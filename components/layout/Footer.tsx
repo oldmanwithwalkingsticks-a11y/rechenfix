@@ -12,10 +12,15 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <div className="flex items-center gap-1 mb-4">
-              <span className="text-2xl font-extrabold text-white">Rechen</span>
-              <span className="text-2xl font-extrabold text-accent-400">fix</span>
-              <span className="text-sm text-primary-300">.de</span>
+            <div className="mb-4">
+              <div className="flex items-center gap-1">
+                <span className="text-2xl font-extrabold text-white">Rechen</span>
+                <span className="text-2xl font-extrabold text-accent-400">fix</span>
+                <span className="text-sm text-primary-300">.de</span>
+              </div>
+              <span className="text-[11px] tracking-widest uppercase text-primary-300 dark:text-gray-500 font-medium">
+                Fix gerechnet!
+              </span>
             </div>
             <p className="text-primary-200 dark:text-gray-400 text-sm leading-relaxed">
               Kostenlose Online-Rechner für jeden Bedarf. Schnell, einfach und ohne Anmeldung.
