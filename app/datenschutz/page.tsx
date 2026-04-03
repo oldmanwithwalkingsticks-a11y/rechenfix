@@ -227,8 +227,8 @@ export default function DatenschutzSeite() {
             </ul>
             <p className="mt-3">
               Zur Ausübung Ihrer Rechte wenden Sie sich bitte per E-Mail an:{' '}
-              <a href="mailto:info@rechenfix.de" className="text-primary-500 dark:text-primary-400 hover:underline">
-                info@rechenfix.de
+              <a href="mailto:karsten.kautz@web.de" className="text-primary-500 dark:text-primary-400 hover:underline">
+                karsten.kautz@web.de
               </a>
             </p>
           </Section>
@@ -244,7 +244,7 @@ export default function DatenschutzSeite() {
             <ul className="list-disc pl-5 space-y-1 mt-3">
               <li>Den Cookie-Banner erneut aufrufen und Ihre Einstellungen ändern</li>
               <li>Die entsprechenden Cookies in Ihrem Browser löschen</li>
-              <li>Uns per E-Mail an <a href="mailto:info@rechenfix.de" className="text-primary-500 dark:text-primary-400 hover:underline">info@rechenfix.de</a> kontaktieren</li>
+              <li>Uns per E-Mail an <a href="mailto:karsten.kautz@web.de" className="text-primary-500 dark:text-primary-400 hover:underline">karsten.kautz@web.de</a> kontaktieren</li>
             </ul>
           </Section>
 
@@ -299,8 +299,8 @@ function Adresse() {
       <p>47804 Krefeld</p>
       <p className="mt-2">
         E-Mail:{' '}
-        <a href="mailto:info@rechenfix.de" className="text-primary-500 dark:text-primary-400 hover:underline">
-          info@rechenfix.de
+        <a href="mailto:karsten.kautz@web.de" className="text-primary-500 dark:text-primary-400 hover:underline">
+          karsten.kautz@web.de
         </a>
       </p>
     </div>

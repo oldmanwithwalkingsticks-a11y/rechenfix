@@ -38,10 +38,10 @@ export default function ImpressumSeite() {
             <p>
               E-Mail:{' '}
               <a
-                href="mailto:info@rechenfix.de"
+                href="mailto:karsten.kautz@web.de"
                 className="text-primary-500 dark:text-primary-400 hover:underline"
               >
-                info@rechenfix.de
+                karsten.kautz@web.de
               </a>
             </p>
           </section>
