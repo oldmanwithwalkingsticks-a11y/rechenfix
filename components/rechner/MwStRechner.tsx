@@ -2,6 +2,8 @@
 
 import { useState, useMemo } from 'react';
 import { berechneNettoZuBrutto, berechneBruttoZuNetto } from '@/lib/berechnungen/mwst';
+import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import NummerEingabe from '@/components/ui/NummerEingabe';
 
 type Richtung = 'netto-zu-brutto' | 'brutto-zu-netto';
 
@@ -10,7 +12,7 @@ export default function MwStRechner() {
   const [betrag, setBetrag] = useState('100');
   const [mwstSatz, setMwstSatz] = useState(19);
 
-  const n = parseFloat(betrag) || 0;
+  const n = parseDeutscheZahl(betrag);
 
   const ergebnis = useMemo(() => {
     return richtung === 'netto-zu-brutto'
@@ -52,16 +54,12 @@ export default function MwStRechner() {
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             {richtung === 'netto-zu-brutto' ? 'Nettobetrag' : 'Bruttobetrag'}
           </label>
-          <div className="relative">
-            <input
-              type="number"
-              value={betrag}
-              onChange={e => setBetrag(e.target.value)}
-              placeholder="Betrag eingeben"
-              className="input-field pr-8"
-            />
-            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">&euro;</span>
-          </div>
+          <NummerEingabe
+            value={betrag}
+            onChange={setBetrag}
+            placeholder="Betrag eingeben"
+            einheit="€"
+          />
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">MwSt-Satz</label>

@@ -2,12 +2,14 @@
 
 import { useState, useMemo } from 'react';
 import { berechneKwPs, KW_ZU_PS, PS_ZU_KW } from '@/lib/berechnungen/kw-ps';
+import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import NummerEingabe from '@/components/ui/NummerEingabe';
 
 export default function KwPsRechner() {
   const [wert, setWert] = useState('100');
   const [richtung, setRichtung] = useState<'kw-zu-ps' | 'ps-zu-kw'>('kw-zu-ps');
 
-  const nWert = parseFloat(wert) || 0;
+  const nWert = parseDeutscheZahl(wert);
 
   const ergebnis = useMemo(
     () => berechneKwPs({ wert: nWert, richtung }),
@@ -47,18 +49,12 @@ export default function KwPsRechner() {
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           {richtung === 'kw-zu-ps' ? 'Leistung in kW' : 'Leistung in PS'}
         </label>
-        <div className="relative">
-          <input
-            type="number"
-            value={wert}
-            onChange={e => setWert(e.target.value)}
-            placeholder={richtung === 'kw-zu-ps' ? 'z.B. 100' : 'z.B. 136'}
-            className="input-field pr-12"
-          />
-          <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
-            {richtung === 'kw-zu-ps' ? 'kW' : 'PS'}
-          </span>
-        </div>
+        <NummerEingabe
+          value={wert}
+          onChange={setWert}
+          placeholder={richtung === 'kw-zu-ps' ? 'z.B. 100' : 'z.B. 136'}
+          einheit={richtung === 'kw-zu-ps' ? 'kW' : 'PS'}
+        />
       </div>
 
       {/* Ergebnis */}

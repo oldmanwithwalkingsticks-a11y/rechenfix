@@ -2,6 +2,8 @@
 
 import { useState, useMemo } from 'react';
 import { berechneBmi, bmiKategorien } from '@/lib/berechnungen/bmi';
+import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import NummerEingabe from '@/components/ui/NummerEingabe';
 
 export default function BmiRechner() {
   const [gewicht, setGewicht] = useState('75');
@@ -9,8 +11,8 @@ export default function BmiRechner() {
   const [geschlecht, setGeschlecht] = useState<'maennlich' | 'weiblich'>('maennlich');
   const [alter, setAlter] = useState('30');
 
-  const nGewicht = parseFloat(gewicht) || 0;
-  const nGroesse = parseFloat(groesse) || 0;
+  const nGewicht = parseDeutscheZahl(gewicht);
+  const nGroesse = parseDeutscheZahl(groesse);
   const nAlter = parseInt(alter) || undefined;
 
   const ergebnis = useMemo(
@@ -55,42 +57,30 @@ export default function BmiRechner() {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gewicht</label>
-          <div className="relative">
-            <input
-              type="number"
-              value={gewicht}
-              onChange={e => setGewicht(e.target.value)}
-              placeholder="z.B. 75"
-              className="input-field pr-10"
-            />
-            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm">kg</span>
-          </div>
+          <NummerEingabe
+            value={gewicht}
+            onChange={setGewicht}
+            placeholder="z.B. 75"
+            einheit="kg"
+          />
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Größe</label>
-          <div className="relative">
-            <input
-              type="number"
-              value={groesse}
-              onChange={e => setGroesse(e.target.value)}
-              placeholder="z.B. 175"
-              className="input-field pr-10"
-            />
-            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm">cm</span>
-          </div>
+          <NummerEingabe
+            value={groesse}
+            onChange={setGroesse}
+            placeholder="z.B. 175"
+            einheit="cm"
+          />
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Alter (optional)</label>
-          <div className="relative">
-            <input
-              type="number"
-              value={alter}
-              onChange={e => setAlter(e.target.value)}
-              placeholder="z.B. 30"
-              className="input-field pr-14"
-            />
-            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm">Jahre</span>
-          </div>
+          <NummerEingabe
+            value={alter}
+            onChange={setAlter}
+            placeholder="z.B. 30"
+            einheit="Jahre"
+          />
         </div>
       </div>
 

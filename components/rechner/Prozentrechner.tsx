@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import { berechneProzentwert, berechneProzentsatz, berechneGrundwert } from '@/lib/berechnungen/prozent';
+import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import NummerEingabe from '@/components/ui/NummerEingabe';
 
 type Modus = 'prozentwert' | 'prozentsatz' | 'grundwert';
 
@@ -10,8 +12,8 @@ export default function Prozentrechner() {
   const [wert1, setWert1] = useState('');
   const [wert2, setWert2] = useState('');
 
-  const n1 = parseFloat(wert1) || 0;
-  const n2 = parseFloat(wert2) || 0;
+  const n1 = parseDeutscheZahl(wert1);
+  const n2 = parseDeutscheZahl(wert2);
 
   let ergebnis = 0;
   let ergebnisLabel = '';
@@ -66,22 +68,18 @@ export default function Prozentrechner() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{aktuellerModus.label1}</label>
-          <input
-            type="number"
+          <NummerEingabe
             value={wert1}
-            onChange={e => setWert1(e.target.value)}
+            onChange={setWert1}
             placeholder="Wert eingeben"
-            className="input-field"
           />
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{aktuellerModus.label2}</label>
-          <input
-            type="number"
+          <NummerEingabe
             value={wert2}
-            onChange={e => setWert2(e.target.value)}
+            onChange={setWert2}
             placeholder="Wert eingeben"
-            className="input-field"
           />
         </div>
       </div>

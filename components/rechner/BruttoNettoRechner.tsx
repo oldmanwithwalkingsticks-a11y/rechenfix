@@ -2,6 +2,8 @@
 
 import { useState, useMemo } from 'react';
 import { berechneBruttoNetto } from '@/lib/berechnungen/brutto-netto';
+import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import NummerEingabe from '@/components/ui/NummerEingabe';
 
 export default function BruttoNettoRechner() {
   const [brutto, setBrutto] = useState('3500');
@@ -10,7 +12,7 @@ export default function BruttoNettoRechner() {
   const [kirchensteuersatz, setKirchensteuersatz] = useState<8 | 9>(9);
   const [kinder, setKinder] = useState(0);
 
-  const bruttoNum = parseFloat(brutto) || 0;
+  const bruttoNum = parseDeutscheZahl(brutto);
 
   const ergebnis = useMemo(() => berechneBruttoNetto({
     bruttoMonat: bruttoNum,
@@ -29,16 +31,12 @@ export default function BruttoNettoRechner() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bruttogehalt (monatlich)</label>
-          <div className="relative">
-            <input
-              type="number"
-              value={brutto}
-              onChange={e => setBrutto(e.target.value)}
-              placeholder="z.B. 3500"
-              className="input-field pr-8"
-            />
-            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">&euro;</span>
-          </div>
+          <NummerEingabe
+            value={brutto}
+            onChange={setBrutto}
+            placeholder="z.B. 3500"
+            einheit="€"
+          />
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Steuerklasse</label>

@@ -2,16 +2,18 @@
 
 import { useState, useMemo } from 'react';
 import { berechneSpritkosten } from '@/lib/berechnungen/spritkosten';
+import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import NummerEingabe from '@/components/ui/NummerEingabe';
 
 export default function SpritkostenRechner() {
   const [strecke, setStrecke] = useState('100');
-  const [verbrauch, setVerbrauch] = useState('7.5');
-  const [spritpreis, setSpritpreis] = useState('1.65');
+  const [verbrauch, setVerbrauch] = useState('7,5');
+  const [spritpreis, setSpritpreis] = useState('1,65');
   const [hinUndZurueck, setHinUndZurueck] = useState(false);
 
-  const nStrecke = parseFloat(strecke) || 0;
-  const nVerbrauch = parseFloat(verbrauch) || 0;
-  const nSpritpreis = parseFloat(spritpreis) || 0;
+  const nStrecke = parseDeutscheZahl(strecke);
+  const nVerbrauch = parseDeutscheZahl(verbrauch);
+  const nSpritpreis = parseDeutscheZahl(spritpreis);
 
   const ergebnis = useMemo(
     () => berechneSpritkosten({ strecke: nStrecke, verbrauch: nVerbrauch, spritpreis: nSpritpreis, hinUndZurueck }),
@@ -50,44 +52,30 @@ export default function SpritkostenRechner() {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Strecke</label>
-          <div className="relative">
-            <input
-              type="number"
-              value={strecke}
-              onChange={e => setStrecke(e.target.value)}
-              placeholder="z.B. 100"
-              className="input-field pr-10"
-            />
-            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm">km</span>
-          </div>
+          <NummerEingabe
+            value={strecke}
+            onChange={setStrecke}
+            placeholder="z.B. 100"
+            einheit="km"
+          />
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Verbrauch</label>
-          <div className="relative">
-            <input
-              type="number"
-              value={verbrauch}
-              onChange={e => setVerbrauch(e.target.value)}
-              placeholder="z.B. 7.5"
-              step="0.1"
-              className="input-field pr-20"
-            />
-            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm">L/100km</span>
-          </div>
+          <NummerEingabe
+            value={verbrauch}
+            onChange={setVerbrauch}
+            placeholder="z.B. 7,5"
+            einheit="L/100km"
+          />
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Spritpreis</label>
-          <div className="relative">
-            <input
-              type="number"
-              value={spritpreis}
-              onChange={e => setSpritpreis(e.target.value)}
-              placeholder="z.B. 1.65"
-              step="0.01"
-              className="input-field pr-12"
-            />
-            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm">€/L</span>
-          </div>
+          <NummerEingabe
+            value={spritpreis}
+            onChange={setSpritpreis}
+            placeholder="z.B. 1,65"
+            einheit="€/L"
+          />
         </div>
       </div>
 

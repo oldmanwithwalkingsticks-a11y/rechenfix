@@ -2,6 +2,8 @@
 
 import { useState, useMemo } from 'react';
 import { berechneDreisatz } from '@/lib/berechnungen/dreisatz';
+import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import NummerEingabe from '@/components/ui/NummerEingabe';
 
 export default function DreisatzRechner() {
   const [a1, setA1] = useState('3');
@@ -9,9 +11,9 @@ export default function DreisatzRechner() {
   const [a2, setA2] = useState('7');
   const [antiproportional, setAntiproportional] = useState(false);
 
-  const nA1 = parseFloat(a1) || 0;
-  const nB1 = parseFloat(b1) || 0;
-  const nA2 = parseFloat(a2) || 0;
+  const nA1 = parseDeutscheZahl(a1);
+  const nB1 = parseDeutscheZahl(b1);
+  const nA2 = parseDeutscheZahl(a2);
 
   const ergebnis = useMemo(
     () => berechneDreisatz({ a1: nA1, b1: nB1, a2: nA2, antiproportional }),
@@ -64,24 +66,20 @@ export default function DreisatzRechner() {
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Wert A1
             </label>
-            <input
-              type="number"
+            <NummerEingabe
               value={a1}
-              onChange={(e) => setA1(e.target.value)}
+              onChange={setA1}
               placeholder="z.B. 3"
-              className="input-field"
             />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Wert B1
             </label>
-            <input
-              type="number"
+            <NummerEingabe
               value={b1}
-              onChange={(e) => setB1(e.target.value)}
+              onChange={setB1}
               placeholder="z.B. 6"
-              className="input-field"
             />
           </div>
         </div>
@@ -94,12 +92,10 @@ export default function DreisatzRechner() {
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Wert A2
             </label>
-            <input
-              type="number"
+            <NummerEingabe
               value={a2}
-              onChange={(e) => setA2(e.target.value)}
+              onChange={setA2}
               placeholder="z.B. 7"
-              className="input-field"
             />
           </div>
           <div className="flex items-end">
