@@ -57,9 +57,14 @@ export const rechner: RechnerConfig[] = [
     beispiel: 'Beispiel: 25% von 200 = 200 × (25 ÷ 100) = 50',
     erklaerung: `Die Prozentrechnung ist ein grundlegendes mathematisches Konzept, das im Alltag ständig benötigt wird — ob beim Einkaufen (Rabatte), bei der Gehaltsabrechnung oder bei Statistiken.
 
+**Die drei Grundbegriffe**
+
 **Grundwert** ist der Ausgangswert (100%). Der **Prozentsatz** gibt an, wie viel Prozent vom Grundwert berechnet werden sollen. Der **Prozentwert** ist das Ergebnis der Berechnung.
 
+**Drei Berechnungsmodi**
+
 Unser Prozentrechner bietet drei Berechnungsmodi:
+
 - **Prozentwert berechnen:** Wie viel sind X% von Y?
 - **Prozentsatz berechnen:** Wie viel Prozent sind X von Y?
 - **Grundwert berechnen:** X sind Y% von welchem Wert?`,
@@ -92,7 +97,8 @@ Unser Prozentrechner bietet drei Berechnungsmodi:
     beispiel: 'Beispiel: Bei 3.500 € brutto, Steuerklasse 1, keine Kirchensteuer ≈ 2.350 € netto (vereinfacht)',
     erklaerung: `Der Brutto-Netto-Rechner zeigt Ihnen, wie viel von Ihrem Bruttogehalt nach Abzug aller Steuern und Sozialabgaben übrig bleibt.
 
-**Abzüge im Überblick:**
+**Abzüge im Überblick**
+
 - **Lohnsteuer:** Abhängig von Steuerklasse und Gehaltshöhe
 - **Solidaritätszuschlag:** 5,5% der Lohnsteuer (mit Freigrenze)
 - **Kirchensteuer:** 8% oder 9% der Lohnsteuer (je nach Bundesland)
@@ -101,7 +107,9 @@ Unser Prozentrechner bietet drei Berechnungsmodi:
 - **Arbeitslosenversicherung:** 2,6% (Arbeitnehmeranteil: 1,3%)
 - **Pflegeversicherung:** 3,4% (Arbeitnehmeranteil: 1,7%, ggf. + 0,6% Zuschlag)
 
-**Hinweis:** Dies ist eine vereinfachte Berechnung zur Orientierung. Für eine exakte Berechnung wenden Sie sich an Ihren Steuerberater.`,
+**Hinweis**
+
+Dies ist eine vereinfachte Berechnung zur Orientierung. Für eine exakte Berechnung wenden Sie sich an Ihren Steuerberater.`,
     faq: [
       {
         frage: 'Wie viel Netto bleibt von meinem Brutto?',
@@ -127,11 +135,13 @@ Unser Prozentrechner bietet drei Berechnungsmodi:
     beispiel: 'Beispiel: 100 € netto + 19% MwSt = 100 × 1,19 = 119 € brutto (MwSt-Betrag: 19 €)',
     erklaerung: `Die Mehrwertsteuer (MwSt) bzw. Umsatzsteuer (USt) ist eine Verbrauchssteuer, die auf fast alle Waren und Dienstleistungen in Deutschland erhoben wird.
 
-**MwSt-Sätze in Deutschland:**
+**MwSt-Sätze in Deutschland**
+
 - **19% Regelsteuersatz:** Gilt für die meisten Waren und Dienstleistungen
 - **7% ermäßigter Steuersatz:** Gilt für Lebensmittel, Bücher, Zeitungen, ÖPNV, Hotelübernachtungen und weitere Grundversorgungsgüter
 
-**Typische Anwendungsfälle:**
+**Typische Anwendungsfälle**
+
 - Rechnungen erstellen (Netto + MwSt = Brutto)
 - Einkaufspreise kalkulieren (Brutto → Netto)
 - MwSt-Betrag aus einem Bruttobetrag herausrechnen`,

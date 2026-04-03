@@ -91,19 +91,24 @@ export default function RechnerSeite({ params }: Props) {
           <p className="text-gray-800 dark:text-gray-200 text-sm">{config.beispiel}</p>
         </div>
 
-        <div className="prose prose-sm max-w-none text-gray-600 dark:text-gray-300">
+        <div className="max-w-none text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
           {config.erklaerung.split('\n\n').map((absatz, i) => {
-            if (absatz.startsWith('**') || absatz.includes('**')) {
+            const istUeberschrift = absatz.startsWith('**') && absatz.indexOf('**', 2) === absatz.length - 2;
+            const hatFetttext = absatz.includes('**');
+
+            if (istUeberschrift) {
               return (
-                <p key={i} dangerouslySetInnerHTML={{
-                  __html: absatz.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br />')
-                }} />
+                <h3 key={i} className="text-base font-bold text-gray-800 dark:text-gray-100 mt-8 mb-3"
+                  dangerouslySetInnerHTML={{
+                    __html: absatz.replace(/\*\*(.*?)\*\*/g, '$1')
+                  }}
+                />
               );
             }
             if (absatz.startsWith('- ')) {
               const items = absatz.split('\n').filter(l => l.startsWith('- '));
               return (
-                <ul key={i} className="list-disc pl-5 space-y-1">
+                <ul key={i} className="list-disc pl-5 space-y-1.5 mb-4">
                   {items.map((item, j) => (
                     <li key={j} dangerouslySetInnerHTML={{
                       __html: item.slice(2).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
@@ -112,7 +117,14 @@ export default function RechnerSeite({ params }: Props) {
                 </ul>
               );
             }
-            return <p key={i}>{absatz}</p>;
+            if (hatFetttext) {
+              return (
+                <p key={i} className="mb-4" dangerouslySetInnerHTML={{
+                  __html: absatz.replace(/\*\*(.*?)\*\*/g, '<strong class="text-gray-800 dark:text-gray-100">$1</strong>').replace(/\n/g, '<br />')
+                }} />
+              );
+            }
+            return <p key={i} className="mb-4">{absatz}</p>;
           })}
         </div>
       </section>
