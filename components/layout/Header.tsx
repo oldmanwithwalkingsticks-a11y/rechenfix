@@ -6,10 +6,15 @@ export default function Header() {
   return (
     <header className="bg-white dark:bg-slate-900 border-b border-gray-100 dark:border-gray-700 sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="text-3xl font-extrabold text-primary-500">Rechen</span>
-          <span className="text-3xl font-extrabold text-accent-500">fix</span>
-          <span className="text-sm text-gray-400 hidden sm:inline">.de</span>
+        <Link href="/" className="flex flex-col">
+          <div className="flex items-center gap-1">
+            <span className="text-3xl font-extrabold text-primary-500">Rechen</span>
+            <span className="text-3xl font-extrabold text-accent-500">fix</span>
+            <span className="text-sm text-gray-400 hidden sm:inline">.de</span>
+          </div>
+          <span className="text-[11px] tracking-widest uppercase text-gray-400 dark:text-gray-500 font-medium -mt-1">
+            Fix gerechnet!
+          </span>
         </Link>
         <div className="flex items-center gap-4">
           <nav className="hidden md:flex items-center gap-6">
