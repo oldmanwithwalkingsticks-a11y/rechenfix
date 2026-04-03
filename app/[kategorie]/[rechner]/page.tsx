@@ -1,0 +1,142 @@
+import { notFound } from 'next/navigation';
+import { rechner as alleRechner, getRechnerBySlug } from '@/lib/rechner-config';
+import { generateRechnerMetadata, generateFAQSchema, generateWebApplicationSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import Breadcrumbs from '@/components/layout/Breadcrumbs';
+import AdSlot from '@/components/ads/AdSlot';
+import StructuredData from '@/components/seo/StructuredData';
+import Prozentrechner from '@/components/rechner/Prozentrechner';
+import BruttoNettoRechner from '@/components/rechner/BruttoNettoRechner';
+import MwStRechner from '@/components/rechner/MwStRechner';
+import type { Metadata } from 'next';
+
+interface Props {
+  params: { kategorie: string; rechner: string };
+}
+
+export function generateStaticParams() {
+  return alleRechner.map(r => ({
+    kategorie: r.kategorieSlug,
+    rechner: r.slug,
+  }));
+}
+
+export function generateMetadata({ params }: Props): Metadata {
+  const config = getRechnerBySlug(params.kategorie, params.rechner);
+  if (!config) return {};
+  return generateRechnerMetadata(config);
+}
+
+const rechnerKomponenten: Record<string, React.ComponentType> = {
+  'prozentrechner': Prozentrechner,
+  'brutto-netto-rechner': BruttoNettoRechner,
+  'mwst-rechner': MwStRechner,
+};
+
+export default function RechnerSeite({ params }: Props) {
+  const config = getRechnerBySlug(params.kategorie, params.rechner);
+  if (!config) notFound();
+
+  const RechnerKomponente = rechnerKomponenten[config.slug];
+  if (!RechnerKomponente) notFound();
+
+  const breadcrumbItems = [
+    { name: 'Startseite', url: '/' },
+    { name: config.kategorie, url: `/${config.kategorieSlug}` },
+    { name: config.titel, url: `/${config.kategorieSlug}/${config.slug}` },
+  ];
+
+  return (
+    <div className="max-w-4xl mx-auto px-4 py-8">
+      {/* Structured Data */}
+      <StructuredData data={generateFAQSchema(config.faq)} />
+      <StructuredData data={generateWebApplicationSchema(config)} />
+      <StructuredData data={generateBreadcrumbSchema(breadcrumbItems)} />
+
+      {/* Breadcrumbs */}
+      <Breadcrumbs
+        items={[
+          { label: config.kategorie, href: `/${config.kategorieSlug}` },
+          { label: config.titel },
+        ]}
+      />
+
+      {/* Ad Top */}
+      <AdSlot typ="leaderboard" className="mb-6" />
+
+      {/* Rechner */}
+      <div className="card p-6 md:p-8 mb-8">
+        <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 mb-2">
+          {config.icon} {config.titel}
+        </h1>
+        <p className="text-gray-500 mb-6">{config.beschreibung}</p>
+        <RechnerKomponente />
+      </div>
+
+      {/* Ad Middle */}
+      <AdSlot typ="rectangle" className="mb-8" />
+
+      {/* Erklärung */}
+      <section className="card p-6 md:p-8 mb-8">
+        <h2 className="text-xl font-bold text-gray-800 mb-4">So funktioniert der {config.titel}</h2>
+
+        <div className="bg-accent-50 border border-accent-200 rounded-xl p-4 mb-6">
+          <p className="font-semibold text-accent-700 text-sm mb-1">Formel</p>
+          <p className="text-gray-800 font-mono text-sm">{config.formel}</p>
+        </div>
+
+        <div className="bg-primary-50 border border-primary-200 rounded-xl p-4 mb-6">
+          <p className="font-semibold text-primary-700 text-sm mb-1">Rechenbeispiel</p>
+          <p className="text-gray-800 text-sm">{config.beispiel}</p>
+        </div>
+
+        <div className="prose prose-sm max-w-none text-gray-600">
+          {config.erklaerung.split('\n\n').map((absatz, i) => {
+            if (absatz.startsWith('**') || absatz.includes('**')) {
+              return (
+                <p key={i} dangerouslySetInnerHTML={{
+                  __html: absatz.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br />')
+                }} />
+              );
+            }
+            if (absatz.startsWith('- ')) {
+              const items = absatz.split('\n').filter(l => l.startsWith('- '));
+              return (
+                <ul key={i} className="list-disc pl-5 space-y-1">
+                  {items.map((item, j) => (
+                    <li key={j} dangerouslySetInnerHTML={{
+                      __html: item.slice(2).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    }} />
+                  ))}
+                </ul>
+              );
+            }
+            return <p key={i}>{absatz}</p>;
+          })}
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="card p-6 md:p-8 mb-8">
+        <h2 className="text-xl font-bold text-gray-800 mb-4">Häufige Fragen</h2>
+        <div className="space-y-4">
+          {config.faq.map((item, i) => (
+            <details key={i} className="group border border-gray-100 rounded-xl">
+              <summary className="cursor-pointer p-4 font-medium text-gray-800 hover:text-primary-500 transition-colors list-none flex justify-between items-center">
+                {item.frage}
+                <svg className="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <div className="px-4 pb-4 text-sm text-gray-600">
+                {item.antwort}
+              </div>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      {/* Ad Bottom */}
+      <AdSlot typ="leaderboard" />
+    </div>
+  );
+}

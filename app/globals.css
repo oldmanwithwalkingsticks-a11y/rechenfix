@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #1a1a2e;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+@layer components {
+  .input-field {
+    @apply w-full px-4 py-3 text-lg border-2 border-gray-200 rounded-xl
+           focus:border-primary-500 focus:ring-2 focus:ring-primary-200
+           outline-none transition-all duration-200;
+  }
+
+  .result-box {
+    @apply bg-gradient-to-r from-primary-500 to-primary-600 text-white
+           rounded-2xl p-6 shadow-lg;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-md border border-gray-100
+           hover:shadow-lg transition-shadow duration-300;
+  }
+
+  .btn-primary {
+    @apply bg-primary-500 hover:bg-primary-600 text-white font-semibold
+           px-6 py-3 rounded-xl transition-colors duration-200;
+  }
+
+  .section-title {
+    @apply text-2xl md:text-3xl font-bold text-primary-700;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
