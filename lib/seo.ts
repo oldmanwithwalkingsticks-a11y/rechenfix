@@ -1,9 +1,11 @@
 import { RechnerConfig, KategorieConfig } from './rechner-config';
+import type { Metadata } from 'next';
 
 const SITE_URL = 'https://rechenfix.de';
 const SITE_NAME = 'Rechenfix.de';
+const OG_IMAGE = `${SITE_URL}/og-image.png`;
 
-export function generateRechnerMetadata(rechner: RechnerConfig) {
+export function generateRechnerMetadata(rechner: RechnerConfig): Metadata {
   const url = `${SITE_URL}/${rechner.kategorieSlug}/${rechner.slug}`;
   return {
     title: rechner.metaTitle,
@@ -16,6 +18,20 @@ export function generateRechnerMetadata(rechner: RechnerConfig) {
       siteName: SITE_NAME,
       type: 'website',
       locale: 'de_DE',
+      images: [
+        {
+          url: OG_IMAGE,
+          width: 1200,
+          height: 630,
+          alt: `${rechner.titel} — ${SITE_NAME}`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: rechner.metaTitle,
+      description: rechner.metaDescription,
+      images: [OG_IMAGE],
     },
     alternates: {
       canonical: url,
@@ -23,7 +39,7 @@ export function generateRechnerMetadata(rechner: RechnerConfig) {
   };
 }
 
-export function generateKategorieMetadata(kategorie: KategorieConfig) {
+export function generateKategorieMetadata(kategorie: KategorieConfig): Metadata {
   const url = `${SITE_URL}/${kategorie.slug}`;
   return {
     title: kategorie.metaTitle,
@@ -35,6 +51,20 @@ export function generateKategorieMetadata(kategorie: KategorieConfig) {
       siteName: SITE_NAME,
       type: 'website',
       locale: 'de_DE',
+      images: [
+        {
+          url: OG_IMAGE,
+          width: 1200,
+          height: 630,
+          alt: `${kategorie.name} — ${SITE_NAME}`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: kategorie.metaTitle,
+      description: kategorie.metaDescription,
+      images: [OG_IMAGE],
     },
     alternates: {
       canonical: url,
@@ -66,12 +96,18 @@ export function generateWebApplicationSchema(rechner: RechnerConfig) {
     url: `${SITE_URL}/${rechner.kategorieSlug}/${rechner.slug}`,
     applicationCategory: 'UtilityApplication',
     operatingSystem: 'All',
+    browserRequirements: 'Requires JavaScript',
     offers: {
       '@type': 'Offer',
       price: '0',
       priceCurrency: 'EUR',
     },
     inLanguage: 'de',
+    author: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
   };
 }
 
@@ -85,5 +121,24 @@ export function generateBreadcrumbSchema(items: { name: string; url: string }[])
       name: item.name,
       item: `${SITE_URL}${item.url}`,
     })),
+  };
+}
+
+export function generateWebsiteSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE_NAME,
+    url: SITE_URL,
+    description: 'Kostenlose Online-Rechner für Finanzen, Alltag, Auto und Gesundheit.',
+    inLanguage: 'de',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${SITE_URL}/?q={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
   };
 }

@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { kategorien, getRechnerByKategorie, getKategorieBySlug } from '@/lib/rechner-config';
-import { generateKategorieMetadata } from '@/lib/seo';
+import { generateKategorieMetadata, generateBreadcrumbSchema } from '@/lib/seo';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
+import StructuredData from '@/components/seo/StructuredData';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -25,8 +26,15 @@ export default function KategorieSeite({ params }: Props) {
 
   const rechnerListe = getRechnerByKategorie(params.kategorie);
 
+  const breadcrumbItems = [
+    { name: 'Startseite', url: '/' },
+    { name: kategorie.name, url: `/${kategorie.slug}` },
+  ];
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
+      <StructuredData data={generateBreadcrumbSchema(breadcrumbItems)} />
+
       <Breadcrumbs items={[{ label: kategorie.name }]} />
 
       <h1 className="text-3xl md:text-4xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
