@@ -7,6 +7,7 @@ import StructuredData from '@/components/seo/StructuredData';
 import Prozentrechner from '@/components/rechner/Prozentrechner';
 import BruttoNettoRechner from '@/components/rechner/BruttoNettoRechner';
 import MwStRechner from '@/components/rechner/MwStRechner';
+import DreisatzRechner from '@/components/rechner/DreisatzRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -30,6 +31,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'prozentrechner': Prozentrechner,
   'brutto-netto-rechner': BruttoNettoRechner,
   'mwst-rechner': MwStRechner,
+  'dreisatz-rechner': DreisatzRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
