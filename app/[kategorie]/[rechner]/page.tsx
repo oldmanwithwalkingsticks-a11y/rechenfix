@@ -9,6 +9,7 @@ import BruttoNettoRechner from '@/components/rechner/BruttoNettoRechner';
 import MwStRechner from '@/components/rechner/MwStRechner';
 import DreisatzRechner from '@/components/rechner/DreisatzRechner';
 import BmiRechner from '@/components/rechner/BmiRechner';
+import SpritkostenRechner from '@/components/rechner/SpritkostenRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -34,6 +35,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'mwst-rechner': MwStRechner,
   'dreisatz-rechner': DreisatzRechner,
   'bmi-rechner': BmiRechner,
+  'spritkosten-rechner': SpritkostenRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
