@@ -105,40 +105,46 @@ export default function TageRechner() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Startdatum</label>
-          <div className="flex gap-2">
+          <div className="relative">
             <input
               type="text"
               value={startText}
               onChange={e => handleStartTextChange(e.target.value)}
               placeholder="TT.MM.JJJJ"
-              className="input-field flex-1"
+              className="input-field pr-12"
             />
             <input
               type="date"
               value={startIso}
               onChange={e => handleStartPickerChange(e.target.value)}
-              className="input-field w-12 px-2 cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-60"
+              className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 opacity-0 cursor-pointer"
               title="Datum auswählen"
             />
+            <svg className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
           </div>
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Enddatum</label>
-          <div className="flex gap-2">
+          <div className="relative">
             <input
               type="text"
               value={endText}
               onChange={e => handleEndTextChange(e.target.value)}
               placeholder="TT.MM.JJJJ"
-              className="input-field flex-1"
+              className="input-field pr-12"
             />
             <input
               type="date"
               value={endIso}
               onChange={e => handleEndPickerChange(e.target.value)}
-              className="input-field w-12 px-2 cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-60"
+              className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 opacity-0 cursor-pointer"
               title="Datum auswählen"
             />
+            <svg className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
           </div>
         </div>
       </div>
