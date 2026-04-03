@@ -1,23 +1,21 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useCookieConsent } from './CookieConsentProvider';
 
 export default function CookieBanner() {
-  const { bannerVisible, consent, saveConsent } = useCookieConsent();
-  const [showSettings, setShowSettings] = useState(false);
+  const { bannerVisible, settingsVisible, consent, saveConsent, closeSettings } = useCookieConsent();
   const [analytics, setAnalytics] = useState(false);
   const [marketing, setMarketing] = useState(false);
 
-  // Toggles mit gespeichertem Consent synchronisieren wenn Einstellungen geöffnet werden
-  const openSettings = () => {
-    setAnalytics(consent?.analytics ?? false);
-    setMarketing(consent?.marketing ?? false);
-    setShowSettings(true);
-  };
-
-  if (!bannerVisible) return null;
+  // Toggles mit gespeichertem Consent synchronisieren wenn Settings geöffnet werden
+  useEffect(() => {
+    if (settingsVisible) {
+      setAnalytics(consent?.analytics ?? false);
+      setMarketing(consent?.marketing ?? false);
+    }
+  }, [settingsVisible, consent]);
 
   const acceptAll = () => saveConsent({ analytics: true, marketing: true });
   const acceptNecessary = () => saveConsent({ analytics: false, marketing: false });
@@ -25,49 +23,46 @@ export default function CookieBanner() {
 
   return (
     <>
-      {/* Banner */}
-      <div className="fixed bottom-0 inset-x-0 z-[100] animate-fade-in">
-        <div className="max-w-5xl mx-auto px-4 pb-4">
-          <div className="bg-gray-900 dark:bg-gray-800 text-white rounded-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.3)] p-5 md:p-6">
-            <div className="flex flex-col md:flex-row md:items-center gap-4">
-              <p className="flex-1 text-sm leading-relaxed text-gray-200">
-                Wir verwenden Cookies, um Ihnen die beste Nutzererfahrung zu bieten und unsere Website zu verbessern.{' '}
-                <Link href="/datenschutz" className="text-primary-400 hover:text-primary-300 underline">
-                  Mehr erfahren
-                </Link>
-              </p>
-              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 shrink-0">
-                <button
-                  onClick={acceptAll}
-                  className="bg-primary-500 hover:bg-primary-600 text-white font-semibold px-5 py-2.5 rounded-xl transition-colors text-sm"
-                >
-                  Alle akzeptieren
-                </button>
-                <button
-                  onClick={acceptNecessary}
-                  className="bg-gray-700 dark:bg-gray-600 hover:bg-gray-600 dark:hover:bg-gray-500 text-white font-medium px-5 py-2.5 rounded-xl transition-colors text-sm"
-                >
-                  Nur notwendige
-                </button>
-                <button
-                  onClick={openSettings}
-                  className="text-gray-400 hover:text-white font-medium px-5 py-2.5 transition-colors text-sm underline underline-offset-2"
-                >
-                  Einstellungen
-                </button>
+      {/* Banner — nur sichtbar wenn noch kein Consent gegeben */}
+      {bannerVisible && (
+        <div className="fixed bottom-0 inset-x-0 z-[100] animate-fade-in">
+          <div className="max-w-5xl mx-auto px-4 pb-4">
+            <div className="bg-gray-900 dark:bg-gray-800 text-white rounded-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.3)] p-5 md:p-6">
+              <div className="flex flex-col md:flex-row md:items-center gap-4">
+                <p className="flex-1 text-sm leading-relaxed text-gray-200">
+                  Wir verwenden Cookies, um Ihnen die beste Nutzererfahrung zu bieten und unsere Website zu verbessern.{' '}
+                  <Link href="/datenschutz" className="text-primary-400 hover:text-primary-300 underline">
+                    Mehr erfahren
+                  </Link>
+                </p>
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 shrink-0">
+                  <button
+                    onClick={acceptAll}
+                    className="bg-primary-500 hover:bg-primary-600 text-white font-semibold px-5 py-2.5 rounded-xl transition-colors text-sm"
+                  >
+                    Alle akzeptieren
+                  </button>
+                  <button
+                    onClick={acceptNecessary}
+                    className="bg-gray-700 dark:bg-gray-600 hover:bg-gray-600 dark:hover:bg-gray-500 text-white font-medium px-5 py-2.5 rounded-xl transition-colors text-sm"
+                  >
+                    Nur notwendige
+                  </button>
+                  <BannerSettingsButton />
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
 
-      {/* Settings Modal */}
-      {showSettings && (
+      {/* Settings Modal — kann unabhängig vom Banner geöffnet werden (z.B. Footer-Link) */}
+      {settingsVisible && (
         <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 animate-fade-in">
           {/* Backdrop */}
           <div
             className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-            onClick={() => setShowSettings(false)}
+            onClick={closeSettings}
           />
 
           {/* Modal */}
@@ -78,7 +73,7 @@ export default function CookieBanner() {
                   Cookie-Einstellungen
                 </h2>
                 <button
-                  onClick={() => setShowSettings(false)}
+                  onClick={closeSettings}
                   className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
                   aria-label="Schließen"
                 >
@@ -140,6 +135,19 @@ export default function CookieBanner() {
         </div>
       )}
     </>
+  );
+}
+
+/** Einstellungen-Button im Banner — eigene Komponente um Hook-Regeln einzuhalten */
+function BannerSettingsButton() {
+  const { openSettings } = useCookieConsent();
+  return (
+    <button
+      onClick={openSettings}
+      className="text-gray-400 hover:text-white font-medium px-5 py-2.5 transition-colors text-sm underline underline-offset-2"
+    >
+      Einstellungen
+    </button>
   );
 }
 

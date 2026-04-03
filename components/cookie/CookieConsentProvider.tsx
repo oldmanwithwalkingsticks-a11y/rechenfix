@@ -15,9 +15,12 @@ interface CookieConsentContextType {
   analyticsAllowed: boolean;
   marketingAllowed: boolean;
   bannerVisible: boolean;
+  settingsVisible: boolean;
   saveConsent: (consent: Omit<CookieConsent, 'necessary' | 'timestamp'>) => void;
   resetConsent: () => void;
   openBanner: () => void;
+  openSettings: () => void;
+  closeSettings: () => void;
 }
 
 const STORAGE_KEY = 'cookie-consent';
@@ -29,9 +32,12 @@ const CookieConsentContext = createContext<CookieConsentContextType>({
   analyticsAllowed: false,
   marketingAllowed: false,
   bannerVisible: false,
+  settingsVisible: false,
   saveConsent: () => {},
   resetConsent: () => {},
   openBanner: () => {},
+  openSettings: () => {},
+  closeSettings: () => {},
 });
 
 export function useCookieConsent() {
@@ -49,6 +55,7 @@ function isConsentExpired(timestamp: string): boolean {
 export default function CookieConsentProvider({ children }: { children: React.ReactNode }) {
   const [consent, setConsent] = useState<CookieConsent | null>(null);
   const [bannerVisible, setBannerVisible] = useState(false);
+  const [settingsVisible, setSettingsVisible] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -81,6 +88,7 @@ export default function CookieConsentProvider({ children }: { children: React.Re
     localStorage.setItem(STORAGE_KEY, JSON.stringify(full));
     setConsent(full);
     setBannerVisible(false);
+    setSettingsVisible(false);
   }, []);
 
   const resetConsent = useCallback(() => {
@@ -91,6 +99,14 @@ export default function CookieConsentProvider({ children }: { children: React.Re
 
   const openBanner = useCallback(() => {
     setBannerVisible(true);
+  }, []);
+
+  const openSettings = useCallback(() => {
+    setSettingsVisible(true);
+  }, []);
+
+  const closeSettings = useCallback(() => {
+    setSettingsVisible(false);
   }, []);
 
   if (!mounted) {
@@ -105,9 +121,12 @@ export default function CookieConsentProvider({ children }: { children: React.Re
         analyticsAllowed: consent?.analytics ?? false,
         marketingAllowed: consent?.marketing ?? false,
         bannerVisible,
+        settingsVisible,
         saveConsent,
         resetConsent,
         openBanner,
+        openSettings,
+        closeSettings,
       }}
     >
       {children}

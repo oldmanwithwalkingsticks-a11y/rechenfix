@@ -5,7 +5,7 @@ import { kategorien, getRechnerByKategorie } from '@/lib/rechner-config';
 import { useCookieConsent } from '@/components/cookie/CookieConsentProvider';
 
 export default function Footer() {
-  const { openBanner } = useCookieConsent();
+  const { openSettings } = useCookieConsent();
 
   return (
     <footer className="bg-primary-700 dark:bg-slate-950 text-white mt-16">
@@ -72,7 +72,7 @@ export default function Footer() {
                 <li><Link href="/datenschutz" className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm">Datenschutz</Link></li>
                 <li>
                   <button
-                    onClick={openBanner}
+                    onClick={openSettings}
                     className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm"
                   >
                     Cookie-Einstellungen
