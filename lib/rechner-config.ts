@@ -706,6 +706,43 @@ Unser Tagerechner unterstützt beliebige Datumsbereiche und berechnet auch sehr 
   },
 ];
 
+/** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
+export const beliebteRechnerSlugs = [
+  'prozentrechner',
+  'brutto-netto-rechner',
+  'mwst-rechner',
+  'bmi-rechner',
+  'dreisatz-rechner',
+];
+
+/** Neu hinzugefügte Rechner (neueste zuerst) */
+export const neueRechnerSlugs = [
+  'tagerechner',
+  'zinsrechner',
+  'kfz-steuer-rechner',
+  'kw-ps-umrechner',
+  'spritkosten-rechner',
+];
+
+export function getBeliebtRechner(): RechnerConfig[] {
+  return beliebteRechnerSlugs
+    .map(slug => rechner.find(r => r.slug === slug))
+    .filter((r): r is RechnerConfig => !!r);
+}
+
+export function getNeueRechner(): RechnerConfig[] {
+  return neueRechnerSlugs
+    .map(slug => rechner.find(r => r.slug === slug))
+    .filter((r): r is RechnerConfig => !!r);
+}
+
+export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
+  // Erst Rechner aus gleicher Kategorie, dann aus anderen
+  const gleicheKategorie = rechner.filter(r => r.kategorieSlug === aktuell.kategorieSlug && r.slug !== aktuell.slug);
+  const andereKategorie = rechner.filter(r => r.kategorieSlug !== aktuell.kategorieSlug);
+  return [...gleicheKategorie, ...andereKategorie].slice(0, anzahl);
+}
+
 export function getRechnerBySlug(kategorieSlug: string, rechnerSlug: string): RechnerConfig | undefined {
   return rechner.find(r => r.kategorieSlug === kategorieSlug && r.slug === rechnerSlug);
 }
