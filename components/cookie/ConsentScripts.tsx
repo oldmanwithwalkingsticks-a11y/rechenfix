@@ -3,7 +3,7 @@
 import Script from 'next/script';
 import { useCookieConsent } from './CookieConsentProvider';
 
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-XXXXXXXXXX';
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-CNVMHDZM4S';
 const ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_ID || 'ca-pub-XXXXXXXXXX';
 
 export default function ConsentScripts() {
