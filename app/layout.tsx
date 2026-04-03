@@ -3,6 +3,9 @@ import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import ThemeProvider from '@/components/ThemeProvider';
+import CookieConsentProvider from '@/components/cookie/CookieConsentProvider';
+import CookieBanner from '@/components/cookie/CookieBanner';
+import ConsentScripts from '@/components/cookie/ConsentScripts';
 
 export const metadata: Metadata = {
   title: {
@@ -27,9 +30,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="de" suppressHydrationWarning>
       <body className="min-h-screen flex flex-col bg-white dark:bg-slate-900 text-gray-800 dark:text-gray-100 antialiased">
         <ThemeProvider>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          <CookieConsentProvider>
+            <ConsentScripts />
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <CookieBanner />
+          </CookieConsentProvider>
         </ThemeProvider>
       </body>
     </html>

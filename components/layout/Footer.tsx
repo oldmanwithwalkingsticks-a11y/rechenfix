@@ -1,7 +1,12 @@
+'use client';
+
 import Link from 'next/link';
 import { kategorien } from '@/lib/rechner-config';
+import { useCookieConsent } from '@/components/cookie/CookieConsentProvider';
 
 export default function Footer() {
+  const { resetConsent } = useCookieConsent();
+
   return (
     <footer className="bg-primary-700 dark:bg-slate-950 text-white mt-16">
       <div className="max-w-6xl mx-auto px-4 py-12">
@@ -33,6 +38,14 @@ export default function Footer() {
             <ul className="space-y-2">
               <li><Link href="/impressum" className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm">Impressum</Link></li>
               <li><Link href="/datenschutz" className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm">Datenschutz</Link></li>
+              <li>
+                <button
+                  onClick={resetConsent}
+                  className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm"
+                >
+                  Cookie-Einstellungen
+                </button>
+              </li>
             </ul>
           </div>
         </div>
