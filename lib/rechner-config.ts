@@ -640,6 +640,70 @@ Wichtig zu beachten: In der Praxis mindern die Abgeltungssteuer (25% plus Solida
       },
     ],
   },
+  {
+    slug: 'tagerechner',
+    titel: 'Tagerechner',
+    beschreibung: 'Tage zwischen zwei Daten berechnen: Kalendertage, Arbeitstage, Wochen und Monate auf einen Blick.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Tagerechner — Tage zwischen zwei Daten | Rechenfix',
+    metaDescription: 'Tage berechnen ✓ Zwischen zwei Daten ✓ Mit Arbeitstagen ✓ Wochen & Monate ✓ Kostenlos. Jetzt Tage zählen!',
+    keywords: ['tagerechner', 'tage berechnen', 'tage zwischen zwei daten', 'arbeitstage berechnen', 'datum differenz', 'tage zählen'],
+    icon: '📅',
+    formel: 'Tage = Enddatum − Startdatum (optional +1 bei Mitzählung)',
+    beispiel: 'Beispiel: Vom 01.01.2026 bis 31.12.2026 = 364 Tage (365 mit Mitzählung) = 52 Wochen',
+    erklaerung: `**Tage zwischen zwei Daten berechnen**
+
+Der Tagerechner ermittelt die exakte Anzahl der Tage zwischen zwei beliebigen Daten. Geben Sie einfach ein Start- und ein Enddatum ein und erhalten Sie sofort das Ergebnis — in Tagen, Wochen, Monaten und Jahren. Zusätzlich berechnet der Rechner die Anzahl der Arbeitstage (Montag bis Freitag) und der Wochenendtage.
+
+Die Berechnung ist denkbar einfach: Der Rechner ermittelt die Differenz zwischen den beiden Daten in Kalendertagen. Standardmäßig wird der Starttag nicht mitgezählt — das entspricht der üblichen Berechnung bei Fristen und Zeiträumen. Wenn Sie möchten, können Sie über den Toggle „Start + Endtag mitzählen" aktivieren, dass beide Tage in die Berechnung einfließen. Das ist zum Beispiel relevant, wenn Sie die Dauer eines Urlaubs oder einer Veranstaltung berechnen möchten, bei der sowohl der erste als auch der letzte Tag zählt.
+
+Sie können das Datum entweder manuell im deutschen Format (TT.MM.JJJJ) eingeben oder den Datepicker verwenden. Die Schnellwahl-Buttons ermöglichen es, häufig benötigte Zeiträume wie 30, 90 oder 365 Tage direkt einzustellen.
+
+Das Ergebnis wird automatisch in verschiedene Einheiten umgerechnet: Wochen und Resttage, Monate und Resttage sowie Jahre, Monate und Tage. Auch die Anzahl der Stunden wird angezeigt. So haben Sie alle relevanten Informationen auf einen Blick.
+
+**Arbeitstage vs. Kalendertage**
+
+Bei vielen Berechnungen ist es wichtig, zwischen Kalendertagen und Arbeitstagen zu unterscheiden. Kalendertage umfassen alle Tage einschließlich Wochenenden und Feiertagen. Arbeitstage hingegen zählen nur die Werktage von Montag bis Freitag.
+
+Unser Tagerechner zeigt beide Werte an. Die Arbeitstage-Berechnung berücksichtigt automatisch Samstage und Sonntage — gesetzliche Feiertage werden jedoch nicht abgezogen, da diese je nach Bundesland unterschiedlich sind. Für eine exakte Arbeitstage-Berechnung müssen Sie die Feiertage Ihres Bundeslandes daher manuell abziehen.
+
+Die Unterscheidung ist in vielen Kontexten wichtig: Bei Kündigungsfristen wird oft in Werktagen gerechnet, bei Urlaubsansprüchen in Arbeitstagen und bei Mietverträgen in Kalendertagen. Auch bei Projektplanung und Lieferzeiten ist die Unterscheidung entscheidend.
+
+Gut zu wissen: In Deutschland fallen je nach Bundesland zwischen 9 und 13 gesetzliche Feiertage auf Werktage. Bayern hat mit bis zu 13 Feiertagen die meisten, die norddeutschen Bundesländer mit 9–10 die wenigsten. Bundesweit einheitlich sind Neujahr, Karfreitag, Ostermontag, Tag der Arbeit (1. Mai), Christi Himmelfahrt, Pfingstmontag, Tag der Deutschen Einheit (3. Oktober) und die beiden Weihnachtsfeiertage.
+
+**Typische Anwendungsfälle**
+
+Der Tagerechner ist ein vielseitiges Werkzeug für den Alltag, das Berufsleben und die Planung:
+
+- **Countdown zu einem Ereignis:** Wie viele Tage sind es noch bis zum Urlaub, zur Hochzeit, zum Geburtstag oder bis Weihnachten? Geben Sie das heutige Datum als Start und das Zieldatum als Ende ein.
+- **Kündigungsfristen:** Viele Arbeitsverträge haben Kündigungsfristen von 4 Wochen zum 15. oder Monatsende, 3 Monate zum Quartalsende oder 6 Monate zum Jahresende. Der Tagerechner hilft, den letzten Arbeitstag zu ermitteln.
+- **Urlaubsplanung:** Berechnen Sie, wie viele Urlaubs- und Arbeitstage ein Zeitraum umfasst. Aktivieren Sie „Start + Endtag mitzählen" für die Urlaubsdauer.
+- **Schwangerschaft und Geburtstermin:** Eine Schwangerschaft dauert ca. 280 Tage (40 Wochen) ab dem ersten Tag der letzten Periode. Vom Empfängnisdatum aus gerechnet sind es ca. 266 Tage.
+- **Projektplanung:** Wie viele Arbeitstage stehen für ein Projekt zur Verfügung? Planen Sie Meilensteine und Deadlines realistisch.
+- **Vertragsfristen:** Wann läuft ein Vertrag, eine Garantie oder eine Probezeit ab? Viele Fristen werden in Tagen, Wochen oder Monaten angegeben.
+- **Altersberechnung:** Wie viele Tage bin ich alt? Geben Sie Ihr Geburtsdatum als Start und das heutige Datum als Ende ein.
+
+Unser Tagerechner unterstützt beliebige Datumsbereiche und berechnet auch sehr lange Zeiträume von mehreren Jahrzehnten zuverlässig. Die Umrechnung in Monate berücksichtigt dabei die unterschiedlichen Monatslängen korrekt.`,
+    faq: [
+      {
+        frage: 'Wie berechne ich die Tage zwischen zwei Daten?',
+        antwort: 'Geben Sie Start- und Enddatum ein und der Rechner ermittelt automatisch die Differenz in Tagen. Standardmäßig wird der Starttag nicht mitgezählt. Aktivieren Sie „Start + Endtag mitzählen", wenn beide Tage zählen sollen.',
+      },
+      {
+        frage: 'Werden Feiertage bei den Arbeitstagen berücksichtigt?',
+        antwort: 'Nein, unser Rechner zählt als Arbeitstage alle Tage von Montag bis Freitag. Gesetzliche Feiertage werden nicht abgezogen, da diese je nach Bundesland unterschiedlich sind (9–13 pro Jahr). Ziehen Sie die Feiertage Ihres Bundeslandes manuell ab.',
+      },
+      {
+        frage: 'Soll ich Start- und Endtag mitzählen?',
+        antwort: 'Das hängt vom Anwendungsfall ab. Bei Fristen (z. B. Kündigungsfrist) wird der Starttag üblicherweise nicht mitgezählt. Bei Urlaubsberechnungen oder Veranstaltungsdauern zählen Start- und Endtag meist mit. Im Zweifel prüfen Sie die geltenden Regelungen.',
+      },
+      {
+        frage: 'Wie viele Arbeitstage hat ein Jahr?',
+        antwort: 'Ein normales Jahr hat ca. 261 Arbeitstage (365 minus 104 Wochenendtage). Abzüglich gesetzlicher Feiertage (je nach Bundesland 9–13) bleiben ca. 248–252 Arbeitstage. Ein Schaltjahr hat 262 Arbeitstage vor Feiertagsabzug.',
+      },
+    ],
+  },
 ];
 
 export function getRechnerBySlug(kategorieSlug: string, rechnerSlug: string): RechnerConfig | undefined {

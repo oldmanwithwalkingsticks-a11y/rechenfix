@@ -13,6 +13,7 @@ import SpritkostenRechner from '@/components/rechner/SpritkostenRechner';
 import KwPsRechner from '@/components/rechner/KwPsRechner';
 import KfzSteuerRechner from '@/components/rechner/KfzSteuerRechner';
 import ZinsRechner from '@/components/rechner/ZinsRechner';
+import TageRechner from '@/components/rechner/TageRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -42,6 +43,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'kw-ps-umrechner': KwPsRechner,
   'kfz-steuer-rechner': KfzSteuerRechner,
   'zinsrechner': ZinsRechner,
+  'tagerechner': TageRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
