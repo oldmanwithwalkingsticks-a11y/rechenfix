@@ -52,9 +52,8 @@ export default function ImpressumSeite() {
               Umsatzsteuer-ID
             </h2>
             <p>
-              Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:
+              Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz: <span className="font-semibold">DE293513316</span>
             </p>
-            <p className="font-semibold">DE293513316</p>
           </section>
 
           {/* Streitbeilegung */}
