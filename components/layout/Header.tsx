@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { kategorien, getRechnerByKategorie } from '@/lib/rechner-config';
 import ThemeToggle from './ThemeToggle';
-import HeaderSearch from './HeaderSearch';
 
 export default function Header() {
   return (
@@ -51,7 +50,6 @@ export default function Header() {
             })}
           </nav>
 
-          <HeaderSearch />
           <ThemeToggle />
           <MobileMenu />
         </div>
