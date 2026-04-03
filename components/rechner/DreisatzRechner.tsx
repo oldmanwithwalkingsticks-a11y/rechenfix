@@ -115,7 +115,7 @@ export default function DreisatzRechner() {
         <>
           <div className="result-box mb-6">
             <p className="text-white/80 text-sm mb-1">
-              Wenn {fmt(nA1)} \u2259 {fmt(nB1)}, dann {fmt(nA2)} \u2259
+              Wenn {fmt(nA1)} ≙ {fmt(nB1)}, dann {fmt(nA2)} ≙
             </p>
             <p className="text-4xl font-bold">{fmt(ergebnis.b2)}</p>
           </div>
@@ -123,7 +123,7 @@ export default function DreisatzRechner() {
           {/* Rechenweg */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5">
             <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3">
-              Rechenweg (Schritt f\u00FCr Schritt)
+              Rechenweg (Schritt für Schritt)
             </h3>
             <ol className="space-y-3">
               {ergebnis.schritte.map((schritt, i) => (
