@@ -29,7 +29,7 @@ export default function MwStRechner() {
           className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
             richtung === 'netto-zu-brutto'
               ? 'bg-primary-500 text-white shadow-md'
-              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
           }`}
         >
           Netto → Brutto
@@ -39,7 +39,7 @@ export default function MwStRechner() {
           className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
             richtung === 'brutto-zu-netto'
               ? 'bg-primary-500 text-white shadow-md'
-              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
           }`}
         >
           Brutto → Netto
@@ -49,7 +49,7 @@ export default function MwStRechner() {
       {/* Eingaben */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             {richtung === 'netto-zu-brutto' ? 'Nettobetrag' : 'Bruttobetrag'}
           </label>
           <div className="relative">
@@ -64,14 +64,14 @@ export default function MwStRechner() {
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">MwSt-Satz</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">MwSt-Satz</label>
           <div className="flex gap-2">
             <button
               onClick={() => setMwstSatz(19)}
               className={`flex-1 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
                 mwstSatz === 19
                   ? 'bg-accent-500 text-white shadow-md'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               19%
@@ -81,7 +81,7 @@ export default function MwStRechner() {
               className={`flex-1 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
                 mwstSatz === 7
                   ? 'bg-accent-500 text-white shadow-md'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               7%

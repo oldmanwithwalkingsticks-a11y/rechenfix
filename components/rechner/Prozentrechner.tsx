@@ -54,7 +54,7 @@ export default function Prozentrechner() {
             className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
               modus === m.key
                 ? 'bg-primary-500 text-white shadow-md'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
             }`}
           >
             {m.label}
@@ -65,7 +65,7 @@ export default function Prozentrechner() {
       {/* Eingabefelder */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">{aktuellerModus.label1}</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{aktuellerModus.label1}</label>
           <input
             type="number"
             value={wert1}
@@ -75,7 +75,7 @@ export default function Prozentrechner() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">{aktuellerModus.label2}</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{aktuellerModus.label2}</label>
           <input
             type="number"
             value={wert2}

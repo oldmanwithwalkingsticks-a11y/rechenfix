@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import ThemeProvider from '@/components/ThemeProvider';
 
 export const metadata: Metadata = {
   title: {
@@ -23,11 +24,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="de">
-      <body className="min-h-screen flex flex-col bg-white text-gray-800 antialiased">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+    <html lang="de" suppressHydrationWarning>
+      <body className="min-h-screen flex flex-col bg-white dark:bg-slate-900 text-gray-800 dark:text-gray-100 antialiased">
+        <ThemeProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

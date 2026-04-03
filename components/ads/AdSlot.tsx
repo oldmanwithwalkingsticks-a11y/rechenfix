@@ -14,7 +14,7 @@ const sizes = {
 export default function AdSlot({ typ, className = '' }: AdSlotProps) {
   return (
     <div
-      className={`bg-gray-50 border border-dashed border-gray-200 rounded-xl flex items-center justify-center text-gray-300 text-sm ${sizes[typ]} ${className}`}
+      className={`bg-gray-50 dark:bg-gray-800/50 border border-dashed border-gray-200 dark:border-gray-700 rounded-xl flex items-center justify-center text-gray-300 dark:text-gray-600 text-sm ${sizes[typ]} ${className}`}
       aria-hidden="true"
     >
       Werbung — {typ.charAt(0).toUpperCase() + typ.slice(1)}

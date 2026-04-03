@@ -3,7 +3,7 @@ import { kategorien } from '@/lib/rechner-config';
 
 export default function Footer() {
   return (
-    <footer className="bg-primary-700 text-white mt-16">
+    <footer className="bg-primary-700 dark:bg-slate-950 text-white mt-16">
       <div className="max-w-6xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
@@ -12,7 +12,7 @@ export default function Footer() {
               <span className="text-2xl font-extrabold text-accent-400">fix</span>
               <span className="text-sm text-primary-300">.de</span>
             </div>
-            <p className="text-primary-200 text-sm leading-relaxed">
+            <p className="text-primary-200 dark:text-gray-400 text-sm leading-relaxed">
               Kostenlose Online-Rechner für jeden Bedarf. Schnell, einfach und ohne Anmeldung.
             </p>
           </div>
@@ -21,7 +21,7 @@ export default function Footer() {
             <ul className="space-y-2">
               {kategorien.map(k => (
                 <li key={k.slug}>
-                  <Link href={`/${k.slug}`} className="text-primary-200 hover:text-white transition-colors text-sm">
+                  <Link href={`/${k.slug}`} className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm">
                     {k.icon} {k.name}
                   </Link>
                 </li>
@@ -31,12 +31,12 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-lg mb-4">Rechtliches</h3>
             <ul className="space-y-2">
-              <li><Link href="/impressum" className="text-primary-200 hover:text-white transition-colors text-sm">Impressum</Link></li>
-              <li><Link href="/datenschutz" className="text-primary-200 hover:text-white transition-colors text-sm">Datenschutz</Link></li>
+              <li><Link href="/impressum" className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm">Impressum</Link></li>
+              <li><Link href="/datenschutz" className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm">Datenschutz</Link></li>
             </ul>
           </div>
         </div>
-        <div className="border-t border-primary-600 mt-8 pt-8 text-center text-primary-300 text-sm">
+        <div className="border-t border-primary-600 dark:border-gray-700 mt-8 pt-8 text-center text-primary-300 dark:text-gray-500 text-sm">
           &copy; {new Date().getFullYear()} Rechenfix.de — Alle Angaben ohne Gewähr.
         </div>
       </div>

@@ -29,10 +29,10 @@ export default function KategorieSeite({ params }: Props) {
     <div className="max-w-6xl mx-auto px-4 py-8">
       <Breadcrumbs items={[{ label: kategorie.name }]} />
 
-      <h1 className="text-3xl md:text-4xl font-extrabold text-primary-700 mb-2">
+      <h1 className="text-3xl md:text-4xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
         {kategorie.icon} {kategorie.name}-Rechner
       </h1>
-      <p className="text-gray-500 mb-8 max-w-2xl">{kategorie.beschreibung}</p>
+      <p className="text-gray-500 dark:text-gray-400 mb-8 max-w-2xl">{kategorie.beschreibung}</p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {rechnerListe.map(r => (
@@ -42,11 +42,11 @@ export default function KategorieSeite({ params }: Props) {
             className="card p-6 group"
           >
             <div className="text-3xl mb-3">{r.icon}</div>
-            <h2 className="text-lg font-bold text-gray-800 group-hover:text-primary-500 transition-colors">
+            <h2 className="text-lg font-bold text-gray-800 dark:text-gray-100 group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors">
               {r.titel}
             </h2>
-            <p className="text-sm text-gray-500 mt-2 line-clamp-2">{r.beschreibung}</p>
-            <span className="inline-block mt-3 text-primary-500 text-sm font-medium">
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2 line-clamp-2">{r.beschreibung}</p>
+            <span className="inline-block mt-3 text-primary-500 dark:text-primary-400 text-sm font-medium">
               Jetzt berechnen →
             </span>
           </Link>

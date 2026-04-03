@@ -28,7 +28,7 @@ export default function BruttoNettoRechner() {
       {/* Eingaben */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Bruttogehalt (monatlich)</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bruttogehalt (monatlich)</label>
           <div className="relative">
             <input
               type="number"
@@ -41,7 +41,7 @@ export default function BruttoNettoRechner() {
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Steuerklasse</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Steuerklasse</label>
           <select
             value={steuerklasse}
             onChange={e => setSteuerklasse(Number(e.target.value) as 1 | 2 | 3 | 4 | 5 | 6)}
@@ -56,7 +56,7 @@ export default function BruttoNettoRechner() {
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Kinder (Freibeträge)</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kinder (Freibeträge)</label>
           <select
             value={kinder}
             onChange={e => setKinder(Number(e.target.value))}
@@ -72,7 +72,7 @@ export default function BruttoNettoRechner() {
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Kirchensteuer</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kirchensteuer</label>
           <div className="flex items-center gap-4 mt-2">
             <label className="flex items-center gap-2 cursor-pointer">
               <input
@@ -81,7 +81,7 @@ export default function BruttoNettoRechner() {
                 onChange={e => setKirchensteuer(e.target.checked)}
                 className="w-5 h-5 rounded text-primary-500 focus:ring-primary-200"
               />
-              <span className="text-gray-700">Ja</span>
+              <span className="text-gray-700 dark:text-gray-300">Ja</span>
             </label>
             {kirchensteuer && (
               <select
@@ -109,8 +109,8 @@ export default function BruttoNettoRechner() {
           </div>
 
           {/* Aufschlüsselung */}
-          <div className="bg-gray-50 rounded-xl p-5">
-            <h3 className="font-bold text-gray-700 mb-3">Aufschlüsselung (monatlich)</h3>
+          <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5">
+            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Aufschlüsselung (monatlich)</h3>
             <table className="w-full text-sm">
               <tbody>
                 <Zeile label="Bruttogehalt" wert={ergebnis.bruttoMonat} hervorgehoben />
@@ -121,7 +121,7 @@ export default function BruttoNettoRechner() {
                 <Zeile label="Rentenversicherung" wert={-ergebnis.rentenversicherung} />
                 <Zeile label="Arbeitslosenversicherung" wert={-ergebnis.arbeitslosenversicherung} />
                 <Zeile label="Pflegeversicherung" wert={-ergebnis.pflegeversicherung} />
-                <tr className="border-t-2 border-primary-200 font-bold text-primary-700">
+                <tr className="border-t-2 border-primary-200 dark:border-primary-500/40 font-bold text-primary-700 dark:text-primary-300">
                   <td className="py-2">Nettogehalt</td>
                   <td className="py-2 text-right">{fmt(ergebnis.nettoMonat)} &euro;</td>
                 </tr>
@@ -137,9 +137,9 @@ export default function BruttoNettoRechner() {
 function Zeile({ label, wert, hervorgehoben = false }: { label: string; wert: number; hervorgehoben?: boolean }) {
   const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   return (
-    <tr className={hervorgehoben ? 'font-semibold text-gray-800' : 'text-gray-600'}>
+    <tr className={hervorgehoben ? 'font-semibold text-gray-800 dark:text-gray-100' : 'text-gray-600 dark:text-gray-400'}>
       <td className="py-1.5">{label}</td>
-      <td className={`py-1.5 text-right ${wert < 0 ? 'text-red-500' : ''}`}>
+      <td className={`py-1.5 text-right ${wert < 0 ? 'text-red-500 dark:text-red-400' : ''}`}>
         {wert < 0 ? `−${fmt(Math.abs(wert))}` : fmt(wert)} &euro;
       </td>
     </tr>
