@@ -5,10 +5,17 @@ import Link from 'next/link';
 import { useCookieConsent } from './CookieConsentProvider';
 
 export default function CookieBanner() {
-  const { bannerVisible, saveConsent } = useCookieConsent();
+  const { bannerVisible, consent, saveConsent } = useCookieConsent();
   const [showSettings, setShowSettings] = useState(false);
   const [analytics, setAnalytics] = useState(false);
   const [marketing, setMarketing] = useState(false);
+
+  // Toggles mit gespeichertem Consent synchronisieren wenn Einstellungen geöffnet werden
+  const openSettings = () => {
+    setAnalytics(consent?.analytics ?? false);
+    setMarketing(consent?.marketing ?? false);
+    setShowSettings(true);
+  };
 
   if (!bannerVisible) return null;
 
@@ -43,7 +50,7 @@ export default function CookieBanner() {
                   Nur notwendige
                 </button>
                 <button
-                  onClick={() => setShowSettings(true)}
+                  onClick={openSettings}
                   className="text-gray-400 hover:text-white font-medium px-5 py-2.5 transition-colors text-sm underline underline-offset-2"
                 >
                   Einstellungen
