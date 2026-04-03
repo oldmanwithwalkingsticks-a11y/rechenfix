@@ -176,10 +176,10 @@ function CookieToggle({
         onClick={() => !disabled && onChange(!checked)}
         className={`relative shrink-0 mt-0.5 w-11 h-6 rounded-full transition-colors duration-200 ${
           disabled
-            ? 'bg-gray-300 dark:bg-gray-600 cursor-not-allowed'
+            ? 'bg-green-500 cursor-not-allowed'
             : checked
-              ? 'bg-primary-500 cursor-pointer'
-              : 'bg-gray-300 dark:bg-gray-600 cursor-pointer hover:bg-gray-400 dark:hover:bg-gray-500'
+              ? 'bg-green-500 cursor-pointer'
+              : 'bg-red-400 cursor-pointer hover:bg-red-500'
         }`}
       >
         <span

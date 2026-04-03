@@ -17,6 +17,7 @@ interface CookieConsentContextType {
   bannerVisible: boolean;
   saveConsent: (consent: Omit<CookieConsent, 'necessary' | 'timestamp'>) => void;
   resetConsent: () => void;
+  openBanner: () => void;
 }
 
 const STORAGE_KEY = 'cookie-consent';
@@ -30,6 +31,7 @@ const CookieConsentContext = createContext<CookieConsentContextType>({
   bannerVisible: false,
   saveConsent: () => {},
   resetConsent: () => {},
+  openBanner: () => {},
 });
 
 export function useCookieConsent() {
@@ -87,6 +89,10 @@ export default function CookieConsentProvider({ children }: { children: React.Re
     setBannerVisible(true);
   }, []);
 
+  const openBanner = useCallback(() => {
+    setBannerVisible(true);
+  }, []);
+
   if (!mounted) {
     return <>{children}</>;
   }
@@ -101,6 +107,7 @@ export default function CookieConsentProvider({ children }: { children: React.Re
         bannerVisible,
         saveConsent,
         resetConsent,
+        openBanner,
       }}
     >
       {children}
