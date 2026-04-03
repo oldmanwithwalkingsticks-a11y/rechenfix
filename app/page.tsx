@@ -67,7 +67,7 @@ export default function Startseite() {
           </div>
           <div>
             <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">Datenschutz</h3>
-            <p>Alle Berechnungen finden direkt in deinem Browser statt. Keine Daten werden an Server übertragen.</p>
+            <p>Alle Berechnungen finden direkt in deinem Browser statt. Analyse- und Werbe-Cookies werden nur nach deiner Einwilligung geladen.</p>
           </div>
         </div>
       </section>
