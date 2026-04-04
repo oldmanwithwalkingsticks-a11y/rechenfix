@@ -154,10 +154,10 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Backdrop overlay — below header (z-[-1] within stacking context) */}
+      {/* Invisible click-catcher to close menu on outside click */}
       {menuOpen && (
         <div
-          className="fixed inset-0 bg-black/20 dark:bg-black/40 -z-10"
+          className="fixed inset-0 -z-10"
           onClick={() => setMenuOpen(false)}
           aria-hidden="true"
         />
