@@ -62,24 +62,22 @@ export default function Footer() {
           {/* Kategorien */}
           <div>
             <h3 className="font-bold text-sm uppercase tracking-wider mb-3 text-primary-100">Kategorien</h3>
-            <ul className="space-y-2">
+            <div className="grid gap-y-2" style={{ gridTemplateColumns: '1.25rem auto min-content' }}>
               {kategorien.map(k => {
                 const anzahl = getRechnerByKategorie(k.slug).length;
                 return (
-                  <li key={k.slug}>
-                    <Link
-                      href={`/${k.slug}`}
-                      className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm inline-grid items-center gap-x-2"
-                      style={{ gridTemplateColumns: '1.25rem 1fr auto' }}
-                    >
-                      <span className="text-center">{k.icon}</span>
-                      <span>{k.name}</span>
-                      <span className="text-primary-400 dark:text-gray-600 text-xs tabular-nums">{anzahl}</span>
-                    </Link>
-                  </li>
+                  <Link
+                    key={k.slug}
+                    href={`/${k.slug}`}
+                    className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm contents"
+                  >
+                    <span className="text-center">{k.icon}</span>
+                    <span className="pl-2">{k.name}</span>
+                    <span className="text-primary-400 dark:text-gray-600 text-xs tabular-nums pl-3 self-center">{anzahl}</span>
+                  </Link>
                 );
               })}
-            </ul>
+            </div>
           </div>
 
           {/* Rechtliches */}
