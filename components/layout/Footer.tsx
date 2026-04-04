@@ -74,7 +74,7 @@ export default function Footer() {
                           <span>{k.name}</span>
                         </Link>
                       </td>
-                      <td className="text-primary-400 dark:text-gray-600 text-xs tabular-nums pl-2">{anzahl}</td>
+                      <td className="text-primary-400 dark:text-gray-600 text-xs tabular-nums pl-4">{anzahl}</td>
                     </tr>
                   );
                 })}
