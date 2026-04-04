@@ -69,11 +69,12 @@ export default function Footer() {
                   <li key={k.slug}>
                     <Link
                       href={`/${k.slug}`}
-                      className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2"
+                      className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm inline-grid items-center gap-x-2"
+                      style={{ gridTemplateColumns: '1.25rem 1fr auto' }}
                     >
-                      <span className="w-5 text-center shrink-0">{k.icon}</span>
+                      <span className="text-center">{k.icon}</span>
                       <span>{k.name}</span>
-                      <span className="text-primary-400 dark:text-gray-600 text-xs">{anzahl}</span>
+                      <span className="text-primary-400 dark:text-gray-600 text-xs tabular-nums">{anzahl}</span>
                     </Link>
                   </li>
                 );
