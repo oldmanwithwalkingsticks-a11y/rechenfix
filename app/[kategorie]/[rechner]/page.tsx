@@ -42,6 +42,7 @@ import PendlerpauschaleRechner from '@/components/rechner/PendlerpauschaleRechne
 import PromilleRechner from '@/components/rechner/PromilleRechner';
 import RabattRechner from '@/components/rechner/RabattRechner';
 import GehaltsvergleichRechner from '@/components/rechner/GehaltsvergleichRechner';
+import CountdownRechner from '@/components/rechner/CountdownRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -96,6 +97,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'promillerechner': PromilleRechner,
   'rabattrechner': RabattRechner,
   'gehaltsvergleich': GehaltsvergleichRechner,
+  'countdown': CountdownRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

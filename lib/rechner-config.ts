@@ -2709,6 +2709,68 @@ Die verwendeten Daten basieren auf der Verdienststrukturerhebung des Statistisch
       },
     ],
   },
+  {
+    slug: 'countdown',
+    titel: 'Countdown-Rechner',
+    beschreibung: 'Wie viele Tage bis Weihnachten, Ostern, Silvester oder Ihrem Geburtstag? Live-Countdown mit Sekunden-Anzeige.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Countdown-Rechner — Tage bis Weihnachten, Ostern & mehr | Rechenfix',
+    metaDescription: 'Countdown-Rechner: Wie viele Tage bis Weihnachten, Ostern, Silvester, Sommerferien oder Ihrem Geburtstag? ✓ Live-Ticker ✓ Tage, Stunden, Minuten, Sekunden ✓ Kostenlos.',
+    keywords: ['countdown rechner', 'wie viele tage bis weihnachten', 'tage bis ostern', 'countdown silvester', 'tage bis sommerferien', 'tage zähler', 'countdown timer', 'tage bis geburtstag', 'wie lange noch bis weihnachten', 'countdown online'],
+    icon: '⏳',
+    formel: 'Verbleibende Zeit = Zieldatum − aktuelle Uhrzeit (in Tagen, Stunden, Minuten, Sekunden)',
+    beispiel: 'Beispiel: Heute ist der 5. April 2026 — bis Weihnachten (24. Dezember) sind es noch 263 Tage, ca. 37 Wochen.',
+    erklaerung: `**Was ist ein Countdown-Rechner?**
+
+Ein Countdown-Rechner zeigt Ihnen in Echtzeit, wie viel Zeit bis zu einem bestimmten Datum oder Ereignis verbleibt. Die Anzeige aktualisiert sich jede Sekunde und zeigt die verbleibenden Tage, Stunden, Minuten und Sekunden. So wissen Sie immer genau, wie lange es noch bis zum nächsten Feiertag, Urlaub oder persönlichen Termin dauert.
+
+**Voreingestellte Events**
+
+Der Rechner enthält die beliebtesten Countdown-Ziele für Deutschland: Weihnachten (24. Dezember), Silvester (31. Dezember), Ostersonntag (variabler Termin), Sommerferien (ca. 1. Juli), Nikolaus (6. Dezember), Valentinstag (14. Februar), Halloween (31. Oktober) und Neujahr (1. Januar). Alle Termine berechnen sich automatisch für das jeweils nächste Vorkommen.
+
+**Eigenes Datum eingeben**
+
+Neben den voreingestellten Events können Sie auch ein beliebiges eigenes Datum eingeben — zum Beispiel Ihren Geburtstag, einen Hochzeitstag, den Beginn einer Reise oder einen Prüfungstermin. Geben Sie optional eine Bezeichnung ein, damit Sie den Countdown leicht zuordnen können.
+
+**Wie wird Ostern berechnet?**
+
+Das Osterdatum variiert jedes Jahr und wird nach dem Algorithmus von Carl Friedrich Gauss für den gregorianischen Kalender berechnet. Ostersonntag fällt immer auf den ersten Sonntag nach dem ersten Frühlingsvollmond (nach dem 21. März). Dadurch liegt Ostern frühestens am 22. März und spätestens am 25. April.
+
+**Was zeigt der Countdown an?**
+
+Die Live-Anzeige zeigt die verbleibende Zeit aufgeteilt in Tage, Stunden, Minuten und Sekunden. Zusätzlich sehen Sie die Gesamtzahl der verbleibenden Wochen, Tage, Stunden und Sekunden in übersichtlichen Kacheln. Ein Fortschrittsbalken visualisiert, wie weit das Zieldatum noch entfernt ist.
+
+**Alle Events im Überblick**
+
+Unterhalb des Hauptcountdowns sehen Sie eine Übersicht aller voreingestellten Events, sortiert nach Nähe. So haben Sie immer im Blick, welcher Feiertag als nächstes ansteht. Klicken Sie auf ein Event, um den Countdown dafür anzuzeigen.
+
+**Praktische Anwendungen**
+
+Countdown-Rechner sind besonders beliebt in der Vorweihnachtszeit, vor Schulferien oder vor persönlichen Meilensteinen. Sie eignen sich auch für die Planung: Wie viele Arbeitstage bleiben noch bis zum Projektende? Wie viele Wochen bis zum Urlaub? Der Live-Ticker macht das Warten greifbar und motivierend.`,
+    faq: [
+      {
+        frage: 'Wie viele Tage sind es noch bis Weihnachten?',
+        antwort: 'Der Countdown-Rechner zeigt Ihnen in Echtzeit die verbleibenden Tage, Stunden, Minuten und Sekunden bis Weihnachten (24. Dezember). Die Anzeige aktualisiert sich jede Sekunde automatisch.',
+      },
+      {
+        frage: 'Wann ist Ostern dieses Jahr?',
+        antwort: 'Das Osterdatum wird nach dem Gauss-Algorithmus berechnet und variiert jedes Jahr. Der Rechner zeigt automatisch das nächste Osterdatum an und zählt die verbleibende Zeit herunter.',
+      },
+      {
+        frage: 'Kann ich ein eigenes Datum für den Countdown eingeben?',
+        antwort: 'Ja, klicken Sie auf „Eigenes Datum" und geben Sie Ihr Wunschdatum ein. Optional können Sie eine Bezeichnung vergeben (z. B. „Mein Geburtstag"). Der Countdown startet sofort.',
+      },
+      {
+        frage: 'Wie genau ist der Countdown?',
+        antwort: 'Der Countdown aktualisiert sich jede Sekunde und ist auf die Sekunde genau. Die Berechnung basiert auf der aktuellen Systemzeit Ihres Geräts.',
+      },
+      {
+        frage: 'Funktioniert der Countdown auch auf dem Handy?',
+        antwort: 'Ja, der Countdown-Rechner ist vollständig responsiv und funktioniert auf allen Geräten — Smartphone, Tablet und Desktop. Die Live-Anzeige tickt auch mobil sekundengenau.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -2722,6 +2784,8 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'countdown',
+  'gehaltsvergleich',
   'promillerechner',
   'pendlerpauschale-rechner',
   'ueberstunden-rechner',
@@ -2799,6 +2863,7 @@ const verwandteMap: Record<string, string[]> = {
   'promillerechner': ['bmi-rechner', 'tagerechner', 'dreisatz-rechner', 'prozentrechner'],
   'rabattrechner': ['prozentrechner', 'mwst-rechner', 'dreisatz-rechner', 'brutto-netto-rechner'],
   'gehaltsvergleich': ['brutto-netto-rechner', 'stundenlohn-rechner', 'inflationsrechner', 'sparrechner'],
+  'countdown': ['tagerechner', 'urlaubstage-rechner', 'arbeitszeitrechner', 'rabattrechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
