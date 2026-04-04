@@ -308,8 +308,12 @@ export default function TapetenbedarfRechner() {
                 <span className="font-medium text-gray-800 dark:text-gray-200">{ergebnis.bahnenBenoetigt}</span>
               </div>
               <div className="flex justify-between px-4 py-3 text-sm">
-                <span className="text-gray-600 dark:text-gray-400">Verschnitt</span>
-                <span className="font-medium text-gray-800 dark:text-gray-200">{ergebnis.verschnittProzent.toLocaleString('de-DE')} %</span>
+                <span className="text-gray-600 dark:text-gray-400">Zuschlag (eingegeben)</span>
+                <span className="font-medium text-gray-800 dark:text-gray-200">{parseDeutscheZahl(verschnitt).toLocaleString('de-DE')} %</span>
+              </div>
+              <div className="flex justify-between px-4 py-3 text-sm">
+                <span className="text-gray-600 dark:text-gray-400">Verschnitt gesamt</span>
+                <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(ergebnis.verschnittFlaeche)} m² ({ergebnis.verschnittProzent.toLocaleString('de-DE')} %)</span>
               </div>
               <div className="flex justify-between px-4 py-3 text-sm font-bold bg-primary-50/50 dark:bg-primary-500/5">
                 <span className="text-gray-800 dark:text-gray-100">Rollen benötigt</span>
