@@ -99,8 +99,17 @@ export default function Startseite() {
       {/* Alle Kategorien mit Rechnern */}
       {kategorien.map(kategorie => {
         const katRechner = getRechnerByKategorie(kategorie.slug);
+        const farbMap: Record<string, string> = {
+          alltag: 'bg-blue-50/70 dark:bg-blue-500/5 border-blue-100 dark:border-blue-500/10',
+          finanzen: 'bg-amber-50/70 dark:bg-amber-500/5 border-amber-100 dark:border-amber-500/10',
+          gesundheit: 'bg-green-50/70 dark:bg-green-500/5 border-green-100 dark:border-green-500/10',
+          auto: 'bg-red-50/70 dark:bg-red-500/5 border-red-100 dark:border-red-500/10',
+          wohnen: 'bg-orange-50/70 dark:bg-orange-500/5 border-orange-100 dark:border-orange-500/10',
+          mathe: 'bg-violet-50/70 dark:bg-violet-500/5 border-violet-100 dark:border-violet-500/10',
+        };
+        const farbe = farbMap[kategorie.slug] || 'bg-gray-50/70 dark:bg-gray-500/5 border-gray-100 dark:border-gray-500/10';
         return (
-          <section key={kategorie.slug} className="mb-12">
+          <section key={kategorie.slug} className={`mb-12 ${farbe} border rounded-2xl p-6`}>
             <div className="flex items-center justify-between mb-6">
               <h2 className="section-title">
                 {kategorie.icon} {kategorie.name}
