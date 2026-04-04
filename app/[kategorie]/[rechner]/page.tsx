@@ -20,6 +20,11 @@ import BuergergeldRechner from '@/components/rechner/BuergergeldRechner';
 import StundenlohnRechner from '@/components/rechner/StundenlohnRechner';
 import SparRechner from '@/components/rechner/SparRechner';
 import InflationsRechner from '@/components/rechner/InflationsRechner';
+import StromkostenRechner from '@/components/rechner/StromkostenRechner';
+import NebenkostenRechner from '@/components/rechner/NebenkostenRechner';
+import MietrechnerRechner from '@/components/rechner/MietrechnerRechner';
+import HeizkostenRechner from '@/components/rechner/HeizkostenRechner';
+import GrunderwerbsteuerRechner from '@/components/rechner/GrunderwerbsteuerRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -55,6 +60,11 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'stundenlohn-rechner': StundenlohnRechner,
   'sparrechner': SparRechner,
   'inflationsrechner': InflationsRechner,
+  'stromkosten-rechner': StromkostenRechner,
+  'nebenkosten-rechner': NebenkostenRechner,
+  'mietrechner': MietrechnerRechner,
+  'heizkosten-rechner': HeizkostenRechner,
+  'grunderwerbsteuer-rechner': GrunderwerbsteuerRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
