@@ -863,6 +863,81 @@ Unser Tagerechner unterstützt beliebige Datumsbereiche und berechnet auch sehr 
     ],
   },
   {
+    slug: 'rabattrechner',
+    titel: 'Rabattrechner',
+    beschreibung: 'Rabatt berechnen: Endpreis, Ersparnis in Euro, Rabatt in Prozent & Doppelrabatt — mit Rechenweg.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Rabattrechner — Rabatt in Euro berechnen | Rechenfix',
+    metaDescription: 'Rabattrechner 2026 ✓ Endpreis nach Rabatt ✓ Ersparnis in Euro ✓ Doppelrabatt berechnen ✓ Mit Rechenweg ✓ Kostenlos.',
+    keywords: ['rabattrechner', 'rabatt berechnen', 'rabatt in euro', 'endpreis berechnen', 'doppelrabatt', 'rabatt prozent', 'ersparnis berechnen', 'sale rechner', 'angebot berechnen', 'preisnachlass berechnen'],
+    icon: '🏷️',
+    formel: 'Endpreis = Originalpreis × (1 − Rabatt ÷ 100)',
+    beispiel: 'Beispiel: Ein Produkt kostet 149,99 € und ist um 20% reduziert. Ersparnis: 149,99 × 20 ÷ 100 = 30,00 €. Endpreis: 149,99 − 30,00 = 119,99 €.',
+    erklaerung: `Ob Black Friday, Sommerschlussverkauf oder einfach ein gutes Angebot im Supermarkt — Rabatte begegnen uns ständig. Doch wie viel spart man wirklich? Unser kostenloser Rabattrechner zeigt Ihnen sofort den Endpreis, die Ersparnis in Euro und den vollständigen Rechenweg.
+
+**Drei Berechnungsmodi für jede Situation**
+
+Der Rabattrechner bietet drei Modi, die alle typischen Rabatt-Fragen abdecken:
+
+- **Rabatt berechnen:** Sie kennen den Originalpreis und den Rabatt in Prozent und möchten wissen, wie viel Sie tatsächlich zahlen. Formel: Endpreis = Originalpreis × (1 − Rabatt ÷ 100). Beispiel: 200 € mit 25% Rabatt = 200 × 0,75 = 150 €.
+- **Rabatt-Prozent ermitteln:** Sie sehen ein Produkt, das vorher 199 € kostete und jetzt für 149 € angeboten wird — aber wie viel Prozent Rabatt sind das eigentlich? Formel: Rabatt = (Ersparnis ÷ Originalpreis) × 100.
+- **Doppelrabatt:** Erst 20% Sale, dann nochmal 10% mit einem Gutscheincode — wie hoch ist der Gesamtrabatt? Achtung: 20% + 10% sind nicht 30%! Der Doppelrabatt-Modus zeigt den tatsächlichen Gesamtrabatt.
+
+**Warum 20% + 10% nicht 30% Rabatt sind**
+
+Das ist einer der häufigsten Rechenfehler bei Rabatten. Wenn ein Produkt für 200 € erst um 20% reduziert wird, kostet es danach 160 €. Die zweiten 10% werden aber auf 160 € berechnet — nicht auf 200 €. Also: 160 × 0,90 = 144 €. Der Gesamtrabatt beträgt (200 − 144) ÷ 200 = 28%, nicht 30%. Diesen Effekt nennt man **multiplikativen Rabatt**. Unser Doppelrabatt-Modus berechnet das automatisch korrekt und weist auf den Unterschied hin.
+
+**Rabatt oder echter Preisvorteil? So erkennen Sie gute Angebote**
+
+Nicht jeder Rabatt ist ein gutes Angebot. Hier einige Tipps, wie Sie Rabatte richtig einordnen:
+
+- **UVP vs. Straßenpreis:** Manche Händler berechnen den Rabatt auf die unverbindliche Preisempfehlung (UVP), obwohl das Produkt schon länger günstiger verkauft wird. Vergleichen Sie immer mit dem tatsächlichen Marktpreis.
+- **Staffelrabatte:** Manche Angebote bieten „3 für 2" oder Mengenrabatte. Rechnen Sie den Stückpreis aus, um den echten Vorteil zu ermitteln.
+- **Rabatt auf den Rabatt:** Bei Doppelrabatten (z. B. Sale + Gutschein) ist der Gesamtvorteil immer geringer als die Summe der Einzelrabatte.
+- **Versandkosten beachten:** Ein Rabatt von 10 € nützt wenig, wenn 8 € Versandkosten dazukommen.
+
+**Typische Rabatt-Situationen im Alltag**
+
+- **Kleidung & Mode:** Saisonaler Schlussverkauf mit 30–70% Rabatt. Tipp: Rechnen Sie aus, ob der reduzierte Preis wirklich günstig ist.
+- **Elektronik:** Black Friday, Cyber Monday — oft mit gestaffelten Rabatten. Der Doppelrabatt-Modus hilft hier besonders.
+- **Lebensmittel:** „25% mehr Inhalt" oder „2. Packung 50% günstiger" — unser Rechner hilft, den echten Stückpreis zu vergleichen.
+- **Verhandlungen & Skonto:** Beim Handwerker oder bei Rechnungen wird oft Skonto (z. B. 2% bei Zahlung innerhalb 14 Tagen) gewährt. Für Unternehmen kann sich das über das Jahr deutlich summieren.
+- **Online-Shopping:** Gutscheincodes werden häufig auf den bereits reduzierten Preis angewendet — ein klassischer Fall für den Doppelrabatt-Modus.
+
+**Rechenweg immer nachvollziehbar**
+
+Der Rabattrechner zeigt bei jeder Berechnung den vollständigen Rechenweg Schritt für Schritt an. So können Sie die Berechnung nachvollziehen und selbst überprüfen. Die farbige Leiste zeigt Ihnen visuell, wie sich der Preis in Endpreis und Ersparnis aufteilt.
+
+**Ergebnis kopieren und teilen**
+
+Haben Sie ein gutes Angebot gefunden? Teilen Sie das Ergebnis direkt per WhatsApp oder kopieren Sie es in die Zwischenablage. So können Sie Freunde und Familie schnell über Schnäppchen informieren.
+
+Für weiterführende Berechnungen nutzen Sie unseren **Prozentrechner** (für allgemeine Prozentrechnung) oder den **MwSt-Rechner** (um die Mehrwertsteuer aus dem Preis herauszurechnen).`,
+    faq: [
+      {
+        frage: 'Wie berechne ich einen Rabatt in Euro?',
+        antwort: 'Multiplizieren Sie den Originalpreis mit dem Rabatt-Prozentsatz und teilen durch 100. Beispiel: 149,99 € mit 20% Rabatt: 149,99 × 20 ÷ 100 = 30,00 € Ersparnis. Endpreis: 149,99 − 30,00 = 119,99 €.',
+      },
+      {
+        frage: 'Wie viel Prozent Rabatt bekomme ich?',
+        antwort: 'Berechnen Sie die Ersparnis (Originalpreis minus reduzierter Preis), teilen Sie durch den Originalpreis und multiplizieren mit 100. Beispiel: Von 80 € auf 60 € = (80 − 60) ÷ 80 × 100 = 25% Rabatt.',
+      },
+      {
+        frage: 'Warum sind 20% + 10% Rabatt nicht 30%?',
+        antwort: 'Weil der zweite Rabatt auf den bereits reduzierten Preis berechnet wird, nicht auf den Originalpreis. Beispiel: 100 € − 20% = 80 €. Dann 80 € − 10% = 72 €. Gesamtrabatt: 28%, nicht 30%. Dieses Prinzip heißt multiplikativer Rabatt.',
+      },
+      {
+        frage: 'Wie berechne ich den Originalpreis aus dem reduzierten Preis?',
+        antwort: 'Teilen Sie den reduzierten Preis durch (1 − Rabatt ÷ 100). Beispiel: Der Endpreis ist 75 € bei 25% Rabatt. Originalpreis = 75 ÷ 0,75 = 100 €.',
+      },
+      {
+        frage: 'Was ist Skonto und wie berechne ich es?',
+        antwort: 'Skonto ist ein Preisnachlass bei schneller Zahlung, typischerweise 2–3% bei Zahlung innerhalb von 10–14 Tagen. Berechnung wie ein normaler Rabatt: 1.000 € Rechnung mit 2% Skonto = 1.000 × 0,98 = 980 €. Ersparnis: 20 €.',
+      },
+    ],
+  },
+  {
     slug: 'elterngeld-rechner',
     titel: 'Elterngeld-Rechner',
     beschreibung: 'Elterngeld 2026 berechnen: Basiselterngeld & ElterngeldPlus mit Geschwisterbonus und Mehrlingszuschlag.',
@@ -2660,6 +2735,7 @@ const verwandteMap: Record<string, string[]> = {
   'ueberstunden-rechner': ['arbeitszeitrechner', 'stundenlohn-rechner', 'brutto-netto-rechner', 'urlaubstage-rechner'],
   'pendlerpauschale-rechner': ['spritkosten-rechner', 'brutto-netto-rechner', 'stundenlohn-rechner', 'kfz-steuer-rechner'],
   'promillerechner': ['bmi-rechner', 'tagerechner', 'dreisatz-rechner', 'prozentrechner'],
+  'rabattrechner': ['prozentrechner', 'mwst-rechner', 'dreisatz-rechner', 'brutto-netto-rechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
