@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     siteName: 'Rechenfix.de',
     type: 'website',
     locale: 'de_DE',
+    images: [{ url: 'https://rechenfix.de/opengraph-image', width: 1200, height: 630, alt: 'Impressum — Rechenfix.de' }],
   },
 };
 

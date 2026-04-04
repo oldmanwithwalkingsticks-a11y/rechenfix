@@ -14,6 +14,13 @@ export const metadata: Metadata = {
     siteName: 'Rechenfix.de',
     type: 'website',
     locale: 'de_DE',
+    images: [{ url: 'https://rechenfix.de/opengraph-image', width: 1200, height: 630, alt: 'Rechenfix.de — Kostenlose Online-Rechner' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Rechenfix.de — Kostenlose Online-Rechner',
+    description: 'Kostenlose Online-Rechner für Finanzen, Alltag, Auto und Gesundheit. Sofort berechnen ohne Anmeldung.',
+    images: ['https://rechenfix.de/opengraph-image'],
   },
 };
 

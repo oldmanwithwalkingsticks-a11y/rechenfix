@@ -55,6 +55,7 @@ export const metadata: Metadata = {
     siteName: 'Rechenfix.de',
     type: 'website',
     locale: 'de_DE',
+    images: [{ url: 'https://rechenfix.de/opengraph-image', width: 1200, height: 630, alt: 'Mindestlohn 2026 netto — Rechenfix.de' }],
   },
   twitter: { card: 'summary_large_image', title: 'Mindestlohn 2026 netto berechnen | Rechenfix', description: `Mindestlohn 2026: ${STUNDENLOHN.toLocaleString('de-DE')} €/Std. = ${BRUTTO.toLocaleString('de-DE')} € brutto/Monat. Netto in allen Steuerklassen.` },
   alternates: { canonical: 'https://rechenfix.de/finanzen/mindestlohn-netto' },

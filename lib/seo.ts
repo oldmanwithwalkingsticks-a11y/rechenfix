@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 
 const SITE_URL = 'https://rechenfix.de';
 const SITE_NAME = 'Rechenfix.de';
-const OG_IMAGE = `${SITE_URL}/og-image.png`;
+const OG_IMAGE = `${SITE_URL}/opengraph-image`;
 
 export function generateRechnerMetadata(rechner: RechnerConfig): Metadata {
   const url = `${SITE_URL}/${rechner.kategorieSlug}/${rechner.slug}`;

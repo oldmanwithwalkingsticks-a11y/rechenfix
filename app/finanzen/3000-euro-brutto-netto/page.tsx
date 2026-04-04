@@ -15,6 +15,7 @@ export const metadata: Metadata = {
     description: '3.000€ brutto in netto umrechnen ✓ Alle Steuerklassen ✓ Mit Abzügen ✓ Aktuell für 2026.',
     url: 'https://rechenfix.de/finanzen/3000-euro-brutto-netto',
     siteName: 'Rechenfix.de', type: 'website', locale: 'de_DE',
+    images: [{ url: 'https://rechenfix.de/opengraph-image', width: 1200, height: 630, alt: '3.000 Euro brutto netto 2026 — Rechenfix.de' }],
   },
   twitter: { card: 'summary_large_image', title: '3.000 Euro brutto wie viel netto 2026? | Rechenfix', description: '3.000€ brutto in netto umrechnen ✓ Alle Steuerklassen ✓ Mit Abzügen ✓ Aktuell für 2026.' },
   alternates: { canonical: 'https://rechenfix.de/finanzen/3000-euro-brutto-netto' },

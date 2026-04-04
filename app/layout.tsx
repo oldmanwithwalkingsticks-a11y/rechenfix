@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     description: 'Kostenlose Online-Rechner für Finanzen, Alltag, Auto und Gesundheit. Sofort berechnen ohne Anmeldung.',
     images: [
       {
-        url: '/og-image.png',
+        url: '/opengraph-image',
         width: 1200,
         height: 630,
         alt: 'Rechenfix.de — Kostenlose Online-Rechner',
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Rechenfix.de — Kostenlose Online-Rechner',
     description: 'Kostenlose Online-Rechner für Finanzen, Alltag, Auto und Gesundheit.',
-    images: ['/og-image.png'],
+    images: ['/opengraph-image'],
   },
   alternates: {
     canonical: 'https://rechenfix.de',

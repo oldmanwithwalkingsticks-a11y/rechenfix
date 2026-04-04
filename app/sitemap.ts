@@ -13,18 +13,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 1.0,
     },
-    {
-      url: `${SITE_URL}/impressum`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.3,
-    },
-    {
-      url: `${SITE_URL}/datenschutz`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.3,
-    },
   ];
 
   // Long-Tail SEO-Seiten (Brutto-Netto für spezifische Beträge)
