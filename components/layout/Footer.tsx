@@ -51,7 +51,7 @@ export default function Footer() {
                     href={`/${r.kategorieSlug}/${r.slug}`}
                     className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2"
                   >
-                    <span>{r.icon}</span>
+                    <span className="w-5 text-center shrink-0">{r.icon}</span>
                     <span>{r.titel}</span>
                   </Link>
                 </li>
@@ -69,12 +69,10 @@ export default function Footer() {
                   <li key={k.slug}>
                     <Link
                       href={`/${k.slug}`}
-                      className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm flex items-center justify-between gap-2"
+                      className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2"
                     >
-                      <span className="flex items-center gap-2">
-                        <span className="w-5 text-center shrink-0">{k.icon}</span>
-                        {k.name}
-                      </span>
+                      <span className="w-5 text-center shrink-0">{k.icon}</span>
+                      <span>{k.name}</span>
                       <span className="text-primary-400 dark:text-gray-600 text-xs">{anzahl}</span>
                     </Link>
                   </li>
