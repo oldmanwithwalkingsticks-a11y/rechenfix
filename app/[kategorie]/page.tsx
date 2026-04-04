@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { kategorien, getRechnerByKategorie, getKategorieBySlug } from '@/lib/rechner-config';
 import { generateKategorieMetadata, generateBreadcrumbSchema } from '@/lib/seo';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
+import ZurueckButton from '@/components/layout/ZurueckButton';
 import StructuredData from '@/components/seo/StructuredData';
 import type { Metadata } from 'next';
 
@@ -37,15 +38,7 @@ export default function KategorieSeite({ params }: Props) {
 
       <Breadcrumbs items={[{ label: kategorie.name }]} />
 
-      <Link
-        href="/"
-        className="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors mb-4"
-      >
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-        </svg>
-        Zurück zur Startseite
-      </Link>
+      <ZurueckButton fallbackHref="/" label="Zurück" />
 
       <h1 className="text-3xl md:text-4xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
         {kategorie.icon} {kategorie.name}-Rechner

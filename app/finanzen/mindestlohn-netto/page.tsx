@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { berechneBruttoNetto } from '@/lib/berechnungen/brutto-netto';
 import type { BruttoNettoErgebnis } from '@/lib/berechnungen/brutto-netto';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
+import ZurueckButton from '@/components/layout/ZurueckButton';
 import AdSlot from '@/components/ads/AdSlot';
 import StructuredData from '@/components/seo/StructuredData';
 import { generateBreadcrumbSchema, generateFAQSchema } from '@/lib/seo';
@@ -104,15 +105,7 @@ export default function Page() {
         <div className="flex-1 min-w-0">
           <AdSlot typ="leaderboard" className="mb-6" />
 
-          <Link
-            href="/finanzen"
-            className="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors mb-3"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            Zurück zu Finanzen
-          </Link>
+          <ZurueckButton fallbackHref="/finanzen" label="Zurück" />
 
           {/* Hauptinhalt */}
           <div className="card p-6 md:p-8 mb-8">

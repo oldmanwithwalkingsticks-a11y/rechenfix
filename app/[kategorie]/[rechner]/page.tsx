@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { rechner as alleRechner, getRechnerBySlug, getRechnerByKategorie, getVerwandteRechner } from '@/lib/rechner-config';
 import { generateRechnerMetadata, generateFAQSchema, generateWebApplicationSchema, generateBreadcrumbSchema } from '@/lib/seo';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
+import ZurueckButton from '@/components/layout/ZurueckButton';
 import AdSlot from '@/components/ads/AdSlot';
 import StructuredData from '@/components/seo/StructuredData';
 import Prozentrechner from '@/components/rechner/Prozentrechner';
@@ -130,15 +131,7 @@ export default function RechnerSeite({ params }: Props) {
           <AdSlot typ="leaderboard" className="mb-6" />
 
           {/* Zurück-Button */}
-          <Link
-            href={`/${config.kategorieSlug}`}
-            className="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors mb-3"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            Zurück zu {config.kategorie}
-          </Link>
+          <ZurueckButton fallbackHref={`/${config.kategorieSlug}`} label={`Zurück`} />
 
           {/* Rechner */}
           <div className="card p-6 md:p-8 mb-8">
