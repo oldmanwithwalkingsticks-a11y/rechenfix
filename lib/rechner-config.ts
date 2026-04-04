@@ -2647,6 +2647,68 @@ Bei einem Unfall unter Alkoholeinfluss verschärfen sich die Strafen erheblich. 
       },
     ],
   },
+  {
+    slug: 'gehaltsvergleich',
+    titel: 'Gehaltsvergleich',
+    beschreibung: 'Vergleichen Sie Ihr Gehalt mit dem Durchschnitt Ihrer Berufsgruppe, Ihres Bundeslandes und Ihrer Altersgruppe.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Gehaltsvergleich 2026 — Wo stehen Sie? | Rechenfix',
+    metaDescription: 'Gehaltsvergleich 2026: Verdienen Sie mehr oder weniger als der Durchschnitt? ✓ Nach Berufsgruppe ✓ Nach Bundesland ✓ Nach Alter ✓ Kostenlos.',
+    keywords: ['gehaltsvergleich', 'gehalt vergleichen', 'durchschnittsgehalt', 'gehaltscheck', 'verdiene ich genug', 'gehaltsrechner', 'gehalt deutschland', 'median gehalt', 'gehalt berufsgruppe', 'gehalt bundesland'],
+    icon: '📊',
+    formel: 'Perzentil = Position des eigenen Gehalts in der Verteilung der Vergleichsgruppe (angepasst nach Bundesland und Alter)',
+    beispiel: 'Beispiel: 3.500 € brutto als kaufmännischer Angestellter, 35–44 Jahre, in NRW → Sie verdienen mehr als ca. 55 % der Vergleichsgruppe.',
+    erklaerung: `**Was ist ein Gehaltsvergleich?**
+
+Ein Gehaltsvergleich zeigt Ihnen, wo Ihr Bruttogehalt im Vergleich zu anderen Arbeitnehmern in derselben Berufsgruppe, im selben Bundesland und in derselben Altersgruppe liegt. Das Ergebnis wird als Perzentil ausgedrückt: Ein Perzentil von 60 bedeutet, dass Sie mehr verdienen als 60 % Ihrer Vergleichsgruppe.
+
+**Wie wird der Vergleich berechnet?**
+
+Die Berechnung basiert auf Daten des Statistischen Bundesamtes (Verdienststrukturerhebung). Für jede Berufsgruppe liegen Median und Streuung vor. Diese werden mit regionalen Faktoren (Ost-West-Gefälle, Stadtstaaten) und Altersfaktoren (Berufserfahrung) gewichtet. Ihr Gehalt wird dann in diese angepasste Verteilung eingeordnet.
+
+**Was bedeutet der Median?**
+
+Der Median ist der Wert, bei dem genau die Hälfte der Arbeitnehmer mehr und die andere Hälfte weniger verdient. Im Gegensatz zum Durchschnitt wird der Median nicht durch einzelne Spitzengehälter verzerrt und gibt daher ein realistischeres Bild.
+
+**Regionale Gehaltsunterschiede**
+
+Die Gehälter in Deutschland unterscheiden sich je nach Bundesland erheblich. In Hamburg, Hessen und Baden-Württemberg liegen die Gehälter 7–10 % über dem Bundesdurchschnitt, während ostdeutsche Bundesländer (Sachsen, Thüringen, Mecklenburg-Vorpommern) etwa 15–18 % darunter liegen. Diese Unterschiede spiegeln die unterschiedlichen Lebenshaltungskosten und Wirtschaftsstrukturen wider.
+
+**Einfluss des Alters und der Berufserfahrung**
+
+Berufseinsteiger (18–24 Jahre) verdienen typischerweise rund 28 % weniger als der Gesamtdurchschnitt ihrer Berufsgruppe. Mit zunehmender Erfahrung steigt das Gehalt, erreicht in der Regel zwischen 45 und 54 Jahren seinen Höhepunkt und sinkt danach leicht ab.
+
+**Wie nutze ich das Ergebnis?**
+
+Liegt Ihr Gehalt deutlich unter dem Median Ihrer Vergleichsgruppe, kann eine Gehaltsverhandlung oder ein Jobwechsel sinnvoll sein. Nutzen Sie das Ergebnis als Argument in Gehaltsgesprächen. Beachten Sie dabei, dass weitere Faktoren wie Unternehmensgröße, Berufserfahrung, Qualifikation und Region den tatsächlichen Marktwert beeinflussen.
+
+**Hinweis zur Datengrundlage**
+
+Die verwendeten Daten basieren auf der Verdienststrukturerhebung des Statistischen Bundesamtes und sind Annäherungswerte. Individuelle Gehälter können je nach Unternehmensgröße, Tarifbindung, Berufserfahrung und weiteren Faktoren abweichen.`,
+    faq: [
+      {
+        frage: 'Woher stammen die Gehaltsdaten?',
+        antwort: 'Die Daten basieren auf der Verdienststrukturerhebung des Statistischen Bundesamtes (Destatis). Die Werte werden jährlich aktualisiert und nach Berufsgruppe, Region und Alter differenziert.',
+      },
+      {
+        frage: 'Was bedeutet das Perzentil genau?',
+        antwort: 'Das Perzentil zeigt an, wie viel Prozent der Arbeitnehmer in Ihrer Vergleichsgruppe weniger verdienen als Sie. Ein Perzentil von 70 bedeutet: Sie verdienen mehr als 70% und weniger als 30% Ihrer Vergleichsgruppe.',
+      },
+      {
+        frage: 'Warum unterscheiden sich die Gehälter je nach Bundesland?',
+        antwort: 'Die regionalen Unterschiede spiegeln die wirtschaftliche Stärke, die Lebenshaltungskosten und die Branchenstruktur wider. In Ballungsräumen und westdeutschen Bundesländern sind die Gehälter in der Regel höher als in ländlichen und ostdeutschen Regionen.',
+      },
+      {
+        frage: 'Wie genau ist der Gehaltsvergleich?',
+        antwort: 'Der Vergleich gibt eine solide Orientierung auf Basis statistischer Durchschnittswerte. Individuelle Faktoren wie Unternehmensgröße, Tarifbindung, Zusatzqualifikationen oder Führungsverantwortung werden nicht berücksichtigt.',
+      },
+      {
+        frage: 'Was kann ich tun wenn mein Gehalt unterdurchschnittlich ist?',
+        antwort: 'Nutzen Sie die Daten als Grundlage für ein Gehaltsgespräch mit Ihrem Arbeitgeber. Informieren Sie sich über branchenübliche Gehälter und bereiten Sie Argumente vor (Leistung, Qualifikation, Marktvergleich). Auch ein Jobwechsel oder eine Weiterbildung können das Gehalt deutlich steigern.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -2736,6 +2798,7 @@ const verwandteMap: Record<string, string[]> = {
   'pendlerpauschale-rechner': ['spritkosten-rechner', 'brutto-netto-rechner', 'stundenlohn-rechner', 'kfz-steuer-rechner'],
   'promillerechner': ['bmi-rechner', 'tagerechner', 'dreisatz-rechner', 'prozentrechner'],
   'rabattrechner': ['prozentrechner', 'mwst-rechner', 'dreisatz-rechner', 'brutto-netto-rechner'],
+  'gehaltsvergleich': ['brutto-netto-rechner', 'stundenlohn-rechner', 'inflationsrechner', 'sparrechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
