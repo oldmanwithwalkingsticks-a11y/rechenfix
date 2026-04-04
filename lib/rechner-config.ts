@@ -86,117 +86,251 @@ export const rechner: RechnerConfig[] = [
   {
     slug: 'prozentrechner',
     titel: 'Prozentrechner',
-    beschreibung: 'Berechne Prozente schnell und einfach: Prozentwert, Grundwert und Prozentsatz.',
+    beschreibung: 'Prozente berechnen: Prozentwert, Grundwert, Prozentsatz, Aufschlag & Rabatt — mit Rechenweg.',
     kategorie: 'Alltag',
     kategorieSlug: 'alltag',
-    metaTitle: 'Prozentrechner Online | Kostenlos Prozente berechnen | Rechenfix.de',
-    metaDescription: 'Kostenloser Prozentrechner: Berechne Prozentwert, Grundwert und Prozentsatz sofort online. Mit Formel, Beispielen und Erklärung.',
-    keywords: ['prozentrechner', 'prozent berechnen', 'prozentwert', 'grundwert', 'prozentsatz'],
+    metaTitle: 'Prozentrechner Online 2026 ▷ Kostenlos Prozente berechnen | Rechenfix.de',
+    metaDescription: 'Prozentrechner: Prozentwert, Grundwert, Prozentsatz, prozentualer Aufschlag & Rabatt sofort berechnen. Mit Rechenweg, Formel und Erklärung ✓ Kostenlos.',
+    keywords: ['prozentrechner', 'prozent berechnen', 'prozentwert berechnen', 'grundwert berechnen', 'prozentsatz berechnen', 'prozentualer aufschlag', 'rabatt berechnen', 'prozentrechnung formel', 'wie viel prozent', 'prozent ausrechnen'],
     icon: '%',
     formel: 'Prozentwert = Grundwert × (Prozentsatz ÷ 100)',
-    beispiel: 'Beispiel: 25% von 200 = 200 × (25 ÷ 100) = 50',
-    erklaerung: `Die Prozentrechnung ist ein grundlegendes mathematisches Konzept, das im Alltag ständig benötigt wird — ob beim Einkaufen (Rabatte), bei der Gehaltsabrechnung oder bei Statistiken.
+    beispiel: 'Beispiel: 25% von 200 = 200 × (25 ÷ 100) = 50. Oder: 200 + 25% Aufschlag = 200 + 50 = 250.',
+    erklaerung: `Die Prozentrechnung gehört zu den wichtigsten mathematischen Grundlagen im Alltag. Ob beim Einkaufen im Supermarkt, bei der Gehaltsverhandlung, in der Schule oder bei der Steuererklärung — Prozente begegnen uns überall. Unser kostenloser Prozentrechner löst alle gängigen Aufgaben der Prozentrechnung sofort und zeigt den vollständigen Rechenweg Schritt für Schritt an.
 
-**Die drei Grundbegriffe**
+**Die drei Grundbegriffe der Prozentrechnung**
 
-**Grundwert** ist der Ausgangswert (100%). Der **Prozentsatz** gibt an, wie viel Prozent vom Grundwert berechnet werden sollen. Der **Prozentwert** ist das Ergebnis der Berechnung.
+Jede Prozentrechnung basiert auf drei Werten, von denen zwei bekannt sein müssen, um den dritten zu berechnen:
 
-**Drei Berechnungsmodi**
+- **Grundwert (G):** Der Ausgangswert, der 100% entspricht. Beispiel: Der Originalpreis eines Produkts.
+- **Prozentsatz (p):** Der Anteil in Prozent, der vom Grundwert berechnet werden soll. Beispiel: 20% Rabatt.
+- **Prozentwert (W):** Das Ergebnis der Berechnung — der tatsächliche Wert, der dem Prozentsatz entspricht. Beispiel: 20% von 150 € = 30 €.
 
-Unser Prozentrechner bietet drei Berechnungsmodi:
+Die grundlegende Formel lautet: **W = G × p ÷ 100**. Durch Umstellen dieser Formel lassen sich alle drei Werte berechnen: Grundwert (G = W ÷ p × 100), Prozentsatz (p = W ÷ G × 100) und Prozentwert.
 
-- **Prozentwert berechnen:** Wie viel sind X% von Y?
-- **Prozentsatz berechnen:** Wie viel Prozent sind X von Y?
-- **Grundwert berechnen:** X sind Y% von welchem Wert?`,
+**Fünf Berechnungsmodi im Überblick**
+
+Unser Prozentrechner bietet fünf verschiedene Berechnungsarten, die alle typischen Fragestellungen der Prozentrechnung abdecken:
+
+- **Prozentwert berechnen:** „Wie viel sind 15% von 300?" — Berechnet den konkreten Wert aus Grundwert und Prozentsatz.
+- **Prozentsatz berechnen:** „Wie viel Prozent sind 45 von 300?" — Ermittelt den prozentualen Anteil zweier Werte.
+- **Grundwert berechnen:** „45 sind 15% von welchem Wert?" — Findet den Ausgangswert, wenn Prozentwert und Prozentsatz bekannt sind.
+- **Prozentualer Aufschlag:** „200 € + 19% Aufschlag = ?" — Berechnet den neuen Wert nach einer prozentualen Erhöhung (z. B. MwSt, Preiserhöhung).
+- **Prozentualer Rabatt:** „200 € − 25% Rabatt = ?" — Berechnet den reduzierten Wert nach einem prozentualen Abzug (z. B. Rabattaktionen, Skonto).
+
+**Prozentrechnung im Alltag: Typische Anwendungsfälle**
+
+Die Prozentrechnung ist eine der am häufigsten genutzten Rechenarten im täglichen Leben. Hier einige typische Situationen:
+
+- **Einkaufen & Rabatte:** Ein Pullover kostet 80 € und ist um 30% reduziert. Rabatt: 80 × 30 ÷ 100 = 24 €. Neuer Preis: 80 − 24 = 56 €.
+- **Trinkgeld berechnen:** Die Rechnung beträgt 45 €, Sie möchten 10% Trinkgeld geben: 45 × 10 ÷ 100 = 4,50 €.
+- **Gehaltserhöhung:** Ihr Gehalt von 3.200 € wird um 5% erhöht: 3.200 × 5 ÷ 100 = 160 €. Neues Gehalt: 3.360 €.
+- **Notenberechnung:** Sie haben 72 von 90 Punkten erreicht: (72 ÷ 90) × 100 = 80%.
+- **Steuern & MwSt:** Der Nettopreis beträgt 100 €, die MwSt (19%): 100 × 19 ÷ 100 = 19 €. Brutto: 119 €.
+
+**Rechenweg Schritt für Schritt**
+
+Unser Prozentrechner zeigt bei jedem Ergebnis den vollständigen Rechenweg an. So können Sie die Berechnung nachvollziehen, für Hausaufgaben oder Prüfungen nutzen und das Konzept der Prozentrechnung besser verstehen. Die Schnellwahl-Buttons ermöglichen häufig gebrauchte Prozentsätze (5%, 10%, 15%, 20%, 25%, 50%) mit einem Klick einzusetzen.
+
+**Häufige Fehler bei der Prozentrechnung**
+
+- **Prozent auf Prozent:** Eine Erhöhung um 50% und anschließende Senkung um 50% ergibt nicht den Ausgangswert! 100 + 50% = 150, dann 150 − 50% = 75 (nicht 100).
+- **Prozent vs. Prozentpunkte:** Eine Steigerung von 20% auf 25% ist eine Steigerung um 5 Prozentpunkte, aber um 25% (relativ).
+- **Grundwert verwechseln:** Achten Sie darauf, welcher Wert die 100%-Basis bildet. Bei Rabatten ist es der Originalpreis, bei Aufschlägen der Nettopreis.`,
     faq: [
       {
         frage: 'Wie berechne ich Prozent?',
-        antwort: 'Um den Prozentwert zu berechnen, multiplizieren Sie den Grundwert mit dem Prozentsatz und teilen durch 100. Formel: Prozentwert = Grundwert × Prozentsatz ÷ 100.',
+        antwort: 'Um den Prozentwert zu berechnen, multiplizieren Sie den Grundwert mit dem Prozentsatz und teilen durch 100. Formel: Prozentwert = Grundwert × Prozentsatz ÷ 100. Beispiel: 25% von 200 = 200 × 25 ÷ 100 = 50.',
       },
       {
-        frage: 'Was sind 25% von 200?',
-        antwort: '25% von 200 = 200 × 25 ÷ 100 = 50. Der Prozentwert beträgt also 50.',
+        frage: 'Wie berechne ich einen prozentualen Aufschlag?',
+        antwort: 'Multiplizieren Sie den Ausgangswert mit (1 + Prozentsatz ÷ 100). Beispiel: 200 € + 19% Aufschlag = 200 × 1,19 = 238 €. Der Aufschlag allein beträgt 200 × 0,19 = 38 €.',
       },
       {
-        frage: 'Wie berechne ich den Prozentsatz?',
-        antwort: 'Teilen Sie den Prozentwert durch den Grundwert und multiplizieren Sie mit 100. Formel: Prozentsatz = (Prozentwert ÷ Grundwert) × 100.',
+        frage: 'Wie berechne ich einen Rabatt in Prozent?',
+        antwort: 'Multiplizieren Sie den Originalpreis mit dem Prozentsatz und teilen durch 100, dann ziehen Sie das Ergebnis ab. Beispiel: 80 € mit 25% Rabatt: 80 × 25 ÷ 100 = 20 € Rabatt. Neuer Preis: 80 − 20 = 60 €.',
+      },
+      {
+        frage: 'Wie viel Prozent sind 45 von 200?',
+        antwort: 'Teilen Sie den Prozentwert durch den Grundwert und multiplizieren mit 100: (45 ÷ 200) × 100 = 22,5%. Also sind 45 genau 22,5% von 200.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen Prozent und Prozentpunkten?',
+        antwort: 'Prozent beschreibt eine relative Veränderung, Prozentpunkte eine absolute. Steigt ein Zinssatz von 2% auf 3%, ist das eine Steigerung um 1 Prozentpunkt, aber um 50% (relativ).',
+      },
+      {
+        frage: 'Wie berechne ich den Grundwert?',
+        antwort: 'Teilen Sie den Prozentwert durch den Prozentsatz und multiplizieren mit 100. Formel: Grundwert = Prozentwert ÷ Prozentsatz × 100. Beispiel: 45 sind 15% von welchem Wert? 45 ÷ 15 × 100 = 300.',
+      },
+      {
+        frage: 'Warum ergibt +50% und dann −50% nicht den Ausgangswert?',
+        antwort: 'Weil sich der Grundwert ändert: 100 + 50% = 150. Jetzt sind 50% von 150 = 75. Also 150 − 75 = 75, nicht 100. Der Grundwert für die Senkung ist der bereits erhöhte Wert.',
+      },
+      {
+        frage: 'Wie rechne ich Bruch in Prozent um?',
+        antwort: 'Teilen Sie den Zähler durch den Nenner und multiplizieren mit 100. Beispiel: 3/4 = 3 ÷ 4 × 100 = 75%. Umgekehrt: 75% = 75/100 = 3/4.',
       },
     ],
   },
   {
     slug: 'brutto-netto-rechner',
     titel: 'Brutto-Netto-Rechner',
-    beschreibung: 'Berechne dein Nettogehalt aus dem Bruttogehalt. Mit Steuerklasse, Kirchensteuer und Sozialabgaben.',
+    beschreibung: 'Nettogehalt berechnen: Mit Steuerklasse, Bundesland, Kirchensteuer, KV und allen Sozialabgaben.',
     kategorie: 'Finanzen',
     kategorieSlug: 'finanzen',
-    metaTitle: 'Brutto-Netto-Rechner 2025 | Gehaltsrechner | Rechenfix.de',
-    metaDescription: 'Kostenloser Brutto-Netto-Rechner 2025: Berechne dein Nettogehalt sofort. Mit Steuerklasse, Kirchensteuer und allen Sozialabgaben.',
-    keywords: ['brutto netto rechner', 'gehaltsrechner', 'nettogehalt', 'lohnrechner', 'steuerklasse'],
+    metaTitle: 'Brutto-Netto-Rechner 2026 ▷ Gehaltsrechner kostenlos | Rechenfix.de',
+    metaDescription: 'Brutto-Netto-Rechner 2026: Nettogehalt sofort berechnen. Mit Steuerklasse, Bundesland, gesetzlicher & privater KV, Kirchensteuer und Prozentbalken ✓ Kostenlos.',
+    keywords: ['brutto netto rechner', 'brutto netto rechner 2026', 'gehaltsrechner', 'nettogehalt berechnen', 'lohnrechner', 'netto brutto', 'steuerklasse', 'gehaltsrechner 2026', 'nettolohn berechnen', 'was bleibt vom brutto'],
     icon: '💶',
-    formel: 'Netto = Brutto − Lohnsteuer − Solidaritätszuschlag − ggf. Kirchensteuer − Sozialabgaben',
-    beispiel: 'Beispiel: Bei 3.500 € brutto, Steuerklasse 1, keine Kirchensteuer ≈ 2.350 € netto (vereinfacht)',
-    erklaerung: `Der Brutto-Netto-Rechner zeigt Ihnen, wie viel von Ihrem Bruttogehalt nach Abzug aller Steuern und Sozialabgaben übrig bleibt.
+    formel: 'Netto = Brutto − Lohnsteuer − Solidaritätszuschlag − ggf. Kirchensteuer − Sozialabgaben (KV + RV + AV + PV)',
+    beispiel: 'Beispiel: Bei 3.500 € brutto, Steuerklasse 1, NRW, keine Kirchensteuer ≈ 2.340 € netto (ca. 33% Abzüge)',
+    erklaerung: `Der Brutto-Netto-Rechner ist der meistgenutzte Online-Rechner in Deutschland. Er zeigt Ihnen, wie viel von Ihrem Bruttogehalt nach Abzug aller Steuern und Sozialabgaben tatsächlich auf Ihrem Konto landet. Unser Gehaltsrechner berücksichtigt alle relevanten Faktoren: Steuerklasse, Bundesland, Kirchensteuer, gesetzliche oder private Krankenversicherung, Kinderfreibeträge und mehr.
 
-**Abzüge im Überblick**
+**So funktioniert die Gehaltsberechnung**
 
-- **Lohnsteuer:** Abhängig von Steuerklasse und Gehaltshöhe
-- **Solidaritätszuschlag:** 5,5% der Lohnsteuer (mit Freigrenze)
-- **Kirchensteuer:** 8% oder 9% der Lohnsteuer (je nach Bundesland)
-- **Krankenversicherung:** ca. 14,6% (Arbeitnehmeranteil: 7,3%) + Zusatzbeitrag
-- **Rentenversicherung:** 18,6% (Arbeitnehmeranteil: 9,3%)
-- **Arbeitslosenversicherung:** 2,6% (Arbeitnehmeranteil: 1,3%)
-- **Pflegeversicherung:** 3,4% (Arbeitnehmeranteil: 1,7%, ggf. + 0,6% Zuschlag)
+Vom Bruttogehalt werden zwei Arten von Abzügen vorgenommen: Steuern und Sozialabgaben. Die Steuern umfassen die Lohnsteuer (progressiv nach Einkommen), den Solidaritätszuschlag (5,5% der Lohnsteuer, mit Freigrenze von 18.130 € Jahressteuer) und ggf. die Kirchensteuer (8% in BW und BY, 9% in allen anderen Bundesländern). Die Sozialabgaben setzen sich aus Kranken-, Renten-, Arbeitslosen- und Pflegeversicherung zusammen.
 
-**Hinweis**
+**Alle Abzüge im Detail (2025/2026)**
 
-Dies ist eine vereinfachte Berechnung zur Orientierung. Für eine exakte Berechnung wenden Sie sich an Ihren Steuerberater.`,
+- **Lohnsteuer:** Progressive Besteuerung nach dem Einkommensteuertarif. Grundfreibetrag 2025: 12.096 €. Der Eingangssteuersatz beträgt 14%, der Spitzensteuersatz 42% (ab ca. 66.761 €) und der Reichensteuersatz 45% (ab 277.826 €).
+- **Solidaritätszuschlag:** 5,5% der Lohnsteuer. Seit 2021 für ca. 90% der Steuerzahler abgeschafft (Freigrenze: 18.130 € Jahressteuer, ca. 73.000 € Jahresbrutto in SK1).
+- **Kirchensteuer:** 8% der Lohnsteuer in Baden-Württemberg und Bayern, 9% in allen anderen Bundesländern. Nur bei Kirchenmitgliedschaft.
+- **Krankenversicherung (GKV):** Allgemeiner Beitragssatz 14,6% (Arbeitnehmeranteil: 7,3%) + kassenindividueller Zusatzbeitrag (Durchschnitt 2025: 1,7%, AN-Anteil: 0,85%). Beitragsbemessungsgrenze: 5.512,50 €/Monat.
+- **Rentenversicherung:** 18,6% (Arbeitnehmeranteil: 9,3%). BBG West: 7.550 €/Monat, BBG Ost: 7.450 €/Monat.
+- **Arbeitslosenversicherung:** 2,6% (Arbeitnehmeranteil: 1,3%). Gleiche BBG wie RV.
+- **Pflegeversicherung:** 3,4% (Arbeitnehmeranteil: 1,7%). Kinderlose ab 23 Jahren zahlen einen Zuschlag von 0,6%. Ab dem 2. Kind gibt es Abschläge. BBG wie KV.
+
+**Die 6 Steuerklassen erklärt**
+
+Die Steuerklasse bestimmt, wie viel Lohnsteuer monatlich einbehalten wird. Sie beeinflusst nicht die jährliche Steuerlast (die wird über die Steuererklärung ausgeglichen), sondern nur die monatliche Verteilung:
+
+- **Steuerklasse 1:** Ledige, Geschiedene, Verwitwete — die Standardklasse für Alleinstehende.
+- **Steuerklasse 2:** Alleinerziehende mit mindestens einem Kind im Haushalt. Bietet den Entlastungsbetrag für Alleinerziehende (4.260 €).
+- **Steuerklasse 3:** Verheiratete mit deutlich höherem Einkommen als der Partner. Günstigste Steuerklasse, aber nur in Kombination mit SK5 für den Partner.
+- **Steuerklasse 4:** Verheiratete mit ähnlich hohem Einkommen. Beide Partner werden wie in SK1 besteuert.
+- **Steuerklasse 5:** Verheiratete mit deutlich niedrigerem Einkommen. Höchste monatliche Abzüge, gleicht sich aber über die Steuererklärung aus.
+- **Steuerklasse 6:** Für Zweit- und Nebenjobs. Keine Freibeträge, daher die höchsten Abzüge.
+
+**Gesetzliche vs. Private Krankenversicherung**
+
+In der gesetzlichen Krankenversicherung (GKV) richtet sich der Beitrag nach dem Einkommen (bis zur BBG). Der Arbeitgeber übernimmt die Hälfte des allgemeinen Beitrags. In der privaten Krankenversicherung (PKV) hängt der Beitrag von Alter, Gesundheitszustand und gewähltem Tarif ab. Der Arbeitgeberzuschuss ist auf den maximalen GKV-Beitrag begrenzt. Beamte, Selbstständige und Arbeitnehmer mit einem Bruttoeinkommen über der Versicherungspflichtgrenze (69.300 € /Jahr in 2025) können in die PKV wechseln.
+
+**Tipps: Mehr Netto vom Brutto**
+
+Es gibt legale Wege, Ihr Nettogehalt zu optimieren:
+
+- **Steuerklassenwechsel:** Verheiratete können durch die Kombination 3/5 statt 4/4 das monatliche Netto des Hauptverdieners deutlich erhöhen.
+- **Kinderfreibeträge eintragen lassen:** Reduziert die monatliche Pflegeversicherung und kann steuerlich günstiger sein als Kindergeld.
+- **Steuererklärung machen:** Viele Arbeitnehmer erhalten im Schnitt ca. 1.100 € Erstattung pro Jahr.
+- **Betriebliche Altersvorsorge:** Beiträge zur bAV werden vor Steuern und Sozialabgaben abgezogen.
+- **Sachbezüge:** Der Arbeitgeber kann bis zu 50 € monatlich steuerfrei als Sachbezug gewähren (z. B. Tankgutschein, Jobticket).
+
+**Hinweis zur Genauigkeit**
+
+Unser Brutto-Netto-Rechner liefert eine gute Orientierung, basiert jedoch auf vereinfachten Berechnungen. Die exakte Lohnsteuer wird vom Finanzamt nach dem offiziellen Lohnsteuertarif berechnet, der deutlich komplexer ist. Für eine exakte Berechnung empfehlen wir den Lohnsteuerrechner des BMF oder Ihren Steuerberater.`,
     faq: [
       {
         frage: 'Wie viel Netto bleibt von meinem Brutto?',
-        antwort: 'Das hängt von Ihrer Steuerklasse, Kirchensteuerpflicht und weiteren Faktoren ab. Als Faustregel bleiben in Steuerklasse 1 etwa 60-67% des Bruttogehalts als Netto übrig.',
+        antwort: 'Das hängt von Steuerklasse, Bundesland, Kirchensteuerpflicht und KV ab. Als Faustregel: In Steuerklasse 1 bleiben bei 3.500 € brutto etwa 60-67% als Netto (ca. 2.300 €). Bei höheren Gehältern steigt der Abzugsanteil wegen der progressiven Steuer.',
       },
       {
         frage: 'Welche Steuerklasse habe ich?',
-        antwort: 'Steuerklasse 1: Ledige. Steuerklasse 2: Alleinerziehende. Steuerklasse 3: Verheiratete (höheres Einkommen). Steuerklasse 4: Verheiratete (ähnliches Einkommen). Steuerklasse 5: Verheiratete (niedrigeres Einkommen). Steuerklasse 6: Zweitjob.',
+        antwort: 'SK1: Ledige/Geschiedene. SK2: Alleinerziehende. SK3: Verheiratete (höheres Einkommen, Partner in SK5). SK4: Verheiratete (ähnliches Einkommen). SK5: Verheiratete (niedrigeres Einkommen, Partner in SK3). SK6: Zweit-/Nebenjob.',
+      },
+      {
+        frage: 'Warum unterscheidet sich mein Netto je nach Bundesland?',
+        antwort: 'Zwei Gründe: 1) Der Kirchensteuersatz ist in Baden-Württemberg und Bayern 8%, in allen anderen Bundesländern 9%. 2) Die Beitragsbemessungsgrenze der Rentenversicherung ist in Ostdeutschland etwas niedriger als im Westen.',
+      },
+      {
+        frage: 'Was ist der Solidaritätszuschlag?',
+        antwort: 'Der Soli beträgt 5,5% der Lohnsteuer. Seit 2021 fällt er für ca. 90% der Steuerzahler weg (Freigrenze: 18.130 € Jahres-Lohnsteuer). Das entspricht etwa 73.000 € Jahresbrutto in Steuerklasse 1.',
+      },
+      {
+        frage: 'Lohnt sich die Steuerklassenkombination 3/5?',
+        antwort: 'Wenn ein Partner deutlich mehr verdient (z.B. 5.000 € vs. 2.000 €), lohnt sich 3/5: Der Hauptverdiener hat mehr Netto. Achtung: Die Jahressteuerlast bleibt gleich — die Steuererklärung ist bei 3/5 Pflicht und kann zu Nachzahlungen führen.',
+      },
+      {
+        frage: 'Wie wirken sich Kinderfreibeträge auf das Nettogehalt aus?',
+        antwort: 'Kinderfreibeträge senken die Pflegeversicherung (kein Zuschlag von 0,6% für Kinderlose). Steuerlich prüft das Finanzamt automatisch, ob Kindergeld oder Kinderfreibetrag günstiger ist (Günstigerprüfung).',
+      },
+      {
+        frage: 'Was ist die Beitragsbemessungsgrenze?',
+        antwort: 'Die BBG ist die Einkommensgrenze, bis zu der Sozialabgaben berechnet werden. Für KV/PV: 5.512,50 €/Monat (2025). Für RV/AV: 7.550 €/Monat (West) bzw. 7.450 €/Monat (Ost). Einkommen darüber ist sozialabgabenfrei.',
+      },
+      {
+        frage: 'Wie berechne ich mein Netto pro Stunde?',
+        antwort: 'Teilen Sie Ihr monatliches Nettogehalt durch Ihre Arbeitsstunden pro Monat. Bei einer 40-Stunden-Woche sind das ca. 160 Stunden. Beispiel: 2.340 € netto ÷ 160 = 14,63 € netto/Stunde. Unser Rechner zeigt diesen Wert automatisch an.',
       },
     ],
   },
   {
     slug: 'mwst-rechner',
     titel: 'MwSt-Rechner',
-    beschreibung: 'Mehrwertsteuer berechnen: Netto zu Brutto, Brutto zu Netto, MwSt-Betrag ermitteln.',
+    beschreibung: 'Mehrwertsteuer berechnen: Brutto ↔ Netto, MwSt herausrechnen, Multi-Rechner für Rechnungen.',
     kategorie: 'Finanzen',
     kategorieSlug: 'finanzen',
-    metaTitle: 'MwSt-Rechner | Mehrwertsteuer berechnen | Rechenfix.de',
-    metaDescription: 'Kostenloser MwSt-Rechner: Mehrwertsteuer sofort berechnen. Netto zu Brutto, Brutto zu Netto mit 19% oder 7% MwSt.',
-    keywords: ['mwst rechner', 'mehrwertsteuer rechner', 'netto brutto', 'umsatzsteuer', '19 prozent'],
+    metaTitle: 'MwSt-Rechner 2026 ▷ Mehrwertsteuer berechnen | Rechenfix.de',
+    metaDescription: 'MwSt-Rechner: Mehrwertsteuer sofort berechnen. Brutto → Netto, Netto → Brutto, Multi-Rechner für Rechnungen. 19% & 7% oder eigener Satz ✓ Kostenlos.',
+    keywords: ['mwst rechner', 'mehrwertsteuer rechner', 'netto brutto rechner', 'brutto netto', 'umsatzsteuer rechner', 'mwst herausrechnen', 'mehrwertsteuer berechnen', '19 prozent mwst', 'mwst aus brutto berechnen', 'netto berechnen'],
     icon: '🧾',
     formel: 'Brutto = Netto × (1 + MwSt-Satz ÷ 100) | Netto = Brutto ÷ (1 + MwSt-Satz ÷ 100)',
-    beispiel: 'Beispiel: 100 € netto + 19% MwSt = 100 × 1,19 = 119 € brutto (MwSt-Betrag: 19 €)',
-    erklaerung: `Die Mehrwertsteuer (MwSt) bzw. Umsatzsteuer (USt) ist eine Verbrauchssteuer, die auf fast alle Waren und Dienstleistungen in Deutschland erhoben wird.
+    beispiel: 'Beispiel: 100 € netto + 19% MwSt = 100 × 1,19 = 119 € brutto. Umgekehrt: 119 € brutto ÷ 1,19 = 100 € netto.',
+    erklaerung: `Die Mehrwertsteuer (MwSt), auch Umsatzsteuer (USt) genannt, ist die wichtigste indirekte Steuer in Deutschland. Sie wird auf nahezu alle Waren und Dienstleistungen erhoben und macht einen erheblichen Teil der Steuereinnahmen des Bundes aus. Unser MwSt-Rechner hilft Ihnen, schnell und fehlerfrei zwischen Netto- und Bruttobeträgen umzurechnen — einzeln oder für ganze Rechnungen.
 
-**MwSt-Sätze in Deutschland**
+**MwSt-Sätze in Deutschland 2026**
 
-- **19% Regelsteuersatz:** Gilt für die meisten Waren und Dienstleistungen
-- **7% ermäßigter Steuersatz:** Gilt für Lebensmittel, Bücher, Zeitungen, ÖPNV, Hotelübernachtungen und weitere Grundversorgungsgüter
+In Deutschland gibt es zwei Mehrwertsteuersätze, die im Umsatzsteuergesetz (UStG) geregelt sind:
 
-**Typische Anwendungsfälle**
+- **19% Regelsteuersatz (§ 12 Abs. 1 UStG):** Gilt für die meisten Waren und Dienstleistungen — von Elektronik über Kleidung bis zu Handwerkerleistungen.
+- **7% ermäßigter Steuersatz (§ 12 Abs. 2 UStG):** Gilt für Grundversorgungsgüter wie Lebensmittel (ausgenommen Getränke und Restaurantessen), Bücher, Zeitungen, ÖPNV-Tickets, Hotelübernachtungen, kulturelle Veranstaltungen und landwirtschaftliche Erzeugnisse.
+- **0% Steuerbefreiung:** Bestimmte Leistungen sind von der Umsatzsteuer befreit, z. B. ärztliche Leistungen, Vermietung von Wohnraum, Versicherungen und bestimmte Finanzdienstleistungen.
 
-- Rechnungen erstellen (Netto + MwSt = Brutto)
-- Einkaufspreise kalkulieren (Brutto → Netto)
-- MwSt-Betrag aus einem Bruttobetrag herausrechnen`,
+**So berechnen Sie die Mehrwertsteuer richtig**
+
+Die Berechnung der MwSt folgt einfachen Formeln, die jedoch oft verwechselt werden:
+
+- **Netto → Brutto:** Brutto = Netto × (1 + MwSt-Satz ÷ 100). Beispiel: 100 € × 1,19 = 119 € brutto.
+- **Brutto → Netto:** Netto = Brutto ÷ (1 + MwSt-Satz ÷ 100). Beispiel: 119 € ÷ 1,19 = 100 € netto.
+- **MwSt-Betrag aus Brutto:** MwSt = Brutto − (Brutto ÷ 1,19). Beispiel: 119 − 100 = 19 € MwSt.
+
+**Achtung: Der häufigste Fehler bei der MwSt-Berechnung**
+
+Viele Menschen machen folgenden Fehler: Sie ziehen einfach 19% vom Bruttobetrag ab. Das ist falsch! 119 € − 19% = 119 × 0,81 = 96,39 € — das ist nicht der korrekte Nettobetrag. Richtig ist: 119 ÷ 1,19 = 100 €. Der Unterschied von 3,61 € mag bei kleinen Beträgen gering erscheinen, kann bei Rechnungen über tausende Euro jedoch erheblich sein. Unser Rechner zeigt diesen Unterschied im Brutto→Netto-Modus automatisch an.
+
+**Multi-Rechner: Mehrere Positionen auf einmal**
+
+Für Selbstständige, Freiberufler und Unternehmer bietet unser MwSt-Rechner einen Multi-Rechner. Damit können Sie mehrere Rechnungspositionen mit unterschiedlichen MwSt-Sätzen gleichzeitig berechnen — ideal für gemischte Rechnungen mit 19% und 7% Positionen. Die Summen werden automatisch berechnet und übersichtlich dargestellt.
+
+**Wann Sie die MwSt ausweisen müssen**
+
+Jeder Unternehmer, der umsatzsteuerpflichtige Leistungen erbringt, muss die MwSt auf seinen Rechnungen gesondert ausweisen (§ 14 Abs. 4 UStG). Ausnahmen gelten für Kleinunternehmer nach § 19 UStG (Umsatz unter 22.000 € im Vorjahr), die keine MwSt berechnen und ausweisen dürfen. Auch für innergemeinschaftliche Lieferungen und bestimmte Ausfuhrlieferungen entfällt die MwSt.
+
+**Vorsteuerabzug: So holen Sie sich die MwSt zurück**
+
+Wenn Sie als Unternehmer Waren oder Dienstleistungen einkaufen, zahlen Sie auf diese Einkäufe MwSt — die sogenannte Vorsteuer. Diese können Sie in Ihrer Umsatzsteuervoranmeldung geltend machen und vom Finanzamt zurückfordern. Voraussetzung ist eine ordnungsgemäße Rechnung mit gesondertem Ausweis der MwSt. Der Vorsteuerabzug ist einer der wichtigsten steuerlichen Vorteile für Selbstständige.`,
     faq: [
       {
         frage: 'Wie berechne ich die Mehrwertsteuer?',
-        antwort: 'MwSt-Betrag = Nettobetrag × MwSt-Satz ÷ 100. Bei 19% MwSt und 100 € netto: 100 × 19 ÷ 100 = 19 € MwSt. Der Bruttobetrag ist dann 119 €.',
+        antwort: 'MwSt-Betrag = Nettobetrag × MwSt-Satz ÷ 100. Bei 19% MwSt und 100 € netto: 100 × 19 ÷ 100 = 19 € MwSt. Der Bruttobetrag ist dann 100 + 19 = 119 €.',
       },
       {
         frage: 'Wie rechne ich die MwSt aus einem Bruttobetrag heraus?',
-        antwort: 'Nettobetrag = Bruttobetrag ÷ (1 + MwSt-Satz ÷ 100). Bei 119 € brutto und 19% MwSt: 119 ÷ 1,19 = 100 € netto. Die MwSt beträgt 19 €.',
+        antwort: 'Nettobetrag = Bruttobetrag ÷ (1 + MwSt-Satz ÷ 100). Bei 119 € brutto und 19%: 119 ÷ 1,19 = 100 € netto. MwSt: 119 − 100 = 19 €. Wichtig: Nicht einfach 19% abziehen!',
+      },
+      {
+        frage: 'Warum darf ich nicht einfach 19% vom Brutto abziehen?',
+        antwort: 'Weil die MwSt auf den Nettobetrag aufgeschlagen wird, nicht auf den Bruttobetrag. 119 € − 19% = 96,39 € (falsch). Richtig: 119 ÷ 1,19 = 100 € netto. Die 19% beziehen sich immer auf den Nettowert.',
       },
       {
         frage: 'Wann gilt der ermäßigte MwSt-Satz von 7%?',
-        antwort: 'Der ermäßigte Steuersatz von 7% gilt u.a. für Lebensmittel (außer Getränke und Restaurantbesuche), Bücher, Zeitungen, ÖPNV-Tickets und Hotelübernachtungen.',
+        antwort: 'Der ermäßigte Steuersatz von 7% gilt u.a. für Lebensmittel (außer Getränke und Restaurantbesuche), Bücher, Zeitungen, ÖPNV-Tickets, Hotelübernachtungen und kulturelle Veranstaltungen (§ 12 Abs. 2 UStG).',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen MwSt und USt?',
+        antwort: 'Kein Unterschied — es sind Synonyme. „Mehrwertsteuer" (MwSt) ist der umgangssprachliche Begriff, „Umsatzsteuer" (USt) der offizielle, im Gesetz verwendete Begriff (Umsatzsteuergesetz, UStG).',
+      },
+      {
+        frage: 'Muss ich als Kleinunternehmer MwSt berechnen?',
+        antwort: 'Nein. Kleinunternehmer nach § 19 UStG (Umsatz unter 22.000 € im Vorjahr) sind von der Umsatzsteuer befreit und dürfen keine MwSt auf ihren Rechnungen ausweisen. Sie haben dafür aber auch keinen Vorsteuerabzug.',
       },
     ],
   },

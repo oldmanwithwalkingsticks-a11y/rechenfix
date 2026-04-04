@@ -5,6 +5,11 @@ export interface BruttoNettoEingabe {
   kirchensteuersatz: 8 | 9;
   kinderfreibetraege: number;
   bundesland: string;
+  kvArt: 'gesetzlich' | 'privat';
+  kvZusatzbeitrag: number;
+  kvPrivatBeitrag: number;
+  rvBefreit: boolean;
+  abrechnungszeitraum: 'monat' | 'jahr';
 }
 
 export interface BruttoNettoErgebnis {
@@ -20,14 +25,36 @@ export interface BruttoNettoErgebnis {
   gesamtAbzuege: number;
   nettoMonat: number;
   nettoJahr: number;
+  steuernGesamt: number;
+  sozialabgabenGesamt: number;
+  nettoProStunde: number;
+  abzuegeProzent: number;
 }
 
-// Vereinfachte Lohnsteuertabelle 2025 (monatlich, Steuerklasse 1)
+export const BUNDESLAENDER = [
+  { kuerzel: 'BW', name: 'Baden-Württemberg', kirchensteuersatz: 8 as const },
+  { kuerzel: 'BY', name: 'Bayern', kirchensteuersatz: 8 as const },
+  { kuerzel: 'BE', name: 'Berlin', kirchensteuersatz: 9 as const },
+  { kuerzel: 'BB', name: 'Brandenburg', kirchensteuersatz: 9 as const },
+  { kuerzel: 'HB', name: 'Bremen', kirchensteuersatz: 9 as const },
+  { kuerzel: 'HH', name: 'Hamburg', kirchensteuersatz: 9 as const },
+  { kuerzel: 'HE', name: 'Hessen', kirchensteuersatz: 9 as const },
+  { kuerzel: 'MV', name: 'Mecklenburg-Vorpommern', kirchensteuersatz: 9 as const },
+  { kuerzel: 'NI', name: 'Niedersachsen', kirchensteuersatz: 9 as const },
+  { kuerzel: 'NW', name: 'Nordrhein-Westfalen', kirchensteuersatz: 9 as const },
+  { kuerzel: 'RP', name: 'Rheinland-Pfalz', kirchensteuersatz: 9 as const },
+  { kuerzel: 'SL', name: 'Saarland', kirchensteuersatz: 9 as const },
+  { kuerzel: 'SN', name: 'Sachsen', kirchensteuersatz: 9 as const },
+  { kuerzel: 'ST', name: 'Sachsen-Anhalt', kirchensteuersatz: 9 as const },
+  { kuerzel: 'SH', name: 'Schleswig-Holstein', kirchensteuersatz: 9 as const },
+  { kuerzel: 'TH', name: 'Thüringen', kirchensteuersatz: 9 as const },
+];
+
+// Vereinfachte Lohnsteuertabelle 2025/2026 (monatlich, Steuerklasse 1)
 function berechneLohnsteuerSK1(brutto: number): number {
   const jahresBrutto = brutto * 12;
   // Grundfreibetrag 2025: 12.096 €
   if (jahresBrutto <= 12096) return 0;
-  // Vereinfachte progressive Besteuerung
   const zuVersteuern = jahresBrutto - 12096;
   let steuer = 0;
   if (zuVersteuern <= 17442) {
@@ -44,65 +71,88 @@ function berechneLohnsteuerSK1(brutto: number): number {
 
 function berechneLohnsteuer(brutto: number, steuerklasse: number): number {
   const sk1Steuer = berechneLohnsteuerSK1(brutto);
-  // Vereinfachte Faktoren je Steuerklasse
   const faktoren: Record<number, number> = {
-    1: 1.0,
-    2: 0.85,
-    3: 0.55,
-    4: 1.0,
-    5: 1.55,
-    6: 1.25,
+    1: 1.0, 2: 0.85, 3: 0.55, 4: 1.0, 5: 1.55, 6: 1.25,
   };
   return Math.round(sk1Steuer * (faktoren[steuerklasse] ?? 1) * 100) / 100;
 }
 
+// Beitragsbemessungsgrenzen 2025
+const BBG_KV = 5512.50;   // monatlich
+const BBG_RV_WEST = 7550;  // monatlich
+const BBG_RV_OST = 7450;   // monatlich
+
+const OSTLAENDER = ['BE', 'BB', 'MV', 'SN', 'ST', 'TH'];
+
 export function berechneBruttoNetto(eingabe: BruttoNettoEingabe): BruttoNettoErgebnis {
-  const brutto = eingabe.bruttoMonat;
+  let brutto = eingabe.bruttoMonat;
+  if (eingabe.abrechnungszeitraum === 'jahr') {
+    brutto = eingabe.bruttoMonat / 12;
+  }
+
+  const istOst = OSTLAENDER.includes(eingabe.bundesland);
+  const bbgRv = istOst ? BBG_RV_OST : BBG_RV_WEST;
 
   // Lohnsteuer
   const lohnsteuer = berechneLohnsteuer(brutto, eingabe.steuerklasse);
 
-  // Solidaritätszuschlag (5,5% der Lohnsteuer, Freigrenze 18.130 € Jahressteuer)
+  // Solidaritätszuschlag
   const jahresLohnsteuer = lohnsteuer * 12;
   const solidaritaet = jahresLohnsteuer > 18130
     ? Math.round(lohnsteuer * 0.055 * 100) / 100
     : 0;
 
   // Kirchensteuer
+  const kstSatz = eingabe.kirchensteuersatz;
   const kirchensteuer = eingabe.kirchensteuer
-    ? Math.round(lohnsteuer * (eingabe.kirchensteuersatz / 100) * 100) / 100
+    ? Math.round(lohnsteuer * (kstSatz / 100) * 100) / 100
     : 0;
 
-  // Sozialabgaben (Arbeitnehmeranteil)
-  const krankenversicherung = Math.round(brutto * 0.073 * 100) / 100;   // 7,3% + ~0,8% Zusatzbeitrag
-  const kvZusatz = Math.round(brutto * 0.008 * 100) / 100;
-  const rentenversicherung = Math.round(brutto * 0.093 * 100) / 100;    // 9,3%
-  const arbeitslosenversicherung = Math.round(brutto * 0.013 * 100) / 100; // 1,3%
-  const pflegeversicherung = Math.round(brutto * 0.017 * 100) / 100;    // 1,7%
+  // Sozialabgaben
+  let krankenversicherung: number;
+  if (eingabe.kvArt === 'privat') {
+    krankenversicherung = eingabe.kvPrivatBeitrag;
+  } else {
+    const kvBrutto = Math.min(brutto, BBG_KV);
+    const kvBasis = Math.round(kvBrutto * 0.073 * 100) / 100;
+    const kvZusatz = Math.round(kvBrutto * (eingabe.kvZusatzbeitrag / 200) * 100) / 100;
+    krankenversicherung = kvBasis + kvZusatz;
+  }
+
+  const rvBrutto = Math.min(brutto, bbgRv);
+  const rentenversicherung = eingabe.rvBefreit ? 0 : Math.round(rvBrutto * 0.093 * 100) / 100;
+
+  const avBrutto = Math.min(brutto, bbgRv);
+  const arbeitslosenversicherung = Math.round(avBrutto * 0.013 * 100) / 100;
+
+  const pvBrutto = Math.min(brutto, BBG_KV);
+  const pflegeBasis = Math.round(pvBrutto * 0.017 * 100) / 100;
   const pflegeZuschlag = eingabe.kinderfreibetraege === 0
-    ? Math.round(brutto * 0.006 * 100) / 100
+    ? Math.round(pvBrutto * 0.006 * 100) / 100
     : 0;
+  const pflegeversicherung = pflegeBasis + pflegeZuschlag;
 
-  const kvGesamt = krankenversicherung + kvZusatz;
-  const pvGesamt = pflegeversicherung + pflegeZuschlag;
-
-  const gesamtAbzuege = lohnsteuer + solidaritaet + kirchensteuer +
-    kvGesamt + rentenversicherung + arbeitslosenversicherung + pvGesamt;
-
+  const steuernGesamt = lohnsteuer + solidaritaet + kirchensteuer;
+  const sozialabgabenGesamt = krankenversicherung + rentenversicherung + arbeitslosenversicherung + pflegeversicherung;
+  const gesamtAbzuege = steuernGesamt + sozialabgabenGesamt;
   const nettoMonat = Math.round((brutto - gesamtAbzuege) * 100) / 100;
 
   return {
-    bruttoMonat: brutto,
-    bruttoJahr: brutto * 12,
+    bruttoMonat: Math.round(brutto * 100) / 100,
+    bruttoJahr: Math.round(brutto * 12 * 100) / 100,
     lohnsteuer,
     solidaritaet,
     kirchensteuer,
-    krankenversicherung: kvGesamt,
+    krankenversicherung: Math.round(krankenversicherung * 100) / 100,
     rentenversicherung,
     arbeitslosenversicherung,
-    pflegeversicherung: pvGesamt,
+    pflegeversicherung: Math.round(pflegeversicherung * 100) / 100,
     gesamtAbzuege: Math.round(gesamtAbzuege * 100) / 100,
     nettoMonat,
     nettoJahr: Math.round(nettoMonat * 12 * 100) / 100,
+    steuernGesamt: Math.round(steuernGesamt * 100) / 100,
+    sozialabgabenGesamt: Math.round(sozialabgabenGesamt * 100) / 100,
+    nettoProStunde: Math.round(nettoMonat / 160 * 100) / 100,
+    abzuegeProzent: brutto > 0 ? Math.round((gesamtAbzuege / brutto) * 1000) / 10 : 0,
   };
 }
