@@ -15,6 +15,7 @@ import KwPsRechner from '@/components/rechner/KwPsRechner';
 import KfzSteuerRechner from '@/components/rechner/KfzSteuerRechner';
 import ZinsRechner from '@/components/rechner/ZinsRechner';
 import TageRechner from '@/components/rechner/TageRechner';
+import ElterngeldRechner from '@/components/rechner/ElterngeldRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -45,6 +46,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'kfz-steuer-rechner': KfzSteuerRechner,
   'zinsrechner': ZinsRechner,
   'tagerechner': TageRechner,
+  'elterngeld-rechner': ElterngeldRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
