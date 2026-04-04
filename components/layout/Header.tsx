@@ -92,15 +92,10 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mega Menu */}
-        <div
-          className={`overflow-hidden transition-all duration-300 ease-in-out ${
-            menuOpen ? 'max-h-[80vh] opacity-100' : 'max-h-0 opacity-0'
-          }`}
-        >
+        {/* Mega Menu — only rendered when open */}
+        {menuOpen && (
           <div className="border-t border-gray-100 dark:border-gray-700 bg-gray-50/80 dark:bg-gray-800/50 backdrop-blur-sm">
             <div className="max-w-6xl mx-auto px-4 py-6 max-h-[75vh] overflow-y-auto">
-              {/* Kategorie-Kacheln */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
                 {kategorien.map(k => {
                   const katRechner = getRechnerByKategorie(k.slug);
@@ -139,17 +134,8 @@ export default function Header() {
               </div>
             </div>
           </div>
-        </div>
+        )}
       </header>
-
-      {/* Invisible click-catcher to close menu on outside click */}
-      {menuOpen && (
-        <div
-          className="fixed inset-0 -z-10"
-          onClick={() => setMenuOpen(false)}
-          aria-hidden="true"
-        />
-      )}
     </div>
   );
 }
