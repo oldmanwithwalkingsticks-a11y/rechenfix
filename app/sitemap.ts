@@ -28,11 +28,33 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   // Long-Tail SEO-Seiten (Brutto-Netto für spezifische Beträge)
-  const longTailPages: MetadataRoute.Sitemap = [
+  const longTailSlugs = [
+    '2000-euro-brutto-netto',
+    '2500-euro-brutto-netto',
+    '3000-euro-brutto-netto',
+    '3500-euro-brutto-netto',
+    '4000-euro-brutto-netto',
+    '5000-euro-brutto-netto',
+  ];
+  const longTailPages: MetadataRoute.Sitemap = longTailSlugs.map(slug => ({
+    url: `${SITE_URL}/finanzen/${slug}`,
+    lastModified: now,
+    changeFrequency: 'yearly' as const,
+    priority: 0.8,
+  }));
+
+  // Brutto-Netto-Tabelle & Mindestlohn Übersichtsseiten
+  const sonderseiten: MetadataRoute.Sitemap = [
     {
-      url: `${SITE_URL}/finanzen/3000-euro-brutto-netto`,
+      url: `${SITE_URL}/finanzen/brutto-netto-tabelle`,
       lastModified: now,
-      changeFrequency: 'yearly',
+      changeFrequency: 'yearly' as const,
+      priority: 0.9,
+    },
+    {
+      url: `${SITE_URL}/finanzen/mindestlohn-netto`,
+      lastModified: now,
+      changeFrequency: 'yearly' as const,
       priority: 0.8,
     },
   ];
@@ -51,5 +73,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
-  return [...staticPages, ...longTailPages, ...kategoriePages, ...rechnerPages];
+  return [...staticPages, ...longTailPages, ...sonderseiten, ...kategoriePages, ...rechnerPages];
 }

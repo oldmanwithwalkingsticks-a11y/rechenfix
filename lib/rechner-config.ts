@@ -2627,8 +2627,50 @@ export function getNeueRechner(): RechnerConfig[] {
     .filter((r): r is RechnerConfig => !!r);
 }
 
+const verwandteMap: Record<string, string[]> = {
+  'brutto-netto-rechner': ['stundenlohn-rechner', 'elterngeld-rechner', 'pendlerpauschale-rechner', 'sparrechner'],
+  'prozentrechner': ['mwst-rechner', 'dreisatz-rechner', 'bruchrechner', 'einheiten-umrechner'],
+  'mwst-rechner': ['prozentrechner', 'brutto-netto-rechner', 'stundenlohn-rechner', 'dreisatz-rechner'],
+  'bmi-rechner': ['promillerechner', 'dreisatz-rechner', 'prozentrechner', 'tagerechner'],
+  'stromkosten-rechner': ['heizkosten-rechner', 'nebenkosten-rechner', 'mietrechner', 'quadratmeter-rechner'],
+  'dreisatz-rechner': ['prozentrechner', 'bruchrechner', 'einheiten-umrechner', 'durchschnitt-rechner'],
+  'tagerechner': ['urlaubstage-rechner', 'arbeitszeitrechner', 'prozentrechner', 'dreisatz-rechner'],
+  'zinsrechner': ['sparrechner', 'inflationsrechner', 'brutto-netto-rechner', 'grunderwerbsteuer-rechner'],
+  'elterngeld-rechner': ['brutto-netto-rechner', 'stundenlohn-rechner', 'buergergeld-rechner', 'sparrechner'],
+  'buergergeld-rechner': ['brutto-netto-rechner', 'elterngeld-rechner', 'mietrechner', 'stundenlohn-rechner'],
+  'stundenlohn-rechner': ['brutto-netto-rechner', 'arbeitszeitrechner', 'ueberstunden-rechner', 'pendlerpauschale-rechner'],
+  'sparrechner': ['zinsrechner', 'inflationsrechner', 'brutto-netto-rechner', 'prozentrechner'],
+  'inflationsrechner': ['sparrechner', 'zinsrechner', 'prozentrechner', 'brutto-netto-rechner'],
+  'spritkosten-rechner': ['kfz-steuer-rechner', 'kw-ps-umrechner', 'pendlerpauschale-rechner', 'stromkosten-rechner'],
+  'kw-ps-umrechner': ['kfz-steuer-rechner', 'spritkosten-rechner', 'einheiten-umrechner', 'dreisatz-rechner'],
+  'kfz-steuer-rechner': ['spritkosten-rechner', 'kw-ps-umrechner', 'brutto-netto-rechner', 'pendlerpauschale-rechner'],
+  'nebenkosten-rechner': ['mietrechner', 'stromkosten-rechner', 'heizkosten-rechner', 'quadratmeter-rechner'],
+  'mietrechner': ['nebenkosten-rechner', 'grunderwerbsteuer-rechner', 'quadratmeter-rechner', 'stromkosten-rechner'],
+  'heizkosten-rechner': ['stromkosten-rechner', 'nebenkosten-rechner', 'mietrechner', 'quadratmeter-rechner'],
+  'grunderwerbsteuer-rechner': ['mietrechner', 'zinsrechner', 'sparrechner', 'nebenkosten-rechner'],
+  'quadratmeter-rechner': ['tapetenbedarf-rechner', 'mietrechner', 'nebenkosten-rechner', 'einheiten-umrechner'],
+  'tapetenbedarf-rechner': ['quadratmeter-rechner', 'nebenkosten-rechner', 'mietrechner', 'einheiten-umrechner'],
+  'bruchrechner': ['prozentrechner', 'dreisatz-rechner', 'durchschnitt-rechner', 'wissenschaftlicher-taschenrechner'],
+  'einheiten-umrechner': ['kw-ps-umrechner', 'quadratmeter-rechner', 'dreisatz-rechner', 'prozentrechner'],
+  'notenschluessel-rechner': ['durchschnitt-rechner', 'prozentrechner', 'dreisatz-rechner', 'bruchrechner'],
+  'durchschnitt-rechner': ['notenschluessel-rechner', 'prozentrechner', 'bruchrechner', 'wissenschaftlicher-taschenrechner'],
+  'wissenschaftlicher-taschenrechner': ['bruchrechner', 'prozentrechner', 'einheiten-umrechner', 'durchschnitt-rechner'],
+  'arbeitszeitrechner': ['ueberstunden-rechner', 'stundenlohn-rechner', 'urlaubstage-rechner', 'tagerechner'],
+  'urlaubstage-rechner': ['arbeitszeitrechner', 'tagerechner', 'stundenlohn-rechner', 'ueberstunden-rechner'],
+  'ueberstunden-rechner': ['arbeitszeitrechner', 'stundenlohn-rechner', 'brutto-netto-rechner', 'urlaubstage-rechner'],
+  'pendlerpauschale-rechner': ['spritkosten-rechner', 'brutto-netto-rechner', 'stundenlohn-rechner', 'kfz-steuer-rechner'],
+  'promillerechner': ['bmi-rechner', 'tagerechner', 'dreisatz-rechner', 'prozentrechner'],
+};
+
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
-  // Erst Rechner aus gleicher Kategorie, dann aus anderen
+  const slugs = verwandteMap[aktuell.slug];
+  if (slugs) {
+    const mapped = slugs
+      .map(s => rechner.find(r => r.slug === s))
+      .filter((r): r is RechnerConfig => !!r);
+    if (mapped.length >= anzahl) return mapped.slice(0, anzahl);
+  }
+  // Fallback: gleiche Kategorie, dann andere
   const gleicheKategorie = rechner.filter(r => r.kategorieSlug === aktuell.kategorieSlug && r.slug !== aktuell.slug);
   const andereKategorie = rechner.filter(r => r.kategorieSlug !== aktuell.kategorieSlug);
   return [...gleicheKategorie, ...andereKategorie].slice(0, anzahl);
