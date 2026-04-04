@@ -29,6 +29,7 @@ import TapetenbedarfRechner from '@/components/rechner/TapetenbedarfRechner';
 import QuadratmeterRechner from '@/components/rechner/QuadratmeterRechner';
 import BruchRechner from '@/components/rechner/BruchRechner';
 import EinheitenRechner from '@/components/rechner/EinheitenRechner';
+import NotenschluesselRechner from '@/components/rechner/NotenschluesselRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -73,6 +74,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'quadratmeter-rechner': QuadratmeterRechner,
   'bruchrechner': BruchRechner,
   'einheiten-umrechner': EinheitenRechner,
+  'notenschluessel-rechner': NotenschluesselRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
