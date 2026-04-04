@@ -23,6 +23,7 @@ export default function MwStRechner() {
   const [customSatz, setCustomSatz] = useState('');
   const [istCustom, setIstCustom] = useState(false);
   const [kopiert, setKopiert] = useState(false);
+  const [geteilt, setGeteilt] = useState(false);
 
   // Multi-Rechner
   const [zeilen, setZeilen] = useState<MultiZeile[]>([
@@ -57,6 +58,19 @@ export default function MwStRechner() {
     navigator.clipboard.writeText(text);
     setKopiert(true);
     setTimeout(() => setKopiert(false), 2000);
+  }
+
+  function handleShare() {
+    if (!ergebnis) return;
+    const richtungText = tab === 'netto-brutto' ? 'Netto → Brutto' : 'Brutto → Netto';
+    const text = `${richtungText}: ${fmt(tab === 'netto-brutto' ? ergebnis.netto : ergebnis.brutto)} € → ${fmt(tab === 'netto-brutto' ? ergebnis.brutto : ergebnis.netto)} € (${aktiverSatz}% MwSt: ${fmt(ergebnis.mwstBetrag)} €) — berechnet auf rechenfix.de/finanzen/mwst-rechner`;
+    if (navigator.share) {
+      navigator.share({ title: 'MwSt-Berechnung', text });
+    } else {
+      window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+    }
+    setGeteilt(true);
+    setTimeout(() => setGeteilt(false), 2000);
   }
 
   function setSatzVorwahl(satz: number) {
@@ -199,12 +213,20 @@ export default function MwStRechner() {
                 </div>
               </div>
 
-              <button
-                onClick={handleCopy}
-                className="text-sm text-primary-500 dark:text-primary-400 hover:text-primary-600 font-medium transition-colors"
-              >
-                {kopiert ? '✓ Kopiert' : 'Ergebnis kopieren'}
-              </button>
+              <div className="flex gap-3 mt-2">
+                <button
+                  onClick={handleCopy}
+                  className="text-sm text-primary-500 dark:text-primary-400 hover:text-primary-600 font-medium transition-colors"
+                >
+                  {kopiert ? '✓ Kopiert' : 'Ergebnis kopieren'}
+                </button>
+                <button
+                  onClick={handleShare}
+                  className="text-sm text-primary-500 dark:text-primary-400 hover:text-primary-600 font-medium transition-colors"
+                >
+                  {geteilt ? '✓ Geteilt' : 'Ergebnis teilen'}
+                </button>
+              </div>
             </>
           )}
         </>

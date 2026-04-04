@@ -69,3 +69,31 @@ body {
     transform: translateY(0);
   }
 }
+
+/* Print-CSS: Nur Rechner + Tabelle anzeigen */
+@media print {
+  header, footer, nav, aside,
+  .print\\:hidden,
+  [class*="AdSlot"],
+  [class*="ad-slot"] {
+    display: none !important;
+  }
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt;
+  }
+  .result-box {
+    background: #f0f4ff !important;
+    color: #1e3a5f !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .result-box * {
+    color: #1e3a5f !important;
+  }
+  .card {
+    box-shadow: none !important;
+    border: 1px solid #e5e7eb !important;
+  }
+}
