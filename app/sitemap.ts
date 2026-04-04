@@ -27,6 +27,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
+  // Long-Tail SEO-Seiten (Brutto-Netto für spezifische Beträge)
+  const longTailPages: MetadataRoute.Sitemap = [
+    {
+      url: `${SITE_URL}/finanzen/3000-euro-brutto-netto`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.8,
+    },
+  ];
+
   const kategoriePages: MetadataRoute.Sitemap = kategorien.map(k => ({
     url: `${SITE_URL}/${k.slug}`,
     lastModified: now,
@@ -41,5 +51,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
-  return [...staticPages, ...kategoriePages, ...rechnerPages];
+  return [...staticPages, ...longTailPages, ...kategoriePages, ...rechnerPages];
 }
