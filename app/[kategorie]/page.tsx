@@ -83,7 +83,7 @@ export default function KategorieSeite({ params }: Props) {
               <Link
                 key={link.href}
                 href={link.href}
-                className="card px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+                className="card px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 hover:bg-primary-50/50 dark:hover:bg-primary-500/5 transition-all"
               >
                 {link.label} →
               </Link>
