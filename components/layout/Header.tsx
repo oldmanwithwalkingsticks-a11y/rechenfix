@@ -1,95 +1,158 @@
+'use client';
+
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { kategorien, getRechnerByKategorie } from '@/lib/rechner-config';
 import ThemeToggle from './ThemeToggle';
 
+const farbMap: Record<string, string> = {
+  alltag: 'border-blue-200 dark:border-blue-500/30',
+  finanzen: 'border-amber-200 dark:border-amber-500/30',
+  gesundheit: 'border-green-200 dark:border-green-500/30',
+  auto: 'border-red-200 dark:border-red-500/30',
+  wohnen: 'border-orange-200 dark:border-orange-500/30',
+  mathe: 'border-violet-200 dark:border-violet-500/30',
+  arbeit: 'border-teal-200 dark:border-teal-500/30',
+};
+
 export default function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLDivElement>(null);
+
+  // Close on click outside
+  useEffect(() => {
+    if (!menuOpen) return;
+    function handleClick(e: MouseEvent) {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
+        setMenuOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, [menuOpen]);
+
+  // Close on Escape
+  useEffect(() => {
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') setMenuOpen(false);
+    }
+    document.addEventListener('keydown', handleKey);
+    return () => document.removeEventListener('keydown', handleKey);
+  }, []);
+
+  // Close on route change (scroll to top = navigation happened)
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handleScroll = () => setMenuOpen(false);
+    window.addEventListener('scroll', handleScroll, { once: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [menuOpen]);
+
   return (
-    <header className="bg-white dark:bg-slate-900 border-b border-gray-100 dark:border-gray-700 sticky top-0 z-50">
-      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between relative">
-        <Link href="/" className="flex flex-col shrink-0">
-          <div className="flex items-center gap-1">
-            <span className="text-3xl font-extrabold text-primary-500">Rechen</span>
-            <span className="text-3xl font-extrabold text-accent-500">fix</span>
-            <span className="text-sm text-gray-400 hidden sm:inline">.de</span>
-          </div>
-          <span className="text-[11px] tracking-widest uppercase text-gray-400 dark:text-gray-500 font-medium -mt-1">
-            Fix gerechnet!
-          </span>
-        </Link>
-
-        <div className="flex items-center gap-2 sm:gap-4">
-          {/* Desktop Navigation mit Dropdown */}
-          <nav className="hidden lg:flex items-center gap-1">
-            {kategorien.map(k => {
-              const katRechner = getRechnerByKategorie(k.slug);
-              return (
-                <div key={k.slug} className="relative group">
-                  <Link
-                    href={`/${k.slug}`}
-                    className="px-3 py-2 text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 font-medium transition-colors text-sm rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800"
-                  >
-                    {k.icon} {k.name}
-                  </Link>
-                  {/* Dropdown */}
-                  <div className="absolute left-0 top-full pt-2 hidden group-hover:block z-50">
-                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 py-2 min-w-[240px]">
-                      {katRechner.map(r => (
-                        <Link
-                          key={r.slug}
-                          href={`/${r.kategorieSlug}/${r.slug}`}
-                          className="flex items-center gap-3 px-4 py-2.5 hover:bg-primary-50 dark:hover:bg-primary-500/10 transition-colors"
-                        >
-                          <span className="text-lg">{r.icon}</span>
-                          <span className="text-sm text-gray-700 dark:text-gray-300 font-medium">{r.titel}</span>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </nav>
-
-          <ThemeToggle />
-          <MobileMenu />
-        </div>
-      </div>
-    </header>
-  );
-}
-
-function MobileMenu() {
-  return (
-    <details className="lg:hidden relative">
-      <summary className="list-none cursor-pointer p-2">
-        <svg className="w-6 h-6 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </summary>
-      <div className="absolute right-0 top-full mt-2 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 p-3 min-w-[260px] z-50 max-h-[80vh] overflow-y-auto">
-        {kategorien.map(k => {
-          const katRechner = getRechnerByKategorie(k.slug);
-          return (
-            <div key={k.slug} className="mb-3 last:mb-0">
-              <Link
-                href={`/${k.slug}`}
-                className="block px-3 py-2 text-sm font-bold text-gray-800 dark:text-gray-200 hover:text-primary-500 dark:hover:text-primary-400"
-              >
-                {k.icon} {k.name}
-              </Link>
-              {katRechner.map(r => (
-                <Link
-                  key={r.slug}
-                  href={`/${r.kategorieSlug}/${r.slug}`}
-                  className="block px-3 py-1.5 pl-8 text-sm text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400"
-                >
-                  {r.icon} {r.titel}
-                </Link>
-              ))}
+    <div ref={headerRef}>
+      <header className="bg-white dark:bg-slate-900 border-b border-gray-100 dark:border-gray-700 sticky top-0 z-50">
+        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/" className="flex flex-col shrink-0" onClick={() => setMenuOpen(false)}>
+            <div className="flex items-center gap-1">
+              <span className="text-3xl font-extrabold text-primary-500">Rechen</span>
+              <span className="text-3xl font-extrabold text-accent-500">fix</span>
+              <span className="text-sm text-gray-400 hidden sm:inline">.de</span>
             </div>
-          );
-        })}
-      </div>
-    </details>
+            <span className="text-[11px] tracking-widest uppercase text-gray-400 dark:text-gray-500 font-medium -mt-1">
+              Fix gerechnet!
+            </span>
+          </Link>
+
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Alle Rechner Button */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+                menuOpen
+                  ? 'bg-primary-500 text-white shadow-md'
+                  : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+              }`}
+              aria-expanded={menuOpen}
+              aria-label="Alle Rechner anzeigen"
+            >
+              {menuOpen ? (
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h7" />
+                </svg>
+              )}
+              <span className="hidden sm:inline">Alle Rechner</span>
+              <svg className={`w-3 h-3 transition-transform duration-200 ${menuOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            <ThemeToggle />
+          </div>
+        </div>
+
+        {/* Mega Menu */}
+        <div
+          className={`overflow-hidden transition-all duration-300 ease-in-out ${
+            menuOpen ? 'max-h-[80vh] opacity-100' : 'max-h-0 opacity-0'
+          }`}
+        >
+          <div className="border-t border-gray-100 dark:border-gray-700 bg-gray-50/80 dark:bg-gray-800/50 backdrop-blur-sm">
+            <div className="max-w-6xl mx-auto px-4 py-6 max-h-[75vh] overflow-y-auto">
+              {/* Kategorie-Kacheln */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                {kategorien.map(k => {
+                  const katRechner = getRechnerByKategorie(k.slug);
+                  const borderColor = farbMap[k.slug] || 'border-gray-200 dark:border-gray-700';
+                  return (
+                    <div
+                      key={k.slug}
+                      className={`bg-white dark:bg-gray-800 rounded-xl border-l-4 ${borderColor} shadow-sm p-4`}
+                    >
+                      <Link
+                        href={`/${k.slug}`}
+                        onClick={() => setMenuOpen(false)}
+                        className="flex items-center gap-2 font-bold text-gray-800 dark:text-gray-100 hover:text-primary-500 dark:hover:text-primary-400 transition-colors mb-3 text-sm"
+                      >
+                        <span className="text-lg">{k.icon}</span>
+                        {k.name}
+                        <span className="text-xs font-normal text-gray-400 ml-auto">{katRechner.length}</span>
+                      </Link>
+                      <ul className="space-y-0.5">
+                        {katRechner.map(r => (
+                          <li key={r.slug}>
+                            <Link
+                              href={`/${r.kategorieSlug}/${r.slug}`}
+                              onClick={() => setMenuOpen(false)}
+                              className="flex items-center gap-2 py-1.5 px-2 -mx-1 rounded-lg text-[13px] text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-500/10 transition-all"
+                            >
+                              <span>{r.icon}</span>
+                              <span className="truncate">{r.titel}</span>
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Backdrop overlay */}
+      {menuOpen && (
+        <div
+          className="fixed inset-0 bg-black/20 dark:bg-black/40 z-40"
+          onClick={() => setMenuOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+    </div>
   );
 }
