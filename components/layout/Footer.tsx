@@ -62,22 +62,24 @@ export default function Footer() {
           {/* Kategorien */}
           <div>
             <h3 className="font-bold text-sm uppercase tracking-wider mb-3 text-primary-100">Kategorien</h3>
-            <div className="grid gap-y-2" style={{ gridTemplateColumns: '1.25rem auto min-content' }}>
-              {kategorien.map(k => {
-                const anzahl = getRechnerByKategorie(k.slug).length;
-                return (
-                  <Link
-                    key={k.slug}
-                    href={`/${k.slug}`}
-                    className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm contents"
-                  >
-                    <span className="text-center">{k.icon}</span>
-                    <span className="pl-2">{k.name}</span>
-                    <span className="text-primary-400 dark:text-gray-600 text-xs tabular-nums pl-3 self-center">{anzahl}</span>
-                  </Link>
-                );
-              })}
-            </div>
+            <table className="border-separate" style={{ borderSpacing: '0 0.35rem' }}>
+              <tbody>
+                {kategorien.map(k => {
+                  const anzahl = getRechnerByKategorie(k.slug).length;
+                  return (
+                    <tr key={k.slug}>
+                      <td className="pr-1.5">
+                        <Link href={`/${k.slug}`} className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm whitespace-nowrap flex items-center gap-1.5">
+                          <span className="w-5 text-center shrink-0">{k.icon}</span>
+                          <span>{k.name}</span>
+                        </Link>
+                      </td>
+                      <td className="text-primary-400 dark:text-gray-600 text-xs tabular-nums pl-2">{anzahl}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
           </div>
 
           {/* Rechtliches */}
