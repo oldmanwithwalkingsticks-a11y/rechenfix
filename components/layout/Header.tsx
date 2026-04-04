@@ -41,11 +41,16 @@ export default function Header() {
     return () => document.removeEventListener('keydown', handleKey);
   }, []);
 
-  // Close on route change (scroll to top = navigation happened)
+  // Close on significant scroll (>50px, debounced to avoid reflow triggers)
   useEffect(() => {
     if (!menuOpen) return;
-    const handleScroll = () => setMenuOpen(false);
-    window.addEventListener('scroll', handleScroll, { once: true });
+    const startY = window.scrollY;
+    const handleScroll = () => {
+      if (Math.abs(window.scrollY - startY) > 50) {
+        setMenuOpen(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [menuOpen]);
 
@@ -149,10 +154,10 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Backdrop overlay */}
+      {/* Backdrop overlay — below header (z-[-1] within stacking context) */}
       {menuOpen && (
         <div
-          className="fixed inset-0 bg-black/20 dark:bg-black/40 z-40"
+          className="fixed inset-0 bg-black/20 dark:bg-black/40 -z-10"
           onClick={() => setMenuOpen(false)}
           aria-hidden="true"
         />
