@@ -11,7 +11,7 @@ export default function Startseite() {
       {/* Hero */}
       <section className="text-center py-12 md:py-20">
         <h1 className="text-4xl md:text-5xl font-extrabold text-primary-700 dark:text-primary-300 mb-3">
-          rechenfix.de — Fix gerechnet! ⚡
+          rechenfix.de — Fix gerechnet!
         </h1>
         <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto mb-8">
           Kostenlose Online-Rechner für Finanzen, Alltag, Auto und Gesundheit. Sofort-Ergebnisse ohne Anmeldung.
@@ -151,7 +151,7 @@ export default function Startseite() {
         <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Warum Rechenfix.de?</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-gray-600 dark:text-gray-400">
           <div>
-            <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">⚡ Sofort-Ergebnisse</h3>
+            <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">Sofort-Ergebnisse</h3>
             <p>Alle Berechnungen erfolgen live während der Eingabe. Kein Warten, kein &quot;Berechnen&quot;-Button.</p>
           </div>
           <div>
