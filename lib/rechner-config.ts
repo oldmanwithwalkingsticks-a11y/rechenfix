@@ -2192,6 +2192,7 @@ export function getBeliebtRechner(): RechnerConfig[] {
 
 export function getNeueRechner(): RechnerConfig[] {
   return neueRechnerSlugs
+    .slice(0, 3)
     .map(slug => rechner.find(r => r.slug === slug))
     .filter((r): r is RechnerConfig => !!r);
 }
