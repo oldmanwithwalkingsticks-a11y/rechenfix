@@ -33,6 +33,7 @@ import NotenschluesselRechner from '@/components/rechner/NotenschluesselRechner'
 import DurchschnittRechner from '@/components/rechner/DurchschnittRechner';
 import TaschenrechnerRechner from '@/components/rechner/TaschenrechnerRechner';
 import ArbeitszeitRechner from '@/components/rechner/ArbeitszeitRechner';
+import UrlaubstageRechner from '@/components/rechner/UrlaubstageRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -81,6 +82,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'durchschnitt-rechner': DurchschnittRechner,
   'wissenschaftlicher-taschenrechner': TaschenrechnerRechner,
   'arbeitszeitrechner': ArbeitszeitRechner,
+  'urlaubstage-rechner': UrlaubstageRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
