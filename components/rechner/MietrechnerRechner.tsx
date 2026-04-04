@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { berechneMietpreis } from '@/lib/berechnungen/mietpreis';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
+import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 
 export default function MietrechnerRechner() {
   const [kaltmiete, setKaltmiete] = useState('650');
@@ -99,6 +100,11 @@ export default function MietrechnerRechner() {
               </p>
             </div>
           </div>
+
+          <ErgebnisAktionen
+            ergebnisText={`Warmmiete: ${fmt(ergebnis.warmmiete)} €/Monat (${fmt(ergebnis.warmmieteProQm)} €/m², Mietbelastung: ${ergebnis.mietbelastung.toLocaleString('de-DE')} %)`}
+            seitenTitel="Mietrechner"
+          />
 
           <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden">
             <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700/50">

@@ -5,6 +5,7 @@ import {
   berechnePendlerpauschale,
   berechneArbeitstage,
 } from '@/lib/berechnungen/pendlerpauschale';
+import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 
 const fmtEuro = (n: number) =>
   n.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' });
@@ -295,6 +296,11 @@ export default function PendlerpauschaleRechner() {
               <span>Die Pendlerpauschale gilt unabhängig vom Verkehrsmittel — auch für Fahrradfahrer, Fußgänger und Mitfahrer in Fahrgemeinschaften.</span>
             </p>
           </div>
+
+          <ErgebnisAktionen
+            ergebnisText={`Pendlerpauschale: ${fmtEuro(ergebnis.pauschaleGesamt)} - Steuerersparnis: ${fmtEuro(ergebnis.steuerersparnis)}/Jahr (${fmtEuro(ergebnis.monatlicheErsparnis)}/Monat)`}
+            seitenTitel="Pendlerpauschale berechnen"
+          />
         </div>
       )}
 

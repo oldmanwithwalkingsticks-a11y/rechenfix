@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { berechneBmi, bmiKategorien } from '@/lib/berechnungen/bmi';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
+import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 
 export default function BmiRechner() {
   const [gewicht, setGewicht] = useState('75');
@@ -179,6 +180,11 @@ export default function BmiRechner() {
               <strong>Hinweis:</strong> Der BMI-Rechner ersetzt keine ärztliche Beratung. Der BMI berücksichtigt weder Muskelmasse noch Körperfettverteilung. Wenden Sie sich für eine individuelle Einschätzung an Ihren Arzt.
             </p>
           </div>
+
+          <ErgebnisAktionen
+            ergebnisText={`BMI: ${fmt(ergebnis.bmi)} — ${ergebnis.kategorie.label}`}
+            seitenTitel="BMI-Rechner"
+          />
         </>
       )}
     </div>

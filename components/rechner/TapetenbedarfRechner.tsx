@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { berechneTapetenbedarf } from '@/lib/berechnungen/tapetenbedarf';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
+import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 
 type Eingabemodus = 'schnell' | 'detail';
 
@@ -262,6 +263,11 @@ export default function TapetenbedarfRechner() {
               <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmt(ergebnis.verschnittFlaeche)} m²</p>
             </div>
           </div>
+
+          <ErgebnisAktionen
+            ergebnisText={`Benötigte Tapetenrollen: ${ergebnis.rollenBenoetigt} (Tapezierfläche: ${fmt(ergebnis.tapezierFlaeche)} m², Bahnen: ${ergebnis.bahnenBenoetigt})`}
+            seitenTitel="Tapetenbedarfrechner"
+          />
 
           {/* Kosten */}
           {ergebnis.kosten !== null && (

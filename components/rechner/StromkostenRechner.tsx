@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { berechneStromkosten } from '@/lib/berechnungen/stromkosten';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
+import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 
 const SCHNELLWAHL = [
   { label: '1 Person', kwh: '1500' },
@@ -83,6 +84,11 @@ export default function StromkostenRechner() {
               <p className="text-xl font-bold text-gray-800 dark:text-gray-100">{fmt(ergebnis.kostenTag)} €</p>
             </div>
           </div>
+
+          <ErgebnisAktionen
+            ergebnisText={`Stromkosten pro Jahr: ${fmt(ergebnis.kostenJahr)} € (${fmt(ergebnis.kostenMonat)} €/Monat, ${fmt(ergebnis.kostenTag)} €/Tag)`}
+            seitenTitel="Stromkostenrechner"
+          />
 
           <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden">
             <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700/50">

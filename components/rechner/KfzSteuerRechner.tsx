@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { berechneKfzSteuer, type Antriebsart, type Zulassungszeitraum } from '@/lib/berechnungen/kfz-steuer';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
+import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 
 export default function KfzSteuerRechner() {
   const [zulassung, setZulassung] = useState<Zulassungszeitraum>('nach-2009');
@@ -186,6 +187,11 @@ export default function KfzSteuerRechner() {
               <strong>Hinweis:</strong> Vereinfachte Berechnung zur Orientierung. Die tatsächliche Kfz-Steuer kann je nach Schadstoffklasse, Erstzulassungsdatum und weiteren Faktoren abweichen. Maßgeblich ist der Steuerbescheid des Hauptzollamts.
             </p>
           </div>
+
+          <ErgebnisAktionen
+            ergebnisText={ergebnis.befreit ? `Kfz-Steuer: 0,00 € (steuerbefreit bis ${ergebnis.befreitBis})` : `Kfz-Steuer: ${fmt(ergebnis.jahresSteuer)} € pro Jahr (${fmt(ergebnis.monatsSteuer)} € / Monat)`}
+            seitenTitel="Kfz-Steuer-Rechner"
+          />
         </>
       )}
     </div>

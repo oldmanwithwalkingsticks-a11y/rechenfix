@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { berechneSparplan, type Zinsintervall } from '@/lib/berechnungen/sparplan';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
+import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 
 export default function SparRechner() {
   const [anfangskapital, setAnfangskapital] = useState('0');
@@ -139,6 +140,11 @@ export default function SparRechner() {
               </span>
             </div>
           </div>
+
+          <ErgebnisAktionen
+            ergebnisText={`Endkapital nach ${ergebnis.jahre.length} Jahren: ${fmt(ergebnis.endkapital)} € (Eigenkapital: ${fmt(ergebnis.eigenkapital)} €, Zinserträge: ${fmt(ergebnis.gesamtzinsen)} €)`}
+            seitenTitel="Sparrechner"
+          />
 
           {/* Balkendiagramm pro Jahr */}
           {ergebnis.jahre.length <= 50 && (

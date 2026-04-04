@@ -6,6 +6,7 @@ import {
   SCHNELLWAHL,
   type Getraenk,
 } from '@/lib/berechnungen/promille';
+import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 
 const fmtZahl = (n: number, s = 2) =>
   n.toLocaleString('de-DE', { minimumFractionDigits: s, maximumFractionDigits: s });
@@ -315,6 +316,11 @@ export default function PromilleRechner() {
               </table>
             </div>
           </div>
+
+          <ErgebnisAktionen
+            ergebnisText={`Promille: ${fmtZahl(ergebnis.aktuellPromille)} \u2030 - ${fmtZahl(ergebnis.gesamtAlkoholGramm, 1)} g Alkohol - Nüchtern um: ${ergebnis.nuechternUhrzeit}`}
+            seitenTitel="Promillerechner"
+          />
         </div>
       )}
 

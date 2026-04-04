@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { berechneDreisatz } from '@/lib/berechnungen/dreisatz';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
+import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 
 export default function DreisatzRechner() {
   const [a1, setA1] = useState('3');
@@ -134,6 +135,11 @@ export default function DreisatzRechner() {
               ))}
             </ol>
           </div>
+
+          <ErgebnisAktionen
+            ergebnisText={`${fmt(nA1)} ≙ ${fmt(nB1)}, dann ${fmt(nA2)} ≙ ${fmt(ergebnis.b2)}`}
+            seitenTitel="Dreisatz-Rechner"
+          />
         </>
       )}
     </div>

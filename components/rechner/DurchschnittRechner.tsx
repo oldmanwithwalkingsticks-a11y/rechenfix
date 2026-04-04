@@ -10,6 +10,7 @@ import {
   type GewichtetEintrag,
 } from '@/lib/berechnungen/durchschnitt';
 import NummerEingabe from '@/components/ui/NummerEingabe';
+import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 
 type Modus = 'arithmetisch' | 'gewichtet' | 'median';
 
@@ -242,6 +243,11 @@ export default function DurchschnittRechner() {
                 <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Sortierte Werte</p>
                 <p className="text-sm text-gray-800 dark:text-gray-200">{arithmErgebnis.sortiert.map(fmt).join(', ')}</p>
               </div>
+
+              <ErgebnisAktionen
+                ergebnisText={`Arithmetisches Mittel: ${fmt(arithmErgebnis.mittelwert)} (${arithmErgebnis.anzahl} Werte)`}
+                seitenTitel="Durchschnitt berechnen"
+              />
             </div>
           )}
         </div>
@@ -308,6 +314,11 @@ export default function DurchschnittRechner() {
                   ))}
                 </div>
               </div>
+
+              <ErgebnisAktionen
+                ergebnisText={`Gewichtetes Mittel: ${fmt(gewichtetErgebnis.mittelwert)} (${gewichtetErgebnis.anzahl} Werte, Gewichtung: ${fmt(gewichtetErgebnis.summeGewichte)})`}
+                seitenTitel="Durchschnitt berechnen"
+              />
             </div>
           )}
         </div>
@@ -358,6 +369,11 @@ export default function DurchschnittRechner() {
                 <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Sortierte Werte</p>
                 <p className="text-sm text-gray-800 dark:text-gray-200">{medianErgebnis.sortiert.map(fmt).join(', ')}</p>
               </div>
+
+              <ErgebnisAktionen
+                ergebnisText={`Mittelwert: ${fmt(medianErgebnis.mittelwert)}, Median: ${fmt(medianErgebnis.median)}${medianErgebnis.modus ? `, Modus: ${medianErgebnis.modus.map(fmt).join(', ')}` : ''}`}
+                seitenTitel="Durchschnitt berechnen"
+              />
             </div>
           )}
         </div>

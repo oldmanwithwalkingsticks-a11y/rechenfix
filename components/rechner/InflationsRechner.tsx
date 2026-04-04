@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { berechneInflation, type InflationsModus } from '@/lib/berechnungen/inflation';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
+import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 
 const SCHNELLWAHL = ['1', '2', '3', '5', '8'];
 
@@ -189,6 +190,13 @@ export default function InflationsRechner() {
               </>
             )}
           </div>
+
+          <ErgebnisAktionen
+            ergebnisText={modus === 'kaufkraft'
+              ? `Kaufkraft nach ${ergebnis.jahre.length} Jahren: ${fmt(ergebnis.ergebnis)} € (Verlust: ${fmt(ergebnis.differenz)} €, ${ergebnis.differenzProzent.toLocaleString('de-DE')} %)`
+              : `Preis in ${ergebnis.jahre.length} Jahren: ${fmt(ergebnis.ergebnis)} € (Anstieg: ${fmt(ergebnis.differenz)} €, ${ergebnis.differenzProzent.toLocaleString('de-DE')} %)`}
+            seitenTitel="Inflationsrechner"
+          />
 
           {/* Historischer Hinweis */}
           <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-xl p-4">

@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from 'react';
 import { berechneHeizkosten, getEnergietraegerDefaults, getAlleEnergietraeger, type Energietraeger } from '@/lib/berechnungen/heizkosten';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
+import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 
 export default function HeizkostenRechner() {
   const [wohnflaeche, setWohnflaeche] = useState('80');
@@ -88,6 +89,11 @@ export default function HeizkostenRechner() {
               <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{ergebnis.verbrauchGesamt.toLocaleString('de-DE')} kWh</p>
             </div>
           </div>
+
+          <ErgebnisAktionen
+            ergebnisText={`Heizkosten pro Jahr: ${fmt(ergebnis.kostenJahr)} € (${fmt(ergebnis.kostenMonat)} €/Monat, ${fmt(ergebnis.kostenProQm)} €/m²)`}
+            seitenTitel="Heizkostenrechner"
+          />
 
           {/* Vergleichstabelle */}
           <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden">

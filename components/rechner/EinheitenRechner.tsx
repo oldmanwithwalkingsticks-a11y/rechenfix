@@ -9,6 +9,7 @@ import {
   type EinheitenKategorie,
 } from '@/lib/berechnungen/einheiten';
 import NummerEingabe from '@/components/ui/NummerEingabe';
+import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 
 const katTabs: { key: EinheitenKategorie; label: string }[] = [
   { key: 'laenge', label: 'Länge' },
@@ -197,6 +198,11 @@ export default function EinheitenRechner() {
               ))}
             </div>
           </div>
+
+          <ErgebnisAktionen
+            ergebnisText={`${formatWert(ergebnis.wert)} ${ergebnis.vonLabel} = ${formatWert(ergebnis.ergebnis)} ${ergebnis.zuLabel}`}
+            seitenTitel="Einheiten umrechnen"
+          />
         </div>
       )}
     </div>

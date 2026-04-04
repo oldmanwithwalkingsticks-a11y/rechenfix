@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { berechneGrunderwerbsteuer, BUNDESLAENDER } from '@/lib/berechnungen/grunderwerbsteuer';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
+import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 
 export default function GrunderwerbsteuerRechner() {
   const [kaufpreis, setKaufpreis] = useState('300000');
@@ -101,6 +102,11 @@ export default function GrunderwerbsteuerRechner() {
               </div>
             </div>
           </div>
+
+          <ErgebnisAktionen
+            ergebnisText={`Gesamtkosten: ${fmt(ergebnis.gesamtkosten)} € (Grunderwerbsteuer: ${fmt(ergebnis.grunderwerbsteuer)} €, Nebenkosten: ${fmt(ergebnis.nebenkostenGesamt)} €)`}
+            seitenTitel="Grunderwerbsteuerrechner"
+          />
 
           {/* Steuersätze */}
           <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden">

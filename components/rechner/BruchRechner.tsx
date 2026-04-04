@@ -15,6 +15,7 @@ import {
 } from '@/lib/berechnungen/bruchrechnung';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
+import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 
 type Tab = 'rechnen' | 'kuerzen' | 'dezimal' | 'vergleichen';
 
@@ -232,6 +233,11 @@ export default function BruchRechner() {
                   )}
                 </div>
               </div>
+
+              <ErgebnisAktionen
+                ergebnisText={`${rechenErgebnis.schritte.eingabe} = ${rechenErgebnis.ergebnis.zaehler}/${rechenErgebnis.ergebnis.nenner} (${fmtDez(rechenErgebnis.dezimal)})`}
+                seitenTitel="Bruchrechner"
+              />
 
               {/* Rechenweg */}
               <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden">

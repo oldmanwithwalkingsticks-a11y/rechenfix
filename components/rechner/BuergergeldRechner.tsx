@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { berechneBuergergeld, type Bedarfsgemeinschaft, type Kindergruppe, type KindEintrag } from '@/lib/berechnungen/buergergeld';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
+import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 
 const ALTERSGRUPPEN: { key: Kindergruppe; label: string }[] = [
   { key: '0-5', label: '0–5 Jahre' },
@@ -329,6 +330,11 @@ export default function BuergergeldRechner() {
               <strong>Hinweis:</strong> Vereinfachte Schätzung. Maßgeblich ist der Bescheid Ihres Jobcenters.
             </p>
           </div>
+
+          <ErgebnisAktionen
+            ergebnisText={ergebnis.bedarfGedeckt ? 'Kein Bürgergeld-Anspruch (Bedarf durch Einkommen gedeckt)' : `Bürgergeld-Anspruch: ${fmt(ergebnis.gesamtAnspruch)} € pro Monat`}
+            seitenTitel="Bürgergeld-Rechner"
+          />
         </div>
       )}
     </div>

@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect } from 'react';
 import { berechne, formatErgebnis, type Winkelmodus, type VerlaufEintrag } from '@/lib/berechnungen/taschenrechner';
+import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 
 type TastenTyp = 'zahl' | 'operator' | 'funktion' | 'gleich' | 'loeschen' | 'spezial';
 
@@ -251,6 +252,16 @@ export default function TaschenrechnerRechner() {
           ))}
         </div>
       </div>
+
+      {/* Ergebnis-Aktionen */}
+      {verlauf.length > 0 && (
+        <div className="max-w-md mx-auto mt-4">
+          <ErgebnisAktionen
+            ergebnisText={`${verlauf[0].eingabe} = ${verlauf[0].ergebnis}`}
+            seitenTitel="Taschenrechner"
+          />
+        </div>
+      )}
 
       {/* Verlauf */}
       {verlauf.length > 0 && (

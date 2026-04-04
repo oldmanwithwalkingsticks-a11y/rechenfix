@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { berechneElterngeld, berechneVergleich, type ElterngeldVariante } from '@/lib/berechnungen/elterngeld';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
+import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 
 export default function ElterngeldRechner() {
   const [nettoVorGeburt, setNettoVorGeburt] = useState('2500');
@@ -230,6 +231,11 @@ export default function ElterngeldRechner() {
               Wenden Sie sich für verbindliche Auskünfte an Ihre zuständige Elterngeldstelle.
             </p>
           </div>
+
+          <ErgebnisAktionen
+            ergebnisText={`${variante === 'basis' ? 'Basiselterngeld' : 'ElterngeldPlus'}: ${fmt(ergebnis.monatlich)} € / Monat, ${fmt(ergebnis.gesamt)} € gesamt (${ergebnis.bezugsMonate} Monate)`}
+            seitenTitel="Elterngeld-Rechner"
+          />
         </div>
       )}
     </div>

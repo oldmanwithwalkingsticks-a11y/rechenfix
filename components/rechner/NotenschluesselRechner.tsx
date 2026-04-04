@@ -11,6 +11,7 @@ import {
   type NotenEintrag,
 } from '@/lib/berechnungen/notenschluessel';
 import NummerEingabe from '@/components/ui/NummerEingabe';
+import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 
 type Modus = 'note' | 'schluessel' | 'durchschnitt';
 
@@ -216,6 +217,11 @@ export default function NotenschluesselRechner() {
                   </p>
                 </div>
               </div>
+
+              <ErgebnisAktionen
+                ergebnisText={`Note: ${noteErgebnis.note} (${noteErgebnis.bezeichnung}) - ${noteErgebnis.prozent} % - ${noteErgebnis.bestanden ? 'Bestanden' : 'Nicht bestanden'}`}
+                seitenTitel="Notenschlüssel"
+              />
             </div>
           )}
         </div>
@@ -317,6 +323,11 @@ export default function NotenschluesselRechner() {
                   </table>
                 </div>
               </div>
+
+              <ErgebnisAktionen
+                ergebnisText={`Notenschlüssel für ${parseDeutscheZahl(sMaximum)} Punkte (${sSystem === 'schule' ? 'Schulnoten' : sSystem === 'ihk' ? 'IHK' : 'Uni'}, ${sSchluessel})`}
+                seitenTitel="Notenschlüssel"
+              />
             </div>
           )}
         </div>
@@ -397,6 +408,10 @@ export default function NotenschluesselRechner() {
                   ))}
                 </div>
               </div>
+              <ErgebnisAktionen
+                ergebnisText={`Notendurchschnitt: ${durchschnittErgebnis.durchschnitt.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} (${durchschnittErgebnis.bezeichnung})`}
+                seitenTitel="Notenschlüssel"
+              />
             </div>
           )}
         </div>

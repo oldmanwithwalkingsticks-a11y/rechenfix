@@ -7,6 +7,7 @@ import {
   type UrlaubsanspruchEingabe,
   type ResturlaubEingabe,
 } from '@/lib/berechnungen/urlaubstage';
+import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 
 type Modus = 'anspruch' | 'resturlaub';
 
@@ -226,6 +227,11 @@ export default function UrlaubstageRechner() {
                 </div>
               </div>
 
+              <ErgebnisAktionen
+                ergebnisText={`Urlaubsanspruch: ${fmtZahl(anspruchErgebnis.gesamt)} Tage (${fmtZahl(anspruchErgebnis.wochen)} Wochen)`}
+                seitenTitel="Urlaubstage berechnen"
+              />
+
               {anspruchErgebnis.ueberMinimum < 0 && (
                 <div className="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/30 rounded-xl p-4">
                   <p className="text-sm text-red-800 dark:text-red-300 flex gap-2">
@@ -346,6 +352,11 @@ export default function UrlaubstageRechner() {
                   ))}
                 </div>
               </div>
+
+              <ErgebnisAktionen
+                ergebnisText={`Resturlaub: ${fmtZahl(resturlaubErgebnis.resturlaub)} Tage (Anspruch: ${fmtZahl(resturlaubErgebnis.anspruchBisKuendigung)}, genommen: ${resturlaubErgebnis.bereitsGenommen})`}
+                seitenTitel="Urlaubstage berechnen"
+              />
 
               {/* Hinweis */}
               <div className={`rounded-xl p-4 ${

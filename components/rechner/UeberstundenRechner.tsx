@@ -5,6 +5,7 @@ import {
   berechneUeberstunden,
   berechneVerguetung,
 } from '@/lib/berechnungen/ueberstunden';
+import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 
 type Modus = 'berechnen' | 'verguetung';
 type EingabeArt = 'gesamt' | 'tageweise';
@@ -266,6 +267,11 @@ export default function UeberstundenRechner() {
                   </p>
                 </div>
               )}
+
+              <ErgebnisAktionen
+                ergebnisText={`${ergebnis1.istMinusstunden ? 'Minusstunden' : 'Überstunden'} ${ergebnis1.zeitraumLabel}: ${ergebnis1.zeitraumWert >= 0 ? '+' : ''}${fmtZahl(ergebnis1.zeitraumWert, 1)} Std.`}
+                seitenTitel="Überstunden berechnen"
+              />
             </div>
           )}
         </div>
@@ -402,6 +408,11 @@ export default function UeberstundenRechner() {
               <p className="text-xs text-gray-400 dark:text-gray-500 text-center">
                 Die Nettoschätzung basiert auf einem pauschalen Abzug von ca. 40% und dient nur zur Orientierung.
               </p>
+
+              <ErgebnisAktionen
+                ergebnisText={`Überstunden-Vergütung: ${fmtEuro(ergebnis2.verguetungBrutto)} brutto (${fmtEuro(ergebnis2.stundenlohn)}/Std., ${fmtEuro(ergebnis2.ueberstundenlohn)}/Überstunde)`}
+                seitenTitel="Überstunden berechnen"
+              />
             </div>
           )}
         </div>

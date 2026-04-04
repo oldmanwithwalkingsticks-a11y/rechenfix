@@ -9,6 +9,7 @@ import {
   type Einheit,
 } from '@/lib/berechnungen/quadratmeter';
 import NummerEingabe from '@/components/ui/NummerEingabe';
+import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 
 interface FlaechenFormular {
   id: number;
@@ -323,6 +324,11 @@ export default function QuadratmeterRechner() {
               </p>
             )}
           </div>
+
+          <ErgebnisAktionen
+            ergebnisText={`${ergebnis.einzelFlaechen.length > 1 ? 'Gesamtfläche' : 'Fläche'}: ${fmt(ergebnis.gesamtFlaeche)} m²`}
+            seitenTitel="Quadratmeterrechner"
+          />
 
           {/* Einzelflächen bei mehreren */}
           {ergebnis.einzelFlaechen.length > 1 && (

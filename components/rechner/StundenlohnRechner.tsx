@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { berechneStundenlohn, MINDESTLOHN_2026, type StundenlohnModus } from '@/lib/berechnungen/stundenlohn';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
+import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 
 const MODI: { key: StundenlohnModus; label: string; icon: string }[] = [
   { key: 'stundenlohn', label: 'Stundenlohn berechnen', icon: '⏱️' },
@@ -209,6 +210,11 @@ export default function StundenlohnRechner() {
               </div>
             </div>
           </div>
+
+          <ErgebnisAktionen
+            ergebnisText={`Stundenlohn: ${fmt(ergebnis.stundenlohn)} €, Monatsgehalt: ${fmt(ergebnis.monatsgehalt)} €, Jahresgehalt: ${fmt(ergebnis.jahresgehalt)} €`}
+            seitenTitel="Stundenlohn-Rechner"
+          />
 
           {/* Stundenlohn-Tabelle nach Berufsgruppen */}
           <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden">

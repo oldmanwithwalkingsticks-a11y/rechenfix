@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { berechneSpritkosten } from '@/lib/berechnungen/spritkosten';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
+import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 
 export default function SpritkostenRechner() {
   const [strecke, setStrecke] = useState('100');
@@ -145,6 +146,11 @@ export default function SpritkostenRechner() {
               Das wären bei dieser Fahrt ca. <strong>{fmt(ergebnis.gesamtkosten * 0.2)} € Ersparnis</strong>.
             </p>
           </div>
+
+          <ErgebnisAktionen
+            ergebnisText={`${fmt(ergebnis.effektiveStrecke)} km, ${fmt(ergebnis.literGesamt)} L Verbrauch, Gesamtkosten: ${fmt(ergebnis.gesamtkosten)} €`}
+            seitenTitel="Spritkosten-Rechner"
+          />
         </>
       )}
     </div>

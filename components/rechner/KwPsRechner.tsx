@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { berechneKwPs, KW_ZU_PS, PS_ZU_KW } from '@/lib/berechnungen/kw-ps';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
+import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 
 export default function KwPsRechner() {
   const [wert, setWert] = useState('100');
@@ -88,6 +89,11 @@ export default function KwPsRechner() {
                 : `${fmt(nWert)} PS × ${PS_ZU_KW} = ${fmt(ergebnis.ergebnisWert)} kW`}
             </p>
           </div>
+
+          <ErgebnisAktionen
+            ergebnisText={`${fmt(ergebnis.eingabeWert)} ${ergebnis.eingabeEinheit} = ${fmt(ergebnis.ergebnisWert)} ${ergebnis.ergebnisEinheit}`}
+            seitenTitel="kW-PS-Rechner"
+          />
         </>
       )}
 
