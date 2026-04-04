@@ -96,9 +96,11 @@ export default function Startseite() {
         </div>
       </section>
 
-      {/* Alle Kategorien mit Rechnern */}
+      {/* Alle Kategorien mit Rechnern (max. 3 Vorschau) */}
       {kategorien.map(kategorie => {
         const katRechner = getRechnerByKategorie(kategorie.slug);
+        const vorschau = katRechner.slice(0, 3);
+        const hatMehr = katRechner.length > 3;
         const farbMap: Record<string, string> = {
           alltag: 'bg-blue-50/70 dark:bg-blue-500/5 border-blue-100 dark:border-blue-500/10',
           finanzen: 'bg-amber-50/70 dark:bg-amber-500/5 border-amber-100 dark:border-amber-500/10',
@@ -115,15 +117,17 @@ export default function Startseite() {
               <h2 className="section-title">
                 {kategorie.icon} {kategorie.name}
               </h2>
-              <Link
-                href={`/${kategorie.slug}`}
-                className="text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-300 text-sm font-medium"
-              >
-                Alle anzeigen →
-              </Link>
+              {hatMehr && (
+                <Link
+                  href={`/${kategorie.slug}`}
+                  className="text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-300 text-sm font-medium"
+                >
+                  Alle {katRechner.length} anzeigen →
+                </Link>
+              )}
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {katRechner.map(r => (
+              {vorschau.map(r => (
                 <Link
                   key={r.slug}
                   href={`/${r.kategorieSlug}/${r.slug}`}
