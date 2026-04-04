@@ -17,6 +17,7 @@ import ZinsRechner from '@/components/rechner/ZinsRechner';
 import TageRechner from '@/components/rechner/TageRechner';
 import ElterngeldRechner from '@/components/rechner/ElterngeldRechner';
 import BuergergeldRechner from '@/components/rechner/BuergergeldRechner';
+import StundenlohnRechner from '@/components/rechner/StundenlohnRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -49,6 +50,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'tagerechner': TageRechner,
   'elterngeld-rechner': ElterngeldRechner,
   'buergergeld-rechner': BuergergeldRechner,
+  'stundenlohn-rechner': StundenlohnRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
