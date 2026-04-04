@@ -106,6 +106,7 @@ export default function Startseite() {
           auto: 'bg-red-50/70 dark:bg-red-500/5 border-red-100 dark:border-red-500/10',
           wohnen: 'bg-orange-50/70 dark:bg-orange-500/5 border-orange-100 dark:border-orange-500/10',
           mathe: 'bg-violet-50/70 dark:bg-violet-500/5 border-violet-100 dark:border-violet-500/10',
+          arbeit: 'bg-teal-50/70 dark:bg-teal-500/5 border-teal-100 dark:border-teal-500/10',
         };
         const farbe = farbMap[kategorie.slug] || 'bg-gray-50/70 dark:bg-gray-500/5 border-gray-100 dark:border-gray-500/10';
         return (
