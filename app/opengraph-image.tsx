@@ -67,11 +67,13 @@ export default function OGImage() {
             fontSize: 40,
           }}
         >
+          <span>📋</span>
           <span>💰</span>
-          <span>📊</span>
-          <span>🚗</span>
           <span>💚</span>
-          <span>⚡</span>
+          <span>🚗</span>
+          <span>🏠</span>
+          <span>🎓</span>
+          <span>💼</span>
         </div>
       </div>
     ),
