@@ -41,18 +41,6 @@ export default function Header() {
     return () => document.removeEventListener('keydown', handleKey);
   }, []);
 
-  // Close on significant scroll (>50px, debounced to avoid reflow triggers)
-  useEffect(() => {
-    if (!menuOpen) return;
-    const startY = window.scrollY;
-    const handleScroll = () => {
-      if (Math.abs(window.scrollY - startY) > 50) {
-        setMenuOpen(false);
-      }
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [menuOpen]);
 
   return (
     <div ref={headerRef} className="sticky top-0 z-50">
