@@ -7,6 +7,7 @@ import ZurueckButton from '@/components/layout/ZurueckButton';
 import AdSlot from '@/components/ads/AdSlot';
 import StructuredData from '@/components/seo/StructuredData';
 import LazySection from '@/components/ui/LazySection';
+import FeedbackButtons from '@/components/ui/FeedbackButtons';
 import Prozentrechner from '@/components/rechner/Prozentrechner';
 import BruttoNettoRechner from '@/components/rechner/BruttoNettoRechner';
 import MwStRechner from '@/components/rechner/MwStRechner';
@@ -143,6 +144,7 @@ export default function RechnerSeite({ params }: Props) {
             </h1>
             <p className="text-gray-500 dark:text-gray-400 mb-6">{config.beschreibung}</p>
             <RechnerKomponente />
+            <FeedbackButtons />
           </div>
 
           {/* Beliebte Gehaltsbeispiele (nur auf Brutto-Netto-Rechner) */}
