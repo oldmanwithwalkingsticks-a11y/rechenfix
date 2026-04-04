@@ -46,26 +46,20 @@ export default function Startseite() {
       <section className="mb-16">
         <h2 className="section-title mb-6">🔥 Beliebte Rechner</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {beliebteRechner.map(r => (
+          {beliebteRechner.slice(0, 3).map(r => (
             <Link
               key={r.slug}
               href={`/${r.kategorieSlug}/${r.slug}`}
-              className="card p-6 group"
+              className="card p-5 group flex items-center gap-4"
             >
-              <div className="flex items-start gap-4">
-                <span className="text-3xl shrink-0">{r.icon}</span>
-                <div className="min-w-0">
-                  <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100 group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors">
-                    {r.titel}
-                  </h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">
-                    {r.beschreibung}
-                  </p>
-                  <span className="inline-block mt-3 text-primary-500 dark:text-primary-400 text-sm font-medium">
-                    Jetzt berechnen →
-                  </span>
-                </div>
+              <span className="text-2xl shrink-0">{r.icon}</span>
+              <div className="min-w-0">
+                <h3 className="font-bold text-gray-800 dark:text-gray-100 group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors">
+                  {r.titel}
+                </h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{r.kategorie}</p>
               </div>
+              <span className="text-primary-400 ml-auto shrink-0">→</span>
             </Link>
           ))}
         </div>
