@@ -67,7 +67,10 @@ export default function Footer() {
                       href={`/${k.slug}`}
                       className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm flex items-center justify-between gap-2"
                     >
-                      <span>{k.icon} {k.name}</span>
+                      <span className="flex items-center gap-2">
+                        <span className="w-5 text-center shrink-0">{k.icon}</span>
+                        {k.name}
+                      </span>
                       <span className="text-primary-400 dark:text-gray-600 text-xs">{anzahl}</span>
                     </Link>
                   </li>
