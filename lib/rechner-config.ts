@@ -2236,6 +2236,101 @@ In der Praxis bedeutet das: Bei einer 40-Stunden-Woche und 5 Arbeitstagen sind m
       },
     ],
   },
+  {
+    slug: 'pendlerpauschale-rechner',
+    titel: 'Pendlerpauschale-Rechner',
+    beschreibung: 'Pendlerpauschale 2026 berechnen: Entfernungspauschale, Steuerersparnis und Vergleich mit der Homeoffice-Pauschale.',
+    kategorie: 'Arbeit & Recht',
+    kategorieSlug: 'arbeit',
+    metaTitle: 'Pendlerpauschale-Rechner 2026 — Entfernungspauschale berechnen | Rechenfix',
+    metaDescription: 'Pendlerpauschale 2026 berechnen ✓ 0,30 € + 0,38 € pro km ✓ Steuerersparnis ermitteln ✓ Vergleich mit Homeoffice. Jetzt berechnen!',
+    keywords: ['pendlerpauschale rechner', 'entfernungspauschale 2026', 'pendlerpauschale berechnen', 'fahrtkostenpauschale', 'pendlerpauschale steuerersparnis', 'homeoffice pauschale vergleich', 'km pauschale'],
+    icon: '🚗',
+    formel: 'Erste 20 km: 0,30 €/km × Tage | Ab km 21: 0,38 €/km × Tage | Steuerersparnis = Pauschale × Grenzsteuersatz',
+    beispiel: '25 km, 220 Tage, 35% Steuersatz: 20×0,30×220 + 5×0,38×220 = 1.320+418 = 1.738 € Pauschale → 608,30 € Steuerersparnis.',
+    erklaerung: `**Pendlerpauschale 2026 — was ist das?**
+
+Die Pendlerpauschale (offiziell: Entfernungspauschale) ist ein steuerlicher Freibetrag für Arbeitnehmer, die zwischen Wohnung und Arbeitsstätte pendeln. Sie mindert das zu versteuernde Einkommen und führt so zu einer Steuerersparnis. Die Pendlerpauschale wird in der Einkommensteuererklärung als Werbungskosten bei den Einkünften aus nichtselbständiger Arbeit geltend gemacht.
+
+Wichtig: Die Pendlerpauschale reduziert nicht direkt die Steuerlast, sondern das zu versteuernde Einkommen. Die tatsächliche Ersparnis hängt vom persönlichen Grenzsteuersatz ab. Bei einer Pendlerpauschale von 1.500 € und einem Grenzsteuersatz von 35 % beträgt die reale Steuerersparnis 525 € pro Jahr.
+
+Die Pendlerpauschale steht jedem Arbeitnehmer zu — unabhängig davon, ob er mit dem Auto, öffentlichen Verkehrsmitteln, dem Fahrrad oder zu Fuß zur Arbeit kommt. Entscheidend ist allein die Entfernung zwischen Wohnung und erster Tätigkeitsstätte.
+
+**Wie hoch ist die Pendlerpauschale pro km?**
+
+Seit 2022 gelten in Deutschland gestaffelte Kilometersätze:
+
+- **Erste 20 Kilometer:** 0,30 € pro Entfernungskilometer und Arbeitstag.
+- **Ab dem 21. Kilometer:** 0,38 € pro Entfernungskilometer und Arbeitstag.
+
+Die erhöhte Pauschale ab dem 21. Kilometer wurde als Entlastung für Fernpendler eingeführt und gilt voraussichtlich bis Ende 2026.
+
+Beispiel: Bei einer einfachen Entfernung von 35 km und 220 Arbeitstagen:
+- Erste 20 km: 20 × 0,30 € × 220 = 1.320 €
+- Ab km 21: 15 × 0,38 € × 220 = 1.254 €
+- Gesamt: 2.574 € Pendlerpauschale
+
+Wichtig: Berechnet wird nur die **einfache Entfernung**, nicht die Hin- und Rückfahrt. Es zählt die kürzeste Straßenverbindung (nicht die tatsächlich gefahrene Strecke), es sei denn, eine längere Strecke ist verkehrsgünstiger und wird regelmäßig genutzt.
+
+**Pendlerpauschale berechnen — Schritt für Schritt**
+
+1. **Entfernung ermitteln:** Messen Sie die einfache Entfernung zwischen Ihrer Wohnung und Ihrer ersten Tätigkeitsstätte. Nutzen Sie dafür einen Routenplaner und wählen Sie die kürzeste Straßenverbindung. Runden Sie auf volle Kilometer (ab 0,5 km aufrunden).
+
+2. **Arbeitstage zählen:** Ermitteln Sie die Anzahl der Tage, an denen Sie tatsächlich zur Arbeitsstätte gefahren sind. Abzuziehen sind: Urlaub, Feiertage, Krankheitstage und Homeoffice-Tage. In der Praxis setzen die Finanzämter bei einer 5-Tage-Woche üblicherweise 220 bis 230 Arbeitstage an.
+
+3. **Pauschale berechnen:** Multiplizieren Sie die Entfernung mit dem Kilometersatz und den Arbeitstagen. Beachten Sie die Staffelung ab dem 21. Kilometer.
+
+4. **Steuerersparnis ermitteln:** Multiplizieren Sie die Pendlerpauschale mit Ihrem persönlichen Grenzsteuersatz. Das Ergebnis ist Ihre tatsächliche jährliche Steuerersparnis.
+
+Unser Rechner führt alle vier Schritte automatisch durch — inklusive einer Detailberechnung der Arbeitstage unter Berücksichtigung von Urlaub, Feiertagen, Krankheit und Homeoffice.
+
+**Pendlerpauschale vs. Homeoffice-Pauschale**
+
+Seit 2023 können Arbeitnehmer alternativ zur Pendlerpauschale die Homeoffice-Pauschale geltend machen:
+
+- **Homeoffice-Pauschale:** 6 € pro Homeoffice-Tag, maximal 210 Tage pro Jahr = maximal 1.260 € pro Jahr.
+- **Pendlerpauschale:** Keine Obergrenze bei PKW-Nutzung, ansonsten 4.500 € pro Jahr.
+- **Kombination:** Pro Arbeitstag kann nur eine der beiden Pauschalen angesetzt werden. An Tagen, an denen Sie ins Büro fahren, setzen Sie die Pendlerpauschale an. An Homeoffice-Tagen die Homeoffice-Pauschale.
+
+Faustregel: Bei kurzen Entfernungen (unter 15 km) und vielen Homeoffice-Tagen kann die Homeoffice-Pauschale günstiger sein. Bei längeren Pendelstrecken überwiegt in der Regel die Pendlerpauschale. Unser Rechner zeigt Ihnen den direkten Vergleich, wenn Sie Homeoffice-Tage angeben.
+
+**Pendlerpauschale in der Steuererklärung angeben**
+
+Die Pendlerpauschale wird in der Einkommensteuererklärung als Werbungskosten eingetragen:
+
+- **Anlage N** (Einkünfte aus nichtselbständiger Arbeit), Zeile 31 ff.: Wege zwischen Wohnung und erster Tätigkeitsstätte.
+- Angaben: Adresse der Arbeitsstätte, Entfernung in km, Anzahl der Arbeitstage, genutztes Verkehrsmittel.
+- Der **Arbeitnehmer-Pauschbetrag** von 1.230 € (Stand 2026) wird automatisch berücksichtigt. Die Pendlerpauschale lohnt sich erst, wenn sie zusammen mit anderen Werbungskosten diesen Betrag übersteigt.
+- Belege aufbewahren: Das Finanzamt kann Nachweise verlangen (z. B. Routenplaner-Ausdruck, Bescheinigung des Arbeitgebers über Homeoffice-Tage).
+
+Bei einem Arbeitsplatzwechsel im laufenden Jahr können die Pendlerpauschalen für beide Arbeitsstätten separat berechnet und addiert werden. Bei mehreren Tätigkeitsstätten wird nur die Entfernung zur ersten Tätigkeitsstätte berücksichtigt.`,
+    faq: [
+      {
+        frage: 'Wie hoch ist die Pendlerpauschale 2026?',
+        antwort: 'Für die ersten 20 Kilometer beträgt die Pendlerpauschale 0,30 € pro Entfernungskilometer. Ab dem 21. Kilometer sind es 0,38 € pro Kilometer. Es zählt nur die einfache Entfernung, nicht Hin- und Rückfahrt.',
+      },
+      {
+        frage: 'Wird die Hin- und Rückfahrt berechnet?',
+        antwort: 'Nein, es wird nur die einfache Entfernung (kürzeste Straßenverbindung) zwischen Wohnung und erster Tätigkeitsstätte angesetzt. Die Rückfahrt ist bereits in der Pauschale enthalten.',
+      },
+      {
+        frage: 'Gilt die Pendlerpauschale auch für Fahrradfahrer?',
+        antwort: 'Ja, die Pendlerpauschale gilt unabhängig vom Verkehrsmittel. Egal ob Auto, Fahrrad, Bus, Bahn oder zu Fuß — der Kilometersatz ist identisch. Nur die einfache Entfernung zählt.',
+      },
+      {
+        frage: 'Kann ich Pendlerpauschale und Homeoffice-Pauschale kombinieren?',
+        antwort: 'Ja, aber nicht am selben Tag. An Tagen, an denen Sie ins Büro fahren, setzen Sie die Pendlerpauschale an. An Homeoffice-Tagen die Homeoffice-Pauschale (6 €/Tag, max. 1.260 €/Jahr). Beide Pauschalen können in der Steuererklärung nebeneinander geltend gemacht werden.',
+      },
+      {
+        frage: 'Wie viele Arbeitstage kann ich ansetzen?',
+        antwort: 'Nur die Tage, an denen Sie tatsächlich zur Arbeitsstätte gefahren sind. Abzuziehen sind Urlaub, Feiertage, Krankheitstage und Homeoffice-Tage. Bei einer 5-Tage-Woche akzeptieren Finanzämter üblicherweise 220–230 Tage ohne Einzelnachweis.',
+      },
+      {
+        frage: 'Wo trage ich die Pendlerpauschale in der Steuererklärung ein?',
+        antwort: 'In der Anlage N (Einkünfte aus nichtselbständiger Arbeit), Zeile 31 ff. Geben Sie die Adresse der Arbeitsstätte, die Entfernung in km, die Anzahl der Arbeitstage und das genutzte Verkehrsmittel an.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -2249,6 +2344,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'pendlerpauschale-rechner',
   'ueberstunden-rechner',
   'urlaubstage-rechner',
   'arbeitszeitrechner',

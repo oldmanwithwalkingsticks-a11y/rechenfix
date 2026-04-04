@@ -35,6 +35,7 @@ import TaschenrechnerRechner from '@/components/rechner/TaschenrechnerRechner';
 import ArbeitszeitRechner from '@/components/rechner/ArbeitszeitRechner';
 import UrlaubstageRechner from '@/components/rechner/UrlaubstageRechner';
 import UeberstundenRechner from '@/components/rechner/UeberstundenRechner';
+import PendlerpauschaleRechner from '@/components/rechner/PendlerpauschaleRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -85,6 +86,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'arbeitszeitrechner': ArbeitszeitRechner,
   'urlaubstage-rechner': UrlaubstageRechner,
   'ueberstunden-rechner': UeberstundenRechner,
+  'pendlerpauschale-rechner': PendlerpauschaleRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
