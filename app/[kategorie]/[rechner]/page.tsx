@@ -149,6 +149,36 @@ export default function RechnerSeite({ params }: Props) {
             <RechnerKomponente />
           </div>
 
+          {/* Beliebte Gehaltsbeispiele (nur auf Brutto-Netto-Rechner) */}
+          {config.slug === 'brutto-netto-rechner' && (
+            <section className="card p-6 md:p-8 mb-8">
+              <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Beliebte Gehaltsbeispiele</h2>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                {[
+                  { href: '/finanzen/2000-euro-brutto-netto', label: '2.000 € brutto' },
+                  { href: '/finanzen/2500-euro-brutto-netto', label: '2.500 € brutto' },
+                  { href: '/finanzen/3000-euro-brutto-netto', label: '3.000 € brutto' },
+                  { href: '/finanzen/3500-euro-brutto-netto', label: '3.500 € brutto' },
+                  { href: '/finanzen/4000-euro-brutto-netto', label: '4.000 € brutto' },
+                  { href: '/finanzen/5000-euro-brutto-netto', label: '5.000 € brutto' },
+                  { href: '/finanzen/mindestlohn-netto', label: 'Mindestlohn 2026' },
+                  { href: '/finanzen/brutto-netto-tabelle', label: 'Gehaltstabelle 2026' },
+                ].map(link => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="text-center p-3 rounded-xl border border-gray-100 dark:border-gray-700 hover:border-primary-200 dark:hover:border-primary-500/30 hover:bg-primary-50/50 dark:hover:bg-primary-500/5 transition-all group"
+                  >
+                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors">
+                      {link.label}
+                    </span>
+                    <span className="block text-xs text-gray-400 dark:text-gray-500 mt-0.5">in netto →</span>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
+
           {/* Ad Middle */}
           <AdSlot typ="rectangle" className="mb-8" />
 

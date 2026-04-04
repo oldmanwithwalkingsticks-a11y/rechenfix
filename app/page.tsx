@@ -16,7 +16,7 @@ export default function Startseite() {
         <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto mb-8">
           Kostenlose Online-Rechner für Finanzen, Alltag, Auto und Gesundheit. Sofort-Ergebnisse ohne Anmeldung.
         </p>
-        <SearchBar grosse="gross" className="max-w-xl mx-auto" />
+        <SearchBar grosse="gross" className="mx-auto w-full" style={{ maxWidth: '600px' }} />
       </section>
 
       {/* Kategorien als Kacheln */}
@@ -60,6 +60,31 @@ export default function Startseite() {
                 <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{r.kategorie}</p>
               </div>
               <span className="text-primary-400 ml-auto shrink-0">→</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Schnellzugriff Brutto-Netto */}
+      <section className="mb-16">
+        <h2 className="section-title mb-4">Wie viel netto bleibt bei …?</h2>
+        <div className="flex flex-wrap gap-2">
+          {[
+            { href: '/finanzen/mindestlohn-netto', label: 'Mindestlohn' },
+            { href: '/finanzen/2000-euro-brutto-netto', label: '2.000 €' },
+            { href: '/finanzen/2500-euro-brutto-netto', label: '2.500 €' },
+            { href: '/finanzen/3000-euro-brutto-netto', label: '3.000 €' },
+            { href: '/finanzen/3500-euro-brutto-netto', label: '3.500 €' },
+            { href: '/finanzen/4000-euro-brutto-netto', label: '4.000 €' },
+            { href: '/finanzen/5000-euro-brutto-netto', label: '5.000 €' },
+            { href: '/finanzen/brutto-netto-tabelle', label: 'Alle Gehälter →' },
+          ].map(link => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="px-4 py-2 rounded-full text-sm font-medium border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-primary-300 dark:hover:border-primary-500/40 hover:text-primary-500 dark:hover:text-primary-400 hover:bg-primary-50/50 dark:hover:bg-primary-500/5 transition-all"
+            >
+              {link.label}
             </Link>
           ))}
         </div>

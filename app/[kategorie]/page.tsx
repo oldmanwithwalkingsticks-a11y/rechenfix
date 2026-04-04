@@ -70,6 +70,34 @@ export default function KategorieSeite({ params }: Props) {
           </Link>
         ))}
       </div>
+
+      {/* Brutto-Netto-Beispiele (nur auf Finanzen-Kategorie) */}
+      {params.kategorie === 'finanzen' && (
+        <section className="mt-12">
+          <h2 className="section-title mb-4">Brutto-Netto-Beispiele</h2>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Wie viel netto bleibt bei diesen Bruttogehältern?</p>
+          <div className="flex flex-wrap gap-2.5">
+            {[
+              { href: '/finanzen/mindestlohn-netto', label: 'Mindestlohn 2026' },
+              { href: '/finanzen/2000-euro-brutto-netto', label: '2.000 € brutto' },
+              { href: '/finanzen/2500-euro-brutto-netto', label: '2.500 € brutto' },
+              { href: '/finanzen/3000-euro-brutto-netto', label: '3.000 € brutto' },
+              { href: '/finanzen/3500-euro-brutto-netto', label: '3.500 € brutto' },
+              { href: '/finanzen/4000-euro-brutto-netto', label: '4.000 € brutto' },
+              { href: '/finanzen/5000-euro-brutto-netto', label: '5.000 € brutto' },
+              { href: '/finanzen/brutto-netto-tabelle', label: 'Gehaltstabelle 2026' },
+            ].map(link => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="card px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+              >
+                {link.label} →
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }

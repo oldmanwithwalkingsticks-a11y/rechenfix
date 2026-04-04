@@ -45,9 +45,14 @@ interface Props {
   faq: { frage: string; antwort: string }[];
 }
 
+const GEHALTSSTUFEN = [2000, 2500, 3000, 3500, 4000, 5000];
+
 export default function BruttoNettoLongTail({ brutto, seoText, faq }: Props) {
   const bruttoFmt = fmtBrutto(brutto);
   const slug = `${brutto}-euro-brutto-netto`;
+  const stufenIndex = GEHALTSSTUFEN.indexOf(brutto);
+  const vorherige = stufenIndex > 0 ? GEHALTSSTUFEN[stufenIndex - 1] : null;
+  const naechste = stufenIndex < GEHALTSSTUFEN.length - 1 ? GEHALTSSTUFEN[stufenIndex + 1] : null;
 
   const ergebnisse = steuerklassen.map(s => ({
     ...s,
@@ -185,14 +190,46 @@ export default function BruttoNettoLongTail({ brutto, seoText, faq }: Props) {
             </div>
           </section>
 
+          {/* Navigation vorherige/nächste Gehaltsstufe */}
+          {(vorherige || naechste) && (
+            <div className="flex gap-3 mb-8">
+              {vorherige ? (
+                <Link
+                  href={`/finanzen/${vorherige}-euro-brutto-netto`}
+                  className="flex-1 card p-4 flex items-center gap-2 group hover:border-primary-200 dark:hover:border-primary-500/30 transition-all"
+                >
+                  <svg className="w-4 h-4 text-gray-400 group-hover:text-primary-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors">
+                    {fmtBrutto(vorherige)} € brutto netto
+                  </span>
+                </Link>
+              ) : <div className="flex-1" />}
+              {naechste ? (
+                <Link
+                  href={`/finanzen/${naechste}-euro-brutto-netto`}
+                  className="flex-1 card p-4 flex items-center justify-end gap-2 group hover:border-primary-200 dark:hover:border-primary-500/30 transition-all"
+                >
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors">
+                    {fmtBrutto(naechste)} € brutto netto
+                  </span>
+                  <svg className="w-4 h-4 text-gray-400 group-hover:text-primary-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              ) : <div className="flex-1" />}
+            </div>
+          )}
+
           {/* Verwandte Seiten */}
           <section className="card p-6 md:p-8 mb-8">
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Weitere Gehaltsberechnungen</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {[
-                { href: '/finanzen/brutto-netto-rechner', label: 'Brutto-Netto-Rechner', icon: '💶', desc: 'Individuell berechnen' },
+                { href: '/finanzen/brutto-netto-rechner', label: 'Brutto-Netto-Rechner', icon: '💶', desc: 'Eigenes Gehalt berechnen' },
+                { href: '/finanzen/brutto-netto-tabelle', label: 'Brutto-Netto-Tabelle', icon: '📊', desc: 'Alle Gehälter im Überblick' },
                 { href: '/finanzen/stundenlohn-rechner', label: 'Stundenlohnrechner', icon: '⏱️', desc: 'Stundenlohn ermitteln' },
-                { href: '/arbeit/pendlerpauschale-rechner', label: 'Pendlerpauschale', icon: '🚗', desc: 'Fahrtkosten berechnen' },
                 { href: '/finanzen/elterngeld-rechner', label: 'Elterngeldrechner', icon: '👶', desc: 'Elterngeld berechnen' },
               ].map(link => (
                 <Link

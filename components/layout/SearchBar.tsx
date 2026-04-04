@@ -8,9 +8,10 @@ interface SearchBarProps {
   className?: string;
   placeholder?: string;
   grosse?: 'normal' | 'gross';
+  style?: React.CSSProperties;
 }
 
-export default function SearchBar({ className = '', placeholder = 'Was möchten Sie berechnen?', grosse = 'normal' }: SearchBarProps) {
+export default function SearchBar({ className = '', placeholder = 'Was möchten Sie berechnen?', grosse = 'normal', style }: SearchBarProps) {
   const [query, setQuery] = useState('');
   const [offen, setOffen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -41,7 +42,7 @@ export default function SearchBar({ className = '', placeholder = 'Was möchten 
   };
 
   return (
-    <div ref={ref} className={`relative ${className}`}>
+    <div ref={ref} className={`relative ${className}`} style={style}>
       <div className="relative">
         <svg className={`absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none ${grosse === 'gross' ? 'w-5 h-5' : 'w-5 h-5'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -51,6 +52,11 @@ export default function SearchBar({ className = '', placeholder = 'Was möchten 
           value={query}
           onChange={e => { setQuery(e.target.value); setOffen(true); }}
           onFocus={() => setOffen(true)}
+          onKeyDown={e => {
+            if (e.key === 'Enter' && ergebnisse.length > 0) {
+              navigiere(ergebnisse[0].slug, ergebnisse[0].kategorieSlug);
+            }
+          }}
           placeholder={placeholder}
           className={`w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-2xl focus:ring-2 focus:ring-primary-300 dark:focus:ring-primary-500 focus:border-primary-400 dark:focus:border-primary-500 outline-none transition-all ${
             grosse === 'gross'

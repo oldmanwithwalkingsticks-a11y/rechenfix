@@ -56,6 +56,15 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  href="/finanzen/brutto-netto-tabelle"
+                  className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2"
+                >
+                  <span className="w-5 text-center shrink-0">📊</span>
+                  <span>Brutto-Netto-Tabelle</span>
+                </Link>
+              </li>
             </ul>
           </div>
 
