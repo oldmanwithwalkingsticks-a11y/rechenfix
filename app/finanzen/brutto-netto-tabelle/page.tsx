@@ -45,6 +45,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'de_DE',
   },
+  twitter: { card: 'summary_large_image', title: 'Brutto-Netto-Tabelle 2026 — Übersicht | Rechenfix', description: 'Brutto-Netto-Tabelle 2026: Alle Gehälter von 1.500 bis 10.000 € im Überblick ✓ Steuerklasse 1, 3 & 4.' },
   alternates: { canonical: 'https://rechenfix.de/finanzen/brutto-netto-tabelle' },
 };
 

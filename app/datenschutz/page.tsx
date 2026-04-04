@@ -5,6 +5,15 @@ export const metadata: Metadata = {
   title: 'Datenschutzerklärung',
   description: 'Datenschutzerklärung von Rechenfix.de — Informationen zum Datenschutz gemäß DSGVO.',
   robots: { index: true, follow: true },
+  alternates: { canonical: 'https://rechenfix.de/datenschutz' },
+  openGraph: {
+    title: 'Datenschutzerklärung | Rechenfix.de',
+    description: 'Datenschutzerklärung von Rechenfix.de — Informationen zum Datenschutz gemäß DSGVO.',
+    url: 'https://rechenfix.de/datenschutz',
+    siteName: 'Rechenfix.de',
+    type: 'website',
+    locale: 'de_DE',
+  },
 };
 
 export default function DatenschutzSeite() {

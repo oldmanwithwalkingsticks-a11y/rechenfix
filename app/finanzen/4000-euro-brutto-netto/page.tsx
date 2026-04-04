@@ -16,6 +16,7 @@ export const metadata: Metadata = {
     url: 'https://rechenfix.de/finanzen/4000-euro-brutto-netto',
     siteName: 'Rechenfix.de', type: 'website', locale: 'de_DE',
   },
+  twitter: { card: 'summary_large_image', title: '4.000 Euro brutto wie viel netto 2026? | Rechenfix', description: '4.000€ brutto in netto umrechnen ✓ Alle Steuerklassen ✓ Mit Abzügen ✓ Aktuell für 2026.' },
   alternates: { canonical: 'https://rechenfix.de/finanzen/4000-euro-brutto-netto' },
 };
 

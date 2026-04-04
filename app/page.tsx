@@ -1,6 +1,21 @@
 import Link from 'next/link';
 import { kategorien, getBeliebtRechner, getNeueRechner, getRechnerByKategorie } from '@/lib/rechner-config';
 import SearchBar from '@/components/layout/SearchBar';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Rechenfix.de — Kostenlose Online-Rechner',
+  description: 'Kostenlose Online-Rechner für Finanzen, Alltag, Auto und Gesundheit. Brutto-Netto, Prozent, MwSt, BMI und mehr. Sofort berechnen ohne Anmeldung.',
+  alternates: { canonical: 'https://rechenfix.de' },
+  openGraph: {
+    title: 'Rechenfix.de — Kostenlose Online-Rechner',
+    description: 'Kostenlose Online-Rechner für Finanzen, Alltag, Auto und Gesundheit. Sofort berechnen ohne Anmeldung.',
+    url: 'https://rechenfix.de',
+    siteName: 'Rechenfix.de',
+    type: 'website',
+    locale: 'de_DE',
+  },
+};
 
 export default function Startseite() {
   const beliebteRechner = getBeliebtRechner();

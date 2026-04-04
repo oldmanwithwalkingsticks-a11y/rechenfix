@@ -5,6 +5,15 @@ export const metadata: Metadata = {
   title: 'Impressum',
   description: 'Impressum von Rechenfix.de — Angaben gemäß § 5 TMG.',
   robots: { index: true, follow: true },
+  alternates: { canonical: 'https://rechenfix.de/impressum' },
+  openGraph: {
+    title: 'Impressum | Rechenfix.de',
+    description: 'Impressum von Rechenfix.de — Angaben gemäß § 5 TMG.',
+    url: 'https://rechenfix.de/impressum',
+    siteName: 'Rechenfix.de',
+    type: 'website',
+    locale: 'de_DE',
+  },
 };
 
 export default function ImpressumSeite() {
