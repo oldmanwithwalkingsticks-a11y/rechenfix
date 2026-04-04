@@ -6,6 +6,7 @@ import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import ZurueckButton from '@/components/layout/ZurueckButton';
 import AdSlot from '@/components/ads/AdSlot';
 import StructuredData from '@/components/seo/StructuredData';
+import LazySection from '@/components/ui/LazySection';
 import Prozentrechner from '@/components/rechner/Prozentrechner';
 import BruttoNettoRechner from '@/components/rechner/BruttoNettoRechner';
 import MwStRechner from '@/components/rechner/MwStRechner';
@@ -177,77 +178,79 @@ export default function RechnerSeite({ params }: Props) {
           {/* Ad Middle */}
           <AdSlot typ="rectangle" className="mb-8" />
 
-          {/* Erklaerung */}
-          <section className="card p-6 md:p-8 mb-8">
-            <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">So funktioniert der {config.titel}</h2>
+          {/* Erklaerung & FAQ — lazy-loaded */}
+          <LazySection>
+            <section className="card p-6 md:p-8 mb-8">
+              <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">So funktioniert der {config.titel}</h2>
 
-            <div className="bg-accent-50 dark:bg-accent-700/20 border border-accent-200 dark:border-accent-600/40 rounded-xl p-4 mb-6">
-              <p className="font-semibold text-accent-700 dark:text-accent-400 text-sm mb-1">Formel</p>
-              <p className="text-gray-800 dark:text-gray-200 font-mono text-sm">{config.formel}</p>
-            </div>
+              <div className="bg-accent-50 dark:bg-accent-700/20 border border-accent-200 dark:border-accent-600/40 rounded-xl p-4 mb-6">
+                <p className="font-semibold text-accent-700 dark:text-accent-400 text-sm mb-1">Formel</p>
+                <p className="text-gray-800 dark:text-gray-200 font-mono text-sm">{config.formel}</p>
+              </div>
 
-            <div className="bg-primary-50 dark:bg-primary-500/10 border border-primary-200 dark:border-primary-500/30 rounded-xl p-4 mb-6">
-              <p className="font-semibold text-primary-700 dark:text-primary-400 text-sm mb-1">Rechenbeispiel</p>
-              <p className="text-gray-800 dark:text-gray-200 text-sm">{config.beispiel}</p>
-            </div>
+              <div className="bg-primary-50 dark:bg-primary-500/10 border border-primary-200 dark:border-primary-500/30 rounded-xl p-4 mb-6">
+                <p className="font-semibold text-primary-700 dark:text-primary-400 text-sm mb-1">Rechenbeispiel</p>
+                <p className="text-gray-800 dark:text-gray-200 text-sm">{config.beispiel}</p>
+              </div>
 
-            <div className="max-w-none text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-              {config.erklaerung.split('\n\n').map((absatz, i) => {
-                const istUeberschrift = absatz.startsWith('**') && absatz.indexOf('**', 2) === absatz.length - 2;
-                const hatFetttext = absatz.includes('**');
+              <div className="max-w-none text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                {config.erklaerung.split('\n\n').map((absatz, i) => {
+                  const istUeberschrift = absatz.startsWith('**') && absatz.indexOf('**', 2) === absatz.length - 2;
+                  const hatFetttext = absatz.includes('**');
 
-                if (istUeberschrift) {
-                  return (
-                    <h3 key={i} className="text-base font-bold text-gray-800 dark:text-gray-100 mt-8 mb-3"
-                      dangerouslySetInnerHTML={{
-                        __html: absatz.replace(/\*\*(.*?)\*\*/g, '$1')
-                      }}
-                    />
-                  );
-                }
-                if (absatz.startsWith('- ')) {
-                  const items = absatz.split('\n').filter(l => l.startsWith('- '));
-                  return (
-                    <ul key={i} className="list-disc pl-5 space-y-1.5 mb-4">
-                      {items.map((item, j) => (
-                        <li key={j} dangerouslySetInnerHTML={{
-                          __html: item.slice(2).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                        }} />
-                      ))}
-                    </ul>
-                  );
-                }
-                if (hatFetttext) {
-                  return (
-                    <p key={i} className="mb-4" dangerouslySetInnerHTML={{
-                      __html: absatz.replace(/\*\*(.*?)\*\*/g, '<strong class="text-gray-800 dark:text-gray-100">$1</strong>').replace(/\n/g, '<br />')
-                    }} />
-                  );
-                }
-                return <p key={i} className="mb-4">{absatz}</p>;
-              })}
-            </div>
-          </section>
+                  if (istUeberschrift) {
+                    return (
+                      <h3 key={i} className="text-base font-bold text-gray-800 dark:text-gray-100 mt-8 mb-3"
+                        dangerouslySetInnerHTML={{
+                          __html: absatz.replace(/\*\*(.*?)\*\*/g, '$1')
+                        }}
+                      />
+                    );
+                  }
+                  if (absatz.startsWith('- ')) {
+                    const items = absatz.split('\n').filter(l => l.startsWith('- '));
+                    return (
+                      <ul key={i} className="list-disc pl-5 space-y-1.5 mb-4">
+                        {items.map((item, j) => (
+                          <li key={j} dangerouslySetInnerHTML={{
+                            __html: item.slice(2).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                          }} />
+                        ))}
+                      </ul>
+                    );
+                  }
+                  if (hatFetttext) {
+                    return (
+                      <p key={i} className="mb-4" dangerouslySetInnerHTML={{
+                        __html: absatz.replace(/\*\*(.*?)\*\*/g, '<strong class="text-gray-800 dark:text-gray-100">$1</strong>').replace(/\n/g, '<br />')
+                      }} />
+                    );
+                  }
+                  return <p key={i} className="mb-4">{absatz}</p>;
+                })}
+              </div>
+            </section>
 
-          {/* FAQ */}
-          <section className="card p-6 md:p-8 mb-8">
-            <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Häufige Fragen</h2>
-            <div className="space-y-4">
-              {config.faq.map((item, i) => (
-                <details key={i} className="group border border-gray-100 dark:border-gray-700 rounded-xl">
-                  <summary className="cursor-pointer p-4 font-medium text-gray-800 dark:text-gray-200 hover:text-primary-500 dark:hover:text-primary-400 transition-colors list-none flex justify-between items-center">
-                    {item.frage}
-                    <svg className="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </summary>
-                  <div className="px-4 pb-4 text-sm text-gray-600 dark:text-gray-400">
-                    {item.antwort}
-                  </div>
-                </details>
-              ))}
-            </div>
-          </section>
+            {/* FAQ */}
+            <section className="card p-6 md:p-8 mb-8">
+              <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Häufige Fragen</h2>
+              <div className="space-y-4">
+                {config.faq.map((item, i) => (
+                  <details key={i} className="group border border-gray-100 dark:border-gray-700 rounded-xl">
+                    <summary className="cursor-pointer p-4 font-medium text-gray-800 dark:text-gray-200 hover:text-primary-500 dark:hover:text-primary-400 transition-colors list-none flex justify-between items-center">
+                      {item.frage}
+                      <svg className="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </summary>
+                    <div className="px-4 pb-4 text-sm text-gray-600 dark:text-gray-400">
+                      {item.antwort}
+                    </div>
+                  </details>
+                ))}
+              </div>
+            </section>
+          </LazySection>
 
           {/* Verwandte Rechner */}
           <section className="card p-6 md:p-8 mb-8">
@@ -275,8 +278,8 @@ export default function RechnerSeite({ params }: Props) {
           <AdSlot typ="leaderboard" />
         </div>
 
-        {/* Sidebar */}
-        <aside className="lg:w-64 shrink-0">
+        {/* Sidebar — hidden on mobile, visible on desktop */}
+        <aside className="hidden lg:block lg:w-64 shrink-0">
           <div className="lg:sticky lg:top-24">
             {/* Kategorie-Rechner */}
             {kategorieRechner.length > 0 && (
