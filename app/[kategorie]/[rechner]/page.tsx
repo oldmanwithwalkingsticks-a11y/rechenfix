@@ -25,6 +25,7 @@ import NebenkostenRechner from '@/components/rechner/NebenkostenRechner';
 import MietrechnerRechner from '@/components/rechner/MietrechnerRechner';
 import HeizkostenRechner from '@/components/rechner/HeizkostenRechner';
 import GrunderwerbsteuerRechner from '@/components/rechner/GrunderwerbsteuerRechner';
+import TapetenbedarfRechner from '@/components/rechner/TapetenbedarfRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -65,6 +66,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'mietrechner': MietrechnerRechner,
   'heizkosten-rechner': HeizkostenRechner,
   'grunderwerbsteuer-rechner': GrunderwerbsteuerRechner,
+  'tapetenbedarf-rechner': TapetenbedarfRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
