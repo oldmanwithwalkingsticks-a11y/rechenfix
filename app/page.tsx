@@ -22,22 +22,20 @@ export default function Startseite() {
       {/* Kategorien als Kacheln */}
       <section className="mb-16">
         <h2 className="section-title mb-6">Kategorien</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="flex flex-wrap gap-2.5">
           {kategorien.map(k => {
             const anzahl = getRechnerByKategorie(k.slug).length;
             return (
               <Link
                 key={k.slug}
                 href={`/${k.slug}`}
-                className="card p-6 text-center group"
+                className="card px-4 py-2.5 group flex items-center gap-2"
               >
-                <div className="text-4xl mb-3">{k.icon}</div>
-                <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100 group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors">
+                <span className="text-xl">{k.icon}</span>
+                <span className="font-semibold text-sm text-gray-800 dark:text-gray-100 group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors">
                   {k.name}
-                </h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                  {anzahl} {anzahl === 1 ? 'Rechner' : 'Rechner'}
-                </p>
+                </span>
+                <span className="text-xs text-gray-400 dark:text-gray-500">{anzahl}</span>
               </Link>
             );
           })}
