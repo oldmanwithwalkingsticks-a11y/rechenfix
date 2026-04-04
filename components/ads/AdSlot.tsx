@@ -1,23 +1,64 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
+import { useCookieConsent } from '@/components/cookie/CookieConsentProvider';
+
 interface AdSlotProps {
   typ: 'leaderboard' | 'rectangle' | 'sidebar';
   className?: string;
 }
 
-const sizes = {
-  leaderboard: 'min-h-[90px] md:min-h-[90px]',
-  rectangle: 'min-h-[250px]',
-  sidebar: 'min-h-[600px]',
+const ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_ID || 'ca-pub-1389746597486587';
+
+const adConfig = {
+  leaderboard: {
+    format: 'horizontal' as const,
+    style: { display: 'block', minHeight: '90px' },
+  },
+  rectangle: {
+    format: 'rectangle' as const,
+    style: { display: 'block', minHeight: '250px' },
+  },
+  sidebar: {
+    format: 'vertical' as const,
+    style: { display: 'block', minHeight: '250px' },
+  },
 };
 
 export default function AdSlot({ typ, className = '' }: AdSlotProps) {
+  const { marketingAllowed } = useCookieConsent();
+  const adRef = useRef<HTMLModElement>(null);
+  const pushed = useRef(false);
+
+  useEffect(() => {
+    if (!marketingAllowed || pushed.current) return;
+
+    try {
+      const adsbygoogle = (window as unknown as { adsbygoogle: unknown[] }).adsbygoogle;
+      if (adsbygoogle) {
+        adsbygoogle.push({});
+        pushed.current = true;
+      }
+    } catch {
+      // AdSense Script noch nicht geladen
+    }
+  }, [marketingAllowed]);
+
+  // Kein Consent → nichts anzeigen
+  if (!marketingAllowed) return null;
+
+  const config = adConfig[typ];
+
   return (
-    <div
-      className={`bg-gray-50 dark:bg-gray-800/50 border border-dashed border-gray-200 dark:border-gray-700 rounded-xl flex items-center justify-center text-gray-300 dark:text-gray-600 text-sm ${sizes[typ]} ${className}`}
-      aria-hidden="true"
-    >
-      Werbung — {typ.charAt(0).toUpperCase() + typ.slice(1)}
+    <div className={`overflow-hidden ${className}`}>
+      <ins
+        ref={adRef}
+        className="adsbygoogle"
+        style={config.style}
+        data-ad-client={ADSENSE_ID}
+        data-ad-format={config.format}
+        data-full-width-responsive="true"
+      />
     </div>
   );
 }

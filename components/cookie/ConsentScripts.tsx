@@ -4,7 +4,7 @@ import Script from 'next/script';
 import { useCookieConsent } from './CookieConsentProvider';
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-CNVMHDZM4S';
-const ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_ID || 'ca-pub-XXXXXXXXXX';
+const ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_ID || 'ca-pub-1389746597486587';
 
 export default function ConsentScripts() {
   const { analyticsAllowed, marketingAllowed } = useCookieConsent();
