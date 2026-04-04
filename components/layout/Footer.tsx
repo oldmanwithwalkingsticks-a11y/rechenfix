@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { kategorien, getRechnerByKategorie, beliebteRechnerSlugs, rechner } from '@/lib/rechner-config';
 import { useCookieConsent } from '@/components/cookie/CookieConsentProvider';
 
@@ -19,15 +20,18 @@ export default function Footer() {
         <div className="py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Logo & Beschreibung */}
           <div>
-            <div className="mb-3">
-              <div className="flex items-center gap-1">
-                <span className="text-2xl font-extrabold text-white">Rechen</span>
-                <span className="text-2xl font-extrabold text-accent-400">fix</span>
-                <span className="text-sm text-primary-300">.de</span>
+            <div className="mb-3 flex items-center gap-2.5">
+              <Image src="/logo.svg" alt="Rechenfix Logo" width={36} height={36} className="shrink-0" />
+              <div>
+                <div className="flex items-center gap-0.5">
+                  <span className="text-2xl font-extrabold text-white">Rechen</span>
+                  <span className="text-2xl font-extrabold text-accent-400">fix</span>
+                  <span className="text-sm text-primary-300">.de</span>
+                </div>
+                <span className="text-[11px] tracking-widest uppercase text-primary-300 dark:text-gray-500 font-medium">
+                  Fix gerechnet!
+                </span>
               </div>
-              <span className="text-[11px] tracking-widest uppercase text-primary-300 dark:text-gray-500 font-medium">
-                Fix gerechnet!
-              </span>
             </div>
             <p className="text-primary-200 dark:text-gray-400 text-sm leading-relaxed mb-4">
               Kostenlose Online-Rechner für jeden Bedarf. Schnell, einfach und ohne Anmeldung.

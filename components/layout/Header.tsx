@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { kategorien, getRechnerByKategorie } from '@/lib/rechner-config';
 import ThemeToggle from './ThemeToggle';
 
@@ -53,15 +54,18 @@ export default function Header() {
       <header className="bg-white dark:bg-slate-900 border-b border-gray-100 dark:border-gray-700 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex flex-col shrink-0" onClick={() => setMenuOpen(false)}>
-            <div className="flex items-center gap-1">
-              <span className="text-3xl font-extrabold text-primary-500">Rechen</span>
-              <span className="text-3xl font-extrabold text-accent-500">fix</span>
-              <span className="text-sm text-gray-400 hidden sm:inline">.de</span>
+          <Link href="/" className="flex items-center gap-2.5 shrink-0" onClick={() => setMenuOpen(false)}>
+            <Image src="/logo.svg" alt="Rechenfix Logo" width={40} height={40} className="shrink-0" priority />
+            <div className="flex flex-col">
+              <div className="flex items-center gap-0.5">
+                <span className="text-3xl font-extrabold text-primary-500">Rechen</span>
+                <span className="text-3xl font-extrabold text-accent-500">fix</span>
+                <span className="text-sm text-gray-400 hidden sm:inline">.de</span>
+              </div>
+              <span className="text-[11px] tracking-widest uppercase text-gray-400 dark:text-gray-500 font-medium -mt-1">
+                Fix gerechnet!
+              </span>
             </div>
-            <span className="text-[11px] tracking-widest uppercase text-gray-400 dark:text-gray-500 font-medium -mt-1">
-              Fix gerechnet!
-            </span>
           </Link>
 
           <div className="flex items-center gap-2 sm:gap-3">

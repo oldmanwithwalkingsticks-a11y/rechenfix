@@ -19,6 +19,12 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/logo.svg',
+  },
   title: {
     default: 'Rechenfix.de — Kostenlose Online-Rechner',
     template: '%s | Rechenfix.de',
