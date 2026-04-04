@@ -5,6 +5,7 @@ import Footer from '@/components/layout/Footer';
 import ThemeProvider from '@/components/ThemeProvider';
 import CookieConsentProvider from '@/components/cookie/CookieConsentProvider';
 import CookieBanner from '@/components/cookie/CookieBanner';
+import ScrollToTop from '@/components/layout/ScrollToTop';
 import ConsentScripts from '@/components/cookie/ConsentScripts';
 import StructuredData from '@/components/seo/StructuredData';
 import { generateWebsiteSchema } from '@/lib/seo';
@@ -90,6 +91,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <main className="flex-1">{children}</main>
             <Footer />
             <CookieBanner />
+            <ScrollToTop />
           </CookieConsentProvider>
         </ThemeProvider>
       </body>
