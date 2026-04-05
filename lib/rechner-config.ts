@@ -2780,7 +2780,7 @@ Countdown-Rechner sind besonders beliebt in der Vorweihnachtszeit, vor Schulferi
     metaTitle: 'Lebenszeit-Rechner — Wie viele Tage habe ich gelebt? | Rechenfix',
     metaDescription: 'Lebenszeit-Rechner: Wie viele Tage, Stunden und Herzschläge haben Sie gelebt? ✓ Schlafzeit ✓ Smartphone-Zeit ✓ Verbleibende Wochenenden ✓ Kostenlos.',
     keywords: ['lebenszeit rechner', 'wie viele tage habe ich gelebt', 'tage gelebt', 'lebenserwartung rechner', 'herzschläge berechnen', 'wie alt bin ich in tagen', 'lebenszeit statistik', 'verbleibende lebenszeit', 'alter in tagen', 'lebensuhr'],
-    icon: '⏳',
+    icon: '🧬',
     formel: 'Gelebte Tage = (Heutiges Datum − Geburtsdatum) in Tagen | Herzschläge = Gelebte Minuten × 70',
     beispiel: 'Beispiel: Geboren am 15. März 1990 → Sie haben ca. 13.170 Tage gelebt, Ihr Herz hat ca. 1,33 Milliarden Mal geschlagen.',
     erklaerung: `**Was zeigt der Lebenszeit-Rechner?**
