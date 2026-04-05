@@ -2829,6 +2829,72 @@ Der Lebenszeit-Rechner gehört zu den meistgeteilten Online-Tools. Die überrasc
       },
     ],
   },
+  {
+    slug: 'streaming-kosten-rechner',
+    titel: 'Streaming-Kosten-Rechner',
+    beschreibung: 'Berechnen Sie Ihre monatlichen Streaming-Kosten: Netflix, Disney+, Spotify und mehr auf einen Blick.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Streaming-Kosten-Rechner — Was kosten alle Abos? | Rechenfix',
+    metaDescription: 'Streaming-Kosten-Rechner: Was kosten Netflix, Disney+, Spotify & Co. zusammen? ✓ Monatlich ✓ Jährlich ✓ In 5 und 10 Jahren ✓ Spar-Tipps ✓ Kostenlos.',
+    keywords: ['streaming kosten rechner', 'streaming abos kosten', 'netflix kosten', 'disney plus kosten', 'spotify kosten', 'streaming vergleich', 'abo kosten berechnen', 'streaming ausgaben', 'was kosten meine abos', 'streaming sparen'],
+    icon: '📺',
+    formel: 'Monatliche Kosten = Summe aller aktiven Abos | Jährlich = Monatlich × 12',
+    beispiel: 'Beispiel: Netflix Standard (13,99 €) + Spotify (11,99 €) + Disney+ (9,99 €) = 35,97 € pro Monat, 431,64 € pro Jahr.',
+    erklaerung: `**Was ist der Streaming-Kosten-Rechner?**
+
+Der Streaming-Kosten-Rechner zeigt Ihnen auf einen Blick, wie viel Geld Sie monatlich, jährlich und über mehrere Jahre für Ihre Streaming-Abos ausgeben. Wählen Sie einfach Ihre aktiven Dienste aus und sehen Sie sofort die Gesamtkosten — inklusive überraschender Hochrechnungen und praktischer Spar-Tipps.
+
+**Streaming-Kosten in Deutschland: Ein wachsender Posten**
+
+Der durchschnittliche deutsche Haushalt gibt laut Bitkom und GfK bereits über 40 Euro pro Monat für Streaming-Dienste aus — Tendenz steigend. Was einzeln betrachtet günstig wirkt, summiert sich schnell: Netflix, Disney+, Spotify, Amazon Prime und vielleicht noch DAZN für den Sport. Am Ende stehen nicht selten 50 bis 80 Euro monatlich auf der Rechnung — oft ohne dass es den Nutzern bewusst ist.
+
+**Warum die Gesamtkosten so überraschen**
+
+Das Phänomen der &bdquo;Abo-Blindheit&ldquo; ist weit verbreitet: Einzelne Beträge von 8 bis 15 Euro pro Monat fühlen sich harmlos an. Doch die Summe aller Abos über ein Jahr oder gar ein Jahrzehnt offenbart das wahre Ausmaß. Wer 60 Euro pro Monat für Streaming ausgibt, investiert in 10 Jahren über 7.000 Euro — das entspricht einem Urlaub oder einem ordentlichen Gebrauchtwagen.
+
+**Die größten Kostentreiber**
+
+Sport-Streaming ist mit Abstand der teuerste Bereich: DAZN Unlimited kostet bereits 44,99 Euro pro Monat, Sky Sport liegt bei 25 Euro. Allein ein Sport-Abo kann mehr kosten als Netflix, Disney+ und Spotify zusammen. Wer Bundesliga und Champions League live sehen möchte, kommt kaum unter 50 Euro pro Monat weg.
+
+Bei den Unterhaltungsdiensten hat Netflix mit dem Premium-Abo (19,99 €) die höchsten Preise, gefolgt von YouTube Premium Family (23,99 €). Die günstigsten Optionen sind werbegestützte Tarife wie Netflix Standard mit Werbung (4,99 €) oder Disney+ mit Werbung (5,99 €).
+
+**Arbeitsstunden zum Mindestlohn**
+
+Eine besonders anschauliche Perspektive: Wie viele Stunden müssten Sie zum gesetzlichen Mindestlohn (12,82 €/Stunde, Stand 2025) arbeiten, um Ihre Streaming-Kosten zu decken? Bei 60 Euro monatlich sind das bereits 56 Stunden reine Arbeitszeit pro Jahr — nur für Streaming.
+
+**Spar-Strategien für Streaming**
+
+Die effektivste Methode ist die Abo-Rotation: Statt alle Dienste gleichzeitig zu bezahlen, abonnieren Sie jeden Monat nur einen und schauen die gewünschten Inhalte gebündelt. Netflix hat eine neue Staffel? Einen Monat Netflix buchen, dann kündigen und zu Disney+ wechseln. So sparen Sie 50 bis 70 Prozent der Kosten.
+
+Weitere Tipps: Family-Tarife mit Mitbewohnern oder Familienmitgliedern teilen, Jahresabos statt Monatsbeiträge buchen (oft 15–20 % günstiger), und regelmäßig prüfen, welche Dienste tatsächlich genutzt werden. Viele Menschen zahlen für Abos, die sie seit Wochen nicht geöffnet haben.
+
+**Preisvergleich und Alternativen**
+
+Öffentlich-rechtliche Mediatheken (ARD, ZDF, Arte) bieten ein erstaunlich großes Angebot — komplett kostenlos und werbefrei. Auch kostenlose Angebote wie Pluto TV, Samsung TV Plus oder Freevee (Amazon) decken viele Unterhaltungsbedürfnisse ab. Kombiniert mit einem oder zwei bezahlten Diensten lässt sich der Streaming-Bedarf oft deutlich günstiger abdecken.
+
+**Bewusst streamen, bewusst sparen**
+
+Der Streaming-Kosten-Rechner hilft Ihnen, den Überblick zu behalten und bewusste Entscheidungen zu treffen. Teilen Sie das Ergebnis mit Freunden und Familie — der Aha-Effekt beim Blick auf die 10-Jahres-Kosten sorgt garantiert für Gesprächsstoff.`,
+    faq: [
+      {
+        frage: 'Wie viel gibt der durchschnittliche Deutsche für Streaming aus?',
+        antwort: 'Laut aktuellen Studien gibt der durchschnittliche deutsche Haushalt über 40 Euro pro Monat für Streaming aus. Haushalte mit Sport-Streaming (DAZN, Sky) liegen oft bei 60 bis 100 Euro. Viele Nutzer unterschätzen ihre Gesamtausgaben, weil die einzelnen Beträge gering erscheinen.',
+      },
+      {
+        frage: 'Wie kann ich bei Streaming-Abos sparen?',
+        antwort: 'Die effektivste Methode ist die Abo-Rotation: Statt alle Dienste gleichzeitig zu bezahlen, nutzen Sie jeden Monat nur einen. Weitere Tipps: Family-Tarife teilen, Jahresabos nutzen (15–20 % günstiger), werbegestützte Tarife wählen und ungenutzte Abos konsequent kündigen.',
+      },
+      {
+        frage: 'Sind die Preise im Rechner aktuell?',
+        antwort: 'Die Preise werden regelmäßig aktualisiert und entsprechen den aktuellen Standardpreisen der jeweiligen Anbieter für Deutschland (Stand 2025). Aktionspreise, Bundles und regionale Sonderangebote können abweichen.',
+      },
+      {
+        frage: 'Kann ich eigene Streaming-Dienste hinzufügen?',
+        antwort: 'Ja, über das Feld „Sonstige Abos" können Sie einen beliebigen monatlichen Betrag eingeben. So erfassen Sie auch kleinere Dienste, App-Abos oder andere regelmäßige Digitalkosten, die nicht in der Liste enthalten sind.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -2842,6 +2908,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'streaming-kosten-rechner',
   'lebenszeit-rechner',
   'countdown',
   'gehaltsvergleich',
@@ -2924,6 +2991,7 @@ const verwandteMap: Record<string, string[]> = {
   'gehaltsvergleich': ['brutto-netto-rechner', 'stundenlohn-rechner', 'inflationsrechner', 'sparrechner'],
   'countdown': ['tagerechner', 'urlaubstage-rechner', 'arbeitszeitrechner', 'lebenszeit-rechner'],
   'lebenszeit-rechner': ['tagerechner', 'countdown', 'bmi-rechner', 'promillerechner'],
+  'streaming-kosten-rechner': ['rabattrechner', 'sparrechner', 'brutto-netto-rechner', 'inflationsrechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
