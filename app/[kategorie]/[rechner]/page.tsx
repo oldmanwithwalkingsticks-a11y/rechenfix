@@ -43,6 +43,7 @@ import PromilleRechner from '@/components/rechner/PromilleRechner';
 import RabattRechner from '@/components/rechner/RabattRechner';
 import GehaltsvergleichRechner from '@/components/rechner/GehaltsvergleichRechner';
 import CountdownRechner from '@/components/rechner/CountdownRechner';
+import LebenszeitRechner from '@/components/rechner/LebenszeitRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -98,6 +99,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'rabattrechner': RabattRechner,
   'gehaltsvergleich': GehaltsvergleichRechner,
   'countdown': CountdownRechner,
+  'lebenszeit-rechner': LebenszeitRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

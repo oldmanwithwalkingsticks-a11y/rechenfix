@@ -2771,6 +2771,64 @@ Countdown-Rechner sind besonders beliebt in der Vorweihnachtszeit, vor Schulferi
       },
     ],
   },
+  {
+    slug: 'lebenszeit-rechner',
+    titel: 'Lebenszeit-Rechner',
+    beschreibung: 'Wie viele Tage haben Sie bereits gelebt? Überraschende Fakten über Ihre Lebenszeit, Herzschläge und verbleibende Wochenenden.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Lebenszeit-Rechner — Wie viele Tage habe ich gelebt? | Rechenfix',
+    metaDescription: 'Lebenszeit-Rechner: Wie viele Tage, Stunden und Herzschläge haben Sie gelebt? ✓ Schlafzeit ✓ Smartphone-Zeit ✓ Verbleibende Wochenenden ✓ Kostenlos.',
+    keywords: ['lebenszeit rechner', 'wie viele tage habe ich gelebt', 'tage gelebt', 'lebenserwartung rechner', 'herzschläge berechnen', 'wie alt bin ich in tagen', 'lebenszeit statistik', 'verbleibende lebenszeit', 'alter in tagen', 'lebensuhr'],
+    icon: '⏳',
+    formel: 'Gelebte Tage = (Heutiges Datum − Geburtsdatum) in Tagen | Herzschläge = Gelebte Minuten × 70',
+    beispiel: 'Beispiel: Geboren am 15. März 1990 → Sie haben ca. 13.170 Tage gelebt, Ihr Herz hat ca. 1,33 Milliarden Mal geschlagen.',
+    erklaerung: `**Was zeigt der Lebenszeit-Rechner?**
+
+Der Lebenszeit-Rechner verwandelt Ihr Geburtsdatum in faszinierende Zahlen und überraschende Fakten. Statt einfach nur Ihr Alter in Jahren zu sehen, erfahren Sie, wie viele Tage, Stunden und Minuten Sie bereits auf dieser Welt verbracht haben — und wie Sie diese Zeit statistisch gesehen genutzt haben.
+
+**Gelebte Zeit in Zahlen**
+
+Die meisten Menschen kennen ihr Alter in Jahren, aber kaum jemand weiß, wie viele Tage er bereits gelebt hat. Ein 30-Jähriger hat zum Beispiel bereits über 10.950 Tage, mehr als 262.000 Stunden und über 15 Millionen Minuten gelebt. Diese Perspektive macht die eigene Lebenszeit greifbar und oft überraschend.
+
+**Wie verbringen wir unsere Lebenszeit?**
+
+Wissenschaftliche Studien und Statistiken zeigen, wie sich unsere Lebenszeit auf verschiedene Aktivitäten verteilt. Im Durchschnitt verbringt ein Mensch etwa ein Drittel seiner Lebenszeit mit Schlafen — das sind bei einem 30-Jährigen bereits rund 10 Jahre. Rund 5 Jahre entfallen insgesamt auf Essen und Trinken. Seit der Smartphone-Ära kommen im Schnitt 4 Stunden tägliche Bildschirmzeit hinzu, was sich über die Jahre zu beeindruckenden Zahlen summiert.
+
+**Herzschläge und Atemzüge**
+
+Das menschliche Herz schlägt durchschnittlich 70 Mal pro Minute, also rund 100.000 Mal am Tag. Über ein ganzes Leben summieren sich die Herzschläge auf etwa 2,5 bis 3 Milliarden. Ähnlich beeindruckend: Wir atmen durchschnittlich 15 Mal pro Minute, was über die Jahre Hunderte Millionen Atemzüge ergibt.
+
+**Statistische Lebenserwartung in Deutschland**
+
+Die durchschnittliche Lebenserwartung in Deutschland beträgt laut Statistischem Bundesamt (Destatis) für Männer etwa 78,5 Jahre und für Frauen etwa 83,2 Jahre. Diese Werte basieren auf aktuellen Sterbetafeln und dienen als statistische Orientierung. Die tatsächliche Lebenserwartung hängt von vielen individuellen Faktoren ab — Lebensstil, Ernährung, Bewegung, genetische Veranlagung und medizinische Versorgung.
+
+**Verbleibende Wochenenden**
+
+Eine besonders eindrucksvolle Perspektive bietet die Zahl der verbleibenden Wochenenden. Ein 40-jähriger Mann hat statistisch noch etwa 2.000 Wochenenden vor sich. Diese Zahl macht bewusst, wie endlich unsere Zeit ist — und motiviert, jedes Wochenende bewusst zu gestalten.
+
+**Warum dieser Rechner viral geht**
+
+Der Lebenszeit-Rechner gehört zu den meistgeteilten Online-Tools. Die überraschenden Zahlen regen zum Nachdenken an und werden gerne auf WhatsApp, Instagram und in sozialen Netzwerken geteilt. Die Kombination aus persönlichen Daten und universellen Fakten macht die Ergebnisse für jeden individuell relevant und faszinierend.`,
+    faq: [
+      {
+        frage: 'Wie genau ist der Lebenszeit-Rechner?',
+        antwort: 'Die Berechnung der gelebten Tage, Stunden und Minuten ist exakt auf den Tag genau. Die Angaben zu Schlafzeit, Smartphone-Nutzung und Herzschlägen sind statistische Durchschnittswerte und dienen als Orientierung — individuelle Werte können abweichen.',
+      },
+      {
+        frage: 'Woher stammen die Daten zur Lebenserwartung?',
+        antwort: 'Die statistischen Lebenserwartungen (Männer: 78,5 Jahre, Frauen: 83,2 Jahre) basieren auf den aktuellen Sterbetafeln des Statistischen Bundesamtes (Destatis) für Deutschland. Die tatsächliche Lebenserwartung hängt von individuellen Faktoren wie Lebensstil und genetischer Veranlagung ab.',
+      },
+      {
+        frage: 'Wie viele Herzschläge hat ein Mensch im Leben?',
+        antwort: 'Bei durchschnittlich 70 Schlägen pro Minute schlägt das Herz etwa 100.000 Mal am Tag, 36,8 Millionen Mal im Jahr und rund 2,5 bis 3 Milliarden Mal im gesamten Leben. Der Rechner berechnet die Herzschläge basierend auf Ihrem tatsächlichen Alter.',
+      },
+      {
+        frage: 'Kann ich das Ergebnis teilen?',
+        antwort: 'Ja, über die Teilen-Funktion können Sie Ihr Ergebnis als Text kopieren oder den Link direkt über WhatsApp, soziale Netzwerke oder per E-Mail versenden. Die Ergebnisse werden nicht gespeichert — Ihre Daten bleiben privat.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -2784,6 +2842,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'lebenszeit-rechner',
   'countdown',
   'gehaltsvergleich',
   'promillerechner',
@@ -2863,7 +2922,8 @@ const verwandteMap: Record<string, string[]> = {
   'promillerechner': ['bmi-rechner', 'tagerechner', 'dreisatz-rechner', 'prozentrechner'],
   'rabattrechner': ['prozentrechner', 'mwst-rechner', 'dreisatz-rechner', 'brutto-netto-rechner'],
   'gehaltsvergleich': ['brutto-netto-rechner', 'stundenlohn-rechner', 'inflationsrechner', 'sparrechner'],
-  'countdown': ['tagerechner', 'urlaubstage-rechner', 'arbeitszeitrechner', 'rabattrechner'],
+  'countdown': ['tagerechner', 'urlaubstage-rechner', 'arbeitszeitrechner', 'lebenszeit-rechner'],
+  'lebenszeit-rechner': ['tagerechner', 'countdown', 'bmi-rechner', 'promillerechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
