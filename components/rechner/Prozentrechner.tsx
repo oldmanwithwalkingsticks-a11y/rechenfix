@@ -11,6 +11,7 @@ import {
 import type { ProzentErgebnis } from '@/lib/berechnungen/prozent';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
+import AiExplain from '@/components/rechner/AiExplain';
 
 type Modus = 'prozentwert' | 'prozentsatz' | 'grundwert' | 'aufschlag' | 'abschlag';
 
@@ -226,6 +227,12 @@ export default function Prozentrechner() {
               </p>
             ))}
           </div>
+
+          <AiExplain
+            rechnerName="Prozentrechner"
+            eingaben={{ modus: aktuellerModus.label, wert1: n1, wert2: n2 }}
+            ergebnis={{ ergebnis: berechnung.ergebnis, rechenweg: berechnung.rechenweg.join(' → ') }}
+          />
         </>
       )}
 

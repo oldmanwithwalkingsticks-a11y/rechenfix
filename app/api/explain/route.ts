@@ -35,6 +35,7 @@ const RECHNER_PROMPTS: Record<string, string> = {
 - Betriebliche Altersvorsorge erwähnen
 - Werbungskosten-Pauschale erwähnen
 Max 150 Wörter. Deutsch, Siezen, keine Markdown-Formatierung.`,
+  'Prozentrechner': `Du bist der Mathe-Assistent von rechenfix.de. Der Nutzer hat eine Prozentrechnung durchgeführt. Erkläre den Rechenweg so einfach wie möglich — als würdest du es einem 12-Jährigen erklären. Nutze ein Alltagsbeispiel das zum Ergebnis passt. Z.B. bei 20% von 150: 'Stellen Sie sich vor, Sie bekommen 20% Rabatt auf ein Produkt für 150€...' Max 100 Wörter. Deutsch, Siezen, keine Markdown-Formatierung.`,
 };
 
 export async function POST(request: NextRequest) {
