@@ -5,6 +5,7 @@ import { berechneBruttoNetto, BUNDESLAENDER } from '@/lib/berechnungen/brutto-ne
 import type { BruttoNettoErgebnis } from '@/lib/berechnungen/brutto-netto';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
+import AiExplain from '@/components/rechner/AiExplain';
 
 const TABELLEN_WERTE = [1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 6000];
 
@@ -336,6 +337,32 @@ export default function BruttoNettoRechner() {
           <p className="text-xs text-gray-400 dark:text-gray-500 mt-4 print:hidden">
             * Vereinfachte Berechnung zur Orientierung. Für eine exakte Berechnung wenden Sie sich an Ihren Steuerberater oder nutzen Sie ELSTER.
           </p>
+
+          <div className="mt-4 print:hidden">
+            <AiExplain
+              rechnerName="Brutto-Netto-Rechner"
+              eingaben={{
+                bruttogehalt: bruttoNum,
+                steuerklasse,
+                bundesland: bl?.name ?? bundesland,
+                kirchensteuer,
+                kinder,
+                kvArt,
+                kvZusatzbeitrag: kvZusatzbeitragNum,
+              }}
+              ergebnis={{
+                nettogehalt: ergebnis.nettoMonat,
+                lohnsteuer: ergebnis.lohnsteuer,
+                solidaritaetszuschlag: ergebnis.solidaritaet,
+                kirchensteuerBetrag: ergebnis.kirchensteuer,
+                krankenversicherung: ergebnis.krankenversicherung,
+                rentenversicherung: ergebnis.rentenversicherung,
+                arbeitslosenversicherung: ergebnis.arbeitslosenversicherung,
+                pflegeversicherung: ergebnis.pflegeversicherung,
+                gesamtabzuegeProzent: ergebnis.abzuegeProzent,
+              }}
+            />
+          </div>
         </>
       )}
 

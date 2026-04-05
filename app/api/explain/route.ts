@@ -25,7 +25,17 @@ setInterval(() => {
   });
 }, 60_000);
 
-const SYSTEM_PROMPT = `Du bist der KI-Assistent von rechenfix.de. Erkläre das Ergebnis einer Berechnung verständlich, persönlich und auf Deutsch. Sprich den Nutzer mit 'Sie' an. Halte dich kurz (max 150 Wörter). Gib 1-2 konkrete, praktische Tipps. Keine Floskeln, kein Smalltalk, direkt zum Punkt. Verwende keine Markdown-Formatierung.`;
+const DEFAULT_PROMPT = `Du bist der KI-Assistent von rechenfix.de. Erkläre das Ergebnis einer Berechnung verständlich, persönlich und auf Deutsch. Sprich den Nutzer mit 'Sie' an. Halte dich kurz (max 150 Wörter). Gib 1-2 konkrete, praktische Tipps. Keine Floskeln, kein Smalltalk, direkt zum Punkt. Verwende keine Markdown-Formatierung.`;
+
+const RECHNER_PROMPTS: Record<string, string> = {
+  'Brutto-Netto-Rechner': `Du bist der Finanz-Assistent von rechenfix.de. Der Nutzer hat gerade sein Nettogehalt berechnet. Erkläre das Ergebnis persönlich und verständlich. Beziehe dich auf die konkreten Zahlen. Gib 2 praktische Spartipps die zur Situation passen. Beispiele:
+- Bei hoher Lohnsteuer: Steuerklassenwechsel empfehlen
+- Bei Kirchensteuer: Höhe der Ersparnis bei Austritt nennen
+- Bei Steuerklasse 1: Steuererklärung empfehlen (Durchschnitt 1.095€ zurück)
+- Betriebliche Altersvorsorge erwähnen
+- Werbungskosten-Pauschale erwähnen
+Max 150 Wörter. Deutsch, Siezen, keine Markdown-Formatierung.`,
+};
 
 export async function POST(request: NextRequest) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
@@ -70,7 +80,7 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 500,
-        system: SYSTEM_PROMPT,
+        system: RECHNER_PROMPTS[rechner_name] || DEFAULT_PROMPT,
         messages: [{ role: 'user', content: userMessage }],
       }),
     });
