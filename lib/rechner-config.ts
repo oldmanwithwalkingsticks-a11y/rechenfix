@@ -2895,6 +2895,60 @@ Der Streaming-Kosten-Rechner hilft Ihnen, den Überblick zu behalten und bewusst
       },
     ],
   },
+  {
+    slug: 'raucher-rechner',
+    titel: 'Raucher-Rechner',
+    beschreibung: 'Berechnen Sie, wie viel Geld Sie fürs Rauchen ausgeben — und was Sie sich stattdessen leisten könnten.',
+    kategorie: 'Gesundheit',
+    kategorieSlug: 'gesundheit',
+    metaTitle: 'Raucher-Rechner — So viel kostet Rauchen | Rechenfix',
+    metaDescription: 'Raucher-Rechner: So viel kostet Rauchen wirklich. ✓ Tägliche, monatliche & jährliche Kosten ✓ Vergleich mit Urlaub & iPhone ✓ Investment-Vergleich ✓ Kostenlos.',
+    keywords: ['raucher rechner', 'kosten rauchen', 'zigaretten kosten', 'rauchen kosten pro monat', 'rauchen kosten pro jahr', 'rauchen aufhören sparen', 'zigarettenpreis rechner', 'was kostet rauchen', 'raucher kosten', 'rauchfrei rechner'],
+    icon: '🚬',
+    formel: 'Kosten pro Tag = (Zigaretten pro Tag ÷ Zigaretten pro Packung) × Preis pro Packung',
+    beispiel: 'Beispiel: 15 Zigaretten/Tag bei 9,00 €/Packung (20 Stück) = 6,75 € pro Tag = 2.464 € pro Jahr.',
+    erklaerung: `**Was zeigt der Raucher-Rechner?**
+
+Der Raucher-Rechner macht die wahren Kosten des Rauchens sichtbar. Während eine einzelne Schachtel Zigaretten mit 8 bis 10 Euro überschaubar wirkt, summieren sich die Ausgaben über Monate und Jahre zu erstaunlichen Beträgen. Der Rechner zeigt nicht nur die reinen Kosten, sondern auch, was Sie sich von dem Geld stattdessen leisten könnten.
+
+**Was kostet Rauchen in Deutschland?**
+
+Der durchschnittliche Zigarettenpreis in Deutschland liegt 2025 bei rund 8,50 bis 9,50 Euro pro Packung (20 Stück). Wer eine Schachtel am Tag raucht, gibt damit über 3.000 Euro pro Jahr aus. Bei einer halben Packung (10 Zigaretten) sind es immer noch rund 1.500 Euro jährlich. Über ein Raucherleben von 20 bis 30 Jahren kommen so 30.000 bis 90.000 Euro zusammen.
+
+**Der Zinseszins-Effekt**
+
+Besonders eindrucksvoll ist der Investment-Vergleich: Hätten Sie das Geld statt in Zigaretten an der Börse mit einer durchschnittlichen Rendite von 5 Prozent pro Jahr angelegt, wäre dank des Zinseszins-Effekts deutlich mehr daraus geworden. Aus 3.000 Euro jährlicher Sparrate werden nach 20 Jahren über 100.000 Euro — ein eindrucksvoller Beweis, wie teuer das Rauchen wirklich ist.
+
+**Steigende Preise: Der Trend geht weiter**
+
+Die Tabaksteuer in Deutschland wurde zuletzt 2022 erhöht und steigt bis 2026 in mehreren Stufen weiter an. Experten erwarten, dass eine Schachtel Markenzigaretten bis 2027 die 10-Euro-Marke überschreiten wird. Das bedeutet: Die tatsächlichen Kosten über die nächsten Jahre werden noch höher ausfallen als die aktuelle Hochrechnung.
+
+**Gesundheitliche Kosten nicht eingerechnet**
+
+Der Rechner zeigt nur die direkten Ausgaben für Zigaretten. Nicht berücksichtigt sind die indirekten Kosten: höhere Krankenversicherungsbeiträge, Zahnbehandlungen, Medikamente, Arbeitsausfälle und eine statistisch kürzere Lebenserwartung. Laut Deutschem Krebsforschungszentrum (DKFZ) verursacht Rauchen in Deutschland jährlich volkswirtschaftliche Kosten von über 97 Milliarden Euro.
+
+**Aufhören lohnt sich — finanziell und gesundheitlich**
+
+Schon wenige Wochen nach dem Rauchstopp verbessern sich Kreislauf und Lungenfunktion. Finanziell spüren Sie den Unterschied sofort: Das eingesparte Geld können Sie in einen Sparplan, Urlaub oder andere Wünsche investieren. Die Bundeszentrale für gesundheitliche Aufklärung (BZgA) bietet unter der kostenlosen Nummer 0800 8 31 31 31 Beratung und Unterstützung beim Aufhören.`,
+    faq: [
+      {
+        frage: 'Wie viel kostet eine Schachtel Zigaretten in Deutschland?',
+        antwort: 'Der Durchschnittspreis für eine Schachtel Markenzigaretten (20 Stück) liegt in Deutschland 2025 bei etwa 8,50 bis 9,50 Euro. Durch weitere Tabaksteuererhöhungen wird der Preis bis 2027 voraussichtlich die 10-Euro-Marke überschreiten.',
+      },
+      {
+        frage: 'Wie viel gibt ein durchschnittlicher Raucher pro Jahr aus?',
+        antwort: 'Bei einer halben Schachtel (10 Zigaretten) pro Tag und einem Packungspreis von 9 Euro sind es rund 1.645 Euro pro Jahr. Bei einer ganzen Schachtel pro Tag über 3.285 Euro. Starke Raucher (30+ Zigaretten) geben über 5.000 Euro jährlich aus.',
+      },
+      {
+        frage: 'Wie wird der Investment-Vergleich berechnet?',
+        antwort: 'Der Rechner nimmt an, dass Sie den monatlichen Betrag, den Sie für Zigaretten ausgeben, stattdessen mit 5 % jährlicher Rendite angelegt hätten. Die Berechnung verwendet die Zinseszinsformel für monatliche Sparraten über den angegebenen Zeitraum.',
+      },
+      {
+        frage: 'Berücksichtigt der Rechner Preiserhöhungen?',
+        antwort: 'Nein, der Rechner rechnet mit dem aktuell eingegebenen Packungspreis. Da Zigarettenpreise historisch jedes Jahr steigen, sind die tatsächlichen Gesamtkosten in der Regel noch höher als die berechneten Werte.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -2908,6 +2962,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'raucher-rechner',
   'streaming-kosten-rechner',
   'lebenszeit-rechner',
   'countdown',
@@ -2992,6 +3047,7 @@ const verwandteMap: Record<string, string[]> = {
   'countdown': ['tagerechner', 'urlaubstage-rechner', 'arbeitszeitrechner', 'lebenszeit-rechner'],
   'lebenszeit-rechner': ['tagerechner', 'countdown', 'bmi-rechner', 'promillerechner'],
   'streaming-kosten-rechner': ['rabattrechner', 'sparrechner', 'brutto-netto-rechner', 'inflationsrechner'],
+  'raucher-rechner': ['bmi-rechner', 'sparrechner', 'lebenszeit-rechner', 'inflationsrechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {

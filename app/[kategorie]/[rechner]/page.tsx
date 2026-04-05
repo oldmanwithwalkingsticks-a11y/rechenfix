@@ -45,6 +45,7 @@ import GehaltsvergleichRechner from '@/components/rechner/GehaltsvergleichRechne
 import CountdownRechner from '@/components/rechner/CountdownRechner';
 import LebenszeitRechner from '@/components/rechner/LebenszeitRechner';
 import StreamingKostenRechner from '@/components/rechner/StreamingKostenRechner';
+import RaucherRechner from '@/components/rechner/RaucherRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -102,6 +103,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'countdown': CountdownRechner,
   'lebenszeit-rechner': LebenszeitRechner,
   'streaming-kosten-rechner': StreamingKostenRechner,
+  'raucher-rechner': RaucherRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
