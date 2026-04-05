@@ -2949,6 +2949,64 @@ Schon wenige Wochen nach dem Rauchstopp verbessern sich Kreislauf und Lungenfunk
       },
     ],
   },
+  {
+    slug: 'wahrer-stundenlohn',
+    titel: 'Wahrer Stundenlohn Rechner',
+    beschreibung: 'Was verdienen Sie wirklich pro Stunde? Berechnen Sie Ihren wahren Stundenlohn inklusive Pendelzeit, Fahrtkosten und Überstunden.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Wahrer Stundenlohn Rechner — Was verdienen Sie wirklich? | Rechenfix',
+    metaDescription: 'Wahrer Stundenlohn Rechner: Was verdienen Sie wirklich pro Stunde? ✓ Pendelzeit ✓ Fahrtkosten ✓ Überstunden ✓ Mindestlohn-Vergleich ✓ Kostenlos.',
+    keywords: ['wahrer stundenlohn', 'stundenlohn berechnen', 'was verdiene ich wirklich', 'netto stundenlohn', 'stundenlohn mit pendelzeit', 'echter stundenlohn', 'stundenlohn rechner', 'versteckte arbeitskosten', 'realer stundenlohn', 'pendelzeit kosten'],
+    icon: '💸',
+    formel: 'Wahrer Stundenlohn = (Nettogehalt − Fahrtkosten − Essenskosten − Kleidungskosten) ÷ (Vertragsstunden + Pendelzeit + Überstunden)',
+    beispiel: 'Beispiel: 3.500 € brutto, 40h/Woche, 60 Min. Pendeln, 100 € Fahrtkosten, 8 € Essen/Tag → offizieller Stundenlohn ca. 13 €, wahrer Stundenlohn ca. 9 €.',
+    erklaerung: `**Was ist der wahre Stundenlohn?**
+
+Der wahre Stundenlohn zeigt, was Sie tatsächlich pro investierter Stunde verdienen — nach Abzug aller versteckten Kosten und unter Berücksichtigung der gesamten Zeit, die Sie für Ihren Job aufwenden. Das Ergebnis ist fast immer deutlich niedriger als der offizielle Netto-Stundenlohn und für viele Menschen ein Augenöffner.
+
+**Warum der offizielle Stundenlohn trügt**
+
+Ihr Arbeitsvertrag zeigt ein Bruttogehalt und eine Wochenarbeitszeit. Daraus lässt sich ein offizieller Stundenlohn berechnen. Doch diese Zahl verschweigt zwei entscheidende Faktoren: die Zeit, die Sie zusätzlich zur Arbeitszeit investieren (Pendeln, Überstunden), und die Kosten, die der Job verursacht (Fahrtkosten, Mittagessen, Arbeitskleidung).
+
+**Pendelzeit: Die versteckte Arbeitszeit**
+
+Der durchschnittliche deutsche Arbeitnehmer pendelt laut Statistischem Bundesamt 30 Minuten pro Strecke — also eine Stunde täglich. Bei 217 Arbeitstagen im Jahr sind das über 217 Stunden, die weder bezahlt werden noch zur Freizeit zählen. Wer 45 Minuten pro Strecke pendelt, investiert jährlich über 325 unbezahlte Stunden allein fürs Fahren.
+
+**Versteckte Kosten: Fahrt, Essen, Kleidung**
+
+Fahrtkosten (Benzin, ÖPNV-Ticket, Verschleiß), tägliches Mittagessen in der Kantine oder beim Bäcker, Kaffee, Arbeitskleidung — diese Ausgaben fallen nur an, weil Sie arbeiten gehen. Im Schnitt kommen leicht 200 bis 400 Euro pro Monat zusammen, die Ihr tatsächliches Einkommen schmälern.
+
+**Unbezahlte Überstunden**
+
+Laut einer Studie des Instituts für Arbeitsmarkt- und Berufsforschung (IAB) leistet jeder Arbeitnehmer in Deutschland im Schnitt 3,1 unbezahlte Überstunden pro Woche. Das sind über 160 Stunden im Jahr, für die Sie keinen Cent erhalten — aber die Ihren wahren Stundenlohn drastisch senken.
+
+**Das Ergebnis ist oft erschreckend**
+
+Bei einem typischen Angestelltengehalt von 3.500 Euro brutto liegt der offizielle Netto-Stundenlohn bei rund 13 Euro. Der wahre Stundenlohn — unter Berücksichtigung von Pendelzeit, Fahrtkosten, Essen und Überstunden — fällt oft auf 8 bis 10 Euro. Das ist erstaunlich nah am Mindestlohn von 12,82 Euro brutto.
+
+**Was können Sie tun?**
+
+Der Rechner zeigt nicht nur das Problem, sondern auch die Hebel: Homeoffice-Tage sparen Pendelzeit und Fahrtkosten. Meal-Prep statt Kantine spart 100 bis 150 Euro pro Monat. Und die konsequente Dokumentation von Überstunden führt entweder zu Vergütung oder zu einer realistischeren Workload-Planung. Jede Verbesserung erhöht Ihren wahren Stundenlohn sofort.`,
+    faq: [
+      {
+        frage: 'Wie wird das Nettogehalt berechnet?',
+        antwort: 'Der Rechner verwendet eine vereinfachte Nettolohn-Schätzung auf Basis von Steuerklasse 1 ohne Kirchensteuer. Die Berechnung berücksichtigt Sozialversicherungsbeiträge (ca. 20,4 % Arbeitnehmeranteil) und eine progressive Lohnsteuer-Schätzung. Für exakte Werte nutzen Sie zusätzlich unseren Brutto-Netto-Rechner.',
+      },
+      {
+        frage: 'Warum ist der wahre Stundenlohn so viel niedriger?',
+        antwort: 'Zwei Faktoren wirken zusammen: Erstens erhöht sich die investierte Zeit erheblich durch Pendeln und Überstunden (oft +30-50%). Zweitens reduzieren Fahrtkosten, Essen und Kleidung das verfügbare Einkommen. Die Kombination aus mehr Zeit und weniger Geld senkt den wahren Stundenlohn oft um 30-40%.',
+      },
+      {
+        frage: 'Zählt die Pendelzeit rechtlich als Arbeitszeit?',
+        antwort: 'Nein, in Deutschland zählt die Pendelzeit grundsätzlich nicht als Arbeitszeit. Ausnahmen gelten bei Dienstreisen oder wenn der Arbeitgeber den Arbeitsort kurzfristig ändert. Trotzdem ist die Pendelzeit Zeit, die Sie für Ihren Job investieren und die Ihnen für andere Aktivitäten fehlt.',
+      },
+      {
+        frage: 'Wie kann ich meinen wahren Stundenlohn erhöhen?',
+        antwort: 'Die effektivsten Hebel sind: Homeoffice-Tage vereinbaren (spart Pendelzeit und Fahrtkosten), Überstunden konsequent erfassen und abbauen, Meal-Prep statt Kantine (spart bis zu 150 €/Monat), und bei Gehaltsverhandlungen die versteckten Kosten mit einbeziehen.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -2962,6 +3020,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'wahrer-stundenlohn',
   'raucher-rechner',
   'streaming-kosten-rechner',
   'lebenszeit-rechner',
@@ -3048,6 +3107,7 @@ const verwandteMap: Record<string, string[]> = {
   'lebenszeit-rechner': ['tagerechner', 'countdown', 'bmi-rechner', 'promillerechner'],
   'streaming-kosten-rechner': ['rabattrechner', 'sparrechner', 'brutto-netto-rechner', 'inflationsrechner'],
   'raucher-rechner': ['bmi-rechner', 'sparrechner', 'lebenszeit-rechner', 'inflationsrechner'],
+  'wahrer-stundenlohn': ['stundenlohn-rechner', 'brutto-netto-rechner', 'pendlerpauschale-rechner', 'gehaltsvergleich'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
