@@ -5,6 +5,7 @@ import { berechneBmi, bmiKategorien } from '@/lib/berechnungen/bmi';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 export default function BmiRechner() {
   const [gewicht, setGewicht] = useState('75');
@@ -184,6 +185,12 @@ export default function BmiRechner() {
           <ErgebnisAktionen
             ergebnisText={`BMI: ${fmt(ergebnis.bmi)} — ${ergebnis.kategorie.label}`}
             seitenTitel="BMI-Rechner"
+          />
+
+          <AiExplain
+            rechnerName="BMI-Rechner"
+            eingaben={{ gewicht: nGewicht, groesse: nGroesse, geschlecht, alter: nAlter }}
+            ergebnis={{ bmi: ergebnis.bmi, kategorie: ergebnis.kategorie.label, optimalesGewichtMin: ergebnis.optimalesGewichtMin, optimalesGewichtMax: ergebnis.optimalesGewichtMax }}
           />
         </>
       )}
