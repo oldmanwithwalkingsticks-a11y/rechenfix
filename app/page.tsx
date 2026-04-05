@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { kategorien, rechner as alleRechner, getBeliebtRechner, getNeueRechner, getRechnerByKategorie } from '@/lib/rechner-config';
 import SearchBar from '@/components/layout/SearchBar';
 import TippDesTages from '@/components/ui/TippDesTages';
+import BerechnungsZaehler from '@/components/ui/BerechnungsZaehler';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -40,6 +41,7 @@ export default function Startseite() {
           Kostenlose Online-Rechner für Finanzen, Alltag, Auto und Gesundheit. Sofort-Ergebnisse ohne Anmeldung.
         </p>
         <SearchBar grosse="gross" className="mx-auto w-full" style={{ maxWidth: '600px' }} />
+        <BerechnungsZaehler />
       </section>
 
       {/* Tipp des Tages */}

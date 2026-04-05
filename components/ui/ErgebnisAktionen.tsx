@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { inkrement } from '@/lib/berechnungs-zaehler';
 
 interface Props {
   ergebnisText: string;
@@ -13,6 +14,15 @@ export default function ErgebnisAktionen({ ergebnisText, seitenTitel, drucken }:
   const [linkKopiert, setLinkKopiert] = useState(false);
   const [teilenOffen, setTeilenOffen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const letzterText = useRef('');
+
+  // Zähler erhöhen wenn sich das Ergebnis ändert
+  useEffect(() => {
+    if (ergebnisText && ergebnisText !== letzterText.current) {
+      letzterText.current = ergebnisText;
+      inkrement();
+    }
+  }, [ergebnisText]);
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
