@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import { berechneRaucherKosten } from '@/lib/berechnungen/raucher';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 function formatEuro(n: number): string {
   return n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -219,6 +220,12 @@ export default function RaucherRechner() {
           <ErgebnisAktionen
             ergebnisText={ergebnisText()}
             seitenTitel="Raucher-Rechner"
+          />
+
+          <AiExplain
+            rechnerName="Raucher-Rechner"
+            eingaben={{ zigarettenProTag: parseFloat(zigarettenProTag), preisProPackung: parseFloat(preisProPackung.replace(',', '.')), jahreGeraucht: parseFloat(jahreGeraucht) }}
+            ergebnis={{ kostenProJahr: ergebnis.kostenProJahr, kostenGesamt: ergebnis.kostenGesamt, kostenNaechste10Jahre: ergebnis.kostenNaechste10Jahre, zigarettenGesamt: ergebnis.zigarettenGesamt, investmentWert: ergebnis.investmentWert }}
           />
         </div>
       )}

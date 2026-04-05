@@ -10,6 +10,7 @@ import {
 } from '@/lib/berechnungen/gehaltsvergleich';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 const fmtE = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -245,6 +246,12 @@ export default function GehaltsvergleichRechner() {
           <ErgebnisAktionen
             ergebnisText={`Gehaltsvergleich: ${fmtE(nBrutto)} € brutto — Perzentil ${ergebnis.perzentil}% (${berufLabel}, ${blLabel}, ${alterLabel})`}
             seitenTitel="Gehaltsvergleich"
+          />
+
+          <AiExplain
+            rechnerName="Gehaltsvergleich"
+            eingaben={{ bruttoGehalt: nBrutto, berufsgruppe: berufLabel, bundesland: blLabel, altersgruppe: alterLabel }}
+            ergebnis={{ perzentil: ergebnis.perzentil, adjustierterMedian: ergebnis.adjustierterMedian, differenz: ergebnis.differenz }}
           />
         </div>
       )}

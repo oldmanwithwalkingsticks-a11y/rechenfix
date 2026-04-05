@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import { streamingDienste, berechneStreamingKosten, type StreamingErgebnis } from '@/lib/berechnungen/streaming-kosten';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 function formatEuro(n: number): string {
   return n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -224,6 +225,12 @@ export default function StreamingKostenRechner() {
           <ErgebnisAktionen
             ergebnisText={ergebnisText()}
             seitenTitel="Streaming-Kosten-Rechner"
+          />
+
+          <AiExplain
+            rechnerName="Streaming-Kosten-Rechner"
+            eingaben={{ anzahlAbos: ergebnis.abos.length, aboNamen: ergebnis.abos.map(a => a.name).join(', ') }}
+            ergebnis={{ monatlich: ergebnis.monatlich, jaehrlich: ergebnis.jaehrlich, fuenfJahre: ergebnis.fuenfJahre, zehnJahre: ergebnis.zehnJahre, arbeitsstundenMindestlohn: ergebnis.arbeitsstundenMindestlohn }}
           />
         </div>
       )}

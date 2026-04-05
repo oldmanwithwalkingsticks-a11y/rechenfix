@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import { berechneWahrenStundenlohn } from '@/lib/berechnungen/wahrer-stundenlohn';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 function formatEuro(n: number): string {
   return n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -230,6 +231,12 @@ export default function WahrerStundenlohnRechner() {
           <ErgebnisAktionen
             ergebnisText={ergebnisText()}
             seitenTitel="Wahrer Stundenlohn Rechner"
+          />
+
+          <AiExplain
+            rechnerName="Wahrer Stundenlohn Rechner"
+            eingaben={{ bruttoMonatlich: parse(brutto), arbeitsstundenWoche: parse(stunden), pendelzeitMinuten: parse(pendel), fahrtkostenMonat: parse(fahrt), essenProTag: parse(essen), kleidungMonat: parse(kleidung), ueberstundenWoche: parse(ueberstunden) }}
+            ergebnis={{ offiziellerStundenlohn: ergebnis.offiziellerStundenlohn, wahrerStundenlohn: ergebnis.wahrerStundenlohn, differenzProzent: ergebnis.differenzProzent, uebermindestlohn: ergebnis.uebermindestlohn, tatsaechlichesNetto: ergebnis.tatsaechlichesNetto }}
           />
         </div>
       )}

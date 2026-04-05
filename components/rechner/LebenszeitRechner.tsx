@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { berechneLebenszeit, type LebenszeitErgebnis } from '@/lib/berechnungen/lebenszeit';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 function formatZahl(n: number): string {
   return Math.round(n).toLocaleString('de-DE');
@@ -251,6 +252,12 @@ export default function LebenszeitRechner() {
           <ErgebnisAktionen
             ergebnisText={ergebnisText()}
             seitenTitel="Lebenszeit-Rechner"
+          />
+
+          <AiExplain
+            rechnerName="Lebenszeit-Rechner"
+            eingaben={{ alterJahre: ergebnis.alterJahre, geschlecht }}
+            ergebnis={{ gesamtTage: ergebnis.gesamtTage, herzschlaege: ergebnis.herzschlaege, jahreGeschlafen: ergebnis.jahreGeschlafen, stundenSmartphone: ergebnis.stundenSmartphone, verbleibendeTage: ergebnis.verbleibendeTage, verbleibendeWochenenden: ergebnis.verbleibendeWochenenden, prozentGelebt: ergebnis.prozentGelebt }}
           />
         </div>
       )}
