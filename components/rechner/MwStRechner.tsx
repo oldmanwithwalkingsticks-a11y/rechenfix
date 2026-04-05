@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { berechneNettoZuBrutto, berechneBruttoZuNetto, berechneMultiMwSt } from '@/lib/berechnungen/mwst';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
+import AiExplain from '@/components/rechner/AiExplain';
 
 type Tab = 'netto-brutto' | 'brutto-netto' | 'multi';
 
@@ -227,6 +228,12 @@ export default function MwStRechner() {
                   {geteilt ? '✓ Geteilt' : 'Ergebnis teilen'}
                 </button>
               </div>
+
+              <AiExplain
+                rechnerName="MwSt-Rechner"
+                eingaben={{ richtung: tab === 'netto-brutto' ? 'Netto → Brutto' : 'Brutto → Netto', betrag: n, mwstSatz: aktiverSatz }}
+                ergebnis={{ netto: ergebnis.netto, mwstBetrag: ergebnis.mwstBetrag, brutto: ergebnis.brutto }}
+              />
             </>
           )}
         </>
