@@ -54,6 +54,7 @@ const RECHNER_LINKS: { keywords: string[]; label: string; href: string }[] = [
   { keywords: ['wahrer stundenlohn', 'tatsächlicher stundenlohn', 'echter stundenlohn', 'pendeln stundenlohn'], label: 'Wahrer-Stundenlohn-Rechner', href: '/finanzen/wahrer-stundenlohn' },
   { keywords: ['kaffee', 'kaffeekosten', 'espresso', 'cappuccino', 'latte', 'café-to-go'], label: 'Kaffee-Kosten-Rechner', href: '/alltag/kaffee-kosten-rechner' },
   { keywords: ['lieferservice', 'lieferdienst', 'lieferando', 'bestellen', 'liefergebühr', 'essenslieferung'], label: 'Lieferservice-Rechner', href: '/alltag/lieferservice-rechner' },
+  { keywords: ['abo', 'abonnement', 'abos', 'monatliche kosten', 'fixkosten', 'subscription'], label: 'Abo-Rechner', href: '/alltag/abo-rechner' },
 ];
 
 function detectRechnerLink(frage: string, antwort: string): { label: string; href: string } | null {

@@ -3230,6 +3230,79 @@ Der Lieferservice-Rechner macht die Kosten sichtbar und hilft Ihnen, eine inform
       },
     ],
   },
+  {
+    slug: 'abo-rechner',
+    titel: 'Abo-Rechner',
+    beschreibung: 'Alle Abos auf einen Blick: Berechnen Sie Ihre monatlichen und jährlichen Abo-Kosten — mit Ranking und Spartipps.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Abo-Rechner — Was kosten alle Ihre Abos? | Rechenfix',
+    metaDescription: 'Abo-Rechner: Berechnen Sie die Gesamtkosten aller Abos pro Monat, Jahr und Jahrzehnt. Mit Tortendiagramm, Ranking und Kündigungstipps. ✓ Mit KI-Erklärung.',
+    keywords: ['abo rechner', 'abo kosten', 'abonnement kosten', 'monatliche abos', 'streaming abos kosten', 'abo übersicht', 'abo kündigen sparen', 'fixkosten rechner', 'abos berechnen', 'abo vergleich'],
+    icon: '🔄',
+    formel: 'Jahreskosten = Summe aller monatlichen Abo-Beträge × 12',
+    beispiel: 'Beispiel: Netflix (14 €) + Spotify (12 €) + Fitnessstudio (30 €) + Handy (25 €) = 81 €/Monat = 972 €/Jahr.',
+    erklaerung: `Abonnements gehören heute zum Alltag wie Strom und Wasser. Vom Streaming-Dienst über das Fitnessstudio bis zum Cloud-Speicher — die monatlichen Abbuchungen summieren sich schnell zu beachtlichen Beträgen. Unser Abo-Rechner verschafft Ihnen den Überblick über alle laufenden Kosten und zeigt, wo Sparpotenzial schlummert.
+
+**Das Abo-Zeitalter: Wie sich die Kosten summieren**
+
+Der durchschnittliche deutsche Haushalt hat heute 8 bis 10 laufende Abonnements. Was einzeln harmlos wirkt — 12 € hier, 14 € dort — summiert sich schnell auf 150 bis 200 € pro Monat. Das sind 1.800 bis 2.400 € pro Jahr, und in zehn Jahren sprechen wir von fünfstelligen Beträgen. Geld, das oft unbewusst vom Konto abgebucht wird.
+
+**Die häufigsten Abo-Fallen**
+
+Das größte Problem bei Abos ist nicht der einzelne Preis, sondern die Masse. Studien zeigen, dass rund 40 Prozent aller Abonnements selten oder gar nicht genutzt werden. Typische Fallen sind vergessene Testphasen, die automatisch in kostenpflichtige Abos übergehen, doppelte Dienste (z. B. mehrere Streaming-Anbieter) und Abos, die man „irgendwann mal" kündigen wollte.
+
+**Streaming: Der größte Kostentreiber**
+
+Die Streaming-Landschaft hat sich in den letzten Jahren stark fragmentiert. Während vor wenigen Jahren ein Netflix-Abo reichte, braucht man heute oft drei oder vier Dienste (Netflix, Disney+, Amazon Prime, Spotify, DAZN), um alle gewünschten Inhalte zu sehen. Das kann leicht 50–70 € monatlich kosten — mehr als der klassische Kabelanschluss, den Streaming eigentlich ersetzen sollte.
+
+**Fitnessstudio: Der Klassiker der ungenutzten Abos**
+
+Das Fitnessstudio-Abo ist statistisch gesehen das am häufigsten ungenutzte Abonnement. Nur rund 20 Prozent der Mitglieder gehen regelmäßig trainieren. Bei 30–50 € pro Monat ist das ein teures Gewissen. Alternative: Viele Krankenkassen bezuschussen Sportkurse, und kostenlose Fitness-Apps bieten effektive Workouts für zu Hause.
+
+**Spartipps für Abo-Jäger**
+
+Mit diesen Strategien können Sie Hunderte Euro im Jahr sparen:
+- **Abo-Audit:** Gehen Sie einmal im Quartal Ihre Kontoauszüge durch und prüfen Sie: Habe ich diesen Dienst in den letzten 30 Tagen genutzt? Wenn nein, kündigen!
+- **Familien- und Duo-Tarife:** Viele Dienste bieten günstigere Tarife für mehrere Nutzer. Teilen Sie sich Abos mit Familie oder Freunden.
+- **Jahresabos:** Wer sich sicher ist, kann mit Jahresabos oft 15–20 Prozent gegenüber dem Monatspreis sparen.
+- **Rotieren statt stapeln:** Statt vier Streaming-Dienste parallel zu nutzen, abonnieren Sie einen für 2–3 Monate, schauen alles Interessante, kündigen und wechseln zum nächsten.
+- **Kostenlose Alternativen:** Für viele kostenpflichtige Dienste gibt es gute Gratis-Alternativen — z. B. Mediatheken statt Streaming, LibreOffice statt Microsoft 365, Signal statt WhatsApp Premium.
+
+**Digitale Abos: Der unsichtbare Kostenfaktor**
+
+Besonders tückisch sind kleine digitale Abos: Cloud-Speicher für 3 €, eine Notizen-App für 5 €, ein VPN für 8 €. Einzeln kaum spürbar, aber zusammen schnell 20–30 € im Monat. Prüfen Sie regelmäßig Ihre App-Store-Abonnements — viele vergessen, dass dort automatisch abgebucht wird.
+
+**Fixkosten-Optimierung: Der größte Hebel beim Sparen**
+
+Finanzexperten empfehlen, die Fixkosten unter 50 Prozent des Nettoeinkommens zu halten (50-30-20-Regel). Abos gehören zu den Fixkosten — und sind gleichzeitig die am einfachsten zu reduzierende Kategorie. Während Miete und Versicherungen schwer zu ändern sind, lässt sich ein unnötiges Abo mit wenigen Klicks kündigen.
+
+**Fazit: Transparenz schafft Sparpotenzial**
+
+Der Abo-Rechner macht Ihre monatlichen Verpflichtungen sichtbar. Allein das Aufschreiben aller Abos führt bei den meisten Menschen dazu, mindestens ein oder zwei unnötige Posten zu entdecken. Nutzen Sie das Tortendiagramm, um zu sehen, welches Abo den größten Anteil hat, und das Ranking, um gezielt zu optimieren. Schon 30 € weniger im Monat sind 360 € mehr im Jahr — für die schönen Dinge im Leben.`,
+    faq: [
+      {
+        frage: 'Wie viel geben Deutsche durchschnittlich für Abos aus?',
+        antwort: 'Der durchschnittliche deutsche Haushalt gibt 150–200 € pro Monat für Abonnements aus. Dazu zählen Streaming (40–60 €), Mobilfunk (20–30 €), Fitnessstudio (30–50 €), Zeitungen/Zeitschriften (10–25 €) und diverse digitale Dienste. In 10 Jahren summiert sich das auf 18.000–24.000 €.',
+      },
+      {
+        frage: 'Welche Abos werden am häufigsten vergessen?',
+        antwort: 'Am häufigsten werden kleine digitale Abos vergessen: Cloud-Speicher, App-Abonnements, VPN-Dienste und kostenlose Testphasen, die automatisch kostenpflichtig werden. Prüfen Sie regelmäßig Ihre App-Store-Einstellungen und Kontoauszüge auf unbekannte Abbuchungen.',
+      },
+      {
+        frage: 'Wie kann ich ungenutzte Abos finden?',
+        antwort: 'Gehen Sie Ihre Kontoauszüge der letzten 3 Monate durch und markieren Sie jede wiederkehrende Abbuchung. Fragen Sie sich bei jedem Posten: Habe ich das in den letzten 30 Tagen genutzt? Wenn nicht, kündigen Sie probeweise — die meisten Dienste können jederzeit wieder aktiviert werden.',
+      },
+      {
+        frage: 'Lohnt sich ein Jahresabo gegenüber dem Monatsabo?',
+        antwort: 'In der Regel ja — Jahresabos sind 15–20 % günstiger als Monatsabos. Bei Spotify sparen Sie z. B. etwa 24 € pro Jahr. Aber: Nur bei Diensten, die Sie sicher das ganze Jahr nutzen. Sonst zahlen Sie im Voraus für Monate, in denen Sie den Dienst nicht brauchen.',
+      },
+      {
+        frage: 'Wie oft sollte ich meine Abos überprüfen?',
+        antwort: 'Finanzexperten empfehlen einen Abo-Check alle 3 Monate (quartalsweise). Setzen Sie sich einen festen Termin, z. B. am ersten Sonntag jedes Quartals. So verhindern Sie, dass ungenutzte Abos über Monate weiterlaufen und unnötig Geld kosten.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -3243,6 +3316,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'abo-rechner',
   'lieferservice-rechner',
   'kaffee-kosten-rechner',
   'schlaf-rechner',
@@ -3337,6 +3411,7 @@ const verwandteMap: Record<string, string[]> = {
   'schlaf-rechner': ['bmi-rechner', 'lebenszeit-rechner', 'tagerechner', 'promillerechner'],
   'kaffee-kosten-rechner': ['streaming-kosten-rechner', 'raucher-rechner', 'sparrechner', 'lebenszeit-rechner'],
   'lieferservice-rechner': ['kaffee-kosten-rechner', 'streaming-kosten-rechner', 'raucher-rechner', 'sparrechner'],
+  'abo-rechner': ['streaming-kosten-rechner', 'kaffee-kosten-rechner', 'lieferservice-rechner', 'sparrechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
