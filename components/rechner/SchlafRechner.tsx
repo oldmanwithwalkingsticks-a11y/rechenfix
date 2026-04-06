@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { berechneSchlaf, getEmpfohleneSchlafdauer } from '@/lib/berechnungen/schlaf';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import SchlafTipp from '@/components/rechner/SchlafTipp';
 
 const SCHNELLWAHL_ZEITEN = ['05:00', '05:30', '06:00', '06:30', '07:00', '07:30', '08:00', '08:30'];
 
@@ -250,21 +251,37 @@ export default function SchlafRechner() {
             seitenTitel="Schlafrechner"
           />
 
-          <AiExplain
-            rechnerName="Schlaf-Rechner"
-            eingaben={{
-              aufwachzeit,
-              alter: alterNum,
-              einschlafzeitMin: einschlafNum,
-            }}
-            ergebnis={{
-              empfohleneSchlafstunden: `${empfohlen.min}–${empfohlen.max}`,
-              altersgruppe: empfohlen.label,
-              idealZyklen: ergebnis.idealZyklen,
-              idealeSchlafenszeit: ergebnis.schlafzeiten.find(s => s.zyklen === ergebnis.idealZyklen)?.uhrzeit,
-              jahreImSchlaf: ergebnis.jahreImSchlaf,
-            }}
-          />
+          <div className="flex flex-wrap gap-3">
+            <AiExplain
+              rechnerName="Schlaf-Rechner"
+              eingaben={{
+                aufwachzeit,
+                alter: alterNum,
+                einschlafzeitMin: einschlafNum,
+              }}
+              ergebnis={{
+                empfohleneSchlafstunden: `${empfohlen.min}–${empfohlen.max}`,
+                altersgruppe: empfohlen.label,
+                idealZyklen: ergebnis.idealZyklen,
+                idealeSchlafenszeit: ergebnis.schlafzeiten.find(s => s.zyklen === ergebnis.idealZyklen)?.uhrzeit,
+                jahreImSchlaf: ergebnis.jahreImSchlaf,
+              }}
+            />
+            <SchlafTipp
+              eingaben={{
+                aufwachzeit,
+                alter: alterNum,
+                einschlafzeitMin: einschlafNum,
+              }}
+              ergebnis={{
+                empfohleneSchlafstunden: `${empfohlen.min}–${empfohlen.max}`,
+                altersgruppe: empfohlen.label,
+                idealZyklen: ergebnis.idealZyklen,
+                idealeSchlafenszeit: ergebnis.schlafzeiten.find(s => s.zyklen === ergebnis.idealZyklen)?.uhrzeit,
+                schlafzeiten: ergebnis.schlafzeiten.map(s => ({ uhrzeit: s.uhrzeit, stunden: s.schlafstunden, bewertung: s.bewertung })),
+              }}
+            />
+          </div>
         </div>
       )}
     </div>
