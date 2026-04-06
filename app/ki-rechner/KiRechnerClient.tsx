@@ -25,7 +25,7 @@ const RECHNER_LINKS: { keywords: string[]; label: string; href: string }[] = [
   { keywords: ['sprit', 'benzin', 'diesel', 'tankfüllung', 'fahrtkosten'], label: 'Spritkosten-Rechner', href: '/auto/spritkosten-rechner' },
   { keywords: ['kfz-steuer', 'kfz steuer', 'autosteuer'], label: 'Kfz-Steuer-Rechner', href: '/auto/kfz-steuer-rechner' },
   { keywords: ['ps umrechnen', 'kw umrechnen', 'pferdestärke', 'kilowatt', 'kw in ps', 'ps in kw'], label: 'kW-PS-Rechner', href: '/auto/kw-ps-umrechner' },
-  { keywords: ['pendlerpauschale', 'pendler', 'entfernungspauschale'], label: 'Pendlerpauschale-Rechner', href: '/auto/pendlerpauschale-rechner' },
+  { keywords: ['pendlerpauschale', 'pendler', 'entfernungspauschale'], label: 'Pendlerpauschale-Rechner', href: '/arbeit/pendlerpauschale-rechner' },
   { keywords: ['strom', 'kwh', 'stromverbrauch', 'stromkosten', 'kühlschrank'], label: 'Stromkosten-Rechner', href: '/wohnen/stromkosten-rechner' },
   { keywords: ['heizkosten', 'heizung', 'heizen', 'gas', 'fernwärme'], label: 'Heizkosten-Rechner', href: '/wohnen/heizkosten-rechner' },
   { keywords: ['nebenkosten', 'betriebskosten', 'warmmiete'], label: 'Nebenkosten-Rechner', href: '/wohnen/nebenkosten-rechner' },

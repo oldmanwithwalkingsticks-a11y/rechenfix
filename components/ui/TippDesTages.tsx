@@ -40,7 +40,7 @@ const tipps = [
   },
   {
     text: 'Die Pendlerpauschale beträgt 0,30 € pro km (ab dem 21. km: 0,38 €). Bei 30 km einfacher Strecke sind das über 2.600 € Steuerentlastung pro Jahr.',
-    link: '/auto/pendlerpauschale-rechner',
+    link: '/arbeit/pendlerpauschale-rechner',
     linkText: 'Zum Pendlerpauschale-Rechner →',
   },
 ];
