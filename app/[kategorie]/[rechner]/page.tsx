@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { rechner as alleRechner, getRechnerBySlug, getRechnerByKategorie, getVerwandteRechner } from '@/lib/rechner-config';
+import { rechner as alleRechner, kategorien, getRechnerBySlug, getRechnerByKategorie, getVerwandteRechner } from '@/lib/rechner-config';
 import { generateRechnerMetadata, generateFAQSchema, generateWebApplicationSchema, generateBreadcrumbSchema } from '@/lib/seo';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import ZurueckButton from '@/components/layout/ZurueckButton';
@@ -117,7 +117,6 @@ export default function RechnerSeite({ params }: Props) {
   const RechnerKomponente = rechnerKomponenten[config.slug];
   if (!RechnerKomponente) notFound();
 
-  const kategorieRechner = getRechnerByKategorie(config.kategorieSlug).filter(r => r.slug !== config.slug);
   const verwandteRechner = getVerwandteRechner(config, 4);
 
   const breadcrumbItems = [
@@ -296,31 +295,45 @@ export default function RechnerSeite({ params }: Props) {
 
         {/* Sidebar — hidden on mobile, visible on desktop */}
         <aside className="hidden lg:block lg:w-64 shrink-0">
-          <div className="lg:sticky lg:top-24">
-            {/* Kategorie-Rechner */}
-            {kategorieRechner.length > 0 && (
-              <div className="card p-5 mb-4">
-                <h3 className="font-bold text-sm text-gray-800 dark:text-gray-200 mb-3">
-                  Weitere {config.kategorie}-Rechner
-                </h3>
-                <ul className="space-y-1">
-                  {kategorieRechner.map(r => (
-                    <li key={r.slug}>
-                      <Link
-                        href={`/${r.kategorieSlug}/${r.slug}`}
-                        className="flex items-center gap-2 py-2 px-2 -mx-2 rounded-lg text-sm text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-500/10 transition-all"
-                      >
-                        <span>{r.icon}</span>
-                        <span>{r.titel}</span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+          <div className="lg:sticky lg:top-24 max-h-[calc(100vh-7rem)] overflow-y-auto space-y-3 pr-1">
+            {kategorien.map(k => {
+              const katRechner = getRechnerByKategorie(k.slug);
+              return (
+                <div key={k.slug} className="card p-4">
+                  <Link
+                    href={`/${k.slug}`}
+                    className="flex items-center gap-2 font-bold text-sm text-gray-800 dark:text-gray-200 hover:text-primary-500 dark:hover:text-primary-400 transition-colors mb-2"
+                  >
+                    <span>{k.icon}</span>
+                    <span>{k.name}</span>
+                    <span className="text-xs font-normal text-gray-400 ml-auto">{katRechner.length}</span>
+                  </Link>
+                  <ul className="space-y-0.5">
+                    {katRechner.map(r => {
+                      const istAktuell = r.slug === config.slug;
+                      return (
+                        <li key={r.slug}>
+                          <Link
+                            href={`/${r.kategorieSlug}/${r.slug}`}
+                            className={`flex items-center gap-2 py-1.5 px-2 -mx-1 rounded-lg text-[13px] transition-all ${
+                              istAktuell
+                                ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-500/10 font-medium'
+                                : 'text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-500/10'
+                            }`}
+                          >
+                            <span>{r.icon}</span>
+                            <span className="truncate">{r.titel}</span>
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              );
+            })}
 
             {/* Ad Sidebar */}
-            <AdSlot typ="rectangle" />
+            <AdSlot typ="rectangle" className="mt-3" />
           </div>
         </aside>
       </div>
