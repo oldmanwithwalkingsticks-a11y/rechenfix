@@ -21,10 +21,10 @@ const RECHNER_LINKS: { keywords: string[]; label: string; href: string }[] = [
   { keywords: ['bmi', 'body mass', 'übergewicht', 'untergewicht', 'normalgewicht'], label: 'BMI-Rechner', href: '/gesundheit/bmi-rechner' },
   { keywords: ['promille', 'alkohol', 'blutalkohol'], label: 'Promillerechner', href: '/gesundheit/promillerechner' },
   { keywords: ['schlaf', 'schlafzykl', 'einschlafen', 'aufwachen', 'schlafenszeit'], label: 'Schlafrechner', href: '/gesundheit/schlaf-rechner' },
-  { keywords: ['rauch', 'zigarett', 'nikotin', 'rauchen'], label: 'Raucher-Rechner', href: '/gesundheit/raucher-rechner' },
+  { keywords: ['rauchen', 'raucher', 'zigarett', 'nikotin', 'tabak'], label: 'Raucher-Rechner', href: '/gesundheit/raucher-rechner' },
   { keywords: ['sprit', 'benzin', 'diesel', 'tankfüllung', 'fahrtkosten'], label: 'Spritkosten-Rechner', href: '/auto/spritkosten-rechner' },
   { keywords: ['kfz-steuer', 'kfz steuer', 'autosteuer'], label: 'Kfz-Steuer-Rechner', href: '/auto/kfz-steuer-rechner' },
-  { keywords: ['ps', 'kw', 'pferdestärke', 'kilowatt'], label: 'kW-PS-Rechner', href: '/auto/kw-ps-umrechner' },
+  { keywords: ['ps umrechnen', 'kw umrechnen', 'pferdestärke', 'kilowatt', 'kw in ps', 'ps in kw'], label: 'kW-PS-Rechner', href: '/auto/kw-ps-umrechner' },
   { keywords: ['pendlerpauschale', 'pendler', 'entfernungspauschale'], label: 'Pendlerpauschale-Rechner', href: '/auto/pendlerpauschale-rechner' },
   { keywords: ['strom', 'kwh', 'stromverbrauch', 'stromkosten', 'kühlschrank'], label: 'Stromkosten-Rechner', href: '/wohnen/stromkosten-rechner' },
   { keywords: ['heizkosten', 'heizung', 'heizen', 'gas', 'fernwärme'], label: 'Heizkosten-Rechner', href: '/wohnen/heizkosten-rechner' },
@@ -34,7 +34,7 @@ const RECHNER_LINKS: { keywords: string[]; label: string; href: string }[] = [
   { keywords: ['tapete', 'tapetenbedarf', 'rolle'], label: 'Tapetenbedarf-Rechner', href: '/wohnen/tapetenbedarf-rechner' },
   { keywords: ['quadratmeter', 'fläche', 'm²', 'wohnfläche'], label: 'Quadratmeter-Rechner', href: '/wohnen/quadratmeter-rechner' },
   { keywords: ['zins', 'zinsen', 'zinseszins', 'festgeld', 'tagesgeld'], label: 'Zinsrechner', href: '/finanzen/zinsrechner' },
-  { keywords: ['spar', 'sparplan', 'etf', 'sparen', 'vermögen'], label: 'Sparrechner', href: '/finanzen/sparrechner' },
+  { keywords: ['sparplan', 'sparrate', 'etf', 'sparen', 'vermögensaufbau', 'ansparen'], label: 'Sparrechner', href: '/finanzen/sparrechner' },
   { keywords: ['inflation', 'kaufkraft', 'preissteigerung', 'geldentwertung'], label: 'Inflationsrechner', href: '/finanzen/inflationsrechner' },
   { keywords: ['elterngeld', 'elternzeit', 'mutterschutz'], label: 'Elterngeld-Rechner', href: '/finanzen/elterngeld-rechner' },
   { keywords: ['bürgergeld', 'arbeitslosengeld', 'hartz', 'jobcenter', 'regelbedarf'], label: 'Bürgergeld-Rechner', href: '/finanzen/buergergeld-rechner' },
@@ -56,12 +56,25 @@ const RECHNER_LINKS: { keywords: string[]; label: string; href: string }[] = [
 
 function detectRechnerLink(frage: string, antwort: string): { label: string; href: string } | null {
   const combined = (frage + ' ' + antwort).toLowerCase();
+
+  let best: { label: string; href: string; score: number } | null = null;
+
   for (const rechner of RECHNER_LINKS) {
-    if (rechner.keywords.some(kw => combined.includes(kw))) {
-      return { label: rechner.label, href: rechner.href };
+    let score = 0;
+    for (const kw of rechner.keywords) {
+      // Use word boundary regex so e.g. 'rauch' doesn't match 'verbrauch'
+      const escaped = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const regex = new RegExp(`(?:^|[\\s,.;:!?/"'()—–-])${escaped}`, 'i');
+      if (regex.test(combined)) {
+        score++;
+      }
+    }
+    if (score > 0 && (!best || score > best.score)) {
+      best = { label: rechner.label, href: rechner.href, score };
     }
   }
-  return null;
+
+  return best ? { label: best.label, href: best.href } : null;
 }
 
 interface Verlauf {
