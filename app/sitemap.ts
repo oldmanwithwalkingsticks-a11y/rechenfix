@@ -13,6 +13,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 1.0,
     },
+    {
+      url: `${SITE_URL}/ki-rechner`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
   ];
 
   // Long-Tail SEO-Seiten (Brutto-Netto für spezifische Beträge)

@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 
 // In-Memory Rate Limiting (pro IP, max 10/min)
 const rateLimit = new Map<string, { count: number; reset: number }>();
+// Stricter rate limit for KI-Rechner (max 3/min)
+const kiRateLimit = new Map<string, { count: number; reset: number }>();
 
 function checkRateLimit(ip: string): boolean {
   const now = Date.now();
@@ -17,11 +19,28 @@ function checkRateLimit(ip: string): boolean {
   return true;
 }
 
+function checkKiRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const entry = kiRateLimit.get(ip);
+
+  if (!entry || now > entry.reset) {
+    kiRateLimit.set(ip, { count: 1, reset: now + 60_000 });
+    return true;
+  }
+
+  if (entry.count >= 3) return false;
+  entry.count++;
+  return true;
+}
+
 // Alte Einträge periodisch aufräumen
 setInterval(() => {
   const now = Date.now();
   rateLimit.forEach((entry, ip) => {
     if (now > entry.reset) rateLimit.delete(ip);
+  });
+  kiRateLimit.forEach((entry, ip) => {
+    if (now > entry.reset) kiRateLimit.delete(ip);
   });
 }, 60_000);
 
@@ -122,15 +141,24 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Fehlende Parameter' }, { status: 400 });
   }
 
+  // Stricter rate limit for KI-Rechner
+  if (rechner_name === '__ki_rechner__' && !checkKiRateLimit(ip)) {
+    return NextResponse.json(
+      { error: 'Maximal 3 Fragen pro Minute. Bitte warten Sie einen Moment.' },
+      { status: 429 },
+    );
+  }
+
   // Spezial-Modi
   const SPEZIAL_PROMPTS: Record<string, string> = {
     '__was_waere_wenn__': `Du bist der Finanzberater von rechenfix.de. Der Nutzer hat sein Gehalt mit dem Brutto-Netto-Rechner berechnet und stellt eine Was-wäre-wenn-Frage. Berechne die Antwort basierend auf den aktuellen Eingaben und erkläre den Unterschied konkret in Euro. Nutze die mitgelieferten Eingaben und Ergebnisse als Basis. Wenn der Nutzer nach einer Gehaltserhöhung fragt, berechne das neue Netto. Wenn er nach Steuerklassenwechsel fragt, schätze den Unterschied. Sei konkret mit Zahlen. Max 200 Wörter. Deutsch, Siezen, keine Markdown-Formatierung. Hinweis: Dies ist eine vereinfachte Schätzung, keine Steuerberatung.`,
+    '__ki_rechner__': `Du bist der KI-Rechner von rechenfix.de. Der Nutzer stellt eine Rechenfrage auf Deutsch. Berechne die Antwort präzise. Antworte in 2-3 Sätzen, maximal 150 Wörter. Nenne das Ergebnis konkret mit Zahlen. Falls die Frage keine Berechnung ist, sage freundlich dass du nur Rechenfragen beantworten kannst und nenne 2-3 Beispiel-Fragen. Deutsch, Siezen, keine Markdown-Formatierung. Keine Links oder URLs in die Antwort einbauen — der Link wird automatisch hinzugefügt.`,
     '__schlaf_tipp__': `Du bist der Schlaf-Experte von rechenfix.de. Der Nutzer hat seine optimale Schlafenszeit berechnet. Gib basierend auf der gewünschten Aufwachzeit einen personalisierten Schlaftipp. Erwähne die Bedeutung von Schlafzyklen (90 Min) und warum die empfohlene Schlafenszeit ideal ist. Gib 1 konkreten Tipp für besseren Schlaf passend zur Aufwachzeit (z.B. bei frühem Aufstehen: Abendroutine, bei spätem Aufstehen: Morgenroutine). Wenn weniger als 6h Schlaf geplant: warne freundlich vor gesundheitlichen Folgen. Max 100 Wörter. Deutsch, Siezen, keine Markdown-Formatierung.`,
     '__strom_spartipp__': `Du bist der Energieberater von rechenfix.de. Der Nutzer hat seine Stromkosten berechnet. Vergleiche seinen Verbrauch mit dem Durchschnitt für seine Haushaltsgröße (1 Pers: 1.500 kWh, 2 Pers: 2.500 kWh, 3 Pers: 3.500 kWh, 4 Pers: 4.500 kWh). Gib genau 3 konkrete Spartipps mit geschätzter Euro-Ersparnis pro Jahr. Beispiele: Standby vermeiden (bis 100€/Jahr), LED-Lampen (bis 80€/Jahr), Kühlschrank A+++  (bis 70€/Jahr), Waschmaschine bei 30° (bis 40€/Jahr), Anbieterwechsel (bis 200€/Jahr). Bei hohem Verbrauch: Balkonkraftwerk erwähnen (ca. 600 kWh/Jahr, Amortisation nach 3-4 Jahren). Beziehe dich auf die konkreten Zahlen des Nutzers. Max 150 Wörter. Deutsch, Siezen, keine Markdown-Formatierung.`,
   };
 
   const isSpezial = rechner_name in SPEZIAL_PROMPTS;
-  if (rechner_name === '__was_waere_wenn__' && !frage) {
+  if ((rechner_name === '__was_waere_wenn__' || rechner_name === '__ki_rechner__') && !frage) {
     return NextResponse.json({ error: 'Fehlende Frage' }, { status: 400 });
   }
 
@@ -139,7 +167,9 @@ export async function POST(request: NextRequest) {
     : (RECHNER_PROMPTS[rechner_name] || DEFAULT_PROMPT);
 
   let userMessage: string;
-  if (rechner_name === '__was_waere_wenn__') {
+  if (rechner_name === '__ki_rechner__') {
+    userMessage = `Rechenfrage des Nutzers: ${frage}`;
+  } else if (rechner_name === '__was_waere_wenn__') {
     userMessage = `Aktuelle Eingaben: ${JSON.stringify(eingaben, null, 2)}\n\nAktuelles Ergebnis: ${JSON.stringify(ergebnis, null, 2)}\n\nFrage des Nutzers: ${frage}`;
   } else if (rechner_name === '__schlaf_tipp__') {
     userMessage = `Schlafberechnung des Nutzers:\n\nEingaben: ${JSON.stringify(eingaben, null, 2)}\n\nErgebnis: ${JSON.stringify(ergebnis, null, 2)}`;

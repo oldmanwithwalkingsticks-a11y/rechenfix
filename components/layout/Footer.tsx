@@ -96,6 +96,11 @@ export default function Footer() {
             <h3 className="font-bold text-sm uppercase tracking-wider mb-3 text-primary-100">Rechtliches</h3>
             <ul className="space-y-2">
               <li>
+                <Link href="/ki-rechner" className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-1">
+                  <span>✨</span> KI-Rechner
+                </Link>
+              </li>
+              <li>
                 <Link href="/ueber-uns" className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm">
                   Über uns
                 </Link>
