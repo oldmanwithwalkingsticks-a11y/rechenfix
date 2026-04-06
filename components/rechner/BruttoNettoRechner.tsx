@@ -40,10 +40,6 @@ export default function BruttoNettoRechner() {
   const [abrechnungszeitraum, setAbrechnungszeitraum] = useState<'monat' | 'jahr'>('monat');
   const [kopiert, setKopiert] = useState(false);
 
-  // Vergleichs-Modus
-  const [vergleich, setVergleich] = useState(false);
-  const [brutto2, setBrutto2] = useState('4000');
-  const [steuerklasse2, setSteuerklasse2] = useState<1 | 2 | 3 | 4 | 5 | 6>(1);
 
   const bruttoNum = parseDeutscheZahl(brutto);
   const bl = BUNDESLAENDER.find(b => b.kuerzel === bundesland);
@@ -57,15 +53,6 @@ export default function BruttoNettoRechner() {
     kinderfreibetraege: kinder, bundesland, kvArt, kvZusatzbeitrag: kvZusatzbeitragNum,
     kvPrivatBeitrag: kvPrivatBeitragNum, rvBefreit, abrechnungszeitraum,
   }), [bruttoNum, steuerklasse, kirchensteuer, kstSatz, kinder, bundesland, kvArt, kvZusatzbeitragNum, kvPrivatBeitragNum, rvBefreit, abrechnungszeitraum]);
-
-  const ergebnis2 = useMemo(() => {
-    if (!vergleich) return null;
-    return berechneBruttoNetto({
-      bruttoMonat: parseDeutscheZahl(brutto2), steuerklasse: steuerklasse2, kirchensteuer, kirchensteuersatz: kstSatz,
-      kinderfreibetraege: kinder, bundesland, kvArt, kvZusatzbeitrag: kvZusatzbeitragNum,
-      kvPrivatBeitrag: kvPrivatBeitragNum, rvBefreit, abrechnungszeitraum: 'monat',
-    });
-  }, [vergleich, brutto2, steuerklasse2, kirchensteuer, kstSatz, kinder, bundesland, kvArt, kvZusatzbeitragNum, kvPrivatBeitragNum, rvBefreit]);
 
   const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const pct = (n: number, base: number) => base > 0 ? ((n / base) * 100).toFixed(1) : '0.0';
@@ -249,60 +236,7 @@ export default function BruttoNettoRechner() {
             <button onClick={handlePrint} className="text-sm text-primary-500 dark:text-primary-400 hover:text-primary-600 font-medium transition-colors">
               Als PDF drucken
             </button>
-            <span className="text-gray-300 dark:text-gray-600">|</span>
-            <button onClick={() => setVergleich(!vergleich)} className={`text-sm font-medium transition-colors ${vergleich ? 'text-accent-500' : 'text-primary-500 dark:text-primary-400 hover:text-primary-600'}`}>
-              {vergleich ? '✕ Vergleich schließen' : 'Was wäre wenn?'}
-            </button>
           </div>
-
-          {/* Vergleichs-Modus */}
-          {vergleich && (
-            <div className="bg-accent-50 dark:bg-accent-900/20 border border-accent-200 dark:border-accent-700/40 rounded-xl p-4 mb-6 no-print">
-              <h4 className="font-bold text-sm text-accent-700 dark:text-accent-400 mb-3">Vergleichs-Szenario</h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
-                <div>
-                  <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Bruttogehalt (monatlich)</label>
-                  <NummerEingabe value={brutto2} onChange={setBrutto2} placeholder="z.B. 4000" einheit="€" />
-                </div>
-                <div>
-                  <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Steuerklasse</label>
-                  <select value={steuerklasse2} onChange={e => setSteuerklasse2(Number(e.target.value) as 1|2|3|4|5|6)} className="input-field !py-2 !text-sm">
-                    <option value={1}>SK1 — Ledig</option>
-                    <option value={2}>SK2 — Alleinerziehend</option>
-                    <option value={3}>SK3 — Verheiratet (mehr)</option>
-                    <option value={4}>SK4 — Verheiratet (gleich)</option>
-                    <option value={5}>SK5 — Verheiratet (weniger)</option>
-                    <option value={6}>SK6 — Zweitjob</option>
-                  </select>
-                </div>
-              </div>
-              {ergebnis2 && (
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-white dark:bg-gray-800 rounded-xl p-3 text-center">
-                    <p className="text-xs text-gray-500 mb-1">Aktuell ({skLabel(steuerklasse)})</p>
-                    <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmt(ergebnis.nettoMonat)} €</p>
-                    <p className="text-xs text-gray-400">{fmt(ergebnis.bruttoMonat)} € brutto</p>
-                  </div>
-                  <div className="bg-white dark:bg-gray-800 rounded-xl p-3 text-center">
-                    <p className="text-xs text-gray-500 mb-1">Szenario ({skLabel(steuerklasse2)})</p>
-                    <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmt(ergebnis2.nettoMonat)} €</p>
-                    <p className="text-xs text-gray-400">{fmt(ergebnis2.bruttoMonat)} € brutto</p>
-                  </div>
-                  <div className="col-span-2 text-center">
-                    {(() => {
-                      const diff = ergebnis2.nettoMonat - ergebnis.nettoMonat;
-                      const diffJahr = diff * 12;
-                      return (
-                        <p className={`text-sm font-bold ${diff >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-500 dark:text-red-400'}`}>
-                          {diff >= 0 ? '+' : ''}{fmt(diff)} € / Monat ({diff >= 0 ? '+' : ''}{fmt(diffJahr)} € / Jahr)
-                        </p>
-                      );
-                    })()}
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
 
           {/* Prozentbalken */}
           <div className="mb-6">
