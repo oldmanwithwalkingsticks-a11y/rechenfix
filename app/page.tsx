@@ -7,11 +7,11 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Rechenfix.de — Kostenlose Online-Rechner',
-  description: 'Kostenlose Online-Rechner für Finanzen, Alltag, Auto und Gesundheit. Brutto-Netto, Prozent, MwSt, BMI und mehr. Sofort berechnen ohne Anmeldung.',
+  description: 'Kostenlose Online-Rechner für Finanzen, Alltag, Auto und Gesundheit. Sofort-Ergebnisse ohne Anmeldung. Deutschlands erster Rechner mit KI-Erklärungen.',
   alternates: { canonical: 'https://rechenfix.de' },
   openGraph: {
     title: 'Rechenfix.de — Kostenlose Online-Rechner',
-    description: 'Kostenlose Online-Rechner für Finanzen, Alltag, Auto und Gesundheit. Sofort berechnen ohne Anmeldung.',
+    description: 'Kostenlose Online-Rechner für Finanzen, Alltag, Auto und Gesundheit. Sofort-Ergebnisse ohne Anmeldung. Deutschlands erster Rechner mit KI-Erklärungen.',
     url: 'https://rechenfix.de',
     siteName: 'Rechenfix.de',
     type: 'website',
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Rechenfix.de — Kostenlose Online-Rechner',
-    description: 'Kostenlose Online-Rechner für Finanzen, Alltag, Auto und Gesundheit. Sofort berechnen ohne Anmeldung.',
+    description: 'Kostenlose Online-Rechner für Finanzen, Alltag, Auto und Gesundheit. Sofort-Ergebnisse ohne Anmeldung. Deutschlands erster Rechner mit KI-Erklärungen.',
     images: ['https://rechenfix.de/opengraph-image'],
   },
 };
