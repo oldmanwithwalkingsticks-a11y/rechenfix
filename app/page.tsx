@@ -49,6 +49,28 @@ export default function Startseite() {
         <TippDesTages />
       </section>
 
+      {/* KI-Rechner Banner */}
+      <section className="mb-12">
+        <Link
+          href="/ki-rechner"
+          className="block bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 rounded-2xl p-6 sm:p-8 text-white transition-all shadow-lg hover:shadow-xl group"
+        >
+          <div className="flex items-center justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-2xl">✨</span>
+                <span className="text-xs font-semibold uppercase tracking-wider text-white/70">Neu</span>
+              </div>
+              <h2 className="text-xl sm:text-2xl font-extrabold mb-1">KI-Rechner — Fragen Sie einfach!</h2>
+              <p className="text-white/80 text-sm sm:text-base">
+                Stellen Sie eine Rechenfrage in natürlicher Sprache und erhalten Sie sofort die Antwort.
+              </p>
+            </div>
+            <span className="text-3xl sm:text-4xl shrink-0 group-hover:translate-x-1 transition-transform">→</span>
+          </div>
+        </Link>
+      </section>
+
       {/* Kategorien als Kacheln */}
       <section className="mb-16">
         <h2 className="section-title mb-6">Kategorien</h2>

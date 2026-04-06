@@ -62,6 +62,15 @@ export default function Header() {
           </Link>
 
           <div className="flex items-center gap-2 sm:gap-3">
+            {/* KI-Rechner Button */}
+            <Link
+              href="/ki-rechner"
+              className="flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-xl text-sm font-medium bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-sm hover:shadow-md hover:from-purple-600 hover:to-blue-600 transition-all"
+            >
+              <span className="text-sm">✨</span>
+              <span className="hidden sm:inline">KI-Rechner</span>
+            </Link>
+
             {/* Alle Rechner Button */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
