@@ -104,7 +104,7 @@ export default function SchnellCheck({
   if (sichtbareTipps.length === 0) return null;
 
   return (
-    <div className="space-y-2 mb-5 print:hidden">
+    <div className="space-y-2 mb-5 no-print">
       {sichtbareTipps.map(tipp => (
         <div
           key={tipp.id}

@@ -73,9 +73,11 @@ body {
 }
 
 /* Print-CSS: Nur Rechner + Tabelle anzeigen */
+.no-print { display: block; }
 @media print {
   header, footer, nav, aside,
-  .print\\:hidden,
+  .no-print,
+  .print\:hidden,
   [class*="AdSlot"],
   [class*="ad-slot"] {
     display: none !important;

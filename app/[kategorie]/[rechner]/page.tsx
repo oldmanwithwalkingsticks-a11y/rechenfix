@@ -133,7 +133,7 @@ export default function RechnerSeite({ params }: Props) {
       <StructuredData data={generateBreadcrumbSchema(breadcrumbItems)} />
 
       {/* Breadcrumbs */}
-      <div className="print:hidden">
+      <div className="no-print">
         <Breadcrumbs
           items={[
             { label: config.kategorie, href: `/${config.kategorieSlug}` },
@@ -150,7 +150,7 @@ export default function RechnerSeite({ params }: Props) {
           <AdSlot typ="leaderboard" className="mb-6" />
 
           {/* Zurück-Button */}
-          <div className="print:hidden">
+          <div className="no-print">
             <ZurueckButton fallbackHref={`/${config.kategorieSlug}`} label={`Zurück`} />
           </div>
 

@@ -66,7 +66,7 @@ export default function ErgebnisAktionen({ ergebnisText, seitenTitel, drucken }:
   };
 
   return (
-    <div className="flex flex-wrap gap-2 print:hidden">
+    <div className="flex flex-wrap gap-2 no-print">
       {/* Kopieren */}
       <button
         onClick={handleKopieren}

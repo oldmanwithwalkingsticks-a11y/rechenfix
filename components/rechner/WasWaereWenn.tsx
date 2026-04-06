@@ -95,7 +95,7 @@ export default function WasWaereWenn({ eingaben, ergebnis }: Props) {
   if (!ergebnis || Object.keys(ergebnis).length === 0) return null;
 
   return (
-    <div className={`mt-4 print:hidden${(offen || antwort) ? ' w-full' : ''}`}>
+    <div className={`mt-4 no-print${(offen || antwort) ? ' w-full' : ''}`}>
       {/* Trigger-Button */}
       {!offen && (
         <button

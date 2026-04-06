@@ -295,7 +295,7 @@ export default function NotenschluesselRechner() {
               <div className="flex justify-end">
                 <button
                   onClick={() => window.print()}
-                  className="px-4 py-2 bg-primary-500 text-white rounded-lg text-sm font-medium hover:bg-primary-600 transition-colors print:hidden"
+                  className="px-4 py-2 bg-primary-500 text-white rounded-lg text-sm font-medium hover:bg-primary-600 transition-colors no-print"
                 >
                   Drucken / PDF
                 </button>

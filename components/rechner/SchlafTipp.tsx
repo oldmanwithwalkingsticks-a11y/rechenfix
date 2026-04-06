@@ -60,7 +60,7 @@ export default function SchlafTipp({ eingaben, ergebnis }: Props) {
   if (!ergebnis || Object.keys(ergebnis).length === 0) return null;
 
   return (
-    <div className={`mt-4 print:hidden${(laden || antwort || fehler) ? ' w-full' : ''}`}>
+    <div className={`mt-4 no-print${(laden || antwort || fehler) ? ' w-full' : ''}`}>
       {/* Trigger-Button */}
       {!antwort && !laden && (
         <button

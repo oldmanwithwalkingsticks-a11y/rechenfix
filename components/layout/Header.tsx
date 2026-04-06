@@ -43,7 +43,7 @@ export default function Header() {
 
 
   return (
-    <div ref={headerRef} className="sticky top-0 z-50 print:hidden">
+    <div ref={headerRef} className="sticky top-0 z-50 no-print">
       <header className="bg-white dark:bg-slate-900 border-b border-gray-100 dark:border-gray-700">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           {/* Logo */}
