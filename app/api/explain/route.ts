@@ -109,19 +109,31 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  let body: { rechner_name?: string; eingaben?: Record<string, unknown>; ergebnis?: Record<string, unknown> };
+  let body: { rechner_name?: string; eingaben?: Record<string, unknown>; ergebnis?: Record<string, unknown>; frage?: string };
   try {
     body = await request.json();
   } catch {
     return NextResponse.json({ error: 'Ungültige Anfrage' }, { status: 400 });
   }
 
-  const { rechner_name, eingaben, ergebnis } = body;
+  const { rechner_name, eingaben, ergebnis, frage } = body;
   if (!rechner_name || !ergebnis) {
     return NextResponse.json({ error: 'Fehlende Parameter' }, { status: 400 });
   }
 
-  const userMessage = `Rechner: ${rechner_name}\n\nEingaben: ${JSON.stringify(eingaben, null, 2)}\n\nErgebnis: ${JSON.stringify(ergebnis, null, 2)}`;
+  // "Was wäre wenn" Modus für Brutto-Netto-Rechner
+  const isWasWaereWenn = rechner_name === '__was_waere_wenn__';
+  if (isWasWaereWenn && !frage) {
+    return NextResponse.json({ error: 'Fehlende Frage' }, { status: 400 });
+  }
+
+  const systemPrompt = isWasWaereWenn
+    ? `Du bist der Finanzberater von rechenfix.de. Der Nutzer hat sein Gehalt mit dem Brutto-Netto-Rechner berechnet und stellt eine Was-wäre-wenn-Frage. Berechne die Antwort basierend auf den aktuellen Eingaben und erkläre den Unterschied konkret in Euro. Nutze die mitgelieferten Eingaben und Ergebnisse als Basis. Wenn der Nutzer nach einer Gehaltserhöhung fragt, berechne das neue Netto. Wenn er nach Steuerklassenwechsel fragt, schätze den Unterschied. Sei konkret mit Zahlen. Max 200 Wörter. Deutsch, Siezen, keine Markdown-Formatierung. Hinweis: Dies ist eine vereinfachte Schätzung, keine Steuerberatung.`
+    : (RECHNER_PROMPTS[rechner_name] || DEFAULT_PROMPT);
+
+  const userMessage = isWasWaereWenn
+    ? `Aktuelle Eingaben: ${JSON.stringify(eingaben, null, 2)}\n\nAktuelles Ergebnis: ${JSON.stringify(ergebnis, null, 2)}\n\nFrage des Nutzers: ${frage}`
+    : `Rechner: ${rechner_name}\n\nEingaben: ${JSON.stringify(eingaben, null, 2)}\n\nErgebnis: ${JSON.stringify(ergebnis, null, 2)}`;
 
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -134,7 +146,7 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 500,
-        system: RECHNER_PROMPTS[rechner_name] || DEFAULT_PROMPT,
+        system: systemPrompt,
         messages: [{ role: 'user', content: userMessage }],
       }),
     });
