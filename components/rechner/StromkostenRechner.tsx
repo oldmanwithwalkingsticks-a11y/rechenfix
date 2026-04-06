@@ -91,7 +91,7 @@ export default function StromkostenRechner() {
             ergebnisText={`Stromkosten pro Jahr: ${fmt(ergebnis.kostenJahr)} € (${fmt(ergebnis.kostenMonat)} €/Monat, ${fmt(ergebnis.kostenTag)} €/Tag)`}
             seitenTitel="Stromkostenrechner"
           />
-          <div className="flex flex-col sm:flex-row gap-3">
+          <div className="flex flex-wrap gap-3">
             <AiExplain
               rechnerName="Stromkosten-Rechner"
               eingaben={{

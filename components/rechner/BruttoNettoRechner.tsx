@@ -339,7 +339,7 @@ export default function BruttoNettoRechner() {
             * Vereinfachte Berechnung zur Orientierung. Für eine exakte Berechnung wenden Sie sich an Ihren Steuerberater oder nutzen Sie ELSTER.
           </p>
 
-          <div className="mt-4 print:hidden flex flex-col sm:flex-row gap-3">
+          <div className="mt-4 print:hidden flex flex-wrap gap-3">
             <AiExplain
               rechnerName="Brutto-Netto-Rechner"
               eingaben={{

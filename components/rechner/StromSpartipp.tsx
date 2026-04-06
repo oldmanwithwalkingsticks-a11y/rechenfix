@@ -60,7 +60,7 @@ export default function StromSpartipp({ eingaben, ergebnis }: Props) {
   if (!ergebnis || Object.keys(ergebnis).length === 0) return null;
 
   return (
-    <div className="mt-4 print:hidden">
+    <div className={`mt-4 print:hidden${(laden || antwort || fehler) ? ' w-full' : ''}`}>
       {/* Trigger-Button */}
       {!antwort && !laden && (
         <button

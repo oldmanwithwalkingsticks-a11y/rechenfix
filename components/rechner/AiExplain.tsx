@@ -71,7 +71,7 @@ export default function AiExplain({ rechnerName, eingaben, ergebnis }: Props) {
   if (!ergebnis || Object.keys(ergebnis).length === 0) return null;
 
   return (
-    <div className="mt-4 print:hidden">
+    <div className={`mt-4 print:hidden${(laden || erklaerung || fehler) ? ' w-full' : ''}`}>
       {/* Button zum Auslösen */}
       {!erklaerung && !laden && (
         <button
