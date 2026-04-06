@@ -48,6 +48,7 @@ import StreamingKostenRechner from '@/components/rechner/StreamingKostenRechner'
 import RaucherRechner from '@/components/rechner/RaucherRechner';
 import WahrerStundenlohnRechner from '@/components/rechner/WahrerStundenlohnRechner';
 import SchlafRechner from '@/components/rechner/SchlafRechner';
+import KaffeeKostenRechner from '@/components/rechner/KaffeeKostenRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -108,6 +109,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'raucher-rechner': RaucherRechner,
   'wahrer-stundenlohn': WahrerStundenlohnRechner,
   'schlaf-rechner': SchlafRechner,
+  'kaffee-kosten-rechner': KaffeeKostenRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

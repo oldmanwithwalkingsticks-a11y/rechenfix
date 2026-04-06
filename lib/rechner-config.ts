@@ -3094,6 +3094,74 @@ Die sogenannte Schlafhygiene hat großen Einfluss auf Ihre Schlafqualität:
       },
     ],
   },
+  {
+    slug: 'kaffee-kosten-rechner',
+    titel: 'Kaffee-Kosten-Rechner',
+    beschreibung: 'Berechnen Sie Ihre täglichen, monatlichen und jährlichen Kaffeekosten — mit Spartipps und Vergleichen.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Kaffee-Kosten-Rechner — So viel geben Sie aus | Rechenfix',
+    metaDescription: 'Kaffee-Kosten-Rechner: Berechnen Sie Ihre täglichen, monatlichen und jährlichen Kaffeeausgaben. Mit Spartipps, 30-Jahres-Projektion und Vergleichen. ✓ Mit KI-Erklärung.',
+    keywords: ['kaffee kosten rechner', 'kaffee kosten pro tag', 'kaffee kosten pro monat', 'kaffee kosten pro jahr', 'kaffee ausgaben berechnen', 'kaffee sparen', 'filterkaffee kosten', 'kapselkaffee kosten', 'café kosten', 'starbucks kosten'],
+    icon: '☕',
+    formel: 'Jahreskosten = Kaffees pro Tag × Preis pro Kaffee × 365',
+    beispiel: 'Beispiel: 2 Kaffees pro Tag à 3,50 € (Café-to-go) = 2 × 3,50 × 365 = 2.555 € pro Jahr.',
+    erklaerung: `Kaffee ist für Millionen Deutsche das tägliche Ritual, das den Morgen einläutet und den Tag begleitet. Doch haben Sie sich schon einmal gefragt, wie viel Sie tatsächlich für Ihren Kaffeekonsum ausgeben? Unser Kaffee-Kosten-Rechner zeigt Ihnen genau, welche Summen sich über Wochen, Monate, Jahre und sogar Jahrzehnte ansammeln — und wo enormes Sparpotenzial schlummert.
+
+**Warum sich ein Blick auf die Kaffeekosten lohnt**
+
+Der tägliche Kaffee wirkt auf den ersten Blick günstig: Ein Filterkaffee zu Hause kostet nur rund 15 Cent, eine Kapsel etwa 40 Cent. Doch wer regelmäßig zum Café-to-go für 3,50 € oder zum Starbucks-Latte für 5,00 € greift, gibt schnell über 1.000 € pro Jahr aus — Geld, das anderweitig gut investiert wäre.
+
+**Die vier Kaffee-Typen im Vergleich**
+
+Filterkaffee ist mit durchschnittlich 15 Cent pro Tasse der günstigste Weg zum Koffein. Eine Tasse aus der Kapselmaschine kostet etwa 40 Cent — fast das Dreifache. Der beliebte Café-to-go vom Bäcker oder der Kaffeebar schlägt mit rund 3,50 € zu Buche, und ein Spezialgetränk bei Starbucks oder vergleichbaren Ketten kann leicht 5 € und mehr kosten.
+
+**Historische Kaffeekosten: Was Sie schon ausgegeben haben**
+
+Unser Rechner zeigt Ihnen nicht nur zukünftige Kosten, sondern berechnet auch, wie viel Geld Sie in der Vergangenheit bereits für Kaffee ausgegeben haben. Wenn Sie seit 10 Jahren täglich einen Café-to-go trinken, haben Sie bereits über 12.000 € investiert — genug für einen gebrauchten Kleinwagen oder einen schönen Urlaub.
+
+**30-Jahres-Projektion: Der Blick in die Zukunft**
+
+Besonders eindrucksvoll ist die 30-Jahres-Projektion: Über ein ganzes Berufsleben hinweg summieren sich die Kaffeekosten auf fünfstellige Beträge. Bei zwei Café-to-go pro Tag sprechen wir von über 76.000 € in 30 Jahren. Hätten Sie dieses Geld stattdessen in einen ETF-Sparplan investiert, wäre daraus ein kleines Vermögen geworden.
+
+**Sparpotenzial erkennen und nutzen**
+
+Der Umstieg von Café-to-go auf Filterkaffee spart pro Tasse über 3 €. Bei zwei Tassen täglich sind das über 2.400 € im Jahr. Eine hochwertige Thermoskanne und gute Bohnen kosten zusammen unter 50 € — eine Investition, die sich bereits im ersten Monat amortisiert.
+
+**Was Sie mit dem gesparten Geld machen könnten**
+
+Die Ersparnisse lassen sich anschaulich in Alltagskäufe übersetzen: Für die jährlichen Kaffeekosten könnten Sie je nach Kaffee-Typ ein neues Smartphone kaufen, mehrere Wochenendtrips unternehmen oder einen beträchtlichen Beitrag zu Ihrer Altersvorsorge leisten.
+
+**Koffein und Gesundheit**
+
+Neben den Kosten lohnt sich auch ein Blick auf die gesundheitliche Seite: Die Europäische Behörde für Lebensmittelsicherheit empfiehlt maximal 400 mg Koffein pro Tag für Erwachsene, das entspricht etwa 4 Tassen Filterkaffee. Mehr als 5–6 Tassen können zu Schlafstörungen, Nervosität und erhöhtem Blutdruck führen.
+
+**Fazit: Kleine Änderungen, große Wirkung**
+
+Der Kaffee-Kosten-Rechner zeigt: Bereits kleine Veränderungen im Konsumverhalten können über die Jahre Tausende Euro einsparen. Ob kompletter Umstieg auf Filterkaffee oder ein bewussterer Mix aus Zuhause-Kaffee und gelegentlichem Café-Besuch — jeder gesparte Euro zählt. Probieren Sie es aus und sehen Sie, wie viel Sparpotenzial in Ihrer Kaffeetasse steckt.`,
+    faq: [
+      {
+        frage: 'Wie viel kostet ein Kaffee am Tag wirklich?',
+        antwort: 'Das hängt stark von der Zubereitungsart ab: Filterkaffee zu Hause kostet nur 10–20 Cent pro Tasse, eine Kapsel 30–50 Cent, ein Café-to-go vom Bäcker 2,50–4,50 € und ein Starbucks-Getränk 4–6 €. Über das Jahr gerechnet macht dieser Unterschied Hunderte bis Tausende Euro aus.',
+      },
+      {
+        frage: 'Wie viel Geld spare ich, wenn ich auf Filterkaffee umsteige?',
+        antwort: 'Bei 2 Kaffees pro Tag sparen Sie beim Umstieg von Café-to-go (3,50 €) auf Filterkaffee (0,15 €) rund 2.445 € pro Jahr. Bei Starbucks (5,00 €) auf Filterkaffee sogar 3.540 € pro Jahr — genug für einen schönen Urlaub.',
+      },
+      {
+        frage: 'Wie viel Kaffee trinken die Deutschen im Durchschnitt?',
+        antwort: 'Deutschland ist eine Kaffee-Nation: Im Durchschnitt trinkt jeder Deutsche 3,4 Tassen Kaffee pro Tag, das sind rund 168 Liter pro Jahr. Damit ist Kaffee noch vor Wasser und Bier das beliebteste Getränk in Deutschland.',
+      },
+      {
+        frage: 'Wie viel Koffein ist gesund?',
+        antwort: 'Die Europäische Behörde für Lebensmittelsicherheit (EFSA) empfiehlt maximal 400 mg Koffein pro Tag für gesunde Erwachsene. Das entspricht etwa 4 Tassen Filterkaffee oder 5 Espressi. Schwangere sollten maximal 200 mg pro Tag konsumieren.',
+      },
+      {
+        frage: 'Lohnt sich eine Kaffeemaschine mit Mahlwerk?',
+        antwort: 'Ja — eine Kaffeemaschine mit integriertem Mahlwerk (Vollautomaten ab ca. 300 €) produziert Kaffee für etwa 15–25 Cent pro Tasse bei deutlich besserem Geschmack als Kapseln. Ab 2 Tassen täglich amortisiert sich die Anschaffung gegenüber Café-to-go bereits nach 2–3 Monaten.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -3107,6 +3175,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'kaffee-kosten-rechner',
   'schlaf-rechner',
   'wahrer-stundenlohn',
   'raucher-rechner',
@@ -3197,6 +3266,7 @@ const verwandteMap: Record<string, string[]> = {
   'raucher-rechner': ['bmi-rechner', 'sparrechner', 'lebenszeit-rechner', 'inflationsrechner'],
   'wahrer-stundenlohn': ['stundenlohn-rechner', 'brutto-netto-rechner', 'pendlerpauschale-rechner', 'gehaltsvergleich'],
   'schlaf-rechner': ['bmi-rechner', 'lebenszeit-rechner', 'tagerechner', 'promillerechner'],
+  'kaffee-kosten-rechner': ['streaming-kosten-rechner', 'raucher-rechner', 'sparrechner', 'lebenszeit-rechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {

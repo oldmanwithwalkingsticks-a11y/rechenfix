@@ -52,6 +52,7 @@ const RECHNER_LINKS: { keywords: string[]; label: string; href: string }[] = [
   { keywords: ['lebenszeit', 'lebensjahr', 'wie alt', 'herzschläge'], label: 'Lebenszeit-Rechner', href: '/alltag/lebenszeit-rechner' },
   { keywords: ['gehaltsvergleich', 'gehalt vergleich', 'verdiene ich genug'], label: 'Gehaltsvergleich', href: '/finanzen/gehaltsvergleich' },
   { keywords: ['wahrer stundenlohn', 'tatsächlicher stundenlohn', 'echter stundenlohn', 'pendeln stundenlohn'], label: 'Wahrer-Stundenlohn-Rechner', href: '/finanzen/wahrer-stundenlohn' },
+  { keywords: ['kaffee', 'kaffeekosten', 'espresso', 'cappuccino', 'latte', 'café-to-go'], label: 'Kaffee-Kosten-Rechner', href: '/alltag/kaffee-kosten-rechner' },
 ];
 
 function detectRechnerLink(frage: string, antwort: string): { label: string; href: string } | null {
