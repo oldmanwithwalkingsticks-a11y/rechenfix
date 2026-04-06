@@ -101,19 +101,22 @@ export default function FeedbackClient() {
 
   const absenden = async () => {
     if (!aktiverTyp || !isValid()) return;
+    const formData = {
+      typ: TYPEN.find(t => t.id === aktiverTyp)?.label ?? aktiverTyp,
+      felder: buildFelder(),
+      email: email.trim() || undefined,
+    };
+    console.log('Submit clicked', formData);
     setSending(true);
     try {
-      await fetch('/api/feedback', {
+      const res = await fetch('/api/feedback', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          typ: TYPEN.find(t => t.id === aktiverTyp)?.label ?? aktiverTyp,
-          felder: buildFelder(),
-          email: email.trim() || undefined,
-        }),
+        body: JSON.stringify(formData),
       });
-    } catch {
-      // Fehler ignorieren — API gibt auch bei Problemen 200 zurück
+      console.log('API response:', res.status, await res.text());
+    } catch (error) {
+      console.error('Fetch error:', error);
     }
     setSending(false);
     setGesendet(true);
