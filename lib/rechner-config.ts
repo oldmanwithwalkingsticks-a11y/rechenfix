@@ -3162,6 +3162,74 @@ Der Kaffee-Kosten-Rechner zeigt: Bereits kleine Veränderungen im Konsumverhalte
       },
     ],
   },
+  {
+    slug: 'lieferservice-rechner',
+    titel: 'Lieferservice-Rechner',
+    beschreibung: 'Berechnen Sie Ihre Lieferservice-Kosten pro Monat und Jahr — mit Vergleich zum Selberkochen und Spartipps.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Lieferservice-Rechner — Was kostet Bestellen? | Rechenfix',
+    metaDescription: 'Lieferservice-Rechner: Berechnen Sie Ihre monatlichen und jährlichen Lieferkosten. Mit Vergleich zum Selberkochen und Sparpotenzial. ✓ Mit KI-Erklärung.',
+    keywords: ['lieferservice rechner', 'lieferservice kosten', 'lieferdienst kosten', 'bestellen kosten', 'lieferando kosten', 'selber kochen sparen', 'essenslieferung kosten', 'liefergebühr rechner', 'lieferdienst vs selber kochen', 'essen bestellen kosten'],
+    icon: '🛵',
+    formel: 'Jahreskosten = Bestellungen/Woche × (Bestellwert + Liefergebühr + Trinkgeld) × 52',
+    beispiel: 'Beispiel: 3× pro Woche à 25 € + 3 € Liefergebühr + 2 € Trinkgeld = 3 × 30 × 52 = 4.680 € pro Jahr.',
+    erklaerung: `Lieferdienste wie Lieferando, Wolt und Uber Eats haben die Art verändert, wie wir essen. Ein paar Klicks auf dem Smartphone, und 30 Minuten später steht das Abendessen vor der Tür. Bequem — aber auch teuer. Unser Lieferservice-Rechner zeigt Ihnen, was das Bestellen wirklich kostet und wie viel Sie durch Selberkochen sparen könnten.
+
+**Die versteckten Kosten beim Bestellen**
+
+Viele unterschätzen die wahren Kosten einer Lieferbestellung. Zum Warenwert kommen Liefergebühren (oft 2–5 €), Servicepauschalen, Mindestbestellwerte und Trinkgeld hinzu. Eine Bestellung für 25 € kostet mit allen Nebenkosten schnell 30 € oder mehr. Wer das dreimal pro Woche macht, gibt über 4.600 € im Jahr aus — fast 400 € pro Monat.
+
+**Der Vergleich: Lieferdienst vs. Selberkochen**
+
+Eine selbstgekochte Mahlzeit kostet im Durchschnitt nur etwa 3–5 € pro Person. Selbst mit hochwertigen Zutaten bleibt man deutlich unter dem Lieferpreis. Der Unterschied wird über die Jahre dramatisch: Bei drei Bestellungen pro Woche sparen Sie durch Selberkochen rund 3.500 € pro Jahr — in zehn Jahren ist das ein Kleinwagen oder eine Weltreise.
+
+**Warum bestellen wir trotzdem so oft?**
+
+Die Gründe sind vielfältig: Zeitmangel nach einem langen Arbeitstag, fehlende Kochkenntnisse, die Bequemlichkeit oder einfach die Lust auf Abwechslung. All das ist verständlich — aber wer die Zahlen kennt, kann bewusstere Entscheidungen treffen. Schon ein oder zwei Bestellungen weniger pro Woche machen einen großen Unterschied.
+
+**Spartipps für Lieferdienst-Fans**
+
+Es geht nicht darum, nie wieder zu bestellen. Aber smarte Strategien helfen, die Kosten zu senken:
+- **Meal-Prep:** Sonntags vorkochen spart unter der Woche Zeit und Geld. Drei Portionen Chili für zusammen 8 € ersetzen drei Bestellungen für je 30 €.
+- **Lieferpässe prüfen:** Dienste wie Lieferando Plus bieten kostenlose Lieferung ab einer monatlichen Gebühr. Ab einer bestimmten Bestellhäufigkeit kann sich das lohnen — rechnen Sie nach.
+- **Selbstabholung:** Viele Restaurants bieten 10–15 % Rabatt bei Selbstabholung. Das spart Liefergebühr und Trinkgeld.
+- **Aktionen nutzen:** Neue-Kunden-Gutscheine, Treueprogramme und Rabattcodes senken den Preis — aber Vorsicht vor dem Anreiz, häufiger zu bestellen.
+
+**Der Liefermarkt in Deutschland**
+
+Der deutsche Lieferservice-Markt wächst rasant. 2024 bestellten rund 25 Millionen Deutsche regelmäßig Essen online. Der durchschnittliche Bestellwert liegt bei etwa 25–30 €. Besonders beliebt sind Pizza, Burger, Sushi und asiatische Küche. Die Pandemie hat den Trend beschleunigt, und viele Haushalte haben die Gewohnheit beibehalten.
+
+**Gesundheit und Ernährung**
+
+Neben den Kosten gibt es einen weiteren Aspekt: Selbstgekochtes Essen ist in der Regel gesünder. Sie kontrollieren die Zutaten, die Portionsgrößen und den Fettgehalt. Lieferdienst-Gerichte enthalten oft mehr Salz, Zucker und Fett als vergleichbare Hausmannskost. Wer häufiger selbst kocht, tut also nicht nur dem Geldbeutel, sondern auch der Gesundheit etwas Gutes.
+
+**Fazit: Bewusst bestellen, clever sparen**
+
+Der Lieferservice-Rechner macht die Kosten sichtbar und hilft Ihnen, eine informierte Entscheidung zu treffen. Niemand muss komplett auf Lieferdienste verzichten — aber wer die Zahlen kennt, kann bewusster entscheiden, wann sich eine Bestellung lohnt und wann der Griff zum Kochlöffel die bessere Wahl ist. Schon kleine Änderungen sparen über die Jahre Tausende Euro.`,
+    faq: [
+      {
+        frage: 'Wie viel geben Deutsche durchschnittlich für Lieferdienste aus?',
+        antwort: 'Laut Studien geben regelmäßige Lieferdienst-Nutzer in Deutschland durchschnittlich 50–70 € pro Monat für Essenslieferungen aus. Bei häufigen Bestellern (3× pro Woche oder mehr) können es leicht 300–500 € monatlich werden.',
+      },
+      {
+        frage: 'Wie viel kostet Selberkochen pro Mahlzeit?',
+        antwort: 'Eine selbstgekochte Mahlzeit kostet im Durchschnitt 3–5 € pro Person, je nach Rezept und Zutatenqualität. Einfache Gerichte wie Pasta, Reis mit Gemüse oder Suppen kosten sogar nur 1,50–3 €. Im Vergleich dazu liegt eine Lieferbestellung bei 20–35 €.',
+      },
+      {
+        frage: 'Lohnt sich ein Lieferpass (z. B. Lieferando Plus)?',
+        antwort: 'Ein Lieferpass lohnt sich ab etwa 4–5 Bestellungen pro Monat, wenn die eingesparten Liefergebühren die monatliche Gebühr übersteigen. Bei 3 Bestellungen pro Woche sparen Sie mit einem Pass rund 30–50 € pro Monat an Liefergebühren.',
+      },
+      {
+        frage: 'Wie kann ich beim Bestellen am meisten sparen?',
+        antwort: 'Die größten Hebel sind: Selbstabholung statt Lieferung (spart 3–7 € pro Bestellung), Gutscheine und Aktionen nutzen, größere Mengen bestellen und am nächsten Tag aufwärmen, und generell seltener bestellen — schon eine Bestellung weniger pro Woche spart über 1.500 € im Jahr.',
+      },
+      {
+        frage: 'Ist Selberkochen wirklich immer günstiger?',
+        antwort: 'In fast allen Fällen ja. Selbst aufwendige Gerichte mit hochwertigen Zutaten kosten selten mehr als 8–10 € pro Person. Eine Ausnahme können Gerichte sein, die spezielle Geräte oder exotische Zutaten erfordern (z. B. Sushi). Aber im Durchschnitt ist Selberkochen 3–5× günstiger als Bestellen.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -3175,6 +3243,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'lieferservice-rechner',
   'kaffee-kosten-rechner',
   'schlaf-rechner',
   'wahrer-stundenlohn',
@@ -3267,6 +3336,7 @@ const verwandteMap: Record<string, string[]> = {
   'wahrer-stundenlohn': ['stundenlohn-rechner', 'brutto-netto-rechner', 'pendlerpauschale-rechner', 'gehaltsvergleich'],
   'schlaf-rechner': ['bmi-rechner', 'lebenszeit-rechner', 'tagerechner', 'promillerechner'],
   'kaffee-kosten-rechner': ['streaming-kosten-rechner', 'raucher-rechner', 'sparrechner', 'lebenszeit-rechner'],
+  'lieferservice-rechner': ['kaffee-kosten-rechner', 'streaming-kosten-rechner', 'raucher-rechner', 'sparrechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
