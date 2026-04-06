@@ -14,7 +14,7 @@ export default function Footer() {
     .slice(0, 5);
 
   return (
-    <footer className="bg-primary-700 dark:bg-slate-950 text-white mt-16">
+    <footer className="bg-primary-700 dark:bg-slate-950 text-white mt-16 no-print">
       <div className="max-w-6xl mx-auto px-4">
         {/* Hauptbereich */}
         <div className="py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">

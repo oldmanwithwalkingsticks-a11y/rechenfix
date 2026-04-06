@@ -14,7 +14,7 @@ export default function FeedbackButtons() {
   }
 
   return (
-    <div className="text-center py-4">
+    <div className="text-center py-4 no-print">
       <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">War dieser Rechner hilfreich?</p>
       <div className="flex justify-center gap-3">
         <button

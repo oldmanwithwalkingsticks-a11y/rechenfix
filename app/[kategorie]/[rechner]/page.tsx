@@ -166,7 +166,7 @@ export default function RechnerSeite({ params }: Props) {
 
           {/* Beliebte Gehaltsbeispiele (nur auf Brutto-Netto-Rechner) */}
           {config.slug === 'brutto-netto-rechner' && (
-            <section className="card p-6 md:p-8 mb-8">
+            <section className="card p-6 md:p-8 mb-8 no-print">
               <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Beliebte Gehaltsbeispiele</h2>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                 {[
@@ -272,7 +272,7 @@ export default function RechnerSeite({ params }: Props) {
           </LazySection>
 
           {/* Verwandte Rechner */}
-          <section className="card p-6 md:p-8 mb-8">
+          <section className="card p-6 md:p-8 mb-8 no-print">
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Das könnte Sie auch interessieren</h2>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
               {verwandteRechner.map(r => (
