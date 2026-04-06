@@ -50,7 +50,7 @@ export default function AdSlot({ typ, className = '' }: AdSlotProps) {
   const config = adConfig[typ];
 
   return (
-    <div className={`overflow-hidden ${className}`}>
+    <div className={`overflow-hidden no-print ${className}`}>
       <ins
         ref={adRef}
         className="adsbygoogle"
