@@ -53,16 +53,16 @@ export default function Startseite() {
       <section className="mb-12">
         <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-xl p-6 text-center">
           <p className="text-xl sm:text-2xl font-extrabold text-white mb-2">
-            &#x1F916; Deutschlands erster Rechner mit KI-Erkl&auml;rungen
+            &#x1F916; Rechenfrage? Einfach der KI stellen!
           </p>
           <p className="text-white/80 text-sm sm:text-base max-w-xl mx-auto mb-5">
-            Nicht nur berechnen &mdash; verstehen. Unsere KI erkl&auml;rt Ihnen pers&ouml;nlich, was Ihr Ergebnis bedeutet und wie Sie sparen k&ouml;nnen.
+            Stellen Sie Ihre Rechenfrage in nat&uuml;rlicher Sprache &mdash; die KI berechnet die Antwort und verlinkt Sie zum passenden Rechner.
           </p>
           <Link
             href="/ki-rechner"
             className="inline-flex items-center gap-2 px-6 py-2.5 bg-white text-indigo-700 font-semibold text-sm rounded-lg hover:bg-indigo-50 transition-colors shadow-md"
           >
-            KI-Rechner ausprobieren
+            Jetzt Frage stellen
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
             </svg>
