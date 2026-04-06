@@ -5,6 +5,7 @@ import { berechneSpritkosten } from '@/lib/berechnungen/spritkosten';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 export default function SpritkostenRechner() {
   const [strecke, setStrecke] = useState('100');
@@ -150,6 +151,11 @@ export default function SpritkostenRechner() {
           <ErgebnisAktionen
             ergebnisText={`${fmt(ergebnis.effektiveStrecke)} km, ${fmt(ergebnis.literGesamt)} L Verbrauch, Gesamtkosten: ${fmt(ergebnis.gesamtkosten)} €`}
             seitenTitel="Spritkosten-Rechner"
+          />
+          <AiExplain
+            rechnerName="Spritkosten-Rechner"
+            eingaben={{ streckeKm: nStrecke, verbrauchLPro100km: nVerbrauch, spritpreisEuroProL: nSpritpreis, hinUndZurueck }}
+            ergebnis={{ gesamtkostenEuro: ergebnis.gesamtkosten, literGesamt: ergebnis.literGesamt, kostenProKm: ergebnis.kostenProKm, effektiveStreckeKm: ergebnis.effektiveStrecke }}
           />
         </>
       )}

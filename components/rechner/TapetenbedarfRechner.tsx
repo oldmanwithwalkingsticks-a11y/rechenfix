@@ -5,6 +5,7 @@ import { berechneTapetenbedarf } from '@/lib/berechnungen/tapetenbedarf';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 type Eingabemodus = 'schnell' | 'detail';
 
@@ -267,6 +268,25 @@ export default function TapetenbedarfRechner() {
           <ErgebnisAktionen
             ergebnisText={`Benötigte Tapetenrollen: ${ergebnis.rollenBenoetigt} (Tapezierfläche: ${fmt(ergebnis.tapezierFlaeche)} m², Bahnen: ${ergebnis.bahnenBenoetigt})`}
             seitenTitel="Tapetenbedarfrechner"
+          />
+          <AiExplain
+            rechnerName="Tapetenbedarf-Rechner"
+            eingaben={{
+              wandflaeche: ergebnis.gesamtWandflaeche,
+              fensterAnzahl: parseDeutscheZahl(fenster),
+              tuerenAnzahl: parseDeutscheZahl(tueren),
+              rollenBreite: parseDeutscheZahl(rollenBreite),
+              rollenLaenge: parseDeutscheZahl(rollenLaenge),
+              rapport: parseDeutscheZahl(rapport),
+              verschnitt: parseDeutscheZahl(verschnitt),
+            }}
+            ergebnis={{
+              rollenBenoetigt: ergebnis.rollenBenoetigt,
+              tapezierFlaeche: ergebnis.tapezierFlaeche,
+              bahnenBenoetigt: ergebnis.bahnenBenoetigt,
+              verschnittFlaeche: ergebnis.verschnittFlaeche,
+              kosten: ergebnis.kosten,
+            }}
           />
 
           {/* Kosten */}

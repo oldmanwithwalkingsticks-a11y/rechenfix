@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { berechneCountdown, voreingestellteEvents, type CountdownErgebnis } from '@/lib/berechnungen/countdown';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 function Ziffer({ wert, label }: { wert: number; label: string }) {
   return (
@@ -207,6 +208,12 @@ export default function CountdownRechner() {
           <ErgebnisAktionen
             ergebnisText={`${eventIcon} ${eventLabel}: Noch ${ergebnis.tage} Tage, ${ergebnis.stunden} Std, ${ergebnis.minuten} Min (${datumFormatiert})`}
             seitenTitel="Countdown-Rechner"
+          />
+
+          <AiExplain
+            rechnerName="Countdown-Rechner"
+            eingaben={{ event: eventLabel, datum: datumFormatiert }}
+            ergebnis={{ tage: ergebnis.tage, stunden: ergebnis.stunden, minuten: ergebnis.minuten, wochen: ergebnis.wochen }}
           />
         </div>
       )}

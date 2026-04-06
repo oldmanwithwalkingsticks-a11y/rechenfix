@@ -11,6 +11,7 @@ import {
 } from '@/lib/berechnungen/durchschnitt';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 type Modus = 'arithmetisch' | 'gewichtet' | 'median';
 
@@ -247,6 +248,12 @@ export default function DurchschnittRechner() {
               <ErgebnisAktionen
                 ergebnisText={`Arithmetisches Mittel: ${fmt(arithmErgebnis.mittelwert)} (${arithmErgebnis.anzahl} Werte)`}
                 seitenTitel="Durchschnitt berechnen"
+              />
+
+              <AiExplain
+                rechnerName="Durchschnittsrechner"
+                eingaben={{ werte: aktuelleWerte, anzahl: arithmErgebnis.anzahl }}
+                ergebnis={{ mittelwert: arithmErgebnis.mittelwert, summe: arithmErgebnis.summe, min: arithmErgebnis.min, max: arithmErgebnis.max, standardabweichung: arithmErgebnis.standardabweichung }}
               />
             </div>
           )}

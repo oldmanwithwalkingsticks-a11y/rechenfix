@@ -5,6 +5,7 @@ import { berechneInflation, type InflationsModus } from '@/lib/berechnungen/infl
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 const SCHNELLWAHL = ['1', '2', '3', '5', '8'];
 
@@ -196,6 +197,21 @@ export default function InflationsRechner() {
               ? `Kaufkraft nach ${ergebnis.jahre.length} Jahren: ${fmt(ergebnis.ergebnis)} € (Verlust: ${fmt(ergebnis.differenz)} €, ${ergebnis.differenzProzent.toLocaleString('de-DE')} %)`
               : `Preis in ${ergebnis.jahre.length} Jahren: ${fmt(ergebnis.ergebnis)} € (Anstieg: ${fmt(ergebnis.differenz)} €, ${ergebnis.differenzProzent.toLocaleString('de-DE')} %)`}
             seitenTitel="Inflationsrechner"
+          />
+          <AiExplain
+            rechnerName="Inflationsrechner"
+            eingaben={{
+              modus,
+              betrag: parseDeutscheZahl(betrag),
+              inflationsrate: parseDeutscheZahl(inflationsrate),
+              zeitraum: parseDeutscheZahl(zeitraum),
+            }}
+            ergebnis={{
+              ergebnis: ergebnis.ergebnis,
+              differenz: ergebnis.differenz,
+              differenzProzent: ergebnis.differenzProzent,
+              jaehrlicherVerlust: ergebnis.jaehrlicherVerlust,
+            }}
           />
 
           {/* Historischer Hinweis */}

@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import { berechneTageszeit, berechneWoche, type WochenTag } from '@/lib/berechnungen/arbeitszeit';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 type Modus = 'tag' | 'woche';
 
@@ -219,6 +220,12 @@ export default function ArbeitszeitRechner() {
               <ErgebnisAktionen
                 ergebnisText={`Netto-Arbeitszeit: ${fmtZeit(tagesErgebnis.nettoStunden, tagesErgebnis.nettoRestMinuten)} (${fmtDez(tagesErgebnis.dezimal)} h)`}
                 seitenTitel="Arbeitszeit berechnen"
+              />
+
+              <AiExplain
+                rechnerName="Arbeitszeit-Rechner"
+                eingaben={{ beginn, ende, pausenMinuten: pausen.map(p => parseInt(p, 10) || 0) }}
+                ergebnis={{ nettoStunden: tagesErgebnis.nettoStunden, nettoRestMinuten: tagesErgebnis.nettoRestMinuten, dezimal: tagesErgebnis.dezimal, bruttoMinuten: tagesErgebnis.bruttoMinuten, pauseMinuten: tagesErgebnis.pauseMinuten }}
               />
             </div>
           )}

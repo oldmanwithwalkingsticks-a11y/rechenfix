@@ -5,6 +5,7 @@ import { berechneHeizkosten, getEnergietraegerDefaults, getAlleEnergietraeger, t
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 export default function HeizkostenRechner() {
   const [wohnflaeche, setWohnflaeche] = useState('80');
@@ -93,6 +94,21 @@ export default function HeizkostenRechner() {
           <ErgebnisAktionen
             ergebnisText={`Heizkosten pro Jahr: ${fmt(ergebnis.kostenJahr)} € (${fmt(ergebnis.kostenMonat)} €/Monat, ${fmt(ergebnis.kostenProQm)} €/m²)`}
             seitenTitel="Heizkostenrechner"
+          />
+          <AiExplain
+            rechnerName="Heizkosten-Rechner"
+            eingaben={{
+              wohnflaeche: parseDeutscheZahl(wohnflaeche),
+              energietraeger,
+              verbrauchProQm: parseDeutscheZahl(verbrauch),
+              preisProKwh: parseDeutscheZahl(preis),
+            }}
+            ergebnis={{
+              kostenJahr: ergebnis.kostenJahr,
+              kostenMonat: ergebnis.kostenMonat,
+              kostenProQm: ergebnis.kostenProQm,
+              verbrauchGesamt: ergebnis.verbrauchGesamt,
+            }}
           />
 
           {/* Vergleichstabelle */}

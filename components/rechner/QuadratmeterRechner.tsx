@@ -10,6 +10,7 @@ import {
 } from '@/lib/berechnungen/quadratmeter';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 interface FlaechenFormular {
   id: number;
@@ -328,6 +329,20 @@ export default function QuadratmeterRechner() {
           <ErgebnisAktionen
             ergebnisText={`${ergebnis.einzelFlaechen.length > 1 ? 'Gesamtfläche' : 'Fläche'}: ${fmt(ergebnis.gesamtFlaeche)} m²`}
             seitenTitel="Quadratmeterrechner"
+          />
+          <AiExplain
+            rechnerName="Quadratmeter-Rechner"
+            eingaben={{
+              anzahlFlaechen: ergebnis.einzelFlaechen.length,
+              einheit,
+              flaechen: ergebnis.einzelFlaechen.map(ef => ({ form: ef.label, flaeche: ef.flaeche })),
+            }}
+            ergebnis={{
+              gesamtFlaeche: ergebnis.gesamtFlaeche,
+              inCm2: ergebnis.inCm2,
+              inAr: ergebnis.inAr,
+              inHektar: ergebnis.inHektar,
+            }}
           />
 
           {/* Einzelflächen bei mehreren */}

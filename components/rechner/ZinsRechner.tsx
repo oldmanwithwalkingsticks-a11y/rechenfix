@@ -5,6 +5,7 @@ import { berechneZinsen } from '@/lib/berechnungen/zinsen';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 export default function ZinsRechner() {
   const [anfangskapital, setAnfangskapital] = useState('10000');
@@ -242,6 +243,21 @@ export default function ZinsRechner() {
           <ErgebnisAktionen
             ergebnisText={`${fmt(nAnfang)} € Anfangskapital → ${fmt(ergebnis.endkapital)} € nach ${Math.floor(nLaufzeit)} Jahren (${fmt(ergebnis.gesamtzinsen)} € Zinsen)`}
             seitenTitel="Zinsrechner"
+          />
+          <AiExplain
+            rechnerName="Zinsrechner"
+            eingaben={{
+              anfangskapital: nAnfang,
+              zinssatz: nZins,
+              laufzeit: nLaufzeit,
+              zinseszins,
+              sparrate: nSparrate,
+            }}
+            ergebnis={{
+              endkapital: ergebnis.endkapital,
+              gesamtzinsen: ergebnis.gesamtzinsen,
+              eigenkapital: ergebnis.eigenkapital,
+            }}
           />
         </>
       )}

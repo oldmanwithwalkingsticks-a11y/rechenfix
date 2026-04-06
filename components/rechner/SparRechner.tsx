@@ -5,6 +5,7 @@ import { berechneSparplan, type Zinsintervall } from '@/lib/berechnungen/sparpla
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 export default function SparRechner() {
   const [anfangskapital, setAnfangskapital] = useState('0');
@@ -144,6 +145,23 @@ export default function SparRechner() {
           <ErgebnisAktionen
             ergebnisText={`Endkapital nach ${ergebnis.jahre.length} Jahren: ${fmt(ergebnis.endkapital)} € (Eigenkapital: ${fmt(ergebnis.eigenkapital)} €, Zinserträge: ${fmt(ergebnis.gesamtzinsen)} €)`}
             seitenTitel="Sparrechner"
+          />
+          <AiExplain
+            rechnerName="Sparrechner"
+            eingaben={{
+              anfangskapital: parseDeutscheZahl(anfangskapital),
+              sparrate: parseDeutscheZahl(sparrate),
+              zinssatz: parseDeutscheZahl(zinssatz),
+              sparzeit: parseDeutscheZahl(sparzeit),
+              dynamik: parseDeutscheZahl(dynamik),
+              zinsintervall,
+            }}
+            ergebnis={{
+              endkapital: ergebnis.endkapital,
+              eigenkapital: ergebnis.eigenkapital,
+              gesamtzinsen: ergebnis.gesamtzinsen,
+              zinsenAnteil: ergebnis.zinsenAnteil,
+            }}
           />
 
           {/* Balkendiagramm pro Jahr */}

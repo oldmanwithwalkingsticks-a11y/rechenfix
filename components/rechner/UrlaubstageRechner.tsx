@@ -8,6 +8,7 @@ import {
   type ResturlaubEingabe,
 } from '@/lib/berechnungen/urlaubstage';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 type Modus = 'anspruch' | 'resturlaub';
 
@@ -230,6 +231,12 @@ export default function UrlaubstageRechner() {
               <ErgebnisAktionen
                 ergebnisText={`Urlaubsanspruch: ${fmtZahl(anspruchErgebnis.gesamt)} Tage (${fmtZahl(anspruchErgebnis.wochen)} Wochen)`}
                 seitenTitel="Urlaubstage berechnen"
+              />
+
+              <AiExplain
+                rechnerName="Urlaubstage-Rechner"
+                eingaben={{ vertraglicheTage: parseInt(vertraglicheTage, 10) || 0, arbeitstageProWoche, teilzeit, schwerbehindert }}
+                ergebnis={{ gesamt: anspruchErgebnis.gesamt, wochen: anspruchErgebnis.wochen, gesetzlichMinimum: anspruchErgebnis.gesetzlichMinimum, ueberMinimum: anspruchErgebnis.ueberMinimum }}
               />
 
               {anspruchErgebnis.ueberMinimum < 0 && (

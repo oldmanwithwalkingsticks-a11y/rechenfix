@@ -5,6 +5,7 @@ import { berechneKfzSteuer, type Antriebsart, type Zulassungszeitraum } from '@/
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 export default function KfzSteuerRechner() {
   const [zulassung, setZulassung] = useState<Zulassungszeitraum>('nach-2009');
@@ -191,6 +192,11 @@ export default function KfzSteuerRechner() {
           <ErgebnisAktionen
             ergebnisText={ergebnis.befreit ? `Kfz-Steuer: 0,00 € (steuerbefreit bis ${ergebnis.befreitBis})` : `Kfz-Steuer: ${fmt(ergebnis.jahresSteuer)} € pro Jahr (${fmt(ergebnis.monatsSteuer)} € / Monat)`}
             seitenTitel="Kfz-Steuer-Rechner"
+          />
+          <AiExplain
+            rechnerName="Kfz-Steuer-Rechner"
+            eingaben={{ zulassung, antrieb, hubraumCcm: nHubraum, co2GProKm: nCo2 }}
+            ergebnis={{ jahresSteuerEuro: ergebnis.jahresSteuer, monatsSteuerEuro: ergebnis.monatsSteuer, sockelbetragEuro: ergebnis.sockelbetrag, co2BetragEuro: ergebnis.co2Betrag, befreit: ergebnis.befreit }}
           />
         </>
       )}

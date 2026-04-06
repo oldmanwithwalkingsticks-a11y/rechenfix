@@ -6,6 +6,7 @@ import {
   berechneVerguetung,
 } from '@/lib/berechnungen/ueberstunden';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 type Modus = 'berechnen' | 'verguetung';
 type EingabeArt = 'gesamt' | 'tageweise';
@@ -271,6 +272,12 @@ export default function UeberstundenRechner() {
               <ErgebnisAktionen
                 ergebnisText={`${ergebnis1.istMinusstunden ? 'Minusstunden' : 'Überstunden'} ${ergebnis1.zeitraumLabel}: ${ergebnis1.zeitraumWert >= 0 ? '+' : ''}${fmtZahl(ergebnis1.zeitraumWert, 1)} Std.`}
                 seitenTitel="Überstunden berechnen"
+              />
+
+              <AiExplain
+                rechnerName="Überstunden-Rechner"
+                eingaben={{ vertraglicheStunden: parseFloat(vertraglicheStunden.replace(',', '.')) || 0, tatsaechlicheStunden, zeitraum }}
+                ergebnis={{ proWoche: ergebnis1.proWoche, proMonat: ergebnis1.proMonat, proJahr: ergebnis1.proJahr, istMinusstunden: ergebnis1.istMinusstunden, zusaetzlicheTageProJahr: ergebnis1.zusaetzlicheTageProJahr }}
               />
             </div>
           )}

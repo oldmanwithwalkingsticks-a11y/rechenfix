@@ -5,6 +5,7 @@ import { berechneDreisatz } from '@/lib/berechnungen/dreisatz';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 export default function DreisatzRechner() {
   const [a1, setA1] = useState('3');
@@ -139,6 +140,12 @@ export default function DreisatzRechner() {
           <ErgebnisAktionen
             ergebnisText={`${fmt(nA1)} ≙ ${fmt(nB1)}, dann ${fmt(nA2)} ≙ ${fmt(ergebnis.b2)}`}
             seitenTitel="Dreisatz-Rechner"
+          />
+
+          <AiExplain
+            rechnerName="Dreisatz-Rechner"
+            eingaben={{ a1: nA1, b1: nB1, a2: nA2, antiproportional }}
+            ergebnis={{ b2: ergebnis.b2 }}
           />
         </>
       )}

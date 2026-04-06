@@ -5,6 +5,7 @@ import { berechneBuergergeld, type Bedarfsgemeinschaft, type Kindergruppe, type 
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 const ALTERSGRUPPEN: { key: Kindergruppe; label: string }[] = [
   { key: '0-5', label: '0–5 Jahre' },
@@ -334,6 +335,24 @@ export default function BuergergeldRechner() {
           <ErgebnisAktionen
             ergebnisText={ergebnis.bedarfGedeckt ? 'Kein Bürgergeld-Anspruch (Bedarf durch Einkommen gedeckt)' : `Bürgergeld-Anspruch: ${fmt(ergebnis.gesamtAnspruch)} € pro Monat`}
             seitenTitel="Bürgergeld-Rechner"
+          />
+          <AiExplain
+            rechnerName="Bürgergeld-Rechner"
+            eingaben={{
+              bedarfsgemeinschaft: bg,
+              anzahlKinder: kinder.length,
+              warmmiete: parseDeutscheZahl(warmmiete),
+              heizkosten: parseDeutscheZahl(heizkosten),
+              einkommen: parseDeutscheZahl(einkommen),
+              vermoegen: parseDeutscheZahl(vermoegen),
+            }}
+            ergebnis={{
+              gesamtAnspruch: ergebnis.gesamtAnspruch,
+              regelbedarfGesamt: ergebnis.regelbedarfGesamt,
+              unterkunftskosten: ergebnis.unterkunftskosten,
+              anrechenbareEinkommen: ergebnis.anrechenbareEinkommen,
+              bedarfGedeckt: ergebnis.bedarfGedeckt,
+            }}
           />
         </div>
       )}

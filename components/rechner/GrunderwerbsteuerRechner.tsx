@@ -5,6 +5,7 @@ import { berechneGrunderwerbsteuer, BUNDESLAENDER } from '@/lib/berechnungen/gru
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 export default function GrunderwerbsteuerRechner() {
   const [kaufpreis, setKaufpreis] = useState('300000');
@@ -106,6 +107,26 @@ export default function GrunderwerbsteuerRechner() {
           <ErgebnisAktionen
             ergebnisText={`Gesamtkosten: ${fmt(ergebnis.gesamtkosten)} € (Grunderwerbsteuer: ${fmt(ergebnis.grunderwerbsteuer)} €, Nebenkosten: ${fmt(ergebnis.nebenkostenGesamt)} €)`}
             seitenTitel="Grunderwerbsteuerrechner"
+          />
+          <AiExplain
+            rechnerName="Grunderwerbsteuer-Rechner"
+            eingaben={{
+              kaufpreis: parseDeutscheZahl(kaufpreis),
+              bundesland: ergebnis.bundeslandName,
+              steuersatz: ergebnis.steuersatz,
+              maklerProvision: parseDeutscheZahl(makler),
+              notarkosten: parseDeutscheZahl(notar),
+              grundbuchGebuehren: parseDeutscheZahl(grundbuch),
+            }}
+            ergebnis={{
+              grunderwerbsteuer: ergebnis.grunderwerbsteuer,
+              makler: ergebnis.makler,
+              notar: ergebnis.notar,
+              grundbuch: ergebnis.grundbuch,
+              nebenkostenGesamt: ergebnis.nebenkostenGesamt,
+              nebenkostenProzent: ergebnis.nebenkostenProzent,
+              gesamtkosten: ergebnis.gesamtkosten,
+            }}
           />
 
           {/* Steuersätze */}

@@ -3,6 +3,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { berechne, formatErgebnis, type Winkelmodus, type VerlaufEintrag } from '@/lib/berechnungen/taschenrechner';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 type TastenTyp = 'zahl' | 'operator' | 'funktion' | 'gleich' | 'loeschen' | 'spezial';
 
@@ -259,6 +260,12 @@ export default function TaschenrechnerRechner() {
           <ErgebnisAktionen
             ergebnisText={`${verlauf[0].eingabe} = ${verlauf[0].ergebnis}`}
             seitenTitel="Taschenrechner"
+          />
+
+          <AiExplain
+            rechnerName="Taschenrechner"
+            eingaben={{ ausdruck: verlauf[0].eingabe }}
+            ergebnis={{ ergebnis: verlauf[0].ergebnis }}
           />
         </div>
       )}

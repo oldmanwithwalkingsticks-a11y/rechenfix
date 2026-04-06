@@ -6,6 +6,7 @@ import {
   berechneArbeitstage,
 } from '@/lib/berechnungen/pendlerpauschale';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 const fmtEuro = (n: number) =>
   n.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' });
@@ -300,6 +301,11 @@ export default function PendlerpauschaleRechner() {
           <ErgebnisAktionen
             ergebnisText={`Pendlerpauschale: ${fmtEuro(ergebnis.pauschaleGesamt)} - Steuerersparnis: ${fmtEuro(ergebnis.steuerersparnis)}/Jahr (${fmtEuro(ergebnis.monatlicheErsparnis)}/Monat)`}
             seitenTitel="Pendlerpauschale berechnen"
+          />
+          <AiExplain
+            rechnerName="Pendlerpauschale-Rechner"
+            eingaben={{ entfernungKm: parseFloat(entfernung.replace(',', '.')) || 0, arbeitstageProJahr: effektiveArbeitstage, grenzsteuersatzProzent: parseFloat(grenzsteuersatz.replace(',', '.')) || 0 }}
+            ergebnis={{ pauschaleGesamtEuro: ergebnis.pauschaleGesamt, steuerersparnisEuro: ergebnis.steuerersparnis, monatlicheErsparnisEuro: ergebnis.monatlicheErsparnis }}
           />
         </div>
       )}

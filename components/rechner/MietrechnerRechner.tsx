@@ -5,6 +5,7 @@ import { berechneMietpreis } from '@/lib/berechnungen/mietpreis';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 export default function MietrechnerRechner() {
   const [kaltmiete, setKaltmiete] = useState('650');
@@ -104,6 +105,23 @@ export default function MietrechnerRechner() {
           <ErgebnisAktionen
             ergebnisText={`Warmmiete: ${fmt(ergebnis.warmmiete)} €/Monat (${fmt(ergebnis.warmmieteProQm)} €/m², Mietbelastung: ${ergebnis.mietbelastung.toLocaleString('de-DE')} %)`}
             seitenTitel="Mietrechner"
+          />
+          <AiExplain
+            rechnerName="Mietrechner"
+            eingaben={{
+              kaltmiete: parseDeutscheZahl(kaltmiete),
+              nebenkosten: parseDeutscheZahl(nebenkosten),
+              wohnflaeche: parseDeutscheZahl(wohnflaeche),
+              nettoEinkommen: parseDeutscheZahl(nettoEinkommen),
+            }}
+            ergebnis={{
+              warmmiete: ergebnis.warmmiete,
+              warmmieteProQm: ergebnis.warmmieteProQm,
+              kaltmieteProQm: ergebnis.kaltmieteProQm,
+              mietbelastung: ergebnis.mietbelastung,
+              jahresmiete: ergebnis.jahresmiete,
+              restNachMiete: ergebnis.restNachMiete,
+            }}
           />
 
           <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden">

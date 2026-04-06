@@ -16,6 +16,7 @@ import {
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 type Tab = 'rechnen' | 'kuerzen' | 'dezimal' | 'vergleichen';
 
@@ -237,6 +238,12 @@ export default function BruchRechner() {
               <ErgebnisAktionen
                 ergebnisText={`${rechenErgebnis.schritte.eingabe} = ${rechenErgebnis.ergebnis.zaehler}/${rechenErgebnis.ergebnis.nenner} (${fmtDez(rechenErgebnis.dezimal)})`}
                 seitenTitel="Bruchrechner"
+              />
+
+              <AiExplain
+                rechnerName="Bruchrechner"
+                eingaben={{ bruch1Zaehler: Math.round(parseDeutscheZahl(z1)), bruch1Nenner: Math.round(parseDeutscheZahl(n1)), operation: op, bruch2Zaehler: Math.round(parseDeutscheZahl(z2)), bruch2Nenner: Math.round(parseDeutscheZahl(n2)) }}
+                ergebnis={{ ergebnisZaehler: rechenErgebnis.ergebnis.zaehler, ergebnisNenner: rechenErgebnis.ergebnis.nenner, dezimal: rechenErgebnis.dezimal }}
               />
 
               {/* Rechenweg */}

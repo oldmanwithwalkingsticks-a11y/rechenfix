@@ -10,6 +10,7 @@ import {
 } from '@/lib/berechnungen/einheiten';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 const katTabs: { key: EinheitenKategorie; label: string }[] = [
   { key: 'laenge', label: 'Länge' },
@@ -202,6 +203,12 @@ export default function EinheitenRechner() {
           <ErgebnisAktionen
             ergebnisText={`${formatWert(ergebnis.wert)} ${ergebnis.vonLabel} = ${formatWert(ergebnis.ergebnis)} ${ergebnis.zuLabel}`}
             seitenTitel="Einheiten umrechnen"
+          />
+
+          <AiExplain
+            rechnerName="Einheitenrechner"
+            eingaben={{ wert: ergebnis.wert, von: ergebnis.vonLabel, zu: ergebnis.zuLabel, kategorie: kat }}
+            ergebnis={{ ergebnis: ergebnis.ergebnis, formel: ergebnis.formel }}
           />
         </div>
       )}

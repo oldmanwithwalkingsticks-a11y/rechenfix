@@ -5,6 +5,7 @@ import { berechneStundenlohn, MINDESTLOHN_2026, type StundenlohnModus } from '@/
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 const MODI: { key: StundenlohnModus; label: string; icon: string }[] = [
   { key: 'stundenlohn', label: 'Stundenlohn berechnen', icon: '⏱️' },
@@ -214,6 +215,12 @@ export default function StundenlohnRechner() {
           <ErgebnisAktionen
             ergebnisText={`Stundenlohn: ${fmt(ergebnis.stundenlohn)} €, Monatsgehalt: ${fmt(ergebnis.monatsgehalt)} €, Jahresgehalt: ${fmt(ergebnis.jahresgehalt)} €`}
             seitenTitel="Stundenlohn-Rechner"
+          />
+
+          <AiExplain
+            rechnerName="Stundenlohn-Rechner"
+            eingaben={{ modus, bruttogehalt: parseDeutscheZahl(bruttogehalt), stundenlohn: parseDeutscheZahl(stundenlohn), wochenstunden: parseDeutscheZahl(wochenstunden) }}
+            ergebnis={{ stundenlohn: ergebnis.stundenlohn, monatsgehalt: ergebnis.monatsgehalt, jahresgehalt: ergebnis.jahresgehalt, effektiverStundenlohn: ergebnis.effektiverStundenlohn, ueberMindestlohn: ergebnis.ueberMindestlohn }}
           />
 
           {/* Stundenlohn-Tabelle nach Berufsgruppen */}

@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { berechneRabatt, berechneRabattProzent, berechneDoppelrabatt } from '@/lib/berechnungen/rabatt';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
+import AiExplain from '@/components/rechner/AiExplain';
 
 type Modus = 'rabatt' | 'endpreis' | 'doppelrabatt';
 
@@ -258,6 +259,12 @@ export default function RabattRechner() {
               Teilen
             </button>
           </div>
+
+          <AiExplain
+            rechnerName="Rabattrechner"
+            eingaben={{ modus, originalpreis: n1, ...(modus === 'rabatt' ? { rabattProzent: n2 } : modus === 'endpreis' ? { reduzierterPreis: n2 } : { ersterRabatt: n2, zweiterRabatt: n3 }) }}
+            ergebnis={{ endpreis: ergebnis.endpreis, ersparnis: ergebnis.ersparnis, ...('rabattProzent' in ergebnis ? { rabattProzent: ergebnis.rabattProzent } : {}), ...('gesamtRabattProzent' in ergebnis ? { gesamtRabattProzent: ergebnis.gesamtRabattProzent } : {}) }}
+          />
         </div>
       )}
     </div>

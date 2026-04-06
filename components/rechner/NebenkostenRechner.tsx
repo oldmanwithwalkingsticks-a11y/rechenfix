@@ -5,6 +5,7 @@ import { berechneNebenkosten } from '@/lib/berechnungen/nebenkosten';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 export default function NebenkostenRechner() {
   const [kaltmiete, setKaltmiete] = useState('650');
@@ -112,6 +113,28 @@ export default function NebenkostenRechner() {
           <ErgebnisAktionen
             ergebnisText={`Warmmiete: ${fmt(ergebnis.warmmiete)} € (Nebenkosten: ${fmt(ergebnis.nebenkostenMonat)} €/Monat, ${fmt(ergebnis.nebenkostenJahr)} €/Jahr)`}
             seitenTitel="Nebenkostenrechner"
+          />
+          <AiExplain
+            rechnerName="Nebenkosten-Rechner"
+            eingaben={{
+              kaltmiete: parseDeutscheZahl(kaltmiete),
+              wohnflaeche: parseDeutscheZahl(wohnflaeche),
+              heizkosten: parseDeutscheZahl(heizkosten),
+              warmwasser: parseDeutscheZahl(warmwasser),
+              wasser: parseDeutscheZahl(wasser),
+              muell: parseDeutscheZahl(muell),
+              grundsteuer: parseDeutscheZahl(grundsteuer),
+              versicherung: parseDeutscheZahl(versicherung),
+              hauswart: parseDeutscheZahl(hauswart),
+              sonstige: parseDeutscheZahl(sonstige),
+            }}
+            ergebnis={{
+              warmmiete: ergebnis.warmmiete,
+              nebenkostenMonat: ergebnis.nebenkostenMonat,
+              nebenkostenJahr: ergebnis.nebenkostenJahr,
+              nebenkostenProQm: ergebnis.nebenkostenProQm,
+              anteilAnWarmmiete: ergebnis.anteilAnWarmmiete,
+            }}
           />
 
           <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden">

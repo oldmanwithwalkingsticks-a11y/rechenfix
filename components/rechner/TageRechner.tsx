@@ -3,6 +3,7 @@
 import { useState, useMemo, useCallback } from 'react';
 import { berechneTage, formatDatum, parseDeutschesDatum } from '@/lib/berechnungen/tage';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 function datumZuIso(d: Date): string {
   const y = d.getFullYear();
@@ -248,6 +249,12 @@ export default function TageRechner() {
           <ErgebnisAktionen
             ergebnisText={`${ergebnis.tage.toLocaleString('de-DE')} Tage zwischen ${startDatum ? formatDatum(startDatum) : ''} und ${endDatum ? formatDatum(endDatum) : ''} (${ergebnis.arbeitstage} Arbeitstage)`}
             seitenTitel="Tagerechner"
+          />
+
+          <AiExplain
+            rechnerName="Tage-Rechner"
+            eingaben={{ startDatum: startDatum ? formatDatum(startDatum) : '', endDatum: endDatum ? formatDatum(endDatum) : '', mitzaehlen }}
+            ergebnis={{ tage: ergebnis.tage, arbeitstage: ergebnis.arbeitstage, wochen: ergebnis.wochen, wochenendtage: ergebnis.wochenendtage }}
           />
         </>
       )}

@@ -7,6 +7,7 @@ import {
   type Getraenk,
 } from '@/lib/berechnungen/promille';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 const fmtZahl = (n: number, s = 2) =>
   n.toLocaleString('de-DE', { minimumFractionDigits: s, maximumFractionDigits: s });
@@ -320,6 +321,12 @@ export default function PromilleRechner() {
           <ErgebnisAktionen
             ergebnisText={`Promille: ${fmtZahl(ergebnis.aktuellPromille)} \u2030 - ${fmtZahl(ergebnis.gesamtAlkoholGramm, 1)} g Alkohol - Nüchtern um: ${ergebnis.nuechternUhrzeit}`}
             seitenTitel="Promillerechner"
+          />
+
+          <AiExplain
+            rechnerName="Promillerechner"
+            eingaben={{ geschlecht, gewichtKg: parseFloat(gewicht.replace(',', '.')) || 0, anzahlGetraenke: getraenke.length, trinkzeitStunden: parseFloat(trinkzeit.replace(',', '.')) || 0 }}
+            ergebnis={{ aktuellPromille: ergebnis.aktuellPromille, maxPromille: ergebnis.maxPromille, gesamtAlkoholGramm: ergebnis.gesamtAlkoholGramm, restStunden: ergebnis.restStunden, zone: ergebnis.zone }}
           />
         </div>
       )}

@@ -5,6 +5,7 @@ import { berechneKwPs, KW_ZU_PS, PS_ZU_KW } from '@/lib/berechnungen/kw-ps';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 export default function KwPsRechner() {
   const [wert, setWert] = useState('100');
@@ -93,6 +94,11 @@ export default function KwPsRechner() {
           <ErgebnisAktionen
             ergebnisText={`${fmt(ergebnis.eingabeWert)} ${ergebnis.eingabeEinheit} = ${fmt(ergebnis.ergebnisWert)} ${ergebnis.ergebnisEinheit}`}
             seitenTitel="kW-PS-Rechner"
+          />
+          <AiExplain
+            rechnerName="kW-PS-Rechner"
+            eingaben={{ wert: nWert, richtung }}
+            ergebnis={{ eingabeWert: ergebnis.eingabeWert, eingabeEinheit: ergebnis.eingabeEinheit, ergebnisWert: ergebnis.ergebnisWert, ergebnisEinheit: ergebnis.ergebnisEinheit }}
           />
         </>
       )}

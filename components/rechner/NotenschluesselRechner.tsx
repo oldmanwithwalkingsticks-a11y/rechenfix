@@ -12,6 +12,7 @@ import {
 } from '@/lib/berechnungen/notenschluessel';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import AiExplain from '@/components/rechner/AiExplain';
 
 type Modus = 'note' | 'schluessel' | 'durchschnitt';
 
@@ -221,6 +222,12 @@ export default function NotenschluesselRechner() {
               <ErgebnisAktionen
                 ergebnisText={`Note: ${noteErgebnis.note} (${noteErgebnis.bezeichnung}) - ${noteErgebnis.prozent} % - ${noteErgebnis.bestanden ? 'Bestanden' : 'Nicht bestanden'}`}
                 seitenTitel="Notenschlüssel"
+              />
+
+              <AiExplain
+                rechnerName="Notenschlüssel-Rechner"
+                eingaben={{ erreichtePunkte: parseDeutscheZahl(erreicht), maximalePunkte: parseDeutscheZahl(maximum), notensystem: system, schluesseltyp: schluessel, bestehensgrenze: parseDeutscheZahl(bestehen) }}
+                ergebnis={{ note: noteErgebnis.note, bezeichnung: noteErgebnis.bezeichnung, prozent: noteErgebnis.prozent, bestanden: noteErgebnis.bestanden }}
               />
             </div>
           )}
