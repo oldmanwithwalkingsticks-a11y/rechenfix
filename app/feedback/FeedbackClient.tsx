@@ -104,7 +104,7 @@ export default function FeedbackClient() {
     const formData = {
       typ: TYPEN.find(t => t.id === aktiverTyp)?.label ?? aktiverTyp,
       felder: buildFelder(),
-      email: email.trim() || undefined,
+      email: email.trim() || '',
     };
     console.log('Submit clicked', formData);
     setSending(true);
@@ -114,13 +114,16 @@ export default function FeedbackClient() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-      console.log('API response:', res.status, await res.text());
+      const data = await res.json();
+      console.log('Response:', res.status, data);
+      if (res.ok) {
+        setGesendet(true);
+        resetForm();
+      }
     } catch (error) {
-      console.error('Fetch error:', error);
+      console.error('Error:', error);
     }
     setSending(false);
-    setGesendet(true);
-    resetForm();
   };
 
   if (gesendet) {
@@ -332,6 +335,7 @@ export default function FeedbackClient() {
 
             {/* Absenden */}
             <button
+              type="button"
               onClick={absenden}
               disabled={!isValid() || sending}
               className={`w-full py-3 rounded-xl font-bold text-white transition-all ${
