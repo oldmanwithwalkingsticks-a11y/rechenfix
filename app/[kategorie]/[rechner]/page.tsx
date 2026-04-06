@@ -142,6 +142,17 @@ export default function RechnerSeite({ params }: Props) {
         />
       </div>
 
+      {/* Print-Header mit Logo — nur im Druck sichtbar */}
+      <div className="hidden print-only mb-4">
+        <div className="flex items-center gap-3 border-b-2 border-gray-800 pb-3">
+          <img src="/logo.svg" alt="Rechenfix" width={36} height={36} />
+          <div>
+            <span className="text-xl font-extrabold text-gray-800">Rechen<span className="text-emerald-600">fix</span><span className="text-sm font-normal text-gray-400">.de</span></span>
+            <span className="block text-xs text-gray-500">Fix gerechnet!</span>
+          </div>
+        </div>
+      </div>
+
       {/* Layout: Hauptinhalt + Sidebar */}
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Hauptinhalt */}
@@ -198,7 +209,7 @@ export default function RechnerSeite({ params }: Props) {
           <AdSlot typ="rectangle" className="mb-8" />
 
           {/* Erklaerung & FAQ — lazy-loaded */}
-          <LazySection>
+          <LazySection className="no-print">
             <section className="card p-6 md:p-8 mb-8">
               <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">So funktioniert der {config.titel}</h2>
 

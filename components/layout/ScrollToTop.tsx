@@ -17,7 +17,7 @@ export default function ScrollToTop() {
     <button
       onClick={nachOben}
       aria-label="Nach oben scrollen"
-      className={`fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full bg-primary-500 hover:bg-primary-600 text-white shadow-lg transition-all duration-300 flex items-center justify-center ${
+      className={`fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full bg-primary-500 hover:bg-primary-600 text-white shadow-lg transition-all duration-300 flex items-center justify-center no-print ${
         sichtbar ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
       }`}
     >

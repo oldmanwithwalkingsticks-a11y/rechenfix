@@ -73,7 +73,8 @@ body {
 }
 
 /* Print-CSS: Nur Rechner + Tabelle anzeigen */
-.no-print { display: block; }
+.no-print { /* hidden in print */ }
+.print-only { display: none !important; }
 @media print {
   header, footer, nav, aside,
   .no-print,
@@ -99,5 +100,8 @@ body {
   .card {
     box-shadow: none !important;
     border: 1px solid #e5e7eb !important;
+  }
+  .print-only {
+    display: block !important;
   }
 }
