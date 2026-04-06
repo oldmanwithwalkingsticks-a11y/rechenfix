@@ -146,8 +146,7 @@ export default function KiRechnerClient() {
             rows={3}
             className="w-full px-5 pt-5 pb-14 text-gray-800 dark:text-gray-200 bg-transparent placeholder-gray-400 dark:placeholder-gray-500 text-base focus:outline-none resize-none"
           />
-          <div className="absolute bottom-3 right-3 flex items-center gap-2">
-            <span className="text-xs text-gray-400 dark:text-gray-500 hidden sm:inline">Enter zum Absenden</span>
+          <div className="absolute bottom-3 right-3">
             <button
               onClick={handleAbsenden}
               disabled={!frage.trim() || laden}
