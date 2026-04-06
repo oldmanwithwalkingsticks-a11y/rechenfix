@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import StromSpartipp from '@/components/rechner/StromSpartipp';
 
 const SCHNELLWAHL = [
   { label: '1 Person', kwh: '1500' },
@@ -90,22 +91,39 @@ export default function StromkostenRechner() {
             ergebnisText={`Stromkosten pro Jahr: ${fmt(ergebnis.kostenJahr)} € (${fmt(ergebnis.kostenMonat)} €/Monat, ${fmt(ergebnis.kostenTag)} €/Tag)`}
             seitenTitel="Stromkostenrechner"
           />
-          <AiExplain
-            rechnerName="Stromkosten-Rechner"
-            eingaben={{
-              verbrauchKwh: parseDeutscheZahl(verbrauch),
-              arbeitspreisCtKwh: parseDeutscheZahl(preisProKwh),
-              grundpreisMonat: parseDeutscheZahl(grundpreis),
-            }}
-            ergebnis={{
-              kostenJahr: ergebnis.kostenJahr,
-              kostenMonat: ergebnis.kostenMonat,
-              kostenTag: ergebnis.kostenTag,
-              arbeitspreis: ergebnis.arbeitspreis,
-              grundpreisJahr: ergebnis.grundpreisJahr,
-              kostenProKwh: ergebnis.kostenProKwh,
-            }}
-          />
+          <div className="flex flex-col sm:flex-row gap-3">
+            <AiExplain
+              rechnerName="Stromkosten-Rechner"
+              eingaben={{
+                verbrauchKwh: parseDeutscheZahl(verbrauch),
+                arbeitspreisCtKwh: parseDeutscheZahl(preisProKwh),
+                grundpreisMonat: parseDeutscheZahl(grundpreis),
+              }}
+              ergebnis={{
+                kostenJahr: ergebnis.kostenJahr,
+                kostenMonat: ergebnis.kostenMonat,
+                kostenTag: ergebnis.kostenTag,
+                arbeitspreis: ergebnis.arbeitspreis,
+                grundpreisJahr: ergebnis.grundpreisJahr,
+                kostenProKwh: ergebnis.kostenProKwh,
+              }}
+            />
+            <StromSpartipp
+              eingaben={{
+                verbrauchKwh: parseDeutscheZahl(verbrauch),
+                arbeitspreisCtKwh: parseDeutscheZahl(preisProKwh),
+                grundpreisMonat: parseDeutscheZahl(grundpreis),
+              }}
+              ergebnis={{
+                kostenJahr: ergebnis.kostenJahr,
+                kostenMonat: ergebnis.kostenMonat,
+                kostenTag: ergebnis.kostenTag,
+                arbeitspreis: ergebnis.arbeitspreis,
+                grundpreisJahr: ergebnis.grundpreisJahr,
+                kostenProKwh: ergebnis.kostenProKwh,
+              }}
+            />
+          </div>
 
           <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden">
             <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700/50">

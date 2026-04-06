@@ -121,19 +121,29 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Fehlende Parameter' }, { status: 400 });
   }
 
-  // "Was wäre wenn" Modus für Brutto-Netto-Rechner
-  const isWasWaereWenn = rechner_name === '__was_waere_wenn__';
-  if (isWasWaereWenn && !frage) {
+  // Spezial-Modi
+  const SPEZIAL_PROMPTS: Record<string, string> = {
+    '__was_waere_wenn__': `Du bist der Finanzberater von rechenfix.de. Der Nutzer hat sein Gehalt mit dem Brutto-Netto-Rechner berechnet und stellt eine Was-wäre-wenn-Frage. Berechne die Antwort basierend auf den aktuellen Eingaben und erkläre den Unterschied konkret in Euro. Nutze die mitgelieferten Eingaben und Ergebnisse als Basis. Wenn der Nutzer nach einer Gehaltserhöhung fragt, berechne das neue Netto. Wenn er nach Steuerklassenwechsel fragt, schätze den Unterschied. Sei konkret mit Zahlen. Max 200 Wörter. Deutsch, Siezen, keine Markdown-Formatierung. Hinweis: Dies ist eine vereinfachte Schätzung, keine Steuerberatung.`,
+    '__strom_spartipp__': `Du bist der Energieberater von rechenfix.de. Der Nutzer hat seine Stromkosten berechnet. Vergleiche seinen Verbrauch mit dem Durchschnitt für seine Haushaltsgröße (1 Pers: 1.500 kWh, 2 Pers: 2.500 kWh, 3 Pers: 3.500 kWh, 4 Pers: 4.500 kWh). Gib genau 3 konkrete Spartipps mit geschätzter Euro-Ersparnis pro Jahr. Beispiele: Standby vermeiden (bis 100€/Jahr), LED-Lampen (bis 80€/Jahr), Kühlschrank A+++  (bis 70€/Jahr), Waschmaschine bei 30° (bis 40€/Jahr), Anbieterwechsel (bis 200€/Jahr). Bei hohem Verbrauch: Balkonkraftwerk erwähnen (ca. 600 kWh/Jahr, Amortisation nach 3-4 Jahren). Beziehe dich auf die konkreten Zahlen des Nutzers. Max 150 Wörter. Deutsch, Siezen, keine Markdown-Formatierung.`,
+  };
+
+  const isSpezial = rechner_name in SPEZIAL_PROMPTS;
+  if (rechner_name === '__was_waere_wenn__' && !frage) {
     return NextResponse.json({ error: 'Fehlende Frage' }, { status: 400 });
   }
 
-  const systemPrompt = isWasWaereWenn
-    ? `Du bist der Finanzberater von rechenfix.de. Der Nutzer hat sein Gehalt mit dem Brutto-Netto-Rechner berechnet und stellt eine Was-wäre-wenn-Frage. Berechne die Antwort basierend auf den aktuellen Eingaben und erkläre den Unterschied konkret in Euro. Nutze die mitgelieferten Eingaben und Ergebnisse als Basis. Wenn der Nutzer nach einer Gehaltserhöhung fragt, berechne das neue Netto. Wenn er nach Steuerklassenwechsel fragt, schätze den Unterschied. Sei konkret mit Zahlen. Max 200 Wörter. Deutsch, Siezen, keine Markdown-Formatierung. Hinweis: Dies ist eine vereinfachte Schätzung, keine Steuerberatung.`
+  const systemPrompt = isSpezial
+    ? SPEZIAL_PROMPTS[rechner_name]
     : (RECHNER_PROMPTS[rechner_name] || DEFAULT_PROMPT);
 
-  const userMessage = isWasWaereWenn
-    ? `Aktuelle Eingaben: ${JSON.stringify(eingaben, null, 2)}\n\nAktuelles Ergebnis: ${JSON.stringify(ergebnis, null, 2)}\n\nFrage des Nutzers: ${frage}`
-    : `Rechner: ${rechner_name}\n\nEingaben: ${JSON.stringify(eingaben, null, 2)}\n\nErgebnis: ${JSON.stringify(ergebnis, null, 2)}`;
+  let userMessage: string;
+  if (rechner_name === '__was_waere_wenn__') {
+    userMessage = `Aktuelle Eingaben: ${JSON.stringify(eingaben, null, 2)}\n\nAktuelles Ergebnis: ${JSON.stringify(ergebnis, null, 2)}\n\nFrage des Nutzers: ${frage}`;
+  } else if (rechner_name === '__strom_spartipp__') {
+    userMessage = `Stromverbrauch und Kosten des Nutzers:\n\nEingaben: ${JSON.stringify(eingaben, null, 2)}\n\nErgebnis: ${JSON.stringify(ergebnis, null, 2)}`;
+  } else {
+    userMessage = `Rechner: ${rechner_name}\n\nEingaben: ${JSON.stringify(eingaben, null, 2)}\n\nErgebnis: ${JSON.stringify(ergebnis, null, 2)}`;
+  }
 
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
