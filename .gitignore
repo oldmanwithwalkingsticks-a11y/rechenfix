@@ -28,6 +28,10 @@ yarn-error.log*
 # local env files
 .env*.local
 
+# sensitive documents
+Dokumente/Claude Api Key.txt
+Dokumente/GitHub Token.txt
+
 # vercel
 .vercel
 
