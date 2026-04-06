@@ -143,8 +143,8 @@ export default function RechnerSeite({ params }: Props) {
       </div>
 
       {/* Print-Header mit Logo — nur im Druck sichtbar */}
-      <div className="hidden print-only mb-4">
-        <div className="flex items-center gap-3 border-b-2 border-gray-800 pb-3">
+      <div className="hidden print-only mb-2">
+        <div className="flex items-center gap-2 border-b border-gray-400 pb-2">
           <img src="/logo.svg" alt="Rechenfix" width={36} height={36} />
           <div>
             <span className="text-xl font-extrabold text-gray-800">Rechen<span className="text-emerald-600">fix</span><span className="text-sm font-normal text-gray-400">.de</span></span>
@@ -167,10 +167,10 @@ export default function RechnerSeite({ params }: Props) {
 
           {/* Rechner */}
           <div className="card p-6 md:p-8 mb-8">
-            <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
+            <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2 print-compact">
               {config.icon} {config.titel}
             </h1>
-            <p className="text-gray-500 dark:text-gray-400 mb-6">{config.beschreibung}</p>
+            <p className="text-gray-500 dark:text-gray-400 mb-6 no-print">{config.beschreibung}</p>
             <RechnerKomponente />
             <FeedbackButtons />
           </div>
