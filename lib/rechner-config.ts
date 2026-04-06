@@ -3007,6 +3007,93 @@ Der Rechner zeigt nicht nur das Problem, sondern auch die Hebel: Homeoffice-Tage
       },
     ],
   },
+  {
+    slug: 'schlaf-rechner',
+    titel: 'Schlafrechner',
+    beschreibung: 'Optimale Schlafenszeit berechnen: Wann ins Bett gehen, um ausgeruht aufzuwachen? Basierend auf 90-Minuten-Schlafzyklen.',
+    kategorie: 'Gesundheit',
+    kategorieSlug: 'gesundheit',
+    metaTitle: 'Schlafrechner — Optimale Schlafenszeit berechnen | Rechenfix',
+    metaDescription: 'Schlafrechner: Wann ins Bett gehen um um 6 Uhr ausgeruht aufzuwachen? ✓ Schlafzyklen à 90 Min. ✓ Empfehlung nach Alter (WHO) ✓ Sofort berechnen.',
+    keywords: ['schlafrechner', 'optimale schlafenszeit', 'schlafzyklen berechnen', 'wann ins bett gehen', 'schlaf rechner', 'schlafphasen', 'rem schlaf', 'wie viel schlaf brauche ich', 'schlafzyklen', 'aufwachzeit berechnen'],
+    icon: '😴',
+    formel: 'Schlafenszeit = Aufwachzeit − (Anzahl Zyklen × 90 Min.) − Einschlafzeit',
+    beispiel: 'Aufwachzeit 6:00 Uhr, 5 Zyklen (7,5 Std.), 15 Min. Einschlafzeit → Schlafenszeit: 22:15 Uhr. Oder 4 Zyklen (6 Std.) → 23:45 Uhr.',
+    erklaerung: `**Schlafrechner — Wann sollten Sie ins Bett gehen?**
+
+Der Schlafrechner berechnet Ihre optimale Schlafenszeit basierend auf Schlafzyklen. Jeder Schlafzyklus dauert etwa 90 Minuten und besteht aus verschiedenen Schlafphasen — Leichtschlaf, Tiefschlaf und REM-Schlaf. Wer zwischen zwei Zyklen aufwacht, fühlt sich deutlich erholter als jemand, der mitten im Tiefschlaf geweckt wird.
+
+**So funktioniert die Berechnung**
+
+Der Rechner nimmt Ihre gewünschte Aufwachzeit und zählt rückwärts in 90-Minuten-Schritten. Zusätzlich wird eine Einschlafzeit von durchschnittlich 15 Minuten berücksichtigt. So erhalten Sie mehrere optimale Schlafenszeiten — je nachdem, wie viele Schlafzyklen Sie durchlaufen möchten.
+
+Beispiel: Sie möchten um 6:00 Uhr aufwachen. Die idealen Schlafenszeiten wären:
+- 21:00 Uhr (6 Zyklen = 9 Stunden Schlaf)
+- 22:30 Uhr (5 Zyklen = 7,5 Stunden Schlaf)
+- 00:00 Uhr (4 Zyklen = 6 Stunden Schlaf)
+- 01:30 Uhr (3 Zyklen = 4,5 Stunden Schlaf)
+
+Jeweils plus 15 Minuten Einschlafzeit, also 20:45, 22:15, 23:45 und 01:15 Uhr.
+
+**Die 5 Schlafphasen erklärt**
+
+Jeder 90-Minuten-Zyklus durchläuft fünf Phasen:
+
+1. **Einschlafphase (N1):** Leichter Übergang vom Wachzustand. Dauert 5–10 Minuten. Sie können leicht geweckt werden und haben manchmal das Gefühl zu fallen.
+
+2. **Leichtschlaf (N2):** Herzfrequenz und Körpertemperatur sinken. Das Gehirn produziert sogenannte Schlafspindeln — kurze Aktivitätsausbrüche, die bei der Gedächtnisbildung helfen. Etwa 50% der Nacht verbringen Sie in dieser Phase.
+
+3. **Tiefschlaf (N3):** Die wichtigste Phase für körperliche Erholung. Wachstumshormone werden ausgeschüttet, das Immunsystem wird gestärkt, Zellen repariert. Wer in dieser Phase geweckt wird, fühlt sich besonders desorientiert und müde.
+
+4. **Übergangsphase:** Kurzer Übergang zurück zum leichteren Schlaf vor der REM-Phase.
+
+5. **REM-Schlaf:** Die Traumphase. Die Augen bewegen sich schnell (Rapid Eye Movement), das Gehirn ist fast so aktiv wie im Wachzustand. Hier werden Erinnerungen konsolidiert und Emotionen verarbeitet. Die REM-Phasen werden im Laufe der Nacht länger — der letzte Zyklus vor dem Aufwachen hat die längste REM-Phase.
+
+**Wie viel Schlaf brauchen Sie?**
+
+Die optimale Schlafdauer hängt vom Alter ab. Die Empfehlungen der National Sleep Foundation und der WHO sind:
+
+| Altersgruppe | Empfohlene Schlafdauer |
+|---|---|
+| Schulkinder (6–13) | 9–11 Stunden |
+| Teenager (14–17) | 8–10 Stunden |
+| Erwachsene (18–64) | 7–9 Stunden |
+| Senioren (65+) | 7–8 Stunden |
+
+Für die meisten Erwachsenen bedeutet das 5 Schlafzyklen (7,5 Stunden) — das ist der optimale Wert, der sowohl genug Tiefschlaf als auch ausreichend REM-Schlaf garantiert.
+
+**Tipps für besseren Schlaf**
+
+Die sogenannte Schlafhygiene hat großen Einfluss auf Ihre Schlafqualität:
+
+- **Regelmäßigkeit:** Gehen Sie jeden Tag zur gleichen Zeit ins Bett — auch am Wochenende. Ihr Körper gewöhnt sich an den Rhythmus.
+- **Bildschirme meiden:** Das blaue Licht von Smartphone und Laptop unterdrückt die Melatonin-Produktion. Mindestens 30 Minuten vor dem Schlafengehen Bildschirme weglegen.
+- **Temperatur:** Die ideale Schlafzimmertemperatur liegt bei 16–18°C. Ein kühler Raum fördert das Einschlafen.
+- **Koffein:** Vermeiden Sie Kaffee und koffeinhaltige Getränke nach 14 Uhr. Die Halbwertszeit von Koffein beträgt 5–6 Stunden.
+- **Alkohol:** Obwohl Alkohol müde macht, stört er die Schlafarchitektur und unterdrückt den REM-Schlaf.`,
+    faq: [
+      {
+        frage: 'Warum sind Schlafzyklen wichtig?',
+        antwort: 'Ein Schlafzyklus dauert ca. 90 Minuten und besteht aus Leichtschlaf, Tiefschlaf und REM-Schlaf. Zwischen zwei Zyklen sind Sie kurz fast wach — der ideale Aufwachzeitpunkt. Mitten im Tiefschlaf geweckt zu werden, fühlt sich dagegen besonders müde an, auch wenn Sie insgesamt genug geschlafen haben.',
+      },
+      {
+        frage: 'Wie lange brauche ich zum Einschlafen?',
+        antwort: 'Der Durchschnitt liegt bei 10–20 Minuten. Der Rechner nimmt als Standard 15 Minuten an, was Sie anpassen können. Brauchen Sie regelmäßig länger als 30 Minuten, könnte das auf Einschlafstörungen hindeuten — sprechen Sie dann mit Ihrem Arzt.',
+      },
+      {
+        frage: 'Ist es okay, nur 6 Stunden zu schlafen?',
+        antwort: '6 Stunden (4 Schlafzyklen) liegen unter der WHO-Empfehlung von 7–9 Stunden für Erwachsene. Kurzfristig ist das tolerierbar, langfristig erhöht chronischer Schlafmangel das Risiko für Herz-Kreislauf-Erkrankungen, Übergewicht und Konzentrationsprobleme.',
+      },
+      {
+        frage: 'Wann ist die beste Zeit zum Einschlafen?',
+        antwort: 'Das hängt von Ihrer Aufwachzeit ab. Für 6:00 Uhr aufstehen empfehlen sich 22:15 Uhr (5 Zyklen = 7,5 Std.) oder 20:45 Uhr (6 Zyklen = 9 Std.). Generell sollten Sie vor Mitternacht einschlafen, da die Tiefschlafphasen in der ersten Nachthälfte am intensivsten sind.',
+      },
+      {
+        frage: 'Soll ich am Wochenende vorschlafen?',
+        antwort: 'Nein — sogenanntes "Social Jetlag" (unter der Woche wenig, am Wochenende viel schlafen) stört den circadianen Rhythmus. Besser ist es, jeden Tag möglichst zur gleichen Zeit aufzustehen. Maximal 30–60 Minuten Abweichung am Wochenende sind in Ordnung.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -3020,6 +3107,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'schlaf-rechner',
   'wahrer-stundenlohn',
   'raucher-rechner',
   'streaming-kosten-rechner',
@@ -3108,6 +3196,7 @@ const verwandteMap: Record<string, string[]> = {
   'streaming-kosten-rechner': ['rabattrechner', 'sparrechner', 'brutto-netto-rechner', 'inflationsrechner'],
   'raucher-rechner': ['bmi-rechner', 'sparrechner', 'lebenszeit-rechner', 'inflationsrechner'],
   'wahrer-stundenlohn': ['stundenlohn-rechner', 'brutto-netto-rechner', 'pendlerpauschale-rechner', 'gehaltsvergleich'],
+  'schlaf-rechner': ['bmi-rechner', 'lebenszeit-rechner', 'tagerechner', 'promillerechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
