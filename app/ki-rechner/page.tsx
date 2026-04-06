@@ -41,41 +41,83 @@ export default function KiRechnerPage() {
 
       <KiRechnerClient />
 
-      {/* SEO Text */}
-      <div className="mt-12 prose prose-sm dark:prose-invert max-w-none">
-        <h2>Wie funktioniert der KI-Rechner?</h2>
-        <p>
-          Der KI-Rechner von Rechenfix.de versteht Ihre Fragen in natürlicher Sprache — so wie Sie sie einem Freund stellen würden.
-          Anstatt Zahlen in Formularfelder einzugeben, schreiben Sie einfach Ihre Frage: &bdquo;Wie viel netto bleiben bei 3.500 Euro brutto?&ldquo;
-          oder &bdquo;Was kostet mich Rauchen pro Jahr bei einer Schachtel am Tag?&ldquo;
-        </p>
-        <p>
-          Die KI analysiert Ihre Frage, erkennt den passenden Rechentyp und liefert Ihnen eine präzise Antwort in Sekundenschnelle.
-          Am Ende jeder Antwort finden Sie einen Link zum detaillierten Rechner, mit dem Sie Ihre Berechnung weiter anpassen können.
-        </p>
+      {/* Wie funktioniert es */}
+      <div className="mt-14 space-y-10">
+        <div>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Wie funktioniert der KI-Rechner?</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl p-5 text-center">
+              <div className="w-10 h-10 mx-auto mb-3 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center text-xl">&#x1F4AC;</div>
+              <h3 className="font-semibold text-gray-800 dark:text-gray-200 text-sm mb-1">1. Frage stellen</h3>
+              <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">Schreiben Sie Ihre Rechenfrage in natürlicher Sprache — so wie Sie sie einem Freund stellen würden.</p>
+            </div>
+            <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl p-5 text-center">
+              <div className="w-10 h-10 mx-auto mb-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center text-xl">&#x1F9E0;</div>
+              <h3 className="font-semibold text-gray-800 dark:text-gray-200 text-sm mb-1">2. KI berechnet</h3>
+              <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">Die KI erkennt den Rechentyp, führt die Berechnung durch und liefert eine präzise Antwort.</p>
+            </div>
+            <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl p-5 text-center">
+              <div className="w-10 h-10 mx-auto mb-3 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center text-xl">&#x1F517;</div>
+              <h3 className="font-semibold text-gray-800 dark:text-gray-200 text-sm mb-1">3. Detailrechner</h3>
+              <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">Am Ende jeder Antwort finden Sie einen Link zum passenden Rechner für exakte Berechnungen.</p>
+            </div>
+          </div>
+        </div>
 
-        <h2>Welche Fragen kann ich stellen?</h2>
-        <p>Der KI-Rechner beantwortet alle Fragen rund um:</p>
-        <ul>
-          <li><strong>Finanzen:</strong> Brutto-Netto, Zinsen, Inflation, Sparplan, Elterngeld, Bürgergeld</li>
-          <li><strong>Alltag:</strong> Prozentrechnung, Dreisatz, Rabatte, Einheiten, Tage zwischen Daten</li>
-          <li><strong>Auto:</strong> Spritkosten, Kfz-Steuer, kW/PS-Umrechnung, Pendlerpauschale</li>
-          <li><strong>Wohnen:</strong> Stromkosten, Heizkosten, Nebenkosten, Miete, Grunderwerbsteuer</li>
-          <li><strong>Gesundheit:</strong> BMI, Promille, Schlafzyklen, Raucherkosten</li>
-          <li><strong>Mathe:</strong> Bruchrechnung, Durchschnitt, Notenschlüssel</li>
-          <li><strong>Arbeit:</strong> Stundenlohn, Arbeitszeit, Urlaubstage, Überstunden</li>
-        </ul>
+        {/* Kategorien */}
+        <div>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Welche Fragen kann ich stellen?</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+            {[
+              { icon: '💰', name: 'Finanzen', items: 'Brutto-Netto, Zinsen, Inflation, Sparplan, Elterngeld' },
+              { icon: '📋', name: 'Alltag', items: 'Prozente, Dreisatz, Rabatte, Einheiten, Tage' },
+              { icon: '🚗', name: 'Auto', items: 'Spritkosten, Kfz-Steuer, kW/PS, Pendlerpauschale' },
+              { icon: '🏠', name: 'Wohnen', items: 'Strom, Heizung, Nebenkosten, Miete, Grunderwerbsteuer' },
+              { icon: '💚', name: 'Gesundheit', items: 'BMI, Promille, Schlafzyklen, Raucherkosten' },
+              { icon: '🎓', name: 'Mathe', items: 'Brüche, Durchschnitt, Notenschlüssel' },
+              { icon: '💼', name: 'Arbeit', items: 'Stundenlohn, Arbeitszeit, Urlaub, Überstunden' },
+            ].map(k => (
+              <div key={k.name} className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-lg">{k.icon}</span>
+                  <span className="font-semibold text-gray-800 dark:text-gray-200 text-sm">{k.name}</span>
+                </div>
+                <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{k.items}</p>
+              </div>
+            ))}
+          </div>
+        </div>
 
-        <h2>Vorteile des KI-Rechners</h2>
-        <p>
-          <strong>Schnell:</strong> Keine Formularfelder, keine Dropdowns — einfach fragen und die Antwort erhalten.
-          <strong>Verständlich:</strong> Die Antwort kommt in einfachem Deutsch, nicht in Fachsprache.
-          <strong>Weiterführend:</strong> Jede Antwort verlinkt auf den passenden Detailrechner für eine exakte Berechnung mit allen Optionen.
-        </p>
-        <p>
-          Der KI-Rechner ist kostenlos, ohne Anmeldung nutzbar und speichert keine persönlichen Daten.
-          Probieren Sie es aus — stellen Sie Ihre erste Frage!
-        </p>
+        {/* Vorteile */}
+        <div>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Vorteile des KI-Rechners</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="flex items-start gap-3 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl p-5">
+              <span className="text-2xl">&#x26A1;</span>
+              <div>
+                <h3 className="font-semibold text-gray-800 dark:text-gray-200 text-sm mb-1">Schnell</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">Keine Formularfelder, keine Dropdowns — einfach fragen und sofort die Antwort erhalten.</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl p-5">
+              <span className="text-2xl">&#x1F4AC;</span>
+              <div>
+                <h3 className="font-semibold text-gray-800 dark:text-gray-200 text-sm mb-1">Verständlich</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">Die Antwort kommt in einfachem Deutsch, nicht in Fachsprache oder Formeln.</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl p-5">
+              <span className="text-2xl">&#x1F517;</span>
+              <div>
+                <h3 className="font-semibold text-gray-800 dark:text-gray-200 text-sm mb-1">Weiterführend</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">Jede Antwort verlinkt auf den passenden Detailrechner für exakte Berechnungen.</p>
+              </div>
+            </div>
+          </div>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-4 text-center">
+            Der KI-Rechner ist kostenlos, ohne Anmeldung nutzbar und speichert keine persönlichen Daten.
+          </p>
+        </div>
       </div>
     </div>
   );
