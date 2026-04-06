@@ -123,6 +123,11 @@ export default function Footer() {
                   Cookie-Einstellungen
                 </button>
               </li>
+              <li>
+                <Link href="/feedback" className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-1">
+                  <span>💬</span> Feedback geben
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

@@ -1,14 +1,29 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function FeedbackButtons() {
   const [feedback, setFeedback] = useState<'ja' | 'nein' | null>(null);
 
-  if (feedback) {
+  if (feedback === 'ja') {
     return (
       <div className="text-center py-4 text-sm text-green-600 dark:text-green-400 font-medium">
         Danke für Ihr Feedback!
+      </div>
+    );
+  }
+
+  if (feedback === 'nein') {
+    return (
+      <div className="text-center py-4 space-y-2">
+        <p className="text-sm text-green-600 dark:text-green-400 font-medium">Danke für Ihr Feedback!</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          Möchten Sie uns mehr verraten?{' '}
+          <Link href="/feedback" className="text-primary-600 dark:text-primary-400 hover:underline font-medium">
+            Zum Feedback-Formular →
+          </Link>
+        </p>
       </div>
     );
   }
