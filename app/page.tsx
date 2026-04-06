@@ -38,7 +38,7 @@ export default function Startseite() {
           rechenfix.de — Fix gerechnet!
         </h1>
         <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto mb-8">
-          Kostenlose Online-Rechner für Finanzen, Alltag, Auto und Gesundheit. Sofort-Ergebnisse ohne Anmeldung.
+          Kostenlose Online-Rechner für Finanzen, Alltag, Auto und Gesundheit. Sofort-Ergebnisse ohne Anmeldung. Deutschlands erster Rechner mit KI-Erklärungen (Fix erklärt).
         </p>
         <SearchBar grosse="gross" className="mx-auto w-full" style={{ maxWidth: '600px' }} />
         <BerechnungsZaehler />
