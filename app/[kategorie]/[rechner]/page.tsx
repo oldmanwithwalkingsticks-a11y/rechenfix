@@ -142,23 +142,12 @@ export default function RechnerSeite({ params }: Props) {
         />
       </div>
 
-      {/* Print-Header mit Logo — nur im Druck sichtbar */}
-      <div className="hidden print-only mb-2">
-        <div className="flex items-center gap-2 border-b border-gray-400 pb-2">
-          <img src="/logo.svg" alt="Rechenfix" width={36} height={36} />
-          <div>
-            <span className="text-xl font-extrabold text-gray-800">Rechen<span className="text-emerald-600">fix</span><span className="text-sm font-normal text-gray-400">.de</span></span>
-            <span className="block text-xs text-gray-500">Fix gerechnet!</span>
-          </div>
-        </div>
-      </div>
-
       {/* Layout: Hauptinhalt + Sidebar */}
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Hauptinhalt */}
         <div className="flex-1 min-w-0">
           {/* Ad Top */}
-          <AdSlot typ="leaderboard" className="mb-6" />
+          <AdSlot typ="leaderboard" className="mb-6 no-print" />
 
           {/* Zurück-Button */}
           <div className="no-print">
@@ -167,6 +156,16 @@ export default function RechnerSeite({ params }: Props) {
 
           {/* Rechner */}
           <div className="card p-6 md:p-8 mb-8">
+            {/* Print-Header mit Logo — nur im Druck sichtbar */}
+            <div className="hidden print-only mb-3">
+              <div className="flex items-center gap-2 pb-2 border-b border-gray-300">
+                <img src="/logo.svg" alt="Rechenfix" width={32} height={32} />
+                <div>
+                  <span className="text-lg font-extrabold text-gray-800">Rechen<span className="text-emerald-600">fix</span><span className="text-sm font-normal text-gray-400">.de</span></span>
+                  <span className="block text-[10px] text-gray-500">Fix gerechnet!</span>
+                </div>
+              </div>
+            </div>
             <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2 print-compact">
               {config.icon} {config.titel}
             </h1>
