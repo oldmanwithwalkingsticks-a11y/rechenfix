@@ -98,7 +98,7 @@ export default function BruttoNettoRechner() {
   }
 
   return (
-    <div className="print:p-0">
+    <div>
       {/* Abrechnungszeitraum */}
       <div className="flex gap-2 mb-6 no-print">
         <button

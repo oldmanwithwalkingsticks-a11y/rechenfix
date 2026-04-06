@@ -73,7 +73,7 @@ body {
 }
 
 /* Print-CSS: Nur Rechner + Tabelle anzeigen */
-.no-print { /* hidden in print */ }
+.no-print { /* hidden via @media print below */ }
 .print-only { display: none !important; }
 @media print {
   header, footer, nav, aside,
@@ -82,6 +82,10 @@ body {
   [class*="AdSlot"],
   [class*="ad-slot"] {
     display: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
   }
   body {
     background: white !important;
