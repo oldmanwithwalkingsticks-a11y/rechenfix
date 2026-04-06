@@ -8,6 +8,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import AiExplain from '@/components/rechner/AiExplain';
 import WasWaereWenn from '@/components/rechner/WasWaereWenn';
 import SchnellCheck from '@/components/rechner/SchnellCheck';
+import GehaltsanalysePdf from '@/components/rechner/GehaltsanalysePdf';
 
 const TABELLEN_WERTE = [1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 6000];
 
@@ -397,6 +398,18 @@ export default function BruttoNettoRechner() {
                 pflegeversicherung: ergebnis.pflegeversicherung,
                 gesamtabzuegeProzent: ergebnis.abzuegeProzent,
               }}
+            />
+            <GehaltsanalysePdf
+              brutto={bruttoNum}
+              steuerklasse={steuerklasse}
+              bundeslandName={bl?.name ?? bundesland}
+              kirchensteuer={kirchensteuer}
+              kirchensteuersatz={kstSatz}
+              kinder={kinder}
+              kvArt={kvArt}
+              kvZusatzbeitrag={kvZusatzbeitragNum}
+              rvBefreit={rvBefreit}
+              ergebnis={ergebnis}
             />
           </div>
         </>
