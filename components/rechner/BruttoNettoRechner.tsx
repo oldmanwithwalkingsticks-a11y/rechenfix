@@ -7,6 +7,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import AiExplain from '@/components/rechner/AiExplain';
 import WasWaereWenn from '@/components/rechner/WasWaereWenn';
+import SchnellCheck from '@/components/rechner/SchnellCheck';
 
 const TABELLEN_WERTE = [1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 6000];
 
@@ -207,6 +208,18 @@ export default function BruttoNettoRechner() {
           </div>
         </div>
       </details>
+
+      {/* KI-Schnellcheck Tipps */}
+      {bruttoNum > 0 && (
+        <SchnellCheck
+          brutto={bruttoNum}
+          steuerklasse={steuerklasse}
+          kirchensteuer={kirchensteuer}
+          kirchensteuersatz={kstSatz}
+          kinder={kinder}
+          kirchensteuerBetrag={ergebnis.kirchensteuer}
+        />
+      )}
 
       {/* Ergebnis */}
       {bruttoNum > 0 && (
