@@ -57,7 +57,7 @@ export default function LieferserviceRechner() {
               value={bestellwert}
               onChange={e => setBestellwert(e.target.value)}
               className="input-field pr-8"
-              placeholder="25"
+              placeholder="z.B. 25,50"
             />
             <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">€</span>
           </div>
@@ -72,7 +72,7 @@ export default function LieferserviceRechner() {
               value={liefergebuehr}
               onChange={e => setLiefergebuehr(e.target.value)}
               className="input-field pr-8"
-              placeholder="3"
+              placeholder="z.B. 2,99"
             />
             <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">€</span>
           </div>
@@ -87,7 +87,7 @@ export default function LieferserviceRechner() {
               value={trinkgeld}
               onChange={e => setTrinkgeld(e.target.value)}
               className="input-field pr-8"
-              placeholder="2"
+              placeholder="z.B. 1,50"
             />
             <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">€</span>
           </div>
