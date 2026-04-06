@@ -5,15 +5,15 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'KI-Rechner — Fragen Sie einfach! | Rechenfix',
   description: 'KI-Rechner: Stellen Sie eine Rechenfrage in natürlicher Sprache und erhalten Sie sofort die Antwort. Kostenlos und auf Deutsch.',
-  alternates: { canonical: 'https://rechenfix.de/ki-rechner' },
+  alternates: { canonical: 'https://www.rechenfix.de/ki-rechner' },
   openGraph: {
     title: 'KI-Rechner — Fragen Sie einfach!',
     description: 'Stellen Sie eine Rechenfrage in natürlicher Sprache und erhalten Sie sofort die Antwort. Kostenlos und auf Deutsch.',
-    url: 'https://rechenfix.de/ki-rechner',
+    url: 'https://www.rechenfix.de/ki-rechner',
     siteName: 'Rechenfix.de',
     type: 'website',
     locale: 'de_DE',
-    images: [{ url: 'https://rechenfix.de/opengraph-image', width: 1200, height: 630, alt: 'KI-Rechner von Rechenfix.de' }],
+    images: [{ url: 'https://www.rechenfix.de/opengraph-image', width: 1200, height: 630, alt: 'KI-Rechner von Rechenfix.de' }],
   },
 };
 

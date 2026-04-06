@@ -5,15 +5,15 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Feedback | Rechenfix.de',
   description: 'Geben Sie uns Feedback zu Rechenfix.de — Rechner-Wünsche, Fehler melden, Bewertungen und Verbesserungsvorschläge.',
-  alternates: { canonical: 'https://rechenfix.de/feedback' },
+  alternates: { canonical: 'https://www.rechenfix.de/feedback' },
   openGraph: {
     title: 'Feedback | Rechenfix.de',
     description: 'Geben Sie uns Feedback zu Rechenfix.de — Rechner-Wünsche, Fehler melden, Bewertungen und Verbesserungsvorschläge.',
-    url: 'https://rechenfix.de/feedback',
+    url: 'https://www.rechenfix.de/feedback',
     siteName: 'Rechenfix.de',
     type: 'website',
     locale: 'de_DE',
-    images: [{ url: 'https://rechenfix.de/opengraph-image', width: 1200, height: 630, alt: 'Feedback | Rechenfix.de' }],
+    images: [{ url: 'https://www.rechenfix.de/opengraph-image', width: 1200, height: 630, alt: 'Feedback | Rechenfix.de' }],
   },
 };
 

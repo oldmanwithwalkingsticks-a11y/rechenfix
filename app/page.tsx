@@ -8,21 +8,21 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Rechenfix.de — Kostenlose Online-Rechner',
   description: 'Kostenlose Online-Rechner für Finanzen, Alltag, Auto und Gesundheit. Sofort-Ergebnisse ohne Anmeldung. Deutschlands erster Rechner mit KI-Erklärungen.',
-  alternates: { canonical: 'https://rechenfix.de' },
+  alternates: { canonical: 'https://www.rechenfix.de' },
   openGraph: {
     title: 'Rechenfix.de — Kostenlose Online-Rechner',
     description: 'Kostenlose Online-Rechner für Finanzen, Alltag, Auto und Gesundheit. Sofort-Ergebnisse ohne Anmeldung. Deutschlands erster Rechner mit KI-Erklärungen.',
-    url: 'https://rechenfix.de',
+    url: 'https://www.rechenfix.de',
     siteName: 'Rechenfix.de',
     type: 'website',
     locale: 'de_DE',
-    images: [{ url: 'https://rechenfix.de/opengraph-image', width: 1200, height: 630, alt: 'Rechenfix.de — Kostenlose Online-Rechner' }],
+    images: [{ url: 'https://www.rechenfix.de/opengraph-image', width: 1200, height: 630, alt: 'Rechenfix.de — Kostenlose Online-Rechner' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Rechenfix.de — Kostenlose Online-Rechner',
     description: 'Kostenlose Online-Rechner für Finanzen, Alltag, Auto und Gesundheit. Sofort-Ergebnisse ohne Anmeldung. Deutschlands erster Rechner mit KI-Erklärungen.',
-    images: ['https://rechenfix.de/opengraph-image'],
+    images: ['https://www.rechenfix.de/opengraph-image'],
   },
 };
 

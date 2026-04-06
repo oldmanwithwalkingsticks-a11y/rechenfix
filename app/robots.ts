@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://rechenfix.de/sitemap.xml',
+    sitemap: 'https://www.rechenfix.de/sitemap.xml',
   };
 }

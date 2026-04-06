@@ -1,7 +1,7 @@
 import { RechnerConfig, KategorieConfig } from './rechner-config';
 import type { Metadata } from 'next';
 
-const SITE_URL = 'https://rechenfix.de';
+const SITE_URL = 'https://www.rechenfix.de';
 const SITE_NAME = 'Rechenfix.de';
 const OG_IMAGE = `${SITE_URL}/opengraph-image`;
 

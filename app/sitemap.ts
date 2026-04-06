@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 import { kategorien, rechner } from '@/lib/rechner-config';
 
-const SITE_URL = 'https://rechenfix.de';
+const SITE_URL = 'https://www.rechenfix.de';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

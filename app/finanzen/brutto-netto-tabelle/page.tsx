@@ -40,14 +40,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Brutto-Netto-Tabelle 2026 — Übersicht | Rechenfix',
     description: 'Brutto-Netto-Tabelle 2026: Alle Gehälter von 1.500 bis 10.000 € im Überblick ✓ Steuerklasse 1, 3 & 4 ✓ Kostenlos & aktuell.',
-    url: 'https://rechenfix.de/finanzen/brutto-netto-tabelle',
+    url: 'https://www.rechenfix.de/finanzen/brutto-netto-tabelle',
     siteName: 'Rechenfix.de',
     type: 'website',
     locale: 'de_DE',
-    images: [{ url: 'https://rechenfix.de/opengraph-image', width: 1200, height: 630, alt: 'Brutto-Netto-Tabelle 2026 — Rechenfix.de' }],
+    images: [{ url: 'https://www.rechenfix.de/opengraph-image', width: 1200, height: 630, alt: 'Brutto-Netto-Tabelle 2026 — Rechenfix.de' }],
   },
   twitter: { card: 'summary_large_image', title: 'Brutto-Netto-Tabelle 2026 — Übersicht | Rechenfix', description: 'Brutto-Netto-Tabelle 2026: Alle Gehälter von 1.500 bis 10.000 € im Überblick ✓ Steuerklasse 1, 3 & 4.' },
-  alternates: { canonical: 'https://rechenfix.de/finanzen/brutto-netto-tabelle' },
+  alternates: { canonical: 'https://www.rechenfix.de/finanzen/brutto-netto-tabelle' },
 };
 
 const faq = [

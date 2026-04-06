@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     template: '%s | Rechenfix.de',
   },
   description: 'Kostenlose Online-Rechner für Finanzen, Alltag, Auto und Gesundheit. Sofort berechnen ohne Anmeldung.',
-  metadataBase: new URL('https://rechenfix.de'),
+  metadataBase: new URL('https://www.rechenfix.de'),
   keywords: ['online rechner', 'kostenloser rechner', 'rechner deutsch', 'rechenfix'],
   authors: [{ name: 'Rechenfix.de' }],
   creator: 'Rechenfix.de',
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     images: ['/opengraph-image'],
   },
   alternates: {
-    canonical: 'https://rechenfix.de',
+    canonical: 'https://www.rechenfix.de',
   },
   robots: {
     index: true,

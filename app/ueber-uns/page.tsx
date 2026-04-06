@@ -4,15 +4,15 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Über Rechenfix.de — Unabhängiges Rechnerportal aus Deutschland',
   description: 'Rechenfix.de ist ein unabhängiges Rechnerportal aus Deutschland. Kostenlose Online-Rechner für Finanzen, Alltag, Wohnen, Mathe und mehr — schnell, privat und ohne Anmeldung.',
-  alternates: { canonical: 'https://rechenfix.de/ueber-uns' },
+  alternates: { canonical: 'https://www.rechenfix.de/ueber-uns' },
   openGraph: {
     title: 'Über Rechenfix.de — Unabhängiges Rechnerportal',
     description: 'Kostenlose Online-Rechner für Finanzen, Alltag, Wohnen, Mathe und mehr. Schnell, privat und ohne Anmeldung.',
-    url: 'https://rechenfix.de/ueber-uns',
+    url: 'https://www.rechenfix.de/ueber-uns',
     siteName: 'Rechenfix.de',
     type: 'website',
     locale: 'de_DE',
-    images: [{ url: 'https://rechenfix.de/opengraph-image', width: 1200, height: 630, alt: 'Über Rechenfix.de' }],
+    images: [{ url: 'https://www.rechenfix.de/opengraph-image', width: 1200, height: 630, alt: 'Über Rechenfix.de' }],
   },
 };
 

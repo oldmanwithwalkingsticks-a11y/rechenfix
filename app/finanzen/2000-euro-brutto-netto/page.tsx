@@ -13,12 +13,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: '2.000 Euro brutto wie viel netto 2026? | Rechenfix',
     description: '2.000€ brutto in netto umrechnen ✓ Alle Steuerklassen ✓ Mit Abzügen ✓ Aktuell für 2026.',
-    url: 'https://rechenfix.de/finanzen/2000-euro-brutto-netto',
+    url: 'https://www.rechenfix.de/finanzen/2000-euro-brutto-netto',
     siteName: 'Rechenfix.de', type: 'website', locale: 'de_DE',
-    images: [{ url: 'https://rechenfix.de/opengraph-image', width: 1200, height: 630, alt: '2.000 Euro brutto netto 2026 — Rechenfix.de' }],
+    images: [{ url: 'https://www.rechenfix.de/opengraph-image', width: 1200, height: 630, alt: '2.000 Euro brutto netto 2026 — Rechenfix.de' }],
   },
   twitter: { card: 'summary_large_image', title: '2.000 Euro brutto wie viel netto 2026? | Rechenfix', description: '2.000€ brutto in netto umrechnen ✓ Alle Steuerklassen ✓ Mit Abzügen ✓ Aktuell für 2026.' },
-  alternates: { canonical: 'https://rechenfix.de/finanzen/2000-euro-brutto-netto' },
+  alternates: { canonical: 'https://www.rechenfix.de/finanzen/2000-euro-brutto-netto' },
 };
 
 const faq = [
