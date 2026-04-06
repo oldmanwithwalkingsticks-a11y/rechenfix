@@ -97,7 +97,7 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link href="/ki-rechner" className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-1">
-                  <span>✨</span> KI-Rechner
+                  <span>🤖</span> KI-Rechner
                 </Link>
               </li>
               <li>
