@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
     try {
       const resend = new Resend(apiKey);
       await resend.emails.send({
-        from: 'Rechenfix <onboarding@resend.dev>',
+        from: 'Rechenfix Feedback <feedback@rechenfix.de>',
         to: 'info@rechenfix.de',
         subject: `[Rechenfix Feedback] Typ: ${typ}`,
         text: textBody,
