@@ -23,13 +23,6 @@ export default function FeedbackSeite() {
       <Breadcrumbs items={[{ label: 'Feedback' }]} />
 
       <div className="card p-6 md:p-8">
-        <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
-          Ihr Feedback macht uns besser
-        </h1>
-        <p className="text-gray-600 dark:text-gray-400 mb-8">
-          Wählen Sie eine Kategorie und teilen Sie uns Ihre Gedanken mit. Jedes Feedback hilft uns, Rechenfix zu verbessern.
-        </p>
-
         <FeedbackClient />
       </div>
     </div>

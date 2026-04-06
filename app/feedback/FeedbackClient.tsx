@@ -129,7 +129,6 @@ export default function FeedbackClient() {
   if (gesendet) {
     return (
       <div className="text-center py-16">
-        <div className="text-6xl mb-4">✅</div>
         <h2 className="text-2xl font-bold text-green-700 dark:text-green-400 mb-2">Vielen Dank für Ihr Feedback!</h2>
         <p className="text-gray-600 dark:text-gray-400 mb-6">Wir lesen jede Nachricht und verbessern Rechenfix damit stetig.</p>
         <button
@@ -144,6 +143,13 @@ export default function FeedbackClient() {
 
   return (
     <div>
+      <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
+        Ihr Feedback macht uns besser
+      </h1>
+      <p className="text-gray-600 dark:text-gray-400 mb-8">
+        Wählen Sie eine Kategorie und teilen Sie uns Ihre Gedanken mit. Jedes Feedback hilft uns, Rechenfix zu verbessern.
+      </p>
+
       {/* Typ-Kacheln */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
         {TYPEN.map(typ => (
