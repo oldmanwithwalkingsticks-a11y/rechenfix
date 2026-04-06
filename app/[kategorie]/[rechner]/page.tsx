@@ -133,12 +133,14 @@ export default function RechnerSeite({ params }: Props) {
       <StructuredData data={generateBreadcrumbSchema(breadcrumbItems)} />
 
       {/* Breadcrumbs */}
-      <Breadcrumbs
-        items={[
-          { label: config.kategorie, href: `/${config.kategorieSlug}` },
-          { label: config.titel },
-        ]}
-      />
+      <div className="print:hidden">
+        <Breadcrumbs
+          items={[
+            { label: config.kategorie, href: `/${config.kategorieSlug}` },
+            { label: config.titel },
+          ]}
+        />
+      </div>
 
       {/* Layout: Hauptinhalt + Sidebar */}
       <div className="flex flex-col lg:flex-row gap-8">
@@ -148,7 +150,9 @@ export default function RechnerSeite({ params }: Props) {
           <AdSlot typ="leaderboard" className="mb-6" />
 
           {/* Zurück-Button */}
-          <ZurueckButton fallbackHref={`/${config.kategorieSlug}`} label={`Zurück`} />
+          <div className="print:hidden">
+            <ZurueckButton fallbackHref={`/${config.kategorieSlug}`} label={`Zurück`} />
+          </div>
 
           {/* Rechner */}
           <div className="card p-6 md:p-8 mb-8">
