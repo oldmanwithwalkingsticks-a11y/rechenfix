@@ -10,6 +10,20 @@ export interface BruttoNettoEingabe {
   kvPrivatBeitrag: number;
   rvBefreit: boolean;
   abrechnungszeitraum: 'monat' | 'jahr';
+  weihnachtsgeld?: number; // Brutto-Weihnachtsgeld (0 = keins)
+}
+
+export interface WeihnachtsgeldErgebnis {
+  brutto: number;
+  lohnsteuer: number;
+  solidaritaet: number;
+  kirchensteuer: number;
+  krankenversicherung: number;
+  rentenversicherung: number;
+  arbeitslosenversicherung: number;
+  pflegeversicherung: number;
+  abzuege: number;
+  netto: number;
 }
 
 export interface BruttoNettoErgebnis {
@@ -29,6 +43,7 @@ export interface BruttoNettoErgebnis {
   sozialabgabenGesamt: number;
   nettoProStunde: number;
   abzuegeProzent: number;
+  weihnachtsgeld?: WeihnachtsgeldErgebnis;
 }
 
 export const BUNDESLAENDER = [
@@ -75,6 +90,26 @@ function berechneLohnsteuer(brutto: number, steuerklasse: number): number {
     1: 1.0, 2: 0.85, 3: 0.55, 4: 1.0, 5: 1.55, 6: 1.25,
   };
   return Math.round(sk1Steuer * (faktoren[steuerklasse] ?? 1) * 100) / 100;
+}
+
+// Berechne Jahressteuer direkt aus Jahresbrutto (für Weihnachtsgeld)
+function berechneJahressteuer(jahresBrutto: number, steuerklasse: number): number {
+  if (jahresBrutto <= 12096) return 0;
+  const zuVersteuern = jahresBrutto - 12096;
+  let steuer = 0;
+  if (zuVersteuern <= 17442) {
+    steuer = zuVersteuern * 0.14;
+  } else if (zuVersteuern <= 54057) {
+    steuer = 17442 * 0.14 + (zuVersteuern - 17442) * 0.2397;
+  } else if (zuVersteuern <= 243714) {
+    steuer = 17442 * 0.14 + 36615 * 0.2397 + (zuVersteuern - 54057) * 0.42;
+  } else {
+    steuer = 17442 * 0.14 + 36615 * 0.2397 + 189657 * 0.42 + (zuVersteuern - 243714) * 0.45;
+  }
+  const faktoren: Record<number, number> = {
+    1: 1.0, 2: 0.85, 3: 0.55, 4: 1.0, 5: 1.55, 6: 1.25,
+  };
+  return Math.round(steuer * (faktoren[steuerklasse] ?? 1) * 100) / 100;
 }
 
 // Beitragsbemessungsgrenzen 2025
@@ -137,6 +172,70 @@ export function berechneBruttoNetto(eingabe: BruttoNettoEingabe): BruttoNettoErg
   const gesamtAbzuege = steuernGesamt + sozialabgabenGesamt;
   const nettoMonat = Math.round((brutto - gesamtAbzuege) * 100) / 100;
 
+  // Weihnachtsgeld-Berechnung
+  let weihnachtsgeldErgebnis: WeihnachtsgeldErgebnis | undefined;
+  const wgBrutto = eingabe.weihnachtsgeld ?? 0;
+
+  if (wgBrutto > 0) {
+    // Steuer: Jahressteuer mit WG minus Jahressteuer ohne WG
+    const jahresBruttoOhne = brutto * 12;
+    const jahresBruttoMit = jahresBruttoOhne + wgBrutto;
+    const jahressteuerOhne = berechneJahressteuer(jahresBruttoOhne, eingabe.steuerklasse);
+    const jahressteuerMit = berechneJahressteuer(jahresBruttoMit, eingabe.steuerklasse);
+    const wgLohnsteuer = Math.round((jahressteuerMit - jahressteuerOhne) * 100) / 100;
+
+    // Soli auf WG-Lohnsteuer
+    const wgJahresLst = jahressteuerMit;
+    const wgSolidaritaet = wgJahresLst > 18130
+      ? Math.round(wgLohnsteuer * 0.055 * 100) / 100
+      : 0;
+
+    // Kirchensteuer auf WG
+    const wgKirchensteuer = eingabe.kirchensteuer
+      ? Math.round(wgLohnsteuer * (kstSatz / 100) * 100) / 100
+      : 0;
+
+    // SV-Beiträge auf Weihnachtsgeld (reguläre Sätze, BBG beachten)
+    let wgKV: number;
+    if (eingabe.kvArt === 'privat') {
+      wgKV = 0; // PKV: kein zusätzlicher Beitrag
+    } else {
+      const kvBrutto = Math.min(wgBrutto, Math.max(0, BBG_KV * 12 - brutto * 12) > 0 ? wgBrutto : Math.max(0, BBG_KV - brutto));
+      const kvBasis = Math.round(kvBrutto * 0.073 * 100) / 100;
+      const kvZusatz = Math.round(kvBrutto * (eingabe.kvZusatzbeitrag / 200) * 100) / 100;
+      wgKV = kvBasis + kvZusatz;
+    }
+
+    const wgRvBrutto = Math.min(wgBrutto, Math.max(0, bbgRv - brutto));
+    const wgRV = eingabe.rvBefreit ? 0 : Math.round(wgRvBrutto * 0.093 * 100) / 100;
+
+    const wgAvBrutto = Math.min(wgBrutto, Math.max(0, bbgRv - brutto));
+    const wgAV = Math.round(wgAvBrutto * 0.013 * 100) / 100;
+
+    const wgPvBrutto = Math.min(wgBrutto, Math.max(0, BBG_KV - brutto));
+    const wgPvBasis = Math.round(wgPvBrutto * 0.017 * 100) / 100;
+    const wgPvZuschlag = eingabe.kinderfreibetraege === 0
+      ? Math.round(wgPvBrutto * 0.006 * 100) / 100
+      : 0;
+    const wgPV = wgPvBasis + wgPvZuschlag;
+
+    const wgAbzuege = wgLohnsteuer + wgSolidaritaet + wgKirchensteuer + wgKV + wgRV + wgAV + wgPV;
+    const wgNetto = Math.round((wgBrutto - wgAbzuege) * 100) / 100;
+
+    weihnachtsgeldErgebnis = {
+      brutto: wgBrutto,
+      lohnsteuer: wgLohnsteuer,
+      solidaritaet: wgSolidaritaet,
+      kirchensteuer: wgKirchensteuer,
+      krankenversicherung: Math.round(wgKV * 100) / 100,
+      rentenversicherung: wgRV,
+      arbeitslosenversicherung: wgAV,
+      pflegeversicherung: Math.round(wgPV * 100) / 100,
+      abzuege: Math.round(wgAbzuege * 100) / 100,
+      netto: wgNetto,
+    };
+  }
+
   return {
     bruttoMonat: Math.round(brutto * 100) / 100,
     bruttoJahr: Math.round(brutto * 12 * 100) / 100,
@@ -154,5 +253,6 @@ export function berechneBruttoNetto(eingabe: BruttoNettoEingabe): BruttoNettoErg
     sozialabgabenGesamt: Math.round(sozialabgabenGesamt * 100) / 100,
     nettoProStunde: Math.round(nettoMonat / 160 * 100) / 100,
     abzuegeProzent: brutto > 0 ? Math.round((gesamtAbzuege / brutto) * 1000) / 10 : 0,
+    weihnachtsgeld: weihnachtsgeldErgebnis,
   };
 }

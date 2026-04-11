@@ -39,6 +39,9 @@ export default function BruttoNettoRechner() {
   const [rvBefreit, setRvBefreit] = useState(false);
   const [abrechnungszeitraum, setAbrechnungszeitraum] = useState<'monat' | 'jahr'>('monat');
   const [kopiert, setKopiert] = useState(false);
+  const [weihnachtsgeldAktiv, setWeihnachtsgeldAktiv] = useState(false);
+  const [weihnachtsgeldHoehe, setWeihnachtsgeldHoehe] = useState<'100' | '50' | 'eigen'>('100');
+  const [weihnachtsgeldBetrag, setWeihnachtsgeldBetrag] = useState('');
 
 
   const bruttoNum = parseDeutscheZahl(brutto);
@@ -47,12 +50,22 @@ export default function BruttoNettoRechner() {
 
   const kvZusatzbeitragNum = parseDeutscheZahl(kvZusatzbeitrag);
   const kvPrivatBeitragNum = parseDeutscheZahl(kvPrivatBeitrag);
+  const weihnachtsgeldBetragNum = parseDeutscheZahl(weihnachtsgeldBetrag);
+
+  const weihnachtsgeldWert = useMemo(() => {
+    if (!weihnachtsgeldAktiv) return 0;
+    const monatsBrutto = abrechnungszeitraum === 'jahr' ? bruttoNum / 12 : bruttoNum;
+    if (weihnachtsgeldHoehe === '100') return monatsBrutto;
+    if (weihnachtsgeldHoehe === '50') return Math.round(monatsBrutto * 50) / 100;
+    return weihnachtsgeldBetragNum;
+  }, [weihnachtsgeldAktiv, weihnachtsgeldHoehe, weihnachtsgeldBetragNum, bruttoNum, abrechnungszeitraum]);
 
   const ergebnis = useMemo(() => berechneBruttoNetto({
     bruttoMonat: bruttoNum, steuerklasse, kirchensteuer, kirchensteuersatz: kstSatz,
     kinderfreibetraege: kinder, bundesland, kvArt, kvZusatzbeitrag: kvZusatzbeitragNum,
     kvPrivatBeitrag: kvPrivatBeitragNum, rvBefreit, abrechnungszeitraum,
-  }), [bruttoNum, steuerklasse, kirchensteuer, kstSatz, kinder, bundesland, kvArt, kvZusatzbeitragNum, kvPrivatBeitragNum, rvBefreit, abrechnungszeitraum]);
+    weihnachtsgeld: weihnachtsgeldWert > 0 ? weihnachtsgeldWert : undefined,
+  }), [bruttoNum, steuerklasse, kirchensteuer, kstSatz, kinder, bundesland, kvArt, kvZusatzbeitragNum, kvPrivatBeitragNum, rvBefreit, abrechnungszeitraum, weihnachtsgeldWert]);
 
   const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const pct = (n: number, base: number) => base > 0 ? ((n / base) * 100).toFixed(1) : '0.0';
@@ -64,7 +77,10 @@ export default function BruttoNettoRechner() {
 
   function handleCopy() {
     const blName = bl?.name || bundesland;
-    const text = `Brutto: ${fmt(ergebnis.bruttoMonat)} € → Netto: ${fmt(ergebnis.nettoMonat)} € (${skLabel(steuerklasse)}, ${blName}, 2026)`;
+    let text = `Brutto: ${fmt(ergebnis.bruttoMonat)} € → Netto: ${fmt(ergebnis.nettoMonat)} € (${skLabel(steuerklasse)}, ${blName}, 2026)`;
+    if (ergebnis.weihnachtsgeld) {
+      text += ` | Weihnachtsgeld: ${fmt(ergebnis.weihnachtsgeld.brutto)} € brutto → ${fmt(ergebnis.weihnachtsgeld.netto)} € netto`;
+    }
     navigator.clipboard.writeText(text);
     setKopiert(true);
     setTimeout(() => setKopiert(false), 2000);
@@ -157,7 +173,7 @@ export default function BruttoNettoRechner() {
           <svg className="w-4 h-4 group-open:rotate-90 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
-          Erweiterte Optionen (KV, RV, Kirchensteuer)
+          Erweiterte Optionen (KV, RV, Kirchensteuer, Weihnachtsgeld)
         </summary>
         <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 bg-gray-50 dark:bg-gray-700/30 rounded-xl p-4">
           <div>
@@ -192,6 +208,54 @@ export default function BruttoNettoRechner() {
               <input type="checkbox" checked={rvBefreit} onChange={e => setRvBefreit(e.target.checked)} className="w-5 h-5 rounded text-primary-500 focus:ring-primary-200" />
               <span className="text-sm text-gray-700 dark:text-gray-300">RV-befreit (z. B. Beamte)</span>
             </label>
+          </div>
+          <div className="sm:col-span-2 border-t border-gray-200 dark:border-gray-600 pt-4 mt-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Weihnachtsgeld</label>
+            <div className="flex gap-2 mb-3">
+              <button
+                type="button"
+                onClick={() => setWeihnachtsgeldAktiv(false)}
+                className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${!weihnachtsgeldAktiv ? 'bg-accent-500 text-white shadow-md' : 'bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300 hover:bg-gray-200'}`}
+              >
+                Nein
+              </button>
+              <button
+                type="button"
+                onClick={() => setWeihnachtsgeldAktiv(true)}
+                className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${weihnachtsgeldAktiv ? 'bg-accent-500 text-white shadow-md' : 'bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300 hover:bg-gray-200'}`}
+              >
+                Ja
+              </button>
+            </div>
+            {weihnachtsgeldAktiv && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Höhe</label>
+                  <select
+                    value={weihnachtsgeldHoehe}
+                    onChange={e => setWeihnachtsgeldHoehe(e.target.value as '100' | '50' | 'eigen')}
+                    className="input-field"
+                  >
+                    <option value="100">Volles 13. Gehalt (100%)</option>
+                    <option value="50">Halbes (50%)</option>
+                    <option value="eigen">Eigener Betrag</option>
+                  </select>
+                </div>
+                {weihnachtsgeldHoehe === 'eigen' && (
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Betrag (brutto)</label>
+                    <NummerEingabe value={weihnachtsgeldBetrag} onChange={setWeihnachtsgeldBetrag} placeholder="z.B. 2000" einheit="€" />
+                  </div>
+                )}
+                {weihnachtsgeldHoehe !== 'eigen' && weihnachtsgeldWert > 0 && (
+                  <div className="flex items-end">
+                    <p className="text-sm text-gray-500 dark:text-gray-400 pb-2">
+                      = {fmt(weihnachtsgeldWert)} € brutto
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </details>
@@ -281,6 +345,37 @@ export default function BruttoNettoRechner() {
               </tbody>
             </table>
           </div>
+
+          {/* Weihnachtsgeld-Ergebnis */}
+          {ergebnis.weihnachtsgeld && (
+            <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-5 mt-4">
+              <h3 className="font-bold text-amber-800 dark:text-amber-300 mb-3 flex items-center gap-2">
+                <span>🎄</span> Weihnachtsgeld-Abrechnung
+              </h3>
+              <table className="w-full text-sm">
+                <tbody>
+                  <Zeile label="Weihnachtsgeld (brutto)" wert={ergebnis.weihnachtsgeld.brutto} hervorgehoben />
+                  <tr><td colSpan={3} className="pt-3 pb-1 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Steuern</td></tr>
+                  <Zeile label="Lohnsteuer" wert={-ergebnis.weihnachtsgeld.lohnsteuer} brutto={ergebnis.weihnachtsgeld.brutto} />
+                  <Zeile label="Solidaritätszuschlag" wert={-ergebnis.weihnachtsgeld.solidaritaet} brutto={ergebnis.weihnachtsgeld.brutto} />
+                  {ergebnis.weihnachtsgeld.kirchensteuer > 0 && <Zeile label={`Kirchensteuer (${kstSatz}%)`} wert={-ergebnis.weihnachtsgeld.kirchensteuer} brutto={ergebnis.weihnachtsgeld.brutto} />}
+                  <tr><td colSpan={3} className="pt-3 pb-1 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Sozialabgaben</td></tr>
+                  <Zeile label="Krankenversicherung" wert={-ergebnis.weihnachtsgeld.krankenversicherung} brutto={ergebnis.weihnachtsgeld.brutto} />
+                  <Zeile label="Rentenversicherung" wert={-ergebnis.weihnachtsgeld.rentenversicherung} brutto={ergebnis.weihnachtsgeld.brutto} />
+                  <Zeile label="Arbeitslosenversicherung" wert={-ergebnis.weihnachtsgeld.arbeitslosenversicherung} brutto={ergebnis.weihnachtsgeld.brutto} />
+                  <Zeile label="Pflegeversicherung" wert={-ergebnis.weihnachtsgeld.pflegeversicherung} brutto={ergebnis.weihnachtsgeld.brutto} />
+                  <tr className="border-t-2 border-amber-300 dark:border-amber-500/40 font-bold text-amber-800 dark:text-amber-300">
+                    <td className="py-2">Weihnachtsgeld (netto)</td>
+                    <td className="py-2 text-right">{fmt(ergebnis.weihnachtsgeld.netto)} &euro;</td>
+                    <td className="py-2 text-right text-xs">{pct(ergebnis.weihnachtsgeld.netto, ergebnis.weihnachtsgeld.brutto)}%</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p className="text-xs text-amber-600 dark:text-amber-400/70 mt-3">
+                Berechnung nach der Jahreslohnsteuer-Differenzmethode: Jahressteuer mit Weihnachtsgeld minus Jahressteuer ohne Weihnachtsgeld.
+              </p>
+            </div>
+          )}
 
           <p className="text-xs text-gray-400 dark:text-gray-500 mt-4 no-print">
             * Vereinfachte Berechnung zur Orientierung. Für eine exakte Berechnung wenden Sie sich an Ihren Steuerberater oder nutzen Sie ELSTER.
