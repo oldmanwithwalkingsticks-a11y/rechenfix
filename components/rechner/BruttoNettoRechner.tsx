@@ -347,35 +347,95 @@ export default function BruttoNettoRechner() {
           </div>
 
           {/* Weihnachtsgeld-Ergebnis */}
-          {ergebnis.weihnachtsgeld && (
-            <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-5 mt-4">
-              <h3 className="font-bold text-amber-800 dark:text-amber-300 mb-3 flex items-center gap-2">
-                <span>🎄</span> Weihnachtsgeld-Abrechnung
-              </h3>
-              <table className="w-full text-sm">
-                <tbody>
-                  <Zeile label="Weihnachtsgeld (brutto)" wert={ergebnis.weihnachtsgeld.brutto} hervorgehoben />
-                  <tr><td colSpan={3} className="pt-3 pb-1 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Steuern</td></tr>
-                  <Zeile label="Lohnsteuer" wert={-ergebnis.weihnachtsgeld.lohnsteuer} brutto={ergebnis.weihnachtsgeld.brutto} />
-                  <Zeile label="Solidaritätszuschlag" wert={-ergebnis.weihnachtsgeld.solidaritaet} brutto={ergebnis.weihnachtsgeld.brutto} />
-                  {ergebnis.weihnachtsgeld.kirchensteuer > 0 && <Zeile label={`Kirchensteuer (${kstSatz}%)`} wert={-ergebnis.weihnachtsgeld.kirchensteuer} brutto={ergebnis.weihnachtsgeld.brutto} />}
-                  <tr><td colSpan={3} className="pt-3 pb-1 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Sozialabgaben</td></tr>
-                  <Zeile label="Krankenversicherung" wert={-ergebnis.weihnachtsgeld.krankenversicherung} brutto={ergebnis.weihnachtsgeld.brutto} />
-                  <Zeile label="Rentenversicherung" wert={-ergebnis.weihnachtsgeld.rentenversicherung} brutto={ergebnis.weihnachtsgeld.brutto} />
-                  <Zeile label="Arbeitslosenversicherung" wert={-ergebnis.weihnachtsgeld.arbeitslosenversicherung} brutto={ergebnis.weihnachtsgeld.brutto} />
-                  <Zeile label="Pflegeversicherung" wert={-ergebnis.weihnachtsgeld.pflegeversicherung} brutto={ergebnis.weihnachtsgeld.brutto} />
-                  <tr className="border-t-2 border-amber-300 dark:border-amber-500/40 font-bold text-amber-800 dark:text-amber-300">
-                    <td className="py-2">Weihnachtsgeld (netto)</td>
-                    <td className="py-2 text-right">{fmt(ergebnis.weihnachtsgeld.netto)} &euro;</td>
-                    <td className="py-2 text-right text-xs">{pct(ergebnis.weihnachtsgeld.netto, ergebnis.weihnachtsgeld.brutto)}%</td>
-                  </tr>
-                </tbody>
-              </table>
-              <p className="text-xs text-amber-600 dark:text-amber-400/70 mt-3">
-                Berechnung nach der Jahreslohnsteuer-Differenzmethode: Jahressteuer mit Weihnachtsgeld minus Jahressteuer ohne Weihnachtsgeld.
-              </p>
-            </div>
-          )}
+          {ergebnis.weihnachtsgeld && (() => {
+            const wg = ergebnis.weihnachtsgeld!;
+            const wgAbzuegePct = wg.brutto > 0 ? Math.round((wg.abzuege / wg.brutto) * 1000) / 10 : 0;
+            const wgSteuern = wg.lohnsteuer + wg.solidaritaet + wg.kirchensteuer;
+            const effektiverSteuersatz = wg.brutto > 0 ? Math.round((wgSteuern / wg.brutto) * 1000) / 10 : 0;
+            const regelSteuersatz = ergebnis.bruttoMonat > 0 ? Math.round((ergebnis.steuernGesamt / ergebnis.bruttoMonat) * 1000) / 10 : 0;
+            const jahresBruttoMitWg = ergebnis.bruttoJahr + wg.brutto;
+            const jahresNettoMitWg = ergebnis.nettoJahr + wg.netto;
+
+            return (
+              <>
+                {/* Sonderzahlung Zusammenfassung */}
+                <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-5 mt-4">
+                  <h3 className="font-bold text-amber-800 dark:text-amber-300 mb-4 flex items-center gap-2">
+                    <span>🎄</span> Sonderzahlung Weihnachtsgeld
+                  </h3>
+
+                  {/* Übersichtskarten */}
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+                    <div className="bg-white dark:bg-gray-800/60 rounded-lg p-3 text-center">
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Brutto</p>
+                      <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmt(wg.brutto)} €</p>
+                    </div>
+                    <div className="bg-white dark:bg-gray-800/60 rounded-lg p-3 text-center">
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Abzüge</p>
+                      <p className="text-lg font-bold text-red-500 dark:text-red-400">{fmt(wg.abzuege)} €</p>
+                      <p className="text-xs text-gray-400">{wgAbzuegePct}%</p>
+                    </div>
+                    <div className="bg-white dark:bg-gray-800/60 rounded-lg p-3 text-center">
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Netto</p>
+                      <p className="text-lg font-bold text-green-600 dark:text-green-400">{fmt(wg.netto)} €</p>
+                    </div>
+                    <div className="bg-white dark:bg-gray-800/60 rounded-lg p-3 text-center">
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Eff. Steuersatz</p>
+                      <p className="text-lg font-bold text-amber-700 dark:text-amber-300">{effektiverSteuersatz}%</p>
+                    </div>
+                  </div>
+
+                  {/* Hinweis Progression */}
+                  {effektiverSteuersatz > regelSteuersatz && (
+                    <div className="bg-amber-100 dark:bg-amber-500/20 rounded-lg px-4 py-2.5 mb-4 text-sm text-amber-800 dark:text-amber-200">
+                      <strong>Hinweis:</strong> Der effektive Steuersatz auf das Weihnachtsgeld ({effektiverSteuersatz}%) ist höher als auf Ihr reguläres Gehalt ({regelSteuersatz}%). Das liegt an der Steuerprogression — die Sonderzahlung wird zum Jahresgehalt addiert und fällt damit in eine höhere Steuerzone.
+                    </div>
+                  )}
+
+                  {/* Detaillierte Aufschlüsselung */}
+                  <table className="w-full text-sm">
+                    <tbody>
+                      <Zeile label="Weihnachtsgeld (brutto)" wert={wg.brutto} hervorgehoben />
+                      <tr><td colSpan={3} className="pt-3 pb-1 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Steuern</td></tr>
+                      <Zeile label="Lohnsteuer" wert={-wg.lohnsteuer} brutto={wg.brutto} />
+                      <Zeile label="Solidaritätszuschlag" wert={-wg.solidaritaet} brutto={wg.brutto} />
+                      {wg.kirchensteuer > 0 && <Zeile label={`Kirchensteuer (${kstSatz}%)`} wert={-wg.kirchensteuer} brutto={wg.brutto} />}
+                      <tr><td colSpan={3} className="pt-3 pb-1 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Sozialabgaben</td></tr>
+                      <Zeile label="Krankenversicherung" wert={-wg.krankenversicherung} brutto={wg.brutto} />
+                      <Zeile label="Rentenversicherung" wert={-wg.rentenversicherung} brutto={wg.brutto} />
+                      <Zeile label="Arbeitslosenversicherung" wert={-wg.arbeitslosenversicherung} brutto={wg.brutto} />
+                      <Zeile label="Pflegeversicherung" wert={-wg.pflegeversicherung} brutto={wg.brutto} />
+                      <tr className="border-t-2 border-amber-300 dark:border-amber-500/40 font-bold text-amber-800 dark:text-amber-300">
+                        <td className="py-2">Weihnachtsgeld (netto)</td>
+                        <td className="py-2 text-right">{fmt(wg.netto)} &euro;</td>
+                        <td className="py-2 text-right text-xs">{pct(wg.netto, wg.brutto)}%</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <p className="text-xs text-amber-600 dark:text-amber-400/70 mt-3">
+                    Berechnung nach der Jahreslohnsteuer-Differenzmethode: Jahressteuer mit Weihnachtsgeld minus Jahressteuer ohne Weihnachtsgeld.
+                  </p>
+                </div>
+
+                {/* Jahresübersicht inkl. Weihnachtsgeld */}
+                <div className="bg-primary-50 dark:bg-primary-500/10 border border-primary-200 dark:border-primary-500/30 rounded-xl p-5 mt-4">
+                  <h3 className="font-bold text-primary-800 dark:text-primary-300 mb-3">Jahresübersicht inkl. Weihnachtsgeld</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Jahresbrutto inkl. Weihnachtsgeld</p>
+                      <p className="text-2xl font-bold text-gray-800 dark:text-gray-100">{fmt(jahresBruttoMitWg)} €</p>
+                      <p className="text-xs text-gray-400 mt-1">{fmt(ergebnis.bruttoJahr)} € Gehalt + {fmt(wg.brutto)} € Weihnachtsgeld</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Jahresnetto inkl. Weihnachtsgeld</p>
+                      <p className="text-2xl font-bold text-green-600 dark:text-green-400">{fmt(jahresNettoMitWg)} €</p>
+                      <p className="text-xs text-gray-400 mt-1">{fmt(ergebnis.nettoJahr)} € Gehalt + {fmt(wg.netto)} € Weihnachtsgeld</p>
+                    </div>
+                  </div>
+                </div>
+              </>
+            );
+          })()}
 
           <p className="text-xs text-gray-400 dark:text-gray-500 mt-4 no-print">
             * Vereinfachte Berechnung zur Orientierung. Für eine exakte Berechnung wenden Sie sich an Ihren Steuerberater oder nutzen Sie ELSTER.
