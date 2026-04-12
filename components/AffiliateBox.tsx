@@ -1,6 +1,7 @@
 'use client';
 
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
+import { usePathname } from 'next/navigation';
 import { useCookieConsent } from '@/components/cookie/CookieConsentProvider';
 
 // --- Affiliate-Programm-Daten ---
@@ -118,20 +119,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
 
 // --- Hilfsfunktionen ---
 
-function buildAwinUrl(program: typeof AFFILIATE_PROGRAMS[ProgramId]): string {
-  let clickref = 'startseite';
-  if (typeof window !== 'undefined') {
-    const pathParts = window.location.pathname.split('/');
-    const slug = pathParts[pathParts.length - 1] || pathParts[pathParts.length - 2] || '';
-    clickref = slug
-      .split('-')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join('-') || 'startseite';
-  }
-
-  // Awin-Limit: max 50 Zeichen, nur alphanumerisch + Bindestrich
-  clickref = clickref.replace(/[^a-zA-Z0-9-]/g, '').slice(0, 50);
-
+function buildAwinUrl(program: typeof AFFILIATE_PROGRAMS[ProgramId], clickref: string): string {
   let url = `${program.baseUrl}&clickref=${encodeURIComponent(clickref)}`;
 
   if (program.deeplink) {
@@ -160,8 +148,20 @@ interface AffiliateBoxProps {
 export function AffiliateBox({ programId, context, variant = 'full' }: AffiliateBoxProps) {
   const program = AFFILIATE_PROGRAMS[programId];
   const description = getDescription(programId, context);
-  const url = buildAwinUrl(program);
+  const pathname = usePathname();
   const { marketingAllowed } = useCookieConsent();
+
+  const clickref = useMemo(() => {
+    const slug = pathname.split('/').filter(Boolean).pop() || 'startseite';
+    return slug
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join('-')
+      .replace(/[^a-zA-Z0-9-]/g, '')
+      .slice(0, 50) || 'startseite';
+  }, [pathname]);
+
+  const url = buildAwinUrl(program, clickref);
 
   const handleClick = useCallback(() => {
     // localStorage-Logging: keine personenbezogenen Daten, immer erlaubt
