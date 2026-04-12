@@ -131,7 +131,7 @@ export default function Header() {
                               onClick={() => setMenuOpen(false)}
                               className="flex items-center gap-2 py-1.5 px-2 -mx-1 rounded-lg text-[13px] text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-500/10 transition-all"
                             >
-                              <span>{r.icon}</span>
+                              <span className="w-5 text-center shrink-0">{r.icon}</span>
                               <span className="truncate">{r.titel}</span>
                             </Link>
                           </li>
