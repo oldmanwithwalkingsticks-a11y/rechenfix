@@ -3304,6 +3304,70 @@ Der Abo-Rechner macht Ihre monatlichen Verpflichtungen sichtbar. Allein das Aufs
     ],
   },
   {
+    slug: 'steuererstattung-rechner',
+    titel: 'Steuererstattungs-Rechner',
+    beschreibung: 'Steuererstattung schätzen: Mögliche Rückzahlung vom Finanzamt anhand Ihrer Ausgaben berechnen.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Steuererstattungs-Rechner 2026 — Wie viel bekomme ich zurück? | Rechenfix',
+    metaDescription: 'Steuererstattung schätzen: Berechnen Sie Ihre mögliche Erstattung anhand Pendlerpauschale, Homeoffice, Werbungskosten ✓ KI-Erklärung.',
+    keywords: ['steuererstattung rechner', 'steuererstattung berechnen', 'steuererklärung erstattung', 'steuer zurück bekommen', 'werbungskosten absetzen', 'pendlerpauschale steuer', 'homeoffice pauschale', 'steuerersparnis berechnen', 'steuerrückzahlung', 'lohnsteuer erstattung'],
+    icon: '💸',
+    formel: 'Erstattung ≈ (Werbungskosten − 1.230 € Pauschbetrag) × Grenzsteuersatz + 20% der haushaltsnahen DL',
+    beispiel: 'Beispiel: 40.000 € Brutto, 25 km Pendel, 220 Tage, 50 Homeoffice-Tage: Werbungskosten 2.250 €, über Pauschbetrag 1.020 €. Bei 30% Grenzsteuersatz ≈ 306 € Erstattung.',
+    erklaerung: `Die Steuererklärung lohnt sich für die meisten Arbeitnehmer: Im Durchschnitt erhalten sie 1.063 Euro vom Finanzamt zurück. Trotzdem verzichten viele auf die Abgabe — oft aus Unwissen über die absetzbaren Kosten. Unser Steuererstattungs-Rechner gibt Ihnen eine erste Einschätzung, wie viel Sie zurückbekommen könnten.
+
+**Durchschnittliche Steuererstattung in Deutschland**
+
+Laut Statistischem Bundesamt geben jedes Jahr rund 14 Millionen Arbeitnehmer eine Steuererklärung ab. Die durchschnittliche Erstattung liegt bei 1.063 Euro — ein Betrag, der in vielen Haushalten spürbar ist. Besonders hoch fallen die Erstattungen für Pendler mit langen Arbeitswegen aus: Wer täglich 30 Kilometer zur Arbeit fährt, sammelt allein durch die Pendlerpauschale über 2.200 Euro an Werbungskosten an — deutlich mehr als der Pauschbetrag von 1.230 Euro.
+
+**Welche Kosten sind absetzbar?**
+
+Die wichtigsten Absetzungsmöglichkeiten für Arbeitnehmer sind Werbungskosten: Dazu gehören die Pendlerpauschale (30 Cent pro Kilometer, ab dem 21. Kilometer 38 Cent), die Homeoffice-Pauschale (6 Euro pro Tag, maximal 1.260 Euro pro Jahr), Kosten für Arbeitsmittel (Computer, Schreibtisch, Fachliteratur), Fortbildungskosten, Berufskleidung und Gewerkschaftsbeiträge. Darüber hinaus können Sonderausgaben wie Spenden und Kirchensteuer abgesetzt werden. Haushaltsnahe Dienstleistungen (Putzhilfe, Gärtner, Handwerkerleistungen) werden mit 20 Prozent direkt von der Steuerschuld abgezogen — bis zu 4.000 Euro pro Jahr.
+
+**Frist für die Steuererklärung**
+
+Wer zur Abgabe verpflichtet ist (z. B. Steuerklasse III/V-Kombination, Nebeneinkünfte über 410 Euro), muss seine Steuererklärung für 2025 bis zum 31. Juli 2026 abgeben. Wer einen Steuerberater oder Lohnsteuerhilfeverein nutzt, hat automatisch Fristverlängerung bis Ende Februar 2027. Wer freiwillig abgibt, hat sogar vier Jahre Zeit — die Steuererklärung für 2022 kann noch bis Ende 2026 eingereicht werden.
+
+**Steuersoftware vs. Steuerberater**
+
+Für die meisten Arbeitnehmer mit einfachen Steuerfällen (Gehalt, Pendlerpauschale, ggf. Homeoffice) reicht eine Steuersoftware völlig aus. Programme wie WISO Steuer oder smartsteuer führen Sie Schritt für Schritt durch die Erklärung und finden automatisch alle relevanten Absetzungsmöglichkeiten. Die Kosten liegen bei 15–40 Euro pro Jahr. Ein Steuerberater lohnt sich bei komplexen Fällen: Immobilienbesitz, Vermietung, Selbstständigkeit im Nebenerwerb oder hohen Kapitalerträgen. Die Kosten richten sich nach der Steuerberatergebührenverordnung und liegen typischerweise bei 300–800 Euro.
+
+**Tipps für eine höhere Erstattung**
+
+Belege sammeln lohnt sich: Sammeln Sie das ganze Jahr über Quittungen für berufliche Ausgaben — auch kleine Beträge für Fachliteratur, USB-Sticks oder Schreibmaterial zählen. Nutzen Sie die Homeoffice-Pauschale konsequent, auch wenn Sie nur teilweise von zu Hause arbeiten. Prüfen Sie, ob haushaltsnahe Dienstleistungen absetzbar sind: Die Rechnung des Schornsteinfegers, des Schlüsseldienstes oder der Fensterputzfirma gehört in die Steuererklärung. Und vergessen Sie nicht: Auch Umzugskosten bei berufsbedingtem Umzug, Kontoführungsgebühren (pauschal 16 Euro) und Bewerbungskosten sind absetzbar.
+
+**Der Arbeitnehmer-Pauschbetrag erklärt**
+
+Der Arbeitnehmer-Pauschbetrag von 1.230 Euro wird automatisch von Ihrem zu versteuernden Einkommen abgezogen — auch ohne Steuererklärung. Eine Steuererklärung lohnt sich daher erst, wenn Ihre tatsächlichen Werbungskosten diesen Betrag übersteigen. Bei einem Pendelweg von mehr als 17 Kilometern (einfach) überschreiten Sie den Pauschbetrag bereits durch die Pendlerpauschale allein. Zusammen mit Homeoffice-Pauschale und beruflichen Ausgaben ist die Schwelle aber oft auch bei kürzeren Wegen schnell überschritten.`,
+    faq: [
+      {
+        frage: 'Wie hoch ist die durchschnittliche Steuererstattung?',
+        antwort: 'Die durchschnittliche Steuererstattung in Deutschland liegt bei ca. 1.063 € pro Jahr. Die Höhe hängt stark vom Einkommen, den Werbungskosten und der persönlichen Situation ab. Pendler mit langen Arbeitswegen erhalten oft 1.500–3.000 € zurück, während Arbeitnehmer ohne besondere Ausgaben teilweise nur den Pauschbetrag geltend machen können.',
+      },
+      {
+        frage: 'Welche Kosten kann ich von der Steuer absetzen?',
+        antwort: 'Die wichtigsten absetzbaren Kosten sind: Pendlerpauschale (30 ct/km, ab km 21: 38 ct), Homeoffice-Pauschale (6 €/Tag, max. 1.260 €/Jahr), Arbeitsmittel (Computer, Schreibtisch), Fortbildungskosten, Fachliteratur, Berufskleidung, Gewerkschaftsbeiträge, Kontoführungsgebühren (16 € pauschal), haushaltsnahe Dienstleistungen und Spenden.',
+      },
+      {
+        frage: 'Bis wann muss die Steuererklärung abgegeben werden?',
+        antwort: 'Pflichtveranlagte (z. B. Steuerklasse III/V) müssen bis 31. Juli des Folgejahres abgeben, mit Steuerberater bis Ende Februar des übernächsten Jahres. Wer freiwillig abgibt, hat 4 Jahre Zeit — die Steuererklärung für 2022 kann noch bis Ende 2026 eingereicht werden.',
+      },
+      {
+        frage: 'Lohnt sich eine Steuererklärung bei Steuerklasse 1?',
+        antwort: 'Ja, in den meisten Fällen. Sobald Ihre Werbungskosten über dem Pauschbetrag von 1.230 € liegen, erhalten Sie Geld zurück. Schon ab ca. 17 km Pendelweg (einfach) überschreiten Sie diese Grenze. Auch Homeoffice-Tage, Fortbildungen oder haushaltsnahe Dienstleistungen können die Erstattung erhöhen.',
+      },
+      {
+        frage: 'Was ist die Homeoffice-Pauschale und wie hoch ist sie?',
+        antwort: 'Die Homeoffice-Pauschale beträgt 6 € pro Tag, maximal 1.260 € pro Jahr (210 Tage). Sie können die Pauschale für jeden Tag geltend machen, an dem Sie überwiegend zu Hause gearbeitet haben — unabhängig davon, ob Sie ein separates Arbeitszimmer haben. An Homeoffice-Tagen entfällt allerdings die Pendlerpauschale.',
+      },
+      {
+        frage: 'Steuersoftware oder Steuerberater — was ist besser?',
+        antwort: 'Für einfache Steuerfälle (Gehalt, Pendlerpauschale, Homeoffice) reicht eine Steuersoftware für 15–40 €/Jahr völlig aus. Programme wie WISO Steuer oder smartsteuer führen Sie Schritt für Schritt. Ein Steuerberater (300–800 €) lohnt sich bei komplexen Fällen: Immobilienbesitz, Vermietung, Nebenerwerb oder hohe Kapitalerträge.',
+      },
+    ],
+  },
+  {
     slug: 'rechtsschutz-rechner',
     titel: 'Rechtsschutz-Rechner',
     beschreibung: 'Rechtsschutzversicherung berechnen: Geschätzte Kosten nach Bausteinen, Selbstbeteiligung und Lebenssituation.',
@@ -3450,6 +3514,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'steuererstattung-rechner',
   'rechtsschutz-rechner',
   'handykosten-rechner',
   'abo-rechner',
@@ -3550,6 +3615,7 @@ const verwandteMap: Record<string, string[]> = {
   'abo-rechner': ['streaming-kosten-rechner', 'kaffee-kosten-rechner', 'lieferservice-rechner', 'sparrechner'],
   'handykosten-rechner': ['abo-rechner', 'kaffee-kosten-rechner', 'lieferservice-rechner', 'prozentrechner'],
   'rechtsschutz-rechner': ['urlaubstage-rechner', 'ueberstunden-rechner', 'arbeitszeitrechner', 'stundenlohn-rechner'],
+  'steuererstattung-rechner': ['brutto-netto-rechner', 'pendlerpauschale-rechner', 'elterngeld-rechner', 'mwst-rechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
