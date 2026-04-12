@@ -51,6 +51,7 @@ import SchlafRechner from '@/components/rechner/SchlafRechner';
 import KaffeeKostenRechner from '@/components/rechner/KaffeeKostenRechner';
 import LieferserviceRechner from '@/components/rechner/LieferserviceRechner';
 import AboRechner from '@/components/rechner/AboRechner';
+import HandykostenRechner from '@/components/rechner/HandykostenRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -114,6 +115,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'kaffee-kosten-rechner': KaffeeKostenRechner,
   'lieferservice-rechner': LieferserviceRechner,
   'abo-rechner': AboRechner,
+  'handykosten-rechner': HandykostenRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

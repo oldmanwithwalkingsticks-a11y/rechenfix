@@ -3303,6 +3303,76 @@ Der Abo-Rechner macht Ihre monatlichen Verpflichtungen sichtbar. Allein das Aufs
       },
     ],
   },
+  {
+    slug: 'handykosten-rechner',
+    titel: 'Handykosten-Rechner',
+    beschreibung: 'Handykosten berechnen: Effektive Monatskosten, Jahreskosten und Kostenaufschlüsselung für Ihren Mobilfunkvertrag.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Handykosten-Rechner 2026 — Monatliche & jährliche Kosten berechnen | Rechenfix',
+    metaDescription: 'Handykosten berechnen: Effektive Monatskosten inkl. Gerät, Tarif und Zusatzoptionen ✓ Anbieter-Vergleich ✓ KI-Erklärung.',
+    keywords: ['handykosten rechner', 'handykosten berechnen', 'handyvertrag kosten', 'mobilfunk kosten', 'handykosten pro monat', 'effektive handykosten', 'handytarif vergleich', 'monatliche handykosten', 'handyvertrag vergleich', 'smartphone kosten'],
+    icon: '📱',
+    formel: 'Effektive Monatskosten = Tarifpreis + Zusatzoptionen + (Gerätepreis ÷ Vertragslaufzeit in Monaten)',
+    beispiel: 'Beispiel: Tarif 15 €/Monat + Smartphone (600 €, 24-Monats-Vertrag = 25 €/Monat) + Auslandsoption 5 € = 45 € effektive Monatskosten = 540 €/Jahr.',
+    erklaerung: `Die tatsächlichen Handykosten sind oft höher, als die monatliche Tarifgebühr vermuten lässt. Neben dem reinen Tarifpreis fallen Kosten für das Gerät, Zusatzoptionen und mögliche Einmalgebühren an. Unser Handykosten-Rechner macht alle Kostenpunkte transparent und zeigt Ihnen die echten monatlichen Gesamtkosten.
+
+**Durchschnittliche Handykosten in Deutschland 2026**
+
+Der durchschnittliche Deutsche gibt 2026 zwischen 20 und 35 Euro pro Monat für seinen Mobilfunktarif aus — ohne Gerätekosten. Mit einem Smartphone-Vertrag steigen die Kosten schnell auf 40 bis 65 Euro monatlich. Über die typische Vertragslaufzeit von 24 Monaten summiert sich das auf 960 bis 1.560 Euro. Jüngere Nutzer geben tendenziell mehr aus, da sie größere Datenvolumen und neuere Geräte bevorzugen.
+
+**Vertrag vs. Prepaid — wann lohnt sich was?**
+
+Die Frage „Vertrag oder Prepaid?" hängt vom Nutzungsverhalten ab. Prepaid-Tarife eignen sich hervorragend für Wenigtelefonierer, die vor allem erreichbar sein möchten und wenig mobiles Internet nutzen. Die Kosten liegen typischerweise bei 5 bis 10 Euro im Monat. Vertragstarife lohnen sich für Vielnutzer mit hohem Datenverbrauch: Ab ca. 10 GB monatlich ist ein Vertrag in der Regel günstiger als vergleichbare Prepaid-Optionen. Ein besonderer Vorteil: Viele Anbieter bieten inzwischen monatlich kündbare Verträge an — Sie haben die Flexibilität von Prepaid mit den günstigeren Konditionen eines Vertrags.
+
+**Gerät separat kaufen vs. mit Vertrag**
+
+Die große Frage beim Smartphone-Kauf: Zusammen mit dem Vertrag oder separat? Auf den ersten Blick wirken Verträge mit Gerät attraktiv — das neueste iPhone für nur 1 Euro Zuzahlung klingt verlockend. Doch die Rechnung zeigt oft ein anderes Bild: Die monatliche Rate für das Gerät ist im höheren Tarifpreis versteckt. Ein Rechenbeispiel: Ein Smartphone für 900 Euro mit 24-Monats-Vertrag kostet 37,50 Euro pro Monat nur für das Gerät. Kombiniert mit dem Tarif (z. B. 25 Euro) ergibt das 62,50 Euro monatlich. Kauft man das Gerät separat und wählt einen günstigen SIM-only-Tarif (z. B. 15 Euro), zahlt man effektiv 52,50 Euro — eine Ersparnis von 240 Euro über 24 Monate.
+
+**Versteckte Kosten im Handyvertrag erkennen**
+
+Handyverträge können überraschende Zusatzkosten enthalten, die auf den ersten Blick nicht sichtbar sind. Dazu gehören: Anschlussgebühren (oft 25–40 Euro einmalig), Kosten für EU-Roaming über das Fair-Use-Limit hinaus, teure Sonderrufnummern (0900er, 0180er), automatische Vertragsverlängerung nach Ablauf der Mindestlaufzeit, Kosten für Zusatzdienste die bei Vertragsabschluss „kostenlos" aktiviert wurden und nach der Testphase kostenpflichtig werden, sowie Gebühren für die Nutzung einer MultiSIM oder eSIM. Lesen Sie das Kleingedruckte sorgfältig und prüfen Sie Ihre Rechnung monatlich auf unerwartete Posten.
+
+**Tipps zum Senken der Handykosten**
+
+Mit diesen Strategien können Sie Ihre Handykosten deutlich reduzieren:
+- **Tarifcheck:** Vergleichen Sie mindestens einmal jährlich die aktuellen Tarife. Der Markt ändert sich schnell, und oft gibt es günstigere Alternativen.
+- **Datenverbrauch analysieren:** Viele Menschen zahlen für mehr Datenvolumen als sie brauchen. Prüfen Sie Ihren tatsächlichen Verbrauch in den Einstellungen Ihres Smartphones.
+- **WLAN nutzen:** Zuhause und am Arbeitsplatz WLAN statt mobile Daten verwenden — das spart Datenvolumen und ermöglicht einen günstigeren Tarif.
+- **Monatlich kündbar:** Wählen Sie wenn möglich monatlich kündbare Tarife. Sie sind oft nur 1–2 Euro teurer als 24-Monats-Verträge, bieten aber volle Flexibilität.
+- **Smartphone-Lebensdauer verlängern:** Nutzen Sie Ihr Gerät mindestens 3–4 Jahre statt alle 2 Jahre zu wechseln. Das halbiert die effektiven Gerätekosten.
+- **Familientarife:** Viele Anbieter bieten Familientarife oder Partnerkarten an, die pro Person deutlich günstiger sind als Einzelverträge.
+
+**Kosten pro GB: Ein wichtiger Vergleichswert**
+
+Der Preis pro Gigabyte ist eine gute Kennzahl, um Tarife zu vergleichen. In Deutschland lag der Durchschnittspreis 2026 bei etwa 1,50 bis 2,50 Euro pro GB. Tarife mit großem Datenvolumen (20+ GB) bieten oft einen günstigeren GB-Preis von unter 1 Euro. Wenn Ihr Kosten-pro-GB-Wert deutlich über 3 Euro liegt, lohnt sich ein Tarifwechsel. Zum Vergleich: In anderen EU-Ländern wie Finnland oder Polen liegt der GB-Preis bei unter 0,50 Euro.`,
+    faq: [
+      {
+        frage: 'Wie berechne ich meine tatsächlichen Handykosten?',
+        antwort: 'Addieren Sie zum monatlichen Tarifpreis die Kosten für Ihr Gerät (Kaufpreis geteilt durch Nutzungsdauer in Monaten), Zusatzoptionen (z.B. Auslandsflatrate) und eventuelle Einmalgebühren (Anschlussgebühr geteilt durch Vertragslaufzeit). Das Ergebnis sind Ihre effektiven monatlichen Handykosten. Unser Rechner macht das automatisch für Sie.',
+      },
+      {
+        frage: 'Ist ein Handyvertrag mit oder ohne Gerät günstiger?',
+        antwort: 'In den meisten Fällen ist der Kauf eines Smartphones ohne Vertrag (separat) günstiger. Ein SIM-only-Tarif kostet oft nur 10–20 € pro Monat, während Verträge mit Gerät 40–65 € kosten. Über 24 Monate sparen Sie typischerweise 100–300 €, wenn Sie das Gerät separat kaufen und einen günstigen Tarif wählen.',
+      },
+      {
+        frage: 'Was sind typische Handykosten pro Monat in Deutschland?',
+        antwort: 'Deutsche geben durchschnittlich 20–35 € pro Monat für ihren Mobilfunktarif aus (ohne Gerät). Mit Smartphone-Vertrag steigen die Kosten auf 40–65 €. Prepaid-Nutzer kommen oft mit 5–10 € aus. Die günstigsten Allnet-Flats mit 5 GB beginnen ab etwa 8–12 € monatlich.',
+      },
+      {
+        frage: 'Lohnt sich monatlich kündbar oder ein 24-Monats-Vertrag?',
+        antwort: 'Monatlich kündbare Tarife sind meist nur 1–3 € teurer als 24-Monats-Verträge, bieten aber volle Flexibilität. Bei einem Preisunterschied von 2 € zahlen Sie über 24 Monate nur 48 € mehr, können aber jederzeit zu einem besseren Angebot wechseln. Für die meisten Nutzer lohnt sich die Flexibilität.',
+      },
+      {
+        frage: 'Welche versteckten Kosten gibt es bei Handyverträgen?',
+        antwort: 'Häufige versteckte Kosten sind: Anschlussgebühren (25–40 €), Kosten für Datenvolumen über dem Limit, Roaming-Gebühren außerhalb der EU, teure Sonderrufnummern, automatisch aktivierte Zusatzdienste nach der Testphase und Kosten bei Vertragsverlängerung (oft zu schlechteren Konditionen). Prüfen Sie monatlich Ihre Rechnung.',
+      },
+      {
+        frage: 'Wie viel Datenvolumen brauche ich wirklich?',
+        antwort: 'Das hängt von Ihrer Nutzung ab: Nur Messaging und E-Mail = 1–3 GB, Social Media und Surfen = 5–10 GB, Videos unterwegs = 15–30 GB, intensives Streaming = 30+ GB. Prüfen Sie Ihren aktuellen Verbrauch in den Smartphone-Einstellungen unter „Mobilfunkdaten". WLAN-Nutzung zählt nicht zum Mobilfunkverbrauch.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -3316,6 +3386,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'handykosten-rechner',
   'abo-rechner',
   'lieferservice-rechner',
   'kaffee-kosten-rechner',
@@ -3412,6 +3483,7 @@ const verwandteMap: Record<string, string[]> = {
   'kaffee-kosten-rechner': ['streaming-kosten-rechner', 'raucher-rechner', 'sparrechner', 'lebenszeit-rechner'],
   'lieferservice-rechner': ['kaffee-kosten-rechner', 'streaming-kosten-rechner', 'raucher-rechner', 'sparrechner'],
   'abo-rechner': ['streaming-kosten-rechner', 'kaffee-kosten-rechner', 'lieferservice-rechner', 'sparrechner'],
+  'handykosten-rechner': ['abo-rechner', 'kaffee-kosten-rechner', 'lieferservice-rechner', 'prozentrechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
