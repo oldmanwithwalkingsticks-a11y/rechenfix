@@ -102,9 +102,10 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'strom': 'Stromtarife vergleichen und bis zu 500 € pro Jahr sparen.',
     'stromvergleich': 'Stromanbieter vergleichen — kostenlos, unverbindlich und mit Wechselbonus.',
     'heizkosten': 'Gas- und Heizstromtarife vergleichen und Heizkosten senken.',
-    'nebenkosten': 'Strom- und Gasanbieter wechseln — einfach und kostenlos.',
+    'nebenkosten': 'Strom- und Gasanbieter wechseln — einfach und kostenlos über CHECK24.',
     'kfz-steuer': 'Kfz-Versicherung vergleichen und bis zu 850 € sparen.',
     'spritkosten': 'Autokosten senken? Kfz-Versicherung vergleichen auf CHECK24.',
+    'kredit': 'Kredite vergleichen — niedrige Zinsen, schnelle Auszahlung, kostenlos.',
   },
   congstar: {
     'handykosten': 'congstar bietet faire Tarife ab 5 €/Monat — monatlich kündbar und ohne versteckte Kosten.',
@@ -122,12 +123,14 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
 
 const CONTEXT_DEEPLINKS: Partial<Record<ProgramId, Record<string, string>>> = {
   check24: {
-    'kfz-steuer': 'https://www.check24.net/kfz-versicherung/',
-    'spritkosten': 'https://www.check24.net/kfz-versicherung/',
-    'strom': 'https://www.check24.net/stromvergleich/',
-    'stromvergleich': 'https://www.check24.net/stromvergleich/',
-    'nebenkosten': 'https://www.check24.net/gasvergleich/',
-    'heizkosten': 'https://www.check24.net/gasvergleich/',
+    'kfz-steuer': 'https://www.check24.de/kfz-versicherung/',
+    'spritkosten': 'https://www.check24.de/kfz-versicherung/',
+    'strom': 'https://www.check24.de/strom/',
+    'stromvergleich': 'https://www.check24.de/strom/',
+    'nebenkosten': 'https://www.check24.de/gas/',
+    'heizkosten': 'https://www.check24.de/gas/',
+    'kredit': 'https://www.check24.de/kredit/',
+    'default': 'https://www.check24.de/',
   },
 };
 
@@ -167,16 +170,12 @@ export function AffiliateBox({ programId, context, variant = 'full' }: Affiliate
   const { marketingAllowed } = useCookieConsent();
 
   const clickref = useMemo(() => {
-    const slug = pathname.split('/').filter(Boolean).pop() || 'startseite';
-    return slug
-      .split('-')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join('-')
-      .replace(/[^a-zA-Z0-9-]/g, '')
-      .slice(0, 50) || 'startseite';
+    return `https://www.rechenfix.de${pathname}`;
   }, [pathname]);
 
-  const contextDeeplink = context ? CONTEXT_DEEPLINKS[programId]?.[context] : undefined;
+  const contextDeeplink = context
+    ? (CONTEXT_DEEPLINKS[programId]?.[context] || CONTEXT_DEEPLINKS[programId]?.['default'])
+    : CONTEXT_DEEPLINKS[programId]?.['default'];
   const url = buildAwinUrl(program, clickref, contextDeeplink);
 
   const handleClick = useCallback(() => {
