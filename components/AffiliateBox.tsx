@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback } from 'react';
+import { useCookieConsent } from '@/components/cookie/CookieConsentProvider';
 
 // --- Affiliate-Programm-Daten ---
 
@@ -160,8 +161,10 @@ export function AffiliateBox({ programId, context, variant = 'full' }: Affiliate
   const program = AFFILIATE_PROGRAMS[programId];
   const description = getDescription(programId, context);
   const url = buildAwinUrl(program);
+  const { marketingAllowed } = useCookieConsent();
 
   const handleClick = useCallback(() => {
+    // localStorage-Logging: keine personenbezogenen Daten, immer erlaubt
     try {
       const clicks = JSON.parse(localStorage.getItem('rf_aff_clicks') || '[]');
       clicks.push({
@@ -174,17 +177,20 @@ export function AffiliateBox({ programId, context, variant = 'full' }: Affiliate
       localStorage.setItem('rf_aff_clicks', JSON.stringify(clicks));
     } catch { /* localStorage nicht verfügbar */ }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const w = window as any;
-    if (typeof window !== 'undefined' && w.gtag) {
-      w.gtag('event', 'affiliate_click', {
-        event_category: 'affiliate',
-        event_label: programId,
-        affiliate_program: programId,
-        rechner_page: window.location.pathname,
-      });
+    // GA-Event nur mit Marketing-Consent
+    if (marketingAllowed) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const w = window as any;
+      if (typeof window !== 'undefined' && w.gtag) {
+        w.gtag('event', 'affiliate_click', {
+          event_category: 'affiliate',
+          event_label: programId,
+          affiliate_program: programId,
+          rechner_page: window.location.pathname,
+        });
+      }
     }
-  }, [programId, context]);
+  }, [programId, context, marketingAllowed]);
 
   if (variant === 'compact') {
     return (
