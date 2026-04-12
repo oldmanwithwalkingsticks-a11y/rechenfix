@@ -3501,6 +3501,66 @@ Der Preis pro Gigabyte ist eine gute Kennzahl, um Tarife zu vergleichen. In Deut
       },
     ],
   },
+  {
+    slug: 'stromvergleich-rechner',
+    titel: 'Stromvergleich-Rechner',
+    beschreibung: 'Stromanbieter vergleichen: Aktuelle Kosten berechnen, Sparpotenzial ermitteln und günstigere Tarife finden.',
+    kategorie: 'Wohnen & Energie',
+    kategorieSlug: 'wohnen',
+    metaTitle: 'Stromvergleich-Rechner 2026 — Stromkosten vergleichen & sparen | Rechenfix',
+    metaDescription: 'Stromvergleich-Rechner: Aktuelle Stromkosten berechnen und mit günstigen Tarifen vergleichen ✓ Sparpotenzial ermitteln ✓ Ökostrom ✓ KI-Erklärung.',
+    keywords: ['stromvergleich rechner', 'stromanbieter vergleichen', 'stromkosten vergleich', 'strom sparen', 'günstiger strom', 'stromtarif vergleichen', 'ökostrom vergleich', 'strompreis vergleich', 'stromanbieter wechseln', 'stromvergleich 2026'],
+    icon: '⚡',
+    formel: 'Jahreskosten = (Verbrauch in kWh × Arbeitspreis in ct/kWh ÷ 100) + (Grundpreis × 12)',
+    beispiel: 'Beispiel: 2.500 kWh × 32 ct/kWh = 800 € + 120 € Grundpreis (10 €/Monat) = 920 €/Jahr. Günstigster Tarif: 820 €/Jahr → Sparpotenzial: 100 €.',
+    erklaerung: `Die Stromkosten sind für viele Haushalte einer der größten Posten bei den Nebenkosten. Trotzdem bleiben viele Verbraucher jahrelang beim selben Anbieter — und zahlen deutlich mehr als nötig. Unser Stromvergleich-Rechner zeigt Ihnen auf einen Blick, wie Ihr aktueller Tarif im Vergleich zum Markt abschneidet und wie viel Sie durch einen Wechsel sparen könnten.
+
+**Stromkosten in Deutschland 2026**
+
+Der durchschnittliche Strompreis für Haushaltskunden liegt 2026 bei rund 32 Cent pro Kilowattstunde. Für einen Zwei-Personen-Haushalt mit einem Verbrauch von 2.500 kWh bedeutet das Jahreskosten von etwa 920 Euro. Ein Vier-Personen-Haushalt mit 4.500 kWh zahlt rund 1.560 Euro pro Jahr. Die Preise variieren regional stark: In Norddeutschland sind die Netzentgelte oft höher als im Süden, was sich direkt auf den Endpreis auswirkt. Ökostromtarife liegen im Schnitt 1–3 Cent über konventionellem Strom, sind aber in vielen Fällen günstiger als der Grundversorgungstarif.
+
+**Wie setzt sich der Strompreis zusammen?**
+
+Der Strompreis besteht aus drei Hauptkomponenten: Etwa ein Drittel entfällt auf die Stromerzeugung und den Vertrieb — das ist der Teil, den Ihr Anbieter beeinflusst und der sich durch einen Wechsel ändern kann. Ein weiteres Drittel sind Netzentgelte für den Transport des Stroms vom Kraftwerk bis zur Steckdose. Das letzte Drittel sind staatliche Abgaben und Umlagen, darunter die Stromsteuer (2,05 ct/kWh), die Konzessionsabgabe und weitere Umlagen. Da Netzentgelte und Steuern für alle Anbieter gleich sind, können Sie durch einen Wechsel primär beim Einkaufs- und Vertriebsanteil sparen.
+
+**Wann lohnt sich ein Anbieterwechsel?**
+
+Ein Anbieterwechsel lohnt sich fast immer — besonders wenn Sie noch in der Grundversorgung Ihres lokalen Stadtwerks sind. Der Grundversorgungstarif ist in der Regel der teuerste Tarif am Markt. Durch einen Wechsel zu einem alternativen Anbieter sparen Haushalte im Schnitt 100 bis 300 Euro pro Jahr. Ein Wechsel ist besonders sinnvoll, wenn Ihr Arbeitspreis über 33 Cent pro kWh liegt, Sie noch nie den Anbieter gewechselt haben, Ihr Vertrag eine automatische Verlängerung hatte oder Sie von der Preisgarantie Ihres alten Vertrags abgelaufen sind.
+
+**Ökostrom — teuer oder günstig?**
+
+Entgegen der landläufigen Meinung ist Ökostrom nicht unbedingt teurer als konventioneller Strom. Viele Ökostromanbieter bieten sehr konkurrenzfähige Preise an — teilweise sogar günstiger als der Grundversorger. Der Grund: Erneuerbare Energien (Wind, Solar) sind inzwischen die günstigsten Stromerzeugungsarten. Achten Sie beim Ökostromtarif auf anerkannte Gütesiegel wie das OK-Power-Label oder das Grüner-Strom-Label. Diese garantieren, dass der Strom tatsächlich aus erneuerbaren Quellen stammt und der Anbieter in den Ausbau der Erneuerbaren investiert.
+
+**Tipps zum Stromsparen**
+
+Neben dem Anbieterwechsel können Sie durch einfache Maßnahmen Ihren Verbrauch und damit die Kosten senken: LED-Lampen statt Glühbirnen sparen bis zu 80 Prozent Stromkosten bei der Beleuchtung. Geräte nicht im Standby lassen — eine Steckdosenleiste mit Schalter eliminiert versteckten Verbrauch von 100–200 kWh pro Jahr. Beim Kauf neuer Geräte auf die Energieeffizienzklasse achten: Ein A-Kühlschrank verbraucht nur halb so viel wie ein D-Gerät. Wäsche bei 30 statt 60 Grad waschen spart pro Waschgang etwa 60 Prozent Strom. Und: Wasserkocher statt Herd zum Wassererhitzen — das geht schneller und spart Energie.
+
+**Strompreisbremse und staatliche Entlastungen**
+
+Die Strompreisbremse des Bundes wurde 2023 eingeführt und inzwischen wieder ausgelaufen. Dennoch gibt es weiterhin Mechanismen, die extreme Preisspitzen abfedern. Für Haushalte mit niedrigem Einkommen gibt es in vielen Kommunen einen Stromspar-Check, der kostenlose Beratung und Soforthilfen bietet. Zudem können Stromkosten als Teil der Nebenkosten bei der Steuererklärung geltend gemacht werden — indirekt über haushaltsnahe Dienstleistungen (Handwerkerleistungen an der Elektrik) oder bei beruflicher Nutzung über das Arbeitszimmer.`,
+    faq: [
+      {
+        frage: 'Wie hoch sind die durchschnittlichen Stromkosten pro Jahr?',
+        antwort: 'Die durchschnittlichen Stromkosten hängen vom Verbrauch ab: Ein Single-Haushalt (1.500 kWh) zahlt ca. 600 €/Jahr, ein 2-Personen-Haushalt (2.500 kWh) ca. 920 €/Jahr, eine Familie mit 4 Personen (4.500 kWh) ca. 1.560 €/Jahr. Der Durchschnittspreis liegt 2026 bei ca. 32 ct/kWh plus Grundgebühr.',
+      },
+      {
+        frage: 'Wie viel kann ich durch einen Stromanbieterwechsel sparen?',
+        antwort: 'Durch einen Anbieterwechsel sparen Haushalte im Schnitt 100–300 € pro Jahr. Die Ersparnis ist besonders groß, wenn Sie noch im Grundversorgungstarif sind — dieser ist meist der teuerste. Auch wer seit über 2 Jahren nicht gewechselt hat, findet in der Regel deutlich günstigere Alternativen.',
+      },
+      {
+        frage: 'Ist Ökostrom teurer als normaler Strom?',
+        antwort: 'Nicht unbedingt. Viele Ökostromtarife sind preislich vergleichbar mit konventionellem Strom — manche sogar günstiger als der Grundversorger. Erneuerbare Energien sind inzwischen die günstigsten Stromerzeugungsarten. Achten Sie auf Gütesiegel wie OK-Power oder Grüner-Strom-Label für echten Ökostrom.',
+      },
+      {
+        frage: 'Wie viel Strom verbraucht ein durchschnittlicher Haushalt?',
+        antwort: 'Der Verbrauch hängt von der Haushaltsgröße ab: 1 Person ca. 1.500 kWh/Jahr, 2 Personen ca. 2.500 kWh, 3 Personen ca. 3.500 kWh, 4 Personen ca. 4.500 kWh, 5+ Personen ca. 5.500 kWh. In Häusern liegt der Verbrauch oft 20–30% höher als in Wohnungen, da Außenbeleuchtung und mehr Fläche hinzukommen.',
+      },
+      {
+        frage: 'Worauf sollte ich beim Stromanbieterwechsel achten?',
+        antwort: 'Achten Sie auf: Vertragslaufzeit (max. 12 Monate empfohlen), Preisgarantie (mindestens so lang wie die Vertragslaufzeit), keine Vorauskasse oder Pakettarife, Kündigungsfrist (max. 6 Wochen), und lesen Sie Bewertungen anderer Kunden. Vermeiden Sie Tarife mit Bonus, der erst nach 12 Monaten ausgezahlt wird.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -3514,6 +3574,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'stromvergleich-rechner',
   'steuererstattung-rechner',
   'rechtsschutz-rechner',
   'handykosten-rechner',
@@ -3616,6 +3677,7 @@ const verwandteMap: Record<string, string[]> = {
   'handykosten-rechner': ['abo-rechner', 'kaffee-kosten-rechner', 'lieferservice-rechner', 'prozentrechner'],
   'rechtsschutz-rechner': ['urlaubstage-rechner', 'ueberstunden-rechner', 'arbeitszeitrechner', 'stundenlohn-rechner'],
   'steuererstattung-rechner': ['brutto-netto-rechner', 'pendlerpauschale-rechner', 'elterngeld-rechner', 'mwst-rechner'],
+  'stromvergleich-rechner': ['stromkosten-rechner', 'heizkosten-rechner', 'nebenkosten-rechner', 'mietrechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
