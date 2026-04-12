@@ -3625,6 +3625,70 @@ Kalkulieren Sie Ihren Stundensatz großzügig: Es ist einfacher, einen Rabatt zu
       },
     ],
   },
+  {
+    slug: 'bussgeldrechner',
+    titel: 'Bußgeldrechner',
+    beschreibung: 'Bußgeld, Punkte und Fahrverbot für Verkehrsverstöße berechnen — basierend auf dem aktuellen Bußgeldkatalog 2026.',
+    kategorie: 'Auto & Verkehr',
+    kategorieSlug: 'auto',
+    metaTitle: 'Bußgeldrechner 2026 — Bußgeld, Punkte & Fahrverbot berechnen | Rechenfix',
+    metaDescription: 'Bußgeld berechnen: Geschwindigkeit, Rotlicht, Abstand, Handy, Alkohol ✓ Aktueller Bußgeldkatalog ✓ Punkte & Fahrverbot ✓ KI-Erklärung.',
+    keywords: ['bußgeldrechner', 'bußgeld berechnen', 'bußgeldkatalog 2026', 'geschwindigkeitsüberschreitung', 'punkte flensburg', 'fahrverbot', 'blitzer strafe', 'rotlichtverstoß', 'bußgeld geschwindigkeit', 'verkehrsverstoß strafe'],
+    icon: '🚨',
+    formel: 'Bußgeld wird anhand des Bußgeldkatalogs bestimmt: Verstoßart + Schwere → Bußgeld + Punkte + ggf. Fahrverbot',
+    beispiel: 'Beispiel: 26 km/h zu schnell innerorts (PKW) → 180 € Bußgeld, 1 Punkt in Flensburg, 1 Monat Fahrverbot (bei Wiederholungstäter).',
+    erklaerung: `Der Bußgeldkatalog regelt die Strafen für Verkehrsverstöße in Deutschland. Er wird regelmäßig aktualisiert — zuletzt 2024 mit deutlich höheren Strafen für Geschwindigkeitsüberschreitungen. Unser Bußgeldrechner zeigt Ihnen sofort, welches Bußgeld, wie viele Punkte in Flensburg und ob ein Fahrverbot droht.
+
+**Der aktuelle Bußgeldkatalog 2026 im Überblick**
+
+Seit der Reform 2024 sind die Bußgelder für Geschwindigkeitsüberschreitungen deutlich gestiegen. Innerorts kostet bereits eine Überschreitung von 16–20 km/h 70 Euro, ab 21 km/h kommt ein Punkt in Flensburg hinzu. Bei 26–30 km/h zu schnell innerorts drohen 180 Euro, ein Punkt und — bei Wiederholungstätern — ein Monat Fahrverbot. Ab 31 km/h zu schnell ist das Fahrverbot obligatorisch. Außerorts sind die Strafen etwas milder, aber ab 41 km/h zu schnell drohen auch hier 320 Euro, 2 Punkte und ein Monat Fahrverbot.
+
+**Einspruch gegen Bußgeldbescheid: Wann lohnt es sich?**
+
+Ein Einspruch gegen den Bußgeldbescheid lohnt sich in vielen Fällen. Laut Statistik sind rund 30 Prozent aller Bußgeldbescheide fehlerhaft — sei es durch falsche Messergebnisse, defekte Blitzer, fehlende Beschilderung oder Formfehler im Bescheid. Sie haben 14 Tage nach Zustellung Zeit, Einspruch einzulegen. Bei hohen Bußgeldern (ab 200 Euro), Punkten oder Fahrverboten sollten Sie den Bescheid unbedingt von einem Anwalt für Verkehrsrecht prüfen lassen. Die Kosten für den Anwalt werden von einer Verkehrsrechtsschutzversicherung übernommen. Typische Angriffspunkte: Wurde das Messgerät korrekt geeicht? Stimmt die Zuordnung zum Fahrzeug? Wurde die Toleranz korrekt abgezogen? Ist der Bescheid fristgerecht zugestellt worden?
+
+**Punkte in Flensburg: Wie funktioniert das Punktesystem?**
+
+Das Fahreignungsregister (FAER) in Flensburg erfasst Verkehrsverstöße mit einem Punktesystem von 1 bis 3 Punkten pro Verstoß. Bei 1–3 Punkten gibt es eine Vormerkung, bei 4–5 Punkten eine Ermahnung, bei 6–7 Punkten eine Verwarnung, und bei 8 Punkten wird die Fahrerlaubnis entzogen. Punkte verjähren nach 2,5 Jahren (1-Punkt-Verstöße), 5 Jahren (2-Punkte-Verstöße) oder 10 Jahren (Straftaten mit 3 Punkten). Wichtig: Durch die Teilnahme an einem Fahreignungsseminar können Sie einmal innerhalb von 5 Jahren 1 Punkt abbauen — allerdings nur bei maximal 5 Punkten.
+
+**Fahrverbot vs. Entzug der Fahrerlaubnis: Der Unterschied**
+
+Ein Fahrverbot ist zeitlich begrenzt (1 bis 3 Monate) und wird bei schweren Ordnungswidrigkeiten verhängt. Nach Ablauf erhalten Sie Ihren Führerschein automatisch zurück. Der Entzug der Fahrerlaubnis dagegen ist eine deutlich härtere Maßnahme: Die Fahrerlaubnis wird komplett eingezogen, und Sie müssen sie nach einer Sperrfrist (mindestens 6 Monate) neu beantragen. Bei Alkoholdelikten ab 1,6 Promille oder bei 8 Punkten in Flensburg ist in der Regel eine MPU (Medizinisch-Psychologische Untersuchung, umgangssprachlich „Idiotentest") erforderlich. Die MPU kostet zwischen 350 und 750 Euro — bei Nichtbestehen muss sie wiederholt werden.
+
+**Probezeit: Welche besonderen Regeln gelten?**
+
+Für Fahranfänger in der zweijährigen Probezeit gelten strengere Regeln. Es gilt eine absolute 0,0-Promille-Grenze (auch unter 21 Jahren). Verstöße werden in A-Verstöße (schwerwiegend, z.B. Geschwindigkeitsüberschreitung ab 21 km/h, Rotlichtverstoß) und B-Verstöße (weniger schwerwiegend, z.B. Handy am Steuer, abgefahrene Reifen) unterteilt. Bereits ein A-Verstoß oder zwei B-Verstöße führen zu einem verpflichtenden Aufbauseminar und einer Verlängerung der Probezeit um zwei weitere Jahre. Ein weiterer Verstoß danach führt zur Empfehlung einer verkehrspsychologischen Beratung. Fahranfänger sollten besonders vorsichtig sein — die Konsequenzen sind deutlich spürbarer als bei erfahrenen Fahrern.
+
+**Toleranzabzug bei Geschwindigkeitsmessungen**
+
+Bei jeder Geschwindigkeitsmessung wird ein Toleranzabzug vorgenommen, um Messungenauigkeiten auszugleichen. Bei Geschwindigkeiten bis 100 km/h werden 3 km/h abgezogen, darüber 3 Prozent des Messwerts. Beispiel: Gemessene Geschwindigkeit 83 km/h in einer 50er-Zone → nach Toleranzabzug (3 km/h) gilt eine Überschreitung von 30 km/h. Bei Messungen durch Nachfahren (Polizeifahrzeug) ist der Toleranzabzug höher: 5 km/h bzw. 5 Prozent. Unser Rechner geht davon aus, dass der Toleranzabzug bereits berücksichtigt ist — geben Sie also die tatsächliche Überschreitung ein, nicht die gemessene Geschwindigkeit.`,
+    faq: [
+      {
+        frage: 'Wie viel kostet eine Geschwindigkeitsüberschreitung?',
+        antwort: 'Die Kosten hängen von der Höhe der Überschreitung und dem Ort ab. Innerorts: bis 10 km/h = 30 €, 16–20 km/h = 70 €, 21–25 km/h = 115 € + 1 Punkt, 26–30 km/h = 180 € + 1 Punkt + ggf. Fahrverbot, 31–40 km/h = 260 € + 2 Punkte + 1 Monat Fahrverbot. Außerorts sind die Strafen etwas geringer.',
+      },
+      {
+        frage: 'Ab wie viel km/h zu schnell gibt es Punkte?',
+        antwort: 'Ab 21 km/h zu schnell gibt es 1 Punkt in Flensburg — sowohl innerorts als auch außerorts. Ab 31 km/h zu schnell innerorts bzw. 41 km/h außerorts gibt es 2 Punkte. Unter 21 km/h Überschreitung drohen nur Verwarngelder ohne Punkte.',
+      },
+      {
+        frage: 'Wann droht ein Fahrverbot?',
+        antwort: 'Ein Fahrverbot droht bei: Geschwindigkeit ab 31 km/h zu schnell innerorts (1 Monat) bzw. ab 41 km/h außerorts, qualifiziertem Rotlichtverstoß (über 1 Sekunde rot), Alkohol ab 0,5 ‰, Handy am Steuer mit Gefährdung, und schwerem Abstandsverstoß. Bei 26–30 km/h zu schnell droht ein Fahrverbot nur bei Wiederholungstätern.',
+      },
+      {
+        frage: 'Kann ich Einspruch gegen einen Bußgeldbescheid einlegen?',
+        antwort: 'Ja, innerhalb von 14 Tagen nach Zustellung können Sie Einspruch einlegen. Etwa 30 % der Bußgeldbescheide enthalten Fehler. Typische Gründe: fehlerhafte Messung, falsche Fahreridentifizierung, Formfehler, fehlende Eichung des Messgeräts. Eine Verkehrsrechtsschutzversicherung übernimmt die Anwaltskosten.',
+      },
+      {
+        frage: 'Wie viele Punkte darf ich in Flensburg haben?',
+        antwort: 'Bei 8 Punkten wird die Fahrerlaubnis entzogen. Das Punktesystem: 1–3 Punkte = Vormerkung, 4–5 Punkte = Ermahnung (Punktestand wird mitgeteilt), 6–7 Punkte = Verwarnung (letzte Warnung), 8 Punkte = Entzug der Fahrerlaubnis. Durch ein Fahreignungsseminar kann 1 Punkt abgebaut werden (max. einmal in 5 Jahren, nur bei max. 5 Punkten).',
+      },
+      {
+        frage: 'Was passiert bei einem Rotlichtverstoß?',
+        antwort: 'Bei einem einfachen Rotlichtverstoß (unter 1 Sekunde rot): 90 € + 1 Punkt. Bei einem qualifizierten Rotlichtverstoß (über 1 Sekunde rot): 200 € + 2 Punkte + 1 Monat Fahrverbot. Mit Gefährdung: 320 € + 2 Punkte + 1 Monat Fahrverbot. Mit Sachbeschädigung: 360 € + 2 Punkte + 1 Monat Fahrverbot.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -3638,6 +3702,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'bussgeldrechner',
   'freelancer-stundensatz-rechner',
   'stromvergleich-rechner',
   'steuererstattung-rechner',
@@ -3744,6 +3809,7 @@ const verwandteMap: Record<string, string[]> = {
   'steuererstattung-rechner': ['brutto-netto-rechner', 'pendlerpauschale-rechner', 'elterngeld-rechner', 'mwst-rechner'],
   'stromvergleich-rechner': ['stromkosten-rechner', 'heizkosten-rechner', 'nebenkosten-rechner', 'mietrechner'],
   'freelancer-stundensatz-rechner': ['stundenlohn-rechner', 'ueberstunden-rechner', 'mwst-rechner', 'arbeitszeitrechner'],
+  'bussgeldrechner': ['kfz-steuer-rechner', 'spritkosten-rechner', 'kw-ps-umrechner', 'promillerechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
