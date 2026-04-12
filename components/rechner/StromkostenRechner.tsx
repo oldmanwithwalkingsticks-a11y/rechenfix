@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import StromSpartipp from '@/components/rechner/StromSpartipp';
+import { AffiliateBox } from '@/components/AffiliateBox';
 
 const SCHNELLWAHL = [
   { label: '1 Person', kwh: '1500' },
@@ -173,6 +174,10 @@ export default function StromkostenRechner() {
             </div>
           </div>
         </div>
+      )}
+
+      {ergebnis && (
+        <AffiliateBox programId="check24" context="strom" />
       )}
     </div>
   );

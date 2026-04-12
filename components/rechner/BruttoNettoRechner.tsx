@@ -8,6 +8,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import AiExplain from '@/components/rechner/AiExplain';
 import WasWaereWenn from '@/components/rechner/WasWaereWenn';
 import SchnellCheck from '@/components/rechner/SchnellCheck';
+import { AffiliateBox } from '@/components/AffiliateBox';
 
 const TABELLEN_WERTE = [1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 6000];
 
@@ -488,6 +489,14 @@ export default function BruttoNettoRechner() {
               }}
             />
           </div>
+        </>
+      )}
+
+      {/* Affiliate-Boxen */}
+      {ergebnis && (
+        <>
+          <AffiliateBox programId="wiso" context="brutto-netto" />
+          <AffiliateBox programId="smartsteuer" context="brutto-netto" />
         </>
       )}
 

@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import { AffiliateBox } from '@/components/AffiliateBox';
 
 export default function SpritkostenRechner() {
   const [strecke, setStrecke] = useState('100');
@@ -157,6 +158,8 @@ export default function SpritkostenRechner() {
             eingaben={{ streckeKm: nStrecke, verbrauchLPro100km: nVerbrauch, spritpreisEuroProL: nSpritpreis, hinUndZurueck }}
             ergebnis={{ gesamtkostenEuro: ergebnis.gesamtkosten, literGesamt: ergebnis.literGesamt, kostenProKm: ergebnis.kostenProKm, effektiveStreckeKm: ergebnis.effektiveStrecke }}
           />
+
+          <AffiliateBox programId="check24" variant="compact" />
         </>
       )}
     </div>

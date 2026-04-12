@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import { AffiliateBox } from '@/components/AffiliateBox';
 
 const ALTERSGRUPPEN: { key: Kindergruppe; label: string }[] = [
   { key: '0-5', label: '0–5 Jahre' },
@@ -354,6 +355,8 @@ export default function BuergergeldRechner() {
               bedarfGedeckt: ergebnis.bedarfGedeckt,
             }}
           />
+
+          <AffiliateBox programId="check24" variant="compact" />
         </div>
       )}
     </div>

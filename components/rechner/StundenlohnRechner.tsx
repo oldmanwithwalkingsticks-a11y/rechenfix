@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import { AffiliateBox } from '@/components/AffiliateBox';
 
 const MODI: { key: StundenlohnModus; label: string; icon: string }[] = [
   { key: 'stundenlohn', label: 'Stundenlohn berechnen', icon: '⏱️' },
@@ -258,6 +259,10 @@ export default function StundenlohnRechner() {
             </div>
           </div>
         </div>
+      )}
+
+      {ergebnis && (
+        <AffiliateBox programId="lexware" context="stundenlohn" />
       )}
     </div>
   );

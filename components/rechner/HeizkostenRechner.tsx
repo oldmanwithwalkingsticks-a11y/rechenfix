@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import { AffiliateBox } from '@/components/AffiliateBox';
 
 export default function HeizkostenRechner() {
   const [wohnflaeche, setWohnflaeche] = useState('80');
@@ -144,6 +145,10 @@ export default function HeizkostenRechner() {
             </div>
           </div>
         </div>
+      )}
+
+      {ergebnis && (
+        <AffiliateBox programId="check24" context="heizkosten" />
       )}
     </div>
   );

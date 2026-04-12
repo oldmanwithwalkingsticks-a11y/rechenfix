@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { berechneTageszeit, berechneWoche, type WochenTag } from '@/lib/berechnungen/arbeitszeit';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import { AffiliateBox } from '@/components/AffiliateBox';
 
 type Modus = 'tag' | 'woche';
 
@@ -397,6 +398,10 @@ export default function ArbeitszeitRechner() {
             </div>
           )}
         </div>
+      )}
+
+      {(tagesErgebnis || wochenErgebnis) && (
+        <AffiliateBox programId="lexware" variant="compact" />
       )}
 
       {/* Disclaimer */}

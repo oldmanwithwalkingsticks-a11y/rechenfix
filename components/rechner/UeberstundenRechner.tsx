@@ -7,6 +7,7 @@ import {
 } from '@/lib/berechnungen/ueberstunden';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import { AffiliateBox } from '@/components/AffiliateBox';
 
 type Modus = 'berechnen' | 'verguetung';
 type EingabeArt = 'gesamt' | 'tageweise';
@@ -423,6 +424,13 @@ export default function UeberstundenRechner() {
             </div>
           )}
         </div>
+      )}
+
+      {(ergebnis1 || ergebnis2) && (
+        <>
+          <AffiliateBox programId="ks-auxilia" context="ueberstunden" />
+          <AffiliateBox programId="lexware" variant="compact" />
+        </>
       )}
 
       {/* Disclaimer */}

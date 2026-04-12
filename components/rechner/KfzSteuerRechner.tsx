@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import { AffiliateBox } from '@/components/AffiliateBox';
 
 export default function KfzSteuerRechner() {
   const [zulassung, setZulassung] = useState<Zulassungszeitraum>('nach-2009');
@@ -198,6 +199,9 @@ export default function KfzSteuerRechner() {
             eingaben={{ zulassung, antrieb, hubraumCcm: nHubraum, co2GProKm: nCo2 }}
             ergebnis={{ jahresSteuerEuro: ergebnis.jahresSteuer, monatsSteuerEuro: ergebnis.monatsSteuer, sockelbetragEuro: ergebnis.sockelbetrag, co2BetragEuro: ergebnis.co2Betrag, befreit: ergebnis.befreit }}
           />
+
+          <AffiliateBox programId="check24" context="kfz-steuer" />
+          <AffiliateBox programId="wiso" context="kfz-steuer" variant="compact" />
         </>
       )}
     </div>

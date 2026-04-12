@@ -7,6 +7,7 @@ import {
 } from '@/lib/berechnungen/pendlerpauschale';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import { AffiliateBox } from '@/components/AffiliateBox';
 
 const fmtEuro = (n: number) =>
   n.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' });
@@ -308,6 +309,10 @@ export default function PendlerpauschaleRechner() {
             ergebnis={{ pauschaleGesamtEuro: ergebnis.pauschaleGesamt, steuerersparnisEuro: ergebnis.steuerersparnis, monatlicheErsparnisEuro: ergebnis.monatlicheErsparnis }}
           />
         </div>
+      )}
+
+      {ergebnis && (
+        <AffiliateBox programId="wiso" context="pendlerpauschale" />
       )}
 
       {/* Disclaimer */}

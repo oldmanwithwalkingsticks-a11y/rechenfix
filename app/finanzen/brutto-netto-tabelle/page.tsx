@@ -3,6 +3,7 @@ import { berechneBruttoNetto } from '@/lib/berechnungen/brutto-netto';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import ZurueckButton from '@/components/layout/ZurueckButton';
 import AdSlot from '@/components/ads/AdSlot';
+import { AffiliateBox } from '@/components/AffiliateBox';
 import StructuredData from '@/components/seo/StructuredData';
 import { generateBreadcrumbSchema, generateFAQSchema } from '@/lib/seo';
 import type { Metadata } from 'next';
@@ -198,6 +199,8 @@ export default function BruttoNettoTabelle() {
               ))}
             </div>
           </section>
+
+          <AffiliateBox programId="wiso" context="brutto-netto" variant="compact" />
 
           {/* Verwandte Seiten */}
           <section className="card p-6 md:p-8 mb-8">

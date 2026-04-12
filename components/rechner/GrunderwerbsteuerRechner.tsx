@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import { AffiliateBox } from '@/components/AffiliateBox';
 
 export default function GrunderwerbsteuerRechner() {
   const [kaufpreis, setKaufpreis] = useState('300000');
@@ -148,6 +149,10 @@ export default function GrunderwerbsteuerRechner() {
             </div>
           </div>
         </div>
+      )}
+
+      {ergebnis && (
+        <AffiliateBox programId="wiso" variant="compact" />
       )}
     </div>
   );

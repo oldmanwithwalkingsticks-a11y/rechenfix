@@ -8,6 +8,7 @@ import {
   type ResturlaubEingabe,
 } from '@/lib/berechnungen/urlaubstage';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
+import { AffiliateBox } from '@/components/AffiliateBox';
 import AiExplain from '@/components/rechner/AiExplain';
 
 type Modus = 'anspruch' | 'resturlaub';
@@ -391,6 +392,10 @@ export default function UrlaubstageRechner() {
             </div>
           )}
         </div>
+      )}
+
+      {(anspruchErgebnis || resturlaubErgebnis) && (
+        <AffiliateBox programId="ks-auxilia" context="urlaubstage" />
       )}
 
       {/* Disclaimer */}

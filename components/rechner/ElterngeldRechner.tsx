@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import { AffiliateBox } from '@/components/AffiliateBox';
 
 export default function ElterngeldRechner() {
   const [nettoVorGeburt, setNettoVorGeburt] = useState('2500');
@@ -254,6 +255,10 @@ export default function ElterngeldRechner() {
             }}
           />
         </div>
+      )}
+
+      {ergebnis && (
+        <AffiliateBox programId="wiso" variant="compact" />
       )}
     </div>
   );

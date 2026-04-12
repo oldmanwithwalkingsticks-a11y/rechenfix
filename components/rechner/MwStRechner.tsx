@@ -5,6 +5,7 @@ import { berechneNettoZuBrutto, berechneBruttoZuNetto, berechneMultiMwSt } from 
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import AiExplain from '@/components/rechner/AiExplain';
+import { AffiliateBox } from '@/components/AffiliateBox';
 
 type Tab = 'netto-brutto' | 'brutto-netto' | 'multi';
 
@@ -347,6 +348,10 @@ export default function MwStRechner() {
             </>
           )}
         </>
+      )}
+
+      {(ergebnis || multiErgebnis) && (
+        <AffiliateBox programId="lexware" context="mwst" />
       )}
     </div>
   );
