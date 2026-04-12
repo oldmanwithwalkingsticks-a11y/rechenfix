@@ -56,7 +56,7 @@ export default function Startseite() {
             &#x1F916; Rechenfrage? Einfach der KI stellen!
           </p>
           <p className="text-white/80 text-sm sm:text-base max-w-xl mx-auto mb-5">
-            Stellen Sie Ihre Rechenfrage in nat&uuml;rlicher Sprache &mdash; die KI berechnet die Antwort und verlinkt Sie zum passenden Rechner.
+            Stellen Sie Ihre Rechenfrage in nat&uuml;rlicher Sprache &mdash; die KI liefert die Antwort und verlinkt Sie zum passenden Rechner.
           </p>
           <Link
             href="/ki-rechner"

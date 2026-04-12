@@ -35,7 +35,7 @@ export default function KiRechnerPage() {
           KI-Rechner — Fragen Sie einfach!
         </h1>
         <p className="text-gray-500 dark:text-gray-400 text-lg max-w-xl mx-auto">
-          Stellen Sie eine Rechenfrage in natürlicher Sprache. Die KI berechnet die Antwort und verlinkt Sie zum passenden Rechner.
+          Stellen Sie eine Rechenfrage in natürlicher Sprache. Die KI liefert die Antwort und verlinkt Sie zum passenden Rechner.
         </p>
       </div>
 
