@@ -34,11 +34,28 @@ const HOMEOFFICE_MAX = 1260;
 const HOMEOFFICE_PRO_TAG = 6;
 const HAUSHALTSNAHE_MAX = 4000;
 
-function berechneGrenzsteuersatz(brutto: number): number {
-  if (brutto <= 12084) return 0;
-  if (brutto <= 17005) return 0.14;
-  if (brutto <= 66760) return 0.25 + (brutto - 17005) / (66760 - 17005) * 0.17;
-  if (brutto <= 277825) return 0.42;
+function berechneZuVersteuerndesEinkommen(brutto: number, steuerklasse: number): number {
+  // Steuerklasse beeinflusst das zu versteuernde Einkommen
+  switch (steuerklasse) {
+    case 2: // Alleinerziehend: zusätzlicher Entlastungsbetrag
+      return Math.max(brutto - 4260, 0);
+    case 3: // Verheiratet, Hauptverdiener: Splittingvorteil (halbes Einkommen → Tarif × 2)
+      return brutto / 2;
+    case 5: // Verheiratet, Geringverdiener: kein Grundfreibetrag
+      return brutto + 12084;
+    case 6: // Zweitjob: keine Freibeträge
+      return brutto + 12084;
+    default: // Klasse 1 und 4: Standardtarif
+      return brutto;
+  }
+}
+
+function berechneGrenzsteuersatz(brutto: number, steuerklasse: number): number {
+  const zvE = berechneZuVersteuerndesEinkommen(brutto, steuerklasse);
+  if (zvE <= 12084) return 0;
+  if (zvE <= 17005) return 0.14;
+  if (zvE <= 66760) return 0.25 + (zvE - 17005) / (66760 - 17005) * 0.17;
+  if (zvE <= 277825) return 0.42;
   return 0.45;
 }
 
@@ -56,7 +73,7 @@ export function berechneSteuererstattung(e: SteuererstattungEingabe): Steuererst
   const werbungskostenGesamt = pendlerpauschale + homeofficePauschale + e.beruflicheAusgaben;
   const werbungskostenUeberPauschbetrag = Math.max(werbungskostenGesamt - PAUSCHBETRAG, 0);
 
-  const grenzsteuersatz = berechneGrenzsteuersatz(e.jahresbrutto);
+  const grenzsteuersatz = berechneGrenzsteuersatz(e.jahresbrutto, e.steuerklasse);
 
   // Steuerersparnis aus Werbungskosten über Pauschbetrag
   const steuerersparnisWerbungskosten = werbungskostenUeberPauschbetrag * grenzsteuersatz;
