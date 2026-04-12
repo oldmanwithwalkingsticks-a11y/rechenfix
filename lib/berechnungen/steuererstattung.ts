@@ -34,29 +34,33 @@ const HOMEOFFICE_MAX = 1260;
 const HOMEOFFICE_PRO_TAG = 6;
 const HAUSHALTSNAHE_MAX = 4000;
 
-function berechneZuVersteuerndesEinkommen(brutto: number, steuerklasse: number): number {
-  // Steuerklasse beeinflusst das zu versteuernde Einkommen
-  switch (steuerklasse) {
-    case 2: // Alleinerziehend: zusätzlicher Entlastungsbetrag
-      return Math.max(brutto - 4260, 0);
-    case 3: // Verheiratet, Hauptverdiener: Splittingvorteil (halbes Einkommen → Tarif × 2)
-      return brutto / 2;
-    case 5: // Verheiratet, Geringverdiener: kein Grundfreibetrag
-      return brutto + 12084;
-    case 6: // Zweitjob: keine Freibeträge
-      return brutto + 12084;
-    default: // Klasse 1 und 4: Standardtarif
-      return brutto;
-  }
-}
-
-function berechneGrenzsteuersatz(brutto: number, steuerklasse: number): number {
-  const zvE = berechneZuVersteuerndesEinkommen(brutto, steuerklasse);
+function grundtarif(zvE: number): number {
   if (zvE <= 12084) return 0;
   if (zvE <= 17005) return 0.14;
   if (zvE <= 66760) return 0.25 + (zvE - 17005) / (66760 - 17005) * 0.17;
   if (zvE <= 277825) return 0.42;
   return 0.45;
+}
+
+function berechneGrenzsteuersatz(brutto: number, steuerklasse: number): number {
+  switch (steuerklasse) {
+    case 2:
+      // Alleinerziehend: Entlastungsbetrag 4.260 € senkt zvE
+      return grundtarif(Math.max(brutto - 4260, 0));
+    case 3:
+      // Ehegattensplitting: Tarif wird auf halbes Einkommen angewendet
+      // Da Partnereinkommen unbekannt, moderate Näherung (Einkommen × 0.85)
+      return grundtarif(brutto * 0.85);
+    case 5:
+      // Partner in Klasse 3 profitiert vom Splitting → eigene Steuerbelastung höher
+      return grundtarif(brutto * 1.12);
+    case 6:
+      // Zweitjob: Grundfreibetrag bereits beim Hauptjob verbraucht
+      return grundtarif(brutto + 12084);
+    default:
+      // Klasse 1 und 4: Grundtarif
+      return grundtarif(brutto);
+  }
 }
 
 function berechnePendlerpauschale(km: number, arbeitstage: number): number {
