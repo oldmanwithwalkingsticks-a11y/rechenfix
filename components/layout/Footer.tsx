@@ -91,44 +91,51 @@ export default function Footer() {
             </table>
           </div>
 
-          {/* Rechtliches */}
-          <div>
-            <h3 className="font-bold text-sm uppercase tracking-wider mb-3 text-primary-100">Rechtliches</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/ki-rechner" className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-1">
-                  <span>🤖</span> KI-Rechner
-                </Link>
-              </li>
-              <li>
-                <Link href="/ueber-uns" className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm">
-                  Über uns
-                </Link>
-              </li>
-              <li>
-                <Link href="/impressum" className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm">
-                  Impressum
-                </Link>
-              </li>
-              <li>
-                <Link href="/datenschutz" className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm">
-                  Datenschutz
-                </Link>
-              </li>
-              <li>
-                <button
-                  onClick={openSettings}
-                  className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm"
-                >
-                  Cookie-Einstellungen
-                </button>
-              </li>
-              <li>
-                <Link href="/feedback" className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-1">
-                  <span>💬</span> Feedback geben
-                </Link>
-              </li>
-            </ul>
+          {/* Rechtliches & Mehr */}
+          <div className="flex flex-col gap-6">
+            <div>
+              <h3 className="font-bold text-sm uppercase tracking-wider mb-3 text-primary-100">Rechtliches</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/impressum" className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm">
+                    Impressum
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/datenschutz" className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm">
+                    Datenschutz
+                  </Link>
+                </li>
+                <li>
+                  <button
+                    onClick={openSettings}
+                    className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm"
+                  >
+                    Cookie-Einstellungen
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-bold text-sm uppercase tracking-wider mb-3 text-primary-100">Mehr</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/ueber-uns" className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm">
+                    Über uns
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/ki-rechner" className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-1">
+                    <span>🤖</span> KI-Rechner
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/feedback" className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-1">
+                    <span>💬</span> Feedback geben
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
 
