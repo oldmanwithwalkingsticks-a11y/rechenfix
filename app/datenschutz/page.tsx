@@ -184,21 +184,46 @@ export default function DatenschutzSeite() {
             </p>
           </Section>
 
-          {/* 9. Affiliate-Links */}
-          <Section nr="9" titel="Affiliate-Links">
+          {/* 9. Affiliate-Links und Werbung */}
+          <Section nr="9" titel="Affiliate-Links und Werbung">
             <p>
-              Unsere Website enthält sogenannte Affiliate-Links zu folgenden Partnerprogrammen:
+              Einige Seiten auf rechenfix.de enthalten Empfehlungen und Links zu Produkten und Dienstleistungen Dritter (sog. Affiliate-Links). Diese Links sind als &bdquo;Anzeige&ldquo; gekennzeichnet. Wenn Sie auf einen solchen Link klicken und ein Produkt kaufen oder einen Vertrag abschließen, erhalten wir möglicherweise eine Provision vom Anbieter. Für Sie entstehen dabei keine zusätzlichen Kosten.
             </p>
+            <p className="mt-3">
+              Die Auswahl der empfohlenen Produkte erfolgt redaktionell und unabhängig. Die Platzierung von Affiliate-Links beeinflusst nicht die Ergebnisse unserer Rechner.
+            </p>
+            <p className="mt-3">Wir arbeiten derzeit mit folgenden Partnerprogrammen (über das Awin-Netzwerk):</p>
             <ul className="list-disc pl-5 space-y-2 mt-3">
               <li>
-                <strong>Amazon PartnerNet:</strong> Betrieben von Amazon Europe Core S.à r.l. (38 avenue John F. Kennedy, L-1855 Luxemburg). Wenn Sie über einen Affiliate-Link ein Produkt kaufen, erhalten wir eine Provision. Amazon setzt dabei eigene Cookies, um die Zuordnung zu ermöglichen.
+                <strong>congstar</strong> (Mobilfunk)
               </li>
               <li>
-                <strong>Check24:</strong> Betrieben von CHECK24 GmbH (Erika-Mann-Straße 62-66, 80636 München). Bei Klick auf einen Check24-Link werden Sie auf die Check24-Website weitergeleitet, wobei ein Tracking-Cookie gesetzt werden kann.
+                <strong>Lexware Office</strong> (Buchhaltungssoftware)
+              </li>
+              <li>
+                <strong>WISO Steuer / Buhl Data</strong> (Steuersoftware)
+              </li>
+              <li>
+                <strong>smartsteuer</strong> (Online-Steuererklärung)
+              </li>
+              <li>
+                <strong>CHECK24</strong> (Vergleichsportal)
+              </li>
+              <li>
+                <strong>KS Auxilia</strong> (Rechtsschutzversicherung)
+              </li>
+              <li>
+                <strong>Eventfloss Berlin</strong> (Eventveranstalter)
               </li>
             </ul>
             <p className="mt-3">
-              Die Einbindung von Affiliate-Links erfolgt auf Grundlage unseres berechtigten Interesses an der Finanzierung unseres kostenlosen Angebots (Art. 6 Abs. 1 lit. f DSGVO). Affiliate-Links sind auf unserer Website als solche gekennzeichnet.
+              Bei Klick auf einen Affiliate-Link werden Sie auf die Website des Anbieters weitergeleitet. Dort gelten die Datenschutzbestimmungen des jeweiligen Anbieters. Die Affiliate-Links werden über das Netzwerk der <strong>Awin AG</strong> (Eichhornstraße 3, 10785 Berlin) vermittelt. Awin kann dabei einen Tracking-Cookie setzen, um die Zuordnung des Kaufs zu ermöglichen.
+            </p>
+            <p className="mt-3">
+              Zusätzlich speichern wir bei Klick auf einen Affiliate-Link anonymisierte Klickdaten (Programm, Seitenname, Zeitstempel) lokal in Ihrem Browser (localStorage). Diese Daten verlassen Ihr Gerät nicht und dienen ausschließlich der internen Auswertung. Sofern Sie der Nutzung von Google Analytics zugestimmt haben, wird der Klick zusätzlich als Analytics-Event erfasst.
+            </p>
+            <p className="mt-3">
+              Die Einbindung von Affiliate-Links erfolgt auf Grundlage unseres berechtigten Interesses an der Finanzierung unseres kostenlosen Angebots (Art. 6 Abs. 1 lit. f DSGVO). Affiliate-Links sind auf unserer Website stets als &bdquo;Anzeige&ldquo; gekennzeichnet.
             </p>
           </Section>
 

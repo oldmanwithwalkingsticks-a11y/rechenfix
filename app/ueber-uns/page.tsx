@@ -35,6 +35,9 @@ export default function UeberUnsSeite() {
             <p>
               Unser Ziel: Komplexe Berechnungen einfach und für jeden zugänglich machen. Alle Rechner werden regelmäßig auf Aktualität geprüft und an die neuesten Werte (Steuersätze, Sozialabgaben, Freibeträge) angepasst.
             </p>
+            <p>
+              Rechenfix.de finanziert sich durch Werbung und Affiliate-Partnerschaften. Die Rechner-Ergebnisse werden davon nicht beeinflusst.
+            </p>
           </div>
 
           {/* Qualitätsstandards */}

@@ -109,7 +109,7 @@ export default function CookieBanner() {
                 {/* Marketing */}
                 <CookieToggle
                   label="Marketing-Cookies (Google AdSense)"
-                  description="Ermöglichen die Anzeige personalisierter Werbung basierend auf Ihrem Surfverhalten."
+                  description="Ermöglichen die Anzeige personalisierter Werbung und die Erfassung von Affiliate-Klicks in Google Analytics."
                   checked={marketing}
                   disabled={false}
                   onChange={setMarketing}

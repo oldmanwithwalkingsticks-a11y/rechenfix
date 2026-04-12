@@ -89,6 +89,16 @@ export default function ImpressumSeite() {
             </p>
           </section>
 
+          {/* Affiliate-Hinweis */}
+          <section>
+            <h2 className="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">
+              Hinweis zu Affiliate-Links
+            </h2>
+            <p>
+              Diese Website enthält Affiliate-Links. Bei einem Kauf über diese Links erhalten wir eine Provision. Affiliate-Links sind als &bdquo;Anzeige&ldquo; gekennzeichnet.
+            </p>
+          </section>
+
           {/* Quelle */}
           <section className="pt-4 border-t border-gray-200 dark:border-gray-700">
             <p className="text-sm text-gray-500 dark:text-gray-500">
