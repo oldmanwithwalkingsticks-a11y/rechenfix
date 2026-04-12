@@ -168,6 +168,29 @@ export default function SteuererstattungRechner() {
             </div>
           </div>
 
+          {/* Steuerklasse-Hinweis */}
+          {steuerklasse === 3 && (
+            <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-xl p-4 mb-4">
+              <p className="text-sm text-blue-700 dark:text-blue-400">
+                <strong>Steuerklasse III:</strong> In dieser Steuerklasse zahlen Sie monatlich bereits weniger Lohnsteuer dank Ehegattensplitting. Dadurch ist Ihr Grenzsteuersatz niedriger — jede absetzbare Ausgabe bringt daher etwas weniger Erstattung. Dafür haben Sie über das Jahr verteilt aber deutlich mehr Netto.
+              </p>
+            </div>
+          )}
+          {steuerklasse === 5 && (
+            <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-xl p-4 mb-4">
+              <p className="text-sm text-blue-700 dark:text-blue-400">
+                <strong>Steuerklasse V:</strong> In dieser Steuerklasse wird ein höherer Lohnsteueranteil einbehalten, damit Ihr Partner in Steuerklasse III weniger zahlt. Dadurch ist Ihr Grenzsteuersatz höher — absetzbare Ausgaben bringen hier mehr Erstattung.
+              </p>
+            </div>
+          )}
+          {steuerklasse === 6 && (
+            <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-xl p-4 mb-4">
+              <p className="text-sm text-blue-700 dark:text-blue-400">
+                <strong>Steuerklasse VI:</strong> Diese Steuerklasse gilt für Zweit- und Nebenjobs. Da der Grundfreibetrag bereits beim Hauptjob berücksichtigt wird, ist der Grenzsteuersatz hier am höchsten — absetzbare Ausgaben bringen daher die größte Erstattung.
+              </p>
+            </div>
+          )}
+
           {/* Motivations-Text */}
           {ergebnis.geschaetzteErstattung > 0 && (
             <div className="bg-green-50 dark:bg-green-500/10 border border-green-200 dark:border-green-500/30 rounded-xl p-4 mb-4">
