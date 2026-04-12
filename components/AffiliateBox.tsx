@@ -39,7 +39,7 @@ const AFFILIATE_PROGRAMS = {
     tagline: 'Anbieter vergleichen und sofort sparen',
     cta: 'Jetzt vergleichen',
     baseUrl: 'https://www.awin1.com/cread.php?awinmid=9364&awinaffid=2843240',
-    deeplink: 'https://www.check24.de/strom/',
+    deeplink: '',
     icon: '🔍',
     color: '#003E7E',
   },
@@ -118,13 +118,27 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
   },
 };
 
+// --- Kontextspezifische Deeplinks ---
+
+const CONTEXT_DEEPLINKS: Partial<Record<ProgramId, Record<string, string>>> = {
+  check24: {
+    'kfz-steuer': 'https://www.check24.net/kfz-versicherung/',
+    'spritkosten': 'https://www.check24.net/kfz-versicherung/',
+    'strom': 'https://www.check24.net/stromvergleich/',
+    'stromvergleich': 'https://www.check24.net/stromvergleich/',
+    'nebenkosten': 'https://www.check24.net/gasvergleich/',
+    'heizkosten': 'https://www.check24.net/gasvergleich/',
+  },
+};
+
 // --- Hilfsfunktionen ---
 
-function buildAwinUrl(program: typeof AFFILIATE_PROGRAMS[ProgramId], clickref: string): string {
+function buildAwinUrl(program: typeof AFFILIATE_PROGRAMS[ProgramId], clickref: string, deeplink?: string): string {
   let url = `${program.baseUrl}&clickref=${encodeURIComponent(clickref)}`;
 
-  if (program.deeplink) {
-    url += `&ued=${encodeURIComponent(program.deeplink)}`;
+  const dl = deeplink || program.deeplink;
+  if (dl) {
+    url += `&ued=${encodeURIComponent(dl)}`;
   }
 
   return url;
@@ -162,7 +176,8 @@ export function AffiliateBox({ programId, context, variant = 'full' }: Affiliate
       .slice(0, 50) || 'startseite';
   }, [pathname]);
 
-  const url = buildAwinUrl(program, clickref);
+  const contextDeeplink = context ? CONTEXT_DEEPLINKS[programId]?.[context] : undefined;
+  const url = buildAwinUrl(program, clickref, contextDeeplink);
 
   const handleClick = useCallback(() => {
     // localStorage-Logging: keine personenbezogenen Daten, immer erlaubt
