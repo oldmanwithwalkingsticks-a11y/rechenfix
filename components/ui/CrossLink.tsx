@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 
 interface CrossLinkProps {
@@ -7,18 +9,18 @@ interface CrossLinkProps {
 }
 
 /**
- * Dezenter Inline-Cross-Link zu einem anderen Rechner.
+ * Inline-Cross-Link zu einem anderen Rechner.
  * Platzierung: im Ergebnis-Bereich oder neben Eingabefeldern.
  */
 export default function CrossLink({ href, emoji, text }: CrossLinkProps) {
   return (
     <Link
       href={href}
-      className="flex items-center gap-2 px-3 py-2.5 my-2 rounded-lg bg-gray-50 dark:bg-gray-700/40 border border-gray-200 dark:border-gray-600 hover:border-primary-300 dark:hover:border-primary-500 hover:bg-primary-50 dark:hover:bg-primary-500/10 transition-colors duration-200 group"
+      className="flex items-center gap-2 px-4 py-3 my-3 rounded-xl bg-primary-50 dark:bg-primary-500/10 border border-primary-200 dark:border-primary-500/30 hover:bg-primary-100 dark:hover:bg-primary-500/20 hover:border-primary-300 dark:hover:border-primary-500/50 transition-colors duration-200 group print:hidden"
     >
-      <span className="text-base flex-shrink-0" role="img" aria-hidden="true">{emoji}</span>
-      <span className="text-sm text-gray-600 dark:text-gray-300 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">{text}</span>
-      <span className="ml-auto text-gray-400 group-hover:text-primary-500 transition-colors" aria-hidden="true">→</span>
+      <span className="text-lg flex-shrink-0" role="img" aria-hidden="true">{emoji}</span>
+      <span className="text-sm font-medium text-primary-700 dark:text-primary-300 group-hover:text-primary-800 dark:group-hover:text-primary-200 transition-colors">{text}</span>
+      <span className="ml-auto text-primary-400 dark:text-primary-500 group-hover:text-primary-600 dark:group-hover:text-primary-300 transition-colors font-bold" aria-hidden="true">→</span>
     </Link>
   );
 }
