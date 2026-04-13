@@ -3838,6 +3838,98 @@ Für eine individuelle Anpassung der Makronährstoffverteilung — etwa bei eine
       },
     ],
   },
+  {
+    slug: 'geburtstermin-rechner',
+    titel: 'Geburtstermin-Rechner',
+    beschreibung: 'Geburtstermin berechnen: Nach der Naegele-Regel mit drei Methoden — letzte Periode, Empfängnisdatum oder Ultraschall.',
+    kategorie: 'Gesundheit',
+    kategorieSlug: 'gesundheit',
+    metaTitle: 'Geburtstermin-Rechner 2026 — Entbindungstermin berechnen | Rechenfix',
+    metaDescription: 'Geburtstermin berechnen: Naegele-Regel mit letzter Periode, Empfängnisdatum oder Ultraschall ✓ SSW-Anzeige ✓ Meilenstein-Timeline ✓ Mit KI-Erklärung.',
+    keywords: ['geburtstermin berechnen', 'geburtsterminrechner', 'entbindungstermin berechnen', 'ssw berechnen', 'schwangerschaftswoche berechnen', 'naegele regel', 'geburtstermin rechner', 'et berechnen'],
+    icon: '🤰',
+    formel: 'Geburtstermin = Erster Tag der letzten Periode + 280 Tage (± Zykluskorrektur)',
+    beispiel: 'Beispiel: Letzte Periode am 01.01.2026 bei 28-Tage-Zyklus → Geburtstermin: 08.10.2026 (SSW 40+0)',
+    erklaerung: `**Wie wird der Geburtstermin berechnet?**
+
+Der Geburtstermin wird in der Regel nach der **Naegele-Regel** berechnet, die nach dem deutschen Gynäkologen Franz Naegele (1778–1851) benannt ist. Diese bewährte Formel ist seit über 200 Jahren der Standard in der Geburtshilfe und wird von Frauenärzten weltweit verwendet.
+
+Die Berechnung geht vom **ersten Tag der letzten Regelblutung** aus und addiert **280 Tage** (40 Wochen). Das Ergebnis ist der voraussichtliche Entbindungstermin (ET). Bei einem abweichenden Zykluslänge wird eine Korrektur vorgenommen: Ist der Zyklus länger als 28 Tage, verschiebt sich der Termin nach hinten — ist er kürzer, nach vorne.
+
+**Was bedeutet SSW (Schwangerschaftswoche)?**
+
+Die Schwangerschaftswoche (SSW) wird ab dem ersten Tag der letzten Periode gezählt — also bereits vor der eigentlichen Empfängnis. Die Angabe erfolgt im Format „SSW X+Y", wobei X die vollendete Woche und Y die zusätzlichen Tage sind. Eine Schwangerschaft dauert rechnerisch **40 Wochen** oder **280 Tage**. Die tatsächliche Empfängnis findet in der Regel um den Eisprung herum statt, also etwa in **SSW 2+0**.
+
+Die Einteilung in Schwangerschaftswochen dient Ärzten und Hebammen zur Orientierung bei Vorsorgeuntersuchungen, Ultraschalltermine und der Beurteilung der kindlichen Entwicklung.
+
+**Drei Methoden zur Berechnung des Geburtstermins**
+
+Unser Rechner bietet drei verschiedene Berechnungsmethoden an:
+
+1. **Letzte Periode (Naegele-Regel):** Die gängigste Methode. Sie geben den ersten Tag Ihrer letzten Regelblutung und Ihre durchschnittliche Zykluslänge ein. Der Rechner addiert 280 Tage und korrigiert bei abweichender Zykluslänge.
+
+2. **Empfängnisdatum:** Wenn Sie das Datum der Empfängnis kennen (z. B. bei künstlicher Befruchtung oder Zyklusmonitoring), rechnet der Rechner vom Empfängnisdatum 266 Tage vorwärts. Das entspricht den 280 Tagen minus den 14 Tagen vor dem Eisprung.
+
+3. **Ultraschall-Messung:** Bei einer Ultraschalluntersuchung bestimmt der Arzt die aktuelle Schwangerschaftswoche anhand der Größe des Embryos. Der Rechner errechnet daraus den Beginn der Schwangerschaft und den voraussichtlichen Geburtstermin. Diese Methode gilt als die **genaueste**, insbesondere im ersten Trimester (SSW 8–12).
+
+**Wie genau ist der errechnete Geburtstermin?**
+
+Der errechnete Geburtstermin ist ein Richtwert. Statistisch kommen nur etwa **4 bis 5 Prozent** aller Babys tatsächlich am errechneten Termin zur Welt. Die meisten Geburten finden in einem Zeitfenster von **zwei Wochen vor bis zwei Wochen nach** dem ET statt. Erstgebärende tendieren dazu, etwas später zu entbinden, während Mehrgebärende häufiger vor dem Termin entbinden.
+
+Faktoren, die den tatsächlichen Geburtstermin beeinflussen, sind unter anderem: genetische Veranlagung, Alter der Mutter, Anzahl vorheriger Schwangerschaften, körperliche Aktivität und allgemeiner Gesundheitszustand.
+
+**Die drei Trimester der Schwangerschaft**
+
+Die Schwangerschaft wird in drei Trimester (Drittel) eingeteilt:
+
+- **1. Trimester (SSW 1–12):** Die Organe des Babys werden angelegt. In dieser Phase finden wichtige Vorsorgeuntersuchungen statt, darunter das Ersttrimester-Screening (SSW 11–14) mit Nackenfaltenmessung.
+
+- **2. Trimester (SSW 13–27):** Das Baby wächst deutlich und die ersten Bewegungen werden spürbar. Das Organscreening (Feindiagnostik) findet in SSW 19–22 statt. Viele Eltern erfahren in diesem Zeitraum das Geschlecht ihres Kindes.
+
+- **3. Trimester (SSW 28–40):** Das Baby reift aus und nimmt an Gewicht zu. Ab SSW 34 beginnt der **Mutterschutz** (6 Wochen vor dem ET). Die Vorbereitung auf die Geburt steht im Vordergrund.
+
+**Mutterschutz und Elterngeld**
+
+Der gesetzliche Mutterschutz in Deutschland beginnt **6 Wochen vor** dem errechneten Entbindungstermin und endet **8 Wochen danach** (bei Früh- und Mehrlingsgeburten 12 Wochen). Während des Mutterschutzes erhalten Arbeitnehmerinnen Mutterschaftsgeld von der Krankenkasse und einen Arbeitgeberzuschuss.
+
+Im Anschluss an den Mutterschutz können Eltern [Elterngeld](/finanzen/elterngeld-rechner) beantragen. Mit unserem Elterngeld-Rechner können Sie bereits vor der Geburt berechnen, wie hoch Ihr Elterngeld voraussichtlich ausfallen wird.
+
+**Vorsorgeuntersuchungen in der Schwangerschaft**
+
+Unser Meilenstein-Timeline zeigt Ihnen die wichtigsten Termine während der Schwangerschaft: vom Ersttrimester-Screening über das Organscreening und den Rhesusfaktor-Test bis hin zum Mutterschutz-Beginn und dem errechneten Geburtstermin. So behalten Sie alle wichtigen Termine im Blick.
+
+Für Ihre allgemeine Gesundheit während der Schwangerschaft kann auch unser [BMI-Rechner](/gesundheit/bmi-rechner) hilfreich sein, um Ihre Gewichtsentwicklung zu beobachten. Achten Sie zudem auf ausreichend Schlaf — unser [Schlafrechner](/gesundheit/schlaf-rechner) hilft Ihnen, die optimale Schlafenszeit zu finden.`,
+    faq: [
+      {
+        frage: 'Wie genau ist der errechnete Geburtstermin?',
+        antwort: 'Nur etwa 4–5 % aller Babys kommen am errechneten Termin zur Welt. Die meisten Geburten finden in einem Zeitfenster von zwei Wochen vor bis zwei Wochen nach dem ET statt. Der per Ultraschall bestimmte Termin gilt als am genauesten, insbesondere wenn die Messung im ersten Trimester (SSW 8–12) erfolgt.',
+      },
+      {
+        frage: 'Welche Methode zur Berechnung des Geburtstermins ist die beste?',
+        antwort: 'Die Ultraschall-Methode gilt als die genaueste, da sie die tatsächliche Größe des Embryos berücksichtigt. Die Berechnung nach der letzten Periode (Naegele-Regel) ist die gängigste, kann aber bei unregelmäßigem Zyklus ungenau sein. Das Empfängnisdatum ist besonders nützlich bei IVF oder wenn der Eisprung durch Monitoring bestätigt wurde.',
+      },
+      {
+        frage: 'Was bedeutet SSW 12+3?',
+        antwort: 'SSW 12+3 bedeutet: 12 vollendete Schwangerschaftswochen und 3 zusätzliche Tage. Sie befinden sich also im Verlauf der 13. Schwangerschaftswoche. Die Zählung beginnt ab dem ersten Tag der letzten Regelblutung, nicht ab der Empfängnis.',
+      },
+      {
+        frage: 'Ab wann beginnt der Mutterschutz?',
+        antwort: 'Der gesetzliche Mutterschutz beginnt 6 Wochen vor dem errechneten Entbindungstermin und endet 8 Wochen nach der Geburt (bei Früh- und Mehrlingsgeburten 12 Wochen). Während des Mutterschutzes erhalten Sie Mutterschaftsgeld von der Krankenkasse und einen Arbeitgeberzuschuss.',
+      },
+      {
+        frage: 'Was passiert, wenn das Baby nach dem Termin noch nicht da ist?',
+        antwort: 'Eine Schwangerschaft gilt bis SSW 42+0 als termingerecht übertragen. Ab SSW 41+0 werden die Vorsorgeuntersuchungen engmaschiger (alle 2 Tage CTG). Ab SSW 42+0 wird in der Regel eine Geburtseinleitung empfohlen, da das Risiko für Komplikationen steigt.',
+      },
+      {
+        frage: 'Beeinflusst die Zykluslänge den Geburtstermin?',
+        antwort: 'Ja, die Zykluslänge hat direkten Einfluss auf den errechneten Geburtstermin. Die Naegele-Regel geht von einem 28-Tage-Zyklus aus. Bei einem längeren Zyklus (z. B. 32 Tage) verschiebt sich der Termin um 4 Tage nach hinten, bei einem kürzeren Zyklus (z. B. 25 Tage) um 3 Tage nach vorne.',
+      },
+      {
+        frage: 'Kann ich den Geburtstermin auch ohne Arztbesuch berechnen?',
+        antwort: 'Ja, mit der Naegele-Regel können Sie den Geburtstermin selbst berechnen: Erster Tag der letzten Periode + 280 Tage (± Zykluskorrektur). Unser Rechner macht das automatisch. Für eine genaue Bestätigung sollten Sie aber immer einen Frauenarzt aufsuchen, der per Ultraschall den Termin überprüft.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -3851,6 +3943,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'geburtstermin-rechner',
   'kalorienrechner',
   'kreditrechner',
   'bussgeldrechner',
@@ -3963,6 +4056,7 @@ const verwandteMap: Record<string, string[]> = {
   'bussgeldrechner': ['kfz-steuer-rechner', 'spritkosten-rechner', 'kw-ps-umrechner', 'promillerechner'],
   'kreditrechner': ['zinsrechner', 'sparrechner', 'inflationsrechner', 'brutto-netto-rechner'],
   'kalorienrechner': ['bmi-rechner', 'schlaf-rechner', 'raucher-rechner', 'promillerechner'],
+  'geburtstermin-rechner': ['elterngeld-rechner', 'schlaf-rechner', 'bmi-rechner', 'kalorienrechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
