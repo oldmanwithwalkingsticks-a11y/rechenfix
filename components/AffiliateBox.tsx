@@ -93,6 +93,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'grunderwerbsteuer': 'Kaufnebenkosten lassen sich teilweise von der Steuer absetzen.',
     'steuererstattung': 'WISO Steuer: Umfassende Steuersoftware mit automatischem Belegabruf.',
     'teilzeit': 'Teilzeit und Steuern? WISO Steuer hilft Ihnen, das Maximum aus Ihrer Steuererklärung herauszuholen.',
+    'abfindung': 'Fünftelregelung in der Steuererklärung beantragen — WISO Steuer führt Sie Schritt für Schritt.',
   },
   smartsteuer: {
     'brutto-netto': 'Online-Steuererklärung machen und Geld vom Finanzamt zurückholen.',
@@ -128,6 +129,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
   'ks-auxilia': {
     'rechtsschutz': 'KS Auxilia bietet Rechtsschutzversicherung ab 18,90 €/Monat — mit freier Anwaltswahl.',
     'kuendigung': 'Kündigung erhalten? KS Auxilia Rechtsschutz übernimmt die Anwaltskosten bei Kündigungsschutzklage und arbeitsrechtlichen Streitigkeiten.',
+    'abfindung': 'Kündigung erhalten? Mit KS Auxilia Rechtsschutz können Sie eine höhere Abfindung verhandeln.',
     'urlaubstage': 'Arbeitgeber kürzt Urlaub? Rechtsschutz gibt Ihnen Sicherheit.',
     'ueberstunden': 'Unbezahlte Überstunden? Mit Rechtsschutz zu Ihrem Recht.',
     'bussgeld': 'Einspruch gegen den Bußgeldbescheid? KS Auxilia Rechtsschutz übernimmt die Anwaltskosten — auch im Verkehrsrecht.',
