@@ -269,71 +269,72 @@ export default function AutokostenRechner() {
             </div>
           </div>
 
-          {/* Tortendiagramm (CSS) + Aufschlüsselung */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-            {/* Tortendiagramm als SVG */}
-            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 flex flex-col items-center justify-center">
-              <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3 self-start">Kostenverteilung</h3>
-              <svg viewBox="0 0 200 200" className="w-48 h-48">
-                {(() => {
-                  let cum = 0;
-                  return ergebnis.kostenBloecke.filter(b => b.anteilProzent > 0).map((block) => {
-                    const startAngle = (cum / 100) * 360;
-                    cum += block.anteilProzent;
-                    const endAngle = (cum / 100) * 360;
-                    const largeArc = endAngle - startAngle > 180 ? 1 : 0;
-                    const r = 90;
-                    const cx = 100, cy = 100;
-                    const x1 = cx + r * Math.cos((startAngle - 90) * Math.PI / 180);
-                    const y1 = cy + r * Math.sin((startAngle - 90) * Math.PI / 180);
-                    const x2 = cx + r * Math.cos((endAngle - 90) * Math.PI / 180);
-                    const y2 = cy + r * Math.sin((endAngle - 90) * Math.PI / 180);
-                    const d = `M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 ${largeArc} 1 ${x2} ${y2} Z`;
-                    return <path key={block.label} d={d} fill={block.farbe} stroke="white" strokeWidth="1" />;
-                  });
-                })()}
-              </svg>
-              <div className="flex flex-wrap gap-2 mt-3 justify-center">
-                {ergebnis.kostenBloecke.filter(b => b.anteilProzent > 0).map(b => (
-                  <span key={b.label} className="flex items-center gap-1 text-[10px] text-gray-600 dark:text-gray-400">
-                    <span className="w-2.5 h-2.5 rounded-sm inline-block" style={{ backgroundColor: b.farbe }} />
-                    {b.label}
-                  </span>
-                ))}
-              </div>
+          {/* Kostenverteilung (Tortendiagramm) */}
+          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-4 flex flex-col items-center">
+            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3 self-start">Kostenverteilung</h3>
+            <svg viewBox="0 0 200 200" className="w-44 h-44">
+              {(() => {
+                let cum = 0;
+                return ergebnis.kostenBloecke.filter(b => b.anteilProzent > 0).map((block) => {
+                  const startAngle = (cum / 100) * 360;
+                  cum += block.anteilProzent;
+                  const endAngle = (cum / 100) * 360;
+                  const largeArc = endAngle - startAngle > 180 ? 1 : 0;
+                  const r = 90;
+                  const cx = 100, cy = 100;
+                  const x1 = cx + r * Math.cos((startAngle - 90) * Math.PI / 180);
+                  const y1 = cy + r * Math.sin((startAngle - 90) * Math.PI / 180);
+                  const x2 = cx + r * Math.cos((endAngle - 90) * Math.PI / 180);
+                  const y2 = cy + r * Math.sin((endAngle - 90) * Math.PI / 180);
+                  const d = `M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 ${largeArc} 1 ${x2} ${y2} Z`;
+                  return <path key={block.label} d={d} fill={block.farbe} stroke="white" strokeWidth="1" />;
+                });
+              })()}
+            </svg>
+            <div className="flex flex-wrap gap-x-3 gap-y-1 mt-3 justify-center">
+              {ergebnis.kostenBloecke.filter(b => b.anteilProzent > 0).map(b => (
+                <span key={b.label} className="flex items-center gap-1 text-[11px] text-gray-600 dark:text-gray-400">
+                  <span className="w-2.5 h-2.5 rounded-sm inline-block flex-shrink-0" style={{ backgroundColor: b.farbe }} />
+                  {b.label}
+                </span>
+              ))}
             </div>
+          </div>
 
-            {/* Aufschlüsselungs-Tabelle */}
-            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
-              <div className="px-4 pt-4 pb-1">
-                <h3 className="font-bold text-gray-700 dark:text-gray-200">Aufschlüsselung</h3>
-              </div>
+          {/* Aufschlüsselungs-Tabelle (volle Breite) */}
+          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
+            <div className="px-4 pt-4 pb-1">
+              <h3 className="font-bold text-gray-700 dark:text-gray-200">Aufschlüsselung</h3>
+            </div>
+            <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50 dark:bg-gray-700/50 text-left">
-                    <th className="px-4 py-2 font-semibold text-gray-700 dark:text-gray-300">Position</th>
-                    <th className="px-4 py-2 font-semibold text-gray-700 dark:text-gray-300 text-right">Monat</th>
-                    <th className="px-4 py-2 font-semibold text-gray-700 dark:text-gray-300 text-right hidden sm:table-cell">Jahr</th>
-                    <th className="px-4 py-2 font-semibold text-gray-700 dark:text-gray-300 text-right">Anteil</th>
+                    <th className="px-4 py-2 font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap">Position</th>
+                    <th className="px-4 py-2 font-semibold text-gray-700 dark:text-gray-300 text-right whitespace-nowrap">Monat</th>
+                    <th className="px-4 py-2 font-semibold text-gray-700 dark:text-gray-300 text-right whitespace-nowrap">Jahr</th>
+                    <th className="px-4 py-2 font-semibold text-gray-700 dark:text-gray-300 text-right whitespace-nowrap">Anteil</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
                   {ergebnis.kostenBloecke.map(b => (
                     <tr key={b.label}>
-                      <td className="px-4 py-2 text-gray-600 dark:text-gray-400 flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-sm inline-block flex-shrink-0" style={{ backgroundColor: b.farbe }} />
-                        {b.label}
+                      <td className="px-4 py-2 text-gray-600 dark:text-gray-400 whitespace-nowrap">
+                        <span className="inline-flex items-center gap-1.5">
+                          <span className="w-2 h-2 rounded-sm inline-block flex-shrink-0" style={{ backgroundColor: b.farbe }} />
+                          {b.label}
+                        </span>
                       </td>
-                      <td className="px-4 py-2 text-right tabular-nums text-gray-800 dark:text-gray-200">{fmtEuro(b.monat)} €</td>
-                      <td className="px-4 py-2 text-right tabular-nums text-gray-800 dark:text-gray-200 hidden sm:table-cell">{fmtEuro(b.jahr)} €</td>
-                      <td className="px-4 py-2 text-right tabular-nums text-gray-500 dark:text-gray-400">{Math.round(b.anteilProzent)}%</td>
+                      <td className="px-4 py-2 text-right tabular-nums text-gray-800 dark:text-gray-200 whitespace-nowrap">{fmtEuro(b.monat)} €</td>
+                      <td className="px-4 py-2 text-right tabular-nums text-gray-800 dark:text-gray-200 whitespace-nowrap">{fmtEuro(b.jahr)} €</td>
+                      <td className="px-4 py-2 text-right tabular-nums text-gray-500 dark:text-gray-400 whitespace-nowrap">{Math.round(b.anteilProzent)} %</td>
                     </tr>
                   ))}
                   <tr className="bg-gray-50 dark:bg-gray-700/30 font-bold">
                     <td className="px-4 py-2.5 text-gray-800 dark:text-gray-200">Gesamt</td>
-                    <td className="px-4 py-2.5 text-right tabular-nums text-primary-600 dark:text-primary-400">{fmtEuro(ergebnis.gesamtMonat)} €</td>
-                    <td className="px-4 py-2.5 text-right tabular-nums text-primary-600 dark:text-primary-400 hidden sm:table-cell">{fmtEuro(ergebnis.gesamtJahr)} €</td>
-                    <td className="px-4 py-2.5 text-right tabular-nums text-gray-500 dark:text-gray-400">100%</td>
+                    <td className="px-4 py-2.5 text-right tabular-nums text-primary-600 dark:text-primary-400 whitespace-nowrap">{fmtEuro(ergebnis.gesamtMonat)} €</td>
+                    <td className="px-4 py-2.5 text-right tabular-nums text-primary-600 dark:text-primary-400 whitespace-nowrap">{fmtEuro(ergebnis.gesamtJahr)} €</td>
+                    <td className="px-4 py-2.5 text-right tabular-nums text-gray-500 dark:text-gray-400">100 %</td>
                   </tr>
                 </tbody>
               </table>
