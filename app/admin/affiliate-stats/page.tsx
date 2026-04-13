@@ -9,10 +9,17 @@ interface ClickEntry {
   t: number;
 }
 
-type Tab = 'programm' | 'rechner' | 'alle';
+interface FeedbackEntry {
+  v: 'ja' | 'nein';
+  r: string;
+  t: number;
+}
+
+type Tab = 'programm' | 'rechner' | 'alle' | 'feedback';
 
 export default function AffiliateStatsPage() {
   const [clicks, setClicks] = useState<ClickEntry[]>([]);
+  const [feedbacks, setFeedbacks] = useState<FeedbackEntry[]>([]);
   const [tab, setTab] = useState<Tab>('programm');
 
   useEffect(() => {
@@ -21,6 +28,12 @@ export default function AffiliateStatsPage() {
       setClicks(data);
     } catch {
       setClicks([]);
+    }
+    try {
+      const fb = JSON.parse(localStorage.getItem('rf_feedback') || '[]');
+      setFeedbacks(fb);
+    } catch {
+      setFeedbacks([]);
     }
   }, []);
 
@@ -72,6 +85,26 @@ export default function AffiliateStatsPage() {
     return [...clicks].sort((a, b) => b.t - a.t);
   }, [clicks]);
 
+  const feedbackStats = useMemo(() => {
+    const map = new Map<string, { ja: number; nein: number; letzter: number }>();
+    for (const f of feedbacks) {
+      const e = map.get(f.r) || { ja: 0, nein: 0, letzter: 0 };
+      if (f.v === 'ja') e.ja++;
+      else e.nein++;
+      if (f.t > e.letzter) e.letzter = f.t;
+      map.set(f.r, e);
+    }
+    return Array.from(map.entries())
+      .map(([rechner, d]) => ({ rechner, ...d, gesamt: d.ja + d.nein, rate: d.gesamt > 0 ? (d.ja / (d.ja + d.nein)) * 100 : 0 }))
+      .map(r => ({ ...r, rate: r.gesamt > 0 ? (r.ja / r.gesamt) * 100 : 0 }))
+      .sort((a, b) => b.gesamt - a.gesamt);
+  }, [feedbacks]);
+
+  const feedbackGesamt = useMemo(() => {
+    const ja = feedbacks.filter(f => f.v === 'ja').length;
+    return { ja, nein: feedbacks.length - ja, gesamt: feedbacks.length };
+  }, [feedbacks]);
+
   const fmtDate = (t: number) => {
     const d = new Date(t);
     return d.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })
@@ -104,6 +137,7 @@ export default function AffiliateStatsPage() {
     { key: 'programm', label: 'Nach Programm' },
     { key: 'rechner', label: 'Nach Rechner' },
     { key: 'alle', label: 'Alle Klicks' },
+    { key: 'feedback', label: 'Feedback' },
   ];
 
   return (
@@ -117,14 +151,19 @@ export default function AffiliateStatsPage() {
       </p>
 
       {/* Übersicht */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-center">
-          <p className="text-sm text-gray-500 dark:text-gray-400">Gesamtklicks</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Affiliate-Klicks</p>
           <p className="text-3xl font-bold text-primary-600 dark:text-primary-400">{clicks.length}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-center">
           <p className="text-sm text-gray-500 dark:text-gray-400">Programme</p>
           <p className="text-3xl font-bold text-primary-600 dark:text-primary-400">{nachProgramm.length}</p>
+        </div>
+        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-center">
+          <p className="text-sm text-gray-500 dark:text-gray-400">Feedback</p>
+          <p className="text-3xl font-bold text-green-600 dark:text-green-400">{feedbackGesamt.ja}</p>
+          <p className="text-xs text-gray-400 dark:text-gray-500">👍 {feedbackGesamt.ja} / 👎 {feedbackGesamt.nein}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-center">
           <p className="text-sm text-gray-500 dark:text-gray-400">Zeitraum</p>
@@ -241,6 +280,47 @@ export default function AffiliateStatsPage() {
                 ))}
               </tbody>
             </table>
+          )}
+
+          {tab === 'feedback' && (
+            feedbackStats.length === 0 ? (
+              <div className="text-center py-12 text-gray-400 dark:text-gray-500">
+                Noch keine Feedback-Daten vorhanden.
+              </div>
+            ) : (
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-gray-50 dark:bg-gray-700/50 text-left">
+                    <th className="px-4 py-3 font-semibold text-gray-700 dark:text-gray-300">Rechner</th>
+                    <th className="px-4 py-3 font-semibold text-gray-700 dark:text-gray-300 text-right">👍</th>
+                    <th className="px-4 py-3 font-semibold text-gray-700 dark:text-gray-300 text-right">👎</th>
+                    <th className="px-4 py-3 font-semibold text-gray-700 dark:text-gray-300 text-right">Gesamt</th>
+                    <th className="px-4 py-3 font-semibold text-gray-700 dark:text-gray-300 text-right">Zufriedenheit</th>
+                    <th className="px-4 py-3 font-semibold text-gray-700 dark:text-gray-300 text-right">Letztes</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
+                  {feedbackStats.map(r => (
+                    <tr key={r.rechner} className="hover:bg-gray-50 dark:hover:bg-gray-700/30">
+                      <td className="px-4 py-3 text-gray-800 dark:text-gray-200 font-mono text-xs">{r.rechner}</td>
+                      <td className="px-4 py-3 text-right tabular-nums text-green-600 dark:text-green-400">{r.ja}</td>
+                      <td className="px-4 py-3 text-right tabular-nums text-red-500 dark:text-red-400">{r.nein}</td>
+                      <td className="px-4 py-3 text-right tabular-nums text-gray-600 dark:text-gray-400">{r.gesamt}</td>
+                      <td className="px-4 py-3 text-right">
+                        <span className={`inline-block px-2 py-0.5 rounded text-xs font-semibold ${
+                          r.rate >= 80 ? 'bg-green-100 dark:bg-green-500/20 text-green-700 dark:text-green-400'
+                            : r.rate >= 50 ? 'bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-400'
+                            : 'bg-red-100 dark:bg-red-500/20 text-red-700 dark:text-red-400'
+                        }`}>
+                          {r.rate.toFixed(0)}%
+                        </span>
+                      </td>
+                      <td className="px-4 py-3 text-right text-gray-500 dark:text-gray-400">{fmtDate(r.letzter)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )
           )}
         </div>
       )}
