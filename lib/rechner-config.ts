@@ -5053,6 +5053,72 @@ Seit dem Beschluss des Bundesverfassungsgerichts 2013 und der „Ehe für alle" 
       },
     ],
   },
+  {
+    slug: 'autokosten-rechner',
+    titel: 'Autokosten-Rechner',
+    beschreibung: 'Autokosten berechnen: Monatliche und jährliche Gesamtkosten Ihres Autos — von Versicherung über Sprit bis Wertverlust.',
+    kategorie: 'Auto & Verkehr',
+    kategorieSlug: 'auto',
+    metaTitle: 'Autokosten-Rechner 2026 — Monatliche Kosten fürs Auto berechnen | Rechenfix',
+    metaDescription: 'Autokosten berechnen: Wertverlust, Sprit, Versicherung, Steuer, Wartung und mehr ✓ Kosten pro km ✓ Kostenaufschlüssung ✓ KI-Erklärung.',
+    keywords: ['autokosten rechner', 'autokosten berechnen', 'was kostet ein auto im monat', 'autokosten pro km', 'kosten auto pro monat', 'wertverlust auto', 'unterhaltskosten auto', 'kfz kosten rechner', 'auto gesamtkosten', 'kosten pro kilometer'],
+    icon: '🚗',
+    formel: 'Gesamtkosten/Monat = (Wertverlust + Kraftstoff + Versicherung + Steuer + Wartung + Sonstige) / 12 | Kosten/km = Jahreskosten / Fahrleistung',
+    beispiel: 'Neuwagen 25.000 €, 5 Jahre Haltedauer, 15.000 km/Jahr, 7l/100km Benzin → Wertverlust: 245 €/Mon. | Sprit: 181 €/Mon. | Versicherung: 80 €/Mon. | Gesamt: ca. 571 €/Monat = 0,46 €/km.',
+    erklaerung: `**Was kostet ein Auto wirklich? Die versteckten Kosten**
+
+Ein Auto ist für viele Deutsche ein täglicher Begleiter — aber die wenigsten kennen die tatsächlichen Gesamtkosten. Laut ADAC kostet ein durchschnittlicher Neuwagen der Kompaktklasse zwischen **400 und 600 Euro pro Monat** — und das ist oft mehr, als man denkt. Der Grund: Neben den offensichtlichen Kosten wie Sprit und Versicherung gibt es zahlreiche versteckte Posten. Der mit Abstand größte ist der **Wertverlust**: Ein Neuwagen für 30.000 Euro verliert im ersten Jahr allein rund 7.200 Euro an Wert — das sind 600 Euro pro Monat, mehr als die meisten für Sprit ausgeben. Unser Rechner erfasst alle Kostenblöcke und zeigt Ihnen die wahren Kosten pro Monat und pro Kilometer.
+
+**Wertverlust: Der größte Kostenblock, den viele übersehen**
+
+Der Wertverlust ist bei den meisten Autos der größte einzelne Kostenfaktor — oft 30 bis 50 Prozent der Gesamtkosten. Ein Neuwagen verliert im ersten Jahr durchschnittlich **24 Prozent** seines Wertes, im zweiten Jahr weitere 13 Prozent, danach nimmt der Verlust langsam ab auf 6 bis 8 Prozent pro Jahr. Nach 5 Jahren ist ein Neuwagen typischerweise nur noch 45 bis 50 Prozent des Neupreises wert. Ein Auto für 25.000 Euro hätte dann einen Restwert von ca. 11.000 bis 12.500 Euro — der Wertverlust beträgt also 12.500 bis 14.000 Euro oder rund **208 bis 233 Euro pro Monat**. Gebrauchtwagen verlieren prozentual weniger, da der stärkste Wertverlust in den ersten Jahren stattfindet. Wer einen 3 Jahre alten Gebrauchtwagen kauft, kann den größten Wertverlust vermeiden.
+
+**Neuwagen vs. Gebrauchtwagen: Kostenvergleich über 5 Jahre**
+
+Ein Neuwagen der Kompaktklasse für 30.000 Euro kostet über 5 Jahre Gesamtkosten von ca. 34.000 Euro (inkl. Wertverlust, Sprit, Versicherung, Wartung). Ein vergleichbarer 3 Jahre alter Gebrauchtwagen für 18.000 Euro kostet im gleichen Zeitraum ca. 24.000 Euro — eine Ersparnis von **10.000 Euro** oder 167 Euro pro Monat. Der Hauptgrund ist der geringere Wertverlust. Allerdings können bei älteren Fahrzeugen die Reparaturkosten steigen. Als Faustregel gilt: Ein 2 bis 4 Jahre alter Gebrauchtwagen bietet das beste Verhältnis aus Wertverlust und Zuverlässigkeit. Nutzen Sie unseren [Kfz-Steuer-Rechner](/auto/kfz-steuer-rechner) für die genaue Steuerberechnung Ihres Fahrzeugs.
+
+**Benziner vs. Diesel vs. Elektro: Welcher Antrieb ist am günstigsten?**
+
+Die Antwort hängt von der jährlichen Fahrleistung ab. **Benziner** haben niedrigere Anschaffungskosten und günstigere Versicherung, dafür höheren Verbrauch. **Diesel** lohnen sich ab ca. 15.000 bis 20.000 km/Jahr — der niedrigere Verbrauch und günstigere Dieselpreis kompensieren dann die höhere Kfz-Steuer und Versicherung. **Elektroautos** haben die niedrigsten Energiekosten (ca. 5 bis 7 Euro/100 km vs. 12 bis 15 Euro beim Benziner), keine Kfz-Steuer (bis 2030), niedrigere Wartungskosten (keine Ölwechsel, weniger Bremsenverschleiß) — aber höhere Anschaffungskosten und den Unsicherheitsfaktor Batterielebensdauer. Bei 15.000 km/Jahr und Laden zu Hause ist ein Elektroauto über die Gesamtbetriebskosten oft günstiger als ein vergleichbarer Verbrenner. Berechnen Sie die genauen Spritkosten mit unserem [Spritkostenrechner](/auto/spritkosten-rechner).
+
+**Tipps zum Senken der Autokosten**
+
+Der einfachste Hebel ist die **Kfz-Versicherung**: Ein jährlicher Vergleich spart durchschnittlich 300 bis 500 Euro. Achten Sie auf: höhere Selbstbeteiligung (150/300 statt 0/150 Euro), Werkstattbindung, Telematik-Tarife für Wenigfahrer. Beim **Sprit** helfen: vorausschauendes Fahren (bis 20% Ersparnis), Reifendruck regelmäßig prüfen, unnötiges Gewicht entladen, Preisvergleich-Apps nutzen. Bei der **Wartung**: Freie Werkstätten sind oft 20 bis 40 Prozent günstiger als Vertragswerkstätten. **Versicherung wechseln** lohnt sich besonders im November (Sonderkündigungsrecht). Auch der [KW-PS-Umrechner](/auto/kw-ps-umrechner) und [Bußgeldrechner](/auto/bussgeldrechner) helfen Ihnen, Kosten rund ums Auto im Blick zu behalten.
+
+**Auto vs. ÖPNV vs. Carsharing: Ab wann lohnt sich ein eigenes Auto?**
+
+Ein eigenes Auto lohnt sich finanziell erst ab einer gewissen Fahrleistung und wenn ÖPNV keine echte Alternative ist. Mit einem Deutschlandticket (49 €/Monat) und gelegentlichem Carsharing (ca. 0,30 bis 0,50 €/km) kommen Stadtbewohner oft günstiger weg als mit einem eigenen Auto für 400 bis 600 Euro/Monat. Die Grenze liegt typischerweise bei **10.000 bis 12.000 km/Jahr** in der Stadt: Darunter ist Carsharing + ÖPNV günstiger, darüber lohnt sich das eigene Auto. Auf dem Land ohne ÖPNV-Anbindung ist das Auto natürlich alternativlos. Bedenken Sie auch den Zeitfaktor: Ein eigenes Auto spart oft erhebliche Zeit — und Zeit hat einen Wert.`,
+    faq: [
+      {
+        frage: 'Wie viel kostet ein Auto im Monat?',
+        antwort: 'Die durchschnittlichen monatlichen Autokosten in Deutschland liegen bei 400–600 € für einen Kompaktwagen. Darin enthalten sind Wertverlust (größter Posten!), Kraftstoff, Versicherung, Steuer, Wartung, Reifen und weitere Nebenkosten. Die tatsächlichen Kosten hängen stark von Fahrzeugwert, Fahrleistung und Versicherung ab.',
+      },
+      {
+        frage: 'Was sind die größten Kostenfaktoren beim Auto?',
+        antwort: 'Der Wertverlust ist mit 30–50% der größte Kostenblock, gefolgt von Kraftstoff (20–25%), Versicherung (15–20%) und Wartung/Reparaturen (10–15%). Viele unterschätzen den Wertverlust: Ein Neuwagen für 30.000 € verliert im ersten Jahr ca. 7.200 € an Wert — das sind 600 €/Monat.',
+      },
+      {
+        frage: 'Wie berechne ich die Kosten pro Kilometer?',
+        antwort: 'Teilen Sie die jährlichen Gesamtkosten (inkl. Wertverlust, Sprit, Versicherung, Steuer, Wartung) durch die jährliche Fahrleistung. Beispiel: 6.850 € Jahreskosten ÷ 15.000 km = 0,46 €/km. Der Vollkosten-Kilometersatz liegt bei den meisten Autos zwischen 0,30 und 0,60 €/km.',
+      },
+      {
+        frage: 'Ist ein Elektroauto günstiger als ein Benziner?',
+        antwort: 'Bei den Betriebskosten ja: Strom kostet ca. 5–7 €/100 km vs. 12–15 € beim Benziner. Keine Kfz-Steuer bis 2030, weniger Wartung. Aber: Höherer Kaufpreis. Über die Gesamtbetriebskosten ist ein E-Auto bei 15.000+ km/Jahr und Laden zu Hause oft günstiger. Bei wenig Fahrleistung oder teuren Ladesäulen kann der Verbrenner günstiger sein.',
+      },
+      {
+        frage: 'Wie kann ich meine Autokosten senken?',
+        antwort: 'Größter Hebel: Kfz-Versicherung jährlich vergleichen (300–500 € Ersparnis). Weitere Tipps: Gebrauchtwagen statt Neuwagen kaufen, vorausschauend fahren (-20% Sprit), Reifendruck prüfen, freie Werkstätten nutzen, Preisvergleich-Apps für Sprit, unnötiges Gewicht entladen.',
+      },
+      {
+        frage: 'Wie hoch ist der Wertverlust bei einem Neuwagen?',
+        antwort: 'Ein Neuwagen verliert im 1. Jahr ca. 24% seines Wertes, im 2. Jahr 13%, danach 6–8% pro Jahr. Nach 5 Jahren ist ein Auto typischerweise noch 45–50% des Neupreises wert. Ein Auto für 25.000 € hat nach 5 Jahren einen Restwert von ca. 11.000–12.500 €.',
+      },
+      {
+        frage: 'Lohnt sich ein eigenes Auto oder ist Carsharing günstiger?',
+        antwort: 'In der Stadt liegt die Grenze bei ca. 10.000–12.000 km/Jahr. Darunter ist ÖPNV + Carsharing (Deutschlandticket 49 €/Mon + Carsharing bei Bedarf) günstiger. Darüber lohnt sich das eigene Auto. Auf dem Land ohne ÖPNV ist das eigene Auto praktisch alternativlos.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -5066,6 +5132,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'autokosten-rechner',
   'splitting-rechner',
   'wasserbedarf-rechner',
   'rentenrechner',
@@ -5207,6 +5274,7 @@ const verwandteMap: Record<string, string[]> = {
   'geburtstag-rechner': ['tagerechner', 'countdown', 'lebenszeit-rechner', 'schlaf-rechner'],
   'prozentuale-veraenderung-rechner': ['prozentrechner', 'dreisatz-rechner', 'durchschnitt-rechner', 'rabattrechner'],
   'splitting-rechner': ['brutto-netto-rechner', 'steuererstattung-rechner', 'elterngeld-rechner', 'teilzeit-rechner'],
+  'autokosten-rechner': ['spritkosten-rechner', 'kfz-steuer-rechner', 'kw-ps-umrechner', 'bussgeldrechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
