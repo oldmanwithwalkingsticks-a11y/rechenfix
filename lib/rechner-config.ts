@@ -4869,6 +4869,64 @@ Unser Rechner berücksichtigt bewusst keine steuerlichen Effekte, da diese sehr 
       },
     ],
   },
+  {
+    slug: 'geburtstag-rechner',
+    titel: 'Geburtstags-Rechner',
+    beschreibung: 'Geburtstag berechnen: Alter in Tagen, Stunden und Minuten, Wochentag der Geburt, Sternzeichen und nächster runder Geburtstag.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Geburtstags-Rechner 2026 — Alter in Tagen, Stunden & Minuten | Rechenfix',
+    metaDescription: 'Geburtsdatum analysieren: Alter in Tagen, Stunden und Minuten ✓ Wochentag der Geburt ✓ Sternzeichen ✓ Nächster runder Geburtstag ✓ Live-Zähler.',
+    keywords: ['geburtstag rechner', 'alter in tagen', 'alter in stunden', 'wochentag geburt', 'wie alt bin ich in tagen', 'sternzeichen berechnen', 'nächster runder geburtstag', 'geburtstag berechnen', 'alter in minuten', 'tage seit geburt'],
+    icon: '🎂',
+    formel: 'Alter in Tagen = Differenz Geburtsdatum → Heute | Stunden = Tage × 24 | Minuten = Stunden × 60 | Sekunden = Minuten × 60',
+    beispiel: 'Geboren am 15.06.1990 → 35 Jahre, 9 Monate, 28 Tage = 13.087 Tage = 314.088 Stunden = ca. 1,13 Milliarden Sekunden.',
+    erklaerung: `**Wie alt bin ich in Tagen? Fun-Facts zur Lebensdauer**
+
+Die Frage „Wie alt bin ich eigentlich in Tagen?" klingt einfach, aber die Zahlen sind erstaunlich. Ein 30-Jähriger hat bereits über **10.950 Tage** gelebt — das sind rund **262.800 Stunden** oder über **15,7 Millionen Minuten**. Bis zum 80. Geburtstag werden es knapp 29.200 Tage sein. Unser Geburtstags-Rechner berechnet Ihr exaktes Alter in allen Einheiten und zeigt sogar einen **Live-Sekunden-Zähler**, der in Echtzeit hochzählt. Die Sekunden-Zahl ist besonders beeindruckend: Mit 30 Jahren haben Sie bereits über **946 Millionen Sekunden** gelebt. Wer 1 Milliarde Sekunden erreichen will, muss etwa 31 Jahre und 8 Monate alt werden — ein Meilenstein, den die meisten Menschen gar nicht bewusst erleben.
+
+**Wochentag der Geburt: Was sagt der Volksmund?**
+
+An welchem Wochentag wurden Sie geboren? Im englischen Volksmund gibt es dazu einen bekannten Kinderreim: „Monday's child is fair of face, Tuesday's child is full of grace..." Auch im deutschen Volksglauben spielte der Geburtstags-Wochentag eine Rolle. **Sonntagskinder** galten traditionell als besonders glücklich — sie sollten übernatürliche Fähigkeiten besitzen und das Glück im Leben anziehen. **Freitagskinder** wurden dagegen mancherorts als unglücklich betrachtet. Statistisch gesehen werden die meisten Kinder in Deutschland an einem **Dienstag** geboren — weniger an Wochenenden, da viele geplante Geburten (Kaiserschnitte, Einleitungen) unter der Woche stattfinden. Mit dem [Tagerechner](/alltag/tagerechner) können Sie übrigens den Wochentag für jedes beliebige Datum ermitteln.
+
+**Die 12 Sternzeichen und ihre Daten**
+
+Die westliche Astrologie teilt das Jahr in 12 Sternzeichen ein, die sich an der Position der Sonne zur Geburt orientieren. **Widder** (21.3.–19.4.) gilt als mutig und impulsiv. **Stier** (20.4.–20.5.) als beständig und genussfreudig. **Zwillinge** (21.5.–20.6.) als kommunikativ und vielseitig. **Krebs** (21.6.–22.7.) als emotional und fürsorglich. **Löwe** (23.7.–22.8.) als selbstbewusst und großzügig. **Jungfrau** (23.8.–22.9.) als analytisch und gewissenhaft. **Waage** (23.9.–22.10.) als harmoniebedürftig und diplomatisch. **Skorpion** (23.10.–21.11.) als leidenschaftlich und tiefgründig. **Schütze** (22.11.–21.12.) als optimistisch und freiheitsliebend. **Steinbock** (22.12.–19.1.) als ehrgeizig und diszipliniert. **Wassermann** (20.1.–18.2.) als kreativ und unkonventionell. **Fische** (19.2.–20.3.) als einfühlsam und träumerisch.
+
+**Runde Geburtstage: Bedeutung und Traditionen**
+
+Runde Geburtstage — also der 30., 40., 50., 60. und so weiter — haben in vielen Kulturen eine besondere Bedeutung. Der **30. Geburtstag** markiert traditionell den Eintritt ins „richtige" Erwachsenenalter. Eine kuriose Tradition: Unverheiratete Männer müssen in Norddeutschland am 30. Geburtstag die Treppe des Rathauses fegen, bis sie von einer Jungfrau erlöst werden. Der **40. Geburtstag** gilt als Lebensmitte — viele Menschen berichten von einer „Midlife-Reflexion". Der **50. Geburtstag** wird oft besonders groß gefeiert, ebenso der **60.**, der in vielen Unternehmen mit einer besonderen Ehrung verbunden ist. Ab dem **65. Geburtstag** beginnt für die meisten das Rentenalter. Unser Rechner zeigt Ihnen, wann Ihr nächster runder Geburtstag ansteht und wie viele Tage es noch dauert.
+
+**Schnapszahl-Geburtstage und besondere Meilensteine**
+
+Neben den runden Geburtstagen gibt es weitere spannende Meilensteine. Der **1.000. Tag** im Leben fällt ungefähr auf den 2. Geburtstag + 9 Monate — ein Datum, das die meisten Menschen verpassen. Der **10.000. Tag** kommt mit etwa 27 Jahren und 5 Monaten und wird inzwischen von vielen bewusst gefeiert. Der **20.000. Tag** liegt bei rund 54 Jahren und 9 Monaten. Wer **1.000.000 Stunden** alt werden möchte, muss stolze 114 Jahre erreichen — bisher haben das weltweit nur wenige Menschen geschafft. Ein weiterer beliebter Meilenstein: Das Datum, an dem man eine **Milliarde Sekunden** alt wird (ca. 31 Jahre, 252 Tage). Nutzen Sie den [Countdown-Rechner](/alltag/countdown), um zu einem dieser Meilensteine herunterzuzählen, oder den [Lebenszeit-Rechner](/alltag/lebenszeit-rechner) für weitere spannende Statistiken zu Ihrem bisherigen Leben.
+
+**Teilen Sie Ihr Ergebnis!**
+
+Die Ergebnisse des Geburtstags-Rechners eignen sich perfekt zum Teilen — überraschen Sie Freunde und Familie mit der Frage „Wusstest du, dass du schon über 12.000 Tage alt bist?" Nutzen Sie die Teilen-Funktion, um Ihr Ergebnis direkt per WhatsApp oder E-Mail zu verschicken.`,
+    faq: [
+      {
+        frage: 'Wie alt bin ich in Tagen?',
+        antwort: 'Geben Sie einfach Ihr Geburtsdatum ein — der Rechner zeigt Ihnen sofort Ihr exaktes Alter in Tagen, Stunden, Minuten und Sekunden. Ein 30-Jähriger hat z. B. bereits über 10.950 Tage gelebt, ein 50-Jähriger über 18.250 Tage.',
+      },
+      {
+        frage: 'An welchem Wochentag bin ich geboren?',
+        antwort: 'Der Rechner ermittelt automatisch den Wochentag Ihres Geburtsdatums. Im Volksmund gelten Sonntagskinder als besonders glücklich. Statistisch werden in Deutschland die meisten Kinder an einem Dienstag geboren, da geplante Geburten unter der Woche stattfinden.',
+      },
+      {
+        frage: 'Wann bin ich 10.000 Tage alt?',
+        antwort: '10.000 Tage entsprechen etwa 27 Jahren und 5 Monaten. Unser Rechner zeigt Ihnen das genaue Datum dieses Meilensteins an — und ob Sie ihn bereits erreicht haben oder er noch bevorsteht. Weitere Meilensteine: 1.000 Tage (ca. 2 Jahre 9 Monate), 20.000 Tage (ca. 54 Jahre 9 Monate).',
+      },
+      {
+        frage: 'Wie berechne ich mein genaues Alter?',
+        antwort: 'Das genaue Alter wird berechnet, indem die vollen Jahre, zusätzlichen Monate und Resttage zwischen Geburtsdatum und heutigem Datum ermittelt werden. Für Tage wird die Differenz in Kalendertagen berechnet. Unser Rechner macht das automatisch — auch Schaltjahre werden berücksichtigt.',
+      },
+      {
+        frage: 'Was ist mein Sternzeichen?',
+        antwort: 'Das Sternzeichen wird durch das Geburtsdatum bestimmt. Es gibt 12 Sternzeichen, die jeweils einen Zeitraum von etwa einem Monat abdecken. Geben Sie Ihr Geburtsdatum ein und der Rechner zeigt Ihr Sternzeichen mit Symbol und Datumsbereich an.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -5019,6 +5077,7 @@ const verwandteMap: Record<string, string[]> = {
   'koerperfett-rechner': ['bmi-rechner', 'kalorienrechner', 'idealgewicht-rechner', 'wasserbedarf-rechner'],
   'flaechenrechner': ['einheiten-umrechner', 'quadratmeter-rechner', 'durchschnitt-rechner', 'prozentrechner'],
   'mietrendite-rechner': ['baufinanzierung-rechner', 'grunderwerbsteuer-rechner', 'mietrechner', 'kreditrechner'],
+  'geburtstag-rechner': ['tagerechner', 'countdown', 'lebenszeit-rechner', 'schlaf-rechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {

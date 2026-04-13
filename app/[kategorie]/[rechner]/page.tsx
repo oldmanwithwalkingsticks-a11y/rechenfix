@@ -74,6 +74,7 @@ import TrinkgeldRechner from '@/components/rechner/TrinkgeldRechner';
 import KoerperfettRechner from '@/components/rechner/KoerperfettRechner';
 import FlaechenRechner from '@/components/rechner/FlaechenRechner';
 import MietrenditeRechner from '@/components/rechner/MietrenditeRechner';
+import GeburtstagRechner from '@/components/rechner/GeburtstagRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -160,6 +161,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'koerperfett-rechner': KoerperfettRechner,
   'flaechenrechner': FlaechenRechner,
   'mietrendite-rechner': MietrenditeRechner,
+  'geburtstag-rechner': GeburtstagRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
