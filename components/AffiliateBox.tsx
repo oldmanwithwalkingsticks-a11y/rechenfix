@@ -94,6 +94,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'steuererstattung': 'WISO Steuer: Umfassende Steuersoftware mit automatischem Belegabruf.',
     'teilzeit': 'Teilzeit und Steuern? WISO Steuer hilft Ihnen, das Maximum aus Ihrer Steuererklärung herauszuholen.',
     'abfindung': 'Fünftelregelung in der Steuererklärung beantragen — WISO Steuer führt Sie Schritt für Schritt.',
+    'mutterschutz': 'Steuererklärung im Mutterschutzjahr? WISO Steuer berechnet Mutterschaftsgeld und Elterngeld automatisch korrekt.',
   },
   smartsteuer: {
     'brutto-netto': 'Online-Steuererklärung machen und Geld vom Finanzamt zurückholen.',

@@ -65,6 +65,7 @@ import KuendigungsfristRechner from '@/components/rechner/KuendigungsfristRechne
 import EtfSparplanRechner from '@/components/rechner/EtfSparplanRechner';
 import TeilzeitRechner from '@/components/rechner/TeilzeitRechner';
 import AbfindungsRechner from '@/components/rechner/AbfindungsRechner';
+import MutterschutzRechner from '@/components/rechner/MutterschutzRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -142,6 +143,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'etf-sparplanrechner': EtfSparplanRechner,
   'teilzeit-rechner': TeilzeitRechner,
   'abfindungsrechner': AbfindungsRechner,
+  'mutterschutz-rechner': MutterschutzRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
