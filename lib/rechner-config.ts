@@ -4077,6 +4077,70 @@ Ergänzend können Sie mit unserem [Kalorienrechner](/gesundheit/kalorienrechner
     ],
   },
   {
+    slug: 'wasserbedarf-rechner',
+    titel: 'Wasserbedarf-Rechner',
+    beschreibung: 'Täglichen Wasserbedarf berechnen: Empfohlene Trinkmenge basierend auf Gewicht, Aktivität und individuellen Faktoren.',
+    kategorie: 'Gesundheit',
+    kategorieSlug: 'gesundheit',
+    metaTitle: 'Wasserbedarf-Rechner 2026 — Tägliche Trinkmenge berechnen | Rechenfix',
+    metaDescription: 'Wasserbedarf berechnen: Empfohlene tägliche Trinkmenge nach Gewicht, Aktivität und Sport ✓ In Gläsern ✓ KI-Erklärung.',
+    keywords: ['wasserbedarf rechner', 'trinkmenge berechnen', 'wie viel wasser trinken', 'täglicher wasserbedarf', 'wasserbedarf sport', 'trinkmenge pro tag', 'wasser pro kg körpergewicht', 'dehydration vermeiden', 'flüssigkeitsbedarf rechner', 'wasserbedarf schwangerschaft'],
+    icon: '💧',
+    formel: 'Basisbedarf = Körpergewicht × 35 ml/kg (bei leichter Aktivität)',
+    beispiel: '75 kg, leicht aktiv, 60 Min. Sport → 2.625 ml Basis + 700 ml Sport = 3.325 ml ≈ 3,3 Liter (ca. 14 Gläser).',
+    erklaerung: `**Wie viel Wasser sollte man am Tag trinken?**
+
+Die Deutsche Gesellschaft für Ernährung (DGE) empfiehlt Erwachsenen eine tägliche Trinkmenge von mindestens **1,5 Litern** — zusätzlich zur Flüssigkeit aus der Nahrung. Der tatsächliche Bedarf variiert jedoch stark je nach Körpergewicht, Aktivitätslevel, Temperatur und individuellen Faktoren. Eine gängige Faustregel lautet: **30-35 ml pro Kilogramm Körpergewicht** bei normaler Aktivität. Bei einem 75 kg schweren Menschen ergibt das 2,25 bis 2,63 Liter pro Tag.
+
+Unser Rechner berücksichtigt neben dem Gewicht auch Ihr Aktivitätslevel, sportliche Betätigung, Hitze und besondere Umstände wie Schwangerschaft oder Stillzeit. So erhalten Sie eine individuell angepasste Empfehlung, die über die pauschale „2 Liter am Tag"-Regel hinausgeht.
+
+**Faktoren, die den Wasserbedarf beeinflussen**
+
+Verschiedene Faktoren können Ihren Wasserbedarf erheblich verändern. Körperliche Aktivität ist der wichtigste: Beim Sport verlieren Sie durch Schweiß je nach Intensität 500-1.500 ml pro Stunde. Hohe Temperaturen erhöhen den Bedarf um weitere 500-1.000 ml am Tag. Auch trockene Heizungsluft im Winter, Fieber, Durchfall oder Erbrechen steigern den Flüssigkeitsbedarf deutlich. Schwangere sollten ca. 300 ml, Stillende ca. 700 ml mehr trinken als üblich.
+
+Auch die Ernährung spielt eine Rolle: Wasserreiche Lebensmittel wie Gurken, Wassermelonen, Tomaten und Suppen decken etwa 20-30% des täglichen Flüssigkeitsbedarfs. Salzhaltige Speisen erhöhen dagegen den Bedarf. Alkohol wirkt harntreibend und entzieht dem Körper Wasser — pro Glas Alkohol sollte man ein zusätzliches Glas Wasser trinken.
+
+**Anzeichen von Dehydration erkennen**
+
+Viele Menschen trinken zu wenig, ohne es zu merken. Typische Anzeichen für einen Flüssigkeitsmangel sind: dunkler Urin (gesund ist hellgelb), Kopfschmerzen, Müdigkeit und Konzentrationsschwäche, trockene Lippen und Haut, Schwindel und Mundtrockenheit. Bereits ein Flüssigkeitsverlust von 2% des Körpergewichts kann die geistige Leistungsfähigkeit spürbar beeinträchtigen.
+
+Ein einfacher Test: Drücken Sie die Haut am Handrücken zusammen. Bleibt eine Falte kurz stehen, trinken Sie wahrscheinlich zu wenig. Der zuverlässigste Indikator ist die **Urinfarbe**: Hellgelb bis klar bedeutet ausreichend Flüssigkeit, dunkelgelb bis bernsteinfarben deutet auf Flüssigkeitsmangel hin.
+
+**Wasser trinken beim Sport: Vor, während und nach dem Training**
+
+Beim Sport steigt der Wasserbedarf erheblich. Pro 30 Minuten intensiver Bewegung verliert der Körper durchschnittlich 350 ml Flüssigkeit über den Schweiß. Empfohlen wird: **Vor dem Sport** ca. 300-500 ml in den zwei Stunden vorher trinken. **Während des Sports** alle 15-20 Minuten 150-250 ml. **Nach dem Sport** die verlorene Flüssigkeit mit dem 1,5-fachen des Gewichtsverlusts ausgleichen.
+
+Bei intensivem Training über 60 Minuten kann ein isotonisches Getränk sinnvoll sein, da mit dem Schweiß auch Mineralstoffe (vor allem Natrium) verloren gehen. Für normales Training reicht Wasser mit einer Prise Salz oder eine Saftschorle.
+
+**Zählen Kaffee und Tee zum Wasserbedarf?**
+
+Entgegen der weit verbreiteten Meinung zählen Kaffee und Tee zur täglichen Flüssigkeitszufuhr. Zwar wirkt Koffein leicht harntreibend, der Effekt ist jedoch minimal: Studien zeigen, dass der Körper den Großteil der Flüssigkeit aus Kaffee und Tee aufnimmt. Die DGE bestätigt: Kaffee in moderaten Mengen (3-4 Tassen) darf als Flüssigkeitszufuhr gewertet werden. Allerdings sollte der Hauptteil der Trinkmenge aus Wasser, ungesüßtem Tee oder Mineralwasser bestehen.
+
+Nicht empfehlenswert als Durstlöscher sind zuckerhaltige Getränke, Limonaden und Säfte pur — sie liefern viele Kalorien und können den Durst sogar verstärken. Besser: Wasser mit Zitrone, Minze oder Gurke für natürlichen Geschmack. Weitere Informationen zu Ernährung und Kalorien finden Sie in unserem [Kalorienrechner](/gesundheit/kalorienrechner), und mit dem [BMI-Rechner](/gesundheit/bmi-rechner) können Sie Ihr Gewicht einordnen.`,
+    faq: [
+      {
+        frage: 'Wie viel Wasser sollte ich am Tag trinken?',
+        antwort: 'Die empfohlene Trinkmenge hängt von Ihrem Körpergewicht und Ihrer Aktivität ab. Als Faustregel gelten 30-35 ml pro Kilogramm Körpergewicht. Bei 75 kg sind das 2,3-2,6 Liter pro Tag. Bei Sport, Hitze oder Schwangerschaft entsprechend mehr. Die DGE empfiehlt mindestens 1,5 Liter reine Trinkmenge zusätzlich zur Nahrung.',
+      },
+      {
+        frage: 'Kann man zu viel Wasser trinken?',
+        antwort: 'Ja, eine sogenannte Wasservergiftung (Hyponatriämie) ist möglich, aber selten. Sie tritt auf, wenn in kurzer Zeit extrem viel Wasser getrunken wird (über 5-6 Liter in wenigen Stunden) und der Natriumspiegel im Blut zu stark sinkt. Für gesunde Erwachsene ist eine Trinkmenge von 3-4 Litern am Tag unbedenklich. Verteilen Sie die Menge gleichmäßig über den Tag.',
+      },
+      {
+        frage: 'Zählen Kaffee und Tee als Wasseraufnahme?',
+        antwort: 'Ja! Entgegen dem weit verbreiteten Mythos zählen Kaffee und Tee zur Flüssigkeitszufuhr. Koffein wirkt zwar leicht harntreibend, aber der Körper nimmt den Großteil der Flüssigkeit auf. Die DGE bestätigt: Moderate Kaffeemengen (3-4 Tassen) dürfen zur täglichen Trinkmenge gezählt werden.',
+      },
+      {
+        frage: 'Wie erkenne ich, ob ich zu wenig trinke?',
+        antwort: 'Typische Anzeichen sind: dunkler Urin (gesund ist hellgelb bis klar), Kopfschmerzen, Müdigkeit, Konzentrationsschwäche, trockene Lippen und Schwindel. Der einfachste Indikator ist die Urinfarbe: Hellgelb bedeutet ausreichend, dunkelgelb deutet auf Flüssigkeitsmangel hin.',
+      },
+      {
+        frage: 'Brauche ich beim Sport mehr Wasser?',
+        antwort: 'Ja, erheblich mehr. Pro 30 Minuten Sport verliert der Körper ca. 350 ml durch Schweiß. Trinken Sie vor dem Sport 300-500 ml, während des Sports alle 15-20 Minuten 150-250 ml und danach das 1,5-fache des Gewichtsverlusts. Bei Training über 60 Minuten können isotonische Getränke sinnvoll sein.',
+      },
+    ],
+  },
+  {
     slug: 'kuendigungsfrist-rechner',
     titel: 'Kündigungsfrist-Rechner',
     beschreibung: 'Gesetzliche Kündigungsfrist berechnen: Für Arbeitnehmer und Arbeitgeber, mit frühestmöglichem Austrittsdatum und relevanten Fristen.',
@@ -4536,6 +4600,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'wasserbedarf-rechner',
   'rentenrechner',
   'baufinanzierung-rechner',
   'mutterschutz-rechner',
@@ -4659,7 +4724,8 @@ const verwandteMap: Record<string, string[]> = {
   'kreditrechner': ['zinsrechner', 'sparrechner', 'inflationsrechner', 'brutto-netto-rechner'],
   'kalorienrechner': ['bmi-rechner', 'schlaf-rechner', 'raucher-rechner', 'promillerechner'],
   'geburtstermin-rechner': ['elterngeld-rechner', 'schlaf-rechner', 'bmi-rechner', 'kalorienrechner'],
-  'idealgewicht-rechner': ['bmi-rechner', 'kalorienrechner', 'schlaf-rechner', 'geburtstermin-rechner'],
+  'idealgewicht-rechner': ['bmi-rechner', 'kalorienrechner', 'wasserbedarf-rechner', 'schlaf-rechner'],
+  'wasserbedarf-rechner': ['kalorienrechner', 'bmi-rechner', 'idealgewicht-rechner', 'schlaf-rechner'],
   'kuendigungsfrist-rechner': ['urlaubstage-rechner', 'ueberstunden-rechner', 'arbeitszeitrechner', 'rechtsschutz-rechner'],
   'etf-sparplanrechner': ['rentenrechner', 'sparrechner', 'inflationsrechner', 'zinsrechner'],
   'rentenrechner': ['etf-sparplanrechner', 'sparrechner', 'brutto-netto-rechner', 'inflationsrechner'],
