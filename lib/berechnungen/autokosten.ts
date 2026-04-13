@@ -50,6 +50,8 @@ export interface AutokostenErgebnis {
 
   // Einzelposten (Jahr)
   kraftstoffJahr: number;
+  kraftstoffVerbrauchJahr: number;   // Liter oder kWh pro Jahr
+  kraftstoffProKm: number;           // reine Spritkosten pro km
   versicherungJahr: number;
   steuerJahr: number;
   wartungGesamtJahr: number;
@@ -145,7 +147,9 @@ export function berechneAutokosten(eingabe: AutokostenEingabe): AutokostenErgebn
   const wertverlustMonat = rund2(wertverlustJahr / 12);
 
   // === KRAFTSTOFF ===
-  const kraftstoffJahr = rund2((fahrleistungJahr / 100) * verbrauch * kraftstoffpreis);
+  const kraftstoffVerbrauchJahr = rund2((fahrleistungJahr / 100) * verbrauch); // Liter oder kWh
+  const kraftstoffJahr = rund2(kraftstoffVerbrauchJahr * kraftstoffpreis);
+  const kraftstoffProKm = rund2(kraftstoffJahr / fahrleistungJahr * 100) / 100;
 
   // === VERSICHERUNG ===
   const versicherungJahr = rund2(versicherungMonat * 12);
@@ -201,23 +205,23 @@ export function berechneAutokosten(eingabe: AutokostenEingabe): AutokostenErgebn
     farbe: b.farbe,
   }));
 
-  // === STRECKENKOSTEN ===
+  // === STRECKENKOSTEN (nur Spritkosten, keine Fixkosten) ===
   const streckenKosten: StreckenKosten[] = [
     {
       label: 'Weg zur Arbeit (20 km einfach)',
       km: 40,
-      kosten: rund2(40 * kostenProKm),
+      kosten: rund2(40 * kraftstoffProKm),
       hinweis: 'pro Tag (Hin + Zurück)',
     },
     {
       label: 'Wochenendausflug',
       km: 100,
-      kosten: rund2(100 * kostenProKm),
+      kosten: rund2(100 * kraftstoffProKm),
     },
     {
       label: 'Urlaub',
       km: 800,
-      kosten: rund2(800 * kostenProKm),
+      kosten: rund2(800 * kraftstoffProKm),
     },
   ];
 
@@ -236,7 +240,7 @@ export function berechneAutokosten(eingabe: AutokostenEingabe): AutokostenErgebn
   return {
     gesamtMonat, gesamtJahr, kostenProKm, kostenProTag,
     restwert, gesamtWertverlust, wertverlustJahr, wertverlustMonat,
-    kraftstoffJahr, versicherungJahr, steuerJahr, wartungGesamtJahr, sonstigeJahr,
+    kraftstoffJahr, kraftstoffVerbrauchJahr, kraftstoffProKm, versicherungJahr, steuerJahr, wartungGesamtJahr, sonstigeJahr,
     kostenBloecke, streckenKosten,
     istFinanziert, finanzierungJahr,
     vergleichText, vergleichProzent,

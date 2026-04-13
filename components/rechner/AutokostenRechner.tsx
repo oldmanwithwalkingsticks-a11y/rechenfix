@@ -313,6 +313,7 @@ export default function AutokostenRechner() {
                   <tr className="bg-gray-50 dark:bg-gray-700/50 text-left">
                     <th className="px-4 py-2 font-semibold text-gray-700 dark:text-gray-300">Position</th>
                     <th className="px-4 py-2 font-semibold text-gray-700 dark:text-gray-300 text-right">Monat</th>
+                    <th className="px-4 py-2 font-semibold text-gray-700 dark:text-gray-300 text-right hidden sm:table-cell">Jahr</th>
                     <th className="px-4 py-2 font-semibold text-gray-700 dark:text-gray-300 text-right">Anteil</th>
                   </tr>
                 </thead>
@@ -324,16 +325,41 @@ export default function AutokostenRechner() {
                         {b.label}
                       </td>
                       <td className="px-4 py-2 text-right tabular-nums text-gray-800 dark:text-gray-200">{fmtEuro(b.monat)} €</td>
+                      <td className="px-4 py-2 text-right tabular-nums text-gray-800 dark:text-gray-200 hidden sm:table-cell">{fmtEuro(b.jahr)} €</td>
                       <td className="px-4 py-2 text-right tabular-nums text-gray-500 dark:text-gray-400">{Math.round(b.anteilProzent)}%</td>
                     </tr>
                   ))}
                   <tr className="bg-gray-50 dark:bg-gray-700/30 font-bold">
                     <td className="px-4 py-2.5 text-gray-800 dark:text-gray-200">Gesamt</td>
                     <td className="px-4 py-2.5 text-right tabular-nums text-primary-600 dark:text-primary-400">{fmtEuro(ergebnis.gesamtMonat)} €</td>
+                    <td className="px-4 py-2.5 text-right tabular-nums text-primary-600 dark:text-primary-400 hidden sm:table-cell">{fmtEuro(ergebnis.gesamtJahr)} €</td>
                     <td className="px-4 py-2.5 text-right tabular-nums text-gray-500 dark:text-gray-400">100%</td>
                   </tr>
                 </tbody>
               </table>
+            </div>
+          </div>
+
+          {/* Kraftstoffverbrauch-Detail */}
+          <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-6">
+            <h3 className="font-bold text-amber-800 dark:text-amber-300 text-sm mb-2">⛽ Kraftstoffverbrauch</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
+              <div>
+                <p className="text-amber-700/70 dark:text-amber-400/70 text-xs">Verbrauch</p>
+                <p className="font-semibold text-amber-800 dark:text-amber-300">{verbrauch} {VERBRAUCH_EINHEITEN[antrieb]}</p>
+              </div>
+              <div>
+                <p className="text-amber-700/70 dark:text-amber-400/70 text-xs">Preis</p>
+                <p className="font-semibold text-amber-800 dark:text-amber-300">{kraftstoffpreis} {ANTRIEB_EINHEITEN[antrieb]}</p>
+              </div>
+              <div>
+                <p className="text-amber-700/70 dark:text-amber-400/70 text-xs">{antrieb === 'elektro' ? 'kWh / Jahr' : 'Liter / Jahr'}</p>
+                <p className="font-semibold text-amber-800 dark:text-amber-300">{fmtEuro(ergebnis.kraftstoffVerbrauchJahr)}</p>
+              </div>
+              <div>
+                <p className="text-amber-700/70 dark:text-amber-400/70 text-xs">Spritkosten / km</p>
+                <p className="font-semibold text-amber-800 dark:text-amber-300">{fmtEuro2(ergebnis.kraftstoffProKm)} €</p>
+              </div>
             </div>
           </div>
 
@@ -355,7 +381,8 @@ export default function AutokostenRechner() {
 
           {/* Kosten pro Strecke */}
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-4">🛣️ Kosten pro Strecke</h3>
+            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-1">🛣️ Spritkosten pro Strecke</h3>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">Reine Kraftstoffkosten — ohne Fixkosten wie Versicherung oder Wertverlust</p>
             <div className="space-y-3">
               {ergebnis.streckenKosten.map(s => (
                 <div key={s.label} className="flex justify-between items-center text-sm">
