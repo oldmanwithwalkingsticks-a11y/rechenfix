@@ -119,6 +119,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'spritkosten': 'Autokosten senken? Kfz-Versicherung vergleichen auf CHECK24.',
     'kredit': 'Kredite vergleichen — niedrige Zinsen, schnelle Auszahlung, kostenlos.',
     'etf': 'Depot-Vergleich auf CHECK24 — das passende Depot für Ihren ETF-Sparplan finden.',
+    'baufinanzierung': 'Baufinanzierung vergleichen auf CHECK24 — über 450 Anbieter, kostenlos und unverbindlich.',
   },
   congstar: {
     'handykosten': 'congstar bietet faire Tarife ab 5 €/Monat — monatlich kündbar und ohne versteckte Kosten.',
@@ -149,6 +150,7 @@ const CONTEXT_DEEPLINKS: Partial<Record<ProgramId, Record<string, string>>> = {
     'heizkosten': 'https://www.check24.net/gasvergleich/',
     'kredit': 'https://www.check24.net/kredit/',
     'etf': 'https://www.check24.de/depot/',
+    'baufinanzierung': 'https://www.check24.de/baufinanzierung/',
     'default': 'https://www.check24.net/',
   },
 };

@@ -1574,6 +1574,76 @@ Bei einem Kaufpreis knapp über der Freigrenze für bewegliches Inventar (z. B. 
     ],
   },
   {
+    slug: 'baufinanzierung-rechner',
+    titel: 'Baufinanzierungs-Rechner',
+    beschreibung: 'Baufinanzierung berechnen: Monatsrate, Gesamtkosten, Restschuld und Tilgungsplan für Ihre Immobilienfinanzierung.',
+    kategorie: 'Wohnen & Energie',
+    kategorieSlug: 'wohnen',
+    metaTitle: 'Baufinanzierungs-Rechner 2026 — Immobilienkredit & Rate berechnen | Rechenfix',
+    metaDescription: 'Baufinanzierung berechnen: Monatsrate, Kaufnebenkosten, Restschuld und Tilgungsplan ✓ Alle Bundesländer ✓ Sondertilgung ✓ KI-Erklärung.',
+    keywords: ['baufinanzierung rechner', 'baufinanzierung berechnen', 'immobilienkredit rechner', 'hypothekenrechner', 'monatsrate immobilie', 'tilgungsplan', 'restschuld berechnen', 'immobilienfinanzierung', 'hauskauf rechner', 'baukredit rechner'],
+    icon: '🏗️',
+    formel: 'Monatsrate = Darlehensbetrag × (Sollzins + Tilgung) / 100 / 12',
+    beispiel: 'Kaufpreis 350.000 €, 70.000 € EK, NRW, 3,5% Zins, 2% Tilgung: → Nebenkosten: 42.245 €, Darlehen: 322.245 €, Rate: 1.476 €/Monat, Restschuld nach 15 J.: ca. 195.000 €.',
+    erklaerung: `**Wie funktioniert eine Baufinanzierung?**
+
+Eine Baufinanzierung ist ein zweckgebundener Kredit zum Kauf oder Bau einer Immobilie. In der Regel handelt es sich um ein Annuitätendarlehen: Die monatliche Rate bleibt über die gesamte Zinsbindung gleich, wobei sich der Anteil von Zinsen und Tilgung verschiebt. Anfangs zahlen Sie vor allem Zinsen, mit der Zeit wächst der Tilgungsanteil. Unser Rechner berechnet Ihre monatliche Rate, die Restschuld nach Ende der Zinsbindung und erstellt einen vollständigen Tilgungsplan.
+
+**Kaufnebenkosten: Grunderwerbsteuer nach Bundesland**
+
+Beim Immobilienkauf fallen neben dem Kaufpreis erhebliche Nebenkosten an. Die Grunderwerbsteuer variiert je nach Bundesland zwischen 3,5% (Bayern, Sachsen) und 6,5% (NRW, Brandenburg, Saarland, Schleswig-Holstein). Hinzu kommen Notar- und Grundbuchkosten (ca. 2%) sowie die Maklerprovision (ca. 3,57% Käuferanteil). Insgesamt betragen die Nebenkosten 9 bis 12% des Kaufpreises. Diese Kosten müssen Sie in der Regel aus Eigenkapital finanzieren, da Banken sie nur ungern mitfinanzieren.
+
+**Wie viel Eigenkapital brauche ich?**
+
+Experten empfehlen mindestens 20 bis 30 Prozent Eigenkapital — idealerweise genug, um die Kaufnebenkosten plus 10 bis 20 Prozent des Kaufpreises abzudecken. Je mehr Eigenkapital Sie einbringen, desto niedriger der Beleihungsauslauf und desto bessere Zinskonditionen erhalten Sie. Eine Vollfinanzierung (100% oder mehr) ist möglich, aber mit deutlich höheren Zinsen verbunden.
+
+**Sollzins vs. Effektivzins**
+
+Der Sollzins ist der reine Zinssatz, den die Bank für das Darlehen berechnet. Der Effektivzins enthält zusätzlich alle Nebenkosten des Kredits (z. B. Bearbeitungsgebühren) und ist daher für den Vergleich verschiedener Angebote besser geeignet. Unser Rechner arbeitet mit dem Sollzins für die Monatsratenberechnung.
+
+**Zinsbindung: 10, 15 oder 20 Jahre?**
+
+Die Zinsbindung legt fest, wie lange der vereinbarte Zinssatz gilt. Nach Ablauf müssen Sie eine Anschlussfinanzierung zu den dann geltenden Konditionen abschließen. Eine längere Zinsbindung bietet mehr Planungssicherheit, ist aber meist teurer. In Niedrigzinsphasen empfiehlt sich eine lange Zinsbindung (15-20 Jahre), in Hochzinsphasen kann eine kürzere Bindung (5-10 Jahre) sinnvoll sein.
+
+**Tilgungsrate: Warum 2% das Minimum sein sollte**
+
+Die anfängliche Tilgung bestimmt, wie schnell Sie das Darlehen zurückzahlen. Bei nur 1% Tilgung dauert die Rückzahlung über 40 Jahre. Bei 2% sind es etwa 28 Jahre, bei 3% nur noch 22 Jahre. Die KfW und Verbraucherzentralen empfehlen mindestens 2% anfängliche Tilgung. Durch die Annuitätenberechnung steigt die tatsächliche Tilgung im Laufe der Zeit automatisch an, da der Zinsanteil sinkt.
+
+**Sondertilgung: Lohnt sich das?**
+
+Sondertilgungen sind zusätzliche Zahlungen über die reguläre Rate hinaus. Die meisten Banken erlauben 5 bis 10% der Darlehenssumme pro Jahr als Sondertilgung ohne Vorfälligkeitsentschädigung. Sondertilgungen lohnen sich fast immer: Sie reduzieren die Restschuld schneller, sparen Zinsen und verkürzen die Laufzeit erheblich. Bei einem Darlehen von 300.000 € und nur 200 € monatlicher Sondertilgung können Sie über 15 Jahre mehrere tausend Euro Zinsen sparen.
+
+**Anschlussfinanzierung nach Zinsbindung**
+
+Nach Ablauf der Zinsbindung bleibt in der Regel eine Restschuld, die Sie weiterfinanzieren müssen. Die Restschuld hängt von der Tilgungsrate, Sondertilgungen und der Zinsbindungsdauer ab. Unser Rechner zeigt Ihnen die voraussichtliche Restschuld nach Ende der Zinsbindung. Planen Sie rechtzeitig (12-36 Monate vor Ablauf) ein Forward-Darlehen oder eine Umschuldung, um sich günstige Zinsen zu sichern.`,
+    faq: [
+      {
+        frage: 'Wie hoch sollte die monatliche Rate maximal sein?',
+        antwort: 'Die monatliche Rate sollte maximal 35% Ihres Nettohaushaltseinkommens betragen. Bei einem Nettoeinkommen von 4.000 € wären das maximal 1.400 €. Bedenken Sie auch Rücklagen für Reparaturen, Versicherungen und unvorhergesehene Ausgaben — rechnen Sie mit ca. 1 €/m² Wohnfläche pro Monat für Instandhaltung.',
+      },
+      {
+        frage: 'Wie viel Eigenkapital brauche ich für eine Immobilie?',
+        antwort: 'Empfohlen werden 20-30% der Gesamtkosten (Kaufpreis + Nebenkosten). Mindestens sollten die Kaufnebenkosten (ca. 10-12% des Kaufpreises) aus Eigenkapital bezahlt werden. Je mehr Eigenkapital, desto bessere Zinskonditionen und desto geringer das Finanzierungsrisiko.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen Sollzins und Effektivzins?',
+        antwort: 'Der Sollzins (auch Nominalzins) ist der reine Zinssatz für das Darlehen. Der Effektivzins enthält zusätzlich alle Kreditnebenkosten und ist daher der bessere Vergleichswert. Für die Berechnung der monatlichen Rate wird der Sollzins verwendet, für den Kreditvergleich der Effektivzins.',
+      },
+      {
+        frage: 'Was passiert nach Ende der Zinsbindung?',
+        antwort: 'Nach der Zinsbindung müssen Sie die Restschuld weiterfinanzieren — entweder bei der gleichen Bank (Prolongation) oder bei einer anderen Bank (Umschuldung). Die neuen Konditionen richten sich nach dem dann aktuellen Zinsniveau. Tipp: Ein Forward-Darlehen sichert Ihnen bis zu 60 Monate im Voraus die aktuellen Zinsen.',
+      },
+      {
+        frage: 'Lohnt sich Sondertilgung bei der Baufinanzierung?',
+        antwort: 'Ja, Sondertilgungen lohnen sich fast immer. Sie reduzieren die Restschuld schneller, senken die Zinskosten und verkürzen die Gesamtlaufzeit. Achten Sie darauf, im Darlehensvertrag das Recht auf Sondertilgungen (meist 5-10% p.a.) zu vereinbaren, um keine Vorfälligkeitsentschädigung zahlen zu müssen.',
+      },
+      {
+        frage: 'Wie hoch sind die Kaufnebenkosten in meinem Bundesland?',
+        antwort: 'Die Nebenkosten setzen sich zusammen aus Grunderwerbsteuer (3,5-6,5% je nach Bundesland), Notar und Grundbuch (ca. 2%) und Makler (ca. 3,57%). In Bayern betragen die Nebenkosten ca. 9%, in NRW ca. 12%. Bei 350.000 € Kaufpreis sind das zwischen 31.500 € und 42.000 €.',
+      },
+    ],
+  },
+  {
     slug: 'quadratmeter-rechner',
     titel: 'Quadratmeter-Rechner',
     beschreibung: 'Fläche in m² berechnen: Rechteck, Kreis, Dreieck, L-Form, Trapez. Mehrere Flächen addieren.',
@@ -4400,6 +4470,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'baufinanzierung-rechner',
   'mutterschutz-rechner',
   'abfindungsrechner',
   'teilzeit-rechner',
@@ -4487,7 +4558,8 @@ const verwandteMap: Record<string, string[]> = {
   'nebenkosten-rechner': ['mietrechner', 'stromkosten-rechner', 'heizkosten-rechner', 'quadratmeter-rechner'],
   'mietrechner': ['nebenkosten-rechner', 'grunderwerbsteuer-rechner', 'quadratmeter-rechner', 'stromkosten-rechner'],
   'heizkosten-rechner': ['stromkosten-rechner', 'nebenkosten-rechner', 'mietrechner', 'quadratmeter-rechner'],
-  'grunderwerbsteuer-rechner': ['mietrechner', 'zinsrechner', 'sparrechner', 'nebenkosten-rechner'],
+  'grunderwerbsteuer-rechner': ['baufinanzierung-rechner', 'mietrechner', 'zinsrechner', 'nebenkosten-rechner'],
+  'baufinanzierung-rechner': ['grunderwerbsteuer-rechner', 'mietrechner', 'kreditrechner', 'nebenkosten-rechner'],
   'quadratmeter-rechner': ['tapetenbedarf-rechner', 'mietrechner', 'nebenkosten-rechner', 'einheiten-umrechner'],
   'tapetenbedarf-rechner': ['quadratmeter-rechner', 'nebenkosten-rechner', 'mietrechner', 'einheiten-umrechner'],
   'bruchrechner': ['prozentrechner', 'dreisatz-rechner', 'durchschnitt-rechner', 'wissenschaftlicher-taschenrechner'],
