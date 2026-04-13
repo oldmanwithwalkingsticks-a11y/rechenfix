@@ -60,6 +60,7 @@ import BussgeldRechner from '@/components/rechner/BussgeldRechner';
 import KreditRechner from '@/components/rechner/KreditRechner';
 import KalorienRechner from '@/components/rechner/KalorienRechner';
 import GeburtsterminRechner from '@/components/rechner/GeburtsterminRechner';
+import IdealgewichtRechner from '@/components/rechner/IdealgewichtRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -132,6 +133,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'kreditrechner': KreditRechner,
   'kalorienrechner': KalorienRechner,
   'geburtstermin-rechner': GeburtsterminRechner,
+  'idealgewicht-rechner': IdealgewichtRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

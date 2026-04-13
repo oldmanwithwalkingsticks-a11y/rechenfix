@@ -3930,6 +3930,82 @@ Für Ihre allgemeine Gesundheit während der Schwangerschaft kann auch unser [BM
       },
     ],
   },
+  {
+    slug: 'idealgewicht-rechner',
+    titel: 'Idealgewicht-Rechner',
+    beschreibung: 'Idealgewicht berechnen nach verschiedenen Formeln: Broca, Creff und BMI-basiert — mit persönlicher Idealgewicht-Spanne.',
+    kategorie: 'Gesundheit',
+    kategorieSlug: 'gesundheit',
+    metaTitle: 'Idealgewicht-Rechner 2026 — Idealgewicht berechnen nach 3 Formeln | Rechenfix',
+    metaDescription: 'Idealgewicht berechnen: Broca-Formel, Creff-Formel und BMI-basierte Spanne ✓ Altersangepasst ✓ Körperbau ✓ KI-Erklärung.',
+    keywords: ['idealgewicht berechnen', 'idealgewicht rechner', 'broca formel', 'creff formel', 'normalgewicht berechnen', 'idealgewicht frau', 'idealgewicht mann', 'idealgewicht nach alter'],
+    icon: '⚖️',
+    formel: 'Broca: (Größe − 100) × 0,90 (♂) / 0,85 (♀) | Creff: ((Größe − 100) + (Alter / 10)) × 0,9 × Körperbau-Koeffizient | BMI-basiert: BMI × (Größe in m)²',
+    beispiel: 'Frau, 30 Jahre, 170 cm, normal → Broca: 59,5 kg | Creff: 66,0 kg | BMI-Spanne: 57,8–72,3 kg',
+    erklaerung: `**Was ist das Idealgewicht und wer definiert es?**
+
+Der Begriff „Idealgewicht" beschreibt das Körpergewicht, bei dem statistisch gesehen die höchste Lebenserwartung und das geringste Risiko für gewichtsbedingte Erkrankungen bestehen. Verschiedene Organisationen und Forscher haben im Laufe der Jahrzehnte unterschiedliche Formeln entwickelt, um das Idealgewicht zu berechnen. Keine dieser Formeln ist perfekt — jede hat ihre Stärken und Schwächen. Unser Rechner vergleicht drei etablierte Methoden, damit Sie ein umfassendes Bild erhalten.
+
+Wichtig zu verstehen: Das Idealgewicht ist kein festes Ziel, das jeder Mensch erreichen muss. Es ist ein **Orientierungswert**, der zusammen mit anderen Faktoren wie Körperfettanteil, Fitness und allgemeinem Wohlbefinden betrachtet werden sollte.
+
+**Die Broca-Formel: Einfach, aber veraltet**
+
+Die Broca-Formel ist die älteste und einfachste Methode zur Berechnung des Normalgewichts. Sie wurde 1871 vom französischen Chirurgen Paul Broca entwickelt: **Normalgewicht = Körpergröße in cm − 100**. Für das Idealgewicht wird ein geschlechtsspezifischer Abzug vorgenommen: Männer multiplizieren mit 0,90 (also 10 % Abzug), Frauen mit 0,85 (15 % Abzug).
+
+Der Vorteil der Broca-Formel liegt in ihrer Einfachheit. Der Nachteil: Sie berücksichtigt weder das Alter noch den Körperbau und wird bei sehr großen oder kleinen Menschen ungenau. Für Personen im Bereich von 155 bis 185 cm liefert sie dennoch brauchbare Richtwerte.
+
+**Die Creff-Formel: Alter und Körperbau einberechnet**
+
+Die Creff-Formel ist eine Weiterentwicklung der Broca-Formel und berücksichtigt zusätzlich das **Alter** und den **Körperbau** des Menschen. Die Formel lautet: **Idealgewicht = ((Größe − 100) + (Alter / 10)) × 0,9 × Körperbau-Koeffizient**. Der Körperbau-Koeffizient beträgt 0,9 für einen schmalen Körperbau, 1,0 für normal und 1,1 für kräftig.
+
+Diese Formel berücksichtigt die Tatsache, dass der Stoffwechsel sich mit dem Alter verändert und dass ein kräftiger Körperbau von Natur aus ein höheres Gewicht mit sich bringt. Die Creff-Formel ist damit differenzierter als die Broca-Formel, basiert jedoch nicht auf epidemiologischen Studien.
+
+**BMI-basierte Spanne: Medizinisch am aussagekräftigsten**
+
+Die **BMI-basierte Idealgewicht-Spanne** gilt als die medizinisch fundierteste Methode. Sie basiert auf dem Body-Mass-Index (BMI), der von der Weltgesundheitsorganisation (WHO) als Standardmaß für die Gewichtsklassifikation anerkannt ist. Ein BMI zwischen 18,5 und 24,9 gilt als normalgewichtig.
+
+Unser Rechner geht noch einen Schritt weiter und verwendet **altersangepasste BMI-Bereiche**. Denn der optimale BMI verschiebt sich mit zunehmendem Alter leicht nach oben: Während für 19- bis 24-Jährige ein BMI von 19–24 ideal ist, liegt der Bereich für über 65-Jährige bei 24–29. Diese Anpassung spiegelt die medizinische Erkenntnis wider, dass ein etwas höheres Gewicht im Alter schützend wirkt. Für eine detaillierte BMI-Analyse nutzen Sie auch unseren [BMI-Rechner](/gesundheit/bmi-rechner).
+
+**Warum ändert sich das Idealgewicht mit dem Alter?**
+
+Mit zunehmendem Alter verändert sich die Körperzusammensetzung: Die Muskelmasse nimmt ab, während der Fettanteil tendenziell steigt. Gleichzeitig zeigen Studien, dass ein leicht erhöhter BMI im Alter (BMI 25–27) sogar mit einer höheren Lebenserwartung verbunden sein kann — ein Phänomen, das als „Adipositas-Paradoxon" bekannt ist. Mögliche Erklärungen sind Energiereserven bei Krankheit und ein Schutz vor Knochenbrüchen. Deshalb empfehlen Geriater oft, im Alter nicht zu streng auf das Gewicht zu achten.
+
+**Idealgewicht vs. Wohlfühlgewicht: Was zählt wirklich?**
+
+Das rechnerische Idealgewicht und das persönliche Wohlfühlgewicht sind nicht immer identisch. Viele Menschen fühlen sich bei einem Gewicht am wohlsten, das leicht über oder unter dem statistischen Idealwert liegt. Entscheidend für die Gesundheit sind letztlich: regelmäßige Bewegung, ausgewogene Ernährung, ausreichend Schlaf und ein gesunder Umgang mit Stress. Das Gewicht auf der Waage ist nur ein Faktor von vielen.
+
+**Muskelmasse und Körperfett: Die Grenzen des Idealgewichts**
+
+Alle drei Formeln haben eine gemeinsame Schwäche: Sie können **Muskelmasse und Körperfett nicht unterscheiden**. Ein durchtrainierter Sportler mit viel Muskelmasse kann laut BMI als „übergewichtig" gelten, obwohl sein Körperfettanteil niedrig ist. Umgekehrt kann eine Person mit normalem BMI einen hohen Körperfettanteil und wenig Muskelmasse haben — das sogenannte „skinny fat". Für eine genauere Einschätzung ist die Messung des Körperfettanteils oder des Taillenumfangs sinnvoll.
+
+Ergänzend können Sie mit unserem [Kalorienrechner](/gesundheit/kalorienrechner) Ihren täglichen Kalorienbedarf ermitteln — ein wichtiger Schritt, wenn Sie Ihr Gewicht verändern oder halten möchten. Auch unser [Schlafrechner](/gesundheit/schlaf-rechner) kann hilfreich sein, denn Schlafmangel beeinflusst das Hungergefühl und den Stoffwechsel erheblich.`,
+    faq: [
+      {
+        frage: 'Wie berechne ich mein Idealgewicht?',
+        antwort: 'Geben Sie Geschlecht, Alter, Größe, Gewicht und Körperbau in den Rechner ein. Er berechnet Ihr Idealgewicht nach drei Formeln: Broca (einfach, nach Körpergröße), Creff (berücksichtigt Alter und Körperbau) und BMI-basiert (altersangepasste Spanne nach WHO-Standard). Die BMI-basierte Spanne gilt als medizinisch am aussagekräftigsten.',
+      },
+      {
+        frage: 'Welche Formel für das Idealgewicht ist am genauesten?',
+        antwort: 'Die BMI-basierte Idealgewicht-Spanne gilt als die genaueste und medizinisch fundierteste Methode, da sie auf epidemiologischen Studien der WHO basiert und einen gesunden Gewichtsbereich statt eines einzelnen Wertes angibt. Die Creff-Formel ist differenzierter als Broca, da sie Alter und Körperbau einbezieht. Die Broca-Formel ist am einfachsten, aber auch am ungenauesten.',
+      },
+      {
+        frage: 'Ändert sich das Idealgewicht mit dem Alter?',
+        antwort: 'Ja, das Idealgewicht verschiebt sich mit dem Alter leicht nach oben. Für junge Erwachsene (19–24 Jahre) liegt der ideale BMI bei 19–24, für über 65-Jährige bei 24–29. Grund: Mit zunehmendem Alter verändern sich Körperzusammensetzung und Stoffwechsel, und ein etwas höheres Gewicht kann im Alter sogar schützend wirken.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen Ideal- und Normalgewicht?',
+        antwort: 'Das Normalgewicht nach Broca ist einfach Körpergröße minus 100 — ein statistischer Durchschnittswert. Das Idealgewicht liegt darunter (90% für Männer, 85% für Frauen vom Normalgewicht) und beschreibt das Gewicht mit dem statistisch geringsten Gesundheitsrisiko. In der modernen Medizin wird statt eines einzelnen Idealwerts eine gesunde Gewichtsspanne bevorzugt.',
+      },
+      {
+        frage: 'Warum weichen die drei Formeln voneinander ab?',
+        antwort: 'Die drei Formeln verwenden unterschiedliche Berechnungsansätze und Faktoren. Broca berücksichtigt nur die Körpergröße, Creff zusätzlich Alter und Körperbau, und die BMI-basierte Methode nutzt altersangepasste Bereiche aus epidemiologischen Studien. Die Abweichungen zeigen, dass es kein einzelnes „perfektes" Idealgewicht gibt, sondern einen gesunden Bereich.',
+      },
+      {
+        frage: 'Ist das Idealgewicht für Sportler anders?',
+        antwort: 'Ja, Sportler mit viel Muskelmasse können ein höheres Gewicht haben, das trotzdem gesund ist. Muskeln wiegen mehr als Fett, daher können trainierte Personen laut BMI als „übergewichtig" gelten, obwohl ihr Körperfettanteil niedrig ist. Für Sportler sind Körperfettmessung und Taillenumfang aussagekräftiger als reine Gewichtsformeln.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -3943,6 +4019,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'idealgewicht-rechner',
   'geburtstermin-rechner',
   'kalorienrechner',
   'kreditrechner',
@@ -4057,6 +4134,7 @@ const verwandteMap: Record<string, string[]> = {
   'kreditrechner': ['zinsrechner', 'sparrechner', 'inflationsrechner', 'brutto-netto-rechner'],
   'kalorienrechner': ['bmi-rechner', 'schlaf-rechner', 'raucher-rechner', 'promillerechner'],
   'geburtstermin-rechner': ['elterngeld-rechner', 'schlaf-rechner', 'bmi-rechner', 'kalorienrechner'],
+  'idealgewicht-rechner': ['bmi-rechner', 'kalorienrechner', 'schlaf-rechner', 'geburtstermin-rechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
