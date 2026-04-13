@@ -96,6 +96,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'abfindung': 'Fünftelregelung in der Steuererklärung beantragen — WISO Steuer führt Sie Schritt für Schritt.',
     'mutterschutz': 'Steuererklärung im Mutterschutzjahr? WISO Steuer berechnet Mutterschaftsgeld und Elterngeld automatisch korrekt.',
     'rente': 'Altersvorsorge steuerlich absetzen — Riester, Rürup und betriebliche Altersvorsorge optimal in der Steuererklärung angeben.',
+    'splitting': 'WISO Steuer berechnet automatisch, ob Einzel- oder Zusammenveranlagung für Sie günstiger ist.',
   },
   smartsteuer: {
     'brutto-netto': 'Online-Steuererklärung machen und Geld vom Finanzamt zurückholen.',
@@ -103,6 +104,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'pendlerpauschale': 'Pendlerpauschale automatisch berechnen lassen mit smartsteuer.',
     'grunderwerbsteuer': 'Immobilienkosten steuerlich geltend machen — smartsteuer hilft.',
     'steuererstattung': 'Online-Steuererklärung in unter 60 Minuten — perfekt für einfache Steuerfälle.',
+    'splitting': 'Gemeinsame Steuererklärung als Ehepaar? smartsteuer führt Sie in unter 1 Stunde durch.',
   },
   lexware: {
     'mwst': 'Als Selbstständiger? Lexware Office erstellt Ihre UStVA automatisch.',

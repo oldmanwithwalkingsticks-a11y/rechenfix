@@ -4987,6 +4987,72 @@ Der Faktor (auch Multiplikator) gibt an, das Wievielfache der neue Wert vom alte
       },
     ],
   },
+  {
+    slug: 'splitting-rechner',
+    titel: 'Splitting-Rechner',
+    beschreibung: 'Ehegattensplitting berechnen: Steuervorteil durch Zusammenveranlagung im Vergleich zur Einzelveranlagung.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Splitting-Rechner 2026 — Ehegattensplitting-Vorteil berechnen | Rechenfix',
+    metaDescription: 'Ehegattensplitting berechnen: Steuervorteil durch Zusammenveranlagung ✓ Einzel vs. Splitting ✓ Steuerklassen-Empfehlung ✓ KI-Erklärung.',
+    keywords: ['splitting rechner', 'ehegattensplitting rechner', 'ehegattensplitting berechnen', 'steuervorteil ehe', 'zusammenveranlagung rechner', 'steuerklassen ehepaar', 'splittingtarif', 'steuerklasse 3 5 rechner', 'splitting vorteil', 'steuererklärung ehepaar'],
+    icon: '💍',
+    formel: 'Splitting-Tarif: ESt = 2 × ESt(zvE_Gesamt / 2) | Vorteil = ESt_Einzel − ESt_Splitting',
+    beispiel: 'Partner 1: 55.000 €, Partner 2: 25.000 €, keine Kirchensteuer → Einzelveranlagung: ca. 12.640 € | Zusammenveranlagung: ca. 10.180 € → Splitting-Vorteil: ca. 2.460 €.',
+    erklaerung: `**Was ist das Ehegattensplitting und wie funktioniert es?**
+
+Das Ehegattensplitting ist ein Verfahren der deutschen Einkommensteuer, das verheirateten Paaren und eingetragenen Lebenspartnern einen Steuervorteil verschaffen kann. Das Prinzip ist einfach: Bei der Zusammenveranlagung werden die Einkommen beider Partner addiert, die Summe wird halbiert, darauf wird die Einkommensteuer berechnet, und das Ergebnis wird verdoppelt. Durch die **progressive Besteuerung** in Deutschland (höheres Einkommen → höherer Steuersatz) zahlt man auf zwei mittlere Einkommen oft weniger Steuer als auf ein hohes und ein niedriges Einkommen. Das Splitting gleicht den Steuersatz zwischen den Partnern aus — es ist ein Ausgleichsmechanismus, kein Steuergeschenk. Nutzen Sie unseren [Brutto-Netto-Rechner](/finanzen/brutto-netto-rechner), um die monatliche Auswirkung verschiedener Steuerklassen zu sehen.
+
+**Wann lohnt sich das Ehegattensplitting?**
+
+Der Splitting-Vorteil ist am größten, wenn die Einkommen der Partner **möglichst unterschiedlich** sind. Das Maximum wird erreicht, wenn ein Partner gar nichts verdient — dann profitiert das Paar maximal von der Progression. Bei **gleich hohen Einkommen** gibt es gar keinen Splitting-Vorteil, denn die Hälfte der Summe ist identisch mit den Einzeleinkommen. Konkret: Bei 55.000 € und 25.000 € Jahresbrutto beträgt der Vorteil ca. 2.460 €. Bei 40.000 € und 40.000 € beträgt er 0 €. Bei 80.000 € und 0 € kann der Vorteil auf über 8.000 € steigen. Als Faustregel: Je größer der Gehaltsunterschied, desto größer der Splitting-Effekt. Der maximale Vorteil über alle Einkommen liegt bei ca. 20.000 Euro pro Jahr.
+
+**Steuerklassen III/V vs. IV/IV vs. IV/IV mit Faktor**
+
+Die Steuerklassenwahl beeinflusst nicht die endgültige Steuerlast (die wird mit der Steuererklärung festgelegt), sondern nur die **monatliche Vorauszahlung**. Bei **III/V** erhält der Mehrverdienende (III) deutlich mehr Netto im Monat, der Geringverdienende (V) deutlich weniger. Vorteil: Mehr monatliches Haushaltsnetto. Nachteil: Oft Nachzahlung bei der Steuererklärung, und der Partner mit V-Klasse hat ein sehr niedriges Netto. Bei **IV/IV** zahlen beide Partner Steuern wie Singles — gleichmäßig verteilt, aber ohne Splitting-Effekt im laufenden Jahr. Bei **IV/IV mit Faktor** wird der Splitting-Vorteil auf die monatliche Steuer umgerechnet — das ist die genaueste Methode und vermeidet Nachzahlungen.
+
+**Ehegattensplitting und Elterngeld: Achtung bei Steuerklassenwahl!**
+
+Ein wichtiger Sonderfall: Das **Elterngeld** berechnet sich aus dem Nettoeinkommen der letzten 12 Monate vor der Geburt. Wer Elterngeld maximieren möchte, sollte rechtzeitig (mindestens 7 Monate vor dem Mutterschutz) in Steuerklasse III wechseln — auch wenn der andere Partner dann in V rutscht. Das Finanzamt erkennt den Wechsel an, solange er nicht offensichtlich nur zur Elterngeld-Optimierung erfolgt. Nutzen Sie den [Elterngeld-Rechner](/finanzen/elterngeld-rechner) für eine detaillierte Berechnung.
+
+**Kritik am Ehegattensplitting: Die politische Debatte**
+
+Das Ehegattensplitting ist politisch umstritten. Kritiker argumentieren, es begünstige das traditionelle Alleinverdiener-Modell und setze falsche Anreize — insbesondere für Frauen, die durch den hohen Grenzsteuersatz in Steuerklasse V wenig Motivation hätten, eine Beschäftigung aufzunehmen oder aufzustocken. Die OECD hat Deutschland wiederholt empfohlen, das Splitting zu reformieren. Befürworter sehen es als gerechte Besteuerung der ehelichen Erwerbs- und Verbrauchsgemeinschaft — unabhängig davon, wer das Einkommen erwirtschaftet. Diskutiert werden Alternativen wie das **Realsplitting** (begrenzt auf einen Maximalbetrag) oder das **Familiensplitting** (das auch Kinder berücksichtigt). Stand 2026 bleibt das Ehegattensplitting in Deutschland unverändert bestehen.
+
+**Eingetragene Lebenspartnerschaft: Gleiche Rechte beim Splitting**
+
+Seit dem Beschluss des Bundesverfassungsgerichts 2013 und der „Ehe für alle" 2017 haben eingetragene Lebenspartnerschaften und gleichgeschlechtliche Ehen die gleichen steuerlichen Rechte wie heterosexuelle Ehen. Das Ehegattensplitting gilt uneingeschränkt — unabhängig vom Geschlecht der Partner. Auch der rückwirkende Antrag auf Zusammenveranlagung für vergangene Jahre war möglich. Der [Steuererstattungs-Rechner](/finanzen/steuererstattung-rechner) kann Ihnen helfen, Ihre potenzielle Rückzahlung abzuschätzen.`,
+    faq: [
+      {
+        frage: 'Was ist das Ehegattensplitting?',
+        antwort: 'Das Ehegattensplitting ist ein Steuerverfahren für Ehepaare und eingetragene Lebenspartner. Die Einkommen beider Partner werden addiert, halbiert, darauf wird die Einkommensteuer berechnet und das Ergebnis verdoppelt. Durch die progressive Besteuerung zahlt das Paar oft weniger Steuer als bei getrennter Veranlagung.',
+      },
+      {
+        frage: 'Wann lohnt sich das Ehegattensplitting?',
+        antwort: 'Der Vorteil ist am größten, wenn die Einkommen der Partner möglichst unterschiedlich sind. Bei gleichen Einkommen gibt es keinen Vorteil. Beispiel: Bei 80.000 € und 0 € kann der Vorteil über 8.000 € betragen. Bei 40.000 € und 40.000 € beträgt er 0 €.',
+      },
+      {
+        frage: 'Welche Steuerklassenkombination ist optimal für Ehepaare?',
+        antwort: 'Bei ähnlichen Gehältern ist IV/IV empfehlenswert. Bei deutlichem Gehaltsunterschied (über 60/40) kann III/V monatlich mehr Netto bringen, führt aber oft zu Nachzahlungen. Das Faktorverfahren (IV/IV mit Faktor) ist die genaueste Option und vermeidet Nachzahlungen.',
+      },
+      {
+        frage: 'Lohnt sich das Splitting auch bei gleich hohen Gehältern?',
+        antwort: 'Nein. Bei exakt gleichen Einkommen gibt es keinen Splitting-Vorteil, da die Halbierung der Summe genau die Einzeleinkommen ergibt. Erst bei einem Gehaltsunterschied entsteht ein Vorteil durch den Progressionsausgleich.',
+      },
+      {
+        frage: 'Gilt das Ehegattensplitting auch für eingetragene Lebenspartnerschaften?',
+        antwort: 'Ja, seit dem BVerfG-Beschluss 2013 und der „Ehe für alle" 2017 haben alle Ehepaare und eingetragenen Lebenspartnerschaften — unabhängig vom Geschlecht — die gleichen steuerlichen Rechte beim Ehegattensplitting.',
+      },
+      {
+        frage: 'Wie wirkt sich die Steuerklassenwahl auf das Elterngeld aus?',
+        antwort: 'Das Elterngeld basiert auf dem Nettoeinkommen der letzten 12 Monate vor der Geburt. Wer Elterngeld maximieren möchte, sollte mindestens 7 Monate vor dem Mutterschutz in Steuerklasse III wechseln. Das erhöht das Netto und damit das Elterngeld erheblich.',
+      },
+      {
+        frage: 'Was ist das Faktorverfahren bei Steuerklasse IV/IV?',
+        antwort: 'Beim Faktorverfahren wird der voraussichtliche Splitting-Vorteil bereits auf die monatliche Lohnsteuer umgerechnet. Beide Partner behalten Steuerklasse IV, aber mit einem Faktor unter 1, der die Steuerlast senkt. So wird der Splitting-Effekt monatlich berücksichtigt und Nachzahlungen werden vermieden.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -5000,6 +5066,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'splitting-rechner',
   'wasserbedarf-rechner',
   'rentenrechner',
   'baufinanzierung-rechner',
@@ -5139,6 +5206,7 @@ const verwandteMap: Record<string, string[]> = {
   'mietrendite-rechner': ['baufinanzierung-rechner', 'grunderwerbsteuer-rechner', 'mietrechner', 'kreditrechner'],
   'geburtstag-rechner': ['tagerechner', 'countdown', 'lebenszeit-rechner', 'schlaf-rechner'],
   'prozentuale-veraenderung-rechner': ['prozentrechner', 'dreisatz-rechner', 'durchschnitt-rechner', 'rabattrechner'],
+  'splitting-rechner': ['brutto-netto-rechner', 'steuererstattung-rechner', 'elterngeld-rechner', 'teilzeit-rechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {

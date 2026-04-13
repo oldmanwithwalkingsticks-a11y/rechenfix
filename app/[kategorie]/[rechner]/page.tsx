@@ -76,6 +76,7 @@ import FlaechenRechner from '@/components/rechner/FlaechenRechner';
 import MietrenditeRechner from '@/components/rechner/MietrenditeRechner';
 import GeburtstagRechner from '@/components/rechner/GeburtstagRechner';
 import ProzVeraenderungRechner from '@/components/rechner/ProzVeraenderungRechner';
+import SplittingRechner from '@/components/rechner/SplittingRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -164,6 +165,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'mietrendite-rechner': MietrenditeRechner,
   'geburtstag-rechner': GeburtstagRechner,
   'prozentuale-veraenderung-rechner': ProzVeraenderungRechner,
+  'splitting-rechner': SplittingRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
