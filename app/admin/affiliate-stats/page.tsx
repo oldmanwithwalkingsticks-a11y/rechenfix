@@ -211,7 +211,7 @@ export default function AffiliateStatsPage() {
       </div>
 
       {/* Tab Content */}
-      {clicks.length === 0 ? (
+      {clicks.length === 0 && tab !== 'feedback' ? (
         <div className="text-center py-12 text-gray-400 dark:text-gray-500">
           Noch keine Klick-Daten vorhanden.
         </div>
@@ -290,6 +290,7 @@ export default function AffiliateStatsPage() {
                 Noch keine Feedback-Daten vorhanden.
               </div>
             ) : (
+              <>
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50 dark:bg-gray-700/50 text-left">
@@ -322,6 +323,28 @@ export default function AffiliateStatsPage() {
                   ))}
                 </tbody>
               </table>
+              <div className="border-t border-gray-200 dark:border-gray-700 mt-2">
+                <p className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide bg-gray-50 dark:bg-gray-700/30">Einzelne Feedbacks</p>
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="bg-gray-50 dark:bg-gray-700/50 text-left">
+                      <th className="px-4 py-2 font-semibold text-gray-700 dark:text-gray-300">Datum/Uhrzeit</th>
+                      <th className="px-4 py-2 font-semibold text-gray-700 dark:text-gray-300">Bewertung</th>
+                      <th className="px-4 py-2 font-semibold text-gray-700 dark:text-gray-300">Rechner</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
+                    {[...feedbacks].sort((a, b) => b.t - a.t).map((f, i) => (
+                      <tr key={`fb-${f.t}-${i}`} className="hover:bg-gray-50 dark:hover:bg-gray-700/30">
+                        <td className="px-4 py-2 text-gray-500 dark:text-gray-400 whitespace-nowrap">{fmtDate(f.t)}</td>
+                        <td className="px-4 py-2">{f.v === 'ja' ? <span className="text-green-600 dark:text-green-400">👍 Ja</span> : <span className="text-red-500 dark:text-red-400">👎 Nein</span>}</td>
+                        <td className="px-4 py-2 text-gray-800 dark:text-gray-200 font-mono text-xs">{f.r}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              </>
             )
           )}
         </div>
