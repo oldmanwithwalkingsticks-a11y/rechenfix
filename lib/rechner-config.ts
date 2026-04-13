@@ -4755,6 +4755,64 @@ Der effektivste Weg, den Körperfettanteil zu senken, ist eine Kombination aus l
       },
     ],
   },
+  {
+    slug: 'flaechenrechner',
+    titel: 'Flächenrechner',
+    beschreibung: 'Fläche und Umfang berechnen: Für Rechteck, Dreieck, Kreis, Trapez, Parallelogramm und weitere Formen.',
+    kategorie: 'Mathe & Schule',
+    kategorieSlug: 'mathe',
+    metaTitle: 'Flächenrechner 2026 — Fläche & Umfang berechnen | Rechenfix',
+    metaDescription: 'Fläche berechnen: Rechteck, Dreieck, Kreis, Trapez und mehr ✓ Mit Formel und Rechenweg ✓ SVG-Grafik ✓ KI-Erklärung.',
+    keywords: ['flächenrechner', 'fläche berechnen', 'umfang berechnen', 'fläche rechteck', 'fläche kreis', 'fläche dreieck', 'trapez fläche', 'parallelogramm fläche', 'geometrie rechner', 'flächenberechnung'],
+    icon: '📐',
+    formel: 'Rechteck: A = a × b | Kreis: A = π × r² | Dreieck: A = (a × h) / 2 | Trapez: A = (a + c) × h / 2',
+    beispiel: 'Rechteck mit a = 5 cm, b = 3 cm → Fläche = 15 cm², Umfang = 16 cm, Diagonale ≈ 5,83 cm.',
+    erklaerung: `**Formeln für die wichtigsten geometrischen Formen**
+
+Die Berechnung von Flächen und Umfängen gehört zu den grundlegenden Aufgaben der Geometrie. Jede geometrische Form hat ihre eigene Formel, und unser Rechner beherrscht acht der wichtigsten Formen. Das **Rechteck** ist die einfachste Form: Fläche = Länge × Breite, Umfang = 2 × (Länge + Breite). Als Bonus wird die Diagonale berechnet, die sich über den Satz des Pythagoras ergibt: d = √(a² + b²). Ein Quadrat ist ein Sonderfall des Rechtecks mit gleichen Seitenlängen. Beim **Kreis** gilt: Fläche = π × r² und Umfang = 2 × π × r. Die Kreiszahl π (Pi, ca. 3,14159) ist dabei eine mathematische Konstante. Sie können wahlweise den Radius oder den Durchmesser eingeben — der Rechner rechnet automatisch um.
+
+Das **Dreieck** hat die Grundformel: Fläche = (Grundseite × Höhe) / 2. Wenn Sie die Höhe nicht kennen, aber alle drei Seiten, kommt die **Heronsche Formel** zum Einsatz: Zuerst berechnen Sie den halben Umfang s = (a + b + c) / 2, dann ist die Fläche = √(s × (s − a) × (s − b) × (s − c)). Das **Trapez** hat zwei parallele Seiten (a und c) und die Fläche ergibt sich aus (a + c) × h / 2 — man nimmt also den Durchschnitt der parallelen Seiten und multipliziert mit der Höhe. Das **Parallelogramm** ist wie ein „verschobenes Rechteck": Fläche = Grundseite × Höhe.
+
+Weitere Formen: Die **Raute** (Rhombus) hat vier gleich lange Seiten und ihre Fläche wird über die Diagonalen berechnet: A = (d₁ × d₂) / 2. Das **regelmäßige Sechseck** besteht aus sechs gleichseitigen Dreiecken: A = (3√3 / 2) × a². Die **Ellipse** ist ein „gestauchter Kreis" mit zwei Halbachsen: A = π × a × b. Für den Umfang der Ellipse gibt es keine exakte geschlossene Formel — unser Rechner verwendet die Näherung nach Ramanujan, die für die meisten Anwendungen ausreichend genau ist.
+
+**Fläche vs. Umfang: Der Unterschied erklärt**
+
+Fläche und Umfang beschreiben zwei völlig verschiedene Eigenschaften einer geometrischen Form. Die **Fläche** gibt an, wie viel Platz eine Form einnimmt — sie wird in Quadrateinheiten gemessen (cm², m², km²). Der **Umfang** gibt an, wie lang die Begrenzungslinie der Form ist — er wird in einfachen Längeneinheiten gemessen (cm, m, km). Ein anschauliches Beispiel: Wenn Sie einen Garten einzäunen möchten, brauchen Sie den Umfang (wie viel Zaun). Wenn Sie den Rasen aussäen möchten, brauchen Sie die Fläche (wie viel Saatgut). Interessanterweise können zwei Formen den gleichen Umfang, aber unterschiedliche Flächen haben: Ein Kreis hat bei gleichem Umfang immer die größte Fläche aller geschlossenen Formen (isoperimetrische Ungleichung).
+
+**Praktische Anwendungen im Alltag**
+
+Die Flächenberechnung ist im Alltag häufiger nötig, als man denkt. Beim **Renovieren** müssen Sie Wandflächen berechnen, um die richtige Menge Farbe oder Tapete zu kaufen — nutzen Sie dafür auch unseren [Quadratmeter-Rechner](/wohnen/quadratmeter-rechner). Beim **Grundstückskauf** ist die exakte Fläche entscheidend für den Preis. Im **Garten** brauchen Sie Flächen für Rasen, Mulch oder Pflasterung. Beim **Basteln und Heimwerken** hilft die Flächenberechnung, Material genau zu planen. Und im **Beruf** — vom Architekten über den Maler bis zum Landwirt — sind Flächenberechnungen tägliches Handwerkszeug.
+
+**Satz des Heron: Dreiecksfläche aus drei Seiten**
+
+Der Satz des Heron (auch Heronsche Formel) ist besonders praktisch, wenn Sie ein Dreieck vermessen haben, aber die Höhe nicht direkt messen können. Benannt nach Heron von Alexandria (ca. 60 n. Chr.), ermöglicht die Formel die Flächenberechnung allein aus den drei Seitenlängen. Zuerst wird der halbe Umfang berechnet: s = (a + b + c) / 2. Dann gilt: A = √(s × (s − a) × (s − b) × (s − c)). Beispiel: Ein Dreieck mit den Seiten 3, 4 und 5 → s = 6, A = √(6 × 3 × 2 × 1) = √36 = 6. Das funktioniert für jedes Dreieck, solange die Dreiecksungleichung erfüllt ist (jede Seite muss kleiner sein als die Summe der anderen beiden). Der [Einheiten-Umrechner](/mathe/einheiten-umrechner) hilft, wenn Ihre Maße in verschiedenen Einheiten vorliegen.
+
+**Einheiten richtig umrechnen**
+
+Bei der Flächenberechnung ist die korrekte Einheitenumrechnung entscheidend. Wichtig: Flächeneinheiten verhalten sich quadratisch — 1 m = 100 cm, aber 1 m² = 10.000 cm² (nicht 100 cm²). Ebenso: 1 km² = 1.000.000 m². Unser Rechner zeigt das Ergebnis automatisch in verschiedenen Einheiten an, sodass Sie nicht selbst umrechnen müssen. Für Grundstücke ist auch die Einheit Ar (1 a = 100 m²) und Hektar (1 ha = 10.000 m²) gebräuchlich.`,
+    faq: [
+      {
+        frage: 'Wie berechne ich die Fläche eines Rechtecks?',
+        antwort: 'Die Fläche eines Rechtecks berechnen Sie mit der Formel: Fläche = Länge × Breite. Beispiel: Ein Rechteck mit 5 cm Länge und 3 cm Breite hat eine Fläche von 15 cm². Den Umfang erhalten Sie mit: U = 2 × (Länge + Breite) = 2 × (5 + 3) = 16 cm.',
+      },
+      {
+        frage: 'Wie berechne ich die Fläche eines Kreises?',
+        antwort: 'Die Fläche eines Kreises berechnen Sie mit: A = π × r² (Pi mal Radius zum Quadrat). Beispiel: Ein Kreis mit Radius 5 cm hat eine Fläche von π × 25 ≈ 78,54 cm². Wenn Sie den Durchmesser kennen, teilen Sie ihn durch 2, um den Radius zu erhalten.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen Fläche und Umfang?',
+        antwort: 'Die Fläche gibt an, wie viel Platz eine Form einnimmt (gemessen in cm², m² etc.). Der Umfang gibt an, wie lang die Begrenzungslinie ist (gemessen in cm, m etc.). Beispiel: Für das Einzäunen eines Gartens brauchen Sie den Umfang, für das Aussäen von Rasen die Fläche.',
+      },
+      {
+        frage: 'Wie berechne ich die Fläche eines Dreiecks ohne Höhe?',
+        antwort: 'Wenn Sie alle drei Seitenlängen (a, b, c) kennen, verwenden Sie die Heronsche Formel: Berechnen Sie zuerst s = (a + b + c) / 2, dann A = √(s × (s−a) × (s−b) × (s−c)). Unser Rechner macht das automatisch, wenn Sie die drei Seiten eingeben und die Höhe leer lassen.',
+      },
+      {
+        frage: 'Wie rechne ich cm² in m² um?',
+        antwort: 'Da 1 m = 100 cm gilt, ist 1 m² = 100 × 100 = 10.000 cm². Um cm² in m² umzurechnen, teilen Sie durch 10.000. Beispiel: 50.000 cm² = 5 m². Unser Rechner zeigt das Ergebnis automatisch in verschiedenen Einheiten an.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -4903,6 +4961,7 @@ const verwandteMap: Record<string, string[]> = {
   'mutterschutz-rechner': ['geburtstermin-rechner', 'elterngeld-rechner', 'teilzeit-rechner', 'urlaubstage-rechner'],
   'trinkgeld-rechner': ['prozentrechner', 'dreisatz-rechner', 'rabattrechner', 'lieferservice-rechner'],
   'koerperfett-rechner': ['bmi-rechner', 'kalorienrechner', 'idealgewicht-rechner', 'wasserbedarf-rechner'],
+  'flaechenrechner': ['einheiten-umrechner', 'quadratmeter-rechner', 'durchschnitt-rechner', 'prozentrechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
