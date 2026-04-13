@@ -95,8 +95,10 @@ export default function AffiliateStatsPage() {
       map.set(f.r, e);
     }
     return Array.from(map.entries())
-      .map(([rechner, d]) => ({ rechner, ...d, gesamt: d.ja + d.nein, rate: d.gesamt > 0 ? (d.ja / (d.ja + d.nein)) * 100 : 0 }))
-      .map(r => ({ ...r, rate: r.gesamt > 0 ? (r.ja / r.gesamt) * 100 : 0 }))
+      .map(([rechner, d]) => {
+        const gesamt = d.ja + d.nein;
+        return { rechner, ...d, gesamt, rate: gesamt > 0 ? (d.ja / gesamt) * 100 : 0 };
+      })
       .sort((a, b) => b.gesamt - a.gesamt);
   }, [feedbacks]);
 
