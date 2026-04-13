@@ -123,14 +123,14 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
 
 const CONTEXT_DEEPLINKS: Partial<Record<ProgramId, Record<string, string>>> = {
   check24: {
-    'kfz-steuer': 'https://www.check24.de/kfz-versicherung/',
-    'spritkosten': 'https://www.check24.de/kfz-versicherung/',
-    'strom': 'https://www.check24.de/strom/',
-    'stromvergleich': 'https://www.check24.de/strom/',
-    'nebenkosten': 'https://www.check24.de/gas/',
-    'heizkosten': 'https://www.check24.de/gas/',
-    'kredit': 'https://www.check24.de/kredit/',
-    'default': 'https://www.check24.de/',
+    'kfz-steuer': 'https://www.check24.net/kfz-versicherung/',
+    'spritkosten': 'https://www.check24.net/kfz-versicherung/',
+    'strom': 'https://www.check24.net/stromvergleich/',
+    'stromvergleich': 'https://www.check24.net/stromvergleich/',
+    'nebenkosten': 'https://www.check24.net/gasvergleich/',
+    'heizkosten': 'https://www.check24.net/gasvergleich/',
+    'kredit': 'https://www.check24.net/kredit/',
+    'default': 'https://www.check24.net/',
   },
 };
 
