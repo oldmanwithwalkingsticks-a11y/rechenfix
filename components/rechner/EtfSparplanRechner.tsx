@@ -6,7 +6,6 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
-import { AffiliateBox } from '@/components/AffiliateBox';
 
 export default function EtfSparplanRechner() {
   const [sparrate, setSparrate] = useState('200');
@@ -321,8 +320,6 @@ export default function EtfSparplanRechner() {
               <strong>Hinweis:</strong> Diese Berechnung basiert auf einer gleichmäßigen jährlichen Rendite. In der Realität schwanken ETF-Kurse. Historische Renditen sind keine Garantie für zukünftige Ergebnisse. Diese Berechnung stellt keine Anlageberatung dar.
             </p>
           </div>
-
-          <AffiliateBox programId="check24" context="etf" />
 
           <ErgebnisAktionen
             ergebnisText={`ETF-Sparplan: ${fmt(nSparrate)} €/Monat, ${nAnlagedauer} Jahre, ${fmtDez(nRendite)}% Rendite → Endkapital: ${fmt(steuern ? ergebnis.endkapitalNachSteuern : ergebnis.endkapital)} € (Einzahlungen: ${fmt(ergebnis.summeEinzahlungen)} €, Rendite: +${fmt(ergebnis.renditeAnteil)} €)`}
