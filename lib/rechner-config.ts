@@ -4091,6 +4091,80 @@ Für die Planung Ihres verbleibenden Urlaubs nutzen Sie unseren [Urlaubstage-Rec
       },
     ],
   },
+  {
+    slug: 'etf-sparplanrechner',
+    titel: 'ETF-Sparplanrechner',
+    beschreibung: 'ETF-Sparplan berechnen: Endkapital, Rendite und Vermögensentwicklung für Ihren monatlichen Sparplan simulieren.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'ETF-Sparplanrechner 2026 — Sparplan-Rendite berechnen | Rechenfix',
+    metaDescription: 'ETF-Sparplan berechnen: Endkapital, Rendite und Vermögensentwicklung ✓ Dynamische Sparrate ✓ Nach Steuern ✓ Mit Diagramm ✓ KI-Erklärung.',
+    keywords: ['etf sparplanrechner', 'etf sparplan berechnen', 'sparplan rendite rechner', 'etf rechner', 'sparplan rechner', 'etf rendite berechnen', 'vermögensaufbau rechner', 'msci world rechner'],
+    icon: '📈',
+    formel: 'Endkapital = Einmalanlage × (1+r)^n + Sparrate × ((1+r)^n − 1) / r, wobei r = Monatsrendite, n = Monate',
+    beispiel: '200 €/Monat, 20 Jahre, 7 % Rendite → Einzahlungen: 48.000 € → Endkapital: ca. 104.000 € → Rendite: ca. 56.000 €',
+    erklaerung: `**Was ist ein ETF-Sparplan und wie funktioniert er?**
+
+Ein ETF-Sparplan ist eine automatisierte Geldanlage, bei der Sie regelmäßig — meist monatlich — einen festen Betrag in einen börsengehandelten Indexfonds (Exchange Traded Fund) investieren. Der ETF bildet einen Aktienindex wie den **MSCI World**, den **S&P 500** oder den **DAX** nach und ermöglicht so eine breite Streuung über viele Unternehmen und Branchen. Durch die regelmäßigen Einzahlungen profitieren Anleger vom sogenannten **Cost-Average-Effekt** (Durchschnittskosteneffekt): Bei niedrigen Kursen werden automatisch mehr Anteile gekauft, bei hohen Kursen weniger. Über lange Zeiträume gleichen sich Kursschwankungen so tendenziell aus.
+
+ETF-Sparpläne sind bereits ab 1 € pro Monat möglich und eignen sich daher auch für Einsteiger mit kleinem Budget. Die meisten Online-Broker bieten kostenlose Sparplanausführungen an, sodass keine zusätzlichen Gebühren anfallen.
+
+**Historische Renditen: MSCI World, S&P 500 und DAX im Vergleich**
+
+Die erwartete Rendite ist der wichtigste Einflussfaktor auf das Endergebnis. Historische Durchschnittswerte (vor Inflation, vor Steuern) über die letzten 30–50 Jahre:
+
+- **MSCI World:** ca. 7–8 % p.a. — investiert in über 1.500 Unternehmen aus 23 Industrieländern
+- **S&P 500:** ca. 9–10 % p.a. — die 500 größten US-Unternehmen, stärkere Konzentration auf den US-Markt
+- **DAX:** ca. 7–8 % p.a. — die 40 größten deutschen Unternehmen, höhere Schwankungsanfälligkeit durch geringere Streuung
+
+Diese Werte sind Durchschnittswerte. In einzelnen Jahren kann die Rendite deutlich höher oder niedriger ausfallen — in Krisenzeiten sogar stark negativ. Langfristig haben sich breit gestreute Aktien-ETFs jedoch als eine der renditestärksten Anlageklassen erwiesen.
+
+**Der Zinseszinseffekt: Warum früh anfangen so wichtig ist**
+
+Der Zinseszinseffekt ist das mächtigste Werkzeug beim langfristigen Vermögensaufbau. Er bewirkt, dass nicht nur Ihre Einzahlungen Rendite erwirtschaften, sondern auch die **bereits erzielten Gewinne** weitere Rendite generieren. Je länger der Anlagezeitraum, desto stärker wirkt dieser Effekt — er wächst exponentiell.
+
+Ein Beispiel verdeutlicht das: Bei 200 €/Monat und 7 % Rendite haben Sie nach 20 Jahren ca. 104.000 € (bei 48.000 € Einzahlungen). Verdoppeln Sie die Laufzeit auf 40 Jahre, beträgt das Endkapital ca. 525.000 € — obwohl Sie nur doppelt so viel eingezahlt haben (96.000 €). Der Renditevorteil versechsfacht sich nahezu. Deshalb gilt: Je früher Sie mit dem Sparplan beginnen, desto besser.
+
+**Kosten: TER, Depotgebühren und ihr Einfluss auf die Rendite**
+
+Die **TER (Total Expense Ratio)** gibt die jährlichen Kosten eines ETFs an. Bei den beliebten MSCI-World-ETFs liegt sie typischerweise zwischen 0,12 % und 0,20 % pro Jahr — deutlich günstiger als aktiv gemanagte Fonds (oft 1,5–2,0 %). Die TER wird automatisch aus dem Fondsvermögen entnommen und ist bereits in der Kursentwicklung berücksichtigt.
+
+Achten Sie bei der Depotauswahl auf: kostenlose Sparplanausführung, keine Depotgebühren und eine breite ETF-Auswahl. Bereits geringe Kostenunterschiede können über Jahrzehnte mehrere Tausend Euro ausmachen.
+
+**Steuern auf ETF-Gewinne: Abgeltungssteuer und Teilfreistellung**
+
+Gewinne aus ETFs unterliegen in Deutschland der **Abgeltungssteuer** von 25 % plus 5,5 % Solidaritätszuschlag — effektiv **26,375 %**. Für Aktienfonds (mind. 51 % Aktienanteil) gilt eine **Teilfreistellung von 30 %**: Nur 70 % der Gewinne werden besteuert. Der **Sparerpauschbetrag** beträgt 1.000 € pro Person (2.000 € für Verheiratete) und befreit Kapitalerträge bis zu dieser Höhe von der Steuer.
+
+Wichtig: Die Steuern fallen erst beim Verkauf an. Solange Sie Ihre ETF-Anteile halten, wächst Ihr Kapital steuerfrei weiter — ein zusätzlicher Renditevorteil langfristiger Anlagestrategien. Unser Rechner berücksichtigt die Steuerberechnung vereinfacht zum Endpunkt; in der Praxis greifen jährlich die Vorabpauschale und beim Verkauf die restliche Steuer.
+
+Ergänzend können Sie mit unserem [Zinsrechner](/finanzen/zinsrechner) verschiedene Zinseszins-Szenarien durchspielen, mit dem [Sparrechner](/finanzen/sparrechner) alternative Sparstrategien vergleichen und mit dem [Inflationsrechner](/finanzen/inflationsrechner) den realen Wert Ihres Vermögens über die Zeit berechnen.`,
+    faq: [
+      {
+        frage: 'Wie viel Geld kann ich mit einem ETF-Sparplan verdienen?',
+        antwort: 'Das hängt von Sparrate, Anlagedauer und Rendite ab. Beispiel: Bei 200 € monatlich, 20 Jahren und 7 % Rendite ergibt sich ein Endkapital von ca. 104.000 € — bei nur 48.000 € Eigeneinzahlung. Je länger Sie sparen, desto stärker wirkt der Zinseszinseffekt: Nach 30 Jahren wären es bereits ca. 243.000 €.',
+      },
+      {
+        frage: 'Welche Rendite ist bei ETFs realistisch?',
+        antwort: 'Breit gestreute Aktien-ETFs wie der MSCI World haben historisch eine durchschnittliche Rendite von 7–8 % pro Jahr erzielt (vor Inflation und Steuern). In einzelnen Jahren kann die Rendite stark schwanken (-40 % bis +40 %), aber über Zeiträume von 15+ Jahren lag die Rendite historisch immer im positiven Bereich. Vergangene Renditen sind keine Garantie für die Zukunft.',
+      },
+      {
+        frage: 'Wie funktioniert der Zinseszinseffekt beim Sparplan?',
+        antwort: 'Beim Zinseszinseffekt erwirtschaften nicht nur Ihre Einzahlungen Rendite, sondern auch die bereits erzielten Gewinne. Das führt zu exponentiellem Wachstum: In den ersten Jahren wächst das Vermögen langsam, in den letzten Jahren dagegen sehr schnell. Deshalb ist die Anlagedauer der wichtigste Faktor — schon 5 Jahre mehr können einen enormen Unterschied machen.',
+      },
+      {
+        frage: 'Wie werden ETF-Gewinne besteuert?',
+        antwort: 'ETF-Gewinne unterliegen der Abgeltungssteuer von 26,375 % (inkl. Soli). Für Aktienfonds gilt eine Teilfreistellung von 30 % — nur 70 % der Gewinne werden besteuert. Der Sparerpauschbetrag befreit 1.000 € (Singles) bzw. 2.000 € (Verheiratete) von der Steuer. Steuern fallen beim Verkauf der Anteile an; während der Haltedauer wächst das Kapital steuerfrei.',
+      },
+      {
+        frage: 'Was ist die Teilfreistellung bei Aktienfonds?',
+        antwort: 'Die Teilfreistellung ist eine steuerliche Vergünstigung für Investmentfonds. Bei Aktienfonds (mindestens 51 % Aktienanteil, was auf die meisten ETFs zutrifft) werden 30 % der Erträge steuerfrei gestellt. Das bedeutet: Von 10.000 € Gewinn sind nur 7.000 € steuerpflichtig. Die Teilfreistellung soll eine Doppelbesteuerung auf Fondsebene und Anlegerebene verhindern.',
+      },
+      {
+        frage: 'Lohnt sich ein ETF-Sparplan auch mit kleinen Beträgen?',
+        antwort: 'Ja, absolut. Viele Broker bieten Sparpläne bereits ab 1 € oder 25 € pro Monat an. Selbst kleine Beträge lohnen sich langfristig: 50 € monatlich über 30 Jahre bei 7 % Rendite ergeben ca. 61.000 € — bei nur 18.000 € Eigeneinzahlung. Entscheidend ist, frühzeitig anzufangen und regelmäßig dabei zu bleiben. Die Sparrate kann jederzeit erhöht werden.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -4104,6 +4178,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'etf-sparplanrechner',
   'kuendigungsfrist-rechner',
   'idealgewicht-rechner',
   'geburtstermin-rechner',
@@ -4222,6 +4297,7 @@ const verwandteMap: Record<string, string[]> = {
   'geburtstermin-rechner': ['elterngeld-rechner', 'schlaf-rechner', 'bmi-rechner', 'kalorienrechner'],
   'idealgewicht-rechner': ['bmi-rechner', 'kalorienrechner', 'schlaf-rechner', 'geburtstermin-rechner'],
   'kuendigungsfrist-rechner': ['urlaubstage-rechner', 'ueberstunden-rechner', 'arbeitszeitrechner', 'rechtsschutz-rechner'],
+  'etf-sparplanrechner': ['zinsrechner', 'sparrechner', 'inflationsrechner', 'kreditrechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
