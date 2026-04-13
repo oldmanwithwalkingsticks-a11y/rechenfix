@@ -63,6 +63,7 @@ import GeburtsterminRechner from '@/components/rechner/GeburtsterminRechner';
 import IdealgewichtRechner from '@/components/rechner/IdealgewichtRechner';
 import KuendigungsfristRechner from '@/components/rechner/KuendigungsfristRechner';
 import EtfSparplanRechner from '@/components/rechner/EtfSparplanRechner';
+import TeilzeitRechner from '@/components/rechner/TeilzeitRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -138,6 +139,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'idealgewicht-rechner': IdealgewichtRechner,
   'kuendigungsfrist-rechner': KuendigungsfristRechner,
   'etf-sparplanrechner': EtfSparplanRechner,
+  'teilzeit-rechner': TeilzeitRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

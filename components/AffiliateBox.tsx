@@ -92,6 +92,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'pendlerpauschale': 'WISO Steuer berechnet Ihre Pendlerpauschale automatisch optimal.',
     'grunderwerbsteuer': 'Kaufnebenkosten lassen sich teilweise von der Steuer absetzen.',
     'steuererstattung': 'WISO Steuer: Umfassende Steuersoftware mit automatischem Belegabruf.',
+    'teilzeit': 'Teilzeit und Steuern? WISO Steuer hilft Ihnen, das Maximum aus Ihrer Steuererklärung herauszuholen.',
   },
   smartsteuer: {
     'brutto-netto': 'Online-Steuererklärung machen und Geld vom Finanzamt zurückholen.',
