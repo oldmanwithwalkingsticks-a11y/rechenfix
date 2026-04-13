@@ -4236,6 +4236,72 @@ Ergänzend können Sie mit unserem [Zinsrechner](/finanzen/zinsrechner) verschie
     ],
   },
   {
+    slug: 'rentenrechner',
+    titel: 'Rentenrechner',
+    beschreibung: 'Gesetzliche Rente schätzen: Voraussichtliche Monatsrente, Rentenpunkte und Rentenlücke berechnen.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Rentenrechner 2026 — Gesetzliche Rente & Rentenlücke berechnen | Rechenfix',
+    metaDescription: 'Rente berechnen: Voraussichtliche Monatsrente, Rentenpunkte und Rentenlücke ✓ Abschläge bei Frührente ✓ Netto-Schätzung ✓ KI-Erklärung.',
+    keywords: ['rentenrechner', 'rente berechnen', 'rentenpunkte berechnen', 'rentenlücke rechner', 'gesetzliche rente rechner', 'rente mit 63', 'monatsrente berechnen', 'rentenanspruch berechnen', 'netto rente rechner', 'altersvorsorge rechner'],
+    icon: '👴',
+    formel: 'Monatsrente = Rentenpunkte × aktueller Rentenwert (39,32 €)\nRentenpunkte/Jahr = Jahresbrutto / Durchschnittsentgelt (45.358 €)',
+    beispiel: '35 Jahre alt, 3.500 € Brutto, 15 Beitragsjahre, Rente mit 67: → ca. 35 Rentenpunkte gesamt → Brutto-Rente: ca. 1.376 € → Netto: ca. 1.170 €.',
+    erklaerung: `**Wie funktioniert die gesetzliche Rentenversicherung?**
+
+Die gesetzliche Rentenversicherung (GRV) ist das wichtigste Standbein der Altersvorsorge in Deutschland. Arbeitnehmer und Arbeitgeber zahlen je 9,3% des Bruttolohns ein — insgesamt 18,6%. Dafür sammeln Versicherte sogenannte Entgeltpunkte (Rentenpunkte), die bei Renteneintritt in eine monatliche Rente umgerechnet werden. Die Rentenformel lautet: **Monatsrente = Entgeltpunkte × Zugangsfaktor × aktueller Rentenwert × Rentenartfaktor**. Für die normale Altersrente vereinfacht sich das zu: Monatsrente = Entgeltpunkte × Rentenwert.
+
+**Was sind Rentenpunkte und wie sammle ich sie?**
+
+Rentenpunkte (Entgeltpunkte) sind die Währung der gesetzlichen Rente. Wer genau das Durchschnittseinkommen verdient (2026: ca. 45.358 € brutto/Jahr), erhält exakt 1,0 Rentenpunkte pro Jahr. Wer das Doppelte verdient, bekommt 2,0 Punkte — allerdings nur bis zur Beitragsbemessungsgrenze (2026: 90.600 € West). Darüber liegende Einkommen bringen keine weiteren Punkte. Auch Kindererziehungszeiten (ca. 1 Punkt pro Kind pro Jahr, max. 3 Jahre), Pflege von Angehörigen und bestimmte Ausbildungszeiten bringen Rentenpunkte.
+
+Der aktuelle Rentenwert liegt bei **39,32 € pro Punkt** (seit Juli 2025). Ein Durchschnittsverdiener mit 45 Beitragsjahren sammelt also 45 Punkte und erhält: 45 × 39,32 € = 1.769 € brutto/Monat. Der Rentenwert wird jährlich angepasst — in den letzten Jahren meist um 3-5%.
+
+**Rente mit 63: Welche Abschläge drohen?**
+
+Die Regelaltersgrenze liegt bei 67 Jahren. Wer früher in Rente gehen möchte, muss mit Abschlägen rechnen: **0,3% pro Monat vor dem 67. Lebensjahr**, maximal 14,4%. Rente mit 63 bedeutet also 48 Monate × 0,3% = **14,4% Abschlag** — und zwar dauerhaft, nicht nur bis zum 67. Geburtstag. Ausnahmen gelten für besonders langjährig Versicherte (45 Beitragsjahre): Sie können mit 63 abschlagsfrei in Rente gehen.
+
+Unser Rechner berechnet die Abschläge automatisch, wenn Sie ein Renteneintrittsalter unter 67 wählen. So sehen Sie sofort, wie viel weniger Rente eine Frühverrentung bedeutet — und können abwägen, ob sich das für Sie lohnt.
+
+**Die Rentenlücke: Warum private Vorsorge wichtig ist**
+
+Die Rentenlücke ist die Differenz zwischen der gewünschten Netto-Rente und der tatsächlich zu erwartenden gesetzlichen Rente. Für die meisten Menschen beträgt die gesetzliche Rente nur 45-48% des letzten Nettoeinkommens (Rentenniveau). Die durchschnittliche Rentenlücke liegt bei 500-1.000 € pro Monat. Um diese Lücke zu schließen, sind zusätzliche Vorsorge-Bausteine nötig.
+
+**Riester, Rürup, ETF-Sparplan: Welche Altersvorsorge passt?**
+
+Zur privaten Altersvorsorge gibt es verschiedene Wege: **Riester-Rente** (staatlich gefördert, besonders für Familien), **Rürup-Rente** (steuerlich absetzbar, für Selbstständige und Gutverdiener), **betriebliche Altersvorsorge** (Arbeitgeberzuschuss nutzen) und **privater ETF-Sparplan** (flexibel, kostengünstig, renditestark). Eine Kombination verschiedener Bausteine ist oft optimal. Mit unserem [ETF-Sparplanrechner](/finanzen/etf-sparplanrechner) können Sie berechnen, wie viel Kapital sich durch regelmäßiges Sparen aufbauen lässt, und mit dem [Sparrechner](/finanzen/sparrechner) alternative Sparstrategien vergleichen.
+
+**Wird meine Rente besteuert?**
+
+Ja, Renten unterliegen der nachgelagerten Besteuerung. Der steuerpflichtige Anteil hängt vom Jahr des Renteneintritts ab: Wer 2026 in Rente geht, muss 83% der Rente versteuern. Dieser Anteil steigt jährlich um 0,5 Prozentpunkte und erreicht 2058 die vollen 100%. Zusätzlich fallen Krankenversicherungsbeiträge (ca. 8,15%) und Pflegeversicherung (ca. 1,7-2,3%) an. Der [Brutto-Netto-Rechner](/finanzen/brutto-netto-rechner) hilft Ihnen, Ihre aktuelle Steuerbelastung zu verstehen.`,
+    faq: [
+      {
+        frage: 'Wie hoch wird meine Rente voraussichtlich sein?',
+        antwort: 'Die Höhe Ihrer Rente hängt von Ihren gesammelten Rentenpunkten ab. Wer das Durchschnittseinkommen verdient, erhält pro Jahr 1 Rentenpunkt (Wert 2026: 39,32 €). Ein Durchschnittsverdiener mit 45 Beitragsjahren erhält ca. 1.769 € brutto. Ihr individueller Wert hängt von Ihrem Gehalt, Ihren Beitragsjahren und dem Renteneintrittsalter ab.',
+      },
+      {
+        frage: 'Was sind Rentenpunkte?',
+        antwort: 'Rentenpunkte (Entgeltpunkte) bestimmen die Höhe Ihrer Rente. Pro Jahr erhalten Sie Punkte im Verhältnis Ihres Einkommens zum Durchschnittseinkommen. Bei 45.358 € brutto/Jahr (Durchschnitt 2026) gibt es genau 1,0 Punkte. Bei 90.000 € gibt es ca. 1,98 Punkte. Die Beitragsbemessungsgrenze (90.600 € West) begrenzt die maximal erreichbaren Punkte pro Jahr auf ca. 2,0.',
+      },
+      {
+        frage: 'Kann ich mit 63 in Rente gehen?',
+        antwort: 'Ja, aber mit Abschlägen: 0,3% pro Monat vor dem 67. Geburtstag, also 14,4% bei Rente mit 63. Das bedeutet bei 1.500 € Rente ein Minus von 216 € — dauerhaft. Ausnahme: Besonders langjährig Versicherte (mindestens 45 Beitragsjahre) können mit 63 abschlagsfrei in Rente gehen.',
+      },
+      {
+        frage: 'Wie groß ist die durchschnittliche Rentenlücke?',
+        antwort: 'Das Rentenniveau liegt bei etwa 48% des letzten Nettoeinkommens. Wer im Berufsleben 2.500 € netto verdient hat, erhält nur ca. 1.200 € Netto-Rente — eine Lücke von 1.300 €. Die durchschnittliche Rentenlücke in Deutschland beträgt 500-1.000 € monatlich und muss durch private Vorsorge geschlossen werden.',
+      },
+      {
+        frage: 'Wie kann ich meine Rentenlücke schließen?',
+        antwort: 'Es gibt mehrere Wege: Betriebliche Altersvorsorge (Arbeitgeberzuschuss nutzen), Riester-Rente (staatliche Zulagen), Rürup-Rente (Steuervorteile), privater ETF-Sparplan (flexibel und renditestark). Je früher Sie anfangen, desto weniger müssen Sie monatlich sparen. Beispiel: Für 500 € Rentenlücke brauchen Sie mit 30 Jahren ca. 170 €/Monat, mit 45 Jahren bereits ca. 430 €/Monat.',
+      },
+      {
+        frage: 'Wird meine Rente besteuert?',
+        antwort: 'Ja, Renten werden nachgelagert besteuert. Der steuerpflichtige Anteil hängt vom Renteneintrittsjahr ab: 2026 sind 83% steuerpflichtig, dieser Anteil steigt jährlich um 0,5%. Zusätzlich fallen ca. 10% für Kranken- und Pflegeversicherung an. Bei einer Brutto-Rente von 1.500 € bleiben netto ca. 1.250-1.350 € übrig.',
+      },
+    ],
+  },
+  {
     slug: 'teilzeit-rechner',
     titel: 'Teilzeit-Rechner',
     beschreibung: 'Teilzeitgehalt berechnen: Brutto, geschätztes Netto, Stundenlohn und Urlaubstage bei Reduzierung der Arbeitszeit.',
@@ -4470,6 +4536,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'rentenrechner',
   'baufinanzierung-rechner',
   'mutterschutz-rechner',
   'abfindungsrechner',
@@ -4594,7 +4661,8 @@ const verwandteMap: Record<string, string[]> = {
   'geburtstermin-rechner': ['elterngeld-rechner', 'schlaf-rechner', 'bmi-rechner', 'kalorienrechner'],
   'idealgewicht-rechner': ['bmi-rechner', 'kalorienrechner', 'schlaf-rechner', 'geburtstermin-rechner'],
   'kuendigungsfrist-rechner': ['urlaubstage-rechner', 'ueberstunden-rechner', 'arbeitszeitrechner', 'rechtsschutz-rechner'],
-  'etf-sparplanrechner': ['zinsrechner', 'sparrechner', 'inflationsrechner', 'kreditrechner'],
+  'etf-sparplanrechner': ['rentenrechner', 'sparrechner', 'inflationsrechner', 'zinsrechner'],
+  'rentenrechner': ['etf-sparplanrechner', 'sparrechner', 'brutto-netto-rechner', 'inflationsrechner'],
   'teilzeit-rechner': ['brutto-netto-rechner', 'stundenlohn-rechner', 'urlaubstage-rechner', 'ueberstunden-rechner'],
   'abfindungsrechner': ['kuendigungsfrist-rechner', 'brutto-netto-rechner', 'steuererstattung-rechner', 'ueberstunden-rechner'],
   'mutterschutz-rechner': ['geburtstermin-rechner', 'elterngeld-rechner', 'teilzeit-rechner', 'urlaubstage-rechner'],

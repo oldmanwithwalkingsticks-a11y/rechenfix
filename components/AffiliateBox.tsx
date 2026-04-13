@@ -95,6 +95,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'teilzeit': 'Teilzeit und Steuern? WISO Steuer hilft Ihnen, das Maximum aus Ihrer Steuererklärung herauszuholen.',
     'abfindung': 'Fünftelregelung in der Steuererklärung beantragen — WISO Steuer führt Sie Schritt für Schritt.',
     'mutterschutz': 'Steuererklärung im Mutterschutzjahr? WISO Steuer berechnet Mutterschaftsgeld und Elterngeld automatisch korrekt.',
+    'rente': 'Altersvorsorge steuerlich absetzen — Riester, Rürup und betriebliche Altersvorsorge optimal in der Steuererklärung angeben.',
   },
   smartsteuer: {
     'brutto-netto': 'Online-Steuererklärung machen und Geld vom Finanzamt zurückholen.',

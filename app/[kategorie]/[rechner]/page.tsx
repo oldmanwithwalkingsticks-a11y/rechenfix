@@ -67,6 +67,7 @@ import TeilzeitRechner from '@/components/rechner/TeilzeitRechner';
 import AbfindungsRechner from '@/components/rechner/AbfindungsRechner';
 import MutterschutzRechner from '@/components/rechner/MutterschutzRechner';
 import BaufinanzierungRechner from '@/components/rechner/BaufinanzierungRechner';
+import RentenRechner from '@/components/rechner/RentenRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -146,6 +147,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'abfindungsrechner': AbfindungsRechner,
   'mutterschutz-rechner': MutterschutzRechner,
   'baufinanzierung-rechner': BaufinanzierungRechner,
+  'rentenrechner': RentenRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
