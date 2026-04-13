@@ -4643,6 +4643,64 @@ Nutzen Sie unseren [Geburtstermin-Rechner](/gesundheit/geburtstermin-rechner), u
       },
     ],
   },
+  {
+    slug: 'trinkgeld-rechner',
+    titel: 'Trinkgeld-Rechner',
+    beschreibung: 'Trinkgeld berechnen: Prozent oder fester Betrag, Rechnung teilen, auf glatten Betrag aufrunden.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Trinkgeld-Rechner 2026 — Trinkgeld berechnen & Rechnung teilen | Rechenfix',
+    metaDescription: 'Trinkgeld berechnen: Prozent oder Festbetrag ✓ Rechnung teilen ✓ Aufrunden ✓ Vergleichstabelle ✓ Mit KI-Erklärung.',
+    keywords: ['trinkgeld rechner', 'trinkgeld berechnen', 'trinkgeld prozent', 'rechnung teilen rechner', 'wie viel trinkgeld', 'trinkgeld deutschland', 'trinkgeld restaurant', 'tip calculator deutsch', 'trinkgeld aufrunden', 'trinkgeld knigge'],
+    icon: '💰',
+    formel: 'Trinkgeld = Rechnungsbetrag × Trinkgeld-Prozent ÷ 100 | Gesamtbetrag = Rechnungsbetrag + Trinkgeld | Pro Person = Gesamtbetrag ÷ Anzahl Personen',
+    beispiel: 'Rechnung: 45,00 € × 10% = 4,50 € Trinkgeld → Gesamt: 49,50 € | Bei 2 Personen: 24,75 € pro Person.',
+    erklaerung: `**Wie viel Trinkgeld gibt man in Deutschland?**
+
+In Deutschland ist Trinkgeld eine freiwillige Anerkennung für guten Service — im Gegensatz zu Ländern wie den USA, wo Trinkgeld ein fester Gehaltsbestandteil ist. Die übliche Höhe im Restaurant liegt bei **5 bis 10 Prozent** des Rechnungsbetrags, bei besonders gutem Service auch **10 bis 15 Prozent**. In der Praxis runden viele Deutsche einfach auf den nächsten glatten Betrag auf: Bei einer Rechnung von 27,30 Euro gibt man beispielsweise 30 Euro und sagt „stimmt so". Unser Rechner hilft Ihnen, den passenden Trinkgeldbetrag schnell zu ermitteln — egal ob Sie prozentual rechnen, einen festen Betrag festlegen oder die Rechnung auf mehrere Personen aufteilen möchten.
+
+**Trinkgeld-Knigge: Wann gibt man wie viel?**
+
+Die Höhe des Trinkgelds hängt von der Branche und dem Service ab. Im **Restaurant** sind 5 bis 10 Prozent Standard, bei hervorragendem Service 15 Prozent. In **Cafés und Bars** wird meist aufgerundet oder 1 bis 2 Euro pro Getränk gegeben. Beim **Friseur** sind 5 bis 10 Prozent üblich. **Taxifahrer** erhalten typischerweise 5 bis 10 Prozent oder man rundet auf den nächsten Euro auf. **Lieferdienste** bekommen 1 bis 3 Euro je nach Bestellwert und Wetter. Im **Hotel** gibt man dem Zimmermädchen 1 bis 2 Euro pro Nacht und dem Kofferträger 1 bis 2 Euro pro Gepäckstück. Wichtig: In Deutschland wird Trinkgeld direkt an die Servicekraft gegeben — nicht auf den Tisch gelegt. Sagen Sie beim Bezahlen „stimmt so" oder nennen Sie den gewünschten Gesamtbetrag.
+
+**Trinkgeld international: Große Unterschiede weltweit**
+
+Wer ins Ausland reist, sollte die lokalen Trinkgeld-Gepflogenheiten kennen — sonst kann es zu peinlichen Situationen kommen. In den **USA** sind 15 bis 20 Prozent Trinkgeld quasi Pflicht, da Servicekräfte oft nur den Mindestlohn erhalten und auf Tips angewiesen sind. In **Großbritannien** werden 10 bis 15 Prozent erwartet, oft ist ein „service charge" bereits auf der Rechnung enthalten. In **Frankreich** und **Italien** ist der Service meist im Preis inbegriffen (service compris), trotzdem ist es üblich, 5 bis 10 Prozent zu lassen. In **Japan** und **Südkorea** ist Trinkgeld unüblich und kann sogar als Beleidigung aufgefasst werden. In **Ägypten** und **Marokko** wird überall ein kleines Trinkgeld (Bakschisch) erwartet, auch für kleine Gefälligkeiten. Informieren Sie sich vor Reisen immer über die lokalen Gepflogenheiten — mit dem [Prozentrechner](/alltag/prozentrechner) können Sie den passenden Betrag schnell umrechnen.
+
+**Muss man Trinkgeld versteuern?**
+
+Für **Arbeitnehmer**, die Trinkgeld erhalten, gilt in Deutschland: Freiwilliges Trinkgeld, das direkt vom Gast an die Servicekraft gegeben wird, ist **steuerfrei und sozialversicherungsfrei** — ohne Obergrenze (§ 3 Nr. 51 EStG). Voraussetzung ist, dass der Gast das Trinkgeld freiwillig und ohne Rechtsanspruch gibt und dass es direkt an den Arbeitnehmer geht. Anders verhält es sich bei Trinkgeld, das über den Arbeitgeber verteilt wird oder wenn ein fester Aufschlag auf der Rechnung steht — dieses ist steuerpflichtig. Für **Selbstständige** (z. B. Friseure mit eigenem Salon) gilt: Trinkgeld ist Teil der Betriebseinnahmen und muss versteuert werden.
+
+**Rechnung teilen: So geht es fair**
+
+Wenn Sie mit mehreren Personen essen gehen, gibt es verschiedene Möglichkeiten, die Rechnung aufzuteilen. Die einfachste Variante: Gesamtbetrag inklusive Trinkgeld durch die Anzahl der Personen teilen. Das ist schnell und unkompliziert, kann aber unfair sein, wenn einzelne Personen deutlich mehr bestellt haben. Die Alternative: Jeder zahlt seinen eigenen Betrag plus anteiliges Trinkgeld. In der Praxis hat sich ein Kompromiss bewährt — die Rechnung gleichmäßig teilen, aber Personen mit deutlich höheren Beträgen (z. B. eine teure Flasche Wein) zahlen entsprechend mehr. Unser Rechner zeigt Ihnen sofort den Betrag pro Person, wenn Sie die Anzahl der Gäste eingeben.
+
+**Tipps für den richtigen Trinkgeld-Betrag**
+
+Wenn der Service gut war, zeigen Sie es mit einem angemessenen Trinkgeld. Bedenken Sie: Servicekräfte in Deutschland verdienen zwar mehr als in den USA, aber das Grundgehalt in der Gastronomie ist trotzdem oft niedrig. Wenn Sie unzufrieden waren, reduzieren Sie das Trinkgeld — kein Trinkgeld zu geben ist in Deutschland ein deutliches Zeichen für schlechten Service. Bei Kartenzahlung können Sie das Trinkgeld oft direkt auf das Kartenterminal aufschlagen lassen — fragen Sie einfach nach dem Gesamtbetrag. Alternativ geben Sie das Trinkgeld bar, auch wenn Sie mit Karte zahlen. Mit dem [Dreisatzrechner](/alltag/dreisatz-rechner) können Sie übrigens schnell berechnen, wie viel Prozent Sie tatsächlich gegeben haben.`,
+    faq: [
+      {
+        frage: 'Wie viel Trinkgeld gibt man im Restaurant in Deutschland?',
+        antwort: 'In Deutschland sind 5 bis 10 Prozent Trinkgeld im Restaurant üblich, bei besonders gutem Service auch 10 bis 15 Prozent. Viele runden einfach auf den nächsten glatten Betrag auf. Trinkgeld ist in Deutschland freiwillig — im Gegensatz zu den USA, wo 15 bis 20 Prozent erwartet werden.',
+      },
+      {
+        frage: 'Muss man in Deutschland Trinkgeld geben?',
+        antwort: 'Nein, Trinkgeld ist in Deutschland freiwillig. Es gibt keinen Rechtsanspruch darauf. Kein Trinkgeld zu geben wird aber als Signal für schlechten Service verstanden. In der Regel wird mindestens aufgerundet oder 5-10% gegeben.',
+      },
+      {
+        frage: 'Ist Trinkgeld steuerfrei?',
+        antwort: 'Für Angestellte ja: Freiwilliges Trinkgeld, das direkt vom Gast gegeben wird, ist nach § 3 Nr. 51 EStG steuerfrei und sozialversicherungsfrei — ohne Obergrenze. Wird das Trinkgeld über den Arbeitgeber verteilt oder als fester Aufschlag berechnet, ist es steuerpflichtig. Selbstständige müssen Trinkgeld als Betriebseinnahme versteuern.',
+      },
+      {
+        frage: 'Wie teile ich die Rechnung fair auf mehrere Personen auf?',
+        antwort: 'Die einfachste Methode: Gesamtbetrag inklusive Trinkgeld durch die Anzahl der Personen teilen. Fairer ist es, wenn Personen mit deutlich höheren Bestellungen entsprechend mehr zahlen. Unser Rechner berechnet den Pro-Person-Betrag automatisch, wenn Sie die Personenanzahl eingeben.',
+      },
+      {
+        frage: 'Wie viel Trinkgeld gibt man beim Friseur, Taxi oder Lieferdienst?',
+        antwort: 'Beim Friseur sind 5-10% üblich, beim Taxi rundet man auf oder gibt 5-10%. Beim Lieferdienst sind 1-3 Euro je nach Bestellwert und Wetter angemessen. Im Hotel gibt man dem Zimmermädchen 1-2 Euro pro Nacht und dem Kofferträger 1-2 Euro pro Gepäckstück.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -4789,6 +4847,7 @@ const verwandteMap: Record<string, string[]> = {
   'teilzeit-rechner': ['brutto-netto-rechner', 'stundenlohn-rechner', 'urlaubstage-rechner', 'ueberstunden-rechner'],
   'abfindungsrechner': ['kuendigungsfrist-rechner', 'brutto-netto-rechner', 'steuererstattung-rechner', 'ueberstunden-rechner'],
   'mutterschutz-rechner': ['geburtstermin-rechner', 'elterngeld-rechner', 'teilzeit-rechner', 'urlaubstage-rechner'],
+  'trinkgeld-rechner': ['prozentrechner', 'dreisatz-rechner', 'rabattrechner', 'lieferservice-rechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
