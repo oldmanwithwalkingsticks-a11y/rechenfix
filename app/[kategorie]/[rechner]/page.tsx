@@ -71,6 +71,7 @@ import RentenRechner from '@/components/rechner/RentenRechner';
 import WasserbedarfRechner from '@/components/rechner/WasserbedarfRechner';
 import UmzugskostenRechner from '@/components/rechner/UmzugskostenRechner';
 import TrinkgeldRechner from '@/components/rechner/TrinkgeldRechner';
+import KoerperfettRechner from '@/components/rechner/KoerperfettRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -154,6 +155,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'wasserbedarf-rechner': WasserbedarfRechner,
   'umzugskosten-rechner': UmzugskostenRechner,
   'trinkgeld-rechner': TrinkgeldRechner,
+  'koerperfett-rechner': KoerperfettRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

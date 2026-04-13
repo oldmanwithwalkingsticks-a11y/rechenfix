@@ -4701,6 +4701,60 @@ Wenn der Service gut war, zeigen Sie es mit einem angemessenen Trinkgeld. Bedenk
       },
     ],
   },
+  {
+    slug: 'koerperfett-rechner',
+    titel: 'Körperfettrechner',
+    beschreibung: 'Körperfettanteil schätzen mit der Navy-Methode: KFA in Prozent basierend auf Körpermaßen, mit Einordnung und Vergleich.',
+    kategorie: 'Gesundheit',
+    kategorieSlug: 'gesundheit',
+    metaTitle: 'Körperfettrechner 2026 — Körperfettanteil berechnen (Navy-Methode) | Rechenfix',
+    metaDescription: 'Körperfettanteil berechnen: Navy-Methode mit Bauchumfang und Halsumfang ✓ Einordnung ✓ Vergleichswerte ✓ KI-Erklärung.',
+    keywords: ['körperfettrechner', 'körperfettanteil berechnen', 'kfa rechner', 'navy methode körperfett', 'körperfett messen', 'body fat calculator', 'körperfettanteil mann', 'körperfettanteil frau', 'körperfett prozent', 'fettmasse berechnen'],
+    icon: '📏',
+    formel: 'Männer: KFA = 495 / (1,0324 − 0,19077 × log₁₀(Bauch − Hals) + 0,15456 × log₁₀(Größe)) − 450 | Frauen: KFA = 495 / (1,29579 − 0,35004 × log₁₀(Bauch + Hüfte − Hals) + 0,22100 × log₁₀(Größe)) − 450',
+    beispiel: 'Mann, 178 cm, Bauchumfang 85 cm, Halsumfang 38 cm → KFA ≈ 18,3% (Durchschnittlich)',
+    erklaerung: `**Was ist ein gesunder Körperfettanteil?**
+
+Der Körperfettanteil (KFA) gibt an, welcher Anteil des Körpergewichts aus Fettgewebe besteht. Im Gegensatz zum BMI, der nur Größe und Gewicht berücksichtigt, ist der KFA ein deutlich aussagekräftigerer Wert für die Beurteilung der Körperzusammensetzung. Ein Bodybuilder mit viel Muskelmasse hat laut BMI „Übergewicht" — sein Körperfettanteil kann trotzdem im athletischen Bereich liegen. Für Männer gilt ein KFA von **14 bis 24 Prozent** als gesund, für Frauen **21 bis 31 Prozent**. Der höhere Anteil bei Frauen ist biologisch bedingt: Frauen haben mehr essentielles Fett, das für den Hormonhaushalt und die Fortpflanzung notwendig ist. Ein zu niedriger KFA (unter 5% bei Männern, unter 13% bei Frauen) ist gesundheitlich bedenklich und tritt fast nur bei Leistungssportlern oder in Wettkampfphasen auf.
+
+**Die Navy-Methode erklärt: Wie funktioniert sie?**
+
+Die US-Navy-Methode wurde in den 1980er Jahren vom US-Militär entwickelt, um den Körperfettanteil von Soldaten schnell und ohne teure Geräte einzuschätzen. Sie basiert auf einer logarithmischen Formel, die den Zusammenhang zwischen bestimmten Körperumfängen und dem Körperfettanteil nutzt. Bei Männern werden Bauchumfang, Halsumfang und Körpergröße gemessen, bei Frauen zusätzlich der Hüftumfang. Die Methode nutzt die Erkenntnis, dass das Verhältnis von Bauch- zu Halsumfang stark mit dem viszeralen Fettanteil korreliert. Die Formel wurde anhand von hydrostatischen Wiegungen (dem damaligen Goldstandard) kalibriert und liefert bei den meisten Menschen eine Genauigkeit von ±3 bis 4 Prozentpunkten. Wichtig für korrekte Ergebnisse: Messen Sie immer morgens nüchtern, an den gleichen Stellen, und verwenden Sie ein flexibles Maßband.
+
+**Methoden zur Körperfettmessung im Vergleich**
+
+Es gibt verschiedene Methoden zur Bestimmung des Körperfettanteils mit unterschiedlicher Genauigkeit und unterschiedlichem Aufwand. Der **DEXA-Scan** (Dual-Röntgen-Absorptiometrie) gilt als genaueste verfügbare Methode und zeigt sogar die Fettverteilung im Körper. Er kostet allerdings 50 bis 150 Euro pro Messung und ist nur in spezialisierten Praxen verfügbar. Die **Caliper-Messung** (Hautfaltenmessung) ist günstiger und bei erfahrenen Anwendern recht genau (±3%). Dabei werden mit einer speziellen Zange Hautfalten an mehreren Stellen gemessen. **Bioelektrische Impedanzanalyse (BIA)** — wie in vielen Körperwaagen verbaut — sendet einen schwachen Strom durch den Körper und misst den Widerstand. Die Genauigkeit schwankt stark je nach Hydrationszustand und Gerät. Die **Navy-Methode** unseres Rechners ist kostenlos, braucht nur ein Maßband und liefert für die meisten Menschen brauchbare Ergebnisse. Für eine präzise Verlaufskontrolle empfiehlt es sich, immer die gleiche Methode unter gleichen Bedingungen zu verwenden.
+
+**Körperfett vs. BMI: Warum der KFA aussagekräftiger ist**
+
+Der Body-Mass-Index (BMI) berechnet sich einfach aus Gewicht geteilt durch Größe zum Quadrat. Das Problem: Er unterscheidet nicht zwischen Fett- und Muskelmasse. Ein durchtrainierter Sportler mit 90 kg bei 180 cm hat einen BMI von 27,8 — laut WHO-Tabelle „übergewichtig". Sein Körperfettanteil liegt aber vielleicht bei 12 Prozent, was athletisch ist. Umgekehrt kann eine Person mit wenig Muskelmasse und viel viszeralem Fett einen „normalen" BMI haben, aber einen zu hohen KFA — das sogenannte „Skinny Fat"-Phänomen. Der KFA ist daher besonders für sportliche Personen und für die Einschätzung gesundheitlicher Risiken deutlich besser geeignet als der BMI allein. Nutzen Sie unseren [BMI-Rechner](/gesundheit/bmi-rechner) als Ergänzung, um beide Werte zu vergleichen.
+
+**Wie kann man den Körperfettanteil senken?**
+
+Der effektivste Weg, den Körperfettanteil zu senken, ist eine Kombination aus leichtem Kaloriendefizit und regelmäßigem Krafttraining. Ein Kaloriendefizit von 300 bis 500 kcal pro Tag führt zu einem gesunden Fettverlust von etwa 0,5 kg pro Woche — ohne übermäßigen Muskelabbau. Krafttraining ist dabei wichtiger als Ausdauertraining, weil es Muskelmasse erhält und sogar aufbaut, was den Grundumsatz erhöht. Mit dem [Kalorienrechner](/gesundheit/kalorienrechner) können Sie Ihren täglichen Kalorienbedarf ermitteln. Ausreichend Protein (1,6 bis 2,2 g pro kg Körpergewicht) unterstützt den Muskelerhalt während einer Diät. Auch guter Schlaf und Stressmanagement spielen eine Rolle: Schlafmangel und chronischer Stress erhöhen den Cortisolspiegel, der die Fetteinlagerung — besonders am Bauch — fördert. Der [Idealgewicht-Rechner](/gesundheit/idealgewicht-rechner) kann Ihnen ein realistisches Zielgewicht zeigen, und der [Wasserbedarf-Rechner](/gesundheit/wasserbedarf-rechner) hilft bei der optimalen Flüssigkeitszufuhr während einer Diätphase.`,
+    faq: [
+      {
+        frage: 'Wie messe ich meinen Körperfettanteil?',
+        antwort: 'Für die Navy-Methode benötigen Sie nur ein flexibles Maßband. Messen Sie morgens nüchtern: Bauchumfang auf Nabelhöhe (nicht einziehen), Halsumfang unterhalb des Kehlkopfes, und bei Frauen zusätzlich den Hüftumfang an der breitesten Stelle. Für genauere Ergebnisse empfehlen sich Caliper-Messung oder DEXA-Scan.',
+      },
+      {
+        frage: 'Was ist ein normaler Körperfettanteil?',
+        antwort: 'Für Männer gilt 14-24% als normaler Bereich, für Frauen 21-31%. Athletische Werte liegen bei 6-13% (Männer) bzw. 14-20% (Frauen). Unter 5% (Männer) bzw. 13% (Frauen) spricht man von essentiellem Fett — dieser Bereich ist gesundheitlich bedenklich und sollte nur kurzfristig im Wettkampf erreicht werden.',
+      },
+      {
+        frage: 'Wie genau ist die Navy-Methode?',
+        antwort: 'Die Navy-Methode hat eine typische Abweichung von ±3 bis 4 Prozentpunkten im Vergleich zum DEXA-Scan. Sie ist für die meisten Menschen ausreichend genau, kann aber bei sehr muskulösen Personen zu hohe Werte und bei Personen mit viel viszeralem Fett zu niedrige Werte liefern. Für eine Verlaufskontrolle ist sie gut geeignet.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen Körperfett und BMI?',
+        antwort: 'Der BMI berechnet sich aus Gewicht und Größe und unterscheidet nicht zwischen Fett und Muskeln. Der Körperfettanteil (KFA) misst dagegen den tatsächlichen Fettanteil. Ein muskulöser Mensch kann laut BMI übergewichtig sein, aber einen niedrigen KFA haben. Der KFA ist daher aussagekräftiger für die Gesundheitsbewertung.',
+      },
+      {
+        frage: 'Wie kann ich meinen Körperfettanteil senken?',
+        antwort: 'Ein leichtes Kaloriendefizit (300-500 kcal/Tag) kombiniert mit Krafttraining ist am effektivsten. Krafttraining erhält Muskelmasse und erhöht den Grundumsatz. Ausreichend Protein (1,6-2,2 g/kg), guter Schlaf und Stressreduktion unterstützen den Fettabbau. Vermeiden Sie Crash-Diäten, da diese vor allem Muskelmasse abbauen.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -4848,6 +4902,7 @@ const verwandteMap: Record<string, string[]> = {
   'abfindungsrechner': ['kuendigungsfrist-rechner', 'brutto-netto-rechner', 'steuererstattung-rechner', 'ueberstunden-rechner'],
   'mutterschutz-rechner': ['geburtstermin-rechner', 'elterngeld-rechner', 'teilzeit-rechner', 'urlaubstage-rechner'],
   'trinkgeld-rechner': ['prozentrechner', 'dreisatz-rechner', 'rabattrechner', 'lieferservice-rechner'],
+  'koerperfett-rechner': ['bmi-rechner', 'kalorienrechner', 'idealgewicht-rechner', 'wasserbedarf-rechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
