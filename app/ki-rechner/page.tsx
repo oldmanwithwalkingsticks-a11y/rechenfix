@@ -29,7 +29,7 @@ export default function KiRechnerPage() {
 
       <div className="mb-8 text-center">
         <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/30 dark:to-blue-900/30 text-purple-700 dark:text-purple-300 text-xs font-semibold px-3 py-1 rounded-full mb-4">
-          <span>🤖</span> Powered by KI
+          Powered by KI
         </div>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white mb-3">
           KI-Rechner — Fragen Sie einfach!

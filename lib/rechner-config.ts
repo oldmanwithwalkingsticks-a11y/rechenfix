@@ -632,7 +632,7 @@ Bei der Kfz-Steuer spielt die kW-Zahl übrigens keine direkte Rolle — hier sin
     metaTitle: 'Kfz-Steuer-Rechner 2026 — Steuer berechnen | Rechenfix',
     metaDescription: 'Kfz-Steuer 2026 berechnen ✓ Benzin, Diesel & Elektro ✓ Nach WLTP ✓ Kostenlos & aktuell. Jetzt Ihre Kfz-Steuer ermitteln! ✓ Mit KI-Erklärung.',
     keywords: ['kfz steuer rechner', 'kfz steuer berechnen', 'kfz steuer 2026', 'autosteuer', 'kraftfahrzeugsteuer', 'co2 steuer auto'],
-    icon: '📋',
+    icon: '🚙',
     formel: 'Kfz-Steuer = Sockelbetrag (Hubraum) + CO₂-Komponente (ab 95 g/km)',
     beispiel: 'Beispiel: 1.498 ccm Benziner, 128 g/km CO₂ → Sockel: 15 × 2 € = 30 € + CO₂: 33 × 2 € = 66 € = 96 € / Jahr',
     erklaerung: `**Kfz-Steuer 2026 — was ändert sich?**
@@ -1126,7 +1126,7 @@ Wer über den Freibeträgen liegt, muss sein Vermögen zunächst aufbrauchen, be
     metaTitle: 'Stundenlohnrechner 2026 — Stundenlohn berechnen | Rechenfix',
     metaDescription: 'Stundenlohn berechnen ✓ Aus Monatsgehalt oder umgekehrt ✓ Vergleich mit Mindestlohn ✓ Kostenlos & sofort. Jetzt berechnen! ✓ Mit KI-Erklärung.',
     keywords: ['stundenlohn rechner', 'stundenlohn berechnen', 'gehalt in stundenlohn', 'monatsgehalt berechnen', 'stundenlohnrechner', 'mindestlohn 2026'],
-    icon: '⏱️',
+    icon: '🕐',
     formel: 'Stundenlohn = Monatsgehalt / (Wochenstunden × 4,33)',
     beispiel: 'Beispiel: 3.500 € Monatsgehalt / (40 Std × 4,33) = 20,21 € Stundenlohn',
     erklaerung: `**Stundenlohn berechnen — so geht's**
@@ -1827,7 +1827,7 @@ Bruchrechnung ist eine der wichtigsten Grundlagen der Mathematik. Wer Brüche si
     metaTitle: 'Einheiten-Umrechner — Länge, Gewicht, Volumen & mehr | Rechenfix',
     metaDescription: 'Einheiten umrechnen ✓ Länge, Gewicht, Volumen, Temperatur, Fläche, Zeit ✓ Sofort-Ergebnis ✓ Alle gängigen Einheiten. Jetzt umrechnen! ✓ Mit KI-Erklärung.',
     keywords: ['einheiten umrechner', 'einheiten umrechnen', 'längeneinheiten umrechnen', 'gewicht umrechnen', 'temperatur umrechnen', 'volumen umrechnen', 'zoll in cm', 'fahrenheit in celsius'],
-    icon: '⚖️',
+    icon: '📏',
     formel: 'Ergebnis = Wert × (Faktor Quelleinheit / Faktor Zieleinheit) | Temperatur: F = C × 9/5 + 32, K = C + 273,15',
     beispiel: '10 km = 10.000 m (× 1.000). 100 °F = 37,78 °C ((100 − 32) × 5/9). 1 Gallone (US) = 3,785 Liter.',
     erklaerung: `**Einheiten umrechnen — der universelle Umrechner**
@@ -2454,7 +2454,7 @@ In der Praxis bedeutet das: Bei einer 40-Stunden-Woche und 5 Arbeitstagen sind m
     metaTitle: 'Pendlerpauschale-Rechner 2026 — Entfernungspauschale berechnen | Rechenfix',
     metaDescription: 'Pendlerpauschale 2026 berechnen ✓ 0,30 € + 0,38 € pro km ✓ Steuerersparnis ermitteln ✓ Vergleich mit Homeoffice. Jetzt berechnen! ✓ Mit KI-Erklärung.',
     keywords: ['pendlerpauschale rechner', 'entfernungspauschale 2026', 'pendlerpauschale berechnen', 'fahrtkostenpauschale', 'pendlerpauschale steuerersparnis', 'homeoffice pauschale vergleich', 'km pauschale'],
-    icon: '🚗',
+    icon: '🛣️',
     formel: 'Erste 20 km: 0,30 €/km × Tage | Ab km 21: 0,38 €/km × Tage | Steuerersparnis = Pauschale × Grenzsteuersatz',
     beispiel: '25 km, 220 Tage, 35% Steuersatz: 20×0,30×220 + 5×0,38×220 = 1.320+418 = 1.738 € Pauschale → 608,30 € Steuerersparnis.',
     erklaerung: `**Pendlerpauschale 2026 — was ist das?**
@@ -2656,7 +2656,7 @@ Bei einem Unfall unter Alkoholeinfluss verschärfen sich die Strafen erheblich. 
     metaTitle: 'Gehaltsvergleich 2026 — Wo stehen Sie? | Rechenfix',
     metaDescription: 'Gehaltsvergleich 2026: Verdienen Sie mehr oder weniger als der Durchschnitt? ✓ Nach Berufsgruppe ✓ Nach Bundesland ✓ Nach Alter ✓ Kostenlos. ✓ Mit KI-Erklärung.',
     keywords: ['gehaltsvergleich', 'gehalt vergleichen', 'durchschnittsgehalt', 'gehaltscheck', 'verdiene ich genug', 'gehaltsrechner', 'gehalt deutschland', 'median gehalt', 'gehalt berufsgruppe', 'gehalt bundesland'],
-    icon: '📊',
+    icon: '💵',
     formel: 'Perzentil = Position des eigenen Gehalts in der Verteilung der Vergleichsgruppe (angepasst nach Bundesland und Alter)',
     beispiel: 'Beispiel: 3.500 € brutto als kaufmännischer Angestellter, 35–44 Jahre, in NRW → Sie verdienen mehr als ca. 55 % der Vergleichsgruppe.',
     erklaerung: `**Was ist ein Gehaltsvergleich?**
@@ -2958,7 +2958,7 @@ Schon wenige Wochen nach dem Rauchstopp verbessern sich Kreislauf und Lungenfunk
     metaTitle: 'Wahrer Stundenlohn Rechner — Was verdienen Sie wirklich? | Rechenfix',
     metaDescription: 'Wahrer Stundenlohn Rechner: Was verdienen Sie wirklich pro Stunde? ✓ Pendelzeit ✓ Fahrtkosten ✓ Überstunden ✓ Mindestlohn-Vergleich ✓ Kostenlos. ✓ Mit KI-Erklärung.',
     keywords: ['wahrer stundenlohn', 'stundenlohn berechnen', 'was verdiene ich wirklich', 'netto stundenlohn', 'stundenlohn mit pendelzeit', 'echter stundenlohn', 'stundenlohn rechner', 'versteckte arbeitskosten', 'realer stundenlohn', 'pendelzeit kosten'],
-    icon: '💸',
+    icon: '🔍',
     formel: 'Wahrer Stundenlohn = (Nettogehalt − Fahrtkosten − Essenskosten − Kleidungskosten) ÷ (Vertragsstunden + Pendelzeit + Überstunden)',
     beispiel: 'Beispiel: 3.500 € brutto, 40h/Woche, 60 Min. Pendeln, 100 € Fahrtkosten, 8 € Essen/Tag → offizieller Stundenlohn ca. 13 €, wahrer Stundenlohn ca. 9 €.',
     erklaerung: `**Was ist der wahre Stundenlohn?**
@@ -3376,7 +3376,7 @@ Der Arbeitnehmer-Pauschbetrag von 1.230 Euro wird automatisch von Ihrem zu verst
     metaTitle: 'Rechtsschutzversicherung-Rechner 2026 — Kosten & Beiträge berechnen | Rechenfix',
     metaDescription: 'Rechtsschutzversicherung Kosten berechnen: Geschätzter Monatsbeitrag nach Bausteinen, Selbstbeteiligung und Lebenssituation ✓ Lohnt-sich-Analyse ✓ KI-Erklärung.',
     keywords: ['rechtsschutzversicherung rechner', 'rechtsschutz kosten', 'rechtsschutzversicherung kosten', 'rechtsschutz beitrag', 'rechtsschutzversicherung vergleich', 'rechtsschutz monatlich', 'arbeitsrechtsschutz', 'verkehrsrechtsschutz', 'privatrechtsschutz', 'mietrechtsschutz'],
-    icon: '⚖️',
+    icon: '🛡️',
     formel: 'Monatsbeitrag = (Summe Bausteine) × Berufs-Faktor × (1 − Selbstbeteiligungs-Rabatt) × (1 − Zahlweise-Rabatt)',
     beispiel: 'Single, Privat + Beruf + Verkehr, 150 € SB, monatlich, angestellt: (15 + 8 + 5) × 1,0 × 0,90 × 1,0 = 25,20 €/Monat = 302,40 €/Jahr.',
     erklaerung: `Eine Rechtsschutzversicherung übernimmt die Kosten für Anwalt, Gericht und Gutachter, wenn Sie Ihre Rechte durchsetzen müssen. In Deutschland hat etwa jeder dritte Haushalt eine Rechtsschutzversicherung — und das aus gutem Grund: Ein einziger Rechtsstreit kann schnell mehrere Tausend Euro kosten. Unser Rechner zeigt Ihnen, mit welchen Beiträgen Sie rechnen müssen und wann sich eine Versicherung lohnt.
@@ -3510,7 +3510,7 @@ Der Preis pro Gigabyte ist eine gute Kennzahl, um Tarife zu vergleichen. In Deut
     metaTitle: 'Stromvergleich-Rechner 2026 — Stromkosten vergleichen & sparen | Rechenfix',
     metaDescription: 'Stromvergleich-Rechner: Aktuelle Stromkosten berechnen und mit günstigen Tarifen vergleichen ✓ Sparpotenzial ermitteln ✓ Ökostrom ✓ KI-Erklärung.',
     keywords: ['stromvergleich rechner', 'stromanbieter vergleichen', 'stromkosten vergleich', 'strom sparen', 'günstiger strom', 'stromtarif vergleichen', 'ökostrom vergleich', 'strompreis vergleich', 'stromanbieter wechseln', 'stromvergleich 2026'],
-    icon: '⚡',
+    icon: '🔌',
     formel: 'Jahreskosten = (Verbrauch in kWh × Arbeitspreis in ct/kWh ÷ 100) + (Grundpreis × 12)',
     beispiel: 'Beispiel: 2.500 kWh × 32 ct/kWh = 800 € + 120 € Grundpreis (10 €/Monat) = 920 €/Jahr. Günstigster Tarif: 820 €/Jahr → Sparpotenzial: 100 €.',
     erklaerung: `Die Stromkosten sind für viele Haushalte einer der größten Posten bei den Nebenkosten. Trotzdem bleiben viele Verbraucher jahrelang beim selben Anbieter — und zahlen deutlich mehr als nötig. Unser Stromvergleich-Rechner zeigt Ihnen auf einen Blick, wie Ihr aktueller Tarif im Vergleich zum Markt abschneidet und wie viel Sie durch einen Wechsel sparen könnten.
@@ -3570,7 +3570,7 @@ Die Strompreisbremse des Bundes wurde 2023 eingeführt und inzwischen wieder aus
     metaTitle: 'Freelancer-Stundensatz-Rechner 2026 — Den richtigen Stundensatz berechnen | Rechenfix',
     metaDescription: 'Stundensatz für Freelancer berechnen: Vom Wunsch-Netto über Versicherungen und Steuern zum nötigen Stundensatz ✓ Tagessatz ✓ KI-Erklärung.',
     keywords: ['freelancer stundensatz rechner', 'stundensatz berechnen freelancer', 'stundensatz selbstständige', 'freelancer stundensatz kalkulation', 'selbstständig stundensatz', 'freiberufler stundensatz', 'stundensatz berechnen', 'tagessatz freelancer', 'freelancer honorar', 'stundensatz kalkulator'],
-    icon: '🧑‍💻',
+    icon: '🖥️',
     formel: 'Stundensatz = (Netto-Wunsch + KV + Rente + Betrieb) ÷ (1 − Steuersatz) × 12 ÷ Fakturierbare Stunden/Jahr',
     beispiel: 'Beispiel: 3.000 € Netto-Wunsch + 450 € KV + 300 € Rente + 200 € Betrieb = 3.950 € ÷ 0,7 = 5.643 €/Monat × 12 = 67.714 € ÷ 1.200 Std = 56,43 €/Std netto.',
     erklaerung: `Den richtigen Stundensatz zu kalkulieren ist eine der wichtigsten Entscheidungen für Freelancer und Selbstständige. Viele machen den Fehler, einfach ihr bisheriges Angestelltengehalt durch die Arbeitsstunden zu teilen — und wundern sich dann, warum am Monatsende zu wenig übrig bleibt. Unser Rechner berücksichtigt alle relevanten Kostenfaktoren und zeigt Ihnen den Stundensatz, den Sie tatsächlich brauchen.
@@ -3783,7 +3783,7 @@ Ergänzend können Sie mit dem **Zinsrechner** die Kraft des Zinseszins für Ihr
     metaTitle: 'Kalorienrechner 2026 — Täglichen Kalorienbedarf berechnen | Rechenfix',
     metaDescription: 'Kalorienbedarf berechnen: Grundumsatz und Gesamtumsatz mit der Mifflin-St Jeor-Formel ✓ Aktivitätslevel ✓ Makronährstoffe ✓ KI-Erklärung.',
     keywords: ['kalorienrechner', 'kalorienbedarf berechnen', 'grundumsatz berechnen', 'gesamtumsatz', 'mifflin st jeor', 'kalorienverbrauch', 'kcal rechner', 'täglicher kalorienbedarf'],
-    icon: '🔥',
+    icon: '🍎',
     formel: 'Grundumsatz (Männer) = (10 × Gewicht) + (6,25 × Größe) − (5 × Alter) + 5 | Grundumsatz (Frauen) = (10 × Gewicht) + (6,25 × Größe) − (5 × Alter) − 161 | Gesamtumsatz = Grundumsatz × Aktivitätsfaktor',
     beispiel: 'Beispiel: Frau, 30 Jahre, 165 cm, 65 kg, leicht aktiv → Grundumsatz = 1.354 kcal → Gesamtumsatz = 1.862 kcal',
     erklaerung: `Der Kalorienrechner berechnet Ihren individuellen täglichen Kalorienbedarf mithilfe der **Mifflin-St Jeor-Formel** — der von Ernährungswissenschaftlern weltweit empfohlenen Standardformel.
