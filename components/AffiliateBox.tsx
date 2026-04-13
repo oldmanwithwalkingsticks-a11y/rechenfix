@@ -70,6 +70,15 @@ const AFFILIATE_PROGRAMS = {
     icon: '🚢',
     color: '#1E90FF',
   },
+  naturesway: {
+    name: "Nature's Way",
+    tagline: 'Hochwertige Nahrungsergänzung für Ihre Gesundheitsziele',
+    cta: 'Produkte entdecken',
+    baseUrl: 'https://www.awin1.com/cread.php?awinmid=47173&awinaffid=2843240',
+    deeplink: 'https://www.naturesway.de/collections/all',
+    icon: '🌿',
+    color: '#2E8B57',
+  },
 } as const;
 
 type ProgramId = keyof typeof AFFILIATE_PROGRAMS;
@@ -109,6 +118,10 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
   },
   congstar: {
     'handykosten': 'congstar bietet faire Tarife ab 5 €/Monat — monatlich kündbar und ohne versteckte Kosten.',
+  },
+  naturesway: {
+    'kalorien': 'Nahrungsergänzung passend zu Ihrem Kalorienziel — Proteinshakes, Vitamine und mehr.',
+    'bmi': 'Vitamine und Mineralstoffe für eine ausgewogene Ernährung.',
   },
   'ks-auxilia': {
     'rechtsschutz': 'KS Auxilia bietet Rechtsschutzversicherung ab 18,90 €/Monat — mit freier Anwaltswahl.',

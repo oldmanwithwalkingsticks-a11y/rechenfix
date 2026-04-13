@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import { AffiliateBox } from '@/components/AffiliateBox';
 
 const AKTIVITAETEN = [
   { label: 'Kaum aktiv (Bürojob, kein Sport)', faktor: 1.2 },
@@ -239,6 +240,8 @@ export default function KalorienRechner() {
               <strong>Hinweis:</strong> Diese Berechnung liefert Richtwerte. Individuelle Faktoren wie Muskelmasse, Stoffwechsel und Gesundheitszustand können den Bedarf beeinflussen. Konsultieren Sie bei Unsicherheit einen Arzt oder Ernährungsberater.
             </p>
           </div>
+
+          <AffiliateBox programId="naturesway" context="kalorien" />
 
           <ErgebnisAktionen
             ergebnisText={`Kalorienbedarf: ${fmt(ergebnis.zielKalorien)} kcal/Tag (Grundumsatz: ${fmt(ergebnis.grundumsatz)} kcal, Gesamtumsatz: ${fmt(ergebnis.gesamtumsatz)} kcal)`}
