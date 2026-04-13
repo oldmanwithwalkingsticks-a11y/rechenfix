@@ -159,7 +159,7 @@ export default function SpritkostenRechner() {
             ergebnis={{ gesamtkostenEuro: ergebnis.gesamtkosten, literGesamt: ergebnis.literGesamt, kostenProKm: ergebnis.kostenProKm, effektiveStreckeKm: ergebnis.effektiveStrecke }}
           />
 
-          <AffiliateBox programId="check24" variant="compact" />
+          <AffiliateBox programId="check24" context="spritkosten" variant="compact" />
         </>
       )}
     </div>
