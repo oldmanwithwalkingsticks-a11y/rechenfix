@@ -150,7 +150,7 @@ const CONTEXT_DEEPLINKS: Partial<Record<ProgramId, Record<string, string>>> = {
     'heizkosten': 'https://www.check24.net/gasvergleich/',
     'kredit': 'https://www.check24.net/kredit/',
     'etf': 'https://www.check24.de/depot/',
-    'baufinanzierung': 'https://www.check24.de/baufinanzierung/',
+    'baufinanzierung': 'https://www.check24.net/kredit/',
     'default': 'https://www.check24.net/',
   },
 };
