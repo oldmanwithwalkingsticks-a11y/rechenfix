@@ -69,6 +69,7 @@ import MutterschutzRechner from '@/components/rechner/MutterschutzRechner';
 import BaufinanzierungRechner from '@/components/rechner/BaufinanzierungRechner';
 import RentenRechner from '@/components/rechner/RentenRechner';
 import WasserbedarfRechner from '@/components/rechner/WasserbedarfRechner';
+import UmzugskostenRechner from '@/components/rechner/UmzugskostenRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -150,6 +151,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'baufinanzierung-rechner': BaufinanzierungRechner,
   'rentenrechner': RentenRechner,
   'wasserbedarf-rechner': WasserbedarfRechner,
+  'umzugskosten-rechner': UmzugskostenRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

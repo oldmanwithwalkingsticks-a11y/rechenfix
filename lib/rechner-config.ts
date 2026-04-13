@@ -3632,6 +3632,62 @@ Die Strompreisbremse des Bundes wurde 2023 eingeführt und inzwischen wieder aus
     ],
   },
   {
+    slug: 'umzugskosten-rechner',
+    titel: 'Umzugskosten-Rechner',
+    beschreibung: 'Umzugskosten berechnen: Geschätzte Kosten für Umzugsfirma, Transporter, Verpackung und Nebenkosten.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Umzugskosten-Rechner 2026 — Was kostet mein Umzug? | Rechenfix',
+    metaDescription: 'Umzugskosten berechnen: Umzugsfirma, Transporter, Verpackung und Nebenkosten ✓ Entfernung ✓ Wohnungsgröße ✓ KI-Erklärung.',
+    keywords: ['umzugskosten rechner', 'umzugskosten berechnen', 'was kostet ein umzug', 'umzugsfirma kosten', 'umzug kosten schätzen', 'umzugskosten deutschland', 'umzug selbst organisiert kosten', 'transporter umzug kosten', 'umzugskosten steuer absetzen', 'umzug checkliste'],
+    icon: '📦',
+    formel: 'Kosten (Umzugsfirma) = Wohnungsgröße × Kosten/m² + Etagenzuschlag + Zusatzleistungen',
+    beispiel: '60 m², 50 km, 2. OG → 2. OG, Umzugsfirma: 1.500 € Basis + 150 € Etage = ca. 1.650 € | Selbst: ca. 355 €.',
+    erklaerung: `**Was kostet ein Umzug in Deutschland?**
+
+Die Kosten für einen Umzug hängen von vielen Faktoren ab: Wohnungsgröße, Entfernung, Etage, Saison und ob Sie eine Umzugsfirma beauftragen oder selbst organisieren. Im Durchschnitt kostet ein Umzug mit Umzugsfirma für eine 2-Zimmer-Wohnung (60 m²) innerhalb der gleichen Stadt zwischen **600 und 1.200 Euro**. Bei einem Fernumzug über 500 km können die Kosten auf **2.000 bis 4.000 Euro** steigen. Unser Rechner gibt Ihnen eine erste Kostenschätzung basierend auf Ihren individuellen Daten.
+
+Neben den reinen Umzugskosten fallen weitere Ausgaben an: Renovierung der alten Wohnung, Kaution für die neue Wohnung (in der Regel 3 Nettokaltmieten), Nachsendeauftrag bei der Post und diverse Ummeldungen. Planen Sie daher immer einen Puffer von 15-20% auf die geschätzten Kosten ein.
+
+**Umzugsfirma vs. selbst organisiert: Wann lohnt sich was?**
+
+Ein Umzug in Eigenregie spart erheblich Geld — aber kostet Zeit, Nerven und körperliche Anstrengung. Für eine kleine Wohnung (30-40 m²) in der gleichen Stadt lohnt sich der Selbstumzug fast immer: Transporter, Verpackung und Pizza für die Helfer kosten zusammen nur 200-400 Euro. Bei größeren Wohnungen, Fernumzügen oder empfindlichen Möbeln (Klavier, antike Schränke) ist eine Umzugsfirma die bessere Wahl — die Kosten stehen in einem besseren Verhältnis zum Aufwand und die Haftung bei Schäden ist abgedeckt.
+
+Tipp: Viele Umzugsfirmen bieten Teilleistungen an, z. B. nur den Transport ohne Ein- und Auspacken. Das kann ein guter Kompromiss sein: Sie packen selbst, die Profis kümmern sich um den Transport und schwere Möbel.
+
+**Umzugskosten steuerlich absetzen**
+
+Bei einem berufsbedingten Umzug können Sie die Kosten als Werbungskosten von der Steuer absetzen. Der Umzug gilt als berufsbedingt, wenn sich Ihr Arbeitsweg dadurch um mindestens 30 Minuten verkürzt, Sie einen neuen Job antreten oder versetzt werden. Absetzbar sind: Transportkosten, doppelte Miete (max. 6 Monate), Maklerkosten für die neue Wohnung und eine Umzugskostenpauschale für sonstige Ausgaben (2026: **886 Euro** für den Umziehenden, plus **590 Euro** pro weitere Person im Haushalt). Bei privatem Umzug können Handwerker- und Transportkosten als haushaltsnahe Dienstleistungen geltend gemacht werden (20% der Arbeitskosten, max. 4.000 Euro/Jahr).
+
+**Checkliste: So planen Sie Ihren Umzug**
+
+Ein guter Umzug beginnt mit rechtzeitiger Planung. **3 Monate vorher:** Umzugsfirma beauftragen (in der Hauptsaison Mai-September frühzeitig buchen), Sonderurlaub beantragen, alte Wohnung kündigen. **4-6 Wochen vorher:** Kartons und Verpackungsmaterial besorgen, Halteverbotszone beantragen, Helfer organisieren, Sperrmülltermin vereinbaren, nicht benötigte Gegenstände verkaufen. **2 Wochen vorher:** Nachsendeauftrag bei der Post einrichten, Strom/Gas für neue Wohnung anmelden, Telefon/Internet ummelden, Schul-/Kindergartenplatz klären. **Nach dem Umzug:** Innerhalb von 2 Wochen beim Einwohnermeldeamt ummelden, Adressänderungen an Bank, Versicherung, Arbeitgeber melden.
+
+Tipp: Umzüge am Monatsanfang oder unter der Woche sind oft günstiger als am Monatsende oder Wochenende. Weitere hilfreiche Rechner: Mit dem [Mietrechner](/wohnen/mietrechner) können Sie die Mietbelastung für die neue Wohnung prüfen und der [Nebenkostenrechner](/wohnen/nebenkosten-rechner) hilft bei der Einschätzung der Betriebskosten.`,
+    faq: [
+      {
+        frage: 'Was kostet ein Umzug mit Umzugsfirma?',
+        antwort: 'Die Kosten hängen von Wohnungsgröße, Entfernung und Leistungsumfang ab. Richtwerte: 1-Zimmer-Wohnung lokal ca. 400-800 €, 3-Zimmer-Wohnung lokal ca. 800-1.500 €, Fernumzug (500+ km) ca. 2.000-4.000 €. In der Hauptsaison (Mai-September) liegen die Preise 20-30% höher. Zusatzleistungen wie Einpackservice oder Möbelmontage kosten extra.',
+      },
+      {
+        frage: 'Kann ich Umzugskosten von der Steuer absetzen?',
+        antwort: 'Bei berufsbedingtem Umzug ja — als Werbungskosten. Der Umzug gilt als berufsbedingt, wenn sich Ihr Arbeitsweg um mindestens 30 Minuten verkürzt. Absetzbar sind Transportkosten, doppelte Miete (max. 6 Monate), Makler und eine Pauschale (886 € plus 590 € pro weitere Person). Bei privatem Umzug können Handwerkerkosten als haushaltsnahe Dienstleistungen geltend gemacht werden.',
+      },
+      {
+        frage: 'Wie groß muss der Transporter sein?',
+        antwort: 'Faustregel: Bis 30 m² reicht ein Sprinter (ca. 12 m³). Für 30-60 m² brauchen Sie einen 3,5t-LKW (ca. 20 m³). Ab 60-90 m² einen 7,5t-LKW (ca. 35 m³). Über 90 m² sind meist zwei Fahrten oder ein noch größerer LKW nötig. Beachten Sie: Für LKW über 3,5t brauchen Sie den Führerschein Klasse C1.',
+      },
+      {
+        frage: 'Wie finde ich eine günstige Umzugsfirma?',
+        antwort: 'Holen Sie mindestens 3 Angebote ein und vergleichen Sie genau, welche Leistungen enthalten sind. Achten Sie auf: Festpreis vs. Stundenbasis, Transportversicherung, versteckte Kosten (An-/Abfahrt, Verpackungsmaterial). Empfehlung: Firmen vor Ort besichtigen lassen für ein genaues Angebot. Vermeiden Sie extrem günstige Anbieter ohne Bewertungen.',
+      },
+      {
+        frage: 'Welche Nebenkosten kommen beim Umzug dazu?',
+        antwort: 'Neben den reinen Umzugskosten sollten Sie einplanen: Kaution für die neue Wohnung (3 Nettokaltmieten), Renovierung der alten Wohnung (ca. 3-8 €/m²), Nachsendeauftrag (30 €), doppelte Miete im Übergangsmonat, neue Möbel/Einrichtung und ggf. Ummeldung des Kfz (ca. 30 €). Planen Sie einen Puffer von 15-20% ein.',
+      },
+    ],
+  },
+  {
     slug: 'freelancer-stundensatz-rechner',
     titel: 'Freelancer-Stundensatz-Rechner',
     beschreibung: 'Freelancer-Stundensatz berechnen: Vom Wunsch-Netto zum nötigen Stundensatz inkl. Steuern, Versicherungen und Betriebskosten.',
@@ -4688,7 +4744,8 @@ const verwandteMap: Record<string, string[]> = {
   'kw-ps-umrechner': ['kfz-steuer-rechner', 'spritkosten-rechner', 'einheiten-umrechner', 'dreisatz-rechner'],
   'kfz-steuer-rechner': ['spritkosten-rechner', 'kw-ps-umrechner', 'brutto-netto-rechner', 'pendlerpauschale-rechner'],
   'nebenkosten-rechner': ['mietrechner', 'stromkosten-rechner', 'heizkosten-rechner', 'quadratmeter-rechner'],
-  'mietrechner': ['nebenkosten-rechner', 'grunderwerbsteuer-rechner', 'quadratmeter-rechner', 'stromkosten-rechner'],
+  'mietrechner': ['nebenkosten-rechner', 'umzugskosten-rechner', 'grunderwerbsteuer-rechner', 'quadratmeter-rechner'],
+  'umzugskosten-rechner': ['mietrechner', 'nebenkosten-rechner', 'quadratmeter-rechner', 'stromvergleich-rechner'],
   'heizkosten-rechner': ['stromkosten-rechner', 'nebenkosten-rechner', 'mietrechner', 'quadratmeter-rechner'],
   'grunderwerbsteuer-rechner': ['baufinanzierung-rechner', 'mietrechner', 'zinsrechner', 'nebenkosten-rechner'],
   'baufinanzierung-rechner': ['grunderwerbsteuer-rechner', 'mietrechner', 'kreditrechner', 'nebenkosten-rechner'],
