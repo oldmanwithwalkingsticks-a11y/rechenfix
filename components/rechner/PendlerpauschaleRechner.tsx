@@ -8,6 +8,7 @@ import {
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import CrossLink from '@/components/ui/CrossLink';
 
 const fmtEuro = (n: number) =>
   n.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' });
@@ -69,6 +70,7 @@ export default function PendlerpauschaleRechner() {
         <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
           Nur die einfache Strecke (nicht Hin + Rück).
         </p>
+        <CrossLink href="/auto/spritkosten-rechner" emoji="⛽" text="Spritkosten für Ihren Arbeitsweg berechnen" />
       </div>
 
       {/* Arbeitstage */}
@@ -298,6 +300,8 @@ export default function PendlerpauschaleRechner() {
               <span>Die Pendlerpauschale gilt unabhängig vom Verkehrsmittel — auch für Fahrradfahrer, Fußgänger und Mitfahrer in Fahrgemeinschaften.</span>
             </p>
           </div>
+
+          <CrossLink href="/finanzen/steuererstattung-rechner" emoji="💰" text="Gesamte Steuererstattung berechnen" />
 
           <ErgebnisAktionen
             ergebnisText={`Pendlerpauschale: ${fmtEuro(ergebnis.pauschaleGesamt)} - Steuerersparnis: ${fmtEuro(ergebnis.steuerersparnis)}/Jahr (${fmtEuro(ergebnis.monatlicheErsparnis)}/Monat)`}

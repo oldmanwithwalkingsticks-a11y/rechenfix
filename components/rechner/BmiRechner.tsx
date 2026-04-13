@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 export default function BmiRechner() {
   const [gewicht, setGewicht] = useState('75');
@@ -181,6 +182,9 @@ export default function BmiRechner() {
               <strong>Hinweis:</strong> Der BMI-Rechner ersetzt keine ärztliche Beratung. Der BMI berücksichtigt weder Muskelmasse noch Körperfettverteilung. Wenden Sie sich für eine individuelle Einschätzung an Ihren Arzt.
             </p>
           </div>
+
+          <CrossLink href="/gesundheit/idealgewicht-rechner" emoji="⚖️" text="Idealgewicht berechnen" />
+          <CrossLink href="/gesundheit/kalorienrechner" emoji="🔥" text="Kalorienbedarf berechnen" />
 
           <ErgebnisAktionen
             ergebnisText={`BMI: ${fmt(ergebnis.bmi)} — ${ergebnis.kategorie.label}`}

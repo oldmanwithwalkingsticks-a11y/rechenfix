@@ -14,6 +14,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import CrossLink from '@/components/ui/CrossLink';
 
 const FAHRLEISTUNG_SCHNELLWAHL = [10000, 15000, 20000, 30000];
 
@@ -364,6 +365,8 @@ export default function AutokostenRechner() {
             </div>
           </div>
 
+          <CrossLink href="/auto/spritkosten-rechner" emoji="⛽" text="Spritkosten für einzelne Fahrten genau berechnen" />
+
           {/* Wertverlust-Highlight */}
           {!ergebnis.istFinanziert && ergebnis.kostenBloecke[0] && ergebnis.kostenBloecke[0].anteilProzent > 20 && (
             <div className="bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-200 dark:border-indigo-500/30 rounded-xl p-4 mb-6">
@@ -396,6 +399,8 @@ export default function AutokostenRechner() {
               ))}
             </div>
           </div>
+
+          <CrossLink href="/auto/bussgeldrechner" emoji="🚨" text="Bußgeld bei Verkehrsverstoß berechnen" />
 
           {/* Hinweis */}
           <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-6">

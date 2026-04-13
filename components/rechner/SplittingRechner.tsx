@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import CrossLink from '@/components/ui/CrossLink';
 
 const KINDERFREIBETRAG_OPTIONEN = ['0', '0,5', '1', '1,5', '2', '2,5', '3', '3,5', '4'];
 
@@ -142,6 +143,8 @@ export default function SplittingRechner() {
         </select>
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Pro Kind 0,5 je Elternteil = 1,0 zusammen. Nur relevant wenn günstiger als Kindergeld.</p>
       </div>
+
+      <CrossLink href="/finanzen/brutto-netto-rechner" emoji="💶" text="Nettolohn berechnen" />
 
       {/* Ergebnis */}
       {ergebnis && (
@@ -290,6 +293,8 @@ export default function SplittingRechner() {
               <strong>⚠️ Hinweis:</strong> Vereinfachte Berechnung. Sonderausgaben, außergewöhnliche Belastungen und weitere Freibeträge sind nicht berücksichtigt. Für eine exakte Berechnung nutzen Sie eine Steuersoftware.
             </p>
           </div>
+
+          <CrossLink href="/finanzen/steuererstattung-rechner" emoji="💰" text="Steuererstattung berechnen" />
 
           <AffiliateBox programId="wiso" context="splitting" />
           <AffiliateBox programId="smartsteuer" context="splitting" />

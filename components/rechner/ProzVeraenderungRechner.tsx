@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 export default function ProzVeraenderungRechner() {
   const [alterWert, setAlterWert] = useState('100');
@@ -213,6 +214,8 @@ export default function ProzVeraenderungRechner() {
               <strong>Tipp:</strong> Prozentuale Veränderungen sind nicht symmetrisch — eine Steigerung um 50% gefolgt von einer Senkung um 50% ergibt nicht den Ausgangswert, sondern nur 75% davon. Bei negativen Ausgangswerten wird der Betrag als Bezugsgröße verwendet.
             </p>
           </div>
+
+          <CrossLink href="/alltag/prozentrechner" emoji="🔢" text="Prozente berechnen — Grundwert, Prozentwert, Prozentsatz" />
 
           <ErgebnisAktionen
             ergebnisText={ergebnis.divisionDurchNull

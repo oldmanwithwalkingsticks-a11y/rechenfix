@@ -8,6 +8,7 @@ import {
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import CrossLink from '@/components/ui/CrossLink';
 
 type Modus = 'berechnen' | 'verguetung';
 type EingabeArt = 'gesamt' | 'tageweise';
@@ -270,6 +271,8 @@ export default function UeberstundenRechner() {
                 </div>
               )}
 
+              <CrossLink href="/arbeit/arbeitszeitrechner" emoji="⏱️" text="Arbeitszeit berechnen" />
+
               <ErgebnisAktionen
                 ergebnisText={`${ergebnis1.istMinusstunden ? 'Minusstunden' : 'Überstunden'} ${ergebnis1.zeitraumLabel}: ${ergebnis1.zeitraumWert >= 0 ? '+' : ''}${fmtZahl(ergebnis1.zeitraumWert, 1)} Std.`}
                 seitenTitel="Überstunden berechnen"
@@ -314,6 +317,7 @@ export default function UeberstundenRechner() {
                 />
                 <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none">€</span>
               </div>
+              <CrossLink href="/finanzen/stundenlohn-rechner" emoji="💶" text="Stundenlohn aus Gehalt berechnen" />
             </div>
           </div>
 

@@ -9,6 +9,7 @@ import AiExplain from '@/components/rechner/AiExplain';
 import WasWaereWenn from '@/components/rechner/WasWaereWenn';
 import SchnellCheck from '@/components/rechner/SchnellCheck';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import CrossLink from '@/components/ui/CrossLink';
 
 const TABELLEN_WERTE = [1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 6000];
 
@@ -441,6 +442,9 @@ export default function BruttoNettoRechner() {
           <p className="text-xs text-gray-400 dark:text-gray-500 mt-4 no-print">
             * Vereinfachte Berechnung zur Orientierung. Für eine exakte Berechnung wenden Sie sich an Ihren Steuerberater oder nutzen Sie ELSTER.
           </p>
+
+          <CrossLink href="/finanzen/steuererstattung-rechner" emoji="💰" text="Wie viel bekommen Sie vom Finanzamt zurück?" />
+          <CrossLink href="/finanzen/gehaltsvergleich" emoji="📊" text="Verdienen Sie genug? Gehalt vergleichen" />
 
           <div className="mt-4 no-print flex flex-wrap gap-3">
             <AiExplain

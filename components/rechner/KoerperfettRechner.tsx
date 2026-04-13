@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 export default function KoerperfettRechner() {
   const [geschlecht, setGeschlecht] = useState<Geschlecht>('mann');
@@ -314,6 +315,9 @@ export default function KoerperfettRechner() {
               <strong>⚠️ Hinweis:</strong> Die Navy-Methode ist eine Schätzung basierend auf Körpermaßen. Genauere Methoden sind DEXA-Scan oder Caliper-Messung. Sehr muskulöse Personen können einen überhöhten Wert erhalten. Im Zweifelsfall konsultieren Sie einen Arzt oder Sportmediziner.
             </p>
           </div>
+
+          <CrossLink href="/gesundheit/bmi-rechner" emoji="📊" text="BMI berechnen" />
+          <CrossLink href="/gesundheit/kalorienrechner" emoji="🔥" text="Kalorienbedarf berechnen" />
 
           <ErgebnisAktionen
             ergebnisText={`Körperfettanteil (Navy-Methode): ${fmtDez(ergebnis.kfa)}% — Kategorie: ${ergebnis.kategorie}${ergebnis.fettmasse !== null ? ` | Fettmasse: ${fmtDez(ergebnis.fettmasse)} kg, Magermasse: ${fmtDez(ergebnis.magermasse!)} kg` : ''}`}

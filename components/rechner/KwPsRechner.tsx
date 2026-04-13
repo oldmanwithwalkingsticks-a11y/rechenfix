@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 export default function KwPsRechner() {
   const [wert, setWert] = useState('100');
@@ -90,6 +91,9 @@ export default function KwPsRechner() {
                 : `${fmt(nWert)} PS × ${PS_ZU_KW} = ${fmt(ergebnis.ergebnisWert)} kW`}
             </p>
           </div>
+
+          <CrossLink href="/auto/kfz-steuer-rechner" emoji="📋" text="Kfz-Steuer für Ihr Fahrzeug berechnen" />
+          <CrossLink href="/auto/autokosten-rechner" emoji="🚗" text="Gesamte Autokosten berechnen" />
 
           <ErgebnisAktionen
             ergebnisText={`${fmt(ergebnis.eingabeWert)} ${ergebnis.eingabeEinheit} = ${fmt(ergebnis.ergebnisWert)} ${ergebnis.ergebnisEinheit}`}

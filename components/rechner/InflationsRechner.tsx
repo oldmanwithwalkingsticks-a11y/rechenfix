@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 const SCHNELLWAHL = ['1', '2', '3', '5', '8'];
 
@@ -191,6 +192,8 @@ export default function InflationsRechner() {
               </>
             )}
           </div>
+
+          <CrossLink href="/finanzen/sparrechner" emoji="🏦" text="Sparplan berechnen — Inflation mit Zinsen ausgleichen" />
 
           <ErgebnisAktionen
             ergebnisText={modus === 'kaufkraft'

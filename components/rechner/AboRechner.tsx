@@ -3,6 +3,7 @@
 import { useState, useMemo, useCallback } from 'react';
 import { berechneAbos, VORDEFINIERTE_ABOS, type Abo } from '@/lib/berechnungen/abo';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
@@ -306,6 +307,8 @@ export default function AboRechner() {
               <li>• Viele vergessen kostenlose Testphasen zu kündigen — das kostet Millionen</li>
             </ul>
           </div>
+
+          <CrossLink href="/alltag/handykosten-rechner" emoji="📱" text="Handykosten berechnen und Tarif optimieren" />
 
           {/* AI Explain */}
           <div className="flex flex-wrap gap-3">

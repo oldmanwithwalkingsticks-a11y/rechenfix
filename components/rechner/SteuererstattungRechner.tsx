@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import CrossLink from '@/components/ui/CrossLink';
 
 const STEUERKLASSEN = [
   { value: 1, label: 'Steuerklasse I' },
@@ -73,6 +74,8 @@ export default function SteuererstattungRechner() {
             </select>
           </div>
         </div>
+
+        <CrossLink href="/finanzen/brutto-netto-rechner" emoji="💶" text="Nettolohn aus Ihrem Brutto berechnen" />
 
         {/* Pendler + Arbeitstage */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -280,6 +283,8 @@ export default function SteuererstattungRechner() {
               <strong>Hinweis:</strong> Vereinfachte Schätzung. Die tatsächliche Erstattung hängt von vielen weiteren Faktoren ab (Vorsorgeaufwendungen, Kinderfreibeträge, außergewöhnliche Belastungen etc.). Für eine exakte Berechnung nutzen Sie eine Steuersoftware oder einen Steuerberater.
             </p>
           </div>
+
+          <CrossLink href="/finanzen/splitting-rechner" emoji="💑" text="Verheiratet? Splitting-Vorteil berechnen" />
 
           <ErgebnisAktionen
             ergebnisText={`Geschätzte Steuererstattung: ca. ${fmt(ergebnis.geschaetzteErstattung)} € (Werbungskosten: ${fmt(ergebnis.werbungskostenGesamt)} €, Grenzsteuersatz: ${(ergebnis.grenzsteuersatz * 100).toFixed(0)}%)`}

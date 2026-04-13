@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import CrossLink from '@/components/ui/CrossLink';
 
 const LAUFZEIT_OPTIONEN = [
   { label: '12 Monate', wert: 12 },
@@ -269,6 +270,8 @@ export default function KreditRechner() {
               <strong>Hinweis:</strong> Diese Berechnung dient der Orientierung. Tatsächliche Kreditkonditionen können je nach Bonität, Bank und Kreditart abweichen. Der effektive Jahreszins kann zusätzliche Gebühren enthalten, die hier nicht berücksichtigt sind.
             </p>
           </div>
+
+          <CrossLink href="/wohnen/baufinanzierung-rechner" emoji="🏠" text="Immobilie finanzieren? Baufinanzierung berechnen" />
 
           <AffiliateBox programId="check24" context="kredit" />
 

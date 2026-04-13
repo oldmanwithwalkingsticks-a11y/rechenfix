@@ -12,6 +12,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import CrossLink from '@/components/ui/CrossLink';
 
 export default function MietrenditeRechner() {
   const [kaufpreis, setKaufpreis] = useState('250000');
@@ -89,6 +90,7 @@ export default function MietrenditeRechner() {
           <NummerEingabe value={kaufnebenkostenProzent} onChange={setKaufnebenkostenProzent} placeholder="z.B. 10" einheit="%" />
         </div>
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Typisch: 8–15% je nach Bundesland (Grunderwerbsteuer + Notar + Makler)</p>
+        <CrossLink href="/wohnen/grunderwerbsteuer-rechner" emoji="📋" text="Grunderwerbsteuer genau berechnen" />
       </div>
 
       {/* Monatliche Kaltmiete */}
@@ -346,6 +348,8 @@ export default function MietrenditeRechner() {
               monatsCashflow: `${ergebnis.monatsCashflow} €`,
             }}
           />
+
+          <CrossLink href="/wohnen/baufinanzierung-rechner" emoji="🏗️" text="Finanzierung planen — Rate und Zinsen berechnen" />
         </>
       )}
     </div>

@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 export default function MietrechnerRechner() {
   const [kaltmiete, setKaltmiete] = useState('650');
@@ -35,6 +36,7 @@ export default function MietrechnerRechner() {
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nebenkosten</label>
           <NummerEingabe value={nebenkosten} onChange={setNebenkosten} placeholder="200" einheit="€" />
+          <CrossLink href="/wohnen/nebenkosten-rechner" emoji="📋" text="Nebenkosten genau berechnen" />
         </div>
       </div>
 
@@ -143,6 +145,8 @@ export default function MietrechnerRechner() {
               </div>
             </div>
           </div>
+
+          <CrossLink href="/wohnen/mietrendite-rechner" emoji="📈" text="Als Vermieter: Mietrendite berechnen" />
         </div>
       )}
     </div>

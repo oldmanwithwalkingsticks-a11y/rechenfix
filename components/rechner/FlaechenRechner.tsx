@@ -12,6 +12,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 const EINHEIT_LABELS: Record<Einheit, string> = {
   mm: 'mm', cm: 'cm', m: 'm', km: 'km', zoll: 'Zoll', fuss: 'Fuß',
@@ -339,6 +340,8 @@ export default function FlaechenRechner() {
         </select>
       </div>
 
+      <CrossLink href="/mathe/einheiten-umrechner" emoji="📐" text="Weitere Einheiten umrechnen" />
+
       {/* Dynamische Eingabefelder */}
       <div className="mb-6 space-y-4">
         {renderEingaben()}
@@ -455,6 +458,8 @@ export default function FlaechenRechner() {
               <strong>Tipp:</strong> Achten Sie darauf, alle Maße in der gleichen Einheit einzugeben. Der Rechner rundet auf 4 Nachkommastellen. Für Raumflächen nutzen Sie auch unseren Quadratmeter-Rechner.
             </p>
           </div>
+
+          <CrossLink href="/wohnen/quadratmeter-rechner" emoji="🏠" text="Quadratmeter für Räume berechnen" />
 
           <ErgebnisAktionen
             ergebnisText={`${FORM_OPTIONEN.find(f => f.value === form)?.label}: Fläche = ${fmtZ(ergebnis.flaeche)} ${e}²${ergebnis.umfang !== null ? ` | Umfang = ${fmtZ(ergebnis.umfang)} ${e}` : ''}${ergebnis.diagonale !== null ? ` | Diagonale = ${fmtZ(ergebnis.diagonale)} ${e}` : ''}`}

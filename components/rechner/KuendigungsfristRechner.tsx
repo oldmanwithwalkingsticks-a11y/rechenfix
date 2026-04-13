@@ -6,6 +6,7 @@ import { berechneKuendigungsfrist, type Kuendiger } from '@/lib/berechnungen/kue
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import CrossLink from '@/components/ui/CrossLink';
 
 function toIso(d: Date): string {
   return d.toISOString().slice(0, 10);
@@ -276,6 +277,9 @@ export default function KuendigungsfristRechner() {
           {kuendiger === 'arbeitgeber' && (
             <AffiliateBox programId="ks-auxilia" context="kuendigung" />
           )}
+
+          <CrossLink href="/arbeit/abfindungsrechner" emoji="💰" text="Abfindung berechnen — wie viel steht Ihnen zu?" />
+          <CrossLink href="/arbeit/urlaubstage-rechner" emoji="🏖️" text="Resturlaub berechnen" />
 
           <ErgebnisAktionen
             ergebnisText={`Letzter Arbeitstag: ${fmtDatum(ergebnis.letzterArbeitstag)} | Kündigungsfrist: ${ergebnis.kuendigungsFristText} | Betriebszugehörigkeit: ${ergebnis.betriebszugehoerigkeitText} | ${ergebnis.rechtsgrundlage}`}

@@ -4,6 +4,7 @@ import { useState, useMemo, useCallback } from 'react';
 import { berechneTage, formatDatum, parseDeutschesDatum } from '@/lib/berechnungen/tage';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 function datumZuIso(d: Date): string {
   const y = d.getFullYear();
@@ -245,6 +246,8 @@ export default function TageRechner() {
               <strong>Hinweis:</strong> Die Arbeitstage-Berechnung berücksichtigt nur Wochenenden (Sa/So), keine gesetzlichen Feiertage. Die tatsächliche Anzahl der Arbeitstage kann daher geringer sein.
             </p>
           </div>
+
+          <CrossLink href="/alltag/countdown" emoji="⏳" text="Countdown erstellen — Tage bis zum Wunschtermin" />
 
           <ErgebnisAktionen
             ergebnisText={`${ergebnis.tage.toLocaleString('de-DE')} Tage zwischen ${startDatum ? formatDatum(startDatum) : ''} und ${endDatum ? formatDatum(endDatum) : ''} (${ergebnis.arbeitstage} Arbeitstage)`}

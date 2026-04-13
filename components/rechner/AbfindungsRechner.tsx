@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import CrossLink from '@/components/ui/CrossLink';
 
 export default function AbfindungsRechner() {
   const [monatsBrutto, setMonatsBrutto] = useState('3500');
@@ -254,6 +255,9 @@ export default function AbfindungsRechner() {
               <strong>Hinweis:</strong> Diese Berechnung ist eine Schätzung. Die tatsächliche Steuerbelastung hängt von weiteren Einkünften, Sonderausgaben und Freibeträgen ab. Lassen Sie sich steuerlich beraten.
             </p>
           </div>
+
+          <CrossLink href="/arbeit/kuendigungsfrist-rechner" emoji="📅" text="Kündigungsfrist berechnen" />
+          <CrossLink href="/finanzen/steuererstattung-rechner" emoji="💰" text="Fünftelregelung? Steuererstattung berechnen" />
 
           <AffiliateBox programId="ks-auxilia" context="abfindung" />
           <AffiliateBox programId="wiso" context="abfindung" />

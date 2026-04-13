@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import CrossLink from '@/components/ui/CrossLink';
 
 export default function SpritkostenRechner() {
   const [strecke, setStrecke] = useState('100');
@@ -148,6 +149,9 @@ export default function SpritkostenRechner() {
               Das wären bei dieser Fahrt ca. <strong>{fmt(ergebnis.gesamtkosten * 0.2)} € Ersparnis</strong>.
             </p>
           </div>
+
+          <CrossLink href="/auto/autokosten-rechner" emoji="🚗" text="Alle Autokosten im Blick — Wertverlust, Versicherung, Steuer & mehr" />
+          <CrossLink href="/arbeit/pendlerpauschale-rechner" emoji="📋" text="Pendlerpauschale berechnen und Steuern sparen" />
 
           <ErgebnisAktionen
             ergebnisText={`${fmt(ergebnis.effektiveStrecke)} km, ${fmt(ergebnis.literGesamt)} L Verbrauch, Gesamtkosten: ${fmt(ergebnis.gesamtkosten)} €`}

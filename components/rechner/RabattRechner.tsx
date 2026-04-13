@@ -5,6 +5,7 @@ import { berechneRabatt, berechneRabattProzent, berechneDoppelrabatt } from '@/l
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 type Modus = 'rabatt' | 'endpreis' | 'doppelrabatt';
 
@@ -259,6 +260,8 @@ export default function RabattRechner() {
               Teilen
             </button>
           </div>
+
+          <CrossLink href="/alltag/prozentrechner" emoji="🔢" text="Prozente berechnen — Grundwert, Prozentwert, Prozentsatz" />
 
           <AiExplain
             rechnerName="Rabattrechner"

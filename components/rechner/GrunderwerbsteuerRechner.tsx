@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import CrossLink from '@/components/ui/CrossLink';
 
 export default function GrunderwerbsteuerRechner() {
   const [kaufpreis, setKaufpreis] = useState('300000');
@@ -152,7 +153,10 @@ export default function GrunderwerbsteuerRechner() {
       )}
 
       {ergebnis && (
-        <AffiliateBox programId="wiso" variant="compact" />
+        <>
+          <CrossLink href="/wohnen/baufinanzierung-rechner" emoji="🏗️" text="Finanzierung berechnen — Rate und Zinsen planen" />
+          <AffiliateBox programId="wiso" variant="compact" />
+        </>
       )}
     </div>
   );

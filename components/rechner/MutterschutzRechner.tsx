@@ -8,6 +8,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import CrossLink from '@/components/ui/CrossLink';
 
 function toIso(d: Date): string {
   return d.toISOString().slice(0, 10);
@@ -77,11 +78,7 @@ export default function MutterschutzRechner() {
             onChange={e => setGeburtstermin(e.target.value)}
             className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"
           />
-          <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-            <Link href="/gesundheit/geburtstermin-rechner" className="text-primary-600 dark:text-primary-400 hover:underline">
-              Geburtstermin berechnen →
-            </Link>
-          </p>
+          <CrossLink href="/gesundheit/geburtstermin-rechner" emoji="👶" text="Geburtstermin berechnen" />
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Art der Geburt</label>
@@ -275,6 +272,8 @@ export default function MutterschutzRechner() {
               <strong>Kündigungsschutz:</strong> Während des Mutterschutzes und der gesamten Schwangerschaft besteht Kündigungsschutz (§ 17 MuSchG). Der Arbeitgeber darf Ihnen nicht kündigen — auch nicht in der Probezeit.
             </p>
           </div>
+
+          <CrossLink href="/finanzen/elterngeld-rechner" emoji="💰" text="Elterngeld berechnen — wie viel steht Ihnen zu?" />
 
           <AffiliateBox programId="wiso" context="mutterschutz" />
 

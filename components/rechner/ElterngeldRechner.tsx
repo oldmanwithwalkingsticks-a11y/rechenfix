@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import CrossLink from '@/components/ui/CrossLink';
 
 export default function ElterngeldRechner() {
   const [nettoVorGeburt, setNettoVorGeburt] = useState('2500');
@@ -63,6 +64,8 @@ export default function ElterngeldRechner() {
             : '24+4 Monate, 150–900 € pro Monat'}
         </p>
       </div>
+
+      <CrossLink href="/gesundheit/geburtstermin-rechner" emoji="👶" text="Geburtstermin berechnen" />
 
       {/* Nettoeinkommen vor der Geburt */}
       <div className="mb-4">
@@ -233,6 +236,8 @@ export default function ElterngeldRechner() {
               Wenden Sie sich für verbindliche Auskünfte an Ihre zuständige Elterngeldstelle.
             </p>
           </div>
+
+          <CrossLink href="/arbeit/mutterschutz-rechner" emoji="🤱" text="Mutterschutz-Fristen berechnen" />
 
           <ErgebnisAktionen
             ergebnisText={`${variante === 'basis' ? 'Basiselterngeld' : 'ElterngeldPlus'}: ${fmt(ergebnis.monatlich)} € / Monat, ${fmt(ergebnis.gesamt)} € gesamt (${ergebnis.bezugsMonate} Monate)`}

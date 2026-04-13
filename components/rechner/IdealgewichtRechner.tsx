@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 const KOERPERBAU_OPTIONEN: { key: Koerperbau; label: string }[] = [
   { key: 'schmal', label: 'Schmal' },
@@ -231,6 +232,9 @@ export default function IdealgewichtRechner() {
               <strong>Hinweis:</strong> Das Idealgewicht ist ein Richtwert. Faktoren wie Muskelmasse, Körperfettverteilung und individuelle Gesundheit werden nicht berücksichtigt. Der BMI-basierte Bereich gilt als medizinisch am aussagekräftigsten.
             </p>
           </div>
+
+          <CrossLink href="/gesundheit/bmi-rechner" emoji="📊" text="BMI berechnen" />
+          <CrossLink href="/gesundheit/koerperfett-rechner" emoji="📏" text="Körperfettanteil berechnen" />
 
           <ErgebnisAktionen
             ergebnisText={`Idealgewicht (BMI-basiert): ${fmt(ergebnis.bmiSpanne.gewichtUnten)}–${fmt(ergebnis.bmiSpanne.gewichtOben)} kg | Broca: ${fmt(ergebnis.broca)} kg | Creff: ${fmt(ergebnis.creff)} kg | Aktuell: ${fmt(nGewicht)} kg — ${ergebnis.statusText}`}

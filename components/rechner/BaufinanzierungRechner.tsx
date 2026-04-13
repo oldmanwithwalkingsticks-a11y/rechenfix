@@ -1,13 +1,13 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import Link from 'next/link';
 import { berechneBaufinanzierung, BUNDESLAENDER } from '@/lib/berechnungen/baufinanzierung';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import CrossLink from '@/components/ui/CrossLink';
 
 const ZINSBINDUNG_OPTIONEN = [
   { label: '5 Jahre', wert: 5 },
@@ -264,11 +264,7 @@ export default function BaufinanzierungRechner() {
                   <span className="font-bold text-gray-800 dark:text-gray-200">{fmt(ergebnis.nebenkosten.gesamt)} €</span>
                 </div>
               </div>
-              <p className="mt-3 text-xs text-gray-500 dark:text-gray-400">
-                <Link href="/wohnen/grunderwerbsteuer-rechner" className="text-primary-600 dark:text-primary-400 hover:underline">
-                  Grunderwerbsteuer im Detail berechnen →
-                </Link>
-              </p>
+              <CrossLink href="/wohnen/grunderwerbsteuer-rechner" emoji="📋" text="Grunderwerbsteuer genau berechnen" />
             </div>
           )}
 
@@ -420,6 +416,8 @@ export default function BaufinanzierungRechner() {
               nebenkosten: ergebnis.nebenkosten.gesamt,
             }}
           />
+
+          <CrossLink href="/wohnen/mietrendite-rechner" emoji="📈" text="Als Kapitalanlage? Mietrendite berechnen" />
         </>
       )}
     </div>

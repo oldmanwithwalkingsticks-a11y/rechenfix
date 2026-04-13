@@ -8,6 +8,7 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import StromSpartipp from '@/components/rechner/StromSpartipp';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import CrossLink from '@/components/ui/CrossLink';
 
 const SCHNELLWAHL = [
   { label: '1 Person', kwh: '1500' },
@@ -177,7 +178,10 @@ export default function StromkostenRechner() {
       )}
 
       {ergebnis && (
-        <AffiliateBox programId="check24" context="strom" />
+        <>
+          <CrossLink href="/wohnen/stromvergleich-rechner" emoji="🔌" text="Stromanbieter wechseln und bis zu 500 € sparen" />
+          <AffiliateBox programId="check24" context="strom" />
+        </>
       )}
     </div>
   );

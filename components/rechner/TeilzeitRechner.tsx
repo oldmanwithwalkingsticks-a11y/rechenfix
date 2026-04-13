@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import CrossLink from '@/components/ui/CrossLink';
 
 const BUNDESLAENDER = [
   { kuerzel: 'BW', name: 'Baden-Württemberg' },
@@ -307,6 +308,9 @@ export default function TeilzeitRechner() {
               <strong>Hinweis:</strong> Die Netto-Berechnung ist eine Schätzung auf Basis der Steuer- und Sozialversicherungswerte 2026. Für eine exakte Berechnung nutzen Sie unseren <a href="/finanzen/brutto-netto-rechner" className="underline hover:no-underline">Brutto-Netto-Rechner</a>.
             </p>
           </div>
+
+          <CrossLink href="/finanzen/brutto-netto-rechner" emoji="💶" text="Exaktes Netto bei Teilzeit berechnen" />
+          <CrossLink href="/arbeit/urlaubstage-rechner" emoji="🏖️" text="Urlaubsanspruch bei Teilzeit berechnen" />
 
           <AffiliateBox programId="wiso" context="teilzeit" />
 

@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 export default function SparRechner() {
   const [anfangskapital, setAnfangskapital] = useState('0');
@@ -141,6 +142,8 @@ export default function SparRechner() {
               </span>
             </div>
           </div>
+
+          <CrossLink href="/finanzen/etf-sparplanrechner" emoji="📈" text="Mehr Rendite mit ETFs? Sparplan berechnen" />
 
           <ErgebnisAktionen
             ergebnisText={`Endkapital nach ${ergebnis.jahre.length} Jahren: ${fmt(ergebnis.endkapital)} € (Eigenkapital: ${fmt(ergebnis.eigenkapital)} €, Zinserträge: ${fmt(ergebnis.gesamtzinsen)} €)`}

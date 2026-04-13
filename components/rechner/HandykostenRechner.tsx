@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 import { AffiliateBox } from '@/components/AffiliateBox';
 
 const LAUFZEITEN = [
@@ -267,6 +268,8 @@ export default function HandykostenRechner() {
               </table>
             </div>
           </div>
+
+          <CrossLink href="/alltag/abo-rechner" emoji="📋" text="Alle Abos im Blick — monatliche Kosten berechnen" />
 
           <ErgebnisAktionen
             ergebnisText={`Handykosten: ${fmt(ergebnis.effektiveMonatskosten)} €/Monat, ${fmt(ergebnis.jahreskosten)} €/Jahr (${fmt(ergebnis.kostenProGb)} €/GB)`}

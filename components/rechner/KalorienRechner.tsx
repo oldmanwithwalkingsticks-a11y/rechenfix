@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 import { AffiliateBox } from '@/components/AffiliateBox';
 
 const AKTIVITAETEN = [
@@ -240,6 +241,9 @@ export default function KalorienRechner() {
               <strong>Hinweis:</strong> Diese Berechnung liefert Richtwerte. Individuelle Faktoren wie Muskelmasse, Stoffwechsel und Gesundheitszustand können den Bedarf beeinflussen. Konsultieren Sie bei Unsicherheit einen Arzt oder Ernährungsberater.
             </p>
           </div>
+
+          <CrossLink href="/gesundheit/bmi-rechner" emoji="📊" text="BMI berechnen — Gewicht einordnen" />
+          <CrossLink href="/gesundheit/wasserbedarf-rechner" emoji="💧" text="Täglichen Wasserbedarf berechnen" />
 
           <AffiliateBox programId="naturesway" context="kalorien" />
 

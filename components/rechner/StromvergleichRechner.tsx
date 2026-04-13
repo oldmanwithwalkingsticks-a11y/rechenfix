@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import CrossLink from '@/components/ui/CrossLink';
 
 export default function StromvergleichRechner() {
   const [verbrauch, setVerbrauch] = useState('2500');
@@ -226,6 +227,8 @@ export default function StromvergleichRechner() {
             ergebnisText={`Stromkosten: ${fmt(ergebnis.aktuell.jahreskosten)} €/Jahr (${fmt(ergebnis.aktuell.monatskosten)} €/Monat). Sparpotenzial: ${fmt(ergebnis.sparpotenzialJahr)} €/Jahr.`}
             seitenTitel="Stromvergleich-Rechner"
           />
+
+          <CrossLink href="/wohnen/stromkosten-rechner" emoji="💡" text="Kosten einzelner Geräte berechnen" />
 
           <AffiliateBox programId="check24" context="stromvergleich" variant="full" />
 

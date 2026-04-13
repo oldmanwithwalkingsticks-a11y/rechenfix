@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { berechneGeburtstermin, type Methode } from '@/lib/berechnungen/geburtstermin';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 function fmtDatum(d: Date): string {
   return d.toLocaleDateString('de-DE', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
@@ -315,6 +316,9 @@ export default function GeburtsterminRechner() {
               <strong>Hinweis:</strong> Nur etwa 4% der Kinder kommen am errechneten Termin zur Welt. Die meisten werden in einem Zeitfenster von 2 Wochen davor bis 2 Wochen danach geboren. Die Berechnung ersetzt keine ärztliche Beratung.
             </p>
           </div>
+
+          <CrossLink href="/arbeit/mutterschutz-rechner" emoji="🤱" text="Mutterschutz-Fristen berechnen" />
+          <CrossLink href="/finanzen/elterngeld-rechner" emoji="💰" text="Elterngeld berechnen" />
 
           <ErgebnisAktionen
             ergebnisText={`Geburtstermin: ${fmtDatum(ergebnis.geburtstermin)} — SSW ${ergebnis.aktuelleSSW}+${ergebnis.aktuelleTage} (${ergebnis.trimester}. Trimester)`}

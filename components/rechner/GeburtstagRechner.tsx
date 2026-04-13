@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect, useRef } from 'react';
 import { berechneGeburtstag } from '@/lib/berechnungen/geburtstag';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 function fmtDatum(d: Date): string {
   return d.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
@@ -169,6 +170,8 @@ export default function GeburtstagRechner() {
               <strong>💡 Wussten Sie?</strong> Die Berechnung basiert auf Kalendertagen ab Mitternacht des Geburtstages. Die tatsächliche Geburtszeit ist nicht berücksichtigt — Ihr exaktes Alter in Sekunden kann also leicht abweichen.
             </p>
           </div>
+
+          <CrossLink href="/alltag/tagerechner" emoji="📅" text="Tage zwischen zwei Daten berechnen" />
 
           <ErgebnisAktionen
             ergebnisText={`Ich bin ${ergebnis.jahre} Jahre, ${ergebnis.monate} Monate und ${ergebnis.tage} Tage alt — das sind ${fmtZahl(ergebnis.gesamtTage)} Tage! 🎂 Geboren am ${ergebnis.wochentagGeburt}, Sternzeichen: ${ergebnis.sternzeichen.symbol} ${ergebnis.sternzeichen.name}`}

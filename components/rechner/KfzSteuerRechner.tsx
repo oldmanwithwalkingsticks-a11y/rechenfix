@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import CrossLink from '@/components/ui/CrossLink';
 
 export default function KfzSteuerRechner() {
   const [zulassung, setZulassung] = useState<Zulassungszeitraum>('nach-2009');
@@ -182,6 +183,9 @@ export default function KfzSteuerRechner() {
               </p>
             </div>
           )}
+
+          <CrossLink href="/auto/autokosten-rechner" emoji="🚗" text="Alle Autokosten berechnen — Wertverlust, Versicherung, Sprit & mehr" />
+          <CrossLink href="/auto/spritkosten-rechner" emoji="⛽" text="Spritkosten für Ihre Fahrten berechnen" />
 
           {/* Disclaimer */}
           <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4">

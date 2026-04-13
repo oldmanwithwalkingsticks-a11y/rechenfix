@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import CrossLink from '@/components/ui/CrossLink';
 
 export default function FreelancerStundensatzRechner() {
   const [nettoWunsch, setNettoWunsch] = useState('3000');
@@ -253,6 +254,8 @@ export default function FreelancerStundensatzRechner() {
               <strong>Hinweis:</strong> Vereinfachte Kalkulation. Der tatsächliche Stundensatz kann je nach Branche, Region, Erfahrung und Marktlage abweichen. Berücksichtigen Sie auch Kosten für Weiterbildung, Rücklagen und Akquisezeiten. Im Zweifel konsultieren Sie einen Steuerberater.
             </p>
           </div>
+
+          <CrossLink href="/finanzen/mwst-rechner" emoji="🧾" text="Mehrwertsteuer berechnen" />
 
           <ErgebnisAktionen
             ergebnisText={`Empfohlener Freelancer-Stundensatz: ${fmt(ergebnis.stundensatzNetto)} € netto${!kleinunternehmer ? ` (${fmt(ergebnis.stundensatzBrutto)} € brutto inkl. USt)` : ''} | Tagessatz: ${fmt(ergebnis.tagessatzNetto)} € | Jahresumsatz nötig: ${fmt(ergebnis.jahresumsatzNoetig)} €`}

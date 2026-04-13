@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import CrossLink from '@/components/ui/CrossLink';
 
 export default function HeizkostenRechner() {
   const [wohnflaeche, setWohnflaeche] = useState('80');
@@ -148,7 +149,10 @@ export default function HeizkostenRechner() {
       )}
 
       {ergebnis && (
-        <AffiliateBox programId="check24" context="heizkosten" />
+        <>
+          <CrossLink href="/wohnen/nebenkosten-rechner" emoji="🏠" text="Alle Nebenkosten berechnen" />
+          <AffiliateBox programId="check24" context="heizkosten" />
+        </>
       )}
     </div>
   );
