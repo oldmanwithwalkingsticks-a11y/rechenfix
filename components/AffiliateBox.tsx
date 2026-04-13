@@ -72,7 +72,7 @@ const AFFILIATE_PROGRAMS = {
   },
   naturesway: {
     name: "Nature's Way",
-    tagline: 'Hochwertige Nahrungsergänzung für Ihre Gesundheitsziele',
+    tagline: 'Vitamine, Mineralstoffe und Pflanzenstoffe für Ihre tägliche Unterstützung',
     cta: 'Produkte entdecken',
     baseUrl: 'https://www.awin1.com/cread.php?awinmid=47173&awinaffid=2843240',
     deeplink: 'https://www.naturesway.de/collections/all',
@@ -120,8 +120,8 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'handykosten': 'congstar bietet faire Tarife ab 5 €/Monat — monatlich kündbar und ohne versteckte Kosten.',
   },
   naturesway: {
-    'kalorien': 'Nahrungsergänzung passend zu Ihrem Kalorienziel — Proteinshakes, Vitamine und mehr.',
-    'bmi': 'Vitamine und Mineralstoffe für eine ausgewogene Ernährung.',
+    'kalorien': 'Vitamine und Mineralstoffe passend zu Ihrem Ernährungsziel — für die tägliche Unterstützung von innen heraus.',
+    'bmi': 'Vitamine und Pflanzenstoffe für eine ausgewogene Ernährung von innen heraus.',
   },
   'ks-auxilia': {
     'rechtsschutz': 'KS Auxilia bietet Rechtsschutzversicherung ab 18,90 €/Monat — mit freier Anwaltswahl.',
