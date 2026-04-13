@@ -3689,6 +3689,91 @@ Bei jeder Geschwindigkeitsmessung wird ein Toleranzabzug vorgenommen, um Messung
       },
     ],
   },
+  {
+    slug: 'kreditrechner',
+    titel: 'Kreditrechner',
+    beschreibung: 'Kreditrate, Gesamtkosten und Tilgungsplan berechnen — für Ratenkredite, Autokredite und Konsumkredite.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Kreditrechner 2026 — Kreditrate & Gesamtkosten berechnen | Rechenfix',
+    metaDescription: 'Kreditrate berechnen: Monatsrate, Gesamtkosten und Tilgungsplan für Ihren Kredit ✓ Sondertilgung ✓ Effektiver Jahreszins ✓ KI-Erklärung.',
+    keywords: ['kreditrechner', 'kreditrate berechnen', 'tilgungsrechner', 'kredit berechnen', 'annuitätenrechner', 'ratenkreditrechner'],
+    icon: '🏦',
+    formel: 'Rate = K × (q × (1+q)ⁿ) / ((1+q)ⁿ - 1), wobei K = Kreditsumme, q = Monatszins, n = Laufzeit in Monaten',
+    beispiel: '10.000 € Kredit bei 5,9% Sollzins auf 60 Monate → Monatsrate: 192,80 €, Gesamtzins: ca. 1.568 €',
+    erklaerung: `**Wie wird die Kreditrate berechnet?**
+
+Die monatliche Kreditrate wird nach der sogenannten Annuitätenformel berechnet. Bei einem Annuitätendarlehen zahlen Sie jeden Monat den gleichen Betrag — die Annuität. Diese setzt sich aus einem Zinsanteil und einem Tilgungsanteil zusammen. Zu Beginn der Laufzeit ist der Zinsanteil hoch und der Tilgungsanteil niedrig. Mit jeder Rate sinkt die Restschuld, wodurch der Zinsanteil abnimmt und der Tilgungsanteil steigt.
+
+Die Formel lautet: **Rate = Kreditsumme × (q × (1+q)ⁿ) / ((1+q)ⁿ - 1)**, wobei q der monatliche Zinssatz (Jahreszins / 12) und n die Laufzeit in Monaten ist. Diese Formel garantiert, dass der Kredit nach genau n Monaten vollständig getilgt ist.
+
+**Sollzins vs. Effektivzins: Was ist der Unterschied?**
+
+Der **Sollzinssatz** (auch Nominalzins) gibt den reinen Zinssatz an, den die Bank für das geliehene Geld berechnet. Er ist die Basis für die Zinsberechnung Ihrer monatlichen Rate.
+
+Der **effektive Jahreszins** berücksichtigt zusätzlich den Zinseszinseffekt, der durch die monatliche Verrechnung entsteht. Bei monatlicher Ratenzahlung ist der Effektivzins immer etwas höher als der Sollzins, weil die Zinsen unterjährig verrechnet werden. Vereinfacht gilt: Effektivzins = (1 + Sollzins/12)¹² - 1.
+
+In der Praxis kann der Effektivzins bei Banken noch weitere Kosten enthalten (Bearbeitungsgebühren, Kontoführungsgebühren). Der hier berechnete Effektivzins basiert rein auf dem mathematischen Zinseszinseffekt.
+
+**Lohnt sich Sondertilgung?**
+
+Sondertilgungen sind eine der effektivsten Möglichkeiten, Zinskosten zu senken. Jeder Euro, den Sie zusätzlich zur regulären Rate tilgen, reduziert die Restschuld — und damit die Zinsen für alle folgenden Monate.
+
+Ein Beispiel: Bei einem Kredit über 10.000 € zu 5,9% auf 60 Monate zahlen Sie ohne Sondertilgung ca. 1.568 € Zinsen. Mit einer monatlichen Sondertilgung von 50 € reduzieren sich die Zinskosten deutlich und der Kredit ist wesentlich früher abbezahlt. Unser Rechner zeigt Ihnen die exakte Ersparnis.
+
+Achten Sie bei Ihrem Kreditvertrag darauf, ob Sondertilgungen kostenlos möglich sind. Viele Banken erlauben jährliche Sondertilgungen bis zu einem bestimmten Prozentsatz der Kreditsumme. Bei Ratenkrediten (Konsumkrediten) ist eine vorzeitige Rückzahlung nach § 500 BGB jederzeit möglich.
+
+**Typische Kreditzinsen 2026 in Deutschland**
+
+Die Kreditzinsen in Deutschland hängen von mehreren Faktoren ab: dem Leitzins der EZB, der Bonität des Kreditnehmers, der Kreditsumme und der Laufzeit. Im Jahr 2026 liegen typische Zinssätze für Ratenkredite bei:
+
+- **Sehr gute Bonität:** 3,0 – 5,0 % effektiv
+- **Gute Bonität:** 5,0 – 7,0 % effektiv
+- **Mittlere Bonität:** 7,0 – 10,0 % effektiv
+- **Autokredite:** Oft günstiger (ab 2,5 % effektiv), da das Fahrzeug als Sicherheit dient
+
+Diese Werte sind Richtwerte und können je nach Bank und individueller Situation variieren. Ein Kreditvergleich lohnt sich immer, da die Zinsunterschiede zwischen Anbietern erheblich sein können.
+
+**Worauf sollte man beim Kreditvergleich achten?**
+
+Beim Vergleich von Kreditangeboten sollten Sie auf folgende Punkte achten:
+
+- **Effektiver Jahreszins:** Der wichtigste Vergleichswert, da er alle Kosten enthält
+- **Sondertilgung:** Ist kostenlose Sondertilgung möglich?
+- **Restschuldversicherung:** Oft teuer und nicht immer nötig — genau prüfen
+- **Laufzeit:** Eine längere Laufzeit senkt die Monatsrate, erhöht aber die Gesamtkosten
+- **Vorfälligkeitsentschädigung:** Was kostet eine vorzeitige Ablösung?
+
+Nutzen Sie unseren Kreditrechner, um verschiedene Szenarien durchzuspielen — mit unterschiedlichen Laufzeiten, Zinssätzen und Sondertilgungen. So finden Sie die optimale Kombination für Ihre Situation.
+
+Ergänzend können Sie mit dem **Zinsrechner** die Kraft des Zinseszins für Ihre Sparanlagen berechnen und mit dem **Sparrechner** langfristige Sparpläne simulieren. Der **Inflationsrechner** zeigt Ihnen, wie die Inflation den realen Wert Ihres Geldes über die Zeit verändert.`,
+    faq: [
+      {
+        frage: 'Wie berechne ich meine monatliche Kreditrate?',
+        antwort: 'Die Kreditrate wird nach der Annuitätenformel berechnet: Rate = Kreditsumme × (Monatszins × (1 + Monatszins)^Laufzeit) / ((1 + Monatszins)^Laufzeit - 1). Geben Sie einfach Kreditsumme, Zinssatz und Laufzeit in unseren Rechner ein — die Rate wird sofort berechnet.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen Sollzins und Effektivzins?',
+        antwort: 'Der Sollzins ist der reine Zinssatz für das geliehene Geld. Der Effektivzins berücksichtigt zusätzlich den Zinseszinseffekt durch monatliche Verrechnung und liegt daher immer etwas höher. Bei Bankangeboten kann der Effektivzins auch weitere Kosten wie Bearbeitungsgebühren enthalten.',
+      },
+      {
+        frage: 'Lohnt sich eine Sondertilgung?',
+        antwort: 'Ja, Sondertilgungen lohnen sich fast immer. Jede zusätzliche Tilgung reduziert die Restschuld und damit die Zinsen für alle folgenden Monate. Bei einem 10.000-€-Kredit zu 5,9% auf 60 Monate können schon 50 €/Monat Sondertilgung mehrere hundert Euro Zinsen sparen.',
+      },
+      {
+        frage: 'Wie hoch sind aktuelle Kreditzinsen 2026?',
+        antwort: 'Die Kreditzinsen für Ratenkredite liegen 2026 je nach Bonität zwischen 3% und 10% effektiv. Autokredite sind oft günstiger (ab 2,5%), da das Fahrzeug als Sicherheit dient. Ein Kreditvergleich lohnt sich, da die Unterschiede zwischen Anbietern erheblich sein können.',
+      },
+      {
+        frage: 'Kann ich einen Kredit vorzeitig ablösen?',
+        antwort: 'Ja, Ratenkredite (Konsumkredite) können nach § 500 BGB jederzeit vorzeitig zurückgezahlt werden. Die Bank darf eine Vorfälligkeitsentschädigung von maximal 1% der Restschuld (bei über 12 Monaten Restlaufzeit) bzw. 0,5% (bei unter 12 Monaten) berechnen.',
+      },
+      {
+        frage: 'Wie viel Kredit kann ich mir leisten?',
+        antwort: 'Als Faustregel gilt: Die monatliche Kreditrate sollte maximal 30-35% Ihres verfügbaren Nettoeinkommens (nach Abzug von Miete und festen Ausgaben) betragen. Nutzen Sie unseren Rechner, um verschiedene Kreditsummen und Laufzeiten durchzuspielen und die passende Monatsrate zu finden.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -3702,6 +3787,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'kreditrechner',
   'bussgeldrechner',
   'freelancer-stundensatz-rechner',
   'stromvergleich-rechner',
@@ -3810,6 +3896,7 @@ const verwandteMap: Record<string, string[]> = {
   'stromvergleich-rechner': ['stromkosten-rechner', 'heizkosten-rechner', 'nebenkosten-rechner', 'mietrechner'],
   'freelancer-stundensatz-rechner': ['stundenlohn-rechner', 'ueberstunden-rechner', 'mwst-rechner', 'arbeitszeitrechner'],
   'bussgeldrechner': ['kfz-steuer-rechner', 'spritkosten-rechner', 'kw-ps-umrechner', 'promillerechner'],
+  'kreditrechner': ['zinsrechner', 'sparrechner', 'inflationsrechner', 'brutto-netto-rechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {

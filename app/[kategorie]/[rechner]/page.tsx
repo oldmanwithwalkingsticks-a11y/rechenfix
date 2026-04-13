@@ -57,6 +57,7 @@ import SteuererstattungRechner from '@/components/rechner/SteuererstattungRechne
 import StromvergleichRechner from '@/components/rechner/StromvergleichRechner';
 import FreelancerStundensatzRechner from '@/components/rechner/FreelancerStundensatzRechner';
 import BussgeldRechner from '@/components/rechner/BussgeldRechner';
+import KreditRechner from '@/components/rechner/KreditRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -126,6 +127,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'stromvergleich-rechner': StromvergleichRechner,
   'freelancer-stundensatz-rechner': FreelancerStundensatzRechner,
   'bussgeldrechner': BussgeldRechner,
+  'kreditrechner': KreditRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
