@@ -125,7 +125,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
   },
   'ks-auxilia': {
     'rechtsschutz': 'KS Auxilia bietet Rechtsschutzversicherung ab 18,90 €/Monat — mit freier Anwaltswahl.',
-    'kuendigung': 'Im Streitfall abgesichert — Rechtsschutz für Arbeitsrecht.',
+    'kuendigung': 'Kündigung erhalten? KS Auxilia Rechtsschutz übernimmt die Anwaltskosten bei Kündigungsschutzklage und arbeitsrechtlichen Streitigkeiten.',
     'urlaubstage': 'Arbeitgeber kürzt Urlaub? Rechtsschutz gibt Ihnen Sicherheit.',
     'ueberstunden': 'Unbezahlte Überstunden? Mit Rechtsschutz zu Ihrem Recht.',
     'bussgeld': 'Einspruch gegen den Bußgeldbescheid? KS Auxilia Rechtsschutz übernimmt die Anwaltskosten — auch im Verkehrsrecht.',
