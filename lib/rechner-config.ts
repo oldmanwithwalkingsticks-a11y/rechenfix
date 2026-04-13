@@ -3774,6 +3774,70 @@ Ergänzend können Sie mit dem **Zinsrechner** die Kraft des Zinseszins für Ihr
       },
     ],
   },
+  {
+    slug: 'kalorienrechner',
+    titel: 'Kalorienrechner',
+    beschreibung: 'Täglichen Kalorienbedarf berechnen: Grundumsatz und Gesamtumsatz basierend auf der Mifflin-St Jeor-Formel.',
+    kategorie: 'Gesundheit',
+    kategorieSlug: 'gesundheit',
+    metaTitle: 'Kalorienrechner 2026 — Täglichen Kalorienbedarf berechnen | Rechenfix',
+    metaDescription: 'Kalorienbedarf berechnen: Grundumsatz und Gesamtumsatz mit der Mifflin-St Jeor-Formel ✓ Aktivitätslevel ✓ Makronährstoffe ✓ KI-Erklärung.',
+    keywords: ['kalorienrechner', 'kalorienbedarf berechnen', 'grundumsatz berechnen', 'gesamtumsatz', 'mifflin st jeor', 'kalorienverbrauch', 'kcal rechner', 'täglicher kalorienbedarf'],
+    icon: '🔥',
+    formel: 'Grundumsatz (Männer) = (10 × Gewicht) + (6,25 × Größe) − (5 × Alter) + 5 | Grundumsatz (Frauen) = (10 × Gewicht) + (6,25 × Größe) − (5 × Alter) − 161 | Gesamtumsatz = Grundumsatz × Aktivitätsfaktor',
+    beispiel: 'Beispiel: Frau, 30 Jahre, 165 cm, 65 kg, leicht aktiv → Grundumsatz = 1.354 kcal → Gesamtumsatz = 1.862 kcal',
+    erklaerung: `Der Kalorienrechner berechnet Ihren individuellen täglichen Kalorienbedarf mithilfe der **Mifflin-St Jeor-Formel** — der von Ernährungswissenschaftlern weltweit empfohlenen Standardformel.
+
+**Was ist der Grundumsatz und warum ist er wichtig?**
+
+Der Grundumsatz (auch Basalmetabolismus oder BMR) ist die Energiemenge, die Ihr Körper in völliger Ruhe benötigt, um lebenswichtige Funktionen aufrechtzuerhalten: Atmung, Herzschlag, Zellerneuerung, Gehirnfunktion und Temperaturregulation. Er macht bei den meisten Menschen **60 bis 75 Prozent** des gesamten täglichen Energieverbrauchs aus. Der Grundumsatz wird maßgeblich von Alter, Geschlecht, Körpergröße und Gewicht bestimmt. Muskelmasse erhöht den Grundumsatz, da Muskelzellen selbst in Ruhe mehr Energie verbrauchen als Fettzellen.
+
+**Mifflin-St Jeor vs. Harris-Benedict: Welche Formel ist genauer?**
+
+Die Harris-Benedict-Formel stammt aus dem Jahr 1919 und wurde lange als Standard verwendet. Studien haben jedoch gezeigt, dass die **Mifflin-St Jeor-Formel** (entwickelt 1990) den tatsächlichen Grundumsatz deutlich genauer vorhersagt — insbesondere bei übergewichtigen Personen. Eine Metaanalyse der American Dietetic Association bestätigte 2005, dass die Mifflin-St Jeor-Formel die zuverlässigsten Ergebnisse liefert und empfahl sie als bevorzugte Methode. Auch die WHO orientiert sich an dieser Berechnungsmethode.
+
+Die Formel berücksichtigt vier Schlüsselfaktoren: Körpergewicht in Kilogramm, Körpergröße in Zentimetern, Alter in Jahren und Geschlecht. Die unterschiedliche Berechnung für Männer und Frauen spiegelt die durchschnittlich höhere Muskelmasse und den damit verbundenen höheren Energieverbrauch bei Männern wider.
+
+**Wie beeinflusst das Aktivitätslevel den Kalorienbedarf?**
+
+Der Gesamtumsatz ergibt sich aus dem Grundumsatz multipliziert mit einem Aktivitätsfaktor (PAL-Wert: Physical Activity Level). Dieser Faktor reicht von 1,2 für überwiegend sitzende Tätigkeiten bis 1,9 für extreme körperliche Belastung. Bereits ein Wechsel von \"kaum aktiv\" zu \"leicht aktiv\" kann den täglichen Kalorienbedarf um **200 bis 300 kcal** erhöhen. Regelmäßige Bewegung steigert nicht nur den akuten Energieverbrauch, sondern erhöht langfristig auch den Grundumsatz durch den Aufbau von Muskelmasse.
+
+**Kaloriendefizit: Wie viel ist gesund?**
+
+Zum Abnehmen muss ein Kaloriendefizit erzielt werden — das bedeutet, weniger Kalorien aufzunehmen als der Körper verbraucht. Ein moderates Defizit von **500 kcal pro Tag** entspricht einem Gewichtsverlust von etwa 0,5 kg pro Woche und gilt als gesund und nachhaltig. Wichtig: Die tägliche Kalorienaufnahme sollte **niemals unter den Grundumsatz fallen**, da dies den Stoffwechsel verlangsamt, Muskelmasse abbaut und langfristig zum gefürchteten Jo-Jo-Effekt führt. Der Körper schaltet bei zu starkem Defizit in einen Sparmodus, der das Abnehmen paradoxerweise erschwert.
+
+**Makronährstoffverteilung: Protein, Kohlenhydrate, Fett**
+
+Neben der Gesamtkalorienmenge spielt die Verteilung auf die drei Makronährstoffe eine wichtige Rolle. Unser Rechner verwendet eine ausgewogene Verteilung: **30% Protein**, **45% Kohlenhydrate** und **25% Fett**. Proteine sind besonders wichtig beim Abnehmen, da sie die Muskelmasse erhalten und den Sättigungseffekt erhöhen. Kohlenhydrate liefern die Hauptenergie für Gehirn und Muskeln. Gesunde Fette sind essenziell für die Hormonproduktion und die Aufnahme fettlöslicher Vitamine.
+
+Für eine individuelle Anpassung der Makronährstoffverteilung — etwa bei einer ketogenen Diät oder bei Leistungssport — empfehlen wir die Rücksprache mit einem Ernährungsberater. Auch der [BMI-Rechner](/gesundheit/bmi-rechner) kann Ihnen helfen, Ihren aktuellen Körperstatus besser einzuordnen. Für eine ganzheitliche Betrachtung Ihrer Gesundheit werfen Sie auch einen Blick auf unseren [Schlafrechner](/gesundheit/schlaf-rechner), denn ausreichender Schlaf spielt eine entscheidende Rolle beim Stoffwechsel und der Gewichtsregulation.`,
+    faq: [
+      {
+        frage: 'Wie berechne ich meinen täglichen Kalorienbedarf?',
+        antwort: 'Geben Sie Ihr Geschlecht, Alter, Größe, Gewicht und Aktivitätslevel in den Kalorienrechner ein. Der Rechner berechnet zunächst Ihren Grundumsatz mit der Mifflin-St Jeor-Formel und multipliziert diesen mit dem Aktivitätsfaktor, um Ihren Gesamtumsatz zu ermitteln. Je nach Ziel (Abnehmen, Halten, Zunehmen) wird die empfohlene Tageskalorien-Menge angepasst.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen Grundumsatz und Gesamtumsatz?',
+        antwort: 'Der Grundumsatz ist die Energiemenge, die Ihr Körper in völliger Ruhe für lebensnotwendige Funktionen benötigt (Atmung, Herzschlag, Zellerneuerung). Der Gesamtumsatz umfasst zusätzlich den Energieverbrauch durch körperliche Aktivität, Arbeit und Sport. Der Gesamtumsatz liegt je nach Aktivitätslevel 20 bis 90 Prozent über dem Grundumsatz.',
+      },
+      {
+        frage: 'Wie viele Kalorien brauche ich zum Abnehmen?',
+        antwort: 'Für eine gesunde Gewichtsabnahme empfiehlt sich ein moderates Kaloriendefizit von etwa 500 kcal pro Tag. Das entspricht einem Gewichtsverlust von ca. 0,5 kg pro Woche. Unser Rechner berechnet automatisch die reduzierte Kalorienmenge, wenn Sie das Ziel „Abnehmen" wählen. Wichtig: Essen Sie nie unter Ihrem Grundumsatz.',
+      },
+      {
+        frage: 'Warum sollte ich nicht unter meinem Grundumsatz essen?',
+        antwort: 'Wenn Sie dauerhaft weniger Kalorien aufnehmen als Ihr Grundumsatz, schaltet der Körper in einen Sparmodus: Der Stoffwechsel verlangsamt sich, Muskelmasse wird abgebaut statt Fett, und es droht der Jo-Jo-Effekt. Zudem können Nährstoffmangel, Müdigkeit, Haarausfall und Hormonstörungen auftreten. Ein moderates Defizit unterhalb des Gesamtumsatzes, aber oberhalb des Grundumsatzes, ist der gesündere Weg.',
+      },
+      {
+        frage: 'Wie genau ist der Kalorienrechner?',
+        antwort: 'Die Mifflin-St Jeor-Formel gilt als die genaueste Formel zur Berechnung des Grundumsatzes und wird von der American Dietetic Association empfohlen. Die Abweichung liegt bei den meisten Menschen bei etwa 10%. Individuelle Faktoren wie Muskelmasse, genetische Veranlagung, Hormonhaushalt und Medikamente können den tatsächlichen Bedarf beeinflussen. Für eine exakte Messung ist eine indirekte Kalorimetrie beim Arzt möglich.',
+      },
+      {
+        frage: 'Wie verteile ich meine Kalorien auf Protein, Kohlenhydrate und Fett?',
+        antwort: 'Eine bewährte Verteilung ist 30% Protein, 45% Kohlenhydrate und 25% Fett. Bei 2.000 kcal pro Tag bedeutet das: ca. 150 g Protein, 225 g Kohlenhydrate und 56 g Fett. Protein sättigt am stärksten und schützt die Muskelmasse beim Abnehmen. Kohlenhydrate sind der Hauptenergielieferant, und gesunde Fette sind essenziell für Hormone und Vitaminaufnahme.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -3787,6 +3851,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'kalorienrechner',
   'kreditrechner',
   'bussgeldrechner',
   'freelancer-stundensatz-rechner',
@@ -3897,6 +3962,7 @@ const verwandteMap: Record<string, string[]> = {
   'freelancer-stundensatz-rechner': ['stundenlohn-rechner', 'ueberstunden-rechner', 'mwst-rechner', 'arbeitszeitrechner'],
   'bussgeldrechner': ['kfz-steuer-rechner', 'spritkosten-rechner', 'kw-ps-umrechner', 'promillerechner'],
   'kreditrechner': ['zinsrechner', 'sparrechner', 'inflationsrechner', 'brutto-netto-rechner'],
+  'kalorienrechner': ['bmi-rechner', 'schlaf-rechner', 'raucher-rechner', 'promillerechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
