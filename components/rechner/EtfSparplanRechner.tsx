@@ -198,6 +198,11 @@ export default function EtfSparplanRechner() {
                 </div>
               )}
             </div>
+            {nAnlagedauer <= 3 && (
+              <p className="mt-3 text-xs text-gray-500 dark:text-gray-400">
+                Hinweis: Bei einem Sparplan wird das Geld schrittweise investiert. Die Rendite wirkt nur auf das bereits angelegte Kapital — bei kurzen Laufzeiten ist der Zinseszinseffekt daher noch gering.
+              </p>
+            )}
           </div>
 
           {/* Flächendiagramm */}
@@ -212,7 +217,7 @@ export default function EtfSparplanRechner() {
                   <span>0 €</span>
                 </div>
                 {/* Chart-Bereich */}
-                <div className="ml-16 h-full flex items-end gap-px pb-6">
+                <div className="ml-16 h-full flex gap-px pb-6">
                   {ergebnis.jahresDaten.map((jd) => {
                     const einzPct = (jd.einzahlungenKumuliert / chartData.maxKapital) * 100;
                     const renditePct = (jd.renditeKumuliert / chartData.maxKapital) * 100;
