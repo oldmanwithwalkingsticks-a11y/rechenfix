@@ -5181,6 +5181,68 @@ Die Wohngeldformel nach § 19 WoGG lautet: Wohngeld = 1,15 × (M − (a + b×M +
       },
     ],
   },
+  {
+    slug: 'bafoeg-rechner',
+    titel: 'BAföG-Rechner',
+    beschreibung: 'BAföG berechnen: Anspruch und voraussichtliche Höhe der Ausbildungsförderung für Studierende und Schüler.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'BAföG-Rechner 2026 — BAföG-Anspruch & Höhe berechnen | Rechenfix',
+    metaDescription: 'BAföG berechnen: Anspruch und Höhe für Studium und Schule ✓ Elterneinkommen ✓ Vermögen ✓ Wohnsituation ✓ KI-Erklärung.',
+    keywords: ['bafög rechner', 'bafög berechnen', 'bafög 2026', 'bafög anspruch', 'bafög höhe', 'bafög höchstsatz', 'bafög elterneinkommen', 'bafög rückzahlung', 'studenten bafög', 'schüler bafög'],
+    icon: '🎓',
+    formel: 'BAföG = Gesamtbedarf − Anrechnung Einkommen − Anrechnung Vermögen − Anrechnung Elterneinkommen | Studium (eigene Wohnung): 934 € Bedarf | Studien-BAföG: 50% Zuschuss + 50% zinsloses Darlehen (max. 10.010 € Rückzahlung)',
+    beispiel: 'Student, eigene Wohnung, familienversichert, Eltern verdienen 50.000 € brutto zusammen → Bedarf: 934 € | Elternanrechnung: ca. 302 € | BAföG: ca. 632 €/Monat (316 € Zuschuss + 316 € Darlehen).',
+    erklaerung: `**Wer hat Anspruch auf BAföG?**
+
+BAföG (Bundesausbildungsförderungsgesetz) unterstützt Studierende und Schüler, deren Eltern die Ausbildung nicht allein finanzieren können. Grundsätzlich haben alle deutschen Staatsangehörigen und viele ausländische Studierende Anspruch, wenn das Einkommen der Eltern unter bestimmten Grenzen liegt. Auch EU-Bürger mit Daueraufenthaltsrecht und anerkannte Flüchtlinge können BAföG beantragen. Die Altersgrenze liegt bei 45 Jahren zu Beginn des Studiums. Das BAföG wird als Kombination aus Zuschuss und zinslosem Darlehen gezahlt — bei Studierenden je 50 Prozent, bei Schülern als reiner Zuschuss ohne Rückzahlung.
+
+**BAföG-Höchstsatz 2026: Was steht Ihnen zu?**
+
+Der aktuelle BAföG-Höchstsatz für Studierende in eigener Wohnung beträgt **934 Euro pro Monat**. Dieser setzt sich zusammen aus dem Grundbedarf von 554 Euro und einer Wohnpauschale von 380 Euro. Wer sich selbst krankenversichern muss (ab 25 Jahre oder bei privatem Vertrag), erhält zusätzlich 94 Euro KV-Zuschlag und 28 Euro PV-Zuschlag. Mit Kindern gibt es einen Betreuungszuschlag von 160 Euro pro Kind. Der maximale BAföG-Satz mit KV-Zuschlag und einem Kind liegt somit bei **1.216 Euro monatlich**. Für Schüler gelten niedrigere Sätze: 262 Euro bei den Eltern oder 632 Euro in eigener Wohnung. Vergleichen Sie auch Ihren [Nettolohn](/finanzen/brutto-netto-rechner) mit den BAföG-Sätzen.
+
+**Elternunabhängiges BAföG: Wann ist das möglich?**
+
+Normalerweise wird das Einkommen der Eltern auf das BAföG angerechnet. In bestimmten Fällen gibt es jedoch elternunabhängiges BAföG — dann zählt nur Ihr eigenes Einkommen: nach mindestens 5 Jahren Erwerbstätigkeit nach dem 18. Lebensjahr, bei Beginn der Ausbildung nach dem 30. Geburtstag, nach Abschluss einer dreijährigen Berufsausbildung plus 3 Jahren Erwerbstätigkeit, oder wenn die Eltern unbekannt bzw. unerreichbar sind. Elternunabhängiges BAföG ist besonders für Berufstätige interessant, die ein Studium aufnehmen möchten. Da kein Elterneinkommen angerechnet wird, ist der Anspruch in der Regel deutlich höher.
+
+**BAföG-Rückzahlung: Wie viel muss ich zurückzahlen?**
+
+Studien-BAföG besteht zu 50 Prozent aus einem zinslosen Darlehen. Die Rückzahlung beginnt fünf Jahre nach dem Ende der Förderungshöchstdauer in Raten von mindestens 130 Euro pro Monat. Die maximale Rückzahlungssumme ist auf **10.010 Euro gedeckelt** — unabhängig davon, wie viel BAföG Sie insgesamt erhalten haben. Bei einem Regelstudium von 6 Semestern mit 934 Euro monatlich beträgt das Gesamtdarlehen 16.812 Euro — Sie müssen aber maximal 10.010 Euro zurückzahlen. Bei vorzeitiger Rückzahlung in einer Summe gibt es einen **Nachlass von bis zu 50 Prozent**. Wer weniger als 1.605 Euro netto verdient, kann sich von der Rückzahlung freistellen lassen. Schüler-BAföG muss **nicht zurückgezahlt** werden — es ist ein reiner Zuschuss.
+
+**BAföG und Nebenjob: Wie viel darf ich verdienen?**
+
+Neben dem BAföG dürfen Sie bis zu **6.456 Euro im Jahr** hinzuverdienen, ohne dass Ihr BAföG gekürzt wird. Das entspricht einem monatlichen Freibetrag von etwa 538 Euro. Ein Minijob bis 538 Euro ist daher problemlos möglich. Wird der Freibetrag überschritten, wird das überschüssige Einkommen abzüglich einer Sozialversicherungspauschale von 22,5 Prozent auf das BAföG angerechnet. Ein Werkstudentenjob mit höherem Verdienst kann sich trotzdem lohnen — rechnen Sie nach, ob das zusätzliche Einkommen die BAföG-Kürzung überwiegt. Prüfen Sie auch Ihren Anspruch auf [Wohngeld](/finanzen/wohngeld-rechner) als Alternative, falls Ihr BAföG-Anspruch gering ausfällt.
+
+**BAföG beantragen: So geht's**
+
+Den BAföG-Antrag stellen Sie beim zuständigen Studenten- oder Schülerwerk (bei Studierenden) oder beim Amt für Ausbildungsförderung (bei Schülern). Benötigt werden: FormBlatt 1 (Antrag), FormBlatt 3 (Einkommen der Eltern), Immatrikulationsbescheinigung, Mietvertrag und Einkommensnachweise. Viele Bundesländer bieten den digitalen Antrag über BAföG Digital an. Die Bearbeitungszeit beträgt durchschnittlich 6 bis 8 Wochen. BAföG wird ab dem Monat der Antragstellung gezahlt — nicht rückwirkend! Stellen Sie den Antrag daher rechtzeitig vor Semesterbeginn. Bei einem zu niedrigen Anspruch prüfen Sie Alternativen wie [Bürgergeld](/finanzen/buergergeld-rechner) oder Wohngeld.`,
+    faq: [
+      {
+        frage: 'Wie viel BAföG bekomme ich?',
+        antwort: 'Die Höhe hängt von Ausbildungsart, Wohnsituation, eigenem Einkommen/Vermögen und dem Einkommen der Eltern ab. Der Höchstsatz für Studierende in eigener Wohnung liegt bei 934 € (2026). Mit KV-Zuschlag und Kindern kann er auf über 1.200 € steigen. Schüler erhalten maximal 632 € in eigener Wohnung.',
+      },
+      {
+        frage: 'Wie viel dürfen meine Eltern verdienen, damit ich BAföG bekomme?',
+        antwort: 'Die Grenze hängt vom Familienstand und der Anzahl der Geschwister ab. Als Faustregel: Bei verheirateten Eltern mit einem Kind in Ausbildung liegt die Grenze bei ca. 45.000-50.000 € Bruttojahreseinkommen für den vollen BAföG-Satz. Mit jedem Geschwister in Ausbildung steigt die Grenze um ca. 730 € monatlich.',
+      },
+      {
+        frage: 'Muss ich BAföG zurückzahlen?',
+        antwort: 'Studien-BAföG: Ja, zu 50% als zinsloses Darlehen. Die Rückzahlung beginnt 5 Jahre nach Förderungsende mit mindestens 130 €/Monat. Maximum: 10.010 € — egal wie viel Sie erhalten haben. Schüler-BAföG: Nein, es ist ein reiner Zuschuss ohne Rückzahlung.',
+      },
+      {
+        frage: 'Wie viel darf ich neben dem BAföG verdienen?',
+        antwort: 'Sie dürfen bis zu 6.456 € im Jahr (ca. 538 €/Monat) hinzuverdienen, ohne BAföG-Kürzung. Ein Minijob ist problemlos möglich. Bei höherem Verdienst wird das überschüssige Einkommen abzüglich 22,5% Sozialversicherungspauschale angerechnet.',
+      },
+      {
+        frage: 'Wie viel Vermögen darf ich haben?',
+        antwort: 'Der Freibetrag liegt bei 15.000 € für unter 30-Jährige und 45.000 € für über 30-Jährige. Vermögen über dem Freibetrag wird auf 12 Monate verteilt und monatlich vom BAföG abgezogen. Zum Vermögen zählen Sparguthaben, Wertpapiere und Sachwerte — nicht jedoch Hausrat und ein angemessenes Auto.',
+      },
+      {
+        frage: 'Gibt es elternunabhängiges BAföG?',
+        antwort: 'Ja, in bestimmten Fällen: nach 5 Jahren Erwerbstätigkeit nach dem 18. Lebensjahr, bei Studienbeginn nach dem 30. Geburtstag, nach abgeschlossener Berufsausbildung plus 3 Jahren Berufserfahrung, oder wenn die Eltern nicht erreichbar sind. Dann wird kein Elterneinkommen angerechnet.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -5194,6 +5256,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'bafoeg-rechner',
   'wohngeld-rechner',
   'autokosten-rechner',
   'splitting-rechner',
@@ -5339,6 +5402,7 @@ const verwandteMap: Record<string, string[]> = {
   'splitting-rechner': ['brutto-netto-rechner', 'steuererstattung-rechner', 'elterngeld-rechner', 'teilzeit-rechner'],
   'autokosten-rechner': ['spritkosten-rechner', 'kfz-steuer-rechner', 'kw-ps-umrechner', 'bussgeldrechner'],
   'wohngeld-rechner': ['buergergeld-rechner', 'mietrechner', 'nebenkosten-rechner', 'brutto-netto-rechner'],
+  'bafoeg-rechner': ['wohngeld-rechner', 'buergergeld-rechner', 'brutto-netto-rechner', 'mietrechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {

@@ -79,6 +79,7 @@ import ProzVeraenderungRechner from '@/components/rechner/ProzVeraenderungRechne
 import SplittingRechner from '@/components/rechner/SplittingRechner';
 import AutokostenRechner from '@/components/rechner/AutokostenRechner';
 import WohngeldRechner from '@/components/rechner/WohngeldRechner';
+import BafoegRechner from '@/components/rechner/BafoegRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -170,6 +171,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'splitting-rechner': SplittingRechner,
   'autokosten-rechner': AutokostenRechner,
   'wohngeld-rechner': WohngeldRechner,
+  'bafoeg-rechner': BafoegRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
