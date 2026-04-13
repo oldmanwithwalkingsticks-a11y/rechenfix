@@ -5119,6 +5119,68 @@ Ein eigenes Auto lohnt sich finanziell erst ab einer gewissen Fahrleistung und w
       },
     ],
   },
+  {
+    slug: 'wohngeld-rechner',
+    titel: 'Wohngeld-Rechner',
+    beschreibung: 'Wohngeld berechnen: Prüfen Sie Ihren Anspruch und die voraussichtliche Höhe des Wohngelds nach dem Wohngeld-Plus-Gesetz 2026.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Wohngeld-Rechner 2026 — Anspruch & Höhe berechnen | Rechenfix',
+    metaDescription: 'Wohngeld berechnen: Anspruch und voraussichtliche Höhe nach Wohngeld-Plus-Gesetz 2026 ✓ Mietstufe ✓ Heizkostenpauschale ✓ KI-Erklärung.',
+    keywords: ['wohngeld rechner', 'wohngeld berechnen', 'wohngeld 2026', 'wohngeld anspruch', 'wohngeld höhe', 'wohngeld plus', 'wohngeld mietstufe', 'wohngeldantrag', 'mietzuschuss berechnen', 'wohngeld einkommensgrenze'],
+    icon: '🏠',
+    formel: 'Wohngeld = 1,15 × (M − (a + b×M + c×Y) × Y) | M = berücksichtigte Miete + Heizkostenpauschale + Klimakomponente | Y = bereinigtes Einkommen | a, b, c = Koeffizienten je Haushaltsgröße (Anlage 1 WoGG)',
+    beispiel: '2-Personen-Haushalt, 2.000 € brutto, 600 € Kaltmiete, Mietstufe III → Bereinigtes Einkommen: ca. 1.400 € | Berücksichtigte Miete: 575 € + 30,60 € Heizkosten + 24,70 € Klima = 630,30 € | Geschätztes Wohngeld: ca. 200–250 €/Monat.',
+    erklaerung: `**Was ist Wohngeld und wer hat Anspruch?**
+
+Wohngeld ist ein staatlicher Mietzuschuss für Haushalte mit geringem Einkommen, die keine anderen Sozialleistungen wie Bürgergeld oder Sozialhilfe beziehen. Es richtet sich an Mieter (als Mietzuschuss) und Eigentümer (als Lastenzuschuss). Seit dem **Wohngeld-Plus-Gesetz 2023** erhalten deutlich mehr Haushalte in Deutschland Wohngeld — die Zahl der Berechtigten hat sich auf rund zwei Millionen Haushalte verdreifacht. Das Wohngeld wird nicht auf das Einkommen angerechnet und muss nicht zurückgezahlt werden.
+
+**Wohngeld-Plus-Gesetz: Was hat sich geändert?**
+
+Das Wohngeld-Plus-Gesetz brachte drei wesentliche Verbesserungen: Erstens wurde eine **Heizkostenpauschale** eingeführt, die die gestiegenen Energiekosten abfedert. Für einen Zwei-Personen-Haushalt beträgt sie 30,60 Euro monatlich. Zweitens gibt es eine **Klimakomponente** von 24,70 Euro (2 Personen), die energetische Sanierungskosten der Vermieter berücksichtigt. Drittens wurden die **Einkommensgrenzen** deutlich angehoben, sodass mehr Haushalte Anspruch haben. Insgesamt ist das Wohngeld im Durchschnitt um rund 190 Euro pro Monat gestiegen. Für viele Haushalte ist Wohngeld finanziell günstiger als [Bürgergeld](/finanzen/buergergeld-rechner), da es weniger Auflagen hat und das Vermögen nicht angerechnet wird.
+
+**Mietstufen erklärt: Welche Mietstufe hat meine Stadt?**
+
+Deutschland ist in sieben Mietstufen eingeteilt, die das lokale Mietniveau widerspiegeln. **Mietstufe I** gilt für ländliche Gemeinden mit niedrigen Mieten, **Mietstufe III** für mittlere Städte, **Mietstufe VI** für teure Großstädte wie München oder Frankfurt, und **Mietstufe VII** für besonders teure Stadtteile (z. B. München-Zentrum). Die Mietstufe bestimmt den Höchstbetrag der Miete, der bei der Wohngeldberechnung berücksichtigt wird. So liegt der Höchstbetrag für einen Zwei-Personen-Haushalt in Mietstufe III bei 575 Euro, in Mietstufe VI bei 770 Euro. Die Mietstufe Ihrer Gemeinde finden Sie auf der Website des Bundesministeriums für Wohnen. Übersteigt Ihre tatsächliche Miete den Höchstbetrag, wird nur dieser für die Berechnung herangezogen — die Differenz müssen Sie selbst tragen. Berechnen Sie Ihre [Nebenkosten](/wohnen/nebenkosten-rechner) und [Warmmiete](/wohnen/mietrechner) vorab, um ein vollständiges Bild Ihrer Wohnkosten zu erhalten.
+
+**Wohngeld beantragen: Schritt für Schritt**
+
+Den Wohngeldantrag stellen Sie bei der Wohngeldstelle Ihrer Stadt- oder Gemeindeverwaltung. Benötigt werden: Personalausweis, Mietvertrag, Einkommensnachweise aller Haushaltsmitglieder (Gehaltsabrechnungen der letzten 3 Monate), Nachweis der Miethöhe und ggf. Nachweise über Freibeträge (Schwerbehindertenausweis, etc.). Die Bearbeitungsdauer beträgt in der Regel 3 bis 6 Wochen. Wichtig: **Wohngeld wird ab dem Monat der Antragstellung gezahlt**, nicht rückwirkend. Stellen Sie den Antrag daher so früh wie möglich. Der Bewilligungszeitraum beträgt in der Regel 12 Monate, danach müssen Sie einen Weiterleistungsantrag stellen.
+
+**Wohngeld und Bürgergeld: Was schließt sich aus?**
+
+Wohngeld und Bürgergeld (ehemals Hartz IV) schließen sich grundsätzlich gegenseitig aus. Wer Bürgergeld bezieht, erhält die Wohnkosten bereits als Teil des Bürgergelds (Kosten der Unterkunft). Ebenso schließen Sozialhilfe und BAföG mit Wohnkostenanteil einen Wohngeldanspruch aus. Für Haushalte nahe der Einkommensgrenze kann es sich lohnen, zu prüfen, ob Wohngeld oder Bürgergeld finanziell günstiger ist. Nutzen Sie unseren [Bürgergeld-Rechner](/finanzen/buergergeld-rechner) und vergleichen Sie. Bei einem [Bruttoeinkommen](/finanzen/brutto-netto-rechner) knapp über der Bürgergeld-Grenze ist Wohngeld häufig die bessere Option — es hat weniger Auflagen, keine Vermögensprüfung unter 60.000 Euro und keinen Vorrang der Arbeitsvermittlung.
+
+**Wie wird das Wohngeld genau berechnet?**
+
+Die Wohngeldformel nach § 19 WoGG lautet: Wohngeld = 1,15 × (M − (a + b×M + c×Y) × Y), wobei M die zu berücksichtigende Miete und Y das bereinigte Einkommen darstellt. Die Koeffizienten a, b und c variieren je nach Haushaltsgröße und sind in Anlage 1 zum Wohngeldgesetz festgelegt. Unser Rechner verwendet diese Formel mit vereinfachten Koeffizienten. Das Ergebnis ist eine Schätzung — die exakte Berechnung erfolgt durch Ihre Wohngeldstelle, die auch individuelle Besonderheiten berücksichtigt.`,
+    faq: [
+      {
+        frage: 'Habe ich Anspruch auf Wohngeld?',
+        antwort: 'Anspruch auf Wohngeld haben Mieter und Eigentümer mit geringem Einkommen, die keine anderen Sozialleistungen (Bürgergeld, Sozialhilfe, BAföG mit Wohnkosten) beziehen. Die Einkommensgrenze hängt von der Haushaltsgröße und Mietstufe ab. Seit dem Wohngeld-Plus-Gesetz haben deutlich mehr Haushalte Anspruch — prüfen Sie es mit unserem Rechner.',
+      },
+      {
+        frage: 'Wie hoch ist das Wohngeld 2026?',
+        antwort: 'Die Höhe hängt von Haushaltsgröße, Einkommen, Miete und Mietstufe ab. Seit dem Wohngeld-Plus-Gesetz liegt das durchschnittliche Wohngeld bei etwa 370 € pro Monat. Ein 2-Personen-Haushalt mit 2.000 € Bruttoeinkommen und 600 € Miete in Mietstufe III erhält geschätzt 200–250 € monatlich.',
+      },
+      {
+        frage: 'Was ist die Mietstufe und wo finde ich meine?',
+        antwort: 'Die Mietstufe (I bis VII) spiegelt das Mietniveau Ihrer Gemeinde wider. Stufe I steht für günstige ländliche Gebiete, Stufe VII für teure Innenstadtlagen (z. B. München). Ihre Mietstufe finden Sie auf der Website des Bundesministeriums für Wohnen (bmwsb.bund.de) oder bei Ihrer Gemeindeverwaltung.',
+      },
+      {
+        frage: 'Kann ich Wohngeld und Bürgergeld gleichzeitig bekommen?',
+        antwort: 'Nein, Wohngeld und Bürgergeld schließen sich gegenseitig aus. Beim Bürgergeld sind die Wohnkosten bereits enthalten (Kosten der Unterkunft). Liegt Ihr Einkommen knapp über der Bürgergeld-Grenze, ist Wohngeld oft die bessere Wahl — weniger Auflagen, keine strenge Vermögensprüfung.',
+      },
+      {
+        frage: 'Wo beantrage ich Wohngeld?',
+        antwort: 'Den Antrag stellen Sie bei der Wohngeldstelle Ihrer Stadt- oder Gemeindeverwaltung. Benötigt werden: Personalausweis, Mietvertrag, Einkommensnachweise der letzten 3 Monate und ggf. Nachweise über Freibeträge. Viele Kommunen bieten auch Online-Anträge an.',
+      },
+      {
+        frage: 'Wie lange dauert die Bearbeitung des Wohngeld-Antrags?',
+        antwort: 'Die Bearbeitung dauert in der Regel 3 bis 6 Wochen, in Stoßzeiten auch länger. Wichtig: Wohngeld wird ab dem Monat der Antragstellung gezahlt, nicht rückwirkend. Stellen Sie den Antrag daher so früh wie möglich. Der Bewilligungszeitraum beträgt meist 12 Monate.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -5132,6 +5194,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'wohngeld-rechner',
   'autokosten-rechner',
   'splitting-rechner',
   'wasserbedarf-rechner',
@@ -5275,6 +5338,7 @@ const verwandteMap: Record<string, string[]> = {
   'prozentuale-veraenderung-rechner': ['prozentrechner', 'dreisatz-rechner', 'durchschnitt-rechner', 'rabattrechner'],
   'splitting-rechner': ['brutto-netto-rechner', 'steuererstattung-rechner', 'elterngeld-rechner', 'teilzeit-rechner'],
   'autokosten-rechner': ['spritkosten-rechner', 'kfz-steuer-rechner', 'kw-ps-umrechner', 'bussgeldrechner'],
+  'wohngeld-rechner': ['buergergeld-rechner', 'mietrechner', 'nebenkosten-rechner', 'brutto-netto-rechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
