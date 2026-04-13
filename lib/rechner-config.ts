@@ -4927,6 +4927,66 @@ Die Ergebnisse des Geburtstags-Rechners eignen sich perfekt zum Teilen — über
       },
     ],
   },
+  {
+    slug: 'prozentuale-veraenderung-rechner',
+    titel: 'Prozentuale-Veränderung-Rechner',
+    beschreibung: 'Prozentuale Veränderung berechnen: Zu- oder Abnahme zwischen zwei Werten in Prozent, mit Rechenweg.',
+    kategorie: 'Mathe & Schule',
+    kategorieSlug: 'mathe',
+    metaTitle: 'Prozentuale Veränderung berechnen 2026 — Zu-/Abnahme in % | Rechenfix',
+    metaDescription: 'Prozentuale Veränderung berechnen: Zunahme oder Abnahme zwischen zwei Werten in Prozent ✓ Mit Rechenweg ✓ Formel ✓ KI-Erklärung.',
+    keywords: ['prozentuale veränderung berechnen', 'prozentuale zunahme', 'prozentuale abnahme', 'veränderung in prozent', 'prozentrechner veränderung', 'steigerung in prozent berechnen', 'rückgang in prozent', 'prozentuale differenz', 'wachstumsrate berechnen', 'relative veränderung'],
+    icon: '📉',
+    formel: 'Prozentuale Veränderung = ((Neuer Wert − Alter Wert) / |Alter Wert|) × 100',
+    beispiel: 'Alter Wert: 80, Neuer Wert: 100 → ((100 − 80) / 80) × 100 = +25%',
+    erklaerung: `**Wie berechnet man die prozentuale Veränderung?**
+
+Die prozentuale Veränderung beschreibt, um wie viel Prozent sich ein Wert im Vergleich zu einem Ausgangswert verändert hat. Die Formel ist: **((Neuer Wert − Alter Wert) / Alter Wert) × 100**. Ein positives Ergebnis bedeutet eine Zunahme (Steigerung), ein negatives eine Abnahme (Rückgang). Wenn zum Beispiel ein Produkt von 80 Euro auf 100 Euro steigt, beträgt die prozentuale Veränderung ((100 − 80) / 80) × 100 = **+25%**. Umgekehrt: Sinkt der Preis von 100 Euro auf 80 Euro, sind das ((80 − 100) / 100) × 100 = **−20%**. Beachten Sie: Der Ausgangswert (Alter Wert) ist immer die Bezugsgröße — er steht im Nenner der Formel.
+
+**Warum +50% und −50% nicht symmetrisch sind**
+
+Eines der häufigsten Missverständnisse bei Prozentrechnung: Viele Menschen glauben, dass eine Steigerung um 50% und eine Senkung um 50% sich gegenseitig aufheben. Das stimmt **nicht**. Ein anschauliches Beispiel: Ein Aktienkurs steigt von 100 Euro um 50% auf 150 Euro. Dann fällt er um 50% — aber 50% von 150 sind 75, also landet er bei 75 Euro, nicht bei 100 Euro. Das liegt daran, dass sich die Prozentzahl immer auf den **jeweiligen Ausgangswert** bezieht. Bei der Steigerung ist 100 die Basis, bei der Senkung ist 150 die Basis. Um von 150 Euro wieder auf 100 Euro zu kommen, wäre eine Senkung von nur **33,3%** nötig (nicht 50%). Unser Rechner zeigt Ihnen die „Umkehr-Prozent" automatisch an, damit Sie diesen Effekt direkt sehen.
+
+Ein weiteres Beispiel: Wenn Ihr Gehalt um 10% steigt (von 3.000 auf 3.300 Euro) und dann um 10% gekürzt wird, landen Sie bei 2.970 Euro — also 30 Euro weniger als vorher. Je größer die Prozentsätze, desto stärker der Effekt: +100% und −100% ergibt 0 (nicht den Ausgangswert). Nutzen Sie den [Prozentrechner](/alltag/prozentrechner) für einfache Prozentberechnungen und den [Dreisatzrechner](/alltag/dreisatz-rechner) für proportionale Zusammenhänge.
+
+**Prozentuale Veränderung vs. Prozentpunkte: Der Unterschied**
+
+Diese Unterscheidung ist besonders in Medien und Politik wichtig und wird häufig verwechselt. Die **prozentuale Veränderung** beschreibt die relative Veränderung eines Wertes. **Prozentpunkte** beschreiben die absolute Differenz zwischen zwei Prozentwerten. Beispiel: Wenn die Arbeitslosenquote von 5% auf 6% steigt, ist das ein Anstieg um **1 Prozentpunkt**, aber eine prozentuale Veränderung um **+20%** (denn (6−5)/5 × 100 = 20%). Wenn ein Journalist schreibt „Die Inflation ist um 2 Prozent gestiegen", ist unklar, ob von 3% auf 5% (2 Prozentpunkte) oder von 3% auf 3,06% (2% von 3%) gemeint ist. Korrekt wäre: „um 2 Prozentpunkte" oder „um 2% auf 3,06%".
+
+**Anwendungsbeispiele im Alltag**
+
+Die prozentuale Veränderung begegnet Ihnen überall: Bei **Preisänderungen** (Inflation, Rabatte), **Gehaltsverhandlungen** (Gehaltserhöhung in Prozent), **Aktienkursen** (Tagesperformance), **Gewichtsveränderungen** (Diäterfolge), **Umsatzentwicklung** von Unternehmen, **Mietspiegel** (Mietpreisentwicklung) und **Energiekosten** (Strompreisänderung). In der Wissenschaft wird sie als **Wachstumsrate** oder **Änderungsrate** bezeichnet. Bei mehreren aufeinanderfolgenden Perioden spricht man von **kumulierter** oder **durchschnittlicher jährlicher Wachstumsrate** (CAGR). Beispiel: Steigt ein Umsatz von 1 Million auf 1,5 Millionen in 3 Jahren, beträgt die Gesamtsteigerung 50%, aber die durchschnittliche jährliche Rate nur 14,5% (nicht 16,7%).
+
+**Sonderfall: Ausgangswert ist Null oder negativ**
+
+Wenn der Ausgangswert 0 ist, kann keine prozentuale Veränderung berechnet werden — die Division durch Null ist mathematisch nicht definiert. In diesem Fall ist nur die absolute Veränderung aussagekräftig. Bei **negativen Ausgangswerten** (z. B. Verluste, Temperaturen unter Null) wird der Betrag des Ausgangswertes als Bezugsgröße verwendet. Beispiel: Von −20 auf −10 ergibt eine prozentuale Veränderung von ((−10) − (−20)) / |−20| × 100 = +50%. Das ist mathematisch korrekt: Der Verlust hat sich halbiert, also um 50% verringert.
+
+**Zusammenhang mit dem Faktor**
+
+Der Faktor (auch Multiplikator) gibt an, das Wievielfache der neue Wert vom alten Wert beträgt: Faktor = Neuer Wert / Alter Wert. Ein Faktor von 1,25 bedeutet +25%, ein Faktor von 0,8 bedeutet −20%. Der Faktor 2 entspricht einer Verdopplung (+100%), der Faktor 0,5 einer Halbierung (−50%). Der Zusammenhang ist einfach: Prozentuale Veränderung = (Faktor − 1) × 100.`,
+    faq: [
+      {
+        frage: 'Wie berechne ich die prozentuale Veränderung?',
+        antwort: 'Die Formel lautet: ((Neuer Wert − Alter Wert) / Alter Wert) × 100. Beispiel: Von 80 auf 100 = ((100 − 80) / 80) × 100 = +25%. Ein positives Ergebnis zeigt eine Zunahme, ein negatives eine Abnahme an.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen Prozent und Prozentpunkt?',
+        antwort: 'Prozent beschreibt eine relative Veränderung, Prozentpunkte eine absolute Differenz zwischen Prozentwerten. Wenn die Arbeitslosenquote von 5% auf 6% steigt, ist das +1 Prozentpunkt, aber +20% prozentuale Veränderung (da (6−5)/5 × 100 = 20%). In Medien werden beide Begriffe oft verwechselt.',
+      },
+      {
+        frage: 'Warum ist eine Erhöhung um 50% und eine Senkung um 50% nicht gleich?',
+        antwort: 'Weil sich Prozent immer auf den aktuellen Ausgangswert beziehen. 100 + 50% = 150, aber 150 − 50% = 75 (nicht 100). Die Basis ändert sich: Bei der Erhöhung ist 100 die Basis, bei der Senkung 150. Um von 150 auf 100 zurückzukommen, brauchen Sie nur −33,3%.',
+      },
+      {
+        frage: 'Wie berechne ich die prozentuale Veränderung bei negativen Werten?',
+        antwort: 'Bei negativen Ausgangswerten wird der Betrag (absolute Wert) als Bezugsgröße verwendet. Beispiel: Von −20 auf −10 = ((−10 − (−20)) / |−20|) × 100 = (10 / 20) × 100 = +50%. Der Verlust hat sich also um 50% verringert.',
+      },
+      {
+        frage: 'Was ist der Unterschied zur prozentualen Abweichung?',
+        antwort: 'Die prozentuale Veränderung misst die Änderung eines Wertes über die Zeit (alter vs. neuer Wert). Die prozentuale Abweichung vergleicht einen Messwert mit einem Referenzwert (z. B. Soll-Wert). Die Formel ist ähnlich, aber der Kontext unterscheidet sich: Veränderung = zeitlich, Abweichung = Vergleich mit Norm.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -5078,6 +5138,7 @@ const verwandteMap: Record<string, string[]> = {
   'flaechenrechner': ['einheiten-umrechner', 'quadratmeter-rechner', 'durchschnitt-rechner', 'prozentrechner'],
   'mietrendite-rechner': ['baufinanzierung-rechner', 'grunderwerbsteuer-rechner', 'mietrechner', 'kreditrechner'],
   'geburtstag-rechner': ['tagerechner', 'countdown', 'lebenszeit-rechner', 'schlaf-rechner'],
+  'prozentuale-veraenderung-rechner': ['prozentrechner', 'dreisatz-rechner', 'durchschnitt-rechner', 'rabattrechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
