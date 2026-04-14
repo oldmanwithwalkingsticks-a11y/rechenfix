@@ -88,6 +88,7 @@ import ScheidungskostenRechner from '@/components/rechner/ScheidungskostenRechne
 import IndexmieteRechner from '@/components/rechner/IndexmieteRechner';
 import MinijobRechner from '@/components/rechner/MinijobRechner';
 import WaermepumpeRechner from '@/components/rechner/WaermepumpeRechner';
+import GehaltserhoehungRechner from '@/components/rechner/GehaltserhoehungRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -188,6 +189,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'indexmiete-rechner': IndexmieteRechner,
   'minijob-rechner': MinijobRechner,
   'waermepumpen-rechner': WaermepumpeRechner,
+  'gehaltserhoehung-rechner': GehaltserhoehungRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

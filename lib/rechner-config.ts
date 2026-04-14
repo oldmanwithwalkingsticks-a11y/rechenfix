@@ -5715,6 +5715,64 @@ Ein entscheidender Hebel für die Wirtschaftlichkeit ist der **Wärmepumpen-Stro
       },
     ],
   },
+  {
+    slug: 'gehaltserhoehung-rechner',
+    titel: 'Gehaltserhöhung-Rechner',
+    beschreibung: 'Gehaltserhöhung berechnen: Wie viel Netto bleibt von Ihrer Brutto-Erhöhung — mit Steuer- und Abgabeneffekt.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Gehaltserhöhung-Rechner 2026 — Netto-Auswirkung berechnen | Rechenfix',
+    metaDescription: 'Gehaltserhöhung berechnen: Wie viel Netto bleibt von Ihrer Brutto-Erhöhung? ✓ Grenzbelastung ✓ Jahreseffekt ✓ Inflationscheck ✓ KI-Erklärung.',
+    keywords: ['gehaltserhöhung rechner', 'gehaltserhöhung netto', 'brutto erhöhung netto', 'grenzbelastung gehalt', 'wie viel netto bleibt', 'kalte progression', 'reallohnerhöhung', 'gehaltssprung steuer', 'gehaltserhöhung berechnen', 'gehaltserhöhung wie viel netto'],
+    icon: '📈',
+    formel: 'Netto-Erhöhung = Netto(neues Brutto) − Netto(altes Brutto) | Grenzbelastung = (Brutto-Erhöhung − Netto-Erhöhung) / Brutto-Erhöhung × 100 % | Netto-Quote = Netto-Erhöhung / Brutto-Erhöhung × 100 %.',
+    beispiel: '3.500 € → 3.800 €, Steuerklasse I, keine Kirchensteuer → Brutto +300 € → Netto ca. +167 € → Grenzbelastung ca. 44,3 %.',
+    erklaerung: `**Wie viel Netto bleibt von einer Gehaltserhöhung?**
+
+Die ernüchternde Antwort: **Deutlich weniger, als Sie denken.** Eine Brutto-Erhöhung von 300 Euro führt je nach Einkommen typischerweise nur zu einer **Netto-Erhöhung von 150 bis 180 Euro** — der Rest geht an Lohnsteuer, Solidaritätszuschlag, Kirchensteuer und Sozialabgaben. Der Grund: Die sogenannte **Grenzbelastung** — also der Steuer- und Abgabensatz auf den zusätzlich verdienten Euro — liegt in Deutschland für mittlere Einkommen bei 40–50 Prozent, im Spitzenbereich sogar über 50 Prozent. Je höher Ihr Ausgangsgehalt, desto höher die Grenzbelastung. Das liegt am progressiven Einkommensteuertarif nach § 32a EStG: Jeder zusätzliche Euro wird mit einem höheren Steuersatz belastet als der durchschnittliche Euro. Unser [Brutto-Netto-Rechner](/finanzen/brutto-netto-rechner) zeigt die Details Ihrer aktuellen Abgabenbelastung.
+
+**Grenzbelastung vs. Durchschnittsbelastung erklärt**
+
+Ein häufiger Denkfehler: Viele Menschen glauben, ihre durchschnittliche Abgabenquote (z.B. 35 Prozent) gilt auch für die Gehaltserhöhung. Tatsächlich ist die **Grenzbelastung** (der Satz auf den letzten Euro) meist deutlich höher. Beispiel: Bei einem Brutto von 3.500 Euro zahlt ein Single in Steuerklasse I rund 35 Prozent Abgaben durchschnittlich — aber auf den 3.501. Euro **44–45 Prozent**. Der Grund ist der progressive Tarif: Die ersten 12.096 Euro pro Jahr sind steuerfrei (Grundfreibetrag), dann beginnt die Progression mit 14 Prozent und steigt linear bis 42 Prozent (ab 68.430 Euro zu versteuerndem Einkommen). Hinzu kommen die Sozialabgaben, die bis zur Beitragsbemessungsgrenze (7.550 Euro/Monat West für RV/AV, 5.812,50 Euro für KV/PV) voll greifen. Erst ab etwa 80.000 Euro Jahresbrutto sinkt die Grenzbelastung wieder, weil dann die BBG für KV/PV überschritten wird.
+
+**Warum "mehr Brutto" nicht proportional "mehr Netto" bedeutet**
+
+Drei Faktoren machen die Rechnung kompliziert: Erstens der **Progressionseffekt** — wer vom mittleren in den oberen Einkommensbereich wechselt, zahlt auf jeden zusätzlichen Euro einen höheren Steuersatz. Zweitens der **Wegfall des Grundfreibetrags-Effekts** — die ersten 12.096 Euro bleiben zwar auch künftig steuerfrei, aber der Vorteil wirkt sich bei der Erhöhung nicht mehr aus. Drittens die **Sozialabgaben-Plateaus**: Unter der BBG zahlen Sie auf jeden Zusatz-Euro volle 20 Prozent Sozialabgaben, über der BBG gar nichts mehr. Bei einer Gehaltserhöhung, die Sie knapp über die BBG befördert, kann die Grenzbelastung sogar kurzfristig sinken. Für die Praxis heißt das: Verhandeln Sie lieber etwas mehr, um den Nettoeffekt spürbar zu machen. Eine Erhöhung um 5 Prozent ist gefühlt oft "nur 3 Prozent netto".
+
+**Kalte Progression: Wie die Inflation die Steuerlast erhöht**
+
+Die **kalte Progression** ist einer der unterschätztesten Effekte im deutschen Steuerrecht. Wenn Ihr Gehalt "nur" um die Inflationsrate steigt (z.B. 3 Prozent bei 3 Prozent Inflation), haben Sie real kein Geld mehr — die Kaufkraft bleibt gleich. Trotzdem **rutschen Sie im Steuertarif höher**, weil die Progression wirkt. Ergebnis: Nominal haben Sie mehr Brutto, real bleibt weniger Netto. Die Bundesregierung gleicht die kalte Progression seit einigen Jahren durch jährliche Anpassungen des Grundfreibetrags und der Tarifeckwerte aus — aber nur teilweise. Für 2026 steigt der Grundfreibetrag voraussichtlich auf 12.384 Euro, der Spitzensteuersatz greift erst ab 69.798 Euro. Nutzen Sie den [Inflationsrechner](/finanzen/inflationsrechner), um zu prüfen, ob Ihre Gehaltserhöhung real überhaupt ein Plus bringt.
+
+**Alternativen zur Gehaltserhöhung: Steuerfreie Benefits**
+
+Weil die Grenzbelastung so hoch ist, lohnen sich steuerfreie Zusatzleistungen oft mehr als eine Bruttoerhöhung. Zu den wichtigsten **steuerfreien Benefits** zählen: Das **Deutschlandticket als Jobticket** (bis 49 Euro/Monat komplett steuerfrei), **Essenszuschüsse** (bis 7,50 Euro pro Arbeitstag), **Kindergarten-Zuschüsse** (unbegrenzt steuerfrei für nicht-schulpflichtige Kinder), **betriebliche Altersvorsorge** (Entgeltumwandlung bis 302 Euro/Monat steuerfrei), **Gesundheitsförderung** (bis 600 Euro/Jahr für zertifizierte Kurse), **Handy- und Laptop-Zuschüsse** sowie **Erholungsbeihilfen**. Ein Essenszuschuss von 150 Euro/Monat (7,50 € × 20 Tage) entspricht einer Brutto-Erhöhung von 250–300 Euro — Sie sparen Abgaben von rund 50 Prozent. Verhandeln Sie deshalb nicht nur über das Grundgehalt, sondern auch über die Zusatzleistungen. Für einen kompletten Gehaltsvergleich nach Branche und Region nutzen Sie unseren [Gehaltsvergleich](/finanzen/gehaltsvergleich).`,
+    faq: [
+      {
+        frage: 'Wie viel Netto bekomme ich bei einer Gehaltserhöhung von 300 Euro?',
+        antwort: 'Das hängt stark von Ihrem Ausgangsgehalt und Ihrer Steuerklasse ab. Bei einem Brutto von 3.500 € und Steuerklasse I bleiben von 300 € Brutto-Erhöhung etwa 165–175 € Netto übrig — der Rest (ca. 125–135 €) geht an Lohnsteuer, Solidaritätszuschlag und Sozialabgaben. Je höher Ihr Ausgangsgehalt, desto höher die Grenzbelastung. Bei 5.000 € Brutto verbleiben von 300 € Erhöhung oft nur noch 150–160 € Netto.',
+      },
+      {
+        frage: 'Warum bleibt so wenig Netto von der Brutto-Erhöhung?',
+        antwort: 'Wegen der Grenzbelastung. Das deutsche Steuersystem ist progressiv: Auf jeden zusätzlichen Euro zahlen Sie einen höheren Steuersatz als auf den durchschnittlichen Euro. Bei mittleren Einkommen (40.000–60.000 € brutto/Jahr) liegt die Grenzbelastung inkl. Sozialabgaben bei 40–50 %. Bei höheren Einkommen knapp unter der Beitragsbemessungsgrenze sogar über 50 %. Nur Spitzenverdiener oberhalb der BBG sind leicht entlastet, weil dort keine Sozialabgaben mehr anfallen.',
+      },
+      {
+        frage: 'Was ist die Grenzbelastung?',
+        antwort: 'Die Grenzbelastung ist der Steuer- und Abgabensatz, der auf den nächsten verdienten Euro anfällt — anders als die durchschnittliche Abgabenquote auf das gesamte Einkommen. Formel: (Brutto-Erhöhung − Netto-Erhöhung) / Brutto-Erhöhung × 100 %. Für die Frage, wie viel eine Gehaltserhöhung "netto bringt", ist die Grenzbelastung entscheidend. In Deutschland liegt sie für die meisten Arbeitnehmer zwischen 40 % und 55 %.',
+      },
+      {
+        frage: 'Lohnt sich eine Gehaltserhöhung immer?',
+        antwort: 'Grundsätzlich ja — auch wenn die Hälfte an den Staat geht, bleibt netto immer ein Plus. Achtung bei bestimmten Schwellen: Wenn Sie durch die Erhöhung Anspruch auf Sozialleistungen (z.B. Wohngeld, Kinderzuschlag, Bürgergeld) verlieren, kann der Netto-Effekt im Extremfall sogar negativ sein. Auch bei Familienversicherten-Einkommensgrenzen oder beim Wechsel in die private Krankenversicherung (JAEG) kann eine Erhöhung unerwartete Nebenwirkungen haben. Mit unserem Rechner sehen Sie den reinen Steuer- und Abgabeneffekt.',
+      },
+      {
+        frage: 'Welche steuerfreien Alternativen gibt es zur Gehaltserhöhung?',
+        antwort: 'Viele. Die wichtigsten steuerfreien Benefits: Jobticket/Deutschlandticket (49 €/Monat), Essenszuschuss (bis 7,50 €/Arbeitstag), Kindergarten-Zuschuss (unbegrenzt für nicht-schulpflichtige Kinder), betriebliche Altersvorsorge (bis 302 €/Monat), Gesundheitsförderung (600 €/Jahr), Handy-/Laptop-Zuschuss, Inflationsausgleichsprämie (bis 3.000 €, befristet), Sachbezüge bis 50 €/Monat. Weil keine Abgaben anfallen, entspricht z.B. ein Jobticket von 49 € einer Brutto-Erhöhung von 80–100 €.',
+      },
+      {
+        frage: 'Was ist die kalte Progression?',
+        antwort: 'Die kalte Progression beschreibt den Effekt, dass inflationsbedingte Gehaltserhöhungen real kein Plus bringen, aber steuerlich doch zu einer höheren Belastung führen. Beispiel: Inflation 3 %, Gehaltserhöhung 3 % — real haben Sie keinen Cent mehr Kaufkraft. Trotzdem rutschen Sie im progressiven Steuertarif nach oben und zahlen einen höheren Durchschnittssteuersatz. Die Bundesregierung gleicht die kalte Progression durch jährliche Anpassungen des Grundfreibetrags und der Tarifeckwerte teilweise aus.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -5728,6 +5786,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'gehaltserhoehung-rechner',
   'waermepumpen-rechner',
   'minijob-rechner',
   'indexmiete-rechner',
@@ -5891,6 +5950,7 @@ const verwandteMap: Record<string, string[]> = {
   'indexmiete-rechner': ['mietrechner', 'nebenkosten-rechner', 'inflationsrechner', 'quadratmeter-rechner'],
   'minijob-rechner': ['brutto-netto-rechner', 'stundenlohn-rechner', 'teilzeit-rechner', 'ueberstunden-rechner'],
   'waermepumpen-rechner': ['heizkosten-rechner', 'stromkosten-rechner', 'stromvergleich-rechner', 'nebenkosten-rechner'],
+  'gehaltserhoehung-rechner': ['brutto-netto-rechner', 'gehaltsvergleich', 'inflationsrechner', 'stundenlohn-rechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {

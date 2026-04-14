@@ -108,6 +108,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'splitting': 'WISO Steuer berechnet automatisch, ob Einzel- oder Zusammenveranlagung für Sie günstiger ist.',
     'kindergeld': 'WISO Steuer führt die Günstigerprüfung automatisch durch und holt das Maximum für Familien heraus.',
     'erbschaft': 'Erbschaft in der Steuererklärung korrekt angeben — WISO Steuer führt Sie durch alle Angaben.',
+    'gehaltserhoehung': 'Bei Gehaltssprung steigt oft die Steuerlast — WISO Steuer holt das Maximum aus Ihrer Steuererklärung.',
   },
   smartsteuer: {
     'brutto-netto': 'Online-Steuererklärung machen und Geld vom Finanzamt zurückholen.',
