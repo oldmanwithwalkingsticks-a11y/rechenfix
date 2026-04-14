@@ -29,7 +29,16 @@
       "Bash(xargs grep:*)",
       "Bash(powershell -Command \"Get-Content 'C:\\\\Users\\\\a-reino\\\\.claude\\\\projects\\\\G--Rechenfix\\\\030294b8-27d0-4138-b6a8-7d629f1e4b20.jsonl' | Select-Object -Last 5\")",
       "Bash(powershell -Command \"Get-Content 'C:\\\\Users\\\\a-reino\\\\.claude\\\\projects\\\\G--Rechenfix\\\\030294b8-27d0-4138-b6a8-7d629f1e4b20.jsonl' | Select-Object -First 3\")",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Read(//c/Users/a-reino/.claude/**)",
+      "Bash(git -C G:/Rechenfix status)",
+      "Bash(git -C G:/Rechenfix diff CLAUDE.md)",
+      "Bash(git -C G:/Rechenfix add CLAUDE.md)",
+      "Bash(git -C G:/Rechenfix commit -m \"docs: add CLAUDE.md project rules\")",
+      "Bash(git -C G:/Rechenfix push)",
+      "Bash(grep -c '\\\\${' G:/Rechenfix/lib/rechner-config.ts)",
+      "Bash(node scripts/split-rechner.mjs)",
+      "Bash(wc -l lib/rechner-config/*.ts components/ui/NummerEingabe.tsx app/sitemap.ts)"
     ]
   }
 }

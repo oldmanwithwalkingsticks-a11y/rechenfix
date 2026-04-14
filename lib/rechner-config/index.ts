@@ -88,6 +88,11 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'hundejahre-rechner',
+  'dachflaechen-rechner',
+  'binaer-rechner',
+  'arbeitstage-rechner',
+  'gmbh-geschaeftsfuehrer-rechner',
   'uhrzeitrechner',
   'schwangerschaft-gewicht-rechner',
   'photovoltaik-rechner',
@@ -271,6 +276,11 @@ const verwandteMap: Record<string, string[]> = {
   'photovoltaik-rechner': ['waermepumpen-rechner', 'stromkosten-rechner', 'stromvergleich-rechner', 'heizkosten-rechner'],
   'schwangerschaft-gewicht-rechner': ['ssw-rechner', 'geburtstermin-rechner', 'bmi-rechner', 'kalorienrechner'],
   'uhrzeitrechner': ['tagerechner', 'arbeitszeitrechner', 'countdown', 'ueberstunden-rechner'],
+  'gmbh-geschaeftsfuehrer-rechner': ['brutto-netto-rechner', 'gehaltsvergleich', 'minijob-rechner', 'freelancer-stundensatz-rechner'],
+  'arbeitstage-rechner': ['tagerechner', 'urlaubstage-rechner', 'arbeitszeitrechner', 'ueberstunden-rechner'],
+  'binaer-rechner': ['einheiten-umrechner', 'wissenschaftlicher-taschenrechner', 'bruchrechner', 'prozentrechner'],
+  'dachflaechen-rechner': ['photovoltaik-rechner', 'tapetenbedarf-rechner', 'quadratmeter-rechner', 'flaechenrechner'],
+  'hundejahre-rechner': ['lebenszeit-rechner', 'geburtstag-rechner', 'tagerechner', 'countdown'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {

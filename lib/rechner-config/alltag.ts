@@ -1086,4 +1086,92 @@ Hinweis: Diese Werte gelten ohne Berücksichtigung der Sommerzeit. In der Sommer
       },
     ],
   },
+  {
+    slug: 'hundejahre-rechner',
+    titel: 'Hundejahre-Rechner',
+    beschreibung: 'Hundejahre in Menschenjahre umrechnen — differenziert nach Größe und Rasse. Vergessen Sie die alte 1:7-Formel!',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Hundejahre-Rechner — Hundealter in Menschenjahre | Rechenfix',
+    metaDescription: 'Hundealter in Menschenjahre umrechnen ✓ Differenziert nach Größe und Rasse ✓ Wissenschaftliche Formel ✓ Mit Lebensphase und KI-Erklärung.',
+    keywords: ['hundejahre rechner', 'hundealter menschenjahre', 'hundejahre umrechnen', 'wie alt ist mein hund', 'hundealter rasse', 'hunde lebenserwartung'],
+    icon: '🐕',
+    formel: 'Jahr 1 = 15 Menschenjahre | Jahr 2 = +9 (→24) | Ab Jahr 3: +4/+5/+6/+7 pro Hundejahr (klein/mittel/groß/Riese)',
+    beispiel: 'Ein 5 Jahre alter Labrador (groß): 15 + 9 + 3 × 6 = 42 Menschenjahre. Ein 5 Jahre alter Chihuahua (klein): 15 + 9 + 3 × 4 = 36 Menschenjahre.',
+    erklaerung: `**Die 1:7-Formel ist überholt — so alt ist Ihr Hund wirklich**
+
+Generationen von Hundehaltern haben mit der Faustformel „1 Hundejahr = 7 Menschenjahre" gerechnet. Doch diese Regel ist biologisch nicht haltbar: Hunde altern im ersten Lebensjahr extrem schnell — sie sind mit einem Jahr bereits geschlechtsreif und ausgewachsen, was beim Menschen ungefähr 15 Jahren entspricht. Danach verlangsamt sich der Alterungsprozess. Und: **Große Hunde altern schneller als kleine**. Ein Chihuahua lebt oft 15 Jahre, eine Dogge selten länger als 9 Jahre. Unser Hundejahre-Rechner nutzt eine wissenschaftlich fundierte, differenzierte Formel.
+
+**Die moderne Formel**
+
+- **Jahr 1:** Ein Welpe wird vom Neugeborenen zum Jugendlichen. Das entspricht rund **15 Menschenjahren**.
+- **Jahr 2:** Junghund bis jung-erwachsen. Plus **9 Menschenjahre** → Gesamt 24.
+- **Ab Jahr 3:** Lineare Alterung, aber unterschiedlich je nach Größe:
+  - **Kleine Hunde** (< 10 kg): +4 Menschenjahre/Jahr
+  - **Mittlere Hunde** (10–25 kg): +5 Menschenjahre/Jahr
+  - **Große Hunde** (25–45 kg): +6 Menschenjahre/Jahr
+  - **Riesenrassen** (> 45 kg): +7 Menschenjahre/Jahr
+
+Für einen 8-jährigen Labrador (25 kg, groß) rechnen wir: 15 + 9 + 6 × 6 = **60 Menschenjahre**. Ein gleichaltriger Chihuahua (3 kg, klein) entspricht nur 15 + 9 + 6 × 4 = **48 Menschenjahre**.
+
+**Warum altern große Hunde schneller?**
+
+Der Unterschied in der Lebenserwartung zwischen Klein- und Großhunden ist wissenschaftlich gut dokumentiert. Große Hunde wachsen schneller, haben einen höheren Stoffwechsel und oft eine höhere Belastung von Gelenken, Herz und anderen Organen. Forscher vermuten, dass das **schnelle Wachstum in den ersten Monaten zu schnellerem Zellverschleiß** führt. Eine Dogge wächst in ihrem ersten Jahr auf über 70 kg — ein Labrador auf 25 kg, ein Chihuahua auf 3 kg. Je größer die Körpermasse, desto belasteter die Biologie.
+
+**Die Lebenserwartung nach Größe**
+
+Die durchschnittliche Lebenserwartung (Quellen: DOGGY IQ 2021, UC Davis):
+
+- **Klein (Chihuahua, Yorkie, Dackel):** 14–16 Jahre
+- **Mittel (Beagle, Mops, Cocker):** 12–14 Jahre
+- **Groß (Labrador, Schäfer, Boxer):** 10–12 Jahre
+- **Riese (Dogge, Bernhardiner, Neufundländer):** 7–10 Jahre
+
+Natürlich gibt es individuelle Ausreißer: Der älteste je dokumentierte Hund, der Australian Cattle Dog „Bluey", wurde 29 Jahre und 5 Monate alt.
+
+**Die Lebensphasen des Hundes**
+
+Hunde durchlaufen im Wesentlichen fünf Phasen, die im Alter des Menschen folgende Entsprechung haben:
+
+1. **Welpe (0–1 Jahr):** Kindheit und Pubertät im Zeitraffer
+2. **Junghund (1–2 Jahre):** Jugendlicher/junger Erwachsener
+3. **Erwachsen (2–6 Jahre):** Blütezeit — der Hund ist körperlich und mental am besten drauf
+4. **Reif (6–10 Jahre):** Mittleres Alter — die ersten grauen Haare am Fang zeigen sich
+5. **Senior (ab 10 Jahren je nach Rasse):** Ältere und betagte Tiere brauchen besondere Pflege
+
+**Was Hundebesitzer im Alter beachten sollten**
+
+Ein älterer Hund hat andere Bedürfnisse als ein junger: **weichere Gelenke**, **leichter verdauliches Futter**, **mehr Ruhephasen** und **regelmäßige Tierarzt-Checks**. Ab dem Eintritt in die Senior-Phase sollte mindestens einmal jährlich ein Gesundheits-Check gemacht werden — inklusive Blutbild, um Frühzeichen von Nieren-, Leber- oder Herzproblemen zu erkennen. Auch Zahnpflege wird wichtiger, da Zahnprobleme im Alter häufig sind.
+
+**Kuriose Hunde-Jahres-Fakten**
+
+- Der älteste Hund der Welt (laut Guinness-Buch) war Bluey, ein Australian Cattle Dog, 29 Jahre alt.
+- Ein Welpe öffnet nach ca. 10–14 Tagen die Augen — Menschenbabys nach wenigen Tagen.
+- Die meisten Hunde schlafen 12–14 Stunden am Tag — Welpen sogar bis 20 Stunden.
+- Ein erwachsener Hund hat 42 Zähne, ein Mensch nur 32.
+
+**Weitere Rechner:** Für Ihr eigenes Lebensalter und wie viele Tage Sie schon leben nutzen Sie den Lebenszeit-Rechner. Für Geburtstage den Geburtstag-Rechner. Für Tage zwischen zwei Daten den Tagerechner.`,
+    faq: [
+      {
+        frage: 'Stimmt die alte Formel 1 Hundejahr = 7 Menschenjahre nicht mehr?',
+        antwort: 'Nein, diese Faustformel ist veraltet und wissenschaftlich nicht haltbar. Hunde altern im ersten Lebensjahr viel schneller (entspricht ca. 15 Menschenjahren), im zweiten immer noch schneller (+9), danach langsamer (+4 bis +7 je nach Größe). Außerdem altern kleine Hunde deutlich langsamer als große — unsere Formel berücksichtigt beide Faktoren.',
+      },
+      {
+        frage: 'Wie alt wird ein Hund durchschnittlich?',
+        antwort: 'Die Lebenserwartung hängt stark von der Größe ab: Kleine Hunde (unter 10 kg) werden 14–16 Jahre alt, mittelgroße 12–14, große 10–12 und Riesenrassen wie die Dogge nur 7–10 Jahre. Individuelle Faktoren wie Ernährung, Bewegung, Veranlagung und tierärztliche Versorgung spielen eine große Rolle.',
+      },
+      {
+        frage: 'Warum altern große Hunde schneller?',
+        antwort: 'Große Hunde wachsen in ihrem ersten Jahr enorm schnell — ein Welpe einer Dogge kann in 12 Monaten auf über 70 kg kommen. Dieses schnelle Wachstum führt zu höherem Zellverschleiß und belastet Gelenke, Herz und innere Organe stärker. Kleine Hunde wachsen moderater und haben dadurch eine biologische Reserve für ein längeres Leben.',
+      },
+      {
+        frage: 'Ab wann gilt ein Hund als Senior?',
+        antwort: 'Das hängt von der Größe ab: Kleine Hunde gelten ab etwa 10–12 Jahren als Senior, mittelgroße ab 8–10, große ab 7–8 und Riesenrassen bereits ab 5–6 Jahren. Als Faustregel: Wenn ein Hund etwa 70 % seiner durchschnittlichen Lebenserwartung erreicht hat, ist er in der Senior-Phase angelangt und sollte häufiger zum Tierarzt.',
+      },
+      {
+        frage: 'Wie kann ich das Leben meines Hundes verlängern?',
+        antwort: 'Die wichtigsten Faktoren sind: ausgewogene, hochwertige Ernährung (nicht überfüttern — Übergewicht verkürzt das Leben um 1–2 Jahre!), regelmäßige Bewegung angepasst an Größe und Alter, jährliche Vorsorge-Checks beim Tierarzt, Zahnpflege, Impfschutz und geistige Auslastung. Kastration verlängert nachweislich die Lebenserwartung bei vielen Rassen.',
+      },
+    ],
+  },
 ];

@@ -706,4 +706,85 @@ Wer das Abitur nicht besteht, kann die Qualifikationsphase unter bestimmten Vora
       },
     ],
   },
+  {
+    slug: 'binaer-rechner',
+    titel: 'Binär-Rechner',
+    beschreibung: 'Zahlen zwischen Dezimal, Binär, Oktal und Hexadezimal live umrechnen — mit Rechenweg und ASCII-Code.',
+    kategorie: 'Mathe & Schule',
+    kategorieSlug: 'mathe',
+    metaTitle: 'Binär-Rechner — Dezimal, Binär, Hex & Oktal umrechnen | Rechenfix',
+    metaDescription: 'Binär-Rechner kostenlos ✓ Dezimal ↔ Binär ↔ Oktal ↔ Hexadezimal ✓ Mit Rechenweg und Zweierpotenzen ✓ Mit KI-Erklärung.',
+    keywords: ['binär rechner', 'dezimal binär umrechnen', 'binärcode', 'hex umrechnen', 'oktal', 'zahlensystem umrechnen', 'binäre zahlen', 'zweierpotenz'],
+    icon: '💻',
+    formel: 'Dezimalzahl = Summe der Zweierpotenzen: 42 = 32 + 8 + 2 = 2⁵ + 2³ + 2¹ → Binär 101010',
+    beispiel: 'Dezimal 42 → Binär 101010 → Oktal 52 → Hexadezimal 2A. ASCII-Code 42 = "*".',
+    erklaerung: `**Zahlensysteme — warum es mehr als Dezimal gibt**
+
+In unserem Alltag rechnen wir im **Dezimalsystem** (Basis 10), doch in der Informatik und Elektronik spielen andere Zahlensysteme eine zentrale Rolle. Computer arbeiten grundlegend im **Binärsystem** (Basis 2), weil elektronische Schaltkreise nur zwei Zustände kennen: Strom ein (1) oder Strom aus (0). Um lange Bitfolgen kompakter darzustellen, wurden das **Oktalsystem** (Basis 8) und das **Hexadezimalsystem** (Basis 16) eingeführt. Unser Binär-Rechner wandelt Zahlen live zwischen allen vier Systemen um und zeigt den Rechenweg.
+
+**Das Binärsystem — nur Nullen und Einsen**
+
+Im Binärsystem wird jede Ziffer (Bit) als Potenz von 2 interpretiert. Die rechte Stelle ist 2⁰ = 1, dann 2¹ = 2, dann 2² = 4, dann 2³ = 8 und so weiter. Die Dezimalzahl 42 lässt sich als **101010**₂ schreiben: 1·32 + 0·16 + 1·8 + 0·4 + 1·2 + 0·1 = 32 + 8 + 2 = 42. Jedes Bit sagt aus, ob die entsprechende Zweierpotenz in der Summe enthalten ist oder nicht.
+
+**Das Hexadezimalsystem — kompakt und praktisch**
+
+Hexadezimal verwendet 16 Ziffern: 0–9 und dann A (=10), B (=11), C (=12), D (=13), E (=14), F (=15). Jede Hex-Ziffer entspricht genau **4 Bits** (einem Nibble), was die Umrechnung zwischen Binär und Hex sehr einfach macht. **2A**₁₆ = 0010 1010₂ = 42₁₀. Hex wird überall verwendet, wo Bytes kompakt dargestellt werden müssen: bei Farbcodes im Web (#FF0000 = Rot), in Speicheradressen, bei MAC-Adressen oder in Hashes.
+
+**Das Oktalsystem — historisch wichtig**
+
+Oktalzahlen (Basis 8) nutzen die Ziffern 0–7. Eine Oktalziffer entspricht 3 Bits. Früher wurden 12- und 24-Bit-Wörter in Oktal ausgedrückt — heute wird Oktal vor allem in Unix-Dateirechten verwendet: "chmod 755" bedeutet rwxr-xr-x. In modernen Systemen ist Oktal selten, doch im Studium und in älteren Codebases begegnet es einem nach wie vor.
+
+**Umrechnung Dezimal → Binär**
+
+Der klassische Weg: Man teilt die Zahl fortlaufend durch 2 und notiert die Reste von unten nach oben. Beispiel 42:
+- 42 ÷ 2 = 21 Rest 0
+- 21 ÷ 2 = 10 Rest 1
+- 10 ÷ 2 = 5 Rest 0
+- 5 ÷ 2 = 2 Rest 1
+- 2 ÷ 2 = 1 Rest 0
+- 1 ÷ 2 = 0 Rest 1
+
+Von unten nach oben gelesen: **101010**. Unser Rechner erledigt das in Millisekunden und zeigt zusätzlich die beteiligten Zweierpotenzen.
+
+**Umrechnung Binär → Dezimal**
+
+Einfacher Weg: Jedes Bit mit seiner Wertigkeit multiplizieren und aufsummieren. **11001**₂ = 1·16 + 1·8 + 0·4 + 0·2 + 1·1 = 25.
+
+**ASCII — Buchstaben als Zahlen**
+
+Der **ASCII-Code** (American Standard Code for Information Interchange) ordnet jedem druckbaren Zeichen eine Zahl zwischen 32 und 126 zu. Der Buchstabe **A** ist 65, **a** ist 97, **0** (die Ziffer) ist 48 und das **Leerzeichen** ist 32. Computer speichern Texte intern als ASCII- oder UTF-8-Codes. Unser Rechner zeigt bei Werten zwischen 32 und 127 automatisch das zugehörige ASCII-Zeichen an — eine praktische Hilfe bei Kryptografie-Aufgaben oder Programmier-Hausaufgaben.
+
+**Einsatzgebiete in der Praxis**
+
+- **Webentwicklung:** Farbangaben in CSS (#FFAA00), RGB → Hex
+- **Embedded Systems:** Ein-/Ausgänge bit-genau setzen
+- **Netzwerktechnik:** IP-Adressen (IPv4 dezimal, IPv6 hexadezimal), Subnetzmasken binär
+- **Kryptografie:** Hash-Werte (SHA-256, MD5) werden hex ausgegeben
+- **Dateirechte:** Unix-Rechte in Oktal (755, 644)
+- **Schule/Studium:** Informatik-Grundlagen, Technische Informatik
+
+**Weitere Rechner:** Für Einheitenumrechnungen (kg, m, °C) nutzen Sie den Einheiten-Umrechner. Für komplexe mathematische Ausdrücke den wissenschaftlichen Taschenrechner. Für Bruchrechnung den Bruchrechner.`,
+    faq: [
+      {
+        frage: 'Wie wandle ich eine Dezimalzahl in Binär um?',
+        antwort: 'Dividieren Sie die Zahl fortlaufend durch 2 und notieren Sie die Reste. Die Reste von unten nach oben ergeben die Binärzahl. Alternativ: Suchen Sie die größten Zweierpotenzen (1, 2, 4, 8, 16, 32, 64, 128, …), die kleiner oder gleich der Zahl sind, und setzen Sie Einsen an diesen Stellen. Unser Rechner erledigt das automatisch und zeigt den Rechenweg.',
+      },
+      {
+        frage: 'Was bedeuten die Buchstaben im Hex-System?',
+        antwort: 'Das Hexadezimalsystem hat 16 Ziffern. Nach 0–9 kommen die Buchstaben A (=10), B (=11), C (=12), D (=13), E (=14) und F (=15). So ist z. B. 1F = 31 in dezimal (16 + 15). Jede Hex-Ziffer entspricht genau 4 Bits, was die Umrechnung von/zu Binär extrem einfach macht.',
+      },
+      {
+        frage: 'Warum nutzen Computer Binär?',
+        antwort: 'Elektronische Schaltkreise (Transistoren) kennen nur zwei Zustände: Strom fließt (1) oder Strom fließt nicht (0). Diese zwei Zustände sind robust und leicht zu unterscheiden. Alle Daten — Zahlen, Texte, Bilder, Videos — werden deshalb intern als Folgen von Nullen und Einsen gespeichert. Höhere Zahlensysteme wie Hex dienen nur als menschenfreundliche Darstellung.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen Bit und Byte?',
+        antwort: 'Ein **Bit** ist die kleinste Informationseinheit — eine einzige 0 oder 1. Ein **Byte** besteht aus 8 Bit und kann Werte von 0 bis 255 (binär: 00000000 bis 11111111) darstellen. Ein Byte reicht für ein ASCII-Zeichen. 1 Kilobyte (KB) = 1024 Byte (streng: Kibibyte), 1 Megabyte (MB) = 1024 KB usw.',
+      },
+      {
+        frage: 'Wie berechne ich ASCII-Codes?',
+        antwort: 'Der ASCII-Code ist eine feste Tabelle: A = 65, B = 66, …, Z = 90, a = 97, b = 98, …, z = 122, Ziffer 0 = 48, …, Ziffer 9 = 57. Wenn Sie eine Zahl zwischen 32 und 127 eingeben, zeigt unser Rechner automatisch das zugehörige Zeichen. Werte unter 32 sind Steuerzeichen (nicht druckbar), Werte über 127 sind erweiterte Zeichen (z. B. Umlaute, nicht standardisiert im reinen ASCII).',
+      },
+    ],
+  },
 ];

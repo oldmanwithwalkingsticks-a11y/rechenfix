@@ -779,4 +779,81 @@ Unser Rechner liefert eine erste Orientierung. Der tatsächliche Ertrag hängt v
       },
     ],
   },
+  {
+    slug: 'dachflaechen-rechner',
+    titel: 'Dachflächen-Rechner',
+    beschreibung: 'Dachfläche berechnen: Satteldach, Pultdach, Walmdach oder Flachdach — mit Material- und PV-Potenzial.',
+    kategorie: 'Wohnen & Energie',
+    kategorieSlug: 'wohnen',
+    metaTitle: 'Dachflächen-Rechner — Dachfläche online berechnen | Rechenfix',
+    metaDescription: 'Dachfläche berechnen für Sattel-, Pult-, Walm- und Flachdach ✓ Mit Dachneigung ✓ Ziegelbedarf ✓ PV-Potenzial ✓ Mit KI-Erklärung.',
+    keywords: ['dachfläche berechnen', 'dachflächen rechner', 'dachneigung', 'satteldach fläche', 'pultdach berechnen', 'walmdach fläche', 'dachziegel berechnen', 'sparrenlänge'],
+    icon: '🏠',
+    formel: 'Satteldach: 2 × Länge × (Breite/2) ÷ cos(Neigung) | Pultdach: Länge × Breite ÷ cos(Neigung) | Flachdach: Länge × Breite',
+    beispiel: 'Haus 10 × 8 m mit Satteldach bei 35° Neigung: Sparrenlänge = 4 m ÷ cos(35°) ≈ 4,88 m → Fläche = 2 × 10 × 4,88 = 97,7 m².',
+    erklaerung: `**Dachfläche berechnen — so funktioniert's**
+
+Die Dachfläche ist die Grundlage für fast jede Dacharbeit: Eindeckung, Dämmung, PV-Anlage, Regenrinnen, Schneefang, Tauwasserbilanz. Im Gegensatz zur Grundfläche des Hauses ist die Dachfläche durch die **Neigung** größer — und der Unterschied kann je nach Dachform erheblich sein. Unser Dachflächen-Rechner unterstützt die vier gebräuchlichsten Dachformen in Deutschland: Satteldach, Pultdach, Walmdach und Flachdach.
+
+**Satteldach — die häufigste Form**
+
+Rund 60 % aller Häuser in Deutschland haben ein Satteldach. Es besteht aus zwei gleich großen geneigten Rechtecken, die an einem First zusammenstoßen. Die Dachfläche ergibt sich aus: **2 × Länge × Sparrenlänge**, wobei die Sparrenlänge (Strecke vom Traufpunkt bis zum First) mit der Neigung zusammenhängt: **Sparrenlänge = (Breite/2) / cos(Neigung)**. Bei einer Grundbreite von 8 m und 35° Neigung rechnet man: 4 m / cos(35°) ≈ 4,88 m. Die Gesamtfläche beträgt dann z. B. bei 10 m Haustiefe 2 × 10 × 4,88 ≈ 97,7 m². Vergleicht man dies mit der reinen Grundfläche (80 m²), sind das **22 % mehr Material** — ein Effekt, der bei Kostenschätzungen oft unterschätzt wird.
+
+**Pultdach — modern und effizient**
+
+Das Pultdach ist eine einzelne, geneigte Dachfläche. Es wird beliebter, weil es bei PV-Anlagen eine große, einheitlich ausgerichtete Fläche bietet. Die Berechnung ist einfacher: **Länge × Breite / cos(Neigung)**. Dachneigungen liegen typischerweise zwischen 5° und 25°.
+
+**Walmdach — repräsentativ, aber komplexer**
+
+Beim Walmdach sind alle vier Seiten geneigt. Die genaue Flächenberechnung erfordert Trapez- und Dreiecksflächen. Als schnelle **Näherung** verwenden wir: **Grundfläche / cos(Neigung)**, was gute Werte liefert, solange die Neigung aller Seiten gleich ist. Für komplexe Walmdächer mit unterschiedlichen Neigungen empfehlen wir eine fachliche Aufmessung.
+
+**Flachdach — geometrisch einfach**
+
+Ein Flachdach hat eine Neigung von weniger als 10° (oft 2–5° für Entwässerung). Rechnerisch entspricht die Dachfläche der Grundfläche, ggf. zuzüglich Dachüberstand. Für Abdichtungen, Dachbegrünung oder Aufstell-PV ist genau diese Rechnung relevant.
+
+**Der Dachüberstand**
+
+Ein Dachüberstand (0,3–0,8 m) schützt die Fassade vor Regen und Sonne. Er vergrößert die Dachfläche entsprechend. Unser Rechner berücksichtigt den Überstand automatisch: Länge und Breite werden um 2 × Überstand erhöht, bevor die Dachfläche berechnet wird. Typische Werte: 30 cm in Neubauten, bis zu 80 cm in alpinen Regionen zum Schutz vor Schnee.
+
+**Dachziegel-Bedarf**
+
+Als Richtwert gilt: Je nach Ziegelart (Doppel-S, Biberschwanz, Frankfurter Pfanne, Flachdachpfanne) werden **10–15 Ziegel pro m²** benötigt. Unser Rechner kalkuliert mit 12 Stück/m² und schlägt 5 % Verschnitt auf. Beispiel: Bei 98 m² Fläche → 98 × 12 × 1,05 ≈ 1.235 Ziegel. Der tatsächliche Bedarf hängt vom gewählten Modell ab — fragen Sie den Dachdecker oder den Baustoffhandel nach dem exakten Verlegewert.
+
+**Dachlatten und Unterspannbahn**
+
+- **Dachlatten:** Richtwert ca. 3,3 lfm pro m² Dachfläche (Querlatten in 30 cm Abstand + Konterlatten)
+- **Unterspannbahn:** Fläche + 15 % Verschnitt (für Überlappungen an den Rändern)
+
+**PV-Potenzial — wie viel Strom kann das Dach liefern?**
+
+Pro Kilowatt-Peak (kWp) einer modernen PV-Anlage benötigen Sie rund **5,5 m² Modulfläche**. Nicht die gesamte Dachfläche ist nutzbar — bei Schrägdächern sind es rund 70 %, bei Flachdächern (aufgeständert) nur 50 %, da die Module sich gegenseitig nicht verschatten dürfen. Der Ertrag liegt in Deutschland bei durchschnittlich **950 kWh/kWp/Jahr**. Ein Satteldach mit 98 m² Südausrichtung könnte also ca. 12 kWp liefern = rund 11.400 kWh/Jahr — mehr als der Verbrauch eines typischen Einfamilienhauses.
+
+**Dachneigung und Niederschlagsabfluss**
+
+Die Dachneigung beeinflusst, wie schnell Regen- und Schmelzwasser abfließen. Je steiler, desto schneller — aber auch desto größer die Dachfläche und damit das Materialvolumen. Für Satteldächer sind 30–45° üblich, Pultdächer haben meist 15–25°. Die Mindestneigung hängt von der Eindeckung ab (z. B. Ziegel ab 22°, Blech ab 3°).
+
+**Weitere Rechner:** Für die PV-Planung nutzen Sie den Photovoltaik-Rechner. Für Wandflächen und Tapetenbedarf den Tapetenbedarf-Rechner. Für einfache Flächenberechnungen den Quadratmeter-Rechner.`,
+    faq: [
+      {
+        frage: 'Wie berechne ich die Fläche eines Satteldachs?',
+        antwort: 'Die Dachfläche eines Satteldachs berechnen Sie mit: 2 × Länge × (Breite / 2) / cos(Neigung). Die Division durch den Kosinus der Neigung berücksichtigt, dass die Sparrenlänge länger ist als die halbe Hausbreite. Beispiel: Haus 10 × 8 m, 35° Neigung → Sparrenlänge 4,88 m → Gesamtfläche 97,7 m². Unser Rechner macht das automatisch.',
+      },
+      {
+        frage: 'Welche Dachneigung ist üblich?',
+        antwort: 'Satteldächer haben typischerweise 30–45°, Pultdächer 5–25°, Walmdächer 22–45°, Flachdächer weniger als 10° (meist 2–5° zur Entwässerung). Die optimale Neigung für eine PV-Anlage liegt in Deutschland bei rund 30–35° Süd. Bei der Wahl spielen auch Eindeckung (Mindestneigung der Ziegel) und Statik eine Rolle.',
+      },
+      {
+        frage: 'Wie viele Dachziegel brauche ich pro m²?',
+        antwort: 'Je nach Modell: 10–15 Ziegel/m². Doppel-S-Pfannen liegen bei 10,5/m², Frankfurter Pfannen bei 10,2/m², Biberschwanzziegel bei 34/m² (wegen kleinerem Format). Plus 5 % Verschnitt. Fragen Sie den Baustoffhandel nach dem exakten Verlegewert für Ihr gewähltes Modell — Hersteller geben diesen an.',
+      },
+      {
+        frage: 'Wie groß kann meine PV-Anlage auf diesem Dach werden?',
+        antwort: 'Faustregel: Pro kWp benötigen Sie rund 5,5 m² Modulfläche. Bei Schrägdächern sind etwa 70 % der Fläche nutzbar (Abstände zu Rand, Kamin, Dachfenstern). Bei 100 m² Dachfläche ergibt das ca. 70 m² nutzbar → ~12 kWp Anlagengröße. Der Jahresertrag beträgt in Deutschland rund 950 kWh pro kWp. Unser Rechner zeigt das PV-Potenzial automatisch.',
+      },
+      {
+        frage: 'Was ist der Dachüberstand und warum wichtig?',
+        antwort: 'Der Dachüberstand ist der Bereich, der über die Fassade hinausragt. Er schützt vor Schlagregen, senkt die sommerliche Aufheizung und verlängert die Lebensdauer der Fassade. Typische Werte: 30 cm bei modernen Neubauten, 50–80 cm in Bergregionen oder bei traditionellen Häusern. Der Überstand vergrößert auch die zu deckende Dachfläche und muss bei der Materialberechnung berücksichtigt werden.',
+      },
+    ],
+  },
 ];

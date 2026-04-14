@@ -126,6 +126,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'ueberstunden': 'Arbeitszeiten und Überstunden sauber dokumentieren.',
     'freelancer': 'Angebote, Rechnungen und Buchhaltung für Freelancer — alles in einem Tool.',
     'skonto': 'Rechnungen mit Skonto-Konditionen erstellen und Zahlungsfristen verwalten — mit Lexware Office.',
+    'gmbh': 'Als GmbH-Geschäftsführer? Lexware Office übernimmt Buchhaltung, Rechnungen und Lohnabrechnung in einem Tool.',
   },
   check24: {
     'strom': 'Stromtarife vergleichen und bis zu 500 € pro Jahr sparen.',

@@ -98,6 +98,11 @@ import AbiRechner from '@/components/rechner/AbiRechner';
 import PhotovoltaikRechner from '@/components/rechner/PhotovoltaikRechner';
 import SchwangerschaftGewichtRechner from '@/components/rechner/SchwangerschaftGewichtRechner';
 import UhrzeitRechner from '@/components/rechner/UhrzeitRechner';
+import GmbhGfRechner from '@/components/rechner/GmbhGfRechner';
+import ArbeitstageRechner from '@/components/rechner/ArbeitstageRechner';
+import BinaerRechner from '@/components/rechner/BinaerRechner';
+import DachflaechenRechner from '@/components/rechner/DachflaechenRechner';
+import HundejahreRechner from '@/components/rechner/HundejahreRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -208,6 +213,11 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'photovoltaik-rechner': PhotovoltaikRechner,
   'schwangerschaft-gewicht-rechner': SchwangerschaftGewichtRechner,
   'uhrzeitrechner': UhrzeitRechner,
+  'gmbh-geschaeftsfuehrer-rechner': GmbhGfRechner,
+  'arbeitstage-rechner': ArbeitstageRechner,
+  'binaer-rechner': BinaerRechner,
+  'dachflaechen-rechner': DachflaechenRechner,
+  'hundejahre-rechner': HundejahreRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

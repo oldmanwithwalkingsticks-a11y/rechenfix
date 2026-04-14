@@ -1590,4 +1590,70 @@ Für die Berechnung Ihres regulären Nettogehalts nutzen Sie den Brutto-Netto-Re
       },
     ],
   },
+  {
+    slug: 'gmbh-geschaeftsfuehrer-rechner',
+    titel: 'GmbH-Geschäftsführer-Rechner',
+    beschreibung: 'Netto-Gehalt des GmbH-Geschäftsführers berechnen: Mit Sozialversicherungsfreiheit, Firmenwagen, PKV und Einkommensteuer.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'GmbH-Geschäftsführer-Rechner 2026 — GGF-Gehalt netto | Rechenfix',
+    metaDescription: 'GmbH-Geschäftsführer-Gehalt berechnen ✓ Beherrschend SV-frei ✓ Firmenwagen ✓ PKV ✓ Einkommensteuer 2026 ✓ Mit KI-Erklärung.',
+    keywords: ['gmbh geschäftsführer rechner', 'ggf gehalt netto', 'gesellschafter geschäftsführer', 'geschäftsführer brutto netto', 'gmbh gf sv frei', 'firmenwagen 1 prozent regelung', 'gmbh gehalt 2026'],
+    icon: '🏢',
+    formel: 'Netto = Brutto − Einkommensteuer − Soli − ggf. Kirchensteuer − (SV-Abgaben bei nicht-beherrschenden GGF) − PKV/GKV | Firmenwagen-gwV = 1% × Listenpreis + 0,03% × km × Listenpreis',
+    beispiel: 'Beherrschender GGF mit 6.000 € brutto/Monat, GKV-pflichtig wird zu PKV-versicherter SV-freier GGF ≈ 4.200 € netto/Monat nach ESt + PKV. Mit Firmenwagen (Listenpreis 45.000 €, 20 km): +540 € geldwerter Vorteil/Monat.',
+    erklaerung: `**GmbH-Geschäftsführer-Gehalt 2026 — die wichtigsten Unterschiede zum Angestellten**
+
+Das Gehalt eines GmbH-Geschäftsführers folgt grundsätzlich den gleichen Regeln wie ein normales Angestelltengehalt — mit einer entscheidenden Ausnahme: Je nach Beteiligung an der GmbH kann der Geschäftsführer sozialversicherungsfrei sein. Das verändert die Nettoberechnung erheblich und macht den GGF-Rechner komplexer als einen klassischen Brutto-Netto-Rechner. Unser Rechner berücksichtigt beide Fälle und zeigt Ihnen live, was vom vereinbarten Bruttogehalt monatlich übrig bleibt.
+
+**Beherrschender Gesellschafter-Geschäftsführer: sozialversicherungsfrei**
+
+Als **beherrschender GGF** gilt, wer mehr als 50 % der Geschäftsanteile hält oder durch eine Sperrminorität alle Entscheidungen blockieren kann. In diesem Fall ist der Geschäftsführer kein klassischer Arbeitnehmer mehr und unterliegt **nicht der Sozialversicherungspflicht**. Das bedeutet: keine Beiträge zur gesetzlichen Renten-, Arbeitslosen-, Kranken- und Pflegeversicherung. Die Ersparnis ist enorm — der AN-Anteil beträgt normalerweise rund 20 % des Bruttogehalts.
+
+Die Kehrseite: Der GGF muss sich eigenständig um Kranken-, Pflege- und vor allem Altersvorsorge kümmern. Üblich ist eine **private Krankenversicherung (PKV)** (Single ca. 600–800 €/Monat) und eine private oder betriebliche Altersvorsorge. Die Beiträge zur PKV sind in der Einkommensteuererklärung als Sonderausgaben abziehbar.
+
+**Nicht-beherrschender GGF: normale Sozialabgaben**
+
+Hält der GGF weniger als 50 % der Anteile und ist weisungsgebunden, gelten die normalen Regeln für Arbeitnehmer. Sozialversicherungsbeiträge werden wie beim Angestellten abgezogen: RV 9,3 %, AV 1,3 %, KV ca. 7,5 % + Zusatzbeitrag, PV 1,8 % (+ 0,6 % für Kinderlose). Diese Beiträge werden bis zur Beitragsbemessungsgrenze berechnet (2026: KV/PV 5.850 €/Monat, RV/AV 8.550 €/Monat West).
+
+**Die 1-%-Regelung für den Firmenwagen**
+
+Ein beliebter Vergütungsbestandteil für Geschäftsführer ist der **Firmenwagen**. Wird er auch privat genutzt, entsteht ein **geldwerter Vorteil**, der versteuert werden muss. Die pauschale 1-%-Regelung rechnet wie folgt: **1 % des Listenpreises** pro Monat + **0,03 % × Entfernung Wohnung-Arbeit (km) × Listenpreis** für die Fahrten zur Arbeit. Bei einem Auto für 45.000 € und 20 km Entfernung ergibt das: 450 € + 270 € = 720 €/Monat zusätzlich zum Bruttogehalt versteuert. Alternativen sind das Fahrtenbuch oder ein reines Dienstwagenmodell ohne Privatnutzung.
+
+**Einkommensteuer nach § 32a EStG**
+
+Auf das zu versteuernde Einkommen (Brutto + geldwerter Vorteil − Vorsorge − Werbungskosten) wird die **Einkommensteuer** nach dem Grundtarif berechnet. 2026 gilt der neue Grundfreibetrag von 12.096 €. Zusätzlich fällt ab einem ESt-Betrag von 19.950 € der Solidaritätszuschlag von 5,5 % an — bei höheren Einkommen also immer. Kirchenmitglieder zahlen zusätzlich 8–9 % Kirchensteuer auf die Einkommensteuer.
+
+**Angemessenheit der GGF-Vergütung**
+
+Das Finanzamt prüft bei Gesellschafter-Geschäftsführern die **Angemessenheit** des Gehalts. Überhöhte Bezüge werden als **verdeckte Gewinnausschüttung (vGA)** gewertet und doppelt besteuert — einmal als Betriebsausgabe bei der GmbH (nachträglich hinzugerechnet) und einmal als Einkünfte beim GGF. Als Richtlinie gelten Daten aus BBE-Gehaltsstrukturanalysen: Für kleine GmbHs (bis 10 Mitarbeiter) sind Jahresgehälter von 80.000–120.000 € üblich, bei mittleren Unternehmen 130.000–200.000 €.
+
+**Gehalt vs. Gewinnausschüttung**
+
+Ein GGF kann sein Einkommen aus der GmbH auf zwei Wegen ziehen: als **Gehalt** (mindert den Gewinn der GmbH, voll einkommensteuerpflichtig) oder als **Gewinnausschüttung** (Abgeltungsteuer 25 % oder Teileinkünfteverfahren). Welcher Weg günstiger ist, hängt vom individuellen Steuersatz und von der Sozialversicherungspflicht ab. Unser Rechner deckt den Gehaltsteil ab — für die steueroptimale Mischstrategie empfehlen wir eine Beratung durch einen Steuerberater.
+
+**Weitere Rechner:** Für den klassischen Arbeitnehmer-Fall nutzen Sie den Brutto-Netto-Rechner. Für Freelancer und Einzelunternehmer gibt es den Freelancer-Stundensatz-Rechner. Wenn Sie den GGF-Vertrag nach einem Jahr optimieren wollen, hilft der Gehaltsvergleich mit Marktdaten weiter.`,
+    faq: [
+      {
+        frage: 'Wann ist ein GmbH-Geschäftsführer sozialversicherungsfrei?',
+        antwort: 'Sozialversicherungsfrei sind beherrschende Gesellschafter-Geschäftsführer — also solche, die mehr als 50 % der Geschäftsanteile halten oder durch eine Sperrminorität Beschlüsse blockieren können. In diesem Fall entfallen die Beiträge zur gesetzlichen Renten-, Arbeitslosen-, Kranken- und Pflegeversicherung vollständig. Die Feststellung erfolgt durch die Clearingstelle der Deutschen Rentenversicherung Bund.',
+      },
+      {
+        frage: 'Wie funktioniert die 1-%-Regelung beim Firmenwagen?',
+        antwort: 'Bei der 1-%-Regelung werden monatlich 1 % des Bruttolistenpreises des Fahrzeugs als geldwerter Vorteil versteuert. Für Fahrten zwischen Wohnung und Arbeitsstätte kommen zusätzlich 0,03 % × Entfernung × Listenpreis hinzu. Beispiel: 45.000 € Listenpreis + 20 km = 720 €/Monat geldwerter Vorteil. Alternative: Fahrtenbuch, das nur die tatsächlichen privaten Fahrten versteuert.',
+      },
+      {
+        frage: 'Lohnt sich die PKV für Geschäftsführer?',
+        antwort: 'Für beherrschende GGF ist die PKV fast immer sinnvoll, da sie ohnehin SV-frei sind. Vorteile: bessere Leistungen, Beitragsrückerstattung, im Alter abziehbare Beiträge. Nachteile: Beiträge steigen im Alter, Rückkehr in GKV ist kaum möglich. Für nicht-beherrschende GGF gilt die Versicherungspflichtgrenze (2026: 73.800 €/Jahr) — erst darüber ist der Wechsel in die PKV möglich.',
+      },
+      {
+        frage: 'Was ist eine verdeckte Gewinnausschüttung (vGA)?',
+        antwort: 'Eine vGA liegt vor, wenn die GmbH ihrem Gesellschafter Vorteile gewährt, die ein fremder Dritter nicht erhalten hätte — z. B. überhöhtes Gehalt, günstige Darlehen oder privat genutzte Firmenausstattung ohne korrekte Versteuerung. Die Folge: Der Vorteil wird bei der GmbH als Gewinn zugerechnet (Körperschaftsteuer + GewSt) und beim Gesellschafter als Kapitaleinkunft besteuert — effektiv doppelt.',
+      },
+      {
+        frage: 'Wie hoch sollte mein GF-Gehalt sein?',
+        antwort: 'Das angemessene Gehalt orientiert sich an Umsatz, Mitarbeiterzahl und Ertragslage der GmbH sowie Branchendaten. BBE-Gehaltsstrukturanalysen dienen als Orientierung: Kleine GmbHs zahlen meist 80.000–150.000 € Jahresgehalt, mittelständische 150.000–300.000 €. Wichtig ist die Schriftform im Anstellungsvertrag und eine klare Trennung zwischen Fixum und Tantieme.',
+      },
+    ],
+  },
 ];
