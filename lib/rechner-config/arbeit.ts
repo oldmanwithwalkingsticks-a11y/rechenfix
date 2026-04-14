@@ -1100,4 +1100,90 @@ Ein gesetzlicher Feiertag, der auf einen Samstag oder Sonntag fällt, wird in De
       },
     ],
   },
+  {
+    slug: 'unterhaltsrechner',
+    titel: 'Unterhaltsrechner',
+    beschreibung: 'Kindesunterhalt berechnen nach Düsseldorfer Tabelle 2026 — mit Kindergeld-Verrechnung und Mangelfallberechnung.',
+    kategorie: 'Arbeit & Recht',
+    kategorieSlug: 'arbeit',
+    metaTitle: 'Unterhaltsrechner 2026 — Kindesunterhalt nach Düsseldorfer Tabelle | Rechenfix',
+    metaDescription: 'Kindesunterhalt berechnen: Düsseldorfer Tabelle 2026 ✓ Kindergeld-Verrechnung ✓ Mangelfallprüfung ✓ KI-Erklärung.',
+    keywords: ['unterhaltsrechner', 'kindesunterhalt berechnen', 'düsseldorfer tabelle 2026', 'unterhalt 2026', 'mangelfall', 'selbstbehalt unterhalt', 'kindergeld verrechnung'],
+    icon: '⚖️',
+    formel: 'Zahlbetrag = Tabellenbetrag (Düsseldorfer Tabelle) − Kindergeld-Abzug (hälftig 127,50 € / voll 255 €) | Mangelfall bei (Netto − Selbstbehalt 1.450 €) < Summe aller Zahlbeträge → Quotelung',
+    beispiel: 'Netto 3.000 €, 1 Kind (8 Jahre), Kindergeld hälftig: Einkommensgruppe 4 → Tabellenbetrag 638 € − 127,50 € Kindergeld = 511 € Zahlbetrag/Monat.',
+    erklaerung: `**Kindesunterhalt 2026 — Düsseldorfer Tabelle erklärt**
+
+Die Düsseldorfer Tabelle ist eine Leitlinie zur Bemessung des Kindesunterhalts in Deutschland. Sie wird vom Oberlandesgericht Düsseldorf in Abstimmung mit den anderen OLGs und dem Deutschen Familiengerichtstag herausgegeben und jährlich angepasst. Die Tabelle enthält Einkommensgruppen und Altersstufen — der Zahlbetrag ergibt sich aus dem bereinigten Nettoeinkommen des Unterhaltspflichtigen und dem Alter des Kindes.
+
+**Bereinigtes Nettoeinkommen — was wird abgezogen?**
+
+Ausgangspunkt ist nicht das reine Netto, sondern das **bereinigte Nettoeinkommen**. Vom Netto werden abgezogen: **berufsbedingte Aufwendungen** (pauschal 5 %, mindestens 50 € und höchstens 150 €), **berücksichtigungsfähige Schulden** (z. B. Kredite aus der Ehezeit) sowie ggf. Beiträge zur zusätzlichen Altersvorsorge. Selbständige müssen das durchschnittliche Einkommen der letzten drei Jahre ansetzen. Je niedriger das bereinigte Netto, desto niedriger die Einkommensgruppe und der Unterhalt.
+
+**Kindergeld-Verrechnung — hälftig oder voll?**
+
+Das Kindergeld ist in der Düsseldorfer Tabelle nicht enthalten — es wird separat verrechnet. Bei **minderjährigen Kindern** wird die Hälfte des Kindergeldes (2026: 127,50 €) auf den Tabellenbetrag angerechnet, weil beide Elternteile für das Kind aufkommen. Bei **volljährigen Kindern** wird das volle Kindergeld (255 €) angerechnet, da es ihnen direkt zusteht und als Einkommen zu werten ist.
+
+**Selbstbehalt und Mangelfall**
+
+Dem Unterhaltspflichtigen steht ein **Selbstbehalt** zu, der das Existenzminimum sichert. 2026 beträgt er **1.450 €** für Erwerbstätige (enthalten: 520 € Miete/Nebenkosten). Reicht das Einkommen nach Abzug des Selbstbehalts nicht für den vollen Unterhalt aller Kinder aus, liegt ein **Mangelfall** vor. In diesem Fall werden die Zahlbeträge quotiert — jedes Kind bekommt anteilig weniger. Unser Rechner erkennt den Mangelfall automatisch und zeigt die angepassten Beträge. Bei grundlegenden finanziellen Fragen nach Trennung sollten Sie auch den [Scheidungskosten-Rechner](/arbeit/scheidungskosten-rechner) und den [Zugewinnausgleich-Rechner](/arbeit/zugewinnausgleich-rechner) nutzen.
+
+**Kindesunterhalt ab 18 — was ändert sich?**
+
+Mit Volljährigkeit endet der Anspruch nicht automatisch. Solange sich das Kind in einer **Erstausbildung** befindet, sind beide Eltern barunterhaltspflichtig. Der Unterhalt richtet sich weiterhin nach der Düsseldorfer Tabelle (Altersstufe "ab 18 Jahre"), allerdings wird das **volle Kindergeld** angerechnet. Lebt das volljährige Kind nicht mehr im Haushalt der Eltern, erhöht sich der Bedarf oft auf den **Regelsatz für Studierende (aktuell 990 €/Monat)**. Wer die finanzielle Situation der Familie gesamt betrachten möchte, kann auch den [Kindergeld-Rechner](/finanzen/kindergeld-rechner) nutzen, um den Anspruch auf Kindergeld bis 25 zu prüfen.
+
+**Sonder- und Mehrbedarf**
+
+Neben dem Tabellenunterhalt gibt es **Sonderbedarf** (einmalige, außergewöhnliche Kosten wie Klassenfahrten oder Konfirmation) und **Mehrbedarf** (regelmäßige, über den Tabellenunterhalt hinausgehende Kosten wie Kita-Beiträge, Nachhilfe oder krankheitsbedingte Zusatzausgaben). Beide werden zusätzlich und anteilig nach Einkommen beider Eltern getragen — nicht vom Selbstbehalt gedeckt. Unser Rechner berücksichtigt diese Posten nicht; sie müssen individuell geltend gemacht werden.`,
+    faq: [
+      { frage: 'Wie viel Kindesunterhalt muss ich 2026 zahlen?', antwort: 'Die Höhe richtet sich nach dem bereinigten Nettoeinkommen und dem Alter des Kindes. Bei 3.000 € Netto und einem 8-jährigen Kind ergibt sich nach Düsseldorfer Tabelle Einkommensgruppe 4 ein Tabellenbetrag von etwa 638 € — minus 127,50 € hälftiges Kindergeld = 511 € Zahlbetrag. Unser Rechner zeigt den genauen Wert für Ihre Situation.' },
+      { frage: 'Was ist die Düsseldorfer Tabelle?', antwort: 'Die Düsseldorfer Tabelle ist eine Leitlinie zur Berechnung des Kindesunterhalts in Deutschland, herausgegeben vom OLG Düsseldorf. Sie enthält Einkommensgruppen und Altersstufen und wird jährlich an die Entwicklung des Mindestbedarfs angepasst. Gerichte orientieren sich bundesweit an dieser Tabelle.' },
+      { frage: 'Wird das Kindergeld auf den Unterhalt angerechnet?', antwort: 'Ja. Bei minderjährigen Kindern wird das hälftige Kindergeld (127,50 € in 2026) vom Tabellenbetrag abgezogen, da beide Elternteile das Kind versorgen. Bei volljährigen Kindern wird das volle Kindergeld (255 €) angerechnet, weil es als Einkommen des Kindes gewertet wird.' },
+      { frage: 'Was ist der Selbstbehalt beim Unterhalt?', antwort: 'Der Selbstbehalt ist der Mindestbetrag, der dem Unterhaltspflichtigen zum Leben bleiben muss. 2026 beträgt er 1.450 € monatlich für Erwerbstätige (nicht erwerbstätig: 1.200 €). Er enthält einen Wohnkostenanteil von 520 €. Liegt das Einkommen nach Unterhalt unter dem Selbstbehalt, liegt ein Mangelfall vor.' },
+      { frage: 'Was passiert im Mangelfall?', antwort: 'Reicht das Einkommen nach Abzug des Selbstbehalts nicht für den vollen Unterhalt aller Kinder, werden die Zahlbeträge anteilig gekürzt (Quotelung). Jedes Kind erhält einen prozentualen Anteil am verfügbaren Betrag. Minderjährige Kinder gehen dabei volljährigen Kindern im Rang vor (§ 1609 BGB).' },
+    ],
+  },
+  {
+    slug: 'arbeitslosengeld-rechner',
+    titel: 'Arbeitslosengeld-Rechner',
+    beschreibung: 'Arbeitslosengeld I berechnen: Höhe, Dauer und Auszahlungsbetrag basierend auf dem letzten Gehalt.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Arbeitslosengeld-Rechner 2026 — ALG I Höhe & Dauer berechnen | Rechenfix',
+    metaDescription: 'Arbeitslosengeld berechnen: ALG-I-Höhe, Bezugsdauer und Auszahlung ✓ 60 %/67 % ✓ Steuerklasse ✓ KI-Erklärung.',
+    keywords: ['arbeitslosengeld rechner', 'alg 1 rechner', 'alg i 2026', 'arbeitslosengeld berechnen', 'bezugsdauer alg', 'leistungsentgelt', 'sperrzeit'],
+    icon: '💶',
+    formel: 'Leistungsentgelt = Bemessungsentgelt − pauschale Lohnsteuer − 21 % SV-Pauschale | ALG = Leistungsentgelt × 60 % (ohne Kind) bzw. 67 % (mit Kind)',
+    beispiel: '3.500 € Brutto, Steuerklasse I, ohne Kind, 24 Monate Beschäftigung (Alter 40): ca. 1.420 € ALG I/Monat für 12 Monate = rund 17.000 € Gesamtanspruch.',
+    erklaerung: `**Arbeitslosengeld I — Höhe und Dauer 2026**
+
+Das Arbeitslosengeld I (ALG I) ist eine Versicherungsleistung aus der Arbeitslosenversicherung. Voraussetzung ist eine **Anwartschaftszeit** von mindestens 12 Monaten sozialversicherungspflichtiger Beschäftigung innerhalb der letzten 30 Monate (Rahmenfrist). Die Höhe richtet sich nach dem pauschalierten Netto (Leistungsentgelt) aus dem Durchschnittsbrutto der letzten 12 Monate — nicht nach dem tatsächlich erhaltenen Netto.
+
+**So wird das Leistungsentgelt berechnet**
+
+Vom Bruttoentgelt (max. bis zur Beitragsbemessungsgrenze der Rentenversicherung, 2026 ca. 7.550 €/Monat) werden pauschal abgezogen: **Lohnsteuer nach Steuerklasse**, **Solidaritätszuschlag**, **Sozialversicherungspauschale von 21 %** sowie ggf. **Kirchensteuer**. Das verbleibende tägliche Leistungsentgelt wird mit dem Leistungssatz multipliziert: **60 %** ohne Kind, **67 %** mit mindestens einem kindergeldberechtigten Kind. Daraus ergibt sich der monatliche ALG-Betrag (Tagesatz × 30).
+
+**Bezugsdauer nach Alter und Beschäftigung**
+
+Die **Bezugsdauer** hängt von der Beschäftigungsdauer in den letzten 5 Jahren und dem Lebensalter bei Arbeitslosmeldung ab. Grundregel: 12 Monate Beschäftigung → 6 Monate ALG, 24 Monate → 12 Monate ALG. Für ältere Arbeitnehmer gelten verlängerte Bezugszeiten: ab 50 Jahre bis zu 15 Monate, ab 55 bis zu 18 Monate, ab 58 bis zu **24 Monate**. Die Bezugsdauer wird verbraucht — Restansprüche können bei erneuter Arbeitslosigkeit innerhalb von 4 Jahren wieder aufleben.
+
+**Sperrzeit bei Eigenkündigung**
+
+Wer selbst kündigt oder einen Aufhebungsvertrag ohne wichtigen Grund schließt, riskiert eine **Sperrzeit von 12 Wochen** (§ 159 SGB III). In dieser Zeit wird kein ALG gezahlt — und die Gesamtanspruchsdauer verringert sich um bis zu ein Viertel. Bei kleineren Verstößen (z. B. verspätete Arbeitslosmeldung) gibt es kürzere Sperrzeiten von 1–3 Wochen. Wer über einen Aufhebungsvertrag verhandelt, sollte vorab den [Abfindungsrechner](/arbeit/abfindungsrechner) und den [Kündigungsfrist-Rechner](/arbeit/kuendigungsfrist-rechner) nutzen.
+
+**Nach dem ALG I — was kommt danach?**
+
+Ist der Anspruch auf ALG I aufgebraucht und wurde keine neue Anwartschaftszeit aufgebaut, greift das **Bürgergeld** (§ 19 SGB II). Anders als das ALG I ist das Bürgergeld eine bedarfsorientierte Grundsicherung: Eigenes Vermögen und Einkommen des Partners werden angerechnet, die Höhe richtet sich nicht nach dem früheren Gehalt, sondern nach Regelsatz, Miete und Nebenkosten. Unser [Bürgergeld-Rechner](/finanzen/buergergeld-rechner) hilft bei der Orientierung.
+
+**Hinweis zur Abfindung**
+
+Eine **Abfindung** bei einvernehmlicher Auflösung des Arbeitsverhältnisses wird in der Regel **nicht auf das ALG I angerechnet**, wenn die ordentliche Kündigungsfrist eingehalten wurde. Wird die Kündigungsfrist verkürzt, kann das ALG während der eigentlich geltenden Kündigungsfrist ruhen (§ 158 SGB III). Darüber hinaus unterliegt die Abfindung der **Fünftelregelung** als außerordentliche Einkünfte — das kann steuerlich günstig sein.`,
+    faq: [
+      { frage: 'Wie hoch ist das Arbeitslosengeld I?', antwort: 'Das ALG I beträgt 60 % des pauschalierten Netto (Leistungsentgelt) bzw. 67 % mit mindestens einem Kind. Grundlage ist das Durchschnittsbrutto der letzten 12 Monate. Bei 3.500 € Brutto und Steuerklasse I ergeben sich etwa 1.420 €/Monat. Nutzen Sie unseren Rechner für Ihren individuellen Wert.' },
+      { frage: 'Wie lange bekomme ich ALG I?', antwort: 'Die Bezugsdauer richtet sich nach Beschäftigungsdauer und Alter: 12 Monate Beschäftigung ergeben 6 Monate ALG, 24 Monate Beschäftigung 12 Monate ALG. Ältere Arbeitnehmer erhalten länger: ab 50 Jahre bis zu 15 Monate, ab 55 bis zu 18 Monate, ab 58 sogar bis zu 24 Monate.' },
+      { frage: 'Wird eine Abfindung auf das ALG I angerechnet?', antwort: 'Grundsätzlich nicht — solange die ordentliche Kündigungsfrist eingehalten wird. Wird die Kündigungsfrist verkürzt (z. B. im Aufhebungsvertrag), ruht das ALG bis zum fiktiven regulären Kündigungstermin (§ 158 SGB III). Steuerlich profitieren Abfindungen von der Fünftelregelung.' },
+      { frage: 'Was passiert bei Eigenkündigung?', antwort: 'Bei Eigenkündigung oder Aufhebungsvertrag ohne wichtigen Grund verhängt die Arbeitsagentur eine Sperrzeit von 12 Wochen. In dieser Zeit wird kein ALG gezahlt und die Gesamtanspruchsdauer verkürzt sich um bis zu ein Viertel. Ein wichtiger Grund (z. B. Mobbing, gesundheitliche Gründe) muss nachgewiesen werden.' },
+      { frage: 'Was kommt nach ALG I?', antwort: 'Ist der ALG-Anspruch aufgebraucht, greift das Bürgergeld als Grundsicherung (§ 19 SGB II). Anders als das ALG I ist es bedarfsorientiert: Höhe richtet sich nach Regelsatz, Miete und Nebenkosten; Vermögen und Partnereinkommen werden angerechnet. Nutzen Sie unseren Bürgergeld-Rechner für eine Schätzung.' },
+    ],
+  },
 ];

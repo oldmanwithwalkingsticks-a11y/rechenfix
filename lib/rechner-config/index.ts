@@ -88,6 +88,11 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'firmenwagenrechner',
+  'midijob-rechner',
+  'grundsteuer-rechner',
+  'arbeitslosengeld-rechner',
+  'unterhaltsrechner',
   'alkohol-abbau-rechner',
   'waehrungsrechner',
   'malerkosten-rechner',
@@ -291,6 +296,11 @@ const verwandteMap: Record<string, string[]> = {
   'binaer-rechner': ['einheiten-umrechner', 'wissenschaftlicher-taschenrechner', 'bruchrechner', 'prozentrechner'],
   'dachflaechen-rechner': ['photovoltaik-rechner', 'tapetenbedarf-rechner', 'quadratmeter-rechner', 'flaechenrechner'],
   'hundejahre-rechner': ['lebenszeit-rechner', 'geburtstag-rechner', 'tagerechner', 'countdown'],
+  'unterhaltsrechner': ['scheidungskosten-rechner', 'zugewinnausgleich-rechner', 'kindergeld-rechner', 'splitting-rechner'],
+  'arbeitslosengeld-rechner': ['kuendigungsfrist-rechner', 'abfindungsrechner', 'buergergeld-rechner', 'brutto-netto-rechner'],
+  'grundsteuer-rechner': ['grunderwerbsteuer-rechner', 'baufinanzierung-rechner', 'nebenkosten-rechner', 'mietrechner'],
+  'midijob-rechner': ['minijob-rechner', 'brutto-netto-rechner', 'stundenlohn-rechner', 'teilzeit-rechner'],
+  'firmenwagenrechner': ['autokosten-rechner', 'gmbh-geschaeftsfuehrer-rechner', 'gehaltserhoehung-rechner', 'brutto-netto-rechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {

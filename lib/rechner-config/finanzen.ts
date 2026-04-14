@@ -1725,4 +1725,82 @@ Auch Freelancer können den Hochrechner nutzen, um Ihren Tages- oder Stundensatz
       },
     ],
   },
+  {
+    slug: 'midijob-rechner',
+    titel: 'Midijob-Rechner',
+    beschreibung: 'Midijob-Abgaben berechnen: Reduzierte Sozialversicherungsbeiträge im Übergangsbereich von 603,01 bis 2.000 Euro.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Midijob-Rechner 2026 — Abgaben im Übergangsbereich berechnen | Rechenfix',
+    metaDescription: 'Midijob berechnen: Reduzierte SV-Beiträge im Übergangsbereich 603–2.000 € ✓ Netto ✓ Ersparnis ✓ KI-Erklärung.',
+    keywords: ['midijob rechner', 'übergangsbereich', 'midijob 2026', 'midijob netto', 'gleitzone', 'beitragspflichtige einnahme', 'faktor f'],
+    icon: '💶',
+    formel: 'BE (AN) = F × 2.000 + ((2.000 − 2.000 × F) / (2.000 − 603)) × (Brutto − 603) mit F = 0,6847 | AN-SV = BE × 21 % | AG-SV = Brutto × 21 %',
+    beispiel: '1.200 € Brutto, Steuerklasse I, kinderlos: Beitragspflichtige Einnahme ca. 990 € → AN-SV ca. 215 € → Netto ca. 985 € (ca. 40 € Ersparnis gegenüber regulärer Beschäftigung).',
+    erklaerung: `**Midijob 2026 — Der Übergangsbereich einfach erklärt**
+
+Der **Midijob** (offiziell: Beschäftigung im Übergangsbereich) ist eine sozialversicherungspflichtige Beschäftigung mit einem monatlichen Verdienst zwischen **603,01 Euro und 2.000 Euro**. Er liegt damit genau zwischen dem [Minijob](/finanzen/minijob-rechner) (bis 603 €) und der regulären Beschäftigung (ab 2.000 €). Ziel des Übergangsbereichs ist es, den sprunghaften Anstieg der Sozialabgaben an der Minijob-Grenze abzufedern.
+
+**Reduzierte Arbeitnehmer-Beiträge**
+
+Im Übergangsbereich werden die **Arbeitnehmer-Sozialversicherungsbeiträge** auf eine **reduzierte beitragspflichtige Einnahme (BE)** berechnet — nicht auf das tatsächliche Brutto. Die Formel: BE = F × 2.000 + ((2.000 − 2.000 × F) / (2.000 − 603)) × (Brutto − 603), mit dem Faktor F = 0,6847 (2026). Das Ergebnis: An der unteren Grenze (603,01 €) beginnen die Beiträge mit dem halben Regelsatz, an der oberen Grenze (2.000 €) sind sie dem regulären Satz angeglichen. Dazwischen steigt der Beitrag linear an. **Wichtig:** Arbeitgeber-Beiträge werden weiterhin auf das volle Brutto berechnet.
+
+**Volle Rentenansprüche trotz Rabatt**
+
+Ein großer Vorteil: Die **Rentenansprüche** werden seit 2022 nicht mehr aus der reduzierten BE, sondern aus dem **tatsächlichen Brutto** berechnet. Midijobber erwerben also **volle Rentenpunkte**, obwohl sie reduzierte Beiträge zahlen — ein echter Solidaritätsbonus. Auch alle anderen Leistungen (Krankengeld, Arbeitslosengeld, Mutterschaftsgeld) werden aus dem vollen Brutto abgeleitet.
+
+**Lohnsteuer — keine Vergünstigung**
+
+Anders als bei den Sozialversicherungsbeiträgen gibt es bei der **Lohnsteuer keinen Rabatt**. Sie wird normal nach der Steuerklasse berechnet. In **Steuerklasse I** fällt bei einem Brutto bis ca. 1.200 € aufgrund des Grundfreibetrags keine oder nur sehr geringe Lohnsteuer an. Bei Ehegatten in Steuerklasse V kann dagegen schon ab 1.000 € deutlich Lohnsteuer abgezogen werden. Unser [Brutto-Netto-Rechner](/finanzen/brutto-netto-rechner) zeigt die genaue Lohnsteuerberechnung.
+
+**Wann lohnt sich der Midijob?**
+
+Der Midijob lohnt sich vor allem für Personen, die **mehr als einen Minijob** leisten wollen (oder müssen), aber noch nicht in die volle Sozialabgabenlast eines regulären Jobs rutschen sollen — z. B. Wiedereinsteiger nach Elternzeit, Studierende mit höherem Verdienst, Rentner mit Teilzeitjob oder Zweitverdienerinnen. Die Ersparnis gegenüber regulärer Beschäftigung beträgt an der Untergrenze des Bereichs ca. 60 €/Monat und nimmt zur Obergrenze hin auf 0 € ab. Wer unter 603 € verdient, sollte den [Minijob](/finanzen/minijob-rechner) prüfen; ab 2.000 € greift der reguläre [Brutto-Netto-Rechner](/finanzen/brutto-netto-rechner).`,
+    faq: [
+      { frage: 'Was ist ein Midijob?', antwort: 'Ein Midijob (offiziell: Beschäftigung im Übergangsbereich) ist eine sozialversicherungspflichtige Beschäftigung mit einem monatlichen Verdienst zwischen 603,01 und 2.000 Euro. Im Übergangsbereich zahlen Arbeitnehmer reduzierte Sozialversicherungsbeiträge, während Arbeitgeber den vollen Satz zahlen.' },
+      { frage: 'Wie hoch sind die Abgaben im Midijob?', antwort: 'Die Arbeitnehmer-Sozialabgaben werden nicht auf das tatsächliche Brutto, sondern auf eine reduzierte beitragspflichtige Einnahme (BE) berechnet. An der Untergrenze (603,01 €) beginnt der Beitrag mit etwa dem halben Regelsatz und steigt bis 2.000 € linear auf den vollen Satz an. Die Lohnsteuer wird normal nach Steuerklasse berechnet.' },
+      { frage: 'Was ist der Übergangsbereich?', antwort: 'Der Übergangsbereich — früher Gleitzone genannt — ist ein gesetzlicher Bereich zwischen 603,01 € und 2.000 € monatlichem Verdienst, in dem die Sozialabgaben für Arbeitnehmer schrittweise ansteigen. Er soll verhindern, dass Arbeitnehmer an der Minijob-Grenze einen sprunghaften Netto-Verlust erleiden.' },
+      { frage: 'Wie unterscheidet sich der Midijob vom Minijob?', antwort: 'Der Minijob ist ein pauschalversteuerter Job mit maximal 603 € Verdienst — ohne Sozialabgaben für den Arbeitnehmer (außer optional RV). Der Midijob beginnt bei 603,01 € und ist voll sozialversicherungspflichtig, mit reduzierten Beiträgen im Übergangsbereich. Midijobber sind durch den Job krankenversichert, Minijobber nicht.' },
+      { frage: 'Bekomme ich volle Rentenansprüche im Midijob?', antwort: 'Ja. Seit 2022 werden die Rentenansprüche aus dem vollen Brutto berechnet, nicht aus der reduzierten beitragspflichtigen Einnahme. Midijobber erwerben also volle Rentenpunkte, obwohl sie reduzierte Beiträge zahlen. Auch Krankengeld und Arbeitslosengeld richten sich nach dem vollen Brutto.' },
+    ],
+  },
+  {
+    slug: 'firmenwagenrechner',
+    titel: 'Firmenwagenrechner',
+    beschreibung: 'Firmenwagen-Steuer berechnen: Geldwerter Vorteil nach 1%-Regel für Verbrenner, Hybrid und Elektroauto.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Firmenwagenrechner 2026 — Geldwerter Vorteil & 1 %-Regel berechnen | Rechenfix',
+    metaDescription: 'Firmenwagen berechnen: 1 %-Regel, 0,25 % E-Auto-Vorteil und Arbeitsweg ✓ Verbrenner/Hybrid/Elektro ✓ KI-Erklärung.',
+    keywords: ['firmenwagenrechner', '1 prozent regel', 'geldwerter vorteil', 'dienstwagen rechner', 'e-auto firmenwagen', '0 25 prozent regel', 'firmenwagen steuer'],
+    icon: '🚗',
+    formel: 'GWV Privat = Bruttolistenpreis × (1 % Verbrenner | 0,5 % Hybrid | 0,25 % E-Auto ≤70k€ | 0,5 % E-Auto >70k€) | GWV Arbeitsweg (pauschal) = BLP × 0,03 % × km × Antriebsfaktor | GWV gesamt = Privat + Arbeitsweg − Zuzahlung',
+    beispiel: 'Bruttolistenpreis 45.000 €, Verbrenner, 20 km Arbeitsweg, keine Zuzahlung: Privatnutzung 450 € + Arbeitsweg 270 € = 720 € GWV/Monat → Steuer bei 35 % Grenzsteuersatz ca. 252 €/Monat.',
+    erklaerung: `**Firmenwagen und die 1 %-Regel**
+
+Wird ein Firmenwagen auch privat genutzt, ist der **geldwerte Vorteil (GWV)** steuerpflichtig. Die einfachste und häufigste Methode ist die **1 %-Regel**: Jeden Monat wird **1 % des Bruttolistenpreises** (inkl. Sonderausstattung und MwSt.) als Privatnutzung versteuert — unabhängig davon, wie oft das Auto tatsächlich privat gefahren wird. Ein Bruttolistenpreis von 45.000 € ergibt 450 € GWV pro Monat.
+
+**E-Auto-Vorteil: Nur 0,25 % bzw. 0,5 %**
+
+Um die Elektromobilität zu fördern, wurde die Steuer für **Elektroautos** drastisch reduziert: Bei Bruttolistenpreis bis **70.000 €** gilt nur **0,25 %** pro Monat — das ist ein Viertel der regulären Last. Über 70.000 € sowie bei **Plug-in-Hybriden** (mit Mindestreichweite und Emissionsgrenzwert) gilt **0,5 %**. Das entspricht einer Steuerersparnis von bis zu 200 €/Monat gegenüber einem vergleichbaren Verbrenner. Mit dem [Autokosten-Rechner](/finanzen/autokosten-rechner) lässt sich zusätzlich ein Gesamtkostenvergleich anstellen.
+
+**Arbeitsweg — pauschal oder einzeln?**
+
+Neben der Privatnutzung wird auch der **Arbeitsweg** besteuert, sofern der Wagen dafür genutzt wird. Zwei Methoden stehen zur Wahl: Die **pauschale Bewertung (0,03 %)** wird standardmäßig angewandt: Bruttolistenpreis × 0,03 % × Entfernungs-km (einfache Strecke) ergibt den monatlichen GWV für den Arbeitsweg — unabhängig von der tatsächlichen Nutzung. Die **Einzelbewertung (0,002 %)** lohnt sich, wenn Sie **weniger als 15 Tage pro Monat** ins Büro fahren: Bruttolistenpreis × 0,002 % × km × Fahrten/Monat. Bei Homeoffice-Tagen oder Außendiensttätigkeit ist die Einzelbewertung oft deutlich günstiger — Sie müssen aber die Fahrten nachweisen.
+
+**Fahrtenbuch als Alternative**
+
+Statt der 1 %-Regel kann ein **Fahrtenbuch** geführt werden: Jede Fahrt wird mit Datum, Kilometerstand, Ziel und Zweck dokumentiert. Am Jahresende wird der Anteil der Privatfahrten berechnet und mit den tatsächlichen Autokosten (Abschreibung, Kraftstoff, Versicherung, Reparatur) multipliziert. Das Fahrtenbuch lohnt sich bei **geringer Privatnutzung** und **teuren Fahrzeugen** — ist aber aufwändig und muss lückenlos geführt werden. Software wie [WISO Steuer](https://www.buhl.de/produkte/wiso-steuer/) vergleicht automatisch, welche Methode günstiger ist.
+
+**Eigene Zuzahlung und Gehaltsumwandlung**
+
+Zahlt der Arbeitnehmer eine **monatliche Eigenbeteiligung** (z. B. 100 €), mindert diese direkt den geldwerten Vorteil. Auch einmalige Zuzahlungen zu den Anschaffungskosten werden über mehrere Jahre verteilt angerechnet. Alternativ kann der Firmenwagen auch im Rahmen einer **Gehaltsumwandlung** finanziert werden — statt einer [Gehaltserhöhung](/finanzen/gehaltserhoehung-rechner) wird ein Teil des Gehalts für den Wagen eingesetzt. Das spart Sozialabgaben und Steuern gleichermaßen, reduziert aber die Rentenbeiträge.`,
+    faq: [
+      { frage: 'Wie wird der Firmenwagen versteuert?', antwort: 'Für die private Nutzung wird monatlich 1 % des Bruttolistenpreises als geldwerter Vorteil versteuert (Verbrenner). Bei Plug-in-Hybriden und E-Autos über 70.000 € gilt 0,5 %, bei E-Autos bis 70.000 € nur 0,25 %. Dazu kommen 0,03 % je Kilometer Arbeitsweg (pauschal) oder 0,002 % je Kilometer und tatsächliche Fahrt (Einzelbewertung).' },
+      { frage: 'Was ist die 1 %-Regel?', antwort: 'Die 1 %-Regel ist die pauschale Methode zur Besteuerung der privaten Nutzung eines Firmenwagens. Jeden Monat wird 1 % des Bruttolistenpreises (inkl. Sonderausstattung) als geldwerter Vorteil versteuert — unabhängig von der tatsächlichen Privatnutzung. Das ist einfach, aber nicht immer günstig.' },
+      { frage: 'Wie profitiere ich vom E-Auto-Vorteil?', antwort: 'Für reine Elektroautos mit einem Bruttolistenpreis bis 70.000 € gilt nur 0,25 % statt 1 % — das ist ein Viertel der regulären Steuerlast. Bei einem 40.000-Euro-E-Auto beträgt der GWV also nur 100 €/Monat statt 400 €. Das spart je nach Grenzsteuersatz 100–150 € Lohnsteuer pro Monat.' },
+      { frage: 'Lohnt sich ein Fahrtenbuch?', antwort: 'Ein Fahrtenbuch lohnt sich bei geringer Privatnutzung (< 30 %) und teuren Fahrzeugen. Sie dokumentieren jede Fahrt lückenlos und versteuern am Jahresende nur den tatsächlichen Privatanteil der realen Kosten. Aber: Das Fahrtenbuch muss vollständig sein — Lücken führen dazu, dass das Finanzamt die 1 %-Regel anwendet.' },
+      { frage: 'Kann ich die Einzelbewertung nutzen?', antwort: 'Ja — die Einzelbewertung (0,002 % × km × Fahrten) lohnt sich, wenn Sie weniger als 15 Tage pro Monat ins Büro fahren, z. B. bei Homeoffice oder Außendienst. Statt der pauschalen 0,03 % wird der Arbeitsweg dann nur mit den tatsächlichen Fahrten angesetzt. Dokumentation pflicht.' },
+    ],
+  },
 ];

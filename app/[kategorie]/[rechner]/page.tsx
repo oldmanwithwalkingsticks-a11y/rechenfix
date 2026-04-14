@@ -108,6 +108,11 @@ import HochRechner from '@/components/rechner/HochRechner';
 import MalerkostenRechner from '@/components/rechner/MalerkostenRechner';
 import WaehrungsRechner from '@/components/rechner/WaehrungsRechner';
 import AlkoholAbbauRechner from '@/components/rechner/AlkoholAbbauRechner';
+import UnterhaltsRechner from '@/components/rechner/UnterhaltsRechner';
+import ArbeitslosengeldRechner from '@/components/rechner/ArbeitslosengeldRechner';
+import GrundsteuerRechner from '@/components/rechner/GrundsteuerRechner';
+import MidijobRechner from '@/components/rechner/MidijobRechner';
+import FirmenwagenRechner from '@/components/rechner/FirmenwagenRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -228,6 +233,11 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'malerkosten-rechner': MalerkostenRechner,
   'waehrungsrechner': WaehrungsRechner,
   'alkohol-abbau-rechner': AlkoholAbbauRechner,
+  'unterhaltsrechner': UnterhaltsRechner,
+  'arbeitslosengeld-rechner': ArbeitslosengeldRechner,
+  'grundsteuer-rechner': GrundsteuerRechner,
+  'midijob-rechner': MidijobRechner,
+  'firmenwagenrechner': FirmenwagenRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
