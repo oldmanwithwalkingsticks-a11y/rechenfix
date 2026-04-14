@@ -89,6 +89,7 @@ import IndexmieteRechner from '@/components/rechner/IndexmieteRechner';
 import MinijobRechner from '@/components/rechner/MinijobRechner';
 import WaermepumpeRechner from '@/components/rechner/WaermepumpeRechner';
 import GehaltserhoehungRechner from '@/components/rechner/GehaltserhoehungRechner';
+import ZugewinnausgleichRechner from '@/components/rechner/ZugewinnausgleichRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -190,6 +191,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'minijob-rechner': MinijobRechner,
   'waermepumpen-rechner': WaermepumpeRechner,
   'gehaltserhoehung-rechner': GehaltserhoehungRechner,
+  'zugewinnausgleich-rechner': ZugewinnausgleichRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

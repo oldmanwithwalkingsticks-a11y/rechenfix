@@ -160,6 +160,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'ueberstunden': 'Unbezahlte Überstunden? Mit Rechtsschutz zu Ihrem Recht.',
     'bussgeld': 'Einspruch gegen den Bußgeldbescheid? KS Auxilia Rechtsschutz übernimmt die Anwaltskosten — auch im Verkehrsrecht.',
     'scheidung': 'Rechtsschutzversicherung mit Familienrecht? KS Auxilia übernimmt Anwalts- und Gerichtskosten bei Scheidung.',
+    'zugewinn': 'Streit um den Zugewinnausgleich? KS Auxilia Rechtsschutz übernimmt Ihre Anwaltskosten im Familienrecht.',
   },
 };
 
