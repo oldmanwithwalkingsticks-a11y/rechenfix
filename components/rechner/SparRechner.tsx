@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 export default function SparRechner() {
@@ -144,6 +145,8 @@ export default function SparRechner() {
           </div>
 
           <CrossLink href="/finanzen/etf-sparplanrechner" emoji="📈" text="Mehr Rendite mit ETFs? Sparplan berechnen" />
+
+          <AffiliateBox programId="verivox" context="sparplan" />
 
           <ErgebnisAktionen
             ergebnisText={`Endkapital nach ${ergebnis.jahre.length} Jahren: ${fmt(ergebnis.endkapital)} € (Eigenkapital: ${fmt(ergebnis.eigenkapital)} €, Zinserträge: ${fmt(ergebnis.gesamtzinsen)} €)`}

@@ -299,6 +299,9 @@ export default function RentenRechner() {
           </div>
 
           <AffiliateBox programId="wiso" context="rente" />
+          {ergebnis.rentenluecke > 0 && (
+            <AffiliateBox programId="verivox" context="rente" variant="compact" />
+          )}
 
           <ErgebnisAktionen
             ergebnisText={`Rentenrechner: Brutto-Rente ca. ${fmt(ergebnis.bruttoRente)} €/Monat | Netto ca. ${fmt(ergebnis.nettoRente)} € | ${fmtDez(ergebnis.gesamtRentenpunkte)} Rentenpunkte | Rentenlücke: ${ergebnis.rentenluecke > 0 ? fmt(ergebnis.rentenluecke) + ' €' : 'keine'}`}
