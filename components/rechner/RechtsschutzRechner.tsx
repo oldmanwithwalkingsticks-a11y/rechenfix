@@ -11,6 +11,7 @@ import {
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import CrossLink from '@/components/ui/CrossLink';
 
 const LEBENSSITUATIONEN: { value: Lebenssituation; label: string }[] = [
   { value: 'single', label: 'Single' },
@@ -280,6 +281,9 @@ export default function RechtsschutzRechner() {
               <strong>Hinweis:</strong> Diese Berechnung zeigt geschätzte Durchschnittswerte. Der tatsächliche Beitrag hängt von Anbieter, Vorschäden und individuellen Faktoren ab.
             </p>
           </div>
+
+          <CrossLink href="/arbeit/kuendigungsfrist-rechner" emoji="📅" text="Kündigungsfrist bei Jobverlust prüfen" />
+          <CrossLink href="/arbeit/scheidungskosten-rechner" emoji="⚖️" text="Scheidungskosten berechnen" />
 
           <ErgebnisAktionen
             ergebnisText={`Rechtsschutzversicherung: ca. ${fmt(ergebnis.monatsbeitrag)} €/Monat (${fmt(ergebnis.jahresbeitrag)} €/Jahr) — ${ergebnis.bausteinDetails.map(d => d.label).join(', ')}`}

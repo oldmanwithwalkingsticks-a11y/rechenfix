@@ -10,6 +10,7 @@ import {
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 type Modus = 'anspruch' | 'resturlaub';
 
@@ -228,6 +229,9 @@ export default function UrlaubstageRechner() {
                   ))}
                 </div>
               </div>
+
+              <CrossLink href="/arbeit/arbeitstage-rechner" emoji="📅" text="Arbeitstage pro Bundesland berechnen" />
+              <CrossLink href="/arbeit/teilzeit-rechner" emoji="⏱️" text="Urlaub bei Teilzeit berechnen" />
 
               <ErgebnisAktionen
                 ergebnisText={`Urlaubsanspruch: ${fmtZahl(anspruchErgebnis.gesamt)} Tage (${fmtZahl(anspruchErgebnis.wochen)} Wochen)`}

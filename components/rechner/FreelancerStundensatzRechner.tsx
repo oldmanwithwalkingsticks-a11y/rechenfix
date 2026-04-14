@@ -256,6 +256,7 @@ export default function FreelancerStundensatzRechner() {
           </div>
 
           <CrossLink href="/finanzen/mwst-rechner" emoji="🧾" text="Mehrwertsteuer berechnen" />
+          <CrossLink href="/finanzen/gmbh-geschaeftsfuehrer-rechner" emoji="💼" text="GmbH gründen? GF-Gehalt berechnen" />
 
           <ErgebnisAktionen
             ergebnisText={`Empfohlener Freelancer-Stundensatz: ${fmt(ergebnis.stundensatzNetto)} € netto${!kleinunternehmer ? ` (${fmt(ergebnis.stundensatzBrutto)} € brutto inkl. USt)` : ''} | Tagessatz: ${fmt(ergebnis.tagessatzNetto)} € | Jahresumsatz nötig: ${fmt(ergebnis.jahresumsatzNoetig)} €`}

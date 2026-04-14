@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { berechneTageszeit, berechneWoche, type WochenTag } from '@/lib/berechnungen/arbeitszeit';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 import { AffiliateBox } from '@/components/AffiliateBox';
 
 type Modus = 'tag' | 'woche';
@@ -217,6 +218,9 @@ export default function ArbeitszeitRechner() {
               </div>
 
               <HinweisBox hinweise={tagesErgebnis.hinweise} />
+
+              <CrossLink href="/arbeit/ueberstunden-rechner" emoji="⏰" text="Überstunden berechnen" />
+              <CrossLink href="/arbeit/arbeitstage-rechner" emoji="📅" text="Arbeitstage pro Jahr berechnen" />
 
               <ErgebnisAktionen
                 ergebnisText={`Netto-Arbeitszeit: ${fmtZeit(tagesErgebnis.nettoStunden, tagesErgebnis.nettoRestMinuten)} (${fmtDez(tagesErgebnis.dezimal)} h)`}
