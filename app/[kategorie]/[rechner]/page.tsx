@@ -82,6 +82,7 @@ import WohngeldRechner from '@/components/rechner/WohngeldRechner';
 import BafoegRechner from '@/components/rechner/BafoegRechner';
 import KindergeldRechner from '@/components/rechner/KindergeldRechner';
 import PflegegeldRechner from '@/components/rechner/PflegegeldRechner';
+import SswRechner from '@/components/rechner/SswRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -176,6 +177,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'bafoeg-rechner': BafoegRechner,
   'kindergeld-rechner': KindergeldRechner,
   'pflegegeld-rechner': PflegegeldRechner,
+  'ssw-rechner': SswRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

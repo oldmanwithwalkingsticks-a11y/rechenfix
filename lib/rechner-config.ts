@@ -5367,6 +5367,68 @@ Neben dem Pflegegeld haben alle Pflegegrade (auch Grad 1) Anspruch auf den **Ent
       },
     ],
   },
+  {
+    slug: 'ssw-rechner',
+    titel: 'SSW-Rechner',
+    beschreibung: 'Schwangerschaftswoche berechnen: Aktuelle SSW, Trimester und Entwicklung Ihres Babys Woche für Woche.',
+    kategorie: 'Gesundheit',
+    kategorieSlug: 'gesundheit',
+    metaTitle: 'SSW-Rechner 2026 — Schwangerschaftswoche berechnen | Rechenfix',
+    metaDescription: 'SSW berechnen: Aktuelle Schwangerschaftswoche, Trimester und Baby-Entwicklung ✓ Größenvergleich ✓ Wichtige Termine ✓ KI-Erklärung.',
+    keywords: ['ssw rechner', 'schwangerschaftswoche berechnen', 'ssw berechnen', 'trimester rechner', 'baby entwicklung', 'wie viele wochen schwanger', 'ssw tabelle', 'mutterpass ssw', 'geburtstermin', 'schwangerschaftskalender'],
+    icon: '🤰',
+    formel: 'SSW = floor((Heute − Erster Tag letzte Periode) / 7) + Resttage | Notation: "SSW X+Y" (X vollendete Wochen, Y Tage) | ET (Naegele): letzte Periode + 280 Tage (+ Zykluskorrektur) | 1. Trimester: SSW 1–12, 2. Trimester: SSW 13–27, 3. Trimester: SSW 28–40.',
+    beispiel: 'Letzte Periode vor 14 Wochen 3 Tagen → SSW 14+3, 2. Trimester, Baby ca. 9 cm groß (Zitrone), noch ca. 25 Wochen 4 Tage bis zum Geburtstermin.',
+    erklaerung: `**Was bedeutet SSW? Die Zählung erklärt**
+
+SSW steht für „Schwangerschaftswoche" und ist die international gebräuchliche Angabe, um den Stand einer Schwangerschaft zu beschreiben. Gezählt wird ab dem **ersten Tag der letzten Periode** — nicht ab dem tatsächlichen Zeugungstermin. Dadurch entstehen im Rechner zwei zusätzliche Wochen, in denen die Frau streng genommen noch gar nicht schwanger ist. Der Grund: Der genaue Eisprung lässt sich oft nicht eindeutig bestimmen, die letzte Periode jedoch schon. Die Angabe erfolgt als „SSW X+Y", wobei X für die vollendeten Wochen und Y für die zusätzlichen Tage steht. Bei „SSW 14+3" ist die Frau also 14 volle Wochen und 3 Tage schwanger — sie befindet sich in der 15. Woche. Eine Schwangerschaft dauert durchschnittlich 40 Wochen bzw. 280 Tage, gerechnet ab der letzten Periode. Der [Geburtstermin-Rechner](/gesundheit/geburtstermin-rechner) ermittelt den errechneten Termin nach verschiedenen Methoden.
+
+**Die drei Trimester im Überblick**
+
+Die 40 Wochen einer Schwangerschaft werden in **drei Trimester** eingeteilt — jeweils mit eigenen Schwerpunkten und Herausforderungen. Das **1. Trimester** umfasst die Wochen 1 bis 12 und ist die sensibelste Phase: Alle Organe werden angelegt, das Fehlgeburtsrisiko ist am höchsten, viele Frauen leiden unter Übelkeit und starker Müdigkeit. Am Ende des 1. Trimesters sinkt das Risiko einer Fehlgeburt deutlich — viele Paare informieren dann Familie und Freunde. Das **2. Trimester** (SSW 13–27) gilt als die „goldene Zeit": Beschwerden lassen nach, der Babybauch wird sichtbar, erste Kindsbewegungen werden spürbar, das Geschlecht ist erkennbar. Im **3. Trimester** (SSW 28–40) bereitet sich der Körper auf die Geburt vor, das Baby gewinnt schnell an Gewicht, der Bauch wird schwer, Kontraktionen (Übungswehen) werden häufiger.
+
+**Baby-Entwicklung Woche für Woche**
+
+Kaum ein Prozess im menschlichen Körper ist so faszinierend wie die Embryonal- und Fötalentwicklung. In **SSW 5–8** schlägt erstmals das Herz, alle wichtigen Organe werden angelegt. Bis **SSW 12** sind Finger und Zehen ausgebildet, das Baby ist etwa 6 cm groß. In **SSW 16** lässt sich das Geschlecht per Ultraschall erkennen. Um **SSW 20** herum nehmen viele Frauen die ersten Kindsbewegungen wahr — bei Erstgebärenden meist etwas später. Ab **SSW 24** kann das Baby hören und reagiert auf Stimmen und Musik. In **SSW 28** öffnen sich die Augen, die Überlebensfähigkeit außerhalb der Gebärmutter erreicht über 90 Prozent. Ab **SSW 32** dreht sich das Baby meist in die Kopflage. In **SSW 37** gilt die Schwangerschaft als ausgetragen — alles ab hier ist kein Frühchen mehr.
+
+**Wichtige Vorsorgeuntersuchungen nach SSW**
+
+Die deutschen Mutterschaftsrichtlinien sehen regelmäßige Vorsorgeuntersuchungen vor — bezahlt von der Krankenkasse. Die **Erstuntersuchung** findet zwischen SSW 5 und 8 statt und umfasst Anamnese, Ausstellung des Mutterpasses und ersten Ultraschall. Der **1. Screening-Ultraschall** erfolgt zwischen SSW 9–12 zur Feststellung der Herzaktivität und des genauen Alters. Zwischen SSW 11 und 14 bieten Ärzte das optionale **Ersttrimester-Screening** (Nackenfaltenmessung) an. Der **2. Ultraschall** zwischen SSW 19–22 ist die sogenannte „Feindiagnostik" — hier werden alle Organe untersucht. Zwischen SSW 24–28 wird der **Zuckerbelastungstest (oGTT)** zum Ausschluss einer Schwangerschaftsdiabetes durchgeführt. Der **3. Ultraschall** findet zwischen SSW 29–32 statt. Ab SSW 32 kommen Sie alle zwei Wochen zur Vorsorge, ab SSW 36 wöchentlich.
+
+**Mutterschutz, Elterngeld und wichtige Fristen**
+
+Sechs Wochen vor dem errechneten Geburtstermin beginnt der **Mutterschutz** — ab diesem Zeitpunkt darf die werdende Mutter nicht mehr arbeiten (außer sie wünscht es ausdrücklich). Nach der Geburt folgen 8 Wochen Schutzfrist, bei Früh- oder Mehrlingsgeburten 12 Wochen. Der [Mutterschutz-Rechner](/arbeit/mutterschutz-rechner) zeigt alle wichtigen Fristen und die Höhe des Mutterschaftsgelds. Für die Zeit nach der Geburt kommt das [Elterngeld](/finanzen/elterngeld-rechner) ins Spiel — 65 % des letzten Nettos, bis 1.800 € monatlich. Beantragen Sie den Mutterpass, Kinderbetreuung und Elterngeld frühzeitig — die Fristen und Wartezeiten sind in Deutschland länger als viele denken.
+
+**Frauenärztliche Beratung ersetzen kann dieser Rechner nicht**
+
+So hilfreich SSW-Rechner und Schwangerschafts-Apps auch sind — sie ersetzen keine ärztliche Betreuung. Jede Schwangerschaft verläuft individuell, Komplikationen sind möglich, und der vom Frauenarzt im Mutterpass eingetragene Geburtstermin gilt als verbindlich. Ultraschallmessungen in den ersten 12 Wochen sind die genaueste Methode zur Bestimmung des Gestationsalters. Ziehen Sie bei Unsicherheiten immer Ihre Frauenärztin oder Ihren Frauenarzt hinzu.`,
+    faq: [
+      {
+        frage: 'In welcher SSW bin ich?',
+        antwort: 'Die aktuelle Schwangerschaftswoche berechnen Sie ab dem ersten Tag Ihrer letzten Periode. Zählen Sie die Tage bis heute und teilen Sie durch 7 — das Ergebnis ist die „SSW X+Y", wobei X die vollendeten Wochen und Y die zusätzlichen Tage sind. Ein Beispiel: 101 Tage seit letzter Periode = SSW 14+3 (14 × 7 = 98, plus 3 Tage). Der Rechner oben übernimmt die Berechnung automatisch.',
+      },
+      {
+        frage: 'Wie wird die SSW gezählt?',
+        antwort: 'Die SSW wird ab dem ersten Tag der letzten Periode gezählt — nicht ab der tatsächlichen Zeugung. Das bedeutet, dass Sie in SSW 1 und 2 streng genommen noch gar nicht schwanger sind. Die Zählung ist international einheitlich und wird so auch im Mutterpass verwendet. Eine volle Schwangerschaft dauert 40 Wochen oder 280 Tage.',
+      },
+      {
+        frage: 'Was passiert in welcher SSW?',
+        antwort: 'SSW 4–8: Herzschlag beginnt, Organogenese. SSW 9–12: Finger, Zehen, Ende 1. Trimester. SSW 13–16: Geschlecht erkennbar. SSW 17–20: erste Kindsbewegungen. SSW 21–24: Baby kann hören. SSW 25–28: Augen öffnen sich. SSW 29–32: Lungenreifung. SSW 33–36: Kopflage. SSW 37–40: geburtsbereit. Der Rechner zeigt die passende Info je nach aktueller SSW.',
+      },
+      {
+        frage: 'Ab wann kann man das Geschlecht erkennen?',
+        antwort: 'Per Ultraschall ist das Geschlecht ab etwa SSW 14–16 erkennbar, sicher meist erst ab SSW 18–20 beim 2. Screening-Ultraschall. Durch einen nicht-invasiven Pränataltest (NIPT) aus dem Blut der Mutter ist das Geschlecht bereits ab SSW 10 bestimmbar — allerdings darf das Ergebnis in Deutschland aus gesetzlichen Gründen erst ab vollendeter SSW 14 mitgeteilt werden (§ 15 GenDG).',
+      },
+      {
+        frage: 'Wann beginnt welches Trimester?',
+        antwort: '1. Trimester: SSW 1 bis 12 (insgesamt 12 Wochen), 2. Trimester: SSW 13 bis 27 (15 Wochen), 3. Trimester: SSW 28 bis 40 (13 Wochen). Die Trimester sind also unterschiedlich lang. Der Übergang zum 2. Trimester markiert das deutlich gesunkene Fehlgeburtsrisiko, der Übergang zum 3. Trimester den Beginn der Spätschwangerschaft.',
+      },
+      {
+        frage: 'Wie genau ist der errechnete Geburtstermin?',
+        antwort: 'Der ET (Naegele-Regel: letzte Periode + 280 Tage) ist ein statistischer Richtwert. Nur etwa 4 % der Babys kommen genau am errechneten Termin zur Welt. Als regulär gelten Geburten zwischen SSW 37+0 und SSW 41+6. Am genauesten wird der Termin durch einen frühen Ultraschall im 1. Trimester bestimmt — diese Messung korrigiert die Naegele-Regel bei unregelmäßigen Zyklen.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -5380,6 +5442,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'ssw-rechner',
   'pflegegeld-rechner',
   'kindergeld-rechner',
   'bafoeg-rechner',
@@ -5531,6 +5594,7 @@ const verwandteMap: Record<string, string[]> = {
   'bafoeg-rechner': ['wohngeld-rechner', 'buergergeld-rechner', 'brutto-netto-rechner', 'mietrechner'],
   'kindergeld-rechner': ['elterngeld-rechner', 'splitting-rechner', 'steuererstattung-rechner', 'brutto-netto-rechner'],
   'pflegegeld-rechner': ['buergergeld-rechner', 'rentenrechner', 'wohngeld-rechner', 'brutto-netto-rechner'],
+  'ssw-rechner': ['geburtstermin-rechner', 'mutterschutz-rechner', 'elterngeld-rechner', 'kalorienrechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
