@@ -143,9 +143,9 @@ export default function AutokostenRechner() {
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kfz-Steuer</label>
             <NummerEingabe value={kfzSteuer} onChange={setKfzSteuer} placeholder="150" einheit="€/Jahr" />
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">→ <a href="/auto/kfz-steuer-rechner" className="text-primary-500 hover:underline">Kfz-Steuer-Rechner</a></p>
           </div>
         </div>
+        <CrossLink href="/auto/kfz-steuer-rechner" emoji="📋" text="Kfz-Steuer genau berechnen" />
       </div>
 
       {/* === Bereich 3: Kraftstoff === */}
@@ -400,7 +400,7 @@ export default function AutokostenRechner() {
             </div>
           </div>
 
-          <CrossLink href="/auto/bussgeldrechner" emoji="🚨" text="Bußgeld bei Verkehrsverstoß berechnen" />
+          <CrossLink href="/auto/leasing-rechner" emoji="🚙" text="Auto leasen statt kaufen? Leasing-Rechner" />
 
           {/* Hinweis */}
           <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-6">

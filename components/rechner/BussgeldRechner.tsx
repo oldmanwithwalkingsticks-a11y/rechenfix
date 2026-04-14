@@ -7,6 +7,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 import { AffiliateBox } from '@/components/AffiliateBox';
 
 const VERSTOSS_OPTIONEN: { value: VerstossArt; label: string }[] = [
@@ -194,6 +195,7 @@ export default function BussgeldRechner() {
               <option value="unter_05_auffaellig">Unter 0,5 ‰ mit Auffälligkeiten</option>
               <option value="probezeit">Probezeit / unter 21: ab 0,0 ‰</option>
             </select>
+            <CrossLink href="/gesundheit/alkohol-abbau-rechner" emoji="🍺" text="Wann bin ich wieder nüchtern? Alkohol-Abbau-Rechner" />
           </div>
         )}
       </div>
@@ -310,6 +312,8 @@ export default function BussgeldRechner() {
             ))}
           </div>
         )}
+
+        <CrossLink href="/auto/kfz-steuer-rechner" emoji="📋" text="Kfz-Steuer berechnen" />
 
         <ErgebnisAktionen
           ergebnisText={`${ergebnis.beschreibung}: ${ergebnis.straftat ? 'Straftat' : `${ergebnis.bussgeld} € Bußgeld`}, ${ergebnis.punkte} Punkt${ergebnis.punkte !== 1 ? 'e' : ''} in Flensburg${ergebnis.fahrverbot > 0 ? `, ${ergebnis.fahrverbot} Monat${ergebnis.fahrverbot > 1 ? 'e' : ''} Fahrverbot` : ''}`}
