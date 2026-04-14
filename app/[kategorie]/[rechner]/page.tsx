@@ -81,6 +81,7 @@ import AutokostenRechner from '@/components/rechner/AutokostenRechner';
 import WohngeldRechner from '@/components/rechner/WohngeldRechner';
 import BafoegRechner from '@/components/rechner/BafoegRechner';
 import KindergeldRechner from '@/components/rechner/KindergeldRechner';
+import PflegegeldRechner from '@/components/rechner/PflegegeldRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -174,6 +175,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'wohngeld-rechner': WohngeldRechner,
   'bafoeg-rechner': BafoegRechner,
   'kindergeld-rechner': KindergeldRechner,
+  'pflegegeld-rechner': PflegegeldRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

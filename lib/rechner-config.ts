@@ -5305,6 +5305,68 @@ Neben Kindergeld und Kinderfreibetrag gibt es weitere Hilfen: den **Kinderzuschl
       },
     ],
   },
+  {
+    slug: 'pflegegeld-rechner',
+    titel: 'Pflegegeld-Rechner',
+    beschreibung: 'Pflegegeld berechnen: Leistungen der Pflegeversicherung nach Pflegegrad — Pflegegeld, Pflegesachleistung und Kombinationsleistung.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Pflegegeld-Rechner 2026 — Leistungen nach Pflegegrad berechnen | Rechenfix',
+    metaDescription: 'Pflegegeld 2026 berechnen: Pflegegeld, Sachleistung und Kombinationsleistung nach Pflegegrad 1-5 ✓ Alle Zusatzleistungen ✓ KI-Erklärung.',
+    keywords: ['pflegegeld rechner', 'pflegegeld 2026', 'pflegegrad', 'pflegesachleistung', 'kombinationsleistung', 'pflegeversicherung', 'pflegeheim eigenanteil', 'entlastungsbetrag', 'verhinderungspflege', 'kurzzeitpflege'],
+    icon: '🏥',
+    formel: 'Pflegegeld 2026 (häusliche Pflege): Grad 2: 332 € | Grad 3: 573 € | Grad 4: 765 € | Grad 5: 947 € | Pflegesachleistung: 761 / 1.432 / 1.778 / 2.200 € | Kombinationsleistung: Dienst-Anteil anteilig + Pflegegeld anteilig | + 125 € Entlastungsbetrag (ab Grad 1).',
+    beispiel: 'Pflegegrad 3, häusliche Pflege durch Angehörige → 573 € Pflegegeld/Monat + 125 € Entlastungsbetrag = 698 € monatlich | Zusätzlich: bis 1.612 € Verhinderungspflege und bis 1.774 € Kurzzeitpflege pro Jahr.',
+    erklaerung: `**Pflegegrade 1 bis 5: Was bedeuten sie?**
+
+Seit 2017 gelten in Deutschland fünf Pflegegrade, die die drei früheren Pflegestufen ersetzt haben. Maßstab ist der Grad der Selbstständigkeit in sechs Lebensbereichen (Mobilität, geistige Fähigkeiten, Verhalten, Selbstversorgung, Umgang mit Krankheit, Alltag). Der Medizinische Dienst (MD) vergibt Punkte und ermittelt daraus den Pflegegrad: **Pflegegrad 1** (geringe Beeinträchtigung) erhalten Versicherte mit 12,5–27 Punkten, **Grad 2** (erhebliche) bei 27–47,5, **Grad 3** (schwere) bei 47,5–70, **Grad 4** (schwerste) bei 70–90 und **Grad 5** (schwerste mit besonderen Anforderungen) ab 90 Punkten. Je höher der Pflegegrad, desto umfangreicher die Leistungen der Pflegeversicherung.
+
+**Pflegegeld vs. Pflegesachleistung: Der Unterschied**
+
+Die Pflegeversicherung unterscheidet zwei Hauptleistungen in der häuslichen Pflege. Das **Pflegegeld** wird direkt an die pflegebedürftige Person ausgezahlt, wenn sie zu Hause von Angehörigen, Freunden oder Nachbarn gepflegt wird. Es ist ein Geldbetrag zur freien Verfügung und beträgt 2026 zwischen 332 € (Grad 2) und 947 € (Grad 5). Die **Pflegesachleistung** hingegen wird direkt an einen ambulanten Pflegedienst gezahlt und ist deutlich höher — von 761 € (Grad 2) bis 2.200 € (Grad 5). Sie deckt die Kosten professioneller Pflege ab, darf aber nur für zugelassene Dienste verwendet werden. Pflegegrad 1 hat keinen Anspruch auf Pflegegeld oder Pflegesachleistung, sondern nur auf den Entlastungsbetrag von 125 €.
+
+**Kombinationsleistung: So funktioniert sie**
+
+Viele Familien kombinieren beide Leistungen: Der Pflegedienst übernimmt beispielsweise Körperpflege und Medikamentenmanagement, während Angehörige die übrige Betreuung leisten. Bei der **Kombinationsleistung** wird der tatsächlich genutzte Anteil der Sachleistung prozentual auf die volle Sachleistung bezogen. Das verbleibende Pflegegeld wird dann im Verhältnis des ungenutzten Anteils ausgezahlt. Beispiel Pflegegrad 3: Der Dienst nutzt 50 % der Sachleistung (716 € von 1.432 €), dann gibt es 50 % des Pflegegelds (286,50 €) zusätzlich. So bleiben Familien flexibel und schöpfen die Leistungen optimal aus. Der Anteil kann bei der Pflegekasse einmal pro Halbjahr geändert werden.
+
+**Pflegegeld-Erhöhung 2025/2026: Was hat sich geändert?**
+
+Zum 1. Januar 2025 wurden alle Leistungsbeträge der Pflegeversicherung um **4,5 Prozent erhöht** — nach Jahren der Stagnation eine spürbare Entlastung. Pflegegrad 3 steigt beispielsweise beim Pflegegeld von 545 € auf 573 €, die Pflegesachleistung von 1.363 € auf 1.432 €. Auch der Entlastungsbetrag bleibt stabil bei 125 €. Ebenfalls angehoben wurden Verhinderungs- und Kurzzeitpflege. Für 2026 ist nach aktuellem Stand keine weitere Dynamisierung vorgesehen — die nächste reguläre Anpassung kommt 2028. Vergleichen Sie mit Ihrem Nettoeinkommen im [Brutto-Netto-Rechner](/finanzen/brutto-netto-rechner), um Ihren finanziellen Spielraum zu überblicken.
+
+**Eigenanteil im Pflegeheim: Wie hoch ist er wirklich?**
+
+Der wohl größte Finanz-Schock für viele Familien: Die Pflegeversicherung deckt die Pflegeheim-Kosten nur zu einem Bruchteil ab. Die gesetzlichen Leistungen für stationäre Pflege liegen zwischen 770 € (Grad 2) und 2.005 € (Grad 5) monatlich — ein deutscher Heimplatz kostet aber durchschnittlich **2.500 bis 3.500 € pro Monat Eigenanteil** (Stand 2026). Dieser sogenannte **einrichtungseinheitliche Eigenanteil (EEE)** umfasst Unterkunft, Verpflegung, Investitionskosten und nicht-pflegerische Ausgaben. Seit 2022 gibt es einen **Leistungszuschlag**, der den Eigenanteil im ersten Jahr um 15 %, im zweiten um 30 %, im dritten um 50 % und ab dem vierten Jahr um 75 % reduziert. Reicht die Rente nicht aus, springt die Sozialhilfe ein — prüfen Sie auch Ihren Anspruch auf [Bürgergeld](/finanzen/buergergeld-rechner) oder [Wohngeld](/finanzen/wohngeld-rechner).
+
+**Zusatzleistungen: Was Sie oft nicht wissen**
+
+Neben dem Pflegegeld haben alle Pflegegrade (auch Grad 1) Anspruch auf den **Entlastungsbetrag von 125 € monatlich**. Dieser ist zweckgebunden für Alltagshilfen, Haushaltshilfe, Betreuungsangebote oder Tagespflege — nicht verwendete Beträge können innerhalb von 6 Monaten angespart werden. Ab Pflegegrad 2 kommen **Verhinderungspflege** (bis 1.612 € pro Jahr bei Urlaub/Krankheit der Angehörigen) und **Kurzzeitpflege** (bis 1.774 €) hinzu. Für Verbrauchsmittel wie Einmalhandschuhe und Desinfektion gibt es **40 € monatlich Pflegehilfsmittel-Pauschale**. Einmalig können bis zu **4.000 € für Wohnraumanpassungen** (Treppenlifte, barrierefreies Bad) beantragt werden — pro Maßnahme, also mehrfach möglich. Nutzen Sie den [Rentenrechner](/finanzen/rentenrechner), um Ihre Altersvorsorge mit den Pflegekosten abzugleichen.`,
+    faq: [
+      {
+        frage: 'Wie hoch ist das Pflegegeld 2026?',
+        antwort: 'Das Pflegegeld beträgt 2026 monatlich: Pflegegrad 1: 0 € (nur Entlastungsbetrag), Grad 2: 332 €, Grad 3: 573 €, Grad 4: 765 €, Grad 5: 947 €. Es wird steuerfrei direkt an die pflegebedürftige Person gezahlt, wenn diese zu Hause von Angehörigen gepflegt wird. Zusätzlich erhält jeder Pflegegrad 125 € Entlastungsbetrag.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen Pflegegeld und Pflegesachleistung?',
+        antwort: 'Pflegegeld wird an die pflegebedürftige Person gezahlt und ist für die Pflege durch Angehörige, Freunde oder Nachbarn gedacht. Pflegesachleistung wird direkt an einen zugelassenen Pflegedienst überwiesen und ist deutlich höher (z. B. Grad 3: 1.432 € statt 573 €). Sie darf nur für professionelle Dienstleistungen verwendet werden, nicht für private Helfer.',
+      },
+      {
+        frage: 'Was ist die Kombinationsleistung?',
+        antwort: 'Die Kombinationsleistung ermöglicht es, Pflegegeld und Pflegesachleistung zu kombinieren. Wenn der Pflegedienst beispielsweise 50 % der maximalen Sachleistung ausschöpft, gibt es 50 % des Pflegegelds zusätzlich. So lassen sich Familie und Profi-Pflege flexibel kombinieren. Der Anteil kann alle 6 Monate neu festgelegt werden.',
+      },
+      {
+        frage: 'Wer stellt den Pflegegrad fest?',
+        antwort: 'Den Pflegegrad stellt der Medizinische Dienst (MD, früher MDK) im Auftrag der Pflegekasse fest. Bei Privatversicherten übernimmt das Medicproof. Ein Gutachter kommt zur pflegebedürftigen Person nach Hause und bewertet die Selbstständigkeit in 6 Lebensbereichen nach einem Punktesystem (NBA). Das Verfahren dauert nach Antragstellung 25 Arbeitstage. Einen Widerspruch kann man innerhalb eines Monats nach Bescheid einlegen.',
+      },
+      {
+        frage: 'Wird das Pflegegeld auf Bürgergeld angerechnet?',
+        antwort: 'Nein. Pflegegeld ist eine zweckgebundene Leistung der Pflegeversicherung und wird NICHT auf Bürgergeld, Grundsicherung oder Wohngeld angerechnet. Es bleibt der pflegebedürftigen Person bzw. den Angehörigen in voller Höhe zur Verfügung. Auch bei der Einkommensteuer bleibt Pflegegeld steuerfrei.',
+      },
+      {
+        frage: 'Wie beantrage ich einen höheren Pflegegrad?',
+        antwort: 'Formlos per Brief, Telefon oder Online-Formular bei der Pflegekasse der eigenen Krankenkasse. Die Kasse beauftragt den MD mit einer erneuten Begutachtung. Tipp: Führen Sie vorher ein Pflegetagebuch über 1–2 Wochen, in dem Sie alle Hilfen und den zeitlichen Aufwand dokumentieren. Das hilft bei der Begutachtung. Bei Ablehnung haben Sie einen Monat Zeit für einen kostenfreien Widerspruch.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -5318,6 +5380,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'pflegegeld-rechner',
   'kindergeld-rechner',
   'bafoeg-rechner',
   'wohngeld-rechner',
@@ -5467,6 +5530,7 @@ const verwandteMap: Record<string, string[]> = {
   'wohngeld-rechner': ['buergergeld-rechner', 'mietrechner', 'nebenkosten-rechner', 'brutto-netto-rechner'],
   'bafoeg-rechner': ['wohngeld-rechner', 'buergergeld-rechner', 'brutto-netto-rechner', 'mietrechner'],
   'kindergeld-rechner': ['elterngeld-rechner', 'splitting-rechner', 'steuererstattung-rechner', 'brutto-netto-rechner'],
+  'pflegegeld-rechner': ['buergergeld-rechner', 'rentenrechner', 'wohngeld-rechner', 'brutto-netto-rechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
