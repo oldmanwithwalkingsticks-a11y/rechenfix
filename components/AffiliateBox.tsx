@@ -107,6 +107,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'rente': 'Altersvorsorge steuerlich absetzen — Riester, Rürup und betriebliche Altersvorsorge optimal in der Steuererklärung angeben.',
     'splitting': 'WISO Steuer berechnet automatisch, ob Einzel- oder Zusammenveranlagung für Sie günstiger ist.',
     'kindergeld': 'WISO Steuer führt die Günstigerprüfung automatisch durch und holt das Maximum für Familien heraus.',
+    'erbschaft': 'Erbschaft in der Steuererklärung korrekt angeben — WISO Steuer führt Sie durch alle Angaben.',
   },
   smartsteuer: {
     'brutto-netto': 'Online-Steuererklärung machen und Geld vom Finanzamt zurückholen.',
@@ -115,6 +116,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'grunderwerbsteuer': 'Immobilienkosten steuerlich geltend machen — smartsteuer hilft.',
     'steuererstattung': 'Online-Steuererklärung in unter 60 Minuten — perfekt für einfache Steuerfälle.',
     'splitting': 'Gemeinsame Steuererklärung als Ehepaar? smartsteuer führt Sie in unter 1 Stunde durch.',
+    'erbschaft': 'Erbschaft oder Schenkung erhalten? smartsteuer hilft bei der steuerlichen Erfassung.',
   },
   lexware: {
     'mwst': 'Als Selbstständiger? Lexware Office erstellt Ihre UStVA automatisch.',

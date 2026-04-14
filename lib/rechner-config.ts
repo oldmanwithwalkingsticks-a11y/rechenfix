@@ -5429,6 +5429,64 @@ So hilfreich SSW-Rechner und Schwangerschafts-Apps auch sind — sie ersetzen ke
       },
     ],
   },
+  {
+    slug: 'erbschaftsteuer-rechner',
+    titel: 'Erbschaftsteuer-Rechner',
+    beschreibung: 'Erbschaftsteuer und Schenkungsteuer berechnen: Freibetrag, Steuersatz und Steuerlast nach Verwandtschaftsgrad.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Erbschaftsteuer-Rechner 2026 — Erbschaftsteuer & Freibetrag berechnen | Rechenfix',
+    metaDescription: 'Erbschaftsteuer berechnen: Freibetrag, Steuersatz und Steuerlast nach Verwandtschaftsgrad ✓ Schenkungsteuer ✓ 10-Jahres-Regel ✓ KI-Erklärung.',
+    keywords: ['erbschaftsteuer rechner', 'erbschaftssteuer 2026', 'schenkungsteuer rechner', 'erbschaftssteuer freibetrag', 'freibetrag kind', 'freibetrag ehepartner', 'erbschaftsteuer steuerklasse', 'erbschaft berechnen', '10 jahre schenkung', 'familienheim'],
+    icon: '🏛️',
+    formel: 'Erbschaftsteuer = (Wert − persönlicher Freibetrag − Versorgungsfreibetrag) × Steuersatz | Freibeträge: Ehepartner 500.000 € · Kind 400.000 € · Enkel (Eltern verstorben) 400.000 € · Enkel 200.000 € · Eltern bei Erbschaft 100.000 € · Geschwister/Neffen/Nicht-Verwandte 20.000 € | Steuersätze 7–50 % je nach Steuerklasse I–III und Betragsstufe.',
+    beispiel: 'Kind erbt 700.000 € → Freibetrag 400.000 € − 52.000 € Versorgung = 248.000 € steuerpfl. Erwerb → Steuerklasse I, 11 % → ca. 27.280 € Erbschaftsteuer → Netto: 672.720 €.',
+    erklaerung: `**Erbschaftsteuer: Freibeträge nach Verwandtschaftsgrad**
+
+Die Höhe der Erbschaftsteuer hängt in Deutschland entscheidend vom **Verwandtschaftsgrad** ab. Je näher die verwandtschaftliche Beziehung, desto höher der Freibetrag und desto niedriger der Steuersatz. **Ehepartner** und eingetragene Lebenspartner haben einen Freibetrag von **500.000 Euro**. **Kinder** (auch Stief- und Adoptivkinder) sowie Enkel, deren Eltern bereits verstorben sind, erhalten jeweils **400.000 Euro**. Enkel, deren Eltern noch leben, bekommen **200.000 Euro**. **Eltern und Großeltern** haben bei einer Erbschaft **100.000 Euro** Freibetrag. Für alle anderen — darunter Geschwister, Nichten, Neffen, Stiefeltern, geschiedene Ehepartner und nicht verwandte Personen — gilt der Mindestfreibetrag von nur **20.000 Euro**. Die Freibeträge sind in § 16 ErbStG geregelt und wurden zuletzt 2009 angepasst. Trotz steigender Immobilienwerte sind sie seither unverändert, was besonders in Großstädten zunehmend zum Problem wird.
+
+**Schenkung vs. Erbschaft: Steuerliche Unterschiede**
+
+Schenkungs- und Erbschaftsteuer funktionieren nach demselben Gesetz (ErbStG) und haben dieselben Freibeträge — mit zwei wichtigen Unterschieden. Erstens: Bei **Eltern und Großeltern** gilt der hohe Freibetrag von 100.000 Euro nur bei einer Erbschaft. Bei Schenkungen von Kindern an ihre Eltern gilt nur der Mindestfreibetrag von 20.000 Euro (Steuerklasse II). Zweitens: Den **Versorgungsfreibetrag** gibt es nur bei Erbschaften — er beträgt für Ehepartner 256.000 Euro und für Kinder je nach Alter bis zu 52.000 Euro. Er soll den Versorgungsausfall durch den Tod des Erblassers kompensieren. Bei Schenkungen entfällt dieser Zusatzfreibetrag vollständig. Diese Unterschiede sind bei der Nachlassplanung entscheidend.
+
+**10-Jahres-Frist: Der wichtigste Steuertrick**
+
+Der wohl wichtigste Hebel im Erbschaftsteuerrecht ist die **10-Jahres-Regel**. Der persönliche Freibetrag erneuert sich alle 10 Jahre — wer sein Vermögen rechtzeitig an die nächste Generation überträgt, kann enorme Summen steuerfrei weitergeben. Beispiel: Ein Ehepaar hat ein Kind und will 1,2 Millionen Euro vererben. Schenken beide Elternteile jeweils 400.000 Euro (2 × 400.000 = 800.000 Euro), sind diese komplett steuerfrei. Nach 10 Jahren können sie erneut je 400.000 Euro schenken. Über 30 Jahre lassen sich so mehrere Millionen Euro an ein Kind steuerfrei übertragen. Wichtig: Die 10-Jahres-Frist beginnt ab dem Tag der Schenkung. Schenkungen innerhalb dieser Frist werden zusammengerechnet und der Freibetrag entsprechend aufgebraucht. Nutzen Sie auch den [Splitting-Rechner](/finanzen/splitting-rechner), um den Steuervorteil verheirateter Paare zu prüfen.
+
+**Selbstgenutzte Immobilie steuerfrei vererben**
+
+Eine der wichtigsten Ausnahmen im Erbschaftsteuerrecht ist das **Familienheim-Privileg** (§ 13 Abs. 1 Nr. 4b ErbStG). Eine vom Erblasser bis zu seinem Tod selbstgenutzte Immobilie kann **komplett steuerfrei** an den Ehepartner vererbt werden, sofern dieser mindestens 10 Jahre darin wohnen bleibt. An Kinder ist die Übertragung ebenfalls steuerfrei, allerdings nur bis zu einer Wohnfläche von **200 Quadratmetern**. Der überschießende Anteil wird normal besteuert. Auch hier gilt die 10-Jahres-Selbstnutzungsfrist. Wer vor Ablauf dieser Frist auszieht oder verkauft, verliert die Steuerbefreiung rückwirkend — außer bei zwingenden Gründen wie Pflegebedürftigkeit. Bei Immobilien sollten Sie zusätzlich die [Grunderwerbsteuer](/wohnen/grunderwerbsteuer-rechner) im Blick behalten, die jedoch bei Erbschaft und Schenkung unter Verwandten meist nicht anfällt.
+
+**Steuerklassen und Steuersätze im Detail**
+
+Das ErbStG unterscheidet drei **Steuerklassen**: Klasse I (enge Verwandte wie Ehepartner, Kinder, Enkel, Eltern bei Erbschaft), Klasse II (Geschwister, Nichten, Neffen, Stiefeltern, Schwiegereltern, geschiedene Ehepartner) und Klasse III (alle anderen, auch nicht verwandte Lebensgefährten). Die Steuersätze sind gestaffelt: Klasse I beginnt bei 7 % und steigt bis 30 % (für Erwerbe über 26 Mio. €). Klasse II beginnt bei 15 % und erreicht 43 %. Klasse III startet bei 30 % und kann bis zu 50 % betragen. Das bedeutet: Ein unverheirateter Lebenspartner zahlt bei einer Erbschaft von 500.000 Euro **150.000 Euro Steuer** (30 % auf 480.000 Euro steuerpflichtigen Erwerb), ein verheirateter Ehepartner **0 Euro**. Eine Heiratsurkunde kann also wortwörtlich sechsstellige Summen sparen. Beachten Sie auch die Steuer auf das laufende Einkommen im [Brutto-Netto-Rechner](/finanzen/brutto-netto-rechner) und die mögliche [Steuererstattung](/finanzen/steuererstattung-rechner).`,
+    faq: [
+      {
+        frage: 'Wie hoch ist der Freibetrag bei einer Erbschaft?',
+        antwort: 'Der Freibetrag hängt vom Verwandtschaftsgrad ab: Ehepartner 500.000 €, Kinder und Enkel (Eltern verstorben) je 400.000 €, andere Enkel 200.000 €, Eltern/Großeltern bei Erbschaft 100.000 €, Geschwister/Nichten/Neffen je 20.000 €, Nicht-Verwandte ebenfalls 20.000 €. Zusätzlich erhalten Ehepartner einen Versorgungsfreibetrag von 256.000 €, Kinder je nach Alter bis 52.000 €.',
+      },
+      {
+        frage: 'Ab welchem Betrag muss man Erbschaftsteuer zahlen?',
+        antwort: 'Sobald der Wert der Erbschaft den persönlichen Freibetrag übersteigt. Ein Kind zahlt also erst ab Erbschaften über 400.000 € (plus Versorgungsfreibetrag) Steuer. Geschwister zahlen schon ab 20.000 € über ihrem Freibetrag. Die Steuerklassen und -sätze richten sich nach der Höhe des steuerpflichtigen Erwerbs und dem Verwandtschaftsgrad.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen Erbschaftsteuer und Schenkungsteuer?',
+        antwort: 'Beide Steuern beruhen auf dem ErbStG und haben fast identische Freibeträge und Steuersätze. Zwei Unterschiede: (1) Bei Schenkungen an Eltern gilt nur der Freibetrag von 20.000 € (statt 100.000 € bei Erbschaft). (2) Den Versorgungsfreibetrag (256.000 € für Ehepartner, bis 52.000 € für Kinder) gibt es nur bei Erbschaften, nicht bei Schenkungen.',
+      },
+      {
+        frage: 'Erneuert sich der Freibetrag bei Schenkungen?',
+        antwort: 'Ja, alle 10 Jahre. Das ist der wichtigste Steuertrick: Schenkungen innerhalb von 10 Jahren werden zusammengerechnet, nach Ablauf der Frist steht der volle Freibetrag wieder zur Verfügung. Über 30 Jahre kann man einem Kind so bis zu 1,2 Mio. € steuerfrei schenken (3 × 400.000 €). Bei Ehegatten-Schenkung sogar 1,5 Mio. € (3 × 500.000 €). Die Planung sollte frühzeitig beginnen.',
+      },
+      {
+        frage: 'Ist eine selbstgenutzte Immobilie steuerfrei vererbbar?',
+        antwort: 'Ja — mit Einschränkungen. Das Familienheim-Privileg (§ 13 ErbStG) macht eine selbstgenutzte Immobilie für Ehepartner komplett steuerfrei, wenn der Erbe 10 Jahre darin wohnen bleibt. Für Kinder gilt die Steuerfreiheit bis 200 m² Wohnfläche, darüber wird anteilig besteuert. Zieht der Erbe innerhalb von 10 Jahren aus, entfällt die Steuerbefreiung rückwirkend (außer bei Pflegebedürftigkeit).',
+      },
+      {
+        frage: 'Welche Steuerklassen gibt es bei der Erbschaftsteuer?',
+        antwort: 'Klasse I: Ehepartner, Kinder, Enkel, Eltern/Großeltern (bei Erbschaft) — Sätze 7–30 %. Klasse II: Geschwister, Nichten, Neffen, Stiefeltern, Schwiegereltern, geschiedene Ehepartner, Eltern (bei Schenkung) — Sätze 15–43 %. Klasse III: Alle anderen, auch nicht verwandte Lebenspartner — Sätze 30–50 %. Je höher die Steuerklasse, desto höher auch der Steuersatz bei gleichem Erwerb.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -5442,6 +5500,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'erbschaftsteuer-rechner',
   'ssw-rechner',
   'pflegegeld-rechner',
   'kindergeld-rechner',
@@ -5595,6 +5654,7 @@ const verwandteMap: Record<string, string[]> = {
   'kindergeld-rechner': ['elterngeld-rechner', 'splitting-rechner', 'steuererstattung-rechner', 'brutto-netto-rechner'],
   'pflegegeld-rechner': ['buergergeld-rechner', 'rentenrechner', 'wohngeld-rechner', 'brutto-netto-rechner'],
   'ssw-rechner': ['geburtstermin-rechner', 'mutterschutz-rechner', 'elterngeld-rechner', 'kalorienrechner'],
+  'erbschaftsteuer-rechner': ['grunderwerbsteuer-rechner', 'splitting-rechner', 'steuererstattung-rechner', 'rentenrechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
