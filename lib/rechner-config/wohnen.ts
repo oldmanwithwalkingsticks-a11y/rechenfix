@@ -856,4 +856,66 @@ Die Dachneigung beeinflusst, wie schnell Regen- und Schmelzwasser abfließen. Je
       },
     ],
   },
+  {
+    slug: 'malerkosten-rechner',
+    titel: 'Malerkosten-Rechner',
+    beschreibung: 'Streichkosten für Wand und Decke berechnen — Farbbedarf, Material und Malerkosten mit Einkaufsliste.',
+    kategorie: 'Wohnen & Energie',
+    kategorieSlug: 'wohnen',
+    metaTitle: 'Malerkosten-Rechner 2026 — Streichkosten und Farbbedarf berechnen | Rechenfix',
+    metaDescription: 'Malerkosten-Rechner: Streichfläche, Farbbedarf, Materialkosten und Maler-Honorar berechnen ✓ Selbst vs. Maler ✓ Einkaufsliste ✓ Mit KI-Erklärung.',
+    keywords: ['malerkosten rechner', 'streichen kosten', 'farbbedarf rechner', 'maler kosten', 'wand streichen kosten', 'decke streichen', 'wandfarbe menge', 'streichfläche berechnen'],
+    icon: '🎨',
+    formel: 'Streichfläche = 2 × (Länge + Breite) × Höhe + Decke − Fenster − Türen. Farbbedarf = Fläche × 0,15 l/m² × Anzahl Anstriche.',
+    beispiel: 'Beispiel: Raum 5×4×2,5 m, 1 Fenster, 1 Tür, 2 Anstriche, Decke mitstreichen → ca. 62 m² Streichfläche, 19 l Farbe (95 €), Material ~135 €. Mit Maler ca. 395 €.',
+    erklaerung: `**Wie funktioniert der Malerkosten-Rechner?**
+
+Der Malerkosten-Rechner ermittelt, wie viel Farbe Sie für einen Raum benötigen, was das Material kostet und wie viel ein professioneller Maler zusätzlich verlangen würde. Sie wählen zwischen zwei Eingabemodi: Entweder Sie geben Länge, Breite und Höhe des Raums an (der Rechner ermittelt die Wandfläche automatisch), oder Sie tragen die Streichfläche direkt in Quadratmetern ein.
+
+**Berechnung der Streichfläche**
+
+Die Wandfläche eines rechteckigen Raums ergibt sich aus dem Umfang mal der Raumhöhe: Fläche = 2 × (Länge + Breite) × Höhe. Ein Raum mit 5 m × 4 m Grundfläche und 2,5 m Höhe hat also 2 × 9 × 2,5 = 45 m² Wandfläche. Kommt die Decke hinzu (Länge × Breite), addieren sich weitere 20 m² — Gesamtfläche 65 m². Für Fenster und Türen zieht der Rechner Pauschalen ab: 1,5 m² pro Fenster und 2,0 m² pro Tür. Bei einem Fenster und einer Tür bleiben 61,5 m² zu streichen.
+
+**Farbbedarf berechnen**
+
+Als Faustregel gilt: Ein Liter Wandfarbe reicht für etwa 6–8 m² bei einem Anstrich. Wir rechnen konservativ mit 0,15 Litern pro Quadratmeter, also ca. 6,7 m²/l. Bei zwei Anstrichen verdoppelt sich der Bedarf. Für dunkle Untergründe oder einen Farbwechsel von dunkel auf hell sind oft drei Anstriche nötig. Das Ergebnis rundet der Rechner immer auf volle Liter auf, damit Sie ausreichend Farbe kaufen und keine Nachläufe durch fehlende Reste riskieren.
+
+**Farbqualität und Preise**
+
+Die Preisspanne bei Wandfarbe ist groß. Standard-Dispersionsfarben kosten ca. 5 €/l, gute Premiumqualität (hohes Deckvermögen, Klasse 1 oder 2) etwa 10 €/l, Spezialfarben für Küche und Bad (schimmelresistent, feuchtraumgeeignet) 15 €/l und mehr. Deckvermögen, Nassabriebklasse und Strapazierfähigkeit sind die wichtigsten Qualitätsmerkmale. Günstige Baumarktfarbe kann zwar verlockend wirken, benötigt aber oft einen zusätzlichen Anstrich — Ersparnis = 0.
+
+**Selbst streichen oder Maler beauftragen?**
+
+Der Rechner zeigt beide Varianten parallel. Bei der Selbst-Option werden nur Material (Farbe, Abdeckmaterial, Werkzeug) berechnet — ein typischer Raum kostet so 80 bis 150 €. Beim Maler kommen Arbeitszeit (ca. 42 €/h, Leistung ca. 10 m²/h) und Anfahrt (pauschal 30 €) hinzu — das Ergebnis liegt meist bei 350 bis 800 €. Die Differenz ist also Ihr „Lohn" fürs Selbststreichen. Hobby-Streicher schaffen rund 5 m² pro Stunde, sollten also für einen Standardraum 5 bis 10 Stunden einplanen.
+
+**Wann lohnt sich der Profi?**
+
+Ein Malermeister lohnt sich vor allem bei großen Flächen, hohen Decken (über 3 m), schwierigen Untergründen (Risse, Schimmel, Tapetenwechsel), Stuckwerk, besonderen Techniken (Lasur, Wischtechnik) oder Zeitdruck. Außerdem haften Profis für Mängel, geben bei richtiger Rechnungsstellung Gewährleistung und übernehmen Entsorgung und Abdeckung. Bei einem reinen Auffrischungs-Anstrich in einem einfachen Wohnraum ist das DIY-Projekt meist die bessere Wahl.
+
+**Einkaufsliste für den Baumarkt**
+
+Zusätzlich zum reinen Farbbedarf zeigt Ihnen der Rechner eine vollständige Einkaufsliste: Abdeckfolie, Kreppband, Farbrolle mit Teleskopstiel, Abstreifgitter und Pinsel für Ecken. Rechnen Sie Materialpauschalen von ca. 40 € für Abdeckung und Werkzeug ein, falls nicht bereits vorhanden. Planen Sie zusätzlich unseren Tapetenbedarf-Rechner, den Quadratmeter-Rechner und den Umzugskosten-Rechner ein, wenn Sie einen kompletten Umzug planen.`,
+    faq: [
+      {
+        frage: 'Wie viel Farbe brauche ich pro Quadratmeter?',
+        antwort: 'Als Faustregel: 0,15 Liter pro Quadratmeter pro Anstrich, das entspricht ca. 6,7 m² Reichweite pro Liter. Bei zwei Anstrichen verdoppelt sich der Bedarf. Der Rechner rundet immer auf volle Liter auf, damit Sie ausreichend Farbe kaufen.',
+      },
+      {
+        frage: 'Brauche ich einen oder zwei Anstriche?',
+        antwort: 'Einmaliges Streichen reicht nur für Auffrischungen in derselben Farbe. Bei Farbwechsel oder nach längerer Zeit sind zwei Anstriche Standard. Von dunkel auf hell brauchen Sie oft drei Anstriche oder einen Haftgrund.',
+      },
+      {
+        frage: 'Was kostet ein Maler pro Quadratmeter?',
+        antwort: 'Professionelle Maler berechnen meist 8 bis 15 € pro Quadratmeter inkl. Farbe für Standardanstriche, plus Anfahrt und Nebenleistungen. Der Rechner kalkuliert intern mit ca. 42 € Stundenlohn und einer Leistung von 10 m²/h.',
+      },
+      {
+        frage: 'Lohnt sich Premium-Farbe?',
+        antwort: 'Ja, oft. Hochwertige Farben (Klasse 1/2 Nassabrieb, hohes Deckvermögen) benötigen häufig nur einen Anstrich statt zwei und sparen damit Arbeitszeit und manchmal sogar Material. Für Küche, Bad und Flure empfehlen wir immer scheuerbeständige Qualität.',
+      },
+      {
+        frage: 'Wie lange brauche ich zum Streichen eines Zimmers?',
+        antwort: 'Ein durchschnittlicher Hobby-Streicher schafft ca. 5 m² pro Stunde. Für einen 60 m²-Wandbereich mit zwei Anstrichen sollten Sie 12 bis 15 Stunden einplanen, verteilt auf zwei Tage (Trocknungszeit zwischen den Anstrichen).',
+      },
+    ],
+  },
 ];

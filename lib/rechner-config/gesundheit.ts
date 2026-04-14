@@ -720,4 +720,143 @@ Der Mehrbedarf an Kalorien ist geringer als oft gedacht: Im 2. Trimester nur etw
       },
     ],
   },
+  {
+    slug: 'zyklusrechner',
+    titel: 'Zyklusrechner',
+    beschreibung: 'Eisprung, fruchtbares Fenster und nächste Periode berechnen — mit Kalenderansicht für 1, 3 oder 6 Zyklen.',
+    kategorie: 'Gesundheit',
+    kategorieSlug: 'gesundheit',
+    metaTitle: 'Zyklusrechner 2026 — Eisprung und fruchtbare Tage berechnen | Rechenfix',
+    metaDescription: 'Zyklusrechner: Eisprung, fruchtbares Fenster und nächste Periode berechnen ✓ Kalender-Ansicht ✓ 1–6 Zyklen voraus ✓ Mit KI-Erklärung.',
+    keywords: ['zyklusrechner', 'eisprungrechner', 'fruchtbare tage berechnen', 'eisprung berechnen', 'fruchtbares fenster', 'menstruationszyklus rechner', 'periode berechnen'],
+    icon: '🔄',
+    formel: 'Eisprung = erster Tag der letzten Periode + (Zykluslänge − 14). Fruchtbares Fenster = Eisprung − 5 Tage bis Eisprung + 1 Tag.',
+    beispiel: 'Beispiel: Letzte Periode am 01.04.2026, Zykluslänge 28 Tage → Eisprung am 15.04.2026, fruchtbares Fenster 10.–16.04.2026, nächste Periode am 29.04.2026.',
+    erklaerung: `**Wie funktioniert der Zyklusrechner?**
+
+Der Zyklusrechner berechnet auf Basis des ersten Tages der letzten Periode und der durchschnittlichen Zykluslänge, wann der nächste Eisprung stattfindet, wann das fruchtbare Fenster beginnt und wann voraussichtlich die nächste Menstruation einsetzt. Dazu nutzt er die in der Reproduktionsmedizin etablierte Faustregel: Der Eisprung findet etwa 14 Tage vor der nächsten Periode statt. Das fruchtbare Fenster umfasst die fünf Tage vor dem Eisprung plus den Eisprungtag selbst, da Spermien bis zu fünf Tage im weiblichen Körper überleben können und die Eizelle nach dem Eisprung etwa 12 bis 24 Stunden befruchtungsfähig ist.
+
+**Der Menstruationszyklus im Überblick**
+
+Ein typischer Zyklus dauert 28 Tage, kann aber individuell zwischen 21 und 35 Tagen schwanken. Der Zyklus wird in vier Phasen unterteilt: Menstruation (Tag 1–5), Follikelphase (Tag 1–13), Ovulation/Eisprung (ca. Tag 14) und Lutealphase (Tag 15–28). Während die Lutealphase relativ konstant etwa 14 Tage dauert, ist die Follikelphase variabel — deshalb verschiebt sich bei längeren oder kürzeren Zyklen vor allem der Zeitpunkt des Eisprungs, nicht aber der Abstand zwischen Eisprung und Periode.
+
+**Fruchtbare und unfruchtbare Tage**
+
+Für eine mögliche Schwangerschaft zählen vor allem die Tage rund um den Eisprung. Die höchste Wahrscheinlichkeit einer Befruchtung besteht an den zwei Tagen vor dem Eisprung und am Tag des Eisprungs selbst. Unser Rechner markiert dieses fruchtbare Fenster grün im Kalender, den Eisprungtag selbst mit einem Stern. Tage außerhalb dieses Fensters gelten als weniger fruchtbar, sind aber niemals vollständig „sicher" — besonders bei unregelmäßigen Zyklen.
+
+**Kalender-Ansicht und Mehrzyklus-Vorschau**
+
+Sie können zwischen einer Vorschau für 1, 3 oder 6 Zyklen wählen. Der Rechner zeigt automatisch alle betroffenen Monate im Kalender an, farblich markiert: Rot für die Menstruationstage, Hellgrün für fruchtbare Tage, Dunkelgrün für den Eisprung. So können Sie Termine langfristig planen — zum Beispiel Urlaubsreisen, Hochzeiten oder Kinderwunsch-Timing.
+
+**Kinderwunsch oder Familienplanung**
+
+Paare mit Kinderwunsch nutzen den Zyklusrechner, um die Wahrscheinlichkeit einer Schwangerschaft zu erhöhen, indem sie den Geschlechtsverkehr in das fruchtbare Fenster legen. Umgekehrt wird der Rechner gelegentlich zur natürlichen Familienplanung (NFP) eingesetzt — allerdings nur eingeschränkt zuverlässig. Die sogenannte Kalendermethode nach Knaus-Ogino hat einen Pearl-Index von etwa 9 bis 15, das heißt 9 bis 15 von 100 Frauen werden damit innerhalb eines Jahres dennoch schwanger. Deutlich sicherer sind symptothermale Methoden in Kombination mit Zyklus-Apps oder moderne Verhütungsmittel.
+
+**Wichtige Einschränkungen**
+
+Der Rechner basiert auf Durchschnittswerten. Der tatsächliche Eisprung kann durch Stress, Krankheit, Hormonschwankungen, Ernährung und andere Faktoren abweichen — mitunter um mehrere Tage. Bei unregelmäßigen Zyklen (Schwankungen über 7 Tage) ist die Berechnung besonders ungenau. Genauer sind Ovulationstests (LH-Messung im Urin), Temperaturmessung (Basaltemperatur), Zervixschleim-Beobachtung oder kombinierte symptothermale Verfahren.
+
+**Dieser Rechner ist kein Verhütungsmittel**
+
+Wir weisen ausdrücklich darauf hin: Der Zyklusrechner darf nicht als alleinige Verhütungsmethode verwendet werden. Er ist ebenfalls keine Garantie dafür, dass eine Schwangerschaft bei einem Kinderwunsch schnell eintritt. Bei unerfülltem Kinderwunsch nach mehr als 12 Monaten (bei Frauen über 35: nach 6 Monaten) sollten Sie einen Gynäkologen oder eine Kinderwunschklinik aufsuchen. Nutzen Sie unseren Zyklusrechner als erste Orientierung, ergänzend zu unserem Geburtstermin-Rechner, SSW-Rechner und Tagerechner.`,
+    faq: [
+      {
+        frage: 'Wann ist der Eisprung bei einem 28-Tage-Zyklus?',
+        antwort: 'Bei einem typischen 28-Tage-Zyklus findet der Eisprung etwa am 14. Tag statt — gezählt ab dem ersten Tag der letzten Periode. Das fruchtbare Fenster umfasst die 5 Tage davor plus den Eisprungtag, also ca. Tag 9 bis Tag 15 des Zyklus.',
+      },
+      {
+        frage: 'Wie lange sind die fruchtbaren Tage?',
+        antwort: 'Das fruchtbare Fenster dauert etwa 6 Tage: 5 Tage vor dem Eisprung und der Eisprungtag selbst. Grund: Spermien überleben bis zu 5 Tage im weiblichen Körper, die Eizelle ist nach dem Eisprung ca. 12–24 Stunden befruchtungsfähig.',
+      },
+      {
+        frage: 'Kann ich den Zyklusrechner zur Verhütung nutzen?',
+        antwort: 'Nein, nicht als alleinige Methode. Die reine Kalendermethode hat einen Pearl-Index von 9–15 und gilt als unsicher. Sicherer sind symptothermale Methoden (Temperaturmessung + Zervixschleim) oder moderne Verhütungsmittel.',
+      },
+      {
+        frage: 'Was, wenn mein Zyklus unregelmäßig ist?',
+        antwort: 'Bei Zyklusschwankungen über 7 Tage ist eine Vorhersage nur eingeschränkt möglich. Ovulationstests (LH-Messung), Basaltemperatur und Zervixschleimbeobachtung liefern genauere Hinweise auf den tatsächlichen Eisprung.',
+      },
+      {
+        frage: 'Wie genau ist die Berechnung?',
+        antwort: 'Bei regelmäßigem 28-Tage-Zyklus liegt die Prognose meist innerhalb von ±1–2 Tagen. Bei schwankender Zykluslänge, Stress, Krankheit oder Hormonumstellungen kann der tatsächliche Eisprung jedoch deutlich abweichen.',
+      },
+    ],
+  },
+  {
+    slug: 'alkohol-abbau-rechner',
+    titel: 'Alkohol-Abbau-Rechner',
+    beschreibung: 'Maximale Promille, Abbauzeit und wann Sie wieder nüchtern sind — berechnet nach der Widmark-Formel.',
+    kategorie: 'Gesundheit',
+    kategorieSlug: 'gesundheit',
+    metaTitle: 'Alkohol-Abbau-Rechner 2026 — Wann bin ich wieder nüchtern? | Rechenfix',
+    metaDescription: 'Alkohol-Abbau berechnen: Maximaler Promillewert, Abbauzeit, 0,5 ‰-Grenze ✓ Widmark-Formel ✓ Dynamische Getränke ✓ Mit KI-Erklärung.',
+    keywords: ['alkohol abbau rechner', 'promille abbau', 'wann bin ich wieder nüchtern', 'widmark formel', 'alkohol fahrtauglich', 'promille berechnen', 'blutalkohol rechner'],
+    icon: '🍺',
+    formel: 'Promille = (Alkohol in Gramm ÷ (Körpergewicht × r)) × 0,9 — mit r = 0,68 (Mann) oder 0,55 (Frau). Abbau ca. 0,15 ‰/Stunde.',
+    beispiel: 'Beispiel: Mann, 80 kg, 3 Bier (0,5 l, 5 %) = 60 g Alkohol → (60 / (80 × 0,68)) × 0,9 ≈ 0,99 ‰. Abbau auf 0,0 ‰ nach ca. 6,6 Stunden.',
+    erklaerung: `**Wie funktioniert der Alkohol-Abbau-Rechner?**
+
+Unser Rechner schätzt anhand der weltweit bekannten **Widmark-Formel**, welchen maximalen Blutalkoholwert (BAK) Sie nach dem Konsum einer bestimmten Menge Alkohol erreichen und wann Sie voraussichtlich wieder nüchtern sein werden. Die Widmark-Formel stammt vom schwedischen Chemiker Erik M. P. Widmark (1889–1945) und ist bis heute Grundlage forensischer Alkoholberechnungen bei Gericht und Polizei.
+
+**Die Widmark-Formel im Detail**
+
+Die Formel lautet: Promille = (Alkoholmenge in Gramm) / (Körpergewicht in kg × Verteilungsfaktor r). Der Faktor r berücksichtigt, dass Alkohol sich nur im Körperwasser verteilt und nicht im Fettgewebe. Bei Männern beträgt r etwa 0,68, bei Frauen 0,55 — weil Frauen im Schnitt einen höheren Körperfettanteil und weniger Körperwasser haben. Zusätzlich berücksichtigt unser Rechner ein **Resorptionsdefizit von etwa 10 %**: Ein Teil des getrunkenen Alkohols wird bereits im Magen-Darm-Trakt abgebaut, bevor er in den Blutkreislauf gelangt.
+
+**Alkoholmenge verschiedener Getränke**
+
+Ein Standardgetränk enthält etwa 10 bis 12 Gramm reinen Alkohol. Typische Mengen:
+
+- **Bier 0,5 l (5 %):** ca. 20 g Alkohol
+- **Wein 0,2 l (12 %):** ca. 19 g Alkohol
+- **Sekt 0,1 l (11 %):** ca. 9 g Alkohol
+- **Schnaps 2 cl (40 %):** ca. 6 g Alkohol
+- **Cocktail 0,3 l (15 %):** ca. 36 g Alkohol
+
+Berechnet wird die Alkoholmenge nach der Formel: ml × (Vol.-% / 100) × 0,8 (spezifische Dichte von Ethanol). Unser Rechner bietet eine dynamische Getränkeliste — fügen Sie beliebig viele Getränke hinzu oder definieren Sie eigene Drinks.
+
+**Abbau im Körper: 0,1 bis 0,2 ‰ pro Stunde**
+
+Der menschliche Körper baut Alkohol linear ab, unabhängig von der getrunkenen Menge. Die durchschnittliche Abbaurate liegt zwischen 0,1 und 0,2 ‰ pro Stunde, im Mittel bei **0,15 ‰/h**. Der Abbau erfolgt fast ausschließlich in der Leber über die Enzyme Alkoholdehydrogenase (ADH) und Aldehyddehydrogenase (ALDH). Weder Kaffee, kalte Duschen, frische Luft noch Bewegung beschleunigen diesen Prozess — Alkoholabbau braucht schlicht Zeit.
+
+**Die 0,5 ‰-Grenze und absolute Fahruntüchtigkeit**
+
+In Deutschland gelten klare gesetzliche Grenzen im Straßenverkehr:
+
+- **0,0 ‰:** Für Fahranfänger in der Probezeit, für alle unter 21 Jahren und für Berufskraftfahrer während der Arbeit.
+- **0,3 ‰:** Ab hier kann bei auffälligem Fahrverhalten oder Unfall eine Straftat wegen relativer Fahruntüchtigkeit vorliegen.
+- **0,5 ‰:** Ordnungswidrigkeit — 500 € Bußgeld, 2 Punkte, 1 Monat Fahrverbot beim Ersttäter.
+- **1,1 ‰:** Ab diesem Wert liegt **absolute Fahruntüchtigkeit** vor (§ 316 StGB) — das ist in jedem Fall eine Straftat, auch ohne Fahrfehler.
+
+Unser Rechner zeigt neben dem Peak-Wert auch die Uhrzeiten, zu denen Sie die Grenzen 0,5 ‰ und 0,3 ‰ unterschreiten und wann Sie vermutlich wieder vollständig nüchtern (0,0 ‰) sind.
+
+**Wichtige Einschränkungen**
+
+Der Rechner liefert eine grobe Schätzung. Individuelle Faktoren können den tatsächlichen Blutalkoholwert erheblich beeinflussen: Nahrung im Magen, Medikamente, Tagesform, genetische Unterschiede im Alkoholabbau, Lebererkrankungen, Schwangerschaft, Trainingszustand. Frauen, ältere Menschen und schlanke Personen reagieren empfindlicher. Bei gleicher Trinkmenge sind die tatsächlichen Werte nicht selten um 0,2 bis 0,3 ‰ höher oder niedriger als berechnet.
+
+**Die einzig sichere Regel: Nicht fahren**
+
+Wenn Sie Alkohol getrunken haben, gilt eine einfache Regel: **Nicht ans Steuer.** Die einzig wirklich sichere Promillegrenze für den Straßenverkehr ist 0,0 ‰. Im Zweifel nehmen Sie ein Taxi, den Nachtbus, einen Designated Driver oder übernachten Sie vor Ort. Die Kosten eines Taxis sind immer niedriger als die Konsequenzen einer Alkoholfahrt: Bußgeld, Punkte, Fahrverbot, MPU, Entzug, Versicherungsprobleme — oder im schlimmsten Fall Personenschäden. Nutzen Sie zur Orientierung auch unseren Promillerechner und den Bußgeldrechner.`,
+    faq: [
+      {
+        frage: 'Wie schnell baut der Körper Alkohol ab?',
+        antwort: 'Die durchschnittliche Abbaurate liegt bei 0,1 bis 0,2 ‰ pro Stunde, im Mittel 0,15 ‰/h. Der Abbau erfolgt in der Leber und ist linear — weder Kaffee, kalte Dusche noch Bewegung beschleunigen den Prozess. Bei einem Peak von 1,0 ‰ dauert es also etwa 6 bis 7 Stunden bis zur Nüchternheit.',
+      },
+      {
+        frage: 'Was ist die Widmark-Formel?',
+        antwort: 'Die Widmark-Formel berechnet den Blutalkoholwert: Promille = Alkohol (g) / (Körpergewicht × r). Der Verteilungsfaktor r beträgt 0,68 bei Männern und 0,55 bei Frauen. Zusätzlich wird ein Resorptionsdefizit von ca. 10 % berücksichtigt.',
+      },
+      {
+        frage: 'Ab wann ist man fahruntüchtig?',
+        antwort: 'Ab 0,3 ‰ kann bei Auffälligkeiten eine relative Fahruntüchtigkeit (Straftat) vorliegen. Ab 0,5 ‰ droht ein Bußgeld von 500 €, 2 Punkte und 1 Monat Fahrverbot. Ab 1,1 ‰ ist der Fahrer absolut fahruntüchtig — das ist immer eine Straftat (§ 316 StGB).',
+      },
+      {
+        frage: 'Warum ist der Wert bei Frauen höher?',
+        antwort: 'Frauen haben im Schnitt einen höheren Körperfett- und niedrigeren Körperwasseranteil als Männer. Da Alkohol sich nur im Körperwasser verteilt, wird er bei Frauen auf ein kleineres Volumen verteilt — das Resultat ist ein höherer Promillewert bei gleicher Trinkmenge und gleichem Gewicht.',
+      },
+      {
+        frage: 'Kann ich mich auf diesen Rechner beim Autofahren verlassen?',
+        antwort: 'Nein. Der Rechner liefert nur eine grobe Schätzung. Individuelle Faktoren (Essen, Medikamente, Tagesform) können den tatsächlichen Wert deutlich beeinflussen. Die einzig sichere Promillegrenze für den Straßenverkehr ist 0,0 ‰. Im Zweifel: NICHT fahren.',
+      },
+    ],
+  },
 ];

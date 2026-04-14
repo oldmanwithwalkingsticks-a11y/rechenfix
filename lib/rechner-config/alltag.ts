@@ -1174,4 +1174,66 @@ Ein älterer Hund hat andere Bedürfnisse als ein junger: **weichere Gelenke**, 
       },
     ],
   },
+  {
+    slug: 'waehrungsrechner',
+    titel: 'Währungsrechner',
+    beschreibung: 'Beträge zwischen 29 Währungen umrechnen — mit statischen Referenzkursen vom 14.04.2026.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Währungsrechner 2026 — EUR, USD, CHF und 26 weitere Währungen | Rechenfix',
+    metaDescription: 'Währungsrechner: Beträge zwischen 29 Währungen umrechnen ✓ EUR, USD, GBP, CHF, JPY, PLN, TRY ✓ Statische Referenzkurse ✓ Mit KI-Erklärung.',
+    keywords: ['währungsrechner', 'wechselkurs rechner', 'euro dollar umrechnen', 'euro franken umrechnen', 'währung umrechnen', 'devisenrechner', 'wechselkurse'],
+    icon: '💱',
+    formel: 'Umrechnung = (Betrag / Kurs_von) × Kurs_nach. Alle Kurse basieren auf EUR = 1.',
+    beispiel: 'Beispiel: 100 € in USD bei Kurs 1,08 → (100 / 1,0) × 1,08 = 108,00 $. Umgekehrt: 100 $ in € → (100 / 1,08) × 1,0 = 92,59 €.',
+    erklaerung: `**Wie funktioniert der Währungsrechner?**
+
+Der Währungsrechner rechnet Beträge zwischen insgesamt 29 Währungen um — darunter Euro, US-Dollar, britisches Pfund, Schweizer Franken, japanischer Yen sowie zahlreiche europäische, amerikanische und asiatische Währungen. Alle Kurse sind auf den Euro (EUR = 1) normiert, sodass jede Umrechnung über den Umweg „ausgangswährung → EUR → zielwährung" möglich ist. Der Rechner zeigt Ihnen live das Ergebnis, den aktuellen Wechselkurs in beide Richtungen und eine Schnellreferenz für die wichtigsten Reisewährungen.
+
+**Statische Referenzkurse — keine Echtzeitkurse**
+
+Wichtiger Hinweis: Unser Währungsrechner arbeitet mit **statischen Referenzkursen**, die auf den Stand vom 14. April 2026 festgelegt sind. Das bedeutet, die tatsächlichen Wechselkurse an den Devisenmärkten können zum Zeitpunkt Ihres Besuchs abweichen — manchmal um wenige Prozent, in turbulenten Marktphasen auch mehr. Für grobe Orientierung beim Reiseplanung, beim Vergleich von Preisen oder beim Kopfrechnen im Urlaub ist das völlig ausreichend. Für echte Transaktionen (Geldwechsel, Überweisung, Online-Shopping) sollten Sie aber immer die aktuellen Kurse Ihrer Bank oder eines Live-Dienstes (z. B. EZB-Referenzkurs, xe.com, oanda.com) zurate ziehen.
+
+**Warum keine Echtzeit-Kurse?**
+
+Echtzeit-Wechselkurse unterliegen Lizenzgebühren und erfordern eine ständige Datenanbindung an einen Marktanbieter. Für einen kostenlosen, werbefinanzierten Online-Rechner wäre das unwirtschaftlich — und für die meisten Alltagssituationen sind statische Referenzkurse völlig ausreichend. Wechselkurse schwanken an normalen Tagen nur um wenige Zehntelprozent. Für einen Kaffee in Istanbul, einen Preis im New Yorker Online-Shop oder die Trinkgeld-Kalkulation in Prag ist die Genauigkeit des Rechners mehr als ausreichend.
+
+**Was beeinflusst Wechselkurse?**
+
+Wechselkurse werden durch Angebot und Nachfrage an den internationalen Devisenmärkten bestimmt. Die wichtigsten Einflussfaktoren sind: Zinsniveau der Zentralbanken (höhere Zinsen locken internationales Kapital an und stärken die Währung), Inflation (hohe Inflation schwächt die Kaufkraft und den Kurs), wirtschaftliche Stabilität, politische Ereignisse, Handelsbilanz und Rohstoffpreise. Die Europäische Zentralbank (EZB) veröffentlicht täglich die offiziellen Euro-Referenzkurse gegenüber den wichtigsten Weltwährungen.
+
+**Wechselkurse beim Geldwechsel — aufgepasst**
+
+Wenn Sie Bargeld wechseln oder mit Kreditkarte im Ausland bezahlen, erhalten Sie selten den reinen Marktkurs. Banken und Wechselstuben schlagen typischerweise 1 bis 5 % Marge auf, Flughafen-Wechselstuben oft sogar 10 % oder mehr. Kreditkarten der großen Netzwerke (Visa, Mastercard) rechnen mit einem Kurs, der nahe am Marktkurs liegt — allerdings erheben viele Banken zusätzlich eine Auslandseinsatzgebühr von 1 bis 2 %. Spezielle Reisekreditkarten und Neobanken bieten oft kostenfreie Fremdwährungstransaktionen an.
+
+**Die 29 unterstützten Währungen**
+
+Unser Rechner deckt die wichtigsten Weltwährungen ab: EUR, USD, GBP, CHF, JPY, PLN, CZK, TRY, SEK, NOK, DKK, HUF, RON, BGN, AUD, CAD, NZD, CNY, INR, BRL, THB, KRW, ZAR, MXN, SGD, HKD, ILS, AED und RUB. Damit sind praktisch alle beliebten Reiseziele sowie die wichtigsten Handelspartner Deutschlands abgedeckt. Für exotischere Währungen (z. B. VND in Vietnam, EGP in Ägypten, ARS in Argentinien) empfehlen wir spezialisierte Dienste.
+
+**Weitere Rechner, die Sie interessieren könnten**
+
+Ergänzend zum Währungsrechner sind unser Einheiten-Umrechner (für Längen, Gewichte, Temperaturen), unser Prozentrechner, unser Inflationsrechner und unser MwSt-Rechner nützlich — besonders bei Online-Käufen im Ausland und beim Vergleich internationaler Preise.`,
+    faq: [
+      {
+        frage: 'Sind die Wechselkurse aktuell?',
+        antwort: 'Nein, der Rechner nutzt statische Referenzkurse mit Stand vom 14.04.2026. Für grobe Orientierung ist das ausreichend. Für echte Transaktionen nutzen Sie bitte die aktuellen Kurse Ihrer Bank oder einen Echtzeit-Dienst (EZB-Referenzkurs, xe.com).',
+      },
+      {
+        frage: 'Welche Währungen unterstützt der Rechner?',
+        antwort: 'Insgesamt 29 Währungen: EUR, USD, GBP, CHF, JPY, PLN, CZK, TRY, SEK, NOK, DKK, HUF, RON, BGN, AUD, CAD, NZD, CNY, INR, BRL, THB, KRW, ZAR, MXN, SGD, HKD, ILS, AED und RUB.',
+      },
+      {
+        frage: 'Warum bekomme ich bei der Bank einen schlechteren Kurs?',
+        antwort: 'Banken schlagen eine Marge von meist 1–5 % auf den Marktkurs auf. Flughafen-Wechselstuben verlangen oft 10 % oder mehr. Kreditkarten der großen Netzwerke (Visa/Mastercard) liegen meist nahe am Marktkurs, es kann aber eine Auslandseinsatzgebühr hinzukommen.',
+      },
+      {
+        frage: 'Was ist der EZB-Referenzkurs?',
+        antwort: 'Die Europäische Zentralbank veröffentlicht werktäglich um 16:00 Uhr einen offiziellen Referenzkurs für den Euro gegenüber 31 Währungen. Dieser Kurs dient als Orientierung, ist aber kein handelbarer Kurs — er basiert auf einer Stichprobe internationaler Banken.',
+      },
+      {
+        frage: 'Wie kann ich günstig Geld wechseln?',
+        antwort: 'Kostenfrei wechseln Sie meist mit speziellen Reisekreditkarten oder Neobanken (z. B. Wise, Revolut, DKB). Vermeiden Sie Wechselstuben an Flughäfen und Touristenzentren. Bargeld vor der Reise in Deutschland zu tauschen ist oft teurer als am Reiseziel Geld abzuheben.',
+      },
+    ],
+  },
 ];

@@ -103,6 +103,11 @@ import ArbeitstageRechner from '@/components/rechner/ArbeitstageRechner';
 import BinaerRechner from '@/components/rechner/BinaerRechner';
 import DachflaechenRechner from '@/components/rechner/DachflaechenRechner';
 import HundejahreRechner from '@/components/rechner/HundejahreRechner';
+import ZyklusRechner from '@/components/rechner/ZyklusRechner';
+import HochRechner from '@/components/rechner/HochRechner';
+import MalerkostenRechner from '@/components/rechner/MalerkostenRechner';
+import WaehrungsRechner from '@/components/rechner/WaehrungsRechner';
+import AlkoholAbbauRechner from '@/components/rechner/AlkoholAbbauRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -218,6 +223,11 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'binaer-rechner': BinaerRechner,
   'dachflaechen-rechner': DachflaechenRechner,
   'hundejahre-rechner': HundejahreRechner,
+  'zyklusrechner': ZyklusRechner,
+  'hochrechner': HochRechner,
+  'malerkosten-rechner': MalerkostenRechner,
+  'waehrungsrechner': WaehrungsRechner,
+  'alkohol-abbau-rechner': AlkoholAbbauRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

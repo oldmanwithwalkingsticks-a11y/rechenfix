@@ -1656,4 +1656,73 @@ Ein GGF kann sein Einkommen aus der GmbH auf zwei Wegen ziehen: als **Gehalt** (
       },
     ],
   },
+  {
+    slug: 'hochrechner',
+    titel: 'Hochrechner (Gehalt)',
+    beschreibung: 'Rechnen Sie Stunden-, Tages-, Wochen-, Monats- oder Jahreslohn ineinander um — inkl. Mindestlohn-Vergleich 2026.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Hochrechner 2026 — Stunden-, Monats- und Jahreslohn umrechnen | Rechenfix',
+    metaDescription: 'Hochrechner für Gehalt: Stundenlohn, Tageslohn, Monatslohn und Jahreslohn umrechnen ✓ Mindestlohn-Check 12,82 € ✓ Mit KI-Erklärung.',
+    keywords: ['hochrechner', 'gehalt hochrechnen', 'stundenlohn monatslohn umrechnen', 'jahreslohn berechnen', 'mindestlohn 2026', 'bruttogehalt hochrechnen'],
+    icon: '📈',
+    formel: 'Jahreslohn = Stundenlohn × Stunden/Woche × 52. Monatslohn = Jahreslohn / 12. Tageslohn = Jahreslohn / (Tage/Woche × 52).',
+    beispiel: 'Beispiel: 20 €/h bei 40 Stunden/Woche → 20 × 40 × 52 = 41.600 € Jahresbrutto = 3.466,67 € Monatsbrutto = 160 € Tageslohn (bei 5 Arbeitstagen).',
+    erklaerung: `**Was macht der Hochrechner?**
+
+Der Hochrechner rechnet einen beliebigen Gehaltswert in alle anderen Zeiträume um. Sie geben an, was Sie bereits wissen — z. B. Ihren Stundenlohn von 20 €, Ihr Monatsgehalt von 3.500 € oder Ihren Tagessatz als Freelancer — und erfahren sofort, wie viel das pro Stunde, pro Tag, pro Woche, pro Monat und pro Jahr ergibt. Der Rechner zeigt zusätzlich, ob Ihr Stundenlohn über oder unter dem gesetzlichen Mindestlohn 2026 (12,82 €) liegt.
+
+**Warum Umrechnung zwischen Zeiträumen wichtig ist**
+
+Bei Jobangeboten werden Gehälter in unterschiedlichen Zeiträumen angegeben: Stellenanzeigen nennen meist das Jahresbrutto, Zeitarbeit arbeitet mit Stundenlöhnen, Minijobs mit Monatsverdienst, Freelancer mit Tagessätzen. Um Angebote vergleichbar zu machen, müssen Sie alle Werte in dieselbe Einheit umrechnen. Der Hochrechner nimmt Ihnen diese Rechnung ab und zeigt das Ergebnis live in allen Zeiträumen parallel.
+
+**So wird gerechnet**
+
+Grundlage ist die wöchentliche Arbeitszeit. In Deutschland beträgt die gesetzliche Höchstarbeitszeit 48 Stunden pro Woche (Arbeitszeitgesetz), tariflich üblich sind 35 bis 40 Stunden. Ein Jahr hat 52 Wochen, ein Monat im Durchschnitt 4,33 Wochen (52/12). Daraus ergibt sich:
+
+- **Jahresstunden** = Stunden/Woche × 52
+- **Monatsstunden** = Jahresstunden / 12
+- **Tagesstunden** = Stunden/Woche / Arbeitstage pro Woche
+- **Jahreslohn** = Stundenlohn × Jahresstunden
+
+Umgekehrt können Sie aus dem Jahreslohn jeden anderen Zeitraum ableiten. Unser Rechner normalisiert intern zunächst alles auf das Jahresbrutto und rechnet dann zurück — egal, welchen Wert Sie eingeben.
+
+**Brutto, nicht netto**
+
+Alle Ergebnisse sind Bruttowerte. Vom Bruttogehalt gehen Lohnsteuer, Solidaritätszuschlag (für hohe Einkommen), Kirchensteuer (bei Kirchenmitgliedschaft) und Sozialabgaben (Renten-, Kranken-, Pflege-, Arbeitslosenversicherung) ab. Der Nettoverdienst liegt je nach Steuerklasse bei etwa 60–75 % des Brutto. Für die exakte Nettoberechnung nutzen Sie bitte unseren Brutto-Netto-Rechner.
+
+**Mindestlohn 2026: 12,82 Euro**
+
+Seit dem 1. Januar 2026 liegt der gesetzliche Mindestlohn in Deutschland bei **12,82 € pro Stunde** (2025: 12,41 €). Er gilt für nahezu alle Arbeitnehmerinnen und Arbeitnehmer, mit wenigen Ausnahmen (Langzeitarbeitslose in den ersten sechs Monaten, Azubis, Praktikanten unter bestimmten Bedingungen). Der Rechner prüft automatisch, ob Ihr errechneter Stundenlohn über oder unter dieser Grenze liegt, und zeigt den prozentualen Abstand an.
+
+**Vollzeit, Teilzeit und verschiedene Arbeitsmodelle**
+
+Der Hochrechner berücksichtigt variable Arbeitszeiten. Ob Sie 20, 30 oder 40 Stunden pro Woche arbeiten, ob Sie eine 4-Tage-Woche, eine klassische 5-Tage-Woche oder eine 6-Tage-Woche haben — alle Eingaben fließen in die Berechnung ein. So sehen Sie auf einen Blick, wie sich Teilzeitmodelle auf Monats- und Jahreslohn auswirken und können Angebote mit unterschiedlichen Arbeitszeiten vergleichen.
+
+**Freelancer und Honorarkräfte**
+
+Auch Freelancer können den Hochrechner nutzen, um Ihren Tages- oder Stundensatz in einen vergleichbaren Jahres-Äquivalenzwert umzurechnen. Beachten Sie aber: Als Selbstständiger tragen Sie alle Sozialabgaben und Steuern selbst und sollten pauschal 30 bis 50 % Ihres Brutto-Umsatzes als Rücklage einplanen. Für eine präzise Stundensatz-Kalkulation nutzen Sie unseren Freelancer-Stundensatz-Rechner. Ergänzend interessant: der Stundenlohn-Rechner, der Gehaltsvergleich und der Gehaltserhöhungs-Rechner.`,
+    faq: [
+      {
+        frage: 'Wie wird ein Jahresgehalt in einen Stundenlohn umgerechnet?',
+        antwort: 'Jahresgehalt / (Stunden pro Woche × 52). Beispiel: 42.000 € Jahr bei 40 h/Woche → 42.000 / 2.080 = 20,19 € pro Stunde. Der Rechner macht diese Umrechnung automatisch in beide Richtungen.',
+      },
+      {
+        frage: 'Sind die Werte brutto oder netto?',
+        antwort: 'Alle Ergebnisse sind Bruttowerte. Vom Brutto gehen noch Lohnsteuer und Sozialabgaben ab. Das Netto liegt je nach Steuerklasse bei etwa 60–75 % des Brutto. Für die Nettoberechnung nutzen Sie unseren Brutto-Netto-Rechner.',
+      },
+      {
+        frage: 'Wie hoch ist der Mindestlohn 2026?',
+        antwort: 'Der gesetzliche Mindestlohn in Deutschland liegt seit 1. Januar 2026 bei 12,82 € pro Stunde. Der Rechner vergleicht Ihren Stundenlohn automatisch mit dieser Grenze.',
+      },
+      {
+        frage: 'Warum hat ein Monat nicht 4 Wochen?',
+        antwort: 'Ein Jahr hat 52 Wochen, verteilt auf 12 Monate — ergibt 4,33 Wochen pro Monat im Schnitt. Deshalb rechnen wir Stunde → Monat über den Umweg Jahresstunden / 12, nicht einfach × 4.',
+      },
+      {
+        frage: 'Wie viele Arbeitsstunden hat ein Jahr bei 40 Stunden/Woche?',
+        antwort: 'Rein rechnerisch 2.080 Stunden (40 × 52). Tatsächlich arbeiten Sie weniger, weil Urlaub und Feiertage nicht mitgerechnet sind. In der Praxis sind es je nach Bundesland und Urlaubstagen ca. 1.800–1.900 Netto-Arbeitsstunden.',
+      },
+    ],
+  },
 ];
