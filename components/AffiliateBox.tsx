@@ -137,6 +137,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'baufinanzierung': 'Baufinanzierung vergleichen auf CHECK24 — über 450 Anbieter, kostenlos und unverbindlich.',
     'mietrendite': 'Immobilienfinanzierung vergleichen — günstige Kredite für Ihre Kapitalanlage auf CHECK24.',
     'autokosten': 'Kfz-Versicherung vergleichen und bis zu 850 € pro Jahr sparen — der einfachste Weg Ihre Autokosten zu senken.',
+    'waermepumpe': 'Günstigen Wärmepumpen-Stromtarif finden — Stromanbieter vergleichen auf CHECK24.',
   },
   congstar: {
     'handykosten': 'congstar bietet faire Tarife ab 5 €/Monat — monatlich kündbar und ohne versteckte Kosten.',
@@ -176,6 +177,7 @@ const CONTEXT_DEEPLINKS: Partial<Record<ProgramId, Record<string, string>>> = {
     'baufinanzierung': 'https://www.check24.net/kredit/',
     'mietrendite': 'https://www.check24.net/kredit/',
     'autokosten': 'https://www.check24.net/kfz-versicherung/',
+    'waermepumpe': 'https://www.check24.net/strom/',
     'default': 'https://www.check24.net/',
   },
   verivox: {

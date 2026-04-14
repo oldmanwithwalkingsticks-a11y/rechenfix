@@ -5657,6 +5657,64 @@ Zwischen 603,01 Euro und 2.000 Euro Monatsverdienst beginnt der sogenannte **Mid
       },
     ],
   },
+  {
+    slug: 'waermepumpen-rechner',
+    titel: 'Wärmepumpen-Rechner',
+    beschreibung: 'Wärmepumpe berechnen: Betriebskosten, Amortisation und Kostenvergleich mit Gasheizung — lohnt sich der Umstieg?',
+    kategorie: 'Wohnen & Energie',
+    kategorieSlug: 'wohnen',
+    metaTitle: 'Wärmepumpen-Rechner 2026 — Kosten, Amortisation & Förderung berechnen | Rechenfix',
+    metaDescription: 'Wärmepumpe berechnen: Betriebskosten, Amortisation und Vergleich mit Gasheizung ✓ BEG-Förderung 2026 ✓ CO₂-Ersparnis ✓ KI-Erklärung.',
+    keywords: ['wärmepumpe rechner', 'wärmepumpe kosten', 'wärmepumpe amortisation', 'beg förderung 2026', 'jahresarbeitszahl jaz', 'wärmepumpe altbau', 'wärmepumpe vs gas', 'wärmepumpen stromtarif', 'heizung tauschen', 'luft wasser wärmepumpe'],
+    icon: '🔥',
+    formel: 'Heizwärmebedarf = Wohnfläche × Heizlast (W/m²) × 1.800 Volllaststunden / 1.000 | Stromverbrauch Wärmepumpe = Heizwärmebedarf / JAZ | Betriebskosten WP = Stromverbrauch × Strompreis + 200 € Wartung | Amortisation = (Anschaffung − Förderung) / jährliche Ersparnis.',
+    beispiel: '120 m² Altbau teilsaniert (JAZ 3,0), 2.000 €/Jahr Gasheizung → Heizwärmebedarf ~19.500 kWh → WP-Stromkosten ~2.080 € + 200 € Wartung = 2.280 € vs. 2.300 € Gas (inkl. Wartung) → bei 30.000 € Anschaffung / 30 % Förderung = 21.000 € netto → Amortisation ca. 10–15 Jahre.',
+    erklaerung: `**Lohnt sich eine Wärmepumpe? Die Wirtschaftlichkeits-Analyse**
+
+Ob sich der Umstieg auf eine Wärmepumpe rechnet, hängt von **vier Hauptfaktoren** ab: dem Zustand Ihres Gebäudes, den aktuellen Energiepreisen, den Anschaffungskosten und der verfügbaren Förderung. Als Faustregel gilt: In einem **gut gedämmten Haus** (Neubau oder sanierter Altbau) amortisiert sich eine Wärmepumpe in 8–15 Jahren. In einem **unsanierten Altbau** mit hohem Wärmebedarf und ungeeigneten Heizkörpern kann es 20 Jahre oder länger dauern. Der entscheidende Faktor ist die **Jahresarbeitszahl (JAZ)** — sie gibt an, wie viel Wärmeenergie aus einer Kilowattstunde Strom erzeugt wird. Je höher die JAZ, desto effizienter und günstiger arbeitet die Wärmepumpe. Bei aktuellen Strompreisen von 30–35 ct/kWh und Gaspreisen um 10–12 ct/kWh lohnt sich eine Wärmepumpe ab einer JAZ von etwa 3,0. Wer zusätzlich eine Photovoltaikanlage besitzt oder einen speziellen [Wärmepumpen-Stromtarif](/wohnen/stromvergleich-rechner) nutzt, verbessert die Wirtschaftlichkeit deutlich.
+
+**BEG-Förderung 2026: Bis zu 70 Prozent Zuschuss**
+
+Die **Bundesförderung für effiziente Gebäude (BEG)** ist das wichtigste Förderinstrument für Wärmepumpen in Deutschland. 2026 setzt sich die maximale Förderung von **bis zu 70 Prozent** aus mehreren Bausteinen zusammen: **Grundförderung 30 Prozent**, **Klimageschwindigkeitsbonus +20 Prozent** (beim Austausch einer alten Öl-, Gas- oder Kohleheizung), **Einkommensbonus +30 Prozent** (bei Haushalten mit zu versteuerndem Jahreseinkommen unter 40.000 Euro) sowie in bestimmten Fällen ein **Effizienzbonus +5 Prozent** für besonders klimafreundliche Kältemittel. Die maximalen förderfähigen Investitionskosten liegen bei 30.000 Euro pro Wohneinheit. Das bedeutet: Wer alle Boni ausschöpft, bekommt bis zu **21.000 Euro Zuschuss**. Der Antrag muss **vor Vertragsunterschrift** beim KfW-Portal eingereicht werden. Ein Energieberater (Experten-Liste der BAFA) ist Pflicht und kostet selbst zusätzlich ca. 1.000–2.000 Euro — die Beratung ist aber wiederum zu 50 % förderfähig.
+
+**Jahresarbeitszahl (JAZ) erklärt**
+
+Die **JAZ** (Jahresarbeitszahl) ist die Schlüsselgröße für die Effizienz einer Wärmepumpe. Sie gibt an, wie viel Wärmeenergie im Jahresdurchschnitt pro eingesetzter Kilowattstunde Strom erzeugt wird. Eine **JAZ von 3,0** bedeutet: Aus 1 kWh Strom werden 3 kWh Wärme — also 2 kWh "gratis" aus der Umweltwärme gewonnen. Die JAZ hängt vom Wärmepumpentyp ab (Luft-Wasser-Wärmepumpen erreichen 2,5–3,5, Sole-Wasser-Wärmepumpen 3,5–4,5, Wasser-Wasser sogar bis 5,0) und vor allem von der **Vorlauftemperatur** Ihres Heizsystems: Je niedriger, desto besser. Fußbodenheizungen sind ideal (35 °C Vorlauf), klassische Heizkörper im Altbau (60–70 °C) reduzieren die JAZ deutlich. Der BAFA fördert Wärmepumpen erst ab einer JAZ von 3,0 (Luft-Wasser) bzw. 3,8 (Sole/Wasser). Prüfen Sie vor dem Kauf das Datenblatt — dort steht die JAZ für Ihre individuelle Situation.
+
+**Wärmepumpe im Altbau: Geht das?**
+
+Der hartnäckigste Mythos: "Im Altbau funktioniert eine Wärmepumpe nicht." **Das stimmt so nicht.** Moderne Hochtemperatur-Wärmepumpen erreichen Vorlauftemperaturen bis 70 °C und können auch unsanierte Altbauten heizen — allerdings mit niedrigerer JAZ (2,0–2,5) und damit höheren Stromkosten. Für einen wirtschaftlichen Betrieb im Altbau sind drei Maßnahmen empfehlenswert: Erstens die **Dämmung von oberster Geschossdecke und Kellerdecke**, was Heizkostenreduzierung bringt. Zweitens der **Austausch kleiner Heizkörper** durch großflächige Niedertemperatur-Modelle, damit die Vorlauftemperatur sinken kann. Drittens ein **hydraulischer Abgleich** der Anlage. Mit diesen Maßnahmen erreichen auch Altbauten JAZ-Werte von 3,0–3,5. Unser [Heizkosten-Rechner](/wohnen/heizkosten-rechner) hilft, die aktuellen Kosten Ihrer bestehenden Heizung zu ermitteln.
+
+**Wärmepumpen-Stromtarife: So sparen Sie zusätzlich**
+
+Ein entscheidender Hebel für die Wirtschaftlichkeit ist der **Wärmepumpen-Stromtarif**. Diese Spezialtarife sind rund 20–30 Prozent günstiger als normale Haushaltsstromtarife — statt 32 ct/kWh zahlen Sie oft nur 25–28 ct/kWh. Voraussetzung ist ein **separater Zähler** für die Wärmepumpe oder ein intelligenter Zähler mit getrennter Messung. Die Stromversorger dürfen im Gegenzug die Wärmepumpe an wenigen Stunden pro Tag netzdienlich abschalten — in der Praxis merkt man das durch den Pufferspeicher kaum. Bei 5.000 kWh Wärmepumpenstrom pro Jahr sparen Sie durch einen Spezialtarif rund **250–350 Euro jährlich**. Vergleichen Sie Tarife regelmäßig über unseren [Stromvergleich-Rechner](/wohnen/stromvergleich-rechner) oder direkt über CHECK24. Wer zusätzlich eine PV-Anlage betreibt und einen Teil des Wärmepumpenstroms selbst erzeugt, senkt die Betriebskosten nochmals deutlich — eine Wärmepumpen-PV-Kombination amortisiert sich oft schon nach 8–12 Jahren.`,
+    faq: [
+      {
+        frage: 'Was kostet eine Wärmepumpe mit Einbau?',
+        antwort: 'Die Gesamtkosten einer Luft-Wasser-Wärmepumpe (die häufigste Variante) liegen 2026 zwischen 20.000 und 35.000 Euro inklusive Einbau. Erdwärme- oder Sole-Wasser-Anlagen kosten 30.000–45.000 Euro, da Tiefenbohrungen oder Flächenkollektoren erforderlich sind. Einfache Luft-Luft-Split-Geräte (Klimageräte mit Heizfunktion) gibt es bereits ab 10.000–15.000 Euro, eignen sich aber nur für gut gedämmte Häuser ohne Warmwasserbereitung über die Wärmepumpe.',
+      },
+      {
+        frage: 'Wie viel Förderung bekomme ich für eine Wärmepumpe?',
+        antwort: 'Die BEG-Förderung 2026 bietet bis zu 70 % Zuschuss: 30 % Grundförderung, +20 % Klimageschwindigkeitsbonus (beim Austausch einer alten Heizung), +30 % Einkommensbonus (bei Haushaltseinkommen unter 40.000 € zu versteuerndem Einkommen), +5 % Effizienzbonus. Die maximalen förderfähigen Kosten betragen 30.000 € pro Wohneinheit — der maximale Zuschuss liegt also bei 21.000 €. Der Antrag muss vor Vertragsunterschrift bei der KfW gestellt werden.',
+      },
+      {
+        frage: 'Was ist die Jahresarbeitszahl (JAZ)?',
+        antwort: 'Die JAZ gibt an, wie viel Wärmeenergie eine Wärmepumpe pro eingesetzter Kilowattstunde Strom im Jahresdurchschnitt erzeugt. Eine JAZ von 3,0 bedeutet: Aus 1 kWh Strom werden 3 kWh Wärme. Je höher die JAZ, desto wirtschaftlicher arbeitet die Wärmepumpe. Luft-Wasser-Wärmepumpen erreichen typisch 2,5–3,5, Sole-Wasser 3,5–4,5. Für die BAFA-Förderung ist eine JAZ von mindestens 3,0 (Luft-Wasser) bzw. 3,8 (Sole/Wasser) erforderlich.',
+      },
+      {
+        frage: 'Funktioniert eine Wärmepumpe im Altbau?',
+        antwort: 'Ja, mit Einschränkungen. Moderne Hochtemperatur-Wärmepumpen erreichen Vorlauftemperaturen bis 70 °C und können auch unsanierte Altbauten heizen. Allerdings sinkt die JAZ im Altbau auf 2,0–2,5, was höhere Stromkosten bedeutet. Für einen wirtschaftlichen Betrieb empfehlen sich: Dämmung oberster Geschossdecke, Austausch kleiner Heizkörper gegen großflächige Modelle und hydraulischer Abgleich. Damit werden auch im Altbau JAZ-Werte von 3,0–3,5 möglich.',
+      },
+      {
+        frage: 'Wie hoch sind die Stromkosten einer Wärmepumpe?',
+        antwort: 'Bei einem typischen Einfamilienhaus mit 15.000–20.000 kWh Heizwärmebedarf und JAZ 3,0 benötigt die Wärmepumpe rund 5.000–6.700 kWh Strom pro Jahr. Bei 32 ct/kWh entstehen Stromkosten von 1.600–2.150 € jährlich. Mit einem günstigeren Wärmepumpen-Stromtarif (ca. 27 ct/kWh) reduzieren sich die Kosten um 20–25 %. Hinzu kommen etwa 200 € jährliche Wartungskosten.',
+      },
+      {
+        frage: 'Wann amortisiert sich eine Wärmepumpe?',
+        antwort: 'Die Amortisationszeit hängt stark vom Gebäudezustand, den Energiepreisen und der Förderung ab. In einem gut gedämmten Haus mit 50 % Förderung amortisiert sich eine Wärmepumpe nach 8–12 Jahren. Im teilsanierten Altbau mit 30 % Förderung liegt sie bei 12–18 Jahren. Ohne Förderung oder in unsanierten Altbauten kann es 20 Jahre oder länger dauern. Bei steigenden Gaspreisen und sinkenden Strompreisen (durch erneuerbare Energien) wird die Wirtschaftlichkeit weiter verbessert.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -5670,6 +5728,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'waermepumpen-rechner',
   'minijob-rechner',
   'indexmiete-rechner',
   'scheidungskosten-rechner',
@@ -5831,6 +5890,7 @@ const verwandteMap: Record<string, string[]> = {
   'scheidungskosten-rechner': ['splitting-rechner', 'kuendigungsfrist-rechner', 'abfindungsrechner', 'rechtsschutz-rechner'],
   'indexmiete-rechner': ['mietrechner', 'nebenkosten-rechner', 'inflationsrechner', 'quadratmeter-rechner'],
   'minijob-rechner': ['brutto-netto-rechner', 'stundenlohn-rechner', 'teilzeit-rechner', 'ueberstunden-rechner'],
+  'waermepumpen-rechner': ['heizkosten-rechner', 'stromkosten-rechner', 'stromvergleich-rechner', 'nebenkosten-rechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
