@@ -1,0 +1,994 @@
+import type { RechnerConfig } from './types';
+
+export const alltagRechner: RechnerConfig[] = [
+  {
+    slug: 'prozentrechner',
+    titel: 'Prozentrechner',
+    beschreibung: 'Prozente berechnen: Prozentwert, Grundwert, Prozentsatz, Aufschlag & Rabatt — mit Rechenweg.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Prozentrechner Online 2026 ▷ Kostenlos Prozente berechnen | Rechenfix.de',
+    metaDescription: 'Prozentrechner: Prozentwert, Grundwert, Prozentsatz, prozentualer Aufschlag & Rabatt sofort berechnen. Mit Rechenweg, Formel und Erklärung ✓ Kostenlos. ✓ Mit KI-Erklärung.',
+    keywords: ['prozentrechner', 'prozent berechnen', 'prozentwert berechnen', 'grundwert berechnen', 'prozentsatz berechnen', 'prozentualer aufschlag', 'rabatt berechnen', 'prozentrechnung formel', 'wie viel prozent', 'prozent ausrechnen'],
+    icon: '%',
+    formel: 'Prozentwert = Grundwert × (Prozentsatz ÷ 100)',
+    beispiel: 'Beispiel: 25% von 200 = 200 × (25 ÷ 100) = 50. Oder: 200 + 25% Aufschlag = 200 + 50 = 250.',
+    erklaerung: `Die Prozentrechnung gehört zu den wichtigsten mathematischen Grundlagen im Alltag. Ob beim Einkaufen im Supermarkt, bei der Gehaltsverhandlung, in der Schule oder bei der Steuererklärung — Prozente begegnen uns überall. Unser kostenloser Prozentrechner löst alle gängigen Aufgaben der Prozentrechnung sofort und zeigt den vollständigen Rechenweg Schritt für Schritt an.
+
+**Die drei Grundbegriffe der Prozentrechnung**
+
+Jede Prozentrechnung basiert auf drei Werten, von denen zwei bekannt sein müssen, um den dritten zu berechnen:
+
+- **Grundwert (G):** Der Ausgangswert, der 100% entspricht. Beispiel: Der Originalpreis eines Produkts.
+- **Prozentsatz (p):** Der Anteil in Prozent, der vom Grundwert berechnet werden soll. Beispiel: 20% Rabatt.
+- **Prozentwert (W):** Das Ergebnis der Berechnung — der tatsächliche Wert, der dem Prozentsatz entspricht. Beispiel: 20% von 150 € = 30 €.
+
+Die grundlegende Formel lautet: **W = G × p ÷ 100**. Durch Umstellen dieser Formel lassen sich alle drei Werte berechnen: Grundwert (G = W ÷ p × 100), Prozentsatz (p = W ÷ G × 100) und Prozentwert.
+
+**Fünf Berechnungsmodi im Überblick**
+
+Unser Prozentrechner bietet fünf verschiedene Berechnungsarten, die alle typischen Fragestellungen der Prozentrechnung abdecken:
+
+- **Prozentwert berechnen:** „Wie viel sind 15% von 300?" — Berechnet den konkreten Wert aus Grundwert und Prozentsatz.
+- **Prozentsatz berechnen:** „Wie viel Prozent sind 45 von 300?" — Ermittelt den prozentualen Anteil zweier Werte.
+- **Grundwert berechnen:** „45 sind 15% von welchem Wert?" — Findet den Ausgangswert, wenn Prozentwert und Prozentsatz bekannt sind.
+- **Prozentualer Aufschlag:** „200 € + 19% Aufschlag = ?" — Berechnet den neuen Wert nach einer prozentualen Erhöhung (z. B. MwSt, Preiserhöhung).
+- **Prozentualer Rabatt:** „200 € − 25% Rabatt = ?" — Berechnet den reduzierten Wert nach einem prozentualen Abzug (z. B. Rabattaktionen, Skonto).
+
+**Prozentrechnung im Alltag: Typische Anwendungsfälle**
+
+Die Prozentrechnung ist eine der am häufigsten genutzten Rechenarten im täglichen Leben. Hier einige typische Situationen:
+
+- **Einkaufen & Rabatte:** Ein Pullover kostet 80 € und ist um 30% reduziert. Rabatt: 80 × 30 ÷ 100 = 24 €. Neuer Preis: 80 − 24 = 56 €.
+- **Trinkgeld berechnen:** Die Rechnung beträgt 45 €, Sie möchten 10% Trinkgeld geben: 45 × 10 ÷ 100 = 4,50 €.
+- **Gehaltserhöhung:** Ihr Gehalt von 3.200 € wird um 5% erhöht: 3.200 × 5 ÷ 100 = 160 €. Neues Gehalt: 3.360 €.
+- **Notenberechnung:** Sie haben 72 von 90 Punkten erreicht: (72 ÷ 90) × 100 = 80%.
+- **Steuern & MwSt:** Der Nettopreis beträgt 100 €, die MwSt (19%): 100 × 19 ÷ 100 = 19 €. Brutto: 119 €.
+
+**Rechenweg Schritt für Schritt**
+
+Unser Prozentrechner zeigt bei jedem Ergebnis den vollständigen Rechenweg an. So können Sie die Berechnung nachvollziehen, für Hausaufgaben oder Prüfungen nutzen und das Konzept der Prozentrechnung besser verstehen. Die Schnellwahl-Buttons ermöglichen häufig gebrauchte Prozentsätze (5%, 10%, 15%, 20%, 25%, 50%) mit einem Klick einzusetzen.
+
+**Häufige Fehler bei der Prozentrechnung**
+
+- **Prozent auf Prozent:** Eine Erhöhung um 50% und anschließende Senkung um 50% ergibt nicht den Ausgangswert! 100 + 50% = 150, dann 150 − 50% = 75 (nicht 100).
+- **Prozent vs. Prozentpunkte:** Eine Steigerung von 20% auf 25% ist eine Steigerung um 5 Prozentpunkte, aber um 25% (relativ).
+- **Grundwert verwechseln:** Achten Sie darauf, welcher Wert die 100%-Basis bildet. Bei Rabatten ist es der Originalpreis, bei Aufschlägen der Nettopreis.`,
+    faq: [
+      {
+        frage: 'Wie berechne ich Prozent?',
+        antwort: 'Um den Prozentwert zu berechnen, multiplizieren Sie den Grundwert mit dem Prozentsatz und teilen durch 100. Formel: Prozentwert = Grundwert × Prozentsatz ÷ 100. Beispiel: 25% von 200 = 200 × 25 ÷ 100 = 50.',
+      },
+      {
+        frage: 'Wie berechne ich einen prozentualen Aufschlag?',
+        antwort: 'Multiplizieren Sie den Ausgangswert mit (1 + Prozentsatz ÷ 100). Beispiel: 200 € + 19% Aufschlag = 200 × 1,19 = 238 €. Der Aufschlag allein beträgt 200 × 0,19 = 38 €.',
+      },
+      {
+        frage: 'Wie berechne ich einen Rabatt in Prozent?',
+        antwort: 'Multiplizieren Sie den Originalpreis mit dem Prozentsatz und teilen durch 100, dann ziehen Sie das Ergebnis ab. Beispiel: 80 € mit 25% Rabatt: 80 × 25 ÷ 100 = 20 € Rabatt. Neuer Preis: 80 − 20 = 60 €.',
+      },
+      {
+        frage: 'Wie viel Prozent sind 45 von 200?',
+        antwort: 'Teilen Sie den Prozentwert durch den Grundwert und multiplizieren mit 100: (45 ÷ 200) × 100 = 22,5%. Also sind 45 genau 22,5% von 200.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen Prozent und Prozentpunkten?',
+        antwort: 'Prozent beschreibt eine relative Veränderung, Prozentpunkte eine absolute. Steigt ein Zinssatz von 2% auf 3%, ist das eine Steigerung um 1 Prozentpunkt, aber um 50% (relativ).',
+      },
+      {
+        frage: 'Wie berechne ich den Grundwert?',
+        antwort: 'Teilen Sie den Prozentwert durch den Prozentsatz und multiplizieren mit 100. Formel: Grundwert = Prozentwert ÷ Prozentsatz × 100. Beispiel: 45 sind 15% von welchem Wert? 45 ÷ 15 × 100 = 300.',
+      },
+      {
+        frage: 'Warum ergibt +50% und dann −50% nicht den Ausgangswert?',
+        antwort: 'Weil sich der Grundwert ändert: 100 + 50% = 150. Jetzt sind 50% von 150 = 75. Also 150 − 75 = 75, nicht 100. Der Grundwert für die Senkung ist der bereits erhöhte Wert.',
+      },
+      {
+        frage: 'Wie rechne ich Bruch in Prozent um?',
+        antwort: 'Teilen Sie den Zähler durch den Nenner und multiplizieren mit 100. Beispiel: 3/4 = 3 ÷ 4 × 100 = 75%. Umgekehrt: 75% = 75/100 = 3/4.',
+      },
+    ],
+  },
+  {
+    slug: 'dreisatz-rechner',
+    titel: 'Dreisatzrechner',
+    beschreibung: 'Dreisatz online berechnen: proportional und antiproportional, mit Rechenweg Schritt für Schritt.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Dreisatzrechner — kostenlos online berechnen | Rechenfix',
+    metaDescription: 'Dreisatzrechner 2026 \u2713 Proportional & antiproportional \u2713 Mit Rechenweg \u2713 Sofort-Ergebnis. Jetzt kostenlos berechnen! ✓ Mit KI-Erklärung.',
+    keywords: ['dreisatzrechner', 'dreisatz berechnen', 'dreisatz online', 'proportional', 'antiproportional', 'dreisatz formel'],
+    icon: '\u2696\uFE0F',
+    formel: 'Proportional: B2 = (B1 \u00F7 A1) \u00D7 A2 | Antiproportional: B2 = (B1 \u00D7 A1) \u00F7 A2',
+    beispiel: 'Beispiel: 3 \u00C4pfel kosten 6 \u20AC. Was kosten 7 \u00C4pfel? \u2192 (6 \u00F7 3) \u00D7 7 = 14 \u20AC',
+    erklaerung: `**Was ist der Dreisatz?**
+
+Der Dreisatz ist eine der wichtigsten Rechenmethoden im Alltag und in der Mathematik. Er ermöglicht es, aus drei bekannten Werten einen vierten unbekannten Wert zu berechnen. Der Name \u201EDreisatz\u201C kommt daher, dass die Berechnung in drei Schritten erfolgt: Zunächst kennt man ein Wertepaar (z.\u00A0B. 3 \u00C4pfel kosten 6\u00A0\u20AC), dann berechnet man den Wert für eine Einheit (1 Apfel kostet 2\u00A0\u20AC), und schließlich multipliziert man mit der gewünschten Menge.
+
+Der Dreisatz begegnet uns täglich: beim Einkaufen, beim Kochen (Rezepte umrechnen), beim Tanken, bei Währungsumrechnungen, bei Gehaltsberechnungen und vielen weiteren Situationen. Wer den Dreisatz beherrscht, kann eine Vielzahl von Alltagsproblemen schnell und zuverlässig lösen.
+
+**Dreisatz-Formel einfach erklärt**
+
+Beim Dreisatz geht man immer in drei logischen Schritten vor:
+
+- **Schritt 1 \u2014 Ausgangssituation:** Man kennt zwei zusammengehörige Werte. Beispiel: 5 Liter Farbe reichen für 40\u00A0m\u00B2.
+- **Schritt 2 \u2014 Auf die Einheit rechnen:** Man teilt (proportional) oder multipliziert (antiproportional), um den Wert für 1 Einheit zu ermitteln. Beispiel: 1 Liter Farbe reicht für 40 \u00F7 5 = 8\u00A0m\u00B2.
+- **Schritt 3 \u2014 Auf die Zielgröße rechnen:** Man multipliziert (proportional) oder teilt (antiproportional) mit der gewünschten Menge. Beispiel: 8 Liter Farbe reichen für 8 \u00D7 8 = 64\u00A0m\u00B2.
+
+Die Formel für den proportionalen Dreisatz lautet: **B2 = (B1 \u00F7 A1) \u00D7 A2**. Für den antiproportionalen Dreisatz gilt: **B2 = (B1 \u00D7 A1) \u00F7 A2**.
+
+**Proportionaler vs. antiproportionaler Dreisatz**
+
+Es gibt zwei Arten des Dreisatzes, und es ist wichtig, den Unterschied zu kennen:
+
+Beim **proportionalen Dreisatz** gilt: \u201EJe mehr, desto mehr\u201C. Wenn eine Größe steigt, steigt auch die andere. Beispiele: Je mehr \u00C4pfel man kauft, desto teurer wird es. Je weiter man fährt, desto mehr Benzin braucht man. Je mehr Stunden man arbeitet, desto mehr verdient man.
+
+Beim **antiproportionalen Dreisatz** gilt: \u201EJe mehr, desto weniger\u201C. Wenn eine Größe steigt, sinkt die andere. Beispiele: Je mehr Arbeiter an einem Projekt arbeiten, desto weniger Tage brauchen sie. Je schneller man fährt, desto weniger Zeit braucht man für die Strecke. Je breiter man ein Rechteck macht, desto niedriger wird es bei gleichem Flächeninhalt.
+
+Die Erkennung, ob eine Zuordnung proportional oder antiproportional ist, ist der entscheidende Schritt. Fragen Sie sich einfach: Wenn ich den einen Wert verdopple \u2014 verdoppelt sich dann auch der andere (proportional) oder halbiert er sich (antiproportional)?
+
+**3 Beispielrechnungen aus dem Alltag**
+
+- **Einkaufen:** 250\u00A0g Käse kosten 3,50\u00A0\u20AC. Was kosten 400\u00A0g? \u2192 Proportional: (3,50 \u00F7 250) \u00D7 400 = 5,60\u00A0\u20AC.
+- **Kochen:** Ein Rezept für 4 Personen braucht 300\u00A0g Mehl. Wie viel Mehl braucht man für 6 Personen? \u2192 Proportional: (300 \u00F7 4) \u00D7 6 = 450\u00A0g.
+- **Arbeit:** 6 Maler streichen ein Haus in 10 Tagen. Wie lange brauchen 4 Maler? \u2192 Antiproportional: (10 \u00D7 6) \u00F7 4 = 15 Tage.`,
+    faq: [
+      {
+        frage: 'Was ist der Dreisatz und wofür braucht man ihn?',
+        antwort: 'Der Dreisatz ist eine mathematische Methode, um aus drei bekannten Werten einen vierten zu berechnen. Man nutzt ihn im Alltag z.\u00A0B. beim Einkaufen, Kochen, Tanken oder Umrechnen von Währungen.',
+      },
+      {
+        frage: 'Wie berechnet man den Dreisatz?',
+        antwort: 'In drei Schritten: 1. Ausgangswerte aufschreiben (z.\u00A0B. 3 Äpfel = 6\u00A0\u20AC). 2. Auf eine Einheit umrechnen (6 \u00F7 3 = 2\u00A0\u20AC). 3. Mit der gesuchten Menge multiplizieren (2 \u00D7 7 = 14\u00A0\u20AC).',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen proportionalem und antiproportionalem Dreisatz?',
+        antwort: 'Proportional: Je mehr, desto mehr (z.\u00A0B. mehr kaufen = teurer). Antiproportional: Je mehr, desto weniger (z.\u00A0B. mehr Arbeiter = weniger Tage). Beim proportionalen Dreisatz teilt man im zweiten Schritt, beim antiproportionalen multipliziert man.',
+      },
+      {
+        frage: 'Woran erkenne ich, ob ein Dreisatz proportional oder antiproportional ist?',
+        antwort: 'Fragen Sie sich: Wenn ich den einen Wert verdopple, verdoppelt sich dann auch der andere? Ja \u2192 proportional. Halbiert er sich? \u2192 antiproportional. Beispiel: Doppelt so viele \u00C4pfel kosten doppelt so viel (proportional). Doppelt so viele Arbeiter brauchen halb so lange (antiproportional).',
+      },
+      {
+        frage: 'Kann der Dreisatzrechner auch mit Kommazahlen rechnen?',
+        antwort: 'Ja, unser Dreisatzrechner unterstützt beliebige Dezimalzahlen. Geben Sie Kommazahlen einfach mit einem Punkt als Dezimaltrennzeichen ein (z.\u00A0B. 3.5 statt 3,5).',
+      },
+    ],
+  },
+  {
+    slug: 'tagerechner',
+    titel: 'Tagerechner',
+    beschreibung: 'Tage zwischen zwei Daten berechnen: Kalendertage, Arbeitstage, Wochen und Monate auf einen Blick.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Tagerechner — Tage zwischen zwei Daten | Rechenfix',
+    metaDescription: 'Tage berechnen ✓ Zwischen zwei Daten ✓ Mit Arbeitstagen ✓ Wochen & Monate ✓ Kostenlos. Jetzt Tage zählen! ✓ Mit KI-Erklärung.',
+    keywords: ['tagerechner', 'tage berechnen', 'tage zwischen zwei daten', 'arbeitstage berechnen', 'datum differenz', 'tage zählen'],
+    icon: '📅',
+    formel: 'Tage = Enddatum − Startdatum (optional +1 bei Mitzählung)',
+    beispiel: 'Beispiel: Vom 01.01.2026 bis 31.12.2026 = 364 Tage (365 mit Mitzählung) = 52 Wochen',
+    erklaerung: `**Tage zwischen zwei Daten berechnen**
+
+Der Tagerechner ermittelt die exakte Anzahl der Tage zwischen zwei beliebigen Daten. Geben Sie einfach ein Start- und ein Enddatum ein und erhalten Sie sofort das Ergebnis — in Tagen, Wochen, Monaten und Jahren. Zusätzlich berechnet der Rechner die Anzahl der Arbeitstage (Montag bis Freitag) und der Wochenendtage.
+
+Die Berechnung ist denkbar einfach: Der Rechner ermittelt die Differenz zwischen den beiden Daten in Kalendertagen. Standardmäßig wird der Starttag nicht mitgezählt — das entspricht der üblichen Berechnung bei Fristen und Zeiträumen. Wenn Sie möchten, können Sie über den Toggle „Start + Endtag mitzählen" aktivieren, dass beide Tage in die Berechnung einfließen. Das ist zum Beispiel relevant, wenn Sie die Dauer eines Urlaubs oder einer Veranstaltung berechnen möchten, bei der sowohl der erste als auch der letzte Tag zählt.
+
+Sie können das Datum entweder manuell im deutschen Format (TT.MM.JJJJ) eingeben oder den Datepicker verwenden. Die Schnellwahl-Buttons ermöglichen es, häufig benötigte Zeiträume wie 30, 90 oder 365 Tage direkt einzustellen.
+
+Das Ergebnis wird automatisch in verschiedene Einheiten umgerechnet: Wochen und Resttage, Monate und Resttage sowie Jahre, Monate und Tage. Auch die Anzahl der Stunden wird angezeigt. So haben Sie alle relevanten Informationen auf einen Blick.
+
+**Arbeitstage vs. Kalendertage**
+
+Bei vielen Berechnungen ist es wichtig, zwischen Kalendertagen und Arbeitstagen zu unterscheiden. Kalendertage umfassen alle Tage einschließlich Wochenenden und Feiertagen. Arbeitstage hingegen zählen nur die Werktage von Montag bis Freitag.
+
+Unser Tagerechner zeigt beide Werte an. Die Arbeitstage-Berechnung berücksichtigt automatisch Samstage und Sonntage — gesetzliche Feiertage werden jedoch nicht abgezogen, da diese je nach Bundesland unterschiedlich sind. Für eine exakte Arbeitstage-Berechnung müssen Sie die Feiertage Ihres Bundeslandes daher manuell abziehen.
+
+Die Unterscheidung ist in vielen Kontexten wichtig: Bei Kündigungsfristen wird oft in Werktagen gerechnet, bei Urlaubsansprüchen in Arbeitstagen und bei Mietverträgen in Kalendertagen. Auch bei Projektplanung und Lieferzeiten ist die Unterscheidung entscheidend.
+
+Gut zu wissen: In Deutschland fallen je nach Bundesland zwischen 9 und 13 gesetzliche Feiertage auf Werktage. Bayern hat mit bis zu 13 Feiertagen die meisten, die norddeutschen Bundesländer mit 9–10 die wenigsten. Bundesweit einheitlich sind Neujahr, Karfreitag, Ostermontag, Tag der Arbeit (1. Mai), Christi Himmelfahrt, Pfingstmontag, Tag der Deutschen Einheit (3. Oktober) und die beiden Weihnachtsfeiertage.
+
+**Typische Anwendungsfälle**
+
+Der Tagerechner ist ein vielseitiges Werkzeug für den Alltag, das Berufsleben und die Planung:
+
+- **Countdown zu einem Ereignis:** Wie viele Tage sind es noch bis zum Urlaub, zur Hochzeit, zum Geburtstag oder bis Weihnachten? Geben Sie das heutige Datum als Start und das Zieldatum als Ende ein.
+- **Kündigungsfristen:** Viele Arbeitsverträge haben Kündigungsfristen von 4 Wochen zum 15. oder Monatsende, 3 Monate zum Quartalsende oder 6 Monate zum Jahresende. Der Tagerechner hilft, den letzten Arbeitstag zu ermitteln.
+- **Urlaubsplanung:** Berechnen Sie, wie viele Urlaubs- und Arbeitstage ein Zeitraum umfasst. Aktivieren Sie „Start + Endtag mitzählen" für die Urlaubsdauer.
+- **Schwangerschaft und Geburtstermin:** Eine Schwangerschaft dauert ca. 280 Tage (40 Wochen) ab dem ersten Tag der letzten Periode. Vom Empfängnisdatum aus gerechnet sind es ca. 266 Tage.
+- **Projektplanung:** Wie viele Arbeitstage stehen für ein Projekt zur Verfügung? Planen Sie Meilensteine und Deadlines realistisch.
+- **Vertragsfristen:** Wann läuft ein Vertrag, eine Garantie oder eine Probezeit ab? Viele Fristen werden in Tagen, Wochen oder Monaten angegeben.
+- **Altersberechnung:** Wie viele Tage bin ich alt? Geben Sie Ihr Geburtsdatum als Start und das heutige Datum als Ende ein.
+
+Unser Tagerechner unterstützt beliebige Datumsbereiche und berechnet auch sehr lange Zeiträume von mehreren Jahrzehnten zuverlässig. Die Umrechnung in Monate berücksichtigt dabei die unterschiedlichen Monatslängen korrekt.`,
+    faq: [
+      {
+        frage: 'Wie berechne ich die Tage zwischen zwei Daten?',
+        antwort: 'Geben Sie Start- und Enddatum ein und der Rechner ermittelt automatisch die Differenz in Tagen. Standardmäßig wird der Starttag nicht mitgezählt. Aktivieren Sie „Start + Endtag mitzählen", wenn beide Tage zählen sollen.',
+      },
+      {
+        frage: 'Werden Feiertage bei den Arbeitstagen berücksichtigt?',
+        antwort: 'Nein, unser Rechner zählt als Arbeitstage alle Tage von Montag bis Freitag. Gesetzliche Feiertage werden nicht abgezogen, da diese je nach Bundesland unterschiedlich sind (9–13 pro Jahr). Ziehen Sie die Feiertage Ihres Bundeslandes manuell ab.',
+      },
+      {
+        frage: 'Soll ich Start- und Endtag mitzählen?',
+        antwort: 'Das hängt vom Anwendungsfall ab. Bei Fristen (z. B. Kündigungsfrist) wird der Starttag üblicherweise nicht mitgezählt. Bei Urlaubsberechnungen oder Veranstaltungsdauern zählen Start- und Endtag meist mit. Im Zweifel prüfen Sie die geltenden Regelungen.',
+      },
+      {
+        frage: 'Wie viele Arbeitstage hat ein Jahr?',
+        antwort: 'Ein normales Jahr hat ca. 261 Arbeitstage (365 minus 104 Wochenendtage). Abzüglich gesetzlicher Feiertage (je nach Bundesland 9–13) bleiben ca. 248–252 Arbeitstage. Ein Schaltjahr hat 262 Arbeitstage vor Feiertagsabzug.',
+      },
+    ],
+  },
+  {
+    slug: 'rabattrechner',
+    titel: 'Rabattrechner',
+    beschreibung: 'Rabatt berechnen: Endpreis, Ersparnis in Euro, Rabatt in Prozent & Doppelrabatt — mit Rechenweg.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Rabattrechner — Rabatt in Euro berechnen | Rechenfix',
+    metaDescription: 'Rabattrechner 2026 ✓ Endpreis nach Rabatt ✓ Ersparnis in Euro ✓ Doppelrabatt berechnen ✓ Mit Rechenweg ✓ Kostenlos. ✓ Mit KI-Erklärung.',
+    keywords: ['rabattrechner', 'rabatt berechnen', 'rabatt in euro', 'endpreis berechnen', 'doppelrabatt', 'rabatt prozent', 'ersparnis berechnen', 'sale rechner', 'angebot berechnen', 'preisnachlass berechnen'],
+    icon: '🏷️',
+    formel: 'Endpreis = Originalpreis × (1 − Rabatt ÷ 100)',
+    beispiel: 'Beispiel: Ein Produkt kostet 149,99 € und ist um 20% reduziert. Ersparnis: 149,99 × 20 ÷ 100 = 30,00 €. Endpreis: 149,99 − 30,00 = 119,99 €.',
+    erklaerung: `Ob Black Friday, Sommerschlussverkauf oder einfach ein gutes Angebot im Supermarkt — Rabatte begegnen uns ständig. Doch wie viel spart man wirklich? Unser kostenloser Rabattrechner zeigt Ihnen sofort den Endpreis, die Ersparnis in Euro und den vollständigen Rechenweg.
+
+**Drei Berechnungsmodi für jede Situation**
+
+Der Rabattrechner bietet drei Modi, die alle typischen Rabatt-Fragen abdecken:
+
+- **Rabatt berechnen:** Sie kennen den Originalpreis und den Rabatt in Prozent und möchten wissen, wie viel Sie tatsächlich zahlen. Formel: Endpreis = Originalpreis × (1 − Rabatt ÷ 100). Beispiel: 200 € mit 25% Rabatt = 200 × 0,75 = 150 €.
+- **Rabatt-Prozent ermitteln:** Sie sehen ein Produkt, das vorher 199 € kostete und jetzt für 149 € angeboten wird — aber wie viel Prozent Rabatt sind das eigentlich? Formel: Rabatt = (Ersparnis ÷ Originalpreis) × 100.
+- **Doppelrabatt:** Erst 20% Sale, dann nochmal 10% mit einem Gutscheincode — wie hoch ist der Gesamtrabatt? Achtung: 20% + 10% sind nicht 30%! Der Doppelrabatt-Modus zeigt den tatsächlichen Gesamtrabatt.
+
+**Warum 20% + 10% nicht 30% Rabatt sind**
+
+Das ist einer der häufigsten Rechenfehler bei Rabatten. Wenn ein Produkt für 200 € erst um 20% reduziert wird, kostet es danach 160 €. Die zweiten 10% werden aber auf 160 € berechnet — nicht auf 200 €. Also: 160 × 0,90 = 144 €. Der Gesamtrabatt beträgt (200 − 144) ÷ 200 = 28%, nicht 30%. Diesen Effekt nennt man **multiplikativen Rabatt**. Unser Doppelrabatt-Modus berechnet das automatisch korrekt und weist auf den Unterschied hin.
+
+**Rabatt oder echter Preisvorteil? So erkennen Sie gute Angebote**
+
+Nicht jeder Rabatt ist ein gutes Angebot. Hier einige Tipps, wie Sie Rabatte richtig einordnen:
+
+- **UVP vs. Straßenpreis:** Manche Händler berechnen den Rabatt auf die unverbindliche Preisempfehlung (UVP), obwohl das Produkt schon länger günstiger verkauft wird. Vergleichen Sie immer mit dem tatsächlichen Marktpreis.
+- **Staffelrabatte:** Manche Angebote bieten „3 für 2" oder Mengenrabatte. Rechnen Sie den Stückpreis aus, um den echten Vorteil zu ermitteln.
+- **Rabatt auf den Rabatt:** Bei Doppelrabatten (z. B. Sale + Gutschein) ist der Gesamtvorteil immer geringer als die Summe der Einzelrabatte.
+- **Versandkosten beachten:** Ein Rabatt von 10 € nützt wenig, wenn 8 € Versandkosten dazukommen.
+
+**Typische Rabatt-Situationen im Alltag**
+
+- **Kleidung & Mode:** Saisonaler Schlussverkauf mit 30–70% Rabatt. Tipp: Rechnen Sie aus, ob der reduzierte Preis wirklich günstig ist.
+- **Elektronik:** Black Friday, Cyber Monday — oft mit gestaffelten Rabatten. Der Doppelrabatt-Modus hilft hier besonders.
+- **Lebensmittel:** „25% mehr Inhalt" oder „2. Packung 50% günstiger" — unser Rechner hilft, den echten Stückpreis zu vergleichen.
+- **Verhandlungen & Skonto:** Beim Handwerker oder bei Rechnungen wird oft Skonto (z. B. 2% bei Zahlung innerhalb 14 Tagen) gewährt. Für Unternehmen kann sich das über das Jahr deutlich summieren.
+- **Online-Shopping:** Gutscheincodes werden häufig auf den bereits reduzierten Preis angewendet — ein klassischer Fall für den Doppelrabatt-Modus.
+
+**Rechenweg immer nachvollziehbar**
+
+Der Rabattrechner zeigt bei jeder Berechnung den vollständigen Rechenweg Schritt für Schritt an. So können Sie die Berechnung nachvollziehen und selbst überprüfen. Die farbige Leiste zeigt Ihnen visuell, wie sich der Preis in Endpreis und Ersparnis aufteilt.
+
+**Ergebnis kopieren und teilen**
+
+Haben Sie ein gutes Angebot gefunden? Teilen Sie das Ergebnis direkt per WhatsApp oder kopieren Sie es in die Zwischenablage. So können Sie Freunde und Familie schnell über Schnäppchen informieren.
+
+Für weiterführende Berechnungen nutzen Sie unseren **Prozentrechner** (für allgemeine Prozentrechnung) oder den **MwSt-Rechner** (um die Mehrwertsteuer aus dem Preis herauszurechnen).`,
+    faq: [
+      {
+        frage: 'Wie berechne ich einen Rabatt in Euro?',
+        antwort: 'Multiplizieren Sie den Originalpreis mit dem Rabatt-Prozentsatz und teilen durch 100. Beispiel: 149,99 € mit 20% Rabatt: 149,99 × 20 ÷ 100 = 30,00 € Ersparnis. Endpreis: 149,99 − 30,00 = 119,99 €.',
+      },
+      {
+        frage: 'Wie viel Prozent Rabatt bekomme ich?',
+        antwort: 'Berechnen Sie die Ersparnis (Originalpreis minus reduzierter Preis), teilen Sie durch den Originalpreis und multiplizieren mit 100. Beispiel: Von 80 € auf 60 € = (80 − 60) ÷ 80 × 100 = 25% Rabatt.',
+      },
+      {
+        frage: 'Warum sind 20% + 10% Rabatt nicht 30%?',
+        antwort: 'Weil der zweite Rabatt auf den bereits reduzierten Preis berechnet wird, nicht auf den Originalpreis. Beispiel: 100 € − 20% = 80 €. Dann 80 € − 10% = 72 €. Gesamtrabatt: 28%, nicht 30%. Dieses Prinzip heißt multiplikativer Rabatt.',
+      },
+      {
+        frage: 'Wie berechne ich den Originalpreis aus dem reduzierten Preis?',
+        antwort: 'Teilen Sie den reduzierten Preis durch (1 − Rabatt ÷ 100). Beispiel: Der Endpreis ist 75 € bei 25% Rabatt. Originalpreis = 75 ÷ 0,75 = 100 €.',
+      },
+      {
+        frage: 'Was ist Skonto und wie berechne ich es?',
+        antwort: 'Skonto ist ein Preisnachlass bei schneller Zahlung, typischerweise 2–3% bei Zahlung innerhalb von 10–14 Tagen. Berechnung wie ein normaler Rabatt: 1.000 € Rechnung mit 2% Skonto = 1.000 × 0,98 = 980 €. Ersparnis: 20 €.',
+      },
+    ],
+  },
+  {
+    slug: 'countdown',
+    titel: 'Countdown-Rechner',
+    beschreibung: 'Wie viele Tage bis Weihnachten, Ostern, Silvester oder Ihrem Geburtstag? Live-Countdown mit Sekunden-Anzeige.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Countdown-Rechner — Tage bis Weihnachten, Ostern & mehr | Rechenfix',
+    metaDescription: 'Countdown-Rechner: Wie viele Tage bis Weihnachten, Ostern, Silvester, Sommerferien oder Ihrem Geburtstag? ✓ Live-Ticker ✓ Tage, Stunden, Minuten, Sekunden ✓ Kostenlos. ✓ Mit KI-Erklärung.',
+    keywords: ['countdown rechner', 'wie viele tage bis weihnachten', 'tage bis ostern', 'countdown silvester', 'tage bis sommerferien', 'tage zähler', 'countdown timer', 'tage bis geburtstag', 'wie lange noch bis weihnachten', 'countdown online'],
+    icon: '⏳',
+    formel: 'Verbleibende Zeit = Zieldatum − aktuelle Uhrzeit (in Tagen, Stunden, Minuten, Sekunden)',
+    beispiel: 'Beispiel: Heute ist der 5. April 2026 — bis Weihnachten (24. Dezember) sind es noch 263 Tage, ca. 37 Wochen.',
+    erklaerung: `**Was ist ein Countdown-Rechner?**
+
+Ein Countdown-Rechner zeigt Ihnen in Echtzeit, wie viel Zeit bis zu einem bestimmten Datum oder Ereignis verbleibt. Die Anzeige aktualisiert sich jede Sekunde und zeigt die verbleibenden Tage, Stunden, Minuten und Sekunden. So wissen Sie immer genau, wie lange es noch bis zum nächsten Feiertag, Urlaub oder persönlichen Termin dauert.
+
+**Voreingestellte Events**
+
+Der Rechner enthält die beliebtesten Countdown-Ziele für Deutschland: Weihnachten (24. Dezember), Silvester (31. Dezember), Ostersonntag (variabler Termin), Sommerferien (ca. 1. Juli), Nikolaus (6. Dezember), Valentinstag (14. Februar), Halloween (31. Oktober) und Neujahr (1. Januar). Alle Termine berechnen sich automatisch für das jeweils nächste Vorkommen.
+
+**Eigenes Datum eingeben**
+
+Neben den voreingestellten Events können Sie auch ein beliebiges eigenes Datum eingeben — zum Beispiel Ihren Geburtstag, einen Hochzeitstag, den Beginn einer Reise oder einen Prüfungstermin. Geben Sie optional eine Bezeichnung ein, damit Sie den Countdown leicht zuordnen können.
+
+**Wie wird Ostern berechnet?**
+
+Das Osterdatum variiert jedes Jahr und wird nach dem Algorithmus von Carl Friedrich Gauss für den gregorianischen Kalender berechnet. Ostersonntag fällt immer auf den ersten Sonntag nach dem ersten Frühlingsvollmond (nach dem 21. März). Dadurch liegt Ostern frühestens am 22. März und spätestens am 25. April.
+
+**Was zeigt der Countdown an?**
+
+Die Live-Anzeige zeigt die verbleibende Zeit aufgeteilt in Tage, Stunden, Minuten und Sekunden. Zusätzlich sehen Sie die Gesamtzahl der verbleibenden Wochen, Tage, Stunden und Sekunden in übersichtlichen Kacheln. Ein Fortschrittsbalken visualisiert, wie weit das Zieldatum noch entfernt ist.
+
+**Alle Events im Überblick**
+
+Unterhalb des Hauptcountdowns sehen Sie eine Übersicht aller voreingestellten Events, sortiert nach Nähe. So haben Sie immer im Blick, welcher Feiertag als nächstes ansteht. Klicken Sie auf ein Event, um den Countdown dafür anzuzeigen.
+
+**Praktische Anwendungen**
+
+Countdown-Rechner sind besonders beliebt in der Vorweihnachtszeit, vor Schulferien oder vor persönlichen Meilensteinen. Sie eignen sich auch für die Planung: Wie viele Arbeitstage bleiben noch bis zum Projektende? Wie viele Wochen bis zum Urlaub? Der Live-Ticker macht das Warten greifbar und motivierend.`,
+    faq: [
+      {
+        frage: 'Wie viele Tage sind es noch bis Weihnachten?',
+        antwort: 'Der Countdown-Rechner zeigt Ihnen in Echtzeit die verbleibenden Tage, Stunden, Minuten und Sekunden bis Weihnachten (24. Dezember). Die Anzeige aktualisiert sich jede Sekunde automatisch.',
+      },
+      {
+        frage: 'Wann ist Ostern dieses Jahr?',
+        antwort: 'Das Osterdatum wird nach dem Gauss-Algorithmus berechnet und variiert jedes Jahr. Der Rechner zeigt automatisch das nächste Osterdatum an und zählt die verbleibende Zeit herunter.',
+      },
+      {
+        frage: 'Kann ich ein eigenes Datum für den Countdown eingeben?',
+        antwort: 'Ja, klicken Sie auf „Eigenes Datum" und geben Sie Ihr Wunschdatum ein. Optional können Sie eine Bezeichnung vergeben (z. B. „Mein Geburtstag"). Der Countdown startet sofort.',
+      },
+      {
+        frage: 'Wie genau ist der Countdown?',
+        antwort: 'Der Countdown aktualisiert sich jede Sekunde und ist auf die Sekunde genau. Die Berechnung basiert auf der aktuellen Systemzeit Ihres Geräts.',
+      },
+      {
+        frage: 'Funktioniert der Countdown auch auf dem Handy?',
+        antwort: 'Ja, der Countdown-Rechner ist vollständig responsiv und funktioniert auf allen Geräten — Smartphone, Tablet und Desktop. Die Live-Anzeige tickt auch mobil sekundengenau.',
+      },
+    ],
+  },
+  {
+    slug: 'lebenszeit-rechner',
+    titel: 'Lebenszeit-Rechner',
+    beschreibung: 'Wie viele Tage haben Sie bereits gelebt? Überraschende Fakten über Ihre Lebenszeit, Herzschläge und verbleibende Wochenenden.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Lebenszeit-Rechner — Wie viele Tage habe ich gelebt? | Rechenfix',
+    metaDescription: 'Lebenszeit-Rechner: Wie viele Tage, Stunden und Herzschläge haben Sie gelebt? ✓ Schlafzeit ✓ Smartphone-Zeit ✓ Verbleibende Wochenenden ✓ Kostenlos. ✓ Mit KI-Erklärung.',
+    keywords: ['lebenszeit rechner', 'wie viele tage habe ich gelebt', 'tage gelebt', 'lebenserwartung rechner', 'herzschläge berechnen', 'wie alt bin ich in tagen', 'lebenszeit statistik', 'verbleibende lebenszeit', 'alter in tagen', 'lebensuhr'],
+    icon: '🧬',
+    formel: 'Gelebte Tage = (Heutiges Datum − Geburtsdatum) in Tagen | Herzschläge = Gelebte Minuten × 70',
+    beispiel: 'Beispiel: Geboren am 15. März 1990 → Sie haben ca. 13.170 Tage gelebt, Ihr Herz hat ca. 1,33 Milliarden Mal geschlagen.',
+    erklaerung: `**Was zeigt der Lebenszeit-Rechner?**
+
+Der Lebenszeit-Rechner verwandelt Ihr Geburtsdatum in faszinierende Zahlen und überraschende Fakten. Statt einfach nur Ihr Alter in Jahren zu sehen, erfahren Sie, wie viele Tage, Stunden und Minuten Sie bereits auf dieser Welt verbracht haben — und wie Sie diese Zeit statistisch gesehen genutzt haben.
+
+**Gelebte Zeit in Zahlen**
+
+Die meisten Menschen kennen ihr Alter in Jahren, aber kaum jemand weiß, wie viele Tage er bereits gelebt hat. Ein 30-Jähriger hat zum Beispiel bereits über 10.950 Tage, mehr als 262.000 Stunden und über 15 Millionen Minuten gelebt. Diese Perspektive macht die eigene Lebenszeit greifbar und oft überraschend.
+
+**Wie verbringen wir unsere Lebenszeit?**
+
+Wissenschaftliche Studien und Statistiken zeigen, wie sich unsere Lebenszeit auf verschiedene Aktivitäten verteilt. Im Durchschnitt verbringt ein Mensch etwa ein Drittel seiner Lebenszeit mit Schlafen — das sind bei einem 30-Jährigen bereits rund 10 Jahre. Rund 5 Jahre entfallen insgesamt auf Essen und Trinken. Seit der Smartphone-Ära kommen im Schnitt 4 Stunden tägliche Bildschirmzeit hinzu, was sich über die Jahre zu beeindruckenden Zahlen summiert.
+
+**Herzschläge und Atemzüge**
+
+Das menschliche Herz schlägt durchschnittlich 70 Mal pro Minute, also rund 100.000 Mal am Tag. Über ein ganzes Leben summieren sich die Herzschläge auf etwa 2,5 bis 3 Milliarden. Ähnlich beeindruckend: Wir atmen durchschnittlich 15 Mal pro Minute, was über die Jahre Hunderte Millionen Atemzüge ergibt.
+
+**Statistische Lebenserwartung in Deutschland**
+
+Die durchschnittliche Lebenserwartung in Deutschland beträgt laut Statistischem Bundesamt (Destatis) für Männer etwa 78,5 Jahre und für Frauen etwa 83,2 Jahre. Diese Werte basieren auf aktuellen Sterbetafeln und dienen als statistische Orientierung. Die tatsächliche Lebenserwartung hängt von vielen individuellen Faktoren ab — Lebensstil, Ernährung, Bewegung, genetische Veranlagung und medizinische Versorgung.
+
+**Verbleibende Wochenenden**
+
+Eine besonders eindrucksvolle Perspektive bietet die Zahl der verbleibenden Wochenenden. Ein 40-jähriger Mann hat statistisch noch etwa 2.000 Wochenenden vor sich. Diese Zahl macht bewusst, wie endlich unsere Zeit ist — und motiviert, jedes Wochenende bewusst zu gestalten.
+
+**Warum dieser Rechner viral geht**
+
+Der Lebenszeit-Rechner gehört zu den meistgeteilten Online-Tools. Die überraschenden Zahlen regen zum Nachdenken an und werden gerne auf WhatsApp, Instagram und in sozialen Netzwerken geteilt. Die Kombination aus persönlichen Daten und universellen Fakten macht die Ergebnisse für jeden individuell relevant und faszinierend.`,
+    faq: [
+      {
+        frage: 'Wie genau ist der Lebenszeit-Rechner?',
+        antwort: 'Die Berechnung der gelebten Tage, Stunden und Minuten ist exakt auf den Tag genau. Die Angaben zu Schlafzeit, Smartphone-Nutzung und Herzschlägen sind statistische Durchschnittswerte und dienen als Orientierung — individuelle Werte können abweichen.',
+      },
+      {
+        frage: 'Woher stammen die Daten zur Lebenserwartung?',
+        antwort: 'Die statistischen Lebenserwartungen (Männer: 78,5 Jahre, Frauen: 83,2 Jahre) basieren auf den aktuellen Sterbetafeln des Statistischen Bundesamtes (Destatis) für Deutschland. Die tatsächliche Lebenserwartung hängt von individuellen Faktoren wie Lebensstil und genetischer Veranlagung ab.',
+      },
+      {
+        frage: 'Wie viele Herzschläge hat ein Mensch im Leben?',
+        antwort: 'Bei durchschnittlich 70 Schlägen pro Minute schlägt das Herz etwa 100.000 Mal am Tag, 36,8 Millionen Mal im Jahr und rund 2,5 bis 3 Milliarden Mal im gesamten Leben. Der Rechner berechnet die Herzschläge basierend auf Ihrem tatsächlichen Alter.',
+      },
+      {
+        frage: 'Kann ich das Ergebnis teilen?',
+        antwort: 'Ja, über die Teilen-Funktion können Sie Ihr Ergebnis als Text kopieren oder den Link direkt über WhatsApp, soziale Netzwerke oder per E-Mail versenden. Die Ergebnisse werden nicht gespeichert — Ihre Daten bleiben privat.',
+      },
+    ],
+  },
+  {
+    slug: 'streaming-kosten-rechner',
+    titel: 'Streaming-Kosten-Rechner',
+    beschreibung: 'Berechnen Sie Ihre monatlichen Streaming-Kosten: Netflix, Disney+, Spotify und mehr auf einen Blick.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Streaming-Kosten-Rechner — Was kosten alle Abos? | Rechenfix',
+    metaDescription: 'Streaming-Kosten-Rechner: Was kosten Netflix, Disney+, Spotify & Co. zusammen? ✓ Monatlich ✓ Jährlich ✓ In 5 und 10 Jahren ✓ Spar-Tipps ✓ Kostenlos. ✓ Mit KI-Erklärung.',
+    keywords: ['streaming kosten rechner', 'streaming abos kosten', 'netflix kosten', 'disney plus kosten', 'spotify kosten', 'streaming vergleich', 'abo kosten berechnen', 'streaming ausgaben', 'was kosten meine abos', 'streaming sparen'],
+    icon: '📺',
+    formel: 'Monatliche Kosten = Summe aller aktiven Abos | Jährlich = Monatlich × 12',
+    beispiel: 'Beispiel: Netflix Standard (13,99 €) + Spotify (11,99 €) + Disney+ (9,99 €) = 35,97 € pro Monat, 431,64 € pro Jahr.',
+    erklaerung: `**Was ist der Streaming-Kosten-Rechner?**
+
+Der Streaming-Kosten-Rechner zeigt Ihnen auf einen Blick, wie viel Geld Sie monatlich, jährlich und über mehrere Jahre für Ihre Streaming-Abos ausgeben. Wählen Sie einfach Ihre aktiven Dienste aus und sehen Sie sofort die Gesamtkosten — inklusive überraschender Hochrechnungen und praktischer Spar-Tipps.
+
+**Streaming-Kosten in Deutschland: Ein wachsender Posten**
+
+Der durchschnittliche deutsche Haushalt gibt laut Bitkom und GfK bereits über 40 Euro pro Monat für Streaming-Dienste aus — Tendenz steigend. Was einzeln betrachtet günstig wirkt, summiert sich schnell: Netflix, Disney+, Spotify, Amazon Prime und vielleicht noch DAZN für den Sport. Am Ende stehen nicht selten 50 bis 80 Euro monatlich auf der Rechnung — oft ohne dass es den Nutzern bewusst ist.
+
+**Warum die Gesamtkosten so überraschen**
+
+Das Phänomen der &bdquo;Abo-Blindheit&ldquo; ist weit verbreitet: Einzelne Beträge von 8 bis 15 Euro pro Monat fühlen sich harmlos an. Doch die Summe aller Abos über ein Jahr oder gar ein Jahrzehnt offenbart das wahre Ausmaß. Wer 60 Euro pro Monat für Streaming ausgibt, investiert in 10 Jahren über 7.000 Euro — das entspricht einem Urlaub oder einem ordentlichen Gebrauchtwagen.
+
+**Die größten Kostentreiber**
+
+Sport-Streaming ist mit Abstand der teuerste Bereich: DAZN Unlimited kostet bereits 44,99 Euro pro Monat, Sky Sport liegt bei 25 Euro. Allein ein Sport-Abo kann mehr kosten als Netflix, Disney+ und Spotify zusammen. Wer Bundesliga und Champions League live sehen möchte, kommt kaum unter 50 Euro pro Monat weg.
+
+Bei den Unterhaltungsdiensten hat Netflix mit dem Premium-Abo (19,99 €) die höchsten Preise, gefolgt von YouTube Premium Family (23,99 €). Die günstigsten Optionen sind werbegestützte Tarife wie Netflix Standard mit Werbung (4,99 €) oder Disney+ mit Werbung (5,99 €).
+
+**Arbeitsstunden zum Mindestlohn**
+
+Eine besonders anschauliche Perspektive: Wie viele Stunden müssten Sie zum gesetzlichen Mindestlohn (12,82 €/Stunde, Stand 2025) arbeiten, um Ihre Streaming-Kosten zu decken? Bei 60 Euro monatlich sind das bereits 56 Stunden reine Arbeitszeit pro Jahr — nur für Streaming.
+
+**Spar-Strategien für Streaming**
+
+Die effektivste Methode ist die Abo-Rotation: Statt alle Dienste gleichzeitig zu bezahlen, abonnieren Sie jeden Monat nur einen und schauen die gewünschten Inhalte gebündelt. Netflix hat eine neue Staffel? Einen Monat Netflix buchen, dann kündigen und zu Disney+ wechseln. So sparen Sie 50 bis 70 Prozent der Kosten.
+
+Weitere Tipps: Family-Tarife mit Mitbewohnern oder Familienmitgliedern teilen, Jahresabos statt Monatsbeiträge buchen (oft 15–20 % günstiger), und regelmäßig prüfen, welche Dienste tatsächlich genutzt werden. Viele Menschen zahlen für Abos, die sie seit Wochen nicht geöffnet haben.
+
+**Preisvergleich und Alternativen**
+
+Öffentlich-rechtliche Mediatheken (ARD, ZDF, Arte) bieten ein erstaunlich großes Angebot — komplett kostenlos und werbefrei. Auch kostenlose Angebote wie Pluto TV, Samsung TV Plus oder Freevee (Amazon) decken viele Unterhaltungsbedürfnisse ab. Kombiniert mit einem oder zwei bezahlten Diensten lässt sich der Streaming-Bedarf oft deutlich günstiger abdecken.
+
+**Bewusst streamen, bewusst sparen**
+
+Der Streaming-Kosten-Rechner hilft Ihnen, den Überblick zu behalten und bewusste Entscheidungen zu treffen. Teilen Sie das Ergebnis mit Freunden und Familie — der Aha-Effekt beim Blick auf die 10-Jahres-Kosten sorgt garantiert für Gesprächsstoff.`,
+    faq: [
+      {
+        frage: 'Wie viel gibt der durchschnittliche Deutsche für Streaming aus?',
+        antwort: 'Laut aktuellen Studien gibt der durchschnittliche deutsche Haushalt über 40 Euro pro Monat für Streaming aus. Haushalte mit Sport-Streaming (DAZN, Sky) liegen oft bei 60 bis 100 Euro. Viele Nutzer unterschätzen ihre Gesamtausgaben, weil die einzelnen Beträge gering erscheinen.',
+      },
+      {
+        frage: 'Wie kann ich bei Streaming-Abos sparen?',
+        antwort: 'Die effektivste Methode ist die Abo-Rotation: Statt alle Dienste gleichzeitig zu bezahlen, nutzen Sie jeden Monat nur einen. Weitere Tipps: Family-Tarife teilen, Jahresabos nutzen (15–20 % günstiger), werbegestützte Tarife wählen und ungenutzte Abos konsequent kündigen.',
+      },
+      {
+        frage: 'Sind die Preise im Rechner aktuell?',
+        antwort: 'Die Preise werden regelmäßig aktualisiert und entsprechen den aktuellen Standardpreisen der jeweiligen Anbieter für Deutschland (Stand 2025). Aktionspreise, Bundles und regionale Sonderangebote können abweichen.',
+      },
+      {
+        frage: 'Kann ich eigene Streaming-Dienste hinzufügen?',
+        antwort: 'Ja, über das Feld „Sonstige Abos" können Sie einen beliebigen monatlichen Betrag eingeben. So erfassen Sie auch kleinere Dienste, App-Abos oder andere regelmäßige Digitalkosten, die nicht in der Liste enthalten sind.',
+      },
+    ],
+  },
+  {
+    slug: 'kaffee-kosten-rechner',
+    titel: 'Kaffee-Kosten-Rechner',
+    beschreibung: 'Berechnen Sie Ihre täglichen, monatlichen und jährlichen Kaffeekosten — mit Spartipps und Vergleichen.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Kaffee-Kosten-Rechner — So viel geben Sie aus | Rechenfix',
+    metaDescription: 'Kaffee-Kosten-Rechner: Berechnen Sie Ihre täglichen, monatlichen und jährlichen Kaffeeausgaben. Mit Spartipps, 30-Jahres-Projektion und Vergleichen. ✓ Mit KI-Erklärung.',
+    keywords: ['kaffee kosten rechner', 'kaffee kosten pro tag', 'kaffee kosten pro monat', 'kaffee kosten pro jahr', 'kaffee ausgaben berechnen', 'kaffee sparen', 'filterkaffee kosten', 'kapselkaffee kosten', 'café kosten', 'starbucks kosten'],
+    icon: '☕',
+    formel: 'Jahreskosten = Kaffees pro Tag × Preis pro Kaffee × 365',
+    beispiel: 'Beispiel: 2 Kaffees pro Tag à 3,50 € (Café-to-go) = 2 × 3,50 × 365 = 2.555 € pro Jahr.',
+    erklaerung: `Kaffee ist für Millionen Deutsche das tägliche Ritual, das den Morgen einläutet und den Tag begleitet. Doch haben Sie sich schon einmal gefragt, wie viel Sie tatsächlich für Ihren Kaffeekonsum ausgeben? Unser Kaffee-Kosten-Rechner zeigt Ihnen genau, welche Summen sich über Wochen, Monate, Jahre und sogar Jahrzehnte ansammeln — und wo enormes Sparpotenzial schlummert.
+
+**Warum sich ein Blick auf die Kaffeekosten lohnt**
+
+Der tägliche Kaffee wirkt auf den ersten Blick günstig: Ein Filterkaffee zu Hause kostet nur rund 15 Cent, eine Kapsel etwa 40 Cent. Doch wer regelmäßig zum Café-to-go für 3,50 € oder zum Starbucks-Latte für 5,00 € greift, gibt schnell über 1.000 € pro Jahr aus — Geld, das anderweitig gut investiert wäre.
+
+**Die vier Kaffee-Typen im Vergleich**
+
+Filterkaffee ist mit durchschnittlich 15 Cent pro Tasse der günstigste Weg zum Koffein. Eine Tasse aus der Kapselmaschine kostet etwa 40 Cent — fast das Dreifache. Der beliebte Café-to-go vom Bäcker oder der Kaffeebar schlägt mit rund 3,50 € zu Buche, und ein Spezialgetränk bei Starbucks oder vergleichbaren Ketten kann leicht 5 € und mehr kosten.
+
+**Historische Kaffeekosten: Was Sie schon ausgegeben haben**
+
+Unser Rechner zeigt Ihnen nicht nur zukünftige Kosten, sondern berechnet auch, wie viel Geld Sie in der Vergangenheit bereits für Kaffee ausgegeben haben. Wenn Sie seit 10 Jahren täglich einen Café-to-go trinken, haben Sie bereits über 12.000 € investiert — genug für einen gebrauchten Kleinwagen oder einen schönen Urlaub.
+
+**30-Jahres-Projektion: Der Blick in die Zukunft**
+
+Besonders eindrucksvoll ist die 30-Jahres-Projektion: Über ein ganzes Berufsleben hinweg summieren sich die Kaffeekosten auf fünfstellige Beträge. Bei zwei Café-to-go pro Tag sprechen wir von über 76.000 € in 30 Jahren. Hätten Sie dieses Geld stattdessen in einen ETF-Sparplan investiert, wäre daraus ein kleines Vermögen geworden.
+
+**Sparpotenzial erkennen und nutzen**
+
+Der Umstieg von Café-to-go auf Filterkaffee spart pro Tasse über 3 €. Bei zwei Tassen täglich sind das über 2.400 € im Jahr. Eine hochwertige Thermoskanne und gute Bohnen kosten zusammen unter 50 € — eine Investition, die sich bereits im ersten Monat amortisiert.
+
+**Was Sie mit dem gesparten Geld machen könnten**
+
+Die Ersparnisse lassen sich anschaulich in Alltagskäufe übersetzen: Für die jährlichen Kaffeekosten könnten Sie je nach Kaffee-Typ ein neues Smartphone kaufen, mehrere Wochenendtrips unternehmen oder einen beträchtlichen Beitrag zu Ihrer Altersvorsorge leisten.
+
+**Koffein und Gesundheit**
+
+Neben den Kosten lohnt sich auch ein Blick auf die gesundheitliche Seite: Die Europäische Behörde für Lebensmittelsicherheit empfiehlt maximal 400 mg Koffein pro Tag für Erwachsene, das entspricht etwa 4 Tassen Filterkaffee. Mehr als 5–6 Tassen können zu Schlafstörungen, Nervosität und erhöhtem Blutdruck führen.
+
+**Fazit: Kleine Änderungen, große Wirkung**
+
+Der Kaffee-Kosten-Rechner zeigt: Bereits kleine Veränderungen im Konsumverhalten können über die Jahre Tausende Euro einsparen. Ob kompletter Umstieg auf Filterkaffee oder ein bewussterer Mix aus Zuhause-Kaffee und gelegentlichem Café-Besuch — jeder gesparte Euro zählt. Probieren Sie es aus und sehen Sie, wie viel Sparpotenzial in Ihrer Kaffeetasse steckt.`,
+    faq: [
+      {
+        frage: 'Wie viel kostet ein Kaffee am Tag wirklich?',
+        antwort: 'Das hängt stark von der Zubereitungsart ab: Filterkaffee zu Hause kostet nur 10–20 Cent pro Tasse, eine Kapsel 30–50 Cent, ein Café-to-go vom Bäcker 2,50–4,50 € und ein Starbucks-Getränk 4–6 €. Über das Jahr gerechnet macht dieser Unterschied Hunderte bis Tausende Euro aus.',
+      },
+      {
+        frage: 'Wie viel Geld spare ich, wenn ich auf Filterkaffee umsteige?',
+        antwort: 'Bei 2 Kaffees pro Tag sparen Sie beim Umstieg von Café-to-go (3,50 €) auf Filterkaffee (0,15 €) rund 2.445 € pro Jahr. Bei Starbucks (5,00 €) auf Filterkaffee sogar 3.540 € pro Jahr — genug für einen schönen Urlaub.',
+      },
+      {
+        frage: 'Wie viel Kaffee trinken die Deutschen im Durchschnitt?',
+        antwort: 'Deutschland ist eine Kaffee-Nation: Im Durchschnitt trinkt jeder Deutsche 3,4 Tassen Kaffee pro Tag, das sind rund 168 Liter pro Jahr. Damit ist Kaffee noch vor Wasser und Bier das beliebteste Getränk in Deutschland.',
+      },
+      {
+        frage: 'Wie viel Koffein ist gesund?',
+        antwort: 'Die Europäische Behörde für Lebensmittelsicherheit (EFSA) empfiehlt maximal 400 mg Koffein pro Tag für gesunde Erwachsene. Das entspricht etwa 4 Tassen Filterkaffee oder 5 Espressi. Schwangere sollten maximal 200 mg pro Tag konsumieren.',
+      },
+      {
+        frage: 'Lohnt sich eine Kaffeemaschine mit Mahlwerk?',
+        antwort: 'Ja — eine Kaffeemaschine mit integriertem Mahlwerk (Vollautomaten ab ca. 300 €) produziert Kaffee für etwa 15–25 Cent pro Tasse bei deutlich besserem Geschmack als Kapseln. Ab 2 Tassen täglich amortisiert sich die Anschaffung gegenüber Café-to-go bereits nach 2–3 Monaten.',
+      },
+    ],
+  },
+  {
+    slug: 'lieferservice-rechner',
+    titel: 'Lieferservice-Rechner',
+    beschreibung: 'Berechnen Sie Ihre Lieferservice-Kosten pro Monat und Jahr — mit Vergleich zum Selberkochen und Spartipps.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Lieferservice-Rechner — Was kostet Bestellen? | Rechenfix',
+    metaDescription: 'Lieferservice-Rechner: Berechnen Sie Ihre monatlichen und jährlichen Lieferkosten. Mit Vergleich zum Selberkochen und Sparpotenzial. ✓ Mit KI-Erklärung.',
+    keywords: ['lieferservice rechner', 'lieferservice kosten', 'lieferdienst kosten', 'bestellen kosten', 'lieferando kosten', 'selber kochen sparen', 'essenslieferung kosten', 'liefergebühr rechner', 'lieferdienst vs selber kochen', 'essen bestellen kosten'],
+    icon: '🛵',
+    formel: 'Jahreskosten = Bestellungen/Woche × (Bestellwert + Liefergebühr + Trinkgeld) × 52',
+    beispiel: 'Beispiel: 3× pro Woche à 25 € + 3 € Liefergebühr + 2 € Trinkgeld = 3 × 30 × 52 = 4.680 € pro Jahr.',
+    erklaerung: `Lieferdienste wie Lieferando, Wolt und Uber Eats haben die Art verändert, wie wir essen. Ein paar Klicks auf dem Smartphone, und 30 Minuten später steht das Abendessen vor der Tür. Bequem — aber auch teuer. Unser Lieferservice-Rechner zeigt Ihnen, was das Bestellen wirklich kostet und wie viel Sie durch Selberkochen sparen könnten.
+
+**Die versteckten Kosten beim Bestellen**
+
+Viele unterschätzen die wahren Kosten einer Lieferbestellung. Zum Warenwert kommen Liefergebühren (oft 2–5 €), Servicepauschalen, Mindestbestellwerte und Trinkgeld hinzu. Eine Bestellung für 25 € kostet mit allen Nebenkosten schnell 30 € oder mehr. Wer das dreimal pro Woche macht, gibt über 4.600 € im Jahr aus — fast 400 € pro Monat.
+
+**Der Vergleich: Lieferdienst vs. Selberkochen**
+
+Eine selbstgekochte Mahlzeit kostet im Durchschnitt nur etwa 3–5 € pro Person. Selbst mit hochwertigen Zutaten bleibt man deutlich unter dem Lieferpreis. Der Unterschied wird über die Jahre dramatisch: Bei drei Bestellungen pro Woche sparen Sie durch Selberkochen rund 3.500 € pro Jahr — in zehn Jahren ist das ein Kleinwagen oder eine Weltreise.
+
+**Warum bestellen wir trotzdem so oft?**
+
+Die Gründe sind vielfältig: Zeitmangel nach einem langen Arbeitstag, fehlende Kochkenntnisse, die Bequemlichkeit oder einfach die Lust auf Abwechslung. All das ist verständlich — aber wer die Zahlen kennt, kann bewusstere Entscheidungen treffen. Schon ein oder zwei Bestellungen weniger pro Woche machen einen großen Unterschied.
+
+**Spartipps für Lieferdienst-Fans**
+
+Es geht nicht darum, nie wieder zu bestellen. Aber smarte Strategien helfen, die Kosten zu senken:
+- **Meal-Prep:** Sonntags vorkochen spart unter der Woche Zeit und Geld. Drei Portionen Chili für zusammen 8 € ersetzen drei Bestellungen für je 30 €.
+- **Lieferpässe prüfen:** Dienste wie Lieferando Plus bieten kostenlose Lieferung ab einer monatlichen Gebühr. Ab einer bestimmten Bestellhäufigkeit kann sich das lohnen — rechnen Sie nach.
+- **Selbstabholung:** Viele Restaurants bieten 10–15 % Rabatt bei Selbstabholung. Das spart Liefergebühr und Trinkgeld.
+- **Aktionen nutzen:** Neue-Kunden-Gutscheine, Treueprogramme und Rabattcodes senken den Preis — aber Vorsicht vor dem Anreiz, häufiger zu bestellen.
+
+**Der Liefermarkt in Deutschland**
+
+Der deutsche Lieferservice-Markt wächst rasant. 2024 bestellten rund 25 Millionen Deutsche regelmäßig Essen online. Der durchschnittliche Bestellwert liegt bei etwa 25–30 €. Besonders beliebt sind Pizza, Burger, Sushi und asiatische Küche. Die Pandemie hat den Trend beschleunigt, und viele Haushalte haben die Gewohnheit beibehalten.
+
+**Gesundheit und Ernährung**
+
+Neben den Kosten gibt es einen weiteren Aspekt: Selbstgekochtes Essen ist in der Regel gesünder. Sie kontrollieren die Zutaten, die Portionsgrößen und den Fettgehalt. Lieferdienst-Gerichte enthalten oft mehr Salz, Zucker und Fett als vergleichbare Hausmannskost. Wer häufiger selbst kocht, tut also nicht nur dem Geldbeutel, sondern auch der Gesundheit etwas Gutes.
+
+**Fazit: Bewusst bestellen, clever sparen**
+
+Der Lieferservice-Rechner macht die Kosten sichtbar und hilft Ihnen, eine informierte Entscheidung zu treffen. Niemand muss komplett auf Lieferdienste verzichten — aber wer die Zahlen kennt, kann bewusster entscheiden, wann sich eine Bestellung lohnt und wann der Griff zum Kochlöffel die bessere Wahl ist. Schon kleine Änderungen sparen über die Jahre Tausende Euro.`,
+    faq: [
+      {
+        frage: 'Wie viel geben Deutsche durchschnittlich für Lieferdienste aus?',
+        antwort: 'Laut Studien geben regelmäßige Lieferdienst-Nutzer in Deutschland durchschnittlich 50–70 € pro Monat für Essenslieferungen aus. Bei häufigen Bestellern (3× pro Woche oder mehr) können es leicht 300–500 € monatlich werden.',
+      },
+      {
+        frage: 'Wie viel kostet Selberkochen pro Mahlzeit?',
+        antwort: 'Eine selbstgekochte Mahlzeit kostet im Durchschnitt 3–5 € pro Person, je nach Rezept und Zutatenqualität. Einfache Gerichte wie Pasta, Reis mit Gemüse oder Suppen kosten sogar nur 1,50–3 €. Im Vergleich dazu liegt eine Lieferbestellung bei 20–35 €.',
+      },
+      {
+        frage: 'Lohnt sich ein Lieferpass (z. B. Lieferando Plus)?',
+        antwort: 'Ein Lieferpass lohnt sich ab etwa 4–5 Bestellungen pro Monat, wenn die eingesparten Liefergebühren die monatliche Gebühr übersteigen. Bei 3 Bestellungen pro Woche sparen Sie mit einem Pass rund 30–50 € pro Monat an Liefergebühren.',
+      },
+      {
+        frage: 'Wie kann ich beim Bestellen am meisten sparen?',
+        antwort: 'Die größten Hebel sind: Selbstabholung statt Lieferung (spart 3–7 € pro Bestellung), Gutscheine und Aktionen nutzen, größere Mengen bestellen und am nächsten Tag aufwärmen, und generell seltener bestellen — schon eine Bestellung weniger pro Woche spart über 1.500 € im Jahr.',
+      },
+      {
+        frage: 'Ist Selberkochen wirklich immer günstiger?',
+        antwort: 'In fast allen Fällen ja. Selbst aufwendige Gerichte mit hochwertigen Zutaten kosten selten mehr als 8–10 € pro Person. Eine Ausnahme können Gerichte sein, die spezielle Geräte oder exotische Zutaten erfordern (z. B. Sushi). Aber im Durchschnitt ist Selberkochen 3–5× günstiger als Bestellen.',
+      },
+    ],
+  },
+  {
+    slug: 'abo-rechner',
+    titel: 'Abo-Rechner',
+    beschreibung: 'Alle Abos auf einen Blick: Berechnen Sie Ihre monatlichen und jährlichen Abo-Kosten — mit Ranking und Spartipps.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Abo-Rechner — Was kosten alle Ihre Abos? | Rechenfix',
+    metaDescription: 'Abo-Rechner: Berechnen Sie die Gesamtkosten aller Abos pro Monat, Jahr und Jahrzehnt. Mit Tortendiagramm, Ranking und Kündigungstipps. ✓ Mit KI-Erklärung.',
+    keywords: ['abo rechner', 'abo kosten', 'abonnement kosten', 'monatliche abos', 'streaming abos kosten', 'abo übersicht', 'abo kündigen sparen', 'fixkosten rechner', 'abos berechnen', 'abo vergleich'],
+    icon: '🔄',
+    formel: 'Jahreskosten = Summe aller monatlichen Abo-Beträge × 12',
+    beispiel: 'Beispiel: Netflix (14 €) + Spotify (12 €) + Fitnessstudio (30 €) + Handy (25 €) = 81 €/Monat = 972 €/Jahr.',
+    erklaerung: `Abonnements gehören heute zum Alltag wie Strom und Wasser. Vom Streaming-Dienst über das Fitnessstudio bis zum Cloud-Speicher — die monatlichen Abbuchungen summieren sich schnell zu beachtlichen Beträgen. Unser Abo-Rechner verschafft Ihnen den Überblick über alle laufenden Kosten und zeigt, wo Sparpotenzial schlummert.
+
+**Das Abo-Zeitalter: Wie sich die Kosten summieren**
+
+Der durchschnittliche deutsche Haushalt hat heute 8 bis 10 laufende Abonnements. Was einzeln harmlos wirkt — 12 € hier, 14 € dort — summiert sich schnell auf 150 bis 200 € pro Monat. Das sind 1.800 bis 2.400 € pro Jahr, und in zehn Jahren sprechen wir von fünfstelligen Beträgen. Geld, das oft unbewusst vom Konto abgebucht wird.
+
+**Die häufigsten Abo-Fallen**
+
+Das größte Problem bei Abos ist nicht der einzelne Preis, sondern die Masse. Studien zeigen, dass rund 40 Prozent aller Abonnements selten oder gar nicht genutzt werden. Typische Fallen sind vergessene Testphasen, die automatisch in kostenpflichtige Abos übergehen, doppelte Dienste (z. B. mehrere Streaming-Anbieter) und Abos, die man „irgendwann mal" kündigen wollte.
+
+**Streaming: Der größte Kostentreiber**
+
+Die Streaming-Landschaft hat sich in den letzten Jahren stark fragmentiert. Während vor wenigen Jahren ein Netflix-Abo reichte, braucht man heute oft drei oder vier Dienste (Netflix, Disney+, Amazon Prime, Spotify, DAZN), um alle gewünschten Inhalte zu sehen. Das kann leicht 50–70 € monatlich kosten — mehr als der klassische Kabelanschluss, den Streaming eigentlich ersetzen sollte.
+
+**Fitnessstudio: Der Klassiker der ungenutzten Abos**
+
+Das Fitnessstudio-Abo ist statistisch gesehen das am häufigsten ungenutzte Abonnement. Nur rund 20 Prozent der Mitglieder gehen regelmäßig trainieren. Bei 30–50 € pro Monat ist das ein teures Gewissen. Alternative: Viele Krankenkassen bezuschussen Sportkurse, und kostenlose Fitness-Apps bieten effektive Workouts für zu Hause.
+
+**Spartipps für Abo-Jäger**
+
+Mit diesen Strategien können Sie Hunderte Euro im Jahr sparen:
+- **Abo-Audit:** Gehen Sie einmal im Quartal Ihre Kontoauszüge durch und prüfen Sie: Habe ich diesen Dienst in den letzten 30 Tagen genutzt? Wenn nein, kündigen!
+- **Familien- und Duo-Tarife:** Viele Dienste bieten günstigere Tarife für mehrere Nutzer. Teilen Sie sich Abos mit Familie oder Freunden.
+- **Jahresabos:** Wer sich sicher ist, kann mit Jahresabos oft 15–20 Prozent gegenüber dem Monatspreis sparen.
+- **Rotieren statt stapeln:** Statt vier Streaming-Dienste parallel zu nutzen, abonnieren Sie einen für 2–3 Monate, schauen alles Interessante, kündigen und wechseln zum nächsten.
+- **Kostenlose Alternativen:** Für viele kostenpflichtige Dienste gibt es gute Gratis-Alternativen — z. B. Mediatheken statt Streaming, LibreOffice statt Microsoft 365, Signal statt WhatsApp Premium.
+
+**Digitale Abos: Der unsichtbare Kostenfaktor**
+
+Besonders tückisch sind kleine digitale Abos: Cloud-Speicher für 3 €, eine Notizen-App für 5 €, ein VPN für 8 €. Einzeln kaum spürbar, aber zusammen schnell 20–30 € im Monat. Prüfen Sie regelmäßig Ihre App-Store-Abonnements — viele vergessen, dass dort automatisch abgebucht wird.
+
+**Fixkosten-Optimierung: Der größte Hebel beim Sparen**
+
+Finanzexperten empfehlen, die Fixkosten unter 50 Prozent des Nettoeinkommens zu halten (50-30-20-Regel). Abos gehören zu den Fixkosten — und sind gleichzeitig die am einfachsten zu reduzierende Kategorie. Während Miete und Versicherungen schwer zu ändern sind, lässt sich ein unnötiges Abo mit wenigen Klicks kündigen.
+
+**Fazit: Transparenz schafft Sparpotenzial**
+
+Der Abo-Rechner macht Ihre monatlichen Verpflichtungen sichtbar. Allein das Aufschreiben aller Abos führt bei den meisten Menschen dazu, mindestens ein oder zwei unnötige Posten zu entdecken. Nutzen Sie das Tortendiagramm, um zu sehen, welches Abo den größten Anteil hat, und das Ranking, um gezielt zu optimieren. Schon 30 € weniger im Monat sind 360 € mehr im Jahr — für die schönen Dinge im Leben.`,
+    faq: [
+      {
+        frage: 'Wie viel geben Deutsche durchschnittlich für Abos aus?',
+        antwort: 'Der durchschnittliche deutsche Haushalt gibt 150–200 € pro Monat für Abonnements aus. Dazu zählen Streaming (40–60 €), Mobilfunk (20–30 €), Fitnessstudio (30–50 €), Zeitungen/Zeitschriften (10–25 €) und diverse digitale Dienste. In 10 Jahren summiert sich das auf 18.000–24.000 €.',
+      },
+      {
+        frage: 'Welche Abos werden am häufigsten vergessen?',
+        antwort: 'Am häufigsten werden kleine digitale Abos vergessen: Cloud-Speicher, App-Abonnements, VPN-Dienste und kostenlose Testphasen, die automatisch kostenpflichtig werden. Prüfen Sie regelmäßig Ihre App-Store-Einstellungen und Kontoauszüge auf unbekannte Abbuchungen.',
+      },
+      {
+        frage: 'Wie kann ich ungenutzte Abos finden?',
+        antwort: 'Gehen Sie Ihre Kontoauszüge der letzten 3 Monate durch und markieren Sie jede wiederkehrende Abbuchung. Fragen Sie sich bei jedem Posten: Habe ich das in den letzten 30 Tagen genutzt? Wenn nicht, kündigen Sie probeweise — die meisten Dienste können jederzeit wieder aktiviert werden.',
+      },
+      {
+        frage: 'Lohnt sich ein Jahresabo gegenüber dem Monatsabo?',
+        antwort: 'In der Regel ja — Jahresabos sind 15–20 % günstiger als Monatsabos. Bei Spotify sparen Sie z. B. etwa 24 € pro Jahr. Aber: Nur bei Diensten, die Sie sicher das ganze Jahr nutzen. Sonst zahlen Sie im Voraus für Monate, in denen Sie den Dienst nicht brauchen.',
+      },
+      {
+        frage: 'Wie oft sollte ich meine Abos überprüfen?',
+        antwort: 'Finanzexperten empfehlen einen Abo-Check alle 3 Monate (quartalsweise). Setzen Sie sich einen festen Termin, z. B. am ersten Sonntag jedes Quartals. So verhindern Sie, dass ungenutzte Abos über Monate weiterlaufen und unnötig Geld kosten.',
+      },
+    ],
+  },
+  {
+    slug: 'handykosten-rechner',
+    titel: 'Handykosten-Rechner',
+    beschreibung: 'Handykosten berechnen: Effektive Monatskosten, Jahreskosten und Kostenaufschlüsselung für Ihren Mobilfunkvertrag.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Handykosten-Rechner 2026 — Monatliche & jährliche Kosten berechnen | Rechenfix',
+    metaDescription: 'Handykosten berechnen: Effektive Monatskosten inkl. Gerät, Tarif und Zusatzoptionen ✓ Anbieter-Vergleich ✓ KI-Erklärung.',
+    keywords: ['handykosten rechner', 'handykosten berechnen', 'handyvertrag kosten', 'mobilfunk kosten', 'handykosten pro monat', 'effektive handykosten', 'handytarif vergleich', 'monatliche handykosten', 'handyvertrag vergleich', 'smartphone kosten'],
+    icon: '📱',
+    formel: 'Effektive Monatskosten = Tarifpreis + Zusatzoptionen + (Gerätepreis ÷ Vertragslaufzeit in Monaten)',
+    beispiel: 'Beispiel: Tarif 15 €/Monat + Smartphone (600 €, 24-Monats-Vertrag = 25 €/Monat) + Auslandsoption 5 € = 45 € effektive Monatskosten = 540 €/Jahr.',
+    erklaerung: `Die tatsächlichen Handykosten sind oft höher, als die monatliche Tarifgebühr vermuten lässt. Neben dem reinen Tarifpreis fallen Kosten für das Gerät, Zusatzoptionen und mögliche Einmalgebühren an. Unser Handykosten-Rechner macht alle Kostenpunkte transparent und zeigt Ihnen die echten monatlichen Gesamtkosten.
+
+**Durchschnittliche Handykosten in Deutschland 2026**
+
+Der durchschnittliche Deutsche gibt 2026 zwischen 20 und 35 Euro pro Monat für seinen Mobilfunktarif aus — ohne Gerätekosten. Mit einem Smartphone-Vertrag steigen die Kosten schnell auf 40 bis 65 Euro monatlich. Über die typische Vertragslaufzeit von 24 Monaten summiert sich das auf 960 bis 1.560 Euro. Jüngere Nutzer geben tendenziell mehr aus, da sie größere Datenvolumen und neuere Geräte bevorzugen.
+
+**Vertrag vs. Prepaid — wann lohnt sich was?**
+
+Die Frage „Vertrag oder Prepaid?" hängt vom Nutzungsverhalten ab. Prepaid-Tarife eignen sich hervorragend für Wenigtelefonierer, die vor allem erreichbar sein möchten und wenig mobiles Internet nutzen. Die Kosten liegen typischerweise bei 5 bis 10 Euro im Monat. Vertragstarife lohnen sich für Vielnutzer mit hohem Datenverbrauch: Ab ca. 10 GB monatlich ist ein Vertrag in der Regel günstiger als vergleichbare Prepaid-Optionen. Ein besonderer Vorteil: Viele Anbieter bieten inzwischen monatlich kündbare Verträge an — Sie haben die Flexibilität von Prepaid mit den günstigeren Konditionen eines Vertrags.
+
+**Gerät separat kaufen vs. mit Vertrag**
+
+Die große Frage beim Smartphone-Kauf: Zusammen mit dem Vertrag oder separat? Auf den ersten Blick wirken Verträge mit Gerät attraktiv — das neueste iPhone für nur 1 Euro Zuzahlung klingt verlockend. Doch die Rechnung zeigt oft ein anderes Bild: Die monatliche Rate für das Gerät ist im höheren Tarifpreis versteckt. Ein Rechenbeispiel: Ein Smartphone für 900 Euro mit 24-Monats-Vertrag kostet 37,50 Euro pro Monat nur für das Gerät. Kombiniert mit dem Tarif (z. B. 25 Euro) ergibt das 62,50 Euro monatlich. Kauft man das Gerät separat und wählt einen günstigen SIM-only-Tarif (z. B. 15 Euro), zahlt man effektiv 52,50 Euro — eine Ersparnis von 240 Euro über 24 Monate.
+
+**Versteckte Kosten im Handyvertrag erkennen**
+
+Handyverträge können überraschende Zusatzkosten enthalten, die auf den ersten Blick nicht sichtbar sind. Dazu gehören: Anschlussgebühren (oft 25–40 Euro einmalig), Kosten für EU-Roaming über das Fair-Use-Limit hinaus, teure Sonderrufnummern (0900er, 0180er), automatische Vertragsverlängerung nach Ablauf der Mindestlaufzeit, Kosten für Zusatzdienste die bei Vertragsabschluss „kostenlos" aktiviert wurden und nach der Testphase kostenpflichtig werden, sowie Gebühren für die Nutzung einer MultiSIM oder eSIM. Lesen Sie das Kleingedruckte sorgfältig und prüfen Sie Ihre Rechnung monatlich auf unerwartete Posten.
+
+**Tipps zum Senken der Handykosten**
+
+Mit diesen Strategien können Sie Ihre Handykosten deutlich reduzieren:
+- **Tarifcheck:** Vergleichen Sie mindestens einmal jährlich die aktuellen Tarife. Der Markt ändert sich schnell, und oft gibt es günstigere Alternativen.
+- **Datenverbrauch analysieren:** Viele Menschen zahlen für mehr Datenvolumen als sie brauchen. Prüfen Sie Ihren tatsächlichen Verbrauch in den Einstellungen Ihres Smartphones.
+- **WLAN nutzen:** Zuhause und am Arbeitsplatz WLAN statt mobile Daten verwenden — das spart Datenvolumen und ermöglicht einen günstigeren Tarif.
+- **Monatlich kündbar:** Wählen Sie wenn möglich monatlich kündbare Tarife. Sie sind oft nur 1–2 Euro teurer als 24-Monats-Verträge, bieten aber volle Flexibilität.
+- **Smartphone-Lebensdauer verlängern:** Nutzen Sie Ihr Gerät mindestens 3–4 Jahre statt alle 2 Jahre zu wechseln. Das halbiert die effektiven Gerätekosten.
+- **Familientarife:** Viele Anbieter bieten Familientarife oder Partnerkarten an, die pro Person deutlich günstiger sind als Einzelverträge.
+
+**Kosten pro GB: Ein wichtiger Vergleichswert**
+
+Der Preis pro Gigabyte ist eine gute Kennzahl, um Tarife zu vergleichen. In Deutschland lag der Durchschnittspreis 2026 bei etwa 1,50 bis 2,50 Euro pro GB. Tarife mit großem Datenvolumen (20+ GB) bieten oft einen günstigeren GB-Preis von unter 1 Euro. Wenn Ihr Kosten-pro-GB-Wert deutlich über 3 Euro liegt, lohnt sich ein Tarifwechsel. Zum Vergleich: In anderen EU-Ländern wie Finnland oder Polen liegt der GB-Preis bei unter 0,50 Euro.`,
+    faq: [
+      {
+        frage: 'Wie berechne ich meine tatsächlichen Handykosten?',
+        antwort: 'Addieren Sie zum monatlichen Tarifpreis die Kosten für Ihr Gerät (Kaufpreis geteilt durch Nutzungsdauer in Monaten), Zusatzoptionen (z.B. Auslandsflatrate) und eventuelle Einmalgebühren (Anschlussgebühr geteilt durch Vertragslaufzeit). Das Ergebnis sind Ihre effektiven monatlichen Handykosten. Unser Rechner macht das automatisch für Sie.',
+      },
+      {
+        frage: 'Ist ein Handyvertrag mit oder ohne Gerät günstiger?',
+        antwort: 'In den meisten Fällen ist der Kauf eines Smartphones ohne Vertrag (separat) günstiger. Ein SIM-only-Tarif kostet oft nur 10–20 € pro Monat, während Verträge mit Gerät 40–65 € kosten. Über 24 Monate sparen Sie typischerweise 100–300 €, wenn Sie das Gerät separat kaufen und einen günstigen Tarif wählen.',
+      },
+      {
+        frage: 'Was sind typische Handykosten pro Monat in Deutschland?',
+        antwort: 'Deutsche geben durchschnittlich 20–35 € pro Monat für ihren Mobilfunktarif aus (ohne Gerät). Mit Smartphone-Vertrag steigen die Kosten auf 40–65 €. Prepaid-Nutzer kommen oft mit 5–10 € aus. Die günstigsten Allnet-Flats mit 5 GB beginnen ab etwa 8–12 € monatlich.',
+      },
+      {
+        frage: 'Lohnt sich monatlich kündbar oder ein 24-Monats-Vertrag?',
+        antwort: 'Monatlich kündbare Tarife sind meist nur 1–3 € teurer als 24-Monats-Verträge, bieten aber volle Flexibilität. Bei einem Preisunterschied von 2 € zahlen Sie über 24 Monate nur 48 € mehr, können aber jederzeit zu einem besseren Angebot wechseln. Für die meisten Nutzer lohnt sich die Flexibilität.',
+      },
+      {
+        frage: 'Welche versteckten Kosten gibt es bei Handyverträgen?',
+        antwort: 'Häufige versteckte Kosten sind: Anschlussgebühren (25–40 €), Kosten für Datenvolumen über dem Limit, Roaming-Gebühren außerhalb der EU, teure Sonderrufnummern, automatisch aktivierte Zusatzdienste nach der Testphase und Kosten bei Vertragsverlängerung (oft zu schlechteren Konditionen). Prüfen Sie monatlich Ihre Rechnung.',
+      },
+      {
+        frage: 'Wie viel Datenvolumen brauche ich wirklich?',
+        antwort: 'Das hängt von Ihrer Nutzung ab: Nur Messaging und E-Mail = 1–3 GB, Social Media und Surfen = 5–10 GB, Videos unterwegs = 15–30 GB, intensives Streaming = 30+ GB. Prüfen Sie Ihren aktuellen Verbrauch in den Smartphone-Einstellungen unter „Mobilfunkdaten". WLAN-Nutzung zählt nicht zum Mobilfunkverbrauch.',
+      },
+    ],
+  },
+  {
+    slug: 'umzugskosten-rechner',
+    titel: 'Umzugskosten-Rechner',
+    beschreibung: 'Umzugskosten berechnen: Geschätzte Kosten für Umzugsfirma, Transporter, Verpackung und Nebenkosten.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Umzugskosten-Rechner 2026 — Was kostet mein Umzug? | Rechenfix',
+    metaDescription: 'Umzugskosten berechnen: Umzugsfirma, Transporter, Verpackung und Nebenkosten ✓ Entfernung ✓ Wohnungsgröße ✓ KI-Erklärung.',
+    keywords: ['umzugskosten rechner', 'umzugskosten berechnen', 'was kostet ein umzug', 'umzugsfirma kosten', 'umzug kosten schätzen', 'umzugskosten deutschland', 'umzug selbst organisiert kosten', 'transporter umzug kosten', 'umzugskosten steuer absetzen', 'umzug checkliste'],
+    icon: '📦',
+    formel: 'Kosten (Umzugsfirma) = Wohnungsgröße × Kosten/m² + Etagenzuschlag + Zusatzleistungen',
+    beispiel: '60 m², 50 km, 2. OG → 2. OG, Umzugsfirma: 1.500 € Basis + 150 € Etage = ca. 1.650 € | Selbst: ca. 355 €.',
+    erklaerung: `**Was kostet ein Umzug in Deutschland?**
+
+Die Kosten für einen Umzug hängen von vielen Faktoren ab: Wohnungsgröße, Entfernung, Etage, Saison und ob Sie eine Umzugsfirma beauftragen oder selbst organisieren. Im Durchschnitt kostet ein Umzug mit Umzugsfirma für eine 2-Zimmer-Wohnung (60 m²) innerhalb der gleichen Stadt zwischen **600 und 1.200 Euro**. Bei einem Fernumzug über 500 km können die Kosten auf **2.000 bis 4.000 Euro** steigen. Unser Rechner gibt Ihnen eine erste Kostenschätzung basierend auf Ihren individuellen Daten.
+
+Neben den reinen Umzugskosten fallen weitere Ausgaben an: Renovierung der alten Wohnung, Kaution für die neue Wohnung (in der Regel 3 Nettokaltmieten), Nachsendeauftrag bei der Post und diverse Ummeldungen. Planen Sie daher immer einen Puffer von 15-20% auf die geschätzten Kosten ein.
+
+**Umzugsfirma vs. selbst organisiert: Wann lohnt sich was?**
+
+Ein Umzug in Eigenregie spart erheblich Geld — aber kostet Zeit, Nerven und körperliche Anstrengung. Für eine kleine Wohnung (30-40 m²) in der gleichen Stadt lohnt sich der Selbstumzug fast immer: Transporter, Verpackung und Pizza für die Helfer kosten zusammen nur 200-400 Euro. Bei größeren Wohnungen, Fernumzügen oder empfindlichen Möbeln (Klavier, antike Schränke) ist eine Umzugsfirma die bessere Wahl — die Kosten stehen in einem besseren Verhältnis zum Aufwand und die Haftung bei Schäden ist abgedeckt.
+
+Tipp: Viele Umzugsfirmen bieten Teilleistungen an, z. B. nur den Transport ohne Ein- und Auspacken. Das kann ein guter Kompromiss sein: Sie packen selbst, die Profis kümmern sich um den Transport und schwere Möbel.
+
+**Umzugskosten steuerlich absetzen**
+
+Bei einem berufsbedingten Umzug können Sie die Kosten als Werbungskosten von der Steuer absetzen. Der Umzug gilt als berufsbedingt, wenn sich Ihr Arbeitsweg dadurch um mindestens 30 Minuten verkürzt, Sie einen neuen Job antreten oder versetzt werden. Absetzbar sind: Transportkosten, doppelte Miete (max. 6 Monate), Maklerkosten für die neue Wohnung und eine Umzugskostenpauschale für sonstige Ausgaben (2026: **886 Euro** für den Umziehenden, plus **590 Euro** pro weitere Person im Haushalt). Bei privatem Umzug können Handwerker- und Transportkosten als haushaltsnahe Dienstleistungen geltend gemacht werden (20% der Arbeitskosten, max. 4.000 Euro/Jahr).
+
+**Checkliste: So planen Sie Ihren Umzug**
+
+Ein guter Umzug beginnt mit rechtzeitiger Planung. **3 Monate vorher:** Umzugsfirma beauftragen (in der Hauptsaison Mai-September frühzeitig buchen), Sonderurlaub beantragen, alte Wohnung kündigen. **4-6 Wochen vorher:** Kartons und Verpackungsmaterial besorgen, Halteverbotszone beantragen, Helfer organisieren, Sperrmülltermin vereinbaren, nicht benötigte Gegenstände verkaufen. **2 Wochen vorher:** Nachsendeauftrag bei der Post einrichten, Strom/Gas für neue Wohnung anmelden, Telefon/Internet ummelden, Schul-/Kindergartenplatz klären. **Nach dem Umzug:** Innerhalb von 2 Wochen beim Einwohnermeldeamt ummelden, Adressänderungen an Bank, Versicherung, Arbeitgeber melden.
+
+Tipp: Umzüge am Monatsanfang oder unter der Woche sind oft günstiger als am Monatsende oder Wochenende. Weitere hilfreiche Rechner: Mit dem [Mietrechner](/wohnen/mietrechner) können Sie die Mietbelastung für die neue Wohnung prüfen und der [Nebenkostenrechner](/wohnen/nebenkosten-rechner) hilft bei der Einschätzung der Betriebskosten.`,
+    faq: [
+      {
+        frage: 'Was kostet ein Umzug mit Umzugsfirma?',
+        antwort: 'Die Kosten hängen von Wohnungsgröße, Entfernung und Leistungsumfang ab. Richtwerte: 1-Zimmer-Wohnung lokal ca. 400-800 €, 3-Zimmer-Wohnung lokal ca. 800-1.500 €, Fernumzug (500+ km) ca. 2.000-4.000 €. In der Hauptsaison (Mai-September) liegen die Preise 20-30% höher. Zusatzleistungen wie Einpackservice oder Möbelmontage kosten extra.',
+      },
+      {
+        frage: 'Kann ich Umzugskosten von der Steuer absetzen?',
+        antwort: 'Bei berufsbedingtem Umzug ja — als Werbungskosten. Der Umzug gilt als berufsbedingt, wenn sich Ihr Arbeitsweg um mindestens 30 Minuten verkürzt. Absetzbar sind Transportkosten, doppelte Miete (max. 6 Monate), Makler und eine Pauschale (886 € plus 590 € pro weitere Person). Bei privatem Umzug können Handwerkerkosten als haushaltsnahe Dienstleistungen geltend gemacht werden.',
+      },
+      {
+        frage: 'Wie groß muss der Transporter sein?',
+        antwort: 'Faustregel: Bis 30 m² reicht ein Sprinter (ca. 12 m³). Für 30-60 m² brauchen Sie einen 3,5t-LKW (ca. 20 m³). Ab 60-90 m² einen 7,5t-LKW (ca. 35 m³). Über 90 m² sind meist zwei Fahrten oder ein noch größerer LKW nötig. Beachten Sie: Für LKW über 3,5t brauchen Sie den Führerschein Klasse C1.',
+      },
+      {
+        frage: 'Wie finde ich eine günstige Umzugsfirma?',
+        antwort: 'Holen Sie mindestens 3 Angebote ein und vergleichen Sie genau, welche Leistungen enthalten sind. Achten Sie auf: Festpreis vs. Stundenbasis, Transportversicherung, versteckte Kosten (An-/Abfahrt, Verpackungsmaterial). Empfehlung: Firmen vor Ort besichtigen lassen für ein genaues Angebot. Vermeiden Sie extrem günstige Anbieter ohne Bewertungen.',
+      },
+      {
+        frage: 'Welche Nebenkosten kommen beim Umzug dazu?',
+        antwort: 'Neben den reinen Umzugskosten sollten Sie einplanen: Kaution für die neue Wohnung (3 Nettokaltmieten), Renovierung der alten Wohnung (ca. 3-8 €/m²), Nachsendeauftrag (30 €), doppelte Miete im Übergangsmonat, neue Möbel/Einrichtung und ggf. Ummeldung des Kfz (ca. 30 €). Planen Sie einen Puffer von 15-20% ein.',
+      },
+    ],
+  },
+  {
+    slug: 'trinkgeld-rechner',
+    titel: 'Trinkgeld-Rechner',
+    beschreibung: 'Trinkgeld berechnen: Prozent oder fester Betrag, Rechnung teilen, auf glatten Betrag aufrunden.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Trinkgeld-Rechner 2026 — Trinkgeld berechnen & Rechnung teilen | Rechenfix',
+    metaDescription: 'Trinkgeld berechnen: Prozent oder Festbetrag ✓ Rechnung teilen ✓ Aufrunden ✓ Vergleichstabelle ✓ Mit KI-Erklärung.',
+    keywords: ['trinkgeld rechner', 'trinkgeld berechnen', 'trinkgeld prozent', 'rechnung teilen rechner', 'wie viel trinkgeld', 'trinkgeld deutschland', 'trinkgeld restaurant', 'tip calculator deutsch', 'trinkgeld aufrunden', 'trinkgeld knigge'],
+    icon: '💰',
+    formel: 'Trinkgeld = Rechnungsbetrag × Trinkgeld-Prozent ÷ 100 | Gesamtbetrag = Rechnungsbetrag + Trinkgeld | Pro Person = Gesamtbetrag ÷ Anzahl Personen',
+    beispiel: 'Rechnung: 45,00 € × 10% = 4,50 € Trinkgeld → Gesamt: 49,50 € | Bei 2 Personen: 24,75 € pro Person.',
+    erklaerung: `**Wie viel Trinkgeld gibt man in Deutschland?**
+
+In Deutschland ist Trinkgeld eine freiwillige Anerkennung für guten Service — im Gegensatz zu Ländern wie den USA, wo Trinkgeld ein fester Gehaltsbestandteil ist. Die übliche Höhe im Restaurant liegt bei **5 bis 10 Prozent** des Rechnungsbetrags, bei besonders gutem Service auch **10 bis 15 Prozent**. In der Praxis runden viele Deutsche einfach auf den nächsten glatten Betrag auf: Bei einer Rechnung von 27,30 Euro gibt man beispielsweise 30 Euro und sagt „stimmt so". Unser Rechner hilft Ihnen, den passenden Trinkgeldbetrag schnell zu ermitteln — egal ob Sie prozentual rechnen, einen festen Betrag festlegen oder die Rechnung auf mehrere Personen aufteilen möchten.
+
+**Trinkgeld-Knigge: Wann gibt man wie viel?**
+
+Die Höhe des Trinkgelds hängt von der Branche und dem Service ab. Im **Restaurant** sind 5 bis 10 Prozent Standard, bei hervorragendem Service 15 Prozent. In **Cafés und Bars** wird meist aufgerundet oder 1 bis 2 Euro pro Getränk gegeben. Beim **Friseur** sind 5 bis 10 Prozent üblich. **Taxifahrer** erhalten typischerweise 5 bis 10 Prozent oder man rundet auf den nächsten Euro auf. **Lieferdienste** bekommen 1 bis 3 Euro je nach Bestellwert und Wetter. Im **Hotel** gibt man dem Zimmermädchen 1 bis 2 Euro pro Nacht und dem Kofferträger 1 bis 2 Euro pro Gepäckstück. Wichtig: In Deutschland wird Trinkgeld direkt an die Servicekraft gegeben — nicht auf den Tisch gelegt. Sagen Sie beim Bezahlen „stimmt so" oder nennen Sie den gewünschten Gesamtbetrag.
+
+**Trinkgeld international: Große Unterschiede weltweit**
+
+Wer ins Ausland reist, sollte die lokalen Trinkgeld-Gepflogenheiten kennen — sonst kann es zu peinlichen Situationen kommen. In den **USA** sind 15 bis 20 Prozent Trinkgeld quasi Pflicht, da Servicekräfte oft nur den Mindestlohn erhalten und auf Tips angewiesen sind. In **Großbritannien** werden 10 bis 15 Prozent erwartet, oft ist ein „service charge" bereits auf der Rechnung enthalten. In **Frankreich** und **Italien** ist der Service meist im Preis inbegriffen (service compris), trotzdem ist es üblich, 5 bis 10 Prozent zu lassen. In **Japan** und **Südkorea** ist Trinkgeld unüblich und kann sogar als Beleidigung aufgefasst werden. In **Ägypten** und **Marokko** wird überall ein kleines Trinkgeld (Bakschisch) erwartet, auch für kleine Gefälligkeiten. Informieren Sie sich vor Reisen immer über die lokalen Gepflogenheiten — mit dem [Prozentrechner](/alltag/prozentrechner) können Sie den passenden Betrag schnell umrechnen.
+
+**Muss man Trinkgeld versteuern?**
+
+Für **Arbeitnehmer**, die Trinkgeld erhalten, gilt in Deutschland: Freiwilliges Trinkgeld, das direkt vom Gast an die Servicekraft gegeben wird, ist **steuerfrei und sozialversicherungsfrei** — ohne Obergrenze (§ 3 Nr. 51 EStG). Voraussetzung ist, dass der Gast das Trinkgeld freiwillig und ohne Rechtsanspruch gibt und dass es direkt an den Arbeitnehmer geht. Anders verhält es sich bei Trinkgeld, das über den Arbeitgeber verteilt wird oder wenn ein fester Aufschlag auf der Rechnung steht — dieses ist steuerpflichtig. Für **Selbstständige** (z. B. Friseure mit eigenem Salon) gilt: Trinkgeld ist Teil der Betriebseinnahmen und muss versteuert werden.
+
+**Rechnung teilen: So geht es fair**
+
+Wenn Sie mit mehreren Personen essen gehen, gibt es verschiedene Möglichkeiten, die Rechnung aufzuteilen. Die einfachste Variante: Gesamtbetrag inklusive Trinkgeld durch die Anzahl der Personen teilen. Das ist schnell und unkompliziert, kann aber unfair sein, wenn einzelne Personen deutlich mehr bestellt haben. Die Alternative: Jeder zahlt seinen eigenen Betrag plus anteiliges Trinkgeld. In der Praxis hat sich ein Kompromiss bewährt — die Rechnung gleichmäßig teilen, aber Personen mit deutlich höheren Beträgen (z. B. eine teure Flasche Wein) zahlen entsprechend mehr. Unser Rechner zeigt Ihnen sofort den Betrag pro Person, wenn Sie die Anzahl der Gäste eingeben.
+
+**Tipps für den richtigen Trinkgeld-Betrag**
+
+Wenn der Service gut war, zeigen Sie es mit einem angemessenen Trinkgeld. Bedenken Sie: Servicekräfte in Deutschland verdienen zwar mehr als in den USA, aber das Grundgehalt in der Gastronomie ist trotzdem oft niedrig. Wenn Sie unzufrieden waren, reduzieren Sie das Trinkgeld — kein Trinkgeld zu geben ist in Deutschland ein deutliches Zeichen für schlechten Service. Bei Kartenzahlung können Sie das Trinkgeld oft direkt auf das Kartenterminal aufschlagen lassen — fragen Sie einfach nach dem Gesamtbetrag. Alternativ geben Sie das Trinkgeld bar, auch wenn Sie mit Karte zahlen. Mit dem [Dreisatzrechner](/alltag/dreisatz-rechner) können Sie übrigens schnell berechnen, wie viel Prozent Sie tatsächlich gegeben haben.`,
+    faq: [
+      {
+        frage: 'Wie viel Trinkgeld gibt man im Restaurant in Deutschland?',
+        antwort: 'In Deutschland sind 5 bis 10 Prozent Trinkgeld im Restaurant üblich, bei besonders gutem Service auch 10 bis 15 Prozent. Viele runden einfach auf den nächsten glatten Betrag auf. Trinkgeld ist in Deutschland freiwillig — im Gegensatz zu den USA, wo 15 bis 20 Prozent erwartet werden.',
+      },
+      {
+        frage: 'Muss man in Deutschland Trinkgeld geben?',
+        antwort: 'Nein, Trinkgeld ist in Deutschland freiwillig. Es gibt keinen Rechtsanspruch darauf. Kein Trinkgeld zu geben wird aber als Signal für schlechten Service verstanden. In der Regel wird mindestens aufgerundet oder 5-10% gegeben.',
+      },
+      {
+        frage: 'Ist Trinkgeld steuerfrei?',
+        antwort: 'Für Angestellte ja: Freiwilliges Trinkgeld, das direkt vom Gast gegeben wird, ist nach § 3 Nr. 51 EStG steuerfrei und sozialversicherungsfrei — ohne Obergrenze. Wird das Trinkgeld über den Arbeitgeber verteilt oder als fester Aufschlag berechnet, ist es steuerpflichtig. Selbstständige müssen Trinkgeld als Betriebseinnahme versteuern.',
+      },
+      {
+        frage: 'Wie teile ich die Rechnung fair auf mehrere Personen auf?',
+        antwort: 'Die einfachste Methode: Gesamtbetrag inklusive Trinkgeld durch die Anzahl der Personen teilen. Fairer ist es, wenn Personen mit deutlich höheren Bestellungen entsprechend mehr zahlen. Unser Rechner berechnet den Pro-Person-Betrag automatisch, wenn Sie die Personenanzahl eingeben.',
+      },
+      {
+        frage: 'Wie viel Trinkgeld gibt man beim Friseur, Taxi oder Lieferdienst?',
+        antwort: 'Beim Friseur sind 5-10% üblich, beim Taxi rundet man auf oder gibt 5-10%. Beim Lieferdienst sind 1-3 Euro je nach Bestellwert und Wetter angemessen. Im Hotel gibt man dem Zimmermädchen 1-2 Euro pro Nacht und dem Kofferträger 1-2 Euro pro Gepäckstück.',
+      },
+    ],
+  },
+  {
+    slug: 'geburtstag-rechner',
+    titel: 'Geburtstags-Rechner',
+    beschreibung: 'Geburtstag berechnen: Alter in Tagen, Stunden und Minuten, Wochentag der Geburt, Sternzeichen und nächster runder Geburtstag.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Geburtstags-Rechner 2026 — Alter in Tagen, Stunden & Minuten | Rechenfix',
+    metaDescription: 'Geburtsdatum analysieren: Alter in Tagen, Stunden und Minuten ✓ Wochentag der Geburt ✓ Sternzeichen ✓ Nächster runder Geburtstag ✓ Live-Zähler.',
+    keywords: ['geburtstag rechner', 'alter in tagen', 'alter in stunden', 'wochentag geburt', 'wie alt bin ich in tagen', 'sternzeichen berechnen', 'nächster runder geburtstag', 'geburtstag berechnen', 'alter in minuten', 'tage seit geburt'],
+    icon: '🎂',
+    formel: 'Alter in Tagen = Differenz Geburtsdatum → Heute | Stunden = Tage × 24 | Minuten = Stunden × 60 | Sekunden = Minuten × 60',
+    beispiel: 'Geboren am 15.06.1990 → 35 Jahre, 9 Monate, 28 Tage = 13.087 Tage = 314.088 Stunden = ca. 1,13 Milliarden Sekunden.',
+    erklaerung: `**Wie alt bin ich in Tagen? Fun-Facts zur Lebensdauer**
+
+Die Frage „Wie alt bin ich eigentlich in Tagen?" klingt einfach, aber die Zahlen sind erstaunlich. Ein 30-Jähriger hat bereits über **10.950 Tage** gelebt — das sind rund **262.800 Stunden** oder über **15,7 Millionen Minuten**. Bis zum 80. Geburtstag werden es knapp 29.200 Tage sein. Unser Geburtstags-Rechner berechnet Ihr exaktes Alter in allen Einheiten und zeigt sogar einen **Live-Sekunden-Zähler**, der in Echtzeit hochzählt. Die Sekunden-Zahl ist besonders beeindruckend: Mit 30 Jahren haben Sie bereits über **946 Millionen Sekunden** gelebt. Wer 1 Milliarde Sekunden erreichen will, muss etwa 31 Jahre und 8 Monate alt werden — ein Meilenstein, den die meisten Menschen gar nicht bewusst erleben.
+
+**Wochentag der Geburt: Was sagt der Volksmund?**
+
+An welchem Wochentag wurden Sie geboren? Im englischen Volksmund gibt es dazu einen bekannten Kinderreim: „Monday's child is fair of face, Tuesday's child is full of grace..." Auch im deutschen Volksglauben spielte der Geburtstags-Wochentag eine Rolle. **Sonntagskinder** galten traditionell als besonders glücklich — sie sollten übernatürliche Fähigkeiten besitzen und das Glück im Leben anziehen. **Freitagskinder** wurden dagegen mancherorts als unglücklich betrachtet. Statistisch gesehen werden die meisten Kinder in Deutschland an einem **Dienstag** geboren — weniger an Wochenenden, da viele geplante Geburten (Kaiserschnitte, Einleitungen) unter der Woche stattfinden. Mit dem [Tagerechner](/alltag/tagerechner) können Sie übrigens den Wochentag für jedes beliebige Datum ermitteln.
+
+**Die 12 Sternzeichen und ihre Daten**
+
+Die westliche Astrologie teilt das Jahr in 12 Sternzeichen ein, die sich an der Position der Sonne zur Geburt orientieren. **Widder** (21.3.–19.4.) gilt als mutig und impulsiv. **Stier** (20.4.–20.5.) als beständig und genussfreudig. **Zwillinge** (21.5.–20.6.) als kommunikativ und vielseitig. **Krebs** (21.6.–22.7.) als emotional und fürsorglich. **Löwe** (23.7.–22.8.) als selbstbewusst und großzügig. **Jungfrau** (23.8.–22.9.) als analytisch und gewissenhaft. **Waage** (23.9.–22.10.) als harmoniebedürftig und diplomatisch. **Skorpion** (23.10.–21.11.) als leidenschaftlich und tiefgründig. **Schütze** (22.11.–21.12.) als optimistisch und freiheitsliebend. **Steinbock** (22.12.–19.1.) als ehrgeizig und diszipliniert. **Wassermann** (20.1.–18.2.) als kreativ und unkonventionell. **Fische** (19.2.–20.3.) als einfühlsam und träumerisch.
+
+**Runde Geburtstage: Bedeutung und Traditionen**
+
+Runde Geburtstage — also der 30., 40., 50., 60. und so weiter — haben in vielen Kulturen eine besondere Bedeutung. Der **30. Geburtstag** markiert traditionell den Eintritt ins „richtige" Erwachsenenalter. Eine kuriose Tradition: Unverheiratete Männer müssen in Norddeutschland am 30. Geburtstag die Treppe des Rathauses fegen, bis sie von einer Jungfrau erlöst werden. Der **40. Geburtstag** gilt als Lebensmitte — viele Menschen berichten von einer „Midlife-Reflexion". Der **50. Geburtstag** wird oft besonders groß gefeiert, ebenso der **60.**, der in vielen Unternehmen mit einer besonderen Ehrung verbunden ist. Ab dem **65. Geburtstag** beginnt für die meisten das Rentenalter. Unser Rechner zeigt Ihnen, wann Ihr nächster runder Geburtstag ansteht und wie viele Tage es noch dauert.
+
+**Schnapszahl-Geburtstage und besondere Meilensteine**
+
+Neben den runden Geburtstagen gibt es weitere spannende Meilensteine. Der **1.000. Tag** im Leben fällt ungefähr auf den 2. Geburtstag + 9 Monate — ein Datum, das die meisten Menschen verpassen. Der **10.000. Tag** kommt mit etwa 27 Jahren und 5 Monaten und wird inzwischen von vielen bewusst gefeiert. Der **20.000. Tag** liegt bei rund 54 Jahren und 9 Monaten. Wer **1.000.000 Stunden** alt werden möchte, muss stolze 114 Jahre erreichen — bisher haben das weltweit nur wenige Menschen geschafft. Ein weiterer beliebter Meilenstein: Das Datum, an dem man eine **Milliarde Sekunden** alt wird (ca. 31 Jahre, 252 Tage). Nutzen Sie den [Countdown-Rechner](/alltag/countdown), um zu einem dieser Meilensteine herunterzuzählen, oder den [Lebenszeit-Rechner](/alltag/lebenszeit-rechner) für weitere spannende Statistiken zu Ihrem bisherigen Leben.
+
+**Teilen Sie Ihr Ergebnis!**
+
+Die Ergebnisse des Geburtstags-Rechners eignen sich perfekt zum Teilen — überraschen Sie Freunde und Familie mit der Frage „Wusstest du, dass du schon über 12.000 Tage alt bist?" Nutzen Sie die Teilen-Funktion, um Ihr Ergebnis direkt per WhatsApp oder E-Mail zu verschicken.`,
+    faq: [
+      {
+        frage: 'Wie alt bin ich in Tagen?',
+        antwort: 'Geben Sie einfach Ihr Geburtsdatum ein — der Rechner zeigt Ihnen sofort Ihr exaktes Alter in Tagen, Stunden, Minuten und Sekunden. Ein 30-Jähriger hat z. B. bereits über 10.950 Tage gelebt, ein 50-Jähriger über 18.250 Tage.',
+      },
+      {
+        frage: 'An welchem Wochentag bin ich geboren?',
+        antwort: 'Der Rechner ermittelt automatisch den Wochentag Ihres Geburtsdatums. Im Volksmund gelten Sonntagskinder als besonders glücklich. Statistisch werden in Deutschland die meisten Kinder an einem Dienstag geboren, da geplante Geburten unter der Woche stattfinden.',
+      },
+      {
+        frage: 'Wann bin ich 10.000 Tage alt?',
+        antwort: '10.000 Tage entsprechen etwa 27 Jahren und 5 Monaten. Unser Rechner zeigt Ihnen das genaue Datum dieses Meilensteins an — und ob Sie ihn bereits erreicht haben oder er noch bevorsteht. Weitere Meilensteine: 1.000 Tage (ca. 2 Jahre 9 Monate), 20.000 Tage (ca. 54 Jahre 9 Monate).',
+      },
+      {
+        frage: 'Wie berechne ich mein genaues Alter?',
+        antwort: 'Das genaue Alter wird berechnet, indem die vollen Jahre, zusätzlichen Monate und Resttage zwischen Geburtsdatum und heutigem Datum ermittelt werden. Für Tage wird die Differenz in Kalendertagen berechnet. Unser Rechner macht das automatisch — auch Schaltjahre werden berücksichtigt.',
+      },
+      {
+        frage: 'Was ist mein Sternzeichen?',
+        antwort: 'Das Sternzeichen wird durch das Geburtsdatum bestimmt. Es gibt 12 Sternzeichen, die jeweils einen Zeitraum von etwa einem Monat abdecken. Geben Sie Ihr Geburtsdatum ein und der Rechner zeigt Ihr Sternzeichen mit Symbol und Datumsbereich an.',
+      },
+    ],
+  },
+  {
+    slug: 'skontorechner',
+    titel: 'Skontorechner',
+    beschreibung: 'Skonto berechnen: Ersparnis durch Skonto und effektiven Jahreszins — lohnt sich die frühzeitige Zahlung?',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Skontorechner 2026 — Skonto & effektiven Jahreszins berechnen | Rechenfix',
+    metaDescription: 'Skonto berechnen: Ersparnis und effektiver Jahreszins bei Skonto-Nutzung ✓ Lohnt sich Skonto? ✓ KI-Erklärung.',
+    keywords: ['skontorechner', 'skonto berechnen', 'skonto ersparnis', 'effektiver jahreszins skonto', 'skonto 2 prozent', 'skonto ziehen', 'skonto formel', 'zahlungsziel skonto'],
+    icon: '💸',
+    formel: 'Skonto = Rechnungsbetrag × Skontosatz ÷ 100 | Effektiver Jahreszins = (Skontosatz / (100 − Skontosatz)) × (360 / (Zahlungsziel − Skontofrist)) × 100',
+    beispiel: 'Beispiel: 5.000 € Rechnung, 2 % Skonto bei Zahlung in 10 Tagen, Zahlungsziel 30 Tage → 100 € Ersparnis, effektiver Jahreszins ≈ 36,7 % p.a.',
+    erklaerung: `Skonto ist ein Preisnachlass für schnelles Zahlen — meist 2 bis 3 % auf den Rechnungsbetrag, wenn Sie innerhalb einer kurzen Frist (typisch 10 Tage) zahlen. Unser Skontorechner zeigt Ihnen sofort Ihre Ersparnis in Euro und — noch wichtiger — den effektiven Jahreszins, der daraus resultiert. Die überraschende Erkenntnis: Skonto ist fast immer ein sensationell gutes Geschäft.
+
+**Was ist Skonto und wie funktioniert es?**
+
+Auf vielen Rechnungen im B2B-Bereich (und auch im Handwerk) steht ein Zahlungsziel wie: "Zahlbar innerhalb von 30 Tagen netto oder innerhalb von 10 Tagen mit 2 % Skonto". Das bedeutet: Wenn Sie schnell zahlen, dürfen Sie 2 % vom Rechnungsbetrag abziehen. Der Lieferant gewinnt Liquidität und Zahlungssicherheit, Sie sparen Geld. **Skonto berechnen** heißt: Rechnungsbetrag × Skontosatz ÷ 100 = Ersparnis in Euro.
+
+**Effektiver Jahreszins: Warum Skonto fast immer lohnt**
+
+Der wirklich interessante Wert ist der effektive Jahreszins: (Skontosatz / (100 − Skontosatz)) × (360 / Tagedifferenz) × 100. Bei **2 % Skonto, 10 Tagen Skontofrist und 30 Tagen Zahlungsziel** ergibt das einen effektiven Jahreszins von **etwa 36,7 %**. Das bedeutet: Wenn Sie das Skonto nicht nutzen, ist das wirtschaftlich gesehen so, als würden Sie einen Kredit zu 36,7 % Zinsen aufnehmen, nur um das Geld 20 Tage länger zu behalten. Selbst ein **Kontokorrentkredit zu 10 % Zinsen** wäre deutlich günstiger. Das heißt: **Nutzen Sie Skonto, auch wenn Sie dafür kurz ins Minus gehen müssen.**
+
+**Skonto richtig buchen (für Selbstständige)**
+
+Bei der Buchhaltung wird Skonto als Erlösminderung verbucht. Konkret: Sie erfassen die Rechnung in voller Höhe als Aufwand, zahlen den gekürzten Betrag und buchen die Differenz auf das Konto "Gewährte Skonti" (bei Erlösen) bzw. "Erhaltene Skonti" (bei Aufwendungen). Wichtig: Auch die Vorsteuer muss entsprechend angepasst werden, da nur die tatsächlich gezahlte Summe umsatzsteuerlich relevant ist. Moderne Buchhaltungstools machen das automatisch.
+
+**Typische Skonto-Konditionen in Deutschland**
+
+Die häufigsten Konditionen im deutschen B2B-Geschäft sind: **2 % Skonto bei Zahlung in 10 Tagen, sonst 30 Tage netto**. Bei größeren Aufträgen finden Sie auch **3 % / 14 Tage** oder sogar **5 % / 7 Tage**. Selten sind Konditionen wie "ohne Abzug" — hier gibt es kein Skonto. Im Handwerk sind 2–3 % Skonto üblich, im Großhandel eher 2 %, bei Spezialkunden auch mehr.
+
+**Skonto vs. Rabatt — der Unterschied**
+
+Rabatte sind generelle Preisnachlässe (z. B. Mengenrabatt, Treuerabatt), die sofort bei der Bestellung gewährt werden und auf der Rechnung bereits abgezogen sind. **Skonto ist dagegen ein Belohnungsmechanismus für schnelle Zahlung** — er wird erst beim Zahlvorgang wirksam. Beide Instrumente können kombiniert werden: Rabatt senkt den Listenpreis, Skonto senkt den bereits rabattierten Rechnungsbetrag zusätzlich.
+
+**Verwandte Rechner**
+
+Für Umsatzsteuer-Berechnungen nutzen Sie unseren MwSt-Rechner. Allgemeine Prozentaufgaben löst der Prozentrechner. Und wenn Sie einen Kredit zum Vergleich heranziehen möchten, hilft der Kreditrechner.`,
+    faq: [
+      {
+        frage: 'Was ist Skonto?',
+        antwort: 'Skonto ist ein Preisnachlass (meist 2–3 %) für schnelle Zahlung einer Rechnung. Typische Klausel: "2 % Skonto bei Zahlung in 10 Tagen, sonst 30 Tage netto." Sie dürfen den Skonto-Betrag vom Rechnungsbetrag abziehen, wenn Sie innerhalb der Skontofrist bezahlen.',
+      },
+      {
+        frage: 'Lohnt sich Skonto immer?',
+        antwort: 'In fast allen Fällen: ja. Der effektive Jahreszins von Skonto liegt meist deutlich über 30 % — selbst ein Kontokorrentkredit zu 10 % ist günstiger. Ausnahme: Wenn Sie das Geld wirklich nicht flüssig haben und kein Kredit möglich ist. Dann lohnt sich Skonto nicht.',
+      },
+      {
+        frage: 'Wie hoch ist der effektive Jahreszins bei Skonto?',
+        antwort: 'Die Formel lautet: (Skontosatz / (100 − Skontosatz)) × (360 / (Zahlungsziel − Skontofrist)) × 100. Bei 2 % Skonto, 10 Tagen Frist und 30 Tagen Ziel ergibt das ≈ 36,7 % p.a. Bei 3 % / 14 / 30 sind es sogar ≈ 68,8 % p.a. Unser Rechner berechnet den exakten Wert automatisch.',
+      },
+      {
+        frage: 'Wie buche ich Skonto richtig?',
+        antwort: 'Bei Zahlungsausgängen buchen Sie die Rechnung zunächst in voller Höhe, dann beim Zahlvorgang die Differenz auf das Konto "Erhaltene Skonti". Die Vorsteuer wird entsprechend angepasst. Buchhaltungssoftware wie Lexware Office oder sevDesk automatisiert das.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen Skonto und Rabatt?',
+        antwort: 'Rabatt ist ein Preisnachlass, der bereits auf der Rechnung berücksichtigt ist (z. B. Mengenrabatt). Skonto ist ein zusätzlicher Nachlass für schnelles Bezahlen. Beides kann kombiniert auftreten: Zuerst Rabatt auf den Listenpreis, dann Skonto auf den Rechnungsbetrag.',
+      },
+    ],
+  },
+];
