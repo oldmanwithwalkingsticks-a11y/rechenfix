@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 export default function ZinsRechner() {
   const [anfangskapital, setAnfangskapital] = useState('10000');
@@ -239,6 +240,9 @@ export default function ZinsRechner() {
               <strong>Hinweis:</strong> Diese Berechnung dient der Orientierung. Tatsächliche Zinserträge können durch Gebühren, Steuern (Abgeltungssteuer 25% + Soli) und Zinsänderungen abweichen. Die Kapitalertragssteuer ist hier nicht berücksichtigt.
             </p>
           </div>
+
+          <CrossLink href="/finanzen/kreditrechner" emoji="💳" text="Kreditrechner: Zinsen und Rate bei Krediten" />
+          <CrossLink href="/finanzen/etf-sparplanrechner" emoji="📈" text="ETF-Sparplan: Mehr Rendite als klassisches Sparen" />
 
           <ErgebnisAktionen
             ergebnisText={`${fmt(nAnfang)} € Anfangskapital → ${fmt(ergebnis.endkapital)} € nach ${Math.floor(nLaufzeit)} Jahren (${fmt(ergebnis.gesamtzinsen)} € Zinsen)`}

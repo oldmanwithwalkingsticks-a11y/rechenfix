@@ -290,6 +290,7 @@ export default function RentenRechner() {
           </div>
 
           <CrossLink href="/finanzen/etf-sparplanrechner" emoji="📈" text="Rentenlücke mit ETF-Sparplan schließen" />
+          <CrossLink href="/finanzen/sparrechner" emoji="🏦" text="Klassischer Sparplan für die Rente" />
 
           {/* Hinweis */}
           <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-2">

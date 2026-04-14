@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import CrossLink from '@/components/ui/CrossLink';
 
 type Tab = 'netto-brutto' | 'brutto-netto' | 'multi';
 
@@ -229,6 +230,9 @@ export default function MwStRechner() {
                   {geteilt ? '✓ Geteilt' : 'Ergebnis teilen'}
                 </button>
               </div>
+
+              <CrossLink href="/alltag/skontorechner" emoji="💸" text="Skonto auf Rechnungen berechnen" />
+              <CrossLink href="/finanzen/brutto-netto-rechner" emoji="💶" text="Brutto-Netto-Rechner für Gehälter" />
 
               <AiExplain
                 rechnerName="MwSt-Rechner"

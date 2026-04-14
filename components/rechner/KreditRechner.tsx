@@ -272,6 +272,7 @@ export default function KreditRechner() {
           </div>
 
           <CrossLink href="/wohnen/baufinanzierung-rechner" emoji="🏠" text="Immobilie finanzieren? Baufinanzierung berechnen" />
+          <CrossLink href="/auto/leasing-rechner" emoji="🚙" text="Auto leasen statt finanzieren? Leasing-Rechner" />
 
           <AffiliateBox programId="check24" context="kredit" />
 

@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import CrossLink from '@/components/ui/CrossLink';
 
 const MODI: { key: StundenlohnModus; label: string; icon: string }[] = [
   { key: 'stundenlohn', label: 'Stundenlohn berechnen', icon: '⏱️' },
@@ -212,6 +213,9 @@ export default function StundenlohnRechner() {
               </div>
             </div>
           </div>
+
+          <CrossLink href="/finanzen/hochrechner" emoji="📈" text="Stundenlohn in Jahresgehalt umrechnen" />
+          <CrossLink href="/finanzen/minijob-rechner" emoji="💼" text="Minijob-Rechner: Stunden und Verdienst" />
 
           <ErgebnisAktionen
             ergebnisText={`Stundenlohn: ${fmt(ergebnis.stundenlohn)} €, Monatsgehalt: ${fmt(ergebnis.monatsgehalt)} €, Jahresgehalt: ${fmt(ergebnis.jahresgehalt)} €`}

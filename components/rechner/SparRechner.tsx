@@ -145,6 +145,7 @@ export default function SparRechner() {
           </div>
 
           <CrossLink href="/finanzen/etf-sparplanrechner" emoji="📈" text="Mehr Rendite mit ETFs? Sparplan berechnen" />
+          <CrossLink href="/finanzen/rentenrechner" emoji="🏖️" text="Reicht das für die Rente? Rentenlücke berechnen" />
 
           <AffiliateBox programId="verivox" context="sparplan" />
 

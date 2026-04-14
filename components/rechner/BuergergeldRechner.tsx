@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import CrossLink from '@/components/ui/CrossLink';
 
 const ALTERSGRUPPEN: { key: Kindergruppe; label: string }[] = [
   { key: '0-5', label: '0–5 Jahre' },
@@ -332,6 +333,8 @@ export default function BuergergeldRechner() {
               <strong>Hinweis:</strong> Vereinfachte Schätzung. Maßgeblich ist der Bescheid Ihres Jobcenters.
             </p>
           </div>
+
+          <CrossLink href="/finanzen/wohngeld-rechner" emoji="🏠" text="Alternativ: Wohngeld prüfen" />
 
           <ErgebnisAktionen
             ergebnisText={ergebnis.bedarfGedeckt ? 'Kein Bürgergeld-Anspruch (Bedarf durch Einkommen gedeckt)' : `Bürgergeld-Anspruch: ${fmt(ergebnis.gesamtAnspruch)} € pro Monat`}

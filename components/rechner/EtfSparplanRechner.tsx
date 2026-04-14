@@ -329,6 +329,7 @@ export default function EtfSparplanRechner() {
           </div>
 
           <CrossLink href="/finanzen/rentenrechner" emoji="🏖️" text="Reicht das für die Rente? Rentenlücke berechnen" />
+          <CrossLink href="/finanzen/sparrechner" emoji="🏦" text="Klassischer Sparplan im Vergleich" />
 
           <AffiliateBox programId="verivox" context="etf" />
 

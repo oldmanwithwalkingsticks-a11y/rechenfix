@@ -194,6 +194,7 @@ export default function InflationsRechner() {
           </div>
 
           <CrossLink href="/finanzen/sparrechner" emoji="🏦" text="Sparplan berechnen — Inflation mit Zinsen ausgleichen" />
+          <CrossLink href="/finanzen/etf-sparplanrechner" emoji="📈" text="ETF-Sparplan: Rendite über Inflation" />
 
           <ErgebnisAktionen
             ergebnisText={modus === 'kaufkraft'
