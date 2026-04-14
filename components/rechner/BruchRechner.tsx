@@ -17,6 +17,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 type Tab = 'rechnen' | 'kuerzen' | 'dezimal' | 'vergleichen';
 
@@ -234,6 +235,8 @@ export default function BruchRechner() {
                   )}
                 </div>
               </div>
+
+              <CrossLink href="/alltag/prozentrechner" emoji="%" text="Bruch in Prozent umrechnen" />
 
               <ErgebnisAktionen
                 ergebnisText={`${rechenErgebnis.schritte.eingabe} = ${rechenErgebnis.ergebnis.zaehler}/${rechenErgebnis.ergebnis.nenner} (${fmtDez(rechenErgebnis.dezimal)})`}

@@ -11,6 +11,7 @@ import {
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 const katTabs: { key: EinheitenKategorie; label: string }[] = [
   { key: 'laenge', label: 'Länge' },
@@ -199,6 +200,9 @@ export default function EinheitenRechner() {
               ))}
             </div>
           </div>
+
+          <CrossLink href="/alltag/waehrungsrechner" emoji="💱" text="Währungen umrechnen" />
+          <CrossLink href="/mathe/flaechenrechner" emoji="📐" text="Flächen berechnen" />
 
           <ErgebnisAktionen
             ergebnisText={`${formatWert(ergebnis.wert)} ${ergebnis.vonLabel} = ${formatWert(ergebnis.ergebnis)} ${ergebnis.zuLabel}`}

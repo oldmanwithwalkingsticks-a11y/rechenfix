@@ -13,6 +13,7 @@ import {
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 type Modus = 'note' | 'schluessel' | 'durchschnitt';
 
@@ -218,6 +219,9 @@ export default function NotenschluesselRechner() {
                   </p>
                 </div>
               </div>
+
+              <CrossLink href="/mathe/abi-rechner" emoji="🎓" text="Abi-Note berechnen" />
+              <CrossLink href="/mathe/durchschnitt-rechner" emoji="🧮" text="Notendurchschnitt berechnen" />
 
               <ErgebnisAktionen
                 ergebnisText={`Note: ${noteErgebnis.note} (${noteErgebnis.bezeichnung}) - ${noteErgebnis.prozent} % - ${noteErgebnis.bestanden ? 'Bestanden' : 'Nicht bestanden'}`}

@@ -460,6 +460,7 @@ export default function FlaechenRechner() {
           </div>
 
           <CrossLink href="/wohnen/quadratmeter-rechner" emoji="🏠" text="Quadratmeter für Räume berechnen" />
+          <CrossLink href="/mathe/volumenrechner" emoji="📦" text="Auch 3D-Körper berechnen" />
 
           <ErgebnisAktionen
             ergebnisText={`${FORM_OPTIONEN.find(f => f.value === form)?.label}: Fläche = ${fmtZ(ergebnis.flaeche)} ${e}²${ergebnis.umfang !== null ? ` | Umfang = ${fmtZ(ergebnis.umfang)} ${e}` : ''}${ergebnis.diagonale !== null ? ` | Diagonale = ${fmtZ(ergebnis.diagonale)} ${e}` : ''}`}

@@ -12,6 +12,7 @@ import {
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 type Modus = 'arithmetisch' | 'gewichtet' | 'median';
 
@@ -244,6 +245,8 @@ export default function DurchschnittRechner() {
                 <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Sortierte Werte</p>
                 <p className="text-sm text-gray-800 dark:text-gray-200">{arithmErgebnis.sortiert.map(fmt).join(', ')}</p>
               </div>
+
+              <CrossLink href="/mathe/notenschluessel-rechner" emoji="📊" text="Notenschlüssel berechnen" />
 
               <ErgebnisAktionen
                 ergebnisText={`Arithmetisches Mittel: ${fmt(arithmErgebnis.mittelwert)} (${arithmErgebnis.anzahl} Werte)`}
