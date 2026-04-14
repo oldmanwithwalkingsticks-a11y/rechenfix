@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import { berechneKaffee, getKaffeePreise } from '@/lib/berechnungen/kaffee';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 const PREISE = getKaffeePreise();
 const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -237,6 +238,7 @@ export default function KaffeeKostenRechner() {
                 kaffeeProJahr: ergebnis.kaffeeProJahr,
               }}
             />
+            <CrossLink href="/alltag/abo-rechner" emoji="📋" text="Alle Abos & Fixkosten berechnen" />
           </div>
         </>
       )}

@@ -248,6 +248,7 @@ export default function TageRechner() {
           </div>
 
           <CrossLink href="/alltag/countdown" emoji="⏳" text="Countdown erstellen — Tage bis zum Wunschtermin" />
+          <CrossLink href="/arbeit/arbeitstage-rechner" emoji="💼" text="Nur Arbeitstage zählen?" />
 
           <ErgebnisAktionen
             ergebnisText={`${ergebnis.tage.toLocaleString('de-DE')} Tage zwischen ${startDatum ? formatDatum(startDatum) : ''} und ${endDatum ? formatDatum(endDatum) : ''} (${ergebnis.arbeitstage} Arbeitstage)`}

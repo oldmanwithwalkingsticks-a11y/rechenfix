@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { streamingDienste, berechneStreamingKosten, type StreamingErgebnis } from '@/lib/berechnungen/streaming-kosten';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 function formatEuro(n: number): string {
   return n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -221,6 +222,8 @@ export default function StreamingKostenRechner() {
               </p>
             )}
           </div>
+
+          <CrossLink href="/alltag/abo-rechner" emoji="📋" text="Alle Abos im Blick — Monatskosten berechnen" />
 
           <ErgebnisAktionen
             ergebnisText={ergebnisText()}

@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 export default function DreisatzRechner() {
   const [a1, setA1] = useState('3');
@@ -136,6 +137,8 @@ export default function DreisatzRechner() {
               ))}
             </ol>
           </div>
+
+          <CrossLink href="/alltag/prozentrechner" emoji="%" text="Prozente berechnen" />
 
           <ErgebnisAktionen
             ergebnisText={`${fmt(nA1)} ≙ ${fmt(nB1)}, dann ${fmt(nA2)} ≙ ${fmt(ergebnis.b2)}`}

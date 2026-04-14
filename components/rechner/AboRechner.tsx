@@ -309,6 +309,7 @@ export default function AboRechner() {
           </div>
 
           <CrossLink href="/alltag/handykosten-rechner" emoji="📱" text="Handykosten berechnen und Tarif optimieren" />
+          <CrossLink href="/alltag/streaming-kosten-rechner" emoji="📺" text="Streaming-Kosten vergleichen" />
 
           {/* AI Explain */}
           <div className="flex flex-wrap gap-3">

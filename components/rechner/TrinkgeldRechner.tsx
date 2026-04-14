@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 const PROZENT_SCHNELLWAHL = [5, 10, 15, 20];
 const PERSONEN_SCHNELLWAHL = [1, 2, 3, 4, 5, 6];
@@ -256,6 +257,8 @@ export default function TrinkgeldRechner() {
               <strong>Tipp:</strong> In Deutschland sind 5-10% Trinkgeld im Restaurant üblich, 10-15% bei sehr gutem Service. Im Gegensatz zu den USA ist Trinkgeld in Deutschland freiwillig und kein fester Gehaltsbestandteil.
             </p>
           </div>
+
+          <CrossLink href="/alltag/prozentrechner" emoji="%" text="Prozente berechnen" />
 
           <ErgebnisAktionen
             ergebnisText={`Rechnung: ${fmtDez(nRechnungsbetrag)} € + ${fmtDez(ergebnis.trinkgeldBetrag)} € Trinkgeld (${fmtDez(ergebnis.trinkgeldProzent).replace(',00', '')}%) = ${fmtDez(ergebnis.gesamtbetrag)} €${nPersonen > 1 ? ` | Pro Person: ${fmtDez(ergebnis.proPerson)} €` : ''}`}

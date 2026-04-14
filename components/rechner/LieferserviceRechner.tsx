@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import { berechneLieferservice } from '@/lib/berechnungen/lieferservice';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
@@ -240,6 +241,7 @@ export default function LieferserviceRechner() {
                 ersparnisIn10Jahren: ergebnis.ersparnisIn10Jahren,
               }}
             />
+            <CrossLink href="/alltag/trinkgeld-rechner" emoji="💶" text="Trinkgeld fürs Lieferpersonal berechnen" />
           </div>
         </>
       )}

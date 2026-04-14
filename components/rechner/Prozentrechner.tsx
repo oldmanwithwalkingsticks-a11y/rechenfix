@@ -12,6 +12,7 @@ import type { ProzentErgebnis } from '@/lib/berechnungen/prozent';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 type Modus = 'prozentwert' | 'prozentsatz' | 'grundwert' | 'aufschlag' | 'abschlag';
 
@@ -227,6 +228,9 @@ export default function Prozentrechner() {
               </p>
             ))}
           </div>
+
+          <CrossLink href="/alltag/rabattrechner" emoji="🏷️" text="Rabatte berechnen — Endpreis nach %" />
+          <CrossLink href="/mathe/prozentuale-veraenderung-rechner" emoji="📈" text="Prozentuale Zu-/Abnahme berechnen" />
 
           <AiExplain
             rechnerName="Prozentrechner"

@@ -172,6 +172,7 @@ export default function GeburtstagRechner() {
           </div>
 
           <CrossLink href="/alltag/tagerechner" emoji="📅" text="Tage zwischen zwei Daten berechnen" />
+          <CrossLink href="/alltag/lebenszeit-rechner" emoji="⏳" text="Lebenszeit berechnen" />
 
           <ErgebnisAktionen
             ergebnisText={`Ich bin ${ergebnis.jahre} Jahre, ${ergebnis.monate} Monate und ${ergebnis.tage} Tage alt — das sind ${fmtZahl(ergebnis.gesamtTage)} Tage! 🎂 Geboren am ${ergebnis.wochentagGeburt}, Sternzeichen: ${ergebnis.sternzeichen.symbol} ${ergebnis.sternzeichen.name}`}

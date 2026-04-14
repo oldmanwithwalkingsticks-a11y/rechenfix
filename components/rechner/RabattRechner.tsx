@@ -262,6 +262,7 @@ export default function RabattRechner() {
           </div>
 
           <CrossLink href="/alltag/prozentrechner" emoji="🔢" text="Prozente berechnen — Grundwert, Prozentwert, Prozentsatz" />
+          <CrossLink href="/alltag/skontorechner" emoji="💼" text="Skonto für Geschäftskunden berechnen" />
 
           <AiExplain
             rechnerName="Rabattrechner"

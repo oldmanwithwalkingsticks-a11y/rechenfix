@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { berechneLebenszeit, type LebenszeitErgebnis } from '@/lib/berechnungen/lebenszeit';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 function formatZahl(n: number): string {
   return Math.round(n).toLocaleString('de-DE');
@@ -248,6 +249,9 @@ export default function LebenszeitRechner() {
               )}
             </div>
           </div>
+
+          <CrossLink href="/alltag/geburtstag-rechner" emoji="🎂" text="Geburtstag-Rechner — Alter exakt" />
+          <CrossLink href="/gesundheit/schlaf-rechner" emoji="😴" text="Wie viel Schlaf brauche ich?" />
 
           <ErgebnisAktionen
             ergebnisText={ergebnisText()}
