@@ -48,7 +48,7 @@ export default function AbiRechner() {
     let blockI = 0;
     let blockII = 0;
     let mindestensBestanden = true;
-    let hinweise: string[] = [];
+    const hinweise: string[] = [];
 
     if (modus === 'schnell') {
       blockI = Math.max(0, Math.min(600, parseDeutscheZahl(blockIStr) || 0));

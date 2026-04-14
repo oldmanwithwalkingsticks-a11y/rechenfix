@@ -31,9 +31,6 @@ const PRO_WOCHE: Record<BmiKat, [number, number]> = {
   adipos: [0.17, 0.27],
 };
 
-// 1. Trimester Zunahme (Mitte der Range)
-const TRIMESTER1 = 1.25;
-
 function getKat(bmi: number): BmiKat {
   if (bmi < 18.5) return 'unter';
   if (bmi < 25) return 'normal';
