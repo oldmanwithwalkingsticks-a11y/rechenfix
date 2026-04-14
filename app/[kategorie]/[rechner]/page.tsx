@@ -90,6 +90,10 @@ import MinijobRechner from '@/components/rechner/MinijobRechner';
 import WaermepumpeRechner from '@/components/rechner/WaermepumpeRechner';
 import GehaltserhoehungRechner from '@/components/rechner/GehaltserhoehungRechner';
 import ZugewinnausgleichRechner from '@/components/rechner/ZugewinnausgleichRechner';
+import VolumenRechner from '@/components/rechner/VolumenRechner';
+import LeasingRechner from '@/components/rechner/LeasingRechner';
+import SkontoRechner from '@/components/rechner/SkontoRechner';
+import KrankengeldRechner from '@/components/rechner/KrankengeldRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -192,6 +196,10 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'waermepumpen-rechner': WaermepumpeRechner,
   'gehaltserhoehung-rechner': GehaltserhoehungRechner,
   'zugewinnausgleich-rechner': ZugewinnausgleichRechner,
+  'volumenrechner': VolumenRechner,
+  'leasing-rechner': LeasingRechner,
+  'skontorechner': SkontoRechner,
+  'krankengeld-rechner': KrankengeldRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

@@ -125,6 +125,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'arbeitszeitrechner': 'Arbeitszeiten erfassen und direkt in Rechnungen umwandeln.',
     'ueberstunden': 'Arbeitszeiten und Überstunden sauber dokumentieren.',
     'freelancer': 'Angebote, Rechnungen und Buchhaltung für Freelancer — alles in einem Tool.',
+    'skonto': 'Rechnungen mit Skonto-Konditionen erstellen und Zahlungsfristen verwalten — mit Lexware Office.',
   },
   check24: {
     'strom': 'Stromtarife vergleichen und bis zu 500 € pro Jahr sparen.',
@@ -139,6 +140,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'mietrendite': 'Immobilienfinanzierung vergleichen — günstige Kredite für Ihre Kapitalanlage auf CHECK24.',
     'autokosten': 'Kfz-Versicherung vergleichen und bis zu 850 € pro Jahr sparen — der einfachste Weg Ihre Autokosten zu senken.',
     'waermepumpe': 'Günstigen Wärmepumpen-Stromtarif finden — Stromanbieter vergleichen auf CHECK24.',
+    'leasing': 'Autofinanzierung als Alternative zum Leasing? Kredite vergleichen auf CHECK24.',
   },
   congstar: {
     'handykosten': 'congstar bietet faire Tarife ab 5 €/Monat — monatlich kündbar und ohne versteckte Kosten.',
@@ -180,6 +182,7 @@ const CONTEXT_DEEPLINKS: Partial<Record<ProgramId, Record<string, string>>> = {
     'mietrendite': 'https://www.check24.net/kredit/',
     'autokosten': 'https://www.check24.net/kfz-versicherung/',
     'waermepumpe': 'https://www.check24.net/strom/',
+    'leasing': 'https://www.check24.net/kredit/',
     'default': 'https://www.check24.net/',
   },
   verivox: {
