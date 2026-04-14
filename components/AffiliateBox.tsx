@@ -97,6 +97,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'mutterschutz': 'Steuererklärung im Mutterschutzjahr? WISO Steuer berechnet Mutterschaftsgeld und Elterngeld automatisch korrekt.',
     'rente': 'Altersvorsorge steuerlich absetzen — Riester, Rürup und betriebliche Altersvorsorge optimal in der Steuererklärung angeben.',
     'splitting': 'WISO Steuer berechnet automatisch, ob Einzel- oder Zusammenveranlagung für Sie günstiger ist.',
+    'kindergeld': 'WISO Steuer führt die Günstigerprüfung automatisch durch und holt das Maximum für Familien heraus.',
   },
   smartsteuer: {
     'brutto-netto': 'Online-Steuererklärung machen und Geld vom Finanzamt zurückholen.',

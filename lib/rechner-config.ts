@@ -5243,6 +5243,68 @@ Den BAföG-Antrag stellen Sie beim zuständigen Studenten- oder Schülerwerk (be
       },
     ],
   },
+  {
+    slug: 'kindergeld-rechner',
+    titel: 'Kindergeld-Rechner',
+    beschreibung: 'Kindergeld 2026 berechnen und Günstigerprüfung: Kindergeld oder Kinderfreibetrag — was lohnt sich für Ihr Einkommen?',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Kindergeld-Rechner 2026 — 255 € & Günstigerprüfung Freibetrag | Rechenfix',
+    metaDescription: 'Kindergeld 2026: 255 € pro Kind ✓ Günstigerprüfung Kindergeld vs. Kinderfreibetrag ✓ ab wann lohnt sich der Freibetrag ✓ KI-Erklärung.',
+    keywords: ['kindergeld rechner', 'kindergeld 2026', 'kindergeld berechnen', 'kinderfreibetrag', 'günstigerprüfung', 'kindergeld höhe', '255 euro kindergeld', 'kinderfreibetrag 2026', 'kindergeld steuer', 'familienkasse'],
+    icon: '👶',
+    formel: 'Kindergeld 2026 = 255 € × Anzahl Kinder (pro Monat) | Günstigerprüfung: Steuerersparnis durch Kinderfreibetrag (7.806 € bzw. 15.612 € pro Kind) vs. Kindergeld/Jahr — das Finanzamt wählt automatisch die günstigere Variante.',
+    beispiel: 'Familie, zwei Kinder, 60.000 € Brutto, Zusammenveranlagung → Kindergeld: 510 €/Monat = 6.120 €/Jahr | Steuerersparnis Freibetrag: ca. 4.700 € → Kindergeld ist günstiger.',
+    erklaerung: `**Kindergeld 2026: 255 Euro pro Kind**
+
+Seit Januar 2025 beträgt das Kindergeld einheitlich **255 Euro pro Kind und Monat** — unabhängig von der Anzahl der Kinder. Die frühere Staffelung (mehr für das dritte und vierte Kind) wurde abgeschafft. Für 2026 bleibt dieser Betrag unverändert. Bei zwei Kindern erhalten Sie also 510 Euro monatlich, bei drei Kindern 765 Euro. Das Kindergeld wird von der Familienkasse der Bundesagentur für Arbeit automatisch überwiesen. Anspruch besteht grundsätzlich bis zum 18. Geburtstag des Kindes, bei Ausbildung, Studium oder FSJ bis zum 25. Lebensjahr. Berechnen Sie parallel Ihr [Nettoeinkommen](/finanzen/brutto-netto-rechner), um den finanziellen Spielraum der Familie zu sehen.
+
+**Kindergeld oder Kinderfreibetrag: Die Günstigerprüfung**
+
+Das deutsche Steuerrecht bietet Eltern zwei Vorteile: **Kindergeld** oder **Kinderfreibetrag**. Beide können nicht gleichzeitig genutzt werden — das Finanzamt prüft bei der Steuererklärung automatisch, was für Sie günstiger ist. Diese sogenannte **Günstigerprüfung** funktioniert so: Das Finanzamt berechnet Ihre Steuer einmal mit und einmal ohne Kinderfreibetrag. Ist die Steuerersparnis durch den Freibetrag höher als das bereits gezahlte Kindergeld, wird der Freibetrag angewendet und das Kindergeld verrechnet. Ist das Kindergeld höher (der Normalfall bei niedrigen und mittleren Einkommen), bleibt es beim Kindergeld.
+
+**Kinderfreibetrag 2026: 9.756 Euro pro Kind**
+
+Der Kinderfreibetrag setzt sich aus zwei Teilen zusammen: dem eigentlichen Freibetrag für das sächliche Existenzminimum (**4.878 Euro** pro Elternteil) und dem Freibetrag für Betreuung, Erziehung und Ausbildung (**2.928 Euro** pro Elternteil, der sogenannte BEA-Freibetrag). Bei Einzelveranlagung beträgt der Freibetrag pro Kind also 7.806 Euro pro Elternteil — bei Zusammenveranlagung verheirateter Eltern wird der volle doppelte Freibetrag von **15.612 Euro pro Kind** vom zu versteuernden Einkommen abgezogen. Das reduziert die Steuerlast und damit auch den Solidaritätszuschlag und die Kirchensteuer.
+
+**Ab wann lohnt sich der Kinderfreibetrag?**
+
+Ob der Freibetrag günstiger ist als das Kindergeld, hängt vom persönlichen Grenzsteuersatz ab — also davon, wie viel Sie verdienen. Als Faustregel lohnt sich der Kinderfreibetrag bei Familien mit **Zusammenveranlagung und einem Kind ab etwa 80.000 bis 90.000 Euro** Jahresbrutto. Bei höherem Einkommen oder mehreren Kindern verschiebt sich die Grenze. Gut zu wissen: Sie müssen nichts tun — das Finanzamt führt die Günstigerprüfung automatisch durch, sobald Sie in der Steuererklärung angeben, dass Sie Kinder haben. Sie erhalten immer das Kindergeld ausgezahlt. Wenn der Freibetrag günstiger ist, wird Ihnen die Differenz bei der Steuererklärung erstattet. Der [Splitting-Rechner](/finanzen/splitting-rechner) zeigt Ihnen den zusätzlichen Vorteil der Zusammenveranlagung.
+
+**Wer bekommt das Kindergeld ausgezahlt?**
+
+Kindergeld wird grundsätzlich nur an einen Berechtigten ausgezahlt — in der Regel an den Elternteil, bei dem das Kind lebt. Bei getrennt lebenden Eltern mit Wechselmodell können die Eltern untereinander bestimmen, wer das Kindergeld erhält. Das Kindergeld zählt beim Kindesunterhalt zur Hälfte auf den Unterhalt an. Bei Patchwork-Familien mit Stiefkindern besteht Anspruch, wenn das Kind im Haushalt lebt. Auch Pflege- und Adoptivkinder sind berücksichtigt. Die Familienkasse zahlt das Geld monatlich auf das angegebene Konto aus — meist in der zweiten Hälfte des Monats. Rückwirkend ist der Kindergeldanspruch auf **6 Monate begrenzt** — stellen Sie den Antrag also rechtzeitig.
+
+**Weitere Leistungen für Familien**
+
+Neben Kindergeld und Kinderfreibetrag gibt es weitere Hilfen: den **Kinderzuschlag** (bis 292 Euro/Monat zusätzlich für einkommensschwache Familien), das **Bildungs- und Teilhabepaket** (Schulbedarf, Mittagessen, Ausflüge), den **Entlastungsbetrag für Alleinerziehende** (4.260 Euro jährlich plus 240 Euro pro weiterem Kind), und in der Elternzeit das [Elterngeld](/finanzen/elterngeld-rechner). Bei geringem Einkommen prüfen Sie auch den Anspruch auf [Wohngeld](/finanzen/wohngeld-rechner) oder [BAföG](/finanzen/bafoeg-rechner) für ältere Kinder in Ausbildung. Die Steuerersparnis durch Kinder können Sie mit dem [Steuererstattungs-Rechner](/finanzen/steuererstattung-rechner) schätzen.`,
+    faq: [
+      {
+        frage: 'Wie hoch ist das Kindergeld 2026?',
+        antwort: 'Das Kindergeld beträgt 2026 einheitlich 255 € pro Kind und Monat — unabhängig von der Anzahl der Kinder. Bei zwei Kindern sind das 510 €, bei drei Kindern 765 € monatlich. Die frühere Staffelung nach Kinderzahl wurde abgeschafft.',
+      },
+      {
+        frage: 'Kindergeld oder Kinderfreibetrag — was ist besser?',
+        antwort: 'Das Finanzamt prüft bei der Steuererklärung automatisch, was für Sie günstiger ist (Günstigerprüfung). Für die meisten Familien ist das Kindergeld günstiger. Ab einem Bruttoeinkommen von etwa 80.000-90.000 € (verheiratet, 1 Kind) kann der Kinderfreibetrag mehr Steuerersparnis bringen als das Kindergeld wert ist.',
+      },
+      {
+        frage: 'Wie hoch ist der Kinderfreibetrag 2026?',
+        antwort: 'Der Kinderfreibetrag beträgt 2026 pro Elternteil 4.878 € plus 2.928 € BEA-Freibetrag, also 7.806 € pro Elternteil und Kind. Bei Zusammenveranlagung wird der volle Freibetrag von 15.612 € pro Kind vom zu versteuernden Einkommen abgezogen.',
+      },
+      {
+        frage: 'Bis wann gibt es Kindergeld?',
+        antwort: 'Grundsätzlich bis zum 18. Geburtstag des Kindes. Bei Berufsausbildung, Studium, Freiwilligendienst (FSJ/BFD) oder Arbeitssuche besteht der Anspruch bis zum 25. Geburtstag. Bei Behinderung kann das Kindergeld unbegrenzt weitergezahlt werden, wenn die Behinderung vor dem 25. Lebensjahr eingetreten ist.',
+      },
+      {
+        frage: 'Wie beantrage ich Kindergeld?',
+        antwort: 'Kindergeld beantragen Sie schriftlich bei der Familienkasse der Bundesagentur für Arbeit. Der Antrag ist auch online über das Familienkassen-Portal möglich. Benötigt werden: Geburtsurkunde des Kindes, Steuer-ID der Eltern und des Kindes, IBAN. Rückwirkend wird Kindergeld maximal 6 Monate ausgezahlt — stellen Sie den Antrag also zeitnah nach der Geburt.',
+      },
+      {
+        frage: 'Wird Kindergeld bei der Steuer angerechnet?',
+        antwort: 'Ja, wenn Sie vom Kinderfreibetrag profitieren. Das Finanzamt berechnet die Steuer mit Kinderfreibetrag und zieht dann das bereits gezahlte Kindergeld von der Steuerersparnis ab. Ist der Freibetrag günstiger, erhalten Sie die Differenz erstattet. Ist das Kindergeld günstiger, bleibt es bei der Auszahlung durch die Familienkasse und der Freibetrag wird nicht angewendet.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -5256,6 +5318,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'kindergeld-rechner',
   'bafoeg-rechner',
   'wohngeld-rechner',
   'autokosten-rechner',
@@ -5403,6 +5466,7 @@ const verwandteMap: Record<string, string[]> = {
   'autokosten-rechner': ['spritkosten-rechner', 'kfz-steuer-rechner', 'kw-ps-umrechner', 'bussgeldrechner'],
   'wohngeld-rechner': ['buergergeld-rechner', 'mietrechner', 'nebenkosten-rechner', 'brutto-netto-rechner'],
   'bafoeg-rechner': ['wohngeld-rechner', 'buergergeld-rechner', 'brutto-netto-rechner', 'mietrechner'],
+  'kindergeld-rechner': ['elterngeld-rechner', 'splitting-rechner', 'steuererstattung-rechner', 'brutto-netto-rechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
