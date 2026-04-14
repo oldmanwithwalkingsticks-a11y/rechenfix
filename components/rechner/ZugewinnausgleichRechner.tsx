@@ -33,7 +33,7 @@ export default function ZugewinnausgleichRechner() {
     const zugewinnP2 = Math.max(0, eP2 - bereinAnfangP2);
 
     const differenz = Math.abs(zugewinnP1 - zugewinnP2);
-    let ausgleichRoh = differenz / 2;
+    const ausgleichRoh = differenz / 2;
 
     // Wer zahlt an wen?
     const pflichtiger = zugewinnP1 > zugewinnP2 ? 'P1' : zugewinnP2 > zugewinnP1 ? 'P2' : null;
