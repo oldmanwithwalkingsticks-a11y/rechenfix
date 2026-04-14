@@ -9,11 +9,12 @@ import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 // Düsseldorfer Tabelle 2026 (vereinfacht, prüfe bei Änderung)
-type Altersstufe = '0-5' | '6-11' | '12-17' | '18+';
+type Altersstufe = '0-5' | '6-11' | '12-17' | '18-24' | '25-30';
+type TabellenSpalte = '0-5' | '6-11' | '12-17' | '18+';
 
 interface Tabellenzeile {
   max: number; // Obergrenze des Einkommens
-  betraege: Record<Altersstufe, number>;
+  betraege: Record<TabellenSpalte, number>;
 }
 
 const DUESSELDORFER_TABELLE_2026: Tabellenzeile[] = [
@@ -36,14 +37,30 @@ const DUESSELDORFER_TABELLE_2026: Tabellenzeile[] = [
 ];
 
 const KINDERGELD = 255;
-const SELBSTBEHALT_ERWERBSTAETIG = 1450;
+const SELBSTBEHALT_RANG1 = 1450; // minderjährig + privilegiert volljährig (erwerbstätig)
+const SELBSTBEHALT_RANG2 = 1750; // nicht-privilegiert volljährig
+const AUSBILDUNGS_PAUSCHALE = 100;
 
 const ALTERS_LABELS: Record<Altersstufe, string> = {
   '0-5': '0–5 Jahre',
   '6-11': '6–11 Jahre',
   '12-17': '12–17 Jahre',
-  '18+': 'ab 18 Jahre',
+  '18-24': '18–24 Jahre (Erstausbildung/Studium)',
+  '25-30': '25–30 Jahre (Erstausbildung/Studium)',
 };
+
+function tabellenSpalte(a: Altersstufe): TabellenSpalte {
+  if (a === '18-24' || a === '25-30') return '18+';
+  return a;
+}
+
+function istVolljaehrig(a: Altersstufe): boolean {
+  return a === '18-24' || a === '25-30';
+}
+
+function istPrivilegiert(a: Altersstufe): boolean {
+  return a === '0-5' || a === '6-11' || a === '12-17' || a === '18-24';
+}
 
 function findeZeile(einkommen: number): { zeile: Tabellenzeile; index: number } {
   for (let i = 0; i < DUESSELDORFER_TABELLE_2026.length; i++) {
@@ -52,25 +69,55 @@ function findeZeile(einkommen: number): { zeile: Tabellenzeile; index: number } 
   return { zeile: DUESSELDORFER_TABELLE_2026[DUESSELDORFER_TABELLE_2026.length - 1], index: DUESSELDORFER_TABELLE_2026.length - 1 };
 }
 
+interface KindState {
+  alter: Altersstufe;
+  kindergeldJa: boolean;
+  kindergeldVoll: boolean; // nur relevant wenn kindergeldJa
+  eigenesEinkommen: string;
+}
+
+function defaultKind(alter: Altersstufe = '6-11'): KindState {
+  return {
+    alter,
+    kindergeldJa: alter !== '25-30',
+    kindergeldVoll: istVolljaehrig(alter),
+    eigenesEinkommen: '0',
+  };
+}
+
 export default function UnterhaltsRechner() {
   const [netto, setNetto] = useState('3000');
   const [anzahlKinder, setAnzahlKinder] = useState(1);
-  const [alter, setAlter] = useState<Altersstufe[]>(['6-11']);
-  const [kindergeldVoll, setKindergeldVoll] = useState(false);
+  const [kinder, setKinder] = useState<KindState[]>([defaultKind('6-11')]);
 
   const handleAnzahlChange = (n: number) => {
     setAnzahlKinder(n);
-    setAlter(prev => {
+    setKinder(prev => {
       const next = [...prev];
-      while (next.length < n) next.push('6-11');
+      while (next.length < n) next.push(defaultKind('6-11'));
       return next.slice(0, n);
     });
   };
 
-  const handleAlterChange = (i: number, val: Altersstufe) => {
-    setAlter(prev => {
+  const updateKind = (i: number, patch: Partial<KindState>) => {
+    setKinder(prev => {
       const next = [...prev];
-      next[i] = val;
+      next[i] = { ...next[i], ...patch };
+      return next;
+    });
+  };
+
+  const handleAlterChange = (i: number, val: Altersstufe) => {
+    setKinder(prev => {
+      const next = [...prev];
+      const alt = next[i];
+      next[i] = {
+        ...alt,
+        alter: val,
+        // Defaults beim Alterswechsel anpassen
+        kindergeldJa: val !== '25-30',
+        kindergeldVoll: istVolljaehrig(val),
+      };
       return next;
     });
   };
@@ -78,31 +125,80 @@ export default function UnterhaltsRechner() {
   const ergebnis = useMemo(() => {
     const einkommen = parseDeutscheZahl(netto) || 0;
     const { zeile, index } = findeZeile(einkommen);
-    const kindergeldAbzug = kindergeldVoll ? KINDERGELD : KINDERGELD / 2;
 
-    const kinder = Array.from({ length: anzahlKinder }).map((_, i) => {
-      const stufe = alter[i] || '6-11';
-      const tabellen = zeile.betraege[stufe];
-      const zahl = Math.max(0, tabellen - kindergeldAbzug);
-      return { index: i + 1, stufe, tabellen, kindergeldAbzug, zahl };
+    const berechnet = Array.from({ length: anzahlKinder }).map((_, i) => {
+      const k = kinder[i] || defaultKind('6-11');
+      const spalte = tabellenSpalte(k.alter);
+      const tabellen = zeile.betraege[spalte];
+
+      const kgAbzug = k.kindergeldJa ? (k.kindergeldVoll ? KINDERGELD : KINDERGELD / 2) : 0;
+
+      const eigen = istVolljaehrig(k.alter) ? (parseDeutscheZahl(k.eigenesEinkommen) || 0) : 0;
+      const anrechenbar = Math.max(0, eigen - AUSBILDUNGS_PAUSCHALE);
+
+      const zahl = Math.max(0, tabellen - kgAbzug - anrechenbar);
+
+      return {
+        index: i + 1,
+        alter: k.alter,
+        privilegiert: istPrivilegiert(k.alter),
+        volljaehrig: istVolljaehrig(k.alter),
+        tabellen,
+        kgAbzug,
+        eigenesEinkommen: eigen,
+        anrechenbar,
+        zahl,
+      };
     });
 
-    const summeZahl = kinder.reduce((a, b) => a + b.zahl, 0);
+    // Rangfolge: Rang 1 = minderjährig + privilegiert; Rang 2 = nicht-privilegiert volljährig
+    const rang1 = berechnet.filter(k => k.privilegiert);
+    const rang2 = berechnet.filter(k => !k.privilegiert);
 
-    // Mangelfall
-    const verfuegbar = Math.max(0, einkommen - SELBSTBEHALT_ERWERBSTAETIG);
-    const istMangelfall = summeZahl > verfuegbar;
+    const summeRang1 = rang1.reduce((a, b) => a + b.zahl, 0);
+    const summeRang2 = rang2.reduce((a, b) => a + b.zahl, 0);
 
-    let kinderAngepasst = kinder;
-    let summeAngepasst = summeZahl;
-    if (istMangelfall && summeZahl > 0) {
-      const quote = verfuegbar / summeZahl;
-      kinderAngepasst = kinder.map(k => ({ ...k, zahl: Math.round(k.zahl * quote) }));
-      summeAngepasst = kinderAngepasst.reduce((a, b) => a + b.zahl, 0);
+    // Rang 1 Prüfung (Selbstbehalt 1450)
+    const verfuegbarRang1 = Math.max(0, einkommen - SELBSTBEHALT_RANG1);
+    let quotientRang1 = 1;
+    if (summeRang1 > verfuegbarRang1 && summeRang1 > 0) {
+      quotientRang1 = verfuegbarRang1 / summeRang1;
     }
+    const gezahltRang1 = rang1.map(k => ({ ...k, zahl: Math.round(k.zahl * quotientRang1) }));
+    const summeRang1Gezahlt = gezahltRang1.reduce((a, b) => a + b.zahl, 0);
 
-    return { einkommen, einkommensgruppe: index + 1, obergrenze: zeile.max, kinder: kinderAngepasst, summe: summeAngepasst, summeRegulaer: summeZahl, verfuegbar, istMangelfall };
-  }, [netto, anzahlKinder, alter, kindergeldVoll]);
+    // Rang 2 bekommt nur etwas, wenn Einkommen − 1750 − Rang1 > 0
+    const verfuegbarRang2 = Math.max(0, einkommen - SELBSTBEHALT_RANG2 - summeRang1Gezahlt);
+    let quotientRang2 = 1;
+    if (summeRang2 > verfuegbarRang2 && summeRang2 > 0) {
+      quotientRang2 = verfuegbarRang2 / summeRang2;
+    }
+    const gezahltRang2 = rang2.map(k => ({ ...k, zahl: Math.round(k.zahl * quotientRang2) }));
+
+    // Zusammenführen in ursprünglicher Reihenfolge
+    const angepasst = berechnet.map(b => {
+      const r1 = gezahltRang1.find(x => x.index === b.index);
+      if (r1) return r1;
+      const r2 = gezahltRang2.find(x => x.index === b.index);
+      return r2 || b;
+    });
+
+    const summeRegulaer = berechnet.reduce((a, b) => a + b.zahl, 0);
+    const summe = angepasst.reduce((a, b) => a + b.zahl, 0);
+    const istMangelfall = quotientRang1 < 1 || quotientRang2 < 1;
+
+    return {
+      einkommen,
+      einkommensgruppe: index + 1,
+      kinder: angepasst,
+      summe,
+      summeRegulaer,
+      istMangelfall,
+      quotientRang1,
+      quotientRang2,
+      hatRang2: rang2.length > 0,
+    };
+  }, [netto, anzahlKinder, kinder]);
 
   const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 
@@ -137,49 +233,99 @@ export default function UnterhaltsRechner() {
         </div>
       </div>
 
-      {/* 3: Alter je Kind */}
+      {/* 3: Einstellungen je Kind */}
       <div className="mb-6">
         <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
-          Alter der Kinder
+          Einstellungen je Kind
         </h3>
-        <div className="space-y-2">
-          {Array.from({ length: anzahlKinder }).map((_, i) => (
-            <div key={i} className="flex items-center gap-3">
-              <span className="text-sm text-gray-600 dark:text-gray-300 w-16">Kind {i + 1}</span>
-              <select
-                value={alter[i] || '6-11'}
-                onChange={e => handleAlterChange(i, e.target.value as Altersstufe)}
-                className="flex-1 min-h-[48px] px-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 text-sm text-gray-800 dark:text-gray-200"
-              >
-                {(Object.keys(ALTERS_LABELS) as Altersstufe[]).map(key => (
-                  <option key={key} value={key}>{ALTERS_LABELS[key]}</option>
-                ))}
-              </select>
-            </div>
-          ))}
-        </div>
-      </div>
+        <div className="space-y-4">
+          {Array.from({ length: anzahlKinder }).map((_, i) => {
+            const k = kinder[i] || defaultKind('6-11');
+            const voll = istVolljaehrig(k.alter);
+            return (
+              <div key={i} className="bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-4 space-y-3">
+                <div className="flex items-center gap-3">
+                  <span className="text-sm font-semibold text-gray-700 dark:text-gray-200 w-16">Kind {i + 1}</span>
+                  <select
+                    value={k.alter}
+                    onChange={e => handleAlterChange(i, e.target.value as Altersstufe)}
+                    className="flex-1 min-h-[48px] px-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 text-sm text-gray-800 dark:text-gray-200"
+                  >
+                    {(Object.keys(ALTERS_LABELS) as Altersstufe[]).map(key => (
+                      <option key={key} value={key}>{ALTERS_LABELS[key]}</option>
+                    ))}
+                  </select>
+                </div>
 
-      {/* 4: Kindergeld-Verrechnung */}
-      <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
-          <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">4</span>
-          Kindergeld-Verrechnung
-        </h3>
-        <div className="flex flex-col sm:flex-row gap-2">
-          {([
-            [false, 'Hälftig (minderjährig)'],
-            [true, 'Voll (volljährig)'],
-          ] as const).map(([val, label]) => (
-            <button
-              key={String(val)}
-              onClick={() => setKindergeldVoll(val)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${kindergeldVoll === val ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
-            >
-              {label}
-            </button>
-          ))}
+                {voll && (
+                  <div className="flex flex-wrap gap-2">
+                    <span className={`inline-flex items-center px-2 py-1 rounded-md text-xs font-medium ${istPrivilegiert(k.alter) ? 'bg-blue-100 text-blue-800 dark:bg-blue-500/20 dark:text-blue-300' : 'bg-orange-100 text-orange-800 dark:bg-orange-500/20 dark:text-orange-300'}`}>
+                      {istPrivilegiert(k.alter) ? 'Privilegiert volljährig' : 'Nicht-privilegiert volljährig'}
+                    </span>
+                  </div>
+                )}
+
+                {k.alter === '25-30' && (
+                  <p className="text-xs text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-lg p-2">
+                    ⚠️ Ab 25 entfällt das Kindergeld. Der Unterhaltsanspruch kann bei zielstrebiger Erstausbildung fortbestehen.
+                  </p>
+                )}
+
+                <div>
+                  <label className="text-xs font-medium text-gray-600 dark:text-gray-400 block mb-1">Erhält das Kind Kindergeld?</label>
+                  <div className="flex gap-2">
+                    {([
+                      [true, 'Ja'],
+                      [false, 'Nein'],
+                    ] as const).map(([val, label]) => (
+                      <button
+                        key={String(val)}
+                        onClick={() => updateKind(i, { kindergeldJa: val })}
+                        className={`flex-1 min-h-[48px] px-4 rounded-xl text-sm font-medium transition-all ${k.kindergeldJa === val ? 'bg-primary-500 text-white' : 'bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
+                      >
+                        {label}
+                      </button>
+                    ))}
+                  </div>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Kindergeld wird i. d. R. bis 25 gezahlt, wenn das Kind in Ausbildung/Studium ist.</p>
+                </div>
+
+                {k.kindergeldJa && (
+                  <div>
+                    <label className="text-xs font-medium text-gray-600 dark:text-gray-400 block mb-1">Verrechnung</label>
+                    <div className="flex flex-col sm:flex-row gap-2">
+                      {([
+                        [false, 'Hälftig (127,50 €)'],
+                        [true, 'Voll (255 €)'],
+                      ] as const).map(([val, label]) => (
+                        <button
+                          key={String(val)}
+                          onClick={() => updateKind(i, { kindergeldVoll: val })}
+                          className={`flex-1 min-h-[48px] px-4 rounded-xl text-sm font-medium transition-all ${k.kindergeldVoll === val ? 'bg-primary-500 text-white' : 'bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
+                        >
+                          {label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {voll && (
+                  <div>
+                    <label className="text-xs font-medium text-gray-600 dark:text-gray-400 block mb-1">Eigenes Einkommen des Kindes</label>
+                    <NummerEingabe
+                      value={k.eigenesEinkommen}
+                      onChange={v => updateKind(i, { eigenesEinkommen: v })}
+                      placeholder="0"
+                      einheit="€/Monat"
+                    />
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Ausbildungsvergütung, Nebenjob etc. Mindert den Unterhaltsanspruch (100 € ausbildungsbedingter Mehrbedarf werden pauschal abgezogen).</p>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -195,7 +341,7 @@ export default function UnterhaltsRechner() {
       {ergebnis.istMangelfall && (
         <div className="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/30 rounded-xl p-4 mb-6">
           <p className="text-red-800 dark:text-red-300 text-sm">
-            <strong>⚠️ Mangelfall:</strong> Nach Abzug des Selbstbehalts von {fmtEuro(SELBSTBEHALT_ERWERBSTAETIG)} € bleiben nur {fmtEuro(ergebnis.verfuegbar)} € für den Unterhalt. Der reguläre Tabellenunterhalt ({fmtEuro(ergebnis.summeRegulaer)} €) kann nicht voll gezahlt werden — die Beträge werden anteilig gekürzt (Quotelung).
+            <strong>⚠️ Mangelfall:</strong> Der reguläre Tabellenunterhalt ({fmtEuro(ergebnis.summeRegulaer)} €) kann nicht voll gezahlt werden. Selbstbehalt {fmtEuro(SELBSTBEHALT_RANG1)} € (gegenüber Minderjährigen/privilegiert Volljährigen){ergebnis.hatRang2 ? ` bzw. ${fmtEuro(SELBSTBEHALT_RANG2)} € (gegenüber nicht-privilegiert Volljährigen)` : ''}. Rang&nbsp;1 hat Vorrang vor Rang&nbsp;2; die Beträge werden anteilig gekürzt (Quotelung).
           </p>
         </div>
       )}
@@ -209,35 +355,52 @@ export default function UnterhaltsRechner() {
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">
-                <th className="px-4 py-2 text-left font-semibold">Kind</th>
-                <th className="px-4 py-2 text-left font-semibold">Alter</th>
-                <th className="px-4 py-2 text-right font-semibold">Tabelle</th>
-                <th className="px-4 py-2 text-right font-semibold">− Kindergeld</th>
-                <th className="px-4 py-2 text-right font-semibold">Zahlbetrag</th>
+                <th className="px-3 py-2 text-left font-semibold">Kind</th>
+                <th className="px-3 py-2 text-left font-semibold">Alter</th>
+                <th className="px-3 py-2 text-right font-semibold">Tabelle</th>
+                <th className="px-3 py-2 text-right font-semibold">− KG</th>
+                <th className="px-3 py-2 text-right font-semibold">− Eig. Eink.</th>
+                <th className="px-3 py-2 text-right font-semibold">Zahlbetrag</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
               {ergebnis.kinder.map(k => (
                 <tr key={k.index}>
-                  <td className="px-4 py-2.5 text-gray-700 dark:text-gray-300">Kind {k.index}</td>
-                  <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">{ALTERS_LABELS[k.stufe as Altersstufe]}</td>
-                  <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200">{fmtEuro(k.tabellen)} €</td>
-                  <td className="px-4 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">−{fmtEuro(k.kindergeldAbzug)} €</td>
-                  <td className="px-4 py-2.5 text-right tabular-nums font-semibold text-gray-900 dark:text-gray-100">{fmtEuro(k.zahl)} €</td>
+                  <td className="px-3 py-2.5 text-gray-700 dark:text-gray-300">
+                    Kind {k.index}
+                    {k.volljaehrig && (
+                      <span className={`ml-2 inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium ${k.privilegiert ? 'bg-blue-100 text-blue-800 dark:bg-blue-500/20 dark:text-blue-300' : 'bg-orange-100 text-orange-800 dark:bg-orange-500/20 dark:text-orange-300'}`}>
+                        {k.privilegiert ? 'privilegiert' : 'nicht-privilegiert'}
+                      </span>
+                    )}
+                  </td>
+                  <td className="px-3 py-2.5 text-gray-600 dark:text-gray-400">{ALTERS_LABELS[k.alter]}</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200">{fmtEuro(k.tabellen)} €</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">{k.kgAbzug > 0 ? `−${fmtEuro(k.kgAbzug)} €` : '—'}</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">{k.anrechenbar > 0 ? `−${fmtEuro(k.anrechenbar)} €` : '—'}</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums font-semibold text-gray-900 dark:text-gray-100">{fmtEuro(k.zahl)} €</td>
                 </tr>
               ))}
               <tr className="bg-blue-50 dark:bg-blue-500/10 font-bold">
-                <td className="px-4 py-3 text-blue-800 dark:text-blue-300" colSpan={4}>= Gesamtsumme</td>
-                <td className="px-4 py-3 text-right tabular-nums text-blue-800 dark:text-blue-300">{fmtEuro(ergebnis.summe)} €</td>
+                <td className="px-3 py-3 text-blue-800 dark:text-blue-300" colSpan={5}>= Gesamtsumme</td>
+                <td className="px-3 py-3 text-right tabular-nums text-blue-800 dark:text-blue-300">{fmtEuro(ergebnis.summe)} €</td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
 
+      {ergebnis.kinder.some(k => k.alter === '25-30') && (
+        <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-6">
+          <p className="text-amber-800 dark:text-amber-300 text-xs">
+            ⚠️ Kein Kindergeld-Anspruch ab 25. Unterhaltsanspruch nur bei laufender Erstausbildung/Studium und zielstrebiger Durchführung.
+          </p>
+        </div>
+      )}
+
       <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-6">
         <p className="text-amber-800 dark:text-amber-300 text-xs">
-          <strong>⚠️ Hinweis:</strong> Berechnung nach Düsseldorfer Tabelle 2026. Sonderbedarf und Mehrbedarf (z.&nbsp;B. Kita, Nachhilfe, Zahnspange) sind nicht berücksichtigt. Der Selbstbehalt beträgt {fmtEuro(SELBSTBEHALT_ERWERBSTAETIG)} € (erwerbstätig).
+          <strong>⚠️ Hinweis:</strong> Berechnung nach Düsseldorfer Tabelle 2026. Sonderbedarf und Mehrbedarf (z.&nbsp;B. Kita, Nachhilfe, Zahnspange, Studiengebühren) sind nicht berücksichtigt. Selbstbehalt {fmtEuro(SELBSTBEHALT_RANG1)} € (erwerbstätig, gegenüber minderjährigen & privilegiert volljährigen Kindern) bzw. {fmtEuro(SELBSTBEHALT_RANG2)} € (gegenüber nicht-privilegiert volljährigen Kindern).
         </p>
       </div>
 
@@ -257,8 +420,7 @@ export default function UnterhaltsRechner() {
         eingaben={{
           netto: `${fmtEuro(ergebnis.einkommen)} €`,
           anzahlKinder: String(anzahlKinder),
-          alter: alter.slice(0, anzahlKinder).map(a => ALTERS_LABELS[a]).join(', '),
-          kindergeld: kindergeldVoll ? 'voll' : 'hälftig',
+          kinder: kinder.slice(0, anzahlKinder).map((k, i) => `Kind ${i + 1}: ${ALTERS_LABELS[k.alter]}${k.kindergeldJa ? `, KG ${k.kindergeldVoll ? 'voll' : 'hälftig'}` : ', kein KG'}${istVolljaehrig(k.alter) && parseDeutscheZahl(k.eigenesEinkommen) > 0 ? `, eig. Eink. ${k.eigenesEinkommen} €` : ''}`).join(' | '),
         }}
         ergebnis={{
           gesamt: `${fmtEuro(ergebnis.summe)} €`,
