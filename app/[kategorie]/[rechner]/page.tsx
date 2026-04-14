@@ -84,6 +84,7 @@ import KindergeldRechner from '@/components/rechner/KindergeldRechner';
 import PflegegeldRechner from '@/components/rechner/PflegegeldRechner';
 import SswRechner from '@/components/rechner/SswRechner';
 import ErbschaftsteuerRechner from '@/components/rechner/ErbschaftsteuerRechner';
+import ScheidungskostenRechner from '@/components/rechner/ScheidungskostenRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -180,6 +181,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'pflegegeld-rechner': PflegegeldRechner,
   'ssw-rechner': SswRechner,
   'erbschaftsteuer-rechner': ErbschaftsteuerRechner,
+  'scheidungskosten-rechner': ScheidungskostenRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

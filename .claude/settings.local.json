@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc:*)",
+      "Bash(npm run:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m ':*)",
+      "Bash(git push:*)",
+      "Bash(xargs cat:*)",
+      "Bash(node -e ':*)",
+      "Bash(git rm:*)",
+      "Bash(npx next:*)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(sed -n '214p' app/admin/affiliate-stats/page.tsx)",
+      "Bash(sed -n '327p' app/admin/affiliate-stats/page.tsx)",
+      "Bash(rm -rf .next node_modules/.cache)",
+      "Bash(powershell -Command \"Get-Content app/admin/affiliate-stats/page.tsx | Select-Object -Skip 212 -First 5\")",
+      "Bash(rm -rf .next)",
+      "Bash(curl -s http://localhost:3001/admin/affiliate-stats)",
+      "Bash(curl -s http://localhost:3001/_next/static/chunks/app/admin/affiliate-stats/page.js)",
+      "Bash(npx kill-port:*)",
+      "Bash(grep -E \"^\\\\\\\\/g\\\\\\\\/Rechenfix\\\\\\\\/app\\\\\\\\/page\\\\\\\\.tsx$\")",
+      "Bash(sort -t'|' -k2)",
+      "Bash(sed -n '35,42p' lib/rechner-config.ts)",
+      "Bash(sed -n '1125,1132p' lib/rechner-config.ts)",
+      "Bash(sed -n '27,34p' lib/rechner-config.ts)",
+      "Bash(sed -n '631,638p' lib/rechner-config.ts)",
+      "Bash(sed -n '51,58p' lib/rechner-config.ts)",
+      "Bash(xargs grep:*)",
+      "Bash(powershell -Command \"Get-Content 'C:\\\\Users\\\\a-reino\\\\.claude\\\\projects\\\\G--Rechenfix\\\\030294b8-27d0-4138-b6a8-7d629f1e4b20.jsonl' | Select-Object -Last 5\")",
+      "Bash(powershell -Command \"Get-Content 'C:\\\\Users\\\\a-reino\\\\.claude\\\\projects\\\\G--Rechenfix\\\\030294b8-27d0-4138-b6a8-7d629f1e4b20.jsonl' | Select-Object -First 3\")",
+      "Bash(git commit:*)"
+    ]
+  }
+}
