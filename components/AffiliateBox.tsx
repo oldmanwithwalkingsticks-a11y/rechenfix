@@ -70,6 +70,15 @@ const AFFILIATE_PROGRAMS = {
     icon: '🚢',
     color: '#1E90FF',
   },
+  verivox: {
+    name: 'Verivox',
+    tagline: 'Depots vergleichen und das passende für Ihren ETF-Sparplan finden',
+    cta: 'Depots vergleichen',
+    baseUrl: 'https://www.awin1.com/cread.php?awinmid=14797&awinaffid=2843240',
+    deeplink: 'https://www.verivox.de/depot/',
+    icon: '📊',
+    color: '#1D4ED8',
+  },
   naturesway: {
     name: "Nature's Way",
     tagline: 'Vitamine, Mineralstoffe und Pflanzenstoffe für Ihre tägliche Unterstützung',
@@ -130,6 +139,9 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
   congstar: {
     'handykosten': 'congstar bietet faire Tarife ab 5 €/Monat — monatlich kündbar und ohne versteckte Kosten.',
   },
+  verivox: {
+    'etf': 'ETF-Depot vergleichen auf Verivox — Ordergebühren, Sparplan-Kosten und Aktionsangebote im Überblick.',
+  },
   naturesway: {
     'kalorien': 'Vitamine und Mineralstoffe passend zu Ihrem Ernährungsziel — für die tägliche Unterstützung von innen heraus.',
     'bmi': 'Vitamine und Pflanzenstoffe für eine ausgewogene Ernährung von innen heraus.',
@@ -160,6 +172,10 @@ const CONTEXT_DEEPLINKS: Partial<Record<ProgramId, Record<string, string>>> = {
     'mietrendite': 'https://www.check24.net/kredit/',
     'autokosten': 'https://www.check24.net/kfz-versicherung/',
     'default': 'https://www.check24.net/',
+  },
+  verivox: {
+    'etf': 'https://www.verivox.de/depot/etf-vergleich/',
+    'default': 'https://www.verivox.de/depot/',
   },
 };
 

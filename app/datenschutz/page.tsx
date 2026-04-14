@@ -215,6 +215,9 @@ export default function DatenschutzSeite() {
               <li>
                 <strong>Eventfloss Berlin</strong> (Eventveranstalter)
               </li>
+              <li>
+                <strong>Verivox</strong> (Vergleichsportal)
+              </li>
             </ul>
             <p className="mt-3">
               Bei Klick auf einen Affiliate-Link werden Sie auf die Website des Anbieters weitergeleitet. Dort gelten die Datenschutzbestimmungen des jeweiligen Anbieters. Die Affiliate-Links werden über das Netzwerk der <strong>Awin AG</strong> (Eichhornstraße 3, 10785 Berlin) vermittelt. Awin kann dabei einen Tracking-Cookie setzen, um die Zuordnung des Kaufs zu ermöglichen.
