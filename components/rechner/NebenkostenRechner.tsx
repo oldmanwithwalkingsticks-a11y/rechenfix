@@ -166,6 +166,7 @@ export default function NebenkostenRechner() {
       {ergebnis && (
         <>
           <CrossLink href="/wohnen/mietrechner" emoji="🏠" text="Warmmiete berechnen" />
+          <CrossLink href="/wohnen/stromvergleich-rechner" emoji="🔌" text="Strom-Nebenkosten mit Anbieterwechsel senken" />
           <AffiliateBox programId="check24" context="nebenkosten" />
         </>
       )}

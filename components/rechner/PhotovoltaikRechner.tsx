@@ -6,6 +6,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import CrossLink from '@/components/ui/CrossLink';
 
 const AUSRICHTUNGEN = [
   { id: 'sued', label: 'Süd (optimal)', faktor: 1.0 },
@@ -237,6 +238,10 @@ export default function PhotovoltaikRechner() {
       </p>
 
       <AffiliateBox programId="check24" context="photovoltaik" />
+
+      <CrossLink href="/wohnen/waermepumpen-rechner" emoji="🔥" text="PV + Wärmepumpe kombinieren" />
+      <CrossLink href="/wohnen/dachflaechen-rechner" emoji="📐" text="Dachfläche exakt berechnen" />
+      <CrossLink href="/wohnen/stromkosten-rechner" emoji="⚡" text="Stromkosten ohne PV vergleichen" />
 
       <ErgebnisAktionen
         ergebnisText={`PV-Anlage ${fmt(ergebnis.kwpWert, 1)} kWp — Amortisation: ${fmt(ergebnis.amortisation, 1)} Jahre, Gewinn nach 20 Jahren: ${fmtEur(ergebnis.gewinn20)}`}

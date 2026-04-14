@@ -151,6 +151,7 @@ export default function HeizkostenRechner() {
       {ergebnis && (
         <>
           <CrossLink href="/wohnen/nebenkosten-rechner" emoji="🏠" text="Alle Nebenkosten berechnen" />
+          <CrossLink href="/wohnen/waermepumpen-rechner" emoji="🔥" text="Wärmepumpe: Sparen gegenüber Gas/Öl?" />
           <AffiliateBox programId="check24" context="heizkosten" />
         </>
       )}

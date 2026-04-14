@@ -147,6 +147,7 @@ export default function MietrechnerRechner() {
           </div>
 
           <CrossLink href="/wohnen/mietrendite-rechner" emoji="📈" text="Als Vermieter: Mietrendite berechnen" />
+          <CrossLink href="/wohnen/indexmiete-rechner" emoji="📊" text="Indexmiete: Erhöhung prüfen" />
         </div>
       )}
     </div>

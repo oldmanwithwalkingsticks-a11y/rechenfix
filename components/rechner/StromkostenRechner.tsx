@@ -180,6 +180,7 @@ export default function StromkostenRechner() {
       {ergebnis && (
         <>
           <CrossLink href="/wohnen/stromvergleich-rechner" emoji="🔌" text="Stromanbieter wechseln und bis zu 500 € sparen" />
+          <CrossLink href="/wohnen/photovoltaik-rechner" emoji="☀️" text="Eigenen Strom produzieren mit PV-Anlage" />
           <AffiliateBox programId="check24" context="strom" />
         </>
       )}

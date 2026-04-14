@@ -11,6 +11,7 @@ import {
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 interface FlaechenFormular {
   id: number;
@@ -325,6 +326,9 @@ export default function QuadratmeterRechner() {
               </p>
             )}
           </div>
+
+          <CrossLink href="/wohnen/tapetenbedarf-rechner" emoji="🧻" text="Tapetenbedarf für die Fläche berechnen" />
+          <CrossLink href="/wohnen/mietrechner" emoji="🏠" text="Miete pro m² vergleichen" />
 
           <ErgebnisAktionen
             ergebnisText={`${ergebnis.einzelFlaechen.length > 1 ? 'Gesamtfläche' : 'Fläche'}: ${fmt(ergebnis.gesamtFlaeche)} m²`}

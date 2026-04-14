@@ -229,6 +229,7 @@ export default function StromvergleichRechner() {
           />
 
           <CrossLink href="/wohnen/stromkosten-rechner" emoji="💡" text="Kosten einzelner Geräte berechnen" />
+          <CrossLink href="/wohnen/waermepumpen-rechner" emoji="🔥" text="Wärmepumpe statt Gas? Kosten vergleichen" />
 
           <AffiliateBox programId="check24" context="stromvergleich" variant="full" />
 
