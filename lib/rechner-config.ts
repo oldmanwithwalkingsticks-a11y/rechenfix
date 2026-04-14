@@ -5599,6 +5599,64 @@ Neben der Indexmiete gibt es zwei weitere wichtige Mietformen: Die **Staffelmiet
       },
     ],
   },
+  {
+    slug: 'minijob-rechner',
+    titel: 'Minijob-Rechner',
+    beschreibung: 'Minijob-Abgaben berechnen: Verdienst, Abgaben für Arbeitgeber und Arbeitnehmer sowie Übergang zum Midijob.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Minijob-Rechner 2026 — Abgaben & Netto bei Minijob berechnen | Rechenfix',
+    metaDescription: 'Minijob berechnen: Netto-Verdienst, Abgaben Arbeitgeber und Arbeitnehmer ✓ Minijob-Grenze 2026 ✓ Midijob-Übergang ✓ KI-Erklärung.',
+    keywords: ['minijob rechner', 'minijob 603 euro', 'minijob grenze 2026', 'minijob abgaben arbeitgeber', 'minijob netto', '520 euro job', '538 euro job', 'midijob rechner', 'minijob rentenversicherung', 'pauschalabgaben minijob'],
+    icon: '💶',
+    formel: 'Gewerblicher Minijob — AG-Abgaben: 15 % RV + 13 % KV + 2 % pauschale Lohnsteuer + ca. 1,6 % Umlagen ≈ 31,6 % Aufschlag | AN-Anteil: 3,6 % RV-Eigenanteil (nur bei RV-Pflicht, steuerfrei) | Minijob-Grenze 2026: 603 €/Monat | Midijob-Gleitzone bis 2.000 €.',
+    beispiel: '603 € Minijob (gewerblich, mit RV-Pflicht) → AN-Netto 581,29 € (abzgl. 21,71 € RV-Eigenanteil) · AG-Gesamtkosten 793,55 € (+31,6 %) · bei Mindestlohn max. 10,8 Std./Woche.',
+    erklaerung: `**Minijob-Grenze 2026: Wie viel darf ich verdienen?**
+
+Die Minijob-Grenze ist in Deutschland seit 2022 **dynamisch an den Mindestlohn gekoppelt**. Bei einem gesetzlichen Mindestlohn von 12,82 Euro pro Stunde (Stand 2026) ergibt sich eine monatliche Verdienstgrenze von rund **603 Euro**. Die genaue Berechnung: 12,82 € × 10 Wochenstunden × 4,33 Wochen/Monat ≈ 556 €, aufgerundet und gesetzlich definiert auf 603 €. Wer diese Grenze dauerhaft überschreitet, rutscht automatisch in den **Midijob-Übergangsbereich** (bis 2.000 € Monatsverdienst), in dem reduzierte Sozialabgaben für Arbeitnehmer gelten. Gelegentliches Überschreiten (höchstens zweimal pro Jahr durch unvorhergesehene Mehrarbeit) ist unschädlich. Wichtig: Die Grenze gilt pro Kalendermonat, aber als Gesamtgrenze im Jahr entspricht sie 7.236 Euro. Auch 13. und 14. Monatsgehälter, Urlaubsgeld und Weihnachtsgeld zählen zur Grenze — anteilig umgerechnet auf den Monatsdurchschnitt.
+
+**Abgaben: Was zahlt der Arbeitgeber, was der Arbeitnehmer?**
+
+Der große Vorteil des Minijobs für Arbeitnehmer: Er ist **steuerfrei und (fast) sozialabgabenfrei**. Die gesamte Last liegt beim Arbeitgeber. Bei einem gewerblichen Minijob zahlt der Arbeitgeber **rund 31,6 Prozent Pauschalabgaben** zusätzlich zum Bruttolohn: 15 Prozent pauschale Rentenversicherung, 13 Prozent pauschale Krankenversicherung, 2 Prozent pauschale Lohnsteuer (die meistens vom Arbeitgeber übernommen wird) sowie etwa 1,6 Prozent für die Umlagen U1 (Krankheit), U2 (Mutterschutz) und Insolvenzgeldumlage. Bei 603 Euro Verdienst kostet der Minijob den Arbeitgeber also rund **793 Euro**. Bei einem Minijob im **Privathaushalt** sind die Pauschalen deutlich niedriger (zusammen nur ca. 14,9 Prozent), weil der Staat diese Beschäftigungsform fördert. Zusätzlich können Privathaushalte 20 Prozent der Kosten, maximal 510 Euro pro Jahr, von der Einkommensteuer absetzen. Der Arbeitnehmer trägt nur einen kleinen Beitrag: 3,6 Prozent Eigenanteil zur Rentenversicherung — also 21,71 Euro bei 603 Euro Verdienst. Der Netto-Auszahlungsbetrag liegt damit bei **581,29 Euro**. Für reguläre Gehälter nutzen Sie bitte unseren [Brutto-Netto-Rechner](/finanzen/brutto-netto-rechner).
+
+**Rentenversicherung im Minijob: Lohnt sich die Befreiung?**
+
+Seit 2013 sind Minijobs **grundsätzlich rentenversicherungspflichtig**. Der Eigenanteil des Arbeitnehmers beträgt nur 3,6 Prozent (Differenz zwischen dem Gesamtbeitrag von 18,6 % und den pauschalen 15 % des Arbeitgebers). Auf Antrag kann man sich jedoch von der Rentenversicherungspflicht **befreien lassen** — dann entfällt der Eigenanteil, und das volle Brutto ist Netto. Ob sich die Befreiung lohnt, hängt vom individuellen Fall ab. **Pro Rentenversicherung:** Sie erwerben vollwertige Rentenpunkte, haben Anspruch auf Erwerbsminderungsrente, auf Rehabilitationsleistungen und erfüllen Wartezeiten für die Altersrente. Bei 603 Euro Minijob pro Jahr erwerben Sie grob 0,16 Rentenpunkte, also ca. 6 Euro mehr Rente pro Monat nach 40 Jahren. **Contra:** Sie bekommen monatlich rund 22 Euro mehr ausgezahlt — auf ein Jahr gerechnet 260 Euro. Die Befreiung lohnt sich vor allem, wenn Sie bereits anderweitig Rentenansprüche aufbauen (z.B. im Hauptberuf) oder der Minijob nur eine kurze Übergangslösung ist.
+
+**Minijob und Hauptjob: Was ist zu beachten?**
+
+Sie dürfen neben Ihrem sozialversicherungspflichtigen Hauptjob **einen Minijob** ausüben, ohne dass dadurch zusätzliche Sozialabgaben anfallen. Ein zweiter Minijob wird allerdings zum Hauptjob addiert und ist dann voll beitragspflichtig — also lohnt es sich oft nicht. Wichtig: Der Minijob muss dem Arbeitgeber des Hauptjobs nicht gemeldet werden (außer das Arbeitsverhältnis verbietet Nebentätigkeiten ausdrücklich). Die Minijob-Zentrale prüft automatisch, ob die Grenze eingehalten wird. Steuerlich wird der Minijob beim Hauptjob nicht berücksichtigt — die 2 Prozent pauschale Lohnsteuer sind abgegolten. Wer mehrere Beschäftigungen hat, sollte mit dem [Stundenlohn-Rechner](/arbeit/stundenlohn-rechner) die reale Vergütung pro Stunde vergleichen.
+
+**Midijob-Übergangsbereich erklärt**
+
+Zwischen 603,01 Euro und 2.000 Euro Monatsverdienst beginnt der sogenannte **Midijob-Übergangsbereich** (auch Gleitzone genannt). Hier gelten reduzierte Sozialabgaben für den Arbeitnehmer: Bei 603 Euro beginnt der AN-Anteil bei praktisch 0 Prozent und steigt linear auf den vollen Anteil von rund 20 Prozent bei 2.000 Euro. Der Arbeitgeber zahlt dagegen von Anfang an den vollen Anteil. Lohnsteuer wird allerdings normal nach Lohnsteuerklasse berechnet. Ein Midijob lohnt sich besonders für Alleinstehende in Steuerklasse I, weil bis etwa 1.300 Euro Brutto wegen des Grundfreibetrags ohnehin keine Lohnsteuer anfällt. Wichtig: Die günstigere Berechnung gilt nur automatisch — der Arbeitnehmer muss sie nicht beantragen. Für den genauen Netto-Verdienst im Midijob nutzen Sie den [Brutto-Netto-Rechner](/finanzen/brutto-netto-rechner), der den Übergangsbereich korrekt berücksichtigt.`,
+    faq: [
+      {
+        frage: 'Wie viel darf ich im Minijob 2026 verdienen?',
+        antwort: 'Die Minijob-Grenze liegt 2026 bei rund 603 Euro monatlich. Sie ist seit 2022 dynamisch an den gesetzlichen Mindestlohn gekoppelt und wird automatisch angepasst. Ein gelegentliches Überschreiten (höchstens zweimal pro Jahr durch unvorhergesehene Mehrarbeit) ist erlaubt. Wer dauerhaft mehr verdient, rutscht in den Midijob-Übergangsbereich bis 2.000 Euro.',
+      },
+      {
+        frage: 'Welche Abgaben zahlt der Arbeitgeber beim Minijob?',
+        antwort: 'Bei einem gewerblichen Minijob zahlt der Arbeitgeber rund 31,6 % Pauschalabgaben: 15 % pauschale Rentenversicherung, 13 % pauschale Krankenversicherung, 2 % pauschale Lohnsteuer und etwa 1,6 % für Umlagen (U1, U2, Insolvenz). Bei einem Minijob im Privathaushalt sind die Abgaben mit knapp 15 % deutlich niedriger, plus 0,72 % Unfallversicherung.',
+      },
+      {
+        frage: 'Ist ein Minijob steuerfrei?',
+        antwort: 'Für den Arbeitnehmer: Ja. Der Minijob ist lohnsteuerfrei, da der Arbeitgeber 2 % pauschale Lohnsteuer abführt. Diese 2 % werden in der Regel vom Arbeitgeber übernommen. Der Minijob muss nicht in der Einkommensteuererklärung angegeben werden. Für den Arbeitnehmer ist der Minijob also komplett steuerfrei — auch neben einem Hauptjob.',
+      },
+      {
+        frage: 'Soll ich mich von der Rentenversicherung befreien lassen?',
+        antwort: 'Das hängt von Ihrer Situation ab. Der AN-Eigenanteil beträgt 3,6 % — bei 603 € also rund 22 €/Monat. Eine Befreiung bringt Ihnen dieses Geld zusätzlich aufs Konto, Sie verlieren aber Rentenansprüche, Erwerbsminderungsschutz und Anspruch auf Reha-Leistungen. Wer bereits anderweitig Rentenansprüche aufbaut (Hauptjob, Beamte), kann sich guten Gewissens befreien lassen. Für Personen ohne weitere Alterssicherung lohnt sich die Pflicht.',
+      },
+      {
+        frage: 'Was passiert, wenn ich die Minijob-Grenze überschreite?',
+        antwort: 'Bei dauerhaftem Überschreiten wird der Minijob rückwirkend zu einem sozialversicherungspflichtigen Midijob oder regulären Beschäftigungsverhältnis. Das kann Nachzahlungen für Sozialabgaben und Steuern auslösen. Ein unvorhergesehenes, gelegentliches Überschreiten (höchstens 2 Monate pro Jahr) ist jedoch unschädlich, solange es durch plötzliche Mehrarbeit (z.B. Krankheitsvertretung) begründet ist und das Jahreslimit nicht überschritten wird.',
+      },
+      {
+        frage: 'Kann ich mehrere Minijobs haben?',
+        antwort: 'Grundsätzlich ja, aber Vorsicht: Die Verdienste aus allen Minijobs werden zusammengerechnet. Übersteigen sie insgesamt die Grenze von 603 €, sind alle Beschäftigungen sozialversicherungspflichtig. Neben einem Hauptjob ist immer nur ein Minijob abgabenfrei — jeder weitere Minijob wird zum Hauptjob addiert und ist voll beitragspflichtig. Die Minijob-Zentrale überwacht dies automatisch.',
+      },
+    ],
+  },
 ];
 
 /** Beliebte Rechner (Reihenfolge = Anzeigereihenfolge) */
@@ -5612,6 +5670,7 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'minijob-rechner',
   'indexmiete-rechner',
   'scheidungskosten-rechner',
   'erbschaftsteuer-rechner',
@@ -5771,6 +5830,7 @@ const verwandteMap: Record<string, string[]> = {
   'erbschaftsteuer-rechner': ['grunderwerbsteuer-rechner', 'splitting-rechner', 'steuererstattung-rechner', 'rentenrechner'],
   'scheidungskosten-rechner': ['splitting-rechner', 'kuendigungsfrist-rechner', 'abfindungsrechner', 'rechtsschutz-rechner'],
   'indexmiete-rechner': ['mietrechner', 'nebenkosten-rechner', 'inflationsrechner', 'quadratmeter-rechner'],
+  'minijob-rechner': ['brutto-netto-rechner', 'stundenlohn-rechner', 'teilzeit-rechner', 'ueberstunden-rechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {

@@ -86,6 +86,7 @@ import SswRechner from '@/components/rechner/SswRechner';
 import ErbschaftsteuerRechner from '@/components/rechner/ErbschaftsteuerRechner';
 import ScheidungskostenRechner from '@/components/rechner/ScheidungskostenRechner';
 import IndexmieteRechner from '@/components/rechner/IndexmieteRechner';
+import MinijobRechner from '@/components/rechner/MinijobRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -184,6 +185,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'erbschaftsteuer-rechner': ErbschaftsteuerRechner,
   'scheidungskosten-rechner': ScheidungskostenRechner,
   'indexmiete-rechner': IndexmieteRechner,
+  'minijob-rechner': MinijobRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
