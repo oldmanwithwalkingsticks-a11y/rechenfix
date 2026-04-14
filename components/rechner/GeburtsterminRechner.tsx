@@ -317,6 +317,7 @@ export default function GeburtsterminRechner() {
             </p>
           </div>
 
+          <CrossLink href="/gesundheit/ssw-rechner" emoji="🤰" text="SSW-Details anzeigen" />
           <CrossLink href="/arbeit/mutterschutz-rechner" emoji="🤱" text="Mutterschutz-Fristen berechnen" />
           <CrossLink href="/finanzen/elterngeld-rechner" emoji="💰" text="Elterngeld berechnen" />
 

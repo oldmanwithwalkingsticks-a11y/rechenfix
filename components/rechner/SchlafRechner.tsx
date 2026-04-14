@@ -5,6 +5,7 @@ import { berechneSchlaf, getEmpfohleneSchlafdauer } from '@/lib/berechnungen/sch
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import SchlafTipp from '@/components/rechner/SchlafTipp';
+import CrossLink from '@/components/ui/CrossLink';
 
 const SCHNELLWAHL_ZEITEN = ['05:00', '05:30', '06:00', '06:30', '07:00', '07:30', '08:00', '08:30'];
 
@@ -245,6 +246,8 @@ export default function SchlafRechner() {
               </table>
             </div>
           </div>
+
+          <CrossLink href="/gesundheit/kalorienrechner" emoji="🔥" text="Kalorienbedarf und Schlaf — Zusammenhang" />
 
           <ErgebnisAktionen
             ergebnisText={`Aufwachzeit ${aufwachzeit} Uhr: Ideale Schlafenszeiten: ${ergebnis.schlafzeiten.map(s => `${s.uhrzeit} (${s.schlafstunden} Std.)`).join(', ')}. Empfohlen für ${empfohlen.label}: ${empfohlen.min}–${empfohlen.max} Stunden.`}

@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 const AKTIVITAETS_OPTIONEN: { key: AktivitaetsLevel; label: string }[] = [
   { key: 'kaum', label: 'Kaum aktiv (Bürojob)' },
@@ -235,6 +236,9 @@ export default function WasserbedarfRechner() {
               <strong>Hinweis:</strong> Ein Teil des Wasserbedarfs wird über die Nahrung gedeckt (ca. 20-30%). Die angezeigte Menge ist die empfohlene reine Trinkmenge. Bei Nierenerkrankungen oder anderen Vorerkrankungen sprechen Sie bitte mit Ihrem Arzt.
             </p>
           </div>
+
+          <CrossLink href="/gesundheit/kalorienrechner" emoji="🔥" text="Kalorienbedarf passend zum Wasserbedarf" />
+          <CrossLink href="/gesundheit/bmi-rechner" emoji="📊" text="BMI berechnen" />
 
           <ErgebnisAktionen
             ergebnisText={`Täglicher Wasserbedarf: ${ergebnis.gesamtLiter.toLocaleString('de-DE', { minimumFractionDigits: 1 })} Liter (${ergebnis.anzahlGlaeser} Gläser) | Basis: ${fmt(ergebnis.basisbedarf)} ml${ergebnis.sportZuschlag > 0 ? ` + Sport: ${fmt(ergebnis.sportZuschlag)} ml` : ''}${ergebnis.hitzeZuschlag > 0 ? ' + Hitze: 500 ml' : ''}`}

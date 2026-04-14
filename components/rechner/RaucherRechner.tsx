@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { berechneRaucherKosten } from '@/lib/berechnungen/raucher';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import CrossLink from '@/components/ui/CrossLink';
 
 function formatEuro(n: number): string {
   return n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -216,6 +217,8 @@ export default function RaucherRechner() {
               Die Bundeszentrale f&uuml;r gesundheitliche Aufkl&auml;rung (BZgA) bietet kostenlose Beratung unter 0800 8 31 31 31.
             </p>
           </div>
+
+          <CrossLink href="/gesundheit/kalorienrechner" emoji="🔥" text="Kalorienbedarf nach Rauchstopp berechnen" />
 
           <ErgebnisAktionen
             ergebnisText={ergebnisText()}
