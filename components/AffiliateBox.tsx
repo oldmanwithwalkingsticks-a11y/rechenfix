@@ -141,6 +141,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'autokosten': 'Kfz-Versicherung vergleichen und bis zu 850 € pro Jahr sparen — der einfachste Weg Ihre Autokosten zu senken.',
     'waermepumpe': 'Günstigen Wärmepumpen-Stromtarif finden — Stromanbieter vergleichen auf CHECK24.',
     'leasing': 'Autofinanzierung als Alternative zum Leasing? Kredite vergleichen auf CHECK24.',
+    'photovoltaik': 'Günstigen Reststrom-Tarif finden — Stromanbieter vergleichen auf CHECK24.',
   },
   congstar: {
     'handykosten': 'congstar bietet faire Tarife ab 5 €/Monat — monatlich kündbar und ohne versteckte Kosten.',
@@ -183,6 +184,7 @@ const CONTEXT_DEEPLINKS: Partial<Record<ProgramId, Record<string, string>>> = {
     'autokosten': 'https://www.check24.net/kfz-versicherung/',
     'waermepumpe': 'https://www.check24.net/strom/',
     'leasing': 'https://www.check24.net/kredit/',
+    'photovoltaik': 'https://www.check24.net/strom/',
     'default': 'https://www.check24.net/',
   },
   verivox: {

@@ -624,4 +624,86 @@ Für reine Flächenberechnungen (Dreieck, Kreis, Rechteck) nutzen Sie den Fläch
       },
     ],
   },
+  {
+    slug: 'abi-rechner',
+    titel: 'Abi-Notenrechner',
+    beschreibung: 'Abitur-Durchschnittsnote berechnen: Von Punkten zur Abi-Note — mit Block I (Kurse) und Block II (Prüfungen).',
+    kategorie: 'Mathe & Schule',
+    kategorieSlug: 'mathe',
+    metaTitle: 'Abi-Rechner 2026 — Abiturnote aus Punkten berechnen | Rechenfix',
+    metaDescription: 'Abiturnote berechnen: Von Punkten zur Note mit Block I und Block II ✓ Punkte-Noten-Tabelle ✓ Bestanden-Check ✓ KI-Erklärung.',
+    keywords: ['abi rechner', 'abiturnote berechnen', 'abi punkte note', 'abinote rechner', 'block i block ii', 'abitur durchschnitt', 'abi note formel'],
+    icon: '🎓',
+    formel: 'Abi-Note = 17/3 − Gesamtpunkte / 180 | Gesamtpunkte = Block I (max 600) + Block II (max 300)',
+    beispiel: 'Block I = 400, Block II = 180 → Gesamt 580 → Note = 17/3 − 580/180 ≈ 2,4. Bestanden, wenn Gesamt ≥ 300, Block I ≥ 200 und Block II ≥ 100.',
+    erklaerung: `**Die Abiturnote — so wird sie berechnet**
+
+Die Abiturnote wird in Deutschland nach einer bundeseinheitlichen Formel der Kultusministerkonferenz (KMK) aus den in der Qualifikationsphase und in den Abiturprüfungen erreichten Punkten berechnet. Die Gesamtpunktzahl liegt zwischen 300 und 900 Punkten — daraus ergibt sich eine Note zwischen 1,0 und 4,0. Unser Abi-Rechner zeigt Ihnen sofort, welche Note Ihren Punkten entspricht und ob Sie die Mindestanforderungen fürs Bestehen erfüllen.
+
+**Block I und Block II erklärt**
+
+Die Abiturnote setzt sich aus zwei Blöcken zusammen. **Block I** umfasst die Leistungen der Qualifikationsphase — also der letzten vier Halbjahre vor dem Abitur. Eingebracht werden in der Regel 36 bis 40 Halbjahresergebnisse der Leistungs- und Grundkurse. Jedes Halbjahr kann bis zu 15 Punkte erreichen. Block I umfasst mindestens 200 und maximal 600 Punkte.
+
+**Block II** besteht aus den fünf Abiturprüfungen: drei schriftlichen, einer mündlichen und einer fünften Komponente (mündlich oder Präsentationsprüfung). Jede Prüfung wird mit bis zu 15 Punkten bewertet, das Ergebnis wird anschließend mit dem Faktor 4 multipliziert. Damit sind in Block II maximal 300 Punkte erreichbar (5 × 15 × 4). Mindestens 100 Punkte müssen erzielt werden, und drei der fünf Prüfungen müssen mit mindestens 5 Punkten (= ausreichend) abgeschlossen sein.
+
+**Die KMK-Formel: Punkte in Noten umrechnen**
+
+Die offizielle Formel der KMK lautet: **Note = (17/3) − (Gesamtpunkte / 180)**. Das Ergebnis wird auf eine Nachkommastelle gerundet. Die Note 1,0 wird ab 823 Punkten erreicht. Für jeden weiteren 18-Punkte-Schritt verschlechtert sich die Note um 0,1. Die schlechteste noch bestandene Note ist 4,0 (bei genau 300 Punkten).
+
+Einige Eckwerte:
+- **300 Punkte** → Note 4,0 (bestanden)
+- **420 Punkte** → Note 3,3
+- **540 Punkte** → Note 2,7
+- **660 Punkte** → Note 2,0
+- **780 Punkte** → Note 1,3
+- **823 Punkte** → Note 1,0
+
+**Punkte-Noten-Tabelle für einzelne Halbjahre und Prüfungen**
+
+In der Oberstufe werden die klassischen Schulnoten (1–6) durch ein Punktesystem von 0 bis 15 ersetzt. Die Umrechnung:
+
+- **15 Punkte** = 1+ (sehr gut +)
+- **13 Punkte** = 1− (noch sehr gut)
+- **10 Punkte** = 2− (befriedigend +)
+- **7 Punkte** = 3− (ausreichend +)
+- **5 Punkte** = 4 (ausreichend)
+- **4 Punkte** = 4− (gerade noch bestanden)
+- **0–3 Punkte** = mangelhaft/ungenügend (nicht bestanden)
+
+**Wann ist das Abitur bestanden?**
+
+Das Abitur gilt als bestanden, wenn alle folgenden Bedingungen erfüllt sind: die Gesamtpunktzahl beträgt mindestens 300, Block I mindestens 200 und Block II mindestens 100 Punkte. Zusätzlich müssen mindestens drei der fünf Abiturprüfungen mit je 5 oder mehr Punkten bewertet sein, davon mindestens eine schriftliche Prüfung. Bei Nichterfüllung dieser Bedingungen wird das Abitur nicht bestanden — unabhängig von der rechnerischen Note.
+
+**Wie kann ich meine Abi-Note verbessern?**
+
+Wer die Durchschnittsnote verbessern möchte, sollte früh in der Qualifikationsphase ansetzen. Block I macht zwei Drittel der Gesamtpunktzahl aus — ein Punkt mehr pro Halbjahr bringt bei 40 eingebrachten Kursen 40 zusätzliche Punkte. In den Abiturprüfungen wiegt jeder Punkt durch den Faktor 4 besonders schwer. Die Wahl der Prüfungsfächer sollte strategisch erfolgen: Fächer, in denen Sie kontinuierlich gute Leistungen zeigen, sind meist besser als vermeintlich „einfache" Fächer.
+
+**Nicht bestanden — was nun?**
+
+Wer das Abitur nicht besteht, kann die Qualifikationsphase unter bestimmten Voraussetzungen wiederholen oder die Prüfungen zu einem späteren Zeitpunkt als externe Prüfung ablegen. Alternativ bietet die **Fachhochschulreife** (Fachabitur) einen Zugang zu Fachhochschulen — sie ist nach erfolgreichem Abschluss der Q1 und Q2 sowie eines Praktikums erreichbar.
+
+**Weitere Rechner:** Für Klassenarbeiten und einzelne Prüfungen nutzen Sie unseren Notenschlüssel-Rechner. Für Durchschnittsberechnungen (Zeugnisnote, Semesterdurchschnitt) den Durchschnittsrechner. Prozentuale Veränderungen (z. B. wie viel Prozent Ihnen noch zur 1,0 fehlen) berechnet der Prozentrechner.`,
+    faq: [
+      {
+        frage: 'Wie berechne ich meine Abi-Note?',
+        antwort: 'Die KMK-Formel lautet: Note = 17/3 − Gesamtpunkte/180. Die Gesamtpunktzahl setzt sich aus Block I (Kurse, max. 600) und Block II (Prüfungen, max. 300) zusammen. Geben Sie einfach Ihre Punkte im Rechner ein — er zeigt Ihnen sofort die Abi-Note und ob Sie bestanden haben.',
+      },
+      {
+        frage: 'Wie werden Punkte in Noten umgerechnet?',
+        antwort: 'In der Oberstufe gilt das 15-Punkte-System: 15 Punkte = 1+, 13 = 1−, 10 = 2−, 7 = 3−, 5 = 4, 4 = 4−, 0–3 Punkte = nicht bestanden. Die Punkte-Noten-Tabelle finden Sie direkt unter dem Rechner.',
+      },
+      {
+        frage: 'Wie viele Punkte brauche ich für eine 1,0?',
+        antwort: 'Für die Traumnote 1,0 benötigen Sie mindestens 823 Gesamtpunkte von 900 möglichen. Das entspricht einem Durchschnitt von rund 13,7 Punkten pro Halbjahr bzw. Prüfung — also etwa der Note 1− (sehr gut).',
+      },
+      {
+        frage: 'Was sind Block I und Block II?',
+        antwort: 'Block I umfasst die Halbjahresergebnisse der Qualifikationsphase (36–40 Kurse mit je bis zu 15 Punkten, insgesamt max. 600). Block II sind die fünf Abiturprüfungen (je max. 15 Punkte × Faktor 4 = max. 300 Punkte). Beide Blöcke zusammen ergeben die Gesamtpunktzahl.',
+      },
+      {
+        frage: 'Wann hat man das Abitur nicht bestanden?',
+        antwort: 'Nicht bestanden ist das Abitur, wenn die Gesamtpunktzahl unter 300 liegt, Block I unter 200 oder Block II unter 100 Punkten. Außerdem müssen mindestens 3 der 5 Prüfungen mit je 5 oder mehr Punkten abgelegt werden. Ist eine dieser Bedingungen nicht erfüllt, gilt das Abitur auch rechnerisch als nicht bestanden.',
+      },
+    ],
+  },
 ];

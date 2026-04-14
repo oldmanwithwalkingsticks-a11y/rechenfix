@@ -630,4 +630,94 @@ So hilfreich SSW-Rechner und Schwangerschafts-Apps auch sind — sie ersetzen ke
       },
     ],
   },
+  {
+    slug: 'schwangerschaft-gewicht-rechner',
+    titel: 'Gewichtszunahme-Rechner (Schwangerschaft)',
+    beschreibung: 'Gewichtszunahme in der Schwangerschaft berechnen: Empfohlene Zunahme nach BMI, aktueller Stand und Verlaufskurve.',
+    kategorie: 'Gesundheit',
+    kategorieSlug: 'gesundheit',
+    metaTitle: 'Gewichtszunahme Schwangerschaft Rechner 2026 — Empfohlene Zunahme berechnen | Rechenfix',
+    metaDescription: 'Gewichtszunahme Schwangerschaft berechnen: Empfohlene Zunahme nach BMI, Verlaufskurve und Verteilung ✓ IOM-Richtlinien ✓ KI-Erklärung.',
+    keywords: ['gewichtszunahme schwangerschaft', 'gewicht schwangerschaft rechner', 'iom richtlinien', 'schwangerschaft bmi', 'zunahme pro woche schwangerschaft', 'zwillinge gewichtszunahme'],
+    icon: '🤰',
+    formel: 'Empfohlene Zunahme nach BMI vor SS (IOM): Untergewicht 12,5–18 kg | Normal 11,5–16 kg | Übergewicht 7–11,5 kg | Adipositas 5–9 kg',
+    beispiel: 'Beispiel: Gewicht vor SS 65 kg, Größe 168 cm → BMI 23,0 (Normalgewicht). Empfohlene Gesamtzunahme: 11,5–16 kg. In SSW 20 liegt der erwartete Bereich bei ca. 3,3–6 kg.',
+    erklaerung: `**Gewichtszunahme in der Schwangerschaft — was ist normal?**
+
+Wie viel Gewicht eine Frau in der Schwangerschaft zunehmen sollte, hängt vor allem vom **BMI vor der Schwangerschaft** ab. Die international anerkannten Empfehlungen stammen vom US-amerikanischen Institute of Medicine (**IOM**) und werden auch in Deutschland von Hebammen, Gynäkologen und der Deutschen Gesellschaft für Ernährung empfohlen. Unser Rechner berechnet Ihren BMI, zeigt die für Sie empfohlene Spanne und vergleicht sie mit Ihrer aktuellen Zunahme.
+
+**IOM-Richtlinien: Die empfohlene Gesamtzunahme**
+
+Die IOM unterscheidet vier BMI-Kategorien. Pro Kategorie gelten folgende Empfehlungen für Einlingsschwangerschaften:
+
+- **Untergewicht (BMI < 18,5):** 12,5–18,0 kg Gesamtzunahme.
+- **Normalgewicht (BMI 18,5–24,9):** 11,5–16,0 kg — die häufigste Gruppe.
+- **Übergewicht (BMI 25–29,9):** 7,0–11,5 kg — bewusstes Maß halten.
+- **Adipositas (BMI ≥ 30):** 5,0–9,0 kg — eher zurückhaltend zunehmen.
+
+Bei **Zwillingsschwangerschaften** liegen die Werte deutlich höher, da zwei Babys plus zusätzliche Plazenta/Fruchtwasser versorgt werden müssen. Für Normalgewichtige gilt: 17–25 kg, bei Übergewicht 14–23 kg, bei Adipositas 11–19 kg.
+
+**Wie viel nimmt man pro Woche zu?**
+
+Im **1. Trimester** (SSW 1–12) ist die Zunahme gering — durchschnittlich 0,5–2,0 kg insgesamt. Bei Übelkeit kann das Gewicht anfangs sogar leicht sinken. Ab dem **2. Trimester** wird die Zunahme gleichmäßiger:
+
+- **Untergewicht:** 0,44–0,58 kg/Woche
+- **Normalgewicht:** 0,35–0,50 kg/Woche
+- **Übergewicht:** 0,23–0,33 kg/Woche
+- **Adipositas:** 0,17–0,27 kg/Woche
+
+Unser Rechner berechnet aus Ihrem BMI und der aktuellen SSW automatisch, in welchem Bereich Sie sich bewegen sollten — und vergleicht Ihre tatsächliche Zunahme mit dem erwarteten Korridor.
+
+**Woraus besteht die Gewichtszunahme?**
+
+Eine verbreitete Sorge lautet: „Ich nehme doch nicht 12 kg Fett zu, oder?" Nein — die Zunahme verteilt sich auf viele Komponenten:
+
+- **Baby:** ca. 3,3 kg
+- **Plazenta:** ca. 0,7 kg
+- **Fruchtwasser:** ca. 0,9 kg
+- **Gebärmutter:** ca. 1,0 kg
+- **Brustgewebe:** ca. 0,5 kg
+- **Blutvolumen:** ca. 1,5 kg (zusätzlich zum Ausgangsvolumen)
+- **Wassereinlagerungen:** ca. 1,5 kg
+- **Fettreserven:** ca. 3,0 kg (als Energiereserve für Stillzeit)
+
+In Summe entspricht das den typischen 12–13 kg einer normalgewichtigen Einlings-Schwangerschaft. Der Großteil dieser Zunahme geht bei der Geburt bzw. in den Wochen danach wieder zurück.
+
+**Zu viel oder zu wenig zugenommen — was tun?**
+
+Abweichungen vom empfohlenen Bereich sind zunächst kein Grund zur Sorge. Die IOM-Werte sind Richtwerte, keine starren Grenzen. Wichtiger als eine exakte Zahl sind Wohlbefinden, regelmäßige Vorsorgeuntersuchungen und ein gesundes Ernährungsverhalten.
+
+- **Zu viel zugenommen:** Bewegung (Schwimmen, Spaziergänge, Schwangerschaftsyoga), bewusste Ernährung mit viel Gemüse, Vollkorn und Proteinen. Keine radikalen Diäten — in der Schwangerschaft darf nicht gefastet werden.
+- **Zu wenig zugenommen:** Nährstoffreiche Snacks (Nüsse, Avocado, Vollmilch, Trockenfrüchte). Bei anhaltender Übelkeit (Hyperemesis) ärztlich abklären lassen.
+
+Sprechen Sie größere Abweichungen in jedem Fall mit Ihrer Hebamme oder Ihrem Frauenarzt/Ihrer Frauenärztin ab. Insbesondere eine sehr starke Zunahme in kurzer Zeit (mehr als 2 kg pro Woche) kann auf **Wassereinlagerungen** bei Präeklampsie hindeuten und sollte immer untersucht werden.
+
+**Ernährung und Gewicht — Qualität vor Quantität**
+
+Der Mehrbedarf an Kalorien ist geringer als oft gedacht: Im 2. Trimester nur etwa **250 kcal/Tag**, im 3. Trimester ca. **500 kcal/Tag** zusätzlich. Wichtiger als „mehr essen" ist „besser essen": Folsäure, Jod, Eisen, Omega-3-Fettsäuren und hochwertiges Eiweiß unterstützen die Entwicklung des Kindes optimal.
+
+**Hinweis:** Die Empfehlungen basieren auf den IOM-Richtlinien. Jede Schwangerschaft ist individuell — unser Rechner ersetzt keine ärztliche Beratung. Nutzen Sie zusätzlich unseren SSW-Rechner, den Geburtstermin-Rechner, den BMI-Rechner und den Kalorienrechner, um Ihren Überblick zu vervollständigen.`,
+    faq: [
+      {
+        frage: 'Wie viel sollte ich in der Schwangerschaft zunehmen?',
+        antwort: 'Die empfohlene Gesamtzunahme hängt vom BMI vor der Schwangerschaft ab (IOM-Richtlinien): Untergewicht 12,5–18 kg, Normalgewicht 11,5–16 kg, Übergewicht 7–11,5 kg, Adipositas 5–9 kg. Bei Zwillingen liegen die Werte höher. Unser Rechner ermittelt Ihre individuelle Spanne automatisch.',
+      },
+      {
+        frage: 'Ab wann nimmt man in der Schwangerschaft zu?',
+        antwort: 'Im 1. Trimester (SSW 1–12) ist die Zunahme gering — meist 0,5–2 kg. Viele Frauen nehmen aufgrund von Übelkeit sogar leicht ab. Ab dem 2. Trimester wird die Zunahme gleichmäßiger, im Schnitt 0,35–0,5 kg pro Woche bei Normalgewicht.',
+      },
+      {
+        frage: 'Ist die empfohlene Zunahme bei Übergewicht anders?',
+        antwort: 'Ja. Bei Übergewicht (BMI 25–29,9) werden nur 7–11,5 kg empfohlen, bei Adipositas (BMI ≥ 30) nur 5–9 kg. Hintergrund: Eine zu hohe Zunahme erhöht das Risiko für Schwangerschaftsdiabetes, Bluthochdruck und Komplikationen bei der Geburt.',
+      },
+      {
+        frage: 'Woraus besteht die Gewichtszunahme in der Schwangerschaft?',
+        antwort: 'Ca. 3,3 kg Baby, 0,7 kg Plazenta, 0,9 kg Fruchtwasser, 1,0 kg Gebärmutter, 0,5 kg Brustgewebe, 1,5 kg zusätzliches Blut, 1,5 kg Wassereinlagerungen und 3 kg Fettreserven. In Summe ergibt das die typischen 12–13 kg bei Normalgewicht.',
+      },
+      {
+        frage: 'Was tun bei zu viel Gewichtszunahme?',
+        antwort: 'Keine Diät! In der Schwangerschaft sollten Sie nicht abnehmen oder fasten. Stattdessen: moderate Bewegung (Schwimmen, Spaziergänge, Yoga), nährstoffreiche statt zuckerreicher Lebensmittel, keine zusätzlichen Süßgetränke. Besprechen Sie größere Abweichungen mit Ihrer Hebamme oder Ihrem Arzt.',
+      },
+    ],
+  },
 ];

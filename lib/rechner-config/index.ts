@@ -88,6 +88,10 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'uhrzeitrechner',
+  'schwangerschaft-gewicht-rechner',
+  'photovoltaik-rechner',
+  'abi-rechner',
   'krankengeld-rechner',
   'skontorechner',
   'leasing-rechner',
@@ -263,6 +267,10 @@ const verwandteMap: Record<string, string[]> = {
   'leasing-rechner': ['autokosten-rechner', 'kfz-steuer-rechner', 'kreditrechner', 'spritkosten-rechner'],
   'skontorechner': ['mwst-rechner', 'prozentrechner', 'kreditrechner', 'rabattrechner'],
   'krankengeld-rechner': ['brutto-netto-rechner', 'buergergeld-rechner', 'rentenrechner', 'pflegegeld-rechner'],
+  'abi-rechner': ['notenschluessel-rechner', 'durchschnitt-rechner', 'prozentrechner', 'prozentuale-veraenderung-rechner'],
+  'photovoltaik-rechner': ['waermepumpen-rechner', 'stromkosten-rechner', 'stromvergleich-rechner', 'heizkosten-rechner'],
+  'schwangerschaft-gewicht-rechner': ['ssw-rechner', 'geburtstermin-rechner', 'bmi-rechner', 'kalorienrechner'],
+  'uhrzeitrechner': ['tagerechner', 'arbeitszeitrechner', 'countdown', 'ueberstunden-rechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {

@@ -991,4 +991,99 @@ Für Umsatzsteuer-Berechnungen nutzen Sie unseren MwSt-Rechner. Allgemeine Proze
       },
     ],
   },
+  {
+    slug: 'uhrzeitrechner',
+    titel: 'Uhrzeitrechner',
+    beschreibung: 'Uhrzeiten berechnen: Zeitdifferenz, Stunden addieren/subtrahieren und Zeitzonen umrechnen.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Uhrzeitrechner 2026 — Zeitdifferenz & Zeitzonen berechnen | Rechenfix',
+    metaDescription: 'Uhrzeiten berechnen: Zeitdifferenz, Stunden addieren/subtrahieren und Zeitzonen umrechnen ✓ Dezimalstunden ✓ KI-Erklärung.',
+    keywords: ['uhrzeitrechner', 'zeitdifferenz berechnen', 'stunden addieren', 'zeitzonen rechner', 'dezimalstunden', 'zeitverschiebung berechnen', 'mez est umrechnen'],
+    icon: '🕐',
+    formel: 'Differenz (min) = End_h×60 + End_m − (Start_h×60 + Start_m) | Dezimalstunden = Differenz / 60 | Zonen: Ziel = Quelle − Quell-Offset + Ziel-Offset',
+    beispiel: 'Von 08:30 bis 17:00 = 8 h 30 min = 8,50 Dezimalstunden. 12:00 MEZ + 2 h 30 min = 14:30. 12:00 MEZ entspricht 06:00 EST (New York).',
+    erklaerung: `**Uhrzeitrechner — Zeitdifferenz, Addition und Zeitzonen**
+
+Der Uhrzeitrechner hilft Ihnen bei drei häufigen Aufgaben rund um Uhrzeiten: dem Berechnen der **Differenz** zwischen zwei Uhrzeiten (z. B. Arbeitszeit), dem **Addieren oder Subtrahieren** von Stunden und Minuten, und dem **Umrechnen zwischen Zeitzonen**. Alle drei Funktionen sind im Rechner über Tabs erreichbar und liefern das Ergebnis sofort bei Eingabe — ohne Button-Druck.
+
+**Zeitdifferenz berechnen: So geht's**
+
+Um die Zeit zwischen zwei Uhrzeiten zu berechnen, rechnet man sie zunächst in Minuten um und bildet die Differenz. Beispiel für eine Arbeitsschicht von 08:30 bis 17:00:
+
+- Startzeit: 8 × 60 + 30 = **510 Minuten**
+- Endzeit: 17 × 60 + 0 = **1.020 Minuten**
+- Differenz: 1.020 − 510 = **510 Minuten = 8 h 30 min**
+
+Wenn die Endzeit vor der Startzeit liegt (z. B. Nachtschicht von 22:00 bis 06:00), wird angenommen, dass der Endzeitpunkt am Folgetag liegt. Die Formel lautet dann: **(24 × 60 − Start_min) + End_min**. Für 22:00 bis 06:00 ergibt das 120 + 360 = 480 Minuten = 8 Stunden.
+
+**Dezimalzeit vs. Stunden:Minuten**
+
+Für Arbeitszeit- und Lohnabrechnungen wird oft mit **Dezimalstunden** gerechnet: Man teilt die Minuten durch 60. 30 Minuten = 0,50 Dezimalstunden, 45 Minuten = 0,75 Dezimalstunden, 10 Minuten = 0,1667 Dezimalstunden. Vorsicht: Der typische Fehler ist, 8:30 einfach als 8,30 zu schreiben — korrekt sind jedoch **8,50 Dezimalstunden**. Unser Rechner zeigt beide Formate parallel an.
+
+**Stunden und Minuten addieren oder subtrahieren**
+
+Beim Addieren von Zeitdauern kann der Stunden- und Minutenwert über 60 bzw. 24 hinausgehen. Korrekte Rechnung:
+
+- 14:30 + 2 h 45 min = 17:15
+- 09:15 + 15 h 45 min = 25:00 → **01:00 am nächsten Tag**
+- 03:00 − 5 h 30 min = −2:30 → **21:30 am Vortag**
+
+Der Rechner normalisiert das Ergebnis automatisch in den Bereich 00:00–23:59 und zeigt einen **Tagesoffset** an, wenn die Rechnung den Tag wechselt. Das ist besonders praktisch bei Schichtplänen und Flugzeiten.
+
+**Zeitzonen erklärt: UTC, MEZ und MESZ**
+
+Alle Zeitzonen der Welt werden in Relation zur **Koordinierten Weltzeit (UTC)** angegeben. Deutschland liegt in der Zone **MEZ (Mitteleuropäische Zeit) = UTC+1** im Winter und **MESZ (Mitteleuropäische Sommerzeit) = UTC+2** im Sommer. Beim Umrechnen zwischen zwei Zeitzonen subtrahiert man zunächst den Offset der Quellzone und addiert dann den Offset der Zielzone:
+
+**Ziel-Uhrzeit = Quelle − Quell-Offset + Ziel-Offset**
+
+Beispiel: 12:00 Uhr MEZ in New York (EST = UTC−5):
+- 12:00 − (+1) + (−5) = 12:00 − 6 = **06:00 EST**
+
+Wenn das Ergebnis unter 00:00 oder über 23:59 fällt, wird der Tag entsprechend angepasst. Unser Rechner berücksichtigt den Tagesübergang automatisch.
+
+**Die wichtigsten Zeitzonen für deutsche Nutzer**
+
+- **London (GMT):** UTC+0 → 1 Stunde zurück
+- **New York (EST):** UTC−5 → 6 Stunden zurück
+- **Los Angeles (PST):** UTC−8 → 9 Stunden zurück
+- **Dubai (GST):** UTC+4 → 3 Stunden voraus
+- **Mumbai (IST):** UTC+5:30 → 4:30 Stunden voraus
+- **Peking (CST):** UTC+8 → 7 Stunden voraus
+- **Tokio (JST):** UTC+9 → 8 Stunden voraus
+- **Sydney (AEST):** UTC+10 → 9 Stunden voraus
+
+Hinweis: Diese Werte gelten ohne Berücksichtigung der Sommerzeit. In der Sommerzeit verschieben sich viele Zeitzonen um eine Stunde — und nicht alle Länder machen Sommerzeit. Unser Rechner arbeitet mit den Standardzeiten und ist daher besonders zuverlässig für Geschäftsplanungen.
+
+**Typische Anwendungsfälle**
+
+- **Arbeitszeit berechnen:** Wie viele Stunden habe ich heute gearbeitet? (Tab „Zeitdifferenz")
+- **Meeting über Zeitzonen planen:** Wann ist 15:00 Uhr Berlin in San Francisco? (Tab „Zeitzonen")
+- **Schichtende ermitteln:** Wann endet meine 7,5-Stunden-Schicht ab 06:30? (Tab „Addieren")
+- **Flugdauer:** Wie lange dauert ein Flug von Frankfurt nach Tokio rein rechnerisch? (Tab „Zeitdifferenz" über zwei Zonen)
+
+**Verwandte Rechner:** Für komplexere Arbeitszeitberechnungen nutzen Sie den Arbeitszeitrechner. Den Countdown bis zu einem bestimmten Datum berechnet der Countdown-Rechner. Für die Anzahl der Tage zwischen zwei Daten hilft der Tagerechner. Überstunden und deren Vergütung rechnet der Überstunden-Rechner aus.`,
+    faq: [
+      {
+        frage: 'Wie berechne ich die Zeitdifferenz zwischen zwei Uhrzeiten?',
+        antwort: 'Rechnen Sie beide Uhrzeiten in Minuten um (Stunden × 60 + Minuten) und bilden Sie die Differenz. Beispiel: 17:00 − 08:30 → 1020 − 510 = 510 Minuten = 8 h 30 min. Bei Nachtschichten (Endzeit < Startzeit) wird die Zeit bis Mitternacht plus die Zeit nach Mitternacht addiert.',
+      },
+      {
+        frage: 'Was sind Dezimalstunden?',
+        antwort: 'Dezimalstunden sind Stunden mit Nachkommastelle statt Minutenformat. 30 Minuten = 0,50 Dezimalstunden, 45 Min = 0,75, 15 Min = 0,25. Die Umrechnung: Minuten ÷ 60. Achtung: 8:30 entspricht 8,50 Dezimalstunden — nicht 8,30! Für Lohnabrechnungen ist das Dezimalformat Standard.',
+      },
+      {
+        frage: 'Wie viele Stunden Zeitverschiebung hat New York?',
+        antwort: 'New York liegt in der Zeitzone EST (Eastern Standard Time, UTC−5). Zur deutschen MEZ (UTC+1) beträgt die Zeitverschiebung 6 Stunden — in Deutschland ist es also 6 Stunden später als in New York. In der Sommerzeit sind es weiterhin 6 Stunden (beide Länder nutzen Sommerzeit).',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen MEZ und MESZ?',
+        antwort: 'MEZ (Mitteleuropäische Zeit) gilt von Ende Oktober bis Ende März und entspricht UTC+1. MESZ (Mitteleuropäische Sommerzeit) gilt von Ende März bis Ende Oktober und entspricht UTC+2. Beim Wechsel wird die Uhr um eine Stunde vor- bzw. zurückgestellt. Der Rechner arbeitet standardmäßig mit MEZ (UTC+1).',
+      },
+      {
+        frage: 'Wie rechne ich Stunden und Minuten in Dezimal um?',
+        antwort: 'Teilen Sie die Minuten durch 60 und addieren Sie den Wert zu den vollen Stunden: 2 h 15 min = 2 + 15/60 = 2,25 h. Umgekehrt: Multiplizieren Sie den Nachkommateil mit 60: 3,75 h = 3 h + 0,75 × 60 = 3 h 45 min. Unser Rechner zeigt beide Formate automatisch an.',
+      },
+    ],
+  },
 ];

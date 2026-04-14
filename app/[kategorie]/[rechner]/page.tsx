@@ -94,6 +94,10 @@ import VolumenRechner from '@/components/rechner/VolumenRechner';
 import LeasingRechner from '@/components/rechner/LeasingRechner';
 import SkontoRechner from '@/components/rechner/SkontoRechner';
 import KrankengeldRechner from '@/components/rechner/KrankengeldRechner';
+import AbiRechner from '@/components/rechner/AbiRechner';
+import PhotovoltaikRechner from '@/components/rechner/PhotovoltaikRechner';
+import SchwangerschaftGewichtRechner from '@/components/rechner/SchwangerschaftGewichtRechner';
+import UhrzeitRechner from '@/components/rechner/UhrzeitRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -200,6 +204,10 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'leasing-rechner': LeasingRechner,
   'skontorechner': SkontoRechner,
   'krankengeld-rechner': KrankengeldRechner,
+  'abi-rechner': AbiRechner,
+  'photovoltaik-rechner': PhotovoltaikRechner,
+  'schwangerschaft-gewicht-rechner': SchwangerschaftGewichtRechner,
+  'uhrzeitrechner': UhrzeitRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

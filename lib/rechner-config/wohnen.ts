@@ -697,4 +697,86 @@ Ein entscheidender Hebel für die Wirtschaftlichkeit ist der **Wärmepumpen-Stro
       },
     ],
   },
+  {
+    slug: 'photovoltaik-rechner',
+    titel: 'Photovoltaik-Rechner',
+    beschreibung: 'Photovoltaik-Anlage berechnen: Ertrag, Eigenverbrauch, Einspeisevergütung und Amortisation Ihrer Solaranlage.',
+    kategorie: 'Wohnen & Energie',
+    kategorieSlug: 'wohnen',
+    metaTitle: 'Photovoltaik-Rechner 2026 — PV-Ertrag & Amortisation berechnen | Rechenfix',
+    metaDescription: 'Photovoltaik berechnen: Ertrag, Eigenverbrauch, Einspeisevergütung und Amortisation ✓ Mit/ohne Speicher ✓ CO₂-Ersparnis ✓ KI-Erklärung.',
+    keywords: ['photovoltaik rechner', 'pv rechner', 'solaranlage berechnen', 'einspeisevergütung 2026', 'photovoltaik amortisation', 'solarrechner', 'pv ertrag berechnen', 'batteriespeicher rechner'],
+    icon: '☀️',
+    formel: 'Jahresertrag = kWp × 1.000 kWh × Ausrichtungsfaktor × 0,85 (Verluste) | Amortisation = Investition / (Ersparnis + Einspeisung − Wartung)',
+    beispiel: 'Eine 8 kWp-Anlage auf einem Süddach (30°) erzeugt ca. 6.800 kWh pro Jahr. Bei 30 % Eigenverbrauch und 32 ct/kWh Strompreis entstehen 653 € Ersparnis plus 382 € Einspeisung = 1.035 € Jahresertrag.',
+    erklaerung: `**Lohnt sich Photovoltaik 2026?**
+
+Eine Photovoltaikanlage ist 2026 für die meisten Hausbesitzer eine lohnende Investition. Dank gesunkener Modulpreise, staatlicher Förderung und steigender Strompreise amortisieren sich moderne PV-Anlagen in 10–14 Jahren — bei einer Lebensdauer von 25–30 Jahren bleibt damit eine lange Gewinnphase. Unser Photovoltaik-Rechner hilft Ihnen, Ertrag, Eigenverbrauch, Einspeisevergütung und Amortisation für Ihre individuelle Situation zu berechnen.
+
+**Wie viel Strom produziert eine PV-Anlage?**
+
+In Deutschland liefert eine optimal ausgerichtete PV-Anlage (Süd, 30° Neigung) rund 950–1.050 kWh pro installiertem kWp und Jahr. Abweichungen entstehen durch Ausrichtung, Neigung, Verschattung und Wetter. West- oder Ost-Dächer erreichen rund 85 % des Optimums, Nord-Ost/Nord-West rund 65 %. Nach Abzug von Systemverlusten (Wechselrichter, Leitungen, Verschmutzung, ca. 15 %) ergibt sich der Netto-Jahresertrag.
+
+**Was kostet eine Photovoltaik-Anlage 2026?**
+
+Die Kosten einer schlüsselfertigen PV-Anlage liegen 2026 bei ca. **1.100–1.500 € pro kWp** inklusive Montage. Eine typische 8 kWp-Anlage kostet damit rund 8.800–12.000 €. Mit Batteriespeicher kommen pro kWh Speicherkapazität 700–1.000 € hinzu. Wichtig: Seit 2023 entfällt die Mehrwertsteuer auf Kauf und Installation von PV-Anlagen bis 30 kWp — ein Rabatt von 19 %.
+
+**Einspeisevergütung 2026: Aktuelle Sätze**
+
+Für Anlagen bis 10 kWp, die ab Januar 2026 in Betrieb gehen, beträgt die Einspeisevergütung (Überschusseinspeisung) **8,03 ct/kWh** für den ins Netz eingespeisten Strom. Für Anlagenteile über 10 kWp sinkt sie auf 6,95 ct/kWh. Die Vergütung wird für 20 Jahre (plus Inbetriebnahme-Jahr) garantiert. Die Sätze werden halbjährlich um etwa 1 % abgesenkt — wer zögert, erhält weniger.
+
+**Eigenverbrauch optimieren: So sparen Sie doppelt**
+
+Je mehr Strom Sie selbst verbrauchen, desto rentabler ist die PV-Anlage. Denn jede kWh Eigenverbrauch spart den aktuellen Haushaltsstrompreis (ca. 32 ct/kWh) — vier Mal so viel wie die Einspeisevergütung. Typische Eigenverbrauchsquoten:
+
+- **Ohne Speicher:** 25–35 % — bei gutem Verhältnis von Ertrag zu Verbrauch.
+- **Mit Speicher (5–10 kWh):** 55–75 % — je größer der Speicher, desto höher die Quote.
+- **Mit Wärmepumpe + Speicher:** bis 85 % — die Kombination ist besonders wirtschaftlich.
+
+Tipps zur Eigenverbrauchs-Optimierung: Waschmaschine, Geschirrspüler und Trockner tagsüber laufen lassen, ein Elektroauto mit Überschussladung betreiben oder die Wärmepumpe per Heizstab mit PV-Strom unterstützen.
+
+**Batteriespeicher: Wann lohnt er sich?**
+
+Ein Batteriespeicher speichert überschüssigen Solarstrom für den Abend und erhöht den Eigenverbrauch erheblich. Rechnerisch lohnt sich ein Speicher meist, wenn der Strompreis über 30 ct/kWh liegt und Sie regelmäßig abends oder nachts viel Strom verbrauchen. Typische Speichergrößen: 5–15 kWh, Faustregel: 1 kWh Speicher pro 1.000 kWh Jahresverbrauch. Die Amortisationszeit des Speichers selbst liegt bei 10–15 Jahren — etwas länger als die der reinen PV-Anlage.
+
+**PV und Wärmepumpe: Die perfekte Kombination**
+
+Wer Photovoltaik und Wärmepumpe kombiniert, nutzt Solarstrom auch zum Heizen. Moderne Systeme koordinieren Wärmepumpe und PV-Wechselrichter so, dass die Wärmepumpe bevorzugt dann läuft, wenn die Sonne scheint. Der Warmwasserspeicher dient als thermischer „Puffer". Das steigert den Eigenverbrauch auf 60–75 % und senkt die Heizkosten drastisch.
+
+**CO₂-Ersparnis: Beitrag zum Klimaschutz**
+
+Jede Kilowattstunde Solarstrom spart ca. 380 g CO₂ gegenüber dem deutschen Strommix. Eine 8-kWp-Anlage vermeidet damit rund 2,6 Tonnen CO₂ pro Jahr — über 20 Jahre sind das 52 Tonnen. Zum Vergleich: Ein Auto mit 15.000 km Jahresfahrleistung verursacht etwa 3 Tonnen CO₂ jährlich.
+
+**Wichtiger Hinweis**
+
+Unser Rechner liefert eine erste Orientierung. Der tatsächliche Ertrag hängt von vielen Faktoren ab: Standort (Süddeutschland > Norddeutschland), Verschattung, Modulqualität, Montagesystem, Wechselrichter-Effizienz und Wetter. Holen Sie sich für die konkrete Planung immer ein individuelles Angebot von mindestens zwei Fachbetrieben ein. Die **Bundesnetzagentur** und die Verbraucherzentralen bieten zusätzliche Informationen zu Förderung und Auswahl.
+
+**Verwandte Rechner:** Für Heizkosten nutzen Sie den Heizkosten-Rechner, für den aktuellen Stromverbrauch den Stromkosten-Rechner. Wenn Sie parallel zur PV-Anlage über eine Wärmepumpe nachdenken, hilft der Wärmepumpen-Rechner. Einen günstigen Reststrom-Tarif finden Sie mit dem Stromvergleich-Rechner.`,
+    faq: [
+      {
+        frage: 'Wie viel Strom produziert eine PV-Anlage?',
+        antwort: 'In Deutschland liefert eine optimal ausgerichtete PV-Anlage (Süddach, 30° Neigung) ca. 950–1.050 kWh pro kWp und Jahr. Eine 8-kWp-Anlage erzeugt damit rund 7.600–8.400 kWh pro Jahr. Abweichungen entstehen durch Ausrichtung, Neigung und Verschattung — unser Rechner berücksichtigt diese Faktoren automatisch.',
+      },
+      {
+        frage: 'Was kostet eine Photovoltaik-Anlage 2026?',
+        antwort: 'Schlüsselfertige PV-Anlagen kosten 2026 ca. 1.100–1.500 € pro kWp inklusive Montage. Eine typische 8-kWp-Anlage liegt bei 8.800–12.000 €. Mit Batteriespeicher kommen 700–1.000 € pro kWh Speicherkapazität hinzu. Seit 2023 gilt 0 % Mehrwertsteuer auf PV-Anlagen bis 30 kWp.',
+      },
+      {
+        frage: 'Wie hoch ist die Einspeisevergütung 2026?',
+        antwort: 'Für Anlagen bis 10 kWp beträgt die Einspeisevergütung 2026 ca. 8,03 ct/kWh für Überschusseinspeisung. Für Anteile über 10 kWp sinkt sie auf 6,95 ct/kWh. Die Vergütung ist für 20 Jahre garantiert. Genauen aktuellen Wert bitte bei der Bundesnetzagentur prüfen.',
+      },
+      {
+        frage: 'Lohnt sich ein Batteriespeicher?',
+        antwort: 'Ein Batteriespeicher erhöht den Eigenverbrauch von rund 30 % auf 55–75 %. Das lohnt sich finanziell meist bei Strompreisen über 30 ct/kWh. Die Amortisationszeit des Speichers selbst liegt bei 10–15 Jahren. Faustregel für die Größe: 1 kWh Speicher pro 1.000 kWh Jahresverbrauch.',
+      },
+      {
+        frage: 'Wann amortisiert sich eine PV-Anlage?',
+        antwort: 'Ohne Speicher amortisieren sich PV-Anlagen typischerweise nach 10–14 Jahren, mit Speicher nach 12–16 Jahren. Bei einer Lebensdauer von 25–30 Jahren ergibt sich eine lange Gewinnphase. Der genaue Wert hängt von Strompreis, Eigenverbrauchsquote und Investitionskosten ab — unser Rechner zeigt Ihren individuellen Wert.',
+      },
+      {
+        frage: 'Wie groß muss die PV-Anlage für meinen Verbrauch sein?',
+        antwort: 'Als Faustregel gilt: 1 kWp PV-Leistung pro 1.000 kWh Jahresverbrauch deckt rechnerisch den Bedarf — allerdings nur übers Jahr gerechnet. Pro kWp werden ca. 5–6 m² Dachfläche benötigt. Bei einem Verbrauch von 4.000 kWh wären also 4 kWp und rund 25 m² Fläche sinnvoll.',
+      },
+    ],
+  },
 ];
