@@ -7,7 +7,7 @@ const STORAGE_KEY = 'rechenfix_berechnungen';
 // Am BASELINE_DATE zeigte der Zähler den BASELINE_VALUE.
 // Pro Tag seither kommen GROWTH_PER_DAY dazu.
 const BASELINE_DATE = Date.UTC(2026, 3, 15); // 2026-04-15 (Monate 0-basiert)
-const BASELINE_VALUE = 10000;
+const BASELINE_VALUE = 10920;
 const GROWTH_PER_DAY = 420;
 
 function zeitbasierteGrundlinie(): number {
