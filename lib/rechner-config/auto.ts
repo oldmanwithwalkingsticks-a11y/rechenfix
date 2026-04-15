@@ -436,4 +436,60 @@ Möchten Sie die Gesamtkosten Ihres Autos inkl. Versicherung, Steuer und Sprit b
       },
     ],
   },
+  {
+    slug: 'fuehrerschein-rechner',
+    titel: 'Führerscheinkosten-Rechner',
+    beschreibung: 'Führerscheinkosten berechnen: Gesamtkosten für Klasse B mit Fahrstunden, Prüfungsgebühren und Sehtest.',
+    kategorie: 'Auto & Verkehr',
+    kategorieSlug: 'auto',
+    metaTitle: 'Führerscheinkosten-Rechner 2026 — Was kostet der Führerschein? | Rechenfix',
+    metaDescription: 'Führerscheinkosten Klasse B berechnen: Fahrstunden, Prüfungen und Nebenkosten nach Region — kostenlose Gesamtkosten-Schätzung mit KI-Erklärung.',
+    keywords: ['führerscheinkosten', 'führerschein kosten', 'was kostet ein führerschein', 'führerschein klasse b', 'fahrschule kosten', 'fahrstunden preis', 'führerschein rechner', 'führerscheinprüfung kosten'],
+    icon: '🚗',
+    formel: 'Gesamt = Grundgebühr + 12 × Sonderfahrten-Preis + Übungsstunden × Preis + Nebenkosten + Theorie- + Praxisprüfung',
+    beispiel: 'Beispiel (Vorort, 25 Übungsstunden, Erstversuche bestanden): 425 € + 12 × 82,50 € + 25 × 55 € + 157 € + 23 € + 117 € = ca. 3.087 €',
+    erklaerung: `**Was kostet der Führerschein 2026 wirklich?**
+
+Der Führerschein Klasse B gehört in Deutschland zu den teuersten Ausbildungen überhaupt — und die Kosten sind in den letzten Jahren spürbar gestiegen. Wer heute neu anfängt, sollte mit **2.500 bis 4.500 Euro** rechnen, in Großstädten auch deutlich mehr. Der Grund: höhere Personal- und Betriebskosten der Fahrschulen, teurere Prüffahrzeuge, gestiegene TÜV-/DEKRA-Gebühren und längere Ausbildungszeiten durch neue Lehrinhalte (z. B. E-Auto-Module). Mit unserem Führerscheinkosten-Rechner bekommen Sie eine realistische Schätzung auf Basis Ihrer Region, Ihrer voraussichtlichen Fahrstundenanzahl und davon, ob Sie die Prüfungen beim ersten Anlauf bestehen. So wissen Sie vorher, was auf Sie zukommt — und können das Budget sauber planen.
+
+**Die einzelnen Kostenblöcke im Überblick**
+
+Die Gesamtkosten setzen sich aus mehreren festen und variablen Posten zusammen. Die **Grundgebühr der Fahrschule** deckt Theorieunterricht, Verwaltung und Anmeldung ab — je nach Region liegt sie bei 350 € (ländlich) bis 500 € (Großstadt). Hinzu kommen die **12 Pflicht-Sonderfahrten** (5 Überlandfahrten, 4 Autobahnfahrten, 3 Nachtfahrten), die gesetzlich vorgeschrieben sind und meist mit einem Zuschlag von rund 50 % auf den normalen Fahrstundenpreis abgerechnet werden. Die **Übungsfahrstunden** sind der größte variable Block: Der Bundesdurchschnitt liegt bei etwa 25 Übungsstunden, die Spanne reicht von 15 bei Vielfahrern bis über 40 bei Fahranfängern, die sich schwertun. Rechnen Sie pro Stunde mit 45 € (ländlich) bis 65 € (Stadt).
+
+Zu den **Nebenkosten** zählen: Lehrmaterial rund 50 €, Sehtest 7 €, Erste-Hilfe-Kurs 40 €, biometrische Passbilder 15 € und die Antragsgebühr der Führerscheinstelle 45 €. Summiert sind das rund 157 € fixe Nebenkosten, die bei jedem Führerschein-Neuantrag anfallen. Schließlich die **Prüfungsgebühren**: Die Theorieprüfung kostet beim TÜV/DEKRA 23 €, die Praxisprüfung 117 €. Wichtig: Jede Wiederholung kostet nochmals den vollen Betrag. Wer zweimal durch die Praxisprüfung fällt, zahlt allein für die Prüfungen 351 € — plus meist 4 bis 10 zusätzliche Übungsstunden zur Vorbereitung.
+
+**Regionale Unterschiede: Stadt vs. Land**
+
+Die Preise für Fahrstunden variieren in Deutschland drastisch. In **München, Hamburg oder Berlin** zahlen Sie oft 65 € oder mehr pro 45-Minuten-Einheit, in **Dörfern und Kleinstädten** teilweise nur 40 bis 45 €. Auch die Grundgebühr der Fahrschule folgt diesem Muster. Wer flexibel ist, kann durch einen Intensivkurs in einer ländlichen Region hunderte Euro sparen — Ferienkurse im Harz, in der Eifel oder im Schwarzwald sind bei Großstadt-Fahrschülern beliebt. Wichtig zu wissen: Die Prüfungen müssen in der Regel bei der TÜV-/DEKRA-Stelle abgelegt werden, die der ausbildenden Fahrschule zugeordnet ist. Ein Wechsel ist möglich, aber mit Aufwand verbunden.
+
+**Spartipps für Fahrschüler**
+
+Der einfachste Hebel: **Theorie konsequent vorbereiten**, um die Prüfung beim ersten Versuch zu bestehen. Kostenlose Apps und Online-Tests ersetzen keine Fahrschule, sind aber perfekt zur Wiederholung. Zweiter Hebel: **Fahrstunden effizient nutzen**. Kommen Sie ausgeschlafen, regelmäßig und in kurzen Abständen — wer nur alle 2 Wochen fährt, braucht erfahrungsgemäß deutlich mehr Stunden. Dritter Hebel: **Fahrschulen vergleichen**. Die Preise unterscheiden sich auch innerhalb einer Stadt stark. Fragen Sie konkret nach Paketpreisen und achten Sie auf den Preis pro Sonderfahrt — hier verstecken sich oft Aufschläge. Und: Bezahlen Sie nie die komplette Fahrschule im Voraus, falls eine Insolvenz droht. Eine Monatsabrechnung ist sicherer.
+
+**Finanzierung: Kann man den Führerschein von der Steuer absetzen?**
+
+Grundsätzlich nein — der Führerschein Klasse B gilt als Kosten der privaten Lebensführung. Es gibt jedoch Ausnahmen: Wenn der Führerschein **Voraussetzung für den Beruf** ist (z. B. bei Polizei, Außendienst, Pflegediensten), kann er als Werbungskosten geltend gemacht werden. Bei Azubis zahlt manchmal der Arbeitgeber oder es gibt einen Zuschuss über die Agentur für Arbeit. Für den LKW-Führerschein (Klasse C/CE) oder Bus-Führerschein (D/DE) gibt es spezielle Förderprogramme. Auch der [Autokosten-Rechner](/auto/autokosten-rechner) hilft Ihnen, die laufenden Kosten nach dem Führerschein realistisch einzuschätzen — und unser [Kfz-Steuer-Rechner](/auto/kfz-steuer-rechner) zeigt, was Sie für Ihr erstes eigenes Auto jährlich ans Finanzamt zahlen.`,
+    faq: [
+      {
+        frage: 'Was kostet der Führerschein Klasse B 2026 im Durchschnitt?',
+        antwort: 'In Deutschland liegt der Durchschnitt aktuell bei 2.500 bis 4.500 Euro, in Großstädten auch darüber. Die Gesamtkosten hängen stark von der Region (Fahrstundenpreis 45–65 €), der Anzahl der Übungsstunden (Durchschnitt 25) und davon ab, ob Sie die Prüfungen beim ersten Versuch bestehen.',
+      },
+      {
+        frage: 'Wie viele Fahrstunden braucht man für den Führerschein?',
+        antwort: 'Pflicht sind die 12 Sonderfahrten (5 Überland, 4 Autobahn, 3 Nacht). Dazu kommen durchschnittlich 20 bis 35 Übungsfahrstunden — abhängig vom Talent und der Fahrpraxis. Wer regelmäßig fährt, braucht weniger Stunden als Fahrschüler mit großen Pausen zwischen den Terminen.',
+      },
+      {
+        frage: 'Was kostet eine Prüfung beim Führerschein?',
+        antwort: 'Die Theorieprüfung kostet 23 € (TÜV/DEKRA-Gebühr), die Praxisprüfung 117 €. Jede Wiederholung kostet nochmals den vollen Betrag. Dazu kommen meist einige zusätzliche Übungsstunden zur Vorbereitung auf den zweiten Versuch.',
+      },
+      {
+        frage: 'Kann man am Führerschein sparen?',
+        antwort: 'Ja. Die größten Hebel: Theorie gründlich vorbereiten (Apps, Online-Tests), regelmäßig fahren statt große Pausen, Fahrschulen vergleichen und auf Paketpreise achten. Intensivkurse in ländlichen Regionen können bis zu 30 % günstiger sein als in Großstädten.',
+      },
+      {
+        frage: 'Kann ich den Führerschein von der Steuer absetzen?',
+        antwort: 'Den PKW-Führerschein (Klasse B) in der Regel nicht — er zählt zur privaten Lebensführung. Ausnahme: Wenn der Führerschein berufliche Voraussetzung ist (z. B. Polizei, Außendienst), können Kosten als Werbungskosten geltend gemacht werden. LKW- und Bus-Führerscheine sind häufig absetzbar.',
+      },
+    ],
+  },
 ];

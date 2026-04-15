@@ -1952,4 +1952,72 @@ Wer für sich zu dem Schluss kommt, dass Riester sich nicht lohnt, hat mehrere A
       { frage: 'Was passiert mit dem Riester-Guthaben bei Tod?', antwort: 'Bei Tod in der Ansparphase geht das Guthaben nur eingeschränkt auf die Erben über: Ehepartner können das Guthaben steuer- und förderunschädlich auf einen eigenen Riester-Vertrag übertragen. Andere Erben erhalten das Guthaben nur abzüglich aller erhaltenen Förderung. Das ist ein häufig kritisierter Punkt an der Riester-Rente.' },
     ],
   },
+  {
+    slug: 'nettolohn-optimierer',
+    titel: 'Nettolohn-Optimierer',
+    beschreibung: 'Nettolohn optimieren: Vergleich Gehaltserhöhung vs. steuerfreie Sachbezüge — was bringt mehr Netto?',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Nettolohn-Optimierer 2026 — Gehaltserhöhung vs. Sachbezüge | Rechenfix',
+    metaDescription: 'Nettolohn optimieren: Gehaltserhöhung vs. Sachbezüge wie Jobticket, Essenszuschuss oder BAV kostenlos vergleichen — mit KI-Erklärung.',
+    keywords: ['nettolohn optimieren', 'sachbezüge', 'steuerfreie gehaltsextras', 'gehaltserhöhung vs sachbezug', 'jobticket steuerfrei', 'essenszuschuss', 'betriebliche altersvorsorge', '50 euro sachbezug', 'nettolohn maximieren'],
+    icon: '💡',
+    formel: 'Netto-Zugewinn je Option vergleichen — steuerfreie Sachbezüge bringen oft mehr als eine Brutto-Erhöhung, weil Steuern und Sozialabgaben entfallen.',
+    beispiel: 'Beispiel: 200 € AG-Budget → Brutto-Erhöhung ≈ 105 € netto (StKl I). Als Essenszuschuss (144,60 € steuerfrei) ≈ 144,60 € netto — rund 40 € mehr pro Monat.',
+    erklaerung: `**Warum steuerfreie Sachbezüge oft schlagen die Gehaltserhöhung**
+
+Eine Brutto-Gehaltserhöhung fühlt sich nach einem guten Deal an — bis die Lohnabrechnung kommt. Wer in Steuerklasse I mit einem Bruttogehalt um 3.500 € liegt, hat einen **Grenzsteuersatz von rund 40 Prozent** (Lohnsteuer + Soli + Sozialabgaben). Das heißt: Von 200 € Brutto-Erhöhung bleiben oft nur **105 bis 120 € netto** übrig. Der Rest verschwindet in Steuern und Sozialabgaben. Und der Arbeitgeber zahlt zusätzlich ca. 20 % AG-Anteil zur Sozialversicherung — das Budget wird also doppelt belastet.
+
+Steuerfreie Sachbezüge umgehen genau diesen Effekt. Wenn der Arbeitgeber Ihnen stattdessen einen **Deutschlandticket-Zuschuss von 58 €/Monat** zahlt, kommen 58 € bei Ihnen an — steuer- und sozialabgabenfrei, ohne jeden Abzug. Noch besser: Der Arbeitgeber spart auf diese 58 € ebenfalls die SV-Abgaben. Aus einem ähnlichen AG-Budget kommt also **deutlich mehr Netto** bei Ihnen an. Unser Nettolohn-Optimierer vergleicht sechs gängige Optionen parallel und zeigt, welche für Ihre Situation die beste ist.
+
+**Die wichtigsten steuerfreien Gehaltsextras 2026**
+
+**Sachbezug nach § 8 Abs. 2 EStG — bis 50 €/Monat:** Die beliebteste Gestaltung. Der Arbeitgeber kann Ihnen einen Gutschein, eine Prepaid-Karte oder Sachleistungen bis 50 € pro Monat steuer- und sozialabgabenfrei überlassen. Beliebt sind Tankgutscheine, Warengutscheine (Amazon, REWE), Shoppingkarten oder sogar Fitnessstudio-Mitgliedschaften. **Wichtig:** Es handelt sich um eine Freigrenze, nicht um einen Freibetrag — schon 1 € darüber, und der volle Betrag wird steuerpflichtig.
+
+**Jobticket / Deutschlandticket — bis 58 €/Monat:** Seit 2024 können Arbeitgeber das Deutschlandticket (49 €) vollständig steuerfrei übernehmen. Der Zuschuss muss **zusätzlich zum ohnehin geschuldeten Arbeitslohn** gezahlt werden (keine Gehaltsumwandlung). Der Vorteil: Der Netto-Zugewinn liegt bei exakt dem Ticketpreis — oft deutlich mehr als eine äquivalente Brutto-Erhöhung.
+
+**Essenszuschuss / Restaurantschecks — bis 7,23 €/Arbeitstag (2026):** Der Arbeitgeber kann für jeden Arbeitstag einen Zuschuss zum Mittagessen gewähren — die Obergrenze für 2026 liegt bei rund 7,23 € pro Tag. Bei 20 Arbeitstagen pro Monat sind das **144,60 € steuerfrei**. Die Kosten werden meist über digitale Meal-Vouchers (z. B. Bonago, Sodexo, Pluxee) abgewickelt, die in Restaurants oder Supermärkten eingelöst werden können.
+
+**Betriebliche Altersvorsorge (BAV) — bis 302 €/Monat:** Beiträge des Arbeitgebers in eine betriebliche Altersvorsorge sind bis zu 4 Prozent der Beitragsbemessungsgrenze der Rentenversicherung steuerfrei — 2026 sind das rund 302 €/Monat. Hinzu kommt SV-Freiheit bis zur Hälfte dieses Betrags. **Der Haken:** Heute fließt nichts in Ihr Konto — das Geld liegt bis zur Rente fest und wird später besteuert. Trotzdem eine hervorragende Option, weil der Arbeitgeber oft 15 % Zuschuss dazulegen muss (§ 1a Abs. 1a BetrAVG).
+
+**Internet-Pauschale — 50 €/Monat pauschal:** Für die berufliche Nutzung privater Internetanschlüsse kann der Arbeitgeber bis zu 50 €/Monat steuerfrei zahlen — ohne Einzelnachweis. Ideal im Homeoffice oder für Außendienstler.
+
+**Wie der Rechner arbeitet**
+
+Sie geben Ihr aktuelles Monatsbrutto, die Steuerklasse und den Betrag ein, den der Arbeitgeber bereitstellt. Der Rechner berechnet parallel: Wie viel Netto-Erhöhung würde eine klassische Brutto-Gehaltserhöhung bringen? Und wie viel kommt netto an, wenn derselbe Betrag als Sachbezug, Jobticket, Essenszuschuss, Internet-Pauschale oder BAV fließt? Die Ergebnisse werden nach Netto-Zugewinn sortiert — und der Gewinner wird oben hervorgehoben. Gleichzeitig sehen Sie die AG-Kosten jeder Variante: Steuerfreie Varianten sind auch für den Arbeitgeber günstiger, weil keine AG-SV-Beiträge anfallen. Das ist ein starkes Argument in der Gehaltsverhandlung.
+
+**Wichtige Regeln — und Fallstricke**
+
+Alle genannten Freibeträge gelten in der Regel nur, wenn die Leistung **zusätzlich zum ohnehin geschuldeten Arbeitslohn** gewährt wird. Eine Gehaltsumwandlung (also: bestehendes Gehalt in Sachbezug umwandeln) ist bei den meisten Optionen **nicht möglich** — das Finanzamt erkennt das nicht an. Außerdem gelten strikte Obergrenzen: Die 50-€-Sachbezugs-Freigrenze darf nicht überschritten werden, sonst wird der gesamte Betrag steuerpflichtig. Auch müssen Sachbezüge **tatsächlich Sachleistungen** sein — reine Geldzahlungen fallen nicht darunter. Unser [Gehaltserhöhung-Rechner](/finanzen/gehaltserhoehung-rechner) zeigt Ihnen parallel, was eine klassische Brutto-Erhöhung bringt, und der [Brutto-Netto-Rechner](/finanzen/brutto-netto-rechner) hilft Ihnen bei der exakten Berechnung Ihrer Abgaben.
+
+**Tipp für die Gehaltsverhandlung**
+
+Gehen Sie mit einer konkreten Liste in die Verhandlung. Viele Arbeitgeber sind bei steuerfreien Extras flexibler als bei einer Bruttoerhöhung, weil sie auf beide Seiten SV-Beiträge sparen. Ein Deutschlandticket, ein 50-€-Sachbezug plus Essenszuschuss kombiniert ergibt in Summe rund **250 € netto pro Monat** — ein Wert, für den Sie in Steuerklasse I etwa **400 bis 450 € Brutto-Erhöhung** bräuchten. Für Ihren Chef ist das günstiger, für Sie netto mehr wert.`,
+    faq: [
+      {
+        frage: 'Lohnt sich eine Gehaltserhöhung oder Sachbezüge mehr?',
+        antwort: 'In den meisten Fällen sind steuerfreie Sachbezüge attraktiver, weil weder Lohnsteuer noch Sozialabgaben anfallen. Von 200 € Brutto-Erhöhung bleiben in Steuerklasse I nur rund 105 bis 120 € netto — ein 58-€-Deutschlandticket bringt dagegen 58 € netto ohne Abzug. Der Rechner zeigt für Ihre Situation die optimale Lösung.',
+      },
+      {
+        frage: 'Wie hoch ist die Sachbezugsfreigrenze 2026?',
+        antwort: 'Die Freigrenze nach § 8 Abs. 2 EStG liegt bei 50 € pro Monat. Wichtig: Es ist eine Freigrenze, kein Freibetrag — schon ein Cent darüber macht den gesamten Betrag steuer- und sozialabgabenpflichtig. Der Sachbezug darf zudem keine reine Geldleistung sein, sondern muss echte Sachleistung (z. B. Gutschein, Tankkarte, Warenkarte) sein.',
+      },
+      {
+        frage: 'Was ist der maximale steuerfreie Essenszuschuss?',
+        antwort: 'Der Arbeitgeber kann 2026 einen Essenszuschuss bis rund 7,23 € pro Arbeitstag steuerfrei gewähren. Bei 20 Arbeitstagen pro Monat sind das etwa 144,60 €. Abgewickelt wird das meist über digitale Meal-Voucher-Anbieter — eingelöst werden können die Gutscheine in Restaurants, Supermärkten oder Bäckereien.',
+      },
+      {
+        frage: 'Ist das Deutschlandticket vom Arbeitgeber steuerfrei?',
+        antwort: 'Ja. Zuschüsse des Arbeitgebers zum Deutschlandticket (49 €) sind in voller Höhe steuer- und sozialabgabenfrei — vorausgesetzt, der Zuschuss wird zusätzlich zum ohnehin geschuldeten Arbeitslohn gewährt. Auch die Monatskarte des ÖPNV in Ihrer Stadt fällt unter die Jobticket-Regelung.',
+      },
+      {
+        frage: 'Lohnt sich BAV als Alternative zur Gehaltserhöhung?',
+        antwort: 'Heute sehen Sie 0 € mehr netto — aber die BAV spart in der Ansparphase Steuern und Sozialabgaben. Der Arbeitgeber ist außerdem gesetzlich verpflichtet, bei der Entgeltumwandlung 15 % Zuschuss dazuzulegen. In der Rentenphase werden die Leistungen dann besteuert. Wer langfristig denkt und Steuern stundet, kann mit BAV attraktive Effekte erzielen — wer heute mehr Netto braucht, greift besser zu Jobticket oder Sachbezug.',
+      },
+      {
+        frage: 'Kann ich mein Gehalt einfach in Sachbezüge umwandeln?',
+        antwort: 'In der Regel nein. Die steuerlichen Vergünstigungen setzen voraus, dass die Leistung zusätzlich zum ohnehin geschuldeten Arbeitslohn gewährt wird. Eine reine Gehaltsumwandlung erkennt das Finanzamt bei Sachbezug, Jobticket, Essenszuschuss und Internet-Pauschale nicht an. Ausnahme ist die betriebliche Altersvorsorge — dort ist die Entgeltumwandlung gesetzlich ausdrücklich erlaubt.',
+      },
+    ],
+  },
 ];

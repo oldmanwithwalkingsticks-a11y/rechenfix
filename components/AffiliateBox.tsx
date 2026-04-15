@@ -109,6 +109,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'kindergeld': 'WISO Steuer führt die Günstigerprüfung automatisch durch und holt das Maximum für Familien heraus.',
     'erbschaft': 'Erbschaft in der Steuererklärung korrekt angeben — WISO Steuer führt Sie durch alle Angaben.',
     'gehaltserhoehung': 'Bei Gehaltssprung steigt oft die Steuerlast — WISO Steuer holt das Maximum aus Ihrer Steuererklärung.',
+    'nettolohn': 'Sachbezüge und Gehaltsextras korrekt in der Steuererklärung angeben — WISO Steuer hilft.',
   },
   smartsteuer: {
     'brutto-netto': 'Online-Steuererklärung machen und Geld vom Finanzamt zurückholen.',

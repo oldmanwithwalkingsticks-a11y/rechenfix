@@ -118,6 +118,8 @@ import ElternzeitRechner from '@/components/rechner/ElternzeitRechner';
 import WitwenrenteRechner from '@/components/rechner/WitwenrenteRechner';
 import KurzarbeitergeldRechner from '@/components/rechner/KurzarbeitergeldRechner';
 import RiesterRechner from '@/components/rechner/RiesterRechner';
+import FuehrerscheinRechner from '@/components/rechner/FuehrerscheinRechner';
+import NettolohnOptimiererRechner from '@/components/rechner/NettolohnOptimiererRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -248,6 +250,8 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'witwenrente-rechner': WitwenrenteRechner,
   'kurzarbeitergeld-rechner': KurzarbeitergeldRechner,
   'riester-rechner': RiesterRechner,
+  'fuehrerschein-rechner': FuehrerscheinRechner,
+  'nettolohn-optimierer': NettolohnOptimiererRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
