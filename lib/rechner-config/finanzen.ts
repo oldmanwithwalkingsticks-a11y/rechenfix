@@ -1803,4 +1803,60 @@ Zahlt der Arbeitnehmer eine **monatliche Eigenbeteiligung** (z. B. 100 €), min
       { frage: 'Kann ich die Einzelbewertung nutzen?', antwort: 'Ja — die Einzelbewertung (0,002 % × km × Fahrten) lohnt sich, wenn Sie weniger als 15 Tage pro Monat ins Büro fahren, z. B. bei Homeoffice oder Außendienst. Statt der pauschalen 0,03 % wird der Arbeitsweg dann nur mit den tatsächlichen Fahrten angesetzt. Dokumentation pflicht.' },
     ],
   },
+  {
+    slug: 'witwenrente-rechner',
+    titel: 'Witwenrente-Rechner',
+    beschreibung: 'Witwenrente berechnen: Große und kleine Witwenrente, Einkommensanrechnung und Rentenanspruch.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Witwenrente-Rechner 2026 — Höhe & Einkommensanrechnung | Rechenfix',
+    metaDescription: 'Witwenrente kostenlos berechnen: Große und kleine Witwenrente, Freibetrag, Einkommensanrechnung und Sterbevierteljahr mit Rechenweg.',
+    keywords: ['witwenrente rechner', 'witwenrente berechnen', 'witwerrente', 'große witwenrente', 'kleine witwenrente', 'witwenrente einkommensanrechnung', 'witwenrente freibetrag', 'sterbevierteljahr', 'witwenrente höhe'],
+    icon: '🕊️',
+    formel: 'Große Witwenrente = 55 % × Rente Verstorbener (neues Recht) bzw. 60 % (altes Recht) | Kleine Witwenrente = 25 % × Rente Verstorbener (max. 24 Monate) | Freibetrag = 26,4 × Rentenwert + 5,6 × Rentenwert pro Kind | Anrechnung = 40 % des übersteigenden Nettoeinkommens',
+    beispiel: 'Verstorbener: 1.500 €/Monat Rente, Hinterbliebene: 1.800 €/Netto, 0 Kinder, neues Recht → Grundanspruch: 55 % × 1.500 = 825 € | Freibetrag: 26,4 × 39,32 ≈ 1.038 € | Anrechenbar: 1.800 − 1.038 = 762 € | Abzug: 40 % × 762 = 305 € | Auszahlung: 825 − 305 = 520 €/Monat. Sterbevierteljahr: 3 × 1.500 = 4.500 €.',
+    erklaerung: `**Was ist die Witwenrente und wer hat Anspruch?**
+
+Die **Witwenrente** (offiziell „Witwen- und Witwerrente") ist eine **Hinterbliebenenrente** der Deutschen Rentenversicherung. Sie soll den wegfallenden Unterhalt des verstorbenen Ehepartners teilweise ersetzen und wird **nicht automatisch** ausgezahlt — sie muss nach dem Todesfall ausdrücklich beantragt werden. Anspruch haben Witwen und Witwer, deren Ehepartner zum Zeitpunkt des Todes mindestens **5 Jahre rentenversichert** war (allgemeine Wartezeit). Diese Wartezeit gilt als vorzeitig erfüllt bei Arbeitsunfall oder Wehrdienstbeschädigung. Auch eingetragene Lebenspartner haben seit 2005 denselben Anspruch. Eheleute, die **nach dem 01.01.2002** geheiratet haben, fallen unter das **neue Recht** mit geringfügig reduzierten Prozentsätzen (siehe unten).
+
+**Große vs. kleine Witwenrente — was ist der Unterschied?**
+
+Die **große Witwenrente** beträgt im neuen Recht **55 Prozent** (im alten Recht: 60 Prozent) der Rente, die der Verstorbene bei voller Erwerbsminderung gehabt hätte oder bereits bezog. Anspruch auf die große Witwenrente besteht, wenn die hinterbliebene Person mindestens **47 Jahre alt** ist, **ein Kind unter 18 Jahren erzieht**, oder **voll erwerbsgemindert** ist. Die große Witwenrente wird **unbefristet** gezahlt, solange die Voraussetzungen erfüllt sind.
+
+Die **kleine Witwenrente** beträgt **25 Prozent** der Rente des Verstorbenen und wird gezahlt, wenn keine der Voraussetzungen für die große Witwenrente erfüllt ist. Im **neuen Recht ist sie auf 24 Monate (2 Jahre) befristet** — im alten Recht wird sie dagegen unbefristet weitergezahlt. Nach Ablauf der kleinen Witwenrente kann unter bestimmten Umständen (z. B. Erreichen des 47. Lebensjahres) in die große Witwenrente gewechselt werden.
+
+**Sterbevierteljahr: Erste 3 Monate volle Rente**
+
+In den **ersten drei Monaten** nach dem Todesfall wird das sogenannte **Sterbevierteljahr** gezahlt: Die Hinterbliebenen erhalten in dieser Zeit die **volle Rente des Verstorbenen** (100 Prozent), ohne Einkommensanrechnung. Das soll helfen, die finanzielle Umstellung nach dem Tod des Partners zu bewältigen. Erst **ab dem vierten Monat** greift die reguläre Berechnung mit 55 % bzw. 25 % und der Einkommensanrechnung. Viele Rentenversicherungen zahlen das Sterbevierteljahr als Einmalbetrag aus, sobald der Antrag gestellt ist.
+
+**Einkommensanrechnung: So wird gekürzt**
+
+Eigenes Einkommen der Hinterbliebenen wird auf die Witwenrente angerechnet — aber nur, soweit es einen **Freibetrag** übersteigt. Der Grundfreibetrag beträgt **26,4 × dem aktuellen Rentenwert** (2026: etwa 39,32 € = rund 1.038 € monatlich). Für **jedes waisenrentenberechtigte Kind** erhöht sich der Freibetrag um zusätzlich **5,6 × dem Rentenwert** (etwa 220 €). Vom Einkommen über dem Freibetrag werden **40 Prozent** auf die Witwenrente angerechnet.
+
+**Rechenbeispiel:** Witwe mit 1.800 € Nettoeinkommen, 0 Kinder, Rente des Verstorbenen 1.500 €, neues Recht:
+
+- Grundanspruch: 55 % × 1.500 € = 825 €
+- Freibetrag: 1.038 €
+- Anrechenbares Einkommen: 1.800 − 1.038 = 762 €
+- Abzug: 40 % × 762 € = 305 €
+- Auszahlung: 825 − 305 = **520 € pro Monat**
+
+Als „Einkommen" zählen u. a. Arbeitsentgelt, eigene Renten, Lohnersatzleistungen und Mieteinnahmen — nicht dagegen Kindergeld oder Grundrentenzuschläge. Wer die eigene Rente mit unserem [Rentenrechner](/finanzen/rentenrechner) grob schätzt, kann früh erkennen, wie stark die Anrechnung ausfallen wird.
+
+**Wiederheirat und Abfindung**
+
+Heiratet die Witwe oder der Witwer erneut, **erlischt der Anspruch** auf die Witwenrente. Als einmalige Abfindung werden in diesem Fall **24 Monatsrenten** gezahlt (sogenannte **Witwenrentenabfindung**). Wird die neue Ehe später geschieden oder der neue Partner stirbt, kann die frühere Witwenrente als **Wiederauflebende Rente** beantragt werden — dann allerdings unter Anrechnung einer eventuellen neuen Hinterbliebenenrente.
+
+**Wenn die Witwenrente nicht reicht**
+
+In vielen Fällen reicht die Witwenrente allein nicht aus, um den Lebensunterhalt zu decken — besonders bei geringem eigenen Einkommen oder wenn die Hinterbliebene nie oder nur kurz berufstätig war. In solchen Fällen kommt ergänzend **Grundsicherung im Alter und bei Erwerbsminderung** in Betracht, die nach denselben Regeln wie das [Bürgergeld](/finanzen/buergergeld-rechner) berechnet wird. Auch **Wohngeld** oder **Pflegegeld** können beantragt werden. Seit 2021 gibt es zudem den **Grundrentenzuschlag** für langjährig Versicherte mit geringem Einkommen — dieser wird nicht auf die Witwenrente angerechnet.`,
+    faq: [
+      { frage: 'Wie hoch ist die Witwenrente?', antwort: 'Die große Witwenrente beträgt 55 % (neues Recht, Heirat ab 2002) bzw. 60 % (altes Recht) der Rente des Verstorbenen. Die kleine Witwenrente beträgt 25 % und ist im neuen Recht auf 24 Monate befristet. In den ersten 3 Monaten nach dem Todesfall wird im Sterbevierteljahr die volle Rente des Verstorbenen gezahlt.' },
+      { frage: 'Was ist der Unterschied zwischen großer und kleiner Witwenrente?', antwort: 'Die große Witwenrente wird gezahlt, wenn die hinterbliebene Person mindestens 47 Jahre alt ist, ein Kind unter 18 erzieht oder voll erwerbsgemindert ist. Sie wird unbefristet gezahlt. Die kleine Witwenrente gilt für alle anderen Fälle, beträgt nur 25 % und ist im neuen Recht auf 2 Jahre befristet.' },
+      { frage: 'Wie funktioniert die Einkommensanrechnung?', antwort: 'Eigenes Einkommen über dem Freibetrag (ca. 1.038 € plus 220 € pro Kind) wird zu 40 % auf die Witwenrente angerechnet. Beispiel: Bei 1.800 € Netto und 0 Kindern sind 762 € anrechenbar, davon 40 % = 305 € Abzug. Die Witwenrente wird um diesen Betrag gekürzt, mindestens aber auf 0 €.' },
+      { frage: 'Was ist das Sterbevierteljahr?', antwort: 'In den ersten 3 Monaten nach dem Todesfall erhält die Hinterbliebene die volle Rente des Verstorbenen (100 %), ohne Einkommensanrechnung. Das Sterbevierteljahr soll helfen, die finanzielle Umstellung zu bewältigen. Ab dem 4. Monat gelten dann die regulären 55 % bzw. 25 % mit Einkommensanrechnung.' },
+      { frage: 'Was passiert bei Wiederheirat?', antwort: 'Bei Wiederheirat erlischt der Anspruch auf die Witwenrente. Als Einmalzahlung werden 24 Monatsrenten als Witwenrentenabfindung gezahlt. Wird die neue Ehe geschieden oder der neue Partner stirbt, kann die frühere Witwenrente als wiederauflebende Rente neu beantragt werden.' },
+      { frage: 'Muss ich die Witwenrente beantragen?', antwort: 'Ja, die Witwenrente wird nicht automatisch ausgezahlt. Sie muss bei der Deutschen Rentenversicherung beantragt werden — am besten innerhalb von 12 Monaten nach dem Todesfall, dann wird rückwirkend ab dem Todestag gezahlt. Bei späteren Anträgen gibt es maximal 12 Monate Rückzahlung.' },
+    ],
+  },
 ];

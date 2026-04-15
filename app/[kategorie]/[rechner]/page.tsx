@@ -113,6 +113,8 @@ import ArbeitslosengeldRechner from '@/components/rechner/ArbeitslosengeldRechne
 import GrundsteuerRechner from '@/components/rechner/GrundsteuerRechner';
 import MidijobRechner from '@/components/rechner/MidijobRechner';
 import FirmenwagenRechner from '@/components/rechner/FirmenwagenRechner';
+import ElternzeitRechner from '@/components/rechner/ElternzeitRechner';
+import WitwenrenteRechner from '@/components/rechner/WitwenrenteRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -238,6 +240,8 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'grundsteuer-rechner': GrundsteuerRechner,
   'midijob-rechner': MidijobRechner,
   'firmenwagenrechner': FirmenwagenRechner,
+  'elternzeit-rechner': ElternzeitRechner,
+  'witwenrente-rechner': WitwenrenteRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
