@@ -128,6 +128,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'freelancer': 'Angebote, Rechnungen und Buchhaltung für Freelancer — alles in einem Tool.',
     'skonto': 'Rechnungen mit Skonto-Konditionen erstellen und Zahlungsfristen verwalten — mit Lexware Office.',
     'gmbh': 'Als GmbH-Geschäftsführer? Lexware Office übernimmt Buchhaltung, Rechnungen und Lohnabrechnung in einem Tool.',
+    'afa': 'Anlagenverwaltung und AfA automatisch berechnen — mit Lexware Office für Selbstständige.',
   },
   check24: {
     'strom': 'Stromtarife vergleichen und bis zu 500 € pro Jahr sparen.',
@@ -145,6 +146,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'leasing': 'Autofinanzierung als Alternative zum Leasing? Kredite vergleichen auf CHECK24.',
     'photovoltaik': 'Günstigen Reststrom-Tarif finden — Stromanbieter vergleichen auf CHECK24.',
     'eauto': 'Kfz-Versicherung für Ihr E-Auto vergleichen — oft günstiger als für Verbrenner.',
+    'vorfaelligkeit': 'Umschuldung prüfen — günstigere Konditionen finden auf CHECK24.',
   },
   congstar: {
     'handykosten': 'congstar bietet faire Tarife ab 5 €/Monat — monatlich kündbar und ohne versteckte Kosten.',
@@ -193,6 +195,7 @@ const CONTEXT_DEEPLINKS: Partial<Record<ProgramId, Record<string, string>>> = {
     'leasing': 'https://www.check24.net/kredit/',
     'photovoltaik': 'https://www.check24.net/strom/',
     'eauto': 'https://www.check24.net/kfz-versicherung/',
+    'vorfaelligkeit': 'https://www.check24.net/kredit/',
     'default': 'https://www.check24.net/',
   },
   verivox: {

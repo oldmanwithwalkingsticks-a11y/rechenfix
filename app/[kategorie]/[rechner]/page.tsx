@@ -130,6 +130,8 @@ import PythagorasRechner from '@/components/rechner/PythagorasRechner';
 import GleichungsloeserRechner from '@/components/rechner/GleichungsloeserRechner';
 import KleidergroessenRechner from '@/components/rechner/KleidergroessenRechner';
 import EhegattenunterhaltRechner from '@/components/rechner/EhegattenunterhaltRechner';
+import AfaRechner from '@/components/rechner/AfaRechner';
+import VorfaelligkeitsentschaedigungRechner from '@/components/rechner/VorfaelligkeitsentschaedigungRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -272,6 +274,8 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'gleichungsrechner': GleichungsloeserRechner,
   'kleidergroessen-rechner': KleidergroessenRechner,
   'ehegattenunterhalt-rechner': EhegattenunterhaltRechner,
+  'afa-rechner': AfaRechner,
+  'vorfaelligkeitsentschaedigung-rechner': VorfaelligkeitsentschaedigungRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

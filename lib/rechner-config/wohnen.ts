@@ -1107,4 +1107,82 @@ Wer eine **PV-Anlage** besitzt, kann Filterpumpe und Wärmepumpe überwiegend mi
       },
     ],
   },
+  {
+    slug: 'vorfaelligkeitsentschaedigung-rechner',
+    titel: 'Vorfälligkeitsentschädigung-Rechner',
+    beschreibung: 'Vorfälligkeitsentschädigung berechnen: Geschätzte Kosten bei vorzeitiger Kreditablösung nach der Aktiv-Passiv-Methode.',
+    kategorie: 'Wohnen & Energie',
+    kategorieSlug: 'wohnen',
+    metaTitle: 'Vorfälligkeitsentschädigung-Rechner 2026 — VFE berechnen | Rechenfix',
+    metaDescription: 'Vorfälligkeitsentschädigung berechnen: VFE bei vorzeitiger Kreditablösung kostenlos schätzen — mit 10-Jahres-Sonderkündigungsrecht.',
+    keywords: ['vorfälligkeitsentschädigung berechnen', 'vfe rechner', 'kredit ablösen', 'baufinanzierung vorzeitig kündigen', 'aktiv passiv methode', '10 jahre sonderkündigungsrecht', '§ 489 bgb', 'umschuldung', 'restschuld ablösen'],
+    icon: '🏦',
+    formel: 'Zinsmarge = Vertragszins − Marktzins. VFE ≈ Restschuld × Zinsmarge% × Restlaufzeit × 0,85 + Bearbeitungsgebühr (ca. 300 €). Bei Zinsmarge ≤ 0: keine VFE.',
+    beispiel: 'Restschuld 150.000 €, Vertragszins 2,5 %, Marktzins 3,5 %, Restlaufzeit 5 Jahre → Zinsmarge 0 %, keine VFE. Bei 4,0 % vs. 2,5 % → 1,5 % × 150.000 × 5 × 0,85 ≈ 9.562 € + 300 € Gebühr.',
+    erklaerung: `**Vorfälligkeitsentschädigung-Rechner — was Banken bei vorzeitiger Kreditablösung verlangen dürfen**
+
+Wer seinen Immobilienkredit **vor Ablauf der Zinsbindung** zurückzahlen möchte — sei es beim Hausverkauf, bei einer Erbschaft oder weil eine günstigere Finanzierung lockt —, muss der Bank in der Regel eine **Vorfälligkeitsentschädigung** (kurz: VFE) zahlen. Die Idee dahinter: Die Bank hat mit Ihnen einen festen Zinssatz über einen bestimmten Zeitraum vereinbart und darauf kalkuliert, über die Laufzeit Zinsen zu verdienen. Wird der Kredit vorzeitig abgelöst, muss sie das frei werdende Geld zu den aktuellen Konditionen neu anlegen. Liegen diese **unter** Ihrem Vertragszins, entgehen der Bank Zinseinnahmen — und genau diesen Schaden dürfen sie Ihnen in Rechnung stellen. Unser VFE-Rechner schätzt die Höhe nach der offiziellen **Aktiv-Passiv-Methode**.
+
+**Rechtsgrundlage und Rechtsprechung**
+
+Die Vorfälligkeitsentschädigung ist in **§ 490 Abs. 2 BGB** (Kündigung durch den Darlehensnehmer bei Immobiliar-Verbraucherdarlehen) und in der ständigen Rechtsprechung des Bundesgerichtshofs geregelt. Der BGH hat in mehreren Urteilen (zuletzt **XI ZR 388/14**) klargestellt: Die Bank darf ihren **tatsächlichen Zinsschaden** verlangen, muss sich aber **ersparte Verwaltungskosten** und das **ersparte Risiko** anrechnen lassen. In der Praxis wird pauschal mit einem **Abschlagsfaktor von ca. 15 %** gearbeitet — entsprechend wird die Zinsschaden-Summe mit **0,85** multipliziert. Zusätzlich fällt eine **Bearbeitungsgebühr** von typischerweise 200 bis 400 € an.
+
+**Die Aktiv-Passiv-Methode einfach erklärt**
+
+Die Aktiv-Passiv-Methode vergleicht zwei Alternativen für die Bank:
+- **Aktiv-Seite:** Hätten Sie normal weitergezahlt, hätte die Bank über die Restlaufzeit **Zinsen von Ihnen** bekommen (Ihr Vertragszins).
+- **Passiv-Seite:** Nach Ihrer vorzeitigen Rückzahlung legt die Bank das Geld zum **aktuellen Kapitalmarktzins** wieder an — typischerweise in Pfandbriefe mit gleicher Restlaufzeit.
+
+Die Differenz zwischen beiden Werten ist der **Zinsschaden**. Der Rechner vereinfacht den Barwertvergleich zu einer jährlichen Betrachtung: **Zinsmarge × Restschuld × Restlaufzeit × 0,85**. Für eine exakte Berechnung brauchen Sie die **individuelle Tilgungsplanung** (die Restschuld sinkt ja durch die laufenden Raten). Unsere Schätzung ist absichtlich konservativ — die tatsächliche Forderung der Bank liegt oft **nahe**, aber selten **höher**.
+
+**Der wichtigste Fall: gar keine VFE**
+
+Wenn der **aktuelle Marktzins über Ihrem Vertragszins** liegt (wie es im Umfeld steigender Zinsen seit 2022 oft der Fall ist), hat die Bank **keinen Zinsschaden** — sie kann das Geld sogar profitabler anlegen. In diesem Fall darf sie **keine Vorfälligkeitsentschädigung verlangen**. Manche Banken versuchen dennoch, eine pauschale "Bearbeitungsgebühr" durchzusetzen — auch das ist rechtlich oft angreifbar. Lassen Sie sich jede VFE-Forderung schriftlich begründen und prüfen Sie den Brief notfalls durch einen Anwalt oder die Verbraucherzentrale.
+
+**Das 10-Jahres-Sonderkündigungsrecht nach § 489 BGB — der wichtigste Spartipp**
+
+Viele Immobilienkredite haben eine Zinsbindung von 15, 20 oder mehr Jahren. Nach § 489 Abs. 1 Nr. 2 BGB können Sie den Kredit aber **immer nach 10 Jahren** kündigen — gerechnet ab der **vollständigen Auszahlung** des Darlehens. Die Kündigungsfrist beträgt **6 Monate**. Wichtig: **Es fällt keinerlei Vorfälligkeitsentschädigung an.** Sie zahlen lediglich die Restschuld und beenden den Vertrag. Dieses Sonderkündigungsrecht ist unabdingbar — kein Kreditvertrag kann es wirksam ausschließen.
+
+Prüfen Sie also **vor** jeder Überlegung zur Umschuldung: Wann genau wurde das Darlehen ausgezahlt? Sind die 10 Jahre schon um oder fast erreicht? Wenn ja, warten Sie ggf. die paar Monate ab und sparen sich die komplette VFE. Bei der Umschuldung danach kann der [Kreditrechner](/finanzen/kreditrechner) oder unser [Baufinanzierungsrechner](/wohnen/baufinanzierung-rechner) helfen, die neuen Raten zu kalkulieren.
+
+**Wann lohnt sich die vorzeitige Ablösung trotz VFE?**
+
+Eine Umschuldung lohnt sich nur, wenn die **Zinsersparnis über die Restlaufzeit größer ist als die VFE plus alle Nebenkosten** (Notar, Grundbuch, neue Bankgebühren). Faustregel: Bei einer Zinsdifferenz von mindestens **1 Prozentpunkt** und einer Restlaufzeit von mindestens **3 Jahren** sollte sich die Rechnung prüfen lassen. Bei einem Hausverkauf gilt: Die VFE ist in der Regel auch nicht verhandelbar — sie wird dann direkt vom Verkaufserlös abgezogen. In den ersten 10 Jahren gibt es aber ein wichtiges Sonderrecht: Wer die Immobilie aus einem **berechtigten Grund** veräußern muss (z. B. berufsbedingter Umzug, Trennung), kann die VFE in einigen Fällen mindern lassen.
+
+**Was unser Rechner liefert**
+
+- Schätzung der VFE nach der Aktiv-Passiv-Methode
+- Automatische Erkennung: Bei **Zinsmarge ≤ 0** keine VFE
+- Vollständiger Rechenweg mit Zwischenschritten
+- Hinweis auf das **10-Jahres-Sonderkündigungsrecht**
+- Bearbeitungsgebühr-Pauschale mit eingerechnet
+
+**Wichtiger Hinweis:** Unsere Berechnung ist eine **Schätzung**. Die exakte VFE-Berechnung hängt von der individuellen Tilgungsstruktur, der Art der Wiederanlage (Hypothekenpfandbriefe vs. Staatsanleihen) und dem konkreten Vertrag ab. Lassen Sie sich die Forderung der Bank **immer schriftlich** detailliert aufschlüsseln und ziehen Sie im Zweifel die Verbraucherzentrale oder einen Fachanwalt für Bankrecht hinzu.`,
+    faq: [
+      {
+        frage: 'Was ist eine Vorfälligkeitsentschädigung?',
+        antwort: 'Die Vorfälligkeitsentschädigung (VFE) ist der finanzielle Ausgleich, den eine Bank verlangen darf, wenn Sie Ihr Immobiliendarlehen vor Ablauf der Zinsbindung zurückzahlen. Rechtsgrundlage ist § 490 BGB. Die Bank entschädigt sich damit für entgangene Zinseinnahmen, weil sie das Geld zum (meist niedrigeren) aktuellen Marktzins wieder anlegen muss. Bei einer Ablösung über das gesetzliche Sonderkündigungsrecht nach § 489 BGB fällt dagegen keine VFE an.',
+      },
+      {
+        frage: 'Wie wird die VFE berechnet?',
+        antwort: 'Banken verwenden die sogenannte Aktiv-Passiv-Methode: Sie vergleichen den Zinsertrag aus Ihrem Darlehen mit dem Zinsertrag einer Wiederanlage zum aktuellen Marktzins (z. B. Hypothekenpfandbriefe). Die Differenz ist der Zinsschaden. Davon werden ersparte Verwaltungs- und Risikokosten abgezogen — in der Praxis meist pauschal mit dem Faktor 0,85. Zusätzlich fällt eine Bearbeitungsgebühr von 200 bis 400 € an. Die exakte Berechnung berücksichtigt auch die vertraglich vereinbarte Tilgung und Sondertilgungsrechte.',
+      },
+      {
+        frage: 'Wann muss ich gar keine VFE zahlen?',
+        antwort: 'In mehreren Fällen: (1) Wenn der aktuelle Marktzins über Ihrem Vertragszins liegt — dann hat die Bank keinen Zinsschaden. (2) Nach 10 Jahren Zinsbindung durch das Sonderkündigungsrecht nach § 489 BGB (6 Monate Frist). (3) Bei fehlerhaften Widerrufsbelehrungen im Kreditvertrag, die ggf. den Widerruf auch Jahre später ermöglichen. (4) In bestimmten Härtefällen wie schwerer Krankheit, Arbeitslosigkeit oder berechtigtem Verkaufsinteresse — hier müssen Sie aber konkret mit der Bank verhandeln.',
+      },
+      {
+        frage: 'Was ist das 10-Jahres-Sonderkündigungsrecht?',
+        antwort: 'Nach § 489 Abs. 1 Nr. 2 BGB dürfen Darlehensnehmer jeden Immobilienkredit 10 Jahre nach vollständiger Auszahlung mit einer Frist von 6 Monaten kündigen — ohne Vorfälligkeitsentschädigung. Das Recht ist gesetzlich unabdingbar, es kann also nicht vertraglich ausgeschlossen werden. Die 10 Jahre laufen ab Valutierung (Auszahlung), nicht ab Vertragsabschluss. Prüfen Sie vor jeder Umschuldung zuerst, ob dieses Recht für Sie schon zur Verfügung steht — es ist der mit Abstand günstigste Ausstiegsweg.',
+      },
+      {
+        frage: 'Lohnt sich eine Umschuldung trotz Vorfälligkeitsentschädigung?',
+        antwort: 'Nur wenn die Zinsersparnis über die Restlaufzeit die VFE plus Umschuldungsnebenkosten deutlich übersteigt. Faustregel: Zinsdifferenz von mindestens 1 Prozentpunkt, Restlaufzeit von mindestens 3 Jahren. Beispielrechnung: Bei 150.000 € Restschuld und 1 % niedrigerem Zins sparen Sie ca. 1.500 € pro Jahr an Zinsen. Eine VFE von 8.000 € rechnet sich dann erst nach etwa 5–6 Jahren. Unser Rechner liefert die VFE-Schätzung, mit dem Baufinanzierungsrechner können Sie die neue Rate gegenrechnen.',
+      },
+      {
+        frage: 'Kann die Bank die VFE frei berechnen?',
+        antwort: 'Nein. Der Bundesgerichtshof hat in mehreren Urteilen (u. a. XI ZR 388/14) klare Vorgaben gemacht. Die Bank muss von der Zinsschadenssumme die ersparten Verwaltungskosten, das ersparte Risiko und die Möglichkeit von Sondertilgungen abziehen. Eine zu hoch berechnete VFE ist nicht selten. Lassen Sie sich die Berechnung immer schriftlich aufschlüsseln. Die Verbraucherzentrale bietet günstige Prüfungen an, mit denen sich oft mehrere Tausend Euro sparen lassen. Im Streitfall hilft ein Fachanwalt für Bankrecht weiter.',
+      },
+    ],
+  },
 ];

@@ -2096,4 +2096,77 @@ Verluste aus Kapitalvermögen werden bei Ihrer Bank in einem separaten Verlustve
       },
     ],
   },
+  {
+    slug: 'afa-rechner',
+    titel: 'AfA-Rechner',
+    beschreibung: 'Abschreibung berechnen: Lineare und degressive AfA für Anlagegüter, Immobilien und GWG mit AfA-Plan und Rechenweg.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'AfA-Rechner 2026 — Abschreibung berechnen (linear & degressiv) | Rechenfix',
+    metaDescription: 'Abschreibung berechnen: Lineare und degressive AfA für Anlagegüter, Immobilien und GWG kostenlos — inklusive AfA-Plan und Rechenweg.',
+    keywords: ['afa rechner', 'abschreibung berechnen', 'afa linear', 'afa degressiv', 'gwg abschreibung', 'afa tabelle', 'nutzungsdauer', 'anlagevermögen abschreibung', 'restbuchwert berechnen', 'afa pro rata temporis'],
+    icon: '📉',
+    formel: 'Linear: AfA = Anschaffungskosten / Nutzungsdauer. Degressiv: AfA_Jahr = Restbuchwert × Satz%. GWG (≤ 800 € netto): Sofortabschreibung im Anschaffungsjahr.',
+    beispiel: 'PC für 2.400 € netto, Nutzungsdauer 3 Jahre, linear: 800 €/Jahr bzw. 66,67 €/Monat. Anschaffung am 01.07. → erstes Jahr anteilig 400 € (6/12).',
+    erklaerung: `**AfA-Rechner — Abschreibung für Abnutzung verständlich erklärt**
+
+Jedes Unternehmen, jeder Freiberufler und jeder Vermieter kennt den Begriff: **Abschreibung für Abnutzung**, kurz AfA. Wer ein Wirtschaftsgut kauft, das länger als ein Jahr genutzt wird, darf die Anschaffungskosten nicht sofort komplett als Ausgabe absetzen. Stattdessen wird der Kaufpreis **über die Nutzungsdauer verteilt** — Jahr für Jahr ein Stück. Dieses Stück ist die AfA. Unser AfA-Rechner zeigt Ihnen sekundenschnell, wie hoch die jährliche Abschreibung ausfällt, wie sich der Restbuchwert entwickelt und welche Methode in Ihrem Fall sinnvoll ist.
+
+**Warum überhaupt abschreiben?**
+
+Die Idee hinter der AfA ist das handelsrechtliche und steuerliche **Abbilden des Werteverzehrs**. Ein Computer, ein Firmenwagen, eine Maschine oder ein vermietetes Haus verlieren durch Nutzung und Zeitablauf an Wert. Würden Sie die vollen Anschaffungskosten im Kaufjahr absetzen, wäre Ihr Gewinn in diesem Jahr künstlich niedrig und in den Folgejahren künstlich hoch. Die AfA sorgt für eine gerechte **periodengerechte Zuordnung** der Kosten zu den Jahren, in denen das Wirtschaftsgut tatsächlich genutzt wird — und glättet damit Ihre Gewinne.
+
+Steuerlich geregelt ist die AfA in **§ 7 EStG**. Die typischen Nutzungsdauern finden Sie in den **AfA-Tabellen des Bundesfinanzministeriums (BMF)**, die nach Branchen und Anlageklassen gegliedert sind. Beispiele: PC 3 Jahre, Büromöbel 13 Jahre, Firmenwagen 6 Jahre, Wohngebäude (Bestand) 50 Jahre, neu errichtete Wohngebäude 33 Jahre (3 %). Wer zu niedrig ansetzt, riskiert einen Streit mit dem Finanzamt — wer zu hoch ansetzt, verschenkt Abschreibungsvolumen.
+
+**Die drei Methoden im Überblick**
+
+- **Lineare AfA (§ 7 Abs. 1 EStG):** Die Anschaffungskosten werden **gleichmäßig** über die Nutzungsdauer verteilt. Bei 10.000 € und 5 Jahren sind das 2.000 € pro Jahr, monatlich 166,67 €. Das ist die Standardmethode — sie ist immer zulässig und passt zu den meisten Wirtschaftsgütern.
+- **Degressive AfA (§ 7 Abs. 2 EStG):** Die AfA wird auf den **Restbuchwert** berechnet und ist in den ersten Jahren deutlich höher. Der Prozentsatz beträgt maximal das **Doppelte des linearen Satzes**, höchstens aber **25 %**. Die degressive AfA ist nicht dauerhaft zulässig — sie wurde zuletzt als Corona-Hilfe und im Rahmen des Wachstumschancengesetzes temporär eingeführt. Wichtig: Sobald die lineare Restwert-AfA günstiger ist, dürfen (und sollten) Sie **in die lineare Methode wechseln**. Unser Rechner macht diesen Wechsel automatisch.
+- **GWG — geringwertige Wirtschaftsgüter (§ 6 Abs. 2 EStG):** Wirtschaftsgüter bis **800 € netto** (952 € brutto) dürfen **im Anschaffungsjahr sofort** vollständig abgesetzt werden. Alternativ gibt es den **Sammelposten** für Güter zwischen 250 € und 1.000 €, der über 5 Jahre abgeschrieben wird — diese Variante müssen Sie für alle GWG des Jahres einheitlich wählen.
+
+**Pro rata temporis — das erste Jahr ist anteilig**
+
+Eine wichtige Feinheit: Im **Anschaffungsjahr** wird die AfA nur **zeitanteilig** für die Monate berechnet, in denen das Wirtschaftsgut schon im Betrieb war. Kaufen Sie eine Maschine am 1. Juli, dürfen Sie für das erste Jahr nur **6/12** der vollen Jahres-AfA absetzen. Im letzten Jahr der Nutzungsdauer werden die restlichen 6/12 erfasst. Unser Rechner berücksichtigt diese **Monatsregel** automatisch — geben Sie einfach das genaue Anschaffungsdatum an.
+
+**Immobilien — die Sonderrolle der Gebäude-AfA**
+
+Für Immobilien gelten eigene AfA-Sätze: **2 % pro Jahr** für Bestandsgebäude (Fertigstellung ab 1925), **2,5 %** für ältere Gebäude und **3 %** (§ 7 Abs. 4 Nr. 2 EStG) für **neu errichtete Wohngebäude** ab Baujahr 2023. Zusätzlich wurde 2023 die **degressive AfA für neue Wohngebäude** mit 5 % eingeführt (§ 7 Abs. 5a EStG) — sie läuft die ersten sechs Jahre mit 5 % auf den jeweiligen Restwert, danach erfolgt der Wechsel zur linearen AfA. Wer Vermieter ist, kann die AfA direkt in der Anlage V der Steuererklärung geltend machen. Die AfA ist oft der **größte Einzelposten** bei der Vermietungsrendite — nutzen Sie unseren [Mietrendite-Rechner](/finanzen/mietrendite-rechner), um die Gesamtrentabilität Ihrer Immobilie zu bewerten.
+
+**Was unser AfA-Rechner leistet**
+
+- **Lineare AfA** mit anteiligem ersten Jahr (pro rata temporis)
+- **Degressive AfA** mit automatischem Wechsel in die lineare Methode, wenn diese günstiger wird
+- **GWG-Sofortabschreibung** für Güter bis 800 € netto
+- Vollständiger **AfA-Plan** als Tabelle mit Jahr, AfA-Betrag, kumulierter AfA und Restbuchwert
+- Visueller **Restbuchwertverlauf** als Balken
+- Monatliche AfA für die Liquiditätsplanung
+
+Als Selbstständige oder Unternehmerin sollten Sie Ihre Anlagegüter sauber in einem Anlageverzeichnis führen. Eine Buchhaltungssoftware wie **Lexware Office** übernimmt die AfA-Berechnung automatisch und erstellt das Anlagenverzeichnis für die Steuererklärung mit. Für die Umsatzsteuer-Behandlung Ihrer Anschaffung nutzen Sie unseren [MwSt-Rechner](/finanzen/mwst-rechner) — beim AfA-Betrag werden immer die **Nettokosten** angesetzt (außer bei Kleinunternehmern, die keine Vorsteuer ziehen). Selbstständige und Freelancer finden im [Freelancer-Stundensatz-Rechner](/finanzen/freelancer-stundensatz-rechner) zusätzlich, wie AfA in die Stundensatzkalkulation einfließt.`,
+    faq: [
+      {
+        frage: 'Was bedeutet AfA?',
+        antwort: 'AfA steht für „Absetzung für Abnutzung" — das ist die steuerliche Bezeichnung für die jährliche Abschreibung eines Wirtschaftsguts. Statt die Anschaffungskosten im Kaufjahr komplett als Ausgabe zu verbuchen, werden sie über die Nutzungsdauer verteilt und jedes Jahr anteilig als Betriebsausgabe oder Werbungskosten abgezogen. Rechtsgrundlage ist § 7 EStG.',
+      },
+      {
+        frage: 'Wann ist lineare und wann degressive AfA sinnvoll?',
+        antwort: 'Die lineare AfA verteilt die Kosten gleichmäßig und ist immer zulässig — sie passt zu stabil genutzten Wirtschaftsgütern. Die degressive AfA bringt höhere Abschreibungen in den ersten Jahren und senkt dort die Steuerlast; sinnvoll ist sie, wenn Sie aktuell hohe Gewinne haben, Liquidität brauchen oder das Wirtschaftsgut in den ersten Jahren stark an Wert verliert (z. B. IT-Hardware, Fahrzeuge). Der Wechsel zur linearen Methode ist erlaubt — unser Rechner macht ihn automatisch, sobald linear günstiger wird.',
+      },
+      {
+        frage: 'Was sind GWG und bis zu welchem Betrag darf ich sofort abschreiben?',
+        antwort: 'Geringwertige Wirtschaftsgüter (GWG) sind bewegliche, abnutzbare und selbstständig nutzbare Anlagegüter bis 800 € netto (952 € brutto). Sie dürfen im Anschaffungsjahr sofort komplett als Betriebsausgabe abgezogen werden (§ 6 Abs. 2 EStG). Alternativ können Sie für GWG zwischen 250 € und 1.000 € den sogenannten Sammelposten nutzen, der über 5 Jahre abgeschrieben wird — diese Wahl gilt dann einheitlich für alle GWG des Wirtschaftsjahres.',
+      },
+      {
+        frage: 'Wie finde ich die richtige Nutzungsdauer?',
+        antwort: 'Die betriebsgewöhnliche Nutzungsdauer entnehmen Sie den AfA-Tabellen des Bundesfinanzministeriums (BMF). Dort sind Anlagegüter nach Branchen und Klassen aufgelistet — z. B. PC 3 Jahre, Büromöbel 13 Jahre, Pkw 6 Jahre, Maschinen je nach Art 5 bis 20 Jahre. Für Immobilien gelten gesetzliche AfA-Sätze (2 %, 2,5 % oder 3 %). Wer zu niedrig ansetzt, riskiert Rückfragen vom Finanzamt; wer zu hoch ansetzt, verschenkt Abschreibung.',
+      },
+      {
+        frage: 'Warum ist die AfA im ersten Jahr oft niedriger?',
+        antwort: 'Weil im Jahr der Anschaffung nur anteilig abgeschrieben wird — und zwar pro rata temporis, also monatsweise. Wer eine Maschine am 1. Juli kauft, darf im ersten Jahr nur 6/12 der vollen Jahres-AfA geltend machen. Die fehlenden 6/12 werden im Jahr nach Ablauf der Nutzungsdauer nachgeholt. Unser Rechner berücksichtigt das automatisch über das Anschaffungsdatum.',
+      },
+      {
+        frage: 'Gilt die AfA auch für Vermieter?',
+        antwort: 'Ja. Vermieter einer Immobilie können die Gebäude-AfA als Werbungskosten in der Anlage V geltend machen. Für Bestandsgebäude gelten 2 % (Baujahr ab 1925) oder 2,5 % (älter). Für neue Wohngebäude ab Baujahr 2023 sind es 3 % linear, optional 5 % degressiv in den ersten Jahren. Der Grundstücksanteil wird nicht abgeschrieben — er muss aus dem Kaufpreis herausgerechnet werden. Die AfA ist bei vermieteten Immobilien einer der größten steuerlichen Hebel.',
+      },
+    ],
+  },
 ];
