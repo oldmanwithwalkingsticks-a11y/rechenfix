@@ -1,11 +1,65 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 
 interface Props {
   rechnerName: string;
   eingaben: Record<string, unknown>;
   ergebnis: Record<string, unknown>;
+}
+
+/**
+ * Minimaler Markdown → JSX Renderer für Claude-Antworten.
+ * Unterstützt: **bold**, *italic*, Absätze (Leerzeilen), Listen (- / *).
+ * Bewusst ohne dangerouslySetInnerHTML, damit nichts HTML-injected werden kann.
+ */
+function renderInline(text: string): React.ReactNode[] {
+  // **bold** und *italic* — wir tokenisieren linear.
+  const tokens: React.ReactNode[] = [];
+  const regex = /\*\*([^*]+)\*\*|\*([^*]+)\*/g;
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+  let key = 0;
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      tokens.push(text.slice(lastIndex, match.index));
+    }
+    if (match[1] !== undefined) {
+      tokens.push(<strong key={`b${key++}`}>{match[1]}</strong>);
+    } else if (match[2] !== undefined) {
+      tokens.push(<em key={`i${key++}`}>{match[2]}</em>);
+    }
+    lastIndex = match.index + match[0].length;
+  }
+  if (lastIndex < text.length) tokens.push(text.slice(lastIndex));
+  return tokens;
+}
+
+function renderMarkdown(md: string): React.ReactNode {
+  const blocks = md.trim().split(/\n{2,}/);
+  return blocks.map((block, bi) => {
+    const lines = block.split('\n');
+    const istListe = lines.every((l) => /^\s*[-*]\s+/.test(l));
+    if (istListe) {
+      return (
+        <ul key={bi} className="list-disc pl-5 space-y-1 mb-3 last:mb-0">
+          {lines.map((l, li) => (
+            <li key={li}>{renderInline(l.replace(/^\s*[-*]\s+/, ''))}</li>
+          ))}
+        </ul>
+      );
+    }
+    return (
+      <p key={bi} className="mb-3 last:mb-0">
+        {lines.map((l, li) => (
+          <Fragment key={li}>
+            {li > 0 && <br />}
+            {renderInline(l)}
+          </Fragment>
+        ))}
+      </p>
+    );
+  });
 }
 
 export default function AiExplain({ rechnerName, eingaben, ergebnis }: Props) {
@@ -129,10 +183,8 @@ export default function AiExplain({ rechnerName, eingaben, ergebnis }: Props) {
           </div>
 
           {/* Text */}
-          <div className="px-5 py-4">
-            <p className="text-gray-800 dark:text-gray-200 text-sm leading-relaxed whitespace-pre-line">
-              {erklaerung}
-            </p>
+          <div className="px-5 py-4 text-gray-800 dark:text-gray-200 text-sm leading-relaxed">
+            {renderMarkdown(erklaerung)}
           </div>
 
           {/* Actions + Hinweis */}
