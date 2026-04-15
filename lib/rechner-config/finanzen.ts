@@ -2020,4 +2020,75 @@ Gehen Sie mit einer konkreten Liste in die Verhandlung. Viele Arbeitgeber sind b
       },
     ],
   },
+  {
+    slug: 'kapitalertragsteuer-rechner',
+    titel: 'Kapitalertragsteuer-Rechner',
+    beschreibung: 'Abgeltungssteuer auf Zinsen, Dividenden und Kursgewinne berechnen — inkl. Sparerpauschbetrag, Teilfreistellung und Kirchensteuer.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Kapitalertragsteuer-Rechner 2026 — Abgeltungssteuer berechnen | Rechenfix',
+    metaDescription: 'Kapitalertragsteuer berechnen: Abgeltungssteuer auf Zinsen, Dividenden und Kursgewinne inkl. Sparerpauschbetrag und Teilfreistellung.',
+    keywords: ['kapitalertragsteuer rechner', 'abgeltungssteuer berechnen', 'kapitalertragsteuer 2026', 'sparerpauschbetrag', 'teilfreistellung etf', 'dividenden steuer', 'zinsen steuer', 'kirchensteuer kapitalerträge', 'günstigerprüfung', 'anlage kap'],
+    icon: '📈',
+    formel: 'Steuerpflichtiger Ertrag = (Ertrag − Teilfreistellung) − Sparerpauschbetrag | Abgeltungssteuer = 25 % + 5,5 % Soli + ggf. 8/9 % KiSt',
+    beispiel: 'Beispiel: 3.000 € Dividenden, Single ohne Kirchensteuer, Pauschbetrag 1.000 € noch nicht verbraucht → steuerpflichtig 2.000 € → 500 € Abgeltungssteuer + 27,50 € Soli = 527,50 €. Netto-Ertrag: 2.472,50 €.',
+    erklaerung: `<h2>Was ist die Kapitalertragsteuer?</h2>
+<p>Die Kapitalertragsteuer — auch <strong>Abgeltungssteuer</strong> genannt — ist die pauschale Steuer auf Einkünfte aus Kapitalvermögen. Seit 2009 gilt in Deutschland ein einheitlicher Satz von <strong>25 %</strong> auf Zinsen, Dividenden, Kursgewinne und ähnliche Kapitalerträge. Zusätzlich fallen <strong>5,5 % Solidaritätszuschlag</strong> auf die Steuer an (auch nach der Soli-Reform 2021 im Bereich der Kapitalerträge unverändert) sowie ggf. <strong>Kirchensteuer</strong> (8 % in Bayern und Baden-Württemberg, 9 % in allen anderen Bundesländern). Die effektive Gesamtbelastung liegt damit je nach Konstellation zwischen rund 26,38 % und 27,99 %.</p>
+
+<h2>Sparerpauschbetrag nutzen</h2>
+<p>Jedem Steuerpflichtigen steht ein jährlicher Sparerpauschbetrag zu: <strong>1.000 € für Singles</strong> und <strong>2.000 € für Ehepaare</strong> mit gemeinsamem Freistellungsauftrag (Stand 2026). Bis zu dieser Höhe bleiben Kapitalerträge komplett steuerfrei. Richten Sie dazu bei Ihrer Bank einen <strong>Freistellungsauftrag</strong> ein — ohne Freistellungsauftrag führt die Bank Abgeltungssteuer automatisch ans Finanzamt ab, und Sie müssen zu viel gezahlte Steuer erst über die Anlage KAP zurückholen.</p>
+
+<h2>Teilfreistellung bei Fonds</h2>
+<p>Seit der Investmentsteuerreform 2018 gilt bei Fondserträgen (Ausschüttungen und Verkaufsgewinne) die <strong>Teilfreistellung</strong>: Ein Teil der Erträge bleibt pauschal steuerfrei, um die Vorbelastung auf Fondsebene auszugleichen. Die Teilfreistellungsquoten im Überblick:</p>
+<ul>
+<li><strong>Aktienfonds/Aktien-ETFs</strong> (≥ 51 % Aktienquote): <strong>30 %</strong> der Erträge steuerfrei</li>
+<li><strong>Mischfonds</strong> (≥ 25 % Aktienquote): <strong>15 %</strong> der Erträge steuerfrei</li>
+<li><strong>Immobilienfonds</strong>: 60 % bzw. 80 % bei Auslandsfokus</li>
+<li><strong>Rentenfonds, Zinsen, Einzelaktien</strong>: keine Teilfreistellung</li>
+</ul>
+<p>Für einen Aktien-ETF-Sparplan bedeutet das: Nur 70 % des Gewinns werden überhaupt zur Bemessung der Abgeltungssteuer herangezogen — ein echter Renditevorteil.</p>
+
+<h2>Kirchensteuer automatisch abgeführt</h2>
+<p>Banken sind verpflichtet, einmal jährlich beim Bundeszentralamt für Steuern abzufragen, ob der Kunde kirchensteuerpflichtig ist (KiStAM-Verfahren). Sie müssen also nichts tun — die Kirchensteuer wird automatisch mit einbehalten. Wer nicht möchte, dass die Bank die Religionszugehörigkeit abfragt, kann dem Verfahren widersprechen (Sperrvermerk) — muss die Kirchensteuer dann aber über die Steuererklärung nacherklären. Die Kirchensteuer mindert übrigens die Bemessungsgrundlage der Abgeltungssteuer (§ 32d EStG), sodass die Zusatzbelastung unter dem nominalen Satz liegt.</p>
+
+<h2>Günstigerprüfung — wann lohnt die Anlage KAP?</h2>
+<p>Wer einen persönlichen Grenzsteuersatz unter 25 % hat (z. B. Studierende, Rentner mit geringen weiteren Einkünften), kann in der Steuererklärung die <strong>Günstigerprüfung</strong> beantragen. Das Finanzamt besteuert die Kapitalerträge dann mit dem niedrigeren persönlichen Steuersatz statt mit der Abgeltungssteuer — die Differenz wird erstattet. Das lohnt sich typischerweise bei einem zu versteuernden Gesamteinkommen unter rund 18.000 € (Single) bzw. 36.000 € (Paare).</p>
+
+<h2>Verlustverrechnung</h2>
+<p>Verluste aus Kapitalvermögen werden bei Ihrer Bank in einem separaten Verlustverrechnungstopf geführt und automatisch mit späteren Gewinnen verrechnet. Haben Sie Depots bei mehreren Banken, müssen Sie rechtzeitig zum 15. Dezember eine <strong>Verlustbescheinigung</strong> beantragen und die Verluste in der Steuererklärung angeben. Verluste aus Aktien dürfen nur mit Aktiengewinnen verrechnet werden — nicht mit Zinsen oder Dividenden anderer Papiere.</p>
+
+<h2>Unser Rechner zeigt Ihnen:</h2>
+<ul>
+<li>Wie hoch die Abgeltungssteuer auf Ihre Kapitalerträge ausfällt</li>
+<li>Wie stark Teilfreistellung und Sparerpauschbetrag die Steuer senken</li>
+<li>Wie viel Netto-Ertrag am Ende bleibt</li>
+<li>Wie sich Kirchensteuer auf die Gesamtbelastung auswirkt</li>
+</ul>`,
+    faq: [
+      {
+        frage: 'Wie hoch ist die Abgeltungssteuer 2026?',
+        antwort: 'Die Abgeltungssteuer beträgt pauschal 25 % auf Kapitalerträge. Dazu kommen 5,5 % Solidaritätszuschlag (bezogen auf die Steuer, nicht auf den Ertrag) und ggf. Kirchensteuer von 8 % (Bayern, Baden-Württemberg) oder 9 % (übrige Bundesländer). Die effektive Gesamtbelastung liegt zwischen 26,38 % (ohne KiSt) und rund 27,99 % (mit 9 % KiSt).',
+      },
+      {
+        frage: 'Wie hoch ist der Sparerpauschbetrag 2026?',
+        antwort: 'Der Sparerpauschbetrag beträgt 2026 für Singles 1.000 € und für Ehepaare mit gemeinsamem Freistellungsauftrag 2.000 € pro Jahr. Bis zu dieser Höhe bleiben Kapitalerträge komplett steuerfrei. Voraussetzung: Sie haben bei Ihrer Bank einen Freistellungsauftrag eingereicht.',
+      },
+      {
+        frage: 'Was bedeutet Teilfreistellung bei ETFs?',
+        antwort: 'Seit 2018 bleibt bei Investmentfonds ein Teil der Erträge pauschal steuerfrei, um die Vorbelastung auf Fondsebene auszugleichen. Bei Aktien-ETFs (≥ 51 % Aktienquote) sind 30 % der Erträge steuerfrei, bei Mischfonds (≥ 25 %) 15 %. Bei Rentenfonds und Einzelaktien gibt es keine Teilfreistellung.',
+      },
+      {
+        frage: 'Muss ich Kapitalerträge in der Steuererklärung angeben?',
+        antwort: 'In der Regel nein — die Bank führt die Abgeltungssteuer automatisch ab. Sie müssen nur dann die Anlage KAP ausfüllen, wenn Sie Erträge aus dem Ausland, aus mehreren Depots mit Verlustbescheinigung haben, die Günstigerprüfung beantragen möchten oder Kirchensteuer nachträglich erklären müssen (Sperrvermerk).',
+      },
+      {
+        frage: 'Was ist die Günstigerprüfung?',
+        antwort: 'Bei der Günstigerprüfung prüft das Finanzamt, ob Ihr persönlicher Einkommensteuersatz unter 25 % liegt. Ist das der Fall, werden Kapitalerträge mit dem niedrigeren persönlichen Satz besteuert statt mit der Abgeltungssteuer — die Differenz erhalten Sie erstattet. Lohnt sich v. a. für Studierende, Rentner und Geringverdiener.',
+      },
+      {
+        frage: 'Mindert die Kirchensteuer die Abgeltungssteuer?',
+        antwort: 'Ja. Nach § 32d EStG mindert die gezahlte Kirchensteuer die Bemessungsgrundlage der Abgeltungssteuer (sie wirkt wie eine Sonderausgabe). Deshalb liegt die effektive Abgeltungssteuer mit KiSt nicht bei 25 + 2 %, sondern bei rund 24,45 %. Die Gesamtbelastung inkl. Soli und KiSt beträgt etwa 27,82 % (8 % KiSt) bzw. 27,99 % (9 % KiSt).',
+      },
+    ],
+  },
 ];

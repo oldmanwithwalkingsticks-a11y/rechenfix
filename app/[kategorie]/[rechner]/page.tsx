@@ -120,6 +120,8 @@ import KurzarbeitergeldRechner from '@/components/rechner/KurzarbeitergeldRechne
 import RiesterRechner from '@/components/rechner/RiesterRechner';
 import FuehrerscheinRechner from '@/components/rechner/FuehrerscheinRechner';
 import NettolohnOptimiererRechner from '@/components/rechner/NettolohnOptimiererRechner';
+import MietpreisbremseRechner from '@/components/rechner/MietpreisbremseRechner';
+import KapitalertragsteuerRechner from '@/components/rechner/KapitalertragsteuerRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -252,6 +254,8 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'riester-rechner': RiesterRechner,
   'fuehrerschein-rechner': FuehrerscheinRechner,
   'nettolohn-optimierer': NettolohnOptimiererRechner,
+  'mietpreisbremse-rechner': MietpreisbremseRechner,
+  'kapitalertragsteuer-rechner': KapitalertragsteuerRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

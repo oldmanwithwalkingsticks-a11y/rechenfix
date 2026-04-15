@@ -48,7 +48,11 @@
       "Bash(git restore:*)",
       "Bash(grep -n \"^  {$\\\\|slug:\" lib/rechner-config/gesundheit.ts)",
       "Bash(node -e \"console.log\\('Proteinbedarf kostenlos berechnen: wie viel Eiweiß pro Tag nach Gewicht, Sport und Ziel. Mit Lebensmittel-Tabelle und KI-Erklärung.'.length\\)\")",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Read(//mnt/**)",
+      "Read(//g//**)",
+      "Bash(node -e \"const a='Führerscheinkosten Klasse B berechnen: Fahrstunden, Prüfungen und Nebenkosten nach Region — kostenlose Gesamtkosten-Schätzung mit KI-Erklärung.'; const b='Nettolohn optimieren: Gehaltserhöhung vs. Sachbezüge wie Jobticket, Essenszuschuss oder BAV kostenlos vergleichen — mit KI-Erklärung.'; console.log\\(a.length, b.length\\);\")",
+      "Bash(node -e \"const a='Mietpreisbremse prüfen: Ist Ihre Miete zulässig oder zu hoch? Vergleichsmiete, max. 110 %-Grenze und Rückforderung kostenlos berechnen.'; const b='Kapitalertragsteuer berechnen: Abgeltungssteuer auf Zinsen, Dividenden und Kursgewinne inkl. Sparerpauschbetrag und Teilfreistellung.'; console.log\\(a.length, b.length\\);\")"
     ]
   }
 }

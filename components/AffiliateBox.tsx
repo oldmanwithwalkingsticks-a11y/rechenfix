@@ -153,6 +153,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'rente': 'Rentenlücke schließen? Depot-Vergleich auf Verivox — das passende Depot für Ihre private Altersvorsorge.',
     'sparplan': 'Mehr aus Ihrem Ersparten machen — Depots vergleichen und Sparplan starten auf Verivox.',
     'riester': 'Riester-Produkte vergleichen auf Verivox — den passenden Anbieter für Ihre Altersvorsorge finden.',
+    'kapitalertrag': 'Depot-Vergleich auf Verivox — das passende Depot mit niedrigen Gebühren für Ihre Kapitalerträge.',
   },
   naturesway: {
     'kalorien': 'Vitamine und Mineralstoffe passend zu Ihrem Ernährungsziel — für die tägliche Unterstützung von innen heraus.',
@@ -167,6 +168,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'bussgeld': 'Einspruch gegen den Bußgeldbescheid? KS Auxilia Rechtsschutz übernimmt die Anwaltskosten — auch im Verkehrsrecht.',
     'scheidung': 'Rechtsschutzversicherung mit Familienrecht? KS Auxilia übernimmt Anwalts- und Gerichtskosten bei Scheidung.',
     'zugewinn': 'Streit um den Zugewinnausgleich? KS Auxilia Rechtsschutz übernimmt Ihre Anwaltskosten im Familienrecht.',
+    'mietpreisbremse': 'Miete zu hoch? KS Auxilia Rechtsschutz übernimmt die Kosten für die Durchsetzung der Mietpreisbremse.',
   },
 };
 
@@ -192,6 +194,7 @@ const CONTEXT_DEEPLINKS: Partial<Record<ProgramId, Record<string, string>>> = {
   },
   verivox: {
     'etf': 'https://www.verivox.de/depot/etf-vergleich/',
+    'kapitalertrag': 'https://www.verivox.de/depot/',
     'default': 'https://www.verivox.de/depot/',
   },
 };

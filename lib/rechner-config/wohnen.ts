@@ -957,4 +957,66 @@ Die Grundsteuer ist nach der **Betriebskostenverordnung** umlagefähig auf Miete
       { frage: 'Wann muss ich die Grundsteuer zahlen?', antwort: 'Die Grundsteuer wird grundsätzlich quartalsweise gezahlt: 15. Februar, 15. Mai, 15. August und 15. November. Auf Antrag ist auch eine jährliche Zahlung zum 1. Juli möglich. Bei vermieteten Wohnungen kann die Grundsteuer auf die Mieter umgelegt werden.' },
     ],
   },
+  {
+    slug: 'mietpreisbremse-rechner',
+    titel: 'Mietpreisbremse-Rechner',
+    beschreibung: 'Mietpreisbremse prüfen: Ist Ihre Miete zulässig und wie viel können Sie zurückfordern?',
+    kategorie: 'Wohnen & Energie',
+    kategorieSlug: 'wohnen',
+    metaTitle: 'Mietpreisbremse-Rechner 2026 — Ist meine Miete zu hoch? | Rechenfix',
+    metaDescription: 'Mietpreisbremse prüfen: Ist Ihre Miete zulässig oder zu hoch? Vergleichsmiete, max. 110 %-Grenze und Rückforderung kostenlos berechnen.',
+    keywords: ['mietpreisbremse', 'mietpreisbremse rechner', 'miete zu hoch', 'vergleichsmiete', 'ortsübliche miete', 'mietspiegel', 'mietminderung', 'rüge vermieter', 'miete zurückfordern'],
+    icon: '🏠',
+    formel: 'Max. zulässige Miete = Vergleichsmiete × 1,10 | Überhöhung/Monat = max(0; Ist-Miete − Max-Miete) × Wohnfläche',
+    beispiel: 'Beispiel: Vergleichsmiete 10 €/m², aktuelle Miete 12 €/m², 65 m² → Max erlaubt: 11 €/m² = 715 €, Ist: 780 € → 65 €/Monat zu viel = 780 € pro Jahr.',
+    erklaerung: `**Was ist die Mietpreisbremse?**
+
+Die Mietpreisbremse (§ 556d BGB) begrenzt in angespannten Wohnungsmärkten die Miete bei Neuvermietung. Sie darf in diesen Gebieten **höchstens 10 Prozent** über der ortsüblichen Vergleichsmiete liegen. Eingeführt wurde die Regelung 2015, seitdem immer wieder nachgeschärft. Für die Jahre ab 2026 bleibt die Mietpreisbremse in den meisten Großstädten und Ballungsräumen weiterhin gültig — welche konkreten Gebiete betroffen sind, regeln die Landesverordnungen. Ziel der Regelung: Mieter in nachgefragten Städten wie Berlin, München, Hamburg, Köln oder Frankfurt vor explodierenden Mietpreisen zu schützen. Unser Mietpreisbremse-Rechner zeigt Ihnen sofort, ob Ihre aktuelle Miete noch zulässig ist — und wenn nicht, wie viel Sie pro Monat und pro Jahr zu viel zahlen.
+
+**Wie wird die Mietpreisbremse berechnet?**
+
+Die Berechnung ist einfach: Sie multiplizieren die **ortsübliche Vergleichsmiete** aus dem Mietspiegel Ihrer Stadt mit 1,10 (also +10 Prozent). Das Ergebnis ist die **Höchstmiete pro Quadratmeter** kalt. Liegt Ihre tatsächliche Kaltmiete darüber, verstößt der Vermieter gegen § 556d BGB — es sei denn, es greift eine Ausnahme. Ein Beispiel: Die Vergleichsmiete liegt in Ihrer Straße bei 10,00 €/m² (laut Mietspiegel), Sie haben 65 m² und zahlen 12,00 €/m² kalt. Die maximale Miete wäre 11,00 €/m² × 65 = 715 € kalt. Sie zahlen aber 780 € kalt — also **65 € zu viel pro Monat**, was über ein Jahr **780 €** ausmacht.
+
+**Welche Ausnahmen gibt es?**
+
+Nicht jede Miete fällt unter die Mietpreisbremse. Es gibt vier wichtige Ausnahmen: Erstens **Neubauten**: Wohnungen, die nach dem 01.10.2014 erstmalig vermietet wurden, sind ausgenommen — der Vermieter darf die Miete frei festsetzen. Zweitens **umfassende Modernisierungen**: Hat der Vermieter mindestens ein Drittel eines vergleichbaren Neubaus in die Wohnung investiert, darf er die Miete neu festlegen. Drittens **die Vormiete**: War die Miete des Vormieters bereits höher als 110 Prozent der Vergleichsmiete, darf der Vermieter diese höhere Miete weiter verlangen (Bestandsschutz). Viertens **möblierte Zimmer oder Wohnungen auf Zeit** — hier gilt die Bremse meist nicht. In all diesen Fällen zeigt der Rechner eine entsprechende Info an.
+
+**Wie fordere ich zu viel gezahlte Miete zurück?**
+
+Wichtig zu wissen: Die Mietpreisbremse wirkt **nicht automatisch**. Sie müssen den Vermieter **schriftlich rügen** — am besten per Einschreiben mit Rückschein. Eine qualifizierte Rüge nennt die konkrete Wohnung, den Verstoß gegen § 556d BGB und fordert die Reduzierung auf die zulässige Miete. **Achtung:** Die Rückforderung gilt **nur ab dem Zeitpunkt der Rüge** — rückwirkend vor der Rüge bekommen Sie nichts zurück. Je früher Sie also rügen, desto besser. Nach der Rüge können Sie die Differenz Monat für Monat einfordern und notfalls gerichtlich durchsetzen. Eine Rechtsschutzversicherung mit Mietrecht deckt die Anwalts- und Gerichtskosten ab und ist bei der Mietpreisbremse oft sinnvoll.
+
+**Wie finde ich die Vergleichsmiete heraus?**
+
+Die ortsübliche Vergleichsmiete wird im **Mietspiegel** der Gemeinde festgelegt. Es gibt zwei Varianten: den **qualifizierten Mietspiegel** (wissenschaftlich erstellt, rechtlich bindend) und den **einfachen Mietspiegel** (weniger detailliert). Die meisten Großstädte führen einen qualifizierten Mietspiegel — häufig kostenlos als PDF auf der Website der Stadt abrufbar. Alternativen sind Mietspiegel-Apps, Mietspiegel-Gutachten oder Auskunft beim Mieterverein. Wichtig: Der Mietspiegel berücksichtigt Lage, Baujahr, Ausstattung, Größe und Art der Wohnung — Sie müssen die richtige Rubrik finden, die auf Ihre Wohnung passt.
+
+**Wann lohnt sich ein Mieterverein?**
+
+Wer unsicher ist, ob die Mietpreisbremse greift und wie die Rüge formuliert werden muss, sollte den örtlichen **Mieterverein** einschalten. Für einen Jahresbeitrag von rund 50 bis 90 € erhalten Sie kompetente Rechtsberatung, fertige Musterbriefe und Unterstützung bei der Durchsetzung. Bei höheren Streitwerten ist eine **Mietrechtsschutzversicherung** sinnvoll, die Anwalts- und Gerichtskosten übernimmt. Unser [Mietrechner](/wohnen/mietrechner) hilft Ihnen gleichzeitig, die monatliche Gesamtbelastung aus Kalt- und Warmmiete im Blick zu behalten — und der [Nebenkosten-Rechner](/wohnen/nebenkosten-rechner) zeigt, welche Posten der Vermieter tatsächlich umlegen darf.`,
+    faq: [
+      {
+        frage: 'Wie hoch darf die Miete laut Mietpreisbremse sein?',
+        antwort: 'Die Miete darf höchstens 10 Prozent über der ortsüblichen Vergleichsmiete laut Mietspiegel liegen. Bei einer Vergleichsmiete von 10 €/m² sind also maximal 11 €/m² erlaubt. Die Mietpreisbremse gilt aber nur in Gebieten, die per Landesverordnung als angespannter Wohnungsmarkt ausgewiesen sind.',
+      },
+      {
+        frage: 'Kann ich zu viel gezahlte Miete zurückfordern?',
+        antwort: 'Ja, aber nur ab dem Zeitpunkt, zu dem Sie den Vermieter schriftlich gerügt haben. Rückwirkend für die Zeit vor der Rüge können Sie nichts zurückfordern. Die Rüge sollte qualifiziert sein — also den konkreten Verstoß gegen § 556d BGB benennen und die geforderte Reduzierung beziffern.',
+      },
+      {
+        frage: 'Wann greift die Mietpreisbremse nicht?',
+        antwort: 'Die Mietpreisbremse greift nicht bei Neubauten mit Erstbezug nach dem 01.10.2014, nach einer umfassenden Modernisierung (Investition ≥ 1/3 eines Neubaus), wenn die Vormiete bereits höher war (Bestandsschutz) und bei möblierten Zimmern oder Wohnungen auf Zeit. In all diesen Fällen darf der Vermieter die Miete frei festsetzen.',
+      },
+      {
+        frage: 'Wo finde ich die ortsübliche Vergleichsmiete?',
+        antwort: 'Im Mietspiegel Ihrer Stadt. Die meisten Großstädte bieten den Mietspiegel kostenlos als PDF auf der Stadt-Website. Alternativ gibt es Mietspiegel-Apps und Auskunft beim Mieterverein. Achten Sie darauf, dass Ihre Wohnung zur richtigen Rubrik passt (Baujahr, Lage, Ausstattung).',
+      },
+      {
+        frage: 'Wie formuliere ich eine Rüge an den Vermieter?',
+        antwort: 'Die Rüge muss schriftlich erfolgen (am besten per Einschreiben), den konkreten Verstoß gegen § 556d BGB benennen, die ortsübliche Vergleichsmiete angeben und die geforderte Herabsetzung beziffern. Mustervorlagen gibt es kostenlos beim Deutschen Mieterbund. Eine Beratung beim Mieterverein ist dringend empfehlenswert.',
+      },
+      {
+        frage: 'Was kostet ein Verfahren gegen den Vermieter?',
+        antwort: 'Bei einem Streitwert von 1.000 € liegen die Anwalts- und Gerichtskosten bei rund 500 bis 800 € pro Instanz. Eine Rechtsschutzversicherung mit Mietrecht übernimmt diese Kosten. Ein Mieterverein bietet für rund 50 bis 90 € Jahresbeitrag kompetente Beratung und einfache Schriftsätze — oft reicht das bereits, um die Sache außergerichtlich zu klären.',
+      },
+    ],
+  },
 ];
