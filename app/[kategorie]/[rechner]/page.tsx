@@ -122,6 +122,7 @@ import FuehrerscheinRechner from '@/components/rechner/FuehrerscheinRechner';
 import NettolohnOptimiererRechner from '@/components/rechner/NettolohnOptimiererRechner';
 import MietpreisbremseRechner from '@/components/rechner/MietpreisbremseRechner';
 import KapitalertragsteuerRechner from '@/components/rechner/KapitalertragsteuerRechner';
+import SchuhgroessenRechner from '@/components/rechner/SchuhgroessenRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -256,6 +257,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'nettolohn-optimierer': NettolohnOptimiererRechner,
   'mietpreisbremse-rechner': MietpreisbremseRechner,
   'kapitalertragsteuer-rechner': KapitalertragsteuerRechner,
+  'schuhgroessen-rechner': SchuhgroessenRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
