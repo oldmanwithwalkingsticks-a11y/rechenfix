@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { useCookieConsent } from '@/components/cookie/CookieConsentProvider';
 
 interface AdSlotProps {
   typ: 'leaderboard' | 'rectangle' | 'sidebar';
@@ -25,13 +26,13 @@ const adConfig = {
 };
 
 export default function AdSlot({ typ, className = '' }: AdSlotProps) {
+  const { marketingAllowed } = useCookieConsent();
   const adRef = useRef<HTMLModElement>(null);
   const pushed = useRef(false);
 
-  // AdSense lädt immer. Bei fehlendem Consent zeigt Google automatisch
-  // nicht-personalisierte Anzeigen (Consent Mode v2).
   useEffect(() => {
-    if (pushed.current) return;
+    if (!marketingAllowed || pushed.current) return;
+
     try {
       const adsbygoogle = (window as unknown as { adsbygoogle: unknown[] }).adsbygoogle;
       if (adsbygoogle) {
@@ -41,7 +42,10 @@ export default function AdSlot({ typ, className = '' }: AdSlotProps) {
     } catch {
       // AdSense Script noch nicht geladen
     }
-  }, []);
+  }, [marketingAllowed]);
+
+  // Kein Consent → nichts anzeigen
+  if (!marketingAllowed) return null;
 
   const config = adConfig[typ];
 
