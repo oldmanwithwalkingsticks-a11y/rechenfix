@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Über Rechenfix.de — Unabhängiges Rechnerportal aus Deutschland',
-  description: 'Rechenfix.de ist ein unabhängiges Rechnerportal aus Deutschland. Kostenlose Online-Rechner für Finanzen, Alltag, Wohnen, Mathe und mehr — schnell, privat und ohne Anmeldung.',
+  description: 'Rechenfix.de — unabhängiges Rechnerportal aus Deutschland. Kostenlose Online-Rechner für Finanzen, Alltag, Wohnen und mehr. Schnell und ohne Anmeldung.',
   alternates: { canonical: 'https://www.rechenfix.de/ueber-uns' },
   openGraph: {
     title: 'Über Rechenfix.de — Unabhängiges Rechnerportal',
