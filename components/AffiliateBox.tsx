@@ -144,6 +144,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'waermepumpe': 'Günstigen Wärmepumpen-Stromtarif finden — Stromanbieter vergleichen auf CHECK24.',
     'leasing': 'Autofinanzierung als Alternative zum Leasing? Kredite vergleichen auf CHECK24.',
     'photovoltaik': 'Günstigen Reststrom-Tarif finden — Stromanbieter vergleichen auf CHECK24.',
+    'eauto': 'Kfz-Versicherung für Ihr E-Auto vergleichen — oft günstiger als für Verbrenner.',
   },
   congstar: {
     'handykosten': 'congstar bietet faire Tarife ab 5 €/Monat — monatlich kündbar und ohne versteckte Kosten.',
@@ -190,6 +191,7 @@ const CONTEXT_DEEPLINKS: Partial<Record<ProgramId, Record<string, string>>> = {
     'waermepumpe': 'https://www.check24.net/strom/',
     'leasing': 'https://www.check24.net/kredit/',
     'photovoltaik': 'https://www.check24.net/strom/',
+    'eauto': 'https://www.check24.net/kfz-versicherung/',
     'default': 'https://www.check24.net/',
   },
   verivox: {

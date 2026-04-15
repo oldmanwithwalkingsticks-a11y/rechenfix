@@ -123,6 +123,8 @@ import NettolohnOptimiererRechner from '@/components/rechner/NettolohnOptimierer
 import MietpreisbremseRechner from '@/components/rechner/MietpreisbremseRechner';
 import KapitalertragsteuerRechner from '@/components/rechner/KapitalertragsteuerRechner';
 import SchuhgroessenRechner from '@/components/rechner/SchuhgroessenRechner';
+import HerzfrequenzRechner from '@/components/rechner/HerzfrequenzRechner';
+import ReichweitenRechner from '@/components/rechner/ReichweitenRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -258,6 +260,8 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'mietpreisbremse-rechner': MietpreisbremseRechner,
   'kapitalertragsteuer-rechner': KapitalertragsteuerRechner,
   'schuhgroessen-rechner': SchuhgroessenRechner,
+  'herzfrequenz-rechner': HerzfrequenzRechner,
+  'reichweiten-rechner': ReichweitenRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

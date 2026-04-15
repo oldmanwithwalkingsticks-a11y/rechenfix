@@ -492,4 +492,91 @@ Grundsätzlich nein — der Führerschein Klasse B gilt als Kosten der privaten 
       },
     ],
   },
+  {
+    slug: 'reichweiten-rechner',
+    titel: 'Reichweiten-Rechner (E-Auto)',
+    beschreibung: 'Realistische E-Auto-Reichweite berechnen — abhängig von Temperatur, Fahrprofil und Verbrauch.',
+    kategorie: 'Auto & Verkehr',
+    kategorieSlug: 'auto',
+    metaTitle: 'E-Auto Reichweiten-Rechner 2026 — Realistische Reichweite berechnen | Rechenfix',
+    metaDescription: 'E-Auto-Reichweite realistisch berechnen: Winter, Autobahn und Heizung mindern die WLTP-Reichweite. Mit Verbrauch & Ladekosten.',
+    keywords: ['e-auto reichweite rechner', 'wltp reichweite real', 'elektroauto verbrauch', 'e-auto winter reichweite', 'kwh pro 100 km', 'ladekosten rechner', 'e-auto autobahn reichweite', 'reichweite tesla', 'e-auto stromverbrauch'],
+    icon: '🔋',
+    formel: 'Realverbrauch = WLTP-Verbrauch ÷ (Fahrprofil × Temperatur × Klima) | Realreichweite = Akku ÷ Realverbrauch × 100',
+    beispiel: 'Beispiel: 60 kWh Akku, 400 km WLTP → 15 kWh/100 km WLTP. Autobahn × 0,70, Winter 0–10 °C × 0,85, Heizung an × 0,90 → Realverbrauch 28 kWh/100 km, Realreichweite ~215 km.',
+    erklaerung: `<h2>Warum die WLTP-Reichweite nicht der Realität entspricht</h2>
+<p>Die von Herstellern angegebene <strong>WLTP-Reichweite</strong> (Worldwide Harmonised Light Vehicles Test Procedure) wird unter Laborbedingungen ermittelt: moderate Temperaturen, definierte Geschwindigkeitsprofile, keine Klimaanlage. Für den Alltag ist sie daher eine Bestwert-Angabe, die Sie im realen Fahrbetrieb fast nie erreichen. Vor allem auf der Autobahn, bei Kälte oder mit eingeschalteter Heizung sinkt die Reichweite teils drastisch — um 20 bis 40 Prozent. Unser Reichweiten-Rechner zeigt Ihnen, welche <strong>realistische Reichweite</strong> Sie von Ihrem E-Auto tatsächlich erwarten können.</p>
+
+<h2>Einflussfaktoren auf die Reichweite</h2>
+<p>Vier große Hebel bestimmen, wie weit Sie mit einer Akkuladung kommen:</p>
+<ul>
+<li><strong>Geschwindigkeit (Fahrprofil):</strong> Der Luftwiderstand wächst im Quadrat zur Geschwindigkeit. Tempo 100 verbraucht etwa doppelt so viel wie Tempo 70, Tempo 130 rund das Dreifache. Stadtfahrten profitieren von Rekuperation — hier landet ein Teil der Bremsenergie zurück im Akku.</li>
+<li><strong>Außentemperatur:</strong> Lithium-Ionen-Akkus arbeiten ab etwa 20 °C ideal. Bei 0 °C liefert der Akku nur noch rund 85 %, bei −10 °C kann es unter 70 % fallen. Gleichzeitig braucht die Heizung viel Strom, weil E-Autos keine Motorabwärme zum Heizen nutzen können.</li>
+<li><strong>Heizung und Klimaanlage:</strong> Klassische Widerstandsheizungen können im Winter 3–5 kW ziehen — das entspricht bei 100 km/h einem Mehrverbrauch von 3–5 kWh/100 km. Moderne Wärmepumpen reduzieren das auf etwa 1 kWh/100 km.</li>
+<li><strong>Beladung, Dachboxen und Anhänger:</strong> Jedes zusätzliche Gewicht und jeder aerodynamische Störfaktor kostet Reichweite — beim Anhänger kann sich die Reichweite halbieren.</li>
+</ul>
+
+<h2>Winter-Reichweite: Was Sie einplanen sollten</h2>
+<p>Der kritischste Moment für E-Auto-Reichweite ist der <strong>Winter</strong>. Kalte Batterien liefern weniger Energie, die Heizung zieht zusätzlich. Faustregel: Rechnen Sie mit <strong>70 bis 80 % der sommerlichen Reichweite</strong> bei Temperaturen unter 0 °C. Wer das unterschätzt, bleibt schnell liegen. Gute Strategien:</p>
+<ul>
+<li><strong>Vorheizen am Stecker:</strong> Wenn Sie mit Akku am Ladekabel vorheizen, verbraucht das Heizen keinen Strom aus dem Akku.</li>
+<li><strong>Sitz- und Lenkradheizung statt Raumheizung:</strong> Sitzheizungen verbrauchen nur 50–100 Watt und heizen effizienter direkt am Körper.</li>
+<li><strong>Gemächliches Fahren:</strong> Auf der Autobahn kostet Tempo 130 im Winter besonders viel — 10–20 km/h weniger zahlen sich direkt in Reichweite aus.</li>
+<li><strong>Eco-Modus nutzen:</strong> Reduziert Beschleunigung und Heizleistung — oft 10–15 % Reichweitengewinn.</li>
+</ul>
+
+<h2>Ladekosten richtig einschätzen</h2>
+<p>Die Kosten pro 100 km hängen vom Strompreis und Ladepunkt ab:</p>
+<ul>
+<li><strong>Zuhause an der Wallbox</strong> (Haushaltstrom ≈ 32 ct/kWh): 4–6 € pro 100 km bei 15–18 kWh/100 km.</li>
+<li><strong>Wallbox-Sondertarif</strong> (ca. 28 ct): 3,50–5 €.</li>
+<li><strong>Öffentliche AC-Säule</strong> (ca. 45 ct): 7–9 €.</li>
+<li><strong>DC-Schnelllader</strong> (ca. 60–80 ct): 9–15 €.</li>
+</ul>
+<p>Zum Vergleich: Ein Verbrenner mit 6 l/100 km und 1,75 €/l kostet rund 10,50 € pro 100 km. E-Autos sind also beim Heimladen klar günstiger — beim Dauer-Nutzen öffentlicher Schnelllader kann der Preisvorteil allerdings schrumpfen.</p>
+
+<h2>Wann lohnt sich das E-Auto?</h2>
+<p>Die Antwort hängt von Ihrem Fahrprofil ab. E-Autos spielen ihre Vorteile aus, wenn Sie</p>
+<ul>
+<li>überwiegend zu Hause oder am Arbeitsplatz laden können,</li>
+<li>hauptsächlich im Pendel- und Alltagsverkehr unterwegs sind,</li>
+<li>die THG-Quote (aktuell 100–200 €/Jahr) mitnehmen,</li>
+<li>eine PV-Anlage haben und selbst erzeugten Strom laden.</li>
+</ul>
+<p>Weniger attraktiv wird die Rechnung bei häufigen Langstrecken mit Schnelllader-Zwang oder in Miet- und Tiefgaragen ohne eigene Wallbox.</p>
+
+<h2>Unser Reichweiten-Rechner zeigt:</h2>
+<ul>
+<li>Die <strong>realistische Reichweite</strong> in km — abhängig von Ihrem Fahrprofil</li>
+<li>Den <strong>Realverbrauch</strong> in kWh/100 km</li>
+<li>Die <strong>Ladekosten</strong> pro 100 km und pro voller Ladung</li>
+<li>Den <strong>Abschlag gegenüber WLTP</strong> in Prozent</li>
+</ul>`,
+    faq: [
+      {
+        frage: 'Warum erreiche ich die WLTP-Reichweite nie?',
+        antwort: 'Die WLTP-Norm wird unter optimalen Bedingungen gemessen: rund 23 °C, moderate Geschwindigkeit, keine Heizung, kein Stau. Im Alltag kommen Klima, höhere Geschwindigkeiten und Temperatur-Extreme hinzu — die tatsächliche Reichweite liegt daher meist 15 bis 30 % unter dem WLTP-Wert. Rechnen Sie mit 80 % WLTP im Sommer und 60–70 % im Winter.',
+      },
+      {
+        frage: 'Wie stark sinkt die Reichweite im Winter?',
+        antwort: 'Bei Temperaturen um 0 °C müssen Sie mit etwa 85 % der sommerlichen Reichweite rechnen, bei −10 °C mit 70 % oder weniger. Die Hauptursachen: langsamere Akkuchemie bei Kälte, höherer Heizbedarf, Rollwiderstand durch Winterreifen. Fahrzeuge mit Wärmepumpe kommen deutlich besser durch den Winter als Modelle mit reiner Widerstandsheizung.',
+      },
+      {
+        frage: 'Was ist die Rekuperation?',
+        antwort: 'Beim Bremsen und Bergabfahren wandelt der E-Motor einen Teil der Bewegungsenergie in Strom zurück und speist ihn in den Akku. Im Stadtverkehr mit vielen Brems- und Anfahrvorgängen lassen sich dadurch 15–25 % Reichweite zurückgewinnen. Auf der Autobahn ist der Effekt klein, weil kaum gebremst wird — deshalb ist Stadt für E-Autos effizienter als Autobahn.',
+      },
+      {
+        frage: 'Lohnt sich ein E-Auto bei Vielfahrern?',
+        antwort: 'Je mehr Kilometer, desto deutlicher der Kostenvorteil — vorausgesetzt, Sie laden überwiegend zu Hause oder im Betrieb. Bei 20.000 km/Jahr sparen Sie gegenüber einem Verbrenner leicht 800–1.200 € pro Jahr an Energiekosten. Bei ausschließlicher Nutzung öffentlicher Schnelllader relativiert sich der Vorteil deutlich, weil DC-Strom teilweise 60–80 ct/kWh kostet.',
+      },
+      {
+        frage: 'Wie oft sollte ich auf 100 % laden?',
+        antwort: 'Im Alltag empfehlen Hersteller, den Akku zwischen 20 und 80 % zu halten — das schont die Zellen und verzögert die kalendarische Alterung. Für lange Strecken dürfen Sie selbstverständlich auf 100 % laden, sollten den vollen Akku dann aber zeitnah nutzen. Regelmäßiges Tiefentladen (<10 %) ist dagegen ungünstig.',
+      },
+      {
+        frage: 'Wie groß sollte der Akku sein?',
+        antwort: 'Für reine Pendler reichen 40–50 kWh völlig aus (200–300 km real). Wer regelmäßig Langstrecken fährt, sollte 70 kWh aufwärts anpeilen — bessere Realreichweite, weniger Ladestopps. Riesige 100-kWh-Akkus haben Nachteile: höheres Gewicht, höhere Anschaffungskosten, längere Ladezeit zu Hause. Die beste Wahl richtet sich nach Ihrem 95-%-Fahrprofil, nicht nach seltenen Langstrecken-Ausnahmen.',
+      },
+    ],
+  },
 ];
