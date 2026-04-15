@@ -1248,41 +1248,46 @@ Ergänzend zum Währungsrechner sind unser Einheiten-Umrechner (für Längen, Ge
     icon: '👟',
     formel: 'cm ≈ (EU + 2) × 0,667 | US Damen ≈ EU − 31 | UK Damen ≈ EU − 33 | Herren und Kinder nach eigener Tabelle',
     beispiel: 'Beispiel: Damen EU 39 entspricht US 8,5, UK 6 und etwa 25 cm Fußlänge. Herren EU 43 = US 9,5 = UK 8,5 = 27,5 cm.',
-    erklaerung: `<h2>Warum Schuhgrößen so unterschiedlich sind</h2>
-<p>Schuhgrößen sind international alles andere als einheitlich. Drei große Systeme stehen sich gegenüber: das <strong>europäische Pariser Stich-Maß</strong> (EU), das <strong>amerikanische System</strong> (US) und das <strong>britische System</strong> (UK). Jedes System hat eigene Nullpunkte, eigene Schrittweiten und zum Teil sogar unterschiedliche Größen für Damen, Herren und Kinder innerhalb des gleichen Landes. Wer online in den USA oder Großbritannien Schuhe bestellt, läuft ohne Umrechnung schnell in die Falle: Eine Damen-US-8 ist nicht gleich eine Herren-US-8, und die UK-Größen liegen wiederum eine halbe bis ganze Nummer tiefer als US.</p>
+    erklaerung: `**Warum Schuhgrößen so unterschiedlich sind**
 
-<h2>EU-System (Pariser Stich)</h2>
-<p>Die europäischen Schuhgrößen basieren auf dem <strong>Pariser Stich</strong>: 1 Stich entspricht 2/3 Zentimeter (≈ 6,67 mm). Gemessen wird nicht die reine Fußlänge, sondern die Länge des Schuhleistens inklusive Zugabe für Zehenfreiheit. Die Umrechnungsformel EU → cm lautet näherungsweise: <strong>cm ≈ (EU + 2) × 0,667</strong>. Eine EU-Größe 39 entspricht also rechnerisch rund 27,3 cm Leistenlänge — die tatsächliche Fußlänge beträgt dann etwa 25 cm.</p>
+Schuhgrößen sind international alles andere als einheitlich. Drei große Systeme stehen sich gegenüber: das **europäische Pariser Stich-Maß** (EU), das **amerikanische System** (US) und das **britische System** (UK). Jedes System hat eigene Nullpunkte, eigene Schrittweiten und zum Teil sogar unterschiedliche Größen für Damen, Herren und Kinder innerhalb des gleichen Landes. Wer online in den USA oder Großbritannien Schuhe bestellt, läuft ohne Umrechnung schnell in die Falle: Eine Damen-US-8 ist nicht gleich eine Herren-US-8, und die UK-Größen liegen wiederum eine halbe bis ganze Nummer tiefer als US.
 
-<h2>US-System</h2>
-<p>Im amerikanischen System werden Größen in Inch und Zoll-Brüchen gemessen. Es gibt getrennte Skalen für Damen, Herren und Kinder — und diese sind <strong>nicht identisch</strong>. Eine US-Damen-8 entspricht ungefähr einer US-Herren-6,5. Kinderschuhe haben eine eigene Skala, die bei Größe 0 (Babyschuh) beginnt und bis etwa 13 reicht, bevor die Erwachsenenskala bei 1 neu startet (so genannte "Big Kid"-Größen).</p>
+**EU-System (Pariser Stich)**
 
-<h2>UK-System</h2>
-<p>Das britische System ähnelt dem amerikanischen, liegt aber <strong>meist eine halbe Größe tiefer</strong>. Eine US-Herren-10 entspricht etwa einer UK-9,5. Auch hier unterscheiden sich Damen- und Herrengrößen. Australien und Neuseeland verwenden für Herren das UK-System, für Damen hingegen das US-System — Verwirrung garantiert.</p>
+Die europäischen Schuhgrößen basieren auf dem **Pariser Stich**: 1 Stich entspricht 2/3 Zentimeter (≈ 6,67 mm). Gemessen wird nicht die reine Fußlänge, sondern die Länge des Schuhleistens inklusive Zugabe für Zehenfreiheit. Die Umrechnungsformel EU → cm lautet näherungsweise: **cm ≈ (EU + 2) × 0,667**. Eine EU-Größe 39 entspricht also rechnerisch rund 27,3 cm Leistenlänge — die tatsächliche Fußlänge beträgt dann etwa 25 cm.
 
-<h2>Fußlänge richtig messen</h2>
-<p>Die beste Grundlage für die richtige Schuhgröße ist die <strong>tatsächliche Fußlänge</strong>. So messen Sie richtig:</p>
-<ol>
-<li>Stellen Sie sich abends auf ein Blatt Papier (Füße sind dann am größten).</li>
-<li>Ziehen Sie den Umriss des Fußes mit einem senkrecht gehaltenen Stift nach.</li>
-<li>Messen Sie vom hintersten Punkt der Ferse bis zur Spitze der längsten Zehe.</li>
-<li>Addieren Sie <strong>0,5 bis 1 cm</strong> Zugabe für Bewegungsfreiheit.</li>
-<li>Messen Sie beide Füße — sie sind selten exakt gleich groß. Maßgeblich ist der größere Fuß.</li>
-</ol>
+**US-System**
 
-<h2>Warum abends messen?</h2>
-<p>Unsere Füße schwellen im Laufe des Tages um bis zu 5 % an — vor allem an warmen Tagen oder nach langem Stehen. Morgens gekaufte Schuhe können abends schmerzhaft drücken. Profis in Laufsport und Orthopädie empfehlen deshalb, Schuhe grundsätzlich am Nachmittag oder Abend anzuprobieren und zu kaufen.</p>
+Im amerikanischen System werden Größen in Inch und Zoll-Brüchen gemessen. Es gibt getrennte Skalen für Damen, Herren und Kinder — und diese sind **nicht identisch**. Eine US-Damen-8 entspricht ungefähr einer US-Herren-6,5. Kinderschuhe haben eine eigene Skala, die bei Größe 0 (Babyschuh) beginnt und bis etwa 13 reicht, bevor die Erwachsenenskala bei 1 neu startet (so genannte "Big Kid"-Größen).
 
-<h2>Kinderschuhe — besondere Regeln</h2>
-<p>Kinderfüße wachsen in den ersten Lebensjahren rasant. Die Deutsche Gesellschaft für Orthopädie und Unfallchirurgie empfiehlt, alle <strong>drei bis vier Monate</strong> nachzumessen. Im Kinderschuh sollte zwischen längster Zehe und Schuhspitze mindestens <strong>12 mm Spielraum</strong> sein — so hat der Fuß Platz zum Wachsen und Abrollen. Zu kleine Schuhe können bleibende Fußdeformationen verursachen.</p>
+**UK-System**
 
-<h2>Unser Schuhgrößen-Rechner zeigt:</h2>
-<ul>
-<li>Die passende Größe in <strong>EU, US, UK und cm</strong> gleichzeitig</li>
-<li>Getrennte Tabellen für <strong>Damen, Herren und Kinder</strong></li>
-<li>Die vollständige <strong>Umrechnungstabelle</strong> mit Ihrer aktuellen Größe hervorgehoben</li>
-<li>Praktische <strong>Mess-Tipps</strong> für den passenden Sitz</li>
-</ul>`,
+Das britische System ähnelt dem amerikanischen, liegt aber **meist eine halbe Größe tiefer**. Eine US-Herren-10 entspricht etwa einer UK-9,5. Auch hier unterscheiden sich Damen- und Herrengrößen. Australien und Neuseeland verwenden für Herren das UK-System, für Damen hingegen das US-System — Verwirrung garantiert.
+
+**Fußlänge richtig messen**
+
+Die beste Grundlage für die richtige Schuhgröße ist die **tatsächliche Fußlänge**. So messen Sie richtig:
+
+- Stellen Sie sich abends auf ein Blatt Papier (Füße sind dann am größten).
+- Ziehen Sie den Umriss des Fußes mit einem senkrecht gehaltenen Stift nach.
+- Messen Sie vom hintersten Punkt der Ferse bis zur Spitze der längsten Zehe.
+- Addieren Sie **0,5 bis 1 cm** Zugabe für Bewegungsfreiheit.
+- Messen Sie beide Füße — sie sind selten exakt gleich groß. Maßgeblich ist der größere Fuß.
+
+**Warum abends messen?**
+
+Unsere Füße schwellen im Laufe des Tages um bis zu 5 % an — vor allem an warmen Tagen oder nach langem Stehen. Morgens gekaufte Schuhe können abends schmerzhaft drücken. Profis in Laufsport und Orthopädie empfehlen deshalb, Schuhe grundsätzlich am Nachmittag oder Abend anzuprobieren und zu kaufen.
+
+**Kinderschuhe — besondere Regeln**
+
+Kinderfüße wachsen in den ersten Lebensjahren rasant. Die Deutsche Gesellschaft für Orthopädie und Unfallchirurgie empfiehlt, alle **drei bis vier Monate** nachzumessen. Im Kinderschuh sollte zwischen längster Zehe und Schuhspitze mindestens **12 mm Spielraum** sein — so hat der Fuß Platz zum Wachsen und Abrollen. Zu kleine Schuhe können bleibende Fußdeformationen verursachen.
+
+**Unser Schuhgrößen-Rechner zeigt:**
+
+- Die passende Größe in **EU, US, UK und cm** gleichzeitig
+- Getrennte Tabellen für **Damen, Herren und Kinder**
+- Die vollständige **Umrechnungstabelle** mit Ihrer aktuellen Größe hervorgehoben
+- Praktische **Mess-Tipps** für den passenden Sitz`,
     faq: [
       {
         frage: 'Warum sind Schuhgrößen nicht international einheitlich?',

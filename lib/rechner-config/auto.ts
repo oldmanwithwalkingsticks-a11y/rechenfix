@@ -504,54 +504,56 @@ Grundsätzlich nein — der Führerschein Klasse B gilt als Kosten der privaten 
     icon: '🔋',
     formel: 'Realverbrauch = WLTP-Verbrauch ÷ (Fahrprofil × Temperatur × Klima) | Realreichweite = Akku ÷ Realverbrauch × 100',
     beispiel: 'Beispiel: 60 kWh Akku, 400 km WLTP → 15 kWh/100 km WLTP. Autobahn × 0,70, Winter 0–10 °C × 0,85, Heizung an × 0,90 → Realverbrauch 28 kWh/100 km, Realreichweite ~215 km.',
-    erklaerung: `<h2>Warum die WLTP-Reichweite nicht der Realität entspricht</h2>
-<p>Die von Herstellern angegebene <strong>WLTP-Reichweite</strong> (Worldwide Harmonised Light Vehicles Test Procedure) wird unter Laborbedingungen ermittelt: moderate Temperaturen, definierte Geschwindigkeitsprofile, keine Klimaanlage. Für den Alltag ist sie daher eine Bestwert-Angabe, die Sie im realen Fahrbetrieb fast nie erreichen. Vor allem auf der Autobahn, bei Kälte oder mit eingeschalteter Heizung sinkt die Reichweite teils drastisch — um 20 bis 40 Prozent. Unser Reichweiten-Rechner zeigt Ihnen, welche <strong>realistische Reichweite</strong> Sie von Ihrem E-Auto tatsächlich erwarten können.</p>
+    erklaerung: `**Warum die WLTP-Reichweite nicht der Realität entspricht**
 
-<h2>Einflussfaktoren auf die Reichweite</h2>
-<p>Vier große Hebel bestimmen, wie weit Sie mit einer Akkuladung kommen:</p>
-<ul>
-<li><strong>Geschwindigkeit (Fahrprofil):</strong> Der Luftwiderstand wächst im Quadrat zur Geschwindigkeit. Tempo 100 verbraucht etwa doppelt so viel wie Tempo 70, Tempo 130 rund das Dreifache. Stadtfahrten profitieren von Rekuperation — hier landet ein Teil der Bremsenergie zurück im Akku.</li>
-<li><strong>Außentemperatur:</strong> Lithium-Ionen-Akkus arbeiten ab etwa 20 °C ideal. Bei 0 °C liefert der Akku nur noch rund 85 %, bei −10 °C kann es unter 70 % fallen. Gleichzeitig braucht die Heizung viel Strom, weil E-Autos keine Motorabwärme zum Heizen nutzen können.</li>
-<li><strong>Heizung und Klimaanlage:</strong> Klassische Widerstandsheizungen können im Winter 3–5 kW ziehen — das entspricht bei 100 km/h einem Mehrverbrauch von 3–5 kWh/100 km. Moderne Wärmepumpen reduzieren das auf etwa 1 kWh/100 km.</li>
-<li><strong>Beladung, Dachboxen und Anhänger:</strong> Jedes zusätzliche Gewicht und jeder aerodynamische Störfaktor kostet Reichweite — beim Anhänger kann sich die Reichweite halbieren.</li>
-</ul>
+Die von Herstellern angegebene **WLTP-Reichweite** (Worldwide Harmonised Light Vehicles Test Procedure) wird unter Laborbedingungen ermittelt: moderate Temperaturen, definierte Geschwindigkeitsprofile, keine Klimaanlage. Für den Alltag ist sie daher eine Bestwert-Angabe, die Sie im realen Fahrbetrieb fast nie erreichen. Vor allem auf der Autobahn, bei Kälte oder mit eingeschalteter Heizung sinkt die Reichweite teils drastisch — um 20 bis 40 Prozent. Unser Reichweiten-Rechner zeigt Ihnen, welche **realistische Reichweite** Sie von Ihrem E-Auto tatsächlich erwarten können.
 
-<h2>Winter-Reichweite: Was Sie einplanen sollten</h2>
-<p>Der kritischste Moment für E-Auto-Reichweite ist der <strong>Winter</strong>. Kalte Batterien liefern weniger Energie, die Heizung zieht zusätzlich. Faustregel: Rechnen Sie mit <strong>70 bis 80 % der sommerlichen Reichweite</strong> bei Temperaturen unter 0 °C. Wer das unterschätzt, bleibt schnell liegen. Gute Strategien:</p>
-<ul>
-<li><strong>Vorheizen am Stecker:</strong> Wenn Sie mit Akku am Ladekabel vorheizen, verbraucht das Heizen keinen Strom aus dem Akku.</li>
-<li><strong>Sitz- und Lenkradheizung statt Raumheizung:</strong> Sitzheizungen verbrauchen nur 50–100 Watt und heizen effizienter direkt am Körper.</li>
-<li><strong>Gemächliches Fahren:</strong> Auf der Autobahn kostet Tempo 130 im Winter besonders viel — 10–20 km/h weniger zahlen sich direkt in Reichweite aus.</li>
-<li><strong>Eco-Modus nutzen:</strong> Reduziert Beschleunigung und Heizleistung — oft 10–15 % Reichweitengewinn.</li>
-</ul>
+**Einflussfaktoren auf die Reichweite**
 
-<h2>Ladekosten richtig einschätzen</h2>
-<p>Die Kosten pro 100 km hängen vom Strompreis und Ladepunkt ab:</p>
-<ul>
-<li><strong>Zuhause an der Wallbox</strong> (Haushaltstrom ≈ 32 ct/kWh): 4–6 € pro 100 km bei 15–18 kWh/100 km.</li>
-<li><strong>Wallbox-Sondertarif</strong> (ca. 28 ct): 3,50–5 €.</li>
-<li><strong>Öffentliche AC-Säule</strong> (ca. 45 ct): 7–9 €.</li>
-<li><strong>DC-Schnelllader</strong> (ca. 60–80 ct): 9–15 €.</li>
-</ul>
-<p>Zum Vergleich: Ein Verbrenner mit 6 l/100 km und 1,75 €/l kostet rund 10,50 € pro 100 km. E-Autos sind also beim Heimladen klar günstiger — beim Dauer-Nutzen öffentlicher Schnelllader kann der Preisvorteil allerdings schrumpfen.</p>
+Vier große Hebel bestimmen, wie weit Sie mit einer Akkuladung kommen:
 
-<h2>Wann lohnt sich das E-Auto?</h2>
-<p>Die Antwort hängt von Ihrem Fahrprofil ab. E-Autos spielen ihre Vorteile aus, wenn Sie</p>
-<ul>
-<li>überwiegend zu Hause oder am Arbeitsplatz laden können,</li>
-<li>hauptsächlich im Pendel- und Alltagsverkehr unterwegs sind,</li>
-<li>die THG-Quote (aktuell 100–200 €/Jahr) mitnehmen,</li>
-<li>eine PV-Anlage haben und selbst erzeugten Strom laden.</li>
-</ul>
-<p>Weniger attraktiv wird die Rechnung bei häufigen Langstrecken mit Schnelllader-Zwang oder in Miet- und Tiefgaragen ohne eigene Wallbox.</p>
+- **Geschwindigkeit (Fahrprofil):** Der Luftwiderstand wächst im Quadrat zur Geschwindigkeit. Tempo 100 verbraucht etwa doppelt so viel wie Tempo 70, Tempo 130 rund das Dreifache. Stadtfahrten profitieren von Rekuperation — hier landet ein Teil der Bremsenergie zurück im Akku.
+- **Außentemperatur:** Lithium-Ionen-Akkus arbeiten ab etwa 20 °C ideal. Bei 0 °C liefert der Akku nur noch rund 85 %, bei −10 °C kann es unter 70 % fallen. Gleichzeitig braucht die Heizung viel Strom, weil E-Autos keine Motorabwärme zum Heizen nutzen können.
+- **Heizung und Klimaanlage:** Klassische Widerstandsheizungen können im Winter 3–5 kW ziehen — das entspricht bei 100 km/h einem Mehrverbrauch von 3–5 kWh/100 km. Moderne Wärmepumpen reduzieren das auf etwa 1 kWh/100 km.
+- **Beladung, Dachboxen und Anhänger:** Jedes zusätzliche Gewicht und jeder aerodynamische Störfaktor kostet Reichweite — beim Anhänger kann sich die Reichweite halbieren.
 
-<h2>Unser Reichweiten-Rechner zeigt:</h2>
-<ul>
-<li>Die <strong>realistische Reichweite</strong> in km — abhängig von Ihrem Fahrprofil</li>
-<li>Den <strong>Realverbrauch</strong> in kWh/100 km</li>
-<li>Die <strong>Ladekosten</strong> pro 100 km und pro voller Ladung</li>
-<li>Den <strong>Abschlag gegenüber WLTP</strong> in Prozent</li>
-</ul>`,
+**Winter-Reichweite: Was Sie einplanen sollten**
+
+Der kritischste Moment für E-Auto-Reichweite ist der **Winter**. Kalte Batterien liefern weniger Energie, die Heizung zieht zusätzlich. Faustregel: Rechnen Sie mit **70 bis 80 % der sommerlichen Reichweite** bei Temperaturen unter 0 °C. Wer das unterschätzt, bleibt schnell liegen. Gute Strategien:
+
+- **Vorheizen am Stecker:** Wenn Sie mit Akku am Ladekabel vorheizen, verbraucht das Heizen keinen Strom aus dem Akku.
+- **Sitz- und Lenkradheizung statt Raumheizung:** Sitzheizungen verbrauchen nur 50–100 Watt und heizen effizienter direkt am Körper.
+- **Gemächliches Fahren:** Auf der Autobahn kostet Tempo 130 im Winter besonders viel — 10–20 km/h weniger zahlen sich direkt in Reichweite aus.
+- **Eco-Modus nutzen:** Reduziert Beschleunigung und Heizleistung — oft 10–15 % Reichweitengewinn.
+
+**Ladekosten richtig einschätzen**
+
+Die Kosten pro 100 km hängen vom Strompreis und Ladepunkt ab:
+
+- **Zuhause an der Wallbox** (Haushaltstrom ≈ 32 ct/kWh): 4–6 € pro 100 km bei 15–18 kWh/100 km.
+- **Wallbox-Sondertarif** (ca. 28 ct): 3,50–5 €.
+- **Öffentliche AC-Säule** (ca. 45 ct): 7–9 €.
+- **DC-Schnelllader** (ca. 60–80 ct): 9–15 €.
+
+Zum Vergleich: Ein Verbrenner mit 6 l/100 km und 1,75 €/l kostet rund 10,50 € pro 100 km. E-Autos sind also beim Heimladen klar günstiger — beim Dauer-Nutzen öffentlicher Schnelllader kann der Preisvorteil allerdings schrumpfen.
+
+**Wann lohnt sich das E-Auto?**
+
+Die Antwort hängt von Ihrem Fahrprofil ab. E-Autos spielen ihre Vorteile aus, wenn Sie
+
+- überwiegend zu Hause oder am Arbeitsplatz laden können,
+- hauptsächlich im Pendel- und Alltagsverkehr unterwegs sind,
+- die THG-Quote (aktuell 100–200 €/Jahr) mitnehmen,
+- eine PV-Anlage haben und selbst erzeugten Strom laden.
+
+Weniger attraktiv wird die Rechnung bei häufigen Langstrecken mit Schnelllader-Zwang oder in Miet- und Tiefgaragen ohne eigene Wallbox.
+
+**Unser Reichweiten-Rechner zeigt:**
+
+- Die **realistische Reichweite** in km — abhängig von Ihrem Fahrprofil
+- Den **Realverbrauch** in kWh/100 km
+- Die **Ladekosten** pro 100 km und pro voller Ladung
+- Den **Abschlag gegenüber WLTP** in Prozent`,
     faq: [
       {
         frage: 'Warum erreiche ich die WLTP-Reichweite nie?',

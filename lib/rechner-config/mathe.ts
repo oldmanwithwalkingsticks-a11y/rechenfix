@@ -799,63 +799,69 @@ Der **ASCII-Code** (American Standard Code for Information Interchange) ordnet j
     icon: '📐',
     formel: 'a² + b² = c² | c = √(a² + b²) | a = √(c² − b²) | b = √(c² − a²)',
     beispiel: 'Beispiel: a = 3 cm, b = 4 cm → c = √(9 + 16) = √25 = 5 cm. Fläche = (3 × 4) / 2 = 6 cm². Winkel α ≈ 36,87°, β ≈ 53,13°.',
-    erklaerung: `<h2>Der Satz des Pythagoras</h2>
-<p>Der <strong>Satz des Pythagoras</strong> gehört zu den wichtigsten Lehrsätzen der Mathematik und wird Schülern ab der Mittelstufe als erstes großes Werkzeug der Geometrie an die Hand gegeben. Er beschreibt eine einfache, aber mächtige Beziehung zwischen den drei Seiten eines <strong>rechtwinkligen Dreiecks</strong>:</p>
-<p style="text-align:center;font-size:1.25em;"><strong>a² + b² = c²</strong></p>
-<p>Dabei sind <strong>a</strong> und <strong>b</strong> die beiden <em>Katheten</em> (die Seiten, die den rechten Winkel einschließen) und <strong>c</strong> die <em>Hypotenuse</em> (die dem rechten Winkel gegenüberliegende Seite — immer die längste Seite des Dreiecks).</p>
+    erklaerung: `**Der Satz des Pythagoras**
 
-<h2>Wer war Pythagoras?</h2>
-<p>Pythagoras von Samos (ca. 570–495 v. Chr.) war ein griechischer Mathematiker und Philosoph. Der nach ihm benannte Lehrsatz war jedoch schon deutlich früher bekannt — babylonische Tontafeln zeigen, dass die Babylonier bereits 1.800 v. Chr. pythagoräische Zahlentripel nutzten. Auch die Ägypter kannten die Beziehung (beim sogenannten „Seilspannen" für rechtwinklige Ecken). Pythagoras und seine Schule haben den Satz allerdings systematisiert und erstmals bewiesen.</p>
+Der **Satz des Pythagoras** gehört zu den wichtigsten Lehrsätzen der Mathematik und wird Schülern ab der Mittelstufe als erstes großes Werkzeug der Geometrie an die Hand gegeben. Er beschreibt eine einfache, aber mächtige Beziehung zwischen den drei Seiten eines **rechtwinkligen Dreiecks**:
+**a² + b² = c²**
 
-<h2>Die drei Formen des Pythagoras-Satzes</h2>
-<p>Je nachdem, welche Seite Sie suchen, wird die Formel umgestellt:</p>
-<ul>
-<li><strong>Hypotenuse c suchen:</strong> c = √(a² + b²)</li>
-<li><strong>Kathete a suchen:</strong> a = √(c² − b²)</li>
-<li><strong>Kathete b suchen:</strong> b = √(c² − a²)</li>
-</ul>
-<p>Wichtig: Bei der Berechnung einer Kathete muss die Hypotenuse <strong>immer länger</strong> sein als die bekannte Kathete — sonst gibt es kein reelles Ergebnis und das Dreieck kann gar nicht existieren.</p>
+Dabei sind **a** und **b** die beiden Katheten (die Seiten, die den rechten Winkel einschließen) und **c** die Hypotenuse (die dem rechten Winkel gegenüberliegende Seite — immer die längste Seite des Dreiecks).
 
-<h2>Pythagoräische Zahlentripel</h2>
-<p>Manche Seitenlängen ergeben besonders „schöne" Dreiecke, weil alle drei Seiten ganzzahlig sind. Die bekanntesten <strong>pythagoräischen Tripel</strong> sind:</p>
-<ul>
-<li><strong>3 – 4 – 5</strong> (das berühmte ägyptische Dreieck)</li>
-<li><strong>5 – 12 – 13</strong></li>
-<li><strong>8 – 15 – 17</strong></li>
-<li><strong>7 – 24 – 25</strong></li>
-<li><strong>20 – 21 – 29</strong></li>
-</ul>
-<p>Diese Tripel sind in Schule und Prüfung beliebt, weil sich die Rechnung ohne Taschenrechner lösen lässt. Alle Vielfachen eines Tripels (z. B. 6–8–10 oder 9–12–15) sind wieder Tripel.</p>
+**Wer war Pythagoras?**
 
-<h2>Anwendungen im Alltag</h2>
-<p>Pythagoras ist keine reine Schulmathematik — er steckt überall im Alltag und Handwerk:</p>
-<ul>
-<li><strong>Bauen &amp; Handwerk:</strong> Rechte Winkel anschlagen, Diagonale von Räumen ausmessen, Treppenhöhen berechnen.</li>
-<li><strong>Navigation:</strong> Luftlinienentfernungen auf einer Karte bestimmen.</li>
-<li><strong>Bildschirm-Diagonalen:</strong> Ein 27-Zoll-Monitor (68,6 cm Diagonale) bei 16:9-Format hat rund 59,7 cm Breite und 33,6 cm Höhe — berechnet mit Pythagoras.</li>
-<li><strong>Sport:</strong> Fußballfeld-Diagonale, Sprungweiten, Schussbahnen.</li>
-<li><strong>Astronomie &amp; Physik:</strong> Komponentenzerlegung von Vektoren, Kräfteberechnung.</li>
-</ul>
+Pythagoras von Samos (ca. 570–495 v. Chr.) war ein griechischer Mathematiker und Philosoph. Der nach ihm benannte Lehrsatz war jedoch schon deutlich früher bekannt — babylonische Tontafeln zeigen, dass die Babylonier bereits 1.800 v. Chr. pythagoräische Zahlentripel nutzten. Auch die Ägypter kannten die Beziehung (beim sogenannten „Seilspannen" für rechtwinklige Ecken). Pythagoras und seine Schule haben den Satz allerdings systematisiert und erstmals bewiesen.
 
-<h2>Die Umkehrung: Ist das Dreieck rechtwinklig?</h2>
-<p>Die Umkehrung des Pythagoras-Satzes ist ebenfalls wichtig: Wenn in einem Dreieck <strong>a² + b² = c²</strong> gilt, dann ist es <strong>rechtwinklig</strong>. So lässt sich prüfen, ob ein gegebenes Dreieck einen rechten Winkel hat — zum Beispiel, wenn ein Handwerker eine rechtwinklige Ecke am Bau kontrolliert.</p>
+**Die drei Formen des Pythagoras-Satzes**
 
-<h2>Winkelberechnung mit Trigonometrie</h2>
-<p>Mit bekannten Seiten lassen sich auch die spitzen Winkel berechnen:</p>
-<ul>
-<li><strong>α = arctan(a / b)</strong> (Winkel gegenüber Kathete a)</li>
-<li><strong>β = 90° − α</strong></li>
-<li><strong>γ = 90°</strong> (der rechte Winkel)</li>
-</ul>
-<p>Die Winkelsumme im Dreieck beträgt immer 180°, also ergibt α + β + 90° = 180°.</p>
+Je nachdem, welche Seite Sie suchen, wird die Formel umgestellt:
 
-<h2>Unser Pythagoras-Rechner zeigt:</h2>
-<ul>
-<li>Die fehlende Seite exakt ausgerechnet</li>
-<li>Den <strong>Rechenweg Schritt für Schritt</strong> zum Verstehen und Nachvollziehen</li>
-<li>Eine <strong>Grafik des Dreiecks</strong> mit allen Maßen</li>
-<li>Fläche, Umfang und beide spitzen Winkel</li>
-</ul>`,
+- **Hypotenuse c suchen:** c = √(a² + b²)
+- **Kathete a suchen:** a = √(c² − b²)
+- **Kathete b suchen:** b = √(c² − a²)
+
+Wichtig: Bei der Berechnung einer Kathete muss die Hypotenuse **immer länger** sein als die bekannte Kathete — sonst gibt es kein reelles Ergebnis und das Dreieck kann gar nicht existieren.
+
+**Pythagoräische Zahlentripel**
+
+Manche Seitenlängen ergeben besonders „schöne" Dreiecke, weil alle drei Seiten ganzzahlig sind. Die bekanntesten **pythagoräischen Tripel** sind:
+
+- **3 – 4 – 5** (das berühmte ägyptische Dreieck)
+- **5 – 12 – 13**
+- **8 – 15 – 17**
+- **7 – 24 – 25**
+- **20 – 21 – 29**
+
+Diese Tripel sind in Schule und Prüfung beliebt, weil sich die Rechnung ohne Taschenrechner lösen lässt. Alle Vielfachen eines Tripels (z. B. 6–8–10 oder 9–12–15) sind wieder Tripel.
+
+**Anwendungen im Alltag**
+
+Pythagoras ist keine reine Schulmathematik — er steckt überall im Alltag und Handwerk:
+
+- **Bauen & Handwerk:** Rechte Winkel anschlagen, Diagonale von Räumen ausmessen, Treppenhöhen berechnen.
+- **Navigation:** Luftlinienentfernungen auf einer Karte bestimmen.
+- **Bildschirm-Diagonalen:** Ein 27-Zoll-Monitor (68,6 cm Diagonale) bei 16:9-Format hat rund 59,7 cm Breite und 33,6 cm Höhe — berechnet mit Pythagoras.
+- **Sport:** Fußballfeld-Diagonale, Sprungweiten, Schussbahnen.
+- **Astronomie & Physik:** Komponentenzerlegung von Vektoren, Kräfteberechnung.
+
+**Die Umkehrung: Ist das Dreieck rechtwinklig?**
+
+Die Umkehrung des Pythagoras-Satzes ist ebenfalls wichtig: Wenn in einem Dreieck **a² + b² = c²** gilt, dann ist es **rechtwinklig**. So lässt sich prüfen, ob ein gegebenes Dreieck einen rechten Winkel hat — zum Beispiel, wenn ein Handwerker eine rechtwinklige Ecke am Bau kontrolliert.
+
+**Winkelberechnung mit Trigonometrie**
+
+Mit bekannten Seiten lassen sich auch die spitzen Winkel berechnen:
+
+- **α = arctan(a / b)** (Winkel gegenüber Kathete a)
+- **β = 90° − α**
+- **γ = 90°** (der rechte Winkel)
+
+Die Winkelsumme im Dreieck beträgt immer 180°, also ergibt α + β + 90° = 180°.
+
+**Unser Pythagoras-Rechner zeigt:**
+
+- Die fehlende Seite exakt ausgerechnet
+- Den **Rechenweg Schritt für Schritt** zum Verstehen und Nachvollziehen
+- Eine **Grafik des Dreiecks** mit allen Maßen
+- Fläche, Umfang und beide spitzen Winkel`,
     faq: [
       {
         frage: 'Was besagt der Satz des Pythagoras?',

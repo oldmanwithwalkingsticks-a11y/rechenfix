@@ -941,46 +941,49 @@ Für Menschen mit **gesunden Nieren** ist eine hohe Proteinzufuhr unbedenklich. 
     icon: '❤️',
     formel: 'Max. HF = 207 − 0,7 × Alter (genauer als 220 − Alter) | Karvonen: Zielpuls = ((MaxHF − Ruhepuls) × Intensität) + Ruhepuls',
     beispiel: 'Beispiel: 35 Jahre, Ruhepuls 65 → MaxHF ≈ 183 bpm. Fettverbrennung (60–70 % nach Karvonen): 136–148 bpm. Grundlagenausdauer (70–80 %): 148–159 bpm.',
-    erklaerung: `<h2>Warum die Herzfrequenz beim Training zählt</h2>
-<p>Der <strong>Puls</strong> ist der zuverlässigste Indikator dafür, wie hart Ihr Körper beim Training arbeitet. Wer ohne Pulskontrolle läuft oder radelt, trainiert oft entweder zu lasch — und verschenkt den Effekt — oder zu intensiv — und bremst die Regeneration aus. Mit einem <strong>Herzfrequenz-Rechner</strong> ermitteln Sie Ihre persönlichen Trainingszonen und wissen genau, bei welchem Puls Sie welchen Effekt erzielen: Fettverbrennung, Ausdauer, Tempohärte oder Spitzenleistung.</p>
+    erklaerung: `**Warum die Herzfrequenz beim Training zählt**
 
-<h2>Maximale Herzfrequenz bestimmen</h2>
-<p>Die <strong>maximale Herzfrequenz (MaxHF)</strong> ist die Obergrenze, die Ihr Herz unter maximaler Belastung erreichen kann. Sie ist individuell, hängt vor allem vom Alter ab und sinkt mit den Jahren natürlich. Die bekannteste Faustformel lautet <strong>220 − Alter</strong>, ist aber ungenau. Die modernere Formel <strong>207 − 0,7 × Alter</strong> (Tanaka) liefert in Studien bessere Ergebnisse — vor allem bei Älteren und Trainierten. Noch präziser ist ein sportmedizinischer <strong>Laktattest</strong> oder <strong>Spiroergometrie</strong>, wie ihn Sportärzte anbieten.</p>
+Der **Puls** ist der zuverlässigste Indikator dafür, wie hart Ihr Körper beim Training arbeitet. Wer ohne Pulskontrolle läuft oder radelt, trainiert oft entweder zu lasch — und verschenkt den Effekt — oder zu intensiv — und bremst die Regeneration aus. Mit einem **Herzfrequenz-Rechner** ermitteln Sie Ihre persönlichen Trainingszonen und wissen genau, bei welchem Puls Sie welchen Effekt erzielen: Fettverbrennung, Ausdauer, Tempohärte oder Spitzenleistung.
 
-<h2>Die 5 Trainingszonen</h2>
-<p>Herzfrequenz-basiertes Training unterscheidet traditionell fünf Zonen — jede mit eigenem Effekt:</p>
-<ul>
-<li><strong>Zone 1 – Regeneration (50–60 % MaxHF):</strong> Lockere Bewegung, aktive Erholung, Warm-Up. Kaum belastend, fördert die Durchblutung nach harten Einheiten.</li>
-<li><strong>Zone 2 – Fettverbrennung (60–70 %):</strong> Der Körper deckt den Energiebedarf maximal aus Fettreserven. Ideal für lange, ruhige Einheiten und Einsteiger. <em>Wichtig: Absolute Fettkalorien sind in Zone 3 höher — weil dort insgesamt mehr Kalorien verbrannt werden.</em></li>
-<li><strong>Zone 3 – Grundlagenausdauer (70–80 %):</strong> Aerobe Energiebereitstellung, verbessert Herz-Kreislauf-System, Sauerstoffaufnahme und Schlagvolumen. Die wichtigste Zone für Breitensportler.</li>
-<li><strong>Zone 4 – Anaerobe Schwelle (80–90 %):</strong> Laktatschwellentraining. Der Körper produziert mehr Laktat, als er abbauen kann. Macht schnell und tempohart, ist aber belastend.</li>
-<li><strong>Zone 5 – Maximum (90–100 %):</strong> VO₂max-Training, nur in kurzen Intervallen. Entwickelt absolute Spitzenleistung, erfordert lange Regeneration.</li>
-</ul>
+**Maximale Herzfrequenz bestimmen**
 
-<h2>Karvonen-Formel: genauer mit Ruhepuls</h2>
-<p>Die einfache Prozentrechnung über MaxHF ignoriert Ihren persönlichen Trainingszustand. Wer sehr fit ist, hat einen deutlich niedrigeren Ruhepuls — und damit eine größere <strong>Herzfrequenzreserve (HFR)</strong>. Die <strong>Karvonen-Formel</strong> bezieht diese Reserve ein:</p>
-<p><strong>Zielpuls = ((MaxHF − Ruhepuls) × Intensität) + Ruhepuls</strong></p>
-<p>Beispiel: Bei MaxHF 180, Ruhepuls 60 und 70 % Intensität ergibt sich Zielpuls = ((180 − 60) × 0,7) + 60 = <strong>144 bpm</strong>. Ohne Karvonen wären es 180 × 0,7 = 126 bpm — deutlich zu niedrig für eine effektive Zone-3-Einheit eines Trainierten. Die Karvonen-Methode liefert damit fairere, individuellere Zonen.</p>
+Die **maximale Herzfrequenz (MaxHF)** ist die Obergrenze, die Ihr Herz unter maximaler Belastung erreichen kann. Sie ist individuell, hängt vor allem vom Alter ab und sinkt mit den Jahren natürlich. Die bekannteste Faustformel lautet **220 − Alter**, ist aber ungenau. Die modernere Formel **207 − 0,7 × Alter** (Tanaka) liefert in Studien bessere Ergebnisse — vor allem bei Älteren und Trainierten. Noch präziser ist ein sportmedizinischer **Laktattest** oder **Spiroergometrie**, wie ihn Sportärzte anbieten.
 
-<h2>Ruhepuls richtig messen</h2>
-<p>Der Ruhepuls wird <strong>morgens direkt nach dem Aufwachen</strong> gemessen — noch im Liegen, bevor Sie aufstehen. Zählen Sie 60 Sekunden lang am Handgelenk oder Hals. Ideal: Mittelwert über 5 Tage. Werte von 60 bis 80 bpm sind normal, trainierte Ausdauersportler erreichen 40 bis 50 bpm, Leistungssportler unter 40. <strong>Wichtig:</strong> Ein plötzlich erhöhter Ruhepuls (> 5 bpm über normal) kann auf Übertraining, Stress oder einen beginnenden Infekt hinweisen — dann besser pausieren.</p>
+**Die 5 Trainingszonen**
 
-<h2>Welche Zone für welches Ziel?</h2>
-<ul>
-<li><strong>Abnehmen:</strong> Zone 2–3, lange Einheiten (45–90 Minuten) bei moderatem Puls.</li>
-<li><strong>Ausdauer aufbauen:</strong> Zone 3, 2–3-mal pro Woche 30–60 Minuten.</li>
-<li><strong>Leistung steigern:</strong> Zone 4 in Intervallen (z. B. 4 × 4 Minuten mit Pause).</li>
-<li><strong>Maximalleistung:</strong> Zone 5, kurze Intervalle (30 Sekunden bis 2 Minuten), selten.</li>
-<li><strong>Regeneration:</strong> Zone 1 nach harten Einheiten.</li>
-</ul>
+Herzfrequenz-basiertes Training unterscheidet traditionell fünf Zonen — jede mit eigenem Effekt:
 
-<h2>Unser Herzfrequenz-Rechner zeigt Ihnen:</h2>
-<ul>
-<li>Ihre individuelle <strong>maximale Herzfrequenz</strong></li>
-<li>Alle <strong>fünf Trainingszonen</strong> in konkreten Puls-Bereichen</li>
-<li>Die genauere Berechnung nach <strong>Karvonen mit Ruhepuls</strong></li>
-<li>Empfehlungen, welche Zone zu welchem Trainingsziel passt</li>
-</ul>`,
+- **Zone 1 – Regeneration (50–60 % MaxHF):** Lockere Bewegung, aktive Erholung, Warm-Up. Kaum belastend, fördert die Durchblutung nach harten Einheiten.
+- **Zone 2 – Fettverbrennung (60–70 %):** Der Körper deckt den Energiebedarf maximal aus Fettreserven. Ideal für lange, ruhige Einheiten und Einsteiger. Wichtig: Absolute Fettkalorien sind in Zone 3 höher — weil dort insgesamt mehr Kalorien verbrannt werden.
+- **Zone 3 – Grundlagenausdauer (70–80 %):** Aerobe Energiebereitstellung, verbessert Herz-Kreislauf-System, Sauerstoffaufnahme und Schlagvolumen. Die wichtigste Zone für Breitensportler.
+- **Zone 4 – Anaerobe Schwelle (80–90 %):** Laktatschwellentraining. Der Körper produziert mehr Laktat, als er abbauen kann. Macht schnell und tempohart, ist aber belastend.
+- **Zone 5 – Maximum (90–100 %):** VO₂max-Training, nur in kurzen Intervallen. Entwickelt absolute Spitzenleistung, erfordert lange Regeneration.
+
+**Karvonen-Formel: genauer mit Ruhepuls**
+
+Die einfache Prozentrechnung über MaxHF ignoriert Ihren persönlichen Trainingszustand. Wer sehr fit ist, hat einen deutlich niedrigeren Ruhepuls — und damit eine größere **Herzfrequenzreserve (HFR)**. Die **Karvonen-Formel** bezieht diese Reserve ein:
+**Zielpuls = ((MaxHF − Ruhepuls) × Intensität) + Ruhepuls**
+
+Beispiel: Bei MaxHF 180, Ruhepuls 60 und 70 % Intensität ergibt sich Zielpuls = ((180 − 60) × 0,7) + 60 = **144 bpm**. Ohne Karvonen wären es 180 × 0,7 = 126 bpm — deutlich zu niedrig für eine effektive Zone-3-Einheit eines Trainierten. Die Karvonen-Methode liefert damit fairere, individuellere Zonen.
+
+**Ruhepuls richtig messen**
+
+Der Ruhepuls wird **morgens direkt nach dem Aufwachen** gemessen — noch im Liegen, bevor Sie aufstehen. Zählen Sie 60 Sekunden lang am Handgelenk oder Hals. Ideal: Mittelwert über 5 Tage. Werte von 60 bis 80 bpm sind normal, trainierte Ausdauersportler erreichen 40 bis 50 bpm, Leistungssportler unter 40. **Wichtig:** Ein plötzlich erhöhter Ruhepuls (> 5 bpm über normal) kann auf Übertraining, Stress oder einen beginnenden Infekt hinweisen — dann besser pausieren.
+
+**Welche Zone für welches Ziel?**
+
+- **Abnehmen:** Zone 2–3, lange Einheiten (45–90 Minuten) bei moderatem Puls.
+- **Ausdauer aufbauen:** Zone 3, 2–3-mal pro Woche 30–60 Minuten.
+- **Leistung steigern:** Zone 4 in Intervallen (z. B. 4 × 4 Minuten mit Pause).
+- **Maximalleistung:** Zone 5, kurze Intervalle (30 Sekunden bis 2 Minuten), selten.
+- **Regeneration:** Zone 1 nach harten Einheiten.
+
+**Unser Herzfrequenz-Rechner zeigt Ihnen:**
+
+- Ihre individuelle **maximale Herzfrequenz**
+- Alle **fünf Trainingszonen** in konkreten Puls-Bereichen
+- Die genauere Berechnung nach **Karvonen mit Ruhepuls**
+- Empfehlungen, welche Zone zu welchem Trainingsziel passt`,
     faq: [
       {
         frage: 'Wie berechne ich meine maximale Herzfrequenz?',
