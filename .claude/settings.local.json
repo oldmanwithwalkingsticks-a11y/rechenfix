@@ -58,7 +58,10 @@
       "Bash(node -e \"console.log\\('p1', 'Poolkosten berechnen: Jährliche Kosten für Wasser, Strom, Chemie und Wartung Ihres Pools — mit Heizung und Abdeckung.'.length\\); console.log\\('p2', 'Satz des Pythagoras berechnen: Fehlende Seite im rechtwinkligen Dreieck — mit Fläche, Winkeln und Rechenweg Schritt für Schritt.'.length\\)\")",
       "Bash(node scripts/fix-erklaerung.mjs)",
       "Bash(node scripts/fix-headings.mjs)",
-      "Bash(node -e \"console.log\\('Gleichungen lösen: Lineare und quadratische Gleichungen mit vollständigem Rechenweg und Parabel-Grafik.'.length\\)\")"
+      "Bash(node -e \"console.log\\('Gleichungen lösen: Lineare und quadratische Gleichungen mit vollständigem Rechenweg und Parabel-Grafik.'.length\\)\")",
+      "Bash(grep -rn \"unterhaltsrechner\\\\|scheidungskosten-rechner\\\\|zugewinnausgleich-rechner\" lib/rechner-config/*.ts)",
+      "Bash(awk 'END{print NR}' lib/rechner-config/alltag.ts lib/rechner-config/arbeit.ts)",
+      "Bash(grep -E \"slug: '\\(einheiten-umrechner|bmi-rechner|splitting-rechner|schuhgroessen-rechner\\)'\" lib/rechner-config/*.ts)"
     ]
   }
 }

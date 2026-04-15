@@ -170,6 +170,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'scheidung': 'Rechtsschutzversicherung mit Familienrecht? KS Auxilia übernimmt Anwalts- und Gerichtskosten bei Scheidung.',
     'zugewinn': 'Streit um den Zugewinnausgleich? KS Auxilia Rechtsschutz übernimmt Ihre Anwaltskosten im Familienrecht.',
     'mietpreisbremse': 'Miete zu hoch? KS Auxilia Rechtsschutz übernimmt die Kosten für die Durchsetzung der Mietpreisbremse.',
+    'ehegattenunterhalt': 'Streit um Ehegattenunterhalt? KS Auxilia Rechtsschutz deckt Ihre Anwaltskosten im Familienrecht.',
   },
 };
 

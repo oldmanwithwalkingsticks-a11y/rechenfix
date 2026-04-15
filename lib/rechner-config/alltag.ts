@@ -1315,4 +1315,94 @@ Kinderfüße wachsen in den ersten Lebensjahren rasant. Die Deutsche Gesellschaf
       },
     ],
   },
+  {
+    slug: 'kleidergroessen-rechner',
+    titel: 'Kleidergrößen-Umrechner',
+    beschreibung: 'Kleidergrößen umrechnen: DE, EU, US, UK und IT für Damen und Herren mit Maßtabelle und Empfehlung.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Kleidergrößen-Umrechner 2026 — DE, US, UK & IT | Rechenfix',
+    metaDescription: 'Kleidergrößen umrechnen: DE, EU, US, UK und IT für Damen und Herren mit Maßtabelle und Größenempfehlung.',
+    keywords: ['kleidergrößen umrechnen', 'konfektionsgrößen', 'damen größe', 'herren größe', 'us größe in deutsche', 'uk größe', 'italienische größe', 'maßtabelle kleidung'],
+    icon: '👕',
+    formel: 'Damen: US = DE − 32 | UK = DE − 28 | IT = DE + 6   |   Herren: US/UK ≈ DE − 10 | IT = DE',
+    beispiel: 'Damen DE 38 entspricht EU 38, US 6, UK 10 und IT 44. Herren DE 50 entspricht EU 50, US 40, UK 40 und IT 50.',
+    erklaerung: `**Kleidergrößen international — der Größen-Dschungel einfach erklärt**
+
+Wer schon einmal online in einem US-amerikanischen oder britischen Shop Kleidung bestellt hat, kennt das Problem: Jedes Land hat sein eigenes Größensystem, und die Umrechnung ist nicht immer intuitiv. Unser **Kleidergrößen-Umrechner** zeigt Ihnen in Sekundenschnelle, welche Größe in den wichtigsten Systemen (DE, EU, US, UK und IT) Ihrer gewohnten deutschen Größe entspricht — sowohl für Damen als auch für Herren.
+
+Zusätzlich können Sie **Körpermaße** (Oberweite, Taille und Hüfte) eingeben, um eine passende Größenempfehlung zu erhalten. Das ist besonders praktisch, wenn Sie zwischen zwei Größen liegen oder bei einer unbekannten Marke einkaufen.
+
+**Die wichtigsten Größensysteme im Überblick**
+
+- **DE (Deutschland):** Das deutsche System ist in Europa am weitesten verbreitet und entspricht bei Damen und Herren dem EU-Standard. Die Größen reichen bei Damen typischerweise von 32 bis 52, bei Herren von 44 bis 62.
+- **EU (Europäische Union):** Identisch mit dem deutschen System in fast allen Fällen. In einigen EU-Ländern (z. B. Frankreich) werden die Damengrößen um 2 erhöht, das Hinweis-Zeichen ist aber selten.
+- **US (USA):** Damengrößen sind deutlich kleiner nummeriert (0, 2, 4 … 20). Herrengrößen entsprechen in der Regel dem Brustumfang in Inch minus einer kleinen Korrektur.
+- **UK (Großbritannien):** Damen liegen 4 Größen unter DE (DE 38 = UK 10). Herren entsprechen dem US-System.
+- **IT (Italien):** Damen sind in IT **6 Größen höher** als in DE. DE 38 wird in Italien zu IT 44. Bei Herren ist IT meist identisch mit DE.
+
+**Faustregeln zum Merken**
+
+- **Damen DE → US:** einfach 32 abziehen. DE 38 → US 6. DE 42 → US 10.
+- **Damen DE → UK:** 28 abziehen. DE 38 → UK 10. DE 44 → UK 16.
+- **Damen DE → IT:** 6 addieren. DE 38 → IT 44.
+- **Herren DE → US/UK:** rund 10 abziehen. DE 50 → US/UK 40.
+- **Herren DE → IT:** identisch. DE 52 → IT 52.
+
+**Körpermaße — die genauere Methode**
+
+Größenangaben sind praktisch, aber ungenau. Eine DE 38 eines Herstellers kann bei einem anderen Hersteller oder in einer anderen Schnittserie komplett anders ausfallen. Zuverlässiger ist es, die **Körpermaße** mit der Maßtabelle abzugleichen. Unsere Tabelle basiert auf Durchschnittswerten deutscher Herstellernormen:
+
+- **Oberweite** (Damen) bzw. **Brustumfang** (Herren): Messen Sie mit einem Maßband horizontal um den vollsten Teil der Brust — bei Damen inklusive Büstenhalter.
+- **Taille:** Messen Sie an der schmalsten Stelle zwischen Rippenbogen und Beckenknochen — ohne den Bauch einzuziehen.
+- **Hüfte** (nur Damen): Messen Sie um den breitesten Teil der Hüfte, etwa 20 cm unterhalb der Taille.
+
+Das Maßband sollte dabei locker anliegen — zu straff gemessen, werden Sie eine zu kleine Größe kaufen.
+
+**Typische Herausforderungen beim Online-Kauf**
+
+- **Italienische Marken** fallen oft enger aus. Wer in Deutschland DE 38 trägt, sollte bei italienischen Labels gelegentlich eine Nummer größer wählen.
+- **US-Shops** verwenden manchmal **Vanity Sizing**: Die Größen werden absichtlich kleiner benannt, damit man sich "dünner" fühlt. Eine US 6 kann also tatsächlich eher einer DE 40 entsprechen.
+- **Britische Jeans und Herren-Hemden** werden oft in Inch für Taille und Kragenweite angegeben. Hier gilt: 1 Inch = 2,54 cm. Eine Kragenweite 16 entspricht 40,6 cm.
+- **Schnitte** wie "Slim Fit", "Regular Fit" oder "Oversized" überlagern die Größenangabe — immer die Produktbeschreibung lesen.
+
+**Zwischen zwei Größen?**
+
+Wenn Ihre Körpermaße genau zwischen zwei Größen liegen, empfiehlt sich in der Regel die **größere**. Zu enge Kleidung wirkt schnell unvorteilhaft, während zu große Kleidung oft mit kleinen Anpassungen (Gürtel, Schneider) noch gut tragbar ist. Bei Stretch-Stoffen (Jersey, Elasthan) können Sie auch die kleinere nehmen — der Stoff gibt nach.
+
+**Was unser Kleidergrößen-Rechner bietet**
+
+- Umrechnung zwischen DE, EU, US, UK und IT
+- Separate Tabellen für **Damen** und **Herren**
+- Maßtabelle mit Oberweite/Brust, Taille und Hüfte
+- Empfehlung nach eingegebenen Körpermaßen (cm)
+- Hervorhebung der aktuellen Größe in der Tabelle
+- Hinweis, wenn Sie zwischen zwei Größen liegen`,
+    faq: [
+      {
+        frage: 'Warum sind italienische Größen anders als deutsche?',
+        antwort: 'Italienische Damengrößen liegen üblicherweise 6 Nummern über den deutschen. DE 38 entspricht IT 44. Grund ist historisch: Italien nutzt ein Maßsystem, das auf dem Brustumfang in Zentimetern basiert — DE 38 hat typischerweise eine Oberweite von etwa 88 cm, was in Italien mit Größe 44 bezeichnet wird. Bei Herren ist das italienische System dagegen meist identisch mit dem deutschen.',
+      },
+      {
+        frage: 'Wie rechne ich US-Damengrößen in deutsche um?',
+        antwort: 'Für Damen gilt als Faustregel: Deutsche Größe = US-Größe + 32. Eine US 6 entspricht also DE 38, US 10 entspricht DE 42. Bei US-Modemarken mit "Vanity Sizing" kann die Realität leicht abweichen — zwei Hersteller können dieselbe US 8 mit 1 bis 2 cm Unterschied in der Oberweite produzieren. Körpermaße sind daher immer verlässlicher als die reine Größenangabe.',
+      },
+      {
+        frage: 'Was bedeutet "Vanity Sizing"?',
+        antwort: 'Vanity Sizing ist die Praxis, Kleidung mit kleineren Größenbezeichnungen zu versehen, als es den tatsächlichen Maßen entspricht — um Kunden ein schmeichelhaftes Gefühl zu geben. Besonders in den USA und Großbritannien verbreitet: Eine Frau, die heute US 6 trägt, hätte vor 30 Jahren US 10 getragen, obwohl sich ihre Maße nicht geändert haben. Die Folge: Größenangaben sind kein verlässlicher Vergleichsmaßstab mehr.',
+      },
+      {
+        frage: 'Welche Körpermaße brauche ich zum Bestellen?',
+        antwort: 'Für Oberteile: Oberweite (Damen) bzw. Brustumfang (Herren). Für Hosen: Taille und Hüfte (Damen) bzw. Bundweite (Herren), gegebenenfalls Innenbeinlänge. Für Kleider: Oberweite, Taille und Hüfte. Messen Sie mit einem weichen Maßband direkt auf der Haut oder dünner Unterwäsche — nicht über Pullover. Das Maßband sollte locker, aber ohne zu hängen, anliegen.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen Konfektionsgröße und Normalgröße?',
+        antwort: 'Konfektionsgrößen (DE 32 bis 52) sind die Standardgrößen, die auf durchschnittliche Körpermaße normgerecht ausgelegt sind. Daneben gibt es Kurzgrößen (halbe Zahl, z. B. 18, 19, 20 — für kleinere Personen), Langgrößen (76, 78 — für größere Personen) und Plus Sizes (ab DE 46/48). Bei Herren gibt es zusätzlich die Schlankgrößen (25–32) und die Untersetzt-Größen (50–64).',
+      },
+      {
+        frage: 'Passt meine Größe bei verschiedenen Marken gleich?',
+        antwort: 'Nein — leider nicht. Trotz DIN-Norm weichen Hersteller teils erheblich voneinander ab. Eine DE 38 bei H&M kann anders sitzen als eine DE 38 bei Zara oder Marc O\\\'Polo. Besonders Premium- und Design-Marken fallen oft enger aus. Lesen Sie immer die Maßangaben in der Produktbeschreibung und vergleichen Sie mit unserer Maßtabelle. Bei Unsicherheit: zwei Größen bestellen und die passendere behalten.',
+      },
+    ],
+  },
 ];
