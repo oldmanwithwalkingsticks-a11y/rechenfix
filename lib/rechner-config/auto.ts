@@ -8,7 +8,7 @@ export const autoRechner: RechnerConfig[] = [
     kategorie: 'Auto & Verkehr',
     kategorieSlug: 'auto',
     metaTitle: 'Spritkostenrechner 2026 — Fahrtkosten berechnen | Rechenfix',
-    metaDescription: 'Spritkosten berechnen ✓ Benzinkosten & Fahrtkosten sofort ermitteln ✓ Mit Hin- & Rückfahrt ✓ Kostenlos. Jetzt Fahrtkosten berechnen! ✓ Mit KI-Erklärung.',
+    metaDescription: 'Spritkosten berechnen: Benzinkosten und Fahrtkosten sofort ermitteln — mit Hin- und Rückfahrt, Kosten pro km und KI-Erklärung. Kostenlos.',
     keywords: ['spritkostenrechner', 'spritkosten berechnen', 'fahrtkosten rechner', 'benzinkosten', 'kosten pro km', 'tankkosten berechnen'],
     icon: '⛽',
     formel: 'Spritkosten = (Strecke ÷ 100) × Verbrauch × Spritpreis',
