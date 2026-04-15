@@ -39,13 +39,14 @@ function progressiveSteuer(jahresBrutto: number, freibetragJahr: number): number
   return 17000 * 0.19 + (66761 - 17000) * 0.33 + (zvE - 66761) * 0.42;
 }
 
-function nettoAus(brutto: number, sk: Steuerklasse): number {
+function nettoAus(brutto: number, sk: Steuerklasse, kirchensteuerSatz: number): number {
   if (brutto <= 0) return 0;
   const jahresBrutto = brutto * 12;
   const sv = brutto * SV_PAUSCHALE;
   const steuerJahr = STEUER_FAKTOR[sk](jahresBrutto);
   const steuerMonat = steuerJahr / 12;
-  return Math.max(0, brutto - sv - steuerMonat);
+  const kirchensteuer = steuerMonat * kirchensteuerSatz;
+  return Math.max(0, brutto - sv - steuerMonat - kirchensteuer);
 }
 
 const BUNDESLAENDER = [
@@ -54,20 +55,24 @@ const BUNDESLAENDER = [
   'Rheinland-Pfalz', 'Saarland', 'Sachsen', 'Sachsen-Anhalt', 'Schleswig-Holstein', 'Thüringen',
 ];
 
+const LAENDER_8_PROZENT = ['Bayern', 'Baden-Württemberg'];
+
 export default function KurzarbeitergeldRechner() {
   const [sollBrutto, setSollBrutto] = useState('3500');
   const [istBrutto, setIstBrutto] = useState('1750');
   const [steuerklasse, setSteuerklasse] = useState<Steuerklasse>('I');
   const [mitKind, setMitKind] = useState(false);
   const [bundesland, setBundesland] = useState('Nordrhein-Westfalen');
+  const [kirchensteuer, setKirchensteuer] = useState(false);
 
   const sB = parseDeutscheZahl(sollBrutto);
   const iB = parseDeutscheZahl(istBrutto);
+  const kstSatz = kirchensteuer ? (LAENDER_8_PROZENT.includes(bundesland) ? 0.08 : 0.09) : 0;
 
   const ergebnis = useMemo(() => {
     if (sB <= 0 || iB < 0 || iB > sB) return null;
-    const sollNetto = nettoAus(sB, steuerklasse);
-    const istNetto = nettoAus(iB, steuerklasse);
+    const sollNetto = nettoAus(sB, steuerklasse, kstSatz);
+    const istNetto = nettoAus(iB, steuerklasse, kstSatz);
     const differenz = Math.max(0, sollNetto - istNetto);
     const satz = mitKind ? 0.67 : 0.60;
     const kug = differenz * satz;
@@ -75,7 +80,7 @@ export default function KurzarbeitergeldRechner() {
     const verlust = Math.max(0, sollNetto - gesamtEinkommen);
     const verlustProzent = sollNetto > 0 ? (verlust / sollNetto) * 100 : 0;
     return { sollNetto, istNetto, differenz, satz, kug, gesamtEinkommen, verlust, verlustProzent };
-  }, [sB, iB, steuerklasse, mitKind]);
+  }, [sB, iB, steuerklasse, mitKind, kstSatz]);
 
   const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const fmtP = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -134,19 +139,34 @@ export default function KurzarbeitergeldRechner() {
         </div>
       </div>
 
-      {/* Bundesland */}
-      <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bundesland</label>
-        <select
-          value={bundesland}
-          onChange={e => setBundesland(e.target.value)}
-          className="w-full sm:w-1/2 px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"
-        >
-          {BUNDESLAENDER.map(b => <option key={b} value={b}>{b}</option>)}
-        </select>
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-          Nur für Kirchensteuer-Satz relevant (in Bayern/BW 8 %, sonst 9 %).
-        </p>
+      {/* Bundesland + Kirchensteuer */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bundesland</label>
+          <select
+            value={bundesland}
+            onChange={e => setBundesland(e.target.value)}
+            className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"
+          >
+            {BUNDESLAENDER.map(b => <option key={b} value={b}>{b}</option>)}
+          </select>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            Nur für Kirchensteuer-Satz relevant (Bayern/BW 8 %, sonst 9 %).
+          </p>
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kirchensteuerpflichtig?</label>
+          <button
+            onClick={() => setKirchensteuer(!kirchensteuer)}
+            className={`w-full px-4 py-3 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
+              kirchensteuer
+                ? 'bg-primary-500 text-white shadow-md'
+                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300'
+            }`}
+          >
+            {kirchensteuer ? `Ja — ${LAENDER_8_PROZENT.includes(bundesland) ? '8' : '9'} %` : 'Nein'}
+          </button>
+        </div>
       </div>
 
       {/* Ergebnis */}
