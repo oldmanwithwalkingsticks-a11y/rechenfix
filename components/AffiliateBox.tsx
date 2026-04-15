@@ -147,6 +147,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'photovoltaik': 'Günstigen Reststrom-Tarif finden — Stromanbieter vergleichen auf CHECK24.',
     'eauto': 'Kfz-Versicherung für Ihr E-Auto vergleichen — oft günstiger als für Verbrenner.',
     'vorfaelligkeit': 'Umschuldung prüfen — günstigere Konditionen finden auf CHECK24.',
+    'energiekosten': 'Stromtarif vergleichen und Energiekosten senken — kostenlos auf CHECK24.',
   },
   congstar: {
     'handykosten': 'congstar bietet faire Tarife ab 5 €/Monat — monatlich kündbar und ohne versteckte Kosten.',
@@ -196,6 +197,7 @@ const CONTEXT_DEEPLINKS: Partial<Record<ProgramId, Record<string, string>>> = {
     'photovoltaik': 'https://www.check24.net/strom/',
     'eauto': 'https://www.check24.net/kfz-versicherung/',
     'vorfaelligkeit': 'https://www.check24.net/kredit/',
+    'energiekosten': 'https://www.check24.net/strom/',
     'default': 'https://www.check24.net/',
   },
   verivox: {

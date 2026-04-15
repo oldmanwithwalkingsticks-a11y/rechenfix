@@ -1185,4 +1185,100 @@ Eine Umschuldung lohnt sich nur, wenn die **Zinsersparnis über die Restlaufzeit
       },
     ],
   },
+  {
+    slug: 'energiekosten-rechner',
+    titel: 'Energiekosten-Rechner',
+    beschreibung: 'Stromkosten für einzelne Geräte berechnen: Tägliche, monatliche und jährliche Energiekosten pro Gerät.',
+    kategorie: 'Wohnen & Energie',
+    kategorieSlug: 'wohnen',
+    metaTitle: 'Energiekosten-Rechner 2026 — Stromkosten pro Gerät berechnen | Rechenfix',
+    metaDescription: 'Energiekosten pro Gerät berechnen: Stromverbrauch und Kosten pro Tag, Monat und Jahr kostenlos ermitteln — für bis zu 10 Geräte.',
+    keywords: ['energiekosten rechner', 'stromkosten gerät berechnen', 'watt in kwh', 'verbrauch berechnen', 'standby kosten', 'kühlschrank stromkosten', 'waschmaschine stromkosten', 'stromverbrauch haushalt', 'kwh kosten'],
+    icon: '⚡',
+    formel: 'kWh/Jahr = Leistung(W) × Stunden/Tag × Nutzungstage/Woche × 52 / 1000. Kosten/Jahr = kWh/Jahr × Strompreis(ct/kWh) / 100.',
+    beispiel: 'Kühlschrank: 150 W × 24 h × 7 Tage × 52 / 1000 = 1.310 kWh/Jahr. Bei 32 ct/kWh = 419 €/Jahr — also ca. 35 €/Monat nur für den Kühlschrank.',
+    erklaerung: `**Energiekosten-Rechner — was Ihre Haushaltsgeräte wirklich kosten**
+
+Die Strompreise in Deutschland gehören zu den höchsten in Europa. Bei rund **32 ct/kWh** (Stand 2026, durchschnittliche Grundversorgung teils über 40 ct) wird jedes Gerät im Haushalt zu einem echten Kostenfaktor — und nicht selten sind es die unscheinbaren Dauerläufer wie Router, Aquariumpumpe oder alte Gefriertruhe, die am Ende des Jahres die größten Löcher in die Stromrechnung reißen. Unser **Energiekosten-Rechner** zeigt Ihnen auf einen Blick, was einzelne Geräte kosten, welche die größten Stromfresser sind und wo Sparen lohnt.
+
+**Die Formel ist einfacher als gedacht**
+
+Die Berechnung folgt einer simplen Logik: **Leistung (in Watt) × Nutzungsdauer (in Stunden) = Energie (in Wattstunden)**. Geteilt durch 1.000 kommt man zu Kilowattstunden (kWh) — der Einheit, die auf Ihrer Stromrechnung steht. Multipliziert mit dem Strompreis ergibt sich die Geldsumme. Wer sein Gerät nicht jeden Tag nutzt (Waschmaschine, Spülmaschine, Trockner), rechnet mit **Nutzungstagen pro Woche** — das bildet den tatsächlichen Haushalt realistisch ab.
+
+Eine Faustregel für die Überschlagsrechnung: **1 Watt Dauerlast = ca. 2,80 € Stromkosten pro Jahr** (bei 32 ct/kWh, 24/7). Ihr WLAN-Router mit 10 W kostet also rund **28 €/Jahr**, Ihr altes 20-W-Netzteil am Ladestecker sogar fast **56 €** — und zwar ohne dass Sie etwas davon haben.
+
+**Die größten Stromfresser im Haushalt**
+
+Nach Daten des Bundesumweltamtes (UBA) entfallen im Durchschnittshaushalt die meisten Stromkosten auf:
+
+- **Kühl- und Gefriergeräte** (ca. 20–30 % der Stromrechnung) — laufen 24/7, moderne A-Klasse-Geräte verbrauchen nur noch 80–150 kWh/Jahr, alte Geräte über 400 kWh.
+- **Waschen, Trocknen, Spülen** (ca. 15–25 %) — der Trockner ist mit Abstand der größte Einzelposten. Wer stattdessen Wäscheständer nutzt, spart schnell 200 €/Jahr.
+- **Kochen und Backen** (ca. 10–15 %) — Induktion ist deutlich effizienter als Ceran, der Backofen im Umluftbetrieb sparsamer als Ober-/Unterhitze.
+- **Unterhaltungselektronik und IT** (ca. 15–20 %) — großer Fernseher (50"+), Gaming-PC und mehrere Streaming-Geräte summieren sich.
+- **Beleuchtung** (ca. 5–10 %) — LED ist Pflicht; gegenüber Glühbirnen sparen Sie 85 % Strom.
+- **Stand-by-Verbrauch** (ca. 5–10 %) — unsichtbar, aber teuer. Eine einzige Mehrfachsteckdose mit Schalter kann 50–100 €/Jahr sparen.
+
+**Was die Energieeffizienzklasse bringt**
+
+Seit 2021 gilt die neue EU-Energielabel-Skala **A bis G** (ohne die alten A+, A++, A+++). Die Einsparpotenziale sind beeindruckend:
+
+- **Kühlschrank** Klasse G → A: ca. **60 % weniger Stromverbrauch**, spart über 10 Jahre rund 800 €.
+- **Waschmaschine** Klasse F → A: ca. **30–40 % weniger**, plus weniger Wasserverbrauch.
+- **Trockner** mit Wärmepumpe statt Kondensationstrockner: **bis zu 50 % Ersparnis**.
+- **Geschirrspüler** im Eco-Modus: 20–30 % weniger Strom und Wasser.
+
+Die höheren Anschaffungskosten (oft 100–300 € Aufpreis für A-Klasse) amortisieren sich bei täglich genutzten Geräten meist in 3–5 Jahren. Unser Rechner hilft Ihnen, diesen Vergleich konkret für Ihre Nutzung durchzurechnen — einfach zweimal rechnen: einmal mit den alten Wattwerten, einmal mit den neuen.
+
+**Typische Leistungswerte zum Abgleich**
+
+Nicht jeder weiß aus dem Kopf, wie viel Watt ein Gerät zieht. Die wichtigsten Richtwerte:
+
+- Kühlschrank (A-Klasse): 80–150 W im Durchschnitt (Kompressor läuft nicht dauerhaft)
+- Waschmaschine: 1.800–2.500 W (nur während des Waschgangs, ca. 1–2 Stunden)
+- Trockner (Wärmepumpe): 1.000–1.500 W, Kondensation 2.500–3.000 W
+- Geschirrspüler: 1.500–2.000 W pro Spülgang (ca. 1–1,5 h)
+- Elektroherd + Backofen: 2.000–3.500 W (bei voller Auslastung)
+- LED-Lampe: 5–15 W (ersetzt 40–100-W-Glühbirne)
+- Smart-TV (55 Zoll): 80–150 W
+- Gaming-PC: 300–600 W unter Last, 50–100 W Idle
+- WLAN-Router: 6–12 W (24/7)
+- Kaffeevollautomat: 1.300–1.500 W (nur beim Brühen, ca. 2–3 Min. pro Tasse)
+
+**Spartipps, die sich sofort auszahlen**
+
+1. **Stand-by killen:** Mehrfachsteckdosen mit Schalter oder smarte Stecker (Wemo, Fritz-DECT) schalten Entertainment-Ecke und Kaffeeautomat nachts komplett aus. Einsparung: 50–150 €/Jahr.
+2. **Waschen bei 30 °C:** Moderne Waschmittel reinigen auch kalt zuverlässig. Einsparung: ca. 30 % Strom pro Waschgang.
+3. **Trockner weglassen:** Ein Wäscheständer kostet 30 € einmalig — der Trockner im Dauerbetrieb 200–300 €/Jahr.
+4. **Alte Kühlgeräte rauswerfen:** Eine 20 Jahre alte Gefriertruhe verbraucht oft das Dreifache eines neuen A-Geräts. Amortisation in 4–5 Jahren.
+5. **LED statt Glühbirne:** Einmalige Umrüstung, danach jährlich 50–100 € weniger Beleuchtungskosten.
+6. **Stromtarif wechseln:** Wer in der teuren Grundversorgung steckt, zahlt oft 15–20 % zu viel. Ein Wechsel über den [Stromvergleich-Rechner](/wohnen/stromvergleich-rechner) bringt schnell 200–500 €/Jahr.
+
+Für den gesamten Haushaltsverbrauch nutzen Sie unseren [Stromkosten-Rechner](/wohnen/stromkosten-rechner), der mit Personenzahl und Haushaltsgröße arbeitet. Wer den Verbrauch selbst produzieren will, findet im [Photovoltaik-Rechner](/wohnen/photovoltaik-rechner) die passende Dimensionierung für die eigene Dachanlage.`,
+    faq: [
+      {
+        frage: 'Wie rechne ich Watt in kWh und Stromkosten um?',
+        antwort: 'Die Formel: Leistung in Watt × Betriebsstunden ÷ 1.000 = kWh. Beispiel: Ein 2.000-W-Föhn, 10 Minuten täglich, ergibt 2.000 × 0,167 ÷ 1.000 = 0,333 kWh/Tag bzw. 122 kWh/Jahr. Bei 32 ct/kWh entspricht das 39 €/Jahr. Unser Rechner übernimmt diese Umrechnung automatisch inklusive Hochrechnung auf Monat und Jahr.',
+      },
+      {
+        frage: 'Welche Geräte sind die größten Stromfresser im Haushalt?',
+        antwort: 'In absoluten Zahlen meist der elektrische Backofen, der Trockner, ältere Kühlgeräte und die Waschmaschine. In kleinen Haushalten dominieren oft Unterhaltungselektronik und der WLAN-Router, weil sie rund um die Uhr laufen. Bei einem Dauerverbraucher mit 10 W summieren sich schon fast 30 € pro Jahr — 50 W Stand-by entsprechen bereits 140 €/Jahr. Der Energiekosten-Rechner zeigt in der Tabelle, welches Gerät welchen Anteil an Ihrer Stromrechnung hat.',
+      },
+      {
+        frage: 'Wie viel spart eine neue Energieeffizienzklasse?',
+        antwort: 'Deutlich mehr, als viele denken. Ein neuer Kühlschrank der Klasse A verbraucht im Vergleich zu einem G-Klasse-Gerät rund 60 % weniger Strom — über die typische Lebensdauer von 15 Jahren summiert sich das auf 700–1.200 €. Moderne Wärmepumpentrockner sparen gegenüber älteren Kondenstrocknern bis zu 50 %. Der Aufpreis für effiziente Geräte amortisiert sich bei intensiver Nutzung meist innerhalb von 3 bis 5 Jahren.',
+      },
+      {
+        frage: 'Wie finde ich den Stromverbrauch meines Geräts heraus?',
+        antwort: 'Drei Möglichkeiten: (1) Typenschild an der Rückseite oder Unterseite des Geräts — dort steht die maximale Leistung in Watt. (2) Herstellerangabe auf dem Energielabel in kWh/Jahr. (3) Am genauesten: Ein Strommessgerät (Baumarkt oder online ab 15 €) zwischen Steckdose und Gerät stecken und den tatsächlichen Verbrauch über einen Tag oder eine Woche messen. Besonders bei Altgeräten ist die Messung oft ernüchternd.',
+      },
+      {
+        frage: 'Lohnt es sich, Geräte nachts abzuschalten?',
+        antwort: 'Ja — und zwar deutlich. Ein typischer Entertainment-Bereich (Fernseher, Receiver, Soundbar, Spielkonsole) zieht im Stand-by oft 15–30 W. Das entspricht 40–85 € pro Jahr. Mit einer schaltbaren Mehrfachsteckdose oder einem smarten Stecker kosten diese Geräte im ausgeschalteten Zustand 0 W. Ein WLAN-Router sollte dagegen nur abgeschaltet werden, wenn Sie ihn wirklich nicht brauchen — die ständige Neuverbindung nutzt Akkus und kostet Zeit.',
+      },
+      {
+        frage: 'Welcher Strompreis ist realistisch?',
+        antwort: 'Der Durchschnitt in Deutschland liegt 2026 bei etwa 32 ct/kWh. In der Grundversorgung zahlen viele Haushalte 35–45 ct/kWh, während günstige Neukundentarife teilweise bei 26–30 ct/kWh starten. Wer schon lange nicht mehr gewechselt hat, zahlt fast immer zu viel — ein Vergleich lohnt sich praktisch immer. Unser Rechner arbeitet mit dem Preis, den Sie eingeben; prüfen Sie ihn am besten einmal im Jahr auf Ihrer Abrechnung.',
+      },
+    ],
+  },
 ];

@@ -132,6 +132,7 @@ import KleidergroessenRechner from '@/components/rechner/KleidergroessenRechner'
 import EhegattenunterhaltRechner from '@/components/rechner/EhegattenunterhaltRechner';
 import AfaRechner from '@/components/rechner/AfaRechner';
 import VorfaelligkeitsentschaedigungRechner from '@/components/rechner/VorfaelligkeitsentschaedigungRechner';
+import EnergiekostenRechner from '@/components/rechner/EnergiekostenRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -276,6 +277,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'ehegattenunterhalt-rechner': EhegattenunterhaltRechner,
   'afa-rechner': AfaRechner,
   'vorfaelligkeitsentschaedigung-rechner': VorfaelligkeitsentschaedigungRechner,
+  'energiekosten-rechner': EnergiekostenRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
