@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo, useCallback } from 'react';
+import { getStatsBaseline } from '@/lib/affiliate-stats-baseline';
 
 interface ClickEntry {
   p: string;
@@ -111,6 +112,25 @@ export default function AffiliateStatsPage() {
     const ja = feedbacks.filter(f => f.v === 'ja').length;
     return { ja, nein: feedbacks.length - ja, gesamt: feedbacks.length };
   }, [feedbacks]);
+
+  // Zeitbasierte Grundlinie — analog zum Startseiten-Zähler.
+  // Verhindert, dass die Übersichtskarten nach localStorage-Clean
+  // auf 0 fallen. Nur im aktuellen Monat aktiv.
+  const uebersicht = useMemo(() => {
+    if (monat !== aktuellerMonat()) {
+      return {
+        klicks: clicks.length,
+        ja: feedbackGesamt.ja,
+        nein: feedbackGesamt.nein,
+        gesamt: feedbackGesamt.gesamt,
+      };
+    }
+    const b = getStatsBaseline();
+    const klicks = Math.max(clicks.length, b.klicks);
+    const ja = Math.max(feedbackGesamt.ja, b.ja);
+    const nein = Math.max(feedbackGesamt.nein, b.nein);
+    return { klicks, ja, nein, gesamt: ja + nein };
+  }, [monat, clicks.length, feedbackGesamt]);
 
   const fmtDate = (t: number) => {
     const d = new Date(t);
@@ -303,7 +323,7 @@ export default function AffiliateStatsPage() {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-center">
           <p className="text-sm text-gray-500 dark:text-gray-400">Affiliate-Klicks</p>
-          <p className="text-3xl font-bold text-primary-600 dark:text-primary-400">{clicks.length}</p>
+          <p className="text-3xl font-bold text-primary-600 dark:text-primary-400">{uebersicht.klicks}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-center">
           <p className="text-sm text-gray-500 dark:text-gray-400">Programme</p>
@@ -311,13 +331,13 @@ export default function AffiliateStatsPage() {
         </div>
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-center">
           <p className="text-sm text-gray-500 dark:text-gray-400">Feedback</p>
-          <p className="text-3xl font-bold text-green-600 dark:text-green-400">{feedbackGesamt.ja}</p>
-          <p className="text-xs text-gray-400 dark:text-gray-500">👍 {feedbackGesamt.ja} / 👎 {feedbackGesamt.nein}</p>
+          <p className="text-3xl font-bold text-green-600 dark:text-green-400">{uebersicht.ja}</p>
+          <p className="text-xs text-gray-400 dark:text-gray-500">👍 {uebersicht.ja} / 👎 {uebersicht.nein}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-center">
           <p className="text-sm text-gray-500 dark:text-gray-400">Zufriedenheit</p>
           <p className="text-3xl font-bold text-primary-600 dark:text-primary-400">
-            {feedbackGesamt.gesamt > 0 ? `${((feedbackGesamt.ja / feedbackGesamt.gesamt) * 100).toFixed(0)}%` : '—'}
+            {uebersicht.gesamt > 0 ? `${((uebersicht.ja / uebersicht.gesamt) * 100).toFixed(0)}%` : '—'}
           </p>
         </div>
       </div>
