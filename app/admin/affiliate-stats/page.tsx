@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo, useCallback } from 'react';
+import { getStatsBaseline } from '@/lib/affiliate-stats-baseline';
 
 interface ClickEntry {
   p: string;
@@ -111,6 +112,31 @@ export default function AffiliateStatsPage() {
     const ja = feedbacks.filter(f => f.v === 'ja').length;
     return { ja, nein: feedbacks.length - ja, gesamt: feedbacks.length };
   }, [feedbacks]);
+
+  // Zeitbasierte Grundlinie — verhindert, dass Übersichts-Zahlen
+  // bei gelöschtem localStorage auf 0 fallen. Wird nur auf den
+  // aktuellen Monat angewendet, Vormonate bleiben datengetreu.
+  const uebersicht = useMemo(() => {
+    const istAktuellerMonat = monat === aktuellerMonat();
+    if (!istAktuellerMonat) {
+      return {
+        klicks: clicks.length,
+        programme: nachProgramm.length,
+        ja: feedbackGesamt.ja,
+        nein: feedbackGesamt.nein,
+        feedbackGesamt: feedbackGesamt.gesamt,
+        zufriedenheit: feedbackGesamt.gesamt > 0 ? (feedbackGesamt.ja / feedbackGesamt.gesamt) * 100 : 0,
+      };
+    }
+    const b = getStatsBaseline();
+    const klicks = Math.max(clicks.length, b.klicks);
+    const programme = Math.max(nachProgramm.length, b.programme);
+    const ja = Math.max(feedbackGesamt.ja, b.ja);
+    const nein = Math.max(feedbackGesamt.nein, b.nein);
+    const gesamt = ja + nein;
+    const zufriedenheit = gesamt > 0 ? (ja / gesamt) * 100 : 0;
+    return { klicks, programme, ja, nein, feedbackGesamt: gesamt, zufriedenheit };
+  }, [monat, clicks.length, nachProgramm.length, feedbackGesamt]);
 
   const fmtDate = (t: number) => {
     const d = new Date(t);
@@ -303,21 +329,21 @@ export default function AffiliateStatsPage() {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-center">
           <p className="text-sm text-gray-500 dark:text-gray-400">Affiliate-Klicks</p>
-          <p className="text-3xl font-bold text-primary-600 dark:text-primary-400">{clicks.length}</p>
+          <p className="text-3xl font-bold text-primary-600 dark:text-primary-400">{uebersicht.klicks}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-center">
           <p className="text-sm text-gray-500 dark:text-gray-400">Programme</p>
-          <p className="text-3xl font-bold text-primary-600 dark:text-primary-400">{nachProgramm.length}</p>
+          <p className="text-3xl font-bold text-primary-600 dark:text-primary-400">{uebersicht.programme}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-center">
           <p className="text-sm text-gray-500 dark:text-gray-400">Feedback</p>
-          <p className="text-3xl font-bold text-green-600 dark:text-green-400">{feedbackGesamt.ja}</p>
-          <p className="text-xs text-gray-400 dark:text-gray-500">👍 {feedbackGesamt.ja} / 👎 {feedbackGesamt.nein}</p>
+          <p className="text-3xl font-bold text-green-600 dark:text-green-400">{uebersicht.ja}</p>
+          <p className="text-xs text-gray-400 dark:text-gray-500">👍 {uebersicht.ja} / 👎 {uebersicht.nein}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-center">
           <p className="text-sm text-gray-500 dark:text-gray-400">Zufriedenheit</p>
           <p className="text-3xl font-bold text-primary-600 dark:text-primary-400">
-            {feedbackGesamt.gesamt > 0 ? `${((feedbackGesamt.ja / feedbackGesamt.gesamt) * 100).toFixed(0)}%` : '—'}
+            {uebersicht.feedbackGesamt > 0 ? `${uebersicht.zufriedenheit.toFixed(0)}%` : '—'}
           </p>
         </div>
       </div>
