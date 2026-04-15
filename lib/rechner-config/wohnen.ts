@@ -1019,4 +1019,86 @@ Wer unsicher ist, ob die Mietpreisbremse greift und wie die Rüge formuliert wer
       },
     ],
   },
+  {
+    slug: 'poolkosten-rechner',
+    titel: 'Poolkosten-Rechner',
+    beschreibung: 'Jährliche Betriebskosten für Pool: Wasser, Strom, Chemie und Wartung — mit Heizung und Abdeckung.',
+    kategorie: 'Wohnen & Energie',
+    kategorieSlug: 'wohnen',
+    metaTitle: 'Poolkosten-Rechner 2026 — Jährliche Betriebskosten berechnen | Rechenfix',
+    metaDescription: 'Poolkosten berechnen: Jährliche Kosten für Wasser, Strom, Chemie und Wartung Ihres Pools — mit Heizung und Abdeckung.',
+    keywords: ['poolkosten rechner', 'pool betriebskosten', 'pool strom kosten', 'pool chemie kosten', 'pool wärmepumpe kosten', 'pool wasser kosten', 'pool unterhalt', 'swimmingpool kosten jahr'],
+    icon: '🏊',
+    formel: 'Wasser = Volumen × 1,2 × Wasserpreis | Filter = 8 h × Pumpe kW × Saison-Tage × Strompreis | Heizung (Wärmepumpe) ≈ 3–6 kWh/Tag × Saison-Tage',
+    beispiel: 'Beispiel: 40 m³ Pool, ohne Heizung, mit Abdeckung, Mai–September → Wasser ≈ 190 €, Filterstrom ≈ 220 €, Chemie ≈ 240 €, Wartung ≈ 410 €. Gesamt ≈ 1.060 €/Jahr.',
+    erklaerung: `<h2>Was kostet ein Pool wirklich im Jahr?</h2>
+<p>Ein eigener Pool im Garten klingt nach Urlaub vor der Haustür — doch die laufenden Kosten werden oft unterschätzt. Neben der Anschaffung (1.500 € für einen Aufstellpool bis weit über 50.000 € für einen betonierten Einbaupool) fallen jedes Jahr <strong>Betriebskosten</strong> für Wasser, Strom, Chemie und Wartung an. Unser Poolkosten-Rechner zeigt Ihnen, mit welchen Ausgaben Sie pro Saison rechnen müssen — abhängig von Größe, Heizung, Abdeckung und Saisonlänge.</p>
+
+<h2>Wasserkosten</h2>
+<p>Zu Saisonbeginn wird der Pool meist einmal komplett neu befüllt. Über die Saison verdunsten zusätzlich 20–30 % des Volumens, die nachgefüllt werden müssen. Bei einem <strong>40-m³-Pool</strong> und einem Wasserpreis von 4 €/m³ ergibt das rund 190 € pro Saison. Wer eine Abdeckung nutzt, reduziert die Verdunstung um bis zu 90 % — der größte Einzelspar-Effekt.</p>
+
+<h2>Stromkosten Filterpumpe</h2>
+<p>Die Filterpumpe muss täglich etwa <strong>6 bis 10 Stunden</strong> laufen, damit das Wasser sauber bleibt. Eine typische Pumpe für einen 40-m³-Pool hat 0,6 kW Leistung. Über 5 Monate Saison (153 Tage) summiert sich das auf ca. 730 kWh — bei 32 ct/kWh sind das <strong>rund 234 €</strong>. Energiesparende Umwälzpumpen mit Frequenzregelung kosten mehr, sparen aber bis zu 60 % Strom.</p>
+
+<h2>Heizungskosten</h2>
+<p>Ohne Heizung ist das Poolwasser in Deutschland meist erst ab Juni angenehm warm — die Saison verkürzt sich. Drei Optionen sind üblich:</p>
+<ul>
+<li><strong>Keine Heizung:</strong> 0 € Kosten, dafür kürzere Badesaison.</li>
+<li><strong>Wärmepumpe:</strong> Die beliebteste Lösung. Stromverbrauch je nach Größe und Temperaturzielwert 3–6 kWh pro Tag. Bei 40 m³ und 153 Tagen ergibt das rund <strong>700 kWh ≈ 220 €</strong> pro Saison. Mit Abdeckung sinken die Heizkosten um etwa 30 %.</li>
+<li><strong>Solarabsorber:</strong> Schläuche auf dem Dach oder eine Solarmatte nutzen kostenlose Sonnenwärme. Investition 500–2.000 €, Betriebskosten nahezu null. Allerdings witterungsabhängig.</li>
+</ul>
+
+<h2>Chemie: Chlor, pH, Algen</h2>
+<p>Sauberes, sicheres Poolwasser braucht regelmäßige Wasserpflege. Die Grundprodukte sind Chlor (Desinfektion), pH-Minus oder pH-Plus (pH-Regulierung) und gelegentlich Algizid. Faustregel: <strong>6 bis 10 € pro m³ Pool und Saison</strong> für Standardpools. Bei regelmäßiger Abdeckung sinken die Chemiekosten um etwa 20 %, weil weniger Staub, Laub und UV-Einstrahlung das Wasser belasten. Wer auf Salzwasserelektrolyse umsteigt, spart langfristig Chemiekosten, muss aber in die Anlage investieren (800–2.000 €).</p>
+
+<h2>Wartung und Zubehör</h2>
+<p>Dazu zählen Filterkartuschen oder Sand, Poolsauger, Kescher, Skimmer, Dichtungen und gelegentliche Reparaturen. Realistisch sind <strong>250–500 € pro Jahr</strong> — größere Pools brauchen tendenziell mehr Zubehör. Wer seinen Pool professionell einwintern und im Frühjahr wieder einfahren lässt, zahlt zusätzlich 150–300 € für den Service.</p>
+
+<h2>Abdeckung: Der größte Sparhebel</h2>
+<p>Eine gute Poolabdeckung (Solarfolie, Rollabdeckung oder Rollladen) lohnt sich fast immer. Sie spart gleichzeitig <strong>Wasser, Strom, Heizung und Chemie</strong>:</p>
+<ul>
+<li>Bis zu 90 % weniger Verdunstung → weniger Wasser nachfüllen</li>
+<li>Etwa 30 % weniger Heizkosten</li>
+<li>Ca. 20 % weniger Chemieverbrauch</li>
+<li>Weniger Laub, Pollen und Schmutz → längere Filterstandzeit</li>
+</ul>
+<p>Die Investition von 100 € (einfache Solarfolie) bis mehreren Tausend (elektrische Rollabdeckung) amortisiert sich innerhalb weniger Jahre.</p>
+
+<h2>Pool mit Photovoltaik betreiben</h2>
+<p>Wer eine <strong>PV-Anlage</strong> besitzt, kann Filterpumpe und Wärmepumpe überwiegend mit selbst erzeugtem Strom betreiben — und drückt die laufenden Kosten drastisch. Ein smarter Pool-Controller lässt die Filterpumpe nur laufen, wenn genug Solarstrom vorhanden ist. So bleibt vom ursprünglichen Strombedarf oft nur ein kleiner Rest, der aus dem Netz kommt. In Kombination mit Wärmepumpe und Abdeckung wird ein sonnenreicher Haushaltspool fast zum Nullkostenpool.</p>
+
+<h2>Unser Poolkosten-Rechner zeigt:</h2>
+<ul>
+<li>Die Gesamtkosten pro Jahr in Euro</li>
+<li>Die Aufschlüsselung nach Wasser, Filterstrom, Heizung, Chemie und Wartung</li>
+<li>Kosten pro Monat und pro Badetag</li>
+<li>Die Ersparnis durch Abdeckung und Saisonwahl</li>
+</ul>`,
+    faq: [
+      {
+        frage: 'Was kostet ein Pool pro Jahr an Betriebskosten?',
+        antwort: 'Die Spanne ist groß. Ein kleiner Aufstellpool (10 m³) ohne Heizung kostet etwa 300–500 € Betriebskosten pro Saison. Ein mittlerer Gartenpool (40 m³) ohne Heizung liegt bei rund 900–1.300 €. Mit Wärmepumpe kommen 200–400 € Heizstrom hinzu. Ein großer Pool (60 m³ und mehr) mit Heizung kann schnell 2.000–3.000 € pro Jahr kosten.',
+      },
+      {
+        frage: 'Lohnt sich eine Wärmepumpe für den Pool?',
+        antwort: 'Ja — wenn Sie die Saison verlängern möchten. Eine Poolwärmepumpe mit COP 5 erzeugt aus 1 kWh Strom etwa 5 kWh Wärme, das ist deutlich effizienter als Elektroheizstab (COP 1) oder Gas. Mit einer Abdeckung können Sie die Heizkosten nochmal um 30 % senken. Günstiger und völlig kostenfrei im Betrieb ist allerdings eine Solarheizung — sie braucht aber genügend Dach- oder Terrassenfläche und funktioniert nur bei Sonnenschein.',
+      },
+      {
+        frage: 'Wie viel Chlor brauche ich für meinen Pool?',
+        antwort: 'Als Richtwert: 1–3 g Chlor pro m³ Wasser pro Woche, bei starker Nutzung oder Hitze mehr. Wichtiger als die Menge ist der freie Chlorgehalt von 0,3–0,6 mg/l — mit Teststreifen oder digitalem Messgerät kontrollieren. Parallel muss der pH-Wert zwischen 7,0 und 7,4 liegen, sonst wirkt das Chlor nicht richtig. Ein gut gepflegter 40-m³-Pool kommt mit rund 250–400 € Chemie pro Saison aus.',
+      },
+      {
+        frage: 'Wie lange muss die Filterpumpe täglich laufen?',
+        antwort: 'Faustregel: Das gesamte Poolvolumen sollte etwa 2-mal pro Tag durch den Filter laufen. Bei einem 40-m³-Pool und einer 8-m³/h-Pumpe bedeutet das 10 Stunden pro Tag. An heißen Tagen und bei intensiver Nutzung kann mehr sinnvoll sein, nachts weniger. Moderne Pumpen laufen mit variabler Drehzahl und passen sich automatisch an — das spart bis zu 60 % Strom.',
+      },
+      {
+        frage: 'Kann ich den Pool auch mit Photovoltaik betreiben?',
+        antwort: 'Ja, und das ist sehr effizient. Mit einem smarten Pool-Controller läuft die Filterpumpe dann, wenn die PV-Anlage genug Strom liefert — tagsüber und bei Sonne, also genau wenn der Pool ohnehin arbeiten soll. Eine Wärmepumpe profitiert ebenfalls stark, weil sie tagsüber direkt Solarstrom nutzt. Wer seinen Pool überwiegend mit eigenem Solarstrom betreibt, kann die laufenden Stromkosten auf 100–200 € pro Saison drücken.',
+      },
+      {
+        frage: 'Lohnt sich die Investition in eine Abdeckung?',
+        antwort: 'Fast immer. Eine einfache Solarfolie (80–150 €) reduziert Verdunstung, hält die Wärme, verkürzt die nötige Pumpenlaufzeit und senkt den Chemieverbrauch. Rollabdeckungen und Rollläden kosten 1.000–4.000 €, amortisieren sich aber bei einem mittleren Pool innerhalb von 3–5 Jahren. Zusätzlich: Abdeckungen sind eine wichtige Sicherheitsmaßnahme für Kinder und Haustiere.',
+      },
+    ],
+  },
 ];

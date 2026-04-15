@@ -125,6 +125,8 @@ import KapitalertragsteuerRechner from '@/components/rechner/Kapitalertragsteuer
 import SchuhgroessenRechner from '@/components/rechner/SchuhgroessenRechner';
 import HerzfrequenzRechner from '@/components/rechner/HerzfrequenzRechner';
 import ReichweitenRechner from '@/components/rechner/ReichweitenRechner';
+import PoolkostenRechner from '@/components/rechner/PoolkostenRechner';
+import PythagorasRechner from '@/components/rechner/PythagorasRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -262,6 +264,8 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'schuhgroessen-rechner': SchuhgroessenRechner,
   'herzfrequenz-rechner': HerzfrequenzRechner,
   'reichweiten-rechner': ReichweitenRechner,
+  'poolkosten-rechner': PoolkostenRechner,
+  'pythagoras-rechner': PythagorasRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

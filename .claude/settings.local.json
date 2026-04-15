@@ -54,7 +54,8 @@
       "Bash(node -e \"const a='Führerscheinkosten Klasse B berechnen: Fahrstunden, Prüfungen und Nebenkosten nach Region — kostenlose Gesamtkosten-Schätzung mit KI-Erklärung.'; const b='Nettolohn optimieren: Gehaltserhöhung vs. Sachbezüge wie Jobticket, Essenszuschuss oder BAV kostenlos vergleichen — mit KI-Erklärung.'; console.log\\(a.length, b.length\\);\")",
       "Bash(node -e \"const a='Mietpreisbremse prüfen: Ist Ihre Miete zulässig oder zu hoch? Vergleichsmiete, max. 110 %-Grenze und Rückforderung kostenlos berechnen.'; const b='Kapitalertragsteuer berechnen: Abgeltungssteuer auf Zinsen, Dividenden und Kursgewinne inkl. Sparerpauschbetrag und Teilfreistellung.'; console.log\\(a.length, b.length\\);\")",
       "Bash(node -e \"console.log\\('Schuhgrößen umrechnen: EU, US, UK und cm Fußlänge — für Damen, Herren und Kinder. Mit vollständiger Umrechnungstabelle.'.length\\)\")",
-      "Bash(node -e \"console.log\\('d1', 'Trainingszonen berechnen: Maximalpuls, Fettverbrennung, Grundlagenausdauer & Intervall — mit Karvonen-Formel für genaue Werte.'.length\\); console.log\\('d2', 'E-Auto-Reichweite realistisch berechnen: Winter, Autobahn und Heizung mindern die WLTP-Reichweite. Mit Verbrauch & Ladekosten.'.length\\)\")"
+      "Bash(node -e \"console.log\\('d1', 'Trainingszonen berechnen: Maximalpuls, Fettverbrennung, Grundlagenausdauer & Intervall — mit Karvonen-Formel für genaue Werte.'.length\\); console.log\\('d2', 'E-Auto-Reichweite realistisch berechnen: Winter, Autobahn und Heizung mindern die WLTP-Reichweite. Mit Verbrauch & Ladekosten.'.length\\)\")",
+      "Bash(node -e \"console.log\\('p1', 'Poolkosten berechnen: Jährliche Kosten für Wasser, Strom, Chemie und Wartung Ihres Pools — mit Heizung und Abdeckung.'.length\\); console.log\\('p2', 'Satz des Pythagoras berechnen: Fehlende Seite im rechtwinkligen Dreieck — mit Fläche, Winkeln und Rechenweg Schritt für Schritt.'.length\\)\")"
     ]
   }
 }
