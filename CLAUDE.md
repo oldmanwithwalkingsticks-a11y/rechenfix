@@ -42,6 +42,28 @@
 - Vercel Hosting
 - Anthropic Claude API für "Fix erklärt"
 
+## Rechner-Bestand (105 gesamt)
+| Kategorie | Anzahl |
+|-----------|-------:|
+| Alltag    | 18 |
+| Finanzen  | 28 |
+| Gesundheit| 12 |
+| Auto      | 6  |
+| Wohnen    | 16 |
+| Mathe     | 10 |
+| Arbeit    | 15 |
+
+## Config-Struktur
+- Configs liegen aufgeteilt unter `lib/rechner-config/<kategorie>.ts` (`alltag.ts`, `finanzen.ts`, `gesundheit.ts`, `auto.ts`, `wohnen.ts`, `mathe.ts`, `arbeit.ts`). Die alte Single-File `rechner-config.ts` existiert nicht mehr.
+- Jeder Rechner-Eintrag hat u. a. `metaDescription`. `openGraph.description` wird automatisch daraus abgeleitet — NICHT doppelt pflegen.
+- Dynamische Route: ALLE Rechner laufen über `app/[kategorie]/[rechner]/page.tsx`. Es gibt KEINE einzelnen `page.tsx` pro Rechner. Wer nach `app/alltag/prozentrechner/page.tsx` sucht, sucht falsch.
+
+## QA-Regeln für neue Rechner
+- `metaDescription` MUSS ≤155 Zeichen sein (Google schneidet sonst ab). Länge vor Commit mit `node -e "console.log('...'.length)"` prüfen.
+- KEIN Suffix `✓ Kostenlos. ✓ Mit KI-Erklärung.` — "kostenlos" natürlich in den Satz einflechten.
+- `<AiExplain>`-Component ist Pflicht, wird innerhalb der Rechner-Komponente nach `<ErgebnisAktionen>` gerendert und rendert nur, wenn der `ergebnis`-State gefüllt ist.
+- Smoke-Test-Script v2.1 existiert als Browser-Console-Script und sollte nach jedem Deploy über die betroffenen Routen laufen.
+
 ## Häufige Fehler vermeiden
 - URLs ohne www in Sitemap/Canonical
 - CHECK24-Links auf check24.de statt check24.net
@@ -49,3 +71,12 @@
 - SEO-Text unter 600 Wörter
 - FAQ unter 5 Fragen
 - Schema.org vergessen (WebApplication + FAQPage + BreadcrumbList)
+- `metaDescription` > 155 Zeichen
+- Nach falscher Datei suchen: Rechner-Metadaten liegen in `lib/rechner-config/<kategorie>.ts`, nicht in `app/<kategorie>/<rechner>/page.tsx`.
+
+## Prompt-Verzeichnis (Stand: Prompt 74)
+- **70a–70d** — Meta-Description Kürzung (Alltag, Arbeit/Auto, Finanzen, Gesundheit/Mathe) ✅
+- **71a/71b** — entfallen
+- **72** — Live-Verifikation aller 16 gekürzten Meta-Descriptions ✅
+- **73** — Meta-Description `/ueber-uns` gekürzt ✅
+- **74** — CLAUDE.md aktualisiert ✅
