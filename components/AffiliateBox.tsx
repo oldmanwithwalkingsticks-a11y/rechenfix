@@ -151,6 +151,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'etf': 'ETF-Depot vergleichen auf Verivox — Ordergebühren, Sparplan-Kosten und Aktionsangebote im Überblick.',
     'rente': 'Rentenlücke schließen? Depot-Vergleich auf Verivox — das passende Depot für Ihre private Altersvorsorge.',
     'sparplan': 'Mehr aus Ihrem Ersparten machen — Depots vergleichen und Sparplan starten auf Verivox.',
+    'riester': 'Riester-Produkte vergleichen auf Verivox — den passenden Anbieter für Ihre Altersvorsorge finden.',
   },
   naturesway: {
     'kalorien': 'Vitamine und Mineralstoffe passend zu Ihrem Ernährungsziel — für die tägliche Unterstützung von innen heraus.',

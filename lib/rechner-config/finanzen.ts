@@ -1859,4 +1859,97 @@ In vielen Fällen reicht die Witwenrente allein nicht aus, um den Lebensunterhal
       { frage: 'Muss ich die Witwenrente beantragen?', antwort: 'Ja, die Witwenrente wird nicht automatisch ausgezahlt. Sie muss bei der Deutschen Rentenversicherung beantragt werden — am besten innerhalb von 12 Monaten nach dem Todesfall, dann wird rückwirkend ab dem Todestag gezahlt. Bei späteren Anträgen gibt es maximal 12 Monate Rückzahlung.' },
     ],
   },
+  {
+    slug: 'kurzarbeitergeld-rechner',
+    titel: 'Kurzarbeitergeld-Rechner',
+    beschreibung: 'Kurzarbeitergeld berechnen: KuG-Höhe basierend auf Ihrem Gehalt und der Arbeitszeitreduzierung.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Kurzarbeitergeld-Rechner 2026 — KuG-Höhe berechnen | Rechenfix',
+    metaDescription: 'Kurzarbeitergeld kostenlos berechnen: 60 % bzw. 67 % der Nettoentgeltdifferenz — mit Soll-/Ist-Vergleich und Verlustanzeige.',
+    keywords: ['kurzarbeitergeld rechner', 'kug rechner', 'kurzarbeitergeld berechnen', 'kurzarbeit rechner', 'nettoentgeltdifferenz', 'kug höhe', 'kurzarbeit 60 prozent', 'kurzarbeit 67 prozent'],
+    icon: '⏱️',
+    formel: 'Nettoentgeltdifferenz = Soll-Netto − Ist-Netto | KuG = 60 % × Nettoentgeltdifferenz (67 % mit Kind) | Gesamteinkommen = Ist-Netto + KuG',
+    beispiel: 'Soll-Brutto 3.500 €, Ist-Brutto 1.750 € (50 % Kurzarbeit), Steuerklasse I, kein Kind → Soll-Netto ca. 2.260 €, Ist-Netto ca. 1.240 € → Differenz 1.020 € → KuG 60 % = 612 €/Monat → Gesamteinkommen 1.852 € (statt 2.260 €, Verlust 408 €).',
+    erklaerung: `**Was ist Kurzarbeitergeld (KuG)?**
+
+Das **Kurzarbeitergeld** ist eine Entgeltersatzleistung der **Agentur für Arbeit** nach § 95 SGB III. Es springt ein, wenn der Arbeitgeber wegen eines **erheblichen Arbeitsausfalls** die Arbeitszeit vorübergehend reduzieren muss — zum Beispiel durch Auftragsrückgang, Lieferkettenproblemen oder wirtschaftlicher Krise. Statt Kündigungen auszusprechen, melden Betriebe Kurzarbeit an. Die Beschäftigten arbeiten weniger Stunden und erhalten entsprechend weniger Gehalt — der Lohnausfall wird durch das KuG teilweise ausgeglichen. Kurzarbeit muss vom Arbeitgeber bei der Agentur für Arbeit beantragt werden; die Beschäftigten selbst müssen nichts tun.
+
+**Wie wird Kurzarbeitergeld berechnet?**
+
+Die Höhe des KuG richtet sich nach der **Nettoentgeltdifferenz** — also dem Unterschied zwischen dem pauschalierten Netto, das man ohne Kurzarbeit bekäme (Soll-Netto) und dem Netto der tatsächlich gearbeiteten Stunden (Ist-Netto). Auf diese Differenz wird ein fester Prozentsatz angewendet:
+
+- **60 Prozent** der Nettoentgeltdifferenz ohne Kind
+- **67 Prozent** mit mindestens einem Kind auf der Lohnsteuerkarte
+
+Die Agentur für Arbeit nutzt für die Berechnung **pauschalierte Werte** aus der offiziellen KuG-Tabelle, nicht das individuelle Netto. Das vereinfacht die Berechnung, kann aber in Einzelfällen vom tatsächlichen Gehalt abweichen. Unser Rechner liefert eine gute Näherung für die Höhe des zu erwartenden KuG.
+
+**Beispielrechnung: 50 % Kurzarbeit**
+
+Nehmen wir eine alleinstehende Person, Steuerklasse I, mit einem **Soll-Brutto** von 3.500 € (Vollzeitgehalt). Der Betrieb ordnet 50 % Kurzarbeit an — das **Ist-Brutto** beträgt also 1.750 €. Die pauschalierten Netto-Werte liegen bei ca. 2.260 € (Soll) und 1.240 € (Ist). Die **Nettoentgeltdifferenz** beträgt rund 1.020 €. Davon erhält die Person 60 Prozent als KuG, also **612 € pro Monat**. Zusammen mit dem reduzierten Netto ergibt sich ein Gesamteinkommen von **1.852 €** — das entspricht etwa 82 Prozent des ursprünglichen Nettos. Der Verlust gegenüber dem normalen Gehalt beträgt 408 € oder rund 18 Prozent.
+
+**Sozialversicherung bleibt voll versichert**
+
+Ein wichtiger Punkt: Während der Kurzarbeit **bleibt die volle Sozialversicherung erhalten**. Der Arbeitgeber übernimmt die Sozialbeiträge auf das ausgefallene Entgelt teilweise pauschal. Für die Rentenversicherung, Krankenversicherung, Pflege- und Arbeitslosenversicherung werden die Beiträge so berechnet, als wäre kein Ausfall eingetreten. Das bedeutet: **Keine Rentenlücke, kein Verlust der Krankenversicherung** und voller Schutz bei Arbeitslosigkeit im Anschluss.
+
+**Wie lange gibt es Kurzarbeitergeld?**
+
+Die Regelbezugsdauer beträgt **12 Monate**. In wirtschaftlichen Ausnahmesituationen (zuletzt 2020/2021 während Corona) kann die Bundesregierung per Verordnung auf **bis zu 24 Monate** verlängern. Nach Ablauf der Kurzarbeit läuft das Arbeitsverhältnis normal weiter — es sei denn, es folgen betriebsbedingte Kündigungen. In diesem Fall können Betroffene in das [Arbeitslosengeld](/arbeit/arbeitslosengeld-rechner) wechseln, das nach denselben Grundsätzen (60/67 Prozent) aus dem letzten Normalgehalt berechnet wird — nicht aus dem reduzierten Kurzarbeit-Gehalt. Das ist gesetzlich so festgelegt, damit Kurzarbeit später nicht zum Nachteil wird.
+
+**Kann ich während der Kurzarbeit nebenher arbeiten?**
+
+Ja, aber mit Einschränkungen. Ein **neuer Nebenjob**, der während der Kurzarbeit aufgenommen wird, wird auf das Kurzarbeitergeld **voll angerechnet** — mindert es also. Ein **bereits vor Kurzarbeit bestehender Nebenjob** bleibt anrechnungsfrei. Wer kurzfristig aufstocken muss, sollte prüfen, ob sich ein [Minijob](/finanzen/minijob-rechner) oder eine [Teilzeit-Tätigkeit](/arbeit/teilzeit-rechner) lohnt, oder ob eine Weiterbildung während der Kurzarbeit gefördert wird (§ 82 SGB III). Die Agentur für Arbeit und viele Branchen bieten spezielle Qualifizierungs-Programme, bei denen sogar zusätzliches Geld zum KuG gezahlt wird.`,
+    faq: [
+      { frage: 'Wie hoch ist das Kurzarbeitergeld?', antwort: 'Das KuG beträgt 60 % der Nettoentgeltdifferenz (Soll-Netto minus Ist-Netto). Mit mindestens einem Kind auf der Lohnsteuerkarte sind es 67 %. Die Berechnung erfolgt pauschaliert nach der KuG-Tabelle der Agentur für Arbeit — maßgeblich ist die Differenz zwischen pauschaliertem Soll-Netto und Ist-Netto.' },
+      { frage: 'Wie lange wird Kurzarbeitergeld gezahlt?', antwort: 'Die Regelbezugsdauer beträgt 12 Monate. In wirtschaftlichen Ausnahmesituationen (z. B. während Corona) kann die Bundesregierung per Verordnung auf bis zu 24 Monate verlängern. Nach Ablauf läuft das Arbeitsverhältnis normal weiter oder es folgt regulär ALG I.' },
+      { frage: 'Muss ich Kurzarbeitergeld selbst beantragen?', antwort: 'Nein — Kurzarbeit wird vom Arbeitgeber bei der Agentur für Arbeit angemeldet und beantragt. Sie als Beschäftigte müssen nichts tun. Der Arbeitgeber rechnet das KuG zusammen mit dem reduzierten Gehalt ab und zahlt es Ihnen aus. Die Agentur für Arbeit erstattet dem Arbeitgeber den Betrag.' },
+      { frage: 'Was passiert mit den Sozialversicherungsbeiträgen?', antwort: 'Die Sozialversicherungsbeiträge bleiben während der Kurzarbeit in voller Höhe erhalten. Der Arbeitgeber übernimmt die Beiträge auf das ausgefallene Entgelt teilweise pauschal. Sie bleiben also krankenversichert, rentenversichert und haben keine Rentenlücke — Kurzarbeit mindert Ihre spätere Rente nicht.' },
+      { frage: 'Bekomme ich nach Kurzarbeit mehr Arbeitslosengeld?', antwort: 'Ja — falls Sie nach Ende der Kurzarbeit doch gekündigt werden und ALG I beantragen, wird das ALG aus Ihrem letzten Normalgehalt berechnet, nicht aus dem reduzierten Kurzarbeits-Gehalt. Das ist in § 151 SGB III geregelt und soll Kurzarbeit nicht zum Nachteil werden lassen.' },
+      { frage: 'Kann ich während der Kurzarbeit nebenher arbeiten?', antwort: 'Ein bereits vor der Kurzarbeit bestehender Nebenjob bleibt anrechnungsfrei. Ein neuer Nebenjob während der Kurzarbeit wird dagegen voll auf das KuG angerechnet und mindert es entsprechend. Besser: Nutzen Sie die Zeit für eine geförderte Weiterbildung nach § 82 SGB III.' },
+    ],
+  },
+  {
+    slug: 'riester-rechner',
+    titel: 'Riester-Rechner',
+    beschreibung: 'Riester-Rente berechnen: Zulage, Eigenbeitrag, Steuerersparnis und ob sich Riestern für Sie lohnt.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Riester-Rechner 2026 — Zulage & Steuerersparnis berechnen | Rechenfix',
+    metaDescription: 'Riester-Rente kostenlos berechnen: Grundzulage, Kinderzulage, optimaler Eigenbeitrag und Steuerersparnis mit Günstigerprüfung.',
+    keywords: ['riester rechner', 'riester rente berechnen', 'riester zulage', 'riester eigenbeitrag', 'riester kinderzulage', 'riester steuerersparnis', 'riester lohnt sich', 'günstigerprüfung riester'],
+    icon: '📊',
+    formel: 'Grundzulage = 175 €/Jahr · Kinderzulage = 185 € (vor 2008) bzw. 300 € (ab 2008) | Mindesteigenbeitrag = 4 % × Vorjahresbrutto − Zulagen (min. 60 €, max. 2.100 €) | Steuerersparnis = Sonderausgabenabzug × Grenzsteuersatz | Günstigerprüfung: Steuervorteil wenn Steuerersparnis > Zulagen',
+    beispiel: 'Alleinstehend, 40.000 € Brutto, 1 Kind (ab 2008), Grenzsteuersatz 35 % → Zulagen: 175 + 300 = 475 € → Mindesteigenbeitrag: 4 % × 40.000 − 475 = 1.125 € → Steuerersparnis: (1.125 + 475) × 35 % = 560 € → Günstigerprüfung: 560 > 475 → Zusatzvorteil 85 € → Gesamtförderung 560 €.',
+    erklaerung: `**Was ist die Riester-Rente?**
+
+Die **Riester-Rente** ist eine staatlich geförderte private Altersvorsorge, benannt nach dem früheren Arbeitsminister Walter Riester. Sie wurde 2002 eingeführt, um den durch die Rentenreform abgesenkten Leistungsniveau der gesetzlichen Rente teilweise auszugleichen. Die Förderung erfolgt über zwei Kanäle: **direkte Zulagen** vom Staat (Grund- und Kinderzulage) und **Steuerersparnis** über den Sonderausgabenabzug. Welcher Weg günstiger ist, prüft das Finanzamt automatisch im Rahmen der sogenannten **Günstigerprüfung**. Anspruchsberechtigt sind unter anderem sozialversicherungspflichtig Beschäftigte, Beamte, Selbstständige (unter bestimmten Voraussetzungen) und deren nicht erwerbstätige Ehepartner.
+
+**Grundzulage und Kinderzulage**
+
+Die **Grundzulage** beträgt **175 Euro pro Jahr** für jeden Riester-Sparer. Ehepaare, bei denen beide einen eigenen Riester-Vertrag haben, bekommen die Grundzulage also zweimal (350 €). Hinzu kommt die **Kinderzulage**: **300 Euro pro Jahr** für jedes Kind, das **ab 2008** geboren wurde, und **185 Euro** für Kinder, die **vor 2008** geboren wurden. Die Zulage gibt es so lange, wie der Sparer auch Kindergeld für das Kind bezieht. Für Berufseinsteiger unter 25 Jahren gibt es zusätzlich einen einmaligen **Bonus von 200 Euro**. Die Zulagen werden vom Staat direkt auf den Riester-Vertrag eingezahlt — Sie müssen lediglich den **Zulagenantrag** rechtzeitig stellen (oder den sogenannten Dauerzulagenantrag, der das einmal für immer erledigt).
+
+**Mindesteigenbeitrag: 4 % vom Vorjahresbrutto**
+
+Um die **volle Zulage** zu erhalten, müssen Sie einen **Mindesteigenbeitrag** einzahlen. Dieser beträgt **4 Prozent Ihres Vorjahresbruttoeinkommens**, abzüglich der bereits erhaltenen Zulagen. Es gilt ein **Sockelbetrag von 60 Euro pro Jahr** (5 €/Monat) — weniger darf es nicht sein, sonst werden die Zulagen gekürzt. Der maximal geförderte Beitrag liegt bei **2.100 Euro pro Jahr** (einschließlich Zulagen). Wer weniger einzahlt als den Mindesteigenbeitrag, bekommt die Zulagen **anteilig gekürzt** — z. B. bei 50 % des Mindestbeitrags nur die Hälfte der Zulagen. Unser Rechner zeigt Ihnen direkt den optimalen Eigenbeitrag.
+
+**Günstigerprüfung: Zulagen oder Steuervorteil?**
+
+Bei der Steuererklärung wird der **Sonderausgabenabzug** geprüft: Sie können **Eigenbeitrag plus Zulagen** bis zu 2.100 € als Sonderausgaben absetzen. Das Finanzamt berechnet dann, wie hoch Ihre **Steuerersparnis** bei Anwendung Ihres persönlichen **Grenzsteuersatzes** wäre. Ist diese Steuerersparnis **höher** als die erhaltenen Zulagen, bekommen Sie die Differenz als **zusätzliche Steuererstattung**. Ist sie niedriger, bleibt es bei den Zulagen — und das Finanzamt zahlt Ihnen nichts extra. Diese Günstigerprüfung erfolgt automatisch, Sie müssen lediglich die **Anlage AV** Ihrer Steuererklärung ausfüllen und die Bescheinigung Ihres Riester-Anbieters beilegen. Wer unsicher ist, wie er Riester in der Steuererklärung angibt, kann zusätzlich unseren [Steuererstattungs-Rechner](/finanzen/steuererstattung-rechner) nutzen.
+
+**Für wen lohnt sich Riester besonders?**
+
+Die Riester-Rente ist besonders attraktiv für **Familien mit Kindern** (wegen der hohen Kinderzulage) und **Geringverdiener** (weil der Eigenbeitrag dank Zulagen sehr niedrig bleibt). Auch **Alleinverdiener-Ehepaare** profitieren oft, weil beide Partner separate Zulagen bekommen können. **Gutverdiener mit hohem Grenzsteuersatz** profitieren weniger über die Zulage, aber stark über den Sonderausgabenabzug — bei 42 % Grenzsteuersatz lohnt sich Riester fast immer rein rechnerisch. **Weniger attraktiv** ist Riester für Singles mit mittlerem Einkommen ohne Kinder, vor allem wegen der hohen Verwaltungskosten vieler Anbieter, der vollständigen nachgelagerten Besteuerung der Rente und der eingeschränkten Vererbbarkeit.
+
+**Alternativen zur Riester-Rente**
+
+Wer für sich zu dem Schluss kommt, dass Riester sich nicht lohnt, hat mehrere Alternativen: Ein **[ETF-Sparplan](/finanzen/etf-sparplanrechner)** bietet deutlich mehr Flexibilität, meist niedrigere Kosten und bessere Renditechancen — allerdings ohne staatliche Zulage und ohne Steuerförderung in der Ansparphase. Eine **Rürup-Rente (Basisrente)** eignet sich besonders für Selbstständige und Gutverdiener, weil die Beiträge zu 100 % als Sonderausgaben absetzbar sind (bis zum Höchstbetrag). Die **betriebliche Altersvorsorge (bAV)** ist oft eine sehr gute Ergänzung, weil der Arbeitgeber häufig Zuschüsse zahlt. Und der klassische Weg bleibt natürlich: in die gesetzliche Rente freiwillig einzahlen und die **Rentenlücke** mit unserem [Rentenrechner](/finanzen/rentenrechner) im Blick behalten.`,
+    faq: [
+      { frage: 'Wie hoch ist die Riester-Zulage?', antwort: 'Die Grundzulage beträgt 175 € pro Jahr. Dazu kommen Kinderzulagen: 300 € pro Kind ab Geburtsjahr 2008, 185 € pro Kind für vor 2008 Geborene. Ehepaare können beide Zulagen getrennt bekommen (2× 175 €). Berufseinsteiger unter 25 erhalten einmalig 200 € Bonus.' },
+      { frage: 'Wie viel muss ich bei Riester selbst einzahlen?', antwort: 'Den Mindesteigenbeitrag: 4 Prozent Ihres Vorjahres-Bruttoeinkommens abzüglich der Zulagen. Mindestens aber 60 € pro Jahr (Sockelbetrag), maximal 2.100 € förderfähig. Wer weniger einzahlt, bekommt die Zulagen anteilig gekürzt. Der optimale Eigenbeitrag wird im Rechner automatisch ermittelt.' },
+      { frage: 'Was ist die Günstigerprüfung?', antwort: 'Das Finanzamt prüft automatisch, ob die Zulagen oder der Sonderausgabenabzug (Eigenbeitrag + Zulagen, max. 2.100 €, multipliziert mit Ihrem Grenzsteuersatz) günstiger ist. Ist die Steuerersparnis höher als die Zulagen, bekommen Sie die Differenz als zusätzliche Steuererstattung. Sie müssen nur die Anlage AV ausfüllen.' },
+      { frage: 'Lohnt sich Riester überhaupt noch?', antwort: 'Für Familien mit Kindern und Geringverdiener meist ja, weil Kinderzulage und geringer Eigenbeitrag eine sehr hohe Förderquote ergeben. Gutverdiener mit 42 % Grenzsteuersatz profitieren stark über den Steuervorteil. Weniger lohnend ist Riester für Singles mit mittlerem Einkommen ohne Kinder — hier ist oft ein ETF-Sparplan die bessere Wahl.' },
+      { frage: 'Wie gebe ich Riester in der Steuererklärung an?', antwort: 'In der Anlage AV (Altersvorsorge). Dort tragen Sie die von Ihrem Riester-Anbieter ausgestellte Bescheinigung nach § 10a EStG ein. Das Finanzamt führt dann die Günstigerprüfung automatisch durch. Wichtig: Ohne Anlage AV gibt es nur die Zulagen, aber keinen zusätzlichen Steuervorteil.' },
+      { frage: 'Was passiert mit dem Riester-Guthaben bei Tod?', antwort: 'Bei Tod in der Ansparphase geht das Guthaben nur eingeschränkt auf die Erben über: Ehepartner können das Guthaben steuer- und förderunschädlich auf einen eigenen Riester-Vertrag übertragen. Andere Erben erhalten das Guthaben nur abzüglich aller erhaltenen Förderung. Das ist ein häufig kritisierter Punkt an der Riester-Rente.' },
+    ],
+  },
 ];
