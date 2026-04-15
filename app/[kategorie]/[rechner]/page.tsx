@@ -127,6 +127,7 @@ import HerzfrequenzRechner from '@/components/rechner/HerzfrequenzRechner';
 import ReichweitenRechner from '@/components/rechner/ReichweitenRechner';
 import PoolkostenRechner from '@/components/rechner/PoolkostenRechner';
 import PythagorasRechner from '@/components/rechner/PythagorasRechner';
+import GleichungsloeserRechner from '@/components/rechner/GleichungsloeserRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -266,6 +267,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'reichweiten-rechner': ReichweitenRechner,
   'poolkosten-rechner': PoolkostenRechner,
   'pythagoras-rechner': PythagorasRechner,
+  'gleichungsrechner': GleichungsloeserRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

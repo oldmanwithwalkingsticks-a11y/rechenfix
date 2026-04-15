@@ -57,7 +57,8 @@
       "Bash(node -e \"console.log\\('d1', 'Trainingszonen berechnen: Maximalpuls, Fettverbrennung, Grundlagenausdauer & Intervall — mit Karvonen-Formel für genaue Werte.'.length\\); console.log\\('d2', 'E-Auto-Reichweite realistisch berechnen: Winter, Autobahn und Heizung mindern die WLTP-Reichweite. Mit Verbrauch & Ladekosten.'.length\\)\")",
       "Bash(node -e \"console.log\\('p1', 'Poolkosten berechnen: Jährliche Kosten für Wasser, Strom, Chemie und Wartung Ihres Pools — mit Heizung und Abdeckung.'.length\\); console.log\\('p2', 'Satz des Pythagoras berechnen: Fehlende Seite im rechtwinkligen Dreieck — mit Fläche, Winkeln und Rechenweg Schritt für Schritt.'.length\\)\")",
       "Bash(node scripts/fix-erklaerung.mjs)",
-      "Bash(node scripts/fix-headings.mjs)"
+      "Bash(node scripts/fix-headings.mjs)",
+      "Bash(node -e \"console.log\\('Gleichungen lösen: Lineare und quadratische Gleichungen mit vollständigem Rechenweg und Parabel-Grafik.'.length\\)\")"
     ]
   }
 }

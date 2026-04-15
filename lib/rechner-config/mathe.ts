@@ -889,4 +889,108 @@ Die Winkelsumme im Dreieck beträgt immer 180°, also ergibt α + β + 90° = 18
       },
     ],
   },
+  {
+    slug: 'gleichungsrechner',
+    titel: 'Gleichungslöser',
+    beschreibung: 'Lineare und quadratische Gleichungen lösen — mit vollständigem Rechenweg, Mitternachtsformel und Parabel-Grafik.',
+    kategorie: 'Mathe & Schule',
+    kategorieSlug: 'mathe',
+    metaTitle: 'Gleichungslöser 2026 — Lineare & quadratische Gleichungen lösen | Rechenfix',
+    metaDescription: 'Gleichungen lösen: Lineare und quadratische Gleichungen mit vollständigem Rechenweg und Parabel-Grafik.',
+    keywords: ['gleichungsrechner', 'gleichungen lösen', 'lineare gleichung', 'quadratische gleichung', 'mitternachtsformel', 'pq-formel', 'nullstellen berechnen', 'diskriminante'],
+    icon: '📝',
+    formel: 'Linear: x = (c − b) / a   |   Quadratisch (Mitternachtsformel): x = (−b ± √(b² − 4ac)) / (2a)',
+    beispiel: 'Linear: 2x + 5 = 11 → x = (11 − 5) / 2 = 3. Quadratisch: x² − 5x + 6 = 0 → x₁ = 2, x₂ = 3 (Diskriminante = 1).',
+    erklaerung: `**Gleichungen lösen — lineare und quadratische Gleichungen einfach erklärt**
+
+Eine Gleichung ist eine mathematische Aussage, in der zwei Ausdrücke mit einem Gleichheitszeichen verbunden sind. Das Ziel beim "Lösen" ist es, den Wert der Unbekannten (meist **x**) herauszufinden, für den die Gleichung wahr wird. Unser Gleichungslöser rechnet Ihnen sowohl **lineare** als auch **quadratische Gleichungen** aus — mit vollständigem Rechenweg, damit Sie jeden Schritt nachvollziehen können.
+
+Gleichungen sind das Fundament der Algebra und begegnen Schülern ab Klasse 7 im Mathe-Unterricht. Wer das Prinzip einmal verstanden hat, kann es später in Physik, Chemie, BWL und Informatik immer wieder anwenden.
+
+**Lineare Gleichungen — die einfache Form**
+
+Eine lineare Gleichung hat die allgemeine Form **ax + b = c**, wobei a, b und c bekannte Zahlen sind und x die Unbekannte. "Linear" heißt, dass x nur in der ersten Potenz vorkommt (also kein x², kein x³). Grafisch entspricht das einer Geraden.
+
+Das Lösungsverfahren ist immer gleich: Man formt die Gleichung so um, dass x auf einer Seite alleine steht. Dabei gilt die goldene Regel der Algebra — **was auf der einen Seite gemacht wird, muss auch auf der anderen Seite gemacht werden**.
+
+- **Schritt 1:** Die Zahl b auf die rechte Seite bringen, indem man sie subtrahiert: ax = c − b
+- **Schritt 2:** Durch a teilen: x = (c − b) / a
+- **Schritt 3:** Ergebnis ausrechnen
+
+Beispiel: 2x + 5 = 11. Erst 5 subtrahieren: 2x = 6. Dann durch 2 teilen: x = 3. Probe: 2 × 3 + 5 = 11 ✓
+
+Wenn a = 0 ist, gibt es keine eindeutige Lösung — entweder ist die Gleichung immer wahr (wenn b = c) oder immer falsch (wenn b ≠ c). Unser Rechner weist in diesem Fall darauf hin.
+
+**Quadratische Gleichungen — die Mitternachtsformel**
+
+Eine quadratische Gleichung hat die allgemeine Form **ax² + bx + c = 0**. Der Name kommt daher, dass x in der zweiten Potenz (x²) vorkommt — "quadratisch". Grafisch entspricht das einer Parabel, die sich nach oben (a > 0) oder nach unten (a < 0) öffnet.
+
+Quadratische Gleichungen können null, eine oder zwei Lösungen haben. Die Anzahl hängt von der sogenannten **Diskriminante D = b² − 4ac** ab:
+
+- **D > 0:** zwei verschiedene reelle Lösungen (die Parabel schneidet die x-Achse an zwei Stellen)
+- **D = 0:** genau eine (doppelte) Lösung (die Parabel berührt die x-Achse in einem Punkt)
+- **D < 0:** keine reelle Lösung (die Parabel verläuft komplett ober- oder unterhalb der x-Achse)
+
+Die universelle Lösungsformel ist die **Mitternachtsformel** (so genannt, weil man sie auch um Mitternacht aufsagen können soll):
+
+**x = (−b ± √(b² − 4ac)) / (2a)**
+
+Das ± bedeutet, dass man zwei Lösungen erhält: eine mit Plus, eine mit Minus vor der Wurzel. Alternativ gibt es die **pq-Formel** für den Sonderfall a = 1: x² + px + q = 0 → x = −p/2 ± √((p/2)² − q).
+
+Beispiel: x² − 5x + 6 = 0. Hier ist a = 1, b = −5, c = 6. Diskriminante: D = 25 − 24 = 1. Einsetzen: x = (5 ± 1) / 2 → x₁ = 3, x₂ = 2. Probe: 3² − 5×3 + 6 = 0 ✓ und 2² − 5×2 + 6 = 0 ✓
+
+**Scheitelpunkt der Parabel**
+
+Der **Scheitelpunkt** ist der höchste oder tiefste Punkt der Parabel — also dort, wo sie ihre Richtung wechselt. Er berechnet sich so:
+
+- **x-Koordinate:** xₛ = −b / (2a)
+- **y-Koordinate:** yₛ = c − b² / (4a)
+
+Beispiel (x² − 5x + 6): xₛ = 5/2 = 2,5. yₛ = 6 − 25/4 = −0,25. Der Scheitelpunkt liegt also bei (2,5 | −0,25) — dem Tiefpunkt der Parabel genau zwischen den beiden Nullstellen 2 und 3.
+
+**Wann brauche ich Gleichungen im Alltag?**
+
+Auch außerhalb der Schule spielen Gleichungen eine Rolle, wenn man es nicht sofort merkt:
+
+- **Beim Einkaufen:** "Wenn 3 Brötchen 1,20 € kosten, wie teuer ist eins?" → 3x = 1,20 → x = 0,40 €
+- **Beim Sparen:** "Wie lange muss ich 200 € monatlich sparen, um 10.000 € zu haben?" → 200x = 10.000 → x = 50 Monate
+- **Bei Rezepten:** "Ein Kuchen für 6 Personen braucht 300 g Mehl — wie viel für 10?" (Dreisatz als lineare Gleichung)
+- **In der Physik:** Wurfbewegungen und Bremswege sind quadratische Gleichungen (weg = ½ × a × t²)
+- **In der Wirtschaft:** Gewinnmaximierung über Scheitelpunkt einer quadratischen Gewinnfunktion
+
+**Was unser Gleichungslöser bietet**
+
+- Lineare **und** quadratische Gleichungen
+- Vollständiger **Rechenweg Schritt für Schritt** mit Mitternachtsformel
+- **Parabel-Grafik** mit markierten Nullstellen und Scheitelpunkt
+- Automatische Berechnung der Diskriminante
+- Hinweise bei Sonderfällen (a = 0, keine reelle Lösung)
+- KI-Erklärung per Klick — perfekt für Hausaufgaben und Klausurvorbereitung`,
+    faq: [
+      {
+        frage: 'Was ist der Unterschied zwischen linearer und quadratischer Gleichung?',
+        antwort: 'Eine lineare Gleichung hat die Form ax + b = c — x kommt nur in der ersten Potenz vor. Grafisch ist das eine Gerade. Eine quadratische Gleichung hat die Form ax² + bx + c = 0 — das x² macht sie zur Parabel. Lineare Gleichungen haben immer genau eine Lösung (sofern a ≠ 0), quadratische können null, eine oder zwei Lösungen haben, je nach Diskriminante.',
+      },
+      {
+        frage: 'Was ist die Mitternachtsformel?',
+        antwort: 'Die Mitternachtsformel ist die universelle Lösungsformel für quadratische Gleichungen der Form ax² + bx + c = 0. Sie lautet: x = (−b ± √(b² − 4ac)) / (2a). Der Name entstand aus dem Spruch, dass man sie auch um Mitternacht aufsagen können soll. Mit ihr lässt sich jede quadratische Gleichung lösen — im Gegensatz zur pq-Formel, die nur für a = 1 gilt.',
+      },
+      {
+        frage: 'Was sagt die Diskriminante aus?',
+        antwort: 'Die Diskriminante D = b² − 4ac verrät, wie viele Lösungen eine quadratische Gleichung hat: Bei D > 0 gibt es zwei verschiedene reelle Lösungen, bei D = 0 gibt es genau eine (doppelte) Lösung, bei D < 0 gibt es keine reelle Lösung. Grafisch entspricht das dem Verhalten der Parabel gegenüber der x-Achse: zwei Schnittpunkte, ein Berührpunkt oder gar kein Kontakt.',
+      },
+      {
+        frage: 'Was ist der Scheitelpunkt einer Parabel?',
+        antwort: 'Der Scheitelpunkt ist der höchste (bei nach unten geöffneten Parabeln) oder tiefste Punkt (bei nach oben geöffneten Parabeln). Er berechnet sich mit xₛ = −b/(2a) und yₛ = c − b²/(4a). Der Scheitelpunkt liegt immer genau in der Mitte zwischen den beiden Nullstellen — falls die Parabel welche hat. Unser Rechner zeigt ihn in der Grafik als roten Punkt an.',
+      },
+      {
+        frage: 'Warum kann eine quadratische Gleichung keine Lösung haben?',
+        antwort: 'Wenn die Diskriminante negativ ist (D < 0), existiert keine reelle Zahl, deren Quadrat negativ ist — daher auch keine reelle Lösung. Grafisch bedeutet das: Die Parabel schneidet die x-Achse nicht. Beispiel: x² + 1 = 0 hat D = 0 − 4 = −4. In den komplexen Zahlen gäbe es zwar Lösungen (x = ±i), aber im Schulstoff bis zur Oberstufe zählt nur der reelle Fall.',
+      },
+      {
+        frage: 'Was passiert, wenn a = 0 ist?',
+        antwort: 'Dann ist die Gleichung gar nicht mehr linear bzw. quadratisch! Bei einer linearen Gleichung 0·x + b = c bleibt nur noch b = c übrig — das ist entweder immer wahr (wenn b = c, unendlich viele Lösungen) oder immer falsch (wenn b ≠ c, keine Lösung). Bei einer quadratischen Gleichung mit a = 0 wird aus ax² + bx + c = 0 automatisch die lineare Gleichung bx + c = 0. Unser Rechner erkennt diese Sonderfälle und weist darauf hin.',
+      },
+    ],
+  },
 ];
