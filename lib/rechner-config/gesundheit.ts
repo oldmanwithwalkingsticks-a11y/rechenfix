@@ -859,4 +859,74 @@ Wenn Sie Alkohol getrunken haben, gilt eine einfache Regel: **Nicht ans Steuer.*
       },
     ],
   },
+  {
+    slug: 'protein-rechner',
+    titel: 'Protein-Rechner',
+    beschreibung: 'Täglichen Proteinbedarf berechnen: Empfohlene Eiweißmenge nach Gewicht, Aktivität und Trainingsziel.',
+    kategorie: 'Gesundheit',
+    kategorieSlug: 'gesundheit',
+    metaTitle: 'Protein-Rechner 2026 — Täglichen Eiweißbedarf berechnen | Rechenfix',
+    metaDescription: 'Proteinbedarf kostenlos berechnen: wie viel Eiweiß pro Tag nach Gewicht, Sport und Ziel. Mit Lebensmittel-Tabelle und KI-Erklärung.',
+    keywords: ['protein rechner', 'eiweißbedarf', 'protein pro tag', 'eiweiß berechnen', 'muskelaufbau protein'],
+    icon: '💪',
+    formel: 'Proteinbedarf (g/Tag) = Körpergewicht (kg) × Faktor (g/kg)\n\nFaktor nach Aktivität + Ziel:\n• Kaum aktiv: 0,8 g/kg\n• Hobbysport: 1,2 g/kg\n• Krafttraining: 1,6 g/kg\n• Bodybuilding: 2,0 g/kg\n• Ausdauer intensiv: 1,4 g/kg\n\nZuschläge:\n• Muskelaufbau: +0,2 g/kg\n• Abnehmen: +0,3 g/kg (Muskelerhalt im Defizit)',
+    beispiel: 'Beispiel: 75 kg Körpergewicht, regelmäßiges Krafttraining, Ziel Muskelaufbau.\nFaktor = 1,6 + 0,2 = 1,8 g/kg\nBedarf = 75 × 1,8 = 135 g Protein pro Tag\nVerteilt auf 4 Mahlzeiten = ca. 34 g pro Mahlzeit\nEntspricht z. B. 587 g Hähnchenbrust oder 1.125 g Magerquark pro Tag.',
+    erklaerung: `## Wie viel Protein braucht der Körper wirklich?
+
+Protein (Eiweiß) ist einer der drei Makronährstoffe und für den Körper lebenswichtig. Eiweiß ist der Baustoff schlechthin: Muskeln, Haut, Haare, Enzyme, Hormone und Antikörper bestehen aus Proteinen. Wer zu wenig Eiweiß zu sich nimmt, verliert Muskelmasse, schwächt das Immunsystem und erholt sich schlechter vom Training.
+
+Die **Deutsche Gesellschaft für Ernährung (DGE)** empfiehlt Erwachsenen seit Jahrzehnten 0,8 g Protein pro Kilogramm Körpergewicht pro Tag. Das ist jedoch der **Mindestwert**, um einem gesunden, sesshaften Erwachsenen Mangelerscheinungen zu ersparen — nicht der optimale Wert für Menschen, die sportlich aktiv sind, Muskeln aufbauen möchten oder über 65 Jahre alt sind.
+
+## Warum Sportler deutlich mehr brauchen
+
+Moderne Sportwissenschaft zeigt klar: Kraftsportler und Bodybuilder profitieren von **1,6 bis 2,0 g Protein pro kg Körpergewicht**. Eine Meta-Analyse von Morton et al. (2018, British Journal of Sports Medicine) wertete 49 Studien aus und kam zu dem Ergebnis, dass Muskelaufbau ab etwa 1,6 g/kg maximal stimuliert wird — mehr bringt statistisch keinen zusätzlichen Effekt, schadet aber auch nicht bei gesunden Nieren.
+
+Ausdauersportler liegen mit 1,2 bis 1,4 g/kg etwas darunter, benötigen aber immer noch deutlich mehr als die DGE-Mindestempfehlung. Der Grund: Ausdauertraining verursacht kleinere muskuläre Mikroverletzungen, die repariert werden müssen, und bei sehr langen Einheiten wird zunehmend Protein zur Energiegewinnung herangezogen.
+
+## Protein in der Diät — das Anti-Jo-Jo-Geheimnis
+
+Wer abnehmen will, profitiert überproportional von einer hohen Proteinzufuhr. Im Kaloriendefizit versucht der Körper, Muskelmasse abzubauen, weil Muskeln energetisch teuer sind. Eine hohe Proteinzufuhr (mindestens 1,8 bis 2,2 g/kg Körpergewicht) signalisiert dem Körper: „Die Muskeln werden gebraucht, baue stattdessen Fett ab." Zusätzlich sättigt Protein besser als Kohlenhydrate oder Fett und hat den höchsten thermischen Effekt (TEF) — etwa 20 bis 30 % der aufgenommenen Proteinkalorien werden direkt bei der Verdauung verbraucht.
+
+## Ältere Menschen und der Proteinbedarf
+
+Senioren ab 65 Jahren sollten nach heutigem Wissensstand **mindestens 1,0 bis 1,2 g/kg** Protein täglich anstreben. Grund ist die sogenannte **anabole Resistenz**: Die Muskulatur älterer Menschen reagiert schwächer auf einen Proteinreiz als die jüngerer Menschen. Ohne ausreichend Protein droht Sarkopenie — der altersbedingte Muskelabbau, der zu Stürzen, Frakturen und Pflegebedürftigkeit führen kann.
+
+## Pflanzlich oder tierisch — macht es einen Unterschied?
+
+Tierische Proteine (Fleisch, Fisch, Eier, Milchprodukte) haben eine höhere **biologische Wertigkeit** als die meisten pflanzlichen Quellen, da sie das komplette Aminosäureprofil liefern. Wer sich vegetarisch oder vegan ernährt, sollte bewusst **kombinieren**: Hülsenfrüchte mit Getreide (Linsen + Reis), Soja mit Mais oder Nüsse mit Haferflocken ergänzen sich gegenseitig. Viele Veganer rechnen mit einem Aufschlag von etwa 10 % auf den Proteinbedarf, um die teils niedrigere Verwertbarkeit auszugleichen.
+
+## Verteilung über den Tag
+
+Studien zeigen, dass der Muskelproteinaufbau pro Mahlzeit durch etwa 20 bis 40 g qualitativ hochwertiges Protein maximal stimuliert wird. Es ist daher sinnvoll, die Tagesmenge auf 3 bis 5 Mahlzeiten zu verteilen, statt alles zum Abendessen zu konsumieren. Unser Rechner zeigt Ihnen direkt, wie viel Protein pro Mahlzeit sinnvoll wäre.
+
+## Ist zu viel Protein gefährlich?
+
+Für Menschen mit **gesunden Nieren** ist eine hohe Proteinzufuhr unbedenklich. Studien, die Nierenschäden durch Protein belegen, beziehen sich durchweg auf Patienten mit vorgeschädigter Niere. Wer eine Nierenerkrankung hat, sollte die Proteinzufuhr allerdings mit dem Arzt absprechen. Alle anderen können selbst 2,5 g/kg ohne Sorge konsumieren — oberhalb davon wird es jedoch schwer, nützliche andere Nährstoffe unterzubringen.`,
+    faq: [
+      {
+        frage: 'Wie viel Protein brauche ich pro Tag?',
+        antwort: 'Die DGE empfiehlt Erwachsenen mindestens 0,8 g Protein pro kg Körpergewicht. Wer Sport treibt, sollte deutlich mehr essen: 1,2 g/kg bei Hobbysport, 1,6 g/kg bei regelmäßigem Krafttraining und bis 2,0 g/kg bei intensivem Bodybuilding. In der Diät sind 1,8–2,2 g/kg sinnvoll, um Muskeln zu erhalten. Der Protein-Rechner berechnet Ihren individuellen Bedarf nach Gewicht, Aktivität und Ziel.',
+      },
+      {
+        frage: 'Kann ich zu viel Eiweiß essen?',
+        antwort: 'Bei gesunden Nieren ist selbst ein Konsum von 2,5 g/kg unbedenklich. Die früher verbreitete Warnung, zu viel Protein schade den Nieren, gilt nur für Menschen mit bereits bestehender Nierenerkrankung. Studien an gesunden Sportlern über Jahre hinweg zeigen keine negativen Effekte. Bei Nierenproblemen sprechen Sie die Proteinzufuhr aber mit Ihrem Arzt ab.',
+      },
+      {
+        frage: 'Welche Lebensmittel haben am meisten Protein?',
+        antwort: 'Top-Proteinquellen pro 100 g: Hähnchenbrust 23 g, Mager-Thunfisch 24 g, Magerquark 12 g, Linsen gekocht 9 g, Tofu 8 g, Haferflocken 13 g. Ein Ei liefert etwa 7 g Protein. Tierische Quellen haben eine höhere biologische Wertigkeit, pflanzliche Proteine sollten kombiniert werden (z. B. Hülsenfrüchte + Getreide), um alle essenziellen Aminosäuren abzudecken.',
+      },
+      {
+        frage: 'Brauchen Senioren mehr oder weniger Protein?',
+        antwort: 'Mehr. Ab 65 Jahren wird eine Zufuhr von 1,0 bis 1,2 g/kg empfohlen, da die Muskulatur älterer Menschen schwächer auf Proteinreize reagiert (anabole Resistenz). Ohne ausreichend Eiweiß droht Sarkopenie — altersbedingter Muskelabbau, der zu Stürzen und Pflegebedürftigkeit führen kann. Wichtig ist zusätzlich Krafttraining, um das Protein auch wirksam zu nutzen.',
+      },
+      {
+        frage: 'Muss ich Protein auf mehrere Mahlzeiten verteilen?',
+        antwort: 'Ja, das ist sinnvoll. Der Körper kann pro Mahlzeit etwa 20 bis 40 g Protein optimal zum Muskelaufbau verwerten. Größere Mengen werden nicht verschwendet, führen aber nicht zu stärkerer Muskelproteinsynthese. Die Tagesmenge auf 3 bis 5 Mahlzeiten zu verteilen ist daher besser, als alles zum Abendessen zu konsumieren. Unser Rechner zeigt Ihnen die ideale Menge pro Mahlzeit.',
+      },
+      {
+        frage: 'Wie viel Protein brauche ich beim Abnehmen?',
+        antwort: 'Beim Abnehmen sind 1,8 bis 2,2 g/kg Körpergewicht ideal. Der hohe Proteinanteil hat drei Vorteile: Er schützt die Muskulatur vor dem Abbau im Kaloriendefizit, sättigt stärker als Kohlenhydrate oder Fett und verbraucht durch den thermischen Effekt bis zu 30 % der Proteinkalorien direkt bei der Verdauung. Wer Muskeln erhält, hält auch den Grundumsatz stabil — und vermeidet den Jo-Jo-Effekt.',
+      },
+    ],
+  },
 ];

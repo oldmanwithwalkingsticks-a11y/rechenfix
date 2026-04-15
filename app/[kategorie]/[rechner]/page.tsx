@@ -61,6 +61,7 @@ import KreditRechner from '@/components/rechner/KreditRechner';
 import KalorienRechner from '@/components/rechner/KalorienRechner';
 import GeburtsterminRechner from '@/components/rechner/GeburtsterminRechner';
 import IdealgewichtRechner from '@/components/rechner/IdealgewichtRechner';
+import ProteinRechner from '@/components/rechner/ProteinRechner';
 import KuendigungsfristRechner from '@/components/rechner/KuendigungsfristRechner';
 import EtfSparplanRechner from '@/components/rechner/EtfSparplanRechner';
 import TeilzeitRechner from '@/components/rechner/TeilzeitRechner';
@@ -190,6 +191,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'kalorienrechner': KalorienRechner,
   'geburtstermin-rechner': GeburtsterminRechner,
   'idealgewicht-rechner': IdealgewichtRechner,
+  'protein-rechner': ProteinRechner,
   'kuendigungsfrist-rechner': KuendigungsfristRechner,
   'etf-sparplanrechner': EtfSparplanRechner,
   'teilzeit-rechner': TeilzeitRechner,
