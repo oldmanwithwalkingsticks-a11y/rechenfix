@@ -46,7 +46,7 @@ export default function DatenschutzSeite() {
               <li>Anzeige personalisierter Werbung (nur nach Einwilligung)</li>
               <li>Einbindung von Affiliate-Links</li>
               <li>Kontaktaufnahme per E-Mail</li>
-              <li>Cookie-Verwaltung über eigenen Consent-Banner</li>
+              <li>Cookie-Verwaltung über Google Consent Mode v2 (Google CMP)</li>
             </ul>
           </Section>
 
@@ -55,7 +55,7 @@ export default function DatenschutzSeite() {
             <p>Wir verarbeiten personenbezogene Daten auf Grundlage folgender Rechtsgrundlagen gemäß Art. 6 Abs. 1 DSGVO:</p>
             <ul className="list-disc pl-5 space-y-2 mt-3">
               <li>
-                <strong>Einwilligung (Art. 6 Abs. 1 lit. a DSGVO):</strong> Für den Einsatz von Google Analytics, Google AdSense und nicht-essenzielle Cookies. Die Einwilligung kann jederzeit über unseren Cookie-Banner oder per E-Mail an uns widerrufen werden.
+                <strong>Einwilligung (Art. 6 Abs. 1 lit. a DSGVO):</strong> Für den Einsatz von Google Analytics, Google AdSense und nicht-essenzielle Cookies. Die Einwilligung kann jederzeit über den Google-CMP-Dialog oder per E-Mail an uns widerrufen werden.
               </li>
               <li>
                 <strong>Vertragserfüllung (Art. 6 Abs. 1 lit. b DSGVO):</strong> Soweit die Verarbeitung zur Bereitstellung unserer kostenlosen Online-Rechner erforderlich ist.
@@ -108,12 +108,28 @@ export default function DatenschutzSeite() {
               Cookies sind kleine Textdateien, die auf Ihrem Endgerät gespeichert werden. Sie richten keinen Schaden an und enthalten keine Viren. Cookies ermöglichen es, unser Angebot nutzerfreundlicher und effektiver zu gestalten.
             </p>
 
-            <h3 className="font-bold text-gray-800 dark:text-gray-100 mt-6 mb-2">6.2 Cookie-Consent-Banner</h3>
+            <h3 className="font-bold text-gray-800 dark:text-gray-100 mt-6 mb-2">6.2 Google Consent Mode v2</h3>
             <p>
-              Wir verwenden einen <strong>selbst programmierten Cookie-Consent-Banner</strong> (kein Drittanbieter-Tool). Beim ersten Besuch unserer Website werden Sie gefragt, ob Sie der Verwendung nicht-essenzieller Cookies zustimmen. Ihre Entscheidung wird in einem lokalen Cookie gespeichert, sodass Sie nicht bei jedem Besuch erneut gefragt werden.
+              Wir verwenden <strong>Google Consent Mode v2</strong> in Kombination mit der von Google bereitgestellten Consent Management Platform (CMP / &bdquo;Funding Choices&ldquo;). Beim ersten Besuch unserer Website werden Sie über ein von Google eingeblendetes Banner um Ihre Einwilligung gebeten. Sie können Ihre Auswahl jederzeit über den Link <strong>&bdquo;Cookie-Einstellungen&ldquo;</strong> im Footer erneut aufrufen und ändern.
             </p>
             <p className="mt-3">
-              Sie können Ihre Einwilligung jederzeit widerrufen, indem Sie den entsprechenden Cookie in Ihrem Browser löschen oder uns per E-Mail kontaktieren.
+              <strong>Ohne Ihre Einwilligung</strong> werden:
+            </p>
+            <ul className="list-disc pl-5 space-y-1 mt-2">
+              <li>keine Analyse-Cookies gesetzt — Google Analytics läuft im cookielosen Modus und überträgt nur aggregierte, anonymisierte Signale</li>
+              <li>keine personalisierten Anzeigen ausgeliefert — Google AdSense zeigt ausschließlich kontextbasierte Werbung</li>
+              <li>keine Marketing-Cookies gesetzt und keine Nutzerdaten für Werbezwecke an Google weitergegeben (<code>ads_data_redaction</code> ist aktiviert)</li>
+            </ul>
+            <p className="mt-3">
+              <strong>Mit Ihrer Einwilligung</strong> werden:
+            </p>
+            <ul className="list-disc pl-5 space-y-1 mt-2">
+              <li>Google Analytics mit Cookies zur Besucheranalyse verwendet</li>
+              <li>Google AdSense mit personalisierten Anzeigen ausgeliefert</li>
+              <li>Affiliate-Klicks als Analytics-Event erfasst</li>
+            </ul>
+            <p className="mt-3">
+              Technisch wird der Einwilligungsstatus über das Google-Consent-Mode-Framework (<code>gtag(&apos;consent&apos;, ...)</code>) an alle Google-Tags übergeben. Bei Seitenaufruf ist der Status standardmäßig auf <em>denied</em> gesetzt; erst nach Ihrer aktiven Zustimmung im Google-CMP-Dialog wird er auf <em>granted</em> aktualisiert.
             </p>
 
             <h3 className="font-bold text-gray-800 dark:text-gray-100 mt-6 mb-2">6.3 Arten von Cookies</h3>
@@ -150,7 +166,7 @@ export default function DatenschutzSeite() {
           {/* 7. Google Analytics */}
           <Section nr="7" titel="Google Analytics 4">
             <p>
-              Wir verwenden Google Analytics 4, einen Webanalysedienst der Google Ireland Limited (Gordon House, Barrow Street, Dublin 4, Irland). Google Analytics wird <strong>ausschließlich nach Ihrer ausdrücklichen Einwilligung</strong> über unseren Cookie-Banner aktiviert.
+              Wir verwenden Google Analytics 4, einen Webanalysedienst der Google Ireland Limited (Gordon House, Barrow Street, Dublin 4, Irland). Google Analytics wird <strong>ausschließlich nach Ihrer ausdrücklichen Einwilligung</strong> über den Google-CMP-Dialog aktiviert.
             </p>
             <p className="mt-3">Google Analytics verwendet Cookies, um eine Analyse der Benutzung der Website zu ermöglichen. Dabei werden folgende Daten erfasst:</p>
             <ul className="list-disc pl-5 space-y-1 mt-3">
@@ -170,7 +186,7 @@ export default function DatenschutzSeite() {
           {/* 8. Google AdSense */}
           <Section nr="8" titel="Google AdSense">
             <p>
-              Wir nutzen Google AdSense, einen Anzeigendienst der Google Ireland Limited, zur Einblendung von Werbeanzeigen. Google AdSense wird <strong>ausschließlich nach Ihrer ausdrücklichen Einwilligung</strong> über unseren Cookie-Banner geladen.
+              Wir nutzen Google AdSense, einen Anzeigendienst der Google Ireland Limited, zur Einblendung von Werbeanzeigen. Google AdSense wird <strong>ausschließlich nach Ihrer ausdrücklichen Einwilligung</strong> über den Google-CMP-Dialog geladen.
             </p>
             <p className="mt-3">
               Google AdSense verwendet Cookies und sogenannte Web Beacons, um die Website-Nutzung zu analysieren und relevante Werbung auszuspielen. Dabei können Daten (einschließlich Ihrer IP-Adresse) an Server von Google in den USA übertragen werden. Google ist unter dem EU-US Data Privacy Framework zertifiziert.
@@ -280,7 +296,7 @@ export default function DatenschutzSeite() {
               Sie können Ihre Einwilligung widerrufen, indem Sie:
             </p>
             <ul className="list-disc pl-5 space-y-1 mt-3">
-              <li>Den Cookie-Banner erneut aufrufen und Ihre Einstellungen ändern</li>
+              <li>Den Google-CMP-Dialog über den Link &bdquo;Cookie-Einstellungen&ldquo; im Footer erneut aufrufen und Ihre Einstellungen ändern</li>
               <li>Die entsprechenden Cookies in Ihrem Browser löschen</li>
               <li>Uns per E-Mail an <a href="mailto:info@rechenfix.de" className="text-primary-500 dark:text-primary-400 hover:underline">info@rechenfix.de</a> kontaktieren</li>
             </ul>

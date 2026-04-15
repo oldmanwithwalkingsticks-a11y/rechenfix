@@ -3,10 +3,39 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { kategorien, getRechnerByKategorie, beliebteRechnerSlugs, rechner } from '@/lib/rechner-config';
-import { useCookieConsent } from '@/components/cookie/CookieConsentProvider';
 
 export default function Footer() {
-  const { openSettings } = useCookieConsent();
+  const openGoogleCMP = () => {
+    if (typeof window === 'undefined') return;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const w = window as any;
+    // Google Funding Choices (AdSense CMP) — Revocation-Dialog erneut öffnen
+    try {
+      if (w.googlefc && typeof w.googlefc.showRevocationMessage === 'function') {
+        w.googlefc.showRevocationMessage();
+        return;
+      }
+      if (w.googlefc) {
+        w.googlefc.callbackQueue = w.googlefc.callbackQueue || [];
+        w.googlefc.callbackQueue.push({
+          CONSENT_DATA_READY: () => {
+            if (typeof w.googlefc.showRevocationMessage === 'function') {
+              w.googlefc.showRevocationMessage();
+            }
+          },
+        });
+        return;
+      }
+      // Fallback: TCF v2 API (falls Google via IAB-CMP arbeitet)
+      if (typeof w.__tcfapi === 'function') {
+        w.__tcfapi('displayConsentUi', 2, () => {});
+        return;
+      }
+      alert('Cookie-Einstellungen sind aktuell nicht verfügbar. Bitte laden Sie die Seite neu.');
+    } catch {
+      /* ignore */
+    }
+  };
 
   const beliebteRechner = beliebteRechnerSlugs
     .map(slug => rechner.find(r => r.slug === slug))
@@ -108,7 +137,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <button
-                    onClick={openSettings}
+                    onClick={openGoogleCMP}
                     className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm"
                   >
                     Cookie-Einstellungen
