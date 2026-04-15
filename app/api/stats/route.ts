@@ -33,8 +33,19 @@ function parseEntry<T>(raw: unknown): T | null {
 
 export async function GET(req: Request) {
   const authHeader = req.headers.get('authorization') || '';
-  const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : '';
-  const expected = process.env.ADMIN_STATS_PASSWORD || '';
+  const token = (authHeader.startsWith('Bearer ') ? authHeader.slice(7) : '').trim();
+  const expected = (process.env.ADMIN_STATS_PASSWORD || '').trim();
+
+  // Diagnose-Modus: /api/stats?diag=1 — verrät nur, ob die Env-Variable gesetzt ist
+  const { searchParams } = new URL(req.url);
+  if (searchParams.get('diag') === '1') {
+    return NextResponse.json({
+      envSet: expected.length > 0,
+      envLength: expected.length,
+      tokenLength: token.length,
+      match: expected.length > 0 && token === expected,
+    });
+  }
 
   if (!expected || token !== expected) {
     return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
@@ -63,8 +74,8 @@ export async function GET(req: Request) {
 // DELETE: löscht alle Einträge eines bestimmten Monats (YYYY-MM)
 export async function DELETE(req: Request) {
   const authHeader = req.headers.get('authorization') || '';
-  const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : '';
-  const expected = process.env.ADMIN_STATS_PASSWORD || '';
+  const token = (authHeader.startsWith('Bearer ') ? authHeader.slice(7) : '').trim();
+  const expected = (process.env.ADMIN_STATS_PASSWORD || '').trim();
 
   if (!expected || token !== expected) {
     return NextResponse.json({ error: 'unauthorized' }, { status: 401 });

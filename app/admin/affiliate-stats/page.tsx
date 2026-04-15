@@ -91,10 +91,11 @@ export default function AffiliateStatsPage() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!passwortEingabe) return;
+    const pw = passwortEingabe.trim();
+    if (!pw) return;
     setAuthFehler(false);
-    setToken(passwortEingabe);
-    try { sessionStorage.setItem(AUTH_STORAGE_KEY, passwortEingabe); } catch { /* ignore */ }
+    setToken(pw);
+    try { sessionStorage.setItem(AUTH_STORAGE_KEY, pw); } catch { /* ignore */ }
     setPasswortEingabe('');
   };
 
