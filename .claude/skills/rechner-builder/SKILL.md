@@ -7,6 +7,8 @@ description: Template and checklist for building standardized online calculators
 
 Build standardized, SEO-optimized calculator pages for the German calculator portal rechenfix.de. Every calculator must follow this template to ensure consistency, completeness, and maximum SEO impact.
 
+**Aktueller Stand:** 105 Rechner live (Alltag 18, Finanzen 28, Gesundheit 12, Auto 6, Wohnen 16, Mathe 10, Arbeit 15).
+
 ## Tech Stack
 
 - **Framework:** Next.js 14 (App Router)
@@ -20,9 +22,14 @@ Build standardized, SEO-optimized calculator pages for the German calculator por
 
 Follow these steps in order. Do not skip any step.
 
-### Step 1: Create the Page
+### Step 1: Register the Calculator (dynamische Route)
 
-Create the page file at: `/app/[kategorie]/[rechner-name]/page.tsx`
+**WICHTIG:** Alle Rechner laufen über die dynamische Route `app/[kategorie]/[rechner]/page.tsx`. Für einen neuen Rechner wird **KEIN** neuer `page.tsx` erstellt. Stattdessen:
+
+a) **Config-Eintrag** in `lib/rechner-config/<kategorie>.ts` (alltag.ts, finanzen.ts, gesundheit.ts, auto.ts, wohnen.ts, mathe.ts, arbeit.ts) mit `slug`, `title`, `metaDescription`, `emoji`, `kategorie`, SEO-Text, FAQ, CrossLinks, etc.
+b) **Neue Rechner-Component** unter `components/rechner/<Name>Rechner.tsx` — dort lebt die gesamte UI + Live-Rechnung.
+c) **Component-Mapping**: Den neuen Component-Import in der Komponenten-Registry hinzufügen, damit die dynamische Route ihn lädt.
+d) `openGraph.description` wird **automatisch** aus `metaDescription` abgeleitet — KEIN separates Feld pflegen.
 
 Category mapping:
 | Category | Path | Topics |
@@ -167,23 +174,26 @@ Add **WebApplication** schema to every calculator:
 
 Add **BreadcrumbList** schema matching the visible breadcrumbs.
 
-### Step 10: Meta Tags
+### Step 10: Meta Tags (über die Config)
 
-```tsx
-export const metadata = {
-  title: '[Rechner-Name] 2026 — [Kurzbeschreibung] | Rechenfix',
-  description: '[Beschreibung] ✓ [Feature 1] ✓ [Feature 2] ✓ Mit KI-Erklärung.',
-  alternates: {
-    canonical: 'https://www.rechenfix.de/[kategorie]/[rechner-name]',
-  },
-  openGraph: {
-    title: '[Rechner-Name] 2026 | Rechenfix',
-    description: '[Beschreibung]',
-    url: 'https://www.rechenfix.de/[kategorie]/[rechner-name]',
-    type: 'website',
-  },
-}
-```
+Meta-Tags werden **NICHT** in einer eigenen `page.tsx` gesetzt, sondern fließen aus dem Config-Eintrag in `lib/rechner-config/<kategorie>.ts`. Die dynamische Route generiert daraus `title`, `description`, `canonical` und `openGraph` automatisch.
+
+Relevante Felder pro Rechner-Eintrag:
+- `title` — wird zu `"<title> 2026 — ... | Rechenfix"`
+- `metaDescription` — wird direkt als `<meta name="description">` und als `openGraph.description` verwendet (nicht doppelt pflegen!)
+- `slug` + `kategorie` — ergeben die Canonical-URL `https://www.rechenfix.de/<kategorie>/<slug>`
+
+**Regeln für `metaDescription`:**
+- **MAXIMAL 155 Zeichen** — Google schneidet längere Descriptions gnadenlos ab. Vor dem Commit mit `node -e "console.log('...'.length)"` zählen.
+- **KEIN Suffix** `✓ Kostenlos. ✓ Mit KI-Erklärung.` — das Wort „kostenlos" natürlich in den Fließtext einbauen.
+- **Keine ✓-Emojis** in der Description.
+- In Fließtext-Form schreiben, nicht als Feature-Liste mit Häkchen.
+
+Beispiel gut (134 Z.):
+> „Prozentrechner: Prozentwert, Grundwert, Prozentsatz, Aufschlag & Rabatt sofort berechnen — mit Rechenweg, Formel und KI-Erklärung."
+
+Beispiel schlecht (alt, >170 Z. + Suffix):
+> „Prozente sofort berechnen ✓ Grundwert ✓ Prozentwert ✓ Prozentsatz ✓ Aufschlag ✓ Rabatt ✓ Mit Rechenweg ✓ Kostenlos. ✓ Mit KI-Erklärung."
 
 **CRITICAL:** All URLs must use `https://www.rechenfix.de/` (with www).
 
@@ -208,6 +218,10 @@ After creating the calculator, verify:
 - [ ] Page is added to sidebar navigation with correct category count
 - [ ] Page is mobile-responsive (test at 320px width)
 - [ ] Input fields are minimum 48px height
+- [ ] **Meta-Description ≤ 155 Zeichen** (zählen! `node -e "console.log('…'.length)"`)
+- [ ] Kein `✓ Kostenlos. ✓ Mit KI-Erklärung.`-Suffix, keine ✓-Emojis in der Description
+- [ ] **Smoke-Test v2.1** nach Deploy über die betroffenen Routen laufen lassen (Browser-Console-Script auf `https://www.rechenfix.de`)
+- [ ] "Fix erklärt"-Button erscheint erst, nachdem der `ergebnis`-State gefüllt ist — das ist **kein Bug**, sondern gewollt
 
 ### Step 12: Register the Calculator
 
@@ -232,3 +246,7 @@ For detailed templates per calculator type, see `references/templates.md`.
 - Forgot to update sidebar navigation count
 - Submit button instead of live calculation
 - Input fields too small on mobile (under 48px)
+- **Meta-Description > 155 Zeichen** (Google schneidet ab)
+- **Legacy `✓ Kostenlos. ✓ Mit KI-Erklärung.`-Suffix** in der Description
+- Eine eigene `page.tsx` für den neuen Rechner anlegen, statt die Config in `lib/rechner-config/<kategorie>.ts` zu pflegen
+- `openGraph.description` doppelt pflegen, statt sie aus `metaDescription` ableiten zu lassen
