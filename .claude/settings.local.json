@@ -38,7 +38,17 @@
       "Bash(git -C G:/Rechenfix push)",
       "Bash(grep -c '\\\\${' G:/Rechenfix/lib/rechner-config.ts)",
       "Bash(node scripts/split-rechner.mjs)",
-      "Bash(wc -l lib/rechner-config/*.ts components/ui/NummerEingabe.tsx app/sitemap.ts)"
+      "Bash(wc -l lib/rechner-config/*.ts components/ui/NummerEingabe.tsx app/sitemap.ts)",
+      "Bash(git revert:*)",
+      "Bash(node -e \"const s='Rechenfix.de — unabhängiges Rechnerportal aus Deutschland. Kostenlose Online-Rechner für Finanzen, Alltag, Wohnen und mehr. Schnell und ohne Anmeldung.'; console.log\\(s.length\\);\")",
+      "Bash(grep -n \"^  {$\\\\|slug:\" lib/rechner-config/arbeit.ts)",
+      "Bash(node -e \"console.log\\('Elternzeit kostenlos berechnen: Anspruch bis zum 8. Geburtstag, Aufteilung zwischen Partnern, Anmeldefristen und Kündigungsschutz.'.length\\)\")",
+      "Bash(node -e \"console.log\\('Witwenrente kostenlos berechnen: Große und kleine Witwenrente, Freibetrag, Einkommensanrechnung und Sterbevierteljahr mit Rechenweg.'.length\\)\")",
+      "Bash(node -e \"console.log\\('Kurzarbeitergeld kostenlos berechnen: 60 % bzw. 67 % der Nettoentgeltdifferenz — mit Soll-/Ist-Vergleich und Verlustanzeige.'.length\\); console.log\\('Riester-Rente kostenlos berechnen: Grundzulage, Kinderzulage, optimaler Eigenbeitrag und Steuerersparnis mit Günstigerprüfung.'.length\\)\")",
+      "Bash(git restore:*)",
+      "Bash(grep -n \"^  {$\\\\|slug:\" lib/rechner-config/gesundheit.ts)",
+      "Bash(node -e \"console.log\\('Proteinbedarf kostenlos berechnen: wie viel Eiweiß pro Tag nach Gewicht, Sport und Ziel. Mit Lebensmittel-Tabelle und KI-Erklärung.'.length\\)\")",
+      "Bash(npm install:*)"
     ]
   }
 }

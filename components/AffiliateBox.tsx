@@ -240,18 +240,20 @@ export function AffiliateBox({ programId, context, variant = 'full' }: Affiliate
   const url = buildAwinUrl(program, clickref, contextDeeplink);
 
   const handleClick = useCallback(() => {
-    // localStorage-Logging: keine personenbezogenen Daten, immer erlaubt
+    // Fire-and-forget Tracking — keine personenbezogenen Daten
     try {
-      const clicks = JSON.parse(localStorage.getItem('rf_aff_clicks') || '[]');
-      clicks.push({
-        p: programId,
-        c: context || '',
-        r: window.location.pathname,
-        t: Date.now(),
-      });
-      if (clicks.length > 200) clicks.splice(0, clicks.length - 200);
-      localStorage.setItem('rf_aff_clicks', JSON.stringify(clicks));
-    } catch { /* localStorage nicht verfügbar */ }
+      fetch('/api/track', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'click',
+          programId,
+          context: context || '',
+          rechner: window.location.pathname,
+        }),
+        keepalive: true,
+      }).catch(() => { /* ignore */ });
+    } catch { /* ignore */ }
 
     // GA-Event nur mit Marketing-Consent
     if (marketingAllowed) {

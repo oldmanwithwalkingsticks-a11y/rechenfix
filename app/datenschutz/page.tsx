@@ -45,6 +45,7 @@ export default function DatenschutzSeite() {
               <li>Analyse des Nutzerverhaltens (nur nach Einwilligung)</li>
               <li>Anzeige personalisierter Werbung (nur nach Einwilligung)</li>
               <li>Einbindung von Affiliate-Links</li>
+              <li>Serverseitige, anonyme Nutzungsstatistik (Klicks, Feedback, Berechnungszähler)</li>
               <li>Kontaktaufnahme per E-Mail</li>
               <li>Cookie-Verwaltung über eigenen Consent-Banner</li>
             </ul>
@@ -223,10 +224,31 @@ export default function DatenschutzSeite() {
               Bei Klick auf einen Affiliate-Link werden Sie auf die Website des Anbieters weitergeleitet. Dort gelten die Datenschutzbestimmungen des jeweiligen Anbieters. Die Affiliate-Links werden über das Netzwerk der <strong>Awin AG</strong> (Eichhornstraße 3, 10785 Berlin) vermittelt. Awin kann dabei einen Tracking-Cookie setzen, um die Zuordnung des Kaufs zu ermöglichen.
             </p>
             <p className="mt-3">
-              Zusätzlich speichern wir bei Klick auf einen Affiliate-Link anonymisierte Klickdaten (Programm, Seitenname, Zeitstempel) lokal in Ihrem Browser (localStorage). Diese Daten verlassen Ihr Gerät nicht und dienen ausschließlich der internen Auswertung. Sofern Sie der Nutzung von Google Analytics zugestimmt haben, wird der Klick zusätzlich als Analytics-Event erfasst.
+              Zusätzlich speichern wir bei Klick auf einen Affiliate-Link anonymisierte Klickdaten (Programm-ID, Rechner-Seitenpfad, Zeitstempel) auf unserem Server, um die Nutzung der Empfehlungen intern statistisch auszuwerten. Es werden <strong>keine IP-Adressen, keine User-Agents und keine sonstigen personenbezogenen Daten</strong> gespeichert. Eine Zuordnung zu einer konkreten Person ist uns nicht möglich. Die technische Speicherung erfolgt bei unserem Auftragsverarbeiter <strong>Upstash, Inc.</strong> in einer Redis-Datenbank mit Standort in der Europäischen Union (Frankfurt/Irland). Mit Upstash besteht ein Auftragsverarbeitungsvertrag gemäß Art. 28 DSGVO. Die Liste ist auf maximal 20.000 Einträge begrenzt; ältere Einträge werden automatisch überschrieben. Sofern Sie der Nutzung von Google Analytics zugestimmt haben, wird der Klick zusätzlich als Analytics-Event erfasst.
             </p>
             <p className="mt-3">
               Die Einbindung von Affiliate-Links erfolgt auf Grundlage unseres berechtigten Interesses an der Finanzierung unseres kostenlosen Angebots (Art. 6 Abs. 1 lit. f DSGVO). Affiliate-Links sind auf unserer Website stets als &bdquo;Anzeige&ldquo; gekennzeichnet.
+            </p>
+          </Section>
+
+          {/* 9a. Serverseitige Nutzungsstatistik */}
+          <Section nr="9a" titel="Serverseitige Nutzungsstatistik (Upstash Redis)">
+            <p>
+              Um unser Angebot zu verbessern und die Nutzung nachvollziehen zu können, speichern wir ausgewählte anonyme Nutzungsereignisse auf unserem Server. Konkret verarbeiten wir:
+            </p>
+            <ul className="list-disc pl-5 space-y-1 mt-3">
+              <li><strong>Berechnungszähler:</strong> Ein einfacher, aggregierter Zählerstand, der bei jeder durchgeführten Berechnung um 1 erhöht wird. Es wird ausschließlich eine einzelne Zahl gespeichert — keine Zuordnung zu einer Person, Sitzung oder einem Gerät.</li>
+              <li><strong>Affiliate-Klicks:</strong> Programm-ID, Rechner-Seitenpfad und Zeitstempel (siehe Abschnitt 9).</li>
+              <li><strong>Rechner-Feedback:</strong> Wenn Sie auf den &bdquo;Daumen hoch&ldquo;/&bdquo;Daumen runter&ldquo;-Button unter einem Rechner klicken, speichern wir die Bewertung (ja/nein), den Pfad des Rechners und den Zeitstempel. Bei negativem Feedback können Sie zusätzlich freiwillig einen Freitext-Hinweis absenden; dieser wird ebenfalls gespeichert. Geben Sie dort bitte keine personenbezogenen Daten ein.</li>
+            </ul>
+            <p className="mt-3">
+              Wir erfassen dabei <strong>keine IP-Adressen, keine User-Agents, keine Cookies und keine sonstigen Merkmale</strong>, die einen Rückschluss auf Ihre Person erlauben würden. Eine Identifizierung einzelner Nutzer ist für uns technisch nicht möglich.
+            </p>
+            <p className="mt-3">
+              Die technische Speicherung erfolgt in einer Redis-Datenbank bei <strong>Upstash, Inc.</strong> (Auftragsverarbeiter gemäß Art. 28 DSGVO). Der Datenbank-Standort liegt innerhalb der Europäischen Union (Frankfurt/Irland). Die Listen sind auf jeweils 20.000 Einträge begrenzt, ältere Einträge werden automatisch überschrieben.
+            </p>
+            <p className="mt-3">
+              Rechtsgrundlage ist unser berechtigtes Interesse an einer anonymen Auswertung der Nutzung zur Verbesserung unseres kostenlosen Angebots sowie an der Finanzierung über Affiliate-Partnerschaften (Art. 6 Abs. 1 lit. f DSGVO). Da keine personenbezogenen Daten verarbeitet werden, ist eine Einwilligung nicht erforderlich.
             </p>
           </Section>
 

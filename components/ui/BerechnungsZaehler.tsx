@@ -12,28 +12,36 @@ export default function BerechnungsZaehler() {
   const zielRef = useRef(0);
 
   useEffect(() => {
-    const ziel = getZaehler();
-    zielRef.current = ziel;
+    let cancelled = false;
+    let timer: ReturnType<typeof setInterval> | null = null;
 
-    // Count-up Animation von 0 bis Zielwert
-    const dauer = 1500; // ms
-    const schritte = 40;
-    const intervall = dauer / schritte;
-    let schritt = 0;
+    getZaehler().then(ziel => {
+      if (cancelled) return;
+      zielRef.current = ziel;
 
-    const timer = setInterval(() => {
-      schritt++;
-      // Ease-out: schnell starten, langsam enden
-      const fortschritt = 1 - Math.pow(1 - schritt / schritte, 3);
-      setAnzeige(Math.round(ziel * fortschritt));
+      // Count-up Animation von 0 bis Zielwert
+      const dauer = 1500; // ms
+      const schritte = 40;
+      const intervall = dauer / schritte;
+      let schritt = 0;
 
-      if (schritt >= schritte) {
-        setAnzeige(ziel);
-        clearInterval(timer);
-      }
-    }, intervall);
+      timer = setInterval(() => {
+        schritt++;
+        // Ease-out: schnell starten, langsam enden
+        const fortschritt = 1 - Math.pow(1 - schritt / schritte, 3);
+        setAnzeige(Math.round(ziel * fortschritt));
 
-    return () => clearInterval(timer);
+        if (schritt >= schritte) {
+          setAnzeige(ziel);
+          if (timer) clearInterval(timer);
+        }
+      }, intervall);
+    });
+
+    return () => {
+      cancelled = true;
+      if (timer) clearInterval(timer);
+    };
   }, []);
 
   if (anzeige === null) return null;

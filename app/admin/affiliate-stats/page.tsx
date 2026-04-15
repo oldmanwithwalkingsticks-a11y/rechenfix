@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import { getStatsBaseline } from '@/lib/affiliate-stats-baseline';
 
 interface ClickEntry {
   p: string;
@@ -17,6 +16,8 @@ interface FeedbackEntry {
 }
 
 type Tab = 'programm' | 'rechner' | 'alle' | 'feedback';
+
+const AUTH_STORAGE_KEY = 'rf_admin_stats_token';
 
 function getMonatKey(t: number) {
   const d = new Date(t);
@@ -38,20 +39,71 @@ function isImMonat(t: number, monatKey: string) {
 }
 
 export default function AffiliateStatsPage() {
+  const [token, setToken] = useState<string | null>(null);
+  const [passwortEingabe, setPasswortEingabe] = useState('');
+  const [authFehler, setAuthFehler] = useState(false);
+  const [ladeStatus, setLadeStatus] = useState<'idle' | 'lade' | 'fehler' | 'ok'>('idle');
+
   const [alleClicks, setAlleClicks] = useState<ClickEntry[]>([]);
   const [alleFeedbacks, setAlleFeedbacks] = useState<FeedbackEntry[]>([]);
   const [monat, setMonat] = useState(aktuellerMonat());
   const [tab, setTab] = useState<Tab>('programm');
   const [berichtStatus, setBerichtStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
+  // Token aus SessionStorage laden (überlebt Reload, nicht Tab-Close)
   useEffect(() => {
     try {
-      setAlleClicks(JSON.parse(localStorage.getItem('rf_aff_clicks') || '[]'));
-    } catch { setAlleClicks([]); }
-    try {
-      setAlleFeedbacks(JSON.parse(localStorage.getItem('rf_feedback') || '[]'));
-    } catch { setAlleFeedbacks([]); }
+      const t = sessionStorage.getItem(AUTH_STORAGE_KEY);
+      if (t) setToken(t);
+    } catch { /* ignore */ }
   }, []);
+
+  const ladeStats = useCallback(async (t: string) => {
+    setLadeStatus('lade');
+    try {
+      const res = await fetch('/api/stats', {
+        headers: { Authorization: `Bearer ${t}` },
+        cache: 'no-store',
+      });
+      if (res.status === 401) {
+        setAuthFehler(true);
+        setToken(null);
+        try { sessionStorage.removeItem(AUTH_STORAGE_KEY); } catch { /* ignore */ }
+        setLadeStatus('fehler');
+        return;
+      }
+      if (!res.ok) {
+        setLadeStatus('fehler');
+        return;
+      }
+      const data = await res.json();
+      setAlleClicks(Array.isArray(data.clicks) ? data.clicks : []);
+      setAlleFeedbacks(Array.isArray(data.feedbacks) ? data.feedbacks : []);
+      setLadeStatus('ok');
+    } catch {
+      setLadeStatus('fehler');
+    }
+  }, []);
+
+  useEffect(() => {
+    if (token) ladeStats(token);
+  }, [token, ladeStats]);
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!passwortEingabe) return;
+    setAuthFehler(false);
+    setToken(passwortEingabe);
+    try { sessionStorage.setItem(AUTH_STORAGE_KEY, passwortEingabe); } catch { /* ignore */ }
+    setPasswortEingabe('');
+  };
+
+  const handleLogout = () => {
+    setToken(null);
+    setAlleClicks([]);
+    setAlleFeedbacks([]);
+    try { sessionStorage.removeItem(AUTH_STORAGE_KEY); } catch { /* ignore */ }
+  };
 
   // Verfügbare Monate ermitteln
   const verfuegbareMonate = useMemo(() => {
@@ -113,25 +165,6 @@ export default function AffiliateStatsPage() {
     return { ja, nein: feedbacks.length - ja, gesamt: feedbacks.length };
   }, [feedbacks]);
 
-  // Zeitbasierte Grundlinie — analog zum Startseiten-Zähler.
-  // Verhindert, dass die Übersichtskarten nach localStorage-Clean
-  // auf 0 fallen. Nur im aktuellen Monat aktiv.
-  const uebersicht = useMemo(() => {
-    if (monat !== aktuellerMonat()) {
-      return {
-        klicks: clicks.length,
-        ja: feedbackGesamt.ja,
-        nein: feedbackGesamt.nein,
-        gesamt: feedbackGesamt.gesamt,
-      };
-    }
-    const b = getStatsBaseline();
-    const klicks = Math.max(clicks.length, b.klicks);
-    const ja = Math.max(feedbackGesamt.ja, b.ja);
-    const nein = Math.max(feedbackGesamt.nein, b.nein);
-    return { klicks, ja, nein, gesamt: ja + nein };
-  }, [monat, clicks.length, feedbackGesamt]);
-
   const fmtDate = (t: number) => {
     const d = new Date(t);
     return d.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })
@@ -150,7 +183,6 @@ export default function AffiliateStatsPage() {
       lines.push(`Feedback;${fmtDate(f.t)};${f.v === 'ja' ? 'Daumen hoch' : 'Daumen runter'};${f.r};${f.r}`);
     }
 
-    // Zusammenfassung
     lines.push('');
     lines.push('--- ZUSAMMENFASSUNG ---');
     lines.push(`Monat;${getMonatLabel(monat)}`);
@@ -199,91 +231,18 @@ export default function AffiliateStatsPage() {
     }
   };
 
-  // Auto-Versand: Prüfe beim Laden ob Vormonat noch nicht gesendet wurde
-  useEffect(() => {
-    if (alleClicks.length === 0 && alleFeedbacks.length === 0) return;
-
-    const jetzt = new Date();
-    const vormonat = new Date(jetzt.getFullYear(), jetzt.getMonth() - 1, 1);
-    const vormonatKey = getMonatKey(vormonat.getTime());
-
-    const bereitsGesendet = JSON.parse(localStorage.getItem('rf_reports_sent') || '[]') as string[];
-    if (bereitsGesendet.includes(vormonatKey)) return;
-
-    // Prüfe ob es Daten im Vormonat gibt
-    const hatVormonatDaten =
-      alleClicks.some(c => isImMonat(c.t, vormonatKey)) ||
-      alleFeedbacks.some(f => isImMonat(f.t, vormonatKey));
-
-    if (!hatVormonatDaten) return;
-
-    // Vormonat-Daten für CSV aufbereiten
-    const vmClicks = alleClicks.filter(c => isImMonat(c.t, vormonatKey));
-    const vmFeedbacks = alleFeedbacks.filter(f => isImMonat(f.t, vormonatKey));
-    const vmJa = vmFeedbacks.filter(f => f.v === 'ja').length;
-    const vmNein = vmFeedbacks.length - vmJa;
-
-    const vmNachProgramm = new Map<string, number>();
-    for (const c of vmClicks) vmNachProgramm.set(c.p, (vmNachProgramm.get(c.p) || 0) + 1);
-
-    const vmFbStats = new Map<string, { ja: number; nein: number }>();
-    for (const f of vmFeedbacks) {
-      const e = vmFbStats.get(f.r) || { ja: 0, nein: 0 };
-      if (f.v === 'ja') e.ja++; else e.nein++;
-      vmFbStats.set(f.r, e);
-    }
-
-    const lines: string[] = [];
-    lines.push('Typ;Datum;Programm/Bewertung;Context/Rechner;Seite');
-    for (const c of vmClicks.sort((a, b) => a.t - b.t)) {
-      lines.push(`Affiliate-Klick;${fmtDate(c.t)};${c.p};${c.c || '-'};${c.r}`);
-    }
-    for (const f of vmFeedbacks.sort((a, b) => a.t - b.t)) {
-      lines.push(`Feedback;${fmtDate(f.t)};${f.v === 'ja' ? 'Daumen hoch' : 'Daumen runter'};${f.r};${f.r}`);
-    }
-    lines.push('');
-    lines.push('--- ZUSAMMENFASSUNG ---');
-    lines.push(`Monat;${getMonatLabel(vormonatKey)}`);
-    lines.push(`Affiliate-Klicks gesamt;${vmClicks.length}`);
-    lines.push(`Feedback gesamt;${vmFeedbacks.length}`);
-    lines.push(`Daumen hoch;${vmJa}`);
-    lines.push(`Daumen runter;${vmNein}`);
-    if (vmFeedbacks.length > 0) lines.push(`Zufriedenheitsrate;${((vmJa / vmFeedbacks.length) * 100).toFixed(0)}%`);
-    lines.push('');
-    lines.push('--- AFFILIATE NACH PROGRAMM ---');
-    lines.push('Programm;Klicks');
-    Array.from(vmNachProgramm.entries()).sort((a, b) => b[1] - a[1]).forEach(([p, c]) => lines.push(`${p};${c}`));
-    lines.push('');
-    lines.push('--- FEEDBACK NACH RECHNER ---');
-    lines.push('Rechner;Daumen hoch;Daumen runter;Gesamt;Zufriedenheit');
-    Array.from(vmFbStats.entries())
-      .map(([r, d]) => ({ r, ...d, g: d.ja + d.nein }))
-      .sort((a, b) => b.g - a.g)
-      .forEach(r => lines.push(`${r.r};${r.ja};${r.nein};${r.g};${r.g > 0 ? ((r.ja / r.g) * 100).toFixed(0) : 0}%`));
-
-    const csv = lines.join('\n');
-
-    fetch('/api/monthly-report', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ monat: getMonatLabel(vormonatKey), csv }),
-    }).then(res => {
+  const handleLoeschen = async () => {
+    if (!token) return;
+    if (!confirm(`Alle Daten für ${getMonatLabel(monat)} unwiderruflich löschen?`)) return;
+    try {
+      const res = await fetch(`/api/stats?monat=${monat}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+      });
       if (res.ok) {
-        bereitsGesendet.push(vormonatKey);
-        localStorage.setItem('rf_reports_sent', JSON.stringify(bereitsGesendet));
+        await ladeStats(token);
       }
-    }).catch(() => { /* stiller Fehler */ });
-  }, [alleClicks, alleFeedbacks]);
-
-  const handleLoeschen = () => {
-    if (confirm(`Alle Daten für ${getMonatLabel(monat)} unwiderruflich löschen?`)) {
-      const restClicks = alleClicks.filter(c => !isImMonat(c.t, monat));
-      const restFeedbacks = alleFeedbacks.filter(f => !isImMonat(f.t, monat));
-      localStorage.setItem('rf_aff_clicks', JSON.stringify(restClicks));
-      localStorage.setItem('rf_feedback', JSON.stringify(restFeedbacks));
-      setAlleClicks(restClicks);
-      setAlleFeedbacks(restFeedbacks);
-    }
+    } catch { /* ignore */ }
   };
 
   const tabs: { key: Tab; label: string }[] = [
@@ -293,15 +252,69 @@ export default function AffiliateStatsPage() {
     { key: 'feedback', label: 'Feedback' },
   ];
 
+  // Login-Screen
+  if (!token) {
+    return (
+      <div className="max-w-md mx-auto px-4 py-16">
+        <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2">Admin-Login</h1>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
+          Passwort erforderlich für Zugriff auf die Affiliate- &amp; Feedback-Statistiken.
+        </p>
+        <form onSubmit={handleLogin} className="space-y-4">
+          <input
+            type="password"
+            value={passwortEingabe}
+            onChange={e => setPasswortEingabe(e.target.value)}
+            placeholder="Passwort"
+            autoFocus
+            className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"
+          />
+          {authFehler && (
+            <p className="text-sm text-red-600 dark:text-red-400">
+              Passwort falsch. Bitte erneut versuchen.
+            </p>
+          )}
+          <button
+            type="submit"
+            disabled={!passwortEingabe}
+            className="w-full px-4 py-3 text-sm font-medium rounded-xl bg-primary-500 text-white hover:bg-primary-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors min-h-[48px]"
+          >
+            Anmelden
+          </button>
+        </form>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2">
-        Affiliate- &amp; Feedback-Statistiken
-      </h1>
+      <div className="flex items-start justify-between mb-2 gap-4">
+        <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
+          Affiliate- &amp; Feedback-Statistiken
+        </h1>
+        <button
+          onClick={handleLogout}
+          className="text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 underline"
+        >
+          Abmelden
+        </button>
+      </div>
 
       <p className="text-sm text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-lg px-3 py-2 mb-6">
-        Monatliche Auswertung. Daten lokal im Browser gespeichert. Der Vormonatsbericht wird automatisch per E-Mail gesendet.
+        Monatliche Auswertung. Daten werden serverseitig in Upstash Redis gespeichert und sind geräteübergreifend verfügbar.
       </p>
+
+      {ladeStatus === 'lade' && (
+        <div className="text-sm text-gray-500 dark:text-gray-400 mb-6">Daten werden geladen …</div>
+      )}
+      {ladeStatus === 'fehler' && (
+        <div className="text-sm text-red-600 dark:text-red-400 mb-6">
+          Fehler beim Laden der Daten.
+          <button onClick={() => token && ladeStats(token)} className="ml-2 underline">
+            Erneut versuchen
+          </button>
+        </div>
+      )}
 
       {/* Monatsauswahl */}
       <div className="flex items-center gap-3 mb-6">
@@ -323,7 +336,7 @@ export default function AffiliateStatsPage() {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-center">
           <p className="text-sm text-gray-500 dark:text-gray-400">Affiliate-Klicks</p>
-          <p className="text-3xl font-bold text-primary-600 dark:text-primary-400">{uebersicht.klicks}</p>
+          <p className="text-3xl font-bold text-primary-600 dark:text-primary-400">{clicks.length}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-center">
           <p className="text-sm text-gray-500 dark:text-gray-400">Programme</p>
@@ -331,13 +344,13 @@ export default function AffiliateStatsPage() {
         </div>
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-center">
           <p className="text-sm text-gray-500 dark:text-gray-400">Feedback</p>
-          <p className="text-3xl font-bold text-green-600 dark:text-green-400">{uebersicht.ja}</p>
-          <p className="text-xs text-gray-400 dark:text-gray-500">👍 {uebersicht.ja} / 👎 {uebersicht.nein}</p>
+          <p className="text-3xl font-bold text-green-600 dark:text-green-400">{feedbackGesamt.ja}</p>
+          <p className="text-xs text-gray-400 dark:text-gray-500">👍 {feedbackGesamt.ja} / 👎 {feedbackGesamt.nein}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-center">
           <p className="text-sm text-gray-500 dark:text-gray-400">Zufriedenheit</p>
           <p className="text-3xl font-bold text-primary-600 dark:text-primary-400">
-            {uebersicht.gesamt > 0 ? `${((uebersicht.ja / uebersicht.gesamt) * 100).toFixed(0)}%` : '—'}
+            {feedbackGesamt.gesamt > 0 ? `${((feedbackGesamt.ja / feedbackGesamt.gesamt) * 100).toFixed(0)}%` : '—'}
           </p>
         </div>
       </div>

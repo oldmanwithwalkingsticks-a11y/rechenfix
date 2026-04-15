@@ -89,16 +89,19 @@ export default function FeedbackButtons() {
 
   const handleFeedback = (wert: 'ja' | 'nein') => {
     setFeedback(wert);
+    // Fire-and-forget Tracking — keine personenbezogenen Daten
     try {
-      const entries = JSON.parse(localStorage.getItem('rf_feedback') || '[]');
-      entries.push({
-        v: wert,
-        r: window.location.pathname,
-        t: Date.now(),
-      });
-      if (entries.length > 500) entries.splice(0, entries.length - 500);
-      localStorage.setItem('rf_feedback', JSON.stringify(entries));
-    } catch { /* localStorage nicht verfügbar */ }
+      fetch('/api/track', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'feedback',
+          feedback: wert,
+          rechner: window.location.pathname,
+        }),
+        keepalive: true,
+      }).catch(() => { /* ignore */ });
+    } catch { /* ignore */ }
   };
 
   return (
