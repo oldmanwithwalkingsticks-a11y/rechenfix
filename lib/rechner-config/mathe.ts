@@ -361,7 +361,7 @@ In der Praxis bedeutet das: Die meisten Werte liegen im Bereich 5,4 ± 2,42, als
     kategorie: 'Mathe & Schule',
     kategorieSlug: 'mathe',
     metaTitle: 'Wissenschaftlicher Taschenrechner online | Rechenfix',
-    metaDescription: 'Wissenschaftlicher Taschenrechner online ✓ Sin, Cos, Tan ✓ Logarithmen ✓ Potenzen & Wurzeln ✓ Kostenlos & ohne App. Jetzt rechnen! ✓ Mit KI-Erklärung.',
+    metaDescription: 'Wissenschaftlicher Taschenrechner online: Trigonometrie, Logarithmen, Potenzen, Klammern und mehr — sofort nutzbar und kostenlos.',
     keywords: ['wissenschaftlicher taschenrechner', 'taschenrechner online', 'scientific calculator', 'sin cos tan rechner', 'logarithmus rechner', 'potenzrechner', 'fakultät berechnen'],
     icon: '🧮',
     formel: 'sin, cos, tan, log, ln, √, x², xʸ, n!, π, e | DEG/RAD umschaltbar | Punkt-vor-Strich, Klammern',
