@@ -1359,4 +1359,75 @@ Kaufen Sie immer 1–2 Fliesen extra als Reserve. Fliesen aus unterschiedlichen 
       },
     ],
   },
+  {
+    slug: 'laminat-rechner',
+    titel: 'Laminat-Rechner',
+    beschreibung: 'Laminat- und Parkettbedarf berechnen: Pakete, Verschnitt und Materialkosten.',
+    kategorie: 'Wohnen & Energie',
+    kategorieSlug: 'wohnen',
+    metaTitle: 'Laminat-Rechner 2026 — Pakete & Verschnitt berechnen | Rechenfix',
+    metaDescription: 'Laminat-Rechner: Pakete, Verschnitt, Trittschalldämmung und Sockelleisten kostenlos berechnen — mit Verlegemuster-Auswahl und Einkaufsliste.',
+    keywords: ['laminat rechner', 'laminat berechnen', 'parkett rechner', 'laminat pakete berechnen', 'verschnitt laminat', 'laminat m2 rechner', 'laminatbedarf', 'parkett bedarf'],
+    icon: '🪵',
+    formel: 'Benötigte Fläche = Raumfläche × (1 + Verschnitt%) | Pakete = ⌈Fläche ÷ Paketgröße⌉ | Trittschalldämmung = Fläche × 1,05 | Sockelleisten = Umfang × 1,10',
+    beispiel: 'Beispiel: 20 m² Raum, 2,49 m²/Paket, gerade verlegt (10 % Verschnitt) → 9 Pakete (22,41 m²), 270 € Materialkosten, 21 m² Trittschalldämmung',
+    erklaerung: `**Laminat- und Parkettbedarf berechnen — Schritt für Schritt**
+
+Ob Laminat, Parkett oder Vinyl-Klickboden: Vor dem Kauf müssen Sie wissen, wie viele Pakete Sie brauchen. Unser Laminat-Rechner kalkuliert die benötigte Menge inklusive Verschnitt, Trittschalldämmung und Sockelleisten — damit Sie weder zu viel noch zu wenig kaufen.
+
+**So funktioniert die Berechnung**
+
+Die Paketanzahl ergibt sich aus Ihrer Raumfläche plus Verschnitt, geteilt durch die Paketgröße (steht auf der Verpackung, typisch 2,0–3,0 m²). Da Sie keine halben Pakete kaufen können, wird immer aufgerundet. Der Rechner zeigt Ihnen auch den Überschuss, den Sie als Reserve behalten sollten.
+
+**Verschnitt nach Verlegemuster**
+
+Das Verlegemuster bestimmt, wie viel Material beim Zuschneiden verloren geht:
+- **Gerade / Schiffsboden (10 %):** Das sparsamste Muster. Die Dielen werden parallel zur längsten Wand verlegt. Reststücke von einer Reihe können oft die nächste beginnen. Ideal für Anfänger und große Räume.
+- **Diagonal (15 %):** Die Dielen verlaufen im 45°-Winkel zu den Wänden. Optisch reizvoll, besonders in schmalen Fluren, da der Raum breiter wirkt. Allerdings müssen an jedem Wandanschluss schräge Schnitte gesetzt werden — das erhöht den Verschnitt.
+- **Fischgrät (20 %):** Die klassischste Parkett-Variante. Kurze Stäbe werden V-förmig verlegt. Erfordert spezielle Fischgrät-Dielen und den höchsten Verschnitt, da viele Passschnitte nötig sind.
+
+In verwinkelten Räumen mit Erkern, Nischen oder Säulen sollten Sie zusätzlich 3–5 % aufschlagen.
+
+**Trittschalldämmung — wann und wie viel?**
+
+Bei Laminat und Klick-Parkett wird eine Trittschalldämmung unter den Boden gelegt — sie reduziert Gehgeräusche und gleicht kleine Unebenheiten aus. Die Bahnen werden mit ca. 5 % Überlappung verlegt, daher rechnet unser Tool Raumfläche × 1,05. Ist die Trittschalldämmung bereits in die Diele integriert (bei vielen Premium-Laminaten der Fall), können Sie diesen Posten ignorieren. Gängige Materialien sind PE-Schaum (günstig), Kork (natürlich, guter Schallschutz) und XPS (feuchtigkeitsresistent).
+
+**Sockelleisten — den Raumumfang kennen**
+
+Sockelleisten verdecken die Dehnungsfuge am Rand (ca. 8–10 mm). Der Rechner berechnet den Raumumfang und addiert 10 % Reserve für Gehrungsschnitte und Verschnitt. Sockelleisten werden in Stücken von typisch 2,40 m verkauft. Ziehen Sie Türöffnungen nicht ab — das Material wird für die Abschlüsse an den Türzargen gebraucht.
+
+**Materialkosten im Überblick**
+
+Laminat gibt es in großer Preisspanne: Einfache Klasse-31-Böden kosten 5–10 € pro m², robuste Klasse-33-Laminatböden 10–20 € pro m². Echtholz-Parkett (Zweischicht) liegt bei 20–50 € pro m², Dreischicht-Parkett bei 30–80 €. Pro Paket zahlen Sie je nach Hersteller und Format 15–60 €. Hinzu kommen Trittschalldämmung (2–5 €/m²) und Sockelleisten (1–4 €/lfdm).
+
+**Tipps für den Einkauf**
+
+Kaufen Sie ein Paket extra als Reserve — für spätere Reparaturen. Laminat aus verschiedenen Produktionschargen kann Farbabweichungen haben. Lagern Sie die Pakete vor dem Verlegen mindestens 48 Stunden im Raum, damit sich das Material an Temperatur und Luftfeuchtigkeit anpasst (Akklimatisierung). Auf mineralischen Untergründen (Estrich) ist eine Dampfbremse unter der Trittschalldämmung Pflicht.`,
+    faq: [
+      {
+        frage: 'Wie berechne ich die Anzahl Laminat-Pakete?',
+        antwort: 'Multiplizieren Sie Ihre Raumfläche mit dem Verschnittfaktor (z. B. × 1,10 bei 10 % Verschnitt) und teilen Sie das Ergebnis durch die Paketgröße in m² (steht auf der Verpackung). Runden Sie immer auf die nächste ganze Zahl auf, da Sie keine halben Pakete kaufen können.',
+      },
+      {
+        frage: 'Wie viel Verschnitt muss ich bei Laminat einplanen?',
+        antwort: 'Bei gerader Verlegung (Schiffsboden) ca. 10 %, bei diagonaler Verlegung ca. 15 % und bei Fischgrätmuster ca. 20 %. In verwinkelten Räumen mit Nischen oder Erkern zusätzlich 3–5 % aufschlagen. Anfänger sollten generell etwas mehr einplanen.',
+      },
+      {
+        frage: 'Brauche ich eine Trittschalldämmung unter dem Laminat?',
+        antwort: 'Ja, in den meisten Fällen. Die Trittschalldämmung reduziert Gehgeräusche und gleicht kleine Unebenheiten im Untergrund aus. Sie wird nicht benötigt, wenn sie bereits in die Laminatdielen integriert ist (bei vielen Premium-Produkten der Fall). Auf mineralischem Untergrund (Estrich) ist zusätzlich eine Dampfbremse erforderlich.',
+      },
+      {
+        frage: 'Was kostet Laminat pro Quadratmeter?',
+        antwort: 'Einfaches Laminat (Klasse 31) kostet 5–10 €/m², robustes Laminat (Klasse 33) 10–20 €/m². Echtholz-Parkett liegt bei 20–80 €/m² je nach Holzart und Aufbau. Hinzu kommen Trittschalldämmung (2–5 €/m²) und Sockelleisten (1–4 €/lfdm). Der Einbau durch einen Fachbetrieb kostet zusätzlich 10–25 €/m².',
+      },
+      {
+        frage: 'Wie viele Sockelleisten brauche ich?',
+        antwort: 'Berechnen Sie den Raumumfang (2 × Länge + 2 × Breite) und addieren Sie 10 % Reserve für Schnitte. Sockelleisten werden in Stücken von 2,40 m verkauft. Türöffnungen müssen nicht abgezogen werden, da Sie an den Zargen Übergangsprofile oder Abschlüsse setzen.',
+      },
+      {
+        frage: 'Kann ich den Laminat-Rechner auch für Vinyl und Parkett nutzen?',
+        antwort: 'Ja. Der Rechner funktioniert für alle Klick-Bodenbeläge: Laminat, Vinyl, Parkett und Kork. Entscheidend sind Raumfläche, Paketgröße und Verlegemuster. Die Verschnitt-Werte gelten für alle diese Materialien gleichermaßen.',
+      },
+    ],
+  },
 ];

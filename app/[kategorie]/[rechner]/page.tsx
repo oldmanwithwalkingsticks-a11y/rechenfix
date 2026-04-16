@@ -135,6 +135,8 @@ import VorfaelligkeitsentschaedigungRechner from '@/components/rechner/Vorfaelli
 import EnergiekostenRechner from '@/components/rechner/EnergiekostenRechner';
 import BetriebskostenRechner from '@/components/rechner/BetriebskostenRechner';
 import FliesenbedarfRechner from '@/components/rechner/FliesenbedarfRechner';
+import LaminatRechner from '@/components/rechner/LaminatRechner';
+import WhrRechner from '@/components/rechner/WhrRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -282,6 +284,8 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'energiekosten-rechner': EnergiekostenRechner,
   'betriebskosten-rechner': BetriebskostenRechner,
   'fliesenbedarf-rechner': FliesenbedarfRechner,
+  'laminat-rechner': LaminatRechner,
+  'whr-rechner': WhrRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

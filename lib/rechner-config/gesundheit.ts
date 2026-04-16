@@ -1011,4 +1011,78 @@ Der Ruhepuls wird **morgens direkt nach dem Aufwachen** gemessen — noch im Lie
       },
     ],
   },
+  {
+    slug: 'whr-rechner',
+    titel: 'WHR-Rechner',
+    beschreibung: 'Taille-Hüfte-Verhältnis berechnen: WHR als Indikator für gesundheitliches Risiko — aussagekräftiger als der BMI.',
+    kategorie: 'Gesundheit',
+    kategorieSlug: 'gesundheit',
+    metaTitle: 'WHR-Rechner 2026 — Taille-Hüfte-Verhältnis berechnen | Rechenfix',
+    metaDescription: 'WHR-Rechner: Taille-Hüfte-Verhältnis und WHtR kostenlos berechnen — mit Risiko-Ampel, WHO-Grenzwerten und Vergleich zum BMI.',
+    keywords: ['whr rechner', 'taille hüfte verhältnis', 'waist hip ratio', 'whr berechnen', 'bauchumfang verhältnis', 'viszerales fett', 'whtr rechner', 'taille hüfte index'],
+    icon: '📏',
+    formel: 'WHR = Taillenumfang ÷ Hüftumfang | WHtR = Taillenumfang ÷ Körpergröße',
+    beispiel: 'Beispiel: Frau, 78 cm Taille, 100 cm Hüfte → WHR 0,78 (niedriges Risiko). Bei 168 cm Größe → WHtR 0,46 (optimal)',
+    erklaerung: `**Taille-Hüfte-Verhältnis (WHR) — was es aussagt**
+
+Das Taille-Hüfte-Verhältnis (Waist-to-Hip Ratio, kurz WHR) ist ein einfacher Indikator für die Fettverteilung am Körper. Im Gegensatz zum BMI, der nur Gewicht und Größe berücksichtigt, zeigt der WHR, wo das Fett sitzt — und genau das ist für die Gesundheit entscheidend. Bauchfett (viszerales Fett) umgibt die inneren Organe und produziert Entzündungsbotenstoffe, die das Risiko für Herz-Kreislauf-Erkrankungen, Typ-2-Diabetes und bestimmte Krebsarten deutlich erhöhen.
+
+**So messen Sie richtig**
+
+Messen Sie morgens nüchtern, im Stehen und in Unterwäsche. Ziehen Sie den Bauch nicht ein:
+- **Taillenumfang:** Messen Sie auf Nabelhöhe, also in der Mitte zwischen der untersten Rippe und dem oberen Rand des Hüftknochens. Das Maßband sollte eng anliegen, aber nicht einschneiden.
+- **Hüftumfang:** Messen Sie an der breitesten Stelle des Gesäßes. Stehen Sie aufrecht, die Füße zusammen.
+
+Beide Maße sollten Sie mehrmals nehmen und den Durchschnitt verwenden, um Messfehler zu minimieren.
+
+**WHO-Grenzwerte für das WHR**
+
+Die Weltgesundheitsorganisation (WHO) definiert folgende Grenzwerte für ein erhöhtes Risiko kardiovaskulärer Erkrankungen:
+- **Frauen:** WHR unter 0,80 gilt als niedriges Risiko, 0,80 bis 0,84 als moderat und ab 0,85 als erhöht.
+- **Männer:** WHR unter 0,90 gilt als niedriges Risiko, 0,90 bis 0,99 als moderat und ab 1,00 als erhöht.
+
+Diese Grenzwerte beziehen sich auf europäische Bevölkerungen. Für asiatische Bevölkerungsgruppen werden oft niedrigere Schwellenwerte empfohlen.
+
+**WHtR — Taille-Größe-Verhältnis als zweite Kennzahl**
+
+Das Waist-to-Height Ratio (WHtR) setzt den Taillenumfang ins Verhältnis zur Körpergröße. Es ist besonders einfach zu interpretieren: Ist der Taillenumfang kleiner als die halbe Körpergröße (WHtR unter 0,50), gilt das als optimal. Ab 0,50 steigt das Risiko für Stoffwechselerkrankungen messbar an. Das WHtR hat den Vorteil, dass es auch bei großen und kleinen Menschen aussagekräftig bleibt — ein Problem, das beim BMI bekannt ist.
+
+**WHR vs. BMI — warum der WHR oft besser ist**
+
+Der BMI unterscheidet nicht zwischen Muskelmasse und Fettmasse und sagt nichts über die Fettverteilung aus. Ein durchtrainierter Sportler kann einen hohen BMI haben und trotzdem metabolisch gesund sein. Umgekehrt kann eine normalgewichtige Person mit viel Bauchfett (sogenanntes „TOFI" — Thin Outside, Fat Inside) ein erhöhtes Risiko tragen, das der BMI nicht erfasst. Mehrere große Studien (u. a. INTERHEART, Prospective Studies Collaboration) zeigen, dass der WHR Herz-Kreislauf-Risiken besser vorhersagt als der BMI.
+
+**Was Sie tun können**
+
+Bei einem erhöhten WHR ist die gute Nachricht: Bauchfett spricht besonders gut auf Lebensstiländerungen an. Ausdauersport (3–5× pro Woche, 30–60 Minuten) reduziert viszerales Fett nachweislich — oft schneller als subkutanes Fett an Oberschenkeln und Hüften. Krafttraining erhöht den Grundumsatz und verbessert die Insulinsensitivität. Bei der Ernährung helfen mediterrane Kost, reduzierter Zuckerkonsum und ausreichend Ballaststoffe. Alkohol — insbesondere Bier — fördert die Fetteinlagerung am Bauch besonders stark.
+
+**Einschränkungen**
+
+Der WHR ist ein Screening-Werkzeug, keine Diagnose. Er funktioniert am besten bei Erwachsenen zwischen 18 und 70 Jahren. Bei Schwangeren, Kindern und Menschen mit bestimmten Erkrankungen (z. B. Aszites) ist er nicht aussagekräftig. Auch nach einer großen Mahlzeit oder bei Blähungen können die Messwerte verfälscht sein. Für eine umfassende Risikobeurteilung konsultieren Sie Ihren Arzt.`,
+    faq: [
+      {
+        frage: 'Was ist ein gutes Taille-Hüfte-Verhältnis?',
+        antwort: 'Für Frauen gilt ein WHR unter 0,80 als niedrig, für Männer unter 0,90. Diese Werte stammen von der WHO und zeigen ein geringes Risiko für Herz-Kreislauf-Erkrankungen. Ideal ist ein WHR möglichst deutlich unter diesen Grenzwerten.',
+      },
+      {
+        frage: 'Ist der WHR aussagekräftiger als der BMI?',
+        antwort: 'Für die Einschätzung von Herz-Kreislauf-Risiken ja. Der WHR berücksichtigt die Fettverteilung — insbesondere das gefährliche Bauchfett (viszerales Fett). Der BMI unterscheidet dagegen nicht zwischen Muskel- und Fettmasse. Große Studien zeigen, dass der WHR Herzinfarkt- und Diabetes-Risiken besser vorhersagt als der BMI.',
+      },
+      {
+        frage: 'Wie messe ich den Taillenumfang richtig?',
+        antwort: 'Messen Sie morgens nüchtern im Stehen, in Unterwäsche, ohne den Bauch einzuziehen. Das Maßband liegt auf Nabelhöhe — das ist die Mitte zwischen der untersten Rippe und dem oberen Rand des Hüftknochens. Das Band sollte eng anliegen, aber nicht einschneiden. Wiederholen Sie die Messung dreimal und nehmen Sie den Durchschnitt.',
+      },
+      {
+        frage: 'Was ist das Taille-Größe-Verhältnis (WHtR)?',
+        antwort: 'Das WHtR (Waist-to-Height Ratio) teilt den Taillenumfang durch die Körpergröße. Die einfache Regel: Ist der Taillenumfang kleiner als die halbe Körpergröße (WHtR < 0,50), gilt das als optimal. Ab 0,50 steigt das Risiko für Stoffwechselerkrankungen. Das WHtR funktioniert bei großen und kleinen Menschen gleich gut.',
+      },
+      {
+        frage: 'Kann ich meinen WHR verbessern?',
+        antwort: 'Ja — Bauchfett spricht besonders gut auf Lebensstiländerungen an. Regelmäßiger Ausdauersport (3–5× pro Woche), Krafttraining, mediterrane Ernährung und weniger Alkohol reduzieren viszerales Fett oft schneller als subkutanes Fett an Hüften und Oberschenkeln. Schon 5–10 % Gewichtsverlust kann den WHR deutlich verbessern.',
+      },
+      {
+        frage: 'Ab welchem Taillenumfang wird es gefährlich?',
+        antwort: 'Die WHO definiert erhöhtes Risiko ab 80 cm Taillenumfang bei Frauen und ab 94 cm bei Männern. Ab 88 cm (Frauen) bzw. 102 cm (Männer) gilt das Risiko als stark erhöht. Diese absoluten Werte ergänzen den WHR und werden von vielen Ärzten als erste Orientierung verwendet.',
+      },
+    ],
+  },
 ];
