@@ -2169,4 +2169,73 @@ Als Selbstständige oder Unternehmerin sollten Sie Ihre Anlagegüter sauber in e
       },
     ],
   },
+  {
+    slug: 'betriebskosten-rechner',
+    titel: 'Betriebskosten-Rechner',
+    beschreibung: 'Monatliche Betriebskosten für Selbstständige und Gewerbe kalkulieren — mit Break-Even-Analyse.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Betriebskosten-Rechner 2026 — Kosten für Selbstständige kalkulieren | Rechenfix',
+    metaDescription: 'Betriebskosten-Rechner: Fix- und variable Kosten, Unternehmerlohn und nötigen Stundensatz kostenlos berechnen — für Freelancer, GmbH und UG.',
+    keywords: ['betriebskosten rechner', 'betriebskosten berechnen', 'kosten selbstständige', 'fixkosten variable kosten', 'break even analyse', 'unternehmerlohn berechnen', 'stundensatz kalkulation', 'betriebsausgaben'],
+    icon: '💼',
+    formel: 'Gesamtkosten/Monat = Fixkosten + Variable Kosten + Unternehmerlohn | Stundensatz = Jahreskosten ÷ 1.400 fakturierbare Stunden',
+    beispiel: 'Beispiel: 1.110 € Fixkosten + 300 € variable Kosten + 3.000 € Unternehmerlohn = 4.410 €/Monat → Stundensatz ≈ 37,80 € (bei 1.400 Std./Jahr)',
+    erklaerung: `**Betriebskosten kalkulieren — so funktioniert's**
+
+Wer sich selbstständig macht oder ein Gewerbe betreibt, braucht einen klaren Überblick über alle laufenden Kosten. Der Betriebskosten-Rechner addiert Ihre monatlichen Fix- und variablen Kosten, rechnet den Unternehmerlohn hinzu und zeigt Ihnen, welchen Monatsumsatz und Stundensatz Sie mindestens erzielen müssen, um kostendeckend zu arbeiten.
+
+**Fixkosten vs. variable Kosten**
+
+- **Fixkosten** fallen jeden Monat in gleicher Höhe an — unabhängig vom Umsatz. Dazu gehören Miete, Versicherungen, Software-Abos, Telefon-/Internet-Flatrates und die monatliche Buchhaltung. Typische Fixkosten eines Freelancers liegen zwischen 800 und 1.500 € pro Monat, bei einer GmbH mit Büro schnell bei 2.000 bis 5.000 €.
+- **Variable Kosten** steigen und fallen mit dem Auftragsvolumen. Materialkosten, Fahrtkosten und Marketing-Ausgaben gehören dazu. Sie lassen sich schwerer planen, weshalb ein Puffer von 10–20 % empfehlenswert ist.
+
+**Unternehmerlohn — das eigene Gehalt richtig einplanen**
+
+Viele Gründer vergessen, sich selbst ein Gehalt auszuzahlen. Der Unternehmerlohn ist das Netto-Äquivalent eines Angestelltengehalts — er deckt Ihre privaten Lebenshaltungskosten, Krankenversicherung und Altersvorsorge. Als Faustregel gilt: Mindestens 2.500–3.500 € im Monat, wenn Sie in einer deutschen Großstadt leben. Planen Sie den Unternehmerlohn immer als festen Bestandteil Ihrer Betriebskosten.
+
+**Nötiger Stundensatz — die Kennzahl für Freelancer**
+
+Der Rechner teilt Ihre Jahreskosten durch ca. 1.400 fakturierbare Stunden. Diese Zahl ergibt sich aus ca. 220 Arbeitstagen minus Urlaub, Krankheit und Feiertage, multipliziert mit ca. 6 produktiven Stunden pro Tag. Die restliche Arbeitszeit geht für Akquise, Buchhaltung, E-Mails und Weiterbildung drauf — und kann nicht in Rechnung gestellt werden.
+
+**Geschäftsformen im Vergleich**
+
+- **Freelancer / Einzelunternehmer:** Geringste Fixkosten, keine Pflicht zur doppelten Buchführung unter der Grenze. Persönliche Haftung mit dem Privatvermögen.
+- **GmbH:** Mindestkapital 25.000 €, Pflicht zur Bilanzierung, Geschäftsführergehalt als Betriebsausgabe absetzbar. Haftung auf das Gesellschaftsvermögen begrenzt.
+- **UG (haftungsbeschränkt):** Mini-GmbH mit nur 1 € Stammkapital, dafür Pflicht zur Rücklagenbildung (25 % des Gewinns). Für den Start mit wenig Kapital geeignet.
+
+**Break-Even-Punkt bestimmen**
+
+Ihr Break-Even ist der Monatsumsatz, bei dem Einnahmen und Ausgaben identisch sind. Jeder Euro darüber ist Gewinn. Unser Rechner zeigt diesen Wert als „Nötiger Monatsumsatz (netto)" an. Multipliziert mit 1,19 erhalten Sie den Bruttobetrag, den Sie Ihren Kunden in Rechnung stellen müssen. Liegt Ihr tatsächlicher Umsatz dauerhaft unter dem Break-Even, müssen Sie entweder Kosten senken oder Preise erhöhen.
+
+**Typische Betriebskosten nach Branche**
+
+IT-Freelancer kommen mit 800–1.200 € Fixkosten aus (Home-Office, Cloud-Tools, Haftpflicht). Handwerker und Dienstleister mit Fahrzeug und Werkzeug rechnen mit 1.500–3.000 €. Einzelhändler und Gastronomen zahlen oft 3.000–8.000 € allein für Miete, Wareneinsatz und Personal. Vergleichen Sie Ihre Kosten regelmäßig mit Branchendurchschnitten, um Einsparpotenzial zu erkennen.`,
+    faq: [
+      {
+        frage: 'Welche Betriebskosten haben Selbstständige?',
+        antwort: 'Zu den typischen Betriebskosten zählen Büromiete, Versicherungen (Haftpflicht, Berufsunfähigkeit), Software und Cloud-Dienste, Telefon und Internet, Buchhaltung oder Steuerberater, Fahrtkosten, Marketing und Materialkosten. Hinzu kommt der Unternehmerlohn — also Ihr eigenes Gehalt.',
+      },
+      {
+        frage: 'Wie berechne ich meinen nötigen Stundensatz?',
+        antwort: 'Addieren Sie alle monatlichen Kosten (fix + variabel + Unternehmerlohn), multiplizieren Sie mit 12 und teilen Sie durch die fakturierbaren Stunden pro Jahr (ca. 1.400). Das ergibt Ihren Mindeststundensatz netto. Für den Bruttosatz addieren Sie 19 % Umsatzsteuer.',
+      },
+      {
+        frage: 'Was ist der Unternehmerlohn?',
+        antwort: 'Der Unternehmerlohn ist das Gehalt, das Sie sich als Selbstständiger selbst zahlen. Er entspricht Ihren privaten Lebenshaltungskosten inklusive Krankenversicherung und Altersvorsorge. Als Faustregel gelten mindestens 2.500–3.500 € pro Monat. In einer GmbH wird das Geschäftsführergehalt als Betriebsausgabe gebucht.',
+      },
+      {
+        frage: 'Was ist der Break-Even-Punkt?',
+        antwort: 'Der Break-Even (Gewinnschwelle) ist der Umsatz, ab dem Ihre Einnahmen alle Kosten decken. Jeder Euro darüber ist Gewinn. Liegt Ihr Monatsumsatz dauerhaft unter dem Break-Even, arbeiten Sie mit Verlust und müssen entweder Kosten senken oder Preise erhöhen.',
+      },
+      {
+        frage: 'Wie viele Stunden kann ein Freelancer pro Jahr fakturieren?',
+        antwort: 'Realistisch sind ca. 1.400 fakturierbare Stunden pro Jahr. Von 365 Tagen bleiben nach Wochenenden, Feiertagen, Urlaub und Krankheit etwa 220 Arbeitstage. Davon sind circa 6 Stunden täglich tatsächlich auf Kundenprojekte anrechenbar — der Rest geht für Akquise, Buchhaltung und Verwaltung drauf.',
+      },
+      {
+        frage: 'Welche Geschäftsform hat die niedrigsten Betriebskosten?',
+        antwort: 'Freelancer und Einzelunternehmer haben in der Regel die niedrigsten laufenden Kosten: keine Bilanzierungspflicht, kein Mindestkapital, geringere Steuerberatungskosten. Eine GmbH verursacht durch Bilanzierungspflicht und höhere Steuerberatungskosten etwa 200–500 € Mehrkosten pro Monat. Dafür bietet sie Haftungsbegrenzung.',
+      },
+    ],
+  },
 ];

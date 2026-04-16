@@ -129,6 +129,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'skonto': 'Rechnungen mit Skonto-Konditionen erstellen und Zahlungsfristen verwalten — mit Lexware Office.',
     'gmbh': 'Als GmbH-Geschäftsführer? Lexware Office übernimmt Buchhaltung, Rechnungen und Lohnabrechnung in einem Tool.',
     'afa': 'Anlagenverwaltung und AfA automatisch berechnen — mit Lexware Office für Selbstständige.',
+    'betriebskosten': 'Einnahmen und Ausgaben im Blick — Lexware Office für Ihre Buchhaltung.',
   },
   check24: {
     'strom': 'Stromtarife vergleichen und bis zu 500 € pro Jahr sparen.',

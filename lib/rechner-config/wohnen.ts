@@ -1281,4 +1281,82 @@ Für den gesamten Haushaltsverbrauch nutzen Sie unseren [Stromkosten-Rechner](/w
       },
     ],
   },
+  {
+    slug: 'fliesenbedarf-rechner',
+    titel: 'Fliesenbedarf-Rechner',
+    beschreibung: 'Fliesenbedarf berechnen: Anzahl Fliesen, Fliesenkleber und Fugenmasse für Boden und Wand.',
+    kategorie: 'Wohnen & Energie',
+    kategorieSlug: 'wohnen',
+    metaTitle: 'Fliesenbedarf-Rechner 2026 — Fliesen, Kleber & Fugenmasse berechnen | Rechenfix',
+    metaDescription: 'Fliesenbedarf berechnen: Anzahl Fliesen, Kleber und Fugenmasse für Ihre Fläche — mit Verschnitt, Verlegemuster und Einkaufsliste. Kostenlos.',
+    keywords: ['fliesenbedarf rechner', 'fliesen berechnen', 'fliesenbedarf berechnen', 'fliesenkleber berechnen', 'fugenmasse berechnen', 'fliesen pro qm', 'verschnitt fliesen', 'fliesenrechner'],
+    icon: '🧱',
+    formel: 'Fliesen pro m² = 10.000 ÷ (Länge cm × Breite cm) | Anzahl = Fläche × Fliesen/m² × (1 + Verschnitt%) | Kleber ≈ 4 kg/m² | Fuge ≈ 0,75 kg/m²',
+    beispiel: 'Beispiel: 7,5 m² mit 30×60 cm Fliesen, gerade verlegt (5 % Verschnitt) → 44 Fliesen, 2 Säcke Kleber (25 kg), 2 Gebinde Fugenmasse (5 kg)',
+    erklaerung: `**Fliesenbedarf berechnen — Schritt für Schritt**
+
+Bevor Sie Fliesen kaufen, sollten Sie genau wissen, wie viele Fliesen, wie viel Kleber und wie viel Fugenmasse Sie brauchen. Unser Fliesenbedarf-Rechner nimmt Ihnen die Arbeit ab: Geben Sie Ihre Fläche und das Fliesenformat ein, wählen Sie das Verlegemuster — und erhalten Sie eine komplette Einkaufsliste mit Materialkosten.
+
+**So berechnen Sie die Fliesenanzahl**
+
+Die Formel ist einfach: Teilen Sie 10.000 durch das Produkt aus Fliesenlänge und -breite (in cm), um die Fliesen pro Quadratmeter zu erhalten. Bei 30 × 60 cm ergibt das 10.000 ÷ 1.800 ≈ 5,56 Fliesen/m². Multiplizieren Sie mit der Fläche und dem Verschnittaufschlag, und Sie haben die benötigte Stückzahl.
+
+**Verschnitt richtig einplanen**
+
+Verschnitt entsteht beim Zuschneiden an Wänden, Ecken und Aussparungen. Je nach Verlegemuster fällt unterschiedlich viel Verschnitt an:
+- **Gerade verlegt:** ca. 5 % Verschnitt — das sparsamste Muster, ideal für Anfänger.
+- **Drittelverband:** ca. 10 % — die Fliesen werden um ein Drittel versetzt, was dynamischer wirkt und den Verschnitt leicht erhöht.
+- **Diagonal verlegt:** ca. 15 % — optisch sehr ansprechend, aber mit dem höchsten Materialverbrauch. Alle Randfliesen müssen diagonal geschnitten werden.
+
+Bei verwinkelte Räumen, vielen Aussparungen (Rohre, Heizkörpernischen) oder großformatigen Fliesen in kleinen Räumen sollten Sie zusätzlich 2–5 % aufschlagen.
+
+**Fliesenkleber — wie viel brauche ich?**
+
+Die Klebermenge hängt vom Untergrund, der Fliesengröße und der Zahnspachtelgröße ab. Als Richtwert gelten 3–5 kg pro Quadratmeter, unser Rechner arbeitet mit 4 kg/m². Bei großformatigen Fliesen (ab 60 × 60 cm) wird empfohlen, sowohl den Untergrund als auch die Fliesenrückseite zu spachteln (Buttering-Floating-Verfahren) — dann steigt der Bedarf auf 5–6 kg/m². Fliesenkleber wird in 25-kg-Säcken verkauft.
+
+**Fugenmasse — der richtige Bedarf**
+
+Der Bedarf an Fugenmasse liegt bei ca. 0,5–1 kg pro Quadratmeter, abhängig von Fugenbreite und Fliesengröße. Kleine Fliesen haben mehr Fugenlänge pro m², große weniger. Unser Rechner kalkuliert mit 0,75 kg/m² als Mittelwert. Fugenmasse gibt es in 5-kg-Gebinden. Wählen Sie die Fugenfarbe passend zur Fliese — graue Fugen auf hellen Fliesen wirken oft schmutziger als helle Fugen.
+
+**Gängige Fliesenformate**
+
+- **30 × 30 cm:** Klassiker für Bodenfliesen in Bädern und Küchen. Universell einsetzbar, einfach zu verlegen.
+- **30 × 60 cm:** Modernes Standardformat. Wirkt durch die Rechteckform großzügiger und eignet sich für Boden und Wand.
+- **60 × 60 cm:** Großformat für moderne Böden. Erfordert einen sehr ebenen Untergrund und das Buttering-Floating-Verfahren.
+- **20 × 25 cm:** Typisches Wandfliesenformat in Küchen und Bädern. Preisgünstig und einfach zu verarbeiten.
+
+**Materialkosten kalkulieren**
+
+Fliesen kosten je nach Material und Qualität zwischen 10 und 80 €/m². Einfache Keramikfliesen gibt es ab 10–15 €/m², Feinsteinzeug in Holzoptik für 20–35 €/m², Naturstein ab 40 €/m². Hinzu kommen Kleber (ca. 18 € pro 25-kg-Sack) und Fugenmasse (ca. 12 € pro 5-kg-Gebinde). Vergessen Sie nicht Silikon für Dehnungsfugen, Kreuzabstandhalter und ggf. Grundierung — diese Posten sind im Rechner nicht enthalten.
+
+**Tipps für den Einkauf**
+
+Kaufen Sie immer 1–2 Fliesen extra als Reserve. Fliesen aus unterschiedlichen Chargen können leichte Farbabweichungen haben. Wenn später eine Fliese beschädigt wird und Ihre Charge ausverkauft ist, haben Sie ein Problem. Die Kartonanzahl Ihres gewählten Formats finden Sie auf der Verpackung — teilen Sie die Gesamtmenge durch die Stückzahl pro Karton.`,
+    faq: [
+      {
+        frage: 'Wie berechne ich die Anzahl Fliesen pro Quadratmeter?',
+        antwort: 'Teilen Sie 10.000 durch das Produkt aus Fliesenlänge und -breite in Zentimetern. Bei 30 × 60 cm: 10.000 ÷ (30 × 60) = 5,56 Fliesen/m². Bei 60 × 60 cm: 10.000 ÷ 3.600 = 2,78 Fliesen/m². Die Gesamtanzahl ergibt sich durch Multiplikation mit der Fläche plus Verschnittzuschlag.',
+      },
+      {
+        frage: 'Wie viel Verschnitt muss ich bei Fliesen einplanen?',
+        antwort: 'Bei gerader Verlegung ca. 5 %, bei Drittelverband ca. 10 % und bei diagonaler Verlegung ca. 15 %. In verwinkelten Räumen mit vielen Ecken und Aussparungen sollten Sie zusätzlich 2–5 % aufschlagen. Bei Großformaten in kleinen Räumen ebenfalls etwas mehr planen.',
+      },
+      {
+        frage: 'Wie viel Fliesenkleber brauche ich pro Quadratmeter?',
+        antwort: 'Der Bedarf liegt bei 3–5 kg/m², abhängig von Fliesengröße und Zahnspachtelgröße. Standard ist ca. 4 kg/m². Bei großformatigen Fliesen (ab 60×60 cm) mit Buttering-Floating-Verfahren steigt der Bedarf auf 5–6 kg/m². Ein 25-kg-Sack reicht somit für ca. 5–6 m² bei Standardfliesen.',
+      },
+      {
+        frage: 'Wie viel Fugenmasse wird pro Quadratmeter benötigt?',
+        antwort: 'Ca. 0,5–1 kg pro m², abhängig von Fugenbreite und Fliesengröße. Kleine Fliesen (z. B. Mosaik) brauchen mehr Fugenmasse, große Fliesen weniger. Als Richtwert rechnet man mit 0,75 kg/m². Ein 5-kg-Gebinde reicht für ca. 6–7 m².',
+      },
+      {
+        frage: 'Welches Verlegemuster ist am sparsamsten?',
+        antwort: 'Die gerade Verlegung (Kreuzfuge) verursacht mit ca. 5 % den geringsten Verschnitt. Der Drittelverband ist ein guter Kompromiss aus Optik und Materialverbrauch (ca. 10 %). Diagonal verlegen sieht elegant aus, kostet aber ca. 15 % mehr Material.',
+      },
+      {
+        frage: 'Was kosten Fliesen pro Quadratmeter?',
+        antwort: 'Die Preisspanne ist groß: einfache Keramikfliesen ab 10–15 €/m², Feinsteinzeug 20–35 €/m², Naturstein ab 40 €/m² aufwärts. Hinzu kommen Kleber (ca. 18 € pro 25-kg-Sack für 5–6 m²) und Fugenmasse (ca. 12 € pro 5-kg-Gebinde für 6–7 m²). Verlegen lassen kostet zusätzlich 30–60 €/m².',
+      },
+    ],
+  },
 ];
