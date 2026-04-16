@@ -137,7 +137,7 @@ export default function KindergeldRechner() {
                 <div className="flex items-center justify-between mb-1">
                   <p className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">Kindergeld</p>
                   {ergebnis.gewinner === 'kindergeld' && (
-                    <span className="text-xs bg-green-500 text-white px-2 py-0.5 rounded-full font-bold">✓ Günstiger</span>
+                    <span className="text-xs bg-green-700 text-white px-2 py-0.5 rounded-full font-bold">✓ Günstiger</span>
                   )}
                 </div>
                 <p className="text-2xl font-bold text-gray-800 dark:text-gray-200">{fmtEuro(ergebnis.vorteilKindergeld)} €</p>

@@ -173,7 +173,7 @@ export default function AboRechner() {
                       removeAbo(a.id);
                     }
                   }}
-                  className="w-7 h-7 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-500 hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors text-sm font-bold flex items-center justify-center"
+                  className="w-7 h-7 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-600 hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors text-sm font-bold flex items-center justify-center"
                 >
                   ×
                 </button>

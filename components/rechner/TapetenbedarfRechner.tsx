@@ -316,13 +316,13 @@ export default function TapetenbedarfRechner() {
               {ergebnis.fensterFlaeche > 0 && (
                 <div className="flex justify-between px-4 py-3 text-sm">
                   <span className="text-gray-600 dark:text-gray-400">Fenster ({parseDeutscheZahl(fenster)}×)</span>
-                  <span className="font-medium text-red-500 dark:text-red-400">−{fmt(ergebnis.fensterFlaeche)} m²</span>
+                  <span className="font-medium text-red-600 dark:text-red-400">−{fmt(ergebnis.fensterFlaeche)} m²</span>
                 </div>
               )}
               {ergebnis.tuerFlaeche > 0 && (
                 <div className="flex justify-between px-4 py-3 text-sm">
                   <span className="text-gray-600 dark:text-gray-400">Türen ({parseDeutscheZahl(tueren)}×)</span>
-                  <span className="font-medium text-red-500 dark:text-red-400">−{fmt(ergebnis.tuerFlaeche)} m²</span>
+                  <span className="font-medium text-red-600 dark:text-red-400">−{fmt(ergebnis.tuerFlaeche)} m²</span>
                 </div>
               )}
               <div className="flex justify-between px-4 py-3 text-sm font-semibold">

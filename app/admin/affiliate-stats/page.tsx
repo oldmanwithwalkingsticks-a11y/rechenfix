@@ -505,7 +505,7 @@ export default function AffiliateStatsPage() {
                     <tr key={r.rechner} className="hover:bg-gray-50 dark:hover:bg-gray-700/30">
                       <td className="px-4 py-3 text-gray-800 dark:text-gray-200 font-mono text-xs">{r.rechner}</td>
                       <td className="px-4 py-3 text-right tabular-nums text-green-600 dark:text-green-400">{r.ja}</td>
-                      <td className="px-4 py-3 text-right tabular-nums text-red-500 dark:text-red-400">{r.nein}</td>
+                      <td className="px-4 py-3 text-right tabular-nums text-red-600 dark:text-red-400">{r.nein}</td>
                       <td className="px-4 py-3 text-right tabular-nums text-gray-600 dark:text-gray-400">{r.gesamt}</td>
                       <td className="px-4 py-3 text-right">
                         <span className={`inline-block px-2 py-0.5 rounded text-xs font-semibold ${
@@ -535,7 +535,7 @@ export default function AffiliateStatsPage() {
                     {[...feedbacks].sort((a, b) => b.t - a.t).map((f, i) => (
                       <tr key={`fb-${f.t}-${i}`} className="hover:bg-gray-50 dark:hover:bg-gray-700/30">
                         <td className="px-4 py-2 text-gray-500 dark:text-gray-400 whitespace-nowrap">{fmtDate(f.t)}</td>
-                        <td className="px-4 py-2">{f.v === 'ja' ? <span className="text-green-600 dark:text-green-400">👍 Ja</span> : <span className="text-red-500 dark:text-red-400">👎 Nein</span>}</td>
+                        <td className="px-4 py-2">{f.v === 'ja' ? <span className="text-green-600 dark:text-green-400">👍 Ja</span> : <span className="text-red-600 dark:text-red-400">👎 Nein</span>}</td>
                         <td className="px-4 py-2 text-gray-800 dark:text-gray-200 font-mono text-xs">{f.r}</td>
                       </tr>
                     ))}

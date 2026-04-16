@@ -23,7 +23,7 @@ const AFFILIATE_PROGRAMS = {
     baseUrl: 'https://www.awin1.com/cread.php?awinmid=15043&awinaffid=2843240',
     deeplink: 'https://steuererklaerung.smartsteuer.de/',
     icon: '⚡',
-    color: '#00A651',
+    color: '#007A3C',
   },
   lexware: {
     name: 'Lexware Office',
@@ -50,7 +50,7 @@ const AFFILIATE_PROGRAMS = {
     baseUrl: 'https://www.awin1.com/cread.php?awinmid=11938&awinaffid=2843240',
     deeplink: 'https://www.congstar.de/handytarife/',
     icon: '📱',
-    color: '#FF6600',
+    color: '#B54700',
   },
   'ks-auxilia': {
     name: 'KS Auxilia Rechtsschutz',
@@ -68,7 +68,7 @@ const AFFILIATE_PROGRAMS = {
     baseUrl: 'https://www.awin1.com/cread.php?awinmid=27722&awinaffid=2843240',
     deeplink: 'https://www.eventfloss-berlin.de/',
     icon: '🚢',
-    color: '#1E90FF',
+    color: '#1565C0',
   },
   verivox: {
     name: 'Verivox',
@@ -86,7 +86,7 @@ const AFFILIATE_PROGRAMS = {
     baseUrl: 'https://www.awin1.com/cread.php?awinmid=47173&awinaffid=2843240',
     deeplink: 'https://www.naturesway.de/collections/all',
     icon: '🌿',
-    color: '#2E8B57',
+    color: '#1F6B42',
   },
 } as const;
 

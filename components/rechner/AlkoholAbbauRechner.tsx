@@ -138,7 +138,7 @@ export default function AlkoholAbbauRechner() {
                     className="w-16 min-h-[44px] px-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-center text-sm"
                     min="0"
                   />
-                  <button onClick={() => removeGetraenk(g.id)} className="min-h-[44px] min-w-[44px] rounded-lg text-red-500 border border-red-200 dark:border-red-800" aria-label="Entfernen">×</button>
+                  <button onClick={() => removeGetraenk(g.id)} className="min-h-[44px] min-w-[44px] rounded-lg text-red-600 border border-red-200 dark:border-red-800" aria-label="Entfernen">×</button>
                 </div>
                 {g.art === 'eigen' && (
                   <div className="grid grid-cols-2 gap-2 mt-2">

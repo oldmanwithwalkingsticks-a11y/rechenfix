@@ -149,7 +149,7 @@ export default function PflegegeldRechner() {
               {anteilDienst >= 15 && `${anteilDienst}% Dienst`}
             </div>
             <div
-              className="bg-green-500 flex items-center justify-center text-white text-xs font-semibold"
+              className="bg-green-700 flex items-center justify-center text-white text-xs font-semibold"
               style={{ width: `${100 - anteilDienst}%` }}
             >
               {(100 - anteilDienst) >= 15 && `${100 - anteilDienst}% Angehörige`}

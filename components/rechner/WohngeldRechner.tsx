@@ -216,12 +216,12 @@ export default function WohngeldRechner() {
                   </tr>
                   <tr>
                     <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">− Pauschalabzug (10%)</td>
-                    <td className="px-4 py-2.5 text-right tabular-nums text-red-500 whitespace-nowrap">−{fmtEuro(Math.round(parseDeutscheZahl(einkommen) * 0.10))} €</td>
+                    <td className="px-4 py-2.5 text-right tabular-nums text-red-600 whitespace-nowrap">−{fmtEuro(Math.round(parseDeutscheZahl(einkommen) * 0.10))} €</td>
                   </tr>
                   {ergebnis.freibetraege > 0 && (
                     <tr>
                       <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">− Freibeträge</td>
-                      <td className="px-4 py-2.5 text-right tabular-nums text-red-500 whitespace-nowrap">−{fmtEuro(ergebnis.freibetraege)} €</td>
+                      <td className="px-4 py-2.5 text-right tabular-nums text-red-600 whitespace-nowrap">−{fmtEuro(ergebnis.freibetraege)} €</td>
                     </tr>
                   )}
                   <tr className="bg-gray-50 dark:bg-gray-700/30 font-medium">

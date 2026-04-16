@@ -52,7 +52,7 @@ export default function Header() {
             <div className="flex flex-col">
               <div className="flex items-center gap-0.5">
                 <span className="text-3xl font-extrabold text-primary-500">Rechen</span>
-                <span className="text-3xl font-extrabold text-accent-500">fix</span>
+                <span className="text-3xl font-extrabold text-accent-700 dark:text-accent-400">fix</span>
                 <span className="text-sm text-gray-600 hidden sm:inline">.de</span>
               </div>
               <span className="text-[11px] tracking-widest uppercase text-gray-600 dark:text-gray-500 font-medium -mt-1">

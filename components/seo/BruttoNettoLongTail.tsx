@@ -112,7 +112,7 @@ export default function BruttoNettoLongTail({ brutto, seoText, faq }: Props) {
                         <span className="block text-xs text-gray-600 dark:text-gray-500">{e.beschreibung}</span>
                       </td>
                       <td className="p-3 text-right font-bold text-primary-600 dark:text-primary-400">{fmt(e.ergebnis.nettoMonat)} €</td>
-                      <td className="p-3 text-right text-red-500 dark:text-red-400">{fmt(e.ergebnis.gesamtAbzuege)} €</td>
+                      <td className="p-3 text-right text-red-600 dark:text-red-400">{fmt(e.ergebnis.gesamtAbzuege)} €</td>
                       <td className="p-3 text-right text-gray-600 dark:text-gray-400">{e.ergebnis.abzuegeProzent}%</td>
                     </tr>
                   ))}

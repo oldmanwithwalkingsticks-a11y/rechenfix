@@ -82,7 +82,7 @@ const tastenReihen: Taste[][] = [
 
 function tastenFarbe(typ: TastenTyp, label: string): string {
   if (typ === 'gleich') return 'bg-orange-500 hover:bg-orange-600 text-white shadow-md';
-  if (typ === 'loeschen') return 'bg-red-500/80 hover:bg-red-500 text-white';
+  if (typ === 'loeschen') return 'bg-red-600/80 hover:bg-red-600 text-white';
   if (typ === 'operator') return 'bg-blue-500/80 hover:bg-blue-500 text-white';
   if (typ === 'funktion') return 'bg-gray-500/60 hover:bg-gray-500/80 text-gray-100';
   if (typ === 'spezial') {

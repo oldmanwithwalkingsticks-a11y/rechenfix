@@ -209,7 +209,7 @@ export default function RabattRechner() {
               </div>
               <div className="flex justify-between text-xs mt-1">
                 <span className="text-primary-600 dark:text-primary-400 font-medium">{fmt(ergebnis.endpreis)} €</span>
-                <span className="text-red-500 font-medium">−{fmt(ergebnis.ersparnis)} €</span>
+                <span className="text-red-600 font-medium">−{fmt(ergebnis.ersparnis)} €</span>
               </div>
             </div>
           )}

@@ -166,7 +166,7 @@ export default function QuadratmeterRechner() {
             {flaechen.length > 1 && (
               <button
                 onClick={() => entferneFlaeche(f.id)}
-                className="text-xs text-red-500 hover:text-red-700 dark:hover:text-red-400 transition-colors"
+                className="text-xs text-red-600 hover:text-red-700 dark:hover:text-red-400 transition-colors"
               >
                 Entfernen
               </button>

@@ -182,7 +182,7 @@ export default function WahrerStundenlohnRechner() {
                 <div key={i} className={`px-4 py-3 ${i < arr.length - 1 ? 'border-b border-gray-100 dark:border-gray-700' : ''}`}>
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-700 dark:text-gray-300">{item.label}</span>
-                    <span className="text-sm font-semibold text-red-500 dark:text-red-400">&minus;{formatEuro(item.wert)} €</span>
+                    <span className="text-sm font-semibold text-red-600 dark:text-red-400">&minus;{formatEuro(item.wert)} €</span>
                   </div>
                 </div>
               ))}

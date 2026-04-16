@@ -313,13 +313,13 @@ export default function BafoegRechner() {
                   {ergebnis.anrechnungEinkommen > 0 && (
                     <tr>
                       <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Eigenes Einkommen</td>
-                      <td className="px-4 py-2.5 text-right tabular-nums text-red-500 whitespace-nowrap">−{fmtEuro(ergebnis.anrechnungEinkommen)} €</td>
+                      <td className="px-4 py-2.5 text-right tabular-nums text-red-600 whitespace-nowrap">−{fmtEuro(ergebnis.anrechnungEinkommen)} €</td>
                     </tr>
                   )}
                   {ergebnis.anrechnungVermoegen > 0 && (
                     <tr>
                       <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Eigenes Vermögen</td>
-                      <td className="px-4 py-2.5 text-right tabular-nums text-red-500 whitespace-nowrap">−{fmtEuro(ergebnis.anrechnungVermoegen)} €</td>
+                      <td className="px-4 py-2.5 text-right tabular-nums text-red-600 whitespace-nowrap">−{fmtEuro(ergebnis.anrechnungVermoegen)} €</td>
                     </tr>
                   )}
                   {!ergebnis.elternunabhaengig && (
@@ -328,7 +328,7 @@ export default function BafoegRechner() {
                         Elterneinkommen
                         <span className="text-xs text-gray-600 ml-1">(Netto {fmtEuro(ergebnis.nettoEltern)} € − Freibetrag {fmtEuro(ergebnis.freibetragEltern)} €)</span>
                       </td>
-                      <td className="px-4 py-2.5 text-right tabular-nums text-red-500 whitespace-nowrap">−{fmtEuro(ergebnis.anrechnungEltern)} €</td>
+                      <td className="px-4 py-2.5 text-right tabular-nums text-red-600 whitespace-nowrap">−{fmtEuro(ergebnis.anrechnungEltern)} €</td>
                     </tr>
                   )}
                   {ergebnis.elternunabhaengig && (

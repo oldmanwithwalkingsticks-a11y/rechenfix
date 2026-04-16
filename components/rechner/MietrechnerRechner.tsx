@@ -98,7 +98,7 @@ export default function MietrechnerRechner() {
             </div>
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
               <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Rest nach Miete</p>
-              <p className={`text-xl font-bold ${ergebnis.restNachMiete >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-500 dark:text-red-400'}`}>
+              <p className={`text-xl font-bold ${ergebnis.restNachMiete >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
                 {fmt(ergebnis.restNachMiete)} €
               </p>
             </div>

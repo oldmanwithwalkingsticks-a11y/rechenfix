@@ -142,7 +142,7 @@ export default function SchwangerschaftGewichtRechner() {
         <p className="text-white/80 text-sm mb-1">Sie haben bisher zugenommen</p>
         <p className="text-5xl font-bold">{fmt(ergebnis.aktuelleZunahme)} kg</p>
         <div className="mt-3">
-          <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${statusColor === 'green' ? 'bg-green-500' : 'bg-yellow-500'} text-white`}>
+          <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${statusColor === 'green' ? 'bg-green-700' : 'bg-yellow-600'} text-white`}>
             {statusText}
           </span>
         </div>

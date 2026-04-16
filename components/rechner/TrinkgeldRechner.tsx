@@ -83,7 +83,7 @@ export default function TrinkgeldRechner() {
                   onClick={() => setTrinkgeldProzent(String(p))}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                     nTrinkgeldProzent === p
-                      ? 'bg-green-500 text-white'
+                      ? 'bg-green-700 text-white'
                       : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                   }`}
                 >

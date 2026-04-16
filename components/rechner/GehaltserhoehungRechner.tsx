@@ -197,10 +197,10 @@ export default function GehaltserhoehungRechner() {
           Von <strong>{fmtEuro(bruttoDiff)} € Brutto-Erhöhung</strong> bleiben <strong className="text-green-600 dark:text-green-400">{fmtEuro(nettoDiff)} € Netto</strong> — der Staat bekommt <strong className="text-red-600 dark:text-red-400">{fmtEuro(abgabenAufErhoehung)} € ({fmtProz(grenzbelastung)} %)</strong>.
         </p>
         <div className="flex h-8 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-600">
-          <div className="bg-green-500 flex items-center justify-center text-white text-xs font-semibold" style={{ width: `${nettoPct}%` }}>
+          <div className="bg-green-700 flex items-center justify-center text-white text-xs font-semibold" style={{ width: `${nettoPct}%` }}>
             {nettoPct >= 15 ? `Netto ${fmtProz(nettoPct)} %` : ''}
           </div>
-          <div className="bg-red-500 flex items-center justify-center text-white text-xs font-semibold" style={{ width: `${abgabenPct}%` }}>
+          <div className="bg-red-700 flex items-center justify-center text-white text-xs font-semibold" style={{ width: `${abgabenPct}%` }}>
             {abgabenPct >= 15 ? `Abgaben ${fmtProz(abgabenPct)} %` : ''}
           </div>
         </div>

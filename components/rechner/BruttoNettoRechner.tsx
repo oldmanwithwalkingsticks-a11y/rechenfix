@@ -307,20 +307,20 @@ export default function BruttoNettoRechner() {
           {/* Prozentbalken */}
           <div className="mb-6">
             <div className="flex rounded-xl overflow-hidden h-8 text-xs font-medium">
-              <div className="bg-green-500 flex items-center justify-center text-white transition-all" style={{ width: `${100 - ergebnis.abzuegeProzent}%` }}>
+              <div className="bg-green-600 flex items-center justify-center text-white transition-all" style={{ width: `${100 - ergebnis.abzuegeProzent}%` }}>
                 {(100 - ergebnis.abzuegeProzent).toFixed(1)}% Netto
               </div>
-              <div className="bg-red-400 flex items-center justify-center text-white transition-all" style={{ width: `${ergebnis.bruttoMonat > 0 ? (ergebnis.steuernGesamt / ergebnis.bruttoMonat * 100) : 0}%` }}>
+              <div className="bg-red-600 flex items-center justify-center text-white transition-all" style={{ width: `${ergebnis.bruttoMonat > 0 ? (ergebnis.steuernGesamt / ergebnis.bruttoMonat * 100) : 0}%` }}>
                 Steuern
               </div>
-              <div className="bg-amber-400 flex items-center justify-center text-white transition-all" style={{ width: `${ergebnis.bruttoMonat > 0 ? (ergebnis.sozialabgabenGesamt / ergebnis.bruttoMonat * 100) : 0}%` }}>
+              <div className="bg-amber-600 flex items-center justify-center text-gray-900 transition-all" style={{ width: `${ergebnis.bruttoMonat > 0 ? (ergebnis.sozialabgabenGesamt / ergebnis.bruttoMonat * 100) : 0}%` }}>
                 Sozial
               </div>
             </div>
             <div className="flex justify-between text-xs text-gray-600 mt-1">
-              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded bg-green-500 inline-block" /> Netto</span>
-              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded bg-red-400 inline-block" /> Steuern</span>
-              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded bg-amber-400 inline-block" /> Sozialabgaben</span>
+              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded bg-green-600 inline-block" /> Netto</span>
+              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded bg-red-600 inline-block" /> Steuern</span>
+              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded bg-amber-600 inline-block" /> Sozialabgaben</span>
             </div>
           </div>
 
@@ -374,7 +374,7 @@ export default function BruttoNettoRechner() {
                     </div>
                     <div className="bg-white dark:bg-gray-800/60 rounded-lg p-3 text-center">
                       <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Abzüge</p>
-                      <p className="text-lg font-bold text-red-500 dark:text-red-400">{fmt(wg.abzuege)} €</p>
+                      <p className="text-lg font-bold text-red-600 dark:text-red-400">{fmt(wg.abzuege)} €</p>
                       <p className="text-xs text-gray-600">{wgAbzuegePct}%</p>
                     </div>
                     <div className="bg-white dark:bg-gray-800/60 rounded-lg p-3 text-center">
@@ -551,7 +551,7 @@ function Zeile({ label, wert, hervorgehoben = false, brutto }: { label: string; 
   return (
     <tr className={hervorgehoben ? 'font-semibold text-gray-800 dark:text-gray-100' : 'text-gray-600 dark:text-gray-400'}>
       <td className="py-1.5">{label}</td>
-      <td className={`py-1.5 text-right ${wert < 0 ? 'text-red-500 dark:text-red-400' : ''}`}>
+      <td className={`py-1.5 text-right ${wert < 0 ? 'text-red-600 dark:text-red-400' : ''}`}>
         {wert < 0 ? `−${fmt(Math.abs(wert))}` : fmt(wert)} &euro;
       </td>
       <td className="py-1.5 text-right text-xs text-gray-600 dark:text-gray-500 w-16">

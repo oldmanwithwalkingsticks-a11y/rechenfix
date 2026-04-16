@@ -63,7 +63,9 @@
       "Bash(awk 'END{print NR}' lib/rechner-config/alltag.ts lib/rechner-config/arbeit.ts)",
       "Bash(grep -E \"slug: '\\(einheiten-umrechner|bmi-rechner|splitting-rechner|schuhgroessen-rechner\\)'\" lib/rechner-config/*.ts)",
       "Bash(node -e \"console.log\\('Abschreibung berechnen: Lineare und degressive AfA für Anlagegüter, Immobilien und GWG kostenlos — inklusive AfA-Plan und Rechenweg.'.length\\); console.log\\('Vorfälligkeitsentschädigung berechnen: VFE bei vorzeitiger Kreditablösung kostenlos schätzen — mit 10-Jahres-Sonderkündigungsrecht.'.length\\)\")",
-      "Bash(node -e \"console.log\\('Energiekosten pro Gerät berechnen: Stromverbrauch und Kosten pro Tag, Monat und Jahr kostenlos ermitteln — für bis zu 10 Geräte.'.length\\)\")"
+      "Bash(node -e \"console.log\\('Energiekosten pro Gerät berechnen: Stromverbrauch und Kosten pro Tag, Monat und Jahr kostenlos ermitteln — für bis zu 10 Geräte.'.length\\)\")",
+      "Bash(grep -v \":0$\")",
+      "Bash(xargs sed:*)"
     ]
   }
 }

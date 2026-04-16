@@ -184,7 +184,7 @@ export default function ErbschaftsteuerRechner() {
               {ergebnis.vorschenkungen > 0 && (
                 <tr>
                   <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">Vorschenkungen (10 Jahre)</td>
-                  <td className="px-4 py-2.5 text-right tabular-nums text-red-500 whitespace-nowrap">+{fmtEuro(ergebnis.vorschenkungen)} € angerechnet</td>
+                  <td className="px-4 py-2.5 text-right tabular-nums text-red-600 whitespace-nowrap">+{fmtEuro(ergebnis.vorschenkungen)} € angerechnet</td>
                 </tr>
               )}
               <tr className="bg-blue-50 dark:bg-blue-500/10 font-medium">

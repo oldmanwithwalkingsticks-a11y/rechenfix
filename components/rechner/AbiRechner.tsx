@@ -162,7 +162,7 @@ export default function AbiRechner() {
         <p className="text-white/80 text-sm mb-1">Abi-Note</p>
         <p className="text-5xl font-bold">{formatNote(ergebnis.note)}</p>
         <div className="mt-3">
-          <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${ergebnis.bestanden ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>
+          <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${ergebnis.bestanden ? 'bg-green-700 text-white' : 'bg-red-700 text-white'}`}>
             {ergebnis.bestanden ? '✓ Bestanden' : '✗ Nicht bestanden'}
           </span>
         </div>

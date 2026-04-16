@@ -277,7 +277,7 @@ export default function BuergergeldRechner() {
                   </div>
                   <div className="flex justify-between px-4 py-2.5 text-sm">
                     <span className="text-gray-600 dark:text-gray-400">Anrechenbares Einkommen</span>
-                    <span className="font-medium text-red-500 dark:text-red-400">−{fmt(ergebnis.anrechenbareEinkommen)} €</span>
+                    <span className="font-medium text-red-600 dark:text-red-400">−{fmt(ergebnis.anrechenbareEinkommen)} €</span>
                   </div>
                 </>
               )}

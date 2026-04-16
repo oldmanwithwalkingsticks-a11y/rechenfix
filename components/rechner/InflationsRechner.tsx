@@ -129,13 +129,13 @@ export default function InflationsRechner() {
               <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">
                 {modus === 'kaufkraft' ? 'Kaufkraftverlust' : 'Preisanstieg'}
               </p>
-              <p className="text-lg font-bold text-red-500 dark:text-red-400">{fmt(ergebnis.differenz)} €</p>
+              <p className="text-lg font-bold text-red-600 dark:text-red-400">{fmt(ergebnis.differenz)} €</p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
               <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">
                 {modus === 'kaufkraft' ? 'Verlust' : 'Anstieg'} in %
               </p>
-              <p className="text-lg font-bold text-red-500 dark:text-red-400">{ergebnis.differenzProzent.toLocaleString('de-DE')} %</p>
+              <p className="text-lg font-bold text-red-600 dark:text-red-400">{ergebnis.differenzProzent.toLocaleString('de-DE')} %</p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
               <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Durchschn. pro Jahr</p>
@@ -259,8 +259,8 @@ export default function InflationsRechner() {
                       <tr key={j.jahr} className="hover:bg-gray-50 dark:hover:bg-gray-700/30">
                         <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">{j.jahr}</td>
                         <td className="px-4 py-2.5 text-right font-medium text-gray-800 dark:text-gray-200">{fmt(j.wert)} €</td>
-                        <td className="px-4 py-2.5 text-right text-red-500 dark:text-red-400">{fmt(j.verlustKumuliert)} €</td>
-                        <td className="px-4 py-2.5 text-right text-red-500 dark:text-red-400">{j.verlustProzent.toLocaleString('de-DE')} %</td>
+                        <td className="px-4 py-2.5 text-right text-red-600 dark:text-red-400">{fmt(j.verlustKumuliert)} €</td>
+                        <td className="px-4 py-2.5 text-right text-red-600 dark:text-red-400">{j.verlustProzent.toLocaleString('de-DE')} %</td>
                       </tr>
                     ))}
                   </tbody>

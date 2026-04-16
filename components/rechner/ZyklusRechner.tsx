@@ -151,7 +151,7 @@ export default function ZyklusRechner() {
                         const kind = getDayKind(c);
                         const istHeute = c.getTime() === heute.getTime();
                         const color =
-                          kind === 'period' ? 'bg-red-400 text-white' :
+                          kind === 'period' ? 'bg-red-600 text-white' :
                           kind === 'ovulation' ? 'bg-green-600 text-white font-bold' :
                           kind === 'fertile' ? 'bg-green-200 dark:bg-green-800 text-gray-800 dark:text-gray-100' :
                           'bg-gray-50 dark:bg-gray-900 text-gray-500';
