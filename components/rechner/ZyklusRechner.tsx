@@ -91,8 +91,8 @@ export default function ZyklusRechner() {
           <input type="date" value={startDatum} onChange={e => setStartDatum(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200" />
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Zykluslänge</label>
-          <select value={laenge} onChange={e => setLaenge(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+          <label htmlFor="zyklus-select-1" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Zykluslänge</label>
+          <select id="zyklus-select-1" value={laenge} onChange={e => setLaenge(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
             {Array.from({ length: 15 }, (_, i) => 21 + i).map(n => <option key={n} value={n}>{n} Tage</option>)}
           </select>
           <p className="text-xs text-gray-500 mt-1">Vom ersten Tag der Periode bis zum Tag vor der nächsten Periode.</p>

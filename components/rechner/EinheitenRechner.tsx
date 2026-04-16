@@ -91,8 +91,8 @@ export default function EinheitenRechner() {
           <NummerEingabe value={wert} onChange={setWert} placeholder="1" />
         </div>
         <div className="flex-1">
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Von</label>
-          <select
+          <label htmlFor="einheiten-select-1" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Von</label>
+          <select id="einheiten-select-1"
             value={von}
             onChange={e => setVon(e.target.value)}
             className="input-field w-full"
@@ -114,8 +114,8 @@ export default function EinheitenRechner() {
 
         {/* Zu */}
         <div className="flex-1">
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Zu</label>
-          <select
+          <label htmlFor="einheiten-select-2" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Zu</label>
+          <select id="einheiten-select-2"
             value={zu}
             onChange={e => setZu(e.target.value)}
             className="input-field w-full"

@@ -99,7 +99,7 @@ export default function GrundsteuerRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
           Grundstücksart
         </h2>
-        <select
+        <select id="grundsteuer-select-1" aria-label="Grundstücksart"
           value={art}
           onChange={e => setArt(e.target.value as Grundstuecksart)}
           className="w-full min-h-[48px] px-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 text-sm text-gray-800 dark:text-gray-200"

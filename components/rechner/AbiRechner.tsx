@@ -130,8 +130,8 @@ export default function AbiRechner() {
                 <NummerEingabe value={kursDurchschnitt} onChange={setKursDurchschnitt} einheit="/15" />
               </div>
               <div>
-                <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Eingebrachte Kurse</label>
-                <select value={anzahlKurse} onChange={e => setAnzahlKurse(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+                <label htmlFor="abi-select-1" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Eingebrachte Kurse</label>
+                <select id="abi-select-1" value={anzahlKurse} onChange={e => setAnzahlKurse(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
                   {[36, 37, 38, 39, 40].map(n => <option key={n} value={n}>{n}</option>)}
                 </select>
               </div>

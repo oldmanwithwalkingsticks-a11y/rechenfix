@@ -141,8 +141,8 @@ export default function NotenschluesselRechner() {
 
           <div className="grid grid-cols-2 gap-3 mb-4">
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Notensystem</label>
-              <select value={system} onChange={e => setSystem(e.target.value as Notensystem)} className="input-field w-full">
+              <label htmlFor="notenschluessel-select-1" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Notensystem</label>
+              <select id="notenschluessel-select-1" value={system} onChange={e => setSystem(e.target.value as Notensystem)} className="input-field w-full">
                 {systemOptionen.map(o => <option key={o.key} value={o.key}>{o.label}</option>)}
               </select>
             </div>
@@ -247,8 +247,8 @@ export default function NotenschluesselRechner() {
               <NummerEingabe value={sMaximum} onChange={setSMaximum} placeholder="100" />
             </div>
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Notensystem</label>
-              <select value={sSystem} onChange={e => setSSystem(e.target.value as Notensystem)} className="input-field w-full">
+              <label htmlFor="notenschluessel-select-2" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Notensystem</label>
+              <select id="notenschluessel-select-2" value={sSystem} onChange={e => setSSystem(e.target.value as Notensystem)} className="input-field w-full">
                 {systemOptionen.map(o => <option key={o.key} value={o.key}>{o.label}</option>)}
               </select>
             </div>

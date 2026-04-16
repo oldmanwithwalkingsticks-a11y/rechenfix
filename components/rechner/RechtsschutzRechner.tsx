@@ -157,10 +157,10 @@ export default function RechtsschutzRechner() {
         {/* Zahlweise + Beruf */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="rechtsschutz-select-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Zahlweise
             </label>
-            <select
+            <select id="rechtsschutz-select-1"
               value={zahlweise}
               onChange={e => setZahlweise(e.target.value as Zahlweise)}
               className="input-field"
@@ -171,10 +171,10 @@ export default function RechtsschutzRechner() {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="rechtsschutz-select-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Beruf
             </label>
-            <select
+            <select id="rechtsschutz-select-2"
               value={beruf}
               onChange={e => setBeruf(e.target.value as Beruf)}
               className="input-field"

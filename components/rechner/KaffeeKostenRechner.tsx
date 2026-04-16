@@ -48,8 +48,8 @@ export default function KaffeeKostenRechner() {
 
         {/* Seit wie vielen Jahren */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Seit wie vielen Jahren?</label>
-          <select
+          <label htmlFor="kaffeekosten-select-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Seit wie vielen Jahren?</label>
+          <select id="kaffeekosten-select-1"
             value={jahre}
             onChange={e => setJahre(Number(e.target.value))}
             className="input-field"

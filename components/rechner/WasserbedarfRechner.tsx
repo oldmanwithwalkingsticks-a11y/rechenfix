@@ -54,8 +54,8 @@ export default function WasserbedarfRechner() {
           <NummerEingabe value={gewicht} onChange={setGewicht} placeholder="z.B. 75" einheit="kg" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Aktivitätslevel</label>
-          <select
+          <label htmlFor="wasserbedarf-select-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Aktivitätslevel</label>
+          <select id="wasserbedarf-select-1"
             value={aktivitaet}
             onChange={e => setAktivitaet(e.target.value as AktivitaetsLevel)}
             className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"
@@ -105,9 +105,9 @@ export default function WasserbedarfRechner() {
 
       {/* Schwanger/Stillend */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Schwanger oder stillend?</label>
+        <label htmlFor="wasserbedarf-select-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Schwanger oder stillend?</label>
         <div className="w-full sm:w-1/2">
-          <select
+          <select id="wasserbedarf-select-2"
             value={schwangerStillend}
             onChange={e => setSchwangerStillend(e.target.value as SchwangerStillend)}
             className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"

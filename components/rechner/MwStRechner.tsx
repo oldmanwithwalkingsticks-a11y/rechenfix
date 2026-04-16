@@ -273,8 +273,8 @@ export default function MwStRechner() {
                   />
                 </div>
                 <div className="w-full sm:w-24">
-                  {idx === 0 && <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">MwSt %</label>}
-                  <select
+                  {idx === 0 && <label htmlFor="mwst-select-1" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">MwSt %</label>}
+                  <select id="mwst-select-1"
                     value={z.mwstSatz}
                     onChange={e => updateZeile(z.id, 'mwstSatz', Number(e.target.value))}
                     className="input-field !py-2 !text-sm"

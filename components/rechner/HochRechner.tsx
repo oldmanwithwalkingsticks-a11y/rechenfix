@@ -92,8 +92,8 @@ export default function HochRechner() {
             <NummerEingabe value={stdWoche} onChange={setStdWoche} einheit="h" />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Tage / Woche</label>
-            <select value={tageWoche} onChange={e => setTageWoche(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+            <label htmlFor="hoch-select-1" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Tage / Woche</label>
+            <select id="hoch-select-1" value={tageWoche} onChange={e => setTageWoche(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
               <option value="4">4 Tage</option>
               <option value="5">5 Tage</option>
               <option value="6">6 Tage</option>

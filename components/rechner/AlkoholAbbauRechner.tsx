@@ -123,12 +123,12 @@ export default function AlkoholAbbauRechner() {
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Getränke</label>
+          <label htmlFor="alkoholabbau-select-1" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Getränke</label>
           <div className="space-y-2">
             {getraenke.map(g => (
               <div key={g.id} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-2">
                 <div className="flex gap-2 items-start">
-                  <select value={g.art} onChange={e => updateGetraenk(g.id, { art: e.target.value as GetraenkArt })} className="flex-1 min-h-[44px] px-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm">
+                  <select id="alkoholabbau-select-1" value={g.art} onChange={e => updateGetraenk(g.id, { art: e.target.value as GetraenkArt })} className="flex-1 min-h-[44px] px-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm">
                     {(Object.keys(GETRAENKE) as GetraenkArt[]).map(k => <option key={k} value={k}>{GETRAENKE[k].label}</option>)}
                   </select>
                   <input
@@ -158,8 +158,8 @@ export default function AlkoholAbbauRechner() {
             <input type="time" value={trinkBeginn} onChange={e => setTrinkBeginn(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200" />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Trinkdauer</label>
-            <select value={trinkDauer} onChange={e => setTrinkDauer(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+            <label htmlFor="alkoholabbau-select-2" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Trinkdauer</label>
+            <select id="alkoholabbau-select-2" value={trinkDauer} onChange={e => setTrinkDauer(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
               <option value="1">1 Stunde</option>
               <option value="2">2 Stunden</option>
               <option value="3">3 Stunden</option>

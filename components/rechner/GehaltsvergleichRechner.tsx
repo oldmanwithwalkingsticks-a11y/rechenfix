@@ -78,8 +78,8 @@ export default function GehaltsvergleichRechner() {
           <NummerEingabe value={brutto} onChange={setBrutto} placeholder="z. B. 3.500" einheit="€" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Berufsgruppe</label>
-          <select
+          <label htmlFor="gehaltsvergleich-select-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Berufsgruppe</label>
+          <select id="gehaltsvergleich-select-1"
             value={beruf}
             onChange={e => setBeruf(e.target.value)}
             className="input-field w-full"
@@ -90,8 +90,8 @@ export default function GehaltsvergleichRechner() {
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bundesland</label>
-          <select
+          <label htmlFor="gehaltsvergleich-select-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bundesland</label>
+          <select id="gehaltsvergleich-select-2"
             value={bundesland}
             onChange={e => setBundesland(e.target.value)}
             className="input-field w-full"
@@ -102,8 +102,8 @@ export default function GehaltsvergleichRechner() {
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Altersgruppe</label>
-          <select
+          <label htmlFor="gehaltsvergleich-select-3" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Altersgruppe</label>
+          <select id="gehaltsvergleich-select-3"
             value={alter}
             onChange={e => setAlter(e.target.value)}
             className="input-field w-full"

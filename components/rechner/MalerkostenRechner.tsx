@@ -124,8 +124,8 @@ export default function MalerkostenRechner() {
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Anzahl Anstriche</label>
-          <select value={anstriche} onChange={e => setAnstriche(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+          <label htmlFor="malerkosten-select-1" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Anzahl Anstriche</label>
+          <select id="malerkosten-select-1" value={anstriche} onChange={e => setAnstriche(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
             <option value="1">1× (Auffrischung)</option>
             <option value="2">2× (Standard)</option>
             <option value="3">3× (Farbwechsel dunkel → hell)</option>
@@ -133,8 +133,8 @@ export default function MalerkostenRechner() {
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Farbqualität</label>
-          <select value={qualitaet} onChange={e => setQualitaet(e.target.value as Qualitaet)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+          <label htmlFor="malerkosten-select-2" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Farbqualität</label>
+          <select id="malerkosten-select-2" value={qualitaet} onChange={e => setQualitaet(e.target.value as Qualitaet)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
             {(['standard', 'premium', 'spezial'] as Qualitaet[]).map(q => <option key={q} value={q}>{FARBE_LABEL[q]}</option>)}
           </select>
         </div>

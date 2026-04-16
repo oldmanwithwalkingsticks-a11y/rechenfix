@@ -328,8 +328,8 @@ export default function FlaechenRechner() {
 
       {/* Einheit */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Einheit</label>
-        <select
+        <label htmlFor="flaechen-select-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Einheit</label>
+        <select id="flaechen-select-1"
           value={einheit}
           onChange={ev => setEinheit(ev.target.value as Einheit)}
           className="w-full sm:w-1/3 px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm min-h-[48px]"

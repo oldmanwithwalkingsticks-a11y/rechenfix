@@ -110,8 +110,8 @@ export default function KurzarbeitergeldRechner() {
       {/* Steuerklasse + Kind-Toggle */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Steuerklasse</label>
-          <select
+          <label htmlFor="kurzarbeitergeld-select-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Steuerklasse</label>
+          <select id="kurzarbeitergeld-select-1"
             value={steuerklasse}
             onChange={e => setSteuerklasse(e.target.value as Steuerklasse)}
             className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"
@@ -142,8 +142,8 @@ export default function KurzarbeitergeldRechner() {
       {/* Bundesland + Kirchensteuer */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bundesland</label>
-          <select
+          <label htmlFor="kurzarbeitergeld-select-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bundesland</label>
+          <select id="kurzarbeitergeld-select-2"
             value={bundesland}
             onChange={e => setBundesland(e.target.value)}
             className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"

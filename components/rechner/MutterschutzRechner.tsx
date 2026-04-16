@@ -81,8 +81,8 @@ export default function MutterschutzRechner() {
           <CrossLink href="/gesundheit/geburtstermin-rechner" emoji="👶" text="Geburtstermin berechnen" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Art der Geburt</label>
-          <select
+          <label htmlFor="mutterschutz-select-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Art der Geburt</label>
+          <select id="mutterschutz-select-1"
             value={geburtsArt}
             onChange={e => setGeburtsArt(e.target.value as GeburtsArt)}
             className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"
@@ -115,8 +115,8 @@ export default function MutterschutzRechner() {
           <NummerEingabe value={nettoGehalt} onChange={setNettoGehalt} placeholder="z.B. 2500" einheit="€" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Beschäftigungsverhältnis</label>
-          <select
+          <label htmlFor="mutterschutz-select-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Beschäftigungsverhältnis</label>
+          <select id="mutterschutz-select-2"
             value={beschaeftigung}
             onChange={e => setBeschaeftigung(e.target.value as Beschaeftigung)}
             className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"

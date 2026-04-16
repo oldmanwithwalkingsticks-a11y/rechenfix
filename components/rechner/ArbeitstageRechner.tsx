@@ -129,8 +129,8 @@ export default function ArbeitstageRechner() {
 
       <div className="space-y-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-6">
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Bundesland</label>
-          <select value={bl} onChange={e => setBl(e.target.value as BL)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+          <label htmlFor="arbeitstage-select-1" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Bundesland</label>
+          <select id="arbeitstage-select-1" value={bl} onChange={e => setBl(e.target.value as BL)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
             {BUNDESLAENDER.map(b => <option key={b.slug} value={b.slug}>{b.name}</option>)}
           </select>
         </div>
@@ -138,14 +138,14 @@ export default function ArbeitstageRechner() {
         {modus === 'monat' && (
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Monat</label>
-              <select value={monat} onChange={e => setMonat(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+              <label htmlFor="arbeitstage-select-2" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Monat</label>
+              <select id="arbeitstage-select-2" value={monat} onChange={e => setMonat(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
                 {MONATE.map((m, i) => <option key={i} value={i + 1}>{m}</option>)}
               </select>
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Jahr</label>
-              <select value={jahr} onChange={e => setJahr(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+              <label htmlFor="arbeitstage-select-3" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Jahr</label>
+              <select id="arbeitstage-select-3" value={jahr} onChange={e => setJahr(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
                 <option value="2026">2026</option>
               </select>
             </div>
@@ -154,8 +154,8 @@ export default function ArbeitstageRechner() {
 
         {modus === 'jahr' && (
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Jahr</label>
-            <select value={jahr} onChange={e => setJahr(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+            <label htmlFor="arbeitstage-select-4" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Jahr</label>
+            <select id="arbeitstage-select-4" value={jahr} onChange={e => setJahr(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
               <option value="2026">2026</option>
             </select>
           </div>

@@ -161,7 +161,7 @@ export default function ArbeitslosengeldRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">5</span>
           Beschäftigungsdauer (letzte 5 Jahre)
         </h2>
-        <select
+        <select id="arbeitslosengeld-select-1" aria-label="Beschäftigungsdauer"
           value={beschDauer}
           onChange={e => setBeschDauer(e.target.value)}
           className="w-full min-h-[48px] px-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 text-sm text-gray-800 dark:text-gray-200"

@@ -115,8 +115,8 @@ export default function WitwenrenteRechner() {
 
       {/* Kinder */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kinder unter 18 Jahren</label>
-        <select
+        <label htmlFor="witwenrente-select-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kinder unter 18 Jahren</label>
+        <select id="witwenrente-select-1"
           value={kinder}
           onChange={e => setKinder(e.target.value)}
           className="w-full sm:w-1/2 px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"

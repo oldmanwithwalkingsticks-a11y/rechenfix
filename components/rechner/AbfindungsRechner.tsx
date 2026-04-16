@@ -109,8 +109,8 @@ export default function AbfindungsRechner() {
       {/* Steuerklasse und Kirchensteuer */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Steuerklasse</label>
-          <select
+          <label htmlFor="abfindungs-select-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Steuerklasse</label>
+          <select id="abfindungs-select-1"
             value={steuerklasse}
             onChange={e => setSteuerklasse(parseInt(e.target.value) as 1 | 2 | 3 | 4 | 5 | 6)}
             className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"
@@ -121,8 +121,8 @@ export default function AbfindungsRechner() {
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kirchensteuer</label>
-          <select
+          <label htmlFor="abfindungs-select-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kirchensteuer</label>
+          <select id="abfindungs-select-2"
             value={kirchensteuer}
             onChange={e => setKirchensteuer(e.target.value as KirchensteuerOption)}
             className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"

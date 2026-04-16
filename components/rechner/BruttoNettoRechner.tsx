@@ -137,8 +137,8 @@ export default function BruttoNettoRechner() {
           <NummerEingabe value={brutto} onChange={setBrutto} placeholder={abrechnungszeitraum === 'monat' ? 'z.B. 3500' : 'z.B. 42000'} einheit="€" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Steuerklasse</label>
-          <select value={steuerklasse} onChange={e => setSteuerklasse(Number(e.target.value) as 1|2|3|4|5|6)} className="input-field">
+          <label htmlFor="bruttonetto-select-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Steuerklasse</label>
+          <select id="bruttonetto-select-1" value={steuerklasse} onChange={e => setSteuerklasse(Number(e.target.value) as 1|2|3|4|5|6)} className="input-field">
             <option value={1}>Steuerklasse 1 — Ledig</option>
             <option value={2}>Steuerklasse 2 — Alleinerziehend</option>
             <option value={3}>Steuerklasse 3 — Verheiratet (mehr)</option>
@@ -148,16 +148,16 @@ export default function BruttoNettoRechner() {
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bundesland</label>
-          <select value={bundesland} onChange={e => setBundesland(e.target.value)} className="input-field">
+          <label htmlFor="bruttonetto-select-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bundesland</label>
+          <select id="bruttonetto-select-2" value={bundesland} onChange={e => setBundesland(e.target.value)} className="input-field">
             {BUNDESLAENDER.map(bl => (
               <option key={bl.kuerzel} value={bl.kuerzel}>{bl.name}</option>
             ))}
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kinder (Freibeträge)</label>
-          <select value={kinder} onChange={e => setKinder(Number(e.target.value))} className="input-field">
+          <label htmlFor="bruttonetto-select-3" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kinder (Freibeträge)</label>
+          <select id="bruttonetto-select-3" value={kinder} onChange={e => setKinder(Number(e.target.value))} className="input-field">
             <option value={0}>Keine Kinder</option>
             <option value={0.5}>0,5</option>
             <option value={1}>1</option>
@@ -232,8 +232,8 @@ export default function BruttoNettoRechner() {
             {weihnachtsgeldAktiv && (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Höhe</label>
-                  <select
+                  <label htmlFor="bruttonetto-select-4" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Höhe</label>
+                  <select id="bruttonetto-select-4"
                     value={weihnachtsgeldHoehe}
                     onChange={e => setWeihnachtsgeldHoehe(e.target.value as '100' | '50' | 'eigen')}
                     className="input-field"

@@ -101,8 +101,8 @@ export default function TeilzeitRechner() {
       {/* Steuer und Bundesland */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Steuerklasse</label>
-          <select
+          <label htmlFor="teilzeit-select-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Steuerklasse</label>
+          <select id="teilzeit-select-1"
             value={steuerklasse}
             onChange={e => setSteuerklasse(parseInt(e.target.value) as 1 | 2 | 3 | 4 | 5 | 6)}
             className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"
@@ -113,8 +113,8 @@ export default function TeilzeitRechner() {
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bundesland</label>
-          <select
+          <label htmlFor="teilzeit-select-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bundesland</label>
+          <select id="teilzeit-select-2"
             value={bundesland}
             onChange={e => setBundesland(e.target.value)}
             className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"
@@ -153,8 +153,8 @@ export default function TeilzeitRechner() {
           <NummerEingabe value={urlaubstage} onChange={setUrlaubstage} placeholder="z.B. 30" einheit="Tage" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Arbeitstage/Woche (Teilzeit)</label>
-          <select
+          <label htmlFor="teilzeit-select-3" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Arbeitstage/Woche (Teilzeit)</label>
+          <select id="teilzeit-select-3"
             value={arbeitstage}
             onChange={e => setArbeitstage(parseInt(e.target.value))}
             className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"

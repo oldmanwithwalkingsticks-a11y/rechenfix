@@ -179,14 +179,14 @@ export default function UhrzeitRechner() {
             <input type="time" value={zoneZeit} onChange={e => setZoneZeit(e.target.value)} className={inputClass} />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Von Zeitzone</label>
-            <select value={vonZone} onChange={e => setVonZone(e.target.value)} className={inputClass}>
+            <label htmlFor="uhrzeit-select-1" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Von Zeitzone</label>
+            <select id="uhrzeit-select-1" value={vonZone} onChange={e => setVonZone(e.target.value)} className={inputClass}>
               {ZONEN.map(z => <option key={z.id} value={z.id}>{z.label} (UTC{z.offset >= 0 ? '+' : ''}{z.offset})</option>)}
             </select>
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Nach Zeitzone</label>
-            <select value={nachZone} onChange={e => setNachZone(e.target.value)} className={inputClass}>
+            <label htmlFor="uhrzeit-select-2" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Nach Zeitzone</label>
+            <select id="uhrzeit-select-2" value={nachZone} onChange={e => setNachZone(e.target.value)} className={inputClass}>
               {ZONEN.map(z => <option key={z.id} value={z.id}>{z.label} (UTC{z.offset >= 0 ? '+' : ''}{z.offset})</option>)}
             </select>
           </div>

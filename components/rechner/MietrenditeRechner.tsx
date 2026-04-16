@@ -120,8 +120,8 @@ export default function MietrenditeRechner() {
 
       {/* Mietausfall-Risiko */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Mietausfall-Risiko</label>
-        <select
+        <label htmlFor="mietrendite-select-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Mietausfall-Risiko</label>
+        <select id="mietrendite-select-1"
           value={mietausfallRisiko}
           onChange={ev => setMietausfallRisiko(Number(ev.target.value) as MietausfallRisiko)}
           className="w-full sm:w-2/3 px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm min-h-[48px]"

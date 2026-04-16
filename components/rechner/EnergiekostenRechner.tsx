@@ -111,8 +111,8 @@ export default function EnergiekostenRechner() {
           </div>
 
           <div className="mb-3">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gerätetyp</label>
-            <select
+            <label htmlFor={`energiekosten-geraet-${g.id}-typ`} className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gerätetyp</label>
+            <select id={`energiekosten-geraet-${g.id}-typ`}
               value={g.preset}
               onChange={e => setPreset(g.id, e.target.value)}
               className="w-full min-h-[48px] px-4 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
@@ -138,8 +138,8 @@ export default function EnergiekostenRechner() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nutzungstage pro Woche</label>
-            <select
+            <label htmlFor={`energiekosten-geraet-${g.id}-tage`} className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nutzungstage pro Woche</label>
+            <select id={`energiekosten-geraet-${g.id}-tage`}
               value={g.tage}
               onChange={e => updateGeraet(g.id, { tage: e.target.value })}
               className="w-full min-h-[48px] px-4 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"

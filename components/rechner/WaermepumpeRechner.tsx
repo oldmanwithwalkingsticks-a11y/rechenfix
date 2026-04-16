@@ -76,7 +76,7 @@ export default function WaermepumpeRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
           Baujahr / Dämmstandard
         </h2>
-        <select
+        <select id="waermepumpe-select-1" aria-label="Baujahr / Dämmstandard"
           value={daemmstandard}
           onChange={e => setDaemmstandard(e.target.value as Daemmstandard)}
           className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"
@@ -93,7 +93,7 @@ export default function WaermepumpeRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
           Aktuelle Heizung
         </h2>
-        <select
+        <select id="waermepumpe-select-2" aria-label="Aktuelle Heizung"
           value={alteHeizung}
           onChange={e => setAlteHeizung(e.target.value as AlteHeizung)}
           className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"

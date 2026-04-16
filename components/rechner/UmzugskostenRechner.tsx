@@ -141,8 +141,8 @@ export default function UmzugskostenRechner() {
       {/* Etagen */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Etage (alte Wohnung)</label>
-          <select
+          <label htmlFor="umzugskosten-select-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Etage (alte Wohnung)</label>
+          <select id="umzugskosten-select-1"
             value={etageAlt}
             onChange={e => setEtageAlt(e.target.value as Etage)}
             className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"
@@ -153,8 +153,8 @@ export default function UmzugskostenRechner() {
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Etage (neue Wohnung)</label>
-          <select
+          <label htmlFor="umzugskosten-select-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Etage (neue Wohnung)</label>
+          <select id="umzugskosten-select-2"
             value={etageNeu}
             onChange={e => setEtageNeu(e.target.value as Etage)}
             className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"

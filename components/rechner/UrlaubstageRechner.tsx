@@ -94,8 +94,8 @@ export default function UrlaubstageRechner() {
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Arbeitstage pro Woche</label>
-              <select
+              <label htmlFor="urlaubstage-select-1" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Arbeitstage pro Woche</label>
+              <select id="urlaubstage-select-1"
                 value={arbeitstageProWoche}
                 onChange={e => setArbeitstageProWoche(parseInt(e.target.value, 10) as 5 | 6)}
                 className="input-field w-full"
@@ -274,8 +274,8 @@ export default function UrlaubstageRechner() {
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Arbeitstage pro Woche</label>
-              <select
+              <label htmlFor="urlaubstage-select-2" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Arbeitstage pro Woche</label>
+              <select id="urlaubstage-select-2"
                 value={restArbeitstage}
                 onChange={e => setRestArbeitstage(parseInt(e.target.value, 10) as 5 | 6)}
                 className="input-field w-full"

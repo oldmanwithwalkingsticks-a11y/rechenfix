@@ -122,14 +122,14 @@ export default function PhotovoltaikRechner() {
           <NummerEingabe value={dachflaeche} onChange={setDachflaeche} einheit="m²" />
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Dachausrichtung</label>
-          <select value={ausrichtung} onChange={e => setAusrichtung(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+          <label htmlFor="photovoltaik-select-1" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Dachausrichtung</label>
+          <select id="photovoltaik-select-1" value={ausrichtung} onChange={e => setAusrichtung(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
             {AUSRICHTUNGEN.map(a => <option key={a.id} value={a.id}>{a.label}</option>)}
           </select>
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Dachneigung</label>
-          <select value={neigung} onChange={e => setNeigung(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+          <label htmlFor="photovoltaik-select-2" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Dachneigung</label>
+          <select id="photovoltaik-select-2" value={neigung} onChange={e => setNeigung(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
             {NEIGUNGEN.map(n => <option key={n.id} value={n.id}>{n.label}</option>)}
           </select>
         </div>

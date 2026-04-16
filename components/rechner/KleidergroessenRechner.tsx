@@ -135,10 +135,10 @@ export default function KleidergroessenRechner() {
 
       {/* Größe */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label htmlFor="kleidergroessen-select-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Größe ({system.toUpperCase()})
         </label>
-        <select
+        <select id="kleidergroessen-select-1"
           value={index}
           onChange={e => setIndex(parseInt(e.target.value, 10))}
           className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"

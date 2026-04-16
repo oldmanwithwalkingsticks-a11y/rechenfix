@@ -67,8 +67,8 @@ export default function ProteinRechner() {
 
       {/* Aktivität */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Aktivitätslevel</label>
-        <select
+        <label htmlFor="protein-select-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Aktivitätslevel</label>
+        <select id="protein-select-1"
           value={aktivitaet}
           onChange={e => setAktivitaet(e.target.value as Aktivitaet)}
           className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"
@@ -102,8 +102,8 @@ export default function ProteinRechner() {
 
       {/* Mahlzeiten */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Anzahl Mahlzeiten pro Tag</label>
-        <select
+        <label htmlFor="protein-select-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Anzahl Mahlzeiten pro Tag</label>
+        <select id="protein-select-2"
           value={mahlzeiten}
           onChange={e => setMahlzeiten(e.target.value)}
           className="w-full sm:w-1/2 px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"

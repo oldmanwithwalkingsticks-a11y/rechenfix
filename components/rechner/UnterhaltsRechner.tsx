@@ -247,7 +247,7 @@ export default function UnterhaltsRechner() {
               <div key={i} className="bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-4 space-y-3">
                 <div className="flex items-center gap-3">
                   <span className="text-sm font-semibold text-gray-700 dark:text-gray-200 w-16">Kind {i + 1}</span>
-                  <select
+                  <select id={`unterhalts-kind-${i + 1}-alter`} aria-label={`Altersgruppe Kind ${i + 1}`}
                     value={k.alter}
                     onChange={e => handleAlterChange(i, e.target.value as Altersstufe)}
                     className="flex-1 min-h-[48px] px-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 text-sm text-gray-800 dark:text-gray-200"

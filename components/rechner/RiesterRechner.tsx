@@ -141,8 +141,8 @@ export default function RiesterRechner() {
 
       {/* Kinder */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Anzahl Kinder</label>
-        <select
+        <label htmlFor="riester-select-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Anzahl Kinder</label>
+        <select id="riester-select-1"
           value={kinderAnzahl}
           onChange={e => setKinderAnzahl(e.target.value)}
           className="w-full sm:w-1/2 px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"
@@ -189,8 +189,8 @@ export default function RiesterRechner() {
           </p>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Grenzsteuersatz</label>
-          <select
+          <label htmlFor="riester-select-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Grenzsteuersatz</label>
+          <select id="riester-select-2"
             value={grenzsteuersatz}
             onChange={e => setGrenzsteuersatz(e.target.value)}
             className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"

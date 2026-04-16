@@ -60,10 +60,10 @@ export default function SteuererstattungRechner() {
             <NummerEingabe value={brutto} onChange={setBrutto} einheit="€" placeholder="z.B. 40.000" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="steuererstattung-select-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Steuerklasse
             </label>
-            <select
+            <select id="steuererstattung-select-1"
               value={steuerklasse}
               onChange={e => setSteuerklasse(Number(e.target.value))}
               className="input-field"

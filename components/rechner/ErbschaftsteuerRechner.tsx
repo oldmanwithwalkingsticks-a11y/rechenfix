@@ -85,7 +85,7 @@ export default function ErbschaftsteuerRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
           Verwandtschaftsgrad
         </h2>
-        <select
+        <select id="erbschaftsteuer-select-1" aria-label="Verwandtschaftsgrad"
           value={verwandtschaft}
           onChange={e => setVerwandtschaft(e.target.value as Verwandtschaft)}
           className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"

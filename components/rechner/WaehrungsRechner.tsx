@@ -86,15 +86,15 @@ export default function WaehrungsRechner() {
         </div>
         <div className="grid grid-cols-[1fr_auto_1fr] gap-2 items-end">
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Von</label>
-            <select value={von} onChange={e => setVon(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+            <label htmlFor="waehrungs-select-1" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Von</label>
+            <select id="waehrungs-select-1" value={von} onChange={e => setVon(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
               {WAEHRUNGEN.map(w => <option key={w.code} value={w.code}>{w.code} — {w.name}</option>)}
             </select>
           </div>
           <button onClick={tauschen} aria-label="Tauschen" className="min-h-[48px] min-w-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-bold text-lg">↔</button>
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Nach</label>
-            <select value={nach} onChange={e => setNach(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+            <label htmlFor="waehrungs-select-2" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Nach</label>
+            <select id="waehrungs-select-2" value={nach} onChange={e => setNach(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
               {WAEHRUNGEN.map(w => <option key={w.code} value={w.code}>{w.code} — {w.name}</option>)}
             </select>
           </div>

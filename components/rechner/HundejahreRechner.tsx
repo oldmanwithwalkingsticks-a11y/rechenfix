@@ -95,8 +95,8 @@ export default function HundejahreRechner() {
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Rasse (optional)</label>
-          <select value={rasse} onChange={e => onRasseChange(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+          <label htmlFor="hundejahre-select-1" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Rasse (optional)</label>
+          <select id="hundejahre-select-1" value={rasse} onChange={e => onRasseChange(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
             <option value="">— bitte wählen —</option>
             {RASSEN.map(r => <option key={r.name} value={r.name}>{r.name}</option>)}
           </select>

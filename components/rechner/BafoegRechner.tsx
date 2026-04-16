@@ -122,8 +122,8 @@ export default function BafoegRechner() {
 
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Familienstand der Eltern</label>
-            <select
+            <label htmlFor="bafoeg-select-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Familienstand der Eltern</label>
+            <select id="bafoeg-select-1"
               value={familienstand}
               onChange={e => setFamilienstand(e.target.value as Familienstand)}
               className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"
@@ -158,8 +158,8 @@ export default function BafoegRechner() {
 
           {!elternunabhaengig && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Geschwister in Ausbildung</label>
-              <select
+              <label htmlFor="bafoeg-select-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Geschwister in Ausbildung</label>
+              <select id="bafoeg-select-2"
                 value={geschwister}
                 onChange={e => setGeschwister(e.target.value)}
                 className="w-full sm:w-1/2 px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"
@@ -206,8 +206,8 @@ export default function BafoegRechner() {
             </div>
             {hatKinder && (
               <div className="mt-3 w-full sm:w-1/2">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Anzahl Kinder</label>
-                <select
+                <label htmlFor="bafoeg-select-3" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Anzahl Kinder</label>
+                <select id="bafoeg-select-3"
                   value={anzahlKinder}
                   onChange={e => setAnzahlKinder(e.target.value)}
                   className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"

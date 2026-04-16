@@ -61,10 +61,10 @@ export default function BussgeldRechner() {
       <div className="space-y-4 mb-6">
         {/* Verstoß-Art */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label htmlFor="bussgeld-select-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Art des Verstoßes
           </label>
-          <select
+          <select id="bussgeld-select-1"
             value={verstoss}
             onChange={e => setVerstoss(e.target.value as VerstossArt)}
             className="input-field"
@@ -128,8 +128,8 @@ export default function BussgeldRechner() {
         {/* Rotlicht-Felder */}
         {verstoss === 'rotlicht' && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Phase</label>
-            <select value={rotlichtPhase} onChange={e => setRotlichtPhase(e.target.value as RotlichtPhase)} className="input-field">
+            <label htmlFor="bussgeld-select-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Phase</label>
+            <select id="bussgeld-select-2" value={rotlichtPhase} onChange={e => setRotlichtPhase(e.target.value as RotlichtPhase)} className="input-field">
               <option value="unter1">Unter 1 Sekunde rot</option>
               <option value="ueber1">Über 1 Sekunde rot</option>
               <option value="gefaehrdung">Mit Gefährdung</option>
@@ -146,8 +146,8 @@ export default function BussgeldRechner() {
               <NummerEingabe value={abstandGeschwindigkeit} onChange={setAbstandGeschwindigkeit} einheit="km/h" placeholder="100" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Abstand</label>
-              <select value={abstandStufe} onChange={e => setAbstandStufe(e.target.value as AbstandStufe)} className="input-field">
+              <label htmlFor="bussgeld-select-3" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Abstand</label>
+              <select id="bussgeld-select-3" value={abstandStufe} onChange={e => setAbstandStufe(e.target.value as AbstandStufe)} className="input-field">
                 <option value="5_10">Weniger als 5/10 des halben Tachos</option>
                 <option value="4_10">Weniger als 4/10 des halben Tachos</option>
                 <option value="3_10">Weniger als 3/10 des halben Tachos</option>
@@ -161,8 +161,8 @@ export default function BussgeldRechner() {
         {/* Handy-Felder */}
         {verstoss === 'handy' && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Situation</label>
-            <select value={handyStufe} onChange={e => setHandyStufe(e.target.value as HandyStufe)} className="input-field">
+            <label htmlFor="bussgeld-select-4" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Situation</label>
+            <select id="bussgeld-select-4" value={handyStufe} onChange={e => setHandyStufe(e.target.value as HandyStufe)} className="input-field">
               <option value="normal">Handy am Steuer</option>
               <option value="gefaehrdung">Mit Gefährdung</option>
               <option value="sachbeschaedigung">Mit Sachbeschädigung</option>
@@ -174,8 +174,8 @@ export default function BussgeldRechner() {
         {/* Park-Felder */}
         {verstoss === 'parken' && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Parkverstoß</label>
-            <select value={parkStufe} onChange={e => setParkStufe(e.target.value as ParkStufe)} className="input-field">
+            <label htmlFor="bussgeld-select-5" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Parkverstoß</label>
+            <select id="bussgeld-select-5" value={parkStufe} onChange={e => setParkStufe(e.target.value as ParkStufe)} className="input-field">
               <option value="unerlaubt">Parken an unerlaubter Stelle</option>
               <option value="feuerwehr">Parken in Feuerwehrzufahrt</option>
               <option value="gehweg">Parken auf Gehweg</option>
@@ -188,8 +188,8 @@ export default function BussgeldRechner() {
         {/* Alkohol-Felder */}
         {verstoss === 'alkohol' && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Promille-Bereich</label>
-            <select value={alkoholStufe} onChange={e => setAlkoholStufe(e.target.value as AlkoholStufe)} className="input-field">
+            <label htmlFor="bussgeld-select-6" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Promille-Bereich</label>
+            <select id="bussgeld-select-6" value={alkoholStufe} onChange={e => setAlkoholStufe(e.target.value as AlkoholStufe)} className="input-field">
               <option value="05_109">0,5 – 1,09 ‰ (Ordnungswidrigkeit)</option>
               <option value="ab_11">Ab 1,1 ‰ (Straftat)</option>
               <option value="unter_05_auffaellig">Unter 0,5 ‰ mit Auffälligkeiten</option>

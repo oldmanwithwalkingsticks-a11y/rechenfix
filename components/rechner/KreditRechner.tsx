@@ -82,8 +82,8 @@ export default function KreditRechner() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Laufzeit</label>
-          <select
+          <label htmlFor="kredit-select-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Laufzeit</label>
+          <select id="kredit-select-1"
             value={laufzeitMonate}
             onChange={e => setLaufzeitMonate(Number(e.target.value))}
             className="w-full h-12 px-4 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary-400"

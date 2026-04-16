@@ -95,8 +95,8 @@ export default function GeburtsterminRechner() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zykluslänge</label>
-            <select
+            <label htmlFor="geburtstermin-select-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zykluslänge</label>
+            <select id="geburtstermin-select-1"
               value={zyklusLaenge}
               onChange={e => setZyklusLaenge(parseInt(e.target.value))}
               className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"
@@ -133,8 +133,8 @@ export default function GeburtsterminRechner() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">SSW am Ultraschalltag (Wochen)</label>
-            <select
+            <label htmlFor="geburtstermin-select-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">SSW am Ultraschalltag (Wochen)</label>
+            <select id="geburtstermin-select-2"
               value={usWochen}
               onChange={e => setUsWochen(parseInt(e.target.value))}
               className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"
@@ -145,8 +145,8 @@ export default function GeburtsterminRechner() {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tage</label>
-            <select
+            <label htmlFor="geburtstermin-select-3" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tage</label>
+            <select id="geburtstermin-select-3"
               value={usTage}
               onChange={e => setUsTage(parseInt(e.target.value))}
               className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"

@@ -95,7 +95,7 @@ export default function BuergergeldRechner() {
             {kinder.map((kind, i) => (
               <div key={i} className="flex items-center gap-2 bg-gray-50 dark:bg-gray-800/50 rounded-xl p-3">
                 <span className="text-sm text-gray-600 dark:text-gray-400 shrink-0 w-16">Kind {i + 1}</span>
-                <select
+                <select id={`buergergeld-kind-${i + 1}-alter`} aria-label={`Alter Kind ${i + 1}`}
                   value={kind.alter}
                   onChange={e => kindAlterAendern(i, e.target.value as Kindergruppe)}
                   className="flex-1 text-sm bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 text-gray-800 dark:text-gray-200"

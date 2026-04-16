@@ -120,10 +120,10 @@ export default function FreelancerStundensatzRechner() {
 
         {/* Umsatzsteuer */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label htmlFor="freelancerstundensatz-select-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Umsatzsteuer
           </label>
-          <select
+          <select id="freelancerstundensatz-select-1"
             value={kleinunternehmer ? 'klein' : 'ust'}
             onChange={e => setKleinunternehmer(e.target.value === 'klein')}
             className="input-field"

@@ -188,8 +188,8 @@ export default function VolumenRechner() {
           </>
         )}
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Einheit</label>
-          <select
+          <label htmlFor="volumen-select-1" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Einheit</label>
+          <select id="volumen-select-1"
             value={einheit}
             onChange={e => setEinheit(e.target.value)}
             className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200"
