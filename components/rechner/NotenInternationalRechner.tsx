@@ -23,9 +23,9 @@ const SYSTEM_OPTIONEN = [
 ];
 
 function notenFarbe(nd: number): string {
-  if (nd <= 2.0) return 'text-green-600 dark:text-green-400';
-  if (nd <= 3.5) return 'text-amber-600 dark:text-amber-400';
-  return 'text-red-600 dark:text-red-400';
+  if (nd <= 2.0) return 'text-green-700 dark:text-green-400';
+  if (nd <= 3.5) return 'text-amber-700 dark:text-amber-400';
+  return 'text-red-700 dark:text-red-400';
 }
 
 export default function NotenInternationalRechner() {
@@ -181,25 +181,25 @@ export default function NotenInternationalRechner() {
               {ergebnis.bewertung}
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-3">
-              <div className="bg-white/60 dark:bg-gray-800/60 rounded-xl p-3 text-center">
+              <div className="bg-white/90 dark:bg-gray-800/60 rounded-xl p-3 text-center">
                 <p className="text-xs text-gray-600 dark:text-gray-400 mb-1 font-medium">Deutsche Note</p>
                 <p className={`text-2xl font-extrabold ${notenFarbe(ergebnis.deutscheNote)}`}>
                   {ergebnis.deutscheNote.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}
                 </p>
               </div>
-              <div className="bg-white/60 dark:bg-gray-800/60 rounded-xl p-3 text-center">
+              <div className="bg-white/90 dark:bg-gray-800/60 rounded-xl p-3 text-center">
                 <p className="text-xs text-gray-600 dark:text-gray-400 mb-1 font-medium">GPA (USA)</p>
                 <p className={`text-2xl font-extrabold ${notenFarbe(ergebnis.deutscheNote)}`}>
                   {ergebnis.gpa.toFixed(2)}
                 </p>
               </div>
-              <div className="bg-white/60 dark:bg-gray-800/60 rounded-xl p-3 text-center">
+              <div className="bg-white/90 dark:bg-gray-800/60 rounded-xl p-3 text-center">
                 <p className="text-xs text-gray-600 dark:text-gray-400 mb-1 font-medium">UK</p>
                 <p className="text-sm font-bold text-gray-800 dark:text-gray-100 leading-tight">
                   {ergebnis.ukClassification}
                 </p>
               </div>
-              <div className="bg-white/60 dark:bg-gray-800/60 rounded-xl p-3 text-center">
+              <div className="bg-white/90 dark:bg-gray-800/60 rounded-xl p-3 text-center">
                 <p className="text-xs text-gray-600 dark:text-gray-400 mb-1 font-medium">ECTS</p>
                 <p className={`text-2xl font-extrabold ${notenFarbe(ergebnis.deutscheNote)}`}>
                   {ergebnis.ectsGrade}
