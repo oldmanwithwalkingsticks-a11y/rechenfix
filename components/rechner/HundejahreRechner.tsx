@@ -123,7 +123,7 @@ export default function HundejahreRechner() {
       </div>
 
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-4">
-        <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Übersicht</h3>
+        <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Übersicht</h2>
         <div className="space-y-1.5 text-sm">
           <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Alter Hund</span><span className="font-medium">{fmt(ergebnis.alter)} Jahre</span></div>
           <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Entspricht Mensch</span><span className="font-medium">{fmt(ergebnis.menschJahre)} Jahre</span></div>
@@ -135,7 +135,7 @@ export default function HundejahreRechner() {
       </div>
 
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-4">
-        <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Die Formel</h3>
+        <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Die Formel</h2>
         <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-1 list-disc pl-5">
           <li>Jahr 1: + 15 Menschenjahre</li>
           <li>Jahr 2: + 9 Menschenjahre (→ 24)</li>

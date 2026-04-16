@@ -71,10 +71,10 @@ export default function GrundsteuerRechner() {
     <div>
       {/* 1: Modell */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Berechnungsmodell
-        </h3>
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
           {([
             ['bund', 'Bundesmodell', 'Die meisten Länder'],
@@ -95,10 +95,10 @@ export default function GrundsteuerRechner() {
 
       {/* 2: Grundstücksart */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
           Grundstücksart
-        </h3>
+        </h2>
         <select
           value={art}
           onChange={e => setArt(e.target.value as Grundstuecksart)}
@@ -113,20 +113,20 @@ export default function GrundsteuerRechner() {
 
       {/* 3: Bodenrichtwert */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
           Bodenrichtwert
-        </h3>
+        </h2>
         <NummerEingabe value={bodenrichtwert} onChange={setBodenrichtwert} placeholder="200" einheit="€/m²" />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Finden Sie auf boris.de oder beim Gutachterausschuss Ihrer Gemeinde.</p>
       </div>
 
       {/* 4: Grundfläche */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">4</span>
           Grundstücksfläche
-        </h3>
+        </h2>
         <NummerEingabe value={grundflaeche} onChange={setGrundflaeche} placeholder="400" einheit="m²" />
       </div>
 
@@ -134,19 +134,19 @@ export default function GrundsteuerRechner() {
         <>
           {/* 5: Wohnfläche */}
           <div className="mb-6">
-            <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+            <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
               <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">5</span>
               Wohnfläche
-            </h3>
+            </h2>
             <NummerEingabe value={wohnflaeche} onChange={setWohnflaeche} placeholder="120" einheit="m²" />
           </div>
 
           {/* 6: Baujahr */}
           <div className="mb-6">
-            <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+            <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
               <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">6</span>
               Baujahr
-            </h3>
+            </h2>
             <NummerEingabe value={baujahr} onChange={setBaujahr} placeholder="1990" einheit="" />
           </div>
         </>
@@ -154,10 +154,10 @@ export default function GrundsteuerRechner() {
 
       {/* 7: Hebesatz */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">7</span>
           Hebesatz der Gemeinde
-        </h3>
+        </h2>
         <NummerEingabe value={hebesatz} onChange={setHebesatz} placeholder="500" einheit="%" />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Finden Sie auf der Website Ihrer Gemeinde. Durchschnitt: ca. 500 %.</p>
       </div>
@@ -174,7 +174,7 @@ export default function GrundsteuerRechner() {
       {/* Aufschlüsselung */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
         <div className="px-4 pt-4 pb-1">
-          <h3 className="font-bold text-gray-700 dark:text-gray-200">Berechnung im Detail</h3>
+          <h2 className="font-bold text-gray-700 dark:text-gray-200">Berechnung im Detail</h2>
         </div>
         <table className="w-full text-sm">
           <tbody className="divide-y divide-gray-100 dark:divide-gray-700">

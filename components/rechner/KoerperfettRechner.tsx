@@ -164,7 +164,7 @@ export default function KoerperfettRechner() {
 
           {/* Farbige Skala */}
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Einordnung</h3>
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Einordnung</h2>
             <div className="relative">
               {/* Skala-Balken */}
               <div className="flex rounded-lg overflow-hidden h-6 mb-1">
@@ -215,7 +215,7 @@ export default function KoerperfettRechner() {
 
           {/* Detail-Box */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Details</h3>
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Details</h2>
             <div className="space-y-3">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Körperfettanteil (KFA)</span>
@@ -275,7 +275,7 @@ export default function KoerperfettRechner() {
           {/* Kategorien-Tabelle */}
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
             <div className="px-5 pt-4 pb-2">
-              <h3 className="font-bold text-gray-700 dark:text-gray-200">KFA-Kategorien ({geschlecht === 'mann' ? 'Männer' : 'Frauen'})</h3>
+              <h2 className="font-bold text-gray-700 dark:text-gray-200">KFA-Kategorien ({geschlecht === 'mann' ? 'Männer' : 'Frauen'})</h2>
             </div>
             <table className="w-full text-sm">
               <thead>

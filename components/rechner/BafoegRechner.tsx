@@ -60,10 +60,10 @@ export default function BafoegRechner() {
     <div>
       {/* === 1: Ausbildung & Wohnen === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Ausbildung &amp; Wohnsituation
-        </h3>
+        </h2>
 
         <div className="space-y-4">
           <div>
@@ -94,10 +94,10 @@ export default function BafoegRechner() {
 
       {/* === 2: Eigenes Einkommen & Vermögen === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
           Eigenes Einkommen &amp; Vermögen
-        </h3>
+        </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
@@ -115,10 +115,10 @@ export default function BafoegRechner() {
 
       {/* === 3: Eltern === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
           Elterneinkommen
-        </h3>
+        </h2>
 
         <div className="space-y-4">
           <div>
@@ -176,10 +176,10 @@ export default function BafoegRechner() {
 
       {/* === 4: Zuschläge === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">4</span>
           Versicherung &amp; Kinder
-        </h3>
+        </h2>
 
         <div className="space-y-4">
           <div>
@@ -268,7 +268,7 @@ export default function BafoegRechner() {
           {/* Aufschlüsselung */}
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
             <div className="px-4 pt-4 pb-1">
-              <h3 className="font-bold text-gray-700 dark:text-gray-200">Berechnung im Detail</h3>
+              <h2 className="font-bold text-gray-700 dark:text-gray-200">Berechnung im Detail</h2>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
@@ -361,7 +361,7 @@ export default function BafoegRechner() {
           {/* Rückzahlungs-Info (nur Studium) */}
           {ergebnis.hatAnspruch && ergebnis.istStudium && (
             <div className="bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-200 dark:border-indigo-500/30 rounded-xl p-4 mb-6">
-              <h3 className="font-bold text-indigo-800 dark:text-indigo-300 text-sm mb-3">📋 Rückzahlung (Studien-BAföG)</h3>
+              <h2 className="font-bold text-indigo-800 dark:text-indigo-300 text-sm mb-3">📋 Rückzahlung (Studien-BAföG)</h2>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
                 <div>
                   <p className="text-indigo-700/70 dark:text-indigo-400/70 text-xs">Zuschuss (geschenkt)</p>

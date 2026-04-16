@@ -383,7 +383,7 @@ export default function FlaechenRechner() {
 
             {/* Formel + Rechenweg */}
             <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5">
-              <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Formel &amp; Rechenweg</h3>
+              <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Formel &amp; Rechenweg</h2>
               <div className="space-y-2">
                 <div className="bg-white dark:bg-gray-800 rounded-lg p-3 border border-gray-200 dark:border-gray-600">
                   <p className="text-sm font-mono text-primary-600 dark:text-primary-400">{ergebnis.formelText}</p>
@@ -402,7 +402,7 @@ export default function FlaechenRechner() {
 
           {/* Aufschlüsselung */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Ergebnisse</h3>
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Ergebnisse</h2>
             <div className="space-y-3">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Fläche</span>
@@ -427,7 +427,7 @@ export default function FlaechenRechner() {
           {ergebnis.umrechnungen.length > 0 && (
             <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
               <div className="px-5 pt-4 pb-2">
-                <h3 className="font-bold text-gray-700 dark:text-gray-200">Umrechnung</h3>
+                <h2 className="font-bold text-gray-700 dark:text-gray-200">Umrechnung</h2>
               </div>
               <table className="w-full text-sm">
                 <thead>

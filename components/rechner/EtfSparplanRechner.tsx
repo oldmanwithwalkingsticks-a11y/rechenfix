@@ -179,7 +179,7 @@ export default function EtfSparplanRechner() {
 
           {/* Aufschlüsselung */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Aufschlüsselung</h3>
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Aufschlüsselung</h2>
             <div className="space-y-3">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Summe Ihrer Einzahlungen</span>
@@ -210,7 +210,7 @@ export default function EtfSparplanRechner() {
           {/* Flächendiagramm */}
           {chartData && ergebnis.jahresDaten.length > 0 && (
             <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6">
-              <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Vermögensentwicklung</h3>
+              <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Vermögensentwicklung</h2>
               <div className="relative h-64">
                 {/* Y-Achse Labels */}
                 <div className="absolute left-0 top-0 bottom-6 w-16 flex flex-col justify-between text-xs text-gray-600 dark:text-gray-500 text-right pr-2">

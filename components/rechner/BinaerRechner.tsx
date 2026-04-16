@@ -96,7 +96,7 @@ export default function BinaerRechner() {
           </div>
 
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-4">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Alle Zahlensysteme</h3>
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Alle Zahlensysteme</h2>
             <div className="space-y-1.5 text-sm">
               <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Dezimal (Basis 10)</span><span className="font-mono font-medium">{ergebnis.dec}</span></div>
               <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Binär (Basis 2)</span><span className="font-mono font-medium break-all">{ergebnis.bin.bits}</span></div>
@@ -110,7 +110,7 @@ export default function BinaerRechner() {
 
           {ergebnis.bin.weg.length > 0 && (
             <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-4">
-              <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Rechenweg (Zweierpotenzen)</h3>
+              <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Rechenweg (Zweierpotenzen)</h2>
               <p className="text-xs text-gray-500 mb-2">Jede 1-Stelle im Binärcode entspricht einer Zweierpotenz.</p>
               <div className="space-y-1 text-sm font-mono">
                 {ergebnis.bin.weg.map(w => (

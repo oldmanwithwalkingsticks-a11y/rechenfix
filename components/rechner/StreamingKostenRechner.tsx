@@ -59,7 +59,7 @@ export default function StreamingKostenRechner() {
     <div className="space-y-6">
       {/* Abo-Auswahl */}
       <div>
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Welche Streaming-Abos haben Sie?</h3>
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Welche Streaming-Abos haben Sie?</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {streamingDienste.map(dienst => {
             const aktiv = dienst.id in auswahl;
@@ -168,7 +168,7 @@ export default function StreamingKostenRechner() {
           {/* Ranking */}
           {ergebnis.ranking.length > 0 && (
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Ihre Abos — teuerstes zuerst</h3>
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Ihre Abos — teuerstes zuerst</h2>
               <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
                 {ergebnis.ranking.map((abo, i) => {
                   const anteil = (abo.preis / ergebnis.monatlich) * 100;

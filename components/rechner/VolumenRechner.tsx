@@ -223,7 +223,7 @@ export default function VolumenRechner() {
 
       {/* Formel + Rechenweg */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-6">
-        <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-2">Formel &amp; Rechenweg</h3>
+        <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-2">Formel &amp; Rechenweg</h2>
         <p className="font-mono text-sm text-gray-800 dark:text-gray-200">{ergebnis.formelV}</p>
         <p className="font-mono text-sm text-gray-600 dark:text-gray-400 mb-2">{ergebnis.rechnungV}</p>
         <p className="font-mono text-sm text-gray-800 dark:text-gray-200">{ergebnis.formelO}</p>

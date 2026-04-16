@@ -135,7 +135,7 @@ export default function WahrerStundenlohnRechner() {
 
           {/* Aufschlüsselung: Zeit */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Wohin geht Ihre Zeit?</h3>
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Wohin geht Ihre Zeit?</h2>
             <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
               {[
                 { label: 'Vertragsarbeitszeit', wert: ergebnis.vertragsstundenMonat, farbe: 'bg-blue-500' },
@@ -166,7 +166,7 @@ export default function WahrerStundenlohnRechner() {
 
           {/* Aufschlüsselung: Geld */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Wohin geht Ihr Geld?</h3>
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Wohin geht Ihr Geld?</h2>
             <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
               <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-700">
                 <div className="flex items-center justify-between">

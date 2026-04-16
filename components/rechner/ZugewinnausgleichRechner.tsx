@@ -64,10 +64,10 @@ export default function ZugewinnausgleichRechner() {
     <div>
       {/* === PARTNER 1 === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Partner 1
-        </h3>
+        </h2>
         <div className="space-y-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-4">
           <div>
             <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Anfangsvermögen (bei Heirat)</label>
@@ -92,10 +92,10 @@ export default function ZugewinnausgleichRechner() {
 
       {/* === PARTNER 2 === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
           Partner 2
-        </h3>
+        </h2>
         <div className="space-y-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-4">
           <div>
             <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Anfangsvermögen (bei Heirat)</label>
@@ -128,7 +128,7 @@ export default function ZugewinnausgleichRechner() {
       {/* Detailtabelle */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
         <div className="px-4 pt-4 pb-1">
-          <h3 className="font-bold text-gray-700 dark:text-gray-200">Berechnung im Detail</h3>
+          <h2 className="font-bold text-gray-700 dark:text-gray-200">Berechnung im Detail</h2>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
@@ -180,7 +180,7 @@ export default function ZugewinnausgleichRechner() {
 
       {/* Balkendiagramm Zugewinn Vergleich */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-6">
-        <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Zugewinn-Vergleich</h3>
+        <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Zugewinn-Vergleich</h2>
         <div className="space-y-3">
           <div>
             <div className="flex justify-between text-xs mb-1 text-gray-600 dark:text-gray-400">

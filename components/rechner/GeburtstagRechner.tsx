@@ -104,7 +104,7 @@ export default function GeburtstagRechner() {
 
           {/* Nächster Geburtstag */}
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3">🎉 Nächster Geburtstag</h3>
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">🎉 Nächster Geburtstag</h2>
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Datum</span>
@@ -125,7 +125,7 @@ export default function GeburtstagRechner() {
 
           {/* Nächster runder Geburtstag */}
           <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-500/10 dark:to-pink-500/10 border border-purple-200 dark:border-purple-500/30 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-purple-800 dark:text-purple-300 mb-3">🎈 Nächster runder Geburtstag</h3>
+            <h2 className="font-bold text-purple-800 dark:text-purple-300 mb-3">🎈 Nächster runder Geburtstag</h2>
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
                 <span className="text-purple-700 dark:text-purple-400">Geburtstag</span>
@@ -144,7 +144,7 @@ export default function GeburtstagRechner() {
 
           {/* Meilensteine */}
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-4">🏆 Meilensteine</h3>
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">🏆 Meilensteine</h2>
             <div className="space-y-3">
               {ergebnis.meilensteine.map(ms => (
                 <div key={ms.label} className="flex items-center justify-between text-sm">

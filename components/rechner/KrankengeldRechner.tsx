@@ -90,7 +90,7 @@ export default function KrankengeldRechner() {
           </div>
 
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
-            <div className="px-4 pt-4 pb-1"><h3 className="font-bold text-gray-700 dark:text-gray-200">Vergleich</h3></div>
+            <div className="px-4 pt-4 pb-1"><h2 className="font-bold text-gray-700 dark:text-gray-200">Vergleich</h2></div>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
@@ -120,7 +120,7 @@ export default function KrankengeldRechner() {
           </div>
 
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-6">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-2">Timeline</h3>
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-2">Timeline</h2>
             <div className="text-xs text-gray-700 dark:text-gray-300 space-y-1">
               <p><strong>Tag 1 – 42 (6 Wochen):</strong> Lohnfortzahlung durch Arbeitgeber (volles Gehalt)</p>
               <p><strong>Ab Tag 43:</strong> Krankengeld durch Krankenkasse</p>

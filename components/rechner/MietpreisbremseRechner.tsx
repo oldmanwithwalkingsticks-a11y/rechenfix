@@ -117,7 +117,7 @@ export default function MietpreisbremseRechner() {
       {/* Ergebnis */}
       {!ergebnis.greiftBremse ? (
         <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-5 mb-6">
-          <h3 className="font-bold text-amber-800 dark:text-amber-300 mb-1">Mietpreisbremse greift nicht</h3>
+          <h2 className="font-bold text-amber-800 dark:text-amber-300 mb-1">Mietpreisbremse greift nicht</h2>
           <p className="text-amber-800 dark:text-amber-300 text-sm">{giltBremse ? aktAusnahme.text : 'An Ihrem Ort gilt die Mietpreisbremse nach Angabe nicht. Der Vermieter darf grundsätzlich frei vereinbaren — Grenze bildet die Wuchermiete (> 20 % Überhöhung strafbar).'}</p>
         </div>
       ) : zuHoch ? (
@@ -138,7 +138,7 @@ export default function MietpreisbremseRechner() {
 
       {/* Aufschlüsselung */}
       <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
-        <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Aufschlüsselung</h3>
+        <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Aufschlüsselung</h2>
         <table className="w-full text-sm">
           <tbody>
             <tr className="text-gray-600 dark:text-gray-400">

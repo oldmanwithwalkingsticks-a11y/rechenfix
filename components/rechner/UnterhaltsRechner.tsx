@@ -206,20 +206,20 @@ export default function UnterhaltsRechner() {
     <div>
       {/* 1: Nettoeinkommen */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Bereinigtes Nettoeinkommen des Unterhaltspflichtigen
-        </h3>
+        </h2>
         <NummerEingabe value={netto} onChange={setNetto} placeholder="3000" einheit="€/Monat" />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Nach Abzug berufsbedingter Aufwendungen (5 % pauschal) und Schulden.</p>
       </div>
 
       {/* 2: Anzahl Kinder */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
           Anzahl unterhaltsberechtigter Kinder
-        </h3>
+        </h2>
         <div className="flex flex-wrap gap-2">
           {[1, 2, 3, 4, 5].map(n => (
             <button
@@ -235,10 +235,10 @@ export default function UnterhaltsRechner() {
 
       {/* 3: Einstellungen je Kind */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
           Einstellungen je Kind
-        </h3>
+        </h2>
         <div className="space-y-4">
           {Array.from({ length: anzahlKinder }).map((_, i) => {
             const k = kinder[i] || defaultKind('6-11');
@@ -349,7 +349,7 @@ export default function UnterhaltsRechner() {
       {/* Tabelle pro Kind */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
         <div className="px-4 pt-4 pb-1">
-          <h3 className="font-bold text-gray-700 dark:text-gray-200">Aufschlüsselung pro Kind</h3>
+          <h2 className="font-bold text-gray-700 dark:text-gray-200">Aufschlüsselung pro Kind</h2>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">

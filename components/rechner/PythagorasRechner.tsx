@@ -172,7 +172,7 @@ export default function PythagorasRechner() {
 
           {/* Rechenweg */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Rechenweg</h3>
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Rechenweg</h2>
             <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
               <p><strong>1.</strong> Satz des Pythagoras: <em>a² + b² = c²</em></p>
               {gesucht === 'c' && (
@@ -207,7 +207,7 @@ export default function PythagorasRechner() {
 
           {/* Kennwerte */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Kennwerte</h3>
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Kennwerte</h2>
             <table className="w-full text-sm">
               <tbody>
                 <tr className="text-gray-600 dark:text-gray-400">

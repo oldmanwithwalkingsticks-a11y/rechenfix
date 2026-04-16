@@ -67,20 +67,20 @@ export default function FirmenwagenRechner() {
     <div>
       {/* 1: BLP */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Bruttolistenpreis
-        </h3>
+        </h2>
         <NummerEingabe value={blp} onChange={setBlp} placeholder="45000" einheit="€" />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Inkl. Sonderausstattung und Umsatzsteuer.</p>
       </div>
 
       {/* 2: Antrieb */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
           Antriebsart
-        </h3>
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {([
             ['verbrenner', 'Verbrenner', '1 %'],
@@ -102,19 +102,19 @@ export default function FirmenwagenRechner() {
 
       {/* 3: km */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
           Entfernung Wohnung–Arbeit
-        </h3>
+        </h2>
         <NummerEingabe value={km} onChange={setKm} placeholder="20" einheit="km (einfache Strecke)" />
       </div>
 
       {/* 4: Methode */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">4</span>
           Berechnungsmethode Arbeitsweg
-        </h3>
+        </h2>
         <div className="flex gap-2">
           {([
             ['pauschal', 'Pauschal (0,03 %)'],
@@ -134,29 +134,29 @@ export default function FirmenwagenRechner() {
 
       {methode === 'einzel' && (
         <div className="mb-6">
-          <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+          <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
             <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">5</span>
             Fahrten pro Monat
-          </h3>
+          </h2>
           <NummerEingabe value={fahrten} onChange={setFahrten} placeholder="20" einheit="Fahrten" />
         </div>
       )}
 
       {/* Zuzahlung */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">{methode === 'einzel' ? '6' : '5'}</span>
           Eigene Zuzahlung pro Monat
-        </h3>
+        </h2>
         <NummerEingabe value={zuzahlung} onChange={setZuzahlung} placeholder="0" einheit="€" />
       </div>
 
       {/* Grenzsteuersatz */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">{methode === 'einzel' ? '7' : '6'}</span>
           Persönlicher Grenzsteuersatz
-        </h3>
+        </h2>
         <div className="flex flex-wrap gap-2">
           {['30', '35', '42', '45'].map(s => (
             <button
@@ -182,7 +182,7 @@ export default function FirmenwagenRechner() {
       {/* Aufschlüsselung */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
         <div className="px-4 pt-4 pb-1">
-          <h3 className="font-bold text-gray-700 dark:text-gray-200">Aufschlüsselung</h3>
+          <h2 className="font-bold text-gray-700 dark:text-gray-200">Aufschlüsselung</h2>
         </div>
         <table className="w-full text-sm">
           <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
@@ -213,7 +213,7 @@ export default function FirmenwagenRechner() {
       {/* Vergleichstabelle */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
         <div className="px-4 pt-4 pb-1">
-          <h3 className="font-bold text-gray-700 dark:text-gray-200">Vergleich: Verbrenner vs. Hybrid vs. E-Auto</h3>
+          <h2 className="font-bold text-gray-700 dark:text-gray-200">Vergleich: Verbrenner vs. Hybrid vs. E-Auto</h2>
         </div>
         <div className="grid grid-cols-3 divide-x divide-gray-100 dark:divide-gray-700">
           <div className={`p-4 ${antrieb === 'verbrenner' ? 'bg-primary-50 dark:bg-primary-500/10' : ''}`}>

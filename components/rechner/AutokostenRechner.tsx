@@ -86,10 +86,10 @@ export default function AutokostenRechner() {
     <div>
       {/* === Bereich 1: Fahrzeug === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Fahrzeug &amp; Anschaffung
-        </h3>
+        </h2>
 
         <div className="space-y-4">
           <div>
@@ -130,10 +130,10 @@ export default function AutokostenRechner() {
 
       {/* === Bereich 2: Versicherung & Steuer === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
           Versicherung &amp; Steuer
-        </h3>
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kfz-Versicherung</label>
@@ -150,10 +150,10 @@ export default function AutokostenRechner() {
 
       {/* === Bereich 3: Kraftstoff === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
           Kraftstoff
-        </h3>
+        </h2>
 
         <div className="space-y-4">
           <div>
@@ -196,10 +196,10 @@ export default function AutokostenRechner() {
 
       {/* === Bereich 4: Laufende Kosten === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">4</span>
           Laufende Kosten
-        </h3>
+        </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
@@ -272,7 +272,7 @@ export default function AutokostenRechner() {
 
           {/* Kostenverteilung (Tortendiagramm) */}
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-4 flex flex-col items-center">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3 self-start">Kostenverteilung</h3>
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3 self-start">Kostenverteilung</h2>
             <svg viewBox="0 0 200 200" className="w-44 h-44">
               {(() => {
                 let cum = 0;
@@ -305,7 +305,7 @@ export default function AutokostenRechner() {
           {/* Aufschlüsselungs-Tabelle (volle Breite) */}
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
             <div className="px-4 pt-4 pb-1">
-              <h3 className="font-bold text-gray-700 dark:text-gray-200">Aufschlüsselung</h3>
+              <h2 className="font-bold text-gray-700 dark:text-gray-200">Aufschlüsselung</h2>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
@@ -344,7 +344,7 @@ export default function AutokostenRechner() {
 
           {/* Kraftstoffverbrauch-Detail */}
           <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-6">
-            <h3 className="font-bold text-amber-800 dark:text-amber-300 text-sm mb-2">⛽ Kraftstoffverbrauch</h3>
+            <h2 className="font-bold text-amber-800 dark:text-amber-300 text-sm mb-2">⛽ Kraftstoffverbrauch</h2>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
               <div>
                 <p className="text-amber-700/70 dark:text-amber-400/70 text-xs">Verbrauch</p>
@@ -385,7 +385,7 @@ export default function AutokostenRechner() {
 
           {/* Kosten pro Strecke */}
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-1">🛣️ Spritkosten pro Strecke</h3>
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-1">🛣️ Spritkosten pro Strecke</h2>
             <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">Reine Kraftstoffkosten — ohne Fixkosten wie Versicherung oder Wertverlust</p>
             <div className="space-y-3">
               {ergebnis.streckenKosten.map(s => (

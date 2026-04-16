@@ -118,7 +118,7 @@ export default function ProzVeraenderungRechner() {
             <>
               {/* Aufschlüsselung */}
               <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
-                <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Ergebnisse</h3>
+                <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Ergebnisse</h2>
                 <div className="space-y-3">
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-600 dark:text-gray-400">Alter Wert</span>
@@ -149,7 +149,7 @@ export default function ProzVeraenderungRechner() {
 
               {/* Rechenweg */}
               <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6">
-                <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Rechenweg</h3>
+                <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Rechenweg</h2>
                 <div className="space-y-2">
                   {ergebnis.rechenschritte.map((schritt, i) => (
                     <div key={i} className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3 border border-gray-200 dark:border-gray-600">
@@ -162,7 +162,7 @@ export default function ProzVeraenderungRechner() {
               {/* Balkenvergleich */}
               {ergebnis.alterWert >= 0 && ergebnis.neuerWert >= 0 && (
                 <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
-                  <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Visueller Vergleich</h3>
+                  <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Visueller Vergleich</h2>
                   <div className="space-y-3">
                     <div>
                       <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">

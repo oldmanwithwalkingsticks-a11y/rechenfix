@@ -40,10 +40,10 @@ export default function ScheidungskostenRechner() {
     <div>
       {/* === 1: Nettoeinkommen === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Gemeinsames Nettoeinkommen (beide Ehepartner)
-        </h3>
+        </h2>
         <NummerEingabe value={netto} onChange={setNetto} placeholder="5.000" einheit="€/Monat" />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
           Der Verfahrenswert beträgt das 3-fache Ihres gemeinsamen monatlichen Nettoeinkommens (mindestens 3.000 €).
@@ -52,10 +52,10 @@ export default function ScheidungskostenRechner() {
 
       {/* === 2: Art === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
           Art der Scheidung
-        </h3>
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {([
             ['einvernehmlich', '🤝 Einvernehmlich', '1 Anwalt, kürzer, günstiger'],
@@ -75,10 +75,10 @@ export default function ScheidungskostenRechner() {
 
       {/* === 3: Versorgungsausgleich === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
           Versorgungsausgleich durchführen?
-        </h3>
+        </h2>
         <div className="flex gap-2">
           {([[true, 'Ja'], [false, 'Nein']] as const).map(([val, label]) => (
             <button
@@ -98,10 +98,10 @@ export default function ScheidungskostenRechner() {
       {/* === 4: Folgesachen (nur streitig) === */}
       {art === 'streitig' && (
         <div className="mb-6">
-          <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+          <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
             <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">4</span>
             Folgesachen (streitig zu klären)
-          </h3>
+          </h2>
           <div className="space-y-2">
             {([
               ['zugewinnausgleich', 'Zugewinnausgleich', '+20% Verfahrenswert', zugewinnausgleich, setZugewinnausgleich],
@@ -141,7 +141,7 @@ export default function ScheidungskostenRechner() {
       {/* Aufschlüsselung */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
         <div className="px-4 pt-4 pb-1">
-          <h3 className="font-bold text-gray-700 dark:text-gray-200">Berechnung im Detail</h3>
+          <h2 className="font-bold text-gray-700 dark:text-gray-200">Berechnung im Detail</h2>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
@@ -212,7 +212,7 @@ export default function ScheidungskostenRechner() {
       {/* Vergleich einvernehmlich vs. streitig */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
         <div className="px-4 pt-4 pb-1">
-          <h3 className="font-bold text-gray-700 dark:text-gray-200">Vergleich: Einvernehmlich vs. Streitig</h3>
+          <h2 className="font-bold text-gray-700 dark:text-gray-200">Vergleich: Einvernehmlich vs. Streitig</h2>
         </div>
         <div className="grid grid-cols-2 divide-x divide-gray-100 dark:divide-gray-700">
           <div className={`p-4 ${art === 'einvernehmlich' ? 'bg-green-50 dark:bg-green-500/10' : ''}`}>

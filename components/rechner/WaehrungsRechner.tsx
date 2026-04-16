@@ -113,7 +113,7 @@ export default function WaehrungsRechner() {
       </div>
 
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-4">
-        <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Schnellreferenz: 1 EUR entspricht</h3>
+        <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Schnellreferenz: 1 EUR entspricht</h2>
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 text-sm">
           {schnellWaehrungen.map(code => {
             const w = WAEHRUNGEN.find(x => x.code === code)!;

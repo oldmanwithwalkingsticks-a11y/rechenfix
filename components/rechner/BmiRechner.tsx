@@ -109,7 +109,7 @@ export default function BmiRechner() {
 
           {/* BMI-Skala */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-4">BMI-Einordnung</h3>
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">BMI-Einordnung</h2>
 
             {/* Farbiger Balken */}
             <div className="relative mb-8">

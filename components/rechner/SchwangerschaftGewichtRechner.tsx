@@ -153,7 +153,7 @@ export default function SchwangerschaftGewichtRechner() {
 
       {/* Empfehlungen */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-4">
-        <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Empfehlung (IOM-Richtlinien)</h3>
+        <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Empfehlung (IOM-Richtlinien)</h2>
         <div className="space-y-2 text-sm">
           <div className="flex justify-between">
             <span className="text-gray-600 dark:text-gray-400">Empfohlene Gesamtzunahme</span>
@@ -172,7 +172,7 @@ export default function SchwangerschaftGewichtRechner() {
 
       {/* Verteilung */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-4">
-        <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Verteilung der Gewichtszunahme</h3>
+        <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Verteilung der Gewichtszunahme</h2>
         <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
           {[
             ['Baby', '≈ 3,3 kg'],

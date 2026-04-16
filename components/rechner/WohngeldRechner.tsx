@@ -43,10 +43,10 @@ export default function WohngeldRechner() {
     <div>
       {/* === Haushalt === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Haushalt
-        </h3>
+        </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
@@ -71,10 +71,10 @@ export default function WohngeldRechner() {
 
       {/* === Miete & Mietstufe === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
           Miete &amp; Wohnort
-        </h3>
+        </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
@@ -116,10 +116,10 @@ export default function WohngeldRechner() {
 
       {/* === Freibeträge === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
           Freibeträge <span className="text-gray-600 font-normal text-xs">(optional)</span>
-        </h3>
+        </h2>
 
         <div className="space-y-3">
           <label className="flex items-center gap-2 cursor-pointer">
@@ -205,7 +205,7 @@ export default function WohngeldRechner() {
           {/* Aufschlüsselung */}
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
             <div className="px-4 pt-4 pb-1">
-              <h3 className="font-bold text-gray-700 dark:text-gray-200">Berechnungsdetails</h3>
+              <h2 className="font-bold text-gray-700 dark:text-gray-200">Berechnungsdetails</h2>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
@@ -268,7 +268,7 @@ export default function WohngeldRechner() {
           {/* Mietbelastungsquote */}
           {parseDeutscheZahl(einkommen) > 0 && (
             <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-xl p-4 mb-6">
-              <h3 className="font-bold text-blue-800 dark:text-blue-300 text-sm mb-2">📊 Mietbelastungsquote</h3>
+              <h2 className="font-bold text-blue-800 dark:text-blue-300 text-sm mb-2">📊 Mietbelastungsquote</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <p className="text-xs text-blue-700/70 dark:text-blue-400/70">Ohne Wohngeld</p>

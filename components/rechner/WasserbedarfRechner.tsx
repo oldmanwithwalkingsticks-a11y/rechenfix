@@ -133,7 +133,7 @@ export default function WasserbedarfRechner() {
 
           {/* Gläser-Visualisierung */}
           <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-blue-800 dark:text-blue-300 mb-3">Ihre {ergebnis.anzahlGlaeser} Gläser am Tag</h3>
+            <h2 className="font-bold text-blue-800 dark:text-blue-300 mb-3">Ihre {ergebnis.anzahlGlaeser} Gläser am Tag</h2>
             <div className="flex flex-wrap gap-2">
               {Array.from({ length: Math.min(ergebnis.anzahlGlaeser, 20) }).map((_, i) => (
                 <div
@@ -152,7 +152,7 @@ export default function WasserbedarfRechner() {
 
           {/* Aufschlüsselung */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Aufschlüsselung</h3>
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Aufschlüsselung</h2>
             <div className="space-y-3">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Basisbedarf ({nGewicht} kg × {aktivitaet === 'kaum' ? '30' : aktivitaet === 'leicht' ? '35' : aktivitaet === 'maessig' ? '40' : aktivitaet === 'sehr' ? '45' : '50'} ml/kg)</span>

@@ -162,7 +162,7 @@ export default function LeasingRechner() {
       </div>
 
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-6">
-        <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-2">Aufschlüsselung</h3>
+        <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-2">Aufschlüsselung</h2>
         <div className="space-y-1.5 text-sm text-gray-700 dark:text-gray-300">
           <div className="flex justify-between"><span>Anzahlung</span><span className="tabular-nums">{fmt(parseDeutscheZahl(anzahlung))} €</span></div>
           <div className="flex justify-between"><span>Monatliche Rate</span><span className="tabular-nums">{fmt2(ergebnis.leasingrate)} €</span></div>
@@ -184,7 +184,7 @@ export default function LeasingRechner() {
 
       {vergleich && (
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-6">
-          <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Leasing vs. Finanzierung</h3>
+          <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Leasing vs. Finanzierung</h2>
           <div className="space-y-3 mb-4">
             <div>
               <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Kaufpreis (Finanzierung)</label>

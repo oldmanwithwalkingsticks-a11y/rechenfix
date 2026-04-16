@@ -326,7 +326,7 @@ export default function BruttoNettoRechner() {
 
           {/* Aufschlüsselung */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5" id="brutto-netto-tabelle">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Aufschlüsselung (monatlich)</h3>
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Aufschlüsselung (monatlich)</h2>
             <table className="w-full text-sm">
               <tbody>
                 <Zeile label="Bruttogehalt" wert={ergebnis.bruttoMonat} hervorgehoben />
@@ -362,9 +362,9 @@ export default function BruttoNettoRechner() {
               <>
                 {/* Sonderzahlung Zusammenfassung */}
                 <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-5 mt-4">
-                  <h3 className="font-bold text-amber-800 dark:text-amber-300 mb-4 flex items-center gap-2">
+                  <h2 className="font-bold text-amber-800 dark:text-amber-300 mb-4 flex items-center gap-2">
                     <span>🎄</span> Sonderzahlung Weihnachtsgeld
-                  </h3>
+                  </h2>
 
                   {/* Übersichtskarten */}
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
@@ -421,7 +421,7 @@ export default function BruttoNettoRechner() {
 
                 {/* Jahresübersicht inkl. Weihnachtsgeld */}
                 <div className="bg-primary-50 dark:bg-primary-500/10 border border-primary-200 dark:border-primary-500/30 rounded-xl p-5 mt-4">
-                  <h3 className="font-bold text-primary-800 dark:text-primary-300 mb-3">Jahresübersicht inkl. Weihnachtsgeld</h3>
+                  <h2 className="font-bold text-primary-800 dark:text-primary-300 mb-3">Jahresübersicht inkl. Weihnachtsgeld</h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Jahresbrutto inkl. Weihnachtsgeld</p>
@@ -506,7 +506,7 @@ export default function BruttoNettoRechner() {
 
       {/* Brutto-Netto-Tabelle (SEO) */}
       <div className="mt-8 no-print">
-        <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Brutto-Netto-Tabelle 2026</h3>
+        <h2 className="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Brutto-Netto-Tabelle 2026</h2>
         <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
           Wie viel Netto bleibt vom Brutto? Übersicht für Steuerklasse 1, 3 und 5 (ohne Kirchensteuer, GKV, NRW).
         </p>

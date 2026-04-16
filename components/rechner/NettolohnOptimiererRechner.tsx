@@ -200,7 +200,7 @@ export default function NettolohnOptimiererRechner() {
       {/* Vergleichstabelle */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
         <div className="px-4 pt-4 pb-1">
-          <h3 className="font-bold text-gray-700 dark:text-gray-200">Vergleich aller Optionen</h3>
+          <h2 className="font-bold text-gray-700 dark:text-gray-200">Vergleich aller Optionen</h2>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
@@ -238,7 +238,7 @@ export default function NettolohnOptimiererRechner() {
 
       {/* Balkendiagramm */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-6">
-        <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Netto-Zugewinn pro Option</h3>
+        <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Netto-Zugewinn pro Option</h2>
         <div className="space-y-2">
           {ranking.map(o => (
             <div key={o.id}>

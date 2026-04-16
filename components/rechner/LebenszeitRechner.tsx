@@ -143,7 +143,7 @@ export default function LebenszeitRechner() {
 
           {/* Gelebte Zeit */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Sie haben bereits gelebt:</h3>
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Sie haben bereits gelebt:</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <FaktKarte icon="📅" label="Tage" wert={formatZahl(ergebnis.gesamtTage)} farbe="primary" />
               <FaktKarte icon="⏰" label="Stunden" wert={formatZahl(ergebnis.gesamtStunden)} farbe="blue" />
@@ -153,7 +153,7 @@ export default function LebenszeitRechner() {
 
           {/* Überraschende Fakten */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Überraschende Fakten über Ihre Lebenszeit:</h3>
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Überraschende Fakten über Ihre Lebenszeit:</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <FaktKarte
                 icon="😴"
@@ -202,7 +202,7 @@ export default function LebenszeitRechner() {
 
           {/* Lebenserwartung */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Statistische Lebenserwartung</h3>
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Statistische Lebenserwartung</h2>
             <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-5 space-y-4">
               <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400">
                 <span>Lebenserwartung ({geschlecht === 'maennlich' ? 'Männer' : 'Frauen'} in DE):</span>

@@ -163,7 +163,7 @@ export default function LieferserviceRechner() {
 
           {/* Balkenvergleich */}
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-xl p-4 mb-6">
-            <h3 className="font-bold text-sm text-gray-700 dark:text-gray-300 mb-4">📊 Lieferdienst vs. Selberkochen (pro Jahr)</h3>
+            <h2 className="font-bold text-sm text-gray-700 dark:text-gray-300 mb-4">📊 Lieferdienst vs. Selberkochen (pro Jahr)</h2>
             <div className="space-y-3">
               <div>
                 <div className="flex justify-between text-sm mb-1">
@@ -199,9 +199,9 @@ export default function LieferserviceRechner() {
           {/* Was man sich in 10 Jahren leisten könnte */}
           {ergebnis.vergleiche.length > 0 && (
             <div className="mb-6">
-              <h3 className="font-bold text-sm text-gray-700 dark:text-gray-300 mb-3">
+              <h2 className="font-bold text-sm text-gray-700 dark:text-gray-300 mb-3">
                 🛒 In 10 Jahren könnten Sie sich davon leisten
-              </h3>
+              </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 {ergebnis.vergleiche.map((v, i) => (
                   <div key={i} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-xl p-3 text-center">
@@ -216,7 +216,7 @@ export default function LieferserviceRechner() {
 
           {/* Fun Facts */}
           <div className="bg-orange-50/50 dark:bg-orange-900/10 rounded-xl p-4 mb-6">
-            <h3 className="font-bold text-sm text-orange-800 dark:text-orange-300 mb-2">🛵 Wussten Sie schon?</h3>
+            <h2 className="font-bold text-sm text-orange-800 dark:text-orange-300 mb-2">🛵 Wussten Sie schon?</h2>
             <ul className="space-y-1.5 text-sm text-gray-700 dark:text-gray-300">
               <li>• Deutsche geben durchschnittlich 58 € pro Monat für Lieferdienste aus</li>
               <li>• Die Liefergebühr macht oft 10–15 % der Gesamtkosten aus</li>

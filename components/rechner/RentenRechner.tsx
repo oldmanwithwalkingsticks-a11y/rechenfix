@@ -135,7 +135,7 @@ export default function RentenRechner() {
 
           {/* Rentenpunkte-Übersicht */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Rentenpunkte-Übersicht</h3>
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Rentenpunkte-Übersicht</h2>
             <div className="space-y-3">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Bereits erworben</span>
@@ -178,7 +178,7 @@ export default function RentenRechner() {
 
           {/* Renten-Details */}
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Renten-Berechnung</h3>
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Renten-Berechnung</h2>
             <div className="space-y-3">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Brutto-Rente (ohne Abschlag)</span>
@@ -218,13 +218,13 @@ export default function RentenRechner() {
               ? 'bg-red-50 dark:bg-red-500/10 border-red-200 dark:border-red-500/30'
               : 'bg-green-50 dark:bg-green-500/10 border-green-200 dark:border-green-500/30'
           }`}>
-            <h3 className={`font-bold mb-4 ${
+            <h2 className={`font-bold mb-4 ${
               ergebnis.rentenluecke > 0
                 ? 'text-red-800 dark:text-red-300'
                 : 'text-green-800 dark:text-green-300'
             }`}>
               Rentenlücke
-            </h3>
+            </h2>
 
             {/* Balkendiagramm */}
             <div className="mb-4">

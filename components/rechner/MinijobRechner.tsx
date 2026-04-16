@@ -64,10 +64,10 @@ export default function MinijobRechner() {
     <div>
       {/* === 1: Verdienst === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Monatlicher Verdienst
-        </h3>
+        </h2>
         <NummerEingabe value={verdienst} onChange={setVerdienst} placeholder="538" einheit="€" />
         <div className="flex flex-wrap gap-2 mt-2">
           {SCHNELLWAHL.map(v => (
@@ -87,10 +87,10 @@ export default function MinijobRechner() {
 
       {/* === 2: Art === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
           Art des Minijobs
-        </h3>
+        </h2>
         <div className="flex gap-2">
           {([['gewerblich', '🏢 Gewerblich'], ['privathaushalt', '🏡 Privathaushalt']] as const).map(([val, label]) => (
             <button
@@ -106,10 +106,10 @@ export default function MinijobRechner() {
 
       {/* === 3: RV-Pflicht === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
           Rentenversicherungspflicht
-        </h3>
+        </h2>
         <div className="flex flex-col sm:flex-row gap-2">
           {([
             [true, 'Ja (Standard seit 2013)'],
@@ -131,10 +131,10 @@ export default function MinijobRechner() {
 
       {/* === 4: Stunden === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">4</span>
           Stunden pro Woche <span className="text-xs font-normal text-gray-500">(optional)</span>
-        </h3>
+        </h2>
         <NummerEingabe value={stunden} onChange={setStunden} placeholder="z.B. 10" einheit="Std." />
       </div>
 
@@ -166,7 +166,7 @@ export default function MinijobRechner() {
       {/* Aufschlüsselung AN/AG */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
         <div className="px-4 pt-4 pb-1">
-          <h3 className="font-bold text-gray-700 dark:text-gray-200">Aufschlüsselung</h3>
+          <h2 className="font-bold text-gray-700 dark:text-gray-200">Aufschlüsselung</h2>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
@@ -245,7 +245,7 @@ export default function MinijobRechner() {
       {ergebnis.status === 'minijob' && (
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
           <div className="px-4 pt-4 pb-1">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200">Vergleich: Mit vs. ohne RV-Befreiung</h3>
+            <h2 className="font-bold text-gray-700 dark:text-gray-200">Vergleich: Mit vs. ohne RV-Befreiung</h2>
           </div>
           <div className="grid grid-cols-2 divide-x divide-gray-100 dark:divide-gray-700">
             <div className={`p-4 ${rvPflicht ? 'bg-primary-50 dark:bg-primary-500/10' : ''}`}>

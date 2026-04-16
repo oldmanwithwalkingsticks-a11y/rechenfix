@@ -234,7 +234,7 @@ export default function AboRechner() {
 
           {/* Tortendiagramm */}
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-xl p-4 mb-6">
-            <h3 className="font-bold text-sm text-gray-700 dark:text-gray-300 mb-4">📊 Anteile Ihrer Abo-Kosten</h3>
+            <h2 className="font-bold text-sm text-gray-700 dark:text-gray-300 mb-4">📊 Anteile Ihrer Abo-Kosten</h2>
             <div className="flex flex-col sm:flex-row items-center gap-6">
               {renderPie()}
               <div className="flex-1 space-y-1.5 w-full">
@@ -252,7 +252,7 @@ export default function AboRechner() {
 
           {/* Ranking */}
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-xl p-4 mb-6">
-            <h3 className="font-bold text-sm text-gray-700 dark:text-gray-300 mb-3">🏆 Ranking: Teuerstes Abo zuerst</h3>
+            <h2 className="font-bold text-sm text-gray-700 dark:text-gray-300 mb-3">🏆 Ranking: Teuerstes Abo zuerst</h2>
             <div className="space-y-2">
               {ergebnis.ranking.map((a, i) => {
                 const maxBetrag = ergebnis!.ranking[0].betrag;
@@ -280,7 +280,7 @@ export default function AboRechner() {
           {/* Kündigungsempfehlung */}
           {ergebnis.kuendigungsEmpfehlung.length > 0 && (
             <div className="bg-green-50 dark:bg-green-900/15 border border-green-200 dark:border-green-700/30 rounded-xl p-4 mb-6">
-              <h3 className="font-bold text-sm text-green-800 dark:text-green-300 mb-2">💡 Nutzen Sie alle Abos wirklich?</h3>
+              <h2 className="font-bold text-sm text-green-800 dark:text-green-300 mb-2">💡 Nutzen Sie alle Abos wirklich?</h2>
               <p className="text-sm text-green-700 dark:text-green-300">
                 Kündigen Sie{' '}
                 {ergebnis.kuendigungsEmpfehlung.map((a, i) => (
@@ -299,7 +299,7 @@ export default function AboRechner() {
 
           {/* Fun Facts */}
           <div className="bg-blue-50/50 dark:bg-blue-900/10 rounded-xl p-4 mb-6">
-            <h3 className="font-bold text-sm text-blue-800 dark:text-blue-300 mb-2">📋 Wussten Sie schon?</h3>
+            <h2 className="font-bold text-sm text-blue-800 dark:text-blue-300 mb-2">📋 Wussten Sie schon?</h2>
             <ul className="space-y-1.5 text-sm text-gray-700 dark:text-gray-300">
               <li>• Deutsche haben im Schnitt 8–10 laufende Abos gleichzeitig</li>
               <li>• 40 % aller Abos werden selten oder nie genutzt</li>

@@ -147,7 +147,7 @@ export default function AbfindungsRechner() {
 
           {/* Aufschlüsselung */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Aufschlüsselung (Fünftelregelung)</h3>
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Aufschlüsselung (Fünftelregelung)</h2>
             <div className="space-y-3">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Brutto-Abfindung</span>
@@ -176,7 +176,7 @@ export default function AbfindungsRechner() {
 
           {/* Vergleichsbox */}
           <div className="bg-green-50 dark:bg-green-500/10 border border-green-200 dark:border-green-500/30 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-green-800 dark:text-green-300 mb-4">Vergleich: Fünftelregelung vs. Normalbesteuerung</h3>
+            <h2 className="font-bold text-green-800 dark:text-green-300 mb-4">Vergleich: Fünftelregelung vs. Normalbesteuerung</h2>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
@@ -218,7 +218,7 @@ export default function AbfindungsRechner() {
 
           {/* Balkendiagramm */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Aufteilung der Brutto-Abfindung</h3>
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Aufteilung der Brutto-Abfindung</h2>
             <div className="h-10 rounded-full overflow-hidden flex">
               <div
                 className="bg-green-400 dark:bg-green-500 transition-all"

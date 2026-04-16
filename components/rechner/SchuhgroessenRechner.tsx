@@ -200,7 +200,7 @@ export default function SchuhgroessenRechner() {
 
       {/* Umrechnungstabelle */}
       <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6 overflow-x-auto">
-        <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Umrechnungstabelle {typ === 'damen' ? 'Damen' : typ === 'herren' ? 'Herren' : 'Kinder'}</h3>
+        <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Umrechnungstabelle {typ === 'damen' ? 'Damen' : typ === 'herren' ? 'Herren' : 'Kinder'}</h2>
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-gray-200 dark:border-gray-600">

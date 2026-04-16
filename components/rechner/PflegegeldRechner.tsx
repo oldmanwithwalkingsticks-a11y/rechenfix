@@ -46,10 +46,10 @@ export default function PflegegeldRechner() {
     <div>
       {/* === 1: Pflegegrad === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Pflegegrad
-        </h3>
+        </h2>
         <div className="grid grid-cols-5 gap-2">
           {([1, 2, 3, 4, 5] as const).map(n => (
             <button
@@ -69,10 +69,10 @@ export default function PflegegeldRechner() {
 
       {/* === 2: Pflegeform === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
           Pflegeform
-        </h3>
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {PFLEGEFORM_OPTIONEN.map(opt => (
             <button
@@ -90,10 +90,10 @@ export default function PflegegeldRechner() {
       {/* === 3: Anteil Pflegedienst (nur bei Kombination) === */}
       {pflegeform === 'kombination' && (
         <div className="mb-6">
-          <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+          <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
             <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
             Anteil Pflegedienst
-          </h3>
+          </h2>
           <div className="space-y-2">
             <input
               type="range"
@@ -140,7 +140,7 @@ export default function PflegegeldRechner() {
       {/* Kombinations-Visualisierung */}
       {pflegeform === 'kombination' && ergebnis.pflegesachleistungVoll > 0 && (
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-6">
-          <h3 className="font-bold text-gray-700 dark:text-gray-200 text-sm mb-3">🤝 Kombinationsleistung aufgeteilt</h3>
+          <h2 className="font-bold text-gray-700 dark:text-gray-200 text-sm mb-3">🤝 Kombinationsleistung aufgeteilt</h2>
           <div className="flex h-8 rounded-lg overflow-hidden mb-3">
             <div
               className="bg-blue-500 flex items-center justify-center text-white text-xs font-semibold"
@@ -173,7 +173,7 @@ export default function PflegegeldRechner() {
       {/* Leistungsübersicht aktueller Grad */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
         <div className="px-4 pt-4 pb-1">
-          <h3 className="font-bold text-gray-700 dark:text-gray-200">Leistungen bei Pflegegrad {pflegegrad}</h3>
+          <h2 className="font-bold text-gray-700 dark:text-gray-200">Leistungen bei Pflegegrad {pflegegrad}</h2>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
@@ -239,7 +239,7 @@ export default function PflegegeldRechner() {
       {/* Vergleichstabelle alle Pflegegrade */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
         <div className="px-4 pt-4 pb-1">
-          <h3 className="font-bold text-gray-700 dark:text-gray-200">Leistungsübersicht aller Pflegegrade 2026</h3>
+          <h2 className="font-bold text-gray-700 dark:text-gray-200">Leistungsübersicht aller Pflegegrade 2026</h2>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">

@@ -193,7 +193,7 @@ export default function PhotovoltaikRechner() {
 
       {/* Ertrags-Übersicht */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-4">
-        <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Ertrags-Übersicht (pro Jahr)</h3>
+        <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Ertrags-Übersicht (pro Jahr)</h2>
         <table className="w-full text-sm">
           <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
             <tr><td className="py-1.5 text-gray-600 dark:text-gray-400">PV-Ertrag</td><td className="py-1.5 text-right font-medium">{fmt(ergebnis.nettoErtrag)} kWh</td></tr>
@@ -206,7 +206,7 @@ export default function PhotovoltaikRechner() {
 
       {/* Finanz-Übersicht */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-4">
-        <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Finanz-Übersicht</h3>
+        <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Finanz-Übersicht</h2>
         <table className="w-full text-sm">
           <thead>
             <tr className="text-xs text-gray-500">

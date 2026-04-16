@@ -43,7 +43,7 @@ export default function Footer() {
 
           {/* Beliebte Rechner */}
           <div>
-            <h3 className="font-bold text-sm uppercase tracking-wider mb-3 text-primary-100">Beliebte Rechner</h3>
+            <h2 className="font-bold text-sm uppercase tracking-wider mb-3 text-primary-100">Beliebte Rechner</h2>
             <ul className="space-y-2">
               {beliebteRechner.map(r => r && (
                 <li key={r.slug}>
@@ -70,7 +70,7 @@ export default function Footer() {
 
           {/* Kategorien */}
           <div>
-            <h3 className="font-bold text-sm uppercase tracking-wider mb-3 text-primary-100">Kategorien</h3>
+            <h2 className="font-bold text-sm uppercase tracking-wider mb-3 text-primary-100">Kategorien</h2>
             <table className="border-separate" style={{ borderSpacing: '0 0.35rem' }}>
               <tbody>
                 {kategorien.map(k => {
@@ -94,7 +94,7 @@ export default function Footer() {
           {/* Rechtliches & Mehr */}
           <div className="flex flex-col gap-6">
             <div>
-              <h3 className="font-bold text-sm uppercase tracking-wider mb-3 text-primary-100">Rechtliches</h3>
+              <h2 className="font-bold text-sm uppercase tracking-wider mb-3 text-primary-100">Rechtliches</h2>
               <ul className="space-y-2">
                 <li>
                   <Link href="/impressum" className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm">
@@ -117,7 +117,7 @@ export default function Footer() {
               </ul>
             </div>
             <div>
-              <h3 className="font-bold text-sm uppercase tracking-wider mb-3 text-primary-100">Mehr</h3>
+              <h2 className="font-bold text-sm uppercase tracking-wider mb-3 text-primary-100">Mehr</h2>
               <ul className="space-y-2">
                 <li>
                   <Link href="/ueber-uns" className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm">

@@ -35,10 +35,10 @@ export default function KindergeldRechner() {
     <div>
       {/* === 1: Anzahl Kinder === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Anzahl der Kinder
-        </h3>
+        </h2>
         <div className="flex gap-2 flex-wrap">
           {[1, 2, 3, 4, 5].map(n => (
             <button
@@ -57,10 +57,10 @@ export default function KindergeldRechner() {
 
       {/* === 2: Einkommen === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
           Jahresbruttoeinkommen
-        </h3>
+        </h2>
         <NummerEingabe value={brutto} onChange={setBrutto} placeholder="60.000" einheit="€/Jahr" />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
           Gesamtes Brutto der Eltern (bei Zusammenveranlagung beide zusammen)
@@ -69,10 +69,10 @@ export default function KindergeldRechner() {
 
       {/* === 3: Veranlagung === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
           Veranlagung
-        </h3>
+        </h2>
         <div className="flex gap-2">
           {([['zusammen', '👫 Zusammenveranlagung'], ['einzeln', '👤 Einzelveranlagung']] as const).map(([val, label]) => (
             <button
@@ -91,10 +91,10 @@ export default function KindergeldRechner() {
 
       {/* === 4: Kirchensteuer === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">4</span>
           Kirchensteuer
-        </h3>
+        </h2>
         <div className="flex gap-2">
           {([false, true] as const).map(val => (
             <button
@@ -129,9 +129,9 @@ export default function KindergeldRechner() {
 
           {/* Günstigerprüfung */}
           <div className={`border-2 rounded-xl p-5 mb-6 ${ergebnis.gewinner === 'freibetrag' ? 'bg-purple-50 dark:bg-purple-500/10 border-purple-300 dark:border-purple-500/40' : 'bg-green-50 dark:bg-green-500/10 border-green-300 dark:border-green-500/40'}`}>
-            <h3 className="font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+            <h2 className="font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
               ⚖️ Günstigerprüfung: Kindergeld vs. Kinderfreibetrag
-            </h3>
+            </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
               <div className={`rounded-xl p-4 ${ergebnis.gewinner === 'kindergeld' ? 'bg-white dark:bg-gray-800 border-2 border-green-500' : 'bg-white/50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700'}`}>
                 <div className="flex items-center justify-between mb-1">
@@ -173,7 +173,7 @@ export default function KindergeldRechner() {
           {/* Steuerberechnung Detail */}
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
             <div className="px-4 pt-4 pb-1">
-              <h3 className="font-bold text-gray-700 dark:text-gray-200">Steuerberechnung im Detail</h3>
+              <h2 className="font-bold text-gray-700 dark:text-gray-200">Steuerberechnung im Detail</h2>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
@@ -221,7 +221,7 @@ export default function KindergeldRechner() {
           {/* Kindergeld-Übersicht */}
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
             <div className="px-4 pt-4 pb-1">
-              <h3 className="font-bold text-gray-700 dark:text-gray-200">Kindergeld-Übersicht 2026</h3>
+              <h2 className="font-bold text-gray-700 dark:text-gray-200">Kindergeld-Übersicht 2026</h2>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">

@@ -187,7 +187,7 @@ export default function AlkoholAbbauRechner() {
       </div>
 
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-4">
-        <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Wann bin ich wieder nüchtern?</h3>
+        <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Wann bin ich wieder nüchtern?</h2>
         <div className="space-y-2 text-sm">
           {ergebnis.promilleMax > 0.5 && (
             <div className="flex justify-between">

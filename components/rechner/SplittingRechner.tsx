@@ -167,7 +167,7 @@ export default function SplittingRechner() {
 
           {/* Splitting-Visualisierung */}
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-4">So funktioniert das Splitting</h3>
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">So funktioniert das Splitting</h2>
             <div className="flex flex-col sm:flex-row items-center gap-3 text-sm">
               <div className="bg-blue-50 dark:bg-blue-500/10 rounded-lg p-3 text-center flex-1 w-full">
                 <p className="text-xs text-blue-600 dark:text-blue-400 mb-1">Partner 1</p>
@@ -192,7 +192,7 @@ export default function SplittingRechner() {
           {/* Vergleichstabelle */}
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
             <div className="px-5 pt-4 pb-2">
-              <h3 className="font-bold text-gray-700 dark:text-gray-200">Vergleich: Einzel- vs. Zusammenveranlagung</h3>
+              <h2 className="font-bold text-gray-700 dark:text-gray-200">Vergleich: Einzel- vs. Zusammenveranlagung</h2>
             </div>
             <table className="w-full text-sm">
               <thead>
@@ -229,7 +229,7 @@ export default function SplittingRechner() {
 
           {/* Balkenvergleich */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Steuerlast im Vergleich</h3>
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Steuerlast im Vergleich</h2>
             <div className="space-y-3">
               <div>
                 <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">
@@ -267,9 +267,9 @@ export default function SplittingRechner() {
 
           {/* Steuerklassen-Empfehlung */}
           <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-blue-800 dark:text-blue-300 mb-2">
+            <h2 className="font-bold text-blue-800 dark:text-blue-300 mb-2">
               💡 Empfohlene Steuerklassenkombination: <span className="text-blue-600 dark:text-blue-200">{ergebnis.empfehlung}</span>
-            </h3>
+            </h2>
             <p className="text-blue-700 dark:text-blue-400 text-sm">
               {ergebnis.empfehlungText}
             </p>

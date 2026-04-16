@@ -38,19 +38,19 @@ export default function IndexmieteRechner() {
     <div>
       {/* === 1: Kaltmiete === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Aktuelle Kaltmiete
-        </h3>
+        </h2>
         <NummerEingabe value={kaltmiete} onChange={setKaltmiete} placeholder="800" einheit="€/Monat" />
       </div>
 
       {/* === 2: VPI alt === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
           VPI bei Vertragsabschluss / letzter Anpassung
-        </h3>
+        </h2>
         <NummerEingabe value={vpiAlt} onChange={setVpiAlt} placeholder="117,4" einheit="Punkte" />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
           Steht in Ihrem Mietvertrag oder der letzten Anpassungsmitteilung. VPI-Werte finden Sie beim Statistischen Bundesamt (destatis.de).
@@ -59,10 +59,10 @@ export default function IndexmieteRechner() {
 
       {/* === 3: VPI neu === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
           Aktueller VPI
-        </h3>
+        </h2>
         <NummerEingabe value={vpiNeu} onChange={setVpiNeu} placeholder="127,8" einheit="Punkte" />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
           Aktuellen Wert prüfen auf destatis.de → Verbraucherpreisindex (Basisjahr 2020 = 100).
@@ -71,10 +71,10 @@ export default function IndexmieteRechner() {
 
       {/* === 4: Datum letzte Anpassung === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">4</span>
           Datum der letzten Anpassung
-        </h3>
+        </h2>
         <input
           type="date"
           value={datumLetzteAnpassung}
@@ -96,7 +96,7 @@ export default function IndexmieteRechner() {
       {/* Aufschlüsselung */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
         <div className="px-4 pt-4 pb-1">
-          <h3 className="font-bold text-gray-700 dark:text-gray-200">Berechnung im Detail</h3>
+          <h2 className="font-bold text-gray-700 dark:text-gray-200">Berechnung im Detail</h2>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">

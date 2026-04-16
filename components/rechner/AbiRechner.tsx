@@ -193,7 +193,7 @@ export default function AbiRechner() {
 
       {/* Punkte-Noten-Tabelle */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-6">
-        <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Punkte-Noten-Tabelle</h3>
+        <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Punkte-Noten-Tabelle</h2>
         <div className="grid grid-cols-4 sm:grid-cols-8 gap-2 text-xs">
           {PUNKTE_NOTEN.map(pn => (
             <div key={pn.p} className="text-center bg-gray-50 dark:bg-gray-900 rounded-lg p-2">

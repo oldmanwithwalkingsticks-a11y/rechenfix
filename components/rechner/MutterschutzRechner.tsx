@@ -174,7 +174,7 @@ export default function MutterschutzRechner() {
 
           {/* Fristen-Übersicht */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Fristen-Übersicht</h3>
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Fristen-Übersicht</h2>
             <div className="space-y-3">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Mutterschutz-Beginn</span>
@@ -207,7 +207,7 @@ export default function MutterschutzRechner() {
 
           {/* Mutterschaftsgeld */}
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Mutterschaftsgeld</h3>
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Mutterschaftsgeld</h2>
             {beschaeftigung !== 'selbststaendig' && (
               <div className="space-y-3">
                 <div className="flex justify-between text-sm">
@@ -244,7 +244,7 @@ export default function MutterschutzRechner() {
 
           {/* Wichtige Termine */}
           <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-blue-800 dark:text-blue-300 mb-3">Wichtige Termine</h3>
+            <h2 className="font-bold text-blue-800 dark:text-blue-300 mb-3">Wichtige Termine</h2>
             <div className="space-y-2 text-sm text-blue-800 dark:text-blue-300">
               <div className="flex gap-3">
                 <span className="font-semibold flex-shrink-0 w-44">Arbeitgeber informieren:</span>

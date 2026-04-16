@@ -157,7 +157,7 @@ export default function MalerkostenRechner() {
       </div>
 
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-4">
-        <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Kostenaufschlüsselung</h3>
+        <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Kostenaufschlüsselung</h2>
         <div className="space-y-1.5 text-sm">
           <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Farbe ({ergebnis.farbeLiter} l × {FARBE_PREIS[qualitaet]} €)</span><span className="font-medium">{fmtEur(ergebnis.farbeKosten)}</span></div>
           <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Abdeckmaterial (Folie, Kreppband)</span><span className="font-medium">15 €</span></div>
@@ -180,7 +180,7 @@ export default function MalerkostenRechner() {
       </div>
 
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-4">
-        <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">🛒 Einkaufsliste</h3>
+        <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">🛒 Einkaufsliste</h2>
         <ul className="text-sm space-y-1 list-disc pl-5 text-gray-700 dark:text-gray-300">
           <li>{ergebnis.farbeLiter} Liter Wandfarbe ({FARBE_LABEL[qualitaet]})</li>
           <li>Abdeckfolie (ca. 20 m²)</li>

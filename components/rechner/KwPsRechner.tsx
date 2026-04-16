@@ -109,7 +109,7 @@ export default function KwPsRechner() {
 
       {/* Umrechnungstabelle */}
       <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5">
-        <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Umrechnungstabelle kW ↔ PS</h3>
+        <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Umrechnungstabelle kW ↔ PS</h2>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>

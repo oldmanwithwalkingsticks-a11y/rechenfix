@@ -107,7 +107,7 @@ export default function SpritkostenRechner() {
 
           {/* Details */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Aufschlüsselung</h3>
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Aufschlüsselung</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="bg-white dark:bg-gray-600/50 rounded-lg p-4 text-center">
                 <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Benzinverbrauch</p>

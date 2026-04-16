@@ -129,7 +129,7 @@ export default function DachflaechenRechner() {
       </div>
 
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-4">
-        <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Materialbedarf (Richtwerte)</h3>
+        <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Materialbedarf (Richtwerte)</h2>
         <div className="space-y-1.5 text-sm">
           <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Dachziegel (ca. 12/m² + 5 %)</span><span className="font-medium">{fmt0(ergebnis.anzahlZiegel)} Stück</span></div>
           <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Dachlatten (ca. 3,3 lfm/m²)</span><span className="font-medium">{fmt0(ergebnis.dachlatten)} lfm</span></div>
@@ -138,7 +138,7 @@ export default function DachflaechenRechner() {
       </div>
 
       <div className="bg-primary-50 dark:bg-primary-500/10 border border-primary-200 dark:border-primary-500/30 rounded-xl p-4 mb-4">
-        <h3 className="font-bold text-primary-700 dark:text-primary-300 mb-3 text-sm">☀️ PV-Potenzial (geschätzt)</h3>
+        <h2 className="font-bold text-primary-700 dark:text-primary-300 mb-3 text-sm">☀️ PV-Potenzial (geschätzt)</h2>
         <div className="space-y-1.5 text-sm">
           <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Max. Anlagengröße</span><span className="font-medium">{fmt(ergebnis.kwpMax, 1)} kWp</span></div>
           <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Erwarteter Jahresertrag</span><span className="font-medium">{fmt0(ergebnis.ertragKWh)} kWh</span></div>

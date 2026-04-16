@@ -140,7 +140,7 @@ export default function KalorienRechner() {
 
           {/* Aufschlüsselung */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Aufschlüsselung</h3>
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Aufschlüsselung</h2>
             <div className="space-y-3">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Grundumsatz (Ruhe)</span>
@@ -200,7 +200,7 @@ export default function KalorienRechner() {
 
           {/* Makronährstoff-Verteilung */}
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Makronährstoff-Verteilung</h3>
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Makronährstoff-Verteilung</h2>
             <div className="space-y-3">
               {/* Protein */}
               <div>

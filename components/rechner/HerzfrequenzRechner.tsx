@@ -103,7 +103,7 @@ export default function HerzfrequenzRechner() {
 
       {/* Zonen */}
       <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
-        <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Trainingszonen</h3>
+        <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Trainingszonen</h2>
         <div className="space-y-3">
           {ergebnis.zonen.map((z, i) => (
             <div key={z.name}>

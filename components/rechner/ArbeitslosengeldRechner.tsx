@@ -98,19 +98,19 @@ export default function ArbeitslosengeldRechner() {
     <div>
       {/* 1: Brutto */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Letztes Monatsbrutto
-        </h3>
+        </h2>
         <NummerEingabe value={brutto} onChange={setBrutto} placeholder="3500" einheit="€" />
       </div>
 
       {/* 2: Steuerklasse */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
           Steuerklasse
-        </h3>
+        </h2>
         <div className="flex flex-wrap gap-2">
           {(['I', 'II', 'III', 'IV', 'V', 'VI'] as const).map(k => (
             <button
@@ -126,10 +126,10 @@ export default function ArbeitslosengeldRechner() {
 
       {/* 3: Mit Kind */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
           Kinder
-        </h3>
+        </h2>
         <div className="flex gap-2">
           {([
             [true, 'Mit Kind (67 %)'],
@@ -148,19 +148,19 @@ export default function ArbeitslosengeldRechner() {
 
       {/* 4: Alter */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">4</span>
           Alter bei Arbeitslosmeldung
-        </h3>
+        </h2>
         <NummerEingabe value={alter} onChange={setAlter} placeholder="40" einheit="Jahre" />
       </div>
 
       {/* 5: Beschäftigungsdauer */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">5</span>
           Beschäftigungsdauer (letzte 5 Jahre)
-        </h3>
+        </h2>
         <select
           value={beschDauer}
           onChange={e => setBeschDauer(e.target.value)}
@@ -174,10 +174,10 @@ export default function ArbeitslosengeldRechner() {
 
       {/* 6: Kirchensteuer */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">6</span>
           Kirchensteuer
-        </h3>
+        </h2>
         <div className="flex gap-2">
           {([[true, 'Ja'], [false, 'Nein']] as const).map(([val, label]) => (
             <button
@@ -211,7 +211,7 @@ export default function ArbeitslosengeldRechner() {
       {/* Vergleich & Bezugsdauer */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
         <div className="px-4 pt-4 pb-1">
-          <h3 className="font-bold text-gray-700 dark:text-gray-200">Vergleich letztes Netto vs. ALG I</h3>
+          <h2 className="font-bold text-gray-700 dark:text-gray-200">Vergleich letztes Netto vs. ALG I</h2>
         </div>
         <table className="w-full text-sm">
           <tbody className="divide-y divide-gray-100 dark:divide-gray-700">

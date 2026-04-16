@@ -134,7 +134,7 @@ export default function GehaltsvergleichRechner() {
 
           {/* Perzentil-Leiste */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-1 text-sm">Ihre Position in der Gehaltsverteilung</h3>
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-1 text-sm">Ihre Position in der Gehaltsverteilung</h2>
             <PerzentilBar perzentil={ergebnis.perzentil} />
           </div>
 

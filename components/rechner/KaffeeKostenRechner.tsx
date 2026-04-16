@@ -176,7 +176,7 @@ export default function KaffeeKostenRechner() {
           {/* Spar-Vergleiche */}
           {ergebnis.sparVergleiche.length > 0 && (
             <div className="bg-green-50 dark:bg-green-900/15 border border-green-200 dark:border-green-700/30 rounded-xl p-4 mb-6">
-              <h3 className="font-bold text-sm text-green-800 dark:text-green-300 mb-3">💡 So können Sie sparen</h3>
+              <h2 className="font-bold text-sm text-green-800 dark:text-green-300 mb-3">💡 So können Sie sparen</h2>
               <div className="space-y-2">
                 {ergebnis.sparVergleiche.map((v, i) => (
                   <div key={i} className="flex items-center justify-between bg-white dark:bg-gray-800 rounded-lg p-3">
@@ -195,9 +195,9 @@ export default function KaffeeKostenRechner() {
           {/* Was man dafür kaufen könnte */}
           {ergebnis.vergleiche.length > 0 && (
             <div className="mb-6">
-              <h3 className="font-bold text-sm text-gray-700 dark:text-gray-300 mb-3">
+              <h2 className="font-bold text-sm text-gray-700 dark:text-gray-300 mb-3">
                 Was Sie in 30 Jahren dafür kaufen könnten
-              </h3>
+              </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 {ergebnis.vergleiche.map((v, i) => (
                   <div key={i} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-xl p-3 text-center">
@@ -212,7 +212,7 @@ export default function KaffeeKostenRechner() {
 
           {/* Fun Facts */}
           <div className="bg-amber-50/50 dark:bg-amber-900/10 rounded-xl p-4 mb-6">
-            <h3 className="font-bold text-sm text-amber-800 dark:text-amber-300 mb-2">☕ Wussten Sie schon?</h3>
+            <h2 className="font-bold text-sm text-amber-800 dark:text-amber-300 mb-2">☕ Wussten Sie schon?</h2>
             <ul className="space-y-1.5 text-sm text-gray-700 dark:text-gray-300">
               <li>• Deutschland ist Europas größter Kaffeemarkt — 164 Liter pro Kopf/Jahr</li>
               <li>• Der durchschnittliche Deutsche trinkt 3,4 Tassen Kaffee pro Tag</li>

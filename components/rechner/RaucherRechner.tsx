@@ -152,7 +152,7 @@ export default function RaucherRechner() {
 
           {/* Zukunft */}
           <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-5">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Blick in die Zukunft</h3>
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Blick in die Zukunft</h2>
             <div className="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700">
               <span className="text-gray-600 dark:text-gray-400">In den n&auml;chsten 10 Jahren</span>
               <span className="font-bold text-red-600 dark:text-red-400 text-lg">{formatEuro(ergebnis.kostenNaechste10Jahre)} €</span>
@@ -169,9 +169,9 @@ export default function RaucherRechner() {
 
           {/* Was Sie dafür kaufen könnten */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
               Daf&uuml;r k&ouml;nnten Sie kaufen:
-            </h3>
+            </h2>
             <div className={`grid grid-cols-1 ${ergebnis.reichtFuerKleinwagen ? 'sm:grid-cols-3' : 'sm:grid-cols-2'} gap-3`}>
               <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700/30 rounded-xl p-4 text-center transition-transform hover:-translate-y-0.5">
                 <span className="text-3xl">✈️</span>
@@ -195,7 +195,7 @@ export default function RaucherRechner() {
 
           {/* Investment-Vergleich */}
           <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border border-green-200 dark:border-green-700/30 rounded-xl p-5">
-            <h3 className="text-lg font-semibold text-green-800 dark:text-green-300 mb-2">📈 Was w&auml;re, wenn&hellip;</h3>
+            <h2 className="text-lg font-semibold text-green-800 dark:text-green-300 mb-2">📈 Was w&auml;re, wenn&hellip;</h2>
             <p className="text-gray-700 dark:text-gray-300">
               H&auml;tten Sie das Geld statt in Zigaretten mit <strong>5 % Rendite</strong> angelegt, h&auml;tten Sie heute:
             </p>

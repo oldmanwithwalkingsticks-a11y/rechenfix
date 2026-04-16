@@ -214,7 +214,7 @@ export default function GeburtsterminRechner() {
 
           {/* Fortschrittsbalken */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Schwangerschaftsfortschritt</h3>
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Schwangerschaftsfortschritt</h2>
             <div className="relative h-6 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden mb-2">
               {/* Trimester-Segmente */}
               <div className="absolute inset-0 flex">
@@ -259,7 +259,7 @@ export default function GeburtsterminRechner() {
           {/* Meilenstein-Timeline */}
           {!ergebnis.terminVerstrichen && (
             <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6">
-              <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Wichtige Meilensteine</h3>
+              <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Wichtige Meilensteine</h2>
               <div className="relative">
                 {/* Vertikale Linie */}
                 <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-600" />

@@ -148,9 +148,9 @@ export default function SchlafRechner() {
 
           {/* Schlafzyklen-Erklärung */}
           <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-700/30 rounded-xl p-5">
-            <h3 className="font-bold text-indigo-800 dark:text-indigo-300 text-sm mb-2 flex items-center gap-2">
+            <h2 className="font-bold text-indigo-800 dark:text-indigo-300 text-sm mb-2 flex items-center gap-2">
               <span>🔄</span> Was sind Schlafzyklen?
-            </h3>
+            </h2>
             <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
               Ein Schlafzyklus dauert ca. <strong>90 Minuten</strong> und besteht aus Leichtschlaf, Tiefschlaf und REM-Schlaf (Traumphase).
               Zwischen zwei Zyklen werden Sie kurz fast wach — der ideale Aufwachzeitpunkt. Mitten im Tiefschlaf geweckt zu werden, fühlt sich dagegen besonders müde an.
@@ -161,9 +161,9 @@ export default function SchlafRechner() {
           {/* Empfehlung nach Alter */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl p-5">
-              <h3 className="font-bold text-gray-700 dark:text-gray-200 text-sm mb-3 flex items-center gap-2">
+              <h2 className="font-bold text-gray-700 dark:text-gray-200 text-sm mb-3 flex items-center gap-2">
                 <span>👤</span> Ihre Empfehlung ({empfohlen.label})
-              </h3>
+              </h2>
               <div className="text-center">
                 <p className="text-3xl font-extrabold text-indigo-600 dark:text-indigo-400">
                   {empfohlen.min}–{empfohlen.max} Stunden
@@ -191,9 +191,9 @@ export default function SchlafRechner() {
             </div>
 
             <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl p-5">
-              <h3 className="font-bold text-gray-700 dark:text-gray-200 text-sm mb-3 flex items-center gap-2">
+              <h2 className="font-bold text-gray-700 dark:text-gray-200 text-sm mb-3 flex items-center gap-2">
                 <span>🌍</span> Wussten Sie schon?
-              </h3>
+              </h2>
               <ul className="space-y-2.5 text-sm text-gray-600 dark:text-gray-400">
                 <li className="flex items-start gap-2">
                   <span className="text-lg leading-tight">🛏️</span>

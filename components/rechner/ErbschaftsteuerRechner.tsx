@@ -53,10 +53,10 @@ export default function ErbschaftsteuerRechner() {
     <div>
       {/* === 1: Erwerbsart === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Art des Erwerbs
-        </h3>
+        </h2>
         <div className="flex gap-2">
           {([['erbschaft', '⚱️ Erbschaft'], ['schenkung', '🎁 Schenkung']] as const).map(([val, label]) => (
             <button
@@ -72,19 +72,19 @@ export default function ErbschaftsteuerRechner() {
 
       {/* === 2: Wert === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
           Wert der {erwerbsart === 'erbschaft' ? 'Erbschaft' : 'Schenkung'}
-        </h3>
+        </h2>
         <NummerEingabe value={wert} onChange={setWert} placeholder="300.000" einheit="€" />
       </div>
 
       {/* === 3: Verwandtschaft === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
           Verwandtschaftsgrad
-        </h3>
+        </h2>
         <select
           value={verwandtschaft}
           onChange={e => setVerwandtschaft(e.target.value as Verwandtschaft)}
@@ -98,10 +98,10 @@ export default function ErbschaftsteuerRechner() {
 
       {/* === 4: Vorschenkungen === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">4</span>
           Vorherige Schenkungen (letzte 10 Jahre)
-        </h3>
+        </h2>
         <NummerEingabe value={vorschenkungen} onChange={setVorschenkungen} placeholder="0" einheit="€" />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
           Schenkungen innerhalb von 10 Jahren werden mit der aktuellen Erbschaft zusammengerechnet und verringern den Freibetrag.
@@ -110,10 +110,10 @@ export default function ErbschaftsteuerRechner() {
 
       {/* === 5: Immobilie === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">5</span>
           Selbstgenutzte Immobilie enthalten?
-        </h3>
+        </h2>
         <div className="flex gap-2">
           {([false, true] as const).map(val => (
             <button
@@ -159,7 +159,7 @@ export default function ErbschaftsteuerRechner() {
       {/* Aufschlüsselung */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
         <div className="px-4 pt-4 pb-1">
-          <h3 className="font-bold text-gray-700 dark:text-gray-200">Berechnung im Detail</h3>
+          <h2 className="font-bold text-gray-700 dark:text-gray-200">Berechnung im Detail</h2>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
@@ -228,7 +228,7 @@ export default function ErbschaftsteuerRechner() {
       {/* Freibeträge-Übersicht */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
         <div className="px-4 pt-4 pb-1">
-          <h3 className="font-bold text-gray-700 dark:text-gray-200">Freibeträge-Übersicht (§ 16 ErbStG)</h3>
+          <h2 className="font-bold text-gray-700 dark:text-gray-200">Freibeträge-Übersicht (§ 16 ErbStG)</h2>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">

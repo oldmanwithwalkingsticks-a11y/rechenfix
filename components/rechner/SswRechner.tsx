@@ -29,10 +29,10 @@ export default function SswRechner() {
     <div>
       {/* Methode */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Berechnungsmethode
-        </h3>
+        </h2>
         <div className="flex gap-2 flex-wrap">
           {([['periode', '🩸 Letzte Periode'], ['termin', '📅 Errechneter Geburtstermin']] as const).map(([val, label]) => (
             <button
@@ -48,10 +48,10 @@ export default function SswRechner() {
 
       {/* Eingabefelder */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
           Daten
-        </h3>
+        </h2>
 
         {methode === 'periode' ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -158,11 +158,11 @@ export default function SswRechner() {
           {/* Baby-Entwicklung & Größenvergleich */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
             <div className="bg-pink-50 dark:bg-pink-500/10 border border-pink-200 dark:border-pink-500/30 rounded-xl p-4">
-              <h3 className="font-bold text-pink-800 dark:text-pink-300 text-sm mb-2">👶 Baby-Entwicklung</h3>
+              <h2 className="font-bold text-pink-800 dark:text-pink-300 text-sm mb-2">👶 Baby-Entwicklung</h2>
               <p className="text-sm text-pink-900/80 dark:text-pink-200/80">{ergebnis.entwicklung}</p>
             </div>
             <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4">
-              <h3 className="font-bold text-amber-800 dark:text-amber-300 text-sm mb-2">🍎 Größenvergleich</h3>
+              <h2 className="font-bold text-amber-800 dark:text-amber-300 text-sm mb-2">🍎 Größenvergleich</h2>
               <p className="text-sm text-amber-900/80 dark:text-amber-200/80">
                 Ihr Baby ist jetzt etwa so groß wie eine <strong>{ergebnis.groessenvergleich}</strong>.
               </p>
@@ -173,7 +173,7 @@ export default function SswRechner() {
           {/* Wichtige Termine */}
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
             <div className="px-4 pt-4 pb-1">
-              <h3 className="font-bold text-gray-700 dark:text-gray-200">📅 Wichtige Termine</h3>
+              <h2 className="font-bold text-gray-700 dark:text-gray-200">📅 Wichtige Termine</h2>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">

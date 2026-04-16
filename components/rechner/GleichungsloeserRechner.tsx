@@ -161,7 +161,7 @@ export default function GleichungsloeserRechner() {
               </div>
 
               <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
-                <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Rechenweg</h3>
+                <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Rechenweg</h2>
                 <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300 tabular-nums">
                   <p><strong>1.</strong> {fmt(linErgebnis.na)}x {fmtSigned(linErgebnis.nb)} = {fmt(linErgebnis.nc)}</p>
                   <p><strong>2.</strong> {fmt(linErgebnis.na)}x = {fmt(linErgebnis.nc)} {fmtSigned(-linErgebnis.nb)} = {fmt(linErgebnis.nc - linErgebnis.nb)} <span className="text-gray-500"> | {linErgebnis.nb >= 0 ? '−' : '+'} {fmt(Math.abs(linErgebnis.nb))}</span></p>
@@ -227,7 +227,7 @@ export default function GleichungsloeserRechner() {
           {!quadErgebnis.fehler && (
             <>
               <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
-                <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Rechenweg (Mitternachtsformel)</h3>
+                <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Rechenweg (Mitternachtsformel)</h2>
                 <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300 tabular-nums">
                   <p><strong>1.</strong> ax² + bx + c = 0 mit a = {fmt(quadErgebnis.na)}, b = {fmt(quadErgebnis.nb)}, c = {fmt(quadErgebnis.nc)}</p>
                   <p><strong>2.</strong> Diskriminante: D = b² − 4ac = {fmt(quadErgebnis.nb * quadErgebnis.nb)} − {fmt(4 * quadErgebnis.na * quadErgebnis.nc)} = <strong>{fmt(quadErgebnis.D)}</strong></p>
@@ -259,7 +259,7 @@ export default function GleichungsloeserRechner() {
               {/* Parabel-Grafik */}
               {svgParabel && (
                 <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
-                  <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Parabel</h3>
+                  <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Parabel</h2>
                   <div className="flex justify-center">
                     <svg viewBox={`-20 -10 ${svgParabel.W + 40} ${svgParabel.H + 30}`} className="w-full max-w-md h-auto">
                       {/* Achsen */}

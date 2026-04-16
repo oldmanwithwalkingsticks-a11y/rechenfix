@@ -63,19 +63,19 @@ export default function WaermepumpeRechner() {
     <div>
       {/* === 1: Wohnfläche === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Wohnfläche
-        </h3>
+        </h2>
         <NummerEingabe value={wohnflaeche} onChange={setWohnflaeche} placeholder="120" einheit="m²" />
       </div>
 
       {/* === 2: Dämmstandard === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
           Baujahr / Dämmstandard
-        </h3>
+        </h2>
         <select
           value={daemmstandard}
           onChange={e => setDaemmstandard(e.target.value as Daemmstandard)}
@@ -89,10 +89,10 @@ export default function WaermepumpeRechner() {
 
       {/* === 3: Alte Heizung === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
           Aktuelle Heizung
-        </h3>
+        </h2>
         <select
           value={alteHeizung}
           onChange={e => setAlteHeizung(e.target.value as AlteHeizung)}
@@ -106,10 +106,10 @@ export default function WaermepumpeRechner() {
 
       {/* === 4: Aktuelle Heizkosten === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">4</span>
           Aktuelle jährliche Heizkosten
-        </h3>
+        </h2>
         <div className="flex gap-2 mb-2">
           {([[true, 'Bekannt'], [false, 'Schätzen']] as const).map(([val, label]) => (
             <button
@@ -133,10 +133,10 @@ export default function WaermepumpeRechner() {
 
       {/* === 5: Strompreis === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">5</span>
           Strompreis
-        </h3>
+        </h2>
         <NummerEingabe value={strompreis} onChange={setStrompreis} placeholder="32" einheit="ct/kWh" />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
           Wärmepumpen-Stromtarife sind oft günstiger (25–30 ct/kWh).
@@ -146,20 +146,20 @@ export default function WaermepumpeRechner() {
       {/* === 6: Gaspreis (nur Gas) === */}
       {alteHeizung === 'gas' && (
         <div className="mb-6">
-          <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+          <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
             <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">6</span>
             Gaspreis
-          </h3>
+          </h2>
           <NummerEingabe value={gaspreis} onChange={setGaspreis} placeholder="12" einheit="ct/kWh" />
         </div>
       )}
 
       {/* === 7: Anschaffungskosten === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">7</span>
           Anschaffungskosten Wärmepumpe
-        </h3>
+        </h2>
         <NummerEingabe value={anschaffung} onChange={setAnschaffung} placeholder="30000" einheit="€" />
         <div className="flex flex-wrap gap-2 mt-2">
           {[
@@ -180,10 +180,10 @@ export default function WaermepumpeRechner() {
 
       {/* === 8: Förderung === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">8</span>
           Förderung
-        </h3>
+        </h2>
         <NummerEingabe value={foerderung} onChange={setFoerderung} placeholder="30" einheit="%" />
         <div className="flex flex-wrap gap-2 mt-2">
           {['30', '50', '70'].map(v => (
@@ -203,10 +203,10 @@ export default function WaermepumpeRechner() {
 
       {/* === 9: Betrachtungszeitraum === */}
       <div className="mb-6">
-        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">9</span>
           Betrachtungszeitraum
-        </h3>
+        </h2>
         <div className="flex gap-2">
           {['10', '15', '20', '25'].map(v => (
             <button
@@ -232,7 +232,7 @@ export default function WaermepumpeRechner() {
       {/* Kostenvergleich */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
         <div className="px-4 pt-4 pb-1">
-          <h3 className="font-bold text-gray-700 dark:text-gray-200">Kostenvergleich</h3>
+          <h2 className="font-bold text-gray-700 dark:text-gray-200">Kostenvergleich</h2>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
@@ -278,7 +278,7 @@ export default function WaermepumpeRechner() {
 
       {/* Liniendiagramm */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-6">
-        <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Kumulative Kosten über {jahre} Jahre</h3>
+        <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Kumulative Kosten über {jahre} Jahre</h2>
         <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full h-48" preserveAspectRatio="none">
           <polyline fill="none" stroke="#ef4444" strokeWidth="1.5" points={points(werteAlt)} vectorEffect="non-scaling-stroke" />
           <polyline fill="none" stroke="#10b981" strokeWidth="1.5" points={points(werteWp)} vectorEffect="non-scaling-stroke" />

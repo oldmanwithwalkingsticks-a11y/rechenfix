@@ -196,7 +196,7 @@ export default function ArbeitstageRechner() {
 
       {ergebnis.feiertageListe.length > 0 && (
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-4">
-          <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Berücksichtigte Feiertage</h3>
+          <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Berücksichtigte Feiertage</h2>
           <ul className="text-sm space-y-1">
             {ergebnis.feiertageListe.map((f, i) => (
               <li key={i} className="flex justify-between">

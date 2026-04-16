@@ -73,7 +73,7 @@ export default function SkontoRechner() {
       </div>
 
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-6">
-        <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-2">Detail</h3>
+        <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-2">Detail</h2>
         <div className="space-y-1.5 text-sm text-gray-700 dark:text-gray-300">
           <div className="flex justify-between"><span>Zahlbetrag mit Skonto (bis Tag {skontofrist})</span><span className="tabular-nums">{fmt(ergebnis.zahlbetrag)} €</span></div>
           <div className="flex justify-between"><span>Zahlbetrag ohne Skonto (bis Tag {zahlungsziel})</span><span className="tabular-nums">{fmt(parseDeutscheZahl(betrag))} €</span></div>
