@@ -152,6 +152,7 @@ import FahrradRahmenRechner from '@/components/rechner/FahrradRahmenRechner';
 import TaxiRechner from '@/components/rechner/TaxiRechner';
 import BetonRechner from '@/components/rechner/BetonRechner';
 import EstrichRechner from '@/components/rechner/EstrichRechner';
+import BalkonSolarRechner from '@/components/rechner/BalkonSolarRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -316,6 +317,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'taxi-rechner': TaxiRechner,
   'beton-rechner': BetonRechner,
   'estrich-rechner': EstrichRechner,
+  'balkon-solar-rechner': BalkonSolarRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

@@ -1575,4 +1575,74 @@ Der Rechner kalkuliert mit Durchschnittspreisen. Großmengen im Baustoffhandel s
       },
     ],
   },
+  {
+    slug: 'balkon-solar-rechner',
+    titel: 'Balkon-Solar-Rechner',
+    beschreibung: 'Balkon-Solaranlage berechnen: Ertrag, Eigenverbrauch und Amortisation für 600W/800W Balkonkraftwerke.',
+    kategorie: 'Wohnen & Energie',
+    kategorieSlug: 'wohnen',
+    metaTitle: 'Balkon-Solar-Rechner 2026 — Balkonkraftwerk Ertrag & Amortisation | Rechenfix',
+    metaDescription: 'Balkonkraftwerk kostenlos berechnen — Ertrag, Eigenverbrauch, Amortisation und CO₂-Ersparnis für 600W/800W Anlagen. Mit Spartipps.',
+    keywords: ['balkonkraftwerk rechner', 'balkon solar rechner', 'balkonkraftwerk ertrag', 'balkonkraftwerk amortisation', '800 watt balkonkraftwerk', 'mini pv anlage', 'stecker solaranlage'],
+    icon: '☀️',
+    formel: 'Jahresertrag = kWp × 950 × Ausrichtung × Aufstellung | Eigenverbrauch = Ertrag × 30 % | Ersparnis = Eigenverbrauch × Strompreis',
+    beispiel: '800 W, Süd, Aufständerung: 0,8 × 950 × 1,0 × 0,9 = 684 kWh/Jahr. Eigenverbrauch 205 kWh × 32 ct = 65,60 € Ersparnis.',
+    erklaerung: `**Was berechnet der Balkon-Solar-Rechner?**
+
+Der Rechner ermittelt den erwarteten Jahresertrag, den nutzbaren Eigenverbrauch und die finanzielle Amortisation eines Balkonkraftwerks. Er berücksichtigt Anlagenleistung, Ausrichtung, Aufstellungsart und Ihren individuellen Stromverbrauch und Strompreis.
+
+**Balkonkraftwerk — was ist das?**
+
+Ein Balkonkraftwerk (auch Mini-PV-Anlage oder Steckersolargerät) ist eine kleine Photovoltaikanlage, die direkt über eine Steckdose ins Hausnetz einspeist. Seit 2024 dürfen in Deutschland Anlagen mit bis zu 800 Watt Wechselrichterleistung (vorher 600 W) ohne Elektriker angemeldet werden — die vereinfachte Anmeldung über das Marktstammdatenregister reicht aus.
+
+**Ertrag — wie viel Strom produziert die Anlage?**
+
+In Deutschland erzeugt eine optimal ausgerichtete PV-Anlage etwa 950 kWh pro kWp (Kilowatt-Peak) und Jahr. Für ein 800-W-Balkonkraftwerk ergibt das theoretisch 760 kWh/Jahr. Der tatsächliche Ertrag hängt von Ausrichtung und Aufstellung ab:
+
+- **Ausrichtung:** Süd = 100 %, Süd-West/Ost = 85 %, West/Ost = 70 %, Nord = 40 %. Süd ist ideal, West/Ost erzeugt morgens/abends mehr (passt oft besser zum Verbrauchsprofil).
+- **Aufstellung:** Senkrecht an der Brüstung = 70 % (schlechterer Winkel), Aufständerung 30° = 90 % (fast ideal), Flachdach/Garten = 100 % (optimaler Winkel möglich).
+
+**Eigenverbrauch — das Schlüsselthema**
+
+Balkonkraftwerke speisen überschüssigen Strom ins Netz ein, erhalten dafür aber keine Vergütung (keine EEG-Einspeisevergütung). Nur der selbst verbrauchte Strom spart Geld. Ohne Speicher liegt die Eigenverbrauchsquote bei etwa 30 % — das heißt, 70 % des erzeugten Stroms gehen ungenutzt ins Netz.
+
+Durch gezieltes Lastmanagement (Waschmaschine, Geschirrspüler und Trockner tagsüber bei Sonne laufen lassen) lässt sich die Quote auf 40–50 % steigern. Mit einem Batteriespeicher sind 60–80 % möglich, aber die Speicher kosten 300–600 € zusätzlich und verlängern die Amortisation.
+
+**Amortisation — wann rechnet sich die Anlage?**
+
+Die Amortisationszeit hängt vom Strompreis und der Eigenverbrauchsquote ab. Bei 800 W, Südausrichtung mit Aufständerung und 32 ct/kWh Strompreis: ca. 9–10 Jahre. Danach produziert die Anlage reinen Gewinn. Die Lebensdauer moderner Solarmodule liegt bei 25–30 Jahren — über die gesamte Laufzeit spart ein 800-W-Balkonkraftwerk typischerweise 800–1.500 €.
+
+**CO₂-Ersparnis**
+
+Jede erzeugte Kilowattstunde Solarstrom spart ca. 0,38 kg CO₂ gegenüber dem deutschen Strommix ein. Ein 800-W-Balkonkraftwerk vermeidet damit etwa 250–290 kg CO₂ pro Jahr — über 20 Jahre sind das rund 5–6 Tonnen.
+
+**Rechtliche Rahmenbedingungen (Stand 2026)**
+
+- Anlagen bis 800 W Wechselrichterleistung dürfen ohne Elektriker installiert werden.
+- Vereinfachte Anmeldung über das Marktstammdatenregister (MaStR) beim Netzbetreiber.
+- Der alte Ferraris-Zähler darf rückwärtslaufen, bis der Netzbetreiber einen Zweirichtungszähler einbaut (kostenlos).
+- Mieter dürfen Balkonkraftwerke installieren — seit 2024 hat der Vermieter kein Vetorecht mehr (privilegierte bauliche Veränderung nach WEG-Reform).`,
+    faq: [
+      {
+        frage: 'Wie viel spart ein Balkonkraftwerk pro Jahr?',
+        antwort: 'Bei 800 W, Südausrichtung und 32 ct/kWh Strompreis: ca. 55–75 € pro Jahr (bei 30 % Eigenverbrauch). Wer stromintensive Geräte gezielt tagsüber laufen lässt, kann auf 80–100 € kommen. Über 20 Jahre summiert sich das auf 1.100–2.000 € — abzüglich der Anschaffungskosten von 400–900 €.',
+      },
+      {
+        frage: 'Wann rechnet sich ein Balkonkraftwerk?',
+        antwort: 'Typischerweise nach 6–12 Jahren, abhängig von Preis, Ausrichtung und Eigenverbrauch. Budget-Anlagen (400 €) amortisieren sich schneller als Premium-Sets mit Speicher (900 €). Ab dem Break-even produziert die Anlage reinen Gewinn — bei einer Lebensdauer von 25+ Jahren ein gutes Geschäft.',
+      },
+      {
+        frage: 'Warum nur 30 % Eigenverbrauch?',
+        antwort: 'Ein Balkonkraftwerk produziert am meisten Strom mittags, wenn viele Haushalte wenig verbrauchen (Arbeit, Schule). Ohne Speicher wird der überschüssige Strom ins Netz eingespeist — ohne Vergütung. Mit Speicher oder gezieltem Lastmanagement (Geräte tagsüber laufen lassen) steigt der Eigenverbrauch auf 40–60 %.',
+      },
+      {
+        frage: 'Brauche ich als Mieter eine Genehmigung?',
+        antwort: 'Seit der WEG-Reform 2024 ist die Installation eines Balkonkraftwerks eine privilegierte bauliche Veränderung. Der Vermieter oder die WEG kann die Anbringung nicht mehr grundlos ablehnen — nur die Art der Installation (z. B. Bohrungen in die Fassade) kann geregelt werden. Eine Anmeldung beim Marktstammdatenregister ist trotzdem Pflicht.',
+      },
+      {
+        frage: 'Was ist besser — 600 W oder 800 W?',
+        antwort: '800 W ist seit 2024 der neue Standard und produziert ca. 33 % mehr Strom als 600 W. Die Mehrkosten sind gering (50–100 €). Bestehende 600-W-Anlagen können auf 800 W umgestellt werden, indem der Wechselrichter per Software-Update auf die neue Grenze gesetzt wird (herstellerabhängig).',
+      },
+    ],
+  },
 ];
