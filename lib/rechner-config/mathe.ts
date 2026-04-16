@@ -1250,4 +1250,68 @@ Alternativ lassen sich ggT und kgV über die Primfaktorzerlegung bestimmen: Der 
       },
     ],
   },
+  {
+    slug: 'zufallszahl-generator',
+    titel: 'Zufallszahl-Generator',
+    beschreibung: 'Zufallszahlen generieren: Zahlen, Würfel, Münzwurf, Losziehung und Passwort-Generator.',
+    kategorie: 'Mathe & Schule',
+    kategorieSlug: 'mathe',
+    metaTitle: 'Zufallszahl-Generator 2026 — Würfel, Münze, Lotto & Passwort | Rechenfix',
+    metaDescription: 'Zufallszahlen kostenlos generieren — Würfel, Münzwurf, Losziehung und Passwort-Generator. Mit Statistik und KI-Erklärung.',
+    keywords: ['zufallszahl generator', 'würfel online', 'münzwurf', 'lotto zahlen generator', 'passwort generator', 'zufallsgenerator', 'random number'],
+    icon: '🎲',
+    formel: 'P(Zahl x bei Würfel mit n Seiten) = 1/n | P(k aus n) = n! / (k! × (n−k)!)',
+    beispiel: 'Zufallszahl 1–100: z. B. 42. Würfel 2×W6: z. B. 3 + 5 = 8. Lotto 6 aus 49: z. B. 4, 12, 23, 31, 38, 47.',
+    erklaerung: `**Was macht der Zufallszahl-Generator?**
+
+Der Generator erzeugt Zufallswerte für fünf verschiedene Anwendungsfälle: beliebige Zufallszahlen in einem wählbaren Bereich, Würfelwürfe mit verschiedenen Würfeltypen, Münzwürfe, Losziehungen (wie Lotto) und sichere Passwörter. Jeder Modus liefert sofort Ergebnisse mit Statistiken.
+
+**Zufallszahlen — Grundlagen**
+
+Eine Zufallszahl ist eine Zahl, die ohne erkennbares Muster aus einem definierten Bereich gewählt wird. Mathematisch bedeutet das: Jede Zahl im Bereich hat die gleiche Wahrscheinlichkeit, gezogen zu werden (Gleichverteilung). Bei einer Zufallszahl von 1 bis 100 hat jede Zahl die Wahrscheinlichkeit 1/100 = 1 %. Computer erzeugen streng genommen Pseudo-Zufallszahlen — algorithmisch berechnete Folgen, die zufällig erscheinen, aber deterministisch sind.
+
+**Würfel — Wahrscheinlichkeitstheorie**
+
+Ein fairer Würfel mit n Seiten liefert jede Zahl von 1 bis n mit der Wahrscheinlichkeit 1/n. Beim Standard-W6 ist P(6) = 1/6 ≈ 16,7 %. Bei zwei Würfeln ist die Summe nicht gleichverteilt: Die 7 kommt am häufigsten vor (6 von 36 Kombinationen = 16,7 %), während 2 und 12 jeweils nur eine Kombination haben (2,8 %). Der Erwartungswert eines W6 ist (1+2+3+4+5+6)/6 = 3,5.
+
+Pen-&-Paper-Rollenspiele verwenden verschiedene Würfeltypen: W4 (Tetraeder), W6 (Würfel), W8 (Oktaeder), W10 (Dekaeder), W12 (Dodekaeder) und W20 (Ikosaeder). Der Generator unterstützt alle gängigen Typen.
+
+**Münzwurf — Bernoulli-Experiment**
+
+Der Münzwurf ist das einfachste Zufallsexperiment: zwei gleich wahrscheinliche Ausgänge (Kopf oder Zahl, jeweils 50 %). Ein einzelner Wurf heißt Bernoulli-Experiment. Die Anzahl von „Kopf" bei n Würfen folgt der Binomialverteilung. Bei 100 Würfen erwartet man im Durchschnitt 50× Kopf, aber Abweichungen von ±5 sind völlig normal (Standardabweichung = √(n×p×(1−p)) = 5).
+
+**Losziehung — Kombinatorik**
+
+Bei einer Losziehung werden k Zahlen ohne Zurücklegen aus n gezogen (wie beim Lotto 6 aus 49). Die Anzahl möglicher Kombinationen berechnet sich als Binomialkoeffizient: C(n, k) = n! / (k! × (n−k)!). Beim Lotto 6 aus 49: C(49, 6) = 13.983.816 — die Wahrscheinlichkeit für einen Sechser liegt also bei 1 zu 13,98 Millionen.
+
+**Passwort-Generator — Sicherheit**
+
+Die Stärke eines Passworts wird durch die Entropie gemessen: E = L × log₂(Z), wobei L die Länge und Z die Größe des Zeichenpools ist. Ein 16-stelliges Passwort aus Groß-/Kleinbuchstaben, Zahlen und Sonderzeichen (Z ≈ 78) hat eine Entropie von ca. 100 Bit — das gilt als sehr sicher. Zum Vergleich: Ein 8-stelliges Passwort nur aus Kleinbuchstaben (Z = 26) hat nur 37,6 Bit.
+
+**Pseudozufall vs. echter Zufall**
+
+Computer nutzen deterministische Algorithmen (PRNG — Pseudo Random Number Generator), die aus einem Startwert (Seed) eine Zahlenfolge ableiten. Für Spiele und Simulationen reicht das völlig aus. Für Kryptografie werden kryptografisch sichere Generatoren (CSPRNG) benötigt, die physikalische Entropiequellen nutzen. JavaScript's Math.random() ist ein PRNG und nicht kryptografisch sicher — für Passwörter in sicherheitskritischen Anwendungen sollte window.crypto.getRandomValues() verwendet werden.`,
+    faq: [
+      {
+        frage: 'Sind die Zufallszahlen wirklich zufällig?',
+        antwort: 'Der Generator nutzt Math.random(), einen Pseudo-Zufallsgenerator. Für Spiele, Simulationen und alltägliche Entscheidungen ist das völlig ausreichend. Für kryptografische Zwecke (z. B. Verschlüsselungsschlüssel) sollten spezielle kryptografisch sichere Generatoren verwendet werden.',
+      },
+      {
+        frage: 'Wie funktioniert die Losziehung?',
+        antwort: 'Die Losziehung zieht k Zahlen ohne Zurücklegen aus dem Bereich 1 bis n. Jede Kombination ist gleich wahrscheinlich. Die gezogenen Zahlen werden sortiert angezeigt — genau wie beim Lotto. Beim Lotto 6 aus 49 gibt es 13.983.816 mögliche Kombinationen.',
+      },
+      {
+        frage: 'Wie stark sollte ein Passwort sein?',
+        antwort: 'Mindestens 12 Zeichen mit Groß-/Kleinbuchstaben, Zahlen und Sonderzeichen. Besser: 16+ Zeichen. Die Stärke steigt exponentiell mit der Länge — ein 16-stelliges Passwort ist nicht doppelt, sondern milliardenfach sicherer als ein 8-stelliges. Verwenden Sie für jeden Dienst ein eigenes Passwort.',
+      },
+      {
+        frage: 'Warum kommt beim Würfeln die 7 am häufigsten vor?',
+        antwort: 'Bei zwei Würfeln (2W6) gibt es 36 mögliche Kombinationen. Die Summe 7 kann auf 6 Arten entstehen (1+6, 2+5, 3+4, 4+3, 5+2, 6+1), während 2 und 12 jeweils nur eine Kombination haben (1+1 bzw. 6+6). Deshalb ist 7 mit 16,7 % die wahrscheinlichste Summe.',
+      },
+      {
+        frage: 'Kann ich den Generator für Lotto-Tipps verwenden?',
+        antwort: 'Ja, der Losziehungs-Modus eignet sich für Lotto-Tipps. Stellen Sie 6 aus 49 ein (oder 5 aus 50 für Eurojackpot). Beachten Sie aber: Jede Kombination ist gleich wahrscheinlich. „Beliebte" Zahlen wie Geburtstage (1–31) werden häufiger getippt — bei einem Gewinn müssten Sie den Jackpot mit mehr Mitspielern teilen.',
+      },
+    ],
+  },
 ];
