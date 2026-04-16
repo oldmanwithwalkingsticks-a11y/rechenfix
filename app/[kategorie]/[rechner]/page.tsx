@@ -148,6 +148,8 @@ import SchritteRechner from '@/components/rechner/SchritteRechner';
 import SonnenschutzRechner from '@/components/rechner/SonnenschutzRechner';
 import ReisekostenRechner from '@/components/rechner/ReisekostenRechner';
 import ZeitwertRechner from '@/components/rechner/ZeitwertRechner';
+import FahrradRahmenRechner from '@/components/rechner/FahrradRahmenRechner';
+import TaxiRechner from '@/components/rechner/TaxiRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -308,6 +310,8 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'sonnenschutz-rechner': SonnenschutzRechner,
   'reisekosten-rechner': ReisekostenRechner,
   'zeitwert-rechner': ZeitwertRechner,
+  'fahrrad-rahmengroesse-rechner': FahrradRahmenRechner,
+  'taxi-rechner': TaxiRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

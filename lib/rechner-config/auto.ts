@@ -581,4 +581,148 @@ Weniger attraktiv wird die Rechnung bei häufigen Langstrecken mit Schnelllader-
       },
     ],
   },
+  {
+    slug: 'fahrrad-rahmengroesse-rechner',
+    titel: 'Fahrrad-Rahmengröße-Rechner',
+    beschreibung: 'Optimale Fahrrad-Rahmengröße berechnen: Nach Körpergröße und Schrittlänge — für Rennrad, MTB, City und E-Bike.',
+    kategorie: 'Auto & Verkehr',
+    kategorieSlug: 'auto',
+    metaTitle: 'Fahrrad-Rahmengröße-Rechner 2026 — Passende Rahmenhöhe | Rechenfix',
+    metaDescription: 'Fahrrad-Rahmengröße kostenlos berechnen — nach Körpergröße und Schrittlänge für City, Rennrad, MTB und E-Bike. Mit Größentabelle.',
+    keywords: ['fahrrad rahmengröße', 'rahmenhöhe berechnen', 'fahrradgröße rechner', 'schrittlänge fahrrad', 'rennrad rahmengröße', 'mtb rahmengröße', 'e-bike rahmenhöhe'],
+    icon: '🚲',
+    formel: 'City/E-Bike: Schrittlänge × 0,66 | Rennrad: × 0,665 | MTB: × 0,574 | Schrittlänge ≈ Körpergröße × 0,47',
+    beispiel: '178 cm, Schrittlänge 84 cm, City: 84 × 0,66 = 55,4 cm (Größe M). MTB: 84 × 0,574 = 48,2 cm (Größe L).',
+    erklaerung: `**Was berechnet der Fahrrad-Rahmengröße-Rechner?**
+
+Der Rechner bestimmt die optimale Rahmenhöhe für Ihr Fahrrad. Er berücksichtigt Körpergröße, Schrittlänge (optional, aber empfohlen) und den Fahrradtyp. Das Ergebnis wird in Zentimetern, Zoll und als Buchstabengröße (XS bis XXL) angegeben — mit einem Toleranzbereich von ±2 cm.
+
+**Warum ist die richtige Rahmengröße wichtig?**
+
+Ein zu großer Rahmen führt zu Überstreckung, Nacken- und Rückenschmerzen. Ein zu kleiner Rahmen erzwingt eine gebeugte Haltung und kann Knieprobleme verursachen. Die richtige Rahmengröße ist Grundvoraussetzung für komfortables, effizientes und verletzungsfreies Radfahren. Sattel und Lenker lassen sich feinjustieren, aber die Rahmenhöhe ist unveränderlich.
+
+**Schrittlänge — der wichtigste Wert**
+
+Die Schrittlänge (Innenbeinlänge) ist genauer als die Körpergröße, weil sie das Verhältnis von Beinen zu Oberkörper berücksichtigt. Zwei Menschen mit gleicher Körpergröße können unterschiedlich lange Beine haben — und brauchen verschiedene Rahmen.
+
+So messen Sie die Schrittlänge: Barfuß mit dem Rücken an die Wand stellen. Ein Buch waagerecht zwischen die Beine klemmen (fest nach oben drücken, wie ein Sattel). Den Abstand vom Boden bis zur Oberkante des Buches messen. Am besten zwei Messungen durchführen und den Mittelwert nehmen.
+
+Wenn keine Schrittlänge angegeben wird, schätzt der Rechner sie als Körpergröße × 0,47. Das ist ein guter Durchschnittswert, aber die eigene Messung ist immer besser.
+
+**Fahrradtypen und Faktoren**
+
+Jeder Fahrradtyp hat eine andere Geometrie und damit einen anderen Umrechnungsfaktor:
+
+- **City/Trekking (× 0,66):** Aufrechte Sitzposition, Komfort im Alltag. Die häufigste Kategorie.
+- **Rennrad (× 0,665):** Gestreckte, aerodynamische Position. Etwas größerer Rahmen wegen der sportlichen Haltung.
+- **Mountainbike (× 0,574):** Kompakter Rahmen für mehr Bewegungsfreiheit im Gelände. Wird oft in Zoll angegeben.
+- **E-Bike (× 0,66):** Gleicher Faktor wie City/Trekking. Der Motor ändert nichts an der idealen Rahmengröße.
+
+**Größenbezeichnungen — XS bis XXL**
+
+Hersteller verwenden Buchstabengrößen, die ungefähr Rahmenhöhen-Bereichen entsprechen. Die Zuordnung variiert leicht zwischen Herstellern — die Angaben im Rechner sind Richtwerte. Prüfen Sie immer die Größentabelle des jeweiligen Herstellers.
+
+**Probefahrt empfohlen**
+
+Der Rechner liefert eine fundierte Empfehlung, aber jedes Fahrrad sitzt etwas anders. Arm- und Oberkörperlänge, Flexibilität und persönliche Vorlieben spielen ebenfalls eine Rolle. Wenn möglich, machen Sie eine Probefahrt mit dem berechneten Rahmen und probieren Sie auch die nächstkleinere und nächstgrößere Größe.`,
+    faq: [
+      {
+        frage: 'Wie messe ich meine Schrittlänge?',
+        antwort: 'Barfuß mit dem Rücken an die Wand stellen. Ein Buch fest waagerecht zwischen die Beine klemmen (wie ein Sattel). Den Abstand vom Boden bis zur Oberkante des Buches messen. Zwei Messungen durchführen und den Mittelwert nehmen. Bei 178 cm Körpergröße liegt die Schrittlänge typischerweise bei 82–86 cm.',
+      },
+      {
+        frage: 'Was ist besser — nach Körpergröße oder Schrittlänge?',
+        antwort: 'Die Schrittlänge ist deutlich genauer. Zwei Menschen mit 178 cm können Schrittlängen von 80 bis 88 cm haben — das macht 5 cm Unterschied bei der Rahmenhöhe. Wenn möglich, immer die Schrittlänge messen. Die Berechnung nach Körpergröße ist nur ein Notbehelf.',
+      },
+      {
+        frage: 'Soll ich bei Zwischengrößen eher größer oder kleiner wählen?',
+        antwort: 'Im Zweifel den kleineren Rahmen wählen. Ein zu kleiner Rahmen lässt sich mit höherem Sattel und längerem Vorbau anpassen. Ein zu großer Rahmen kann nicht kleiner gemacht werden. Sportliche Fahrer tendieren eher zum kleineren, komfortorientierte zum größeren Rahmen.',
+      },
+      {
+        frage: 'Warum ist der MTB-Rahmen kleiner als der City-Rahmen?',
+        antwort: 'Mountainbikes brauchen mehr Bewegungsfreiheit für Abfahrten, Sprünge und technisches Gelände. Ein kompakterer Rahmen ermöglicht schnelleres Reagieren und einen tieferen Schwerpunkt. Deshalb liegt der Faktor bei 0,574 statt 0,66 — das ergibt bei gleicher Schrittlänge einen ca. 8 cm kleineren Rahmen.',
+      },
+      {
+        frage: 'Gelten die Werte auch für Kinderfahrräder?',
+        antwort: 'Nein — Kinderfahrräder werden nach Radgröße (12 bis 26 Zoll) statt nach Rahmenhöhe gewählt. Als Faustregel: 95–110 cm → 16 Zoll, 110–125 cm → 20 Zoll, 125–140 cm → 24 Zoll, ab 140 cm → 26 Zoll oder Erwachsenenrad in XS.',
+      },
+    ],
+  },
+  {
+    slug: 'taxi-rechner',
+    titel: 'Taxi-Kosten-Rechner',
+    beschreibung: 'Taxikosten schätzen: Fahrpreis nach Strecke, Tarif und Stadt.',
+    kategorie: 'Auto & Verkehr',
+    kategorieSlug: 'auto',
+    metaTitle: 'Taxi-Kosten-Rechner 2026 — Taxipreis berechnen | Rechenfix',
+    metaDescription: 'Taxikosten kostenlos berechnen — Fahrpreis nach Strecke, Stadt und Tageszeit. Für Berlin, München, Hamburg und 5 weitere Städte.',
+    keywords: ['taxi rechner', 'taxikosten berechnen', 'taxi preis', 'taxi tarif', 'taxifahrt kosten', 'taxi berlin', 'taxi münchen'],
+    icon: '🚕',
+    formel: 'Fahrpreis = Grundgebühr + Strecke × km-Preis + Wartezeit × Minutenpreis',
+    beispiel: 'Berlin, 10 km Tag: 3,90 € + 7 × 2,30 € + 3 × 1,65 € = 3,90 + 16,10 + 4,95 = 24,95 €. Mit 10 % Trinkgeld: 27,45 €.',
+    erklaerung: `**Was berechnet der Taxi-Kosten-Rechner?**
+
+Der Rechner schätzt den Fahrpreis einer Taxifahrt in deutschen Großstädten. Er berücksichtigt die stadtspezifischen Tarife (Grundgebühr, Kilometerpreis gestaffelt, Wartezeit) und unterscheidet zwischen Tag- und Nachttarif. Zusätzlich wird eine Trinkgeld-Empfehlung (10 %) berechnet.
+
+**Wie setzen sich Taxikosten zusammen?**
+
+Jede Taxifahrt besteht aus drei Kostenblöcken:
+
+- **Grundgebühr:** Fällt beim Einsteigen an, unabhängig von der Strecke. Je nach Stadt 3,50–4,70 €.
+- **Streckentarif:** Preis pro gefahrenem Kilometer, meist gestaffelt. Die ersten Kilometer (3–7 km je nach Stadt) kosten mehr als die folgenden.
+- **Wartezeit:** Wird berechnet, wenn das Taxi im Stau steht oder wartet. Üblich: 0,50–0,55 €/Minute.
+
+Die Tarife werden von der jeweiligen Kommune festgelegt und sind für alle Taxis in der Stadt verbindlich. Private Vereinbarungen über den Preis sind nicht erlaubt — es gilt der Taxameter.
+
+**Tarifsysteme der Städte**
+
+Die Tarife unterscheiden sich deutlich zwischen den Städten:
+
+- **Berlin:** Günstigste Großstadt. Grundgebühr 3,90 €, stark gestaffelter km-Preis (2,30 €/1,65 €). Kurzstreckentarif für Fahrten unter 2 km möglich.
+- **München:** Höchste Grundgebühr (4,70 €), aber moderate km-Preise. Staffelung ab km 6.
+- **Hamburg:** Mittlere Preise, Staffelung bereits ab km 5.
+- **Stuttgart:** Niedrige Grundgebühr, aber höchste km-Preise (2,50 €). Staffelung ab km 4.
+
+**Tag vs. Nacht**
+
+Einige Städte haben erhöhte Nachttarife (22–6 Uhr), andere verwenden einen Einheitstarif rund um die Uhr. Berlin und München haben keinen separaten Nachttarif; Köln und Düsseldorf berechnen nachts 10–20 Cent mehr pro Kilometer.
+
+**Zuschläge und Sondertarife**
+
+Der Rechner kalkuliert den Standardtarif. Zusätzliche Kosten können entstehen durch:
+- **Großraumtaxi:** Zuschlag von 5–10 € für Fahrzeuge mit mehr als 4 Sitzplätzen.
+- **Gepäck:** In manchen Städten Zuschlag für sperriges Gepäck.
+- **Flughafen:** Einige Flughäfen haben Festpreise für bestimmte Strecken.
+- **Feiertage:** In manchen Regionen gelten an Feiertagen erhöhte Tarife.
+
+**Trinkgeld im Taxi**
+
+In Deutschland ist Trinkgeld im Taxi üblich, aber nicht verpflichtend. 5–10 % sind Standard. Bei kurzen Fahrten rundet man auf den nächsten vollen Euro auf. Bei gutem Service (Gepäckhilfe, freundliches Gespräch) darf es auch etwas mehr sein.
+
+**Taxi vs. eigenes Auto**
+
+Für gelegentliche Fahrten ist das Taxi oft günstiger als ein eigenes Auto. Die Vollkosten eines Mittelklassewagens liegen bei 30–60 Cent pro Kilometer (Versicherung, Steuern, Wertverlust, Wartung). Eine 10-km-Taxifahrt kostet 25–30 € — das entspricht den Vollkosten von 50–100 km Autofahrt. Wer selten fährt, spart mit Taxi und ÖPNV.`,
+    faq: [
+      {
+        frage: 'Wie genau ist die Kostenberechnung?',
+        antwort: 'Der Rechner nutzt die offiziellen Taxitarife der jeweiligen Stadt. Der tatsächliche Preis kann durch Stau (Wartezeit), Umwege, Zuschläge (Großraumtaxi, Gepäck) oder Kurzstreckentarife abweichen. Als Schätzung für die Planung ist der berechnete Preis aber zuverlässig — die Abweichung liegt meist unter 10 %.',
+      },
+      {
+        frage: 'Gibt es einen Nachttarif?',
+        antwort: 'Das hängt von der Stadt ab. Berlin und München haben Einheitstarife rund um die Uhr. Köln und Düsseldorf berechnen nachts (22–6 Uhr) etwas höhere km-Preise. Der Rechner berücksichtigt die Tageszeit automatisch bei der Preisberechnung.',
+      },
+      {
+        frage: 'Wie viel Trinkgeld gibt man im Taxi?',
+        antwort: '5–10 % sind in Deutschland üblich. Bei kurzen Fahrten rundet man auf den nächsten vollen Euro auf. Bei einem Fahrpreis von 12,80 € gibt man typischerweise 14 € (ca. 9 % Trinkgeld). Trinkgeld ist freiwillig, wird aber erwartet — besonders bei Gepäckhilfe oder netter Unterhaltung.',
+      },
+      {
+        frage: 'Warum sind die km-Preise gestaffelt?',
+        antwort: 'Die ersten Kilometer kosten mehr, weil das Taxi im Stadtverkehr (Ampeln, Kreuzungen) langsamer fährt und mehr Treibstoff verbraucht. Ab einer gewissen Distanz fährt das Taxi meist auf Hauptstraßen oder Autobahnen — schneller und effizienter, deshalb günstiger pro Kilometer.',
+      },
+      {
+        frage: 'Wann lohnt sich ein Taxi gegenüber dem eigenen Auto?',
+        antwort: 'Wenn Sie weniger als 5.000 km pro Jahr fahren, ist Taxi + ÖPNV oft günstiger als ein eigenes Auto. Die Vollkosten eines Autos (Versicherung, Steuer, Wertverlust, Wartung, Kraftstoff) betragen 300–600 €/Monat — selbst wenn es nur steht. Rechnen Sie mit dem Autokosten-Rechner nach.',
+      },
+    ],
+  },
 ];
