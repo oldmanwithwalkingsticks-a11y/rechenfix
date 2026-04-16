@@ -42,7 +42,7 @@
 - Vercel Hosting
 - Anthropic Claude API für "Fix erklärt"
 
-## Rechner-Bestand (158 gesamt)
+## Rechner-Bestand (160 gesamt)
 | Kategorie | Anzahl |
 |-----------|-------:|
 | Alltag    | 23 |
@@ -53,6 +53,7 @@
 | Mathe     | 18 |
 | Arbeit    | 17 |
 | Kochen    | 2  |
+| Sport     | 2  |
 
 ## Config-Struktur
 - Configs liegen aufgeteilt unter `lib/rechner-config/<kategorie>.ts` (`alltag.ts`, `finanzen.ts`, `gesundheit.ts`, `auto.ts`, `wohnen.ts`, `mathe.ts`, `arbeit.ts`). Die alte Single-File `rechner-config.ts` existiert nicht mehr.

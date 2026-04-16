@@ -7,6 +7,7 @@ import { wohnenRechner } from './wohnen';
 import { matheRechner } from './mathe';
 import { arbeitRechner } from './arbeit';
 import { kochenRechner } from './kochen';
+import { sportRechner } from './sport';
 
 export type { RechnerConfig, KategorieConfig } from './types';
 
@@ -75,6 +76,14 @@ export const kategorien: KategorieConfig[] = [
     metaTitle: 'Kochen & Ernährung Rechner | Rechenfix.de',
     metaDescription: 'Kostenlose Online-Rechner für Kochen & Ernährung: Rezept-Umrechner, Cups in Gramm, Portionen skalieren. Sofort berechnen ohne Anmeldung.',
   },
+  {
+    slug: 'sport',
+    name: 'Sport & Fitness',
+    beschreibung: 'Rechner für Läufer und Sportler: Pace, Trainingszonen, Herzfrequenz und mehr.',
+    icon: '🏃',
+    metaTitle: 'Sport & Fitness Rechner | Rechenfix.de',
+    metaDescription: 'Kostenlose Online-Rechner für Sport & Fitness: Pace-Rechner, Herzfrequenz-Zonen, Trainingsintensität. Sofort berechnen ohne Anmeldung.',
+  },
 ];
 
 export const rechner: RechnerConfig[] = [
@@ -86,6 +95,7 @@ export const rechner: RechnerConfig[] = [
   ...matheRechner,
   ...arbeitRechner,
   ...kochenRechner,
+  ...sportRechner,
 ];
 
 export const beliebteRechnerSlugs = [
@@ -98,6 +108,8 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'pace-rechner',
+  'herzfrequenz-zonen-rechner',
   'rezept-umrechner',
   'cups-umrechner',
   'pfaendungsrechner',
@@ -359,6 +371,8 @@ const verwandteMap: Record<string, string[]> = {
   'lohnsteuer-rechner': ['einkommensteuer-rechner', 'brutto-netto-rechner', 'steuerklassen-vergleich-rechner', 'steuerprogression-rechner'],
   'rezept-umrechner': ['cups-umrechner', 'einheiten-umrechner', 'dreisatz-rechner', 'prozentrechner'],
   'cups-umrechner': ['rezept-umrechner', 'einheiten-umrechner', 'dreisatz-rechner', 'waehrungsrechner'],
+  'pace-rechner': ['herzfrequenz-zonen-rechner', 'kalorienrechner', 'herzfrequenz-rechner', 'einheiten-umrechner'],
+  'herzfrequenz-zonen-rechner': ['pace-rechner', 'herzfrequenz-rechner', 'kalorienrechner', 'bmi-rechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {

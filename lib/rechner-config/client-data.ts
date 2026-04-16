@@ -91,6 +91,14 @@ export const kategorien: KategorieConfig[] = [
     "icon": "🍳",
     "metaTitle": "Kochen & Ernährung Rechner | Rechenfix.de",
     "metaDescription": "Kostenlose Online-Rechner für Kochen & Ernährung: Rezept-Umrechner, Cups in Gramm, Portionen skalieren. Sofort berechnen ohne Anmeldung."
+  },
+  {
+    "slug": "sport",
+    "name": "Sport & Fitness",
+    "beschreibung": "Rechner für Läufer und Sportler: Pace, Trainingszonen, Herzfrequenz und mehr.",
+    "icon": "🏃",
+    "metaTitle": "Sport & Fitness Rechner | Rechenfix.de",
+    "metaDescription": "Kostenlose Online-Rechner für Sport & Fitness: Pace-Rechner, Herzfrequenz-Zonen, Trainingsintensität. Sofort berechnen ohne Anmeldung."
   }
 ];
 
@@ -2973,6 +2981,44 @@ export const rechner: RechnerLight[] = [
       "fl oz in ml"
     ],
     "icon": "🥣"
+  },
+  {
+    "slug": "pace-rechner",
+    "titel": "Pace-Rechner",
+    "beschreibung": "Pace, Zeit oder Distanz beim Laufen berechnen: min/km, km/h, Split-Zeiten und Zielzeit-Tabellen.",
+    "kategorie": "Sport & Fitness",
+    "kategorieSlug": "sport",
+    "keywords": [
+      "pace rechner",
+      "pace berechnen laufen",
+      "min/km rechner",
+      "laufgeschwindigkeit",
+      "marathon pace",
+      "halbmarathon pace",
+      "pace in km/h",
+      "split zeiten laufen",
+      "laufzeit rechner"
+    ],
+    "icon": "🏃"
+  },
+  {
+    "slug": "herzfrequenz-zonen-rechner",
+    "titel": "Herzfrequenz-Zonen-Rechner",
+    "beschreibung": "Trainingszonen berechnen: HFmax nach Tanaka und Karvonen, 5 Zonen, 80/20-Training und Fettverbrennungszone.",
+    "kategorie": "Sport & Fitness",
+    "kategorieSlug": "sport",
+    "keywords": [
+      "herzfrequenz zonen",
+      "trainingszonen rechner",
+      "karvonen formel",
+      "hfmax berechnen",
+      "maximale herzfrequenz",
+      "fettverbrennungszone",
+      "puls trainingszonen",
+      "80/20 training",
+      "herzfrequenz laufen"
+    ],
+    "icon": "❤️"
   }
 ];
 

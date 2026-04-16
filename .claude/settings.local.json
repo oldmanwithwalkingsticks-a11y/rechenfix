@@ -91,7 +91,8 @@
       "Bash(node -e \"console.log\\('ESt:', 'Einkommensteuer 2026 kostenlos berechnen: Grundtabelle oder Splitting, Soli, Kirchensteuer, Grenz- und Durchschnittssteuersatz — mit KI-Erklärung.'.length\\); console.log\\('SKV:', 'Steuerklassen-Kombinationen vergleichen: III/V, V/III, IV/IV mit Faktor — welche bringt Ehepaaren das höchste monatliche Netto? Kostenlos mit KI-Erklärung.'.length\\);\")",
       "Bash(find \"G:\\\\Rechenfix\" -type f \\\\\\( -name \"*.tsx\" -o -name \"*.ts\" \\\\\\) -exec grep -l \"kategorien\" {} \\\\;)",
       "Bash(node -e \"console.log\\('Rezept:', 'Rezept auf Personen umrechnen: Zutaten automatisch skalieren, verdoppeln, halbieren — mit intelligenter Rundung und Kopierfunktion. Kostenlos mit KI-Erklärung.'.length\\); console.log\\('Cups:', 'Cups in Gramm und ml umrechnen: Zutatspezifische Dichten für amerikanische Rezepte — Mehl, Zucker, Butter, Milch und mehr. Kostenlos mit Tabelle.'.length\\);\")",
-      "Bash(node -e \"console.log\\('Rezept:', 'Rezept auf Personen umrechnen: Zutaten automatisch skalieren, verdoppeln oder halbieren — mit intelligenter Rundung und KI-Erklärung. Kostenlos.'.length\\);\")"
+      "Bash(node -e \"console.log\\('Rezept:', 'Rezept auf Personen umrechnen: Zutaten automatisch skalieren, verdoppeln oder halbieren — mit intelligenter Rundung und KI-Erklärung. Kostenlos.'.length\\);\")",
+      "Bash(node -e \"console.log\\('Pace:', 'Pace berechnen beim Laufen: min/km, km/h, Zielzeit und Split-Tabellen für 5k, 10k, Halbmarathon und Marathon. Kostenlos mit KI-Erklärung.'.length\\); console.log\\('HF:', 'Herzfrequenz-Trainingszonen berechnen: HFmax nach Tanaka und Karvonen-Formel, 5 Zonen, Fettverbrennung und 80/20-Regel. Kostenlos mit KI-Erklärung.'.length\\);\")"
     ]
   }
 }

@@ -166,6 +166,8 @@ import PfaendungRechner from '@/components/rechner/PfaendungRechner';
 import LohnsteuerRechner from '@/components/rechner/LohnsteuerRechner';
 import RezeptUmrechner from '@/components/rechner/RezeptUmrechner';
 import CupsUmrechner from '@/components/rechner/CupsUmrechner';
+import PaceRechner from '@/components/rechner/PaceRechner';
+import HerzfrequenzZonenRechner from '@/components/rechner/HerzfrequenzZonenRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -344,6 +346,8 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'lohnsteuer-rechner': LohnsteuerRechner,
   'rezept-umrechner': RezeptUmrechner,
   'cups-umrechner': CupsUmrechner,
+  'pace-rechner': PaceRechner,
+  'herzfrequenz-zonen-rechner': HerzfrequenzZonenRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
