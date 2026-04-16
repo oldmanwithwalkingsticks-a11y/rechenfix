@@ -107,6 +107,11 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
+                  <Link href="/barrierefreiheit" className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm">
+                    Barrierefreiheit
+                  </Link>
+                </li>
+                <li>
                   <button
                     onClick={openSettings}
                     className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm"
