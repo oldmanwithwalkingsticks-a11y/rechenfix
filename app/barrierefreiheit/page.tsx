@@ -143,47 +143,9 @@ export default function BarrierefreiheitSeite() {
               </li>
             </ul>
             <p className="mt-3 leading-relaxed">
-              Wir bemühen uns, innerhalb von <strong>14 Tagen</strong> auf Ihre Anfrage zu antworten und
-              etwaige Mängel zeitnah zu beheben.
-            </p>
-          </section>
-
-          {/* Schlichtungsverfahren */}
-          <section>
-            <h2 className="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">
-              Schlichtungsverfahren
-            </h2>
-            <p className="leading-relaxed">
-              Sollten Sie nach Kontaktaufnahme mit uns keine zufriedenstellende Lösung erhalten,
-              können Sie sich an die Schlichtungsstelle nach § 16 BGG wenden:
-            </p>
-            <div className="mt-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-sm leading-relaxed">
-              <p className="font-semibold text-gray-800 dark:text-gray-200">Schlichtungsstelle nach dem Behindertengleichstellungsgesetz</p>
-              <p className="mt-1">bei dem Beauftragten der Bundesregierung für die Belange von Menschen mit Behinderungen</p>
-              <p className="mt-2">Mauerstraße 53, 10117 Berlin</p>
-              <p>
-                E-Mail:{' '}
-                <a href="mailto:info@schlichtungsstelle-bgg.de" className="text-primary-500 dark:text-primary-400 hover:underline">
-                  info@schlichtungsstelle-bgg.de
-                </a>
-              </p>
-              <p>Telefon: 030 18 527-2805</p>
-              <p>
-                Web:{' '}
-                <a
-                  href="https://www.schlichtungsstelle-bgg.de"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary-500 dark:text-primary-400 hover:underline"
-                >
-                  www.schlichtungsstelle-bgg.de
-                </a>
-              </p>
-            </div>
-            <p className="mt-3 text-xs text-gray-500 dark:text-gray-400">
-              Hinweis: Das Schlichtungsverfahren nach § 16 BGG gilt formal für öffentliche Stellen des Bundes.
-              Als privater Anbieter stellen wir diese Information als Service bereit. Bei Fragen zur
-              Anwendbarkeit des BFSG empfehlen wir eine rechtliche Beratung.
+              Wir nehmen Ihr Feedback ernst und bemühen uns, innerhalb von <strong>14 Tagen</strong> zu
+              antworten. Bitte beachten Sie, dass rechenfix.de als privates Angebot betrieben wird und
+              wir Verbesserungen nach bestem Kenntnisstand umsetzen.
             </p>
           </section>
         </div>
