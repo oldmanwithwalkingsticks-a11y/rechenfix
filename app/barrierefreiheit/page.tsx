@@ -67,6 +67,7 @@ export default function BarrierefreiheitSeite() {
               <li>Skip-Link zum Überspringen der Navigation für Tastaturnutzer</li>
               <li>Auswahlgruppen (z.&thinsp;B. Geschlecht, Berechnungsart) als native Radio-Buttons mit Fieldset/Legend</li>
               <li>Automatische Screenreader-Ansage bei Ergebnisänderung (aria-live mit Debounce)</li>
+              <li>Fokus-Lenkung bei &bdquo;Fix erklärt&ldquo;-KI-Erklärungen: Fokus wandert automatisch zum neuen Inhalt, beim Schließen zurück zum Auslöser</li>
               <li>Responsives Design für alle Bildschirmgrößen</li>
               <li>Unterstützung für Dark Mode</li>
             </ul>
@@ -90,11 +91,6 @@ export default function BarrierefreiheitSeite() {
               <li>
                 <strong>Wissenschaftlicher Taschenrechner:</strong>{' '}
                 Der Taschenrechner mit seinem Button-Raster ist nur eingeschränkt per Tastatur bedienbar.
-              </li>
-              <li>
-                <strong>KI-Erklärungen (&bdquo;Fix erklärt&ldquo;):</strong>{' '}
-                Die nach Nutzeraktion dynamisch geladenen KI-Erklärungen lenken den Fokus derzeit
-                nicht automatisch auf den neuen Inhalt.
               </li>
               <li>
                 <strong>Externe Inhalte:</strong>{' '}

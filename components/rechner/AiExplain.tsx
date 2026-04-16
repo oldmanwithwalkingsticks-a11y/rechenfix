@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, Fragment } from 'react';
+import { useState, useRef, useEffect, Fragment } from 'react';
 
 interface Props {
   rechnerName: string;
@@ -67,6 +67,15 @@ export default function AiExplain({ rechnerName, eingaben, ergebnis }: Props) {
   const [laden, setLaden] = useState(false);
   const [fehler, setFehler] = useState('');
   const [kopiert, setKopiert] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+
+  // Focus panel when explanation loads
+  useEffect(() => {
+    if (erklaerung && panelRef.current) {
+      panelRef.current.focus();
+    }
+  }, [erklaerung]);
 
   async function handleExplain() {
     setLaden(true);
@@ -119,6 +128,8 @@ export default function AiExplain({ rechnerName, eingaben, ergebnis }: Props) {
   function handleSchliessen() {
     setErklaerung('');
     setFehler('');
+    // Return focus to the trigger button
+    requestAnimationFrame(() => buttonRef.current?.focus());
   }
 
   // Noch kein Ergebnis oder Ergebnis leer
@@ -129,7 +140,10 @@ export default function AiExplain({ rechnerName, eingaben, ergebnis }: Props) {
       {/* Button zum Auslösen */}
       {!erklaerung && !laden && (
         <button
+          ref={buttonRef}
           onClick={handleExplain}
+          aria-expanded={!!(erklaerung || laden)}
+          aria-controls="fix-erklaert-panel"
           className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white font-medium rounded-xl transition-all shadow-sm hover:shadow-md"
         >
           <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
@@ -141,9 +155,10 @@ export default function AiExplain({ rechnerName, eingaben, ergebnis }: Props) {
 
       {/* Loading */}
       {laden && (
-        <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700/30 rounded-xl p-5 flex items-center gap-3">
+        <div id="fix-erklaert-panel" className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700/30 rounded-xl p-5 flex items-center gap-3">
           <div className="w-5 h-5 border-2 border-blue-400 border-t-transparent rounded-full animate-spin shrink-0" />
           <span className="text-blue-700 dark:text-blue-300 text-sm font-medium">KI analysiert Ihr Ergebnis&hellip;</span>
+          <span role="status" aria-live="polite" className="sr-only">KI-Erklärung wird geladen…</span>
         </div>
       )}
 
@@ -162,7 +177,12 @@ export default function AiExplain({ rechnerName, eingaben, ergebnis }: Props) {
 
       {/* Erklärung */}
       {erklaerung && (
-        <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700/30 rounded-xl overflow-hidden">
+        <div
+          ref={panelRef}
+          id="fix-erklaert-panel"
+          tabIndex={-1}
+          className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700/30 rounded-xl overflow-hidden outline-none"
+        >
           {/* Header */}
           <div className="flex items-center justify-between px-5 py-3 border-b border-blue-200 dark:border-blue-700/30">
             <div className="flex items-center gap-2">
