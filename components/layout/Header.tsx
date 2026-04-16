@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { kategorien, getRechnerByKategorie } from '@/lib/rechner-config';
+import { kategorien, getRechnerByKategorie } from '@/lib/rechner-config/client-data';
 import ThemeToggle from './ThemeToggle';
 
 const farbMap: Record<string, string> = {

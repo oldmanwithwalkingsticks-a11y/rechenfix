@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { rechner as alleRechner, kategorien } from '@/lib/rechner-config';
+import { rechner as alleRechner, kategorien } from '@/lib/rechner-config/client-data';
 
 type FeedbackTyp = 'rechner-wunsch' | 'fehler' | 'bewertung' | 'rechner-verbessern' | 'ki-feedback';
 

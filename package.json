@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "generate-client-data": "npx tsx scripts/generate-client-data.ts",
+    "prebuild": "npx tsx scripts/generate-client-data.ts",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

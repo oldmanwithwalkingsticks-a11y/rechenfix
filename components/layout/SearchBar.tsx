@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { rechner as alleRechner } from '@/lib/rechner-config';
+import { rechner as alleRechner } from '@/lib/rechner-config/client-data';
 
 interface SearchBarProps {
   className?: string;
