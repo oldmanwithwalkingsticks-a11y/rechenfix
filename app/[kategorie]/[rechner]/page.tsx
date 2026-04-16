@@ -162,6 +162,8 @@ import SchenkungssteuerRechner from '@/components/rechner/SchenkungssteuerRechne
 import GewerbesteuerRechner from '@/components/rechner/GewerbesteuerRechner';
 import EinkommensteuerRechner from '@/components/rechner/EinkommensteuerRechner';
 import SteuerklassenVergleichRechner from '@/components/rechner/SteuerklassenVergleichRechner';
+import PfaendungRechner from '@/components/rechner/PfaendungRechner';
+import LohnsteuerRechner from '@/components/rechner/LohnsteuerRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -336,6 +338,8 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'gewerbesteuer-rechner': GewerbesteuerRechner,
   'einkommensteuer-rechner': EinkommensteuerRechner,
   'steuerklassen-vergleich-rechner': SteuerklassenVergleichRechner,
+  'pfaendungsrechner': PfaendungRechner,
+  'lohnsteuer-rechner': LohnsteuerRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

@@ -2831,4 +2831,189 @@ Wichtig: Die Jahressteuer bleibt unabhängig von der Steuerklasse identisch. Die
       },
     ],
   },
+  {
+    slug: 'pfaendungsrechner',
+    titel: 'Pfändungsrechner',
+    beschreibung: 'Pfändungsfreies Einkommen berechnen: Freibetrag nach § 850c ZPO, Erhöhung bei Unterhaltspflichten, P-Konto.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Pfändungsrechner 2026 — § 850c ZPO Pfändungsfreibetrag | Rechenfix',
+    metaDescription: 'Pfändungsfreies Einkommen kostenlos berechnen: Pfändungstabelle nach § 850c ZPO, Freibeträge bei Unterhaltspflichten und P-Konto — mit KI-Erklärung.',
+    keywords: ['pfändungsrechner', 'pfändungsfreibetrag', 'pfändungstabelle 2026', '850c zpo', 'pfändungsfreigrenze', 'p-konto freibetrag', 'lohnpfändung', 'unterhaltspflicht pfändung', 'gehaltspfändung rechner'],
+    icon: '⚖️',
+    formel: 'Pfändbar = (Netto − Freibetrag) × Pfändungsquote | Freibetrag = 1.555,99 € + 585,59 € (1. Unterhalt) + 326,04 € je weitere Person | Quote: 70 % (0 Unterhalt), 50 / 40 / 30 / 20 / 10 % je Unterhalt',
+    beispiel: 'Netto 2.500 €/Monat, keine Unterhaltspflicht: Freibetrag 1.555,99 €, Mehrbetrag 944,01 €, Pfändungsquote 70 % → 660,81 € pfändbar, 1.839,19 € pfändungsfrei.',
+    erklaerung: `**Pfändungsfreibetrag — was bleibt bei einer Lohnpfändung?**
+
+Wer verschuldet ist und eine Lohnpfändung erhält, darf nicht unbegrenzt gepfändet werden. Der Gesetzgeber schützt das Existenzminimum durch die sogenannte Pfändungsfreigrenze (§ 850c Zivilprozessordnung — ZPO). Bis zu diesem Betrag ist das Nettoeinkommen vollständig pfändungsfrei — darüber hinaus greift eine gestaffelte Pfändung.
+
+Unser Pfändungsrechner nutzt die aktuelle Pfändungstabelle, gültig ab 01.07.2025. Die nächste Anpassung erfolgt turnusgemäß zum 01.07.2026 — der Gesetzgeber aktualisiert die Freibeträge alle zwei Jahre an die Inflation.
+
+**Pfändungsfreibetrag 2025/2026: 1.555,99 € monatlich**
+
+Der Grundfreibetrag für einen alleinstehenden Schuldner ohne Unterhaltspflichten beträgt 1.555,99 € pro Monat. Bis zu diesem Betrag ist das Nettoeinkommen komplett pfändungsfrei. Erst darüber hinaus wird gepfändet — und auch dann nicht komplett.
+
+**Erhöhung bei Unterhaltspflichten**
+
+Für jede Person, der der Schuldner zum Unterhalt verpflichtet ist (z. B. Ehepartner, minderjährige Kinder), erhöht sich der Freibetrag:
+
+- 1. unterhaltsberechtigte Person: +585,59 €
+- 2. unterhaltsberechtigte Person: +326,04 €
+- 3.–5. unterhaltsberechtigte Person: je +326,04 €
+
+Beispiel: Ein Schuldner mit Ehepartner und zwei Kindern hat einen Freibetrag von 1.555,99 € + 585,59 € + 2 × 326,04 € = 2.793,66 € monatlich.
+
+**Pfändungsquote: Wie viel ist oberhalb des Freibetrags pfändbar?**
+
+Oberhalb der Freigrenze ist nicht alles pfändbar — es gilt eine gestaffelte Quote, die umso niedriger ist, je mehr Personen der Schuldner unterhält:
+
+- 0 Unterhaltspflichten: 70 % pfändbar (30 % bleiben dem Schuldner)
+- 1 Unterhaltspflicht: 50 %
+- 2 Unterhaltspflichten: 40 %
+- 3 Unterhaltspflichten: 30 %
+- 4 Unterhaltspflichten: 20 %
+- 5 und mehr: 10 %
+
+Ab einem bestimmten Einkommen (ca. 4.573 € bei 0 Unterhalt) greift zusätzlich die Obergrenze: Alles darüber ist vollständig pfändbar. Das verhindert, dass Top-Verdiener sich über die Staffelung schützen können.
+
+**Das Pfändungsschutzkonto (P-Konto)**
+
+Wer ein normales Girokonto hat und eine Kontopfändung erhält, verliert meist den Zugriff auf sein gesamtes Guthaben. Die Lösung: das Pfändungsschutzkonto (P-Konto nach § 850k ZPO). Jeder Schuldner hat das Recht, sein Girokonto in ein P-Konto umzuwandeln — kostenlos und ohne Begründung.
+
+Auf einem P-Konto bleiben mindestens 1.555,99 € pro Monat automatisch geschützt. Höhere Freibeträge (z. B. durch Unterhaltspflichten, Kindergeld, Sozialleistungen) müssen mit einer P-Konto-Bescheinigung nachgewiesen werden. Diese erhalten Sie bei einer Schuldnerberatung, beim Arbeitgeber oder beim Jobcenter/Familienkasse.
+
+**Was ist pfändungsfrei?**
+
+Bestimmte Einkommensbestandteile sind ganz oder teilweise pfändungsfrei:
+
+- **Urlaubsgeld:** Komplett pfändungsfrei (§ 850a Nr. 2 ZPO)
+- **Weihnachtsgeld:** Bis zu einem Monatsfreibetrag (ca. 705 € in 2025)
+- **Erziehungsgeld, Elterngeld, Kindergeld:** Pfändungsfrei, aber müssen gesondert beim P-Konto angemeldet werden
+- **Aufwandsentschädigungen, Gefahrenzulagen:** Bis zur Hälfte des Üblichen pfändungsfrei
+- **Überstundenvergütung:** Zur Hälfte pfändungsfrei
+
+**Nachweise und P-Konto-Bescheinigung**
+
+Um einen erhöhten Freibetrag geltend zu machen, reicht die Aussage allein nicht aus — Sie brauchen eine P-Konto-Bescheinigung. Diese wird ausgestellt von:
+
+- Schuldnerberatungsstellen (kostenlos, ca. 6–12 Wochen Wartezeit)
+- Rechtsanwälten (kostenpflichtig, meist 30–80 €)
+- Familienkasse (für Kindergeldempfänger)
+- Jobcenter (für Bürgergeld-Empfänger)
+- Arbeitgeber (in Einzelfällen)
+
+Die Bescheinigung ist bei der Bank einzureichen. Die Bank muss den erhöhten Freibetrag dann innerhalb von 7 Tagen umsetzen.`,
+    faq: [
+      {
+        frage: 'Wie hoch ist die Pfändungsfreigrenze 2026?',
+        antwort: 'Der Grundfreibetrag für einen alleinstehenden Schuldner ohne Unterhaltspflichten beträgt aktuell 1.555,99 € monatlich (gültig ab 01.07.2025). Die nächste Anpassung erfolgt zum 01.07.2026 — dann steigen die Werte erfahrungsgemäß um 4–6 % an die Inflation.',
+      },
+      {
+        frage: 'Wie wirken sich Unterhaltspflichten auf die Pfändungsfreigrenze aus?',
+        antwort: 'Für die 1. unterhaltsberechtigte Person erhöht sich der Freibetrag um 585,59 €, für jede weitere um 326,04 €. Zusätzlich sinkt die Pfändungsquote oberhalb des Freibetrags: 70 % (0 Unterhalt) → 50 % (1) → 40 % (2) → 30 % (3) → 20 % (4) → 10 % (5+).',
+      },
+      {
+        frage: 'Was ist ein P-Konto und wie schützt es mein Einkommen?',
+        antwort: 'Ein P-Konto (Pfändungsschutzkonto, § 850k ZPO) ist ein normales Girokonto, das durch Umwandlung den Pfändungsschutz automatisch aktiviert. Auf einem P-Konto bleiben monatlich mindestens 1.555,99 € geschützt — ohne Gerichtsverfahren. Jeder hat das Recht auf ein P-Konto, die Umwandlung ist kostenlos. Höhere Freibeträge brauchen eine P-Konto-Bescheinigung.',
+      },
+      {
+        frage: 'Wird Kindergeld bei der Pfändung berücksichtigt?',
+        antwort: 'Kindergeld ist grundsätzlich pfändungsfrei und erhöht nicht das pfändbare Einkommen. Auf einem P-Konto muss das Kindergeld aber mit einer Bescheinigung angemeldet werden, damit es zusätzlich zum Grundfreibetrag geschützt bleibt. Bescheinigungen gibt es bei der Familienkasse oder Schuldnerberatung.',
+      },
+      {
+        frage: 'Wann wird die Pfändungstabelle aktualisiert?',
+        antwort: 'Die Pfändungstabelle wird alle zwei Jahre zum 1. Juli angepasst (§ 850c Abs. 4 ZPO). Die aktuellen Werte gelten seit 01.07.2025, die nächste Anpassung erfolgt zum 01.07.2026. Der Gesetzgeber erhöht die Freibeträge an die Inflation — typischerweise um 4–6 %.',
+      },
+      {
+        frage: 'Was passiert bei Einkommen über 4.573 € monatlich?',
+        antwort: 'Ab einer Obergrenze von ca. 4.573 € (bei 0 Unterhaltspflichten) greift die Staffelung nicht mehr — der Betrag oberhalb dieser Grenze ist zu 100 % pfändbar. Die Obergrenze erhöht sich um die Unterhaltspauschalen. Das verhindert, dass Spitzenverdiener die Pfändungsquote nutzen, um große Beträge zu schützen.',
+      },
+    ],
+  },
+  {
+    slug: 'lohnsteuer-rechner',
+    titel: 'Lohnsteuer-Rechner',
+    beschreibung: 'Lohnsteuer berechnen: Steuerklasse I–VI, Bundesland, Kirchensteuer, Kinderfreibeträge — monatlich oder jährlich.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Lohnsteuer-Rechner 2026 — LSt, Soli & Kirchensteuer | Rechenfix',
+    metaDescription: 'Lohnsteuer 2026 kostenlos berechnen: alle Steuerklassen I–VI, Soli mit Freigrenze, Kirchensteuer und Vergleichstabelle — mit KI-Erklärung.',
+    keywords: ['lohnsteuer rechner', 'lohnsteuer berechnen', 'lohnsteuer 2026', 'lohnsteuer steuerklasse', 'lohnsteuer tabelle 2026', 'pap 2026', 'lohnsteuer monatlich', 'lohnsteuer jahrestabelle', 'lohnsteuer rechner brutto', 'lohnsteuer klasse 1'],
+    icon: '💷',
+    formel: 'Jahresbrutto = Monatsbrutto × 12 | zvE = Jahresbrutto − Arbeitnehmerpauschbetrag − Sonderausgaben − Vorsorgepauschale − Freibetrag | Lohnsteuer = ESt(zvE) nach § 32a EStG mit Steuerklassen-Tarif',
+    beispiel: '3.500 € Brutto/Monat, Klasse I, BW, ohne KiSt: Lohnsteuer ca. 390 €/Monat, Soli 0 € (unter Freigrenze), Gesamt-Steuer ca. 390 €/Monat. Gleicher Lohn in Klasse VI: ca. 590 €/Monat (deutlich mehr, kein Grundfreibetrag).',
+    erklaerung: `**Lohnsteuer berechnen — was der Arbeitgeber einbehält**
+
+Die Lohnsteuer ist eine besondere Erhebungsform der Einkommensteuer: Sie wird vom Arbeitgeber bereits am Gehaltszahltag einbehalten und direkt ans Finanzamt abgeführt — quasi als monatliche Vorauszahlung auf die Jahres-Einkommensteuer. Am Jahresende wird über die Steuererklärung abgeglichen, ob zu viel oder zu wenig einbehalten wurde.
+
+Die Berechnung folgt dem sogenannten Programmablaufplan (PAP) des Bundesfinanzministeriums, der jedes Jahr aktualisiert wird. Er basiert auf der Einkommensteuer-Formel nach § 32a EStG, berücksichtigt aber die individuelle Steuerklasse, Freibeträge und die Vorsorgepauschale.
+
+**Unterschied Lohnsteuer vs. Einkommensteuer**
+
+Ein häufiges Missverständnis: Lohnsteuer und Einkommensteuer sind NICHT zwei verschiedene Steuern, sondern zwei Erhebungsformen derselben Steuer:
+
+- **Lohnsteuer:** Monatlich vom Arbeitgeber einbehalten. Nur bei Arbeitnehmern.
+- **Einkommensteuer:** Jährliche Abrechnung über die Steuererklärung. Für alle (Arbeitnehmer, Selbstständige, Rentner).
+
+Bei Arbeitnehmern wird die gezahlte Lohnsteuer am Jahresende auf die endgültige Einkommensteuer angerechnet. Ergebnis: Erstattung (wenn zu viel einbehalten) oder Nachzahlung (wenn zu wenig).
+
+**Die 6 Steuerklassen erklärt**
+
+Die Steuerklasse bestimmt, wie viel Lohnsteuer monatlich einbehalten wird. Sie hat KEINEN Einfluss auf die Jahressteuer (die wird über die Steuererklärung ausgeglichen):
+
+- **Klasse I:** Ledige, Geschiedene, Verwitwete — Standardklasse. Grundfreibetrag 12.096 €.
+- **Klasse II:** Alleinerziehende mit mindestens einem Kind im Haushalt. Bietet zusätzlich Entlastungsbetrag (4.260 €). Muss beim Finanzamt beantragt werden.
+- **Klasse III:** Verheiratete mit deutlich höherem Einkommen als der Partner. Niedrigste LSt. Partner muss in Klasse V.
+- **Klasse IV:** Verheiratete mit ähnlich hohem Einkommen. Wie Klasse I pro Partner. Optional mit Faktor.
+- **Klasse V:** Verheiratete mit deutlich niedrigerem Einkommen. Höchste LSt, weil kein Grundfreibetrag. Partner in Klasse III.
+- **Klasse VI:** Zweit- und Nebenjobs. Keine Freibeträge überhaupt — höchste Abzüge.
+
+**Die Vorsorgepauschale**
+
+Bei der Lohnsteuer werden bereits pauschal 12 % des Bruttolohns als Vorsorgeaufwendungen (Kranken- und Pflegeversicherung) abgezogen. Das verhindert, dass die Lohnsteuer die tatsächliche Steuerlast zu hoch ansetzt. Die genaue Berechnung unterscheidet sich geringfügig zwischen GKV und PKV.
+
+**Solidaritätszuschlag und Kirchensteuer**
+
+Zusätzlich zur Lohnsteuer werden weitere Abgaben einbehalten:
+
+- **Solidaritätszuschlag:** 5,5 % der Lohnsteuer, aber erst ab einer Jahres-LSt von 20.350 € (2026, Klasse I–II, IV–VI) bzw. 40.700 € (Klasse III mit Splitting). Für ca. 90 % der Steuerzahler entfällt der Soli.
+- **Kirchensteuer:** 8 % der Lohnsteuer in Bayern und Baden-Württemberg, 9 % in allen anderen Bundesländern. Nur bei Kirchenmitgliedschaft.
+
+**Freibetrag eintragen lassen**
+
+Wer hohe abziehbare Aufwendungen hat (z. B. lange Pendelstrecken, Unterhaltszahlungen, außergewöhnliche Belastungen), kann einen Steuerfreibetrag beim Finanzamt eintragen lassen. Der Freibetrag wird dann monatlich bei der Lohnsteuerberechnung berücksichtigt — Sie haben sofort mehr Netto.
+
+Das geht mit dem Formular „Antrag auf Lohnsteuer-Ermäßigung" (online über Elster) und gilt bis zu zwei Jahre. Typische Gründe:
+
+- Pendlerpauschale über 1.230 €/Jahr (ab ca. 15 km einfacher Weg)
+- Behinderten-Pauschbetrag
+- Unterhaltsleistungen an geschiedene Partner
+- Kinderbetreuungskosten`,
+    faq: [
+      {
+        frage: 'Was ist der Unterschied zwischen Lohnsteuer und Einkommensteuer?',
+        antwort: 'Beides ist dieselbe Steuer, nur unterschiedlich erhoben: Die Lohnsteuer wird vom Arbeitgeber monatlich einbehalten (Vorauszahlung). Die Einkommensteuer wird am Jahresende über die Steuererklärung final abgerechnet. Bei Arbeitnehmern wird die gezahlte Lohnsteuer auf die endgültige Einkommensteuer angerechnet — je nach Ergebnis gibt es Erstattung oder Nachzahlung.',
+      },
+      {
+        frage: 'Welche Steuerklasse habe ich?',
+        antwort: 'Klasse I: ledig, geschieden, verwitwet. Klasse II: alleinerziehend (mit Kind im Haushalt, muss beantragt werden). Klasse III: verheiratet mit höherem Einkommen (Partner in V). Klasse IV: verheiratet mit ähnlichem Einkommen. Klasse V: verheiratet mit niedrigerem Einkommen (Partner in III). Klasse VI: Zweit- oder Nebenjob.',
+      },
+      {
+        frage: 'Kann ich einen Freibetrag eintragen lassen?',
+        antwort: 'Ja, mit dem „Antrag auf Lohnsteuer-Ermäßigung" beim Finanzamt (online über Elster). Der Freibetrag wird monatlich bei der Lohnsteuer berücksichtigt — Sie haben sofort mehr Netto. Typische Gründe: hohe Pendlerpauschale, Kinderbetreuungskosten, Unterhaltszahlungen, Behinderten-Pauschbetrag. Der Freibetrag gilt bis zu zwei Jahre.',
+      },
+      {
+        frage: 'Warum zahle ich in Steuerklasse V so viel Lohnsteuer?',
+        antwort: 'In Klasse V wird KEIN Grundfreibetrag gewährt — der steht dem Partner in Klasse III zu. Dadurch wird auf jeden verdienten Euro Lohnsteuer fällig. Der Sinn: Die Gesamtbelastung des Ehepaars bleibt gleich, nur anders auf die Partner verteilt. Am Jahresende gleicht sich das über die Steuererklärung meist aus — oft mit einer Erstattung für den Partner in V.',
+      },
+      {
+        frage: 'Wird die Lohnsteuer bei der Steuererklärung verrechnet?',
+        antwort: 'Ja, die im Jahr gezahlte Lohnsteuer wird auf die Jahres-Einkommensteuer angerechnet. Stimmt die Lohnsteuer mit der Jahressteuer überein: keine Nachzahlung/Erstattung. Wurde zu viel einbehalten (z. B. wegen Werbungskosten, außergewöhnlicher Belastungen): Erstattung. Wurde zu wenig einbehalten (z. B. Nebeneinkünfte, Klasse III/V): Nachzahlung.',
+      },
+      {
+        frage: 'Wie hoch ist der Grundfreibetrag 2026?',
+        antwort: 'Der Grundfreibetrag 2026 beträgt 12.096 € — das entspricht genau dem Wert von 2025. Bis zu diesem Jahresbetrag fällt keine Einkommensteuer an (in Klasse I, II, IV). In Klasse III ist der Grundfreibetrag verdoppelt (24.192 €, Splitting). Klasse V und VI haben keinen Grundfreibetrag.',
+      },
+    ],
+  },
 ];

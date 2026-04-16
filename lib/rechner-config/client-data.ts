@@ -1299,6 +1299,45 @@ export const rechner: RechnerLight[] = [
     "icon": "⚖️"
   },
   {
+    "slug": "pfaendungsrechner",
+    "titel": "Pfändungsrechner",
+    "beschreibung": "Pfändungsfreies Einkommen berechnen: Freibetrag nach § 850c ZPO, Erhöhung bei Unterhaltspflichten, P-Konto.",
+    "kategorie": "Finanzen",
+    "kategorieSlug": "finanzen",
+    "keywords": [
+      "pfändungsrechner",
+      "pfändungsfreibetrag",
+      "pfändungstabelle 2026",
+      "850c zpo",
+      "pfändungsfreigrenze",
+      "p-konto freibetrag",
+      "lohnpfändung",
+      "unterhaltspflicht pfändung",
+      "gehaltspfändung rechner"
+    ],
+    "icon": "⚖️"
+  },
+  {
+    "slug": "lohnsteuer-rechner",
+    "titel": "Lohnsteuer-Rechner",
+    "beschreibung": "Lohnsteuer berechnen: Steuerklasse I–VI, Bundesland, Kirchensteuer, Kinderfreibeträge — monatlich oder jährlich.",
+    "kategorie": "Finanzen",
+    "kategorieSlug": "finanzen",
+    "keywords": [
+      "lohnsteuer rechner",
+      "lohnsteuer berechnen",
+      "lohnsteuer 2026",
+      "lohnsteuer steuerklasse",
+      "lohnsteuer tabelle 2026",
+      "pap 2026",
+      "lohnsteuer monatlich",
+      "lohnsteuer jahrestabelle",
+      "lohnsteuer rechner brutto",
+      "lohnsteuer klasse 1"
+    ],
+    "icon": "💷"
+  },
+  {
     "slug": "bmi-rechner",
     "titel": "BMI-Rechner",
     "beschreibung": "Body Mass Index berechnen: Mit WHO-Einordnung, farbiger Skala und optimalem BMI-Bereich für Ihr Alter.",

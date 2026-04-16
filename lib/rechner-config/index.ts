@@ -88,6 +88,8 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'pfaendungsrechner',
+  'lohnsteuer-rechner',
   'einkommensteuer-rechner',
   'steuerklassen-vergleich-rechner',
   'schenkungssteuer-rechner',
@@ -339,8 +341,10 @@ const verwandteMap: Record<string, string[]> = {
   'ehegattenunterhalt-rechner': ['unterhaltsrechner', 'scheidungskosten-rechner', 'zugewinnausgleich-rechner', 'splitting-rechner'],
   'schenkungssteuer-rechner': ['erbschaftsteuer-rechner', 'splitting-rechner', 'kapitalertragsteuer-rechner', 'steuererstattung-rechner'],
   'gewerbesteuer-rechner': ['gmbh-geschaeftsfuehrer-rechner', 'steuerprogression-rechner', 'brutto-netto-rechner', 'freelancer-stundensatz-rechner'],
-  'einkommensteuer-rechner': ['brutto-netto-rechner', 'splitting-rechner', 'steuerprogression-rechner', 'steuerklassen-vergleich-rechner'],
-  'steuerklassen-vergleich-rechner': ['splitting-rechner', 'einkommensteuer-rechner', 'brutto-netto-rechner', 'elterngeld-rechner'],
+  'einkommensteuer-rechner': ['lohnsteuer-rechner', 'brutto-netto-rechner', 'splitting-rechner', 'steuerklassen-vergleich-rechner'],
+  'steuerklassen-vergleich-rechner': ['splitting-rechner', 'einkommensteuer-rechner', 'lohnsteuer-rechner', 'brutto-netto-rechner'],
+  'pfaendungsrechner': ['brutto-netto-rechner', 'buergergeld-rechner', 'unterhaltsrechner', 'kreditrechner'],
+  'lohnsteuer-rechner': ['einkommensteuer-rechner', 'brutto-netto-rechner', 'steuerklassen-vergleich-rechner', 'steuerprogression-rechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {
