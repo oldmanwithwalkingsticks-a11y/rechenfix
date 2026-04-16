@@ -251,12 +251,12 @@ export default function WaermepumpeRechner() {
               </tr>
               <tr>
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Jährliche Ersparnis</td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-gray-400">—</td>
+                <td className="px-4 py-2.5 text-right tabular-nums text-gray-600">—</td>
                 <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400">+{fmtEuro(ergebnis.ersparnisJaehrlich)} €</td>
               </tr>
               <tr>
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Investition (nach Förderung)</td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-gray-400">—</td>
+                <td className="px-4 py-2.5 text-right tabular-nums text-gray-600">—</td>
                 <td className="px-4 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">{fmtEuro(ergebnis.nettoInvestition)} €</td>
               </tr>
               <tr>
@@ -266,7 +266,7 @@ export default function WaermepumpeRechner() {
               </tr>
               <tr className={`font-bold ${ergebnis.gesamtersparnis > 0 ? 'bg-green-50 dark:bg-green-500/10' : 'bg-red-50 dark:bg-red-500/10'}`}>
                 <td className={`px-4 py-3 ${ergebnis.gesamtersparnis > 0 ? 'text-green-800 dark:text-green-300' : 'text-red-800 dark:text-red-300'}`}>= Gesamtersparnis</td>
-                <td className="px-4 py-3 text-right tabular-nums text-gray-400">—</td>
+                <td className="px-4 py-3 text-right tabular-nums text-gray-600">—</td>
                 <td className={`px-4 py-3 text-right tabular-nums text-lg ${ergebnis.gesamtersparnis > 0 ? 'text-green-700 dark:text-green-300' : 'text-red-700 dark:text-red-300'}`}>
                   {ergebnis.gesamtersparnis >= 0 ? '+' : ''}{fmtEuro(ergebnis.gesamtersparnis)} €
                 </td>

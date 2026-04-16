@@ -58,7 +58,7 @@ export default function NummerEingabe({
         className={`input-field ${einheitPadding} ${className}`}
       />
       {einheit && (
-        <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none">
+        <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">
           {einheit}
         </span>
       )}

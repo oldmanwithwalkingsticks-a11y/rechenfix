@@ -70,7 +70,7 @@ export default function FeedbackButtons() {
               className={`flex-1 py-2 text-sm font-medium rounded-lg transition-colors ${
                 nachricht.trim() && !sending
                   ? 'bg-primary-600 text-white hover:bg-primary-700'
-                  : 'bg-gray-200 dark:bg-gray-700 text-gray-400 cursor-not-allowed'
+                  : 'bg-gray-200 dark:bg-gray-700 text-gray-600 cursor-not-allowed'
               }`}
             >
               {sending ? 'Wird gesendet...' : 'Feedback absenden'}

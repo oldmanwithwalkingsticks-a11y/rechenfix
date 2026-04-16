@@ -197,7 +197,7 @@ export default function CountdownRechner() {
                     <span className="flex items-center gap-2">
                       <span>{e.icon}</span>
                       <span className="text-gray-800 dark:text-gray-200 font-medium">{e.label}</span>
-                      <span className="text-xs text-gray-400">{e.d.toLocaleDateString('de-DE', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+                      <span className="text-xs text-gray-600">{e.d.toLocaleDateString('de-DE', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
                     </span>
                     <span className="font-bold text-primary-600 dark:text-primary-400">{e.cd.tage} Tage</span>
                   </button>
@@ -228,7 +228,7 @@ export default function CountdownRechner() {
 
       {/* Kein Datum gewählt */}
       {istEigen && !eigenDatum && (
-        <div className="text-center py-8 text-gray-400 dark:text-gray-500 text-sm">
+        <div className="text-center py-8 text-gray-600 dark:text-gray-500 text-sm">
           Bitte wählen Sie ein Datum aus.
         </div>
       )}

@@ -65,9 +65,9 @@ export default function PendlerpauschaleRechner() {
             onChange={e => setEntfernung(e.target.value)}
             className="input-field w-full pr-10"
           />
-          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none">km</span>
+          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">km</span>
         </div>
-        <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">
           Nur die einfache Strecke (nicht Hin + Rück).
         </p>
         <CrossLink href="/auto/spritkosten-rechner" emoji="⛽" text="Spritkosten für Ihren Arbeitsweg berechnen" />
@@ -96,7 +96,7 @@ export default function PendlerpauschaleRechner() {
               onChange={e => setArbeitstage(e.target.value)}
               className="input-field w-full pr-12"
             />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none">Tage</span>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">Tage</span>
           </div>
         ) : (
           <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 space-y-3">
@@ -184,7 +184,7 @@ export default function PendlerpauschaleRechner() {
               onChange={e => setGrenzsteuersatz(e.target.value)}
               className="input-field w-full pr-8"
             />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none">%</span>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">%</span>
           </div>
         </div>
         <div className="flex gap-1.5 flex-wrap">
@@ -202,7 +202,7 @@ export default function PendlerpauschaleRechner() {
             </button>
           ))}
         </div>
-        <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
+        <p className="text-xs text-gray-600 dark:text-gray-500 mt-2">
           Der Grenzsteuersatz ist der Steuersatz auf Ihren letzten verdienten Euro. Er liegt meist zwischen 25–42%.
         </p>
       </div>
@@ -278,7 +278,7 @@ export default function PendlerpauschaleRechner() {
                   }`}>
                     <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Homeoffice-Pauschale</p>
                     <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmtEuro(ergebnis.homeofficePauschale)}</p>
-                    <p className="text-xs text-gray-400 mt-0.5">{ergebnis.homeofficeTageJahr} Tage × 6 €</p>
+                    <p className="text-xs text-gray-600 mt-0.5">{ergebnis.homeofficeTageJahr} Tage × 6 €</p>
                   </div>
                 </div>
                 <p className="text-sm text-center font-medium text-gray-700 dark:text-gray-300">
@@ -286,7 +286,7 @@ export default function PendlerpauschaleRechner() {
                     {ergebnis.homeofficeVorteilhaft ? 'Homeoffice-Pauschale' : 'Pendlerpauschale'}
                   </strong>
                 </p>
-                <p className="text-xs text-gray-400 dark:text-gray-500 mt-2 text-center">
+                <p className="text-xs text-gray-600 dark:text-gray-500 mt-2 text-center">
                   Hinweis: Pro Tag kann nur eine Pauschale angesetzt werden — entweder Pendler oder Homeoffice.
                 </p>
               </div>
@@ -320,7 +320,7 @@ export default function PendlerpauschaleRechner() {
       )}
 
       {/* Disclaimer */}
-      <p className="text-xs text-gray-400 dark:text-gray-500 mt-6 text-center">
+      <p className="text-xs text-gray-600 dark:text-gray-500 mt-6 text-center">
         Allgemeine Information auf Basis des EStG 2026. Für verbindliche Auskünfte wenden Sie sich an einen Steuerberater.
       </p>
     </div>

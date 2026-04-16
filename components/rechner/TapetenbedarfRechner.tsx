@@ -141,7 +141,7 @@ export default function TapetenbedarfRechner() {
               <div className="flex-1">
                 <NummerEingabe value={w.b} onChange={w.setB} placeholder="Breite" einheit="m" />
               </div>
-              <span className="text-gray-400">×</span>
+              <span className="text-gray-600">×</span>
               <div className="flex-1">
                 <NummerEingabe value={w.h} onChange={w.setH} placeholder="Höhe" einheit="m" />
               </div>
@@ -164,19 +164,19 @@ export default function TapetenbedarfRechner() {
       </div>
       <div className="grid grid-cols-4 gap-2 mb-5">
         <div>
-          <label className="block text-xs text-gray-400 mb-1">Fenster B</label>
+          <label className="block text-xs text-gray-600 mb-1">Fenster B</label>
           <NummerEingabe value={fensterB} onChange={setFensterB} placeholder="1,2" einheit="m" />
         </div>
         <div>
-          <label className="block text-xs text-gray-400 mb-1">Fenster H</label>
+          <label className="block text-xs text-gray-600 mb-1">Fenster H</label>
           <NummerEingabe value={fensterH} onChange={setFensterH} placeholder="1,4" einheit="m" />
         </div>
         <div>
-          <label className="block text-xs text-gray-400 mb-1">Tür B</label>
+          <label className="block text-xs text-gray-600 mb-1">Tür B</label>
           <NummerEingabe value={tuerB} onChange={setTuerB} placeholder="0,9" einheit="m" />
         </div>
         <div>
-          <label className="block text-xs text-gray-400 mb-1">Tür H</label>
+          <label className="block text-xs text-gray-600 mb-1">Tür H</label>
           <NummerEingabe value={tuerH} onChange={setTuerH} placeholder="2,1" einheit="m" />
         </div>
       </div>

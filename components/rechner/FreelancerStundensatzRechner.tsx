@@ -65,7 +65,7 @@ export default function FreelancerStundensatzRechner() {
               Produktive Stunden pro Tag
             </label>
             <NummerEingabe value={produktiveStunden} onChange={setProduktiveStunden} einheit="h" placeholder="6" />
-            <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Fakturierbare Stunden (ohne Akquise, Admin etc.)</p>
+            <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">Fakturierbare Stunden (ohne Akquise, Admin etc.)</p>
           </div>
         </div>
 
@@ -108,7 +108,7 @@ export default function FreelancerStundensatzRechner() {
               Betriebsausgaben
             </label>
             <NummerEingabe value={betriebsausgaben} onChange={setBetriebsausgaben} einheit="€/Monat" placeholder="200" />
-            <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Büro, Software, Telefon, Internet etc.</p>
+            <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">Büro, Software, Telefon, Internet etc.</p>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">

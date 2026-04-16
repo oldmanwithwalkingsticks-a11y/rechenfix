@@ -115,7 +115,7 @@ export default function PromilleRechner() {
               onChange={e => setGewicht(e.target.value)}
               className="input-field w-full pr-10"
             />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none">kg</span>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">kg</span>
           </div>
         </div>
         <div>
@@ -131,7 +131,7 @@ export default function PromilleRechner() {
               onChange={e => setTrinkzeit(e.target.value)}
               className="input-field w-full pr-10"
             />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none">Std.</span>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">Std.</span>
           </div>
         </div>
       </div>
@@ -170,7 +170,7 @@ export default function PromilleRechner() {
                   onChange={e => updateGetraenk(g.id, { mengeL: parseFloat(e.target.value) || 0 })}
                   className="input-field w-full pr-6 text-xs py-1.5"
                 />
-                <span className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 text-xs pointer-events-none">L</span>
+                <span className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-600 text-xs pointer-events-none">L</span>
               </div>
               <div className="relative flex-1">
                 <input
@@ -183,7 +183,7 @@ export default function PromilleRechner() {
                   onChange={e => updateGetraenk(g.id, { alkoholProzent: parseFloat(e.target.value) || 0 })}
                   className="input-field w-full pr-6 text-xs py-1.5"
                 />
-                <span className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 text-xs pointer-events-none">%</span>
+                <span className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-600 text-xs pointer-events-none">%</span>
               </div>
               <button
                 onClick={() => entferne(g.id)}
@@ -336,7 +336,7 @@ export default function PromilleRechner() {
       )}
 
       {getraenke.length === 0 && (
-        <div className="text-center py-8 text-gray-400 dark:text-gray-500">
+        <div className="text-center py-8 text-gray-600 dark:text-gray-500">
           <p className="text-3xl mb-2">🍺</p>
           <p className="text-sm">Fügen Sie Getränke hinzu, um den Promillewert zu berechnen.</p>
         </div>

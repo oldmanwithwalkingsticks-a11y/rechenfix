@@ -58,7 +58,7 @@ export default function StromvergleichRechner() {
               </button>
             ))}
           </div>
-          <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+          <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">
             Klicken Sie auf eine Haushaltsgröße oder geben Sie Ihren Verbrauch manuell ein
           </p>
         </div>
@@ -157,13 +157,13 @@ export default function StromvergleichRechner() {
                 <div key={tarif.label} className="flex justify-between items-center px-4 py-3">
                   <div>
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{tarif.label}</span>
-                    <p className="text-xs text-gray-400 dark:text-gray-500">
+                    <p className="text-xs text-gray-600 dark:text-gray-500">
                       {fmt(tarif.arbeitspreisCtKwh)} ct/kWh + {fmt(tarif.grundpreisMonat)} €/Monat
                     </p>
                   </div>
                   <div className="text-right">
                     <span className="font-bold text-sm text-gray-800 dark:text-gray-200">{fmt(tarif.jahreskosten)} €/Jahr</span>
-                    <p className="text-xs text-gray-400 dark:text-gray-500">{fmt(tarif.monatskosten)} €/Monat</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-500">{fmt(tarif.monatskosten)} €/Monat</p>
                   </div>
                 </div>
               ))}

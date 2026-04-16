@@ -109,7 +109,7 @@ export default function BruttoNettoLongTail({ brutto, seoText, faq }: Props) {
                     <tr key={e.sk} className={i % 2 === 0 ? 'bg-gray-50 dark:bg-gray-700/30' : ''}>
                       <td className="p-3">
                         <span className="font-medium text-gray-800 dark:text-gray-200">{e.label}</span>
-                        <span className="block text-xs text-gray-400 dark:text-gray-500">{e.beschreibung}</span>
+                        <span className="block text-xs text-gray-600 dark:text-gray-500">{e.beschreibung}</span>
                       </td>
                       <td className="p-3 text-right font-bold text-primary-600 dark:text-primary-400">{fmt(e.ergebnis.nettoMonat)} €</td>
                       <td className="p-3 text-right text-red-500 dark:text-red-400">{fmt(e.ergebnis.gesamtAbzuege)} €</td>
@@ -173,7 +173,7 @@ export default function BruttoNettoLongTail({ brutto, seoText, faq }: Props) {
                 <details key={i} className="group border border-gray-100 dark:border-gray-700 rounded-xl">
                   <summary className="cursor-pointer p-4 font-medium text-gray-800 dark:text-gray-200 hover:text-primary-500 dark:hover:text-primary-400 transition-colors list-none flex justify-between items-center">
                     {item.frage}
-                    <svg className="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 text-gray-600 group-open:rotate-180 transition-transform shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </summary>
@@ -191,7 +191,7 @@ export default function BruttoNettoLongTail({ brutto, seoText, faq }: Props) {
                   href={`/finanzen/${vorherige}-euro-brutto-netto`}
                   className="flex-1 card p-4 flex items-center gap-2 group hover:border-primary-200 dark:hover:border-primary-500/30 transition-all"
                 >
-                  <svg className="w-4 h-4 text-gray-400 group-hover:text-primary-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 text-gray-600 group-hover:text-primary-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                   </svg>
                   <span className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors">
@@ -207,7 +207,7 @@ export default function BruttoNettoLongTail({ brutto, seoText, faq }: Props) {
                   <span className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors">
                     {fmtBrutto(naechste)} € brutto netto
                   </span>
-                  <svg className="w-4 h-4 text-gray-400 group-hover:text-primary-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 text-gray-600 group-hover:text-primary-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </Link>

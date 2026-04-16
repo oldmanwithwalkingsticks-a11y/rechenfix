@@ -161,7 +161,7 @@ export default function StreamingKostenRechner() {
             <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-center">
               <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Arbeitsstunden</p>
               <p className="text-xl font-bold text-purple-600 dark:text-purple-400">{ergebnis.arbeitsstundenMindestlohn.toFixed(0)} h</p>
-              <p className="text-xs text-gray-400 dark:text-gray-500">pro Jahr (Mindestlohn)</p>
+              <p className="text-xs text-gray-600 dark:text-gray-500">pro Jahr (Mindestlohn)</p>
             </div>
           </div>
 
@@ -179,7 +179,7 @@ export default function StreamingKostenRechner() {
                         i < ergebnis.ranking.length - 1 ? 'border-b border-gray-100 dark:border-gray-700' : ''
                       }`}
                     >
-                      <span className="text-sm font-bold text-gray-400 dark:text-gray-500 w-6 text-right">{i + 1}.</span>
+                      <span className="text-sm font-bold text-gray-600 dark:text-gray-500 w-6 text-right">{i + 1}.</span>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between mb-1">
                           <span className="font-medium text-gray-900 dark:text-white truncate">
@@ -199,7 +199,7 @@ export default function StreamingKostenRechner() {
                 })}
                 {ergebnis.sonstigeBetrag > 0 && (
                   <div className="flex items-center gap-3 px-4 py-3">
-                    <span className="text-sm font-bold text-gray-400 dark:text-gray-500 w-6 text-right">&bull;</span>
+                    <span className="text-sm font-bold text-gray-600 dark:text-gray-500 w-6 text-right">&bull;</span>
                     <div className="flex-1 flex items-center justify-between">
                       <span className="font-medium text-gray-900 dark:text-white">Sonstige</span>
                       <span className="font-bold text-gray-900 dark:text-white">{formatEuro(ergebnis.sonstigeBetrag)} €</span>

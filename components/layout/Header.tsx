@@ -53,9 +53,9 @@ export default function Header() {
               <div className="flex items-center gap-0.5">
                 <span className="text-3xl font-extrabold text-primary-500">Rechen</span>
                 <span className="text-3xl font-extrabold text-accent-500">fix</span>
-                <span className="text-sm text-gray-400 hidden sm:inline">.de</span>
+                <span className="text-sm text-gray-600 hidden sm:inline">.de</span>
               </div>
-              <span className="text-[11px] tracking-widest uppercase text-gray-400 dark:text-gray-500 font-medium -mt-1">
+              <span className="text-[11px] tracking-widest uppercase text-gray-600 dark:text-gray-500 font-medium -mt-1">
                 Fix gerechnet!
               </span>
             </div>
@@ -124,7 +124,7 @@ export default function Header() {
                       >
                         <span className="text-lg">{k.icon}</span>
                         {k.name}
-                        <span className="text-xs font-normal text-gray-400 ml-auto">{katRechner.length}</span>
+                        <span className="text-xs font-normal text-gray-600 ml-auto">{katRechner.length}</span>
                       </Link>
                       <ul className="space-y-0.5">
                         {katRechner.map(r => (

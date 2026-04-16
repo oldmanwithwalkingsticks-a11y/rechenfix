@@ -196,7 +196,7 @@ export default function BruttoNettoRechner() {
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">KV-Zusatzbeitrag (AN-Anteil)</label>
               <NummerEingabe value={kvZusatzbeitrag} onChange={setKvZusatzbeitrag} placeholder="z.B. 1,7" einheit="%" />
-              <p className="text-xs text-gray-400 mt-1">Durchschnitt 2025: 1,7%</p>
+              <p className="text-xs text-gray-600 mt-1">Durchschnitt 2025: 1,7%</p>
             </div>
           ) : (
             <div>
@@ -317,7 +317,7 @@ export default function BruttoNettoRechner() {
                 Sozial
               </div>
             </div>
-            <div className="flex justify-between text-xs text-gray-400 mt-1">
+            <div className="flex justify-between text-xs text-gray-600 mt-1">
               <span className="flex items-center gap-1"><span className="w-2 h-2 rounded bg-green-500 inline-block" /> Netto</span>
               <span className="flex items-center gap-1"><span className="w-2 h-2 rounded bg-red-400 inline-block" /> Steuern</span>
               <span className="flex items-center gap-1"><span className="w-2 h-2 rounded bg-amber-400 inline-block" /> Sozialabgaben</span>
@@ -330,11 +330,11 @@ export default function BruttoNettoRechner() {
             <table className="w-full text-sm">
               <tbody>
                 <Zeile label="Bruttogehalt" wert={ergebnis.bruttoMonat} hervorgehoben />
-                <tr><td colSpan={3} className="pt-3 pb-1 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Steuern</td></tr>
+                <tr><td colSpan={3} className="pt-3 pb-1 text-xs font-semibold text-gray-600 dark:text-gray-500 uppercase tracking-wider">Steuern</td></tr>
                 <Zeile label="Lohnsteuer" wert={-ergebnis.lohnsteuer} brutto={ergebnis.bruttoMonat} />
                 <Zeile label="Solidaritätszuschlag" wert={-ergebnis.solidaritaet} brutto={ergebnis.bruttoMonat} />
                 {kirchensteuer && <Zeile label={`Kirchensteuer (${kstSatz}%)`} wert={-ergebnis.kirchensteuer} brutto={ergebnis.bruttoMonat} />}
-                <tr><td colSpan={3} className="pt-3 pb-1 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Sozialabgaben</td></tr>
+                <tr><td colSpan={3} className="pt-3 pb-1 text-xs font-semibold text-gray-600 dark:text-gray-500 uppercase tracking-wider">Sozialabgaben</td></tr>
                 <Zeile label={kvArt === 'privat' ? 'Private KV (AN-Anteil)' : 'Krankenversicherung'} wert={-ergebnis.krankenversicherung} brutto={ergebnis.bruttoMonat} />
                 <Zeile label="Rentenversicherung" wert={-ergebnis.rentenversicherung} brutto={ergebnis.bruttoMonat} />
                 <Zeile label="Arbeitslosenversicherung" wert={-ergebnis.arbeitslosenversicherung} brutto={ergebnis.bruttoMonat} />
@@ -375,7 +375,7 @@ export default function BruttoNettoRechner() {
                     <div className="bg-white dark:bg-gray-800/60 rounded-lg p-3 text-center">
                       <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Abzüge</p>
                       <p className="text-lg font-bold text-red-500 dark:text-red-400">{fmt(wg.abzuege)} €</p>
-                      <p className="text-xs text-gray-400">{wgAbzuegePct}%</p>
+                      <p className="text-xs text-gray-600">{wgAbzuegePct}%</p>
                     </div>
                     <div className="bg-white dark:bg-gray-800/60 rounded-lg p-3 text-center">
                       <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Netto</p>
@@ -398,11 +398,11 @@ export default function BruttoNettoRechner() {
                   <table className="w-full text-sm">
                     <tbody>
                       <Zeile label="Weihnachtsgeld (brutto)" wert={wg.brutto} hervorgehoben />
-                      <tr><td colSpan={3} className="pt-3 pb-1 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Steuern</td></tr>
+                      <tr><td colSpan={3} className="pt-3 pb-1 text-xs font-semibold text-gray-600 dark:text-gray-500 uppercase tracking-wider">Steuern</td></tr>
                       <Zeile label="Lohnsteuer" wert={-wg.lohnsteuer} brutto={wg.brutto} />
                       <Zeile label="Solidaritätszuschlag" wert={-wg.solidaritaet} brutto={wg.brutto} />
                       {wg.kirchensteuer > 0 && <Zeile label={`Kirchensteuer (${kstSatz}%)`} wert={-wg.kirchensteuer} brutto={wg.brutto} />}
-                      <tr><td colSpan={3} className="pt-3 pb-1 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Sozialabgaben</td></tr>
+                      <tr><td colSpan={3} className="pt-3 pb-1 text-xs font-semibold text-gray-600 dark:text-gray-500 uppercase tracking-wider">Sozialabgaben</td></tr>
                       <Zeile label="Krankenversicherung" wert={-wg.krankenversicherung} brutto={wg.brutto} />
                       <Zeile label="Rentenversicherung" wert={-wg.rentenversicherung} brutto={wg.brutto} />
                       <Zeile label="Arbeitslosenversicherung" wert={-wg.arbeitslosenversicherung} brutto={wg.brutto} />
@@ -426,12 +426,12 @@ export default function BruttoNettoRechner() {
                     <div>
                       <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Jahresbrutto inkl. Weihnachtsgeld</p>
                       <p className="text-2xl font-bold text-gray-800 dark:text-gray-100">{fmt(jahresBruttoMitWg)} €</p>
-                      <p className="text-xs text-gray-400 mt-1">{fmt(ergebnis.bruttoJahr)} € Gehalt + {fmt(wg.brutto)} € Weihnachtsgeld</p>
+                      <p className="text-xs text-gray-600 mt-1">{fmt(ergebnis.bruttoJahr)} € Gehalt + {fmt(wg.brutto)} € Weihnachtsgeld</p>
                     </div>
                     <div>
                       <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Jahresnetto inkl. Weihnachtsgeld</p>
                       <p className="text-2xl font-bold text-green-600 dark:text-green-400">{fmt(jahresNettoMitWg)} €</p>
-                      <p className="text-xs text-gray-400 mt-1">{fmt(ergebnis.nettoJahr)} € Gehalt + {fmt(wg.netto)} € Weihnachtsgeld</p>
+                      <p className="text-xs text-gray-600 mt-1">{fmt(ergebnis.nettoJahr)} € Gehalt + {fmt(wg.netto)} € Weihnachtsgeld</p>
                     </div>
                   </div>
                 </div>
@@ -439,7 +439,7 @@ export default function BruttoNettoRechner() {
             );
           })()}
 
-          <p className="text-xs text-gray-400 dark:text-gray-500 mt-4 no-print">
+          <p className="text-xs text-gray-600 dark:text-gray-500 mt-4 no-print">
             * Vereinfachte Berechnung zur Orientierung. Für eine exakte Berechnung wenden Sie sich an Ihren Steuerberater oder nutzen Sie ELSTER.
           </p>
 
@@ -537,7 +537,7 @@ export default function BruttoNettoRechner() {
             </tbody>
           </table>
         </div>
-        <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
+        <p className="text-xs text-gray-600 dark:text-gray-500 mt-2">
           Werte gerundet, ohne Kirchensteuer, GKV mit 1,7% Zusatzbeitrag, keine Kinder, NRW. Stand 2025/2026.
         </p>
       </div>
@@ -554,7 +554,7 @@ function Zeile({ label, wert, hervorgehoben = false, brutto }: { label: string; 
       <td className={`py-1.5 text-right ${wert < 0 ? 'text-red-500 dark:text-red-400' : ''}`}>
         {wert < 0 ? `−${fmt(Math.abs(wert))}` : fmt(wert)} &euro;
       </td>
-      <td className="py-1.5 text-right text-xs text-gray-400 dark:text-gray-500 w-16">
+      <td className="py-1.5 text-right text-xs text-gray-600 dark:text-gray-500 w-16">
         {prozent ? `${prozent}%` : ''}
       </td>
     </tr>

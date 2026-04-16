@@ -56,7 +56,7 @@ export default function ProzVeraenderungRechner() {
       {/* Einheit */}
       <div className="mb-6">
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-          Einheit <span className="text-gray-400 font-normal">(optional)</span>
+          Einheit <span className="text-gray-600 font-normal">(optional)</span>
         </label>
         <div className="w-full sm:w-1/3">
           <input

@@ -288,7 +288,7 @@ export function AffiliateBox({ programId, context, variant = 'full' }: Affiliate
         className="mt-6 mb-6 relative bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden print:hidden"
         style={{ borderLeftWidth: '4px', borderLeftColor: program.color }}
       >
-        <span className="absolute top-2 right-3 text-[11px] text-gray-400 dark:text-gray-500 font-medium">
+        <span className="absolute top-2 right-3 text-[11px] text-gray-600 dark:text-gray-500 font-medium">
           Anzeige
         </span>
         <a
@@ -323,7 +323,7 @@ export function AffiliateBox({ programId, context, variant = 'full' }: Affiliate
       className="mt-6 mb-6 relative bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 print:hidden"
       style={{ borderLeftWidth: '4px', borderLeftColor: program.color }}
     >
-      <span className="absolute top-3 right-4 text-[11px] text-gray-400 dark:text-gray-500 font-medium">
+      <span className="absolute top-3 right-4 text-[11px] text-gray-600 dark:text-gray-500 font-medium">
         Anzeige
       </span>
       <div className="p-4">

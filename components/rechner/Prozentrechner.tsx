@@ -224,7 +224,7 @@ export default function Prozentrechner() {
                     ? 'font-bold text-primary-600 dark:text-primary-400 mt-2 pt-2 border-t border-gray-200 dark:border-gray-600'
                     : 'text-gray-600 dark:text-gray-400'
                 }`}>
-                  {i < berechnung.rechenweg.length - 1 && <span className="text-gray-400 dark:text-gray-500 mr-2">→</span>}
+                  {i < berechnung.rechenweg.length - 1 && <span className="text-gray-600 dark:text-gray-500 mr-2">→</span>}
                   {i === berechnung.rechenweg.length - 1 && <span className="text-primary-500 mr-2">=</span>}
                   {schritt}
                 </p>
@@ -265,10 +265,10 @@ export default function Prozentrechner() {
             {history.slice(1).map((h, i) => (
               <div key={i} className="flex items-center justify-between bg-gray-50 dark:bg-gray-700/30 rounded-lg px-3 py-2 text-sm">
                 <span className="text-gray-600 dark:text-gray-400 truncate">
-                  <span className="text-xs text-gray-400 dark:text-gray-500 mr-2">{h.modus}:</span>
+                  <span className="text-xs text-gray-600 dark:text-gray-500 mr-2">{h.modus}:</span>
                   {h.label} = <strong className="text-gray-800 dark:text-gray-200">{h.ergebnis}</strong>
                 </span>
-                <span className="text-xs text-gray-400 dark:text-gray-500 ml-2 shrink-0">{h.zeit}</span>
+                <span className="text-xs text-gray-600 dark:text-gray-500 ml-2 shrink-0">{h.zeit}</span>
               </div>
             ))}
           </div>

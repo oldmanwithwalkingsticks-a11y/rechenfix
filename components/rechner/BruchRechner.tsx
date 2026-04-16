@@ -390,7 +390,7 @@ export default function BruchRechner() {
         <div>
           <div className="flex flex-wrap items-end justify-center gap-4 mb-6">
             <BruchEingabe zaehler={vz1} setZaehler={setVz1} nenner={vn1} setNenner={setVn1} label="Bruch 1" />
-            <div className="pb-4 text-2xl font-bold text-gray-400">?</div>
+            <div className="pb-4 text-2xl font-bold text-gray-600">?</div>
             <BruchEingabe zaehler={vz2} setZaehler={setVz2} nenner={vn2} setNenner={setVn2} label="Bruch 2" />
           </div>
 

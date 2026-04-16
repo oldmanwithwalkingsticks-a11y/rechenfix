@@ -346,7 +346,7 @@ export default function AffiliateStatsPage() {
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-center">
           <p className="text-sm text-gray-500 dark:text-gray-400">Feedback</p>
           <p className="text-3xl font-bold text-green-600 dark:text-green-400">{feedbackGesamt.ja}</p>
-          <p className="text-xs text-gray-400 dark:text-gray-500">👍 {feedbackGesamt.ja} / 👎 {feedbackGesamt.nein}</p>
+          <p className="text-xs text-gray-600 dark:text-gray-500">👍 {feedbackGesamt.ja} / 👎 {feedbackGesamt.nein}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-center">
           <p className="text-sm text-gray-500 dark:text-gray-400">Zufriedenheit</p>
@@ -400,14 +400,14 @@ export default function AffiliateStatsPage() {
 
       {/* Tab Content */}
       {clicks.length === 0 && feedbacks.length === 0 ? (
-        <div className="text-center py-12 text-gray-400 dark:text-gray-500">
+        <div className="text-center py-12 text-gray-600 dark:text-gray-500">
           Keine Daten für {getMonatLabel(monat)} vorhanden.
         </div>
       ) : (
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
           {tab === 'programm' && (
             clicks.length === 0 ? (
-              <div className="text-center py-12 text-gray-400 dark:text-gray-500">Keine Affiliate-Klicks in diesem Monat.</div>
+              <div className="text-center py-12 text-gray-600 dark:text-gray-500">Keine Affiliate-Klicks in diesem Monat.</div>
             ) : (
             <table className="w-full text-sm">
               <thead>
@@ -432,7 +432,7 @@ export default function AffiliateStatsPage() {
 
           {tab === 'rechner' && (
             clicks.length === 0 ? (
-              <div className="text-center py-12 text-gray-400 dark:text-gray-500">Keine Affiliate-Klicks in diesem Monat.</div>
+              <div className="text-center py-12 text-gray-600 dark:text-gray-500">Keine Affiliate-Klicks in diesem Monat.</div>
             ) : (
             <table className="w-full text-sm">
               <thead>
@@ -459,7 +459,7 @@ export default function AffiliateStatsPage() {
 
           {tab === 'alle' && (
             clicks.length === 0 ? (
-              <div className="text-center py-12 text-gray-400 dark:text-gray-500">Keine Affiliate-Klicks in diesem Monat.</div>
+              <div className="text-center py-12 text-gray-600 dark:text-gray-500">Keine Affiliate-Klicks in diesem Monat.</div>
             ) : (
             <table className="w-full text-sm">
               <thead>
@@ -486,7 +486,7 @@ export default function AffiliateStatsPage() {
 
           {tab === 'feedback' && (
             feedbacks.length === 0 ? (
-              <div className="text-center py-12 text-gray-400 dark:text-gray-500">Keine Feedback-Daten in diesem Monat.</div>
+              <div className="text-center py-12 text-gray-600 dark:text-gray-500">Keine Feedback-Daten in diesem Monat.</div>
             ) : (
               <>
               <table className="w-full text-sm">

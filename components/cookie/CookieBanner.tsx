@@ -74,7 +74,7 @@ export default function CookieBanner() {
                 </h2>
                 <button
                   onClick={closeSettings}
-                  className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                  className="text-gray-600 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
                   aria-label="Schließen"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -144,7 +144,7 @@ function BannerSettingsButton() {
   return (
     <button
       onClick={openSettings}
-      className="text-gray-400 hover:text-white font-medium px-5 py-2.5 transition-colors text-sm underline underline-offset-2"
+      className="text-gray-600 hover:text-white font-medium px-5 py-2.5 transition-colors text-sm underline underline-offset-2"
     >
       Einstellungen
     </button>

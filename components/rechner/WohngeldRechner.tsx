@@ -107,7 +107,7 @@ export default function WohngeldRechner() {
               onChange={e => setHeizkosten(e.target.checked)}
               className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-500 focus:ring-primary-500"
             />
-            <span className="text-sm text-gray-700 dark:text-gray-300">Heizkostenpauschale einrechnen <span className="text-gray-400">(Wohngeld-Plus)</span></span>
+            <span className="text-sm text-gray-700 dark:text-gray-300">Heizkostenpauschale einrechnen <span className="text-gray-600">(Wohngeld-Plus)</span></span>
           </label>
         </div>
 
@@ -118,7 +118,7 @@ export default function WohngeldRechner() {
       <div className="mb-6">
         <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
-          Freibeträge <span className="text-gray-400 font-normal text-xs">(optional)</span>
+          Freibeträge <span className="text-gray-600 font-normal text-xs">(optional)</span>
         </h3>
 
         <div className="space-y-3">
@@ -129,7 +129,7 @@ export default function WohngeldRechner() {
               onChange={e => setErwerbstaetig(e.target.checked)}
               className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-500 focus:ring-primary-500"
             />
-            <span className="text-sm text-gray-700 dark:text-gray-300">Erwerbstätig <span className="text-gray-400">(Erwerbstätigenfreibetrag)</span></span>
+            <span className="text-sm text-gray-700 dark:text-gray-300">Erwerbstätig <span className="text-gray-600">(Erwerbstätigenfreibetrag)</span></span>
           </label>
 
           <label className="flex items-center gap-2 cursor-pointer">
@@ -149,7 +149,7 @@ export default function WohngeldRechner() {
               onChange={e => setSchwerbehindert(e.target.checked)}
               className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-500 focus:ring-primary-500"
             />
-            <span className="text-sm text-gray-700 dark:text-gray-300">Schwerbehindert <span className="text-gray-400">(GdB ≥ 50)</span></span>
+            <span className="text-sm text-gray-700 dark:text-gray-300">Schwerbehindert <span className="text-gray-600">(GdB ≥ 50)</span></span>
           </label>
         </div>
       </div>

@@ -151,7 +151,7 @@ export default function ProteinRechner() {
                   <div key={l.name} className="flex justify-between px-4 py-3 text-sm">
                     <span className="text-gray-600 dark:text-gray-400">
                       {l.name}
-                      <span className="text-xs text-gray-400 ml-2">({l.protein} g / {l.menge})</span>
+                      <span className="text-xs text-gray-600 ml-2">({l.protein} g / {l.menge})</span>
                     </span>
                     <span className="font-medium text-gray-800 dark:text-gray-200">{anzeige}</span>
                   </div>

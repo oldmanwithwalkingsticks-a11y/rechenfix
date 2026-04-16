@@ -123,7 +123,7 @@ export default function HandykostenRechner() {
               Zusatzoptionen pro Monat
             </label>
             <NummerEingabe value={zusatzoptionen} onChange={setZusatzoptionen} einheit="€" placeholder="0" />
-            <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">z.B. Auslandsflatrate, Cloud-Speicher</p>
+            <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">z.B. Auslandsflatrate, Cloud-Speicher</p>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -136,7 +136,7 @@ export default function HandykostenRechner() {
         {/* Vergleich mit aktuellem Anbieter */}
         <div className="bg-gray-50 dark:bg-gray-700/30 rounded-xl p-4">
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            Aktueller Anbieter — Kosten pro Monat <span className="text-gray-400 font-normal">(optional, zum Vergleich)</span>
+            Aktueller Anbieter — Kosten pro Monat <span className="text-gray-600 font-normal">(optional, zum Vergleich)</span>
           </label>
           <NummerEingabe value={aktuellerAnbieter} onChange={setAktuellerAnbieter} einheit="€" placeholder="z.B. 30" />
         </div>
@@ -210,7 +210,7 @@ export default function HandykostenRechner() {
                       <div className="flex justify-between text-sm mb-1">
                         <span className="text-gray-600 dark:text-gray-400">{pos.label}</span>
                         <span className="font-medium text-gray-800 dark:text-gray-200">
-                          {fmt(pos.betrag)} € <span className="text-gray-400 text-xs">({prozent.toFixed(0)}%)</span>
+                          {fmt(pos.betrag)} € <span className="text-gray-600 text-xs">({prozent.toFixed(0)}%)</span>
                         </span>
                       </div>
                       <div className="h-3 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">

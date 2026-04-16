@@ -100,14 +100,14 @@ export default function SteuererstattungRechner() {
               Homeoffice-Tage pro Jahr
             </label>
             <NummerEingabe value={homeofficeTage} onChange={setHomeofficeTage} placeholder="0" />
-            <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">6 €/Tag, max. 1.260 €/Jahr</p>
+            <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">6 €/Tag, max. 1.260 €/Jahr</p>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Berufsbedingte Ausgaben
             </label>
             <NummerEingabe value={beruflicheAusgaben} onChange={setBeruflicheAusgaben} einheit="€" placeholder="0" />
-            <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Fachliteratur, Fortbildung, Arbeitsmittel</p>
+            <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">Fachliteratur, Fortbildung, Arbeitsmittel</p>
           </div>
         </div>
 
@@ -135,7 +135,7 @@ export default function SteuererstattungRechner() {
               Haushaltsnahe Dienstleistungen
             </label>
             <NummerEingabe value={haushaltsnaheDL} onChange={setHaushaltsnaheDL} einheit="€" placeholder="0" />
-            <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">z.B. Putzhilfe, Handwerker</p>
+            <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">z.B. Putzhilfe, Handwerker</p>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -225,7 +225,7 @@ export default function SteuererstattungRechner() {
                   <div key={p.label} className="flex justify-between items-center px-4 py-3">
                     <div>
                       <span className="text-sm text-gray-700 dark:text-gray-300">{p.label}</span>
-                      {p.info && <p className="text-xs text-gray-400 dark:text-gray-500">{p.info}</p>}
+                      {p.info && <p className="text-xs text-gray-600 dark:text-gray-500">{p.info}</p>}
                     </div>
                     <span className="font-medium text-sm text-green-600 dark:text-green-400">+{fmt(p.betrag)} €</span>
                   </div>

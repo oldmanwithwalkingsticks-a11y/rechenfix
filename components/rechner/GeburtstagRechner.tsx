@@ -36,11 +36,11 @@ function LiveSekundenZaehler({ geburtsdatumMs }: { geburtsdatumMs: number }) {
 
   return (
     <div className="bg-gray-900 dark:bg-gray-950 rounded-xl p-5 mb-6 text-center">
-      <p className="text-gray-400 text-sm mb-2">Sie leben seit</p>
+      <p className="text-gray-600 text-sm mb-2">Sie leben seit</p>
       <p className="text-3xl sm:text-4xl font-mono font-bold text-green-400 tabular-nums tracking-wider">
         {sekunden}
       </p>
-      <p className="text-gray-400 text-sm mt-2">Sekunden</p>
+      <p className="text-gray-600 text-sm mt-2">Sekunden</p>
     </div>
   );
 }

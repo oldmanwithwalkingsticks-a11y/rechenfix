@@ -215,7 +215,7 @@ export default function TaschenrechnerRechner() {
       <div className="max-w-md mx-auto bg-gray-800 dark:bg-gray-900 rounded-3xl p-4 shadow-2xl">
         {/* Display */}
         <div className="bg-gray-900/80 dark:bg-black/60 rounded-2xl p-4 mb-4 min-h-[100px] flex flex-col justify-end">
-          <div className="text-right text-gray-400 text-sm font-mono min-h-[1.5rem] break-all leading-relaxed">
+          <div className="text-right text-gray-600 text-sm font-mono min-h-[1.5rem] break-all leading-relaxed">
             {eingabe || '\u00A0'}
           </div>
           <div className="text-right text-white text-3xl font-bold font-mono mt-1 break-all leading-tight">
@@ -291,7 +291,7 @@ export default function TaschenrechnerRechner() {
                   }}
                   className="w-full text-right px-4 py-2.5 hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors"
                 >
-                  <p className="text-xs text-gray-400 dark:text-gray-500 font-mono">{v.eingabe}</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-500 font-mono">{v.eingabe}</p>
                   <p className="text-sm font-bold text-gray-800 dark:text-gray-200 font-mono">= {v.ergebnis}</p>
                 </button>
               ))}

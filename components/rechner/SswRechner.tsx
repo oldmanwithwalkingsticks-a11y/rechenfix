@@ -191,7 +191,7 @@ export default function SswRechner() {
                       <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">Nächste Vorsorge</td>
                       <td className="px-4 py-2.5 text-right text-gray-800 dark:text-gray-200 whitespace-nowrap">
                         {ergebnis.vorstehendeUntersuchung.label}
-                        <span className="text-xs text-gray-400 ml-2">(SSW {ergebnis.vorstehendeUntersuchung.sswAnfang}–{ergebnis.vorstehendeUntersuchung.sswEnde})</span>
+                        <span className="text-xs text-gray-600 ml-2">(SSW {ergebnis.vorstehendeUntersuchung.sswAnfang}–{ergebnis.vorstehendeUntersuchung.sswEnde})</span>
                       </td>
                     </tr>
                   )}

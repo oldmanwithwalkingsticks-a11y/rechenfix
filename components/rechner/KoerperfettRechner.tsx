@@ -127,7 +127,7 @@ export default function KoerperfettRechner() {
 
       {/* Alter */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Alter <span className="text-gray-400 font-normal">(für Vergleichswerte)</span></label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Alter <span className="text-gray-600 font-normal">(für Vergleichswerte)</span></label>
         <div className="w-full sm:w-1/3">
           <NummerEingabe value={alter} onChange={setAlter} placeholder="z.B. 30" einheit="Jahre" />
         </div>
@@ -135,7 +135,7 @@ export default function KoerperfettRechner() {
 
       {/* Gewicht (optional) */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gewicht <span className="text-gray-400 font-normal">(optional, für Fett-/Magermasse)</span></label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gewicht <span className="text-gray-600 font-normal">(optional, für Fett-/Magermasse)</span></label>
         <div className="w-full sm:w-1/3">
           <NummerEingabe value={gewicht} onChange={setGewicht} placeholder="z.B. 80" einheit="kg" />
         </div>
@@ -205,7 +205,7 @@ export default function KoerperfettRechner() {
                       <span className="hidden sm:inline">{k.label}</span>
                       <span className="sm:hidden">{skalaFarben[i]?.label ?? ''}</span>
                       <br />
-                      <span className="text-gray-400 text-[9px]">{k.von}–{k.bis}%</span>
+                      <span className="text-gray-600 text-[9px]">{k.von}–{k.bis}%</span>
                     </div>
                   );
                 })}

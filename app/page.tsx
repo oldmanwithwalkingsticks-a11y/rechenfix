@@ -87,7 +87,7 @@ export default function Startseite() {
                   <span className="font-semibold text-sm text-gray-800 dark:text-gray-100 group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors">
                     {k.name}
                   </span>
-                  <span className="text-xs text-gray-400 dark:text-gray-500">{anzahl}</span>
+                  <span className="text-xs text-gray-600 dark:text-gray-500">{anzahl}</span>
                 </div>
                 <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed line-clamp-2">
                   {k.beschreibung}

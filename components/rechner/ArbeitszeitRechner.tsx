@@ -37,7 +37,7 @@ function MinutenEingabe({ value, onChange, label }: { value: string; onChange: (
           onChange={e => onChange(e.target.value)}
           className="input-field w-full pr-10"
         />
-        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none">min</span>
+        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">min</span>
       </div>
     </div>
   );
@@ -290,7 +290,7 @@ export default function ArbeitszeitRechner() {
                       onChange={e => updateTag(idx, { beginn: e.target.value })}
                       className="input-field w-24 text-xs py-1.5"
                     />
-                    <span className="text-gray-400 text-xs">–</span>
+                    <span className="text-gray-600 text-xs">–</span>
                     <input
                       type="time"
                       value={tag.ende}
@@ -307,11 +307,11 @@ export default function ArbeitszeitRechner() {
                       className="input-field w-16 text-xs py-1.5 text-center"
                       title="Pause in Minuten"
                     />
-                    <span className="text-xs text-gray-400 shrink-0">min</span>
+                    <span className="text-xs text-gray-600 shrink-0">min</span>
                   </>
                 )}
                 {tag.frei && (
-                  <span className="text-xs text-gray-400 italic ml-2">Frei</span>
+                  <span className="text-xs text-gray-600 italic ml-2">Frei</span>
                 )}
               </div>
             ))}
@@ -373,11 +373,11 @@ export default function ArbeitszeitRechner() {
                               <td className="px-4 py-2 text-gray-600 dark:text-gray-400">{t.ergebnis.pauseMinuten} min</td>
                               <td className="px-4 py-2 text-right font-medium text-gray-800 dark:text-gray-200">
                                 {fmtZeit(t.ergebnis.nettoStunden, t.ergebnis.nettoRestMinuten)}
-                                <span className="text-xs text-gray-400 ml-1">({fmtDez(t.ergebnis.dezimal)} h)</span>
+                                <span className="text-xs text-gray-600 ml-1">({fmtDez(t.ergebnis.dezimal)} h)</span>
                               </td>
                             </>
                           ) : (
-                            <td colSpan={4} className="px-4 py-2 text-gray-400 italic">Frei</td>
+                            <td colSpan={4} className="px-4 py-2 text-gray-600 italic">Frei</td>
                           )}
                         </tr>
                       ))}
@@ -409,7 +409,7 @@ export default function ArbeitszeitRechner() {
       )}
 
       {/* Disclaimer */}
-      <p className="text-xs text-gray-400 dark:text-gray-500 mt-6 text-center">
+      <p className="text-xs text-gray-600 dark:text-gray-500 mt-6 text-center">
         Allgemeine Information. Für verbindliche Auskünfte zum Arbeitsrecht wenden Sie sich an einen Fachanwalt für Arbeitsrecht.
       </p>
     </div>

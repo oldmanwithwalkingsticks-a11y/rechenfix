@@ -108,7 +108,7 @@ export default function WahrerStundenlohnRechner() {
               <p className="text-3xl sm:text-4xl font-extrabold text-gray-600 dark:text-gray-400">
                 {formatEuro(ergebnis.offiziellerStundenlohn)} €
               </p>
-              <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+              <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">
                 {formatEuro(ergebnis.nettoMonatlich)} € netto &divide; {ergebnis.vertragsstundenMonat.toFixed(0)} h
               </p>
             </div>

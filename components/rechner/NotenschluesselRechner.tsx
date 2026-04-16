@@ -351,11 +351,11 @@ export default function NotenschluesselRechner() {
           <div className="space-y-2 mb-4">
             {noten.map((n, idx) => (
               <div key={n.id} className="flex items-center gap-2">
-                <span className="text-xs text-gray-400 w-5 shrink-0">{idx + 1}.</span>
+                <span className="text-xs text-gray-600 w-5 shrink-0">{idx + 1}.</span>
                 <div className="flex-1">
                   <NummerEingabe value={n.note} onChange={v => updateNote(n.id, 'note', v)} placeholder="Note" />
                 </div>
-                <span className="text-xs text-gray-400 shrink-0">×</span>
+                <span className="text-xs text-gray-600 shrink-0">×</span>
                 <div className="w-16">
                   <NummerEingabe value={n.gewicht} onChange={v => updateNote(n.id, 'gewicht', v)} placeholder="1" />
                 </div>

@@ -286,7 +286,7 @@ export default function MwStRechner() {
                 </div>
                 <button
                   onClick={() => removeZeile(z.id)}
-                  className="px-2 py-2 text-gray-400 hover:text-red-500 transition-colors shrink-0"
+                  className="px-2 py-2 text-gray-600 hover:text-red-500 transition-colors shrink-0"
                   title="Position entfernen"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

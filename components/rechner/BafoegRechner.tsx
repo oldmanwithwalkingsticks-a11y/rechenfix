@@ -326,7 +326,7 @@ export default function BafoegRechner() {
                     <tr>
                       <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">
                         Elterneinkommen
-                        <span className="text-xs text-gray-400 ml-1">(Netto {fmtEuro(ergebnis.nettoEltern)} € − Freibetrag {fmtEuro(ergebnis.freibetragEltern)} €)</span>
+                        <span className="text-xs text-gray-600 ml-1">(Netto {fmtEuro(ergebnis.nettoEltern)} € − Freibetrag {fmtEuro(ergebnis.freibetragEltern)} €)</span>
                       </td>
                       <td className="px-4 py-2.5 text-right tabular-nums text-red-500 whitespace-nowrap">−{fmtEuro(ergebnis.anrechnungEltern)} €</td>
                     </tr>

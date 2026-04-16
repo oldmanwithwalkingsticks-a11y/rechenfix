@@ -128,7 +128,7 @@ export default function UrlaubstageRechner() {
               />
             </div>
           </div>
-          <p className="text-xs text-gray-400 dark:text-gray-500 mb-4">
+          <p className="text-xs text-gray-600 dark:text-gray-500 mb-4">
             Leer lassen = volles Kalenderjahr. Bei Eintritt/Austritt im laufenden Jahr wird der Urlaub anteilig berechnet (§ 5 BUrlG).
           </p>
 
@@ -158,7 +158,7 @@ export default function UrlaubstageRechner() {
                 onChange={e => setTeilzeitTage(e.target.value)}
                 className="input-field w-32"
               />
-              <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+              <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">
                 Umrechnung: {teilzeitTage}/{arbeitstageProWoche} der Vollzeit-Tage
               </p>
             </div>
@@ -403,7 +403,7 @@ export default function UrlaubstageRechner() {
       )}
 
       {/* Disclaimer */}
-      <p className="text-xs text-gray-400 dark:text-gray-500 mt-6 text-center">
+      <p className="text-xs text-gray-600 dark:text-gray-500 mt-6 text-center">
         Allgemeine Information auf Basis des BUrlG. Tarifverträge und Betriebsvereinbarungen können abweichende Regelungen enthalten. Für verbindliche Auskünfte wenden Sie sich an einen Fachanwalt für Arbeitsrecht.
       </p>
     </div>

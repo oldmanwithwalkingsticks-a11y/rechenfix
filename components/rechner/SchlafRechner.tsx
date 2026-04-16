@@ -86,7 +86,7 @@ export default function SchlafRechner() {
               className="input-field pr-14"
               placeholder="30"
             />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-400">Jahre</span>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-600">Jahre</span>
           </div>
         </div>
         <div>
@@ -101,7 +101,7 @@ export default function SchlafRechner() {
               className="input-field pr-14"
               placeholder="15"
             />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-400">Min.</span>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-600">Min.</span>
           </div>
         </div>
       </div>
@@ -186,7 +186,7 @@ export default function SchlafRechner() {
                     }}
                   />
                 </div>
-                <p className="text-[10px] text-gray-400 mt-1 text-center">Grüner Bereich = empfohlen</p>
+                <p className="text-[10px] text-gray-600 mt-1 text-center">Grüner Bereich = empfohlen</p>
               </div>
             </div>
 

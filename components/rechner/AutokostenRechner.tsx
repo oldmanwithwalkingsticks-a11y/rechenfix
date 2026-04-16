@@ -217,11 +217,11 @@ export default function AutokostenRechner() {
             <NummerEingabe value={tuev} onChange={setTuev} placeholder="120" einheit="€ / 2 Jahre" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Parkkosten <span className="text-gray-400 font-normal">(optional)</span></label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Parkkosten <span className="text-gray-600 font-normal">(optional)</span></label>
             <NummerEingabe value={parkkosten} onChange={setParkkosten} placeholder="0" einheit="€/Monat" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Waschanlage / Pflege <span className="text-gray-400 font-normal">(optional)</span></label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Waschanlage / Pflege <span className="text-gray-600 font-normal">(optional)</span></label>
             <NummerEingabe value={waschanlage} onChange={setWaschanlage} placeholder="15" einheit="€/Monat" />
           </div>
         </div>
@@ -392,7 +392,7 @@ export default function AutokostenRechner() {
                 <div key={s.label} className="flex justify-between items-center text-sm">
                   <div>
                     <span className="text-gray-700 dark:text-gray-300 font-medium">{s.label}</span>
-                    <span className="text-gray-400 dark:text-gray-500 text-xs ml-1">({s.km} km{s.hinweis ? `, ${s.hinweis}` : ''})</span>
+                    <span className="text-gray-600 dark:text-gray-500 text-xs ml-1">({s.km} km{s.hinweis ? `, ${s.hinweis}` : ''})</span>
                   </div>
                   <span className="font-bold text-gray-800 dark:text-gray-200 tabular-nums">{fmtEuro2(s.kosten)} €</span>
                 </div>

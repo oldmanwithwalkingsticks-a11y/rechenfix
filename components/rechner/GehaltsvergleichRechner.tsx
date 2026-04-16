@@ -32,7 +32,7 @@ function PerzentilBar({ perzentil }: { perzentil: number }) {
         <div className="bg-green-400 flex-1" />
         <div className="bg-emerald-500 flex-1" />
       </div>
-      <div className="flex justify-between text-[10px] text-gray-400 mt-1 px-0.5">
+      <div className="flex justify-between text-[10px] text-gray-600 mt-1 px-0.5">
         <span>0%</span>
         <span>25%</span>
         <span>50%</span>

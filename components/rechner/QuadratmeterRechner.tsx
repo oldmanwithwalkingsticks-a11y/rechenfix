@@ -257,7 +257,7 @@ export default function QuadratmeterRechner() {
 
           {f.form === 'lform' && (
             <div>
-              <p className="text-xs text-gray-400 dark:text-gray-500 mb-3">Teilen Sie Ihren L-förmigen Raum in zwei Rechtecke auf</p>
+              <p className="text-xs text-gray-600 dark:text-gray-500 mb-3">Teilen Sie Ihren L-förmigen Raum in zwei Rechtecke auf</p>
               <p className="text-xs font-medium text-gray-600 dark:text-gray-300 mb-2">Rechteck 1</p>
               <div className="grid grid-cols-2 gap-3 mb-3">
                 <div>
@@ -362,7 +362,7 @@ export default function QuadratmeterRechner() {
                     <div className="text-right">
                       <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(ef.flaeche)} m²</span>
                       {ef.umfang !== null && (
-                        <span className="text-xs text-gray-400 dark:text-gray-500 ml-2">(U: {fmt(ef.umfang)} m)</span>
+                        <span className="text-xs text-gray-600 dark:text-gray-500 ml-2">(U: {fmt(ef.umfang)} m)</span>
                       )}
                     </div>
                   </div>

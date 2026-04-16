@@ -207,7 +207,7 @@ export default function StundenlohnRechner() {
               <div className="flex justify-between px-4 py-3 text-sm bg-accent-50/50 dark:bg-accent-500/5">
                 <span className="text-gray-600 dark:text-gray-400">
                   Effektiver Stundenlohn
-                  <span className="block text-xs text-gray-400 dark:text-gray-500">nach Abzug Urlaub & Feiertage</span>
+                  <span className="block text-xs text-gray-600 dark:text-gray-500">nach Abzug Urlaub & Feiertage</span>
                 </span>
                 <span className="font-bold text-accent-600 dark:text-accent-400">{fmt(ergebnis.effektiverStundenlohn)} €</span>
               </div>

@@ -60,7 +60,7 @@ export default function LieferserviceRechner() {
               className="input-field pr-8"
               placeholder="z.B. 25,50"
             />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">€</span>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm">€</span>
           </div>
         </div>
 
@@ -75,7 +75,7 @@ export default function LieferserviceRechner() {
               className="input-field pr-8"
               placeholder="z.B. 2,99"
             />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">€</span>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm">€</span>
           </div>
         </div>
 
@@ -90,7 +90,7 @@ export default function LieferserviceRechner() {
               className="input-field pr-8"
               placeholder="z.B. 1,50"
             />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">€</span>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm">€</span>
           </div>
         </div>
       </div>

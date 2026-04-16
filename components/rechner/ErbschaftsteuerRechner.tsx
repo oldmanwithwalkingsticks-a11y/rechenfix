@@ -171,7 +171,7 @@ export default function ErbschaftsteuerRechner() {
               <tr>
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">
                   Persönlicher Freibetrag
-                  <span className="text-xs text-gray-400 ml-1">({ergebnis.verwandtschaftLabel})</span>
+                  <span className="text-xs text-gray-600 ml-1">({ergebnis.verwandtschaftLabel})</span>
                 </td>
                 <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">−{fmtEuro(ergebnis.persoenlicherFreibetrag)} €</td>
               </tr>

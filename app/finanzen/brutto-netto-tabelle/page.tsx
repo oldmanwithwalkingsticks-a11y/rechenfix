@@ -135,7 +135,7 @@ export default function BruttoNettoTabelle() {
               </table>
             </div>
 
-            <p className="text-xs text-gray-400 dark:text-gray-500 mt-3">
+            <p className="text-xs text-gray-600 dark:text-gray-500 mt-3">
               Werte gerundet, ohne Kirchensteuer, GKV mit 1,7% Zusatzbeitrag, keine Kinder, NRW. Stand 2025/2026.
             </p>
 
@@ -190,7 +190,7 @@ export default function BruttoNettoTabelle() {
                 <details key={i} className="group border border-gray-100 dark:border-gray-700 rounded-xl">
                   <summary className="cursor-pointer p-4 font-medium text-gray-800 dark:text-gray-200 hover:text-primary-500 dark:hover:text-primary-400 transition-colors list-none flex justify-between items-center">
                     {item.frage}
-                    <svg className="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 text-gray-600 group-open:rotate-180 transition-transform shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </summary>

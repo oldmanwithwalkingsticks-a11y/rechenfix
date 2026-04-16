@@ -150,7 +150,7 @@ export default function DurchschnittRechner() {
             placeholder="4; 7; 2; 9; 5"
             className="input-field w-full"
           />
-          <p className="text-xs text-gray-400 mt-1">{aktuelleWerte.length} Werte erkannt</p>
+          <p className="text-xs text-gray-600 mt-1">{aktuelleWerte.length} Werte erkannt</p>
         </div>
       ) : (
         <div>
@@ -158,7 +158,7 @@ export default function DurchschnittRechner() {
           <div className="space-y-2">
             {einzelWerte.map((e, idx) => (
               <div key={e.id} className="flex items-center gap-2">
-                <span className="text-xs text-gray-400 w-5 shrink-0">{idx + 1}.</span>
+                <span className="text-xs text-gray-600 w-5 shrink-0">{idx + 1}.</span>
                 <div className="flex-1">
                   <NummerEingabe value={e.wert} onChange={v => updateEinzel(e.id, v)} placeholder="Wert" />
                 </div>
@@ -270,11 +270,11 @@ export default function DurchschnittRechner() {
           <div className="space-y-2 mb-4">
             {gEintraege.map((e, idx) => (
               <div key={e.id} className="flex items-center gap-2">
-                <span className="text-xs text-gray-400 w-5 shrink-0">{idx + 1}.</span>
+                <span className="text-xs text-gray-600 w-5 shrink-0">{idx + 1}.</span>
                 <div className="flex-1">
                   <NummerEingabe value={e.wert} onChange={v => updateG(e.id, 'wert', v)} placeholder="Wert" />
                 </div>
-                <span className="text-xs text-gray-400 shrink-0">×</span>
+                <span className="text-xs text-gray-600 shrink-0">×</span>
                 <div className="w-16">
                   <NummerEingabe value={e.gewicht} onChange={v => updateG(e.id, 'gewicht', v)} placeholder="1" />
                 </div>
@@ -356,7 +356,7 @@ export default function DurchschnittRechner() {
                     {medianErgebnis.modus ? medianErgebnis.modus.map(fmt).join(', ') : '–'}
                   </p>
                   {!medianErgebnis.modus && (
-                    <p className="text-xs text-gray-400 mt-0.5">kein Modus</p>
+                    <p className="text-xs text-gray-600 mt-0.5">kein Modus</p>
                   )}
                 </div>
               </div>

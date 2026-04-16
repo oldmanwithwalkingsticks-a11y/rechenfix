@@ -186,32 +186,32 @@ export default function MinijobRechner() {
               <tr>
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">RV-Eigenanteil (3,6 %)</td>
                 <td className="px-4 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">{ergebnis.rvEigenanteil > 0 ? `−${fmtEuro(ergebnis.rvEigenanteil)} €` : '—'}</td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-gray-400">—</td>
+                <td className="px-4 py-2.5 text-right tabular-nums text-gray-600">—</td>
               </tr>
               <tr>
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Pauschale Rentenversicherung ({art === 'gewerblich' ? '15' : '5'} %)</td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-gray-400">—</td>
+                <td className="px-4 py-2.5 text-right tabular-nums text-gray-600">—</td>
                 <td className="px-4 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">−{fmtEuro(ergebnis.agRentenversicherung)} €</td>
               </tr>
               <tr>
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Pauschale Krankenversicherung ({art === 'gewerblich' ? '13' : '5'} %)</td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-gray-400">—</td>
+                <td className="px-4 py-2.5 text-right tabular-nums text-gray-600">—</td>
                 <td className="px-4 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">−{fmtEuro(ergebnis.agKrankenversicherung)} €</td>
               </tr>
               <tr>
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Pauschale Lohnsteuer (2 %)</td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-gray-400">—</td>
+                <td className="px-4 py-2.5 text-right tabular-nums text-gray-600">—</td>
                 <td className="px-4 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">−{fmtEuro(ergebnis.agLohnsteuer)} €</td>
               </tr>
               <tr>
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Umlagen (U1, U2, Insolvenz)</td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-gray-400">—</td>
+                <td className="px-4 py-2.5 text-right tabular-nums text-gray-600">—</td>
                 <td className="px-4 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">−{fmtEuro(ergebnis.agUmlagen)} €</td>
               </tr>
               {ergebnis.agUnfallversicherung > 0 && (
                 <tr>
                   <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Unfallversicherung</td>
-                  <td className="px-4 py-2.5 text-right tabular-nums text-gray-400">—</td>
+                  <td className="px-4 py-2.5 text-right tabular-nums text-gray-600">—</td>
                   <td className="px-4 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">−{fmtEuro(ergebnis.agUnfallversicherung)} €</td>
                 </tr>
               )}

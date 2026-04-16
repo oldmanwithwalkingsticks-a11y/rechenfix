@@ -79,7 +79,7 @@ export default function EtfSparplanRechner() {
             onChange={e => setAnlagedauer(e.target.value)}
             className="w-full mt-2 accent-primary-500"
           />
-          <div className="flex justify-between text-xs text-gray-400 dark:text-gray-500">
+          <div className="flex justify-between text-xs text-gray-600 dark:text-gray-500">
             <span>1</span><span>10</span><span>20</span><span>30</span><span>40</span><span>50</span>
           </div>
         </div>
@@ -213,7 +213,7 @@ export default function EtfSparplanRechner() {
               <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Vermögensentwicklung</h3>
               <div className="relative h-64">
                 {/* Y-Achse Labels */}
-                <div className="absolute left-0 top-0 bottom-6 w-16 flex flex-col justify-between text-xs text-gray-400 dark:text-gray-500 text-right pr-2">
+                <div className="absolute left-0 top-0 bottom-6 w-16 flex flex-col justify-between text-xs text-gray-600 dark:text-gray-500 text-right pr-2">
                   <span>{fmt(chartData.maxKapital)} €</span>
                   <span>{fmt(chartData.maxKapital / 2)} €</span>
                   <span>0 €</span>
@@ -253,7 +253,7 @@ export default function EtfSparplanRechner() {
                   })}
                 </div>
                 {/* X-Achse */}
-                <div className="ml-16 flex justify-between text-xs text-gray-400 dark:text-gray-500">
+                <div className="ml-16 flex justify-between text-xs text-gray-600 dark:text-gray-500">
                   <span>1</span>
                   {nAnlagedauer >= 10 && <span>{Math.round(nAnlagedauer / 2)}</span>}
                   <span>{nAnlagedauer} J.</span>

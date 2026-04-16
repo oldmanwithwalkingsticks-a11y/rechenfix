@@ -133,14 +133,14 @@ export default function ElterngeldRechner() {
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
               <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Bezugsdauer</p>
               <p className="text-xl font-bold text-gray-800 dark:text-gray-100">{ergebnis.bezugsMonate} Monate</p>
-              <p className="text-xs text-gray-400 dark:text-gray-500">
+              <p className="text-xs text-gray-600 dark:text-gray-500">
                 {variante === 'basis' ? '(12+2 Partnermonate)' : '(24+4 Partnermonate)'}
               </p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
               <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Gesamt-Elterngeld</p>
               <p className="text-xl font-bold text-accent-600 dark:text-accent-400">{fmt(ergebnis.gesamt)} €</p>
-              <p className="text-xs text-gray-400 dark:text-gray-500">über {ergebnis.bezugsMonate} Monate</p>
+              <p className="text-xs text-gray-600 dark:text-gray-500">über {ergebnis.bezugsMonate} Monate</p>
             </div>
           </div>
 

@@ -133,7 +133,7 @@ export default function AboRechner() {
               placeholder="€/Mon."
               onKeyDown={e => e.key === 'Enter' && addEigenesAbo()}
             />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">€</span>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm">€</span>
           </div>
           <button
             onClick={addEigenesAbo}
@@ -162,7 +162,7 @@ export default function AboRechner() {
                     }}
                     className="input-field text-sm py-1 pr-7 text-right"
                   />
-                  <span className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 text-xs">€</span>
+                  <span className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-600 text-xs">€</span>
                 </div>
                 <button
                   onClick={() => {
@@ -243,7 +243,7 @@ export default function AboRechner() {
                     <span className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: a.farbe }} />
                     <span className="text-sm text-gray-700 dark:text-gray-300 flex-1">{a.name}</span>
                     <span className="text-sm font-medium text-gray-800 dark:text-gray-200">{fmt(a.betrag)} €</span>
-                    <span className="text-xs text-gray-400 w-10 text-right">{Math.round(a.prozent)}%</span>
+                    <span className="text-xs text-gray-600 w-10 text-right">{Math.round(a.prozent)}%</span>
                   </div>
                 ))}
               </div>

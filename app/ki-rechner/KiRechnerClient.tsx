@@ -271,7 +271,7 @@ export default function KiRechnerClient() {
       )}
 
       {/* Hinweis */}
-      <p className="text-xs text-center text-gray-400 dark:text-gray-500">
+      <p className="text-xs text-center text-gray-600 dark:text-gray-500">
         KI-basierte Sch&auml;tzung &mdash; f&uuml;r pr&auml;zise Ergebnisse nutzen Sie den verlinkten Detailrechner. Max 3 Fragen pro Minute.
       </p>
     </div>

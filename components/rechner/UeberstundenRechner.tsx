@@ -99,7 +99,7 @@ export default function UeberstundenRechner() {
                 onChange={e => setVertraglicheStunden(e.target.value)}
                 className="input-field w-full pr-16"
               />
-              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none">Std./Wo.</span>
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">Std./Wo.</span>
             </div>
           </div>
 
@@ -137,7 +137,7 @@ export default function UeberstundenRechner() {
                   onChange={e => setTatsaechlich(e.target.value)}
                   className="input-field w-full pr-16"
                 />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none">Std./Wo.</span>
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">Std./Wo.</span>
               </div>
             </div>
           ) : (
@@ -156,7 +156,7 @@ export default function UeberstundenRechner() {
                       onChange={e => updateTag(idx, e.target.value)}
                       className="input-field w-full pr-8"
                     />
-                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs pointer-events-none">h</span>
+                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-xs pointer-events-none">h</span>
                   </div>
                 </div>
               ))}
@@ -199,7 +199,7 @@ export default function UeberstundenRechner() {
                   onChange={e => setCustomWochen(e.target.value)}
                   className="input-field w-full pr-16"
                 />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs pointer-events-none">Wochen</span>
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-xs pointer-events-none">Wochen</span>
               </div>
             )}
           </div>
@@ -315,7 +315,7 @@ export default function UeberstundenRechner() {
                   onChange={e => setBruttogehalt(e.target.value)}
                   className="input-field w-full pr-8"
                 />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none">€</span>
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">€</span>
               </div>
               <CrossLink href="/finanzen/stundenlohn-rechner" emoji="💶" text="Stundenlohn aus Gehalt berechnen" />
             </div>
@@ -334,7 +334,7 @@ export default function UeberstundenRechner() {
                   onChange={e => setMonatsstunden(e.target.value)}
                   className="input-field w-full pr-8"
                 />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none">h</span>
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">h</span>
               </div>
             </div>
             <div>
@@ -349,7 +349,7 @@ export default function UeberstundenRechner() {
                   onChange={e => setZuschlag(e.target.value)}
                   className="input-field w-full pr-8"
                 />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none">%</span>
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">%</span>
               </div>
             </div>
           </div>
@@ -417,7 +417,7 @@ export default function UeberstundenRechner() {
                 </div>
               </div>
 
-              <p className="text-xs text-gray-400 dark:text-gray-500 text-center">
+              <p className="text-xs text-gray-600 dark:text-gray-500 text-center">
                 Die Nettoschätzung basiert auf einem pauschalen Abzug von ca. 40% und dient nur zur Orientierung.
               </p>
 
@@ -438,7 +438,7 @@ export default function UeberstundenRechner() {
       )}
 
       {/* Disclaimer */}
-      <p className="text-xs text-gray-400 dark:text-gray-500 mt-6 text-center">
+      <p className="text-xs text-gray-600 dark:text-gray-500 mt-6 text-center">
         Allgemeine Information. Überstundenregelungen hängen vom Arbeitsvertrag und Tarifvertrag ab.
       </p>
     </div>

@@ -173,14 +173,14 @@ export default function SplittingRechner() {
                 <p className="text-xs text-blue-600 dark:text-blue-400 mb-1">Partner 1</p>
                 <p className="font-bold text-blue-800 dark:text-blue-200">{fmtEuro(ergebnis.zveP1)} €</p>
               </div>
-              <div className="text-gray-400 text-lg hidden sm:block">+</div>
-              <div className="text-gray-400 text-lg sm:hidden">+</div>
+              <div className="text-gray-600 text-lg hidden sm:block">+</div>
+              <div className="text-gray-600 text-lg sm:hidden">+</div>
               <div className="bg-pink-50 dark:bg-pink-500/10 rounded-lg p-3 text-center flex-1 w-full">
                 <p className="text-xs text-pink-600 dark:text-pink-400 mb-1">Partner 2</p>
                 <p className="font-bold text-pink-800 dark:text-pink-200">{fmtEuro(ergebnis.zveP2)} €</p>
               </div>
-              <div className="text-gray-400 text-lg hidden sm:block">→</div>
-              <div className="text-gray-400 text-lg sm:hidden">↓</div>
+              <div className="text-gray-600 text-lg hidden sm:block">→</div>
+              <div className="text-gray-600 text-lg sm:hidden">↓</div>
               <div className="bg-purple-50 dark:bg-purple-500/10 rounded-lg p-3 text-center flex-1 w-full">
                 <p className="text-xs text-purple-600 dark:text-purple-400 mb-1">Gesamt ÷ 2</p>
                 <p className="font-bold text-purple-800 dark:text-purple-200">{fmtEuro(ergebnis.zveHalbe)} €</p>

@@ -142,7 +142,7 @@ export default function ZyklusRechner() {
                     <p className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
                       {first.toLocaleDateString('de-DE', { month: 'long', year: 'numeric' })}
                     </p>
-                    <div className="grid grid-cols-7 gap-0.5 text-[10px] text-gray-400 mb-1">
+                    <div className="grid grid-cols-7 gap-0.5 text-[10px] text-gray-600 mb-1">
                       {['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'].map(l => <div key={l} className="text-center">{l}</div>)}
                     </div>
                     <div className="grid grid-cols-7 gap-0.5">

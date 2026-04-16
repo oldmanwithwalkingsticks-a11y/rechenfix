@@ -147,7 +147,7 @@ export default function Page() {
                     <tr key={e.sk} className={i % 2 === 0 ? 'bg-gray-50 dark:bg-gray-700/30' : ''}>
                       <td className="p-3">
                         <span className="font-medium text-gray-800 dark:text-gray-200">{e.label}</span>
-                        <span className="block text-xs text-gray-400 dark:text-gray-500">{e.beschreibung}</span>
+                        <span className="block text-xs text-gray-600 dark:text-gray-500">{e.beschreibung}</span>
                       </td>
                       <td className="p-3 text-right font-bold text-primary-600 dark:text-primary-400">{fmt(e.ergebnis.nettoMonat)} €</td>
                       <td className="p-3 text-right text-red-500 dark:text-red-400">{fmt(e.ergebnis.gesamtAbzuege)} €</td>
@@ -219,7 +219,7 @@ export default function Page() {
                 <details key={i} className="group border border-gray-100 dark:border-gray-700 rounded-xl">
                   <summary className="cursor-pointer p-4 font-medium text-gray-800 dark:text-gray-200 hover:text-primary-500 dark:hover:text-primary-400 transition-colors list-none flex justify-between items-center">
                     {item.frage}
-                    <svg className="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 text-gray-600 group-open:rotate-180 transition-transform shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </summary>

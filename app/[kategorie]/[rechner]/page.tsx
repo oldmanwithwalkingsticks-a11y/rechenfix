@@ -331,7 +331,7 @@ export default function RechnerSeite({ params }: Props) {
               <div className="flex items-center gap-2 pb-2 border-b border-gray-300">
                 <img src="/logo.svg" alt="Rechenfix" width={32} height={32} />
                 <div>
-                  <span className="text-lg font-extrabold text-gray-800">Rechen<span className="text-emerald-600">fix</span><span className="text-sm font-normal text-gray-400">.de</span></span>
+                  <span className="text-lg font-extrabold text-gray-800">Rechen<span className="text-emerald-600">fix</span><span className="text-sm font-normal text-gray-600">.de</span></span>
                   <span className="block text-[10px] text-gray-500">Fix gerechnet!</span>
                 </div>
               </div>
@@ -367,7 +367,7 @@ export default function RechnerSeite({ params }: Props) {
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors">
                       {link.label}
                     </span>
-                    <span className="block text-xs text-gray-400 dark:text-gray-500 mt-0.5">in netto →</span>
+                    <span className="block text-xs text-gray-600 dark:text-gray-500 mt-0.5">in netto →</span>
                   </Link>
                 ))}
               </div>
@@ -438,7 +438,7 @@ export default function RechnerSeite({ params }: Props) {
                   <details key={i} className="group border border-gray-100 dark:border-gray-700 rounded-xl">
                     <summary className="cursor-pointer p-4 font-medium text-gray-800 dark:text-gray-200 hover:text-primary-500 dark:hover:text-primary-400 transition-colors list-none flex justify-between items-center">
                       {item.frage}
-                      <svg className="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5 text-gray-600 group-open:rotate-180 transition-transform shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                       </svg>
                     </summary>
@@ -490,7 +490,7 @@ export default function RechnerSeite({ params }: Props) {
                   >
                     <span>{k.icon}</span>
                     <span>{k.name}</span>
-                    <span className="text-xs font-normal text-gray-400 ml-auto">{katRechner.length}</span>
+                    <span className="text-xs font-normal text-gray-600 ml-auto">{katRechner.length}</span>
                   </Link>
                   <ul className="space-y-0.5">
                     {katRechner.map(r => {
