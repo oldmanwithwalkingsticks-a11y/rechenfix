@@ -1085,4 +1085,139 @@ Der WHR ist ein Screening-Werkzeug, keine Diagnose. Er funktioniert am besten be
       },
     ],
   },
+  {
+    slug: 'blutdruck-rechner',
+    titel: 'Blutdruck-Rechner',
+    beschreibung: 'Blutdruckwerte einordnen: WHO-Klassifikation, Durchschnitt aus mehreren Messungen und Risikobewertung.',
+    kategorie: 'Gesundheit',
+    kategorieSlug: 'gesundheit',
+    metaTitle: 'Blutdruck-Rechner 2026 — Blutdruckwerte einordnen (WHO) | Rechenfix',
+    metaDescription: 'Blutdruck einordnen nach WHO-Klassifikation — mit Durchschnitt aus mehreren Messungen, Pulsdruck und KI-Erklärung. Kostenlos.',
+    keywords: ['blutdruck rechner', 'blutdruck einordnen', 'blutdruckwerte tabelle', 'hypertonie', 'blutdruck normal', 'blutdruck messen', 'systolisch diastolisch'],
+    icon: '🩺',
+    formel: 'Pulsdruck = Systolisch − Diastolisch | Mittlerer Druck = Diastolisch + Pulsdruck ÷ 3',
+    beispiel: '130/85 mmHg = Hochnormal. Pulsdruck: 45 mmHg. Mittlerer arterieller Druck: 100 mmHg.',
+    erklaerung: `**Was misst der Blutdruck?**
+
+Der Blutdruck beschreibt den Druck, den das Blut auf die Wände der Arterien ausübt. Er wird in Millimeter Quecksilbersäule (mmHg) angegeben und besteht aus zwei Werten: dem systolischen (oberen) und dem diastolischen (unteren) Wert. Der systolische Wert entsteht, wenn das Herz sich zusammenzieht und Blut in die Arterien pumpt. Der diastolische Wert wird gemessen, wenn das Herz sich entspannt und sich wieder mit Blut füllt.
+
+**WHO-Klassifikation der Blutdruckwerte**
+
+Die Weltgesundheitsorganisation (WHO) und die European Society of Hypertension (ESH) teilen Blutdruckwerte in sechs Kategorien ein:
+
+- **Optimal** (unter 120/80): Idealer Blutdruck mit dem geringsten kardiovaskulären Risiko.
+- **Normal** (120–129/80–84): Normaler Blutdruck, kein Handlungsbedarf.
+- **Hochnormal** (130–139/85–89): Leicht erhöht. Lebensstiländerungen können sinnvoll sein.
+- **Hypertonie Grad 1** (140–159/90–99): Leichter Bluthochdruck. Ärztliche Beratung und Lebensstiländerungen empfohlen.
+- **Hypertonie Grad 2** (160–179/100–109): Mittelschwerer Bluthochdruck. Medikamentöse Behandlung meist notwendig.
+- **Hypertonie Grad 3** (ab 180/110): Schwerer Bluthochdruck mit hohem Risiko für Organschäden. Sofortige Behandlung notwendig.
+
+Die Klassifikation richtet sich immer nach dem höheren Grad — wenn also der systolische Wert in Grad 2 fällt und der diastolische in Grad 1, gilt Grad 2.
+
+**Isolierte systolische Hypertonie**
+
+Eine Sonderform ist die isolierte systolische Hypertonie: Der systolische Wert liegt bei 140 mmHg oder darüber, während der diastolische Wert unter 90 mmHg bleibt. Sie tritt besonders häufig bei älteren Menschen auf, weil die Arterien mit dem Alter steifer werden. Trotz des normalen diastolischen Werts erhöht sie das Risiko für Herz-Kreislauf-Erkrankungen und sollte behandelt werden.
+
+**Pulsdruck und mittlerer arterieller Druck**
+
+Der Pulsdruck (Blutdruckamplitude) ist die Differenz zwischen systolischem und diastolischem Wert. Ein normaler Pulsdruck liegt bei 30–50 mmHg. Werte über 60 mmHg deuten auf eine erhöhte Gefäßsteifigkeit hin. Der mittlere arterielle Druck (MAD) beschreibt den durchschnittlichen Druck während eines Herzschlags und wird näherungsweise berechnet als: MAD = Diastolisch + (Systolisch − Diastolisch) ÷ 3.
+
+**Richtig messen**
+
+Für aussagekräftige Ergebnisse sollten Sie mehrere Messungen zu verschiedenen Zeitpunkten durchführen. Empfohlen wird: morgens und abends je zwei Messungen im Abstand von einer Minute, im Sitzen nach fünf Minuten Ruhe, Manschette auf Herzhöhe. Der Rechner kann bis zu fünf Messungen mitteln — das liefert ein genaueres Bild als eine Einzelmessung.
+
+**Lebensstil und Blutdruck**
+
+Viele Faktoren beeinflussen den Blutdruck: Salzkonsum, Bewegung, Stress, Alkohol, Übergewicht und Rauchen. Eine Gewichtsreduktion von 10 kg kann den systolischen Wert um 5–20 mmHg senken. Regelmäßige Ausdauerbewegung (30 Minuten, 5× pro Woche) senkt den Blutdruck um 4–9 mmHg. Eine salzarme Ernährung (unter 6 g pro Tag) bringt 2–8 mmHg.`,
+    faq: [
+      {
+        frage: 'Was ist ein normaler Blutdruck?',
+        antwort: 'Ein optimaler Blutdruck liegt unter 120/80 mmHg, ein normaler bei 120–129/80–84 mmHg. Ab 140/90 mmHg spricht man von Bluthochdruck (Hypertonie). Werte zwischen 130–139/85–89 gelten als hochnormal — kein Bluthochdruck, aber ein Bereich, in dem Lebensstiländerungen sinnvoll sind.',
+      },
+      {
+        frage: 'Was bedeuten systolisch und diastolisch?',
+        antwort: 'Der systolische Wert (oberer Wert) misst den Druck, wenn das Herz Blut pumpt. Der diastolische Wert (unterer Wert) misst den Druck, wenn das Herz sich entspannt. Beide Werte sind wichtig — ein erhöhter systolischer Wert bei normalem diastolischen Wert (isolierte systolische Hypertonie) ist ebenfalls behandlungsbedürftig.',
+      },
+      {
+        frage: 'Wie oft sollte ich den Blutdruck messen?',
+        antwort: 'Bei bekanntem Bluthochdruck: täglich morgens und abends, jeweils zwei Messungen. Bei normalen Werten: alle 1–2 Jahre beim Arzt. Für den Rechner empfehlen wir den Durchschnittsmodus mit 3–5 Messungen über verschiedene Tage — das gibt ein realistischeres Bild als eine Einzelmessung.',
+      },
+      {
+        frage: 'Was ist der Pulsdruck?',
+        antwort: 'Der Pulsdruck ist die Differenz zwischen systolischem und diastolischem Wert (z. B. 130 − 80 = 50 mmHg). Normale Werte liegen bei 30–50 mmHg. Ein hoher Pulsdruck (über 60 mmHg) deutet auf steife Arterien hin und ist ein eigenständiger Risikofaktor für Herz-Kreislauf-Erkrankungen, besonders bei älteren Menschen.',
+      },
+      {
+        frage: 'Ersetzt der Rechner eine ärztliche Diagnose?',
+        antwort: 'Nein. Der Rechner ordnet Ihre Werte nach der WHO-Klassifikation ein — das ist eine Orientierung, keine Diagnose. Bei dauerhaft erhöhten Werten (ab 140/90 mmHg) oder Beschwerden wie Kopfschmerzen, Schwindel oder Sehstörungen sollten Sie unbedingt einen Arzt aufsuchen.',
+      },
+    ],
+  },
+  {
+    slug: 'schritte-rechner',
+    titel: 'Schritte-Rechner',
+    beschreibung: 'Schritte in Kilometer und Kalorien umrechnen: Tagesziel prüfen und Kalorienverbrauch durch Gehen berechnen.',
+    kategorie: 'Gesundheit',
+    kategorieSlug: 'gesundheit',
+    metaTitle: 'Schritte-Rechner 2026 — Schritte in km & Kalorien umrechnen | Rechenfix',
+    metaDescription: 'Schritte in Kilometer und Kalorien umrechnen — mit Schrittlänge, Gehzeit und Fortschrittsbalken zum 10.000-Schritte-Ziel. Kostenlos.',
+    keywords: ['schritte rechner', 'schritte in km', 'schritte kalorien', '10000 schritte', 'schrittlänge berechnen', 'gehgeschwindigkeit', 'kalorienverbrauch gehen'],
+    icon: '🚶',
+    formel: 'Schrittlänge ≈ Körpergröße × 0,415 | Distanz = Schritte × Schrittlänge ÷ 100.000 | Kalorien ≈ Distanz × Gewicht × 0,9',
+    beispiel: '8.000 Schritte bei 175 cm Größe: Schrittlänge 72,6 cm → 5,81 km. Bei 75 kg: ca. 392 kcal verbrannt.',
+    erklaerung: `**Was berechnet der Schritte-Rechner?**
+
+Der Rechner wandelt Schritte in Kilometer, Kalorien und Gehzeit um. Er berücksichtigt Ihre Körpergröße (für die individuelle Schrittlänge), Ihr Gewicht (für den Kalorienverbrauch) und die Gehgeschwindigkeit (für die Dauer). Ein Fortschrittsbalken zeigt, wie nah Sie dem empfohlenen Tagesziel von 10.000 Schritten sind.
+
+**Schrittlänge — individuell berechnet**
+
+Die Schrittlänge variiert je nach Körpergröße, Schrittfrequenz und Gelände. Als Faustregel gilt: Schrittlänge ≈ Körpergröße × 0,415. Bei einer Körpergröße von 175 cm ergibt das etwa 72,6 cm pro Schritt. Größere Menschen haben längere Schritte — wer 185 cm groß ist, legt pro Schritt rund 76,8 cm zurück und braucht für einen Kilometer weniger Schritte.
+
+Exaktere Werte erhält man durch eigene Messung: 100 Schritte auf einer ebenen Strecke gehen und die zurückgelegte Distanz teilen. Die Formel im Rechner liefert aber einen guten Näherungswert für den Alltagsgebrauch.
+
+**10.000 Schritte — woher kommt das Ziel?**
+
+Das 10.000-Schritte-Ziel stammt ursprünglich aus einer japanischen Marketingkampagne der 1960er-Jahre für einen Schrittzähler namens „Manpo-kei" (万歩計 = 10.000-Schritte-Messgerät). Inzwischen bestätigt die Forschung: 7.000–10.000 Schritte pro Tag senken das Risiko für Herz-Kreislauf-Erkrankungen, Diabetes Typ 2 und Gesamtsterblichkeit signifikant.
+
+Eine Meta-Analyse aus 2023 zeigt: Bereits 4.000 Schritte pro Tag reduzieren das Sterblichkeitsrisiko messbar. Mit jedem zusätzlichen 1.000 Schritte sinkt das Risiko um weitere 15 %. Der Effekt flacht ab etwa 10.000 Schritten ab — mehr hilft, aber der größte Nutzen liegt im Übergang von wenig zu mäßig aktiv.
+
+**Kalorienverbrauch beim Gehen**
+
+Der Kalorienverbrauch beim Gehen hängt von Gewicht, Geschwindigkeit und Steigung ab. Die Näherungsformel lautet: Kalorien ≈ Distanz (km) × Gewicht (kg) × 0,9. Das ist weniger als beim Joggen (Faktor ~1,0–1,1), aber Gehen ist gelenkschonender und lässt sich leichter in den Alltag integrieren.
+
+Beispiel: 10.000 Schritte bei 175 cm und 75 kg ≈ 7,26 km ≈ 490 kcal. Das entspricht einer kleinen Mahlzeit oder einem Stück Kuchen. Wer abnehmen möchte, kann durch tägliches Gehen ein Kaloriendefizit schaffen, ohne die Gelenke zu belasten.
+
+**Geschwindigkeit und Gehzeit**
+
+Die Gehgeschwindigkeit beeinflusst die Dauer, aber kaum den Kalorienverbrauch pro Kilometer. Langsames Gehen (4 km/h) entspricht einem gemütlichen Spaziergang, normales Tempo (5 km/h) einem zügigen Gang, schnelles Gehen (6,5 km/h) fast einem Walking-Tempo. Für 10.000 Schritte benötigt man bei normalem Tempo etwa 80–100 Minuten — verteilt über den Tag (Arbeitsweg, Mittagspause, Abendspaziergang) gut machbar.
+
+**Tipps für mehr Schritte im Alltag**
+
+- Eine Haltestelle früher aussteigen und den Rest gehen.
+- Treppe statt Aufzug nehmen.
+- Telefonate im Stehen oder Gehen führen.
+- In der Mittagspause einen 15-Minuten-Spaziergang machen.
+- Einkäufe zu Fuß erledigen statt mit dem Auto.`,
+    faq: [
+      {
+        frage: 'Wie viele Schritte sind ein Kilometer?',
+        antwort: 'Das hängt von der Körpergröße ab. Bei 170 cm sind es ca. 1.417 Schritte pro Kilometer, bei 180 cm ca. 1.339 Schritte. Als Faustregel: 1.200–1.500 Schritte pro Kilometer. Der Rechner berechnet den genauen Wert anhand Ihrer Körpergröße.',
+      },
+      {
+        frage: 'Wie viele Kalorien verbrennt man bei 10.000 Schritten?',
+        antwort: 'Bei 175 cm Größe und 75 kg Gewicht verbrennen 10.000 Schritte ca. 490 kcal. Der genaue Wert hängt von Gewicht, Schrittlänge und Geschwindigkeit ab. Schwerere Personen verbrauchen mehr Energie pro Kilometer, da sie mehr Masse bewegen müssen.',
+      },
+      {
+        frage: 'Sind 10.000 Schritte wirklich nötig?',
+        antwort: 'Nein — bereits 7.000 Schritte bringen erhebliche Gesundheitsvorteile. Studien zeigen: Ab 4.000 Schritten sinkt das Sterblichkeitsrisiko messbar. Das 10.000-Schritte-Ziel ist ein guter Richtwert, aber nicht das Minimum. Jeder Schritt über der persönlichen Basis ist ein Gewinn.',
+      },
+      {
+        frage: 'Wie wird die Schrittlänge berechnet?',
+        antwort: 'Der Rechner nutzt die Formel: Schrittlänge = Körpergröße × 0,415. Bei 175 cm ergibt das 72,6 cm. Für genauere Werte können Sie 100 Schritte auf einer bekannten Strecke gehen und die Distanz durch 100 teilen. Die Schrittlänge variiert mit Geschwindigkeit und Untergrund.',
+      },
+      {
+        frage: 'Zählt der Rechner auch Joggen oder Laufen?',
+        antwort: 'Der Rechner ist für normales Gehen optimiert. Beim Joggen ist die Schrittlänge länger und der Kalorienverbrauch höher. Für Laufstrecken verwenden Sie besser den Kalorienrechner mit der Aktivität „Joggen". Die Schrittlänge beim Laufen beträgt etwa Körpergröße × 0,6 statt × 0,415.',
+      },
+    ],
+  },
 ];

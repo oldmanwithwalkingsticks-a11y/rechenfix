@@ -143,6 +143,8 @@ import QuersummeRechner from '@/components/rechner/QuersummeRechner';
 import PotenzRechner from '@/components/rechner/PotenzRechner';
 import GgtKgvRechner from '@/components/rechner/GgtKgvRechner';
 import ZufallszahlRechner from '@/components/rechner/ZufallszahlRechner';
+import BlutdruckRechner from '@/components/rechner/BlutdruckRechner';
+import SchritteRechner from '@/components/rechner/SchritteRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -298,6 +300,8 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'potenz-rechner': PotenzRechner,
   'ggt-kgv-rechner': GgtKgvRechner,
   'zufallszahl-generator': ZufallszahlRechner,
+  'blutdruck-rechner': BlutdruckRechner,
+  'schritte-rechner': SchritteRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
