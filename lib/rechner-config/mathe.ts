@@ -1131,4 +1131,123 @@ Die Neunerprobe nutzt die Quersumme zur schnellen Überprüfung von Rechnungen: 
       },
     ],
   },
+  {
+    slug: 'potenz-rechner',
+    titel: 'Potenz-Rechner',
+    beschreibung: 'Potenzen, Wurzeln und Logarithmen berechnen mit Rechenweg und Potenzgesetzen.',
+    kategorie: 'Mathe & Schule',
+    kategorieSlug: 'mathe',
+    metaTitle: 'Potenz-Rechner 2026 — Potenzen, Wurzeln & Logarithmen | Rechenfix',
+    metaDescription: 'Potenzen, Wurzeln und Logarithmen kostenlos berechnen — mit Rechenweg, Potenzgesetzen und KI-Erklärung. Für Schule und Studium.',
+    keywords: ['potenzrechner', 'potenz berechnen', 'wurzel berechnen', 'logarithmus rechner', 'potenzgesetze', 'quadratwurzel', 'exponenten'],
+    icon: '🔢',
+    formel: 'Potenz: xⁿ = x × x × … × x (n-mal) | Wurzel: ⁿ√x = x^(1/n) | Logarithmus: logₐ(x) = n ⟺ aⁿ = x',
+    beispiel: '2¹⁰ = 1.024. √144 = 12. log₁₀(1000) = 3, denn 10³ = 1.000.',
+    erklaerung: `**Was berechnet der Potenz-Rechner?**
+
+Der Potenz-Rechner löst drei zusammenhängende Aufgaben: Potenzen (xⁿ), Wurzeln (ⁿ√x) und Logarithmen (logₐx). Alle drei sind Umkehroperationen zueinander — wer eine versteht, versteht die anderen. Der Rechner zeigt den Rechenweg und die wichtigsten Potenzgesetze als Referenz.
+
+**Potenzen — die Grundlage**
+
+Eine Potenz ist die wiederholte Multiplikation einer Basis mit sich selbst: 2⁴ = 2 × 2 × 2 × 2 = 16. Der Exponent gibt an, wie oft multipliziert wird. Besondere Fälle: a⁰ = 1 (Konvention), a¹ = a, und a⁻ⁿ = 1/aⁿ (negativer Exponent bedeutet Kehrwert). Die Potenzgesetze vereinfachen das Rechnen mit Potenzen gleicher Basis: aⁿ × aᵐ = aⁿ⁺ᵐ, aⁿ ÷ aᵐ = aⁿ⁻ᵐ und (aⁿ)ᵐ = aⁿ·ᵐ.
+
+**Wurzeln — Umkehrung der Potenz**
+
+Die n-te Wurzel fragt: Welche Zahl ergibt mit sich selbst n-mal multipliziert den Radikanden? √144 = 12, denn 12² = 144. Mathematisch ist ⁿ√a = a^(1/n). Die Quadratwurzel (n = 2) ist der häufigste Fall, aber auch Kubikwurzeln (n = 3) kommen in der Praxis vor — etwa bei der Berechnung von Kantenlängen aus Volumina.
+
+**Logarithmen — Umkehrung der Potenz (anderer Blickwinkel)**
+
+Der Logarithmus fragt: Mit welchem Exponenten muss die Basis potenziert werden, um die Zahl zu erhalten? log₁₀(1000) = 3, denn 10³ = 1000. Der dekadische Logarithmus (Basis 10) und der natürliche Logarithmus (Basis e ≈ 2,718) sind die gebräuchlichsten. Logarithmen verwandeln Multiplikation in Addition und sind daher in Wissenschaft, Technik und Finanzen allgegenwärtig.
+
+**Anwendungen in der Praxis**
+
+- **Zinseszins:** Das Kapital wächst exponentiell: K = K₀ × (1 + p/100)ⁿ. Wie lange dauert eine Verdopplung? → Logarithmus: n = log(2) / log(1 + p/100).
+- **Physik:** Erdbebenstärke (Richter-Skala), Lautstärke (Dezibel) und pH-Wert sind logarithmische Skalen.
+- **Informatik:** Binäre Suche hat O(log₂ n) Schritte, Speicheradressen nutzen Zweierpotenzen.
+- **Geometrie:** Flächen wachsen quadratisch (r²), Volumina kubisch (r³) mit dem Radius.`,
+    faq: [
+      {
+        frage: 'Was ist eine Potenz?',
+        antwort: 'Eine Potenz ist die wiederholte Multiplikation einer Basis mit sich selbst. 3⁴ bedeutet 3 × 3 × 3 × 3 = 81. Die Basis (3) wird so oft mit sich selbst multipliziert, wie der Exponent (4) angibt. Sonderfälle: Jede Zahl hoch 0 ergibt 1, und ein negativer Exponent bedeutet den Kehrwert.',
+      },
+      {
+        frage: 'Wie berechnet man eine Wurzel?',
+        antwort: 'Die n-te Wurzel von x ist die Zahl, die n-mal mit sich selbst multipliziert x ergibt. √25 = 5, weil 5² = 25. Mathematisch: ⁿ√x = x^(1/n). Nicht jede Wurzel ergibt eine glatte Zahl — √2 ≈ 1,414 ist irrational und hat unendlich viele Nachkommastellen.',
+      },
+      {
+        frage: 'Was bedeutet der Logarithmus?',
+        antwort: 'Der Logarithmus beantwortet die Frage: „Mit welchem Exponenten muss ich die Basis potenzieren, um die Zahl zu erhalten?" log₂(8) = 3, weil 2³ = 8. Der Logarithmus ist die Umkehrung der Potenz, so wie die Subtraktion die Umkehrung der Addition ist.',
+      },
+      {
+        frage: 'Was sind die wichtigsten Potenzgesetze?',
+        antwort: 'Die sechs Kernregeln: aⁿ × aᵐ = aⁿ⁺ᵐ (gleiche Basis), aⁿ ÷ aᵐ = aⁿ⁻ᵐ (Division), (aⁿ)ᵐ = aⁿ·ᵐ (Potenz einer Potenz), a⁰ = 1 (Null-Exponent), a⁻ⁿ = 1/aⁿ (negativer Exponent), ⁿ√a = a^(1/n) (Wurzel als Potenz).',
+      },
+      {
+        frage: 'Warum ist jede Zahl hoch 0 gleich 1?',
+        antwort: 'Aus dem Potenzgesetz aⁿ ÷ aⁿ = aⁿ⁻ⁿ = a⁰. Da jede Zahl durch sich selbst 1 ergibt, muss a⁰ = 1 sein. Diese Konvention gilt für alle a ≠ 0. Der Ausdruck 0⁰ ist in der Mathematik nicht einheitlich definiert, wird aber in der Kombinatorik oft als 1 festgelegt.',
+      },
+    ],
+  },
+  {
+    slug: 'ggt-kgv-rechner',
+    titel: 'ggT/kgV-Rechner',
+    beschreibung: 'Größten gemeinsamen Teiler und kleinstes gemeinsames Vielfaches berechnen.',
+    kategorie: 'Mathe & Schule',
+    kategorieSlug: 'mathe',
+    metaTitle: 'ggT/kgV-Rechner 2026 — Größter gemeinsamer Teiler & kleinstes Vielfaches | Rechenfix',
+    metaDescription: 'ggT und kgV kostenlos berechnen — mit Euklidischem Algorithmus, Primfaktorzerlegung und Teilermengen. Bis zu 4 Zahlen gleichzeitig.',
+    keywords: ['ggt rechner', 'kgv rechner', 'größter gemeinsamer teiler', 'kleinstes gemeinsames vielfaches', 'euklidischer algorithmus', 'primfaktorzerlegung'],
+    icon: '🔢',
+    formel: 'kgV(a, b) = |a × b| ÷ ggT(a, b) | Euklid: ggT(a, b) = ggT(b, a mod b)',
+    beispiel: 'ggT(24, 36) = 12. kgV(24, 36) = 24 × 36 ÷ 12 = 72. Primfaktoren: 24 = 2³ × 3, 36 = 2² × 3².',
+    erklaerung: `**Was berechnet der ggT/kgV-Rechner?**
+
+Der Rechner bestimmt den größten gemeinsamen Teiler (ggT) und das kleinste gemeinsame Vielfache (kgV) von bis zu vier Zahlen gleichzeitig. Er zeigt den Rechenweg über den Euklidischen Algorithmus, die Primfaktorzerlegung und die vollständigen Teilermengen mit hervorgehobenen gemeinsamen Teilern.
+
+**Größter gemeinsamer Teiler (ggT)**
+
+Der ggT zweier Zahlen ist die größte Zahl, die beide ohne Rest teilt. ggT(24, 36) = 12, denn 12 ist der größte Teiler, der sowohl in 24 als auch in 36 aufgeht. Der ggT wird mit dem Euklidischen Algorithmus berechnet: Man teilt die größere Zahl durch die kleinere und wendet das Verfahren auf den Divisor und den Rest an, bis der Rest 0 ist. Der letzte von Null verschiedene Rest ist der ggT. Für mehr als zwei Zahlen wird der ggT paarweise berechnet: ggT(a, b, c) = ggT(ggT(a, b), c).
+
+**Kleinstes gemeinsames Vielfaches (kgV)**
+
+Das kgV zweier Zahlen ist die kleinste positive Zahl, die von beiden ohne Rest teilbar ist. kgV(4, 6) = 12, denn 12 ist die kleinste Zahl, die sowohl durch 4 als auch durch 6 teilbar ist. Die Berechnung nutzt den Zusammenhang: kgV(a, b) = |a × b| ÷ ggT(a, b). Für mehrere Zahlen wird das kgV ebenfalls paarweise bestimmt.
+
+**Euklidischer Algorithmus**
+
+Der Euklidische Algorithmus ist eines der ältesten bekannten Verfahren der Mathematik (ca. 300 v. Chr.) und berechnet den ggT effizient ohne Primfaktorzerlegung. Das Prinzip: ggT(a, b) = ggT(b, a mod b). Beispiel: ggT(36, 24) → 36 = 1 × 24 + 12 → 24 = 2 × 12 + 0 → ggT = 12. Der Algorithmus terminiert immer, weil der Rest in jedem Schritt kleiner wird.
+
+**Primfaktorzerlegung und ggT/kgV**
+
+Alternativ lassen sich ggT und kgV über die Primfaktorzerlegung bestimmen: Der ggT enthält alle gemeinsamen Primfaktoren mit dem jeweils kleinsten Exponenten, das kgV alle vorkommenden Primfaktoren mit dem jeweils größten Exponenten. Beispiel: 24 = 2³ × 3, 36 = 2² × 3². ggT = 2² × 3 = 12, kgV = 2³ × 3² = 72.
+
+**Praktische Anwendungen**
+
+- **Brüche kürzen:** Der ggT von Zähler und Nenner ist der Kürzungsfaktor. 24/36 kürzen: ggT(24, 36) = 12, also 24/36 = 2/3.
+- **Brüche addieren:** Das kgV der Nenner ist der Hauptnenner. 1/4 + 1/6: kgV(4, 6) = 12, also 3/12 + 2/12 = 5/12.
+- **Zahnräder und Getriebe:** Zwei Zahnräder mit 24 und 36 Zähnen greifen alle kgV(24, 36) = 72 Zähne wieder in dieselbe Position.
+- **Kachelungen und Muster:** Ein Raum von 360 × 480 cm lässt sich mit quadratischen Fliesen der Seitenlänge ggT(360, 480) = 120 cm fugenlos fliesen.
+- **Kryptografie:** Der erweiterte Euklidische Algorithmus ist ein Grundbaustein des RSA-Verschlüsselungsverfahrens.`,
+    faq: [
+      {
+        frage: 'Was ist der ggT?',
+        antwort: 'Der größte gemeinsame Teiler (ggT) zweier Zahlen ist die größte Zahl, die beide ohne Rest teilt. ggT(12, 18) = 6, weil 6 der größte Teiler ist, der sowohl in 12 als auch in 18 aufgeht. Der ggT wird zum Kürzen von Brüchen verwendet: 12/18 = 2/3 (gekürzt um den ggT 6).',
+      },
+      {
+        frage: 'Was ist das kgV?',
+        antwort: 'Das kleinste gemeinsame Vielfache (kgV) zweier Zahlen ist die kleinste positive Zahl, die von beiden teilbar ist. kgV(4, 6) = 12, weil 12 die kleinste Zahl ist, die sowohl durch 4 als auch durch 6 ohne Rest teilbar ist. Das kgV wird benötigt, um Brüche auf einen gemeinsamen Nenner zu bringen.',
+      },
+      {
+        frage: 'Wie funktioniert der Euklidische Algorithmus?',
+        antwort: 'Man teilt die größere Zahl durch die kleinere und merkt sich den Rest. Dann teilt man den Divisor durch den Rest — und wiederholt, bis der Rest 0 ist. Der letzte Divisor ist der ggT. Beispiel: ggT(48, 18): 48 = 2 × 18 + 12, dann 18 = 1 × 12 + 6, dann 12 = 2 × 6 + 0 → ggT = 6.',
+      },
+      {
+        frage: 'Wie hängen ggT und kgV zusammen?',
+        antwort: 'Für zwei Zahlen a und b gilt: kgV(a, b) = |a × b| ÷ ggT(a, b). Je größer der ggT, desto kleiner das kgV — und umgekehrt. Wenn ggT = 1 (teilerfremde Zahlen), ist das kgV einfach das Produkt der beiden Zahlen.',
+      },
+      {
+        frage: 'Können mehr als zwei Zahlen eingegeben werden?',
+        antwort: 'Ja, der Rechner unterstützt bis zu 4 Zahlen. ggT und kgV werden paarweise berechnet: ggT(a, b, c) = ggT(ggT(a, b), c). Das Ergebnis ist unabhängig von der Reihenfolge. Die Teilermengen werden für alle eingegebenen Zahlen angezeigt, gemeinsame Teiler sind farblich hervorgehoben.',
+      },
+    ],
+  },
 ];

@@ -140,6 +140,8 @@ import WhrRechner from '@/components/rechner/WhrRechner';
 import MwstRueckerstattungRechner from '@/components/rechner/MwstRueckerstattungRechner';
 import PrimzahlRechner from '@/components/rechner/PrimzahlRechner';
 import QuersummeRechner from '@/components/rechner/QuersummeRechner';
+import PotenzRechner from '@/components/rechner/PotenzRechner';
+import GgtKgvRechner from '@/components/rechner/GgtKgvRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -292,6 +294,8 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'mwst-rueckerstattung-rechner': MwstRueckerstattungRechner,
   'primzahl-rechner': PrimzahlRechner,
   'quersumme-rechner': QuersummeRechner,
+  'potenz-rechner': PotenzRechner,
+  'ggt-kgv-rechner': GgtKgvRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
