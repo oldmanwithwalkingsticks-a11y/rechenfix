@@ -259,7 +259,7 @@ export default function MutterschutzRechner() {
                 <span>{ergebnis.elterngeldFrist}</span>
               </div>
               <div className="mt-2 pt-2 border-t border-blue-200 dark:border-blue-500/30">
-                <Link href="/finanzen/elterngeld-rechner" className="text-primary-600 dark:text-primary-400 hover:underline font-medium">
+                <Link href="/finanzen/elterngeld-rechner" className="text-primary-600 dark:text-primary-400 underline font-medium">
                   Elterngeld berechnen →
                 </Link>
               </div>

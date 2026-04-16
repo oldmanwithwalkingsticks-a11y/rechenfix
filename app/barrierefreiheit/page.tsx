@@ -31,7 +31,7 @@ export default function BarrierefreiheitSeite() {
         <div className="space-y-8 text-gray-700 dark:text-gray-300">
           <p className="text-base leading-relaxed">
             Diese Erklärung zur Barrierefreiheit gilt für die unter{' '}
-            <Link href="/" className="text-primary-600 dark:text-primary-400 hover:underline">www.rechenfix.de</Link>{' '}
+            <Link href="/" className="text-primary-600 dark:text-primary-400 underline">www.rechenfix.de</Link>{' '}
             veröffentlichte Website. Sie wird im Sinne der Barrierefreie-Informationstechnik-Verordnung (BITV 2.0) und
             des Barrierefreiheitsstärkungsgesetzes (BFSG) bereitgestellt.
           </p>
@@ -131,13 +131,13 @@ export default function BarrierefreiheitSeite() {
             <ul className="mt-2 space-y-1 text-sm">
               <li>
                 E-Mail:{' '}
-                <a href="mailto:info@rechenfix.de" className="text-primary-600 dark:text-primary-400 hover:underline">
+                <a href="mailto:info@rechenfix.de" className="text-primary-600 dark:text-primary-400 underline">
                   info@rechenfix.de
                 </a>
               </li>
               <li>
                 Feedback-Formular:{' '}
-                <Link href="/feedback" className="text-primary-600 dark:text-primary-400 hover:underline">
+                <Link href="/feedback" className="text-primary-600 dark:text-primary-400 underline">
                   www.rechenfix.de/feedback
                 </Link>
               </li>

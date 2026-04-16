@@ -223,7 +223,7 @@ export default function KuendigungsfristRechner() {
               <div className="pt-2 border-t border-gray-200 dark:border-gray-600">
                 <Link
                   href="/arbeit/urlaubstage-rechner"
-                  className="text-sm text-primary-600 dark:text-primary-400 hover:underline"
+                  className="text-sm text-primary-600 dark:text-primary-400 underline"
                 >
                   Prüfen Sie Ihren Resturlaub → Urlaubstage-Rechner
                 </Link>

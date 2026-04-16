@@ -284,7 +284,7 @@ export default function GeburtsterminRechner() {
                         </div>
                         <p className="text-xs text-gray-500 dark:text-gray-400">{m.beschreibung}</p>
                         {m.link && (
-                          <Link href={m.link.href} className="text-xs text-primary-600 dark:text-primary-400 hover:underline font-medium">
+                          <Link href={m.link.href} className="text-xs text-primary-600 dark:text-primary-400 underline font-medium">
                             {m.link.text}
                           </Link>
                         )}

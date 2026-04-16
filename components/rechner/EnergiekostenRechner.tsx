@@ -103,7 +103,7 @@ export default function EnergiekostenRechner() {
             {geraete.length > 1 && (
               <button
                 onClick={() => removeGeraet(g.id)}
-                className="text-xs text-red-600 dark:text-red-400 hover:underline"
+                className="text-xs text-red-600 dark:text-red-400 underline"
               >
                 ✕ Entfernen
               </button>

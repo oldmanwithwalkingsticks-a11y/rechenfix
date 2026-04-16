@@ -276,7 +276,7 @@ export default function RentenRechner() {
                     (Annahme: 5% Rendite p.a., 20 Jahre Entnahmephase, benötigtes Kapital: ca. {fmt(ergebnis.benoetigtesKapital)} €)
                   </p>
                   <p className="mt-2 text-xs">
-                    <Link href="/finanzen/etf-sparplanrechner" className="text-primary-600 dark:text-primary-400 hover:underline font-medium">
+                    <Link href="/finanzen/etf-sparplanrechner" className="text-primary-600 dark:text-primary-400 underline font-medium">
                       ETF-Sparplan berechnen →
                     </Link>
                   </p>

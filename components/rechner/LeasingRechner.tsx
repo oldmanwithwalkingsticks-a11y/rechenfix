@@ -164,7 +164,7 @@ export default function LeasingRechner() {
       <div className="mb-6">
         <button
           onClick={() => setVergleich(!vergleich)}
-          className="text-sm font-medium text-primary-600 dark:text-primary-400 hover:underline"
+          className="text-sm font-medium text-primary-600 dark:text-primary-400 underline"
         >
           {vergleich ? '− Vergleich mit Finanzierung ausblenden' : '+ Vergleich mit Finanzierung anzeigen'}
         </button>

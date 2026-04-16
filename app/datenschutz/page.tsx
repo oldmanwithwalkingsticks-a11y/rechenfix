@@ -96,7 +96,7 @@ export default function DatenschutzSeite() {
             </p>
             <Hinweisbox>
               <strong>Datenübermittlung in die USA:</strong> Vercel Inc. ist unter dem EU-US Data Privacy Framework (DPF) zertifiziert, wodurch ein angemessenes Datenschutzniveau im Sinne von Art. 45 DSGVO gewährleistet wird. Weitere Informationen finden Sie unter{' '}
-              <a href="https://www.dataprivacyframework.gov" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-400 hover:underline">
+              <a href="https://www.dataprivacyframework.gov" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-400 underline">
                 dataprivacyframework.gov
               </a>.
             </Hinweisbox>
@@ -178,7 +178,7 @@ export default function DatenschutzSeite() {
             </p>
             <p className="mt-3">
               Rechtsgrundlage ist Ihre Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO. Sie können Ihre Einwilligung jederzeit über den Cookie-Banner widerrufen. Darüber hinaus können Sie personalisierte Werbung in den{' '}
-              <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-400 hover:underline">
+              <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-400 underline">
                 Google Ads-Einstellungen
               </a>{' '}
               deaktivieren.
@@ -287,7 +287,7 @@ export default function DatenschutzSeite() {
             </ul>
             <p className="mt-3">
               Zur Ausübung Ihrer Rechte wenden Sie sich bitte per E-Mail an:{' '}
-              <a href="mailto:info@rechenfix.de" className="text-primary-600 dark:text-primary-400 hover:underline">
+              <a href="mailto:info@rechenfix.de" className="text-primary-600 dark:text-primary-400 underline">
                 info@rechenfix.de
               </a>
             </p>
@@ -304,7 +304,7 @@ export default function DatenschutzSeite() {
             <ul className="list-disc pl-5 space-y-1 mt-3">
               <li>Den Cookie-Banner erneut aufrufen und Ihre Einstellungen ändern</li>
               <li>Die entsprechenden Cookies in Ihrem Browser löschen</li>
-              <li>Uns per E-Mail an <a href="mailto:info@rechenfix.de" className="text-primary-600 dark:text-primary-400 hover:underline">info@rechenfix.de</a> kontaktieren</li>
+              <li>Uns per E-Mail an <a href="mailto:info@rechenfix.de" className="text-primary-600 dark:text-primary-400 underline">info@rechenfix.de</a> kontaktieren</li>
             </ul>
           </Section>
 
@@ -320,7 +320,7 @@ export default function DatenschutzSeite() {
               <p>40213 Düsseldorf</p>
               <p className="mt-2">
                 Website:{' '}
-                <a href="https://www.ldi.nrw.de" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-400 hover:underline">
+                <a href="https://www.ldi.nrw.de" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-400 underline">
                   www.ldi.nrw.de
                 </a>
               </p>
@@ -359,7 +359,7 @@ function Adresse() {
       <p>47804 Krefeld</p>
       <p className="mt-2">
         E-Mail:{' '}
-        <a href="mailto:info@rechenfix.de" className="text-primary-600 dark:text-primary-400 hover:underline">
+        <a href="mailto:info@rechenfix.de" className="text-primary-600 dark:text-primary-400 underline">
           info@rechenfix.de
         </a>
       </p>
