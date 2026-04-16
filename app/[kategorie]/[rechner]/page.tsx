@@ -164,6 +164,8 @@ import EinkommensteuerRechner from '@/components/rechner/EinkommensteuerRechner'
 import SteuerklassenVergleichRechner from '@/components/rechner/SteuerklassenVergleichRechner';
 import PfaendungRechner from '@/components/rechner/PfaendungRechner';
 import LohnsteuerRechner from '@/components/rechner/LohnsteuerRechner';
+import RezeptUmrechner from '@/components/rechner/RezeptUmrechner';
+import CupsUmrechner from '@/components/rechner/CupsUmrechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -340,6 +342,8 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'steuerklassen-vergleich-rechner': SteuerklassenVergleichRechner,
   'pfaendungsrechner': PfaendungRechner,
   'lohnsteuer-rechner': LohnsteuerRechner,
+  'rezept-umrechner': RezeptUmrechner,
+  'cups-umrechner': CupsUmrechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

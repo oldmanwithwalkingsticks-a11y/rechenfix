@@ -14,6 +14,7 @@ const farbMap: Record<string, string> = {
   wohnen: 'border-orange-200 dark:border-orange-500/30',
   mathe: 'border-violet-200 dark:border-violet-500/30',
   arbeit: 'border-teal-200 dark:border-teal-500/30',
+  kochen: 'border-pink-200 dark:border-pink-500/30',
 };
 
 export default function Header() {

@@ -6,6 +6,7 @@ import { autoRechner } from './auto';
 import { wohnenRechner } from './wohnen';
 import { matheRechner } from './mathe';
 import { arbeitRechner } from './arbeit';
+import { kochenRechner } from './kochen';
 
 export type { RechnerConfig, KategorieConfig } from './types';
 
@@ -66,6 +67,14 @@ export const kategorien: KategorieConfig[] = [
     metaTitle: 'Arbeit & Recht Rechner | Rechenfix.de',
     metaDescription: 'Kostenlose Online-Rechner für Arbeit & Recht: Arbeitszeit, Urlaubstage und mehr. Sofort berechnen ohne Anmeldung.',
   },
+  {
+    slug: 'kochen',
+    name: 'Kochen & Ernährung',
+    beschreibung: 'Rechner rund ums Kochen und Backen: Rezept skalieren, Cups umrechnen und mehr.',
+    icon: '🍳',
+    metaTitle: 'Kochen & Ernährung Rechner | Rechenfix.de',
+    metaDescription: 'Kostenlose Online-Rechner für Kochen & Ernährung: Rezept-Umrechner, Cups in Gramm, Portionen skalieren. Sofort berechnen ohne Anmeldung.',
+  },
 ];
 
 export const rechner: RechnerConfig[] = [
@@ -76,6 +85,7 @@ export const rechner: RechnerConfig[] = [
   ...wohnenRechner,
   ...matheRechner,
   ...arbeitRechner,
+  ...kochenRechner,
 ];
 
 export const beliebteRechnerSlugs = [
@@ -88,6 +98,8 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'rezept-umrechner',
+  'cups-umrechner',
   'pfaendungsrechner',
   'lohnsteuer-rechner',
   'einkommensteuer-rechner',
@@ -345,6 +357,8 @@ const verwandteMap: Record<string, string[]> = {
   'steuerklassen-vergleich-rechner': ['splitting-rechner', 'einkommensteuer-rechner', 'lohnsteuer-rechner', 'brutto-netto-rechner'],
   'pfaendungsrechner': ['brutto-netto-rechner', 'buergergeld-rechner', 'unterhaltsrechner', 'kreditrechner'],
   'lohnsteuer-rechner': ['einkommensteuer-rechner', 'brutto-netto-rechner', 'steuerklassen-vergleich-rechner', 'steuerprogression-rechner'],
+  'rezept-umrechner': ['cups-umrechner', 'einheiten-umrechner', 'dreisatz-rechner', 'prozentrechner'],
+  'cups-umrechner': ['rezept-umrechner', 'einheiten-umrechner', 'dreisatz-rechner', 'waehrungsrechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {

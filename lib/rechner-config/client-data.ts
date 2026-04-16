@@ -83,6 +83,14 @@ export const kategorien: KategorieConfig[] = [
     "icon": "💼",
     "metaTitle": "Arbeit & Recht Rechner | Rechenfix.de",
     "metaDescription": "Kostenlose Online-Rechner für Arbeit & Recht: Arbeitszeit, Urlaubstage und mehr. Sofort berechnen ohne Anmeldung."
+  },
+  {
+    "slug": "kochen",
+    "name": "Kochen & Ernährung",
+    "beschreibung": "Rechner rund ums Kochen und Backen: Rezept skalieren, Cups umrechnen und mehr.",
+    "icon": "🍳",
+    "metaTitle": "Kochen & Ernährung Rechner | Rechenfix.de",
+    "metaDescription": "Kostenlose Online-Rechner für Kochen & Ernährung: Rezept-Umrechner, Cups in Gramm, Portionen skalieren. Sofort berechnen ohne Anmeldung."
   }
 ];
 
@@ -2926,6 +2934,45 @@ export const rechner: RechnerLight[] = [
       "unterhalt scheidung"
     ],
     "icon": "⚖️"
+  },
+  {
+    "slug": "rezept-umrechner",
+    "titel": "Rezept-Umrechner",
+    "beschreibung": "Rezept auf beliebige Portionen umrechnen: Zutatenmengen automatisch skalieren mit intelligenter Rundung.",
+    "kategorie": "Kochen & Ernährung",
+    "kategorieSlug": "kochen",
+    "keywords": [
+      "rezept umrechner",
+      "rezept portionen umrechnen",
+      "rezept verdoppeln",
+      "rezept halbieren",
+      "zutaten umrechnen",
+      "portionen skalieren",
+      "rezeptmengen anpassen",
+      "rezept für 6 personen",
+      "kochen rechner"
+    ],
+    "icon": "📝"
+  },
+  {
+    "slug": "cups-umrechner",
+    "titel": "Cups-Umrechner",
+    "beschreibung": "Cups in Gramm und Milliliter umrechnen: Zutatspezifische Dichten für amerikanische Rezepte — Mehl, Zucker, Butter etc.",
+    "kategorie": "Kochen & Ernährung",
+    "kategorieSlug": "kochen",
+    "keywords": [
+      "cups umrechner",
+      "cup in gramm",
+      "cup in ml",
+      "1 cup mehl in gramm",
+      "1 cup zucker",
+      "amerikanische rezepte umrechnen",
+      "tablespoon in ml",
+      "teaspoon in ml",
+      "us cup",
+      "fl oz in ml"
+    ],
+    "icon": "🥣"
   }
 ];
 
