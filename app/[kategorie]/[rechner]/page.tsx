@@ -147,6 +147,7 @@ import BlutdruckRechner from '@/components/rechner/BlutdruckRechner';
 import SchritteRechner from '@/components/rechner/SchritteRechner';
 import SonnenschutzRechner from '@/components/rechner/SonnenschutzRechner';
 import ReisekostenRechner from '@/components/rechner/ReisekostenRechner';
+import ZeitwertRechner from '@/components/rechner/ZeitwertRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -306,6 +307,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'schritte-rechner': SchritteRechner,
   'sonnenschutz-rechner': SonnenschutzRechner,
   'reisekosten-rechner': ReisekostenRechner,
+  'zeitwert-rechner': ZeitwertRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

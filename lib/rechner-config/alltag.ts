@@ -1480,4 +1480,81 @@ Der Rechner deckt die Hauptkostenblöcke ab. Zusätzlich können anfallen: Trans
       },
     ],
   },
+  {
+    slug: 'zeitwert-rechner',
+    titel: 'Zeitwert-Rechner',
+    beschreibung: 'Zeitwert gebrauchter Gegenstände berechnen: Restwert für Versicherung, Verkauf oder Schadensersatz.',
+    kategorie: 'Alltag & Leben',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Zeitwert-Rechner 2026 — Restwert gebrauchter Gegenstände | Rechenfix',
+    metaDescription: 'Zeitwert kostenlos berechnen — Restwert nach Alter, Nutzungsdauer und Zustand. Für Versicherung, Verkauf und Schadensersatz.',
+    keywords: ['zeitwert rechner', 'restwert berechnen', 'wertverlust', 'zeitwert möbel', 'zeitwert elektronik', 'lineare abschreibung', 'gebrauchtwert'],
+    icon: '📦',
+    formel: 'Zeitwert = max(0, Neupreis − Neupreis ÷ Nutzungsdauer × Alter) × Zustandsfaktor',
+    beispiel: 'Laptop 1.000 €, 3 Jahre alt, Nutzungsdauer 5 Jahre, Zustand gut (75 %): Zeitwert = (1.000 − 600) × 0,75 = 300 €.',
+    erklaerung: `**Was berechnet der Zeitwert-Rechner?**
+
+Der Rechner ermittelt den aktuellen Wert eines gebrauchten Gegenstands auf Basis der linearen Abschreibung. Er berücksichtigt den Neupreis, das Alter, die übliche Nutzungsdauer und den aktuellen Zustand. Das Ergebnis ist eine realistische Schätzung für Versicherungsfälle, Verkaufspreise oder Schadensersatzforderungen.
+
+**Lineare Abschreibung — das Prinzip**
+
+Bei der linearen Abschreibung verliert ein Gegenstand jedes Jahr den gleichen Betrag an Wert. Ein Laptop für 1.000 € mit einer Nutzungsdauer von 5 Jahren verliert pro Jahr 200 € an Wert. Nach 3 Jahren beträgt der rechnerische Restwert noch 400 €. Am Ende der Nutzungsdauer liegt der Wert bei 0 €.
+
+Diese Methode ist einfach und nachvollziehbar. Sie wird von Versicherungen, Gerichten und dem Finanzamt (bei betrieblicher Abschreibung) als Standardverfahren verwendet.
+
+**Nutzungsdauer — wie lange hält was?**
+
+Die übliche Nutzungsdauer variiert stark je nach Produktkategorie:
+
+- **Smartphones und Tablets:** 2–3 Jahre. Technologisch schnell veraltet.
+- **Laptops und Computer:** 3–4 Jahre. Leistungsanforderungen steigen.
+- **TV und Unterhaltungselektronik:** 5–7 Jahre.
+- **Günstige Möbel (IKEA-Segment):** 5 Jahre.
+- **Hochwertige Möbel (Massivholz):** 8–10 Jahre.
+- **Haushaltsgroßgeräte (Waschmaschine, Kühlschrank):** 10 Jahre.
+- **Einbauküchen:** 15–20 Jahre.
+- **Fahrräder:** 8–10 Jahre.
+
+Das Finanzamt veröffentlicht AfA-Tabellen (Absetzung für Abnutzung) mit Nutzungsdauern für betriebliche Güter — diese können als Orientierung dienen.
+
+**Zustandsbewertung**
+
+Der tatsächliche Zustand weicht oft vom rechnerischen Alter ab. Ein pfleglich behandelter Gegenstand kann nach 5 Jahren besser aussehen als ein vernachlässigter nach 2 Jahren. Der Zustandsfaktor korrigiert den linearen Zeitwert:
+
+- **Sehr gut (90 %):** Kaum Gebrauchsspuren, voll funktionsfähig, mit Originalverpackung.
+- **Gut (75 %):** Leichte Gebrauchsspuren, voll funktionsfähig. Standard für sorgfältig gepflegte Gegenstände.
+- **Gebraucht (60 %):** Sichtbare Gebrauchsspuren, funktionsfähig. Normalzustand nach einigen Jahren Nutzung.
+- **Stark gebraucht (40 %):** Deutliche Abnutzung, funktionsfähig mit Einschränkungen.
+- **Mangelhaft (20 %):** Erhebliche Mängel, eingeschränkt funktionsfähig.
+
+**Zeitwert bei Versicherungsschäden**
+
+Bei einem Schadensfall (Einbruch, Wasserschaden, Brand) erstattet die Hausratversicherung in der Regel den Zeitwert — es sei denn, Sie haben eine Neuwertentschädigung vereinbart. Der Zeitwert liegt oft deutlich unter dem Neupreis, besonders bei Elektronik. Bei einer Neuwertklausel erhalten Sie den Wiederbeschaffungspreis eines gleichwertigen neuen Gegenstands.
+
+**Zeitwert vs. Marktwert**
+
+Der rechnerische Zeitwert weicht vom tatsächlichen Marktwert (was jemand bereit ist zu zahlen) oft ab. Manche Gegenstände verlieren schneller an Wert (Elektronik, Mode), andere halten ihren Wert besser (Designermöbel, Werkzeug). Der Zeitwert-Rechner liefert eine faire, nachvollziehbare Basis — für den tatsächlichen Verkaufspreis empfiehlt sich ein Blick auf eBay Kleinanzeigen oder vergleichbare Plattformen.`,
+    faq: [
+      {
+        frage: 'Wie berechnet man den Zeitwert?',
+        antwort: 'Zeitwert = Neupreis minus Wertverlust mal Alter, multipliziert mit dem Zustandsfaktor. Bei einem Fernseher für 800 €, 4 Jahre alt, Nutzungsdauer 7 Jahre, Zustand gut: Zeitwert = (800 − 800/7 × 4) × 0,75 = (800 − 457) × 0,75 = 257,25 €.',
+      },
+      {
+        frage: 'Welche Nutzungsdauer soll ich wählen?',
+        antwort: 'Orientieren Sie sich an der Produktkategorie: Elektronik 3–5 Jahre, günstige Möbel 5 Jahre, hochwertige Möbel 8–10 Jahre, Großgeräte 10 Jahre, Küchen 15 Jahre. Im Zweifel wählen Sie die kürzere Dauer — das ergibt einen niedrigeren Zeitwert, was bei Verkäufen realistischer ist.',
+      },
+      {
+        frage: 'Was zahlt die Versicherung — Zeitwert oder Neuwert?',
+        antwort: 'Das hängt von Ihrem Vertrag ab. Die meisten Hausratversicherungen erstatten den Neuwert (Wiederbeschaffungspreis), wenn eine Neuwertklausel vereinbart ist. Ohne Neuwertklausel erhalten Sie nur den Zeitwert. Prüfen Sie Ihre Police — der Unterschied kann erheblich sein.',
+      },
+      {
+        frage: 'Ist der Zeitwert dasselbe wie der Verkaufspreis?',
+        antwort: 'Nicht unbedingt. Der Zeitwert ist ein rechnerischer Wert nach linearer Abschreibung. Der Verkaufspreis richtet sich nach Angebot und Nachfrage. Apple-Produkte erzielen auf dem Gebrauchtmarkt oft höhere Preise als der rechnerische Zeitwert, während No-Name-Elektronik oft weniger einbringt.',
+      },
+      {
+        frage: 'Was passiert nach Ende der Nutzungsdauer?',
+        antwort: 'Der rechnerische Zeitwert ist dann 0 €. Das bedeutet nicht, dass der Gegenstand wertlos ist — ein 12 Jahre alter Massivholztisch kann noch lange nutzbar und auf dem Gebrauchtmarkt gefragt sein. Die lineare Abschreibung ist ein Rechenmodell, kein Abbild der Realität.',
+      },
+    ],
+  },
 ];
