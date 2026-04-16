@@ -33,7 +33,6 @@ export default function GewerbesteuerRechner() {
   );
 
   // Balkendiagramm-Daten
-  const maxBalken = Math.max(ergebnis.gewerbesteuer, 1);
   const gwStBreite = 100;
   const anrechnungBreite = ergebnis.gewerbesteuer > 0
     ? Math.round(ergebnis.estAnrechnung / ergebnis.gewerbesteuer * 100)

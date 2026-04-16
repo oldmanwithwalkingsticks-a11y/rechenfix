@@ -465,6 +465,58 @@ export const rechner: RechnerLight[] = [
     "icon": "👕"
   },
   {
+    "slug": "reisekosten-rechner",
+    "titel": "Reisekosten-Rechner",
+    "beschreibung": "Reisekosten berechnen: Gesamtbudget für Anreise, Unterkunft, Essen und Aktivitäten planen.",
+    "kategorie": "Alltag & Leben",
+    "kategorieSlug": "alltag",
+    "keywords": [
+      "reisekosten rechner",
+      "urlaub budget",
+      "reisebudget planen",
+      "urlaubskosten",
+      "reise kosten berechnen",
+      "urlaub kosten pro tag"
+    ],
+    "icon": "✈️"
+  },
+  {
+    "slug": "zeitwert-rechner",
+    "titel": "Zeitwert-Rechner",
+    "beschreibung": "Zeitwert gebrauchter Gegenstände berechnen: Restwert für Versicherung, Verkauf oder Schadensersatz.",
+    "kategorie": "Alltag & Leben",
+    "kategorieSlug": "alltag",
+    "keywords": [
+      "zeitwert rechner",
+      "restwert berechnen",
+      "wertverlust",
+      "zeitwert möbel",
+      "zeitwert elektronik",
+      "lineare abschreibung",
+      "gebrauchtwert"
+    ],
+    "icon": "📦"
+  },
+  {
+    "slug": "budget-rechner",
+    "titel": "Budget-Rechner",
+    "beschreibung": "Haushaltsbudget berechnen: Einnahmen vs. Ausgaben aufschlüsseln, Sparpotenzial identifizieren und 50/30/20-Regel prüfen.",
+    "kategorie": "Alltag",
+    "kategorieSlug": "alltag",
+    "keywords": [
+      "budget rechner",
+      "haushaltsbuch",
+      "50 30 20 regel",
+      "haushaltsbudget",
+      "ausgaben berechnen",
+      "sparquote",
+      "budgetplaner",
+      "haushaltsbuch rechner",
+      "ausgaben aufschlüsseln"
+    ],
+    "icon": "💰"
+  },
+  {
     "slug": "brutto-netto-rechner",
     "titel": "Brutto-Netto-Rechner",
     "beschreibung": "Nettogehalt berechnen: Mit Steuerklasse, Bundesland, Kirchensteuer, KV und allen Sozialabgaben.",
@@ -1078,6 +1130,175 @@ export const rechner: RechnerLight[] = [
     "icon": "📉"
   },
   {
+    "slug": "betriebskosten-rechner",
+    "titel": "Betriebskosten-Rechner",
+    "beschreibung": "Monatliche Betriebskosten für Selbstständige und Gewerbe kalkulieren — mit Break-Even-Analyse.",
+    "kategorie": "Finanzen",
+    "kategorieSlug": "finanzen",
+    "keywords": [
+      "betriebskosten rechner",
+      "betriebskosten berechnen",
+      "kosten selbstständige",
+      "fixkosten variable kosten",
+      "break even analyse",
+      "unternehmerlohn berechnen",
+      "stundensatz kalkulation",
+      "betriebsausgaben"
+    ],
+    "icon": "💼"
+  },
+  {
+    "slug": "mwst-rueckerstattung-rechner",
+    "titel": "MwSt-Rückerstattungs-Rechner",
+    "beschreibung": "Tax-Free-Shopping berechnen: MwSt-Erstattung für Nicht-EU-Touristen beim Einkauf in Deutschland.",
+    "kategorie": "Finanzen",
+    "kategorieSlug": "finanzen",
+    "keywords": [
+      "mwst rückerstattung rechner",
+      "tax free shopping deutschland",
+      "mehrwertsteuer erstattung touristen",
+      "tax refund germany",
+      "global blue rechner",
+      "umsatzsteuer rückerstattung",
+      "tax free rechner"
+    ],
+    "icon": "🧾"
+  },
+  {
+    "slug": "steuerprogression-rechner",
+    "titel": "Steuerprogression-Rechner",
+    "beschreibung": "Steuerprogression visualisieren: Durchschnitts- und Grenzsteuersatz für jedes Einkommen berechnen.",
+    "kategorie": "Finanzen",
+    "kategorieSlug": "finanzen",
+    "keywords": [
+      "steuerprogression",
+      "grenzsteuersatz rechner",
+      "durchschnittssteuersatz",
+      "einkommensteuer tarif",
+      "steuerprogression rechner",
+      "steuersatz berechnen",
+      "progressiver steuertarif",
+      "einkommensteuer kurve",
+      "steuertarif 2026"
+    ],
+    "icon": "📊"
+  },
+  {
+    "slug": "spenden-rechner",
+    "titel": "Spenden-Rechner",
+    "beschreibung": "Steuerersparnis durch Spenden berechnen: Wie viel bekommen Sie von Ihrer Spende über die Steuererklärung zurück?",
+    "kategorie": "Finanzen",
+    "kategorieSlug": "finanzen",
+    "keywords": [
+      "spenden rechner",
+      "spenden steuerersparnis",
+      "spenden absetzen",
+      "spendenquittung",
+      "sonderausgabenabzug",
+      "spenden steuer",
+      "spenden von der steuer absetzen",
+      "steuerersparnis spende",
+      "spenden steuerlich absetzbar"
+    ],
+    "icon": "🎁"
+  },
+  {
+    "slug": "nebenjob-rechner",
+    "titel": "Nebenjob-Rechner",
+    "beschreibung": "Nebenjob-Steuer berechnen: Auswirkung eines Nebenjobs auf Steuern und Sozialversicherung neben dem Hauptjob.",
+    "kategorie": "Finanzen",
+    "kategorieSlug": "finanzen",
+    "keywords": [
+      "nebenjob rechner",
+      "nebenjob steuer",
+      "nebenjob steuern",
+      "minijob neben hauptjob",
+      "steuerklasse 6",
+      "nebenverdienst steuer",
+      "nebenjob netto",
+      "zweiter job steuer",
+      "nebeneinkünfte steuer"
+    ],
+    "icon": "💼"
+  },
+  {
+    "slug": "schenkungssteuer-rechner",
+    "titel": "Schenkungssteuer-Rechner",
+    "beschreibung": "Schenkungssteuer berechnen: Freibeträge, Steuerklassen und 10-Jahres-Regel bei Schenkungen an Verwandte.",
+    "kategorie": "Finanzen",
+    "kategorieSlug": "finanzen",
+    "keywords": [
+      "schenkungssteuer rechner",
+      "schenkungssteuer berechnen",
+      "schenkungssteuer freibetrag",
+      "schenkung freibetrag",
+      "schenkungssteuer steuerklasse",
+      "freibetrag schenkung kind",
+      "schenkung 10 jahre",
+      "kettenschenkung",
+      "schenkungssteuer tabelle"
+    ],
+    "icon": "🎁"
+  },
+  {
+    "slug": "gewerbesteuer-rechner",
+    "titel": "Gewerbesteuer-Rechner",
+    "beschreibung": "Gewerbesteuer berechnen: Hebesatz, Steuermessbetrag, Freibetrag und ESt-Anrechnung für Gewerbetreibende.",
+    "kategorie": "Finanzen",
+    "kategorieSlug": "finanzen",
+    "keywords": [
+      "gewerbesteuer rechner",
+      "gewerbesteuer berechnen",
+      "gewerbesteuer hebesatz",
+      "gewerbesteuer freibetrag",
+      "steuermessbetrag",
+      "gewerbesteuer anrechnung",
+      "gewerbesteuer einzelunternehmen",
+      "gewerbesteuer gmbh",
+      "gewerbesteuer 2026"
+    ],
+    "icon": "🏭"
+  },
+  {
+    "slug": "einkommensteuer-rechner",
+    "titel": "Einkommensteuer-Rechner",
+    "beschreibung": "Einkommensteuer berechnen: Grundtabelle, Splitting, Soli, Kirchensteuer und Grenzsteuersatz nach § 32a EStG.",
+    "kategorie": "Finanzen",
+    "kategorieSlug": "finanzen",
+    "keywords": [
+      "einkommensteuer rechner",
+      "einkommensteuer berechnen",
+      "est rechner",
+      "32a estg",
+      "einkommensteuer 2026",
+      "einkommensteuer tabelle",
+      "grenzsteuersatz rechner",
+      "durchschnittssteuersatz",
+      "einkommensteuer splitting",
+      "grundtabelle"
+    ],
+    "icon": "📋"
+  },
+  {
+    "slug": "steuerklassen-vergleich-rechner",
+    "titel": "Steuerklassen-Vergleich-Rechner",
+    "beschreibung": "Steuerklassen-Kombinationen vergleichen: III/V, V/III und IV/IV mit Faktor — welche Wahl bringt das höchste monatliche Netto?",
+    "kategorie": "Finanzen",
+    "kategorieSlug": "finanzen",
+    "keywords": [
+      "steuerklassen vergleich",
+      "steuerklasse 3 5",
+      "steuerklasse 4 4 faktor",
+      "steuerklasse ehepaar",
+      "faktorverfahren",
+      "steuerklasse wechseln",
+      "steuerklasse optimieren",
+      "beste steuerklasse ehepaar",
+      "iii v oder iv iv"
+    ],
+    "icon": "⚖️"
+  },
+  {
     "slug": "bmi-rechner",
     "titel": "BMI-Rechner",
     "beschreibung": "Body Mass Index berechnen: Mit WHO-Einordnung, farbiger Skala und optimalem BMI-Bereich für Ihr Alter.",
@@ -1333,6 +1554,75 @@ export const rechner: RechnerLight[] = [
     "icon": "❤️"
   },
   {
+    "slug": "whr-rechner",
+    "titel": "WHR-Rechner",
+    "beschreibung": "Taille-Hüfte-Verhältnis berechnen: WHR als Indikator für gesundheitliches Risiko — aussagekräftiger als der BMI.",
+    "kategorie": "Gesundheit",
+    "kategorieSlug": "gesundheit",
+    "keywords": [
+      "whr rechner",
+      "taille hüfte verhältnis",
+      "waist hip ratio",
+      "whr berechnen",
+      "bauchumfang verhältnis",
+      "viszerales fett",
+      "whtr rechner",
+      "taille hüfte index"
+    ],
+    "icon": "📏"
+  },
+  {
+    "slug": "blutdruck-rechner",
+    "titel": "Blutdruck-Rechner",
+    "beschreibung": "Blutdruckwerte einordnen: WHO-Klassifikation, Durchschnitt aus mehreren Messungen und Risikobewertung.",
+    "kategorie": "Gesundheit",
+    "kategorieSlug": "gesundheit",
+    "keywords": [
+      "blutdruck rechner",
+      "blutdruck einordnen",
+      "blutdruckwerte tabelle",
+      "hypertonie",
+      "blutdruck normal",
+      "blutdruck messen",
+      "systolisch diastolisch"
+    ],
+    "icon": "🩺"
+  },
+  {
+    "slug": "schritte-rechner",
+    "titel": "Schritte-Rechner",
+    "beschreibung": "Schritte in Kilometer und Kalorien umrechnen: Tagesziel prüfen und Kalorienverbrauch durch Gehen berechnen.",
+    "kategorie": "Gesundheit",
+    "kategorieSlug": "gesundheit",
+    "keywords": [
+      "schritte rechner",
+      "schritte in km",
+      "schritte kalorien",
+      "10000 schritte",
+      "schrittlänge berechnen",
+      "gehgeschwindigkeit",
+      "kalorienverbrauch gehen"
+    ],
+    "icon": "🚶"
+  },
+  {
+    "slug": "sonnenschutz-rechner",
+    "titel": "Sonnenschutz-Rechner",
+    "beschreibung": "Sonnenschutz berechnen: Eigenschutzzeit, empfohlener Lichtschutzfaktor und maximale Sonnenzeit.",
+    "kategorie": "Gesundheit",
+    "kategorieSlug": "gesundheit",
+    "keywords": [
+      "sonnenschutz rechner",
+      "lsf rechner",
+      "eigenschutzzeit",
+      "uv index",
+      "sonnencreme",
+      "lichtschutzfaktor",
+      "hauttyp"
+    ],
+    "icon": "☀️"
+  },
+  {
     "slug": "spritkosten-rechner",
     "titel": "Spritkostenrechner",
     "beschreibung": "Spritkosten und Fahrtkosten berechnen: Benzinverbrauch, Kosten pro Kilometer und Gesamtkosten für jede Strecke.",
@@ -1474,6 +1764,40 @@ export const rechner: RechnerLight[] = [
       "e-auto stromverbrauch"
     ],
     "icon": "🔋"
+  },
+  {
+    "slug": "fahrrad-rahmengroesse-rechner",
+    "titel": "Fahrrad-Rahmengröße-Rechner",
+    "beschreibung": "Optimale Fahrrad-Rahmengröße berechnen: Nach Körpergröße und Schrittlänge — für Rennrad, MTB, City und E-Bike.",
+    "kategorie": "Auto & Verkehr",
+    "kategorieSlug": "auto",
+    "keywords": [
+      "fahrrad rahmengröße",
+      "rahmenhöhe berechnen",
+      "fahrradgröße rechner",
+      "schrittlänge fahrrad",
+      "rennrad rahmengröße",
+      "mtb rahmengröße",
+      "e-bike rahmenhöhe"
+    ],
+    "icon": "🚲"
+  },
+  {
+    "slug": "taxi-rechner",
+    "titel": "Taxi-Kosten-Rechner",
+    "beschreibung": "Taxikosten schätzen: Fahrpreis nach Strecke, Tarif und Stadt.",
+    "kategorie": "Auto & Verkehr",
+    "kategorieSlug": "auto",
+    "keywords": [
+      "taxi rechner",
+      "taxikosten berechnen",
+      "taxi preis",
+      "taxi tarif",
+      "taxifahrt kosten",
+      "taxi berlin",
+      "taxi münchen"
+    ],
+    "icon": "🚕"
   },
   {
     "slug": "stromkosten-rechner",
@@ -1834,6 +2158,93 @@ export const rechner: RechnerLight[] = [
     "icon": "⚡"
   },
   {
+    "slug": "fliesenbedarf-rechner",
+    "titel": "Fliesenbedarf-Rechner",
+    "beschreibung": "Fliesenbedarf berechnen: Anzahl Fliesen, Fliesenkleber und Fugenmasse für Boden und Wand.",
+    "kategorie": "Wohnen & Energie",
+    "kategorieSlug": "wohnen",
+    "keywords": [
+      "fliesenbedarf rechner",
+      "fliesen berechnen",
+      "fliesenbedarf berechnen",
+      "fliesenkleber berechnen",
+      "fugenmasse berechnen",
+      "fliesen pro qm",
+      "verschnitt fliesen",
+      "fliesenrechner"
+    ],
+    "icon": "🧱"
+  },
+  {
+    "slug": "laminat-rechner",
+    "titel": "Laminat-Rechner",
+    "beschreibung": "Laminat- und Parkettbedarf berechnen: Pakete, Verschnitt und Materialkosten.",
+    "kategorie": "Wohnen & Energie",
+    "kategorieSlug": "wohnen",
+    "keywords": [
+      "laminat rechner",
+      "laminat berechnen",
+      "parkett rechner",
+      "laminat pakete berechnen",
+      "verschnitt laminat",
+      "laminat m2 rechner",
+      "laminatbedarf",
+      "parkett bedarf"
+    ],
+    "icon": "🪵"
+  },
+  {
+    "slug": "beton-rechner",
+    "titel": "Beton-Rechner",
+    "beschreibung": "Betonmenge berechnen: Kubikmeter und benötigte Säcke für Fundament, Bodenplatte und Pfosten.",
+    "kategorie": "Wohnen & Energie",
+    "kategorieSlug": "wohnen",
+    "keywords": [
+      "beton rechner",
+      "betonmenge berechnen",
+      "beton säcke",
+      "fundament beton",
+      "beton kubikmeter",
+      "fertigbeton",
+      "lieferbeton"
+    ],
+    "icon": "🧱"
+  },
+  {
+    "slug": "estrich-rechner",
+    "titel": "Estrich-Rechner",
+    "beschreibung": "Estrich- und Putzmenge berechnen: Materialbedarf in kg und Säcke für Boden und Wand.",
+    "kategorie": "Wohnen & Energie",
+    "kategorieSlug": "wohnen",
+    "keywords": [
+      "estrich rechner",
+      "estrich menge berechnen",
+      "estrich bedarf",
+      "putz rechner",
+      "verputz menge",
+      "zementestrich",
+      "fließestrich"
+    ],
+    "icon": "🏗️"
+  },
+  {
+    "slug": "balkon-solar-rechner",
+    "titel": "Balkon-Solar-Rechner",
+    "beschreibung": "Balkon-Solaranlage berechnen: Ertrag, Eigenverbrauch und Amortisation für 600W/800W Balkonkraftwerke.",
+    "kategorie": "Wohnen & Energie",
+    "kategorieSlug": "wohnen",
+    "keywords": [
+      "balkonkraftwerk rechner",
+      "balkon solar rechner",
+      "balkonkraftwerk ertrag",
+      "balkonkraftwerk amortisation",
+      "800 watt balkonkraftwerk",
+      "mini pv anlage",
+      "stecker solaranlage"
+    ],
+    "icon": "☀️"
+  },
+  {
     "slug": "bruchrechner",
     "titel": "Bruchrechner",
     "beschreibung": "Brüche berechnen: Addieren, subtrahieren, multiplizieren, dividieren. Mit Rechenweg, Kürzen und Umrechnung.",
@@ -2049,6 +2460,110 @@ export const rechner: RechnerLight[] = [
       "diskriminante"
     ],
     "icon": "📝"
+  },
+  {
+    "slug": "primzahl-rechner",
+    "titel": "Primzahl-Rechner",
+    "beschreibung": "Primzahlen prüfen und finden: Ist eine Zahl prim? Primfaktorzerlegung und Primzahlen in einem Bereich.",
+    "kategorie": "Mathe & Schule",
+    "kategorieSlug": "mathe",
+    "keywords": [
+      "primzahl rechner",
+      "primzahlen",
+      "primfaktorzerlegung",
+      "ist primzahl",
+      "primzahl prüfen",
+      "primzahlen liste",
+      "sieb des eratosthenes",
+      "faktorzerlegung"
+    ],
+    "icon": "🔢"
+  },
+  {
+    "slug": "quersumme-rechner",
+    "titel": "Quersumme-Rechner",
+    "beschreibung": "Quersumme berechnen: Einstellige und alternierende Quersumme — mit Teilbarkeitsregeln.",
+    "kategorie": "Mathe & Schule",
+    "kategorieSlug": "mathe",
+    "keywords": [
+      "quersumme rechner",
+      "quersumme berechnen",
+      "iterierte quersumme",
+      "alternierende quersumme",
+      "teilbarkeitsregeln",
+      "quersummenregel",
+      "ziffernquersumme"
+    ],
+    "icon": "➕"
+  },
+  {
+    "slug": "potenz-rechner",
+    "titel": "Potenz-Rechner",
+    "beschreibung": "Potenzen, Wurzeln und Logarithmen berechnen mit Rechenweg und Potenzgesetzen.",
+    "kategorie": "Mathe & Schule",
+    "kategorieSlug": "mathe",
+    "keywords": [
+      "potenzrechner",
+      "potenz berechnen",
+      "wurzel berechnen",
+      "logarithmus rechner",
+      "potenzgesetze",
+      "quadratwurzel",
+      "exponenten"
+    ],
+    "icon": "🔢"
+  },
+  {
+    "slug": "ggt-kgv-rechner",
+    "titel": "ggT/kgV-Rechner",
+    "beschreibung": "Größten gemeinsamen Teiler und kleinstes gemeinsames Vielfaches berechnen.",
+    "kategorie": "Mathe & Schule",
+    "kategorieSlug": "mathe",
+    "keywords": [
+      "ggt rechner",
+      "kgv rechner",
+      "größter gemeinsamer teiler",
+      "kleinstes gemeinsames vielfaches",
+      "euklidischer algorithmus",
+      "primfaktorzerlegung"
+    ],
+    "icon": "🔢"
+  },
+  {
+    "slug": "zufallszahl-generator",
+    "titel": "Zufallszahl-Generator",
+    "beschreibung": "Zufallszahlen generieren: Zahlen, Würfel, Münzwurf, Losziehung und Passwort-Generator.",
+    "kategorie": "Mathe & Schule",
+    "kategorieSlug": "mathe",
+    "keywords": [
+      "zufallszahl generator",
+      "würfel online",
+      "münzwurf",
+      "lotto zahlen generator",
+      "passwort generator",
+      "zufallsgenerator",
+      "random number"
+    ],
+    "icon": "🎲"
+  },
+  {
+    "slug": "noten-international",
+    "titel": "Noten-Umrechner (international)",
+    "beschreibung": "Noten international umrechnen: Deutsche Note ↔ GPA (USA) ↔ UK Classification ↔ ECTS-Grade.",
+    "kategorie": "Mathe & Schule",
+    "kategorieSlug": "mathe",
+    "keywords": [
+      "noten umrechnen",
+      "gpa rechner",
+      "deutsche note gpa",
+      "ects note",
+      "uk classification",
+      "noten international",
+      "bayerische formel",
+      "notenumrechner",
+      "gpa in deutsche note"
+    ],
+    "icon": "🌍"
   },
   {
     "slug": "arbeitszeitrechner",
