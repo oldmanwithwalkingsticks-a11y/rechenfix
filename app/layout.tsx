@@ -90,12 +90,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="de" suppressHydrationWarning className={inter.variable}>
       <body className="min-h-screen flex flex-col bg-white dark:bg-slate-900 text-gray-800 dark:text-gray-100 antialiased font-sans">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-lg focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
+        >
+          Zum Hauptinhalt springen
+        </a>
         <StructuredData data={generateWebsiteSchema()} />
         <ThemeProvider>
           <CookieConsentProvider>
             <ConsentScripts />
             <Header />
-            <main className="flex-1">{children}</main>
+            <main id="main-content" tabIndex={-1} className="flex-1 outline-none">{children}</main>
             <Footer />
             <CookieBanner />
             <ScrollToTop />
