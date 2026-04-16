@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 const SCHNELLWAHL = ['1', '2', '3', '5', '8'];
 
@@ -33,29 +34,20 @@ export default function InflationsRechner() {
     <div>
       {/* Modus-Auswahl */}
       <div className="mb-5">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Was möchten Sie berechnen?</label>
-        <div className="flex gap-2">
-          <button
-            onClick={() => { setModus('kaufkraft'); setBetrag('1000'); }}
-            className={`flex-1 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
-              modus === 'kaufkraft'
-                ? 'bg-primary-500 text-white shadow-md'
-                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-            }`}
-          >
-            📉 Kaufkraftverlust
-          </button>
-          <button
-            onClick={() => { setModus('preisanstieg'); setBetrag('100'); }}
-            className={`flex-1 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
-              modus === 'preisanstieg'
-                ? 'bg-primary-500 text-white shadow-md'
-                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-            }`}
-          >
-            📈 Preisanstieg
-          </button>
-        </div>
+        <RadioToggleGroup
+          name="inflation-modus"
+          legend="Was möchten Sie berechnen?"
+          options={[
+            { value: 'kaufkraft', label: '📉 Kaufkraftverlust' },
+            { value: 'preisanstieg', label: '📈 Preisanstieg' },
+          ]}
+          value={modus}
+          onChange={(v) => {
+            setModus(v as InflationsModus);
+            setBetrag(v === 'kaufkraft' ? '1000' : '100');
+          }}
+          fullWidth
+        />
       </div>
 
       {/* Eingaben */}

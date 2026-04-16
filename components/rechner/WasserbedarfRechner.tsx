@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 const AKTIVITAETS_OPTIONEN: { key: AktivitaetsLevel; label: string }[] = [
   { key: 'kaum', label: 'Kaum aktiv (Bürojob)' },
@@ -77,29 +78,14 @@ export default function WasserbedarfRechner() {
           </p>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Temperatur / Jahreszeit</label>
-          <div className="flex gap-2">
-            <button
-              onClick={() => setHeiss(false)}
-              className={`flex-1 px-4 py-3 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
-                !heiss
-                  ? 'bg-primary-500 text-white'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
-              }`}
-            >
-              Normal
-            </button>
-            <button
-              onClick={() => setHeiss(true)}
-              className={`flex-1 px-4 py-3 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
-                heiss
-                  ? 'bg-orange-500 text-white'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
-              }`}
-            >
-              Heiß / Sommer
-            </button>
-          </div>
+          <RadioToggleGroup
+            name="wasser-temperatur"
+            legend="Temperatur / Jahreszeit"
+            options={[{ value: 'normal', label: 'Normal' }, { value: 'heiss', label: 'Heiß / Sommer' }]}
+            value={heiss ? 'heiss' : 'normal'}
+            onChange={(v) => setHeiss(v === 'heiss')}
+            fullWidth
+          />
         </div>
       </div>
 

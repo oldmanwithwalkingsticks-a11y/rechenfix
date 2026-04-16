@@ -13,6 +13,7 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 export default function MietrenditeRechner() {
   const [kaufpreis, setKaufpreis] = useState('250000');
@@ -134,28 +135,17 @@ export default function MietrenditeRechner() {
 
       {/* Finanzierung */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Finanzierung</label>
-        <div className="flex gap-2 mb-3">
-          <button
-            onClick={() => setFinanzierung('eigenkapital')}
-            className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
-              finanzierung === 'eigenkapital'
-                ? 'bg-primary-500 text-white'
-                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
-            }`}
-          >
-            Komplett Eigenkapital
-          </button>
-          <button
-            onClick={() => setFinanzierung('kredit')}
-            className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
-              finanzierung === 'kredit'
-                ? 'bg-primary-500 text-white'
-                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
-            }`}
-          >
-            Mit Kredit
-          </button>
+        <div className="mb-3">
+          <RadioToggleGroup
+            name="mietrendite-finanzierung"
+            legend="Finanzierung"
+            options={[
+              { value: 'eigenkapital', label: 'Komplett Eigenkapital' },
+              { value: 'kredit', label: 'Mit Kredit' },
+            ]}
+            value={finanzierung}
+            onChange={(v) => setFinanzierung(v as FinanzierungsModus)}
+          />
         </div>
 
         {finanzierung === 'kredit' && (

@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 export default function KoerperfettRechner() {
   const [geschlecht, setGeschlecht] = useState<Geschlecht>('mann');
@@ -63,29 +64,13 @@ export default function KoerperfettRechner() {
     <div>
       {/* Geschlecht */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Geschlecht</label>
-        <div className="flex gap-2">
-          <button
-            onClick={() => setGeschlecht('mann')}
-            className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
-              geschlecht === 'mann'
-                ? 'bg-primary-500 text-white'
-                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
-            }`}
-          >
-            Mann
-          </button>
-          <button
-            onClick={() => setGeschlecht('frau')}
-            className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
-              geschlecht === 'frau'
-                ? 'bg-primary-500 text-white'
-                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
-            }`}
-          >
-            Frau
-          </button>
-        </div>
+        <RadioToggleGroup
+          name="koerperfett-geschlecht"
+          legend="Geschlecht"
+          options={[{ value: 'mann', label: 'Mann' }, { value: 'frau', label: 'Frau' }]}
+          value={geschlecht}
+          onChange={(v) => setGeschlecht(v as Geschlecht)}
+        />
       </div>
 
       {/* Körpergröße */}

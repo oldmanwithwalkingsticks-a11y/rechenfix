@@ -13,6 +13,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 const EINHEIT_LABELS: Record<Einheit, string> = {
   mm: 'mm', cm: 'cm', m: 'm', km: 'km', zoll: 'Zoll', fuss: 'Fuß',
@@ -234,27 +235,17 @@ export default function FlaechenRechner() {
       case 'kreis':
         return (
           <>
-            <div className="flex gap-2 mb-3">
-              <button
-                onClick={() => setDurchmesserModus(false)}
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-                  !durchmesserModus
-                    ? 'bg-primary-500 text-white'
-                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
-                }`}
-              >
-                Radius
-              </button>
-              <button
-                onClick={() => setDurchmesserModus(true)}
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-                  durchmesserModus
-                    ? 'bg-primary-500 text-white'
-                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
-                }`}
-              >
-                Durchmesser
-              </button>
+            <div className="mb-3">
+              <RadioToggleGroup
+                name="flaeche-radius-dm"
+                legend="Eingabemodus"
+                options={[
+                  { value: 'radius', label: 'Radius' },
+                  { value: 'dm', label: 'Durchmesser' },
+                ]}
+                value={durchmesserModus ? 'dm' : 'radius'}
+                onChange={(v) => setDurchmesserModus(v === 'dm')}
+              />
             </div>
             <Feld label={durchmesserModus ? 'Durchmesser (d)' : 'Radius (r)'} value={radius} onChange={setRadius} einheit={e} />
           </>

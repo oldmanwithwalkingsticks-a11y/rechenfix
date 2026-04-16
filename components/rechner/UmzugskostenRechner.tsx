@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 const GROESSE_SCHNELLWAHL = [
   { label: '30 m² (1 Zi.)', wert: 30 },
@@ -113,29 +114,16 @@ export default function UmzugskostenRechner() {
 
       {/* Art des Umzugs */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Art des Umzugs</label>
-        <div className="flex gap-2">
-          <button
-            onClick={() => setArt('firma')}
-            className={`flex-1 px-4 py-3 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
-              art === 'firma'
-                ? 'bg-primary-500 text-white'
-                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
-            }`}
-          >
-            Mit Umzugsfirma
-          </button>
-          <button
-            onClick={() => setArt('selbst')}
-            className={`flex-1 px-4 py-3 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
-              art === 'selbst'
-                ? 'bg-primary-500 text-white'
-                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
-            }`}
-          >
-            Selbst organisiert
-          </button>
-        </div>
+        <RadioToggleGroup
+          name="umzug-art"
+          legend="Art des Umzugs"
+          options={[
+            { value: 'firma', label: 'Mit Umzugsfirma' },
+            { value: 'selbst', label: 'Selbst organisiert' },
+          ]}
+          value={art}
+          onChange={(v) => setArt(v as UmzugsArt)}
+        />
       </div>
 
       {/* Etagen */}

@@ -7,6 +7,7 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 type Modell = 'bund' | 'bayern' | 'bw';
 type Grundstuecksart = 'efh' | 'etw' | 'miet' | 'unbebaut';
@@ -75,22 +76,19 @@ export default function GrundsteuerRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Berechnungsmodell
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-          {([
-            ['bund', 'Bundesmodell', 'Die meisten Länder'],
-            ['bayern', 'Bayern', 'Flächenmodell'],
-            ['bw', 'Baden-Württemberg', 'Bodenwertmodell'],
-          ] as const).map(([val, label, sub]) => (
-            <button
-              key={val}
-              onClick={() => setModell(val)}
-              className={`px-4 py-3 rounded-xl text-sm font-medium transition-all text-left ${modell === val ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
-            >
-              <div className="font-semibold">{label}</div>
-              <div className={`text-xs mt-0.5 ${modell === val ? 'text-white/80' : 'text-gray-500 dark:text-gray-400'}`}>{sub}</div>
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="grundsteuer-modell"
+          legend="Berechnungsmodell"
+          srOnlyLegend
+          options={[
+            { value: 'bund', label: 'Bundesmodell', description: 'Die meisten Länder' },
+            { value: 'bayern', label: 'Bayern', description: 'Flächenmodell' },
+            { value: 'bw', label: 'Baden-Württemberg', description: 'Bodenwertmodell' },
+          ]}
+          value={modell}
+          onChange={(v) => setModell(v as Modell)}
+          columns={3}
+        />
       </div>
 
       {/* 2: Grundstücksart */}

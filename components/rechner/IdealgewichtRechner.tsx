@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 const KOERPERBAU_OPTIONEN: { key: Koerperbau; label: string }[] = [
   { key: 'schmal', label: 'Schmal' },
@@ -54,20 +55,14 @@ export default function IdealgewichtRechner() {
   return (
     <div>
       {/* Geschlecht Toggle */}
-      <div className="flex gap-2 mb-6">
-        {(['frau', 'mann'] as const).map(g => (
-          <button
-            key={g}
-            onClick={() => setGeschlecht(g)}
-            className={`px-5 py-2 rounded-xl text-sm font-medium transition-all ${
-              geschlecht === g
-                ? 'bg-primary-500 text-white shadow-md'
-                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-            }`}
-          >
-            {g === 'frau' ? 'Frau' : 'Mann'}
-          </button>
-        ))}
+      <div className="mb-6">
+        <RadioToggleGroup
+          name="idealgewicht-geschlecht"
+          legend="Geschlecht"
+          options={[{ value: 'frau', label: 'Frau' }, { value: 'mann', label: 'Mann' }]}
+          value={geschlecht}
+          onChange={(v) => setGeschlecht(v as Geschlecht)}
+        />
       </div>
 
       {/* Eingaben */}
@@ -88,22 +83,14 @@ export default function IdealgewichtRechner() {
 
       {/* Körperbau Toggle */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Körperbau</label>
-        <div className="flex gap-2">
-          {KOERPERBAU_OPTIONEN.map(k => (
-            <button
-              key={k.key}
-              onClick={() => setKoerperbau(k.key)}
-              className={`flex-1 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-                koerperbau === k.key
-                  ? 'bg-primary-500 text-white shadow-md'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-              }`}
-            >
-              {k.label}
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="idealgewicht-koerperbau"
+          legend="Körperbau"
+          options={KOERPERBAU_OPTIONEN.map(k => ({ value: k.key, label: k.label }))}
+          value={koerperbau}
+          onChange={(v) => setKoerperbau(v as Koerperbau)}
+          fullWidth
+        />
       </div>
 
       {/* Ergebnis */}

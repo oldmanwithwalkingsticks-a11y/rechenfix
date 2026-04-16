@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import { berechneSplitting, BUNDESLAENDER } from '@/lib/berechnungen/splitting';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
@@ -64,54 +65,28 @@ export default function SplittingRechner() {
       {/* Kirchensteuer */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kirchensteuer Partner 1</label>
-          <div className="flex gap-2">
-            <button
-              onClick={() => setKircheP1(false)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
-                !kircheP1
-                  ? 'bg-primary-500 text-white'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
-              }`}
-            >
-              Nein
-            </button>
-            <button
-              onClick={() => setKircheP1(true)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
-                kircheP1
-                  ? 'bg-primary-500 text-white'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
-              }`}
-            >
-              Ja
-            </button>
-          </div>
+          <RadioToggleGroup
+            name="splitting-kirche-p1"
+            legend="Kirchensteuer Partner 1"
+            options={[
+              { value: 'nein', label: 'Nein' },
+              { value: 'ja', label: 'Ja' },
+            ]}
+            value={kircheP1 ? 'ja' : 'nein'}
+            onChange={(v) => setKircheP1(v === 'ja')}
+          />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kirchensteuer Partner 2</label>
-          <div className="flex gap-2">
-            <button
-              onClick={() => setKircheP2(false)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
-                !kircheP2
-                  ? 'bg-primary-500 text-white'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
-              }`}
-            >
-              Nein
-            </button>
-            <button
-              onClick={() => setKircheP2(true)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
-                kircheP2
-                  ? 'bg-primary-500 text-white'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
-              }`}
-            >
-              Ja
-            </button>
-          </div>
+          <RadioToggleGroup
+            name="splitting-kirche-p2"
+            legend="Kirchensteuer Partner 2"
+            options={[
+              { value: 'nein', label: 'Nein' },
+              { value: 'ja', label: 'Ja' },
+            ]}
+            value={kircheP2 ? 'ja' : 'nein'}
+            onChange={(v) => setKircheP2(v === 'ja')}
+          />
         </div>
       </div>
 

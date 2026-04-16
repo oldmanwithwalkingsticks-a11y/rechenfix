@@ -8,6 +8,7 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 const ZINSBINDUNG_OPTIONEN = [
   { label: '5 Jahre', wert: 5 },
@@ -99,29 +100,16 @@ export default function BaufinanzierungRechner() {
         </div>
         <div className="flex items-end">
           <div className="w-full">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kaufnebenkosten einrechnen?</label>
-            <div className="flex gap-2">
-              <button
-                onClick={() => setNebenkostenEin(true)}
-                className={`flex-1 px-4 py-3 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
-                  nebenkostenEin
-                    ? 'bg-primary-500 text-white'
-                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
-                }`}
-              >
-                Ja
-              </button>
-              <button
-                onClick={() => setNebenkostenEin(false)}
-                className={`flex-1 px-4 py-3 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
-                  !nebenkostenEin
-                    ? 'bg-primary-500 text-white'
-                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
-                }`}
-              >
-                Nein
-              </button>
-            </div>
+            <RadioToggleGroup
+              name="baufinanz-nebenkosten"
+              legend="Kaufnebenkosten einrechnen?"
+              options={[
+                { value: 'ja', label: 'Ja' },
+                { value: 'nein', label: 'Nein' },
+              ]}
+              value={nebenkostenEin ? 'ja' : 'nein'}
+              onChange={(v) => setNebenkostenEin(v === 'ja')}
+            />
           </div>
         </div>
       </div>

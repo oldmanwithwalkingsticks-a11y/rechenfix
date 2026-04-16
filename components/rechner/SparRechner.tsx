@@ -8,6 +8,7 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 export default function SparRechner() {
   const [anfangskapital, setAnfangskapital] = useState('0');
@@ -66,29 +67,16 @@ export default function SparRechner() {
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Sparrate jährlich erhöhen</p>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zinsintervall</label>
-          <div className="flex gap-2">
-            <button
-              onClick={() => setZinsintervall('jaehrlich')}
-              className={`flex-1 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                zinsintervall === 'jaehrlich'
-                  ? 'bg-primary-500 text-white shadow-md'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-              }`}
-            >
-              Jährlich
-            </button>
-            <button
-              onClick={() => setZinsintervall('monatlich')}
-              className={`flex-1 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                zinsintervall === 'monatlich'
-                  ? 'bg-primary-500 text-white shadow-md'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-              }`}
-            >
-              Monatlich
-            </button>
-          </div>
+          <RadioToggleGroup
+            name="spar-zinsintervall"
+            legend="Zinsintervall"
+            options={[
+              { value: 'jaehrlich', label: 'Jährlich' },
+              { value: 'monatlich', label: 'Monatlich' },
+            ]}
+            value={zinsintervall}
+            onChange={(v) => setZinsintervall(v as Zinsintervall)}
+          />
         </div>
       </div>
 

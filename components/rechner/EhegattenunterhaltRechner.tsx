@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
@@ -71,25 +72,18 @@ export default function EhegattenunterhaltRechner() {
     <div>
       {/* Art */}
       <div className="mb-5">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Art des Unterhalts</label>
-        <div className="grid grid-cols-2 gap-2">
-          {([
-            { key: 'trennung', label: 'Trennungsunterhalt' },
-            { key: 'nachehelich', label: 'Nachehelicher Unterhalt' },
-          ] as const).map(o => (
-            <button
-              key={o.key}
-              onClick={() => setArt(o.key)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
-                art === o.key
-                  ? 'bg-primary-500 text-white shadow-md'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
-              }`}
-            >
-              {o.label}
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="eheunterhalt-art"
+          legend="Art des Unterhalts"
+          options={[
+            { value: 'trennung', label: 'Trennungsunterhalt' },
+            { value: 'nachehelich', label: 'Nachehelicher Unterhalt' },
+          ]}
+          value={art}
+          onChange={(v) => setArt(v as Art)}
+          columns={2}
+          fullWidth
+        />
       </div>
 
       {/* Einkommen */}
@@ -109,27 +103,18 @@ export default function EhegattenunterhaltRechner() {
 
       {/* Kindesunterhalt */}
       <div className="mb-5">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-          Kindesunterhalt bereits im Netto berücksichtigt?
-        </label>
-        <div className="grid grid-cols-2 gap-2">
-          {([
-            { key: true, label: 'Ja' },
-            { key: false, label: 'Nein' },
-          ] as const).map(o => (
-            <button
-              key={String(o.key)}
-              onClick={() => setKuBeruecksichtigt(o.key)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
-                kuBeruecksichtigt === o.key
-                  ? 'bg-primary-500 text-white shadow-md'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
-              }`}
-            >
-              {o.label}
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="eheunterhalt-ku"
+          legend="Kindesunterhalt bereits im Netto berücksichtigt?"
+          options={[
+            { value: 'ja', label: 'Ja' },
+            { value: 'nein', label: 'Nein' },
+          ]}
+          value={kuBeruecksichtigt ? 'ja' : 'nein'}
+          onChange={(v) => setKuBeruecksichtigt(v === 'ja')}
+          columns={2}
+          fullWidth
+        />
       </div>
 
       {!kuBeruecksichtigt && (

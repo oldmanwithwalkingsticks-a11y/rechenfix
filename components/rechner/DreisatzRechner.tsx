@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 export default function DreisatzRechner() {
   const [a1, setA1] = useState('3');
@@ -29,27 +30,18 @@ export default function DreisatzRechner() {
   return (
     <div>
       {/* Modus-Toggle */}
-      <div className="flex gap-2 mb-6">
-        <button
-          onClick={() => setAntiproportional(false)}
-          className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-            !antiproportional
-              ? 'bg-primary-500 text-white shadow-md'
-              : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-          }`}
-        >
-          Proportional
-        </button>
-        <button
-          onClick={() => setAntiproportional(true)}
-          className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-            antiproportional
-              ? 'bg-primary-500 text-white shadow-md'
-              : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-          }`}
-        >
-          Antiproportional
-        </button>
+      <div className="mb-6">
+        <RadioToggleGroup
+          name="dreisatz-modus"
+          legend="Berechnungsart"
+          srOnlyLegend
+          options={[
+            { value: 'prop', label: 'Proportional' },
+            { value: 'anti', label: 'Antiproportional' },
+          ]}
+          value={antiproportional ? 'anti' : 'prop'}
+          onChange={(v) => setAntiproportional(v === 'anti')}
+        />
       </div>
 
       {/* Hinweis */}

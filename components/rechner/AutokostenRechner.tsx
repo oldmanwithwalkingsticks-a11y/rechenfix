@@ -15,6 +15,7 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 const FAHRLEISTUNG_SCHNELLWAHL = [10000, 15000, 20000, 30000];
 
@@ -109,15 +110,16 @@ export default function AutokostenRechner() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Finanzierung</label>
-            <div className="flex gap-2">
-              {(['bar', 'finanziert'] as FinanzierungsModus[]).map(f => (
-                <button key={f} onClick={() => setFinanzierung(f)}
-                  className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${finanzierung === f ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}>
-                  {f === 'bar' ? 'Bar bezahlt' : 'Finanziert / Leasing'}
-                </button>
-              ))}
-            </div>
+            <RadioToggleGroup
+              name="autokosten-finanzierung"
+              legend="Finanzierung"
+              options={[
+                { value: 'bar', label: 'Bar bezahlt' },
+                { value: 'finanziert', label: 'Finanziert / Leasing' },
+              ]}
+              value={finanzierung}
+              onChange={(v) => setFinanzierung(v as FinanzierungsModus)}
+            />
             {finanzierung === 'finanziert' && (
               <div className="mt-3 w-full sm:w-1/2">
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monatliche Rate</label>
@@ -170,15 +172,18 @@ export default function AutokostenRechner() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Antriebsart</label>
-            <div className="flex flex-wrap gap-2">
-              {(['benzin', 'diesel', 'elektro', 'hybrid'] as Antriebsart[]).map(a => (
-                <button key={a} onClick={() => setAntrieb(a)}
-                  className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${antrieb === a ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}>
-                  {a === 'benzin' ? '⛽ Benzin' : a === 'diesel' ? '⛽ Diesel' : a === 'elektro' ? '⚡ Elektro' : '🔋 Hybrid'}
-                </button>
-              ))}
-            </div>
+            <RadioToggleGroup
+              name="autokosten-antrieb"
+              legend="Antriebsart"
+              options={[
+                { value: 'benzin', label: '⛽ Benzin' },
+                { value: 'diesel', label: '⛽ Diesel' },
+                { value: 'elektro', label: '⚡ Elektro' },
+                { value: 'hybrid', label: '🔋 Hybrid' },
+              ]}
+              value={antrieb}
+              onChange={(v) => setAntrieb(v as Antriebsart)}
+            />
           </div>
 
           <div className="grid grid-cols-2 gap-3">

@@ -14,6 +14,7 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 const VERWANDTSCHAFT_OPTIONEN: { value: Verwandtschaft; label: string; kl: string }[] = [
   { value: 'ehepartner',         label: 'Ehepartner / eingetragener Lebenspartner', kl: 'Kl. I' },
@@ -57,17 +58,17 @@ export default function ErbschaftsteuerRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Art des Erwerbs
         </h2>
-        <div className="flex gap-2">
-          {([['erbschaft', '⚱️ Erbschaft'], ['schenkung', '🎁 Schenkung']] as const).map(([val, label]) => (
-            <button
-              key={val}
-              onClick={() => setErwerbsart(val)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${erwerbsart === val ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="erbschaft-erwerbsart"
+          legend="Art des Erwerbs"
+          srOnlyLegend
+          options={[
+            { value: 'erbschaft', label: '⚱️ Erbschaft' },
+            { value: 'schenkung', label: '🎁 Schenkung' },
+          ]}
+          value={erwerbsart}
+          onChange={(v) => setErwerbsart(v as Erwerbsart)}
+        />
       </div>
 
       {/* === 2: Wert === */}
@@ -114,17 +115,17 @@ export default function ErbschaftsteuerRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">5</span>
           Selbstgenutzte Immobilie enthalten?
         </h2>
-        <div className="flex gap-2">
-          {([false, true] as const).map(val => (
-            <button
-              key={String(val)}
-              onClick={() => setSelbstgenutzteImmobilie(val)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${selbstgenutzteImmobilie === val ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
-            >
-              {val ? '🏡 Ja' : 'Nein'}
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="erbschaft-immobilie"
+          legend="Selbstgenutzte Immobilie enthalten?"
+          srOnlyLegend
+          options={[
+            { value: 'nein', label: 'Nein' },
+            { value: 'ja', label: '🏡 Ja' },
+          ]}
+          value={selbstgenutzteImmobilie ? 'ja' : 'nein'}
+          onChange={(v) => setSelbstgenutzteImmobilie(v === 'ja')}
+        />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
           Selbstgenutzte Immobilien bis 200 m² können an Ehepartner/Kinder steuerfrei vererbt werden (10-Jahres-Selbstnutzung erforderlich).
         </p>

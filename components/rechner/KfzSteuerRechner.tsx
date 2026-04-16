@@ -8,6 +8,7 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 export default function KfzSteuerRechner() {
   const [zulassung, setZulassung] = useState<Zulassungszeitraum>('nach-2009');
@@ -38,49 +39,27 @@ export default function KfzSteuerRechner() {
     <div>
       {/* Erstzulassung Toggle */}
       <div className="mb-5">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Erstzulassung</label>
-        <div className="flex gap-2">
-          <button
-            onClick={() => setZulassung('nach-2009')}
-            className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-              zulassung === 'nach-2009'
-                ? 'bg-primary-500 text-white shadow-md'
-                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-            }`}
-          >
-            Ab 01.07.2009
-          </button>
-          <button
-            onClick={() => setZulassung('vor-2009')}
-            className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-              zulassung === 'vor-2009'
-                ? 'bg-primary-500 text-white shadow-md'
-                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-            }`}
-          >
-            Vor 01.07.2009
-          </button>
-        </div>
+        <RadioToggleGroup
+          name="kfzsteuer-zulassung"
+          legend="Erstzulassung"
+          options={[
+            { value: 'nach-2009', label: 'Ab 01.07.2009' },
+            { value: 'vor-2009', label: 'Vor 01.07.2009' },
+          ]}
+          value={zulassung}
+          onChange={(v) => setZulassung(v as Zulassungszeitraum)}
+        />
       </div>
 
       {/* Antriebsart */}
       <div className="mb-5">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Antriebsart</label>
-        <div className="flex flex-wrap gap-2">
-          {antriebsarten.map(a => (
-            <button
-              key={a.key}
-              onClick={() => setAntrieb(a.key)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-                antrieb === a.key
-                  ? 'bg-primary-500 text-white shadow-md'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-              }`}
-            >
-              {a.icon} {a.label}
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="kfzsteuer-antrieb"
+          legend="Antriebsart"
+          options={antriebsarten.map(a => ({ value: a.key, label: `${a.icon} ${a.label}` }))}
+          value={antrieb}
+          onChange={(v) => setAntrieb(v as Antriebsart)}
+        />
       </div>
 
       {/* Eingaben */}

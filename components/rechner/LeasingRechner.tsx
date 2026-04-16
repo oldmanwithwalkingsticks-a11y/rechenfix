@@ -7,6 +7,7 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 export default function LeasingRechner() {
   const [listenpreis, setListenpreis] = useState('35000');
@@ -80,29 +81,16 @@ export default function LeasingRechner() {
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Berechnungsart</label>
-          <div className="grid grid-cols-2 gap-2">
-            <button
-              onClick={() => setFaktorModus('faktor')}
-              className={`min-h-[48px] px-3 rounded-xl border text-sm font-medium transition ${
-                faktorModus === 'faktor'
-                  ? 'bg-primary-500 text-white border-primary-500'
-                  : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300'
-              }`}
-            >
-              Über Leasingfaktor
-            </button>
-            <button
-              onClick={() => setFaktorModus('rate')}
-              className={`min-h-[48px] px-3 rounded-xl border text-sm font-medium transition ${
-                faktorModus === 'rate'
-                  ? 'bg-primary-500 text-white border-primary-500'
-                  : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300'
-              }`}
-            >
-              Rate direkt
-            </button>
-          </div>
+          <RadioToggleGroup
+            name="leasing-modus"
+            legend="Berechnungsart"
+            options={[
+              { value: 'faktor', label: 'Über Leasingfaktor' },
+              { value: 'rate', label: 'Rate direkt' },
+            ]}
+            value={faktorModus}
+            onChange={(v) => setFaktorModus(v as 'faktor' | 'rate')}
+          />
         </div>
 
         {faktorModus === 'faktor' ? (

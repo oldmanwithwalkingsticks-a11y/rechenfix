@@ -7,6 +7,7 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 type Antrieb = 'verbrenner' | 'hybrid' | 'eAutoUnter70' | 'eAutoUeber70';
 type Methode = 'pauschal' | 'einzel';
@@ -81,23 +82,20 @@ export default function FirmenwagenRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
           Antriebsart
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          {([
-            ['verbrenner', 'Verbrenner', '1 %'],
-            ['hybrid', 'Plug-in-Hybrid', '0,5 %'],
-            ['eAutoUnter70', 'E-Auto ≤ 70.000 €', '0,25 %'],
-            ['eAutoUeber70', 'E-Auto > 70.000 €', '0,5 %'],
-          ] as const).map(([val, label, sub]) => (
-            <button
-              key={val}
-              onClick={() => setAntrieb(val)}
-              className={`px-4 py-3 rounded-xl text-sm font-medium transition-all text-left ${antrieb === val ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
-            >
-              <div className="font-semibold">{label}</div>
-              <div className={`text-xs mt-0.5 ${antrieb === val ? 'text-white/80' : 'text-gray-500 dark:text-gray-400'}`}>{sub}</div>
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="firmenwagen-antrieb"
+          legend="Antriebsart"
+          srOnlyLegend
+          columns={2}
+          options={[
+            { value: 'verbrenner', label: 'Verbrenner', description: '1 %' },
+            { value: 'hybrid', label: 'Plug-in-Hybrid', description: '0,5 %' },
+            { value: 'eAutoUnter70', label: 'E-Auto ≤ 70.000 €', description: '0,25 %' },
+            { value: 'eAutoUeber70', label: 'E-Auto > 70.000 €', description: '0,5 %' },
+          ]}
+          value={antrieb}
+          onChange={(v) => setAntrieb(v as Antrieb)}
+        />
       </div>
 
       {/* 3: km */}
@@ -115,20 +113,17 @@ export default function FirmenwagenRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">4</span>
           Berechnungsmethode Arbeitsweg
         </h2>
-        <div className="flex gap-2">
-          {([
-            ['pauschal', 'Pauschal (0,03 %)'],
-            ['einzel', 'Einzelbewertung (0,002 %)'],
-          ] as const).map(([val, label]) => (
-            <button
-              key={val}
-              onClick={() => setMethode(val)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${methode === val ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="firmenwagen-methode"
+          legend="Berechnungsmethode Arbeitsweg"
+          srOnlyLegend
+          options={[
+            { value: 'pauschal', label: 'Pauschal (0,03 %)' },
+            { value: 'einzel', label: 'Einzelbewertung (0,002 %)' },
+          ]}
+          value={methode}
+          onChange={(v) => setMethode(v as Methode)}
+        />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Einzelbewertung lohnt sich bei weniger als 15 Fahrten/Monat.</p>
       </div>
 
@@ -157,17 +152,19 @@ export default function FirmenwagenRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">{methode === 'einzel' ? '7' : '6'}</span>
           Persönlicher Grenzsteuersatz
         </h2>
-        <div className="flex flex-wrap gap-2">
-          {['30', '35', '42', '45'].map(s => (
-            <button
-              key={s}
-              onClick={() => setGrenzsteuersatz(s)}
-              className={`min-h-[48px] px-4 rounded-xl text-sm font-medium transition-all ${grenzsteuersatz === s ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
-            >
-              {s} %
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="firmenwagen-steuersatz"
+          legend="Persönlicher Grenzsteuersatz"
+          srOnlyLegend
+          options={[
+            { value: '30', label: '30 %' },
+            { value: '35', label: '35 %' },
+            { value: '42', label: '42 %' },
+            { value: '45', label: '45 %' },
+          ]}
+          value={grenzsteuersatz}
+          onChange={setGrenzsteuersatz}
+        />
       </div>
 
       {/* ERGEBNIS */}

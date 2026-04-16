@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 export default function ZinsRechner() {
   const [anfangskapital, setAnfangskapital] = useState('10000');
@@ -42,27 +43,18 @@ export default function ZinsRechner() {
   return (
     <div>
       {/* Zinseszins Toggle */}
-      <div className="flex gap-2 mb-6">
-        <button
-          onClick={() => setZinseszins(true)}
-          className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-            zinseszins
-              ? 'bg-primary-500 text-white shadow-md'
-              : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-          }`}
-        >
-          Mit Zinseszins
-        </button>
-        <button
-          onClick={() => setZinseszins(false)}
-          className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-            !zinseszins
-              ? 'bg-primary-500 text-white shadow-md'
-              : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-          }`}
-        >
-          Ohne Zinseszins
-        </button>
+      <div className="mb-6">
+        <RadioToggleGroup
+          name="zins-zinseszins"
+          legend="Zinseszins"
+          srOnlyLegend
+          options={[
+            { value: 'mit', label: 'Mit Zinseszins' },
+            { value: 'ohne', label: 'Ohne Zinseszins' },
+          ]}
+          value={zinseszins ? 'mit' : 'ohne'}
+          onChange={(v) => setZinseszins(v === 'mit')}
+        />
       </div>
 
       {/* Eingaben */}

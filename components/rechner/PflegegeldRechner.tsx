@@ -12,6 +12,7 @@ import {
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 const PFLEGEGRAD_INFO: Record<Pflegegrad, string> = {
   1: 'Geringe Beeinträchtigung',
@@ -73,18 +74,18 @@ export default function PflegegeldRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
           Pflegeform
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          {PFLEGEFORM_OPTIONEN.map(opt => (
-            <button
-              key={opt.value}
-              onClick={() => setPflegeform(opt.value)}
-              className={`px-4 py-3 rounded-xl text-sm font-medium transition-all min-h-[56px] text-left flex items-center gap-2 ${pflegeform === opt.value ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
-            >
-              <span className="text-xl flex-shrink-0">{opt.icon}</span>
-              <span className="text-xs leading-tight">{opt.label}</span>
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="pflege-form"
+          legend="Pflegeform"
+          srOnlyLegend
+          options={PFLEGEFORM_OPTIONEN.map(opt => ({
+            value: opt.value,
+            label: `${opt.icon} ${opt.label}`,
+          }))}
+          value={pflegeform}
+          onChange={(v) => setPflegeform(v as Pflegeform)}
+          columns={2}
+        />
       </div>
 
       {/* === 3: Anteil Pflegedienst (nur bei Kombination) === */}

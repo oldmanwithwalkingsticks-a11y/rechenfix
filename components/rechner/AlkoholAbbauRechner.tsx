@@ -6,6 +6,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 type GetraenkArt = 'bier05' | 'bier03' | 'wein' | 'sekt' | 'schnaps' | 'cocktail' | 'eigen';
 
@@ -111,11 +112,13 @@ export default function AlkoholAbbauRechner() {
     <div>
       <div className="space-y-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-6">
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Geschlecht</label>
-          <div className="grid grid-cols-2 gap-2">
-            <button onClick={() => setGeschlecht('f')} className={`min-h-[48px] px-3 rounded-xl border text-sm font-medium ${geschlecht === 'f' ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'}`}>Frau</button>
-            <button onClick={() => setGeschlecht('m')} className={`min-h-[48px] px-3 rounded-xl border text-sm font-medium ${geschlecht === 'm' ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'}`}>Mann</button>
-          </div>
+          <RadioToggleGroup
+            name="alkohol-geschlecht"
+            legend="Geschlecht"
+            options={[{ value: 'f', label: 'Frau' }, { value: 'm', label: 'Mann' }]}
+            value={geschlecht}
+            onChange={(v) => setGeschlecht(v as 'f' | 'm')}
+          />
         </div>
         <div>
           <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Körpergewicht</label>

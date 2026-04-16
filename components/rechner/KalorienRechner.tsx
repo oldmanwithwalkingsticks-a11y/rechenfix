@@ -8,6 +8,7 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 const AKTIVITAETEN = [
   { label: 'Kaum aktiv (Bürojob, kein Sport)', faktor: 1.2 },
@@ -53,20 +54,14 @@ export default function KalorienRechner() {
   return (
     <div>
       {/* Geschlecht Toggle */}
-      <div className="flex gap-2 mb-6">
-        {(['frau', 'mann'] as const).map(g => (
-          <button
-            key={g}
-            onClick={() => setGeschlecht(g)}
-            className={`px-5 py-2 rounded-xl text-sm font-medium transition-all ${
-              geschlecht === g
-                ? 'bg-primary-500 text-white shadow-md'
-                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-            }`}
-          >
-            {g === 'frau' ? 'Frau' : 'Mann'}
-          </button>
-        ))}
+      <div className="mb-6">
+        <RadioToggleGroup
+          name="kalorien-geschlecht"
+          legend="Geschlecht"
+          options={[{ value: 'frau', label: 'Frau' }, { value: 'mann', label: 'Mann' }]}
+          value={geschlecht}
+          onChange={(v) => setGeschlecht(v as 'frau' | 'mann')}
+        />
       </div>
 
       {/* Eingaben */}
@@ -101,26 +96,18 @@ export default function KalorienRechner() {
 
       {/* Ziel Toggle */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Ziel</label>
-        <div className="flex gap-2">
-          {([
-            { key: 'abnehmen' as const, label: 'Abnehmen' },
-            { key: 'halten' as const, label: 'Gewicht halten' },
-            { key: 'zunehmen' as const, label: 'Zunehmen' },
-          ]).map(z => (
-            <button
-              key={z.key}
-              onClick={() => setZiel(z.key)}
-              className={`flex-1 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-                ziel === z.key
-                  ? 'bg-primary-500 text-white shadow-md'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-              }`}
-            >
-              {z.label}
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="kalorien-ziel"
+          legend="Ziel"
+          options={[
+            { value: 'abnehmen', label: 'Abnehmen' },
+            { value: 'halten', label: 'Gewicht halten' },
+            { value: 'zunehmen', label: 'Zunehmen' },
+          ]}
+          value={ziel}
+          onChange={(v) => setZiel(v as 'abnehmen' | 'halten' | 'zunehmen')}
+          fullWidth
+        />
       </div>
 
       {/* Ergebnis */}

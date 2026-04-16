@@ -7,6 +7,7 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 // Einkommensteuer §32a EStG 2026 (Grundtarif, vereinfacht)
 function estGrund(zvE: number): number {
@@ -132,20 +133,30 @@ export default function GmbhGfRechner() {
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Beteiligung</label>
-          <div className="grid grid-cols-2 gap-2">
-            <button onClick={() => setBeherrschend(true)} className={`min-h-[48px] px-3 rounded-xl border text-sm font-medium ${beherrschend ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'}`}>Beherrschend (SV-frei)</button>
-            <button onClick={() => setBeherrschend(false)} className={`min-h-[48px] px-3 rounded-xl border text-sm font-medium ${!beherrschend ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'}`}>Nicht beherrschend</button>
-          </div>
+          <RadioToggleGroup
+            name="gmbhgf-stellung"
+            legend="Stellung"
+            options={[
+              { value: 'ja', label: 'Beherrschend (SV-frei)' },
+              { value: 'nein', label: 'Nicht beherrschend' },
+            ]}
+            value={beherrschend ? 'ja' : 'nein'}
+            onChange={(v) => setBeherrschend(v === 'ja')}
+          />
           <p className="text-xs text-gray-500 mt-1">Beherrschend = &gt; 50 % Anteile oder Sperrminorität → sozialversicherungsfrei.</p>
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Krankenversicherung</label>
-          <div className="grid grid-cols-2 gap-2">
-            <button onClick={() => setKv('gkv')} className={`min-h-[48px] px-3 rounded-xl border text-sm font-medium ${kv === 'gkv' ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'}`}>GKV</button>
-            <button onClick={() => setKv('pkv')} className={`min-h-[48px] px-3 rounded-xl border text-sm font-medium ${kv === 'pkv' ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'}`}>PKV (≈ 650 €/Mon.)</button>
-          </div>
+          <RadioToggleGroup
+            name="gmbhgf-kv"
+            legend="Krankenversicherung"
+            options={[
+              { value: 'gkv', label: 'GKV' },
+              { value: 'pkv', label: 'PKV (≈ 650 €/Mon.)' },
+            ]}
+            value={kv}
+            onChange={(v) => setKv(v as 'gkv' | 'pkv')}
+          />
         </div>
 
         {kv === 'gkv' && !beherrschend && (

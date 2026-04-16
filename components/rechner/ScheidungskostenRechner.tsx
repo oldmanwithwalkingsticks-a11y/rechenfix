@@ -6,6 +6,7 @@ import {
   type Scheidungsart,
 } from '@/lib/berechnungen/scheidungskosten';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
@@ -56,21 +57,18 @@ export default function ScheidungskostenRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
           Art der Scheidung
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          {([
-            ['einvernehmlich', '🤝 Einvernehmlich', '1 Anwalt, kürzer, günstiger'],
-            ['streitig', '⚔️ Streitig', '2 Anwälte, Folgesachen, teurer'],
-          ] as const).map(([val, label, sub]) => (
-            <button
-              key={val}
-              onClick={() => setArt(val)}
-              className={`px-4 py-3 rounded-xl text-sm font-medium transition-all text-left ${art === val ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
-            >
-              <div className="font-semibold">{label}</div>
-              <div className={`text-xs mt-0.5 ${art === val ? 'text-white/80' : 'text-gray-500 dark:text-gray-400'}`}>{sub}</div>
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="scheidung-art"
+          legend="Art der Scheidung"
+          srOnlyLegend
+          options={[
+            { value: 'einvernehmlich', label: '🤝 Einvernehmlich', description: '1 Anwalt, kürzer, günstiger' },
+            { value: 'streitig', label: '⚔️ Streitig', description: '2 Anwälte, Folgesachen, teurer' },
+          ]}
+          value={art}
+          onChange={(v) => setArt(v as Scheidungsart)}
+          columns={2}
+        />
       </div>
 
       {/* === 3: Versorgungsausgleich === */}
@@ -79,17 +77,17 @@ export default function ScheidungskostenRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
           Versorgungsausgleich durchführen?
         </h2>
-        <div className="flex gap-2">
-          {([[true, 'Ja'], [false, 'Nein']] as const).map(([val, label]) => (
-            <button
-              key={String(val)}
-              onClick={() => setVersorgungsausgleich(val)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${versorgungsausgleich === val ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="scheidung-versorgung"
+          legend="Versorgungsausgleich durchführen?"
+          srOnlyLegend
+          options={[
+            { value: 'ja', label: 'Ja' },
+            { value: 'nein', label: 'Nein' },
+          ]}
+          value={versorgungsausgleich ? 'ja' : 'nein'}
+          onChange={(v) => setVersorgungsausgleich(v === 'ja')}
+        />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
           Der Versorgungsausgleich (Aufteilung der Rentenansprüche) ist der gesetzliche Regelfall und erhöht den Verfahrenswert um 10%.
         </p>

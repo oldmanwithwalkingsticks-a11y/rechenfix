@@ -6,6 +6,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 // Beitragsbemessungsgrenze KV 2026: 69.750 €/Jahr = 5.812,50 €/Monat
 const BBG_MONAT = 5812.5;
@@ -58,18 +59,28 @@ export default function KrankengeldRechner() {
           <NummerEingabe value={netto} onChange={setNetto} einheit="€" />
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Kinder</label>
-          <div className="grid grid-cols-2 gap-2">
-            <button onClick={() => setKinder(true)} className={`min-h-[48px] px-3 rounded-xl border text-sm font-medium transition ${kinder ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300'}`}>Ja</button>
-            <button onClick={() => setKinder(false)} className={`min-h-[48px] px-3 rounded-xl border text-sm font-medium transition ${!kinder ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300'}`}>Nein (kinderlos-Zuschlag)</button>
-          </div>
+          <RadioToggleGroup
+            name="krankengeld-kinder"
+            legend="Kinder"
+            options={[
+              { value: 'ja', label: 'Ja' },
+              { value: 'nein', label: 'Nein (kinderlos-Zuschlag)' },
+            ]}
+            value={kinder ? 'ja' : 'nein'}
+            onChange={(v) => setKinder(v === 'ja')}
+          />
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Art der Versicherung</label>
-          <div className="grid grid-cols-2 gap-2">
-            <button onClick={() => setVersicherung('gesetzlich')} className={`min-h-[48px] px-3 rounded-xl border text-sm font-medium transition ${versicherung === 'gesetzlich' ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300'}`}>Gesetzlich</button>
-            <button onClick={() => setVersicherung('privat')} className={`min-h-[48px] px-3 rounded-xl border text-sm font-medium transition ${versicherung === 'privat' ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300'}`}>Privat</button>
-          </div>
+          <RadioToggleGroup
+            name="krankengeld-versicherung"
+            legend="Art der Versicherung"
+            options={[
+              { value: 'gesetzlich', label: 'Gesetzlich' },
+              { value: 'privat', label: 'Privat' },
+            ]}
+            value={versicherung}
+            onChange={(v) => setVersicherung(v as 'gesetzlich' | 'privat')}
+          />
         </div>
       </div>
 

@@ -7,6 +7,7 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 type Ertragsart = 'zinsen' | 'dividenden' | 'aktien' | 'aktien-etf' | 'misch-etf';
 
@@ -121,25 +122,16 @@ export default function KapitalertragsteuerRechner() {
 
       {/* Familienstand */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Familienstand</label>
-        <div className="flex gap-2">
-          {[
-            { val: false, label: 'Single (1.000 €)' },
-            { val: true, label: 'Verheiratet (2.000 €)' },
-          ].map(opt => (
-            <button
-              key={String(opt.val)}
-              onClick={() => setVerheiratet(opt.val)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
-                verheiratet === opt.val
-                  ? 'bg-primary-500 text-white shadow-md'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
-              }`}
-            >
-              {opt.label}
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="kapitalertrag-verheiratet"
+          legend="Familienstand"
+          options={[
+            { value: 'nein', label: 'Single (1.000 €)' },
+            { value: 'ja', label: 'Verheiratet (2.000 €)' },
+          ]}
+          value={verheiratet ? 'ja' : 'nein'}
+          onChange={(v) => setVerheiratet(v === 'ja')}
+        />
       </div>
 
       {/* Sparerpauschbetrag */}

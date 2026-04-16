@@ -10,6 +10,7 @@ import WasWaereWenn from '@/components/rechner/WasWaereWenn';
 import SchnellCheck from '@/components/rechner/SchnellCheck';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 const TABELLEN_WERTE = [1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 6000];
 
@@ -105,27 +106,18 @@ export default function BruttoNettoRechner() {
   return (
     <div>
       {/* Abrechnungszeitraum */}
-      <div className="flex gap-2 mb-6 no-print">
-        <button
-          onClick={() => setAbrechnungszeitraum('monat')}
-          className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-            abrechnungszeitraum === 'monat'
-              ? 'bg-primary-500 text-white shadow-md'
-              : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-          }`}
-        >
-          Monatsgehalt
-        </button>
-        <button
-          onClick={() => setAbrechnungszeitraum('jahr')}
-          className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-            abrechnungszeitraum === 'jahr'
-              ? 'bg-primary-500 text-white shadow-md'
-              : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-          }`}
-        >
-          Jahresgehalt
-        </button>
+      <div className="mb-6 no-print">
+        <RadioToggleGroup
+          name="bruttonetto-zeitraum"
+          legend="Abrechnungszeitraum"
+          srOnlyLegend
+          options={[
+            { value: 'monat', label: 'Monatsgehalt' },
+            { value: 'jahr', label: 'Jahresgehalt' },
+          ]}
+          value={abrechnungszeitraum}
+          onChange={(v) => setAbrechnungszeitraum(v as 'monat' | 'jahr')}
+        />
       </div>
 
       {/* Eingaben */}
@@ -186,11 +178,18 @@ export default function BruttoNettoRechner() {
             </label>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Krankenversicherung</label>
-            <div className="flex gap-2">
-              <button onClick={() => setKvArt('gesetzlich')} className={`flex-1 px-3 py-2 rounded-xl text-xs font-medium transition-all ${kvArt === 'gesetzlich' ? 'bg-accent-500 text-white shadow-md' : 'bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300 hover:bg-gray-200'}`}>Gesetzlich</button>
-              <button onClick={() => setKvArt('privat')} className={`flex-1 px-3 py-2 rounded-xl text-xs font-medium transition-all ${kvArt === 'privat' ? 'bg-accent-500 text-white shadow-md' : 'bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300 hover:bg-gray-200'}`}>Privat</button>
-            </div>
+            <RadioToggleGroup
+              name="bruttonetto-kv"
+              legend="Krankenversicherung"
+              options={[
+                { value: 'gesetzlich', label: 'Gesetzlich' },
+                { value: 'privat', label: 'Privat' },
+              ]}
+              value={kvArt}
+              onChange={(v) => setKvArt(v as 'gesetzlich' | 'privat')}
+              activeColor="accent"
+              fullWidth
+            />
           </div>
           {kvArt === 'gesetzlich' ? (
             <div>
@@ -212,22 +211,18 @@ export default function BruttoNettoRechner() {
             </label>
           </div>
           <div className="sm:col-span-2 border-t border-gray-200 dark:border-gray-600 pt-4 mt-2">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Weihnachtsgeld</label>
-            <div className="flex gap-2 mb-3">
-              <button
-                type="button"
-                onClick={() => setWeihnachtsgeldAktiv(false)}
-                className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${!weihnachtsgeldAktiv ? 'bg-accent-500 text-white shadow-md' : 'bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300 hover:bg-gray-200'}`}
-              >
-                Nein
-              </button>
-              <button
-                type="button"
-                onClick={() => setWeihnachtsgeldAktiv(true)}
-                className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${weihnachtsgeldAktiv ? 'bg-accent-500 text-white shadow-md' : 'bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300 hover:bg-gray-200'}`}
-              >
-                Ja
-              </button>
+            <div className="mb-3">
+              <RadioToggleGroup
+                name="bruttonetto-weihnachtsgeld"
+                legend="Weihnachtsgeld"
+                options={[
+                  { value: 'nein', label: 'Nein' },
+                  { value: 'ja', label: 'Ja' },
+                ]}
+                value={weihnachtsgeldAktiv ? 'ja' : 'nein'}
+                onChange={(v) => setWeihnachtsgeldAktiv(v === 'ja')}
+                activeColor="accent"
+              />
             </div>
             {weihnachtsgeldAktiv && (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

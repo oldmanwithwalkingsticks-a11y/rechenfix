@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { berechneGeburtstermin, type Methode } from '@/lib/berechnungen/geburtstermin';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
@@ -62,24 +63,19 @@ export default function GeburtsterminRechner() {
   return (
     <div>
       {/* Methode Toggle */}
-      <div className="flex flex-wrap gap-2 mb-6">
-        {([
-          { key: 'periode' as Methode, label: 'Letzte Periode' },
-          { key: 'empfaengnis' as Methode, label: 'Empfängnisdatum' },
-          { key: 'ultraschall' as Methode, label: 'Ultraschall' },
-        ]).map(m => (
-          <button
-            key={m.key}
-            onClick={() => setMethode(m.key)}
-            className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-              methode === m.key
-                ? 'bg-primary-500 text-white shadow-md'
-                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-            }`}
-          >
-            {m.label}
-          </button>
-        ))}
+      <div className="mb-6">
+        <RadioToggleGroup
+          name="geburtstermin-methode"
+          legend="Berechnungsmethode"
+          options={[
+            { value: 'periode', label: 'Letzte Periode' },
+            { value: 'empfaengnis', label: 'Empfängnisdatum' },
+            { value: 'ultraschall', label: 'Ultraschall' },
+          ]}
+          value={methode}
+          onChange={(v) => setMethode(v as Methode)}
+          columns={3}
+        />
       </div>
 
       {/* Eingabefelder */}

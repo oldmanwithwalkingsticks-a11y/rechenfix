@@ -13,6 +13,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 const SCHNELLWAHL = ['450', '520', '538', '556', '603'];
 
@@ -91,17 +92,17 @@ export default function MinijobRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
           Art des Minijobs
         </h2>
-        <div className="flex gap-2">
-          {([['gewerblich', '🏢 Gewerblich'], ['privathaushalt', '🏡 Privathaushalt']] as const).map(([val, label]) => (
-            <button
-              key={val}
-              onClick={() => setArt(val)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${art === val ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="minijob-art"
+          legend="Art des Minijobs"
+          srOnlyLegend
+          options={[
+            { value: 'gewerblich', label: '🏢 Gewerblich' },
+            { value: 'privathaushalt', label: '🏡 Privathaushalt' },
+          ]}
+          value={art}
+          onChange={(v) => setArt(v as MinijobArt)}
+        />
       </div>
 
       {/* === 3: RV-Pflicht === */}
@@ -110,20 +111,18 @@ export default function MinijobRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
           Rentenversicherungspflicht
         </h2>
-        <div className="flex flex-col sm:flex-row gap-2">
-          {([
-            [true, 'Ja (Standard seit 2013)'],
-            [false, 'Nein (Befreiung beantragt)'],
-          ] as const).map(([val, label]) => (
-            <button
-              key={String(val)}
-              onClick={() => setRvPflicht(val)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${rvPflicht === val ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="minijob-rv"
+          legend="Rentenversicherungspflicht"
+          srOnlyLegend
+          options={[
+            { value: 'ja', label: 'Ja (Standard seit 2013)' },
+            { value: 'nein', label: 'Nein (Befreiung beantragt)' },
+          ]}
+          value={rvPflicht ? 'ja' : 'nein'}
+          onChange={(v) => setRvPflicht(v === 'ja')}
+          columns={2}
+        />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
           Sie können sich von der RV-Pflicht befreien lassen. Dann entfällt Ihr Eigenanteil, aber Sie erwerben keine Rentenpunkte.
         </p>

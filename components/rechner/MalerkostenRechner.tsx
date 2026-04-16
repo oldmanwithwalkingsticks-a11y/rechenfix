@@ -6,6 +6,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 type Modus = 'raum' | 'flaeche';
 type Qualitaet = 'standard' | 'premium' | 'spezial';
@@ -80,10 +81,17 @@ export default function MalerkostenRechner() {
     <div>
       <div className="space-y-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-6">
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Raumgröße</label>
-          <div className="grid grid-cols-2 gap-2 mb-3">
-            <button onClick={() => setModus('raum')} className={`min-h-[48px] px-3 rounded-xl border text-sm font-medium ${modus === 'raum' ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'}`}>Raummaße</button>
-            <button onClick={() => setModus('flaeche')} className={`min-h-[48px] px-3 rounded-xl border text-sm font-medium ${modus === 'flaeche' ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'}`}>Fläche direkt</button>
+          <div className="mb-3">
+            <RadioToggleGroup
+              name="maler-modus"
+              legend="Raumgröße"
+              options={[
+                { value: 'raum', label: 'Raummaße' },
+                { value: 'flaeche', label: 'Fläche direkt' },
+              ]}
+              value={modus}
+              onChange={(v) => setModus(v as Modus)}
+            />
           </div>
           {modus === 'raum' ? (
             <div className="grid grid-cols-3 gap-2">
@@ -140,11 +148,16 @@ export default function MalerkostenRechner() {
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Wer streicht?</label>
-          <div className="grid grid-cols-2 gap-2">
-            <button onClick={() => setMaler(false)} className={`min-h-[48px] px-3 rounded-xl border text-sm font-medium ${!maler ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'}`}>Selbst</button>
-            <button onClick={() => setMaler(true)} className={`min-h-[48px] px-3 rounded-xl border text-sm font-medium ${maler ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'}`}>Maler beauftragen</button>
-          </div>
+          <RadioToggleGroup
+            name="maler-ausfuehrung"
+            legend="Wer streicht?"
+            options={[
+              { value: 'nein', label: 'Selbst' },
+              { value: 'ja', label: 'Maler beauftragen' },
+            ]}
+            value={maler ? 'ja' : 'nein'}
+            onChange={(v) => setMaler(v === 'ja')}
+          />
         </div>
       </div>
 

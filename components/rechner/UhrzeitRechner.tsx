@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
@@ -135,11 +136,18 @@ export default function UhrzeitRechner() {
             <input type="time" value={endZeit} onChange={e => setEndZeit(e.target.value)} className={inputClass} />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Über Mitternacht?</label>
-            <div className="grid grid-cols-2 gap-2">
-              <button onClick={() => setUeberMitternacht(false)} className={`min-h-[48px] px-3 rounded-xl border text-sm font-medium ${!ueberMitternacht ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'}`}>Nein</button>
-              <button onClick={() => setUeberMitternacht(true)} className={`min-h-[48px] px-3 rounded-xl border text-sm font-medium ${ueberMitternacht ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'}`}>Ja</button>
-            </div>
+            <RadioToggleGroup
+              name="uhrzeit-mitternacht"
+              legend="Über Mitternacht?"
+              options={[
+                { value: 'nein', label: 'Nein' },
+                { value: 'ja', label: 'Ja' },
+              ]}
+              value={ueberMitternacht ? 'ja' : 'nein'}
+              onChange={(v) => setUeberMitternacht(v === 'ja')}
+              columns={2}
+              fullWidth
+            />
           </div>
         </div>
       )}
@@ -152,11 +160,18 @@ export default function UhrzeitRechner() {
             <input type="time" value={basisZeit} onChange={e => setBasisZeit(e.target.value)} className={inputClass} />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Operation</label>
-            <div className="grid grid-cols-2 gap-2">
-              <button onClick={() => setOperation('add')} className={`min-h-[48px] px-3 rounded-xl border text-sm font-medium ${operation === 'add' ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'}`}>Addieren (+)</button>
-              <button onClick={() => setOperation('sub')} className={`min-h-[48px] px-3 rounded-xl border text-sm font-medium ${operation === 'sub' ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'}`}>Subtrahieren (−)</button>
-            </div>
+            <RadioToggleGroup
+              name="uhrzeit-operation"
+              legend="Operation"
+              options={[
+                { value: 'add', label: 'Addieren (+)' },
+                { value: 'sub', label: 'Subtrahieren (−)' },
+              ]}
+              value={operation}
+              onChange={(v) => setOperation(v as 'add' | 'sub')}
+              columns={2}
+              fullWidth
+            />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>

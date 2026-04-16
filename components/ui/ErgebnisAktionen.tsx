@@ -13,8 +13,10 @@ export default function ErgebnisAktionen({ ergebnisText, seitenTitel, drucken }:
   const [kopiert, setKopiert] = useState(false);
   const [linkKopiert, setLinkKopiert] = useState(false);
   const [teilenOffen, setTeilenOffen] = useState(false);
+  const [liveText, setLiveText] = useState('');
   const dropdownRef = useRef<HTMLDivElement>(null);
   const letzterText = useRef('');
+  const hatGeaendert = useRef(false);
 
   // Zähler erhöhen wenn sich das Ergebnis ändert
   useEffect(() => {
@@ -23,6 +25,24 @@ export default function ErgebnisAktionen({ ergebnisText, seitenTitel, drucken }:
       inkrement();
     }
   }, [ergebnisText]);
+
+  // Debounced aria-live: Screenreader-Ansage 750ms nach letzter Änderung
+  useEffect(() => {
+    if (!ergebnisText) {
+      setLiveText('');
+      return;
+    }
+    // Erste Berechnung (Seitenaufruf) nicht ansagen
+    if (!hatGeaendert.current) {
+      hatGeaendert.current = true;
+      return;
+    }
+    const timer = setTimeout(() => {
+      const prefix = seitenTitel ? `${seitenTitel}: ` : '';
+      setLiveText(prefix + ergebnisText);
+    }, 750);
+    return () => clearTimeout(timer);
+  }, [ergebnisText, seitenTitel]);
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
@@ -67,6 +87,10 @@ export default function ErgebnisAktionen({ ergebnisText, seitenTitel, drucken }:
 
   return (
     <div className="flex flex-wrap gap-2 no-print">
+      {/* Screenreader-Ansage bei Ergebnis-Änderung (WCAG 4.1.3) */}
+      <div aria-live="polite" aria-atomic="true" role="status" className="sr-only">
+        {liveText}
+      </div>
       {/* Kopieren */}
       <button
         onClick={handleKopieren}

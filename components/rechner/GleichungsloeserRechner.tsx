@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
@@ -107,25 +108,18 @@ export default function GleichungsloeserRechner() {
     <div>
       {/* Typ */}
       <div className="mb-5">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Gleichungstyp</label>
-        <div className="flex flex-col sm:flex-row gap-2">
-          {[
-            { val: 'linear' as Typ, label: 'Linear (ax + b = c)' },
-            { val: 'quadratisch' as Typ, label: 'Quadratisch (ax² + bx + c = 0)' },
-          ].map(opt => (
-            <button
-              key={opt.val}
-              onClick={() => setTyp(opt.val)}
-              className={`flex-1 px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
-                typ === opt.val
-                  ? 'bg-primary-500 text-white shadow-md'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
-              }`}
-            >
-              {opt.label}
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="gleichung-typ"
+          legend="Gleichungstyp"
+          options={[
+            { value: 'linear', label: 'Linear (ax + b = c)' },
+            { value: 'quadratisch', label: 'Quadratisch (ax² + bx + c = 0)' },
+          ]}
+          value={typ}
+          onChange={(v) => setTyp(v as Typ)}
+          columns={2}
+          fullWidth
+        />
       </div>
 
       {typ === 'linear' ? (

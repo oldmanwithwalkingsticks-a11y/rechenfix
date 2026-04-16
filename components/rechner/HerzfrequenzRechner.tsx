@@ -6,6 +6,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 type Formel = 'einfach' | 'karvonen';
 
@@ -71,25 +72,16 @@ export default function HerzfrequenzRechner() {
 
       {/* Formel */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Formel</label>
-        <div className="flex flex-col sm:flex-row gap-2">
-          {[
-            { val: 'einfach' as Formel, label: 'Einfach (% vom Maxpuls)' },
-            { val: 'karvonen' as Formel, label: 'Karvonen (mit Ruhepuls)' },
-          ].map(opt => (
-            <button
-              key={opt.val}
-              onClick={() => setFormel(opt.val)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
-                formel === opt.val
-                  ? 'bg-primary-500 text-white shadow-md'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
-              }`}
-            >
-              {opt.label}
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="herzfrequenz-formel"
+          legend="Formel"
+          options={[
+            { value: 'einfach', label: 'Einfach (% vom Maxpuls)' },
+            { value: 'karvonen', label: 'Karvonen (mit Ruhepuls)' },
+          ]}
+          value={formel}
+          onChange={(v) => setFormel(v as Formel)}
+        />
       </div>
 
       {/* Max-HF */}

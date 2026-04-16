@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 type Tab = 'netto-brutto' | 'brutto-netto' | 'multi';
 
@@ -76,11 +77,6 @@ export default function MwStRechner() {
     setTimeout(() => setGeteilt(false), 2000);
   }
 
-  function setSatzVorwahl(satz: number) {
-    setIstCustom(false);
-    setMwstSatz(satz);
-  }
-
   function addZeile() {
     setZeilen([...zeilen, { id: nextId++, bezeichnung: `Position ${zeilen.length + 1}`, netto: '', mwstSatz: 19 }]);
   }
@@ -139,39 +135,25 @@ export default function MwStRechner() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">MwSt-Satz</label>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => setSatzVorwahl(19)}
-                  className={`flex-1 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
-                    !istCustom && mwstSatz === 19
-                      ? 'bg-accent-500 text-white shadow-md'
-                      : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-                  }`}
-                >
-                  19%
-                </button>
-                <button
-                  onClick={() => setSatzVorwahl(7)}
-                  className={`flex-1 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
-                    !istCustom && mwstSatz === 7
-                      ? 'bg-accent-500 text-white shadow-md'
-                      : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-                  }`}
-                >
-                  7%
-                </button>
-                <button
-                  onClick={() => setIstCustom(true)}
-                  className={`flex-1 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
-                    istCustom
-                      ? 'bg-accent-500 text-white shadow-md'
-                      : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-                  }`}
-                >
-                  Eigen
-                </button>
-              </div>
+              <RadioToggleGroup
+                name="mwst-satz"
+                legend="MwSt-Satz"
+                options={[
+                  { value: '19', label: '19%' },
+                  { value: '7', label: '7%' },
+                  { value: 'eigen', label: 'Eigen' },
+                ]}
+                value={istCustom ? 'eigen' : String(mwstSatz)}
+                onChange={(v) => {
+                  if (v === 'eigen') {
+                    setIstCustom(true);
+                  } else {
+                    setIstCustom(false);
+                    setMwstSatz(Number(v));
+                  }
+                }}
+                activeColor="accent"
+              />
               {istCustom && (
                 <div className="mt-2">
                   <NummerEingabe

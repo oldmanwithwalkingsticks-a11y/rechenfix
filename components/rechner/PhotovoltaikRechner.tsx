@@ -7,6 +7,7 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 const AUSRICHTUNGEN = [
   { id: 'sued', label: 'Süd (optimal)', faktor: 1.0 },
@@ -160,11 +161,16 @@ export default function PhotovoltaikRechner() {
           <NummerEingabe value={kosten} onChange={setKosten} einheit="€" placeholder={`Ø ${fmt(ergebnis.kostenWert)}`} />
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Batteriespeicher?</label>
-          <div className="grid grid-cols-2 gap-2">
-            <button onClick={() => setMitSpeicher(false)} className={`min-h-[48px] px-3 rounded-xl border text-sm font-medium ${!mitSpeicher ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'}`}>Ohne Speicher</button>
-            <button onClick={() => setMitSpeicher(true)} className={`min-h-[48px] px-3 rounded-xl border text-sm font-medium ${mitSpeicher ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'}`}>Mit Speicher</button>
-          </div>
+          <RadioToggleGroup
+            name="pv-speicher"
+            legend="Batteriespeicher?"
+            options={[
+              { value: 'ohne', label: 'Ohne Speicher' },
+              { value: 'mit', label: 'Mit Speicher' },
+            ]}
+            value={mitSpeicher ? 'mit' : 'ohne'}
+            onChange={(v) => setMitSpeicher(v === 'mit')}
+          />
         </div>
         {mitSpeicher && (
           <div className="grid grid-cols-2 gap-3">

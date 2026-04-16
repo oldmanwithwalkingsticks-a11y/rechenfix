@@ -6,6 +6,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 type Groesse = 'aufstell' | 'klein' | 'mittel' | 'gross' | 'eigen';
 type Heizung = 'keine' | 'waermepumpe' | 'solar';
@@ -141,49 +142,32 @@ export default function PoolkostenRechner() {
 
       {/* Beheizung */}
       <div className="mb-5">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Beheizung</label>
-        <div className="grid grid-cols-3 gap-2">
-          {[
-            { val: 'keine' as Heizung, label: 'Keine' },
-            { val: 'waermepumpe' as Heizung, label: 'Wärmepumpe' },
-            { val: 'solar' as Heizung, label: 'Solar' },
-          ].map(opt => (
-            <button
-              key={opt.val}
-              onClick={() => setHeizung(opt.val)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
-                heizung === opt.val
-                  ? 'bg-primary-500 text-white shadow-md'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
-              }`}
-            >
-              {opt.label}
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="pool-heizung"
+          legend="Beheizung"
+          options={[
+            { value: 'keine', label: 'Keine' },
+            { value: 'waermepumpe', label: 'Wärmepumpe' },
+            { value: 'solar', label: 'Solar' },
+          ]}
+          value={heizung}
+          onChange={(v) => setHeizung(v as Heizung)}
+          columns={3}
+        />
       </div>
 
       {/* Abdeckung */}
       <div className="mb-5">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Abdeckung</label>
-        <div className="flex gap-2">
-          {[
-            { val: true, label: 'Ja (spart Heizung + Chemie)' },
-            { val: false, label: 'Nein' },
-          ].map(opt => (
-            <button
-              key={String(opt.val)}
-              onClick={() => setAbdeckung(opt.val)}
-              className={`flex-1 px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
-                abdeckung === opt.val
-                  ? 'bg-primary-500 text-white shadow-md'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
-              }`}
-            >
-              {opt.label}
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="pool-abdeckung"
+          legend="Abdeckung"
+          options={[
+            { value: 'ja', label: 'Ja (spart Heizung + Chemie)' },
+            { value: 'nein', label: 'Nein' },
+          ]}
+          value={abdeckung ? 'ja' : 'nein'}
+          onChange={(v) => setAbdeckung(v === 'ja')}
+        />
       </div>
 
       {/* Saison */}

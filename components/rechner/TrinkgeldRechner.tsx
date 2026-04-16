@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 const PROZENT_SCHNELLWAHL = [5, 10, 15, 20];
 const PERSONEN_SCHNELLWAHL = [1, 2, 3, 4, 5, 6];
@@ -50,28 +51,17 @@ export default function TrinkgeldRechner() {
 
       {/* Trinkgeld-Modus */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Trinkgeld</label>
-        <div className="flex gap-2 mb-3">
-          <button
-            onClick={() => setModus('prozent')}
-            className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-              modus === 'prozent'
-                ? 'bg-primary-500 text-white'
-                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
-            }`}
-          >
-            Prozent
-          </button>
-          <button
-            onClick={() => setModus('betrag')}
-            className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-              modus === 'betrag'
-                ? 'bg-primary-500 text-white'
-                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
-            }`}
-          >
-            Fester Betrag
-          </button>
+        <div className="mb-3">
+          <RadioToggleGroup
+            name="trinkgeld-modus"
+            legend="Trinkgeld"
+            options={[
+              { value: 'prozent', label: 'Prozent' },
+              { value: 'betrag', label: 'Fester Betrag' },
+            ]}
+            value={modus}
+            onChange={(v) => setModus(v as TrinkgeldModus)}
+          />
         </div>
 
         {modus === 'prozent' ? (
@@ -127,29 +117,16 @@ export default function TrinkgeldRechner() {
 
       {/* Aufrunden */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Auf glatten Betrag aufrunden?</label>
-        <div className="flex gap-2">
-          <button
-            onClick={() => setAufrunden(false)}
-            className={`px-4 py-3 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
-              !aufrunden
-                ? 'bg-primary-500 text-white'
-                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
-            }`}
-          >
-            Nein
-          </button>
-          <button
-            onClick={() => setAufrunden(true)}
-            className={`px-4 py-3 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
-              aufrunden
-                ? 'bg-primary-500 text-white'
-                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
-            }`}
-          >
-            Ja (nächster voller Euro)
-          </button>
-        </div>
+        <RadioToggleGroup
+          name="trinkgeld-aufrunden"
+          legend="Auf glatten Betrag aufrunden?"
+          options={[
+            { value: 'nein', label: 'Nein' },
+            { value: 'ja', label: 'Ja (nächster voller Euro)' },
+          ]}
+          value={aufrunden ? 'ja' : 'nein'}
+          onChange={(v) => setAufrunden(v === 'ja')}
+        />
       </div>
 
       {/* Ergebnis */}

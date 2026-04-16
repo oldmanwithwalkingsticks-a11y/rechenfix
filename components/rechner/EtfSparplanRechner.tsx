@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import { berechneEtfSparplan } from '@/lib/berechnungen/etf-sparplan';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
@@ -94,25 +95,18 @@ export default function EtfSparplanRechner() {
 
       {/* Dynamik Toggle */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Dynamische Sparrate</label>
-        <div className="flex gap-2">
-          {([
-            { key: false, label: 'Ohne Dynamik' },
-            { key: true, label: 'Mit jährlicher Erhöhung' },
-          ] as const).map(o => (
-            <button
-              key={String(o.key)}
-              onClick={() => setDynamik(o.key)}
-              className={`flex-1 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-                dynamik === o.key
-                  ? 'bg-primary-500 text-white shadow-md'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-              }`}
-            >
-              {o.label}
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="etf-dynamik"
+          legend="Dynamische Sparrate"
+          options={[
+            { value: 'nein', label: 'Ohne Dynamik' },
+            { value: 'ja', label: 'Mit jährlicher Erhöhung' },
+          ]}
+          value={dynamik ? 'ja' : 'nein'}
+          onChange={(v) => setDynamik(v === 'ja')}
+          columns={2}
+          fullWidth
+        />
       </div>
 
       {dynamik && (
@@ -124,25 +118,18 @@ export default function EtfSparplanRechner() {
 
       {/* Steuern Toggle */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Steuern berücksichtigen?</label>
-        <div className="flex gap-2">
-          {([
-            { key: false, label: 'Ohne Steuern' },
-            { key: true, label: 'Nach Steuern' },
-          ] as const).map(o => (
-            <button
-              key={String(o.key)}
-              onClick={() => setSteuern(o.key)}
-              className={`flex-1 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-                steuern === o.key
-                  ? 'bg-primary-500 text-white shadow-md'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-              }`}
-            >
-              {o.label}
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="etf-steuern"
+          legend="Steuern berücksichtigen?"
+          options={[
+            { value: 'nein', label: 'Ohne Steuern' },
+            { value: 'ja', label: 'Nach Steuern' },
+          ]}
+          value={steuern ? 'ja' : 'nein'}
+          onChange={(v) => setSteuern(v === 'ja')}
+          columns={2}
+          fullWidth
+        />
       </div>
 
       {steuern && (

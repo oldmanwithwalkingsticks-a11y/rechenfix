@@ -6,6 +6,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 type BmiKat = 'unter' | 'normal' | 'ueber' | 'adipos';
 
@@ -129,11 +130,16 @@ export default function SchwangerschaftGewichtRechner() {
           <NummerEingabe value={ssw} onChange={setSsw} einheit="SSW" />
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Einling oder Zwillinge?</label>
-          <div className="grid grid-cols-2 gap-2">
-            <button onClick={() => setZwillinge(false)} className={`min-h-[48px] px-3 rounded-xl border text-sm font-medium ${!zwillinge ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'}`}>Einling</button>
-            <button onClick={() => setZwillinge(true)} className={`min-h-[48px] px-3 rounded-xl border text-sm font-medium ${zwillinge ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'}`}>Zwillinge</button>
-          </div>
+          <RadioToggleGroup
+            name="schwanger-mehrling"
+            legend="Einling oder Zwillinge?"
+            options={[
+              { value: 'nein', label: 'Einling' },
+              { value: 'ja', label: 'Zwillinge' },
+            ]}
+            value={zwillinge ? 'ja' : 'nein'}
+            onChange={(v) => setZwillinge(v === 'ja')}
+          />
         </div>
       </div>
 

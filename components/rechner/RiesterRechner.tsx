@@ -7,6 +7,7 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 type Familienstand = 'alleinstehend' | 'ein-partner' | 'beide-partner';
 
@@ -117,26 +118,18 @@ export default function RiesterRechner() {
 
       {/* Familienstand */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Familienstand</label>
-        <div className="flex flex-col sm:flex-row gap-2">
-          {([
-            ['alleinstehend', 'Alleinstehend'],
-            ['ein-partner', 'Verheiratet (nur einer riestert)'],
-            ['beide-partner', 'Verheiratet (beide riestern)'],
-          ] as const).map(([key, label]) => (
-            <button
-              key={key}
-              onClick={() => setFamilienstand(key)}
-              className={`flex-1 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all min-h-[48px] ${
-                familienstand === key
-                  ? 'bg-primary-500 text-white shadow-md'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-              }`}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="riester-familienstand"
+          legend="Familienstand"
+          options={[
+            { value: 'alleinstehend', label: 'Alleinstehend' },
+            { value: 'ein-partner', label: 'Verheiratet (nur einer riestert)' },
+            { value: 'beide-partner', label: 'Verheiratet (beide riestern)' },
+          ]}
+          value={familienstand}
+          onChange={(v) => setFamilienstand(v as Familienstand)}
+          columns={3}
+        />
       </div>
 
       {/* Kinder */}
@@ -159,19 +152,18 @@ export default function RiesterRechner() {
             {Array.from({ length: kAnzahl }).map((_, i) => (
               <div key={i} className="flex items-center gap-3">
                 <span className="text-xs text-gray-500 dark:text-gray-400 w-16">Kind {i + 1}</span>
-                <div className="flex gap-2 flex-1">
-                  <button
-                    onClick={() => setKindJahr(i, false)}
-                    className={`flex-1 px-3 py-2 rounded-lg text-xs transition-all ${!kinderAb2008[i] ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300'}`}
-                  >
-                    Vor 2008 (185 €)
-                  </button>
-                  <button
-                    onClick={() => setKindJahr(i, true)}
-                    className={`flex-1 px-3 py-2 rounded-lg text-xs transition-all ${kinderAb2008[i] ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300'}`}
-                  >
-                    Ab 2008 (300 €)
-                  </button>
+                <div className="flex-1">
+                  <RadioToggleGroup
+                    name={`riester-kind-${i}`}
+                    legend="Geburtsjahr"
+                    srOnlyLegend
+                    options={[
+                      { value: 'vor2008', label: 'Vor 2008 (185 €)' },
+                      { value: 'ab2008', label: 'Ab 2008 (300 €)' },
+                    ]}
+                    value={kinderAb2008[i] ? 'ab2008' : 'vor2008'}
+                    onChange={(v) => setKindJahr(i, v === 'ab2008')}
+                  />
                 </div>
               </div>
             ))}

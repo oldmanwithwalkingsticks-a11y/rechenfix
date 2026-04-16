@@ -7,6 +7,7 @@ import {
   defaultTerminDatum,
   type SswMethode,
 } from '@/lib/berechnungen/ssw';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
@@ -33,17 +34,19 @@ export default function SswRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Berechnungsmethode
         </h2>
-        <div className="flex gap-2 flex-wrap">
-          {([['periode', '🩸 Letzte Periode'], ['termin', '📅 Errechneter Geburtstermin']] as const).map(([val, label]) => (
-            <button
-              key={val}
-              onClick={() => setMethode(val)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${methode === val ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="ssw-methode"
+          legend="Berechnungsmethode"
+          srOnlyLegend
+          options={[
+            { value: 'periode', label: '🩸 Letzte Periode' },
+            { value: 'termin', label: '📅 Errechneter Geburtstermin' },
+          ]}
+          value={methode}
+          onChange={(v) => setMethode(v as SswMethode)}
+          columns={2}
+          fullWidth
+        />
       </div>
 
       {/* Eingabefelder */}

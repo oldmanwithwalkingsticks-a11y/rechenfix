@@ -8,6 +8,7 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 export default function SpritkostenRechner() {
   const [strecke, setStrecke] = useState('100');
@@ -29,27 +30,18 @@ export default function SpritkostenRechner() {
   return (
     <div>
       {/* Hin und Zurück Toggle */}
-      <div className="flex gap-2 mb-6">
-        <button
-          onClick={() => setHinUndZurueck(false)}
-          className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-            !hinUndZurueck
-              ? 'bg-primary-500 text-white shadow-md'
-              : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-          }`}
-        >
-          Einfache Fahrt
-        </button>
-        <button
-          onClick={() => setHinUndZurueck(true)}
-          className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-            hinUndZurueck
-              ? 'bg-primary-500 text-white shadow-md'
-              : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-          }`}
-        >
-          Hin + Zurück
-        </button>
+      <div className="mb-6">
+        <RadioToggleGroup
+          name="spritkosten-strecke"
+          legend="Strecke"
+          srOnlyLegend
+          options={[
+            { value: 'einfach', label: 'Einfache Fahrt' },
+            { value: 'hinzurueck', label: 'Hin + Zurück' },
+          ]}
+          value={hinUndZurueck ? 'hinzurueck' : 'einfach'}
+          onChange={(v) => setHinUndZurueck(v === 'hinzurueck')}
+        />
       </div>
 
       {/* Eingaben */}

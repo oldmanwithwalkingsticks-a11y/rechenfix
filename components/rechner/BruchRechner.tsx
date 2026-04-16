@@ -18,6 +18,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 type Tab = 'rechnen' | 'kuerzen' | 'dezimal' | 'vergleichen';
 
@@ -318,27 +319,18 @@ export default function BruchRechner() {
       {/* Tab 3: Dezimal ↔ Bruch */}
       {tab === 'dezimal' && (
         <div>
-          <div className="flex gap-2 mb-4">
-            <button
-              onClick={() => setDezMode('zuBruch')}
-              className={`flex-1 px-3 py-2 rounded-xl text-sm font-medium transition-all ${
-                dezMode === 'zuBruch'
-                  ? 'bg-accent-500 text-white shadow-md'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300'
-              }`}
-            >
-              Dezimal → Bruch
-            </button>
-            <button
-              onClick={() => setDezMode('zuDezimal')}
-              className={`flex-1 px-3 py-2 rounded-xl text-sm font-medium transition-all ${
-                dezMode === 'zuDezimal'
-                  ? 'bg-accent-500 text-white shadow-md'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300'
-              }`}
-            >
-              Bruch → Dezimal
-            </button>
+          <div className="mb-4">
+            <RadioToggleGroup
+              name="bruch-dezmode"
+              legend="Umrechnungsrichtung"
+              options={[
+                { value: 'zuBruch', label: 'Dezimal → Bruch' },
+                { value: 'zuDezimal', label: 'Bruch → Dezimal' },
+              ]}
+              value={dezMode}
+              onChange={(v) => setDezMode(v as 'zuBruch' | 'zuDezimal')}
+              activeColor="accent"
+            />
           </div>
 
           <div className="flex justify-center mb-6">

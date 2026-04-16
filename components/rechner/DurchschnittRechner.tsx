@@ -13,6 +13,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 type Modus = 'arithmetisch' | 'gewichtet' | 'median';
 
@@ -115,27 +116,19 @@ export default function DurchschnittRechner() {
   // Werte-Eingabe (Modus 1 & 3)
   const werteEingabe = (
     <div className="mb-6">
-      <div className="flex gap-2 mb-3">
-        <button
-          onClick={() => setEingabeArt('text')}
-          className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-            eingabeArt === 'text'
-              ? 'bg-accent-500 text-white'
-              : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300'
-          }`}
-        >
-          Textfeld
-        </button>
-        <button
-          onClick={() => setEingabeArt('felder')}
-          className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-            eingabeArt === 'felder'
-              ? 'bg-accent-500 text-white'
-              : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300'
-          }`}
-        >
-          Einzelfelder
-        </button>
+      <div className="mb-3">
+        <RadioToggleGroup
+          name="durchschnitt-eingabe"
+          legend="Eingabeart"
+          srOnlyLegend
+          options={[
+            { value: 'text', label: 'Textfeld' },
+            { value: 'felder', label: 'Einzelfelder' },
+          ]}
+          value={eingabeArt}
+          onChange={(v) => setEingabeArt(v as 'text' | 'felder')}
+          activeColor="accent"
+        />
       </div>
 
       {eingabeArt === 'text' ? (

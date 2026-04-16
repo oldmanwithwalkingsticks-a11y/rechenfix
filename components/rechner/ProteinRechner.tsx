@@ -6,6 +6,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 type Aktivitaet = 'kaum' | 'leicht' | 'kraft' | 'intensiv' | 'ausdauer';
 type Ziel = 'halten' | 'aufbau' | 'abnehmen';
@@ -81,23 +82,18 @@ export default function ProteinRechner() {
 
       {/* Ziel */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Trainingsziel</label>
-        <div className="flex flex-col sm:flex-row gap-2">
-          {ZIELE.map(z => (
-            <button
-              key={z.key}
-              onClick={() => setZiel(z.key)}
-              className={`flex-1 px-3 py-2.5 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
-                ziel === z.key
-                  ? 'bg-primary-500 text-white shadow-md'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-              }`}
-            >
-              {z.label}
-              {z.zuschlag > 0 && <span className="block text-[10px] opacity-80">+{fmt1(z.zuschlag)} g/kg</span>}
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="protein-ziel"
+          legend="Trainingsziel"
+          options={ZIELE.map(z => ({
+            value: z.key,
+            label: z.label,
+            ...(z.zuschlag > 0 ? { description: `+${fmt1(z.zuschlag)} g/kg` } : {}),
+          }))}
+          value={ziel}
+          onChange={(v) => setZiel(v as Ziel)}
+          fullWidth
+        />
       </div>
 
       {/* Mahlzeiten */}

@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { berechneBmi, bmiKategorien } from '@/lib/berechnungen/bmi';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
@@ -32,28 +33,17 @@ export default function BmiRechner() {
 
   return (
     <div>
-      {/* Geschlecht Toggle */}
-      <div className="flex gap-2 mb-6">
-        <button
-          onClick={() => setGeschlecht('maennlich')}
-          className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-            geschlecht === 'maennlich'
-              ? 'bg-primary-500 text-white shadow-md'
-              : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-          }`}
-        >
-          Männlich
-        </button>
-        <button
-          onClick={() => setGeschlecht('weiblich')}
-          className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-            geschlecht === 'weiblich'
-              ? 'bg-primary-500 text-white shadow-md'
-              : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-          }`}
-        >
-          Weiblich
-        </button>
+      <div className="mb-6">
+        <RadioToggleGroup
+          name="bmi-geschlecht"
+          legend="Geschlecht"
+          options={[
+            { value: 'maennlich', label: 'Männlich' },
+            { value: 'weiblich', label: 'Weiblich' },
+          ]}
+          value={geschlecht}
+          onChange={(v) => setGeschlecht(v as 'maennlich' | 'weiblich')}
+        />
       </div>
 
       {/* Eingaben */}

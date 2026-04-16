@@ -6,6 +6,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 type Region = 'stadt' | 'vorort' | 'laendlich';
 
@@ -107,48 +108,30 @@ export default function FuehrerscheinRechner() {
 
       {/* Theorie bestanden */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Theorieprüfung im ersten Versuch bestanden?</label>
-        <div className="flex gap-2">
-          {[
-            { val: true, label: 'Ja' },
-            { val: false, label: 'Nein (1 Wiederholung)' },
-          ].map(opt => (
-            <button
-              key={String(opt.val)}
-              onClick={() => setTheorieBestanden(opt.val)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
-                theorieBestanden === opt.val
-                  ? 'bg-primary-500 text-white shadow-md'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
-              }`}
-            >
-              {opt.label}
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="fuehrerschein-theorie"
+          legend="Theorieprüfung im ersten Versuch bestanden?"
+          options={[
+            { value: 'ja', label: 'Ja' },
+            { value: 'nein', label: 'Nein (1 Wiederholung)' },
+          ]}
+          value={theorieBestanden ? 'ja' : 'nein'}
+          onChange={(v) => setTheorieBestanden(v === 'ja')}
+        />
       </div>
 
       {/* Praxis bestanden */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Praxisprüfung im ersten Versuch bestanden?</label>
-        <div className="flex gap-2">
-          {[
-            { val: true, label: 'Ja' },
-            { val: false, label: 'Nein (1 Wiederholung)' },
-          ].map(opt => (
-            <button
-              key={String(opt.val)}
-              onClick={() => setPraxisBestanden(opt.val)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
-                praxisBestanden === opt.val
-                  ? 'bg-primary-500 text-white shadow-md'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
-              }`}
-            >
-              {opt.label}
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="fuehrerschein-praxis"
+          legend="Praxisprüfung im ersten Versuch bestanden?"
+          options={[
+            { value: 'ja', label: 'Ja' },
+            { value: 'nein', label: 'Nein (1 Wiederholung)' },
+          ]}
+          value={praxisBestanden ? 'ja' : 'nein'}
+          onChange={(v) => setPraxisBestanden(v === 'ja')}
+        />
       </div>
 
       {/* Ergebnis */}

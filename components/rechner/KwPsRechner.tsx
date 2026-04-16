@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 export default function KwPsRechner() {
   const [wert, setWert] = useState('100');
@@ -24,27 +25,18 @@ export default function KwPsRechner() {
   return (
     <div>
       {/* Richtung Toggle */}
-      <div className="flex gap-2 mb-6">
-        <button
-          onClick={() => setRichtung('kw-zu-ps')}
-          className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-            richtung === 'kw-zu-ps'
-              ? 'bg-primary-500 text-white shadow-md'
-              : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-          }`}
-        >
-          kW → PS
-        </button>
-        <button
-          onClick={() => setRichtung('ps-zu-kw')}
-          className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-            richtung === 'ps-zu-kw'
-              ? 'bg-primary-500 text-white shadow-md'
-              : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-          }`}
-        >
-          PS → kW
-        </button>
+      <div className="mb-6">
+        <RadioToggleGroup
+          name="kwps-richtung"
+          legend="Umrechnungsrichtung"
+          srOnlyLegend
+          options={[
+            { value: 'kw-zu-ps', label: 'kW → PS' },
+            { value: 'ps-zu-kw', label: 'PS → kW' },
+          ]}
+          value={richtung}
+          onChange={(v) => setRichtung(v as 'kw-zu-ps' | 'ps-zu-kw')}
+        />
       </div>
 
       {/* Eingabe */}

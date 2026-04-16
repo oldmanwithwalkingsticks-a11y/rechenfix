@@ -9,6 +9,7 @@ import {
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 const fmtZahl = (n: number, s = 2) =>
   n.toLocaleString('de-DE', { minimumFractionDigits: s, maximumFractionDigits: s });
@@ -80,25 +81,14 @@ export default function PromilleRechner() {
     <div>
       {/* Geschlecht */}
       <div className="mb-4">
-        <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Geschlecht</label>
-        <div className="flex gap-2">
-          {([
-            { key: 'mann' as const, label: '♂ Männlich' },
-            { key: 'frau' as const, label: '♀ Weiblich' },
-          ]).map(t => (
-            <button
-              key={t.key}
-              onClick={() => setGeschlecht(t.key)}
-              className={`flex-1 px-3 py-2 rounded-xl text-sm font-medium transition-all ${
-                geschlecht === t.key
-                  ? 'bg-primary-500 text-white shadow-md'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-              }`}
-            >
-              {t.label}
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="promille-geschlecht"
+          legend="Geschlecht"
+          options={[{ value: 'mann', label: '♂ Männlich' }, { value: 'frau', label: '♀ Weiblich' }]}
+          value={geschlecht}
+          onChange={(v) => setGeschlecht(v as 'mann' | 'frau')}
+          fullWidth
+        />
       </div>
 
       {/* Gewicht & Trinkzeit */}

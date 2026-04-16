@@ -9,6 +9,7 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 const VERSTOSS_OPTIONEN: { value: VerstossArt; label: string }[] = [
   { value: 'geschwindigkeit', label: 'Geschwindigkeitsüberschreitung' },
@@ -86,40 +87,28 @@ export default function BussgeldRechner() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Wo?</label>
-                <div className="flex gap-2">
-                  {(['ausserorts', 'innerorts'] as Ort[]).map(o => (
-                    <button
-                      key={o}
-                      onClick={() => setOrt(o)}
-                      className={`flex-1 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                        ort === o
-                          ? 'bg-primary-500 text-white shadow-md'
-                          : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-                      }`}
-                    >
-                      {o === 'innerorts' ? 'Innerorts' : 'Außerorts'}
-                    </button>
-                  ))}
-                </div>
+                <RadioToggleGroup
+                  name="bussgeld-ort"
+                  legend="Wo?"
+                  options={[
+                    { value: 'ausserorts', label: 'Außerorts' },
+                    { value: 'innerorts', label: 'Innerorts' },
+                  ]}
+                  value={ort}
+                  onChange={(v) => setOrt(v as Ort)}
+                />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Fahrzeugtyp</label>
-                <div className="flex gap-2">
-                  {(['pkw', 'lkw'] as Fahrzeug[]).map(f => (
-                    <button
-                      key={f}
-                      onClick={() => setFahrzeug(f)}
-                      className={`flex-1 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                        fahrzeug === f
-                          ? 'bg-primary-500 text-white shadow-md'
-                          : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-                      }`}
-                    >
-                      {f === 'pkw' ? 'PKW' : 'LKW/Bus'}
-                    </button>
-                  ))}
-                </div>
+                <RadioToggleGroup
+                  name="bussgeld-fahrzeug"
+                  legend="Fahrzeugtyp"
+                  options={[
+                    { value: 'pkw', label: 'PKW' },
+                    { value: 'lkw', label: 'LKW/Bus' },
+                  ]}
+                  value={fahrzeug}
+                  onChange={(v) => setFahrzeug(v as Fahrzeug)}
+                />
               </div>
             </div>
           </>
