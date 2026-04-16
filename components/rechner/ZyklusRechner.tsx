@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 type Modus = 1 | 3 | 6;
 
@@ -98,14 +99,18 @@ export default function ZyklusRechner() {
           <p className="text-xs text-gray-500 mt-1">Vom ersten Tag der Periode bis zum Tag vor der nächsten Periode.</p>
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Vorausberechnung</label>
-          <div className="grid grid-cols-3 gap-2">
-            {([1, 3, 6] as Modus[]).map(m => (
-              <button key={m} onClick={() => setModus(m)} className={`min-h-[48px] px-2 rounded-xl border text-xs font-medium ${modus === m ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'}`}>
-                {m === 1 ? '1 Zyklus' : m === 3 ? '3 Zyklen' : '6 Zyklen'}
-              </button>
-            ))}
-          </div>
+          <RadioToggleGroup
+            name="zyklus-vorausberechnung"
+            legend="Vorausberechnung"
+            options={[
+              { value: '1', label: '1 Zyklus' },
+              { value: '3', label: '3 Zyklen' },
+              { value: '6', label: '6 Zyklen' },
+            ]}
+            value={String(modus)}
+            onChange={(v) => setModus(Number(v) as Modus)}
+            columns={3}
+          />
         </div>
       </div>
 

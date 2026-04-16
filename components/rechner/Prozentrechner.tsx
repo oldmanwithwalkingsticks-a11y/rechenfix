@@ -14,6 +14,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import TabGroup from '@/components/ui/TabGroup';
 
 type Modus = 'prozentwert' | 'prozentsatz' | 'grundwert' | 'aufschlag' | 'abschlag';
 
@@ -142,22 +143,13 @@ export default function Prozentrechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Was möchten Sie berechnen?
         </h2>
-        <div className="flex flex-wrap gap-2">
-          {MODI.map(m => (
-            <button
-              key={m.key}
-              onClick={() => handleModusChange(m.key)}
-              className={`min-h-[48px] px-4 rounded-xl text-sm font-medium transition-all ${
-                modus === m.key
-                  ? 'bg-primary-500 text-white shadow-md'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600'
-              }`}
-            >
-              {m.label}
-            </button>
-          ))}
-        </div>
       </div>
+      <TabGroup
+        tabs={MODI.map(m => ({ id: m.key, label: m.label }))}
+        activeId={modus}
+        onChange={(id) => handleModusChange(id as Modus)}
+        ariaLabel="Rechenmodus wählen"
+      >
 
       {/* 2: Werte */}
       <div className="mb-6">
@@ -256,6 +248,8 @@ export default function Prozentrechner() {
           />
         </>
       )}
+
+      </TabGroup>
 
       {/* Letzte Berechnungen */}
       {history.length > 1 && (

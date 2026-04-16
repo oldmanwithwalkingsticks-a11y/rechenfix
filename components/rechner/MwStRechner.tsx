@@ -8,6 +8,7 @@ import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
+import TabGroup from '@/components/ui/TabGroup';
 
 type Tab = 'netto-brutto' | 'brutto-netto' | 'multi';
 
@@ -98,26 +99,17 @@ export default function MwStRechner() {
 
   return (
     <div>
-      {/* Tabs */}
-      <div className="flex flex-wrap gap-2 mb-6">
-        {tabs.map(t => (
-          <button
-            key={t.key}
-            onClick={() => {
-              setTab(t.key);
-              if (t.key === 'netto-brutto') setBetrag('100');
-              else if (t.key === 'brutto-netto') setBetrag('119');
-            }}
-            className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-              tab === t.key
-                ? 'bg-primary-500 text-white shadow-md'
-                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-            }`}
-          >
-            {t.label}
-          </button>
-        ))}
-      </div>
+      <TabGroup
+        tabs={tabs.map(t => ({ id: t.key, label: t.label }))}
+        activeId={tab}
+        onChange={(id) => {
+          const newTab = id as Tab;
+          setTab(newTab);
+          if (newTab === 'netto-brutto') setBetrag('100');
+          else if (newTab === 'brutto-netto') setBetrag('119');
+        }}
+        ariaLabel="MwSt-Berechnungsart"
+      >
 
       {/* Einzel-Rechner */}
       {tab !== 'multi' && (
@@ -335,6 +327,8 @@ export default function MwStRechner() {
           )}
         </>
       )}
+
+      </TabGroup>
 
       {(ergebnis || multiErgebnis) && (
         <AffiliateBox programId="lexware" context="mwst" />
