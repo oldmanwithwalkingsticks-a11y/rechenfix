@@ -1220,4 +1220,77 @@ Die Gehgeschwindigkeit beeinflusst die Dauer, aber kaum den Kalorienverbrauch pr
       },
     ],
   },
+  {
+    slug: 'sonnenschutz-rechner',
+    titel: 'Sonnenschutz-Rechner',
+    beschreibung: 'Sonnenschutz berechnen: Eigenschutzzeit, empfohlener Lichtschutzfaktor und maximale Sonnenzeit.',
+    kategorie: 'Gesundheit',
+    kategorieSlug: 'gesundheit',
+    metaTitle: 'Sonnenschutz-Rechner 2026 — LSF & Sonnenzeit berechnen | Rechenfix',
+    metaDescription: 'Sonnenschutzzeit kostenlos berechnen — Eigenschutzzeit nach Hauttyp, UV-Index und LSF. Mit Nachcreme-Erinnerung und KI-Erklärung.',
+    keywords: ['sonnenschutz rechner', 'lsf rechner', 'eigenschutzzeit', 'uv index', 'sonnencreme', 'lichtschutzfaktor', 'hauttyp'],
+    icon: '☀️',
+    formel: 'Eigenschutzzeit = Basis × (3 ÷ UV-Index) | Geschützte Zeit = Eigenschutzzeit × LSF × 0,6',
+    beispiel: 'Hauttyp II, UV 6–7, LSF 30: Eigenschutz ca. 7 Min., geschützte Zeit ca. 126 Min. Nachcremen nach ca. 63 Min.',
+    erklaerung: `**Was berechnet der Sonnenschutz-Rechner?**
+
+Der Rechner bestimmt, wie lange Sie sich mit und ohne Sonnencreme in der Sonne aufhalten können, ohne einen Sonnenbrand zu riskieren. Er berücksichtigt Ihren Hauttyp (Eigenschutzzeit), den aktuellen UV-Index (Sonnenstärke) und den Lichtschutzfaktor (LSF) Ihrer Sonnencreme.
+
+**Hauttypen nach Fitzpatrick**
+
+Die Dermatologie unterscheidet sechs Hauttypen nach der Fitzpatrick-Skala. Sie bestimmen die Eigenschutzzeit — die Zeit, die die Haut ohne Schutz der Sonne ausgesetzt werden kann, bevor eine Rötung entsteht:
+
+- **Typ I** (sehr hell, Sommersprossen, rotes Haar): 5–10 Minuten. Bräunt nie, bekommt immer Sonnenbrand.
+- **Typ II** (hell, blondes Haar): 10–20 Minuten. Bräunt kaum, häufig Sonnenbrand.
+- **Typ III** (mittelhell, dunkelblond/braun): 20–30 Minuten. Bräunt langsam, gelegentlich Sonnenbrand.
+- **Typ IV** (bräunlich, dunkles Haar): 30–45 Minuten. Bräunt gut, selten Sonnenbrand.
+- **Typ V** (dunkel): ca. 60 Minuten. Bräunt schnell, sehr selten Sonnenbrand.
+- **Typ VI** (sehr dunkel): ca. 90 Minuten. Sonnenbrand extrem selten.
+
+Diese Basiswerte gelten bei einem UV-Index von etwa 3 (mäßig). Bei höherem UV-Index verkürzt sich die Eigenschutzzeit proportional.
+
+**UV-Index — was bedeutet er?**
+
+Der UV-Index (UVI) ist ein international standardisiertes Maß für die sonnenbrandwirksame UV-Strahlung. Er reicht von 0 (nachts) bis über 11 (Hochgebirge, Tropen). In Deutschland erreicht der UV-Index im Sommer typischerweise 6–8. Jede Wetter-App zeigt den aktuellen UV-Index an.
+
+- **1–2 (niedrig):** Kein Schutz nötig für die meisten Hauttypen.
+- **3–5 (mäßig):** Sonnenschutz empfohlen. Mittagssonne meiden.
+- **6–7 (hoch):** Sonnenschutz notwendig. Schatten bevorzugen.
+- **8–10 (sehr hoch):** Starker Schutz nötig. Mittagssonne unbedingt meiden.
+- **11+ (extrem):** Maximaler Schutz. Aufenthalt im Freien minimieren.
+
+**Lichtschutzfaktor (LSF) — was bedeutet die Zahl?**
+
+Der LSF gibt an, um welchen Faktor sich die Eigenschutzzeit verlängert. LSF 30 bedeutet theoretisch: 30× längerer Schutz. In der Praxis wird jedoch zu dünn aufgetragen, die Creme wird durch Schweiß und Wasser abgetragen und der Schutz lässt mit der Zeit nach. Deshalb rechnet der Rechner mit einem Sicherheitsabzug von 40 % (Faktor 0,6).
+
+**Nachcremen — verlängert es die Schutzzeit?**
+
+Nein! Nachcremen verlängert die maximale Schutzzeit nicht, sondern erhält den bestehenden Schutz. Wer nach 2 Stunden nachcremt, hat nicht 4 Stunden Schutz, sondern stellt sicher, dass die verbleibende Schutzzeit nicht durch Abrieb oder Schweiß verloren geht. Der Rechner empfiehlt, nach der Hälfte der geschützten Zeit nachzucremen.
+
+**Richtig eincremen**
+
+Für den vollen LSF-Schutz müssen 2 mg Sonnencreme pro Quadratzentimeter Haut aufgetragen werden. Für einen Erwachsenen entspricht das etwa 30–40 ml (6 Teelöffel) für den gesamten Körper. Die meisten Menschen tragen nur die Hälfte auf — und erhalten damit nur die Hälfte des angegebenen LSF.`,
+    faq: [
+      {
+        frage: 'Wie finde ich meinen Hauttyp heraus?',
+        antwort: 'Orientieren Sie sich an Haarfarbe, Augenfarbe und Sonnenbrand-Neigung: Rothaarig mit Sommersprossen = Typ I, hellblond mit häufigem Sonnenbrand = Typ II, dunkelblond/mittelbraun = Typ III, braun/schwarz mit seltenen Sonnenbränden = Typ IV–VI. Im Zweifel den helleren Typ wählen — lieber zu viel Schutz als zu wenig.',
+      },
+      {
+        frage: 'Wo finde ich den aktuellen UV-Index?',
+        antwort: 'In jeder Wetter-App (Apple Wetter, Google, Wetter.com) wird der UV-Index angezeigt. Auch der Deutsche Wetterdienst (DWD) veröffentlicht UV-Prognosen. Im deutschen Sommer liegt der UV-Index mittags typischerweise bei 5–8, im Mittelmeerraum bei 8–10, am Äquator bei 10–12.',
+      },
+      {
+        frage: 'Reicht LSF 30 oder brauche ich LSF 50?',
+        antwort: 'LSF 30 filtert 97 % der UVB-Strahlung, LSF 50 filtert 98 %. Der Unterschied ist gering. Entscheidend ist die ausreichende Menge und regelmäßiges Nachcremen. Für Hauttyp I–II oder bei UV-Index über 8 ist LSF 50 sinnvoll. Für Hauttyp III–IV reicht LSF 30 in der Regel aus.',
+      },
+      {
+        frage: 'Verlängert Nachcremen die Schutzzeit?',
+        antwort: 'Nein. Nachcremen erhält den Schutz, verlängert ihn aber nicht über die berechnete Maximalzeit hinaus. Wenn Ihre geschützte Zeit 3 Stunden beträgt, bleibt das auch nach Nachcremen so. Es schützt aber davor, dass der Schutz durch Schweiß, Wasser oder Abrieb vorzeitig nachlässt.',
+      },
+      {
+        frage: 'Warum wird ein Sicherheitsabzug berechnet?',
+        antwort: 'Die LSF-Zahl gilt nur bei optimalen Bedingungen: 2 mg/cm² Auftragsmenge, gleichmäßig verteilt, kein Schweiß oder Wasser. In der Praxis trägt man weniger auf und der Schutz lässt durch Abrieb nach. Der 40 %-Sicherheitsabzug (Faktor 0,6) berücksichtigt diese realen Bedingungen.',
+      },
+    ],
+  },
 ];

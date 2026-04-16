@@ -1405,4 +1405,79 @@ Wenn Ihre Körpermaße genau zwischen zwei Größen liegen, empfiehlt sich in de
       },
     ],
   },
+  {
+    slug: 'reisekosten-rechner',
+    titel: 'Reisekosten-Rechner',
+    beschreibung: 'Reisekosten berechnen: Gesamtbudget für Anreise, Unterkunft, Essen und Aktivitäten planen.',
+    kategorie: 'Alltag & Leben',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Reisekosten-Rechner 2026 — Urlaub-Budget planen | Rechenfix',
+    metaDescription: 'Reisekosten kostenlos berechnen — Anreise, Unterkunft, Verpflegung und Aktivitäten. Budget pro Person und Tag mit Kostenaufteilung.',
+    keywords: ['reisekosten rechner', 'urlaub budget', 'reisebudget planen', 'urlaubskosten', 'reise kosten berechnen', 'urlaub kosten pro tag'],
+    icon: '✈️',
+    formel: 'Gesamt = Anreise (hin+rück) + Unterkunft × Nächte + Verpflegung × Personen × Tage + Aktivitäten × Personen × Tage + Versicherung',
+    beispiel: '7 Nächte, 2 Personen, Auto (500 km): Anreise 152,50 €, Unterkunft 560 €, Verpflegung 800 €, Aktivitäten 320 € = 1.832,50 € (916,25 €/Pers.).',
+    erklaerung: `**Was berechnet der Reisekosten-Rechner?**
+
+Der Rechner kalkuliert das Gesamtbudget für eine Reise und schlüsselt die Kosten nach Kategorien auf: Anreise, Unterkunft, Verpflegung, Aktivitäten und Versicherung. Sie erhalten die Kosten pro Person, pro Tag und als Gesamtsumme — mit einer visuellen Aufteilung der Kostenblöcke.
+
+**Anreisekosten — vier Transportmittel**
+
+Die Anreise wird immer als Hin- und Rückfahrt berechnet:
+
+- **Auto:** Spritkosten nach Entfernung, Verbrauch und Spritpreis plus Maut/Vignette. Die Kosten werden für eine einfache Fahrt berechnet und verdoppelt. Hinweis: Verschleiß und Versicherung sind nicht enthalten — die tatsächlichen Autokosten liegen etwa 50 % über den reinen Spritkosten.
+- **Zug:** Preis pro Person für die einfache Fahrt. Frühbucher-Sparpreise der Deutschen Bahn können 60–80 % günstiger sein als Flexpreise.
+- **Flug:** Preis pro Person einfach. Beachten Sie Zusatzkosten für Gepäck, Sitzplatzreservierung und Transfers zum/vom Flughafen.
+- **Bus:** Fernbusse (FlixBus etc.) sind oft die günstigste Option, aber auch die langsamste.
+
+**Unterkunftskosten**
+
+Die Unterkunft wird pro Nacht berechnet. Typische Richtwerte in Deutschland: Hostel 25–40 €/Nacht, Budget-Hotel 60–80 €, Mittelklasse-Hotel 80–120 €, Ferienwohnung (für 2–4 Personen) 80–150 €. Im Ausland variieren die Preise stark — in Südostasien kosten Hotels 20–40 €/Nacht, in der Schweiz oder Skandinavien 150–250 €.
+
+**Verpflegungskosten**
+
+Der Rechner bietet drei Stufen plus eigene Eingabe:
+
+- **Budget (25 €/Tag/Person):** Selbstkochen, Streetfood, günstige Restaurants. Realistisch in Südeuropa, Südostasien oder bei Selbstversorgung.
+- **Mittel (50 €/Tag/Person):** Frühstück im Hotel, mittags Imbiss, abends Restaurant. Standard für Mitteleuropa.
+- **Komfort (80 €/Tag/Person):** Gehobene Restaurants, Cafés, keine Einschränkungen. Für Städtereisen in teureren Destinationen.
+
+**Aktivitäten und Eintritte**
+
+Museen, Ausflüge, Sportaktivitäten und Eintrittsgelder summieren sich schnell. Als Faustregel: 10–20 €/Tag für eine ruhige Reise, 30–50 €/Tag für aktivitätsreiche Reisen mit Führungen und Attraktionen.
+
+**Versteckte Kosten nicht vergessen**
+
+Der Rechner deckt die Hauptkostenblöcke ab. Zusätzlich können anfallen: Transfers (Taxi, Mietwagen), Trinkgelder, Souvenirs, Währungsumtausch-Gebühren, Roaming-Kosten und Parkgebühren. Ein Puffer von 10–15 % auf die Gesamtsumme ist empfehlenswert.
+
+**Spartipps für die Reiseplanung**
+
+- Frühbucher-Angebote für Flüge und Hotels nutzen (3–6 Monate vorher).
+- Nebensaison wählen — 20–40 % günstiger als Hauptsaison.
+- Ferienwohnungen statt Hotels für Familien und Gruppen (Küche spart Essenskosten).
+- Lokale Supermärkte statt Touristenrestaurants.
+- City-Cards für öffentliche Verkehrsmittel und Sehenswürdigkeiten.`,
+    faq: [
+      {
+        frage: 'Wie genau ist die Berechnung?',
+        antwort: 'Der Rechner liefert eine solide Planungsgrundlage. Die tatsächlichen Kosten können 10–20 % abweichen — durch Trinkgelder, spontane Ausgaben, Währungsschwankungen oder günstigere Angebote. Planen Sie einen Puffer von 10–15 % ein, dann sind Sie auf der sicheren Seite.',
+      },
+      {
+        frage: 'Werden Autokosten nur als Sprit berechnet?',
+        antwort: 'Ja — der Rechner kalkuliert Spritkosten plus Maut/Vignette. Die tatsächlichen Kosten (Verschleiß, Versicherung, Wertverlust) liegen laut ADAC bei 30–60 Cent pro Kilometer, also deutlich höher. Für einen fairen Vergleich mit Bahn oder Flug sollten Sie die Vollkosten berücksichtigen.',
+      },
+      {
+        frage: 'Was kostet ein Urlaub pro Person und Tag?',
+        antwort: 'Das hängt stark vom Reiseziel ab. In Deutschland: 80–150 €/Tag/Person (ohne Anreise). Südeuropa: 60–120 €. Südostasien: 30–60 €. Skandinavien/Schweiz: 120–200 €. Diese Werte umfassen Unterkunft, Essen und Aktivitäten bei mittlerem Standard.',
+      },
+      {
+        frage: 'Wie kann ich bei der Anreise sparen?',
+        antwort: 'Frühbucher-Sparpreise der Bahn (ab 17,90 €) oder Flug-Vergleichsportale (Skyscanner, Google Flights) nutzen. Beim Auto: Mitfahrer einladen und Kosten teilen. Fernbusse sind oft am günstigsten. Flexible Reisedaten eingeben — ein Tag Unterschied kann den Flugpreis halbieren.',
+      },
+      {
+        frage: 'Wird die Reiseversicherung pro Person berechnet?',
+        antwort: 'Nein — die Versicherung wird als Gesamtbetrag eingegeben. Viele Reiseversicherungen gelten pro Familie oder Gruppe. Eine Auslandskrankenversicherung kostet ab 10 €/Jahr, eine Reiserücktrittsversicherung 3–5 % des Reisepreises. Bei der Kostenaufteilung wird die Versicherung auf alle Personen umgelegt.',
+      },
+    ],
+  },
 ];

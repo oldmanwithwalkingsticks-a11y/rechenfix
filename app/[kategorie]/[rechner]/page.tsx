@@ -145,6 +145,8 @@ import GgtKgvRechner from '@/components/rechner/GgtKgvRechner';
 import ZufallszahlRechner from '@/components/rechner/ZufallszahlRechner';
 import BlutdruckRechner from '@/components/rechner/BlutdruckRechner';
 import SchritteRechner from '@/components/rechner/SchritteRechner';
+import SonnenschutzRechner from '@/components/rechner/SonnenschutzRechner';
+import ReisekostenRechner from '@/components/rechner/ReisekostenRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -302,6 +304,8 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'zufallszahl-generator': ZufallszahlRechner,
   'blutdruck-rechner': BlutdruckRechner,
   'schritte-rechner': SchritteRechner,
+  'sonnenschutz-rechner': SonnenschutzRechner,
+  'reisekosten-rechner': ReisekostenRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
