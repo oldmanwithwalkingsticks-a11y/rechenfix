@@ -2666,4 +2666,169 @@ Die Gewerbesteuererklärung muss bis zum 31. Juli des Folgejahres beim Finanzamt
       },
     ],
   },
+  {
+    slug: 'einkommensteuer-rechner',
+    titel: 'Einkommensteuer-Rechner',
+    beschreibung: 'Einkommensteuer berechnen: Grundtabelle, Splitting, Soli, Kirchensteuer und Grenzsteuersatz nach § 32a EStG.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Einkommensteuer-Rechner 2026 — ESt nach § 32a EStG | Rechenfix',
+    metaDescription: 'Einkommensteuer 2026 kostenlos berechnen: Grundtabelle oder Splitting, Soli, Kirchensteuer, Grenz- und Durchschnittssteuersatz — mit KI-Erklärung.',
+    keywords: ['einkommensteuer rechner', 'einkommensteuer berechnen', 'est rechner', '32a estg', 'einkommensteuer 2026', 'einkommensteuer tabelle', 'grenzsteuersatz rechner', 'durchschnittssteuersatz', 'einkommensteuer splitting', 'grundtabelle'],
+    icon: '📋',
+    formel: 'Zone 2 (12.097–17.443 €): (932,30·y+1.400)·y | Zone 3 (17.444–66.760 €): (176,86·z+2.397)·z+1.015,42 | Zone 4 (66.761–277.825 €): 0,42·zvE−10.636,30 | Zone 5 (ab 277.826 €): 0,45·zvE−18.970,05',
+    beispiel: '50.000 € zvE, Einzelveranlagung 2026: Einkommensteuer 9.758 €, Grenzsteuersatz ca. 30,5 %, Durchschnittssteuersatz 19,5 %. Mit Splitting (Paar mit zvE 50k): nur 5.030 € — Splitting-Vorteil ca. 4.700 €.',
+    erklaerung: `**Einkommensteuer berechnen nach § 32a EStG**
+
+Die Einkommensteuer ist die wichtigste direkte Steuer in Deutschland. Sie wird auf das zu versteuernde Einkommen (zvE) natürlicher Personen erhoben. Die Berechnung folgt einer Formel, die im § 32a Einkommensteuergesetz (EStG) festgelegt ist — dem sogenannten Einkommensteuertarif.
+
+Der Tarif ist progressiv: Je höher das Einkommen, desto höher der Steuersatz. Die Steuer steigt aber nicht sprunghaft, sondern kontinuierlich — jeder zusätzlich verdiente Euro wird mit einem höheren Grenzsteuersatz belastet, bis der Spitzensteuersatz von 42 % bzw. 45 % erreicht ist.
+
+**Das zu versteuernde Einkommen (zvE)**
+
+Das zvE ist NICHT identisch mit dem Bruttogehalt. Es ergibt sich aus dem Gesamtbetrag der Einkünfte nach Abzug von:
+- Werbungskosten (mindestens Arbeitnehmer-Pauschbetrag 1.230 €)
+- Sonderausgaben (z. B. Vorsorgeaufwendungen, Kirchensteuer, Spenden)
+- Außergewöhnliche Belastungen (z. B. Krankheitskosten)
+- Freibeträge (z. B. Kinderfreibetrag 9.540 € pro Kind bei Zusammenveranlagung)
+
+Unser Rechner geht vom bereits ermittelten zvE aus. Wer vom Bruttogehalt starten möchte, nutzt den Brutto-Netto-Rechner.
+
+**Grundfreibetrag 2026: 12.096 €**
+
+Bis zu einem zvE von 12.096 € (2026) fällt keine Einkommensteuer an (Grundfreibetrag). Dieser Betrag sichert das Existenzminimum. Bei Zusammenveranlagung (Splitting) verdoppelt sich der Grundfreibetrag auf 24.192 €.
+
+**Die fünf Zonen des Einkommensteuertarifs 2026**
+
+- **Zone 1 (bis 12.096 €):** Grundfreibetrag — Steuer = 0 €
+- **Zone 2 (12.097–17.443 €):** Progressionszone I — Eingangssteuersatz 14 %, steigt auf 24 %
+- **Zone 3 (17.444–66.760 €):** Progressionszone II — Steuersatz steigt von 24 % auf 42 %
+- **Zone 4 (66.761–277.825 €):** Spitzensteuersatz 42 % linear
+- **Zone 5 (ab 277.826 €):** Reichensteuer 45 %
+
+**Grenzsteuersatz vs. Durchschnittssteuersatz**
+
+Zwei zentrale Begriffe, die oft verwechselt werden:
+
+- Der **Grenzsteuersatz** ist der Steuersatz auf den nächsten verdienten Euro. Wer 50.000 € zvE hat, zahlt auf jeden zusätzlichen Euro etwa 30,5 % Steuern.
+- Der **Durchschnittssteuersatz** ist die Gesamtsteuer geteilt durch das zvE. Bei 50.000 € zvE liegt er bei ca. 19,5 %.
+
+Der Grenzsteuersatz ist relevant für Entscheidungen wie Gehaltserhöhungen, Sonderzahlungen oder das Ausnutzen von Freibeträgen. Der Durchschnittssteuersatz zeigt die tatsächliche Gesamtbelastung.
+
+**Splittingverfahren für Ehepaare**
+
+Verheiratete und eingetragene Lebenspartner können die Zusammenveranlagung wählen. Dabei wird das gemeinsame zvE halbiert, die Einkommensteuer darauf berechnet und verdoppelt (Splittingverfahren). Der Vorteil ist umso größer, je stärker die Einkommen auseinanderliegen. Bei zwei gleich hohen Einkommen gibt es keinen Splittingvorteil.
+
+**Solidaritätszuschlag: Freigrenze 2026 bei 20.350 €**
+
+Der Soli beträgt 5,5 % der Einkommensteuer. Seit 2021 gilt eine Freigrenze von 20.350 € ESt (2026, Einzelveranlagung) — das entspricht etwa 73.000 € zvE. Unterhalb dieser Grenze fällt kein Soli an. In der Milderungszone (20.351–31.500 € ESt) steigt der Soli gleitend an.
+
+**Kirchensteuer: 8 % oder 9 %**
+
+Die Kirchensteuer beträgt 9 % der ESt in 14 Bundesländern und 8 % in Baden-Württemberg und Bayern. Sie ist als Sonderausgabe im Folgejahr abzugsfähig. Ein Austritt aus der Kirche ist jederzeit möglich (Kosten: 10–60 €).`,
+    faq: [
+      {
+        frage: 'Wie hoch ist der Grundfreibetrag 2026?',
+        antwort: 'Der Grundfreibetrag beträgt 2026 12.096 € für Alleinstehende und 24.192 € für Verheiratete mit Zusammenveranlagung. Einkommen bis zu diesem Betrag bleibt steuerfrei — es sichert das steuerliche Existenzminimum.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen Grenz- und Durchschnittssteuersatz?',
+        antwort: 'Der Grenzsteuersatz gibt an, wie stark der nächste verdiente Euro besteuert wird — relevant für Gehaltserhöhungen oder Sonderzahlungen. Der Durchschnittssteuersatz ist die Gesamtsteuer geteilt durch das zvE und zeigt die tatsächliche Belastung. Bei 50.000 € zvE beträgt der Grenzsteuersatz ca. 30,5 %, der Durchschnittssteuersatz ca. 19,5 %.',
+      },
+      {
+        frage: 'Wie funktioniert das Splittingverfahren?',
+        antwort: 'Bei Zusammenveranlagung wird das gemeinsame zu versteuernde Einkommen der Ehepartner halbiert, die Einkommensteuer auf die Hälfte berechnet und das Ergebnis verdoppelt. Dadurch wird der progressive Tarif „geglättet". Der Splittingvorteil ist am größten bei großen Gehaltsunterschieden — bei gleich hohen Einkommen gibt es keinen Vorteil.',
+      },
+      {
+        frage: 'Wann fällt der Solidaritätszuschlag an?',
+        antwort: 'Der Soli beträgt 5,5 % der Einkommensteuer, aber erst ab einer Jahres-ESt von 20.350 € (2026, Einzelveranlagung) bzw. 40.700 € (Splitting). Das entspricht etwa 73.000 € zvE bei Einzelveranlagung. Für ca. 90 % der Steuerzahler ist der Soli seit 2021 abgeschafft.',
+      },
+      {
+        frage: 'Was ist das zu versteuernde Einkommen (zvE)?',
+        antwort: 'Das zvE ist die Basis für die Einkommensteuer. Es entsteht nach Abzug von Werbungskosten, Sonderausgaben, außergewöhnlichen Belastungen und Freibeträgen vom Gesamteinkommen. Es ist also deutlich niedriger als das Bruttogehalt. Im Elster-Bescheid finden Sie den Wert unter „zu versteuerndes Einkommen".',
+      },
+      {
+        frage: 'Wie hoch ist der Spitzensteuersatz 2026?',
+        antwort: 'Der Spitzensteuersatz von 42 % gilt ab einem zvE von 66.761 € (Einzelveranlagung) bzw. 133.522 € (Splitting). Ab 277.826 € (Einzelveranlagung) bzw. 555.652 € (Splitting) greift zusätzlich die sogenannte „Reichensteuer" mit 45 %.',
+      },
+    ],
+  },
+  {
+    slug: 'steuerklassen-vergleich-rechner',
+    titel: 'Steuerklassen-Vergleich-Rechner',
+    beschreibung: 'Steuerklassen-Kombinationen vergleichen: III/V, V/III und IV/IV mit Faktor — welche Wahl bringt das höchste monatliche Netto?',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Steuerklassen-Vergleich 2026 — III/V vs. IV/IV mit Faktor | Rechenfix',
+    metaDescription: 'Steuerklassen-Kombinationen vergleichen: III/V, V/III, IV/IV mit Faktor — welche bringt Ehepaaren das höchste monatliche Netto? Kostenlos mit KI-Erklärung.',
+    keywords: ['steuerklassen vergleich', 'steuerklasse 3 5', 'steuerklasse 4 4 faktor', 'steuerklasse ehepaar', 'faktorverfahren', 'steuerklasse wechseln', 'steuerklasse optimieren', 'beste steuerklasse ehepaar', 'iii v oder iv iv'],
+    icon: '⚖️',
+    formel: 'Kombinationen: III/V | V/III | IV/IV mit Faktor (F = Splitting-ESt / Summe LSt bei IV/IV) — maßgeblich ist das höchste monatliche Haushaltsnetto',
+    beispiel: 'Paar mit 55.000 € + 35.000 € brutto/Jahr: III/V bringt dem Hauptverdiener ca. 350 €/Monat mehr Netto als IV/IV, dafür Nachzahlungsrisiko. IV/IV mit Faktor liefert identisches Jahres-Netto bei minimaler Abweichung.',
+    erklaerung: `**Welche Steuerklassen-Kombination ist für Ehepaare die beste?**
+
+Ehepaare und eingetragene Lebenspartner haben die Wahl zwischen drei Steuerklassen-Kombinationen, die beeinflussen, wie viel Lohnsteuer monatlich vom Gehalt einbehalten wird. Die Wahl ändert NICHT die Jahressteuer (die wird über die Steuererklärung ausgeglichen), sondern nur die monatliche Verteilung und mögliche Nachzahlungen oder Erstattungen.
+
+Unser Rechner berechnet alle drei möglichen Kombinationen parallel und zeigt, welche Variante das höchste monatliche Netto-Einkommen bringt.
+
+**Die drei möglichen Kombinationen**
+
+- **III/V:** Der höherverdienende Partner ist in Steuerklasse III (doppelter Grundfreibetrag, niedrigste LSt), der andere in V (kein Grundfreibetrag, höchste LSt). Sinnvoll, wenn ein Partner deutlich mehr verdient (Verhältnis ca. 60:40 oder stärker).
+- **V/III:** Umgekehrt — sinnvoll, wenn der zweite Partner der Hauptverdiener ist.
+- **IV/IV mit Faktor (Faktorverfahren):** Beide Partner sind in Klasse IV (Einzelveranlagungs-LSt), aber die einbehaltene LSt wird mit einem Faktor multipliziert, der aus der Splittingsteuer ermittelt wird (Faktor = tatsächliche Splittingsteuer / Summe LSt bei IV+IV). Dadurch entspricht die monatlich einbehaltene LSt fast genau der Jahressteuer — Nachzahlungen oder Erstattungen werden minimal.
+
+**III/V: Vor- und Nachteile**
+
+Die Kombination III/V ist die klassische Wahl bei großem Gehaltsunterschied. Der Hauptverdiener erhält monatlich deutlich mehr Netto, weil der Grundfreibetrag beider Partner dort berücksichtigt wird. Der Partner in V trägt die Hauptlast.
+
+Nachteil: Die Jahressteuer ist oft höher als die monatlich einbehaltene Lohnsteuer — es droht eine Nachzahlung. Zudem ist bei III/V die Steuererklärung Pflicht. Ein weiterer Aspekt: Lohnersatzleistungen wie Elterngeld, Arbeitslosengeld oder Kurzarbeitergeld bemessen sich am Netto aus der Steuerklasse — wer z. B. demnächst Elterngeld bezieht, sollte rechtzeitig in III wechseln, um das Bemessungsentgelt zu maximieren.
+
+**IV/IV mit Faktor: Die stressfreie Option**
+
+Das Faktorverfahren wurde 2010 eingeführt und ist die präziseste Lösung. Jeder Partner wird bei der Lohnsteuer so behandelt, als würde er einzeln besteuert (Klasse IV), aber der Faktor berücksichtigt bereits den Splittingvorteil. Ergebnis: Die monatlich einbehaltene Lohnsteuer entspricht fast genau der Jahressteuer — keine größere Nachzahlung oder Erstattung.
+
+Der Faktor muss beim Finanzamt beantragt werden und ist für zwei Jahre gültig. Jeder Partner kommt mit der Lohnsteuer aus, die seinem eigenen Anteil am Gesamteinkommen entspricht — gerechter als III/V.
+
+**Wann lohnt sich welche Kombination?**
+
+- **Gehaltsverhältnis bis 60:40 / ähnliche Einkommen:** IV/IV ohne Faktor ist einfach und ausgewogen.
+- **Gehaltsverhältnis 60:40 bis 80:20:** IV/IV mit Faktor — faire Verteilung, keine Nachzahlung.
+- **Gehaltsverhältnis ab 80:20 (oder Partner arbeitet nicht):** III/V — Hauptverdiener hat deutlich mehr Netto. Nachzahlung einkalkulieren.
+- **Vor Elterngeld / ALG / Kurzarbeit:** Rechtzeitig in die günstigere Klasse wechseln (für den betroffenen Partner), um das Bemessungsentgelt zu erhöhen.
+
+**Wann und wie Steuerklasse wechseln**
+
+Seit 2020 können Ehepaare die Steuerklasse beliebig oft im Jahr wechseln (vorher nur einmal pro Jahr). Der Wechsel erfolgt formlos beim Finanzamt oder online über Elster. Der Wechsel wirkt ab dem Monat nach Antragstellung.
+
+Wichtig: Die Jahressteuer bleibt unabhängig von der Steuerklasse identisch. Die Wahl beeinflusst nur:
+1. Die Liquidität über das Jahr (mehr oder weniger monatliches Netto)
+2. Höhe von Lohnersatzleistungen (Elterngeld, ALG I, Krankengeld, Kurzarbeitergeld)
+3. Nachzahlung oder Erstattung bei der Steuererklärung`,
+    faq: [
+      {
+        frage: 'Welche Steuerklassen-Kombination ist für uns am besten?',
+        antwort: 'Das hängt vom Gehaltsverhältnis ab: Bei ähnlichen Einkommen (bis 60:40) ist IV/IV einfach und fair. Bei größeren Unterschieden (60:40 bis 80:20) empfiehlt sich IV/IV mit Faktor — faire Verteilung ohne Nachzahlungen. Bei sehr großen Unterschieden (ab 80:20) liefert III/V das höchste monatliche Netto für den Hauptverdiener.',
+      },
+      {
+        frage: 'Was ist das Faktorverfahren (IV/IV mit Faktor)?',
+        antwort: 'Beim Faktorverfahren sind beide Partner in Klasse IV, aber die Lohnsteuer wird mit einem individuellen Faktor multipliziert (Faktor = Splittingsteuer / Summe LSt IV+IV). Dadurch entspricht die monatliche Lohnsteuer fast genau der Jahressteuer — keine Nachzahlung oder Erstattung. Der Faktor gilt zwei Jahre und muss beim Finanzamt beantragt werden.',
+      },
+      {
+        frage: 'Hat die Steuerklasse Einfluss auf das Elterngeld?',
+        antwort: 'Ja, erheblich. Elterngeld (und auch ALG I, Krankengeld, Kurzarbeitergeld) bemisst sich am Netto der letzten 12 Monate vor der Geburt. Wer vor dem Elterngeldbezug von Klasse V in Klasse III wechselt, kann das Bemessungsentgelt um mehrere hundert Euro pro Monat erhöhen. Wichtig: Der Wechsel muss mindestens 7 Monate vor Beginn des Mutterschutzes erfolgen.',
+      },
+      {
+        frage: 'Wie oft kann man die Steuerklasse wechseln?',
+        antwort: 'Seit 2020 können Ehepaare die Steuerklasse beliebig oft im Jahr wechseln. Der Antrag ist formlos beim Finanzamt oder online über Elster möglich. Der Wechsel wirkt ab dem Monat nach Antragstellung. Vorher galt die Regel „einmal pro Jahr".',
+      },
+      {
+        frage: 'Welche Steuerklasse bei großem Gehaltsunterschied?',
+        antwort: 'Bei einem Gehaltsunterschied ab etwa 60:40 lohnt sich III/V: Der Hauptverdiener in III zahlt deutlich weniger monatliche Lohnsteuer, der Partner in V trägt die Hauptlast. Alternativ IV/IV mit Faktor — das ist fast genauso gut und vermeidet Nachzahlungen bei der Steuererklärung.',
+      },
+      {
+        frage: 'Muss ich bei III/V eine Steuererklärung abgeben?',
+        antwort: 'Ja, bei der Kombination III/V ist die Steuererklärung Pflicht (§ 46 Abs. 2 Nr. 3a EStG). Grund: Die monatliche Lohnsteuer bei III/V entspricht meist nicht der Jahressteuer — oft resultiert eine Nachzahlung. Bei IV/IV ohne Faktor oder mit Faktor ist die Erklärung nur in bestimmten Fällen Pflicht.',
+      },
+    ],
+  },
 ];
