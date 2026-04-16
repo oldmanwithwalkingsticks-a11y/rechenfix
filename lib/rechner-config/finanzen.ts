@@ -2238,4 +2238,79 @@ IT-Freelancer kommen mit 800–1.200 € Fixkosten aus (Home-Office, Cloud-Tools
       },
     ],
   },
+  {
+    slug: 'mwst-rueckerstattung-rechner',
+    titel: 'MwSt-Rückerstattungs-Rechner',
+    beschreibung: 'Tax-Free-Shopping berechnen: MwSt-Erstattung für Nicht-EU-Touristen beim Einkauf in Deutschland.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'MwSt-Rückerstattung-Rechner 2026 — Tax Free Shopping | Rechenfix',
+    metaDescription: 'MwSt-Rückerstattung berechnen: Erstattungsbetrag, Dienstleister-Gebühren und effektive Ersparnis beim Tax-Free-Shopping in Deutschland. Kostenlos.',
+    keywords: ['mwst rückerstattung rechner', 'tax free shopping deutschland', 'mehrwertsteuer erstattung touristen', 'tax refund germany', 'global blue rechner', 'umsatzsteuer rückerstattung', 'tax free rechner'],
+    icon: '🧾',
+    formel: 'MwSt-Anteil = Brutto − (Brutto ÷ 1,19) | Netto-Erstattung = MwSt-Anteil − Fixgebühr − (MwSt-Anteil × Prozentgebühr)',
+    beispiel: 'Beispiel: 500 € Einkauf, 19 % MwSt → 79,83 € MwSt-Anteil, abzgl. Global-Blue-Gebühr (4,70 €) = 75,13 € Erstattung (15,0 % Ersparnis)',
+    erklaerung: `**Tax-Free-Shopping in Deutschland — so funktioniert die MwSt-Rückerstattung**
+
+Nicht-EU-Bürger können sich beim Einkauf in Deutschland die Mehrwertsteuer erstatten lassen. Das sogenannte Tax-Free-Shopping ist eine erhebliche Ersparnis — bei 19 % Regelsteuersatz erhalten Sie effektiv bis zu 15,97 % des Kaufpreises zurück. Unser Rechner zeigt Ihnen den genauen Erstattungsbetrag inklusive Dienstleister-Gebühren.
+
+**Voraussetzungen für die MwSt-Rückerstattung**
+
+- **Wohnsitz außerhalb der EU:** Sie müssen Ihren ständigen Wohnsitz in einem Nicht-EU-Land haben. Schweizer, Briten (seit Brexit), US-Amerikaner, Asiaten und andere Nicht-EU-Bürger sind berechtigt. EU-Bürger (auch mit Doppelpass) sind ausgeschlossen.
+- **Mindestbetrag 50,01 €:** Pro Händler und pro Tag müssen Sie mindestens 50,01 € (brutto) ausgeben. Mehrere kleine Einkäufe beim selben Händler am selben Tag können addiert werden.
+- **Ausfuhr innerhalb von 3 Monaten:** Die Ware muss innerhalb von drei Monaten nach dem Kaufmonat im persönlichen Reisegepäck aus der EU ausgeführt werden.
+- **Zollabstempelung:** Am Flughafen oder Grenzübergang muss der deutsche Zoll den Ausfuhrschein (Tax-Free-Formular) abstempeln. Ohne Stempel keine Erstattung.
+
+**Die drei Erstattungswege**
+
+- **Direkt beim Händler:** Manche größere Geschäfte erstatten die MwSt direkt. Sie erhalten die volle MwSt ohne Abzüge. Nachteil: Wenige Händler bieten das an, und Sie müssen den abgestempelten Beleg zurücksenden.
+- **Global Blue:** Der Marktführer mit Schaltern an allen großen Flughäfen. Global Blue erhebt eine Fixgebühr (~3,50 €) plus eine prozentuale Gebühr (~1,5 % des MwSt-Anteils). Erstattung bar, auf Kreditkarte oder als Alipay/WeChat-Überweisung.
+- **Planet (ehem. Premier Tax Free):** Ähnlich wie Global Blue, mit Schaltern an vielen Flughäfen. Gebühren liegen bei ~4 € fix plus ~2 % des MwSt-Anteils. Die tatsächlichen Gebühren variieren je nach Vertrag mit dem Händler.
+
+**Schritt-für-Schritt-Anleitung**
+
+1. Beim Kauf nach dem Tax-Free-Formular fragen (Global Blue, Planet oder händlereigen).
+2. Formular mit Passdaten ausfüllen (lassen).
+3. Am Flughafen vor dem Check-in zum Zoll gehen — Ware, Kassenbon und Formular vorzeigen.
+4. Zoll stempelt das Formular ab (Ware muss unbenutzt und im Originalzustand sein).
+5. Mit dem gestempelten Formular zum Tax-Refund-Schalter (Global Blue / Planet) gehen und Erstattung kassieren — oder den Beleg in den Briefkasten werfen für Kreditkarten-Erstattung.
+
+**Ausnahmen und Besonderheiten**
+
+Nicht erstattungsfähig sind: Lebensmittel, Getränke, Dienstleistungen (Hotels, Restaurants), Fahrkarten, digitale Güter und Waren, die bereits in der EU verbraucht werden. Autos und andere Fahrzeuge unterliegen gesonderten Ausfuhrregeln. Bei Luxusgütern über 10.000 € empfiehlt sich eine gesonderte Zollanmeldung.
+
+**19 % vs. 7 % MwSt-Satz**
+
+Der Regelsteuersatz von 19 % gilt für die meisten Waren: Elektronik, Kleidung, Schmuck, Kosmetik, Haushaltsgeräte. Der ermäßigte Satz von 7 % gilt u. a. für Bücher, Zeitschriften und bestimmte Lebensmittel (die aber ohnehin von der Erstattung ausgeschlossen sind). Bei 7 % ist die absolute Erstattung deutlich geringer — unser Rechner zeigt Ihnen den Unterschied.
+
+**Tipps für maximale Erstattung**
+
+Bündeln Sie Ihre Einkäufe bei wenigen Händlern, um den Mindestbetrag sicher zu überschreiten. Kaufen Sie hochpreisige Waren (Elektronik, Designermode), bei denen die prozentuale Erstattung absolut am meisten bringt. Nutzen Sie wenn möglich die direkte Händlererstattung, um die Dienstleistergebühren zu sparen. Planen Sie am Flughafen mindestens 30–60 Minuten zusätzlich für den Zoll- und Erstattungsprozess ein — besonders in der Urlaubssaison können die Schlangen lang sein.`,
+    faq: [
+      {
+        frage: 'Wie viel MwSt bekomme ich beim Tax-Free-Shopping zurück?',
+        antwort: 'Bei 19 % MwSt können Sie maximal 15,97 % des Kaufpreises zurückerhalten (die im Bruttobetrag enthaltene MwSt). Bei Nutzung eines Dienstleisters wie Global Blue oder Planet werden davon Gebühren abgezogen, sodass die effektive Erstattung bei ca. 14–15 % liegt. Bei 7 % MwSt sind es maximal 6,54 %.',
+      },
+      {
+        frage: 'Was ist der Mindestbetrag für Tax-Free-Shopping?',
+        antwort: 'Sie müssen mindestens 50,01 € (brutto) pro Händler und pro Tag ausgeben. Mehrere Einkäufe beim selben Händler am selben Tag können addiert werden. Einkäufe bei verschiedenen Händlern können nicht zusammengefasst werden.',
+      },
+      {
+        frage: 'Wer hat Anspruch auf MwSt-Rückerstattung?',
+        antwort: 'Alle Personen mit ständigem Wohnsitz außerhalb der EU. Das schließt Schweizer, Briten, US-Amerikaner und alle anderen Nicht-EU-Bürger ein. EU-Bürger sind nicht berechtigt, auch nicht mit einem zusätzlichen Nicht-EU-Pass. Entscheidend ist der ständige Wohnsitz, nicht die Staatsangehörigkeit.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen Global Blue und Planet?',
+        antwort: 'Beides sind Dienstleister, die die MwSt-Erstattung am Flughafen abwickeln. Global Blue ist der Marktführer mit den meisten Schaltern und etwas niedrigeren Gebühren (~3,50 € + 1,5 %). Planet (ehem. Premier Tax Free) ist der zweitgrößte Anbieter (~4 € + 2 %). Welchen Dienstleister Sie nutzen, hängt davon ab, mit wem der Händler zusammenarbeitet.',
+      },
+      {
+        frage: 'Muss ich die Ware am Flughafen vorzeigen?',
+        antwort: 'Ja. Der Zoll kann verlangen, die Ware im unbenutzten Originalzustand zu sehen. Packen Sie Tax-Free-Einkäufe deshalb ins Handgepäck oder gehen Sie vor dem Einchecken zum Zoll. Bei Einkäufen über 10.000 € ist die Vorlage beim Zoll verpflichtend.',
+      },
+      {
+        frage: 'Kann ich die MwSt auch bei Online-Einkäufen zurückbekommen?',
+        antwort: 'Nein. Tax-Free-Shopping gilt nur für Einkäufe im stationären Handel in Deutschland. Online-Bestellungen, die ins Nicht-EU-Ausland geliefert werden, werden in der Regel direkt ohne MwSt berechnet (Ausfuhrlieferung). Falls doch MwSt berechnet wurde, müssen Sie sich direkt an den Händler wenden.',
+      },
+    ],
+  },
 ];

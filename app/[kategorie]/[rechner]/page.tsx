@@ -137,6 +137,7 @@ import BetriebskostenRechner from '@/components/rechner/BetriebskostenRechner';
 import FliesenbedarfRechner from '@/components/rechner/FliesenbedarfRechner';
 import LaminatRechner from '@/components/rechner/LaminatRechner';
 import WhrRechner from '@/components/rechner/WhrRechner';
+import MwstRueckerstattungRechner from '@/components/rechner/MwstRueckerstattungRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -286,6 +287,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'fliesenbedarf-rechner': FliesenbedarfRechner,
   'laminat-rechner': LaminatRechner,
   'whr-rechner': WhrRechner,
+  'mwst-rueckerstattung-rechner': MwstRueckerstattungRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
