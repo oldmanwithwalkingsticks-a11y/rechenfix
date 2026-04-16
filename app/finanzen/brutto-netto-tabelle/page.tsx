@@ -118,7 +118,7 @@ export default function BruttoNettoTabelle() {
                       <tr key={z.brutto} className={`${i % 2 === 0 ? 'bg-gray-50 dark:bg-gray-700/30' : ''} ${highlight ? 'font-medium' : ''}`}>
                         <td className="p-2.5 sm:p-3 text-gray-800 dark:text-gray-200">
                           {highlight ? (
-                            <Link href={`/finanzen/${z.brutto}-euro-brutto-netto`} className="text-primary-500 hover:text-primary-600 font-semibold">
+                            <Link href={`/finanzen/${z.brutto}-euro-brutto-netto`} className="text-primary-600 hover:text-primary-600 font-semibold">
                               {fmtK(z.brutto)} €
                             </Link>
                           ) : (
@@ -171,13 +171,13 @@ export default function BruttoNettoTabelle() {
                 <strong className="text-gray-800 dark:text-gray-100">Sozialabgaben als konstanter Faktor:</strong> Während die Lohnsteuer progressiv steigt, bleiben die Sozialabgaben (Kranken-, Renten-, Arbeitslosen- und Pflegeversicherung) prozentual gleich — bis zur jeweiligen Beitragsbemessungsgrenze. Für die Krankenversicherung liegt diese 2025 bei 5.512,50 € monatlich, für die Rentenversicherung bei 7.550 € (West). Das bedeutet: Ab diesen Grenzen steigen die Sozialabgaben nicht mehr weiter, wodurch die relative Belastung bei sehr hohen Gehältern sogar leicht sinkt.
               </p>
               <p>
-                <strong className="text-gray-800 dark:text-gray-100">Wichtiger Hinweis:</strong> Die Tabelle zeigt Orientierungswerte ohne Kirchensteuer, mit gesetzlicher Krankenversicherung (Zusatzbeitrag 1,7%) und ohne Kinderfreibeträge. Kirchensteuer (8-9% der Lohnsteuer), private Krankenversicherung oder Kinderfreibeträge können das Ergebnis verändern. Für Ihre individuelle Berechnung nutzen Sie unseren <Link href="/finanzen/brutto-netto-rechner" className="text-primary-500 hover:text-primary-600 font-medium">Brutto-Netto-Rechner</Link> mit allen Optionen.
+                <strong className="text-gray-800 dark:text-gray-100">Wichtiger Hinweis:</strong> Die Tabelle zeigt Orientierungswerte ohne Kirchensteuer, mit gesetzlicher Krankenversicherung (Zusatzbeitrag 1,7%) und ohne Kinderfreibeträge. Kirchensteuer (8-9% der Lohnsteuer), private Krankenversicherung oder Kinderfreibeträge können das Ergebnis verändern. Für Ihre individuelle Berechnung nutzen Sie unseren <Link href="/finanzen/brutto-netto-rechner" className="text-primary-600 hover:text-primary-600 font-medium">Brutto-Netto-Rechner</Link> mit allen Optionen.
               </p>
               <p>
                 <strong className="text-gray-800 dark:text-gray-100">Steuerklasse wechseln?</strong> Verheiratete können die Steuerklassenkombination beim Finanzamt ändern. Die klassische Kombination 3/5 lohnt sich, wenn ein Partner deutlich mehr verdient. Beachten Sie: Die Steuerklasse beeinflusst nur die monatliche Auszahlung — die tatsächliche Jahressteuer wird über die Einkommensteuererklärung ausgeglichen. Bei der Kombination 3/5 ist die Steuererklärung Pflicht und es kommt häufig zu Nachzahlungen.
               </p>
               <p>
-                Für detaillierte Berechnungen zu einzelnen Gehältern haben wir eigene Seiten erstellt: <Link href="/finanzen/2000-euro-brutto-netto" className="text-primary-500 hover:text-primary-600 font-medium">2.000 € brutto</Link>, <Link href="/finanzen/3000-euro-brutto-netto" className="text-primary-500 hover:text-primary-600 font-medium">3.000 € brutto</Link>, <Link href="/finanzen/4000-euro-brutto-netto" className="text-primary-500 hover:text-primary-600 font-medium">4.000 € brutto</Link> und <Link href="/finanzen/5000-euro-brutto-netto" className="text-primary-500 hover:text-primary-600 font-medium">5.000 € brutto</Link> — jeweils mit allen 6 Steuerklassen und ausführlicher Erklärung.
+                Für detaillierte Berechnungen zu einzelnen Gehältern haben wir eigene Seiten erstellt: <Link href="/finanzen/2000-euro-brutto-netto" className="text-primary-600 hover:text-primary-600 font-medium">2.000 € brutto</Link>, <Link href="/finanzen/3000-euro-brutto-netto" className="text-primary-600 hover:text-primary-600 font-medium">3.000 € brutto</Link>, <Link href="/finanzen/4000-euro-brutto-netto" className="text-primary-600 hover:text-primary-600 font-medium">4.000 € brutto</Link> und <Link href="/finanzen/5000-euro-brutto-netto" className="text-primary-600 hover:text-primary-600 font-medium">5.000 € brutto</Link> — jeweils mit allen 6 Steuerklassen und ausführlicher Erklärung.
               </p>
             </div>
           </section>
@@ -188,7 +188,7 @@ export default function BruttoNettoTabelle() {
             <div className="space-y-4">
               {faq.map((item, i) => (
                 <details key={i} className="group border border-gray-100 dark:border-gray-700 rounded-xl">
-                  <summary className="cursor-pointer p-4 font-medium text-gray-800 dark:text-gray-200 hover:text-primary-500 dark:hover:text-primary-400 transition-colors list-none flex justify-between items-center">
+                  <summary className="cursor-pointer p-4 font-medium text-gray-800 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors list-none flex justify-between items-center">
                     {item.frage}
                     <svg className="w-5 h-5 text-gray-600 group-open:rotate-180 transition-transform shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -219,7 +219,7 @@ export default function BruttoNettoTabelle() {
                 >
                   <span className="text-2xl shrink-0">{link.icon}</span>
                   <div className="min-w-0">
-                    <p className="font-medium text-gray-800 dark:text-gray-200 group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors text-sm">{link.label}</p>
+                    <p className="font-medium text-gray-800 dark:text-gray-200 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors text-sm">{link.label}</p>
                     <p className="text-xs text-gray-500 dark:text-gray-400">{link.desc}</p>
                   </div>
                   <span className="text-gray-300 dark:text-gray-600 ml-auto shrink-0 group-hover:text-primary-400 transition-colors">→</span>

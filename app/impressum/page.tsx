@@ -49,7 +49,7 @@ export default function ImpressumSeite() {
               E-Mail:{' '}
               <a
                 href="mailto:info@rechenfix.de"
-                className="text-primary-500 dark:text-primary-400 hover:underline"
+                className="text-primary-600 dark:text-primary-400 hover:underline"
               >
                 info@rechenfix.de
               </a>
@@ -81,7 +81,7 @@ export default function ImpressumSeite() {
                 href="https://www.verbraucher-schlichter.de"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary-500 dark:text-primary-400 hover:underline"
+                className="text-primary-600 dark:text-primary-400 hover:underline"
               >
                 https://www.verbraucher-schlichter.de
               </a>
@@ -107,7 +107,7 @@ export default function ImpressumSeite() {
                 href="https://www.e-recht24.de"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary-500 dark:text-primary-400 hover:underline"
+                className="text-primary-600 dark:text-primary-400 hover:underline"
               >
                 e-recht24.de
               </a>

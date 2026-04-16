@@ -163,7 +163,7 @@ export default function BruttoNettoRechner() {
 
       {/* Erweiterte Optionen */}
       <details className="mb-6 group no-print">
-        <summary className="cursor-pointer text-sm font-medium text-primary-500 dark:text-primary-400 hover:text-primary-600 transition-colors list-none flex items-center gap-2">
+        <summary className="cursor-pointer text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-600 transition-colors list-none flex items-center gap-2">
           <svg className="w-4 h-4 group-open:rotate-90 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
@@ -173,7 +173,7 @@ export default function BruttoNettoRechner() {
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kirchensteuer</label>
             <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" checked={kirchensteuer} onChange={e => setKirchensteuer(e.target.checked)} className="w-5 h-5 rounded text-primary-500 focus:ring-primary-200" />
+              <input type="checkbox" checked={kirchensteuer} onChange={e => setKirchensteuer(e.target.checked)} className="w-5 h-5 rounded text-primary-600 focus:ring-primary-200" />
               <span className="text-sm text-gray-700 dark:text-gray-300">Ja ({kstSatz}% in {bl?.name})</span>
             </label>
           </div>
@@ -206,7 +206,7 @@ export default function BruttoNettoRechner() {
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Rentenversicherung</label>
             <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" checked={rvBefreit} onChange={e => setRvBefreit(e.target.checked)} className="w-5 h-5 rounded text-primary-500 focus:ring-primary-200" />
+              <input type="checkbox" checked={rvBefreit} onChange={e => setRvBefreit(e.target.checked)} className="w-5 h-5 rounded text-primary-600 focus:ring-primary-200" />
               <span className="text-sm text-gray-700 dark:text-gray-300">RV-befreit (z. B. Beamte)</span>
             </label>
           </div>
@@ -286,15 +286,15 @@ export default function BruttoNettoRechner() {
 
           {/* Action-Buttons */}
           <div className="flex flex-wrap gap-3 mb-4 no-print">
-            <button onClick={handleCopy} className="text-sm text-primary-500 dark:text-primary-400 hover:text-primary-600 font-medium transition-colors">
+            <button onClick={handleCopy} className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-600 font-medium transition-colors">
               {kopiert ? '✓ Kopiert' : 'Ergebnis kopieren'}
             </button>
             <span className="text-gray-300 dark:text-gray-600">|</span>
-            <button onClick={handleShare} className="text-sm text-primary-500 dark:text-primary-400 hover:text-primary-600 font-medium transition-colors">
+            <button onClick={handleShare} className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-600 font-medium transition-colors">
               Ergebnis teilen
             </button>
             <span className="text-gray-300 dark:text-gray-600">|</span>
-            <button onClick={handlePrint} className="text-sm text-primary-500 dark:text-primary-400 hover:text-primary-600 font-medium transition-colors">
+            <button onClick={handlePrint} className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-600 font-medium transition-colors">
               Als PDF drucken
             </button>
           </div>

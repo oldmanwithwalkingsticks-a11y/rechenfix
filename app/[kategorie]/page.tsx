@@ -53,11 +53,11 @@ export default function KategorieSeite({ params }: Props) {
             className="card p-6 group"
           >
             <div className="text-3xl mb-3">{r.icon}</div>
-            <h2 className="text-lg font-bold text-gray-800 dark:text-gray-100 group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors">
+            <h2 className="text-lg font-bold text-gray-800 dark:text-gray-100 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
               {r.titel}
             </h2>
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-2 line-clamp-2">{r.beschreibung}</p>
-            <span className="inline-block mt-3 text-primary-500 dark:text-primary-400 text-sm font-medium">
+            <span className="inline-block mt-3 text-primary-600 dark:text-primary-400 text-sm font-medium">
               Jetzt berechnen →
             </span>
           </Link>
@@ -83,7 +83,7 @@ export default function KategorieSeite({ params }: Props) {
               <Link
                 key={link.href}
                 href={link.href}
-                className="card px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 hover:bg-primary-50/50 dark:hover:bg-primary-500/5 transition-all"
+                className="card px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50/50 dark:hover:bg-primary-500/5 transition-all"
               >
                 {link.label} →
               </Link>

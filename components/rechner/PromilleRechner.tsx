@@ -189,7 +189,7 @@ export default function PromilleRechner() {
       {/* Manuell hinzufügen */}
       <button
         onClick={() => fuegeHinzu('Getränk', 0.33, 5)}
-        className="text-sm text-primary-500 hover:text-primary-600 dark:text-primary-400 font-medium mb-6"
+        className="text-sm text-primary-600 hover:text-primary-600 dark:text-primary-400 font-medium mb-6"
       >
         + Eigenes Getränk hinzufügen
       </button>

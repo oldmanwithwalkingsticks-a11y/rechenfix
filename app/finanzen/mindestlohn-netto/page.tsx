@@ -203,10 +203,10 @@ export default function Page() {
                 Der Mindestlohn wurde 2015 mit 8,50 € eingeführt und seitdem mehrfach erhöht. Die bislang <strong className="text-gray-800 dark:text-gray-100">größte Anhebung</strong> erfolgte im Oktober 2022 auf 12,00 €, gefolgt von der Erhöhung auf 12,41 € (2024) und 12,82 € (2025). Die Mindestlohnkommission empfiehlt die Anpassung regelmäßig auf Basis der Tarifentwicklung.
               </p>
               <p>
-                <strong className="text-gray-800 dark:text-gray-100">Wichtig:</strong> Wer vom Mindestlohn lebt und ergänzende Sozialleistungen wie <strong className="text-gray-800 dark:text-gray-100">Wohngeld</strong> oder <strong className="text-gray-800 dark:text-gray-100">Kinderzuschlag</strong> beantragen möchte, sollte sein exaktes Nettogehalt kennen. Nutzen Sie dafür unseren <Link href="/finanzen/brutto-netto-rechner" className="text-primary-500 hover:text-primary-600 font-medium">Brutto-Netto-Rechner</Link> mit individuellen Einstellungen für Bundesland, Kirchensteuer und Krankenversicherung.
+                <strong className="text-gray-800 dark:text-gray-100">Wichtig:</strong> Wer vom Mindestlohn lebt und ergänzende Sozialleistungen wie <strong className="text-gray-800 dark:text-gray-100">Wohngeld</strong> oder <strong className="text-gray-800 dark:text-gray-100">Kinderzuschlag</strong> beantragen möchte, sollte sein exaktes Nettogehalt kennen. Nutzen Sie dafür unseren <Link href="/finanzen/brutto-netto-rechner" className="text-primary-600 hover:text-primary-600 font-medium">Brutto-Netto-Rechner</Link> mit individuellen Einstellungen für Bundesland, Kirchensteuer und Krankenversicherung.
               </p>
               <p>
-                In der <Link href="/finanzen/brutto-netto-tabelle" className="text-primary-500 hover:text-primary-600 font-medium">Brutto-Netto-Tabelle 2026</Link> finden Sie einen Überblick über weitere Gehaltsstufen von 1.500 € bis 10.000 € brutto.
+                In der <Link href="/finanzen/brutto-netto-tabelle" className="text-primary-600 hover:text-primary-600 font-medium">Brutto-Netto-Tabelle 2026</Link> finden Sie einen Überblick über weitere Gehaltsstufen von 1.500 € bis 10.000 € brutto.
               </p>
             </div>
           </section>
@@ -217,7 +217,7 @@ export default function Page() {
             <div className="space-y-4">
               {faq.map((item, i) => (
                 <details key={i} className="group border border-gray-100 dark:border-gray-700 rounded-xl">
-                  <summary className="cursor-pointer p-4 font-medium text-gray-800 dark:text-gray-200 hover:text-primary-500 dark:hover:text-primary-400 transition-colors list-none flex justify-between items-center">
+                  <summary className="cursor-pointer p-4 font-medium text-gray-800 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors list-none flex justify-between items-center">
                     {item.frage}
                     <svg className="w-5 h-5 text-gray-600 group-open:rotate-180 transition-transform shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -245,7 +245,7 @@ export default function Page() {
                   className="flex items-center gap-3 p-4 rounded-xl border border-gray-100 dark:border-gray-700 hover:border-primary-200 dark:hover:border-primary-500/30 hover:bg-primary-50/50 dark:hover:bg-primary-500/5 transition-all group"
                 >
                   <div className="min-w-0">
-                    <p className="font-medium text-gray-800 dark:text-gray-200 group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors text-sm">{link.label}</p>
+                    <p className="font-medium text-gray-800 dark:text-gray-200 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors text-sm">{link.label}</p>
                     <p className="text-xs text-gray-500 dark:text-gray-400">{link.desc}</p>
                   </div>
                   <span className="text-gray-300 dark:text-gray-600 ml-auto shrink-0 group-hover:text-primary-400 transition-colors">→</span>

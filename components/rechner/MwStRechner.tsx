@@ -193,13 +193,13 @@ export default function MwStRechner() {
               <div className="flex gap-3 mt-2">
                 <button
                   onClick={handleCopy}
-                  className="text-sm text-primary-500 dark:text-primary-400 hover:text-primary-600 font-medium transition-colors"
+                  className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-600 font-medium transition-colors"
                 >
                   {kopiert ? '✓ Kopiert' : 'Ergebnis kopieren'}
                 </button>
                 <button
                   onClick={handleShare}
-                  className="text-sm text-primary-500 dark:text-primary-400 hover:text-primary-600 font-medium transition-colors"
+                  className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-600 font-medium transition-colors"
                 >
                   {geteilt ? '✓ Geteilt' : 'Ergebnis teilen'}
                 </button>
@@ -273,7 +273,7 @@ export default function MwStRechner() {
 
           <button
             onClick={addZeile}
-            className="flex items-center gap-2 text-sm text-primary-500 dark:text-primary-400 hover:text-primary-600 font-medium mb-6 transition-colors"
+            className="flex items-center gap-2 text-sm text-primary-600 dark:text-primary-400 hover:text-primary-600 font-medium mb-6 transition-colors"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />

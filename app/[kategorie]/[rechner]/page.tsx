@@ -368,7 +368,7 @@ export default function RechnerSeite({ params }: Props) {
                     href={link.href}
                     className="text-center p-3 rounded-xl border border-gray-100 dark:border-gray-700 hover:border-primary-200 dark:hover:border-primary-500/30 hover:bg-primary-50/50 dark:hover:bg-primary-500/5 transition-all group"
                   >
-                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors">
+                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                       {link.label}
                     </span>
                     <span className="block text-xs text-gray-600 dark:text-gray-500 mt-0.5">in netto →</span>
@@ -440,7 +440,7 @@ export default function RechnerSeite({ params }: Props) {
               <div className="space-y-4">
                 {config.faq.map((item, i) => (
                   <details key={i} className="group border border-gray-100 dark:border-gray-700 rounded-xl">
-                    <summary className="cursor-pointer p-4 font-medium text-gray-800 dark:text-gray-200 hover:text-primary-500 dark:hover:text-primary-400 transition-colors list-none flex justify-between items-center">
+                    <summary className="cursor-pointer p-4 font-medium text-gray-800 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors list-none flex justify-between items-center">
                       {item.frage}
                       <svg className="w-5 h-5 text-gray-600 group-open:rotate-180 transition-transform shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -467,7 +467,7 @@ export default function RechnerSeite({ params }: Props) {
                 >
                   <span className="text-3xl">{r.icon}</span>
                   <div className="min-w-0">
-                    <p className="font-medium text-gray-800 dark:text-gray-200 group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors text-sm">
+                    <p className="font-medium text-gray-800 dark:text-gray-200 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors text-sm">
                       {r.titel}
                     </p>
                     <p className="text-xs text-gray-500 dark:text-gray-400">{r.kategorie}</p>
@@ -490,7 +490,7 @@ export default function RechnerSeite({ params }: Props) {
                 <div key={k.slug} className="card p-4">
                   <Link
                     href={`/${k.slug}`}
-                    className="flex items-center gap-2 font-bold text-sm text-gray-800 dark:text-gray-200 hover:text-primary-500 dark:hover:text-primary-400 transition-colors mb-2"
+                    className="flex items-center gap-2 font-bold text-sm text-gray-800 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors mb-2"
                   >
                     <span>{k.icon}</span>
                     <span>{k.name}</span>
@@ -506,7 +506,7 @@ export default function RechnerSeite({ params }: Props) {
                             className={`flex items-center gap-2 py-1.5 px-2 -mx-1 rounded-lg text-[13px] transition-all ${
                               istAktuell
                                 ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-500/10 font-medium'
-                                : 'text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-500/10'
+                                : 'text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-500/10'
                             }`}
                           >
                             <span>{r.icon}</span>

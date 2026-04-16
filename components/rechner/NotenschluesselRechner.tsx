@@ -374,7 +374,7 @@ export default function NotenschluesselRechner() {
 
           <button
             onClick={fuegeNoteHinzu}
-            className="w-full py-2.5 mb-6 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl text-sm font-medium text-gray-500 dark:text-gray-400 hover:border-primary-400 hover:text-primary-500 dark:hover:border-primary-500 dark:hover:text-primary-400 transition-all"
+            className="w-full py-2.5 mb-6 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl text-sm font-medium text-gray-500 dark:text-gray-400 hover:border-primary-400 hover:text-primary-600 dark:hover:border-primary-500 dark:hover:text-primary-400 transition-all"
           >
             + Weitere Note
           </button>

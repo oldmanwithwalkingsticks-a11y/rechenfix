@@ -51,7 +51,7 @@ export default function Header() {
             <Image src="/logo.svg" alt="Rechenfix Logo" width={40} height={40} className="shrink-0" priority />
             <div className="flex flex-col">
               <div className="flex items-center gap-0.5">
-                <span className="text-3xl font-extrabold text-primary-500">Rechen</span>
+                <span className="text-3xl font-extrabold text-primary-600">Rechen</span>
                 <span className="text-3xl font-extrabold text-accent-700 dark:text-accent-400">fix</span>
                 <span className="text-sm text-gray-600 hidden sm:inline">.de</span>
               </div>
@@ -120,7 +120,7 @@ export default function Header() {
                       <Link
                         href={`/${k.slug}`}
                         onClick={() => setMenuOpen(false)}
-                        className="flex items-center gap-2 font-bold text-gray-800 dark:text-gray-100 hover:text-primary-500 dark:hover:text-primary-400 transition-colors mb-3 text-sm"
+                        className="flex items-center gap-2 font-bold text-gray-800 dark:text-gray-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors mb-3 text-sm"
                       >
                         <span className="text-lg">{k.icon}</span>
                         {k.name}
@@ -132,7 +132,7 @@ export default function Header() {
                             <Link
                               href={`/${r.kategorieSlug}/${r.slug}`}
                               onClick={() => setMenuOpen(false)}
-                              className="flex items-center gap-2 py-1.5 px-2 -mx-1 rounded-lg text-[13px] text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-500/10 transition-all"
+                              className="flex items-center gap-2 py-1.5 px-2 -mx-1 rounded-lg text-[13px] text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-500/10 transition-all"
                             >
                               <span className="w-5 text-center shrink-0">{r.icon}</span>
                               <span className="truncate">{r.titel}</span>

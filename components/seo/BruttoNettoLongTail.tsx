@@ -160,7 +160,7 @@ export default function BruttoNettoLongTail({ brutto, seoText, faq }: Props) {
                 <strong className="text-gray-800 dark:text-gray-100">Wichtig zu wissen:</strong> Die Steuerklasse beeinflusst nur die monatlichen Abzüge, nicht die tatsächliche Jahressteuer. Über die Steuererklärung gleicht das Finanzamt die Differenz aus.
               </p>
               <p>
-                Nutzen Sie unseren <Link href="/finanzen/brutto-netto-rechner" className="text-primary-500 hover:text-primary-600 font-medium">Brutto-Netto-Rechner</Link> für eine individuelle Berechnung mit allen Parametern wie Kirchensteuer, Bundesland und privater Krankenversicherung.
+                Nutzen Sie unseren <Link href="/finanzen/brutto-netto-rechner" className="text-primary-600 hover:text-primary-600 font-medium">Brutto-Netto-Rechner</Link> für eine individuelle Berechnung mit allen Parametern wie Kirchensteuer, Bundesland und privater Krankenversicherung.
               </p>
             </div>
           </section>
@@ -171,7 +171,7 @@ export default function BruttoNettoLongTail({ brutto, seoText, faq }: Props) {
             <div className="space-y-4">
               {faq.map((item, i) => (
                 <details key={i} className="group border border-gray-100 dark:border-gray-700 rounded-xl">
-                  <summary className="cursor-pointer p-4 font-medium text-gray-800 dark:text-gray-200 hover:text-primary-500 dark:hover:text-primary-400 transition-colors list-none flex justify-between items-center">
+                  <summary className="cursor-pointer p-4 font-medium text-gray-800 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors list-none flex justify-between items-center">
                     {item.frage}
                     <svg className="w-5 h-5 text-gray-600 group-open:rotate-180 transition-transform shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -191,10 +191,10 @@ export default function BruttoNettoLongTail({ brutto, seoText, faq }: Props) {
                   href={`/finanzen/${vorherige}-euro-brutto-netto`}
                   className="flex-1 card p-4 flex items-center gap-2 group hover:border-primary-200 dark:hover:border-primary-500/30 transition-all"
                 >
-                  <svg className="w-4 h-4 text-gray-600 group-hover:text-primary-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 text-gray-600 group-hover:text-primary-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                   </svg>
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors">
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                     {fmtBrutto(vorherige)} € brutto netto
                   </span>
                 </Link>
@@ -204,10 +204,10 @@ export default function BruttoNettoLongTail({ brutto, seoText, faq }: Props) {
                   href={`/finanzen/${naechste}-euro-brutto-netto`}
                   className="flex-1 card p-4 flex items-center justify-end gap-2 group hover:border-primary-200 dark:hover:border-primary-500/30 transition-all"
                 >
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors">
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                     {fmtBrutto(naechste)} € brutto netto
                   </span>
-                  <svg className="w-4 h-4 text-gray-600 group-hover:text-primary-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 text-gray-600 group-hover:text-primary-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </Link>
@@ -232,7 +232,7 @@ export default function BruttoNettoLongTail({ brutto, seoText, faq }: Props) {
                 >
                   <span className="text-2xl shrink-0">{link.icon}</span>
                   <div className="min-w-0">
-                    <p className="font-medium text-gray-800 dark:text-gray-200 group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors text-sm">{link.label}</p>
+                    <p className="font-medium text-gray-800 dark:text-gray-200 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors text-sm">{link.label}</p>
                     <p className="text-xs text-gray-500 dark:text-gray-400">{link.desc}</p>
                   </div>
                   <span className="text-gray-300 dark:text-gray-600 ml-auto shrink-0 group-hover:text-primary-400 transition-colors">→</span>

@@ -10,7 +10,7 @@ export default function HeaderSearch() {
     <>
       <button
         onClick={() => setOffen(!offen)}
-        className="p-2 text-gray-500 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+        className="p-2 text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
         aria-label="Suche öffnen"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

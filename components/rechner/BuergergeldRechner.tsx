@@ -119,7 +119,7 @@ export default function BuergergeldRechner() {
           {kinder.length < 6 && (
             <button
               onClick={kindHinzufuegen}
-              className="mt-2 text-sm text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 font-medium flex items-center gap-1 transition-colors"
+              className="mt-2 text-sm text-primary-600 hover:text-primary-600 dark:hover:text-primary-400 font-medium flex items-center gap-1 transition-colors"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />

@@ -168,7 +168,7 @@ export default function DurchschnittRechner() {
           </div>
           <button
             onClick={fuegeEinzelHinzu}
-            className="w-full py-2 mt-2 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl text-sm font-medium text-gray-500 dark:text-gray-400 hover:border-primary-400 hover:text-primary-500 transition-all"
+            className="w-full py-2 mt-2 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl text-sm font-medium text-gray-500 dark:text-gray-400 hover:border-primary-400 hover:text-primary-600 transition-all"
           >
             + Wert hinzufügen
           </button>
@@ -284,7 +284,7 @@ export default function DurchschnittRechner() {
           </div>
           <button
             onClick={fuegeGHinzu}
-            className="w-full py-2.5 mb-6 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl text-sm font-medium text-gray-500 dark:text-gray-400 hover:border-primary-400 hover:text-primary-500 transition-all"
+            className="w-full py-2.5 mb-6 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl text-sm font-medium text-gray-500 dark:text-gray-400 hover:border-primary-400 hover:text-primary-600 transition-all"
           >
             + Weitere Zeile
           </button>

@@ -94,7 +94,7 @@ export default function WohngeldRechner() {
               ))}
             </select>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              <a href="https://www.bmwsb.bund.de/SharedDocs/downloads/Webs/BMWSB/DE/veroeffentlichungen/wohnen/wohngeld-mietstufen.html" target="_blank" rel="noopener noreferrer" className="text-primary-500 hover:underline">Mietstufe Ihrer Gemeinde prüfen → bmwsb.bund.de</a>
+              <a href="https://www.bmwsb.bund.de/SharedDocs/downloads/Webs/BMWSB/DE/veroeffentlichungen/wohnen/wohngeld-mietstufen.html" target="_blank" rel="noopener noreferrer" className="text-primary-600 hover:underline">Mietstufe Ihrer Gemeinde prüfen → bmwsb.bund.de</a>
             </p>
           </div>
         </div>
@@ -105,7 +105,7 @@ export default function WohngeldRechner() {
               type="checkbox"
               checked={heizkosten}
               onChange={e => setHeizkosten(e.target.checked)}
-              className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-500 focus:ring-primary-500"
+              className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 focus:ring-primary-500"
             />
             <span className="text-sm text-gray-700 dark:text-gray-300">Heizkostenpauschale einrechnen <span className="text-gray-600">(Wohngeld-Plus)</span></span>
           </label>
@@ -127,7 +127,7 @@ export default function WohngeldRechner() {
               type="checkbox"
               checked={erwerbstaetig}
               onChange={e => setErwerbstaetig(e.target.checked)}
-              className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-500 focus:ring-primary-500"
+              className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 focus:ring-primary-500"
             />
             <span className="text-sm text-gray-700 dark:text-gray-300">Erwerbstätig <span className="text-gray-600">(Erwerbstätigenfreibetrag)</span></span>
           </label>
@@ -137,7 +137,7 @@ export default function WohngeldRechner() {
               type="checkbox"
               checked={alleinerziehend}
               onChange={e => setAlleinerziehend(e.target.checked)}
-              className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-500 focus:ring-primary-500"
+              className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 focus:ring-primary-500"
             />
             <span className="text-sm text-gray-700 dark:text-gray-300">Alleinerziehend</span>
           </label>
@@ -147,7 +147,7 @@ export default function WohngeldRechner() {
               type="checkbox"
               checked={schwerbehindert}
               onChange={e => setSchwerbehindert(e.target.checked)}
-              className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-500 focus:ring-primary-500"
+              className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 focus:ring-primary-500"
             />
             <span className="text-sm text-gray-700 dark:text-gray-300">Schwerbehindert <span className="text-gray-600">(GdB ≥ 50)</span></span>
           </label>

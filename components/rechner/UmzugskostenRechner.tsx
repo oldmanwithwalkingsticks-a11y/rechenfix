@@ -177,7 +177,7 @@ export default function UmzugskostenRechner() {
                   type="checkbox"
                   checked={z.checked}
                   onChange={e => z.set(e.target.checked)}
-                  className="w-4 h-4 rounded border-gray-300 text-primary-500 focus:ring-primary-400"
+                  className="w-4 h-4 rounded border-gray-300 text-primary-600 focus:ring-primary-400"
                 />
                 <span className="text-sm text-gray-800 dark:text-gray-200">{z.label}</span>
                 <span className="ml-auto text-xs text-gray-500 dark:text-gray-400">{z.hint}</span>

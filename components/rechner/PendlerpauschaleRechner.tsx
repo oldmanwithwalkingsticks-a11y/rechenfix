@@ -79,7 +79,7 @@ export default function PendlerpauschaleRechner() {
           <label className="text-xs text-gray-500 dark:text-gray-400">Arbeitstage pro Jahr</label>
           <button
             onClick={() => setArbeitstageMode(arbeitstageMode === 'direkt' ? 'detail' : 'direkt')}
-            className="text-xs text-primary-500 hover:text-primary-600 dark:text-primary-400 font-medium"
+            className="text-xs text-primary-600 hover:text-primary-600 dark:text-primary-400 font-medium"
           >
             {arbeitstageMode === 'direkt' ? 'Detail-Berechnung ▾' : 'Direkt eingeben ▴'}
           </button>

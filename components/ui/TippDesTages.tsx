@@ -64,7 +64,7 @@ export default function TippDesTages() {
           <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-2">{tipp.text}</p>
           <Link
             href={tipp.link}
-            className="text-sm font-medium text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-300 transition-colors"
+            className="text-sm font-medium text-primary-600 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-300 transition-colors"
           >
             {tipp.linkText}
           </Link>

@@ -217,7 +217,7 @@ export default function Prozentrechner() {
                     : 'text-gray-600 dark:text-gray-400'
                 }`}>
                   {i < berechnung.rechenweg.length - 1 && <span className="text-gray-600 dark:text-gray-500 mr-2">→</span>}
-                  {i === berechnung.rechenweg.length - 1 && <span className="text-primary-500 mr-2">=</span>}
+                  {i === berechnung.rechenweg.length - 1 && <span className="text-primary-600 mr-2">=</span>}
                   {schritt}
                 </p>
               ))}
