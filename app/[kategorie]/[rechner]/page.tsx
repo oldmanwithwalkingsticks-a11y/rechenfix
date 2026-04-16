@@ -150,6 +150,8 @@ import ReisekostenRechner from '@/components/rechner/ReisekostenRechner';
 import ZeitwertRechner from '@/components/rechner/ZeitwertRechner';
 import FahrradRahmenRechner from '@/components/rechner/FahrradRahmenRechner';
 import TaxiRechner from '@/components/rechner/TaxiRechner';
+import BetonRechner from '@/components/rechner/BetonRechner';
+import EstrichRechner from '@/components/rechner/EstrichRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -312,6 +314,8 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'zeitwert-rechner': ZeitwertRechner,
   'fahrrad-rahmengroesse-rechner': FahrradRahmenRechner,
   'taxi-rechner': TaxiRechner,
+  'beton-rechner': BetonRechner,
+  'estrich-rechner': EstrichRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

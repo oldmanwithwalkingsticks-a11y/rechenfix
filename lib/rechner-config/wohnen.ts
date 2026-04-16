@@ -1430,4 +1430,149 @@ Kaufen Sie ein Paket extra als Reserve — für spätere Reparaturen. Laminat au
       },
     ],
   },
+  {
+    slug: 'beton-rechner',
+    titel: 'Beton-Rechner',
+    beschreibung: 'Betonmenge berechnen: Kubikmeter und benötigte Säcke für Fundament, Bodenplatte und Pfosten.',
+    kategorie: 'Wohnen & Energie',
+    kategorieSlug: 'wohnen',
+    metaTitle: 'Beton-Rechner 2026 — Betonmenge & Säcke berechnen | Rechenfix',
+    metaDescription: 'Betonmenge kostenlos berechnen — Volumen, Gewicht und Säcke für Fundament, Bodenplatte oder Pfosten. Mit Zuschlag und Kostenvergleich.',
+    keywords: ['beton rechner', 'betonmenge berechnen', 'beton säcke', 'fundament beton', 'beton kubikmeter', 'fertigbeton', 'lieferbeton'],
+    icon: '🧱',
+    formel: 'Volumen = L × B × H (Quader) | π × (D/2)² × H (Zylinder) | Gewicht = Volumen × 2.400 kg/m³',
+    beispiel: 'Bodenplatte 3 × 2 × 0,15 m = 0,9 m³ + 10 % = 0,99 m³. Gewicht: 2.376 kg. Säcke (25 kg): 83 Stück.',
+    erklaerung: `**Was berechnet der Beton-Rechner?**
+
+Der Rechner ermittelt die benötigte Betonmenge für Ihr Bauprojekt. Er berechnet das Volumen in Kubikmetern, das Gewicht, die Anzahl der Fertigbeton-Säcke und die ungefähren Materialkosten. Ab 0,5 m³ empfiehlt der Rechner Lieferbeton als günstigere und bequemere Alternative.
+
+**Drei Formen für verschiedene Projekte**
+
+- **Rechteckig:** Für Bodenplatten, Streifenfundamente, Terrassen und Stufen. Maße in Länge × Breite × Höhe/Dicke.
+- **Rund (Zylinder):** Für Punktfundamente, Zaunpfosten und Säulen. Maße in Durchmesser × Höhe.
+- **L-Form:** Für L-förmige Fundamente oder Stützwände. Zwei Schenkel mit eigenen Maßen plus gemeinsame Dicke.
+
+**Betongewicht und Dichte**
+
+Normalbeton hat eine Dichte von etwa 2.400 kg/m³. Ein Kubikmeter Beton wiegt also 2,4 Tonnen. Das ist wichtig für Transport und Statik. Leichtbeton (1.200–2.000 kg/m³) und Schwerbeton (über 2.600 kg/m³) haben andere Dichten — der Rechner kalkuliert mit Normalbeton.
+
+**Sackware vs. Lieferbeton**
+
+Fertigbeton in Säcken (Trockenmischung, nur Wasser hinzufügen) ist praktisch für kleine Projekte. Ein 25-kg-Sack ergibt etwa 0,012 m³ Beton, ein 40-kg-Sack etwa 0,019 m³. Ab 0,5 m³ wird Lieferbeton (Transportbeton per LKW) empfohlen:
+
+- **Preis:** Lieferbeton kostet 80–120 €/m³, Sackware 5–8 €/25 kg. Für 1 m³ brauchen Sie 84 Säcke à 25 kg = 420–670 € — Lieferbeton ist ab 0,5 m³ deutlich günstiger.
+- **Qualität:** Lieferbeton wird im Werk gemischt und hat eine gleichmäßige Qualität. Sackware hängt von der Mischung vor Ort ab.
+- **Aufwand:** 84 Säcke à 25 kg = 2.100 kg händisch anmischen. Lieferbeton wird per Pumpe oder Rutsche eingebracht.
+
+**Zuschlag einplanen**
+
+Der Rechner bietet 0 %, 5 % und 10 % Zuschlag. 10 % ist empfohlen, weil: Schalungen nie perfekt sind, Unebenheiten im Untergrund zusätzliches Volumen erfordern und Schwund beim Mischen und Einbringen entsteht. Lieber zu viel als zu wenig — Restbeton lässt sich für kleine Projekte verwenden.
+
+**Tipps für Heimwerker**
+
+- Bei Fundamenten: Schotterschicht (10–15 cm) als frostfreie Gründung unter dem Beton einplanen.
+- Beton nicht bei Frost verarbeiten — Mindesttemperatur 5 °C.
+- Frischbeton innerhalb von 90 Minuten verarbeiten.
+- Bei größeren Flächen: Bewehrung (Baustahlmatte) einlegen, um Risse zu vermeiden.
+- Beton nach dem Einbringen verdichten (Rüttelflasche oder Stochern) und 7 Tage feucht halten.`,
+    faq: [
+      {
+        frage: 'Wie viel Beton brauche ich für ein Fundament?',
+        antwort: 'Berechnen Sie Länge × Breite × Tiefe. Ein Streifenfundament von 6 × 0,3 × 0,8 m benötigt 1,44 m³ Beton. Mit 10 % Zuschlag: 1,58 m³. Das sind etwa 3.800 kg — hier ist Lieferbeton die richtige Wahl. Für ein einzelnes Pfosten-Punktfundament (30 cm Durchmesser, 80 cm tief) reichen ca. 2 Säcke à 25 kg.',
+      },
+      {
+        frage: 'Ab wann lohnt sich Lieferbeton?',
+        antwort: 'Ab etwa 0,5 m³ (ca. 42 Säcke à 25 kg). Der Preisunterschied ist erheblich: 0,5 m³ kosten als Sackware 250–340 €, als Lieferbeton 80–120 € plus Anfahrt (50–80 €). Zudem sparen Sie Stunden Mischarbeit. Die Mindestbestellmenge liegt bei vielen Anbietern bei 0,5–1 m³.',
+      },
+      {
+        frage: 'Wie viel wiegt ein Kubikmeter Beton?',
+        antwort: 'Normalbeton wiegt ca. 2.400 kg/m³ (2,4 Tonnen). Das ist wichtig für den Transport: Eine Palette 25-kg-Säcke (42 Stück) wiegt über eine Tonne und ergibt nur 0,5 m³ Beton. Bedenken Sie die Tragfähigkeit Ihres Fahrzeugs und die Erreichbarkeit der Baustelle.',
+      },
+      {
+        frage: 'Was bedeutet der Zuschlag?',
+        antwort: 'Der Zuschlag ist ein Sicherheitspuffer für Schwund, Verschütten und Unebenheiten. 10 % sind empfohlen. Bei sehr unebenen Untergründen oder komplizierten Schalungen sollten Sie 15–20 % einplanen. Restbeton kann für kleine Projekte (Gehwegplatten, Pfosten) verwendet werden.',
+      },
+      {
+        frage: 'Kann ich den Rechner auch für Mörtel oder Estrich verwenden?',
+        antwort: 'Für Estrich und Putz nutzen Sie besser den Estrich-Rechner, der die materialspezifischen Dichten berücksichtigt. Mörtel hat eine ähnliche Dichte wie Beton (ca. 2.200 kg/m³), aber die benötigte Menge ist wegen der dünneren Schichten ganz anders.',
+      },
+    ],
+  },
+  {
+    slug: 'estrich-rechner',
+    titel: 'Estrich-Rechner',
+    beschreibung: 'Estrich- und Putzmenge berechnen: Materialbedarf in kg und Säcke für Boden und Wand.',
+    kategorie: 'Wohnen & Energie',
+    kategorieSlug: 'wohnen',
+    metaTitle: 'Estrich-Rechner 2026 — Materialbedarf berechnen | Rechenfix',
+    metaDescription: 'Estrich- und Putzmenge kostenlos berechnen — Zementestrich, Fließestrich, Kalkzement- und Gipsputz. Gewicht, Säcke und Kosten.',
+    keywords: ['estrich rechner', 'estrich menge berechnen', 'estrich bedarf', 'putz rechner', 'verputz menge', 'zementestrich', 'fließestrich'],
+    icon: '🏗️',
+    formel: 'Volumen = Fläche × Dicke (m) | Gewicht = Volumen × Dichte | Säcke = Gewicht × 1,05 ÷ Sackgewicht',
+    beispiel: '20 m² Zementestrich, 50 mm: Volumen 1,0 m³, Gewicht 2.000 kg, 53 Säcke à 40 kg (~424 €).',
+    erklaerung: `**Was berechnet der Estrich-Rechner?**
+
+Der Rechner ermittelt den Materialbedarf für Estrich (Bodenbeschichtung) und Putz/Mörtel (Wandbeschichtung). Er berechnet Volumen, Gewicht, Anzahl der Säcke und ungefähre Materialkosten — jeweils mit 5 % Reserve für Verschnitt und Schwund.
+
+**Estrich — der Boden unter dem Boden**
+
+Estrich ist die Ausgleichsschicht zwischen Rohboden (Betondecke) und Bodenbelag (Fliesen, Laminat, Parkett). Er gleicht Unebenheiten aus, nimmt die Fußbodenheizung auf und verteilt Lasten gleichmäßig.
+
+- **Zementestrich (CT):** Der Klassiker. Dichte ca. 2.000 kg/m³. Schichtdicke meist 45–65 mm. Belastbar nach 28 Tagen, begehbar nach 3 Tagen. Robust und feuchtigkeitsbeständig — auch für Nassräume geeignet.
+- **Fließestrich (CAF/CA):** Selbstnivellierende Calciumsulfat-Mischung. Dichte ca. 1.800 kg/m³. Ideal für Fußbodenheizung (bessere Wärmeleitfähigkeit). Nicht für Nassräume ohne zusätzliche Abdichtung.
+
+**Putz und Mörtel — die Wandbeschichtung**
+
+Putz wird auf Mauerwerk oder Beton aufgetragen und dient als Grundlage für Tapete, Farbe oder Fliesen.
+
+- **Kalkzement-Putz:** Dichte ca. 1.600 kg/m³. Universell einsetzbar, auch in Feuchträumen. Schichtdicke innen 10–15 mm, außen 15–20 mm.
+- **Gipsputz:** Dichte ca. 1.200 kg/m³. Leichter zu verarbeiten, glattere Oberfläche. Nur für trockene Innenräume. Schichtdicke 10–15 mm.
+
+**Schichtdicken — Richtwerte**
+
+- Estrich auf Fußbodenheizung: 45–50 mm (über den Rohren)
+- Estrich ohne Heizung: 35–45 mm
+- Innenputz: 10–15 mm
+- Außenputz: 15–20 mm (zwei Lagen: Unter- und Oberputz)
+
+**Materialkosten — Richtwerte**
+
+Preise schwanken je nach Region und Anbieter:
+- Zementestrich (40 kg): ca. 7–10 €/Sack
+- Fließestrich (25 kg): ca. 10–15 €/Sack
+- Kalkzement-Putz (30 kg): ca. 8–12 €/Sack
+- Gipsputz (30 kg): ca. 5–9 €/Sack
+
+Der Rechner kalkuliert mit Durchschnittspreisen. Großmengen im Baustoffhandel sind oft 20–30 % günstiger als Baumarktpreise.
+
+**Tipps für die Verarbeitung**
+
+- Untergrund muss sauber, tragfähig und frei von losen Teilen sein.
+- Grundierung (Tiefengrund) verbessert die Haftung und reguliert das Saugverhalten.
+- Bei Estrich: Randdämmstreifen an allen Wänden und Durchbrüchen.
+- Trocknungszeit beachten: Zementestrich braucht ca. 1 cm Dicke = 1 Woche Trocknungszeit.
+- Restfeuchte vor dem Verlegen des Bodenbelags messen (CM-Messung).`,
+    faq: [
+      {
+        frage: 'Wie dick muss Estrich sein?',
+        antwort: 'Auf Fußbodenheizung: mindestens 45 mm über den Heizungsrohren (gesamt oft 65–75 mm). Ohne Heizung: 35–45 mm auf Dämmung, 25–30 mm direkt auf Beton. Die Mindestdicke hängt von der Nutzung ab — bei schweren Möbeln oder Gewerberäumen mehr.',
+      },
+      {
+        frage: 'Was ist besser — Zementestrich oder Fließestrich?',
+        antwort: 'Fließestrich ist einfacher zu verarbeiten (selbstnivellierend) und ideal für Fußbodenheizung. Zementestrich ist günstiger, robuster und auch für Nassräume geeignet. Für Heimwerker ist Fließestrich bequemer, für Profis ist Zementestrich Standard.',
+      },
+      {
+        frage: 'Wie lange muss Estrich trocknen?',
+        antwort: 'Faustregel: 1 cm Schichtdicke = 1 Woche Trocknungszeit bei Zementestrich. Ein 5 cm dicker Estrich braucht also mindestens 5 Wochen. Fließestrich trocknet etwas schneller. Vor dem Verlegen des Bodenbelags muss die Restfeuchte gemessen werden (CM-Messung).',
+      },
+      {
+        frage: 'Wie viel Putz brauche ich für einen Raum?',
+        antwort: 'Berechnen Sie die Wandfläche (Umfang × Raumhöhe − Fenster/Türen). Ein Raum mit 4 × 5 m und 2,50 m Höhe hat ca. 45 m² Wandfläche (minus Öffnungen). Bei 15 mm Kalkzement-Putz: 45 × 0,015 × 1.600 = 1.080 kg, also ca. 36 Säcke à 30 kg.',
+      },
+      {
+        frage: 'Kann ich Gipsputz im Badezimmer verwenden?',
+        antwort: 'Nein — Gipsputz ist nicht feuchtigkeitsbeständig. Im Badezimmer, in der Küche (Spritzbereich) und in Kellerräumen verwenden Sie Kalkzement-Putz. Unter Fliesen im Nassbereich ist zusätzlich eine Abdichtung (Flüssigfolie) Pflicht.',
+      },
+    ],
+  },
 ];
