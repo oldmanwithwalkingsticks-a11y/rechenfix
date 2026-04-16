@@ -2512,4 +2512,158 @@ Für die meisten Arbeitnehmer ist der Minijob die attraktivste Option — 100 % 
       },
     ],
   },
+  {
+    slug: 'schenkungssteuer-rechner',
+    titel: 'Schenkungssteuer-Rechner',
+    beschreibung: 'Schenkungssteuer berechnen: Freibeträge, Steuerklassen und 10-Jahres-Regel bei Schenkungen an Verwandte.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Schenkungssteuer-Rechner 2026 — Freibeträge & Steuer berechnen | Rechenfix',
+    metaDescription: 'Schenkungssteuer kostenlos berechnen: Freibeträge nach Verwandtschaftsgrad, Steuerklasse und 10-Jahres-Regel — mit KI-Erklärung.',
+    keywords: ['schenkungssteuer rechner', 'schenkungssteuer berechnen', 'schenkungssteuer freibetrag', 'schenkung freibetrag', 'schenkungssteuer steuerklasse', 'freibetrag schenkung kind', 'schenkung 10 jahre', 'kettenschenkung', 'schenkungssteuer tabelle'],
+    icon: '🎁',
+    formel: 'Steuerpflichtiger Erwerb = Schenkungswert − Freibetrag − bereits genutzt − ggf. Hausrat | Schenkungssteuer = steuerpflichtiger Erwerb × Steuersatz (§ 19 ErbStG)',
+    beispiel: 'Schenkung 250.000 € an Kind: Freibetrag 400.000 € → steuerfrei. Schenkung 250.000 € an Neffe: Freibetrag 20.000 €, steuerpflichtiger Erwerb 230.000 €, Steuerklasse II, Steuersatz 20 % → 46.000 € Schenkungssteuer.',
+    erklaerung: `**Was ist die Schenkungssteuer?**
+
+Die Schenkungssteuer ist eine Steuer auf unentgeltliche Zuwendungen unter Lebenden. Sie ist im Erbschaftsteuer- und Schenkungsteuergesetz (ErbStG) geregelt und folgt denselben Regeln wie die Erbschaftsteuer — mit einem entscheidenden Vorteil: Die Freibeträge können alle 10 Jahre erneut genutzt werden.
+
+Jede Schenkung muss dem Finanzamt innerhalb von drei Monaten gemeldet werden (§ 30 ErbStG). Die Meldepflicht trifft sowohl den Schenker als auch den Beschenkten. Auch wenn keine Steuer anfällt, besteht die Anzeigepflicht.
+
+**Unterschied zwischen Schenkungssteuer und Erbschaftsteuer**
+
+Schenkungssteuer und Erbschaftsteuer verwenden dieselben Freibeträge, Steuerklassen und Steuersätze. Der zentrale Unterschied: Bei einer Erbschaft steht der Freibetrag nur einmal zur Verfügung. Bei Schenkungen kann der Freibetrag alle 10 Jahre erneut ausgeschöpft werden — das macht die Schenkung zu einem wichtigen Instrument der Vermögensübertragung.
+
+Ein weiterer Unterschied: Eltern und Großeltern werden bei einer Schenkung in Steuerklasse II eingestuft (Freibetrag 20.000 €), bei einer Erbschaft dagegen in Steuerklasse I (Freibetrag 100.000 €).
+
+**Freibeträge bei Schenkungen (§ 16 ErbStG)**
+
+Die Freibeträge hängen vom Verwandtschaftsgrad ab:
+
+- Ehepartner / eingetragener Lebenspartner: 500.000 € (Steuerklasse I)
+- Kind (inkl. Stief- und Adoptivkind): 400.000 € (Steuerklasse I)
+- Enkelkind: 200.000 € (Steuerklasse I)
+- Elternteil / Großelternteil: 20.000 € (Steuerklasse II)
+- Geschwister: 20.000 € (Steuerklasse II)
+- Nichte / Neffe: 20.000 € (Steuerklasse II)
+- Nicht verwandt: 20.000 € (Steuerklasse III)
+
+Zusätzlich gibt es einen Hausrat-Freibetrag von 41.000 € für Personen der Steuerklasse I.
+
+**Die 10-Jahres-Regel und Kettenschenkung**
+
+Der Freibetrag erneuert sich alle 10 Jahre vollständig. Das ermöglicht die sogenannte Kettenschenkung: Ein Ehepaar mit zwei Kindern kann über 30 Jahre bis zu 4,8 Mio. € steuerfrei übertragen (2 × 400.000 € × 3 Zyklen pro Kind × 2 Kinder). Bei der Planung ist allerdings zu beachten, dass Schenkungen innerhalb eines 10-Jahres-Zeitraums zusammengerechnet werden.
+
+**Immobilien schenken**
+
+Bei der Schenkung einer Immobilie ist nicht der Kaufpreis, sondern der Verkehrswert zum Zeitpunkt der Schenkung maßgeblich. Das Finanzamt ermittelt den Wert nach dem Bewertungsgesetz (BewG) — oft liegt dieser unter dem tatsächlichen Marktwert, was Immobilienschenkungen steuerlich attraktiv macht.
+
+Selbstgenutzte Familienheime können unter bestimmten Voraussetzungen steuerfrei an den Ehepartner übertragen werden (§ 13 Abs. 1 Nr. 4a ErbStG). Für Kinder gilt die Steuerbefreiung bei Erbschaft (nicht bei Schenkung) bis 200 m² Wohnfläche.
+
+**Meldepflicht beim Finanzamt (§ 30 ErbStG)**
+
+Sowohl Schenker als auch Beschenkter müssen die Schenkung innerhalb von drei Monaten beim zuständigen Finanzamt anzeigen. Notariell beurkundete Schenkungen (z. B. Immobilien) werden automatisch vom Notar gemeldet. Bei Geldschenkungen müssen Sie selbst aktiv werden. Die Anzeige ist auch dann Pflicht, wenn aufgrund des Freibetrags keine Steuer anfällt.`,
+    faq: [
+      {
+        frage: 'Wie hoch ist der Freibetrag bei einer Schenkung an mein Kind?',
+        antwort: 'Der persönliche Freibetrag bei einer Schenkung an ein Kind (inkl. Stief- und Adoptivkind) beträgt 400.000 €. Dieser Freibetrag kann alle 10 Jahre erneut genutzt werden. Über 30 Jahre können Sie also bis zu 1,2 Mio. € pro Kind steuerfrei übertragen.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen Schenkungssteuer und Erbschaftsteuer?',
+        antwort: 'Beide Steuern verwenden dieselben Freibeträge, Steuerklassen und Steuersätze. Der entscheidende Unterschied: Bei Schenkungen erneuern sich die Freibeträge alle 10 Jahre, bei einer Erbschaft stehen sie nur einmal zur Verfügung. Außerdem werden Eltern bei Schenkungen in Steuerklasse II (20.000 € Freibetrag) statt I (100.000 €) eingestuft.',
+      },
+      {
+        frage: 'Muss ich eine Schenkung dem Finanzamt melden?',
+        antwort: 'Ja, nach § 30 ErbStG müssen sowohl Schenker als auch Beschenkter jede Schenkung innerhalb von drei Monaten beim Finanzamt anzeigen — auch wenn aufgrund des Freibetrags keine Steuer anfällt. Bei notariellen Schenkungen (z. B. Immobilien) übernimmt der Notar die Meldung.',
+      },
+      {
+        frage: 'Kann ich den Freibetrag alle 10 Jahre erneut nutzen?',
+        antwort: 'Ja, die persönlichen Freibeträge erneuern sich alle 10 Jahre vollständig. Das ist der große Vorteil der Schenkung gegenüber der Erbschaft. Beispiel: Sie können Ihrem Kind alle 10 Jahre 400.000 € steuerfrei schenken.',
+      },
+      {
+        frage: 'Wird die Schenkungssteuer auf den Schenker oder den Beschenkten erhoben?',
+        antwort: 'Steuerschuldner ist grundsätzlich der Beschenkte. Schenker und Beschenkter haften aber als Gesamtschuldner — das Finanzamt kann die Steuer von beiden fordern. In der Praxis wird die Steuer meist vom Beschenkten gezahlt. Übernimmt der Schenker die Steuer, gilt das als zusätzliche Schenkung.',
+      },
+      {
+        frage: 'Wie wird eine Immobilie bei der Schenkungssteuer bewertet?',
+        antwort: 'Das Finanzamt bewertet Immobilien nach dem Bewertungsgesetz (BewG) — entweder im Vergleichswertverfahren, Ertragswertverfahren oder Sachwertverfahren. Der ermittelte Wert liegt oft unter dem tatsächlichen Marktwert. Sie können ein eigenes Gutachten vorlegen, wenn der Finanzamtswert zu hoch ausfällt.',
+      },
+    ],
+  },
+  {
+    slug: 'gewerbesteuer-rechner',
+    titel: 'Gewerbesteuer-Rechner',
+    beschreibung: 'Gewerbesteuer berechnen: Hebesatz, Steuermessbetrag, Freibetrag und ESt-Anrechnung für Gewerbetreibende.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Gewerbesteuer-Rechner 2026 — Hebesatz & ESt-Anrechnung | Rechenfix',
+    metaDescription: 'Gewerbesteuer kostenlos berechnen: Hebesatz, Freibetrag, Steuermessbetrag und ESt-Anrechnung für Einzel- und Kapitalgesellschaften — mit KI-Erklärung.',
+    keywords: ['gewerbesteuer rechner', 'gewerbesteuer berechnen', 'gewerbesteuer hebesatz', 'gewerbesteuer freibetrag', 'steuermessbetrag', 'gewerbesteuer anrechnung', 'gewerbesteuer einzelunternehmen', 'gewerbesteuer gmbh', 'gewerbesteuer 2026'],
+    icon: '🏭',
+    formel: 'Gewerbeertrag = Gewinn + Hinzurechnungen − Kürzungen − Freibetrag | Steuermessbetrag = Gewerbeertrag × 3,5 % | Gewerbesteuer = Steuermessbetrag × Hebesatz / 100',
+    beispiel: 'Einzelunternehmer, 80.000 € Gewinn, Hebesatz 400 %: Gewerbeertrag 55.500 € (nach Freibetrag), Steuermessbetrag 1.942,50 €, Gewerbesteuer 7.770 €, ESt-Anrechnung 7.770 € → effektive Belastung 0 €.',
+    erklaerung: `**Was ist die Gewerbesteuer?**
+
+Die Gewerbesteuer ist eine Steuer auf den Ertrag von Gewerbebetrieben und die wichtigste Einnahmequelle der Gemeinden. Sie wird von der Gemeinde erhoben, in der das Unternehmen seinen Sitz hat. Die Höhe hängt maßgeblich vom kommunalen Hebesatz ab — und der schwankt in Deutschland zwischen 200 % und über 900 %.
+
+Rechtsgrundlage ist das Gewerbesteuergesetz (GewStG). Steuerpflichtig sind alle Gewerbebetriebe im Sinne des Einkommensteuergesetzes. Freiberufler (Ärzte, Rechtsanwälte, Ingenieure, Künstler, Journalisten u. a.) sind von der Gewerbesteuer befreit.
+
+**Wer muss Gewerbesteuer zahlen?**
+
+Gewerbesteuerpflichtig sind alle Gewerbetreibenden: Einzelunternehmer, Personengesellschaften (OHG, KG, GbR mit Gewerbeeintragung) und Kapitalgesellschaften (GmbH, AG, UG). Freiberufler und land-/forstwirtschaftliche Betriebe sind befreit. Die Abgrenzung zwischen Gewerbe und freiem Beruf ist nicht immer eindeutig — im Zweifel entscheidet das Finanzamt.
+
+**Freibetrag für Personengesellschaften**
+
+Einzelunternehmen und Personengesellschaften erhalten einen Freibetrag von 24.500 € auf den Gewerbeertrag. Kapitalgesellschaften (GmbH, AG) haben keinen Freibetrag — sie zahlen ab dem ersten Euro Gewerbesteuer.
+
+**Der Hebesatz — so unterschiedlich besteuert Deutschland**
+
+Der Hebesatz ist der Faktor, mit dem die Gemeinde den Steuermessbetrag multipliziert. Er variiert enorm: Der gesetzliche Mindesthebesatz beträgt 200 %. In ländlichen Regionen liegen Hebesätze oft bei 300–350 %, in Großstädten bei 400–500 %. Spitzenreiter ist die Gemeinde Oberhausen mit über 580 %. Einige kleine Gemeinden locken mit dem Mindesthebesatz von 200 % — dort ist die Gewerbesteuer besonders günstig.
+
+Der bundesweite Durchschnitt liegt bei etwa 400 %. Den Hebesatz Ihrer Gemeinde finden Sie auf der Website Ihrer Stadt oder beim Gewerbeamt.
+
+**Die Anrechnung auf die Einkommensteuer (§ 35 EStG)**
+
+Für Einzelunternehmer und Personengesellschafter gibt es eine wichtige Entlastung: Die Gewerbesteuer wird pauschal auf die Einkommensteuer angerechnet. Der Anrechnungsfaktor beträgt das 4,0-Fache des Steuermessbetrags — das entspricht einem Hebesatz von 400 %.
+
+Das bedeutet: Bei Hebesätzen bis 400 % wird die Gewerbesteuer durch die ESt-Anrechnung praktisch vollständig neutralisiert. Erst bei Hebesätzen über 400 % entsteht eine echte Zusatzbelastung. Diese Regelung macht die Gewerbesteuer für viele Einzelunternehmer zu einer „durchlaufenden" Steuer.
+
+Für Kapitalgesellschaften (GmbH, AG) gibt es keine ESt-Anrechnung — sie tragen die volle Gewerbesteuer als Betriebsausgabe.
+
+**Hinzurechnungen und Kürzungen**
+
+Bestimmte Aufwendungen, die den Gewinn gemindert haben, werden für die Gewerbesteuer wieder hinzugerechnet (§ 8 GewStG): 25 % der Zinsen, 50 % der Mieten für bewegliche Wirtschaftsgüter, 75 % der Mieten für Immobilien — jeweils nach Abzug eines Freibetrags von 200.000 €.
+
+Umgekehrt gibt es Kürzungen (§ 9 GewStG): 1,2 % des Einheitswerts des eigenen Grundbesitzes und Gewinnanteile aus Beteiligungen an anderen Gewerbebetrieben werden abgezogen.
+
+**Gewerbesteuererklärung**
+
+Die Gewerbesteuererklärung muss bis zum 31. Juli des Folgejahres beim Finanzamt eingereicht werden (mit Steuerberater bis Ende Februar des übernächsten Jahres). Ab einem Gewerbeertrag von über 24.500 € (Personengesellschaft) bzw. ab dem ersten Euro (Kapitalgesellschaft) ist die Erklärung Pflicht. Das Finanzamt setzt den Steuermessbetrag fest, die Gemeinde erlässt dann den Gewerbesteuerbescheid mit ihrem Hebesatz.`,
+    faq: [
+      {
+        frage: 'Wer muss Gewerbesteuer zahlen?',
+        antwort: 'Alle Gewerbetreibenden: Einzelunternehmer, Personengesellschaften (OHG, KG) und Kapitalgesellschaften (GmbH, AG, UG). Freiberufler wie Ärzte, Rechtsanwälte, Architekten oder Journalisten sind von der Gewerbesteuer befreit. Entscheidend ist die Einstufung durch das Finanzamt.',
+      },
+      {
+        frage: 'Wie hoch ist der Gewerbesteuer-Freibetrag?',
+        antwort: 'Der Freibetrag beträgt 24.500 € und gilt nur für Einzelunternehmen und Personengesellschaften. Kapitalgesellschaften (GmbH, AG) haben keinen Freibetrag und zahlen ab dem ersten Euro Gewerbeertrag.',
+      },
+      {
+        frage: 'Was ist der Hebesatz und wo finde ich ihn?',
+        antwort: 'Der Hebesatz ist ein Prozentsatz, den jede Gemeinde selbst festlegt (mindestens 200 %). Er wird mit dem Steuermessbetrag multipliziert und bestimmt die endgültige Gewerbesteuer. Den Hebesatz finden Sie auf der Website Ihrer Gemeinde, beim Gewerbeamt oder auf der IHK-Website.',
+      },
+      {
+        frage: 'Wird die Gewerbesteuer auf die Einkommensteuer angerechnet?',
+        antwort: 'Ja, aber nur bei Einzelunternehmern und Personengesellschaftern. Die Anrechnung beträgt das 4,0-Fache des Steuermessbetrags (§ 35 EStG). Bei Hebesätzen bis 400 % wird die Gewerbesteuer dadurch praktisch neutralisiert. Kapitalgesellschaften haben keine ESt-Anrechnung.',
+      },
+      {
+        frage: 'Zahlen Freiberufler Gewerbesteuer?',
+        antwort: 'Nein, Freiberufler (§ 18 EStG) sind von der Gewerbesteuer befreit. Dazu gehören u. a. Ärzte, Rechtsanwälte, Steuerberater, Ingenieure, Architekten, Journalisten und Künstler. Die Abgrenzung zum Gewerbe ist aber nicht immer eindeutig — im Zweifel prüft das Finanzamt.',
+      },
+      {
+        frage: 'Wie hoch ist der durchschnittliche Hebesatz in Deutschland?',
+        antwort: 'Der bundesweite Durchschnitt liegt bei etwa 400 %. In Großstädten wie München (490 %), Frankfurt (460 %) oder Berlin (410 %) ist er höher. Ländliche Gemeinden liegen oft bei 300–350 %. Einige kleine Gemeinden bieten den Mindesthebesatz von 200 %.',
+      },
+    ],
+  },
 ];

@@ -158,6 +158,8 @@ import SteuerprogressionsRechner from '@/components/rechner/SteuerprogressionsRe
 import BudgetRechner from '@/components/rechner/BudgetRechner';
 import SpendenRechner from '@/components/rechner/SpendenRechner';
 import NebenjobRechner from '@/components/rechner/NebenjobRechner';
+import SchenkungssteuerRechner from '@/components/rechner/SchenkungssteuerRechner';
+import GewerbesteuerRechner from '@/components/rechner/GewerbesteuerRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -328,6 +330,8 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'budget-rechner': BudgetRechner,
   'spenden-rechner': SpendenRechner,
   'nebenjob-rechner': NebenjobRechner,
+  'schenkungssteuer-rechner': SchenkungssteuerRechner,
+  'gewerbesteuer-rechner': GewerbesteuerRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
