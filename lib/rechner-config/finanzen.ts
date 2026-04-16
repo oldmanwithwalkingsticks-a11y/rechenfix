@@ -2446,4 +2446,70 @@ Bündeln Sie mehrere kleinere Spenden in einem Jahr statt sie zu verteilen. Durc
       },
     ],
   },
+  {
+    slug: 'nebenjob-rechner',
+    titel: 'Nebenjob-Rechner',
+    beschreibung: 'Nebenjob-Steuer berechnen: Auswirkung eines Nebenjobs auf Steuern und Sozialversicherung neben dem Hauptjob.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Nebenjob-Rechner 2026 — Steuern & Netto bei Nebenjob | Rechenfix',
+    metaDescription: 'Nebenjob-Steuer berechnen: Netto-Zuwachs durch Minijob, Steuerkarte oder selbstständigen Nebenjob ermitteln — kostenlos mit KI-Erklärung.',
+    keywords: ['nebenjob rechner', 'nebenjob steuer', 'nebenjob steuern', 'minijob neben hauptjob', 'steuerklasse 6', 'nebenverdienst steuer', 'nebenjob netto', 'zweiter job steuer', 'nebeneinkünfte steuer'],
+    icon: '💼',
+    formel: 'Netto-Zuwachs = Nebenjob-Brutto − LSt − Soli − KiSt − SV | Steuerbelastung = Abzüge / Brutto × 100',
+    beispiel: 'Hauptjob 3.500 € brutto, Minijob 450 €: Netto-Zuwachs 450 €/Monat (steuerfrei). Steuerkarte: Netto-Zuwachs ca. 250 €/Monat nach Abzügen.',
+    erklaerung: `**Nebenjob und Steuern — was bleibt wirklich netto?**
+
+Viele Arbeitnehmer verdienen sich mit einem Nebenjob etwas dazu. Doch wie viel kommt tatsächlich auf dem Konto an? Das hängt entscheidend von der Art des Nebenjobs ab: Ein Minijob ist steuerfrei, ein Job auf Steuerkarte wird sofort besteuert, und selbstständige Nebeneinkünfte erhöhen den Steuersatz auf das Gesamteinkommen.
+
+Unser Nebenjob-Rechner zeigt Ihnen den Netto-Zuwachs für alle drei Varianten und hilft Ihnen, die beste Option zu wählen.
+
+**Variante 1: Minijob (bis 603 €/Monat)**
+
+Der Minijob ist die einfachste Form des Nebenverdiensts. Seit 2024 liegt die Grenze bei 603 € monatlich (7.236 € jährlich, gekoppelt an den Mindestlohn). Für Sie als Arbeitnehmer fallen keine Steuern und keine Sozialversicherungsbeiträge an — der Arbeitgeber zahlt pauschal 2 % Lohnsteuer und Sozialabgaben. Ihr Netto entspricht dem Brutto.
+
+Einzige Ausnahme: Die Rentenversicherung. Standardmäßig sind Minijobber rentenversicherungspflichtig (Eigenanteil 3,6 % des Verdienstes). Sie können sich davon befreien lassen — dann entfallen auch die minimalen Rentenansprüche aus dem Minijob.
+
+**Variante 2: Nebenjob auf Steuerkarte (Steuerklasse VI)**
+
+Verdienen Sie mehr als 603 € oder haben bereits einen Minijob, wird der zweite Job mit Steuerklasse VI abgerechnet. Das bedeutet: kein Grundfreibetrag, kein Arbeitnehmer-Pauschbetrag — Lohnsteuer fällt ab dem ersten Euro an. Die effektive Steuerbelastung liegt typischerweise bei 25–35 %.
+
+Zusätzlich werden volle Sozialversicherungsbeiträge fällig (ca. 20 % Arbeitnehmeranteil). Damit bleiben von 1.000 € Brutto-Nebenverdienst oft nur 500–600 € netto übrig.
+
+Wichtig: Bei zwei Jobs auf Steuerkarte sind Sie zur Abgabe einer Steuererklärung verpflichtet. Da die Lohnsteuer in Steuerklasse VI oft zu hoch angesetzt ist, erhalten viele Arbeitnehmer bei der Jahresveranlagung eine Erstattung.
+
+**Variante 3: Selbstständiger Nebenjob**
+
+Freelancer, Honorarkräfte oder Kleingewerbetreibende neben dem Hauptjob zahlen keine zusätzlichen Sozialversicherungsbeiträge — die SV-Pflicht besteht nur im Hauptjob. Die Nebeneinkünfte werden aber zum Hauptjob-Einkommen addiert und unterliegen dem (dann höheren) persönlichen Steuersatz.
+
+Sonderregel: Nebeneinkünfte bis 410 €/Jahr (Härteausgleich) bleiben steuerfrei. Darüber hinaus wird die Differenz zwischen ESt mit und ohne Nebeneinkünfte fällig — zahlbar als Nachzahlung mit der Steuererklärung.
+
+Als Kleinunternehmer (Umsatz unter 25.000 €/Jahr) müssen Sie keine Umsatzsteuer ausweisen. Eine EÜR (Einnahmen-Überschuss-Rechnung) am Jahresende genügt für das Finanzamt.
+
+**Welche Variante ist die beste?**
+
+Für die meisten Arbeitnehmer ist der Minijob die attraktivste Option — 100 % netto bei null Bürokratie. Wer mehr verdienen möchte, sollte prüfen, ob ein selbstständiger Nebenjob günstiger ist als Steuerklasse VI: Durch den Wegfall der Sozialversicherung bleibt trotz höherem Steuersatz oft mehr übrig.`,
+    faq: [
+      {
+        frage: 'Wie viel darf ich im Nebenjob verdienen, ohne Steuern zu zahlen?',
+        antwort: 'Im Minijob bis 603 €/Monat (2026) zahlen Sie keine Steuern und keine Sozialversicherungsbeiträge. Bei selbstständigen Nebeneinkünften bleiben bis 410 €/Jahr steuerfrei (Härteausgleich). Auf Steuerkarte (Steuerklasse VI) fällt ab dem ersten Euro Lohnsteuer an.',
+      },
+      {
+        frage: 'Muss ich bei einem Nebenjob eine Steuererklärung abgeben?',
+        antwort: 'Beim Minijob: Nein. Bei einem Job auf Steuerkarte (Steuerklasse VI) oder selbstständigen Nebeneinkünften über 410 €/Jahr: Ja, die Steuererklärung ist Pflicht. Bei Steuerklasse VI lohnt sich die Erklärung meist, weil oft eine Erstattung herauskommt.',
+      },
+      {
+        frage: 'Was ist besser: Minijob oder Nebenjob auf Steuerkarte?',
+        antwort: 'Bis 603 € ist der Minijob immer besser — Sie erhalten 100 % netto. Darüber hinaus ist die Steuerkarte alternativlos. Prüfen Sie aber, ob ein selbstständiger Nebenjob möglich ist — durch den Wegfall der SV-Beiträge bleibt oft mehr netto.',
+      },
+      {
+        frage: 'Zahle ich im Nebenjob Sozialversicherung?',
+        antwort: 'Im Minijob: Nein (nur optionale Rentenversicherung, 3,6 %). Auf Steuerkarte: Ja, volle SV-Beiträge (ca. 20 % AN-Anteil). Selbstständig: Nein, wenn Sie hauptberuflich angestellt sind — die SV-Pflicht besteht nur im Hauptjob.',
+      },
+      {
+        frage: 'Kann mein Arbeitgeber den Nebenjob verbieten?',
+        antwort: 'Grundsätzlich nein — Nebentätigkeiten sind erlaubt, solange sie den Hauptjob nicht beeinträchtigen. Viele Arbeitsverträge enthalten aber eine Anzeigepflicht: Sie müssen Ihren Arbeitgeber über den Nebenjob informieren. Ein Verbot ist nur bei direkter Konkurrenz oder Arbeitszeitverstößen zulässig.',
+      },
+    ],
+  },
 ];

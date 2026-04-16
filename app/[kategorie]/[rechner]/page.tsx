@@ -157,6 +157,7 @@ import NotenInternationalRechner from '@/components/rechner/NotenInternationalRe
 import SteuerprogressionsRechner from '@/components/rechner/SteuerprogressionsRechner';
 import BudgetRechner from '@/components/rechner/BudgetRechner';
 import SpendenRechner from '@/components/rechner/SpendenRechner';
+import NebenjobRechner from '@/components/rechner/NebenjobRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -326,6 +327,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'steuerprogression-rechner': SteuerprogressionsRechner,
   'budget-rechner': BudgetRechner,
   'spenden-rechner': SpendenRechner,
+  'nebenjob-rechner': NebenjobRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
