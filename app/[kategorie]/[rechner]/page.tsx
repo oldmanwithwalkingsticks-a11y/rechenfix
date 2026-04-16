@@ -155,6 +155,8 @@ import EstrichRechner from '@/components/rechner/EstrichRechner';
 import BalkonSolarRechner from '@/components/rechner/BalkonSolarRechner';
 import NotenInternationalRechner from '@/components/rechner/NotenInternationalRechner';
 import SteuerprogressionsRechner from '@/components/rechner/SteuerprogressionsRechner';
+import BudgetRechner from '@/components/rechner/BudgetRechner';
+import SpendenRechner from '@/components/rechner/SpendenRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -322,6 +324,8 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'balkon-solar-rechner': BalkonSolarRechner,
   'noten-international': NotenInternationalRechner,
   'steuerprogression-rechner': SteuerprogressionsRechner,
+  'budget-rechner': BudgetRechner,
+  'spenden-rechner': SpendenRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

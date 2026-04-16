@@ -46,18 +46,19 @@ export function berechneBudget(
   const einnahmenGesamt = nettoEinkommen + weitereEinnahmen;
 
   // Build categorized expense list
-  const kategorien: AusgabenKategorie[] = [
-    { name: 'Miete & Nebenkosten', betrag: miete, typ: 'beduerfnis' },
-    { name: 'Strom/Gas', betrag: stromGas, typ: 'beduerfnis' },
-    { name: 'Versicherungen', betrag: versicherungen, typ: 'beduerfnis' },
-    { name: 'Lebensmittel', betrag: lebensmittel, typ: 'beduerfnis' },
-    { name: 'Mobilität (Auto/ÖPNV)', betrag: mobilitaet, typ: 'beduerfnis' },
-    { name: 'Internet/Handy', betrag: internetHandy, typ: 'beduerfnis' },
-    { name: 'Abos/Streaming', betrag: abosStreaming, typ: 'wunsch' },
-    { name: 'Freizeit/Ausgehen', betrag: freizeitAusgehen, typ: 'wunsch' },
-    { name: 'Kleidung', betrag: kleidung, typ: 'wunsch' },
-    { name: 'Sonstiges', betrag: sonstiges, typ: 'wunsch' },
-  ].filter(k => k.betrag > 0);
+  const alleKategorien: AusgabenKategorie[] = [
+    { name: 'Miete & Nebenkosten', betrag: miete, typ: 'beduerfnis' as const },
+    { name: 'Strom/Gas', betrag: stromGas, typ: 'beduerfnis' as const },
+    { name: 'Versicherungen', betrag: versicherungen, typ: 'beduerfnis' as const },
+    { name: 'Lebensmittel', betrag: lebensmittel, typ: 'beduerfnis' as const },
+    { name: 'Mobilität (Auto/ÖPNV)', betrag: mobilitaet, typ: 'beduerfnis' as const },
+    { name: 'Internet/Handy', betrag: internetHandy, typ: 'beduerfnis' as const },
+    { name: 'Abos/Streaming', betrag: abosStreaming, typ: 'wunsch' as const },
+    { name: 'Freizeit/Ausgehen', betrag: freizeitAusgehen, typ: 'wunsch' as const },
+    { name: 'Kleidung', betrag: kleidung, typ: 'wunsch' as const },
+    { name: 'Sonstiges', betrag: sonstiges, typ: 'wunsch' as const },
+  ];
+  const kategorien = alleKategorien.filter(k => k.betrag > 0);
 
   const ausgabenGesamt = kategorien.reduce((sum, k) => sum + k.betrag, 0);
   const ueberschuss = einnahmenGesamt - ausgabenGesamt;

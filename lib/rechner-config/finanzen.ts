@@ -2384,4 +2384,66 @@ Der Grenzsteuersatz zeigt, wie stark eine Gehaltserhöhung besteuert wird. Liegt
       },
     ],
   },
+  {
+    slug: 'spenden-rechner',
+    titel: 'Spenden-Rechner',
+    beschreibung: 'Steuerersparnis durch Spenden berechnen: Wie viel bekommen Sie von Ihrer Spende über die Steuererklärung zurück?',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Spenden-Rechner 2026 — Steuerersparnis durch Spenden | Rechenfix',
+    metaDescription: 'Steuerersparnis durch Spenden berechnen: effektive Kosten, Förderquote und Grenzsteuersatz ermitteln — kostenlos mit KI-Erklärung.',
+    keywords: ['spenden rechner', 'spenden steuerersparnis', 'spenden absetzen', 'spendenquittung', 'sonderausgabenabzug', 'spenden steuer', 'spenden von der steuer absetzen', 'steuerersparnis spende', 'spenden steuerlich absetzbar'],
+    icon: '🎁',
+    formel: 'Steuerersparnis = ESt(zvE) − ESt(zvE − Spende) + Soli + KiSt | Effektive Kosten = Spende − Ersparnis | Förderquote = Ersparnis / Spende × 100',
+    beispiel: '500 € Spende bei 50.000 € zvE: Grenzsteuersatz ca. 33 %, ESt-Ersparnis ca. 165 €, effektive Kosten ca. 335 €, Förderquote ca. 33 %.',
+    erklaerung: `**Spenden von der Steuer absetzen — so funktioniert es**
+
+Spenden an gemeinnützige Organisationen können in Deutschland als Sonderausgaben von der Steuer abgesetzt werden. Das bedeutet: Sie verringern Ihr zu versteuerndes Einkommen und zahlen weniger Einkommensteuer. Wie viel Sie tatsächlich sparen, hängt von Ihrem persönlichen Grenzsteuersatz ab — je höher das Einkommen, desto größer die Steuerersparnis.
+
+Unser Spenden-Rechner berechnet Ihre individuelle Steuerersparnis, die effektiven Kosten Ihrer Spende und Ihre persönliche Förderquote.
+
+**Wie wird die Steuerersparnis berechnet?**
+
+Die Steuerersparnis entspricht der Differenz zwischen der Einkommensteuer ohne und mit Spendenabzug. Bei einem zu versteuernden Einkommen von 50.000 € und einer Spende von 500 € reduziert sich das zvE auf 49.500 €. Die Steuerdifferenz ergibt die ESt-Ersparnis. Zusätzlich sparen Sie den Solidaritätszuschlag (5,5 % der ESt) und ggf. Kirchensteuer (8–9 %).
+
+Der Grenzsteuersatz zeigt den Prozentsatz, den Sie auf den letzten verdienten Euro zahlen. Er bestimmt maßgeblich Ihre Spendenersparnis: Bei einem Grenzsteuersatz von 42 % kosten Sie 100 € Spende effektiv nur 58 €.
+
+**Die 20-Prozent-Grenze**
+
+Spenden sind bis zu 20 % des Gesamtbetrags der Einkünfte als Sonderausgaben absetzbar. Bei 50.000 € Einkommen können Sie also bis zu 10.000 € absetzen. Darüber hinausgehende Beträge werden als Spendenvortrag ins Folgejahr übernommen — sie gehen nicht verloren.
+
+**Spendenquittung und Nachweise**
+
+Für den steuerlichen Abzug benötigen Sie eine Zuwendungsbestätigung (Spendenquittung) der empfangenden Organisation. Vereinfachung: Bei Spenden bis 300 € reicht der Kontoauszug oder Überweisungsbeleg als Nachweis — eine formelle Spendenquittung ist dann nicht nötig. Das gilt auch für Spenden an politische Parteien und Katastrophenhilfe.
+
+**Parteispenden: Zusätzlicher Steuerabzug**
+
+Spenden an politische Parteien werden besonders gefördert: Die ersten 1.650 € (3.300 € bei Zusammenveranlagung) werden direkt von der Steuerschuld abgezogen (§ 34g EStG). Darüber hinausgehende Beträge können als Sonderausgaben abgesetzt werden. Dieser Rechner berechnet den allgemeinen Sonderausgabenabzug — für Parteispenden gelten die erweiterten Regelungen.
+
+**Tipps zur Spendenoptimierung**
+
+Bündeln Sie mehrere kleinere Spenden in einem Jahr statt sie zu verteilen. Durch den progressiven Steuertarif kann eine größere Einzelspende eine höhere Steuerersparnis bringen als viele kleine über mehrere Jahre. Achten Sie darauf, dass die Organisation als gemeinnützig anerkannt ist — nur dann ist der Abzug möglich.`,
+    faq: [
+      {
+        frage: 'Wie viel Steuer spare ich durch eine Spende?',
+        antwort: 'Die Ersparnis hängt von Ihrem Grenzsteuersatz ab. Bei einem Grenzsteuersatz von 33 % (ca. 50.000 € Einkommen) sparen Sie bei 500 € Spende rund 165 € ESt plus Soli und ggf. Kirchensteuer. Die effektiven Kosten der Spende betragen dann nur ca. 335 €.',
+      },
+      {
+        frage: 'Wie viel kann ich maximal als Spende absetzen?',
+        antwort: 'Bis zu 20 % des Gesamtbetrags der Einkünfte. Bei 50.000 € Einkommen sind das 10.000 €. Darüber hinausgehende Beträge werden als Spendenvortrag ins Folgejahr übernommen.',
+      },
+      {
+        frage: 'Brauche ich immer eine Spendenquittung?',
+        antwort: 'Bei Spenden bis 300 € reicht der Kontoauszug oder Überweisungsbeleg. Ab 300 € benötigen Sie eine formelle Zuwendungsbestätigung der empfangenden Organisation. Diese wird oft automatisch per Post oder E-Mail zugeschickt.',
+      },
+      {
+        frage: 'Kann ich Sachspenden von der Steuer absetzen?',
+        antwort: 'Ja, Sachspenden sind absetzbar. Der Wert richtet sich nach dem Zeitwert (Marktwert zum Zeitpunkt der Spende). Bei gebrauchten Gegenständen ist das oft der Gebrauchtpreis auf gängigen Plattformen. Die empfangende Organisation stellt eine Zuwendungsbestätigung mit dem geschätzten Wert aus.',
+      },
+      {
+        frage: 'Werden Spenden bei der Steuererklärung automatisch berücksichtigt?',
+        antwort: 'Nein, Sie müssen Ihre Spenden in der Steuererklärung unter Sonderausgaben angeben. Viele Organisationen übermitteln die Daten elektronisch an das Finanzamt — prüfen Sie trotzdem, ob die Beträge korrekt übernommen wurden.',
+      },
+    ],
+  },
 ];

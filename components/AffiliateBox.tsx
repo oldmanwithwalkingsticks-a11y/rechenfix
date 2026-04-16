@@ -110,6 +110,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'erbschaft': 'Erbschaft in der Steuererklärung korrekt angeben — WISO Steuer führt Sie durch alle Angaben.',
     'gehaltserhoehung': 'Bei Gehaltssprung steigt oft die Steuerlast — WISO Steuer holt das Maximum aus Ihrer Steuererklärung.',
     'steuerprogression': 'WISO Steuer berechnet Ihren persönlichen Steuersatz und holt das Maximum heraus.',
+    'spenden': 'Spenden korrekt in der Steuererklärung angeben — WISO Steuer führt Sie durch den Sonderausgabenabzug.',
     'nettolohn': 'Sachbezüge und Gehaltsextras korrekt in der Steuererklärung angeben — WISO Steuer hilft.',
   },
   smartsteuer: {

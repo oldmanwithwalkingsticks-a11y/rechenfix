@@ -1557,4 +1557,67 @@ Der rechnerische Zeitwert weicht vom tatsächlichen Marktwert (was jemand bereit
       },
     ],
   },
+  {
+    slug: 'budget-rechner',
+    titel: 'Budget-Rechner',
+    beschreibung: 'Haushaltsbudget berechnen: Einnahmen vs. Ausgaben aufschlüsseln, Sparpotenzial identifizieren und 50/30/20-Regel prüfen.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'Budget-Rechner 2026 — Haushaltsbuch & 50/30/20-Regel | Rechenfix',
+    metaDescription: 'Haushaltsbudget kostenlos berechnen: Einnahmen und Ausgaben aufschlüsseln, Sparquote ermitteln und 50/30/20-Regel prüfen — mit KI-Erklärung.',
+    keywords: ['budget rechner', 'haushaltsbuch', '50 30 20 regel', 'haushaltsbudget', 'ausgaben berechnen', 'sparquote', 'budgetplaner', 'haushaltsbuch rechner', 'ausgaben aufschlüsseln'],
+    icon: '💰',
+    formel: 'Überschuss = Einnahmen − Ausgaben | Sparquote = Überschuss / Einnahmen × 100 | 50/30/20: Bedürfnisse 50 %, Wünsche 30 %, Sparen 20 %',
+    beispiel: '2.500 € Netto, 1.845 € Ausgaben → 655 € Überschuss, 26,2 % Sparquote. Bedürfnisse: 1.480 € (Soll: 1.250 €), Wünsche: 365 € (Soll: 750 €).',
+    erklaerung: `**Was ist ein Haushaltsbudget und warum ist es wichtig?**
+
+Ein Haushaltsbudget ist die Gegenüberstellung aller Einnahmen und Ausgaben eines Haushalts. Es zeigt, wohin Ihr Geld fließt, ob Sie im Plus oder Minus sind und wo Sparpotenzial liegt. Wer sein Budget kennt, trifft bessere finanzielle Entscheidungen — vom täglichen Einkauf bis zur langfristigen Altersvorsorge.
+
+Unser Budget-Rechner schlüsselt Ihre monatlichen Ausgaben in zehn Kategorien auf, berechnet Ihren Überschuss und prüft, ob Ihr Budget der bewährten 50/30/20-Regel entspricht.
+
+**Die 50/30/20-Regel nach Elizabeth Warren**
+
+Die 50/30/20-Regel ist eine einfache Faustregel für die Budgetverteilung:
+- **50 % für Bedürfnisse**: Miete, Nebenkosten, Strom/Gas, Versicherungen, Lebensmittel, Mobilität, Internet/Handy — alles, was lebensnotwendig ist.
+- **30 % für Wünsche**: Abos, Streaming, Freizeit, Ausgehen, Kleidung, Sonstiges — alles, was das Leben angenehmer macht, aber nicht überlebensnotwendig ist.
+- **20 % für Sparen**: Was übrig bleibt, sollte gespart oder investiert werden — für den Notgroschen, die Altersvorsorge oder größere Anschaffungen.
+
+Die Regel wurde von der US-Senatorin Elizabeth Warren in ihrem Buch „All Your Worth" populär gemacht. Sie ist kein starres Gesetz, sondern ein Orientierungsrahmen. In deutschen Großstädten mit hohen Mieten kann der Bedürfnisanteil deutlich über 50 % liegen — dann müssen die anderen Bereiche angepasst werden.
+
+**Typische Ausgabenverteilung in Deutschland**
+
+Laut Statistischem Bundesamt gibt ein durchschnittlicher deutscher Haushalt rund 2.700 € pro Monat aus. Die größten Posten sind Wohnen (36 %), Ernährung (15 %), Mobilität (14 %) und Freizeit (11 %). Versicherungen und Vorsorge machen weitere 11 % aus.
+
+Die Miete ist in den meisten Haushalten der größte Einzelposten. Als Faustregel gilt: Die Warmmiete sollte nicht mehr als ein Drittel des Nettoeinkommens betragen. In teuren Städten wie München oder Frankfurt liegt der Anteil oft deutlich höher.
+
+**Sparquote — wie viel sollte man sparen?**
+
+Die durchschnittliche Sparquote in Deutschland lag 2024 bei rund 11 %. Finanzexperten empfehlen mindestens 15–20 % für eine solide Altersvorsorge. Der erste Schritt ist ein Notgroschen von 3–6 Monatsgehältern auf einem Tagesgeldkonto. Danach können Sie in ETFs, Festgeld oder andere Anlageformen investieren.
+
+**Tipps zum Budget optimieren**
+
+Wenn Ihre Bedürfnisse über 50 % liegen, prüfen Sie zunächst die größten Posten: Lohnt ein Umzug in eine günstigere Wohnung? Können Sie den Stromanbieter wechseln? Gibt es eine günstigere Versicherung? Wenn Ihre Wünsche über 30 % liegen, schauen Sie auf Abos und Streaming-Dienste — oft laufen vergessene Abonnements weiter.`,
+    faq: [
+      {
+        frage: 'Was ist die 50/30/20-Regel?',
+        antwort: 'Die 50/30/20-Regel empfiehlt, 50 % des Nettoeinkommens für Bedürfnisse (Miete, Essen, Versicherungen), 30 % für Wünsche (Freizeit, Abos, Kleidung) und 20 % zum Sparen auszugeben. Sie wurde von Elizabeth Warren populär gemacht und dient als einfacher Orientierungsrahmen.',
+      },
+      {
+        frage: 'Wie hoch sollte die Sparquote sein?',
+        antwort: 'Finanzexperten empfehlen mindestens 15–20 % des Nettoeinkommens. Der Durchschnitt in Deutschland liegt bei rund 11 %. Der erste Schritt ist ein Notgroschen von 3–6 Monatsgehältern. Danach können Sie in ETFs oder andere Anlageformen investieren.',
+      },
+      {
+        frage: 'Wie viel sollte die Miete vom Netto betragen?',
+        antwort: 'Als Faustregel gilt: Die Warmmiete sollte nicht mehr als ein Drittel (33 %) des Nettoeinkommens betragen. Bei 2.500 € Netto wären das maximal 833 €. In teuren Großstädten liegt der Anteil oft bei 40 % oder mehr.',
+      },
+      {
+        frage: 'Was zählt zu Bedürfnissen und was zu Wünschen?',
+        antwort: 'Bedürfnisse sind lebensnotwendige Ausgaben: Miete, Nebenkosten, Strom, Versicherungen, Lebensmittel, Mobilität und Internet. Wünsche sind alles, was das Leben angenehmer macht, aber nicht überlebensnotwendig ist: Streaming, Restaurantbesuche, neue Kleidung, Hobbys.',
+      },
+      {
+        frage: 'Was mache ich bei einem Haushaltsdefizit?',
+        antwort: 'Prüfen Sie zuerst die großen Posten: Miete (Umzug?), Versicherungen (Vergleich?), Mobilität (ÖPNV statt Auto?). Dann die kleinen: Abos kündigen, Einkäufe mit Liste planen, Stromanbieter wechseln. Ein Haushaltsbuch über 3 Monate zeigt, wo versteckte Ausgaben liegen.',
+      },
+    ],
+  },
 ];
