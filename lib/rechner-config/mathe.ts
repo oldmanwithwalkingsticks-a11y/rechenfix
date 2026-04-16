@@ -993,4 +993,142 @@ Auch außerhalb der Schule spielen Gleichungen eine Rolle, wenn man es nicht sof
       },
     ],
   },
+  {
+    slug: 'primzahl-rechner',
+    titel: 'Primzahl-Rechner',
+    beschreibung: 'Primzahlen prüfen und finden: Ist eine Zahl prim? Primfaktorzerlegung und Primzahlen in einem Bereich.',
+    kategorie: 'Mathe & Schule',
+    kategorieSlug: 'mathe',
+    metaTitle: 'Primzahl-Rechner 2026 — Primzahlen prüfen & Faktorzerlegung | Rechenfix',
+    metaDescription: 'Primzahl-Rechner: Primzahl-Check, Primfaktorzerlegung mit Rechenweg und Primzahlen im Bereich kostenlos berechnen. Für Schule und Studium.',
+    keywords: ['primzahl rechner', 'primzahlen', 'primfaktorzerlegung', 'ist primzahl', 'primzahl prüfen', 'primzahlen liste', 'sieb des eratosthenes', 'faktorzerlegung'],
+    icon: '🔢',
+    formel: 'Primzahl-Check: Teste Teilbarkeit bis √n | Primfaktorzerlegung: Wiederholte Division durch kleinste Primteiler | Bereich: Sieb des Eratosthenes',
+    beispiel: 'Beispiel: 360 = 2³ × 3² × 5 (Primfaktorzerlegung) | 97 ist eine Primzahl (kein Teiler bis √97 ≈ 9) | Zwischen 1 und 100 gibt es 25 Primzahlen',
+    erklaerung: `**Primzahlen — Grundbausteine der Mathematik**
+
+Eine Primzahl ist eine natürliche Zahl größer als 1, die nur durch 1 und sich selbst teilbar ist. Die ersten Primzahlen lauten: 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47 … Die 2 ist die einzige gerade Primzahl — alle anderen geraden Zahlen sind durch 2 teilbar. Primzahlen sind die Grundbausteine der natürlichen Zahlen: Jede natürliche Zahl größer als 1 lässt sich eindeutig als Produkt von Primzahlen darstellen (Fundamentalsatz der Arithmetik).
+
+**Primzahl-Check — ist eine Zahl prim?**
+
+Um zu prüfen, ob eine Zahl n prim ist, muss man nur testen, ob sie durch Primzahlen bis zur Wurzel von n teilbar ist. Wenn kein Teiler gefunden wird, ist n prim. Beispiel: Ist 97 prim? √97 ≈ 9,85. Wir testen: 97 ÷ 2 = 48,5 (nicht ganzzahlig), 97 ÷ 3 = 32,3…, 97 ÷ 5 = 19,4, 97 ÷ 7 = 13,9. Kein Teiler gefunden — 97 ist eine Primzahl.
+
+**Primfaktorzerlegung — so funktioniert's**
+
+Bei der Primfaktorzerlegung wird eine Zahl in ihre Primfaktoren zerlegt. Man teilt wiederholt durch den kleinsten Primteiler, bis 1 übrig bleibt. Beispiel: 360 ÷ 2 = 180, 180 ÷ 2 = 90, 90 ÷ 2 = 45, 45 ÷ 3 = 15, 15 ÷ 3 = 5, 5 ist prim. Also: 360 = 2³ × 3² × 5. Die Primfaktorzerlegung ist eindeutig — es gibt nur eine Möglichkeit, eine Zahl in Primfaktoren zu zerlegen (bis auf die Reihenfolge).
+
+**Anwendungen der Primfaktorzerlegung**
+
+Die Primfaktorzerlegung ist kein reines Schulthema — sie hat praktische Anwendungen:
+- **ggT und kgV berechnen:** Der größte gemeinsame Teiler (ggT) ergibt sich aus den gemeinsamen Primfaktoren mit dem jeweils kleinsten Exponenten. Das kleinste gemeinsame Vielfache (kgV) aus allen Primfaktoren mit dem jeweils größten Exponenten.
+- **Brüche kürzen:** Den Zähler und Nenner durch ihren ggT teilen — dafür braucht man die Primfaktorzerlegung.
+- **Kryptographie:** Die RSA-Verschlüsselung basiert darauf, dass es extrem schwierig ist, sehr große Zahlen (mehrere hundert Stellen) in ihre Primfaktoren zu zerlegen.
+
+**Sieb des Eratosthenes — Primzahlen in einem Bereich finden**
+
+Das Sieb des Eratosthenes ist ein antiker Algorithmus (ca. 240 v. Chr.), um alle Primzahlen bis zu einer Obergrenze effizient zu finden. Man beginnt mit 2 und streicht alle Vielfachen von 2, dann alle Vielfachen von 3, dann von 5 und so weiter. Die übrig gebliebenen Zahlen sind die Primzahlen. Unser Rechner nutzt dieses Verfahren für den Modus „Primzahlen im Bereich".
+
+**Bekannte Fakten über Primzahlen**
+
+- Es gibt unendlich viele Primzahlen (bewiesen von Euklid, ca. 300 v. Chr.).
+- Zwischen 1 und 100 gibt es 25 Primzahlen, zwischen 1 und 1.000 sind es 168.
+- Die größte bekannte Primzahl (Stand 2024) hat über 41 Millionen Stellen.
+- Primzahlen werden mit zunehmender Größe seltener, es gibt aber keine größte Lücke — nach dem Satz von Bertrand gibt es zwischen n und 2n immer mindestens eine Primzahl.
+- Primzahlzwillinge sind Paare wie (11, 13) oder (29, 31), bei denen der Abstand genau 2 beträgt. Ob es unendlich viele gibt, ist ein offenes Problem.`,
+    faq: [
+      {
+        frage: 'Wie erkenne ich, ob eine Zahl eine Primzahl ist?',
+        antwort: 'Prüfen Sie, ob die Zahl durch eine der Primzahlen bis zu ihrer Quadratwurzel teilbar ist. Wenn kein Teiler gefunden wird, ist sie prim. Beispiel: Bei 97 prüft man die Teiler 2, 3, 5, 7 (da √97 ≈ 9,85). Keiner teilt 97 ganzzahlig, also ist 97 eine Primzahl.',
+      },
+      {
+        frage: 'Was ist eine Primfaktorzerlegung?',
+        antwort: 'Die Primfaktorzerlegung stellt eine natürliche Zahl als Produkt von Primzahlen dar. Beispiel: 360 = 2³ × 3² × 5. Man teilt die Zahl wiederholt durch den kleinsten Primteiler, bis 1 übrig bleibt. Die Zerlegung ist eindeutig (Fundamentalsatz der Arithmetik).',
+      },
+      {
+        frage: 'Ist 1 eine Primzahl?',
+        antwort: 'Nein. Per Definition ist eine Primzahl eine natürliche Zahl größer als 1, die nur durch 1 und sich selbst teilbar ist. Die 1 wurde bewusst ausgeschlossen, weil sonst die Eindeutigkeit der Primfaktorzerlegung verloren ginge (man könnte beliebig viele Einsen hinzufügen).',
+      },
+      {
+        frage: 'Wie viele Primzahlen gibt es zwischen 1 und 100?',
+        antwort: 'Zwischen 1 und 100 gibt es genau 25 Primzahlen: 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89 und 97. Mit dem Modus „Primzahlen im Bereich" können Sie beliebige Bereiche bis 100.000 durchsuchen.',
+      },
+      {
+        frage: 'Wofür braucht man Primfaktorzerlegung in der Schule?',
+        antwort: 'Hauptsächlich für zwei Aufgabentypen: (1) ggT und kgV berechnen — z. B. um Brüche auf den gemeinsamen Nenner zu bringen oder zu kürzen. (2) Teilbarkeitsaussagen beweisen. Auch in der Oberstufe (Zahlentheorie) und im Studium (Kryptographie, Algebra) sind Primzahlen zentral.',
+      },
+      {
+        frage: 'Was ist das Sieb des Eratosthenes?',
+        antwort: 'Ein Algorithmus aus der Antike (ca. 240 v. Chr.), um alle Primzahlen bis zu einer Obergrenze zu finden. Man streicht nacheinander alle Vielfachen von 2, 3, 5, 7 usw. Die übrig gebliebenen Zahlen sind prim. Es ist effizient und wird auch heute noch in Varianten für die Primzahlsuche eingesetzt.',
+      },
+    ],
+  },
+  {
+    slug: 'quersumme-rechner',
+    titel: 'Quersumme-Rechner',
+    beschreibung: 'Quersumme berechnen: Einstellige und alternierende Quersumme — mit Teilbarkeitsregeln.',
+    kategorie: 'Mathe & Schule',
+    kategorieSlug: 'mathe',
+    metaTitle: 'Quersumme-Rechner 2026 — Quersumme & Teilbarkeit berechnen | Rechenfix',
+    metaDescription: 'Quersumme-Rechner: Quersumme, iterierte und alternierende Quersumme berechnen — mit Teilbarkeitscheck für 3, 9 und 11. Kostenlos.',
+    keywords: ['quersumme rechner', 'quersumme berechnen', 'iterierte quersumme', 'alternierende quersumme', 'teilbarkeitsregeln', 'quersummenregel', 'ziffernquersumme'],
+    icon: '➕',
+    formel: 'Quersumme = Summe aller Ziffern | Iteriert: QS wiederholen bis einstellig | Alternierend: Ziffern abwechselnd +/−',
+    beispiel: 'Beispiel: QS(123456789) = 1+2+3+4+5+6+7+8+9 = 45, iteriert → 9, alternierend: 1−2+3−4+5−6+7−8+9 = 5. Teilbar durch 9 (QS 45), aber nicht durch 11.',
+    erklaerung: `**Quersumme — Definition und Berechnung**
+
+Die Quersumme einer Zahl ist die Summe aller ihrer Ziffern. Für 123.456.789 ergibt sich: 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 = 45. Die Quersumme ist eines der ältesten und nützlichsten Werkzeuge der Arithmetik — sie hilft beim Kopfrechnen, bei Teilbarkeitsprüfungen und als Prüfziffernverfahren.
+
+**Iterierte Quersumme (Quersumme der Quersumme)**
+
+Ist die Quersumme selbst mehrstellig, bildet man erneut die Quersumme, bis eine einstellige Zahl übrig bleibt. Für 123.456.789: QS = 45, QS(45) = 9. Die iterierte Quersumme ist immer eine Zahl zwischen 1 und 9 (für positive Zahlen) und entspricht dem Rest der Division durch 9 — außer wenn der Rest 0 ist, dann ist die iterierte Quersumme 9.
+
+**Alternierende Quersumme**
+
+Bei der alternierenden Quersumme werden die Ziffern von rechts nach links abwechselnd addiert und subtrahiert. Für 123.456.789 (von links nach rechts, mit Vorzeichen von rechts her): 1 − 2 + 3 − 4 + 5 − 6 + 7 − 8 + 9 = 5. Die alternierende Quersumme ist das Schlüsselwerkzeug für die Teilbarkeitsregel durch 11.
+
+**Teilbarkeitsregeln mit der Quersumme**
+
+Die Quersumme ermöglicht drei wichtige Teilbarkeitsprüfungen:
+- **Teilbar durch 3:** Eine Zahl ist genau dann durch 3 teilbar, wenn ihre Quersumme durch 3 teilbar ist. Beispiel: QS(123) = 6, und 6 ist durch 3 teilbar → 123 ist durch 3 teilbar (123 ÷ 3 = 41).
+- **Teilbar durch 9:** Eine Zahl ist genau dann durch 9 teilbar, wenn ihre Quersumme durch 9 teilbar ist. Beispiel: QS(729) = 18, QS(18) = 9 → durch 9 teilbar (729 ÷ 9 = 81).
+- **Teilbar durch 11:** Eine Zahl ist genau dann durch 11 teilbar, wenn ihre alternierende Quersumme durch 11 teilbar ist (auch 0 zählt). Beispiel: Alternierende QS von 918.082 = 9 − 1 + 8 − 0 + 8 − 2 = 22, und 22 ist durch 11 teilbar → 918.082 ÷ 11 = 83.462.
+
+**Warum funktionieren diese Regeln?**
+
+Der mathematische Hintergrund: 10 ≡ 1 (mod 9), also ist jede Zehnerpotenz kongruent zu 1 modulo 9. Deshalb ist eine Zahl modulo 9 gleich ihrer Quersumme modulo 9 — und die Teilbarkeit durch 3 und 9 überträgt sich. Für die 11-Regel gilt: 10 ≡ −1 (mod 11), also wechseln die Zehnerpotenzen das Vorzeichen — genau wie bei der alternierenden Quersumme.
+
+**Praktische Anwendungen**
+
+Die Quersumme wird nicht nur in der Schulmathematik verwendet:
+- **ISBN-Prüfziffer:** Die Prüfziffer von ISBN-10-Nummern basiert auf einer gewichteten Quersumme modulo 11.
+- **IBAN-Prüfung:** Bankkontonummern verwenden Quersummen-Varianten zur Fehlererkennung.
+- **Kopfrechnen:** Ob eine Rechnung stimmt, lässt sich mit der Neunerprobe (Quersummen der Operanden und des Ergebnisses vergleichen) schnell prüfen.
+- **Zahlenmystik und Numerologie:** In der Numerologie wird die iterierte Quersumme als „Wurzelzahl" bezeichnet — mathematisch hat das keine Bedeutung, aber es zeigt die kulturelle Reichweite des Konzepts.
+
+**Quersumme und Neunerprobe**
+
+Die Neunerprobe nutzt die Quersumme zur schnellen Überprüfung von Rechnungen: Wenn QS(a) × QS(b) ≡ QS(a × b) (mod 9), dann ist das Ergebnis wahrscheinlich korrekt. Die Probe erkennt nicht alle Fehler (z. B. Ziffernvertauschungen wie 18 vs. 81 haben dieselbe Quersumme), aber sie deckt die meisten Flüchtigkeitsfehler auf.`,
+    faq: [
+      {
+        frage: 'Wie berechnet man die Quersumme?',
+        antwort: 'Addieren Sie alle Ziffern der Zahl. Beispiel: Quersumme von 4.711 = 4 + 7 + 1 + 1 = 13. Für die iterierte Quersumme wiederholen: QS(13) = 4. Vorzeichen und Dezimalstellen werden ignoriert — nur die Ziffern zählen.',
+      },
+      {
+        frage: 'Was ist die alternierende Quersumme?',
+        antwort: 'Die Ziffern werden von rechts nach links abwechselnd addiert und subtrahiert. Für 12345: 1 − 2 + 3 − 4 + 5 = 3. Sie dient zur Prüfung der Teilbarkeit durch 11: Ist die alternierende Quersumme durch 11 teilbar (auch 0), dann ist die Zahl durch 11 teilbar.',
+      },
+      {
+        frage: 'Warum zeigt die Quersumme Teilbarkeit durch 3 und 9?',
+        antwort: 'Weil 10 ≡ 1 (mod 9) gilt. Jede Zehnerpotenz (10, 100, 1000 …) lässt bei Division durch 9 den Rest 1. Deshalb ist eine Zahl modulo 9 gleich der Summe ihrer Ziffern modulo 9. Da 9 = 3 × 3, gilt dasselbe für die Teilbarkeit durch 3.',
+      },
+      {
+        frage: 'Was ist die iterierte Quersumme?',
+        antwort: 'Man bildet die Quersumme so lange, bis eine einstellige Zahl (1–9) übrig bleibt. Beispiel: QS(9999) = 36, QS(36) = 9. Die iterierte Quersumme ist immer 1–9 und entspricht dem Rest bei Division durch 9 (wobei Rest 0 als 9 gezählt wird). Sie wird auch „digitale Wurzel" genannt.',
+      },
+      {
+        frage: 'Funktioniert der Rechner auch mit sehr großen Zahlen?',
+        antwort: 'Ja. Da die Quersumme nur die einzelnen Ziffern addiert, gibt es keine Obergrenze. Sie können beliebig lange Zahlen eingeben — der Rechner verarbeitet auch 100-stellige Zahlen problemlos. Die Eingabe erfolgt als Text, nicht als Zahl, daher gibt es keine Rundungsfehler.',
+      },
+    ],
+  },
 ];

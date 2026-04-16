@@ -138,6 +138,8 @@ import FliesenbedarfRechner from '@/components/rechner/FliesenbedarfRechner';
 import LaminatRechner from '@/components/rechner/LaminatRechner';
 import WhrRechner from '@/components/rechner/WhrRechner';
 import MwstRueckerstattungRechner from '@/components/rechner/MwstRueckerstattungRechner';
+import PrimzahlRechner from '@/components/rechner/PrimzahlRechner';
+import QuersummeRechner from '@/components/rechner/QuersummeRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -288,6 +290,8 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'laminat-rechner': LaminatRechner,
   'whr-rechner': WhrRechner,
   'mwst-rueckerstattung-rechner': MwstRueckerstattungRechner,
+  'primzahl-rechner': PrimzahlRechner,
+  'quersumme-rechner': QuersummeRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {
