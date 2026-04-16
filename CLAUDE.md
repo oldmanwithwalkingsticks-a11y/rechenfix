@@ -42,16 +42,16 @@
 - Vercel Hosting
 - Anthropic Claude API für "Fix erklärt"
 
-## Rechner-Bestand (105 gesamt)
+## Rechner-Bestand (125 gesamt)
 | Kategorie | Anzahl |
 |-----------|-------:|
-| Alltag    | 18 |
-| Finanzen  | 28 |
-| Gesundheit| 12 |
-| Auto      | 6  |
-| Wohnen    | 16 |
-| Mathe     | 10 |
-| Arbeit    | 15 |
+| Alltag    | 20 |
+| Finanzen  | 34 |
+| Gesundheit| 14 |
+| Auto      | 8  |
+| Wohnen    | 20 |
+| Mathe     | 12 |
+| Arbeit    | 17 |
 
 ## Config-Struktur
 - Configs liegen aufgeteilt unter `lib/rechner-config/<kategorie>.ts` (`alltag.ts`, `finanzen.ts`, `gesundheit.ts`, `auto.ts`, `wohnen.ts`, `mathe.ts`, `arbeit.ts`). Die alte Single-File `rechner-config.ts` existiert nicht mehr.
@@ -73,10 +73,51 @@
 - Schema.org vergessen (WebApplication + FAQPage + BreadcrumbList)
 - `metaDescription` > 155 Zeichen
 - Nach falscher Datei suchen: Rechner-Metadaten liegen in `lib/rechner-config/<kategorie>.ts`, nicht in `app/<kategorie>/<rechner>/page.tsx`.
+- Custom-Toggle-Buttons statt `<RadioToggleGroup>`
+- Custom-Button-Tabs statt `<TabGroup>`
+- Selects ohne sichtbares `<label>`
+- `text-gray-400` als Sekundärtextfarbe auf weißem Grund
+- Ergebnis-Updates ohne aria-live-Region
 
-## Prompt-Verzeichnis (Stand: Prompt 74)
+## Accessibility (WCAG 2.1 AA)
+
+rechenfix erfüllt WCAG 2.1 AA (Lighthouse ≥97 auf Referenzseiten, Stand April 2026).
+
+### Farb-Regeln
+- Text auf weiß: min. `text-gray-600`, NIE `-400` oder `-300`
+- Akzent-Buttons mit weißem Text: immer `-600`-Varianten (`bg-green-600`, `bg-red-600`, `bg-amber-600`, `bg-blue-600`)
+- Rote Beträge: `text-red-600` (nicht `-500`)
+
+### A11y-Komponenten
+- `<RadioToggleGroup>` (`components/ui/RadioToggleGroup.tsx`) — Werte-Auswahl mit 2–4 Optionen (native Radio-Inputs + Fieldset/Legend)
+- `<TabGroup>` (`components/ui/TabGroup.tsx`) — Panel-Umschaltung (WAI-ARIA Tabs Pattern mit Roving Tabindex)
+- Skip-Link im Root-Layout (`app/layout.tsx`, `href="#main-content"`)
+- aria-live-Ergebnis-Pattern in `ErgebnisAktionen` (debounced, 750 ms)
+- `<AiExplain>` Disclosure: `aria-expanded`, `aria-controls`, Fokus-Lenkung auf Panel + zurück zum Button
+
+### Headings
+H1 → H2 → H3 ohne Sprünge. Section-Titel sind H2, nicht H3.
+
+### Vor Deploy
+Lighthouse Accessibility ≥95 auf neuer/geänderter Seite.
+
+### Barrierefreiheitserklärung
+`/barrierefreiheit` wird gepflegt. Bei strukturellen A11y-Änderungen prüfen, ob Inhalte aktualisiert werden müssen.
+
+## Prompt-Verzeichnis (Stand: Prompt 78j)
 - **70a–70d** — Meta-Description Kürzung (Alltag, Arbeit/Auto, Finanzen, Gesundheit/Mathe) ✅
 - **71a/71b** — entfallen
 - **72** — Live-Verifikation aller 16 gekürzten Meta-Descriptions ✅
 - **73** — Meta-Description `/ueber-uns` gekürzt ✅
 - **74** — CLAUDE.md aktualisiert ✅
+- **78a** — Accessibility: Farbkontraste WCAG 2.1 AA ✅
+- **78b** — Accessibility: Heading-Hierarchie ✅
+- **78c** — Accessibility: Select-Labels (htmlFor) ✅
+- **78d** — Accessibility: Skip-Link ✅
+- **78e** — Accessibility: aria-live-Region für Live-Ergebnisse ✅
+- **78f** — Accessibility: RadioToggleGroup (Custom-Toggles → native Radios) ✅
+- **78g** — Accessibility: Barrierefreiheitserklärung `/barrierefreiheit` ✅
+- **78g-hotfix** — Schlichtungsverfahren aus BfE entfernt ✅
+- **78h** — Accessibility: TabGroup (WAI-ARIA Tabs Pattern) ✅
+- **78i** — Dokumentations-Update nach A11y-Offensive ✅
+- **78j** — Accessibility: Fokus-Lenkung "Fix erklärt" Disclosure ✅

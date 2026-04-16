@@ -1,10 +1,10 @@
 # Rechenfix.de — Projekt-Referenz
 
-Stand: 14. April 2026
+Stand: 16. April 2026
 
 ## Was ist rechenfix.de?
 
-Rechenfix.de ist ein deutschsprachiges Online-Rechner-Portal mit aktuell **80+ kostenlosen Rechnern** in 7 Kategorien (Ziel: 100). Es gibt 19 weitere Rechner mit fertigen Prompts (47-66), die noch gebaut werden müssen. Slogan: "Fix gerechnet!". Alleinstellungsmerkmal gegenüber Konkurrenz: **KI-Erklärungen** ("Fix erklärt") via Anthropic Claude API — kein anderer deutscher Rechner-Anbieter hat das. Alle Berechnungen erfolgen live im Browser ohne Submit-Button.
+Rechenfix.de ist ein deutschsprachiges Online-Rechner-Portal mit aktuell **125 kostenlosen Rechnern** in 7 Kategorien. Slogan: "Fix gerechnet!". Alleinstellungsmerkmal gegenüber Konkurrenz: **KI-Erklärungen** ("Fix erklärt") via Anthropic Claude API — kein anderer deutscher Rechner-Anbieter hat das. Alle Berechnungen erfolgen live im Browser ohne Submit-Button. WCAG 2.1 AA konform (Lighthouse ≥97).
 
 - **URL:** https://www.rechenfix.de (IMMER mit www!)
 - **Hosting:** Vercel
@@ -19,9 +19,9 @@ Rechenfix.de ist ein deutschsprachiges Online-Rechner-Portal mit aktuell **80+ k
 - **KI:** Anthropic Claude API (für "Fix erklärt"-Feature)
 - **Monetarisierung:** AdSense + Affiliate (Awin-Netzwerk)
 
-## Rechner-Übersicht (70 Rechner, 7 Kategorien)
+## Rechner-Übersicht (125 Rechner, 7 Kategorien)
 
-### 📋 Alltag (14)
+### 📋 Alltag (20)
 | Rechner | Route |
 |---------|-------|
 | Prozentrechner | /alltag/prozentrechner |
@@ -38,8 +38,14 @@ Rechenfix.de ist ein deutschsprachiges Online-Rechner-Portal mit aktuell **80+ k
 | Umzugskosten-Rechner | /alltag/umzugskosten-rechner |
 | Trinkgeld-Rechner | /alltag/trinkgeld-rechner |
 | Geburtstags-Rechner | /alltag/geburtstag-rechner |
+| Skontorechner | /alltag/skontorechner |
+| Uhrzeitrechner | /alltag/uhrzeitrechner |
+| Hundejahre-Rechner | /alltag/hundejahre-rechner |
+| Währungsrechner | /alltag/waehrungsrechner |
+| Schuhgrößen-Umrechner | /alltag/schuhgroessen-rechner |
+| Kleidergrößen-Umrechner | /alltag/kleidergroessen-rechner |
 
-### 💰 Finanzen (15)
+### 💰 Finanzen (34)
 | Rechner | Route | Affiliate |
 |---------|-------|-----------|
 | Brutto-Netto-Rechner | /finanzen/brutto-netto-rechner | WISO + smartsteuer |
@@ -55,7 +61,7 @@ Rechenfix.de ist ein deutschsprachiges Online-Rechner-Portal mit aktuell **80+ k
 | Steuererstattungs-Rechner | /finanzen/steuererstattung-rechner | WISO + smartsteuer |
 | Kreditrechner | /finanzen/kreditrechner | CHECK24 (/kredit/) |
 | ETF-Sparplanrechner | /finanzen/etf-sparplanrechner | Verivox |
-| Rentenrechner | /finanzen/rentenrechner | WISO + Verivox (bei Rentenlücke) |
+| Rentenrechner | /finanzen/rentenrechner | WISO + Verivox |
 | Splitting-Rechner | /finanzen/splitting-rechner | WISO + smartsteuer |
 | Wohngeld-Rechner | /finanzen/wohngeld-rechner | — |
 | BAföG-Rechner | /finanzen/bafoeg-rechner | — |
@@ -64,10 +70,22 @@ Rechenfix.de ist ein deutschsprachiges Online-Rechner-Portal mit aktuell **80+ k
 | Erbschaftsteuer-Rechner | /finanzen/erbschaftsteuer-rechner | WISO + smartsteuer |
 | Minijob-Rechner | /finanzen/minijob-rechner | — |
 | Gehaltserhöhung-Rechner | /finanzen/gehaltserhoehung-rechner | WISO |
+| Krankengeld-Rechner | /finanzen/krankengeld-rechner | — |
+| GmbH-Geschäftsführer-Rechner | /finanzen/gmbh-geschaeftsfuehrer-rechner | — |
+| Hochrechner (Gehalt) | /finanzen/hochrechner | — |
+| Midijob-Rechner | /finanzen/midijob-rechner | — |
+| Firmenwagenrechner | /finanzen/firmenwagenrechner | — |
+| Witwenrente-Rechner | /finanzen/witwenrente-rechner | — |
+| Kurzarbeitergeld-Rechner | /finanzen/kurzarbeitergeld-rechner | — |
+| Riester-Rechner | /finanzen/riester-rechner | — |
+| Nettolohn-Optimierer | /finanzen/nettolohn-optimierer | — |
+| Kapitalertragsteuer-Rechner | /finanzen/kapitalertragsteuer-rechner | — |
+| Arbeitslosengeld-Rechner | /finanzen/arbeitslosengeld-rechner | — |
+| AfA-Rechner | /finanzen/afa-rechner | — |
 
-Zusätzlich: Brutto-Netto-Tabelle und Einzelgehalt-Seiten (Mindestlohn, 2000€-5000€)
+Zusätzlich: Brutto-Netto-Tabelle und Einzelgehalt-Seiten (Mindestlohn, 2000€–5000€)
 
-### 💚 Gesundheit (8)
+### 💚 Gesundheit (14)
 | Rechner | Route |
 |---------|-------|
 | BMI-Rechner | /gesundheit/bmi-rechner |
@@ -79,10 +97,15 @@ Zusätzlich: Brutto-Netto-Tabelle und Einzelgehalt-Seiten (Mindestlohn, 2000€-
 | Wasserbedarf-Rechner | /gesundheit/wasserbedarf-rechner |
 | Körperfettrechner | /gesundheit/koerperfett-rechner |
 | SSW-Rechner | /gesundheit/ssw-rechner |
+| Gewichtszunahme-Rechner (Schwangerschaft) | /gesundheit/schwangerschaft-gewicht-rechner |
+| Zyklusrechner | /gesundheit/zyklusrechner |
+| Alkohol-Abbau-Rechner | /gesundheit/alkohol-abbau-rechner |
+| Protein-Rechner | /gesundheit/protein-rechner |
+| Herzfrequenz-Rechner | /gesundheit/herzfrequenz-rechner |
 
 Kein Affiliate in dieser Kategorie (sensibles Thema).
 
-### 🚗 Auto & Verkehr (5)
+### 🚗 Auto & Verkehr (8)
 | Rechner | Route | Affiliate |
 |---------|-------|-----------|
 | Spritkostenrechner | /auto/spritkosten-rechner | CHECK24 (/kfz-versicherung/) |
@@ -90,8 +113,11 @@ Kein Affiliate in dieser Kategorie (sensibles Thema).
 | Kfz-Steuer-Rechner | /auto/kfz-steuer-rechner | CHECK24 (/kfz-versicherung/) |
 | Bußgeldrechner | /auto/bussgeldrechner | KS Auxilia |
 | Autokosten-Rechner | /auto/autokosten-rechner | CHECK24 (/kfz-versicherung/) |
+| Leasing-Rechner | /auto/leasing-rechner | — |
+| Führerscheinkosten-Rechner | /auto/fuehrerschein-rechner | — |
+| Reichweiten-Rechner (E-Auto) | /auto/reichweiten-rechner | — |
 
-### 🏠 Wohnen & Energie (10)
+### 🏠 Wohnen & Energie (20)
 | Rechner | Route | Affiliate |
 |---------|-------|-----------|
 | Stromkostenrechner | /wohnen/stromkosten-rechner | CHECK24 (/strom/) |
@@ -99,15 +125,23 @@ Kein Affiliate in dieser Kategorie (sensibles Thema).
 | Mietrechner | /wohnen/mietrechner | — |
 | Heizkostenrechner | /wohnen/heizkosten-rechner | CHECK24 (/gas/) |
 | Grunderwerbsteuerrechner | /wohnen/grunderwerbsteuer-rechner | WISO |
+| Baufinanzierungs-Rechner | /wohnen/baufinanzierung-rechner | CHECK24 (/kredit/) |
 | Quadratmeter-Rechner | /wohnen/quadratmeter-rechner | — |
 | Tapetenbedarf-Rechner | /wohnen/tapetenbedarf-rechner | — |
 | Stromvergleich-Rechner | /wohnen/stromvergleich-rechner | CHECK24 (/strom/) |
-| Baufinanzierungs-Rechner | /wohnen/baufinanzierung-rechner | CHECK24 (/kredit/) |
 | Mietrendite-Rechner | /wohnen/mietrendite-rechner | CHECK24 (/kredit/) |
 | Indexmiete-Rechner | /wohnen/indexmiete-rechner | — |
 | Wärmepumpen-Rechner | /wohnen/waermepumpen-rechner | CHECK24 (/strom/) |
+| Photovoltaik-Rechner | /wohnen/photovoltaik-rechner | — |
+| Dachflächen-Rechner | /wohnen/dachflaechen-rechner | — |
+| Malerkosten-Rechner | /wohnen/malerkosten-rechner | — |
+| Grundsteuer-Rechner | /wohnen/grundsteuer-rechner | — |
+| Mietpreisbremse-Rechner | /wohnen/mietpreisbremse-rechner | — |
+| Poolkosten-Rechner | /wohnen/poolkosten-rechner | — |
+| Vorfälligkeitsentschädigung-Rechner | /wohnen/vorfaelligkeitsentschaedigung-rechner | — |
+| Energiekosten-Rechner | /wohnen/energiekosten-rechner | — |
 
-### 🎓 Mathe & Schule (7)
+### 🎓 Mathe & Schule (12)
 | Rechner | Route |
 |---------|-------|
 | Bruchrechner | /mathe/bruchrechner |
@@ -117,10 +151,15 @@ Kein Affiliate in dieser Kategorie (sensibles Thema).
 | Wissenschaftlicher Taschenrechner | /mathe/wissenschaftlicher-taschenrechner |
 | Flächenrechner | /mathe/flaechenrechner |
 | Prozentuale-Veränderung-Rechner | /mathe/prozentuale-veraenderung-rechner |
+| Volumen-Rechner | /mathe/volumenrechner |
+| Abi-Notenrechner | /mathe/abi-rechner |
+| Binär-Rechner | /mathe/binaer-rechner |
+| Pythagoras-Rechner | /mathe/pythagoras-rechner |
+| Gleichungslöser | /mathe/gleichungsrechner |
 
 Kein Affiliate in dieser Kategorie (Schüler-Zielgruppe).
 
-### 💼 Arbeit & Recht (11)
+### 💼 Arbeit & Recht (17)
 | Rechner | Route | Affiliate |
 |---------|-------|-----------|
 | Arbeitszeitrechner | /arbeit/arbeitszeitrechner | Lexware |
@@ -135,6 +174,11 @@ Kein Affiliate in dieser Kategorie (Schüler-Zielgruppe).
 | Abfindungsrechner | /arbeit/abfindungsrechner | KS Auxilia + WISO |
 | Mutterschutz-Rechner | /arbeit/mutterschutz-rechner | WISO |
 | Scheidungskosten-Rechner | /arbeit/scheidungskosten-rechner | KS Auxilia |
+| Zugewinnausgleich-Rechner | /arbeit/zugewinnausgleich-rechner | — |
+| Arbeitstage-Rechner | /arbeit/arbeitstage-rechner | — |
+| Unterhaltsrechner | /arbeit/unterhaltsrechner | — |
+| Elternzeit-Rechner | /arbeit/elternzeit-rechner | — |
+| Ehegattenunterhalt-Rechner | /arbeit/ehegattenunterhalt-rechner | — |
 
 ## Affiliate-System
 
@@ -227,25 +271,21 @@ Pflicht-Elemente in dieser Reihenfolge:
 - **Datenschutzerklärung:** Enthält Abschnitt zu Affiliate-Links
 - **Impressum:** Enthält Hinweis zu Affiliate-Links
 - **Über-uns:** Enthält Finanzierungshinweis
+- **Barrierefreiheitserklärung:** `/barrierefreiheit` (seit April 2026)
 - **Cookie-Banner:** Marketing-Cookies als eigene Kategorie
 - **Werbekennzeichnung:** Alle AffiliateBoxen zeigen "Anzeige"-Label
 - Sprache: Deutsch, formale "Sie"-Anrede
 
 ## Entwicklung mit Claude Code
 
-### Infrastruktur-Verbesserungen (offen)
-- **rechner-config.ts aufsplitten:** Die Datei hat 6.000+ Zeilen und muss in eine config pro Kategorie gesplittet werden (lib/rechner-config/alltag.ts, finanzen.ts etc.) → spart 80% Token pro Session
+### Infrastruktur
+- **rechner-config aufgeteilt:** `lib/rechner-config/alltag.ts`, `finanzen.ts`, `gesundheit.ts`, `auto.ts`, `wohnen.ts`, `mathe.ts`, `arbeit.ts` + `index.ts` + `types.ts`
 - **CLAUDE.md** existiert im Projekt-Root mit allen Regeln
-- Sessions: 3-5 Rechner pro Session möglich, Anweisung "Lies Dateien nicht komplett ein, nutze grep" am Anfang geben
+- Sessions: 3–5 Rechner pro Session möglich
 
-### Offene Prompts (19 Rechner)
-Prio B: Uhrzeitrechner (47), Schwangerschaft-Gewicht (48), Photovoltaik (49), Abi-Rechner (50), Krankengeld (51), Skontorechner (52), Leasing (53), Volumenrechner (54), Zugewinnausgleich (55)
-Prio C: Alkohol-Abbau (57), Währungsrechner (58), Malerkosten (59), Hochrechner (60), Zyklusrechner (61), Hundejahre (62), Dachflächen (63), Binär-Rechner (64), GmbH-GF (65), Arbeitstage (66)
-
-### Weitere offene Tasks
-- Prompt 8: Affiliate-Stats-Dashboard (/admin/affiliate-stats)
-- Prompt 34: Systematische Crosslinks zwischen allen Rechnern (erst nach allen Rechnern!)
-- Prompt 16: CHECK24-Deeplinks pro Rechner (prüfen ob schon umgesetzt)
+### Offene Tasks
+- Prompt 34: Systematische Crosslinks zwischen allen Rechnern
+- Prompt 78-review: Barrierefreiheitserklärung Inhalts-Check nach finalem Stand
 - Google Search Console: Neue URLs nach jedem Batch einreichen
 
 ### Skill für neue Rechner
@@ -274,6 +314,29 @@ Jeder Prompt für einen neuen Rechner enthält:
 - Submit-Button statt Live-Berechnung
 - Sidebar-Count nicht aktualisiert nach neuem Rechner
 - Input-Felder unter 48px (Mobile-Probleme)
+
+## Accessibility-Status (Stand April 2026)
+
+- WCAG 2.1 AA Ziel erreicht (Lighthouse ≥97 auf Referenzseiten)
+- Barrierefreiheitserklärung unter /barrierefreiheit
+- Audit-Stand: Prompts 78a–h + 78j abgeschlossen
+- Komponenten: RadioToggleGroup, TabGroup, Skip-Link, aria-live-Ergebnis-Pattern, AiExplain-Disclosure mit Fokus-Lenkung
+- BFSG-Einschätzung: Kleinstunternehmer-Ausnahme greift voraussichtlich; Selbstbewertung gepflegt
+- Nächstes geplantes Review: 78-review (Inhalt der BfE-Seite nach finalem Fix-Stand überprüfen)
+
+## Komponenten-Inventar (Auswahl)
+
+| Komponente | Pfad | Zweck |
+|------------|------|-------|
+| RadioToggleGroup | `components/ui/RadioToggleGroup.tsx` | Werte-Auswahl (2–4 Optionen) mit nativen Radio-Inputs + Fieldset/Legend |
+| TabGroup | `components/ui/TabGroup.tsx` | Panel-Umschaltung (WAI-ARIA Tabs Pattern mit Roving Tabindex) |
+| NummerEingabe | `components/ui/NummerEingabe.tsx` | Deutsche Zahleneingabe mit Einheiten-Suffix |
+| ErgebnisAktionen | `components/ui/ErgebnisAktionen.tsx` | Kopieren/Teilen + debounced aria-live-Region |
+| AiExplain | `components/rechner/AiExplain.tsx` | "Fix erklärt" Disclosure mit Fokus-Lenkung |
+| AffiliateBox | `components/AffiliateBox.tsx` | Kontextuelle Affiliate-Empfehlung |
+| CrossLink | `components/ui/CrossLink.tsx` | Verwandte Rechner-Links |
+| FeedbackButtons | `components/ui/FeedbackButtons.tsx` | 👍/👎 Bewertung |
+| Skip-Link | `app/layout.tsx` | Überspringen der Navigation (href="#main-content") |
 
 ## Monetarisierungs-Strategie
 
