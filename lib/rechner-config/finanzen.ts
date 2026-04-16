@@ -2313,4 +2313,75 @@ Bündeln Sie Ihre Einkäufe bei wenigen Händlern, um den Mindestbetrag sicher z
       },
     ],
   },
+  {
+    slug: 'steuerprogression-rechner',
+    titel: 'Steuerprogression-Rechner',
+    beschreibung: 'Steuerprogression visualisieren: Durchschnitts- und Grenzsteuersatz für jedes Einkommen berechnen.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Steuerprogression-Rechner 2026 — Grenz- & Durchschnittssteuersatz | Rechenfix',
+    metaDescription: 'Steuerprogression 2026 berechnen: Grenzsteuersatz und Durchschnittssteuersatz für jedes Einkommen — mit Diagramm und KI-Erklärung.',
+    keywords: ['steuerprogression', 'grenzsteuersatz rechner', 'durchschnittssteuersatz', 'einkommensteuer tarif', 'steuerprogression rechner', 'steuersatz berechnen', 'progressiver steuertarif', 'einkommensteuer kurve', 'steuertarif 2026'],
+    icon: '📊',
+    formel: 'Durchschnittssteuersatz = ESt / zvE × 100 | Grenzsteuersatz = ESt(zvE + 1) − ESt(zvE)',
+    beispiel: 'Zu versteuerndes Einkommen 50.000 €, Einzelveranlagung: ESt ca. 10.886 €, Durchschnittssteuersatz ca. 21,8 %, Grenzsteuersatz ca. 33,3 %.',
+    erklaerung: `**Was ist die Steuerprogression?**
+
+Die Steuerprogression ist das zentrale Prinzip der deutschen Einkommensteuer: Wer mehr verdient, zahlt nicht nur mehr Steuer, sondern auch einen höheren Prozentsatz. Dieses Prinzip der Leistungsfähigkeit soll sicherstellen, dass Geringverdiener entlastet und hohe Einkommen stärker belastet werden. In Deutschland steigt der Steuersatz von 14 % (Eingangssteuersatz) bis auf 45 % (Reichensteuer).
+
+**Durchschnittssteuersatz vs. Grenzsteuersatz**
+
+Zwei Begriffe werden oft verwechselt:
+- **Durchschnittssteuersatz**: Die gesamte Einkommensteuer geteilt durch das zu versteuernde Einkommen. Bei 50.000 € zvE zahlen Sie ca. 10.886 € ESt — der Durchschnittssteuersatz beträgt also rund 21,8 %.
+- **Grenzsteuersatz**: Der Steuersatz auf den nächsten verdienten Euro. Er zeigt, wie viel Steuer eine Gehaltserhöhung „kostet". Bei 50.000 € liegt der Grenzsteuersatz bei ca. 33,3 % — von jedem weiteren Euro gehen also 33 Cent an das Finanzamt.
+
+Der Grenzsteuersatz ist immer höher als der Durchschnittssteuersatz. Das bedeutet: Auch bei hohen Grenzsteuersätzen zahlen Sie auf Ihr gesamtes Einkommen durchschnittlich deutlich weniger.
+
+**Der Einkommensteuertarif 2026 (§ 32a EStG)**
+
+Der Tarif gliedert sich in fünf Zonen:
+- **Grundfreibetrag** (bis 12.096 €): 0 % — steuerfrei
+- **Progressionszone I** (12.097–29.538 €): 14–24 % — linear ansteigend
+- **Progressionszone II** (29.539–66.153 €): 24–42 % — linear ansteigend
+- **Proportionalzone** (66.154–277.825 €): 42 % — konstant (Spitzensteuersatz)
+- **Reichensteuer** (ab 277.826 €): 45 % — konstant
+
+Wichtig: Die Zonengrenzen gelten für das **zu versteuernde Einkommen** (zvE), nicht für das Bruttogehalt. Vom Brutto werden Werbungskosten, Sonderausgaben und weitere Freibeträge abgezogen.
+
+**Zusammenveranlagung und Ehegattensplitting**
+
+Bei Zusammenveranlagung (Ehegattensplitting) wird das gemeinsame zvE halbiert, die Steuer berechnet und das Ergebnis verdoppelt. Dadurch profitieren Paare mit unterschiedlich hohen Einkommen: Der besserverdienende Partner rutscht in eine niedrigere Progressionszone.
+
+**Solidaritätszuschlag und Kirchensteuer**
+
+Zusätzlich zur Einkommensteuer können anfallen:
+- **Solidaritätszuschlag**: 5,5 % der ESt, mit Freigrenze (18.130 € ESt) und Milderungszone. Seit 2021 zahlen ca. 90 % der Steuerzahler keinen Soli mehr.
+- **Kirchensteuer**: 8 % (Bayern, Baden-Württemberg) oder 9 % (übrige Bundesländer) der ESt.
+
+**Tipps zur Steueroptimierung**
+
+Der Grenzsteuersatz zeigt, wie stark eine Gehaltserhöhung besteuert wird. Liegt er bei 42 %, bleiben von 100 € Erhöhung netto nur ca. 58 € (vor Sozialabgaben). Steuerfreie Sachbezüge wie Jobticket, Essenszuschuss oder betriebliche Altersvorsorge umgehen die Progression — und bringen mehr Netto vom Brutto.`,
+    faq: [
+      {
+        frage: 'Was ist der Unterschied zwischen Grenzsteuersatz und Durchschnittssteuersatz?',
+        antwort: 'Der Durchschnittssteuersatz ist die gesamte Steuer geteilt durch das Einkommen — er zeigt Ihre durchschnittliche Belastung. Der Grenzsteuersatz ist der Steuersatz auf den nächsten verdienten Euro — er zeigt, wie viel Steuer eine Gehaltserhöhung kostet. Der Grenzsteuersatz ist immer höher als der Durchschnittssteuersatz.',
+      },
+      {
+        frage: 'Ab welchem Einkommen zahlt man den Spitzensteuersatz?',
+        antwort: 'Der Spitzensteuersatz von 42 % greift 2026 ab einem zu versteuernden Einkommen von 66.154 €. Das entspricht einem Bruttojahresgehalt von ca. 78.000–85.000 € (je nach Abzügen). Bei Zusammenveranlagung verdoppelt sich die Grenze auf ca. 132.308 €.',
+      },
+      {
+        frage: 'Stimmt es, dass man durch eine Gehaltserhöhung weniger Geld hat?',
+        antwort: 'Nein, das ist ein verbreiteter Irrtum. Die Steuerprogression gilt nur für den Teil des Einkommens, der in der höheren Zone liegt. Eine Gehaltserhöhung führt nie dazu, dass Sie insgesamt weniger Netto haben. Es kann aber sein, dass von 100 € Erhöhung nur 50–60 € netto ankommen.',
+      },
+      {
+        frage: 'Was ist die Reichensteuer?',
+        antwort: 'Die Reichensteuer ist der Höchststeuersatz von 45 % und gilt ab einem zu versteuernden Einkommen von 277.826 € (2026). Sie betrifft nur etwa 1 % der Steuerzahler. Der Zuschlag gegenüber dem Spitzensteuersatz beträgt 3 Prozentpunkte.',
+      },
+      {
+        frage: 'Wie wirkt sich das Ehegattensplitting auf die Progression aus?',
+        antwort: 'Beim Splitting wird das gemeinsame Einkommen halbiert und besteuert, dann verdoppelt. Dadurch fallen beide Partner in niedrigere Progressionszonen. Der Vorteil ist am größten, wenn die Einkommen sehr unterschiedlich sind — bei gleich hohen Gehältern gibt es keinen Splitting-Vorteil.',
+      },
+    ],
+  },
 ];

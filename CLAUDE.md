@@ -42,15 +42,15 @@
 - Vercel Hosting
 - Anthropic Claude API für "Fix erklärt"
 
-## Rechner-Bestand (145 gesamt)
+## Rechner-Bestand (147 gesamt)
 | Kategorie | Anzahl |
 |-----------|-------:|
 | Alltag    | 22 |
-| Finanzen  | 36 |
+| Finanzen  | 37 |
 | Gesundheit| 18 |
 | Auto      | 10 |
 | Wohnen    | 25 |
-| Mathe     | 17 |
+| Mathe     | 18 |
 | Arbeit    | 17 |
 
 ## Config-Struktur

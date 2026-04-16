@@ -1314,4 +1314,81 @@ Computer nutzen deterministische Algorithmen (PRNG — Pseudo Random Number Gene
       },
     ],
   },
+  {
+    slug: 'noten-international',
+    titel: 'Noten-Umrechner (international)',
+    beschreibung: 'Noten international umrechnen: Deutsche Note ↔ GPA (USA) ↔ UK Classification ↔ ECTS-Grade.',
+    kategorie: 'Mathe & Schule',
+    kategorieSlug: 'mathe',
+    metaTitle: 'Noten-Umrechner 2026 — Deutsche Note, GPA, UK & ECTS | Rechenfix',
+    metaDescription: 'Noten international umrechnen: Deutsche Note ↔ GPA ↔ UK Classification ↔ ECTS-Grade kostenlos berechnen — mit Tabelle und KI-Erklärung.',
+    keywords: ['noten umrechnen', 'gpa rechner', 'deutsche note gpa', 'ects note', 'uk classification', 'noten international', 'bayerische formel', 'notenumrechner', 'gpa in deutsche note'],
+    icon: '🌍',
+    formel: 'GPA = 1 + 3 × (Nmax − Nd) / (Nmax − Nmin) | Nmax = 4,0, Nmin = 1,0',
+    beispiel: 'Deutsche Note 2,0 → GPA 3.0 → UK: Upper Second (2:1) → ECTS: B.',
+    erklaerung: `**Noten international umrechnen — so funktioniert es**
+
+Wer sich an einer ausländischen Universität bewirbt oder internationale Zeugnisse vergleichen muss, steht vor dem Problem: Notensysteme sind weltweit unterschiedlich. In Deutschland vergeben wir Noten von 1,0 (sehr gut) bis 5,0 (nicht bestanden), in den USA wird der GPA (Grade Point Average) von 0.0 bis 4.0 verwendet, in Großbritannien gibt es Classifications (First, 2:1, 2:2, Third) und im europäischen Hochschulraum das ECTS-System mit den Buchstaben A bis F.
+
+Unser Rechner konvertiert Noten zwischen allen vier Systemen — sofort und kostenlos. Geben Sie Ihre Note in einem beliebigen System ein und erhalten Sie die Entsprechung in allen anderen Systemen.
+
+**Die modifizierte Bayerische Formel**
+
+Die bekannteste Methode zur Umrechnung deutscher Noten in den GPA ist die modifizierte Bayerische Formel:
+
+- GPA = 1 + 3 × (Nmax − Nd) / (Nmax − Nmin)
+- Dabei ist Nmax die schlechteste Bestehensnote (4,0), Nmin die beste Note (1,0) und Nd die umzurechnende Note.
+
+Beispiel: Deutsche Note 2,0 → GPA = 1 + 3 × (4,0 − 2,0) / (4,0 − 1,0) = 1 + 3 × 2/3 = 3,0.
+
+Diese Formel wird von vielen deutschen Hochschulen für die Anerkennung ausländischer Noten empfohlen. Beachten Sie: Viele Hochschulen haben eigene Umrechnungstabellen, die von dieser Formel abweichen können.
+
+**UK Classification — das britische System**
+
+Das britische Hochschulsystem kennt vier Stufen:
+- First Class Honours (1st): entspricht etwa 1,0–1,5 in Deutschland
+- Upper Second Class Honours (2:1): entspricht etwa 1,6–2,5
+- Lower Second Class Honours (2:2): entspricht etwa 2,6–3,5
+- Third Class Honours (3rd): entspricht etwa 3,6–4,0
+
+Die meisten guten Arbeitgeber in Großbritannien verlangen mindestens einen 2:1-Abschluss. Ein First ist vergleichbar mit „sehr gut" im deutschen System.
+
+**ECTS-Grading — europäischer Standard**
+
+Das European Credit Transfer System (ECTS) verwendet Buchstabennoten:
+- A: hervorragend (beste 10 %)
+- B: sehr gut (nächste 25 %)
+- C: gut (nächste 30 %)
+- D: befriedigend (nächste 25 %)
+- E: ausreichend (nächste 10 %)
+- F: nicht bestanden
+
+Das ECTS-System wurde eingeführt, um die Vergleichbarkeit von Studienleistungen innerhalb Europas zu erleichtern. Es basiert auf einer relativen Notengebung — die Grenzen hängen also von der Leistungsverteilung im jeweiligen Kurs ab.
+
+**Wichtiger Hinweis zur Genauigkeit**
+
+Notenumrechnungen sind immer Näherungen. Unterschiedliche Bildungssysteme bewerten nach verschiedenen Kriterien, und eine exakte 1:1-Übersetzung ist nicht möglich. Hochschulen und Arbeitgeber können eigene Umrechnungstabellen verwenden. Für offizielle Bewerbungen empfehlen wir, die Umrechnungsrichtlinien der jeweiligen Institution zu prüfen.`,
+    faq: [
+      {
+        frage: 'Wie rechne ich eine deutsche Note in den GPA um?',
+        antwort: 'Verwenden Sie die modifizierte Bayerische Formel: GPA = 1 + 3 × (4,0 − Note) / (4,0 − 1,0). Eine deutsche 1,0 entspricht einem GPA von 4.0, eine 2,0 entspricht 3.0, eine 3,0 entspricht 2.0 und eine 4,0 entspricht 1.0.',
+      },
+      {
+        frage: 'Was ist ein guter GPA?',
+        antwort: 'In den USA gilt ein GPA ab 3.5 als sehr gut (cum laude), ab 3.7 als magna cum laude und ab 3.9 als summa cum laude. Ein GPA von 3.0 (entspricht deutscher Note 2,0) ist solide und reicht für viele Graduate Programs.',
+      },
+      {
+        frage: 'Was bedeutet 2:1 im britischen System?',
+        antwort: 'Ein Upper Second Class Honours (2:1, gesprochen „two-one") entspricht einer deutschen Note von etwa 1,6 bis 2,5. Es ist die am häufigsten verlangte Mindestqualifikation bei britischen Arbeitgebern und für viele Masterstudiengänge.',
+      },
+      {
+        frage: 'Ist die Umrechnung offiziell anerkannt?',
+        antwort: 'Die modifizierte Bayerische Formel wird von vielen deutschen Hochschulen empfohlen, ist aber nicht gesetzlich verbindlich. Jede Hochschule kann eigene Umrechnungstabellen verwenden. Für offizielle Anerkennungen wenden Sie sich an die jeweilige Institution oder an anabin (KMK).',
+      },
+      {
+        frage: 'Was bedeuten die ECTS-Noten A bis F?',
+        antwort: 'ECTS-Noten basieren auf einer relativen Verteilung: A erhält die besten 10 %, B die nächsten 25 %, C die nächsten 30 %, D die nächsten 25 % und E die letzten 10 % der Bestehenden. F bedeutet nicht bestanden. Die Grenzen variieren je nach Hochschule und Kurs.',
+      },
+    ],
+  },
 ];
