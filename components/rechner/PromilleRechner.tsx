@@ -6,6 +6,7 @@ import {
   SCHNELLWAHL,
   type Getraenk,
 } from '@/lib/berechnungen/promille';
+import { clampInputValue, clampNumber } from '@/lib/zahlenformat';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
@@ -102,7 +103,7 @@ export default function PromilleRechner() {
               min="30"
               max="250"
               value={gewicht}
-              onChange={e => setGewicht(e.target.value)}
+              onChange={e => setGewicht(clampInputValue(e.target.value, 30, 250))}
               className="input-field w-full pr-10"
             />
             <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">kg</span>
@@ -118,7 +119,7 @@ export default function PromilleRechner() {
               max="48"
               step="0.5"
               value={trinkzeit}
-              onChange={e => setTrinkzeit(e.target.value)}
+              onChange={e => setTrinkzeit(clampInputValue(e.target.value, 0, 48))}
               className="input-field w-full pr-10"
             />
             <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">Std.</span>
@@ -157,7 +158,7 @@ export default function PromilleRechner() {
                   max="5"
                   step="0.01"
                   value={g.mengeL}
-                  onChange={e => updateGetraenk(g.id, { mengeL: parseFloat(e.target.value) || 0 })}
+                  onChange={e => updateGetraenk(g.id, { mengeL: clampNumber(parseFloat(e.target.value), 0.01, 5) })}
                   className="input-field w-full pr-6 text-xs py-1.5"
                 />
                 <span className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-600 text-xs pointer-events-none">L</span>
@@ -170,7 +171,7 @@ export default function PromilleRechner() {
                   max="100"
                   step="0.1"
                   value={g.alkoholProzent}
-                  onChange={e => updateGetraenk(g.id, { alkoholProzent: parseFloat(e.target.value) || 0 })}
+                  onChange={e => updateGetraenk(g.id, { alkoholProzent: clampNumber(parseFloat(e.target.value), 0.1, 100) })}
                   className="input-field w-full pr-6 text-xs py-1.5"
                 />
                 <span className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-600 text-xs pointer-events-none">%</span>

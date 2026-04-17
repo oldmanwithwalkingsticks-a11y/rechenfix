@@ -5,6 +5,7 @@ import {
   berechneUeberstunden,
   berechneVerguetung,
 } from '@/lib/berechnungen/ueberstunden';
+import { clampInputValue } from '@/lib/zahlenformat';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
@@ -96,7 +97,7 @@ export default function UeberstundenRechner() {
                 max="80"
                 step="0.5"
                 value={vertraglicheStunden}
-                onChange={e => setVertraglicheStunden(e.target.value)}
+                onChange={e => setVertraglicheStunden(clampInputValue(e.target.value, 0, 80))}
                 className="input-field w-full pr-16"
               />
               <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">Std./Wo.</span>
@@ -134,7 +135,7 @@ export default function UeberstundenRechner() {
                   max="120"
                   step="0.5"
                   value={tatsaechlich}
-                  onChange={e => setTatsaechlich(e.target.value)}
+                  onChange={e => setTatsaechlich(clampInputValue(e.target.value, 0, 120))}
                   className="input-field w-full pr-16"
                 />
                 <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">Std./Wo.</span>
@@ -153,7 +154,7 @@ export default function UeberstundenRechner() {
                       max="24"
                       step="0.5"
                       value={tagesStunden[idx]}
-                      onChange={e => updateTag(idx, e.target.value)}
+                      onChange={e => updateTag(idx, clampInputValue(e.target.value, 0, 24))}
                       className="input-field w-full pr-8"
                     />
                     <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-xs pointer-events-none">h</span>
@@ -196,7 +197,7 @@ export default function UeberstundenRechner() {
                   min="1"
                   max="52"
                   value={customWochen}
-                  onChange={e => setCustomWochen(e.target.value)}
+                  onChange={e => setCustomWochen(clampInputValue(e.target.value, 1, 52))}
                   className="input-field w-full pr-16"
                 />
                 <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-xs pointer-events-none">Wochen</span>
@@ -346,7 +347,7 @@ export default function UeberstundenRechner() {
                   min="0"
                   max="200"
                   value={zuschlag}
-                  onChange={e => setZuschlag(e.target.value)}
+                  onChange={e => setZuschlag(clampInputValue(e.target.value, 0, 200))}
                   className="input-field w-full pr-8"
                 />
                 <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">%</span>

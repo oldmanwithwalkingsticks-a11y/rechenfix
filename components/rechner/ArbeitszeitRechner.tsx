@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { berechneTageszeit, berechneWoche, type WochenTag } from '@/lib/berechnungen/arbeitszeit';
+import { clampInputValue, clampNumber } from '@/lib/zahlenformat';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
@@ -34,7 +35,7 @@ function MinutenEingabe({ value, onChange, label }: { value: string; onChange: (
           min="0"
           max="480"
           value={value}
-          onChange={e => onChange(e.target.value)}
+          onChange={e => onChange(clampInputValue(e.target.value, 0, 480))}
           className="input-field w-full pr-10"
         />
         <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">min</span>
@@ -303,7 +304,7 @@ export default function ArbeitszeitRechner() {
                       min="0"
                       max="480"
                       value={tag.pause}
-                      onChange={e => updateTag(idx, { pause: parseInt(e.target.value, 10) || 0 })}
+                      onChange={e => updateTag(idx, { pause: clampNumber(parseInt(e.target.value, 10), 0, 480) })}
                       className="input-field w-16 text-xs py-1.5 text-center"
                       title="Pause in Minuten"
                     />

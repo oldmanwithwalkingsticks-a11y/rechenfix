@@ -5,6 +5,7 @@ import {
   berechnePendlerpauschale,
   berechneArbeitstage,
 } from '@/lib/berechnungen/pendlerpauschale';
+import { clampInputValue } from '@/lib/zahlenformat';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
@@ -62,7 +63,7 @@ export default function PendlerpauschaleRechner() {
             min="1"
             max="999"
             value={entfernung}
-            onChange={e => setEntfernung(e.target.value)}
+            onChange={e => setEntfernung(clampInputValue(e.target.value, 1, 999))}
             className="input-field w-full pr-10"
           />
           <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">km</span>
@@ -93,7 +94,7 @@ export default function PendlerpauschaleRechner() {
               min="1"
               max="365"
               value={arbeitstage}
-              onChange={e => setArbeitstage(e.target.value)}
+              onChange={e => setArbeitstage(clampInputValue(e.target.value, 1, 365))}
               className="input-field w-full pr-12"
             />
             <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">Tage</span>
@@ -109,7 +110,7 @@ export default function PendlerpauschaleRechner() {
                   min="1"
                   max="7"
                   value={tageProWoche}
-                  onChange={e => setTageProWoche(e.target.value)}
+                  onChange={e => setTageProWoche(clampInputValue(e.target.value, 1, 7))}
                   className="input-field w-full"
                 />
               </div>
@@ -121,7 +122,7 @@ export default function PendlerpauschaleRechner() {
                   min="0"
                   max="60"
                   value={urlaubstage}
-                  onChange={e => setUrlaubstage(e.target.value)}
+                  onChange={e => setUrlaubstage(clampInputValue(e.target.value, 0, 60))}
                   className="input-field w-full"
                 />
               </div>
@@ -133,7 +134,7 @@ export default function PendlerpauschaleRechner() {
                   min="0"
                   max="20"
                   value={feiertage}
-                  onChange={e => setFeiertage(e.target.value)}
+                  onChange={e => setFeiertage(clampInputValue(e.target.value, 0, 20))}
                   className="input-field w-full"
                 />
               </div>
@@ -145,7 +146,7 @@ export default function PendlerpauschaleRechner() {
                   min="0"
                   max="365"
                   value={krankheitstage}
-                  onChange={e => setKrankheitstage(e.target.value)}
+                  onChange={e => setKrankheitstage(clampInputValue(e.target.value, 0, 365))}
                   className="input-field w-full"
                 />
               </div>
@@ -159,7 +160,7 @@ export default function PendlerpauschaleRechner() {
                 max={tageProWoche}
                 step="0.5"
                 value={homeofficeTage}
-                onChange={e => setHomeofficeTage(e.target.value)}
+                onChange={e => setHomeofficeTage(clampInputValue(e.target.value, 0, parseInt(tageProWoche, 10) || 7))}
                 className="input-field w-32"
               />
             </div>
@@ -181,7 +182,7 @@ export default function PendlerpauschaleRechner() {
               min="0"
               max="100"
               value={grenzsteuersatz}
-              onChange={e => setGrenzsteuersatz(e.target.value)}
+              onChange={e => setGrenzsteuersatz(clampInputValue(e.target.value, 0, 100))}
               className="input-field w-full pr-8"
             />
             <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">%</span>

@@ -7,6 +7,7 @@ import {
   type UrlaubsanspruchEingabe,
   type ResturlaubEingabe,
 } from '@/lib/berechnungen/urlaubstage';
+import { clampInputValue } from '@/lib/zahlenformat';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import AiExplain from '@/components/rechner/AiExplain';
@@ -89,7 +90,7 @@ export default function UrlaubstageRechner() {
                 min="0"
                 max="365"
                 value={vertraglicheTage}
-                onChange={e => setVertraglicheTage(e.target.value)}
+                onChange={e => setVertraglicheTage(clampInputValue(e.target.value, 0, 365))}
                 className="input-field w-full"
               />
             </div>
@@ -155,7 +156,7 @@ export default function UrlaubstageRechner() {
                 min="1"
                 max={arbeitstageProWoche - 1}
                 value={teilzeitTage}
-                onChange={e => setTeilzeitTage(e.target.value)}
+                onChange={e => setTeilzeitTage(clampInputValue(e.target.value, 1, arbeitstageProWoche - 1))}
                 className="input-field w-32"
               />
               <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">
@@ -269,7 +270,7 @@ export default function UrlaubstageRechner() {
                 min="0"
                 max="365"
                 value={urlaubstageProJahr}
-                onChange={e => setUrlaubstageProJahr(e.target.value)}
+                onChange={e => setUrlaubstageProJahr(clampInputValue(e.target.value, 0, 365))}
                 className="input-field w-full"
               />
             </div>
@@ -304,7 +305,7 @@ export default function UrlaubstageRechner() {
                 min="0"
                 max="365"
                 value={bereitsGenommen}
-                onChange={e => setBereitsGenommen(e.target.value)}
+                onChange={e => setBereitsGenommen(clampInputValue(e.target.value, 0, 365))}
                 className="input-field w-full"
               />
             </div>
