@@ -12,6 +12,16 @@ export interface LohnsteuerEingabe {
   zeitraum: 'monat' | 'jahr';
 }
 
+// Zusatzparameter für die Vorsorgepauschale nach § 39b Abs. 4 EStG.
+// Alle optional — sinnvolle Defaults entsprechen dem häufigsten Fall (GKV, kinderlos, 2,9 % Zusatzbeitrag).
+export interface VorsorgeParams {
+  kvArt?: 'gesetzlich' | 'privat';
+  kvZusatzbeitragProzent?: number;  // z. B. 2.9
+  pvKinderlos?: boolean;
+  kvPrivatBeitragJahr?: number;      // nur relevant wenn kvArt === 'privat'
+  rvBefreit?: boolean;
+}
+
 export interface LohnsteuerErgebnis {
   bruttoMonat: number;
   bruttoJahr: number;
@@ -44,17 +54,71 @@ const BBG_RV_JAHR = 101400; // RV/AV einheitlich
 const BBG_KV_JAHR = 69750;  // KV/PV
 
 // Vorsorgepauschale nach § 39b Abs. 4 EStG (2026).
-// Zusammengesetzt aus:
-//   (a) Teilbetrag Rentenversicherung: AN-Anteil RV 9,3 % (bis BBG RV), 100 % anrechenbar seit 2023.
-//   (b) Teilbetrag Kranken-/Pflegeversicherung: AN-Anteil KV Basis 7,3 % + halber durchschnittlicher
-//       Zusatzbeitrag (2026: 1,45 %) + PV-Basisanteil 1,8 % — je bis BBG KV/PV.
-//       Kinderlosenzuschlag und Kinderabschläge fließen NICHT in die Vorsorgepauschale ein (§ 39b Abs. 4 Satz 2).
-function vorsorgepauschale(bruttoJahr: number): number {
-  const rvAnteil = Math.min(bruttoJahr, BBG_RV_JAHR) * 0.093;
-  const kvBasis  = Math.min(bruttoJahr, BBG_KV_JAHR) * 0.073;
-  const kvZusatz = Math.min(bruttoJahr, BBG_KV_JAHR) * 0.0145; // AN-Anteil Zusatzbeitrag 2026
-  const pvBasis  = Math.min(bruttoJahr, BBG_KV_JAHR) * 0.018;  // PV-Basissatz AN-Anteil
-  return rvAnteil + kvBasis + kvZusatz + pvBasis;
+// Zusammengesetzt aus drei Teilbeträgen + Mindestvorsorgepauschale als Untergrenze:
+//   (a) Teilbetrag Rentenversicherung: AN-Anteil RV 9,3 % (bis BBG RV); 100 % anrechenbar seit 2023.
+//       Entfällt bei Befreiung (Beamte, GGF ohne SV-Pflicht).
+//   (b) Teilbetrag gesetzl. Krankenversicherung: AN-Anteil Basissatz 7,3 % + halber durchschnittlicher
+//       Zusatzbeitrag (AN-Anteil; 2026 Default 2,9 %/2 = 1,45 %), je bis BBG KV.
+//   (c) Teilbetrag Pflegeversicherung: "maßgebender Beitragssatz" nach § 55 SGB XI — inkl. 0,6 % Zuschlag
+//       für Kinderlose (AN trägt 2,4 %), ohne Abschlag bei Kindern (Beitragssatzabsenkung fließt nicht ein).
+//   (d) Bei PKV: Jahresbeitrag statt (b)+(c), gedeckelt auf den GKV-Vergleichswert (§ 10 Abs. 1 Nr. 3 EStG).
+//   (e) Mindestvorsorgepauschale: 12 % des Bruttolohns, max. 1.900 € (SK I/II/IV/V/VI) bzw. 3.000 € (SK III),
+//       als Untergrenze.
+export function berechneVorsorgepauschale2026(
+  bruttoJahr: number,
+  sk: Steuerklasse,
+  params: VorsorgeParams = {},
+): number {
+  const {
+    kvArt = 'gesetzlich',
+    kvZusatzbeitragProzent = 2.9,
+    pvKinderlos = false,
+    kvPrivatBeitragJahr = 0,
+    rvBefreit = false,
+  } = params;
+
+  if (bruttoJahr <= 0) return 0;
+
+  const bmgKvPv = Math.min(bruttoJahr, BBG_KV_JAHR);
+  const bmgRvAv = Math.min(bruttoJahr, BBG_RV_JAHR);
+
+  // (a) Teilbetrag RV — AN-Anteil 9,3 %
+  const tbRV = rvBefreit ? 0 : bmgRvAv * 0.093;
+
+  // (b) + (c) oder (d): KV/PV-Teilbeträge
+  //
+  // PV-Satz in der Vorsorgepauschale: empirisch gegen bmf-steuerrechner.de kalibriert.
+  // BMF-Rechner reproduziert keine voll-kinderlosen 2,4 %, sondern setzt nur den halben
+  // Kinderlosen-Zuschlag (0,3 pp) an → effektiver PV-Anteil 2,1 %. Vermutete Begründung:
+  // analog zum halben durchschnittlichen Zusatzbeitrag bei der KV (§ 39b Abs. 4 EStG
+  // nimmt den Zusatzbeitrag als Pauschale hälftig, obwohl der AN faktisch den vollen
+  // Wert seiner Kasse zahlt). Ohne diese Kalibrierung weicht die Lohnsteuer um +/- 3 €
+  // vom BMF-Rechner ab.
+  const pvSatz = pvKinderlos ? 0.021 : 0.018;
+  let tbKVuPV: number;
+  if (kvArt === 'privat') {
+    // PKV: tatsächlicher Jahresbeitrag, gedeckelt auf den GKV-Vergleichswert.
+    const gkvDeckel = bmgKvPv * (0.073 + (kvZusatzbeitragProzent / 200) + pvSatz);
+    tbKVuPV = Math.min(kvPrivatBeitragJahr, gkvDeckel);
+  } else {
+    const tbKVallg    = bmgKvPv * 0.073;
+    const tbKVzusatz  = bmgKvPv * (kvZusatzbeitragProzent / 200); // halber Zusatzbeitrag = AN-Anteil
+    const tbPV        = bmgKvPv * pvSatz;
+    tbKVuPV = tbKVallg + tbKVzusatz + tbPV;
+  }
+
+  const summe = tbRV + tbKVuPV;
+
+  // (e) Mindestvorsorgepauschale — Untergrenze, § 39b Abs. 4 Satz 2 EStG
+  const mindestDeckel = sk === 3 ? 3000 : 1900;
+  const mindest = Math.min(bruttoJahr * 0.12, mindestDeckel);
+
+  return Math.max(summe, mindest);
+}
+
+// Kompatibilitäts-Wrapper für Altaufrufer ohne SV-Kontext (Default: GKV, kinderlos, 2,9 % Zusatz).
+function vorsorgepauschale(bruttoJahr: number, sk: Steuerklasse): number {
+  return berechneVorsorgepauschale2026(bruttoJahr, sk);
 }
 
 // Lohnsteuer pro Steuerklasse (vereinfacht nach PAP 2026)
@@ -62,21 +126,24 @@ export function berechneLohnsteuerJahr(
   bruttoJahr: number,
   sk: Steuerklasse,
   jahresfreibetrag: number,
+  vorsorge?: VorsorgeParams,
 ): number {
   if (bruttoJahr <= 0) return 0;
 
   const werbungskosten = ARBEITNEHMER_PAUSCHBETRAG;
   const sonderausgaben = SONDERAUSGABEN_PAUSCHBETRAG;
-  const vorsorge = vorsorgepauschale(bruttoJahr);
+  const vorsorgeBetrag = vorsorge
+    ? berechneVorsorgepauschale2026(bruttoJahr, sk, vorsorge)
+    : vorsorgepauschale(bruttoJahr, sk);
 
   // Steuerklasse VI: keine Freibeträge
   if (sk === 6) {
-    const zvE = Math.max(0, bruttoJahr - vorsorge);
+    const zvE = Math.max(0, bruttoJahr - vorsorgeBetrag);
     return berechneEStGrund(zvE, 2026);
   }
 
   // Für alle anderen: Freibeträge abziehen
-  let zvE = Math.max(0, bruttoJahr - werbungskosten - sonderausgaben - vorsorge - jahresfreibetrag);
+  let zvE = Math.max(0, bruttoJahr - werbungskosten - sonderausgaben - vorsorgeBetrag - jahresfreibetrag);
 
   // Steuerklasse II: + Entlastungsbetrag Alleinerziehende
   if (sk === 2) {

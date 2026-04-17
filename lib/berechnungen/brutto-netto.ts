@@ -70,14 +70,40 @@ export const BUNDESLAENDER = [
 // Lohnsteuer/Jahressteuer via zentrale PAP-2026-Formel (§ 32a EStG)
 // aus lib/berechnungen/lohnsteuer.ts — eine Quelle der Wahrheit, keine lineare
 // Approximation mehr. Der BruttoNetto-Rechner kennt kein Jahresfreibetrag-Feld → 0.
-function berechneLohnsteuer(brutto: number, steuerklasse: 1 | 2 | 3 | 4 | 5 | 6): number {
+// Die Vorsorgepauschale nach § 39b Abs. 4 EStG wird mit den konkreten SV-Daten des
+// Nutzers ermittelt (Zusatzbeitrag, PV-Kinderlosenstatus, RV-Befreiung, PKV).
+function buildVorsorgeParams(eingabe: BruttoNettoEingabe): {
+  kvArt: 'gesetzlich' | 'privat';
+  kvZusatzbeitragProzent: number;
+  pvKinderlos: boolean;
+  kvPrivatBeitragJahr: number;
+  rvBefreit: boolean;
+} {
+  return {
+    kvArt: eingabe.kvArt,
+    kvZusatzbeitragProzent: eingabe.kvZusatzbeitrag,
+    pvKinderlos: eingabe.kinderfreibetraege === 0,
+    kvPrivatBeitragJahr: eingabe.kvPrivatBeitrag * 12,
+    rvBefreit: eingabe.rvBefreit,
+  };
+}
+
+function berechneLohnsteuer(
+  brutto: number,
+  steuerklasse: 1 | 2 | 3 | 4 | 5 | 6,
+  vorsorge: ReturnType<typeof buildVorsorgeParams>,
+): number {
   const jahresBrutto = brutto * 12;
-  const lstJahr = berechneLohnsteuerJahr(jahresBrutto, steuerklasse, 0);
+  const lstJahr = berechneLohnsteuerJahr(jahresBrutto, steuerklasse, 0, vorsorge);
   return Math.round((lstJahr / 12) * 100) / 100;
 }
 
-function berechneJahressteuer(jahresBrutto: number, steuerklasse: 1 | 2 | 3 | 4 | 5 | 6): number {
-  return Math.round(berechneLohnsteuerJahr(jahresBrutto, steuerklasse, 0) * 100) / 100;
+function berechneJahressteuer(
+  jahresBrutto: number,
+  steuerklasse: 1 | 2 | 3 | 4 | 5 | 6,
+  vorsorge: ReturnType<typeof buildVorsorgeParams>,
+): number {
+  return Math.round(berechneLohnsteuerJahr(jahresBrutto, steuerklasse, 0, vorsorge) * 100) / 100;
 }
 
 // Beitragsbemessungsgrenzen 2026 (einheitlich, seit 2025 keine West/Ost-Trennung)
@@ -91,9 +117,10 @@ export function berechneBruttoNetto(eingabe: BruttoNettoEingabe): BruttoNettoErg
   }
 
   const bbgRv = BBG_RV;
+  const vorsorgeParams = buildVorsorgeParams(eingabe);
 
   // Lohnsteuer
-  const lohnsteuer = berechneLohnsteuer(brutto, eingabe.steuerklasse);
+  const lohnsteuer = berechneLohnsteuer(brutto, eingabe.steuerklasse, vorsorgeParams);
 
   // Solidaritätszuschlag
   const jahresLohnsteuer = lohnsteuer * 12;
@@ -144,8 +171,8 @@ export function berechneBruttoNetto(eingabe: BruttoNettoEingabe): BruttoNettoErg
     // Steuer: Jahressteuer mit WG minus Jahressteuer ohne WG
     const jahresBruttoOhne = brutto * 12;
     const jahresBruttoMit = jahresBruttoOhne + wgBrutto;
-    const jahressteuerOhne = berechneJahressteuer(jahresBruttoOhne, eingabe.steuerklasse);
-    const jahressteuerMit = berechneJahressteuer(jahresBruttoMit, eingabe.steuerklasse);
+    const jahressteuerOhne = berechneJahressteuer(jahresBruttoOhne, eingabe.steuerklasse, vorsorgeParams);
+    const jahressteuerMit = berechneJahressteuer(jahresBruttoMit, eingabe.steuerklasse, vorsorgeParams);
     const wgLohnsteuer = Math.round((jahressteuerMit - jahressteuerOhne) * 100) / 100;
 
     // Soli auf WG-Lohnsteuer
