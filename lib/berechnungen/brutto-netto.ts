@@ -1,3 +1,5 @@
+import { berechneLohnsteuerJahr } from './lohnsteuer';
+
 export interface BruttoNettoEingabe {
   bruttoMonat: number;
   steuerklasse: 1 | 2 | 3 | 4 | 5 | 6;
@@ -65,59 +67,22 @@ export const BUNDESLAENDER = [
   { kuerzel: 'TH', name: 'Thüringen', kirchensteuersatz: 9 as const },
 ];
 
-// Vereinfachte Lohnsteuertabelle 2025/2026 (monatlich, Steuerklasse 1)
-function berechneLohnsteuerSK1(brutto: number): number {
+// Lohnsteuer/Jahressteuer via zentrale PAP-2026-Formel (§ 32a EStG)
+// aus lib/berechnungen/lohnsteuer.ts — eine Quelle der Wahrheit, keine lineare
+// Approximation mehr. Der BruttoNetto-Rechner kennt kein Jahresfreibetrag-Feld → 0.
+function berechneLohnsteuer(brutto: number, steuerklasse: 1 | 2 | 3 | 4 | 5 | 6): number {
   const jahresBrutto = brutto * 12;
-  // Grundfreibetrag 2025: 12.096 €
-  if (jahresBrutto <= 12096) return 0;
-  const zuVersteuern = jahresBrutto - 12096;
-  let steuer = 0;
-  if (zuVersteuern <= 17442) {
-    steuer = zuVersteuern * 0.14;
-  } else if (zuVersteuern <= 54057) {
-    steuer = 17442 * 0.14 + (zuVersteuern - 17442) * 0.2397;
-  } else if (zuVersteuern <= 243714) {
-    steuer = 17442 * 0.14 + 36615 * 0.2397 + (zuVersteuern - 54057) * 0.42;
-  } else {
-    steuer = 17442 * 0.14 + 36615 * 0.2397 + 189657 * 0.42 + (zuVersteuern - 243714) * 0.45;
-  }
-  return Math.round(steuer / 12 * 100) / 100;
+  const lstJahr = berechneLohnsteuerJahr(jahresBrutto, steuerklasse, 0);
+  return Math.round((lstJahr / 12) * 100) / 100;
 }
 
-function berechneLohnsteuer(brutto: number, steuerklasse: number): number {
-  const sk1Steuer = berechneLohnsteuerSK1(brutto);
-  const faktoren: Record<number, number> = {
-    1: 1.0, 2: 0.85, 3: 0.55, 4: 1.0, 5: 1.55, 6: 1.25,
-  };
-  return Math.round(sk1Steuer * (faktoren[steuerklasse] ?? 1) * 100) / 100;
+function berechneJahressteuer(jahresBrutto: number, steuerklasse: 1 | 2 | 3 | 4 | 5 | 6): number {
+  return Math.round(berechneLohnsteuerJahr(jahresBrutto, steuerklasse, 0) * 100) / 100;
 }
 
-// Berechne Jahressteuer direkt aus Jahresbrutto (für Weihnachtsgeld)
-function berechneJahressteuer(jahresBrutto: number, steuerklasse: number): number {
-  if (jahresBrutto <= 12096) return 0;
-  const zuVersteuern = jahresBrutto - 12096;
-  let steuer = 0;
-  if (zuVersteuern <= 17442) {
-    steuer = zuVersteuern * 0.14;
-  } else if (zuVersteuern <= 54057) {
-    steuer = 17442 * 0.14 + (zuVersteuern - 17442) * 0.2397;
-  } else if (zuVersteuern <= 243714) {
-    steuer = 17442 * 0.14 + 36615 * 0.2397 + (zuVersteuern - 54057) * 0.42;
-  } else {
-    steuer = 17442 * 0.14 + 36615 * 0.2397 + 189657 * 0.42 + (zuVersteuern - 243714) * 0.45;
-  }
-  const faktoren: Record<number, number> = {
-    1: 1.0, 2: 0.85, 3: 0.55, 4: 1.0, 5: 1.55, 6: 1.25,
-  };
-  return Math.round(steuer * (faktoren[steuerklasse] ?? 1) * 100) / 100;
-}
-
-// Beitragsbemessungsgrenzen 2025
-const BBG_KV = 5512.50;   // monatlich
-const BBG_RV_WEST = 7550;  // monatlich
-const BBG_RV_OST = 7450;   // monatlich
-
-const OSTLAENDER = ['BE', 'BB', 'MV', 'SN', 'ST', 'TH'];
+// Beitragsbemessungsgrenzen 2026 (einheitlich, seit 2025 keine West/Ost-Trennung)
+const BBG_KV = 5812.50;   // monatlich · 69.750 €/Jahr
+const BBG_RV = 8450;      // monatlich · 101.400 €/Jahr (einheitlich 2026)
 
 export function berechneBruttoNetto(eingabe: BruttoNettoEingabe): BruttoNettoErgebnis {
   let brutto = eingabe.bruttoMonat;
@@ -125,15 +90,14 @@ export function berechneBruttoNetto(eingabe: BruttoNettoEingabe): BruttoNettoErg
     brutto = eingabe.bruttoMonat / 12;
   }
 
-  const istOst = OSTLAENDER.includes(eingabe.bundesland);
-  const bbgRv = istOst ? BBG_RV_OST : BBG_RV_WEST;
+  const bbgRv = BBG_RV;
 
   // Lohnsteuer
   const lohnsteuer = berechneLohnsteuer(brutto, eingabe.steuerklasse);
 
   // Solidaritätszuschlag
   const jahresLohnsteuer = lohnsteuer * 12;
-  const solidaritaet = jahresLohnsteuer > 18130
+  const solidaritaet = jahresLohnsteuer > 20350
     ? Math.round(lohnsteuer * 0.055 * 100) / 100
     : 0;
 
@@ -161,7 +125,7 @@ export function berechneBruttoNetto(eingabe: BruttoNettoEingabe): BruttoNettoErg
   const arbeitslosenversicherung = Math.round(avBrutto * 0.013 * 100) / 100;
 
   const pvBrutto = Math.min(brutto, BBG_KV);
-  const pflegeBasis = Math.round(pvBrutto * 0.017 * 100) / 100;
+  const pflegeBasis = Math.round(pvBrutto * 0.018 * 100) / 100;
   const pflegeZuschlag = eingabe.kinderfreibetraege === 0
     ? Math.round(pvBrutto * 0.006 * 100) / 100
     : 0;
@@ -186,7 +150,7 @@ export function berechneBruttoNetto(eingabe: BruttoNettoEingabe): BruttoNettoErg
 
     // Soli auf WG-Lohnsteuer
     const wgJahresLst = jahressteuerMit;
-    const wgSolidaritaet = wgJahresLst > 18130
+    const wgSolidaritaet = wgJahresLst > 20350
       ? Math.round(wgLohnsteuer * 0.055 * 100) / 100
       : 0;
 
@@ -213,7 +177,7 @@ export function berechneBruttoNetto(eingabe: BruttoNettoEingabe): BruttoNettoErg
     const wgAV = Math.round(wgAvBrutto * 0.013 * 100) / 100;
 
     const wgPvBrutto = Math.min(wgBrutto, Math.max(0, BBG_KV - brutto));
-    const wgPvBasis = Math.round(wgPvBrutto * 0.017 * 100) / 100;
+    const wgPvBasis = Math.round(wgPvBrutto * 0.018 * 100) / 100;
     const wgPvZuschlag = eingabe.kinderfreibetraege === 0
       ? Math.round(wgPvBrutto * 0.006 * 100) / 100
       : 0;

@@ -29,37 +29,39 @@ export interface NebenjobErgebnis {
   hinweis: string;
 }
 
-// Einkommensteuer (Jahresbetrag) nach §32a EStG 2025/2026
+// Einkommensteuer (Jahresbetrag) nach §32a EStG 2026
 function berechneESt(zvE: number): number {
-  const grundfreibetrag = 12096;
+  const grundfreibetrag = 12348;
   if (zvE <= grundfreibetrag) return 0;
   const x = zvE - grundfreibetrag;
   let steuer: number;
-  if (x <= 17442) {
-    steuer = x * 0.14;
-  } else if (x <= 54057) {
-    steuer = 17442 * 0.14 + (x - 17442) * 0.2397;
-  } else if (x <= 243714) {
-    steuer = 17442 * 0.14 + 36615 * 0.2397 + (x - 54057) * 0.42;
+  if (x <= 5451) { // bis zvE 17.799 €
+    const y = x / 10000;
+    steuer = (914.51 * y + 1400) * y;
+  } else if (x <= 57530) { // bis zvE 69.878 €
+    const z = (x - 5451) / 10000;
+    steuer = (173.10 * z + 2397) * z + 1034.87;
+  } else if (x <= 265477) { // bis zvE 277.825 €
+    steuer = 0.42 * zvE - 11135.63;
   } else {
-    steuer = 17442 * 0.14 + 36615 * 0.2397 + 189657 * 0.42 + (x - 243714) * 0.45;
+    steuer = 0.45 * zvE - 19470.38;
   }
   return Math.round(steuer);
 }
 
 // Vereinfachte Hauptjob-Netto-Schätzung (Steuerklasse I, gesetzlich KV)
 function berechneHauptjobNetto(bruttoMonat: number, kirchensteuer: boolean): number {
-  // SV-Beitrag AN: ~20.4% (RV 9.3%, KV 8.15%, PV 2.3%, AV 1.3%)
-  // Beitragsbemessungsgrenze KV: 5512,50 €/Monat; RV/AV: 7550 €/Monat
-  const BBG_KV = 5512.5;
-  const BBG_RV = 7550;
+  // SV-Beitrag AN 2026: ~20,95 % (RV 9,3 %, KV 8,75 % inkl. 1,45 % Zusatz, PV 2,4 % kinderlos, AV 1,3 %)
+  // BBG KV: 5.812,50 €/Monat; BBG RV/AV: 8.450 €/Monat (einheitlich 2026)
+  const BBG_KV = 5812.5;
+  const BBG_RV = 8450;
 
   const rvBasis = Math.min(bruttoMonat, BBG_RV);
   const kvBasis = Math.min(bruttoMonat, BBG_KV);
 
   const rv = Math.round(rvBasis * 0.093 * 100) / 100;
-  const kv = Math.round(kvBasis * 0.0815 * 100) / 100;
-  const pv = Math.round(kvBasis * 0.023 * 100) / 100;
+  const kv = Math.round(kvBasis * 0.0875 * 100) / 100; // 7,3 % + 1,45 % AN-Zusatz
+  const pv = Math.round(kvBasis * 0.024 * 100) / 100;  // 1,8 % Basis + 0,6 % kinderlos
   const av = Math.round(rvBasis * 0.013 * 100) / 100;
   const sv = rv + kv + pv + av;
 
@@ -70,8 +72,8 @@ function berechneHauptjobNetto(bruttoMonat: number, kirchensteuer: boolean): num
   const jahresESt = berechneESt(zvE);
   const lstMonat = Math.round(jahresESt / 12 * 100) / 100;
 
-  // Soli: 5,5% der LSt, Freigrenze 18.130€ Jahres-LSt
-  const soli = jahresESt > 18130 ? Math.round(lstMonat * 0.055 * 100) / 100 : 0;
+  // Soli: 5,5 % der LSt, Freigrenze 20.350 € Jahres-LSt 2026
+  const soli = jahresESt > 20350 ? Math.round(lstMonat * 0.055 * 100) / 100 : 0;
 
   // Kirchensteuer: 9% der LSt
   const kist = kirchensteuer ? Math.round(lstMonat * 0.09 * 100) / 100 : 0;

@@ -38,7 +38,7 @@ export default function GehaltserhoehungRechner() {
     kinderfreibetraege: parseInt(kinder, 10) || 0,
     bundesland,
     kvArt: 'gesetzlich' as const,
-    kvZusatzbeitrag: 1.7,
+    kvZusatzbeitrag: 2.9,
     kvPrivatBeitrag: 0,
     rvBefreit: false,
     abrechnungszeitraum: 'monat' as const,

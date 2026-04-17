@@ -39,7 +39,7 @@ export default function NettolohnOptimiererRechner() {
     kinderfreibetraege: 0,
     bundesland: 'NW',
     kvArt: 'gesetzlich' as const,
-    kvZusatzbeitrag: 1.7,
+    kvZusatzbeitrag: 2.9,
     kvPrivatBeitrag: 0,
     rvBefreit: false,
     abrechnungszeitraum: 'monat' as const,

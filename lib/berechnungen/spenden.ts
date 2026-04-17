@@ -12,25 +12,22 @@ export interface SpendenErgebnis {
   foerderquote: number;          // ersparnis / spende * 100
 }
 
-// Einkommensteuer nach § 32a EStG 2025/2026
+// Einkommensteuer nach § 32a EStG 2026
 function berechneESt(zvE: number): number {
-  const grundfreibetrag = 12096;
+  const grundfreibetrag = 12348;
   if (zvE <= grundfreibetrag) return 0;
-
-  const x = zvE - grundfreibetrag;
-  let steuer: number;
-
-  if (x <= 17442) {
-    steuer = x * 0.14;
-  } else if (x <= 54057) {
-    steuer = 17442 * 0.14 + (x - 17442) * 0.2397;
-  } else if (x <= 243714) {
-    steuer = 17442 * 0.14 + 36615 * 0.2397 + (x - 54057) * 0.42;
-  } else {
-    steuer = 17442 * 0.14 + 36615 * 0.2397 + 189657 * 0.42 + (x - 243714) * 0.45;
+  if (zvE <= 17799) {
+    const y = (zvE - grundfreibetrag) / 10000;
+    return Math.round((914.51 * y + 1400) * y);
   }
-
-  return Math.round(steuer);
+  if (zvE <= 69878) {
+    const z = (zvE - 17799) / 10000;
+    return Math.round((173.10 * z + 2397) * z + 1034.87);
+  }
+  if (zvE <= 277825) {
+    return Math.round(0.42 * zvE - 11135.63);
+  }
+  return Math.round(0.45 * zvE - 19470.38);
 }
 
 export function berechneSpendenErsparnis(

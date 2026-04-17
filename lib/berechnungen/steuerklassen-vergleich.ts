@@ -74,7 +74,7 @@ function berechneLohnsteuerSK5Jahr(bruttoJahr: number): number {
   // Näherungsformel SK5: Differenz der Splittingsteuer zwischen (bruttoNachAbzug + 40.000) und 40.000,
   // aber kein Grundfreibetrag — vereinfachte Approximation via "SK4 × 1,55"-Faktor
   // Genauer: SK5-Tabelle orientiert sich an der Annahme, dass der Partner viel verdient
-  const estOhneGF = berechneEStGrund(bruttoNachAbzug + 12096, 2026) - berechneEStGrund(12096, 2026);
+  const estOhneGF = berechneEStGrund(bruttoNachAbzug + 12348, 2026) - berechneEStGrund(12348, 2026);
   return Math.max(estOhneGF, bruttoNachAbzug * 0.14);
 }
 
@@ -92,12 +92,12 @@ function berechneLohnsteuerByKlasse(bruttoJahr: number, sk: Steuerklasse): numbe
   }
 }
 
-// Sozialversicherungsbeiträge (AN-Anteil, vereinfacht 20 % des Bruttos bis BBG)
+// Sozialversicherungsbeiträge 2026 (AN-Anteil, bis BBG)
 function berechneSvJahr(bruttoJahr: number): number {
-  const bbgKV = 5512.50 * 12; // 66.150
-  const bbgRV = 7550 * 12;    // 90.600
-  const kv = Math.min(bruttoJahr, bbgKV) * (0.073 + 0.0085); // 0,85 % Zusatzbeitrag Durchschnitt
-  const pv = Math.min(bruttoJahr, bbgKV) * 0.017;
+  const bbgKV = 5812.50 * 12; // 69.750 €
+  const bbgRV = 8450 * 12;    // 101.400 € (einheitlich 2026)
+  const kv = Math.min(bruttoJahr, bbgKV) * (0.073 + 0.0145); // 7,3 % + 1,45 % AN-Zusatz (Durchschnitt 2026: 2,9 %)
+  const pv = Math.min(bruttoJahr, bbgKV) * 0.018;            // PV Basis 1,8 % AN (3,6 % gesamt)
   const rv = Math.min(bruttoJahr, bbgRV) * 0.093;
   const av = Math.min(bruttoJahr, bbgRV) * 0.013;
   return kv + pv + rv + av;

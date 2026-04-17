@@ -45,7 +45,7 @@ function makeBnEingabe(brutto: number, steuerklasse: TeilzeitEingabe['steuerklas
     kinderfreibetraege: 0,
     bundesland,
     kvArt: 'gesetzlich',
-    kvZusatzbeitrag: 1.7,
+    kvZusatzbeitrag: 2.9,
     kvPrivatBeitrag: 0,
     rvBefreit: false,
     abrechnungszeitraum: 'monat',

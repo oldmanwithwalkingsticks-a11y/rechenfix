@@ -29,29 +29,29 @@ export interface EinkommensteuerErgebnis {
 const PARAMS: Record<Steuerjahr, { grundfreibetrag: number; soliFreigrenze: number }> = {
   2024: { grundfreibetrag: 11604, soliFreigrenze: 18130 },
   2025: { grundfreibetrag: 12096, soliFreigrenze: 19950 },
-  2026: { grundfreibetrag: 12096, soliFreigrenze: 20350 },
+  2026: { grundfreibetrag: 12348, soliFreigrenze: 20350 },
 };
 
-// Einkommensteuer nach § 32a EStG — Formelberechnung 2026
+// Einkommensteuer nach § 32a EStG i. d. F. v. 2024 — Formelberechnung 2026
 function berechneESt2026(zvE: number): number {
-  const gf = 12096;
+  const gf = 12348;
   if (zvE <= gf) return 0;
-  // Zone 2: 12.097 – 17.443 €
-  if (zvE <= 17443) {
+  // Zone 2: 12.349 – 17.799 €
+  if (zvE <= 17799) {
     const y = (zvE - gf) / 10000;
-    return Math.floor((932.30 * y + 1400) * y);
+    return Math.floor((914.51 * y + 1400) * y);
   }
-  // Zone 3: 17.444 – 66.760 €
-  if (zvE <= 66760) {
-    const z = (zvE - 17443) / 10000;
-    return Math.floor((176.86 * z + 2397) * z + 1015.42);
+  // Zone 3: 17.800 – 69.878 €
+  if (zvE <= 69878) {
+    const z = (zvE - 17799) / 10000;
+    return Math.floor((173.10 * z + 2397) * z + 1034.87);
   }
-  // Zone 4: 66.761 – 277.825 €
+  // Zone 4: 69.879 – 277.825 €
   if (zvE <= 277825) {
-    return Math.floor(0.42 * zvE - 10636.30);
+    return Math.floor(0.42 * zvE - 11135.63);
   }
   // Zone 5: ab 277.826 €
-  return Math.floor(0.45 * zvE - 18970.05);
+  return Math.floor(0.45 * zvE - 19470.38);
 }
 
 // Einkommensteuer 2025 (Grundfreibetrag 12.096 € — Werte praktisch identisch zu 2026 bis auf Details)
