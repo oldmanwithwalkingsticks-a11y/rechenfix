@@ -32,22 +32,22 @@ export interface AbfindungErgebnis {
   nebenAnteilProzent: number; // Soli + KiSt
 }
 
-// Einkommensteuer nach § 32a EStG (Grundtabelle, vereinfacht 2025/2026)
+// Einkommensteuer nach § 32a EStG (Grundtabelle 2026)
 function berechneESt(zvE: number, steuerklasse: number): number {
-  const grundfreibetrag = 12096;
+  const grundfreibetrag = 12348;
   if (zvE <= grundfreibetrag) return 0;
 
-  const zuVersteuern = zvE - grundfreibetrag;
   let steuer = 0;
-
-  if (zuVersteuern <= 17442) {
-    steuer = zuVersteuern * 0.14;
-  } else if (zuVersteuern <= 54057) {
-    steuer = 17442 * 0.14 + (zuVersteuern - 17442) * 0.2397;
-  } else if (zuVersteuern <= 243714) {
-    steuer = 17442 * 0.14 + 36615 * 0.2397 + (zuVersteuern - 54057) * 0.42;
+  if (zvE <= 17799) {
+    const y = (zvE - grundfreibetrag) / 10000;
+    steuer = (914.51 * y + 1400) * y;
+  } else if (zvE <= 69878) {
+    const z = (zvE - 17799) / 10000;
+    steuer = (173.10 * z + 2397) * z + 1034.87;
+  } else if (zvE <= 277825) {
+    steuer = 0.42 * zvE - 11135.63;
   } else {
-    steuer = 17442 * 0.14 + 36615 * 0.2397 + 189657 * 0.42 + (zuVersteuern - 243714) * 0.45;
+    steuer = 0.45 * zvE - 19470.38;
   }
 
   // Steuerklassen-Faktor
@@ -58,9 +58,8 @@ function berechneESt(zvE: number, steuerklasse: number): number {
 }
 
 function berechneSoli(lohnsteuer: number): number {
-  // Soli: 5,5% auf Lohnsteuer, Freigrenze 18.130€/Jahr → ca. 1.511€/Monat
-  // Vereinfacht: Freigrenze auf Jahresbasis
-  if (lohnsteuer <= 18130) return 0;
+  // Soli: 5,5 % auf Lohnsteuer, Freigrenze 20.350 €/Jahr 2026
+  if (lohnsteuer <= 20350) return 0;
   return Math.round(lohnsteuer * 0.055 * 100) / 100;
 }
 

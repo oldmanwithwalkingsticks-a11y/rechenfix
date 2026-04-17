@@ -23,7 +23,7 @@ function berechneSchnell(brutto: number, sk: 1 | 3 | 5): BruttoNettoErgebnis {
     kinderfreibetraege: 0,
     bundesland: 'NW',
     kvArt: 'gesetzlich',
-    kvZusatzbeitrag: 1.7,
+    kvZusatzbeitrag: 2.9,
     kvPrivatBeitrag: 0,
     rvBefreit: false,
     abrechnungszeitraum: 'monat',
@@ -37,7 +37,7 @@ export default function BruttoNettoRechner() {
   const [kinder, setKinder] = useState(0);
   const [bundesland, setBundesland] = useState('NW');
   const [kvArt, setKvArt] = useState<'gesetzlich' | 'privat'>('gesetzlich');
-  const [kvZusatzbeitrag, setKvZusatzbeitrag] = useState('1.7');
+  const [kvZusatzbeitrag, setKvZusatzbeitrag] = useState('2.9');
   const [kvPrivatBeitrag, setKvPrivatBeitrag] = useState('');
   const [rvBefreit, setRvBefreit] = useState(false);
   const [abrechnungszeitraum, setAbrechnungszeitraum] = useState<'monat' | 'jahr'>('monat');

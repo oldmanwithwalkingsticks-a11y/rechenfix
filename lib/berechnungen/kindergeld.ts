@@ -36,7 +36,7 @@ export interface KindergeldErgebnis {
 
 // === KONSTANTEN 2026 ===
 
-export const KINDERGELD_PRO_KIND_MONAT = 255;
+export const KINDERGELD_PRO_KIND_MONAT = 259;
 
 // Kinderfreibetrag pro Kind (Einzelveranlagung = halber Freibetrag, Zusammenveranlagung = voller)
 const KINDERFREIBETRAG_EINZEL = 4878;
@@ -64,22 +64,22 @@ function rund2(n: number): number {
 }
 
 /**
- * Einkommensteuer Grundtabelle 2026 (§ 32a EStG, vereinfacht)
+ * Einkommensteuer Grundtabelle 2026 (§ 32a EStG)
  */
 function estGrundtabelle(zvE: number): number {
-  if (zvE <= 12096) return 0;
-  if (zvE <= 17443) {
-    const y = (zvE - 12096) / 10000;
-    return Math.round((932.30 * y + 1400) * y);
+  if (zvE <= 12348) return 0;
+  if (zvE <= 17799) {
+    const y = (zvE - 12348) / 10000;
+    return Math.round((914.51 * y + 1400) * y);
   }
-  if (zvE <= 66760) {
-    const z = (zvE - 17443) / 10000;
-    return Math.round((176.64 * z + 2397) * z + 1025.38);
+  if (zvE <= 69878) {
+    const z = (zvE - 17799) / 10000;
+    return Math.round((173.10 * z + 2397) * z + 1034.87);
   }
   if (zvE <= 277825) {
-    return Math.round(0.42 * zvE - 10636.31);
+    return Math.round(0.42 * zvE - 11135.63);
   }
-  return Math.round(0.45 * zvE - 18971.06);
+  return Math.round(0.45 * zvE - 19470.38);
 }
 
 /**

@@ -35,9 +35,9 @@ export interface WahrerStundenlohnErgebnis {
 // Vereinfachte Netto-Schätzung (Steuerklasse 1, keine Kinder, keine Kirchensteuer)
 function schaetzeNetto(brutto: number): number {
   if (brutto <= 0) return 0;
-  // Vereinfachte Abzüge: ~Sozialversicherung 20.4% + Lohnsteuer progressiv
-  const svBeitrag = brutto * 0.204; // AN-Anteil KV+PV+RV+AV
-  const zuVersteuern = Math.max(0, brutto * 12 - 11784) / 12; // Grundfreibetrag 2025 anteilig
+  // Vereinfachte Abzüge: ~Sozialversicherung 20,95 % (2026) + Lohnsteuer progressiv
+  const svBeitrag = brutto * 0.2095; // AN-Anteil KV 8,75 % + PV 2,4 % + RV 9,3 % + AV 1,3 %
+  const zuVersteuern = Math.max(0, brutto * 12 - 12348) / 12; // Grundfreibetrag 2026 anteilig
   let lohnsteuer = 0;
   if (zuVersteuern > 0) {
     // Progressive Schätzung

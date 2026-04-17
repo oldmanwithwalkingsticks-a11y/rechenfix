@@ -17,17 +17,17 @@ export const finanzenRechner: RechnerConfig[] = [
 
 **So funktioniert die Gehaltsberechnung**
 
-Vom Bruttogehalt werden zwei Arten von Abzügen vorgenommen: Steuern und Sozialabgaben. Die Steuern umfassen die Lohnsteuer (progressiv nach Einkommen), den Solidaritätszuschlag (5,5% der Lohnsteuer, mit Freigrenze von 18.130 € Jahressteuer) und ggf. die Kirchensteuer (8% in BW und BY, 9% in allen anderen Bundesländern). Die Sozialabgaben setzen sich aus Kranken-, Renten-, Arbeitslosen- und Pflegeversicherung zusammen.
+Vom Bruttogehalt werden zwei Arten von Abzügen vorgenommen: Steuern und Sozialabgaben. Die Steuern umfassen die Lohnsteuer (progressiv nach Einkommen), den Solidaritätszuschlag (5,5 % der Lohnsteuer, mit Freigrenze von 20.350 € Jahressteuer 2026) und ggf. die Kirchensteuer (8 % in BW und BY, 9 % in allen anderen Bundesländern). Die Sozialabgaben setzen sich aus Kranken-, Renten-, Arbeitslosen- und Pflegeversicherung zusammen.
 
-**Alle Abzüge im Detail (2025/2026)**
+**Alle Abzüge im Detail (2026)**
 
-- **Lohnsteuer:** Progressive Besteuerung nach dem Einkommensteuertarif. Grundfreibetrag 2025: 12.096 €. Der Eingangssteuersatz beträgt 14%, der Spitzensteuersatz 42% (ab ca. 66.761 €) und der Reichensteuersatz 45% (ab 277.826 €).
-- **Solidaritätszuschlag:** 5,5% der Lohnsteuer. Seit 2021 für ca. 90% der Steuerzahler abgeschafft (Freigrenze: 18.130 € Jahressteuer, ca. 73.000 € Jahresbrutto in SK1).
-- **Kirchensteuer:** 8% der Lohnsteuer in Baden-Württemberg und Bayern, 9% in allen anderen Bundesländern. Nur bei Kirchenmitgliedschaft.
-- **Krankenversicherung (GKV):** Allgemeiner Beitragssatz 14,6% (Arbeitnehmeranteil: 7,3%) + kassenindividueller Zusatzbeitrag (Durchschnitt 2025: 1,7%, AN-Anteil: 0,85%). Beitragsbemessungsgrenze: 5.512,50 €/Monat.
-- **Rentenversicherung:** 18,6% (Arbeitnehmeranteil: 9,3%). BBG West: 7.550 €/Monat, BBG Ost: 7.450 €/Monat.
-- **Arbeitslosenversicherung:** 2,6% (Arbeitnehmeranteil: 1,3%). Gleiche BBG wie RV.
-- **Pflegeversicherung:** 3,4% (Arbeitnehmeranteil: 1,7%). Kinderlose ab 23 Jahren zahlen einen Zuschlag von 0,6%. Ab dem 2. Kind gibt es Abschläge. BBG wie KV.
+- **Lohnsteuer:** Progressive Besteuerung nach dem Einkommensteuertarif § 32a EStG. Grundfreibetrag 2026: 12.348 €. Der Eingangssteuersatz beträgt 14 %, der Spitzensteuersatz 42 % (ab 69.879 €) und der Reichensteuersatz 45 % (ab 277.826 €).
+- **Solidaritätszuschlag:** 5,5 % der Lohnsteuer. Seit 2021 für ca. 90 % der Steuerzahler abgeschafft (Freigrenze 2026: 20.350 € Jahressteuer).
+- **Kirchensteuer:** 8 % der Lohnsteuer in Baden-Württemberg und Bayern, 9 % in allen anderen Bundesländern. Nur bei Kirchenmitgliedschaft.
+- **Krankenversicherung (GKV):** Allgemeiner Beitragssatz 14,6 % (Arbeitnehmeranteil: 7,3 %) + kassenindividueller Zusatzbeitrag (Durchschnitt 2026: 2,9 %, AN-Anteil: 1,45 %). Beitragsbemessungsgrenze: 5.812,50 €/Monat.
+- **Rentenversicherung:** 18,6 % (Arbeitnehmeranteil: 9,3 %). BBG 2026 einheitlich: 8.450 €/Monat (seit 2025 keine West/Ost-Trennung mehr).
+- **Arbeitslosenversicherung:** 2,6 % (Arbeitnehmeranteil: 1,3 %). Gleiche BBG wie RV.
+- **Pflegeversicherung:** 3,6 % (Arbeitnehmeranteil: 1,8 %). Kinderlose ab 23 Jahren zahlen einen Zuschlag von 0,6 %. Ab dem 2. Kind Abschlag von 0,25 pp pro Kind (bis 5. Kind, unter 25 J.). BBG wie KV.
 
 **Die 6 Steuerklassen erklärt**
 
@@ -84,7 +84,7 @@ Unser Brutto-Netto-Rechner liefert eine gute Orientierung, basiert jedoch auf ve
       },
       {
         frage: 'Was ist die Beitragsbemessungsgrenze?',
-        antwort: 'Die BBG ist die Einkommensgrenze, bis zu der Sozialabgaben berechnet werden. Für KV/PV: 5.512,50 €/Monat (2025). Für RV/AV: 7.550 €/Monat (West) bzw. 7.450 €/Monat (Ost). Einkommen darüber ist sozialabgabenfrei.',
+        antwort: 'Die BBG ist die Einkommensgrenze, bis zu der Sozialabgaben berechnet werden. 2026: KV/PV 5.812,50 €/Monat (69.750 €/Jahr), RV/AV einheitlich 8.450 €/Monat (101.400 €/Jahr). Einkommen darüber ist sozialabgabenfrei.',
       },
       {
         frage: 'Wie berechne ich mein Netto pro Stunde?',
@@ -1622,7 +1622,7 @@ Ein beliebter Vergütungsbestandteil für Geschäftsführer ist der **Firmenwage
 
 **Einkommensteuer nach § 32a EStG**
 
-Auf das zu versteuernde Einkommen (Brutto + geldwerter Vorteil − Vorsorge − Werbungskosten) wird die **Einkommensteuer** nach dem Grundtarif berechnet. 2026 gilt der neue Grundfreibetrag von 12.096 €. Zusätzlich fällt ab einem ESt-Betrag von 19.950 € der Solidaritätszuschlag von 5,5 % an — bei höheren Einkommen also immer. Kirchenmitglieder zahlen zusätzlich 8–9 % Kirchensteuer auf die Einkommensteuer.
+Auf das zu versteuernde Einkommen (Brutto + geldwerter Vorteil − Vorsorge − Werbungskosten) wird die **Einkommensteuer** nach dem Grundtarif berechnet. 2026 gilt der Grundfreibetrag von 12.348 €. Zusätzlich fällt ab einem ESt-Betrag von 20.350 € der Solidaritätszuschlag von 5,5 % an — bei höheren Einkommen also immer. Kirchenmitglieder zahlen zusätzlich 8–9 % Kirchensteuer auf die Einkommensteuer.
 
 **Angemessenheit der GGF-Vergütung**
 
@@ -2340,10 +2340,10 @@ Der Grenzsteuersatz ist immer höher als der Durchschnittssteuersatz. Das bedeut
 **Der Einkommensteuertarif 2026 (§ 32a EStG)**
 
 Der Tarif gliedert sich in fünf Zonen:
-- **Grundfreibetrag** (bis 12.096 €): 0 % — steuerfrei
-- **Progressionszone I** (12.097–29.538 €): 14–24 % — linear ansteigend
-- **Progressionszone II** (29.539–66.153 €): 24–42 % — linear ansteigend
-- **Proportionalzone** (66.154–277.825 €): 42 % — konstant (Spitzensteuersatz)
+- **Grundfreibetrag** (bis 12.348 €): 0 % — steuerfrei
+- **Progressionszone I** (12.349–17.799 €): 14–24 % — quadratisch ansteigend
+- **Progressionszone II** (17.800–69.878 €): 24–42 % — quadratisch ansteigend
+- **Proportionalzone** (69.879–277.825 €): 42 % — konstant (Spitzensteuersatz)
 - **Reichensteuer** (ab 277.826 €): 45 % — konstant
 
 Wichtig: Die Zonengrenzen gelten für das **zu versteuernde Einkommen** (zvE), nicht für das Bruttogehalt. Vom Brutto werden Werbungskosten, Sonderausgaben und weitere Freibeträge abgezogen.
@@ -2694,16 +2694,16 @@ Das zvE ist NICHT identisch mit dem Bruttogehalt. Es ergibt sich aus dem Gesamtb
 
 Unser Rechner geht vom bereits ermittelten zvE aus. Wer vom Bruttogehalt starten möchte, nutzt den Brutto-Netto-Rechner.
 
-**Grundfreibetrag 2026: 12.096 €**
+**Grundfreibetrag 2026: 12.348 €**
 
-Bis zu einem zvE von 12.096 € (2026) fällt keine Einkommensteuer an (Grundfreibetrag). Dieser Betrag sichert das Existenzminimum. Bei Zusammenveranlagung (Splitting) verdoppelt sich der Grundfreibetrag auf 24.192 €.
+Bis zu einem zvE von 12.348 € (2026) fällt keine Einkommensteuer an (Grundfreibetrag). Dieser Betrag sichert das Existenzminimum. Bei Zusammenveranlagung (Splitting) verdoppelt sich der Grundfreibetrag auf 24.696 €.
 
 **Die fünf Zonen des Einkommensteuertarifs 2026**
 
-- **Zone 1 (bis 12.096 €):** Grundfreibetrag — Steuer = 0 €
-- **Zone 2 (12.097–17.443 €):** Progressionszone I — Eingangssteuersatz 14 %, steigt auf 24 %
-- **Zone 3 (17.444–66.760 €):** Progressionszone II — Steuersatz steigt von 24 % auf 42 %
-- **Zone 4 (66.761–277.825 €):** Spitzensteuersatz 42 % linear
+- **Zone 1 (bis 12.348 €):** Grundfreibetrag — Steuer = 0 €
+- **Zone 2 (12.349–17.799 €):** Progressionszone I — Eingangssteuersatz 14 %, steigt auf 24 %
+- **Zone 3 (17.800–69.878 €):** Progressionszone II — Steuersatz steigt von 24 % auf 42 %
+- **Zone 4 (69.879–277.825 €):** Spitzensteuersatz 42 % linear
 - **Zone 5 (ab 277.826 €):** Reichensteuer 45 %
 
 **Grenzsteuersatz vs. Durchschnittssteuersatz**
@@ -2729,7 +2729,7 @@ Die Kirchensteuer beträgt 9 % der ESt in 14 Bundesländern und 8 % in Baden-Wü
     faq: [
       {
         frage: 'Wie hoch ist der Grundfreibetrag 2026?',
-        antwort: 'Der Grundfreibetrag beträgt 2026 12.096 € für Alleinstehende und 24.192 € für Verheiratete mit Zusammenveranlagung. Einkommen bis zu diesem Betrag bleibt steuerfrei — es sichert das steuerliche Existenzminimum.',
+        antwort: 'Der Grundfreibetrag beträgt 2026 12.348 € für Alleinstehende und 24.696 € für Verheiratete mit Zusammenveranlagung. Einkommen bis zu diesem Betrag bleibt steuerfrei — es sichert das steuerliche Existenzminimum.',
       },
       {
         frage: 'Was ist der Unterschied zwischen Grenz- und Durchschnittssteuersatz?',
@@ -2961,7 +2961,7 @@ Bei Arbeitnehmern wird die gezahlte Lohnsteuer am Jahresende auf die endgültige
 
 Die Steuerklasse bestimmt, wie viel Lohnsteuer monatlich einbehalten wird. Sie hat KEINEN Einfluss auf die Jahressteuer (die wird über die Steuererklärung ausgeglichen):
 
-- **Klasse I:** Ledige, Geschiedene, Verwitwete — Standardklasse. Grundfreibetrag 12.096 €.
+- **Klasse I:** Ledige, Geschiedene, Verwitwete — Standardklasse. Grundfreibetrag 12.348 €.
 - **Klasse II:** Alleinerziehende mit mindestens einem Kind im Haushalt. Bietet zusätzlich Entlastungsbetrag (4.260 €). Muss beim Finanzamt beantragt werden.
 - **Klasse III:** Verheiratete mit deutlich höherem Einkommen als der Partner. Niedrigste LSt. Partner muss in Klasse V.
 - **Klasse IV:** Verheiratete mit ähnlich hohem Einkommen. Wie Klasse I pro Partner. Optional mit Faktor.
@@ -3012,7 +3012,7 @@ Das geht mit dem Formular „Antrag auf Lohnsteuer-Ermäßigung" (online über E
       },
       {
         frage: 'Wie hoch ist der Grundfreibetrag 2026?',
-        antwort: 'Der Grundfreibetrag 2026 beträgt 12.096 € — das entspricht genau dem Wert von 2025. Bis zu diesem Jahresbetrag fällt keine Einkommensteuer an (in Klasse I, II, IV). In Klasse III ist der Grundfreibetrag verdoppelt (24.192 €, Splitting). Klasse V und VI haben keinen Grundfreibetrag.',
+        antwort: 'Der Grundfreibetrag 2026 beträgt 12.348 € (2025 waren es 12.096 €). Bis zu diesem Jahresbetrag fällt keine Einkommensteuer an (in Klasse I, II, IV). In Klasse III ist der Grundfreibetrag verdoppelt (24.696 €, Splitting). Klasse V und VI haben keinen Grundfreibetrag.',
       },
     ],
   },

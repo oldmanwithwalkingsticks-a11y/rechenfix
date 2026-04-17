@@ -32,9 +32,9 @@ export interface RentenErgebnis {
 }
 
 // Konstanten 2026
-const RENTENWERT = 39.32; // € pro Rentenpunkt (ab 01.07.2025, gilt 2026)
-const DURCHSCHNITTSENTGELT = 45358; // Vorläufiges Durchschnittsentgelt 2026
-const BBG_WEST = 90600; // Beitragsbemessungsgrenze West 2026
+const RENTENWERT = 39.32; // € pro Rentenpunkt (ab 01.07.2025, gilt bis 30.06.2026)
+const DURCHSCHNITTSENTGELT = 51944; // Vorläufiges Durchschnittsentgelt 2026
+const BBG_WEST = 101400; // BBG RV 2026 (einheitlich, 8.450 €/Monat)
 const REGELALTERSGRENZE = 67;
 
 export function berechneRente(eingabe: RentenEingabe): RentenErgebnis | null {
@@ -86,8 +86,8 @@ export function berechneRente(eingabe: RentenEingabe): RentenErgebnis | null {
 
   // Vereinfachter Grenzsteuersatz für Rentner (ca. 15-20% im unteren Bereich)
   const jahrRenteSteuerpflichtig = bruttoRente * 12 * steuerpflichtAnteil / 100;
-  // Grundfreibetrag ca. 12.096 € (2026 geschätzt)
-  const zuVersteuern = Math.max(0, jahrRenteSteuerpflichtig - 12096);
+  // Grundfreibetrag 2026: 12.348 €
+  const zuVersteuern = Math.max(0, jahrRenteSteuerpflichtig - 12348);
   // Vereinfachter Durchschnittssteuersatz
   let steuerSatz = 0;
   if (zuVersteuern > 0) {

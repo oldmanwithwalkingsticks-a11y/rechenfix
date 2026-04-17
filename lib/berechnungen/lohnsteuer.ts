@@ -39,13 +39,26 @@ const ENTLASTUNGSBETRAG_ALLEINERZIEHENDE = 4260;
 const SOLI_FREIGRENZE_JAHR = 20350;      // 2026 Einzelveranlagung (Steuerklasse I/II/IV/V/VI)
 const SOLI_FREIGRENZE_SPLITTING = 40700; // 2026 Splitting (Steuerklasse III)
 
-// Vereinfachte Vorsorgepauschale (Approximation aus § 39b EStG): ca. 12 % des Bruttos, gedeckelt
+// BBG 2026 für die Vorsorgepauschale
+const BBG_RV_JAHR = 101400; // RV/AV einheitlich
+const BBG_KV_JAHR = 69750;  // KV/PV
+
+// Vorsorgepauschale nach § 39b Abs. 4 EStG (2026).
+// Zusammengesetzt aus:
+//   (a) Teilbetrag Rentenversicherung: AN-Anteil RV 9,3 % (bis BBG RV), 100 % anrechenbar seit 2023.
+//   (b) Teilbetrag Kranken-/Pflegeversicherung: AN-Anteil KV Basis 7,3 % + halber durchschnittlicher
+//       Zusatzbeitrag (2026: 1,45 %) + PV-Basisanteil 1,8 % — je bis BBG KV/PV.
+//       Kinderlosenzuschlag und Kinderabschläge fließen NICHT in die Vorsorgepauschale ein (§ 39b Abs. 4 Satz 2).
 function vorsorgepauschale(bruttoJahr: number): number {
-  return Math.min(bruttoJahr * 0.12, 15000);
+  const rvAnteil = Math.min(bruttoJahr, BBG_RV_JAHR) * 0.093;
+  const kvBasis  = Math.min(bruttoJahr, BBG_KV_JAHR) * 0.073;
+  const kvZusatz = Math.min(bruttoJahr, BBG_KV_JAHR) * 0.0145; // AN-Anteil Zusatzbeitrag 2026
+  const pvBasis  = Math.min(bruttoJahr, BBG_KV_JAHR) * 0.018;  // PV-Basissatz AN-Anteil
+  return rvAnteil + kvBasis + kvZusatz + pvBasis;
 }
 
 // Lohnsteuer pro Steuerklasse (vereinfacht nach PAP 2026)
-function berechneLohnsteuerJahr(
+export function berechneLohnsteuerJahr(
   bruttoJahr: number,
   sk: Steuerklasse,
   jahresfreibetrag: number,
@@ -84,7 +97,7 @@ function berechneLohnsteuerJahr(
     case 5: {
       // Stark vereinfachte Approximation nach PAP: hohe LSt, kein Grundfreibetrag
       // Näherung: ESt(zvE + 2×Grundfreibetrag) − ESt(2×Grundfreibetrag), gedeckelt
-      const gf = 12096;
+      const gf = 12348;
       const estMitBasis = berechneEStGrund(zvE + 2 * gf, 2026);
       const estBasis = berechneEStGrund(2 * gf, 2026);
       const naeherung = estMitBasis - estBasis;
