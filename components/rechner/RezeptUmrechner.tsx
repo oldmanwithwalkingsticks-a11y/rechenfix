@@ -16,7 +16,8 @@ interface Zutat {
 
 const EINHEITEN: Einheit[] = ['g', 'kg', 'ml', 'l', 'EL', 'TL', 'Stück', 'Prise', 'Bund', 'Dose', 'Becher'];
 
-const BEISPIEL_ZUTATEN: Zutat[] = [
+/** Standard-Zutaten: Quelle für Initial-State UND Reset-Button */
+const DEFAULT_INGREDIENTS: Zutat[] = [
   { id: 1, menge: '250', einheit: 'g',     name: 'Mehl' },
   { id: 2, menge: '4',   einheit: 'Stück', name: 'Eier' },
   { id: 3, menge: '500', einheit: 'ml',    name: 'Milch' },
@@ -24,6 +25,14 @@ const BEISPIEL_ZUTATEN: Zutat[] = [
   { id: 5, menge: '2',   einheit: 'EL',    name: 'Zucker' },
   { id: 6, menge: '30',  einheit: 'g',     name: 'Butter' },
 ];
+
+const MIN_PORTIONEN = 1;
+const MAX_PORTIONEN = 50;
+
+function clampPortionen(raw: number): number {
+  if (isNaN(raw)) return MIN_PORTIONEN;
+  return Math.min(MAX_PORTIONEN, Math.max(MIN_PORTIONEN, raw));
+}
 
 function parseZahl(s: string): number {
   const n = parseFloat(s.replace(',', '.'));
@@ -64,25 +73,49 @@ function fmtMenge(n: number, einheit: Einheit): string {
 }
 
 export default function RezeptUmrechner() {
-  const [originalPortionen, setOriginalPortionen] = useState('4');
-  const [gewuenschtePortionen, setGewuenschtePortionen] = useState('6');
-  const [zutaten, setZutaten] = useState<Zutat[]>(BEISPIEL_ZUTATEN);
+  const [originalPortionen, setOriginalPortionen] = useState<number>(4);
+  const [gewuenschtePortionen, setGewuenschtePortionen] = useState<number>(6);
+  const [zutaten, setZutaten] = useState<Zutat[]>(DEFAULT_INGREDIENTS);
+
+  // Guard: ungültige Portionen (< 1) blenden Faktor und Tabelle aus
+  const portionenValide = originalPortionen >= 1 && gewuenschtePortionen >= 1;
 
   const faktor = useMemo(() => {
-    const orig = parseZahl(originalPortionen) || 1;
-    const gewunsch = parseZahl(gewuenschtePortionen) || 1;
-    return gewunsch / orig;
-  }, [originalPortionen, gewuenschtePortionen]);
+    if (!portionenValide) return 1;
+    return gewuenschtePortionen / originalPortionen;
+  }, [originalPortionen, gewuenschtePortionen, portionenValide]);
 
   const neuesZutatenliste = useMemo(() => {
-    return zutaten.map(z => ({
-      ...z,
-      neueMenge: parseZahl(z.menge) * faktor,
-      neueMengeFormatiert: fmtMenge(parseZahl(z.menge) * faktor, z.einheit),
-    }));
+    return zutaten.map(z => {
+      // Prisen-Cap: Einheit „Prise" wird nie skaliert
+      if (z.einheit === 'Prise') {
+        const originalMenge = parseZahl(z.menge);
+        return {
+          ...z,
+          neueMenge: originalMenge,
+          neueMengeFormatiert: fmtMenge(originalMenge, 'Prise'),
+        };
+      }
+      return {
+        ...z,
+        neueMenge: parseZahl(z.menge) * faktor,
+        neueMengeFormatiert: fmtMenge(parseZahl(z.menge) * faktor, z.einheit),
+      };
+    });
   }, [zutaten, faktor]);
 
   const fmtFaktor = faktor.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+
+  function handlePortionenChange(setter: (n: number) => void, e: React.ChangeEvent<HTMLInputElement>) {
+    const raw = parseInt(e.target.value, 10);
+    setter(clampPortionen(raw));
+  }
+
+  function handleReset() {
+    setOriginalPortionen(4);
+    setGewuenschtePortionen(4);
+    setZutaten(DEFAULT_INGREDIENTS);
+  }
 
   function addZutat() {
     const neueId = Math.max(...zutaten.map(z => z.id), 0) + 1;
@@ -113,10 +146,11 @@ export default function RezeptUmrechner() {
           <input
             id="rezept-original"
             type="number"
-            min="1"
-            max="50"
+            min={MIN_PORTIONEN}
+            max={MAX_PORTIONEN}
+            step="1"
             value={originalPortionen}
-            onChange={e => setOriginalPortionen(e.target.value)}
+            onChange={e => handlePortionenChange(setOriginalPortionen, e)}
             className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"
           />
         </div>
@@ -127,10 +161,11 @@ export default function RezeptUmrechner() {
           <input
             id="rezept-gewuenscht"
             type="number"
-            min="1"
-            max="50"
+            min={MIN_PORTIONEN}
+            max={MAX_PORTIONEN}
+            step="1"
             value={gewuenschtePortionen}
-            onChange={e => setGewuenschtePortionen(e.target.value)}
+            onChange={e => handlePortionenChange(setGewuenschtePortionen, e)}
             className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"
           />
         </div>
@@ -140,21 +175,21 @@ export default function RezeptUmrechner() {
       <div className="mb-6 flex flex-wrap gap-2">
         <button
           type="button"
-          onClick={() => setGewuenschtePortionen(String(parseZahl(originalPortionen) * 2))}
+          onClick={() => setGewuenschtePortionen(clampPortionen(originalPortionen * 2))}
           className="px-3 py-1.5 rounded-lg border border-gray-200 dark:border-gray-600 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50"
         >
           × 2 (verdoppeln)
         </button>
         <button
           type="button"
-          onClick={() => setGewuenschtePortionen(String(parseZahl(originalPortionen) / 2))}
+          onClick={() => setGewuenschtePortionen(clampPortionen(Math.round(originalPortionen / 2)))}
           className="px-3 py-1.5 rounded-lg border border-gray-200 dark:border-gray-600 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50"
         >
           ÷ 2 (halbieren)
         </button>
         <button
           type="button"
-          onClick={() => setGewuenschtePortionen(originalPortionen)}
+          onClick={handleReset}
           className="px-3 py-1.5 rounded-lg border border-gray-200 dark:border-gray-600 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50"
         >
           Zurücksetzen
@@ -162,13 +197,22 @@ export default function RezeptUmrechner() {
       </div>
 
       {/* === Ergebnis: Faktor === */}
-      <div className="result-box mb-6 text-center">
-        <p className="text-white/80 text-sm mb-1">Umrechnungsfaktor</p>
-        <p className="text-5xl font-bold">× {fmtFaktor}</p>
-        <p className="text-white/90 text-sm mt-2">
-          Von {originalPortionen || '?'} auf {gewuenschtePortionen || '?'} Portionen
-        </p>
-      </div>
+      {portionenValide ? (
+        <div className="result-box mb-6 text-center">
+          <p className="text-white/80 text-sm mb-1">Umrechnungsfaktor</p>
+          <p className="text-5xl font-bold">× {fmtFaktor}</p>
+          <p className="text-white/90 text-sm mt-2">
+            Von {originalPortionen} auf {gewuenschtePortionen} Portionen
+          </p>
+        </div>
+      ) : (
+        <div
+          role="alert"
+          className="mb-6 p-4 rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-300 text-sm"
+        >
+          <strong>Hinweis:</strong> Bitte Original- und gewünschte Portionen eingeben (mindestens 1).
+        </div>
+      )}
 
       {/* === Zutaten === */}
       <div className="mb-6">
@@ -227,10 +271,11 @@ export default function RezeptUmrechner() {
       </div>
 
       {/* === Umgerechnete Zutatenliste === */}
+      {portionenValide && (
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
         <div className="px-4 pt-4 pb-1">
           <h2 className="font-bold text-gray-700 dark:text-gray-200">
-            Umgerechnete Zutaten für {gewuenschtePortionen || '?'} Portionen
+            Umgerechnete Zutaten für {gewuenschtePortionen} Portionen
           </h2>
         </div>
         <div className="overflow-x-auto">
@@ -265,6 +310,7 @@ export default function RezeptUmrechner() {
           </table>
         </div>
       </div>
+      )}
 
       {/* Tipp Backrezepte */}
       <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-xl p-4 mb-6">
