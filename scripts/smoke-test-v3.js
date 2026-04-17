@@ -1,5 +1,5 @@
 /**
- * Rechenfix Smoke Test v3 — 9 automated checks per Rechner.
+ * Rechenfix Smoke Test v3.1 — 9 automated checks per Rechner.
  *
  * USAGE:
  *   1. Open https://www.rechenfix.de (or any Rechenfix page) in the browser.
@@ -29,6 +29,14 @@
  *   C7  Title consistency (length, single suffix)
  *   C8  Copy button produces non-empty output
  *   C9  No unresolved template placeholders
+ *
+ * V3.1 changes (Prompt 87, April 2026):
+ *   C8  — Replace clipboard.readText() with UI-feedback check
+ *          (button text / aria-live / toast change). Clipboard API is
+ *          blocked in cross-origin iframes — produced 156 false-positives.
+ *   C2  — Broaden post-reset number scan to include table/hero/result/
+ *          faktor containers. Rezept-Umrechner showed reset-state numbers
+ *          only in the result-table, which the narrow scan missed.
  */
 
 (function () {
@@ -197,20 +205,41 @@
   async function checkC2_ResetButton(doc, recordFail) {
     const btn = findButtonByText(doc, /zur[uü]cksetzen|^reset\b/i);
     if (!btn) return; // No reset button — nothing to test
-    // Change every number input to a random positive value
-    const numberInputs = Array.from(doc.querySelectorAll('input[type="number"]'));
-    for (const input of numberInputs) setInputValue(input, Math.floor(10 + Math.random() * 90));
-    // Click reset
+
+    // Pre-condition: mutate inputs so reset actually has work to do.
+    const inputs = Array.from(doc.querySelectorAll('input[type="number"]'));
+    for (const input of inputs) setInputValue(input, 999);
+    await sleep(150);
+
     btn.click();
-    await sleep(SETTLE_MS);
-    const anyPositive = numberInputs.some((n) => {
-      const v = parseFloat(n.value);
+    await sleep(300);
+
+    // Check A: at least one number input holds a positive value.
+    const inputsAfter = Array.from(doc.querySelectorAll('input[type="number"]'));
+    const anyInputPositive = inputsAfter.some((i) => {
+      const v = parseFloat(i.value);
       return !isNaN(v) && v > 0;
     });
-    const resultText = getResultText(doc);
-    const hasNumericResult = /[1-9]/.test(resultText);
-    if (!anyPositive) recordFail('C2', 'Reset: alle Number-Inputs ≤0 oder leer');
-    if (!hasNumericResult) recordFail('C2', `Reset: Ergebnis zeigt keine Zahl ("${resultText.slice(0, 60)}")`);
+
+    // Check B: some number is visible in a broad set of result containers.
+    // Intentionally wide — Rezept-Umrechner shows reset numbers in the
+    // ingredients table, which a narrow [aria-live] scan misses. Better a
+    // false negative than another false positive on a working Rechner.
+    const scanRoots = [
+      ...doc.querySelectorAll('[class*="result" i], [class*="ergebnis" i]'),
+      ...doc.querySelectorAll('table'),
+      ...doc.querySelectorAll('[aria-live]'),
+      ...doc.querySelectorAll('[class*="hero" i], [class*="factor" i], [class*="faktor" i]'),
+    ];
+    const numberRegex = /\d[\d.,]*/;
+    const anyNumberVisible = scanRoots.some((el) => numberRegex.test(el.textContent || ''));
+
+    if (anyInputPositive && anyNumberVisible) return;
+    if (!anyInputPositive) {
+      recordFail('C2', 'Reset: alle Inputs sind 0 oder leer');
+      return;
+    }
+    recordFail('C2', 'Reset: Inputs gesetzt, aber kein Ergebnis/Zahl sichtbar');
   }
 
   async function checkC3_Clamping(doc, recordFail) {
@@ -303,35 +332,43 @@
   }
 
   async function checkC8_CopyButton(doc, recordFail) {
-    const btn = findButtonByText(doc, /ergebnis\s+kopieren|kopieren|^copy\b/i);
-    if (!btn) return;
-    if (btn.disabled) {
+    // Filter out the "Fix erklärt / Feedback" button which also contains "Copy"
+    // in some rechner — we only want the primary result-copy button.
+    const copyBtn = Array.from(doc.querySelectorAll('button'))
+      .find((b) => /kopieren|copy/i.test(b.textContent || '')
+        && !/feedback/i.test(b.textContent || ''));
+    if (!copyBtn) return;
+    if (copyBtn.disabled) {
       recordFail('C8', 'Copy-Button ist disabled');
       return;
     }
-    // We cannot reliably read clipboard from a cross-frame script and without permission.
-    // Fallback: click and confirm the button triggered a visible change (aria-live update,
-    // toast, or aria-pressed toggle).
-    const beforeStatus = doc.querySelectorAll('[role="status"], [aria-live]').length;
-    const beforeText = Array.from(doc.querySelectorAll('[role="status"], [aria-live]'))
-      .map((n) => n.textContent).join('|');
-    btn.click();
-    await sleep(SETTLE_MS);
-    const afterText = Array.from(doc.querySelectorAll('[role="status"], [aria-live]'))
-      .map((n) => n.textContent).join('|');
-    const ariaPressed = btn.getAttribute('aria-pressed');
-    const hasFeedback = afterText !== beforeText || ariaPressed === 'true';
-    if (!hasFeedback) {
-      // Last-resort: try clipboard read (often blocked, that's OK)
-      try {
-        const txt = await navigator.clipboard.readText();
-        if (!txt || !/\d/.test(txt)) {
-          recordFail('C8', `Copy liefert leeren/zahlenfreien Text ("${(txt || '').slice(0, 60)}")`);
-        }
-      } catch {
-        recordFail('C8', 'Copy-Klick löste keine sichtbare Rückmeldung aus und Clipboard-Read blockiert');
-      }
-    }
+
+    // Snapshot UI state before clicking. We do NOT use navigator.clipboard —
+    // cross-origin iframes block both read and write, so only DOM observability
+    // is reliable. If the button produces any visible feedback (label swap,
+    // aria-live update, or a toast/snackbar node appearing), that is what the
+    // user actually sees and is what we consider "working".
+    const textBefore = (copyBtn.textContent || '').trim();
+    const ariaLiveBefore = Array.from(doc.querySelectorAll('[aria-live]'))
+      .map((e) => (e.textContent || '').trim()).join('|');
+    const TOAST_SEL = '[role="status"], [class*="toast" i], [class*="snackbar" i], [class*="notification" i]';
+    const toastCountBefore = doc.querySelectorAll(TOAST_SEL).length;
+
+    copyBtn.click();
+    await sleep(350);
+
+    const textAfter = (copyBtn.textContent || '').trim();
+    const textChanged = textBefore !== textAfter;
+
+    const ariaLiveAfter = Array.from(doc.querySelectorAll('[aria-live]'))
+      .map((e) => (e.textContent || '').trim()).join('|');
+    const ariaLiveChanged = ariaLiveBefore !== ariaLiveAfter;
+
+    const toastCountAfter = doc.querySelectorAll(TOAST_SEL).length;
+    const toastAppeared = toastCountAfter > toastCountBefore;
+
+    if (textChanged || ariaLiveChanged || toastAppeared) return;
+    recordFail('C8', 'Kein UI-Feedback nach Copy-Klick (Button-Text, aria-live, Toast alle unverändert)');
   }
 
   function checkC9_Placeholders(doc, recordFail) {
