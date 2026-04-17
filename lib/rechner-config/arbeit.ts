@@ -1160,7 +1160,7 @@ Neben dem Tabellenunterhalt gibt es **Sonderbedarf** (einmalige, außergewöhnli
     beschreibung: 'Arbeitslosengeld I berechnen: Höhe, Dauer und Auszahlungsbetrag basierend auf dem letzten Gehalt.',
     kategorie: 'Finanzen',
     kategorieSlug: 'finanzen',
-    metaTitle: 'Arbeitslosengeld-Rechner 2026 — ALG I Höhe & Dauer',
+    metaTitle: 'Arbeitslosengeld-Rechner 2026 — Höhe & Dauer',
     metaDescription: 'Arbeitslosengeld berechnen: ALG-I-Höhe, Bezugsdauer und Auszahlung ✓ 60 %/67 % ✓ Steuerklasse ✓ KI-Erklärung.',
     keywords: ['arbeitslosengeld rechner', 'alg 1 rechner', 'alg i 2026', 'arbeitslosengeld berechnen', 'bezugsdauer alg', 'leistungsentgelt', 'sperrzeit'],
     icon: '💶',
