@@ -25,9 +25,13 @@ export default function CountdownRechner() {
   const [eigenDatum, setEigenDatum] = useState('');
   const [eigenLabel, setEigenLabel] = useState('');
   const [tick, setTick] = useState(0);
+  const [mounted, setMounted] = useState(false);
 
-  // Live-Ticker: jede Sekunde aktualisieren
+  // Erst nach Mount Live-Werte rendern — verhindert SSR/Client-Hydration-Mismatch,
+  // da berechneCountdown() auf new Date() zugreift und sich Server- und Client-Zeit
+  // zwangsläufig um einige hundert ms unterscheiden.
   useEffect(() => {
+    setMounted(true);
     const interval = setInterval(() => setTick(t => t + 1), 1000);
     return () => clearInterval(interval);
   }, []);
@@ -116,8 +120,8 @@ export default function CountdownRechner() {
         </div>
       )}
 
-      {/* Countdown Ergebnis */}
-      {ergebnis && !ergebnis.vorbei && (
+      {/* Countdown Ergebnis — erst nach Mount, um Hydration-Mismatch zu verhindern */}
+      {mounted && ergebnis && !ergebnis.vorbei && (
         <div className="space-y-5">
           {/* Event-Titel */}
           <div className="text-center">
@@ -219,7 +223,7 @@ export default function CountdownRechner() {
       )}
 
       {/* Event vorbei */}
-      {ergebnis && ergebnis.vorbei && (
+      {mounted && ergebnis && ergebnis.vorbei && (
         <div className="result-box text-center">
           <p className="text-5xl mb-2">🎉</p>
           <p className="text-2xl font-bold">{eventLabel} ist da!</p>
