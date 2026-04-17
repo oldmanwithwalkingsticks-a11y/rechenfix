@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import { parseDeutscheZahl, clampInputValue } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
@@ -122,7 +122,7 @@ export default function AlkoholAbbauRechner() {
         </div>
         <div>
           <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Körpergewicht</label>
-          <NummerEingabe value={gewicht} onChange={setGewicht} einheit="kg" />
+          <NummerEingabe value={gewicht} onChange={v => setGewicht(clampInputValue(v, 30, 250))} einheit="kg" />
         </div>
 
         <div>
@@ -137,7 +137,7 @@ export default function AlkoholAbbauRechner() {
                   <input
                     type="number"
                     value={g.anzahl}
-                    onChange={e => updateGetraenk(g.id, { anzahl: e.target.value })}
+                    onChange={e => updateGetraenk(g.id, { anzahl: clampInputValue(e.target.value, 0, null) })}
                     className="w-16 min-h-[44px] px-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-center text-sm"
                     min="0"
                   />

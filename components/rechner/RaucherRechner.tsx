@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { berechneRaucherKosten } from '@/lib/berechnungen/raucher';
+import { clampInputValue } from '@/lib/zahlenformat';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
@@ -69,7 +70,7 @@ export default function RaucherRechner() {
             min="1"
             max="100"
             value={zigarettenProTag}
-            onChange={e => setZigarettenProTag(e.target.value)}
+            onChange={e => setZigarettenProTag(clampInputValue(e.target.value, 1, 100))}
             className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-2 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
           />
         </div>
@@ -96,7 +97,7 @@ export default function RaucherRechner() {
             min="1"
             max="50"
             value={zigarettenProPackung}
-            onChange={e => setZigarettenProPackung(e.target.value)}
+            onChange={e => setZigarettenProPackung(clampInputValue(e.target.value, 1, 50))}
             className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-2 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
           />
         </div>
@@ -110,7 +111,7 @@ export default function RaucherRechner() {
             min="1"
             max="80"
             value={jahreGeraucht}
-            onChange={e => setJahreGeraucht(e.target.value)}
+            onChange={e => setJahreGeraucht(clampInputValue(e.target.value, 1, 80))}
             className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-2 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
           />
         </div>
