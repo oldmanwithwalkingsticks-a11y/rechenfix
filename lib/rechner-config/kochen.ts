@@ -367,4 +367,209 @@ Bei sehr saftigen Kuchen (Brownies, Schokokuchen) soll das Stäbchen nicht ganz 
       },
     ],
   },
+  {
+    slug: 'kochzeit-rechner',
+    titel: 'Kochzeit-Rechner',
+    beschreibung: 'Kochzeit für Ei, Nudeln, Reis, Kartoffeln und Gemüse: Sorten-Datenbank mit Schritt-für-Schritt-Anleitungen.',
+    kategorie: 'Kochen & Ernährung',
+    kategorieSlug: 'kochen',
+    metaTitle: 'Kochzeit-Rechner 2026 — Ei, Nudeln, Reis & Gemüse | Rechenfix',
+    metaDescription: 'Kochzeit berechnen: perfektes Ei (weich/wachsweich/hart), Nudeln al dente, Reis, Kartoffeln und Gemüse — mit Anleitung und Höhenlage. Kostenlos.',
+    keywords: ['kochzeit rechner', 'eier kochen minuten', 'nudeln kochzeit', 'reis kochzeit', 'kartoffeln kochen', 'gemüse garzeit', 'ei weich wachsweich hart', 'al dente', 'perfektes ei'],
+    icon: '⏱️',
+    formel: 'Kochzeit hängt von Lebensmittel, Sorte, Größe und Methode ab. Bei Höhenlage >1.000 m: +10–20 % Zeit (Wasser siedet bei niedrigerer Temperatur).',
+    beispiel: 'Ei Größe M, aus Kühlschrank, wachsweich: 7 Min ab Siedebeginn. Spaghetti al dente: 8–10 Min. Basmati-Reis: 10 Min kochen + 10 Min quellen. Brokkoli dämpfen: 5–7 Min.',
+    erklaerung: `**Kochzeiten — die häufigste Fehlerquelle in der Küche**
+
+Zu lange gekocht sind Eier grau-grün im Dotter, Nudeln matschig, Kartoffeln zerfallen. Zu kurz gekocht sind Kartoffeln roh, Reis knuspert, Brokkoli bitter. Unser Kochzeit-Rechner liefert die richtigen Zeiten für die häufigsten Lebensmittel — je nach Sorte, Größe und gewünschter Konsistenz.
+
+**Eier kochen — die vier Härtegrade**
+
+Die Kochzeit für Eier hängt von Größe und Starttemperatur ab. Faustregel für Eier aus dem Kühlschrank (Größe M):
+
+- **Weich (fließendes Eigelb, flüssiges Weiß):** 4–5 Minuten
+- **Wachsweich (fester Weißei, flüssiger Dotter):** 6–7 Minuten
+- **Mittelweich (cremiger Dotter, fest am Rand):** 8–9 Minuten
+- **Hart (kompletter Dotter fest):** 10–12 Minuten
+
+Bei Raumtemperatur 30 Sekunden weniger. Größe S: 30 Sekunden weniger. Größe L/XL: 30 Sekunden mehr. Tipp: Eier nach dem Kochen sofort in eiskaltes Wasser legen — stoppt den Garprozess und erleichtert das Pellen.
+
+**Nudeln — al dente ist die Kunst**
+
+„Al dente" (ital. „zum Zahn") bedeutet: Die Nudel hat noch einen minimalen weißen Kern, der beim Durchbeißen leichten Widerstand bietet. Das ist DIE korrekte Garstufe in Italien — matschige Nudeln gelten als Versagen.
+
+Kochzeiten (ab Siedebeginn):
+- **Spaghetti:** 8–10 Min al dente, 11–12 Min weich
+- **Penne, Fusilli:** 10–12 Min al dente
+- **Farfalle:** 11–13 Min al dente
+- **Makkaroni:** 8–10 Min al dente
+- **Vollkornnudeln:** immer 2 Min länger als auf Packung
+- **Frische Eiernudeln:** 3–5 Min (deutlich kürzer)
+
+Tipps: 1 Liter Wasser pro 100 g Nudeln, 10 g Salz pro Liter. Nudelwasser vor dem Abgießen abschöpfen — die Stärke bindet Saucen.
+
+**Reis — Kochmethode vs. Quellmethode**
+
+Zwei Hauptmethoden:
+
+- **Kochmethode (offen, viel Wasser):** Reis in reichlich Salzwasser 10–15 Min kochen, abgießen. Funktioniert mit jedem Reis.
+- **Quellmethode (geschlossen, abgemessenes Wasser):** Reis mit genau definierter Wassermenge aufkochen, dann bei geschlossenem Deckel quellen lassen.
+
+Wassermenge für Quellmethode:
+- **Basmati/Jasmin:** 1 Teil Reis : 1,5 Teile Wasser, 10 Min kochen + 10 Min quellen
+- **Langkornreis:** 1 : 1,5, 15 Min kochen + 5 Min quellen
+- **Vollkornreis:** 1 : 2, 30 Min kochen + 10 Min quellen
+- **Risottoreis:** 1 : 3, 18–20 Min unter ständigem Rühren (Brühe nachgießen)
+- **Sushireis:** 1 : 1,1, 12 Min kochen + 10 Min quellen + Essigmischung unterheben
+
+**Kartoffeln — festkochend oder mehlig?**
+
+Die Kochzeit hängt von Größe, Art und Methode ab:
+
+- **Festkochend (Annabelle, Linda):** Salate, Bratkartoffeln, weil sie Form halten
+- **Vorwiegend festkochend (Sieglinde):** Allrounder
+- **Mehlig (Augusta, Bintje):** Püree, Suppen, Klöße — zerfallen beim Kochen
+
+Kochzeiten:
+- **Ganze Pellkartoffeln (mittel):** 20–25 Min
+- **Ganze geschälte Kartoffeln (mittel):** 20 Min
+- **Stücke (2–3 cm):** 10–15 Min
+- **Drillinge (klein):** 12–15 Min
+- **Große Kartoffeln (>200 g):** 30 Min
+
+Test: Gabel einstechen, rutscht leicht rein → fertig. Kartoffeln immer im kalten Wasser ansetzen, sonst bleiben sie innen roh.
+
+**Gemüse — bissfest vs. butterweich**
+
+Kochzeiten für bissfestes Gemüse (Blanchieren):
+- **Brokkoli-Röschen:** 4–5 Min kochen, 6–7 Min dämpfen
+- **Blumenkohl-Röschen:** 5–7 Min kochen
+- **Möhren (Scheiben):** 8–10 Min
+- **Grüne Bohnen:** 6–8 Min
+- **Spargel weiß:** 12–15 Min, Spargel grün: 8–10 Min
+- **Erbsen (frisch/TK):** 3–5 Min
+- **Rosenkohl:** 10–12 Min
+
+Nach dem Blanchieren sofort in Eiswasser (Schockgaren) — stoppt das Garen und erhält die Farbe. Dämpfen ist schonender als Kochen: Vitamine und Aroma bleiben besser erhalten.
+
+**Höhenlage verlängert die Kochzeit**
+
+In höheren Lagen siedet Wasser bei niedrigerer Temperatur, weil der Luftdruck sinkt. Pro 300 m Höhe sinkt der Siedepunkt um etwa 1 °C. Das bedeutet längere Kochzeiten:
+
+- **1.000 m:** +10 % Kochzeit (Siedepunkt ~97 °C)
+- **1.500 m:** +15 %
+- **2.000 m:** +20 %
+- **2.500 m:** +25 %
+
+In sehr großen Höhen (über 3.000 m, z. B. in La Paz) dauert selbst ein einfaches Ei 15+ Minuten. Schnellkochtopf löst das Problem, weil er Druck aufbaut.`,
+    faq: [
+      {
+        frage: 'Wie lange muss ein Ei kochen für wachsweich?',
+        antwort: 'Ein Ei Größe M aus dem Kühlschrank braucht für wachsweich (festes Weiß, flüssiger Dotter) 6–7 Minuten ab Siedebeginn. Bei Raumtemperatur 30 Sekunden weniger. Tipp: Direkt nach dem Kochen in eiskaltes Wasser — stoppt den Garprozess und erleichtert das Pellen.',
+      },
+      {
+        frage: 'Wie viel Wasser brauche ich für Reis?',
+        antwort: 'Das hängt vom Reis ab: Basmati/Jasmin 1:1,5, Langkornreis 1:1,5, Vollkornreis 1:2, Risotto 1:3, Sushi-Reis 1:1,1. Bei der Quellmethode: Reis + Wasser aufkochen, dann Deckel drauf und bei niedriger Hitze quellen lassen. Alternativ Kochmethode: viel Salzwasser, abgießen — funktioniert mit jedem Reis.',
+      },
+      {
+        frage: 'Wie koche ich Kartoffeln richtig?',
+        antwort: 'Kartoffeln immer im kalten Salzwasser ansetzen, dann langsam erhitzen — sonst bleiben sie innen roh. Kochzeit: mittelgroße ganze Kartoffeln 20–25 Min, Stücke (2–3 cm) 10–15 Min. Test: Gabel einstechen, gleitet leicht rein → fertig. Für Salat/Bratkartoffeln festkochende Sorten, für Püree mehlige Sorten.',
+      },
+      {
+        frage: 'Was bedeutet al dente?',
+        antwort: 'Al dente (italienisch „zum Zahn") bedeutet: Die Nudel hat noch einen minimalen weißen Kern, der beim Durchbeißen leichten Widerstand bietet. Das ist die korrekte italienische Garstufe. Zeit: meist 1–2 Min kürzer als Packungsanweisung. Ab Siedebeginn stoppen, Nudel abbeißen, leichter Kern ist sichtbar → fertig.',
+      },
+      {
+        frage: 'Verändert sich die Kochzeit in den Bergen?',
+        antwort: 'Ja. Pro 300 m Höhe sinkt der Siedepunkt des Wassers um etwa 1 °C, dadurch dauert das Garen länger. Faustregel: +10 % Kochzeit bei 1.000 m, +15 % bei 1.500 m, +20 % bei 2.000 m. In sehr großen Höhen (>3.000 m) ist ein Schnellkochtopf sinnvoll, weil dort auch einfache Gerichte extrem lange dauern.',
+      },
+    ],
+  },
+  {
+    slug: 'hefe-umrechner',
+    titel: 'Hefe-Umrechner',
+    beschreibung: 'Hefe umrechnen: Frischhefe ↔ Trockenhefe ↔ Lievito Madre mit Mengentabellen und Verarbeitungstipps.',
+    kategorie: 'Kochen & Ernährung',
+    kategorieSlug: 'kochen',
+    metaTitle: 'Hefe-Umrechner 2026 — Frisch- in Trockenhefe & Lievito Madre | Rechenfix',
+    metaDescription: 'Hefe umrechnen: Frischhefe in Trockenhefe (÷3), Lievito Madre, Päckchen-Umrechnung und Mehlmengen-Tabelle. Kostenlos mit KI-Erklärung.',
+    keywords: ['hefe umrechner', 'frischhefe trockenhefe', 'hefe umrechnen', 'wie viel hefe für 500g mehl', 'lievito madre umrechnen', 'hefe würfel trocken', 'hefe päckchen', 'trockenhefe menge', 'hefe-ersatz'],
+    icon: '🥖',
+    formel: 'Frischhefe : Trockenhefe = 3 : 1 | Frischhefe : Lievito Madre ≈ 1 : 5–7 | 1 Würfel Frischhefe = 42 g = 14 g Trockenhefe = 2 Päckchen',
+    beispiel: '42 g Frischhefe (1 Würfel) → 14 g Trockenhefe (2 Päckchen à 7 g) → ca. 200–300 g Lievito Madre. Reicht jeweils für ca. 500–1.000 g Mehl.',
+    erklaerung: `**Hefe umrechnen — Frisch, Trocken, Lievito Madre**
+
+Beim Backen stellt sich oft die Frage: Das Rezept sagt „1 Würfel Hefe", aber Sie haben nur Trockenhefe im Schrank. Oder umgekehrt. Unser Hefe-Umrechner rechnet zwischen allen gängigen Hefe-Typen um und zeigt die passenden Mengen für Ihre Mehlmenge.
+
+**Frischhefe — der Standard in Deutschland**
+
+Ein Würfel Frischhefe wiegt 42 g (früher 40 g). Er hat eine Haltbarkeit von ca. 2 Wochen im Kühlschrank und reicht für etwa 500–1.000 g Mehl. Vorteile: Schnellere Triebkraft, kräftigeres Aroma. Nachteile: Kurze Haltbarkeit, muss gekühlt werden.
+
+Frischhefe lässt sich einfrieren (bis 6 Monate) — Triebkraft nimmt aber leicht ab. Vor Gebrauch auftauen lassen.
+
+**Trockenhefe — der Vorratsfavorit**
+
+Trockenhefe (Instanthefe) kommt in Päckchen à 7 g. Ein Päckchen entspricht ca. 21 g Frischhefe — also ein halber Würfel. Zwei Päckchen (14 g) entsprechen einem ganzen Würfel Frischhefe (42 g).
+
+Die Umrechnung: **Frischhefe ÷ 3 = Trockenhefe**. Beispiel: 42 g Frisch ÷ 3 = 14 g Trocken = 2 Päckchen. Oder: 21 g Frisch ÷ 3 = 7 g Trocken = 1 Päckchen.
+
+Vorteile der Trockenhefe: Lange haltbar (2+ Jahre), kein Kühlschrank nötig, einfache Dosierung. Nachteile: Minimal weniger Triebkraft, gewöhnungsbedürftiger Geschmack für Frischhefe-Liebhaber.
+
+**Lievito Madre — die italienische Mutterhefe**
+
+Lievito Madre (ital. „Mutterhefe") ist ein fester italienischer Sauerteig-Ableger mit sehr milder Säure. Perfekt für Pizza, Brot und Panettone. Da Lievito Madre zu 50 % aus Mehl und Wasser besteht, brauchen Sie deutlich mehr Masse:
+
+**Frischhefe × 5–7 = Lievito Madre**. Beispiel: 42 g Frisch × 5 = 210 g Lievito Madre.
+
+Lievito Madre muss regelmäßig „gefüttert" werden (meist alle 4–7 Tage mit Mehl + Wasser). Viele Bäcker schwören drauf — andere finden den Aufwand übertrieben. Gekauft kostet er 8–15 €/kg.
+
+**Sauerteig — nicht direkt umrechenbar**
+
+Sauerteig (für Roggen- und Mischbrote) hat eine komplett andere Triebwirkung als Hefe: Er nutzt wilde Mikroorganismen (Hefen + Milchsäurebakterien) und entwickelt Säure, die dem Brot Charakter gibt. Eine 1:1-Umrechnung zwischen Hefe und Sauerteig ist nicht möglich — das Brot würde anders schmecken und backen.
+
+Für ein klassisches Roggenbrot: 100–200 g aktiver Sauerteig pro 500 g Mehl, zusätzlich oft 5–10 g Frischhefe für Sicherheit.
+
+**Hefe-Mengen für gängige Mehlmengen**
+
+Klassische Faustregel: Pro 500 g Mehl ca. 21 g Frischhefe (½ Würfel) oder 7 g Trockenhefe (1 Päckchen). Weniger Hefe = längere Gehzeit, aber mehr Aroma:
+
+- **Schnelle Hefe (1–2 h Gehzeit):** 42 g Frisch / 14 g Trocken pro 500 g Mehl
+- **Normale Hefe (2–3 h Gehzeit):** 21 g Frisch / 7 g Trocken pro 500 g Mehl
+- **Lange Gehzeit (6–12 h, Kühlschrank):** 5–10 g Frisch / 2–3 g Trocken pro 500 g Mehl
+- **Sehr lange Gehzeit (24 h, Neapolitanische Pizza):** 1–2 g Frisch pro 500 g Mehl
+
+**Verarbeitung: So wird Hefe aktiv**
+
+- **Frischhefe:** In lauwarmem (max. 35 °C!) Wasser oder Milch auflösen, mit etwas Zucker „füttern", 5–10 Min ruhen lassen. Schaumige Oberfläche = aktiv.
+- **Trockenhefe:** Direkt ins Mehl mischen, dann Flüssigkeit dazu. Kein Auflösen nötig (bei Instanthefe).
+- **Lievito Madre:** Direkt in den Teig, oft mit etwas Wasser gelöst.
+
+Wichtig: Hefe nie direkt mit Salz in Kontakt bringen — Salz tötet die Hefe ab. Immer erst Hefe mit Mehl mischen, dann Salz später dazu.
+
+**Woran erkennt man aktive Hefe?**
+
+Test bei Zweifel: Etwas Hefe in lauwarmem Wasser mit einer Prise Zucker auflösen. Nach 10 Min: Bläschen und Schaum → Hefe ist aktiv. Keine Reaktion → Hefe ist tot, neue kaufen. Abgelaufene Trockenhefe ist nicht automatisch tot — erst testen, dann wegwerfen.`,
+    faq: [
+      {
+        frage: 'Wie rechne ich Frischhefe in Trockenhefe um?',
+        antwort: 'Frischhefe ÷ 3 = Trockenhefe. Beispiel: 42 g Frischhefe (1 Würfel) = 14 g Trockenhefe = 2 Päckchen à 7 g. Oder: 21 g Frischhefe (½ Würfel) = 7 g Trockenhefe = 1 Päckchen. Ein Päckchen Trockenhefe (7 g) entspricht etwa ½ Würfel Frischhefe.',
+      },
+      {
+        frage: 'Wie viel Hefe brauche ich für 500g Mehl?',
+        antwort: 'Klassisch: ½ Würfel Frischhefe (21 g) oder 1 Päckchen Trockenhefe (7 g) pro 500 g Mehl. Bei langer Gehzeit (6–12 h im Kühlschrank) nur 5–10 g Frisch bzw. 2–3 g Trocken. Bei neapolitanischer Pizza (24 h Gehzeit) reichen 1–2 g Frischhefe — weniger Hefe = mehr Aroma.',
+      },
+      {
+        frage: 'Kann ich Lievito Madre durch Hefe ersetzen?',
+        antwort: 'Ja, aber das Brot schmeckt anders — milder und weniger aromatisch. Umrechnung: Lievito Madre ÷ 5–7 = Frischhefe. 200 g Lievito Madre ≈ 30–40 g Frischhefe. Umgekehrt: Frischhefe × 5–7 = Lievito Madre. Für den typischen Geschmack des Originals ist Lievito Madre aber unersetzbar.',
+      },
+      {
+        frage: 'Ist Trockenhefe genauso gut wie Frischhefe?',
+        antwort: 'Ja, das Backergebnis ist fast identisch. Trockenhefe hat minimal weniger Triebkraft, was man durch eine etwas längere Gehzeit kompensiert. Vorteile: Lange haltbar (2+ Jahre), kein Kühlschrank nötig. Für Hobby-Bäcker praktischer. Profis verwenden meist Frischhefe wegen der marginalen Geschmacksunterschiede.',
+      },
+      {
+        frage: 'Wie erkenne ich, ob Hefe noch aktiv ist?',
+        antwort: 'Testen Sie die Hefe: Etwas Hefe in lauwarmem Wasser (ca. 30 °C) mit einer Prise Zucker auflösen. Nach 10 Minuten sollten Bläschen und Schaum entstehen — das bedeutet, die Hefe lebt. Keine Reaktion = Hefe ist tot. Abgelaufene Trockenhefe ist nicht automatisch unbrauchbar, immer erst testen.',
+      },
+    ],
+  },
 ];

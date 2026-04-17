@@ -170,6 +170,8 @@ import PaceRechner from '@/components/rechner/PaceRechner';
 import HerzfrequenzZonenRechner from '@/components/rechner/HerzfrequenzZonenRechner';
 import BackformUmrechner from '@/components/rechner/BackformUmrechner';
 import BackzeitRechner from '@/components/rechner/BackzeitRechner';
+import KochzeitRechner from '@/components/rechner/KochzeitRechner';
+import HefeUmrechner from '@/components/rechner/HefeUmrechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -352,6 +354,8 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'herzfrequenz-zonen-rechner': HerzfrequenzZonenRechner,
   'backform-umrechner': BackformUmrechner,
   'backzeit-rechner': BackzeitRechner,
+  'kochzeit-rechner': KochzeitRechner,
+  'hefe-umrechner': HefeUmrechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

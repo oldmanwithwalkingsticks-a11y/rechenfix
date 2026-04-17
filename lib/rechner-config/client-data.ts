@@ -3021,6 +3021,44 @@ export const rechner: RechnerLight[] = [
     "icon": "⏲️"
   },
   {
+    "slug": "kochzeit-rechner",
+    "titel": "Kochzeit-Rechner",
+    "beschreibung": "Kochzeit für Ei, Nudeln, Reis, Kartoffeln und Gemüse: Sorten-Datenbank mit Schritt-für-Schritt-Anleitungen.",
+    "kategorie": "Kochen & Ernährung",
+    "kategorieSlug": "kochen",
+    "keywords": [
+      "kochzeit rechner",
+      "eier kochen minuten",
+      "nudeln kochzeit",
+      "reis kochzeit",
+      "kartoffeln kochen",
+      "gemüse garzeit",
+      "ei weich wachsweich hart",
+      "al dente",
+      "perfektes ei"
+    ],
+    "icon": "⏱️"
+  },
+  {
+    "slug": "hefe-umrechner",
+    "titel": "Hefe-Umrechner",
+    "beschreibung": "Hefe umrechnen: Frischhefe ↔ Trockenhefe ↔ Lievito Madre mit Mengentabellen und Verarbeitungstipps.",
+    "kategorie": "Kochen & Ernährung",
+    "kategorieSlug": "kochen",
+    "keywords": [
+      "hefe umrechner",
+      "frischhefe trockenhefe",
+      "hefe umrechnen",
+      "wie viel hefe für 500g mehl",
+      "lievito madre umrechnen",
+      "hefe würfel trocken",
+      "hefe päckchen",
+      "trockenhefe menge",
+      "hefe-ersatz"
+    ],
+    "icon": "🥖"
+  },
+  {
     "slug": "pace-rechner",
     "titel": "Pace-Rechner",
     "beschreibung": "Pace, Zeit oder Distanz beim Laufen berechnen: min/km, km/h, Split-Zeiten und Zielzeit-Tabellen.",
