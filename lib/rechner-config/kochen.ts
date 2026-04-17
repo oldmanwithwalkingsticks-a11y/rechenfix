@@ -174,4 +174,197 @@ Unterschiede im ml-Bereich fallen bei kleinen Gewürzmengen kaum ins Gewicht.`,
       },
     ],
   },
+  {
+    slug: 'backform-umrechner',
+    titel: 'Backform-Umrechner',
+    beschreibung: 'Backform umrechnen: Rund ↔ eckig ↔ Kasten, Teigmenge anpassen, Flächenvergleich mit Umrechnungsfaktor.',
+    kategorie: 'Kochen & Ernährung',
+    kategorieSlug: 'kochen',
+    metaTitle: 'Backform-Umrechner 2026 — Springform, eckig & Kasten | Rechenfix',
+    metaDescription: 'Backform umrechnen: von 26 auf 20 cm Springform, rund in eckig, Kastenform-Volumen. Teigmenge und Faktor automatisch — kostenlos mit KI-Erklärung.',
+    keywords: ['backform umrechner', 'springform umrechnen', '26 cm in 20 cm', 'rund in eckig backform', 'kastenform umrechnen', 'backform größen', 'teigmenge anpassen', 'backform faktor', 'backform vergleich'],
+    icon: '🎂',
+    formel: 'Faktor = Fläche Ziel ÷ Fläche Original | Rund = π × (d/2)² | Rechteckig = L × B | Kasten = L × B (Fläche) / L × B × H (Volumen)',
+    beispiel: 'Springform 26 cm → 20 cm: Fläche 531 cm² → 314 cm², Faktor 0,59. Bei 250 g Mehl Original → 148 g für die kleinere Form. Kastenform 30×11 cm → 2310 cm³ Volumen (bei 7 cm Höhe).',
+    erklaerung: `**Backform umrechnen — wenn das Rezept nicht zu Ihrer Form passt**
+
+Ein häufiges Küchenproblem: Sie haben ein Rezept für eine 26-cm-Springform, aber nur eine 20-cm-Form zu Hause. Oder Sie möchten einen runden Kuchen eckig backen. Unser Backform-Umrechner berechnet den Faktor, mit dem Sie alle Zutaten skalieren müssen, damit die Teighöhe in der neuen Form ähnlich wird.
+
+Das Prinzip: Nicht der Durchmesser, sondern die **Fläche** entscheidet über die Teigmenge. Eine 20-cm-Springform hat eine Fläche von 314 cm², eine 26-cm-Springform 531 cm² — fast doppelt so groß. Ein Teig, der für 26 cm gedacht ist, wäre in einer 20-cm-Form doppelt so hoch und würde überlaufen oder ungar bleiben.
+
+**Flächenformeln für gängige Backformen**
+
+- **Runde Form (Springform):** Fläche = π × (Durchmesser ÷ 2)² = π × r²
+- **Rechteckige Form:** Fläche = Länge × Breite
+- **Kastenform:** Fläche = Länge × Breite (für Faktor), Volumen = L × B × H (für Füllhöhe)
+- **Muffinform:** Pro Mulde ca. 50 ml Volumen (Standardgröße).
+
+**Die wichtigsten Springform-Größen im Vergleich**
+
+- 18 cm Springform: 254 cm² — für kleine Kuchen, 4–6 Personen
+- 20 cm Springform: 314 cm² — „mittel", 6–8 Personen
+- 22 cm Springform: 380 cm² — Standard im Haushalt
+- 24 cm Springform: 452 cm² — größerer Haushalt
+- **26 cm Springform:** 531 cm² — DIE Standardgröße (70 % aller Backrezepte)
+- 28 cm Springform: 616 cm² — für große Kuchen, Partys
+- 30 cm Tortenring: 707 cm² — Hochzeitstorten, Festgebäck
+
+**Faktor-Berechnung in der Praxis**
+
+Der Umrechnungsfaktor ist das Verhältnis der Zielfläche zur Originalfläche:
+
+Faktor = Fläche Zielform ÷ Fläche Originalform
+
+Beispiel: 26 cm → 20 cm Springform. Faktor = 314 ÷ 531 = 0,59. Alle Zutatenmengen werden mit 0,59 multipliziert:
+- 250 g Mehl × 0,59 = 148 g
+- 150 g Zucker × 0,59 = 89 g
+- 4 Eier × 0,59 = 2,4 → 2 Eier (auf ganze runden)
+
+**Rund in eckig — geht das?**
+
+Ja, die Umrechnung über die Fläche funktioniert auch zwischen verschiedenen Formarten. Eine 26-cm-Springform (531 cm²) entspricht einer rechteckigen Form von ca. 23 × 23 cm. Eine 30 × 20 cm Auflaufform (600 cm²) entspricht einer 27,6-cm-Springform.
+
+**Kastenform: Das Volumen zählt**
+
+Bei Kastenformen und Gugelhupfformen geht es zusätzlich ums Volumen, weil die Höhe variiert. Eine klassische Kastenform (30 × 11 × 7 cm) hat ein Volumen von 2.310 ml. Die Fläche von 330 cm² ist deutlich kleiner als eine 26-cm-Springform (531 cm²) — man kann also nicht einfach gleiches Volumen = gleicher Teig annehmen. Besser: Fläche als Referenz nehmen und Teighöhe entsprechend anpassen.
+
+**Backzeit anpassen bei anderer Formgröße**
+
+Eine kleinere Form bedeutet höheren Teig → längere Backzeit. Eine größere Form bedeutet flacheren Teig → kürzere Backzeit. Faustregel:
+
+- Form 10–20 % kleiner: Backzeit +5–10 Minuten, Temperatur 10 °C niedriger
+- Form 10–20 % größer: Backzeit −5–10 Minuten, Temperatur gleich
+- Form >30 % anders: Besser in zwei Durchgängen backen
+
+Für die exakte Anpassung nutzen Sie unseren Backzeit-Rechner.
+
+**Warnungen und Tipps**
+
+- **Füllhöhe:** Springformen sollten zu ⅔ gefüllt werden, damit der Teig Platz zum Aufgehen hat. Bei zu viel Teig: Backpapier-Rand basteln.
+- **Übrigen Teig verwerten:** Muffins, Muffinform oder kleines Schälchen für einen „Probekuchen".
+- **Baiser und Biskuit:** Lassen sich nicht gut skalieren, weil die Luftigkeit unter kleinen Mengen leidet.`,
+    faq: [
+      {
+        frage: 'Wie rechne ich von 26 cm auf 20 cm Springform um?',
+        antwort: 'Fläche 26 cm = 531 cm², Fläche 20 cm = 314 cm². Faktor: 314 ÷ 531 = 0,59. Alle Zutaten mit 0,59 multiplizieren: 250 g Mehl → 148 g, 150 g Zucker → 89 g, 4 Eier → 2,4 (auf 2 runden und etwas mehr Flüssigkeit). Backzeit um 5–10 Minuten verlängern.',
+      },
+      {
+        frage: 'Muss ich die Backzeit anpassen?',
+        antwort: 'Ja, leicht. Bei kleinerer Form wird der Teig höher → Backzeit +5–10 Minuten und Temperatur 10 °C niedriger. Bei größerer Form wird der Teig flacher → Backzeit −5–10 Minuten, Temperatur gleich. Immer mit Stäbchenprobe kontrollieren (Stäbchen in die Mitte stechen, bleibt kein Teig kleben, ist der Kuchen fertig).',
+      },
+      {
+        frage: 'Wie rechne ich rund in eckig um?',
+        antwort: 'Über die Fläche: Runde Form Fläche = π × r², eckige Form = L × B. Eine 26-cm-Springform (531 cm²) entspricht einer 23 × 23 cm quadratischen Form. Eine 30 × 20 cm Auflaufform (600 cm²) entspricht einer 27,6-cm-Springform. Unser Rechner macht das automatisch.',
+      },
+      {
+        frage: 'Was mache ich mit übrigem Teig?',
+        antwort: 'Übrigen Teig einfach als Muffins backen — dafür in Muffinform oder Förmchen füllen. Backzeit verkürzt sich auf 15–20 Minuten (statt 45–60 für einen Kuchen). Alternative: Kleine Auflaufform für einen „Probekuchen" als Dessert. Teig nicht wegwerfen — auch in kleiner Form gut haltbar.',
+      },
+      {
+        frage: 'Welche Springform-Größe ist Standard?',
+        antwort: 'Der Großteil deutscher Backrezepte ist für eine 26-cm-Springform ausgelegt — das ist der klassische Standard für 8–12 Portionen. Kleinere Haushalte arbeiten oft mit 20 oder 24 cm. Die Mini-Springform (18 cm) und die XXL-Form (28/30 cm) sind Nischenprodukte für Single-Haushalte bzw. Festtagsbäckerei.',
+      },
+    ],
+  },
+  {
+    slug: 'backzeit-rechner',
+    titel: 'Backzeit-Rechner',
+    beschreibung: 'Backzeit und Temperatur anpassen: Umluft ↔ Ober-/Unterhitze, Gasmark, Formgröße, Faustregeln.',
+    kategorie: 'Kochen & Ernährung',
+    kategorieSlug: 'kochen',
+    metaTitle: 'Backzeit-Rechner 2026 — Umluft vs. O/U-Hitze & Gasmark | Rechenfix',
+    metaDescription: 'Backzeit umrechnen: Umluft in Ober-/Unterhitze, Gasmark-Tabelle, Backzeit bei anderer Form oder Temperatur. Kostenlos mit KI-Erklärung.',
+    keywords: ['backzeit rechner', 'umluft in ober unterhitze', 'backzeit umrechnen', 'gasmark umrechnen', 'backzeit anpassen', 'backtemperatur umrechnen', 'umluft rechner', 'backzeit andere form', 'backofen temperatur umrechnen'],
+    icon: '⏲️',
+    formel: 'Umluft = O/U − 20 °C (gleiche Zeit) | Zeit bei −10 °C: +5–8 Min | Zeit bei kleinerer Form: +10–15 % | Zeit bei größerer Form: −10–15 %',
+    beispiel: '180 °C O/U-Hitze, 45 Min Backzeit → 160 °C Umluft bei 45 Min. Oder: Gleicher Kuchen in kleinerer Form (Faktor 0,7) bei 180 °C O/U: Backzeit auf ca. 50–52 Min verlängern.',
+    erklaerung: `**Backzeit richtig umrechnen — Ober-/Unterhitze, Umluft, Gasmark**
+
+Jeder Backofen ist unterschiedlich. Das Rezept sagt 180 °C Ober-/Unterhitze, Sie haben nur einen Umluftofen. Oder die Oma gibt Gasmark 4 vor, aber wie viel °C ist das? Unser Backzeit-Rechner rechnet zwischen allen gängigen Herdarten um und berücksichtigt Formgrößen-Änderungen.
+
+**Umluft vs. Ober-/Unterhitze — 20 °C Regel**
+
+Die wichtigste Faustregel: **Umluft ist 20 °C „heißer" als Ober-/Unterhitze bei gleicher Zeit.** Grund: Bei Umluft zirkuliert die heiße Luft und überträgt die Hitze effektiver auf den Teig. Damit der Kuchen nicht außen verbrennt, bevor er innen gar ist, reduzieren Sie die Temperatur um 20 °C.
+
+- Rezept: 180 °C Ober-/Unterhitze, 45 Min
+- Umluft: **160 °C, 45 Min** (gleiche Zeit)
+
+Alternativ: gleiche Temperatur, aber kürzere Zeit — das funktioniert nur bei flachen Gebäcken wie Keksen.
+
+**Heißluft vs. Umluft — ein feiner Unterschied**
+
+„Heißluft" und „Umluft" werden oft synonym verwendet, sind aber technisch unterschiedlich. Bei Heißluft hat der Ofen einen zusätzlichen Heizring um den Ventilator — die Luft wird dadurch direkt am Ring erhitzt und gleichmäßig verteilt. Für die Umrechnung reicht aber die 20-°C-Regel.
+
+**Gasmark: Die traditionelle britische Skala**
+
+Gasöfen nutzen Stufen statt Grad Celsius. Typische Umrechnung:
+
+- **Gasmark ¼:** 110 °C (warm halten)
+- **Gasmark ½:** 120 °C
+- **Gasmark 1:** 140 °C (sehr niedrig)
+- **Gasmark 2:** 150 °C
+- **Gasmark 3:** 160 °C
+- **Gasmark 4:** 180 °C (mittel, Standard für viele Kuchen)
+- **Gasmark 5:** 190 °C
+- **Gasmark 6:** 200 °C
+- **Gasmark 7:** 220 °C (hoch)
+- **Gasmark 8:** 230 °C (sehr hoch)
+- **Gasmark 9:** 240 °C (Pizza, Brot-Oberhitze)
+
+**Temperaturänderung — Backzeit anpassen**
+
+Wenn Sie die Temperatur ändern müssen (zu dunkel, zu blass), passen Sie die Zeit an:
+
+- **+10 °C:** Zeit −5 Minuten (Faustregel für Kuchen)
+- **−10 °C:** Zeit +5–8 Minuten
+- **+20 °C:** Zeit −10 Minuten
+- **−20 °C:** Zeit +10–15 Minuten
+
+Wichtig: Diese Faustregeln gelten für Kuchen (Rührteig, Biskuit). Bei Brot, Pizza oder Gebäck gelten andere Regeln.
+
+**Formgröße anders als im Rezept — was tun?**
+
+Wenn Sie eine andere Backform verwenden (z. B. 20 cm statt 26 cm), ändert sich die Teighöhe und damit die Backzeit:
+
+- **Kleinere Form (Teig höher):** +10–15 % Backzeit, ggf. −10 °C Temperatur (sonst außen zu dunkel)
+- **Größere Form (Teig flacher):** −10–15 % Backzeit, Temperatur gleich
+- **Gleiche Fläche, andere Form:** Backzeit meist unverändert
+
+Der Backform-Umrechner hilft bei der Flächenberechnung.
+
+**Die Stäbchenprobe — der ultimative Test**
+
+Unabhängig von allen Rechnern: Der sicherste Test ist die Stäbchenprobe. Stechen Sie ein Holzstäbchen (Zahnstocher, Schaschlikspieß) in die dickste Stelle des Kuchens. Bleibt kein Teig kleben → fertig. Klebt noch Teig → 3–5 Minuten länger backen und erneut prüfen.
+
+Bei sehr saftigen Kuchen (Brownies, Schokokuchen) soll das Stäbchen nicht ganz sauber bleiben, sondern leicht feucht — sonst wird er trocken.
+
+**Häufige Fehler beim Backen mit verschiedenen Herdarten**
+
+- **Fehler 1:** Umluft ohne Temperaturanpassung → Kuchen außen verbrannt, innen roh
+- **Fehler 2:** Türöffnen in den ersten 20 Minuten → Biskuit fällt zusammen
+- **Fehler 3:** Kalten Ofen nicht vorheizen → ungleichmäßiges Backergebnis
+- **Fehler 4:** Oberhitze statt Umluft bei Pizza → Boden zu weich`,
+    faq: [
+      {
+        frage: 'Wie rechne ich Ober-/Unterhitze in Umluft um?',
+        antwort: 'Faustregel: Umluft = Ober-/Unterhitze minus 20 °C bei gleicher Zeit. Beispiel: 180 °C O/U-Hitze, 45 Min → 160 °C Umluft, 45 Min. Grund: Umluft überträgt Hitze effektiver durch zirkulierende Luft — bei gleicher Temperatur würde der Kuchen außen verbrennen.',
+      },
+      {
+        frage: 'Wird die Backzeit bei niedrigerer Temperatur länger?',
+        antwort: 'Ja, aber nicht linear. Faustregel: −10 °C = +5 bis 8 Minuten, −20 °C = +10 bis 15 Minuten. Bei sehr empfindlichen Kuchen (Käsekuchen, Baiser) lieber niedriger und länger backen — das gibt bessere Konsistenz. Immer mit Stäbchenprobe kontrollieren.',
+      },
+      {
+        frage: 'Was ist Gasmark und wie rechne ich um?',
+        antwort: 'Gasmark ist die Skalenangabe für britische Gasöfen. Die wichtigsten Umrechnungen: Gasmark 1 = 140 °C, Gasmark 3 = 160 °C, Gasmark 4 = 180 °C (Standard für Kuchen), Gasmark 6 = 200 °C, Gasmark 7 = 220 °C. Unser Rechner zeigt die komplette Tabelle von Gasmark ¼ bis 9.',
+      },
+      {
+        frage: 'Wie erkenne ich, ob der Kuchen fertig ist?',
+        antwort: 'Stäbchenprobe: Holzstäbchen (Zahnstocher) in die dickste Stelle stechen. Bleibt kein Teig kleben → fertig. Klebt noch Teig → 3–5 Min länger backen. Ausnahme: Bei Brownies und sehr saftigen Kuchen soll das Stäbchen leicht feucht bleiben. Bei Hefekuchen klopft der Boden hohl, wenn fertig.',
+      },
+      {
+        frage: 'Ändert sich die Backzeit bei einer größeren Form?',
+        antwort: 'Ja. Bei größerer Form wird der Teig flacher → Backzeit um 10–15 % kürzer bei gleicher Temperatur. Bei kleinerer Form wird der Teig höher → Backzeit um 10–15 % länger und Temperatur ggf. 10 °C niedriger, damit der Kuchen außen nicht verbrennt, bevor die Mitte durch ist.',
+      },
+    ],
+  },
 ];
