@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { berechneLebenszeit, type LebenszeitErgebnis } from '@/lib/berechnungen/lebenszeit';
+import { useMounted } from '@/lib/hooks/useMounted';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
@@ -43,6 +44,7 @@ export default function LebenszeitRechner() {
   const [geschlecht, setGeschlecht] = useState<'maennlich' | 'weiblich'>('maennlich');
   const [ergebnis, setErgebnis] = useState<LebenszeitErgebnis | null>(null);
   const [fehler, setFehler] = useState('');
+  const mounted = useMounted();
 
   function berechnen() {
     setFehler('');
@@ -99,7 +101,7 @@ export default function LebenszeitRechner() {
             type="date"
             value={geburtsdatum}
             onChange={e => setGeburtsdatum(e.target.value)}
-            max={new Date().toISOString().split('T')[0]}
+            max={mounted ? new Date().toISOString().split('T')[0] : undefined}
             className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-2 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
           />
         </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { berechneKuendigungsfrist, type Kuendiger } from '@/lib/berechnungen/kuendigungsfrist';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
@@ -28,12 +28,19 @@ function fmtDatumKurz(d: Date): string {
 
 export default function KuendigungsfristRechner() {
   const [kuendiger, setKuendiger] = useState<Kuendiger>('arbeitnehmer');
-  const [beschaeftigtSeit, setBeschaeftigtSeit] = useState(defaultBeschaeftigtSeit());
+  // Datums-States leer initialisiert, um SSG-Hydration-Mismatch zu vermeiden.
+  // Defaults werden erst im useEffect client-seitig gesetzt.
+  const [beschaeftigtSeit, setBeschaeftigtSeit] = useState('');
   const [probezeit, setProbezeit] = useState(false);
   const [probezeitDauer, setProbezeitDauer] = useState<3 | 6>(6);
-  const [kuendigungsDatum, setKuendigungsDatum] = useState(toIso(new Date()));
+  const [kuendigungsDatum, setKuendigungsDatum] = useState('');
   const [abweichendeFrist, setAbweichendeFrist] = useState(false);
   const [individuelleFristWochen, setIndividuelleFristWochen] = useState('4');
+
+  useEffect(() => {
+    setBeschaeftigtSeit(defaultBeschaeftigtSeit());
+    setKuendigungsDatum(toIso(new Date()));
+  }, []);
 
   const ergebnis = useMemo(
     () =>

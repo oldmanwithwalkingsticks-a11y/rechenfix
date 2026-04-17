@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { berechneMutterschutz, type GeburtsArt, type Beschaeftigung } from '@/lib/berechnungen/mutterschutz';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
@@ -43,11 +43,16 @@ const BESCHAEFTIGUNG_ARTEN: { key: Beschaeftigung; label: string }[] = [
 ];
 
 export default function MutterschutzRechner() {
-  const [geburtstermin, setGeburtstermin] = useState(defaultET());
+  // SSG-Hydration-Guard: Geburtstermin leer initialisieren.
+  const [geburtstermin, setGeburtstermin] = useState('');
   const [geburtsArt, setGeburtsArt] = useState<GeburtsArt>('normal');
   const [tatsaechlich, setTatsaechlich] = useState('');
   const [nettoGehalt, setNettoGehalt] = useState('2500');
   const [beschaeftigung, setBeschaeftigung] = useState<Beschaeftigung>('gesetzlich');
+
+  useEffect(() => {
+    setGeburtstermin(defaultET());
+  }, []);
 
   const nNettoGehalt = parseDeutscheZahl(nettoGehalt);
 

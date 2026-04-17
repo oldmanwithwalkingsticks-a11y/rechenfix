@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import {
   berechneIndexmiete,
   defaultDatumLetzteAnpassung,
@@ -15,7 +15,12 @@ export default function IndexmieteRechner() {
   const [kaltmiete, setKaltmiete] = useState('800');
   const [vpiAlt, setVpiAlt] = useState('117,4');
   const [vpiNeu, setVpiNeu] = useState('127,8');
-  const [datumLetzteAnpassung, setDatumLetzteAnpassung] = useState(defaultDatumLetzteAnpassung());
+  // SSG-Hydration-Guard: Datum leer initialisieren, client-seitig setzen.
+  const [datumLetzteAnpassung, setDatumLetzteAnpassung] = useState('');
+
+  useEffect(() => {
+    setDatumLetzteAnpassung(defaultDatumLetzteAnpassung());
+  }, []);
 
   const ergebnis = useMemo(
     () => berechneIndexmiete({

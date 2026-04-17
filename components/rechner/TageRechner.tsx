@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import { berechneTage, formatDatum, parseDeutschesDatum } from '@/lib/berechnungen/tage';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
@@ -20,12 +20,19 @@ function isoZuDate(iso: string): Date | null {
 }
 
 export default function TageRechner() {
-  const heute = new Date();
-  const [startText, setStartText] = useState(formatDatum(heute));
-  const [startIso, setStartIso] = useState(datumZuIso(heute));
+  // Start-Defaults leer, damit SSG-HTML und Client-Hydrate identisch sind.
+  // "Heute" wird erst client-seitig per useEffect gesetzt.
+  const [startText, setStartText] = useState('');
+  const [startIso, setStartIso] = useState('');
   const [endText, setEndText] = useState('');
   const [endIso, setEndIso] = useState('');
   const [mitzaehlen, setMitzaehlen] = useState(false);
+
+  useEffect(() => {
+    const heute = new Date();
+    setStartText(formatDatum(heute));
+    setStartIso(datumZuIso(heute));
+  }, []);
 
   // Start-Datum aus Text oder Datepicker
   const startDatum = useMemo(() => {

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
@@ -34,7 +34,8 @@ function addTage(d: Date, t: number): Date {
 }
 
 export default function ElternzeitRechner() {
-  const [geburt, setGeburt] = useState(defaultGeburt());
+  // SSG-Hydration-Guard: Geburtsdatum leer, client-seitig setzen.
+  const [geburt, setGeburt] = useState('');
   const [p1Beginn, setP1Beginn] = useState('');
   const [p1Monate, setP1Monate] = useState('12');
   const [p2Beginn, setP2Beginn] = useState('');
@@ -42,10 +43,16 @@ export default function ElternzeitRechner() {
   const [teilzeit, setTeilzeit] = useState(false);
   const [teilzeitStunden, setTeilzeitStunden] = useState('20');
 
+  useEffect(() => {
+    setGeburt(defaultGeburt());
+  }, []);
+
   // Default-Vorschläge basierend auf Geburt
   const effP1Beginn = useMemo(() => {
     if (p1Beginn) return p1Beginn;
+    if (!geburt) return '';
     const g = new Date(geburt);
+    if (isNaN(g.getTime())) return '';
     return toIso(addTage(g, 56)); // Mutterschutz-Ende: 8 Wochen nach Geburt
   }, [geburt, p1Beginn]);
 

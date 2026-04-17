@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
@@ -38,9 +38,14 @@ function buildCycle(start: Date, laenge: number) {
 }
 
 export default function ZyklusRechner() {
-  const [startDatum, setStartDatum] = useState(defaultStart());
+  // SSG-Hydration-Guard: Startdatum leer, erst client-seitig setzen.
+  const [startDatum, setStartDatum] = useState('');
   const [laenge, setLaenge] = useState('28');
   const [modus, setModus] = useState<Modus>(3);
+
+  useEffect(() => {
+    setStartDatum(defaultStart());
+  }, []);
 
   const ergebnis = useMemo(() => {
     const l = Math.max(21, Math.min(35, parseInt(laenge) || 28));

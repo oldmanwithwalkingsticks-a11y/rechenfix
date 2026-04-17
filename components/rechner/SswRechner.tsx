@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import {
   berechneSsw,
   defaultPeriodeDatum,
@@ -14,9 +14,15 @@ import CrossLink from '@/components/ui/CrossLink';
 
 export default function SswRechner() {
   const [methode, setMethode] = useState<SswMethode>('periode');
-  const [periodeDatum, setPeriodeDatum] = useState(() => defaultPeriodeDatum());
+  // SSG-Hydration-Guard: Datums-Defaults leer, client-seitig setzen.
+  const [periodeDatum, setPeriodeDatum] = useState('');
   const [zyklusLaenge, setZyklusLaenge] = useState(28);
-  const [terminDatum, setTerminDatum] = useState(() => defaultTerminDatum());
+  const [terminDatum, setTerminDatum] = useState('');
+
+  useEffect(() => {
+    setPeriodeDatum(defaultPeriodeDatum());
+    setTerminDatum(defaultTerminDatum());
+  }, []);
 
   const ergebnis = useMemo(
     () => berechneSsw({ methode, periodeDatum, zyklusLaenge, terminDatum }),

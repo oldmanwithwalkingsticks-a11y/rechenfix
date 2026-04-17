@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { berechneGeburtstermin, type Methode } from '@/lib/berechnungen/geburtstermin';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
@@ -40,12 +40,19 @@ function defaultUltraschallDatum(): string {
 
 export default function GeburtsterminRechner() {
   const [methode, setMethode] = useState<Methode>('periode');
-  const [periodeDatum, setPeriodeDatum] = useState(defaultPeriodeDatum());
+  // Datums-Defaults leer initialisiert (SSG-Hydration-Guard).
+  const [periodeDatum, setPeriodeDatum] = useState('');
   const [zyklusLaenge, setZyklusLaenge] = useState(28);
-  const [empfaengnisDatum, setEmpfaengnisDatum] = useState(defaultEmpfaengnisDatum());
-  const [ultraschallDatum, setUltraschallDatum] = useState(defaultUltraschallDatum());
+  const [empfaengnisDatum, setEmpfaengnisDatum] = useState('');
+  const [ultraschallDatum, setUltraschallDatum] = useState('');
   const [usWochen, setUsWochen] = useState(8);
   const [usTage, setUsTage] = useState(0);
+
+  useEffect(() => {
+    setPeriodeDatum(defaultPeriodeDatum());
+    setEmpfaengnisDatum(defaultEmpfaengnisDatum());
+    setUltraschallDatum(defaultUltraschallDatum());
+  }, []);
 
   const ergebnis = useMemo(() => berechneGeburtstermin({
     methode,

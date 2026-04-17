@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import { useMounted } from '@/lib/hooks/useMounted';
 import { parseDeutscheZahl, clampInputValue } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
@@ -52,6 +53,7 @@ export default function AlkoholAbbauRechner() {
   ]);
   const [trinkBeginn, setTrinkBeginn] = useState('20:00');
   const [trinkDauer, setTrinkDauer] = useState('3');
+  const mounted = useMounted();
 
   const ergebnis = useMemo(() => {
     const gew = Math.max(1, parseDeutscheZahl(gewicht) || 80);
@@ -189,16 +191,17 @@ export default function AlkoholAbbauRechner() {
         </p>
       </div>
 
+      {/* Zeit-Ausgabe erst nach Mount: new Date() im Render-Pfad → SSG-Mismatch */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-4">
         <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Wann bin ich wieder nüchtern?</h2>
         <div className="space-y-2 text-sm">
-          {ergebnis.promilleMax > 0.5 && (
+          {mounted && ergebnis.promilleMax > 0.5 && (
             <div className="flex justify-between">
               <span className="text-yellow-700 dark:text-yellow-400">🟡 Unter 0,5 ‰</span>
               <span className="font-medium">{fmtTime(ergebnis.zeit05)}</span>
             </div>
           )}
-          {ergebnis.promilleMax > 0.3 && (
+          {mounted && ergebnis.promilleMax > 0.3 && (
             <div className="flex justify-between">
               <span className="text-orange-700 dark:text-orange-400">🟠 Unter 0,3 ‰</span>
               <span className="font-medium">{fmtTime(ergebnis.zeit03)}</span>
@@ -206,7 +209,7 @@ export default function AlkoholAbbauRechner() {
           )}
           <div className="flex justify-between border-t border-gray-100 dark:border-gray-700 pt-2">
             <span className="text-green-700 dark:text-green-400 font-medium">🟢 Voraussichtlich nüchtern (0,0 ‰)</span>
-            <span className="font-bold">{fmtTime(ergebnis.zeitNull)}</span>
+            <span className="font-bold">{mounted ? fmtTime(ergebnis.zeitNull) : '—'}</span>
           </div>
         </div>
         <p className="text-xs text-gray-500 mt-3">

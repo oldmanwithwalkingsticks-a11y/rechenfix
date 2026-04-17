@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useEffect, useRef } from 'react';
 import { berechneGeburtstag } from '@/lib/berechnungen/geburtstag';
+import { useMounted } from '@/lib/hooks/useMounted';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
@@ -47,6 +48,7 @@ function LiveSekundenZaehler({ geburtsdatumMs }: { geburtsdatumMs: number }) {
 
 export default function GeburtstagRechner() {
   const [geburtsdatum, setGeburtsdatum] = useState('1990-06-15');
+  const mounted = useMounted();
 
   const ergebnis = useMemo(
     () => berechneGeburtstag(geburtsdatum),
@@ -62,13 +64,13 @@ export default function GeburtstagRechner() {
           type="date"
           value={geburtsdatum}
           onChange={ev => setGeburtsdatum(ev.target.value)}
-          max={new Date().toISOString().split('T')[0]}
+          max={mounted ? new Date().toISOString().split('T')[0] : undefined}
           className="w-full sm:w-1/2 px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm min-h-[48px]"
         />
       </div>
 
-      {/* Ergebnis */}
-      {ergebnis && (
+      {/* Ergebnis — erst nach Mount (SSG-Hydration-Guard) */}
+      {mounted && ergebnis && (
         <>
           {/* Hauptergebnis */}
           <div className="result-box mb-6">
