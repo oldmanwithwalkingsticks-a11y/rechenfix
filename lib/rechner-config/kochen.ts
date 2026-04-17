@@ -960,4 +960,176 @@ Für präzise Kalorienzählerei empfiehlt es sich, Lebensmittel vor dem Kochen z
       },
     ],
   },
+  {
+    slug: 'zucker-umrechner',
+    titel: 'Zucker-Umrechner',
+    beschreibung: 'Zucker durch Honig, Ahornsirup, Stevia oder Erythrit ersetzen — mit Mengenangaben, Kalorien-Vergleich und Backtipps.',
+    kategorie: 'Kochen & Ernährung',
+    kategorieSlug: 'kochen',
+    metaTitle: 'Zucker-Umrechner 2026 — Honig, Stevia, Erythrit & Ahornsirup | Rechenfix',
+    metaDescription: 'Zucker ersetzen: Mengen für Honig, Ahornsirup, Agave, Kokos, Stevia, Erythrit und Xylit berechnen — kostenlos mit Kalorien-Vergleich.',
+    keywords: ['zucker ersetzen', 'zucker umrechnen honig', 'stevia statt zucker', 'erythrit zucker ersetzen', 'ahornsirup zucker', 'zuckerersatz rechner', 'backen ohne zucker', 'kokosblütenzucker', 'xylit zucker'],
+    icon: '🍯',
+    formel: 'Ersatzmenge = Zuckermenge × Faktor | Flüssigkeitsreduktion = Ersatzmenge × Flüssigkeitskorrektur (bei flüssigen Süßungsmitteln)',
+    beispiel: '200 g Zucker → 150 g Honig (Faktor 0,75) + 30 ml weniger Flüssigkeit. 200 g Zucker → 1 g Stevia-Pulver (Faktor 0,005).',
+    erklaerung: `**Zucker ersetzen — Süßungsmittel im Vergleich**
+
+Zucker ist in der deutschen Küche allgegenwärtig, aber viele suchen nach gesünderen oder kalorienärmeren Alternativen. Ob beim Backen, Kochen oder für Getränke — für jedes Ziel gibt es das passende Süßungsmittel. Dieser Rechner zeigt Ihnen die genauen Mengen und erklärt die wichtigsten Unterschiede.
+
+**Warum sind die Mengen unterschiedlich?**
+
+Verschiedene Süßungsmittel haben unterschiedliche Süßkraft. Agavendicksaft ist etwa 1,5-mal so süß wie Zucker (Sie brauchen also weniger), während Xylit gleich süß ist. Stevia ist hingegen bis zu 300-mal süßer — ein Gramm ersetzt 200 g Zucker. Diese Unterschiede machen präzise Umrechnung wichtig.
+
+**Flüssige Süßungsmittel: Flüssigkeit reduzieren**
+
+Honig, Ahornsirup und Agavendicksaft bringen eigene Flüssigkeit mit. Wenn Sie 150 g Honig statt 200 g Zucker verwenden, fügen Sie dem Rezept ca. 40–50 ml extra Flüssigkeit hinzu. Diese sollten Sie an anderer Stelle reduzieren — z. B. weniger Milch oder Öl — sonst wird der Teig zu weich oder flüssig.
+
+**Backen vs. Kochen: Warum der Unterschied wichtig ist**
+
+- Beim Backen bindet Zucker Feuchtigkeit, sorgt für Bräunung (Maillard-Reaktion) und Volumen. Zuckerersatzstoffe können das Volumen verringern und die Farbe verändern.
+- Beim Kochen und für Desserts ist die Umstellung meist einfacher, da keine chemischen Backprozesse ablaufen.
+- Erythrit und Xylit können beim Backen in großen Mengen einen leichten Kühlungseffekt oder ein unangenehmes Mundgefühl erzeugen.
+
+**Süßungsmittel im Detail**
+
+- **Honig:** Enthält Enzyme, Spurenelemente und Antioxidantien. Roher Honig nicht über 40 °C erhitzen, da Enzyme zerstört werden. Beim Backen: Ofen 10–15 °C kühler stellen (karamellisiert schneller).
+- **Ahornsirup:** Charakteristisches Aroma (Grad A mild, Grad B kräftig). Gut für Pfannkuchen, Waffeln, Dressings. Lässt sich besser erhitzen als Honig.
+- **Agavendicksaft:** Höchster Fruchtzuckeranteil (70–90 % Fructose) — neutral im Geschmack, gut dosierbar. Wegen hohem Fructosegehalt in der Diskussion.
+- **Kokosblütenzucker:** Gleich süß wie Zucker, leicht karamellartig. Kann 1:1 ersetzt werden. Kalorienähnlich zu Zucker, aber niedrigerer glykämischer Index (35 vs. 65).
+- **Stevia:** Kalorienfrei, 200–300× süßer als Zucker. Bitterer Nachgeschmack in großen Mengen. Nicht für Volumen beim Backen geeignet — mit anderen Füllstoffen kombinieren.
+- **Erythrit:** Kalorienfrei (0,24 kcal/g, als 0 deklariert), ca. 70 % so süß wie Zucker, kein Einfluss auf Blutzucker. Kann in großen Mengen abführend wirken.
+- **Xylit:** Gleich süß wie Zucker, 40 % weniger Kalorien. Gut verträglich in kleinen Mengen. Achtung: Für Hunde extrem giftig — sicher aufbewahren!
+
+**Glykämischer Index im Überblick**
+
+| Süßungsmittel | GI |
+|---|---|
+| Zucker (Saccharose) | 65 |
+| Honig | 55–60 |
+| Ahornsirup | 54 |
+| Agave | 15 |
+| Kokosblütenzucker | 35 |
+| Stevia | 0 |
+| Erythrit | 0 |
+| Xylit | 7 |
+
+Ein niedriger glykämischer Index bedeutet einen langsameren Blutzuckeranstieg — relevant für Diabetiker und alle, die Heißhunger vermeiden wollen.`,
+    faq: [
+      {
+        frage: 'Wie viel Honig ersetzt 100 g Zucker?',
+        antwort: 'Für 100 g Zucker verwenden Sie ca. 75 g Honig (Faktor 0,75), da Honig etwas süßer ist. Da Honig Flüssigkeit enthält, reduzieren Sie die Flüssigkeit im Rezept um ca. 30 ml. Beim Backen: Ofen 10–15 °C kühler stellen, da Honig schneller bräunt.',
+      },
+      {
+        frage: 'Kann ich Erythrit 1:1 wie Zucker verwenden?',
+        antwort: 'Nicht ganz: Erythrit ist nur ca. 70 % so süß wie Zucker, daher brauchen Sie etwa 130 g Erythrit für 100 g Zucker (Faktor 1,3). Dafür ist es kalorienfrei und hat keinen Einfluss auf den Blutzucker. Beim Backen kann es in größeren Mengen kristallisieren und einen leichten Kühlungseffekt erzeugen.',
+      },
+      {
+        frage: 'Wie viel Stevia ergibt 100 g Zucker?',
+        antwort: 'Stevia-Pulver ist ca. 200–300× süßer als Zucker: Für 100 g Zucker reichen ca. 0,5 g Stevia-Pulver. Da Stevia kein Volumen hat, müssen Sie beim Backen andere Füllstoffe (z. B. Apfelmus, Joghurt, Xylit) ergänzen, um die fehlende Masse auszugleichen.',
+      },
+      {
+        frage: 'Ist Kokosblütenzucker wirklich gesünder?',
+        antwort: 'Kokosblütenzucker hat mehr Spurenelemente als Weißzucker und einen niedrigeren glykämischen Index (35 vs. 65) — führt also zu einem langsameren Blutzuckeranstieg. Kalorientechnisch ist er aber fast gleich wie Zucker (~380 kcal/100 g). Er eignet sich gut als 1:1-Ersatz im Backen und hat ein angenehmes Karamell-Aroma.',
+      },
+      {
+        frage: 'Warum muss ich beim Backen mit Honig die Flüssigkeit reduzieren?',
+        antwort: 'Honig besteht zu ca. 17–20 % aus Wasser. 150 g Honig bringen also ca. 25–30 ml Wasser mit ins Rezept. Ohne Ausgleich wird der Teig zu weich oder flüssig. Faustregel: Pro 100 g Honig ca. 20 ml weniger Flüssigkeit (Milch, Wasser, Öl) verwenden.',
+      },
+      {
+        frage: 'Welcher Zuckerersatz eignet sich am besten zum Backen?',
+        antwort: 'Für unkompliziertes Backen: Erythrit oder Xylit (ähnliches Verhalten wie Zucker). Für Aroma: Kokosblütenzucker (1:1). Für kalorienarm: Erythrit + Stevia kombiniert. Honig und Ahornsirup sind hervorragend für feuchte Backwaren (Muffins, Kuchen), weniger geeignet für trockene Kekse oder knuspriges Gebäck.',
+      },
+    ],
+  },
+  {
+    slug: 'gefrierdauer-rechner',
+    titel: 'Gefrierdauer-Rechner',
+    beschreibung: 'Wie lange ist Tiefkühlkost haltbar? Einfriedatum eingeben und Haltbarkeitsdatum mit Ampel-Anzeige berechnen.',
+    kategorie: 'Kochen & Ernährung',
+    kategorieSlug: 'kochen',
+    metaTitle: 'Gefrierdauer-Rechner 2026 — Tiefkühlkost Haltbarkeit berechnen | Rechenfix',
+    metaDescription: 'Wie lange ist Tiefkühlkost haltbar? Einfriedatum + Lebensmittel eingeben — Haltbarkeitsdatum, Ampel-Anzeige und Auftau-Tipps. Kostenlos.',
+    keywords: ['gefrierdauer rechner', 'tiefkühlkost haltbarkeit', 'wie lange eingefroren haltbar', 'einfrieren haltbarkeit', 'gefrierfach haltbarkeit', 'tiefkühlware haltbar bis', 'lebensmittel einfrieren dauer', 'haltbarkeit gefroren'],
+    icon: '🧊',
+    formel: 'Haltbar bis = Einfriedatum + Haltbarkeitsdauer (Monate) × Verpackungsfaktor | Vakuum-Faktor: ×1,5 (50 % länger)',
+    beispiel: 'Hähnchen eingefroren am 01.01.2026 in Gefrierbeutel: Haltbar bis ca. 01.10.2026–01.01.2027 (9–12 Monate). Vakuumiert: bis 01.07.2027 (18 Monate).',
+    erklaerung: `**Tiefkühlkost: Wie lange ist sie wirklich haltbar?**
+
+Viele Menschen fragen sich, wie lange eingefrorene Lebensmittel noch genießbar sind. Die gute Nachricht: Bei −18 °C stoppt das Wachstum aller Mikroorganismen vollständig — eingefrorene Lebensmittel können theoretisch unbegrenzt lang sicher gegessen werden. Aber: Qualität, Geschmack und Textur nehmen trotzdem ab.
+
+**Warum sinkt die Qualität trotz Einfrieren?**
+
+Tiefgekühlte Lebensmittel sind zwar sicher, aber chemische und enzymatische Prozesse laufen bei −18 °C sehr langsam weiter. Fette oxidieren (Gefrierbrand), Proteine denaturieren, und Eiskristalle beschädigen Zellstrukturen. Das macht aufgetautes Fleisch manchmal trocken und Gemüse matschig.
+
+**Die wichtigsten Richtwerte**
+
+| Lebensmittel | Haltbarkeit |
+|---|---|
+| Hackfleisch | 1–3 Monate |
+| Hähnchen (ganz) | 9–12 Monate |
+| Rindfleisch (Braten) | 6–12 Monate |
+| Fetter Fisch (Lachs) | 2–3 Monate |
+| Magerer Fisch | 6–8 Monate |
+| Gemüse (blanchiert) | 10–12 Monate |
+| Brot | 3–6 Monate |
+| Butter | 6–9 Monate |
+| Suppe / Eintopf | 2–3 Monate |
+| Kuchen | 2–3 Monate |
+
+**Verpackung entscheidet mit**
+
+Die richtige Verpackung verlängert die Haltbarkeit erheblich:
+
+- **Gefrierbeutel:** Standard, gut für die meisten Lebensmittel. Luft herausdrücken.
+- **Gefrierbox/Dose:** Schützt vor Geruchs-Übertragung und Druck. Gut für empfindliche Lebensmittel.
+- **Alufolie:** Nur bedingt geeignet — Luft kann eindringen, Gefrierbrand wahrscheinlicher.
+- **Vakuumverpackung:** Beste Option — kein Sauerstoff, kaum Oxidation. Verlängert Haltbarkeit um ca. 50 %.
+
+**Blanchieren vor dem Einfrieren**
+
+Gemüse immer blanchieren (kurz in kochendes Wasser, dann Eiswasser): Deaktiviert Enzyme, die sonst Farbe, Geschmack und Vitamine abbauen. Nicht blanchiertes Gemüse wird nach 3–6 Monaten grau und geschmacklos.
+
+**Auftauen — richtig und sicher**
+
+Das Auftauen ist genauso wichtig wie das Einfrieren:
+
+- **Kühlschrank (ideal):** Langsam und gleichmäßig. Fleisch: 12–48 h, je nach Größe.
+- **Kaltes Wasser (schneller):** Lebensmittel in verschlossenem Beutel in kaltes Wasser legen. Wasser alle 30 Min wechseln.
+- **Mikrowelle (für sofortiges Garen):** Nur wenn danach sofort weiterverarbeitet wird.
+- **Raumtemperatur: NIE** — besonders bei Fleisch. Die Außenschichten erwärmen sich auf Keimtemperatur, während innen noch Eis ist.
+
+**Niemals erneut einfrieren**
+
+Aufgetaute Lebensmittel niemals erneut einfrieren — beim Auftauen beginnen Bakterien wieder zu wachsen. Ausnahme: Sie haben das aufgetaute Lebensmittel gegart (z. B. Hack gebraten) — dann darf das fertige Gericht erneut eingefroren werden.
+
+**Gefrierbrand: Was ist das?**
+
+Gefrierbrand entsteht, wenn Luft an die Oberfläche des Lebensmittels gelangt — Feuchtigkeitsentzug und Oxidation erzeugen graue, trockene Flecken. Nicht gesundheitsschädlich, aber unangenehm im Geschmack. Betroffene Stellen großzügig abschneiden.`,
+    faq: [
+      {
+        frage: 'Wie lange ist Hackfleisch eingefroren haltbar?',
+        antwort: 'Hackfleisch ist eingefroren 1–3 Monate haltbar. Wegen der großen Oberfläche verdirbt es schneller als ganze Fleischstücke. Nach dem Auftauen sofort verwenden und niemals bei Raumtemperatur auftauen — im Kühlschrank über Nacht ist die sicherste Methode.',
+      },
+      {
+        frage: 'Verlängert Vakuumieren die Haltbarkeit wirklich?',
+        antwort: 'Ja, deutlich: Vakuumieren verlängert die Haltbarkeit um ca. 50 %, da kein Sauerstoff an das Lebensmittel gelangt. Statt 6–12 Monate für Rindfleisch sind bei Vakuumverpackung bis zu 18 Monate möglich. Zudem wird Gefrierbrand nahezu verhindert.',
+      },
+      {
+        frage: 'Kann ich Brot einfrieren und wie lange hält es?',
+        antwort: 'Ja, Brot lässt sich hervorragend einfrieren — 3–6 Monate in Scheiben oder als Laib. Scheiben am besten einzeln einfrieren und direkt im Toaster auftauen. Laib bei Raumtemperatur 2–3 h auftauen. Brot verliert beim Einfrieren kaum an Qualität.',
+      },
+      {
+        frage: 'Warum muss Gemüse vor dem Einfrieren blanchiert werden?',
+        antwort: 'Rohes Gemüse enthält Enzyme, die beim Einfrieren nicht inaktiviert werden. Sie bauen langsam Farbe, Geschmack und Vitamine ab. Blanchieren (2–5 Min in kochendem Wasser, dann sofort Eiswasser) stoppt diese Enzyme — blanchiertes Gemüse bleibt 10–12 Monate qualitativ gut, rohes nur 3–6 Monate.',
+      },
+      {
+        frage: 'Wie taut man Fisch am besten auf?',
+        antwort: 'Fisch am besten im Kühlschrank über 12–24 h langsam auftauen. Alternativ im verschlossenen Beutel in kaltem Wasser (ca. 1–2 h, Wasser alle 30 Min wechseln). Fisch kann auch direkt gefroren gegart werden — einfach die Garzeit um 50 % verlängern. Niemals bei Raumtemperatur auftauen.',
+      },
+      {
+        frage: 'Was bedeutet Gefrierbrand und ist er gefährlich?',
+        antwort: 'Gefrierbrand entsteht durch Feuchtigkeitsverlust und Oxidation, wenn Luft an eingefrorene Lebensmittel gelangt. Er zeigt sich als graue, trockene Flecken. Gefrierbrand ist nicht gefährlich — die betroffenen Stellen einfach großzügig abschneiden. Zur Vorbeugung: Luft aus Gefrierbeuteln drücken oder vakuumieren.',
+      },
+    ],
+  },
 ];
