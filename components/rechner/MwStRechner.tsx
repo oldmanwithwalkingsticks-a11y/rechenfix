@@ -28,6 +28,7 @@ export default function MwStRechner() {
   const [customSatz, setCustomSatz] = useState('');
   const [istCustom, setIstCustom] = useState(false);
   const [kopiert, setKopiert] = useState(false);
+  const [kopierFehler, setKopierFehler] = useState(false);
   const [geteilt, setGeteilt] = useState(false);
 
   // Multi-Rechner
@@ -55,14 +56,21 @@ export default function MwStRechner() {
 
   const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-  function handleCopy() {
+  async function handleCopy() {
     if (!ergebnis) return;
     const text = tab === 'netto-brutto'
       ? `Netto: ${fmt(ergebnis.netto)} € | MwSt: ${fmt(ergebnis.mwstBetrag)} € | Brutto: ${fmt(ergebnis.brutto)} €`
       : `Brutto: ${fmt(ergebnis.brutto)} € | MwSt: ${fmt(ergebnis.mwstBetrag)} € | Netto: ${fmt(ergebnis.netto)} €`;
-    navigator.clipboard.writeText(text);
-    setKopiert(true);
-    setTimeout(() => setKopiert(false), 2000);
+    try {
+      await navigator.clipboard.writeText(text);
+      setKopierFehler(false);
+      setKopiert(true);
+      setTimeout(() => setKopiert(false), 2000);
+    } catch {
+      setKopiert(false);
+      setKopierFehler(true);
+      setTimeout(() => setKopierFehler(false), 3000);
+    }
   }
 
   function handleShare() {
@@ -195,7 +203,7 @@ export default function MwStRechner() {
                   onClick={handleCopy}
                   className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-600 font-medium transition-colors"
                 >
-                  {kopiert ? '✓ Kopiert' : 'Ergebnis kopieren'}
+                  {kopiert ? '✓ Kopiert' : kopierFehler ? 'Fehler — bitte manuell kopieren' : 'Ergebnis kopieren'}
                 </button>
                 <button
                   onClick={handleShare}

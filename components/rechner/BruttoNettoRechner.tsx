@@ -42,6 +42,7 @@ export default function BruttoNettoRechner() {
   const [rvBefreit, setRvBefreit] = useState(false);
   const [abrechnungszeitraum, setAbrechnungszeitraum] = useState<'monat' | 'jahr'>('monat');
   const [kopiert, setKopiert] = useState(false);
+  const [kopierFehler, setKopierFehler] = useState(false);
   const [weihnachtsgeldAktiv, setWeihnachtsgeldAktiv] = useState(false);
   const [weihnachtsgeldHoehe, setWeihnachtsgeldHoehe] = useState<'100' | '50' | 'eigen'>('100');
   const [weihnachtsgeldBetrag, setWeihnachtsgeldBetrag] = useState('');
@@ -78,15 +79,22 @@ export default function BruttoNettoRechner() {
     return labels[sk] || `SK${sk}`;
   };
 
-  function handleCopy() {
+  async function handleCopy() {
     const blName = bl?.name || bundesland;
     let text = `Brutto: ${fmt(ergebnis.bruttoMonat)} € → Netto: ${fmt(ergebnis.nettoMonat)} € (${skLabel(steuerklasse)}, ${blName}, 2026)`;
     if (ergebnis.weihnachtsgeld) {
       text += ` | Weihnachtsgeld: ${fmt(ergebnis.weihnachtsgeld.brutto)} € brutto → ${fmt(ergebnis.weihnachtsgeld.netto)} € netto`;
     }
-    navigator.clipboard.writeText(text);
-    setKopiert(true);
-    setTimeout(() => setKopiert(false), 2000);
+    try {
+      await navigator.clipboard.writeText(text);
+      setKopierFehler(false);
+      setKopiert(true);
+      setTimeout(() => setKopiert(false), 2000);
+    } catch {
+      setKopiert(false);
+      setKopierFehler(true);
+      setTimeout(() => setKopierFehler(false), 3000);
+    }
   }
 
   function handlePrint() {
@@ -287,7 +295,7 @@ export default function BruttoNettoRechner() {
           {/* Action-Buttons */}
           <div className="flex flex-wrap gap-3 mb-4 no-print">
             <button onClick={handleCopy} className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-600 font-medium transition-colors">
-              {kopiert ? '✓ Kopiert' : 'Ergebnis kopieren'}
+              {kopiert ? '✓ Kopiert' : kopierFehler ? 'Fehler — bitte manuell kopieren' : 'Ergebnis kopieren'}
             </button>
             <span className="text-gray-300 dark:text-gray-600">|</span>
             <button onClick={handleShare} className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-600 font-medium transition-colors">
