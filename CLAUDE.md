@@ -42,7 +42,7 @@
 - Vercel Hosting
 - Anthropic Claude API für "Fix erklärt"
 
-## Rechner-Bestand (166 gesamt)
+## Rechner-Bestand (168 gesamt)
 | Kategorie | Anzahl |
 |-----------|-------:|
 | Alltag    | 23 |
@@ -52,7 +52,7 @@
 | Wohnen    | 25 |
 | Mathe     | 18 |
 | Arbeit    | 17 |
-| Kochen    | 8  |
+| Kochen    | 10 |
 | Sport     | 2  |
 
 ## Config-Struktur
@@ -124,3 +124,4 @@ Lighthouse Accessibility ≥95 auf neuer/geänderter Seite.
 - **78i** — Dokumentations-Update nach A11y-Offensive ✅
 - **78j** — Accessibility: Fokus-Lenkung "Fix erklärt" Disclosure ✅
 - **Batch 39** — Kochen: Pizzateig-Rechner + Brotback-Rechner (Bäckerprozente) ✅
+- **Batch 40** — Kochen: Alkoholgehalt-Rechner + Nährwert-Rechner ✅

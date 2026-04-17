@@ -174,6 +174,8 @@ import KochzeitRechner from '@/components/rechner/KochzeitRechner';
 import HefeUmrechner from '@/components/rechner/HefeUmrechner';
 import PizzateigRechner from '@/components/rechner/PizzateigRechner';
 import BrotbackRechner from '@/components/rechner/BrotbackRechner';
+import AlkoholgehaltRechner from '@/components/rechner/AlkoholgehaltRechner';
+import NaehrwertRechner from '@/components/rechner/NaehrwertRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -360,6 +362,8 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'hefe-umrechner': HefeUmrechner,
   'pizzateig-rechner': PizzateigRechner,
   'brotback-rechner': BrotbackRechner,
+  'alkoholgehalt-rechner': AlkoholgehaltRechner,
+  'naehrwert-rechner': NaehrwertRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

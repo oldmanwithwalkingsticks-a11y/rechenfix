@@ -108,6 +108,8 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'alkoholgehalt-rechner',
+  'naehrwert-rechner',
   'pizzateig-rechner',
   'brotback-rechner',
   'kochzeit-rechner',
@@ -385,6 +387,8 @@ const verwandteMap: Record<string, string[]> = {
   'hefe-umrechner': ['rezept-umrechner', 'backzeit-rechner', 'backform-umrechner', 'cups-umrechner'],
   'pizzateig-rechner': ['hefe-umrechner', 'brotback-rechner', 'rezept-umrechner', 'backzeit-rechner'],
   'brotback-rechner': ['pizzateig-rechner', 'hefe-umrechner', 'backzeit-rechner', 'backform-umrechner'],
+  'alkoholgehalt-rechner': ['promillerechner', 'kalorienrechner', 'cups-umrechner', 'rezept-umrechner'],
+  'naehrwert-rechner': ['kalorienrechner', 'protein-rechner', 'rezept-umrechner', 'cups-umrechner'],
 };
 
 export function getVerwandteRechner(aktuell: RechnerConfig, anzahl = 4): RechnerConfig[] {

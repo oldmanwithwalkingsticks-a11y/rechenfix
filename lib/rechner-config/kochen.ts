@@ -769,4 +769,195 @@ Beim Backen verliert Brot durch Wasserverdunstung ca. 10–15 % seines Gewichts.
       },
     ],
   },
+  {
+    slug: 'alkoholgehalt-rechner',
+    titel: 'Alkoholgehalt-Rechner',
+    beschreibung: 'Alkoholgehalt von Cocktails berechnen und Restalkohol beim Kochen ermitteln — mit Kalorien und Standardgläsern.',
+    kategorie: 'Kochen & Ernährung',
+    kategorieSlug: 'kochen',
+    metaTitle: 'Alkoholgehalt-Rechner 2026 — Cocktail mischen & Restalkohol | Rechenfix',
+    metaDescription: 'Alkoholgehalt berechnen: Cocktail mischen, Restalkohol beim Kochen nach USDA, Kalorien durch Alkohol und Standardgläser. Kostenlos.',
+    keywords: ['alkoholgehalt rechner', 'cocktail alkohol berechnen', 'restalkohol beim kochen', 'alkohol kalorien', 'standardglas alkohol', 'promille berechnen', 'alkohol verdampfen kochen', 'cocktail mixen rechner'],
+    icon: '🍹',
+    formel: 'Mischung: Alkohol (ml) = Menge × % vol ÷ 100 | Mischgehalt = Σ Alkohol ÷ Σ Volumen × 100 | Gramm Alkohol = ml × 0,789 | kcal = g × 7,1 kcal/g',
+    beispiel: '0,5 l Bier (5 %) + 0,1 l Orangensaft: Gesamtvolumen 600 ml, Alkohol 25 ml = 19,7 g, Mischgehalt 4,2 % vol, 140 kcal. Restalkohol nach 30 Min Kochen: 35 % des ursprünglichen Alkohols.',
+    erklaerung: `**Alkohol berechnen — beim Mischen und beim Kochen**
+
+Wer Cocktails mixt oder mit Wein kocht, stellt sich oft die Frage: Wie viel Alkohol enthält mein Getränk eigentlich? Und verdampft der Alkohol beim Kochen wirklich vollständig? Unser Alkoholgehalt-Rechner beantwortet beide Fragen mit einer einfachen Formel.
+
+**Alkoholgehalt beim Mischen berechnen**
+
+Die Berechnung folgt dem Prinzip der Volumenanteile. Jede Zutat bringt eine bestimmte Menge reinen Alkohol mit:
+
+Reiner Alkohol (ml) = Volumen (ml) × Alkoholgehalt (% vol) ÷ 100
+
+Der Gesamtalkoholgehalt der Mischung ergibt sich dann aus dem Verhältnis des Gesamtalkohols zum Gesamtvolumen:
+
+Mischgehalt (% vol) = Σ Alkohol (ml) ÷ Σ Volumen (ml) × 100
+
+**Von Milliliter zu Gramm: Die Dichte von Alkohol**
+
+Alkohol (Ethanol) hat eine Dichte von 0,789 g/ml — er ist also leichter als Wasser. Die Umrechnung ist wichtig, weil Kalorienwerte in Gramm angegeben werden:
+
+Gramm Alkohol = ml reiner Alkohol × 0,789
+
+**Kalorien durch Alkohol**
+
+Alkohol liefert 7,1 Kilokalorien pro Gramm — mehr als Kohlenhydrate (4 kcal/g) und Protein (4 kcal/g), aber weniger als Fett (9 kcal/g). Das macht Alkohol zu einem oft unterschätzten Kalorienträger. Ein Glas Wein (0,2 l, 12 % vol) liefert:
+
+- Alkohol: 200 ml × 12 % / 100 × 0,789 g/ml = 18,9 g
+- Kalorien: 18,9 g × 7,1 kcal/g = 134 kcal
+
+Das entspricht fast einem kleinen Stück Kuchen — nur aus Alkohol.
+
+**Das Standardglas — eine internationale Maßeinheit**
+
+Verschiedene Länder definieren das „Standardglas" unterschiedlich. In Deutschland und nach WHO-Definition gilt:
+
+1 Standardglas = 10 g reiner Alkohol
+
+Das entspricht ungefähr:
+- 0,33 l Bier (5 % vol): ~13 g Alkohol ≈ 1,3 Standardgläser
+- 0,1 l Wein (12 % vol): ~9,5 g ≈ 1 Standardglas
+- 4 cl Wodka (40 % vol): ~12,6 g ≈ 1,3 Standardgläser
+
+Die Deutsche Gesellschaft für Ernährung (DGE) empfiehlt, nicht mehr als 1–2 Standardgläser täglich zu konsumieren — und an mindestens 2–3 Tagen pro Woche keinen Alkohol.
+
+**Restalkohol beim Kochen — die USDA-Studie**
+
+Ein weit verbreiteter Mythos: „Alkohol verdampft beim Kochen vollständig." Das ist falsch. Die US-Behörde für Landwirtschaft (USDA) hat untersucht, wie viel Alkohol bei verschiedenen Kochmethoden verbleibt:
+
+- **Flambieren (kurz):** 75 % Restalkohol — das Feuer verbrennt nur oberflächlich
+- **15 Minuten Kochen:** 40 % verbleiben
+- **30 Minuten Köcheln:** 35 %
+- **1 Stunde Köcheln:** 25 %
+- **2 Stunden Köcheln:** 10 %
+- **2,5 Stunden Köcheln:** noch 5 % des ursprünglichen Alkohols
+
+Für 100 % Alkoholverdampfung wäre theoretisch sehr langes, offenes Köcheln nötig — das ist in der Praxis kaum erreichbar. Bei alkoholarmen Gerichten wie Coq au Vin oder Risotto verbleibt nach 30–45 Minuten immer noch ein signifikanter Restalkohol.
+
+**Praktische Tipps zum Alkohol beim Kochen**
+
+- **Für Kinder und Schwangere:** Auf Gerichte mit Alkohol verzichten oder auf alkoholfreie Alternativen ausweichen (alkoholfreier Wein, Traubensaft, Apfelsaft)
+- **Rotwein in Saucen:** 30 Minuten Reduktion bei offener Pfanne reduziert den Alkohol auf etwa 35 % des Ausgangsgehalts
+- **Flambieren:** Der Alkohol brennt kurz, bleibt aber größtenteils erhalten. Flambierten Crêpes Suzette enthalten immer noch ~75 % des verwendeten Alkohols
+
+**Alkohol und Kalorien: Der unterschätzte Faktor**
+
+Alkohol wird im Körper bevorzugt verbrannt — bevor Fett oder Kohlenhydrate als Energie genutzt werden. Während der Körper mit Alkohol beschäftigt ist, werden Fette und Zucker als Reserve eingelagert. Deshalb begünstigt regelmäßiger Alkoholkonsum Fetteinlagerungen mehr als die Kalorien allein erklären.`,
+    faq: [
+      {
+        frage: 'Verdampft Alkohol beim Kochen vollständig?',
+        antwort: 'Nein. Laut USDA-Studie verbleiben nach 15 Min Kochen noch 40 % des Alkohols, nach 30 Min noch 35 %, nach 1 Stunde 25 % und nach 2,5 Stunden noch 5 %. Für vollständige Verdampfung bräuchten Sie extrem lange Kochzeiten mit offenem Topf — praktisch nicht erreichbar. Für Gerichte für Kinder oder Schwangere besser auf alkoholfreie Alternativen zurückgreifen.',
+      },
+      {
+        frage: 'Wie berechne ich den Alkoholgehalt eines Cocktails?',
+        antwort: 'Formel: Alkohol (ml) = Volumen × % vol ÷ 100. Beispiel: 50 ml Wodka (40 %) = 20 ml reiner Alkohol. Dann alle Zutaten summieren: Gesamtalkohol ÷ Gesamtvolumen × 100 = % vol der Mischung. Unser Rechner macht das automatisch für bis zu 10 Zutaten.',
+      },
+      {
+        frage: 'Wie viel Kalorien hat Alkohol?',
+        antwort: 'Alkohol liefert 7,1 kcal pro Gramm. Da 1 ml Alkohol 0,789 g wiegt, sind das 5,6 kcal/ml. Ein Glas Wein (0,2 l, 12 %) hat ca. 134 kcal aus Alkohol — dazu kommen noch Kalorien aus Zucker (beim Süßwein mehr). Ein kleines Bier (0,33 l, 5 %) liefert ca. 82 kcal aus Alkohol. Hinzu kommen Kalorien aus Malzzucker.',
+      },
+      {
+        frage: 'Was ist ein Standardglas Alkohol?',
+        antwort: 'In Deutschland (und nach WHO-Definition) gilt: 1 Standardglas = 10 g reiner Alkohol. Das entspricht ca. 0,33 l Bier (5 %), 0,1 l Wein (12 %) oder 3 cl Schnaps (40 %). Andere Länder definieren es anders: USA = 14 g, UK = 8 g. Die DGE empfiehlt max. 1–2 Standardgläser täglich mit mehreren alkoholfreien Tagen/Woche.',
+      },
+      {
+        frage: 'Wie viel Restalkohol bleibt beim Flambieren?',
+        antwort: 'Beim Flambieren verbrennt nur die Alkoholdampfschicht an der Oberfläche — der Großteil bleibt erhalten. Laut USDA verbleiben ca. 75 % des ursprünglichen Alkohols. Flambieren dient dem Aromaeffekt und dem optischen Spektakel, ist aber keine Methode, Alkohol zu entfernen. Für Gerichte ohne Alkohol lieber weglassen statt flambieren.',
+      },
+    ],
+  },
+  {
+    slug: 'naehrwert-rechner',
+    titel: 'Nährwert-Rechner',
+    beschreibung: 'Nährwerte pro Portion berechnen: Kalorien, Protein, KH und Fett für selbst gekochte Rezepte — mit 47 Lebensmitteln.',
+    kategorie: 'Kochen & Ernährung',
+    kategorieSlug: 'kochen',
+    metaTitle: 'Nährwert-Rechner 2026 — Kalorien pro Portion für Rezepte | Rechenfix',
+    metaDescription: 'Nährwerte pro Portion berechnen: Kalorien, Protein, Kohlenhydrate und Fett für Rezepte — mit 47 Lebensmitteln und Makro-Verteilung. Kostenlos.',
+    keywords: ['nährwert rechner', 'kalorien pro portion berechnen', 'makronährstoffe berechnen', 'rezept kalorien', 'nährwerte selbst kochen', 'kaloriengehalt rezept', 'protein fett kohlenhydrate', 'nährwerttabelle lebensmittel'],
+    icon: '🥗',
+    formel: 'Pro Zutat: Nährwert = Menge (g) × Nährwert_pro_100g ÷ 100 | Gesamt = Σ alle Zutaten | Pro Portion = Gesamt ÷ Portionen | kcal aus Makros: Protein × 4, KH × 4, Fett × 9',
+    beispiel: 'Pfannkuchen (4 Portionen): 250 g Mehl (870 kcal), 2 Eier = 120 g (186 kcal), 300 ml Milch (192 kcal) = 1.248 kcal gesamt ÷ 4 = 312 kcal pro Portion, davon 11 g Protein, 50 g KH, 7 g Fett.',
+    erklaerung: `**Nährwerte selbst berechnen — Rezepte transparent machen**
+
+Wer bewusst kochen möchte, fragt sich: Wie viel Kalorien hat mein Rezept pro Portion? Unser Nährwert-Rechner ermöglicht es, selbst gekochte Gerichte zu analysieren — mit Echtdaten aus dem Bundeslebensmittelschlüssel (BLS) für 47 gängige Lebensmittel.
+
+**Das Prinzip: Pro-100-g-Werte skalieren**
+
+Alle Nährwertangaben auf Lebensmittelverpackungen beziehen sich auf 100 g. Die Berechnung für Ihre tatsächliche Menge funktioniert durch einfaches Skalieren:
+
+Nährwert = Menge (g) × Nährwert pro 100 g ÷ 100
+
+Die Gesamtnährwerte des Rezepts ergeben sich als Summe aller Zutaten. Geteilt durch die Portionenzahl erhalten Sie die Werte pro Portion.
+
+**Die vier Makronährstoffe und ihre Kalorienwerte**
+
+Lebensmittel enthalten drei energieliefernde Makronährstoffe, deren kalorische Dichte unterschiedlich ist:
+
+- **Protein (Eiweiß):** 4 kcal pro Gramm. Unverzichtbar für Muskelaufbau, Zellreparatur und Immunsystem. Quellen: Fleisch, Fisch, Hülsenfrüchte, Milchprodukte, Eier.
+- **Kohlenhydrate:** 4 kcal pro Gramm. Hauptenergielieferant für Gehirn und Muskeln. Quellen: Mehl, Reis, Pasta, Kartoffeln, Zucker, Gemüse.
+- **Fett:** 9 kcal pro Gramm — mehr als doppelt so viel wie Protein und KH. Wichtig für fettlösliche Vitamine (A, D, E, K), Hormonbildung und Zellmembranen. Quellen: Öle, Butter, Nüsse, Käse, fettiges Fleisch.
+
+**Makro-Verteilung: Was ist gesund?**
+
+Die Deutsche Gesellschaft für Ernährung (DGE) empfiehlt für Erwachsene folgende Makro-Verteilung:
+
+- Protein: 15–20 % der Gesamtkalorien
+- Kohlenhydrate: 50–55 %
+- Fett: 25–35 %
+
+Für sportlich aktive Personen und beim Muskelaufbau empfehlen sich höhere Proteinwerte (20–30 %). Low-Carb-Diäten verschieben die Verteilung zu mehr Fett und Protein.
+
+**Tagesbedarf: Was ist normal?**
+
+Der Rechner vergleicht Ihre Portionskalorien mit dem Referenzwert von 2.000 kcal/Tag (offizieller EU-Referenzwert für Nährwertkennzeichnungen). Der tatsächliche Bedarf variiert stark nach:
+
+- Körpergewicht und Größe
+- Aktivitätsniveau
+- Alter und Geschlecht
+- Stoffwechseltyp
+
+Ein 70 kg schwerer Mann mit leichter Aktivität benötigt ca. 2.200 kcal, eine 60 kg schwere Frau ca. 1.800 kcal. Unser Kalorienrechner berechnet Ihren persönlichen Bedarf nach der Mifflin-St.-Jeor-Formel.
+
+**Nährwertveränderungen beim Kochen**
+
+Beim Kochen ändern sich die Nährwerte kaum — aber das Gewicht der Lebensmittel ändert sich durch Wasserverlust:
+
+- **Fleisch beim Braten:** verliert ca. 20–30 % Gewicht (Wasser verdampft). Die Kalorien bleiben aber dieselben — sie konzentrieren sich auf weniger Gramm. 100 g rohes Hähnchen = ca. 112 kcal; 100 g gebratenes Hähnchen = ca. 165 kcal (durch Wasserverlust)
+- **Pasta beim Kochen:** nimmt Wasser auf, wird ca. 2,5× schwerer. 100 g rohe Pasta (356 kcal) werden zu 250 g gekochter Pasta (356 kcal — gleiche Kalorien, mehr Gewicht)
+- **Gemüse beim Blanchieren:** minimaler Nährwertverlust (5–15 % wasserlösliche Vitamine gehen ins Kochwasser)
+
+Für präzise Kalorienzählerei empfiehlt es sich, Lebensmittel vor dem Kochen zu wiegen.
+
+**Praxis-Tipps für genaue Berechnungen**
+
+- **Immer roh wiegen:** Fleisch, Gemüse und Kartoffeln am besten vor dem Kochen wiegen, da der Wasserverlust variiert.
+- **Pasta-Ausnahme:** Pasta und Reis am besten im Rohzustand wiegen (Angaben auf Packung sind Rohgewicht).
+- **Sauce mitrechnen:** Saucen und Fette beim Anbraten (Öl, Butter) nicht vergessen — sie summieren sich schnell.
+- **Portionsgröße:** Wenn Sie nicht genau abwiegen möchten, hilft die Handflächenmethode: Eine Proteinportion = Handfläche, eine Kohlenhydratportion = gefauste Hand.`,
+    faq: [
+      {
+        frage: 'Wie berechne ich die Kalorien meines Rezepts?',
+        antwort: 'Für jede Zutat: Menge (g) × Kalorien pro 100 g ÷ 100. Dann alle Zutaten summieren. Durch die Portionszahl teilen = Kalorien pro Portion. Unser Rechner macht das automatisch für 47 Lebensmittel. Beispiel: 250 g Weizenmehl (348 kcal/100g) = 870 kcal. Bei 4 Portionen = 217 kcal nur aus dem Mehl.',
+      },
+      {
+        frage: 'Ändern sich Kalorien beim Kochen?',
+        antwort: 'Die absoluten Kalorien bleiben gleich — was sich ändert, ist das Gewicht. Fleisch verliert beim Braten 20–30 % Wasser, Pasta nimmt Wasser auf und wird schwerer. 100 g rohes Hähnchen (112 kcal) werden zu ca. 70–80 g gebratenem Hähnchen mit denselben 112 kcal. Deshalb immer im Rohzustand wiegen für genaue Berechnungen.',
+      },
+      {
+        frage: 'Was sind Makronährstoffe und wie viel brauche ich?',
+        antwort: 'Makronährstoffe sind Protein (4 kcal/g), Kohlenhydrate (4 kcal/g) und Fett (9 kcal/g). Die DGE empfiehlt: 15–20 % Protein, 50–55 % KH, 25–35 % Fett der Gesamtkalorien. Für Sportler und Muskelaufbau: 20–30 % Protein, weniger KH. Die Makro-Verteilungsanzeige im Rechner zeigt, wie ausgewogen Ihr Gericht ist.',
+      },
+      {
+        frage: 'Wie viel kcal hat eine Portion selbst gekochtes Essen?',
+        antwort: 'Das variiert stark je nach Gericht. Ein Pfannkuchen (ohne Belag): ca. 300–400 kcal/Portion. Eine Pasta Bolognese: 550–700 kcal. Ein Salat mit Dressing: 150–300 kcal. Gemüse-Curry mit Reis: 400–600 kcal. Selbst kochen ist meist kalorienärmer als Restaurant oder Fertiggerichte, weil Sie Öl und Butter kontrollieren können.',
+      },
+      {
+        frage: 'Sind selbst gekochte Mahlzeiten kalorienärmer?',
+        antwort: 'In der Regel ja. Restaurants und Fertiggerichte enthalten oft deutlich mehr Butter, Öl, Sahne und Zucker als nötig. Studien zeigen, dass Menschen, die regelmäßig selbst kochen, im Durchschnitt 150–200 kcal weniger pro Mahlzeit aufnehmen. Der größte Unterschied: Sie steuern, wie viel Fett beim Anbraten verwendet wird — und das sind schnell 100–200 extra kcal.',
+      },
+    ],
+  },
 ];
