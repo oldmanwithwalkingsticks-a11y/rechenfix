@@ -29,6 +29,18 @@ const DEFAULT_INGREDIENTS: Zutat[] = [
 const MIN_PORTIONEN = 1;
 const MAX_PORTIONEN = 50;
 
+/** Pluralisierungs-Map für Einheiten, deren Plural sich vom Singular unterscheidet */
+const PLURAL_MAP: Record<string, string> = {
+  'Prise': 'Prisen',
+  'Dose': 'Dosen',
+};
+
+/** Liefert die grammatikalisch korrekte Einheit für eine Menge (1 Prise vs. 2 Prisen). */
+function formatEinheit(menge: number, einheit: string): string {
+  if (menge === 1) return einheit;
+  return PLURAL_MAP[einheit] ?? einheit;
+}
+
 function clampPortionen(raw: number): number {
   if (isNaN(raw)) return MIN_PORTIONEN;
   return Math.min(MAX_PORTIONEN, Math.max(MIN_PORTIONEN, raw));
@@ -132,7 +144,7 @@ export default function RezeptUmrechner() {
 
   const zutatenListeText = neuesZutatenliste
     .filter(z => z.name.trim())
-    .map(z => `- ${z.neueMengeFormatiert} ${z.einheit} ${z.name}`)
+    .map(z => `- ${z.neueMengeFormatiert} ${formatEinheit(z.neueMenge, z.einheit)} ${z.name}`)
     .join('\n');
 
   return (
@@ -292,10 +304,10 @@ export default function RezeptUmrechner() {
                 <tr key={z.id}>
                   <td className="px-4 py-2.5 text-gray-700 dark:text-gray-300 whitespace-nowrap">{z.name || '—'}</td>
                   <td className="px-4 py-2.5 text-right tabular-nums text-gray-500 dark:text-gray-400 whitespace-nowrap">
-                    {z.menge} {z.einheit}
+                    {z.menge} {formatEinheit(parseZahl(z.menge), z.einheit)}
                   </td>
                   <td className="px-4 py-2.5 text-right tabular-nums text-primary-700 dark:text-primary-300 font-semibold whitespace-nowrap">
-                    {z.neueMengeFormatiert} {z.einheit}
+                    {z.neueMengeFormatiert} {formatEinheit(z.neueMenge, z.einheit)}
                   </td>
                 </tr>
               ))}
@@ -324,7 +336,7 @@ export default function RezeptUmrechner() {
       <CrossLink href="/alltag/dreisatz-rechner" emoji="⚖️" text="Dreisatz-Rechner" />
 
       <ErgebnisAktionen
-        ergebnisText={`Rezept-Umrechner: ${originalPortionen} → ${gewuenschtePortionen} Portionen (Faktor × ${fmtFaktor})\n\n${zutatenListeText}`}
+        ergebnisText={`${originalPortionen} → ${gewuenschtePortionen} Portionen (Faktor × ${fmtFaktor})\n\n${zutatenListeText}`}
         seitenTitel="Rezept-Umrechner"
       />
 
