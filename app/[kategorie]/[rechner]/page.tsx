@@ -172,6 +172,8 @@ import BackformUmrechner from '@/components/rechner/BackformUmrechner';
 import BackzeitRechner from '@/components/rechner/BackzeitRechner';
 import KochzeitRechner from '@/components/rechner/KochzeitRechner';
 import HefeUmrechner from '@/components/rechner/HefeUmrechner';
+import PizzateigRechner from '@/components/rechner/PizzateigRechner';
+import BrotbackRechner from '@/components/rechner/BrotbackRechner';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -356,6 +358,8 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'backzeit-rechner': BackzeitRechner,
   'kochzeit-rechner': KochzeitRechner,
   'hefe-umrechner': HefeUmrechner,
+  'pizzateig-rechner': PizzateigRechner,
+  'brotback-rechner': BrotbackRechner,
 };
 
 export default function RechnerSeite({ params }: Props) {

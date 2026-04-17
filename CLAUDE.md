@@ -42,7 +42,7 @@
 - Vercel Hosting
 - Anthropic Claude API für "Fix erklärt"
 
-## Rechner-Bestand (164 gesamt)
+## Rechner-Bestand (166 gesamt)
 | Kategorie | Anzahl |
 |-----------|-------:|
 | Alltag    | 23 |
@@ -52,7 +52,7 @@
 | Wohnen    | 25 |
 | Mathe     | 18 |
 | Arbeit    | 17 |
-| Kochen    | 6  |
+| Kochen    | 8  |
 | Sport     | 2  |
 
 ## Config-Struktur
@@ -106,7 +106,7 @@ Lighthouse Accessibility ≥95 auf neuer/geänderter Seite.
 ### Barrierefreiheitserklärung
 `/barrierefreiheit` wird gepflegt. Bei strukturellen A11y-Änderungen prüfen, ob Inhalte aktualisiert werden müssen.
 
-## Prompt-Verzeichnis (Stand: Prompt 78j)
+## Prompt-Verzeichnis (Stand: Batch 39)
 - **70a–70d** — Meta-Description Kürzung (Alltag, Arbeit/Auto, Finanzen, Gesundheit/Mathe) ✅
 - **71a/71b** — entfallen
 - **72** — Live-Verifikation aller 16 gekürzten Meta-Descriptions ✅
@@ -123,3 +123,4 @@ Lighthouse Accessibility ≥95 auf neuer/geänderter Seite.
 - **78h** — Accessibility: TabGroup (WAI-ARIA Tabs Pattern) ✅
 - **78i** — Dokumentations-Update nach A11y-Offensive ✅
 - **78j** — Accessibility: Fokus-Lenkung "Fix erklärt" Disclosure ✅
+- **Batch 39** — Kochen: Pizzateig-Rechner + Brotback-Rechner (Bäckerprozente) ✅

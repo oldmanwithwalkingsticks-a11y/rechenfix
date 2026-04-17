@@ -572,4 +572,201 @@ Test bei Zweifel: Etwas Hefe in lauwarmem Wasser mit einer Prise Zucker auflöse
       },
     ],
   },
+  {
+    slug: 'pizzateig-rechner',
+    titel: 'Pizzateig-Rechner',
+    beschreibung: 'Pizzateig mit Bäckerprozenten: Mehl, Wasser, Salz, Hefe für 1–8 Pizzen — mit Hydration-Slider und Zeitplan.',
+    kategorie: 'Kochen & Ernährung',
+    kategorieSlug: 'kochen',
+    metaTitle: 'Pizzateig-Rechner 2026 — Bäckerprozente für Pizza Napoletana | Rechenfix',
+    metaDescription: 'Pizzateig berechnen: Mehl, Wasser, Salz und Hefe nach Bäckerprozenten — Hydration-Slider, Gehzeit 1h bis 48h, Zeitplan. Kostenlos.',
+    keywords: ['pizzateig rechner', 'pizzateig berechnen', 'bäckerprozente pizza', 'pizza napoletana rezept', 'pizzateig hydration', 'pizzateig mehl wasser', 'pizzateig gehzeit', 'hefe pizza', 'pizza teig rechner'],
+    icon: '🍕',
+    formel: 'Mehl = Gesamtteig ÷ (1 + Hydration/100 + Salz/100 + Öl/100 + Hefe/100) | Bäckerprozente: alle Mengen relativ zu Mehl = 100 %',
+    beispiel: '4 Pizzen à 270 g = 1.080 g Teig, 65 % Hydration, 24h Gehzeit: Mehl 626 g, Wasser 407 g, Salz 16 g, Frischhefe 1,3 g (0,2 % vom Mehl). Weniger Hefe = mehr Aroma.',
+    erklaerung: `**Pizzateig nach Bäckerprozenten — das Handwerk der Pizzaioli**
+
+Wer eine wirklich gute Pizza backen möchte, kommt am Prinzip der Bäckerprozente nicht vorbei. Professionelle Bäcker und Pizzaioli geben alle Zutatenmengen als Prozentwert des Mehlgewichts an. Das ermöglicht das einfache Skalieren eines Rezepts — egal ob für 2 oder 20 Pizzen.
+
+**Was sind Bäckerprozente?**
+
+Das Mehl gilt als 100 %. Jede andere Zutat wird als Prozentsatz des Mehlgewichts angegeben. Ein klassisches neapolitanisches Rezept sieht so aus:
+
+- Mehl (Tipo 00): 100 %
+- Wasser: 60–65 % (= Hydration)
+- Salz: 2,5–3 %
+- Hefe (frisch): 0,1–1 % (je nach Gehzeit)
+- Olivenöl: 0–2 % (optinal, nicht im STG-Original)
+
+Der Vorteil: Wenn Sie die Mehlmenge verdoppeln, verdoppeln sich alle anderen Zutaten automatisch proportional.
+
+**Hydration — der entscheidende Faktor**
+
+Die Hydration gibt an, wie viel Wasser relativ zum Mehl im Teig enthalten ist. Sie ist der wichtigste Parameter für Konsistenz und Ergebnis:
+
+- **55–60 %:** Sehr fester Teig, ideal für knusprige, dünne Böden. Leicht zu verarbeiten, weniger feuchte Krume.
+- **62–65 %:** Die klassische Hydration für Pizza Napoletana (STG). Gute Balance zwischen Weichheit und Verarbeitbarkeit.
+- **67–72 %:** Weicherer Teig mit feuchter, luftiger Krume. Erfordert mehr Übung beim Ausziehen.
+- **75–80 %:** Sehr weich, schwierig zu handhaben. Für erfahrene Bäcker und besonders luftige Pizzen.
+
+Für Anfänger empfehlen sich 63–65 % Hydration — das gibt gute Ergebnisse ohne zu klebriges Handling.
+
+**Hefe und Gehzeit — weniger ist mehr**
+
+Der zweite Schlüsselparameter ist die Hefemenge. Hier gilt die Regel: Je weniger Hefe, desto länger die Gehzeit und desto komplexer das Aroma. Der Grund liegt in der Fermentation: Die Hefepilze bauen Zucker ab und produzieren CO₂ (Lockerung) und Aromastoffe (Geschmack). Bei langer, langsamer Fermentation entstehen deutlich mehr und vielfältigere Aromastoffe.
+
+Richtwerte für Frischhefe-Mengen (% vom Mehlgewicht):
+- **1 % (Direktführung, 1–2 h):** Schnell, aber wenig Aroma. Für eilige Abende.
+- **0,5 % (8 h, Kühlschrank):** Guter Kompromiss. Über Nacht stehenlassen.
+- **0,2 % (24 h, Kühlschrank):** Das Standardrezept der Napoletana-Tradition. Deutlich besseres Aroma.
+- **0,1 % (48 h, Kühlschrank):** Maximales Aroma. Für Perfektionisten und Pizzafeste.
+
+Im Kühlschrank verlangsamt sich die Fermentation durch die Kälte — die Hefe bleibt aktiv, arbeitet aber langsamer. Das Ergebnis: ein komplexerer, leicht säuerlicher Geschmack wie beim Bäcker.
+
+**Mehl: Tipo 00 — was steckt dahinter?**
+
+Tipo 00 ist das feinst gemahlene Weizenmehl im italienischen System. Die Null-Null-Bezeichnung bezieht sich auf die Feinheit des Mahlguts, nicht auf den Ausmahlungsgrad. Für Pizza wichtiger ist der Proteingehalt (W-Wert, Klebergehalt):
+
+- **W200–W260:** Standard-Tipo-00, gut für kurze Gehzeiten (bis 8 h).
+- **W300–W350:** Manitoba-Typ, für lange Gehzeiten (24–48 h) und hohe Hydration.
+- **W390+:** Professionelle Mehlmischungen für Pizzerien.
+
+Als Alternative in Deutschland eignet sich Weizenmehl Type 405 (feinster Ausmahlungsgrad, niedriger Proteingehalt) oder Type 550 (etwas mehr Protein, besser für lange Gehzeiten).
+
+**Die Kühlschrank-Methode (kalte Fermentation)**
+
+Die meisten Qualitätspizzerien arbeiten mit kalter Fermentation: Der Teig wird bei 4–6 °C im Kühlschrank 24–72 Stunden gereift. Vorteile:
+
+- Deutlich besseres Aroma durch langsame Fermentation
+- Bessere Verarbeitbarkeit (Glutennetz entspannt sich vollständig)
+- Flexibilität im Timing (der Teig wartet auf Sie, nicht umgekehrt)
+- Leichtere Verdaulichkeit durch längere Stärkeabbau-Zeit
+
+Wichtig: Den Teig 2–3 Stunden vor dem Backen aus dem Kühlschrank nehmen und auf Raumtemperatur akklimatisieren. Ein kalter Teig reißt beim Ausziehen sofort.
+
+**Backen: So heiß wie möglich**
+
+Pizza braucht extreme Hitze. Ein echter Holzofen erreicht 400–500 °C — eine Pizza ist in 60–90 Sekunden fertig. Im Heimofen:
+
+- **250–300 °C:** Maximaltemperatur vorheizen (60 Min)
+- **Pizzastein oder Stahlplatte:** Mindestens 60 Min vorheizen. Der Stein speichert Hitze und gibt sie direkt an den Boden ab.
+- **Backzeit:** 6–10 Min bei 260–280 °C
+
+Ohne Pizzastein: Backblech umgekehrt im Ofen vorheizen, Pizza direkt darauf backen. Funktioniert deutlich besser als ein kaltes Blech.`,
+    faq: [
+      {
+        frage: 'Was sind Bäckerprozente beim Pizzateig?',
+        antwort: 'Bäckerprozente geben alle Zutatenmengen relativ zum Mehlgewicht (= 100 %) an. Bei 65 % Hydration und 500 g Mehl bedeutet das: 325 g Wasser. Bei 0,2 % Hefe: 1 g Frischhefe. Das Prinzip erlaubt einfaches Skalieren — egal ob für 2 oder 20 Pizzen. Professionelle Pizzaioli arbeiten ausschließlich so.',
+      },
+      {
+        frage: 'Wie viel Hefe brauche ich für Pizzateig?',
+        antwort: 'Das hängt von der Gehzeit ab. Für 24 h im Kühlschrank (neapolitanische Methode): 0,2 % Frischhefe vom Mehl, also nur 1–2 g auf 500 g Mehl. Für Direktführung (1–2 h): 1 % = 5 g. Je weniger Hefe, desto länger die Gehzeit und desto komplexer das Aroma. Weniger Hefe ist definitiv mehr.',
+      },
+      {
+        frage: 'Was ist Hydration beim Pizzateig und welche ist die beste?',
+        antwort: 'Die Hydration gibt den Wasseranteil relativ zum Mehl an. 65 % bedeutet: 650 g Wasser auf 1.000 g Mehl. Für Anfänger ist 62–65 % ideal — das entspricht dem klassischen neapolitanischen Rezept, ist gut verarbeitbar und liefert hervorragende Ergebnisse. Höhere Hydration (70–75 %) ergibt luftigere Krume, ist aber schwieriger zu handhaben.',
+      },
+      {
+        frage: 'Welches Mehl für Pizzateig: Tipo 00 oder Weizenmehl 405/550?',
+        antwort: 'Tipo 00 ist ideal, besonders für lange Gehzeiten. In Deutschland gut verfügbar. Als Alternative: Weizenmehl Type 405 für kurze Gehzeiten (bis 8 h), Type 550 für längere Fermentation. Für 24–48 h Kaltreifen eignet sich Manitoba-Mehl (W300+) besonders gut, weil das starke Glutennetz die lange Fermentation besser verträgt.',
+      },
+      {
+        frage: 'Wie lange soll Pizzateig im Kühlschrank reifen?',
+        antwort: '24 Stunden ist der Sweet Spot: Sehr gutes Aroma, deutlich besser als Direktführung, und logistisch einfach (Teig am Vortag machen). 48 Stunden ist noch besser — komplexes, leicht mildes Aroma wie in einer echten Pizzeria. 72 Stunden geht auch, dann wird der Teig aber etwas klebriger und saurer. Kürzer als 8 h ergibt spürbar weniger Aroma.',
+      },
+      {
+        frage: 'Darf Olivenöl in den Pizzateig?',
+        antwort: 'Das Original-Rezept der Pizza Napoletana (STG-Standard) enthält kein Öl. Öl macht den Teig geschmeidiger, die Krume feinporiger und etwas weniger knusprig. Wer eine knusprige Kruste mag: ohne Öl. Wer einen geschmeidigen, reicheren Teig bevorzugt: 2 % Olivenöl (z. B. 10 g auf 500 g Mehl). Für Pizza al Taglio (Blechpizza) ist Öl üblich.',
+      },
+    ],
+  },
+  {
+    slug: 'brotback-rechner',
+    titel: 'Brotback-Rechner',
+    beschreibung: 'Zutaten für 5 Brottypen berechnen: Weißbrot, Mischbrot, Roggenbrot, Sauerteigbrot, Toastbrot — mit Hefe oder Sauerteig.',
+    kategorie: 'Kochen & Ernährung',
+    kategorieSlug: 'kochen',
+    metaTitle: 'Brotback-Rechner 2026 — Zutaten für Brot mit Bäckerprozenten | Rechenfix',
+    metaDescription: 'Brot backen leicht gemacht: Zutaten für 5 Brottypen mit Bäckerprozenten — Weißbrot, Mischbrot, Roggenbrot, Sauerteig. Kostenlos.',
+    keywords: ['brotback rechner', 'brot backen rechner', 'bäckerprozente brot', 'sauerteig rechner', 'brotrezept berechnen', 'roggenbrot rezept', 'mischbrot zutaten', 'sauerteig anstellgut berechnen', 'brot hefe menge'],
+    icon: '🍞',
+    formel: 'Mehl = Teiggewicht ÷ (1 + Hydration/100 + Salz/100 + Hefe/100) | Sauerteig-ASG = 20 % Mehl | Fertiggewicht ≈ Teiggewicht × 0,88',
+    beispiel: '1 Mischbrot, 900 g Teig, Hefe: Gesamtmehl 527 g, Wasser 358 g, Salz 10,5 g, Frischhefe 7,9 g. Fertig gebacken ca. 792 g. Mit Sauerteig: 527 g Mehl, 253 g Wasser, 10,5 g Salz, 105 g Anstellgut (ASG).',
+    erklaerung: `**Brot backen mit Bäckerprozenten — das Grundprinzip**
+
+Brot selbst zu backen ist nicht schwer — wenn man die Grundformel versteht. Professionelle Bäcker rechnen alle Zutaten in Bäckerprozenten, also relativ zum Mehlgewicht. Das Mehl gilt als 100 %. Alle anderen Zutaten werden als Prozentwert angegeben. So lässt sich jedes Rezept problemlos skalieren, ohne Verhältnisse neu ausrechnen zu müssen.
+
+Unser Brotback-Rechner unterstützt fünf klassische Brottypen und drei verschiedene Triebmittel: Hefe, reinen Sauerteig oder eine Kombination aus beiden.
+
+**Die fünf Brottypen im Überblick**
+
+**Weißbrot (65 % Hydration)**
+Weißbrot aus Weizenmehl Type 550 ist der Klassiker — mild im Geschmack, weiche Krume, knusprige Kruste. Geeignet für Hefeteig und kurze Gehzeiten (2–4 h). Mit Dampf backen für die perfekte Kruste.
+
+**Mischbrot (68 % Hydration)**
+Das beliebteste Brot Deutschlands: 60 % Weizen, 40 % Roggen. Milder Geschmack, saftige Krume. Kann mit reiner Hefe gebacken werden, profitiert aber deutlich von einem Sauerteig-Anteil. Backen auf dem Stein oder in einer Kastenform.
+
+**Roggenbrot (76 % Hydration)**
+Reines Roggenbrot braucht zwingend Sauerteig als Triebmittel. Der Grund: Roggenmehl enthält kaum dehnbares Gluten, dafür Pentosane (Schleimstoffe), die viel Wasser binden. Hefe allein kann das nötige Glutennetz nicht aufbauen. Sauerteig säuert den Teig an, was die Pentosane ausschaltet und dem Brot Struktur gibt. Das Ergebnis: das typisch dunkle, saftige, aromatische Roggenbrot.
+
+**Sauerteigbrot (72 % Hydration)**
+80 % Weizen + 20 % Roggen, reiner Sauerteigantrieb. Das aromatischste Brot — die langen Fermentationszeiten entwickeln komplexe Säure-, Frucht- und Brotaromen, die mit Hefe nicht erreichbar sind. Ideal im Dutch Oven gebacken. Das Glutennetz muss durch Dehnen und Falten (Stretch & Fold) aufgebaut werden.
+
+**Toastbrot (60 % Hydration)**
+Weicher, milder Teig mit Butter und Zucker für die typisch fluffige Konsistenz. Niedrige Hydration (60 %) und das Fett aus der Butter verhindern eine rustikale Kruste — das Brot wird weich und schneidbar wie aus dem Supermarkt. In einer Kastenform gebacken.
+
+**Triebmittel: Hefe, Sauerteig oder Kombi**
+
+**Hefe (Frischhefe, 1,5 % vom Mehl)**
+Die schnellste Methode: 1–2 h Gehzeit, gleichmäßiges Ergebnis. Für Weißbrot und Toastbrot ideal. Bei Roggenbrot ungeeignet, da Roggenteig ohne Säuerung nicht bindet.
+
+**Reiner Sauerteig (20 % Anstellgut vom Mehl)**
+Das Anstellgut (ASG) ist ein aktiv fermentierter Starter aus Mehl und Wasser (100 % Teigausbeute = gleiche Teile Mehl und Wasser). Es enthält wilde Hefen und Milchsäurebakterien, die das Brot auflockern und durch Säure aromatisieren. Der ASG-Anteil von 20 % ist ein praxisbewährter Richtwert. Die Gehzeit beträgt 4–12 h je nach Aktivität des Starters und Raumtemperatur. Für Roggenbrot Pflicht, für Sauerteigbrot und Mischbrot ideal.
+
+**Kombination (10 % Sauerteig + 0,5 % Hefe)**
+Das Beste aus beiden Welten: Die Hefe sorgt für verlässlichen Trieb, der Sauerteig bringt Aroma. Gehzeit ca. 2–4 h bei Raumtemperatur oder über Nacht im Kühlschrank. Empfehlung für Einsteiger ins Sauerteigbacken.
+
+**Das Sauerteig-Anstellgut (ASG) verstehen**
+
+Das Anstellgut ist Ihr aktiver Sauerteig-Starter. Bei 100 % Teigausbeute (TA 200) besteht er zu gleichen Teilen aus Mehl und Wasser. Wenn Sie 200 g ASG verwenden, enthält dieser 100 g Mehl + 100 g Wasser — die bereits in den Gesamtmengen berücksichtigt sind.
+
+Der Rechner zeigt Ihnen das Mehl und Wasser für den Hauptteig (abzüglich der Anteile im ASG), damit Sie nie doppelt einwiegen. Das Mehl und Wasser im ASG sind also schon im Gesamtmehl eingerechnet.
+
+**Auffrischen des Anstellguts**
+Vor dem Backen das ASG auffrischen: 1 Teil alter ASG + 1 Teil Mehl + 1 Teil Wasser (Raumtemperatur, 22–26 °C). Nach 8–12 h sollte sich der Starter verdoppelt haben und Bläschen werfen — dann ist er backfertig. Wer seinen Starter im Kühlschrank lagert, sollte ihn am Tag vor dem Backen auffrischen.
+
+**Backofenverlust: Teig- vs. Brotgewicht**
+
+Beim Backen verliert Brot durch Wasserverdunstung ca. 10–15 % seines Gewichts. Der Rechner zeigt das geschätzte Fertiggewicht bei 12 % Verlust. Faktoren, die den Verlust beeinflussen:
+- Hohe Backtemperatur → mehr Verlust
+- Dünne Kruste → weniger Verlust
+- Lange Backzeit → mehr Verlust
+- Kastenform → etwas weniger Verlust als frei geschobene Brote`,
+    faq: [
+      {
+        frage: 'Warum braucht Roggenbrot Sauerteig?',
+        antwort: 'Roggenmehl enthält kaum Gluten, dafür aber Pentosane — Schleimstoffe, die viel Wasser binden und verhindern, dass ein dehnbares Klebergerüst entsteht. Hefe allein kann Roggenteig kaum auflockern. Sauerteig löst dieses Problem durch Milchsäurebakterien, die Pentosane bei niedrigem pH-Wert inaktivieren. Erst die Ansäuerung macht den Teig backfähig. Ohne Sauerteig wird Roggenbrot zu einem kompakten, klebrigen Klotz.',
+      },
+      {
+        frage: 'Was ist Teigausbeute (TA) beim Sauerteig?',
+        antwort: 'Die Teigausbeute (TA) gibt das Verhältnis von Teiggewicht zu Mehlgewicht an. TA 200 bedeutet: 100 g Mehl + 100 g Wasser = 200 g Teig — also 100 % Hydration. Ein fester Sauerteig hat TA 150 (50 % Hydration), ein flüssiger TA 250. Unser Rechner rechnet mit TA 200 (100 % Hydration), weil das am verbreitetsten und für Einsteiger am einfachsten zu handhaben ist.',
+      },
+      {
+        frage: 'Wie viel Hefe brauche ich für ein Brot?',
+        antwort: 'Faustregel: 1,5 % Frischhefe vom Mehlgewicht für direkte Führung (2–4 h Gehzeit). Für 500 g Mehl sind das 7,5 g Frischhefe oder 2,5 g Trockenhefe. Bei Verwendung von Sauerteig (Kombimethode) reichen 0,5 % = 2,5 g Frischhefe auf 500 g Mehl. Weniger Hefe + längere Gehzeit = mehr Aroma.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen Teiggewicht und Brotgewicht?',
+        antwort: 'Beim Backen verliert das Brot durch Wasserverdunstung ca. 10–15 % seines Gewichts. Ein 900 g schwerer Teig ergibt ca. 790 g fertiges Brot. Der Rechner zeigt das geschätzte Fertiggewicht bei 12 % Verlust. Wer ein bestimmtes Fertiggewicht anstrebt: Zielgewicht ÷ 0,88 = benötigtes Teiggewicht.',
+      },
+      {
+        frage: 'Was ist der Dutch Oven und warum eignet er sich fürs Brot backen?',
+        antwort: 'Ein Dutch Oven ist ein schwerer Gusseisentopf mit Deckel. Brot im geschlossenen Topf gebacken profitiert vom eigenen Dampf — die Kruste bleibt in der ersten Backphase weich und kann sich ausdehnen. Dann wird der Deckel abgenommen und die Kruste karamellisiert. Das Ergebnis: Bäckerqualität im Heimofen. Besonders für Sauerteigbrot empfehlenswert.',
+      },
+      {
+        frage: 'Wie erkenne ich, ob mein Brot fertig gebacken ist?',
+        antwort: 'Klopftest: Das fertige Brot aus der Form nehmen und auf den Boden klopfen — klingt es hohl, ist es durch. Alternativ: Kerntemperatur 95–98 °C (Bratenthermometer). Weißbrot und Toastbrot: goldbraune Kruste, 30 Min Backzeit. Roggenbrot und Mischbrot: nach dem Backen mind. 24 h warten — frisch angeschnittenes Roggenbrot klebt und schmeckt roh. Das Brot zieht nach und wird besser.',
+      },
+    ],
+  },
 ];
