@@ -33,7 +33,7 @@ export const kategorien: KategorieConfig[] = [
     "name": "Alltag",
     "beschreibung": "Praktische Rechner für den Alltag: Prozente, Einheiten, Rabatte und mehr.",
     "icon": "📋",
-    "metaTitle": "Alltags-Rechner | Rechenfix.de",
+    "metaTitle": "Alltags-Rechner",
     "metaDescription": "Kostenlose Online-Rechner für den Alltag: Prozentrechner, Einheitenumrechner, Rabattrechner und mehr. Sofort berechnen ohne Anmeldung."
   },
   {
@@ -41,7 +41,7 @@ export const kategorien: KategorieConfig[] = [
     "name": "Finanzen",
     "beschreibung": "Finanzrechner für Gehalt, Steuern, Kredite und Investitionen.",
     "icon": "💰",
-    "metaTitle": "Finanz-Rechner | Rechenfix.de",
+    "metaTitle": "Finanz-Rechner",
     "metaDescription": "Kostenlose Online-Finanzrechner: Brutto-Netto, MwSt, Kreditrechner und mehr. Sofort berechnen ohne Anmeldung."
   },
   {
@@ -49,7 +49,7 @@ export const kategorien: KategorieConfig[] = [
     "name": "Gesundheit",
     "beschreibung": "Gesundheitsrechner: BMI, Kalorienbedarf, Idealgewicht und mehr.",
     "icon": "💚",
-    "metaTitle": "Gesundheits-Rechner | Rechenfix.de",
+    "metaTitle": "Gesundheits-Rechner",
     "metaDescription": "Kostenlose Online-Gesundheitsrechner: BMI, Kalorienbedarf, Idealgewicht und mehr. Sofort berechnen ohne Anmeldung."
   },
   {
@@ -57,7 +57,7 @@ export const kategorien: KategorieConfig[] = [
     "name": "Auto & Verkehr",
     "beschreibung": "Rechner rund ums Auto: Spritkosten, Fahrtkosten, Kfz-Steuer und mehr.",
     "icon": "🚗",
-    "metaTitle": "Auto-Rechner | Rechenfix.de",
+    "metaTitle": "Auto-Rechner",
     "metaDescription": "Kostenlose Online-Rechner für Auto & Verkehr: Spritkosten, Fahrtkosten und mehr. Sofort berechnen ohne Anmeldung."
   },
   {
@@ -65,7 +65,7 @@ export const kategorien: KategorieConfig[] = [
     "name": "Wohnen & Energie",
     "beschreibung": "Rechner für Miete, Nebenkosten, Strom, Heizung und Immobilien.",
     "icon": "🏠",
-    "metaTitle": "Wohnen & Energie Rechner | Rechenfix.de",
+    "metaTitle": "Wohnen & Energie Rechner",
     "metaDescription": "Kostenlose Online-Rechner für Wohnen & Energie: Mietrechner, Stromkosten, Heizkosten und mehr. Sofort berechnen ohne Anmeldung."
   },
   {
@@ -73,7 +73,7 @@ export const kategorien: KategorieConfig[] = [
     "name": "Mathe & Schule",
     "beschreibung": "Mathematik-Rechner für Schule, Studium und Alltag: Brüche, Gleichungen und mehr.",
     "icon": "🎓",
-    "metaTitle": "Mathe-Rechner | Rechenfix.de",
+    "metaTitle": "Mathe-Rechner",
     "metaDescription": "Kostenlose Online-Mathe-Rechner für Schule und Studium: Bruchrechner, Gleichungen und mehr. Sofort berechnen ohne Anmeldung."
   },
   {
@@ -81,7 +81,7 @@ export const kategorien: KategorieConfig[] = [
     "name": "Arbeit & Recht",
     "beschreibung": "Rechner für Arbeitszeit, Urlaubstage, Kündigungsfristen und mehr.",
     "icon": "💼",
-    "metaTitle": "Arbeit & Recht Rechner | Rechenfix.de",
+    "metaTitle": "Arbeit & Recht Rechner",
     "metaDescription": "Kostenlose Online-Rechner für Arbeit & Recht: Arbeitszeit, Urlaubstage und mehr. Sofort berechnen ohne Anmeldung."
   },
   {
@@ -89,7 +89,7 @@ export const kategorien: KategorieConfig[] = [
     "name": "Kochen & Ernährung",
     "beschreibung": "Rechner rund ums Kochen und Backen: Rezept skalieren, Cups umrechnen und mehr.",
     "icon": "🍳",
-    "metaTitle": "Kochen & Ernährung Rechner | Rechenfix.de",
+    "metaTitle": "Kochen & Ernährung Rechner",
     "metaDescription": "Kostenlose Online-Rechner für Kochen & Ernährung: Rezept-Umrechner, Cups in Gramm, Portionen skalieren. Sofort berechnen ohne Anmeldung."
   },
   {
@@ -97,7 +97,7 @@ export const kategorien: KategorieConfig[] = [
     "name": "Sport & Fitness",
     "beschreibung": "Rechner für Läufer und Sportler: Pace, Trainingszonen, Herzfrequenz und mehr.",
     "icon": "🏃",
-    "metaTitle": "Sport & Fitness Rechner | Rechenfix.de",
+    "metaTitle": "Sport & Fitness Rechner",
     "metaDescription": "Kostenlose Online-Rechner für Sport & Fitness: Pace-Rechner, Herzfrequenz-Zonen, Trainingsintensität. Sofort berechnen ohne Anmeldung."
   }
 ];
@@ -3057,6 +3057,117 @@ export const rechner: RechnerLight[] = [
       "hefe-ersatz"
     ],
     "icon": "🥖"
+  },
+  {
+    "slug": "pizzateig-rechner",
+    "titel": "Pizzateig-Rechner",
+    "beschreibung": "Pizzateig mit Bäckerprozenten: Mehl, Wasser, Salz, Hefe für 1–8 Pizzen — mit Hydration-Slider und Zeitplan.",
+    "kategorie": "Kochen & Ernährung",
+    "kategorieSlug": "kochen",
+    "keywords": [
+      "pizzateig rechner",
+      "pizzateig berechnen",
+      "bäckerprozente pizza",
+      "pizza napoletana rezept",
+      "pizzateig hydration",
+      "pizzateig mehl wasser",
+      "pizzateig gehzeit",
+      "hefe pizza",
+      "pizza teig rechner"
+    ],
+    "icon": "🍕"
+  },
+  {
+    "slug": "brotback-rechner",
+    "titel": "Brotback-Rechner",
+    "beschreibung": "Zutaten für 5 Brottypen berechnen: Weißbrot, Mischbrot, Roggenbrot, Sauerteigbrot, Toastbrot — mit Hefe oder Sauerteig.",
+    "kategorie": "Kochen & Ernährung",
+    "kategorieSlug": "kochen",
+    "keywords": [
+      "brotback rechner",
+      "brot backen rechner",
+      "bäckerprozente brot",
+      "sauerteig rechner",
+      "brotrezept berechnen",
+      "roggenbrot rezept",
+      "mischbrot zutaten",
+      "sauerteig anstellgut berechnen",
+      "brot hefe menge"
+    ],
+    "icon": "🍞"
+  },
+  {
+    "slug": "alkoholgehalt-rechner",
+    "titel": "Alkoholgehalt-Rechner",
+    "beschreibung": "Alkoholgehalt von Cocktails berechnen und Restalkohol beim Kochen ermitteln — mit Kalorien und Standardgläsern.",
+    "kategorie": "Kochen & Ernährung",
+    "kategorieSlug": "kochen",
+    "keywords": [
+      "alkoholgehalt rechner",
+      "cocktail alkohol berechnen",
+      "restalkohol beim kochen",
+      "alkohol kalorien",
+      "standardglas alkohol",
+      "promille berechnen",
+      "alkohol verdampfen kochen",
+      "cocktail mixen rechner"
+    ],
+    "icon": "🍹"
+  },
+  {
+    "slug": "naehrwert-rechner",
+    "titel": "Nährwert-Rechner",
+    "beschreibung": "Nährwerte pro Portion berechnen: Kalorien, Protein, KH und Fett für selbst gekochte Rezepte — mit 47 Lebensmitteln.",
+    "kategorie": "Kochen & Ernährung",
+    "kategorieSlug": "kochen",
+    "keywords": [
+      "nährwert rechner",
+      "kalorien pro portion berechnen",
+      "makronährstoffe berechnen",
+      "rezept kalorien",
+      "nährwerte selbst kochen",
+      "kaloriengehalt rezept",
+      "protein fett kohlenhydrate",
+      "nährwerttabelle lebensmittel"
+    ],
+    "icon": "🥗"
+  },
+  {
+    "slug": "zucker-umrechner",
+    "titel": "Zucker-Umrechner",
+    "beschreibung": "Zucker durch Honig, Ahornsirup, Stevia oder Erythrit ersetzen — mit Mengenangaben, Kalorien-Vergleich und Backtipps.",
+    "kategorie": "Kochen & Ernährung",
+    "kategorieSlug": "kochen",
+    "keywords": [
+      "zucker ersetzen",
+      "zucker umrechnen honig",
+      "stevia statt zucker",
+      "erythrit zucker ersetzen",
+      "ahornsirup zucker",
+      "zuckerersatz rechner",
+      "backen ohne zucker",
+      "kokosblütenzucker",
+      "xylit zucker"
+    ],
+    "icon": "🍯"
+  },
+  {
+    "slug": "gefrierdauer-rechner",
+    "titel": "Gefrierdauer-Rechner",
+    "beschreibung": "Wie lange ist Tiefkühlkost haltbar? Einfriedatum eingeben und Haltbarkeitsdatum mit Ampel-Anzeige berechnen.",
+    "kategorie": "Kochen & Ernährung",
+    "kategorieSlug": "kochen",
+    "keywords": [
+      "gefrierdauer rechner",
+      "tiefkühlkost haltbarkeit",
+      "wie lange eingefroren haltbar",
+      "einfrieren haltbarkeit",
+      "gefrierfach haltbarkeit",
+      "tiefkühlware haltbar bis",
+      "lebensmittel einfrieren dauer",
+      "haltbarkeit gefroren"
+    ],
+    "icon": "🧊"
   },
   {
     "slug": "pace-rechner",

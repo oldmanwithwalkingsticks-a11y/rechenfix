@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Affiliate-Statistiken | Rechenfix (Admin)',
+  title: 'Affiliate-Statistiken (Admin)',
   robots: 'noindex, nofollow',
 };
 

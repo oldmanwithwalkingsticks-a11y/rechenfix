@@ -17,7 +17,7 @@ export const kategorien: KategorieConfig[] = [
     name: 'Alltag',
     beschreibung: 'Praktische Rechner für den Alltag: Prozente, Einheiten, Rabatte und mehr.',
     icon: '📋',
-    metaTitle: 'Alltags-Rechner | Rechenfix.de',
+    metaTitle: 'Alltags-Rechner',
     metaDescription: 'Kostenlose Online-Rechner für den Alltag: Prozentrechner, Einheitenumrechner, Rabattrechner und mehr. Sofort berechnen ohne Anmeldung.',
   },
   {
@@ -25,7 +25,7 @@ export const kategorien: KategorieConfig[] = [
     name: 'Finanzen',
     beschreibung: 'Finanzrechner für Gehalt, Steuern, Kredite und Investitionen.',
     icon: '💰',
-    metaTitle: 'Finanz-Rechner | Rechenfix.de',
+    metaTitle: 'Finanz-Rechner',
     metaDescription: 'Kostenlose Online-Finanzrechner: Brutto-Netto, MwSt, Kreditrechner und mehr. Sofort berechnen ohne Anmeldung.',
   },
   {
@@ -33,7 +33,7 @@ export const kategorien: KategorieConfig[] = [
     name: 'Gesundheit',
     beschreibung: 'Gesundheitsrechner: BMI, Kalorienbedarf, Idealgewicht und mehr.',
     icon: '💚',
-    metaTitle: 'Gesundheits-Rechner | Rechenfix.de',
+    metaTitle: 'Gesundheits-Rechner',
     metaDescription: 'Kostenlose Online-Gesundheitsrechner: BMI, Kalorienbedarf, Idealgewicht und mehr. Sofort berechnen ohne Anmeldung.',
   },
   {
@@ -41,7 +41,7 @@ export const kategorien: KategorieConfig[] = [
     name: 'Auto & Verkehr',
     beschreibung: 'Rechner rund ums Auto: Spritkosten, Fahrtkosten, Kfz-Steuer und mehr.',
     icon: '🚗',
-    metaTitle: 'Auto-Rechner | Rechenfix.de',
+    metaTitle: 'Auto-Rechner',
     metaDescription: 'Kostenlose Online-Rechner für Auto & Verkehr: Spritkosten, Fahrtkosten und mehr. Sofort berechnen ohne Anmeldung.',
   },
   {
@@ -49,7 +49,7 @@ export const kategorien: KategorieConfig[] = [
     name: 'Wohnen & Energie',
     beschreibung: 'Rechner für Miete, Nebenkosten, Strom, Heizung und Immobilien.',
     icon: '🏠',
-    metaTitle: 'Wohnen & Energie Rechner | Rechenfix.de',
+    metaTitle: 'Wohnen & Energie Rechner',
     metaDescription: 'Kostenlose Online-Rechner für Wohnen & Energie: Mietrechner, Stromkosten, Heizkosten und mehr. Sofort berechnen ohne Anmeldung.',
   },
   {
@@ -57,7 +57,7 @@ export const kategorien: KategorieConfig[] = [
     name: 'Mathe & Schule',
     beschreibung: 'Mathematik-Rechner für Schule, Studium und Alltag: Brüche, Gleichungen und mehr.',
     icon: '🎓',
-    metaTitle: 'Mathe-Rechner | Rechenfix.de',
+    metaTitle: 'Mathe-Rechner',
     metaDescription: 'Kostenlose Online-Mathe-Rechner für Schule und Studium: Bruchrechner, Gleichungen und mehr. Sofort berechnen ohne Anmeldung.',
   },
   {
@@ -65,7 +65,7 @@ export const kategorien: KategorieConfig[] = [
     name: 'Arbeit & Recht',
     beschreibung: 'Rechner für Arbeitszeit, Urlaubstage, Kündigungsfristen und mehr.',
     icon: '💼',
-    metaTitle: 'Arbeit & Recht Rechner | Rechenfix.de',
+    metaTitle: 'Arbeit & Recht Rechner',
     metaDescription: 'Kostenlose Online-Rechner für Arbeit & Recht: Arbeitszeit, Urlaubstage und mehr. Sofort berechnen ohne Anmeldung.',
   },
   {
@@ -73,7 +73,7 @@ export const kategorien: KategorieConfig[] = [
     name: 'Kochen & Ernährung',
     beschreibung: 'Rechner rund ums Kochen und Backen: Rezept skalieren, Cups umrechnen und mehr.',
     icon: '🍳',
-    metaTitle: 'Kochen & Ernährung Rechner | Rechenfix.de',
+    metaTitle: 'Kochen & Ernährung Rechner',
     metaDescription: 'Kostenlose Online-Rechner für Kochen & Ernährung: Rezept-Umrechner, Cups in Gramm, Portionen skalieren. Sofort berechnen ohne Anmeldung.',
   },
   {
@@ -81,7 +81,7 @@ export const kategorien: KategorieConfig[] = [
     name: 'Sport & Fitness',
     beschreibung: 'Rechner für Läufer und Sportler: Pace, Trainingszonen, Herzfrequenz und mehr.',
     icon: '🏃',
-    metaTitle: 'Sport & Fitness Rechner | Rechenfix.de',
+    metaTitle: 'Sport & Fitness Rechner',
     metaDescription: 'Kostenlose Online-Rechner für Sport & Fitness: Pace-Rechner, Herzfrequenz-Zonen, Trainingsintensität. Sofort berechnen ohne Anmeldung.',
   },
 ];

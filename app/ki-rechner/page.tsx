@@ -3,7 +3,7 @@ import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'KI-Rechner — Fragen Sie einfach! | Rechenfix',
+  title: 'KI-Rechner — Fragen Sie einfach!',
   description: 'KI-Rechner: Stellen Sie eine Rechenfrage in natürlicher Sprache und erhalten Sie sofort die Antwort. Kostenlos und auf Deutsch.',
   alternates: { canonical: 'https://www.rechenfix.de/ki-rechner' },
   openGraph: {

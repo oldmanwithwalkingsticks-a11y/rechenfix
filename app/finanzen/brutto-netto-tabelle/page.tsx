@@ -35,11 +35,11 @@ function fmtK(n: number): string {
 }
 
 export const metadata: Metadata = {
-  title: 'Brutto-Netto-Tabelle 2026 — Übersicht | Rechenfix',
+  title: 'Brutto-Netto-Tabelle 2026 — Übersicht',
   description: 'Brutto-Netto-Tabelle 2026: Alle Gehälter von 1.500 bis 10.000 € im Überblick ✓ Steuerklasse 1, 3 & 4 ✓ Kostenlos & aktuell.',
   keywords: 'brutto netto tabelle, brutto netto tabelle 2026, gehaltstabelle, netto tabelle, brutto netto übersicht',
   openGraph: {
-    title: 'Brutto-Netto-Tabelle 2026 — Übersicht | Rechenfix',
+    title: 'Brutto-Netto-Tabelle 2026 — Übersicht',
     description: 'Brutto-Netto-Tabelle 2026: Alle Gehälter von 1.500 bis 10.000 € im Überblick ✓ Steuerklasse 1, 3 & 4 ✓ Kostenlos & aktuell.',
     url: 'https://www.rechenfix.de/finanzen/brutto-netto-tabelle',
     siteName: 'Rechenfix.de',
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     locale: 'de_DE',
     images: [{ url: 'https://www.rechenfix.de/opengraph-image', width: 1200, height: 630, alt: 'Brutto-Netto-Tabelle 2026 — Rechenfix.de' }],
   },
-  twitter: { card: 'summary_large_image', title: 'Brutto-Netto-Tabelle 2026 — Übersicht | Rechenfix', description: 'Brutto-Netto-Tabelle 2026: Alle Gehälter von 1.500 bis 10.000 € im Überblick ✓ Steuerklasse 1, 3 & 4.' },
+  twitter: { card: 'summary_large_image', title: 'Brutto-Netto-Tabelle 2026 — Übersicht', description: 'Brutto-Netto-Tabelle 2026: Alle Gehälter von 1.500 bis 10.000 € im Überblick ✓ Steuerklasse 1, 3 & 4.' },
   alternates: { canonical: 'https://www.rechenfix.de/finanzen/brutto-netto-tabelle' },
 };
 

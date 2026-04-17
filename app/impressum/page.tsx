@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
   alternates: { canonical: 'https://www.rechenfix.de/impressum' },
   openGraph: {
-    title: 'Impressum | Rechenfix.de',
+    title: 'Impressum',
     description: 'Impressum von Rechenfix.de — Angaben gemäß § 5 TMG.',
     url: 'https://www.rechenfix.de/impressum',
     siteName: 'Rechenfix.de',

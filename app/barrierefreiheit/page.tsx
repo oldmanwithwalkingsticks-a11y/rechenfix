@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
   alternates: { canonical: 'https://www.rechenfix.de/barrierefreiheit' },
   openGraph: {
-    title: 'Erklärung zur Barrierefreiheit | Rechenfix.de',
+    title: 'Erklärung zur Barrierefreiheit',
     description: 'Informationen zur Barrierefreiheit von rechenfix.de, bekannte Einschränkungen und Feedback-Möglichkeiten.',
     url: 'https://www.rechenfix.de/barrierefreiheit',
     siteName: 'Rechenfix.de',

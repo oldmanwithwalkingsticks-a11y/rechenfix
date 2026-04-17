@@ -45,11 +45,11 @@ const ergebnisse = steuerklassen.map(s => ({
 }));
 
 export const metadata: Metadata = {
-  title: 'Mindestlohn 2026 netto berechnen | Rechenfix',
+  title: 'Mindestlohn 2026 netto berechnen',
   description: `Mindestlohn 2026: ${STUNDENLOHN.toLocaleString('de-DE')} €/Std. = ${BRUTTO.toLocaleString('de-DE')} € brutto/Monat. Netto in allen 6 Steuerklassen berechnet ✓ Aktuell für 2026.`,
   keywords: 'mindestlohn 2026 netto, mindestlohn netto, mindestlohn steuerklasse 1, 12 82 euro netto, mindestlohn gehalt netto, was bleibt vom mindestlohn',
   openGraph: {
-    title: 'Mindestlohn 2026 netto berechnen | Rechenfix',
+    title: 'Mindestlohn 2026 netto berechnen',
     description: `Mindestlohn 2026: ${STUNDENLOHN.toLocaleString('de-DE')} €/Std. = ${BRUTTO.toLocaleString('de-DE')} € brutto/Monat. Netto in allen Steuerklassen.`,
     url: 'https://www.rechenfix.de/finanzen/mindestlohn-netto',
     siteName: 'Rechenfix.de',
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     locale: 'de_DE',
     images: [{ url: 'https://www.rechenfix.de/opengraph-image', width: 1200, height: 630, alt: 'Mindestlohn 2026 netto — Rechenfix.de' }],
   },
-  twitter: { card: 'summary_large_image', title: 'Mindestlohn 2026 netto berechnen | Rechenfix', description: `Mindestlohn 2026: ${STUNDENLOHN.toLocaleString('de-DE')} €/Std. = ${BRUTTO.toLocaleString('de-DE')} € brutto/Monat. Netto in allen Steuerklassen.` },
+  twitter: { card: 'summary_large_image', title: 'Mindestlohn 2026 netto berechnen', description: `Mindestlohn 2026: ${STUNDENLOHN.toLocaleString('de-DE')} €/Std. = ${BRUTTO.toLocaleString('de-DE')} € brutto/Monat. Netto in allen Steuerklassen.` },
   alternates: { canonical: 'https://www.rechenfix.de/finanzen/mindestlohn-netto' },
 };
 
