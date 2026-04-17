@@ -11,6 +11,7 @@ interface Props {
 
 export default function ErgebnisAktionen({ ergebnisText, seitenTitel, drucken }: Props) {
   const [kopiert, setKopiert] = useState(false);
+  const [kopierFehler, setKopierFehler] = useState(false);
   const [linkKopiert, setLinkKopiert] = useState(false);
   const [teilenOffen, setTeilenOffen] = useState(false);
   const [liveText, setLiveText] = useState('');
@@ -61,9 +62,16 @@ export default function ErgebnisAktionen({ ergebnisText, seitenTitel, drucken }:
   const handleKopieren = async () => {
     try {
       await navigator.clipboard.writeText(text);
+      setKopierFehler(false);
       setKopiert(true);
       setTimeout(() => setKopiert(false), 2000);
-    } catch { /* ignore */ }
+    } catch {
+      // Clipboard-API kann fehlschlagen (fehlende Permission, unsichere Origin).
+      // Sichtbares Feedback statt still scheitern.
+      setKopiert(false);
+      setKopierFehler(true);
+      setTimeout(() => setKopierFehler(false), 3000);
+    }
   };
 
   const handleLinkKopieren = async () => {
@@ -91,13 +99,26 @@ export default function ErgebnisAktionen({ ergebnisText, seitenTitel, drucken }:
       <div aria-live="polite" aria-atomic="true" role="status" className="sr-only">
         {liveText}
       </div>
+      {/* Screenreader-Ansage bei Copy-Aktion (Prompt 88) */}
+      <span aria-live="polite" className="sr-only">
+        {kopiert ? 'Ergebnis wurde in die Zwischenablage kopiert.' : kopierFehler ? 'Kopieren fehlgeschlagen. Bitte manuell markieren und kopieren.' : ''}
+      </span>
       {/* Kopieren */}
       <button
         onClick={handleKopieren}
-        className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-xl bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+        aria-label={kopiert ? 'Kopiert' : kopierFehler ? 'Kopieren fehlgeschlagen' : 'Ergebnis kopieren'}
+        className={`inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-xl transition-colors ${
+          kopiert
+            ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200'
+            : kopierFehler
+              ? 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200'
+              : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600'
+        }`}
       >
         {kopiert ? (
-          <><svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>Kopiert!</>
+          <><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>Kopiert! ✓</>
+        ) : kopierFehler ? (
+          <><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>Fehler — bitte manuell kopieren</>
         ) : (
           <><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>Ergebnis kopieren</>
         )}
