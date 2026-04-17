@@ -568,43 +568,46 @@ export default function RechnerSeite({ params }: Props) {
         </div>
 
         {/* Sidebar — hidden on mobile, visible on desktop */}
-        <aside className="hidden lg:block lg:w-64 shrink-0">
+        <aside className="hidden lg:block lg:w-64 shrink-0" aria-label={`Weitere Rechner in ${config.kategorie}`}>
           <div className="lg:sticky lg:top-24 max-h-[calc(100vh-7rem)] overflow-y-auto space-y-3 pr-1">
-            {kategorien.map(k => {
-              const katRechner = getRechnerByKategorie(k.slug);
-              return (
-                <div key={k.slug} className="card p-4">
-                  <Link
-                    href={`/${k.slug}`}
-                    className="flex items-center gap-2 font-bold text-sm text-gray-800 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors mb-2"
-                  >
-                    <span>{k.icon}</span>
-                    <span>{k.name}</span>
-                    <span className="text-xs font-normal text-gray-600 ml-auto">{katRechner.length}</span>
-                  </Link>
-                  <ul className="space-y-0.5">
-                    {katRechner.map(r => {
-                      const istAktuell = r.slug === config.slug;
-                      return (
-                        <li key={r.slug}>
-                          <Link
-                            href={`/${r.kategorieSlug}/${r.slug}`}
-                            className={`flex items-center gap-2 py-1.5 px-2 -mx-1 rounded-lg text-[13px] transition-all ${
-                              istAktuell
-                                ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-500/10 font-medium'
-                                : 'text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-500/10'
-                            }`}
-                          >
-                            <span>{r.icon}</span>
-                            <span className="truncate">{r.titel}</span>
-                          </Link>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-              );
-            })}
+            {kategorien
+              .filter(k => k.slug === config.kategorieSlug)
+              .map(k => {
+                const katRechner = getRechnerByKategorie(k.slug);
+                return (
+                  <div key={k.slug} className="card p-4">
+                    <Link
+                      href={`/${k.slug}`}
+                      className="flex items-center gap-2 font-bold text-sm text-gray-800 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors mb-2"
+                    >
+                      <span>{k.icon}</span>
+                      <span>{k.name}</span>
+                      <span className="text-xs font-normal text-gray-600 ml-auto">{katRechner.length}</span>
+                    </Link>
+                    <ul className="space-y-0.5">
+                      {katRechner.map(r => {
+                        const istAktuell = r.slug === config.slug;
+                        return (
+                          <li key={r.slug}>
+                            <Link
+                              href={`/${r.kategorieSlug}/${r.slug}`}
+                              aria-current={istAktuell ? 'page' : undefined}
+                              className={`flex items-center gap-2 py-1.5 px-2 -mx-1 rounded-lg text-[13px] transition-all ${
+                                istAktuell
+                                  ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-500/10 font-medium'
+                                  : 'text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-500/10'
+                              }`}
+                            >
+                              <span>{r.icon}</span>
+                              <span className="truncate">{r.titel}</span>
+                            </Link>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                );
+              })}
 
             {/* Ad Sidebar */}
             <AdSlot typ="rectangle" className="mt-3" />
