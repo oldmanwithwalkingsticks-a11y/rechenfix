@@ -58,9 +58,9 @@ export default function BackformUmrechner() {
     // Backzeit-Empfehlung
     let backzeitHinweis = '';
     if (faktor < 0.85) {
-      backzeitHinweis = `Zielform ${fmt((1 - faktor) * 100)} % kleiner → Backzeit um 5–10 Min verlängern, Temperatur ggf. 10 °C niedriger.`;
+      backzeitHinweis = `Zielform ${fmt((1 - faktor) * 100)} % kleiner. Da die Zutaten entsprechend reduziert werden, bleibt die Teighöhe ähnlich → Backzeit und Temperatur bleiben weitgehend gleich (ggf. 2–5 Min kürzer, weil weniger Masse).`;
     } else if (faktor > 1.15) {
-      backzeitHinweis = `Zielform ${fmt((faktor - 1) * 100)} % größer → Backzeit um 5–10 Min verkürzen, Temperatur gleich lassen.`;
+      backzeitHinweis = `Zielform ${fmt((faktor - 1) * 100)} % größer. Da die Zutaten entsprechend erhöht werden, bleibt die Teighöhe ähnlich → Backzeit und Temperatur bleiben weitgehend gleich (ggf. 2–5 Min länger, weil mehr Masse).`;
     } else {
       backzeitHinweis = 'Formen sind ähnlich groß — Backzeit und Temperatur bleiben unverändert.';
     }
@@ -151,22 +151,10 @@ export default function BackformUmrechner() {
         </div>
       </div>
 
-      {/* Backzeit-Warnung */}
-      <div className={`rounded-xl border p-4 mb-6 ${
-        ergebnis.abweichung > 30
-          ? 'bg-red-50 dark:bg-red-500/10 border-red-200 dark:border-red-500/30'
-          : ergebnis.abweichung > 15
-            ? 'bg-amber-50 dark:bg-amber-500/10 border-amber-200 dark:border-amber-500/30'
-            : 'bg-green-50 dark:bg-green-500/10 border-green-200 dark:border-green-500/30'
-      }`}>
-        <p className={`text-sm ${
-          ergebnis.abweichung > 30
-            ? 'text-red-800 dark:text-red-300'
-            : ergebnis.abweichung > 15
-              ? 'text-amber-800 dark:text-amber-300'
-              : 'text-green-800 dark:text-green-300'
-        }`}>
-          <strong>⏲️ Backzeit-Hinweis:</strong> {ergebnis.backzeitHinweis} Für exakte Anpassung nutzen Sie den Backzeit-Rechner.
+      {/* Backzeit-Hinweis */}
+      <div className="rounded-xl border p-4 mb-6 bg-blue-50 dark:bg-blue-500/10 border-blue-200 dark:border-blue-500/30">
+        <p className="text-sm text-blue-800 dark:text-blue-300">
+          <strong>⏲️ Backzeit-Hinweis:</strong> {ergebnis.backzeitHinweis} Für exakte Anpassung bei geänderter Temperatur nutzen Sie den Backzeit-Rechner.
         </p>
       </div>
 

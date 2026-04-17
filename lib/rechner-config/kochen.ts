@@ -250,7 +250,7 @@ Für die exakte Anpassung nutzen Sie unseren Backzeit-Rechner.
       },
       {
         frage: 'Muss ich die Backzeit anpassen?',
-        antwort: 'Ja, leicht. Bei kleinerer Form wird der Teig höher → Backzeit +5–10 Minuten und Temperatur 10 °C niedriger. Bei größerer Form wird der Teig flacher → Backzeit −5–10 Minuten, Temperatur gleich. Immer mit Stäbchenprobe kontrollieren (Stäbchen in die Mitte stechen, bleibt kein Teig kleben, ist der Kuchen fertig).',
+        antwort: 'Wenn Sie die Zutaten wie vom Rechner vorgeschlagen mitskalieren, bleibt die Teighöhe in der neuen Form gleich — damit bleibt auch die Backzeit weitgehend gleich (±2–5 Min wegen unterschiedlicher Gesamtmasse). Anders sieht es aus, wenn Sie das Originalrezept unverändert in eine kleinere Form geben: Dann wird der Teig höher → Backzeit +5–10 Min und Temperatur ggf. 10 °C niedriger. Immer mit Stäbchenprobe kontrollieren.',
       },
       {
         frage: 'Wie rechne ich rund in eckig um?',
