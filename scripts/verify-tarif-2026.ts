@@ -1,4 +1,6 @@
 import { berechneBruttoNetto } from '../lib/berechnungen/brutto-netto.js';
+import { berechneLohnsteuer } from '../lib/berechnungen/lohnsteuer.js';
+import { berechneEinkommensteuer } from '../lib/berechnungen/einkommensteuer.js';
 
 const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
@@ -57,3 +59,24 @@ run('TESTFALL D — 5.000 € · SK III · NRW · 6 Kinder · Zusatz 2,9 %', {
   kvArt: 'gesetzlich', kvZusatzbeitrag: 2.9, kvPrivatBeitrag: 0,
   rvBefreit: false, abrechnungszeitraum: 'monat',
 }, { pflegeversicherung: 40.00 });
+
+// Prompt 84 — Lohnsteuer-Rechner Testfall A (5.000 · SK III · 2 Kinder)
+console.log('\n--- PROMPT 84: Lohnsteuer-Rechner ---');
+const lstA = berechneLohnsteuer({
+  brutto: 5000, steuerklasse: 3, kirchensteuer: false, kirchensteuersatz: 9,
+  kinderfreibetraege: 2, kinderUnter25: 2, jahresfreibetrag: 0, zeitraum: 'monat',
+});
+console.log(`Testfall A: LSt ${fmt(lstA.lohnsteuerMonat)} €/M   Ziel: 409,00 € (±2 €)`);
+
+const lstC = berechneLohnsteuer({
+  brutto: 3500, steuerklasse: 1, kirchensteuer: false, kirchensteuersatz: 9,
+  kinderfreibetraege: 0, kinderUnter25: 0, jahresfreibetrag: 0, zeitraum: 'monat',
+});
+console.log(`Testfall C (Regression): LSt ${fmt(lstC.lohnsteuerMonat)} €/M   Ziel: 405,50 €`);
+
+// Prompt 84 — Einkommensteuer-Rechner Testfall B (zvE 46.974 Splitting)
+console.log('\n--- PROMPT 84: Einkommensteuer-Rechner ---');
+const estB = berechneEinkommensteuer({
+  zvE: 46974, splitting: true, jahr: 2026, kirchensteuer: false, kirchensteuersatz: 9,
+});
+console.log(`Testfall B: ESt/Jahr ${fmt(estB.einkommensteuer)} €   Ziel: 4.908 €`);
