@@ -1,10 +1,10 @@
 # Rechenfix.de — Projekt-Referenz
 
-Stand: 16. April 2026
+Stand: April 2026
 
 ## Was ist rechenfix.de?
 
-Rechenfix.de ist ein deutschsprachiges Online-Rechner-Portal mit aktuell **125 kostenlosen Rechnern** in 7 Kategorien. Slogan: "Fix gerechnet!". Alleinstellungsmerkmal gegenüber Konkurrenz: **KI-Erklärungen** ("Fix erklärt") via Anthropic Claude API — kein anderer deutscher Rechner-Anbieter hat das. Alle Berechnungen erfolgen live im Browser ohne Submit-Button. WCAG 2.1 AA konform (Lighthouse ≥97).
+Rechenfix.de ist ein deutschsprachiges Online-Rechner-Portal mit aktuell **170 kostenlosen Rechnern** in 9 Kategorien. Slogan: "Fix gerechnet!". Alleinstellungsmerkmal gegenüber Konkurrenz: **KI-Erklärungen** ("Fix erklärt") via Anthropic Claude API — kein anderer deutscher Rechner-Anbieter hat das. Alle Berechnungen erfolgen live im Browser ohne Submit-Button. WCAG 2.1 AA konform (Lighthouse ≥97).
 
 - **URL:** https://www.rechenfix.de (IMMER mit www!)
 - **Hosting:** Vercel
@@ -19,166 +19,85 @@ Rechenfix.de ist ein deutschsprachiges Online-Rechner-Portal mit aktuell **125 k
 - **KI:** Anthropic Claude API (für "Fix erklärt"-Feature)
 - **Monetarisierung:** AdSense + Affiliate (Awin-Netzwerk)
 
-## Rechner-Übersicht (125 Rechner, 7 Kategorien)
+## Rechner-Inventar (Stand April 2026)
 
-### 📋 Alltag (20)
-| Rechner | Route |
-|---------|-------|
-| Prozentrechner | /alltag/prozentrechner |
-| Dreisatzrechner | /alltag/dreisatz-rechner |
-| Tagerechner | /alltag/tagerechner |
-| Rabattrechner | /alltag/rabattrechner |
-| Countdown-Rechner | /alltag/countdown |
-| Lebenszeit-Rechner | /alltag/lebenszeit-rechner |
-| Streaming-Kosten-Rechner | /alltag/streaming-kosten-rechner |
-| Kaffee-Kosten-Rechner | /alltag/kaffee-kosten-rechner |
-| Lieferservice-Rechner | /alltag/lieferservice-rechner |
-| Abo-Rechner | /alltag/abo-rechner |
-| Handykosten-Rechner | /alltag/handykosten-rechner |
-| Umzugskosten-Rechner | /alltag/umzugskosten-rechner |
-| Trinkgeld-Rechner | /alltag/trinkgeld-rechner |
-| Geburtstags-Rechner | /alltag/geburtstag-rechner |
-| Skontorechner | /alltag/skontorechner |
-| Uhrzeitrechner | /alltag/uhrzeitrechner |
-| Hundejahre-Rechner | /alltag/hundejahre-rechner |
-| Währungsrechner | /alltag/waehrungsrechner |
-| Schuhgrößen-Umrechner | /alltag/schuhgroessen-rechner |
-| Kleidergrößen-Umrechner | /alltag/kleidergroessen-rechner |
+**170 eigenständige Rechner in 9 Kategorien:**
 
-### 💰 Finanzen (34)
-| Rechner | Route | Affiliate |
-|---------|-------|-----------|
-| Brutto-Netto-Rechner | /finanzen/brutto-netto-rechner | WISO + smartsteuer |
-| MwSt-Rechner | /finanzen/mwst-rechner | Lexware |
-| Zinsrechner | /finanzen/zinsrechner | — |
-| Elterngeld-Rechner | /finanzen/elterngeld-rechner | WISO |
-| Bürgergeld-Rechner | /finanzen/buergergeld-rechner | — |
-| Stundenlohnrechner | /finanzen/stundenlohn-rechner | Lexware |
-| Sparrechner | /finanzen/sparrechner | Verivox |
-| Inflationsrechner | /finanzen/inflationsrechner | — |
-| Gehaltsvergleich | /finanzen/gehaltsvergleich | — |
-| Wahrer Stundenlohn Rechner | /finanzen/wahrer-stundenlohn | — |
-| Steuererstattungs-Rechner | /finanzen/steuererstattung-rechner | WISO + smartsteuer |
-| Kreditrechner | /finanzen/kreditrechner | CHECK24 (/kredit/) |
-| ETF-Sparplanrechner | /finanzen/etf-sparplanrechner | Verivox |
-| Rentenrechner | /finanzen/rentenrechner | WISO + Verivox |
-| Splitting-Rechner | /finanzen/splitting-rechner | WISO + smartsteuer |
-| Wohngeld-Rechner | /finanzen/wohngeld-rechner | — |
-| BAföG-Rechner | /finanzen/bafoeg-rechner | — |
-| Kindergeld-Rechner | /finanzen/kindergeld-rechner | WISO |
-| Pflegegeld-Rechner | /finanzen/pflegegeld-rechner | — |
-| Erbschaftsteuer-Rechner | /finanzen/erbschaftsteuer-rechner | WISO + smartsteuer |
-| Minijob-Rechner | /finanzen/minijob-rechner | — |
-| Gehaltserhöhung-Rechner | /finanzen/gehaltserhoehung-rechner | WISO |
-| Krankengeld-Rechner | /finanzen/krankengeld-rechner | — |
-| GmbH-Geschäftsführer-Rechner | /finanzen/gmbh-geschaeftsfuehrer-rechner | — |
-| Hochrechner (Gehalt) | /finanzen/hochrechner | — |
-| Midijob-Rechner | /finanzen/midijob-rechner | — |
-| Firmenwagenrechner | /finanzen/firmenwagenrechner | — |
-| Witwenrente-Rechner | /finanzen/witwenrente-rechner | — |
-| Kurzarbeitergeld-Rechner | /finanzen/kurzarbeitergeld-rechner | — |
-| Riester-Rechner | /finanzen/riester-rechner | — |
-| Nettolohn-Optimierer | /finanzen/nettolohn-optimierer | — |
-| Kapitalertragsteuer-Rechner | /finanzen/kapitalertragsteuer-rechner | — |
-| Arbeitslosengeld-Rechner | /finanzen/arbeitslosengeld-rechner | — |
-| AfA-Rechner | /finanzen/afa-rechner | — |
+| Kategorie | Slug | Anzahl |
+|---|---|---|
+| Alltag | `/alltag` | 23 |
+| Finanzen | `/finanzen` | 45 |
+| Gesundheit | `/gesundheit` | 18 |
+| Auto & Verkehr | `/auto` | 10 |
+| Wohnen & Energie | `/wohnen` | 25 |
+| Mathe & Schule | `/mathe` | 18 |
+| Arbeit & Recht | `/arbeit` | 17 |
+| Kochen & Ernährung | `/kochen` | 12 |
+| Sport & Fitness | `/sport` | 2 |
+| **Summe** | | **170** |
 
-Zusätzlich: Brutto-Netto-Tabelle und Einzelgehalt-Seiten (Mindestlohn, 2000€–5000€)
+**Sitemap: 178 Rechner-URLs** — Differenz zu 170 erklärt sich durch Varianten-/Tabellen-Seiten unter `/finanzen/` (z.B. `2000-euro-brutto-netto` bis `5000-euro-brutto-netto`, `brutto-netto-tabelle`). Die dynamische Route `app/[kategorie]/[rechner]/page.tsx` rendert alle 178 URLs; Metadaten stehen in `lib/rechner-config/<kategorie>.ts`.
 
-### 💚 Gesundheit (14)
-| Rechner | Route |
-|---------|-------|
-| BMI-Rechner | /gesundheit/bmi-rechner |
-| Raucher-Rechner | /gesundheit/raucher-rechner |
-| Schlafrechner | /gesundheit/schlaf-rechner |
-| Kalorienrechner | /gesundheit/kalorienrechner |
-| Idealgewicht-Rechner | /gesundheit/idealgewicht-rechner |
-| Geburtstermin-Rechner | /gesundheit/geburtstermin-rechner |
-| Wasserbedarf-Rechner | /gesundheit/wasserbedarf-rechner |
-| Körperfettrechner | /gesundheit/koerperfett-rechner |
-| SSW-Rechner | /gesundheit/ssw-rechner |
-| Gewichtszunahme-Rechner (Schwangerschaft) | /gesundheit/schwangerschaft-gewicht-rechner |
-| Zyklusrechner | /gesundheit/zyklusrechner |
-| Alkohol-Abbau-Rechner | /gesundheit/alkohol-abbau-rechner |
-| Protein-Rechner | /gesundheit/protein-rechner |
-| Herzfrequenz-Rechner | /gesundheit/herzfrequenz-rechner |
+## Sprint-Historie
 
-Kein Affiliate in dieser Kategorie (sensibles Thema).
+### Sprint 1 — Tarif-Audit (April 2026) ✅ ABGESCHLOSSEN
 
-### 🚗 Auto & Verkehr (8)
-| Rechner | Route | Affiliate |
-|---------|-------|-----------|
-| Spritkostenrechner | /auto/spritkosten-rechner | CHECK24 (/kfz-versicherung/) |
-| KW-PS-Umrechner | /auto/kw-ps-umrechner | — |
-| Kfz-Steuer-Rechner | /auto/kfz-steuer-rechner | CHECK24 (/kfz-versicherung/) |
-| Bußgeldrechner | /auto/bussgeldrechner | KS Auxilia |
-| Autokosten-Rechner | /auto/autokosten-rechner | CHECK24 (/kfz-versicherung/) |
-| Leasing-Rechner | /auto/leasing-rechner | — |
-| Führerscheinkosten-Rechner | /auto/fuehrerschein-rechner | — |
-| Reichweiten-Rechner (E-Auto) | /auto/reichweiten-rechner | — |
+**Ziel:** Alle drei Tarif-Rechner (Brutto-Netto, Lohnsteuer, Einkommensteuer) BMF-konform und cent-genau zum 1.1.2026.
 
-### 🏠 Wohnen & Energie (20)
-| Rechner | Route | Affiliate |
-|---------|-------|-----------|
-| Stromkostenrechner | /wohnen/stromkosten-rechner | CHECK24 (/strom/) |
-| Nebenkostenrechner | /wohnen/nebenkosten-rechner | CHECK24 (/gas/) |
-| Mietrechner | /wohnen/mietrechner | — |
-| Heizkostenrechner | /wohnen/heizkosten-rechner | CHECK24 (/gas/) |
-| Grunderwerbsteuerrechner | /wohnen/grunderwerbsteuer-rechner | WISO |
-| Baufinanzierungs-Rechner | /wohnen/baufinanzierung-rechner | CHECK24 (/kredit/) |
-| Quadratmeter-Rechner | /wohnen/quadratmeter-rechner | — |
-| Tapetenbedarf-Rechner | /wohnen/tapetenbedarf-rechner | — |
-| Stromvergleich-Rechner | /wohnen/stromvergleich-rechner | CHECK24 (/strom/) |
-| Mietrendite-Rechner | /wohnen/mietrendite-rechner | CHECK24 (/kredit/) |
-| Indexmiete-Rechner | /wohnen/indexmiete-rechner | — |
-| Wärmepumpen-Rechner | /wohnen/waermepumpen-rechner | CHECK24 (/strom/) |
-| Photovoltaik-Rechner | /wohnen/photovoltaik-rechner | — |
-| Dachflächen-Rechner | /wohnen/dachflaechen-rechner | — |
-| Malerkosten-Rechner | /wohnen/malerkosten-rechner | — |
-| Grundsteuer-Rechner | /wohnen/grundsteuer-rechner | — |
-| Mietpreisbremse-Rechner | /wohnen/mietpreisbremse-rechner | — |
-| Poolkosten-Rechner | /wohnen/poolkosten-rechner | — |
-| Vorfälligkeitsentschädigung-Rechner | /wohnen/vorfaelligkeitsentschaedigung-rechner | — |
-| Energiekosten-Rechner | /wohnen/energiekosten-rechner | — |
+**Umgesetzte Prompts:**
+- **81** — §32a EStG Tarif 2026 + SV-Sätze + Formel-Umstellung
+- **82** — Vorsorgepauschale §39b Abs. 4 EStG PAP-konform
+- **83** — PV-Kinderabschlag nach § 55 Abs. 3 SGB XI (PUEG 2023) für 2+ Kinder
+- **84** — UI-Felder "Kinder unter 25" in Lohnsteuer- und Einkommensteuer-Rechner
+- **84a** — Clamping-Fix für neue Kinder-Inputs (Smoketest C3-Fail)
 
-### 🎓 Mathe & Schule (12)
-| Rechner | Route |
-|---------|-------|
-| Bruchrechner | /mathe/bruchrechner |
-| Einheiten-Umrechner | /mathe/einheiten-umrechner |
-| Notenschlüssel-Rechner | /mathe/notenschluessel-rechner |
-| Durchschnittsrechner | /mathe/durchschnitt-rechner |
-| Wissenschaftlicher Taschenrechner | /mathe/wissenschaftlicher-taschenrechner |
-| Flächenrechner | /mathe/flaechenrechner |
-| Prozentuale-Veränderung-Rechner | /mathe/prozentuale-veraenderung-rechner |
-| Volumen-Rechner | /mathe/volumenrechner |
-| Abi-Notenrechner | /mathe/abi-rechner |
-| Binär-Rechner | /mathe/binaer-rechner |
-| Pythagoras-Rechner | /mathe/pythagoras-rechner |
-| Gleichungslöser | /mathe/gleichungsrechner |
+**Verifikations-Runs:**
+- Testfall Single (3.500 €, StKl I, kinderlos): LSt 405,50 €/Mon, Netto 2.333,25 €/Mon — cent-genau
+- Testfall Familie (5.000 €, StKl III, 2 Kinder): PV 77,50 €, LSt 409,00 €, Netto 3.546,00 €/Mon — cent-genau
+- Einkommensteuer-Rechner bei zvE 46.974 € Splitting: ESt 4.908 €/Jahr — cent-genau
+- Smoketest v3.1: 178/178 Rechner funktional grün
 
-Kein Affiliate in dieser Kategorie (Schüler-Zielgruppe).
+**Lessons Learned:**
+- HTML `min`/`max` reicht nicht — onChange-Clamping Pflicht (Smoketest C3)
+- PV-Kinderabschlag und Kinderfreibeträge sind zwei getrennte Konzepte, zwei getrennte UI-Felder
+- Smoketest v3 findet Frontend-Integrität, aber keine numerische Korrektheit — für Tarif-Changes separat gegen BMF-Steuerrechner prüfen
+- web_fetch-Tool-Cache kann bei Live-Audits irreführen — Inkognito-Browser-Check ist Ground Truth
 
-### 💼 Arbeit & Recht (17)
-| Rechner | Route | Affiliate |
-|---------|-------|-----------|
-| Arbeitszeitrechner | /arbeit/arbeitszeitrechner | Lexware |
-| Urlaubstage-Rechner | /arbeit/urlaubstage-rechner | KS Auxilia |
-| Überstunden-Rechner | /arbeit/ueberstunden-rechner | KS Auxilia + Lexware |
-| Pendlerpauschale-Rechner | /arbeit/pendlerpauschale-rechner | WISO |
-| Promillerechner | /arbeit/promillerechner | — |
-| Rechtsschutz-Rechner | /arbeit/rechtsschutz-rechner | KS Auxilia |
-| Freelancer-Stundensatz-Rechner | /arbeit/freelancer-stundensatz-rechner | Lexware |
-| Kündigungsfrist-Rechner | /arbeit/kuendigungsfrist-rechner | KS Auxilia |
-| Teilzeit-Rechner | /arbeit/teilzeit-rechner | WISO |
-| Abfindungsrechner | /arbeit/abfindungsrechner | KS Auxilia + WISO |
-| Mutterschutz-Rechner | /arbeit/mutterschutz-rechner | WISO |
-| Scheidungskosten-Rechner | /arbeit/scheidungskosten-rechner | KS Auxilia |
-| Zugewinnausgleich-Rechner | /arbeit/zugewinnausgleich-rechner | — |
-| Arbeitstage-Rechner | /arbeit/arbeitstage-rechner | — |
-| Unterhaltsrechner | /arbeit/unterhaltsrechner | — |
-| Elternzeit-Rechner | /arbeit/elternzeit-rechner | — |
-| Ehegattenunterhalt-Rechner | /arbeit/ehegattenunterhalt-rechner | — |
+## Test-Referenzwerte Tarif-Rechner (Stand April 2026)
+
+Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Abweichung ist ein Regressions-Kandidat und muss untersucht werden.
+
+### Brutto-Netto-Rechner
+
+| Szenario | Inputs | PV | LSt | Netto |
+|---|---|---|---|---|
+| Single kinderlos | 3.500 € / StKl I / 0 Kinder / keine KiSt | Kinderlos-Zuschlag 2,4 % | 405,50 €/Mon | 2.333,25 €/Mon |
+| Familie | 5.000 € / StKl III / 2 Kinder / keine KiSt | 77,50 €/Mon (1,55 %) | 409,00 €/Mon | 3.546,00 €/Mon |
+
+### Lohnsteuer-Rechner
+
+| Szenario | Inputs | LSt |
+|---|---|---|
+| Single kinderlos | 3.500 € / StKl I / 0 Kinder | 405,50 €/Mon |
+| Familie | 5.000 € / StKl III / 2 Kinder | 409,00 €/Mon |
+
+### Einkommensteuer-Rechner
+
+| Szenario | Inputs | ESt |
+|---|---|---|
+| Splitting mittig | zvE 46.974 € / Zusammenveranlagung / 2 Kinder | 4.908 €/Jahr |
+| Grundtarif gleich | zvE 46.974 € / Einzelveranlagung / 0 Kinder | 9.501 €/Jahr |
+
+**Amtliche Gegenprobe:** [BMF-Steuerrechner](https://www.bmf-steuerrechner.de/ekst/) mit identischen Inputs.
+
+## Parkende Items (bis AdSense-Freigabe)
+
+Zwei Prompts sind bewusst gesperrt, bis Google AdSense aktiv freigeschaltet ist:
+
+1. **Prompt 85** — AdSense `data-nscript`-Warning fixen (nativer `<script>`-Tag in `app/layout.tsx` statt `next/script`). Script-Loader-Änderung könnte Review-Prozess beeinträchtigen.
+2. **Prompt 68** — Google CMP + Consent Mode v2 aktivieren. Ersetzt das aktuelle self-built CookieBanner.tsx.
+
+**Reihenfolge nach Freigabe:** erst 85 (Warning wegräumen), dann 68 (CMP dazu).
 
 ## Affiliate-System
 
