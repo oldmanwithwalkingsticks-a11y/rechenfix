@@ -4,6 +4,11 @@ export interface PfaendungEingabe {
   nettoMonat: number;
   unterhaltspflichten: number; // 0–5+
   zeitraum: Zeitraum;
+  /**
+   * Stichtag für die Pfändungstabelle. Default: aktuelles Datum.
+   * Ab 01.07.2026 greift automatisch die Tabelle aus BGBl. 2026 I Nr. 80.
+   */
+  stichtag?: Date;
 }
 
 export interface PfaendungErgebnis {
@@ -23,13 +28,61 @@ export interface PfaendungErgebnis {
   unterhaltspflichten: number;
 }
 
-// Pfändungstabelle § 850c ZPO, gültig ab 01.07.2025 (Turnus: alle 2 Jahre, nächste Anpassung 01.07.2026)
-const GRUNDFREIBETRAG = 1555.99;          // monatlich, 0 Unterhaltspflichten
-const ERHOEHUNG_1 = 585.59;                // für 1. unterhaltsberechtigte Person
-const ERHOEHUNG_WEITERE = 326.04;          // für jede weitere unterhaltsberechtigte Person (2.–5.)
-const OBERGRENZE_0 = 4573.10;              // Obergrenze, oberhalb → alles pfändbar (0 Unterhalt)
+/**
+ * Pfändungsfreigrenzen nach § 850c ZPO
+ *
+ * Historie:
+ * - 01.07.2023–30.06.2025: Grundfreibetrag 1.402,28 € (BGBl. 2023)
+ * - 01.07.2025–30.06.2026: Grundfreibetrag 1.555,00 € (BGBl. 2025)
+ * - 01.07.2026–30.06.2028: Grundfreibetrag 1.587,40 € (BGBl. 2026 I Nr. 80 v. 26.03.2026)
+ *
+ * Anpassung alle zwei Jahre zum 01.07. (§ 850c Abs. 4 ZPO), Kopplung an den
+ * Grundfreibetrag nach § 32a EStG. Die amtliche Tabelle arbeitet mit 10-€-Stufen
+ * und hat eigene Rundungslogik — wir nutzen die Pauschalquote aus § 850c Abs. 3 ZPO.
+ */
 
-// Pfändungsquoten oberhalb des Freibetrags (§ 850c Abs. 3 ZPO, Pauschalquote)
+export interface PfaendungsParameter {
+  /** Unpfändbarer Grundbetrag ohne Unterhaltspflichten (€/Monat). */
+  grundfreibetrag: number;
+  /** Erhöhung für die 1. unterhaltsberechtigte Person (€/Monat). */
+  unterhalt_1: number;
+  /** Erhöhung je weitere unterhaltsberechtigte Person 2.–5. (€/Monat). */
+  unterhalt_2_bis_5: number;
+  /** Vollpfändungsgrenze: Nettoeinkommen, oberhalb dessen alles pfändbar ist (€/Monat). */
+  vollpfaendung: number;
+}
+
+/** Werte 01.07.2025–30.06.2026 (BGBl. 2025). */
+export const PFAENDUNG_2025: PfaendungsParameter = {
+  grundfreibetrag: 1555.0,
+  unterhalt_1: 585.23,
+  unterhalt_2_bis_5: 326.04,
+  vollpfaendung: 4771.49,
+};
+
+/** Werte ab 01.07.2026 (BGBl. 2026 I Nr. 80 v. 26.03.2026), gültig bis 30.06.2028. */
+export const PFAENDUNG_2026: PfaendungsParameter = {
+  grundfreibetrag: 1587.4,
+  unterhalt_1: 597.42,
+  unterhalt_2_bis_5: 332.83,
+  vollpfaendung: 4866.3,
+};
+
+/**
+ * Liefert die jeweils geltende Pfändungstabelle nach Stichtag.
+ * Der Switch greift am 01.07.2026 automatisch.
+ */
+export function getAktuellePfaendungsParameter(
+  stichtag: Date = new Date(),
+): PfaendungsParameter {
+  const switchDatum = new Date(2026, 6, 1); // 01.07.2026 (Monat 0-indexiert)
+  return stichtag >= switchDatum ? PFAENDUNG_2026 : PFAENDUNG_2025;
+}
+
+// Backwards-Compat: bestehende Importe liefern weiterhin den tagesaktuellen Wert.
+export const GRUNDFREIBETRAG = getAktuellePfaendungsParameter().grundfreibetrag;
+
+// Pfändungsquoten oberhalb des Freibetrags (§ 850c Abs. 3 ZPO, Pauschalquote).
 const PFAENDUNGS_QUOTEN: Record<number, number> = {
   0: 0.7,
   1: 0.5,
@@ -39,29 +92,36 @@ const PFAENDUNGS_QUOTEN: Record<number, number> = {
   5: 0.1,
 };
 
-function berechneFreibetrag(unterhalt: number): { grund: number; erhoehung: number; gesamt: number } {
+function berechneFreibetrag(
+  unterhalt: number,
+  p: PfaendungsParameter,
+): { grund: number; erhoehung: number; gesamt: number } {
   const u = Math.min(Math.max(Math.floor(unterhalt), 0), 5);
   let erhoehung = 0;
-  if (u >= 1) erhoehung += ERHOEHUNG_1;
-  if (u >= 2) erhoehung += (u - 1) * ERHOEHUNG_WEITERE;
+  if (u >= 1) erhoehung += p.unterhalt_1;
+  if (u >= 2) erhoehung += (u - 1) * p.unterhalt_2_bis_5;
   return {
-    grund: GRUNDFREIBETRAG,
+    grund: p.grundfreibetrag,
     erhoehung,
-    gesamt: GRUNDFREIBETRAG + erhoehung,
+    gesamt: p.grundfreibetrag + erhoehung,
   };
 }
 
-function berechneObergrenze(unterhalt: number): number {
+function berechneObergrenze(unterhalt: number, p: PfaendungsParameter): number {
   const u = Math.min(Math.max(Math.floor(unterhalt), 0), 5);
   let erhoehung = 0;
-  if (u >= 1) erhoehung += ERHOEHUNG_1;
-  if (u >= 2) erhoehung += (u - 1) * ERHOEHUNG_WEITERE;
-  return OBERGRENZE_0 + erhoehung;
+  if (u >= 1) erhoehung += p.unterhalt_1;
+  if (u >= 2) erhoehung += (u - 1) * p.unterhalt_2_bis_5;
+  return p.vollpfaendung + erhoehung;
 }
 
-function berechnePfaendbarMonat(nettoMonat: number, unterhalt: number): { frei: number; pfaendbar: number; mehrbetrag: number; quote: number; ueberObergrenze: boolean } {
-  const { gesamt: freibetrag } = berechneFreibetrag(unterhalt);
-  const obergrenze = berechneObergrenze(unterhalt);
+function berechnePfaendbarMonat(
+  nettoMonat: number,
+  unterhalt: number,
+  p: PfaendungsParameter,
+): { frei: number; pfaendbar: number; mehrbetrag: number; quote: number; ueberObergrenze: boolean } {
+  const { gesamt: freibetrag } = berechneFreibetrag(unterhalt, p);
+  const obergrenze = berechneObergrenze(unterhalt, p);
   const u = Math.min(Math.max(Math.floor(unterhalt), 0), 5);
   const quote = PFAENDUNGS_QUOTEN[u];
 
@@ -98,10 +158,11 @@ function umrechnen(wertMonat: number, zeitraum: Zeitraum): number {
 }
 
 export function berechnePfaendung(e: PfaendungEingabe): PfaendungErgebnis {
-  const { nettoMonat, unterhaltspflichten, zeitraum } = e;
-  const fb = berechneFreibetrag(unterhaltspflichten);
-  const obergrenze = berechneObergrenze(unterhaltspflichten);
-  const { frei, pfaendbar, mehrbetrag, quote, ueberObergrenze } = berechnePfaendbarMonat(nettoMonat, unterhaltspflichten);
+  const { nettoMonat, unterhaltspflichten, zeitraum, stichtag } = e;
+  const p = getAktuellePfaendungsParameter(stichtag);
+  const fb = berechneFreibetrag(unterhaltspflichten, p);
+  const obergrenze = berechneObergrenze(unterhaltspflichten, p);
+  const { frei, pfaendbar, mehrbetrag, quote, ueberObergrenze } = berechnePfaendbarMonat(nettoMonat, unterhaltspflichten, p);
 
   const pfaendbarProzent = nettoMonat > 0
     ? Math.round(pfaendbar / nettoMonat * 10000) / 100
@@ -110,7 +171,7 @@ export function berechnePfaendung(e: PfaendungEingabe): PfaendungErgebnis {
   // Beispieltabelle: 5 Nettowerte rund um das aktuelle Einkommen
   const werte = [2000, 2500, 3000, 3500, 4000, 5000];
   const beispielTabelle = werte.map(netto => {
-    const r = berechnePfaendbarMonat(netto, unterhaltspflichten);
+    const r = berechnePfaendbarMonat(netto, unterhaltspflichten, p);
     return {
       netto,
       frei: Math.round(umrechnen(r.frei, zeitraum) * 100) / 100,

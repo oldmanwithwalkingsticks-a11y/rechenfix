@@ -2849,27 +2849,26 @@ Wichtig: Die Jahressteuer bleibt unabhängig von der Steuerklasse identisch. Die
     metaDescription: 'Pfändungsfreies Einkommen kostenlos berechnen: Pfändungstabelle nach § 850c ZPO, Freibeträge bei Unterhaltspflichten und P-Konto — mit KI-Erklärung.',
     keywords: ['pfändungsrechner', 'pfändungsfreibetrag', 'pfändungstabelle 2026', '850c zpo', 'pfändungsfreigrenze', 'p-konto freibetrag', 'lohnpfändung', 'unterhaltspflicht pfändung', 'gehaltspfändung rechner'],
     icon: '⚖️',
-    formel: 'Pfändbar = (Netto − Freibetrag) × Pfändungsquote | Freibetrag = 1.555,99 € + 585,59 € (1. Unterhalt) + 326,04 € je weitere Person | Quote: 70 % (0 Unterhalt), 50 / 40 / 30 / 20 / 10 % je Unterhalt',
-    beispiel: 'Netto 2.500 €/Monat, keine Unterhaltspflicht: Freibetrag 1.555,99 €, Mehrbetrag 944,01 €, Pfändungsquote 70 % → 660,81 € pfändbar, 1.839,19 € pfändungsfrei.',
+    formel: 'Pfändbar = (Netto − Freibetrag) × Pfändungsquote | Freibetrag bis 30.06.2026: 1.555,00 € + 585,23 € (1. Unterhalt) + 326,04 € je weitere | Freibetrag ab 01.07.2026: 1.587,40 € + 597,42 € + 332,83 € | Quote: 70 % (0 Unterhalt), 50 / 40 / 30 / 20 / 10 %',
+    beispiel: 'Netto 2.500 €/Monat, keine Unterhaltspflicht (bis 30.06.2026): Freibetrag 1.555,00 €, Mehrbetrag 945,00 €, Pfändungsquote 70 % → 661,50 € pfändbar, 1.838,50 € pfändungsfrei.',
     erklaerung: `**Pfändungsfreibetrag — was bleibt bei einer Lohnpfändung?**
 
 Wer verschuldet ist und eine Lohnpfändung erhält, darf nicht unbegrenzt gepfändet werden. Der Gesetzgeber schützt das Existenzminimum durch die sogenannte Pfändungsfreigrenze (§ 850c Zivilprozessordnung — ZPO). Bis zu diesem Betrag ist das Nettoeinkommen vollständig pfändungsfrei — darüber hinaus greift eine gestaffelte Pfändung.
 
-Unser Pfändungsrechner nutzt die aktuelle Pfändungstabelle, gültig ab 01.07.2025. Die nächste Anpassung erfolgt turnusgemäß zum 01.07.2026 — der Gesetzgeber aktualisiert die Freibeträge alle zwei Jahre an die Inflation.
+Unser Pfändungsrechner nutzt die aktuell gültige Tabelle und schaltet automatisch zum 01.07.2026 auf die neuen Werte um. Die Anpassung erfolgt alle zwei Jahre (§ 850c Abs. 4 ZPO, Kopplung an den Grundfreibetrag der Einkommensteuer).
 
-**Pfändungsfreibetrag 2025/2026: 1.555,99 € monatlich**
+**Pfändungsfreibetrag: Zweizeitraum-Übersicht**
 
-Der Grundfreibetrag für einen alleinstehenden Schuldner ohne Unterhaltspflichten beträgt 1.555,99 € pro Monat. Bis zu diesem Betrag ist das Nettoeinkommen komplett pfändungsfrei. Erst darüber hinaus wird gepfändet — und auch dann nicht komplett.
+| Zeitraum | Grundfreibetrag | Zuschlag 1. Unterhalt | Je 2.–5. Unterhalt | Vollpfändungsgrenze |
+|---|---|---|---|---|
+| 01.07.2025 – 30.06.2026 | 1.555,00 € | 585,23 € | 326,04 € | ≈ 4.771,49 € |
+| **ab 01.07.2026** | **1.587,40 €** | **597,42 €** | **332,83 €** | **≈ 4.866,30 €** |
+
+Die neuen Werte sind in der **Pfändungsfreigrenzenbekanntmachung 2026** (BGBl. 2026 I Nr. 80 vom 26.03.2026) verkündet und gelten bis 30.06.2028. Die Erhöhung entspricht ca. 2,1 % und gleicht die Inflation der letzten zwei Jahre aus.
 
 **Erhöhung bei Unterhaltspflichten**
 
-Für jede Person, der der Schuldner zum Unterhalt verpflichtet ist (z. B. Ehepartner, minderjährige Kinder), erhöht sich der Freibetrag:
-
-- 1. unterhaltsberechtigte Person: +585,59 €
-- 2. unterhaltsberechtigte Person: +326,04 €
-- 3.–5. unterhaltsberechtigte Person: je +326,04 €
-
-Beispiel: Ein Schuldner mit Ehepartner und zwei Kindern hat einen Freibetrag von 1.555,99 € + 585,59 € + 2 × 326,04 € = 2.793,66 € monatlich.
+Für jede Person, der der Schuldner zum Unterhalt verpflichtet ist (z. B. Ehepartner, minderjährige Kinder), erhöht sich der Freibetrag. Beispiel für einen Schuldner mit Ehepartner und zwei Kindern (3 Unterhaltsberechtigte) ab 01.07.2026: 1.587,40 € + 597,42 € + 2 × 332,83 € = **2.850,48 € monatlich** (bis 30.06.2026: 1.555,00 € + 585,23 € + 2 × 326,04 € = 2.792,31 €).
 
 **Pfändungsquote: Wie viel ist oberhalb des Freibetrags pfändbar?**
 
@@ -2882,13 +2881,13 @@ Oberhalb der Freigrenze ist nicht alles pfändbar — es gilt eine gestaffelte Q
 - 4 Unterhaltspflichten: 20 %
 - 5 und mehr: 10 %
 
-Ab einem bestimmten Einkommen (ca. 4.573 € bei 0 Unterhalt) greift zusätzlich die Obergrenze: Alles darüber ist vollständig pfändbar. Das verhindert, dass Top-Verdiener sich über die Staffelung schützen können.
+Ab einem bestimmten Einkommen greift zusätzlich die Vollpfändungsgrenze: Alles darüber ist vollständig pfändbar. Bis 30.06.2026 liegt sie für einen Alleinstehenden bei ca. 4.771 €, ab 01.07.2026 bei ca. 4.866 €. Das verhindert, dass Top-Verdiener sich über die Staffelung schützen können.
 
 **Das Pfändungsschutzkonto (P-Konto)**
 
 Wer ein normales Girokonto hat und eine Kontopfändung erhält, verliert meist den Zugriff auf sein gesamtes Guthaben. Die Lösung: das Pfändungsschutzkonto (P-Konto nach § 850k ZPO). Jeder Schuldner hat das Recht, sein Girokonto in ein P-Konto umzuwandeln — kostenlos und ohne Begründung.
 
-Auf einem P-Konto bleiben mindestens 1.555,99 € pro Monat automatisch geschützt. Höhere Freibeträge (z. B. durch Unterhaltspflichten, Kindergeld, Sozialleistungen) müssen mit einer P-Konto-Bescheinigung nachgewiesen werden. Diese erhalten Sie bei einer Schuldnerberatung, beim Arbeitgeber oder beim Jobcenter/Familienkasse.
+Auf einem P-Konto bleiben monatlich automatisch die Pfändungsfreigrenze geschützt — aktuell 1.555,00 €, ab 01.07.2026 dann 1.587,40 € (jeweils für Alleinstehende ohne Unterhaltspflichten). Höhere Freibeträge (z. B. durch Unterhaltspflichten, Kindergeld, Sozialleistungen) müssen mit einer P-Konto-Bescheinigung nachgewiesen werden. Diese erhalten Sie bei einer Schuldnerberatung, beim Arbeitgeber oder beim Jobcenter/Familienkasse.
 
 **Was ist pfändungsfrei?**
 
@@ -2914,15 +2913,15 @@ Die Bescheinigung ist bei der Bank einzureichen. Die Bank muss den erhöhten Fre
     faq: [
       {
         frage: 'Wie hoch ist die Pfändungsfreigrenze 2026?',
-        antwort: 'Der Grundfreibetrag für einen alleinstehenden Schuldner ohne Unterhaltspflichten beträgt aktuell 1.555,99 € monatlich (gültig ab 01.07.2025). Die nächste Anpassung erfolgt zum 01.07.2026 — dann steigen die Werte erfahrungsgemäß um 4–6 % an die Inflation.',
+        antwort: 'Der Grundfreibetrag für einen alleinstehenden Schuldner ohne Unterhaltspflichten beträgt bis 30.06.2026 monatlich 1.555,00 € (BGBl. 2025). Ab dem 01.07.2026 steigt er auf 1.587,40 € (BGBl. 2026 I Nr. 80 vom 26.03.2026) — die Anpassung ist bereits amtlich verkündet und gilt bis 30.06.2028.',
       },
       {
         frage: 'Wie wirken sich Unterhaltspflichten auf die Pfändungsfreigrenze aus?',
-        antwort: 'Für die 1. unterhaltsberechtigte Person erhöht sich der Freibetrag um 585,59 €, für jede weitere um 326,04 €. Zusätzlich sinkt die Pfändungsquote oberhalb des Freibetrags: 70 % (0 Unterhalt) → 50 % (1) → 40 % (2) → 30 % (3) → 20 % (4) → 10 % (5+).',
+        antwort: 'Bis 30.06.2026 erhöht sich der Freibetrag für die 1. unterhaltsberechtigte Person um 585,23 € und für jede weitere um 326,04 €. Ab 01.07.2026 sind es 597,42 € bzw. 332,83 €. Zusätzlich sinkt die Pfändungsquote oberhalb des Freibetrags: 70 % (0 Unterhalt) → 50 % (1) → 40 % (2) → 30 % (3) → 20 % (4) → 10 % (5+).',
       },
       {
         frage: 'Was ist ein P-Konto und wie schützt es mein Einkommen?',
-        antwort: 'Ein P-Konto (Pfändungsschutzkonto, § 850k ZPO) ist ein normales Girokonto, das durch Umwandlung den Pfändungsschutz automatisch aktiviert. Auf einem P-Konto bleiben monatlich mindestens 1.555,99 € geschützt — ohne Gerichtsverfahren. Jeder hat das Recht auf ein P-Konto, die Umwandlung ist kostenlos. Höhere Freibeträge brauchen eine P-Konto-Bescheinigung.',
+        antwort: 'Ein P-Konto (Pfändungsschutzkonto, § 850k ZPO) ist ein normales Girokonto, das durch Umwandlung den Pfändungsschutz automatisch aktiviert. Auf einem P-Konto bleiben monatlich der gesetzliche Grundfreibetrag geschützt — bis 30.06.2026 1.555,00 €, ab 01.07.2026 dann 1.587,40 €. Jeder hat das Recht auf ein P-Konto, die Umwandlung ist kostenlos. Höhere Freibeträge brauchen eine P-Konto-Bescheinigung.',
       },
       {
         frage: 'Wird Kindergeld bei der Pfändung berücksichtigt?',
@@ -2930,11 +2929,11 @@ Die Bescheinigung ist bei der Bank einzureichen. Die Bank muss den erhöhten Fre
       },
       {
         frage: 'Wann wird die Pfändungstabelle aktualisiert?',
-        antwort: 'Die Pfändungstabelle wird alle zwei Jahre zum 1. Juli angepasst (§ 850c Abs. 4 ZPO). Die aktuellen Werte gelten seit 01.07.2025, die nächste Anpassung erfolgt zum 01.07.2026. Der Gesetzgeber erhöht die Freibeträge an die Inflation — typischerweise um 4–6 %.',
+        antwort: 'Die Pfändungstabelle wird alle zwei Jahre zum 1. Juli angepasst (§ 850c Abs. 4 ZPO, gekoppelt an den Grundfreibetrag nach § 32a EStG). Die aktuellen Werte gelten seit 01.07.2025. Zum 01.07.2026 greift die nächste Anpassung (BGBl. 2026 I Nr. 80 vom 26.03.2026, Erhöhung um ca. 2,1 %), die bis 30.06.2028 gilt. Die übernächste Anpassung folgt zum 01.07.2028.',
       },
       {
-        frage: 'Was passiert bei Einkommen über 4.573 € monatlich?',
-        antwort: 'Ab einer Obergrenze von ca. 4.573 € (bei 0 Unterhaltspflichten) greift die Staffelung nicht mehr — der Betrag oberhalb dieser Grenze ist zu 100 % pfändbar. Die Obergrenze erhöht sich um die Unterhaltspauschalen. Das verhindert, dass Spitzenverdiener die Pfändungsquote nutzen, um große Beträge zu schützen.',
+        frage: 'Was passiert bei hohem Einkommen über der Vollpfändungsgrenze?',
+        antwort: 'Die Vollpfändungsgrenze liegt bis 30.06.2026 bei ca. 4.771 € monatlich (0 Unterhaltspflichten), ab 01.07.2026 bei ca. 4.866 €. Oberhalb dieser Grenze greift die Staffelung nicht mehr — der Betrag darüber ist zu 100 % pfändbar. Die Grenze erhöht sich um die Unterhaltspauschalen. Das verhindert, dass Spitzenverdiener die Pfändungsquote nutzen, um große Beträge zu schützen.',
       },
     ],
   },

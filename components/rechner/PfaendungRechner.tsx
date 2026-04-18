@@ -214,14 +214,14 @@ export default function PfaendungRechner() {
       {/* P-Konto-Tipp */}
       <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-xl p-4 mb-6">
         <p className="text-blue-800 dark:text-blue-300 text-sm">
-          <strong>💡 P-Konto nicht vergessen:</strong> Nur ein Pfändungsschutzkonto (P-Konto) schützt den pfändungsfreien Betrag automatisch. Der Basisfreibetrag beim P-Konto liegt 2025 bei 1.555,99 € monatlich. Höhere Freibeträge (bei Unterhaltspflichten, Kindergeld) müssen mit einer Bescheinigung nachgewiesen werden. Die Umwandlung eines Girokontos in ein P-Konto ist kostenlos.
+          <strong>💡 P-Konto nicht vergessen:</strong> Nur ein Pfändungsschutzkonto (P-Konto) schützt den pfändungsfreien Betrag automatisch. Der Basisfreibetrag beim P-Konto liegt bis 30.06.2026 bei 1.555,00 €, ab 01.07.2026 bei 1.587,40 € monatlich. Höhere Freibeträge (bei Unterhaltspflichten, Kindergeld) müssen mit einer Bescheinigung nachgewiesen werden. Die Umwandlung eines Girokontos in ein P-Konto ist kostenlos.
         </p>
       </div>
 
       {/* Hinweis */}
       <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-6">
         <p className="text-amber-800 dark:text-amber-300 text-xs">
-          <strong>⚠️ Hinweis:</strong> Werte der Pfändungstabelle gültig ab 01.07.2025 (§ 850c ZPO). Die nächste Anpassung erfolgt zum 01.07.2026. Diese Berechnung nutzt die pauschalen Pfändungsquoten — die offizielle Pfändungstabelle arbeitet mit 10-Euro-Stufen, kleine Abweichungen im Cent-Bereich sind möglich. Bei speziellen Einkünften (Urlaubs-/Weihnachtsgeld, Zulagen) gelten Zusatzregeln.
+          <strong>⚠️ Hinweis:</strong> Der Rechner nutzt die aktuell gültige Pfändungstabelle (§ 850c ZPO) und schaltet am 01.07.2026 automatisch auf die neuen Werte aus BGBl. 2026 I Nr. 80 um (Grundfreibetrag 1.587,40 €). Die Berechnung nutzt die pauschalen Pfändungsquoten — die offizielle Tabelle arbeitet mit 10-Euro-Stufen, kleine Abweichungen im Cent-Bereich sind möglich. Bei speziellen Einkünften (Urlaubs-/Weihnachtsgeld, Zulagen) gelten Zusatzregeln.
         </p>
       </div>
 
