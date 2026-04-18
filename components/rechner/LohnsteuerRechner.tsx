@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { berechneLohnsteuer, type Steuerklasse } from '@/lib/berechnungen/lohnsteuer';
-import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import { parseDeutscheZahl, clampInputValue } from '@/lib/zahlenformat';
 import { BUNDESLAENDER } from '@/lib/berechnungen/brutto-netto';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
@@ -179,7 +179,7 @@ export default function LohnsteuerRechner() {
           min={0}
           max={10}
           value={kinderUnter25}
-          onChange={e => setKinderUnter25(e.target.value)}
+          onChange={e => setKinderUnter25(clampInputValue(e.target.value, 0, 10))}
           className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"
         />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
