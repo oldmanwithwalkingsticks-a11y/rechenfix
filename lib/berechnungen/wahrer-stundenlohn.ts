@@ -1,3 +1,5 @@
+import { MINDESTLOHN } from './mindestlohn';
+
 export interface WahrerStundenlohnEingabe {
   bruttoMonatlich: number;
   arbeitsstundenWoche: number;
@@ -59,7 +61,6 @@ function schaetzeNetto(brutto: number): number {
 
 const ARBEITSTAGE_MONAT = 21.7; // Durchschnitt
 const WOCHEN_MONAT = 4.33;
-const MINDESTLOHN = 12.82; // 2025
 
 export function berechneWahrenStundenlohn(eingabe: WahrerStundenlohnEingabe): WahrerStundenlohnErgebnis {
   const nettoMonatlich = schaetzeNetto(eingabe.bruttoMonatlich);

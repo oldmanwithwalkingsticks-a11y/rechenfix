@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { berechneWahrenStundenlohn } from '@/lib/berechnungen/wahrer-stundenlohn';
+import { MINDESTLOHN } from '@/lib/berechnungen/mindestlohn';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 
@@ -203,7 +204,7 @@ export default function WahrerStundenlohnRechner() {
               ? 'bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-700/30'
               : 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-700/30'
           }`}>
-            <p className="font-semibold text-gray-800 dark:text-gray-200 mb-1">Vergleich mit Mindestlohn (12,82 €/h)</p>
+            <p className="font-semibold text-gray-800 dark:text-gray-200 mb-1">Vergleich mit Mindestlohn ({formatEuro(MINDESTLOHN)} €/h)</p>
             {ergebnis.uebermindestlohn > 0 ? (
               <p className="text-sm text-gray-700 dark:text-gray-300">
                 Ihr wahrer Stundenlohn liegt <strong>{formatEuro(ergebnis.uebermindestlohn)} €</strong> &uuml;ber dem Mindestlohn.

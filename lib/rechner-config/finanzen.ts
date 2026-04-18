@@ -453,9 +453,9 @@ Das Jahresgehalt ergibt sich durch Multiplikation des Monatsgehalts mit 12 — o
 
 **Mindestlohn 2026 in Deutschland**
 
-Der gesetzliche Mindestlohn in Deutschland beträgt seit dem 1. Januar 2025 12,82 Euro pro Stunde. Er gilt für nahezu alle Beschäftigten ab 18 Jahren. Ausnahmen gibt es nur für Auszubildende, Pflichtpraktikanten, freiwillige Praktika unter drei Monaten und ehrenamtliche Tätigkeiten.
+Der gesetzliche Mindestlohn in Deutschland beträgt seit dem 1. Januar 2026 13,90 Euro pro Stunde (vorher 12,82 € in 2025). Er gilt für nahezu alle Beschäftigten ab 18 Jahren. Ausnahmen gibt es nur für Auszubildende, Pflichtpraktikanten, freiwillige Praktika unter drei Monaten und ehrenamtliche Tätigkeiten.
 
-Bei einer 40-Stunden-Woche entspricht der Mindestlohn einem monatlichen Bruttogehalt von etwa 2.224 Euro (12,82 × 40 × 4,33). Das ergibt ein Jahresbrutto von ca. 26.690 Euro. Verschiedene Branchen haben eigene Tarifmindestlöhne, die über dem gesetzlichen Mindestlohn liegen — etwa in der Elektrobranche, im Baugewerbe oder in der Pflege.
+Bei einer 40-Stunden-Woche entspricht der Mindestlohn einem monatlichen Bruttogehalt von etwa 2.407 Euro (13,90 × 40 × 4,33). Das ergibt ein Jahresbrutto von ca. 28.891 Euro. Zum 1. Januar 2027 steigt der Mindestlohn laut Vierter Mindestlohnanpassungsverordnung weiter auf 14,60 €. Verschiedene Branchen haben eigene Tarifmindestlöhne, die über dem gesetzlichen Mindestlohn liegen — etwa in der Elektrobranche, im Baugewerbe oder in der Pflege.
 
 Unser Rechner vergleicht Ihren errechneten Stundenlohn automatisch mit dem aktuellen Mindestlohn und zeigt an, ob Ihr Verdienst darüber oder darunter liegt.
 
@@ -473,7 +473,7 @@ Beachten Sie, dass ein hoher Stundenlohn allein noch kein aussagekräftiger Verg
       },
       {
         frage: 'Wie hoch ist der Mindestlohn 2026?',
-        antwort: 'Der gesetzliche Mindestlohn in Deutschland beträgt 12,82 Euro pro Stunde (Stand 2025/2026). Bei einer 40-Stunden-Woche entspricht das einem Monatsbrutto von ca. 2.224 Euro bzw. einem Jahresbrutto von ca. 26.690 Euro.',
+        antwort: 'Der gesetzliche Mindestlohn in Deutschland beträgt seit dem 1. Januar 2026 13,90 Euro pro Stunde (vorher 12,82 € in 2025). Bei einer 40-Stunden-Woche entspricht das einem Monatsbrutto von ca. 2.407 Euro bzw. einem Jahresbrutto von ca. 28.891 Euro. Zum 1. Januar 2027 steigt er weiter auf 14,60 €.',
       },
       {
         frage: 'Was ist ein guter Stundenlohn in Deutschland?',
@@ -729,7 +729,7 @@ Laut einer Studie des Instituts für Arbeitsmarkt- und Berufsforschung (IAB) lei
 
 **Das Ergebnis ist oft erschreckend**
 
-Bei einem typischen Angestelltengehalt von 3.500 Euro brutto liegt der offizielle Netto-Stundenlohn bei rund 13 Euro. Der wahre Stundenlohn — unter Berücksichtigung von Pendelzeit, Fahrtkosten, Essen und Überstunden — fällt oft auf 8 bis 10 Euro. Das ist erstaunlich nah am Mindestlohn von 12,82 Euro brutto.
+Bei einem typischen Angestelltengehalt von 3.500 Euro brutto liegt der offizielle Netto-Stundenlohn bei rund 13 Euro. Der wahre Stundenlohn — unter Berücksichtigung von Pendelzeit, Fahrtkosten, Essen und Überstunden — fällt oft auf 8 bis 10 Euro. Das liegt bereits unter dem gesetzlichen Mindestlohn von 13,90 Euro brutto (2026).
 
 **Was können Sie tun?**
 
@@ -1428,7 +1428,7 @@ Das ErbStG unterscheidet drei **Steuerklassen**: Klasse I (enge Verwandte wie Eh
     beispiel: '603 € Minijob (gewerblich, mit RV-Pflicht) → AN-Netto 581,29 € (abzgl. 21,71 € RV-Eigenanteil) · AG-Gesamtkosten 793,55 € (+31,6 %) · bei Mindestlohn max. 10,8 Std./Woche.',
     erklaerung: `**Minijob-Grenze 2026: Wie viel darf ich verdienen?**
 
-Die Minijob-Grenze ist in Deutschland seit 2022 **dynamisch an den Mindestlohn gekoppelt**. Bei einem gesetzlichen Mindestlohn von 12,82 Euro pro Stunde (Stand 2026) ergibt sich eine monatliche Verdienstgrenze von rund **603 Euro**. Die genaue Berechnung: 12,82 € × 10 Wochenstunden × 4,33 Wochen/Monat ≈ 556 €, aufgerundet und gesetzlich definiert auf 603 €. Wer diese Grenze dauerhaft überschreitet, rutscht automatisch in den **Midijob-Übergangsbereich** (bis 2.000 € Monatsverdienst), in dem reduzierte Sozialabgaben für Arbeitnehmer gelten. Gelegentliches Überschreiten (höchstens zweimal pro Jahr durch unvorhergesehene Mehrarbeit) ist unschädlich. Wichtig: Die Grenze gilt pro Kalendermonat, aber als Gesamtgrenze im Jahr entspricht sie 7.236 Euro. Auch 13. und 14. Monatsgehälter, Urlaubsgeld und Weihnachtsgeld zählen zur Grenze — anteilig umgerechnet auf den Monatsdurchschnitt.
+Die Minijob-Grenze ist in Deutschland seit 2022 **dynamisch an den Mindestlohn gekoppelt**. Die gesetzliche Formel lautet: Mindestlohn × 130 / 3, gerundet auf volle Euro. Bei einem Mindestlohn von 13,90 Euro pro Stunde (seit 01.01.2026) ergibt sich eine monatliche Verdienstgrenze von **603 Euro** (Jahreswert: 7.236 €). Wer diese Grenze dauerhaft überschreitet, rutscht automatisch in den **Midijob-Übergangsbereich** (bis 2.000 € Monatsverdienst), in dem reduzierte Sozialabgaben für Arbeitnehmer gelten. Gelegentliches Überschreiten (höchstens zweimal pro Jahr durch unvorhergesehene Mehrarbeit) ist unschädlich. Auch 13. und 14. Monatsgehälter, Urlaubsgeld und Weihnachtsgeld zählen zur Grenze — anteilig umgerechnet auf den Monatsdurchschnitt. Zum 1. Januar 2027 steigt der Mindestlohn auf 14,60 € und damit die Minijob-Grenze voraussichtlich auf rund 633 €.
 
 **Abgaben: Was zahlt der Arbeitgeber, was der Arbeitnehmer?**
 
@@ -1663,14 +1663,14 @@ Ein GGF kann sein Einkommen aus der GmbH auf zwei Wegen ziehen: als **Gehalt** (
     kategorie: 'Finanzen',
     kategorieSlug: 'finanzen',
     metaTitle: 'Hochrechner — Stunden-, Monats- & Jahreslohn',
-    metaDescription: 'Hochrechner für Gehalt: Stundenlohn, Tageslohn, Monatslohn und Jahreslohn umrechnen ✓ Mindestlohn-Check 12,82 € ✓ Mit KI-Erklärung.',
+    metaDescription: 'Hochrechner für Gehalt: Stundenlohn, Tageslohn, Monatslohn und Jahreslohn umrechnen ✓ Mindestlohn-Check 13,90 € ✓ Mit KI-Erklärung.',
     keywords: ['hochrechner', 'gehalt hochrechnen', 'stundenlohn monatslohn umrechnen', 'jahreslohn berechnen', 'mindestlohn 2026', 'bruttogehalt hochrechnen'],
     icon: '📈',
     formel: 'Jahreslohn = Stundenlohn × Stunden/Woche × 52. Monatslohn = Jahreslohn / 12. Tageslohn = Jahreslohn / (Tage/Woche × 52).',
     beispiel: 'Beispiel: 20 €/h bei 40 Stunden/Woche → 20 × 40 × 52 = 41.600 € Jahresbrutto = 3.466,67 € Monatsbrutto = 160 € Tageslohn (bei 5 Arbeitstagen).',
     erklaerung: `**Was macht der Hochrechner?**
 
-Der Hochrechner rechnet einen beliebigen Gehaltswert in alle anderen Zeiträume um. Sie geben an, was Sie bereits wissen — z. B. Ihren Stundenlohn von 20 €, Ihr Monatsgehalt von 3.500 € oder Ihren Tagessatz als Freelancer — und erfahren sofort, wie viel das pro Stunde, pro Tag, pro Woche, pro Monat und pro Jahr ergibt. Der Rechner zeigt zusätzlich, ob Ihr Stundenlohn über oder unter dem gesetzlichen Mindestlohn 2026 (12,82 €) liegt.
+Der Hochrechner rechnet einen beliebigen Gehaltswert in alle anderen Zeiträume um. Sie geben an, was Sie bereits wissen — z. B. Ihren Stundenlohn von 20 €, Ihr Monatsgehalt von 3.500 € oder Ihren Tagessatz als Freelancer — und erfahren sofort, wie viel das pro Stunde, pro Tag, pro Woche, pro Monat und pro Jahr ergibt. Der Rechner zeigt zusätzlich, ob Ihr Stundenlohn über oder unter dem gesetzlichen Mindestlohn 2026 (13,90 €) liegt.
 
 **Warum Umrechnung zwischen Zeiträumen wichtig ist**
 
@@ -1691,9 +1691,9 @@ Umgekehrt können Sie aus dem Jahreslohn jeden anderen Zeitraum ableiten. Unser 
 
 Alle Ergebnisse sind Bruttowerte. Vom Bruttogehalt gehen Lohnsteuer, Solidaritätszuschlag (für hohe Einkommen), Kirchensteuer (bei Kirchenmitgliedschaft) und Sozialabgaben (Renten-, Kranken-, Pflege-, Arbeitslosenversicherung) ab. Der Nettoverdienst liegt je nach Steuerklasse bei etwa 60–75 % des Brutto. Für die exakte Nettoberechnung nutzen Sie bitte unseren Brutto-Netto-Rechner.
 
-**Mindestlohn 2026: 12,82 Euro**
+**Mindestlohn 2026: 13,90 Euro**
 
-Seit dem 1. Januar 2026 liegt der gesetzliche Mindestlohn in Deutschland bei **12,82 € pro Stunde** (2025: 12,41 €). Er gilt für nahezu alle Arbeitnehmerinnen und Arbeitnehmer, mit wenigen Ausnahmen (Langzeitarbeitslose in den ersten sechs Monaten, Azubis, Praktikanten unter bestimmten Bedingungen). Der Rechner prüft automatisch, ob Ihr errechneter Stundenlohn über oder unter dieser Grenze liegt, und zeigt den prozentualen Abstand an.
+Seit dem 1. Januar 2026 liegt der gesetzliche Mindestlohn in Deutschland bei **13,90 € pro Stunde** (2025: 12,82 €). Er gilt für nahezu alle Arbeitnehmerinnen und Arbeitnehmer, mit wenigen Ausnahmen (Langzeitarbeitslose in den ersten sechs Monaten, Azubis, Praktikanten unter bestimmten Bedingungen). Zum 1. Januar 2027 steigt der Mindestlohn laut Vierter Mindestlohnanpassungsverordnung weiter auf **14,60 €**. Der Rechner prüft automatisch, ob Ihr errechneter Stundenlohn über oder unter dieser Grenze liegt, und zeigt den prozentualen Abstand an.
 
 **Vollzeit, Teilzeit und verschiedene Arbeitsmodelle**
 
@@ -1713,7 +1713,7 @@ Auch Freelancer können den Hochrechner nutzen, um Ihren Tages- oder Stundensatz
       },
       {
         frage: 'Wie hoch ist der Mindestlohn 2026?',
-        antwort: 'Der gesetzliche Mindestlohn in Deutschland liegt seit 1. Januar 2026 bei 12,82 € pro Stunde. Der Rechner vergleicht Ihren Stundenlohn automatisch mit dieser Grenze.',
+        antwort: 'Der gesetzliche Mindestlohn in Deutschland liegt seit dem 1. Januar 2026 bei 13,90 € pro Stunde (vorher 12,82 € in 2025). Zum 1. Januar 2027 steigt er weiter auf 14,60 €. Der Rechner vergleicht Ihren Stundenlohn automatisch mit dieser Grenze.',
       },
       {
         frage: 'Warum hat ein Monat nicht 4 Wochen?',
@@ -2466,7 +2466,7 @@ Unser Nebenjob-Rechner zeigt Ihnen den Netto-Zuwachs für alle drei Varianten un
 
 **Variante 1: Minijob (bis 603 €/Monat)**
 
-Der Minijob ist die einfachste Form des Nebenverdiensts. Seit 2024 liegt die Grenze bei 603 € monatlich (7.236 € jährlich, gekoppelt an den Mindestlohn). Für Sie als Arbeitnehmer fallen keine Steuern und keine Sozialversicherungsbeiträge an — der Arbeitgeber zahlt pauschal 2 % Lohnsteuer und Sozialabgaben. Ihr Netto entspricht dem Brutto.
+Der Minijob ist die einfachste Form des Nebenverdiensts. Seit dem 1. Januar 2026 liegt die Grenze bei 603 € monatlich (7.236 € jährlich, dynamisch an den Mindestlohn von 13,90 € gekoppelt; vorher 556 € bei 12,82 €). Für Sie als Arbeitnehmer fallen keine Steuern und keine Sozialversicherungsbeiträge an — der Arbeitgeber zahlt pauschal 2 % Lohnsteuer und Sozialabgaben. Ihr Netto entspricht dem Brutto.
 
 Einzige Ausnahme: Die Rentenversicherung. Standardmäßig sind Minijobber rentenversicherungspflichtig (Eigenanteil 3,6 % des Verdienstes). Sie können sich davon befreien lassen — dann entfallen auch die minimalen Rentenansprüche aus dem Minijob.
 

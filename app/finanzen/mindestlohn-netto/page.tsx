@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { berechneBruttoNetto } from '@/lib/berechnungen/brutto-netto';
 import type { BruttoNettoErgebnis } from '@/lib/berechnungen/brutto-netto';
 import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from '@/lib/berechnungen/sv-parameter';
+import { MINDESTLOHN } from '@/lib/berechnungen/mindestlohn';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import ZurueckButton from '@/components/layout/ZurueckButton';
 import AdSlot from '@/components/ads/AdSlot';
@@ -9,7 +10,7 @@ import StructuredData from '@/components/seo/StructuredData';
 import { generateBreadcrumbSchema, generateFAQSchema } from '@/lib/seo';
 import type { Metadata } from 'next';
 
-const STUNDENLOHN = 12.82;
+const STUNDENLOHN = MINDESTLOHN;
 const STUNDEN_PRO_MONAT = 160;
 const BRUTTO = Math.round(STUNDENLOHN * STUNDEN_PRO_MONAT);
 
@@ -81,7 +82,7 @@ const faq = [
   },
   {
     frage: 'Wie hat sich der Mindestlohn in den letzten Jahren entwickelt?',
-    antwort: 'Der Mindestlohn wurde seit seiner Einführung 2015 (8,50 €) kontinuierlich angehoben: 2022 auf 12,00 €, Oktober 2022 auf 12,41 €, Januar 2024 auf 12,41 €, Januar 2025 auf 12,82 €. Für 2026 gilt weiterhin 12,82 € pro Stunde.',
+    antwort: 'Der Mindestlohn wurde seit seiner Einführung 2015 (8,50 €) kontinuierlich angehoben: 2022 auf 12,00 €, Oktober 2022 auf 12,00 €, Januar 2024 auf 12,41 €, Januar 2025 auf 12,82 €, Januar 2026 auf 13,90 €. Zum 1. Januar 2027 steigt er weiter auf 14,60 € pro Stunde.',
   },
 ];
 
@@ -186,7 +187,7 @@ export default function Page() {
             </h2>
             <div className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed space-y-4">
               <p>
-                Der <strong className="text-gray-800 dark:text-gray-100">gesetzliche Mindestlohn</strong> beträgt seit Januar 2025 in Deutschland <strong className="text-gray-800 dark:text-gray-100">{STUNDENLOHN.toLocaleString('de-DE')} Euro brutto pro Stunde</strong>. Dieser Wert gilt auch 2026 fort. Für Arbeitnehmerinnen und Arbeitnehmer in Vollzeit mit einer 40-Stunden-Woche ergibt sich bei durchschnittlich {STUNDEN_PRO_MONAT} Arbeitsstunden pro Monat ein <strong className="text-gray-800 dark:text-gray-100">monatliches Bruttogehalt von rund {BRUTTO.toLocaleString('de-DE')} Euro</strong>. Auf das Jahr gerechnet sind das etwa {(BRUTTO * 12).toLocaleString('de-DE')} Euro brutto.
+                Der <strong className="text-gray-800 dark:text-gray-100">gesetzliche Mindestlohn</strong> beträgt seit dem 1. Januar 2026 in Deutschland <strong className="text-gray-800 dark:text-gray-100">{STUNDENLOHN.toLocaleString('de-DE')} Euro brutto pro Stunde</strong> (vorher 12,82 € in 2025). Für Arbeitnehmerinnen und Arbeitnehmer in Vollzeit mit einer 40-Stunden-Woche ergibt sich bei durchschnittlich {STUNDEN_PRO_MONAT} Arbeitsstunden pro Monat ein <strong className="text-gray-800 dark:text-gray-100">monatliches Bruttogehalt von rund {BRUTTO.toLocaleString('de-DE')} Euro</strong>. Auf das Jahr gerechnet sind das etwa {(BRUTTO * 12).toLocaleString('de-DE')} Euro brutto.
               </p>
               <p>
                 Doch wie viel davon tatsächlich auf dem Konto ankommt, hängt von verschiedenen Faktoren ab. Die wichtigsten sind die <strong className="text-gray-800 dark:text-gray-100">Steuerklasse</strong>, der Familienstand und ob Kirchensteuer anfällt. In <strong className="text-gray-800 dark:text-gray-100">Steuerklasse 1</strong> — der häufigsten Klasse für ledige Arbeitnehmer — bleiben von {BRUTTO.toLocaleString('de-DE')} € brutto etwa <strong className="text-gray-800 dark:text-gray-100">{fmt(ergebnisse[0].ergebnis.nettoMonat)} € netto</strong> übrig. Das entspricht einem effektiven Netto-Stundenlohn von ca. {fmt(ergebnisse[0].ergebnis.nettoProStunde)} Euro.
@@ -201,7 +202,7 @@ export default function Page() {
                 <strong className="text-gray-800 dark:text-gray-100">Alleinerziehende in Steuerklasse 2</strong> profitieren vom Entlastungsbetrag und behalten ca. {fmt(ergebnisse[1].ergebnis.nettoMonat)} € netto. Am wenigsten bleibt in Steuerklasse 6, die für Zweit- und Nebenjobs gilt — hier entfallen sämtliche Freibeträge, sodass nur ca. {fmt(ergebnisse[5].ergebnis.nettoMonat)} € netto übrig bleiben.
               </p>
               <p>
-                Der Mindestlohn wurde 2015 mit 8,50 € eingeführt und seitdem mehrfach erhöht. Die bislang <strong className="text-gray-800 dark:text-gray-100">größte Anhebung</strong> erfolgte im Oktober 2022 auf 12,00 €, gefolgt von der Erhöhung auf 12,41 € (2024) und 12,82 € (2025). Die Mindestlohnkommission empfiehlt die Anpassung regelmäßig auf Basis der Tarifentwicklung.
+                Der Mindestlohn wurde 2015 mit 8,50 € eingeführt und seitdem mehrfach erhöht. Nach der Anhebung auf 12,41 € (2024) und 12,82 € (2025) folgte zum 1. Januar 2026 die bisher <strong className="text-gray-800 dark:text-gray-100">größte Einzelerhöhung</strong> auf {STUNDENLOHN.toLocaleString('de-DE')} €. Zum 1. Januar 2027 steigt er laut Vierter Mindestlohnanpassungsverordnung weiter auf 14,60 € pro Stunde.
               </p>
               <p>
                 <strong className="text-gray-800 dark:text-gray-100">Wichtig:</strong> Wer vom Mindestlohn lebt und ergänzende Sozialleistungen wie <strong className="text-gray-800 dark:text-gray-100">Wohngeld</strong> oder <strong className="text-gray-800 dark:text-gray-100">Kinderzuschlag</strong> beantragen möchte, sollte sein exaktes Nettogehalt kennen. Nutzen Sie dafür unseren <Link href="/finanzen/brutto-netto-rechner" className="text-primary-600 hover:text-primary-600 font-medium">Brutto-Netto-Rechner</Link> mit individuellen Einstellungen für Bundesland, Kirchensteuer und Krankenversicherung.

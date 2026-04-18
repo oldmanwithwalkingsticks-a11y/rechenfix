@@ -42,10 +42,13 @@ export interface MinijobErgebnis {
   rentenpunkteProJahrMitRv: number;
 }
 
-// Konstanten 2026
-export const MINIJOB_GRENZE = 603;        // €/Monat (geschätzt anhand Mindestlohn 12,82 × 10,8 × 4,33/Woche)
-export const MIDIJOB_OBERGRENZE = 2000;   // €/Monat
-export const MINDESTLOHN_2026 = 12.82;    // €/Stunde
+// Konstanten 2026 — Mindestlohn und Minijob-Grenze aus zentraler SSOT.
+// Re-Export von MINDESTLOHN_2026 hält bestehende Konsumenten kompatibel.
+import { MINDESTLOHN_2026, MINIJOB_GRENZE_MONAT } from './mindestlohn';
+export { MINDESTLOHN_2026 } from './mindestlohn';
+
+export const MINIJOB_GRENZE = MINIJOB_GRENZE_MONAT;   // €/Monat (Mindestlohn × 130 / 3 → 603 € in 2026)
+export const MIDIJOB_OBERGRENZE = 2000;               // €/Monat
 export const WOCHEN_PRO_MONAT = 4.33;
 // Durchschnittliches Bruttoentgelt (gesetzl. RV) 2026: ca. 45.358 €/Jahr → Rentenpunkte-Umrechnung
 

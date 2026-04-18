@@ -6,6 +6,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { MINDESTLOHN } from '@/lib/berechnungen/mindestlohn';
 
 type Eingabe = 'stunde' | 'tag' | 'woche' | 'monat' | 'jahr';
 
@@ -25,7 +26,6 @@ const LABEL: Record<Eingabe, string> = {
   jahr: 'Pro Jahr',
 };
 
-const MINDESTLOHN = 12.82;
 const fmtEur = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
 
 export default function HochRechner() {
@@ -132,7 +132,7 @@ export default function HochRechner() {
       </div>
 
       <div className={`border rounded-xl p-4 mb-4 text-sm ${ergebnis.stunde >= MINDESTLOHN ? 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-700 text-green-800 dark:text-green-200' : 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-700 text-red-800 dark:text-red-200'}`}>
-        <strong>Mindestlohn 2026:</strong> 12,82 €/h — Ihr Stundenlohn von {fmtEur(ergebnis.stunde)} liegt{' '}
+        <strong>Mindestlohn 2026:</strong> {fmtEur(MINDESTLOHN)}/h — Ihr Stundenlohn von {fmtEur(ergebnis.stunde)} liegt{' '}
         <strong>{ergebnis.abweichung >= 0 ? `${ergebnis.abweichung.toFixed(0)} % darüber` : `${Math.abs(ergebnis.abweichung).toFixed(0)} % darunter`}</strong>.
       </div>
 

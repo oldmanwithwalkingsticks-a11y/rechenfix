@@ -446,7 +446,7 @@ Bei den Unterhaltungsdiensten hat Netflix mit dem Premium-Abo (19,99 €) die h�
 
 **Arbeitsstunden zum Mindestlohn**
 
-Eine besonders anschauliche Perspektive: Wie viele Stunden müssten Sie zum gesetzlichen Mindestlohn (12,82 €/Stunde, Stand 2025) arbeiten, um Ihre Streaming-Kosten zu decken? Bei 60 Euro monatlich sind das bereits 56 Stunden reine Arbeitszeit pro Jahr — nur für Streaming.
+Eine besonders anschauliche Perspektive: Wie viele Stunden müssten Sie zum gesetzlichen Mindestlohn (13,90 €/Stunde, Stand 2026) arbeiten, um Ihre Streaming-Kosten zu decken? Bei 60 Euro monatlich sind das bereits rund 52 Stunden reine Arbeitszeit pro Jahr — nur für Streaming.
 
 **Spar-Strategien für Streaming**
 
@@ -472,7 +472,7 @@ Der Streaming-Kosten-Rechner hilft Ihnen, den Überblick zu behalten und bewusst
       },
       {
         frage: 'Sind die Preise im Rechner aktuell?',
-        antwort: 'Die Preise werden regelmäßig aktualisiert und entsprechen den aktuellen Standardpreisen der jeweiligen Anbieter für Deutschland (Stand 2025). Aktionspreise, Bundles und regionale Sonderangebote können abweichen.',
+        antwort: 'Die Preise werden regelmäßig aktualisiert und entsprechen den aktuellen Standardpreisen der jeweiligen Anbieter für Deutschland (Stand 2026). Aktionspreise, Bundles und regionale Sonderangebote können abweichen.',
       },
       {
         frage: 'Kann ich eigene Streaming-Dienste hinzufügen?',

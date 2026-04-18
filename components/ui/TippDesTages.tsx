@@ -2,6 +2,29 @@
 
 import Link from 'next/link';
 import { useMounted } from '@/lib/hooks/useMounted';
+import { MINDESTLOHN } from '@/lib/berechnungen/mindestlohn';
+import { berechneBruttoNetto } from '@/lib/berechnungen/brutto-netto';
+import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from '@/lib/berechnungen/sv-parameter';
+
+// Mindestlohn-Tipp: Brutto dynamisch aus MINDESTLOHN, Netto live aus zentraler Lib
+// (SK I, kinderlos, NRW, GKV mit Durchschnitts-Zusatzbeitrag, ohne Kirchensteuer).
+// So läuft der Tipp automatisch beim 01.01.2027-Wechsel auf 14,60 € mit.
+const mindestlohnBrutto = Math.round(MINDESTLOHN * 40 * 4.33);
+const mindestlohnNetto = Math.round(
+  berechneBruttoNetto({
+    bruttoMonat: mindestlohnBrutto,
+    steuerklasse: 1,
+    kirchensteuer: false,
+    kirchensteuersatz: 9,
+    kinderfreibetraege: 0,
+    bundesland: 'NW',
+    kvArt: 'gesetzlich',
+    kvZusatzbeitrag: KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT,
+    kvPrivatBeitrag: 0,
+    rvBefreit: false,
+    abrechnungszeitraum: 'monat',
+  }).nettoMonat,
+);
 
 const tipps = [
   {
@@ -30,7 +53,7 @@ const tipps = [
     linkText: 'Zum Rabattrechner →',
   },
   {
-    text: 'Mindestlohn 2026: 12,82 € pro Stunde ergeben bei Vollzeit ca. 2.051 € brutto — in Steuerklasse 1 bleiben rund 1.560 € netto.',
+    text: `Mindestlohn 2026: ${MINDESTLOHN.toLocaleString('de-DE', { minimumFractionDigits: 2 })} € pro Stunde ergeben bei Vollzeit ca. ${mindestlohnBrutto.toLocaleString('de-DE')} € brutto — in Steuerklasse 1 bleiben rund ${mindestlohnNetto.toLocaleString('de-DE')} € netto.`,
     link: '/finanzen/mindestlohn-netto',
     linkText: 'Mehr zum Mindestlohn →',
   },

@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useCallback } from 'react';
 import { BBG_KV_MONAT } from '@/lib/berechnungen/brutto-netto';
+import { MINDESTLOHN } from '@/lib/berechnungen/mindestlohn';
 
 interface SchnellCheckProps {
   brutto: number;
@@ -86,11 +87,12 @@ export default function SchnellCheck({
       });
     }
 
-    // Brutto unter Mindestlohn-Niveau (ca. 2.184€ bei 40h/Woche × 12,82€)
-    if (brutto > 0 && brutto < 2054) {
+    // Brutto unter Mindestlohn-Niveau (13,90 €/h × 160 h ≈ 2.224 €)
+    const mindestlohnVollzeit = MINDESTLOHN * 160;
+    if (brutto > 0 && brutto < mindestlohnVollzeit - 20) {
       tipps.push({
         id: 'mindestlohn',
-        text: 'Dieses Gehalt liegt unter dem gesetzlichen Mindestlohn (12,82 €/h bei Vollzeit). Prüfen Sie Ihren Arbeitsvertrag.',
+        text: `Dieses Gehalt liegt unter dem gesetzlichen Mindestlohn (${MINDESTLOHN.toLocaleString('de-DE', { minimumFractionDigits: 2 })} €/h bei Vollzeit). Prüfen Sie Ihren Arbeitsvertrag.`,
       });
     }
 

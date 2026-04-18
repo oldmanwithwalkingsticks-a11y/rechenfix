@@ -243,7 +243,7 @@ export default function StundenlohnRechner() {
                 </thead>
                 <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
                   {[
-                    ['Mindestlohn', '12,82 €'],
+                    ['Mindestlohn', `${MINDESTLOHN_2026.toLocaleString('de-DE', { minimumFractionDigits: 2 })} €`],
                     ['Einzelhandel', '14–18 €'],
                     ['Handwerk', '16–22 €'],
                     ['Büro / Verwaltung', '18–25 €'],

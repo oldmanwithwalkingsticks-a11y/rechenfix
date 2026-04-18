@@ -120,7 +120,10 @@ export interface StreamingErgebnis {
   ranking: AktivesAbo[];
 }
 
-const MINDESTLOHN_2025 = 12.82; // € pro Stunde (ab 2025)
+// Aktueller Mindestlohn aus zentraler SSOT — die Variable wurde bis
+// Prompt 88 als `MINDESTLOHN_2025` hartkodiert; semantisch ist sie immer
+// der *aktuelle* Mindestlohn (für die "Arbeitsstunden-Äquivalent"-Metrik).
+import { MINDESTLOHN } from './mindestlohn';
 
 export function berechneStreamingKosten(
   auswahl: Record<string, number>, // dienstId -> variantenIndex
@@ -146,7 +149,7 @@ export function berechneStreamingKosten(
   const jaehrlich = monatlich * 12;
   const fuenfJahre = jaehrlich * 5;
   const zehnJahre = jaehrlich * 10;
-  const arbeitsstundenMindestlohn = jaehrlich / MINDESTLOHN_2025;
+  const arbeitsstundenMindestlohn = jaehrlich / MINDESTLOHN;
 
   const ranking = [...abos].sort((a, b) => b.preis - a.preis);
 
