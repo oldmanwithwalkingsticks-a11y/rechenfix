@@ -150,6 +150,27 @@ Die drei **Tarif-Rechner** (Brutto-Netto, Lohnsteuer, Einkommensteuer) sind eine
 
 5. **Referenz für Finanz-Rechner**: BMF-Steuerrechner (`bmf-steuerrechner.de/ekst/`) ist die amtliche Quelle für Lohn- und Einkommensteuer-Berechnungen.
 
+## Unterhaltsrechner — Parameter 2026
+
+**Zentrale Konstanten in `lib/berechnungen/duesseldorfer-tabelle.ts`:**
+- Mindestbedarf 2026: 486 / 558 / 653 / 698 € (Altersstufen 0–5 / 6–11 / 12–17 / 18+)
+- Kindergeld 2026: **259 €** (hälftig **129,50 €** exakt — nicht vorher runden!)
+- Einkommensgruppen: 15 Stufen, Basis bis 2.100 € (100 %), Spitze ab 9.701 € (170 %)
+- Selbstbehalt Kindesunterhalt (unverändert 2025→2026): 1.450 € erwerbstätig / 1.200 € nicht erwerbstätig / 1.750 € nicht-privilegiert
+- Selbstbehalt Elternunterhalt NEU 2026 (BGH XII ZB 6/24): 2.650 € Kind / 2.120 € Ehegatte, 70 % des Mehreinkommens anrechnungsfrei
+- Rundung: Tabellenwert und Zahlbetrag via `Math.ceil` auf volle Euro (DT-Regel), Elternunterhalt via `Math.floor` (zugunsten des Pflichtigen)
+
+**Logik-Invarianten:**
+- Volljähriges Kind (18+): einheitlicher Tabellenwert 698 €, unabhängig von Alter 18 oder 30. Der Erstausbildungs-Status ändert NUR die Kindergeld-Berechtigung, nicht den Tabellenwert.
+- Höherstufung bei Kinderzahl ≠ 2: Opt-in, Default aus. +1 Gruppe bei 1 Kind, −1 Gruppe bei 3+ Kindern.
+- Testfälle dokumentiert in `scripts/verify-unterhalt-2026.ts` (T1–T7, alle cent-genau).
+
+**Rechtsquellen:**
+- DT 2026: OLG Düsseldorf, gültig ab 01.01.2026
+- Kindergeld: § 66 EStG
+- Mindestunterhalt: § 1612a BGB + Mindestunterhaltsverordnung
+- Elternunterhalt: BGH XII ZB 6/24 v. 23.10.2024
+
 ## Gesperrte Prompts (Stand April 2026)
 
 Folgende Prompts **dürfen nicht ausgeführt werden**, bis AdSense-Freigabe erfolgt:

@@ -1103,14 +1103,14 @@ Ein gesetzlicher Feiertag, der auf einen Samstag oder Sonntag fällt, wird in De
   {
     slug: 'unterhaltsrechner',
     titel: 'Unterhaltsrechner',
-    beschreibung: 'Kindesunterhalt berechnen nach Düsseldorfer Tabelle 2026 — mit Kindergeld-Verrechnung und Mangelfallberechnung.',
+    beschreibung: 'Kindesunterhalt nach Düsseldorfer Tabelle 2026 berechnen — mit Kindergeld-Verrechnung, Höherstufung und Elternunterhalt-Abschnitt.',
     kategorie: 'Arbeit & Recht',
     kategorieSlug: 'arbeit',
     metaTitle: 'Unterhaltsrechner 2026 — Düsseldorfer Tabelle',
-    metaDescription: 'Kindesunterhalt berechnen: Düsseldorfer Tabelle 2026 ✓ Kindergeld-Verrechnung ✓ Mangelfallprüfung ✓ KI-Erklärung.',
-    keywords: ['unterhaltsrechner', 'kindesunterhalt berechnen', 'düsseldorfer tabelle 2026', 'unterhalt 2026', 'mangelfall', 'selbstbehalt unterhalt', 'kindergeld verrechnung'],
+    metaDescription: 'Kindesunterhalt nach Düsseldorfer Tabelle 2026 berechnen — mit Kindergeld-Verrechnung, Höherstufung und Elternunterhalt-Abschnitt 2026.',
+    keywords: ['unterhaltsrechner', 'kindesunterhalt berechnen', 'düsseldorfer tabelle 2026', 'unterhalt 2026', 'elternunterhalt 2026', 'selbstbehalt unterhalt', 'kindergeld verrechnung', 'höherstufung unterhalt'],
     icon: '⚖️',
-    formel: 'Zahlbetrag = Tabellenbetrag (Düsseldorfer Tabelle) − Kindergeld-Abzug (hälftig 127,50 € / voll 255 €) | Mangelfall bei (Netto − Selbstbehalt 1.450 €) < Summe aller Zahlbeträge → Quotelung',
+    formel: 'Tabellenwert = Math.ceil(Mindestbedarf × Gruppenprozent) · Zahlbetrag = Math.ceil(Tabellenwert − Kindergeld-Abzug − anrechenbares Eigeneinkommen) · Elternunterhalt = floor((Netto − Selbstbehalt 2.650 €) × 30 %)',
     beispiel: 'Netto 3.000 €, 1 Kind (8 Jahre), Kindergeld hälftig: Einkommensgruppe 4 → Tabellenbetrag 638 € − 127,50 € Kindergeld = 511 € Zahlbetrag/Monat.',
     erklaerung: `**Kindesunterhalt 2026 — Düsseldorfer Tabelle erklärt**
 

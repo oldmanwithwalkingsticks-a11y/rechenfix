@@ -2857,7 +2857,7 @@ export const rechner: RechnerLight[] = [
   {
     "slug": "unterhaltsrechner",
     "titel": "Unterhaltsrechner",
-    "beschreibung": "Kindesunterhalt berechnen nach Düsseldorfer Tabelle 2026 — mit Kindergeld-Verrechnung und Mangelfallberechnung.",
+    "beschreibung": "Kindesunterhalt nach Düsseldorfer Tabelle 2026 berechnen — mit Kindergeld-Verrechnung, Höherstufung und Elternunterhalt-Abschnitt.",
     "kategorie": "Arbeit & Recht",
     "kategorieSlug": "arbeit",
     "keywords": [
@@ -2865,9 +2865,10 @@ export const rechner: RechnerLight[] = [
       "kindesunterhalt berechnen",
       "düsseldorfer tabelle 2026",
       "unterhalt 2026",
-      "mangelfall",
+      "elternunterhalt 2026",
       "selbstbehalt unterhalt",
-      "kindergeld verrechnung"
+      "kindergeld verrechnung",
+      "höherstufung unterhalt"
     ],
     "icon": "⚖️"
   },
