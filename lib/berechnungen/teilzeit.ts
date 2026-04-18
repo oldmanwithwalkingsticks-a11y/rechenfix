@@ -1,4 +1,5 @@
 import { berechneBruttoNetto, type BruttoNettoEingabe, type BruttoNettoErgebnis } from './brutto-netto';
+import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from './sv-parameter';
 
 export interface TeilzeitEingabe {
   vollzeitBrutto: number;
@@ -45,7 +46,7 @@ function makeBnEingabe(brutto: number, steuerklasse: TeilzeitEingabe['steuerklas
     kinderfreibetraege: 0,
     bundesland,
     kvArt: 'gesetzlich',
-    kvZusatzbeitrag: 2.9,
+    kvZusatzbeitrag: KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT,
     kvPrivatBeitrag: 0,
     rvBefreit: false,
     abrechnungszeitraum: 'monat',

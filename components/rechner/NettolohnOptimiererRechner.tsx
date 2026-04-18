@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { berechneBruttoNetto } from '@/lib/berechnungen/brutto-netto';
+import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from '@/lib/berechnungen/sv-parameter';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
@@ -39,7 +40,7 @@ export default function NettolohnOptimiererRechner() {
     kinderfreibetraege: 0,
     bundesland: 'NW',
     kvArt: 'gesetzlich' as const,
-    kvZusatzbeitrag: 2.9,
+    kvZusatzbeitrag: KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT,
     kvPrivatBeitrag: 0,
     rvBefreit: false,
     abrechnungszeitraum: 'monat' as const,

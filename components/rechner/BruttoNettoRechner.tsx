@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import { berechneBruttoNetto, BUNDESLAENDER } from '@/lib/berechnungen/brutto-netto';
 import type { BruttoNettoErgebnis } from '@/lib/berechnungen/brutto-netto';
+import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from '@/lib/berechnungen/sv-parameter';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import AiExplain from '@/components/rechner/AiExplain';
@@ -23,7 +24,7 @@ function berechneSchnell(brutto: number, sk: 1 | 3 | 5): BruttoNettoErgebnis {
     kinderfreibetraege: 0,
     bundesland: 'NW',
     kvArt: 'gesetzlich',
-    kvZusatzbeitrag: 2.9,
+    kvZusatzbeitrag: KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT,
     kvPrivatBeitrag: 0,
     rvBefreit: false,
     abrechnungszeitraum: 'monat',

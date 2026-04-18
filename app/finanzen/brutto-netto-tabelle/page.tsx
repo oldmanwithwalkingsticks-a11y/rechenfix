@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { berechneBruttoNetto } from '@/lib/berechnungen/brutto-netto';
+import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from '@/lib/berechnungen/sv-parameter';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import ZurueckButton from '@/components/layout/ZurueckButton';
 import AdSlot from '@/components/ads/AdSlot';
@@ -17,7 +18,7 @@ function calc(brutto: number, sk: 1 | 3 | 4) {
     kinderfreibetraege: 0,
     bundesland: 'NW',
     kvArt: 'gesetzlich',
-    kvZusatzbeitrag: 1.7,
+    kvZusatzbeitrag: KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT,
     kvPrivatBeitrag: 0,
     rvBefreit: false,
     abrechnungszeitraum: 'monat',
