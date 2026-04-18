@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useMounted } from '@/lib/hooks/useMounted';
 
 const tipps = [
   {
@@ -53,7 +54,11 @@ function getTippIndex(): number {
 }
 
 export default function TippDesTages() {
-  const tipp = tipps[getTippIndex()];
+  const mounted = useMounted();
+  // Erst nach Mount den datumsabhängigen Tipp anzeigen — sonst Hydration-Mismatch
+  // (SSG backt den Build-Tag-Tipp ins HTML, Client würde den heutigen auswählen).
+  // Index 0 als stabiler Fallback für den Server-Pass und den ersten Client-Render.
+  const tipp = mounted ? tipps[getTippIndex()] : tipps[0];
 
   return (
     <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-2xl p-5">
