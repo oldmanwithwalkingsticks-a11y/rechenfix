@@ -539,27 +539,35 @@ export default function RechnerSeite({ params }: Props) {
             </section>
           </LazySection>
 
-          {/* Verwandte Rechner */}
-          <section className="card p-6 md:p-8 mb-8 no-print">
-            <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Das könnte Sie auch interessieren</h2>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-              {verwandteRechner.map(r => (
-                <Link
-                  key={r.slug}
-                  href={`/${r.kategorieSlug}/${r.slug}`}
-                  className="flex flex-col items-center text-center gap-2 p-4 rounded-xl border border-gray-100 dark:border-gray-700 hover:border-primary-200 dark:hover:border-primary-500/30 hover:bg-primary-50/50 dark:hover:bg-primary-500/5 transition-all group"
-                >
-                  <span className="text-3xl">{r.icon}</span>
-                  <div className="min-w-0">
-                    <p className="font-medium text-gray-800 dark:text-gray-200 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors text-sm">
-                      {r.titel}
-                    </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">{r.kategorie}</p>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </section>
+          {/*
+            Verwandte Rechner — auf dem wissenschaftlichen Taschenrechner bewusst
+            ausgelassen. Utility-Tool wird oft mehrfach hintereinander genutzt,
+            Content-Crosslinks würden vom Fokus ablenken. Globaler Footer mit
+            Kategorien-Übersicht bleibt für SEO erhalten.
+            Entscheidung: Prompt 78z-C, April 2026.
+          */}
+          {config.slug !== 'wissenschaftlicher-taschenrechner' && (
+            <section className="card p-6 md:p-8 mb-8 no-print">
+              <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Das könnte Sie auch interessieren</h2>
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                {verwandteRechner.map(r => (
+                  <Link
+                    key={r.slug}
+                    href={`/${r.kategorieSlug}/${r.slug}`}
+                    className="flex flex-col items-center text-center gap-2 p-4 rounded-xl border border-gray-100 dark:border-gray-700 hover:border-primary-200 dark:hover:border-primary-500/30 hover:bg-primary-50/50 dark:hover:bg-primary-500/5 transition-all group"
+                  >
+                    <span className="text-3xl">{r.icon}</span>
+                    <div className="min-w-0">
+                      <p className="font-medium text-gray-800 dark:text-gray-200 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors text-sm">
+                        {r.titel}
+                      </p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">{r.kategorie}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* Ad Bottom */}
           <AdSlot typ="leaderboard" />

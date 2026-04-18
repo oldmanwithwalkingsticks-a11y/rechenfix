@@ -48,7 +48,7 @@ Laut `/barrierefreiheit` BfE-Seite:
 | 8 | `/auto/kfz-steuer-rechner` | Auto & Verkehr | 100 | 100 | 0 | 0 | 0 | 0 | ✅ | — |
 | 9 | `/wohnen/heizkosten-rechner` | Wohnen & Energie | 100 | 100 | 0 | 0 | 0 | 0 | ✅ | — |
 | 10 | `/wohnen/baufinanzierung-rechner` | Wohnen & Energie | 97 | 97 | 0 | 2 | 0 | 0 | ✅ | color-contrast |
-| 11 | `/mathe/wissenschaftlicher-taschenrechner` | Mathe & Schule | 100 | 100 | 0 | 0 | 0 | 0 | ❌ | Crosslinks fehlen (Custom-Layout?) |
+| 11 | `/mathe/wissenschaftlicher-taschenrechner` | Mathe & Schule | 100 | 100 | 0 | 0 | 0 | 0 | ⚙️ | Footer-Crosslinks ✓, Content-Box bewusst weggelassen (Utility-Tool, siehe 78z-C) |
 | 12 | `/mathe/bruchrechner` | Mathe & Schule | 100 | 100 | 0 | 0 | 0 | 0 | ✅ | — |
 | 13 | `/arbeit/unterhaltsrechner` | Arbeit & Recht | 100 | 100 | 0 | 0 | 0 | 0 | ✅ | — |
 | 14 | `/arbeit/arbeitszeitrechner` | Arbeit & Recht | 95 | 95 | 3 | 0 | 0 | 0 | ✅ | form labels (3 Critical) |
