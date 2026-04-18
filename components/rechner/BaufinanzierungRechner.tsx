@@ -58,12 +58,12 @@ export default function BaufinanzierungRechner() {
   // EK-Quote Bewertung
   const ekQuote = nKaufpreis > 0 ? (nEigenkapital / (nebenkostenEin ? nKaufpreis * 1.12 : nKaufpreis)) * 100 : 0;
   const ekBewertung = ekQuote < 10
-    ? { text: 'Sehr gering — hohe Zinsen wahrscheinlich', farbe: 'text-red-600 dark:text-red-400' }
+    ? { text: 'Sehr gering — hohe Zinsen wahrscheinlich', farbe: 'text-red-700 dark:text-red-300' }
     : ekQuote < 20
-    ? { text: 'Ausreichend', farbe: 'text-amber-600 dark:text-amber-400' }
+    ? { text: 'Ausreichend', farbe: 'text-amber-700 dark:text-amber-300' }
     : ekQuote < 30
-    ? { text: 'Gut', farbe: 'text-green-600 dark:text-green-400' }
-    : { text: 'Sehr gut', farbe: 'text-green-600 dark:text-green-400' };
+    ? { text: 'Gut', farbe: 'text-green-700 dark:text-green-300' }
+    : { text: 'Sehr gut', farbe: 'text-green-700 dark:text-green-300' };
 
   return (
     <div>

@@ -331,10 +331,10 @@ export default function BruttoNettoRechner() {
           {/* Prozentbalken */}
           <div className="mb-6">
             <div className="flex rounded-xl overflow-hidden h-8 text-xs font-medium">
-              <div className="bg-green-600 flex items-center justify-center text-white transition-all" style={{ width: `${100 - ergebnis.abzuegeProzent}%` }}>
+              <div className="bg-green-800 flex items-center justify-center text-white transition-all" style={{ width: `${100 - ergebnis.abzuegeProzent}%` }}>
                 {(100 - ergebnis.abzuegeProzent).toFixed(1)}% Netto
               </div>
-              <div className="bg-red-600 flex items-center justify-center text-white transition-all" style={{ width: `${ergebnis.bruttoMonat > 0 ? (ergebnis.steuernGesamt / ergebnis.bruttoMonat * 100) : 0}%` }}>
+              <div className="bg-red-700 flex items-center justify-center text-white transition-all" style={{ width: `${ergebnis.bruttoMonat > 0 ? (ergebnis.steuernGesamt / ergebnis.bruttoMonat * 100) : 0}%` }}>
                 Steuern
               </div>
               <div className="bg-amber-600 flex items-center justify-center text-gray-900 transition-all" style={{ width: `${ergebnis.bruttoMonat > 0 ? (ergebnis.sozialabgabenGesamt / ergebnis.bruttoMonat * 100) : 0}%` }}>
