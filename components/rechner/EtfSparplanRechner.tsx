@@ -175,11 +175,11 @@ export default function EtfSparplanRechner() {
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Davon Rendite / Gewinn</span>
-                <span className="font-semibold text-green-600 dark:text-green-400">+{fmt(ergebnis.renditeAnteil)} €</span>
+                <span className="font-semibold text-green-700 dark:text-green-300">+{fmt(ergebnis.renditeAnteil)} €</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Renditeanteil</span>
-                <span className="font-semibold text-green-600 dark:text-green-400">{fmtDez(ergebnis.renditeAnteilProzent)} %</span>
+                <span className="font-semibold text-green-700 dark:text-green-300">{fmtDez(ergebnis.renditeAnteilProzent)} %</span>
               </div>
               {steuern && ergebnis.steuer > 0 && (
                 <div className="flex justify-between text-sm pt-2 border-t border-gray-200 dark:border-gray-600">
@@ -288,7 +288,7 @@ export default function EtfSparplanRechner() {
                           <td className="py-2 px-3 text-right text-gray-800 dark:text-gray-200">{fmt(jd.sparrateMonat)} €</td>
                           <td className="py-2 px-3 text-right text-gray-800 dark:text-gray-200">{fmt(jd.einzahlungenKumuliert)} €</td>
                           <td className="py-2 px-3 text-right font-semibold text-gray-800 dark:text-gray-200">{fmt(jd.kapital)} €</td>
-                          <td className="py-2 pl-3 text-right font-semibold text-green-600 dark:text-green-400">+{fmt(jd.renditeKumuliert)} €</td>
+                          <td className="py-2 pl-3 text-right font-semibold text-green-700 dark:text-green-300">+{fmt(jd.renditeKumuliert)} €</td>
                         </tr>
                       ))}
                     </tbody>
