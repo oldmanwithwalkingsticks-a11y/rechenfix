@@ -183,8 +183,8 @@ export default function Prozentrechner() {
                     onClick={() => handleQuick(val)}
                     className={`min-h-[32px] px-3 rounded-lg text-xs font-medium transition-all ${
                       wert2 === val.toString()
-                        ? 'bg-accent-500 text-white'
-                        : 'bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600'
+                        ? 'bg-accent-700 text-white'
+                        : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600'
                     }`}
                   >
                     {val} %

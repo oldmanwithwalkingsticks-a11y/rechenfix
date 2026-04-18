@@ -297,7 +297,12 @@ export default function PaceRechner() {
           <div className="px-4 pt-4 pb-1">
             <h2 className="font-bold text-gray-700 dark:text-gray-200">Split-Tabelle (Zwischenzeiten bei konstanter Pace)</h2>
           </div>
-          <div className="overflow-x-auto max-h-96">
+          <div
+            className="overflow-x-auto max-h-96"
+            tabIndex={0}
+            role="region"
+            aria-label="Split-Tabelle, scrollbar mit Tab und Pfeiltasten"
+          >
             <table className="w-full text-sm">
               <thead className="sticky top-0 bg-gray-50 dark:bg-gray-700/90">
                 <tr className="text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

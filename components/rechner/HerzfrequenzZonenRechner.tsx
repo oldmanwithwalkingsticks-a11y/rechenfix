@@ -13,11 +13,11 @@ type Sportart = 'laufen' | 'radfahren' | 'schwimmen';
 const fmt = (n: number): string => Math.round(n).toString();
 
 const ZONEN = [
-  { nr: 1, name: 'Regeneration',        min: 0.50, max: 0.60, farbe: 'bg-green-300 dark:bg-green-500/60',  textFarbe: 'text-green-800 dark:text-green-200',   beschreibung: 'Sehr locker, Regeneration nach hartem Training' },
-  { nr: 2, name: 'Grundlagenausdauer',  min: 0.60, max: 0.70, farbe: 'bg-green-500 dark:bg-green-600',     textFarbe: 'text-green-900 dark:text-green-100',   beschreibung: 'Lockeres Tempo, Fettverbrennung, 80 % des Trainings' },
-  { nr: 3, name: 'Aerobe Zone',         min: 0.70, max: 0.80, farbe: 'bg-yellow-500 dark:bg-yellow-600',   textFarbe: 'text-yellow-900 dark:text-yellow-100', beschreibung: 'Wettkampftempo für lange Distanzen, noch kontrollierbar' },
-  { nr: 4, name: 'Anaerobe Schwelle',   min: 0.80, max: 0.90, farbe: 'bg-orange-500 dark:bg-orange-600',   textFarbe: 'text-orange-900 dark:text-orange-100', beschreibung: 'Hartes Training, Intervalle, Tempodauerläufe' },
-  { nr: 5, name: 'Maximum',             min: 0.90, max: 1.00, farbe: 'bg-red-600 dark:bg-red-700',         textFarbe: 'text-red-900 dark:text-red-100',       beschreibung: 'Sprint, Maximalintensität, nur kurze Zeit haltbar' },
+  { nr: 1, name: 'Regeneration',        min: 0.50, max: 0.60, farbe: 'bg-green-200 dark:bg-green-800',     textFarbe: 'text-green-950 dark:text-green-50',   beschreibung: 'Sehr locker, Regeneration nach hartem Training' },
+  { nr: 2, name: 'Grundlagenausdauer',  min: 0.60, max: 0.70, farbe: 'bg-green-500 dark:bg-green-800',     textFarbe: 'text-green-950 dark:text-white',      beschreibung: 'Lockeres Tempo, Fettverbrennung, 80 % des Trainings' },
+  { nr: 3, name: 'Aerobe Zone',         min: 0.70, max: 0.80, farbe: 'bg-yellow-400 dark:bg-yellow-800',   textFarbe: 'text-yellow-950 dark:text-white',     beschreibung: 'Wettkampftempo für lange Distanzen, noch kontrollierbar' },
+  { nr: 4, name: 'Anaerobe Schwelle',   min: 0.80, max: 0.90, farbe: 'bg-orange-500 dark:bg-orange-800',   textFarbe: 'text-orange-950 dark:text-white',     beschreibung: 'Hartes Training, Intervalle, Tempodauerläufe' },
+  { nr: 5, name: 'Maximum',             min: 0.90, max: 1.00, farbe: 'bg-red-700 dark:bg-red-900',         textFarbe: 'text-white dark:text-white',          beschreibung: 'Sprint, Maximalintensität, nur kurze Zeit haltbar' },
 ];
 
 export default function HerzfrequenzZonenRechner() {
@@ -172,11 +172,11 @@ export default function HerzfrequenzZonenRechner() {
               <div className={`flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 ${z.textFarbe}`}>
                 <div>
                   <p className="font-bold text-sm">Zone {z.nr}: {z.name}</p>
-                  <p className="text-xs opacity-90">{z.beschreibung}</p>
+                  <p className="text-xs">{z.beschreibung}</p>
                 </div>
                 <div className="text-right">
                   <p className="font-bold text-lg tabular-nums">{fmt(z.bpmMin)}–{fmt(z.bpmMax)} bpm</p>
-                  <p className="text-xs opacity-90">{Math.round(z.min * 100)}–{Math.round(z.max * 100)} % HFmax</p>
+                  <p className="text-xs">{Math.round(z.min * 100)}–{Math.round(z.max * 100)} % HFmax</p>
                 </div>
               </div>
             </div>
