@@ -1238,15 +1238,23 @@ Den BAföG-Antrag stellen Sie beim zuständigen Studenten- oder Schülerwerk (be
     beschreibung: 'Kindergeld 2026 berechnen und Günstigerprüfung: Kindergeld oder Kinderfreibetrag — was lohnt sich für Ihr Einkommen?',
     kategorie: 'Finanzen',
     kategorieSlug: 'finanzen',
-    metaTitle: 'Kindergeld 2026 — 255 € & Günstigerprüfung',
-    metaDescription: 'Kindergeld 2026: 255 € pro Kind ✓ Günstigerprüfung Kindergeld vs. Kinderfreibetrag ✓ ab wann lohnt sich der Freibetrag ✓ KI-Erklärung.',
-    keywords: ['kindergeld rechner', 'kindergeld 2026', 'kindergeld berechnen', 'kinderfreibetrag', 'günstigerprüfung', 'kindergeld höhe', '255 euro kindergeld', 'kinderfreibetrag 2026', 'kindergeld steuer', 'familienkasse'],
+    metaTitle: 'Kindergeld 2026 — 259 € & Günstigerprüfung',
+    metaDescription: 'Kindergeld 2026: 259 € pro Kind ✓ Günstigerprüfung Kindergeld vs. Kinderfreibetrag ✓ ab wann lohnt sich der Freibetrag ✓ KI-Erklärung.',
+    keywords: ['kindergeld rechner', 'kindergeld 2026', 'kindergeld berechnen', 'kinderfreibetrag', 'günstigerprüfung', 'kindergeld höhe', '259 euro kindergeld', 'kinderfreibetrag 2026', 'kindergeld steuer', 'familienkasse'],
     icon: '👶',
-    formel: 'Kindergeld 2026 = 255 € × Anzahl Kinder (pro Monat) | Günstigerprüfung: Steuerersparnis durch Kinderfreibetrag (7.806 € bzw. 15.612 € pro Kind) vs. Kindergeld/Jahr — das Finanzamt wählt automatisch die günstigere Variante.',
-    beispiel: 'Familie, zwei Kinder, 60.000 € Brutto, Zusammenveranlagung → Kindergeld: 510 €/Monat = 6.120 €/Jahr | Steuerersparnis Freibetrag: ca. 4.700 € → Kindergeld ist günstiger.',
-    erklaerung: `**Kindergeld 2026: 255 Euro pro Kind**
+    formel: 'Kindergeld 2026 = 259 € × Anzahl Kinder (pro Monat) | Günstigerprüfung: Steuerersparnis durch Kinderfreibetrag (7.806 € bzw. 15.612 € pro Kind) vs. Kindergeld/Jahr — das Finanzamt wählt automatisch die günstigere Variante.',
+    beispiel: 'Familie, zwei Kinder, 60.000 € Brutto, Zusammenveranlagung → Kindergeld: 518 €/Monat = 6.216 €/Jahr | Steuerersparnis Freibetrag: ca. 4.700 € → Kindergeld ist günstiger.',
+    erklaerung: `**Kindergeld 2026: 259 Euro pro Kind**
 
-Seit Januar 2025 beträgt das Kindergeld einheitlich **255 Euro pro Kind und Monat** — unabhängig von der Anzahl der Kinder. Die frühere Staffelung (mehr für das dritte und vierte Kind) wurde abgeschafft. Für 2026 bleibt dieser Betrag unverändert. Bei zwei Kindern erhalten Sie also 510 Euro monatlich, bei drei Kindern 765 Euro. Das Kindergeld wird von der Familienkasse der Bundesagentur für Arbeit automatisch überwiesen. Anspruch besteht grundsätzlich bis zum 18. Geburtstag des Kindes, bei Ausbildung, Studium oder FSJ bis zum 25. Lebensjahr. Berechnen Sie parallel Ihr [Nettoeinkommen](/finanzen/brutto-netto-rechner), um den finanziellen Spielraum der Familie zu sehen.
+Das Kindergeld wurde zum 1. Januar 2026 von 255 Euro auf einheitlich **259 Euro pro Kind und Monat** angehoben — unabhängig von der Anzahl der Kinder. Die frühere Staffelung nach Kinderzahl wurde bereits zum 1. Januar 2023 abgeschafft. Bei zwei Kindern erhalten Sie also 518 Euro monatlich, bei drei Kindern 777 Euro. Über das Jahr ergibt das **3.108 Euro pro Kind** (12 × 259 Euro). Die Anhebung um 4 Euro pro Kind ist Teil des Inflationsausgleichs nach § 66 Abs. 1 EStG. Das Kindergeld wird von der Familienkasse der Bundesagentur für Arbeit automatisch überwiesen. Anspruch besteht grundsätzlich bis zum 18. Geburtstag des Kindes, bei Ausbildung, Studium oder FSJ bis zum 25. Lebensjahr. Berechnen Sie parallel Ihr [Nettoeinkommen](/finanzen/brutto-netto-rechner), um den finanziellen Spielraum der Familie zu sehen.
+
+**Historische Entwicklung**
+
+| Zeitraum | Kindergeld pro Kind und Monat |
+|---|---|
+| 2023–2024 | 250 € (Einführung der Einheitsstaffel) |
+| 2025 | 255 € |
+| Ab 2026 | **259 €** |
 
 **Kindergeld oder Kinderfreibetrag: Die Günstigerprüfung**
 
@@ -1270,7 +1278,7 @@ Neben Kindergeld und Kinderfreibetrag gibt es weitere Hilfen: den **Kinderzuschl
     faq: [
       {
         frage: 'Wie hoch ist das Kindergeld 2026?',
-        antwort: 'Das Kindergeld beträgt 2026 einheitlich 255 € pro Kind und Monat — unabhängig von der Anzahl der Kinder. Bei zwei Kindern sind das 510 €, bei drei Kindern 765 € monatlich. Die frühere Staffelung nach Kinderzahl wurde abgeschafft.',
+        antwort: 'Das Kindergeld beträgt seit dem 1. Januar 2026 einheitlich 259 € pro Kind und Monat (vorher 255 € in 2025) — unabhängig von der Anzahl der Kinder. Bei zwei Kindern sind das 518 €, bei drei Kindern 777 € monatlich. Die frühere Staffelung nach Kinderzahl wurde abgeschafft.',
       },
       {
         frage: 'Kindergeld oder Kinderfreibetrag — was ist besser?',

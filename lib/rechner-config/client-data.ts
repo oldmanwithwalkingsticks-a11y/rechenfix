@@ -859,7 +859,7 @@ export const rechner: RechnerLight[] = [
       "kinderfreibetrag",
       "günstigerprüfung",
       "kindergeld höhe",
-      "255 euro kindergeld",
+      "259 euro kindergeld",
       "kinderfreibetrag 2026",
       "kindergeld steuer",
       "familienkasse"
