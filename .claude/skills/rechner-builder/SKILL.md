@@ -41,6 +41,8 @@ Category mapping:
 | Wohnen & Energie | `/wohnen` | Strom, Heizung, Miete, Nebenkosten, Immobilien |
 | Mathe & Schule | `/mathe` | Brüche, Einheiten, Noten, Durchschnitt |
 | Arbeit & Recht | `/arbeit` | Arbeitszeit, Urlaub, Überstunden, Pendlerpauschale |
+| Kochen & Ernährung | `/kochen` | Rezepte, Backen, Mengen-Umrechnung, Nährwerte |
+| Sport & Fitness | `/sport` | Herzfrequenz-Zonen, Pace, Trainingsplan |
 
 ### Step 2: Page Structure
 
@@ -70,6 +72,23 @@ Requirements for all input fields:
 - Add **labels** above every field (not placeholder-only)
 - For dropdowns: Use native `<select>` elements
 - For toggles: Use clear toggle buttons (not checkboxes)
+
+### Step 3a: Input Clamping (Pflicht)
+
+HTML-Attribute `min` und `max` sind **nicht** ausreichend — Browser clampt programmatisch gesetzte Werte nicht. Bei jedem `<input type="number">` muss der `onChange`-Handler den Wert aktiv klammern:
+
+```typescript
+const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const raw = parseFloat(e.target.value);
+  if (isNaN(raw)) { setValue(0); return; }
+  const clamped = Math.max(MIN, Math.min(MAX, raw));
+  setValue(clamped);
+};
+```
+
+Der Rechner muss als **controlled component** arbeiten — `value={state}` statt `defaultValue`, sonst bleibt der User-Eingabewert im Feld sichtbar, auch wenn der State bereits geklammert wurde.
+
+Grund: Smoketest v3 Check C3 fängt fehlendes Clamping ab (Lesson aus Prompt 84a, April 2026).
 
 ### Step 4: Live Calculation
 
@@ -224,6 +243,19 @@ After creating the calculator, verify:
 - [ ] **Guards G1–G9 geprüft** (siehe Abschnitt „Qualitäts-Guards" in diesem Skill)
 - [ ] "Fix erklärt"-Button erscheint erst, nachdem der `ergebnis`-State gefüllt ist — das ist **kein Bug**, sondern gewollt
 
+### Step 11a: Smoketest v3 Regression (Pflicht nach jedem Eingriff)
+
+Nach jeder Änderung an Rechnern oder zentralen Libs:
+
+1. `https://www.rechenfix.de` im Inkognito-Tab öffnen
+2. DevTools → Console → Smoketest-v3-Script einfügen
+3. `await runSmokeTestV3()` ausführen
+4. Erwartung: **178/178 Rechner-URLs grün, 0 Fails, 0 Errors**
+
+Für Tarif-Änderungen zusätzlich: **Testfall 2 Familie** cent-genau verifizieren (5.000 €/Monat, StKl III, 2 Kinder unter 25, keine KiSt → Netto **3.546,00 €/Monat**).
+
+Bekannter Noise: `adsbygoogle.js AdSense head tag doesn't support data-nscript attribute`-Warning. Ist kein Fail, kann ignoriert werden. Fix parkt bis AdSense-Freigabe (Prompt 85).
+
 ### Step 12: Register the Calculator
 
 After the page works:
@@ -363,3 +395,28 @@ For detailed templates per calculator type, see `references/templates.md`.
 - **Legacy `✓ Kostenlos. ✓ Mit KI-Erklärung.`-Suffix** in der Description
 - Eine eigene `page.tsx` für den neuen Rechner anlegen, statt die Config in `lib/rechner-config/<kategorie>.ts` zu pflegen
 - `openGraph.description` doppelt pflegen, statt sie aus `metaDescription` ableiten zu lassen
+- Clamping vergessen — `min="0" max="10"` im HTML reicht nicht, onChange-Handler muss aktiv klammern
+- Smoketest v3 nach Änderung nicht ausgeführt — auch bei scheinbar harmlosen Eingriffen
+- Tarif-Parameter hartkodiert statt über zentrale Lib (siehe Abschnitt "Referenz-Werkzeuge")
+- PV-Kinderabschlag mit Kinderfreibeträgen verwechselt — zwei getrennte Konzepte (§ 55 Abs. 3 SGB XI vs. § 32 EStG)
+- Controlled/uncontrolled Inputs vermischt — clamping funktioniert nur mit `value={state}`, nicht mit `defaultValue`
+
+## Referenz-Werkzeuge
+
+Für Finanz- und Steuer-Rechner immer gegen diese externen Referenzen prüfen:
+
+- **BMF-Steuerrechner** (amtlich): `https://www.bmf-steuerrechner.de/ekst/` — Einkommensteuer-Tarif, Lohnsteuer nach §39b PAP
+- **Finanz-Tools Formeln**: `https://www.finanz-tools.de/einkommensteuer/berechnung-formeln/2026` — Tarifzonen, Koeffizienten
+- **BMF Änderungen 2026**: `https://www.bundesfinanzministerium.de/Content/DE/Standardartikel/Themen/Steuern/das-aendert-sich-2026.html`
+- **Gesetze im Internet**: `https://www.gesetze-im-internet.de/estg/__32a.html` (ESt-Tarif), `https://www.sozialgesetzbuch-sgb.de/sgbxi/55.html` (PV-Beiträge)
+
+## Zentrale Libs (nicht duplizieren)
+
+Tarif- und SV-relevante Rechner dürfen Parameter nicht hartkodieren, sondern nutzen die zentralen Libs:
+
+- `lib/berechnungen/einkommensteuer.ts` — §32a EStG Tarifzonen, Grundfreibeträge, Soli-Freigrenzen
+- `lib/berechnungen/pflegeversicherung.ts` — PV-AN-Satz, Kinderlos-Zuschlag, Kinderabschlag nach § 55 Abs. 3 SGB XI (PUEG 2023)
+- `lib/berechnungen/lohnsteuer.ts` — Vorsorgepauschale §39b Abs. 4 EStG PAP-konform
+- `lib/berechnungen/brutto-netto.ts` — orchestriert Lohnsteuer + SV + PV zum Netto
+
+Die drei Tarif-Rechner (Brutto-Netto, Lohnsteuer, Einkommensteuer) sind eine **Rechner-Gruppe** mit geteilter Logik. Änderungen an zentralen Parametern wirken auf alle drei.
