@@ -217,7 +217,7 @@ export default function BaufinanzierungRechner() {
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Restschuld nach Zinsbindung ({zinsbindung} J.)</span>
-                <span className="font-semibold text-orange-600 dark:text-orange-400">{fmt(ergebnis.restschuldNachZinsbindung)} €</span>
+                <span className="font-semibold text-orange-700 dark:text-orange-300">{fmt(ergebnis.restschuldNachZinsbindung)} €</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Gezahlte Zinsen ({zinsbindung} J.)</span>
@@ -339,8 +339,8 @@ export default function BaufinanzierungRechner() {
                           {j.jahr === zinsbindung && <span className="ml-1 text-xs text-primary-600 dark:text-primary-400">(Ende Zinsbindung)</span>}
                         </td>
                         <td className="py-2 pr-3 text-gray-600 dark:text-gray-400 text-right tabular-nums">{fmt(j.rateGesamt)} €</td>
-                        <td className="py-2 pr-3 text-orange-600 dark:text-orange-400 text-right tabular-nums">{fmt(j.zinsanteil)} €</td>
-                        <td className="py-2 pr-3 text-green-600 dark:text-green-400 text-right tabular-nums">{fmt(j.tilgungsanteil)} €</td>
+                        <td className="py-2 pr-3 text-orange-700 dark:text-orange-300 text-right tabular-nums">{fmt(j.zinsanteil)} €</td>
+                        <td className="py-2 pr-3 text-green-700 dark:text-green-300 text-right tabular-nums">{fmt(j.tilgungsanteil)} €</td>
                         {nSondertilgung > 0 && (
                           <td className="py-2 pr-3 text-blue-600 dark:text-blue-400 text-right tabular-nums">{fmt(j.sondertilgung)} €</td>
                         )}
