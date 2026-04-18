@@ -10,6 +10,21 @@ const nextConfig = {
     minimumCacheTTL: 60 * 60 * 24 * 30, // 30 Tage
   },
 
+  // Permanente Redirects für konsolidierte/umbenannte Rechner
+  async redirects() {
+    return [
+      {
+        // Konsolidierung April 2026: Feature-Obermenge liegt in der Sport-Kategorie.
+        // Der frühere Gesundheits-Rechner war eine Teilmenge (nur Karvonen-Toggle,
+        // eine HFmax-Formel). Sport-Variante bietet Tanaka/Fox/Karvonen, HFmax-
+        // Override, Sportart-Kontext und Formel-Vergleichstabelle.
+        source: '/gesundheit/herzfrequenz-rechner',
+        destination: '/sport/herzfrequenz-zonen-rechner',
+        permanent: true,
+      },
+    ];
+  },
+
   // Headers für Caching und Security
   async headers() {
     return [

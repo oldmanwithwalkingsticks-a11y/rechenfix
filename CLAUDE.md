@@ -44,8 +44,8 @@
 
 ## Projekt-Status (Stand April 2026)
 
-- **170 eigenständige Rechner in 9 Kategorien** (Alltag 23, Finanzen 45, Gesundheit 18, Auto & Verkehr 10, Wohnen & Energie 25, Mathe & Schule 18, Arbeit & Recht 17, Kochen & Ernährung 12, Sport & Fitness 2)
-- **178 Rechner-URLs** in der Sitemap (inkl. Varianten-Seiten wie `/finanzen/2000-euro-brutto-netto` bis `/5000-euro-brutto-netto` und `/finanzen/brutto-netto-tabelle`)
+- **169 eigenständige Rechner in 9 Kategorien** (Alltag 23, Finanzen 45, Gesundheit 17, Auto & Verkehr 10, Wohnen & Energie 25, Mathe & Schule 18, Arbeit & Recht 17, Kochen & Ernährung 12, Sport & Fitness 2)
+- **177 Rechner-URLs** in der Sitemap (inkl. Varianten-Seiten wie `/finanzen/2000-euro-brutto-netto` bis `/5000-euro-brutto-netto` und `/finanzen/brutto-netto-tabelle`)
 - **Domain:** `https://www.rechenfix.de` (immer mit www, 308-Redirect von nicht-www)
 - **Stack:** Next.js 14 App Router, Tailwind, TypeScript, Vercel
 - **Smoketest v3.1** mit 9 Checks (C1–C9) als Regressions-Sweep über alle Rechner-URLs, Pflicht nach jeder Änderung

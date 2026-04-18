@@ -171,7 +171,7 @@ export default function BlutdruckRechner() {
 
           <CrossLink href="/gesundheit/bmi-rechner" emoji="❤️" text="BMI berechnen" />
           <CrossLink href="/gesundheit/kalorienrechner" emoji="🔥" text="Kalorienbedarf berechnen" />
-          <CrossLink href="/gesundheit/herzfrequenz-rechner" emoji="💓" text="Herzfrequenz-Zonen berechnen" />
+          <CrossLink href="/sport/herzfrequenz-zonen-rechner" emoji="💓" text="Herzfrequenz-Zonen berechnen" />
 
           <ErgebnisAktionen
             ergebnisText={`Blutdruck: ${ergebnis.systolisch}/${ergebnis.diastolisch} mmHg — ${ergebnis.klassifikation.name}`}

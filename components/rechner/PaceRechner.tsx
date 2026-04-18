@@ -361,7 +361,7 @@ export default function PaceRechner() {
 
       <CrossLink href="/sport/herzfrequenz-zonen-rechner" emoji="❤️" text="Herzfrequenz-Zonen berechnen" />
       <CrossLink href="/gesundheit/kalorienrechner" emoji="🔥" text="Kalorienverbrauch berechnen" />
-      <CrossLink href="/gesundheit/herzfrequenz-rechner" emoji="💓" text="Maximale Herzfrequenz" />
+      <CrossLink href="/gesundheit/bmi-rechner" emoji="⚖️" text="BMI berechnen" />
 
       <ErgebnisAktionen
         ergebnisText={`Pace-Rechner: ${fmtZahl(ergebnis.finalDistanz, 2)} km in ${zeitLabel} | Pace ${paceLabel} min/km (${paceLabelMi} min/mi) | ${fmtZahl(ergebnis.kmh, 2)} km/h | Leistung: ${ergebnis.stufe}`}

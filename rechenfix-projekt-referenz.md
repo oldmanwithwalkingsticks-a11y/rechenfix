@@ -4,7 +4,7 @@ Stand: April 2026
 
 ## Was ist rechenfix.de?
 
-Rechenfix.de ist ein deutschsprachiges Online-Rechner-Portal mit aktuell **170 kostenlosen Rechnern** in 9 Kategorien. Slogan: "Fix gerechnet!". Alleinstellungsmerkmal gegenüber Konkurrenz: **KI-Erklärungen** ("Fix erklärt") via Anthropic Claude API — kein anderer deutscher Rechner-Anbieter hat das. Alle Berechnungen erfolgen live im Browser ohne Submit-Button. WCAG 2.1 AA konform (Lighthouse ≥97).
+Rechenfix.de ist ein deutschsprachiges Online-Rechner-Portal mit aktuell **169 kostenlosen Rechnern** in 9 Kategorien. Slogan: "Fix gerechnet!". Alleinstellungsmerkmal gegenüber Konkurrenz: **KI-Erklärungen** ("Fix erklärt") via Anthropic Claude API — kein anderer deutscher Rechner-Anbieter hat das. Alle Berechnungen erfolgen live im Browser ohne Submit-Button. WCAG 2.1 AA konform (Lighthouse ≥97).
 
 - **URL:** https://www.rechenfix.de (IMMER mit www!)
 - **Hosting:** Vercel
@@ -21,22 +21,22 @@ Rechenfix.de ist ein deutschsprachiges Online-Rechner-Portal mit aktuell **170 k
 
 ## Rechner-Inventar (Stand April 2026)
 
-**170 eigenständige Rechner in 9 Kategorien:**
+**169 eigenständige Rechner in 9 Kategorien:**
 
 | Kategorie | Slug | Anzahl |
 |---|---|---|
 | Alltag | `/alltag` | 23 |
 | Finanzen | `/finanzen` | 45 |
-| Gesundheit | `/gesundheit` | 18 |
+| Gesundheit | `/gesundheit` | 17 |
 | Auto & Verkehr | `/auto` | 10 |
 | Wohnen & Energie | `/wohnen` | 25 |
 | Mathe & Schule | `/mathe` | 18 |
 | Arbeit & Recht | `/arbeit` | 17 |
 | Kochen & Ernährung | `/kochen` | 12 |
 | Sport & Fitness | `/sport` | 2 |
-| **Summe** | | **170** |
+| **Summe** | | **169** |
 
-**Sitemap: 178 Rechner-URLs** — Differenz zu 170 erklärt sich durch Varianten-/Tabellen-Seiten unter `/finanzen/` (z.B. `2000-euro-brutto-netto` bis `5000-euro-brutto-netto`, `brutto-netto-tabelle`). Die dynamische Route `app/[kategorie]/[rechner]/page.tsx` rendert alle 178 URLs; Metadaten stehen in `lib/rechner-config/<kategorie>.ts`.
+**Sitemap: 177 Rechner-URLs** — Differenz zu 169 erklärt sich durch Varianten-/Tabellen-Seiten unter `/finanzen/` (z.B. `2000-euro-brutto-netto` bis `5000-euro-brutto-netto`, `brutto-netto-tabelle`). Die dynamische Route `app/[kategorie]/[rechner]/page.tsx` rendert alle 177 URLs; Metadaten stehen in `lib/rechner-config/<kategorie>.ts`. Die URL `/gesundheit/herzfrequenz-rechner` wurde im April 2026 per 301-Redirect auf `/sport/herzfrequenz-zonen-rechner` konsolidiert (Feature-Obermenge).
 
 ## Sprint-Historie
 

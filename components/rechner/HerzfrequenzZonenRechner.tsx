@@ -241,7 +241,7 @@ export default function HerzfrequenzZonenRechner() {
       </div>
 
       <CrossLink href="/sport/pace-rechner" emoji="🏃" text="Pace beim Laufen berechnen" />
-      <CrossLink href="/gesundheit/herzfrequenz-rechner" emoji="💓" text="Herzfrequenz-Rechner (Gesundheit)" />
+      <CrossLink href="/gesundheit/blutdruck-rechner" emoji="🩺" text="Blutdruck einordnen" />
       <CrossLink href="/gesundheit/kalorienrechner" emoji="🔥" text="Kalorienverbrauch berechnen" />
       <CrossLink href="/gesundheit/bmi-rechner" emoji="⚖️" text="BMI berechnen" />
 

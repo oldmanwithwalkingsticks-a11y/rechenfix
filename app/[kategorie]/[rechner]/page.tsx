@@ -123,7 +123,6 @@ import NettolohnOptimiererRechner from '@/components/rechner/NettolohnOptimierer
 import MietpreisbremseRechner from '@/components/rechner/MietpreisbremseRechner';
 import KapitalertragsteuerRechner from '@/components/rechner/KapitalertragsteuerRechner';
 import SchuhgroessenRechner from '@/components/rechner/SchuhgroessenRechner';
-import HerzfrequenzRechner from '@/components/rechner/HerzfrequenzRechner';
 import ReichweitenRechner from '@/components/rechner/ReichweitenRechner';
 import PoolkostenRechner from '@/components/rechner/PoolkostenRechner';
 import PythagorasRechner from '@/components/rechner/PythagorasRechner';
@@ -313,7 +312,6 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'mietpreisbremse-rechner': MietpreisbremseRechner,
   'kapitalertragsteuer-rechner': KapitalertragsteuerRechner,
   'schuhgroessen-rechner': SchuhgroessenRechner,
-  'herzfrequenz-rechner': HerzfrequenzRechner,
   'reichweiten-rechner': ReichweitenRechner,
   'poolkosten-rechner': PoolkostenRechner,
   'pythagoras-rechner': PythagorasRechner,
