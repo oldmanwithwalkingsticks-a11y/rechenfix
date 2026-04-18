@@ -39,6 +39,7 @@ export default function LohnsteuerRechner() {
   const [bundesland, setBundesland] = useState('BW');
   const [kirchensteuer, setKirchensteuer] = useState(false);
   const [kinder, setKinder] = useState('0');
+  const [kinderUnter25, setKinderUnter25] = useState('0');
   const [jahresfreibetrag, setJahresfreibetrag] = useState('0');
   const [zeitraum, setZeitraum] = useState<'monat' | 'jahr'>('monat');
 
@@ -54,10 +55,11 @@ export default function LohnsteuerRechner() {
       kirchensteuer,
       kirchensteuersatz,
       kinderfreibetraege: parseFloat(kinder) || 0,
+      kinderUnter25: Math.max(0, Math.min(10, parseInt(kinderUnter25, 10) || 0)),
       jahresfreibetrag: parseDeutscheZahl(jahresfreibetrag),
       zeitraum,
     }),
-    [brutto, steuerklasse, kirchensteuer, kirchensteuersatz, kinder, jahresfreibetrag, zeitraum],
+    [brutto, steuerklasse, kirchensteuer, kirchensteuersatz, kinder, kinderUnter25, jahresfreibetrag, zeitraum],
   );
 
   return (
@@ -158,8 +160,30 @@ export default function LohnsteuerRechner() {
             <option key={o.value} value={o.value}>{o.label}</option>
           ))}
         </select>
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-          Kinderfreibeträge mindern die Pflegeversicherung. Bei Lohnsteuer greifen sie erst bei der Einkommensteuer-Günstigerprüfung.
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+          Kinderfreibeträge (0 / 0,5 / 1 / 1,5 / 2 …) sind bei der Lohnsteuer nur für die Soli-Bemessung relevant. Für die steuerliche Entlastung entscheidet die Günstigerprüfung (Kindergeld vs. Freibetrag) erst in der Einkommensteuer-Veranlagung.
+        </p>
+      </div>
+
+      {/* === 5b: Kinder unter 25 (PV-Kinderabschlag) === */}
+      <div className="mb-6">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+          <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">5b</span>
+          Kinder unter 25 Jahren
+        </h2>
+        <label htmlFor="lst-kinder-unter-25" className="sr-only">Kinder unter 25 Jahren</label>
+        <input
+          id="lst-kinder-unter-25"
+          type="number"
+          inputMode="numeric"
+          min={0}
+          max={10}
+          value={kinderUnter25}
+          onChange={e => setKinderUnter25(e.target.value)}
+          className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"
+        />
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+          Für den Pflegeversicherungs-Beitragsabschlag nach § 55 Abs. 3 SGB XI. Zählt alle Kinder unter 25 Jahren — unabhängig von den steuerlichen Kinderfreibeträgen. Ab dem 2. bis 5. Kind wird der PV-Beitrag um 0,25 %-Punkte je Kind reduziert.
         </p>
       </div>
 

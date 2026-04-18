@@ -8,7 +8,13 @@ export interface LohnsteuerEingabe {
   steuerklasse: Steuerklasse;
   kirchensteuer: boolean;
   kirchensteuersatz: 8 | 9;
-  kinderfreibetraege: number; // 0, 0.5, 1, 1.5, 2, 2.5, 3
+  kinderfreibetraege: number; // 0, 0.5, 1, 1.5, 2, 2.5, 3 — nur Soli/KiSt-relevant
+  /**
+   * Anzahl berücksichtigungsfähiger Kinder unter 25 Jahren (§ 55 Abs. 3 SGB XI).
+   * Beeinflusst die Vorsorgepauschale über den PV-AN-Satz und damit die Lohnsteuer.
+   * 0 = Kinderloszuschlag (sofern Alter > 23), 2-5 = Kinderabschlag.
+   */
+  kinderUnter25?: number;
   jahresfreibetrag: number;   // eingetragener Freibetrag (z.B. Werbungskosten)
   zeitraum: 'monat' | 'jahr';
 }
@@ -193,14 +199,18 @@ export function berechneLohnsteuer(e: LohnsteuerEingabe): LohnsteuerErgebnis {
   const bruttoJahr = e.zeitraum === 'monat' ? e.brutto * 12 : e.brutto;
   const bruttoMonat = bruttoJahr / 12;
 
-  const lstJahr = berechneLohnsteuerJahr(bruttoJahr, e.steuerklasse, e.jahresfreibetrag);
+  // Vorsorgepauschale braucht die Anzahl Kinder unter 25 für den PV-Staffel-Satz
+  // (§ 55 Abs. 3 SGB XI). Ohne Angabe: kinderlos (Default im Helper).
+  const vorsorge: VorsorgeParams = { kinderUnter25: e.kinderUnter25 ?? 0 };
+
+  const lstJahr = berechneLohnsteuerJahr(bruttoJahr, e.steuerklasse, e.jahresfreibetrag, vorsorge);
   const soliJahr = berechneSoliJahr(lstJahr, e.steuerklasse);
   const kistJahr = berechneKiStJahr(lstJahr, e.kirchensteuer, e.kirchensteuersatz);
 
   // Vergleich aller Steuerklassen
   const skListe: Steuerklasse[] = [1, 2, 3, 4, 5, 6];
   const vergleichsTabelle = skListe.map(sk => {
-    const lst = berechneLohnsteuerJahr(bruttoJahr, sk, e.jahresfreibetrag);
+    const lst = berechneLohnsteuerJahr(bruttoJahr, sk, e.jahresfreibetrag, vorsorge);
     const soli = berechneSoliJahr(lst, sk);
     const kist = berechneKiStJahr(lst, e.kirchensteuer, e.kirchensteuersatz);
     return {

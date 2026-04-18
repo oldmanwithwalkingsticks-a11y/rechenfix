@@ -21,6 +21,9 @@ export default function EinkommensteuerRechner() {
   const [jahr, setJahr] = useState<Steuerjahr>(2026);
   const [kirchensteuer, setKirchensteuer] = useState(false);
   const [bundesland, setBundesland] = useState('BW');
+  // Informativ: wird in der Einkommensteuer-Veranlagung nicht direkt verrechnet,
+  // da das zvE bereits nach Werbungskosten/Sonderausgaben/Vorsorgepauschale übergeben wird.
+  const [kinderUnter25, setKinderUnter25] = useState('0');
 
   const kirchensteuersatz = useMemo(() => {
     const bl = BUNDESLAENDER.find(b => b.kuerzel === bundesland);
@@ -93,10 +96,32 @@ export default function EinkommensteuerRechner() {
           onChange={e => setJahr(Number(e.target.value) as Steuerjahr)}
           className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"
         >
-          <option value={2026}>2026 (Grundfreibetrag 12.096 €)</option>
+          <option value={2026}>2026 (Grundfreibetrag 12.348 €)</option>
           <option value={2025}>2025 (Grundfreibetrag 12.096 €)</option>
           <option value={2024}>2024 (Grundfreibetrag 11.604 €)</option>
         </select>
+      </div>
+
+      {/* === 3b: Kinder unter 25 (informativ, für PV-Abzug im Lohnsteuer- bzw. Brutto-Netto-Rechner) === */}
+      <div className="mb-6">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+          <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3b</span>
+          Kinder unter 25 Jahren
+        </h2>
+        <label htmlFor="est-kinder-unter-25" className="sr-only">Kinder unter 25 Jahren</label>
+        <input
+          id="est-kinder-unter-25"
+          type="number"
+          inputMode="numeric"
+          min={0}
+          max={10}
+          value={kinderUnter25}
+          onChange={e => setKinderUnter25(e.target.value)}
+          className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"
+        />
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+          Für den Pflegeversicherungs-Beitragsabschlag nach § 55 Abs. 3 SGB XI. Zählt alle Kinder unter 25 Jahren — unabhängig von den steuerlichen Kinderfreibeträgen. Ab dem 2. bis 5. Kind wird der PV-Beitrag um 0,25 %-Punkte je Kind reduziert. In der Einkommensteuer-Veranlagung selbst wirkt sich dieser Wert nicht auf die hier berechnete Steuer aus — er ist für den Brutto-Netto- und Lohnsteuer-Rechner relevant.
+        </p>
       </div>
 
       {/* === 4: Kirchensteuer === */}
