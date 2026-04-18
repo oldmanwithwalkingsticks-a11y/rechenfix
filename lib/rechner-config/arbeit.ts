@@ -1172,7 +1172,7 @@ Das Arbeitslosengeld I (ALG I) ist eine Versicherungsleistung aus der Arbeitslos
 
 **So wird das Leistungsentgelt berechnet**
 
-Vom Bruttoentgelt (max. bis zur Beitragsbemessungsgrenze der Rentenversicherung, 2026 ca. 7.550 €/Monat) werden pauschal abgezogen: **Lohnsteuer nach Steuerklasse**, **Solidaritätszuschlag**, **Sozialversicherungspauschale von 21 %** sowie ggf. **Kirchensteuer**. Das verbleibende tägliche Leistungsentgelt wird mit dem Leistungssatz multipliziert: **60 %** ohne Kind, **67 %** mit mindestens einem kindergeldberechtigten Kind. Daraus ergibt sich der monatliche ALG-Betrag (Tagesatz × 30).
+Vom Bruttoentgelt (max. bis zur Beitragsbemessungsgrenze der Rentenversicherung, 2026 einheitlich 8.450 €/Monat — seit 2025 keine West/Ost-Trennung mehr) werden pauschal abgezogen: **Lohnsteuer nach Steuerklasse**, **Solidaritätszuschlag**, **Sozialversicherungspauschale von 21 %** sowie ggf. **Kirchensteuer**. Das verbleibende tägliche Leistungsentgelt wird mit dem Leistungssatz multipliziert: **60 %** ohne Kind, **67 %** mit mindestens einem kindergeldberechtigten Kind. Daraus ergibt sich der monatliche ALG-Betrag (Tagesatz × 30).
 
 **Bezugsdauer nach Alter und Beschäftigung**
 

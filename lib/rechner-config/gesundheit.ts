@@ -95,7 +95,7 @@ Der Raucher-Rechner macht die wahren Kosten des Rauchens sichtbar. Während eine
 
 **Was kostet Rauchen in Deutschland?**
 
-Der durchschnittliche Zigarettenpreis in Deutschland liegt 2025 bei rund 8,50 bis 9,50 Euro pro Packung (20 Stück). Wer eine Schachtel am Tag raucht, gibt damit über 3.000 Euro pro Jahr aus. Bei einer halben Packung (10 Zigaretten) sind es immer noch rund 1.500 Euro jährlich. Über ein Raucherleben von 20 bis 30 Jahren kommen so 30.000 bis 90.000 Euro zusammen.
+Der durchschnittliche Zigarettenpreis in Deutschland liegt 2026 bei rund 8,90 bis 10,00 Euro pro Packung (20 Stück), im Schnitt etwa 9,20 Euro. Grund für den Anstieg ist unter anderem die letzte Stufe des Tabaksteuermodernisierungsgesetzes (TaStMoG), die zum 01.01.2026 in Kraft getreten ist. Wer eine Schachtel am Tag raucht, gibt damit rund 3.350 Euro pro Jahr aus. Bei einer halben Packung (10 Zigaretten) sind es immer noch rund 1.680 Euro jährlich. Über ein Raucherleben von 20 bis 30 Jahren kommen so 33.000 bis 100.000 Euro zusammen.
 
 **Der Zinseszins-Effekt**
 
@@ -115,7 +115,7 @@ Schon wenige Wochen nach dem Rauchstopp verbessern sich Kreislauf und Lungenfunk
     faq: [
       {
         frage: 'Wie viel kostet eine Schachtel Zigaretten in Deutschland?',
-        antwort: 'Der Durchschnittspreis für eine Schachtel Markenzigaretten (20 Stück) liegt in Deutschland 2025 bei etwa 8,50 bis 9,50 Euro. Durch weitere Tabaksteuererhöhungen wird der Preis bis 2027 voraussichtlich die 10-Euro-Marke überschreiten.',
+        antwort: 'Der Durchschnittspreis für eine Schachtel Markenzigaretten (20 Stück) liegt in Deutschland 2026 bei etwa 8,90 bis 10,00 Euro (Ø ~9,20 Euro). Grund für den Anstieg ist unter anderem die letzte Stufe des Tabaksteuermodernisierungsgesetzes, die zum 01.01.2026 in Kraft getreten ist. Bis 2027 wird bei vielen Marken die 10-Euro-Marke überschritten.',
       },
       {
         frage: 'Wie viel gibt ein durchschnittlicher Raucher pro Jahr aus?',

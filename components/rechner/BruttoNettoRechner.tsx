@@ -562,7 +562,7 @@ export default function BruttoNettoRechner() {
           </table>
         </div>
         <p className="text-xs text-gray-600 dark:text-gray-500 mt-2">
-          Werte gerundet, ohne Kirchensteuer, GKV mit 1,7% Zusatzbeitrag, keine Kinder, NRW. Stand 2025/2026.
+          Werte gerundet, ohne Kirchensteuer, GKV mit 2,9 % durchschnittlichem Zusatzbeitrag (AN-Anteil 1,45 %), keine Kinder, NRW. Stand 2026. Der kassenindividuelle Zusatzbeitrag kann abweichen.
         </p>
       </div>
     </div>

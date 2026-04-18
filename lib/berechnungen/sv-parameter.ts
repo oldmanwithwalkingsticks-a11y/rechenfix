@@ -31,3 +31,13 @@ export const KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT = 2.9;
  */
 export const KV_ZUSATZBEITRAG_AN_DURCHSCHNITT_2026 =
   KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT / 200;
+
+/**
+ * Jahresarbeitsentgeltgrenze (Versicherungspflichtgrenze) 2026 nach § 6 Abs. 6
+ * SGB V bzw. § 6 Abs. 7 SGB V (allgemeine Grenze). Arbeitnehmer können erst
+ * oberhalb dieses Jahresbruttos in die PKV wechseln.
+ *
+ * Quelle: SV-Rechengrößen-Verordnung 2026.
+ */
+export const JAEG_2026_JAHR = 77400;
+export const JAEG_2026_MONAT = 6450;

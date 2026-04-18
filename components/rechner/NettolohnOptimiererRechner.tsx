@@ -80,9 +80,9 @@ export default function NettolohnOptimiererRechner() {
       {
         id: 'jobticket',
         label: 'Jobticket / Deutschlandticket',
-        beschreibung: 'Deutschlandticket steuerfrei bis 58 €/Monat (ÖPNV-Zuschuss).',
-        nettoZugewinn: cap(58),
-        agKosten: cap(58),
+        beschreibung: 'Deutschlandticket steuerfrei bis 63 €/Monat (Stand 2026, ÖPNV-Zuschuss).',
+        nettoZugewinn: cap(63),
+        agKosten: cap(63),
       },
       {
         id: 'essen',

@@ -42,7 +42,7 @@ Die Steuerklasse bestimmt, wie viel Lohnsteuer monatlich einbehalten wird. Sie b
 
 **Gesetzliche vs. Private Krankenversicherung**
 
-In der gesetzlichen Krankenversicherung (GKV) richtet sich der Beitrag nach dem Einkommen (bis zur BBG). Der Arbeitgeber übernimmt die Hälfte des allgemeinen Beitrags. In der privaten Krankenversicherung (PKV) hängt der Beitrag von Alter, Gesundheitszustand und gewähltem Tarif ab. Der Arbeitgeberzuschuss ist auf den maximalen GKV-Beitrag begrenzt. Beamte, Selbstständige und Arbeitnehmer mit einem Bruttoeinkommen über der Versicherungspflichtgrenze (69.300 € /Jahr in 2025) können in die PKV wechseln.
+In der gesetzlichen Krankenversicherung (GKV) richtet sich der Beitrag nach dem Einkommen (bis zur BBG). Der Arbeitgeber übernimmt die Hälfte des allgemeinen Beitrags. In der privaten Krankenversicherung (PKV) hängt der Beitrag von Alter, Gesundheitszustand und gewähltem Tarif ab. Der Arbeitgeberzuschuss ist auf den maximalen GKV-Beitrag begrenzt. Beamte, Selbstständige und Arbeitnehmer mit einem Bruttoeinkommen über der Versicherungspflichtgrenze (Jahresarbeitsentgeltgrenze 77.400 €/Jahr bzw. 6.450 €/Monat, Stand 2026) können in die PKV wechseln.
 
 **Tipps: Mehr Netto vom Brutto**
 
@@ -1498,19 +1498,19 @@ Die ernüchternde Antwort: **Deutlich weniger, als Sie denken.** Eine Brutto-Erh
 
 **Grenzbelastung vs. Durchschnittsbelastung erklärt**
 
-Ein häufiger Denkfehler: Viele Menschen glauben, ihre durchschnittliche Abgabenquote (z.B. 35 Prozent) gilt auch für die Gehaltserhöhung. Tatsächlich ist die **Grenzbelastung** (der Satz auf den letzten Euro) meist deutlich höher. Beispiel: Bei einem Brutto von 3.500 Euro zahlt ein Single in Steuerklasse I rund 35 Prozent Abgaben durchschnittlich — aber auf den 3.501. Euro **44–45 Prozent**. Der Grund ist der progressive Tarif: Die ersten 12.096 Euro pro Jahr sind steuerfrei (Grundfreibetrag), dann beginnt die Progression mit 14 Prozent und steigt linear bis 42 Prozent (ab 68.430 Euro zu versteuerndem Einkommen). Hinzu kommen die Sozialabgaben, die bis zur Beitragsbemessungsgrenze (7.550 Euro/Monat West für RV/AV, 5.812,50 Euro für KV/PV) voll greifen. Erst ab etwa 80.000 Euro Jahresbrutto sinkt die Grenzbelastung wieder, weil dann die BBG für KV/PV überschritten wird.
+Ein häufiger Denkfehler: Viele Menschen glauben, ihre durchschnittliche Abgabenquote (z.B. 35 Prozent) gilt auch für die Gehaltserhöhung. Tatsächlich ist die **Grenzbelastung** (der Satz auf den letzten Euro) meist deutlich höher. Beispiel: Bei einem Brutto von 3.500 Euro zahlt ein Single in Steuerklasse I rund 35 Prozent Abgaben durchschnittlich — aber auf den 3.501. Euro **44–45 Prozent**. Der Grund ist der progressive Tarif 2026: Die ersten 12.348 Euro pro Jahr sind steuerfrei (Grundfreibetrag nach § 32a EStG), dann beginnt die Progression mit 14 Prozent und steigt linear bis 42 Prozent (ab 69.878 Euro zu versteuerndem Einkommen). Hinzu kommen die Sozialabgaben, die bis zur Beitragsbemessungsgrenze (8.450 Euro/Monat einheitlich für RV/AV, 5.812,50 Euro für KV/PV) voll greifen. Erst ab etwa 80.000 Euro Jahresbrutto sinkt die Grenzbelastung wieder, weil dann die BBG für KV/PV überschritten wird.
 
 **Warum "mehr Brutto" nicht proportional "mehr Netto" bedeutet**
 
-Drei Faktoren machen die Rechnung kompliziert: Erstens der **Progressionseffekt** — wer vom mittleren in den oberen Einkommensbereich wechselt, zahlt auf jeden zusätzlichen Euro einen höheren Steuersatz. Zweitens der **Wegfall des Grundfreibetrags-Effekts** — die ersten 12.096 Euro bleiben zwar auch künftig steuerfrei, aber der Vorteil wirkt sich bei der Erhöhung nicht mehr aus. Drittens die **Sozialabgaben-Plateaus**: Unter der BBG zahlen Sie auf jeden Zusatz-Euro volle 20 Prozent Sozialabgaben, über der BBG gar nichts mehr. Bei einer Gehaltserhöhung, die Sie knapp über die BBG befördert, kann die Grenzbelastung sogar kurzfristig sinken. Für die Praxis heißt das: Verhandeln Sie lieber etwas mehr, um den Nettoeffekt spürbar zu machen. Eine Erhöhung um 5 Prozent ist gefühlt oft "nur 3 Prozent netto".
+Drei Faktoren machen die Rechnung kompliziert: Erstens der **Progressionseffekt** — wer vom mittleren in den oberen Einkommensbereich wechselt, zahlt auf jeden zusätzlichen Euro einen höheren Steuersatz. Zweitens der **Wegfall des Grundfreibetrags-Effekts** — die ersten 12.348 Euro (2026) bleiben zwar auch künftig steuerfrei, aber der Vorteil wirkt sich bei der Erhöhung nicht mehr aus. Drittens die **Sozialabgaben-Plateaus**: Unter der BBG zahlen Sie auf jeden Zusatz-Euro volle 20 Prozent Sozialabgaben, über der BBG gar nichts mehr. Bei einer Gehaltserhöhung, die Sie knapp über die BBG befördert, kann die Grenzbelastung sogar kurzfristig sinken. Für die Praxis heißt das: Verhandeln Sie lieber etwas mehr, um den Nettoeffekt spürbar zu machen. Eine Erhöhung um 5 Prozent ist gefühlt oft "nur 3 Prozent netto".
 
 **Kalte Progression: Wie die Inflation die Steuerlast erhöht**
 
-Die **kalte Progression** ist einer der unterschätztesten Effekte im deutschen Steuerrecht. Wenn Ihr Gehalt "nur" um die Inflationsrate steigt (z.B. 3 Prozent bei 3 Prozent Inflation), haben Sie real kein Geld mehr — die Kaufkraft bleibt gleich. Trotzdem **rutschen Sie im Steuertarif höher**, weil die Progression wirkt. Ergebnis: Nominal haben Sie mehr Brutto, real bleibt weniger Netto. Die Bundesregierung gleicht die kalte Progression seit einigen Jahren durch jährliche Anpassungen des Grundfreibetrags und der Tarifeckwerte aus — aber nur teilweise. Für 2026 steigt der Grundfreibetrag voraussichtlich auf 12.384 Euro, der Spitzensteuersatz greift erst ab 69.798 Euro. Nutzen Sie den [Inflationsrechner](/finanzen/inflationsrechner), um zu prüfen, ob Ihre Gehaltserhöhung real überhaupt ein Plus bringt.
+Die **kalte Progression** ist einer der unterschätztesten Effekte im deutschen Steuerrecht. Wenn Ihr Gehalt "nur" um die Inflationsrate steigt (z.B. 3 Prozent bei 3 Prozent Inflation), haben Sie real kein Geld mehr — die Kaufkraft bleibt gleich. Trotzdem **rutschen Sie im Steuertarif höher**, weil die Progression wirkt. Ergebnis: Nominal haben Sie mehr Brutto, real bleibt weniger Netto. Die Bundesregierung gleicht die kalte Progression seit einigen Jahren durch jährliche Anpassungen des Grundfreibetrags und der Tarifeckwerte aus — aber nur teilweise. Für 2026 ist der Grundfreibetrag auf 12.348 Euro gestiegen (2025: 12.096 €), der Spitzensteuersatz greift ab 69.878 Euro zu versteuerndem Einkommen. Nutzen Sie den [Inflationsrechner](/finanzen/inflationsrechner), um zu prüfen, ob Ihre Gehaltserhöhung real überhaupt ein Plus bringt.
 
 **Alternativen zur Gehaltserhöhung: Steuerfreie Benefits**
 
-Weil die Grenzbelastung so hoch ist, lohnen sich steuerfreie Zusatzleistungen oft mehr als eine Bruttoerhöhung. Zu den wichtigsten **steuerfreien Benefits** zählen: Das **Deutschlandticket als Jobticket** (bis 49 Euro/Monat komplett steuerfrei), **Essenszuschüsse** (bis 7,50 Euro pro Arbeitstag), **Kindergarten-Zuschüsse** (unbegrenzt steuerfrei für nicht-schulpflichtige Kinder), **betriebliche Altersvorsorge** (Entgeltumwandlung bis 302 Euro/Monat steuerfrei), **Gesundheitsförderung** (bis 600 Euro/Jahr für zertifizierte Kurse), **Handy- und Laptop-Zuschüsse** sowie **Erholungsbeihilfen**. Ein Essenszuschuss von 150 Euro/Monat (7,50 € × 20 Tage) entspricht einer Brutto-Erhöhung von 250–300 Euro — Sie sparen Abgaben von rund 50 Prozent. Verhandeln Sie deshalb nicht nur über das Grundgehalt, sondern auch über die Zusatzleistungen. Für einen kompletten Gehaltsvergleich nach Branche und Region nutzen Sie unseren [Gehaltsvergleich](/finanzen/gehaltsvergleich).`,
+Weil die Grenzbelastung so hoch ist, lohnen sich steuerfreie Zusatzleistungen oft mehr als eine Bruttoerhöhung. Zu den wichtigsten **steuerfreien Benefits** zählen: Das **Deutschlandticket als Jobticket** (63 Euro/Monat seit 2026 komplett steuerfrei), **Essenszuschüsse** (bis 7,50 Euro pro Arbeitstag), **Kindergarten-Zuschüsse** (unbegrenzt steuerfrei für nicht-schulpflichtige Kinder), **betriebliche Altersvorsorge** (Entgeltumwandlung bis 302 Euro/Monat steuerfrei), **Gesundheitsförderung** (bis 600 Euro/Jahr für zertifizierte Kurse), **Handy- und Laptop-Zuschüsse** sowie **Erholungsbeihilfen**. Ein Essenszuschuss von 150 Euro/Monat (7,50 € × 20 Tage) entspricht einer Brutto-Erhöhung von 250–300 Euro — Sie sparen Abgaben von rund 50 Prozent. Verhandeln Sie deshalb nicht nur über das Grundgehalt, sondern auch über die Zusatzleistungen. Für einen kompletten Gehaltsvergleich nach Branche und Region nutzen Sie unseren [Gehaltsvergleich](/finanzen/gehaltsvergleich).`,
     faq: [
       {
         frage: 'Wie viel Netto bekomme ich bei einer Gehaltserhöhung von 300 Euro?',
@@ -1530,7 +1530,7 @@ Weil die Grenzbelastung so hoch ist, lohnen sich steuerfreie Zusatzleistungen of
       },
       {
         frage: 'Welche steuerfreien Alternativen gibt es zur Gehaltserhöhung?',
-        antwort: 'Viele. Die wichtigsten steuerfreien Benefits: Jobticket/Deutschlandticket (49 €/Monat), Essenszuschuss (bis 7,50 €/Arbeitstag), Kindergarten-Zuschuss (unbegrenzt für nicht-schulpflichtige Kinder), betriebliche Altersvorsorge (bis 302 €/Monat), Gesundheitsförderung (600 €/Jahr), Handy-/Laptop-Zuschuss, Inflationsausgleichsprämie (bis 3.000 €, befristet), Sachbezüge bis 50 €/Monat. Weil keine Abgaben anfallen, entspricht z.B. ein Jobticket von 49 € einer Brutto-Erhöhung von 80–100 €.',
+        antwort: 'Viele. Die wichtigsten steuerfreien Benefits: Jobticket/Deutschlandticket (63 €/Monat seit 2026), Essenszuschuss (bis 7,50 €/Arbeitstag), Kindergarten-Zuschuss (unbegrenzt für nicht-schulpflichtige Kinder), betriebliche Altersvorsorge (bis 302 €/Monat), Gesundheitsförderung (600 €/Jahr), Handy-/Laptop-Zuschuss, Sachbezüge bis 50 €/Monat. Weil keine Abgaben anfallen, entspricht z.B. ein Jobticket von 63 € einer Brutto-Erhöhung von rund 100–120 €.',
       },
       {
         frage: 'Was ist die kalte Progression?',
@@ -1652,7 +1652,7 @@ Ein GGF kann sein Einkommen aus der GmbH auf zwei Wegen ziehen: als **Gehalt** (
       },
       {
         frage: 'Lohnt sich die PKV für Geschäftsführer?',
-        antwort: 'Für beherrschende GGF ist die PKV fast immer sinnvoll, da sie ohnehin SV-frei sind. Vorteile: bessere Leistungen, Beitragsrückerstattung, im Alter abziehbare Beiträge. Nachteile: Beiträge steigen im Alter, Rückkehr in GKV ist kaum möglich. Für nicht-beherrschende GGF gilt die Versicherungspflichtgrenze (2026: 73.800 €/Jahr) — erst darüber ist der Wechsel in die PKV möglich.',
+        antwort: 'Für beherrschende GGF ist die PKV fast immer sinnvoll, da sie ohnehin SV-frei sind. Vorteile: bessere Leistungen, Beitragsrückerstattung, im Alter abziehbare Beiträge. Nachteile: Beiträge steigen im Alter, Rückkehr in GKV ist kaum möglich. Für nicht-beherrschende GGF gilt die Versicherungspflichtgrenze (2026: 77.400 €/Jahr bzw. 6.450 €/Monat) — erst darüber ist der Wechsel in die PKV möglich.',
       },
       {
         frage: 'Was ist eine verdeckte Gewinnausschüttung (vGA)?',
@@ -1976,13 +1976,13 @@ Wer für sich zu dem Schluss kommt, dass Riester sich nicht lohnt, hat mehrere A
 
 Eine Brutto-Gehaltserhöhung fühlt sich nach einem guten Deal an — bis die Lohnabrechnung kommt. Wer in Steuerklasse I mit einem Bruttogehalt um 3.500 € liegt, hat einen **Grenzsteuersatz von rund 40 Prozent** (Lohnsteuer + Soli + Sozialabgaben). Das heißt: Von 200 € Brutto-Erhöhung bleiben oft nur **105 bis 120 € netto** übrig. Der Rest verschwindet in Steuern und Sozialabgaben. Und der Arbeitgeber zahlt zusätzlich ca. 20 % AG-Anteil zur Sozialversicherung — das Budget wird also doppelt belastet.
 
-Steuerfreie Sachbezüge umgehen genau diesen Effekt. Wenn der Arbeitgeber Ihnen stattdessen einen **Deutschlandticket-Zuschuss von 58 €/Monat** zahlt, kommen 58 € bei Ihnen an — steuer- und sozialabgabenfrei, ohne jeden Abzug. Noch besser: Der Arbeitgeber spart auf diese 58 € ebenfalls die SV-Abgaben. Aus einem ähnlichen AG-Budget kommt also **deutlich mehr Netto** bei Ihnen an. Unser Nettolohn-Optimierer vergleicht sechs gängige Optionen parallel und zeigt, welche für Ihre Situation die beste ist.
+Steuerfreie Sachbezüge umgehen genau diesen Effekt. Wenn der Arbeitgeber Ihnen stattdessen einen **Deutschlandticket-Zuschuss von 63 €/Monat** zahlt (Preis seit 01.01.2026), kommen 63 € bei Ihnen an — steuer- und sozialabgabenfrei, ohne jeden Abzug. Noch besser: Der Arbeitgeber spart auf diese 63 € ebenfalls die SV-Abgaben. Aus einem ähnlichen AG-Budget kommt also **deutlich mehr Netto** bei Ihnen an. Unser Nettolohn-Optimierer vergleicht sechs gängige Optionen parallel und zeigt, welche für Ihre Situation die beste ist.
 
 **Die wichtigsten steuerfreien Gehaltsextras 2026**
 
 **Sachbezug nach § 8 Abs. 2 EStG — bis 50 €/Monat:** Die beliebteste Gestaltung. Der Arbeitgeber kann Ihnen einen Gutschein, eine Prepaid-Karte oder Sachleistungen bis 50 € pro Monat steuer- und sozialabgabenfrei überlassen. Beliebt sind Tankgutscheine, Warengutscheine (Amazon, REWE), Shoppingkarten oder sogar Fitnessstudio-Mitgliedschaften. **Wichtig:** Es handelt sich um eine Freigrenze, nicht um einen Freibetrag — schon 1 € darüber, und der volle Betrag wird steuerpflichtig.
 
-**Jobticket / Deutschlandticket — bis 58 €/Monat:** Seit 2024 können Arbeitgeber das Deutschlandticket (49 €) vollständig steuerfrei übernehmen. Der Zuschuss muss **zusätzlich zum ohnehin geschuldeten Arbeitslohn** gezahlt werden (keine Gehaltsumwandlung). Der Vorteil: Der Netto-Zugewinn liegt bei exakt dem Ticketpreis — oft deutlich mehr als eine äquivalente Brutto-Erhöhung.
+**Jobticket / Deutschlandticket — 63 €/Monat (Stand 2026):** Seit 2024 können Arbeitgeber das Deutschlandticket vollständig steuerfrei übernehmen. Der Preis des Tickets wurde mehrfach angepasst: Mai 2023–Dezember 2024 galten 49 €, im Jahr 2025 waren es 58 €, seit dem 1. Januar 2026 sind es 63 € pro Monat (bundesgesetzlich abgesichert bis 2029). Der Zuschuss muss **zusätzlich zum ohnehin geschuldeten Arbeitslohn** gezahlt werden (keine Gehaltsumwandlung). Der Vorteil: Der Netto-Zugewinn liegt bei exakt dem Ticketpreis — oft deutlich mehr als eine äquivalente Brutto-Erhöhung.
 
 **Essenszuschuss / Restaurantschecks — bis 7,23 €/Arbeitstag (2026):** Der Arbeitgeber kann für jeden Arbeitstag einen Zuschuss zum Mittagessen gewähren — die Obergrenze für 2026 liegt bei rund 7,23 € pro Tag. Bei 20 Arbeitstagen pro Monat sind das **144,60 € steuerfrei**. Die Kosten werden meist über digitale Meal-Vouchers (z. B. Bonago, Sodexo, Pluxee) abgewickelt, die in Restaurants oder Supermärkten eingelöst werden können.
 
@@ -2004,7 +2004,7 @@ Gehen Sie mit einer konkreten Liste in die Verhandlung. Viele Arbeitgeber sind b
     faq: [
       {
         frage: 'Lohnt sich eine Gehaltserhöhung oder Sachbezüge mehr?',
-        antwort: 'In den meisten Fällen sind steuerfreie Sachbezüge attraktiver, weil weder Lohnsteuer noch Sozialabgaben anfallen. Von 200 € Brutto-Erhöhung bleiben in Steuerklasse I nur rund 105 bis 120 € netto — ein 58-€-Deutschlandticket bringt dagegen 58 € netto ohne Abzug. Der Rechner zeigt für Ihre Situation die optimale Lösung.',
+        antwort: 'In den meisten Fällen sind steuerfreie Sachbezüge attraktiver, weil weder Lohnsteuer noch Sozialabgaben anfallen. Von 200 € Brutto-Erhöhung bleiben in Steuerklasse I nur rund 105 bis 120 € netto — ein 63-€-Deutschlandticket (Stand 2026) bringt dagegen 63 € netto ohne Abzug. Der Rechner zeigt für Ihre Situation die optimale Lösung.',
       },
       {
         frage: 'Wie hoch ist die Sachbezugsfreigrenze 2026?',
@@ -2016,7 +2016,7 @@ Gehen Sie mit einer konkreten Liste in die Verhandlung. Viele Arbeitgeber sind b
       },
       {
         frage: 'Ist das Deutschlandticket vom Arbeitgeber steuerfrei?',
-        antwort: 'Ja. Zuschüsse des Arbeitgebers zum Deutschlandticket (49 €) sind in voller Höhe steuer- und sozialabgabenfrei — vorausgesetzt, der Zuschuss wird zusätzlich zum ohnehin geschuldeten Arbeitslohn gewährt. Auch die Monatskarte des ÖPNV in Ihrer Stadt fällt unter die Jobticket-Regelung.',
+        antwort: 'Ja. Zuschüsse des Arbeitgebers zum Deutschlandticket (63 €/Monat seit 01.01.2026) sind in voller Höhe steuer- und sozialabgabenfrei — vorausgesetzt, der Zuschuss wird zusätzlich zum ohnehin geschuldeten Arbeitslohn gewährt. Auch die Monatskarte des ÖPNV in Ihrer Stadt fällt unter die Jobticket-Regelung.',
       },
       {
         frage: 'Lohnt sich BAV als Alternative zur Gehaltserhöhung?',

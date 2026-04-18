@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 
 const faq = [
   { frage: '5.000 Euro brutto — wie viel netto in Steuerklasse 1?', antwort: `Bei 5.000 € brutto bleiben in Steuerklasse 1 ca. ${fmt(n(1).nettoMonat)} € netto übrig. Das entspricht einer Abzugsquote von rund ${n(1).abzuegeProzent}%.` },
-  { frage: 'Welche Abzüge habe ich bei 5.000 Euro brutto?', antwort: 'Von 5.000 € brutto werden erhebliche Lohnsteuer sowie Sozialabgaben abgezogen. Bei der Krankenversicherung nähert man sich der Beitragsbemessungsgrenze (5.512,50 €/Monat).' },
+  { frage: 'Welche Abzüge habe ich bei 5.000 Euro brutto?', antwort: 'Von 5.000 € brutto werden erhebliche Lohnsteuer sowie Sozialabgaben abgezogen. Bei der Krankenversicherung nähert man sich der Beitragsbemessungsgrenze 2026 (5.812,50 €/Monat).' },
   { frage: 'Wie viel netto bei 5.000 Euro brutto in Steuerklasse 3?', antwort: `In Steuerklasse 3 behalten Sie bei 5.000 € brutto ca. ${fmt(n(3).nettoMonat)} € netto — das sind ${fmt(n(3).nettoMonat - n(1).nettoMonat)} € mehr als in SK1.` },
   { frage: 'Ist 5.000 Euro brutto ein überdurchschnittliches Gehalt?', antwort: '5.000 € brutto liegt deutlich über dem deutschen Durchschnitt von ca. 4.100 € brutto. Es entspricht ca. 60.000 € Jahresgehalt und ist typisch für erfahrene Fachkräfte, Ingenieure und akademische Berufe.' },
 ];
