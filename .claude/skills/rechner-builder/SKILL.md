@@ -265,12 +265,36 @@ After the page works:
 3. Add to **sitemap** (must use https://www.rechenfix.de/ with www)
 4. Consider adding to **"Neu hinzugefügt"** section on homepage
 
-### Step 13: Qualitäts-Guards G1–G9 durchgehen
+### Step 12a: Jahresabhängige Werte und Stichtag-Switch
 
-Bevor ein Rechner committed wird, die neun Guards unten im Abschnitt
+Wenn der Rechner einen Parameter verwendet, der sich unterjährig
+ändert (Rentenanpassung zum 01.07., Pfändungstabelle zum 01.07.,
+Mindestlohn zum 01.01. usw.):
+
+1. Wert kommt aus der zentralen Lib über eine
+   `getAktuellerXxx(stichtag?)` Funktion — niemals als konstante Zahl.
+2. Default-Aufruf ohne Parameter liefert den heute gültigen Wert
+   (Server-Time).
+3. **Optional (UX-Entscheidung):** Im UI einen Toggle/Tab „Stichtag
+   heute" vs. „Ab TT.MM.JJJJ" anbieten, damit Nutzer den kommenden
+   Wechsel vergleichen können. Siehe `PfaendungRechner` für
+   Referenz-Umsetzung.
+4. Wenn der Stichtag noch in der Zukunft liegt, im SEO-Text oder in
+   einer Hinweis-Box auf den kommenden Wechsel verweisen.
+
+**Pattern-Referenzen im Code:**
+- `lib/berechnungen/mindestlohn.ts` — Switch auf 14,60 € zum 01.01.2027
+- `lib/berechnungen/rente.ts` — Switch auf 42,52 € zum 01.07.2026
+- `lib/berechnungen/pfaendung.ts` — Switch auf 1.587,40 € zum 01.07.2026
+
+### Step 13: Qualitäts-Guards G1–G10 durchgehen
+
+Bevor ein Rechner committed wird, die zehn Guards unten im Abschnitt
 „Qualitäts-Guards (aus Rezept-Umrechner-Audit, April 2026)" abarbeiten.
 Wo ein Guard nicht zutrifft (z. B. G5 ohne Einheiten-Output), das in der
-Code-Review-Notiz kurz begründen.
+Code-Review-Notiz kurz begründen. G10 (keine Dubletten zentraler Werte)
+ist nach dem Jahresaudit 2026 hinzugekommen — besonders wichtig für
+Finanz-, SV- und Arbeits-Rechner.
 
 ### Step 14: Smoke Test v3 lokal durchlaufen
 
@@ -377,6 +401,27 @@ const skalieren = (menge: number, einheit: string, faktor: number) =>
   UNSCALED_UNITS.has(einheit) ? menge : menge * faktor;
 ```
 
+### G10 — Keine Dubletten zentraler Werte
+
+Jeder Rechner, der einen gesetzlich fixierten Jahreswert benötigt
+(Grundfreibetrag, Kindergeld, Mindestlohn, Rentenwert, BBG, JAEG,
+Soli-Grenzen, Pfändungsfreibeträge, Tabaksteuer, D-Ticket-Preis,
+Zusatzbeitrag etc.), MUSS diesen aus der entsprechenden
+`lib/berechnungen/*`-Datei importieren. Hartcodierte Zahlen für solche
+Werte sind verboten — auch dann, wenn sie in einem einzelnen SEO-Text
+oder in einer einzelnen Berechnung stehen.
+
+**Warum:** Die Jahresparameter-Audits Sprint 1 (April 2026) und
+Jahresaudit 2026 (Prompts 86–91) haben gemeinsam in neun Rechnern
+Werte gefunden, die 1–2 Jahre veraltet waren — weil sie lokal
+hartkodiert waren statt aus der zentralen Lib gezogen.
+
+**Ausnahme:** Nicht rechts-/jahresabhängige Konstanten (z. B.
+„12 Monate pro Jahr", „π ≈ 3,14159") dürfen hartkodiert sein.
+
+**Verweis:** Siehe `CLAUDE.md` Abschnitt „Zentrale Libs (SSOT)" für
+die vollständige Liste und das Stichtag-Switch-Pattern.
+
 ## Rechner-Specific Templates
 
 For detailed templates per calculator type, see `references/templates.md`.
@@ -412,11 +457,32 @@ Für Finanz- und Steuer-Rechner immer gegen diese externen Referenzen prüfen:
 
 ## Zentrale Libs (nicht duplizieren)
 
-Tarif- und SV-relevante Rechner dürfen Parameter nicht hartkodieren, sondern nutzen die zentralen Libs:
+Tarif-, SV-, Unterhalts-, Mindestlohn-, Renten- und Pfändungs-Rechner dürfen Parameter nicht hartkodieren, sondern nutzen die zentralen Libs. Die vollständige Tabelle mit Exports steht in `CLAUDE.md` unter „Zentrale Libs (SSOT)". Kurzliste der wichtigsten:
 
-- `lib/berechnungen/einkommensteuer.ts` — §32a EStG Tarifzonen, Grundfreibeträge, Soli-Freigrenzen
-- `lib/berechnungen/pflegeversicherung.ts` — PV-AN-Satz, Kinderlos-Zuschlag, Kinderabschlag nach § 55 Abs. 3 SGB XI (PUEG 2023)
-- `lib/berechnungen/lohnsteuer.ts` — Vorsorgepauschale §39b Abs. 4 EStG PAP-konform
-- `lib/berechnungen/brutto-netto.ts` — orchestriert Lohnsteuer + SV + PV zum Netto
+- `lib/berechnungen/einkommensteuer.ts` — § 32a EStG Tarifzonen 2024/2025/2026, Grundfreibeträge, Soli-Freigrenzen
+- `lib/berechnungen/lohnsteuer.ts` — Vorsorgepauschale § 39b Abs. 4 EStG PAP-konform
+- `lib/berechnungen/brutto-netto.ts` — BBG (`BBG_KV_MONAT`, `BBG_RV_MONAT`), orchestriert LSt + SV + PV zum Netto
+- `lib/berechnungen/sv-parameter.ts` — KV-Zusatzbeitrag, JAEG (`JAEG_2026_JAHR`/`_MONAT`)
+- `lib/berechnungen/pflegeversicherung.ts` — PV-AN-Satz, Kinderlos-Zuschlag, Kinderabschlag § 55 Abs. 3 SGB XI (PUEG 2023)
+- `lib/berechnungen/kindergeld.ts` — Kindergeld + Günstigerprüfung (`KINDERGELD_2026 = 259`)
+- `lib/berechnungen/duesseldorfer-tabelle.ts` — DT 2026, Mindestbedarf, Selbstbehalte
+- `lib/berechnungen/mindestlohn.ts` **(neu, 04/2026)** — `MINDESTLOHN`, `getAktuellerMindestlohn(stichtag)`, Switch auf 14,60 € zum 01.01.2027
+- `lib/berechnungen/rente.ts` **(erweitert, 04/2026)** — `RENTENWERT`, `getAktuellerRentenwert(stichtag)`, Switch 40,79 → 42,52 € zum 01.07.2026
+- `lib/berechnungen/pfaendung.ts` **(erweitert, 04/2026)** — `getAktuellePfaendungsParameter(stichtag)`, Switch 1.555,00 → 1.587,40 € zum 01.07.2026 (BGBl. 2026 I Nr. 80)
 
-Die drei Tarif-Rechner (Brutto-Netto, Lohnsteuer, Einkommensteuer) sind eine **Rechner-Gruppe** mit geteilter Logik. Änderungen an zentralen Parametern wirken auf alle drei.
+Die drei Tarif-Rechner (Brutto-Netto, Lohnsteuer, Einkommensteuer) sind eine **Rechner-Gruppe** mit geteilter Logik. Änderungen an zentralen Parametern wirken auf alle drei. Siehe auch G10 (keine Dubletten zentraler Werte).
+
+## Skill-Synchronisation (wichtig!)
+
+Dieser Skill existiert in zwei Kopien:
+
+1. **Repo (maßgeblich):** `.claude/skills/rechner-builder/SKILL.md` — diese Datei, gepflegt von Claude Code
+2. **Chat-AppData:** `%AppData%\Claude\...\skills\rechner-builder\SKILL.md` — gelesen von Claude-Chat-Instanzen über `/mnt/skills/user/rechner-builder/SKILL.md`
+
+Nach einem Update der Repo-Version muss die AppData-Kopie **manuell vom User** synchronisiert werden. Sonst geben Claude-Chat und Claude Code inkonsistente Ratschläge.
+
+**Sync-Protokoll:**
+
+| Datum | Änderung | AppData synchronisiert? |
+|---|---|---|
+| 19.04.2026 | Prompt 92: G10, Step 12a (Jahresabhängige Werte), diese Sync-Sektion, erweiterte Lib-Liste mit mindestlohn.ts / rente.ts / pfaendung.ts | [ ] noch offen |

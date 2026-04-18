@@ -38,6 +38,42 @@ Rechenfix.de ist ein deutschsprachiges Online-Rechner-Portal mit aktuell **169 k
 
 **Sitemap: 177 Rechner-URLs** — Differenz zu 169 erklärt sich durch Varianten-/Tabellen-Seiten unter `/finanzen/` (z.B. `2000-euro-brutto-netto` bis `5000-euro-brutto-netto`, `brutto-netto-tabelle`). Die dynamische Route `app/[kategorie]/[rechner]/page.tsx` rendert alle 177 URLs; Metadaten stehen in `lib/rechner-config/<kategorie>.ts`. Die URL `/gesundheit/herzfrequenz-rechner` wurde im April 2026 per 301-Redirect auf `/sport/herzfrequenz-zonen-rechner` konsolidiert (Feature-Obermenge).
 
+## Zentrale Libs (SSOT, Stand April 2026)
+
+Alle jahresabhängigen und gesetzlich definierten Werte liegen in `lib/berechnungen/`. Rechner, Komponenten und Config-Dateien MÜSSEN von dort importieren — niemals Werte lokal hartcodieren.
+
+| Lib | Zweck | Wichtigste Exports |
+|---|---|---|
+| `einkommensteuer.ts` | § 32a EStG 2024/2025/2026, Soli-Freigrenzen | `berechneEStGrund(zvE, jahr)`, `PARAMS[jahr]` |
+| `lohnsteuer.ts` | LSt nach § 39b PAP, Vorsorgepauschale | `berechneLohnsteuerJahr(brutto, steuerklasse, jahr)` |
+| `brutto-netto.ts` | BBG KV/PV/RV, Gesamtberechnung Netto | `BBG_KV_MONAT`, `BBG_RV_MONAT`, `berechneBruttoNetto(...)` |
+| `sv-parameter.ts` | GKV-Zusatzbeitrag, JAEG | `KV_ZUSATZBEITRAG_AN_DURCHSCHNITT_2026`, `JAEG_2026_JAHR`/`_MONAT` |
+| `kindergeld.ts` | Kindergeld + Günstigerprüfung | `KINDERGELD_2026` |
+| `duesseldorfer-tabelle.ts` | Unterhalt DT 2026 | Mindestbedarf, `KINDERGELD_2026`, `KINDERGELD_HAELFTIG_2026` |
+| `pflegeversicherung.ts` | PV-Kinderabschlag § 55 SGB XI | Staffel 1,55 / 1,30 / 1,05 / 0,80 % |
+| `mindestlohn.ts` **(neu, 04/2026)** | § 1 MiLoG mit Stichtag-Switch | `MINDESTLOHN`, `getAktuellerMindestlohn(stichtag)`, `MINIJOB_GRENZE_MONAT` |
+| `rente.ts` **(erweitert, 04/2026)** | Rentenwert § 68 SGB VI | `RENTENWERT`, `getAktuellerRentenwert(stichtag)` |
+| `pfaendung.ts` **(erweitert, 04/2026)** | § 850c ZPO mit Stichtag-Switch | `getAktuellePfaendungsParameter(stichtag)` |
+
+**Verboten:** Eigene ESt-, LSt-, SV-, Kindergeld-, Pfändungs- oder Mindestlohn-Formeln in Komponenten. Siehe `CLAUDE.md` Abschnitt "Zentrale Libs (SSOT)" für die vollständige Liste und das Stichtag-Switch-Pattern.
+
+## Automatische Jahreswechsel (Stichtag-Switch)
+
+Dank Prompts 87/88/91 greifen folgende Anpassungen automatisch — **kein manueller Zwischen-Prompt nötig:**
+
+| Stichtag | Parameter | Von → Auf | Quelle |
+|---|---|---|---|
+| 01.07.2026 | Rentenwert | 40,79 € → 42,52 € | BMAS 05.03.2026 |
+| 01.07.2026 | Pfändungs-Grundfreibetrag | 1.555,00 € → 1.587,40 € | BGBl. 2026 I Nr. 80 |
+| 01.07.2026 | Pfändungs-Zuschlag 1. Unterhalt | 585,23 € → 597,42 € | BGBl. 2026 I Nr. 80 |
+| 01.07.2026 | Pfändungs-Zuschlag 2.–5. Unterhalt | 326,04 € → 332,83 € | BGBl. 2026 I Nr. 80 |
+| 01.01.2027 | Mindestlohn | 13,90 € → 14,60 € | Vierte MiLoV |
+| 01.01.2027 | Minijob-Grenze | 603 € → 633 € | automatisch via Kopplung |
+
+**Kontroll-Termine:**
+- 01.07.2026 spot-check: Rentenrechner und Pfändungsrechner liefern neue Werte — keine Aktion nötig, nur Verifikation.
+- 01.01.2027 spot-check: Mindestlohn-Rechner, Minijob-Rechner, Stundenlohn-Rechner liefern 14,60 € bzw. 633 €.
+
 ## Sprint-Historie
 
 ### Sprint 1 — Tarif-Audit (April 2026) ✅ ABGESCHLOSSEN
@@ -62,6 +98,27 @@ Rechenfix.de ist ein deutschsprachiges Online-Rechner-Portal mit aktuell **169 k
 - PV-Kinderabschlag und Kinderfreibeträge sind zwei getrennte Konzepte, zwei getrennte UI-Felder
 - Smoketest v3 findet Frontend-Integrität, aber keine numerische Korrektheit — für Tarif-Changes separat gegen BMF-Steuerrechner prüfen
 - web_fetch-Tool-Cache kann bei Live-Audits irreführen — Inkognito-Browser-Check ist Ground Truth
+
+### Jahresparameter-Audit 2026 (April 2026) ✅ ABGESCHLOSSEN
+
+**Ziel:** Gesamten Code auf 2026er Rechtsstand bringen. Sprint 1 hatte die Tarif-Gruppe aktualisiert; der Audit hat gezeigt, dass in Sekundär-Rechnern, SEO-Texten und Scripts noch 2024er/2025er Werte schlummerten.
+
+**Umgesetzte Prompts:**
+
+| Prompt | Datum | Inhalt |
+|---|---|---|
+| 86 | 18.04.2026 | Grep-basierter Audit-Report (`docs/jahresparameter-audit-2026-04.md`) — 7 Bugs + 5 Verdachtsfälle + 21 Metadaten/Hilfetexte identifiziert |
+| 87 | 19.04.2026 | Bug-Fix-Batch 1–8: 4 Sekundär-Rechner auf zentrale Libs (ArbeitslosengeldRechner, GmbhGfRechner, MidijobRechner, KurzarbeitergeldRechner), Soli-Freigrenze in `kindergeld.ts` korrigiert, Rentenwert-Bug (seit Juli 2025 falsch 39,32 € statt 40,79 €) entdeckt und gefixt + 01.07.2026-Switch auf 42,52 € |
+| 88 | 19.04.2026 | Mindestlohn 12,82 → 13,90 € an ~15 Stellen, neue SSOT `lib/berechnungen/mindestlohn.ts` mit Stichtag-Switch auf 14,60 € (01.01.2027) |
+| 89 | 19.04.2026 | Kindergeld 255 → 259 € Metadaten-Batch: 13 Stellen in finanzen.ts/arbeit.ts/client-data.ts/scripts/, H2-SEO-Absatz war sachlich falsch |
+| 90 | 19.04.2026 | Hilfetext-Batch H1/H3/H5/H9–H12/H14 — BBG-Werte, JAEG 77.400 €, GKV-Zusatzbeitrag 2,9 %, Deutschlandticket 63 €, Zigarettenpreise 2026, KI-Explain-Prompts; neue Konstante `JAEG_2026_*` in `sv-parameter.ts` |
+| 91 | 19.04.2026 | Pfändungstabelle 01.07.2026 vorab eingepflegt (BGBl. 2026 I Nr. 80), Stichtag-Switch analog Rentenwert — 3 Bonus-Bugs in `pfaendung.ts` mitkorrigiert (1.555,99 → 1.555,00, 585,59 → 585,23, Obergrenze 4.573,10 war 2023er Wert) |
+| 92 | 19.04.2026 | Doku-Sync (diese Datei, CLAUDE.md, SKILL.md) |
+
+**Lessons Learned:**
+- Zentrale Libs aktualisieren reicht nicht — Hartkodierungen in einzelnen Komponenten, SEO-Texten und Build-Scripts rutschen durch, wenn kein Grep-Audit läuft.
+- Stichtag-Switch-Pattern (siehe CLAUDE.md) verhindert "Bug-seit-X-Monaten"-Szenarien wie beim Rentenwert.
+- Meta-Config-Dateien (`lib/rechner-config/*.ts`) und Build-Scripts (`scripts/apply-v2-titles.js`) müssen bei Jahresupdates mit-migriert werden.
 
 ## Test-Referenzwerte Tarif-Rechner (Stand April 2026)
 
@@ -89,6 +146,24 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
 | Grundtarif gleich | zvE 46.974 € / Einzelveranlagung / 0 Kinder | 9.501 €/Jahr |
 
 **Amtliche Gegenprobe:** [BMF-Steuerrechner](https://www.bmf-steuerrechner.de/ekst/) mit identischen Inputs.
+
+## Status April 2026
+
+**Abgeschlossen:**
+- ✅ Sprint 1 — Tarif-Audit (Prompts 81–84a)
+- ✅ A11y-Sprint — Lighthouse 100/100, axe 0 auf 19 Stichproben (Prompts 78a–h + 78z-Serie + 34a–c)
+- ✅ Jahresparameter-Audit 2026 (Prompts 86–92)
+- ✅ Unterhaltsrechner DT 2026 (Prompt 67)
+- ✅ Verivox-Affiliate ETF/Rente/Spar (Prompts 45+46)
+
+**Parkend (wartet auf AdSense-Freigabe):**
+- ⏸ Prompt 68 — Google CMP + Consent Mode v2
+- ⏸ Prompt 85 — AdSense `data-nscript` Warning Fix
+- Rollback-Prompt 69 bleibt im Repo als Sicherheit
+
+**Offen:**
+- 🎯 Neue Rechner-Batches (thematisch offen)
+- 🎯 Jahresparameter-Audit 2027 (Frühjahr 2027): ESt-Tarif 2027, SV-Rechengrößen 2027, JAEG, Zusatzbeitrag, D-Ticket, Pfändung-Switch zum 01.07.2028
 
 ## Parkende Items (bis AdSense-Freigabe)
 

@@ -101,16 +101,77 @@ Lighthouse Accessibility ≥95 auf neuer/geänderter Seite.
 ### Barrierefreiheitserklärung
 `/barrierefreiheit` wird gepflegt. Bei strukturellen A11y-Änderungen prüfen, ob Inhalte aktualisiert werden müssen.
 
-## Zentrale Libs (Stand Sprint 1 / April 2026)
+## Zentrale Libs (SSOT)
 
-Tarif- und SV-relevante Rechner dürfen Parameter **nicht hartkodieren**, sondern nutzen die zentralen Libs:
+Alle jahresabhängigen und gesetzlich definierten Werte liegen in `lib/berechnungen/`. Rechner, Komponenten und Config-Dateien MÜSSEN von dort importieren — niemals Werte lokal hartcodieren, wenn eine zentrale Konstante existiert.
 
-- `lib/berechnungen/einkommensteuer.ts` — §32a EStG Tarifzonen 2024/2025/2026, Grundfreibeträge und Soli-Freigrenzen
-- `lib/berechnungen/pflegeversicherung.ts` — PV-AN-Satz 2026, Kinderlos-Zuschlag und Kinderabschlag nach § 55 Abs. 3 SGB XI (PUEG 2023)
-- `lib/berechnungen/lohnsteuer.ts` — Vorsorgepauschale §39b Abs. 4 EStG PAP-konform
-- `lib/berechnungen/brutto-netto.ts` — orchestriert Lohnsteuer + SV + PV zum Netto
+| Lib | Zweck | Wichtigste Exports |
+|---|---|---|
+| `einkommensteuer.ts` | § 32a EStG 2024/2025/2026, Soli-Freigrenzen | `berechneEStGrund(zvE, jahr)`, `PARAMS[jahr]` |
+| `lohnsteuer.ts` | LSt nach § 39b PAP, Vorsorgepauschale | `berechneLohnsteuerJahr(brutto, steuerklasse, jahr)` |
+| `brutto-netto.ts` | BBG KV/PV/RV, Gesamtberechnung Netto | `BBG_KV_MONAT`, `BBG_RV_MONAT`, `berechneBruttoNetto(...)` |
+| `sv-parameter.ts` | GKV-Zusatzbeitrag Ø, JAEG | `KV_ZUSATZBEITRAG_AN_DURCHSCHNITT_2026`, `JAEG_2026_JAHR`, `JAEG_2026_MONAT` |
+| `kindergeld.ts` | Kindergeld + Günstigerprüfung | `KINDERGELD_2026`, `berechneKindergeld(...)` |
+| `duesseldorfer-tabelle.ts` | Unterhalt, Mindestbedarf DT 2026 | Mindestbedarfsätze, `KINDERGELD_2026`, `KINDERGELD_HAELFTIG_2026` |
+| `pflegeversicherung.ts` | PV-Kinderabschlag SGB XI § 55 | Staffel 1,55 / 1,30 / 1,05 / 0,80 % |
+| `mindestlohn.ts` **(neu, 04/2026)** | § 1 MiLoG mit Stichtag-Switch | `MINDESTLOHN`, `getAktuellerMindestlohn(stichtag)`, `MINIJOB_GRENZE_MONAT` |
+| `rente.ts` **(erweitert, 04/2026)** | Aktueller Rentenwert § 68 SGB VI | `RENTENWERT`, `getAktuellerRentenwert(stichtag)` |
+| `pfaendung.ts` **(erweitert, 04/2026)** | § 850c ZPO mit Stichtag-Switch | `getAktuellePfaendungsParameter(stichtag)`, `PFAENDUNG_2025`, `PFAENDUNG_2026` |
+| `minijob.ts`, `midijob.ts` | Geringfügigkeitsgrenze, Übergangsbereich | aus `mindestlohn.ts` abgeleitet |
+| `steuerprogression.ts` | Grenz-/Durchschnittssteuersatz | nutzt `einkommensteuer.ts` |
+| `kfz-steuer.ts`, `balkon-solar.ts`, `waermepumpe.ts` | Domänen-spezifisch | |
+
+**Verboten:** Eigene ESt-, LSt-, SV-, Kindergeld-, Pfändungs- oder Mindestlohn-Formeln in Komponenten oder Rechnern. Immer die zentrale Lib importieren. Diese Regel ergab sich aus Sprint 1 (April 2026) und wurde im Jahresaudit 2026 (Prompts 86–91) nochmal bestätigt, als in fünf Rechnern Formel-Duplikate mit 1–2 Jahre veralteten Werten gefunden wurden.
 
 Die drei **Tarif-Rechner** (Brutto-Netto, Lohnsteuer, Einkommensteuer) sind eine Gruppe mit geteilter Berechnungslogik. Änderungen an zentralen Parametern wirken automatisch auf alle drei.
+
+## Stichtag-Switch-Pattern
+
+Für Werte, die sich unterjährig ändern (Rentenanpassung zum 01.07., Pfändungstabelle zum 01.07., Mindestlohn zum 01.01.), wird das folgende Pattern genutzt:
+
+```ts
+export const WERT_BIS_STICHTAG = 1234.56;
+export const WERT_AB_STICHTAG  = 1345.67;
+
+export function getAktuellerWert(stichtag: Date = new Date()): number {
+  const switchDatum = new Date(2026, 6, 1); // 01.07.2026 (Monat 0-indexiert!)
+  return stichtag >= switchDatum ? WERT_AB_STICHTAG : WERT_BIS_STICHTAG;
+}
+
+// Backwards-Compat: bestehende Konsumenten bekommen tagesaktuellen Wert
+export const WERT = getAktuellerWert();
+```
+
+**Gründe für dieses Pattern:**
+- Neuer Wert kann Wochen vor Inkrafttreten vorab eingepflegt werden (keine Jahreswechsel-Panik).
+- Rechner kann über optionalen Stichtag-Parameter "Heute" vs. "Nach Switch" anzeigen.
+- Unit-Tests möglich (Stichtag injizierbar).
+- Kein "aktiver Bug seit X Monaten"-Szenario, weil der Switch deterministisch greift.
+
+**Aktuell mit Stichtag-Switch:** `mindestlohn.ts` (01.01.2027), `rente.ts` (01.07.2026), `pfaendung.ts` (01.07.2026).
+
+**Regel:** Bei jedem neuen unterjährigen Wechsel dieses Pattern anwenden — nicht einen nackten Kommentar "// TODO: Wert zum 01.07. ändern" hinterlegen.
+
+## Aktueller Rechtsstand (Stand April 2026)
+
+| Parameter | Wert | Rechtsgrundlage |
+|---|---|---|
+| Grundfreibetrag ESt | 12.348 € | § 32a EStG |
+| ESt-Zonengrenzen | 17.799 / 69.878 / 277.826 € | § 32a EStG |
+| Soli-Freigrenze | 20.350 € | § 4 SolzG |
+| Kindergeld | 259 € / Kind / Monat | § 66 EStG |
+| Mindestlohn | 13,90 €/h (ab 01.01.2027: 14,60 €) | MiLoG |
+| Minijob-Grenze | 603 € / Monat (Jahr: 7.236 €) | § 8 SGB IV |
+| Midijob-Untergrenze | 603,01 € / Monat | § 20 SGB IV |
+| BBG KV/PV | 5.812,50 € / Monat (69.750 € / Jahr) | SV-RechengrößenVO 2026 |
+| BBG RV (einheitlich) | 8.450 € / Monat (101.400 € / Jahr) | SV-RechengrößenVO 2026 |
+| JAEG / Versicherungspflichtgrenze | 77.400 € / Jahr (6.450 € / Monat) | BMG |
+| GKV allgemeiner Beitragssatz | 14,6 % | § 241 SGB V |
+| GKV-Zusatzbeitrag Ø | 2,9 % (AN-Anteil 1,45 %) | § 242a SGB V |
+| Rentenwert | 40,79 € (ab 01.07.2026: 42,52 €) | SGB VI, BMAS 05.03.2026 |
+| Pfändungs-Grundfreibetrag | 1.555,00 € (ab 01.07.2026: 1.587,40 €) | § 850c ZPO, BGBl. 2026 I Nr. 80 |
+| Unterhalt DT 2026 Mindestbedarf | 486 / 558 / 653 / 698 € | Düsseldorfer Tabelle |
+| Deutschlandticket | 63 €/Monat | seit 01.01.2026 |
 
 ## Tarif-Parameter 2026 (Referenzwerte)
 
@@ -200,3 +261,10 @@ Reihenfolge nach Freigabe: erst 85 (Warning wegräumen), dann 68 (CMP dazu).
 - **Batch 39** — Kochen: Pizzateig-Rechner + Brotback-Rechner (Bäckerprozente) ✅
 - **Batch 40** — Kochen: Alkoholgehalt-Rechner + Nährwert-Rechner ✅
 - **Batch 41** — Kochen: Zucker-Umrechner + Gefrierdauer-Rechner ✅
+- **86** — Jahresparameter-Audit 2026 (Grep-basiert, Report `docs/jahresparameter-audit-2026-04.md`) ✅
+- **87** — Bug-Fix-Batch 1–8: 4 Sekundär-Rechner auf zentrale Libs, Soli-Freigrenze in `kindergeld.ts`, Rentenwert-Stichtag-Switch ✅
+- **88** — Mindestlohn 12,82 → 13,90 €, neue SSOT `mindestlohn.ts` mit 2027-Switch auf 14,60 € ✅
+- **89** — Kindergeld 255 → 259 € Metadaten-Batch (13 Stellen) ✅
+- **90** — Hilfetext-Batch H1/H3/H5/H9–H12 (BBG, JAEG 77.400 €, Zusatzbeitrag 2,9 %, D-Ticket 63 €, Zigaretten 2026) ✅
+- **91** — Pfändungstabelle 01.07.2026 vorab via Stichtag-Switch (BGBl. 2026 I Nr. 80) ✅
+- **92** — Doku-Sync CLAUDE.md / Projekt-Referenz / SKILL.md nach Audit 2026 ✅
