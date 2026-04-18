@@ -6,6 +6,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { berechneEStGrund } from '@/lib/berechnungen/einkommensteuer';
 
 type Steuerklasse = 'I' | 'II' | 'III' | 'IV' | 'V' | 'VI';
 
@@ -17,22 +18,12 @@ const FAKTOR_F = 0.6847;
 const SV_AN = 0.0930 + 0.0875 + 0.0170 + 0.0130; // RV + KV + PV + AV = ca. 21.05%
 const SV_AG = 0.0930 + 0.0875 + 0.0170 + 0.0130;
 
+// Vereinfachte Monatslohnsteuer: nutzt den zentralen 2026-Tarif
+// (§ 32a EStG) aus lib/berechnungen/einkommensteuer.ts.
 function einfacheLohnsteuerMonat(brutto: number, klasse: Steuerklasse): number {
   const jahr = brutto * 12;
-  const grundfreibetrag = 12096;
   const zvEff = klasse === 'III' ? jahr / 2 : jahr;
-  const x = Math.max(0, zvEff - grundfreibetrag);
-  let steuer = 0;
-  if (x === 0) steuer = 0;
-  else if (zvEff <= 17443) {
-    const y = x / 10000;
-    steuer = (932.3 * y + 1400) * y;
-  } else if (zvEff <= 68480) {
-    const y = (zvEff - 17443) / 10000;
-    steuer = (176.64 * y + 2397) * y + 1015.13;
-  } else {
-    steuer = 0.42 * zvEff - 10602.13;
-  }
+  let steuer = berechneEStGrund(Math.max(0, zvEff), 2026);
   if (klasse === 'III') steuer *= 2;
   if (klasse === 'V' || klasse === 'VI') steuer *= 1.15;
   return Math.max(0, steuer / 12);

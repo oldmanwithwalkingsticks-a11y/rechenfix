@@ -51,9 +51,11 @@ const SONDERAUSGABEN_PAUSCHBETRAG = 36;
 // Grobe SV-Pauschale für zvE-Schätzung (vereinfacht)
 const SV_PAUSCHALE = 0.20;
 
-// Soli-Parameter
-const SOLI_FREIGRENZE = 18130;
-const SOLI_MILDERUNGSGRENZE = 33761;
+// Soli-Parameter 2026 (§ 4 SolzG)
+// Freigrenze Grundtarif: 20.350 €; Obergrenze Milderungszone: Freigrenze × 1,8595.
+// TODO Prompt 88+: aus lib/berechnungen/einkommensteuer.ts (PARAMS[2026]) ableiten.
+const SOLI_FREIGRENZE = 20350;
+const SOLI_MILDERUNGSGRENZE = 37838;
 const SOLI_SATZ = 0.055;
 
 // Kirchensteuer (vereinfacht: 9%)

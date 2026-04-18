@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo, useCallback } from 'react';
+import { BBG_KV_MONAT } from '@/lib/berechnungen/brutto-netto';
 
 interface SchnellCheckProps {
   brutto: number;
@@ -61,11 +62,11 @@ export default function SchnellCheck({
       });
     }
 
-    // Brutto über KV-Beitragsbemessungsgrenze (2025: 5512,50 €/Monat)
-    if (brutto > 5512) {
+    // Brutto über KV-Beitragsbemessungsgrenze 2026 (5.812,50 €/Monat)
+    if (brutto > BBG_KV_MONAT) {
       tipps.push({
         id: 'kvgrenze',
-        text: 'Ihr Gehalt liegt über der KV-Beitragsbemessungsgrenze (5.512,50 €). KV-Beiträge steigen ab hier nicht weiter — eine private KV könnte sich lohnen.',
+        text: 'Ihr Gehalt liegt über der KV-Beitragsbemessungsgrenze (5.812,50 €). KV-Beiträge steigen ab hier nicht weiter — eine private KV könnte sich lohnen.',
       });
     }
 

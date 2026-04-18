@@ -6,44 +6,23 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { berechneLohnsteuerJahr } from '@/lib/berechnungen/lohnsteuer';
 
 type Steuerklasse = 'I' | 'II' | 'III' | 'IV' | 'V' | 'VI';
 
-// Pauschalierte Lohnsteuer-Sätze (sehr vereinfacht, KuG-Tabelle-Approximation)
-// Wir nutzen für die Berechnung einen pauschalen SV-Abzug von ~21 % plus einen
-// Steuer-Faktor nach Steuerklasse auf das verbleibende Brutto.
+// Pauschaler SV-Abzug (~21 %) für die KuG-Nettoberechnung. Steuer läuft
+// über die zentrale 2026-Lohnsteuer-Lib (§ 39b EStG, PAP 2026).
 const SV_PAUSCHALE = 0.21;
 
-const STEUER_FAKTOR: Record<Steuerklasse, (brutto: number) => number> = {
-  // progressive Näherung: 0 % bis ~1100 €/Monat, dann 14–42 %
-  'I':   (b) => progressiveSteuer(b, 11604),
-  'II':  (b) => progressiveSteuer(b, 14924), // Alleinerziehend-Entlastung
-  'III': (b) => progressiveSteuer(b, 23208), // doppelter Grundfreibetrag
-  'IV':  (b) => progressiveSteuer(b, 11604),
-  'V':   (b) => progressiveSteuer(b, 0),
-  'VI':  (b) => progressiveSteuer(b, 0),
+const SK_MAP: Record<Steuerklasse, 1 | 2 | 3 | 4 | 5 | 6> = {
+  'I': 1, 'II': 2, 'III': 3, 'IV': 4, 'V': 5, 'VI': 6,
 };
-
-function progressiveSteuer(jahresBrutto: number, freibetragJahr: number): number {
-  const zvE = Math.max(0, jahresBrutto - freibetragJahr);
-  if (zvE <= 0) return 0;
-  if (zvE <= 17000) {
-    // linear 14 % bis 24 %
-    const y = zvE / 17000;
-    return zvE * (0.14 + y * 0.10);
-  }
-  if (zvE <= 66761) {
-    const y = (zvE - 17000) / (66761 - 17000);
-    return 17000 * 0.19 + (zvE - 17000) * (0.24 + y * 0.18);
-  }
-  return 17000 * 0.19 + (66761 - 17000) * 0.33 + (zvE - 66761) * 0.42;
-}
 
 function nettoAus(brutto: number, sk: Steuerklasse, kirchensteuerSatz: number): number {
   if (brutto <= 0) return 0;
   const jahresBrutto = brutto * 12;
   const sv = brutto * SV_PAUSCHALE;
-  const steuerJahr = STEUER_FAKTOR[sk](jahresBrutto);
+  const steuerJahr = berechneLohnsteuerJahr(jahresBrutto, SK_MAP[sk], 0);
   const steuerMonat = steuerJahr / 12;
   const kirchensteuer = steuerMonat * kirchensteuerSatz;
   return Math.max(0, brutto - sv - steuerMonat - kirchensteuer);

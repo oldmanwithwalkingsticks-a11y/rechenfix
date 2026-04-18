@@ -116,8 +116,11 @@ function berechneJahressteuer(
 }
 
 // Beitragsbemessungsgrenzen 2026 (einheitlich, seit 2025 keine West/Ost-Trennung)
-const BBG_KV = 5812.50;   // monatlich · 69.750 €/Jahr
-const BBG_RV = 8450;      // monatlich · 101.400 €/Jahr (einheitlich 2026)
+export const BBG_KV_MONAT = 5812.50;   // · 69.750 €/Jahr
+export const BBG_RV_MONAT = 8450;      // · 101.400 €/Jahr
+// Alias für interne Verwendung
+const BBG_KV = BBG_KV_MONAT;
+const BBG_RV = BBG_RV_MONAT;
 
 export function berechneBruttoNetto(eingabe: BruttoNettoEingabe): BruttoNettoErgebnis {
   let brutto = eingabe.bruttoMonat;

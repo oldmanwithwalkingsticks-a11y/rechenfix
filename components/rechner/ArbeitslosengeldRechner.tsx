@@ -6,32 +6,19 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { berechneEStGrund } from '@/lib/berechnungen/einkommensteuer';
+import { BBG_RV_MONAT } from '@/lib/berechnungen/brutto-netto';
 
 type Steuerklasse = 'I' | 'II' | 'III' | 'IV' | 'V' | 'VI';
 
-// Vereinfachte Jahreslohnsteuer 2026 (Grundtarif), ohne Soli
+// Vereinfachte Jahreslohnsteuer: nutzt den zentralen 2026-Tarif
+// (§ 32a EStG) aus lib/berechnungen/einkommensteuer.ts und wendet die
+// bekannten Steuerklassen-Multiplikatoren an.
 function lohnsteuerJahr(zvE: number, klasse: Steuerklasse): number {
-  if (klasse === 'III') zvE = Math.max(0, zvE - 0); // Vereinfacht: Ehegattensplitting ≈ doppelter Grundfreibetrag
-  // Grundfreibetrag 2026 (approx)
-  const grundfreibetrag = 12096;
   const zvEff = klasse === 'III' ? zvE / 2 : zvE;
-  const x = Math.max(0, zvEff - grundfreibetrag);
-  let steuer = 0;
-  if (x === 0) steuer = 0;
-  else if (zvEff <= 17443) {
-    const y = x / 10000;
-    steuer = (932.3 * y + 1400) * y;
-  } else if (zvEff <= 68480) {
-    const y = (zvEff - 17443) / 10000;
-    steuer = (176.64 * y + 2397) * y + 1015.13;
-  } else if (zvEff <= 277825) {
-    steuer = 0.42 * zvEff - 10602.13;
-  } else {
-    steuer = 0.45 * zvEff - 18936.88;
-  }
+  let steuer = berechneEStGrund(Math.max(0, zvEff), 2026);
   if (klasse === 'III') steuer *= 2;
   if (klasse === 'V' || klasse === 'VI') steuer *= 1.15;
-  if (klasse === 'I' || klasse === 'II' || klasse === 'IV') steuer *= 1;
   return Math.max(0, steuer);
 }
 
@@ -60,9 +47,8 @@ export default function ArbeitslosengeldRechner() {
     const a = parseDeutscheZahl(alter) || 0;
     const beschMonate = parseDeutscheZahl(beschDauer) || 0;
 
-    // BBG Rentenversicherung 2026 (approx)
-    const BBG_MONAT = 7550;
-    const bemessung = Math.min(b, BBG_MONAT);
+    // BBG Rentenversicherung 2026 (einheitlich, aus zentraler Lib)
+    const bemessung = Math.min(b, BBG_RV_MONAT);
 
     // Jahres-Lohnsteuer vereinfacht
     const jahresBrutto = bemessung * 12;

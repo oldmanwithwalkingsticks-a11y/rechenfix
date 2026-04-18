@@ -8,23 +8,11 @@ import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
+import { berechneEStGrund } from '@/lib/berechnungen/einkommensteuer';
+import { BBG_KV_MONAT, BBG_RV_MONAT } from '@/lib/berechnungen/brutto-netto';
 
-// Einkommensteuer §32a EStG 2026 (Grundtarif, vereinfacht)
-function estGrund(zvE: number): number {
-  if (zvE <= 12096) return 0;
-  if (zvE <= 17443) {
-    const y = (zvE - 12096) / 10000;
-    return Math.max(0, (932.3 * y + 1400) * y);
-  }
-  if (zvE <= 68480) {
-    const z = (zvE - 17443) / 10000;
-    return (176.64 * z + 2397) * z + 1015.13;
-  }
-  if (zvE <= 277825) {
-    return 0.42 * zvE - 10911.92;
-  }
-  return 0.45 * zvE - 19246.67;
-}
+// Soli-Freigrenze Grundtarif 2026 (§ 4 SolzG)
+const SOLI_FREIGRENZE_2026 = 20350;
 
 const fmtEur = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
 const fmt0 = (n: number) => Math.round(n).toLocaleString('de-DE') + ' €';
@@ -53,9 +41,9 @@ export default function GmbhGfRechner() {
     // Steuerpflichtiges Brutto (inkl. Firmenwagen)
     const steuerBruttoJahr = jahresBrutto + gwVJahr;
 
-    // Sozialabgaben 2026 (vereinfacht)
-    const bbgKVPV = 5850 * 12; // BBG KV/PV monatlich 5.850 €
-    const bbgRVAV = 8550 * 12; // BBG RV/AV (West) 8.550 €
+    // Sozialabgaben 2026 (aus zentraler Lib)
+    const bbgKVPV = BBG_KV_MONAT * 12;
+    const bbgRVAV = BBG_RV_MONAT * 12;
 
     const kvBasis = Math.min(steuerBruttoJahr, bbgKVPV);
     const rvBasis = Math.min(steuerBruttoJahr, bbgRVAV);
@@ -98,8 +86,8 @@ export default function GmbhGfRechner() {
     const vorsorge = beherrschend ? Math.min(pkvJahr, 7000) : (anRv + anKv + anPv);
 
     const zvE = Math.max(0, steuerBruttoJahr - werbungskosten - vorsorge);
-    const est = estGrund(zvE);
-    const soli = est > 19950 ? est * 0.055 : 0;
+    const est = berechneEStGrund(zvE, 2026);
+    const soli = est > SOLI_FREIGRENZE_2026 ? est * 0.055 : 0;
     const kirchensteuer = kirche ? est * 0.09 : 0;
 
     const summeAbgabenJahr = anKv + anPv + anRv + anAv + est + soli + kirchensteuer + pkvJahr;

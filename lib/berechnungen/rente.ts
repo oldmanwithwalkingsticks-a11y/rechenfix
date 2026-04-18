@@ -31,8 +31,23 @@ export interface RentenErgebnis {
   durchschnittsentgelt: number;
 }
 
+// Aktueller Rentenwert nach § 68 SGB VI
+// Historie:
+// - 01.07.2024–30.06.2025: 39,32 €
+// - 01.07.2025–30.06.2026: 40,79 € (Rentenanpassung 01.07.2025, +4,57 %)
+// - Ab 01.07.2026:         42,52 € (BMAS-Bekanntgabe 05.03.2026, +4,24 %)
+export const RENTENWERT_BIS_30_06_2026 = 40.79;
+export const RENTENWERT_AB_01_07_2026 = 42.52;
+
+export function getAktuellerRentenwert(stichtag: Date = new Date()): number {
+  const switchDatum = new Date(2026, 6, 1); // 01.07.2026 (Monat 0-indexiert)
+  return stichtag >= switchDatum ? RENTENWERT_AB_01_07_2026 : RENTENWERT_BIS_30_06_2026;
+}
+
+// Backwards-Compat: bestehende Importe liefern weiterhin den tagesaktuellen Wert.
+export const RENTENWERT = getAktuellerRentenwert();
+
 // Konstanten 2026
-const RENTENWERT = 39.32; // € pro Rentenpunkt (ab 01.07.2025, gilt bis 30.06.2026)
 const DURCHSCHNITTSENTGELT = 51944; // Vorläufiges Durchschnittsentgelt 2026
 const BBG_WEST = 101400; // BBG RV 2026 (einheitlich, 8.450 €/Monat)
 const REGELALTERSGRENZE = 67;
