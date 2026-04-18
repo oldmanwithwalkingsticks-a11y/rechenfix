@@ -47,8 +47,10 @@ export default function BarrierefreiheitSeite() {
               weitgehend erfüllt. Wir arbeiten kontinuierlich an der Verbesserung der Barrierefreiheit.
             </p>
             <p className="mt-3 leading-relaxed">
-              Die Website ist mit den genannten Anforderungen aufgrund der nachfolgend aufgeführten
-              Einschränkungen <strong>teilweise vereinbar</strong>.
+              Die Website erfüllt die automatisiert prüfbaren Anforderungen der WCAG 2.1 AA{' '}
+              vollständig (Lighthouse-Ø <strong>100/100</strong>, axe <strong>0 Findings</strong>{' '}
+              in der Stichprobe vom April 2026). Einzelne Inhalte sind trotzdem noch eingeschränkt{' '}
+              barrierefrei zugänglich, siehe Abschnitt „Nicht barrierefreie Inhalte".
             </p>
           </section>
 
@@ -114,12 +116,18 @@ export default function BarrierefreiheitSeite() {
               und Tastaturnavigation.
             </p>
             <p className="mt-2 leading-relaxed">
-              Zuletzt geprüft durch Lighthouse- und axe-DevTools-Sweep am{' '}
-              <strong>18. April 2026</strong> über eine Stichprobe von{' '}
-              <strong>19 Rechnern aus allen 9 Kategorien</strong>.{' '}
-              Durchschnittlicher Lighthouse-Accessibility-Score:{' '}
-              <strong>98,4 / 100</strong>.
+              Zuletzt geprüft durch Lighthouse- und axe-DevTools-Sweep:{' '}
+              <strong>18. April 2026</strong> (Stichprobe 19 Rechner aus allen 9 Kategorien,{' '}
+              Re-Runs nach Prompts 78z-B und 78z-A).
             </p>
+            <p className="mt-2 leading-relaxed">
+              Ergebnis der Stichprobe:
+            </p>
+            <ul className="mt-2 list-disc pl-6 space-y-1 text-sm leading-relaxed">
+              <li>Durchschnittlicher Lighthouse-Accessibility-Score: <strong>100/100</strong> (Mobile und Desktop)</li>
+              <li>axe DevTools: <strong>0 Findings</strong> (Critical, Serious, Moderate, Minor)</li>
+              <li>Alle 19 geprüften Rechner-Seiten erfüllen die Stichprobe vollständig</li>
+            </ul>
           </section>
 
           {/* Feedback */}

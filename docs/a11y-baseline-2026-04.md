@@ -140,6 +140,39 @@ Fixes sind committed. **Lighthouse- und axe-Messwerte hier sind noch als _pendin
 
 Nächster Prompt **78z-A** adressiert den Hauptteil der verbleibenden Serious-Findings (27 color-contrast, v. a. die 16 Zonen-Farbblöcke im `HerzfrequenzZonenRechner`).
 
+## Re-Run nach 78z-A (Color-Contrast) — 18. April 2026
+
+Alle 5 betroffenen Seiten nach dem Fix neu gemessen + die 14 bereits grünen Seiten zur Regression mitgescannt:
+
+| Route | LH Mobile | LH Desktop | Critical | Serious |
+|---|---:|---:|---:|---:|
+| `/sport/herzfrequenz-zonen-rechner` | 100 | 100 | 0 | 0 |
+| `/alltag/prozentrechner` | 100 | 100 | 0 | 0 |
+| `/wohnen/baufinanzierung-rechner` | 100 | 100 | 0 | 0 |
+| `/finanzen/brutto-netto-rechner` | 100 | 100 | 0 | 0 |
+| `/sport/pace-rechner` | 100 | 100 | 0 | 0 |
+
+Alle übrigen 14 Stichproben: unverändert 100/100, 0 Findings.
+
+**Fix-Ansatz:**
+- **HerzfrequenzZonenRechner** (16 Serious): Das ZONEN-Array wurde komplett auf WCAG-AA-konforme Paare umgestellt — Zone 1 `bg-green-200 text-green-950`, Zone 2 `bg-green-500 text-green-950`, Zone 3 `bg-yellow-400 text-yellow-950`, Zone 4 `bg-orange-500 text-orange-950`, Zone 5 `bg-red-700 text-white`. Der visuelle Gradient (Regeneration → Maximum) bleibt erhalten. Zusätzlich `opacity-90` auf den beiden Sub-Text-Zeilen entfernt; die Hierarchie zum Haupt-Text bleibt durch Schriftgröße und Weight gewahrt.
+- **Prozentrechner** (6 Serious): Die 6 Quick-Value-Prozent-Buttons hatten im aktiven Zustand `bg-accent-500 text-white` (≈ 2:1) und inaktiv `bg-gray-100 text-gray-500` (≈ 4,24:1). Fix auf `bg-accent-700 text-white` aktiv und `text-gray-700 dark:text-gray-200` inaktiv — beide sauber über 4,5:1.
+- **BaufinanzierungRechner** (2 Serious + 1 weiteres aus dem Abend-Scan): Ursprünglich `text-amber-600` in der EK-Quote-Bewertung, später zusätzlich `text-orange-600` in der Restschuld-/Zinsanteil-Anzeige und `text-green-600` in der Tilgungsanteil-Spalte der Jahrestabelle. Alle drei Farbfamilien auf die `-700` (light) und `dark:*-300` (dark) Stufen gehoben — Orange und Grün bleiben farblich deutlich erkennbar.
+- **BruttoNettoRechner** (1 Serious): Der Verteilungs-Prozentbalken hatte im Netto-Segment `bg-green-600 text-white` (≈ 3,29:1) und im Steuer-Segment `bg-red-600 text-white` (≈ 4,61:1 borderline). Fix auf `bg-green-800 text-white` (≈ 5,86:1) und `bg-red-700 text-white` (≈ 6,58:1).
+- **PaceRechner** (1 Serious keyboard-access, nicht color-contrast wie ursprünglich vermutet): Die Split-Tabelle mit `overflow-x-auto max-h-96` war scrollbar, aber nicht tastatur-fokusierbar. Fix: `tabIndex={0}` + `role="region"` + `aria-label` am Scroll-Container.
+
+## Status gesamt nach 78z-B + 78z-A
+
+| Metrik | Baseline | Nach 78z-B | Nach 78z-A | Gesamt-Δ |
+|---|---:|---:|---:|---:|
+| LH Mobile Ø | 98,42 | 99,37 | **100,00** | +1,58 |
+| LH Desktop Ø | 98,42 | 99,37 | **100,00** | +1,58 |
+| axe Critical | 5 | 0 | **0** | −5 |
+| axe Serious | 28 | 26 | **0** | −28 |
+| 100/100 + 0 Findings | 11/19 | 14/19 | **19/19** | +8 Seiten |
+
+A11y-Sprint damit abgeschlossen bis auf 78z-C (Taschenrechner-Crosslinks, Design-Entscheidung).
+
 ## Nächster Sweep
 
 Empfohlener Rhythmus: nach jedem größeren Sprint oder nach Layout-/Footer-Änderungen.
