@@ -50,7 +50,7 @@ export default function BarrierefreiheitSeite() {
               Die Website erfüllt die automatisiert prüfbaren Anforderungen der WCAG 2.1 AA{' '}
               vollständig (Lighthouse-Ø <strong>100/100</strong>, axe <strong>0 Findings</strong>{' '}
               in der Stichprobe vom April 2026). Einzelne Inhalte sind trotzdem noch eingeschränkt{' '}
-              barrierefrei zugänglich, siehe Abschnitt „Nicht barrierefreie Inhalte".
+              barrierefrei zugänglich, siehe Abschnitt &bdquo;Nicht barrierefreie Inhalte&ldquo;.
             </p>
           </section>
 
