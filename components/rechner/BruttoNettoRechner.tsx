@@ -222,8 +222,8 @@ export default function BruttoNettoRechner() {
           {kvArt === 'gesetzlich' ? (
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">KV-Zusatzbeitrag (AN-Anteil)</label>
-              <NummerEingabe value={kvZusatzbeitrag} onChange={setKvZusatzbeitrag} placeholder="z.B. 1,7" einheit="%" />
-              <p className="text-xs text-gray-600 mt-1">Durchschnitt 2025: 1,7%</p>
+              <NummerEingabe value={kvZusatzbeitrag} onChange={setKvZusatzbeitrag} placeholder="z.B. 2,9" einheit="%" />
+              <p className="text-xs text-gray-600 mt-1">Durchschnitt 2026: 1,45% (halber Zusatzbeitrag von 2,9%)</p>
             </div>
           ) : (
             <div>

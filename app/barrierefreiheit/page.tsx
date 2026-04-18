@@ -113,6 +113,12 @@ export default function BarrierefreiheitSeite() {
               (Google Lighthouse, axe DevTools) sowie manueller Prüfung mit Screenreadern
               und Tastaturnavigation.
             </p>
+            <p className="mt-2 leading-relaxed">
+              Zuletzt geprüft durch Lighthouse- und axe-DevTools-Sweep:{' '}
+              <strong>[Datum des Sweep-Runs]</strong>.{' '}
+              Durchschnittlicher Lighthouse-Accessibility-Score:{' '}
+              <strong>[Ø-Score aus Sweep]</strong>.
+            </p>
           </section>
 
           {/* Feedback */}
