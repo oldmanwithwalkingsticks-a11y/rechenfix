@@ -48,16 +48,16 @@ Laut `/barrierefreiheit` BfE-Seite:
 | 9 | `/wohnen/heizkosten-rechner` | Wohnen & Energie | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | ☐ |
 | 10 | `/wohnen/baufinanzierung-rechner` | Wohnen & Energie | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | ☐ |
 | 11 | `/mathe/wissenschaftlicher-taschenrechner` | Mathe & Schule | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | ☐ |
-| 12 | `/mathe/dreisatzrechner` oder `/alltag/dreisatz-rechner` | Mathe & Schule | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | ☐ |
+| 12 | `/mathe/bruchrechner` | Mathe & Schule | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | ☐ |
 | 13 | `/arbeit/unterhaltsrechner` | Arbeit & Recht | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | ☐ |
 | 14 | `/arbeit/arbeitszeitrechner` | Arbeit & Recht | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | ☐ |
 | 15 | `/kochen/rezept-umrechner` | Kochen & Ernährung | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | ☐ |
 | 16 | `/kochen/naehrwert-rechner` | Kochen & Ernährung | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | ☐ |
 | 17 | `/sport/pace-rechner` | Sport & Fitness | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | ☐ |
-| 18 | `/sport/herzfrequenz-rechner` | Sport & Fitness | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | ☐ |
+| 18 | `/sport/herzfrequenz-zonen-rechner` | Sport & Fitness | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | ☐ |
 | 19 | `/barrierefreiheit` | **BfE-Pflicht** | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | ☐ |
 
-**Hinweis zu Slugs:** Falls eine Route oben nicht existiert, gegen `lib/rechner-config/<kategorie>.ts` prüfen und korrigieren. Die Dreisatz-Route liegt laut Config in `/alltag/`, nicht unter `/mathe/`.
+**Slug-Stand:** Alle 19 Routen wurden gegen `lib/rechner-config/client-data.ts` verifiziert (Stand April 2026). Mathe ist durch `/mathe/bruchrechner` vertreten, der Dreisatz-Rechner liegt laut Config nur unter `/alltag/`. Der Zweit-Sport-Rechner hat den Slug `herzfrequenz-zonen-rechner` (nicht identisch mit dem gleichnamigen, aber separaten `/gesundheit/herzfrequenz-rechner` — zwei getrennte Rechner in zwei Kategorien).
 
 ## Aggregat
 
