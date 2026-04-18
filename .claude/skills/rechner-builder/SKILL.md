@@ -472,17 +472,26 @@ Tarif-, SV-, Unterhalts-, Mindestlohn-, Renten- und Pfändungs-Rechner dürfen P
 
 Die drei Tarif-Rechner (Brutto-Netto, Lohnsteuer, Einkommensteuer) sind eine **Rechner-Gruppe** mit geteilter Logik. Änderungen an zentralen Parametern wirken auf alle drei. Siehe auch G10 (keine Dubletten zentraler Werte).
 
-## Skill-Synchronisation (wichtig!)
+## Skill-Synchronisation
 
 Dieser Skill existiert in zwei Kopien:
 
 1. **Repo (maßgeblich):** `.claude/skills/rechner-builder/SKILL.md` — diese Datei, gepflegt von Claude Code
-2. **Chat-AppData:** `%AppData%\Claude\...\skills\rechner-builder\SKILL.md` — gelesen von Claude-Chat-Instanzen über `/mnt/skills/user/rechner-builder/SKILL.md`
+2. **claude.ai Skills-UI:** Menü oben links → Einstellungen → Skills → rechner-builder → Bearbeiten
 
-Nach einem Update der Repo-Version muss die AppData-Kopie **manuell vom User** synchronisiert werden. Sonst geben Claude-Chat und Claude Code inkonsistente Ratschläge.
+Die claude.ai-Kopie wird von Claude-Chat-Instanzen beim Trigger geladen (nicht als lokale Datei auf Disk, sondern cloud-basiert). Nach einem Update der Repo-Version muss der Inhalt **manuell** in die claude.ai-UI übertragen werden:
+
+1. Vollständigen Inhalt dieser Datei kopieren (ohne YAML-Frontmatter falls vorhanden)
+2. In claude.ai → Einstellungen → Skills → rechner-builder → Bearbeiten öffnen
+3. Gesamten Inhalt dort ersetzen
+4. Speichern
+5. Laufende Claude-Chat-Session neu starten, damit der frische Skill geladen wird
+
+Ohne diesen Schritt geben Claude-Chat und Claude-Code inkonsistente Ratschläge (Chat arbeitet mit veralteter Skill-Version).
 
 **Sync-Protokoll:**
 
-| Datum | Änderung | AppData synchronisiert? |
+| Datum | Änderung | claude.ai synchronisiert? |
 |---|---|---|
-| 19.04.2026 | Prompt 92: G10, Step 12a (Jahresabhängige Werte), diese Sync-Sektion, erweiterte Lib-Liste mit mindestlohn.ts / rente.ts / pfaendung.ts | [ ] noch offen |
+| 19.04.2026 | Prompt 92: Guard G10, Stichtag-Switch-Step, SSOT-Referenzen | [ ] noch offen |
+| 19.04.2026 | Prompt 92a: Sync-Sektion auf claude.ai-UI-Workflow umgestellt | [ ] noch offen |
