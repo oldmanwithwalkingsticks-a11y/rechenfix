@@ -79,6 +79,7 @@ export default function EtfSparplanRechner() {
             value={nAnlagedauer || 20}
             onChange={e => setAnlagedauer(e.target.value)}
             className="w-full mt-2 accent-primary-500"
+            aria-label="Anlagedauer in Jahren (Schieberegler)"
           />
           <div className="flex justify-between text-xs text-gray-600 dark:text-gray-500">
             <span>1</span><span>10</span><span>20</span><span>30</span><span>40</span><span>50</span>

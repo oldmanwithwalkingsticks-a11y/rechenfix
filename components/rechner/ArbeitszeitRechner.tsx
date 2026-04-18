@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useId } from 'react';
 import { berechneTageszeit, berechneWoche, type WochenTag } from '@/lib/berechnungen/arbeitszeit';
 import { clampInputValue, clampNumber } from '@/lib/zahlenformat';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
@@ -11,10 +11,12 @@ import { AffiliateBox } from '@/components/AffiliateBox';
 type Modus = 'tag' | 'woche';
 
 function ZeitEingabe({ value, onChange, label }: { value: string; onChange: (v: string) => void; label: string }) {
+  const id = useId();
   return (
     <div>
-      <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">{label}</label>
+      <label htmlFor={id} className="block text-xs text-gray-500 dark:text-gray-400 mb-1">{label}</label>
       <input
+        id={id}
         type="time"
         value={value}
         onChange={e => onChange(e.target.value)}
@@ -25,11 +27,13 @@ function ZeitEingabe({ value, onChange, label }: { value: string; onChange: (v: 
 }
 
 function MinutenEingabe({ value, onChange, label }: { value: string; onChange: (v: string) => void; label: string }) {
+  const id = useId();
   return (
     <div>
-      <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">{label}</label>
+      <label htmlFor={id} className="block text-xs text-gray-500 dark:text-gray-400 mb-1">{label}</label>
       <div className="relative">
         <input
+          id={id}
           type="number"
           inputMode="numeric"
           min="0"
@@ -290,13 +294,15 @@ export default function ArbeitszeitRechner() {
                       value={tag.beginn}
                       onChange={e => updateTag(idx, { beginn: e.target.value })}
                       className="input-field w-24 text-xs py-1.5"
+                      aria-label={`Arbeitsbeginn ${tag.label}`}
                     />
-                    <span className="text-gray-600 text-xs">–</span>
+                    <span className="text-gray-600 text-xs" aria-hidden="true">–</span>
                     <input
                       type="time"
                       value={tag.ende}
                       onChange={e => updateTag(idx, { ende: e.target.value })}
                       className="input-field w-24 text-xs py-1.5"
+                      aria-label={`Arbeitsende ${tag.label}`}
                     />
                     <input
                       type="number"
@@ -306,9 +312,9 @@ export default function ArbeitszeitRechner() {
                       value={tag.pause}
                       onChange={e => updateTag(idx, { pause: clampNumber(parseInt(e.target.value, 10), 0, 480) })}
                       className="input-field w-16 text-xs py-1.5 text-center"
-                      title="Pause in Minuten"
+                      aria-label={`Pause ${tag.label} in Minuten`}
                     />
-                    <span className="text-xs text-gray-600 shrink-0">min</span>
+                    <span className="text-xs text-gray-600 shrink-0" aria-hidden="true">min</span>
                   </>
                 )}
                 {tag.frei && (

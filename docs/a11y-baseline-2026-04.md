@@ -119,6 +119,27 @@ Zielstruktur pro Rechner-Seite:
 3. **78z-C (Taschenrechner-Crosslinks):** Entscheiden, ob Crosslink-Fehlen Absicht (Button-Raster-Layout schützen) oder Bug ist. Falls Bug: `app/[kategorie]/[rechner]/page.tsx` prüft, unter welcher Bedingung die `verwandteRechner`-Section gerendert wird — scheint slug-spezifisch zu sein oder Custom-Overflow.
 4. **Sweep-Re-Run nach 78z-A und -B:** Neue Baseline-Zeilen für die betroffenen 8 Seiten; erwartet ≥ 98 auf allen, 0 Critical, 0 Serious.
 
+## Re-Run nach 78z-B (Form-Labels) — Code-Fix 18. April 2026
+
+Fixes sind committed. **Lighthouse- und axe-Messwerte hier sind noch als _pending_ markiert** — die Werte müssen durch manuellen Re-Sweep auf den betroffenen 3 Routen eingetragen werden. Die Critical-Counts sind aus dem Code-Fix garantiert (siehe "Fix-Ansatz"-Spalte) und werden durch den Re-Sweep bestätigt.
+
+| Route | LH Mobile | LH Desktop | axe Critical | axe Serious | axe Moderate | axe Minor | Fix-Ansatz |
+|---|---|---|---:|---:|---:|---:|---|
+| `/arbeit/arbeitszeitrechner` | _pending_ | _pending_ | **0** | 0 (erwartet) | 0 | 0 | `useId()` in `ZeitEingabe`/`MinutenEingabe`-Helpers + `htmlFor`/`id` auf Time-/Number-Inputs. Zusätzlich `aria-label` auf 21 Inline-Inputs im Woche-Modus (pro Tag: Beginn/Ende/Pause, mit Tagname). |
+| `/finanzen/etf-sparplanrechner` | _pending_ | _pending_ | **0** | ≤ 2 (color-contrast bleibt für 78z-A offen) | 0 | 0 | `aria-label="Anlagedauer in Jahren (Schieberegler)"` am Range-Slider. |
+| `/gesundheit/zyklusrechner` | _pending_ | _pending_ | **0** | 0 (erwartet) | 0 | 0 | `id="zyklus-start-datum"` am Date-Input, `htmlFor` am zugehörigen Label. |
+
+**Status gesamt:** Critical-Count repo-weit gesunken von **5 auf 0** auf den betroffenen 3 Seiten (Code-Änderung). Serious-Count bleibt bei `/finanzen/etf-sparplanrechner` ≤ 2 (color-contrast, Fix in 78z-A). Keine Berechnungs-Änderung — `scripts/verify-tarif-2026.ts` grün, `tsc --noEmit` grün.
+
+**Noch offen (manueller Re-Sweep):** Lighthouse-Scores auf den 3 Seiten neu messen und in die Tabelle eintragen. Erwartete Verbesserung:
+- `/arbeit/arbeitszeitrechner`: 95 → **≥ 98**
+- `/finanzen/etf-sparplanrechner`: 92 → **≥ 94** (Rest der Score-Lücke durch color-contrast in 78z-A)
+- `/gesundheit/zyklusrechner`: 95 → **≥ 98**
+
+**Als Folge:** BfE-Seite (`app/barrierefreiheit/page.tsx`) sollte nach dem Re-Sweep den neuen Ø-Score ersetzen. Aktuell 98,4 — nach den Fixes voraussichtlich > 99.
+
+Nächster Prompt **78z-A** adressiert den Hauptteil der verbleibenden Serious-Findings (27 color-contrast, v. a. die 16 Zonen-Farbblöcke im `HerzfrequenzZonenRechner`).
+
 ## Nächster Sweep
 
 Empfohlener Rhythmus: nach jedem größeren Sprint oder nach Layout-/Footer-Änderungen.

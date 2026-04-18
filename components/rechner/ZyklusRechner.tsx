@@ -93,8 +93,8 @@ export default function ZyklusRechner() {
     <div>
       <div className="space-y-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-6">
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Erster Tag der letzten Periode</label>
-          <input type="date" value={startDatum} onChange={e => setStartDatum(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200" />
+          <label htmlFor="zyklus-start-datum" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Erster Tag der letzten Periode</label>
+          <input id="zyklus-start-datum" type="date" value={startDatum} onChange={e => setStartDatum(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200" />
         </div>
         <div>
           <label htmlFor="zyklus-select-1" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Zykluslänge</label>
