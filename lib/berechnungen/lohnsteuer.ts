@@ -1,4 +1,5 @@
 import { berechneEStGrund } from './einkommensteuer';
+import { pvAnteilAnVorsorge2026 } from './pflegeversicherung';
 
 export type Steuerklasse = 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -17,7 +18,11 @@ export interface LohnsteuerEingabe {
 export interface VorsorgeParams {
   kvArt?: 'gesetzlich' | 'privat';
   kvZusatzbeitragProzent?: number;  // z. B. 2.9
-  pvKinderlos?: boolean;
+  /**
+   * Anzahl berücksichtigungsfähiger Kinder unter 25 Jahren (§ 55 Abs. 3 SGB XI).
+   * 0 = Kinderloszuschlag, ≥2 = Kinderabschlag.
+   */
+  kinderUnter25?: number;
   kvPrivatBeitragJahr?: number;      // nur relevant wenn kvArt === 'privat'
   rvBefreit?: boolean;
 }
@@ -72,7 +77,7 @@ export function berechneVorsorgepauschale2026(
   const {
     kvArt = 'gesetzlich',
     kvZusatzbeitragProzent = 2.9,
-    pvKinderlos = false,
+    kinderUnter25 = 0,
     kvPrivatBeitragJahr = 0,
     rvBefreit = false,
   } = params;
@@ -86,15 +91,11 @@ export function berechneVorsorgepauschale2026(
   const tbRV = rvBefreit ? 0 : bmgRvAv * 0.093;
 
   // (b) + (c) oder (d): KV/PV-Teilbeträge
-  //
-  // PV-Satz in der Vorsorgepauschale: empirisch gegen bmf-steuerrechner.de kalibriert.
-  // BMF-Rechner reproduziert keine voll-kinderlosen 2,4 %, sondern setzt nur den halben
-  // Kinderlosen-Zuschlag (0,3 pp) an → effektiver PV-Anteil 2,1 %. Vermutete Begründung:
-  // analog zum halben durchschnittlichen Zusatzbeitrag bei der KV (§ 39b Abs. 4 EStG
-  // nimmt den Zusatzbeitrag als Pauschale hälftig, obwohl der AN faktisch den vollen
-  // Wert seiner Kasse zahlt). Ohne diese Kalibrierung weicht die Lohnsteuer um +/- 3 €
-  // vom BMF-Rechner ab.
-  const pvSatz = pvKinderlos ? 0.021 : 0.018;
+  // PV-Satz aus dem zentralen Helper (§ 55 Abs. 3 SGB XI + BMF-Vorsorge-Kalibrierung):
+  //   - Kinderlos: 2,1 % (1,8 % + halber Zuschlag 0,3 pp — BMF-Rundung)
+  //   - 1 Kind (Elterneigenschaft): 1,8 %
+  //   - 2 Kinder: 1,55 % / 3: 1,30 % / 4: 1,05 % / 5+: 0,80 % (gekappt)
+  const pvSatz = pvAnteilAnVorsorge2026(kinderUnter25);
   let tbKVuPV: number;
   if (kvArt === 'privat') {
     // PKV: tatsächlicher Jahresbeitrag, gedeckelt auf den GKV-Vergleichswert.

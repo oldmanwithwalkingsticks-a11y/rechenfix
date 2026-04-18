@@ -1,4 +1,5 @@
 import { berechneLohnsteuerJahr } from './lohnsteuer';
+import { pvAnteilAn2026 } from './pflegeversicherung';
 
 export interface BruttoNettoEingabe {
   bruttoMonat: number;
@@ -6,6 +7,13 @@ export interface BruttoNettoEingabe {
   kirchensteuer: boolean;
   kirchensteuersatz: 8 | 9;
   kinderfreibetraege: number;
+  /**
+   * Anzahl berücksichtigungsfähiger Kinder unter 25 Jahren für die PV
+   * (§ 55 Abs. 3 SGB XI — eigener Begriff, nicht identisch mit
+   * `kinderfreibetraege`). Wenn undefined, wird für Abwärtskompatibilität aus
+   * `kinderfreibetraege` abgeleitet (Math.floor).
+   */
+  kinderUnter25?: number;
   bundesland: string;
   kvArt: 'gesetzlich' | 'privat';
   kvZusatzbeitrag: number;
@@ -75,14 +83,15 @@ export const BUNDESLAENDER = [
 function buildVorsorgeParams(eingabe: BruttoNettoEingabe): {
   kvArt: 'gesetzlich' | 'privat';
   kvZusatzbeitragProzent: number;
-  pvKinderlos: boolean;
+  kinderUnter25: number;
   kvPrivatBeitragJahr: number;
   rvBefreit: boolean;
 } {
+  const kinderUnter25 = eingabe.kinderUnter25 ?? Math.floor(eingabe.kinderfreibetraege);
   return {
     kvArt: eingabe.kvArt,
     kvZusatzbeitragProzent: eingabe.kvZusatzbeitrag,
-    pvKinderlos: eingabe.kinderfreibetraege === 0,
+    kinderUnter25,
     kvPrivatBeitragJahr: eingabe.kvPrivatBeitrag * 12,
     rvBefreit: eingabe.rvBefreit,
   };
@@ -151,12 +160,13 @@ export function berechneBruttoNetto(eingabe: BruttoNettoEingabe): BruttoNettoErg
   const avBrutto = Math.min(brutto, bbgRv);
   const arbeitslosenversicherung = Math.round(avBrutto * 0.013 * 100) / 100;
 
+  // PV-AN-Satz nach § 55 Abs. 3 SGB XI — Kinderlos-Zuschlag UND Kinderabschlag (2.–5. Kind).
+  // Anzahl berücksichtigungsfähiger Kinder unter 25: bevorzugt das explizite Feld;
+  // Fallback für Abwärtskompatibilität aus `kinderfreibetraege` (ganzzahlig gerundet).
   const pvBrutto = Math.min(brutto, BBG_KV);
-  const pflegeBasis = Math.round(pvBrutto * 0.018 * 100) / 100;
-  const pflegeZuschlag = eingabe.kinderfreibetraege === 0
-    ? Math.round(pvBrutto * 0.006 * 100) / 100
-    : 0;
-  const pflegeversicherung = pflegeBasis + pflegeZuschlag;
+  const kinderUnter25 = eingabe.kinderUnter25 ?? Math.floor(eingabe.kinderfreibetraege);
+  const pvSatz = pvAnteilAn2026(kinderUnter25);
+  const pflegeversicherung = Math.round(pvBrutto * pvSatz * 100) / 100;
 
   const steuernGesamt = lohnsteuer + solidaritaet + kirchensteuer;
   const sozialabgabenGesamt = krankenversicherung + rentenversicherung + arbeitslosenversicherung + pflegeversicherung;
@@ -203,12 +213,9 @@ export function berechneBruttoNetto(eingabe: BruttoNettoEingabe): BruttoNettoErg
     const wgAvBrutto = Math.min(wgBrutto, Math.max(0, bbgRv - brutto));
     const wgAV = Math.round(wgAvBrutto * 0.013 * 100) / 100;
 
+    // PV auf WG: gleiche Staffel nach § 55 Abs. 3 SGB XI wie beim Monatsbrutto
     const wgPvBrutto = Math.min(wgBrutto, Math.max(0, BBG_KV - brutto));
-    const wgPvBasis = Math.round(wgPvBrutto * 0.018 * 100) / 100;
-    const wgPvZuschlag = eingabe.kinderfreibetraege === 0
-      ? Math.round(wgPvBrutto * 0.006 * 100) / 100
-      : 0;
-    const wgPV = wgPvBasis + wgPvZuschlag;
+    const wgPV = Math.round(wgPvBrutto * pvSatz * 100) / 100;
 
     const wgAbzuege = wgLohnsteuer + wgSolidaritaet + wgKirchensteuer + wgKV + wgRV + wgAV + wgPV;
     const wgNetto = Math.round((wgBrutto - wgAbzuege) * 100) / 100;
