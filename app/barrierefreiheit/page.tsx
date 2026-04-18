@@ -62,7 +62,7 @@ export default function BarrierefreiheitSeite() {
             <p className="leading-relaxed mb-3">
               Folgende Maßnahmen wurden implementiert, um die Barrierefreiheit von rechenfix.de sicherzustellen:
             </p>
-            <ul className="list-disc pl-6 space-y-1.5 text-sm leading-relaxed">
+            <ul className="list-disc pl-6 space-y-1.5 leading-relaxed">
               <li>Ausreichende Farbkontraste gemäß WCAG 2.1 AA (mindestens 4,5:1 für Fließtext, 3:1 für große Schrift)</li>
               <li>Korrekte Überschriften-Hierarchie (h1 &rarr; h2 &rarr; h3) auf allen Seiten</li>
               <li>Alle Formularfelder (&lt;select&gt;, &lt;input&gt;) sind mit zugehörigen Labels verknüpft</li>
@@ -83,7 +83,7 @@ export default function BarrierefreiheitSeite() {
             <p className="leading-relaxed mb-3">
               Die folgenden Inhalte sind trotz unserer Bemühungen noch nicht vollständig barrierefrei:
             </p>
-            <ul className="list-disc pl-6 space-y-2 text-sm leading-relaxed">
+            <ul className="list-disc pl-6 space-y-2 leading-relaxed">
               <li>
                 <strong>Visuelle Diagramme und Skalen:</strong>{' '}
                 Einige Rechner verwenden visuelle Darstellungen (z.&thinsp;B. BMI-Skala, Fortschrittsbalken,
@@ -123,7 +123,7 @@ export default function BarrierefreiheitSeite() {
             <p className="mt-2 leading-relaxed">
               Ergebnis der Stichprobe:
             </p>
-            <ul className="mt-2 list-disc pl-6 space-y-1 text-sm leading-relaxed">
+            <ul className="mt-2 list-disc pl-6 space-y-1 leading-relaxed">
               <li>Durchschnittlicher Lighthouse-Accessibility-Score: <strong>100/100</strong> (Mobile und Desktop)</li>
               <li>axe DevTools: <strong>0 Findings</strong> (Critical, Serious, Moderate, Minor)</li>
               <li>Alle 19 geprüften Rechner-Seiten erfüllen die Stichprobe vollständig</li>
@@ -143,7 +143,7 @@ export default function BarrierefreiheitSeite() {
             <p className="mt-3 leading-relaxed">
               Bitte kontaktieren Sie uns:
             </p>
-            <ul className="mt-2 space-y-1 text-sm">
+            <ul className="mt-2 space-y-1 leading-relaxed">
               <li>
                 E-Mail:{' '}
                 <a href="mailto:info@rechenfix.de" className="text-primary-600 dark:text-primary-400 underline">
