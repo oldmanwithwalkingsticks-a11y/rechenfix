@@ -35,6 +35,10 @@ export default function BruttoNettoRechner() {
   const [steuerklasse, setSteuerklasse] = useState<1 | 2 | 3 | 4 | 5 | 6>(1);
   const [kirchensteuer, setKirchensteuer] = useState(false);
   const [kinder, setKinder] = useState(0);
+  // Anzahl berücksichtigungsfähiger Kinder unter 25 (für PV nach § 55 Abs. 3 SGB XI).
+  // Default 1 = Elterneigenschaft ohne Abschlag (gängigster Fall mit Kindern);
+  // bei 0 greift Kinderloszuschlag (sofern Alter > 23).
+  const [kinderUnter25, setKinderUnter25] = useState(0);
   const [bundesland, setBundesland] = useState('NW');
   const [kvArt, setKvArt] = useState<'gesetzlich' | 'privat'>('gesetzlich');
   const [kvZusatzbeitrag, setKvZusatzbeitrag] = useState('2.9');
@@ -66,10 +70,10 @@ export default function BruttoNettoRechner() {
 
   const ergebnis = useMemo(() => berechneBruttoNetto({
     bruttoMonat: bruttoNum, steuerklasse, kirchensteuer, kirchensteuersatz: kstSatz,
-    kinderfreibetraege: kinder, bundesland, kvArt, kvZusatzbeitrag: kvZusatzbeitragNum,
+    kinderfreibetraege: kinder, kinderUnter25, bundesland, kvArt, kvZusatzbeitrag: kvZusatzbeitragNum,
     kvPrivatBeitrag: kvPrivatBeitragNum, rvBefreit, abrechnungszeitraum,
     weihnachtsgeld: weihnachtsgeldWert > 0 ? weihnachtsgeldWert : undefined,
-  }), [bruttoNum, steuerklasse, kirchensteuer, kstSatz, kinder, bundesland, kvArt, kvZusatzbeitragNum, kvPrivatBeitragNum, rvBefreit, abrechnungszeitraum, weihnachtsgeldWert]);
+  }), [bruttoNum, steuerklasse, kirchensteuer, kstSatz, kinder, kinderUnter25, bundesland, kvArt, kvZusatzbeitragNum, kvPrivatBeitragNum, rvBefreit, abrechnungszeitraum, weihnachtsgeldWert]);
 
   const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const pct = (n: number, base: number) => base > 0 ? ((n / base) * 100).toFixed(1) : '0.0';
@@ -166,6 +170,22 @@ export default function BruttoNettoRechner() {
             <option value={2.5}>2,5</option>
             <option value={3}>3+</option>
           </select>
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Steuerliche Kinderfreibeträge (für Soli &amp; KiSt-Ermäßigung).</p>
+        </div>
+        <div>
+          <label htmlFor="bruttonetto-select-4" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kinder unter 25 Jahren</label>
+          <select id="bruttonetto-select-4" value={kinderUnter25} onChange={e => setKinderUnter25(Number(e.target.value))} className="input-field">
+            <option value={0}>0 (kinderlos)</option>
+            <option value={1}>1 Kind</option>
+            <option value={2}>2 Kinder</option>
+            <option value={3}>3 Kinder</option>
+            <option value={4}>4 Kinder</option>
+            <option value={5}>5 Kinder</option>
+            <option value={6}>6+ Kinder</option>
+          </select>
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+            Für den PV-Beitrag nach § 55 Abs. 3 SGB XI. Bei 0 und Alter &gt; 23 fällt der Kinderloszuschlag an; ab dem 2. Kind ermäßigt sich der AN-Anteil um 0,25 pp je Kind (bis 5.).
+          </p>
         </div>
       </div>
 
