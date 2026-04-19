@@ -38,7 +38,19 @@ body {
            dark:bg-gray-800 dark:border-gray-700
            hover:shadow-lg hover:border-primary-200 dark:hover:border-primary-500/30
            hover:-translate-y-0.5
+           focus-visible:shadow-lg focus-visible:border-primary-200 dark:focus-visible:border-primary-500/30
+           focus-visible:-translate-y-0.5 focus-visible:outline-none
            transition-all duration-300;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card {
+      @apply transition-colors;
+    }
+    .card:hover,
+    .card:focus-visible {
+      transform: none;
+    }
   }
 
   .btn-primary {
