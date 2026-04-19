@@ -101,6 +101,14 @@ Lighthouse Accessibility ≥95 auf neuer/geänderter Seite.
 ### Barrierefreiheitserklärung
 `/barrierefreiheit` wird gepflegt. Bei strukturellen A11y-Änderungen prüfen, ob Inhalte aktualisiert werden müssen.
 
+## UI-Regeln für Rechner-Kacheln (Prompt 96/96a)
+
+- **Keine `transform`/`scale`/`translate`-Hover-Effekte auf Karten-artigen Elementen.** Der Browser promotet transformierte Elemente auf eine Compositor-Ebene und rendert Text dort mit Subpixel-Antialiasing → sichtbarer Text-Blur während der Transition. Auch `translateY(-2px)` ist betroffen.
+- **Nur Shadow-Animation für Elevation-Effekte.** Der "Anheben"-Eindruck entsteht allein durch einen verstärkten Schatten — das Auge liest größeren Schatten als "höher schwebend", ohne dass sich Pixel bewegen müssen.
+- Hover-Effekte müssen `:focus-visible` mit abdecken (Tastatur-A11y).
+- Die zentrale `.card`-Utility-Klasse in `app/globals.css` ist die Referenz-Implementierung: transition nur auf `box-shadow` + `border-color`, identischer Effekt für `:hover` und `:focus-visible`.
+- `prefers-reduced-motion: reduce` nicht mehr nötig, sobald kein Transform beteiligt ist (Schatten sind kein Bewegungsreiz).
+
 ## Zentrale Libs (SSOT)
 
 Alle jahresabhängigen und gesetzlich definierten Werte liegen in `lib/berechnungen/`. Rechner, Komponenten und Config-Dateien MÜSSEN von dort importieren — niemals Werte lokal hartcodieren, wenn eine zentrale Konstante existiert.
@@ -122,6 +130,22 @@ Alle jahresabhängigen und gesetzlich definierten Werte liegen in `lib/berechnun
 | `kfz-steuer.ts`, `balkon-solar.ts`, `waermepumpe.ts` | Domänen-spezifisch | |
 
 **Verboten:** Eigene ESt-, LSt-, SV-, Kindergeld-, Pfändungs- oder Mindestlohn-Formeln in Komponenten oder Rechnern. Immer die zentrale Lib importieren. Diese Regel ergab sich aus Sprint 1 (April 2026) und wurde im Jahresaudit 2026 (Prompts 86–91) nochmal bestätigt, als in fünf Rechnern Formel-Duplikate mit 1–2 Jahre veralteten Werten gefunden wurden.
+
+**Konkret verbotene Muster (Audit-Welle 1, Prompts 94–95):**
+
+- Eigene ESt-/LSt-Tariftabellen (Zonen, Grundfreibetrag, Progressionsformeln) — immer `berechneEStGrund(zvE, jahr)` aus `einkommensteuer.ts`
+- Eigene Soli-Berechnungen (insb. harte Schwellen wie `est > 20350 ? est * 0.055 : 0`) — immer `berechneSoli(est, splittingtarif, jahr)` mit Milderungszone
+- Eigene Kirchensteuer-Logik — immer `berechneKirchensteuerByBundesland(est, bundesland)` (8 % BY/BW, 9 % sonst)
+- Eigene Rentenwert-Konstanten wie `RENTENWERT_2026 = 40.79` — immer `getAktuellerRentenwert()` aus `rente.ts` mit Stichtag-Switch
+- Eigene BBG-Werte (`const BBG_MONAT = 5812.5`) — immer `BBG_KV_MONAT` / `BBG_RV_MONAT` aus `brutto-netto.ts`
+- Eigene Kinderfreibetrag-Werte — immer `KIFB_GESAMT_ZUSAMMEN_2026` (9.756 €) / `KIFB_GESAMT_EINZEL_2026` (4.878 €) aus `kindergeld.ts`
+- Eigene Steuerklassen-Faktor-Arrays für Fünftelregelung o.ä. — **§ 34 EStG kennt keinen solchen Faktor.** Die Fünftelregelung wirkt auf zvE, die Steuerklasse spielt bei der ESt-Veranlagung keine Rolle. Bei verheiratet → Splittingtarif (`berechneEStGrund(zvE/2) × 2`), sonst Grundtarif. Mehr nicht.
+
+Jede Verletzung dieser Regeln ist ein P1-Bug wie die im April 2026 gefundenen. Vor jedem Commit greppen:
+```bash
+grep -E "12348|17799|69878|40\.79|42\.52|9756|6828|2928|259|0\.38|5812\.50|8450|51944|13\.90" lib/berechnungen/<neue-lib>.ts
+```
+Treffer = Refactor auf zentrale Lib-Imports, bevor der PR aufmacht.
 
 Die drei **Tarif-Rechner** (Brutto-Netto, Lohnsteuer, Einkommensteuer) sind eine Gruppe mit geteilter Berechnungslogik. Änderungen an zentralen Parametern wirken automatisch auf alle drei.
 
@@ -154,24 +178,41 @@ export const WERT = getAktuellerWert();
 
 ## Aktueller Rechtsstand (Stand April 2026)
 
-| Parameter | Wert | Rechtsgrundlage |
-|---|---|---|
-| Grundfreibetrag ESt | 12.348 € | § 32a EStG |
-| ESt-Zonengrenzen | 17.799 / 69.878 / 277.826 € | § 32a EStG |
-| Soli-Freigrenze | 20.350 € | § 4 SolzG |
-| Kindergeld | 259 € / Kind / Monat | § 66 EStG |
-| Mindestlohn | 13,90 €/h (ab 01.01.2027: 14,60 €) | MiLoG |
-| Minijob-Grenze | 603 € / Monat (Jahr: 7.236 €) | § 8 SGB IV |
-| Midijob-Untergrenze | 603,01 € / Monat | § 20 SGB IV |
-| BBG KV/PV | 5.812,50 € / Monat (69.750 € / Jahr) | SV-RechengrößenVO 2026 |
-| BBG RV (einheitlich) | 8.450 € / Monat (101.400 € / Jahr) | SV-RechengrößenVO 2026 |
-| JAEG / Versicherungspflichtgrenze | 77.400 € / Jahr (6.450 € / Monat) | BMG |
-| GKV allgemeiner Beitragssatz | 14,6 % | § 241 SGB V |
-| GKV-Zusatzbeitrag Ø | 2,9 % (AN-Anteil 1,45 %) | § 242a SGB V |
-| Rentenwert | 40,79 € (ab 01.07.2026: 42,52 €) | SGB VI, BMAS 05.03.2026 |
-| Pfändungs-Grundfreibetrag | 1.555,00 € (ab 01.07.2026: 1.587,40 €) | § 850c ZPO, BGBl. 2026 I Nr. 80 |
-| Unterhalt DT 2026 Mindestbedarf | 486 / 558 / 653 / 698 € | Düsseldorfer Tabelle |
-| Deutschlandticket | 63 €/Monat | seit 01.01.2026 |
+| Parameter | Wert | Stichtag nächste Änderung | Zentrale Lib | Rechtsgrundlage |
+|---|---|---|---|---|
+| Grundfreibetrag ESt | 12.348 € | vermutlich 01.01.2027 | `einkommensteuer.ts` | § 32a EStG |
+| ESt-Zonengrenzen | 17.799 / 69.878 / 277.826 € | 01.01.2027 | `einkommensteuer.ts` | § 32a EStG |
+| Soli-Freigrenze Grundtarif | 20.350 € | offen | `einkommensteuer.ts` | § 4 SolzG |
+| Soli-Freigrenze Splittingtarif | 40.700 € | offen | `einkommensteuer.ts` | § 4 SolzG |
+| Soli-Milderungsgrenze | 37.838 € (Grundtarif × 1,859375) | offen | `einkommensteuer.ts` | § 4 SolzG |
+| Werbungskostenpauschale | 1.230 € **pro Partner!** | offen | — (in Rechnern inline) | § 9a EStG |
+| Sonderausgabenpauschale | 36 € **pro Partner** | offen | — (in Rechnern inline) | § 10c EStG |
+| Kindergeld | 259 € / Kind / Monat | offen | `kindergeld.ts` | § 66 EStG |
+| Kinderfreibetrag sächlich (zusammen) | 6.828 € | vermutlich 01.01.2027 | `kindergeld.ts` | § 32 Abs. 6 EStG |
+| BEA-Freibetrag (zusammen) | 2.928 € (seit 2021 unverändert) | keine bekannt | `kindergeld.ts` | § 32 Abs. 6 EStG |
+| Kinderfreibetrag gesamt (zusammen) | **9.756 €** | vermutlich 01.01.2027 | `kindergeld.ts` als `KIFB_GESAMT_ZUSAMMEN_2026` | § 32 Abs. 6 EStG |
+| Kinderfreibetrag gesamt (einzeln, pro Elternteil) | **4.878 €** | vermutlich 01.01.2027 | `kindergeld.ts` als `KIFB_GESAMT_EINZEL_2026` | § 32 Abs. 6 EStG |
+| Mindestlohn | 13,90 €/h (ab 01.01.2027: 14,60 €) | **01.01.2027 Switch automatisch** | `mindestlohn.ts` | MiLoG |
+| Minijob-Grenze | 603 € / Monat (Jahr: 7.236 €) | 01.01.2027 auf 633 € | `mindestlohn.ts` | § 8 SGB IV |
+| Midijob-Untergrenze | 603,01 € / Monat | 01.01.2027 | `mindestlohn.ts` | § 20 SGB IV |
+| BBG KV/PV | 5.812,50 € / Monat (69.750 € / Jahr) | 01.01.2027 | `brutto-netto.ts` als `BBG_KV_MONAT` | SV-RechengrößenVO 2026 |
+| BBG RV (einheitlich) | 8.450 € / Monat (101.400 € / Jahr) | 01.01.2027 | `brutto-netto.ts` als `BBG_RV_MONAT` | SV-RechengrößenVO 2026 |
+| JAEG / Versicherungspflichtgrenze | 77.400 € / Jahr (6.450 € / Monat) | 01.01.2027 | `sv-parameter.ts` als `JAEG_2026_*` | BMG |
+| GKV allgemeiner Beitragssatz | 14,6 % | offen | `sv-parameter.ts` | § 241 SGB V |
+| GKV-Zusatzbeitrag Ø | 2,9 % (AN-Anteil 1,45 %) | offen | `sv-parameter.ts` | § 242a SGB V |
+| PV-Beitrag AN-Anteil | 1,8 % (Standard) / 2,4 % (kinderlos >23) | offen | `pflegeversicherung.ts` | § 55 SGB XI |
+| PV-Kinderabschlag ab Kind 2 | 1,55 / 1,30 / 1,05 / 0,80 % | offen | `pflegeversicherung.ts` | § 55 Abs. 3 SGB XI (PUEG 2023) |
+| Rentenwert | 40,79 € (ab 01.07.2026: 42,52 €) | **01.07.2026 Switch automatisch** | `rente.ts` als `getAktuellerRentenwert()` | § 68 SGB VI, BMAS 05.03.2026 |
+| Durchschnittsentgelt | 51.944 € (vorläufig) | 01.01.2027 | `rente.ts` | Anlage 1 SGB VI |
+| Witwenrente-Grundfreibetrag-Faktor | 26,4 × Rentenwert (Kind: +5,6 × Rentenwert) | bleibt | Formel inline, Rentenwert aus `rente.ts` | § 97 SGB VI + Anlage 1 |
+| Pfändungs-Grundfreibetrag | 1.555,00 € (ab 01.07.2026: 1.587,40 €) | **01.07.2026 Switch automatisch** | `pfaendung.ts` | § 850c ZPO, BGBl. 2026 I Nr. 80 |
+| Pendlerpauschale | **einheitlich 0,38 €/km ab 1. km** (seit 01.01.2026) | keine bekannt | `pendlerpauschale.ts` als `PENDLERPAUSCHALE_SATZ_2026` | § 9 Abs. 1 Nr. 4 EStG i.d.F. StÄndG 2025 |
+| Pendlerpauschale-Höchstbetrag (Nicht-PKW) | 4.500 € / Jahr | keine | `pendlerpauschale.ts` | § 9 Abs. 1 Nr. 4 Satz 2 EStG |
+| Homeoffice-Pauschale | 6 € / Tag, max. 210 Tage | offen | `pendlerpauschale.ts` | § 4 Abs. 5 Nr. 6c EStG |
+| Unterhalt DT 2026 Mindestbedarf | 486 / 558 / 653 / 698 € | 01.01.2027 | `duesseldorfer-tabelle.ts` | Düsseldorfer Tabelle |
+| Deutschlandticket | 63 €/Monat | offen | Inline | seit 01.01.2026 |
+
+**Stichtag-Switch automatisch:** Die drei fett markierten Parameter (Rentenwert 01.07.2026, Mindestlohn 01.01.2027, Pfändung 01.07.2026) wechseln ohne Deploy durch das Stichtag-Switch-Pattern in den Libs. Nach den Stichtagen nur Spot-Check.
 
 ## Tarif-Parameter 2026 (Referenzwerte)
 
@@ -268,3 +309,10 @@ Reihenfolge nach Freigabe: erst 85 (Warning wegräumen), dann 68 (CMP dazu).
 - **90** — Hilfetext-Batch H1/H3/H5/H9–H12 (BBG, JAEG 77.400 €, Zusatzbeitrag 2,9 %, D-Ticket 63 €, Zigaretten 2026) ✅
 - **91** — Pfändungstabelle 01.07.2026 vorab via Stichtag-Switch (BGBl. 2026 I Nr. 80) ✅
 - **92** — Doku-Sync CLAUDE.md / Projekt-Referenz / SKILL.md nach Audit 2026 ✅
+- **93** — RentenRechner UX: Rentenwert prominent + Stichtag-Callout 01.07.2026 ✅
+- **94** — SSOT Steuer-Rechner: Splitting/Kindergeld/Abfindung auf zentrale Libs; erfundener Steuerklassen-Faktor in abfindung.ts gelöscht; Soli-Milderungszone zentral ✅
+- **94a** — Stufe-1-Bugfixes: Pendlerpauschale einheitlich 0,38 €/km (Reform 2026), Kifb von erfundenen 15.612 € auf korrekte 9.756 €, Splitting WK+SA pro Partner ✅
+- **95** — Stufe-2 SV-Bugfixes: Witwenrente-Rentenwert 39,32→`getAktuellerRentenwert`, ALG-Soli mit Freigrenze/Milderung, Rentenrechner BBG-Hinweis, Krankengeld-BBG und Rente-ESt auf zentrale Libs ✅
+- **96** — `.card` Hover-Utility um `focus-visible` + `prefers-reduced-motion` erweitert ✅
+- **96a** — Transform aus `.card` Hover entfernt, reine Shadow-Animation (Text bleibt scharf) ✅
+- **97** — Doku-Sync nach Welle-1-Audit (CLAUDE.md + SKILL.md + Projekt-Referenz) ✅

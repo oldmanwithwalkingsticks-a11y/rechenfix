@@ -243,6 +243,25 @@ After creating the calculator, verify:
 - [ ] **Guards G1–G9 geprüft** (siehe Abschnitt „Qualitäts-Guards" in diesem Skill)
 - [ ] "Fix erklärt"-Button erscheint erst, nachdem der `ergebnis`-State gefüllt ist — das ist **kein Bug**, sondern gewollt
 
+### Step 11b: SSOT-Import-Audit (Pflicht vor Commit)
+
+Vor dem `git commit` die neue oder geänderte Berechnungs-Lib auf
+versteckte Duplikate prüfen:
+
+```bash
+grep -E "12348|17799|69878|40\.79|42\.52|9756|6828|2928|259|0\.38|5812\.50|8450|51944|13\.90|20350|37838" lib/berechnungen/<neue-lib>.ts
+```
+
+Jeder Treffer = verpflichtender Refactor auf zentrale Lib-Import,
+bevor der PR aufmacht. Wenn der Wert wirklich gebraucht wird und
+keine zentrale Quelle existiert: Konstante in die passende zentrale
+Lib einführen und von dort importieren, nicht in der neuen Lib
+hartcodieren.
+
+Hintergrund: Der Welle-1-Audit (Prompts 94–95) hat in fünf Rechnern
+solche Duplikate gefunden — alle mit veralteten oder frei erfundenen
+Werten. Siehe „Anti-Patterns aus der Audit-Welle 2026" weiter unten.
+
 ### Step 11a: Smoketest v3 Regression (Pflicht nach jedem Eingriff)
 
 Nach jeder Änderung an Rechnern oder zentralen Libs:
@@ -422,6 +441,135 @@ hartkodiert waren statt aus der zentralen Lib gezogen.
 **Verweis:** Siehe `CLAUDE.md` Abschnitt „Zentrale Libs (SSOT)" für
 die vollständige Liste und das Stichtag-Switch-Pattern.
 
+### G11 — SSOT-Import-Pflicht (Welle-1-Audit, April 2026)
+
+Vor jedem Rechner-Bau prüfen und konsumieren — niemals duplizieren:
+
+- ESt? → `berechneEStGrund(zvE, jahr)` aus `einkommensteuer.ts`
+- Soli? → `berechneSoli(est, splittingtarif, jahr)` (mit Milderungszone)
+- Kirchensteuer? → `berechneKirchensteuerByBundesland(est, bundesland)`
+- Rentenwert? → `getAktuellerRentenwert()` aus `rente.ts` (Stichtag-Switch)
+- BBG? → `BBG_RV_MONAT` / `BBG_KV_MONAT` aus `brutto-netto.ts`
+- Kindergeld / Kinderfreibetrag? → Konstanten + Logik aus `kindergeld.ts`
+  (`KIFB_GESAMT_ZUSAMMEN_2026` = 9.756 €, `KIFB_GESAMT_EINZEL_2026` = 4.878 €)
+- Pfändungstabelle? → `pfaendung.ts`
+- Mindestlohn? → `mindestlohn.ts`
+- Pendlerpauschale-Satz? → `PENDLERPAUSCHALE_SATZ_2026` (= 0,38 €) aus `pendlerpauschale.ts`
+
+Keine eigenen Zahlen-Konstanten für gesetzliche Werte. Keine eigenen
+Tarif-Formeln. Jede Verletzung ist ein P1-Bug wie die im April 2026
+gefundenen (Steuerklassen-Faktor, Rentenwert 39,32, Kifb 15.612,
+Pendler-Staffelung 0,30/0,38).
+
+### G12 — Keine Transform-Hover auf Karten (Prompt 96/96a)
+
+Keine `transform`/`scale`/`translate`-basierten Hover-Effekte auf
+Karten-artigen Elementen. Der Browser promotet transformierte
+Elemente auf eine Compositor-Ebene und rendert Text mit Subpixel-
+Antialiasing → Text-Blur während der Transition. Auch `translateY(-2px)`
+ist betroffen.
+
+**Korrekte Umsetzung:** Nutze die zentrale `.card`-Utility aus
+`app/globals.css` oder eine äquivalente Shadow-only-Animation.
+Elevation-Eindruck entsteht allein durch verstärkten Box-Shadow —
+keine Pixel-Bewegung nötig. Siehe CLAUDE.md Abschnitt
+„UI-Regeln für Rechner-Kacheln".
+
+## Anti-Patterns aus der Audit-Welle 2026 (nicht wiederholen)
+
+Reale Bugs, die der April-2026-Audit aufgedeckt hat. Bei jedem neuen
+Rechner, der ESt/SV/Rente/Kindergeld berührt, diese Liste vor dem
+Commit durchsehen.
+
+### 🚫 Erfundener Steuerklassen-Faktor (Prompt 94)
+
+```ts
+// FALSCH (altes abfindung.ts):
+const SK_FAKTOR = { 1: 1.0, 2: 0.85, 3: 0.55, 4: 1.0, 5: 1.55, 6: 1.25 };
+const est = berechneEStGrund(zve, 2026) * SK_FAKTOR[steuerklasse];
+```
+
+§ 34 EStG kennt keinen Steuerklassen-Faktor. Die Fünftelregelung
+wirkt auf zvE; die Steuerklasse spielt bei der ESt-Veranlagung keine
+Rolle. Korrekt: bei verheiratet → Splittingtarif
+(`berechneEStGrund(zvE/2, 2026) × 2`), sonst Grundtarif. Mehr nicht.
+
+### 🚫 Hartcodierter Rentenwert (Prompt 95)
+
+```ts
+// FALSCH (alter WitwenrenteRechner):
+const RENTENWERT_2026 = 39.32;  // war der Wert bis 30.06.2025!
+```
+
+Der Rentenwert ändert sich jährlich zum 01.07. Hartcodierung bedeutet
+automatisch Bug nach wenigen Monaten. Immer `getAktuellerRentenwert()`
+aus `rente.ts` nutzen, das Stichtag-Switch enthält.
+
+### 🚫 Kinderfreibetrag selbst zusammenbauen (Prompt 94a)
+
+```ts
+// FALSCH (alter KindergeldRechner):
+const KIFB_EINZEL = 4878;
+const BEA_EINZEL = 2928;  // ← ist der ZUSAMMEN-Wert, nicht Einzel!
+const KIFB_ZUSAMMEN = (KIFB_EINZEL + BEA_EINZEL) * 2;  // = 15.612, falsch
+```
+
+Korrekte Werte: `KIFB_GESAMT_ZUSAMMEN_2026 = 9.756 €`
+(6.828 sächlich + 2.928 BEA), `KIFB_GESAMT_EINZEL_2026 = 4.878 €`.
+Immer aus `kindergeld.ts` importieren.
+
+### 🚫 WK+SA-Pauschale bei Zusammenveranlagung nur einmal (Prompt 94a)
+
+```ts
+// FALSCH (alter SplittingRechner):
+const zveGesamt = bruttoP1 + bruttoP2 - 1266;  // nur einmal abgezogen
+```
+
+Jeder Partner mit Einkommen hat eigene WK-Pauschale (1.230 €,
+§ 9a EStG) und Sonderausgabenpauschale (36 €, § 10c EStG). Auch bei
+Zusammenveranlagung. Korrekt:
+```ts
+const zveA = bruttoP1 > 0 ? Math.max(0, bruttoP1 - 1266) : 0;
+const zveB = bruttoP2 > 0 ? Math.max(0, bruttoP2 - 1266) : 0;
+const zveGesamt = zveA + zveB;
+```
+
+### 🚫 Pendlerpauschale mit 2025er-Staffelung (Prompt 94a)
+
+```ts
+// FALSCH (Code bis StÄndG 2025):
+const pauschale = km <= 20
+  ? km * 0.30 * tage
+  : (20 * 0.30 + (km - 20) * 0.38) * tage;
+```
+
+Seit StÄndG 2025 (01.01.2026): einheitlich `km * 0.38 * tage` ab dem
+ersten Kilometer. `PENDLERPAUSCHALE_SATZ_2026` aus `pendlerpauschale.ts`.
+
+### 🚫 Soli ohne Milderungszone (Prompt 94/95)
+
+```ts
+// FALSCH:
+const soli = est > 20350 ? est * 0.055 : 0;  // harter Sprung an Freigrenze
+```
+
+Korrekt ist der gleitende Übergang in der Milderungszone
+(20.350 – 37.838 € ESt). `berechneSoli(est, splittingtarif, jahr)` aus
+`einkommensteuer.ts` enthält die Milderungszone und die doppelte
+Freigrenze (40.700 €) bei Splittingtarif bereits.
+
+### 🚫 `transform: scale()` oder `translate()` beim Hover auf Karten (Prompt 96/96a)
+
+```css
+/* FALSCH: */
+.rechner-kachel:hover { transform: scale(1.05); }
+.rechner-kachel:hover { transform: translateY(-3px); }
+```
+
+Beide erzeugen Subpixel-Antialiasing während der Transition →
+Text verschwimmt. Nutze die zentrale `.card`-Klasse aus
+`app/globals.css` oder reine Shadow-Animation ohne Transform.
+
 ## Rechner-Specific Templates
 
 For detailed templates per calculator type, see `references/templates.md`.
@@ -495,3 +643,4 @@ Ohne diesen Schritt geben Claude-Chat und Claude-Code inkonsistente Ratschläge 
 |---|---|---|
 | 19.04.2026 | Prompt 92: Guard G10, Stichtag-Switch-Step, SSOT-Referenzen | [ ] noch offen |
 | 19.04.2026 | Prompt 92a: Sync-Sektion auf claude.ai-UI-Workflow umgestellt | [ ] noch offen |
+| 19.04.2026 | Prompt 97: Guards G11 (SSOT-Imports) + G12 (kein Transform-Hover), Step 11b SSOT-Import-Audit, Anti-Patterns-Abschnitt aus Welle-1-Audit | [ ] noch offen |

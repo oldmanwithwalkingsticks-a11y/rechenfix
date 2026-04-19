@@ -54,8 +54,19 @@ Alle jahresabhängigen und gesetzlich definierten Werte liegen in `lib/berechnun
 | `mindestlohn.ts` **(neu, 04/2026)** | § 1 MiLoG mit Stichtag-Switch | `MINDESTLOHN`, `getAktuellerMindestlohn(stichtag)`, `MINIJOB_GRENZE_MONAT` |
 | `rente.ts` **(erweitert, 04/2026)** | Rentenwert § 68 SGB VI | `RENTENWERT`, `getAktuellerRentenwert(stichtag)` |
 | `pfaendung.ts` **(erweitert, 04/2026)** | § 850c ZPO mit Stichtag-Switch | `getAktuellePfaendungsParameter(stichtag)` |
+| `pendlerpauschale.ts` **(überarbeitet 94a)** | § 9 EStG Entfernungspauschale | `PENDLERPAUSCHALE_SATZ_2026` (= 0,38 €), einheitlich ab 1. km |
+| `abfindung.ts` **(überarbeitet 94)** | § 34 EStG Fünftelregelung | `berechneEStGrund`-basiert, ohne Steuerklassen-Faktor, `verheiratet: boolean` |
+| `splitting.ts` **(überarbeitet 94/94a)** | Ehegattensplitting | `berechneEStGrund`-basiert, WK+SA **pro Partner** |
 
-**Verboten:** Eigene ESt-, LSt-, SV-, Kindergeld-, Pfändungs- oder Mindestlohn-Formeln in Komponenten. Siehe `CLAUDE.md` Abschnitt "Zentrale Libs (SSOT)" für die vollständige Liste und das Stichtag-Switch-Pattern.
+**Verboten:** Eigene ESt-, LSt-, SV-, Kindergeld-, Pfändungs-, Mindestlohn- oder Pendler-Formeln in Komponenten. Siehe `CLAUDE.md` Abschnitt "Zentrale Libs (SSOT)" und die Audit-Welle-1-Anti-Patterns im `rechner-builder`-Skill.
+
+### Wichtige Kinderfreibetrag-Werte 2026 (nicht verwechseln!)
+
+Aus `kindergeld.ts`:
+- `KIFB_GESAMT_ZUSAMMEN_2026` = **9.756 €** (6.828 sächlich + 2.928 BEA)
+- `KIFB_GESAMT_EINZEL_2026` = **4.878 €** (halber Anteil pro Elternteil)
+
+Der alte Wert `15.612 €` in Splitting/Kindergeld war frei erfunden (Prompt 94a hat ihn entfernt). Wer neu damit rechnet, MUSS die Konstanten aus `kindergeld.ts` importieren.
 
 ## Automatische Jahreswechsel (Stichtag-Switch)
 
@@ -71,8 +82,10 @@ Dank Prompts 87/88/91 greifen folgende Anpassungen automatisch — **kein manuel
 | 01.01.2027 | Minijob-Grenze | 603 € → 633 € | automatisch via Kopplung |
 
 **Kontroll-Termine:**
-- 01.07.2026 spot-check: Rentenrechner und Pfändungsrechner liefern neue Werte — keine Aktion nötig, nur Verifikation.
+- 01.07.2026 spot-check: Rentenrechner und Pfändungsrechner liefern neue Werte — keine Aktion nötig, nur Verifikation. Durch den Fix in Prompt 95 zieht auch der Witwenrenten-Rechner (26,4 × 42,52 € Grundfreibetrag) automatisch nach.
 - 01.01.2027 spot-check: Mindestlohn-Rechner, Minijob-Rechner, Stundenlohn-Rechner liefern 14,60 € bzw. 633 €.
+
+**Vollständiger Stichtag-Kalender:** Der umfassende Kalender aller gesetzlichen Stichtage und Jahreswerte-Wechsel wird in `docs/jahreswerte-kalender.md` gepflegt (geplant als Prompt 98). Dient als Regiebuch für den jährlichen Audit: Dezember für 01.01.-Wechsel, Juni für 01.07.-Wechsel.
 
 ## Sprint-Historie
 
@@ -120,6 +133,60 @@ Dank Prompts 87/88/91 greifen folgende Anpassungen automatisch — **kein manuel
 - Stichtag-Switch-Pattern (siehe CLAUDE.md) verhindert "Bug-seit-X-Monaten"-Szenarien wie beim Rentenwert.
 - Meta-Config-Dateien (`lib/rechner-config/*.ts`) und Build-Scripts (`scripts/apply-v2-titles.js`) müssen bei Jahresupdates mit-migriert werden.
 
+### Welle 1 — Hoch-Risiko-Rechner (April 2026)
+
+**Stufe 1 — Steuer-Kern (abgeschlossen 19.04.2026)**
+
+Manueller Audit der Steuer-Rechner nach Prompt-86-Grep hatte nur Jahresliterale gefunden — Formel- und Konstanten-Bugs schlüpften durch. Stufe 1 hat zusätzlich:
+
+| Prompt | Rechner | Befund | Schwere |
+|---|---|---|---|
+| 94 | Abfindung | Steuerklassen-Faktor-Array `{1:1, 2:0.85, 3:0.55, …}` frei erfunden; § 34 EStG kennt das nicht | P1 |
+| 94 | Abfindung | Soli ohne Milderungszone (harter Sprung bei ESt > 20.350 €) | P2 |
+| 94 | Splitting/Kindergeld/Abfindung | Eigene § 32a-Grundtabellen-Kopien statt `berechneEStGrund` (SSOT-Verstoß) | SSOT |
+| 94a | Pendlerpauschale | Staffelung 0,30/0,38 €/km statt einheitlich 0,38 € (StÄndG 2025) | P1 |
+| 94a | Kindergeld | Kinderfreibetrag 15.612 € (erfunden) statt 9.756 € → falsche Günstigerprüfung bei 1K + 70–110k Brutto | P1 |
+| 94a | Splitting | WK- + SA-Pauschale bei Zusammenveranlagung nur einmal (1.266 €) statt pro Partner | P2 |
+
+Nicht existierende Rechner (→ Welle 1.5): Kirchensteuer-Standalone, ESt-Vorauszahlung, Fünftelregelung-Standalone, Altersentlastung.
+
+Doku-Artefakte: `docs/stufe1-rechner-semantik.md`.
+
+**Stufe 2 — SV-Kern (abgeschlossen 19.04.2026)**
+
+| Prompt | Rechner | Befund | Schwere |
+|---|---|---|---|
+| 95 | Witwenrente | `RENTENWERT_2026 = 39.32` hartcodiert — war Wert bis 30.06.2025 (zwei Anpassungen veraltet!) | P1 |
+| 95 | ALG | Soli ohne Freigrenze (nur `lstMonat > 1000`-Schwelle statt § 4 SolzG-Freigrenze) | P2 |
+| 95 | Rentenrechner | BBG-Kappung nicht erklärt im UI bei Brutto > BBG | P3 |
+| 95 | Krankengeld | BBG hartcodiert 5.812,50 € statt aus `brutto-netto.ts` | SSOT |
+| 95 | Rente-Lib | Eigene lineare ESt-Näherung (14–42 %) statt `berechneEStGrund` | SSOT |
+
+Nicht existierende Rechner (→ Welle 1.5): Rentenpunkte-Standalone, PV-Beitrag-Standalone.
+
+Doku-Artefakte: `docs/stufe2-rechner-semantik.md`.
+
+**Stufe 3 (Familie + Arbeitsrecht) — offen**
+- Geplant: Elterngeld, Mutterschaftsgeld, Teilzeit, Kündigungsfrist, Urlaub, Minijob
+
+**Stufe 4 (Wohnen + Spezial-Steuer) — offen**
+- Geplant: Grundsteuer, CO2, Heizkosten, Abfindung-Neuprüfung
+
+### Welle 1.5 — fehlende Rechner neu bauen (separate Sprint-Planung)
+
+Aus den Stufen 1+2 identifizierte Rechner ohne Standalone-Implementierung:
+- Kirchensteuer-Standalone
+- ESt-Vorauszahlung
+- Fünftelregelung-Standalone (aktuell nur in AbfindungsRechner)
+- Altersentlastungsbetrag
+- Rentenpunkte-Standalone (aktuell nur in RentenRechner)
+- PV-Beitrag-Standalone (aktuell nur in BruttoNettoRechner)
+
+**Audit-Welle-1-Lessons:**
+- Grep-basierter Jahres-Audit reicht nicht, wenn falsche Werte mit aktuellem Suffix versehen sind (`RENTENWERT_2026 = 39.32`, `KIFB_EINZEL = 4878` bei Code, der daraus 15.612 € rechnet). Der Mini-Check-Pass zwingt Claude Code, jede Rechner-Komponente zu öffnen und zu lesen — dabei fallen solche Konstanten-Drifts auf.
+- Law-Changes ohne Jahres-Zahl (StÄndG 2025 → einheitlich 0,38 € ab 2026) sind für Grep unsichtbar. Gehören in einen separaten Rechtsänderungs-Audit-Pass.
+- Das SSOT-Prinzip (Prompts 86/87) wurde für die Hauptrechner durchgezogen, aber Sekundär-Rechner hatten noch Eigenkopien. Die Welle-1-Fixes haben das für Splitting/Kindergeld/Abfindung/Rente/ALG/Krankengeld/Witwenrente nachgeholt.
+
 ## Test-Referenzwerte Tarif-Rechner (Stand April 2026)
 
 Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Abweichung ist ein Regressions-Kandidat und muss untersucht werden.
@@ -153,6 +220,8 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
 - ✅ Sprint 1 — Tarif-Audit (Prompts 81–84a)
 - ✅ A11y-Sprint — Lighthouse 100/100, axe 0 auf 19 Stichproben (Prompts 78a–h + 78z-Serie + 34a–c)
 - ✅ Jahresparameter-Audit 2026 (Prompts 86–92)
+- ✅ **Welle-1-Audit Stufen 1+2** (Prompts 94/94a/95) — Steuer- und SV-Kern durchgeprüft, 3×P1 + 3×P2 + 2×P3 gefixt, 5 SSOT-Refactorings
+- ✅ Card-Hover A11y/UX (Prompts 96/96a) — nur Shadow-Animation, kein Transform
 - ✅ Unterhaltsrechner DT 2026 (Prompt 67)
 - ✅ Verivox-Affiliate ETF/Rente/Spar (Prompts 45+46)
 
