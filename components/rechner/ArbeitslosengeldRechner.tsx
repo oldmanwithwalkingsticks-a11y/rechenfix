@@ -6,7 +6,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
-import { berechneEStGrund } from '@/lib/berechnungen/einkommensteuer';
+import { berechneEStGrund, berechneSoli } from '@/lib/berechnungen/einkommensteuer';
 import { BBG_RV_MONAT } from '@/lib/berechnungen/brutto-netto';
 
 type Steuerklasse = 'I' | 'II' | 'III' | 'IV' | 'V' | 'VI';
@@ -14,6 +14,10 @@ type Steuerklasse = 'I' | 'II' | 'III' | 'IV' | 'V' | 'VI';
 // Vereinfachte Jahreslohnsteuer: nutzt den zentralen 2026-Tarif
 // (§ 32a EStG) aus lib/berechnungen/einkommensteuer.ts und wendet die
 // bekannten Steuerklassen-Multiplikatoren an.
+// TODO: SK V/VI Faktor 1,15 ist eine grobe Näherung. Exakte Werte nach
+// § 39b PAP liegen bei ~1,4–1,6. Für präzise SK-V/VI-Berechnung müsste
+// berechneLohnsteuer aus lohnsteuer.ts verwendet werden. Offener Punkt
+// für zukünftiges Refactoring (nicht Teil von Prompt 95).
 function lohnsteuerJahr(zvE: number, klasse: Steuerklasse): number {
   const zvEff = klasse === 'III' ? zvE / 2 : zvE;
   let steuer = berechneEStGrund(Math.max(0, zvEff), 2026);
@@ -54,7 +58,11 @@ export default function ArbeitslosengeldRechner() {
     const jahresBrutto = bemessung * 12;
     const lstJahr = lohnsteuerJahr(jahresBrutto, klasse);
     const lstMonat = lstJahr / 12;
-    const soli = lstMonat > 1000 ? lstMonat * 0.055 : 0;
+    // Soli mit Freigrenze (§ 4 SolzG): 20.350 € Grundtarif / 40.700 € Splittingtarif,
+    // inkl. Milderungszone. Splittingtarif greift bei SK III.
+    const splittingtarif = klasse === 'III';
+    const soliJahr = berechneSoli(lstJahr, splittingtarif, 2026);
+    const soli = soliJahr / 12;
     const kiSt = kirchensteuer ? lstMonat * 0.09 : 0;
 
     // Sozialversicherungspauschale 21 %

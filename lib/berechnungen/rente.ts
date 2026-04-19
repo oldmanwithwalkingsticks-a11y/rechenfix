@@ -1,3 +1,5 @@
+import { berechneEStGrund } from './einkommensteuer';
+
 export interface RentenEingabe {
   alter: number;
   renteneintrittsalter: number;
@@ -95,29 +97,20 @@ export function berechneRente(eingabe: RentenEingabe): RentenErgebnis | null {
 
   const bruttoRente = bruttoRenteOhneAbschlag * (1 - abschlagProzent / 100);
 
-  // Netto-Rente (vereinfacht)
-  // Steuerpflichtiger Anteil: 83% ab 2026, steigt um 0,5% pro Jahr
+  // Netto-Rente (Näherung)
+  // Steuerpflichtiger Anteil nach § 22 EStG: 83 % bei Rentenbeginn 2026,
+  // steigt um 0,5 %-Punkte pro Jahr bis 100 %.
   const steuerpflichtAnteil = Math.min(100, 83 + jahreBisRente * 0.5);
 
-  // Vereinfachter Grenzsteuersatz für Rentner (ca. 15-20% im unteren Bereich)
+  // ESt auf den steuerpflichtigen Teil der Jahresrente — zentrale Grundtabelle
+  // (§ 32a EStG 2026). Rentner: Grundtarif, kein Splitting im Default.
   const jahrRenteSteuerpflichtig = bruttoRente * 12 * steuerpflichtAnteil / 100;
-  // Grundfreibetrag 2026: 12.348 €
-  const zuVersteuern = Math.max(0, jahrRenteSteuerpflichtig - 12348);
-  // Vereinfachter Durchschnittssteuersatz
-  let steuerSatz = 0;
-  if (zuVersteuern > 0) {
-    // Progressionszone 1: 14% bis 42% (vereinfacht linear)
-    if (zuVersteuern <= 17000) {
-      steuerSatz = 14 + (zuVersteuern / 17000) * 10; // 14-24%
-    } else if (zuVersteuern <= 65000) {
-      steuerSatz = 24 + ((zuVersteuern - 17000) / 48000) * 18; // 24-42%
-    } else {
-      steuerSatz = 42;
-    }
-  }
-  const steuerMonat = (zuVersteuern * steuerSatz / 100) / 12;
+  const steuerJahr = berechneEStGrund(jahrRenteSteuerpflichtig, 2026);
+  const steuerMonat = steuerJahr / 12;
 
-  // KV + PV pauschal ca. 10,85% (8,15% KV + 1,7% PV + 1% Zusatz)
+  // SV-Pauschale für Rentner (grob): KV 8,15 % + PV 1,7 % + Zusatzbeitrag ~1 %
+  // = 10,85 %. Tatsächlich abhängig von Zusatzbeitragssatz der individuellen
+  // Krankenkasse und Kinderlosenzuschlag. Für Rentenlücken-Schätzung ausreichend.
   const sozialAbgaben = bruttoRente * 0.1085;
 
   const nettoRente = Math.max(0, bruttoRente - steuerMonat - sozialAbgaben);

@@ -7,9 +7,10 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
+import { BBG_KV_MONAT } from '@/lib/berechnungen/brutto-netto';
 
-// Beitragsbemessungsgrenze KV 2026: 69.750 €/Jahr = 5.812,50 €/Monat
-const BBG_MONAT = 5812.5;
+// Beitragsbemessungsgrenze KV 2026 — zentrale SSOT aus brutto-netto.ts
+const BBG_MONAT = BBG_KV_MONAT;
 
 export default function KrankengeldRechner() {
   const [brutto, setBrutto] = useState('3500');

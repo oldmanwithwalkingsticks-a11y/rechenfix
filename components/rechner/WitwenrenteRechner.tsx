@@ -7,13 +7,16 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
+import { getAktuellerRentenwert, RENTENWERT_AB_01_07_2026 } from '@/lib/berechnungen/rente';
 
 type Art = 'gross' | 'klein';
 
-const RENTENWERT_2026 = 39.32; // aktueller Rentenwert (West) 2026
-const FREIBETRAG_FAKTOR = 26.4; // × Rentenwert = Grundfreibetrag
-const KIND_FAKTOR = 5.6; // × Rentenwert pro Kind
-const ANRECHNUNG = 0.40; // 40% des übersteigenden Einkommens
+// Rentenwert aus zentraler SSOT (§ 255 SGB VI + Rentenwert-Verordnung).
+// Heute: 40,79 €, ab 01.07.2026: 42,52 € — Switch greift automatisch.
+const RENTENWERT = getAktuellerRentenwert();
+const FREIBETRAG_FAKTOR = 26.4; // § 97 SGB VI + Anlage 1
+const KIND_FAKTOR = 5.6;        // § 97 SGB VI pro Kind unter 18
+const ANRECHNUNG = 0.40;        // 40 % des übersteigenden Einkommens
 
 export default function WitwenrenteRechner() {
   const [art, setArt] = useState<Art>('gross');
@@ -37,8 +40,8 @@ export default function WitwenrenteRechner() {
     const grundanspruch = rv * prozent;
 
     // Freibetrag
-    const freibetragBasis = FREIBETRAG_FAKTOR * RENTENWERT_2026;
-    const freibetragKinder = k * KIND_FAKTOR * RENTENWERT_2026;
+    const freibetragBasis = FREIBETRAG_FAKTOR * RENTENWERT;
+    const freibetragKinder = k * KIND_FAKTOR * RENTENWERT;
     const freibetragGesamt = freibetragBasis + freibetragKinder;
 
     // Anrechenbares Einkommen
@@ -173,7 +176,7 @@ export default function WitwenrenteRechner() {
                 <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(ergebnis.grundanspruch)} €</span>
               </div>
               <div className="flex justify-between px-4 py-3 text-sm">
-                <span className="text-gray-600 dark:text-gray-400">Grundfreibetrag (26,4 × {fmt(RENTENWERT_2026)} €)</span>
+                <span className="text-gray-600 dark:text-gray-400">Grundfreibetrag (26,4 × {fmt(RENTENWERT)} € Rentenwert)</span>
                 <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(ergebnis.freibetragBasis)} €</span>
               </div>
               {ergebnis.freibetragKinder > 0 && (
@@ -204,7 +207,7 @@ export default function WitwenrenteRechner() {
           {/* Disclaimer */}
           <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-3">
             <p className="text-xs text-amber-800 dark:text-amber-300 leading-relaxed">
-              <strong>Hinweis:</strong> Vereinfachte Berechnung mit aktuellem Rentenwert 2026 ({fmt(RENTENWERT_2026)} €). Maßgeblich ist der Bescheid der Deutschen Rentenversicherung.
+              <strong>Hinweis:</strong> Vereinfachte Berechnung mit Rentenwert {fmt(RENTENWERT)} €. Ab 01.07.2026 steigt der Rentenwert auf {fmt(RENTENWERT_AB_01_07_2026)} €, dadurch erhöhen sich Grundfreibetrag und Kinderfreibetrag automatisch. Maßgeblich bleibt der Bescheid der Deutschen Rentenversicherung.
             </p>
           </div>
 

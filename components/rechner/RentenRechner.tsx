@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { berechneRente } from '@/lib/berechnungen/rente';
 import { RENTENWERT_AB_01_07_2026 } from '@/lib/berechnungen/rente';
+import { BBG_RV_MONAT } from '@/lib/berechnungen/brutto-netto';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
@@ -137,6 +138,15 @@ export default function RentenRechner() {
               </div>
             </div>
           </div>
+
+          {/* BBG-Kappungs-Hinweis, nur wenn Brutto ueber BBG RV */}
+          {nMonatsbrutto > BBG_RV_MONAT && (
+            <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-4">
+              <p className="text-amber-800 dark:text-amber-300 text-sm">
+                <strong>Hinweis:</strong> Ihr Bruttoeinkommen liegt über der Beitragsbemessungsgrenze Rentenversicherung (BBG 2026: {fmt(BBG_RV_MONAT)} €/Monat, {fmt(BBG_RV_MONAT * 12)} €/Jahr). Für die Rentenpunkte werden nur Einkommensanteile bis zur BBG berücksichtigt — Ihre maximal möglichen Entgeltpunkte sind daher bei <strong>1,9521 EP/Jahr</strong> gedeckelt.
+              </p>
+            </div>
+          )}
 
           {/* Rentenpunkte-Übersicht */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
