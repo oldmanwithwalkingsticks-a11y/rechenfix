@@ -19,6 +19,7 @@ export const kategorien: KategorieConfig[] = [
     icon: '📋',
     metaTitle: 'Alltags-Rechner',
     metaDescription: 'Kostenlose Online-Rechner für den Alltag: Prozentrechner, Einheitenumrechner, Rabattrechner und mehr. Sofort berechnen ohne Anmeldung.',
+    einleitung: '',
   },
   {
     slug: 'finanzen',
@@ -27,6 +28,7 @@ export const kategorien: KategorieConfig[] = [
     icon: '💰',
     metaTitle: 'Finanz-Rechner',
     metaDescription: 'Kostenlose Online-Finanzrechner: Brutto-Netto, MwSt, Kreditrechner und mehr. Sofort berechnen ohne Anmeldung.',
+    einleitung: '',
   },
   {
     slug: 'gesundheit',
@@ -35,6 +37,7 @@ export const kategorien: KategorieConfig[] = [
     icon: '💚',
     metaTitle: 'Gesundheits-Rechner',
     metaDescription: 'Kostenlose Online-Gesundheitsrechner: BMI, Kalorienbedarf, Idealgewicht und mehr. Sofort berechnen ohne Anmeldung.',
+    einleitung: '',
   },
   {
     slug: 'auto',
@@ -43,6 +46,7 @@ export const kategorien: KategorieConfig[] = [
     icon: '🚗',
     metaTitle: 'Auto-Rechner',
     metaDescription: 'Kostenlose Online-Rechner für Auto & Verkehr: Spritkosten, Fahrtkosten und mehr. Sofort berechnen ohne Anmeldung.',
+    einleitung: '',
   },
   {
     slug: 'wohnen',
@@ -51,6 +55,7 @@ export const kategorien: KategorieConfig[] = [
     icon: '🏠',
     metaTitle: 'Wohnen & Energie Rechner',
     metaDescription: 'Kostenlose Online-Rechner für Wohnen & Energie: Mietrechner, Stromkosten, Heizkosten und mehr. Sofort berechnen ohne Anmeldung.',
+    einleitung: '',
   },
   {
     slug: 'mathe',
@@ -59,6 +64,7 @@ export const kategorien: KategorieConfig[] = [
     icon: '🎓',
     metaTitle: 'Mathe-Rechner',
     metaDescription: 'Kostenlose Online-Mathe-Rechner für Schule und Studium: Bruchrechner, Gleichungen und mehr. Sofort berechnen ohne Anmeldung.',
+    einleitung: '',
   },
   {
     slug: 'arbeit',
@@ -67,6 +73,7 @@ export const kategorien: KategorieConfig[] = [
     icon: '💼',
     metaTitle: 'Arbeit & Recht Rechner',
     metaDescription: 'Kostenlose Online-Rechner für Arbeit & Recht: Arbeitszeit, Urlaubstage und mehr. Sofort berechnen ohne Anmeldung.',
+    einleitung: '',
   },
   {
     slug: 'kochen',
@@ -75,6 +82,7 @@ export const kategorien: KategorieConfig[] = [
     icon: '🍳',
     metaTitle: 'Kochen & Ernährung Rechner',
     metaDescription: 'Kostenlose Online-Rechner für Kochen & Ernährung: Rezept-Umrechner, Cups in Gramm, Portionen skalieren. Sofort berechnen ohne Anmeldung.',
+    einleitung: '',
   },
   {
     slug: 'sport',
@@ -83,6 +91,7 @@ export const kategorien: KategorieConfig[] = [
     icon: '🏃',
     metaTitle: 'Sport & Fitness Rechner',
     metaDescription: 'Kostenlose Online-Rechner für Sport & Fitness: Pace-Rechner, Herzfrequenz-Zonen, Trainingsintensität. Sofort berechnen ohne Anmeldung.',
+    einleitung: '',
   },
 ];
 

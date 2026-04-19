@@ -41,9 +41,19 @@ export default function KategorieSeite({ params }: Props) {
       <ZurueckButton fallbackHref="/" label="Zurück" />
 
       <h1 className="text-3xl md:text-4xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
-        {kategorie.icon} {kategorie.name}-Rechner
+        {kategorie.icon} {kategorie.name}-Rechner — {rechnerListe.length} kostenlose Tools 2026
       </h1>
-      <p className="text-gray-500 dark:text-gray-400 mb-8 max-w-2xl">{kategorie.beschreibung}</p>
+      <p className="text-gray-500 dark:text-gray-400 mb-6 max-w-2xl">{kategorie.beschreibung}</p>
+
+      {kategorie.einleitung && kategorie.einleitung.trim().length > 0 && (
+        <section className="mb-8 max-w-3xl">
+          <div className="text-sm md:text-base text-gray-700 dark:text-gray-300 leading-relaxed space-y-3">
+            {kategorie.einleitung.split('\n\n').filter(Boolean).map((absatz, i) => (
+              <p key={i}>{absatz.trim()}</p>
+            ))}
+          </div>
+        </section>
+      )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {rechnerListe.map(r => (
