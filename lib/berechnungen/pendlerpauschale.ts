@@ -7,8 +7,6 @@ export interface PendlerEingabe {
 }
 
 export interface PendlerErgebnis {
-  erste20km: number;
-  ab21km: number;
   pauschaleGesamt: number;
   steuerersparnis: number;
   monatlicheErsparnis: number;
@@ -18,21 +16,21 @@ export interface PendlerErgebnis {
   aufschluesselung: { label: string; wert: string }[];
 }
 
+// § 9 Abs. 1 Nr. 4 EStG i.d.F. StÄndG 2025:
+// Einheitlich 0,38 €/km ab dem ersten Kilometer (seit 01.01.2026).
+export const PENDLERPAUSCHALE_SATZ_2026 = 0.38;
+// Homeoffice-Pauschale § 4 Abs. 5 Nr. 6c EStG — 6 €/Tag, max. 210 Tage.
+export const HOMEOFFICE_PAUSCHALE_PRO_TAG = 6;
+export const HOMEOFFICE_PAUSCHALE_MAX_TAGE = 210;
+
 export function berechnePendlerpauschale(eingabe: PendlerEingabe): PendlerErgebnis | null {
   const { entfernungKm, arbeitstageProJahr, grenzsteuersatz, homeofficeTageProWoche, arbeitstageProWoche } = eingabe;
   if (entfernungKm <= 0 || arbeitstageProJahr <= 0 || grenzsteuersatz <= 0) return null;
 
   const km = Math.round(entfernungKm);
 
-  // Erste 20 km: 0,30 € pro km
-  const kmErste20 = Math.min(km, 20);
-  const erste20km = kmErste20 * 0.30 * arbeitstageProJahr;
-
-  // Ab km 21: 0,38 € pro km
-  const kmAb21 = Math.max(km - 20, 0);
-  const ab21km = kmAb21 * 0.38 * arbeitstageProJahr;
-
-  const pauschaleGesamt = erste20km + ab21km;
+  // Einheitlicher Satz 0,38 €/km ab dem ersten Kilometer
+  const pauschaleGesamt = km * PENDLERPAUSCHALE_SATZ_2026 * arbeitstageProJahr;
 
   const steuerersparnis = pauschaleGesamt * grenzsteuersatz / 100;
   const monatlicheErsparnis = steuerersparnis / 12;
@@ -40,37 +38,22 @@ export function berechnePendlerpauschale(eingabe: PendlerEingabe): PendlerErgebn
   // Homeoffice-Pauschale
   const homeofficeTageJahr = Math.min(
     Math.round(homeofficeTageProWoche * (arbeitstageProJahr / arbeitstageProWoche)),
-    210
+    HOMEOFFICE_PAUSCHALE_MAX_TAGE,
   );
-  const homeofficePauschale = homeofficeTageJahr * 6;
+  const homeofficePauschale = homeofficeTageJahr * HOMEOFFICE_PAUSCHALE_PRO_TAG;
 
   const aufschluesselung: { label: string; wert: string }[] = [
     {
-      label: `Erste 20 km: ${kmErste20} km × 0,30 € × ${arbeitstageProJahr} Tage`,
-      wert: `${fmtEuro(erste20km)}`,
+      label: `Pendlerpauschale: ${km} km × 0,38 € × ${arbeitstageProJahr} Tage`,
+      wert: fmtEuro(pauschaleGesamt),
+    },
+    {
+      label: `Steuerersparnis (${grenzsteuersatz}% Grenzsteuersatz)`,
+      wert: fmtEuro(steuerersparnis),
     },
   ];
 
-  if (kmAb21 > 0) {
-    aufschluesselung.push({
-      label: `Ab km 21: ${kmAb21} km × 0,38 € × ${arbeitstageProJahr} Tage`,
-      wert: `${fmtEuro(ab21km)}`,
-    });
-  }
-
-  aufschluesselung.push({
-    label: 'Pendlerpauschale gesamt',
-    wert: fmtEuro(pauschaleGesamt),
-  });
-
-  aufschluesselung.push({
-    label: `Steuerersparnis (${grenzsteuersatz}% Grenzsteuersatz)`,
-    wert: fmtEuro(steuerersparnis),
-  });
-
   return {
-    erste20km,
-    ab21km,
     pauschaleGesamt,
     steuerersparnis,
     monatlicheErsparnis,

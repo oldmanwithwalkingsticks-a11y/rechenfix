@@ -46,11 +46,16 @@ export interface KindergeldErgebnis {
 
 export const KINDERGELD_PRO_KIND_MONAT = 259;
 
-// Kinderfreibetrag pro Kind (Einzelveranlagung = halber Freibetrag, Zusammenveranlagung = voller)
-const KINDERFREIBETRAG_EINZEL = 4878;
-const BEA_FREIBETRAG_EINZEL = 2928;
-const FREIBETRAG_PRO_KIND_EINZEL = KINDERFREIBETRAG_EINZEL + BEA_FREIBETRAG_EINZEL; // 7.806 €
-const FREIBETRAG_PRO_KIND_ZUSAMMEN = FREIBETRAG_PRO_KIND_EINZEL * 2; // 15.612 €
+// § 32 Abs. 6 EStG 2026 — Kinderfreibetrag + BEA.
+// Zusammenveranlagung: voller Jahresfreibetrag pro Kind.
+// Einzelveranlagung: halber Anteil pro Elternteil (Eltern teilen sich den Freibetrag).
+export const KIFB_SAECHLICH_ZUSAMMEN_2026 = 6828;   // § 32 Abs. 6 Satz 1 EStG 2026
+export const BEA_ZUSAMMEN_2026 = 2928;              // unverändert seit 2021
+export const KIFB_GESAMT_ZUSAMMEN_2026 = KIFB_SAECHLICH_ZUSAMMEN_2026 + BEA_ZUSAMMEN_2026; // 9.756 €
+export const KIFB_GESAMT_EINZEL_2026 = KIFB_GESAMT_ZUSAMMEN_2026 / 2; // 4.878 €
+
+const FREIBETRAG_PRO_KIND_ZUSAMMEN = KIFB_GESAMT_ZUSAMMEN_2026;
+const FREIBETRAG_PRO_KIND_EINZEL = KIFB_GESAMT_EINZEL_2026;
 
 // Pauschalen
 const WERBUNGSKOSTEN_PAUSCHBETRAG = 1230;

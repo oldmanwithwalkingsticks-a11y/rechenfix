@@ -285,11 +285,11 @@ In der Praxis bedeutet das: Bei einer 40-Stunden-Woche und 5 Arbeitstagen sind m
     kategorie: 'Arbeit & Recht',
     kategorieSlug: 'arbeit',
     metaTitle: 'Pendlerpauschale-Rechner — km-Pauschale',
-    metaDescription: 'Pendlerpauschale 2026 berechnen ✓ 0,30 € + 0,38 € pro km ✓ Steuerersparnis ermitteln ✓ Vergleich mit Homeoffice. Jetzt berechnen! ✓ Mit KI-Erklärung.',
-    keywords: ['pendlerpauschale rechner', 'entfernungspauschale 2026', 'pendlerpauschale berechnen', 'fahrtkostenpauschale', 'pendlerpauschale steuerersparnis', 'homeoffice pauschale vergleich', 'km pauschale'],
+    metaDescription: 'Pendlerpauschale 2026 berechnen ✓ einheitlich 0,38 €/km ab dem ersten Kilometer ✓ Steuerersparnis ✓ Vergleich Homeoffice. Kostenlos mit KI-Erklärung.',
+    keywords: ['pendlerpauschale rechner', 'entfernungspauschale 2026', 'pendlerpauschale berechnen', 'fahrtkostenpauschale', 'pendlerpauschale steuerersparnis', 'homeoffice pauschale vergleich', 'km pauschale', 'pendlerpauschale 0,38'],
     icon: '🛣️',
-    formel: 'Erste 20 km: 0,30 €/km × Tage | Ab km 21: 0,38 €/km × Tage | Steuerersparnis = Pauschale × Grenzsteuersatz',
-    beispiel: '25 km, 220 Tage, 35% Steuersatz: 20×0,30×220 + 5×0,38×220 = 1.320+418 = 1.738 € Pauschale → 608,30 € Steuerersparnis.',
+    formel: 'Pendlerpauschale = Entfernung (km) × 0,38 € × Arbeitstage | Steuerersparnis = Pauschale × Grenzsteuersatz',
+    beispiel: '25 km, 220 Tage, 35% Steuersatz: 25 × 0,38 € × 220 = 2.090 € Pauschale → 731,50 € Steuerersparnis.',
     erklaerung: `**Pendlerpauschale 2026 — was ist das?**
 
 Die Pendlerpauschale (offiziell: Entfernungspauschale) ist ein steuerlicher Freibetrag für Arbeitnehmer, die zwischen Wohnung und Arbeitsstätte pendeln. Sie mindert das zu versteuernde Einkommen und führt so zu einer Steuerersparnis. Die Pendlerpauschale wird in der Einkommensteuererklärung als Werbungskosten bei den Einkünften aus nichtselbständiger Arbeit geltend gemacht.
@@ -298,19 +298,16 @@ Wichtig: Die Pendlerpauschale reduziert nicht direkt die Steuerlast, sondern das
 
 Die Pendlerpauschale steht jedem Arbeitnehmer zu — unabhängig davon, ob er mit dem Auto, öffentlichen Verkehrsmitteln, dem Fahrrad oder zu Fuß zur Arbeit kommt. Entscheidend ist allein die Entfernung zwischen Wohnung und erster Tätigkeitsstätte.
 
-**Wie hoch ist die Pendlerpauschale pro km?**
+**Wie hoch ist die Pendlerpauschale 2026?**
 
-Seit 2022 gelten in Deutschland gestaffelte Kilometersätze:
+Seit dem 1. Januar 2026 gilt ein **einheitlicher Kilometersatz** (§ 9 Abs. 1 Nr. 4 EStG i.d.F. Steueränderungsgesetz 2025):
 
-- **Erste 20 Kilometer:** 0,30 € pro Entfernungskilometer und Arbeitstag.
-- **Ab dem 21. Kilometer:** 0,38 € pro Entfernungskilometer und Arbeitstag.
+- **0,38 € pro Entfernungskilometer und Arbeitstag — ab dem ersten Kilometer.**
 
-Die erhöhte Pauschale ab dem 21. Kilometer wurde als Entlastung für Fernpendler eingeführt und gilt voraussichtlich bis Ende 2026.
+Die bis 2025 geltende Staffelung (erste 20 km: 0,30 €, ab km 21: 0,38 €) wurde mit der Reform zum 01.01.2026 abgeschafft. Die einheitliche Pauschale entlastet vor allem Nahpendler spürbar: Wer bisher 10 km einfach gependelt ist, bekommt nun statt 0,30 € auch auf diese Strecke die 0,38 €.
 
 Beispiel: Bei einer einfachen Entfernung von 35 km und 220 Arbeitstagen:
-- Erste 20 km: 20 × 0,30 € × 220 = 1.320 €
-- Ab km 21: 15 × 0,38 € × 220 = 1.254 €
-- Gesamt: 2.574 € Pendlerpauschale
+- 35 × 0,38 € × 220 = **2.926 € Pendlerpauschale**
 
 Wichtig: Berechnet wird nur die **einfache Entfernung**, nicht die Hin- und Rückfahrt. Es zählt die kürzeste Straßenverbindung (nicht die tatsächlich gefahrene Strecke), es sei denn, eine längere Strecke ist verkehrsgünstiger und wird regelmäßig genutzt.
 
@@ -320,7 +317,7 @@ Wichtig: Berechnet wird nur die **einfache Entfernung**, nicht die Hin- und Rüc
 
 2. **Arbeitstage zählen:** Ermitteln Sie die Anzahl der Tage, an denen Sie tatsächlich zur Arbeitsstätte gefahren sind. Abzuziehen sind: Urlaub, Feiertage, Krankheitstage und Homeoffice-Tage. In der Praxis setzen die Finanzämter bei einer 5-Tage-Woche üblicherweise 220 bis 230 Arbeitstage an.
 
-3. **Pauschale berechnen:** Multiplizieren Sie die Entfernung mit dem Kilometersatz und den Arbeitstagen. Beachten Sie die Staffelung ab dem 21. Kilometer.
+3. **Pauschale berechnen:** Multiplizieren Sie die Entfernung mit 0,38 € und den Arbeitstagen.
 
 4. **Steuerersparnis ermitteln:** Multiplizieren Sie die Pendlerpauschale mit Ihrem persönlichen Grenzsteuersatz. Das Ergebnis ist Ihre tatsächliche jährliche Steuerersparnis.
 
@@ -349,7 +346,7 @@ Bei einem Arbeitsplatzwechsel im laufenden Jahr können die Pendlerpauschalen f�
     faq: [
       {
         frage: 'Wie hoch ist die Pendlerpauschale 2026?',
-        antwort: 'Für die ersten 20 Kilometer beträgt die Pendlerpauschale 0,30 € pro Entfernungskilometer. Ab dem 21. Kilometer sind es 0,38 € pro Kilometer. Es zählt nur die einfache Entfernung, nicht Hin- und Rückfahrt.',
+        antwort: 'Seit dem 1. Januar 2026 gilt ein einheitlicher Satz von 0,38 € pro Entfernungskilometer ab dem ersten Kilometer (Steueränderungsgesetz 2025). Die frühere Staffelung (bis 20 km: 0,30 €, darüber: 0,38 €) ist damit entfallen. Es zählt nur die einfache Entfernung, nicht Hin- und Rückfahrt.',
       },
       {
         frage: 'Wird die Hin- und Rückfahrt berechnet?',

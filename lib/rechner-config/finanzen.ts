@@ -769,11 +769,11 @@ Der Rechner zeigt nicht nur das Problem, sondern auch die Hebel: Homeoffice-Tage
 
 **Durchschnittliche Steuererstattung in Deutschland**
 
-Laut Statistischem Bundesamt geben jedes Jahr rund 14 Millionen Arbeitnehmer eine Steuererklärung ab. Die durchschnittliche Erstattung liegt bei 1.063 Euro — ein Betrag, der in vielen Haushalten spürbar ist. Besonders hoch fallen die Erstattungen für Pendler mit langen Arbeitswegen aus: Wer täglich 30 Kilometer zur Arbeit fährt, sammelt allein durch die Pendlerpauschale über 2.200 Euro an Werbungskosten an — deutlich mehr als der Pauschbetrag von 1.230 Euro.
+Laut Statistischem Bundesamt geben jedes Jahr rund 14 Millionen Arbeitnehmer eine Steuererklärung ab. Die durchschnittliche Erstattung liegt bei 1.063 Euro — ein Betrag, der in vielen Haushalten spürbar ist. Besonders hoch fallen die Erstattungen für Pendler mit langen Arbeitswegen aus: Wer täglich 30 Kilometer zur Arbeit fährt, sammelt seit der Reform 2026 allein durch die Pendlerpauschale über 2.500 Euro an Werbungskosten an — deutlich mehr als der Pauschbetrag von 1.230 Euro.
 
 **Welche Kosten sind absetzbar?**
 
-Die wichtigsten Absetzungsmöglichkeiten für Arbeitnehmer sind Werbungskosten: Dazu gehören die Pendlerpauschale (30 Cent pro Kilometer, ab dem 21. Kilometer 38 Cent), die Homeoffice-Pauschale (6 Euro pro Tag, maximal 1.260 Euro pro Jahr), Kosten für Arbeitsmittel (Computer, Schreibtisch, Fachliteratur), Fortbildungskosten, Berufskleidung und Gewerkschaftsbeiträge. Darüber hinaus können Sonderausgaben wie Spenden und Kirchensteuer abgesetzt werden. Haushaltsnahe Dienstleistungen (Putzhilfe, Gärtner, Handwerkerleistungen) werden mit 20 Prozent direkt von der Steuerschuld abgezogen — bis zu 4.000 Euro pro Jahr.
+Die wichtigsten Absetzungsmöglichkeiten für Arbeitnehmer sind Werbungskosten: Dazu gehören die Pendlerpauschale (seit 2026 einheitlich 38 Cent pro Kilometer ab dem ersten Kilometer), die Homeoffice-Pauschale (6 Euro pro Tag, maximal 1.260 Euro pro Jahr), Kosten für Arbeitsmittel (Computer, Schreibtisch, Fachliteratur), Fortbildungskosten, Berufskleidung und Gewerkschaftsbeiträge. Darüber hinaus können Sonderausgaben wie Spenden und Kirchensteuer abgesetzt werden. Haushaltsnahe Dienstleistungen (Putzhilfe, Gärtner, Handwerkerleistungen) werden mit 20 Prozent direkt von der Steuerschuld abgezogen — bis zu 4.000 Euro pro Jahr.
 
 **Frist für die Steuererklärung**
 
@@ -789,7 +789,7 @@ Belege sammeln lohnt sich: Sammeln Sie das ganze Jahr über Quittungen für beru
 
 **Der Arbeitnehmer-Pauschbetrag erklärt**
 
-Der Arbeitnehmer-Pauschbetrag von 1.230 Euro wird automatisch von Ihrem zu versteuernden Einkommen abgezogen — auch ohne Steuererklärung. Eine Steuererklärung lohnt sich daher erst, wenn Ihre tatsächlichen Werbungskosten diesen Betrag übersteigen. Bei einem Pendelweg von mehr als 17 Kilometern (einfach) überschreiten Sie den Pauschbetrag bereits durch die Pendlerpauschale allein. Zusammen mit Homeoffice-Pauschale und beruflichen Ausgaben ist die Schwelle aber oft auch bei kürzeren Wegen schnell überschritten.`,
+Der Arbeitnehmer-Pauschbetrag von 1.230 Euro wird automatisch von Ihrem zu versteuernden Einkommen abgezogen — auch ohne Steuererklärung. Eine Steuererklärung lohnt sich daher erst, wenn Ihre tatsächlichen Werbungskosten diesen Betrag übersteigen. Bei einem Pendelweg von rund 15 Kilometern (einfach, bei 220 Arbeitstagen) überschreiten Sie den Pauschbetrag seit der Reform 2026 bereits durch die Pendlerpauschale allein. Zusammen mit Homeoffice-Pauschale und beruflichen Ausgaben ist die Schwelle aber oft auch bei kürzeren Wegen schnell überschritten.`,
     faq: [
       {
         frage: 'Wie hoch ist die durchschnittliche Steuererstattung?',
@@ -797,7 +797,7 @@ Der Arbeitnehmer-Pauschbetrag von 1.230 Euro wird automatisch von Ihrem zu verst
       },
       {
         frage: 'Welche Kosten kann ich von der Steuer absetzen?',
-        antwort: 'Die wichtigsten absetzbaren Kosten sind: Pendlerpauschale (30 ct/km, ab km 21: 38 ct), Homeoffice-Pauschale (6 €/Tag, max. 1.260 €/Jahr), Arbeitsmittel (Computer, Schreibtisch), Fortbildungskosten, Fachliteratur, Berufskleidung, Gewerkschaftsbeiträge, Kontoführungsgebühren (16 € pauschal), haushaltsnahe Dienstleistungen und Spenden.',
+        antwort: 'Die wichtigsten absetzbaren Kosten sind: Pendlerpauschale (seit 2026 einheitlich 38 ct/km ab dem ersten Kilometer), Homeoffice-Pauschale (6 €/Tag, max. 1.260 €/Jahr), Arbeitsmittel (Computer, Schreibtisch), Fortbildungskosten, Fachliteratur, Berufskleidung, Gewerkschaftsbeiträge, Kontoführungsgebühren (16 € pauschal), haushaltsnahe Dienstleistungen und Spenden.',
       },
       {
         frage: 'Bis wann muss die Steuererklärung abgegeben werden?',

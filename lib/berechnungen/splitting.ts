@@ -5,6 +5,7 @@ import {
   BUNDESLAENDER as BUNDESLAENDER_CENTRAL,
   type Bundesland,
 } from './einkommensteuer';
+import { KIFB_GESAMT_ZUSAMMEN_2026 } from './kindergeld';
 
 export interface SplittingEingabe {
   jahresBruttoP1: number;
@@ -68,16 +69,19 @@ function kistWenn(est: number, hatKirche: boolean, bundesland: string): number {
   return berechneKirchensteuerByBundesland(est, bundesland as Bundesland);
 }
 
-// zvE berechnen (vereinfacht)
-function berechneZvE(brutto: number, kinderfreibetraege: number): number {
-  let zve = brutto - WERBUNGSKOSTEN_PAUSCHBETRAG - SONDERAUSGABEN_PAUSCHBETRAG;
-  // Kinderfreibetrag 2026 inkl. BEA: 9.756 € sächlich + 5.856 € BEA = 15.612 € pro Kind (zusammen).
-  // Einzelveranlagung: halber Freibetrag (7.806 €). Wert hier bezieht sich auf vollen Kinderfreibetrag.
-  // Achtung: Kinderfreibetrag wird nur angesetzt wenn günstiger als Kindergeld.
-  if (kinderfreibetraege > 0) {
-    zve -= kinderfreibetraege * 15612;
-  }
-  return Math.max(0, Math.round(zve));
+// zvE-Hilfsfunktion: Brutto eines Partners nach Arbeitnehmer-Pauschbetrag (§ 9a EStG)
+// und Sonderausgabenpauschale (§ 10c EStG). Gilt nur, wenn Partner auch Einkommen hat.
+function pauschalenAbzug(brutto: number): number {
+  if (brutto <= 0) return 0;
+  return Math.max(0, brutto - WERBUNGSKOSTEN_PAUSCHBETRAG - SONDERAUSGABEN_PAUSCHBETRAG);
+}
+
+function kifbAbzug(zve: number, kinderfreibetraege: number): number {
+  // § 32 Abs. 6 EStG 2026: voller Jahresfreibetrag pro Kind bei Zusammenveranlagung,
+  // halbierter Anteil pro Elternteil bei Einzelveranlagung.
+  // Achtung: Kifb wird nur angesetzt, wenn günstiger als Kindergeld.
+  if (kinderfreibetraege <= 0) return zve;
+  return Math.max(0, zve - kinderfreibetraege * KIFB_GESAMT_ZUSAMMEN_2026);
 }
 
 export function berechneSplitting(eingabe: SplittingEingabe): SplittingErgebnis | null {
@@ -90,14 +94,18 @@ export function berechneSplitting(eingabe: SplittingEingabe): SplittingErgebnis 
   if (jahresBruttoP1 < 0 || jahresBruttoP2 < 0) return null;
   if (jahresBruttoP1 === 0 && jahresBruttoP2 === 0) return null;
 
-  // zvE berechnen
-  // Bei Einzelveranlagung: Kinderfreibeträge hälftig aufteilen
-  const kfbEinzel = kinderfreibetraege / 2;
-  const zveP1 = berechneZvE(jahresBruttoP1, kfbEinzel);
-  const zveP2 = berechneZvE(jahresBruttoP2, kfbEinzel);
+  // === zvE berechnen ===
+  // WK- und Sonderausgabenpauschale greifen PRO PARTNER (§ 9a, § 10c EStG), auch bei
+  // Zusammenveranlagung — sofern der Partner überhaupt Einkommen hat.
+  const zveP1Vor = pauschalenAbzug(jahresBruttoP1);
+  const zveP2Vor = pauschalenAbzug(jahresBruttoP2);
 
-  // Bei Zusammenveranlagung: Voller Kinderfreibetrag
-  const zveGesamt = berechneZvE(jahresBruttoP1 + jahresBruttoP2, kinderfreibetraege);
+  // Bei Einzelveranlagung: Kinderfreibeträge hälftig aufteilen (halber Anteil pro Elternteil)
+  const zveP1 = Math.max(0, Math.round(kifbAbzug(zveP1Vor, kinderfreibetraege / 2)));
+  const zveP2 = Math.max(0, Math.round(kifbAbzug(zveP2Vor, kinderfreibetraege / 2)));
+
+  // Bei Zusammenveranlagung: voller Kinderfreibetrag auf die Summe nach Pauschalen
+  const zveGesamt = Math.max(0, Math.round(kifbAbzug(zveP1Vor + zveP2Vor, kinderfreibetraege)));
   const zveHalbe = Math.round(zveGesamt / 2);
 
   // === EINZELVERANLAGUNG ===
