@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useId } from 'react';
 import { berechneSteuerprogression } from '@/lib/berechnungen/steuerprogression';
+import { BUNDESLAENDER, type Bundesland } from '@/lib/berechnungen/einkommensteuer';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
@@ -55,15 +56,17 @@ export default function SteuerprogressionsRechner() {
   const [zveStr, setZveStr] = useState('50000');
   const [veranlagung, setVeranlagung] = useState<'einzel' | 'splitting'>('einzel');
   const [kirchensteuer, setKirchensteuer] = useState<'nein' | 'ja'>('nein');
+  const [bundesland, setBundesland] = useState<Bundesland>('Nordrhein-Westfalen');
   const sliderId = useId();
 
   const zve = parseDeutscheZahl(zveStr);
   const splitting = veranlagung === 'splitting';
   const hatKirchensteuer = kirchensteuer === 'ja';
+  const kistSatzProzent = bundesland === 'Bayern' || bundesland === 'Baden-Württemberg' ? 8 : 9;
 
   const ergebnis = useMemo(
-    () => berechneSteuerprogression(zve, splitting, hatKirchensteuer),
-    [zve, splitting, hatKirchensteuer],
+    () => berechneSteuerprogression(zve, splitting, hatKirchensteuer, bundesland),
+    [zve, splitting, hatKirchensteuer, bundesland],
   );
 
   // Slider sync
@@ -170,12 +173,31 @@ export default function SteuerprogressionsRechner() {
           legend="Kirchensteuer"
           options={[
             { value: 'nein', label: 'Nein' },
-            { value: 'ja', label: 'Ja (9%)' },
+            { value: 'ja', label: `Ja (${kistSatzProzent} %)` },
           ]}
           value={kirchensteuer}
           onChange={(v) => setKirchensteuer(v as 'nein' | 'ja')}
           columns={2}
         />
+
+        {hatKirchensteuer && (
+          <div>
+            <label htmlFor="steuerprogression-bundesland" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Bundesland
+            </label>
+            <select
+              id="steuerprogression-bundesland"
+              value={bundesland}
+              onChange={e => setBundesland(e.target.value as Bundesland)}
+              className="w-full sm:w-2/3 px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm min-h-[48px]"
+            >
+              {BUNDESLAENDER.map(bl => (
+                <option key={bl} value={bl}>{bl}</option>
+              ))}
+            </select>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Bayern und Baden-Württemberg: 8 %, sonst 9 %.</p>
+          </div>
+        )}
       </div>
 
       {/* Ergebnis */}
@@ -373,7 +395,7 @@ export default function SteuerprogressionsRechner() {
               </div>
               {hatKirchensteuer && (
                 <div className="flex justify-between px-4 py-3 text-sm">
-                  <span className="text-gray-700 dark:text-gray-300">Kirchensteuer (9%)</span>
+                  <span className="text-gray-700 dark:text-gray-300">Kirchensteuer ({kistSatzProzent} %)</span>
                   <span className="font-medium text-gray-800 dark:text-gray-200">{formatEuroFull(ergebnis.kirchensteuer)} €</span>
                 </div>
               )}
@@ -493,7 +515,7 @@ export default function SteuerprogressionsRechner() {
             eingaben={{
               zuVersteuerndesEinkommenEuro: zve,
               veranlagung: splitting ? 'Zusammenveranlagung (Splitting)' : 'Einzelveranlagung',
-              kirchensteuer: hatKirchensteuer ? 'Ja (9%)' : 'Nein',
+              kirchensteuer: hatKirchensteuer ? `Ja (${kistSatzProzent} %, ${bundesland})` : 'Nein',
             }}
             ergebnis={{
               einkommensteuerEuro: ergebnis.einkommensteuer,

@@ -1,3 +1,5 @@
+import { berechneKirchensteuerByBundesland, type Bundesland } from './einkommensteuer';
+
 export interface SteuerprogressionsErgebnis {
   zvE: number;
   splitting: boolean;
@@ -55,10 +57,10 @@ function berechneSoli(est: number): number {
   return Math.min(mild, voll);
 }
 
-// Kirchensteuer: 9% als Standard (8% in Bayern/BW)
-function berechneKiSt(est: number, kirchensteuer: boolean): number {
+// Kirchensteuer: bundesland-abhängig 8 % (BY/BW) oder 9 % — zentrale SSOT.
+function berechneKiSt(est: number, kirchensteuer: boolean, bundesland: Bundesland): number {
   if (!kirchensteuer) return 0;
-  return Math.round(est * 0.09 * 100) / 100;
+  return berechneKirchensteuerByBundesland(est, bundesland);
 }
 
 // Grenzsteuersatz: Steuer auf den nächsten Euro
@@ -85,6 +87,7 @@ export function berechneSteuerprogression(
   zvE: number,
   splitting: boolean,
   kirchensteuer: boolean,
+  bundesland: Bundesland = 'Nordrhein-Westfalen',
 ): SteuerprogressionsErgebnis | null {
   if (zvE < 0 || isNaN(zvE)) return null;
 
@@ -95,7 +98,7 @@ export function berechneSteuerprogression(
   const solidaritaetszuschlag = berechneSoli(einkommensteuer);
 
   // Kirchensteuer
-  const kirchensteuerBetrag = berechneKiSt(einkommensteuer, kirchensteuer);
+  const kirchensteuerBetrag = berechneKiSt(einkommensteuer, kirchensteuer, bundesland);
 
   // Gesamt
   const gesamtSteuer = Math.round(
