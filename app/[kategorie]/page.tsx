@@ -11,6 +11,28 @@ interface Props {
   params: { kategorie: string };
 }
 
+// Einfacher Markdown-Link-Renderer für Kategorie-Einleitungstexte:
+// wandelt `[text](/pfad)` in <Link> um, lässt alles andere als Plain-Text stehen.
+function renderMarkdownLinks(text: string): React.ReactNode[] {
+  const parts: React.ReactNode[] = [];
+  const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+  let key = 0;
+  while ((match = linkRegex.exec(text)) !== null) {
+    if (match.index > lastIndex) parts.push(text.slice(lastIndex, match.index));
+    const [, label, href] = match;
+    parts.push(
+      <Link key={key++} href={href} className="text-primary-600 dark:text-primary-400 underline hover:no-underline">
+        {label}
+      </Link>
+    );
+    lastIndex = match.index + match[0].length;
+  }
+  if (lastIndex < text.length) parts.push(text.slice(lastIndex));
+  return parts;
+}
+
 export function generateStaticParams() {
   return kategorien.map(k => ({ kategorie: k.slug }));
 }
@@ -48,9 +70,13 @@ export default function KategorieSeite({ params }: Props) {
       {kategorie.einleitung && kategorie.einleitung.trim().length > 0 && (
         <section className="mb-8 max-w-3xl">
           <div className="text-sm md:text-base text-gray-700 dark:text-gray-300 leading-relaxed space-y-3">
-            {kategorie.einleitung.split('\n\n').filter(Boolean).map((absatz, i) => (
-              <p key={i}>{absatz.trim()}</p>
-            ))}
+            {kategorie.einleitung
+              .replace(/\{COUNT\}/g, String(rechnerListe.length))
+              .split('\n\n')
+              .filter(Boolean)
+              .map((absatz, i) => (
+                <p key={i}>{renderMarkdownLinks(absatz.trim())}</p>
+              ))}
           </div>
         </section>
       )}

@@ -19,7 +19,11 @@ export const kategorien: KategorieConfig[] = [
     icon: '📋',
     metaTitle: 'Alltags-Rechner',
     metaDescription: 'Kostenlose Online-Rechner für den Alltag: Prozentrechner, Einheitenumrechner, Rabattrechner und mehr. Sofort berechnen ohne Anmeldung.',
-    einleitung: '',
+    einleitung: `Im Alltag tauchen ständig Rechenfragen auf, die man schnell beantwortet haben will — ohne Taschenrechner, ohne umständliches Hin- und Herrechnen. Was sind 15 Prozent von 89 Euro? Wie viele Tage noch bis zum Urlaub? Wie hoch ist der Rabatt auf ein reduziertes Produkt wirklich? Und wie viel Trinkgeld gehört sich beim Restaurantbesuch?
+
+In der Kategorie Alltag finden Sie {COUNT} Rechner für genau solche Situationen. Der [Prozentrechner](/alltag/prozentrechner) ist das universelle Werkzeug für Anteile, Aufschläge und Abschläge, und der [Dreisatz-Rechner](/alltag/dreisatz-rechner) hilft immer dann, wenn sich zwei Werte proportional zueinander verhalten — etwa bei Mengenberechnungen oder Preisvergleichen. Der [Rabatt-Rechner](/alltag/rabattrechner) zeigt Ihnen sekundenschnell, wie viel Sie bei einem reduzierten Preis tatsächlich sparen.
+
+Daneben finden Sie spezialisiertere Helfer: Countdown- und Geburtstags-Rechner für Termine, Streaming- und Handykosten-Rechner für laufende Abos, ein Umzugskosten-Rechner für Ihre Planung oder der Trinkgeld-Rechner für unterwegs. Alle Rechner sind kostenlos, ohne Anmeldung und funktionieren auch auf dem Smartphone. Wenn Sie wissen möchten, wie das Ergebnis zustande kommt, erklärt "Fix erklärt" den Rechenweg in einfacher Sprache.`,
   },
   {
     slug: 'finanzen',
@@ -28,7 +32,11 @@ export const kategorien: KategorieConfig[] = [
     icon: '💰',
     metaTitle: 'Finanz-Rechner',
     metaDescription: 'Kostenlose Online-Finanzrechner: Brutto-Netto, MwSt, Kreditrechner und mehr. Sofort berechnen ohne Anmeldung.',
-    einleitung: '',
+    einleitung: `Ob Sie Ihr Nettogehalt berechnen, einen Kredit finanzieren, eine Steuererklärung vorbereiten oder für die Rente planen möchten — in der Kategorie Finanzen finden Sie {COUNT} Rechner rund um Einkommen, Steuern und Sozialleistungen. Alle Werte basieren auf den 2026 geltenden Sätzen: Grundfreibetrag 12.348 Euro, Kindergeld 259 Euro pro Kind, Rentenwert 40,79 Euro (ab 1. Juli 2026: 42,52 Euro) und die aktuellen Beitragssätze zur Sozialversicherung.
+
+Der [Brutto-Netto-Rechner](/finanzen/brutto-netto-rechner) ist der meistgenutzte Rechner dieser Kategorie — er zeigt Ihnen, wie viel von Ihrem Bruttogehalt nach Steuern und Sozialabgaben übrig bleibt, inklusive Steuerklasse, Bundesland und Kirchensteuer. Für Immobilien- oder Konsumfinanzierungen ermittelt der [Kreditrechner](/finanzen/kreditrechner) Ihre monatliche Rate und die Gesamtkosten über die Laufzeit. Wer langfristig Vermögen aufbauen möchte, plant mit dem [ETF-Sparplanrechner](/finanzen/etf-sparplanrechner) inklusive Zinseszinseffekt.
+
+Daneben decken wir Spezialfälle ab: Elterngeld, Witwenrente, Kurzarbeitergeld, Einkommensteuer, Splitting, Pfändung, Minijob, Midijob, Firmenwagen und mehr. Alle Ergebnisse dienen der Orientierung; für die verbindliche Veranlagung wenden Sie sich an Ihren Steuerberater oder ELSTER.`,
   },
   {
     slug: 'gesundheit',
@@ -37,7 +45,11 @@ export const kategorien: KategorieConfig[] = [
     icon: '💚',
     metaTitle: 'Gesundheits-Rechner',
     metaDescription: 'Kostenlose Online-Gesundheitsrechner: BMI, Kalorienbedarf, Idealgewicht und mehr. Sofort berechnen ohne Anmeldung.',
-    einleitung: '',
+    einleitung: `Viele Gesundheits-Kennzahlen lassen sich mit wenigen Eingaben bestimmen: das Verhältnis von Gewicht zu Körpergröße, der geschätzte Kalorienbedarf, das errechnete Idealgewicht oder die verbleibende Zeit bis zum Geburtstermin. Die {COUNT} Rechner in dieser Kategorie geben Ihnen schnelle Orientierungswerte — sie ersetzen kein ärztliches Gespräch, sind aber eine verlässliche erste Einschätzung.
+
+Der [BMI-Rechner](/gesundheit/bmi-rechner) ist der bekannteste Gesundheitsrechner überhaupt. Er ordnet das Verhältnis von Körpergröße zu Gewicht nach den WHO-Kategorien ein und berücksichtigt optional Alter und Geschlecht. Wer seinen täglichen Energiebedarf abschätzen möchte — etwa beim Planen einer Ernährungsumstellung oder beim Sport — nutzt den [Kalorienrechner](/gesundheit/kalorienrechner), der Grundumsatz und Gesamtumsatz getrennt ausweist. Für werdende Eltern errechnet der [Geburtstermin-Rechner](/gesundheit/geburtstermin-rechner) auf Basis der letzten Periode oder des Zeugungstags den voraussichtlichen Entbindungstermin.
+
+Darüber hinaus finden Sie Rechner für Körperfettanteil, Wasserbedarf, Schlafzyklen, Raucher-Kostenbilanz und weitere gesundheitsbezogene Berechnungen. Wichtiger Hinweis: Bei medizinischen Entscheidungen oder Symptomen konsultieren Sie bitte immer eine Ärztin oder einen Arzt — unsere Rechner dienen der Orientierung, nicht der Diagnose.`,
   },
   {
     slug: 'auto',
@@ -46,7 +58,11 @@ export const kategorien: KategorieConfig[] = [
     icon: '🚗',
     metaTitle: 'Auto-Rechner',
     metaDescription: 'Kostenlose Online-Rechner für Auto & Verkehr: Spritkosten, Fahrtkosten und mehr. Sofort berechnen ohne Anmeldung.',
-    einleitung: '',
+    einleitung: `Autofahren kostet Geld — und die meisten Kostenblöcke lassen sich mit etwas Rechnen transparent machen. Sprit, Kfz-Steuer, Versicherung, Wertverlust, Wartung: In der Kategorie Auto & Verkehr finden Sie {COUNT} Rechner, die Sie bei der Budget-Planung, beim Fahrzeugvergleich oder bei konkreten Alltags-Fragen unterstützen.
+
+Der [Spritkosten-Rechner](/auto/spritkosten-rechner) zeigt Ihnen, was eine bestimmte Strecke bei aktuellem Kraftstoffpreis und dem Verbrauch Ihres Fahrzeugs kostet — nützlich für Pendelfahrten, Urlaubsplanung oder beim Vergleich zweier Fahrzeugmodelle. Der [Kfz-Steuer-Rechner](/auto/kfz-steuer-rechner) ermittelt die jährliche Kraftfahrzeugsteuer nach den 2026 geltenden Regeln, abhängig von Hubraum und CO₂-Ausstoß. Für den Gesamtbetrieb eines Fahrzeugs rechnet der [Autokosten-Rechner](/auto/autokosten-rechner) alle regelmäßigen Posten zusammen — vom Wertverlust über Versicherung bis zur Wartung.
+
+Weitere Rechner helfen bei typischen Fragen rund ums Fahrzeug: KW-PS-Umrechnung, Bußgeld-Einschätzung bei Verkehrsverstößen, Gebrauchtwagen-Bewertung, THG-Prämie für E-Autos und Wallbox-Kosten. Alle Rechner sind kostenlos und beachten die 2026 gültigen Gesetze.`,
   },
   {
     slug: 'wohnen',
@@ -55,7 +71,11 @@ export const kategorien: KategorieConfig[] = [
     icon: '🏠',
     metaTitle: 'Wohnen & Energie Rechner',
     metaDescription: 'Kostenlose Online-Rechner für Wohnen & Energie: Mietrechner, Stromkosten, Heizkosten und mehr. Sofort berechnen ohne Anmeldung.',
-    einleitung: '',
+    einleitung: `Rund ums Wohnen fallen laufend Kosten an, die sich nicht immer auf den ersten Blick vergleichen lassen: Miete, Nebenkosten, Strom, Heizung, Renovierung, Kaufnebenkosten beim Immobilienerwerb. Die {COUNT} Rechner dieser Kategorie machen diese Posten transparent und helfen Ihnen bei konkreten Entscheidungen — egal ob Sie mieten, kaufen oder Ihren Energieverbrauch optimieren möchten.
+
+Wer eine Immobilie finanzieren möchte, beginnt beim [Baufinanzierungs-Rechner](/wohnen/baufinanzierung-rechner): Er zeigt monatliche Rate, Zinsbindung, Restschuld und Gesamtkosten auf einen Blick. Für laufende Energiekosten helfen der [Stromkosten-Rechner](/wohnen/stromkosten-rechner) und der Stromvergleich-Rechner, mit dem Sie Ihren aktuellen Tarif gegen verfügbare Anbieter gegenrechnen. Die korrekte Wohnfläche nach Wohnflächenverordnung ermittelt der [Quadratmeter-Rechner](/wohnen/quadratmeter-rechner) — relevant bei Miet- oder Kaufverträgen.
+
+Ergänzend finden Sie Rechner für Mietrendite, Nebenkosten, Heizkosten-Aufteilung, Grunderwerbsteuer, Notarkosten, Wohngeld, Tapetenbedarf, Renovierung und Spezialthemen wie THG-Prämie oder Wallbox-Installation. Alle Werte basieren auf aktuellen Sätzen und den 2026 geltenden gesetzlichen Grundlagen.`,
   },
   {
     slug: 'mathe',
@@ -64,7 +84,11 @@ export const kategorien: KategorieConfig[] = [
     icon: '🎓',
     metaTitle: 'Mathe-Rechner',
     metaDescription: 'Kostenlose Online-Mathe-Rechner für Schule und Studium: Bruchrechner, Gleichungen und mehr. Sofort berechnen ohne Anmeldung.',
-    einleitung: '',
+    einleitung: `Mathe begegnet einem nicht nur in der Schule — auch im Beruf, im Studium oder bei alltäglichen Entscheidungen sind Grundrechenarten, Prozentrechnung, Einheitenumrechnung oder Flächenberechnung ständige Begleiter. Die {COUNT} Rechner dieser Kategorie sind für alle, die schnell ein korrektes Ergebnis brauchen — egal ob Schülerin, Student oder Berufstätige.
+
+Der [Bruchrechner](/mathe/bruchrechner) addiert, subtrahiert, multipliziert und dividiert Brüche und zeigt den vollständigen Rechenweg. Für Schulnoten-Durchschnitte, Notenschlüssel-Punktetabellen oder die Umrechnung zwischen Punkte-Systemen gibt es den [Notenschlüssel-Rechner](/mathe/notenschluessel-rechner). Beim Umrechnen zwischen Einheiten — Länge, Gewicht, Temperatur, Volumen — nutzen Sie den [Einheiten-Umrechner](/mathe/einheiten-umrechner).
+
+Weitere Rechner decken Flächen und Volumen geometrischer Formen ab, rechnen Mittelwerte und Streuungsmaße aus, lösen prozentuale Veränderungen und stellen einen wissenschaftlichen Taschenrechner für komplexere Ausdrücke bereit. Viele Rechner bieten zusätzlich einen Rechenweg-Modus: Sie sehen nicht nur das Ergebnis, sondern auch, wie es zustande kommt — hilfreich beim Lernen oder beim Kontrollieren eigener Rechnungen.`,
   },
   {
     slug: 'arbeit',
@@ -73,7 +97,11 @@ export const kategorien: KategorieConfig[] = [
     icon: '💼',
     metaTitle: 'Arbeit & Recht Rechner',
     metaDescription: 'Kostenlose Online-Rechner für Arbeit & Recht: Arbeitszeit, Urlaubstage und mehr. Sofort berechnen ohne Anmeldung.',
-    einleitung: '',
+    einleitung: `Vom Arbeitsvertrag über die Elternzeit bis zur Kündigung stellen sich im Berufsleben immer wieder Fragen, bei denen präzise Berechnungen entscheidend sind: Wie hoch ist mein Stundenlohn wirklich? Wann endet meine Probezeit? Welche Kündigungsfrist gilt bei meinem Arbeitsverhältnis? Wie viele Urlaubstage stehen mir bei Teilzeit zu? Die {COUNT} Rechner dieser Kategorie geben Ihnen belastbare Antworten — basierend auf aktuellen gesetzlichen Regelungen.
+
+Der [Arbeitszeit-Rechner](/arbeit/arbeitszeitrechner) hilft bei der Pausen- und Pflichtzeit-Kalkulation nach Arbeitszeitgesetz, und der [Urlaubstage-Rechner](/arbeit/urlaubstage-rechner) ermittelt Ihren anteiligen Anspruch bei Teilzeit, Jobwechsel oder während der Probezeit. Bei Fragen zur Trennung vom Arbeitgeber klärt der [Kündigungsfrist-Rechner](/arbeit/kuendigungsfrist-rechner) anhand von Betriebszugehörigkeit und Vertragsart die einzuhaltende Frist nach § 622 BGB.
+
+Weitere Rechner decken Abfindung (mit Fünftelregelung), Überstundenvergütung, Mutterschutz, Pendlerpauschale, Promille-Grenzwerte im Verkehrsrecht und weitere arbeitsrechtliche Themen ab. Die Ergebnisse dienen der Orientierung — bei individuellen arbeitsrechtlichen Fragen empfehlen wir die Beratung durch eine Fachanwältin oder eine Gewerkschaft.`,
   },
   {
     slug: 'kochen',
@@ -82,7 +110,11 @@ export const kategorien: KategorieConfig[] = [
     icon: '🍳',
     metaTitle: 'Kochen & Ernährung Rechner',
     metaDescription: 'Kostenlose Online-Rechner für Kochen & Ernährung: Rezept-Umrechner, Cups in Gramm, Portionen skalieren. Sofort berechnen ohne Anmeldung.',
-    einleitung: '',
+    einleitung: `Beim Kochen gibt es immer wiederkehrende Rechenaufgaben: Ein Rezept ist für 4 Personen ausgelegt, aber Sie kochen für 6. Das amerikanische Rezept gibt Mehl in Cups an, Ihre Küchenwaage arbeitet in Gramm. Die Springform hat 24 Zentimeter Durchmesser, das Rezept verlangt eine 28er. Für all diese Fälle bietet die Kategorie Kochen {COUNT} spezialisierte Rechner.
+
+Der [Rezept-Umrechner](/kochen/rezept-umrechner) skaliert alle Zutaten proportional auf Ihre gewünschte Portionenzahl — mit sinnvoller Behandlung von Prisen (werden nicht skaliert) und praktischer Rundung. Der [Cups-Umrechner](/kochen/cups-umrechner) übersetzt amerikanische Volumenangaben in Gramm, abhängig davon, welche Zutat Sie messen — Mehl wiegt anders als Zucker oder Haferflocken. Wenn Sie eine andere Backform verwenden als im Rezept angegeben, rechnet der [Backform-Umrechner](/kochen/backform-umrechner) die Zutatenmengen auf Ihre Form um.
+
+Daneben finden Sie Helfer für Hefe-Umrechnung zwischen Frisch- und Trockenhefe, Makronährstoff-Kalkulation für Ernährungsziele, Kalorienbedarf nach Aktivitätsniveau und weitere praktische Küchen-Rechner. Alle Werte beruhen auf Standard-Dichtetabellen und können bei abweichenden Zutaten nachjustiert werden.`,
   },
   {
     slug: 'sport',
@@ -91,7 +123,11 @@ export const kategorien: KategorieConfig[] = [
     icon: '🏃',
     metaTitle: 'Sport & Fitness Rechner',
     metaDescription: 'Kostenlose Online-Rechner für Sport & Fitness: Pace-Rechner, Herzfrequenz-Zonen, Trainingsintensität. Sofort berechnen ohne Anmeldung.',
-    einleitung: '',
+    einleitung: `Sport-Training wird effektiver, wenn man nicht aufs Gefühl, sondern auf messbare Werte setzt: die richtige Trainingsherzfrequenz für Ausdauerziele, die passende Pace für einen 10-Kilometer-Wettkampf, der tatsächliche Kalorienverbrauch beim Joggen. Die Kategorie Sport & Fitness ist noch klein — {COUNT} Rechner stehen derzeit zur Verfügung —, deckt aber zentrale Trainings-Fragen ab.
+
+Der [Herzfrequenz-Zonen-Rechner](/sport/herzfrequenz-zonen-rechner) berechnet Ihre individuellen Trainingszonen nach der Karvonen-Formel und ordnet sie den Trainingszielen Grundlagenausdauer, Fettverbrennung, Laktatschwelle und Maximalleistung zu — basierend auf Ruhepuls, maximaler Herzfrequenz und Ihrem Trainingsniveau. Der [Pace-Rechner](/sport/pace-rechner) rechnet zwischen Laufgeschwindigkeit (in min/km oder km/h) und Zielzeit über eine bestimmte Distanz um, was bei der Trainings- und Wettkampfplanung hilft.
+
+Weitere Sport- und Fitness-Rechner sind in Planung, etwa zu Kraft-Trainingsgewichten, Tapering-Strategien oder Regenerations-Zeiten. Wenn Sie einen bestimmten Rechner vermissen, freuen wir uns über Ihr [Feedback](/feedback) — Nutzer-Wünsche fließen direkt in die Priorisierung neuer Rechner ein.`,
   },
 ];
 
