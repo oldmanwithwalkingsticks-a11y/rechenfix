@@ -8,11 +8,8 @@ import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
-import { berechneEStGrund } from '@/lib/berechnungen/einkommensteuer';
+import { berechneEStGrund, berechneSoli } from '@/lib/berechnungen/einkommensteuer';
 import { BBG_KV_MONAT, BBG_RV_MONAT } from '@/lib/berechnungen/brutto-netto';
-
-// Soli-Freigrenze Grundtarif 2026 (§ 4 SolzG)
-const SOLI_FREIGRENZE_2026 = 20350;
 
 const fmtEur = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
 const fmt0 = (n: number) => Math.round(n).toLocaleString('de-DE') + ' €';
@@ -87,7 +84,9 @@ export default function GmbhGfRechner() {
 
     const zvE = Math.max(0, steuerBruttoJahr - werbungskosten - vorsorge);
     const est = berechneEStGrund(zvE, 2026);
-    const soli = est > SOLI_FREIGRENZE_2026 ? est * 0.055 : 0;
+    // Soli mit Freigrenze (§ 4 SolzG): 20.350 € Grundtarif + Milderungszone.
+    // Rechner hat kein Splittingtarif-Toggle, daher splittingtarif = false.
+    const soli = berechneSoli(est, false, 2026);
     const kirchensteuer = kirche ? est * 0.09 : 0;
 
     const summeAbgabenJahr = anKv + anPv + anRv + anAv + est + soli + kirchensteuer + pkvJahr;
