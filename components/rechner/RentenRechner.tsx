@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { berechneRente } from '@/lib/berechnungen/rente';
+import { RENTENWERT_AB_01_07_2026 } from '@/lib/berechnungen/rente';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
@@ -121,6 +122,10 @@ export default function RentenRechner() {
               <div>
                 <p className="text-white/80 text-sm mb-1">Geschätzte Brutto-Monatsrente</p>
                 <p className="text-5xl font-bold">{fmt(ergebnis.bruttoRente)} €</p>
+                <p className="text-white/80 text-xs sm:text-sm mt-2">
+                  = {fmtDez(ergebnis.gesamtRentenpunkte)} Rentenpunkte × {fmtDez(ergebnis.rentenwert)} €/Punkt
+                  {ergebnis.abschlagProzent > 0 && <> (nach {fmtDez(ergebnis.abschlagProzent)} % Abschlag)</>}
+                </p>
               </div>
               <div className="sm:text-right">
                 <span
@@ -211,6 +216,21 @@ export default function RentenRechner() {
               Aktueller Rentenwert: {fmtDez(ergebnis.rentenwert)} € | Durchschnittsentgelt: {fmt(ergebnis.durchschnittsentgelt)} €/Jahr
             </p>
           </div>
+
+          {/* Stichtag-Hinweis 01.07.2026 — verschwindet automatisch nach dem Switch */}
+          {new Date() < new Date(2026, 6, 1) && (
+            <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-xl p-4 mb-6">
+              <p className="text-blue-800 dark:text-blue-300 text-sm">
+                <span aria-hidden="true">📅</span>{' '}
+                <strong>Ab 01.07.2026:</strong> Der Rentenwert steigt auf {fmtDez(RENTENWERT_AB_01_07_2026)} € (+4,24 %).
+                Ihre geschätzte Brutto-Rente läge dann bei ca.{' '}
+                <strong>{fmt(ergebnis.gesamtRentenpunkte * RENTENWERT_AB_01_07_2026 * (1 - ergebnis.abschlagProzent / 100))} €</strong>/Monat.
+              </p>
+              <p className="text-blue-700/80 dark:text-blue-300/70 text-xs mt-1">
+                Quelle: Rentenanpassungsverordnung 2026 (BMAS 05.03.2026)
+              </p>
+            </div>
+          )}
 
           {/* Rentenlücke */}
           <div className={`rounded-xl p-5 mb-6 border ${
