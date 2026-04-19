@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { berechneSpendenErsparnis } from '@/lib/berechnungen/spenden';
+import { BUNDESLAENDER, type Bundesland } from '@/lib/berechnungen/einkommensteuer';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
@@ -10,21 +11,24 @@ import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
-const KIRCHENSTEUER_OPTIONEN = [
-  { value: 'nein', label: 'Nein' },
-  { value: 'ja', label: 'Ja (9%)' },
-];
-
 export default function SpendenRechner() {
   const [spendenbetrag, setSpendenbetrag] = useState('500');
   const [zvE, setZvE] = useState('50000');
   const [kirchensteuer, setKirchensteuer] = useState('nein');
+  const [bundesland, setBundesland] = useState<Bundesland>('Nordrhein-Westfalen');
+
+  const kistSatzProzent = bundesland === 'Bayern' || bundesland === 'Baden-Württemberg' ? 8 : 9;
+
+  const KIRCHENSTEUER_OPTIONEN = [
+    { value: 'nein', label: 'Nein' },
+    { value: 'ja', label: `Ja (${kistSatzProzent} %)` },
+  ];
 
   const ergebnis = useMemo(() => {
     const spende = parseDeutscheZahl(spendenbetrag);
     const einkommen = parseDeutscheZahl(zvE);
-    return berechneSpendenErsparnis(spende, einkommen, kirchensteuer === 'ja');
-  }, [spendenbetrag, zvE, kirchensteuer]);
+    return berechneSpendenErsparnis(spende, einkommen, kirchensteuer === 'ja', bundesland);
+  }, [spendenbetrag, zvE, kirchensteuer, bundesland]);
 
   const fmt = (n: number) =>
     n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -70,6 +74,25 @@ export default function SpendenRechner() {
           columns={2}
           fullWidth
         />
+
+        {kirchensteuer === 'ja' && (
+          <div>
+            <label htmlFor="spenden-bundesland" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Bundesland
+            </label>
+            <select
+              id="spenden-bundesland"
+              value={bundesland}
+              onChange={e => setBundesland(e.target.value as Bundesland)}
+              className="w-full sm:w-2/3 px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm min-h-[48px]"
+            >
+              {BUNDESLAENDER.map(bl => (
+                <option key={bl} value={bl}>{bl}</option>
+              ))}
+            </select>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Bayern und Baden-Württemberg: 8 %, sonst 9 %.</p>
+          </div>
+        )}
       </div>
 
       {/* Ergebnis */}

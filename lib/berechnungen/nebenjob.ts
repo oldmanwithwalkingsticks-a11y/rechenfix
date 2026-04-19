@@ -1,4 +1,10 @@
-import { WK_PAUSCHALE_AN_2026 } from './einkommensteuer';
+import {
+  WK_PAUSCHALE_AN_2026,
+  berechneEStGrund,
+  berechneSoli,
+  berechneKirchensteuerByBundesland,
+  type Bundesland,
+} from './einkommensteuer';
 
 export type NebenjobArt = 'minijob' | 'steuerkarte' | 'selbststaendig';
 
@@ -31,28 +37,15 @@ export interface NebenjobErgebnis {
   hinweis: string;
 }
 
-// Einkommensteuer (Jahresbetrag) nach §32a EStG 2026
-function berechneESt(zvE: number): number {
-  const grundfreibetrag = 12348;
-  if (zvE <= grundfreibetrag) return 0;
-  const x = zvE - grundfreibetrag;
-  let steuer: number;
-  if (x <= 5451) { // bis zvE 17.799 €
-    const y = x / 10000;
-    steuer = (914.51 * y + 1400) * y;
-  } else if (x <= 57530) { // bis zvE 69.878 €
-    const z = (x - 5451) / 10000;
-    steuer = (173.10 * z + 2397) * z + 1034.87;
-  } else if (x <= 265477) { // bis zvE 277.825 €
-    steuer = 0.42 * zvE - 11135.63;
-  } else {
-    steuer = 0.45 * zvE - 19470.38;
-  }
-  return Math.round(steuer);
-}
+// Einkommensteuer (Jahresbetrag) nach § 32a EStG — zentrale SSOT.
+const berechneESt = (zvE: number) => berechneEStGrund(zvE, 2026);
 
 // Vereinfachte Hauptjob-Netto-Schätzung (Steuerklasse I, gesetzlich KV)
-function berechneHauptjobNetto(bruttoMonat: number, kirchensteuer: boolean): number {
+function berechneHauptjobNetto(
+  bruttoMonat: number,
+  kirchensteuer: boolean,
+  bundesland: Bundesland,
+): number {
   // SV-Beitrag AN 2026: ~20,95 % (RV 9,3 %, KV 8,75 % inkl. 1,45 % Zusatz, PV 2,4 % kinderlos, AV 1,3 %)
   // BBG KV: 5.812,50 €/Monat; BBG RV/AV: 8.450 €/Monat (einheitlich 2026)
   const BBG_KV = 5812.5;
@@ -74,11 +67,13 @@ function berechneHauptjobNetto(bruttoMonat: number, kirchensteuer: boolean): num
   const jahresESt = berechneESt(zvE);
   const lstMonat = Math.round(jahresESt / 12 * 100) / 100;
 
-  // Soli: 5,5 % der LSt, Freigrenze 20.350 € Jahres-LSt 2026
-  const soli = jahresESt > 20350 ? Math.round(lstMonat * 0.055 * 100) / 100 : 0;
+  // Soli 2026 mit Milderungszone (§ 4 SolzG) via zentralem Helfer
+  const soliJahr = berechneSoli(jahresESt, false, 2026);
+  const soli = Math.round(soliJahr / 12 * 100) / 100;
 
-  // Kirchensteuer: 9% der LSt
-  const kist = kirchensteuer ? Math.round(lstMonat * 0.09 * 100) / 100 : 0;
+  // Kirchensteuer 8/9 % je Bundesland
+  const kistJahr = kirchensteuer ? berechneKirchensteuerByBundesland(jahresESt, bundesland) : 0;
+  const kist = Math.round(kistJahr / 12 * 100) / 100;
 
   const abzuege = sv + lstMonat + soli + kist;
   return Math.round((bruttoMonat - abzuege) * 100) / 100;
@@ -89,10 +84,11 @@ export function berechneNebenjob(
   art: NebenjobArt,
   nebenjobBrutto: number,
   kirchensteuer: boolean,
+  bundesland: Bundesland = 'Nordrhein-Westfalen',
 ): NebenjobErgebnis | null {
   if (hauptjobBrutto <= 0 || nebenjobBrutto <= 0) return null;
 
-  const hauptjobNettoMonat = berechneHauptjobNetto(hauptjobBrutto, kirchensteuer);
+  const hauptjobNettoMonat = berechneHauptjobNetto(hauptjobBrutto, kirchensteuer, bundesland);
 
   let artLabel: string;
   let nebenjobLohnsteuer: number;
@@ -112,9 +108,12 @@ export function berechneNebenjob(
     artLabel = 'Steuerkarte (Steuerklasse VI)';
     // Steuerklasse VI: kein Grundfreibetrag, pauschal ~25%
     nebenjobLohnsteuer = Math.round(nebenjobBrutto * 0.25 * 100) / 100;
-    nebenjobSoli = Math.round(nebenjobLohnsteuer * 0.055 * 100) / 100;
+    // Soli auf Monats-LSt × 12 = Jahres-LSt (unter Freigrenze → 0); falls Nebenjob allein
+    // in die Milderungszone kommt, greift die zentrale Funktion korrekt.
+    const steuerkarteLstJahr = nebenjobLohnsteuer * 12;
+    nebenjobSoli = Math.round(berechneSoli(steuerkarteLstJahr, false, 2026) / 12 * 100) / 100;
     nebenjobKirchensteuer = kirchensteuer
-      ? Math.round(nebenjobLohnsteuer * 0.09 * 100) / 100
+      ? Math.round(berechneKirchensteuerByBundesland(steuerkarteLstJahr, bundesland) / 12 * 100) / 100
       : 0;
     // Volle SV AN-Anteile: ~20.4%
     nebenjobSozialversicherung = Math.round(nebenjobBrutto * 0.204 * 100) / 100;
@@ -136,17 +135,26 @@ export function berechneNebenjob(
 
     // Härteausgleich: bis 410€ Jahres-Nebenjob steuerfrei
     let zusatzsteuerJahr: number;
+    let zusatzSoliJahr: number;
+    let zusatzKiStJahr: number;
     if (nebenjobJahr <= 410) {
       zusatzsteuerJahr = 0;
+      zusatzSoliJahr = 0;
+      zusatzKiStJahr = 0;
     } else {
-      zusatzsteuerJahr = Math.max(0, berechneESt(zvEMit) - berechneESt(zvEOhne));
+      const estOhne = berechneESt(zvEOhne);
+      const estMit = berechneESt(zvEMit);
+      zusatzsteuerJahr = Math.max(0, estMit - estOhne);
+      // Soli-Ersparnis via Differenz der beiden berechneSoli-Werte (Milderungszone korrekt)
+      zusatzSoliJahr = Math.max(0, berechneSoli(estMit, false, 2026) - berechneSoli(estOhne, false, 2026));
+      zusatzKiStJahr = kirchensteuer
+        ? Math.max(0, berechneKirchensteuerByBundesland(estMit, bundesland) - berechneKirchensteuerByBundesland(estOhne, bundesland))
+        : 0;
     }
 
     nebenjobLohnsteuer = Math.round(zusatzsteuerJahr / 12 * 100) / 100;
-    nebenjobSoli = Math.round((zusatzsteuerJahr / 12) * 0.055 * 100) / 100;
-    nebenjobKirchensteuer = kirchensteuer
-      ? Math.round((zusatzsteuerJahr / 12) * 0.09 * 100) / 100
-      : 0;
+    nebenjobSoli = Math.round(zusatzSoliJahr / 12 * 100) / 100;
+    nebenjobKirchensteuer = Math.round(zusatzKiStJahr / 12 * 100) / 100;
     hinweis =
       'Selbstständiger Nebenjob: Einkünfte werden zum Hauptjob addiert → höherer Steuersatz. Steuererklärung ist Pflicht.';
   }

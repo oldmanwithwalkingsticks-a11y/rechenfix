@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { berechneNebenjob, type NebenjobArt } from '@/lib/berechnungen/nebenjob';
+import { BUNDESLAENDER, type Bundesland } from '@/lib/berechnungen/einkommensteuer';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
@@ -18,6 +19,7 @@ export default function NebenjobRechner() {
   const [art, setArt] = useState<NebenjobArt>('minijob');
   const [nebenjobBrutto, setNebenjobBrutto] = useState('450');
   const [kirchensteuer, setKirchensteuer] = useState('nein');
+  const [bundesland, setBundesland] = useState<Bundesland>('Nordrhein-Westfalen');
 
   const ergebnis = useMemo(() => {
     return berechneNebenjob(
@@ -25,8 +27,11 @@ export default function NebenjobRechner() {
       art,
       parseDeutscheZahl(nebenjobBrutto),
       kirchensteuer === 'ja',
+      bundesland,
     );
-  }, [hauptjobBrutto, art, nebenjobBrutto, kirchensteuer]);
+  }, [hauptjobBrutto, art, nebenjobBrutto, kirchensteuer, bundesland]);
+
+  const kistSatzProzent = bundesland === 'Bayern' || bundesland === 'Baden-Württemberg' ? 8 : 9;
 
   return (
     <div>
@@ -99,11 +104,29 @@ export default function NebenjobRechner() {
           srOnlyLegend
           options={[
             { value: 'nein', label: 'Nein' },
-            { value: 'ja', label: 'Ja (9 %)' },
+            { value: 'ja', label: `Ja (${kistSatzProzent} %)` },
           ]}
           value={kirchensteuer}
           onChange={setKirchensteuer}
         />
+        {kirchensteuer === 'ja' && (
+          <div className="mt-3">
+            <label htmlFor="nebenjob-bundesland" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Bundesland
+            </label>
+            <select
+              id="nebenjob-bundesland"
+              value={bundesland}
+              onChange={e => setBundesland(e.target.value as Bundesland)}
+              className="w-full sm:w-2/3 px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm min-h-[48px]"
+            >
+              {BUNDESLAENDER.map(bl => (
+                <option key={bl} value={bl}>{bl}</option>
+              ))}
+            </select>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Bayern und Baden-Württemberg: 8 %, sonst 9 %.</p>
+          </div>
+        )}
       </div>
 
       {/* === ERGEBNIS === */}

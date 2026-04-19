@@ -29,47 +29,49 @@ export interface SteuererstattungErgebnis {
   posten: ErstattungsPosten[];
 }
 
-import { WK_PAUSCHALE_AN_2026 } from './einkommensteuer';
+import { WK_PAUSCHALE_AN_2026, berechneEStGrund } from './einkommensteuer';
+import { PENDLERPAUSCHALE_SATZ_2026 } from './pendlerpauschale';
 
 const PAUSCHBETRAG = WK_PAUSCHALE_AN_2026;
 const HOMEOFFICE_MAX = 1260;
 const HOMEOFFICE_PRO_TAG = 6;
 const HAUSHALTSNAHE_MAX = 4000;
 
-function grundtarif(zvE: number): number {
-  if (zvE <= 12084) return 0;
-  if (zvE <= 17005) return 0.14;
-  if (zvE <= 66760) return 0.25 + (zvE - 17005) / (66760 - 17005) * 0.17;
-  if (zvE <= 277825) return 0.42;
-  return 0.45;
+// Grenzsteuersatz: finite Differenz aus zentralem § 32a-Tarif (berechneEStGrund).
+// Liefert einen Dezimal-Wert zwischen 0 und 0,45 (0 % bis 45 %).
+function grenzsteuersatzFuerZvE(zvE: number): number {
+  if (zvE <= 0) return 0;
+  const est1 = berechneEStGrund(zvE, 2026);
+  const est2 = berechneEStGrund(zvE + 100, 2026);
+  return Math.max(0, (est2 - est1) / 100);
 }
 
 function berechneGrenzsteuersatz(brutto: number, steuerklasse: number): number {
   switch (steuerklasse) {
     case 2:
       // Alleinerziehend: Entlastungsbetrag 4.260 € senkt zvE
-      return grundtarif(Math.max(brutto - 4260, 0));
+      return grenzsteuersatzFuerZvE(Math.max(brutto - 4260, 0));
     case 3:
       // Ehegattensplitting: Tarif wird auf halbes Einkommen angewendet
       // Da Partnereinkommen unbekannt, moderate Näherung (Einkommen × 0.85)
-      return grundtarif(brutto * 0.85);
+      return grenzsteuersatzFuerZvE(brutto * 0.85);
     case 5:
       // Partner in Klasse 3 profitiert vom Splitting → eigene Steuerbelastung höher
-      return grundtarif(brutto * 1.12);
+      return grenzsteuersatzFuerZvE(brutto * 1.12);
     case 6:
-      // Zweitjob: Grundfreibetrag bereits beim Hauptjob verbraucht
-      return grundtarif(brutto + 12084);
+      // Zweitjob: Grundfreibetrag bereits beim Hauptjob verbraucht — zvE + Grundfreibetrag schätzen
+      return grenzsteuersatzFuerZvE(brutto + 12348);
     default:
       // Klasse 1 und 4: Grundtarif
-      return grundtarif(brutto);
+      return grenzsteuersatzFuerZvE(brutto);
   }
 }
 
+// Pendlerpauschale 2026: einheitlich 0,38 €/km ab dem ersten Kilometer
+// (§ 9 Abs. 1 Nr. 4 EStG i.d.F. StÄndG 2025). Zentrale Konstante aus pendlerpauschale.ts.
 function berechnePendlerpauschale(km: number, arbeitstage: number): number {
   if (km <= 0 || arbeitstage <= 0) return 0;
-  const ersteZwanzig = Math.min(km, 20) * 0.30 * arbeitstage;
-  const abKm21 = km > 20 ? (km - 20) * 0.38 * arbeitstage : 0;
-  return ersteZwanzig + abKm21;
+  return Math.round(km) * PENDLERPAUSCHALE_SATZ_2026 * arbeitstage;
 }
 
 export function berechneSteuererstattung(e: SteuererstattungEingabe): SteuererstattungErgebnis {
