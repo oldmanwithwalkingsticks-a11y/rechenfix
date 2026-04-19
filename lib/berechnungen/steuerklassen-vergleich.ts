@@ -1,4 +1,11 @@
-import { berechneEStGrund, WK_PAUSCHALE_AN_2026 } from './einkommensteuer';
+import { berechneEStGrund, berechneSoli, WK_PAUSCHALE_AN_2026 } from './einkommensteuer';
+import {
+  KV_BASISSATZ_AN_2026,
+  RV_SATZ_AN_2026,
+  AV_SATZ_AN_2026,
+  BBG_KV_MONAT,
+  BBG_RV_MONAT,
+} from './brutto-netto';
 
 export type Steuerklasse = 1 | 3 | 4 | 5;
 
@@ -92,25 +99,23 @@ function berechneLohnsteuerByKlasse(bruttoJahr: number, sk: Steuerklasse): numbe
   }
 }
 
-// Sozialversicherungsbeiträge 2026 (AN-Anteil, bis BBG)
+// Sozialversicherungsbeiträge 2026 (AN-Anteil, bis BBG) — Konstanten aus brutto-netto.ts.
+// Zusatzbeitrag-Durchschnitt 2,9 % hart verdrahtet (typisch-Szenario); präzise Rechnung
+// würde berechneBruttoNetto-Konsumation erfordern.
 function berechneSvJahr(bruttoJahr: number): number {
-  const bbgKV = 5812.50 * 12; // 69.750 €
-  const bbgRV = 8450 * 12;    // 101.400 € (einheitlich 2026)
-  const kv = Math.min(bruttoJahr, bbgKV) * (0.073 + 0.0145); // 7,3 % + 1,45 % AN-Zusatz (Durchschnitt 2026: 2,9 %)
-  const pv = Math.min(bruttoJahr, bbgKV) * 0.018;            // PV Basis 1,8 % AN (3,6 % gesamt)
-  const rv = Math.min(bruttoJahr, bbgRV) * 0.093;
-  const av = Math.min(bruttoJahr, bbgRV) * 0.013;
+  const bbgKV = BBG_KV_MONAT * 12;
+  const bbgRV = BBG_RV_MONAT * 12;
+  const kv = Math.min(bruttoJahr, bbgKV) * (KV_BASISSATZ_AN_2026 + 0.0145); // + 1,45 % Ø-Zusatz AN-Anteil
+  const pv = Math.min(bruttoJahr, bbgKV) * 0.018;                           // PV Basis (Staffel ignoriert für Vergleich)
+  const rv = Math.min(bruttoJahr, bbgRV) * RV_SATZ_AN_2026;
+  const av = Math.min(bruttoJahr, bbgRV) * AV_SATZ_AN_2026;
   return kv + pv + rv + av;
 }
 
-// Soli auf Lohnsteuer (Freigrenze 20.350 € Einzelveranlagung, 40.700 € Splitting)
+// Soli auf Lohnsteuer — zentrale berechneSoli handhabt Freigrenze + Milderungszone.
+// Bei SK 3 oder 5 gilt Splittingtarif-Freigrenze (das Paar ist zusammenveranlagt).
 function berechneSoliJahr(lohnsteuerJahr: number, isSK3or5: boolean): number {
-  // Bei SK3/5 gilt die doppelte Freigrenze (weil das Paar schon zusammenveranlagt ist)
-  const freigrenze = isSK3or5 ? 40700 : 20350;
-  if (lohnsteuerJahr <= freigrenze) return 0;
-  const mild = (lohnsteuerJahr - freigrenze) * 0.119;
-  const voll = lohnsteuerJahr * 0.055;
-  return Math.min(mild, voll);
+  return berechneSoli(lohnsteuerJahr, isSK3or5, 2026);
 }
 
 function berechneKiStJahr(lohnsteuerJahr: number, kirchensteuer: boolean, satz: 8 | 9): number {

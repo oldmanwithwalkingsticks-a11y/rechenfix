@@ -1,4 +1,9 @@
-import { berechneEStGrund, WK_PAUSCHALE_AN_2026 } from './einkommensteuer';
+import {
+  berechneEStGrund,
+  berechneSoli,
+  WK_PAUSCHALE_AN_2026,
+  GRUNDFREIBETRAG_2026,
+} from './einkommensteuer';
 import { pvAnteilAnVorsorge2026 } from './pflegeversicherung';
 
 export type Steuerklasse = 1 | 2 | 3 | 4 | 5 | 6;
@@ -57,12 +62,14 @@ export interface LohnsteuerErgebnis {
 const ARBEITNEHMER_PAUSCHBETRAG = WK_PAUSCHALE_AN_2026;
 const SONDERAUSGABEN_PAUSCHBETRAG = 36;
 const ENTLASTUNGSBETRAG_ALLEINERZIEHENDE = 4260;
-const SOLI_FREIGRENZE_JAHR = 20350;      // 2026 Einzelveranlagung (Steuerklasse I/II/IV/V/VI)
-const SOLI_FREIGRENZE_SPLITTING = 40700; // 2026 Splitting (Steuerklasse III)
 
-// BBG 2026 für die Vorsorgepauschale
-const BBG_RV_JAHR = 101400; // RV/AV einheitlich
-const BBG_KV_JAHR = 69750;  // KV/PV
+// BBG 2026 für die Vorsorgepauschale. Werte ident mit BBG_KV_MONAT/BBG_RV_MONAT
+// in brutto-netto.ts — Import hier nicht möglich (zirkuläre Abhängigkeit, da
+// brutto-netto.ts die Lohnsteuer-Funktionen konsumiert). Beide Stellen bei
+// Jahreswechsel 2027 gemeinsam aktualisieren. Lint-Script schützt über
+// forbiddenValues-Einträge für diese Zahlen.
+const BBG_RV_JAHR = 101400; // = BBG_RV_MONAT * 12
+const BBG_KV_JAHR = 69750;  // = BBG_KV_MONAT * 12
 
 // Vorsorgepauschale nach § 39b Abs. 4 EStG (2026).
 // Zusammengesetzt aus drei Teilbeträgen + Mindestvorsorgepauschale als Untergrenze:
@@ -171,7 +178,7 @@ export function berechneLohnsteuerJahr(
     case 5: {
       // Stark vereinfachte Approximation nach PAP: hohe LSt, kein Grundfreibetrag
       // Näherung: ESt(zvE + 2×Grundfreibetrag) − ESt(2×Grundfreibetrag), gedeckelt
-      const gf = 12348;
+      const gf = GRUNDFREIBETRAG_2026;
       const estMitBasis = berechneEStGrund(zvE + 2 * gf, 2026);
       const estBasis = berechneEStGrund(2 * gf, 2026);
       const naeherung = estMitBasis - estBasis;
@@ -183,11 +190,9 @@ export function berechneLohnsteuerJahr(
 }
 
 function berechneSoliJahr(lstJahr: number, sk: Steuerklasse): number {
-  const freigrenze = sk === 3 ? SOLI_FREIGRENZE_SPLITTING : SOLI_FREIGRENZE_JAHR;
-  if (lstJahr <= freigrenze) return 0;
-  const mild = (lstJahr - freigrenze) * 0.119;
-  const voll = lstJahr * 0.055;
-  return Math.min(mild, voll);
+  // SK III = Splittingtarif → doppelte Freigrenze (40.700 €) + Milderungszone
+  // wird von berechneSoli zentral behandelt (§ 4 SolzG).
+  return berechneSoli(lstJahr, sk === 3, 2026);
 }
 
 function berechneKiStJahr(lstJahr: number, kirchensteuer: boolean, satz: 8 | 9): number {

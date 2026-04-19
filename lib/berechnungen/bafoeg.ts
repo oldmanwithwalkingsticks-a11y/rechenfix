@@ -1,3 +1,5 @@
+import { berechneEStGrund } from './einkommensteuer';
+
 export type AusbildungsArt = 'studium' | 'schule';
 export type Wohnsituation = 'eltern' | 'eigene';
 export type Familienstand = 'verheiratet' | 'getrennt' | 'geschieden' | 'verwitwet' | 'elternunabhaengig';
@@ -94,23 +96,9 @@ function rund2(n: number): number {
 }
 
 /**
- * Einkommensteuer-Berechnung nach § 32a EStG (Grundtabelle, 2026)
+ * Einkommensteuer-Schätzung nach § 32a EStG 2026 — zentrale SSOT.
  */
-function schaetzeEinkommensteuer(zvE: number): number {
-  if (zvE <= 12348) return 0;
-  if (zvE <= 17799) {
-    const y = (zvE - 12348) / 10000;
-    return Math.round((914.51 * y + 1400) * y);
-  }
-  if (zvE <= 69878) {
-    const z = (zvE - 17799) / 10000;
-    return Math.round((173.10 * z + 2397) * z + 1034.87);
-  }
-  if (zvE <= 277825) {
-    return Math.round(0.42 * zvE - 11135.63);
-  }
-  return Math.round(0.45 * zvE - 19470.38);
-}
+const schaetzeEinkommensteuer = (zvE: number) => berechneEStGrund(zvE, 2026);
 
 /**
  * Berechnet das anrechenbare Netto-Einkommen eines Elternteils

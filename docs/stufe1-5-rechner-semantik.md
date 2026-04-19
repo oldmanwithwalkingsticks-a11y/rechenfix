@@ -1,6 +1,33 @@
 # Stufe 1.5 — Sekundär-Rechner-Libs Audit
 
-**Datum:** 19.04.2026 (Mini-Check, noch keine Fixes)
+**Datum:** 19.04.2026 (Mini-Check). **Status nach Prompt 101 (20.04.2026): Stufe 1.5 vollständig abgeschlossen.**
+
+## Fix-Status nach Prompts 100 + 101
+
+| Lib | P1 | P2 | P3 | Status |
+|---|---|---|---|---|
+| `lohnsteuer.ts` | — | — | 3 | ✅ gefixt (101 Teil 3): Soli zentral, Grundfreibetrag zentral; BBG bleibt inline (zirkulärer Import, Kommentar ergänzt) |
+| `nebenjob.ts` | 2 | 1 | 3 | ✅ gefixt (100): Soli Milderungszone, § 32a zentral, KiSt-Bundesland |
+| `steuererstattung.ts` | 2 | 0 | 1 | ✅ gefixt (100): Pendlerpauschale 0,38, Tarif via berechneEStGrund |
+| `steuerklassen-vergleich.ts` | — | — | 4 | ✅ gefixt (101 Teil 3): Soli, BBG, SV-Sätze zentral |
+| `steuerprogression.ts` | — | 1 | 3 | ✅ gefixt (101 Teil 2+3): KiSt-Bundesland, ESt+Soli zentral |
+| `spenden.ts` | 1 | 1 | 2 | ✅ gefixt (100): Soli-Differenz, KiSt-Bundesland, § 32a zentral |
+| `bafoeg.ts` | — | — | 1 | ✅ gefixt (101 Teil 3): § 32a zentral |
+| `wahrer-stundenlohn.ts` | — | 1 | 1 | ✅ gefixt (101 Teil 3): Grundfreibetrag zentral; Soli-Näherung mit Kommentar dokumentiert |
+| `gehaltsvergleich.ts` | — | — | — | sauber (Mini-Check) |
+| _Cold-Libs_ (elterngeld, mutterschutz, teilzeit, buergergeld, wohngeld, stundenlohn, gewerbesteuer, reisekosten) | — | — | — | sauber (Mini-Check) |
+
+**Gesamt-Bilanz Stufe 1.5:** 5 P1, 4 P2, 18 P3 — alle gefixt. Lint-Script wacht über künftige Regressionen (Soli-Freigrenzen mit `contextKeywords` seit 101 Teil 1).
+
+## Bewusst offen gelassen (nicht im Scope)
+
+- `lohnsteuer.ts` BBG-Inline (zirkulärer Import mit `brutto-netto.ts`, die die Lohnsteuer-Funktion konsumiert)
+- `wahrer-stundenlohn.ts` Soli-Monats-Schwelle 81 € — Näherung, rechnerisch unauffällig, mit Kommentar dokumentiert
+- `nebenjob.ts` PV-Satz 0,024 fix-kinderlos (ignoriert Staffel) — kein Nutzer-Impact, dokumentiert
+
+---
+
+**Ursprungs-Mini-Check (19.04.2026, vor Fixes):**
 
 ## Zusammenfassung
 

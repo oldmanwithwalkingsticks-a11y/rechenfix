@@ -20,6 +20,11 @@ const KIRCHENSTEUER_8_LAENDER: Bundesland[] = ['Bayern', 'Baden-Württemberg'];
 // SSOT: alle Rechner, die zvE oder Netto schätzen, importieren diese Konstante.
 export const WK_PAUSCHALE_AN_2026 = 1230;
 
+// Grundfreibetrag § 32a EStG — als Jahres-Konstante für Konsumenten außerhalb
+// dieser Lib (z. B. SK-V-Näherungen, einfache Netto-Proxies). Für Tarif-Rechnungen
+// immer berechneEStGrund verwenden, nicht manuell abziehen.
+export const GRUNDFREIBETRAG_2026 = 12348;
+
 export function kirchensteuersatzFuer(bundesland: Bundesland): 8 | 9 {
   return KIRCHENSTEUER_8_LAENDER.includes(bundesland) ? 8 : 9;
 }

@@ -1,4 +1,9 @@
-import { berechneKirchensteuerByBundesland, type Bundesland } from './einkommensteuer';
+import {
+  berechneEStGrund,
+  berechneSoli as berechneSoliZentral,
+  berechneKirchensteuerByBundesland,
+  type Bundesland,
+} from './einkommensteuer';
 
 export interface SteuerprogressionsErgebnis {
   zvE: number;
@@ -31,31 +36,12 @@ export interface SteuerprogressionsErgebnis {
   }>;
 }
 
-// Einkommensteuer nach § 32a EStG Grundtabelle 2026
-function berechneESt(zvE: number): number {
-  const grundfreibetrag = 12348;
-  if (zvE <= grundfreibetrag) return 0;
-  if (zvE <= 17799) {
-    const y = (zvE - grundfreibetrag) / 10000;
-    return Math.round((914.51 * y + 1400) * y);
-  }
-  if (zvE <= 69878) {
-    const z = (zvE - 17799) / 10000;
-    return Math.round((173.10 * z + 2397) * z + 1034.87);
-  }
-  if (zvE <= 277825) {
-    return Math.round(0.42 * zvE - 11135.63);
-  }
-  return Math.round(0.45 * zvE - 19470.38);
-}
+// Einkommensteuer nach § 32a EStG Grundtabelle 2026 — zentrale SSOT
+const berechneESt = (zvE: number) => berechneEStGrund(zvE, 2026);
 
-// Solidaritätszuschlag: 5,5 % der ESt mit Freigrenze 2026 (20.350 €) und Milderungszone
-function berechneSoli(est: number): number {
-  if (est <= 20350) return 0;
-  const mild = Math.round((est - 20350) * 0.119 * 100) / 100;
-  const voll = Math.round(est * 0.055 * 100) / 100;
-  return Math.min(mild, voll);
-}
+// Solidaritätszuschlag — zentrale SSOT (Milderungszone + Splittingtarif-Freigrenze)
+const berechneSoli = (est: number, splitting: boolean = false) =>
+  berechneSoliZentral(est, splitting, 2026);
 
 // Kirchensteuer: bundesland-abhängig 8 % (BY/BW) oder 9 % — zentrale SSOT.
 function berechneKiSt(est: number, kirchensteuer: boolean, bundesland: Bundesland): number {
@@ -94,8 +80,8 @@ export function berechneSteuerprogression(
   // Einkommensteuer
   const einkommensteuer = berechneEStMitSplitting(zvE, splitting);
 
-  // Soli
-  const solidaritaetszuschlag = berechneSoli(einkommensteuer);
+  // Soli (Splittingtarif-Freigrenze greift bei splitting=true)
+  const solidaritaetszuschlag = berechneSoli(einkommensteuer, splitting);
 
   // Kirchensteuer
   const kirchensteuerBetrag = berechneKiSt(einkommensteuer, kirchensteuer, bundesland);

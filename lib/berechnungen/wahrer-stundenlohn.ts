@@ -1,4 +1,5 @@
 import { MINDESTLOHN } from './mindestlohn';
+import { GRUNDFREIBETRAG_2026 } from './einkommensteuer';
 
 export interface WahrerStundenlohnEingabe {
   bruttoMonatlich: number;
@@ -39,7 +40,7 @@ function schaetzeNetto(brutto: number): number {
   if (brutto <= 0) return 0;
   // Vereinfachte Abzüge: ~Sozialversicherung 20,95 % (2026) + Lohnsteuer progressiv
   const svBeitrag = brutto * 0.2095; // AN-Anteil KV 8,75 % + PV 2,4 % + RV 9,3 % + AV 1,3 %
-  const zuVersteuern = Math.max(0, brutto * 12 - 12348) / 12; // Grundfreibetrag 2026 anteilig
+  const zuVersteuern = Math.max(0, brutto * 12 - GRUNDFREIBETRAG_2026) / 12; // Grundfreibetrag zentral
   let lohnsteuer = 0;
   if (zuVersteuern > 0) {
     // Progressive Schätzung
@@ -55,6 +56,9 @@ function schaetzeNetto(brutto: number): number {
       lohnsteuer = zuVersteuern * 0.33;
     }
   }
+  // Näherung: Soli-Schwelle als Monats-Proxy (81 € LSt/M ≈ 972 €/Jahr, weit unter
+  // echter § 4 SolzG-Freigrenze 20.350 €/Jahr). Für "wahrer Stundenlohn"-Schätzung
+  // ausreichend — präzise Milderungszone würde berechneBruttoNetto verlangen.
   const soli = lohnsteuer > 81 ? (lohnsteuer - 81) * 0.055 : 0;
   return Math.max(0, brutto - svBeitrag - lohnsteuer - soli);
 }
