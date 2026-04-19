@@ -8,8 +8,21 @@ import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
-import { berechneEStGrund, berechneSoli } from '@/lib/berechnungen/einkommensteuer';
-import { BBG_KV_MONAT, BBG_RV_MONAT } from '@/lib/berechnungen/brutto-netto';
+import {
+  berechneEStGrund,
+  berechneSoli,
+  berechneKirchensteuerByBundesland,
+  BUNDESLAENDER,
+  type Bundesland,
+} from '@/lib/berechnungen/einkommensteuer';
+import {
+  BBG_KV_MONAT,
+  BBG_RV_MONAT,
+  KV_BASISSATZ_AN_2026,
+  RV_SATZ_AN_2026,
+  AV_SATZ_AN_2026,
+} from '@/lib/berechnungen/brutto-netto';
+import { pvAnteilAn2026 } from '@/lib/berechnungen/pflegeversicherung';
 
 const fmtEur = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
 const fmt0 = (n: number) => Math.round(n).toLocaleString('de-DE') + ' €';
@@ -17,9 +30,11 @@ const fmt0 = (n: number) => Math.round(n).toLocaleString('de-DE') + ' €';
 export default function GmbhGfRechner() {
   const [brutto, setBrutto] = useState('6000'); // Monatsgehalt
   const [beherrschend, setBeherrschend] = useState(true);
+  const [splitting, setSplitting] = useState(false);
   const [kv, setKv] = useState<'gkv' | 'pkv'>('gkv');
   const [kvZusatz, setKvZusatz] = useState('1.7');
   const [kirche, setKirche] = useState(false);
+  const [bundesland, setBundesland] = useState<Bundesland>('Nordrhein-Westfalen');
   const [kinder, setKinder] = useState('0');
   const [firmenwagen, setFirmenwagen] = useState(false);
   const [listenpreis, setListenpreis] = useState('45000');
@@ -45,15 +60,11 @@ export default function GmbhGfRechner() {
     const kvBasis = Math.min(steuerBruttoJahr, bbgKVPV);
     const rvBasis = Math.min(steuerBruttoJahr, bbgRVAV);
 
-    const kvAllg = 0.146;
     const kvZusatzSatz = (parseDeutscheZahl(kvZusatz) || 0) / 100;
-    const pvSatz = 0.036; // + Zuschlag bei kinderlos
     const anzKinder = Math.max(0, Math.floor(parseDeutscheZahl(kinder) || 0));
-    const pvZuschlag = anzKinder === 0 ? 0.006 : 0;
-    const pvAbschlag = anzKinder >= 2 ? (Math.min(anzKinder, 5) - 1) * 0.0025 : 0;
-
-    const rvSatz = 0.093;
-    const avSatz = 0.013;
+    // PV-AN-Anteil inkl. Kinderlos-Zuschlag und Kinderabschlag — aus zentraler Lib
+    // (§ 55 Abs. 3 SGB XI, PUEG 2023).
+    const pvAnSatz = pvAnteilAn2026(anzKinder, true, false);
 
     let anKv = 0, anPv = 0, anRv = 0, anAv = 0;
 
@@ -64,13 +75,13 @@ export default function GmbhGfRechner() {
       anKv = 0;
       anPv = 0;
     } else {
-      // Nicht-beherrschend: normaler AN-Anteil
+      // Nicht-beherrschend: normaler AN-Anteil aus zentralen Konstanten
       if (kv === 'gkv') {
-        anKv = kvBasis * (kvAllg / 2 + kvZusatzSatz / 2);
+        anKv = kvBasis * (KV_BASISSATZ_AN_2026 + kvZusatzSatz / 2);
       }
-      anPv = kvBasis * ((pvSatz / 2) + pvZuschlag - pvAbschlag / 2);
-      anRv = rvBasis * (rvSatz / 2);
-      anAv = rvBasis * (avSatz / 2);
+      anPv = kvBasis * pvAnSatz;
+      anRv = rvBasis * RV_SATZ_AN_2026;
+      anAv = rvBasis * AV_SATZ_AN_2026;
     }
 
     // PKV: pauschaler Schätzwert wenn gewählt (Single ca. 650 €/Monat)
@@ -83,11 +94,15 @@ export default function GmbhGfRechner() {
     const vorsorge = beherrschend ? Math.min(pkvJahr, 7000) : (anRv + anKv + anPv);
 
     const zvE = Math.max(0, steuerBruttoJahr - werbungskosten - vorsorge);
-    const est = berechneEStGrund(zvE, 2026);
-    // Soli mit Freigrenze (§ 4 SolzG): 20.350 € Grundtarif + Milderungszone.
-    // Rechner hat kein Splittingtarif-Toggle, daher splittingtarif = false.
-    const soli = berechneSoli(est, false, 2026);
-    const kirchensteuer = kirche ? est * 0.09 : 0;
+    // ESt nach § 32a EStG: Grundtarif oder Splittingtarif (verheiratet Zusammen)
+    const est = splitting
+      ? 2 * berechneEStGrund(zvE / 2, 2026)
+      : berechneEStGrund(zvE, 2026);
+    // Soli mit Freigrenze (§ 4 SolzG): 20.350 € Grundtarif / 40.700 € Splittingtarif,
+    // inkl. Milderungszone.
+    const soli = berechneSoli(est, splitting, 2026);
+    // Kirchensteuer mit Bundesland-Abhängigkeit (8 % BY/BW, 9 % sonst)
+    const kirchensteuer = kirche ? berechneKirchensteuerByBundesland(est, bundesland) : 0;
 
     const summeAbgabenJahr = anKv + anPv + anRv + anAv + est + soli + kirchensteuer + pkvJahr;
     const nettoJahr = jahresBrutto - (anKv + anPv + anRv + anAv) - est - soli - kirchensteuer - pkvJahr;
@@ -109,7 +124,9 @@ export default function GmbhGfRechner() {
       summeAbgabenJahr,
       quote,
     };
-  }, [brutto, beherrschend, kv, kvZusatz, kirche, kinder, firmenwagen, listenpreis, km]);
+  }, [brutto, beherrschend, splitting, kv, kvZusatz, kirche, bundesland, kinder, firmenwagen, listenpreis, km]);
+
+  const kistSatzProzent = bundesland === 'Bayern' || bundesland === 'Baden-Württemberg' ? 8 : 9;
 
   return (
     <div>
@@ -131,6 +148,19 @@ export default function GmbhGfRechner() {
             onChange={(v) => setBeherrschend(v === 'ja')}
           />
           <p className="text-xs text-gray-500 mt-1">Beherrschend = &gt; 50 % Anteile oder Sperrminorität → sozialversicherungsfrei.</p>
+        </div>
+
+        <div>
+          <RadioToggleGroup
+            name="gmbhgf-splitting"
+            legend="Familienstand / Veranlagung"
+            options={[
+              { value: 'grund', label: 'Ledig / Einzelveranlagung (Grundtarif)' },
+              { value: 'splitting', label: 'Verheiratet, Zusammenveranlagung (Splittingtarif)' },
+            ]}
+            value={splitting ? 'splitting' : 'grund'}
+            onChange={(v) => setSplitting(v === 'splitting')}
+          />
         </div>
 
         <div>
@@ -160,8 +190,25 @@ export default function GmbhGfRechner() {
 
         <div className="flex items-center gap-2">
           <input id="kirche" type="checkbox" checked={kirche} onChange={e => setKirche(e.target.checked)} className="w-5 h-5" />
-          <label htmlFor="kirche" className="text-sm text-gray-700 dark:text-gray-300">Kirchensteuer (9 %)</label>
+          <label htmlFor="kirche" className="text-sm text-gray-700 dark:text-gray-300">Kirchensteuer ({kistSatzProzent} %)</label>
         </div>
+
+        {kirche && (
+          <div>
+            <label htmlFor="gmbhgf-bundesland" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Bundesland</label>
+            <select
+              id="gmbhgf-bundesland"
+              value={bundesland}
+              onChange={e => setBundesland(e.target.value as Bundesland)}
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm min-h-[48px]"
+            >
+              {BUNDESLAENDER.map(bl => (
+                <option key={bl} value={bl}>{bl}</option>
+              ))}
+            </select>
+            <p className="text-xs text-gray-500 mt-1">Bayern und Baden-Württemberg: 8 %, sonst 9 %.</p>
+          </div>
+        )}
 
         <div className="flex items-center gap-2">
           <input id="fw" type="checkbox" checked={firmenwagen} onChange={e => setFirmenwagen(e.target.checked)} className="w-5 h-5" />
@@ -242,8 +289,9 @@ export default function GmbhGfRechner() {
         eingaben={{
           'GF-Brutto/Monat': `${brutto} €`,
           'Beteiligung': beherrschend ? 'Beherrschend (SV-frei)' : 'Nicht beherrschend',
+          'Veranlagung': splitting ? 'Zusammen (Splittingtarif)' : 'Einzel (Grundtarif)',
           'KV': kv === 'gkv' ? 'GKV' : 'PKV',
-          'Kirchensteuer': kirche ? 'Ja' : 'Nein',
+          'Kirchensteuer': kirche ? `Ja (${kistSatzProzent} %, ${bundesland})` : 'Nein',
           'Firmenwagen': firmenwagen ? `Ja (${listenpreis} €, ${km} km)` : 'Nein',
         }}
         ergebnis={{

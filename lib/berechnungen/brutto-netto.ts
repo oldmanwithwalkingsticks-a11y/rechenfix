@@ -118,6 +118,13 @@ function berechneJahressteuer(
 // Beitragsbemessungsgrenzen 2026 (einheitlich, seit 2025 keine West/Ost-Trennung)
 export const BBG_KV_MONAT = 5812.50;   // · 69.750 €/Jahr
 export const BBG_RV_MONAT = 8450;      // · 101.400 €/Jahr
+
+// SV-AN-Beitragssätze 2026 (paritätisch hälftig, exportiert für Konsumenten außerhalb
+// dieser Lib, z. B. GmbhGfRechner). KV-Zusatzbeitrag kommt aus sv-parameter.ts,
+// PV-Satz + Kinderabschlag aus pflegeversicherung.ts (pvAnteilAn2026).
+export const KV_BASISSATZ_AN_2026 = 0.073;    // § 241 SGB V: 14,6 % hälftig
+export const RV_SATZ_AN_2026 = 0.093;         // § 158 SGB VI: 18,6 % hälftig
+export const AV_SATZ_AN_2026 = 0.013;         // § 341 SGB III: 2,6 % hälftig
 // Alias für interne Verwendung
 const BBG_KV = BBG_KV_MONAT;
 const BBG_RV = BBG_RV_MONAT;
