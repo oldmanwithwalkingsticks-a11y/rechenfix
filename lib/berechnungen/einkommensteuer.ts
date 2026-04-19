@@ -1,5 +1,30 @@
 export type Steuerjahr = 2024 | 2025 | 2026;
 
+export type Bundesland =
+  | 'Baden-Württemberg' | 'Bayern' | 'Berlin' | 'Brandenburg'
+  | 'Bremen' | 'Hamburg' | 'Hessen' | 'Mecklenburg-Vorpommern'
+  | 'Niedersachsen' | 'Nordrhein-Westfalen' | 'Rheinland-Pfalz'
+  | 'Saarland' | 'Sachsen' | 'Sachsen-Anhalt' | 'Schleswig-Holstein'
+  | 'Thüringen';
+
+export const BUNDESLAENDER: Bundesland[] = [
+  'Baden-Württemberg', 'Bayern', 'Berlin', 'Brandenburg', 'Bremen',
+  'Hamburg', 'Hessen', 'Mecklenburg-Vorpommern', 'Niedersachsen',
+  'Nordrhein-Westfalen', 'Rheinland-Pfalz', 'Saarland', 'Sachsen',
+  'Sachsen-Anhalt', 'Schleswig-Holstein', 'Thüringen',
+];
+
+const KIRCHENSTEUER_8_LAENDER: Bundesland[] = ['Bayern', 'Baden-Württemberg'];
+
+export function kirchensteuersatzFuer(bundesland: Bundesland): 8 | 9 {
+  return KIRCHENSTEUER_8_LAENDER.includes(bundesland) ? 8 : 9;
+}
+
+export function berechneKirchensteuerByBundesland(est: number, bundesland: Bundesland): number {
+  if (est <= 0) return 0;
+  return berechneKiSt(est, true, kirchensteuersatzFuer(bundesland));
+}
+
 export interface EinkommensteuerEingabe {
   zvE: number;
   splitting: boolean;
@@ -189,4 +214,4 @@ export function berechneEinkommensteuer(e: EinkommensteuerEingabe): Einkommenste
   };
 }
 
-export { berechneEStGrund, berechneEStMitSplitting };
+export { berechneEStGrund, berechneEStMitSplitting, berechneSoli, berechneKiSt };

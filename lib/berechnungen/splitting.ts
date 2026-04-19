@@ -1,3 +1,11 @@
+import {
+  berechneEStGrund,
+  berechneSoli,
+  berechneKirchensteuerByBundesland,
+  BUNDESLAENDER as BUNDESLAENDER_CENTRAL,
+  type Bundesland,
+} from './einkommensteuer';
+
 export interface SplittingEingabe {
   jahresBruttoP1: number;
   jahresBruttoP2: number;
@@ -53,47 +61,11 @@ export interface SplittingErgebnis {
 const WERBUNGSKOSTEN_PAUSCHBETRAG = 1230;
 const SONDERAUSGABEN_PAUSCHBETRAG = 36;
 
-const KIRCHENSTEUER_8_LAENDER = ['Bayern', 'Baden-Württemberg'];
+export const BUNDESLAENDER = BUNDESLAENDER_CENTRAL;
 
-export const BUNDESLAENDER = [
-  'Baden-Württemberg', 'Bayern', 'Berlin', 'Brandenburg', 'Bremen',
-  'Hamburg', 'Hessen', 'Mecklenburg-Vorpommern', 'Niedersachsen',
-  'Nordrhein-Westfalen', 'Rheinland-Pfalz', 'Saarland', 'Sachsen',
-  'Sachsen-Anhalt', 'Schleswig-Holstein', 'Thüringen',
-];
-
-// Einkommensteuer nach § 32a EStG Grundtabelle 2026
-function berechneEStGrundtabelle(zvE: number): number {
-  const grundfreibetrag = 12348;
-  if (zvE <= grundfreibetrag) return 0;
-  if (zvE <= 17799) {
-    const y = (zvE - grundfreibetrag) / 10000;
-    return Math.round((914.51 * y + 1400) * y);
-  }
-  if (zvE <= 69878) {
-    const z = (zvE - 17799) / 10000;
-    return Math.round((173.10 * z + 2397) * z + 1034.87);
-  }
-  if (zvE <= 277825) {
-    return Math.round(0.42 * zvE - 11135.63);
-  }
-  return Math.round(0.45 * zvE - 19470.38);
-}
-
-// Solidaritätszuschlag: 5,5 % der ESt mit Freigrenze 2026 (20.350 €) und Milderungszone
-function berechneSoli(est: number): number {
-  if (est <= 20350) return 0;
-  // Milderungszone: 11,9 % des Differenzbetrags, gedeckelt auf 5,5 % ESt
-  const mild = Math.round((est - 20350) * 0.119 * 100) / 100;
-  const voll = Math.round(est * 0.055 * 100) / 100;
-  return Math.min(mild, voll);
-}
-
-// Kirchensteuer
-function berechneKiSt(est: number, hatKirche: boolean, bundesland: string): number {
+function kistWenn(est: number, hatKirche: boolean, bundesland: string): number {
   if (!hatKirche) return 0;
-  const satz = KIRCHENSTEUER_8_LAENDER.includes(bundesland) ? 0.08 : 0.09;
-  return Math.round(est * satz * 100) / 100;
+  return berechneKirchensteuerByBundesland(est, bundesland as Bundesland);
 }
 
 // zvE berechnen (vereinfacht)
@@ -129,30 +101,30 @@ export function berechneSplitting(eingabe: SplittingEingabe): SplittingErgebnis 
   const zveHalbe = Math.round(zveGesamt / 2);
 
   // === EINZELVERANLAGUNG ===
-  const estP1 = berechneEStGrundtabelle(zveP1);
-  const estP2 = berechneEStGrundtabelle(zveP2);
+  const estP1 = berechneEStGrund(zveP1, 2026);
+  const estP2 = berechneEStGrund(zveP2, 2026);
   const estEinzelGesamt = estP1 + estP2;
 
-  const soliP1 = berechneSoli(estP1);
-  const soliP2 = berechneSoli(estP2);
+  const soliP1 = berechneSoli(estP1, false, 2026);
+  const soliP2 = berechneSoli(estP2, false, 2026);
   const soliEinzel = Math.round((soliP1 + soliP2) * 100) / 100;
 
-  const kistP1 = berechneKiSt(estP1, kirchensteuerP1, bundesland);
-  const kistP2 = berechneKiSt(estP2, kirchensteuerP2, bundesland);
+  const kistP1 = kistWenn(estP1, kirchensteuerP1, bundesland);
+  const kistP2 = kistWenn(estP2, kirchensteuerP2, bundesland);
   const kistEinzel = Math.round((kistP1 + kistP2) * 100) / 100;
 
   const gesamtEinzel = estEinzelGesamt + soliEinzel + kistEinzel;
 
   // === ZUSAMMENVERANLAGUNG (SPLITTING) ===
-  const estHalbe = berechneEStGrundtabelle(zveHalbe);
+  const estHalbe = berechneEStGrund(zveHalbe, 2026);
   const estSplitting = estHalbe * 2;
 
-  const soliSplitting = berechneSoli(estSplitting);
+  const soliSplitting = berechneSoli(estSplitting, true, 2026);
 
   // Kirchensteuer: Auf den jeweiligen ESt-Anteil berechnen
   // Vereinfachung: Bei Splitting wird die ESt hälftig verteilt
-  const kistSplittingP1 = berechneKiSt(estHalbe, kirchensteuerP1, bundesland);
-  const kistSplittingP2 = berechneKiSt(estHalbe, kirchensteuerP2, bundesland);
+  const kistSplittingP1 = kistWenn(estHalbe, kirchensteuerP1, bundesland);
+  const kistSplittingP2 = kistWenn(estHalbe, kirchensteuerP2, bundesland);
   const kistSplitting = Math.round((kistSplittingP1 + kistSplittingP2) * 100) / 100;
 
   const gesamtSplitting = estSplitting + soliSplitting + kistSplitting;

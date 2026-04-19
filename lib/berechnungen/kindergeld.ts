@@ -1,3 +1,10 @@
+import {
+  berechneEStGrund,
+  berechneSoli,
+  berechneKirchensteuerByBundesland,
+  type Bundesland,
+} from './einkommensteuer';
+
 export type Veranlagung = 'zusammen' | 'einzeln';
 
 export interface KindergeldEingabe {
@@ -5,6 +12,7 @@ export interface KindergeldEingabe {
   jahresbruttoeinkommen: number;
   veranlagung: Veranlagung;
   kirchensteuer: boolean;
+  bundesland?: Bundesland;
 }
 
 export interface KindergeldErgebnis {
@@ -48,67 +56,37 @@ const FREIBETRAG_PRO_KIND_ZUSAMMEN = FREIBETRAG_PRO_KIND_EINZEL * 2; // 15.612 �
 const WERBUNGSKOSTEN_PAUSCHBETRAG = 1230;
 const SONDERAUSGABEN_PAUSCHBETRAG = 36;
 
-// Grobe SV-Pauschale für zvE-Schätzung (vereinfacht)
+// Grobe SV-Pauschale für zvE-Schätzung (vereinfacht, ohne BBG-Kappung).
+// TODO: Für präzisere zvE-Schätzung könnte `berechneBruttoNetto` aus brutto-netto.ts
+// konsumiert werden. Scope bewusst ausgeklammert — siehe Prompt 94 PR-Body.
 const SV_PAUSCHALE = 0.20;
-
-// Soli-Parameter 2026 (§ 4 SolzG)
-// Freigrenze Grundtarif: 20.350 €; Obergrenze Milderungszone: Freigrenze × 1,8595.
-// TODO Prompt 88+: aus lib/berechnungen/einkommensteuer.ts (PARAMS[2026]) ableiten.
-const SOLI_FREIGRENZE = 20350;
-const SOLI_MILDERUNGSGRENZE = 37838;
-const SOLI_SATZ = 0.055;
-
-// Kirchensteuer (vereinfacht: 9%)
-const KIST_SATZ = 0.09;
 
 function rund2(n: number): number {
   return Math.round(n * 100) / 100;
 }
 
 /**
- * Einkommensteuer Grundtabelle 2026 (§ 32a EStG)
- */
-function estGrundtabelle(zvE: number): number {
-  if (zvE <= 12348) return 0;
-  if (zvE <= 17799) {
-    const y = (zvE - 12348) / 10000;
-    return Math.round((914.51 * y + 1400) * y);
-  }
-  if (zvE <= 69878) {
-    const z = (zvE - 17799) / 10000;
-    return Math.round((173.10 * z + 2397) * z + 1034.87);
-  }
-  if (zvE <= 277825) {
-    return Math.round(0.42 * zvE - 11135.63);
-  }
-  return Math.round(0.45 * zvE - 19470.38);
-}
-
-/**
- * ESt nach Veranlagung — Splittingtarif oder Grundtarif
+ * ESt nach Veranlagung — Splittingtarif oder Grundtarif, zentrale Lib.
  */
 function estNachVeranlagung(zvE: number, veranlagung: Veranlagung): number {
   if (zvE <= 0) return 0;
   if (veranlagung === 'zusammen') {
-    return estGrundtabelle(zvE / 2) * 2;
+    return berechneEStGrund(zvE / 2, 2026) * 2;
   }
-  return estGrundtabelle(zvE);
+  return berechneEStGrund(zvE, 2026);
 }
 
-/**
- * Soli mit Milderungszone
- */
-function soliBerechnen(est: number): number {
-  if (est <= SOLI_FREIGRENZE) return 0;
-  const voll = est * SOLI_SATZ;
-  if (est >= SOLI_MILDERUNGSGRENZE) return voll;
-  // Milderungszone: 11,9% des Betrags über Freigrenze
-  const milderung = (est - SOLI_FREIGRENZE) * 0.119;
-  return Math.min(voll, milderung);
+function soliNachVeranlagung(est: number, veranlagung: Veranlagung): number {
+  return berechneSoli(est, veranlagung === 'zusammen', 2026);
+}
+
+function kistBerechnen(est: number, hatKirche: boolean, bundesland?: Bundesland): number {
+  if (!hatKirche) return 0;
+  return berechneKirchensteuerByBundesland(est, bundesland ?? 'Nordrhein-Westfalen');
 }
 
 export function berechneKindergeld(eingabe: KindergeldEingabe): KindergeldErgebnis | null {
-  const { anzahlKinder, jahresbruttoeinkommen, veranlagung, kirchensteuer } = eingabe;
+  const { anzahlKinder, jahresbruttoeinkommen, veranlagung, kirchensteuer, bundesland } = eingabe;
 
   if (anzahlKinder < 1) return null;
 
@@ -132,11 +110,11 @@ export function berechneKindergeld(eingabe: KindergeldEingabe): KindergeldErgebn
   const estOhneFreibetrag = estNachVeranlagung(zvEOhneFreibetrag, veranlagung);
   const estMitFreibetrag = estNachVeranlagung(zvEMitFreibetrag, veranlagung);
 
-  const soliOhne = soliBerechnen(estOhneFreibetrag);
-  const soliMit = soliBerechnen(estMitFreibetrag);
+  const soliOhne = soliNachVeranlagung(estOhneFreibetrag, veranlagung);
+  const soliMit = soliNachVeranlagung(estMitFreibetrag, veranlagung);
 
-  const kistOhne = kirchensteuer ? estOhneFreibetrag * KIST_SATZ : 0;
-  const kistMit = kirchensteuer ? estMitFreibetrag * KIST_SATZ : 0;
+  const kistOhne = kistBerechnen(estOhneFreibetrag, kirchensteuer, bundesland);
+  const kistMit = kistBerechnen(estMitFreibetrag, kirchensteuer, bundesland);
 
   // === GÜNSTIGERPRÜFUNG ===
   // Steuerersparnis durch Freibetrag (inkl. Soli + KiSt)
@@ -164,10 +142,10 @@ export function berechneKindergeld(eingabe: KindergeldEingabe): KindergeldErgebn
     const zvE_m = Math.max(0, zvE_o - kinderFreibetragGesamt);
     const est_o = estNachVeranlagung(zvE_o, veranlagung);
     const est_m = estNachVeranlagung(zvE_m, veranlagung);
-    const soli_o = soliBerechnen(est_o);
-    const soli_m = soliBerechnen(est_m);
-    const kist_o = kirchensteuer ? est_o * KIST_SATZ : 0;
-    const kist_m = kirchensteuer ? est_m * KIST_SATZ : 0;
+    const soli_o = soliNachVeranlagung(est_o, veranlagung);
+    const soli_m = soliNachVeranlagung(est_m, veranlagung);
+    const kist_o = kistBerechnen(est_o, kirchensteuer, bundesland);
+    const kist_m = kistBerechnen(est_m, kirchensteuer, bundesland);
     const ersparnis = (est_o - est_m) + (soli_o - soli_m) + (kist_o - kist_m);
     if (ersparnis > kindergeldJahr) {
       high = mid;

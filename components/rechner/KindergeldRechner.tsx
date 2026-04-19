@@ -6,6 +6,7 @@ import {
   KINDERGELD_PRO_KIND_MONAT,
   type Veranlagung,
 } from '@/lib/berechnungen/kindergeld';
+import { BUNDESLAENDER, type Bundesland } from '@/lib/berechnungen/einkommensteuer';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
@@ -18,6 +19,7 @@ export default function KindergeldRechner() {
   const [brutto, setBrutto] = useState('60000');
   const [veranlagung, setVeranlagung] = useState<Veranlagung>('zusammen');
   const [kirchensteuer, setKirchensteuer] = useState(false);
+  const [bundesland, setBundesland] = useState<Bundesland>('Nordrhein-Westfalen');
 
   const ergebnis = useMemo(
     () => berechneKindergeld({
@@ -25,9 +27,12 @@ export default function KindergeldRechner() {
       jahresbruttoeinkommen: parseDeutscheZahl(brutto),
       veranlagung,
       kirchensteuer,
+      bundesland,
     }),
-    [anzahlKinder, brutto, veranlagung, kirchensteuer],
+    [anzahlKinder, brutto, veranlagung, kirchensteuer, bundesland],
   );
+
+  const kistSatzProzent = bundesland === 'Bayern' || bundesland === 'Baden-Württemberg' ? 8 : 9;
 
   const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 
@@ -62,8 +67,8 @@ export default function KindergeldRechner() {
           Jahresbruttoeinkommen
         </h2>
         <NummerEingabe value={brutto} onChange={setBrutto} placeholder="60.000" einheit="€/Jahr" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-          Gesamtes Brutto der Eltern (bei Zusammenveranlagung beide zusammen)
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+          Bei Zusammenveranlagung bitte das gesamte Bruttoeinkommen beider Elternteile eingeben (vor Steuern und Sozialabgaben). Für die Günstigerprüfung wird das zu versteuernde Einkommen grob geschätzt (SV-Pauschale 20 %, WK- und Sonderausgabenpauschale).
         </p>
       </div>
 
@@ -95,17 +100,33 @@ export default function KindergeldRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">4</span>
           Kirchensteuer
         </h2>
-        <div className="flex gap-2">
+        <div className="flex gap-2 mb-3">
           {([false, true] as const).map(val => (
             <button
               key={String(val)}
               onClick={() => setKirchensteuer(val)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${kirchensteuer === val ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
             >
-              {val ? '⛪ Ja (9%)' : '✖ Nein'}
+              {val ? `⛪ Ja (${kistSatzProzent} %)` : '✖ Nein'}
             </button>
           ))}
         </div>
+        {kirchensteuer && (
+          <>
+            <label htmlFor="kindergeld-bundesland" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Bundesland</label>
+            <select
+              id="kindergeld-bundesland"
+              value={bundesland}
+              onChange={ev => setBundesland(ev.target.value as Bundesland)}
+              className="w-full sm:w-2/3 px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm min-h-[48px]"
+            >
+              {BUNDESLAENDER.map(bl => (
+                <option key={bl} value={bl}>{bl}</option>
+              ))}
+            </select>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Bayern und Baden-Württemberg: 8 %, alle anderen: 9 %.</p>
+          </>
+        )}
       </div>
 
       {/* === ERGEBNIS === */}
@@ -202,7 +223,7 @@ export default function KindergeldRechner() {
                   </tr>
                   {kirchensteuer && (
                     <tr>
-                      <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">Kirchensteuer (9%)</td>
+                      <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">Kirchensteuer ({kistSatzProzent}%)</td>
                       <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200 whitespace-nowrap">{fmtEuro(ergebnis.kistOhne)} €</td>
                       <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200 whitespace-nowrap">{fmtEuro(ergebnis.kistMit)} €</td>
                     </tr>
@@ -269,7 +290,7 @@ export default function KindergeldRechner() {
               anzahlKinder,
               jahresbrutto: `${fmtEuro(parseDeutscheZahl(brutto))} €`,
               veranlagung: veranlagung === 'zusammen' ? 'Zusammenveranlagung' : 'Einzelveranlagung',
-              kirchensteuer: kirchensteuer ? 'Ja (9%)' : 'Nein',
+              kirchensteuer: kirchensteuer ? `Ja (${kistSatzProzent} %, ${bundesland})` : 'Nein',
             }}
             ergebnis={{
               kindergeldMonat: `${ergebnis.kindergeldMonat} €`,

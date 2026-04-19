@@ -16,7 +16,7 @@ export default function AbfindungsRechner() {
   const [eigeneAbfindungBetrag, setEigeneAbfindungBetrag] = useState('14000');
   const [faktor, setFaktor] = useState('0,5');
   const [jahresBrutto, setJahresBrutto] = useState('42000');
-  const [steuerklasse, setSteuerklasse] = useState<1 | 2 | 3 | 4 | 5 | 6>(1);
+  const [verheiratet, setVerheiratet] = useState(false);
   const [kirchensteuer, setKirchensteuer] = useState<KirchensteuerOption>('nein');
 
   const nMonatsBrutto = parseDeutscheZahl(monatsBrutto);
@@ -34,10 +34,10 @@ export default function AbfindungsRechner() {
         eigeneAbfindungBetrag: nEigeneAbfindung,
         faktor: nFaktor,
         jahresBrutto: nJahresBrutto,
-        steuerklasse,
+        verheiratet,
         kirchensteuer,
       }),
-    [nMonatsBrutto, nBetriebsjahre, eigeneAbfindung, nEigeneAbfindung, nFaktor, nJahresBrutto, steuerklasse, kirchensteuer],
+    [nMonatsBrutto, nBetriebsjahre, eigeneAbfindung, nEigeneAbfindung, nFaktor, nJahresBrutto, verheiratet, kirchensteuer],
   );
 
   const fmt = (n: number) => Math.round(n).toLocaleString('de-DE');
@@ -97,28 +97,30 @@ export default function AbfindungsRechner() {
         </div>
       )}
 
-      {/* Jahresbrutto */}
+      {/* zvE */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Jahresbrutto (ohne Abfindung)</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zu versteuerndes Einkommen (ohne Abfindung)</label>
         <NummerEingabe value={jahresBrutto} onChange={setJahresBrutto} placeholder="z.B. 42000" einheit="€" />
-        <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-          Ihr voraussichtliches Bruttoeinkommen im Jahr der Abfindung (ohne die Abfindung selbst)
+        <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
+          Bitte das <strong>zu versteuernde Einkommen (zvE)</strong> eintragen — nicht das Brutto. Sie finden den Wert im letzten Steuerbescheid. Die Fünftelregelung (§ 34 EStG) wirkt auf das zvE, nicht auf Brutto oder Lohnsteuer.
         </p>
       </div>
 
-      {/* Steuerklasse und Kirchensteuer */}
+      {/* Veranlagung und Kirchensteuer */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
         <div>
-          <label htmlFor="abfindungs-select-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Steuerklasse</label>
+          <label htmlFor="abfindungs-select-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Veranlagung</label>
           <select id="abfindungs-select-1"
-            value={steuerklasse}
-            onChange={e => setSteuerklasse(parseInt(e.target.value) as 1 | 2 | 3 | 4 | 5 | 6)}
+            value={verheiratet ? 'zusammen' : 'einzeln'}
+            onChange={e => setVerheiratet(e.target.value === 'zusammen')}
             className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"
           >
-            {[1, 2, 3, 4, 5, 6].map(sk => (
-              <option key={sk} value={sk}>Steuerklasse {['I','II','III','IV','V','VI'][sk - 1]}</option>
-            ))}
+            <option value="einzeln">Einzelveranlagung (Grundtarif)</option>
+            <option value="zusammen">Zusammenveranlagung (Splittingtarif)</option>
           </select>
+          <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
+            Die Steuerklasse (§ 39 EStG) spielt bei der Veranlagung nach § 34 EStG keine Rolle.
+          </p>
         </div>
         <div>
           <label htmlFor="abfindungs-select-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kirchensteuer</label>
@@ -273,8 +275,8 @@ export default function AbfindungsRechner() {
               monatsBrutto: nMonatsBrutto,
               betriebsjahre: nBetriebsjahre,
               abfindungsmodus: eigeneAbfindung ? 'Eigene Abfindung' : `Regelabfindung (Faktor ${nFaktor})`,
-              jahresBrutto: nJahresBrutto,
-              steuerklasse,
+              zvEOhneAbfindung: nJahresBrutto,
+              veranlagung: verheiratet ? 'Zusammen (Splittingtarif)' : 'Einzel (Grundtarif)',
               kirchensteuer: kirchensteuer === 'nein' ? 'Nein' : `Ja (${kirchensteuer}%)`,
             }}
             ergebnis={{

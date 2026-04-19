@@ -60,6 +60,9 @@ export default function SplittingRechner() {
         <div className="w-full sm:w-1/2">
           <NummerEingabe value={bruttoP2} onChange={setBruttoP2} placeholder="z.B. 25.000" einheit="€" />
         </div>
+        <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
+          Bruttogehalt aus nichtselbständiger Arbeit (vor Steuern). Werbungskosten- und Sonderausgabenpauschale (insg. 1.266 € pro Partner) werden automatisch berücksichtigt. Sozialversicherungsbeiträge werden nicht gesondert abgezogen — wer das Netto inkl. SV braucht, nutzt den <a href="/finanzen/brutto-netto-rechner" className="underline">Brutto-Netto-Rechner</a>.
+        </p>
       </div>
 
       {/* Kirchensteuer */}

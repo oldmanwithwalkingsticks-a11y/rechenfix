@@ -1,3 +1,11 @@
+import {
+  berechneEStGrund,
+  berechneSoli,
+  type Bundesland,
+  kirchensteuersatzFuer,
+  berechneKiSt as berechneKiStZentral,
+} from './einkommensteuer';
+
 export type KirchensteuerOption = 'nein' | '9' | '8';
 
 export interface AbfindungEingabe {
@@ -6,8 +14,12 @@ export interface AbfindungEingabe {
   eigeneAbfindung: boolean;
   eigeneAbfindungBetrag: number;
   faktor: number;
-  jahresBrutto: number; // ohne Abfindung
-  steuerklasse: 1 | 2 | 3 | 4 | 5 | 6;
+  jahresBrutto: number; // tatsächlich: zu versteuerndes Einkommen ohne Abfindung
+  /**
+   * Veranlagungsart: Ledig = Grundtarif, zusammen = Splittingtarif auf zvE.
+   * Die Steuerklasse (§ 39 EStG) spielt bei der Veranlagung nach § 34 EStG keine Rolle.
+   */
+  verheiratet: boolean;
   kirchensteuer: KirchensteuerOption;
 }
 
@@ -32,45 +44,29 @@ export interface AbfindungErgebnis {
   nebenAnteilProzent: number; // Soli + KiSt
 }
 
-// Einkommensteuer nach § 32a EStG (Grundtabelle 2026)
-function berechneESt(zvE: number, steuerklasse: number): number {
-  const grundfreibetrag = 12348;
-  if (zvE <= grundfreibetrag) return 0;
-
-  let steuer = 0;
-  if (zvE <= 17799) {
-    const y = (zvE - grundfreibetrag) / 10000;
-    steuer = (914.51 * y + 1400) * y;
-  } else if (zvE <= 69878) {
-    const z = (zvE - 17799) / 10000;
-    steuer = (173.10 * z + 2397) * z + 1034.87;
-  } else if (zvE <= 277825) {
-    steuer = 0.42 * zvE - 11135.63;
-  } else {
-    steuer = 0.45 * zvE - 19470.38;
+/**
+ * Einkommensteuer auf zvE — Grundtarif oder Splittingtarif.
+ * Keine Steuerklassen-Faktoren (§ 34 EStG wirkt in der Veranlagung, nicht im Lohnsteuerabzug).
+ */
+function estVeranlagung(zvE: number, verheiratet: boolean): number {
+  if (zvE <= 0) return 0;
+  if (verheiratet) {
+    return berechneEStGrund(zvE / 2, 2026) * 2;
   }
-
-  // Steuerklassen-Faktor
-  const faktoren: Record<number, number> = {
-    1: 1.0, 2: 0.85, 3: 0.55, 4: 1.0, 5: 1.55, 6: 1.25,
-  };
-  return Math.round(steuer * (faktoren[steuerklasse] ?? 1) * 100) / 100;
+  return berechneEStGrund(zvE, 2026);
 }
 
-function berechneSoli(lohnsteuer: number): number {
-  // Soli: 5,5 % auf Lohnsteuer, Freigrenze 20.350 €/Jahr 2026
-  if (lohnsteuer <= 20350) return 0;
-  return Math.round(lohnsteuer * 0.055 * 100) / 100;
-}
-
-function berechneKiSt(lohnsteuer: number, satz: KirchensteuerOption): number {
-  if (satz === 'nein') return 0;
-  const prozent = satz === '8' ? 0.08 : 0.09;
-  return Math.round(lohnsteuer * prozent * 100) / 100;
+function kistBerechnen(est: number, option: KirchensteuerOption): number {
+  if (option === 'nein' || est <= 0) return 0;
+  const satz: 8 | 9 = option === '8' ? 8 : 9;
+  return berechneKiStZentral(est, true, satz);
 }
 
 export function berechneAbfindung(eingabe: AbfindungEingabe): AbfindungErgebnis | null {
-  const { monatsBrutto, betriebsjahre, eigeneAbfindung, eigeneAbfindungBetrag, faktor, jahresBrutto, steuerklasse, kirchensteuer } = eingabe;
+  const {
+    monatsBrutto, betriebsjahre, eigeneAbfindung, eigeneAbfindungBetrag, faktor,
+    jahresBrutto, verheiratet, kirchensteuer,
+  } = eingabe;
 
   if (monatsBrutto <= 0 || betriebsjahre <= 0 || jahresBrutto <= 0) return null;
 
@@ -82,28 +78,36 @@ export function berechneAbfindung(eingabe: AbfindungEingabe): AbfindungErgebnis 
   if (bruttoAbfindung <= 0) return null;
 
   // === OHNE Fünftelregelung ===
-  const estOhneAbfindung = berechneESt(jahresBrutto, steuerklasse);
-  const estMitAbfindung = berechneESt(jahresBrutto + bruttoAbfindung, steuerklasse);
+  const estOhneAbfindung = estVeranlagung(jahresBrutto, verheiratet);
+  const estMitAbfindung = estVeranlagung(jahresBrutto + bruttoAbfindung, verheiratet);
   const steuerOhneFuenftel = Math.round((estMitAbfindung - estOhneAbfindung) * 100) / 100;
-  const soliOhneFuenftel = berechneSoli(estMitAbfindung) - berechneSoli(estOhneAbfindung);
-  const kirchensteuerOhneFuenftel = berechneKiSt(estMitAbfindung, kirchensteuer) - berechneKiSt(estOhneAbfindung, kirchensteuer);
-  const abzuegeOhne = steuerOhneFuenftel + Math.max(0, soliOhneFuenftel) + Math.max(0, kirchensteuerOhneFuenftel);
+
+  const soliOhneFuenftelRaw =
+    berechneSoli(estMitAbfindung, verheiratet, 2026) - berechneSoli(estOhneAbfindung, verheiratet, 2026);
+  const soliOhneFuenftel = Math.max(0, Math.round(soliOhneFuenftelRaw * 100) / 100);
+
+  const kirchensteuerOhneFuenftelRaw =
+    kistBerechnen(estMitAbfindung, kirchensteuer) - kistBerechnen(estOhneAbfindung, kirchensteuer);
+  const kirchensteuerOhneFuenftel = Math.max(0, Math.round(kirchensteuerOhneFuenftelRaw * 100) / 100);
+
+  const abzuegeOhne = steuerOhneFuenftel + soliOhneFuenftel + kirchensteuerOhneFuenftel;
   const nettoOhneFuenftel = Math.round((bruttoAbfindung - abzuegeOhne) * 100) / 100;
 
   // === MIT Fünftelregelung (§ 34 EStG) ===
-  const estNormal = berechneESt(jahresBrutto, steuerklasse);
-  const estPlusFuenftel = berechneESt(jahresBrutto + bruttoAbfindung / 5, steuerklasse);
+  // ESt_ermäßigt = 5 × [ESt(zvE + aoe/5) − ESt(zvE)]
+  const estNormal = estVeranlagung(jahresBrutto, verheiratet);
+  const estPlusFuenftel = estVeranlagung(jahresBrutto + bruttoAbfindung / 5, verheiratet);
   const differenz = estPlusFuenftel - estNormal;
   const steuerMitFuenftel = Math.round(differenz * 5 * 100) / 100;
 
   // Soli und KiSt auf die Steuer der Abfindung (Fünftelregelung)
   const gesamtSteuerMitFuenftel = estNormal + steuerMitFuenftel;
-  const soliGesamt = berechneSoli(gesamtSteuerMitFuenftel);
-  const soliNormal = berechneSoli(estNormal);
+  const soliGesamt = berechneSoli(gesamtSteuerMitFuenftel, verheiratet, 2026);
+  const soliNormal = berechneSoli(estNormal, verheiratet, 2026);
   const soliMitFuenftel = Math.max(0, Math.round((soliGesamt - soliNormal) * 100) / 100);
 
-  const kiStGesamt = berechneKiSt(gesamtSteuerMitFuenftel, kirchensteuer);
-  const kiStNormal = berechneKiSt(estNormal, kirchensteuer);
+  const kiStGesamt = kistBerechnen(gesamtSteuerMitFuenftel, kirchensteuer);
+  const kiStNormal = kistBerechnen(estNormal, kirchensteuer);
   const kirchensteuerMitFuenftel = Math.max(0, Math.round((kiStGesamt - kiStNormal) * 100) / 100);
 
   const abzuegeMit = steuerMitFuenftel + soliMitFuenftel + kirchensteuerMitFuenftel;
@@ -126,8 +130,8 @@ export function berechneAbfindung(eingabe: AbfindungEingabe): AbfindungErgebnis 
     kirchensteuerMitFuenftel,
     nettoMitFuenftel,
     steuerOhneFuenftel,
-    soliOhneFuenftel: Math.max(0, soliOhneFuenftel),
-    kirchensteuerOhneFuenftel: Math.max(0, kirchensteuerOhneFuenftel),
+    soliOhneFuenftel,
+    kirchensteuerOhneFuenftel,
     nettoOhneFuenftel,
     steuerErsparnis,
     nettoVorteil,
@@ -135,4 +139,9 @@ export function berechneAbfindung(eingabe: AbfindungEingabe): AbfindungErgebnis 
     steuerAnteilProzent,
     nebenAnteilProzent,
   };
+}
+
+// Hilfs-Re-Export: KiSt-Satz für Bundesland (falls UI das braucht)
+export function kistOptionFuerBundesland(bundesland: Bundesland): KirchensteuerOption {
+  return kirchensteuersatzFuer(bundesland) === 8 ? '8' : '9';
 }
