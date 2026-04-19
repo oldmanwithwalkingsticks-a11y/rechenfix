@@ -14,6 +14,7 @@ Keine Code-Änderungen — reine Bestandsaufnahme.
 | **ESt-Vorauszahlung** | — | — | — | **Rechner nicht gefunden** |
 | **Fünftelregelung** | — | — | — | **Rechner nicht als Standalone gefunden** — integriert in `AbfindungsRechner.tsx` / `lib/berechnungen/abfindung.ts` |
 | **Altersentlastungsbetrag** | — | — | — | **Rechner nicht gefunden** |
+| **Abfindung / Fünftelregelung** | "Jahresbrutto (ohne Abfindung)" | Wird direkt als zvE behandelt (keine Abzüge!) | **keine** — kein WK-, SA-, SV- oder Kinderfreibetrag-Abzug | `lib/berechnungen/abfindung.ts` mit **lokaler** `berechneESt()` + undokumentierten Steuerklassen-Faktoren — **NICHT** `einkommensteuer.ts` |
 
 ## Details pro Rechner
 
@@ -110,6 +111,47 @@ Wer Fünftelregelung auditieren will, sollte den AbfindungsRechner prüfen. Eing
 
 **Nicht vorhanden.** Weder als Datei, Feature noch in den Configs.
 
+### 8. Abfindungs-Rechner (inkl. Fünftelregelung)
+
+- **Datei:** [components/rechner/AbfindungsRechner.tsx](components/rechner/AbfindungsRechner.tsx)
+- **Lib:** [lib/berechnungen/abfindung.ts](lib/berechnungen/abfindung.ts)
+- **Config:** [lib/rechner-config/arbeit.ts:771–842](lib/rechner-config/arbeit.ts:771)
+- **Eingabefelder:**
+  - Monatsbruttoeinkommen (Default **3.500 €**)
+  - Betriebszugehörigkeit in Jahren (Default **8**)
+  - Abfindungsmodus: "Regelabfindung berechnen" / "Eigene Abfindung eingeben" (Default Regel)
+  - Faktor Monatsgehälter pro Jahr (Default **0,5**) — nur bei Regelabfindung
+  - Abfindungsbetrag brutto (Default **14.000 €**) — nur bei eigener Abfindung
+  - **Jahresbrutto (ohne Abfindung)** (Default **42.000 €**)
+  - Steuerklasse I–VI (Default **I**)
+  - Kirchensteuer "Nein" / "Ja (9 %)" / "Ja (8 %, Bayern/BaWü)" (Default Nein)
+  - _Kein Bundesland, keine Kinderfreibeträge, keine SV-Felder_
+- **Semantik:** Der Code behandelt "Jahresbrutto (ohne Abfindung)" **direkt als zvE** (`berechneESt(jahresBrutto, steuerklasse)` in [abfindung.ts:85, :94](lib/berechnungen/abfindung.ts:85)). Es gibt keine Pauschal-Abzüge, keine SV-Kappung, keinen Kinderfreibetrag. Ein Nutzer, der tatsächlich 42.000 € Brutto verdient, hat realistisch ein zvE von ~32.000 € — der Rechner überschätzt also die ESt auf den regulären Teil.
+- **Interne Abzüge vor ESt-Berechnung:** **Keine.** Weder WK-Pauschale 1.230 €, noch Sonderausgaben 36 €, noch SV-Pauschale, noch Kinderfreibeträge. Das steht im Gegensatz zu Splitting (WK+SA) und Kindergeld (SV+WK+SA+KFB).
+- **Lib-Nutzung:** **Lokale Duplikat-Formel** `berechneESt()` in [abfindung.ts:36–58](lib/berechnungen/abfindung.ts:36). Nutzt **NICHT** `berechneEStGrund()` aus `lib/berechnungen/einkommensteuer.ts`. Zusätzlich undokumentierter Steuerklassen-Faktor-Array `{1: 1.0, 2: 0.85, 3: 0.55, 4: 1.0, 5: 1.55, 6: 1.25}` in [abfindung.ts:54–56](lib/berechnungen/abfindung.ts:54).
+- **Fünftelregelungs-Formel** ([abfindung.ts:93–97](lib/berechnungen/abfindung.ts:93)):
+
+  ```ts
+  const estNormal = berechneESt(jahresBrutto, steuerklasse);
+  const estPlusFuenftel = berechneESt(jahresBrutto + bruttoAbfindung / 5, steuerklasse);
+  const differenz = estPlusFuenftel - estNormal;
+  const steuerMitFuenftel = Math.round(differenz * 5 * 100) / 100;
+  ```
+
+  Das entspricht exakt § 34 Abs. 1 EStG (`5 × [ESt(zvE + aoe/5) − ESt(zvE)]`). **Formel korrekt**, Bezugsgröße (zvE-Input) jedoch falsch beschriftet (siehe Semantik).
+- **2025er Gesetzesänderungs-Hinweis:** **Ja**, prominent als blaue Info-Box in [AbfindungsRechner.tsx:213–217](components/rechner/AbfindungsRechner.tsx:213):
+
+  > "**Wichtig:** Die Fünftelregelung wird seit 2025 nicht mehr automatisch vom Arbeitgeber angewendet, sondern muss in der **Steuererklärung** beantragt werden."
+
+  Zusätzlich im langen Hilfetext der Config [lib/rechner-config/arbeit.ts:792–794](lib/rechner-config/arbeit.ts:792) und in den FAQs [arbeit.ts:826](lib/rechner-config/arbeit.ts:826).
+- **Auffälligkeiten:**
+  - **SSOT-Verstoß:** eigene ESt-Formel, eigene Soli-Formel (ohne Milderungszone, [abfindung.ts:60–64](lib/berechnungen/abfindung.ts:60)), eigene KiSt-Formel.
+  - **Soli ohne Milderungszone:** Sprung von 0 auf volle 5,5 %, sobald ESt > 20.350 € — verfälscht Vergleichswert "ohne Fünftelregelung" bei niedrigen Abfindungen knapp über der Freigrenze.
+  - **Steuerklassen-Faktoren sind keine offiziellen Werte.** § 39b EStG (Lohnsteuer-PAP) hat kein "ESt × Faktor"-Modell. Für Fünftelregelung wird in der Praxis die Grundtabelle genutzt (Stkl. III/IV/V spielen nur beim Lohnsteuerabzug eine Rolle, nicht bei § 34 EStG). Die Faktor-Logik hier ist eine vereinfachte Näherung ohne Rechtsgrundlage und sollte in der Semantik-Diskussion geklärt werden.
+  - **Kein Kinderfreibetrag-Input:** bei § 34 EStG macht das den Vergleich zvE-nah.
+  - **"Jahresbrutto (ohne Abfindung)" als Label ist irreführend** — semantisch gebraucht der Code es als zvE. Hilfetext unter dem Feld lautet "Ihr voraussichtliches Bruttoeinkommen im Jahr der Abfindung", was Nutzer zum tatsächlichen Brutto verleitet.
+  - Keine 2024er/2025er-Altwerte gefunden — der § 32a-Tarif (Grundfreibetrag 12.348 €, Zonengrenzen 17.799 / 69.878 / 277.825 €) entspricht 2026.
+
 ## Einschätzung für Audit-Testfälle
 
 | Kategorie | Rechner | Test-Strategie |
@@ -118,11 +160,22 @@ Wer Fünftelregelung auditieren will, sollte den AbfindungsRechner prüfen. Eing
 | **Brutto-Eingabe mit SV-Pauschale 20 % + WK/SA** | Kindergeld | BMF-Vergleich erfordert: `zvE_BMF = Brutto × 0,8 − WK − SA − Kinderfreibetrag`. Bei Zusammenveranlagung verdoppelt sich WK+SA. Anteile SV werden grob geschätzt — exakter Vergleich nur gegen eigene Lib, nicht BMF. |
 | **Keine ESt — reine Pauschale × Grenzsteuersatz** | Pendlerpauschale | Kein BMF-Abgleich sinnvoll. Prüfbar sind nur: Pauschalsätze (0,30 € / 0,38 € / 6 €), 210-Tage-Cap, km-Rundung. |
 | **Nicht implementiert** | Kirchensteuer (standalone), ESt-Vorauszahlung, Fünftelregelung (standalone), Altersentlastungsbetrag | Kein Audit möglich. Entweder integriertes Feature in anderem Rechner prüfen (KiSt, Fünftelreg → Abfindung) oder Rechner streichen/neu bauen. |
+| **Abfindung / Fünftelregelung** | AbfindungsRechner | "Jahresbrutto" = zvE. BMF-Vergleich direkt möglich, wenn Nutzer zvE-Wert einträgt. Aber: lokale Duplikat-ESt-Formel ohne Grundtabelle-Wahlrecht (nur Grundtarif × Stkl.-Faktor), Soli ohne Milderungszone. Testfälle sollten stkl. I (Faktor 1,0) nutzen, um den Stkl.-Faktor-Artefakt aus der Rechnung rauszuhalten, und die Fünftelregelungs-Formel gegen § 34 EStG prüfen (korrekt implementiert). |
 
 ## Zentrale Beobachtung
 
-**Die drei existierenden Steuer-Kern-Rechner (Splitting, Kindergeld, Pendlerpauschale) nutzen KEINE der zentralen Tarif-Libs.** Jeder hat seine eigene `estGrundtabelle()`-Kopie (bzw. verzichtet ganz auf ESt). Das ist ein direkter Verstoß gegen die SSOT-Regel in [CLAUDE.md](CLAUDE.md) ("Verboten: Eigene ESt-, LSt-, SV-, Kindergeld-, Pfändungs- oder Mindestlohn-Formeln").
+**Von den fünf geprüften Rechnern mit ESt-Bezug nutzen VIER eine lokale ESt-Formel-Kopie statt der zentralen Lib:**
 
-Das [Jahresparameter-Audit 2026-04](docs/jahresparameter-audit-2026-04.md) scheint diese Duplikate nicht erfasst zu haben, da sich die aktuellen 2026-Werte (Grundfreibetrag 12.348 €, Zonenformeln) gerade noch zufällig decken. Bei der nächsten Tarifänderung (2027) werden diese drei Rechner aber auseinanderdriften, sofern nicht vorher auf `berechneEStGrund(zvE, jahr)` umgestellt wird.
+| Rechner | ESt-Quelle | Zeilen |
+|---|---|---|
+| Splitting | `berechneEStGrundtabelle()` inline | [splitting.ts:66–81](lib/berechnungen/splitting.ts:66) |
+| Kindergeld | `estGrundtabelle()` inline | [kindergeld.ts:71–85](lib/berechnungen/kindergeld.ts:71) |
+| Pendlerpauschale | keine ESt-Rechnung (Grenzsteuersatz-Input) | — |
+| Abfindung | `berechneESt()` inline + Steuerklassen-Faktor | [abfindung.ts:36–58](lib/berechnungen/abfindung.ts:36) |
+| _(zentrale Lib `einkommensteuer.ts`)_ | `berechneEStGrund(zvE, jahr)` | nicht von den 4 oben genutzt |
+
+Das ist ein direkter Verstoß gegen die SSOT-Regel in [CLAUDE.md](CLAUDE.md) ("Verboten: Eigene ESt-, LSt-, SV-, Kindergeld-, Pfändungs- oder Mindestlohn-Formeln"). Das [Jahresparameter-Audit 2026-04](docs/jahresparameter-audit-2026-04.md) scheint diese Duplikate nicht erfasst zu haben, da sich die aktuellen 2026-Werte (Grundfreibetrag 12.348 €, Zonenformeln) gerade noch zufällig decken. Bei der nächsten Tarifänderung (2027) werden diese Rechner aber auseinanderdriften, sofern nicht vorher auf `berechneEStGrund(zvE, jahr)` umgestellt wird.
+
+**Konsequenz für Prompt 94 (SSOT-Konsolidierung):** umfasst **drei** Rechner mit ESt-Duplikat (Splitting, Kindergeld, Abfindung). Pendlerpauschale bleibt außen vor (keine ESt-Berechnung).
 
 Für den **aktuellen Audit** heißt das: Testfälle müssen gegen den **jeweiligen Rechner-eigenen** zvE-Begriff gebaut werden, nicht gegen einen einheitlichen. Wer "30.000 € Brutto" in drei Rechner eingibt, bekommt drei unterschiedliche Ergebnisse — und jedes einzelne kann in sich konsistent sein.
