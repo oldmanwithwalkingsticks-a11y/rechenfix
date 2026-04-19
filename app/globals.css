@@ -36,21 +36,15 @@ body {
   .card {
     @apply bg-white rounded-2xl shadow-md border border-gray-100
            dark:bg-gray-800 dark:border-gray-700
-           hover:shadow-lg hover:border-primary-200 dark:hover:border-primary-500/30
-           hover:-translate-y-0.5
-           focus-visible:shadow-lg focus-visible:border-primary-200 dark:focus-visible:border-primary-500/30
-           focus-visible:-translate-y-0.5 focus-visible:outline-none
-           transition-all duration-300;
+           hover:border-primary-200 dark:hover:border-primary-500/30
+           focus-visible:border-primary-200 dark:focus-visible:border-primary-500/30
+           focus-visible:outline-none;
+    transition: box-shadow 200ms ease-out, border-color 200ms ease-out;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .card {
-      @apply transition-colors;
-    }
-    .card:hover,
-    .card:focus-visible {
-      transform: none;
-    }
+  .card:hover,
+  .card:focus-visible {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.10), 0 4px 8px rgba(0, 0, 0, 0.06);
   }
 
   .btn-primary {
