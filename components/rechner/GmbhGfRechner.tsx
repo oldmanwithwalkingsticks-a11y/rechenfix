@@ -34,6 +34,7 @@ export default function GmbhGfRechner() {
   const [splitting, setSplitting] = useState(false);
   const [kv, setKv] = useState<'gkv' | 'pkv'>('gkv');
   const [kvZusatz, setKvZusatz] = useState('1.7');
+  const [pkvBeitrag, setPkvBeitrag] = useState('650');
   const [kirche, setKirche] = useState(false);
   const [bundesland, setBundesland] = useState<Bundesland>('Nordrhein-Westfalen');
   const [kinder, setKinder] = useState('0');
@@ -85,8 +86,9 @@ export default function GmbhGfRechner() {
       anAv = rvBasis * AV_SATZ_AN_2026;
     }
 
-    // PKV: pauschaler Schätzwert wenn gewählt (Single ca. 650 €/Monat)
-    const pkvMonat = kv === 'pkv' ? 650 : 0;
+    // PKV: individueller Nutzer-Eingabewert (Default 650 €/Monat, KV-Teil)
+    // PV wird separat über pvAnSatz berechnet (gilt auch für privat KV-Versicherte).
+    const pkvMonat = kv === 'pkv' ? Math.max(0, parseDeutscheZahl(pkvBeitrag) || 0) : 0;
     const pkvJahr = pkvMonat * 12;
 
     // Werbungskostenpauschale (§ 9a Nr. 1 EStG) + Sonderausgaben (vereinfacht)
@@ -125,7 +127,7 @@ export default function GmbhGfRechner() {
       summeAbgabenJahr,
       quote,
     };
-  }, [brutto, beherrschend, splitting, kv, kvZusatz, kirche, bundesland, kinder, firmenwagen, listenpreis, km]);
+  }, [brutto, beherrschend, splitting, kv, kvZusatz, pkvBeitrag, kirche, bundesland, kinder, firmenwagen, listenpreis, km]);
 
   const kistSatzProzent = bundesland === 'Bayern' || bundesland === 'Baden-Württemberg' ? 8 : 9;
 
@@ -170,7 +172,7 @@ export default function GmbhGfRechner() {
             legend="Krankenversicherung"
             options={[
               { value: 'gkv', label: 'GKV' },
-              { value: 'pkv', label: 'PKV (≈ 650 €/Mon.)' },
+              { value: 'pkv', label: 'PKV' },
             ]}
             value={kv}
             onChange={(v) => setKv(v as 'gkv' | 'pkv')}
@@ -181,6 +183,18 @@ export default function GmbhGfRechner() {
           <div>
             <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">KV-Zusatzbeitrag</label>
             <NummerEingabe value={kvZusatz} onChange={setKvZusatz} einheit="%" />
+          </div>
+        )}
+
+        {kv === 'pkv' && (
+          <div>
+            <label htmlFor="gmbhgf-pkv" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
+              Monatlicher PKV-Beitrag
+            </label>
+            <NummerEingabe value={pkvBeitrag} onChange={setPkvBeitrag} einheit="€" />
+            <p id="gmbhgf-pkv-hint" className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+              PKV-Beiträge variieren individuell (Alter, Tarif, Selbstbehalt). Typische Bandbreite: 400–1.000 € pro Monat. Tragen Sie Ihren tatsächlichen KV-Beitrag ein — die Pflegepflichtversicherung wird separat berechnet.
+            </p>
           </div>
         )}
 
@@ -291,7 +305,7 @@ export default function GmbhGfRechner() {
           'GF-Brutto/Monat': `${brutto} €`,
           'Beteiligung': beherrschend ? 'Beherrschend (SV-frei)' : 'Nicht beherrschend',
           'Veranlagung': splitting ? 'Zusammen (Splittingtarif)' : 'Einzel (Grundtarif)',
-          'KV': kv === 'gkv' ? 'GKV' : 'PKV',
+          'KV': kv === 'gkv' ? 'GKV' : `PKV (${pkvBeitrag} €/M)`,
           'Kirchensteuer': kirche ? `Ja (${kistSatzProzent} %, ${bundesland})` : 'Nein',
           'Firmenwagen': firmenwagen ? `Ja (${listenpreis} €, ${km} km)` : 'Nein',
         }}
