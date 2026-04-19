@@ -262,6 +262,17 @@ Hintergrund: Der Welle-1-Audit (Prompts 94–95) hat in fünf Rechnern
 solche Duplikate gefunden — alle mit veralteten oder frei erfundenen
 Werten. Siehe „Anti-Patterns aus der Audit-Welle 2026" weiter unten.
 
+**Seit Prompt 99c kennt das Lint-Script einen `contextKeywords`-Mechanismus**
+für generische Werte (z. B. `1230` WK-Pauschale, `20350` Soli-Freigrenze):
+Treffer werden nur gemeldet, wenn in ±2 Zeilen um den Fund eines der
+Keywords (case-insensitive) vorkommt — False Positives bei Layout-
+oder zufälligen Zahlenwerten sind damit ausgeschlossen.
+
+Seit Prompt 101 sind die Soli-Freigrenzen (20350 / 37838 / 40700) mit
+Keywords (soli / solidarit / milderung / freigrenze / solz / splitting /
+zusammen) aufgenommen. Der Soli-ohne-Milderungszone-Bug wird damit
+automatisch gefunden, falls er ein sechstes Mal auftritt.
+
 ### Step 11a: Smoketest v3 Regression (Pflicht nach jedem Eingriff)
 
 Nach jeder Änderung an Rechnern oder zentralen Libs:
@@ -475,6 +486,30 @@ Elevation-Eindruck entsteht allein durch verstärkten Box-Shadow —
 keine Pixel-Bewegung nötig. Siehe CLAUDE.md Abschnitt
 „UI-Regeln für Rechner-Kacheln".
 
+### G13 — Differenz-Methode für Steuer-/Soli-Ersparnis (Prompt 100)
+
+Bei Rechnern, die Steuerersparnis aus Absetzungen schätzen
+(Spenden, Werbungskosten, Altersvorsorge): Immer Differenz-Methode
+nutzen — nie pauschal `ersparnis * 0.055`:
+
+```ts
+// FALSCH (ignoriert Soli-Freigrenze):
+const soliErsparnis = estErsparnis * 0.055;
+
+// RICHTIG (berücksichtigt Freigrenze + Milderungszone):
+const soliVoll = berechneSoli(estVoll, splitting, 2026);
+const soliNachAbzug = berechneSoli(estNachAbzug, splitting, 2026);
+const soliErsparnis = soliVoll - soliNachAbzug;
+```
+
+Dieselbe Logik gilt für KiSt:
+`berechneKirchensteuerByBundesland(estVoll, bundesland) − berechneKirchensteuerByBundesland(estNachAbzug, bundesland)`.
+
+Der pauschale 5,5 %-Ansatz überschätzt die Ersparnis systematisch,
+wenn zvE vor oder nach Abzug unter die Soli-Freigrenze rutscht
+(Prompt 100: ~200 €/Jahr Überschätzung bei typischen Spendern
+um zvE 70–80 k).
+
 ## Anti-Patterns aus der Audit-Welle 2026 (nicht wiederholen)
 
 Reale Bugs, die der April-2026-Audit aufgedeckt hat. Bei jedem neuen
@@ -570,6 +605,95 @@ Beide erzeugen Subpixel-Antialiasing während der Transition →
 Text verschwimmt. Nutze die zentrale `.card`-Klasse aus
 `app/globals.css` oder reine Shadow-Animation ohne Transform.
 
+### 🚫 Eigene Pendlerpauschale-Kopie (Prompt 100)
+
+```ts
+// FALSCH (aus altem steuererstattung.ts):
+function berechnePendlerpauschale(km: number, tage: number) {
+  const ersteZwanzig = Math.min(km, 20) * 0.30 * tage;
+  const abKm21 = km > 20 ? (km - 20) * 0.38 * tage : 0;
+  return ersteZwanzig + abKm21;
+}
+```
+
+Pendlerpauschale ist seit StÄndG 2025 einheitlich **0,38 €/km ab 1. Kilometer**.
+Die alte Staffelung wurde in `pendlerpauschale.ts` korrekt gefixt (Prompt 94a),
+aber das Duplikat in `steuererstattung.ts` blieb stehen — führte zu **−352 €/Jahr WK**
+bei einem typischen Pendler mit 30 km × 220 Tagen. Immer aus `pendlerpauschale.ts`
+importieren (`PENDLERPAUSCHALE_SATZ_2026` oder `berechnePendlerpauschale`).
+
+### 🚫 Hartkodierte Tarif-Schwellen ohne Jahr-Parameter (Prompt 100)
+
+```ts
+// FALSCH (aus altem steuererstattung.ts — die Werte sind 2025er!):
+if (zvE < 12084) return 0;           // 2025er Grundfreibetrag
+if (zvE < 17005) return tarif2(zvE); // 2025er Zone-2-Grenze
+if (zvE < 66760) return tarif3(zvE); // 2025er Zone-3-Grenze
+```
+
+Die Grenzen werden jährlich angepasst (Inflationsausgleichsgesetz). Harte Werte
+ohne Jahr-Bezug werden nach dem Jahreswechsel unbemerkt falsch.
+Immer `berechneEStGrund(zvE, 2026)` aus `einkommensteuer.ts`.
+
+### 🚫 Soli-Ersparnis pauschal als 5,5 % der ESt-Ersparnis (Prompt 100)
+
+```ts
+// FALSCH (aus altem spenden.ts):
+const soliErsparnis = estErsparnis * 0.055;
+```
+
+Ignoriert, dass bei Jahres-ESt unter 20.350 € gar kein Soli anfällt — der Effekt
+kann komplett ausbleiben oder nur teilweise wirken. Bei Spendern mit zvE knapp
+über 20.350 € überschätzt der pauschale Ansatz die Ersparnis um ~200 €/Jahr.
+
+Immer Differenz-Methode (siehe Guard G13 und CLAUDE.md → SSOT-Patterns).
+
+### 🚫 BBG-Hardcodes außerhalb der zentralen Lib (Prompt 99b / 100 / 101)
+
+```ts
+// FALSCH (aus altem nebenjob.ts, GmbhGfRechner.tsx, steuerklassen-vergleich.ts):
+const BBG_KV = 5812.5;
+const BBG_RV = 8450;
+```
+
+BBG-Werte ändern sich jährlich via SV-Rechengrößenverordnung. Aus
+`brutto-netto.ts` importieren (`BBG_KV_MONAT`, `BBG_RV_MONAT`).
+
+**Bekannte Ausnahme:** `lohnsteuer.ts` behält BBG inline (zirkulärer Import mit
+`brutto-netto.ts`) — dokumentiert in CLAUDE.md → Architektur-Notes. Lint-Script
+schützt über forbiddenValues-Einträge.
+
+### 📌 Meta-Lektion: Soli ohne Milderungszone — ein Wiederholungs-Bug
+
+Das Muster `est > 20350 ? est * 0.055 : 0` (harte Kante ohne Milderungszone)
+wurde zwischen März und April 2026 **fünfmal** in unterschiedlichen Libs gefunden:
+1. `ArbeitslosengeldRechner` (vor Prompt 95)
+2. `GmbhGfRechner` (vor Prompt 99a)
+3. `nebenjob.ts` — drei Stellen (vor Prompt 100)
+4. `spenden.ts` — pauschal 5,5 % ohne Freigrenze-Check (vor Prompt 100)
+
+Seit Prompt 101 sind die Soli-Grenzen (20350 / 37838 / 40700) im Lint-Script
+(`scripts/check-jahreswerte.mjs`) mit `contextKeywords` aufgenommen — ein
+sechster Auftritt wird automatisch erkannt, False Positives bei Layout-Werten
+werden ausgefiltert.
+
+**Trotzdem: Bei neuen Rechnern immer `berechneSoli(est, splitting, 2026)` nutzen,
+nie eigene Schwellen-Logik.** Das Lint-Script ist Sicherheitsnetz, nicht Ersatz
+für korrektes Pattern-Wissen.
+
+## Bewährte Patterns (Kopiervorlagen)
+
+Diese Muster sind durch den April-Audit 2026 validiert und stehen als
+Kopiervorlagen bereit. Volldetails in `CLAUDE.md` → „SSOT-Patterns":
+
+- **Splittingtarif-Toggle** → Referenz: `components/rechner/GmbhGfRechner.tsx`
+- **Bundesland-Dropdown für KiSt** → Referenz: `GmbhGfRechner.tsx`, `SteuerprogressionsRechner.tsx`
+- **Differenz-Methode für Steuer-/Soli-Ersparnis** → Referenz: `lib/berechnungen/spenden.ts`
+- **Individuelle Pauschalen als Eingabefeld** → Referenz: PKV-Beitrag in `GmbhGfRechner.tsx`
+
+Bei neuen Rechnern: erst prüfen, ob eines dieser Patterns zutrifft,
+dann aus dem Referenz-Rechner kopieren.
+
 ## Rechner-Specific Templates
 
 For detailed templates per calculator type, see `references/templates.md`.
@@ -644,3 +768,4 @@ Ohne diesen Schritt geben Claude-Chat und Claude-Code inkonsistente Ratschläge 
 | 19.04.2026 | Prompt 92: Guard G10, Stichtag-Switch-Step, SSOT-Referenzen | [ ] noch offen |
 | 19.04.2026 | Prompt 92a: Sync-Sektion auf claude.ai-UI-Workflow umgestellt | [ ] noch offen |
 | 19.04.2026 | Prompt 97: Guards G11 (SSOT-Imports) + G12 (kein Transform-Hover), Step 11b SSOT-Import-Audit, Anti-Patterns-Abschnitt aus Welle-1-Audit | [ ] noch offen |
+| 20.04.2026 | Prompt 102: Guard G13 (Differenz-Methode Steuer-Ersparnis), 4 neue Anti-Patterns (Pendler-Duplikat, Tarif-Jahr-Hardcode, Soli-pauschal, BBG-Hardcodes), Meta-Lektion Soli-Wiederholungs-Bug, Positive-Patterns-Abschnitt mit Referenz-Rechnern, Lint-contextKeywords-Hinweis | [ ] noch offen |

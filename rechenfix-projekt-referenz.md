@@ -44,9 +44,9 @@ Alle jahresabhängigen und gesetzlich definierten Werte liegen in `lib/berechnun
 
 | Lib | Zweck | Wichtigste Exports |
 |---|---|---|
-| `einkommensteuer.ts` | § 32a EStG 2024/2025/2026, Soli-Freigrenzen | `berechneEStGrund(zvE, jahr)`, `PARAMS[jahr]` |
+| `einkommensteuer.ts` | § 32a EStG 2024/2025/2026, Soli-Freigrenzen, KiSt, Pauschalen | `berechneEStGrund(zvE, jahr)`, `berechneSoli(est, splitting, jahr)`, `berechneKirchensteuerByBundesland(est, bundesland)`, `PARAMS[jahr]`, `GRUNDFREIBETRAG_2026`, `WK_PAUSCHALE_AN_2026`, `BUNDESLAENDER` |
 | `lohnsteuer.ts` | LSt nach § 39b PAP, Vorsorgepauschale | `berechneLohnsteuerJahr(brutto, steuerklasse, jahr)` |
-| `brutto-netto.ts` | BBG KV/PV/RV, Gesamtberechnung Netto | `BBG_KV_MONAT`, `BBG_RV_MONAT`, `berechneBruttoNetto(...)` |
+| `brutto-netto.ts` | BBG KV/PV/RV, SV-Sätze AN, Gesamtberechnung Netto | `BBG_KV_MONAT`, `BBG_RV_MONAT`, `KV_BASISSATZ_AN_2026`, `RV_SATZ_AN_2026`, `AV_SATZ_AN_2026`, `berechneBruttoNetto(...)` |
 | `sv-parameter.ts` | GKV-Zusatzbeitrag, JAEG | `KV_ZUSATZBEITRAG_AN_DURCHSCHNITT_2026`, `JAEG_2026_JAHR`/`_MONAT` |
 | `kindergeld.ts` | Kindergeld + Günstigerprüfung | `KINDERGELD_2026` |
 | `duesseldorfer-tabelle.ts` | Unterhalt DT 2026 | Mindestbedarf, `KINDERGELD_2026`, `KINDERGELD_HAELFTIG_2026` |
@@ -172,6 +172,41 @@ Doku-Artefakte: `docs/stufe2-rechner-semantik.md`.
 **Stufe 4 (Wohnen + Spezial-Steuer) — offen**
 - Geplant: Grundsteuer, CO2, Heizkosten, Abfindung-Neuprüfung
 
+### Welle 1 — Stufe 1.5 (Sekundär-Rechner-Audit) — abgeschlossen 20.04.2026
+
+**Prompt 99a:** GmbhGfRechner Soli-Milderungszone (P1, durch Lint-Script entdeckt).
+
+**Prompt 99b:** GmbhGfRechner Splittingtarif-Toggle (P2) + SV-Sätze aus `brutto-netto.ts` + KiSt via `berechneKirchensteuerByBundesland` mit Bundesland-Dropdown (P2-Bonusfix BY/BW).
+
+**Prompt 99c:** WK-Pauschale SSOT über 7 Dateien / 13 Stellen (`WK_PAUSCHALE_AN_2026` zentral) + PKV-Beitrag als Eingabefeld statt Pauschale. Lint-Script um `contextKeywords`-Mechanismus erweitert.
+
+**Mini-Check Stufe 1.5** ([docs/stufe1-5-rechner-semantik.md](docs/stufe1-5-rechner-semantik.md)): 17 Sekundär-Libs geprüft, 9 sauber, 8 mit Findings.
+
+**Prompt 100 — P1-Pass** (5 Bugs gefixt):
+- `steuererstattung.ts`: Pendlerpauschale 0,30/0,38 → einheitlich 0,38 €/km (+352 €/Jahr WK bei 30 km × 220 Tagen)
+- `steuererstattung.ts`: 2025er-Tarifschwellen durch `berechneEStGrund` ersetzt
+- `nebenjob.ts`: 3 × Soli ohne Milderungszone → `berechneSoli` (−822 €/Jahr bei typischen Milderungszonen-Fällen)
+- `nebenjob.ts`: eigene § 32a-Formel → `berechneEStGrund`
+- `spenden.ts`: Soli-Ersparnis pauschal 5,5 % → Differenz-Methode (−199 €/Jahr Überschätzung korrigiert)
+- KiSt-Bundesland in `nebenjob` und `spenden` mitgezogen
+
+**Prompt 101 — SSOT + P2-Pass:**
+- Lint-Script: Soli-Freigrenzen (20350/37838/40700) mit `contextKeywords` aufgenommen
+- `steuerprogression.ts`: KiSt-Bundesland (+142 €/Jahr BY/BW-Fix)
+- SSOT-Refactor in 5 Libs (lohnsteuer, steuerklassen-vergleich, steuerprogression, bafoeg, wahrer-stundenlohn)
+- Neue Konstante `GRUNDFREIBETRAG_2026` in `einkommensteuer.ts`
+- Architektur-Note: BBG bleibt in `lohnsteuer.ts` inline wg. zirkulärem Import — dokumentiert
+
+**Audit-Bilanz Stufe 1.5:** 5 P1 + 4 P2 + 18 P3 — alle gefixt.
+
+**Audit-Bilanz Welle 1 gesamt (Stufen 1 + 2 + 1.5):** 10 P1 + 11 P2 + ~40 SSOT-Refactorings.
+
+### Meta-Lektion aus dem April-Audit
+
+Der **Soli-ohne-Milderungszone-Bug** tauchte **5× auf** (ALG, GmbhGf, nebenjob-3×, spenden). Das Anti-Pattern war im Skill dokumentiert — trotzdem haben Bestandsfälle es nicht verhindert. **Das technische Sicherheitsnetz (Lint-Script mit `contextKeywords`) ist der primäre Schutz**, die Doku ist ergänzend.
+
+Der manuelle Jahresaudit Prompt 87 hatte Sekundär-Rechner (nebenjob, steuererstattung, steuerklassen-vergleich, bafoeg etc.) nicht erfasst. Die systematische Lib-Inventur im Stufe-1.5-Mini-Check hat das aufgedeckt. **Bei zukünftigen Jahres-Audits ist die Inventur (→ `ls lib/berechnungen/*.ts`) Pflicht-Schritt vor der Tiefenprüfung.**
+
 ### Welle 1.5 — fehlende Rechner neu bauen (separate Sprint-Planung)
 
 Aus den Stufen 1+2 identifizierte Rechner ohne Standalone-Implementierung:
@@ -242,6 +277,19 @@ Zwei Prompts sind bewusst gesperrt, bis Google AdSense aktiv freigeschaltet ist:
 2. **Prompt 68** — Google CMP + Consent Mode v2 aktivieren. Ersetzt das aktuelle self-built CookieBanner.tsx.
 
 **Reihenfolge nach Freigabe:** erst 85 (Warning wegräumen), dann 68 (CMP dazu).
+
+## Architektur-TODOs (dokumentierte technische Schulden)
+
+### BBG-Konstanten in eigene Datei auslagern
+**Entdeckt in:** Prompt 101
+**Problem:** Zirkulärer Import zwischen [lib/berechnungen/brutto-netto.ts](lib/berechnungen/brutto-netto.ts) und [lib/berechnungen/lohnsteuer.ts](lib/berechnungen/lohnsteuer.ts) verhindert, dass `lohnsteuer.ts` die BBG-Werte aus `brutto-netto.ts` importiert — `brutto-netto.ts` konsumiert bereits `berechneLohnsteuerJahr`.
+Aktuell: BBG bleibt in `lohnsteuer.ts` inline (`101400` / `69750`), mit Code-Kommentar und Lint-Schutz über `forbiddenValues`.
+
+**Saubere Lösung:** Neue Datei `lib/berechnungen/bbg.ts` mit den BBG-Konstanten. Sowohl `brutto-netto.ts` als auch `lohnsteuer.ts` konsumieren daraus — Zyklus entschärft.
+
+**Priorität:** Niedrig akut, relevant spätestens zum nächsten BBG-Update (vermutlich 01.01.2027 via SV-Rechengrößenverordnung).
+
+**Workaround bis dahin:** In [docs/jahreswerte-kalender.md](docs/jahreswerte-kalender.md) ist die BBG mit "Doppel-Pflege"-Hinweis markiert. Beim jährlichen Dezember-Audit **beide Stellen** synchron aktualisieren.
 
 ## Affiliate-System
 

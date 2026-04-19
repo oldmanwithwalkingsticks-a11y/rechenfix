@@ -101,6 +101,44 @@ Lighthouse Accessibility ≥95 auf neuer/geänderter Seite.
 ### Barrierefreiheitserklärung
 `/barrierefreiheit` wird gepflegt. Bei strukturellen A11y-Änderungen prüfen, ob Inhalte aktualisiert werden müssen.
 
+## SSOT-Patterns (bewährt, seit April-Audit 2026)
+
+Wiederkehrende Muster, die bei neuen oder zu refactorenden Rechnern als Kopiervorlage dienen:
+
+### Splittingtarif-Toggle
+Wenn ein Rechner Nutzer mit möglicher Zusammenveranlagung erreicht (GF, Freiberufler, Arbeitnehmer):
+- State `splitting: boolean`, Default `false` (Grundtarif)
+- UI: Radio-Buttons "Ledig / getrennt veranlagt" vs. "Verheiratet, Zusammenveranlagung"
+- ESt: `splitting ? 2 * berechneEStGrund(zvE / 2, 2026) : berechneEStGrund(zvE, 2026)`
+- Soli: `berechneSoli(est, splitting, 2026)` — der zweite Parameter greift die Splittingtarif-Freigrenze 40.700 € ab
+
+Referenz-Implementation: [components/rechner/GmbhGfRechner.tsx](components/rechner/GmbhGfRechner.tsx) (seit Prompt 99b)
+
+### Bundesland-Dropdown für KiSt
+Jeder Rechner mit KiSt-Anzeige braucht Bundesland-Input:
+- State `bundesland: Bundesland`, Default `'Nordrhein-Westfalen'`
+- 16-Länder-Dropdown, erscheint konditional nur wenn Kirche=Ja
+- `berechneKirchensteuerByBundesland(est, bundesland)` ersetzt hartkodierte `est * 0.09`
+- Label-Dynamisierung: `Ja (${kistSatzProzent} %)` statt fix "Ja (9 %)"
+
+Referenz-Implementation: [components/rechner/GmbhGfRechner.tsx](components/rechner/GmbhGfRechner.tsx), [components/rechner/SteuerprogressionsRechner.tsx](components/rechner/SteuerprogressionsRechner.tsx)
+
+### Differenz-Methode für Steuer-/Soli-Ersparnis
+Bei Rechnern, die Steuerersparnis durch Absetzungen prognostizieren (Spenden, Werbungskosten, Altersvorsorge):
+- **Nicht:** `steuerersparnisSoli = estErsparnis * 0.055` (ignoriert Freigrenze, überschätzt an der Schwelle)
+- **Sondern:** `soliVoll = berechneSoli(estVoll, ...) - soliNachAbzug = berechneSoli(estNachAbzug, ...)`
+- Funktioniert analog für KiSt: `berechneKirchensteuerByBundesland(estVoll, bundesland) - berechneKirchensteuerByBundesland(estNachAbzug, bundesland)`
+
+Referenz-Implementation: [lib/berechnungen/spenden.ts](lib/berechnungen/spenden.ts) (seit Prompt 100)
+
+### Individuelle Pauschalen als Eingabefeld
+Pauschal-Werte mit hoher individueller Variation (PKV-Beitrag, Nebenjob-Netto) sollten als Eingabefeld realisiert werden:
+- State mit realistischem Default (z. B. `'650'` für PKV)
+- Hint-Text zur Bandbreite
+- Min/Max plausibel, step passend
+
+Referenz-Implementation: PKV-Beitrag in [components/rechner/GmbhGfRechner.tsx](components/rechner/GmbhGfRechner.tsx) (seit Prompt 99c)
+
 ## UI-Regeln für Rechner-Kacheln (Prompt 96/96a)
 
 - **Keine `transform`/`scale`/`translate`-Hover-Effekte auf Karten-artigen Elementen.** Der Browser promotet transformierte Elemente auf eine Compositor-Ebene und rendert Text dort mit Subpixel-Antialiasing → sichtbarer Text-Blur während der Transition. Auch `translateY(-2px)` ist betroffen.
@@ -180,12 +218,13 @@ export const WERT = getAktuellerWert();
 
 | Parameter | Wert | Stichtag nächste Änderung | Zentrale Lib | Rechtsgrundlage |
 |---|---|---|---|---|
-| Grundfreibetrag ESt | 12.348 € | vermutlich 01.01.2027 | `einkommensteuer.ts` | § 32a EStG |
+| Grundfreibetrag ESt | 12.348 € | vermutlich 01.01.2027 | `einkommensteuer.ts` (Konstante `GRUNDFREIBETRAG_2026` seit Prompt 101) | § 32a EStG |
 | ESt-Zonengrenzen | 17.799 / 69.878 / 277.826 € | 01.01.2027 | `einkommensteuer.ts` | § 32a EStG |
 | Soli-Freigrenze Grundtarif | 20.350 € | offen | `einkommensteuer.ts` | § 4 SolzG |
 | Soli-Freigrenze Splittingtarif | 40.700 € | offen | `einkommensteuer.ts` | § 4 SolzG |
 | Soli-Milderungsgrenze | 37.838 € (Grundtarif × 1,859375) | offen | `einkommensteuer.ts` | § 4 SolzG |
-| Werbungskostenpauschale | 1.230 € **pro Partner!** | offen | — (in Rechnern inline) | § 9a EStG |
+| Werbungskostenpauschale | 1.230 € **pro Partner!** (zentrale Konstante seit Prompt 99c) | offen | `einkommensteuer.ts` (`WK_PAUSCHALE_AN_2026`) | § 9a EStG |
+| SV-Sätze AN (zentrale Konstanten) | KV 7,3 % / RV 9,3 % / AV 1,3 % | selten | `brutto-netto.ts` (`KV_BASISSATZ_AN_2026`, `RV_SATZ_AN_2026`, `AV_SATZ_AN_2026`) | §§ 241/158 SGB V/VI, § 341 SGB III |
 | Sonderausgabenpauschale | 36 € **pro Partner** | offen | — (in Rechnern inline) | § 10c EStG |
 | Kindergeld | 259 € / Kind / Monat | offen | `kindergeld.ts` | § 66 EStG |
 | Kinderfreibetrag sächlich (zusammen) | 6.828 € | vermutlich 01.01.2027 | `kindergeld.ts` | § 32 Abs. 6 EStG |
@@ -273,6 +312,17 @@ export const WERT = getAktuellerWert();
 - Mindestunterhalt: § 1612a BGB + Mindestunterhaltsverordnung
 - Elternunterhalt: BGH XII ZB 6/24 v. 23.10.2024
 
+## Architektur-Notes (dokumentierte technische Schulden)
+
+### Zirkulärer Import brutto-netto ↔ lohnsteuer
+**Status:** bekannt, seit Prompt 101. BBG-Werte in [lib/berechnungen/lohnsteuer.ts](lib/berechnungen/lohnsteuer.ts) bleiben inline (`101400` / `69750`), weil ein direkter Import aus `brutto-netto.ts` einen Zyklus erzeugen würde — `brutto-netto.ts` konsumiert bereits `berechneLohnsteuerJahr` aus `lohnsteuer.ts`.
+
+**Saubere Lösung (nicht umgesetzt):** BBG-Konstanten in eine eigene Datei `lib/berechnungen/bbg.ts` auslagern, aus der sowohl `brutto-netto.ts` als auch `lohnsteuer.ts` konsumieren. Breche die Abhängigkeitskette an der richtigen Stelle.
+
+**Warum nicht jetzt:** Architektur-Change würde mehrere Dateien berühren und müsste über einen dedizierten Refactor-Prompt laufen. Kandidat für Ausführung, wenn die nächste BBG-Änderung ansteht (vermutlich 01.01.2027).
+
+**Workaround bis dahin:** Beim jährlichen Audit (Dezember) **beide Stellen** synchron aktualisieren. Im [docs/jahreswerte-kalender.md](docs/jahreswerte-kalender.md) als "BBG hat Doppel-Pflege"-Eintrag dokumentieren.
+
 ## Gesperrte Prompts (Stand April 2026)
 
 Folgende Prompts **dürfen nicht ausgeführt werden**, bis AdSense-Freigabe erfolgt:
@@ -316,3 +366,11 @@ Reihenfolge nach Freigabe: erst 85 (Warning wegräumen), dann 68 (CMP dazu).
 - **96** — `.card` Hover-Utility um `focus-visible` + `prefers-reduced-motion` erweitert ✅
 - **96a** — Transform aus `.card` Hover entfernt, reine Shadow-Animation (Text bleibt scharf) ✅
 - **97** — Doku-Sync nach Welle-1-Audit (CLAUDE.md + SKILL.md + Projekt-Referenz) ✅
+- **98** — Jahreswerte-Kalender als Governance-Dokument (`docs/jahreswerte-kalender.md`) ✅
+- **99** — Pre-Deploy-Lint-Script `scripts/check-jahreswerte.mjs` ✅
+- **99a** — GmbhGfRechner Soli-Milderungszone (P1, durch Lint entdeckt) ✅
+- **99b** — GmbhGfRechner Splittingtarif-Toggle + SV-Sätze/KiSt SSOT ✅
+- **99c** — WK-Pauschale SSOT (7 Dateien) + Lint `contextKeywords` + PKV-Beitrag Eingabefeld ✅
+- **100** — Stufe-1.5 P1-Pass: steuererstattung Pendler 0,38 + Tarif, nebenjob Soli+§32a+KiSt, spenden Differenz-Methode ✅
+- **101** — Stufe-1.5 SSOT-Konsolidierung: Soli-Lint, KiSt-Bundesland Steuerprogression, 5 Libs refactored ✅
+- **102** — Doku-Delta-Sync nach Stufe 1.5 (CLAUDE.md + SKILL + Projekt-Referenz) ✅
