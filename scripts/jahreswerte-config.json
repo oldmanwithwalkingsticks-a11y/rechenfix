@@ -1,0 +1,139 @@
+{
+  "scanPaths": [
+    "components",
+    "app",
+    "src"
+  ],
+  "allowlist": [
+    "lib/berechnungen/**",
+    "docs/**",
+    "scripts/**",
+    "node_modules/**",
+    ".next/**",
+    "dist/**",
+    "build/**",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "CLAUDE.md",
+    "README.md"
+  ],
+  "forbiddenValues": [
+    {
+      "value": "12348",
+      "description": "Grundfreibetrag ESt 2026",
+      "expectedSource": "lib/berechnungen/einkommensteuer.ts (PARAMS[2026])"
+    },
+    {
+      "value": "17799",
+      "description": "ESt-Zonengrenze 1 (2026)",
+      "expectedSource": "lib/berechnungen/einkommensteuer.ts"
+    },
+    {
+      "value": "69878",
+      "description": "ESt-Zonengrenze 2 (2026)",
+      "expectedSource": "lib/berechnungen/einkommensteuer.ts"
+    },
+    {
+      "value": "277826",
+      "description": "Reichensteuer-Grenze 2026",
+      "expectedSource": "lib/berechnungen/einkommensteuer.ts"
+    },
+    {
+      "value": "20350",
+      "description": "Soli-Freigrenze (Grundtarif) 2026",
+      "expectedSource": "lib/berechnungen/einkommensteuer.ts (berechneSoli)"
+    },
+    {
+      "value": "37838",
+      "description": "Soli-Milderungsgrenze 2026",
+      "expectedSource": "lib/berechnungen/einkommensteuer.ts (berechneSoli)"
+    },
+    {
+      "value": "40700",
+      "description": "Soli-Freigrenze (Splittingtarif) 2026",
+      "expectedSource": "lib/berechnungen/einkommensteuer.ts (berechneSoli)"
+    },
+    {
+      "value": "40.79",
+      "description": "Rentenwert bis 30.06.2026",
+      "expectedSource": "lib/berechnungen/rente.ts (getAktuellerRentenwert)"
+    },
+    {
+      "value": "42.52",
+      "description": "Rentenwert ab 01.07.2026",
+      "expectedSource": "lib/berechnungen/rente.ts (getAktuellerRentenwert)"
+    },
+    {
+      "value": "39.32",
+      "description": "VERALTETER Rentenwert (bis 30.06.2025) — darf NIRGENDS stehen",
+      "expectedSource": "nirgends — war April 2026 ein P1-Bug"
+    },
+    {
+      "value": "51944",
+      "description": "Durchschnittsentgelt 2026 (vorläufig)",
+      "expectedSource": "lib/berechnungen/rente.ts"
+    },
+    {
+      "value": "5812.50",
+      "description": "BBG KV/PV Monat 2026",
+      "expectedSource": "lib/berechnungen/brutto-netto.ts"
+    },
+    {
+      "value": "8450",
+      "description": "BBG RV Monat 2026",
+      "expectedSource": "lib/berechnungen/brutto-netto.ts"
+    },
+    {
+      "value": "101400",
+      "description": "BBG RV Jahr 2026",
+      "expectedSource": "lib/berechnungen/brutto-netto.ts"
+    },
+    {
+      "value": "69750",
+      "description": "BBG KV/PV Jahr 2026",
+      "expectedSource": "lib/berechnungen/brutto-netto.ts"
+    },
+    {
+      "value": "9756",
+      "description": "Kinderfreibetrag gesamt (zusammen) 2026",
+      "expectedSource": "lib/berechnungen/kindergeld.ts (KIFB_GESAMT_ZUSAMMEN_2026)"
+    },
+    {
+      "value": "6828",
+      "description": "Kinderfreibetrag sächlich (zusammen) 2026",
+      "expectedSource": "lib/berechnungen/kindergeld.ts"
+    },
+    {
+      "value": "4878",
+      "description": "Kinderfreibetrag gesamt (einzeln) 2026",
+      "expectedSource": "lib/berechnungen/kindergeld.ts"
+    },
+    {
+      "value": "15612",
+      "description": "ERFUNDENER Kinderfreibetrag-Wert — darf NIRGENDS stehen (war April 2026 ein P1-Bug)",
+      "expectedSource": "nirgends"
+    },
+    {
+      "value": "1555",
+      "description": "Pfändungsfreigrenze bis 30.06.2026",
+      "expectedSource": "lib/berechnungen/pfaendung.ts"
+    },
+    {
+      "value": "1587.40",
+      "description": "Pfändungsfreigrenze ab 01.07.2026",
+      "expectedSource": "lib/berechnungen/pfaendung.ts"
+    },
+    {
+      "value": "13.90",
+      "description": "Mindestlohn bis 31.12.2026",
+      "expectedSource": "lib/berechnungen/mindestlohn.ts"
+    },
+    {
+      "value": "14.60",
+      "description": "Mindestlohn ab 01.01.2027",
+      "expectedSource": "lib/berechnungen/mindestlohn.ts"
+    }
+  ]
+}
