@@ -291,6 +291,8 @@ export const WERT = getAktuellerWert();
 
 5. **Referenz für Finanz-Rechner**: BMF-Steuerrechner (`bmf-steuerrechner.de/ekst/`) ist die amtliche Quelle für Lohn- und Einkommensteuer-Berechnungen.
 
+6. **Lokaler Build-Check: immer `npm run build`, nie nur `npx next build`** (Prompt 104, April 2026). Das Repo hat einen `prebuild`-Hook, der `scripts/generate-client-data.ts` ausführt und `lib/rechner-config/client-data.ts` regeneriert. `npx next build` überspringt den Hook, wodurch sich Inkonsistenzen zwischen dem commited `client-data.ts` und dem aktuellen Stand in `lib/rechner-config/index.ts` lokal nicht zeigen — aber Vercel schlägt Alarm (`npm run build` dort). Folge: TS-Fehler im Vercel-Build für einen vorherigen Commit, der lokal grün war. Konkret passiert bei neuen Feldern in `KategorieConfig`/`RechnerConfig`, die im Generator-Inline-Interface nicht mit-ergänzt wurden. Fix-Pattern: Generator mappt explizit „light" Felder, Interface in der generierten Datei passt dazu.
+
 ## Unterhaltsrechner — Parameter 2026
 
 **Zentrale Konstanten in `lib/berechnungen/duesseldorfer-tabelle.ts`:**
