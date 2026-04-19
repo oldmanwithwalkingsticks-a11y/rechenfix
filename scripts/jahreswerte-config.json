@@ -42,18 +42,41 @@
     },
     {
       "value": "20350",
-      "description": "Soli-Freigrenze (Grundtarif) 2026",
-      "expectedSource": "lib/berechnungen/einkommensteuer.ts (berechneSoli)"
+      "description": "Soli-Freigrenze Grundtarif 2026 — wenn inline, fehlt typisch die Milderungszone (5× gefixt in Prompts 95/99a/100)",
+      "expectedSource": "lib/berechnungen/einkommensteuer.ts (berechneSoli handhabt Freigrenze + Milderung intern)",
+      "contextKeywords": [
+        "soli",
+        "solidarit",
+        "milderung",
+        "freigrenze",
+        "solz",
+        "SolzG"
+      ]
     },
     {
       "value": "37838",
-      "description": "Soli-Milderungsgrenze 2026",
-      "expectedSource": "lib/berechnungen/einkommensteuer.ts (berechneSoli)"
+      "description": "Soli-Milderungsgrenze Grundtarif 2026 (Freigrenze × 1,859375)",
+      "expectedSource": "lib/berechnungen/einkommensteuer.ts (berechneSoli handhabt Milderungszone intern)",
+      "contextKeywords": [
+        "soli",
+        "solidarit",
+        "milderung",
+        "freigrenze",
+        "solz"
+      ]
     },
     {
       "value": "40700",
-      "description": "Soli-Freigrenze (Splittingtarif) 2026",
-      "expectedSource": "lib/berechnungen/einkommensteuer.ts (berechneSoli)"
+      "description": "Soli-Freigrenze Splittingtarif 2026 (2 × 20.350)",
+      "expectedSource": "lib/berechnungen/einkommensteuer.ts (berechneSoli(est, splitting=true) handhabt intern)",
+      "contextKeywords": [
+        "soli",
+        "solidarit",
+        "milderung",
+        "freigrenze",
+        "splitting",
+        "zusammen"
+      ]
     },
     {
       "value": "40.79",
