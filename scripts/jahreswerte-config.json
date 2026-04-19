@@ -134,6 +134,23 @@
       "value": "14.60",
       "description": "Mindestlohn ab 01.01.2027",
       "expectedSource": "lib/berechnungen/mindestlohn.ts"
+    },
+    {
+      "value": "1230",
+      "description": "WK-Pauschale / Arbeitnehmer-Pauschbetrag 2026 (§ 9a Nr. 1 EStG)",
+      "expectedSource": "lib/berechnungen/einkommensteuer.ts (WK_PAUSCHALE_AN_2026)",
+      "contextKeywords": [
+        "werbung",
+        "werbungsk",
+        "wk_pausch",
+        "wk-pausch",
+        "wkpausch",
+        "arbeitnehmer",
+        "pauschbetrag",
+        "pauschale",
+        "§ 9a",
+        "§9a"
+      ]
     }
   ]
 }

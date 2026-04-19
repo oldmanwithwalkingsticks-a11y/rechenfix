@@ -29,7 +29,9 @@ export interface SteuererstattungErgebnis {
   posten: ErstattungsPosten[];
 }
 
-const PAUSCHBETRAG = 1230;
+import { WK_PAUSCHALE_AN_2026 } from './einkommensteuer';
+
+const PAUSCHBETRAG = WK_PAUSCHALE_AN_2026;
 const HOMEOFFICE_MAX = 1260;
 const HOMEOFFICE_PRO_TAG = 6;
 const HAUSHALTSNAHE_MAX = 4000;

@@ -92,6 +92,18 @@ function buildValueRegex(value) {
   return new RegExp(`(?<!\\w)${escaped}(?!\\w)`, 'g');
 }
 
+// --- Kontext-Filter: Prüft, ob in den ±2 Zeilen ein Keyword vorkommt ---
+// Wird nur angewendet, wenn der forbiddenValues-Eintrag contextKeywords definiert.
+// Ohne contextKeywords → immer melden (Default-Verhalten wie vor Prompt 99c).
+function contextKeywordsMatch(lines, lineIdx, keywords) {
+  if (!keywords || keywords.length === 0) return true;
+  const window = lines
+    .slice(Math.max(0, lineIdx - 2), Math.min(lines.length, lineIdx + 3))
+    .join('\n')
+    .toLowerCase();
+  return keywords.some(kw => window.includes(kw.toLowerCase()));
+}
+
 // --- Jede Datei durchsuchen ---
 const findings = [];
 
@@ -99,12 +111,13 @@ for (const file of files) {
   const content = readFileSync(file, 'utf8');
   const lines = content.split('\n');
 
-  for (const { value, description, expectedSource } of config.forbiddenValues) {
+  for (const entry of config.forbiddenValues) {
+    const { value, description, expectedSource, contextKeywords } = entry;
     const regex = buildValueRegex(value);
     lines.forEach((line, idx) => {
       // Kommentare ignorieren? Nein — Werte in Kommentaren sind genauso problematisch
       // (wären irreführend). Aber JSX-Inline-Props wie `width={12348}` sollen matchen.
-      if (regex.test(line)) {
+      if (regex.test(line) && contextKeywordsMatch(lines, idx, contextKeywords)) {
         findings.push({
           file: relative(ROOT, file),
           line: idx + 1,

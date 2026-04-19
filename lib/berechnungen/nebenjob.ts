@@ -1,3 +1,5 @@
+import { WK_PAUSCHALE_AN_2026 } from './einkommensteuer';
+
 export type NebenjobArt = 'minijob' | 'steuerkarte' | 'selbststaendig';
 
 export interface NebenjobErgebnis {
@@ -66,9 +68,9 @@ function berechneHauptjobNetto(bruttoMonat: number, kirchensteuer: boolean): num
   const sv = rv + kv + pv + av;
 
   // Lohnsteuer: ESt auf Jahres-zvE / 12
-  // zvE = Brutto*12 - Werbungskosten-Pauschbetrag (1230€) - Sonderausgaben-Pauschbetrag (36€)
+  // zvE = Brutto*12 - Werbungskostenpauschbetrag - Sonderausgabenpauschbetrag (36€)
   const jahresBrutto = bruttoMonat * 12;
-  const zvE = Math.max(0, jahresBrutto - 1230 - 36);
+  const zvE = Math.max(0, jahresBrutto - WK_PAUSCHALE_AN_2026 - 36);
   const jahresESt = berechneESt(zvE);
   const lstMonat = Math.round(jahresESt / 12 * 100) / 100;
 
@@ -129,8 +131,8 @@ export function berechneNebenjob(
     const nebenjobJahr = nebenjobBrutto * 12;
 
     // Werbungskosten-Pauschale nur auf Hauptjob; Nebenjob als Gewerbe/Freiberuf
-    const zvEOhne = Math.max(0, hauptjobJahr - 1230 - 36);
-    const zvEMit = Math.max(0, hauptjobJahr + nebenjobJahr - 1230 - 36);
+    const zvEOhne = Math.max(0, hauptjobJahr - WK_PAUSCHALE_AN_2026 - 36);
+    const zvEMit = Math.max(0, hauptjobJahr + nebenjobJahr - WK_PAUSCHALE_AN_2026 - 36);
 
     // Härteausgleich: bis 410€ Jahres-Nebenjob steuerfrei
     let zusatzsteuerJahr: number;

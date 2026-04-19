@@ -13,6 +13,7 @@ import {
   berechneSoli,
   berechneKirchensteuerByBundesland,
   BUNDESLAENDER,
+  WK_PAUSCHALE_AN_2026,
   type Bundesland,
 } from '@/lib/berechnungen/einkommensteuer';
 import {
@@ -88,8 +89,8 @@ export default function GmbhGfRechner() {
     const pkvMonat = kv === 'pkv' ? 650 : 0;
     const pkvJahr = pkvMonat * 12;
 
-    // Werbungskostenpauschale + Sonderausgaben (vereinfacht)
-    const werbungskosten = 1230;
+    // Werbungskostenpauschale (§ 9a Nr. 1 EStG) + Sonderausgaben (vereinfacht)
+    const werbungskosten = WK_PAUSCHALE_AN_2026;
     // Vorsorgepauschale grob: Summe der SV-Beiträge oder geschätzt
     const vorsorge = beherrschend ? Math.min(pkvJahr, 7000) : (anRv + anKv + anPv);
 

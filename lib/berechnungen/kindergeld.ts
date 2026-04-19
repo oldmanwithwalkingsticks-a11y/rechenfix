@@ -2,6 +2,7 @@ import {
   berechneEStGrund,
   berechneSoli,
   berechneKirchensteuerByBundesland,
+  WK_PAUSCHALE_AN_2026,
   type Bundesland,
 } from './einkommensteuer';
 
@@ -57,8 +58,8 @@ export const KIFB_GESAMT_EINZEL_2026 = KIFB_GESAMT_ZUSAMMEN_2026 / 2; // 4.878 �
 const FREIBETRAG_PRO_KIND_ZUSAMMEN = KIFB_GESAMT_ZUSAMMEN_2026;
 const FREIBETRAG_PRO_KIND_EINZEL = KIFB_GESAMT_EINZEL_2026;
 
-// Pauschalen
-const WERBUNGSKOSTEN_PAUSCHBETRAG = 1230;
+// Pauschalen (WK aus zentraler SSOT)
+const WERBUNGSKOSTEN_PAUSCHBETRAG = WK_PAUSCHALE_AN_2026;
 const SONDERAUSGABEN_PAUSCHBETRAG = 36;
 
 // Grobe SV-Pauschale für zvE-Schätzung (vereinfacht, ohne BBG-Kappung).

@@ -3,6 +3,7 @@ import {
   berechneSoli,
   berechneKirchensteuerByBundesland,
   BUNDESLAENDER as BUNDESLAENDER_CENTRAL,
+  WK_PAUSCHALE_AN_2026,
   type Bundesland,
 } from './einkommensteuer';
 import { KIFB_GESAMT_ZUSAMMEN_2026 } from './kindergeld';
@@ -59,7 +60,7 @@ export interface SplittingErgebnis {
   vergleichsTabelle: SplittingVergleichsZeile[];
 }
 
-const WERBUNGSKOSTEN_PAUSCHBETRAG = 1230;
+const WERBUNGSKOSTEN_PAUSCHBETRAG = WK_PAUSCHALE_AN_2026;
 const SONDERAUSGABEN_PAUSCHBETRAG = 36;
 
 export const BUNDESLAENDER = BUNDESLAENDER_CENTRAL;

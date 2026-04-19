@@ -1,4 +1,4 @@
-import { berechneEStGrund } from './einkommensteuer';
+import { berechneEStGrund, WK_PAUSCHALE_AN_2026 } from './einkommensteuer';
 import { pvAnteilAnVorsorge2026 } from './pflegeversicherung';
 
 export type Steuerklasse = 1 | 2 | 3 | 4 | 5 | 6;
@@ -54,7 +54,7 @@ export interface LohnsteuerErgebnis {
   }>;
 }
 
-const ARBEITNEHMER_PAUSCHBETRAG = 1230;
+const ARBEITNEHMER_PAUSCHBETRAG = WK_PAUSCHALE_AN_2026;
 const SONDERAUSGABEN_PAUSCHBETRAG = 36;
 const ENTLASTUNGSBETRAG_ALLEINERZIEHENDE = 4260;
 const SOLI_FREIGRENZE_JAHR = 20350;      // 2026 Einzelveranlagung (Steuerklasse I/II/IV/V/VI)

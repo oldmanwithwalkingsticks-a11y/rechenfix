@@ -16,6 +16,10 @@ export const BUNDESLAENDER: Bundesland[] = [
 
 const KIRCHENSTEUER_8_LAENDER: Bundesland[] = ['Bayern', 'Baden-Württemberg'];
 
+// Arbeitnehmer-Pauschbetrag (Werbungskostenpauschale) 2026 — § 9a Nr. 1 EStG.
+// SSOT: alle Rechner, die zvE oder Netto schätzen, importieren diese Konstante.
+export const WK_PAUSCHALE_AN_2026 = 1230;
+
 export function kirchensteuersatzFuer(bundesland: Bundesland): 8 | 9 {
   return KIRCHENSTEUER_8_LAENDER.includes(bundesland) ? 8 : 9;
 }

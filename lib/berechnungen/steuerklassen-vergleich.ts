@@ -1,4 +1,4 @@
-import { berechneEStGrund } from './einkommensteuer';
+import { berechneEStGrund, WK_PAUSCHALE_AN_2026 } from './einkommensteuer';
 
 export type Steuerklasse = 1 | 3 | 4 | 5;
 
@@ -44,7 +44,7 @@ export interface SteuerklassenVergleichErgebnis {
 function berechneLohnsteuerSK1Jahr(bruttoJahr: number): number {
   if (bruttoJahr <= 0) return 0;
   // Arbeitnehmer-Pauschbetrag (1.230 €) + Sonderausgaben (36 €) + Vorsorgepauschale (vereinfacht 12 %)
-  const werbungskosten = 1230;
+  const werbungskosten = WK_PAUSCHALE_AN_2026;
   const sonderausgaben = 36;
   const vorsorgepauschale = Math.min(bruttoJahr * 0.12, 15000);
   const zvE = Math.max(0, bruttoJahr - werbungskosten - sonderausgaben - vorsorgepauschale);
@@ -54,7 +54,7 @@ function berechneLohnsteuerSK1Jahr(bruttoJahr: number): number {
 // SK3: Doppelter Grundfreibetrag, sehr niedrige LSt
 function berechneLohnsteuerSK3Jahr(bruttoJahr: number): number {
   if (bruttoJahr <= 0) return 0;
-  const werbungskosten = 1230;
+  const werbungskosten = WK_PAUSCHALE_AN_2026;
   const sonderausgaben = 36;
   const vorsorgepauschale = Math.min(bruttoJahr * 0.12, 15000);
   const zvE = Math.max(0, bruttoJahr - werbungskosten - sonderausgaben - vorsorgepauschale);
@@ -66,7 +66,7 @@ function berechneLohnsteuerSK3Jahr(bruttoJahr: number): number {
 // SK5: Kein Grundfreibetrag, stark erhöhte LSt
 function berechneLohnsteuerSK5Jahr(bruttoJahr: number): number {
   if (bruttoJahr <= 0) return 0;
-  const werbungskosten = 1230;
+  const werbungskosten = WK_PAUSCHALE_AN_2026;
   const sonderausgaben = 36;
   const vorsorgepauschale = Math.min(bruttoJahr * 0.12, 15000);
   const bruttoNachAbzug = Math.max(0, bruttoJahr - werbungskosten - sonderausgaben - vorsorgepauschale);
@@ -120,8 +120,8 @@ function berechneKiStJahr(lohnsteuerJahr: number, kirchensteuer: boolean, satz: 
 
 // Splitting-ESt des Paares (für Faktorverfahren und Nachzahlung/Erstattung)
 function berechneSplittingEStPaar(brutto1: number, brutto2: number): number {
-  const zvE1 = Math.max(0, brutto1 - 1230 - 36 - Math.min(brutto1 * 0.12, 15000));
-  const zvE2 = Math.max(0, brutto2 - 1230 - 36 - Math.min(brutto2 * 0.12, 15000));
+  const zvE1 = Math.max(0, brutto1 - WK_PAUSCHALE_AN_2026 - 36 - Math.min(brutto1 * 0.12, 15000));
+  const zvE2 = Math.max(0, brutto2 - WK_PAUSCHALE_AN_2026 - 36 - Math.min(brutto2 * 0.12, 15000));
   const zvEGesamt = zvE1 + zvE2;
   const halb = Math.floor(zvEGesamt / 2);
   return berechneEStGrund(halb, 2026) * 2;
