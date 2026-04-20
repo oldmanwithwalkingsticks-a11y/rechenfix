@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "generate-client-data": "npx tsx scripts/generate-client-data.ts",
-    "prebuild": "npx tsx scripts/generate-client-data.ts",
+    "prebuild": "node scripts/check-footer.mjs && node scripts/check-jahreswerte.mjs && npx tsx scripts/generate-client-data.ts",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
