@@ -50,7 +50,13 @@ export function getAktuellerRentenwert(stichtag: Date = new Date()): number {
 export const RENTENWERT = getAktuellerRentenwert();
 
 // Konstanten 2026
-const DURCHSCHNITTSENTGELT = 51944; // Vorläufiges Durchschnittsentgelt 2026
+/**
+ * Vorläufiges Durchschnittsentgelt der gesetzlichen Rentenversicherung 2026.
+ * Quelle: § 69 SGB VI + Anlage 1, SV-Rechengrößenverordnung 2026.
+ * Dient als Divisor für Entgeltpunkte: 1 EP = Jahresbrutto / DURCHSCHNITTSENTGELT.
+ */
+export const DURCHSCHNITTSENTGELT_2026 = 51944;
+const DURCHSCHNITTSENTGELT = DURCHSCHNITTSENTGELT_2026;
 const BBG_WEST = 101400; // BBG RV 2026 (einheitlich, 8.450 €/Monat)
 const REGELALTERSGRENZE = 67;
 

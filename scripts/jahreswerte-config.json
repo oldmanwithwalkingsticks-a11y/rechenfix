@@ -96,7 +96,21 @@
     {
       "value": "51944",
       "description": "Durchschnittsentgelt 2026 (vorläufig)",
-      "expectedSource": "lib/berechnungen/rente.ts"
+      "expectedSource": "lib/berechnungen/rente.ts (DURCHSCHNITTSENTGELT_2026)"
+    },
+    {
+      "value": "45358",
+      "description": "VERALTETES Durchschnittsentgelt (2023/2024) — darf NIRGENDS als Divisor für Rentenpunkte/Entgeltpunkte stehen (war April 2026 ein P1-Bug in minijob.ts)",
+      "expectedSource": "nirgends — Rentenpunkte-Divisor 2026 ist 51.944 € aus DURCHSCHNITTSENTGELT_2026",
+      "contextKeywords": [
+        "rente",
+        "rentenpunkt",
+        "entgeltpunkt",
+        "durchschnittsentgelt",
+        "durchschnittsbrutto",
+        "SGB VI",
+        "§ 69"
+      ]
     },
     {
       "value": "5812.50",

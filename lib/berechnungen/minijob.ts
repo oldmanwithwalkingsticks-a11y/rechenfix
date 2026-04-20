@@ -45,12 +45,14 @@ export interface MinijobErgebnis {
 // Konstanten 2026 — Mindestlohn und Minijob-Grenze aus zentraler SSOT.
 // Re-Export von MINDESTLOHN_2026 hält bestehende Konsumenten kompatibel.
 import { MINDESTLOHN_2026, MINIJOB_GRENZE_MONAT } from './mindestlohn';
+import { DURCHSCHNITTSENTGELT_2026 } from './rente';
 export { MINDESTLOHN_2026 } from './mindestlohn';
 
 export const MINIJOB_GRENZE = MINIJOB_GRENZE_MONAT;   // €/Monat (Mindestlohn × 130 / 3 → 603 € in 2026)
 export const MIDIJOB_OBERGRENZE = 2000;               // €/Monat
 export const WOCHEN_PRO_MONAT = 4.33;
-// Durchschnittliches Bruttoentgelt (gesetzl. RV) 2026: ca. 45.358 €/Jahr → Rentenpunkte-Umrechnung
+// Durchschnittliches Bruttoentgelt gesetzl. RV 2026: 51.944 €/Jahr (§ 69 SGB VI, Anlage 1)
+// → Rentenpunkte-Umrechnung via SSOT-Konstante aus rente.ts.
 
 function rund2(n: number): number {
   return Math.round(n * 100) / 100;
@@ -105,10 +107,10 @@ export function berechneMinijob(e: MinijobEingabe): MinijobErgebnis {
   const maxStundenProWoche = rund2(verdienst / MINDESTLOHN_2026 / WOCHEN_PRO_MONAT);
 
   // === RENTENPUNKTE (grob) ===
-  // 1 Rentenpunkt = Durchschnittsbrutto ~45.358 €/Jahr
+  // 1 Rentenpunkt = Durchschnittsbrutto 2026: 51.944 €/Jahr (§ 69 SGB VI + Anlage 1).
   const jahresbrutto = verdienst * 12;
   const rentenpunkteProJahrMitRv = rentenversicherungspflicht && status === 'minijob'
-    ? Math.round((jahresbrutto / 45358) * 1000) / 1000
+    ? Math.round((jahresbrutto / DURCHSCHNITTSENTGELT_2026) * 1000) / 1000
     : 0;
 
   return {
