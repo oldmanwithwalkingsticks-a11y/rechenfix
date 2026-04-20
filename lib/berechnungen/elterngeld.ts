@@ -1,11 +1,21 @@
 export type ElterngeldVariante = 'basis' | 'plus';
 
+/**
+ * § 1 Abs. 8 BEEG — Einkommensgrenze für Anspruchsberechtigung.
+ * Gilt für Paare UND Alleinerziehende gleichermaßen.
+ * Stand: 01.01.2026 (ab 01.04.2025 für Neugeburten, ab 01.01.2026 alle Fälle).
+ */
+export const ELTERNGELD_EINKOMMENSGRENZE_2026 = 175_000;
+
 export interface ElterngeldEingabe {
   nettoVorGeburt: number;
   nettoDanach: number;
   variante: ElterngeldVariante;
   mehrlinge: boolean;
   geschwisterbonus: boolean;
+  /** Zu versteuerndes Jahreseinkommen. Bei Paaren: Summe beider zvE.
+   *  Wenn undefined oder null: keine Anspruchsprüfung, Berechnung läuft normal. */
+  zvE?: number | null;
 }
 
 export interface ElterngeldErgebnis {
@@ -17,6 +27,8 @@ export interface ElterngeldErgebnis {
   mehrlingszuschlag: number;
   ersatzrate: number;
   relevantesEinkommen: number;
+  /** true, wenn zvE > ELTERNGELD_EINKOMMENSGRENZE_2026 — kein Anspruch (§ 1 Abs. 8 BEEG). */
+  anspruchAusgeschlossen: boolean;
 }
 
 export interface ElterngeldVergleich {
@@ -50,9 +62,29 @@ function berechneErsatzrate(netto: number): number {
 }
 
 export function berechneElterngeld(eingabe: ElterngeldEingabe): ElterngeldErgebnis | null {
-  const { nettoVorGeburt, nettoDanach, variante, mehrlinge, geschwisterbonus } = eingabe;
+  const { nettoVorGeburt, nettoDanach, variante, mehrlinge, geschwisterbonus, zvE } = eingabe;
 
   if (nettoVorGeburt < 0 || nettoDanach < 0) return null;
+
+  // § 1 Abs. 8 BEEG — Anspruchsausschluss bei zvE > 175.000 €.
+  // Nur prüfen, wenn zvE angegeben wurde. Bei fehlendem zvE läuft Berechnung
+  // normal, UI zeigt ergänzend einen Hinweis an.
+  const anspruchAusgeschlossen =
+    typeof zvE === 'number' && zvE > ELTERNGELD_EINKOMMENSGRENZE_2026;
+
+  if (anspruchAusgeschlossen) {
+    return {
+      monatlich: 0,
+      gesamt: 0,
+      bezugsMonate: variante === 'plus' ? 28 : 14,
+      basisBetrag: 0,
+      geschwisterbonusBetrag: 0,
+      mehrlingszuschlag: 0,
+      ersatzrate: 0,
+      relevantesEinkommen: Math.max(0, nettoVorGeburt - nettoDanach),
+      anspruchAusgeschlossen: true,
+    };
+  }
 
   // Relevantes Einkommen = Differenz zwischen vorher und nachher
   const relevantesEinkommen = Math.max(0, nettoVorGeburt - nettoDanach);
@@ -108,6 +140,7 @@ export function berechneElterngeld(eingabe: ElterngeldEingabe): ElterngeldErgebn
     mehrlingszuschlag,
     ersatzrate: Math.round(ersatzrate * 1000) / 10,
     relevantesEinkommen,
+    anspruchAusgeschlossen: false,
   };
 }
 

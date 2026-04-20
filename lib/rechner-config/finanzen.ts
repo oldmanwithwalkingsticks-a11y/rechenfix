@@ -257,13 +257,13 @@ Wichtig zu beachten: In der Praxis mindern die Abgeltungssteuer (25% plus Solida
 
 Elterngeld ist eine staatliche Leistung für Eltern, die nach der Geburt ihres Kindes vorübergehend weniger oder gar nicht arbeiten. Es soll den Einkommensverlust nach der Geburt teilweise ausgleichen und ermöglicht es Müttern und Vätern, sich in den ersten Lebensmonaten intensiv um ihr Kind zu kümmern. Das Elterngeld wird von den Elterngeldstellen der jeweiligen Bundesländer ausgezahlt und ist im Bundeselterngeld- und Elternzeitgesetz (BEEG) geregelt.
 
-Grundsätzlich gibt es zwei Varianten: Das Basiselterngeld und das ElterngeldPlus. Beide können auch kombiniert werden, um den Bezugszeitraum flexibel zu gestalten. Seit der Reform 2024 gelten zudem neue Einkommensgrenzen für den Bezug von Elterngeld.
+Grundsätzlich gibt es zwei Varianten: Das Basiselterngeld und das ElterngeldPlus. Beide können auch kombiniert werden, um den Bezugszeitraum flexibel zu gestalten. Seit der Reform 2025 gilt zudem eine einheitliche Einkommensgrenze für den Bezug von Elterngeld.
 
 **Wer hat Anspruch auf Elterngeld?**
 
 Anspruch auf Elterngeld haben Mütter und Väter, die ihr Kind nach der Geburt selbst betreuen und erziehen, in Deutschland wohnen oder ihren gewöhnlichen Aufenthalt hier haben, mit ihrem Kind in einem gemeinsamen Haushalt leben und nicht mehr als 32 Stunden pro Woche (im Durchschnitt) erwerbstätig sind. Auch Adoptiveltern und in bestimmten Fällen Verwandte bis dritten Grades können Elterngeld erhalten.
 
-Seit April 2024 liegt die Einkommensgrenze bei 200.000 Euro zu versteuerndem Jahreseinkommen für Paare und 150.000 Euro für Alleinerziehende. Wer darüber liegt, hat keinen Anspruch auf Elterngeld. Zuvor lag die Grenze bei 300.000 Euro (Paare) bzw. 250.000 Euro (Alleinerziehende).
+Seit 01.04.2025 liegt die Einkommensgrenze einheitlich bei 175.000 Euro zu versteuerndem Jahreseinkommen (zvE) — für Paare und Alleinerziehende gleichermaßen (§ 1 Abs. 8 BEEG). Wer darüber liegt, hat keinen Anspruch auf Elterngeld. Für Geburten ab 01.01.2026 gilt die Grenze für alle laufenden Fälle einheitlich. Zuvor (bis 31.03.2024) lag die Grenze bei 300.000 Euro (Paare) bzw. 250.000 Euro (Alleinerziehende), dazwischen galt eine Übergangsregelung von 200.000 / 150.000 Euro.
 
 Auch Eltern ohne Erwerbseinkommen vor der Geburt — etwa Studierende, Hausfrauen oder Hausmänner — erhalten den Mindestbetrag von 300 Euro (Basiselterngeld) bzw. 150 Euro (ElterngeldPlus) pro Monat.
 
@@ -301,6 +301,10 @@ Beide Zuschläge werden unabhängig von der Höhe des regulären Elterngeldes ge
 - **Schritt 4 — Antrag einreichen:** Reichen Sie den Antrag bei der Elterngeldstelle ein — persönlich, per Post oder je nach Bundesland auch online. Elterngeld wird rückwirkend maximal für 3 Lebensmonate vor dem Monat der Antragstellung gezahlt.
 - **Schritt 5 — Bescheid abwarten:** Die Bearbeitungszeit beträgt je nach Bundesland 4–8 Wochen. Sie erhalten einen schriftlichen Bescheid mit der Berechnung.`,
     faq: [
+      {
+        frage: 'Wer hat 2026 keinen Elterngeldanspruch mehr?',
+        antwort: 'Seit 01.04.2025 gilt einheitlich: Liegt das zu versteuernde Jahreseinkommen (zvE) über 175.000 Euro, besteht nach § 1 Abs. 8 BEEG kein Anspruch auf Elterngeld. Diese Grenze gilt für Paare UND Alleinerziehende gleichermaßen. Für Geburten ab 01.01.2026 greift die Grenze für alle laufenden Fälle. Maßgeblich ist das zvE aus dem Steuerbescheid des Kalenderjahres vor der Geburt. Die früheren Grenzen (200.000 / 150.000 Euro seit 2024, davor 300.000 / 250.000 Euro) sind entfallen.',
+      },
       {
         frage: 'Wie lange bekommt man Elterngeld?',
         antwort: 'Basiselterngeld wird für maximal 14 Monate gezahlt (12 Monate für einen Elternteil plus 2 Partnermonate). ElterngeldPlus kann bis zu 28 Monate bezogen werden (24 plus 4 Partnermonate). Beide Varianten können kombiniert werden — ein Monat Basiselterngeld entspricht zwei Monaten ElterngeldPlus.',

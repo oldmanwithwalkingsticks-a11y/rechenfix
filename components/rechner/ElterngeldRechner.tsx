@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { berechneElterngeld, berechneVergleich, type ElterngeldVariante } from '@/lib/berechnungen/elterngeld';
+import { berechneElterngeld, berechneVergleich, ELTERNGELD_EINKOMMENSGRENZE_2026, type ElterngeldVariante } from '@/lib/berechnungen/elterngeld';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
@@ -13,21 +13,25 @@ import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 export default function ElterngeldRechner() {
   const [nettoVorGeburt, setNettoVorGeburt] = useState('2500');
   const [nettoDanach, setNettoDanach] = useState('0');
+  const [zvEInput, setZvEInput] = useState('');
   const [variante, setVariante] = useState<ElterngeldVariante>('basis');
   const [mehrlinge, setMehrlinge] = useState(false);
   const [geschwisterbonus, setGeschwisterbonus] = useState(false);
 
   const nVor = parseDeutscheZahl(nettoVorGeburt);
   const nNach = parseDeutscheZahl(nettoDanach);
+  const zvETrim = zvEInput.trim();
+  const zvE = zvETrim === '' ? null : parseDeutscheZahl(zvETrim);
+  const grenzeFormatiert = ELTERNGELD_EINKOMMENSGRENZE_2026.toLocaleString('de-DE');
 
   const ergebnis = useMemo(
-    () => berechneElterngeld({ nettoVorGeburt: nVor, nettoDanach: nNach, variante, mehrlinge, geschwisterbonus }),
-    [nVor, nNach, variante, mehrlinge, geschwisterbonus]
+    () => berechneElterngeld({ nettoVorGeburt: nVor, nettoDanach: nNach, variante, mehrlinge, geschwisterbonus, zvE }),
+    [nVor, nNach, variante, mehrlinge, geschwisterbonus, zvE]
   );
 
   const vergleich = useMemo(
-    () => berechneVergleich({ nettoVorGeburt: nVor, nettoDanach: nNach, variante, mehrlinge, geschwisterbonus }),
-    [nVor, nNach, variante, mehrlinge, geschwisterbonus]
+    () => berechneVergleich({ nettoVorGeburt: nVor, nettoDanach: nNach, variante, mehrlinge, geschwisterbonus, zvE }),
+    [nVor, nNach, variante, mehrlinge, geschwisterbonus, zvE]
   );
 
   const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -84,6 +88,23 @@ export default function ElterngeldRechner() {
         </p>
       </div>
 
+      {/* zu versteuerndes Einkommen (für Anspruchsprüfung) */}
+      <div className="mb-5">
+        <label htmlFor="elterngeld-zve" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          Zu versteuerndes Jahreseinkommen (zvE)
+        </label>
+        <NummerEingabe
+          id="elterngeld-zve"
+          value={zvEInput}
+          onChange={setZvEInput}
+          placeholder="z. B. 60000"
+          einheit="€"
+        />
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          zvE aus Steuerbescheid. Bei Paaren: Summe beider zvE. Über {grenzeFormatiert} € kein Elterngeldanspruch (§ 1 Abs. 8 BEEG).
+        </p>
+      </div>
+
       {/* Toggles */}
       <div className="flex flex-col sm:flex-row gap-3 mb-6">
         <ToggleButton
@@ -100,9 +121,33 @@ export default function ElterngeldRechner() {
         />
       </div>
 
+      {/* Kein Anspruch — § 1 Abs. 8 BEEG */}
+      {ergebnis && ergebnis.anspruchAusgeschlossen && (
+        <div className="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/30 rounded-2xl p-6 mb-4">
+          <p className="text-base font-bold text-red-700 dark:text-red-400 mb-2">
+            Kein Anspruch auf Elterngeld
+          </p>
+          <p className="text-sm text-red-800 dark:text-red-300 leading-relaxed">
+            Ihr zu versteuerndes Jahreseinkommen (zvE) liegt über {grenzeFormatiert} €. Seit 01.04.2025 (für alle laufenden Fälle ab 01.01.2026) besteht nach <strong>§ 1 Abs. 8 BEEG</strong> kein Anspruch auf Elterngeld — die Grenze gilt sowohl für Paare als auch für Alleinerziehende.
+          </p>
+          <p className="text-xs text-red-700 dark:text-red-400 mt-3">
+            Bezugsdauer und Ersatzrate entfallen. Der Mutterschutz-Zuschuss bleibt davon unberührt.
+          </p>
+        </div>
+      )}
+
       {/* Ergebnis */}
-      {ergebnis && (
+      {ergebnis && !ergebnis.anspruchAusgeschlossen && (
         <div className="space-y-4">
+          {/* zvE-Hinweis, wenn nicht angegeben */}
+          {zvE === null && (
+            <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-3">
+              <p className="text-xs text-amber-800 dark:text-amber-300 leading-relaxed">
+                <strong>Hinweis:</strong> Ohne Angabe des zvE keine Anspruchsprüfung — bei zvE über {grenzeFormatiert} € besteht kein Elterngeldanspruch (§ 1 Abs. 8 BEEG).
+              </p>
+            </div>
+          )}
+
           {/* Hauptergebnis */}
           <div className="bg-gradient-to-br from-primary-50 to-primary-100/50 dark:from-primary-500/15 dark:to-primary-600/10 rounded-2xl p-6 text-center">
             <p className="text-sm text-primary-600 dark:text-primary-400 font-medium mb-1">
@@ -250,7 +295,7 @@ export default function ElterngeldRechner() {
         </div>
       )}
 
-      {ergebnis && (
+      {ergebnis && !ergebnis.anspruchAusgeschlossen && (
         <AffiliateBox programId="wiso" variant="compact" />
       )}
     </div>

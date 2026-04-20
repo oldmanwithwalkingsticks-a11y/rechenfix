@@ -8,6 +8,8 @@ interface NummerEingabeProps {
   placeholder?: string;
   className?: string;
   einheit?: string;
+  /** HTML-id zur Verknüpfung mit <label htmlFor={...}> (A11y). */
+  id?: string;
   /** Schrittweite für +/- Buttons (nicht verwendet, nur für Kompatibilität) */
   step?: string;
 }
@@ -29,6 +31,7 @@ export default function NummerEingabe({
   placeholder,
   className = '',
   einheit,
+  id,
 }: NummerEingabeProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const neuerWert = e.target.value;
@@ -55,6 +58,7 @@ export default function NummerEingabe({
         value={value}
         onChange={handleChange}
         placeholder={placeholder}
+        id={id}
         className={`input-field ${einheitPadding} ${className}`}
       />
       {einheit && (
