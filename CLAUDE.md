@@ -418,3 +418,5 @@ Reihenfolge nach Freigabe: erst 85 (Warning wegräumen), dann 68 (CMP dazu).
 - **109** — Welle 1 Stufe 3 Audit (Familie + Arbeitsrecht, 6 Rechner, Bericht + Testfälle) ✅
 - **110** — AdSense-Basis-Loader in `<head>` für Crawl-Erkennung ✅
 - **111** — Welle 1 Stufe 3 P1-Pass: Elterngeld 175k-Grenze + Ersatzrate aus Netto vor Geburt + 2770-Deckel; Minijob Rentenpunkte-Divisor SSOT `DURCHSCHNITTSENTGELT_2026` ✅
+- **111a** — UX-Polish: 2.770-€-Deckel-Hinweis im Elterngeld-Aufschlüsselungsblock (kontextabhängig) ✅
+- **112** — Welle 1 Stufe 3 P2-Pass: Mutterschutz-Minijob-Familienvers., Kündigungsfrist-Fristende (BAG 10 AZR 64/17), Teilzeit-Vollzeit-Tage-Input + § 5 Abs. 2 BUrlG-Rundung (Teilzeit + Urlaubstage), Minijob Stichtag-Switch `MINDESTLOHN`; Bonus: Rentenrechner-SEO auf 2026er Werte ✅
