@@ -6,6 +6,8 @@
 **Scope:** 8 Rechner
 **Audit-Ausgang:** Nur Befund + Priorisierung, kein Code-Fix
 
+> **Teil-Abschluss Prompt 115a (2026-04-21):** Alle 3 P1 + 4 P2 im MidijobRechner behoben (BE-Formel, LSt, Soli, SV-SSOT, PV 1,8 %, PV-Kinderabschlag, KiSt-Bundesland). Neue SSOT-Lib `lib/berechnungen/midijob-uebergang.ts` für § 20a SGB IV. Restliche P1/P2/P3 in Erbschaft, Schenkung, AfA, Firmenwagen, KESt offen für Prompts 115b / 116 / 117.
+
 ---
 
 ## Zusammenfassung

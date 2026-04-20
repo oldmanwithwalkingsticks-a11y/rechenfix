@@ -176,6 +176,7 @@ Alle jahresabhängigen und gesetzlich definierten Werte liegen in `lib/berechnun
 | `rente.ts` **(erweitert, 04/2026)** | Aktueller Rentenwert § 68 SGB VI | `RENTENWERT`, `getAktuellerRentenwert(stichtag)` |
 | `pfaendung.ts` **(erweitert, 04/2026)** | § 850c ZPO mit Stichtag-Switch | `getAktuellePfaendungsParameter(stichtag)`, `PFAENDUNG_2025`, `PFAENDUNG_2026` |
 | `minijob.ts`, `midijob.ts` | Geringfügigkeitsgrenze, Übergangsbereich | aus `mindestlohn.ts` abgeleitet |
+| `midijob-uebergang.ts` **(neu, Prompt 115a)** | § 20a SGB IV BE-Formel Midijob | `berechneBemessungsgrundlageAN`, `MIDIJOB_OBERGRENZE_MONAT`, `FAKTOR_F_2026`, `getMidijobUntergrenze` |
 | `steuerprogression.ts` | Grenz-/Durchschnittssteuersatz | nutzt `einkommensteuer.ts` |
 | `kfz-steuer.ts`, `balkon-solar.ts`, `waermepumpe.ts` | Domänen-spezifisch | |
 
@@ -245,7 +246,9 @@ export const WERT = getAktuellerWert();
 | Kinderfreibetrag gesamt (einzeln, pro Elternteil) | **4.878 €** | vermutlich 01.01.2027 | `kindergeld.ts` als `KIFB_GESAMT_EINZEL_2026` | § 32 Abs. 6 EStG |
 | Mindestlohn | 13,90 €/h (ab 01.01.2027: 14,60 €) | **01.01.2027 Switch automatisch** | `mindestlohn.ts` | MiLoG |
 | Minijob-Grenze | 603 € / Monat (Jahr: 7.236 €) | 01.01.2027 auf 633 € | `mindestlohn.ts` | § 8 SGB IV |
-| Midijob-Untergrenze | 603,01 € / Monat | 01.01.2027 | `mindestlohn.ts` | § 20 SGB IV |
+| Midijob-Untergrenze | 603,01 € / Monat | 01.01.2027 | `mindestlohn.ts`, abgeleitet in `midijob-uebergang.ts` (`getMidijobUntergrenze`) | § 20 SGB IV |
+| Midijob-Obergrenze | 2.000 €/Monat | keine (seit 01.01.2023) | `midijob-uebergang.ts` (`MIDIJOB_OBERGRENZE_MONAT`) | § 20a SGB IV |
+| Midijob F-Faktor | 0,6847 (jährlich neu) | 01.01.2027 | `midijob-uebergang.ts` (`FAKTOR_F_2026`) | § 20a Abs. 2 SGB IV |
 | BBG KV/PV | 5.812,50 € / Monat (69.750 € / Jahr) | 01.01.2027 | `brutto-netto.ts` als `BBG_KV_MONAT` | SV-RechengrößenVO 2026 |
 | BBG RV (einheitlich) | 8.450 € / Monat (101.400 € / Jahr) | 01.01.2027 | `brutto-netto.ts` als `BBG_RV_MONAT` | SV-RechengrößenVO 2026 |
 | JAEG / Versicherungspflichtgrenze | 77.400 € / Jahr (6.450 € / Monat) | 01.01.2027 | `sv-parameter.ts` als `JAEG_2026_*` | BMG |
@@ -425,3 +428,4 @@ Reihenfolge nach Freigabe: erst 85 (Warning wegräumen), dann 68 (CMP dazu).
 - **112** — Welle 1 Stufe 3 P2-Pass: Mutterschutz-Minijob-Familienvers., Kündigungsfrist-Fristende (BAG 10 AZR 64/17), Teilzeit-Vollzeit-Tage-Input + § 5 Abs. 2 BUrlG-Rundung (Teilzeit + Urlaubstage), Minijob Stichtag-Switch `MINDESTLOHN`; Bonus: Rentenrechner-SEO auf 2026er Werte ✅
 - **113** — Stufe 3 Abschluss: SSOT-Cleanup (`_helpers.ts` neu mit `rundeBuRlGKonform` + `WOCHEN_PRO_MONAT`, `BUNDESLAENDER`-Dedup) + P3-Polish (Elterngeld-Plus-Block, Mutterschutz-Hint, Kündigungsfrist-Kommentar, Minijob-FAQ); Welle 1 Stufe 3 formal abgeschlossen ✅
 - **114** — Welle 1 Stufe 4a Audit (Spezial-Steuer, 8 Rechner, Bericht + Testfälle in `docs/audit-arbeitspapiere/`, kein Code-Fix): 6 P1 + 12 P2 + 11 P3; MidijobRechner als Hot Spot (BE-Formel falsch, Steuerklassen-Faktor × 1,15 erfunden, Soli-Wiederholungs-Bug); Erbschaft+Schenkung § 19 Abs. 3-Härtefall fehlt ✅
+- **115a** — Midijob komplett saniert: neue SSOT-Lib `midijob-uebergang.ts` (§ 20a SGB IV, Stichtag-Switch für UG); BE-Formel gefixt (P1), LSt via `berechneLohnsteuerJahr` statt × 1,15 (P1), Soli via `berechneSoli` (P1); SV-SSOT-Imports, PV 1,7→1,8 %, PV-Kinderabschlag-Input, KiSt-Bundesland-Dropdown ✅
