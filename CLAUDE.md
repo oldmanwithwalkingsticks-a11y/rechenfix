@@ -166,7 +166,7 @@ Alle jahresabhängigen und gesetzlich definierten Werte liegen in `lib/berechnun
 | Lib | Zweck | Wichtigste Exports |
 |---|---|---|
 | `einkommensteuer.ts` | § 32a EStG 2024/2025/2026, Soli-Freigrenzen | `berechneEStGrund(zvE, jahr)`, `PARAMS[jahr]` |
-| `lohnsteuer.ts` | LSt nach § 39b PAP, Vorsorgepauschale | `berechneLohnsteuerJahr(brutto, steuerklasse, jahr)` |
+| `lohnsteuer.ts` | LSt nach § 39b PAP, Vorsorgepauschale; Kl. V/VI via empirischer Lookup-Tabelle (LST_LOOKUP_V/VI_2026), Voll-PAP offen | `berechneLohnsteuerJahr(brutto, steuerklasse, jahr)`, `LST_LOOKUP_V_2026`, `LST_LOOKUP_VI_2026`, `getInterpolierteLst` |
 | `brutto-netto.ts` | BBG KV/PV/RV, Gesamtberechnung Netto | `BBG_KV_MONAT`, `BBG_RV_MONAT`, `berechneBruttoNetto(...)` |
 | `sv-parameter.ts` | GKV-Zusatzbeitrag Ø, JAEG | `KV_ZUSATZBEITRAG_AN_DURCHSCHNITT_2026`, `JAEG_2026_JAHR`, `JAEG_2026_MONAT` |
 | `kindergeld.ts` | Kindergeld + Günstigerprüfung | `KINDERGELD_2026`, `berechneKindergeld(...)` |
@@ -181,6 +181,10 @@ Alle jahresabhängigen und gesetzlich definierten Werte liegen in `lib/berechnun
 | `kfz-steuer.ts`, `balkon-solar.ts`, `waermepumpe.ts` | Domänen-spezifisch | |
 
 **Verboten:** Eigene ESt-, LSt-, SV-, Kindergeld-, Pfändungs- oder Mindestlohn-Formeln in Komponenten oder Rechnern. Immer die zentrale Lib importieren. Diese Regel ergab sich aus Sprint 1 (April 2026) und wurde im Jahresaudit 2026 (Prompts 86–91) nochmal bestätigt, als in fünf Rechnern Formel-Duplikate mit 1–2 Jahre veralteten Werten gefunden wurden.
+
+**Konkret verbotenes Muster (Prompt 115b2, April 2026):**
+
+- Eigene Lohnsteuer-Formeln für Kl. V/VI — nur `berechneLohnsteuerJahr` aus `lohnsteuer.ts` verwenden. Die Kl. V/VI-Behandlung dort ist aktuell empirisch kalibriert (Lookup-Tabellen `LST_LOOKUP_V_2026` / `LST_LOOKUP_VI_2026`) mit Δ=0 an 20 BMF-Stützpunkten, ±5 € Toleranz dazwischen. Änderungen an den Lookup-Tabellen erfordern Re-Verifikation gegen bmf-steuerrechner.de an allen 20 Stützpunkten über [scripts/verify-lohnsteuer-vvi.ts](scripts/verify-lohnsteuer-vvi.ts). Voll-PAP-Implementation (§ 39b Abs. 2 Satz 7 EStG) bleibt offen als Wochenend-Refactor.
 
 **Konkret verbotene Muster (Audit-Welle 1, Prompts 94–95):**
 
@@ -292,6 +296,14 @@ export const WERT = getAktuellerWert();
 - Grundtarif: 20.350 € ESt
 - Splittingtarif: 40.700 € ESt
 - Milderungszone: 11,9 % auf ESt-Differenz, Obergrenze × 1,859375 der Freigrenze
+
+## Methodische Lehre (Prompt 115b2, April 2026)
+
+Der Kl. V/VI-LSt-Bug in `berechneLohnsteuerJahr` war strukturell seit der ursprünglichen Implementation vorhanden — selbst-erfundene Näherungen mit Code-Kommentar „Stark vereinfachte Approximation nach PAP". Er hat alle bisherigen Audit-Sprints überlebt, weil Testfälle sich auf Kl. I und IV konzentrierten.
+
+**Regel für künftige LSt-Audits:** bei jedem Rechner, der `berechneLohnsteuerJahr` konsumiert, MINDESTENS je einen Testfall in Kl. V UND Kl. VI durchrechnen — bei Niedriglohn-Bruttos (800–1.500 €) UND bei Mittellohn (3.000–4.000 €). Niedriglohn deckt Grundfreibetrag- und PAP-Mindestregelungen ab; Mittellohn die Zonen-Übergänge.
+
+**Regel für SSOT-Lib-Änderungen mit empirischer Kalibrierung:** Wenn eine Lib-Funktion via Lookup-Tabelle gegen eine externe Referenz kalibriert ist (hier: BMF-PAP), MUSS ein UI-Hinweis auf den konsumierenden Rechnern darauf verweisen, solange die Voll-Implementation offen ist. Das dokumentiert die technische Schuld für Nutzer sichtbar und hält den Aufrüttelungs-Druck für den späteren Refactor hoch.
 
 ## Gelernte Regeln (Sprint 1, April 2026)
 
@@ -429,3 +441,5 @@ Reihenfolge nach Freigabe: erst 85 (Warning wegräumen), dann 68 (CMP dazu).
 - **113** — Stufe 3 Abschluss: SSOT-Cleanup (`_helpers.ts` neu mit `rundeBuRlGKonform` + `WOCHEN_PRO_MONAT`, `BUNDESLAENDER`-Dedup) + P3-Polish (Elterngeld-Plus-Block, Mutterschutz-Hint, Kündigungsfrist-Kommentar, Minijob-FAQ); Welle 1 Stufe 3 formal abgeschlossen ✅
 - **114** — Welle 1 Stufe 4a Audit (Spezial-Steuer, 8 Rechner, Bericht + Testfälle in `docs/audit-arbeitspapiere/`, kein Code-Fix): 6 P1 + 12 P2 + 11 P3; MidijobRechner als Hot Spot (BE-Formel falsch, Steuerklassen-Faktor × 1,15 erfunden, Soli-Wiederholungs-Bug); Erbschaft+Schenkung § 19 Abs. 3-Härtefall fehlt ✅
 - **115a** — Midijob komplett saniert: neue SSOT-Lib `midijob-uebergang.ts` (§ 20a SGB IV, Stichtag-Switch für UG); BE-Formel gefixt (P1), LSt via `berechneLohnsteuerJahr` statt × 1,15 (P1), Soli via `berechneSoli` (P1); SV-SSOT-Imports, PV 1,7→1,8 %, PV-Kinderabschlag-Input, KiSt-Bundesland-Dropdown ✅
+- **115b** — Analyse Lohnsteuer-Kl.V/VI-Bug in `berechneLohnsteuerJahr` (nur Analyse, kein Fix; `docs/audit-arbeitspapiere/lohnsteuer-v-vi-analyse.md`) ✅
+- **115b2** — Fix Lohnsteuer-Kl.V/VI via empirischer Lookup-Kalibrierung (20 BMF-Stützpunkte, Δ=0 an Stützpunkten, UI-Hinweis auf 3 Rechnern, Verifikations-Script `scripts/verify-lohnsteuer-vvi.ts`) ✅

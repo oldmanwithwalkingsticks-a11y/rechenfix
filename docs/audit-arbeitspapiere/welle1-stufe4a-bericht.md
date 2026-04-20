@@ -8,6 +8,10 @@
 
 > **Teil-Abschluss Prompt 115a (2026-04-21):** Alle 3 P1 + 4 P2 im MidijobRechner behoben (BE-Formel, LSt, Soli, SV-SSOT, PV 1,8 %, PV-Kinderabschlag, KiSt-Bundesland). Neue SSOT-Lib `lib/berechnungen/midijob-uebergang.ts` für § 20a SGB IV. Restliche P1/P2/P3 in Erbschaft, Schenkung, AfA, Firmenwagen, KESt offen für Prompts 115b / 116 / 117.
 
+> **Nachtrag Prompt 115b (2026-04-21):** Während der Live-Verifikation nach 115a wurde ein schwerwiegender P1-Bug in `berechneLohnsteuerJahr` für Kl. V/VI entdeckt — technisch außerhalb Stufe-4a-Scope (zentrale SSOT-Lib aus Welle 1 Stufe 1). Analyse in [lohnsteuer-v-vi-analyse.md](lohnsteuer-v-vi-analyse.md).
+
+> **Nachtrag 2 Prompt 115b2 (2026-04-21):** Der Kl. V/VI-Bug wurde via empirischer Lookup-Kalibrierung behoben. 20 BMF-Stützpunkte mit Δ = 0,00 € verifiziert (Verifikations-Script `scripts/verify-lohnsteuer-vvi.ts`), ±5 €/Monat Toleranz zwischen Stützpunkten. UI-Hinweis auf 3 Rechnern (Brutto-Netto, Lohnsteuer, Midijob — Nebenjob entfiel, da kein Steuerklasse-UI). Voll-PAP-Implementation bleibt offen als separater Refactor-Prompt.
+
 ---
 
 ## Zusammenfassung
