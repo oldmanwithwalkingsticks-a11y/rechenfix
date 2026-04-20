@@ -228,10 +228,12 @@ export function berechneLohnsteuerJahr(
     ? berechneVorsorgepauschale2026(bruttoJahr, sk, vorsorge)
     : vorsorgepauschale(bruttoJahr, sk);
 
-  // Steuerklasse VI: keine Freibeträge
+  // Steuerklasse VI: empirisch kalibrierter Lookup (kein Grundfreibetrag,
+  // kein WK-Pauschbetrag). Der frühere Grundtarif-Ansatz mit 12.348 €
+  // Grundfreibetrag lieferte systematisch zu niedrige LSt (0 € bei
+  // Brutto unter GF, −85 % bei 1.500 €/Mon gegenüber BMF).
   if (sk === 6) {
-    const zvE = Math.max(0, bruttoJahr - vorsorgeBetrag);
-    return berechneEStGrund(zvE, 2026);
+    return getInterpolierteLst(bruttoJahr, LST_LOOKUP_VI_2026);
   }
 
   // Für alle anderen: Freibeträge abziehen
