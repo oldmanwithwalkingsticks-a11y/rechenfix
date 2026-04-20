@@ -108,24 +108,23 @@ export function berechneElterngeld(eingabe: ElterngeldEingabe): ElterngeldErgebn
   const gedeckeltesVor = Math.min(nettoVorGeburt, ELTERNGELD_VORGEBURT_DECKEL_2026);
   const relevantesEinkommen = Math.max(0, gedeckeltesVor - nettoDanach);
 
-  // Basis-Elterngeld berechnen
-  let basisBetrag = relevantesEinkommen * ersatzrate;
-
-  // Mindest- und Höchstbeträge
+  // Basis-Elterngeld bzw. ElterngeldPlus berechnen.
+  // BEEG § 4a: ElterngeldPlus = halbiertes Basiselterngeld, eigene Grenzen 150/900.
   const istPlus = variante === 'plus';
-  const minBetrag = istPlus ? 150 : 300;
-  const maxBetrag = istPlus ? 900 : 1800;
+  const roh = relevantesEinkommen * ersatzrate;
+  let basisBetrag: number;
 
-  // Mindestens Mindestbetrag (auch bei 0 Einkommen)
-  basisBetrag = Math.max(minBetrag, basisBetrag);
-  basisBetrag = Math.min(maxBetrag, basisBetrag);
-
-  // Bei ElterngeldPlus: halbierter Betrag
-  if (istPlus && relevantesEinkommen > 0) {
-    // ElterngeldPlus = maximal die Hälfte des Basiselterngeldes
-    const basisVoll = Math.min(1800, Math.max(300, relevantesEinkommen * ersatzrate));
-    basisBetrag = Math.min(900, basisVoll / 2);
-    basisBetrag = Math.max(150, basisBetrag);
+  if (istPlus) {
+    // Zunächst volles Basiselterngeld ermitteln (Grenzen 300/1800), dann halbieren
+    // und auf Plus-Grenzen 150/900 klammern. Bei rel. Einkommen = 0 greift der
+    // Mindestbetrag 300 → halbiert 150 = Plus-Minimum.
+    const basisVoll = relevantesEinkommen > 0
+      ? Math.min(1800, Math.max(300, roh))
+      : 300;
+    basisBetrag = Math.min(900, Math.max(150, basisVoll / 2));
+  } else {
+    // Basiselterngeld: direkt auf 300/1800 klammern
+    basisBetrag = Math.min(1800, Math.max(300, roh));
   }
 
   // Geschwisterbonus: +10%, mindestens 75€ (Basis) / 37,50€ (Plus)
