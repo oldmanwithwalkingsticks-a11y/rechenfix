@@ -7,7 +7,12 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 import { berechneLohnsteuerJahr } from '@/lib/berechnungen/lohnsteuer';
-import { berechneSoli } from '@/lib/berechnungen/einkommensteuer';
+import {
+  berechneSoli,
+  berechneKirchensteuerByBundesland,
+  BUNDESLAENDER,
+  type Bundesland,
+} from '@/lib/berechnungen/einkommensteuer';
 import {
   berechneBemessungsgrundlageAN,
   getMidijobUntergrenze,
@@ -49,6 +54,7 @@ export default function MidijobRechner() {
   const [brutto, setBrutto] = useState('1200');
   const [klasse, setKlasse] = useState<Steuerklasse>('I');
   const [kirchensteuer, setKirchensteuer] = useState(false);
+  const [bundesland, setBundesland] = useState<Bundesland>('Nordrhein-Westfalen');
   const [anzahlKinder, setAnzahlKinder] = useState<number>(0);
 
   const ergebnis = useMemo(() => {
@@ -81,7 +87,8 @@ export default function MidijobRechner() {
     const lstJahr = lohnsteuer * 12;
     const soli = berechneSoli(lstJahr, false, 2026) / 12;
 
-    const kiSt = kirchensteuer ? lohnsteuer * 0.09 : 0;
+    // KiSt je Bundesland (8 % BY/BW, 9 % sonst) — § 51a EStG + Landes-KiStG.
+    const kiSt = kirchensteuer ? berechneKirchensteuerByBundesland(lohnsteuer, bundesland) : 0;
 
     const netto = b - anSv - lohnsteuer - soli - kiSt;
 
@@ -91,7 +98,7 @@ export default function MidijobRechner() {
     const ersparnis = netto - nettoRegulaer;
 
     return { b, be, imBereich, anSv, agSv, lohnsteuer, soli, kiSt, netto, nettoRegulaer, ersparnis };
-  }, [brutto, klasse, kirchensteuer, anzahlKinder]);
+  }, [brutto, klasse, kirchensteuer, bundesland, anzahlKinder]);
 
   const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
@@ -173,6 +180,23 @@ export default function MidijobRechner() {
             </button>
           ))}
         </div>
+        {kirchensteuer && (
+          <div className="mt-3">
+            <label htmlFor="midijob-bundesland" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
+              Bundesland (8 % in Bayern und Baden-Württemberg, sonst 9 %)
+            </label>
+            <select
+              id="midijob-bundesland"
+              value={bundesland}
+              onChange={e => setBundesland(e.target.value as Bundesland)}
+              className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"
+            >
+              {BUNDESLAENDER.map(bl => (
+                <option key={bl} value={bl}>{bl}</option>
+              ))}
+            </select>
+          </div>
+        )}
       </div>
 
       {/* ERGEBNIS */}
