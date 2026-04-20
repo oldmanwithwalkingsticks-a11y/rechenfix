@@ -120,6 +120,9 @@ export default function MutterschutzRechner() {
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Netto-Monatsgehalt (Ø letzte 3 Monate)</label>
           <NummerEingabe value={nettoGehalt} onChange={setNettoGehalt} placeholder="z.B. 2500" einheit="€" />
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            Bei schwankendem Einkommen: Durchschnitt der letzten 3 abgerechneten Monate eingeben (§ 24i Abs. 2 SGB V).
+          </p>
         </div>
         <div>
           <label htmlFor="mutterschutz-select-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Beschäftigungsverhältnis</label>
