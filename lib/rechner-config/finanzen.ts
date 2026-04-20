@@ -271,11 +271,11 @@ Auch Eltern ohne Erwerbseinkommen vor der Geburt — etwa Studierende, Hausfraue
 
 Die Berechnung des Elterngeldes basiert auf dem durchschnittlichen monatlichen Nettoeinkommen aus Erwerbstätigkeit in den 12 Monaten vor der Geburt. Bei Arbeitnehmerinnen und Arbeitnehmern wird das Bruttoeinkommen um pauschalierte Abzüge für Steuern und Sozialversicherung gemindert. Mutterschaftsgeld und Arbeitgeberzuschuss werden auf das Elterngeld angerechnet.
 
-Die Standard-Ersatzrate beträgt 67% für Einkommen zwischen 1.000 und 1.200 Euro. Wer weniger als 1.000 Euro netto verdient hat, erhält eine höhere Ersatzrate: Pro 2 Euro unter 1.000 Euro steigt die Rate um 0,1 Prozentpunkte — bis maximal 100%. Wer mehr als 1.200 Euro netto verdient hat, erhält eine etwas niedrigere Rate: Pro 2 Euro über 1.200 Euro sinkt die Rate um 0,1 Prozentpunkte — aber nie unter 65%.
+Die Standard-Ersatzrate beträgt 67% für Einkommen zwischen 1.000 und 1.240 Euro. Wer weniger als 1.000 Euro netto verdient hat, erhält eine höhere Ersatzrate: Pro 2 Euro unter 1.000 Euro steigt die Rate um 0,1 Prozentpunkte — bis maximal 100%. Wer mehr als 1.240 Euro netto verdient hat, erhält eine etwas niedrigere Rate: Pro 2 Euro über 1.240 Euro sinkt die Rate um 0,1 Prozentpunkte — aber nie unter 65%.
 
 Mindest- und Höchstbeträge sorgen für eine Ober- und Untergrenze: Das Basiselterngeld beträgt mindestens 300 Euro und höchstens 1.800 Euro pro Monat. ElterngeldPlus beträgt mindestens 150 Euro und höchstens 900 Euro pro Monat.
 
-Falls Sie während der Elternzeit in Teilzeit arbeiten, wird das Teilzeiteinkommen vom vorherigen Einkommen abgezogen. Auf die Differenz (das sogenannte Einkommensdifferenz-Elterngeld) wird dann die Ersatzrate angewendet.
+Falls Sie während der Elternzeit in Teilzeit arbeiten, wird das Teilzeiteinkommen vom vorherigen Einkommen abgezogen und auf den Unterschiedsbetrag die Ersatzrate angewendet. Maßgeblich für die Ersatzrate bleibt jedoch Ihr Nettoeinkommen vor der Geburt — nicht der Unterschiedsbetrag. Außerdem wird das Vor-Geburt-Nettoeinkommen nach § 2 Abs. 3 BEEG höchstens mit 2.770 Euro/Monat angesetzt.
 
 **Basiselterngeld vs. ElterngeldPlus — was lohnt sich?**
 

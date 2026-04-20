@@ -7,6 +7,13 @@ export type ElterngeldVariante = 'basis' | 'plus';
  */
 export const ELTERNGELD_EINKOMMENSGRENZE_2026 = 175_000;
 
+/**
+ * § 2 Abs. 3 BEEG — Deckelung des anzusetzenden Vor-Geburt-Nettoeinkommens
+ * bei Teilzeit-Zuverdienst während Elternzeit. Das Einkommen vor der Geburt
+ * wird höchstens mit 2.770 €/Monat angesetzt, auch wenn es faktisch höher war.
+ */
+export const ELTERNGELD_VORGEBURT_DECKEL_2026 = 2_770;
+
 export interface ElterngeldEingabe {
   nettoVorGeburt: number;
   nettoDanach: number;
@@ -37,26 +44,31 @@ export interface ElterngeldVergleich {
 }
 
 /**
- * Berechnet die Ersatzrate basierend auf dem Nettoeinkommen.
- * - Netto < 1000€: Rate steigt um 0,1% pro 2€ unter 1000€ (max 100%)
- * - Netto 1000–1200€: 65%
- * - Netto > 1200€: Rate sinkt um 0,1% pro 2€ über 1200€ (min 65% → eigentlich min bei Geringverdienern)
+ * Berechnet die Ersatzrate nach § 2 Abs. 1+2 BEEG — IMMER bezogen auf das
+ * Nettoeinkommen VOR der Geburt (nicht auf den Unterschiedsbetrag bei
+ * Teilzeit-Zuverdienst).
+ *
+ * - Netto < 1.000 €: Rate steigt um 0,1 Prozentpunkte pro 2 € unter 1.000 €
+ *   bis max. 100 % (Geringverdiener-Bonus § 2 Abs. 2 Satz 1)
+ * - Netto 1.000–1.240 €: Plateau bei 67 %
+ * - Netto > 1.240 €: Rate sinkt um 0,1 Prozentpunkte pro 2 € über 1.240 €
+ *   bis min. 65 % (§ 2 Abs. 2 Satz 2 — zweite Absenkungsstufe)
  */
-function berechneErsatzrate(netto: number): number {
-  if (netto <= 0) return 1.0;
+export function berechneErsatzrate(nettoVorGeburt: number): number {
+  if (nettoVorGeburt <= 0) return 1.0;
 
-  if (netto < 1000) {
-    const differenz = 1000 - netto;
+  if (nettoVorGeburt < 1000) {
+    const differenz = 1000 - nettoVorGeburt;
     const zusatz = Math.floor(differenz / 2) * 0.001;
     return Math.min(1.0, 0.67 + zusatz);
   }
 
-  if (netto <= 1200) {
+  if (nettoVorGeburt <= 1240) {
     return 0.67;
   }
 
-  // Über 1200€: Ersatzrate sinkt
-  const differenz = netto - 1200;
+  // Über 1.240 €: Ersatzrate sinkt bis auf 65 %
+  const differenz = nettoVorGeburt - 1240;
   const abzug = Math.floor(differenz / 2) * 0.001;
   return Math.max(0.65, 0.67 - abzug);
 }
@@ -86,11 +98,15 @@ export function berechneElterngeld(eingabe: ElterngeldEingabe): ElterngeldErgebn
     };
   }
 
-  // Relevantes Einkommen = Differenz zwischen vorher und nachher
-  const relevantesEinkommen = Math.max(0, nettoVorGeburt - nettoDanach);
+  // § 2 Abs. 1+2 BEEG: Ersatzrate richtet sich nach dem Netto VOR der Geburt,
+  // nicht nach dem Unterschiedsbetrag.
+  const ersatzrate = berechneErsatzrate(nettoVorGeburt);
 
-  // Ersatzrate berechnen
-  const ersatzrate = berechneErsatzrate(relevantesEinkommen);
+  // § 2 Abs. 3 BEEG: Bei Teilzeit-Zuverdienst wird der Unterschiedsbetrag zur
+  // Bemessungsgrundlage, wobei das Vor-Geburt-Einkommen mit 2.770 €/Monat
+  // gedeckelt ist.
+  const gedeckeltesVor = Math.min(nettoVorGeburt, ELTERNGELD_VORGEBURT_DECKEL_2026);
+  const relevantesEinkommen = Math.max(0, gedeckeltesVor - nettoDanach);
 
   // Basis-Elterngeld berechnen
   let basisBetrag = relevantesEinkommen * ersatzrate;
