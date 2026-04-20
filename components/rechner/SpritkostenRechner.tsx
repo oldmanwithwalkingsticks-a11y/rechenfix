@@ -156,6 +156,7 @@ export default function SpritkostenRechner() {
           />
 
           <AffiliateBox programId="check24" context="spritkosten" variant="compact" />
+          <AffiliateBox programId="hotelde" context="spritkosten" variant="compact" />
         </>
       )}
     </div>

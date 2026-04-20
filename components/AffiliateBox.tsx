@@ -70,6 +70,24 @@ const AFFILIATE_PROGRAMS = {
     icon: '🚢',
     color: '#1565C0',
   },
+  hotelde: {
+    name: 'hotel.de',
+    tagline: 'Günstige Hotels weltweit — über 340.000 Hotels einfach und schnell buchen',
+    cta: 'Hotels vergleichen',
+    baseUrl: 'https://www.awin1.com/cread.php?awinmid=16018&awinaffid=2843240',
+    deeplink: 'https://www.hotel.de/',
+    icon: '🏨',
+    color: '#C8102E',
+  },
+  burdaZahn: {
+    name: 'Zahnzusatzversicherung',
+    tagline: 'Zahnzusatztarife vergleichen — hohe Eigenanteile beim Zahnarzt vermeiden',
+    cta: 'Tarife vergleichen',
+    baseUrl: 'https://www.awin1.com/cread.php?awinmid=121064&awinaffid=2843240',
+    deeplink: 'https://zahn.burda-vergleicht.de/campaign_600.html',
+    icon: '🦷',
+    color: '#0D9488',
+  },
   verivox: {
     name: 'Verivox',
     tagline: 'Depots vergleichen und das passende für Ihren ETF-Sparplan finden',
@@ -167,6 +185,21 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
   naturesway: {
     'kalorien': 'Vitamine und Mineralstoffe passend zu Ihrem Ernährungsziel — für die tägliche Unterstützung von innen heraus.',
     'bmi': 'Vitamine und Pflanzenstoffe für eine ausgewogene Ernährung von innen heraus.',
+  },
+  hotelde: {
+    'urlaubstage': 'Urlaub planen? Finden Sie günstige Hotels für Ihren nächsten Urlaub — über 340.000 Hotels weltweit bei hotel.de.',
+    'countdown': 'Vorfreude ist die schönste Freude. Zählen Sie die Tage — und sichern Sie sich jetzt Ihr Hotel zum Bestpreis bei hotel.de.',
+    'spritkosten': 'Übernachtung auf der Strecke. Lange Fahrt geplant? Hotels entlang Ihrer Route bei hotel.de finden — schnell und unkompliziert.',
+  },
+  burdaZahn: {
+    'pflegegeld': 'Zahnzusatzversicherung vergleichen. Hohe Eigenanteile beim Zahnarzt vermeiden — Tarife über burda-vergleicht kostenlos prüfen.',
+    'krankengeld': 'Gut abgesichert im Krankheitsfall. Zahnersatz kann teuer werden. Zahnzusatztarife vergleichen bei burda-vergleicht.',
+    'rente': 'Vorsorge für die Zähne. Im Alter wird Zahnersatz häufiger nötig. Zahnzusatztarife jetzt bei burda-vergleicht prüfen.',
+    'raucher': 'Zahngesundheit absichern. Rauchen erhöht das Risiko für Parodontitis und Zahnverlust. Zahnzusatz vergleichen bei burda-vergleicht.',
+    'schlaf': 'Schutz bei Bruxismus. Nächtliches Zähneknirschen kann teuer werden. Zahnzusatztarife vergleichen bei burda-vergleicht.',
+  },
+  eventfloss: {
+    'geburtstag': 'Geburtstag in Berlin? Feiern Sie auf dem Eventfloß auf der Spree — der Geheimtipp für besondere Geburtstage in Berlin.',
   },
   'ks-auxilia': {
     'rechtsschutz': 'KS Auxilia bietet Rechtsschutzversicherung ab 18,90 €/Monat — mit freier Anwaltswahl.',

@@ -11,6 +11,7 @@ import {
 } from '@/lib/berechnungen/pflegegeld';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
@@ -297,6 +298,8 @@ export default function PflegegeldRechner() {
           kurzzeitpflege: `bis ${ergebnis.kurzzeitpflegeJahr} €/Jahr`,
         }}
       />
+
+      <AffiliateBox programId="burdaZahn" context="pflegegeld" />
     </div>
   );
 }

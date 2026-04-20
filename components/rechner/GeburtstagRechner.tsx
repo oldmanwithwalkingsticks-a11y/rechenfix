@@ -5,6 +5,7 @@ import { berechneGeburtstag } from '@/lib/berechnungen/geburtstag';
 import { useMounted } from '@/lib/hooks/useMounted';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 function fmtDatum(d: Date): string {
@@ -194,6 +195,8 @@ export default function GeburtstagRechner() {
               naechsterGeburtstag: `in ${ergebnis.tagesBisNaechster} Tagen`,
             }}
           />
+
+          <AffiliateBox programId="eventfloss" context="geburtstag" />
         </>
       )}
     </div>

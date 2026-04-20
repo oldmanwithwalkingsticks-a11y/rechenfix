@@ -5,6 +5,7 @@ import { berechneRaucherKosten } from '@/lib/berechnungen/raucher';
 import { clampInputValue } from '@/lib/zahlenformat';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 function formatEuro(n: number): string {
@@ -231,6 +232,8 @@ export default function RaucherRechner() {
             eingaben={{ zigarettenProTag: parseFloat(zigarettenProTag), preisProPackung: parseFloat(preisProPackung.replace(',', '.')), jahreGeraucht: parseFloat(jahreGeraucht) }}
             ergebnis={{ kostenProJahr: ergebnis.kostenProJahr, kostenGesamt: ergebnis.kostenGesamt, kostenNaechste10Jahre: ergebnis.kostenNaechste10Jahre, zigarettenGesamt: ergebnis.zigarettenGesamt, investmentWert: ergebnis.investmentWert }}
           />
+
+          <AffiliateBox programId="burdaZahn" context="raucher" />
         </div>
       )}
     </div>

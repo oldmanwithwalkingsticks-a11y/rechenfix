@@ -305,8 +305,11 @@ Publisher-ID: 2843240
 | CHECK24 | 9364 | **check24.net** (NICHT .de!) | /strom/, /gas/, /kfz-versicherung/, /kredit/ |
 | congstar | 11938 | congstar.de | /handytarife/ |
 | KS Auxilia | 108114 | — (keine Deeplinks) | — |
-| Eventfloss Berlin | 27722 | eventfloss-berlin.de | / (nicht aktiv integriert) |
+| Eventfloss Berlin | 27722 | eventfloss-berlin.de | / (aktiv auf /alltag/geburtstag-rechner) |
 | Verivox | 14797 | verivox.de | /depot/, /depot/etf-vergleich/ |
+| hotel.de | 16018 | hotel.de | / |
+| burda-vergleicht (Zahnzusatz) | 121064 | zahn.burda-vergleicht.de | /campaign_600.html |
+| Nature's Way | 47173 | naturesway.de | /collections/all |
 
 ### WICHTIG zu CHECK24
 - Awin-Links leiten auf **check24.net** weiter, NICHT auf check24.de

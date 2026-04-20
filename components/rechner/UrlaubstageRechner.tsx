@@ -400,7 +400,10 @@ export default function UrlaubstageRechner() {
       )}
 
       {(anspruchErgebnis || resturlaubErgebnis) && (
-        <AffiliateBox programId="ks-auxilia" context="urlaubstage" />
+        <>
+          <AffiliateBox programId="ks-auxilia" context="urlaubstage" />
+          <AffiliateBox programId="hotelde" context="urlaubstage" variant="compact" />
+        </>
       )}
 
       {/* Disclaimer */}

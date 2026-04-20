@@ -31,11 +31,18 @@
 | congstar | 11938 | congstar.de |
 | KS Auxilia | 108114 | keine Deeplinks |
 | Verivox | 14797 | verivox.de |
+| hotel.de | 16018 | hotel.de |
+| burda-vergleicht (Zahnzusatz) | 121064 | zahn.burda-vergleicht.de |
+| Eventfloss Berlin | 27722 | eventfloss-berlin.de |
+| Nature's Way | 47173 | naturesway.de |
 
-## Keine Affiliate-Boxen in
-- Gesundheits-Rechnern (sensibles Thema)
-- Mathe/Schule-Rechnern (Schüler-Zielgruppe)
-- Es sei denn, der Prompt sagt explizit etwas anderes
+## Affiliate-Platzierungs-Regel (Stand April 2026, Prompt 106)
+Affiliate ist erlaubt, wenn **thematischer Match** zum Rechner besteht. Entscheidung pro Rechner, nicht pauschal pro Kategorie.
+- ✅ Zahnzusatz auf Gesundheits-Rechnern mit thematischer Brücke (Raucher → Parodontitis, Schlaf → Bruxismus) — erlaubt
+- ❌ Finanzwerbung (Kredit, Steuer-Software, Versicherung) auf Gesundheits-Rechnern — verboten
+- ❌ Mathe/Schule bleibt komplett ohne Affiliate (kein Kaufintent bei Schul-/Studium-Traffic)
+- Max. 2–3 AffiliateBoxen pro Rechner, erste `full`, weitere `compact`
+- Pflege zentral in `components/AffiliateBox.tsx` (Programme + `CONTEXT_TEXTS` + `CONTEXT_DEEPLINKS`), Platzierung pro Rechner-Komponente als JSX nach `AiExplain`/`ErgebnisAktionen`
 
 ## Tech Stack
 - Next.js 14 (App Router), TypeScript, Tailwind CSS

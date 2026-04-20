@@ -6,6 +6,7 @@ import { clampInputValue } from '@/lib/zahlenformat';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import SchlafTipp from '@/components/rechner/SchlafTipp';
+import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 const SCHNELLWAHL_ZEITEN = ['05:00', '05:30', '06:00', '06:30', '07:00', '07:30', '08:00', '08:30'];
@@ -286,6 +287,8 @@ export default function SchlafRechner() {
               }}
             />
           </div>
+
+          <AffiliateBox programId="burdaZahn" context="schlaf" />
         </div>
       )}
     </div>

@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { berechneCountdown, voreingestellteEvents, type CountdownErgebnis } from '@/lib/berechnungen/countdown';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import { AffiliateBox } from '@/components/AffiliateBox';
 
 function Ziffer({ wert, label }: { wert: number; label: string }) {
   return (
@@ -219,6 +220,8 @@ export default function CountdownRechner() {
             eingaben={{ event: eventLabel, datum: datumFormatiert }}
             ergebnis={{ tage: ergebnis.tage, stunden: ergebnis.stunden, minuten: ergebnis.minuten, wochen: ergebnis.wochen }}
           />
+
+          <AffiliateBox programId="hotelde" context="countdown" />
         </div>
       )}
 
