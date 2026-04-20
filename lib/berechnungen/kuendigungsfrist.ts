@@ -40,6 +40,9 @@ function endOfMonth(date: Date): Date {
   return r;
 }
 
+// § 622 Abs. 1 BGB: „vier Wochen" = 28 Tage. Danach Aufrundung auf den
+// nächsten 15. oder das Monatsende. Monats-Schalttage spielen für die
+// 4-Wochen-Frist keine Rolle, da Wochen kalendarisch gezählt werden.
 function nextFifteenthOrEndOfMonth(date: Date): Date {
   // Find the next 15. or end-of-month that is >= date
   const y = date.getFullYear();
