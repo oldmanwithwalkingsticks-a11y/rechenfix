@@ -990,7 +990,7 @@ Ergänzend können Sie mit unserem [Zinsrechner](/finanzen/zinsrechner) verschie
     metaDescription: 'Rente berechnen: Voraussichtliche Monatsrente, Rentenpunkte und Rentenlücke ✓ Abschläge bei Frührente ✓ Netto-Schätzung ✓ KI-Erklärung.',
     keywords: ['rentenrechner', 'rente berechnen', 'rentenpunkte berechnen', 'rentenlücke rechner', 'gesetzliche rente rechner', 'rente mit 63', 'monatsrente berechnen', 'rentenanspruch berechnen', 'netto rente rechner', 'altersvorsorge rechner'],
     icon: '👴',
-    formel: 'Monatsrente = Rentenpunkte × aktueller Rentenwert (39,32 €)\nRentenpunkte/Jahr = Jahresbrutto / Durchschnittsentgelt (45.358 €)',
+    formel: 'Monatsrente = Rentenpunkte × aktueller Rentenwert (40,79 € bis 30.06.2026, ab 01.07.2026: 42,52 €)\nRentenpunkte/Jahr = Jahresbrutto / Durchschnittsentgelt 2026 (51.944 €)',
     beispiel: '35 Jahre alt, 3.500 € Brutto, 15 Beitragsjahre, Rente mit 67: → ca. 35 Rentenpunkte gesamt → Brutto-Rente: ca. 1.376 € → Netto: ca. 1.170 €.',
     erklaerung: `**Wie funktioniert die gesetzliche Rentenversicherung?**
 
@@ -998,9 +998,9 @@ Die gesetzliche Rentenversicherung (GRV) ist das wichtigste Standbein der Alters
 
 **Was sind Rentenpunkte und wie sammle ich sie?**
 
-Rentenpunkte (Entgeltpunkte) sind die Währung der gesetzlichen Rente. Wer genau das Durchschnittseinkommen verdient (2026: ca. 45.358 € brutto/Jahr), erhält exakt 1,0 Rentenpunkte pro Jahr. Wer das Doppelte verdient, bekommt 2,0 Punkte — allerdings nur bis zur Beitragsbemessungsgrenze (2026: 90.600 € West). Darüber liegende Einkommen bringen keine weiteren Punkte. Auch Kindererziehungszeiten (ca. 1 Punkt pro Kind pro Jahr, max. 3 Jahre), Pflege von Angehörigen und bestimmte Ausbildungszeiten bringen Rentenpunkte.
+Rentenpunkte (Entgeltpunkte) sind die Währung der gesetzlichen Rente. Wer genau das Durchschnittseinkommen verdient (2026 vorläufig: 51.944 € brutto/Jahr), erhält exakt 1,0 Rentenpunkte pro Jahr. Wer das Doppelte verdient, bekommt 2,0 Punkte — allerdings nur bis zur Beitragsbemessungsgrenze (seit 2025 bundeseinheitlich, 2026: 101.400 €/Jahr). Darüber liegende Einkommen bringen keine weiteren Punkte. Auch Kindererziehungszeiten (ca. 1 Punkt pro Kind pro Jahr, max. 3 Jahre), Pflege von Angehörigen und bestimmte Ausbildungszeiten bringen Rentenpunkte.
 
-Der aktuelle Rentenwert liegt bei **39,32 € pro Punkt** (seit Juli 2025). Ein Durchschnittsverdiener mit 45 Beitragsjahren sammelt also 45 Punkte und erhält: 45 × 39,32 € = 1.769 € brutto/Monat. Der Rentenwert wird jährlich angepasst — in den letzten Jahren meist um 3-5%.
+Der aktuelle Rentenwert liegt bis 30.06.2026 bei **40,79 € pro Punkt** und ab 01.07.2026 bei **42,52 € pro Punkt** (BMAS-Rentenanpassung, +4,24 %). Ein Durchschnittsverdiener mit 45 Beitragsjahren sammelt also 45 Punkte und erhält nach dem Juli-Stichtag: 45 × 42,52 € = 1.913 € brutto/Monat. Der Rentenwert wird jährlich zum 01.07. angepasst — in den letzten Jahren meist um 3–5 %.
 
 **Rente mit 63: Welche Abschläge drohen?**
 
@@ -1022,11 +1022,11 @@ Ja, Renten unterliegen der nachgelagerten Besteuerung. Der steuerpflichtige Ante
     faq: [
       {
         frage: 'Wie hoch wird meine Rente voraussichtlich sein?',
-        antwort: 'Die Höhe Ihrer Rente hängt von Ihren gesammelten Rentenpunkten ab. Wer das Durchschnittseinkommen verdient, erhält pro Jahr 1 Rentenpunkt (Wert 2026: 39,32 €). Ein Durchschnittsverdiener mit 45 Beitragsjahren erhält ca. 1.769 € brutto. Ihr individueller Wert hängt von Ihrem Gehalt, Ihren Beitragsjahren und dem Renteneintrittsalter ab.',
+        antwort: 'Die Höhe Ihrer Rente hängt von Ihren gesammelten Rentenpunkten ab. Wer das Durchschnittseinkommen verdient, erhält pro Jahr 1 Rentenpunkt. Der Rentenwert pro Punkt liegt 2026 bei 40,79 € (bis 30.06.) und 42,52 € (ab 01.07.). Ein Durchschnittsverdiener mit 45 Beitragsjahren erhält ab Juli 2026 ca. 1.913 € brutto. Ihr individueller Wert hängt von Ihrem Gehalt, Ihren Beitragsjahren und dem Renteneintrittsalter ab.',
       },
       {
         frage: 'Was sind Rentenpunkte?',
-        antwort: 'Rentenpunkte (Entgeltpunkte) bestimmen die Höhe Ihrer Rente. Pro Jahr erhalten Sie Punkte im Verhältnis Ihres Einkommens zum Durchschnittseinkommen. Bei 45.358 € brutto/Jahr (Durchschnitt 2026) gibt es genau 1,0 Punkte. Bei 90.000 € gibt es ca. 1,98 Punkte. Die Beitragsbemessungsgrenze (90.600 € West) begrenzt die maximal erreichbaren Punkte pro Jahr auf ca. 2,0.',
+        antwort: 'Rentenpunkte (Entgeltpunkte) bestimmen die Höhe Ihrer Rente. Pro Jahr erhalten Sie Punkte im Verhältnis Ihres Einkommens zum Durchschnittseinkommen. Bei 51.944 € brutto/Jahr (Durchschnitt 2026 vorläufig) gibt es genau 1,0 Punkte. Bei 100.000 € gibt es ca. 1,925 Punkte. Die bundeseinheitliche Beitragsbemessungsgrenze 2026 (101.400 €/Jahr) begrenzt die maximal erreichbaren Punkte pro Jahr auf ca. 1,95.',
       },
       {
         frage: 'Kann ich mit 63 in Rente gehen?',
@@ -1826,7 +1826,7 @@ Zahlt der Arbeitnehmer eine **monatliche Eigenbeteiligung** (z. B. 100 €), min
     keywords: ['witwenrente rechner', 'witwenrente berechnen', 'witwerrente', 'große witwenrente', 'kleine witwenrente', 'witwenrente einkommensanrechnung', 'witwenrente freibetrag', 'sterbevierteljahr', 'witwenrente höhe'],
     icon: '🕊️',
     formel: 'Große Witwenrente = 55 % × Rente Verstorbener (neues Recht) bzw. 60 % (altes Recht) | Kleine Witwenrente = 25 % × Rente Verstorbener (max. 24 Monate) | Freibetrag = 26,4 × Rentenwert + 5,6 × Rentenwert pro Kind | Anrechnung = 40 % des übersteigenden Nettoeinkommens',
-    beispiel: 'Verstorbener: 1.500 €/Monat Rente, Hinterbliebene: 1.800 €/Netto, 0 Kinder, neues Recht → Grundanspruch: 55 % × 1.500 = 825 € | Freibetrag: 26,4 × 39,32 ≈ 1.038 € | Anrechenbar: 1.800 − 1.038 = 762 € | Abzug: 40 % × 762 = 305 € | Auszahlung: 825 − 305 = 520 €/Monat. Sterbevierteljahr: 3 × 1.500 = 4.500 €.',
+    beispiel: 'Verstorbener: 1.500 €/Monat Rente, Hinterbliebene: 1.800 €/Netto, 0 Kinder, neues Recht → Grundanspruch: 55 % × 1.500 = 825 € | Freibetrag: 26,4 × 40,79 ≈ 1.077 € (bis 30.06.2026; ab 01.07.2026: 26,4 × 42,52 ≈ 1.123 €) | Anrechenbar: 1.800 − 1.077 = 723 € | Abzug: 40 % × 723 = 289 € | Auszahlung: 825 − 289 = 536 €/Monat. Sterbevierteljahr: 3 × 1.500 = 4.500 €.',
     erklaerung: `**Was ist die Witwenrente und wer hat Anspruch?**
 
 Die **Witwenrente** (offiziell „Witwen- und Witwerrente") ist eine **Hinterbliebenenrente** der Deutschen Rentenversicherung. Sie soll den wegfallenden Unterhalt des verstorbenen Ehepartners teilweise ersetzen und wird **nicht automatisch** ausgezahlt — sie muss nach dem Todesfall ausdrücklich beantragt werden. Anspruch haben Witwen und Witwer, deren Ehepartner zum Zeitpunkt des Todes mindestens **5 Jahre rentenversichert** war (allgemeine Wartezeit). Diese Wartezeit gilt als vorzeitig erfüllt bei Arbeitsunfall oder Wehrdienstbeschädigung. Auch eingetragene Lebenspartner haben seit 2005 denselben Anspruch. Eheleute, die **nach dem 01.01.2002** geheiratet haben, fallen unter das **neue Recht** mit geringfügig reduzierten Prozentsätzen (siehe unten).
@@ -1843,7 +1843,7 @@ In den **ersten drei Monaten** nach dem Todesfall wird das sogenannte **Sterbevi
 
 **Einkommensanrechnung: So wird gekürzt**
 
-Eigenes Einkommen der Hinterbliebenen wird auf die Witwenrente angerechnet — aber nur, soweit es einen **Freibetrag** übersteigt. Der Grundfreibetrag beträgt **26,4 × dem aktuellen Rentenwert** (2026: etwa 39,32 € = rund 1.038 € monatlich). Für **jedes waisenrentenberechtigte Kind** erhöht sich der Freibetrag um zusätzlich **5,6 × dem Rentenwert** (etwa 220 €). Vom Einkommen über dem Freibetrag werden **40 Prozent** auf die Witwenrente angerechnet.
+Eigenes Einkommen der Hinterbliebenen wird auf die Witwenrente angerechnet — aber nur, soweit es einen **Freibetrag** übersteigt. Der Grundfreibetrag beträgt **26,4 × dem aktuellen Rentenwert** (Rentenwert 2026: 40,79 € bis 30.06., 42,52 € ab 01.07. → Freibetrag rund 1.077 € bzw. 1.123 € monatlich). Für **jedes waisenrentenberechtigte Kind** erhöht sich der Freibetrag um zusätzlich **5,6 × dem Rentenwert** (rund 228 € bzw. 238 €). Vom Einkommen über dem Freibetrag werden **40 Prozent** auf die Witwenrente angerechnet.
 
 **Rechenbeispiel:** Witwe mit 1.800 € Nettoeinkommen, 0 Kinder, Rente des Verstorbenen 1.500 €, neues Recht:
 
