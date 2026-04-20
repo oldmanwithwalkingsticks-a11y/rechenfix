@@ -321,6 +321,15 @@ export const WERT = getAktuellerWert();
 - Mindestunterhalt: § 1612a BGB + Mindestunterhaltsverordnung
 - Elternunterhalt: BGH XII ZB 6/24 v. 23.10.2024
 
+## Architektur-Regeln
+
+### Footer — Ein Footer, dynamische Zahlen (Prompt 107b)
+Genau eine Footer-Komponente site-weit: [components/layout/Footer.tsx](components/layout/Footer.tsx), ausschließlich vom Root-Layout ([app/layout.tsx](app/layout.tsx)) gerendert. Rechner- und Kategorie-Zahlen werden dynamisch aus [lib/rechner-config/client-data.ts](lib/rechner-config/client-data.ts) berechnet — nie hartcodiert.
+
+Lint-Guard: `npm run lint:footer` ([scripts/check-footer.mjs](scripts/check-footer.mjs)) prüft beides:
+- `footer-uniqueness`: genau 1 Footer-Datei in `{app,components}/**/*Footer*.{ts,tsx}` (ohne `.test.`, `.stories.`, `.d.ts`)
+- `footer-hardcoded-count`: Footer-Content enthält kein Muster `<Zahl> Rechner in <Zahl> Kategorien`
+
 ## Architektur-Notes (dokumentierte technische Schulden)
 
 ### Zirkulärer Import brutto-netto ↔ lohnsteuer
@@ -383,3 +392,4 @@ Reihenfolge nach Freigabe: erst 85 (Warning wegräumen), dann 68 (CMP dazu).
 - **100** — Stufe-1.5 P1-Pass: steuererstattung Pendler 0,38 + Tarif, nebenjob Soli+§32a+KiSt, spenden Differenz-Methode ✅
 - **101** — Stufe-1.5 SSOT-Konsolidierung: Soli-Lint, KiSt-Bundesland Steuerprogression, 5 Libs refactored ✅
 - **102** — Doku-Delta-Sync nach Stufe 1.5 (CLAUDE.md + SKILL + Projekt-Referenz) ✅
+- **107b** — Lint-Guards `lint:footer` (footer-uniqueness + footer-hardcoded-count), Guard G14 ✅

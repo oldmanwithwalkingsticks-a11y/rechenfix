@@ -9,7 +9,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "lint:jahreswerte": "node scripts/check-jahreswerte.mjs"
+    "lint:jahreswerte": "node scripts/check-jahreswerte.mjs",
+    "lint:footer": "node scripts/check-footer.mjs"
   },
   "dependencies": {
     "@upstash/redis": "^1.37.0",

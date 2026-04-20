@@ -510,6 +510,24 @@ wenn zvE vor oder nach Abzug unter die Soli-Freigrenze rutscht
 (Prompt 100: ~200 €/Jahr Überschätzung bei typischen Spendern
 um zvE 70–80 k).
 
+### G14 — Ein Footer, dynamische Zahlen (Prompt 107b)
+
+Genau **eine** Footer-Komponente site-weit: [components/layout/Footer.tsx](components/layout/Footer.tsx). Keine zweite Footer-Komponente anlegen (z. B. für Landing-Pages, Admin-Bereiche oder Rechner-Subseiten).
+
+Rechner- und Kategorie-Zahlen im Footer werden **dynamisch** aus [lib/rechner-config/client-data.ts](lib/rechner-config/client-data.ts) berechnet — niemals hartcodieren:
+
+```tsx
+// RICHTIG:
+{rechner.length} Rechner in {kategorien.length} Kategorien
+
+// FALSCH (veraltet, sobald ein Rechner dazukommt):
+169 Rechner in 9 Kategorien
+```
+
+Das Lint-Script `npm run lint:footer` prüft beides automatisch:
+- `footer-uniqueness`: genau 1 Footer-Datei in `{app,components}/**/*Footer*.{ts,tsx}`
+- `footer-hardcoded-count`: Regex `\b\d{2,4}\s+Rechner\s+(in|pro)\s+\d+\s+Kategorien?\b` im Footer-Content → Fehler
+
 ## Anti-Patterns aus der Audit-Welle 2026 (nicht wiederholen)
 
 Reale Bugs, die der April-2026-Audit aufgedeckt hat. Bei jedem neuen
