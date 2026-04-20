@@ -44,6 +44,8 @@ Affiliate ist erlaubt, wenn **thematischer Match** zum Rechner besteht. Entschei
 - Max. 2–3 AffiliateBoxen pro Rechner, erste `full`, weitere `compact`
 - Pflege zentral in `components/AffiliateBox.tsx` (Programme + `CONTEXT_TEXTS` + `CONTEXT_DEEPLINKS`), Platzierung pro Rechner-Komponente als JSX nach `AiExplain`/`ErgebnisAktionen`
 
+**Neue Partner (April 2026, Prompt 106):** hotel.de (MID 16018), burda-Zahnzusatz (MID 121064), eventfloss-berlin (MID 27722). Vollständige MID-Tabelle und Platzierungs-Zuordnung pro Rechner: siehe [rechenfix-projekt-referenz.md](rechenfix-projekt-referenz.md) → Abschnitt „Affiliate-System".
+
 ## Tech Stack
 - Next.js 14 (App Router), TypeScript, Tailwind CSS
 - Vercel Hosting
@@ -323,12 +325,24 @@ export const WERT = getAktuellerWert();
 
 ## Architektur-Regeln
 
-### Footer — Ein Footer, dynamische Zahlen (Prompt 107b)
+### G14 — Ein Footer, dynamische Zahlen (Prompt 107b)
 Genau eine Footer-Komponente site-weit: [components/layout/Footer.tsx](components/layout/Footer.tsx), ausschließlich vom Root-Layout ([app/layout.tsx](app/layout.tsx)) gerendert. Rechner- und Kategorie-Zahlen werden dynamisch aus [lib/rechner-config/client-data.ts](lib/rechner-config/client-data.ts) berechnet — nie hartcodiert.
 
 Lint-Guard: `npm run lint:footer` ([scripts/check-footer.mjs](scripts/check-footer.mjs)) prüft beides:
 - `footer-uniqueness`: genau 1 Footer-Datei in `{app,components}/**/*Footer*.{ts,tsx}` (ohne `.test.`, `.stories.`, `.d.ts`)
 - `footer-hardcoded-count`: Footer-Content enthält kein Muster `<Zahl> Rechner in <Zahl> Kategorien`
+
+Vollständige Guard-Tabelle (G1–G14) liegt in [.claude/skills/rechner-builder/SKILL.md](.claude/skills/rechner-builder/SKILL.md) Abschnitt „Qualitäts-Guards".
+
+### CI-Hooks (prebuild)
+
+Das `prebuild`-Script in [package.json](package.json) kettet folgende Checks, bevor der Next.js-Build startet:
+
+1. `node scripts/check-footer.mjs` — Footer-Guards (G14)
+2. `node scripts/check-jahreswerte.mjs` — Jahreswerte-Guards (Sprint 1.5, contextKeywords-basiert)
+3. `npx tsx scripts/generate-client-data.ts` — Client-Data-Generation
+
+Reihenfolge ist bewusst fail-fast: Schlägt ein Lint-Check fehl, wird die teurere Client-Data-Generation gar nicht erst gestartet. Greift lokal bei `npm run build` **und** auf Vercel bei jedem Deploy. Fehler blockieren den Build — kaputte Footer oder veraltete Jahreswerte erreichen nie die Produktion.
 
 ## Architektur-Notes (dokumentierte technische Schulden)
 
@@ -392,4 +406,10 @@ Reihenfolge nach Freigabe: erst 85 (Warning wegräumen), dann 68 (CMP dazu).
 - **100** — Stufe-1.5 P1-Pass: steuererstattung Pendler 0,38 + Tarif, nebenjob Soli+§32a+KiSt, spenden Differenz-Methode ✅
 - **101** — Stufe-1.5 SSOT-Konsolidierung: Soli-Lint, KiSt-Bundesland Steuerprogression, 5 Libs refactored ✅
 - **102** — Doku-Delta-Sync nach Stufe 1.5 (CLAUDE.md + SKILL + Projekt-Referenz) ✅
+- **103** — Canonical-Diagnose: bereits sauber, Prompt geschlossen ohne Fix ✅
+- **104** — Crawl-Discovery: Sitemap-`lastmod` via git-log, Priority-Staffelung, Kategorie-H1 mit Count + 2026 ✅
+- **105** — 9 Kategorie-Einleitungen live (je 180–220 Wörter, `{COUNT}`-Platzhalter, Markdown-Links) ✅
+- **106** — 3 neue Awin-Partner platziert: hotel.de (16018), burda-Zahnzusatz (121064), eventfloss-berlin (27722) ✅
 - **107b** — Lint-Guards `lint:footer` (footer-uniqueness + footer-hardcoded-count), Guard G14 ✅
+- **107c** — `prebuild`-Hook kettet `check-footer` + `check-jahreswerte` + `generate-client-data`; Repo-Housekeeping (gitignore, `docs/audit-arbeitspapiere/`) ✅
+- **108** — Doku-Sync nach Sprint 20.04.2026 ✅

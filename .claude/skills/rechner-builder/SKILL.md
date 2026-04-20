@@ -7,7 +7,7 @@ description: Template and checklist for building standardized online calculators
 
 Build standardized, SEO-optimized calculator pages for the German calculator portal rechenfix.de. Every calculator must follow this template to ensure consistency, completeness, and maximum SEO impact.
 
-**Aktueller Stand:** 105 Rechner live (Alltag 18, Finanzen 28, Gesundheit 12, Auto 6, Wohnen 16, Mathe 10, Arbeit 15).
+**Aktueller Stand:** 169 Rechner in 9 Kategorien (Alltag 23, Finanzen 45, Gesundheit 17, Auto & Verkehr 10, Wohnen & Energie 25, Mathe & Schule 18, Arbeit & Recht 17, Kochen & Ernährung 12, Sport & Fitness 2).
 
 ## Tech Stack
 
@@ -240,7 +240,7 @@ After creating the calculator, verify:
 - [ ] **Meta-Description ≤ 155 Zeichen** (zählen! `node -e "console.log('…'.length)"`)
 - [ ] Kein `✓ Kostenlos. ✓ Mit KI-Erklärung.`-Suffix, keine ✓-Emojis in der Description
 - [ ] **Smoke-Test v3** nach Deploy über die betroffenen Routen laufen lassen: `scripts/smoke-test-v3.js` in die Browser-Konsole auf `https://www.rechenfix.de` pasten und `await runSmokeTestV3({ filter: /<slug>/ })` ausführen. Alle 9 Checks (C1–C9) müssen grün sein.
-- [ ] **Guards G1–G9 geprüft** (siehe Abschnitt „Qualitäts-Guards" in diesem Skill)
+- [ ] **Guards G1–G14 geprüft** (siehe Abschnitt „Qualitäts-Guards" in diesem Skill)
 - [ ] "Fix erklärt"-Button erscheint erst, nachdem der `ergebnis`-State gefüllt ist — das ist **kein Bug**, sondern gewollt
 
 ### Step 11b: SSOT-Import-Audit (Pflicht vor Commit)
@@ -317,14 +317,15 @@ Mindestlohn zum 01.01. usw.):
 - `lib/berechnungen/rente.ts` — Switch auf 42,52 € zum 01.07.2026
 - `lib/berechnungen/pfaendung.ts` — Switch auf 1.587,40 € zum 01.07.2026
 
-### Step 13: Qualitäts-Guards G1–G10 durchgehen
+### Step 13: Qualitäts-Guards G1–G14 durchgehen
 
-Bevor ein Rechner committed wird, die zehn Guards unten im Abschnitt
+Bevor ein Rechner committed wird, die vierzehn Guards unten im Abschnitt
 „Qualitäts-Guards (aus Rezept-Umrechner-Audit, April 2026)" abarbeiten.
 Wo ein Guard nicht zutrifft (z. B. G5 ohne Einheiten-Output), das in der
 Code-Review-Notiz kurz begründen. G10 (keine Dubletten zentraler Werte)
 ist nach dem Jahresaudit 2026 hinzugekommen — besonders wichtig für
-Finanz-, SV- und Arbeits-Rechner.
+Finanz-, SV- und Arbeits-Rechner. G11–G14 aus der Welle-1-Audit-Serie
+und Prompt 107b (Footer-Architektur).
 
 ### Step 14: Smoke Test v3 lokal durchlaufen
 
@@ -681,6 +682,18 @@ BBG-Werte ändern sich jährlich via SV-Rechengrößenverordnung. Aus
 `brutto-netto.ts`) — dokumentiert in CLAUDE.md → Architektur-Notes. Lint-Script
 schützt über forbiddenValues-Einträge.
 
+### 🚫 Grundfreibetrag oder WK-Pauschale inline (Prompt 101)
+
+```ts
+// FALSCH:
+if (zvE <= 12348) return 0;
+const wkAbzug = Math.min(brutto, 1230);
+```
+
+Immer die SSOT-Konstanten `GRUNDFREIBETRAG_2026` und `WK_PAUSCHALE_AN_2026`
+aus `einkommensteuer.ts`. Inline-Werte bleiben beim Jahreswechsel stehen
+(G11 deckt das ab, hier nur als Merk-Anker).
+
 ### 📌 Meta-Lektion: Soli ohne Milderungszone — ein Wiederholungs-Bug
 
 Das Muster `est > 20350 ? est * 0.055 : 0` (harte Kante ohne Milderungszone)
@@ -715,6 +728,10 @@ dann aus dem Referenz-Rechner kopieren.
 ## Rechner-Specific Templates
 
 For detailed templates per calculator type, see `references/templates.md`.
+
+## Affiliate-Platzierung (Verweis)
+
+Affiliate-Platzierungs-Regel: thematischer Match zum Rechner erforderlich. Details, verbotene Kombinationen und aktuelle Partner-Liste: siehe CLAUDE.md → Abschnitt »Affiliate-Regel«.
 
 ## Common Mistakes to Avoid
 
@@ -787,3 +804,5 @@ Ohne diesen Schritt geben Claude-Chat und Claude-Code inkonsistente Ratschläge 
 | 19.04.2026 | Prompt 92a: Sync-Sektion auf claude.ai-UI-Workflow umgestellt | [ ] noch offen |
 | 19.04.2026 | Prompt 97: Guards G11 (SSOT-Imports) + G12 (kein Transform-Hover), Step 11b SSOT-Import-Audit, Anti-Patterns-Abschnitt aus Welle-1-Audit | [ ] noch offen |
 | 20.04.2026 | Prompt 102: Guard G13 (Differenz-Methode Steuer-Ersparnis), 4 neue Anti-Patterns (Pendler-Duplikat, Tarif-Jahr-Hardcode, Soli-pauschal, BBG-Hardcodes), Meta-Lektion Soli-Wiederholungs-Bug, Positive-Patterns-Abschnitt mit Referenz-Rechnern, Lint-contextKeywords-Hinweis | [ ] noch offen |
+| 20.04.2026 | Prompt 107b: Guard G14 (Ein Footer, dynamische Zahlen) + Lint-Script `scripts/check-footer.mjs` dokumentiert | [ ] noch offen |
+| 20.04.2026 | Prompt 108: Rechner-Count im Header auf 169/9 aktualisiert, Guards-Referenzen G1–G9/G10 auf G1–G14, Affiliate-Regel-Verweis auf CLAUDE.md, Anti-Pattern Grundfreibetrag inline ergänzt | [ ] noch offen |

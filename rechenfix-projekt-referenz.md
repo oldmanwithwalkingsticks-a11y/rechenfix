@@ -201,6 +201,31 @@ Doku-Artefakte: `docs/stufe2-rechner-semantik.md`.
 
 **Audit-Bilanz Welle 1 gesamt (Stufen 1 + 2 + 1.5):** 10 P1 + 11 P2 + ~40 SSOT-Refactorings.
 
+### SEO-Sprint Crawl-Discovery (20.04.2026) ✅ ABGESCHLOSSEN
+
+| Prompt | Inhalt |
+|---|---|
+| 103 | Canonical-Diagnose — bereits sauber (alle Rechner mit www-Canonical, keine Duplicate-Content-Signale). Prompt ohne Fix geschlossen. |
+| 104 | Crawl-Discovery-Sprint: Sitemap-`lastmod` via git-log statt `new Date()` (Google erkennt echte Änderungen), Priority-Staffelung (Kategorien 0.9 > Rechner 0.8), Kategorieseiten mit H1 „{Kategorie} — {COUNT} Rechner {JAHR}" + Einleitungs-Prosa-Slot |
+| 105 | 9 Kategorie-Einleitungen live (je 180–220 Wörter, `{COUNT}`-Platzhalter wird zur Build-Zeit ersetzt, Markdown-Links auf Top-3-Rechner der Kategorie) |
+
+### Affiliate-Erweiterung (20.04.2026) ✅ ABGESCHLOSSEN
+
+**Prompt 106** — 3 neue Awin-Partner auf 9 Rechnern platziert:
+- hotel.de (MID 16018): /arbeit/urlaubstage-rechner, /alltag/countdown, /auto/spritkosten-rechner
+- burda-Zahnzusatz (MID 121064): /finanzen/pflegegeld-, krankengeld-, rentenrechner + /gesundheit/raucher-, schlaf-rechner
+- eventfloss-berlin (MID 27722): /alltag/geburtstag-rechner (Test, CTR-Review ~20.05.2026)
+
+Gleichzeitig: Affiliate-Regel von „kein Affiliate in Gesundheit/Mathe" umgestellt auf thematischen Match. Details in CLAUDE.md → Abschnitt „Affiliate-Platzierungs-Regel".
+
+### Footer-Lint + prebuild-Hook (20.04.2026) ✅ ABGESCHLOSSEN
+
+| Prompt | Inhalt |
+|---|---|
+| 107b | Lint-Script `scripts/check-footer.mjs` mit zwei Regeln (`footer-uniqueness`, `footer-hardcoded-count`), Guard G14 im Skill |
+| 107c | `prebuild`-Hook kettet `check-footer` + `check-jahreswerte` + `generate-client-data`; Fails blockieren Deploy auf Vercel. Repo-Housekeeping: `.gitignore` um `.claude/settings.local.json` + `/reports/` erweitert, `Checks/` → `docs/audit-arbeitspapiere/` verschoben |
+| 108 | Doku-Sync CLAUDE.md + SKILL.md + diese Datei |
+
 ### Meta-Lektion aus dem April-Audit
 
 Der **Soli-ohne-Milderungszone-Bug** tauchte **5× auf** (ALG, GmbhGf, nebenjob-3×, spenden). Das Anti-Pattern war im Skill dokumentiert — trotzdem haben Bestandsfälle es nicht verhindert. **Das technische Sicherheitsnetz (Lint-Script mit `contextKeywords`) ist der primäre Schutz**, die Doku ist ergänzend.
@@ -256,9 +281,13 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
 - ✅ A11y-Sprint — Lighthouse 100/100, axe 0 auf 19 Stichproben (Prompts 78a–h + 78z-Serie + 34a–c)
 - ✅ Jahresparameter-Audit 2026 (Prompts 86–92)
 - ✅ **Welle-1-Audit Stufen 1+2** (Prompts 94/94a/95) — Steuer- und SV-Kern durchgeprüft, 3×P1 + 3×P2 + 2×P3 gefixt, 5 SSOT-Refactorings
+- ✅ **Welle-1-Audit Stufe 1.5** (Prompts 99a–c + 100 + 101) — Sekundär-Rechner nachgezogen, 5 P1 + 4 P2 + 18 P3 + ~35 SSOT-Refactorings; Lint-Script mit contextKeywords produktiv
 - ✅ Card-Hover A11y/UX (Prompts 96/96a) — nur Shadow-Animation, kein Transform
 - ✅ Unterhaltsrechner DT 2026 (Prompt 67)
 - ✅ Verivox-Affiliate ETF/Rente/Spar (Prompts 45+46)
+- ✅ **SEO-Sprint Crawl-Discovery** (Prompts 103–105) — git-log-basierter lastmod, Priority-Staffelung, 9 Kategorie-Einleitungen live
+- ✅ **Affiliate-Erweiterung** (Prompt 106) — hotel.de, burda-Zahnzusatz, eventfloss-berlin auf 9 Rechnern platziert
+- ✅ **Footer-Lint + prebuild-Hook** (Prompts 107b + 107c) — Guard G14, `lint:footer`, CI-Hook blockiert Deploys bei Guard-Fail
 
 **Parkend (wartet auf AdSense-Freigabe):**
 - ⏸ Prompt 68 — Google CMP + Consent Mode v2
@@ -266,6 +295,7 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
 - Rollback-Prompt 69 bleibt im Repo als Sicherheit
 
 **Offen:**
+- 🎯 GSC: Sitemap neu einreichen nach Deploy; CTR-Review der 3 neuen Awin-Partner ~20.05.2026
 - 🎯 Neue Rechner-Batches (thematisch offen)
 - 🎯 Jahresparameter-Audit 2027 (Frühjahr 2027): ESt-Tarif 2027, SV-Rechengrößen 2027, JAEG, Zusatzbeitrag, D-Ticket, Pfändung-Switch zum 01.07.2028
 
@@ -324,7 +354,7 @@ Publisher-ID: 2843240
 - KS Auxilia hat keine Deeplinks aktiviert — kein `ued`-Parameter
 
 ### AffiliateBox-Komponente
-- Pfad: `src/components/AffiliateBox.tsx`
+- Pfad: `components/AffiliateBox.tsx`
 - Client Component mit Props: `programId`, `context`, `variant` ("compact" | "full")
 - Enthält localStorage-Tracking (`rf_aff_clicks`) und GA-Events
 - "Anzeige"-Label oben rechts (deutsche Werbekennzeichnungs-Pflicht)
@@ -450,7 +480,22 @@ Jeder Prompt für einen neuen Rechner enthält:
 | AffiliateBox | `components/AffiliateBox.tsx` | Kontextuelle Affiliate-Empfehlung |
 | CrossLink | `components/ui/CrossLink.tsx` | Verwandte Rechner-Links |
 | FeedbackButtons | `components/ui/FeedbackButtons.tsx` | 👍/👎 Bewertung |
+| Footer | `components/layout/Footer.tsx` | Einzige Footer-Komponente site-weit (siehe Footer-Architektur unten) |
 | Skip-Link | `app/layout.tsx` | Überspringen der Navigation (href="#main-content") |
+
+## Footer-Architektur
+
+- **Einzige Footer-Komponente:** [components/layout/Footer.tsx](components/layout/Footer.tsx), ausschließlich vom Root-Layout ([app/layout.tsx](app/layout.tsx)) gerendert.
+- **Dynamische Counts:** Rechner- und Kategorie-Zahlen werden aus [lib/rechner-config/client-data.ts](lib/rechner-config/client-data.ts) per Template-Literal berechnet (`{rechner.length} Rechner in {kategorien.length} Kategorien`) — nie hartkodiert.
+- **Lint-Guard:** [scripts/check-footer.mjs](scripts/check-footer.mjs) prüft per CI, dass genau eine Footer-Komponente existiert (`footer-uniqueness`) und keine Zahlen hartkodiert sind (`footer-hardcoded-count`). Läuft im `prebuild`-Hook — Fails blockieren den Deploy.
+- **Guard-Dokumentation:** G14 in [.claude/skills/rechner-builder/SKILL.md](.claude/skills/rechner-builder/SKILL.md).
+
+## docs-Verzeichnis
+
+- `docs/jahreswerte-kalender.md` — Governance-Kalender gesetzlicher Stichtage (Prompt 98)
+- `docs/audit-arbeitspapiere/` **(neu seit Prompt 107c)** — Stufenpläne der Welle-1-Audits (`stufe1-arbeitsblatt.md`, `welle1-stufenplan.md`); dienen bei weiteren Audits als Methodik-Referenz
+- `docs/jahresparameter-audit-2026-04.md` — Grep-Report Prompt 86
+- `docs/stufe1-rechner-semantik.md`, `docs/stufe1-5-rechner-semantik.md`, `docs/stufe2-rechner-semantik.md` — Welle-1-Audit-Artefakte
 
 ## Monetarisierungs-Strategie
 
