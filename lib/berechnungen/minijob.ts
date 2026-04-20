@@ -42,9 +42,11 @@ export interface MinijobErgebnis {
   rentenpunkteProJahrMitRv: number;
 }
 
-// Konstanten 2026 — Mindestlohn und Minijob-Grenze aus zentraler SSOT.
-// Re-Export von MINDESTLOHN_2026 hält bestehende Konsumenten kompatibel.
-import { MINDESTLOHN_2026, MINIJOB_GRENZE_MONAT } from './mindestlohn';
+// Mindestlohn und Minijob-Grenze aus zentraler SSOT mit Stichtag-Switch:
+// MINDESTLOHN springt am 01.01.2027 auf 14,60 €, MINIJOB_GRENZE_MONAT auf 633 €.
+// MINDESTLOHN_2026 bleibt als Re-Export für Konsumenten, die explizit den
+// 2026er Wert brauchen (z.B. SEO-Texte mit Jahresbezug).
+import { MINDESTLOHN, MINIJOB_GRENZE_MONAT } from './mindestlohn';
 import { DURCHSCHNITTSENTGELT_2026 } from './rente';
 export { MINDESTLOHN_2026 } from './mindestlohn';
 
@@ -102,9 +104,9 @@ export function berechneMinijob(e: MinijobEingabe): MinijobErgebnis {
   let unterMindestlohn = false;
   if (stundenProWoche && stundenProWoche > 0) {
     stundenlohn = rund2(verdienst / (stundenProWoche * WOCHEN_PRO_MONAT));
-    unterMindestlohn = stundenlohn < MINDESTLOHN_2026;
+    unterMindestlohn = stundenlohn < MINDESTLOHN;
   }
-  const maxStundenProWoche = rund2(verdienst / MINDESTLOHN_2026 / WOCHEN_PRO_MONAT);
+  const maxStundenProWoche = rund2(verdienst / MINDESTLOHN / WOCHEN_PRO_MONAT);
 
   // === RENTENPUNKTE (grob) ===
   // 1 Rentenpunkt = Durchschnittsbrutto 2026: 51.944 €/Jahr (§ 69 SGB VI + Anlage 1).
@@ -132,7 +134,7 @@ export function berechneMinijob(e: MinijobEingabe): MinijobErgebnis {
     maxStundenProWoche,
     minijobGrenze: MINIJOB_GRENZE,
     midijobObergrenze: MIDIJOB_OBERGRENZE,
-    mindestlohn: MINDESTLOHN_2026,
+    mindestlohn: MINDESTLOHN,
     rentenpunkteProJahrMitRv,
   };
 }

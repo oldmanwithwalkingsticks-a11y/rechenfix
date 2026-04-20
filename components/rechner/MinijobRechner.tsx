@@ -5,9 +5,9 @@ import {
   berechneMinijob,
   MINIJOB_GRENZE,
   MIDIJOB_OBERGRENZE,
-  MINDESTLOHN_2026,
   type MinijobArt,
 } from '@/lib/berechnungen/minijob';
+import { MINDESTLOHN } from '@/lib/berechnungen/mindestlohn';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
@@ -231,7 +231,7 @@ export default function MinijobRechner() {
       {ergebnis.stundenlohn !== null && (
         <div className={`border rounded-xl p-4 mb-6 ${ergebnis.unterMindestlohn ? 'bg-red-50 dark:bg-red-500/10 border-red-200 dark:border-red-500/30' : 'bg-green-50 dark:bg-green-500/10 border-green-200 dark:border-green-500/30'}`}>
           <p className={`text-sm ${ergebnis.unterMindestlohn ? 'text-red-800 dark:text-red-300' : 'text-green-800 dark:text-green-300'}`}>
-            {ergebnis.unterMindestlohn ? '⚠️' : '✓'} <strong>Ihr Stundenlohn:</strong> {fmtEuro(ergebnis.stundenlohn)} €/Std. (Mindestlohn 2026: {fmtEuro(MINDESTLOHN_2026)} €/Std.)
+            {ergebnis.unterMindestlohn ? '⚠️' : '✓'} <strong>Ihr Stundenlohn:</strong> {fmtEuro(ergebnis.stundenlohn)} €/Std. (aktueller Mindestlohn: {fmtEuro(MINDESTLOHN)} €/Std.)
             {ergebnis.unterMindestlohn && <> — <strong>Stundenlohn unter Mindestlohn!</strong></>}
           </p>
           <p className="text-xs mt-1 text-gray-600 dark:text-gray-400">
