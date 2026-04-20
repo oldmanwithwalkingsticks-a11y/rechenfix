@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
-import { berechneMutterschutz, type GeburtsArt, type Beschaeftigung } from '@/lib/berechnungen/mutterschutz';
+import { berechneMutterschutz, type GeburtsArt, type Beschaeftigung, type MinijobVersicherung } from '@/lib/berechnungen/mutterschutz';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
@@ -49,6 +49,7 @@ export default function MutterschutzRechner() {
   const [tatsaechlich, setTatsaechlich] = useState('');
   const [nettoGehalt, setNettoGehalt] = useState('2500');
   const [beschaeftigung, setBeschaeftigung] = useState<Beschaeftigung>('gesetzlich');
+  const [minijobVersicherung, setMinijobVersicherung] = useState<MinijobVersicherung>('familie');
 
   useEffect(() => {
     setGeburtstermin(defaultET());
@@ -64,8 +65,9 @@ export default function MutterschutzRechner() {
         tatsaechlichesGeburtsdatum: tatsaechlich,
         nettoGehalt: nNettoGehalt,
         beschaeftigung,
+        minijobVersicherung,
       }),
-    [geburtstermin, geburtsArt, tatsaechlich, nNettoGehalt, beschaeftigung],
+    [geburtstermin, geburtsArt, tatsaechlich, nNettoGehalt, beschaeftigung, minijobVersicherung],
   );
 
   const fmt = (n: number) => Math.round(n).toLocaleString('de-DE');
@@ -132,6 +134,25 @@ export default function MutterschutzRechner() {
           </select>
         </div>
       </div>
+
+      {/* Minijob-Versicherungsart (nur wenn Minijob gewählt) */}
+      {beschaeftigung === 'minijob' && (
+        <div className="mb-4">
+          <label htmlFor="mutterschutz-minijob-vers" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Krankenversicherung</label>
+          <select
+            id="mutterschutz-minijob-vers"
+            value={minijobVersicherung}
+            onChange={e => setMinijobVersicherung(e.target.value as MinijobVersicherung)}
+            className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"
+          >
+            <option value="familie">Familienversichert (über Partner/Eltern)</option>
+            <option value="eigen">Eigene GKV-Mitgliedschaft (selbst versichert)</option>
+          </select>
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1.5 leading-relaxed">
+            Bei eigener GKV-Mitgliedschaft: 13 €/Tag von der Krankenkasse (§ 24i SGB V). Bei Familienversicherung: einmalig 210 € vom Bundesamt für Soziale Sicherung. Arbeitgeberzuschuss entfällt bei Minijob in beiden Fällen.
+          </p>
+        </div>
+      )}
 
       {/* Ergebnis */}
       {ergebnis && (

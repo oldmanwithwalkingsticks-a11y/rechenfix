@@ -1,5 +1,6 @@
 export type GeburtsArt = 'normal' | 'fruehgeburt' | 'mehrlingsgeburt' | 'behinderung';
 export type Beschaeftigung = 'gesetzlich' | 'privat' | 'minijob' | 'selbststaendig';
+export type MinijobVersicherung = 'eigen' | 'familie';
 
 export interface MutterschutzEingabe {
   geburtstermin: string; // ISO date
@@ -7,6 +8,10 @@ export interface MutterschutzEingabe {
   tatsaechlichesGeburtsdatum: string; // ISO date, leer = noch nicht geboren
   nettoGehalt: number;
   beschaeftigung: Beschaeftigung;
+  /** Nur relevant bei beschaeftigung === 'minijob'. 'eigen' → 13 €/Tag GKV;
+   *  'familie' → einmalig 210 € vom BAS (§ 24i SGB V-konform). Default: 'familie'
+   *  (häufigerer Fall bei Minijobberinnen). */
+  minijobVersicherung?: MinijobVersicherung;
 }
 
 export interface MutterschutzErgebnis {
@@ -125,12 +130,23 @@ export function berechneMutterschutz(eingabe: MutterschutzEingabe): Mutterschutz
       einkommenMonat = eingabe.nettoGehalt;
       geldHinweis = 'Einmalig 210 € vom Bundesamt + Arbeitgeberzuschuss zum vollen Netto.';
       break;
-    case 'minijob':
-      kasseSatzTag = 13;
-      agZuschussTag = 0;
-      einkommenMonat = Math.round(kasseSatzTag * 30 * 100) / 100;
-      geldHinweis = 'Max. 13 €/Tag von der Krankenkasse. Kein Arbeitgeberzuschuss bei Minijob.';
+    case 'minijob': {
+      const versicherung = eingabe.minijobVersicherung ?? 'familie';
+      if (versicherung === 'eigen') {
+        kasseSatzTag = 13;
+        agZuschussTag = 0;
+        einkommenMonat = Math.round(kasseSatzTag * 30 * 100) / 100;
+        geldHinweis = 'Eigene GKV-Mitgliedschaft: max. 13 €/Tag von der Krankenkasse. Kein Arbeitgeberzuschuss bei Minijob.';
+      } else {
+        // Familienversichert (über Partner/Eltern) → BAS-Einmalzahlung analog 'privat'
+        einmalzahlungPrivat = 210;
+        kasseSatzTag = 0;
+        agZuschussTag = 0;
+        einkommenMonat = 0;
+        geldHinweis = 'Familienversichert über Partner/Eltern: einmalig 210 € vom Bundesamt für Soziale Sicherung (§ 24i SGB V). Kein Arbeitgeberzuschuss bei Minijob.';
+      }
       break;
+    }
     case 'selbststaendig':
       kasseSatzTag = 0;
       agZuschussTag = 0;
