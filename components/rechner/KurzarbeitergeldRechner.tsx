@@ -7,6 +7,7 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 import { berechneLohnsteuerJahr } from '@/lib/berechnungen/lohnsteuer';
+import { BUNDESLAENDER } from '@/lib/berechnungen/einkommensteuer';
 
 type Steuerklasse = 'I' | 'II' | 'III' | 'IV' | 'V' | 'VI';
 
@@ -27,12 +28,6 @@ function nettoAus(brutto: number, sk: Steuerklasse, kirchensteuerSatz: number): 
   const kirchensteuer = steuerMonat * kirchensteuerSatz;
   return Math.max(0, brutto - sv - steuerMonat - kirchensteuer);
 }
-
-const BUNDESLAENDER = [
-  'Baden-Württemberg', 'Bayern', 'Berlin', 'Brandenburg', 'Bremen', 'Hamburg',
-  'Hessen', 'Mecklenburg-Vorpommern', 'Niedersachsen', 'Nordrhein-Westfalen',
-  'Rheinland-Pfalz', 'Saarland', 'Sachsen', 'Sachsen-Anhalt', 'Schleswig-Holstein', 'Thüringen',
-];
 
 const LAENDER_8_PROZENT = ['Bayern', 'Baden-Württemberg'];
 
