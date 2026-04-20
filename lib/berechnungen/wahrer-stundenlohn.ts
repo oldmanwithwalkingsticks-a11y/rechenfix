@@ -1,5 +1,6 @@
 import { MINDESTLOHN } from './mindestlohn';
 import { GRUNDFREIBETRAG_2026 } from './einkommensteuer';
+import { WOCHEN_PRO_MONAT } from './_helpers';
 
 export interface WahrerStundenlohnEingabe {
   bruttoMonatlich: number;
@@ -64,7 +65,7 @@ function schaetzeNetto(brutto: number): number {
 }
 
 const ARBEITSTAGE_MONAT = 21.7; // Durchschnitt
-const WOCHEN_MONAT = 4.33;
+const WOCHEN_MONAT = WOCHEN_PRO_MONAT;
 
 export function berechneWahrenStundenlohn(eingabe: WahrerStundenlohnEingabe): WahrerStundenlohnErgebnis {
   const nettoMonatlich = schaetzeNetto(eingabe.bruttoMonatlich);

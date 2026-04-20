@@ -1,6 +1,6 @@
 import { berechneBruttoNetto, type BruttoNettoEingabe, type BruttoNettoErgebnis } from './brutto-netto';
 import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from './sv-parameter';
-import { rundeBuRlGKonform } from './_helpers';
+import { rundeBuRlGKonform, WOCHEN_PRO_MONAT } from './_helpers';
 
 export interface TeilzeitEingabe {
   vollzeitBrutto: number;
@@ -86,8 +86,7 @@ export function berechneTeilzeit(eingabe: TeilzeitEingabe): TeilzeitErgebnis | n
     : 0;
 
   // Stundenlohn (gleich für Voll- und Teilzeit)
-  const wochenProMonat = 4.33;
-  const stundenlohn = Math.round((vollzeitBrutto / (vollzeitStunden * wochenProMonat)) * 100) / 100;
+  const stundenlohn = Math.round((vollzeitBrutto / (vollzeitStunden * WOCHEN_PRO_MONAT)) * 100) / 100;
 
   // Urlaubstage: BAG-konforme Umrechnung mit tatsächlicher Vollzeit-Arbeitstagesanzahl
   // (häufig 5, im Einzelhandel/Gastronomie auch 6). § 5 Abs. 2 BUrlG-Rundung.

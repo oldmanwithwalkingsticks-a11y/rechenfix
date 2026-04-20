@@ -3,7 +3,8 @@ export type StundenlohnModus = 'stundenlohn' | 'monatsgehalt' | 'jahresgehalt';
 export { MINDESTLOHN_2026 } from './mindestlohn';
 import { MINDESTLOHN_2026 } from './mindestlohn';
 
-export const WOCHEN_PRO_MONAT = 4.33;
+export { WOCHEN_PRO_MONAT } from './_helpers';
+import { WOCHEN_PRO_MONAT } from './_helpers';
 export const WOCHEN_PRO_JAHR = 52;
 
 export interface StundenlohnEingabe {

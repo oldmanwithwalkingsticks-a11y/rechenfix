@@ -1,3 +1,5 @@
+import { WOCHEN_PRO_MONAT } from './_helpers';
+
 // ── Modus 1: Überstunden berechnen ──
 
 export interface UeberstundenEingabe {
@@ -22,7 +24,7 @@ export function berechneUeberstunden(eingabe: UeberstundenEingabe): Ueberstunden
   if (vertraglicheStunden <= 0 || tatsaechlicheStunden < 0) return null;
 
   const proWoche = tatsaechlicheStunden - vertraglicheStunden;
-  const proMonat = proWoche * 4.33;
+  const proMonat = proWoche * WOCHEN_PRO_MONAT;
   const proJahr = proWoche * 52;
 
   const tagesStunden = vertraglicheStunden / 5;
