@@ -63,6 +63,85 @@ const ARBEITNEHMER_PAUSCHBETRAG = WK_PAUSCHALE_AN_2026;
 const SONDERAUSGABEN_PAUSCHBETRAG = 36;
 const ENTLASTUNGSBETRAG_ALLEINERZIEHENDE = 4260;
 
+/**
+ * Empirisch kalibrierte Lookup-Tabelle für Lohnsteuer Kl. V 2026.
+ * Stützpunkte verifiziert gegen BMF-Steuerrechner (https://www.bmf-steuerrechner.de).
+ * Parameter: NRW, kinderlos, gesetzlich KV, Zusatzbeitrag 2,9 %, keine KiSt, 2026.
+ *
+ * Zwischen Stützpunkten wird linear interpoliert (→ getInterpolierteLst).
+ * Toleranz-Ziel: ±5 €/Monat im Vergleich zum BMF-PAP.
+ *
+ * Tech-Schuld: Dieser Lookup-Ansatz ist eine Zwischenlösung. Die saubere
+ * Voll-PAP-Implementation nach § 39b Abs. 2 Satz 7 EStG ist Thema eines
+ * späteren Refactor-Prompts.
+ *
+ * Format: [Jahres-Brutto €, LSt-Jahreswert €]
+ */
+export const LST_LOOKUP_V_2026: Array<[number, number]> = [
+  [      0,         0 ],
+  [  9_600,     886.00 ],
+  [ 12_000,   1_152.00 ],
+  [ 14_400,   1_417.92 ],
+  [ 18_000,   1_842.00 ],
+  [ 24_000,   3_636.00 ],
+  [ 30_000,   5_664.00 ],
+  [ 36_000,   7_587.96 ],
+  [ 48_000,  11_460.00 ],
+  [ 60_000,  15_514.92 ],
+  [ 84_000,  24_237.00 ],
+];
+
+/**
+ * Empirisch kalibrierte Lookup-Tabelle für Lohnsteuer Kl. VI 2026.
+ * Gleiche Parameter wie LST_LOOKUP_V_2026. Kl. VI hat keinen Grundfreibetrag,
+ * daher Anker bei (0, 0) ist Vereinfachung — für Bruttos < 800 €/Monat
+ * ist die Faktor-Extrapolation zum Ursprung eine akzeptable Nische.
+ */
+export const LST_LOOKUP_VI_2026: Array<[number, number]> = [
+  [      0,         0 ],
+  [  9_600,   1_080.96 ],
+  [ 12_000,   1_350.96 ],
+  [ 14_400,   1_620.96 ],
+  [ 18_000,   2_140.92 ],
+  [ 24_000,   4_167.96 ],
+  [ 30_000,   6_195.00 ],
+  [ 36_000,   8_061.96 ],
+  [ 48_000,  11_991.96 ],
+  [ 60_000,  16_047.00 ],
+  [ 84_000,  24_768.96 ],
+];
+
+/**
+ * Liefert die Jahres-Lohnsteuer für einen gegebenen Jahres-Brutto per linearer
+ * Interpolation zwischen den Lookup-Stützpunkten.
+ *
+ * Grenzverhalten:
+ * - Unterhalb des ersten Stützpunkts (< 0): liefert 0
+ * - Oberhalb des letzten Stützpunkts (> 84_000): extrapoliert mit der Steigung
+ *   des letzten Intervalls (60_000 → 84_000). Das ist für Hochlohn-Nische
+ *   (>7.000 €/Mon) eine grobe Näherung, aber deutlich besser als 0.
+ */
+export function getInterpolierteLst(
+  jahresBrutto: number,
+  lookup: Array<[number, number]>,
+): number {
+  if (jahresBrutto <= 0) return 0;
+
+  for (let i = 0; i < lookup.length - 1; i++) {
+    const [x0, y0] = lookup[i];
+    const [x1, y1] = lookup[i + 1];
+    if (jahresBrutto >= x0 && jahresBrutto <= x1) {
+      const t = (jahresBrutto - x0) / (x1 - x0);
+      return y0 + (y1 - y0) * t;
+    }
+  }
+
+  const [xN1, yN1] = lookup[lookup.length - 2];
+  const [xN, yN] = lookup[lookup.length - 1];
+  const steigung = (yN - yN1) / (xN - xN1);
+  return yN + (jahresBrutto - xN) * steigung;
+}
+
 // BBG 2026 für die Vorsorgepauschale. Werte ident mit BBG_KV_MONAT/BBG_RV_MONAT
 // in brutto-netto.ts — Import hier nicht möglich (zirkuläre Abhängigkeit, da
 // brutto-netto.ts die Lohnsteuer-Funktionen konsumiert). Beide Stellen bei
