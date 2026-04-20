@@ -251,7 +251,9 @@ export const WERT = getAktuellerWert();
 | PV-Beitrag AN-Anteil | 1,8 % (Standard) / 2,4 % (kinderlos >23) | offen | `pflegeversicherung.ts` | § 55 SGB XI |
 | PV-Kinderabschlag ab Kind 2 | 1,55 / 1,30 / 1,05 / 0,80 % | offen | `pflegeversicherung.ts` | § 55 Abs. 3 SGB XI (PUEG 2023) |
 | Rentenwert | 40,79 € (ab 01.07.2026: 42,52 €) | **01.07.2026 Switch automatisch** | `rente.ts` als `getAktuellerRentenwert()` | § 68 SGB VI, BMAS 05.03.2026 |
-| Durchschnittsentgelt | 51.944 € (vorläufig) | 01.01.2027 | `rente.ts` | Anlage 1 SGB VI |
+| Durchschnittsentgelt | 51.944 € (vorläufig) | 01.01.2027 | `rente.ts` (`DURCHSCHNITTSENTGELT_2026`) | § 69 SGB VI + Anlage 1 |
+| Elterngeld-Einkommensgrenze | 175.000 € zvE (Paare + Alleinerziehende einheitlich) | offen | `elterngeld.ts` (`ELTERNGELD_EINKOMMENSGRENZE_2026`) | § 1 Abs. 8 BEEG |
+| Elterngeld-Vor-Geburt-Deckel | 2.770 €/Monat | offen | `elterngeld.ts` (`ELTERNGELD_VORGEBURT_DECKEL_2026`) | § 2 Abs. 3 BEEG |
 | Witwenrente-Grundfreibetrag-Faktor | 26,4 × Rentenwert (Kind: +5,6 × Rentenwert) | bleibt | Formel inline, Rentenwert aus `rente.ts` | § 97 SGB VI + Anlage 1 |
 | Pfändungs-Grundfreibetrag | 1.555,00 € (ab 01.07.2026: 1.587,40 €) | **01.07.2026 Switch automatisch** | `pfaendung.ts` | § 850c ZPO, BGBl. 2026 I Nr. 80 |
 | Pendlerpauschale | **einheitlich 0,38 €/km ab 1. km** (seit 01.01.2026) | keine bekannt | `pendlerpauschale.ts` als `PENDLERPAUSCHALE_SATZ_2026` | § 9 Abs. 1 Nr. 4 EStG i.d.F. StÄndG 2025 |
@@ -413,3 +415,6 @@ Reihenfolge nach Freigabe: erst 85 (Warning wegräumen), dann 68 (CMP dazu).
 - **107b** — Lint-Guards `lint:footer` (footer-uniqueness + footer-hardcoded-count), Guard G14 ✅
 - **107c** — `prebuild`-Hook kettet `check-footer` + `check-jahreswerte` + `generate-client-data`; Repo-Housekeeping (gitignore, `docs/audit-arbeitspapiere/`) ✅
 - **108** — Doku-Sync nach Sprint 20.04.2026 ✅
+- **109** — Welle 1 Stufe 3 Audit (Familie + Arbeitsrecht, 6 Rechner, Bericht + Testfälle) ✅
+- **110** — AdSense-Basis-Loader in `<head>` für Crawl-Erkennung ✅
+- **111** — Welle 1 Stufe 3 P1-Pass: Elterngeld 175k-Grenze + Ersatzrate aus Netto vor Geburt + 2770-Deckel; Minijob Rentenpunkte-Divisor SSOT `DURCHSCHNITTSENTGELT_2026` ✅
