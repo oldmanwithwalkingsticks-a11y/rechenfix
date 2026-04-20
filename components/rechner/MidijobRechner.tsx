@@ -12,15 +12,23 @@ import {
   getMidijobUntergrenze,
   MIDIJOB_OBERGRENZE_MONAT,
 } from '@/lib/berechnungen/midijob-uebergang';
+import {
+  KV_BASISSATZ_AN_2026,
+  RV_SATZ_AN_2026,
+  AV_SATZ_AN_2026,
+} from '@/lib/berechnungen/brutto-netto';
+import { KV_ZUSATZBEITRAG_AN_DURCHSCHNITT_2026 } from '@/lib/berechnungen/sv-parameter';
+import { pvAnteilAn2026 } from '@/lib/berechnungen/pflegeversicherung';
 
 type Steuerklasse = 'I' | 'II' | 'III' | 'IV' | 'V' | 'VI';
 
 const MIDIJOB_UNTERGRENZE = getMidijobUntergrenze();
 const MIDIJOB_OBERGRENZE = MIDIJOB_OBERGRENZE_MONAT;
 
-// SV-Sätze 2026 (vereinfacht)
-const SV_AN = 0.0930 + 0.0875 + 0.0170 + 0.0130; // RV + KV + PV + AV = ca. 21.05%
-const SV_AG = 0.0930 + 0.0875 + 0.0170 + 0.0130;
+// SV-Grundsätze 2026 aus SSOT-Libs (ohne PV — wird über pvAnteilAn2026 geholt,
+// abhängig von Kinderanzahl und Kinderlos-Zuschlag § 55 Abs. 3 SGB XI).
+const KV_AN_GESAMT = KV_BASISSATZ_AN_2026 + KV_ZUSATZBEITRAG_AN_DURCHSCHNITT_2026;
+const SV_AN_OHNE_PV = RV_SATZ_AN_2026 + KV_AN_GESAMT + AV_SATZ_AN_2026;
 
 // Vereinfachte Monatslohnsteuer: nutzt den zentralen 2026-Tarif
 // (§ 32a EStG) aus lib/berechnungen/einkommensteuer.ts.
@@ -37,7 +45,7 @@ export default function MidijobRechner() {
   const [brutto, setBrutto] = useState('1200');
   const [klasse, setKlasse] = useState<Steuerklasse>('I');
   const [kirchensteuer, setKirchensteuer] = useState(false);
-  const [kinder, setKinder] = useState(false);
+  const [anzahlKinder, setAnzahlKinder] = useState<number>(0);
 
   const ergebnis = useMemo(() => {
     const b = parseDeutscheZahl(brutto) || 0;
@@ -48,9 +56,15 @@ export default function MidijobRechner() {
     const imBereich = b >= MIDIJOB_UNTERGRENZE && b <= MIDIJOB_OBERGRENZE;
     const be = imBereich ? berechneBemessungsgrundlageAN(b) : b;
 
-    const pvZuschlag = !kinder ? 0.006 : 0;
-    const anSvSatz = SV_AN + pvZuschlag;
-    const agSvSatz = SV_AG;
+    // PV-AN-Satz inkl. Kinderlos-Zuschlag / Kinderabschlag nach § 55 Abs. 3 SGB XI.
+    // Vereinfachung: Wer anzahlKinder = 0 hat, gilt als kinderlos (Zuschlag greift,
+    // Annahme Alter > 23). Ab Kind 2 greift der Kinderabschlag von 0,25 pp pro Kind
+    // (bis Kind 5 gedeckelt). Eltern mit Kindern über 25 Jahren müssen derzeit für
+    // den Kinderlos-Zuschlag-Nachweis ihren Elternstatus separat belegen — ein
+    // explizites UI-Flag dafür könnte Prompt 117 nachreichen.
+    const pvAnSatz = pvAnteilAn2026(anzahlKinder, true, false);
+    const anSvSatz = SV_AN_OHNE_PV + pvAnSatz;
+    const agSvSatz = anSvSatz; // Display-Wert, keine Midijob-AG-Logik
 
     const anSv = be * anSvSatz;
     const agSv = b * agSvSatz;
@@ -67,7 +81,7 @@ export default function MidijobRechner() {
     const ersparnis = netto - nettoRegulaer;
 
     return { b, be, imBereich, anSv, agSv, lohnsteuer, soli, kiSt, netto, nettoRegulaer, ersparnis };
-  }, [brutto, klasse, kirchensteuer, kinder]);
+  }, [brutto, klasse, kirchensteuer, anzahlKinder]);
 
   const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
@@ -109,23 +123,27 @@ export default function MidijobRechner() {
         </div>
       </div>
 
-      {/* 3: Kinder */}
+      {/* 3: Kinder unter 25 (für PV-Kinderabschlag und Kinderlos-Zuschlag) */}
       <div className="mb-6">
         <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
-          Kinder (für PV-Zuschlag)
+          Anzahl Kinder unter 25 Jahren
         </h2>
-        <div className="flex gap-2">
-          {([[true, 'Ja'], [false, 'Nein (+0,6 %)']] as const).map(([val, label]) => (
+        <div className="flex flex-wrap gap-2">
+          {[0, 1, 2, 3, 4, 5].map(n => (
             <button
-              key={String(val)}
-              onClick={() => setKinder(val)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${kinder === val ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
+              key={n}
+              onClick={() => setAnzahlKinder(n)}
+              className={`min-w-[48px] min-h-[48px] px-4 rounded-xl text-sm font-medium transition-all ${anzahlKinder === n ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
+              aria-pressed={anzahlKinder === n}
             >
-              {label}
+              {n === 5 ? '5+' : n}
             </button>
           ))}
         </div>
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-2 leading-relaxed">
+          Kinderlos (über 23): Zuschlag +0,6 %-Punkte. Ab Kind 2 verringert sich Ihr PV-Beitrag um 0,25 %-Punkte pro Kind unter 25 (bis Kind 5 gedeckelt, § 55 Abs. 3 SGB XI).
+        </p>
       </div>
 
       {/* 4: Kirchensteuer */}
@@ -226,7 +244,7 @@ export default function MidijobRechner() {
         eingaben={{
           brutto: `${fmtEuro(ergebnis.b)} €`,
           steuerklasse: klasse,
-          kinder: kinder ? 'ja' : 'nein',
+          kinderUnter25: anzahlKinder,
           kirchensteuer: kirchensteuer ? 'ja' : 'nein',
         }}
         ergebnis={{
