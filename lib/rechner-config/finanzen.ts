@@ -1482,6 +1482,10 @@ Zwischen 603,01 Euro und 2.000 Euro Monatsverdienst beginnt der sogenannte **Mid
         frage: 'Kann ich mehrere Minijobs haben?',
         antwort: 'Grundsätzlich ja, aber Vorsicht: Die Verdienste aus allen Minijobs werden zusammengerechnet. Übersteigen sie insgesamt die Grenze von 603 €, sind alle Beschäftigungen sozialversicherungspflichtig. Neben einem Hauptjob ist immer nur ein Minijob abgabenfrei — jeder weitere Minijob wird zum Hauptjob addiert und ist voll beitragspflichtig. Die Minijob-Zentrale überwacht dies automatisch.',
       },
+      {
+        frage: 'Pauschale oder individuelle Versteuerung — was ist günstiger?',
+        antwort: 'Der Arbeitgeber darf nach § 40a Abs. 2 EStG wählen: Pauschale 2 %-Lohnsteuer (Standard) ODER individuelle Versteuerung über die Lohnsteuerkarte des Arbeitnehmers. Die individuelle Variante lohnt sich praktisch nur in einer Konstellation: Steuerklasse I UND der Minijob ist das einzige Einkommen — dann liegt das Jahresbrutto (max. 7.236 €) unter dem Grundfreibetrag von 12.348 €, es fällt 0 € Lohnsteuer an, und der AN bekommt das Brutto voll ausgezahlt. Bei Steuerklasse V oder VI oder bei weiteren Einkünften verschlechtert die individuelle Versteuerung das Netto oft deutlich. Unser Rechner zeigt aktuell die Pauschal-Variante — für die Individual-Berechnung den [Brutto-Netto-Rechner](/finanzen/brutto-netto-rechner) nutzen.',
+      },
     ],
   },
   {
