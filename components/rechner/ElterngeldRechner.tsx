@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { berechneElterngeld, berechneVergleich, ELTERNGELD_EINKOMMENSGRENZE_2026, type ElterngeldVariante } from '@/lib/berechnungen/elterngeld';
+import { berechneElterngeld, berechneVergleich, ELTERNGELD_EINKOMMENSGRENZE_2026, ELTERNGELD_VORGEBURT_DECKEL_2026, type ElterngeldVariante } from '@/lib/berechnungen/elterngeld';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
@@ -183,9 +183,16 @@ export default function ElterngeldRechner() {
               <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">Aufschlüsselung</p>
             </div>
             <div className="divide-y divide-gray-100 dark:divide-gray-700">
-              <div className="flex justify-between px-4 py-3 text-sm">
-                <span className="text-gray-600 dark:text-gray-400">Relevantes Einkommen</span>
-                <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(ergebnis.relevantesEinkommen)} €</span>
+              <div className="px-4 py-3 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-gray-600 dark:text-gray-400">Relevantes Einkommen</span>
+                  <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(ergebnis.relevantesEinkommen)} €</span>
+                </div>
+                {nVor > ELTERNGELD_VORGEBURT_DECKEL_2026 && nNach > 0 && (
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 text-right">
+                    Vor-Geburt-Netto auf {ELTERNGELD_VORGEBURT_DECKEL_2026.toLocaleString('de-DE')} € gedeckelt (§ 2 Abs. 3 BEEG)
+                  </p>
+                )}
               </div>
               <div className="flex justify-between px-4 py-3 text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Ersatzrate</span>
