@@ -38,11 +38,11 @@ function LiveSekundenZaehler({ geburtsdatumMs }: { geburtsdatumMs: number }) {
 
   return (
     <div className="bg-gray-900 dark:bg-gray-950 rounded-xl p-5 mb-6 text-center">
-      <p className="text-gray-600 text-sm mb-2">Sie leben seit</p>
+      <p className="text-gray-400 text-sm mb-2">Sie leben seit</p>
       <p className="text-3xl sm:text-4xl font-mono font-bold text-green-400 tabular-nums tracking-wider">
         {sekunden}
       </p>
-      <p className="text-gray-600 text-sm mt-2">Sekunden</p>
+      <p className="text-gray-400 text-sm mt-2">Sekunden</p>
     </div>
   );
 }
@@ -60,8 +60,9 @@ export default function GeburtstagRechner() {
     <div>
       {/* Geburtsdatum */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Geburtsdatum</label>
+        <label htmlFor="geburtsdatum" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Geburtsdatum</label>
         <input
+          id="geburtsdatum"
           type="date"
           value={geburtsdatum}
           onChange={ev => setGeburtsdatum(ev.target.value)}
@@ -159,7 +160,7 @@ export default function GeburtstagRechner() {
                       {ms.label}
                     </span>
                   </div>
-                  <span className={`tabular-nums ${ms.vergangen ? 'text-green-600 dark:text-green-400' : 'text-gray-500 dark:text-gray-400'}`}>
+                  <span className={`tabular-nums ${ms.vergangen ? 'text-green-700 dark:text-green-400' : 'text-gray-600 dark:text-gray-400'}`}>
                     {fmtDatum(ms.datum)}
                   </span>
                 </div>
