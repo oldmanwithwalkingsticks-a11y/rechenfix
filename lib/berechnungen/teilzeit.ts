@@ -10,6 +10,8 @@ export interface TeilzeitEingabe {
   kirchensteuer: boolean;
   urlaubstageVollzeit: number;
   arbeitstageProWocheTeilzeit: number; // 3, 4 oder 5
+  /** Arbeitstage/Woche in Vollzeit (Default 5; 6 bei Einzelhandel / Gastronomie). */
+  arbeitstageProWocheVollzeit?: number;
 }
 
 export interface TeilzeitErgebnis {
@@ -37,6 +39,14 @@ function kirchensteuersatz(bundesland: string): 8 | 9 {
   return (bundesland === 'BY' || bundesland === 'BW') ? 8 : 9;
 }
 
+// § 5 Abs. 2 BUrlG-konforme Rundung: Bruchteile ≥ 0,5 Tage auf, sonst ab.
+// Identisch zu Implementation in urlaubstage.ts — SSOT-Konsolidierung offen für Prompt 113.
+function rundeBuRlGKonform(tage: number): number {
+  const ganz = Math.floor(tage);
+  const rest = tage - ganz;
+  return rest >= 0.5 ? ganz + 1 : ganz;
+}
+
 function makeBnEingabe(brutto: number, steuerklasse: TeilzeitEingabe['steuerklasse'], bundesland: string, kirchensteuer: boolean): BruttoNettoEingabe {
   return {
     bruttoMonat: brutto,
@@ -55,9 +65,12 @@ function makeBnEingabe(brutto: number, steuerklasse: TeilzeitEingabe['steuerklas
 
 export function berechneTeilzeit(eingabe: TeilzeitEingabe): TeilzeitErgebnis | null {
   const { vollzeitBrutto, vollzeitStunden, teilzeitStunden, steuerklasse, bundesland, kirchensteuer, urlaubstageVollzeit, arbeitstageProWocheTeilzeit } = eingabe;
+  const arbeitstageProWocheVollzeit = eingabe.arbeitstageProWocheVollzeit ?? 5;
 
   if (vollzeitBrutto <= 0 || vollzeitStunden <= 0 || teilzeitStunden <= 0) return null;
   if (teilzeitStunden > vollzeitStunden) return null;
+  if (arbeitstageProWocheVollzeit < 1 || arbeitstageProWocheVollzeit > 7) return null;
+  if (arbeitstageProWocheTeilzeit > arbeitstageProWocheVollzeit) return null;
 
   const teilzeitFaktor = teilzeitStunden / vollzeitStunden;
   const teilzeitBrutto = Math.round(vollzeitBrutto * teilzeitFaktor * 100) / 100;
@@ -82,8 +95,11 @@ export function berechneTeilzeit(eingabe: TeilzeitEingabe): TeilzeitErgebnis | n
   const wochenProMonat = 4.33;
   const stundenlohn = Math.round((vollzeitBrutto / (vollzeitStunden * wochenProMonat)) * 100) / 100;
 
-  // Urlaubstage
-  const urlaubstageTeilzeit = Math.ceil(urlaubstageVollzeit * (arbeitstageProWocheTeilzeit / 5));
+  // Urlaubstage: BAG-konforme Umrechnung mit tatsächlicher Vollzeit-Arbeitstagesanzahl
+  // (häufig 5, im Einzelhandel/Gastronomie auch 6). § 5 Abs. 2 BUrlG-Rundung.
+  const urlaubstageTeilzeit = rundeBuRlGKonform(
+    urlaubstageVollzeit * (arbeitstageProWocheTeilzeit / arbeitstageProWocheVollzeit),
+  );
 
   return {
     teilzeitFaktor,

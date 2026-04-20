@@ -39,6 +39,7 @@ export default function TeilzeitRechner() {
   const [kirchensteuer, setKirchensteuer] = useState(false);
   const [urlaubstage, setUrlaubstage] = useState('30');
   const [arbeitstage, setArbeitstage] = useState(5);
+  const [arbeitstageVollzeit, setArbeitstageVollzeit] = useState(5);
 
   const nVollzeitBrutto = parseDeutscheZahl(vollzeitBrutto);
   const nVollzeitStunden = parseDeutscheZahl(vollzeitStunden);
@@ -56,8 +57,9 @@ export default function TeilzeitRechner() {
         kirchensteuer,
         urlaubstageVollzeit: nUrlaubstage,
         arbeitstageProWocheTeilzeit: arbeitstage,
+        arbeitstageProWocheVollzeit: arbeitstageVollzeit,
       }),
-    [nVollzeitBrutto, nVollzeitStunden, nTeilzeitStunden, steuerklasse, bundesland, kirchensteuer, nUrlaubstage, arbeitstage],
+    [nVollzeitBrutto, nVollzeitStunden, nTeilzeitStunden, steuerklasse, bundesland, kirchensteuer, nUrlaubstage, arbeitstage, arbeitstageVollzeit],
   );
 
   const fmt = (n: number) => Math.round(n).toLocaleString('de-DE');
@@ -147,10 +149,21 @@ export default function TeilzeitRechner() {
       </div>
 
       {/* Urlaub */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Urlaubstage (Vollzeit)</label>
           <NummerEingabe value={urlaubstage} onChange={setUrlaubstage} placeholder="z.B. 30" einheit="Tage" />
+        </div>
+        <div>
+          <label htmlFor="teilzeit-select-vz" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Arbeitstage/Woche (Vollzeit)</label>
+          <select id="teilzeit-select-vz"
+            value={arbeitstageVollzeit}
+            onChange={e => setArbeitstageVollzeit(parseInt(e.target.value))}
+            className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"
+          >
+            <option value={5}>5 Tage (Standard)</option>
+            <option value={6}>6 Tage (z. B. Einzelhandel)</option>
+          </select>
         </div>
         <div>
           <label htmlFor="teilzeit-select-3" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Arbeitstage/Woche (Teilzeit)</label>
@@ -159,9 +172,11 @@ export default function TeilzeitRechner() {
             onChange={e => setArbeitstage(parseInt(e.target.value))}
             className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"
           >
+            <option value={6}>6 Tage</option>
             <option value={5}>5 Tage</option>
             <option value={4}>4 Tage</option>
             <option value={3}>3 Tage</option>
+            <option value={2}>2 Tage</option>
           </select>
         </div>
       </div>
