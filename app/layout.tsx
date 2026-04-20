@@ -89,6 +89,17 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="de" suppressHydrationWarning className={inter.variable}>
+      <head>
+        {/* AdSense Basis-Loader — notwendig für AdSense-Crawler-Erkennung.
+            Zeigt keine Werbung bis AdSense freigegeben ist. Setzt keine Cookies,
+            solange keine Anzeigen geladen werden. CMP-Integration folgt in
+            Prompt 68 nach Freigabe. */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1389746597486587"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="min-h-screen flex flex-col bg-white dark:bg-slate-900 text-gray-800 dark:text-gray-100 antialiased font-sans">
         <a
           href="#main-content"
