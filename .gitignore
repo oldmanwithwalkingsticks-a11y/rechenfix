@@ -38,3 +38,9 @@ Dokumente/GitHub Token.txt
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Claude Code local settings (maschinenspezifisch)
+.claude/settings.local.json
+
+# Generierte Reports (Quell-Code ist committed, Output nicht)
+/reports/
