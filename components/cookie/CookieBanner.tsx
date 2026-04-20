@@ -144,7 +144,7 @@ function BannerSettingsButton() {
   return (
     <button
       onClick={openSettings}
-      className="text-gray-600 hover:text-white font-medium px-5 py-2.5 transition-colors text-sm underline underline-offset-2"
+      className="text-gray-300 hover:text-white font-medium px-5 py-2.5 transition-colors text-sm underline underline-offset-2"
     >
       Einstellungen
     </button>
