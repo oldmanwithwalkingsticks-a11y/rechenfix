@@ -6,7 +6,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
-import { berechneEStGrund } from '@/lib/berechnungen/einkommensteuer';
+import { berechneLohnsteuerJahr } from '@/lib/berechnungen/lohnsteuer';
 import {
   berechneBemessungsgrundlageAN,
   getMidijobUntergrenze,
@@ -30,15 +30,18 @@ const MIDIJOB_OBERGRENZE = MIDIJOB_OBERGRENZE_MONAT;
 const KV_AN_GESAMT = KV_BASISSATZ_AN_2026 + KV_ZUSATZBEITRAG_AN_DURCHSCHNITT_2026;
 const SV_AN_OHNE_PV = RV_SATZ_AN_2026 + KV_AN_GESAMT + AV_SATZ_AN_2026;
 
-// Vereinfachte Monatslohnsteuer: nutzt den zentralen 2026-Tarif
-// (§ 32a EStG) aus lib/berechnungen/einkommensteuer.ts.
-function einfacheLohnsteuerMonat(brutto: number, klasse: Steuerklasse): number {
-  const jahr = brutto * 12;
-  const zvEff = klasse === 'III' ? jahr / 2 : jahr;
-  let steuer = berechneEStGrund(Math.max(0, zvEff), 2026);
-  if (klasse === 'III') steuer *= 2;
-  if (klasse === 'V' || klasse === 'VI') steuer *= 1.15;
-  return Math.max(0, steuer / 12);
+// Mapping Römisch → Numerisch für berechneLohnsteuerJahr (§ 39b EStG PAP).
+const KLASSE_NUM: Record<Steuerklasse, 1 | 2 | 3 | 4 | 5 | 6> = {
+  I: 1, II: 2, III: 3, IV: 4, V: 5, VI: 6,
+};
+
+// Monatslohnsteuer über zentrale LSt-Lib (§ 39b EStG PAP 2026) —
+// kein erfundener Steuerklassen-Faktor für V/VI mehr. Jahresfreibetrag 0,
+// weil Midijob-Rechner keinen ELStAM-Freibetrag modelliert.
+function lohnsteuerMonat(brutto: number, klasse: Steuerklasse): number {
+  const jahr = Math.max(0, brutto * 12);
+  const lstJahr = berechneLohnsteuerJahr(jahr, KLASSE_NUM[klasse], 0);
+  return Math.max(0, lstJahr / 12);
 }
 
 export default function MidijobRechner() {
@@ -69,7 +72,7 @@ export default function MidijobRechner() {
     const anSv = be * anSvSatz;
     const agSv = b * agSvSatz;
 
-    const lohnsteuer = einfacheLohnsteuerMonat(b, klasse);
+    const lohnsteuer = lohnsteuerMonat(b, klasse);
     const soli = lohnsteuer > 1000 ? lohnsteuer * 0.055 : 0;
     const kiSt = kirchensteuer ? lohnsteuer * 0.09 : 0;
 
