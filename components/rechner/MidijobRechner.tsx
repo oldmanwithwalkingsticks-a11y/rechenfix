@@ -7,6 +7,7 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 import { berechneLohnsteuerJahr } from '@/lib/berechnungen/lohnsteuer';
+import { berechneSoli } from '@/lib/berechnungen/einkommensteuer';
 import {
   berechneBemessungsgrundlageAN,
   getMidijobUntergrenze,
@@ -73,7 +74,13 @@ export default function MidijobRechner() {
     const agSv = b * agSvSatz;
 
     const lohnsteuer = lohnsteuerMonat(b, klasse);
-    const soli = lohnsteuer > 1000 ? lohnsteuer * 0.055 : 0;
+
+    // Soli nach § 4 SolzG mit Freigrenze + Milderungszone — nicht mehr harte
+    // 1.000-€-Monats-Schwelle. splitting=false, weil Midijob-Modell
+    // Einzelbetrachtung ist (Partner-zvE nicht vom Rechner erfasst).
+    const lstJahr = lohnsteuer * 12;
+    const soli = berechneSoli(lstJahr, false, 2026) / 12;
+
     const kiSt = kirchensteuer ? lohnsteuer * 0.09 : 0;
 
     const netto = b - anSv - lohnsteuer - soli - kiSt;
