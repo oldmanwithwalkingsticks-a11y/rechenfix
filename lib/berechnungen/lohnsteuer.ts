@@ -2,7 +2,6 @@ import {
   berechneEStGrund,
   berechneSoli,
   WK_PAUSCHALE_AN_2026,
-  GRUNDFREIBETRAG_2026,
 } from './einkommensteuer';
 import { pvAnteilAnVorsorge2026 } from './pflegeversicherung';
 
@@ -255,13 +254,11 @@ export function berechneLohnsteuerJahr(
       return berechneEStGrund(halb, 2026) * 2;
     }
     case 5: {
-      // Stark vereinfachte Approximation nach PAP: hohe LSt, kein Grundfreibetrag
-      // Näherung: ESt(zvE + 2×Grundfreibetrag) − ESt(2×Grundfreibetrag), gedeckelt
-      const gf = GRUNDFREIBETRAG_2026;
-      const estMitBasis = berechneEStGrund(zvE + 2 * gf, 2026);
-      const estBasis = berechneEStGrund(2 * gf, 2026);
-      const naeherung = estMitBasis - estBasis;
-      return Math.max(naeherung, zvE * 0.14);
+      // Kl. V: empirisch kalibrierter Lookup (§ 39b Abs. 2 Satz 7 EStG — Voll-PAP
+      // als Refactor offen, siehe CLAUDE.md Methodische Lehre Prompt 115b2).
+      // Nutzt bruttoJahr (nicht zvE), weil die BMF-Stützpunkte gegen den
+      // gesamten Jahres-Brutto verifiziert sind (Vorsorge/WK/SA implizit).
+      return getInterpolierteLst(bruttoJahr, LST_LOOKUP_V_2026);
     }
     default:
       return berechneEStGrund(zvE, 2026);
