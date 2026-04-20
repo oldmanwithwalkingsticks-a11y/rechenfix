@@ -1,5 +1,6 @@
 import { berechneBruttoNetto, type BruttoNettoEingabe, type BruttoNettoErgebnis } from './brutto-netto';
 import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from './sv-parameter';
+import { rundeBuRlGKonform } from './_helpers';
 
 export interface TeilzeitEingabe {
   vollzeitBrutto: number;
@@ -39,13 +40,6 @@ function kirchensteuersatz(bundesland: string): 8 | 9 {
   return (bundesland === 'BY' || bundesland === 'BW') ? 8 : 9;
 }
 
-// § 5 Abs. 2 BUrlG-konforme Rundung: Bruchteile ≥ 0,5 Tage auf, sonst ab.
-// Identisch zu Implementation in urlaubstage.ts — SSOT-Konsolidierung offen für Prompt 113.
-function rundeBuRlGKonform(tage: number): number {
-  const ganz = Math.floor(tage);
-  const rest = tage - ganz;
-  return rest >= 0.5 ? ganz + 1 : ganz;
-}
 
 function makeBnEingabe(brutto: number, steuerklasse: TeilzeitEingabe['steuerklasse'], bundesland: string, kirchensteuer: boolean): BruttoNettoEingabe {
   return {

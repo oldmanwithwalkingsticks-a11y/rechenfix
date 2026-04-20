@@ -1,11 +1,4 @@
-// § 5 Abs. 2 BUrlG-konforme Rundung: Bruchteile ≥ 0,5 auf volle Tage auf,
-// sonst ab. Identisch zu Implementation in teilzeit.ts — SSOT-Konsolidierung
-// in einen gemeinsamen Helfer ist offen für Prompt 113.
-function rundeBuRlGKonform(tage: number): number {
-  const ganz = Math.floor(tage);
-  const rest = tage - ganz;
-  return rest >= 0.5 ? ganz + 1 : ganz;
-}
+import { rundeBuRlGKonform } from './_helpers';
 
 // --- Modus 1: Urlaubsanspruch ---
 
