@@ -7,12 +7,16 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 import { berechneEStGrund } from '@/lib/berechnungen/einkommensteuer';
+import {
+  berechneBemessungsgrundlageAN,
+  getMidijobUntergrenze,
+  MIDIJOB_OBERGRENZE_MONAT,
+} from '@/lib/berechnungen/midijob-uebergang';
 
 type Steuerklasse = 'I' | 'II' | 'III' | 'IV' | 'V' | 'VI';
 
-const MIDIJOB_UNTERGRENZE = 603.01;
-const MIDIJOB_OBERGRENZE = 2000;
-const FAKTOR_F = 0.6847;
+const MIDIJOB_UNTERGRENZE = getMidijobUntergrenze();
+const MIDIJOB_OBERGRENZE = MIDIJOB_OBERGRENZE_MONAT;
 
 // SV-Sätze 2026 (vereinfacht)
 const SV_AN = 0.0930 + 0.0875 + 0.0170 + 0.0130; // RV + KV + PV + AV = ca. 21.05%
@@ -38,13 +42,11 @@ export default function MidijobRechner() {
   const ergebnis = useMemo(() => {
     const b = parseDeutscheZahl(brutto) || 0;
 
-    // BE: reduzierte beitragspflichtige Einnahme für AN
-    let be = b;
-    let imBereich = false;
-    if (b >= MIDIJOB_UNTERGRENZE && b <= MIDIJOB_OBERGRENZE) {
-      be = FAKTOR_F * MIDIJOB_OBERGRENZE + ((MIDIJOB_OBERGRENZE - MIDIJOB_OBERGRENZE * FAKTOR_F) / (MIDIJOB_OBERGRENZE - MIDIJOB_UNTERGRENZE)) * (b - MIDIJOB_UNTERGRENZE);
-      imBereich = true;
-    }
+    // BE: reduzierte beitragspflichtige Einnahme für AN nach § 20a SGB IV.
+    // Formel und Konstanten in lib/berechnungen/midijob-uebergang.ts —
+    // SSOT, testbar, stichtag-switch für UG zum 01.01.2027 (633,01 €).
+    const imBereich = b >= MIDIJOB_UNTERGRENZE && b <= MIDIJOB_OBERGRENZE;
+    const be = imBereich ? berechneBemessungsgrundlageAN(b) : b;
 
     const pvZuschlag = !kinder ? 0.006 : 0;
     const anSvSatz = SV_AN + pvZuschlag;
