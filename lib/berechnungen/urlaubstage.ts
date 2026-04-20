@@ -1,3 +1,12 @@
+// § 5 Abs. 2 BUrlG-konforme Rundung: Bruchteile ≥ 0,5 auf volle Tage auf,
+// sonst ab. Identisch zu Implementation in teilzeit.ts — SSOT-Konsolidierung
+// in einen gemeinsamen Helfer ist offen für Prompt 113.
+function rundeBuRlGKonform(tage: number): number {
+  const ganz = Math.floor(tage);
+  const rest = tage - ganz;
+  return rest >= 0.5 ? ganz + 1 : ganz;
+}
+
 // --- Modus 1: Urlaubsanspruch ---
 
 export interface UrlaubsanspruchEingabe {
@@ -83,7 +92,8 @@ export function berechneUrlaubsanspruch(e: UrlaubsanspruchEingabe): Urlaubsanspr
     });
   }
 
-  const gesamt = Math.round(basis * 2) / 2; // Auf halbe Tage runden
+  // § 5 Abs. 2 BUrlG: Bruchteile ≥ 0,5 Tage werden auf volle Tage aufgerundet.
+  const gesamt = rundeBuRlGKonform(basis);
   const ueberMinimum = Math.round((gesamt - (e.teilzeit && teilzeitFaktor
     ? gesetzlichMinimum * teilzeitFaktor
     : gesetzlichMinimum)) * 10) / 10;
@@ -141,8 +151,7 @@ export function berechneResturlaub(e: ResturlaubEingabe): ResturlaubErgebnis | n
   if (ersteJahreshaelfte) {
     // Anteilig: volle Monate / 12
     const monate = monat + 1;
-    anspruch = Math.round((e.urlaubstageProJahr / 12) * monate * 10) / 10;
-    anspruch = Math.round(anspruch * 2) / 2; // halbe Tage
+    anspruch = rundeBuRlGKonform((e.urlaubstageProJahr / 12) * monate); // § 5 Abs. 2 BUrlG
     vollerAnspruch = false;
     aufschluesselung.push({ label: 'Jahresurlaub', wert: `${e.urlaubstageProJahr} Tage` });
     aufschluesselung.push({ label: `Anteilig (${monate} Monate)`, wert: `${anspruch} Tage` });
