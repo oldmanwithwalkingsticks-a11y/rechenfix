@@ -12,6 +12,12 @@ import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 type Antrieb = 'verbrenner' | 'hybrid' | 'eAutoUnter70' | 'eAutoUeber70';
 type Methode = 'pauschal' | 'einzel';
 
+// § 6 Abs. 1 Nr. 4 Satz 2 Nr. 3 EStG (ab 01.01.2025): Plug-in-Hybrid darf die
+// 0,5-%-Regel nur anwenden, wenn CO2-Ausstoß ≤ 50 g/km UND rein elektrische
+// Mindestreichweite ≥ 80 km.
+const HYBRID_CO2_GRENZE_G_KM = 50;
+const HYBRID_REICHWEITE_MIN_KM = 80;
+
 const SATZ: Record<Antrieb, number> = {
   verbrenner: 0.01,
   hybrid: 0.005,
@@ -34,6 +40,8 @@ export default function FirmenwagenRechner() {
   const [methode, setMethode] = useState<Methode>('pauschal');
   const [zuzahlung, setZuzahlung] = useState('0');
   const [grenzsteuersatz, setGrenzsteuersatz] = useState('35');
+  const [co2, setCo2] = useState('50');
+  const [reichweite, setReichweite] = useState('80');
 
   const ergebnis = useMemo(() => {
     const bruttoListenpreis = parseDeutscheZahl(blp) || 0;
@@ -41,6 +49,11 @@ export default function FirmenwagenRechner() {
     const fahrtenProMonat = parseDeutscheZahl(fahrten) || 0;
     const zuz = parseDeutscheZahl(zuzahlung) || 0;
     const gSatz = (parseDeutscheZahl(grenzsteuersatz) || 0) / 100;
+    const co2Wert = parseDeutscheZahl(co2) || 0;
+    const reichweiteWert = parseDeutscheZahl(reichweite) || 0;
+
+    const hybridBedingungenErfuellt =
+      co2Wert <= HYBRID_CO2_GRENZE_G_KM && reichweiteWert >= HYBRID_REICHWEITE_MIN_KM;
 
     const berechneFuer = (a: Antrieb) => {
       const privat = bruttoListenpreis * SATZ[a];
@@ -52,15 +65,19 @@ export default function FirmenwagenRechner() {
       return { privat, arbeitsweg, gwv, steuerMonat };
     };
 
-    const aktuell = berechneFuer(antrieb);
+    // Fallback: Hybrid ohne erfüllte Bedingungen wird wie Verbrenner (1 %) gerechnet.
+    // Die Vergleichs-Spalte "Hybrid" bleibt pädagogisch beim Idealfall 0,5 %.
+    const aktuell = antrieb === 'hybrid' && !hybridBedingungenErfuellt
+      ? berechneFuer('verbrenner')
+      : berechneFuer(antrieb);
     const verbrenner = berechneFuer('verbrenner');
     const hybrid = berechneFuer('hybrid');
     const eAuto = berechneFuer(bruttoListenpreis <= 70000 ? 'eAutoUnter70' : 'eAutoUeber70');
 
     const ersparnisEAuto = verbrenner.steuerMonat - eAuto.steuerMonat;
 
-    return { aktuell, verbrenner, hybrid, eAuto, ersparnisEAuto };
-  }, [blp, antrieb, km, fahrten, methode, zuzahlung, grenzsteuersatz]);
+    return { aktuell, verbrenner, hybrid, eAuto, ersparnisEAuto, hybridBedingungenErfuellt };
+  }, [blp, antrieb, km, fahrten, methode, zuzahlung, grenzsteuersatz, co2, reichweite]);
 
   const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 
@@ -96,6 +113,41 @@ export default function FirmenwagenRechner() {
           value={antrieb}
           onChange={(v) => setAntrieb(v as Antrieb)}
         />
+
+        {antrieb === 'hybrid' && (
+          <div className="mt-3 p-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800/50">
+            <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">
+              Die 0,5-%-Regel gilt bei Plug-in-Hybriden nur, wenn CO₂-Ausstoß ≤ {HYBRID_CO2_GRENZE_G_KM} g/km
+              <strong> und</strong> rein elektrische Reichweite ≥ {HYBRID_REICHWEITE_MIN_KM} km (§ 6 Abs. 1 Nr. 4
+              Satz 2 Nr. 3 EStG, ab 01.01.2025).
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  CO₂-Ausstoß
+                </label>
+                <NummerEingabe value={co2} onChange={setCo2} placeholder="50" einheit="g/km" />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Elektrische Reichweite
+                </label>
+                <NummerEingabe value={reichweite} onChange={setReichweite} placeholder="80" einheit="km" />
+              </div>
+            </div>
+            {!ergebnis.hybridBedingungenErfuellt && (
+              <div className="mt-3 p-2 rounded-lg border border-amber-300 bg-amber-50 dark:border-amber-700 dark:bg-amber-900/20">
+                <p className="text-xs font-bold text-amber-800 dark:text-amber-200 mb-1">
+                  ⚠️ 0,5-%-Regel nicht anwendbar
+                </p>
+                <p className="text-xs text-amber-700 dark:text-amber-300">
+                  Da die Bedingungen nach § 6 Abs. 1 Nr. 4 Satz 2 Nr. 3 EStG nicht erfüllt sind, wird der
+                  geldwerte Vorteil wie beim Verbrenner nach der 1-%-Regel berechnet.
+                </p>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* 3: km */}
