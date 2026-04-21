@@ -8,7 +8,11 @@ import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
-type Methode = 'linear' | 'degressiv' | 'gwg';
+type Methode = 'linear' | 'degressiv' | 'gwg' | 'wohngebaeude-5';
+
+// Wohngebäude-Sonder-AfA § 7 Abs. 5a EStG: 5 % linear p. a. für neue
+// Mietwohngebäude mit Bauantrag 01.10.2023 bis 30.09.2029.
+const WOHNGEBAEUDE_SATZ_PROZENT = 5;
 
 interface JahresRow {
   jahr: number;
@@ -78,9 +82,34 @@ export default function AfaRechner() {
       return { k, nd, methode: methodeEffektiv, rows, jaehrlich, linSatz: 100 / nd, degSatzNum: 0, anteilErstjahr, startJahr, gwgOk: true, degressivGesperrt };
     }
 
+    if (methodeEffektiv === 'wohngebaeude-5') {
+      // § 7 Abs. 5a EStG: 5 % linear p. a., Laufzeit automatisch 20 Jahre.
+      // Der nd-Input wird ignoriert, weil der Satz durch das Gesetz fest ist.
+      const jaehrlich = k * (WOHNGEBAEUDE_SATZ_PROZENT / 100);
+      let kum = 0;
+      let rest = k;
+      const erstAfa = Math.min(jaehrlich * anteilErstjahr, rest);
+      kum += erstAfa;
+      rest -= erstAfa;
+      rows.push({ jahr: startJahr, afa: erstAfa, kumuliert: kum, restwert: rest });
+      let jahr = startJahr + 1;
+      while (rest > 0.01 && rows.length < 60) {
+        const afa = Math.min(jaehrlich, rest);
+        kum += afa;
+        rest -= afa;
+        rows.push({ jahr, afa, kumuliert: kum, restwert: rest });
+        jahr++;
+      }
+      return {
+        k, nd, methode: methodeEffektiv, rows, jaehrlich,
+        linSatz: WOHNGEBAEUDE_SATZ_PROZENT, degSatzNum: 0,
+        anteilErstjahr, startJahr, gwgOk: true, degressivGesperrt,
+      };
+    }
+
     // Degressiv — Wechsel zu linear, wenn günstiger
     const linSatz = 100 / nd;
-    const degNum = Math.min(parseDeutscheZahl(degSatz) || 0, 25);
+    const degNum = Math.min(parseDeutscheZahl(degSatz) || 0, 20);
     let rest = k;
     let kum = 0;
     // Erstes Jahr anteilig
@@ -118,16 +147,22 @@ export default function AfaRechner() {
   const labelMethode =
     result.methode === 'linear' ? 'Linear' :
     result.methode === 'degressiv' ? `Degressiv (${result.degSatzNum}%)` :
+    result.methode === 'wohngebaeude-5' ? 'Wohngebäude (5 % linear, § 7 Abs. 5a EStG)' :
     'GWG (Sofortabschreibung)';
 
   const afaJahr1 = result.rows[0]?.afa ?? 0;
-  const afaTypisch = result.methode === 'linear' ? (result.k / result.nd) : afaJahr1;
+  const afaTypisch =
+    result.methode === 'linear' ? (result.k / result.nd) :
+    result.methode === 'wohngebaeude-5' ? (result.k * WOHNGEBAEUDE_SATZ_PROZENT / 100) :
+    afaJahr1;
 
   const ergebnis =
     result.methode === 'gwg'
       ? (result.gwgOk
           ? `GWG-Sofortabschreibung: ${fmtEuro(result.k)} im Jahr ${result.startJahr}.`
           : `GWG nicht möglich — Anschaffungskosten über 800 € netto.`)
+      : result.methode === 'wohngebaeude-5'
+      ? `AfA (${labelMethode}): ${fmtEuro(afaTypisch)} pro Jahr, ${fmtEuro(afaTypisch / 12)} pro Monat. Anschaffung ${fmtEuro(result.k)}, Laufzeit 20 Jahre.`
       : `AfA (${labelMethode}): ${fmtEuro(afaTypisch)} pro Jahr, ${fmtEuro(afaTypisch / 12)} pro Monat. Anschaffung ${fmtEuro(result.k)}, Nutzungsdauer ${result.nd} Jahre.`;
 
   // Max für Diagramm
@@ -155,11 +190,12 @@ export default function AfaRechner() {
       {/* Methode */}
       <div className="mb-5">
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Abschreibungsmethode</label>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           {([
             { key: 'linear', label: 'Linear' },
             { key: 'degressiv', label: 'Degressiv' },
             { key: 'gwg', label: 'GWG (bis 800 €)' },
+            { key: 'wohngebaeude-5', label: 'Wohngebäude (5 %)' },
           ] as const).map(o => (
             <button
               key={o.key}
@@ -174,12 +210,17 @@ export default function AfaRechner() {
             </button>
           ))}
         </div>
+        {methode === 'wohngebaeude-5' && (
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-2 leading-relaxed">
+            5 % p. a. linear für neue Mietwohngebäude mit Bauantrag zwischen 01.10.2023 und 30.09.2029 (§ 7 Abs. 5a EStG). Voraussetzung: Effizienzhaus-Standards nach Förderrichtlinien. Die Nutzungsdauer-Eingabe wirkt hier nicht — der Plan läuft gesetzlich 20 Jahre.
+          </p>
+        )}
       </div>
 
       {methode === 'degressiv' && (
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            Degressiver Satz (max. 25 %, höchstens 2× linearer Satz)
+            Degressiver Satz (max. 20 %, höchstens 2× linearer Satz)
           </label>
           <NummerEingabe value={degSatz} onChange={setDegSatz} placeholder="20" einheit="%" />
         </div>
@@ -240,7 +281,7 @@ export default function AfaRechner() {
       </div>
 
       {/* AfA-Plan Tabelle */}
-      {result.rows.length > 0 && methode !== 'gwg' && (
+      {result.rows.length > 0 && result.methode !== 'gwg' && (
         <div className="mb-6 p-4 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800/50 overflow-x-auto">
           <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">AfA-Plan</p>
           <table className="w-full text-xs text-left">
