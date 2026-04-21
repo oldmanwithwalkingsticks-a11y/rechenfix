@@ -8,11 +8,18 @@ import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
-type Methode = 'linear' | 'degressiv' | 'gwg' | 'wohngebaeude-5';
+type Methode = 'linear' | 'degressiv' | 'gwg' | 'wohngebaeude-5' | 'sammelposten';
 
 // Wohngebäude-Sonder-AfA § 7 Abs. 5a EStG: 5 % linear p. a. für neue
 // Mietwohngebäude mit Bauantrag 01.10.2023 bis 30.09.2029.
 const WOHNGEBAEUDE_SATZ_PROZENT = 5;
+
+// Sammelposten-Pool § 6 Abs. 2a EStG: WG mit Anschaffungskosten netto
+// 250,01 € bis 1.000 € werden in einem Pool zusammengefasst und über
+// 5 Jahre linear mit 20 % p. a. abgeschrieben. Keine anteilige Jahres-AfA.
+const SAMMELPOSTEN_MIN = 250.01;
+const SAMMELPOSTEN_MAX = 1000;
+const SAMMELPOSTEN_JAHRE = 5;
 
 interface JahresRow {
   jahr: number;
@@ -45,6 +52,30 @@ export default function AfaRechner() {
     const methodeEffektiv: Methode = degressivGesperrt ? 'linear' : methode;
 
     const rows: JahresRow[] = [];
+
+    // Sammelposten-Pool § 6 Abs. 2a EStG: 20 % linear über 5 Jahre,
+    // keine anteilige Erstjahres-AfA (Pool wird zum Jahresende angelegt).
+    if (methodeEffektiv === 'sammelposten') {
+      const sammelOk = k >= SAMMELPOSTEN_MIN && k <= SAMMELPOSTEN_MAX;
+      if (sammelOk) {
+        const jaehrlich = k / SAMMELPOSTEN_JAHRE;
+        let kum = 0;
+        let rest = k;
+        for (let i = 0; i < SAMMELPOSTEN_JAHRE; i++) {
+          const afa = Math.min(jaehrlich, rest);
+          kum += afa;
+          rest -= afa;
+          rows.push({ jahr: startJahr + i, afa, kumuliert: kum, restwert: rest });
+        }
+      }
+      return {
+        k, nd, methode: methodeEffektiv, rows,
+        jaehrlich: sammelOk ? k / SAMMELPOSTEN_JAHRE : 0,
+        linSatz: sammelOk ? 100 / SAMMELPOSTEN_JAHRE : 0,
+        degSatzNum: 0, anteilErstjahr, startJahr,
+        gwgOk: sammelOk, degressivGesperrt,
+      };
+    }
 
     // GWG (bis 800€ netto): sofort
     if (methodeEffektiv === 'gwg') {
@@ -148,12 +179,14 @@ export default function AfaRechner() {
     result.methode === 'linear' ? 'Linear' :
     result.methode === 'degressiv' ? `Degressiv (${result.degSatzNum}%)` :
     result.methode === 'wohngebaeude-5' ? 'Wohngebäude (5 % linear, § 7 Abs. 5a EStG)' :
+    result.methode === 'sammelposten' ? 'Sammelposten-Pool (20 % über 5 Jahre, § 6 Abs. 2a EStG)' :
     'GWG (Sofortabschreibung)';
 
   const afaJahr1 = result.rows[0]?.afa ?? 0;
   const afaTypisch =
     result.methode === 'linear' ? (result.k / result.nd) :
     result.methode === 'wohngebaeude-5' ? (result.k * WOHNGEBAEUDE_SATZ_PROZENT / 100) :
+    result.methode === 'sammelposten' ? (result.gwgOk ? result.k / SAMMELPOSTEN_JAHRE : 0) :
     afaJahr1;
 
   const ergebnis =
@@ -163,6 +196,10 @@ export default function AfaRechner() {
           : `GWG nicht möglich — Anschaffungskosten über 800 € netto.`)
       : result.methode === 'wohngebaeude-5'
       ? `AfA (${labelMethode}): ${fmtEuro(afaTypisch)} pro Jahr, ${fmtEuro(afaTypisch / 12)} pro Monat. Anschaffung ${fmtEuro(result.k)}, Laufzeit 20 Jahre.`
+      : result.methode === 'sammelposten'
+      ? (result.gwgOk
+          ? `AfA (${labelMethode}): ${fmtEuro(afaTypisch)} pro Jahr über 5 Jahre. Anschaffung ${fmtEuro(result.k)}.`
+          : `Sammelposten nicht möglich — Anschaffungskosten außerhalb 250,01 € bis 1.000 € netto.`)
       : `AfA (${labelMethode}): ${fmtEuro(afaTypisch)} pro Jahr, ${fmtEuro(afaTypisch / 12)} pro Monat. Anschaffung ${fmtEuro(result.k)}, Nutzungsdauer ${result.nd} Jahre.`;
 
   // Max für Diagramm
@@ -190,12 +227,13 @@ export default function AfaRechner() {
       {/* Methode */}
       <div className="mb-5">
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Abschreibungsmethode</label>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
           {([
             { key: 'linear', label: 'Linear' },
             { key: 'degressiv', label: 'Degressiv' },
             { key: 'gwg', label: 'GWG (bis 800 €)' },
             { key: 'wohngebaeude-5', label: 'Wohngebäude (5 %)' },
+            { key: 'sammelposten', label: 'Sammelposten' },
           ] as const).map(o => (
             <button
               key={o.key}
@@ -213,6 +251,11 @@ export default function AfaRechner() {
         {methode === 'wohngebaeude-5' && (
           <p className="text-xs text-gray-600 dark:text-gray-400 mt-2 leading-relaxed">
             5 % p. a. linear für neue Mietwohngebäude mit Bauantrag zwischen 01.10.2023 und 30.09.2029 (§ 7 Abs. 5a EStG). Voraussetzung: Effizienzhaus-Standards nach Förderrichtlinien. Die Nutzungsdauer-Eingabe wirkt hier nicht — der Plan läuft gesetzlich 20 Jahre.
+          </p>
+        )}
+        {methode === 'sammelposten' && (
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-2 leading-relaxed">
+            Sammelposten-Pool § 6 Abs. 2a EStG: 20 % p. a. linear über 5 Jahre, unabhängig von Nutzungsdauer. Alle WG eines Wirtschaftsjahres zusammen in einen Pool — Einzel-Anlagenbuchhaltung entfällt. Zulässig nur für WG mit Anschaffungskosten 250,01 € bis 1.000 € netto.
           </p>
         )}
       </div>
@@ -261,9 +304,11 @@ export default function AfaRechner() {
         <p className="text-4xl font-bold text-white mb-3">
           {methode === 'gwg'
             ? (result.gwgOk ? fmtEuro(result.k) : '—')
+            : methode === 'sammelposten' && !result.gwgOk
+            ? '—'
             : fmtEuro(afaTypisch)}
         </p>
-        {methode !== 'gwg' && (
+        {methode !== 'gwg' && !(methode === 'sammelposten' && !result.gwgOk) && (
           <div className="grid grid-cols-2 gap-3 text-white text-sm">
             <div>
               <p className="opacity-80 text-xs">Monatliche AfA</p>
@@ -278,10 +323,13 @@ export default function AfaRechner() {
         {methode === 'gwg' && !result.gwgOk && (
           <p className="text-white/90 text-sm">GWG nur bis 800 € netto zulässig — bitte Methode wechseln.</p>
         )}
+        {methode === 'sammelposten' && !result.gwgOk && (
+          <p className="text-white/90 text-sm">Sammelposten nur für WG mit 250,01 € bis 1.000 € netto — bitte Methode wechseln.</p>
+        )}
       </div>
 
       {/* AfA-Plan Tabelle */}
-      {result.rows.length > 0 && result.methode !== 'gwg' && (
+      {result.rows.length > 0 && result.methode !== 'gwg' && !(result.methode === 'sammelposten' && !result.gwgOk) && (
         <div className="mb-6 p-4 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800/50 overflow-x-auto">
           <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">AfA-Plan</p>
           <table className="w-full text-xs text-left">
