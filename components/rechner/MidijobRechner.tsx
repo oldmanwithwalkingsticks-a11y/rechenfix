@@ -28,7 +28,10 @@ import { pvAnteilAn2026 } from '@/lib/berechnungen/pflegeversicherung';
 
 type Steuerklasse = 'I' | 'II' | 'III' | 'IV' | 'V' | 'VI';
 
-const MIDIJOB_UNTERGRENZE = getMidijobUntergrenze();
+// MIDIJOB_UNTERGRENZE wird NICHT modul-scope konstant gehalten — sonst
+// würde der via Stichtag-Switch (01.01.2027 → 633,01 €) neuer Wert erst
+// nach Redeploy greifen. Stattdessen bei jedem Render neu via
+// getMidijobUntergrenze() aus lib/berechnungen/midijob-uebergang.ts.
 const MIDIJOB_OBERGRENZE = MIDIJOB_OBERGRENZE_MONAT;
 
 // SV-Grundsätze 2026 aus SSOT-Libs (ohne PV — wird über pvAnteilAn2026 geholt,
@@ -57,13 +60,15 @@ export default function MidijobRechner() {
   const [bundesland, setBundesland] = useState<Bundesland>('Nordrhein-Westfalen');
   const [anzahlKinder, setAnzahlKinder] = useState<number>(0);
 
+  const untergrenze = getMidijobUntergrenze();
+
   const ergebnis = useMemo(() => {
     const b = parseDeutscheZahl(brutto) || 0;
 
     // BE: reduzierte beitragspflichtige Einnahme für AN nach § 20a SGB IV.
     // Formel und Konstanten in lib/berechnungen/midijob-uebergang.ts —
     // SSOT, testbar, stichtag-switch für UG zum 01.01.2027 (633,01 €).
-    const imBereich = b >= MIDIJOB_UNTERGRENZE && b <= MIDIJOB_OBERGRENZE;
+    const imBereich = b >= untergrenze && b <= MIDIJOB_OBERGRENZE;
     const be = imBereich ? berechneBemessungsgrundlageAN(b) : b;
 
     // PV-AN-Satz inkl. Kinderlos-Zuschlag / Kinderabschlag nach § 55 Abs. 3 SGB XI.
@@ -98,15 +103,17 @@ export default function MidijobRechner() {
     const ersparnis = netto - nettoRegulaer;
 
     return { b, be, imBereich, anSv, agSv, lohnsteuer, soli, kiSt, netto, nettoRegulaer, ersparnis };
-  }, [brutto, klasse, kirchensteuer, bundesland, anzahlKinder]);
+  }, [brutto, klasse, kirchensteuer, bundesland, anzahlKinder, untergrenze]);
 
   const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
   const status = ergebnis.imBereich
     ? { text: 'Midijob ✓', color: 'bg-green-500' }
-    : ergebnis.b < MIDIJOB_UNTERGRENZE
+    : ergebnis.b < untergrenze
     ? { text: '⚠️ Minijob-Bereich', color: 'bg-orange-500' }
     : { text: '⚠️ Reguläre Beschäftigung', color: 'bg-red-500' };
+
+  const fmtUntergrenze = untergrenze.toFixed(2).replace('.', ',');
 
   return (
     <div>
@@ -117,7 +124,7 @@ export default function MidijobRechner() {
           Monatlicher Bruttoverdienst
         </h2>
         <NummerEingabe value={brutto} onChange={setBrutto} placeholder="1200" einheit="€" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Übergangsbereich: 603,01 – 2.000 €</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Übergangsbereich: {fmtUntergrenze} – 2.000 €</p>
         <div className={`mt-3 inline-block px-3 py-1 rounded-lg text-xs font-semibold text-white ${status.color}`}>{status.text}</div>
       </div>
 
@@ -270,7 +277,7 @@ export default function MidijobRechner() {
         </div>
       )}
 
-      <CrossLink href="/finanzen/minijob-rechner" emoji="💼" text="Unter 603 €? → Minijob-Rechner" />
+      <CrossLink href="/finanzen/minijob-rechner" emoji="💼" text={`Unter ${Math.floor(untergrenze)} €? → Minijob-Rechner`} />
       <CrossLink href="/finanzen/brutto-netto-rechner" emoji="💰" text="Über 2.000 €? → Brutto-Netto-Rechner" />
 
       <ErgebnisAktionen
