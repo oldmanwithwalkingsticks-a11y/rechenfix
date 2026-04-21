@@ -364,3 +364,5 @@ Die Erb-Lib differenziert korrekter. Der „Enkelkind bei verstorbenen Eltern"-F
 - **Prompt 116 (Stufe-4a P2 + SSOT):** Erbschaft-§14-Kumulation, Enkel-Schenkung-Differenzierung, Hausrat-FB Kl. II/III, AfA-Degressiv-Deckel 25→20 %, Wohngebäude-Sonder-AfA, erweiterte SchenkSt-Verwandtschafts-Optionen (Schwieger-/Schwager), Midijob-Lib-Konsolidierung (MIDIJOB_UNTERGRENZE aus `mindestlohn.ts`).
 - **Prompt 117 (Stufe-4a P3):** UX-Polish (Versorgungsfreibetrag-Staffel, Familienheim, KESt-Bundesland, Verlustverrechnungs-Töpfe, AfA-Typ-Filter, Sammelposten, Firmenwagen-Grenzsteuersatz aus ESt-Lib, KiSt+Soli im gwV, MwSt-Gastronomie-Hinweis, Midijob F-Faktor-Doku).
 - **Wochenend-Refactor (separat):** Lohnsteuer Kl. V/VI Voll-PAP-Implementation nach § 39b Abs. 2 Satz 7 EStG, um die empirische Lookup-Tabelle (115b2) abzulösen.
+
+> Folge-Fix Prompt 115d (21.04.2026): UX-Inkonsistenz in der Vergleichs-Tabelle behoben (aktive Spalte nun markiert, Hybrid-Spalte mit Bedingungs-Fußnote versehen). Rechenlogik unverändert.

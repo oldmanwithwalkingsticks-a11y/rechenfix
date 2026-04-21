@@ -260,33 +260,53 @@ export default function FirmenwagenRechner() {
       </div>
 
       {/* Vergleichstabelle */}
-      <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
-        <div className="px-4 pt-4 pb-1">
-          <h2 className="font-bold text-gray-700 dark:text-gray-200">Vergleich: Verbrenner vs. Hybrid vs. E-Auto</h2>
-        </div>
-        <div className="grid grid-cols-3 divide-x divide-gray-100 dark:divide-gray-700">
-          <div className={`p-4 ${antrieb === 'verbrenner' ? 'bg-primary-50 dark:bg-primary-500/10' : ''}`}>
-            <div className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide">Verbrenner</div>
-            <div className="text-xl font-bold text-gray-800 dark:text-gray-200 mt-1">{fmtEuro(ergebnis.verbrenner.gwv)} €</div>
-            <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">Steuer: {fmtEuro(ergebnis.verbrenner.steuerMonat)} €</div>
+      {(() => {
+        const aktiveSpalte: 'verbrenner' | 'hybrid' | 'eAuto' =
+          antrieb === 'verbrenner' ? 'verbrenner'
+          : antrieb === 'hybrid'   ? 'hybrid'
+          : 'eAuto';
+        const aktivCls = 'bg-primary-50 dark:bg-primary-500/10 ring-2 ring-inset ring-primary-500';
+        const aktivBadge = (
+          <span className="inline-block px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide rounded-full bg-primary-500 text-white mb-1">
+            Ihre Wahl
+          </span>
+        );
+        return (
+          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
+            <div className="px-4 pt-4 pb-1">
+              <h2 className="font-bold text-gray-700 dark:text-gray-200">Vergleich: Verbrenner vs. Hybrid vs. E-Auto</h2>
+            </div>
+            <div className="grid grid-cols-3 divide-x divide-gray-100 dark:divide-gray-700">
+              <div className={`p-4 ${aktiveSpalte === 'verbrenner' ? aktivCls : ''}`}>
+                {aktiveSpalte === 'verbrenner' && aktivBadge}
+                <div className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide">Verbrenner</div>
+                <div className="text-xl font-bold text-gray-800 dark:text-gray-200 mt-1">{fmtEuro(ergebnis.verbrenner.gwv)} €</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">Steuer: {fmtEuro(ergebnis.verbrenner.steuerMonat)} €</div>
+              </div>
+              <div className={`p-4 ${aktiveSpalte === 'hybrid' ? aktivCls : ''}`}>
+                {aktiveSpalte === 'hybrid' && aktivBadge}
+                <div className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide">Hybrid</div>
+                <div className="text-xl font-bold text-gray-800 dark:text-gray-200 mt-1">{fmtEuro(ergebnis.hybrid.gwv)} €*</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">Steuer: {fmtEuro(ergebnis.hybrid.steuerMonat)} €</div>
+              </div>
+              <div className={`p-4 ${aktiveSpalte === 'eAuto' ? aktivCls : ''}`}>
+                {aktiveSpalte === 'eAuto' && aktivBadge}
+                <div className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide">E-Auto</div>
+                <div className="text-xl font-bold text-green-700 dark:text-green-300 mt-1">{fmtEuro(ergebnis.eAuto.gwv)} €</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">Steuer: {fmtEuro(ergebnis.eAuto.steuerMonat)} €</div>
+              </div>
+            </div>
+            <div className="px-4 py-2 border-t border-gray-100 dark:border-gray-700 text-xs text-gray-500 dark:text-gray-400">
+              * 0,5-%-Regel für Hybrid nur bei CO₂ ≤ 50 g/km und elektrischer Reichweite ≥ 80 km (§ 6 Abs. 1 Nr. 4 S. 2 Nr. 3 EStG).
+            </div>
+            {ergebnis.ersparnisEAuto > 0 && (
+              <div className="px-4 py-3 bg-green-50 dark:bg-green-500/10 border-t border-gray-100 dark:border-gray-700 text-sm text-green-800 dark:text-green-300">
+                <strong>💡 E-Auto-Vorteil:</strong> Mit einem E-Auto sparen Sie ca. {fmtEuro(ergebnis.ersparnisEAuto)} €/Monat an Steuern.
+              </div>
+            )}
           </div>
-          <div className={`p-4 ${antrieb === 'hybrid' ? 'bg-primary-50 dark:bg-primary-500/10' : ''}`}>
-            <div className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide">Hybrid</div>
-            <div className="text-xl font-bold text-gray-800 dark:text-gray-200 mt-1">{fmtEuro(ergebnis.hybrid.gwv)} €</div>
-            <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">Steuer: {fmtEuro(ergebnis.hybrid.steuerMonat)} €</div>
-          </div>
-          <div className={`p-4 ${antrieb.startsWith('eAuto') ? 'bg-green-50 dark:bg-green-500/10' : ''}`}>
-            <div className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide">E-Auto</div>
-            <div className="text-xl font-bold text-green-700 dark:text-green-300 mt-1">{fmtEuro(ergebnis.eAuto.gwv)} €</div>
-            <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">Steuer: {fmtEuro(ergebnis.eAuto.steuerMonat)} €</div>
-          </div>
-        </div>
-        {ergebnis.ersparnisEAuto > 0 && (
-          <div className="px-4 py-3 bg-green-50 dark:bg-green-500/10 border-t border-gray-100 dark:border-gray-700 text-sm text-green-800 dark:text-green-300">
-            <strong>💡 E-Auto-Vorteil:</strong> Mit einem E-Auto sparen Sie ca. {fmtEuro(ergebnis.ersparnisEAuto)} €/Monat an Steuern.
-          </div>
-        )}
-      </div>
+        );
+      })()}
 
       <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-6">
         <p className="text-amber-800 dark:text-amber-300 text-xs">
