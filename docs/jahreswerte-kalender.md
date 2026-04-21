@@ -146,11 +146,38 @@
 1. [ ] **Rentenwert** (Rentenwert-VO meist Ende März/April verkündet):
    - Neuer Rentenwert ab 01.07.
    - Quelle: https://www.deutsche-rentenversicherung.de/ + BGBl.
-2. [ ] **Pfändungsfreigrenzen** (jährliche Anpassung nach § 850c Abs. 4 ZPO):
-   - Grundfreibetrag + Staffel
+2. [ ] **Pfändungsfreigrenzen** (§ 850c Abs. 4 ZPO: alle **zwei** Jahre zum 01.07.):
+   - Grundfreibetrag + Unterhalts-Erhöhungssätze + Vollpfändungsgrenze
+   - `PFAENDUNGSTABELLE_{JAHR}` in `pfaendung.ts` neu anlegen, `getAktuellePfaendungsParameter(stichtag)` um neues Switch-Datum erweitern
+   - Amtliche Tabelle wird via 10-€-Stufen-Abrundung algorithmisch reproduziert — Werte-Update reicht
    - Quelle: Pfändungsfreigrenzenbekanntmachung im BGBl.
 3. [ ] **Witwenrente-Freibetrag**: abhängig vom Rentenwert, bei Switch automatisch — aber formal checken
 4. [ ] **Krankengeld-Höchstsatz**: abhängig von BBG, nur bei BBG-Anpassung relevant
+
+### August-Audit (für BAföG-WS-Wechsel)
+
+**Typischer Zeitraum: Anfang August** vor dem Wintersemester-Start.
+
+**Checkliste:**
+
+1. [ ] **BAföG-Bedarfssätze / Wohnpauschalen / KV+PV-Zuschläge** (§ 13 + § 13a BAföG, typische Erhöhung alle 2 Jahre via BAföG-ÄndG):
+   - Grundbedarf Studium/Schule
+   - Wohnpauschale auswärts + bei Eltern
+   - KV/PV-Zuschlag bis 30 J. + ab 30 J.
+   - `BEDARF`, `WOHNPAUSCHALE`, `KV_ZUSCHLAG`, `PV_ZUSCHLAG` in `bafoeg.ts`
+   - Quelle: https://www.bmbf.de/ + BAföG-Gesetz i.d.F. des jeweiligen ÄndG
+
+### Wohngeld-Dynamisierung (2-jährlich, typisch Herbst vor Inkrafttreten)
+
+**Typischer Zeitraum: Oktober–Dezember** vor dem 01.01.-Wechsel (alle 2 Jahre: 2025, 2027, 2029 …).
+
+**Checkliste:**
+
+1. [ ] **Höchstbeträge § 12 WoGG Anlage 1**: komplette 35-Zellen-Matrix + ZUSCHLAG_PRO_PERSON
+2. [ ] **Koeffizienten Anlage 1 WoGG**: a/b/c je Haushaltsgröße
+3. [ ] **Freibeträge § 17 WoGG**: Erwerbstätigen-/Schwerbehinderten-/Alleinerziehenden-FB
+4. [ ] **Heizkostenkomponente + Klimakomponente § 12 Abs. 6/7 WoGG**
+   - Quelle: Verordnung zur Fortschreibung des Wohngeldes (BGBl.) + BMWSB
 
 **Nach dem Check:**
 - Wenn nicht schon durch einen früheren Switch vorbereitet: Switch mit Stichtag 01.07. einbauen

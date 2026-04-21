@@ -300,3 +300,27 @@ Nächste 12 Monate — diese Parameter brauchen Aufmerksamkeit:
 4. **Mehrbedarfe / Sonderregelungen fehlen häufig.** Der rechenfix-Anspruch „Standard-Fall schnell rechnen" deckt die 80 % ab, aber für die nächste Qualitätsstufe sollten Mehrbedarfe zumindest als optionale Toggles verfügbar sein.
 
 5. **BMF-Steuerrechner-Methode (Prompt 118: offizieller Algorithmus als XML-Port) ist für Sozialleistungen nicht anwendbar** — Wohngeld/BAföG/Bürgergeld haben keine vergleichbare offizielle Algorithmus-Spezifikation. Die Referenz sind die Gesetzestexte + offizielle Parameter-Tabellen. Port-Ansatz dort ist: Parameter exakt übernehmen, Rechenlogik aus Gesetzestext ableiten.
+
+---
+
+## Nachtrag Prompt 120 (22.04.2026) — P1-Pass abgeschlossen
+
+Alle 9 P1-Bugs gefixt in 4 Commits + 1 Doku-Commit.
+
+### Umgesetzt
+
+- **BAföG (Commit `e5041a2`):** Bedarfssätze + KV/PV-Zuschläge auf Stand 29. BAföG-ÄndG (01.08.2024). `BEDARF.studium.eigene` 934 → 855, `BEDARF.studium.eltern` 511 → 534, `KV_ZUSCHLAG` 94 → 102, `PV_ZUSCHLAG` 28 → 35. Höchstsatz jetzt **992 €** (vorher 1.056 €).
+- **Wohngeld (Commit `06e96ae`):** Alle 35 `HOECHSTBETRAEGE`-Zellen nach Anlage 1 WoGG (Dynamisierungsverordnung v. 21.10.2024) + `ZUSCHLAG_PRO_PERSON`. Vier Freibetragsregeln § 17 WoGG (Einkommens-Pauschale 10 → 30 %, Schwerbeh-FB 150 → 125, Alleinerz.-FB 130 pauschal → 110 pro Kind mit neuem Input-Feld `alleinerziehendKinderAnzahl`, Erwerbst.-FB 20 % Brutto → pauschal 83,33). UI-Erweiterung: Kinder-Dropdown bei aktiver Alleinerziehend-Checkbox.
+- **Pfändung (Commit `2998a55`):** Amtliche § 850c-Tabelle wird durch 10-€-Stufen-Abrundung des Nettos exakt reproduziert — keine Tabellen-Portierung nötig. Zusätzlich: latente Modul-Scope-Konstante `GRUNDFREIBETRAG` durch Getter-Funktion `getGrundfreibetrag(stichtag?)` ersetzt.
+- **Verify-Scripts (Commit `45f8271`):** `verify-bafoeg-p1.ts` 5/5, `verify-wohngeld-p1.ts` 41/41 (35 Matrix + 6 FB), `verify-pfaendung-p1.ts` 17/17 (10 Stützpunkte + 2 Stichtag-Switch + 5 Tabelle 2026). Alle Δ ≤ 0,01 €.
+
+### Nicht in 120 (offen für 121/122)
+
+- SSOT-Extraktion in `bafoeg-parameter.ts` / `wohngeld-parameter.ts` / `buergergeld-parameter.ts` (Architektur-Arbeit, Prompt 121)
+- Bürgergeld Mehrbedarfe § 21 SGB II (P2, Prompt 121)
+- BAföG WS-2026/27-Erhöhung (KoaV-Beschluss abwarten, Stichtag-Switch-Pattern in 121)
+- P3-Polish: Bürgergeld-Info-Tabelle aus Lib ableiten, Pfändungs-Datum-Input, BAföG Altersdifferenzierung KV/PV (Prompt 122)
+
+### Prompt-Inkorrektheit dokumentiert
+
+Der Prompt 120 Testfall PF-01 nannte „28,59 €" als Soll-Wert für 1.600 € Netto / 0 Unterhaltspflichten. Die amtliche Tabelle (BGBl. 2025 I Nr. 110 Anlage) zeigt 31,50 € für den Band 1.600,00–1.609,99 €. Der Verify-Script nutzt den korrekten Tabellenwert; der Prompt-Wert war vermutlich eine ad-hoc-Rechnung ohne 10-€-Stufen-Abrundung.
