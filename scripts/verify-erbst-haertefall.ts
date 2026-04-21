@@ -100,6 +100,23 @@ cases.push({
   expected: 0,
 });
 
+// Prompt 117 Item 3: Versorgungs-FB-Staffel § 17 Abs. 2 ErbStG.
+// Erb 500k Kind mit Alter 8 → Versorgungs-FB 41k (statt 52k pauschal).
+// stpfl = 500k - 400k persFB - 41k Versorgungs-FB = 59k → Zone 1 (bis 75k) I=7 % → 4.130 €
+cases.push({
+  name: 'Staffel: Erb 500k Kind Alter 8 → Versorgungs-FB 41k',
+  actual: berechneErbschaftsteuer({
+    erwerbsart: 'erbschaft',
+    wert: 500_000,
+    verwandtschaft: 'kind',
+    vorschenkungen: 0,
+    selbstgenutzteImmobilie: false,
+    hausratFreibetrag: false,
+    alterKind: 8,
+  }).steuerbetrag,
+  expected: 4_130,
+});
+
 let passed = 0;
 let failed = 0;
 for (const c of cases) {

@@ -22,6 +22,27 @@ export interface ErbschaftsteuerEingabe {
   vorschenkungen: number;
   selbstgenutzteImmobilie: boolean;
   hausratFreibetrag?: boolean;
+  /**
+   * Alter des Kindes bei Erbfall (nur relevant bei verwandtschaft
+   * 'kind' oder 'enkel-eltern-tot' UND erwerbsart 'erbschaft').
+   * Wenn gesetzt, greift die altersabhängige Staffel nach § 17 Abs. 2
+   * ErbStG. Wenn nicht gesetzt (undefined), pauschale 52.000 €.
+   */
+  alterKind?: number;
+}
+
+/**
+ * Versorgungsfreibetrag Kinder § 17 Abs. 2 ErbStG — altersabhängige Staffel.
+ * Bei nicht gesetztem Alter wird der Höchstbetrag (52.000 €) verwendet.
+ */
+export function versorgungsfbKind(alter: number | undefined): number {
+  if (alter === undefined) return 52000;
+  if (alter <= 5) return 52000;
+  if (alter <= 10) return 41000;
+  if (alter <= 15) return 30700;
+  if (alter <= 20) return 20500;
+  if (alter <= 27) return 10300;
+  return 0;
 }
 
 export interface ErbschaftsteuerErgebnis {
@@ -142,11 +163,17 @@ export function berechneErbschaftsteuer(e: ErbschaftsteuerEingabe): Erbschaftste
   const fb = FREIBETRAEGE[verwandtschaft];
   const persoenlicherFreibetrag = erwerbsart === 'erbschaft' ? fb.erb : fb.schenk;
 
-  // Versorgungsfreibetrag nur bei Erbschaft für Ehepartner/Kinder (vereinfacht)
+  // Versorgungsfreibetrag nur bei Erbschaft; § 17 Abs. 1 ErbStG für Ehepartner
+  // (256.000 €), § 17 Abs. 2 ErbStG für Kinder altersabhängig (via Staffel).
+  // Enkel mit verstorbenen Eltern stehen Kindern gleich (§ 1924 BGB i. V. m.
+  // § 17 Abs. 2 ErbStG analog).
   let versorgungsfreibetrag = 0;
   if (erwerbsart === 'erbschaft') {
-    if (verwandtschaft === 'ehepartner') versorgungsfreibetrag = 256000;
-    else if (verwandtschaft === 'kind') versorgungsfreibetrag = 52000; // annäherung für junges Kind; in Realität altersabhängig
+    if (verwandtschaft === 'ehepartner') {
+      versorgungsfreibetrag = 256000;
+    } else if (verwandtschaft === 'kind' || verwandtschaft === 'enkel-eltern-tot') {
+      versorgungsfreibetrag = versorgungsfbKind(e.alterKind);
+    }
   }
 
   // Hausrat-Freibetrag § 13 Abs. 1 Nr. 1 ErbStG: 41.000 € Kl. I / 12.000 € Kl. II+III.

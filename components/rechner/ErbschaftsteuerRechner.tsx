@@ -37,6 +37,13 @@ export default function ErbschaftsteuerRechner() {
   const [vorschenkungen, setVorschenkungen] = useState('0');
   const [selbstgenutzteImmobilie, setSelbstgenutzteImmobilie] = useState(false);
   const [hausratFreibetrag, setHausratFreibetrag] = useState(false);
+  const [alterKindRaw, setAlterKindRaw] = useState('');
+
+  const kindAlterRelevant =
+    erwerbsart === 'erbschaft' &&
+    (verwandtschaft === 'kind' || verwandtschaft === 'enkel-eltern-tot');
+
+  const alterKindNum = alterKindRaw.trim() === '' ? undefined : Math.max(0, parseDeutscheZahl(alterKindRaw));
 
   const ergebnis = useMemo(
     () => berechneErbschaftsteuer({
@@ -46,8 +53,9 @@ export default function ErbschaftsteuerRechner() {
       vorschenkungen: parseDeutscheZahl(vorschenkungen),
       selbstgenutzteImmobilie,
       hausratFreibetrag,
+      alterKind: kindAlterRelevant ? alterKindNum : undefined,
     }),
-    [erwerbsart, wert, verwandtschaft, vorschenkungen, selbstgenutzteImmobilie, hausratFreibetrag],
+    [erwerbsart, wert, verwandtschaft, vorschenkungen, selbstgenutzteImmobilie, hausratFreibetrag, kindAlterRelevant, alterKindNum],
   );
 
   const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
@@ -97,6 +105,22 @@ export default function ErbschaftsteuerRechner() {
             <option key={o.value} value={o.value}>{o.label} ({o.kl})</option>
           ))}
         </select>
+        {kindAlterRelevant && (
+          <div className="mt-3">
+            <label htmlFor="erbschaftsteuer-alter-kind" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
+              Alter des Kindes bei Erbfall (optional)
+            </label>
+            <NummerEingabe
+              value={alterKindRaw}
+              onChange={setAlterKindRaw}
+              placeholder="bei Leerlassen: 52.000 € (Höchstbetrag)"
+              einheit="Jahre"
+            />
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              § 17 Abs. 2 ErbStG-Staffel: bis 5 J. 52k € · 6–10 J. 41k € · 11–15 J. 30,7k € · 16–20 J. 20,5k € · 21–27 J. 10,3k € · ab 27 J. 0 €.
+            </p>
+          </div>
+        )}
       </div>
 
       {/* === 4: Vorschenkungen === */}
