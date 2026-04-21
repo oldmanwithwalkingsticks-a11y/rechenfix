@@ -217,6 +217,14 @@ export default function FirmenwagenRechner() {
           value={grenzsteuersatz}
           onChange={setGrenzsteuersatz}
         />
+        <div className="mt-3 p-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800/50 text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+          <p>
+            Ihr persönlicher Grenzsteuersatz hängt von zvE, Steuerklasse und Splitting ab. Richtwerte: 14 % beim Einstieg, 30 % bis 42 % im Mittelfeld, 42 % ab ca. 69.000 € zvE (Single). <a href="/finanzen/steuerprogression-rechner" className="text-primary-600 dark:text-primary-400 underline">Grenzsteuersatz berechnen →</a>
+          </p>
+          <p className="mt-2">
+            Der tatsächliche Netto-Effekt ist etwas höher: Auf die zusätzliche ESt fallen noch Kirchensteuer (8 % / 9 %) und ggf. Solidaritätszuschlag an — der Rechner klammert diese Zusatzabzüge vereinfacht aus.
+          </p>
+        </div>
       </div>
 
       {/* ERGEBNIS */}
