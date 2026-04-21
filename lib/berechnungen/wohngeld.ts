@@ -139,8 +139,7 @@ export function berechneWohngeld(eingabe: WohngeldEingabe): WohngeldErgebnis | n
   const {
     haushaltsmitglieder, bruttoEinkommen, miete, mietstufe,
     heizkostenpauschale, freibetragSchwerbehindert,
-    freibetragAlleinerziehend, alleinerziehendKinderAnzahl,
-    freibetragErwerbstaetig,
+    freibetragAlleinerziehend, freibetragErwerbstaetig,
   } = eingabe;
 
   if (haushaltsmitglieder < 1 || bruttoEinkommen < 0 || miete <= 0) return null;

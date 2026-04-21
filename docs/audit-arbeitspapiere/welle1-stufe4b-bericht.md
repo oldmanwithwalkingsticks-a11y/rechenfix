@@ -324,3 +324,36 @@ Alle 9 P1-Bugs gefixt in 4 Commits + 1 Doku-Commit.
 ### Prompt-Inkorrektheit dokumentiert
 
 Der Prompt 120 Testfall PF-01 nannte „28,59 €" als Soll-Wert für 1.600 € Netto / 0 Unterhaltspflichten. Die amtliche Tabelle (BGBl. 2025 I Nr. 110 Anlage) zeigt 31,50 € für den Band 1.600,00–1.609,99 €. Der Verify-Script nutzt den korrekten Tabellenwert; der Prompt-Wert war vermutlich eine ad-hoc-Rechnung ohne 10-€-Stufen-Abrundung.
+
+---
+
+## Hotfix Prompt 120a (22.04.2026) — Wohngeld-Tarifformel + Anti-Pattern
+
+User-Cross-Check gegen BMWSB-Rechner WG-01 zeigte Δ = +46 €/Monat (~21 % zu hoch: rechenfix 260 € vs. BMWSB 214 €). Drei separate Bugs:
+
+### Umgesetzt
+
+- **UI-Display-Bug (Commit `850d0d3`):** [components/rechner/WohngeldRechner.tsx](../../components/rechner/WohngeldRechner.tsx) Z. 237 zeigte „Pauschalabzug (10%)" und rechnete × 0,10, während die Lib intern bereits korrekt mit 30 % rechnete. Text + Multiplikator auf 30 % korrigiert.
+
+- **Tarifformel-Bug (Commit `267607e`):** `KOEFFIZIENTEN`-Array in [lib/berechnungen/wohngeld.ts](../../lib/berechnungen/wohngeld.ts) war seit ~2022 nicht aktualisiert. Formel `1,15 · (M − (a + b·M + c·Y) · Y)` selbst war korrekt, die Konstanten aber veraltet. Methode A (Anlage 2 WoGG direkt portieren) gewählt: neue a/b/c-Werte aus BGBl. 2024 I Nr. 314 für 1–12 Haushaltsmitglieder + M_min/Y_min aus Anlage 3 + Rundung auf volle Euro nach Anlage 3 Nr. 3.
+
+- **§ 17-Freibetrags-Rollback (Commit `267607e`):** Mehrere Prompt-120-„Korrekturen" basierten auf falscher § 17-Zuordnung. Rückgängig gemacht:
+  - Schwerbehinderten-FB: 150 → 125 → **wieder 150 €/Monat** (§ 17 Nr. 1 WoGG: 1.800 €/Jahr).
+  - Alleinerziehenden-FB: pauschal 130 → pro Kind 110 → **wieder pauschal 110 €/Monat** (§ 17 Nr. 3 WoGG: 1.320 €/Jahr, EIN Betrag, nicht multiplikativ).
+  - Erwerbstätigen-FB: 20 % Brutto → pauschal 83 €/Mo → **als No-Op markiert**. § 17 WoGG enthält keinen allgemeinen Erwerbstätigen-FB; die 120-Annahme war falsch. Der Input bleibt für Backwards-Compat, wirkt aber nicht mehr.
+  - Kinder-Dropdown aus `WohngeldRechner.tsx` entfernt.
+  - `alleinerziehendKinderAnzahl`-Interface-Feld als `@deprecated` markiert.
+
+- **Klimakomponente gekoppelt (Commit `267607e`):** § 12 Abs. 7 WoGG ist Aufschlag auf Heizkostenkomponente, nicht unabhängig. In der Lib war Klima immer addiert → führte zu Überberechnung, wenn User ohne Heizkostenantrag rechnete. Jetzt korrekt an `heizkostenpauschale`-Flag gekoppelt.
+
+- **Verify-Script-Anti-Pattern (Commit `ee9c060`):** Das 120er verify-wohngeld-p1.ts hatte 41/41 grün, weil die Tarif-Tests zirkulär gegen Lib-Werte prüften. Umgebaut auf drei externe Referenzblöcke:
+  - Höchstbeträge → § 12 WoGG Anlage 1 (BGBl-verifiziert)
+  - Freibeträge → § 17 WoGG aktuelle Fassung
+  - Tarif-Stützpunkte → BMWSB-Oracle (WG-01) + manuelle Gesetzesnachrechnungen aus Anlage 2/3
+  42/42 grün, Δ = 1 € beim BMWSB-Oracle (Tol ±2 €).
+
+### Methodische Lehre
+
+1. **Verify-Scripts müssen gegen Quellen außerhalb der getesteten Lib prüfen.** Neuer Anti-Pattern-Eintrag in CLAUDE.md.
+2. **Gesetzestext-Prüfung geht vor Prompt-Vorgabe.** Mehrere § 17 WoGG-„Soll-Werte" im Prompt 120 waren fehlerhaft; Rückgängigmachen war richtiger Weg.
+3. **User-Cross-Check gegen offizielle Rechner ist der kritischste Verifikationsschritt** — selbst bei vermeintlich grünen Regressions-Scripts.
