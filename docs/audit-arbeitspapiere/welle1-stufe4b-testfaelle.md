@@ -1,0 +1,145 @@
+# Welle 1 Stufe 4b — Testfall-Katalog
+
+**Stand:** 2026-04-21 (Prompt 119 Audit-Phase)
+**Zweck:** Regressions-Basis für Fix-Prompts 120/121/122 und Jahresaudits der Sozialleistungen.
+
+**Legende:**
+- **Ist-vor-Fix** = beobachtetes Verhalten am Code-Level (Lib-Konstanten + Komponenten-Bindung) Stand 21.04.2026
+- **Soll** = aus Rechtsquelle (SGB II, BAföG, WoGG, ZPO § 850c) und offiziellem Referenz-Rechner (BMBF, BMWSB, BA, BMJ) abgeleitet
+- Nach jeweiligem Fix-Pass die Ist-Spalte aktualisieren.
+
+---
+
+## BAFÖG-RECHNER
+
+Referenz: BAföG-Höchstsatz 2026 (unverändert seit 01.08.2024):
+Grundbedarf 475 € + Wohnpauschale auswärts 380 € + KV-Zuschlag 102 € + PV-Zuschlag 35 € = **992 €**
+
+### BA-01 (Studentin 21, auswärts, GKV-pflichtversichert, Eltern 3.200 € Netto zusammen)
+- **Input:** ausbildung=studium, wohnsituation=eigene, selbstVersichert=true, familienstand=verheiratet, einkommenEltern1 = 40.000 € brutto, einkommenEltern2 = 20.000 € brutto (zusammen ~3.200 € netto), geschwisterInAusbildung=0, keine Kinder, eigenesEinkommen=0, eigenesVermoegen=0
+- **Soll:** Gesamtbedarf 992 € − Anrechnung Elterneinkommen (≈ (netto − 2.415) × 0,45). Bei 3.200 € Netto: Anrechnung = (3.200 − 2.415) × 0,45 ≈ 353 €. Förderbetrag ≈ 992 − 353 = **639 €**
+- **Ist-vor-Fix:** Gesamtbedarf laut Code: `BEDARF.studium.eigene + KV_ZUSCHLAG + PV_ZUSCHLAG = 934 + 94 + 28 = 1.056 €`. Differenz zu Soll: **+64 €**. — **P1-Beweis veraltete Bedarfssätze.**
+
+### BA-02 (Schüler 17 bei Eltern, Eltern 3.800 € netto)
+- **Input:** ausbildung=schule, wohnsituation=eltern, familienstand=verheiratet, Eltern-Netto zusammen 3.800 €, kein Geschwister in Ausbildung, nicht selbstVersichert, keine Kinder
+- **Soll:** Bedarf Schüler bei Eltern (§ 12 BAföG) — aktuell 262 € Grundbedarf (2026). Anrechnung: (3.800 − 2.415) × 0,45 = 623 €. Anrechnung > Bedarf → **kein BAföG**.
+- **Ist-vor-Fix:** Code-Bedarf 262 €. Anrechnung identisch. Ergebnis: kein BAföG. ✓ (Schüler-Bedarfssatz 262 € könnte aber auch veraltet sein — siehe BA-Cross-Check-Punkt.)
+
+### BA-03 (Student 29, auswärts, Waise/elternunabhängig, familienversichert)
+- **Input:** ausbildung=studium, wohnsituation=eigene, familienstand=elternunabhaengig, eigenesEinkommen=0, eigenesVermoegen=0, selbstVersichert=false (familienversichert), keine Kinder
+- **Soll:** Voller Höchstsatz ohne KV/PV-Zuschlag = 475 + 380 = **855 €**
+- **Ist-vor-Fix:** Code liefert `934 + 0 + 0 = 934 €`. Differenz +79 €. — **P1-Beweis Bedarfssatz.**
+
+### BA-MAX (Höchstsatz voll, selbstversichert, Waise)
+- **Input:** wie BA-03 aber selbstVersichert=true
+- **Soll:** 475 + 380 + 102 + 35 = **992 €**
+- **Ist-vor-Fix:** Code liefert `934 + 94 + 28 = 1.056 €`. Differenz **+64 €/Monat = +768 €/Jahr** zu hoch. — **P1-Beweis.**
+
+---
+
+## WOHNGELD-RECHNER
+
+Referenz: § 12 WoGG 2026 (Dynamisierung 01.01.2025, gültig bis 31.12.2026). Höchstbeträge 1 Person:
+| Mietstufe | I | II | III | IV | V | VI | VII |
+|---|---|---|---|---|---|---|---|
+| Soll 2026 | 361 | 408 | 456 | 511 | 562 | 615 | 677 |
+| Lib | 377 | 425 | 473 | 521 | 575 | 634 | 693 |
+| Δ | +16 | +17 | +17 | +10 | +13 | +19 | +16 |
+
+### WG-01 (1 Person, Miete 500 €, Einkommen 1.400 € Brutto, Mietstufe IV)
+- **Input:** haushaltsmitglieder=1, bruttoEinkommen=1400, miete=500, mietstufe='IV', freibetragErwerbstaetig=true, sonst keine Freibeträge
+- **Soll (BMWSB-Rechner approx.):** bereinigtes Einkommen nach 30 %-Pauschale und Erwerbstätigen-Freibetrag. Hoechstbetrag 1P/IV = 511 €. Berücksichtigte Miete = min(500, 511) = 500 €. Wohngeld ca. **180–220 €/Monat**.
+- **Ist-vor-Fix:** Lib rechnet nur 10 %-Pauschalabzug, +20 %-Erwerbstätigenfreibetrag. Bereinigtes Einkommen deutlich höher als Soll → Wohngeld zu niedrig. Hoechstbetrag Lib = 521 €. Delta-Kombination zeigt systematischen Fehler. — **P1-Beweis Einkommensbereinigung + Höchstbeträge.**
+
+### WG-02 (4 Personen, Miete 1.200 €, Einkommen 3.200 € Brutto, Mietstufe VI, mit Heizkostenpauschale)
+- **Input:** haushaltsmitglieder=4, bruttoEinkommen=3200, miete=1200, mietstufe='VI', heizkostenpauschale=true, freibetragErwerbstaetig=true
+- **Soll:** Hoechstbetrag 4P/VI = 1.035 €. Miete gekappt auf 1.035 €. Heizkosten 44,20 €, Klimakomponente 35,70 €. Gesamtmiete 1.114,90 €. Wohngeld-Bereich ca. **350–430 €/Mo**.
+- **Ist-vor-Fix:** Lib 4P/VI = 1.072 € (+37 €). Delta einspielt. — **P1 (Höchstbeträge).**
+
+### WG-03 (Rentner-Ehepaar, Miete 750 €, Einkommen 1.900 € Brutto, Mietstufe III)
+- **Input:** haushaltsmitglieder=2, bruttoEinkommen=1900, miete=750, mietstufe='III', freibetragSchwerbehindert=true, ohne Erwerbstätigen-Freibetrag (Rentner)
+- **Soll (WoGG):** Schwerbehinderten-Freibetrag 1.500 €/J = **125 €/Mo** (§ 17 Nr. 2 WoGG). Hoechstbetrag 2P/III = 551 €. Miete gekappt.
+- **Ist-vor-Fix:** Lib nutzt 150 €/Mo Schwerbehinderten-Freibetrag (Delta +25 €/Mo, führt zu höherem Wohngeld). Hoechstbetrag Lib 2P/III = 575 € (+24). — **P1 (Freibetrag + Höchstbetrag).**
+
+### WG-ALLEIN (Alleinerziehenden-Freibetrag mit 2 Kindern)
+- **Input:** haushaltsmitglieder=3, 2 Kinder, freibetragAlleinerziehend=true
+- **Soll:** 1.320 €/J × 2 Kinder = 2.640 €/J = **220 €/Mo**
+- **Ist-vor-Fix:** Lib nutzt pauschal 130 €/Mo unabhängig von Kinderzahl. Bei 2 Kindern Δ = **−90 €/Mo Freibetrag zu niedrig**. — **P1 (Alleinerziehenden-Freibetrag nicht gestaffelt).**
+
+---
+
+## BÜRGERGELD-RECHNER
+
+Referenz: SGB II 2026 (Nullrunde, Besitzschutzregelung § 28a): Regelsätze aus 2025 unverändert.
+
+### BG-01 (Alleinstehend, Miete 450 €, kein Vermögen, kein Einkommen)
+- **Input:** bedarfsgemeinschaft='alleinstehend', kinder=[], warmmiete=450, heizkosten=0, einkommen=0, vermoegen=0
+- **Soll:** Regelsatz 563 € + KdU 450 € = **1.013 €**
+- **Ist-vor-Fix:** Code liefert 1.013 € ✓
+
+### BG-02 (Paar + 2 Kinder 8, 15, Miete 900 €, 600 € Minijob)
+- **Input:** bedarfsgemeinschaft='paar-mit-kindern', kinder=[{alter:'6-13'},{alter:'14-17'}], warmmiete=900, einkommen=600
+- **Soll:** Regelsatz Paar 1.012 + Kind 8J 390 + Kind 15J 471 = 1.873 €. KdU 900. Bedarf 2.773 €. Einkommensfreibetrag: 100 + (520−100)×0,2 + (600−520)×0,3 = 100 + 84 + 24 = 208 €. Anrechnung 600 − 208 = 392 €. Anspruch **2.381 €**.
+- **Ist-vor-Fix:** Code rechnet identisch ✓
+
+### BG-03 (Alleinstehend mit 900 €/Mo, Miete 500 €)
+- **Input:** alleinstehend, Miete 500, einkommen=900
+- **Soll:** Regelsatz 563 + KdU 500 = 1.063 €. Freibetrag: 100 + 420×0,2 + (900−520)×0,3 = 100+84+114 = 298 €. Anrechnung 900−298 = 602 €. Aufstockung **461 €**.
+- **Ist-vor-Fix:** Code-Ergebnis identisch ✓
+
+### BG-MB (Alleinerziehende mit 1 Kind 10 J — Mehrbedarf fehlt)
+- **Input:** `bedarfsgemeinschaft='alleinstehend', kinder=[{alter:'6-13'}]`, Miete 600
+- **Soll (§ 21 Abs. 3 Nr. 1 SGB II):** Mehrbedarf Alleinerziehend +12 % auf 563 € = **67,56 €/Monat** zusätzlich. Bedarf: 563 + 67,56 + 390 (Kind) + 600 = 1.620,56 €
+- **Ist-vor-Fix:** Code ohne Mehrbedarf: 563 + 390 + 600 = 1.553 €. Differenz **−67,56 €/Monat**. — **P2 (Mehrbedarf Alleinerziehende nicht implementiert).**
+
+### BG-KDU (KdU-Angemessenheitsprüfung)
+- **Input:** alleinstehend, Miete 800 € (deutlich über lokalem Richtwert z. B. 550 € in ländlicher Region)
+- **Soll:** Jobcenter begrenzt auf Angemessenheitsgrenze (nach § 22 SGB II), hier 550 €. Bedarf 563 + 550 = 1.113 €.
+- **Ist-vor-Fix:** Code erkennt 800 € voll an → Bedarf 1.363 €. **Keine Angemessenheitsprüfung implementiert.** — **P2 (UX-Hinweis ausreichend, kein Rechner-Fehler da individuelle Angemessenheitsgrenzen lokal sind).**
+
+---
+
+## PFÄNDUNGS-RECHNER
+
+Referenz: Pfändungsfreigrenzen-Bekanntmachung 2026 (BGBl. 2026 I Nr. 80 v. 26.03.2026), § 850c ZPO, Anlage.
+
+### PF-01 (Netto 1.600 €, 0 Unterhalt, Zahltag 15.04.2026 — noch Tabelle 2025)
+- **Input:** nettoMonat=1600, unterhaltspflichten=0, stichtag=2026-04-15
+- **Soll (Tabelle 2025, § 850c Abs. 3 Pauschalquote):** Freibetrag 1.555 €. Mehrbetrag 45 €. Pfändungsquote 0 Unterhalt = 70 %. Pfändbar **31,50 €** nach Pauschalquote. Laut amtlicher Tabelle (10-€-Stufen) jedoch **≈ 28,59 €** (Abrundung auf nächstniedrigere Stufe).
+- **Ist-vor-Fix:** Code liefert 45 × 0,70 = **31,50 €** (Pauschalquote). — **P1 Tabellen-Annäherung**, Delta zu amtlicher Tabelle ~2,91 €. Der Prompt fordert „±0,01 € Toleranz für Pfändung" — nicht erreicht.
+
+### PF-02 (Netto 2.000 €, 2 Unterhalt, Zahltag 15.08.2026 — Tabelle 2026)
+- **Input:** nettoMonat=2000, unterhaltspflichten=2, stichtag=2026-08-15
+- **Soll (Tabelle 2026):** Freibetrag 1.587,40 + 597,42 + 332,83 = 2.517,65 €. Netto 2.000 < Freibetrag → **pfändbar 0 €**.
+- **Ist-vor-Fix:** Code liefert 0 € ✓
+
+### PF-03 (Netto 3.500 €, 0 Unterhalt, Zahltag 01.08.2026)
+- **Input:** nettoMonat=3500, unterhaltspflichten=0, stichtag=2026-08-01
+- **Soll (Tabelle 2026 Pauschal):** Freibetrag 1.587,40 €. Mehrbetrag 1.912,60 €. Quote 70 %. Pfändbar via Pauschal **1.338,82 €**. Amtliche 10-€-Stufen-Tabelle weicht bis zu ~±7 € ab.
+- **Ist-vor-Fix:** Code via Pauschalquote. Tabellen-Annäherung. — **P1 Tabellen-Annäherung (gleicher Mechanismus).**
+
+### PF-SW-01 (Stichtag-Regression: Netto 1.580, 0 Unterhalt)
+- **Input-A:** nettoMonat=1580, unterhaltspflichten=0, stichtag=2026-06-30 (Tabelle 2025)
+- **Soll-A:** Freibetrag 1.555 €. Mehrbetrag 25 €. Pfändbar 25 × 0,70 = **17,50 €**.
+- **Input-B:** nettoMonat=1580, unterhaltspflichten=0, stichtag=2026-07-01 (Tabelle 2026)
+- **Soll-B:** Freibetrag 1.587,40 €. Netto 1.580 < Freibetrag → **pfändbar 0 €**.
+- **Ist-vor-Fix:** Da die Komponente `PfaendungRechner.tsx` keinen `stichtag`-Parameter exposes und die Lib beim ersten Render `new Date()` evaluiert, sind beide Fälle nicht vom User steuerbar. Der Stichtag-Switch greift automatisch am 01.07.2026 beim nächsten Client-Mount. ✓ (keine Modul-Scope-Falle)
+- **Potentielle UX-Lücke:** User kann „vorher/nachher"-Vergleich nicht selbst durchspielen. — **P2 UX.**
+
+### PF-MOD (Modul-Scope-Prüfung)
+- `export const GRUNDFREIBETRAG = getAktuellePfaendungsParameter().grundfreibetrag` in `pfaendung.ts` ist Modul-Scope-Konstante (wird beim Next.js-Server-Start initialisiert). Nach 01.07.2026 würde sie **auf Vercel serverseitig** auf dem alten Wert eingefroren werden, bis neuer Deploy erfolgt.
+- **Aktuell:** Diese Konstante wird **nirgendwo sonst im Repo** konsumiert (Grep: nur in pfaendung.ts selbst). Aktiv kein Bug, aber **latente Stichtag-Falle**.
+- **Ist-vor-Fix:** Latent, nicht aktiv. — **P2 (proaktive Entfernung empfohlen).**
+
+---
+
+## Zusammenfassung Verifikations-Coverage
+
+| Rechner | Testfälle | P1-Case | P2-Case | Bemerkung |
+|---|---|---|---|---|
+| BAföG | 4 | BA-01, BA-03, BA-MAX (veraltete Sätze) | BA-02 Schüler-Bedarfssatz | Höchstsatz 992 € vs. Code 1.056 € |
+| Wohngeld | 4 | WG-01, WG-02, WG-03, WG-ALLEIN (Freibeträge + Höchstbeträge) | — | 4 Freibetrags-Bugs + 35 Tabellenzellen falsch |
+| Bürgergeld | 5 | — | BG-MB Alleinerziehende, BG-KDU Angemessenheit | Regelsätze 2026 korrekt (Nullrunde) |
+| **Pfändung** | **5** | **PF-01, PF-03 (Tabellen-Pauschalquote)** | **PF-SW-01, PF-MOD (latent)** | Werte 2025/2026 korrekt, Algorithmus nur Pauschalquote |
+
+**Regression-Nutzung:** Nach jedem Fix-Pass (Prompt 120/121/122) diese Testfälle nachrechnen. Besonderer Fokus auf BAföG (veraltete Bedarfssätze) und Wohngeld (35 Höchstbeträge + 4 Freibetragsregeln).
