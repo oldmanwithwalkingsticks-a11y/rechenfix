@@ -1,9 +1,6 @@
-import {
-  berechneEStGrund,
-  berechneSoli,
-  WK_PAUSCHALE_AN_2026,
-} from './einkommensteuer';
+import { berechneSoli, WK_PAUSCHALE_AN_2026 } from './einkommensteuer';
 import { pvAnteilAnVorsorge2026 } from './pflegeversicherung';
+import { berechneLohnsteuerPAP2026 } from './_lohnsteuer-pap-2026';
 
 export type Steuerklasse = 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -61,85 +58,10 @@ export interface LohnsteuerErgebnis {
 const ARBEITNEHMER_PAUSCHBETRAG = WK_PAUSCHALE_AN_2026;
 const SONDERAUSGABEN_PAUSCHBETRAG = 36;
 const ENTLASTUNGSBETRAG_ALLEINERZIEHENDE = 4260;
-
-/**
- * Empirisch kalibrierte Lookup-Tabelle für Lohnsteuer Kl. V 2026.
- * Stützpunkte verifiziert gegen BMF-Steuerrechner (https://www.bmf-steuerrechner.de).
- * Parameter: NRW, kinderlos, gesetzlich KV, Zusatzbeitrag 2,9 %, keine KiSt, 2026.
- *
- * Zwischen Stützpunkten wird linear interpoliert (→ getInterpolierteLst).
- * Toleranz-Ziel: ±5 €/Monat im Vergleich zum BMF-PAP.
- *
- * Tech-Schuld: Dieser Lookup-Ansatz ist eine Zwischenlösung. Die saubere
- * Voll-PAP-Implementation nach § 39b Abs. 2 Satz 7 EStG ist Thema eines
- * späteren Refactor-Prompts.
- *
- * Format: [Jahres-Brutto €, LSt-Jahreswert €]
- */
-export const LST_LOOKUP_V_2026: Array<[number, number]> = [
-  [      0,         0 ],
-  [  9_600,     886.00 ],
-  [ 12_000,   1_152.00 ],
-  [ 14_400,   1_417.92 ],
-  [ 18_000,   1_842.00 ],
-  [ 24_000,   3_636.00 ],
-  [ 30_000,   5_664.00 ],
-  [ 36_000,   7_587.96 ],
-  [ 48_000,  11_460.00 ],
-  [ 60_000,  15_514.92 ],
-  [ 84_000,  24_237.00 ],
-];
-
-/**
- * Empirisch kalibrierte Lookup-Tabelle für Lohnsteuer Kl. VI 2026.
- * Gleiche Parameter wie LST_LOOKUP_V_2026. Kl. VI hat keinen Grundfreibetrag,
- * daher Anker bei (0, 0) ist Vereinfachung — für Bruttos < 800 €/Monat
- * ist die Faktor-Extrapolation zum Ursprung eine akzeptable Nische.
- */
-export const LST_LOOKUP_VI_2026: Array<[number, number]> = [
-  [      0,         0 ],
-  [  9_600,   1_080.96 ],
-  [ 12_000,   1_350.96 ],
-  [ 14_400,   1_620.96 ],
-  [ 18_000,   2_140.92 ],
-  [ 24_000,   4_167.96 ],
-  [ 30_000,   6_195.00 ],
-  [ 36_000,   8_061.96 ],
-  [ 48_000,  11_991.96 ],
-  [ 60_000,  16_047.00 ],
-  [ 84_000,  24_768.96 ],
-];
-
-/**
- * Liefert die Jahres-Lohnsteuer für einen gegebenen Jahres-Brutto per linearer
- * Interpolation zwischen den Lookup-Stützpunkten.
- *
- * Grenzverhalten:
- * - Unterhalb des ersten Stützpunkts (< 0): liefert 0
- * - Oberhalb des letzten Stützpunkts (> 84_000): extrapoliert mit der Steigung
- *   des letzten Intervalls (60_000 → 84_000). Das ist für Hochlohn-Nische
- *   (>7.000 €/Mon) eine grobe Näherung, aber deutlich besser als 0.
- */
-export function getInterpolierteLst(
-  jahresBrutto: number,
-  lookup: Array<[number, number]>,
-): number {
-  if (jahresBrutto <= 0) return 0;
-
-  for (let i = 0; i < lookup.length - 1; i++) {
-    const [x0, y0] = lookup[i];
-    const [x1, y1] = lookup[i + 1];
-    if (jahresBrutto >= x0 && jahresBrutto <= x1) {
-      const t = (jahresBrutto - x0) / (x1 - x0);
-      return y0 + (y1 - y0) * t;
-    }
-  }
-
-  const [xN1, yN1] = lookup[lookup.length - 2];
-  const [xN, yN] = lookup[lookup.length - 1];
-  const steigung = (yN - yN1) / (xN - xN1);
-  return yN + (jahresBrutto - xN) * steigung;
-}
+// ARBEITNEHMER_PAUSCHBETRAG / SONDERAUSGABEN_PAUSCHBETRAG / ENTLASTUNGSBETRAG werden
+// seit Prompt 118 nicht mehr direkt in berechneLohnsteuerJahr verwendet (der Voll-PAP
+// handhabt die Beträge intern in MZTABFB). Sie bleiben exportiert, weil andere
+// Stellen (Netto-Vergleiche in Komponenten-Rechnern) sie zur eigenen Schätzung ziehen.
 
 // BBG 2026 für die Vorsorgepauschale. Werte ident mit BBG_KV_MONAT/BBG_RV_MONAT
 // in brutto-netto.ts — Import hier nicht möglich (zirkuläre Abhängigkeit, da
@@ -208,12 +130,17 @@ export function berechneVorsorgepauschale2026(
   return Math.max(summe, mindest);
 }
 
-// Kompatibilitäts-Wrapper für Altaufrufer ohne SV-Kontext (Default: GKV, kinderlos, 2,9 % Zusatz).
-function vorsorgepauschale(bruttoJahr: number, sk: Steuerklasse): number {
-  return berechneVorsorgepauschale2026(bruttoJahr, sk);
-}
-
-// Lohnsteuer pro Steuerklasse (vereinfacht nach PAP 2026)
+/**
+ * Jahres-Lohnsteuer nach offiziellem ITZBund-Programmablaufplan 2026.
+ *
+ * Seit Prompt 118 delegiert diese Funktion komplett an
+ * `berechneLohnsteuerPAP2026` aus `_lohnsteuer-pap-2026.ts` (1:1-Port des
+ * BMF-XML-Pseudocodes, Δ=0 € an allen 20 BMF-Stützpunkten verifiziert).
+ *
+ * Vorher (Prompt 115b2 → 118): Grundtarif-Vereinfachung für Kl. I/II/III/IV
+ * + empirische Lookup-Tabellen für Kl. V/VI. Diese sind im Archiv
+ * `lib/berechnungen/_lookup-archiv/lohnsteuer-lookup-2026.ts.txt`.
+ */
 export function berechneLohnsteuerJahr(
   bruttoJahr: number,
   sk: Steuerklasse,
@@ -221,51 +148,23 @@ export function berechneLohnsteuerJahr(
   vorsorge?: VorsorgeParams,
 ): number {
   if (bruttoJahr <= 0) return 0;
-
-  const werbungskosten = ARBEITNEHMER_PAUSCHBETRAG;
-  const sonderausgaben = SONDERAUSGABEN_PAUSCHBETRAG;
-  const vorsorgeBetrag = vorsorge
-    ? berechneVorsorgepauschale2026(bruttoJahr, sk, vorsorge)
-    : vorsorgepauschale(bruttoJahr, sk);
-
-  // Steuerklasse VI: empirisch kalibrierter Lookup (kein Grundfreibetrag,
-  // kein WK-Pauschbetrag). Der frühere Grundtarif-Ansatz mit 12.348 €
-  // Grundfreibetrag lieferte systematisch zu niedrige LSt (0 € bei
-  // Brutto unter GF, −85 % bei 1.500 €/Mon gegenüber BMF).
-  if (sk === 6) {
-    return getInterpolierteLst(bruttoJahr, LST_LOOKUP_VI_2026);
-  }
-
-  // Für alle anderen: Freibeträge abziehen
-  let zvE = Math.max(0, bruttoJahr - werbungskosten - sonderausgaben - vorsorgeBetrag - jahresfreibetrag);
-
-  // Steuerklasse II: + Entlastungsbetrag Alleinerziehende
-  if (sk === 2) {
-    zvE = Math.max(0, zvE - ENTLASTUNGSBETRAG_ALLEINERZIEHENDE);
-  }
-
-  switch (sk) {
-    case 1:
-    case 4:
-      return berechneEStGrund(zvE, 2026);
-    case 2:
-      return berechneEStGrund(zvE, 2026);
-    case 3: {
-      // Splitting: halbes zvE, dann × 2
-      const halb = Math.floor(zvE / 2);
-      return berechneEStGrund(halb, 2026) * 2;
-    }
-    case 5: {
-      // Kl. V: empirisch kalibrierter Lookup (§ 39b Abs. 2 Satz 7 EStG — Voll-PAP
-      // als Refactor offen, siehe CLAUDE.md Methodische Lehre Prompt 115b2).
-      // Nutzt bruttoJahr (nicht zvE), weil die BMF-Stützpunkte gegen den
-      // gesamten Jahres-Brutto verifiziert sind (Vorsorge/WK/SA implizit).
-      return getInterpolierteLst(bruttoJahr, LST_LOOKUP_V_2026);
-    }
-    default:
-      return berechneEStGrund(zvE, 2026);
-  }
+  const result = berechneLohnsteuerPAP2026({
+    jahresBrutto: bruttoJahr,
+    steuerklasse: sk,
+    jahresfreibetrag,
+    kinderfreibetraege: 0, // Kinderfreibeträge wirken nur auf Soli/KiSt, nicht auf LSt.
+    religion: 0,
+    vorsorge,
+  });
+  return result.lstJahr;
 }
+
+// ARBEITNEHMER_PAUSCHBETRAG + SONDERAUSGABEN_PAUSCHBETRAG + ENTLASTUNGSBETRAG_ALLEINERZIEHENDE
+// (oben deklariert) werden aus dem PAP-Port nicht mehr direkt genutzt, bleiben aber
+// im Modul-Scope, weil sie aus anderen Komponenten als Schätzwerte abgerufen werden.
+void ARBEITNEHMER_PAUSCHBETRAG;
+void SONDERAUSGABEN_PAUSCHBETRAG;
+void ENTLASTUNGSBETRAG_ALLEINERZIEHENDE;
 
 function berechneSoliJahr(lstJahr: number, sk: Steuerklasse): number {
   // SK III = Splittingtarif → doppelte Freigrenze (40.700 €) + Milderungszone

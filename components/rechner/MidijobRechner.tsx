@@ -145,11 +145,6 @@ export default function MidijobRechner() {
             </button>
           ))}
         </div>
-        {(klasse === 'V' || klasse === 'VI') && (
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
-            Hinweis: Die Lohnsteuer-Berechnung für Steuerklasse V und VI nutzt eine empirisch kalibrierte Näherung mit ±5 €/Monat Toleranz zum amtlichen BMF-Steuerrechner. Für cent-genaue Werte empfehlen wir den BMF-Rechner unter bmf-steuerrechner.de.
-          </p>
-        )}
       </div>
 
       {/* 3: Kinder unter 25 (für PV-Kinderabschlag und Kinderlos-Zuschlag) */}

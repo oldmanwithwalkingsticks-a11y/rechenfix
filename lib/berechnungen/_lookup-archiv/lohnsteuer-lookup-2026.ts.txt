@@ -1,0 +1,58 @@
+// ARCHIV — abgelöst am 2026-04-21 durch Prompt 118 (Voll-PAP-Port).
+// Datei-Endung .txt, damit sie aus dem TypeScript-Graph rausfällt.
+// Historischer Dokumentations-Wert für zukünftige Audits: diese empirischen
+// Lookup-Tabellen waren zwischen Prompt 115b2 (2026-04-21) und Prompt 118
+// (2026-04-21, wenige Stunden später) produktiv. Sie wurden gegen BMF-
+// Steuerrechner-Webinterface kalibriert und interpolierten linear.
+//
+// Der Voll-PAP-Port in lib/berechnungen/_lohnsteuer-pap-2026.ts ersetzt
+// diese Tabellen vollständig: er ist ein mechanischer 1:1-Port des
+// offiziellen ITZBund-XML-Pseudocodes (siehe docs/referenzen/) und
+// trifft die gleichen 20 BMF-Stützpunkte mit Δ = 0,00 €.
+
+export const LST_LOOKUP_V_2026: Array<[number, number]> = [
+  [      0,         0 ],
+  [  9_600,     886.00 ],
+  [ 12_000,   1_152.00 ],
+  [ 14_400,   1_417.92 ],
+  [ 18_000,   1_842.00 ],
+  [ 24_000,   3_636.00 ],
+  [ 30_000,   5_664.00 ],
+  [ 36_000,   7_587.96 ],
+  [ 48_000,  11_460.00 ],
+  [ 60_000,  15_514.92 ],
+  [ 84_000,  24_237.00 ],
+];
+
+export const LST_LOOKUP_VI_2026: Array<[number, number]> = [
+  [      0,         0 ],
+  [  9_600,   1_080.96 ],
+  [ 12_000,   1_350.96 ],
+  [ 14_400,   1_620.96 ],
+  [ 18_000,   2_140.92 ],
+  [ 24_000,   4_167.96 ],
+  [ 30_000,   6_195.00 ],
+  [ 36_000,   8_061.96 ],
+  [ 48_000,  11_991.96 ],
+  [ 60_000,  16_047.00 ],
+  [ 84_000,  24_768.96 ],
+];
+
+export function getInterpolierteLst(
+  jahresBrutto: number,
+  lookup: Array<[number, number]>,
+): number {
+  if (jahresBrutto <= 0) return 0;
+  for (let i = 0; i < lookup.length - 1; i++) {
+    const [x0, y0] = lookup[i];
+    const [x1, y1] = lookup[i + 1];
+    if (jahresBrutto >= x0 && jahresBrutto <= x1) {
+      const t = (jahresBrutto - x0) / (x1 - x0);
+      return y0 + (y1 - y0) * t;
+    }
+  }
+  const [xN1, yN1] = lookup[lookup.length - 2];
+  const [xN, yN] = lookup[lookup.length - 1];
+  const steigung = (yN - yN1) / (xN - xN1);
+  return yN + (jahresBrutto - xN) * steigung;
+}

@@ -40,15 +40,16 @@ import Decimal from 'decimal.js';
 const ZERO = new Decimal(0);
 const ZAHL1 = new Decimal(1);
 const ZAHL2 = new Decimal(2);
-const ZAHL5 = new Decimal(5);
 const ZAHL7 = new Decimal(7);
 const ZAHL12 = new Decimal(12);
 const ZAHL100 = new Decimal(100);
 const ZAHL360 = new Decimal(360);
-const ZAHL500 = new Decimal(500);
 const ZAHL700 = new Decimal(700);
-const ZAHL1000 = new Decimal(1000);
 const ZAHL10000 = new Decimal(10000);
+// ZAHL5, ZAHL500, ZAHL1000 sind im XML-Original definiert, werden aber
+// vom 2026er-PAP nicht benutzt. Bewusst nicht portiert (ungenutzt), um
+// ESLint no-unused-vars-Warnung zu vermeiden. Bei künftigen Jahres-
+// Porten neu prüfen — der 2027er PAP kann sie reaktivieren.
 
 const ROUND_DOWN = Decimal.ROUND_DOWN;
 const ROUND_UP = Decimal.ROUND_UP;

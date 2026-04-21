@@ -151,11 +151,6 @@ export default function BruttoNettoRechner() {
             <option value={5}>Steuerklasse 5 — Verheiratet (weniger)</option>
             <option value={6}>Steuerklasse 6 — Zweitjob</option>
           </select>
-          {(steuerklasse === 5 || steuerklasse === 6) && (
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
-              Hinweis: Die Lohnsteuer-Berechnung für Steuerklasse V und VI nutzt eine empirisch kalibrierte Näherung mit ±5 €/Monat Toleranz zum amtlichen BMF-Steuerrechner. Für cent-genaue Werte empfehlen wir den BMF-Rechner unter bmf-steuerrechner.de.
-            </p>
-          )}
         </div>
         <div>
           <label htmlFor="bruttonetto-select-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bundesland</label>
