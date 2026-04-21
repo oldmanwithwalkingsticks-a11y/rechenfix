@@ -7,7 +7,6 @@
 // Grundtarif ignorierte Teile der Vorsorgepauschale-Staffel).
 
 import { berechneLohnsteuerJahr } from '../lib/berechnungen/lohnsteuer';
-import { berechneBruttoNetto } from '../lib/berechnungen/brutto-netto';
 
 interface Fall {
   name: string;
@@ -31,7 +30,8 @@ const faelle: Fall[] = [
 ];
 
 console.log('=== Phase 5 — Breite Regression LSt-Konsumenten ===\n');
-console.log('Spalten: LSt/Mo (PAP) | Brutto-Netto-Rechner-Netto/Mo (mit PAP)');
+console.log('PAP-LSt (€/Mo) für die repräsentativen Bruttos über alle sechs Steuerklassen.');
+console.log('Vergleiche gegen bmf-steuerrechner.de web für externe Validierung.');
 console.log('');
 
 for (const f of faelle) {
@@ -39,22 +39,7 @@ for (const f of faelle) {
     kvArt: 'gesetzlich', kvZusatzbeitragProzent: 2.9, kinderUnter25: 0,
   });
   const lstMonat = lstJahr / 12;
-
-  const bn = berechneBruttoNetto({
-    bruttoMonat: f.brutto,
-    steuerklasse: f.stkl,
-    bundesland: 'Nordrhein-Westfalen',
-    kirchensteuer: false,
-    kinderfreibetraege: 0,
-    kinderUnter25: 0,
-    arbeitgeberzuschussBavAvwl: 0,
-    geldwerteVorteile: 0,
-    zusatzbeitragKvProzent: 2.9,
-    pflegeversicherungKinderlos: true,
-    jahresfreibetrag: 0,
-  });
-
-  console.log(`  ${f.name.padEnd(20)} LSt/Mo ${lstMonat.toFixed(2).padStart(8)} €  |  Netto/Mo ${bn.nettoMonat.toFixed(2).padStart(8)} €`);
+  console.log(`  ${f.name.padEnd(20)} LSt/Mo ${lstMonat.toFixed(2).padStart(8)} €`);
 }
 
-console.log('\n20 BMF-Stützpunkte aus scripts/verify-lohnsteuer-vvi.ts werden separat geprüft.');
+console.log('\n20 BMF-Stützpunkte aus scripts/verify-lohnsteuer-pap.ts werden separat geprüft.');

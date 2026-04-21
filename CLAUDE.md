@@ -166,7 +166,8 @@ Alle jahresabhängigen und gesetzlich definierten Werte liegen in `lib/berechnun
 | Lib | Zweck | Wichtigste Exports |
 |---|---|---|
 | `einkommensteuer.ts` | § 32a EStG 2024/2025/2026, Soli-Freigrenzen | `berechneEStGrund(zvE, jahr)`, `PARAMS[jahr]` |
-| `lohnsteuer.ts` | LSt nach § 39b PAP, Vorsorgepauschale; Kl. V/VI via empirischer Lookup-Tabelle (LST_LOOKUP_V/VI_2026), Voll-PAP offen | `berechneLohnsteuerJahr(brutto, steuerklasse, jahr)`, `LST_LOOKUP_V_2026`, `LST_LOOKUP_VI_2026`, `getInterpolierteLst` |
+| `lohnsteuer.ts` | Delegate-Wrapper auf Voll-PAP; `berechneVorsorgepauschale2026` (§ 39b Abs. 4 EStG) bleibt als Export | `berechneLohnsteuerJahr(brutto, steuerklasse, jahr, vorsorge?)`, `berechneLohnsteuer(...)`, `berechneVorsorgepauschale2026` |
+| `_lohnsteuer-pap-2026.ts` **(neu, Prompt 118)** | Voll-PAP § 39b EStG via 1:1-Port des offiziellen ITZBund-XML-Pseudocodes. BigDecimal via `decimal.js`. Δ=0 € an allen 20 BMF-Stützpunkten. | `LohnsteuerPAP2026` (Klasse), `berechneLohnsteuerPAP2026(params)` |
 | `brutto-netto.ts` | BBG KV/PV/RV, Gesamtberechnung Netto | `BBG_KV_MONAT`, `BBG_RV_MONAT`, `berechneBruttoNetto(...)` |
 | `sv-parameter.ts` | GKV-Zusatzbeitrag Ø, JAEG | `KV_ZUSATZBEITRAG_AN_DURCHSCHNITT_2026`, `JAEG_2026_JAHR`, `JAEG_2026_MONAT` |
 | `kindergeld.ts` | Kindergeld + Günstigerprüfung | `KINDERGELD_2026`, `berechneKindergeld(...)` |
@@ -275,6 +276,7 @@ export const WERT = getAktuellerWert();
 | Homeoffice-Pauschale | 6 € / Tag, max. 210 Tage | offen | `pendlerpauschale.ts` | § 4 Abs. 5 Nr. 6c EStG |
 | Unterhalt DT 2026 Mindestbedarf | 486 / 558 / 653 / 698 € | 01.01.2027 | `duesseldorfer-tabelle.ts` | Düsseldorfer Tabelle |
 | Deutschlandticket | 63 €/Monat | offen | Inline | seit 01.01.2026 |
+| LSt-PAP § 39b EStG | jährlicher ITZBund-Programmablaufplan 2026 | jährlich zum 01.01. | `_lohnsteuer-pap-2026.ts` (Voll-PAP-Port seit Prompt 118) | § 39b EStG + BMF/ITZBund-Referenz |
 | ErbSt-Tarifstufen § 19 ErbStG | 75k/300k/600k/6M/13M/26M mit Kl. I/II/III-Sätzen | selten | `erbschaftsteuer.ts` (`ERBST_TARIF_STUFEN` + `berechneErbStMitHaertefall` seit Prompt 115c) | § 19 ErbStG inkl. Abs. 3 Härtefall |
 | AfA degressiv bewegliche WG | **ausgelaufen zum 31.12.2025** (Fallback auf linear für Anschaffungen ab 01.01.2026) | — | `AfaRechner.tsx` (Gate `startJahr >= 2026`) | § 7 Abs. 2 EStG n.F. (Wachstumschancengesetz) |
 | Plug-in-Hybrid 0,5 %-Bedingungen | CO₂ ≤ 50 g/km **und** E-Reichweite ≥ 80 km | offen | `FirmenwagenRechner.tsx` (`HYBRID_CO2_GRENZE_G_KM`, `HYBRID_REICHWEITE_MIN_KM`) | § 6 Abs. 1 Nr. 4 S. 2 Nr. 3 EStG (ab 01.01.2025) |
@@ -308,13 +310,17 @@ export const WERT = getAktuellerWert();
 - Splittingtarif: 40.700 € ESt
 - Milderungszone: 11,9 % auf ESt-Differenz, Obergrenze × 1,859375 der Freigrenze
 
-## Methodische Lehre (Prompt 115b2, April 2026)
+## Methodische Lehre Lookup → Voll-PAP (Prompt 115b2 → 118)
 
-Der Kl. V/VI-LSt-Bug in `berechneLohnsteuerJahr` war strukturell seit der ursprünglichen Implementation vorhanden — selbst-erfundene Näherungen mit Code-Kommentar „Stark vereinfachte Approximation nach PAP". Er hat alle bisherigen Audit-Sprints überlebt, weil Testfälle sich auf Kl. I und IV konzentrierten.
+**Abgeschlossen am 2026-04-21 (Prompt 118):** Die empirischen Lookup-Tabellen aus 115b2 (`LST_LOOKUP_V_2026`, `LST_LOOKUP_VI_2026`) wurden durch einen 1:1-Port des offiziellen ITZBund-XML-Pseudocodes abgelöst. Δ = 0,00 € an allen 20 BMF-Stützpunkten, algorithmisch identisch zum bmf-steuerrechner.de-Webrechner. Archiv der Lookups unter [lib/berechnungen/_lookup-archiv/lohnsteuer-lookup-2026.ts.txt](lib/berechnungen/_lookup-archiv/lohnsteuer-lookup-2026.ts.txt).
+
+Der ursprüngliche Kl. V/VI-LSt-Bug in `berechneLohnsteuerJahr` war strukturell seit der ursprünglichen Implementation vorhanden — selbst-erfundene Näherungen mit Code-Kommentar „Stark vereinfachte Approximation nach PAP". Er hat alle bisherigen Audit-Sprints überlebt, weil Testfälle sich auf Kl. I und IV konzentrierten.
 
 **Regel für künftige LSt-Audits:** bei jedem Rechner, der `berechneLohnsteuerJahr` konsumiert, MINDESTENS je einen Testfall in Kl. V UND Kl. VI durchrechnen — bei Niedriglohn-Bruttos (800–1.500 €) UND bei Mittellohn (3.000–4.000 €). Niedriglohn deckt Grundfreibetrag- und PAP-Mindestregelungen ab; Mittellohn die Zonen-Übergänge.
 
-**Regel für SSOT-Lib-Änderungen mit empirischer Kalibrierung:** Wenn eine Lib-Funktion via Lookup-Tabelle gegen eine externe Referenz kalibriert ist (hier: BMF-PAP), MUSS ein UI-Hinweis auf den konsumierenden Rechnern darauf verweisen, solange die Voll-Implementation offen ist. Das dokumentiert die technische Schuld für Nutzer sichtbar und hält den Aufrüttelungs-Druck für den späteren Refactor hoch.
+**Regel zu empirischen Lookup-Lösungen (historisch):** Lookups als Zwischenlösung sind legitim, wenn eine Voll-Implementation nicht sofort machbar ist. Voraussetzung: UI-Hinweis auf Toleranz, dokumentierte Tech-Schuld, und ein konkret eingeplanter Ablöse-Prompt (siehe 115b2 → 118 als erfolgreicher Präzedenzfall).
+
+**Regel für Voll-PAP-Ports:** Der XML-Pseudocode vom ITZBund ist die maßgebliche Quelle (nicht PDF, nicht Java). Jährlicher Update-Prozess in `docs/referenzen/itzbund-README.md`. Dezember-Audit-Checkliste in `docs/jahreswerte-kalender.md` Punkt 9.
 
 ## Gelernte Regeln (Sprint 1, April 2026)
 
@@ -453,8 +459,9 @@ Reihenfolge nach Freigabe: erst 85 (Warning wegräumen), dann 68 (CMP dazu).
 - **114** — Welle 1 Stufe 4a Audit (Spezial-Steuer, 8 Rechner, Bericht + Testfälle in `docs/audit-arbeitspapiere/`, kein Code-Fix): 6 P1 + 12 P2 + 11 P3; MidijobRechner als Hot Spot (BE-Formel falsch, Steuerklassen-Faktor × 1,15 erfunden, Soli-Wiederholungs-Bug); Erbschaft+Schenkung § 19 Abs. 3-Härtefall fehlt ✅
 - **115a** — Midijob komplett saniert: neue SSOT-Lib `midijob-uebergang.ts` (§ 20a SGB IV, Stichtag-Switch für UG); BE-Formel gefixt (P1), LSt via `berechneLohnsteuerJahr` statt × 1,15 (P1), Soli via `berechneSoli` (P1); SV-SSOT-Imports, PV 1,7→1,8 %, PV-Kinderabschlag-Input, KiSt-Bundesland-Dropdown ✅
 - **115b** — Analyse Lohnsteuer-Kl.V/VI-Bug in `berechneLohnsteuerJahr` (nur Analyse, kein Fix; `docs/audit-arbeitspapiere/lohnsteuer-v-vi-analyse.md`) ✅
-- **115b2** — Fix Lohnsteuer-Kl.V/VI via empirischer Lookup-Kalibrierung (20 BMF-Stützpunkte, Δ=0 an Stützpunkten, UI-Hinweis auf 3 Rechnern, Verifikations-Script `scripts/verify-lohnsteuer-vvi.ts`) ✅
+- **115b2** — Fix Lohnsteuer-Kl.V/VI via empirischer Lookup-Kalibrierung (20 BMF-Stützpunkte, Δ=0 an Stützpunkten, UI-Hinweis auf 3 Rechnern, Verifikations-Script `scripts/verify-lohnsteuer-vvi.ts`) ✅ **Abgelöst von Prompt 118.**
 - **115c** — Stufe-4a P1-Rest (3 Bugs): Härtefall § 19 Abs. 3 ErbStG zentral als `berechneErbStMitHaertefall` + `ERBST_TARIF_STUFEN` (Schenkungssteuer importiert); AfA degressiv ab 2026 gated mit Fallback auf linear + Warn-Banner (§ 7 Abs. 2 EStG n.F.); Firmenwagen Plug-in-Hybrid CO₂/Reichweite-Bedingungen als conditional UI-Block mit Fallback auf 1 %-Regel (§ 6 Abs. 1 Nr. 4 S. 2 Nr. 3 EStG); Regressions-Script `scripts/verify-erbst-haertefall.ts` mit 11 grünen Testfällen ✅
 - **115d** — Firmenwagen-Vergleichs-Tabelle: aktive Spalte markieren + Hybrid-Bedingungs-Fußnote. UX-Fix zu 115c-Widerspruch (Hauptblock zeigte Fallback-Wert, Tabelle weiterhin Idealfall → zwei Hybrid-Zahlen untereinander). Keine Änderung an Rechenlogik, nur UI. ✅
 - **116** — Stufe-4a P2-Pass (8 Bugs): ErbSt § 14-Kumulation (Gesamterwerb + proportionale/tatsächliche Vorsteuer-Anrechnung, ER-04 von 67.500 → 39.706 €) + Hausrat-FB § 13 ErbStG (41k Kl. I / 12k Kl. II+III, ER-03); SchenkSt Enkel-Differenzierung (enkel-eltern-tot 400k FB, SS-02) + Hausrat-FB Kl. II/III (SS-03) + Schwieger-/Stiefeltern + Geschiedener Ehepartner als neue Optionen; AfA Degressiv-Deckel 25 → 20 % + neue Methode Wohngebäude-5 (§ 7 Abs. 5a EStG, 5 % linear p. a. über 20 Jahre); Midijob-UNTERGRENZE aus Modul-Scope in Komponenten-Scope verschoben (Stichtag-Robustheit 01.01.2027). Regressions-Script auf 15/15 erweitert. ✅
 - **117** — Stufe-4a P3-Pass (7 UX-Polish-Items): KESt Bundesland-Dropdown + Verlustverrechnung Zwei-Töpfe § 20 Abs. 6 EStG; ErbSt Versorgungsfreibetrag-Staffel § 17 Abs. 2 ErbStG für Kinder (altersabhängig); AfA Sammelposten-Pool § 6 Abs. 2a EStG als 5. Methode; Firmenwagen Info-Block zu Grenzsteuersatz + KiSt/Soli-Vereinfachung; MwSt Gastronomie-19-%-Rückkehr-Hinweis bei 7-%-Auswahl; Midijob F-Faktor-Dokumentation + Jahreskalender-Eintrag. Fünf weitere P3 ins Backlog verschoben (siehe welle1-stufe4a-bericht.md Nachtrag 117). ✅
+- **118** — Lohnsteuer-Voll-PAP-Refactor via ITZBund-XML-Pseudocode: 1:1-Port nach TypeScript in `lib/berechnungen/_lohnsteuer-pap-2026.ts` (decimal.js). 24 Methoden aus dem offiziellen BMF-Programmablaufplan 2026 (40 Seiten PDF entsprechen 1396 Zeilen XML, SHA256 verifiziert). Δ = 0,00 € an allen 20 BMF-Stützpunkten der 115b2-Lookups. `berechneLohnsteuerJahr` delegiert vollständig an PAP, Grundtarif-Vereinfachung + Lookup-Tabellen entfernt (Archiv unter `_lookup-archiv/`). UI-Toleranz-Hinweise aus BruttoNetto/Lohnsteuer/Midijob entfernt. Jährlicher Update-Prozess in `docs/referenzen/itzbund-README.md`. ✅

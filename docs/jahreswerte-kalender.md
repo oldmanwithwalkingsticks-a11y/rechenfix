@@ -123,6 +123,14 @@
 8. [ ] **Midijob F-Faktor** § 20a Abs. 2 SGB IV (wird jährlich aus den Durchschnittsbeitragssätzen abgeleitet, gemeinsames Rundschreiben GKV-Spitzenverband / DRV Bund / BA):
    - `FAKTOR_F_2026` in `lib/berechnungen/midijob-uebergang.ts` → Wert für (X+1) prüfen und ggf. neue Konstante `FAKTOR_F_{X+1}` + Default anpassen
    - Quelle: https://www.gkv-spitzenverband.de/ (gemeinsame Rundschreiben)
+9. [ ] **Lohnsteuer-PAP** § 39b EStG (BMF/ITZBund veröffentlicht den neuen Programmablaufplan typischerweise Oktober/November für das Folgejahr):
+   - XML-Pseudocode herunterladen: `https://www.bmf-steuerrechner.de/javax.faces.resource/daten/xmls/Lohnsteuer{JAHR}.xml.xhtml`
+   - SHA256 + Abruf-Datum in `docs/referenzen/itzbund-README.md` eintragen
+   - Diffs zum Vorjahr analysieren: in der Regel nur Konstanten in `MPARA` (Grundfreibetrag, Zonengrenzen W1STKL5/W2STKL5/W3STKL5, BBG) + ggf. `UPTAB26`-Tarifformeln + SOLZFREI
+   - Neue Datei `lib/berechnungen/_lohnsteuer-pap-{JAHR}.ts` durch Duplizieren und Konstanten-Austausch erzeugen
+   - `berechneLohnsteuerJahr` in `lohnsteuer.ts` auf Jahres-Switch umstellen (analog Mindestlohn/Rentenwert-Pattern)
+   - `scripts/verify-lohnsteuer-pap.ts` um neue Jahres-Stützpunkte erweitern (20 neue BMF-Werte gegen bmf-steuerrechner.de webbasiert verifizieren)
+   - Quelle: https://www.bundesfinanzministerium.de/ (PAP-PDF) + https://www.bmf-steuerrechner.de/interface/pseudocodes.xhtml (XML)
 
 **Nach dem Check:**
 - Für jeden geänderten Parameter: Switch in der entsprechenden Lib einbauen (mit Stichtag 01.01.)

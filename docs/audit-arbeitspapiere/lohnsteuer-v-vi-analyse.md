@@ -234,3 +234,15 @@ Ich warte auf Antwort. Weder Commit noch Code-Änderung bisher — nur dieser An
 Behoben via **Prompt 115b2** (Option B: empirisch kalibrierte Lookup-Tabelle). Neue Exports `LST_LOOKUP_V_2026`, `LST_LOOKUP_VI_2026`, `getInterpolierteLst` in `lib/berechnungen/lohnsteuer.ts`. Kl. V- und Kl. VI-Zweige in `berechneLohnsteuerJahr` nutzen jetzt den Lookup mit linearer Interpolation. Alle 20 BMF-Stützpunkte treffen exakt (Δ = 0,00 €). UI-Hinweis auf den 3 konsumierenden Rechnern (Brutto-Netto, Lohnsteuer, Midijob).
 
 Voll-PAP-Refactor nach § 39b Abs. 2 Satz 7 EStG bleibt als späterer Prompt offen (Option A aus obigem Entscheidungs-Menü, ~8–16 h Aufwand).
+
+---
+
+## Fix-Abschluss (21.04.2026, Prompt 118)
+
+**Voll-PAP komplett implementiert.** Die 115b2-Lookup-Tabellen sind durch einen mechanischen 1:1-Port des offiziellen ITZBund-XML-Pseudocodes abgelöst.
+
+Neue Datei [lib/berechnungen/_lohnsteuer-pap-2026.ts](../../lib/berechnungen/_lohnsteuer-pap-2026.ts): TypeScript-Klasse `LohnsteuerPAP2026` mit allen 24 Methoden aus dem XML-PAP (MPARA, MRE4JL, MRE4, MRE4ALTE, MRE4ABZ, MBERECH, MZTABFB, MLSTJAHR, UPLSTLZZ, UPMLST, UPEVP, MVSPKVPV, MVSPHB, MST5_6, UP5_6, MSOLZ, UPANTEIL, MSONST, STSMIN, MSOLZSTS, MOSONST, MRE4SONST, UPTAB26, main). BigDecimal-Arithmetik via `decimal.js`.
+
+**Verifikation:** `scripts/verify-lohnsteuer-pap.ts` — Δ = 0,00 € an allen 20 BMF-Stützpunkten. [docs/referenzen/itzbund-README.md](../referenzen/itzbund-README.md) dokumentiert Quelle, SHA256, Lizenz (§ 5 UrhG, gemeinfrei) und jährlichen Update-Prozess.
+
+**Produktivpfad:** `berechneLohnsteuerJahr` in `lohnsteuer.ts` delegiert komplett an `berechneLohnsteuerPAP2026`. Empirische Lookup-Tabellen archiviert unter [lib/berechnungen/_lookup-archiv/](../../lib/berechnungen/_lookup-archiv/). UI-Toleranz-Hinweise aus Brutto-Netto / Lohnsteuer / Midijob entfernt — der Algorithmus ist jetzt offiziell BMF-identisch.
