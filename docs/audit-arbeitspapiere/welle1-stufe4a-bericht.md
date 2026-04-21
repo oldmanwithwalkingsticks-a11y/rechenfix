@@ -366,3 +366,41 @@ Die Erb-Lib differenziert korrekter. Der „Enkelkind bei verstorbenen Eltern"-F
 - **Wochenend-Refactor (separat):** Lohnsteuer Kl. V/VI Voll-PAP-Implementation nach § 39b Abs. 2 Satz 7 EStG, um die empirische Lookup-Tabelle (115b2) abzulösen.
 
 > Folge-Fix Prompt 115d (21.04.2026): UX-Inkonsistenz in der Vergleichs-Tabelle behoben (aktive Spalte nun markiert, Hybrid-Spalte mit Bedingungs-Fußnote versehen). Rechenlogik unverändert.
+
+---
+
+## Nachtrag Prompt 116 (21.04.2026) — P2-Pass abgeschlossen
+
+Acht P2-Bugs aus dem ursprünglichen 114er-Audit über vier Rechner. Midijob-P2 war bereits mit 115a abgedeckt; hier die verbleibenden Stufe-4a-P2.
+
+### ErbSt (Commit `e7951eb`)
+
+- **§ 14 ErbStG-Kumulation** (ER-04): Neue Berechnungsroutine in [lib/berechnungen/erbschaftsteuer.ts](../../lib/berechnungen/erbschaftsteuer.ts) `berechneErbschaftsteuer` bei `vorschenkungen > 0`. Gesamterwerb = wert + vorschenkungen; Tarif auf Gesamterwerb − persFB; Anrechnung der fiktiven/tatsächlichen Vorsteuer nach § 14 Abs. 1 Satz 2/3 (höherer Betrag aus tatsächlicher Vor-Steuer mit persFB-Schutz und proportionalem Anteil). ER-04-Testfall (500k Kind + 350k Vorschenkung): vorher 67.500 €, jetzt 39.706 €.
+- **Hausrat-Freibetrag § 13 ErbStG** (ER-03): Neuer optionaler Input `hausratFreibetrag: boolean`. 41.000 € Kl. I / 12.000 € Kl. II+III. Neuer Schritt 5 im ErbschaftsteuerRechner.
+- Neue UI-Zeile „Anrechnung auf Vorschenkung (§ 14 Abs. 1 ErbStG)" in der Berechnungs-Tabelle.
+
+### SchenkSt (Commit `3aa2583`)
+
+- **Enkel-Differenzierung** (SS-02): Typ `enkelkind` (200k FB pauschal) ersetzt durch `enkel-eltern-leben` (200k) und `enkel-eltern-tot` (400k, § 16 Abs. 1 Nr. 3 ErbStG analog zur ErbSt-Lib).
+- **Hausrat-FB Kl. II/III** (SS-03): 12.000 € statt 0 €.
+- **Schwieger-/Stiefeltern + Geschiedener Ehepartner**: Zwei neue Optionen (jeweils Kl. II), konsistent zur ErbSt-Lib.
+
+### AfA (Commit `39923c0`)
+
+- **Degressiv-Deckel 20 %** (AFA-03): `Math.min`-Clamp auf 20 (statt 25); Label „max. 20 %, höchstens 2× linearer Satz". Der 115c-Gate (Fallback auf linear ab 2026) bleibt greifbar; der 20 %-Deckel wirkt nur im Rest-Gültigkeitsbereich bis 31.12.2025.
+- **Wohngebäude-Sonder-AfA § 7 Abs. 5a EStG** (AFA-04): Vierte Methode `wohngebaeude-5` mit 5 % linear p. a., Plan läuft gesetzlich 20 Jahre. Info-Hinweis unter der Methoden-Auswahl zu Bauantrags-Stichtagen (01.10.2023 bis 30.09.2029) und Effizienzhaus-Voraussetzungen. Nutzungsdauer-Eingabe wirkt hier bewusst nicht.
+
+### Midijob (Commit `b9107b2`)
+
+- **UNTERGRENZE-Stichtag-Regressionsfalle**: Die ehemals Modul-Scope-Konstante `MIDIJOB_UNTERGRENZE = getMidijobUntergrenze()` wurde in die Komponente verschoben. Nach dem 01.01.2027 greift der Stichtag-Switch (603,01 → 633,01 €) jetzt ohne Redeploy. Übergangsbereich-Text und CrossLink zum Minijob-Rechner formulieren die Schwelle dynamisch.
+
+### Regressions-Script
+
+[scripts/verify-erbst-haertefall.ts](../../scripts/verify-erbst-haertefall.ts) auf 15/15 erweitert: ER-04 (§ 14 Kumulation), ER-03 (Hausrat Kl. I), SS-02 (Enkel Eltern verstorben), SS-03 (Hausrat Kl. II Geschwister). Alle Δ = 0 €.
+
+### Offener Scope
+
+- **Prompt 117 (P3 + UX-Polish):** Versorgungsfreibetrag altersabhängige Staffel; Selbstgenutzte Immobilie bei Schenkung; KESt Bundesland-Dropdown; Verlustverrechnungs-Töpfe trennen; AfA-Typ-Filter + Sammelposten; Firmenwagen-Grenzsteuersatz via ESt-Lib; KiSt+Soli im gwV; MwSt-Gastronomie-Hinweis; Midijob F-Faktor-Doku.
+- **Wochenend-Refactor (separat):** Lohnsteuer Kl. V/VI Voll-PAP nach § 39b Abs. 2 Satz 7 EStG.
+
+Damit ist die Stufe-4a-Audit-Welle inhaltlich bis auf P3 + LSt-Voll-PAP durchgearbeitet.

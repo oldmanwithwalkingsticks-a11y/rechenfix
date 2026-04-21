@@ -179,7 +179,7 @@ Alle jahresabhängigen und gesetzlich definierten Werte liegen in `lib/berechnun
 | `midijob-uebergang.ts` **(neu, Prompt 115a)** | § 20a SGB IV BE-Formel Midijob | `berechneBemessungsgrundlageAN`, `MIDIJOB_OBERGRENZE_MONAT`, `FAKTOR_F_2026`, `getMidijobUntergrenze` |
 | `steuerprogression.ts` | Grenz-/Durchschnittssteuersatz | nutzt `einkommensteuer.ts` |
 | `kfz-steuer.ts`, `balkon-solar.ts`, `waermepumpe.ts` | Domänen-spezifisch | |
-| `erbschaftsteuer.ts` **(erweitert, Prompt 115c)** | § 19 ErbStG inkl. Abs. 3 Härtefall (einheitlich für Erbschaft + Schenkung) | `berechneErbStMitHaertefall(stpflErwerb, klasse)`, `ERBST_TARIF_STUFEN`, `Steuerklasse` |
+| `erbschaftsteuer.ts` **(erweitert, Prompts 115c+116)** | § 19 ErbStG inkl. Abs. 3 Härtefall + § 14-Kumulation bei Vorschenkungen + § 13 Hausrat-FB | `berechneErbStMitHaertefall(stpflErwerb, klasse)`, `ERBST_TARIF_STUFEN`, `Steuerklasse`, `berechneErbschaftsteuer` (nutzt § 14 + Hausrat) |
 | `schenkungssteuer.ts` | § 16 ErbStG persönliche Freibeträge, § 13 Hausrat-FB | `berechneSchenkungssteuer(...)` (importiert Härtefall aus `erbschaftsteuer.ts`) |
 
 **Verboten:** Eigene ESt-, LSt-, SV-, Kindergeld-, Pfändungs- oder Mindestlohn-Formeln in Komponenten oder Rechnern. Immer die zentrale Lib importieren. Diese Regel ergab sich aus Sprint 1 (April 2026) und wurde im Jahresaudit 2026 (Prompts 86–91) nochmal bestätigt, als in fünf Rechnern Formel-Duplikate mit 1–2 Jahre veralteten Werten gefunden wurden.
@@ -278,6 +278,8 @@ export const WERT = getAktuellerWert();
 | ErbSt-Tarifstufen § 19 ErbStG | 75k/300k/600k/6M/13M/26M mit Kl. I/II/III-Sätzen | selten | `erbschaftsteuer.ts` (`ERBST_TARIF_STUFEN` + `berechneErbStMitHaertefall` seit Prompt 115c) | § 19 ErbStG inkl. Abs. 3 Härtefall |
 | AfA degressiv bewegliche WG | **ausgelaufen zum 31.12.2025** (Fallback auf linear für Anschaffungen ab 01.01.2026) | — | `AfaRechner.tsx` (Gate `startJahr >= 2026`) | § 7 Abs. 2 EStG n.F. (Wachstumschancengesetz) |
 | Plug-in-Hybrid 0,5 %-Bedingungen | CO₂ ≤ 50 g/km **und** E-Reichweite ≥ 80 km | offen | `FirmenwagenRechner.tsx` (`HYBRID_CO2_GRENZE_G_KM`, `HYBRID_REICHWEITE_MIN_KM`) | § 6 Abs. 1 Nr. 4 S. 2 Nr. 3 EStG (ab 01.01.2025) |
+| Wohngebäude-Sonder-AfA § 7 Abs. 5a EStG | 5 % linear p. a., Bauantrag 01.10.2023 bis 30.09.2029 | 30.09.2029 | `AfaRechner.tsx` (Methode `'wohngebaeude-5'`) | § 7 Abs. 5a EStG |
+| Degressive AfA Maximalsatz | 20 % (bis 31.12.2025); ab 01.01.2026 nicht mehr zulässig | — | `AfaRechner.tsx` (Math.min-Clamp, Label) | § 7 Abs. 2 EStG n.F. (Wachstumschancengesetz) |
 
 **Stichtag-Switch automatisch:** Die drei fett markierten Parameter (Rentenwert 01.07.2026, Mindestlohn 01.01.2027, Pfändung 01.07.2026) wechseln ohne Deploy durch das Stichtag-Switch-Pattern in den Libs. Nach den Stichtagen nur Spot-Check.
 
@@ -452,3 +454,4 @@ Reihenfolge nach Freigabe: erst 85 (Warning wegräumen), dann 68 (CMP dazu).
 - **115b2** — Fix Lohnsteuer-Kl.V/VI via empirischer Lookup-Kalibrierung (20 BMF-Stützpunkte, Δ=0 an Stützpunkten, UI-Hinweis auf 3 Rechnern, Verifikations-Script `scripts/verify-lohnsteuer-vvi.ts`) ✅
 - **115c** — Stufe-4a P1-Rest (3 Bugs): Härtefall § 19 Abs. 3 ErbStG zentral als `berechneErbStMitHaertefall` + `ERBST_TARIF_STUFEN` (Schenkungssteuer importiert); AfA degressiv ab 2026 gated mit Fallback auf linear + Warn-Banner (§ 7 Abs. 2 EStG n.F.); Firmenwagen Plug-in-Hybrid CO₂/Reichweite-Bedingungen als conditional UI-Block mit Fallback auf 1 %-Regel (§ 6 Abs. 1 Nr. 4 S. 2 Nr. 3 EStG); Regressions-Script `scripts/verify-erbst-haertefall.ts` mit 11 grünen Testfällen ✅
 - **115d** — Firmenwagen-Vergleichs-Tabelle: aktive Spalte markieren + Hybrid-Bedingungs-Fußnote. UX-Fix zu 115c-Widerspruch (Hauptblock zeigte Fallback-Wert, Tabelle weiterhin Idealfall → zwei Hybrid-Zahlen untereinander). Keine Änderung an Rechenlogik, nur UI. ✅
+- **116** — Stufe-4a P2-Pass (8 Bugs): ErbSt § 14-Kumulation (Gesamterwerb + proportionale/tatsächliche Vorsteuer-Anrechnung, ER-04 von 67.500 → 39.706 €) + Hausrat-FB § 13 ErbStG (41k Kl. I / 12k Kl. II+III, ER-03); SchenkSt Enkel-Differenzierung (enkel-eltern-tot 400k FB, SS-02) + Hausrat-FB Kl. II/III (SS-03) + Schwieger-/Stiefeltern + Geschiedener Ehepartner als neue Optionen; AfA Degressiv-Deckel 25 → 20 % + neue Methode Wohngebäude-5 (§ 7 Abs. 5a EStG, 5 % linear p. a. über 20 Jahre); Midijob-UNTERGRENZE aus Modul-Scope in Komponenten-Scope verschoben (Stichtag-Robustheit 01.01.2027). Regressions-Script auf 15/15 erweitert. ✅
