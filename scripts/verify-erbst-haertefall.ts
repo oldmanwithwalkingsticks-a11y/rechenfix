@@ -55,10 +55,50 @@ const sch = (wert: number, vw: any, genutzt = 0, hausrat = false) =>
   }).schenkungssteuer;
 
 cases.push(
-  { name: 'SS-01: Schenkung 250k Enkel (Eltern leben)',  actual: sch(250_000, 'enkelkind'), expected: 3_500 },
+  { name: 'SS-01: Schenkung 250k Enkel (Eltern leben)',  actual: sch(250_000, 'enkel-eltern-leben'), expected: 3_500 },
   { name: 'SS-Härtefall: Schenkung 700.001 Kind',        actual: sch(700_001, 'kind'),      expected: 33_001 },
   { name: 'SS-Härtefall: Schenkung 475.001 Kind',        actual: sch(475_001, 'kind'),      expected: 5_251 },
 );
+
+// --- Prompt 116 Neuzugänge (P2) ---
+
+// ER-04: § 14 ErbStG-Kumulation (Erbschaft 500k Kind + Vorschenkung 350k)
+// Erwartet: steuerGesamt 67.500 €, anrechenbar 67.500 × 350/850 ≈ 27.794 €,
+// final 39.706 € (±1 € durch Ganzzahl-Rundung).
+cases.push({
+  name: 'ER-04: § 14 Kumulation Erb 500k + Vorsch 350k Kind',
+  actual: erb(500_000, 'kind', 350_000),
+  expected: 39_706,
+  tolerance: 2,
+});
+
+// ER-03 Hausrat Kl. I: Erbschaft 50k Kind + Hausrat → FB 400k + 52k + 41k = 493k → 0 €
+cases.push({
+  name: 'ER-03: Hausrat Kl. I Erb 50k Kind',
+  actual: berechneErbschaftsteuer({
+    erwerbsart: 'erbschaft',
+    wert: 50_000,
+    verwandtschaft: 'kind',
+    vorschenkungen: 0,
+    selbstgenutzteImmobilie: false,
+    hausratFreibetrag: true,
+  }).steuerbetrag,
+  expected: 0,
+});
+
+// SS-02: Enkel Eltern verstorben → FB 400k → 250k steuerfrei
+cases.push({
+  name: 'SS-02: Enkel Eltern verstorben 250k',
+  actual: sch(250_000, 'enkel-eltern-tot'),
+  expected: 0,
+});
+
+// SS-03: Hausrat Kl. II Geschwister 25k → FB 20k + 12k = 32k → 0 €
+cases.push({
+  name: 'SS-03: Hausrat Kl. II Geschwister 25k',
+  actual: sch(25_000, 'geschwister', 0, true),
+  expected: 0,
+});
 
 let passed = 0;
 let failed = 0;

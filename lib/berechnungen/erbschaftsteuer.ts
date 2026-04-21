@@ -21,6 +21,7 @@ export interface ErbschaftsteuerEingabe {
   verwandtschaft: Verwandtschaft;
   vorschenkungen: number;
   selbstgenutzteImmobilie: boolean;
+  hausratFreibetrag?: boolean;
 }
 
 export interface ErbschaftsteuerErgebnis {
@@ -28,8 +29,10 @@ export interface ErbschaftsteuerErgebnis {
   steuerklasse: Steuerklasse;
   persoenlicherFreibetrag: number;
   versorgungsfreibetrag: number;
+  hausratFreibetrag: number;
   gesamtFreibetrag: number;
   vorschenkungen: number;
+  anrechenbareVorsteuer: number;
   steuerpflichtigerErwerb: number;
   steuersatz: number;        // Prozent
   steuerbetrag: number;
@@ -133,6 +136,7 @@ function rund2(n: number): number {
 
 export function berechneErbschaftsteuer(e: ErbschaftsteuerEingabe): ErbschaftsteuerErgebnis {
   const { erwerbsart, wert, verwandtschaft, vorschenkungen, selbstgenutzteImmobilie } = e;
+  const hausratAktiv = e.hausratFreibetrag ?? false;
 
   const steuerklasse = getSteuerklasse(verwandtschaft, erwerbsart);
   const fb = FREIBETRAEGE[verwandtschaft];
@@ -145,12 +149,12 @@ export function berechneErbschaftsteuer(e: ErbschaftsteuerEingabe): Erbschaftste
     else if (verwandtschaft === 'kind') versorgungsfreibetrag = 52000; // annäherung für junges Kind; in Realität altersabhängig
   }
 
-  // Vorschenkungen verringern den Freibetrag
-  const freibetragNachVorschenkung = Math.max(0, persoenlicherFreibetrag - vorschenkungen);
-  const gesamtFreibetrag = freibetragNachVorschenkung + versorgungsfreibetrag;
+  // Hausrat-Freibetrag § 13 Abs. 1 Nr. 1 ErbStG: 41.000 € Kl. I / 12.000 € Kl. II+III.
+  const hausratFreibetrag = hausratAktiv
+    ? (steuerklasse === 'I' ? 41000 : 12000)
+    : 0;
 
-  // Steuerpflichtiger Erwerb
-  const steuerpflichtigerErwerb = Math.max(0, wert - gesamtFreibetrag);
+  const gesamtFreibetrag = persoenlicherFreibetrag + versorgungsfreibetrag + hausratFreibetrag;
 
   // Selbstgenutzte Immobilie: vereinfachte Behandlung — bei Ehepartner/Kind komplett steuerfrei (Bedingungen)
   let hinweisImmobilie: string | null = null;
@@ -164,16 +168,50 @@ export function berechneErbschaftsteuer(e: ErbschaftsteuerEingabe): Erbschaftste
     }
   }
 
-  const { steuerbetrag, steuersatz } = berechneErbStMitHaertefall(steuerpflichtigerErwerb, steuerklasse);
+  let steuerpflichtigerErwerb: number;
+  let steuerbetrag: number;
+  let steuersatz: number;
+  let anrechenbareVorsteuer = 0;
+
+  if (vorschenkungen > 0) {
+    // § 14 ErbStG-Kumulation: Aktueller Erwerb + Vorerwerbe der letzten 10 Jahre
+    // werden zum Gesamterwerb addiert. Der Tarif greift auf den Gesamtbetrag,
+    // nur der persönliche Freibetrag steht einmal zur Verfügung. Die fiktiv
+    // oder tatsächlich auf den Vorerwerb zu entrichtende Steuer wird nach
+    // § 14 Abs. 1 Satz 2/3 ErbStG angerechnet (der höhere der beiden Beträge).
+    // Versorgungs- und Hausrat-FB bleiben hier außen vor; sie gelten nur für
+    // den aktuellen Erbfall und werden nicht retrospektiv auf die Vorschenkung
+    // angewandt. Bei reinen Vorschenkungs-Szenarien (§ 13 greift nur für das
+    // aktuelle Inventar) ist das konservativ zuungunsten des Erben.
+    const gesamtErwerb = wert + vorschenkungen;
+    const stpflGesamt = Math.max(0, gesamtErwerb - persoenlicherFreibetrag);
+    const tariff = berechneErbStMitHaertefall(stpflGesamt, steuerklasse);
+    const stpflVor = Math.max(0, vorschenkungen - persoenlicherFreibetrag);
+    const steuerVorTatsaechlich = berechneErbStMitHaertefall(stpflVor, steuerklasse).steuerbetrag;
+    const anteilVor = gesamtErwerb > 0 ? vorschenkungen / gesamtErwerb : 0;
+    const steuerProportional = Math.round(tariff.steuerbetrag * anteilVor);
+    anrechenbareVorsteuer = Math.max(steuerVorTatsaechlich, steuerProportional);
+    steuerpflichtigerErwerb = stpflGesamt;
+    steuersatz = tariff.steuersatz;
+    steuerbetrag = Math.max(0, tariff.steuerbetrag - anrechenbareVorsteuer);
+  } else {
+    steuerpflichtigerErwerb = Math.max(0, wert - gesamtFreibetrag);
+    const tariff = berechneErbStMitHaertefall(steuerpflichtigerErwerb, steuerklasse);
+    steuerbetrag = tariff.steuerbetrag;
+    steuersatz = tariff.steuersatz;
+  }
+
   const nettoErbschaft = rund2(wert - steuerbetrag);
 
   return {
     wert,
     steuerklasse,
-    persoenlicherFreibetrag: freibetragNachVorschenkung,
+    persoenlicherFreibetrag,
     versorgungsfreibetrag,
+    hausratFreibetrag,
     gesamtFreibetrag,
     vorschenkungen,
+    anrechenbareVorsteuer,
     steuerpflichtigerErwerb,
     steuersatz,
     steuerbetrag,

@@ -36,6 +36,7 @@ export default function ErbschaftsteuerRechner() {
   const [verwandtschaft, setVerwandtschaft] = useState<Verwandtschaft>('kind');
   const [vorschenkungen, setVorschenkungen] = useState('0');
   const [selbstgenutzteImmobilie, setSelbstgenutzteImmobilie] = useState(false);
+  const [hausratFreibetrag, setHausratFreibetrag] = useState(false);
 
   const ergebnis = useMemo(
     () => berechneErbschaftsteuer({
@@ -44,8 +45,9 @@ export default function ErbschaftsteuerRechner() {
       verwandtschaft,
       vorschenkungen: parseDeutscheZahl(vorschenkungen),
       selbstgenutzteImmobilie,
+      hausratFreibetrag,
     }),
-    [erwerbsart, wert, verwandtschaft, vorschenkungen, selbstgenutzteImmobilie],
+    [erwerbsart, wert, verwandtschaft, vorschenkungen, selbstgenutzteImmobilie, hausratFreibetrag],
   );
 
   const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
@@ -105,14 +107,36 @@ export default function ErbschaftsteuerRechner() {
         </h2>
         <NummerEingabe value={vorschenkungen} onChange={setVorschenkungen} placeholder="0" einheit="€" />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-          Schenkungen innerhalb von 10 Jahren werden mit der aktuellen Erbschaft zusammengerechnet und verringern den Freibetrag.
+          § 14 ErbStG: Schenkungen der letzten 10 Jahre werden zum Gesamterwerb kumuliert. Die auf den Vorerwerb tatsächlich oder fiktiv zu zahlende Steuer wird anschließend angerechnet.
         </p>
       </div>
 
-      {/* === 5: Immobilie === */}
+      {/* === 5: Hausrat-Freibetrag === */}
       <div className="mb-6">
         <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">5</span>
+          Hausrat im Erwerb enthalten?
+        </h2>
+        <RadioToggleGroup
+          name="erbschaft-hausrat"
+          legend="Hausrat-Freibetrag berücksichtigen?"
+          srOnlyLegend
+          options={[
+            { value: 'nein', label: 'Nein' },
+            { value: 'ja', label: '🛋️ Ja' },
+          ]}
+          value={hausratFreibetrag ? 'ja' : 'nein'}
+          onChange={(v) => setHausratFreibetrag(v === 'ja')}
+        />
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          § 13 Abs. 1 Nr. 1 ErbStG: 41.000 € in Steuerklasse I, 12.000 € in Steuerklasse II und III.
+        </p>
+      </div>
+
+      {/* === 6: Immobilie === */}
+      <div className="mb-6">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+          <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">6</span>
           Selbstgenutzte Immobilie enthalten?
         </h2>
         <RadioToggleGroup
@@ -176,20 +200,26 @@ export default function ErbschaftsteuerRechner() {
                 </td>
                 <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">−{fmtEuro(ergebnis.persoenlicherFreibetrag)} €</td>
               </tr>
-              {ergebnis.versorgungsfreibetrag > 0 && (
+              {ergebnis.versorgungsfreibetrag > 0 && ergebnis.vorschenkungen === 0 && (
                 <tr>
                   <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">Versorgungsfreibetrag</td>
                   <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">−{fmtEuro(ergebnis.versorgungsfreibetrag)} €</td>
                 </tr>
               )}
+              {ergebnis.hausratFreibetrag > 0 && ergebnis.vorschenkungen === 0 && (
+                <tr>
+                  <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">Hausrat-Freibetrag (§ 13 ErbStG)</td>
+                  <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">−{fmtEuro(ergebnis.hausratFreibetrag)} €</td>
+                </tr>
+              )}
               {ergebnis.vorschenkungen > 0 && (
                 <tr>
-                  <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">Vorschenkungen (10 Jahre)</td>
-                  <td className="px-4 py-2.5 text-right tabular-nums text-red-600 whitespace-nowrap">+{fmtEuro(ergebnis.vorschenkungen)} € angerechnet</td>
+                  <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">+ Vorschenkungen (§ 14 ErbStG)</td>
+                  <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200 whitespace-nowrap">+{fmtEuro(ergebnis.vorschenkungen)} €</td>
                 </tr>
               )}
               <tr className="bg-blue-50 dark:bg-blue-500/10 font-medium">
-                <td className="px-4 py-2.5 text-blue-800 dark:text-blue-300 whitespace-nowrap">= Steuerpflichtiger Erwerb</td>
+                <td className="px-4 py-2.5 text-blue-800 dark:text-blue-300 whitespace-nowrap">= Steuerpflichtiger {ergebnis.vorschenkungen > 0 ? 'Gesamterwerb' : 'Erwerb'}</td>
                 <td className="px-4 py-2.5 text-right tabular-nums text-blue-800 dark:text-blue-300 whitespace-nowrap">{fmtEuro(ergebnis.steuerpflichtigerErwerb)} €</td>
               </tr>
               <tr>
@@ -200,6 +230,12 @@ export default function ErbschaftsteuerRechner() {
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">Steuersatz (§ 19 ErbStG)</td>
                 <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200 whitespace-nowrap">{ergebnis.steuersatz} %</td>
               </tr>
+              {ergebnis.anrechenbareVorsteuer > 0 && (
+                <tr>
+                  <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">− Anrechnung auf Vorschenkung (§ 14 Abs. 1 ErbStG)</td>
+                  <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">−{fmtEuro(ergebnis.anrechenbareVorsteuer)} €</td>
+                </tr>
+              )}
               <tr className={`font-bold ${ergebnis.steuerfrei ? 'bg-green-50 dark:bg-green-500/10' : 'bg-red-50 dark:bg-red-500/10'}`}>
                 <td className={`px-4 py-3 whitespace-nowrap ${ergebnis.steuerfrei ? 'text-green-800 dark:text-green-300' : 'text-red-800 dark:text-red-300'}`}>
                   = {erwerbsart === 'erbschaft' ? 'Erbschaftsteuer' : 'Schenkungsteuer'}
@@ -292,6 +328,7 @@ export default function ErbschaftsteuerRechner() {
           verwandtschaft: VERWANDTSCHAFT_LABELS[verwandtschaft],
           vorschenkungen: `${fmtEuro(parseDeutscheZahl(vorschenkungen))} €`,
           immobilie: selbstgenutzteImmobilie ? 'Ja' : 'Nein',
+          hausrat: hausratFreibetrag ? 'Ja' : 'Nein',
         }}
         ergebnis={{
           steuerklasse: ergebnis.steuerklasse,
