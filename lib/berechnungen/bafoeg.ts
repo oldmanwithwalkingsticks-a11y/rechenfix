@@ -49,22 +49,30 @@ export interface BafoegErgebnis {
   elternunabhaengig: boolean;
 }
 
-// === BEDARFSSÄTZE 2026 ===
+// === BEDARFSSÄTZE seit 29. BAföG-ÄndG (01.08.2024), Stand 21.04.2026 ===
+// § 13 BAföG: Studierende / § 12 BAföG: Schüler
+// Grundbedarf Studium 475 € + Wohnpauschale bei Eltern 59 € = 534 €
+// Grundbedarf Studium 475 € + Wohnpauschale auswärts 380 € = 855 €
+// Höchstsatz Studium auswärts mit KV/PV-Zuschlag (bis 30 J.) = 475 + 380 + 102 + 35 = 992 €
 
 const BEDARF = {
-  studium: { eltern: 511, eigene: 934 },
+  studium: { eltern: 534, eigene: 855 },
   schule: { eltern: 262, eigene: 632 },
 };
 
-// Wohnpauschale ist im Eigene-Wohnung-Bedarf bereits enthalten
+// Wohnpauschale ist im 'eigene'-Bedarf bereits enthalten (im BAföG-Bescheid werden
+// Grundbedarf und Wohnpauschale getrennt ausgewiesen; hier aggregiert im BEDARF).
 const WOHNPAUSCHALE = {
   studium: 380,
   schule: 370,
 };
 
-const KV_ZUSCHLAG = 94;
-const PV_ZUSCHLAG = 28;
-const KINDER_ZUSCHLAG = 160; // pro Kind
+// KV/PV-Zuschläge § 13a BAföG ab 01.08.2024 (Werte für bis 30 J.).
+// Für Studierende ab 30 Jahren gelten höhere Sätze (KV 122 €, PV 41 €) — aktuell
+// nicht differenziert (P3-Backlog); der 992-€-Höchstsatz folgt der "bis 30 J."-Staffel.
+const KV_ZUSCHLAG = 102;
+const PV_ZUSCHLAG = 35;
+const KINDER_ZUSCHLAG = 160; // pro Kind, § 14b BAföG
 
 // === FREIBETRÄGE ===
 
