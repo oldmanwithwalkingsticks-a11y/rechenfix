@@ -33,10 +33,17 @@ export default function AfaRechner() {
     const restMonate = 13 - startMonat; // z.B. 01. Januar -> 12 Monate
     const anteilErstjahr = restMonate / 12;
 
+    // § 7 Abs. 2 EStG n.F. (Wachstumschancengesetz): degressive AfA für
+    // bewegliche Wirtschaftsgüter ist für Anschaffungen ab 01.01.2026
+    // nicht mehr zulässig. Fallback auf linear, Button-State bleibt als
+    // User-Intention erhalten.
+    const degressivGesperrt = methode === 'degressiv' && startJahr >= 2026;
+    const methodeEffektiv: Methode = degressivGesperrt ? 'linear' : methode;
+
     const rows: JahresRow[] = [];
 
     // GWG (bis 800€ netto): sofort
-    if (methode === 'gwg') {
+    if (methodeEffektiv === 'gwg') {
       if (k <= 800) {
         rows.push({ jahr: startJahr, afa: k, kumuliert: k, restwert: 0 });
       } else {
@@ -44,13 +51,13 @@ export default function AfaRechner() {
       }
       const jaehrlich = k <= 800 ? k : 0;
       return {
-        k, nd, methode, rows, jaehrlich,
+        k, nd, methode: methodeEffektiv, rows, jaehrlich,
         linSatz: 0, degSatzNum: 0, anteilErstjahr, startJahr,
-        gwgOk: k <= 800,
+        gwgOk: k <= 800, degressivGesperrt,
       };
     }
 
-    if (methode === 'linear') {
+    if (methodeEffektiv === 'linear') {
       const jaehrlich = k / nd;
       let kum = 0;
       let rest = k;
@@ -68,7 +75,7 @@ export default function AfaRechner() {
         rows.push({ jahr, afa, kumuliert: kum, restwert: rest });
         jahr++;
       }
-      return { k, nd, methode, rows, jaehrlich, linSatz: 100 / nd, degSatzNum: 0, anteilErstjahr, startJahr, gwgOk: true };
+      return { k, nd, methode: methodeEffektiv, rows, jaehrlich, linSatz: 100 / nd, degSatzNum: 0, anteilErstjahr, startJahr, gwgOk: true, degressivGesperrt };
     }
 
     // Degressiv — Wechsel zu linear, wenn günstiger
@@ -100,7 +107,7 @@ export default function AfaRechner() {
       restJahre -= 1;
       if (restJahre <= 0) break;
     }
-    return { k, nd, methode, rows, jaehrlich: rows[1]?.afa ?? ersteAfa, linSatz, degSatzNum: degNum, anteilErstjahr, startJahr, gwgOk: true };
+    return { k, nd, methode: methodeEffektiv, rows, jaehrlich: rows[1]?.afa ?? ersteAfa, linSatz, degSatzNum: degNum, anteilErstjahr, startJahr, gwgOk: true, degressivGesperrt };
   }, [kosten, nutzungsdauer, methode, degSatz, datum]);
 
   const fmtEuro = (n: number) =>
@@ -191,6 +198,21 @@ export default function AfaRechner() {
         />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Für die anteilige AfA im ersten Jahr (pro rata temporis)</p>
       </div>
+
+      {/* Warn-Banner: Degressive AfA ab 2026 nicht zulässig */}
+      {result.degressivGesperrt && (
+        <div className="mb-4 p-3 rounded-xl border border-amber-300 bg-amber-50 dark:border-amber-700 dark:bg-amber-900/20">
+          <p className="text-sm font-bold text-amber-800 dark:text-amber-200 mb-1">
+            ⚠️ Degressive AfA nicht mehr zulässig
+          </p>
+          <p className="text-xs text-amber-700 dark:text-amber-300">
+            Nach § 7 Abs. 2 EStG n.F. (Wachstumschancengesetz) ist die degressive AfA für bewegliche
+            Wirtschaftsgüter nur noch für Anschaffungen bis 31.12.2025 zulässig. Für Ihr
+            Anschaffungsdatum wird automatisch linear gerechnet. Um degressiv zu reaktivieren, setzen
+            Sie das Anschaffungsdatum auf einen Tag bis 31.12.2025.
+          </p>
+        </div>
+      )}
 
       {/* Ergebnis */}
       <div className="result-box mb-6" style={{ background: 'linear-gradient(135deg, #059669, #0d9488)' }}>
