@@ -8,6 +8,7 @@ import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
+import { BUNDESLAENDER, kirchensteuersatzFuer, type Bundesland } from '@/lib/berechnungen/einkommensteuer';
 
 type Ertragsart = 'zinsen' | 'dividenden' | 'aktien' | 'aktien-etf' | 'misch-etf';
 
@@ -28,11 +29,24 @@ export default function KapitalertragsteuerRechner() {
   const [restFreibetrag, setRestFreibetrag] = useState('500');
   const [verheiratet, setVerheiratet] = useState(false);
   const [kirchensteuer, setKirchensteuer] = useState(false);
-  const [kirchensteuersatz, setKirchensteuersatz] = useState<8 | 9>(9);
-  const [verluste, setVerluste] = useState('0');
+  const [bundesland, setBundesland] = useState<Bundesland>('Nordrhein-Westfalen');
+  const [verlusteAufgeteilt, setVerlusteAufgeteilt] = useState(false);
+  const [verlusteAllgemein, setVerlusteAllgemein] = useState('0');
+  const [verlusteAktien, setVerlusteAktien] = useState('0');
 
+  const kirchensteuersatz = kirchensteuersatzFuer(bundesland);
   const nErtrag = Math.max(0, parseDeutscheZahl(ertrag));
-  const nVerluste = Math.max(0, parseDeutscheZahl(verluste));
+  const nVerlusteAllgemein = Math.max(0, parseDeutscheZahl(verlusteAllgemein));
+  const nVerlusteAktien = Math.max(0, parseDeutscheZahl(verlusteAktien));
+  // Verlustverrechnung nach § 20 Abs. 6 EStG:
+  // - Aktien-Topf: nur direkte Aktien-Veräußerungsverluste mit Aktien-Gewinnen
+  // - Allgemeiner Topf: alle anderen Verluste mit allen anderen Kapitalerträgen
+  // Im single-field-Modus (verlusteAufgeteilt=false) wird verlusteAllgemein als
+  // pauschaler Topf verwendet — der User ist selbst verantwortlich, dass der
+  // Wert zur Ertragsart passt.
+  const nVerluste = verlusteAufgeteilt
+    ? (ertragsart === 'aktien' ? nVerlusteAktien : nVerlusteAllgemein)
+    : nVerlusteAllgemein;
   const pauschVoll = verheiratet ? 2000 : 1000;
   const art = ERTRAGSARTEN.find(a => a.key === ertragsart)!;
 
@@ -186,20 +200,20 @@ export default function KapitalertragsteuerRechner() {
           ))}
         </div>
         {kirchensteuer && (
-          <div className="flex gap-2 mt-2">
-            {([8, 9] as const).map(s => (
-              <button
-                key={s}
-                onClick={() => setKirchensteuersatz(s)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                  kirchensteuersatz === s
-                    ? 'bg-primary-500 text-white'
-                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300'
-                }`}
-              >
-                {s} % (BW/BY: 8 %, sonst 9 %)
-              </button>
-            ))}
+          <div className="mt-3">
+            <label htmlFor="kest-bundesland" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
+              Bundesland (8 % in Bayern und Baden-Württemberg, sonst 9 %)
+            </label>
+            <select
+              id="kest-bundesland"
+              value={bundesland}
+              onChange={e => setBundesland(e.target.value as Bundesland)}
+              className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"
+            >
+              {BUNDESLAENDER.map(bl => (
+                <option key={bl} value={bl}>{bl}</option>
+              ))}
+            </select>
           </div>
         )}
       </div>
@@ -207,8 +221,35 @@ export default function KapitalertragsteuerRechner() {
       {/* Verlustverrechnung */}
       <div className="mb-6">
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Verlustverrechnung (optional)</label>
-        <NummerEingabe value={verluste} onChange={setVerluste} placeholder="0" einheit="€" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Realisierte Verluste aus dem gleichen Verlusttopf, die mit den Erträgen verrechnet werden können.</p>
+        {!verlusteAufgeteilt ? (
+          <>
+            <NummerEingabe value={verlusteAllgemein} onChange={setVerlusteAllgemein} placeholder="0" einheit="€" />
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Realisierte Verluste aus dem gleichen Verlusttopf, die mit den Erträgen verrechnet werden können.</p>
+          </>
+        ) : (
+          <div className="space-y-3">
+            <div>
+              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Verluste Aktien-Topf</label>
+              <NummerEingabe value={verlusteAktien} onChange={setVerlusteAktien} placeholder="0" einheit="€" />
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Nur aus direkt gehaltenen Aktien — nur mit Aktien-Kursgewinnen verrechenbar.</p>
+            </div>
+            <div>
+              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Verluste allgemeiner Topf</label>
+              <NummerEingabe value={verlusteAllgemein} onChange={setVerlusteAllgemein} placeholder="0" einheit="€" />
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">ETF, Anleihen, Zertifikate u. a. — mit allen Erträgen außer direkten Aktien-Gewinnen verrechenbar.</p>
+            </div>
+            <div className="text-xs text-blue-800 dark:text-blue-300 bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-lg p-2">
+              Aktuell wirkt: <strong>{ertragsart === 'aktien' ? 'Aktien-Topf' : 'Allgemeiner Topf'}</strong> (abhängig von Ertragsart „{art.label}").
+            </div>
+          </div>
+        )}
+        <button
+          type="button"
+          onClick={() => setVerlusteAufgeteilt(v => !v)}
+          className="mt-2 text-xs text-primary-600 dark:text-primary-400 underline"
+        >
+          {verlusteAufgeteilt ? '→ Aufschlüsselung zurücknehmen (ein Feld)' : '→ Verluste nach Töpfen aufschlüsseln (§ 20 Abs. 6 EStG)'}
+        </button>
       </div>
 
       {/* Ergebnis */}
@@ -300,8 +341,9 @@ export default function KapitalertragsteuerRechner() {
           bruttoErtragEuro: fmt(nErtrag),
           sparerpauschbetragEuro: fmt0(ergebnis.verfuegbarerPausch),
           verheiratet: verheiratet ? 'Ja' : 'Nein',
-          kirchensteuer: kirchensteuer ? `Ja (${kirchensteuersatz} %)` : 'Nein',
+          kirchensteuer: kirchensteuer ? `Ja (${kirchensteuersatz} %, ${bundesland})` : 'Nein',
           verlusteEuro: fmt(nVerluste),
+          verlustToepfeAufgeteilt: verlusteAufgeteilt ? 'Ja' : 'Nein',
         }}
         ergebnis={{
           steuerpflichtigEuro: fmt(ergebnis.steuerpflichtig),
