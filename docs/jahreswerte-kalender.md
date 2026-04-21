@@ -120,6 +120,9 @@
 5. [ ] **Altersentlastungsbetrag**: neue Kohorten-Zeile für Jahrgang (X+1)-64, Prozentsatz −0,4 pp, Höchstbetrag −19 €
 6. [ ] **Pendlerpauschale**: Politische Lage prüfen (Änderungs-Diskussionen?)
 7. [ ] **PV-Beitragssätze**: Änderungen bei § 55 SGB XI?
+8. [ ] **Midijob F-Faktor** § 20a Abs. 2 SGB IV (wird jährlich aus den Durchschnittsbeitragssätzen abgeleitet, gemeinsames Rundschreiben GKV-Spitzenverband / DRV Bund / BA):
+   - `FAKTOR_F_2026` in `lib/berechnungen/midijob-uebergang.ts` → Wert für (X+1) prüfen und ggf. neue Konstante `FAKTOR_F_{X+1}` + Default anpassen
+   - Quelle: https://www.gkv-spitzenverband.de/ (gemeinsame Rundschreiben)
 
 **Nach dem Check:**
 - Für jeden geänderten Parameter: Switch in der entsprechenden Lib einbauen (mit Stichtag 01.01.)

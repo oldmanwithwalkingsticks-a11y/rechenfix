@@ -267,6 +267,11 @@ export default function MidijobRechner() {
             </tr>
           </tbody>
         </table>
+        {ergebnis.imBereich && (
+          <p className="px-4 py-2 text-xs text-gray-500 dark:text-gray-400 border-t border-gray-100 dark:border-gray-700">
+            F-Faktor 0,6847 für 2026 — jährlich neu von den SV-Spitzenverbänden festgesetzt (§ 20a Abs. 2 SGB IV).
+          </p>
+        )}
       </div>
 
       {!ergebnis.imBereich && ergebnis.b > MIDIJOB_OBERGRENZE && (

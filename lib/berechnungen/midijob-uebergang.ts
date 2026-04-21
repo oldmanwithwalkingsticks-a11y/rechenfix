@@ -18,8 +18,22 @@ import { getMinijobGrenzeMonat } from './mindestlohn';
 /** Obergrenze Übergangsbereich (konstant seit 01.01.2023, § 20a SGB IV). */
 export const MIDIJOB_OBERGRENZE_MONAT = 2_000;
 
-/** F-Faktor 2026 nach § 20a Abs. 2 SGB IV.
- *  Wird jährlich von den Spitzenverbänden der SV neu festgesetzt. */
+/**
+ * F-Faktor § 20a Abs. 2 SGB IV für das Kalenderjahr 2026: **0,6847**.
+ *
+ * Herleitung: F ergibt sich aus dem Verhältnis der SV-Durchschnitts-
+ * beitragssätze (GKV inkl. Zusatzbeitrag, PV, RV, AV) auf der
+ * AG-Pauschal-Seite zur vollen Beitragsbelastung. Die Spitzenverbände
+ * der Sozialversicherung (GKV-Spitzenverband, DRV Bund, BA) weisen F
+ * jährlich in einem gemeinsamen Rundschreiben aus.
+ *
+ * Regressions-Falle zum Jahreswechsel:
+ * - Zum 01.01.2027 neu prüfen (veränderte Beitragssätze → anderer F).
+ * - Bei unterjähriger Änderung (selten, aber möglich bei SV-Reformen)
+ *   analog zum Stichtag-Switch-Pattern in `mindestlohn.ts` /
+ *   `rente.ts` / `pfaendung.ts` umstellen. Bis dahin reicht das
+ *   Jahres-Audit (siehe `docs/jahreswerte-kalender.md`, Dez-15-Check).
+ */
 export const FAKTOR_F_2026 = 0.6847;
 
 /**
