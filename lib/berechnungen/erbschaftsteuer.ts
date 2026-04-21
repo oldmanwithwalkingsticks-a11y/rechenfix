@@ -75,23 +75,56 @@ function getSteuerklasse(v: Verwandtschaft, art: Erwerbsart): Steuerklasse {
   return 'III';
 }
 
-// § 19 ErbStG Steuersätze
-function getSteuersatz(steuerpflichtigerErwerb: number, klasse: Steuerklasse): number {
-  const stufen: { bis: number; I: number; II: number; III: number }[] = [
-    { bis:    75000, I:  7, II: 15, III: 30 },
-    { bis:   300000, I: 11, II: 20, III: 30 },
-    { bis:   600000, I: 15, II: 25, III: 30 },
-    { bis:  6000000, I: 19, II: 30, III: 30 },
-    { bis: 13000000, I: 23, II: 35, III: 50 },
-    { bis: 26000000, I: 27, II: 40, III: 50 },
-    { bis: Infinity, I: 30, II: 43, III: 50 },
-  ];
-  for (const s of stufen) {
-    if (steuerpflichtigerErwerb <= s.bis) {
-      return s[klasse];
-    }
+// § 19 ErbStG Steuersätze — SSOT für Erbschaft- und Schenkungsteuer
+export interface ErbStTarifStufe {
+  readonly bis: number;
+  readonly I: number;
+  readonly II: number;
+  readonly III: number;
+}
+
+export const ERBST_TARIF_STUFEN: ReadonlyArray<ErbStTarifStufe> = [
+  { bis:    75000, I:  7, II: 15, III: 30 },
+  { bis:   300000, I: 11, II: 20, III: 30 },
+  { bis:   600000, I: 15, II: 25, III: 30 },
+  { bis:  6000000, I: 19, II: 30, III: 30 },
+  { bis: 13000000, I: 23, II: 35, III: 50 },
+  { bis: 26000000, I: 27, II: 40, III: 50 },
+  { bis: Infinity, I: 30, II: 43, III: 50 },
+];
+
+// § 19 Abs. 3 ErbStG Härtefall-Regel: Beim knappen Überschreiten einer
+// Tarifstufe darf die Mehrsteuer nicht mehr als 50 % (Kl. I, Sätze ≤ 30 %)
+// bzw. 75 % (Kl. II/III bei Satz > 30 %) des überschreitenden Betrags
+// betragen. Rückgabe: Steuerbetrag auf ganze Euro gerundet + Tarifsatz
+// der Stufe (zur Anzeige).
+export function berechneErbStMitHaertefall(
+  stpflErwerb: number,
+  klasse: Steuerklasse,
+): { steuerbetrag: number; steuersatz: number } {
+  if (stpflErwerb <= 0) return { steuerbetrag: 0, steuersatz: 0 };
+
+  const idx = ERBST_TARIF_STUFEN.findIndex(s => stpflErwerb <= s.bis);
+  const stufe = ERBST_TARIF_STUFEN[idx];
+  const satzNeu = stufe[klasse];
+  const steuerRegulaer = stpflErwerb * satzNeu / 100;
+
+  if (idx === 0) {
+    return { steuerbetrag: Math.round(steuerRegulaer), steuersatz: satzNeu };
   }
-  return stufen[stufen.length - 1][klasse];
+
+  const vorstufe = ERBST_TARIF_STUFEN[idx - 1];
+  const grenze = vorstufe.bis;
+  const satzVorstufe = vorstufe[klasse];
+  const steuerGrenze = grenze * satzVorstufe / 100;
+  const ueberschreitung = stpflErwerb - grenze;
+  const maxZuwachs = satzNeu <= 30 ? ueberschreitung * 0.5 : ueberschreitung * 0.75;
+  const steuerHaertefall = steuerGrenze + Math.min(steuerRegulaer - steuerGrenze, maxZuwachs);
+
+  return {
+    steuerbetrag: Math.round(Math.min(steuerRegulaer, steuerHaertefall)),
+    steuersatz: satzNeu,
+  };
 }
 
 function rund2(n: number): number {
@@ -131,8 +164,7 @@ export function berechneErbschaftsteuer(e: ErbschaftsteuerEingabe): Erbschaftste
     }
   }
 
-  const steuersatz = getSteuersatz(steuerpflichtigerErwerb, steuerklasse);
-  const steuerbetrag = steuerpflichtigerErwerb > 0 ? Math.round(steuerpflichtigerErwerb * steuersatz / 100) : 0;
+  const { steuerbetrag, steuersatz } = berechneErbStMitHaertefall(steuerpflichtigerErwerb, steuerklasse);
   const nettoErbschaft = rund2(wert - steuerbetrag);
 
   return {

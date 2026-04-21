@@ -1,3 +1,7 @@
+import { berechneErbStMitHaertefall, type Steuerklasse } from './erbschaftsteuer';
+
+export type { Steuerklasse };
+
 export type SchenkungsVerwandtschaft =
   | 'ehepartner'
   | 'kind'
@@ -6,8 +10,6 @@ export type SchenkungsVerwandtschaft =
   | 'geschwister'
   | 'nichte-neffe'
   | 'nicht-verwandt';
-
-export type Steuerklasse = 'I' | 'II' | 'III';
 
 export interface SchenkungssteuerEingabe {
   schenkungswert: number;
@@ -61,23 +63,6 @@ export const VERWANDTSCHAFT_LABELS: Record<SchenkungsVerwandtschaft, string> = {
   'nicht-verwandt': 'Nicht verwandt',
 };
 
-// § 19 ErbStG Steuersätze
-function getSteuersatz(steuerpflichtigerErwerb: number, klasse: Steuerklasse): number {
-  const stufen: { bis: number; I: number; II: number; III: number }[] = [
-    { bis:    75000, I:  7, II: 15, III: 30 },
-    { bis:   300000, I: 11, II: 20, III: 30 },
-    { bis:   600000, I: 15, II: 25, III: 30 },
-    { bis:  6000000, I: 19, II: 30, III: 30 },
-    { bis: 13000000, I: 23, II: 35, III: 50 },
-    { bis: 26000000, I: 27, II: 40, III: 50 },
-    { bis: Infinity, I: 30, II: 43, III: 50 },
-  ];
-  for (const s of stufen) {
-    if (steuerpflichtigerErwerb <= s.bis) return s[klasse];
-  }
-  return stufen[stufen.length - 1][klasse];
-}
-
 export function berechneSchenkungssteuer(e: SchenkungssteuerEingabe): SchenkungssteuerErgebnis {
   const { schenkungswert, verwandtschaft, bereitsGenutzt, hausratFreibetrag } = e;
 
@@ -94,10 +79,8 @@ export function berechneSchenkungssteuer(e: SchenkungssteuerEingabe): Schenkungs
   // Steuerpflichtiger Erwerb
   const steuerpflichtigerErwerb = Math.max(0, schenkungswert - gesamtFB);
 
-  const steuersatz = getSteuersatz(steuerpflichtigerErwerb, steuerklasse);
-  const schenkungssteuer = steuerpflichtigerErwerb > 0
-    ? Math.round(steuerpflichtigerErwerb * steuersatz / 100)
-    : 0;
+  const { steuerbetrag: schenkungssteuer, steuersatz } =
+    berechneErbStMitHaertefall(steuerpflichtigerErwerb, steuerklasse);
 
   const effektiverSteuersatz = schenkungswert > 0
     ? Math.round(schenkungssteuer / schenkungswert * 10000) / 100
