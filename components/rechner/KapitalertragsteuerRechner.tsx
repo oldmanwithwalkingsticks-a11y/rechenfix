@@ -239,7 +239,7 @@ export default function KapitalertragsteuerRechner() {
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">ETF, Anleihen, Zertifikate u. a. — mit allen Erträgen außer direkten Aktien-Gewinnen verrechenbar.</p>
             </div>
             <div className="text-xs text-blue-800 dark:text-blue-300 bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-lg p-2">
-              Aktuell wirkt: <strong>{ertragsart === 'aktien' ? 'Aktien-Topf' : 'Allgemeiner Topf'}</strong> (abhängig von Ertragsart „{art.label}").
+              Aktuell wirkt: <strong>{ertragsart === 'aktien' ? 'Aktien-Topf' : 'Allgemeiner Topf'}</strong> (abhängig von Ertragsart „{art.label}“).
             </div>
           </div>
         )}

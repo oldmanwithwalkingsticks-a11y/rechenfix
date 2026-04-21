@@ -404,3 +404,34 @@ Acht P2-Bugs aus dem ursprünglichen 114er-Audit über vier Rechner. Midijob-P2 
 - **Wochenend-Refactor (separat):** Lohnsteuer Kl. V/VI Voll-PAP nach § 39b Abs. 2 Satz 7 EStG.
 
 Damit ist die Stufe-4a-Audit-Welle inhaltlich bis auf P3 + LSt-Voll-PAP durchgearbeitet.
+
+---
+
+## Nachtrag Prompt 117 (22.04.2026) — P3-Pass (Teil) abgeschlossen
+
+Sieben P3-UX-Polish-Items umgesetzt, fünf weitere bewusst ins Backlog verschoben (siehe unten).
+
+### Umgesetzt
+
+- **KESt Bundesland-Dropdown + Verlustverrechnung zwei Töpfe § 20 Abs. 6 EStG** (Commit `3eeb72a`) — [components/rechner/KapitalertragsteuerRechner.tsx](../../components/rechner/KapitalertragsteuerRechner.tsx): Statt 8/9-%-Button ein Bundesland-Select (SSOT-Pattern); Toggle-Link für Verlust-Aufschlüsselung in Aktien-Topf vs. allgemeiner Topf mit kontextabhängigem Aktiv-Hinweis.
+- **ErbSt Versorgungsfreibetrag-Staffel § 17 Abs. 2 ErbStG** (Commit `0a34df3`) — [lib/berechnungen/erbschaftsteuer.ts](../../lib/berechnungen/erbschaftsteuer.ts): Neue exportierte `versorgungsfbKind(alter?)`-Fn mit Staffel 52k/41k/30,7k/20,5k/10,3k/0 €. Rechner-UI bei Kind/Enkel-Eltern-tot + Erbschaft mit optionalem Alter-Input. Regressions-Script um einen Staffel-Testfall erweitert (16/16 grün).
+- **AfA Sammelposten-Pool § 6 Abs. 2a EStG** (Commit `d9c3a6d`) — 5. Methode mit 20 % linear über 5 Jahre, Validitätscheck auf 250,01 €–1.000 € netto.
+- **Firmenwagen Info-Block Grenzsteuersatz + KiSt/Soli-Vereinfachung** (Commit `64804e8`) — dezenter Info-Block mit Richtwerten und Link auf Steuerprogressions-Rechner.
+- **MwSt Gastronomie-19-%-Rückkehr-Hinweis** (Commit `5ef90c7`) — konditional bei 7-%-Auswahl, Verweis auf § 12 Abs. 2 UStG.
+- **Midijob F-Faktor-Dokumentation** (Commit `90905a2`) — ausführlicher JSDoc-Block in `midijob-uebergang.ts`, UI-Hinweis unter der Aufschlüsselung, neuer Punkt 8 in [docs/jahreswerte-kalender.md](../jahreswerte-kalender.md) Dezember-Audit-Checkliste.
+
+### Backlog — nicht in 117 umgesetzt
+
+Fünf P3-Items bleiben bewusst im Backlog, weil sie entweder Nische, komplex oder eigenständige Arbeitspakete sind:
+
+- **KESt Vorabpauschale § 18 InvStG** — eigenes thematisches Arbeitspaket, erfordert Basiszinssatz-Jahresupdate und separaten Rechen-Pfad.
+- **SchenkSt Familienheim § 13 Abs. 1 Nr. 4a ErbStG** — komplexes Bedingungsgefüge (10-Jahres-Selbstnutzung, 200-qm-Grenze bei Kindern); erst bei nachgefragtem User-Bedarf sinnvoll zu bauen.
+- **AfA Typ-Filter (Gebäude/Maschine/Computer)** — Preset-Liste auf Basis der BMF-AfA-Tabellen; nice-to-have, aber User kann die Nutzungsdauer aus BMF-Tabelle selbst eintragen.
+- **Firmenwagen Vergleichs-Box bei BLP > 70.000 €** — die Spalten-Markierung aus 115d mildert die UX-Verwirrung bereits; kein aktiver Bug mehr.
+- **KESt Soli-Freigrenze bei Veranlagung** — juristische Feinabwägung, der aktuelle Quellensteuer-Ansatz ist für den Massen-Fall korrekt.
+
+Diese Items werden erst aufgegriffen, wenn konkreter User-Bedarf oder ein Jahres-Audit-Finding dazu zwingt.
+
+### Welle-Abschluss
+
+Mit 117 ist die Stufe-4a-Audit-Welle inhaltlich abgeschlossen. Der Lohnsteuer-Voll-PAP-Refactor (Ersatz der 115b2-Lookup-Tabellen durch § 39b Abs. 2 Satz 7 EStG-Volltariff) bleibt als separater Wochenend-Kandidat außerhalb der Welle.
