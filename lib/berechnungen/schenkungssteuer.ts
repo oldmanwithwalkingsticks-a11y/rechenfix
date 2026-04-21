@@ -5,10 +5,13 @@ export type { Steuerklasse };
 export type SchenkungsVerwandtschaft =
   | 'ehepartner'
   | 'kind'
-  | 'enkelkind'
+  | 'enkel-eltern-leben'
+  | 'enkel-eltern-tot'
   | 'elternteil'
   | 'geschwister'
   | 'nichte-neffe'
+  | 'stiefeltern'
+  | 'geschieden'
   | 'nicht-verwandt';
 
 export interface SchenkungssteuerEingabe {
@@ -34,33 +37,42 @@ export interface SchenkungssteuerErgebnis {
 }
 
 export const FREIBETRAEGE: Record<SchenkungsVerwandtschaft, number> = {
-  'ehepartner':     500000,
-  'kind':           400000,
-  'enkelkind':      200000,
-  'elternteil':      20000,
-  'geschwister':     20000,
-  'nichte-neffe':    20000,
-  'nicht-verwandt':  20000,
+  'ehepartner':         500000,
+  'kind':               400000,
+  'enkel-eltern-tot':   400000,
+  'enkel-eltern-leben': 200000,
+  'elternteil':          20000,
+  'geschwister':         20000,
+  'nichte-neffe':        20000,
+  'stiefeltern':         20000,
+  'geschieden':          20000,
+  'nicht-verwandt':      20000,
 };
 
 export const STEUERKLASSEN: Record<SchenkungsVerwandtschaft, Steuerklasse> = {
-  'ehepartner':     'I',
-  'kind':           'I',
-  'enkelkind':      'I',
-  'elternteil':     'II',
-  'geschwister':    'II',
-  'nichte-neffe':   'II',
-  'nicht-verwandt': 'III',
+  'ehepartner':         'I',
+  'kind':               'I',
+  'enkel-eltern-tot':   'I',
+  'enkel-eltern-leben': 'I',
+  'elternteil':         'II',
+  'geschwister':        'II',
+  'nichte-neffe':       'II',
+  'stiefeltern':        'II',
+  'geschieden':         'II',
+  'nicht-verwandt':     'III',
 };
 
 export const VERWANDTSCHAFT_LABELS: Record<SchenkungsVerwandtschaft, string> = {
-  'ehepartner':     'Ehepartner / eingetr. Lebenspartner',
-  'kind':           'Kind (inkl. Stief-/Adoptivkind)',
-  'enkelkind':      'Enkelkind',
-  'elternteil':     'Elternteil / Großelternteil',
-  'geschwister':    'Geschwister',
-  'nichte-neffe':   'Nichte / Neffe',
-  'nicht-verwandt': 'Nicht verwandt',
+  'ehepartner':         'Ehepartner / eingetr. Lebenspartner',
+  'kind':               'Kind (inkl. Stief-/Adoptivkind)',
+  'enkel-eltern-tot':   'Enkelkind (Eltern verstorben)',
+  'enkel-eltern-leben': 'Enkelkind (Eltern leben)',
+  'elternteil':         'Elternteil / Großelternteil',
+  'geschwister':        'Geschwister',
+  'nichte-neffe':       'Nichte / Neffe',
+  'stiefeltern':        'Stief- / Schwiegereltern',
+  'geschieden':         'Geschiedener Ehepartner',
+  'nicht-verwandt':     'Nicht verwandt',
 };
 
 export function berechneSchenkungssteuer(e: SchenkungssteuerEingabe): SchenkungssteuerErgebnis {
@@ -69,8 +81,10 @@ export function berechneSchenkungssteuer(e: SchenkungssteuerEingabe): Schenkungs
   const steuerklasse = STEUERKLASSEN[verwandtschaft];
   const persoenlichFB = FREIBETRAEGE[verwandtschaft];
 
-  // Hausrat-Freibetrag nur für Steuerklasse I (41.000 €)
-  const hausratFB = hausratFreibetrag && steuerklasse === 'I' ? 41000 : 0;
+  // Hausrat-Freibetrag § 13 Abs. 1 Nr. 1 ErbStG: 41.000 € Kl. I / 12.000 € Kl. II+III.
+  const hausratFB = hausratFreibetrag
+    ? (steuerklasse === 'I' ? 41000 : 12000)
+    : 0;
 
   // Verfügbarer Freibetrag nach Abzug bereits genutzter Beträge
   const verfuegbarerFB = Math.max(0, persoenlichFB - bereitsGenutzt);

@@ -17,13 +17,16 @@ import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 const VERWANDTSCHAFT_OPTIONEN: { value: SchenkungsVerwandtschaft; label: string; kl: string }[] = [
-  { value: 'ehepartner',     label: 'Ehepartner / eingetr. Lebenspartner', kl: 'Kl. I' },
-  { value: 'kind',           label: 'Kind (inkl. Stief-/Adoptivkind)',     kl: 'Kl. I' },
-  { value: 'enkelkind',      label: 'Enkelkind',                           kl: 'Kl. I' },
-  { value: 'elternteil',     label: 'Elternteil / Großelternteil',         kl: 'Kl. II' },
-  { value: 'geschwister',    label: 'Geschwister',                         kl: 'Kl. II' },
-  { value: 'nichte-neffe',   label: 'Nichte / Neffe',                      kl: 'Kl. II' },
-  { value: 'nicht-verwandt', label: 'Nicht verwandt',                      kl: 'Kl. III' },
+  { value: 'ehepartner',         label: 'Ehepartner / eingetr. Lebenspartner', kl: 'Kl. I' },
+  { value: 'kind',               label: 'Kind (inkl. Stief-/Adoptivkind)',     kl: 'Kl. I' },
+  { value: 'enkel-eltern-tot',   label: 'Enkelkind (Eltern verstorben)',        kl: 'Kl. I' },
+  { value: 'enkel-eltern-leben', label: 'Enkelkind (Eltern leben)',             kl: 'Kl. I' },
+  { value: 'elternteil',         label: 'Elternteil / Großelternteil',          kl: 'Kl. II' },
+  { value: 'geschwister',        label: 'Geschwister',                          kl: 'Kl. II' },
+  { value: 'nichte-neffe',       label: 'Nichte / Neffe',                       kl: 'Kl. II' },
+  { value: 'stiefeltern',        label: 'Stief- / Schwiegereltern',             kl: 'Kl. II' },
+  { value: 'geschieden',         label: 'Geschiedener Ehepartner',              kl: 'Kl. II' },
+  { value: 'nicht-verwandt',     label: 'Nicht verwandt',                       kl: 'Kl. III' },
 ];
 
 const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
@@ -101,13 +104,13 @@ export default function SchenkungssteuerRechner() {
           srOnlyLegend
           options={[
             { value: 'nein', label: 'Nein' },
-            { value: 'ja', label: '🏠 Ja (41.000 €)' },
+            { value: 'ja', label: '🏠 Ja' },
           ]}
           value={hausratFreibetrag ? 'ja' : 'nein'}
           onChange={(v) => setHausratFreibetrag(v === 'ja')}
         />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-          Der Hausrat-Freibetrag von 41.000 € gilt nur in Steuerklasse I (Ehepartner, Kinder, Enkelkinder).
+          § 13 Abs. 1 Nr. 1 ErbStG: 41.000 € in Steuerklasse I, 12.000 € in Steuerklasse II und III.
         </p>
       </div>
 
@@ -262,7 +265,7 @@ export default function SchenkungssteuerRechner() {
           schenkungswert: `${fmtEuro(parseDeutscheZahl(schenkungswert))} €`,
           verwandtschaft: VERWANDTSCHAFT_LABELS[verwandtschaft],
           bereitsGenutzt: `${fmtEuro(parseDeutscheZahl(bereitsGenutzt))} €`,
-          hausratFreibetrag: hausratFreibetrag ? 'Ja (41.000 €)' : 'Nein',
+          hausratFreibetrag: hausratFreibetrag ? `Ja (${ergebnis.hausratFreibetrag.toLocaleString('de-DE')} €)` : 'Nein',
         }}
         ergebnis={{
           steuerklasse: ergebnis.steuerklasse,
