@@ -164,6 +164,11 @@ export default function MwStRechner() {
                   />
                 </div>
               )}
+              {!istCustom && mwstSatz === 7 && (
+                <p className="mt-2 text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+                  ℹ️ <strong>Hinweis:</strong> Für Gastronomie-Restaurantumsätze (verzehrfertige Speisen vor Ort) gilt seit 01.01.2024 wieder 19 %. Der reduzierte Satz 7 % greift weiter für Grundnahrungsmittel, Bücher, Hotelübernachtungen, öffentlichen Personennahverkehr u. a. (§ 12 Abs. 2 UStG).
+                </p>
+              )}
             </div>
           </div>
 
