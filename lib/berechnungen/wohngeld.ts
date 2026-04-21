@@ -9,9 +9,9 @@ export interface WohngeldEingabe {
   freibetragSchwerbehindert: boolean;
   freibetragAlleinerziehend: boolean;
   /**
-   * Anzahl Kinder, die beim Alleinerziehenden-Freibetrag angerechnet werden
-   * (§ 17 Nr. 4 WoGG: 110 €/Monat pro Kind). Nur relevant wenn
-   * freibetragAlleinerziehend=true. Default 1.
+   * @deprecated § 17 Nr. 3 WoGG ist ein pauschaler Betrag (110 €/Mo), nicht
+   * pro Kind. Das Feld bleibt für Backwards-Compatibility im Interface, wird
+   * aber von berechneWohngeld ignoriert. Entfernung in späterem Prompt.
    */
   alleinerziehendKinderAnzahl?: number;
   freibetragErwerbstaetig: boolean;
@@ -56,10 +56,12 @@ const HEIZKOSTENPAUSCHALE_ZUSCHLAG = 6.80;
 const KLIMAKOMPONENTE = [19.20, 24.70, 30.20, 35.70, 41.20];
 const KLIMAKOMPONENTE_ZUSCHLAG = 5.50;
 
-// Koeffizienten für die Wohngeldformel nach § 19 WoGG (Anlage 1)
-// Vereinfachte Werte für Haushaltsgröße 1-8
-// Formel: Wohngeld = 1,15 × (M - (a + b×M + c×Y) × Y)
-// mit M = berücksichtigte Miete in €, Y = bereinigtes Einkommen in €
+// Koeffizienten für die Wohngeldformel nach § 19 Abs. 1 WoGG (Anlage 2)
+// Quelle: Anlage 2 WoGG BGBl. 2024 I Nr. 314 S. 3, unverändert 2026.
+// Formel (§ 19 Abs. 1 S. 1): Wohngeld = 1,15 · (M − (a + b·M + c·Y) · Y)
+// mit M = berücksichtigte Miete (€), Y = monatliches Gesamteinkommen (€)
+// Reihenfolge + Rundung: Anlage 3 WoGG (10 Nachkomma-Festkommazahlen;
+// Endergebnis kaufmännisch auf volle Euro).
 interface Koeffizienten {
   a: number;
   b: number;
@@ -67,15 +69,24 @@ interface Koeffizienten {
 }
 
 const KOEFFIZIENTEN: Koeffizienten[] = [
-  { a: 4.000e-2, b: 2.000e-4, c: 2.040e-4 }, // 1 Person
-  { a: 3.000e-2, b: 1.700e-4, c: 1.500e-4 }, // 2 Personen
-  { a: 2.000e-2, b: 1.400e-4, c: 1.200e-4 }, // 3 Personen
-  { a: 1.500e-2, b: 1.200e-4, c: 1.000e-4 }, // 4 Personen
-  { a: 1.200e-2, b: 1.000e-4, c: 8.500e-5 }, // 5 Personen
-  { a: 1.000e-2, b: 9.000e-5, c: 7.500e-5 }, // 6 Personen
-  { a: 8.500e-3, b: 8.000e-5, c: 6.700e-5 }, // 7 Personen
-  { a: 7.500e-3, b: 7.200e-5, c: 6.000e-5 }, // 8+ Personen
+  { a:  4.000e-2, b: 4.797e-4, c: 4.080e-5 }, // 1 Person
+  { a:  3.000e-2, b: 3.571e-4, c: 3.040e-5 }, // 2 Personen
+  { a:  2.000e-2, b: 2.917e-4, c: 2.450e-5 }, // 3 Personen
+  { a:  1.000e-2, b: 2.163e-4, c: 1.760e-5 }, // 4 Personen
+  { a:  0,        b: 1.907e-4, c: 1.720e-5 }, // 5 Personen
+  { a: -1.000e-2, b: 1.722e-4, c: 1.660e-5 }, // 6 Personen
+  { a: -2.000e-2, b: 1.592e-4, c: 1.650e-5 }, // 7 Personen
+  { a: -3.000e-2, b: 1.583e-4, c: 1.650e-5 }, // 8 Personen
+  { a: -4.000e-2, b: 1.376e-4, c: 1.660e-5 }, // 9 Personen
+  { a: -6.000e-2, b: 1.249e-4, c: 1.660e-5 }, // 10 Personen
+  { a: -9.000e-2, b: 1.141e-4, c: 1.960e-5 }, // 11 Personen
+  { a: -1.200e-1, b: 1.107e-4, c: 2.210e-5 }, // 12+ Personen
 ];
+
+// Mindestwerte M und Y nach Anlage 3 Nr. 1 WoGG — werden angehoben, wenn
+// die tatsächlichen Werte unter diesen Tabellenwerten liegen.
+const M_MIN_PERSONEN: number[] = [54, 67, 79, 92, 103, 103, 115, 128, 140, 152, 187, 298];
+const Y_MIN_PERSONEN: number[] = [396, 679, 906, 1132, 1358, 1585, 1811, 2037, 2264, 2490, 2717, 2943];
 
 const MIETSTUFE_INDEX: Record<Mietstufe, number> = {
   I: 0, II: 1, III: 2, IV: 3, V: 4, VI: 5, VII: 6,
@@ -115,8 +126,13 @@ function getKlimakomponente(personen: number): number {
 }
 
 function getKoeffizienten(personen: number): Koeffizienten {
-  const idx = Math.min(personen, 8) - 1;
+  const idx = Math.min(Math.max(personen, 1), 12) - 1;
   return KOEFFIZIENTEN[idx];
+}
+
+function getMindestwerte(personen: number): { M: number; Y: number } {
+  const idx = Math.min(Math.max(personen, 1), 12) - 1;
+  return { M: M_MIN_PERSONEN[idx], Y: Y_MIN_PERSONEN[idx] };
 }
 
 export function berechneWohngeld(eingabe: WohngeldEingabe): WohngeldErgebnis | null {
@@ -131,21 +147,24 @@ export function berechneWohngeld(eingabe: WohngeldEingabe): WohngeldErgebnis | n
 
   const personen = Math.min(haushaltsmitglieder, 12);
 
-  // === FREIBETRÄGE nach § 17 WoGG ===
+  // === FREIBETRÄGE nach § 17 WoGG (Gesetzesfassung Stand 22.04.2026) ===
   let freibetraege = 0;
-  if (freibetragErwerbstaetig) {
-    // § 17 Nr. 1 WoGG: 1.000 €/Jahr = 83,33 €/Monat pauschal (NICHT 20 % Brutto!)
-    freibetraege += rund2(1000 / 12);
-  }
   if (freibetragSchwerbehindert) {
-    // § 17 Nr. 2 WoGG: 1.500 €/Jahr = 125 €/Monat
-    freibetraege += 125;
+    // § 17 Nr. 1 WoGG: 1.800 €/Jahr = 150 €/Monat für jedes schwerbehinderte
+    // Haushaltsmitglied (GdB 100 oder GdB < 100 + Pflegebedürftigkeit).
+    freibetraege += 150;
   }
   if (freibetragAlleinerziehend) {
-    // § 17 Nr. 4 WoGG: 1.320 €/Jahr = 110 €/Monat PRO KIND
-    const kinder = Math.max(1, Math.floor(alleinerziehendKinderAnzahl ?? 1));
-    freibetraege += 110 * kinder;
+    // § 17 Nr. 3 WoGG: 1.320 €/Jahr = 110 €/Monat pauschal (nicht pro Kind),
+    // wenn im Haushalt mit mindestens einem Kind unter 18 für das Kindergeld
+    // gewährt wird. Die Kinderzahl wirkt nicht multiplikativ.
+    freibetraege += 110;
   }
+  // Hinweis: § 17 WoGG enthält KEINEN allgemeinen Erwerbstätigen-Freibetrag.
+  // Der freibetragErwerbstaetig-Input hat keine Gesetzeswirkung — vorübergehend
+  // bleibt er im Interface als No-Op, wird aber in künftigen Prompts ohne
+  // Rückwirkung entfernbar.
+  void freibetragErwerbstaetig;
 
   // === BEREINIGTES EINKOMMEN nach § 16 WoGG ===
   // Drei 10-%-Pauschalen für Steuerpflicht, GKV-Pflicht, RV-Pflicht (Summe 30 %
@@ -160,21 +179,33 @@ export function berechneWohngeld(eingabe: WohngeldEingabe): WohngeldErgebnis | n
   const beruecksichtigteMiete = Math.min(miete, hoechstbetragMiete);
 
   // === ZUSCHLÄGE ===
+  // § 12 Abs. 6 WoGG: Heizkostenkomponente als monatlicher Zuschlag.
+  // § 12 Abs. 7 WoGG: Klimakomponente als Aufschlag zur Heizkostenkomponente —
+  // greift nur, wenn Heizkosten überhaupt als Wohnkosten anerkannt werden.
+  // In der Lib gekoppelt: Klima nur bei aktivem heizkostenpauschale-Flag.
   const heizkostenZuschlag = heizkostenpauschale ? getHeizkostenpauschale(personen) : 0;
-  const klimaKomponente = getKlimakomponente(personen);
+  const klimaKomponente = heizkostenpauschale ? getKlimakomponente(personen) : 0;
 
   // === GESAMTMIETE ===
   const gesamtMiete = rund2(beruecksichtigteMiete + heizkostenZuschlag + klimaKomponente);
 
-  // === WOHNGELD-BERECHNUNG nach § 19 WoGG ===
+  // === WOHNGELD-BERECHNUNG nach § 19 WoGG + Anlage 3 ===
   const koeff = getKoeffizienten(personen);
-  const M = gesamtMiete;
-  const Y = Math.max(bereinigtesEinkommen, 10); // Minimum um Division durch 0 zu vermeiden
+  const { M: M_min, Y: Y_min } = getMindestwerte(personen);
+  // Anlage 3 Nr. 1: Werte unter den Tabellenmindestwerten werden durch diese ersetzt.
+  const M = Math.max(gesamtMiete, M_min);
+  const Y = Math.max(bereinigtesEinkommen, Y_min);
 
-  // Formel: Wohngeld = 1,15 × (M - (a + b×M + c×Y) × Y)
-  const faktor = koeff.a + koeff.b * M + koeff.c * Y;
-  const abzug = faktor * Y;
-  let wohngeldMonat = rund2(1.15 * (M - abzug));
+  // Anlage 3 Nr. 2: vier Rechenschritte mit Festkommazahlen (10 Nachkommastellen).
+  // JavaScript number reicht praktisch aus — Koeffizienten haben ~4 signifikante
+  // Stellen, Zwischenergebnisse bleiben unter 1e7 → Präzisionsverlust vernachlässigbar.
+  const z1 = koeff.a + koeff.b * M + koeff.c * Y;
+  const z2 = z1 * Y;
+  const z3 = M - z2;
+  const z4 = 1.15 * z3;
+
+  // Anlage 3 Nr. 3: kaufmännische Rundung auf volle Euro.
+  let wohngeldMonat = Math.round(z4);
 
   // === ANSPRUCHSPRÜFUNG ===
   let ablehnungsGrund: string | null = null;
