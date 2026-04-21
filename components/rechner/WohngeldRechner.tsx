@@ -20,6 +20,7 @@ export default function WohngeldRechner() {
   const [heizkosten, setHeizkosten] = useState(true);
   const [schwerbehindert, setSchwerbehindert] = useState(false);
   const [alleinerziehend, setAlleinerziehend] = useState(false);
+  const [alleinerziehendKinder, setAlleinerziehendKinder] = useState('1');
   const [erwerbstaetig, setErwerbstaetig] = useState(true);
 
   const ergebnis = useMemo(
@@ -31,9 +32,10 @@ export default function WohngeldRechner() {
       heizkostenpauschale: heizkosten,
       freibetragSchwerbehindert: schwerbehindert,
       freibetragAlleinerziehend: alleinerziehend,
+      alleinerziehendKinderAnzahl: parseInt(alleinerziehendKinder) || 1,
       freibetragErwerbstaetig: erwerbstaetig,
     }),
-    [personen, einkommen, miete, mietstufe, heizkosten, schwerbehindert, alleinerziehend, erwerbstaetig],
+    [personen, einkommen, miete, mietstufe, heizkosten, schwerbehindert, alleinerziehend, alleinerziehendKinder, erwerbstaetig],
   );
 
   const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
@@ -139,8 +141,25 @@ export default function WohngeldRechner() {
               onChange={e => setAlleinerziehend(e.target.checked)}
               className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 focus:ring-primary-500"
             />
-            <span className="text-sm text-gray-700 dark:text-gray-300">Alleinerziehend</span>
+            <span className="text-sm text-gray-700 dark:text-gray-300">Alleinerziehend <span className="text-gray-600">(110 €/Monat pro Kind)</span></span>
           </label>
+          {alleinerziehend && (
+            <div className="ml-7 mt-1">
+              <label htmlFor="wohngeld-kinder" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
+                Anzahl Kinder für Alleinerziehenden-Freibetrag
+              </label>
+              <select
+                id="wohngeld-kinder"
+                value={alleinerziehendKinder}
+                onChange={e => setAlleinerziehendKinder(e.target.value)}
+                className="px-3 py-2 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[40px] text-sm"
+              >
+                {[1,2,3,4,5,6].map(n => (
+                  <option key={n} value={n}>{n} Kind{n > 1 ? 'er' : ''}</option>
+                ))}
+              </select>
+            </div>
+          )}
 
           <label className="flex items-center gap-2 cursor-pointer">
             <input

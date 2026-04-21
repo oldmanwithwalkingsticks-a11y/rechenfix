@@ -8,6 +8,12 @@ export interface WohngeldEingabe {
   heizkostenpauschale: boolean;
   freibetragSchwerbehindert: boolean;
   freibetragAlleinerziehend: boolean;
+  /**
+   * Anzahl Kinder, die beim Alleinerziehenden-Freibetrag angerechnet werden
+   * (§ 17 Nr. 4 WoGG: 110 €/Monat pro Kind). Nur relevant wenn
+   * freibetragAlleinerziehend=true. Default 1.
+   */
+  alleinerziehendKinderAnzahl?: number;
   freibetragErwerbstaetig: boolean;
 }
 
@@ -27,18 +33,20 @@ export interface WohngeldErgebnis {
   freibetraege: number;
 }
 
-// Höchstbeträge der Miete (monatlich, € — vereinfacht 2026)
+// Höchstbeträge der Miete § 12 WoGG Anlage 1 nach Zweiter Verordnung zur
+// Fortschreibung des Wohngeldes v. 21.10.2024 (gültig seit 01.01.2025, unverändert 2026).
+// Quelle: buzer.de/Anlage_1_WoGG.htm + MBWSV-NRW-PDF 08/2024.
 // Zeilen: Haushaltsgröße 1-5, Spalten: Mietstufe I-VII
 const HOECHSTBETRAEGE: number[][] = [
-  [377, 425, 473, 521, 575, 634, 693],   // 1 Person
-  [457, 516, 575, 633, 699, 770, 842],   // 2 Personen
-  [545, 615, 685, 755, 833, 918, 1004],  // 3 Personen
-  [636, 717, 799, 881, 973, 1072, 1172], // 4 Personen
-  [725, 818, 911, 1005, 1109, 1222, 1337], // 5 Personen
+  [361, 408, 456, 511, 562, 615, 677],    // 1 Person
+  [437, 493, 551, 619, 680, 745, 820],    // 2 Personen
+  [521, 587, 657, 737, 809, 887, 975],    // 3 Personen
+  [608, 686, 766, 858, 946, 1035, 1139],  // 4 Personen
+  [694, 782, 875, 982, 1080, 1183, 1302], // 5 Personen
 ];
 
-// Zuschlag pro weitere Person je Mietstufe
-const ZUSCHLAG_PRO_PERSON = [89, 100, 112, 124, 136, 150, 164];
+// Zuschlag pro weitere Person je Mietstufe (§ 12 WoGG Anlage 1)
+const ZUSCHLAG_PRO_PERSON = [82, 94, 106, 119, 129, 149, 163];
 
 // Heizkostenpauschale (monatlich, €)
 const HEIZKOSTENPAUSCHALE = [23.80, 30.60, 37.40, 44.20, 51.00];
@@ -115,29 +123,36 @@ export function berechneWohngeld(eingabe: WohngeldEingabe): WohngeldErgebnis | n
   const {
     haushaltsmitglieder, bruttoEinkommen, miete, mietstufe,
     heizkostenpauschale, freibetragSchwerbehindert,
-    freibetragAlleinerziehend, freibetragErwerbstaetig,
+    freibetragAlleinerziehend, alleinerziehendKinderAnzahl,
+    freibetragErwerbstaetig,
   } = eingabe;
 
   if (haushaltsmitglieder < 1 || bruttoEinkommen < 0 || miete <= 0) return null;
 
   const personen = Math.min(haushaltsmitglieder, 12);
 
-  // === FREIBETRÄGE ===
+  // === FREIBETRÄGE nach § 17 WoGG ===
   let freibetraege = 0;
   if (freibetragErwerbstaetig) {
-    // 10% Werbungskosten-Pauschale + 20% vom Rest (Erwerbstätigenfreibetrag)
-    freibetraege += rund2(bruttoEinkommen * 0.20);
+    // § 17 Nr. 1 WoGG: 1.000 €/Jahr = 83,33 €/Monat pauschal (NICHT 20 % Brutto!)
+    freibetraege += rund2(1000 / 12);
   }
   if (freibetragSchwerbehindert) {
-    freibetraege += 150; // 1.800€/Jahr ÷ 12
+    // § 17 Nr. 2 WoGG: 1.500 €/Jahr = 125 €/Monat
+    freibetraege += 125;
   }
   if (freibetragAlleinerziehend) {
-    freibetraege += 130; // Alleinerziehenden-Freibetrag monatlich
+    // § 17 Nr. 4 WoGG: 1.320 €/Jahr = 110 €/Monat PRO KIND
+    const kinder = Math.max(1, Math.floor(alleinerziehendKinderAnzahl ?? 1));
+    freibetraege += 110 * kinder;
   }
 
-  // === BEREINIGTES EINKOMMEN ===
-  // Grundsätzlich 10% Abzug für Steuern/Sozialversicherung (Pauschal)
-  const pauschalAbzug = rund2(bruttoEinkommen * 0.10);
+  // === BEREINIGTES EINKOMMEN nach § 16 WoGG ===
+  // Drei 10-%-Pauschalen für Steuerpflicht, GKV-Pflicht, RV-Pflicht (Summe 30 %
+  // für den typischen AN-Fall). Rentner tragen nur 2 von 3 Pauschalen (20 %),
+  // Selbständige ggf. andere Abzüge. Default 30 % entspricht BMWSB-Rechner-Default
+  // für erwerbstätige AN — häufigster Wohngeld-Antragsteller-Typ.
+  const pauschalAbzug = rund2(bruttoEinkommen * 0.30);
   const bereinigtesEinkommen = Math.max(0, rund2(bruttoEinkommen - pauschalAbzug - freibetraege));
 
   // === HÖCHSTBETRAG DER MIETE ===
