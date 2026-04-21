@@ -79,8 +79,15 @@ export function getAktuellePfaendungsParameter(
   return stichtag >= switchDatum ? PFAENDUNG_2026 : PFAENDUNG_2025;
 }
 
-// Backwards-Compat: bestehende Importe liefern weiterhin den tagesaktuellen Wert.
-export const GRUNDFREIBETRAG = getAktuellePfaendungsParameter().grundfreibetrag;
+/**
+ * Backwards-Compat: liefert den tagesaktuellen Grundfreibetrag. Als Getter-
+ * Funktion statt Modul-Scope-Konstante, damit der 01.07.-Stichtag-Switch
+ * auch nach längerer Server-Laufzeit greift (Regressionsfalle-Pattern aus
+ * Prompt 116 Midijob).
+ */
+export function getGrundfreibetrag(stichtag: Date = new Date()): number {
+  return getAktuellePfaendungsParameter(stichtag).grundfreibetrag;
+}
 
 // Pfändungsquoten oberhalb des Freibetrags (§ 850c Abs. 3 ZPO, Pauschalquote).
 const PFAENDUNGS_QUOTEN: Record<number, number> = {
@@ -129,18 +136,26 @@ function berechnePfaendbarMonat(
     return { frei: nettoMonat, pfaendbar: 0, mehrbetrag: 0, quote, ueberObergrenze: false };
   }
 
-  const mehrbetrag = nettoMonat - freibetrag;
+  // Amtliche Pfändungstabelle (§ 850c ZPO Anlage) rundet das Netto auf die
+  // nächstniedrigere 10-€-Stufe ab und berechnet darauf mit den Pauschalquoten
+  // aus Abs. 3. Dieses Verfahren reproduziert die BGBl-Tabelle exakt —
+  // ein separater Tabellen-Port ist dann nicht nötig.
+  const nettoAufStufe = Math.floor(nettoMonat / 10) * 10;
+  const mehrbetragStufe = Math.max(0, nettoAufStufe - freibetrag);
+  const mehrbetrag = nettoMonat - freibetrag; // für Display, nicht für Rechnung
   let pfaendbar: number;
   let ueberObergrenze = false;
 
-  if (nettoMonat >= obergrenze) {
-    // Pfändbar = alles oberhalb Obergrenze (zu 100%) + Pauschalquote bis Obergrenze
+  if (nettoAufStufe >= obergrenze) {
+    // Oberhalb Vollpfändungsgrenze: alles über Obergrenze zu 100 % + Pauschalquote
+    // auf die Strecke [Freibetrag, Obergrenze]. Obergrenze wird nicht gerundet,
+    // weil sie exakt aus Freibetrag + Unterhaltssätzen abgeleitet ist.
     const ueberGrenze = nettoMonat - obergrenze;
     const bisGrenze = obergrenze - freibetrag;
     pfaendbar = ueberGrenze + bisGrenze * quote;
     ueberObergrenze = true;
   } else {
-    pfaendbar = mehrbetrag * quote;
+    pfaendbar = mehrbetragStufe * quote;
   }
 
   pfaendbar = Math.round(pfaendbar * 100) / 100;
