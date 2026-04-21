@@ -312,3 +312,55 @@ Elf P3-Punkte, alle UX oder Nische:
 1. **„1 Input sichtbar"-Live-Beobachtung war irreführend bei Midijob** — der Rechner hat tatsächlich 4 Inputs (Brutto, Steuerklasse, Kirchensteuer, Kinder), nicht 1. Die Pre-Audit-Inventur sollte die **tatsächlichen React-State-Deklarationen** erfassen, nicht den visuellen ersten Eindruck.
 2. **Midijob-BE-Formel** ist ein klassischer „sieht fast richtig aus, ist aber eine Konstante verdreht"-Fehler, den Grep-basierte Audits niemals finden würden. Nur Gegenrechnung an konkreten Beispielwerten (UG und OG getrennt prüfen) deckt das auf. **Regel für nächste Audits:** bei mehrteiligen Formeln mindestens zwei Extremwerte durchrechnen, nicht nur „sieht plausibel aus".
 3. **Erbschafts-/Schenkungs-Duplikation** ist ein SSOT-Schmerz, aber kein Rechts-Bug — wurde trotzdem im Audit bemerkt, weil der Blick in beide Libs parallel schnell geht. **Regel:** Libs mit thematischer Nähe zusammen lesen.
+
+---
+
+## Nachtrag Prompt 115c (21.04.2026) — Stufe-4a P1-Rest geschlossen
+
+Die drei verbleibenden P1-Bugs aus dem ursprünglichen 114er-Audit (außer Midijob = 115a und LSt Kl. V/VI = 115b2) wurden behoben.
+
+### ER-02 — Härtefall § 19 Abs. 3 ErbStG (Commit `e711b52`)
+
+- Neue exportierte Konstante `ERBST_TARIF_STUFEN` und Helper-Funktion `berechneErbStMitHaertefall(stpflErwerb, klasse)` in [lib/berechnungen/erbschaftsteuer.ts](../../lib/berechnungen/erbschaftsteuer.ts).
+- Härtefall-Logik: Bei Stufensprung wird die Mehrsteuer auf 50 % (Sätze ≤ 30 %) bzw. 75 % (Sätze > 30 %) des überschreitenden Betrags gedeckelt.
+- [lib/berechnungen/schenkungssteuer.ts](../../lib/berechnungen/schenkungssteuer.ts) importiert die Helper-Funktion, lokaler `getSteuersatz`-Duplikat entfernt; Steuerklasse-Type re-exportiert.
+- SSOT-Konsolidierung der ErbSt-Tariftabelle ist damit pragmatisch in `erbschaftsteuer.ts` gelandet — eine dedizierte `_erbst-tarif.ts` (wie im Audit-Bericht vorgeschlagen) bleibt für Prompt 116 eher überflüssig.
+
+### AFA-02 — Degressive AfA ab 2026 (Commit `8bda68b`)
+
+- Gate in `useMemo` von [components/rechner/AfaRechner.tsx](../../components/rechner/AfaRechner.tsx): `degressivGesperrt = methode === 'degressiv' && startJahr >= 2026`.
+- Fallback auf linear, Button-State bleibt visuell aktiv (User-Intention).
+- Amber-Warn-Banner vor der Result-Box mit Verweis auf § 7 Abs. 2 EStG n.F. und Hinweis, dass Rückdatierung auf ≤ 31.12.2025 degressiv reaktiviert.
+
+### FW-02 — Plug-in-Hybrid 0,5 %-Bedingungen (Commit `90cad88`)
+
+- Neue Modul-Konstanten `HYBRID_CO2_GRENZE_G_KM = 50` und `HYBRID_REICHWEITE_MIN_KM = 80` in [components/rechner/FirmenwagenRechner.tsx](../../components/rechner/FirmenwagenRechner.tsx).
+- Zwei neue State-Felder `co2` / `reichweite` mit Defaults 50/80 (bestehende Nutzer bekommen weiter 0,5 %; Fallback greift nur bei aktiv schlechteren Werten).
+- Bei Nicht-Erfüllung fällt die `aktuell`-Spalte auf Verbrenner-Berechnung zurück; Vergleichs-Box zeigt weiterhin den Idealfall Hybrid = 0,5 %.
+- Conditional UI-Block nur bei Antrieb=Hybrid: zwei NummerEingabe-Felder + Amber-Warn-Banner bei verpassten Schwellen, mit Verweis auf § 6 Abs. 1 Nr. 4 S. 2 Nr. 3 EStG.
+
+### Regressions-Script
+
+Neues [scripts/verify-erbst-haertefall.ts](../../scripts/verify-erbst-haertefall.ts) mit 11 Testfällen:
+
+- 4 Kern-Fälle (Kl. I/II/III an Tarifsprungkanten)
+- 4 ErbSt-Regressions (ER-01, ER-02a, ER-02b, ER-03)
+- 3 SchenkSt-Regressions (SS-01 + 2 Härtefall-Varianten)
+
+Ergebnis: **11/11 grün, Δ = 0 € an allen Stützpunkten.**
+
+### Neu entdeckter P2-Kandidat für Prompt 116
+
+Die SchenkSt-Lib kennt nur 7 Verwandtschafts-Optionen (`ehepartner`, `kind`, `enkelkind`, `elternteil`, `geschwister`, `nichte-neffe`, `nicht-verwandt`). Es fehlen:
+
+- **Schwiegereltern** (Kl. II nach § 15 Abs. 1 Nr. 5 ErbStG)
+- **Schwager / Schwägerin** (Kl. II nach § 15 Abs. 1 Nr. 7 ErbStG)
+- **Stiefeltern getrennt von leiblichen Eltern** (die Erb-Lib unterscheidet via `stiefeltern` separat)
+
+Die Erb-Lib differenziert korrekter. Der „Enkelkind bei verstorbenen Eltern"-Fall (SS-02 im Testfall-Katalog) bleibt als eigener Bug im Prompt-116-Scope.
+
+### Offener Scope
+
+- **Prompt 116 (Stufe-4a P2 + SSOT):** Erbschaft-§14-Kumulation, Enkel-Schenkung-Differenzierung, Hausrat-FB Kl. II/III, AfA-Degressiv-Deckel 25→20 %, Wohngebäude-Sonder-AfA, erweiterte SchenkSt-Verwandtschafts-Optionen (Schwieger-/Schwager), Midijob-Lib-Konsolidierung (MIDIJOB_UNTERGRENZE aus `mindestlohn.ts`).
+- **Prompt 117 (Stufe-4a P3):** UX-Polish (Versorgungsfreibetrag-Staffel, Familienheim, KESt-Bundesland, Verlustverrechnungs-Töpfe, AfA-Typ-Filter, Sammelposten, Firmenwagen-Grenzsteuersatz aus ESt-Lib, KiSt+Soli im gwV, MwSt-Gastronomie-Hinweis, Midijob F-Faktor-Doku).
+- **Wochenend-Refactor (separat):** Lohnsteuer Kl. V/VI Voll-PAP-Implementation nach § 39b Abs. 2 Satz 7 EStG, um die empirische Lookup-Tabelle (115b2) abzulösen.

@@ -179,6 +179,8 @@ Alle jahresabhängigen und gesetzlich definierten Werte liegen in `lib/berechnun
 | `midijob-uebergang.ts` **(neu, Prompt 115a)** | § 20a SGB IV BE-Formel Midijob | `berechneBemessungsgrundlageAN`, `MIDIJOB_OBERGRENZE_MONAT`, `FAKTOR_F_2026`, `getMidijobUntergrenze` |
 | `steuerprogression.ts` | Grenz-/Durchschnittssteuersatz | nutzt `einkommensteuer.ts` |
 | `kfz-steuer.ts`, `balkon-solar.ts`, `waermepumpe.ts` | Domänen-spezifisch | |
+| `erbschaftsteuer.ts` **(erweitert, Prompt 115c)** | § 19 ErbStG inkl. Abs. 3 Härtefall (einheitlich für Erbschaft + Schenkung) | `berechneErbStMitHaertefall(stpflErwerb, klasse)`, `ERBST_TARIF_STUFEN`, `Steuerklasse` |
+| `schenkungssteuer.ts` | § 16 ErbStG persönliche Freibeträge, § 13 Hausrat-FB | `berechneSchenkungssteuer(...)` (importiert Härtefall aus `erbschaftsteuer.ts`) |
 
 **Verboten:** Eigene ESt-, LSt-, SV-, Kindergeld-, Pfändungs- oder Mindestlohn-Formeln in Komponenten oder Rechnern. Immer die zentrale Lib importieren. Diese Regel ergab sich aus Sprint 1 (April 2026) und wurde im Jahresaudit 2026 (Prompts 86–91) nochmal bestätigt, als in fünf Rechnern Formel-Duplikate mit 1–2 Jahre veralteten Werten gefunden wurden.
 
@@ -201,6 +203,8 @@ Jede Verletzung dieser Regeln ist ein P1-Bug wie die im April 2026 gefundenen. V
 grep -E "12348|17799|69878|40\.79|42\.52|9756|6828|2928|259|0\.38|5812\.50|8450|51944|13\.90" lib/berechnungen/<neue-lib>.ts
 ```
 Treffer = Refactor auf zentrale Lib-Imports, bevor der PR aufmacht.
+
+Zusätzlich bei ErbSt-/SchenkSt-nahen Rechnern: niemals `{ bis: 75000 / 300000 / 600000 ... }`-Tarif-Tabellen oder eigene Härtefall-Formeln (§ 19 Abs. 3 ErbStG) anlegen — stattdessen `ERBST_TARIF_STUFEN` und `berechneErbStMitHaertefall(stpflErwerb, klasse)` aus `erbschaftsteuer.ts` konsumieren. Die SchenkSt-Lib macht das seit Prompt 115c vor.
 
 Die drei **Tarif-Rechner** (Brutto-Netto, Lohnsteuer, Einkommensteuer) sind eine Gruppe mit geteilter Berechnungslogik. Änderungen an zentralen Parametern wirken automatisch auf alle drei.
 
@@ -271,6 +275,9 @@ export const WERT = getAktuellerWert();
 | Homeoffice-Pauschale | 6 € / Tag, max. 210 Tage | offen | `pendlerpauschale.ts` | § 4 Abs. 5 Nr. 6c EStG |
 | Unterhalt DT 2026 Mindestbedarf | 486 / 558 / 653 / 698 € | 01.01.2027 | `duesseldorfer-tabelle.ts` | Düsseldorfer Tabelle |
 | Deutschlandticket | 63 €/Monat | offen | Inline | seit 01.01.2026 |
+| ErbSt-Tarifstufen § 19 ErbStG | 75k/300k/600k/6M/13M/26M mit Kl. I/II/III-Sätzen | selten | `erbschaftsteuer.ts` (`ERBST_TARIF_STUFEN` + `berechneErbStMitHaertefall` seit Prompt 115c) | § 19 ErbStG inkl. Abs. 3 Härtefall |
+| AfA degressiv bewegliche WG | **ausgelaufen zum 31.12.2025** (Fallback auf linear für Anschaffungen ab 01.01.2026) | — | `AfaRechner.tsx` (Gate `startJahr >= 2026`) | § 7 Abs. 2 EStG n.F. (Wachstumschancengesetz) |
+| Plug-in-Hybrid 0,5 %-Bedingungen | CO₂ ≤ 50 g/km **und** E-Reichweite ≥ 80 km | offen | `FirmenwagenRechner.tsx` (`HYBRID_CO2_GRENZE_G_KM`, `HYBRID_REICHWEITE_MIN_KM`) | § 6 Abs. 1 Nr. 4 S. 2 Nr. 3 EStG (ab 01.01.2025) |
 
 **Stichtag-Switch automatisch:** Die drei fett markierten Parameter (Rentenwert 01.07.2026, Mindestlohn 01.01.2027, Pfändung 01.07.2026) wechseln ohne Deploy durch das Stichtag-Switch-Pattern in den Libs. Nach den Stichtagen nur Spot-Check.
 
@@ -443,3 +450,4 @@ Reihenfolge nach Freigabe: erst 85 (Warning wegräumen), dann 68 (CMP dazu).
 - **115a** — Midijob komplett saniert: neue SSOT-Lib `midijob-uebergang.ts` (§ 20a SGB IV, Stichtag-Switch für UG); BE-Formel gefixt (P1), LSt via `berechneLohnsteuerJahr` statt × 1,15 (P1), Soli via `berechneSoli` (P1); SV-SSOT-Imports, PV 1,7→1,8 %, PV-Kinderabschlag-Input, KiSt-Bundesland-Dropdown ✅
 - **115b** — Analyse Lohnsteuer-Kl.V/VI-Bug in `berechneLohnsteuerJahr` (nur Analyse, kein Fix; `docs/audit-arbeitspapiere/lohnsteuer-v-vi-analyse.md`) ✅
 - **115b2** — Fix Lohnsteuer-Kl.V/VI via empirischer Lookup-Kalibrierung (20 BMF-Stützpunkte, Δ=0 an Stützpunkten, UI-Hinweis auf 3 Rechnern, Verifikations-Script `scripts/verify-lohnsteuer-vvi.ts`) ✅
+- **115c** — Stufe-4a P1-Rest (3 Bugs): Härtefall § 19 Abs. 3 ErbStG zentral als `berechneErbStMitHaertefall` + `ERBST_TARIF_STUFEN` (Schenkungssteuer importiert); AfA degressiv ab 2026 gated mit Fallback auf linear + Warn-Banner (§ 7 Abs. 2 EStG n.F.); Firmenwagen Plug-in-Hybrid CO₂/Reichweite-Bedingungen als conditional UI-Block mit Fallback auf 1 %-Regel (§ 6 Abs. 1 Nr. 4 S. 2 Nr. 3 EStG); Regressions-Script `scripts/verify-erbst-haertefall.ts` mit 11 grünen Testfällen ✅
