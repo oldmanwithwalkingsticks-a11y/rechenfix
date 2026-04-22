@@ -82,7 +82,7 @@
 - **AFBG-06** VZ mit 1 Kind + Ehegatte, eigen 1.800 + ehe 1.500, Vermögen 18.000 → Quote 0,45, Anrechnung 484,65, Unterhalt 1.154,35
 - **AFBG-07** Meisterstück 2.500 → Deckel 2.000, Zuschuss 1.000
 
-**Oracle-Cross-Check:** AFBG-01 und AFBG-02 gegen [BMBFSFJ-AFBG-Rechner](https://www.aufstiegs-bafoeg.de/aufstiegs-bafoeg-rechner) manuell validieren (Karsten beim Verify-Pass).
+**Oracle-Quellen:** Das Info-Portal [aufstiegs-bafoeg.de](https://www.aufstiegs-bafoeg.de/) bietet **keinen** eigenen Online-Rechner zum direkten Cross-Check. Die Bedarfssätze (1.019 €, 1.254 € Alleinerziehend mit 1 Kind etc.) sind dort aber in den FAQ-Seiten und Beispielrechnungen dokumentiert. Die Testfall-Sollwerte leiten sich daher aus Gesetzestext (§§ 10/12/13b/17b AFBG) + BMBFSFJ-Portal-FAQ ab, nicht aus einem Referenz-Rechner.
 
 **Ergebnis:** 35/35 grün.
 
@@ -105,7 +105,7 @@ Aktuell nur ein Bucket `AFBG_AB_2024_08_01`. Bei der nächsten Anhebung (vorauss
 
 ## Offene Punkte
 
-- **BMBFSFJ-Oracle-Cross-Check:** AFBG-01 und AFBG-02 gegen den offiziellen Rechner auf aufstiegs-bafoeg.de manuell validieren
+- **Oracle-Situation:** Das BMBFSFJ bietet für AFBG keinen öffentlich zugänglichen Online-Rechner (im Gegensatz zu BAföG/Wohngeld). Verifikation erfolgt daher ausschließlich gegen Gesetzestext und die in den BMBFSFJ-FAQ publizierten Beispielzahlen (1.019 €, 1.254 € usw.). Bei Abweichungen in echten AFBG-Bescheiden von Usern ggf. nachjustieren.
 - **Vermögens-Freibetrag:** Falls in konkreten Bescheiden 15.000 € statt 45.000 € zum Einsatz kommen, ggf. altersabhängige Unterscheidung (unter/ab 30) analog zu `bafoeg-parameter.ts` ergänzen
 - **Ferienjob-Regelungen (§ 11a Abs. 7 SGB II)** spielen beim AFBG keine direkte Rolle, weil § 11b SGB II nicht anwendbar ist
 - **Nächste Parameter-Anpassung:** voraussichtlich mit BAföG-Novelle 01.08.2026 oder später — dann `AFBG_AB_2026_08_01`-Bucket ergänzen

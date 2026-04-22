@@ -7,13 +7,16 @@
 //
 // Externe Oracle-Quellen (dokumentiert in Kommentaren):
 //   - § 10, § 12, § 13b, § 17b AFBG (gesetze-im-internet.de)
-//   - BMBFSFJ-Portal aufstiegs-bafoeg.de (Bedarfssätze, Beispielrechner)
+//   - BMBFSFJ-Info-Portal aufstiegs-bafoeg.de (Bedarfssätze, Tarif-Details,
+//     FAQ). Wichtig: Das Portal bietet KEINEN eigenen Online-Rechner zum
+//     Cross-Check — Verifikation erfolgt gegen Gesetzestext + Portal-FAQ.
+//   - Antragsportal afbg-digital.de (Start des formalen Antrags, keine
+//     öffentlich zugängliche Rechner-Schätzung vor dem Antrag).
 //   - 29. BAföG-Änderungsgesetz v. 23.07.2024 (BGBl. 2024 I Nr. 247)
 //
-// Oracle-Cross-Check: AFBG-01 und AFBG-02 sind gegen den BMBFSFJ-
-// Aufstiegs-BAföG-Rechner auf aufstiegs-bafoeg.de zu validieren
-// (Karsten manuell beim Verify; URL:
-// https://www.aufstiegs-bafoeg.de/aufstiegs-bafoeg-rechner ).
+// Alle Testfälle leiten Sollwerte rein aus Gesetzestext ab — Oracle-
+// Cross-Check erfolgt indirekt über die in aufstiegs-bafoeg.de publizierten
+// Beispielrechnungen der Unterhaltssätze (1.019 €, 1.254 € etc.).
 
 import { berechneAfbg } from '../lib/berechnungen/afbg';
 
