@@ -1245,7 +1245,7 @@ Den BAföG-Antrag stellen Sie beim zuständigen Studenten- oder Schülerwerk (be
     metaTitle: 'Aufstiegs-BAföG 2026 — Meister-BAföG',
     metaDescription: 'Aufstiegs-BAföG 2026 berechnen: Zuschuss, Darlehen und Vollzuschuss-Unterhalt für Meister, Techniker, Fachwirt ✓ Erlass-Szenarien ✓ KI-Erklärung.',
     keywords: ['aufstiegs-bafög', 'meister-bafög', 'afbg', 'aufstiegs-bafög rechner', 'meister bafög 2026', 'meister bafög rechner', 'kfw aufstiegs-bafög', 'aufstiegsfortbildungsförderungsgesetz', 'fortbildungsförderung', 'meisterkurs finanzieren'],
-    icon: '🧑‍🏭',
+    icon: '📜',
     formel: 'Maßnahmebeitrag: min(Lehrgangskosten, 15.000 €) × 50 % Zuschuss + 50 % KfW-Darlehen (+ max. 2.000 € Meisterstück) | Unterhaltsbeitrag (nur Vollzeit, 100 % Vollzuschuss): 1.019 € + 235 € je Ehegatte/Kind + 150 € Kinderbetreuungszuschlag pro Kind unter 14 − Einkommensanrechnung | Erlass: 50 % Bestehen + 100 % Rest bei Gründung ≥ 3 Jahre Haupterwerb',
     beispiel: 'Meisterkurs Handwerk, Vollzeit, 12.000 € Lehrgangskosten, kein Einkommen, keine Kinder → Maßnahme: 6.000 € Zuschuss + 6.000 € KfW-Darlehen | Unterhaltsbeitrag: 1.019 €/Monat Vollzuschuss | Nach Bestehens-Erlass (50 %) zurückzuzahlen: 3.000 € | Bei Gründung zusätzlich 100 % Rest-Erlass: 0 €.',
     erklaerung: `**Was ist Aufstiegs-BAföG (Meister-BAföG)?**

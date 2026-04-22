@@ -864,7 +864,7 @@ export const rechner: RechnerLight[] = [
       "fortbildungsförderung",
       "meisterkurs finanzieren"
     ],
-    "icon": "🧑‍🏭"
+    "icon": "📜"
   },
   {
     "slug": "kindergeld-rechner",
