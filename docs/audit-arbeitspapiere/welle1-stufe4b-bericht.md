@@ -370,3 +370,44 @@ Nach Diagnose-Cliffhanger: Architektur-Bug in der Einkommensermittlung bestätig
 - **Prompt 120c (reserviert, Juni 2026):** Lib-Refactoring auf §§ 14–16-Pro-Person-Architektur, parallel zum Bürgergeld-Refactor „Neue Grundsicherung" zum 01.07.2026. Interface: `Array<Haushaltsmitglied>` mit `{ brutto, erwerbstaetig, werbungskosten?, steuerpflichtig, gkvPflichtig, rvPflichtig }`. Pauschalabzüge 10/20/30 % erst NACH Werbungskosten-Abzug, pro Person summieren, dann in § 19-Formel einsetzen. Verify-Script mit echten BMWSB-Stützpunkten (nicht-zirkulär!), Rollback der Erklärseite zurück auf dynamische Route.
 
 Stufe 4b P1 damit abgeschlossen: BAföG ✓, Pfändung ✓, Bürgergeld ✓, Wohngeld → Erklärseite (kein Bug mehr live). Prompt 121 kann mit Stufe 4b P2 + SSOT für die drei sauberen Rechner starten.
+
+---
+
+## Nachtrag Prompt 121 (22.04.2026) — P2-Pass + SSOT abgeschlossen
+
+### Umgesetzt
+
+**SSOT-Extraktion:**
+- [lib/berechnungen/bafoeg-parameter.ts](../../lib/berechnungen/bafoeg-parameter.ts) neu — `BafoegParameter`-Typ, `BAFOEG_AB_2024_08_01`-Konstante, `getAktuelleBafoegParameter()`, `getAnrechnungsquote()`. Stichtag-Switch-Skeleton für WS 2026/27 vorbereitet (Prompt 121a).
+- [lib/berechnungen/buergergeld-parameter.ts](../../lib/berechnungen/buergergeld-parameter.ts) neu — zwei Buckets `BUERGERGELD_2026_H1`/`_H2` mit Stichtag-Switch zum 01.07.2026. H2 ist Skeleton (Parameter identisch zu H1, nur Bezeichnung und Quelle unterscheiden sich, bis Gesetzestext der „Neuen Grundsicherung" verabschiedet). Zusätzlich: `KDU_ANGEMESSENHEITS_HINWEIS` als Info-Konstante.
+
+**BAföG:**
+- Anrechnungsquote als Funktion der Geschwister: `1 − (0,50 + 0,05 × Geschwister)` nach § 25 Abs. 6 BAföG.
+- **Wichtige Recherche-Korrektur** zum Prompt-Text: Der Antragsteller zählt NICHT selbst mit (bestätigt durch Gesetzestext § 25 Abs. 6 + BMBF-FAQ bafög.de). Bei 0 Geschwistern → Quote 0,50 (vorher hartkodiert 0,45 → leichte Überanrechnung bei Standardfall, jetzt korrekt).
+- `BafoegErgebnis` um `anrechnungsquoteEltern` erweitert (für Display im Rechner).
+
+**Bürgergeld — Mehrbedarfe § 21 SGB II (alle 6 Tatbestände):**
+- Abs. 2 Schwangerschaft (17 %)
+- Abs. 3 Alleinerziehend mit korrekter Kombinations-Logik: `min(max(Nr.1: 36 % wenn 1 Kind<7 oder 2-3 Kinder<16, Nr.2: 12 % × Kinder), 60 %-Deckel)`
+- Abs. 4 Behinderung + Eingliederungshilfe (35 %)
+- Abs. 5 Kostenaufwändige Ernährung (freier Euro-Betrag laut Attest)
+- Abs. 6 Atypischer unabweisbarer Bedarf (freier Euro-Betrag)
+- Abs. 7 Dezentrale Warmwasserbereitung, altersgestaffelt (2,3 % / 1,4 % / 1,2 % / 0,8 %)
+
+**UI-Integration:**
+- [components/rechner/BuergergeldRechner.tsx](../../components/rechner/BuergergeldRechner.tsx): neue aufklappbare Sektion „Weitere Bedarfe (optional) — § 21 SGB II" mit 4 Checkboxen + 2 Euro-Feldern. Alleinerziehend-Option nur bei Kindern > 0 sichtbar. Ergebnis-Aufschlüsselung zeigt pro-Abs.-Zeilen nur wenn Betrag > 0. KdU-Hinweis nach § 22 SGB II als dezenter Info-Block unter dem Miete-Input. Rechner-Config-Metadaten **unverändert** (bleibt „Bürgergeld", kein Rebranding vor Gesetzes-Inkrafttreten).
+- [components/rechner/PfaendungRechner.tsx](../../components/rechner/PfaendungRechner.tsx): neuer Monat-Picker „Stichtag (Monat der Pfändung)" mit Default = heute + Hinweistext zur 01.07.2026-Anhebung.
+
+**Verify-Scripts:**
+- `scripts/verify-bafoeg-p2.ts` — 16/16 grün (Quote-Formel + SSOT-Eckwerte + Monotonie)
+- `scripts/verify-buergergeld-p2.ts` — 19/19 grün (Regelsätze + alle 6 Mehrbedarfs-Varianten + Stichtag-Switch + Skeleton-Invariante)
+- `scripts/verify-pfaendung-p2.ts` — 5/5 grün (Stichtag-Switch vor/nach 01.07.2026)
+- Alle Tests prüfen gegen externe Referenzen (Gesetzestext § 20/21 SGB II, § 25 BAföG, § 850c ZPO, BGBl-Veröffentlichungen) oder SSOT-Konstanten direkt — keine zirkulären Tests (Lehre aus 120a).
+
+### Nicht umgesetzt (bewusst vertagt)
+
+- BAföG WS 2026/27-Erhöhung → Prompt 121a, sobald Verordnung verabschiedet (bafoeg-parameter.ts hat Stichtag-Switch-Skeleton dafür vorbereitet)
+- Wohngeld-Refactoring → Prompt 120c, Juni 2026 parallel zu Bürgergeld-Reform-Umsetzung
+- P3-Polish → Prompt 122
+
+**Stufe 4b damit:** P1 ✓, P2 ✓, SSOT ✓. Offene Positionen nur noch P3-Polish und die zwei Reform-Abhängigkeiten (Juni/Juli 2026).

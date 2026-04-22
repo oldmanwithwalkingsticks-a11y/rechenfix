@@ -143,3 +143,39 @@ Referenz: Pfändungsfreigrenzen-Bekanntmachung 2026 (BGBl. 2026 I Nr. 80 v. 26.0
 | **Pfändung** | **5** | **PF-01, PF-03 (Tabellen-Pauschalquote)** | **PF-SW-01, PF-MOD (latent)** | Werte 2025/2026 korrekt, Algorithmus nur Pauschalquote |
 
 **Regression-Nutzung:** Nach jedem Fix-Pass (Prompt 120/121/122) diese Testfälle nachrechnen. Besonderer Fokus auf BAföG (veraltete Bedarfssätze) und Wohngeld (35 Höchstbeträge + 4 Freibetragsregeln).
+
+---
+
+## Stufe-4b P2-Testfälle (neu in Prompt 121)
+
+### BAföG
+
+- **BA-QUOTE-0:** `getAnrechnungsquote(0)` → 0,50 (§ 25 Abs. 6 BAföG, 0 Geschwister)
+- **BA-QUOTE-1:** `getAnrechnungsquote(1)` → 0,45 (1 Geschwister)
+- **BA-QUOTE-2:** `getAnrechnungsquote(2)` → 0,40
+- **BA-QUOTE-5:** `getAnrechnungsquote(5)` → 0,25
+- **BA-QUOTE-MIN:** `getAnrechnungsquote(11)` → 0,00 (Clamp untere Grenze)
+- **BA-MONO:** BA-01-Inputs mit 2 Geschw. liefern ≥ BAföG als mit 0 Geschw. (Monotonie)
+
+### Bürgergeld — Mehrbedarfe § 21 SGB II
+
+- **BG-MB:** Alleinerz., 1 Kind 10 J., Miete 600 → 1.620,56 € (563 + 67,56 + 390 + 600)
+- **BG-MB-2:** Alleinerz., 1 Kind 4 J. (< 7) → Mehrbedarf 202,68 € (36 % Nr. 1)
+- **BG-MB-3:** Alleinerz., 4 Kinder (2×<7, 2×12) → Mehrbedarf 270,24 € (48 % = 12 %×4 > 36 %)
+- **BG-MB-4:** Alleinerz., 6 Kinder gemischt → Mehrbedarf 337,80 € (60 %-Deckel)
+- **BG-SCHW:** Schwangerschaft ab 13. SSW alleinstehend → 95,71 € (17 %)
+- **BG-BEH:** Behinderung + Teilhabe alleinstehend → 197,05 € (35 %)
+- **BG-WW:** Warmwasser dezentral, alleinstehend + 1 Kind 5 J. → 15,81 € (2,3 % + 0,8 %)
+
+### Bürgergeld — Stichtag-Switch (Skeleton)
+
+- **BG-STICHTAG-H1:** `getAktuelleBuergergeldParameter(2026-06-15).bezeichnung` === 'Bürgergeld'
+- **BG-STICHTAG-H2:** `getAktuelleBuergergeldParameter(2026-07-15).bezeichnung` startet mit 'Grundsicherungsgeld'
+- **BG-SKELETON:** H1.rbs1 === H2.rbs1 (Skeleton-Invariante bis Gesetzestext verabschiedet)
+
+### Pfändung — Stichtag-Switch (UI-vermittelt)
+
+- **PF-SW-01-A:** Netto 1.580, 0 UH, stichtag 30.06.2026 → 17,50 € pfändbar (Tabelle 2025)
+- **PF-SW-01-B:** Netto 1.580, 0 UH, stichtag 01.07.2026 → 0 € pfändbar (unter neuem Freibetrag)
+- **PF-PARAM-VOR:** `getAktuellePfaendungsParameter(30.06.2026).grundfreibetrag` === 1.555
+- **PF-PARAM-NACH:** `getAktuellePfaendungsParameter(01.07.2026).grundfreibetrag` === 1.587,40

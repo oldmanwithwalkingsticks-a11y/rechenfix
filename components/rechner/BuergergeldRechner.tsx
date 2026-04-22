@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { berechneBuergergeld, type Bedarfsgemeinschaft, type Kindergruppe, type KindEintrag } from '@/lib/berechnungen/buergergeld';
+import { berechneBuergergeld, type Bedarfsgemeinschaft, type Kindergruppe, type KindEintrag, type MehrbedarfEingabe } from '@/lib/berechnungen/buergergeld';
+import { KDU_ANGEMESSENHEITS_HINWEIS } from '@/lib/berechnungen/buergergeld-parameter';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
@@ -24,6 +25,23 @@ export default function BuergergeldRechner() {
   const [einkommen, setEinkommen] = useState('0');
   const [vermoegen, setVermoegen] = useState('0');
 
+  // Mehrbedarfe § 21 SGB II (optional)
+  const [alleinerziehend, setAlleinerziehend] = useState(false);
+  const [schwanger, setSchwanger] = useState(false);
+  const [behinderung, setBehinderung] = useState(false);
+  const [warmwasserDezentral, setWarmwasserDezentral] = useState(false);
+  const [ernaehrungEuro, setErnaehrungEuro] = useState('0');
+  const [atypischEuro, setAtypischEuro] = useState('0');
+
+  const mehrbedarfeInput: MehrbedarfEingabe = useMemo(() => ({
+    alleinerziehend: alleinerziehend && kinder.length > 0,
+    schwangerschaftAb13SSW: schwanger,
+    behinderungEingliederungshilfe: behinderung,
+    warmwasserDezentral,
+    kostenaufwaendigeErnaehrungEuro: parseDeutscheZahl(ernaehrungEuro),
+    atypischerMehrbedarfEuro: parseDeutscheZahl(atypischEuro),
+  }), [alleinerziehend, kinder.length, schwanger, behinderung, warmwasserDezentral, ernaehrungEuro, atypischEuro]);
+
   const ergebnis = useMemo(
     () => berechneBuergergeld({
       bedarfsgemeinschaft: bg,
@@ -32,8 +50,9 @@ export default function BuergergeldRechner() {
       heizkosten: parseDeutscheZahl(heizkosten),
       einkommen: parseDeutscheZahl(einkommen),
       vermoegen: parseDeutscheZahl(vermoegen),
+      mehrbedarfe: mehrbedarfeInput,
     }),
-    [bg, kinder, warmmiete, heizkosten, einkommen, vermoegen]
+    [bg, kinder, warmmiete, heizkosten, einkommen, vermoegen, mehrbedarfeInput]
   );
 
   const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -142,6 +161,14 @@ export default function BuergergeldRechner() {
         </div>
       </div>
 
+      {/* KdU-Angemessenheitshinweis § 22 SGB II */}
+      <div className="mb-6 rounded-xl bg-gray-50 dark:bg-gray-800/40 border border-gray-200 dark:border-gray-700 px-3 py-2.5 flex gap-2 items-start">
+        <span className="text-gray-500 dark:text-gray-400 text-sm leading-tight" aria-hidden="true">ℹ️</span>
+        <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+          {KDU_ANGEMESSENHEITS_HINWEIS}
+        </p>
+      </div>
+
       {/* Einkommen & Vermögen */}
       <div className="grid grid-cols-2 gap-3 mb-6">
         <div>
@@ -155,6 +182,86 @@ export default function BuergergeldRechner() {
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Gesamt-Vermögen</p>
         </div>
       </div>
+
+      {/* Mehrbedarfe § 21 SGB II — aufklappbar */}
+      <details className="mb-6 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+        <summary className="cursor-pointer px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-200 select-none">
+          Weitere Bedarfe (optional) — § 21 SGB II
+        </summary>
+        <div className="px-4 pb-4 pt-1 space-y-3 border-t border-gray-100 dark:border-gray-700">
+          {kinder.length > 0 && (
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={alleinerziehend}
+                onChange={e => setAlleinerziehend(e.target.checked)}
+                className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 focus:ring-primary-500"
+              />
+              <span className="text-sm text-gray-700 dark:text-gray-300">
+                Alleinerziehend <span className="text-gray-600 dark:text-gray-500">(Mehrbedarf § 21 Abs. 3 SGB II: max. 60 %)</span>
+              </span>
+            </label>
+          )}
+          {kinder.length === 0 && (
+            <p className="text-xs text-gray-500 dark:text-gray-400 italic">
+              Der Alleinerziehenden-Mehrbedarf nach § 21 Abs. 3 SGB II setzt mindestens ein Kind im Haushalt voraus.
+            </p>
+          )}
+
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={schwanger}
+              onChange={e => setSchwanger(e.target.checked)}
+              className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 focus:ring-primary-500"
+            />
+            <span className="text-sm text-gray-700 dark:text-gray-300">
+              Schwangerschaft ab 13. Woche <span className="text-gray-600 dark:text-gray-500">(+17 %)</span>
+            </span>
+          </label>
+
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={behinderung}
+              onChange={e => setBehinderung(e.target.checked)}
+              className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 focus:ring-primary-500"
+            />
+            <span className="text-sm text-gray-700 dark:text-gray-300">
+              Behinderung mit Leistungen zur Teilhabe am Arbeitsleben <span className="text-gray-600 dark:text-gray-500">(+35 %)</span>
+            </span>
+          </label>
+
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={warmwasserDezentral}
+              onChange={e => setWarmwasserDezentral(e.target.checked)}
+              className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 focus:ring-primary-500"
+            />
+            <span className="text-sm text-gray-700 dark:text-gray-300">
+              Dezentrale Warmwasserbereitung <span className="text-gray-600 dark:text-gray-500">(Boiler/Durchlauferhitzer; § 21 Abs. 7 SGB II, altersgestaffelt)</span>
+            </span>
+          </label>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+            <div>
+              <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Kostenaufwändige Ernährung <span className="font-normal text-gray-500">(§ 21 Abs. 5)</span>
+              </label>
+              <NummerEingabe value={ernaehrungEuro} onChange={setErnaehrungEuro} placeholder="0" einheit="€/Mo" />
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Laut ärztl. Attest, angemessene Höhe.</p>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Sonstiger unabweisbarer Bedarf <span className="font-normal text-gray-500">(§ 21 Abs. 6)</span>
+              </label>
+              <NummerEingabe value={atypischEuro} onChange={setAtypischEuro} placeholder="0" einheit="€/Mo" />
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Atypisch, individuell vom Jobcenter geprüft.</p>
+            </div>
+          </div>
+        </div>
+      </details>
 
       {/* Ergebnis */}
       {ergebnis && (
@@ -250,6 +357,51 @@ export default function BuergergeldRechner() {
                 </>
               )}
 
+              {/* Mehrbedarfe § 21 SGB II */}
+              {ergebnis.mehrbedarfe.gesamt > 0 && (
+                <>
+                  <div className="px-4 py-2 bg-gray-50/50 dark:bg-gray-700/20">
+                    <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Mehrbedarfe (§ 21 SGB II)</p>
+                  </div>
+                  {ergebnis.mehrbedarfe.schwangerschaft > 0 && (
+                    <div className="flex justify-between px-4 py-2 text-sm">
+                      <span className="text-gray-600 dark:text-gray-400">Schwangerschaft (Abs. 2)</span>
+                      <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(ergebnis.mehrbedarfe.schwangerschaft)} €</span>
+                    </div>
+                  )}
+                  {ergebnis.mehrbedarfe.alleinerziehend > 0 && (
+                    <div className="flex justify-between px-4 py-2 text-sm">
+                      <span className="text-gray-600 dark:text-gray-400">Alleinerziehend (Abs. 3)</span>
+                      <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(ergebnis.mehrbedarfe.alleinerziehend)} €</span>
+                    </div>
+                  )}
+                  {ergebnis.mehrbedarfe.behinderung > 0 && (
+                    <div className="flex justify-between px-4 py-2 text-sm">
+                      <span className="text-gray-600 dark:text-gray-400">Behinderung + Teilhabe (Abs. 4)</span>
+                      <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(ergebnis.mehrbedarfe.behinderung)} €</span>
+                    </div>
+                  )}
+                  {ergebnis.mehrbedarfe.ernaehrung > 0 && (
+                    <div className="flex justify-between px-4 py-2 text-sm">
+                      <span className="text-gray-600 dark:text-gray-400">Kostenaufwändige Ernährung (Abs. 5)</span>
+                      <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(ergebnis.mehrbedarfe.ernaehrung)} €</span>
+                    </div>
+                  )}
+                  {ergebnis.mehrbedarfe.atypisch > 0 && (
+                    <div className="flex justify-between px-4 py-2 text-sm">
+                      <span className="text-gray-600 dark:text-gray-400">Atypischer Bedarf (Abs. 6)</span>
+                      <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(ergebnis.mehrbedarfe.atypisch)} €</span>
+                    </div>
+                  )}
+                  {ergebnis.mehrbedarfe.warmwasser > 0 && (
+                    <div className="flex justify-between px-4 py-2 text-sm">
+                      <span className="text-gray-600 dark:text-gray-400">Dezentrale Warmwasserbereitung (Abs. 7)</span>
+                      <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(ergebnis.mehrbedarfe.warmwasser)} €</span>
+                    </div>
+                  )}
+                </>
+              )}
+
               {/* Unterkunft */}
               <div className="px-4 py-2 bg-gray-50/50 dark:bg-gray-700/20">
                 <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Kosten der Unterkunft</p>
@@ -262,7 +414,7 @@ export default function BuergergeldRechner() {
               {/* Zwischensumme */}
               <div className="flex justify-between px-4 py-3 text-sm font-semibold bg-gray-50/80 dark:bg-gray-700/30">
                 <span className="text-gray-700 dark:text-gray-200">Gesamtbedarf</span>
-                <span className="text-gray-800 dark:text-gray-100">{fmt(ergebnis.regelbedarfGesamt + ergebnis.unterkunftskosten)} €</span>
+                <span className="text-gray-800 dark:text-gray-100">{fmt(ergebnis.regelbedarfGesamt + ergebnis.mehrbedarfe.gesamt + ergebnis.unterkunftskosten)} €</span>
               </div>
 
               {/* Einkommen */}

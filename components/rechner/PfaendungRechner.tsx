@@ -19,18 +19,37 @@ const ZEITRAUM_LABEL: Record<Zeitraum, string> = {
   taeglich: 'Tag',
 };
 
+/**
+ * Default-Stichtag: heute (YYYY-MM im input-Feld). Das Date-Input-Feld vom
+ * Browser liefert "YYYY-MM-DD" — für Monats-Input nutzen wir type="month",
+ * daraus ableitend einen Date-Objekt für den 15. des Monats (mittlerer Bezug).
+ */
+function heuteAlsMonatString(): string {
+  const d = new Date();
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  return `${d.getFullYear()}-${mm}`;
+}
+
+function monatStringZuDate(monatStr: string): Date {
+  const [jahr, monat] = monatStr.split('-').map(Number);
+  if (!jahr || !monat) return new Date();
+  return new Date(jahr, monat - 1, 15);
+}
+
 export default function PfaendungRechner() {
   const [netto, setNetto] = useState('2500');
   const [unterhalt, setUnterhalt] = useState('0');
   const [zeitraum, setZeitraum] = useState<Zeitraum>('monatlich');
+  const [stichtagMonat, setStichtagMonat] = useState<string>(heuteAlsMonatString());
 
   const ergebnis = useMemo(
     () => berechnePfaendung({
       nettoMonat: parseDeutscheZahl(netto),
       unterhaltspflichten: parseFloat(unterhalt) || 0,
       zeitraum,
+      stichtag: monatStringZuDate(stichtagMonat),
     }),
-    [netto, unterhalt, zeitraum],
+    [netto, unterhalt, zeitraum, stichtagMonat],
   );
 
   const freiBreite = ergebnis.nettoMonat > 0
@@ -91,6 +110,25 @@ export default function PfaendungRechner() {
           value={zeitraum}
           onChange={(v) => setZeitraum(v as Zeitraum)}
         />
+      </div>
+
+      {/* === 4: Stichtag (Pfändungsmonat) === */}
+      <div className="mb-6">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+          <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">4</span>
+          Stichtag (Monat der Pfändung)
+        </h2>
+        <label htmlFor="pfaendung-stichtag" className="sr-only">Stichtag der Pfändung</label>
+        <input
+          id="pfaendung-stichtag"
+          type="month"
+          value={stichtagMonat}
+          onChange={e => setStichtagMonat(e.target.value)}
+          className="w-full min-h-[48px] px-4 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm"
+        />
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          Die Pfändungsfreigrenzen wurden zum 01.07.2026 angehoben. Mit diesem Feld können Sie Vorher-/Nachher-Szenarien durchspielen.
+        </p>
       </div>
 
       {/* === ERGEBNIS === */}
