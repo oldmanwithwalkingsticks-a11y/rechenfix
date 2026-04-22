@@ -33,14 +33,20 @@ export default function BuergergeldRechner() {
   const [ernaehrungEuro, setErnaehrungEuro] = useState('0');
   const [atypischEuro, setAtypischEuro] = useState('0');
 
+  // Alleinerziehend-Mehrbedarf § 21 Abs. 3 SGB II: rechtlich nur bei alleiniger
+  // Pflege/Erziehung. Im UI deshalb NUR wirksam, wenn Bedarfsgemeinschaft
+  // = 'alleinstehend' + Kinder > 0 + Checkbox bewusst aktiviert. Bei „Paar mit
+  // Kindern" greift der Mehrbedarf regelmäßig nicht (gemeinsame Verantwortung).
+  const alleinerziehendWirksam = bg === 'alleinstehend' && kinder.length > 0 && alleinerziehend;
+
   const mehrbedarfeInput: MehrbedarfEingabe = useMemo(() => ({
-    alleinerziehend: alleinerziehend && kinder.length > 0,
+    alleinerziehend: alleinerziehendWirksam,
     schwangerschaftAb13SSW: schwanger,
     behinderungEingliederungshilfe: behinderung,
     warmwasserDezentral,
     kostenaufwaendigeErnaehrungEuro: parseDeutscheZahl(ernaehrungEuro),
     atypischerMehrbedarfEuro: parseDeutscheZahl(atypischEuro),
-  }), [alleinerziehend, kinder.length, schwanger, behinderung, warmwasserDezentral, ernaehrungEuro, atypischEuro]);
+  }), [alleinerziehendWirksam, schwanger, behinderung, warmwasserDezentral, ernaehrungEuro, atypischEuro]);
 
   const ergebnis = useMemo(
     () => berechneBuergergeld({
@@ -70,11 +76,15 @@ export default function BuergergeldRechner() {
     setKinder(kinder.map((k, i) => i === index ? { alter } : k));
   };
 
-  // Bei Wechsel zu alleinstehend/paar: Kinder entfernen
+  // Bei Wechsel zu „Paar" (ohne Kinder): Kinder entfernen. „Alleinstehend" behält
+  // die bisherigen Kinder (Alleinerziehend-Fall BG-MB bleibt ohne Re-Input
+  // aktivierbar). „Paar mit Kindern" behält Kinder ohnehin.
   const handleBgChange = (neu: Bedarfsgemeinschaft) => {
     setBg(neu);
-    if (neu === 'alleinstehend' || neu === 'paar') {
+    if (neu === 'paar') {
       setKinder([]);
+      // Alleinerziehend-Checkbox auch zurücksetzen, da ohne Kinder nicht anwendbar
+      setAlleinerziehend(false);
     }
   };
 
@@ -104,8 +114,8 @@ export default function BuergergeldRechner() {
         </div>
       </div>
 
-      {/* Kinder */}
-      {bg === 'paar-mit-kindern' && (
+      {/* Kinder — bei „Paar mit Kindern" Pflicht, bei „Alleinstehend" optional (Alleinerziehend-Fall) */}
+      {(bg === 'paar-mit-kindern' || bg === 'alleinstehend') && (
         <div className="mb-5">
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Kinder ({kinder.length})
@@ -189,23 +199,27 @@ export default function BuergergeldRechner() {
           Weitere Bedarfe (optional) — § 21 SGB II
         </summary>
         <div className="px-4 pb-4 pt-1 space-y-3 border-t border-gray-100 dark:border-gray-700">
-          {kinder.length > 0 && (
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={alleinerziehend}
-                onChange={e => setAlleinerziehend(e.target.checked)}
-                className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 focus:ring-primary-500"
-              />
-              <span className="text-sm text-gray-700 dark:text-gray-300">
-                Alleinerziehend <span className="text-gray-600 dark:text-gray-500">(Mehrbedarf § 21 Abs. 3 SGB II: max. 60 %)</span>
-              </span>
-            </label>
-          )}
-          {kinder.length === 0 && (
-            <p className="text-xs text-gray-500 dark:text-gray-400 italic">
-              Der Alleinerziehenden-Mehrbedarf nach § 21 Abs. 3 SGB II setzt mindestens ein Kind im Haushalt voraus.
-            </p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 italic">
+            Mehrbedarfe werden zusätzlich zum Regelsatz gewährt, wenn bestimmte Lebensumstände vorliegen. Mehrere Mehrbedarfe sind kombinierbar.
+          </p>
+
+          {bg === 'alleinstehend' && kinder.length > 0 && (
+            <div>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={alleinerziehend}
+                  onChange={e => setAlleinerziehend(e.target.checked)}
+                  className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 focus:ring-primary-500"
+                />
+                <span className="text-sm text-gray-700 dark:text-gray-300">
+                  Alleinerziehend <span className="text-gray-600 dark:text-gray-500">— alleinige Pflege und Erziehung des/der Kinder (+12–60 % nach Staffel)</span>
+                </span>
+              </label>
+              <p className="ml-7 mt-1 text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                Rechtsgrundlage: § 21 Abs. 3 SGB II. Anwendbar, wenn Sie allein für Pflege und Erziehung zuständig sind. Bei Wechselmodellen mit etwa gleicher Betreuung durch beide Elternteile greift der Mehrbedarf üblicherweise nicht.
+              </p>
+            </div>
           )}
 
           <label className="flex items-center gap-2 cursor-pointer">

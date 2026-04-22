@@ -411,3 +411,24 @@ Stufe 4b P1 damit abgeschlossen: BAföG ✓, Pfändung ✓, Bürgergeld ✓, Woh
 - P3-Polish → Prompt 122
 
 **Stufe 4b damit:** P1 ✓, P2 ✓, SSOT ✓. Offene Positionen nur noch P3-Polish und die zwei Reform-Abhängigkeiten (Juni/Juli 2026).
+
+---
+
+## Nachtrag Prompt 121-fix (22.04.2026) — UI-Komplettierung Alleinerziehend
+
+Post-Deploy-Review zu Prompt 121 zeigte drei UI-Lücken im Bürgergeld-Rechner:
+
+1. Kinder-Input war bei „Alleinstehend" nicht verfügbar → BG-MB-Testfall nicht über UI abbildbar.
+2. Alleinerziehend-Mehrbedarf griff automatisch bei Kindern > 0, auch bei „Paar mit Kindern" (rechtlich falsch: § 21 Abs. 3 SGB II verlangt alleinige Pflege und Erziehung).
+3. Keine bewusste User-Bestätigung der Alleinerziehend-Eigenschaft.
+
+Fix in [components/rechner/BuergergeldRechner.tsx](../../components/rechner/BuergergeldRechner.tsx):
+- Kinder-Input-Block auch bei „Alleinstehend" gerendert (bleibt bei „Paar" unsichtbar).
+- Neue Checkbox „Alleinerziehend — alleinige Pflege und Erziehung des/der Kinder" im Mehrbedarfs-Block, nur sichtbar bei `bg === 'alleinstehend' && kinder.length > 0`. Hilfetext erklärt Wechselmodell-Ausnahme (§ 21 Abs. 3 SGB II).
+- Alleinerziehend-Mehrbedarf wird über `alleinerziehendWirksam = bg === 'alleinstehend' && kinder.length > 0 && alleinerziehend`-Guard nur dann an die Lib weitergegeben, wenn alle drei Bedingungen erfüllt sind. Bei „Paar mit Kindern" wirkt die Checkbox selbst bei gesetztem State nicht.
+- Info-Text „automatisch im Haushalt" durch neutralere Einleitung ersetzt („Mehrbedarfe werden zusätzlich zum Regelsatz gewährt, wenn bestimmte Lebensumstände vorliegen").
+- `handleBgChange`: bei Wechsel zu „Paar" werden Kinder UND Alleinerziehend-Flag geleert; „Alleinstehend" behält die Kinderliste (kein unnötiger Re-Input).
+
+Lib unberührt — `buergergeld.ts` und `buergergeld-parameter.ts` weiterhin identisch zu Prompt 121. Verify-Scripts bleiben 19/19 grün.
+
+**Stufe 4b jetzt endgültig P1+P2-komplett ohne offene UI-Lücken.**
