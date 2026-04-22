@@ -179,3 +179,55 @@ Referenz: Pfändungsfreigrenzen-Bekanntmachung 2026 (BGBl. 2026 I Nr. 80 v. 26.0
 - **PF-SW-01-B:** Netto 1.580, 0 UH, stichtag 01.07.2026 → 0 € pfändbar (unter neuem Freibetrag)
 - **PF-PARAM-VOR:** `getAktuellePfaendungsParameter(30.06.2026).grundfreibetrag` === 1.555
 - **PF-PARAM-NACH:** `getAktuellePfaendungsParameter(01.07.2026).grundfreibetrag` === 1.587,40
+
+---
+
+## P3 Testfälle — Prompt 123 (22.04.2026)
+
+Externe Quellen dokumentiert in den Verify-Scripts:
+- [`scripts/verify-bafoeg-p3.ts`](../../scripts/verify-bafoeg-p3.ts) — 20 Fälle, § 11/12/25 BAföG + BMBF-FAQ
+- [`scripts/verify-buergergeld-p3.ts`](../../scripts/verify-buergergeld-p3.ts) — 21 Fälle, § 11b Abs. 2b SGB II
+- [`scripts/verify-pfaendung-p2.ts`](../../scripts/verify-pfaendung-p2.ts) (erweitert um 6 Fälle)
+
+### BAföG § 12 Schul-Bedarfstypen
+
+- **BA-SCHUL-01:** schule, `berufsfachschuleOhneVorausbildung`, eltern → Bedarf **276 €** (§ 12 Abs. 1 Nr. 1)
+- **BA-SCHUL-02:** schule, `fachoberschuleMitVorausbildung`, auswärts → Bedarf **775 €** (§ 12 Abs. 2 Nr. 2)
+- **BA-SCHUL-03:** schule, `berufsfachschuleOhneVorausbildung`, auswärts → Bedarf **666 €** (§ 12 Abs. 2 Nr. 1)
+- **BA-SCHUL-04:** schule, `fachoberschuleMitVorausbildung`, eltern → Bedarf **498 €** (§ 12 Abs. 1 Nr. 2)
+
+### BAföG § 11 Abs. 3 / Abs. 2a — Elternunabhängig
+
+- **BA-ELUN-01:** Student 31 J., Tatbestand `ueber_30_bei_beginn`, Eltern 40k+20k → voller Höchstsatz **992 €**, `anrechnungEltern=0`
+- **BA-ELUN-02:** Student 22 J. Kolleg-Besuch, Tatbestand `abendgymnasium_kolleg`, Eltern 40k+20k → **992 €**
+- **BA-ELUN-REGR:** Ohne Tatbestand, Eltern 40k+20k → regulärer Pfad, `anrechnungEltern>0`
+
+### BAföG § 11 Abs. 4 — Aufteilung
+
+- **BA-ABS4-01:** Student Eltern 40k+20k, `gefoerdeteGeschwisterAnzahl=1` → Anrechnung ≈ 268,50 € (≈537/2), BAföG ≈ **723,50 €**
+- **BA-ABS4-02:** `gefoerdeteGeschwisterAnzahl=2` → Anrechnung ≈ 179 € (≈537/3), BAföG ≈ **813 €**
+- **BA-KOMBI:** `geschwisterInAusbildung=2` + `gefoerdeteGeschwisterAnzahl=1`: Quote 0,40, Freibetrag 3.875 € kappt Anrechnung auf 0 → BAföG **992 €** (beide Effekte wirken, aber Netto < Freibetrag)
+- **Helper:** `aufteilungNachAbs4(537, 1) = 268,50`, `(537, 2) = 179,00`, `(537, 0) = 537,00`
+
+### Bürgergeld § 11b Abs. 2b — Jugendlichen-Freibetrag
+
+- **BG-JUGEND-01:** Alleinstehend 22 J. Student, 500 € Einkommen → Freibetrag 500 € (unter 556), `anrechenbareEinkommen=0`, Anspruch **1.093 €**
+- **BG-JUGEND-02:** 28 J. Student, 500 € → Freibetrag 250 €, Anrechnung 250, Anspruch **843 €**
+- **BG-JUGEND-03:** 22 J. OHNE Sonderstatus, 500 € → regulärer Stufen-Freibetrag 180, Anspruch **773 €**
+- **BG-JUGEND-04:** Azubi 22 J., 600 € → Freibetrag gedeckelt 556, Anrechnung 44, Anspruch **1.049 €**
+- **BG-JUGEND-05:** `status: 'none'` → regulärer Pfad, gleiche 180 € Freibetrag wie BG-JUGEND-03
+
+### Bürgergeld Dedup (Paket 6)
+
+- **DEDUP RBS1–6:** Tabelle in `BuergergeldRechner.tsx` liest aus `getAktuelleBuergergeldParameter().regelsaetze` — keine Hartkodierungen mehr
+
+### Pfändung — Dynamische Beispieltabelle (Paket 7)
+
+- **PF-BEISP-01:** `getBeispielNettoWerte(3000)` liefert 6 Werte, erster = 2.500, enthält 3.000
+- **PF-BEISP-02:** Fallback bei Netto < 1.500 → `[2000, 2500, 3000, 3500, 4000, 5000]`
+- **PF-BEISP-03:** `berechnePfaendung({nettoMonat: 3000})` liefert 6 Zeilen, Anker 3.000 enthalten
+
+### Pfändung — Permanente Obergrenze-Anzeige
+
+- UI-Test: Obergrenze-Info-Block **sichtbar bei jedem Netto** (nicht nur bei `ueberObergrenze`)
+- Wert aus `ergebnis.obergrenze` (stichtag-aware: 4.866,30 €/Monat ab 01.07.2026, 4.771,49 € davor, jeweils +Unterhalts-Erhöhung)

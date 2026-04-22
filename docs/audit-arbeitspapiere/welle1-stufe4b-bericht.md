@@ -446,3 +446,45 @@ Im Anschluss an den Analyse-Report [`bafoeg-geschwister-analyse.md`](bafoeg-gesc
 **Keine Änderung an der Lib-Logik** — [`lib/berechnungen/bafoeg.ts`](../../lib/berechnungen/bafoeg.ts) und [`bafoeg-parameter.ts`](../../lib/berechnungen/bafoeg-parameter.ts) identisch zu Prompt 121. Verify-Scripts weiterhin 16/16 grün. Testfall mit 0 Geschwistern liefert weiter denselben Wert, Testfall mit 2 Geschwistern ebenso.
 
 **Offener Punkt für Prompt 122 oder separaten Folge-Prompt:** echte § 11 Abs. 4-Aufteilungsregel als zweites Input-Feld („Weitere Geschwister mit eigenem BAföG-Bezug") mit Formel `anrechnungEltern / (1 + gefoerderteGeschwister)`. Aktuell aus Scope — 121-geschwister-label schafft nur Transparenz, keine Verhaltensänderung.
+
+---
+
+## Nachtrag Prompt 123 (22.04.2026) — P3-Polish komplett
+
+**Umgesetzt:**
+
+### BAföG (Pakete 1–4)
+- **§ 12 Schul-Bedarfstypen** strukturell in [`bafoeg-parameter.ts`](../../lib/berechnungen/bafoeg-parameter.ts) abgebildet (276 / 498 / 666 / 775 €). Alte Konstante `schule.eltern = 262` / `schule.eigene = 632` ersetzt durch `SchulBedarfe`-Interface mit zwei Gruppen nach § 12 Abs. 1 Nr. 1/2 + Abs. 2 Nr. 1/2. Neuer UI-Dropdown „Schulform" in `BafoegRechner.tsx`, sichtbar nur bei `ausbildung === 'schule'`.
+- **§ 11 Abs. 3 + Abs. 2a elternunabhängige Förderung** als neuer Eingabe-Parameter `elternunabhaengig: { tatbestand }` in [`bafoeg.ts`](../../lib/berechnungen/bafoeg.ts). 5 Tatbestände: `abendgymnasium_kolleg`, `ueber_30_bei_beginn`, `5_jahre_erwerbstaetig`, `3_jahre_ausbildung_plus_3_erwerbstaetig`, `eltern_nicht_verfuegbar`. UI: aufklappbare `<details>`-Sektion mit Dropdown unter den Elterneinkommen-Inputs. Wenn ein Tatbestand gewählt, werden die Elterneinkommen-Inputs ausgeblendet und der grüne Hinweis „nicht angerechnet" erscheint mit Paragraph-Referenz. Detail-Prüfung nach § 11 Abs. 3 Satz 2 (Selbstunterhalt in Erwerbsjahren) wird im UI-Hinweis adressiert, aber nicht berechnet.
+- **§ 11 Abs. 4 Aufteilungsregel** als neuer Eingabe-Parameter `gefoerdeteGeschwisterAnzahl` (Default 0). Helper-Funktion `aufteilungNachAbs4(anrechnung, anzahl)` exportiert für direkten Test. Divisor `1 + gefoerdeteGeschwisterAnzahl` auf den Elternanrechnungsbetrag nach § 25 BAföG. UI: zweites Geschwister-Feld „Weitere Geschwister mit eigenem BAföG-/BAB-Bezug" direkt unter dem bestehenden „Geschwister in Ausbildung"-Feld. Help-Texte auf beiden Feldern präzisieren die semantische Abgrenzung (ohne eigenen BAföG = § 25 Abs. 3/6; mit eigenem BAföG = § 11 Abs. 4).
+- **Aufschlüsselungs-Tabelle** erweitert: Wenn `aufteilungDivisor > 1`, werden drei Zeilen gerendert (Anrechnung vor Aufteilung → ÷ Divisor → Anrechnung nach Aufteilung). Wenn Divisor = 1, bleibt die klassische Single-Row-Darstellung.
+- **Disclaimer-Block** aktualisiert: § 11 Abs. 3 und § 11 Abs. 4 sind **nicht mehr** als Lücken gelistet (sie sind jetzt abgebildet); nur die Detail-Voraussetzung § 11 Abs. 3 Satz 2 (Selbstunterhalt) und Sonderfälle bei Selbstständigkeit bleiben dokumentiert.
+- Neuer **Ergebnis-Typ `ElternunabhaengigTatbestand`** für TS-Konsumenten. Neue Exports: `SchulForm`, `aufteilungNachAbs4`.
+- **Verify-Script:** [`scripts/verify-bafoeg-p3.ts`](../../scripts/verify-bafoeg-p3.ts) mit 20 Testfällen, alle gegen externe Oracle-Quellen (§ 11/12/25 BAföG, BMBF-FAQ). **20/20 grün.**
+- Regressions-Check: `verify-bafoeg-p2.ts` weiterhin **16/16 grün**.
+
+### Bürgergeld (Pakete 5–6)
+- **§ 11b Abs. 2b Jugendlichen-Freibetrag** als neuer Eingabe-Parameter `jugendlicherStatus: { alter, status }` in [`buergergeld.ts`](../../lib/berechnungen/buergergeld.ts). Zwei neue Konstanten in [`buergergeld-parameter.ts`](../../lib/berechnungen/buergergeld-parameter.ts): `jugendlicherFreibetrag_unter25 = 556` (Minijob-Grenze § 8 Abs. 1a SGB IV) und `jugendlicherFreibetrag_ab25 = 250`. Bei gesetztem Status wird der reguläre Stufen-Freibetrag durch den Jugendlichen-Pfad ersetzt (Freibetrag = min(Einkommen, 556/250)). UI: aufklappbare `<details>`-Sektion „Sonderstatus Einkommensfreibetrag" mit Dropdown (Kein / Schüler / Azubi / Student / Freiwilligendienst) + Alter-Input. Ferienjob-Sonderregel § 11a Abs. 7 SGB II ist im Hinweistext adressiert, aber nicht implementiert.
+- **Regelsatz-Info-Tabelle** aus Lib abgeleitet: die sechs RBS-Werte kommen jetzt aus `getAktuelleBuergergeldParameter().regelsaetze` statt hartkodiert. Titel der Tabelle nutzt `params.bezeichnung` (Bürgergeld vor 01.07., Grundsicherungsgeld danach).
+- **Verify-Script:** [`scripts/verify-buergergeld-p3.ts`](../../scripts/verify-buergergeld-p3.ts) mit 21 Testfällen inkl. Dedup-Prüfung. **21/21 grün.**
+- Regressions-Check: `verify-buergergeld-p2.ts` weiterhin **19/19 grün**.
+
+### Pfändung (Paket 7)
+- **Dynamische Beispieltabelle** in [`pfaendung.ts`](../../lib/berechnungen/pfaendung.ts): neue exportierte Helper-Funktion `getBeispielNettoWerte(userNetto)` liefert 6 um das User-Netto zentrierte Werte (Staffelung −500 / −250 / Anker / +250 / +500 / +1000 auf 100er-Stufen). Fallback auf fixe Werte `[2000, 2500, 3000, 3500, 4000, 5000]` bei unplausiblem Input (< 1.500 oder > 10.000).
+- **Permanente Obergrenze-Anzeige** in [`PfaendungRechner.tsx`](../../components/rechner/PfaendungRechner.tsx): neuer grauer Info-Block unter der Aufschlüsselungs-Tabelle (oberhalb des P-Konto-Tipps). Zeigt Obergrenze + Pauschalquote permanent an, markiert rot „Ihr Einkommen liegt über dieser Grenze" nur bei Überschreitung. Wert aus `ergebnis.obergrenze` → stichtag-aware via bestehenden Switch.
+- **Verify-Script-Erweiterung:** [`scripts/verify-pfaendung-p2.ts`](../../scripts/verify-pfaendung-p2.ts) um 6 Fälle für dynamische Tabelle erweitert. **11/11 grün** (war 5/5).
+
+**Build:** `npm run build` grün, 203/203 statische Seiten, alle Prebuild-Hooks durchlaufen.
+
+**Verify-Gesamtbilanz für Stufe 4b:** verify-bafoeg-p2: 16/16 — verify-bafoeg-p3: 20/20 — verify-buergergeld-p2: 19/19 — verify-buergergeld-p3: 21/21 — verify-pfaendung-p2 (erweitert): 11/11 → **87/87 grün.**
+
+**Stufe 4b damit final abgeschlossen:**
+- P1 ✓ (Prompt 120)
+- P2 + SSOT ✓ (Prompt 121 + 121-fix)
+- UI-Transparenz ✓ (Prompt 121-analyse + 121-geschwister-label)
+- P3-Polish ✓ (Prompt 123)
+
+**Offen:**
+- **Prompt 120c (Juni 2026):** Wohngeld-Lib-Refactoring §§ 14–16 pro Person + PLZ-Mietstufen-Zuordnung, gebündelt mit Bürgergeld-Reform „Neue Grundsicherung" 01.07.2026. Erst danach: Rollback des Wohngeld-Explainers auf die dynamische Route.
+- **Prompt 121a:** BAföG WS 2026/27-Erhöhung, sobald Verordnung verabschiedet (neuer Bucket `BAFOEG_AB_2026_08_01`).
+- **Eventuell neuer Rechner AFBG (Aufstiegs-BAföG):** Für Meister/Techniker/Fachwirt. Eigener Rechner, eigene Parameter-Lib. Nicht Teil von 4b.
