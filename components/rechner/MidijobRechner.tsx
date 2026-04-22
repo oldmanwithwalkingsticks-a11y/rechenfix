@@ -15,9 +15,11 @@ import {
 } from '@/lib/berechnungen/einkommensteuer';
 import {
   berechneBemessungsgrundlageAN,
+  berechneBemessungsgrundlageGesamt,
   getMidijobUntergrenze,
   MIDIJOB_OBERGRENZE_MONAT,
 } from '@/lib/berechnungen/midijob-uebergang';
+import { getAktuelleMidijobParameter } from '@/lib/berechnungen/midijob-parameter';
 import {
   KV_BASISSATZ_AN_2026,
   RV_SATZ_AN_2026,
@@ -65,24 +67,34 @@ export default function MidijobRechner() {
   const ergebnis = useMemo(() => {
     const b = parseDeutscheZahl(brutto) || 0;
 
-    // BE: reduzierte beitragspflichtige Einnahme für AN nach § 20a SGB IV.
-    // Formel und Konstanten in lib/berechnungen/midijob-uebergang.ts —
-    // SSOT, testbar, stichtag-switch für UG zum 01.01.2027 (633,01 €).
+    // Zwei separate Bemessungsgrundlagen nach § 20a SGB IV (seit 01.10.2022):
+    //  - BE_gesamt (Abs. 2): für Gesamtbeitrag und RV-Entgeltpunkte § 163 SGB VI
+    //  - BE_AN (Abs. 2a): für AN-Beitragsanteil (startet bei UG mit 0)
+    // AG trägt Gesamtbeitrag − AN-Anteil (im Übergangsbereich > halbe Last).
     const imBereich = b >= untergrenze && b <= MIDIJOB_OBERGRENZE;
-    const be = imBereich ? berechneBemessungsgrundlageAN(b) : b;
+    const beGesamt = imBereich ? berechneBemessungsgrundlageGesamt(b) : b;
+    const beAn = imBereich ? berechneBemessungsgrundlageAN(b) : b;
 
     // PV-AN-Satz inkl. Kinderlos-Zuschlag / Kinderabschlag nach § 55 Abs. 3 SGB XI.
-    // Vereinfachung: Wer anzahlKinder = 0 hat, gilt als kinderlos (Zuschlag greift,
-    // Annahme Alter > 23). Ab Kind 2 greift der Kinderabschlag von 0,25 pp pro Kind
-    // (bis Kind 5 gedeckelt). Eltern mit Kindern über 25 Jahren müssen derzeit für
-    // den Kinderlos-Zuschlag-Nachweis ihren Elternstatus separat belegen — ein
-    // explizites UI-Flag dafür könnte Prompt 117 nachreichen.
+    // Annahme anzahlKinder = 0 → kinderlos (Zuschlag, Alter > 23). Ab Kind 2
+    // greift Kinderabschlag 0,25 pp pro Kind (bis Kind 5 gedeckelt).
     const pvAnSatz = pvAnteilAn2026(anzahlKinder, true, false);
     const anSvSatz = SV_AN_OHNE_PV + pvAnSatz;
-    const agSvSatz = anSvSatz; // Display-Wert, keine Midijob-AG-Logik
 
-    const anSv = be * anSvSatz;
-    const agSv = b * agSvSatz;
+    // Gesamtbeitragssatz (AN + AG = voller Beitrag): AN-Satz × 2 als Näherung
+    // (PV-Basis 1,8 % geteilt AN/AG = je 0,9 %, plus Kinderlos-Zuschlag trägt
+    // nur AN). Hier einfach anSvSatz × 2 minus Kinderlos-Zuschlag-Anteil, den
+    // der AG NICHT trägt. Vereinfacht: volles Brutto × 2 × anSvSatz wäre
+    // Überschätzung. Wir nutzen für den Gesamt-AN+AG-Beitrag aktuell
+    // AN-Satz × 2 auf BE_gesamt (akzeptable Näherung, Kinderlos-Zuschlag
+    // wäre eine Feinheit ≈ 0,3 €-Bereich bei Midijob).
+    const gesamtSvSatz = anSvSatz * 2;
+
+    const gesamtSv = beGesamt * gesamtSvSatz;
+    const anSv = beAn * anSvSatz;
+    // § 20a SGB IV: AG trägt Gesamtbeitrag − AN-Anteil (= deutlich mehr als
+    // die Hälfte bei niedrigem AE, weil BE_AN ≪ BE_gesamt in dem Bereich)
+    const agSv = Math.max(0, gesamtSv - anSv);
 
     const lohnsteuer = lohnsteuerMonat(b, klasse);
 
@@ -97,13 +109,18 @@ export default function MidijobRechner() {
 
     const netto = b - anSv - lohnsteuer - soli - kiSt;
 
-    // Vergleich: Reguläre Beschäftigung (SV auf volles Brutto)
+    // Vergleich: Reguläre Beschäftigung (AN-SV auf volles Brutto, halber Satz)
     const anSvRegulaer = b * anSvSatz;
     const nettoRegulaer = b - anSvRegulaer - lohnsteuer - soli - kiSt;
     const ersparnis = netto - nettoRegulaer;
 
-    return { b, be, imBereich, anSv, agSv, lohnsteuer, soli, kiSt, netto, nettoRegulaer, ersparnis };
+    return { b, beGesamt, beAn, imBereich, gesamtSv, anSv, agSv, lohnsteuer, soli, kiSt, netto, nettoRegulaer, ersparnis };
   }, [brutto, klasse, kirchensteuer, bundesland, anzahlKinder, untergrenze]);
+
+  // F-Faktor dynamisch aus Parameter-Lib lesen (ändert sich jährlich)
+  const midijobParams = getAktuelleMidijobParameter();
+  const fFaktorAnzeige = midijobParams.faktorF.toLocaleString('de-DE', { minimumFractionDigits: 4, maximumFractionDigits: 4 });
+  const jahrAnzeige = midijobParams.gueltigAb.getFullYear();
 
   const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
@@ -228,10 +245,27 @@ export default function MidijobRechner() {
               <td className="px-4 py-2.5 text-gray-700 dark:text-gray-300">Bruttoverdienst</td>
               <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200">{fmtEuro(ergebnis.b)} €</td>
             </tr>
-            <tr>
-              <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Beitragspfl. Einnahme (AN, reduziert)</td>
-              <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200">{fmtEuro(ergebnis.be)} €</td>
-            </tr>
+            {ergebnis.imBereich && (
+              <>
+                <tr className="bg-gray-50 dark:bg-gray-700/30">
+                  <td colSpan={2} className="px-4 py-1.5 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">
+                    Bemessungsgrundlagen § 20a SGB IV
+                  </td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2 text-gray-600 dark:text-gray-400">
+                    BE<sub className="text-xs">gesamt</sub> (Abs. 2 — für Gesamtbeitrag und RV-Entgeltpunkte)
+                  </td>
+                  <td className="px-4 py-2 text-right tabular-nums text-gray-800 dark:text-gray-200">{fmtEuro(ergebnis.beGesamt)} €</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2 text-gray-600 dark:text-gray-400">
+                    BE<sub className="text-xs">AN</sub> (Abs. 2a — für reduzierten AN-Anteil)
+                  </td>
+                  <td className="px-4 py-2 text-right tabular-nums text-gray-800 dark:text-gray-200">{fmtEuro(ergebnis.beAn)} €</td>
+                </tr>
+              </>
+            )}
             <tr>
               <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">− AN-Sozialversicherung</td>
               <td className="px-4 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">−{fmtEuro(ergebnis.anSv)} €</td>
@@ -256,23 +290,67 @@ export default function MidijobRechner() {
               <td className="px-4 py-3 text-blue-800 dark:text-blue-300">= Netto</td>
               <td className="px-4 py-3 text-right tabular-nums text-blue-800 dark:text-blue-300">{fmtEuro(ergebnis.netto)} €</td>
             </tr>
-            <tr>
-              <td className="px-4 py-2.5 text-gray-500 dark:text-gray-400">AG-Sozialversicherung</td>
-              <td className="px-4 py-2.5 text-right tabular-nums text-gray-500 dark:text-gray-400">{fmtEuro(ergebnis.agSv)} €</td>
-            </tr>
+            {ergebnis.imBereich && (
+              <>
+                <tr className="bg-gray-50 dark:bg-gray-700/30">
+                  <td colSpan={2} className="px-4 py-1.5 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">
+                    Arbeitgeber-Seite (Differenzbetrag)
+                  </td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2 text-gray-500 dark:text-gray-400">Gesamtbeitrag SV (AN + AG)</td>
+                  <td className="px-4 py-2 text-right tabular-nums text-gray-500 dark:text-gray-400">{fmtEuro(ergebnis.gesamtSv)} €</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2 pl-8 text-xs text-gray-500 dark:text-gray-400">
+                    davon AG-Anteil (= Gesamtbeitrag − AN-Anteil)
+                  </td>
+                  <td className="px-4 py-2 text-right tabular-nums text-gray-500 dark:text-gray-400">{fmtEuro(ergebnis.agSv)} €</td>
+                </tr>
+              </>
+            )}
+            {!ergebnis.imBereich && (
+              <tr>
+                <td className="px-4 py-2.5 text-gray-500 dark:text-gray-400">AG-Sozialversicherung (normal, halber Satz)</td>
+                <td className="px-4 py-2.5 text-right tabular-nums text-gray-500 dark:text-gray-400">{fmtEuro(ergebnis.agSv)} €</td>
+              </tr>
+            )}
           </tbody>
         </table>
         {ergebnis.imBereich && (
           <p className="px-4 py-2 text-xs text-gray-500 dark:text-gray-400 border-t border-gray-100 dark:border-gray-700">
-            F-Faktor 0,6847 für 2026 — jährlich neu von den SV-Spitzenverbänden festgesetzt (§ 20a Abs. 2 SGB IV).
+            F-Faktor <strong>{fFaktorAnzeige}</strong> für {jahrAnzeige} — jährlich neu von den SV-Spitzenverbänden festgesetzt (§ 20a Abs. 2 SGB IV, gemeinsames Rundschreiben GKV-Spitzenverband / DRV Bund / BA).
           </p>
         )}
       </div>
 
+      {/* § 163 Abs. 10 SGB VI — Info-Hinweis: Volle Rentenansprüche trotz reduzierter BE */}
+      {ergebnis.imBereich && (
+        <div className="mb-6 rounded-xl bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 px-4 py-3 flex gap-2 items-start">
+          <span className="text-blue-600 dark:text-blue-400 text-sm leading-tight" aria-hidden="true">ℹ️</span>
+          <p className="text-xs text-blue-800 dark:text-blue-300 leading-relaxed">
+            <strong>Volle SV-Ansprüche trotz reduzierter Beiträge:</strong> Im Übergangsbereich
+            zahlen Sie weniger AN-SV, behalten aber die <strong>vollen Ansprüche</strong> auf
+            Krankengeld, Arbeitslosengeld und Rente (§ 163 Abs. 10 SGB VI).
+            Die Rentenpunkte werden auf Basis der Gesamt-Bemessungsgrundlage gutgeschrieben,
+            nicht auf der AN-BE. Der Arbeitgeber trägt den Differenzbetrag zwischen
+            Gesamtbeitrag und Ihrem AN-Anteil.
+          </p>
+        </div>
+      )}
+
       {!ergebnis.imBereich && ergebnis.b > MIDIJOB_OBERGRENZE && (
         <div className="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/30 rounded-xl p-4 mb-6">
           <p className="text-red-800 dark:text-red-300 text-sm">
-            <strong>⚠️ Kein Midijob:</strong> Ihr Verdienst liegt über 2.000 €. Es gelten volle SV-Beiträge. Nutzen Sie den <a href="/finanzen/brutto-netto-rechner" className="underline">Brutto-Netto-Rechner</a>.
+            <strong>⚠️ Kein Midijob:</strong> Ihr Verdienst liegt über 2.000 €. Der Übergangsbereich endet bei der Obergrenze OG — es gelten volle SV-Beiträge (halber Satz für AN auf das volle Brutto). Nutzen Sie den <a href="/finanzen/brutto-netto-rechner" className="underline">Brutto-Netto-Rechner</a>.
+          </p>
+        </div>
+      )}
+
+      {!ergebnis.imBereich && ergebnis.b > 0 && ergebnis.b < untergrenze && (
+        <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-6">
+          <p className="text-amber-800 dark:text-amber-300 text-sm">
+            <strong>⚠️ Dies ist ein Minijob, kein Midijob:</strong> Ihr Verdienst liegt auf oder unter der Geringfügigkeitsgrenze ({fmtUntergrenze.replace(',01', '')} €). Für Minijobs zahlt der Arbeitgeber Pauschalabgaben, der AN-Beitrag ist in der Regel nur der RV-Pflichtanteil (3,6 %). Nutzen Sie den <a href="/finanzen/minijob-rechner" className="underline">Minijob-Rechner</a>.
           </p>
         </div>
       )}

@@ -1813,15 +1813,15 @@ Auch Freelancer können den Hochrechner nutzen, um Ihren Tages- oder Stundensatz
     metaDescription: 'Midijob berechnen: Reduzierte SV-Beiträge im Übergangsbereich 603–2.000 € ✓ Netto ✓ Ersparnis ✓ KI-Erklärung.',
     keywords: ['midijob rechner', 'übergangsbereich', 'midijob 2026', 'midijob netto', 'gleitzone', 'beitragspflichtige einnahme', 'faktor f'],
     icon: '💶',
-    formel: 'BE (AN) = F × 2.000 + ((2.000 − 2.000 × F) / (2.000 − 603)) × (Brutto − 603) mit F = 0,6847 | AN-SV = BE × 21 % | AG-SV = Brutto × 21 %',
-    beispiel: '1.200 € Brutto, Steuerklasse I, kinderlos: Beitragspflichtige Einnahme ca. 990 € → AN-SV ca. 215 € → Netto ca. 985 € (ca. 40 € Ersparnis gegenüber regulärer Beschäftigung).',
+    formel: 'BE_gesamt = F × G + ((OG − F × G) / (OG − G)) × (Brutto − G) (§ 20a Abs. 2 SGB IV, für Gesamtbeitrag und RV-Entgeltpunkte) | BE_AN = (OG / (OG − G)) × (Brutto − G) (§ 20a Abs. 2a SGB IV, für AN-Anteil) | G = 603 € Geringfügigkeitsgrenze, OG = 2.000 € Obergrenze, F = 0,6619 (2026) | AN-SV = BE_AN × 21 % | AG-SV = BE_gesamt × 42 % − AN-SV',
+    beispiel: '1.500 € Brutto, Steuerklasse I, kinderlos: BE_gesamt ≈ 1.427 € (für Rentenansprüche), BE_AN ≈ 1.284 € → AN-SV ca. 257 € → Netto ca. 1.145 € (ca. 30 € Ersparnis gegenüber regulärer Beschäftigung, Arbeitgeber trägt den Differenzbetrag).',
     erklaerung: `**Midijob 2026 — Der Übergangsbereich einfach erklärt**
 
 Der **Midijob** (offiziell: Beschäftigung im Übergangsbereich) ist eine sozialversicherungspflichtige Beschäftigung mit einem monatlichen Verdienst zwischen **603,01 Euro und 2.000 Euro**. Er liegt damit genau zwischen dem [Minijob](/finanzen/minijob-rechner) (bis 603 €) und der regulären Beschäftigung (ab 2.000 €). Ziel des Übergangsbereichs ist es, den sprunghaften Anstieg der Sozialabgaben an der Minijob-Grenze abzufedern.
 
 **Reduzierte Arbeitnehmer-Beiträge**
 
-Im Übergangsbereich werden die **Arbeitnehmer-Sozialversicherungsbeiträge** auf eine **reduzierte beitragspflichtige Einnahme (BE)** berechnet — nicht auf das tatsächliche Brutto. Die Formel: BE = F × 2.000 + ((2.000 − 2.000 × F) / (2.000 − 603)) × (Brutto − 603), mit dem Faktor F = 0,6847 (2026). Das Ergebnis: An der unteren Grenze (603,01 €) beginnen die Beiträge mit dem halben Regelsatz, an der oberen Grenze (2.000 €) sind sie dem regulären Satz angeglichen. Dazwischen steigt der Beitrag linear an. **Wichtig:** Arbeitgeber-Beiträge werden weiterhin auf das volle Brutto berechnet.
+Seit 01.10.2022 gibt es **zwei getrennte Bemessungsgrundlagen** im Übergangsbereich: Die BE_gesamt nach § 20a Abs. 2 SGB IV zählt für Gesamtbeitrag und Rentenpunkte, die BE_AN nach § 20a Abs. 2a SGB IV ist die reduzierte Basis für den Arbeitnehmer-Anteil. An der Untergrenze 603 € beginnt die BE_AN bei null — der AN zahlt faktisch keine Sozialversicherung. An der Obergrenze 2.000 € laufen beide Formeln zusammen und der Übergangsbereich endet. Der Faktor F = 0,6619 (2026) wird jährlich vom BMAS in einem gemeinsamen Rundschreiben der Spitzenverbände der Sozialversicherung festgesetzt. Den Differenzbetrag zwischen Gesamtbeitrag und Arbeitnehmer-Anteil trägt der Arbeitgeber — deutlich mehr als die übliche Hälfte.
 
 **Volle Rentenansprüche trotz Rabatt**
 
