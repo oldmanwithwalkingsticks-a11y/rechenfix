@@ -108,8 +108,8 @@ export default function CookieBanner() {
 
                 {/* Marketing */}
                 <CookieToggle
-                  label="Marketing-Cookies (Google AdSense)"
-                  description="Ermöglichen die Anzeige personalisierter Werbung und die Erfassung von Affiliate-Klicks in Google Analytics."
+                  label="Marketing-Cookies (Google AdSense, Amazon Associates)"
+                  description="Ermöglichen die Anzeige personalisierter Werbung, die Erfassung von Affiliate-Klicks in Google Analytics und das Setzen des Amazon-Partner-Tags (rechenfix-21) für Zuordnung von Käufen aus dem Amazon-Partnerprogramm."
                   checked={marketing}
                   disabled={false}
                   onChange={setMarketing}

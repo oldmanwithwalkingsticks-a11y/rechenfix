@@ -221,6 +221,9 @@ export default function DatenschutzSeite() {
               </li>
             </ul>
             <p className="mt-3">
+              Zusätzlich nehmen wir am <strong>Amazon Partner-Programm</strong> (Amazon EU S.à r.l., 38 avenue John F. Kennedy, L-1855 Luxemburg) teil, das eigenständig außerhalb des Awin-Netzwerks betrieben wird. Weitere Details dazu in Abschnitt 9b.
+            </p>
+            <p className="mt-3">
               Bei Klick auf einen Affiliate-Link werden Sie auf die Website des Anbieters weitergeleitet. Dort gelten die Datenschutzbestimmungen des jeweiligen Anbieters. Die Affiliate-Links werden über das Netzwerk der <strong>Awin AG</strong> (Eichhornstraße 3, 10785 Berlin) vermittelt. Awin kann dabei einen Tracking-Cookie setzen, um die Zuordnung des Kaufs zu ermöglichen.
             </p>
             <p className="mt-3">
@@ -228,6 +231,25 @@ export default function DatenschutzSeite() {
             </p>
             <p className="mt-3">
               Die Einbindung von Affiliate-Links erfolgt auf Grundlage unseres berechtigten Interesses an der Finanzierung unseres kostenlosen Angebots (Art. 6 Abs. 1 lit. f DSGVO). Affiliate-Links sind auf unserer Website stets als &bdquo;Anzeige&ldquo; gekennzeichnet.
+            </p>
+          </Section>
+
+          {/* 9b. Amazon-Partnerprogramm */}
+          <Section nr="9b" titel="Amazon-Partnerprogramm">
+            <p>
+              Rechenfix.de ist Teilnehmer am Partnerprogramm von Amazon EU S.à r.l. (Amazon Associates Germany), einem Affiliate-Programm, das Websites die Möglichkeit bietet, durch das Platzieren von Werbelinks zu <a href="https://www.amazon.de" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-400 underline">amazon.de</a> Werbekostenerstattungen zu verdienen.
+            </p>
+            <p className="mt-3">
+              Auf ausgewählten Rechner-Seiten (z. B. Rezept-Umrechner, Pace-Rechner, Heizkosten-Rechner, Umzugskosten-Rechner) zeigen wir eine als &bdquo;Anzeige&ldquo; gekennzeichnete Amazon-Box mit einem thematisch passenden <strong>Suchlink</strong> (z. B. &bdquo;digitale Küchenwaage&ldquo; auf dem Rezept-Umrechner). Es werden keine individualisierten Produktempfehlungen getroffen — der Link führt zur Amazon-Suchergebnisseite für das angegebene Stichwort.
+            </p>
+            <p className="mt-3">
+              Bei erteilter Einwilligung in Marketing-Cookies hängen wir an den Amazon-Suchlink unseren Partner-Tag <code className="px-1 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-xs">tag=rechenfix-21</code> an. Amazon kann damit einen Kauf, den Sie innerhalb ihres Tracking-Zeitfensters tätigen, unserer Website zuordnen und uns eine Provision auszahlen. Ohne erteilte Einwilligung wird der Tag <strong>nicht</strong> übermittelt — der Link bleibt funktionsfähig, aber eine Zuordnung als Referral unterbleibt.
+            </p>
+            <p className="mt-3">
+              Sobald Sie auf amazon.de landen, gelten die Datenschutzbestimmungen von Amazon. Amazon setzt dort eigene Cookies, die wir nicht kontrollieren und die technisch unabhängig von unserem Tag sind. Weitere Informationen finden Sie in Amazons <a href="https://www.amazon.de/gp/help/customer/display.html?nodeId=201909010" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-400 underline">Datenschutzerklärung</a>.
+            </p>
+            <p className="mt-3">
+              Die Einbindung von Amazon-Werbelinks erfolgt auf Grundlage Ihrer Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO (für den gesetzten Tag) bzw. unseres berechtigten Interesses an der Finanzierung des Angebots (Art. 6 Abs. 1 lit. f DSGVO) für die bloße Anzeige der Box. Ihre Einwilligung können Sie jederzeit im Cookie-Banner widerrufen.
             </p>
           </Section>
 

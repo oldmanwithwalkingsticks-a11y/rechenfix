@@ -144,9 +144,12 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="border-t border-primary-600 dark:border-gray-800 py-5 text-center text-primary-300 dark:text-gray-500 text-sm">
-          &copy; {new Date().getFullYear()} Rechenfix.de — Alle Angaben ohne Gewähr.
+        {/* Copyright + Amazon-Partner-Pflichthinweis */}
+        <div className="border-t border-primary-600 dark:border-gray-800 py-5 text-center text-primary-300 dark:text-gray-500 text-sm space-y-1">
+          <p>&copy; {new Date().getFullYear()} Rechenfix.de — Alle Angaben ohne Gewähr.</p>
+          <p className="text-xs text-primary-400 dark:text-gray-600">
+            Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.
+          </p>
         </div>
       </div>
     </footer>
