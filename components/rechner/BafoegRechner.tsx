@@ -168,7 +168,14 @@ export default function BafoegRechner() {
                   <option key={n} value={n}>{n}{n === 0 ? ' (keine)' : ''}</option>
                 ))}
               </select>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Geschwister unter 25 in Ausbildung (erhöht den Freibetrag)</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 leading-relaxed">
+                Jedes angegebene Geschwister erhöht den Elternfreibetrag um 730 €/Monat
+                (§ 25 Abs. 3 BAföG) und senkt die Anrechnungsquote um 5 %-Punkte
+                (§ 25 Abs. 6 BAföG). Für Geschwister mit eigenem BAföG-Bezug gilt
+                zusätzlich eine Aufteilungsregel nach § 11 Abs. 4 BAföG, die hier
+                vereinfacht abgebildet ist — der vom BAföG-Amt berechnete Wert
+                kann im Einzelfall abweichen.
+              </p>
             </div>
           )}
         </div>
@@ -356,6 +363,20 @@ export default function BafoegRechner() {
                 </tbody>
               </table>
             </div>
+          </div>
+
+          {/* Disclaimer-Block — Vereinfachungen gegenüber BAföG-Amt */}
+          <div className="mb-6 rounded-xl bg-gray-50 dark:bg-gray-800/40 border border-gray-200 dark:border-gray-700 px-3 py-2.5 flex gap-2 items-start">
+            <span className="text-gray-500 dark:text-gray-400 text-sm leading-tight" aria-hidden="true">ℹ️</span>
+            <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+              <strong className="font-semibold text-gray-700 dark:text-gray-300">Vereinfachte Schätzung — Abweichungen möglich.</strong>{' '}
+              Dieser Rechner bildet die Grundmechanik nach §§ 13, 13a, 25 BAföG ab.
+              Nicht berücksichtigt sind: Härtefallregelungen (§ 25 Abs. 6 BAföG),
+              die Aufteilungsregel für Geschwister mit eigenem BAföG-Bezug
+              (§ 11 Abs. 4 BAföG), elternunabhängige Förderung (§ 11 Abs. 3 BAföG)
+              sowie Sonderfälle bei Selbstständigkeit oder schwankendem Einkommen.
+              Der vom BAföG-Amt erlassene Bescheid ist rechtsverbindlich.
+            </p>
           </div>
 
           {/* Rückzahlungs-Info (nur Studium) */}

@@ -432,3 +432,17 @@ Fix in [components/rechner/BuergergeldRechner.tsx](../../components/rechner/Buer
 Lib unberührt — `buergergeld.ts` und `buergergeld-parameter.ts` weiterhin identisch zu Prompt 121. Verify-Scripts bleiben 19/19 grün.
 
 **Stufe 4b jetzt endgültig P1+P2-komplett ohne offene UI-Lücken.**
+
+---
+
+## Nachtrag Prompt 121-geschwister-label (22.04.2026) — UI-Transparenz BAföG-Geschwister
+
+Im Anschluss an den Analyse-Report [`bafoeg-geschwister-analyse.md`](bafoeg-geschwister-analyse.md):
+
+- **UI-Label für Geschwister-Feld präzisiert** ([`BafoegRechner.tsx:171`](../../components/rechner/BafoegRechner.tsx#L171)): Help-Text nennt jetzt **beide** Effekte (+ 730 €/Monat Freibetrag nach § 25 Abs. 3 BAföG **und** − 5 %-Punkte Anrechnungsquote nach § 25 Abs. 6 BAföG). Zusätzlicher Hinweis auf § 11 Abs. 4 BAföG als vereinfacht abgebildet.
+- **Disclaimer-Block unter der Aufschlüsselung** (neuer `bg-gray-50`-Info-Block oberhalb der Rückzahlungs-Tabelle, Layout analog zum KdU-Hinweis im BuergergeldRechner): Verweist explizit auf §§ 11 Abs. 3 + 4 BAföG, § 25 Abs. 6 Härtefall sowie Sonderfälle bei Selbstständigkeit/schwankendem Einkommen. Der bestehende amber-Hinweis am Fuß („tatsächliche Berechnung durch das BAföG-Amt …") bleibt zusätzlich bestehen.
+- **Netto-Display-Label geprüft** — Fall A bestätigt: Der angezeigte Wert ist `nettoEltern` direkt aus der Lib (unverändert durch Geschwisterzahl). Karstens Screenshot-Beobachtung „3.489 → 2.206 €" lässt sich damit **nicht reproduzieren** und ist vermutlich durch eine zusätzliche Eingabeänderung (z. B. Familienstand-Switch „verheiratet → getrennt" lässt Elternteil 2 wegfallen) oder einen Display-Lesefehler (Freibetrag-Wert statt Netto) entstanden. **Keine** Label-Korrektur nötig.
+
+**Keine Änderung an der Lib-Logik** — [`lib/berechnungen/bafoeg.ts`](../../lib/berechnungen/bafoeg.ts) und [`bafoeg-parameter.ts`](../../lib/berechnungen/bafoeg-parameter.ts) identisch zu Prompt 121. Verify-Scripts weiterhin 16/16 grün. Testfall mit 0 Geschwistern liefert weiter denselben Wert, Testfall mit 2 Geschwistern ebenso.
+
+**Offener Punkt für Prompt 122 oder separaten Folge-Prompt:** echte § 11 Abs. 4-Aufteilungsregel als zweites Input-Feld („Weitere Geschwister mit eigenem BAföG-Bezug") mit Formel `anrechnungEltern / (1 + gefoerderteGeschwister)`. Aktuell aus Scope — 121-geschwister-label schafft nur Transparenz, keine Verhaltensänderung.
