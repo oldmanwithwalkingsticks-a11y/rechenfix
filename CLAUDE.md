@@ -297,7 +297,7 @@ export function getAktuelleXxxParameter(stichtag: Date = new Date()): XxxParamet
 | Minijob-Grenze | 603 € / Monat (Jahr: 7.236 €) | 01.01.2027 auf 633 € | `mindestlohn.ts` | § 8 SGB IV |
 | Midijob-Untergrenze | 603,01 € / Monat | 01.01.2027 | `mindestlohn.ts`, abgeleitet in `midijob-uebergang.ts` (`getMidijobUntergrenze`) | § 20 SGB IV |
 | Midijob-Obergrenze | 2.000 €/Monat | keine (seit 01.01.2023) | `midijob-uebergang.ts` (`MIDIJOB_OBERGRENZE_MONAT`) | § 20a SGB IV |
-| Midijob F-Faktor | 0,6847 (jährlich neu) | 01.01.2027 | `midijob-uebergang.ts` (`FAKTOR_F_2026`) | § 20a Abs. 2 SGB IV |
+| Midijob F-Faktor | **0,6619** (2026, jährlich neu) | 01.01.2027 | `midijob-parameter.ts` (`MIDIJOB_2026.faktorF` seit Prompt 125a) + Re-Export aus `midijob-uebergang.ts` | § 20a Abs. 2 SGB IV |
 | BBG KV/PV | 5.812,50 € / Monat (69.750 € / Jahr) | 01.01.2027 | `brutto-netto.ts` als `BBG_KV_MONAT` | SV-RechengrößenVO 2026 |
 | BBG RV (einheitlich) | 8.450 € / Monat (101.400 € / Jahr) | 01.01.2027 | `brutto-netto.ts` als `BBG_RV_MONAT` | SV-RechengrößenVO 2026 |
 | JAEG / Versicherungspflichtgrenze | 77.400 € / Jahr (6.450 € / Monat) | 01.01.2027 | `sv-parameter.ts` als `JAEG_2026_*` | BMG |

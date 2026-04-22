@@ -187,3 +187,43 @@
 | MwSt-Rückerst. | 1 | — | — | — |
 
 **Regression-Nutzung:** Nach jedem Fix-Pass (Prompt 115/116/117) diese Testfälle nachrechnen. Besonderer Fokus auf MJ-01–MJ-05, weil der BE-Formel-Fix sehr sensitiv auf Eingabewerte reagiert.
+
+---
+
+## Midijob-Testfälle Prompt 125a (22.04.2026)
+
+Automatisiert in [`scripts/verify-midijob-p1.ts`](../../scripts/verify-midijob-p1.ts) (21/21 grün). Alle Soll-Werte aus § 20a SGB IV abgeleitet (nicht-zirkulär).
+
+### Parameter-Konstanten (Gruppe 1)
+
+- **PARAMS-F:** `getAktuelleMidijobParameter().faktorF === 0,6619` (BMAS-Bekanntmachung 2026, gemeinsames Rundschreiben der SV-Spitzenverbände)
+- **PARAMS-G:** Geringfügigkeitsgrenze = 603 € (§ 8 Abs. 1a SGB IV)
+- **PARAMS-OG:** Obergrenze = 2.000 € (konstant seit 01.01.2023)
+- **FORMEL-FG:** `faktorGesamt = (OG − F×G) / (OG − G) ≈ 1,145937`
+- **FORMEL-FAN:** `faktorAN = OG / (OG − G) ≈ 1,431639` (F-unabhängig)
+- **FORMEL-KAN:** `konstanteAN = faktorAN × G ≈ 863,278`
+
+### BE-Stützpunkte (Gruppe 2)
+
+- **MJ-01a (UG = 603,01):** BE_gesamt ≈ 399,14 € (= F × G minimal angepasst)
+- **MJ-01b (UG = 603,01):** BE_AN ≈ 0,01 € (AN zahlt faktisch nichts)
+- **MJ-02a (AE = 1.500):** BE_gesamt = **1.427,03 €** (Oracle DRV-Rechner)
+- **MJ-02b (AE = 1.500):** BE_AN = **1.284,18 €** (Oracle DRV-Rechner)
+- **MJ-02c (Invariante):** BE_AN < BE_gesamt (AN-Vorteil existiert strukturell)
+- **MJ-03a (OG = 2.000):** BE_gesamt = 2.000 € (Konvergenz, kein Midijob-Effekt)
+- **MJ-03b (OG = 2.000):** BE_AN = 2.000 € (Konvergenz)
+- **MJ-04 (AE = 500 < UG):** istImUebergangsbereich = false, BE-Funktionen liefern NaN
+- **MJ-05 (AE = 2.500 > OG):** istImUebergangsbereich = false, normale SV-Berechnung
+
+### Soli + Steuerklassen (Gruppen 3+4)
+
+- **MJ-SOLI (AE = 2.000, StKl I):** Soli = **0 €** (Jahres-Brutto 24.000 € < Soli-Freigrenze 20.350 € ESt)
+- **MJ-STKL-BASIS:** LSt StKl I bei 18k Jahres-Brutto > 0
+- **MJ-STKL-NO-1.15:** Verhältnis LSt_V / LSt_I ≠ 1,15 (kein erfundener Faktor — § 39b PAP-konform)
+
+### AG-Anteil-Invarianten (Gruppe 5)
+
+- **MJ-AG-UG:** An UG ist BE_gesamt > 2 × BE_AN → AG trägt deutlich mehr als halbe Last
+- **MJ-AG-OG:** An OG konvergiert BE_gesamt = BE_AN → normale halbe Teilung
+
+**Oracle-Verify für Karsten:** MJ-02a/b gegen den DRV-Übergangsbereichsrechner auf `deutsche-rentenversicherung.de/…übergangsbereich` cross-checken, Toleranz ±1 € wegen Rundungsdifferenzen zwischen Rechnern.

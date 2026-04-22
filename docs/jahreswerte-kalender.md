@@ -180,7 +180,8 @@
 6. [ ] **Pendlerpauschale**: Politische Lage prüfen (Änderungs-Diskussionen?)
 7. [ ] **PV-Beitragssätze**: Änderungen bei § 55 SGB XI?
 8. [ ] **Midijob F-Faktor** § 20a Abs. 2 SGB IV (wird jährlich aus den Durchschnittsbeitragssätzen abgeleitet, gemeinsames Rundschreiben GKV-Spitzenverband / DRV Bund / BA):
-   - `FAKTOR_F_2026` in `lib/berechnungen/midijob-uebergang.ts` → Wert für (X+1) prüfen und ggf. neue Konstante `FAKTOR_F_{X+1}` + Default anpassen
+   - 2026: `F = 0,6619` in `MIDIJOB_2026` in [`lib/berechnungen/midijob-parameter.ts`](../lib/berechnungen/midijob-parameter.ts) (seit Prompt 125a)
+   - Für (X+1): Neuen Bucket `MIDIJOB_{X+1}` mit aktualisiertem F + ggf. neuer Geringfügigkeitsgrenze G anlegen, Kaskade in `getAktuelleMidijobParameter(stichtag)` ergänzen (Stichtag-Switch 01.01.)
    - Quelle: https://www.gkv-spitzenverband.de/ (gemeinsame Rundschreiben)
 9. [ ] **Lohnsteuer-PAP** § 39b EStG (BMF/ITZBund veröffentlicht den neuen Programmablaufplan typischerweise Oktober/November für das Folgejahr):
    - XML-Pseudocode herunterladen: `https://www.bmf-steuerrechner.de/javax.faces.resource/daten/xmls/Lohnsteuer{JAHR}.xml.xhtml`

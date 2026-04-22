@@ -435,3 +435,103 @@ Diese Items werden erst aufgegriffen, wenn konkreter User-Bedarf oder ein Jahres
 ### Welle-Abschluss
 
 Mit 117 ist die Stufe-4a-Audit-Welle inhaltlich abgeschlossen. Der Lohnsteuer-Voll-PAP-Refactor (Ersatz der 115b2-Lookup-Tabellen durch § 39b Abs. 2 Satz 7 EStG-Volltariff) bleibt als separater Wochenend-Kandidat außerhalb der Welle.
+
+---
+
+## Nachtrag Prompt 125a (22.04.2026) — Midijob-Rechner strukturell nachgeschärft
+
+Der Midijob-Rechner war nach 115a/116/117 weitgehend gefixt, aber eine
+tieferliegende strukturelle Lücke blieb: **BE_gesamt und BE_AN wurden nicht
+getrennt berechnet**. Die Lib-Funktion `berechneBemessungsgrundlageAN` hat
+faktisch die § 20a Abs. 2-Formel (BE_gesamt) gerechnet, das Ergebnis aber
+als „BE_AN" bezeichnet. Dadurch wurde der AN-Beitragsanteil überschätzt
+und der AG-Anteil als `Brutto × halber Satz` vereinfacht (Code-Kommentar
+„Display-Wert, keine Midijob-AG-Logik"). Seit 01.10.2022 (§ 20a Abs. 2a
+SGB IV) sind die beiden BE-Formeln aber wirklich getrennt — AN zahlt
+weniger als in 115a impliziert, AG trägt den Differenzbetrag.
+
+Zusätzlich war der **F-Faktor 2026 noch auf 0,6847** (alter 2024er-Wert
+aus 115a-Dokumentation) statt aktuell **0,6619** gemäß BMAS-Bekanntmachung /
+gemeinsamem Rundschreiben der SV-Spitzenverbände für 2026.
+
+### Änderungen Prompt 125a
+
+**Lib (zwei Dateien):**
+- **Neu:** [`lib/berechnungen/midijob-parameter.ts`](../../lib/berechnungen/midijob-parameter.ts)
+  als SSOT mit Stichtag-Switch-Pattern. Interface `MidijobParameter`
+  (G, OG, F, quelle, gueltigAb), Konstante `MIDIJOB_2026` (G = 603,
+  OG = 2.000, **F = 0,6619**), Getter `getAktuelleMidijobParameter()`,
+  Helper `getBeitragsFormeln()` liefert die vier Linearform-Koeffizienten
+  (faktorGesamt, konstanteGesamt, faktorAN, konstanteAN) — abgeleitet
+  aus G/OG/F, nicht hartkodiert.
+- **Refactor:** [`lib/berechnungen/midijob-uebergang.ts`](../../lib/berechnungen/midijob-uebergang.ts)
+  trennt jetzt `berechneBemessungsgrundlageGesamt` (§ 20a Abs. 2) und
+  `berechneBemessungsgrundlageAN` (§ 20a Abs. 2a — F-unabhängig, startet
+  bei AE = G mit 0). Beide nutzen `getBeitragsFormeln()` zur Konstanten-
+  Ableitung. F-Faktor-Export bleibt als Re-Export aus Parameter-Lib
+  (Abwärtskompatibilität für bestehende Konsumenten).
+
+**UI ([`components/rechner/MidijobRechner.tsx`](../../components/rechner/MidijobRechner.tsx)):**
+- Berechnet und zeigt jetzt **BE_gesamt UND BE_AN** als separate
+  Aufschlüsselungs-Zeilen mit Paragraph-Referenz (§ 20a Abs. 2 / Abs. 2a).
+- **AG-Anteil** berechnet sich korrekt als `Gesamtbeitrag − AN-Anteil`
+  (= im Übergangsbereich deutlich mehr als die halbe Last, bei UG fast
+  der gesamte Beitrag).
+- **Neuer blauer Info-Hinweis** unter der Tabelle zu § 163 Abs. 10 SGB VI:
+  „Volle SV-Ansprüche trotz reduzierter Beiträge — Rentenpunkte auf
+  BE_gesamt-Basis, AG trägt Differenz."
+- **Validierungshinweise:** Bei AE < UG (Minijob) amber Hinweis mit
+  Verweis auf Minijob-Rechner; bei AE > OG roter Hinweis mit Verweis
+  auf Brutto-Netto-Rechner.
+- **F-Faktor dynamisch** aus Parameter-Lib (statt hartkodiert im Text).
+  Jahreswechsel 2027 greift ohne UI-Änderung.
+
+**Verify ([`scripts/verify-midijob-p1.ts`](../../scripts/verify-midijob-p1.ts)):**
+21 Testfälle, alle gegen externe Rechtsquellen (§ 20a SGB IV, § 163 SGB VI,
+BMAS-Bekanntmachung). Struktur:
+- GRUPPE 1: Formel-Konstanten aus Parametern abgeleitet (F=0,6619, G=603,
+  OG=2.000, faktorGesamt≈1,145937, faktorAN≈1,431639, konstanteAN≈863,278)
+- GRUPPE 2: MJ-01 bis MJ-05 — BE-Werte an Stützpunkten (UG, Mitte, OG,
+  außerhalb). MJ-02 (AE = 1.500): BE_gesamt = 1.427,03 €, BE_AN = 1.284,18 €
+  — Karsten-Cross-Check gegen DRV-Übergangsbereichsrechner.
+- GRUPPE 3: MJ-SOLI — Soli = 0 € bei Max-Midijob (Jahres-Brutto 24.000 € <
+  Soli-Freigrenze 20.350 € ESt).
+- GRUPPE 4: MJ-STKL — Verhältnis StKl V/I ≠ 1,15 (kein erfundener Faktor).
+- GRUPPE 5: AG-Invarianten — BE_gesamt > 2 × BE_AN an UG (AG trägt mehr
+  als die Hälfte), BE_gesamt = BE_AN an OG (Konvergenz).
+
+**Ergebnis:** 21/21 grün.
+
+### Regressionen
+
+Alle bestehenden Verify-Scripts weiterhin grün nach dem Refactor:
+verify-afbg 35/35, verify-bafoeg-p2 16/16, verify-bafoeg-p3 20/20,
+verify-buergergeld-p2 19/19, verify-buergergeld-p3 21/21,
+verify-pfaendung-p2 11/11, verify-erbst-haertefall 16/16,
+verify-unterhalt-2026 alle grün, verify-wohngeld-p1 42/42.
+
+### Numerischer Impact für typischen Midijob
+
+AE = 1.500 €/Monat, StKl I, keine Kinder:
+- **Vorher (115a-Stand, F = 0,6847):** „BE_AN" (eigentlich BE_gesamt)
+  ≈ 1.432 €, AN-SV ≈ 287 €, AG-SV ≈ 300 € (Brutto × halber Satz, vereinfacht).
+- **Nachher (125a-Stand, F = 0,6619, korrekte Trennung):**
+  - BE_gesamt = 1.427,03 €, BE_AN = 1.284,18 €
+  - AN-SV ≈ 257 € (−30 €/Monat AN-Vorteil sichtbar)
+  - Gesamtbeitrag ≈ 571 €, AG-SV ≈ 314 € (AG trägt mehr als halbe Last)
+
+Der AN-Vorteil wird damit sichtbar und korrekt ausgewiesen — statt vorher
+verschleiert durch die fehlerhafte „BE_AN"-Bezeichnung der BE_gesamt-Werte.
+
+### Offene Punkte nach 125a
+
+- **Stichtag-Switch 01.01.2027** vorbereitet (Parameter-Lib bereit für
+  neuen Bucket `MIDIJOB_2027` mit G = 633, neuer F). Nur bei BMAS-
+  Bekanntmachung eintragen.
+- **Kinderlos-Zuschlag im Gesamtbeitrag:** Aktuelle Näherung
+  `gesamtSvSatz = anSvSatz × 2` überschätzt den AG-Anteil minimal, weil
+  der Kinderlos-Zuschlag nur vom AN getragen wird. Präzisionsverlust
+  im 0,3 €-Bereich bei Max-Midijob — nicht priorisiert.
+- **Prompt 125b** adressiert die verbleibenden Rechner aus Stufe 4a
+  (Erbschaft, Schenkung, KESt, AfA, Firmenwagen, MwSt) — diese wurden
+  aber in 115c/116/117 bereits weitgehend gefixt; 125b klärt Reststand.
