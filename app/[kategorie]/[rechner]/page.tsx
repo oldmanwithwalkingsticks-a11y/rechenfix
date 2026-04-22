@@ -81,6 +81,7 @@ import SplittingRechner from '@/components/rechner/SplittingRechner';
 import AutokostenRechner from '@/components/rechner/AutokostenRechner';
 import WohngeldRechner from '@/components/rechner/WohngeldRechner';
 import BafoegRechner from '@/components/rechner/BafoegRechner';
+import AfbgRechner from '@/components/rechner/AfbgRechner';
 import KindergeldRechner from '@/components/rechner/KindergeldRechner';
 import PflegegeldRechner from '@/components/rechner/PflegegeldRechner';
 import SswRechner from '@/components/rechner/SswRechner';
@@ -278,6 +279,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'autokosten-rechner': AutokostenRechner,
   'wohngeld-rechner': WohngeldRechner,
   'bafoeg-rechner': BafoegRechner,
+  'aufstiegs-bafoeg-rechner': AfbgRechner,
   'kindergeld-rechner': KindergeldRechner,
   'pflegegeld-rechner': PflegegeldRechner,
   'ssw-rechner': SswRechner,

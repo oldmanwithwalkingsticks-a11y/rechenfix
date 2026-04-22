@@ -847,6 +847,26 @@ export const rechner: RechnerLight[] = [
     "icon": "🎓"
   },
   {
+    "slug": "aufstiegs-bafoeg-rechner",
+    "titel": "Aufstiegs-BAföG-Rechner",
+    "beschreibung": "Aufstiegs-BAföG („Meister-BAföG\") berechnen: Zuschuss, Darlehen und Unterhaltsbeitrag für Meister, Techniker, Fachwirt und vergleichbare Aufstiegsfortbildungen.",
+    "kategorie": "Finanzen",
+    "kategorieSlug": "finanzen",
+    "keywords": [
+      "aufstiegs-bafög",
+      "meister-bafög",
+      "afbg",
+      "aufstiegs-bafög rechner",
+      "meister bafög 2026",
+      "meister bafög rechner",
+      "kfw aufstiegs-bafög",
+      "aufstiegsfortbildungsförderungsgesetz",
+      "fortbildungsförderung",
+      "meisterkurs finanzieren"
+    ],
+    "icon": "🧑‍🏭"
+  },
+  {
     "slug": "kindergeld-rechner",
     "titel": "Kindergeld-Rechner",
     "beschreibung": "Kindergeld 2026 berechnen und Günstigerprüfung: Kindergeld oder Kinderfreibetrag — was lohnt sich für Ihr Einkommen?",

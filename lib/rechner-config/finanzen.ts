@@ -1237,6 +1237,68 @@ Den BAföG-Antrag stellen Sie beim zuständigen Studenten- oder Schülerwerk (be
     ],
   },
   {
+    slug: 'aufstiegs-bafoeg-rechner',
+    titel: 'Aufstiegs-BAföG-Rechner',
+    beschreibung: 'Aufstiegs-BAföG („Meister-BAföG") berechnen: Zuschuss, Darlehen und Unterhaltsbeitrag für Meister, Techniker, Fachwirt und vergleichbare Aufstiegsfortbildungen.',
+    kategorie: 'Finanzen',
+    kategorieSlug: 'finanzen',
+    metaTitle: 'Aufstiegs-BAföG 2026 — Meister-BAföG',
+    metaDescription: 'Aufstiegs-BAföG 2026 berechnen: Zuschuss, Darlehen und Vollzuschuss-Unterhalt für Meister, Techniker, Fachwirt ✓ Erlass-Szenarien ✓ KI-Erklärung.',
+    keywords: ['aufstiegs-bafög', 'meister-bafög', 'afbg', 'aufstiegs-bafög rechner', 'meister bafög 2026', 'meister bafög rechner', 'kfw aufstiegs-bafög', 'aufstiegsfortbildungsförderungsgesetz', 'fortbildungsförderung', 'meisterkurs finanzieren'],
+    icon: '🧑‍🏭',
+    formel: 'Maßnahmebeitrag: min(Lehrgangskosten, 15.000 €) × 50 % Zuschuss + 50 % KfW-Darlehen (+ max. 2.000 € Meisterstück) | Unterhaltsbeitrag (nur Vollzeit, 100 % Vollzuschuss): 1.019 € + 235 € je Ehegatte/Kind + 150 € Kinderbetreuungszuschlag pro Kind unter 14 − Einkommensanrechnung | Erlass: 50 % Bestehen + 100 % Rest bei Gründung ≥ 3 Jahre Haupterwerb',
+    beispiel: 'Meisterkurs Handwerk, Vollzeit, 12.000 € Lehrgangskosten, kein Einkommen, keine Kinder → Maßnahme: 6.000 € Zuschuss + 6.000 € KfW-Darlehen | Unterhaltsbeitrag: 1.019 €/Monat Vollzuschuss | Nach Bestehens-Erlass (50 %) zurückzuzahlen: 3.000 € | Bei Gründung zusätzlich 100 % Rest-Erlass: 0 €.',
+    erklaerung: `**Was ist Aufstiegs-BAföG (Meister-BAföG)?**
+
+Das Aufstiegs-BAföG nach dem Aufstiegsfortbildungsförderungsgesetz (AFBG) unterstützt berufliche Aufstiegsfortbildungen — also Meister, Techniker, Fachwirt, Betriebswirt, Erzieher (Abschluss mit staatlicher Anerkennung), Industriemeister und weitere Qualifikationen über dem Facharbeiter-Niveau. Die Förderung ist **elternunabhängig** und hat keine Altersgrenze. Auch Zweitausbildungen werden gefördert, solange keine vergleichbare Qualifikation bereits erreicht wurde. Der Antrag geht an die Landesämter für Ausbildungsförderung. Rechtliche Grundlage ist die 2024er Neufassung durch das 29. BAföG-Änderungsgesetz, die Bedarfssätze und Zuschussanteile deutlich angehoben hat.
+
+**Wie setzt sich die Förderung zusammen?**
+
+Zwei unabhängige Komponenten: Der **Maßnahmebeitrag** nach § 12 AFBG deckt bis zu **15.000 Euro** Lehrgangs- und Prüfungsgebühren pro Fortbildung (50 % Zuschuss + 50 % zinsgünstiges KfW-Darlehen). Zusätzlich werden bis zu **2.000 Euro** Materialkosten für das Meisterstück oder Prüfungsstück im selben Verhältnis gefördert. Der Maßnahmebeitrag ist **einkommens- und vermögensunabhängig**. Der **Unterhaltsbeitrag** nach § 10 AFBG gibt es nur bei Vollzeit-Maßnahmen: **1.019 Euro pro Monat für Alleinstehende** (seit 01.08.2024, vorher 892 Euro), zuzüglich 235 Euro pro Ehegatten oder kindergeldberechtigtem Kind, dazu 150 Euro Kinderbetreuungszuschlag je Kind unter 14. Seit dem 29. BAföG-ÄndG ist der Unterhaltsbeitrag ein **100 % Vollzuschuss** — keine Rückzahlung nötig.
+
+**Bestehens- und Gründer-Erlass: die zwei Joker**
+
+Hier liegt die eigentliche Stärke des Aufstiegs-BAföG gegenüber gewöhnlichen Krediten. Bei **bestandener Abschlussprüfung** werden 50 Prozent des noch nicht fälligen Lehrgangsdarlehens erlassen (§ 13b Abs. 1 AFBG — „Bestehens-Erlass"). Wer sich anschließend selbständig macht und mindestens drei Jahre im Haupterwerb ein Unternehmen führt, bekommt das **verbleibende Restdarlehen zu 100 % erlassen** (§ 13b Abs. 2 AFBG — „Gründer-Erlass", seit 2020 ohne Mitarbeiter-Pflicht). Im besten Fall zahlen Sie also vom gesamten Lehrgangsdarlehen **überhaupt nichts zurück**. Diese Mechanik ist vor allem für Handwerksmeister interessant, die nach der Ausbildung einen eigenen Betrieb gründen wollen.
+
+**Einkommensanrechnung beim Unterhaltsbeitrag**
+
+Das Elterneinkommen wird beim Aufstiegs-BAföG **nicht** angerechnet — AFBG ist konzeptionell ein Instrument für Berufstätige. Angerechnet werden nur eigenes Einkommen, das Einkommen des Ehegatten oder Lebenspartners sowie das eigene Vermögen. Freibeträge: 603 Euro pro Monat Bruttoeinkommen für den Antragsteller (entspricht der Minijob-Grenze 2026), 850 Euro für den Ehepartner und 770 Euro pro kindergeldberechtigtem Kind. Der Vermögensfreibetrag beträgt 45.000 Euro plus je 2.300 Euro pro Ehegatten und Kind. Über diesen Grenzen fließen übersteigende Beträge zu 50 Prozent in die Anrechnung ein (je Kind minus 5 Prozent-Punkte bis auf null). Vergleichen Sie alternativ auch Ihren Anspruch auf [reguläres BAföG](/finanzen/bafoeg-rechner) oder [Bürgergeld](/finanzen/buergergeld-rechner).
+
+**Rückzahlung und Freistellung**
+
+Der Darlehens-Anteil läuft über die KfW. Während der Fortbildung und in der zwei Jahre dauernden Karenzzeit bleibt das Darlehen zinsfrei und muss nicht getilgt werden (insgesamt maximal sechs Jahre zins- und tilgungsfrei). Danach liegt die Mindestrate bei **128 Euro pro Monat**. Bei geringem eigenem Einkommen lässt sich eine Freistellung von der Rückzahlung beantragen (§ 13a AFBG). Bei Tod wird das Restdarlehen automatisch erlassen. Wer vor dem Bestehens-Erlass durchgefallen ist, kann die Prüfung nachholen und den Erlass dann noch in Anspruch nehmen. Für eine präzise Einzelberechnung und den formalen Antrag nutzen Sie bitte den [offiziellen Rechner auf aufstiegs-bafoeg.de](https://www.aufstiegs-bafoeg.de/).
+
+**Antrag und Zuständigkeit**
+
+Der Antrag wird beim zuständigen Landesamt für Ausbildungsförderung gestellt (manche Bundesländer nennen es „Amt für Ausbildungsförderung") — nicht bei der KfW und nicht beim BAföG-Amt der Hochschule. Beilagen: FormBlatt 1 + Einkommensnachweise, Lehrgangsvertrag, Nachweise über beruflichen Werdegang. Die Bearbeitung dauert je nach Bundesland 4 bis 12 Wochen. AFBG wird ab dem Monat der Antragstellung gewährt — nicht rückwirkend. Stellen Sie den Antrag daher vor Lehrgangsbeginn. Bei Fragen zur beruflichen Weiterbildung hilft auch die [Pendlerpauschale](/arbeit/pendlerpauschale-rechner) bei der steuerlichen Absetzung von Fahrten zum Lehrgangsort.`,
+    faq: [
+      {
+        frage: 'Wer bekommt Aufstiegs-BAföG?',
+        antwort: 'Alle Teilnehmer an förderfähigen Aufstiegsfortbildungen ab Niveaustufe 5 des Deutschen Qualifikationsrahmens (Meister, Techniker, Fachwirt, Betriebswirt, Erzieher mit staatlicher Anerkennung, Industriemeister u. a.). Voraussetzung ist in der Regel eine abgeschlossene Erstausbildung oder eine mindestens zweijährige einschlägige Berufstätigkeit. Keine Altersgrenze, keine Elterneinkommens-Anrechnung.',
+      },
+      {
+        frage: 'Wie viel Aufstiegs-BAföG kann ich maximal bekommen?',
+        antwort: 'Beim Maßnahmebeitrag 15.000 € Lehrgangskosten (7.500 € Zuschuss + 7.500 € Darlehen) plus bis zu 2.000 € Meisterstück-Materialkosten (50/50). Beim Unterhaltsbeitrag als Vollzeit-Alleinstehender 1.019 € pro Monat, mit Familienzuschlägen und Kinderbetreuungszuschlag deutlich mehr. Der Unterhaltsbeitrag ist seit dem 29. BAföG-ÄndG ein 100 % Vollzuschuss — keine Rückzahlung.',
+      },
+      {
+        frage: 'Was ist der Bestehens- und Gründer-Erlass?',
+        antwort: 'Bei bestandener Abschlussprüfung werden 50 % des bis dahin nicht fälligen Lehrgangsdarlehens erlassen (§ 13b Abs. 1 AFBG). Zusätzlich kann bei Existenzgründung im Haupterwerb mit mindestens drei Jahren Führung das verbleibende Restdarlehen zu 100 % erlassen werden (§ 13b Abs. 2 AFBG, seit 2020 ohne Mitarbeiter-Pflicht). Im Bestfall zahlen Sie 0 Euro zurück.',
+      },
+      {
+        frage: 'Was ist der Unterschied zum normalen BAföG?',
+        antwort: 'Reguläres BAföG ist für Erstausbildungen (Schüler/Studium). Aufstiegs-BAföG ist speziell für berufliche Aufstiegsfortbildungen wie Meister oder Techniker. Wichtige Unterschiede: Keine Elterneinkommens-Anrechnung, keine Altersgrenze, kein Höchstsatz-Limit (abhängig von Lehrgangskosten), zusätzlich Förderung der Lehrgangsgebühren bis 15.000 €, Bestehens- und Gründer-Erlass als besondere Anreize.',
+      },
+      {
+        frage: 'Bekomme ich Aufstiegs-BAföG auch bei Teilzeit-Fortbildung?',
+        antwort: 'Ja, aber nur den Maßnahmebeitrag (Lehrgangs- und Prüfungsgebühren). Den Unterhaltsbeitrag nach § 10 AFBG gibt es nur bei Vollzeit-Maßnahmen, weil die Teilzeit-Teilnahme neben einer Erwerbstätigkeit erfolgt. In der Praxis ist die Teilzeit-Variante bei berufsbegleitenden Fortbildungen (z. B. abends/wochenends) der Standardfall.',
+      },
+      {
+        frage: 'Wo beantrage ich Aufstiegs-BAföG?',
+        antwort: 'Beim Amt für Ausbildungsförderung Ihres Bundeslandes — nicht bei der KfW und nicht beim BAföG-Amt der Hochschule. Die zuständigen Ämter unterscheiden sich je Bundesland; Kontakte finden Sie auf aufstiegs-bafoeg.de. Der Antrag muss vor Lehrgangsbeginn gestellt werden — rückwirkend wird nicht bewilligt. Bearbeitungszeit: je nach Bundesland 4 bis 12 Wochen.',
+      },
+    ],
+  },
+  {
     slug: 'kindergeld-rechner',
     titel: 'Kindergeld-Rechner',
     beschreibung: 'Kindergeld 2026 berechnen und Günstigerprüfung: Kindergeld oder Kinderfreibetrag — was lohnt sich für Ihr Einkommen?',

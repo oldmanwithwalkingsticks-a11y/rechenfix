@@ -125,6 +125,27 @@
 | Warmwasserzuschlag (altersgestaffelt) | 2,3 % / 1,4 % / 1,2 % / 0,8 % pro Person | § 21 Abs. 7 SGB II | — | `buergergeld-parameter.ts` | — | 22.04.2026 |
 | Bürgergeld H2 „Neue Grundsicherung" | **Skeleton** — Parameter identisch zu H1 bis Gesetzestext | Koalitions-Entwurf, Stand 04/2026 | — | `buergergeld-parameter.ts` (`BUERGERGELD_2026_H2`) | **01.07.2026 Switch aktiv (noch ohne Effekt)** | 22.04.2026 |
 
+### Aufstiegs-BAföG (AFBG — neu Prompt 124, 22.04.2026)
+
+| Parameter | Wert ab 01.08.2024 | Rechtsgrundlage | Bekanntgabe | Zentrale Lib | Switch | Letzter Check |
+|---|---|---|---|---|---|---|
+| Maßnahme-Höchstbetrag Lehrgang | 15.000 € | § 12 Abs. 1 Nr. 1 AFBG | 29. BAföG-ÄndG v. 23.07.2024 | `afbg-parameter.ts` (`massnahme.lehrgangskostenMax`) | nächste Anhebung offen | 22.04.2026 |
+| Maßnahme-Zuschussanteil | 50 % | § 12 Abs. 2 AFBG | — | `afbg-parameter.ts` | — | 22.04.2026 |
+| Meisterstück-Höchstbetrag | 2.000 € | § 12 Abs. 3 AFBG | wie oben | `afbg-parameter.ts` | — | 22.04.2026 |
+| Unterhalt Grundbedarf Vollzeit | 1.019 €/Monat | § 10 Abs. 2 AFBG | wie oben | `afbg-parameter.ts` (`unterhalt.alleinstehendVZ`) | nächste BAföG-Novelle | 22.04.2026 |
+| Ehegatten-/Kinder-Zuschlag | 235 €/Monat je | § 10 Abs. 3 AFBG | wie oben | `afbg-parameter.ts` | — | 22.04.2026 |
+| Kinderbetreuungszuschlag (< 14 J.) | 150 €/Monat je Kind | § 10 Abs. 3a AFBG | wie oben | `afbg-parameter.ts` (`unterhalt.kinderbetreuungZuschlag`) | — | 22.04.2026 |
+| Unterhalt Rückzahlung | **100 % Vollzuschuss** | § 10 AFBG i.d.F. 29. BAföG-ÄndG | seit 01.08.2024 | `afbg-parameter.ts` | — | 22.04.2026 |
+| Einkommens-Freibetrag Antragsteller | 603 €/Monat | § 17b AFBG + § 23 BAföG-analog (Minijob-Grenze 2026) | — | `afbg-parameter.ts` (`freibetraege.antragstellerBrutto`) | mit Minijob-Grenze | 22.04.2026 |
+| Einkommens-Freibetrag Ehegatte | 850 €/Monat | § 25 Abs. 1 BAföG-analog | — | `afbg-parameter.ts` | — | 22.04.2026 |
+| Einkommens-Freibetrag pro Kind | 770 €/Monat | § 25 Abs. 3 BAföG-analog | — | `afbg-parameter.ts` | — | 22.04.2026 |
+| Anrechnungsquote | 50 % − 5 %/Kind (min 0, max 50) | § 25 Abs. 4 BAföG-analog | — | `getAfbgAnrechnungsquote()` | — | 22.04.2026 |
+| Vermögens-Freibetrag | 45.000 € + 2.300 € je Ehegatte/Kind | § 29 BAföG-analog | — | `afbg-parameter.ts` (`vermoegen.grundfreibetrag`) | **Unsicherheit: für unter-30-Jährige könnte 15.000 € greifen** | 22.04.2026 |
+| Bestehens-Erlass | 50 % des nicht fälligen Lehrgangsdarlehens | § 13b Abs. 1 AFBG | — | `afbg-parameter.ts` (`erlass.bestehensErlassQuote`) | — | 22.04.2026 |
+| Gründer-Erlass | 100 % Rest nach Bestehen bei Gründung ≥ 3 J. | § 13b Abs. 2 AFBG (seit 2020 ohne Mitarbeiter-Pflicht) | — | `afbg-parameter.ts` (`erlass.gruenderErlassQuote`) | — | 22.04.2026 |
+| Darlehens-Karenzzeit | 24 Monate (max. 72 gesamt) | § 13 Abs. 2 AFBG | — | `afbg-parameter.ts` (`darlehen.karenzzeitMonate`) | — | 22.04.2026 |
+| Rückzahlungs-Mindestrate | 128 €/Monat | § 13 Abs. 5 AFBG | — | `afbg-parameter.ts` (`darlehen.mindestrateMonat`) | — | 22.04.2026 |
+
 ---
 
 ## 🔔 Audit-Routine
@@ -199,11 +220,19 @@
 **Checkliste:**
 
 1. [ ] **BAföG-Bedarfssätze / Wohnpauschalen / KV+PV-Zuschläge** (§ 13 + § 13a BAföG, typische Erhöhung alle 2 Jahre via BAföG-ÄndG):
-   - Grundbedarf Studium/Schule
+   - Grundbedarf Studium/Schule (nach Schulform, § 12 BAföG)
    - Wohnpauschale auswärts + bei Eltern
    - KV/PV-Zuschlag bis 30 J. + ab 30 J.
-   - `BEDARF`, `WOHNPAUSCHALE`, `KV_ZUSCHLAG`, `PV_ZUSCHLAG` in `bafoeg.ts`
+   - `bafoeg-parameter.ts` — neue `BAFOEG_AB_YYYY_08_01`-Konstante + Getter-Kaskade
    - Quelle: https://www.bmbf.de/ + BAföG-Gesetz i.d.F. des jeweiligen ÄndG
+
+2. [ ] **AFBG-Bedarfssätze (Aufstiegs-BAföG)** — meist gleichzeitig mit BAföG-ÄndG angehoben:
+   - Unterhaltsbeitrag Grundbedarf (1.019 €)
+   - Ehegatten-/Kinder-Zuschlag (235 €)
+   - Kinderbetreuungszuschlag (150 €)
+   - Maßnahme-Höchstbetrag Lehrgang (15.000 €) und Meisterstück (2.000 €) — diese ändern sich seltener als die Unterhaltssätze
+   - `afbg-parameter.ts` — neue `AFBG_AB_YYYY_08_01`-Konstante + Getter-Kaskade (analog `bafoeg-parameter.ts`)
+   - Quelle: https://www.aufstiegs-bafoeg.de/ + AFBG i.d.F. des jeweiligen ÄndG
 
 ### Wohngeld-Dynamisierung (2-jährlich, typisch Herbst vor Inkrafttreten)
 
@@ -232,10 +261,12 @@ Wenn ein Gesetz verabschiedet wird, das einen Parameter ändert (z. B. StÄndG 2
 
 Neue Einträge oben anfügen.
 
-### 2026-04-22 — Stufe-4b-Ergänzung (Prompt 121 + 122-doku-sync)
+### 2026-04-22 — Stufe-4b-Ergänzung (Prompt 121 + 122-doku-sync) + AFBG (Prompt 124)
 - Neue Sektion **BAföG** mit 16 Parametern (Bedarfe, Zuschläge, Freibeträge, Anrechnungsquote) aus `bafoeg-parameter.ts`
 - Neue Sektion **Bürgergeld** mit 12 Parametern (Regelsätze RSS1–6, Mehrbedarfe § 21 Abs. 2–7 SGB II, Warmwasser-Staffel) aus `buergergeld-parameter.ts`
+- Neue Sektion **Aufstiegs-BAföG (AFBG)** mit 16 Parametern (Maßnahme-/Unterhaltsbeitrag, Erlass-Quoten, Freibeträge, Darlehensmechanik) aus `afbg-parameter.ts` — Prompt 124 neuer Rechner
 - Zwei neue Stichtag-Switches dokumentiert: BAföG WS 2026/27 (Skeleton bis Verordnung) und Bürgergeld H2 „Neue Grundsicherung" zum 01.07.2026 (Skeleton bis Gesetzestext)
+- August-Audit-Checkliste um AFBG erweitert (typisch gleichzeitige BAföG/AFBG-Anhebung)
 - Wohngeld-Lib ist vorübergehend Explainer-Mode (Prompt 120d) — Wohngeld-Dynamisierung-Checkliste bleibt für 120c-Refactoring im Juni 2026 relevant
 
 ### 2026-04-19 — Initial-Befüllung
