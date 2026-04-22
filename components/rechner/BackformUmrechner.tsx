@@ -6,6 +6,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { AmazonBox } from '@/components/AmazonBox';
 
 type FormTyp = 'rund' | 'rechteckig' | 'kasten';
 
@@ -192,6 +193,11 @@ export default function BackformUmrechner() {
           </table>
         </div>
       </div>
+
+      <AmazonBox
+        keyword="silikon backform"
+        description="Wenn die vorhandene Backform nicht passt, kommt oft eine neue ins Haus. Silikonformen lösen sich leicht und sind spülmaschinenfest."
+      />
 
       <CrossLink href="/kochen/backzeit-rechner" emoji="⏲️" text="Backzeit anpassen" />
       <CrossLink href="/kochen/rezept-umrechner" emoji="📝" text="Rezept auf Portionen umrechnen" />

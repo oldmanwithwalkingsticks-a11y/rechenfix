@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import { AmazonBox } from '@/components/AmazonBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 export default function HeizkostenRechner() {
@@ -153,6 +154,10 @@ export default function HeizkostenRechner() {
           <CrossLink href="/wohnen/nebenkosten-rechner" emoji="🏠" text="Alle Nebenkosten berechnen" />
           <CrossLink href="/wohnen/waermepumpen-rechner" emoji="🔥" text="Wärmepumpe: Sparen gegenüber Gas/Öl?" />
           <AffiliateBox programId="check24" context="heizkosten" />
+          <AmazonBox
+            keyword="heizkörperthermostat"
+            description="Programmierbare Thermostatköpfe senken die Nachttemperatur automatisch — pro Raum je nach Nutzungsmuster 5–10 % Heizenergie."
+          />
         </>
       )}
     </div>

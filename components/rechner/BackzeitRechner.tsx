@@ -7,6 +7,7 @@ import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { AmazonBox } from '@/components/AmazonBox';
 
 type Herdart = 'ou' | 'umluft' | 'gasmark';
 
@@ -251,6 +252,11 @@ export default function BackzeitRechner() {
           <strong>🎯 Stäbchenprobe — der ultimative Test:</strong> Stechen Sie 5 Minuten vor der berechneten Endzeit ein Holzstäbchen in die dickste Stelle. Bleibt kein Teig kleben → Kuchen ist fertig. Klebt noch Teig → weitere 3–5 Minuten backen. Bei Brownies und saftigen Kuchen soll das Stäbchen leicht feucht bleiben.
         </p>
       </div>
+
+      <AmazonBox
+        keyword="fleischthermometer digital"
+        description="Die Stäbchenprobe ist gut — ein digitales Thermometer im Teig ist genauer. Piept, wenn die Zieltemperatur erreicht ist."
+      />
 
       <CrossLink href="/kochen/backform-umrechner" emoji="🎂" text="Backform umrechnen" />
       <CrossLink href="/kochen/rezept-umrechner" emoji="📝" text="Rezept auf Portionen umrechnen" />

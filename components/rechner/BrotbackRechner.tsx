@@ -6,6 +6,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { AmazonBox } from '@/components/AmazonBox';
 
 type BrotTyp = 'weiss' | 'misch' | 'roggen' | 'sauerteig' | 'toast';
 type Triebmittel = 'hefe' | 'sauerteig' | 'kombi';
@@ -374,6 +375,11 @@ export default function BrotbackRechner() {
           </table>
         </div>
       </div>
+
+      <AmazonBox
+        keyword="brotbackform gusseisen"
+        description="Gleichmäßige Kruste, perfekte Form — eine Brotbackform aus Gusseisen oder schwerem Stahl macht den Unterschied zwischen Frei­schiebe-Experiment und stabilem Laib."
+      />
 
       <CrossLink href="/kochen/pizzateig-rechner" emoji="🍕" text="Pizzateig-Rechner mit Bäckerprozenten" />
       <CrossLink href="/kochen/hefe-umrechner" emoji="🥖" text="Hefe umrechnen: Frisch ↔ Trocken" />

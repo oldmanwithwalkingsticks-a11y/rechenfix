@@ -9,6 +9,7 @@ import { clampInputValue } from '@/lib/zahlenformat';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import { AmazonBox } from '@/components/AmazonBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 const fmtEuro = (n: number) =>
@@ -318,6 +319,13 @@ export default function PendlerpauschaleRechner() {
 
       {ergebnis && (
         <AffiliateBox programId="wiso" context="pendlerpauschale" />
+      )}
+
+      {ergebnis && (
+        <AmazonBox
+          keyword="handyhalterung auto"
+          description="Für den täglichen Pendelweg: Sichere Handyhalterung im Auto erleichtert Navigation und hält die Hände frei — verkehrssicherheitskonform."
+        />
       )}
 
       {/* Disclaimer */}

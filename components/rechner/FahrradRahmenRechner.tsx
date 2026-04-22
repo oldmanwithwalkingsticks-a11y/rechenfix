@@ -8,6 +8,7 @@ import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { AmazonBox } from '@/components/AmazonBox';
 
 export default function FahrradRahmenRechner() {
   const [koerpergroesse, setKoerpergroesse] = useState('178');
@@ -127,6 +128,11 @@ export default function FahrradRahmenRechner() {
               </p>
             </div>
           )}
+
+          <AmazonBox
+            keyword="fahrrad computer"
+            description="Geschwindigkeit, Distanz, Durchschnitt — ein Fahrradcomputer macht Trainingsfortschritte sichtbar."
+          />
 
           <CrossLink href="/mathe/einheiten-umrechner" emoji="📏" text="Zoll in Zentimeter umrechnen" />
           <CrossLink href="/auto/autokosten-rechner" emoji="🚗" text="Autokosten berechnen — Alternative zum Rad?" />

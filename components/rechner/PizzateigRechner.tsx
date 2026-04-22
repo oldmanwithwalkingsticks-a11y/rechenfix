@@ -6,6 +6,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { AmazonBox } from '@/components/AmazonBox';
 
 type HefeArt = 'frisch' | 'trocken';
 type Gehzeit = 'direkt' | '8h' | '24h' | '48h';
@@ -231,6 +232,11 @@ export default function PizzateigRechner() {
           <strong>💡 Bäckerprozente:</strong> Alle Mengen sind relativ zum Mehlgewicht (= 100 %). {hyd} % Hydration bedeutet: {fmt(ergebnis.wasser, 0)} g Wasser auf {fmt(ergebnis.mehl, 0)} g Mehl. Weniger Hefe + längere Gehzeit = mehr Aroma und bessere Verdaulichkeit.
         </p>
       </div>
+
+      <AmazonBox
+        keyword="pizzastein"
+        description="Knusprige Unterseite wie beim Italiener: Ein vorgeheizter Pizzastein speichert Hitze und gibt sie direkt an den Teig ab."
+      />
 
       <CrossLink href="/kochen/hefe-umrechner" emoji="🥖" text="Hefe umrechnen: Frisch ↔ Trocken ↔ Lievito Madre" />
       <CrossLink href="/kochen/brotback-rechner" emoji="🍞" text="Brotback-Rechner: Zutaten für 5 Brottypen" />

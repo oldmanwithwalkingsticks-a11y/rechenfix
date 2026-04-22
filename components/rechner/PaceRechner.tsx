@@ -7,6 +7,7 @@ import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { AmazonBox } from '@/components/AmazonBox';
 
 type Modus = 'pace' | 'zeit' | 'distanz';
 
@@ -363,6 +364,11 @@ export default function PaceRechner() {
           </table>
         </div>
       </div>
+
+      <AmazonBox
+        keyword="laufschuhe"
+        description="Passende Laufschuhe machen den Unterschied zwischen entspannten Kilometern und Shin-Splints. Vergleichen Sie Dämpfung, Sprengung und Gewicht."
+      />
 
       <CrossLink href="/sport/herzfrequenz-zonen-rechner" emoji="❤️" text="Herzfrequenz-Zonen berechnen" />
       <CrossLink href="/gesundheit/kalorienrechner" emoji="🔥" text="Kalorienverbrauch berechnen" />

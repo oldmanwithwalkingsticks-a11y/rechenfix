@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { AmazonBox } from '@/components/AmazonBox';
 
 type Einheit = 'g' | 'kg' | 'ml' | 'l' | 'EL' | 'TL' | 'Stück' | 'Prise' | 'Bund' | 'Dose' | 'Becher';
 
@@ -330,6 +331,11 @@ export default function RezeptUmrechner() {
           <strong>💡 Backrezepte:</strong> Bei Verdopplung bleibt die Backzeit fast gleich — nur die Formgröße muss angepasst werden. Salz und scharfe Gewürze lieber 20 % weniger einrechnen und am Ende abschmecken. Ab Faktor 3 besser in zwei Durchgängen backen.
         </p>
       </div>
+
+      <AmazonBox
+        keyword="digitale küchenwaage"
+        description="Exakte Grammwerte beim Umrechnen — eine digitale Küchenwaage macht die neue Zutatenmenge sofort portionsgerecht."
+      />
 
       <CrossLink href="/kochen/cups-umrechner" emoji="🥣" text="Cups in Gramm umrechnen" />
       <CrossLink href="/alltag/einheiten-umrechner" emoji="📏" text="Einheiten umrechnen" />

@@ -8,6 +8,7 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
+import { AmazonBox } from '@/components/AmazonBox';
 
 const GROESSE_SCHNELLWAHL = [
   { label: '30 m² (1 Zi.)', wert: 30 },
@@ -377,6 +378,11 @@ export default function UmzugskostenRechner() {
               <strong>Hinweis:</strong> Die Kosten sind Richtwerte und können je nach Region, Saison und Anbieter variieren. Holen Sie mindestens 3 Angebote von Umzugsfirmen ein. In der Hauptsaison (Mai-September) liegen die Preise meist 20-30% höher.
             </p>
           </div>
+
+          <AmazonBox
+            keyword="umzugskartons 30 stück"
+            description="Stabile Umzugskartons im Mehrfach-Set sind günstiger als einzeln gekauft und lassen sich nach dem Umzug zusammenfalten."
+          />
 
           <CrossLink href="/wohnen/mietrechner" emoji="🏠" text="Neue Miete berechnen" />
           <CrossLink href="/wohnen/nebenkosten-rechner" emoji="📋" text="Nebenkosten der neuen Wohnung" />

@@ -7,6 +7,7 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
+import { AmazonBox } from '@/components/AmazonBox';
 
 type Modus = 'raum' | 'flaeche';
 type Qualitaet = 'standard' | 'premium' | 'spezial';
@@ -208,6 +209,11 @@ export default function MalerkostenRechner() {
           <strong>⏱️ Zeitschätzung:</strong> ca. {fmt(ergebnis.selbstDauer)} Stunden für {anstriche} Anstriche (Hobby-Streicher ≈ 5 m²/h).
         </div>
       )}
+
+      <AmazonBox
+        keyword="wandfarbe weiß 10 liter"
+        description="Wenn Sie selbst streichen: Ein 10-Liter-Gebinde Innenfarbe reicht je nach Deckkraft für zwei Anstriche auf rund 60–80 m²."
+      />
 
       <CrossLink href="/wohnen/tapetenbedarf-rechner" emoji="🧻" text="Tapetenbedarf-Rechner" />
       <CrossLink href="/wohnen/quadratmeter-rechner" emoji="📐" text="Quadratmeter-Rechner" />

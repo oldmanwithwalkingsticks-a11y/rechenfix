@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { AmazonBox } from '@/components/AmazonBox';
 
 type Eingabemodus = 'schnell' | 'detail';
 
@@ -265,6 +266,11 @@ export default function TapetenbedarfRechner() {
               <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmt(ergebnis.verschnittFlaeche)} m²</p>
             </div>
           </div>
+
+          <AmazonBox
+            keyword="tapete raufaser"
+            description="Klassische Raufasertapete deckt kleine Wandrisse mit und lässt sich danach in Wunschfarbe überstreichen."
+          />
 
           <CrossLink href="/wohnen/malerkosten-rechner" emoji="🎨" text="Malerkosten für den Raum berechnen" />
           <CrossLink href="/wohnen/quadratmeter-rechner" emoji="📐" text="Quadratmeter genau ausrechnen" />

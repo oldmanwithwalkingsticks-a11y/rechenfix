@@ -5,6 +5,7 @@ import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { AmazonBox } from '@/components/AmazonBox';
 
 type Lebensmittel = 'ei' | 'nudeln' | 'reis' | 'kartoffeln' | 'gemuese';
 
@@ -354,6 +355,11 @@ export default function KochzeitRechner() {
           )}
         </>
       )}
+
+      <AmazonBox
+        keyword="fleischthermometer digital"
+        description="Bei Fleisch, Fisch oder Geflügel ist die Kerntemperatur die sicherste Garprobe. Ein digitales Thermometer zeigt sie sekundengenau."
+      />
 
       <CrossLink href="/kochen/rezept-umrechner" emoji="📝" text="Rezept auf Portionen umrechnen" />
       <CrossLink href="/kochen/backzeit-rechner" emoji="⏲️" text="Backzeit anpassen" />

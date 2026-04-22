@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import { AmazonBox } from '@/components/AmazonBox';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
@@ -157,6 +158,10 @@ export default function SpritkostenRechner() {
 
           <AffiliateBox programId="check24" context="spritkosten" variant="compact" />
           <AffiliateBox programId="hotelde" context="spritkosten" variant="compact" />
+          <AmazonBox
+            keyword="kraftstoffzusatz"
+            description="Injektorreiniger und Kraftstoffzusätze können bei älteren Motoren helfen, Ablagerungen zu lösen und den Verbrauch zu senken."
+          />
         </>
       )}
     </div>
