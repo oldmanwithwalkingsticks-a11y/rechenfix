@@ -5,8 +5,15 @@
 // Sobald der BruttoNetto-Rechner eine Bundesland-abhängige PV-Erhöhung abbildet,
 // ist diese Konstante hier zu ergänzen.
 
-const BASIS_AN              = 0.018;  // 1,8 % AN-Anteil bei Basissatz 3,6 %
-const ZUSCHLAG_KINDERLOS    = 0.006;  // +0,6 pp nach § 55 Abs. 3 Satz 1 (AN trägt voll)
+/**
+ * PV-Basissatz hälftig (§ 58 Abs. 1 SGB XI): 1,8 % für AN-Seite.
+ * Identisch zum AG-Anteil — AG trägt **immer** nur 1,8 % (ohne Kinderlos-
+ * Zuschlag nach § 59 Abs. 5 SGB XI, ohne Kinderabschlag § 55 Abs. 3 SGB XI).
+ * Abschläge und Zuschläge wirken ausschließlich AN-seitig.
+ */
+export const PV_BASIS_SATZ_2026 = 0.018;
+const BASIS_AN              = PV_BASIS_SATZ_2026;
+const ZUSCHLAG_KINDERLOS    = 0.006;  // +0,6 pp nach § 59 Abs. 5 SGB XI (AN trägt voll)
 const ABSCHLAG_PRO_KIND     = 0.0025; // -0,25 pp pro berücksichtigungsfähiges Kind 2–5
 const MAX_ABSCHLAEGE        = 4;      // gedeckelt bei 5. Kind → 4 Abschläge
 

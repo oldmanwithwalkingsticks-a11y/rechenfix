@@ -29,6 +29,9 @@ import {
 } from '../lib/berechnungen/midijob-parameter';
 import { berechneLohnsteuerJahr } from '../lib/berechnungen/lohnsteuer';
 import { berechneSoli } from '../lib/berechnungen/einkommensteuer';
+import { KV_BASISSATZ_AN_2026, RV_SATZ_AN_2026, AV_SATZ_AN_2026 } from '../lib/berechnungen/brutto-netto';
+import { KV_ZUSATZBEITRAG_AN_DURCHSCHNITT_2026 } from '../lib/berechnungen/sv-parameter';
+import { pvAnteilAn2026, PV_BASIS_SATZ_2026 } from '../lib/berechnungen/pflegeversicherung';
 
 interface Fall {
   name: string;
@@ -213,6 +216,84 @@ cases.push({
     name: 'MJ-AG Invariante OG: BE_gesamt = BE_AN (kein Midijob-Effekt)',
     actual: Math.abs(beGesamtOG - beAnOG) < 0.01 ? 1 : 0, expected: 1,
     quelle: 'An OG: beide Formeln konvergieren auf OG',
+  });
+}
+
+// ============================================================================
+// GRUPPE 6: MJ-AG-RECHT — AG-Anteil OHNE Kinderlos-Zuschlag (Prompt 125a-fix)
+// § 59 Abs. 5 SGB XI: Der Kinderlos-Zuschlag (0,6 %) ist ausschließlich vom
+// Arbeitnehmer zu tragen. In 125a rechnete der Code `gesamtSvSatz = anSvSatz × 2`
+// und verdoppelte damit den Zuschlag — AG-Anteil systematisch um 0,6 %-Punkte
+// (×BE_gesamt/2) überhöht. Diese Tests verhindern den Bug strukturell.
+// ============================================================================
+
+const SV_AN_OHNE_PV = RV_SATZ_AN_2026 + KV_BASISSATZ_AN_2026 + KV_ZUSATZBEITRAG_AN_DURCHSCHNITT_2026 + AV_SATZ_AN_2026;
+const agSvSatz = SV_AN_OHNE_PV + PV_BASIS_SATZ_2026;
+
+cases.push({
+  name: 'MJ-AG-RECHT agSvSatz = 21,15 % (paritätisch, ohne Kinderlos-Zuschlag)',
+  actual: agSvSatz, expected: 0.2115, tol: 0.00001,
+  quelle: '§ 58 Abs. 1 SGB XI + §§ 249 SGB V / 168 SGB VI / 346 SGB III — paritätische Hälfte',
+});
+
+{
+  // Bei 0 Kindern + ≥23: AN-Satz = AG-Satz + Kinderlos-Zuschlag (0,6 %)
+  const anSvSatzKinderlos = SV_AN_OHNE_PV + pvAnteilAn2026(0, true, false);
+  cases.push({
+    name: 'MJ-AG-RECHT AN − AG = 0,6 % bei 0 Kindern (Kinderlos-Zuschlag nur AN)',
+    actual: anSvSatzKinderlos - agSvSatz, expected: 0.006, tol: 0.00001,
+    quelle: '§ 59 Abs. 5 SGB XI: Zuschlag ausschließlich AN',
+  });
+  // Gesamtsatz korrekt: 42,9 % (= AN 21,75 % + AG 21,15 %), NICHT 43,5 %
+  const gesamtSvSatzKinderlos = anSvSatzKinderlos + agSvSatz;
+  cases.push({
+    name: 'MJ-AG-RECHT gesamtSvSatz bei 0 Kindern = 42,9 % (nicht 43,5 %)',
+    actual: gesamtSvSatzKinderlos, expected: 0.429, tol: 0.00001,
+    quelle: 'Kinderlos-Zuschlag nur einmal (AN-Seite), nicht verdoppelt',
+  });
+}
+
+// MJ-AG-PARITAET: Bei 1 Kind → kein Kinderlos-Zuschlag, AN-Satz = AG-Satz
+{
+  const anSvSatz1Kind = SV_AN_OHNE_PV + pvAnteilAn2026(1, true, false);
+  cases.push({
+    name: 'MJ-AG-PARITAET bei 1 Kind: anSvSatz = agSvSatz (echte Parität)',
+    actual: Math.abs(anSvSatz1Kind - agSvSatz), expected: 0, tol: 0.00001,
+    quelle: 'Ohne Kinderlos-Zuschlag identische Sätze AN/AG',
+  });
+  const gesamtSvSatz1Kind = anSvSatz1Kind + agSvSatz;
+  cases.push({
+    name: 'MJ-AG-PARITAET gesamtSvSatz bei 1 Kind = 42,3 %',
+    actual: gesamtSvSatz1Kind, expected: 0.423, tol: 0.00001,
+    quelle: 'KV 14,6 + Zusatz 2,9 + RV 18,6 + ALV 2,6 + PV 3,6 = 42,3',
+  });
+}
+
+// Konkrete €-Beträge für Testfall aus Analyse-Report (AE = 1.500, 0 Kinder):
+// AN-SV = 279,31 €, gesamtSv = 612,20 €, agSv = 332,89 €
+{
+  const beGesamt = berechneBemessungsgrundlageGesamt(1500);
+  const beAn = berechneBemessungsgrundlageAN(1500);
+  const anSvSatzTest = SV_AN_OHNE_PV + pvAnteilAn2026(0, true, false);
+  const gesamtSvSatzTest = anSvSatzTest + agSvSatz;
+  const anSv = beAn * anSvSatzTest;
+  const gesamtSv = beGesamt * gesamtSvSatzTest;
+  const agSv = gesamtSv - anSv;
+
+  cases.push({
+    name: 'MJ-AG-RECHT AE=1.500 0 Kind: AN-SV = 279,31 € (unverändert)',
+    actual: anSv, expected: 279.31, tol: 0.02,
+    quelle: 'BE_AN 1.284,18 × 21,75 % — keine Regression',
+  });
+  cases.push({
+    name: 'MJ-AG-RECHT AE=1.500 0 Kind: gesamtSv = 612,20 € (vorher 620,76 €)',
+    actual: gesamtSv, expected: 612.20, tol: 0.02,
+    quelle: 'BE_gesamt 1.427,03 × 42,9 % — 8,56 € weniger als 125a-Stand',
+  });
+  cases.push({
+    name: 'MJ-AG-RECHT AE=1.500 0 Kind: agSv = 332,89 € (vorher 341,45 €)',
+    actual: agSv, expected: 332.89, tol: 0.02,
+    quelle: 'Gesamt − AN — Kinderlos-Zuschlag nicht mehr verdoppelt',
   });
 }
 

@@ -26,7 +26,7 @@ import {
   AV_SATZ_AN_2026,
 } from '@/lib/berechnungen/brutto-netto';
 import { KV_ZUSATZBEITRAG_AN_DURCHSCHNITT_2026 } from '@/lib/berechnungen/sv-parameter';
-import { pvAnteilAn2026 } from '@/lib/berechnungen/pflegeversicherung';
+import { pvAnteilAn2026, PV_BASIS_SATZ_2026 } from '@/lib/berechnungen/pflegeversicherung';
 
 type Steuerklasse = 'I' | 'II' | 'III' | 'IV' | 'V' | 'VI';
 
@@ -75,20 +75,18 @@ export default function MidijobRechner() {
     const beGesamt = imBereich ? berechneBemessungsgrundlageGesamt(b) : b;
     const beAn = imBereich ? berechneBemessungsgrundlageAN(b) : b;
 
-    // PV-AN-Satz inkl. Kinderlos-Zuschlag / Kinderabschlag nach § 55 Abs. 3 SGB XI.
+    // PV-AN-Satz inkl. Kinderlos-Zuschlag / Kinderabschlag nach § 55/59 SGB XI.
     // Annahme anzahlKinder = 0 → kinderlos (Zuschlag, Alter > 23). Ab Kind 2
     // greift Kinderabschlag 0,25 pp pro Kind (bis Kind 5 gedeckelt).
     const pvAnSatz = pvAnteilAn2026(anzahlKinder, true, false);
     const anSvSatz = SV_AN_OHNE_PV + pvAnSatz;
 
-    // Gesamtbeitragssatz (AN + AG = voller Beitrag): AN-Satz × 2 als Näherung
-    // (PV-Basis 1,8 % geteilt AN/AG = je 0,9 %, plus Kinderlos-Zuschlag trägt
-    // nur AN). Hier einfach anSvSatz × 2 minus Kinderlos-Zuschlag-Anteil, den
-    // der AG NICHT trägt. Vereinfacht: volles Brutto × 2 × anSvSatz wäre
-    // Überschätzung. Wir nutzen für den Gesamt-AN+AG-Beitrag aktuell
-    // AN-Satz × 2 auf BE_gesamt (akzeptable Näherung, Kinderlos-Zuschlag
-    // wäre eine Feinheit ≈ 0,3 €-Bereich bei Midijob).
-    const gesamtSvSatz = anSvSatz * 2;
+    // AG-Satz: paritätischer halber Beitrag ohne Kinderlos-Zuschlag
+    // (§ 59 Abs. 5 SGB XI: Zuschlag trägt ausschließlich AN).
+    // PV-Abschläge bei Kindern wirken ebenfalls nur AN-seitig (§ 55 Abs. 3),
+    // AG-PV-Satz ist konstant PV_BASIS_SATZ_2026 = 1,8 %.
+    const agSvSatz = SV_AN_OHNE_PV + PV_BASIS_SATZ_2026;
+    const gesamtSvSatz = anSvSatz + agSvSatz;
 
     const gesamtSv = beGesamt * gesamtSvSatz;
     const anSv = beAn * anSvSatz;
