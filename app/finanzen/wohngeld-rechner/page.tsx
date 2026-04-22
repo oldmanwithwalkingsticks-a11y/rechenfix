@@ -53,7 +53,7 @@ const faq = [
   {
     frage: 'Welche Einkommensgrenzen gelten 2026?',
     antwort:
-      'Die Einkommensgrenze ist kein fester Betrag, sondern ergibt sich aus dem Zusammenspiel von Haushaltsgröße, Mietstufe, Miete und pauschalen Abzügen. Faustregel: Bei einem Vier-Personen-Haushalt in Mietstufe IV liegt die Obergrenze bei etwa 3.200 bis 3.800 € brutto monatlich, je nach Konstellation der Abzüge.',
+      'Wohngeld kennt keine feste Einkommensgrenze. Ob Anspruch besteht, ergibt sich aus dem Zusammenspiel von Haushaltsgröße, Mietstufe, zu berücksichtigender Miete und den Abzügen nach §§ 14 bis 16 WoGG — also Werbungskosten sowie pauschale Abzüge von 10, 20 oder 30 Prozent für Steuer, Kranken- und Rentenversicherung, dazu individuelle Freibeträge. Die Obergrenzen steigen mit der Mietstufe und der Haushaltsgröße. Für die konkrete Prüfung Ihrer Konstellation nutzen Sie bitte den offiziellen BMWSB-Wohngeldrechner.',
   },
   {
     frage: 'Wie finde ich meine Mietstufe?',
@@ -63,7 +63,7 @@ const faq = [
   {
     frage: 'Wird Wohngeld rückwirkend gezahlt?',
     antwort:
-      'Wohngeld wird in der Regel ab dem Monat der Antragstellung bewilligt. In Ausnahmefällen ist eine rückwirkende Bewilligung bis zu drei Monate möglich (§ 25 WoGG). Ein zügiger Antrag ist daher wichtig, um keinen Anspruch zu verlieren.',
+      'Wohngeld wird grundsätzlich ab dem Ersten des Monats gezahlt, in dem der Antrag bei der Wohngeldbehörde eingegangen ist (§ 25 Abs. 2 WoGG). Eine Rückwirkung für frühere Monate gibt es nur in engen Ausnahmefällen — zum Beispiel wenn ein zuvor gestellter Antrag auf Bürgergeld abgelehnt wurde und der Wohngeldantrag noch im Folgemonat nachgereicht wird (§ 25 Abs. 3 WoGG), oder bei einer rückwirkenden Mieterhöhung von mehr als zehn Prozent (§ 27 WoGG). Für zurückliegende Monate ohne solche Ausnahmesituation entsteht kein Anspruch — ein zügiger Antrag ist daher wichtig.',
   },
   {
     frage: 'Warum zeigt rechenfix.de aktuell keinen interaktiven Wohngeld-Rechner?',
@@ -291,14 +291,15 @@ export default function WohngeldErklaerseite() {
                   rechnerischen Wohngeldbetrag.
                 </li>
                 <li>
-                  Mindestwohngeld-Prüfung und Rundung nach Anlage 3 — das Ergebnis wird auf volle
-                  Euro kaufmännisch gerundet.
+                  Rechenschritte und Rundungen nach § 19 Abs. 2 WoGG in Verbindung mit Anlage 3.
+                  Der errechnete Betrag wird auf den nächsten vollen Eurobetrag aufgerundet.
                 </li>
               </ol>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed mt-3">
                 Die Berechnung berücksichtigt zahlreiche Detailregeln zu Freibeträgen (zum
-                Beispiel für Alleinerziehende oder Schwerbehinderte) und Besonderheiten bei
-                Bedarfsgemeinschaften. Für eine präzise Einzelfallberechnung empfehlen wir den{' '}
+                Beispiel für Alleinerziehende oder Schwerbehinderte) und Besonderheiten der
+                wohngeldrechtlichen Haushaltszusammensetzung. Für eine präzise
+                Einzelfallberechnung empfehlen wir den{' '}
                 <a
                   href={BMWSB_WOHNGELDRECHNER_URL}
                   target="_blank"
