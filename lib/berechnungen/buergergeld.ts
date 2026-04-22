@@ -11,6 +11,23 @@ export interface KindEintrag {
   alter: Kindergruppe;
 }
 
+/**
+ * § 11b Abs. 2b SGB II: Status des Antragstellers für Jugendlichen-Freibetrag.
+ * `'none'` = kein Sonderstatus → regulärer Freibetrag-Pfad greift.
+ */
+export type JugendlicherStatusKategorie =
+  | 'none'
+  | 'schueler'
+  | 'azubi'
+  | 'studierender'
+  | 'freiwilligendienst';
+
+export interface JugendlicherStatusEingabe {
+  /** Alter des Antragstellers (entscheidet über 556 € vs. 250 € Freibetrag). */
+  alter: number;
+  status: JugendlicherStatusKategorie;
+}
+
 export interface MehrbedarfEingabe {
   /** § 21 Abs. 2 SGB II: werdende Mütter ab 13. SSW bis Ende Entbindungsmonat. */
   schwangerschaftAb13SSW?: boolean;
@@ -35,6 +52,15 @@ export interface BuergergeldEingabe {
   vermoegen: number;
   /** Optional: Zusatzbedarfe § 21 SGB II. Default: keine. */
   mehrbedarfe?: MehrbedarfEingabe;
+  /**
+   * Optional: § 11b Abs. 2b SGB II — Jugendlichen-Status. Wenn gesetzt und
+   * `status !== 'none'`, wird der Einkommensfreibetrag durch den
+   * Jugendlichen-Freibetrag ersetzt (556 €/Monat unter 25, 250 €/Monat ab 25).
+   * Ferienjobs von Schülern sind zusätzlich vollständig anrechnungsfrei
+   * (§ 11a Abs. 7 SGB II) — das deckt die Lib NICHT ab; bei Ferienjobs als
+   * Einkommen 0 € angeben.
+   */
+  jugendlicherStatus?: JugendlicherStatusEingabe;
   /** Optional: Stichtag. Default = heute (für Bucket-Wahl H1/H2). */
   stichtag?: Date;
 }
@@ -76,6 +102,24 @@ const KINDERGRUPPE_LABEL: Record<Kindergruppe, string> = {
 
 function rund2(n: number): number {
   return Math.round(n * 100) / 100;
+}
+
+/**
+ * § 11b Abs. 2b SGB II — Jugendlichen-Freibetrag.
+ * Ersetzt den regulären Stufen-Freibetrag, wenn der Antragsteller in einer
+ * der vier Status-Gruppen (Schüler/Azubi/Student/Freiwilligendienst) ist.
+ * Freibetrag: 556 € bis unter 25 J., 250 € ab 25 J.
+ */
+function berechneJugendlicherFreibetrag(
+  brutto: number,
+  alter: number,
+  params: BuergergeldParameter,
+): number {
+  if (brutto <= 0) return 0;
+  const fb = alter < 25
+    ? params.einkommensfreibetrag.jugendlicherFreibetrag_unter25
+    : params.einkommensfreibetrag.jugendlicherFreibetrag_ab25;
+  return Math.min(brutto, fb);
 }
 
 function berechneEinkommensFreibetrag(
@@ -252,9 +296,14 @@ export function berechneBuergergeld(eingabe: BuergergeldEingabe): BuergergeldErg
   // Gesamtbedarf
   const gesamtBedarf = regelbedarfGesamt + mehrbedarfeErgebnis.gesamt + unterkunftskosten;
 
-  // Einkommensanrechnung
+  // Einkommensanrechnung — § 11b SGB II
   const hatKinder = kinder.length > 0 || bedarfsgemeinschaft === 'paar-mit-kindern';
-  const freibetragEinkommen = berechneEinkommensFreibetrag(einkommen, hatKinder, params);
+  const jugendlicher = eingabe.jugendlicherStatus;
+  const freibetragEinkommen = jugendlicher && jugendlicher.status !== 'none'
+    // § 11b Abs. 2b SGB II — Jugendlichen-Pfad (Schüler/Azubi/Student/Freiwilligendienst)
+    ? rund2(berechneJugendlicherFreibetrag(einkommen, jugendlicher.alter, params))
+    // Regulärer Stufen-Freibetrag
+    : berechneEinkommensFreibetrag(einkommen, hatKinder, params);
   const anrechenbareEinkommen = Math.max(0, einkommen - freibetragEinkommen);
 
   // Anspruch

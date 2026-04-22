@@ -59,6 +59,18 @@ export interface BuergergeldParameter {
     stufe3ObergrenzeMitKind: number;
     /** Quote Stufe 3: 10 % des Betrags über 1.000 bis 1.200/1.500 € */
     stufe3Quote: number;
+    /**
+     * § 11b Abs. 2b SGB II (seit 01.01.2023): erhöhter Freibetrag für
+     * Schüler/Azubis/Studenten/Freiwilligendienstler UNTER 25 Jahren in Höhe
+     * der Minijob-Grenze (2026: 556 €/Monat). Einkommen bis zu dieser Grenze
+     * ist vollständig anrechnungsfrei.
+     */
+    jugendlicherFreibetrag_unter25: number;
+    /**
+     * § 11b Abs. 2b SGB II: Freibetrag für dieselben Statusgruppen AB 25 Jahren
+     * in Höhe von 250 €/Monat.
+     */
+    jugendlicherFreibetrag_ab25: number;
   };
 
   mehrbedarfe: {
@@ -122,6 +134,9 @@ const EINKOMMENSFREIBETRAG_2026 = {
   stufe3ObergrenzeOhneKind: 1200,
   stufe3ObergrenzeMitKind: 1500,
   stufe3Quote: 0.10,
+  // § 11b Abs. 2b SGB II — Jugendlichen-Freibetrag (2026-Werte)
+  jugendlicherFreibetrag_unter25: 556, // Minijob-Grenze § 8 Abs. 1a SGB IV
+  jugendlicherFreibetrag_ab25: 250,
 };
 
 const MEHRBEDARFE_2026 = {

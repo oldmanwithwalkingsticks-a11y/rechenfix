@@ -1,8 +1,18 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { berechneBuergergeld, type Bedarfsgemeinschaft, type Kindergruppe, type KindEintrag, type MehrbedarfEingabe } from '@/lib/berechnungen/buergergeld';
-import { KDU_ANGEMESSENHEITS_HINWEIS } from '@/lib/berechnungen/buergergeld-parameter';
+import {
+  berechneBuergergeld,
+  type Bedarfsgemeinschaft,
+  type Kindergruppe,
+  type KindEintrag,
+  type MehrbedarfEingabe,
+  type JugendlicherStatusKategorie,
+} from '@/lib/berechnungen/buergergeld';
+import {
+  KDU_ANGEMESSENHEITS_HINWEIS,
+  getAktuelleBuergergeldParameter,
+} from '@/lib/berechnungen/buergergeld-parameter';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
@@ -15,6 +25,14 @@ const ALTERSGRUPPEN: { key: Kindergruppe; label: string }[] = [
   { key: '6-13', label: '6–13 Jahre' },
   { key: '14-17', label: '14–17 Jahre' },
   { key: '18-24', label: '18–24 Jahre' },
+];
+
+const JUGENDLICHER_STATUS_OPTIONEN: { value: JugendlicherStatusKategorie; label: string }[] = [
+  { value: 'none', label: 'Kein Sonderstatus (regulärer Freibetrag)' },
+  { value: 'schueler', label: 'Schüler/in einer allgemein- oder berufsbildenden Schule' },
+  { value: 'azubi', label: 'Auszubildende/r' },
+  { value: 'studierender', label: 'Studierende/r' },
+  { value: 'freiwilligendienst', label: 'Bundesfreiwilligendienst / Jugendfreiwilligendienst' },
 ];
 
 export default function BuergergeldRechner() {
@@ -32,6 +50,10 @@ export default function BuergergeldRechner() {
   const [warmwasserDezentral, setWarmwasserDezentral] = useState(false);
   const [ernaehrungEuro, setErnaehrungEuro] = useState('0');
   const [atypischEuro, setAtypischEuro] = useState('0');
+
+  // § 11b Abs. 2b SGB II — Jugendlichen-Freibetrag (optional)
+  const [jugendlicherStatus, setJugendlicherStatus] = useState<JugendlicherStatusKategorie>('none');
+  const [jugendlicherAlter, setJugendlicherAlter] = useState('22');
 
   // Alleinerziehend-Mehrbedarf § 21 Abs. 3 SGB II: rechtlich nur bei alleiniger
   // Pflege/Erziehung. Im UI deshalb NUR wirksam, wenn Bedarfsgemeinschaft
@@ -57,8 +79,11 @@ export default function BuergergeldRechner() {
       einkommen: parseDeutscheZahl(einkommen),
       vermoegen: parseDeutscheZahl(vermoegen),
       mehrbedarfe: mehrbedarfeInput,
+      jugendlicherStatus: jugendlicherStatus !== 'none'
+        ? { alter: parseInt(jugendlicherAlter) || 0, status: jugendlicherStatus }
+        : undefined,
     }),
-    [bg, kinder, warmmiete, heizkosten, einkommen, vermoegen, mehrbedarfeInput]
+    [bg, kinder, warmmiete, heizkosten, einkommen, vermoegen, mehrbedarfeInput, jugendlicherStatus, jugendlicherAlter]
   );
 
   const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -87,6 +112,17 @@ export default function BuergergeldRechner() {
       setAlleinerziehend(false);
     }
   };
+
+  // Regelsätze aus Lib ableiten (Paket 6, Prompt 123): keine Hartkodierungen mehr
+  const params = getAktuelleBuergergeldParameter();
+  const regelsatzInfo: { label: string; betrag: number }[] = [
+    { label: 'Alleinstehende',     betrag: params.regelsaetze.rbs1_alleinstehend },
+    { label: 'Partner/in (je Person)', betrag: params.regelsaetze.rbs2_paarProPerson },
+    { label: 'Kind 18–24 Jahre',   betrag: params.regelsaetze.rbs3_volljaehrigBeiEltern },
+    { label: 'Kind 14–17 Jahre',   betrag: params.regelsaetze.rbs4_jugendlich_14_17 },
+    { label: 'Kind 6–13 Jahre',    betrag: params.regelsaetze.rbs5_kind_6_13 },
+    { label: 'Kind 0–5 Jahre',     betrag: params.regelsaetze.rbs6_kind_0_5 },
+  ];
 
   return (
     <div>
@@ -180,7 +216,7 @@ export default function BuergergeldRechner() {
       </div>
 
       {/* Einkommen & Vermögen */}
-      <div className="grid grid-cols-2 gap-3 mb-6">
+      <div className="grid grid-cols-2 gap-3 mb-3">
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Einkommen (Brutto)</label>
           <NummerEingabe value={einkommen} onChange={setEinkommen} placeholder="0" einheit="€" />
@@ -192,6 +228,60 @@ export default function BuergergeldRechner() {
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Gesamt-Vermögen</p>
         </div>
       </div>
+
+      {/* § 11b Abs. 2b SGB II — Jugendlichen-Freibetrag (aufklappbar, Paket 5 Prompt 123) */}
+      <details className="mb-6 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800" open={jugendlicherStatus !== 'none'}>
+        <summary className="cursor-pointer px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-200 select-none">
+          Sonderstatus Einkommensfreibetrag (Schüler/Azubi/Student/Freiwilligendienst) — § 11b Abs. 2b SGB II
+        </summary>
+        <div className="px-4 pb-4 pt-1 space-y-3 border-t border-gray-100 dark:border-gray-700">
+          <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed italic">
+            § 11b Abs. 2b SGB II: Für Schüler/Azubis/Studierende/Freiwilligendienstler unter
+            25 Jahren gilt ein erhöhter Erwerbstätigen-Freibetrag in Höhe der Minijob-Grenze
+            ({params.einkommensfreibetrag.jugendlicherFreibetrag_unter25} €/Monat, 2026) statt
+            der üblichen Stufen-Regelung. Für über-25-Jährige in denselben Situationen:{' '}
+            {params.einkommensfreibetrag.jugendlicherFreibetrag_ab25} €/Monat.
+            Ferienjobs von Schülern sind zusätzlich vollständig anrechnungsfrei
+            (§ 11a Abs. 7 SGB II) — diesen Sonderfall deckt der Rechner NICHT ab;
+            bei Ferienjobs als Einkommen 0 € angeben.
+          </p>
+          <div>
+            <label htmlFor="buergergeld-select-jugend-status" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Status des Antragstellers
+            </label>
+            <select id="buergergeld-select-jugend-status"
+              value={jugendlicherStatus}
+              onChange={e => setJugendlicherStatus(e.target.value as JugendlicherStatusKategorie)}
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"
+            >
+              {JUGENDLICHER_STATUS_OPTIONEN.map(o => (
+                <option key={o.value} value={o.value}>{o.label}</option>
+              ))}
+            </select>
+          </div>
+          {jugendlicherStatus !== 'none' && (
+            <div>
+              <label htmlFor="buergergeld-jugend-alter" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Alter des Antragstellers
+              </label>
+              <input
+                id="buergergeld-jugend-alter"
+                type="number"
+                min={14}
+                max={99}
+                step={1}
+                value={jugendlicherAlter}
+                onChange={e => setJugendlicherAlter(e.target.value)}
+                className="w-full sm:w-1/2 px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"
+              />
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                Unter 25 → Freibetrag {params.einkommensfreibetrag.jugendlicherFreibetrag_unter25} €/Monat.
+                Ab 25 → {params.einkommensfreibetrag.jugendlicherFreibetrag_ab25} €/Monat.
+              </p>
+            </div>
+          )}
+        </div>
+      </details>
 
       {/* Mehrbedarfe § 21 SGB II — aufklappbar */}
       <details className="mb-6 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
@@ -456,38 +546,22 @@ export default function BuergergeldRechner() {
             </div>
           </div>
 
-          {/* Regelsätze Info */}
+          {/* Regelsätze Info — Werte aus Lib abgeleitet (Paket 6, Prompt 123) */}
           <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden">
             <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700/50">
-              <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">Bürgergeld-Regelsätze 2026</p>
+              <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">
+                {params.bezeichnung}-Regelsätze {new Date().getFullYear()}
+              </p>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
-                  <tr>
-                    <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Alleinstehende</td>
-                    <td className="px-4 py-2.5 text-right font-medium text-gray-800 dark:text-gray-200">563 €</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Partner/in (je Person)</td>
-                    <td className="px-4 py-2.5 text-right font-medium text-gray-800 dark:text-gray-200">506 €</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Kind 18–24 Jahre</td>
-                    <td className="px-4 py-2.5 text-right font-medium text-gray-800 dark:text-gray-200">451 €</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Kind 14–17 Jahre</td>
-                    <td className="px-4 py-2.5 text-right font-medium text-gray-800 dark:text-gray-200">471 €</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Kind 6–13 Jahre</td>
-                    <td className="px-4 py-2.5 text-right font-medium text-gray-800 dark:text-gray-200">390 €</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Kind 0–5 Jahre</td>
-                    <td className="px-4 py-2.5 text-right font-medium text-gray-800 dark:text-gray-200">357 €</td>
-                  </tr>
+                  {regelsatzInfo.map((zeile) => (
+                    <tr key={zeile.label}>
+                      <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">{zeile.label}</td>
+                      <td className="px-4 py-2.5 text-right font-medium text-gray-800 dark:text-gray-200">{zeile.betrag} €</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
