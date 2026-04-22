@@ -1,13 +1,18 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import ZurueckButton from '@/components/layout/ZurueckButton';
 import AdSlot from '@/components/ads/AdSlot';
 import StructuredData from '@/components/seo/StructuredData';
 import { generateFAQSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import { kategorien, getRechnerByKategorie } from '@/lib/rechner-config';
 import {
   HOECHSTBETRAEGE_WOGG_2026,
   ZUSCHLAG_PRO_PERSON_WOGG_2026,
 } from '@/lib/berechnungen/wohngeld';
+
+const AKTUELLER_SLUG = 'wohngeld-rechner';
+const KATEGORIE_SLUG = 'finanzen';
 
 const BMWSB_WOHNGELDRECHNER_URL =
   'https://www.bmwsb.bund.de/DE/wohnen/wohngeld/wohngeldrechner/wohngeldrechner-2025_node.html';
@@ -395,8 +400,51 @@ export default function WohngeldErklaerseite() {
           <AdSlot typ="rectangle" className="mb-8" />
         </div>
 
-        <aside className="lg:w-80 shrink-0">
-          <AdSlot typ="sidebar" />
+        {/* Sidebar — hidden on mobile, visible on desktop (identisch zu Rechner-Seiten) */}
+        <aside className="hidden lg:block lg:w-64 shrink-0" aria-label="Weitere Rechner in Finanzen">
+          <div className="lg:sticky lg:top-24 max-h-[calc(100vh-7rem)] overflow-y-auto space-y-3 pr-1">
+            {kategorien
+              .filter(k => k.slug === KATEGORIE_SLUG)
+              .map(k => {
+                const katRechner = getRechnerByKategorie(k.slug);
+                return (
+                  <div key={k.slug} className="card p-4">
+                    <Link
+                      href={`/${k.slug}`}
+                      className="flex items-center gap-2 font-bold text-sm text-gray-800 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors mb-2"
+                    >
+                      <span>{k.icon}</span>
+                      <span>{k.name}</span>
+                      <span className="text-xs font-normal text-gray-600 ml-auto">{katRechner.length}</span>
+                    </Link>
+                    <ul className="space-y-0.5">
+                      {katRechner.map(r => {
+                        const istAktuell = r.slug === AKTUELLER_SLUG;
+                        return (
+                          <li key={r.slug}>
+                            <Link
+                              href={`/${r.kategorieSlug}/${r.slug}`}
+                              aria-current={istAktuell ? 'page' : undefined}
+                              className={`flex items-center gap-2 py-1.5 px-2 -mx-1 rounded-lg text-[13px] transition-all ${
+                                istAktuell
+                                  ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-500/10 font-medium'
+                                  : 'text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-500/10'
+                              }`}
+                            >
+                              <span>{r.icon}</span>
+                              <span className="truncate">{r.titel}</span>
+                            </Link>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                );
+              })}
+
+            {/* Ad Sidebar */}
+            <AdSlot typ="rectangle" className="mt-3" />
+          </div>
         </aside>
       </div>
     </div>
