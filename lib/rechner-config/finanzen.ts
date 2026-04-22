@@ -1266,7 +1266,7 @@ Das Elterneinkommen wird beim Aufstiegs-BAföG **nicht** angerechnet — AFBG is
 
 **Rückzahlung und Freistellung**
 
-Der Darlehens-Anteil läuft über die KfW. Während der Fortbildung und in der zwei Jahre dauernden Karenzzeit bleibt das Darlehen zinsfrei und muss nicht getilgt werden (insgesamt maximal sechs Jahre zins- und tilgungsfrei). Danach liegt die Mindestrate bei **128 Euro pro Monat**. Bei geringem eigenem Einkommen lässt sich eine Freistellung von der Rückzahlung beantragen (§ 13a AFBG). Bei Tod wird das Restdarlehen automatisch erlassen. Wer vor dem Bestehens-Erlass durchgefallen ist, kann die Prüfung nachholen und den Erlass dann noch in Anspruch nehmen. Für den formalen Antrag und vertiefende Informationen nutzen Sie das BMBFSFJ-Info-Portal [aufstiegs-bafoeg.de](https://www.aufstiegs-bafoeg.de/) sowie das Antragsportal [afbg-digital.de](https://afbg-digital.de/start).
+Der Darlehens-Anteil läuft über die KfW. Während der Fortbildung und in der zwei Jahre dauernden Karenzzeit bleibt das Darlehen zinsfrei und muss nicht getilgt werden (insgesamt maximal sechs Jahre zins- und tilgungsfrei). Danach liegt die Mindestrate bei **128 Euro pro Monat**. Bei geringem eigenem Einkommen lässt sich eine Freistellung von der Rückzahlung beantragen (§ 13a AFBG). Bei Tod wird das Restdarlehen automatisch erlassen. Wer vor dem Bestehens-Erlass durchgefallen ist, kann die Prüfung nachholen und den Erlass dann noch in Anspruch nehmen. Für den formalen Antrag und vertiefende Informationen nutzen Sie das BMBF-Info-Portal [aufstiegs-bafoeg.de](https://www.aufstiegs-bafoeg.de/) sowie das Antragsportal [afbg-digital.de](https://afbg-digital.de/start).
 
 **Antrag und Zuständigkeit**
 

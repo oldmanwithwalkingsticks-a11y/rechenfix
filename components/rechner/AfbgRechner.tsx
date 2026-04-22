@@ -447,7 +447,7 @@ export default function AfbgRechner() {
       >
         <span className="text-lg flex-shrink-0" role="img" aria-hidden="true">ℹ️</span>
         <span className="text-sm font-medium text-primary-700 dark:text-primary-300 group-hover:text-primary-800 dark:group-hover:text-primary-200 transition-colors">
-          Info-Portal aufstiegs-bafoeg.de (BMBFSFJ)
+          Info-Portal aufstiegs-bafoeg.de (BMBF)
         </span>
         <span className="ml-auto text-primary-400 dark:text-primary-500 group-hover:text-primary-600 dark:group-hover:text-primary-300 transition-colors font-bold" aria-hidden="true">↗</span>
       </a>

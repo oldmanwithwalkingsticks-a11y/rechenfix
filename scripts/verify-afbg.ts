@@ -7,7 +7,7 @@
 //
 // Externe Oracle-Quellen (dokumentiert in Kommentaren):
 //   - § 10, § 12, § 13b, § 17b AFBG (gesetze-im-internet.de)
-//   - BMBFSFJ-Info-Portal aufstiegs-bafoeg.de (Bedarfssätze, Tarif-Details,
+//   - BMBF-Info-Portal aufstiegs-bafoeg.de (Bedarfssätze, Tarif-Details,
 //     FAQ). Wichtig: Das Portal bietet KEINEN eigenen Online-Rechner zum
 //     Cross-Check — Verifikation erfolgt gegen Gesetzestext + Portal-FAQ.
 //   - Antragsportal afbg-digital.de (Start des formalen Antrags, keine
@@ -31,7 +31,7 @@ const cases: Fall[] = [];
 
 // ============================================================================
 // AFBG-01 — Alleinstehend Vollzeit, 15.000 € Lehrgang (Maximalförderung)
-// Oracle: BMBFSFJ-Rechner mit identischen Inputs
+// Oracle: BMBF-Rechner mit identischen Inputs
 // ============================================================================
 {
   const r = berechneAfbg({
@@ -76,8 +76,8 @@ const cases: Fall[] = [];
 
 // ============================================================================
 // AFBG-02 — Alleinerziehend Vollzeit mit 1 Kind (5 Jahre), 10.000 € Lehrgang
-// Oracle: BMBFSFJ-Rechner; Bedarf ergibt sich aus Grund 1.019 + Kinderzuschlag
-// 235 (BMBFSFJ-Portal weist "bis 1.254 €" aus) + Kinderbetreuungszuschlag 150
+// Oracle: BMBF-Rechner; Bedarf ergibt sich aus Grund 1.019 + Kinderzuschlag
+// 235 (BMBF-Portal weist "bis 1.254 €" aus) + Kinderbetreuungszuschlag 150
 // (separat in § 10 Abs. 3a AFBG, einkommensunabhängig) = 1.404 €
 // ============================================================================
 {
@@ -117,7 +117,7 @@ const cases: Fall[] = [];
   cases.push({
     name: 'AFBG-02 Gesamtbedarf',
     actual: r.unterhalt.bedarf, expected: 1404, tol: 0.01,
-    quelle: '1.019 + 235 + 150 = 1.404 (BMBFSFJ-Oracle: "bis 1.254" zzgl. KBZ)',
+    quelle: '1.019 + 235 + 150 = 1.404 (BMBF-Oracle: "bis 1.254" zzgl. KBZ)',
   });
   cases.push({
     name: 'AFBG-02 Auszahlung = voller Bedarf (kein Einkommen)',

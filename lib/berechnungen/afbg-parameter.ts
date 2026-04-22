@@ -114,7 +114,7 @@ export interface AfbgParameter {
 
 /**
  * AFBG-Parameter seit 29. BAföG-ÄndG v. 23.07.2024, gültig ab 01.08.2024.
- * Quelle: BMBFSFJ-Portal aufstiegs-bafoeg.de und § 10/12/13b AFBG.
+ * Quelle: BMBF-Portal aufstiegs-bafoeg.de und § 10/12/13b AFBG.
  */
 export const AFBG_AB_2024_08_01: AfbgParameter = {
   massnahme: {
@@ -157,7 +157,7 @@ export const AFBG_AB_2024_08_01: AfbgParameter = {
     gruenderErlassQuote: 1.00,
     gruenderErlassJahreMin: 3,
   },
-  quelle: "§§ 10, 12, 13, 13b, 17b AFBG i.d.F. des 29. BAföG-ÄndG v. 23.07.2024, gültig ab 01.08.2024 — Bedarfssätze aus BMBFSFJ aufstiegs-bafoeg.de",
+  quelle: "§§ 10, 12, 13, 13b, 17b AFBG i.d.F. des 29. BAföG-ÄndG v. 23.07.2024, gültig ab 01.08.2024 — Bedarfssätze aus BMBF aufstiegs-bafoeg.de",
   gueltigAb: new Date("2024-08-01"),
 };
 

@@ -11,7 +11,7 @@
 
 - **AFBG** — Aufstiegsfortbildungsförderungsgesetz (umgangssprachlich „Meister-BAföG")
 - **29. BAföG-ÄndG v. 23.07.2024** (BGBl. 2024 I Nr. 247) — Anhebung der Bedarfssätze zum 01.08.2024, Umwandlung des Unterhaltsbeitrags in 100 % Vollzuschuss
-- Portal: [aufstiegs-bafoeg.de](https://www.aufstiegs-bafoeg.de/) — vom BMBFSFJ betrieben, enthält den offiziellen Rechner als Oracle-Vergleich
+- Portal: [aufstiegs-bafoeg.de](https://www.aufstiegs-bafoeg.de/) — vom BMBF betrieben, enthält den offiziellen Rechner als Oracle-Vergleich
 - Einschlägige Paragraphen: §§ 2, 5, 10, 12, 13, 13a, 13b, 17b AFBG
 
 ## Was der Rechner abbildet
@@ -48,7 +48,7 @@
 |---|---|---|---|
 | Maßnahme-Höchstbetrag | 15.000 € | § 12 Abs. 1 Nr. 1 AFBG | hoch |
 | Meisterstück-Höchstbetrag | 2.000 € | § 12 Abs. 3 AFBG | hoch |
-| Unterhalt Grundbedarf VZ | 1.019 € | BMBFSFJ-Portal + § 10 Abs. 2 AFBG | hoch (ab 01.08.2024) |
+| Unterhalt Grundbedarf VZ | 1.019 € | BMBF-Portal + § 10 Abs. 2 AFBG | hoch (ab 01.08.2024) |
 | Ehegatten-Zuschlag | 235 € | § 10 Abs. 3 AFBG | hoch |
 | Kinder-Zuschlag | 235 € | § 10 Abs. 3 AFBG | hoch |
 | Kinderbetreuungszuschlag | 150 € | § 10 Abs. 3a AFBG | hoch |
@@ -72,7 +72,7 @@
 
 ## Testfälle (scripts/verify-afbg.ts)
 
-35 Testfälle, alle gegen externe Oracle-Quellen (§§ 10/12/13b/17b AFBG + BMBFSFJ-Portal):
+35 Testfälle, alle gegen externe Oracle-Quellen (§§ 10/12/13b/17b AFBG + BMBF-Portal):
 
 - **AFBG-01** Alleinstehend VZ, 15k Lehrgang, keine Kinder → Zuschuss 7.500, Darlehen 7.500, Unterhalt 1.019, Bestehens-Erlass 3.750, Nach Gründer-Erlass 0
 - **AFBG-02** VZ mit 1 Kind 5 J. + KG, 10k Lehrgang → Unterhalt 1.019 + 235 + 150 = 1.404
@@ -82,7 +82,7 @@
 - **AFBG-06** VZ mit 1 Kind + Ehegatte, eigen 1.800 + ehe 1.500, Vermögen 18.000 → Quote 0,45, Anrechnung 484,65, Unterhalt 1.154,35
 - **AFBG-07** Meisterstück 2.500 → Deckel 2.000, Zuschuss 1.000
 
-**Oracle-Quellen:** Das Info-Portal [aufstiegs-bafoeg.de](https://www.aufstiegs-bafoeg.de/) bietet **keinen** eigenen Online-Rechner zum direkten Cross-Check. Die Bedarfssätze (1.019 €, 1.254 € Alleinerziehend mit 1 Kind etc.) sind dort aber in den FAQ-Seiten und Beispielrechnungen dokumentiert. Die Testfall-Sollwerte leiten sich daher aus Gesetzestext (§§ 10/12/13b/17b AFBG) + BMBFSFJ-Portal-FAQ ab, nicht aus einem Referenz-Rechner.
+**Oracle-Quellen:** Das Info-Portal [aufstiegs-bafoeg.de](https://www.aufstiegs-bafoeg.de/) bietet **keinen** eigenen Online-Rechner zum direkten Cross-Check. Die Bedarfssätze (1.019 €, 1.254 € Alleinerziehend mit 1 Kind etc.) sind dort aber in den FAQ-Seiten und Beispielrechnungen dokumentiert. Die Testfall-Sollwerte leiten sich daher aus Gesetzestext (§§ 10/12/13b/17b AFBG) + BMBF-Portal-FAQ ab, nicht aus einem Referenz-Rechner.
 
 **Ergebnis:** 35/35 grün.
 
@@ -105,7 +105,7 @@ Aktuell nur ein Bucket `AFBG_AB_2024_08_01`. Bei der nächsten Anhebung (vorauss
 
 ## Offene Punkte
 
-- **Oracle-Situation:** Das BMBFSFJ bietet für AFBG keinen öffentlich zugänglichen Online-Rechner (im Gegensatz zu BAföG/Wohngeld). Verifikation erfolgt daher ausschließlich gegen Gesetzestext und die in den BMBFSFJ-FAQ publizierten Beispielzahlen (1.019 €, 1.254 € usw.). Bei Abweichungen in echten AFBG-Bescheiden von Usern ggf. nachjustieren.
+- **Oracle-Situation:** Das BMBF bietet für AFBG keinen öffentlich zugänglichen Online-Rechner (im Gegensatz zu BAföG/Wohngeld). Verifikation erfolgt daher ausschließlich gegen Gesetzestext und die in den BMBF-FAQ publizierten Beispielzahlen (1.019 €, 1.254 € usw.). Bei Abweichungen in echten AFBG-Bescheiden von Usern ggf. nachjustieren.
 - **Vermögens-Freibetrag:** Falls in konkreten Bescheiden 15.000 € statt 45.000 € zum Einsatz kommen, ggf. altersabhängige Unterscheidung (unter/ab 30) analog zu `bafoeg-parameter.ts` ergänzen
 - **Ferienjob-Regelungen (§ 11a Abs. 7 SGB II)** spielen beim AFBG keine direkte Rolle, weil § 11b SGB II nicht anwendbar ist
 - **Nächste Parameter-Anpassung:** voraussichtlich mit BAföG-Novelle 01.08.2026 oder später — dann `AFBG_AB_2026_08_01`-Bucket ergänzen
