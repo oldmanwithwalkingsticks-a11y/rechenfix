@@ -316,6 +316,40 @@ Mindestlohn zum 01.01. usw.):
 - `lib/berechnungen/mindestlohn.ts` — Switch auf 14,60 € zum 01.01.2027
 - `lib/berechnungen/rente.ts` — Switch auf 42,52 € zum 01.07.2026
 - `lib/berechnungen/pfaendung.ts` — Switch auf 1.587,40 € zum 01.07.2026
+- `lib/berechnungen/bafoeg-parameter.ts` — single-bucket mit Skeleton für WS 2026/27-Erhöhung (Prompt 121)
+- `lib/berechnungen/buergergeld-parameter.ts` — zwei Buckets H1/H2 für 01.07.2026 „Neue Grundsicherung" (H2 derzeit identisch zu H1 als Skeleton bis Gesetzestext)
+
+### SSOT-Parameter-Lib-Muster (Prompt 121)
+
+Parameter-Libs folgen einem einheitlichen **Typ-Interface + Bucket + Getter**-Muster:
+
+```ts
+// lib/berechnungen/<thema>-parameter.ts
+export interface XxxParameter {
+  regelsaetze: { alleinstehend: number; /* ... */ };
+  freibetraege: { /* ... */ };
+  quelle: string;
+  gueltigAb: Date;
+}
+
+export const XXX_AB_2024_08_01: XxxParameter = {
+  regelsaetze: { alleinstehend: 563, /* ... */ },
+  freibetraege: { /* ... */ },
+  quelle: '§ 20 SGB II i.d.F. …',
+  gueltigAb: new Date('2024-08-01'),
+};
+
+export function getAktuelleXxxParameter(stichtag: Date = new Date()): XxxParameter {
+  void stichtag; // single-bucket, reserviert für künftigen Switch
+  return XXX_AB_2024_08_01;
+}
+```
+
+**Regeln:**
+- Rechner-Komponenten und andere Libs importieren ausschließlich über `getAktuelleXxxParameter()`, niemals direkt aus den Bucket-Konstanten
+- Bei jedem neuen unterjährigen Wechsel einen neuen Bucket ergänzen + Switch-Datum im Getter einbauen
+- `gueltigAb` auf der Konstante dokumentiert, ab wann der Bucket rechtlich greift
+- `quelle` nennt Paragrafen + BGBl.-Referenz, damit der Audit die Herkunft nachvollziehen kann
 
 ### Step 13: Qualitäts-Guards G1–G14 durchgehen
 
@@ -733,6 +767,78 @@ For detailed templates per calculator type, see `references/templates.md`.
 
 Affiliate-Platzierungs-Regel: thematischer Match zum Rechner erforderlich. Details, verbotene Kombinationen und aktuelle Partner-Liste: siehe CLAUDE.md → Abschnitt »Affiliate-Regel«.
 
+### Amazon-Partner-Programm (seit Prompt 122-amazon, 22.04.2026)
+
+Separates Partnerprogramm neben Awin. Tag-ID: **`rechenfix-21`**. Mechanik: keyword-basierte Suchlinks (keine ASINs), Consent-abhängig.
+
+**Komponente:** `components/AmazonBox.tsx` mit Prop `keyword` (+ optional `headline`/`description`).
+
+```tsx
+import { AmazonBox } from '@/components/AmazonBox';
+
+// Im Rechner-JSX, nach dem Ergebnisblock:
+<AmazonBox
+  keyword="digitale küchenwaage"
+  description="Kurzer thematischer Kontextsatz."
+/>
+```
+
+**Helper:** `lib/amazon-link.ts` exportiert `createAmazonSearchLink(keyword, consent)`. Tag wird nur bei erteiltem Marketing-Consent (`useCookieConsent().marketingAllowed`) angehängt.
+
+**Regeln:**
+- **Keine AmazonBox auf Gesundheit/Finanzen/Mathe** (konsistent mit Awin-Platzierungsregel)
+- **Box bleibt immer sichtbar**, unabhängig vom Consent — nur der Tag wird bei fehlendem Consent weggelassen (User-Service vor Provision)
+- **Werbe-Kennzeichnung „Anzeige" Pflicht** (DE-Werbekennzeichnung, in der Box oben rechts)
+- **Link-Attribute:** `rel="sponsored noopener noreferrer"` und `target="_blank"`
+- **Platzierung:** Unterhalb des Ergebnisblocks. Mit bestehender AffiliateBox → AmazonBox nach der letzten AffiliateBox gestapelt (nicht konkurrierend). Ohne AffiliateBox → AmazonBox vor den CrossLinks am Ende des Ergebnisbereichs.
+- **Selbstbezug verboten** (Amazon-Teilnahmebedingungen) — keine Eigen-Käufe über den Tag, auch nicht im Familienumfeld
+
+**Integration-Registry:** Vollständige Tabelle der 16 integrierten Rechner mit Keywords: [`docs/amazon-integration.md`](../../docs/amazon-integration.md).
+
+## Audit-Lehre-Checkliste (Prompts 120d, 121-analyse, 22.04.2026)
+
+Vor Behauptung eines Soll-Werts oder Testfall-Erwartungswerts:
+
+1. **Niemals aus dem Gedächtnis schätzen.** Weder in Prompts noch in Code-Kommentaren noch in FAQ-Texten.
+2. **Primärquelle oder externes Oracle konsultieren:**
+   - Gesetze im Internet (gesetzestext-Konstanten, Frist- und Satz-Regelungen)
+   - BGBl.-Anlagen (amtliche Tabellen, z. B. § 850c ZPO Pfändungstabelle, § 12 WoGG Anlage 1)
+   - Offizielle Referenz-Rechner mit Oracle-Charakter:
+     - BMF-Steuerrechner ([bmf-steuerrechner.de/ekst/](https://www.bmf-steuerrechner.de/ekst/)) — ESt/LSt/Soli
+     - BMWSB-Wohngeldrechner — Wohngeld
+     - BA-Bürgergeldrechner — SGB II Regelsätze + Mehrbedarfe
+     - BMBF-BAföG-Rechner ([bafoeg-rechner.de](https://www.bafoeg-rechner.de)) — BAföG
+3. **Bei Prompt-Diskrepanz:** Gesetzestext-Prüfung schlägt Prompt-Vorgabe. Dokumentieren, warum abgewichen wurde (Kommentar im Code + Prompt-Antwort).
+4. **Verify-Scripts gegen externe Oracle**, niemals zirkulär Lib-gegen-Lib (Lehre aus Prompt 120a — zirkulärer Test lief 41/41 grün, obwohl die Lib-Koeffizienten seit 2022 veraltet waren).
+
+Reale Vorfälle, die diese Regel nötig gemacht haben (alle 22.04.2026):
+- FAQ-Faustregel zu Wohngeld-Einkommensgrenzen (Prompt 120d-fix)
+- 3-Monats-Rückwirkungs-Annahme Wohngeld (120d-fix)
+- BAföG-Schätzwert 600 € in Beispielrechnung
+- BAföG-Geschwister-Anrechnungsquote 0,45 vs. korrekt 0,50 bei 0 Geschwistern (Prompt 121)
+- Wohngeld § 17 Nr. 1 Schwerbehinderten-FB 125 € statt korrekt 150 €/Monat (Prompt 120a-Rollback)
+
+## UI-Labels und rechtliche Tatbestände (Prompt 121-fix, 22.04.2026)
+
+Wenn ein Rechner Mehrbedarfe, Freibeträge oder Tarif-Optionen mit rechtlichen Voraussetzungen anbietet:
+
+- **Keine impliziten Auto-Aktivierungen** basierend auf Kontext-Wahrscheinlichkeiten. Beispiel-Anti-Pattern: „Alleinerziehenden-Mehrbedarf wirkt automatisch bei Kind im Haushalt" — § 21 Abs. 3 SGB II verlangt **alleinige Pflege und Erziehung**, nicht bloßes Kind-Vorhandensein. Im Wechselmodell oder bei Paar mit Kindern greift er nicht.
+- **Explizite Checkbox mit Rechtsbegriff im Label**, nicht nur „Alleinerziehend", sondern „Alleinerziehend — alleinige Pflege und Erziehung des/der Kinder". Der Rechtsbegriff **ist** das Label.
+- **Hilfetext erläutert die Ausnahmen** (z. B. Wechselmodell). Kein pauschaler „automatisch"-Text.
+- **Tatbestandsgebundene Inputs nur sichtbar**, wenn die Grundvoraussetzung erfüllt ist (z. B. Alleinerziehend-Checkbox erst bei `bedarfsgemeinschaft === 'alleinstehend' && kinder.length > 0`).
+
+## Statische Routes müssen Kategorie-Sidebar explizit integrieren (Prompt 120d-sidebar, 22.04.2026)
+
+Für Rechner- oder Explainer-Seiten, die nicht über die dynamische Route `app/[kategorie]/[rechner]/page.tsx` laufen:
+
+- Sidebar-Pattern 1:1 aus der dynamischen Route übernehmen (`kategorien` + `getRechnerByKategorie` + `aria-current`-Markierung)
+- `AKTUELLER_SLUG`-Konstante setzen, damit der aktive Rechner visuell hervorgehoben wird
+- Breite konsistent: `lg:w-64 shrink-0`
+- AdSlot typ="rectangle" unter der Sidebar-Kategorie platzieren
+- **Prompts für neue statische Routes müssen explizit „inkl. Kategorie-Sidebar" nennen** — „passt optisch zu anderen Rechnern" ist nicht präzise genug (Fallstrick-Herkunft)
+
+Referenz-Umsetzung: [`app/finanzen/wohngeld-rechner/page.tsx`](../../app/finanzen/wohngeld-rechner/page.tsx) (seit Prompt 120d-sidebar).
+
 ## Common Mistakes to Avoid
 
 - URLs without www in sitemap or canonical tags
@@ -776,6 +882,8 @@ Tarif-, SV-, Unterhalts-, Mindestlohn-, Renten- und Pfändungs-Rechner dürfen P
 - `lib/berechnungen/mindestlohn.ts` **(neu, 04/2026)** — `MINDESTLOHN`, `getAktuellerMindestlohn(stichtag)`, Switch auf 14,60 € zum 01.01.2027
 - `lib/berechnungen/rente.ts` **(erweitert, 04/2026)** — `RENTENWERT`, `getAktuellerRentenwert(stichtag)`, Switch 40,79 → 42,52 € zum 01.07.2026
 - `lib/berechnungen/pfaendung.ts` **(erweitert, 04/2026)** — `getAktuellePfaendungsParameter(stichtag)`, Switch 1.555,00 → 1.587,40 € zum 01.07.2026 (BGBl. 2026 I Nr. 80)
+- `lib/berechnungen/bafoeg-parameter.ts` **(neu, Prompt 121, 22.04.2026)** — `getAktuelleBafoegParameter(stichtag)`, `getAnrechnungsquote(geschwister)` (0,50 − 0,05 × Kinder, min/max-Clamp), single-bucket `BAFOEG_AB_2024_08_01` mit Skeleton für WS 2026/27. Antragsteller zählt NICHT mit.
+- `lib/berechnungen/buergergeld-parameter.ts` **(neu, Prompt 121, 22.04.2026)** — `getAktuelleBuergergeldParameter(stichtag)`, Zwei Buckets `BUERGERGELD_2026_H1` + `BUERGERGELD_2026_H2` (Switch 01.07.2026 auf „Neue Grundsicherung"; H2 derzeit identisch zu H1 als Skeleton bis Gesetzestext verabschiedet). Enthält Regelsätze RSS1–6, Vermögensfreibeträge, Mehrbedarfs-Sätze § 21 Abs. 2–7 SGB II.
 
 Die drei Tarif-Rechner (Brutto-Netto, Lohnsteuer, Einkommensteuer) sind eine **Rechner-Gruppe** mit geteilter Logik. Änderungen an zentralen Parametern wirken auf alle drei. Siehe auch G10 (keine Dubletten zentraler Werte).
 
@@ -806,3 +914,4 @@ Ohne diesen Schritt geben Claude-Chat und Claude-Code inkonsistente Ratschläge 
 | 20.04.2026 | Prompt 102: Guard G13 (Differenz-Methode Steuer-Ersparnis), 4 neue Anti-Patterns (Pendler-Duplikat, Tarif-Jahr-Hardcode, Soli-pauschal, BBG-Hardcodes), Meta-Lektion Soli-Wiederholungs-Bug, Positive-Patterns-Abschnitt mit Referenz-Rechnern, Lint-contextKeywords-Hinweis | [ ] noch offen |
 | 20.04.2026 | Prompt 107b: Guard G14 (Ein Footer, dynamische Zahlen) + Lint-Script `scripts/check-footer.mjs` dokumentiert | [ ] noch offen |
 | 20.04.2026 | Prompt 108: Rechner-Count im Header auf 169/9 aktualisiert, Guards-Referenzen G1–G9/G10 auf G1–G14, Affiliate-Regel-Verweis auf CLAUDE.md, Anti-Pattern Grundfreibetrag inline ergänzt | [ ] noch offen |
+| 22.04.2026 | Prompt 122-doku-sync: BAföG/Bürgergeld Parameter-Libs im Pattern-Abschnitt, SSOT-Parameter-Lib-Muster mit Interface+Bucket+Getter, Amazon-Partner-Abschnitt (AmazonBox + Regeln), Audit-Lehre-Checkliste (Zahlen-Erwartungen nur aus Primärquelle/Oracle), UI-Label-Rechtsbezug (Prompt 121-fix Lehre), statische-Route-Sidebar (Prompt 120d-sidebar Lehre) | [ ] noch offen |

@@ -87,6 +87,44 @@
 | DT 2026 Mindestbedarf (1. Altersstufe) | 486 € | Düsseldorfer Tabelle 2026 | OLG Düsseldorf | `duesseldorfer-tabelle.ts` | — | 19.04.2026 |
 | Elternunterhalt-Schwelle | 2.650 € + 70 % anrechnungsfrei | BGH XII ZB 6/24 | — | `duesseldorfer-tabelle.ts` | — | 19.04.2026 |
 
+### BAföG (Prompt 121, 22.04.2026)
+
+| Parameter | Wert 2026 | Rechtsgrundlage | Bekanntgabe | Zentrale Lib | Switch | Letzter Check |
+|---|---|---|---|---|---|---|
+| Grundbedarf Studium (eigene Wohnung) | 855 € (= 475 + 380) | § 13 Abs. 1 Nr. 2 + Abs. 2 Nr. 2 BAföG | 29. BAföG-ÄndG v. 23.07.2024 | `bafoeg-parameter.ts` (`BAFOEG_AB_2024_08_01.bedarf.studium.eigene`) | WS 2026/27 offen | 22.04.2026 |
+| Grundbedarf Studium (bei Eltern) | 534 € | § 13 Abs. 2 Nr. 1 BAföG | wie oben | `bafoeg-parameter.ts` | WS 2026/27 offen | 22.04.2026 |
+| Wohnpauschale Studium (auswärts) | 380 € | § 13 Abs. 2 Nr. 2 BAföG | wie oben | `bafoeg-parameter.ts` | KoaV-Plan 440 € noch nicht verabschiedet | 22.04.2026 |
+| Wohnpauschale Schule (auswärts) | 370 € | § 13 BAföG | wie oben | `bafoeg-parameter.ts` | WS 2026/27 offen | 22.04.2026 |
+| KV-Zuschlag Studium (bis 30 J.) | 102 €/Monat | § 13a BAföG | wie oben | `bafoeg-parameter.ts` | — | 22.04.2026 |
+| PV-Zuschlag Studium (bis 30 J.) | 35 €/Monat | § 13a BAföG | wie oben | `bafoeg-parameter.ts` | — | 22.04.2026 |
+| Kinderbetreuungszuschlag § 14b | 160 €/Monat pro Kind | § 14b BAföG | wie oben | `bafoeg-parameter.ts` | — | 22.04.2026 |
+| Elternfreibetrag verheiratet | 2.415 € | § 25 Abs. 1 BAföG | wie oben | `bafoeg-parameter.ts` (`freibetraege.elternVerheiratet`) | — | 22.04.2026 |
+| Elternfreibetrag alleinstehend | 1.605 € | § 25 Abs. 1 BAföG | wie oben | `bafoeg-parameter.ts` (`freibetraege.elternAlleinstehend`) | — | 22.04.2026 |
+| Freibetrag Geschwister § 25 Abs. 3 | 730 €/Kind | § 25 Abs. 3 BAföG | wie oben | `bafoeg-parameter.ts` (`freibetraege.proGeschwister`) | — | 22.04.2026 |
+| Freibetrag eigenes Einkommen | 330 €/Monat (Minijob-Grenze) | § 23 BAföG | wie oben | `bafoeg-parameter.ts` | — | 22.04.2026 |
+| Vermögensfreibetrag < 30 J. | 15.000 € | § 29 BAföG | wie oben | `bafoeg-parameter.ts` | — | 22.04.2026 |
+| Vermögensfreibetrag ≥ 30 J. | 45.000 € | § 29 BAföG | wie oben | `bafoeg-parameter.ts` | — | 22.04.2026 |
+| Anrechnungsquote Eltern | 0,50 − 0,05 × Geschwister (min 0, max 0,50) | § 25 Abs. 6 S. 1 BAföG | BMBF-FAQ (Antragsteller NICHT mitgezählt) | `bafoeg-parameter.ts` via `getAnrechnungsquote()` | — | 22.04.2026 |
+| Höchstsatz Studium (auswärts, selbstvers., bis 30 J.) | 992 € | Summe § 13 + § 13a | wie oben | aus `bafoeg-parameter.ts` abgeleitet | WS 2026/27 offen | 22.04.2026 |
+| Bagatellgrenze | 10 € | § 51 Abs. 4 BAföG | unverändert | `bafoeg-parameter.ts` | — | 22.04.2026 |
+
+### Bürgergeld (Prompt 121, 22.04.2026)
+
+| Parameter | Wert 2026 | Rechtsgrundlage | Bekanntgabe | Zentrale Lib | Switch | Letzter Check |
+|---|---|---|---|---|---|---|
+| Regelsatz Alleinstehend (RSS1) | 563 € | § 20 SGB II RBS | Regelbedarfsstufen-Fortschreibung (Nullrunde 2026) | `buergergeld-parameter.ts` (`BUERGERGELD_2026_H1.regelsaetze.alleinstehend`) | 01.07.2026 H2-Skeleton | 22.04.2026 |
+| Regelsatz Partner (RSS2) | 506 € | § 20 SGB II RBS | wie oben | `buergergeld-parameter.ts` | 01.07.2026 H2-Skeleton | 22.04.2026 |
+| Regelsatz Kinder 14–17 (RSS3) | 471 € | § 20 SGB II RBS | wie oben | `buergergeld-parameter.ts` | 01.07.2026 H2-Skeleton | 22.04.2026 |
+| Regelsatz Kinder 6–13 (RSS4) | 390 € | § 20 SGB II RBS | wie oben | `buergergeld-parameter.ts` | 01.07.2026 H2-Skeleton | 22.04.2026 |
+| Regelsatz Kinder 0–5 (RSS5/6) | 357 € | § 20 SGB II RBS | wie oben | `buergergeld-parameter.ts` | 01.07.2026 H2-Skeleton | 22.04.2026 |
+| Mehrbedarf Schwangerschaft ab 13. SSW | 17 % Regelsatz | § 21 Abs. 2 SGB II | — | `buergergeld-parameter.ts` | — | 22.04.2026 |
+| Mehrbedarf Alleinerziehend Nr. 1 | 36 % (bei spezifischer Konstellation Alter/Zahl der Kinder) | § 21 Abs. 3 Nr. 1 SGB II | — | `buergergeld-parameter.ts` | — | 22.04.2026 |
+| Mehrbedarf Alleinerziehend Nr. 2 | 12 % × Kinderzahl | § 21 Abs. 3 Nr. 2 SGB II | — | `buergergeld-parameter.ts` | — | 22.04.2026 |
+| Mehrbedarf Alleinerziehend Deckel | 60 % Regelsatz | § 21 Abs. 3 SGB II (max-Klausel) | — | `buergergeld.ts` (`berechneMehrbedarfe`) | — | 22.04.2026 |
+| Mehrbedarf Behinderung + Eingliederungshilfe | 35 % | § 21 Abs. 4 SGB II | — | `buergergeld-parameter.ts` | — | 22.04.2026 |
+| Warmwasserzuschlag (altersgestaffelt) | 2,3 % / 1,4 % / 1,2 % / 0,8 % pro Person | § 21 Abs. 7 SGB II | — | `buergergeld-parameter.ts` | — | 22.04.2026 |
+| Bürgergeld H2 „Neue Grundsicherung" | **Skeleton** — Parameter identisch zu H1 bis Gesetzestext | Koalitions-Entwurf, Stand 04/2026 | — | `buergergeld-parameter.ts` (`BUERGERGELD_2026_H2`) | **01.07.2026 Switch aktiv (noch ohne Effekt)** | 22.04.2026 |
+
 ---
 
 ## 🔔 Audit-Routine
@@ -193,6 +231,12 @@ Wenn ein Gesetz verabschiedet wird, das einen Parameter ändert (z. B. StÄndG 2
 ## 🗒️ Änderungshistorie dieser Datei
 
 Neue Einträge oben anfügen.
+
+### 2026-04-22 — Stufe-4b-Ergänzung (Prompt 121 + 122-doku-sync)
+- Neue Sektion **BAföG** mit 16 Parametern (Bedarfe, Zuschläge, Freibeträge, Anrechnungsquote) aus `bafoeg-parameter.ts`
+- Neue Sektion **Bürgergeld** mit 12 Parametern (Regelsätze RSS1–6, Mehrbedarfe § 21 Abs. 2–7 SGB II, Warmwasser-Staffel) aus `buergergeld-parameter.ts`
+- Zwei neue Stichtag-Switches dokumentiert: BAföG WS 2026/27 (Skeleton bis Verordnung) und Bürgergeld H2 „Neue Grundsicherung" zum 01.07.2026 (Skeleton bis Gesetzestext)
+- Wohngeld-Lib ist vorübergehend Explainer-Mode (Prompt 120d) — Wohngeld-Dynamisierung-Checkliste bleibt für 120c-Refactoring im Juni 2026 relevant
 
 ### 2026-04-19 — Initial-Befüllung
 - Alle Parameter auf Stand Audit-Welle 1 Stufen 1+2

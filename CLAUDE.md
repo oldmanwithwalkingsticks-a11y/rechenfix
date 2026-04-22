@@ -36,6 +36,20 @@
 | Eventfloss Berlin | 27722 | eventfloss-berlin.de |
 | Nature's Way | 47173 | naturesway.de |
 
+## Amazon Partner-Programm (seit 22.04.2026, Prompt 122-amazon)
+
+Separates Partnerprogramm außerhalb von Awin. Tag-ID: **`rechenfix-21`**. Mechanik: keyword-basierte Suchlinks (keine festen ASINs, selbstheilend), Ziel-Domain `amazon.de`.
+
+- **Komponente:** [`components/AmazonBox.tsx`](components/AmazonBox.tsx) — unabhängig von `AffiliateBox`, weil Amazon eine andere Mechanik hat (Tag statt Publisher-ID, Suchlink statt Deeplink)
+- **Helper:** [`lib/amazon-link.ts`](lib/amazon-link.ts) — `createAmazonSearchLink(keyword, marketingConsentGranted)`. Tag `rechenfix-21` wird **nur** bei erteiltem Marketing-Consent angehängt; ohne Consent bleibt der Link funktionsfähig, aber ohne Provision
+- **Pflicht-Footer-Hinweis:** „Als Amazon-Partner verdiene ich an qualifizierten Verkäufen." — sichtbar auf jeder Seite, Teilnahmebedingung nicht optional
+- **Datenschutzerklärung:** Abschnitt 9b Amazon-Partnerprogramm in [`app/datenschutz/page.tsx`](app/datenschutz/page.tsx)
+- **Cookie-Banner:** Marketing-Kategorie erweitert um „Amazon Associates" mit expliziter Tag-Nennung
+- **Einsatz-Kategorien:** Kochen, Sport, Auto, Wohnen, Alltag, Arbeit. **Verboten** auf Gesundheit/Finanzen/Mathe (analog Awin-Platzierungsregel)
+- **Integrierte Rechner (Stand 22.04.2026):** 16 — siehe [`docs/amazon-integration.md`](docs/amazon-integration.md) für vollständige Tabelle mit Keywords und Platzierungs-Pattern
+- **Frist:** Erster qualifizierter Referral bis ca. 19.10.2026 (180-Tage-Uhr), sonst Account-Schließung durch Amazon
+- **Selbstbezug verboten:** Keine Käufe über eigene Affiliate-Links, auch nicht für Familie im selben Haushalt. Testklicks im Inkognito ohne Marketing-Consent (Tag wird nicht übermittelt)
+
 ## Affiliate-Platzierungs-Regel (Stand April 2026, Prompt 106)
 Affiliate ist erlaubt, wenn **thematischer Match** zum Rechner besteht. Entscheidung pro Rechner, nicht pauschal pro Kategorie.
 - ✅ Zahnzusatz auf Gesundheits-Rechnern mit thematischer Brücke (Raucher → Parodontitis, Schlaf → Bruxismus) — erlaubt
@@ -182,6 +196,10 @@ Alle jahresabhängigen und gesetzlich definierten Werte liegen in `lib/berechnun
 | `kfz-steuer.ts`, `balkon-solar.ts`, `waermepumpe.ts` | Domänen-spezifisch | |
 | `erbschaftsteuer.ts` **(erweitert, Prompts 115c+116)** | § 19 ErbStG inkl. Abs. 3 Härtefall + § 14-Kumulation bei Vorschenkungen + § 13 Hausrat-FB | `berechneErbStMitHaertefall(stpflErwerb, klasse)`, `ERBST_TARIF_STUFEN`, `Steuerklasse`, `berechneErbschaftsteuer` (nutzt § 14 + Hausrat) |
 | `schenkungssteuer.ts` | § 16 ErbStG persönliche Freibeträge, § 13 Hausrat-FB | `berechneSchenkungssteuer(...)` (importiert Härtefall aus `erbschaftsteuer.ts`) |
+| `bafoeg-parameter.ts` **(neu, Prompt 121)** | SSOT für BAföG § 13/13a/14b/23/25/29/51 mit Stichtag-Switch-Skeleton (single-bucket `BAFOEG_AB_2024_08_01`, Platz für WS 2026/27) | `getAktuelleBafoegParameter(stichtag)`, `getAnrechnungsquote(geschwister, params)`, `BafoegParameter`, `BAFOEG_AB_2024_08_01` |
+| `buergergeld-parameter.ts` **(neu, Prompt 121)** | SSOT für Bürgergeld § 20 ff. SGB II mit Stichtag-Switch H1/H2 (01.07.2026 „Neue Grundsicherung" — H2 derzeit identisch zu H1 als Skeleton) | `getAktuelleBuergergeldParameter(stichtag)`, `BuergergeldParameter`, `BUERGERGELD_2026_H1`, `BUERGERGELD_2026_H2` |
+| `buergergeld.ts` **(erweitert, Prompt 121)** | Gesamtberechnung + Mehrbedarfe § 21 SGB II (alle 6 Tatbestände inkl. Alleinerziehend-Kombinations-Logik max(Nr.1/Nr.2) mit 60 %-Deckel) | `berechneBuergergeld(...)`, `berechneMehrbedarfe(eingabe, params)`, `MehrbedarfEingabe` |
+| `wohngeld.ts` **(Explainer-Mode seit 120d)** | **Lib vorübergehend nicht voll-produktiv** — `/finanzen/wohngeld-rechner` läuft als Explainer-Seite. Bekannter Architektur-Bug bei §§ 14–16 WoGG Pro-Person-Behandlung (Refactoring Prompt 120c geplant für Juni 2026 gemeinsam mit Bürgergeld-Reform) | `HOECHSTBETRAEGE_WOGG_2026`, `ZUSCHLAG_PRO_PERSON_WOGG_2026` (für Explainer-Tabelle) |
 
 **Verboten:** Eigene ESt-, LSt-, SV-, Kindergeld-, Pfändungs- oder Mindestlohn-Formeln in Komponenten oder Rechnern. Immer die zentrale Lib importieren. Diese Regel ergab sich aus Sprint 1 (April 2026) und wurde im Jahresaudit 2026 (Prompts 86–91) nochmal bestätigt, als in fünf Rechnern Formel-Duplikate mit 1–2 Jahre veralteten Werten gefunden wurden.
 
@@ -232,9 +250,31 @@ export const WERT = getAktuellerWert();
 - Unit-Tests möglich (Stichtag injizierbar).
 - Kein "aktiver Bug seit X Monaten"-Szenario, weil der Switch deterministisch greift.
 
-**Aktuell mit Stichtag-Switch:** `mindestlohn.ts` (01.01.2027), `rente.ts` (01.07.2026), `pfaendung.ts` (01.07.2026).
+**Aktuell mit Stichtag-Switch:** `mindestlohn.ts` (01.01.2027), `rente.ts` (01.07.2026), `pfaendung.ts` (01.07.2026), `bafoeg-parameter.ts` (single-bucket, Skeleton für WS 2026/27), `buergergeld-parameter.ts` (H1/H2 zum 01.07.2026).
 
 **Regel:** Bei jedem neuen unterjährigen Wechsel dieses Pattern anwenden — nicht einen nackten Kommentar "// TODO: Wert zum 01.07. ändern" hinterlegen.
+
+### SSOT-Parameter-Lib-Muster (seit Prompt 121)
+
+Parameter-Libs folgen einem einheitlichen Muster: **Typ-Interface + ein Bucket pro Stichtag + `getAktuelle…Parameter(stichtag)`-Getter**. Dieses Muster existiert für `mindestlohn.ts`, `rente.ts`, `pfaendung.ts`, `bafoeg-parameter.ts`, `buergergeld-parameter.ts`. Bei jedem neuen rechtsstands-abhängigen Parameter-Set wird das Muster angewendet.
+
+```ts
+export interface XxxParameter {
+  regelsaetze: { alleinstehend: number; /* ... */ };
+  freibetraege: { /* ... */ };
+  quelle: string;
+  gueltigAb: Date;
+}
+
+export const XXX_AB_YYYY_MM_DD: XxxParameter = { /* ... */ };
+
+export function getAktuelleXxxParameter(stichtag: Date = new Date()): XxxParameter {
+  const switchDatum = new Date(2026, 6, 1); // 01.07.2026
+  return stichtag >= switchDatum ? XXX_AB_2026_07_01 : XXX_AB_2024_08_01;
+}
+```
+
+**Import-Regel:** Rechner und andere Libs **importieren ausschließlich über den Getter** `getAktuelleXxxParameter()`, niemals direkt aus den Bucket-Konstanten. Damit bleibt der Stichtag-Switch deterministisch und testbar, und das Austauschen von Buckets erfordert keine Suche/Ersetzen im Repo.
 
 ## Aktueller Rechtsstand (Stand April 2026)
 
@@ -277,9 +317,16 @@ export const WERT = getAktuellerWert();
 | Unterhalt DT 2026 Mindestbedarf | 486 / 558 / 653 / 698 € | 01.01.2027 | `duesseldorfer-tabelle.ts` | Düsseldorfer Tabelle |
 | Deutschlandticket | 63 €/Monat | offen | Inline | seit 01.01.2026 |
 | LSt-PAP § 39b EStG | jährlicher ITZBund-Programmablaufplan 2026 | jährlich zum 01.01. | `_lohnsteuer-pap-2026.ts` (Voll-PAP-Port seit Prompt 118) | § 39b EStG + BMF/ITZBund-Referenz |
-| BAföG-Höchstsatz | 992 € Studium auswärts bis 30 J. (475 + 380 + 102 + 35) | ggf. 01.08.2026 (KoaV-Plan 440 € Wohnpauschale, noch nicht verabschiedet) | `bafoeg.ts` (BEDARF, KV_ZUSCHLAG, PV_ZUSCHLAG seit Prompt 120) | § 13, § 13a BAföG + 29. BAföG-ÄndG v. 01.08.2024 |
-| Wohngeld Höchstbeträge | 35-Zellen-Matrix 5 P × 7 Mietstufen nach Anlage 1 WoGG | 01.01.2027 (nächste 2-J-Dynamisierung) | `wohngeld.ts` (HOECHSTBETRAEGE seit Prompt 120) | § 12 WoGG + Zweite Verordnung z. Fortschreibung v. 21.10.2024 |
-| Wohngeld Freibeträge § 17 WoGG | Erwerbst. 83,33 €/Mo, Schwerbeh. 125 €/Mo, Alleinerz. 110 €/Mo pro Kind | offen | `wohngeld.ts` (berechneWohngeld seit Prompt 120) | § 17 WoGG |
+| BAföG-Höchstsatz | 992 € Studium auswärts bis 30 J. (475 + 380 + 102 + 35) | ggf. 01.08.2026 (KoaV-Plan 440 € Wohnpauschale, noch nicht verabschiedet) | `bafoeg-parameter.ts` **(neu SSOT, Prompt 121)** via `getAktuelleBafoegParameter()` | § 13, § 13a BAföG + 29. BAföG-ÄndG v. 01.08.2024 |
+| BAföG Elternfreibetrag | 2.415 € verheiratet / 1.605 € alleinstehend + 730 €/Geschwister | offen | `bafoeg-parameter.ts` (`freibetraege.elternVerheiratet`/`elternAlleinstehend`/`proGeschwister`) | § 25 Abs. 1 + Abs. 3 BAföG |
+| BAföG Anrechnungsquote | 0,50 − 0,05 × Geschwister (min 0, max 0,50) — Antragsteller zählt NICHT mit | offen | `bafoeg-parameter.ts` via `getAnrechnungsquote(geschwister)` | § 25 Abs. 6 S. 1 BAföG + BMBF-FAQ |
+| Bürgergeld Regelsatz Alleinstehend | 563 €/Monat (Nullrunde 2026, Anpassung 2027) | 01.01.2027 | `buergergeld-parameter.ts` **(neu SSOT, Prompt 121)** via `getAktuelleBuergergeldParameter()` | § 20 SGB II + Regelbedarfsstufen-Fortschreibung |
+| Bürgergeld Regelsatz Partner | 506 €/Monat (RSS2) | 01.01.2027 | `buergergeld-parameter.ts` | § 20 SGB II RSS2 |
+| Bürgergeld Regelsatz Kinder | 471 / 390 / 357 € je nach Alter (RSS3/4/5/6) | 01.01.2027 | `buergergeld-parameter.ts` | § 20 SGB II RSS3–6 |
+| Bürgergeld Mehrbedarfe § 21 SGB II | Schwangerschaft 17 %, Alleinerz. max(36 %, 12%×Kind) Deckel 60 %, Behinderung 35 %, kostenaufw. Ernährung/atyp. €-Betrag, Warmwasser 2,3/1,4/1,2/0,8 % altersabh. | offen | `buergergeld.ts` (`berechneMehrbedarfe`) + `buergergeld-parameter.ts` | § 21 Abs. 2–7 SGB II |
+| Bürgergeld H2 „Neue Grundsicherung" | **Skeleton** — Parameter identisch zu H1 bis Gesetzestext verabschiedet ist | **01.07.2026 Switch aktiv (noch ohne Effekt)** | `buergergeld-parameter.ts` (`BUERGERGELD_2026_H2`) | Koalitions-Entwurf, Stand 04/2026 |
+| Wohngeld Höchstbeträge | 35-Zellen-Matrix 5 P × 7 Mietstufen nach Anlage 1 WoGG | 01.01.2027 (nächste 2-J-Dynamisierung) | `wohngeld.ts` (`HOECHSTBETRAEGE_WOGG_2026`, `ZUSCHLAG_PRO_PERSON_WOGG_2026` exportiert seit 120d) | § 12 WoGG + Zweite Verordnung z. Fortschreibung v. 21.10.2024 |
+| Wohngeld-Rechner | **Explainer-Seite seit Prompt 120d** (Lib hat Architektur-Bug bei §§ 14–16 pro Person). Statische Route `app/finanzen/wohngeld-rechner/page.tsx` mit Hinweis-Banner auf BMWSB-Rechner | Juni 2026 (Prompt 120c Lib-Refactoring gebündelt mit Bürgergeld-Reform) | `app/finanzen/wohngeld-rechner/page.tsx` + `wohngeld.ts` (unberührt) | — |
 | Pfändung § 850c ZPO Tabelle | amtliche 10-€-Stufen-Tabelle via Netto-Abrundung; Stichtag-Switch PFAENDUNG_2025/2026 | 01.07.2028 (2-J-Rhythmus § 850c Abs. 4) | `pfaendung.ts` (seit Prompt 120 mit Stufen-Abrundung) | § 850c ZPO + BGBl. 2025 I Nr. 110 + BGBl. 2026 I Nr. 80 |
 | ErbSt-Tarifstufen § 19 ErbStG | 75k/300k/600k/6M/13M/26M mit Kl. I/II/III-Sätzen | selten | `erbschaftsteuer.ts` (`ERBST_TARIF_STUFEN` + `berechneErbStMitHaertefall` seit Prompt 115c) | § 19 ErbStG inkl. Abs. 3 Härtefall |
 | AfA degressiv bewegliche WG | **ausgelaufen zum 31.12.2025** (Fallback auf linear für Anschaffungen ab 01.01.2026) | — | `AfaRechner.tsx` (Gate `startJahr >= 2026`) | § 7 Abs. 2 EStG n.F. (Wachstumschancengesetz) |
@@ -289,7 +336,7 @@ export const WERT = getAktuellerWert();
 | AfA Sammelposten-Pool § 6 Abs. 2a EStG | 20 % p. a. linear, 5 Jahre, WG 250,01 € bis 1.000 € netto | offen | `AfaRechner.tsx` (Methode `'sammelposten'`) | § 6 Abs. 2a EStG |
 | ErbSt Versorgungs-FB Kinder § 17 Abs. 2 ErbStG | Staffel 52k/41k/30,7k/20,5k/10,3k/0 € je nach Alter | selten | `erbschaftsteuer.ts` (`versorgungsfbKind`) | § 17 Abs. 2 ErbStG |
 
-**Stichtag-Switch automatisch:** Die drei fett markierten Parameter (Rentenwert 01.07.2026, Mindestlohn 01.01.2027, Pfändung 01.07.2026) wechseln ohne Deploy durch das Stichtag-Switch-Pattern in den Libs. Nach den Stichtagen nur Spot-Check.
+**Stichtag-Switch automatisch:** Die fett markierten Parameter (Rentenwert 01.07.2026, Mindestlohn 01.01.2027, Pfändung 01.07.2026, Bürgergeld H2 01.07.2026-Skeleton) wechseln ohne Deploy durch das Stichtag-Switch-Pattern in den Libs. Nach den Stichtagen nur Spot-Check. Bei Bürgergeld H2 muss die „Neue Grundsicherung"-Reform-Verabschiedung abgewartet werden — aktuell sind H1- und H2-Werte identisch.
 
 ## Tarif-Parameter 2026 (Referenzwerte)
 
@@ -357,6 +404,14 @@ Gelernt aus Prompt 120 → 120a: `verify-wohngeld-p1.ts` lief 41/41 grün, weil 
 5. **Referenz für Finanz-Rechner**: BMF-Steuerrechner (`bmf-steuerrechner.de/ekst/`) ist die amtliche Quelle für Lohn- und Einkommensteuer-Berechnungen.
 
 6. **Lokaler Build-Check: immer `npm run build`, nie nur `npx next build`** (Prompt 104, April 2026). Das Repo hat einen `prebuild`-Hook, der `scripts/generate-client-data.ts` ausführt und `lib/rechner-config/client-data.ts` regeneriert. `npx next build` überspringt den Hook, wodurch sich Inkonsistenzen zwischen dem commited `client-data.ts` und dem aktuellen Stand in `lib/rechner-config/index.ts` lokal nicht zeigen — aber Vercel schlägt Alarm (`npm run build` dort). Folge: TS-Fehler im Vercel-Build für einen vorherigen Commit, der lokal grün war. Konkret passiert bei neuen Feldern in `KategorieConfig`/`RechnerConfig`, die im Generator-Inline-Interface nicht mit-ergänzt wurden. Fix-Pattern: Generator mappt explizit „light" Felder, Interface in der generierten Datei passt dazu.
+
+7. **Amazon-Partnerprogramm** (Prompt 122-amazon, April 2026): Der Tag `rechenfix-21` wird **nur** bei erteiltem Marketing-Consent an den Amazon-Suchlink angehängt (`useCookieConsent().marketingAllowed`). Die AmazonBox bleibt **immer** sichtbar — ohne Consent kein Partner-Tag, aber der Link funktioniert weiter für den User (Service über Provision). Keine AmazonBox auf Rechnern der Kategorien **Gesundheit, Finanzen, Mathe** (konsistent zur bestehenden Affiliate-Platzierungsregel aus Prompt 106). Vollständige Integration-Dokumentation mit Rechner-Tabelle und 180-Tage-Monitoring-Plan in [`docs/amazon-integration.md`](docs/amazon-integration.md).
+
+8. **Audit-Methodik — Zahlen-Erwartungen nie aus dem Gedächtnis** (Lehren 22.04.2026): Wenn Prompts Soll-Werte nennen (Testfall-Erwartungen, FAQ-Faustregeln, BAföG-Beispielwerte), diese **nicht** ungeprüft übernehmen. Stattdessen aus Rechtsquelle (Gesetzestext, BGBl., Amtliche Tabelle) oder externem Oracle (BMBF-BAföG-Rechner, BMWSB-Wohngeldrechner, BA-Bürgergeldrechner, BMF-Steuerrechner) herleiten. Mehrfach-Vorfälle am 22.04.: FAQ-Faustregel zu Einkommensgrenzen, 3-Monats-Rückwirkungs-Annahme Wohngeld, BAföG-Schätzwert 600 €, BAföG-Geschwister-Quoten-Schnellschuss (0,45 → korrekt 0,50 bei 0 Geschwistern nach § 25 Abs. 6 + BMBF-FAQ). **Regel:** Jede Zahl im Prompt vor Übernahme gegen externe Quelle cross-checken — „sieht plausibel aus" ist nicht genug.
+
+9. **UI-Labels müssen rechtliche Tatbestände korrekt abbilden** (Lehre 22.04.2026 aus Prompt 121 → 121-fix): Keine impliziten Auto-Aktivierungen von Mehrbedarfen/Freibeträgen/Tarifen, die rechtliche Voraussetzungen haben. Beispiel Alleinerziehenden-Mehrbedarf § 21 Abs. 3 SGB II: war in 121 pauschal „bei Kind im Haushalt" getriggert, musste in 121-fix auf explizite Checkbox mit Wechselmodell-Hinweis umgestellt werden (§ 21 Abs. 3 verlangt **alleinige Pflege und Erziehung**). Pattern: Bei Tatbeständen mit Rechtsvoraussetzung immer bewusste User-Bestätigung einfordern, nicht aus Kontext raten.
+
+10. **Statische Routes mit eigener `page.tsx` müssen Kategorie-Sidebar explizit rendern** (Lehre 22.04.2026 aus Prompt 120d → 120d-sidebar): Dynamische Rechner-Route `app/[kategorie]/[rechner]/page.tsx` rendert die Sidebar inline. Statische Overrides (aktuell nur `/finanzen/wohngeld-rechner`) fallen ohne explizite Integration raus und zeigen kein Kategorie-Menü → UX-Bruch + fehlende interne Verlinkung. Pattern: Sidebar-Code aus der dynamischen Route 1:1 übernehmen, `AKTUELLER_SLUG` als Aktiv-Markierung setzen. Prompts für neue statische Routes müssen **explizit** „inkl. Kategorie-Sidebar" nennen — „passt optisch zu anderen Rechnern" reicht nicht.
 
 ## Unterhaltsrechner — Parameter 2026
 
@@ -490,3 +545,10 @@ Reihenfolge nach Freigabe: erst 85 (Warning wegräumen), dann 68 (CMP dazu).
 - **120d** — Wohngeld-Hybrid Teil 1: `/finanzen/wohngeld-rechner` ersetzt durch statische Erklärseite in `app/finanzen/wohngeld-rechner/page.tsx` (Server Component, gewinnt gegen dynamische Route, zusätzlich in `generateStaticParams` per `STATISCHE_OVERRIDES`-Set ausgeschlossen). Oberhalb H1: Hinweis-Banner mit Link zum offiziellen BMWSB-Wohngeldrechner. Inhalt: Anspruchserklärung, Mietstufen I–VII, Höchstbeträge-Tabelle (Werte aus `HOECHSTBETRAEGE_WOGG_2026`/`ZUSCHLAG_PRO_PERSON_WOGG_2026`, neu exportiert — kein Daten-Duplikat), Rechengang paraphrasiert, Beispielrechnung 215 €, 5 FAQ (Frage 5 transparent zum Refactoring), Weiterführende Links. Schema.org FAQPage + BreadcrumbList, KEIN Calculator-Schema. Lib nur STATUS-Dateidoc-Kommentar + zwei Getter-Exports. Lib-Refactoring + Rollback auf dynamische Route als Prompt 120c reserviert (Juni 2026, parallel zu Bürgergeld → Neue Grundsicherung 01.07.2026). ✅
 - **120d-fix** — Vier fachliche Textkorrekturen in `app/finanzen/wohngeld-rechner/page.tsx`: Rechengang Schritt 4 (korrekt aufrunden auf volle Euro nach § 19 Abs. 2 WoGG i.V.m. Anlage 3 statt "Mindestwohngeld-Prüfung" + kaufmännisch), Rechengang-Schluss (wohngeldrechtliche Haushaltszusammensetzung statt Bedarfsgemeinschaft), FAQ 2 Einkommensgrenzen (keine Zahl-Faustregel, Verweis auf BMWSB), FAQ 4 Rückwirkung (§ 25 Abs. 2 WoGG + § 25 Abs. 3 / § 27 Ausnahmefälle statt pauschale Drei-Monats-Regel). FAQ-Array als single source of truth — Änderungen propagieren automatisch in Schema.org-JSON-LD. ✅
 - **121** — Stufe-4b P2-Pass + SSOT für BAföG/Bürgergeld/Pfändung (ohne Wohngeld — läuft als Explainer bis 120c/Juni): Neue SSOT-Libs `bafoeg-parameter.ts` + `buergergeld-parameter.ts` mit Stichtag-Switch-Pattern (BAföG single-bucket mit Skeleton für WS 2026/27, Bürgergeld mit H1+H2-Bucket für 01.07.2026 „Neue Grundsicherung"; H2-Parameter identisch zu H1 als Skeleton bis Gesetzestext). BAföG-Anrechnungsquote § 25 Abs. 6 als Funktion der Geschwister (0,50 − 0,05/Kind mit min/max-Clamp). Recherche-Korrektur zum Prompt: Antragsteller zählt NICHT selbst als „Kind" (bestätigt § 25 Abs. 6 + BMBF-FAQ) — bei 0 Geschwistern Quote 0,50 statt vorher hartkodiert 0,45. Bürgergeld-Mehrbedarfe § 21 SGB II alle 6 Tatbestände (Abs. 2/3/4/5/6/7) mit korrekter Alleinerziehend-Kombinations-Logik (max(Nr.1 36 %, Nr.2 12 %/Kind), 60 %-Deckel) + altersgestaffelter Warmwasser-Prozentsatz. UI-Erweiterungen: aufklappbare „Weitere Bedarfe"-Sektion mit 4 Checkboxen + 2 Euro-Feldern, KdU-Angemessenheitshinweis § 22 SGB II als dezenter Info-Block. Pfändung: Monat-Picker „Stichtag" mit Default = heute. Drei neue Verify-Scripts: 16/19/5 grün, alle gegen externe Gesetzesreferenzen (nicht-zirkulär). ✅
+- **121-fix** — Bürgergeld-Rechner UI-Komplettierung (22.04.2026): Kinder-Input-Block auch bei „Alleinstehend" (nicht nur „Paar mit Kindern"); explizite Alleinerziehend-Checkbox mit Wechselmodell-Hinweis (§ 21 Abs. 3 SGB II verlangt alleinige Pflege/Erziehung, nicht bloßes Kind-Vorhandensein); Dreifach-Guard `bg === 'alleinstehend' && kinder.length > 0 && alleinerziehend`; neutraler „automatisch im Haushalt"-Text ersetzt; `handleBgChange`-Cleanup beim Paar-Wechsel. Lib unverändert — Verify-Scripts weiter 19/19 grün. ✅
+- **121-analyse** — BAföG Geschwister-in-Ausbildung-Logik dokumentiert in `docs/audit-arbeitspapiere/bafoeg-geschwister-analyse.md`. Analyse ohne Code-Change: Lib wendet simultan + 730 €/Geschw Freibetrag (§ 25 Abs. 3) UND − 5 %-Punkte Anrechnungsquote (§ 25 Abs. 6) an. Beide Effekte aus dem gleichen Input gespeist — entspricht Gesetzestext (Abs. 6 verweist explizit auf Abs. 3). § 11 Abs. 4 BAföG (Aufteilung bei mehreren geförderten Auszubildenden) ist NICHT implementiert — User bekommt bei dem Fall zu niedrigen Betrag ausgewiesen. Karstens Netto-Sprung „3.489 → 2.206" im Screenshot konnte Lib-seitig nicht reproduziert werden (nettoEltern unverändert durch Geschwisterzahl). ✅
+- **121-geschwister-label** — BAföG-UI-Transparenz (22.04.2026): Help-Text unter Geschwister-Feld benennt jetzt beide Effekte und § 11 Abs. 4 als vereinfacht abgebildet; neuer grauer Disclaimer-Block (analog KdU-Hinweis BuergergeldRechner) unterhalb der Aufschlüsselung mit Verweis auf §§ 11 Abs. 3 + 4, § 25 Abs. 6 BAföG; Netto-Display als Fall A bestätigt (ist tatsächlich `nettoEltern`, keine Label-Korrektur nötig). Keine Lib-Änderung — Testfall-Werte bleiben identisch, Verify-Script 16/16 grün. ✅
+- **120d-fix** — Vier fachliche Textkorrekturen in der Wohngeld-Erklärseite (22.04.2026): Rechengang Schritt 4 korrekt aufrunden nach § 19 Abs. 2 WoGG (Anlage 3); Schluss-Begriff „wohngeldrechtliche Haushaltszusammensetzung" statt „Bedarfsgemeinschaft"; FAQ 2 ohne konkrete Einkommensgrenzen-Zahl; FAQ 4 Rückwirkung nach § 25 Abs. 2/3 + § 27 WoGG differenziert. FAQ-Array bleibt single source of truth (propagiert in Schema.org JSON-LD). ✅
+- **120d-sidebar** — Wohngeld-Erklärseite Kategorie-Sidebar wiederhergestellt (22.04.2026): Sidebar-Pattern 1:1 aus `app/[kategorie]/[rechner]/page.tsx` übernommen (`kategorien` + `getRechnerByKategorie` + `aria-current`), Wohngeld-Eintrag visuell als aktuelle Seite markiert (`AKTUELLER_SLUG = 'wohngeld-rechner'`), Breite auf `lg:w-64` angeglichen, AdSlot wandert in die Sidebar. Keine Content-Änderungen. Build 203/203 grün, Route weiterhin statisch gerendert. ✅
+- **122-amazon** — Amazon Partner-Programm (Tag `rechenfix-21`) integriert (22.04.2026): Rechtliches (Footer-Pflichthinweis, Datenschutz § 9b, Cookie-Banner Marketing-Kategorie); neue Komponente `components/AmazonBox.tsx` + Helper `lib/amazon-link.ts` (keyword-basierte Suchlinks, Tag nur bei Marketing-Consent); Integration in 16 Rechner (Kochen 6, Sport 2, Auto 2, Wohnen 3, Alltag 1, Arbeit 2). Keine AmazonBox auf Gesundheit/Finanzen/Mathe. 180-Tage-Frist für ersten Referral läuft bis ca. 19.10.2026. Vollständige Dokumentation in `docs/amazon-integration.md`. Build 203/203 grün. ✅
+- **122-doku-sync** — Doku-Sync nach Welle 1 Stufe 4b + Amazon (22.04.2026): CLAUDE.md + SKILL.md + Projekt-Referenz + Jahreswerte-Kalender auf Stand; neue Zeilen für BAföG- und Bürgergeld-Parameter, Amazon-Abschnitt, Anti-Patterns 9+10 (UI-Label-Rechtsbezug, statische Route-Sidebar), Regel 7+8 (Amazon-Consent, Zahlen-Erwartungen-Herkunft). Keine Code-Änderungen. ✅

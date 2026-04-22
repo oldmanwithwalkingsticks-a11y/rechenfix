@@ -1,6 +1,6 @@
 # Rechenfix.de — Projekt-Referenz
 
-Stand: April 2026
+Stand: 22.04.2026
 
 ## Was ist rechenfix.de?
 
@@ -36,7 +36,9 @@ Rechenfix.de ist ein deutschsprachiges Online-Rechner-Portal mit aktuell **169 k
 | Sport & Fitness | `/sport` | 2 |
 | **Summe** | | **169** |
 
-**Sitemap: 177 Rechner-URLs** — Differenz zu 169 erklärt sich durch Varianten-/Tabellen-Seiten unter `/finanzen/` (z.B. `2000-euro-brutto-netto` bis `5000-euro-brutto-netto`, `brutto-netto-tabelle`). Die dynamische Route `app/[kategorie]/[rechner]/page.tsx` rendert alle 177 URLs; Metadaten stehen in `lib/rechner-config/<kategorie>.ts`. Die URL `/gesundheit/herzfrequenz-rechner` wurde im April 2026 per 301-Redirect auf `/sport/herzfrequenz-zonen-rechner` konsolidiert (Feature-Obermenge).
+**Sitemap: 177 Rechner-URLs** — Differenz zu 169 erklärt sich durch Varianten-/Tabellen-Seiten unter `/finanzen/` (z.B. `2000-euro-brutto-netto` bis `5000-euro-brutto-netto`, `brutto-netto-tabelle`). Die dynamische Route `app/[kategorie]/[rechner]/page.tsx` rendert die URLs; Metadaten stehen in `lib/rechner-config/<kategorie>.ts`. Die URL `/gesundheit/herzfrequenz-rechner` wurde im April 2026 per 301-Redirect auf `/sport/herzfrequenz-zonen-rechner` konsolidiert (Feature-Obermenge).
+
+**Ausnahme:** `/finanzen/wohngeld-rechner` läuft seit Prompt 120d (22.04.2026) als **statische Explainer-Seite** statt als interaktiver Rechner — die Wohngeld-Lib hat einen Architektur-Bug bei §§ 14–16 WoGG Pro-Person-Behandlung, das Lib-Refactoring ist als Prompt 120c für Juni 2026 reserviert (gebündelt mit Bürgergeld-Reform „Neue Grundsicherung" 01.07.2026). Die Explainer-Seite verlinkt auf den offiziellen BMWSB-Wohngeldrechner und zeigt Höchstbeträge + Rechengang. Der Sidebar-Counter bleibt bei 169 (Rechner zählt weiter als Kategorie-Eintrag, rendert aber statisch).
 
 ## Zentrale Libs (SSOT, Stand April 2026)
 
@@ -57,6 +59,11 @@ Alle jahresabhängigen und gesetzlich definierten Werte liegen in `lib/berechnun
 | `pendlerpauschale.ts` **(überarbeitet 94a)** | § 9 EStG Entfernungspauschale | `PENDLERPAUSCHALE_SATZ_2026` (= 0,38 €), einheitlich ab 1. km |
 | `abfindung.ts` **(überarbeitet 94)** | § 34 EStG Fünftelregelung | `berechneEStGrund`-basiert, ohne Steuerklassen-Faktor, `verheiratet: boolean` |
 | `splitting.ts` **(überarbeitet 94/94a)** | Ehegattensplitting | `berechneEStGrund`-basiert, WK+SA **pro Partner** |
+| `bafoeg-parameter.ts` **(neu, Prompt 121)** | SSOT BAföG § 13/13a/14b/23/25/29/51 mit Stichtag-Switch-Skeleton | `getAktuelleBafoegParameter(stichtag)`, `getAnrechnungsquote(geschwister)` (§ 25 Abs. 6: 0,50 − 0,05 × Kinder, Antragsteller zählt NICHT mit), `BAFOEG_AB_2024_08_01` |
+| `buergergeld-parameter.ts` **(neu, Prompt 121)** | SSOT Bürgergeld § 20 ff. SGB II mit H1/H2-Switch | `getAktuelleBuergergeldParameter(stichtag)`, `BUERGERGELD_2026_H1` + `BUERGERGELD_2026_H2` (01.07.2026 „Neue Grundsicherung" — H2 Skeleton bis Gesetzestext) |
+| `buergergeld.ts` **(erweitert, Prompt 121)** | Gesamt-Berechnung + Mehrbedarfe § 21 SGB II | `berechneBuergergeld(...)`, `berechneMehrbedarfe(eingabe, params)`, `MehrbedarfEingabe` (alle 6 Tatbestände inkl. Alleinerziehend-max-Logik + Deckel 60 %) |
+| `wohngeld.ts` **(Explainer-Mode seit 120d)** | **nicht produktiv für Berechnung** — Lib hat Architektur-Bug bei §§ 14–16 pro Person | `HOECHSTBETRAEGE_WOGG_2026`, `ZUSCHLAG_PRO_PERSON_WOGG_2026` (für Explainer-Tabelle exportiert) |
+| `lib/amazon-link.ts` **(neu, Prompt 122-amazon)** | Amazon-Partnerprogramm Suchlinks, Consent-abhängig | `createAmazonSearchLink(keyword, marketingConsentGranted)`, `AMAZON_TAG = 'rechenfix-21'` |
 
 **Verboten:** Eigene ESt-, LSt-, SV-, Kindergeld-, Pfändungs-, Mindestlohn- oder Pendler-Formeln in Komponenten. Siehe `CLAUDE.md` Abschnitt "Zentrale Libs (SSOT)" und die Audit-Welle-1-Anti-Patterns im `rechner-builder`-Skill.
 
@@ -226,6 +233,43 @@ Gleichzeitig: Affiliate-Regel von „kein Affiliate in Gesundheit/Mathe" umgeste
 | 107c | `prebuild`-Hook kettet `check-footer` + `check-jahreswerte` + `generate-client-data`; Fails blockieren Deploy auf Vercel. Repo-Housekeeping: `.gitignore` um `.claude/settings.local.json` + `/reports/` erweitert, `Checks/` → `docs/audit-arbeitspapiere/` verschoben |
 | 108 | Doku-Sync CLAUDE.md + SKILL.md + diese Datei |
 
+### Welle 1 — Stufe 4b (Sozialleistungen) — abgeschlossen 22.04.2026
+
+**Scope:** BAföG, Wohngeld, Bürgergeld, Pfändung — 4 Rechner im Sozial-Bereich. Sieben Prompts an einem Tag (120d, 120d-fix, 120d-sidebar, 121, 121-fix, 121-analyse, 121-geschwister-label).
+
+| Prompt | Zweck | Ergebnis |
+|---|---|---|
+| 119 | Audit-Bericht Sozialleistungen | 9 P1 + 7 P2 + 6 P3 identifiziert (BAföG Bedarfssätze veraltet, Wohngeld 35 Höchstbetragszellen + 4 Freibetragsregeln, Pfändung Pauschalquote statt amtliche Tabelle) |
+| 120 | P1-Pass Sozialleistungen | 9 P1 gefixt; BAföG-Höchstsatz 1.056 → 992 €, Wohngeld Zellen nach § 12 WoGG Anlage 1 (Dynamisierung 01.01.2025), Pfändung algorithmische 10-€-Stufen-Abrundung. 3 Verify-Scripts 5/5 + 41/41 + 17/17 grün (aber 41/41 zirkulär, siehe 120a) |
+| 120a | Wohngeld-Hotfix nach User-Cross-Check gegen BMWSB | 3 Bugs: UI-Display 10 % vs. Lib 30 %, Tarifformel-Koeffizienten seit ~2022 nicht aktualisiert → jetzt aus Anlage 2 WoGG BGBl. 2024 I Nr. 314, Verify-Script-Anti-Pattern (zirkulär → externe Oracle). Rollback mehrerer 120-Freibetrags-„Korrekturen": § 17 Nr. 1 Schwerbehindert 150 €/Mo (nicht 125), § 17 Nr. 3 Alleinerz. 110 €/Mo pauschal (nicht pro Kind). 2P-Cross-Check zeigte weitere §§ 14-16-Architektur-Bug → Hybrid-Plan (120d + 120c Juni 2026) |
+| 120d | Wohngeld-Rechner → statische Explainer-Seite | `app/finanzen/wohngeld-rechner/page.tsx` als Server Component, gewinnt gegen dynamische Route via `STATISCHE_OVERRIDES`-Set. Hinweis-Banner mit BMWSB-Link, Höchstbeträge-Tabelle (aus Lib exportiert, kein Daten-Duplikat), 5 FAQ, Schema.org FAQPage + BreadcrumbList. Lib-Refactoring für Prompt 120c (Juni 2026) reserviert. |
+| 120d-fix | Vier fachliche Textkorrekturen Wohngeld-Explainer | Rechengang Schritt 4 (Aufrundung § 19 Abs. 2), Haushaltszusammensetzung (statt Bedarfsgemeinschaft), FAQ 2 ohne konkrete Einkommensgrenzen, FAQ 4 Rückwirkung differenziert (§ 25 Abs. 2/3 + § 27 WoGG) |
+| 120d-sidebar | Kategorie-Sidebar auf Wohngeld-Explainer wiederhergestellt | Sidebar-Pattern 1:1 aus dynamischer Route übernommen, Wohngeld-Eintrag als aktiv markiert. UX-Konsistenz mit anderen 45 Finanzen-Rechnern. |
+| 121 | Stufe-4b P2-Pass + SSOT BAföG/Bürgergeld/Pfändung | Neue SSOT-Libs `bafoeg-parameter.ts` + `buergergeld-parameter.ts` mit Stichtag-Switch. BAföG-Anrechnungsquote § 25 Abs. 6 als Funktion der Geschwister (Recherche-Korrektur: Antragsteller zählt NICHT mit, bei 0 Geschwistern 0,50 statt 0,45). Bürgergeld-Mehrbedarfe § 21 SGB II alle 6 Tatbestände. Pfändung: Monat-Picker „Stichtag" mit Default heute. 3 Verify-Scripts 16/19/5 grün gegen externe Oracles. |
+| 121-fix | Bürgergeld-Rechner Alleinerziehend-UI-Komplettierung | Kinder-Input auch bei „Alleinstehend", explizite Alleinerziehend-Checkbox (§ 21 Abs. 3 SGB II verlangt alleinige Pflege), Dreifach-Guard, Wechselmodell-Hinweis. Lib unverändert, Verify 19/19 grün. |
+| 121-analyse | BAföG Geschwister-Logik dokumentiert | Analyse-Report in `docs/audit-arbeitspapiere/bafoeg-geschwister-analyse.md`. Lib wendet simultan § 25 Abs. 3 (Freibetrag) + § 25 Abs. 6 (Quote) an. § 11 Abs. 4 Aufteilungsregel nicht implementiert (Empfehlung für Prompt 122+). |
+| 121-geschwister-label | BAföG UI-Transparenz | Help-Text benennt beide Effekte + § 11 Abs. 4-Hinweis; neuer Disclaimer-Block unterhalb der Aufschlüsselung (Verweis auf §§ 11 Abs. 3 + 4, § 25 Abs. 6). Keine Lib-Änderung, Verify 16/16 grün. |
+
+**Audit-Bilanz Welle 1 Stufe 4b:** 9 P1 + 7 P2 + 3 UX-Folge-Prompts + Wohngeld-Explainer-Replacement + Kategorie-Sidebar-Restore.
+
+**Neue Methoden-Lehren aus dem Tag:**
+- **Zahlen aus Prompts nie ungeprüft übernehmen** — Gesetzestext/Oracle schlägt Prompt (mehrfach-Vorfall: BAföG-Schätzwert, Geschwister-Quote, Wohngeld-FAQ-Faustregel)
+- **Verify-Scripts gegen externe Oracle, nie zirkulär** — Prompt-120-Wohngeld-Tests liefen 41/41 grün trotz veralteter Lib-Koeffizienten (Prompt 120a-Lehre)
+- **UI-Labels an Rechtstatbestand koppeln** — Alleinerziehend-Mehrbedarf braucht explizite User-Bestätigung, nicht Auto-Aktivierung aus Kontext (Prompt 121-fix)
+- **Statische Routes müssen Kategorie-Sidebar explizit rendern** — Prompts müssen „inkl. Sidebar" nennen, „passt optisch zu anderen Rechnern" reicht nicht (Prompt 120d-sidebar)
+
+### Amazon-Partner-Integration (22.04.2026) ✅ ABGESCHLOSSEN
+
+**Prompt 122-amazon** — Neues Partnerprogramm neben Awin integriert. Tag-ID `rechenfix-21`.
+
+- **Rechtliche Basics:** Footer-Pflichthinweis „Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.", Datenschutzerklärung §9b Amazon-Partnerprogramm, Cookie-Banner Marketing-Kategorie erweitert (Amazon Associates mit expliziter Tag-Nennung)
+- **Komponente:** [`components/AmazonBox.tsx`](components/AmazonBox.tsx) — keyword-basiert, Amazon-Orange `#FF9900`, „Anzeige"-Kennzeichnung, `rel="sponsored noopener noreferrer"`, SSR-fest
+- **Helper:** [`lib/amazon-link.ts`](lib/amazon-link.ts) — `createAmazonSearchLink(keyword, marketingConsentGranted)`. Tag wird **nur** bei erteiltem Marketing-Consent angehängt; ohne Consent funktioniert der Link weiter, aber ohne Provision
+- **16 integrierte Rechner:** Kochen (6) + Sport (2) + Auto (2) + Wohnen (3) + Alltag (1) + Arbeit (2). Keine AmazonBox auf Gesundheit/Finanzen/Mathe
+- **180-Tage-Frist:** Erster qualifizierter Referral bis ca. **19.10.2026**, sonst Account-Schließung
+- **Selbstbezug verboten** (Teilnahmebedingungen) — Testklicks im Inkognito ohne Marketing-Consent (Tag wird dann nicht übermittelt)
+- **Vollständige Dokumentation:** [`docs/amazon-integration.md`](docs/amazon-integration.md) mit Rechner-Tabelle, Keywords, Platzierungs-Pattern, Monitoring-Plan 4/12/24 Wochen
+
 ### Meta-Lektion aus dem April-Audit
 
 Der **Soli-ohne-Milderungszone-Bug** tauchte **5× auf** (ALG, GmbhGf, nebenjob-3×, spenden). Das Anti-Pattern war im Skill dokumentiert — trotzdem haben Bestandsfälle es nicht verhindert. **Das technische Sicherheitsnetz (Lint-Script mit `contextKeywords`) ist der primäre Schutz**, die Doku ist ergänzend.
@@ -298,6 +342,10 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
 - 🎯 GSC: Sitemap neu einreichen nach Deploy; CTR-Review der 3 neuen Awin-Partner ~20.05.2026
 - 🎯 Neue Rechner-Batches (thematisch offen)
 - 🎯 Jahresparameter-Audit 2027 (Frühjahr 2027): ESt-Tarif 2027, SV-Rechengrößen 2027, JAEG, Zusatzbeitrag, D-Ticket, Pfändung-Switch zum 01.07.2028
+- 🎯 **Prompt 120c (Juni 2026):** Wohngeld-Lib-Refactoring auf Pro-Person-Architektur §§ 14–16 WoGG, gebündelt mit Bürgergeld-Reform zur „Neuen Grundsicherung" (Switch 01.07.2026). Nach Umsetzung: `STATISCHE_OVERRIDES`-Ausschluss aufheben, dynamische Route rendert wieder den interaktiven Rechner
+- 🎯 **Prompt 121a (~August 2026 bei Bedarf):** BAföG WS 2026/27-Erhöhung einpflegen (neuer Bucket `BAFOEG_AB_2026_08_01` in `bafoeg-parameter.ts`, wenn Verordnung verabschiedet)
+- 🎯 **Prompt 122 P3-Polish:** echte § 11 Abs. 4 BAföG-Aufteilungsregel als zweites Input-Feld „geförderte Geschwister", Pfändung Obergrenze-Anzeige permanent, Regelsatz-Info-Tabelle aus Lib ableiten, Pfändung dynamische Beispieltabelle, Schüler-BAföG-Bedarfssatz-Hinweis
+- 🎯 **Amazon-Monitoring** 4/12/24 Wochen (ab 22.04.2026): Erste Klick-Stats, Conversion-Rate, Eskalation vor 19.10.2026-Deadline (siehe `docs/amazon-integration.md`)
 
 ## Parkende Items (bis AdSense-Freigabe)
 
@@ -340,6 +388,22 @@ Publisher-ID: 2843240
 | hotel.de | 16018 | hotel.de | / |
 | burda-vergleicht (Zahnzusatz) | 121064 | zahn.burda-vergleicht.de | /campaign_600.html |
 | Nature's Way | 47173 | naturesway.de | /collections/all |
+
+### Amazon Partner-Programm (neben Awin, seit Prompt 122-amazon)
+
+| Aspekt | Wert |
+|---|---|
+| Tag-ID | `rechenfix-21` |
+| Partnernetz | Amazon Associates Germany (Amazon EU S.à r.l., Luxemburg) |
+| Mechanik | Suchlinks mit Keyword (keine festen ASINs, selbstheilend) |
+| Komponente | `components/AmazonBox.tsx` (eigenständig, nicht in AffiliateBox integriert) |
+| Helper | `lib/amazon-link.ts` — `createAmazonSearchLink(keyword, marketingConsentGranted)` |
+| Consent-Kopplung | Tag nur bei `useCookieConsent().marketingAllowed === true`. Box bleibt immer sichtbar. |
+| Einsatz-Kategorien | Kochen, Sport, Auto, Wohnen, Alltag, Arbeit |
+| Verboten auf | Gesundheit, Finanzen, Mathe |
+| Integrierte Rechner | 16 (Stand 22.04.2026) — vollständige Tabelle in [`docs/amazon-integration.md`](docs/amazon-integration.md) |
+| 180-Tage-Deadline | ca. 19.10.2026 — erster qualifizierter Referral nötig, sonst Account-Schließung |
+| Selbstbezug | verboten (Teilnahmebedingungen) — Testklicks im Inkognito ohne Marketing-Consent |
 
 ### WICHTIG zu CHECK24
 - Awin-Links leiten auf **check24.net** weiter, NICHT auf check24.de
@@ -412,12 +476,13 @@ Pflicht-Elemente in dieser Reihenfolge:
 
 ## Rechtliches
 
-- **Datenschutzerklärung:** Enthält Abschnitt zu Affiliate-Links
+- **Datenschutzerklärung:** Abschnitt 9 zu Awin-Affiliate-Links + Abschnitt 9b Amazon-Partnerprogramm (seit Prompt 122-amazon, 22.04.2026)
 - **Impressum:** Enthält Hinweis zu Affiliate-Links
 - **Über-uns:** Enthält Finanzierungshinweis
 - **Barrierefreiheitserklärung:** `/barrierefreiheit` (seit April 2026)
-- **Cookie-Banner:** Marketing-Cookies als eigene Kategorie
-- **Werbekennzeichnung:** Alle AffiliateBoxen zeigen "Anzeige"-Label
+- **Cookie-Banner:** Marketing-Cookies als eigene Kategorie (listet Google AdSense + Amazon Associates mit expliziter Tag-Nennung)
+- **Werbekennzeichnung:** Alle AffiliateBoxen **und** AmazonBoxen zeigen "Anzeige"-Label
+- **Footer-Pflichthinweis** (seit 22.04.2026): „Als Amazon-Partner verdiene ich an qualifizierten Verkäufen." — unter dem Copyright, Teilnahmebedingung
 - Sprache: Deutsch, formale "Sie"-Anrede
 
 ## Entwicklung mit Claude Code
@@ -493,9 +558,11 @@ Jeder Prompt für einen neuen Rechner enthält:
 ## docs-Verzeichnis
 
 - `docs/jahreswerte-kalender.md` — Governance-Kalender gesetzlicher Stichtage (Prompt 98)
-- `docs/audit-arbeitspapiere/` **(neu seit Prompt 107c)** — Stufenpläne der Welle-1-Audits (`stufe1-arbeitsblatt.md`, `welle1-stufenplan.md`); dienen bei weiteren Audits als Methodik-Referenz
+- `docs/audit-arbeitspapiere/` **(neu seit Prompt 107c)** — Stufenpläne der Welle-1-Audits (`stufe1-arbeitsblatt.md`, `welle1-stufenplan.md`, `welle1-stufe3-bericht.md`, `welle1-stufe4a-bericht.md`, `welle1-stufe4b-bericht.md`, `bafoeg-geschwister-analyse.md`); dienen bei weiteren Audits als Methodik-Referenz
 - `docs/jahresparameter-audit-2026-04.md` — Grep-Report Prompt 86
 - `docs/stufe1-rechner-semantik.md`, `docs/stufe1-5-rechner-semantik.md`, `docs/stufe2-rechner-semantik.md` — Welle-1-Audit-Artefakte
+- `docs/amazon-integration.md` **(neu seit Prompt 122-amazon)** — Amazon-Partner-Programm: rechtliche Basics, Komponente, 16 integrierte Rechner mit Keywords, Monitoring-Plan 4/12/24 Wochen, Selbstbezug-Reminder, 180-Tage-Deadline
+- `docs/referenzen/itzbund-README.md` — Jährlicher Update-Prozess für Lohnsteuer-PAP § 39b EStG
 
 ## Monetarisierungs-Strategie
 
