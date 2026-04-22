@@ -357,3 +357,16 @@ User-Cross-Check gegen BMWSB-Rechner WG-01 zeigte Δ = +46 €/Monat (~21 % zu h
 1. **Verify-Scripts müssen gegen Quellen außerhalb der getesteten Lib prüfen.** Neuer Anti-Pattern-Eintrag in CLAUDE.md.
 2. **Gesetzestext-Prüfung geht vor Prompt-Vorgabe.** Mehrere § 17 WoGG-„Soll-Werte" im Prompt 120 waren fehlerhaft; Rückgängigmachen war richtiger Weg.
 3. **User-Cross-Check gegen offizielle Rechner ist der kritischste Verifikationsschritt** — selbst bei vermeintlich grünen Regressions-Scripts.
+
+---
+
+## Cliffhanger-Resolution Wohngeld (22.04.2026, Prompt 120d)
+
+Nach Diagnose-Cliffhanger: Architektur-Bug in der Einkommensermittlung bestätigt (§§ 14–16 WoGG pro Haushaltsmitglied statt pauschal × 0.7). 1P-Fälle sauber, 2P+ abweichend — effektive Pauschalabzugs-Quote schwankt 8,4–29,1 % je nach Konstellation, Δ von 26 €/Monat belegt (potenziell > 50 € bei Extremfällen).
+
+**Entscheidung Hybrid** aus Option 3 + Option 1 zeitversetzt:
+
+- **Prompt 120d (22.04.2026, dieser Sprint):** Wohngeld-Seite durch Explainer ersetzt unter [app/finanzen/wohngeld-rechner/page.tsx](../../app/finanzen/wohngeld-rechner/page.tsx) (statische Server-Component, gewinnt gegen dynamische Route per Next-Routing-Präzision, zusätzlich in `generateStaticParams` der dynamischen Route via `STATISCHE_OVERRIDES`-Set ausgeschlossen). Sidebar-Eintrag und URL erhalten, SEO-Position stabil. BMWSB-Rechner prominent verlinkt (`https://www.bmwsb.bund.de/DE/wohnen/wohngeld/wohngeldrechner/wohngeldrechner-2025_node.html`). Lib unberührt bis auf STATUS-Dateidoc-Kommentar und zwei neue Exports (`HOECHSTBETRAEGE_WOGG_2026`, `ZUSCHLAG_PRO_PERSON_WOGG_2026`), damit die Höchstbeträge-Tabelle in der Explainer-Seite ohne Daten-Duplikat rendert. FAQ transparent zum Refactoring-Grund (Frage 5). Schema.org FAQPage + BreadcrumbList, KEIN Calculator-Schema.
+- **Prompt 120c (reserviert, Juni 2026):** Lib-Refactoring auf §§ 14–16-Pro-Person-Architektur, parallel zum Bürgergeld-Refactor „Neue Grundsicherung" zum 01.07.2026. Interface: `Array<Haushaltsmitglied>` mit `{ brutto, erwerbstaetig, werbungskosten?, steuerpflichtig, gkvPflichtig, rvPflichtig }`. Pauschalabzüge 10/20/30 % erst NACH Werbungskosten-Abzug, pro Person summieren, dann in § 19-Formel einsetzen. Verify-Script mit echten BMWSB-Stützpunkten (nicht-zirkulär!), Rollback der Erklärseite zurück auf dynamische Route.
+
+Stufe 4b P1 damit abgeschlossen: BAföG ✓, Pfändung ✓, Bürgergeld ✓, Wohngeld → Erklärseite (kein Bug mehr live). Prompt 121 kann mit Stufe 4b P2 + SSOT für die drei sauberen Rechner starten.

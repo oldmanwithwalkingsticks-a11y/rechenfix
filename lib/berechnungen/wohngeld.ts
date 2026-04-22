@@ -1,3 +1,29 @@
+/**
+ * STATUS 22.04.2026 — ARCHITEKTUR-BUG, REFACTORING GEPLANT
+ *
+ * Diese Lib hat einen architektonischen Bug in der Einkommensermittlung:
+ * Sie nimmt ein Single-Brutto-Feld und pauschalisiert mit × 0.7, während
+ * §§ 14–16 WoGG eine Pro-Person-Ermittlung mit individueller
+ * Werbungskostenpauschale (102,50 €/Monat je AN) und Steuer/KV/RV-Flags
+ * vorsehen. 1-Personen-Haushalte liefern korrekte Werte (validiert gegen
+ * BMWSB-Rechner, Δ ≤ 1 €); bei 2P+ weicht die effektive Pauschalabzugs-
+ * Quote 8,4–29,1 % je nach Konstellation ab (Δ 26 € belegt, potenziell
+ * >50 €/Monat).
+ *
+ * Frontend zeigt aktuell eine Erklärseite statt Rechner
+ * (Prompt 120d, 22.04.2026). Der bestehende Code (Tabellen-Koeffizienten
+ * nach Anlage 2, Höchstbeträge nach § 12, Mindestwerte nach Anlage 3)
+ * ist korrekt und wird beim Refactoring weiterverwendet.
+ *
+ * Vollständiges Refactoring geplant als Prompt 120c gemeinsam mit dem
+ * Bürgergeld-Refactoring zur Neuen Grundsicherung zum 01.07.2026.
+ *
+ * Bei Reaktivierung: Interface ändern auf Array<Haushaltsmitglied> mit
+ * { brutto, erwerbstaetig, werbungskosten?, steuerpflichtig, gkvPflichtig,
+ * rvPflichtig }. Pauschalabzüge 10/20/30 % erst NACH Werbungskosten-
+ * Abzug, pro Person summieren, dann in § 19-Formel einsetzen.
+ */
+
 export type Mietstufe = 'I' | 'II' | 'III' | 'IV' | 'V' | 'VI' | 'VII';
 
 export interface WohngeldEingabe {
@@ -37,7 +63,8 @@ export interface WohngeldErgebnis {
 // Fortschreibung des Wohngeldes v. 21.10.2024 (gültig seit 01.01.2025, unverändert 2026).
 // Quelle: buzer.de/Anlage_1_WoGG.htm + MBWSV-NRW-PDF 08/2024.
 // Zeilen: Haushaltsgröße 1-5, Spalten: Mietstufe I-VII
-const HOECHSTBETRAEGE: number[][] = [
+// Exportiert, damit die Erklärseite (Prompt 120d) die Werte direkt rendern kann.
+export const HOECHSTBETRAEGE_WOGG_2026: ReadonlyArray<ReadonlyArray<number>> = [
   [361, 408, 456, 511, 562, 615, 677],    // 1 Person
   [437, 493, 551, 619, 680, 745, 820],    // 2 Personen
   [521, 587, 657, 737, 809, 887, 975],    // 3 Personen
@@ -45,8 +72,12 @@ const HOECHSTBETRAEGE: number[][] = [
   [694, 782, 875, 982, 1080, 1183, 1302], // 5 Personen
 ];
 
+/** @deprecated internes Alias; Explainer nutzt HOECHSTBETRAEGE_WOGG_2026. */
+const HOECHSTBETRAEGE = HOECHSTBETRAEGE_WOGG_2026 as number[][];
+
 // Zuschlag pro weitere Person je Mietstufe (§ 12 WoGG Anlage 1)
-const ZUSCHLAG_PRO_PERSON = [82, 94, 106, 119, 129, 149, 163];
+export const ZUSCHLAG_PRO_PERSON_WOGG_2026: ReadonlyArray<number> = [82, 94, 106, 119, 129, 149, 163];
+const ZUSCHLAG_PRO_PERSON = ZUSCHLAG_PRO_PERSON_WOGG_2026 as number[];
 
 // Heizkostenpauschale (monatlich, €)
 const HEIZKOSTENPAUSCHALE = [23.80, 30.60, 37.40, 44.20, 51.00];

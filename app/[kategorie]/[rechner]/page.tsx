@@ -183,11 +183,19 @@ interface Props {
   params: { kategorie: string; rechner: string };
 }
 
+// Rechner, die eine eigene statische Route in app/<kategorie>/<slug>/page.tsx
+// haben und deshalb NICHT unter der dynamischen Route gerendert werden sollen.
+// Statische Routen gewinnen zwar in Next.js gegen die dynamische Route, aber
+// der Ausschluss hier vermeidet doppelten Prerender und hält den Build schlank.
+const STATISCHE_OVERRIDES = new Set<string>(['wohngeld-rechner']);
+
 export function generateStaticParams() {
-  return alleRechner.map(r => ({
-    kategorie: r.kategorieSlug,
-    rechner: r.slug,
-  }));
+  return alleRechner
+    .filter(r => !STATISCHE_OVERRIDES.has(r.slug))
+    .map(r => ({
+      kategorie: r.kategorieSlug,
+      rechner: r.slug,
+    }));
 }
 
 export function generateMetadata({ params }: Props): Metadata {
