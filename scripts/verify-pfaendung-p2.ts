@@ -6,7 +6,7 @@
 // ist er durch den UI-Datum-Input adressierbar. Das Verify prüft den
 // Vorher/Nachher-Switch am Beispiel PF-SW-01.
 
-import { berechnePfaendung, getAktuellePfaendungsParameter } from '../lib/berechnungen/pfaendung';
+import { berechnePfaendung, getAktuellePfaendungsParameter, getBeispielNettoWerte } from '../lib/berechnungen/pfaendung';
 
 interface Fall { name: string; actual: number; expected: number; tol?: number; quelle: string; }
 const cases: Fall[] = [];
@@ -47,6 +47,55 @@ cases.push({
   expected: 1338.82, tol: 0.01,
   quelle: 'Pauschalquote × (3500-1587,40) = 0,70 × 1912,60',
 });
+
+// Paket 7, Prompt 123: dynamische Beispieltabelle
+{
+  const werte = getBeispielNettoWerte(3000);
+  cases.push({
+    name: 'PF-BEISP-01 getBeispielNettoWerte(3000): 6 Werte zentriert',
+    actual: werte.length,
+    expected: 6,
+    quelle: 'dynamische Beispieltabelle um 3.000 €-Anker',
+  });
+  cases.push({
+    name: 'PF-BEISP-01 erster Wert = 2.500 (Anker − 500)',
+    actual: werte[0],
+    expected: 2500,
+    quelle: 'Staffelung -500/-250/anker/+250/+500/+1000',
+  });
+  cases.push({
+    name: 'PF-BEISP-01 Anker-Wert 3000 enthalten',
+    actual: werte.includes(3000) ? 1 : 0,
+    expected: 1,
+    quelle: 'User-Netto muss in der Liste sein',
+  });
+}
+// Fallback bei unplausiblem Input (< 1500)
+{
+  const werte = getBeispielNettoWerte(500);
+  cases.push({
+    name: 'PF-BEISP-02 Fallback bei Netto 500 €',
+    actual: werte[0],
+    expected: 2000,
+    quelle: 'Fallback-Array [2000, 2500, 3000, 3500, 4000, 5000]',
+  });
+}
+// Tabellen-Integration
+{
+  const r = berechnePfaendung({ nettoMonat: 3000, unterhaltspflichten: 0, zeitraum: 'monatlich', stichtag: nach });
+  cases.push({
+    name: 'PF-BEISP-03 beispielTabelle hat 6 Zeilen',
+    actual: r.beispielTabelle.length,
+    expected: 6,
+    quelle: 'berechnePfaendung nutzt getBeispielNettoWerte',
+  });
+  cases.push({
+    name: 'PF-BEISP-03 Anker-Zeile 3000 enthalten',
+    actual: r.beispielTabelle.some(z => z.netto === 3000) ? 1 : 0,
+    expected: 1,
+    quelle: 'User-Netto zentriert',
+  });
+}
 
 let passed = 0, failed = 0;
 console.log('=== Verify Pfändung P2 (Stufe-4b Prompt 121) ===\n');

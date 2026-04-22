@@ -249,6 +249,23 @@ export default function PfaendungRechner() {
         </div>
       </div>
 
+      {/* Vollpfändungs-Obergrenze — permanent sichtbar (Paket 7 Prompt 123). Stichtag-aware. */}
+      <div className="bg-gray-50 dark:bg-gray-800/40 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-6">
+        <p className="text-xs text-gray-700 dark:text-gray-300 leading-relaxed">
+          <strong className="font-semibold">Vollpfändungs-Obergrenze (§ 850c Abs. 1 Nr. 2 ZPO):</strong>{' '}
+          Oberhalb eines Nettoeinkommens von <strong>{fmtEuro(ergebnis.obergrenze)} €/{ZEITRAUM_LABEL[zeitraum]}</strong>
+          {ergebnis.unterhaltspflichten > 0 && (
+            <> (inkl. Erhöhung für {ergebnis.unterhaltspflichten} Unterhaltsberechtigte{ergebnis.unterhaltspflichten > 1 ? '' : 'n'})</>
+          )}
+          {' '}ist der Betrag, der diese Grenze übersteigt, zu 100 % pfändbar.
+          {' '}Unter der Grenze gilt die Pauschalquote aus § 850c Abs. 3 ZPO
+          ({ergebnis.pfaendungsQuote} % für {ergebnis.unterhaltspflichten} Unterhaltsberechtigte).
+          {ergebnis.ueberObergrenze && (
+            <span className="text-red-700 dark:text-red-400 font-semibold"> Ihr Einkommen liegt über dieser Grenze.</span>
+          )}
+        </p>
+      </div>
+
       {/* P-Konto-Tipp */}
       <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-xl p-4 mb-6">
         <p className="text-blue-800 dark:text-blue-300 text-sm">

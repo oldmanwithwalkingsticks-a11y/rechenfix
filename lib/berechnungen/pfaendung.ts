@@ -172,6 +172,29 @@ function umrechnen(wertMonat: number, zeitraum: Zeitraum): number {
   }
 }
 
+/**
+ * Liefert 6 Netto-Werte, zentriert um das User-Netto (sofern plausibel).
+ * Fallback auf [2000, 2500, 3000, 3500, 4000, 5000], wenn User-Netto außerhalb
+ * des Plausibilitätsbereichs liegt (< 1.500 oder > 10.000).
+ *
+ * Staffelung um den Ankerwert: -500 / -250 / anker / +250 / +500 / +1000
+ * auf 100er-Stufen gerundet. Siehe Prompt 123, Phase C.
+ */
+export function getBeispielNettoWerte(userNetto: number): number[] {
+  const FALLBACK = [2000, 2500, 3000, 3500, 4000, 5000];
+  if (userNetto < 1500 || userNetto > 10000 || !Number.isFinite(userNetto)) {
+    return FALLBACK;
+  }
+  const anker = Math.round(userNetto / 100) * 100;
+  const kandidaten = [anker - 500, anker - 250, anker, anker + 250, anker + 500, anker + 1000];
+  // Duplikate entfernen, außerhalb-Bereich-Werte filtern, dann auf 6 auffüllen falls nötig
+  const gefiltert = Array.from(new Set(kandidaten))
+    .filter(v => v >= 1000 && v <= 12000)
+    .sort((a, b) => a - b);
+  if (gefiltert.length < 4) return FALLBACK;
+  return gefiltert.slice(0, 6);
+}
+
 export function berechnePfaendung(e: PfaendungEingabe): PfaendungErgebnis {
   const { nettoMonat, unterhaltspflichten, zeitraum, stichtag } = e;
   const p = getAktuellePfaendungsParameter(stichtag);
@@ -183,8 +206,9 @@ export function berechnePfaendung(e: PfaendungEingabe): PfaendungErgebnis {
     ? Math.round(pfaendbar / nettoMonat * 10000) / 100
     : 0;
 
-  // Beispieltabelle: 5 Nettowerte rund um das aktuelle Einkommen
-  const werte = [2000, 2500, 3000, 3500, 4000, 5000];
+  // Beispieltabelle: 6 Nettowerte dynamisch zentriert um das User-Netto
+  // (Fallback auf fixe Werte, wenn Netto außerhalb 1.500–10.000 €)
+  const werte = getBeispielNettoWerte(nettoMonat);
   const beispielTabelle = werte.map(netto => {
     const r = berechnePfaendbarMonat(netto, unterhaltspflichten, p);
     return {
