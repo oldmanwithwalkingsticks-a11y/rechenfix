@@ -528,10 +528,87 @@ verschleiert durch die fehlerhafte „BE_AN"-Bezeichnung der BE_gesamt-Werte.
 - **Stichtag-Switch 01.01.2027** vorbereitet (Parameter-Lib bereit für
   neuen Bucket `MIDIJOB_2027` mit G = 633, neuer F). Nur bei BMAS-
   Bekanntmachung eintragen.
-- **Kinderlos-Zuschlag im Gesamtbeitrag:** Aktuelle Näherung
-  `gesamtSvSatz = anSvSatz × 2` überschätzt den AG-Anteil minimal, weil
-  der Kinderlos-Zuschlag nur vom AN getragen wird. Präzisionsverlust
-  im 0,3 €-Bereich bei Max-Midijob — nicht priorisiert.
+- **Kinderlos-Zuschlag im Gesamtbeitrag:** ~~Aktuelle Näherung
+  `gesamtSvSatz = anSvSatz × 2` überschätzt den AG-Anteil minimal~~
+  → **in Prompt 125a-fix behoben (siehe Nachtrag unten). Die
+  „0,3 €-Bereich"-Schätzung in dieser Commit-Message war eine
+  Fehlschätzung um Faktor 25–40.**
 - **Prompt 125b** adressiert die verbleibenden Rechner aus Stufe 4a
   (Erbschaft, Schenkung, KESt, AfA, Firmenwagen, MwSt) — diese wurden
   aber in 115c/116/117 bereits weitgehend gefixt; 125b klärt Reststand.
+
+---
+
+## Nachtrag Prompt 125a-fix (22.04.2026) — AG-Anteil Kinderlosen-Zuschlag korrigiert
+
+Post-Deploy-Analyse (siehe [`midijob-an-sv-analyse.md`](midijob-an-sv-analyse.md))
+hat einen in 125a als „0,3 €-Bereich" bagatellisierten Näherungsfehler als
+echten P1-Bug entlarvt: `gesamtSvSatz = anSvSatz × 2` verdoppelte den PV-
+Kinderlos-Zuschlag (0,6 %), der nach § 59 Abs. 5 SGB XI ausschließlich vom
+AN zu tragen ist.
+
+### Auslöser
+
+Karsten hat nach Deploy von 125a den AN-SV-Wert 279,31 € (bei AE = 1.500,
+StKl I, 0 Kinder) auf Korrektheit geprüft und eine Differenz zum erwarteten
+Wert (~276,74 €) beanstandet. Die Analyse zeigte: AN-SV ist korrekt — die
+User-Erwartung basierte auf einem 2025er-Zusatzbeitrag (2,5 % statt aktuell
+2,9 %). **ABER:** Die Prüfung hat den daneben liegenden AG-Fehler freigelegt.
+
+### Impact
+
+- **AE = 1.500 €, 0 Kinder:** AG-Anteil 341,45 € → korrekt **332,89 €** (Δ −8,56 €/Monat)
+- **AE = 2.000 € (Max-Midijob):** Δ bis zu −12 €/Monat
+- **Jahresimpact:** ~100 €/Jahr überhöhter AG-Ausweis bei typischem Midijob
+- **AN-Anteil unverändert** bei 279,31 € (war immer korrekt)
+
+### Fix
+
+**Neu:** Export `PV_BASIS_SATZ_2026 = 0.018` aus
+[`lib/berechnungen/pflegeversicherung.ts`](../../lib/berechnungen/pflegeversicherung.ts)
+als SSOT-Konstante. Identisch zum AG-PV-Satz — AG trägt immer nur den
+Basissatz 1,8 %, ohne Kinderlos-Zuschlag (§ 59 Abs. 5 SGB XI) und ohne
+Kinderabschlag (§ 55 Abs. 3 SGB XI — beide nur AN-seitig).
+
+**Refactor in [`components/rechner/MidijobRechner.tsx`](../../components/rechner/MidijobRechner.tsx):**
+```ts
+// VORHER (Bug):
+const gesamtSvSatz = anSvSatz * 2;  // verdoppelt Kinderlos-Zuschlag
+
+// NACHHER:
+const agSvSatz = SV_AN_OHNE_PV + PV_BASIS_SATZ_2026;  // paritätisch, ohne Zuschlag
+const gesamtSvSatz = anSvSatz + agSvSatz;
+```
+
+### Verify ([`scripts/verify-midijob-p1.ts`](../../scripts/verify-midijob-p1.ts))
+
+Neue Gruppe 6 mit 8 Testfällen gegen mathematische Identitäten aus
+Gesetzestext (nicht zirkulär):
+- **MJ-AG-RECHT agSvSatz = 21,15 %** (paritätisch ohne Kinderlos)
+- **MJ-AG-RECHT AN − AG = 0,6 %** bei 0 Kindern (Zuschlag ist alleiniger Unterschied)
+- **MJ-AG-RECHT gesamtSvSatz = 42,9 %** (nicht mehr 43,5 %)
+- **MJ-AG-PARITAET** bei 1 Kind: anSvSatz = agSvSatz (echte Parität)
+- **MJ-AG-PARITAET** gesamtSvSatz bei 1 Kind = 42,3 %
+- Konkrete €-Beträge für AE = 1.500 €, 0 Kinder:
+  - AN-SV = 279,31 € (keine Regression)
+  - gesamtSv = **612,20 €** (vorher 620,76 €)
+  - agSv = **332,89 €** (vorher 341,45 €)
+
+**Ergebnis:** 29/29 grün. Alle bestehenden Tests regressionsfrei.
+
+### Methodische Lehre
+
+Die „0,3 €-Bereich"-Schätzung in der 125a-Commit-Message war eine
+Fehlschätzung um Faktor 25–40. Tatsächlicher Impact: bis 12 €/Monat.
+Der Grund: Ich habe den Wert aus dem Gedächtnis geschätzt, ohne einen
+konkreten Testfall durchzurechnen. Diese Regel ist jetzt in der
+CLAUDE.md unter „Anti-Patterns" verankert (Commit-Messages mit
+Spannbreiten müssen testfallbasiert sein oder als „nicht quantifiziert"
+markiert werden).
+
+### Offen nach 125a-fix
+
+- **Alters-Input** (Kinderlos-Zuschlag nur ab 23 J.): Aktuell Annahme
+  „≥ 23" hart, betrifft nur Midijob-Studierende unter 23 — Nische,
+  nicht priorisiert.
+- **Prompt 125b** bleibt offen für die verbleibenden Stufe-4a-Rechner.

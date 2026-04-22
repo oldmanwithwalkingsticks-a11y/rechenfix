@@ -388,6 +388,28 @@ Gelernt aus Prompt 120 → 120a: `verify-wohngeld-p1.ts` lief 41/41 grün, weil 
 
 **Anti-Pattern auch dokumentiert:** Wohngeld-Koeffizienten ausschließlich gegen § 19 WoGG Anlage 2 oder kalibriert gegen BMWSB-Rechner — keine „vereinfachten Schätzwerte" pauschal übernehmen.
 
+## Anti-Pattern: Schätzungen in Commit-Messages (Prompt 125a-fix, 22.04.2026)
+
+**Regel:** Wenn eine Commit-Message oder ein Audit-Bericht eine Näherung oder ein Restrisiko mit einer Zahl-Spannbreite beziffert („~0,3 €-Bereich", „im Cent-Bereich", „minimal"), MUSS diese Spannbreite aus einem konkreten durchgerechneten Testfall stammen — nicht aus dem Gedächtnis oder Bauchgefühl.
+
+Gelernt aus Prompt 125a → 125a-fix: Die 125a-Commit-Message hatte eine verdoppelte Kinderlos-Zuschlag-Konstante als „Präzisionsverlust im 0,3 €-Bereich bei Max-Midijob — nicht priorisiert" dokumentiert. Tatsächlicher Impact: bis **12 €/Monat** bei Max-Midijob, ~100 €/Jahr Jahres-Überhöhung des AG-Anteils. Fehlschätzung um Faktor 25–40.
+
+**Folgen einer zu kleinen Schätzung:**
+- Der Fix wird de-priorisiert und bleibt unbeachtet im Code
+- Der Audit-Bericht akzeptiert den „kleinen Fehler" als gegeben
+- Erst ein User-Cross-Check (hier: Karsten prüft AN-SV-Wert und lokalisiert den AG-Bug) offenbart die tatsächliche Größenordnung
+
+**Zulässige Formulierungen für Näherungen:**
+- „~5 €/Monat bei AE = 1.500 €, ~12 €/Monat bei Max-Midijob" (konkret + durchgerechnet)
+- „Nicht quantifiziert, Impact-Schätzung in Folge-Prompt" (explizit als offen markiert)
+- „Δ = 0 bei Testfall X, Y, Z" (negative Feststellung mit belegter Toleranz)
+
+**Verboten:**
+- „im 0,3-€-Bereich" ohne Rechnung
+- „minimal", „unerheblich", „vernachlässigbar" ohne Beleg
+
+Bei Unsicherheit → mindestens zwei Extremwert-Testfälle durchrechnen (z. B. UG und OG bei Midijob) und die beiden €-Werte beide nennen. Das verhindert Größenordnungs-Fehler wie 125a.
+
 ## Gelernte Regeln (Sprint 1, April 2026)
 
 1. **Input-Clamping**: HTML `min`/`max` reicht nicht. React-onChange-Handler muss aktiv klammern. Controlled component mit `value={state}`, nicht `defaultValue`. (Smoketest C3)
