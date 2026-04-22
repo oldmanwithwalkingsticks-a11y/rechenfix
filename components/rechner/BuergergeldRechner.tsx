@@ -521,8 +521,29 @@ export default function BuergergeldRechner() {
                 <span className="text-gray-800 dark:text-gray-100">{fmt(ergebnis.regelbedarfGesamt + ergebnis.mehrbedarfe.gesamt + ergebnis.unterkunftskosten)} €</span>
               </div>
 
-              {/* Einkommen */}
-              {ergebnis.anrechenbareEinkommen > 0 && (
+              {/* Einkommensanrechnung — Jugendlicher-Pfad (§ 11b Abs. 2b SGB II, Prompt 123-fix) */}
+              {jugendlicherStatus !== 'none' && parseDeutscheZahl(einkommen) > 0 && (
+                <>
+                  <div className="px-4 py-2 bg-gray-50/50 dark:bg-gray-700/20">
+                    <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Einkommensanrechnung</p>
+                  </div>
+                  <div className="flex justify-between px-4 py-2.5 text-sm">
+                    <span className="text-gray-600 dark:text-gray-400">Monatliches Bruttoeinkommen</span>
+                    <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(parseDeutscheZahl(einkommen))} €</span>
+                  </div>
+                  <div className="flex justify-between px-4 py-2 text-sm">
+                    <span className="pl-4 text-xs text-gray-600 dark:text-gray-400">abzgl. Freibetrag § 11b Abs. 2b SGB II</span>
+                    <span className="font-medium text-red-600 dark:text-red-400">−{fmt(ergebnis.freibetragEinkommen)} €</span>
+                  </div>
+                  <div className="flex justify-between px-4 py-2.5 text-sm">
+                    <span className="text-gray-600 dark:text-gray-400">Anrechenbares Einkommen</span>
+                    <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(ergebnis.anrechenbareEinkommen)} €</span>
+                  </div>
+                </>
+              )}
+
+              {/* Einkommensanrechnung — regulärer Pfad (§ 11b Abs. 1/3 SGB II) */}
+              {jugendlicherStatus === 'none' && ergebnis.anrechenbareEinkommen > 0 && (
                 <>
                   <div className="px-4 py-2 bg-gray-50/50 dark:bg-gray-700/20">
                     <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Einkommensanrechnung</p>
