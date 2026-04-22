@@ -6,6 +6,8 @@ import {
   type AusbildungsArt,
   type Wohnsituation,
   type Familienstand,
+  type SchulForm,
+  type ElternunabhaengigTatbestand,
 } from '@/lib/berechnungen/bafoeg';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
@@ -21,8 +23,31 @@ const FAMILIENSTAND_OPTIONEN: { value: Familienstand; label: string }[] = [
   { value: 'elternunabhaengig', label: 'Elternunabhängig' },
 ];
 
+const SCHULFORM_OPTIONEN: { value: SchulForm; label: string }[] = [
+  {
+    value: 'berufsfachschuleOhneVorausbildung',
+    label: 'Berufsfach-/Fachschulklasse ohne Berufsausbildung (§ 12 Abs. 1 Nr. 1)',
+  },
+  {
+    value: 'fachoberschuleMitVorausbildung',
+    label: 'Abend-/Berufsaufbau-/Fachoberschule mit Berufsausbildung (§ 12 Abs. 1 Nr. 2)',
+  },
+];
+
+/** § 11 Abs. 3 + Abs. 2a BAföG — Sentinel '' = kein Tatbestand. */
+type TatbestandValue = ElternunabhaengigTatbestand | '';
+const ELTERNUNABHAENGIG_OPTIONEN: { value: TatbestandValue; label: string }[] = [
+  { value: '', label: 'Keine der folgenden (Standard-Fall)' },
+  { value: 'abendgymnasium_kolleg', label: 'Abendgymnasium oder Kolleg (§ 11 Abs. 3 Nr. 1)' },
+  { value: 'ueber_30_bei_beginn', label: 'Bei Ausbildungsbeginn mindestens 30 Jahre alt (Nr. 2)' },
+  { value: '5_jahre_erwerbstaetig', label: 'Nach dem 18. LJ 5 Jahre erwerbstätig (Nr. 3)' },
+  { value: '3_jahre_ausbildung_plus_3_erwerbstaetig', label: '3 Jahre Berufsausbildung + 3 Jahre erwerbstätig (Nr. 4)' },
+  { value: 'eltern_nicht_verfuegbar', label: 'Eltern unbekannt / im Ausland / nicht leistungsfähig (Abs. 2a)' },
+];
+
 export default function BafoegRechner() {
   const [ausbildung, setAusbildung] = useState<AusbildungsArt>('studium');
+  const [schulform, setSchulform] = useState<SchulForm>('berufsfachschuleOhneVorausbildung');
   const [wohnsituation, setWohnsituation] = useState<Wohnsituation>('eigene');
   const [einkommen, setEinkommen] = useState('0');
   const [vermoegen, setVermoegen] = useState('0');
@@ -30,16 +55,21 @@ export default function BafoegRechner() {
   const [einkommenEltern1, setEinkommenEltern1] = useState('40000');
   const [einkommenEltern2, setEinkommenEltern2] = useState('0');
   const [geschwister, setGeschwister] = useState('0');
+  const [gefoerdeteGeschwister, setGefoerdeteGeschwister] = useState('0');
+  const [elternunabhaengigTatbestand, setElternunabhaengigTatbestand] = useState<TatbestandValue>('');
   const [selbstVersichert, setSelbstVersichert] = useState(false);
   const [hatKinder, setHatKinder] = useState(false);
   const [anzahlKinder, setAnzahlKinder] = useState('1');
 
-  const elternunabhaengig = familienstand === 'elternunabhaengig';
+  const elternunabhaengigViaFamilienstand = familienstand === 'elternunabhaengig';
+  const elternunabhaengigViaTatbestand = elternunabhaengigTatbestand !== '';
+  const elternunabhaengig = elternunabhaengigViaFamilienstand || elternunabhaengigViaTatbestand;
   const verheiratet = familienstand === 'verheiratet';
 
   const ergebnis = useMemo(
     () => berechneBafoeg({
       ausbildung,
+      schulform,
       wohnsituation,
       eigenesEinkommen: parseDeutscheZahl(einkommen),
       eigenesVermoegen: parseDeutscheZahl(vermoegen),
@@ -47,11 +77,15 @@ export default function BafoegRechner() {
       einkommenEltern1: parseDeutscheZahl(einkommenEltern1),
       einkommenEltern2: parseDeutscheZahl(einkommenEltern2),
       geschwisterInAusbildung: parseInt(geschwister) || 0,
+      gefoerdeteGeschwisterAnzahl: parseInt(gefoerdeteGeschwister) || 0,
+      elternunabhaengig: elternunabhaengigTatbestand !== ''
+        ? { tatbestand: elternunabhaengigTatbestand }
+        : null,
       selbstVersichert,
       hatKinder,
       anzahlKinder: hatKinder ? (parseInt(anzahlKinder) || 1) : 0,
     }),
-    [ausbildung, wohnsituation, einkommen, vermoegen, familienstand, einkommenEltern1, einkommenEltern2, geschwister, selbstVersichert, hatKinder, anzahlKinder],
+    [ausbildung, schulform, wohnsituation, einkommen, vermoegen, familienstand, einkommenEltern1, einkommenEltern2, geschwister, gefoerdeteGeschwister, elternunabhaengigTatbestand, selbstVersichert, hatKinder, anzahlKinder],
   );
 
   const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
@@ -89,6 +123,30 @@ export default function BafoegRechner() {
               ))}
             </div>
           </div>
+
+          {ausbildung === 'schule' && (
+            <div>
+              <label htmlFor="bafoeg-select-schulform" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Schulform (§ 12 BAföG)
+              </label>
+              <select id="bafoeg-select-schulform"
+                value={schulform}
+                onChange={e => setSchulform(e.target.value as SchulForm)}
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"
+              >
+                {SCHULFORM_OPTIONEN.map(o => (
+                  <option key={o.value} value={o.value}>{o.label}</option>
+                ))}
+              </select>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 leading-relaxed">
+                {schulform === 'berufsfachschuleOhneVorausbildung' ? (
+                  <>Bedarf nach § 12 Abs. 1 Nr. 1 / Abs. 2 Nr. 1 BAföG: <strong>276 € bei Eltern</strong>, <strong>666 € auswärts</strong>.</>
+                ) : (
+                  <>Bedarf nach § 12 Abs. 1 Nr. 2 / Abs. 2 Nr. 2 BAföG: <strong>498 € bei Eltern</strong>, <strong>775 € auswärts</strong>.</>
+                )}
+              </p>
+            </div>
+          )}
         </div>
       </div>
 
@@ -134,7 +192,11 @@ export default function BafoegRechner() {
             </select>
             {elternunabhaengig && (
               <p className="text-xs text-green-600 dark:text-green-400 mt-1">
-                ✓ Kein Elterneinkommen wird angerechnet (z. B. nach 5 Jahren Erwerbstätigkeit oder ab 30 Jahren)
+                ✓ Kein Elterneinkommen wird angerechnet
+                {elternunabhaengigViaTatbestand && !elternunabhaengigViaFamilienstand
+                  ? ' (Tatbestand § 11 Abs. 3 / Abs. 2a BAföG unten ausgewählt)'
+                  : ' (z. B. nach 5 Jahren Erwerbstätigkeit oder ab 30 Jahren)'
+                }
               </p>
             )}
           </div>
@@ -156,9 +218,38 @@ export default function BafoegRechner() {
             </div>
           )}
 
+          {/* Elternunabhängige Förderung § 11 Abs. 3 + Abs. 2a BAföG (aufklappbar) */}
+          {!elternunabhaengigViaFamilienstand && (
+            <details className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/50 overflow-hidden" open={elternunabhaengigViaTatbestand}>
+              <summary className="cursor-pointer px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-200 select-none">
+                Elternunabhängige Förderung prüfen (§ 11 Abs. 3 BAföG)
+              </summary>
+              <div className="px-4 pb-4 pt-1 border-t border-gray-100 dark:border-gray-700 space-y-2">
+                <label htmlFor="bafoeg-select-tatbestand" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mt-2">
+                  Tatbestand auswählen (falls zutreffend):
+                </label>
+                <select id="bafoeg-select-tatbestand"
+                  value={elternunabhaengigTatbestand}
+                  onChange={e => setElternunabhaengigTatbestand(e.target.value as TatbestandValue)}
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"
+                >
+                  {ELTERNUNABHAENGIG_OPTIONEN.map(o => (
+                    <option key={o.value} value={o.value}>{o.label}</option>
+                  ))}
+                </select>
+                <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                  Bei den Tatbeständen &bdquo;5 Jahre erwerbstätig&ldquo; und &bdquo;3 Jahre Berufsausbildung + 3 Jahre erwerbstätig&ldquo;
+                  verlangt § 11 Abs. 3 Satz 2 BAföG zusätzlich, dass Sie sich aus dem Ertrag der Erwerbstätigkeit
+                  selbst unterhalten konnten. Diese Detail-Prüfung muss das BAföG-Amt im Einzelfall vornehmen —
+                  der Rechner nimmt die Voraussetzung als erfüllt an, wenn Sie den Tatbestand auswählen.
+                </p>
+              </div>
+            </details>
+          )}
+
           {!elternunabhaengig && (
             <div>
-              <label htmlFor="bafoeg-select-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Geschwister in Ausbildung</label>
+              <label htmlFor="bafoeg-select-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Geschwister in Ausbildung (ohne eigenes BAföG)</label>
               <select id="bafoeg-select-2"
                 value={geschwister}
                 onChange={e => setGeschwister(e.target.value)}
@@ -169,12 +260,36 @@ export default function BafoegRechner() {
                 ))}
               </select>
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 leading-relaxed">
-                Jedes angegebene Geschwister erhöht den Elternfreibetrag um 730 €/Monat
-                (§ 25 Abs. 3 BAföG) und senkt die Anrechnungsquote um 5 %-Punkte
-                (§ 25 Abs. 6 BAföG). Für Geschwister mit eigenem BAföG-Bezug gilt
-                zusätzlich eine Aufteilungsregel nach § 11 Abs. 4 BAföG, die hier
-                vereinfacht abgebildet ist — der vom BAföG-Amt berechnete Wert
-                kann im Einzelfall abweichen.
+                Geschwister unter 25 in BAföG-fähiger Ausbildung <strong>ohne eigenen BAföG-Bezug</strong>
+                (z. B. Azubi mit Ausbildungsvergütung). Diese erhöhen den Elternfreibetrag um
+                730 €/Monat pro Kopf (§ 25 Abs. 3 BAföG) und senken die Anrechnungsquote um
+                5 %-Punkte (§ 25 Abs. 6 BAföG). Geschwister MIT eigenem BAföG gehören ins
+                separate Feld darunter.
+              </p>
+            </div>
+          )}
+
+          {!elternunabhaengig && (
+            <div>
+              <label htmlFor="bafoeg-select-gefoerdert" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Weitere Geschwister mit eigenem BAföG- / BAB-Bezug (§ 11 Abs. 4 BAföG)
+              </label>
+              <select id="bafoeg-select-gefoerdert"
+                value={gefoerdeteGeschwister}
+                onChange={e => setGefoerdeteGeschwister(e.target.value)}
+                className="w-full sm:w-1/2 px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"
+              >
+                {[0,1,2,3,4,5,6,7,8,9,10].map(n => (
+                  <option key={n} value={n}>{n}{n === 0 ? ' (keine)' : ''}</option>
+                ))}
+              </select>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 leading-relaxed">
+                § 11 Abs. 4 BAföG: Wenn mehrere Geschwister gleichzeitig BAföG oder BAB
+                (Berufsausbildungsbeihilfe nach § 56 SGB III) beziehen, wird der auf die Eltern
+                entfallende Anrechnungsbetrag zu gleichen Teilen auf alle geförderten Kinder
+                aufgeteilt. Zählen Sie hier nur Geschwister mit <strong>eigenem</strong>
+                {' '}BAföG/BAB — NICHT solche, die oben unter &bdquo;Geschwister in Ausbildung&ldquo;
+                bereits erfasst sind.
               </p>
             </div>
           )}
@@ -329,7 +444,32 @@ export default function BafoegRechner() {
                       <td className="px-4 py-2.5 text-right tabular-nums text-red-600 whitespace-nowrap">−{fmtEuro(ergebnis.anrechnungVermoegen)} €</td>
                     </tr>
                   )}
-                  {!ergebnis.elternunabhaengig && (
+                  {!ergebnis.elternunabhaengig && ergebnis.aufteilungDivisor > 1 && (
+                    <>
+                      <tr>
+                        <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">
+                          Anrechnungsbetrag Eltern (§ 25 BAföG)
+                          <span className="text-xs text-gray-600 ml-1">(vor § 11 Abs. 4-Aufteilung)</span>
+                        </td>
+                        <td className="px-4 py-2.5 text-right tabular-nums text-gray-700 dark:text-gray-300 whitespace-nowrap">{fmtEuro(ergebnis.anrechnungElternVorAufteilung)} €</td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">
+                          ÷ Aufteilung auf Antragsteller + {ergebnis.aufteilungDivisor - 1} gefördert{ergebnis.aufteilungDivisor - 1 === 1 ? 'es' : 'e'} Geschwister
+                          <span className="text-xs text-gray-600 ml-1">(§ 11 Abs. 4 BAföG)</span>
+                        </td>
+                        <td className="px-4 py-2.5 text-right tabular-nums text-gray-700 dark:text-gray-300 whitespace-nowrap">÷ {ergebnis.aufteilungDivisor}</td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">
+                          Anrechnung nach Aufteilung
+                          <span className="text-xs text-gray-600 ml-1">(Netto {fmtEuro(ergebnis.nettoEltern)} € − Freibetrag {fmtEuro(ergebnis.freibetragEltern)} €)</span>
+                        </td>
+                        <td className="px-4 py-2.5 text-right tabular-nums text-red-600 whitespace-nowrap">−{fmtEuro(ergebnis.anrechnungEltern)} €</td>
+                      </tr>
+                    </>
+                  )}
+                  {!ergebnis.elternunabhaengig && ergebnis.aufteilungDivisor === 1 && (
                     <tr>
                       <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">
                         Elterneinkommen
@@ -340,7 +480,12 @@ export default function BafoegRechner() {
                   )}
                   {ergebnis.elternunabhaengig && (
                     <tr>
-                      <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Elterneinkommen</td>
+                      <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">
+                        Elterneinkommen
+                        {ergebnis.elternunabhaengigGrund && ergebnis.elternunabhaengigGrund.startsWith('tatbestand:') && (
+                          <span className="text-xs text-gray-600 ml-1">(§ 11 Abs. 3 / Abs. 2a BAföG)</span>
+                        )}
+                      </td>
                       <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">nicht angerechnet</td>
                     </tr>
                   )}
@@ -370,12 +515,14 @@ export default function BafoegRechner() {
             <span className="text-gray-500 dark:text-gray-400 text-sm leading-tight" aria-hidden="true">ℹ️</span>
             <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
               <strong className="font-semibold text-gray-700 dark:text-gray-300">Vereinfachte Schätzung — Abweichungen möglich.</strong>{' '}
-              Dieser Rechner bildet die Grundmechanik nach §§ 13, 13a, 25 BAföG ab.
-              Nicht berücksichtigt sind: Härtefallregelungen (§ 25 Abs. 6 BAföG),
-              die Aufteilungsregel für Geschwister mit eigenem BAföG-Bezug
-              (§ 11 Abs. 4 BAföG), elternunabhängige Förderung (§ 11 Abs. 3 BAföG)
-              sowie Sonderfälle bei Selbstständigkeit oder schwankendem Einkommen.
-              Der vom BAföG-Amt erlassene Bescheid ist rechtsverbindlich.
+              Dieser Rechner bildet die Grundmechanik nach §§ 11, 12, 13, 13a, 25 BAföG ab —
+              inklusive elternunabhängiger Förderung (§ 11 Abs. 3) und Aufteilung bei
+              mehreren geförderten Geschwistern (§ 11 Abs. 4). Nicht berücksichtigt sind:
+              Härtefallregelungen (§ 25 Abs. 6 BAföG), Detail-Voraussetzungen der
+              elternunabhängigen Förderung (§ 11 Abs. 3 Satz 2 BAföG — Selbstunterhalts-Prüfung
+              in den Erwerbsjahren) sowie Sonderfälle bei Selbstständigkeit oder
+              schwankendem Einkommen der Eltern. Der vom BAföG-Amt erlassene Bescheid
+              ist rechtsverbindlich.
             </p>
           </div>
 

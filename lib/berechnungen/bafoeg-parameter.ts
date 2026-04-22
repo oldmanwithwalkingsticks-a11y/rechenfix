@@ -7,15 +7,37 @@
  * Bucket `BAFOEG_AB_2026_08_01` ergänzt (Prompt 121a, noch offen).
  */
 
+/**
+ * Schul-Bedarfstypen nach § 12 BAföG. Zwei Typen:
+ * - `berufsfachschuleOhneVorausbildung`: Berufsfachschul- und Fachschulklassen
+ *   ohne vorausgesetzte Berufsausbildung (§ 12 Abs. 1 Nr. 1 / Abs. 2 Nr. 1)
+ *   → 276 € bei Eltern / 666 € auswärts
+ * - `fachoberschuleMitVorausbildung`: Abendhauptschulen, Berufsaufbauschulen,
+ *   Abendrealschulen, Fachoberschulklassen MIT vorausgesetzter Berufsausbildung
+ *   (§ 12 Abs. 1 Nr. 2 / Abs. 2 Nr. 2) → 498 € bei Eltern / 775 € auswärts
+ */
+export interface SchulBedarfe {
+  berufsfachschuleOhneVorausbildung: {
+    eltern: number;
+    auswaerts: number;
+  };
+  fachoberschuleMitVorausbildung: {
+    eltern: number;
+    auswaerts: number;
+  };
+}
+
 export interface BafoegParameter {
   bedarf: {
     studium: { eltern: number; eigene: number };
-    schule:  { eltern: number; eigene: number };
+    schule:  SchulBedarfe;
   };
   /**
-   * Wohnpauschale. Achtung: Im aggregierten `bedarf.*.eigene` ist die
+   * Wohnpauschale. Achtung: Im aggregierten `bedarf.studium.eigene` ist die
    * Wohnpauschale bereits addiert (z. B. Studium eigene = 475 + 380 = 855).
-   * Dieses Feld dient nur der UI-Ausgabe als separate Displayzeile.
+   * Für Schüler ist die Wohnpauschale bereits in den auswärts-Werten nach § 12
+   * eingepreist; das Feld dient hier nur der UI-Ausgabe als separate Displayzeile
+   * (Differenz aus auswärts- minus eltern-Betrag je Schulform).
    */
   wohnpauschale: { studium: number; schule: number };
   zuschlaege: {
@@ -83,7 +105,12 @@ export interface BafoegParameter {
 export const BAFOEG_AB_2024_08_01: BafoegParameter = {
   bedarf: {
     studium: { eltern: 534, eigene: 855 },
-    schule:  { eltern: 262, eigene: 632 },
+    schule: {
+      // § 12 Abs. 1 Nr. 1 / Abs. 2 Nr. 1 BAföG
+      berufsfachschuleOhneVorausbildung: { eltern: 276, auswaerts: 666 },
+      // § 12 Abs. 1 Nr. 2 / Abs. 2 Nr. 2 BAföG
+      fachoberschuleMitVorausbildung:    { eltern: 498, auswaerts: 775 },
+    },
   },
   wohnpauschale: { studium: 380, schule: 370 },
   zuschlaege: {
@@ -113,7 +140,7 @@ export const BAFOEG_AB_2024_08_01: BafoegParameter = {
   },
   maxRueckzahlung: 10010,
   bagatellgrenze: 10,
-  quelle: "§§ 13, 13a, 14b, 18, 23, 25, 29, 51 BAföG i.d.F. 29. BAföG-ÄndG v. 23.07.2024, gültig ab 01.08.2024",
+  quelle: "§§ 12, 13, 13a, 14b, 18, 23, 25, 29, 51 BAföG i.d.F. 29. BAföG-ÄndG v. 23.07.2024, gültig ab 01.08.2024",
   gueltigAb: new Date("2024-08-01"),
 };
 
