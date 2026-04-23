@@ -18,6 +18,51 @@ Build standardized, SEO-optimized calculator pages for the German calculator por
 - **AI:** Anthropic Claude API (for "Fix erklärt" feature)
 - **Domain:** https://www.rechenfix.de (ALWAYS use www)
 
+## URL-Slug-Konvention
+
+Slug-Format orientiert sich an der Duden-Schreibweise des Begriffs, nicht an
+einer mechanischen Regel. Beide Muster kommen im Bestand vor und sind
+SEO-etabliert (Stand 23.04.2026: 178 Rechner-URLs, ~130 Bindestrich,
+~27 Einwort, 7 Umrechner).
+
+### Regeln
+
+**Einfaches Kompositum aus 2 Wortstämmen → zusammen (Einwort):**
+- `rentenrechner`, `zinsrechner`, `mietrechner`, `kreditrechner`,
+  `kalorienrechner`, `promillerechner`, `unterhaltsrechner`
+- Faustregel: Wenn das Wort im Duden als ein Wort steht → zusammenschreiben.
+
+**Abkürzung oder Anglizismus im Stamm → Bindestrich:**
+- `afa-rechner`, `bmi-rechner`, `ggt-kgv-rechner`, `kfz-steuer-rechner`,
+  `etf-sparplanrechner` (Ausnahme: „Sparplan" als ein Wort dran)
+
+**3+ Wortstämme oder zwei eigenständige Fachbegriffe → Bindestrich:**
+- `erbschaftsteuer-rechner`, `grunderwerbsteuer-rechner`,
+  `brutto-netto-rechner`, `herzfrequenz-zonen-rechner`,
+  `freelancer-stundensatz-rechner`, `firmenwagen-rechner`
+
+**Umrechner-Sub-Klasse → immer Bindestrich vor „umrechner":**
+- `hefe-umrechner`, `cups-umrechner`, `kw-ps-umrechner`, `einheiten-umrechner`
+
+### Im Zweifel
+
+1. Duden online (`duden.de`) prüfen, ob das Kompositum als ein Wort geführt ist.
+2. Etablierte Einwort-Form vorhanden → zusammen.
+3. Duden empfiehlt Bindestrich bei Unübersichtlichkeit → Bindestrich.
+4. Kein klarer Duden-Eintrag → am nächstliegenden Bestands-Slug orientieren
+   (`grep -rn "slug:" lib/rechner-config/`).
+
+### Anti-Pattern
+
+- **Historische Slugs nicht rückwirkend migrieren.** Backlinks, Rankings,
+  GSC-Historie gehen verloren bzw. müssen aufwendig per 301 überführt werden.
+  Lektion aus Prompt 126: selbst bei einem einzigen Slug-Wechsel waren
+  atomare Commits + Redirect + Intro-Text-Update nötig.
+- **Mechanische „alle mit Bindestrich"-Regel vermeiden.** Würde aus
+  `rentenrechner` ein unnatürliches `rente-n-rechner` machen.
+- **URL-Slug ≠ Komponenten-Dateiname.** Dateiname folgt PascalCase
+  (`RentenRechner.tsx`), Slug folgt Duden-Logik.
+
 ## When Building a New Rechner
 
 Follow these steps in order. Do not skip any step.
