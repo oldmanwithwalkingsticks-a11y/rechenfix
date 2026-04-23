@@ -1,5 +1,6 @@
 import {
   getAktuelleBuergergeldParameter,
+  getSchonvermoegenProPerson,
   type BuergergeldParameter,
 } from './buergergeld-parameter';
 
@@ -63,6 +64,24 @@ export interface BuergergeldEingabe {
   jugendlicherStatus?: JugendlicherStatusEingabe;
   /** Optional: Stichtag. Default = heute (für Bucket-Wahl H1/H2). */
   stichtag?: Date;
+  /**
+   * Optional: Alter der Erwachsenen (vollendete Lebensjahre). Bei
+   * `alleinstehend` ein Wert, bei `paar`/`paar-mit-kindern` zwei Werte.
+   * Wird ab H2 (01.07.2026) für die altersgestaffelte Schonvermögens-
+   * berechnung nach § 12 Abs. 2 SGB II n.F. ausgewertet. Fehlt der Eintrag
+   * oder ist kürzer als die BG-Größe, wird 35 als Default angenommen
+   * (mittlere Staffel 10.000 € pro Person). Im H1-Modus wird der Wert
+   * ignoriert.
+   */
+  erwachseneAlter?: number[];
+  /**
+   * Optional (H2, § 12 Abs. 1 Satz 3 SGB II n.F.): Wenn `true`, gilt die
+   * Person als im ersten Bezugsjahr (Karenzzeit nach § 22 Abs. 1 Satz 2
+   * SGB II). In dem Fall ist selbstgenutztes Hausgrundstück / selbstgenutzte
+   * Eigentumswohnung unabhängig von der Größe geschützt. Ohne KdU-Gesamt-
+   * Logik im Rechner wirkt diese Flag bisher nur auf den UI-Hinweis.
+   */
+  inKarenzzeit?: boolean;
 }
 
 export interface MehrbedarfErgebnis {
@@ -86,6 +105,13 @@ export interface BuergergeldErgebnis {
   freibetragEinkommen: number;
   vermoegensFreibetrag: number;
   vermoegenOk: boolean;
+  /** Welches Schema zur Freibetrags-Berechnung angewendet wurde (H1 vs. H2). */
+  vermoegenModus: 'karenz_pauschal' | 'alter_gestaffelt';
+  /**
+   * Aufschlüsselung der Freibeträge pro Person (nur bei `alter_gestaffelt`
+   * befüllt, sonst leer).
+   */
+  vermoegensAufschluesselung: { label: string; alter: number; betrag: number }[];
   bedarfGedeckt: boolean;
   personenImHaushalt: number;
   aufschluesselungErwachsene: { label: string; betrag: number }[];
@@ -248,7 +274,7 @@ export function berechneMehrbedarfe(
 }
 
 export function berechneBuergergeld(eingabe: BuergergeldEingabe): BuergergeldErgebnis | null {
-  const { bedarfsgemeinschaft, kinder, warmmiete, heizkosten, einkommen, vermoegen, mehrbedarfe, stichtag } = eingabe;
+  const { bedarfsgemeinschaft, kinder, warmmiete, heizkosten, einkommen, vermoegen, mehrbedarfe, stichtag, erwachseneAlter } = eingabe;
 
   if (warmmiete < 0 || heizkosten < 0 || einkommen < 0 || vermoegen < 0) return null;
 
@@ -309,12 +335,47 @@ export function berechneBuergergeld(eingabe: BuergergeldEingabe): BuergergeldErg
   // Anspruch
   const gesamtAnspruch = Math.max(0, rund2(gesamtBedarf - anrechenbareEinkommen));
 
-  // Vermögensprüfung (Karenzzeit — erste 12 Monate)
+  // Vermögensprüfung — abhängig vom Bucket-Modus
   const anzahlErwachsene = bedarfsgemeinschaft === 'alleinstehend' ? 1 : 2;
   const personenImHaushalt = anzahlErwachsene + kinder.length;
-  const vermoegensFreibetrag =
-    params.vermoegen.erstePersonKarenz +
-    (personenImHaushalt - 1) * params.vermoegen.weiterePersonenKarenz;
+  const vermoegensAufschluesselung: { label: string; alter: number; betrag: number }[] = [];
+  let vermoegensFreibetrag = 0;
+
+  if (params.vermoegen.modus === 'karenz_pauschal') {
+    // H1 (bis 30.06.2026): Pauschale Karenzzeit-Freibeträge nach bisheriger
+    // Rechtslage. Die Differenzierung „Karenzzeit (12 Mo.) vs. nach Karenzzeit"
+    // ist im UI als Hinweis abgebildet; die Lib gibt den höheren Karenz-Wert
+    // aus, wie seit Implementation 121.
+    vermoegensFreibetrag =
+      params.vermoegen.erstePersonKarenz +
+      (personenImHaushalt - 1) * params.vermoegen.weiterePersonenKarenz;
+  } else {
+    // H2 (ab 01.07.2026): Altersgestaffelter Freibetrag pro Person nach
+    // § 12 Abs. 2 SGB II n.F. (13. SGB II-ÄndG, BGBl. 2026 I Nr. 107).
+    // Erwachsene: Alter aus `erwachseneAlter`-Array; fehlender Wert → 35 J.
+    // Kinder: Alter aus der oberen Grenze der Alters-Gruppe.
+    const staffeln = params.vermoegen.staffeln;
+    for (let i = 0; i < anzahlErwachsene; i++) {
+      const alter = erwachseneAlter?.[i] ?? 35;
+      const fb = getSchonvermoegenProPerson(alter, staffeln);
+      vermoegensFreibetrag += fb;
+      vermoegensAufschluesselung.push({
+        label: anzahlErwachsene === 1 ? 'Alleinstehende/r' : `Partner/in ${i + 1}`,
+        alter,
+        betrag: fb,
+      });
+    }
+    kinder.forEach((kind, i) => {
+      const alter = kindAlterNumerisch(kind);
+      const fb = getSchonvermoegenProPerson(alter, staffeln);
+      vermoegensFreibetrag += fb;
+      vermoegensAufschluesselung.push({
+        label: `Kind ${i + 1} (${KINDERGRUPPE_LABEL[kind.alter]})`,
+        alter,
+        betrag: fb,
+      });
+    });
+  }
   const vermoegenOk = vermoegen <= vermoegensFreibetrag;
 
   const bedarfGedeckt = gesamtAnspruch <= 0;
@@ -330,6 +391,8 @@ export function berechneBuergergeld(eingabe: BuergergeldEingabe): BuergergeldErg
     freibetragEinkommen,
     vermoegensFreibetrag,
     vermoegenOk,
+    vermoegenModus: params.vermoegen.modus,
+    vermoegensAufschluesselung,
     bedarfGedeckt,
     personenImHaushalt,
     aufschluesselungErwachsene,

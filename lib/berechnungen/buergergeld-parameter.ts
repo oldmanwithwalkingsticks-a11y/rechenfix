@@ -12,6 +12,35 @@
  * evtl. Hinzuverdienst-Anpassungen — Regelsätze bleiben vorerst gleich).
  */
 
+/**
+ * Schonvermögen-Modus: H1 (Bürgergeld bis 30.06.2026) kennt pauschale
+ * Karenzzeit-Freibeträge pro Person; H2 (Grundsicherungsgeld ab 01.07.2026,
+ * § 12 Abs. 2 SGB II n.F. nach 13. SGB II-ÄndG, BGBl. 2026 I Nr. 107 v.
+ * 16.04.2026) staffelt den Freibetrag nach Lebensalter.
+ */
+export type VermoegenParameter =
+  | {
+      modus: 'karenz_pauschal';
+      /** Karenzzeit: 40.000 € erste Person */
+      erstePersonKarenz: number;
+      /** Karenzzeit: 15.000 € je weitere Person */
+      weiterePersonenKarenz: number;
+      /** Nach Karenzzeit: 15.000 € erste Person */
+      erstePersonNachKarenz: number;
+      /** Nach Karenzzeit: 10.000 € je weitere Person */
+      weiterePersonenNachKarenz: number;
+    }
+  | {
+      modus: 'alter_gestaffelt';
+      /**
+       * Altersstaffel § 12 Abs. 2 SGB II n.F. aufsteigend nach `bisUnterAlter`.
+       * Interpretation: `bisUnterAlter = 30` = „bis zur Vollendung des 30. Lebensjahres"
+       * (d.h. Personen mit vollendetem Alter < 30 bekommen diesen Betrag). Letzte
+       * Zeile nutzt `Infinity` als offene Obergrenze.
+       */
+      staffeln: ReadonlyArray<{ bisUnterAlter: number; betrag: number }>;
+    };
+
 export interface BuergergeldParameter {
   /** Anzeigen-Bezeichnung (SGB-II-Leistung). Ändert sich zum 01.07.2026. */
   bezeichnung: string;
@@ -31,16 +60,7 @@ export interface BuergergeldParameter {
     rbs6_kind_0_5: number;
   };
 
-  vermoegen: {
-    /** Karenzzeit: 40.000 € erste Person */
-    erstePersonKarenz: number;
-    /** Karenzzeit: 15.000 € je weitere Person */
-    weiterePersonenKarenz: number;
-    /** Nach Karenzzeit: 15.000 € erste Person */
-    erstePersonNachKarenz: number;
-    /** Nach Karenzzeit: 10.000 € je weitere Person */
-    weiterePersonenNachKarenz: number;
-  };
+  vermoegen: VermoegenParameter;
 
   einkommensfreibetrag: {
     /** § 11b Abs. 1 Nr. 6 SGB II: 100 € Grundfreibetrag */
@@ -118,11 +138,35 @@ const REGELSAETZE_2026 = {
   rbs6_kind_0_5: 357,
 };
 
-const VERMOEGEN_2026 = {
+/** Pauschal-Schema H1 (bis 30.06.2026): Karenzzeit mit gestaffelten Freibeträgen. */
+const VERMOEGEN_H1: VermoegenParameter = {
+  modus: 'karenz_pauschal',
   erstePersonKarenz: 40000,
   weiterePersonenKarenz: 15000,
   erstePersonNachKarenz: 15000,
   weiterePersonenNachKarenz: 10000,
+};
+
+/**
+ * Altersstaffel H2 (ab 01.07.2026): § 12 Abs. 2 SGB II n.F. nach 13. SGB II-ÄndG
+ * (BGBl. 2026 I Nr. 107 v. 16.04.2026). Jede Person der BG erhält den
+ * altersabhängigen Freibetrag; erhöhte Stufe gilt ab Beginn des Monats, in
+ * dem die Altersgrenze erreicht wird (§ 12 Abs. 2 Satz 2 SGB II n.F.).
+ *
+ * Gesetzestext (Artikel 1 Nr. 10 b):
+ *   bis zur Vollendung des 30. Lebensjahres:  5.000 €
+ *   ab dem 31. Lebensjahr:                   10.000 €
+ *   ab dem 41. Lebensjahr:                   12.500 €
+ *   ab dem 51. Lebensjahr:                   20.000 €
+ */
+const VERMOEGEN_H2: VermoegenParameter = {
+  modus: 'alter_gestaffelt',
+  staffeln: [
+    { bisUnterAlter: 30, betrag: 5000 },
+    { bisUnterAlter: 40, betrag: 10000 },
+    { bisUnterAlter: 50, betrag: 12500 },
+    { bisUnterAlter: Infinity, betrag: 20000 },
+  ],
 };
 
 const EINKOMMENSFREIBETRAG_2026 = {
@@ -161,7 +205,7 @@ const MEHRBEDARFE_2026 = {
 export const BUERGERGELD_2026_H1: BuergergeldParameter = {
   bezeichnung: 'Bürgergeld',
   regelsaetze: REGELSAETZE_2026,
-  vermoegen: VERMOEGEN_2026,
+  vermoegen: VERMOEGEN_H1,
   einkommensfreibetrag: EINKOMMENSFREIBETRAG_2026,
   mehrbedarfe: MEHRBEDARFE_2026,
   quelle: "Bürgergeld-Regelbedarfsermittlungsgesetz 2025 mit § 28a-Besitzschutz (Nullrunde 2026), § 21 SGB II",
@@ -169,20 +213,43 @@ export const BUERGERGELD_2026_H1: BuergergeldParameter = {
 };
 
 /**
- * SKELETON Neue Grundsicherung ab 01.07.2026.
- * Parameter IDENTISCH zu H1, nur Label und Quelle unterscheiden sich. Sobald
- * Gesetzestext verabschiedet: inhaltliche Abweichungen hier eintragen
- * (voraussichtlich: geänderte Sanktionsregeln, evtl. Hinzuverdienst-Anpassungen).
+ * Grundsicherungsgeld ab 01.07.2026 — verabschiedet im 13. Gesetz zur Änderung
+ * des SGB II (BGBl. 2026 I Nr. 107 v. 16.04.2026). Regelsätze und Mehrbedarfe
+ * unverändert (Nullrunde 2026 durch § 28a-Besitzschutz, Reform ändert keine
+ * Regelsatzbeträge); Schonvermögen komplett neu als Altersstaffel § 12 Abs. 2
+ * SGB II n.F. (siehe `VERMOEGEN_H2`).
  */
 export const BUERGERGELD_2026_H2: BuergergeldParameter = {
-  bezeichnung: 'Grundsicherungsgeld (Neue Grundsicherung)',
+  bezeichnung: 'Grundsicherungsgeld',
   regelsaetze: REGELSAETZE_2026,
-  vermoegen: VERMOEGEN_2026,
+  vermoegen: VERMOEGEN_H2,
   einkommensfreibetrag: EINKOMMENSFREIBETRAG_2026,
   mehrbedarfe: MEHRBEDARFE_2026,
-  quelle: "Übergangsregelung zur Neuen Grundsicherung ab 01.07.2026 — Gesetzestext noch nicht vollständig verabschiedet, Parameter identisch zu Bürgergeld H1 bis zur Klärung",
+  quelle: "13. Gesetz zur Änderung des SGB II (BGBl. 2026 I Nr. 107 v. 16.04.2026), § 12 Abs. 2 SGB II n.F.; Regelsätze unverändert durch § 28a-Besitzschutz",
   gueltigAb: new Date("2026-07-01"),
 };
+
+/**
+ * Liefert den Schonvermögens-Freibetrag pro Person aus einer Alters-Staffel.
+ *
+ * Logik nach § 12 Abs. 2 SGB II n.F.: Die Bedingung „bis zur Vollendung des
+ * 30. Lebensjahres" erfüllt eine Person mit vollendetem Alter **unter 30**
+ * (ab dem 30. Geburtstag greift bereits die nächste Stufe, weil das 31.
+ * Lebensjahr beginnt).
+ *
+ * @param alterJahre Vollendete Lebensjahre zum relevanten Stichtag
+ * @param staffeln   Alters-Staffel aus `VermoegenParameterAltersstaffel`
+ */
+export function getSchonvermoegenProPerson(
+  alterJahre: number,
+  staffeln: ReadonlyArray<{ bisUnterAlter: number; betrag: number }>,
+): number {
+  for (const s of staffeln) {
+    if (alterJahre < s.bisUnterAlter) return s.betrag;
+  }
+  // Defensiv: letzter Eintrag sollte bisUnterAlter=Infinity haben
+  return staffeln[staffeln.length - 1].betrag;
+}
 
 /**
  * Liefert den jeweils geltenden Parameter-Satz zum Stichtag (Default = heute).

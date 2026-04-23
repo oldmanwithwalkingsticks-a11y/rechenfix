@@ -35,6 +35,18 @@ const JUGENDLICHER_STATUS_OPTIONEN: { value: JugendlicherStatusKategorie; label:
   { value: 'freiwilligendienst', label: 'Bundesfreiwilligendienst / Jugendfreiwilligendienst' },
 ];
 
+// ISO-Monat „YYYY-MM" des aktuellen Datums für <input type="month">-Default.
+function aktuellerMonat(): string {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+}
+
+/** Parst „YYYY-MM" in Date (1. des Monats, lokale Zeit). */
+function parseMonat(s: string): Date {
+  const [y, m] = s.split('-').map(Number);
+  return new Date(y, (m || 1) - 1, 1);
+}
+
 export default function BuergergeldRechner() {
   const [bg, setBg] = useState<Bedarfsgemeinschaft>('alleinstehend');
   const [kinder, setKinder] = useState<KindEintrag[]>([]);
@@ -42,6 +54,9 @@ export default function BuergergeldRechner() {
   const [heizkosten, setHeizkosten] = useState('80');
   const [einkommen, setEinkommen] = useState('0');
   const [vermoegen, setVermoegen] = useState('0');
+  const [stichtagMonat, setStichtagMonat] = useState<string>(aktuellerMonat());
+  const [alterAntragsteller, setAlterAntragsteller] = useState('35');
+  const [alterPartner, setAlterPartner] = useState('35');
 
   // Mehrbedarfe § 21 SGB II (optional)
   const [alleinerziehend, setAlleinerziehend] = useState(false);
@@ -70,6 +85,14 @@ export default function BuergergeldRechner() {
     atypischerMehrbedarfEuro: parseDeutscheZahl(atypischEuro),
   }), [alleinerziehendWirksam, schwanger, behinderung, warmwasserDezentral, ernaehrungEuro, atypischEuro]);
 
+  const stichtag = useMemo(() => parseMonat(stichtagMonat), [stichtagMonat]);
+
+  const erwachseneAlter = useMemo(() => {
+    const a = parseInt(alterAntragsteller) || 0;
+    if (bg === 'alleinstehend') return [a];
+    return [a, parseInt(alterPartner) || 0];
+  }, [bg, alterAntragsteller, alterPartner]);
+
   const ergebnis = useMemo(
     () => berechneBuergergeld({
       bedarfsgemeinschaft: bg,
@@ -82,8 +105,10 @@ export default function BuergergeldRechner() {
       jugendlicherStatus: jugendlicherStatus !== 'none'
         ? { alter: parseInt(jugendlicherAlter) || 0, status: jugendlicherStatus }
         : undefined,
+      stichtag,
+      erwachseneAlter,
     }),
-    [bg, kinder, warmmiete, heizkosten, einkommen, vermoegen, mehrbedarfeInput, jugendlicherStatus, jugendlicherAlter]
+    [bg, kinder, warmmiete, heizkosten, einkommen, vermoegen, mehrbedarfeInput, jugendlicherStatus, jugendlicherAlter, stichtag, erwachseneAlter]
   );
 
   const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -113,8 +138,11 @@ export default function BuergergeldRechner() {
     }
   };
 
-  // Regelsätze aus Lib ableiten (Paket 6, Prompt 123): keine Hartkodierungen mehr
-  const params = getAktuelleBuergergeldParameter();
+  // Regelsätze aus Lib ableiten (Paket 6, Prompt 123): keine Hartkodierungen mehr.
+  // Ab Prompt 129 mit Stichtag-Parameter, damit H2 (Grundsicherungsgeld ab
+  // 01.07.2026) live im UI sichtbar wird, wenn User den Stichtag vorzieht.
+  const params = getAktuelleBuergergeldParameter(stichtag);
+  const istH2 = params.vermoegen.modus === 'alter_gestaffelt';
   const regelsatzInfo: { label: string; betrag: number }[] = [
     { label: 'Alleinstehende',     betrag: params.regelsaetze.rbs1_alleinstehend },
     { label: 'Partner/in (je Person)', betrag: params.regelsaetze.rbs2_paarProPerson },
@@ -149,6 +177,62 @@ export default function BuergergeldRechner() {
           ))}
         </div>
       </div>
+
+      {/* Stichtag & Alter der Erwachsenen — ab H2 (01.07.2026) relevant für
+          Schonvermögen § 12 Abs. 2 SGB II n.F. (altersgestaffelt). */}
+      <div className="mb-5">
+        <label htmlFor="buergergeld-stichtag" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          Stichtag (Bezugsmonat)
+        </label>
+        <input
+          id="buergergeld-stichtag"
+          type="month"
+          value={stichtagMonat}
+          onChange={e => setStichtagMonat(e.target.value)}
+          className="w-full sm:w-1/2 px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"
+        />
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          Ab 01.07.2026 heißt die Leistung offiziell <strong>Grundsicherungsgeld</strong>, mit neuem Schonvermögen
+          (§ 12 Abs. 2 SGB II i.d.F. des 13. SGB II-Änderungsgesetzes, BGBl. 2026 I Nr. 107).
+        </p>
+      </div>
+
+      {istH2 && (
+        <div className="mb-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label htmlFor="buergergeld-alter-antragsteller" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Alter {bg === 'alleinstehend' ? 'Antragsteller/in' : 'Partner/in 1'}
+            </label>
+            <input
+              id="buergergeld-alter-antragsteller"
+              type="number"
+              min={18}
+              max={99}
+              step={1}
+              value={alterAntragsteller}
+              onChange={e => setAlterAntragsteller(e.target.value)}
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"
+            />
+          </div>
+          {bg !== 'alleinstehend' && (
+            <div>
+              <label htmlFor="buergergeld-alter-partner" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Alter Partner/in 2
+              </label>
+              <input
+                id="buergergeld-alter-partner"
+                type="number"
+                min={18}
+                max={99}
+                step={1}
+                value={alterPartner}
+                onChange={e => setAlterPartner(e.target.value)}
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"
+              />
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Kinder — bei „Paar mit Kindern" Pflicht, bei „Alleinstehend" optional (Alleinerziehend-Fall) */}
       {(bg === 'paar-mit-kindern' || bg === 'alleinstehend') && (
@@ -378,7 +462,7 @@ export default function BuergergeldRechner() {
           }`}>
             {ergebnis.bedarfGedeckt ? (
               <>
-                <p className="text-sm text-gray-500 dark:text-gray-400 font-medium mb-1">Kein Bürgergeld-Anspruch</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400 font-medium mb-1">Kein {params.bezeichnung}-Anspruch</p>
                 <p className="text-2xl font-extrabold text-gray-500 dark:text-gray-400">0,00 €</p>
                 <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
                   Ihr Einkommen deckt den Bedarf vollständig.
@@ -387,7 +471,7 @@ export default function BuergergeldRechner() {
             ) : (
               <>
                 <p className="text-sm text-primary-600 dark:text-primary-400 font-medium mb-1">
-                  Voraussichtlicher Bürgergeld-Anspruch
+                  Voraussichtlicher {params.bezeichnung}-Anspruch
                 </p>
                 <p className="text-4xl font-extrabold text-primary-700 dark:text-primary-300">
                   {fmt(ergebnis.gesamtAnspruch)} €
@@ -397,7 +481,7 @@ export default function BuergergeldRechner() {
             )}
           </div>
 
-          {/* Vermögensprüfung */}
+          {/* Vermögensprüfung — H1 (pauschale Karenz) / H2 (altersgestaffelt) */}
           <div className={`rounded-xl p-4 border ${
             ergebnis.vermoegenOk
               ? 'bg-green-50 dark:bg-green-500/10 border-green-200 dark:border-green-500/30'
@@ -405,7 +489,7 @@ export default function BuergergeldRechner() {
           }`}>
             <div className="flex items-start gap-3">
               <span className="text-lg">{ergebnis.vermoegenOk ? '✅' : '⚠️'}</span>
-              <div>
+              <div className="flex-1">
                 <p className={`text-sm font-semibold ${
                   ergebnis.vermoegenOk
                     ? 'text-green-700 dark:text-green-400'
@@ -416,14 +500,35 @@ export default function BuergergeldRechner() {
                     : 'Vermögen liegt über dem Freibetrag'}
                 </p>
                 <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">
-                  Freibetrag: {ergebnis.vermoegensFreibetrag.toLocaleString('de-DE')} €
-                  ({ergebnis.personenImHaushalt} {ergebnis.personenImHaushalt === 1 ? 'Person' : 'Personen'} im Haushalt)
+                  Freibetrag gesamt: <strong>{ergebnis.vermoegensFreibetrag.toLocaleString('de-DE')} €</strong>
+                  {' '}({ergebnis.personenImHaushalt} {ergebnis.personenImHaushalt === 1 ? 'Person' : 'Personen'} im Haushalt)
                 </p>
-                {!ergebnis.vermoegenOk && (
-                  <p className="text-xs text-red-600 dark:text-red-400 mt-1">
-                    In den ersten 12 Monaten (Karenzzeit) gelten erhöhte Freibeträge.
-                    Wenden Sie sich an Ihr Jobcenter.
+                {ergebnis.vermoegenModus === 'karenz_pauschal' && (
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mt-1 leading-relaxed">
+                    In den ersten 12 Monaten (Karenzzeit) gelten erhöhte Freibeträge nach § 12 Abs. 4 SGB II a.F.
+                    Nach der Karenzzeit sinken die Freibeträge auf 15.000 € für die erste und 10.000 € für weitere Personen.
+                    Ab 01.07.2026 wird diese Regelung durch altersgestaffelte Freibeträge (5.000–20.000 € je Person) ersetzt.
                   </p>
+                )}
+                {ergebnis.vermoegenModus === 'alter_gestaffelt' && ergebnis.vermoegensAufschluesselung.length > 0 && (
+                  <div className="mt-2">
+                    <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">
+                      Altersstaffel nach § 12 Abs. 2 SGB II n.F. (Grundsicherungsgeld-Gesetz):
+                    </p>
+                    <ul className="text-xs text-gray-700 dark:text-gray-300 space-y-0.5">
+                      {ergebnis.vermoegensAufschluesselung.map((p, i) => (
+                        <li key={i} className="flex justify-between">
+                          <span>{p.label} ({p.alter} J.)</span>
+                          <span className="tabular-nums">{p.betrag.toLocaleString('de-DE')} €</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 leading-relaxed">
+                      Hinweis: Selbstgenutztes Hausgrundstück oder selbstgenutzte Eigentumswohnung bleiben
+                      während der Karenzzeit (erstes Bezugsjahr, § 22 Abs. 1 Satz 2 SGB II) unabhängig
+                      von der Größe vom Vermögen ausgenommen (§ 12 Abs. 1 Satz 3 SGB II n.F.).
+                    </p>
+                  </div>
                 )}
               </div>
             </div>
@@ -561,7 +666,7 @@ export default function BuergergeldRechner() {
 
               {/* Endergebnis */}
               <div className="flex justify-between px-4 py-3 text-sm font-bold bg-primary-50/50 dark:bg-primary-500/5">
-                <span className="text-gray-800 dark:text-gray-100">Bürgergeld-Anspruch</span>
+                <span className="text-gray-800 dark:text-gray-100">{params.bezeichnung}-Anspruch</span>
                 <span className="text-primary-600 dark:text-primary-400">{fmt(ergebnis.gesamtAnspruch)} €</span>
               </div>
             </div>
@@ -598,7 +703,7 @@ export default function BuergergeldRechner() {
           <CrossLink href="/finanzen/wohngeld-rechner" emoji="🏠" text="Alternativ: Wohngeld prüfen" />
 
           <ErgebnisAktionen
-            ergebnisText={ergebnis.bedarfGedeckt ? 'Kein Bürgergeld-Anspruch (Bedarf durch Einkommen gedeckt)' : `Bürgergeld-Anspruch: ${fmt(ergebnis.gesamtAnspruch)} € pro Monat`}
+            ergebnisText={ergebnis.bedarfGedeckt ? `Kein ${params.bezeichnung}-Anspruch (Bedarf durch Einkommen gedeckt)` : `${params.bezeichnung}-Anspruch: ${fmt(ergebnis.gesamtAnspruch)} € pro Monat`}
             seitenTitel="Bürgergeld-Rechner"
           />
           <AiExplain
