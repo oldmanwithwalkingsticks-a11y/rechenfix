@@ -12,9 +12,10 @@ import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 type Antrieb = 'verbrenner' | 'hybrid' | 'eAutoUnter70' | 'eAutoUeber70';
 type Methode = 'pauschal' | 'einzel';
 
-// § 6 Abs. 1 Nr. 4 Satz 2 Nr. 3 EStG (ab 01.01.2025): Plug-in-Hybrid darf die
-// 0,5-%-Regel nur anwenden, wenn CO2-Ausstoß ≤ 50 g/km UND rein elektrische
-// Mindestreichweite ≥ 80 km.
+// § 6 Abs. 1 Nr. 4 Satz 2 Nr. 5 EStG (ab 01.01.2025): Plug-in-Hybrid darf die
+// 0,5-%-Regel anwenden, wenn CO2-Ausstoß ≤ 50 g/km ODER rein elektrische
+// Mindestreichweite ≥ 80 km. Gesetzestext: "hat oder ... beträgt" — eine der
+// beiden Bedingungen genügt.
 const HYBRID_CO2_GRENZE_G_KM = 50;
 const HYBRID_REICHWEITE_MIN_KM = 80;
 
@@ -52,8 +53,10 @@ export default function FirmenwagenRechner() {
     const co2Wert = parseDeutscheZahl(co2) || 0;
     const reichweiteWert = parseDeutscheZahl(reichweite) || 0;
 
+    // § 6 Abs. 1 Nr. 4 S. 2 Nr. 5 EStG: "hat oder ... beträgt" — eine
+    // der beiden Bedingungen (CO2 oder Reichweite) genügt.
     const hybridBedingungenErfuellt =
-      co2Wert <= HYBRID_CO2_GRENZE_G_KM && reichweiteWert >= HYBRID_REICHWEITE_MIN_KM;
+      co2Wert <= HYBRID_CO2_GRENZE_G_KM || reichweiteWert >= HYBRID_REICHWEITE_MIN_KM;
 
     const berechneFuer = (a: Antrieb) => {
       const privat = bruttoListenpreis * SATZ[a];
@@ -117,9 +120,9 @@ export default function FirmenwagenRechner() {
         {antrieb === 'hybrid' && (
           <div className="mt-3 p-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800/50">
             <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">
-              Die 0,5-%-Regel gilt bei Plug-in-Hybriden nur, wenn CO₂-Ausstoß ≤ {HYBRID_CO2_GRENZE_G_KM} g/km
-              <strong> und</strong> rein elektrische Reichweite ≥ {HYBRID_REICHWEITE_MIN_KM} km (§ 6 Abs. 1 Nr. 4
-              Satz 2 Nr. 3 EStG, ab 01.01.2025).
+              Die 0,5-%-Regel gilt bei Plug-in-Hybriden, wenn CO₂-Ausstoß ≤ {HYBRID_CO2_GRENZE_G_KM} g/km
+              <strong> oder</strong> rein elektrische Reichweite ≥ {HYBRID_REICHWEITE_MIN_KM} km (§ 6 Abs. 1 Nr. 4
+              Satz 2 Nr. 5 EStG, ab 01.01.2025). Eine der beiden Bedingungen reicht aus.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
@@ -141,8 +144,8 @@ export default function FirmenwagenRechner() {
                   ⚠️ 0,5-%-Regel nicht anwendbar
                 </p>
                 <p className="text-xs text-amber-700 dark:text-amber-300">
-                  Da die Bedingungen nach § 6 Abs. 1 Nr. 4 Satz 2 Nr. 3 EStG nicht erfüllt sind, wird der
-                  geldwerte Vorteil wie beim Verbrenner nach der 1-%-Regel berechnet.
+                  Da weder die CO₂- noch die Reichweiten-Bedingung nach § 6 Abs. 1 Nr. 4 Satz 2 Nr. 5 EStG
+                  erfüllt ist, wird der geldwerte Vorteil wie beim Verbrenner nach der 1-%-Regel berechnet.
                 </p>
               </div>
             )}
@@ -305,7 +308,7 @@ export default function FirmenwagenRechner() {
               </div>
             </div>
             <div className="px-4 py-2 border-t border-gray-100 dark:border-gray-700 text-xs text-gray-500 dark:text-gray-400">
-              * 0,5-%-Regel für Hybrid nur bei CO₂ ≤ 50 g/km und elektrischer Reichweite ≥ 80 km (§ 6 Abs. 1 Nr. 4 S. 2 Nr. 3 EStG).
+              * 0,5-%-Regel für Hybrid bei CO₂ ≤ 50 g/km oder elektrischer Reichweite ≥ 80 km (§ 6 Abs. 1 Nr. 4 S. 2 Nr. 5 EStG — eine Bedingung reicht).
             </div>
             {ergebnis.ersparnisEAuto > 0 && (
               <div className="px-4 py-3 bg-green-50 dark:bg-green-500/10 border-t border-gray-100 dark:border-gray-700 text-sm text-green-800 dark:text-green-300">

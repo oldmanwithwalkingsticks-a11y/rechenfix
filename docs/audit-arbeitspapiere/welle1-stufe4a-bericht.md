@@ -29,7 +29,7 @@
 
 1. **MidijobRechner ist der Hot Spot der Stufe** — 3 P1: BE-Formel mathematisch falsch (`F × OG` statt `F × UG`, Midijob-Vorteil drastisch unterschätzt), erfundener Steuerklassen-Faktor `× 1.15` für V/VI, harte Soli-Schwelle ohne Milderungszone (bekanntes Wiederholungs-Anti-Pattern, 6. Auftritt).
 2. **Erbschaft + Schenkung:** Härtefall-Regel § 19 Abs. 3 ErbStG fehlt in beiden → an Tarifsprungkanten (75k/300k/600k/6M/13M/26M) überberechnete Steuer. Plus: Libs sind Duplikate, SSOT-Refactor-Kandidat.
-3. **FirmenwagenRechner:** Plug-in-Hybrid-0,5-%-Regel ohne Bedingungs-Check (CO2 ≤ 50 g/km UND elektrische Mindestreichweite 80 km seit 2025) → stille Vergünstigung falschberechnet.
+3. **FirmenwagenRechner:** Plug-in-Hybrid-0,5-%-Regel ohne Bedingungs-Check (CO2 ≤ 50 g/km ODER elektrische Mindestreichweite 80 km seit 2025) → stille Vergünstigung falschberechnet. [Korrigiert 2026-04-23: ursprünglich in dieser Highlight-Zeile fälschlich als „UND" notiert, im Detail-Abschnitt unten korrekt als „ODER" — Code aus 115c folgte versehentlich dem Highlight. Fix in Prompt 125b, siehe Nachtrag unten.]
 4. **AfA-Rechner P1:** Degressive AfA für bewegliche Wirtschaftsgüter ist ab 01.01.2026 nicht mehr zulässig — der Rechner erlaubt sie weiter (Wachstumschancengesetz lief 31.12.2025 aus).
 
 ---
@@ -612,3 +612,77 @@ markiert werden).
   „≥ 23" hart, betrifft nur Midijob-Studierende unter 23 — Nische,
   nicht priorisiert.
 - **Prompt 125b** bleibt offen für die verbleibenden Stufe-4a-Rechner.
+
+---
+
+## Nachtrag Prompt 125b (2026-04-23) — Scope-Abgleich + FW-02-Folgebug
+
+### Scope-Abgleich gegen Arbeitspapier
+
+Prompt 125b listete fünf angebliche Rest-Bugs aus Stufe 4a
+(ErbSt-Härtefall, SchenkSt-Härtefall, KESt-Bundesland, AfA-Cutoff,
+Firmenwagen-Hybrid). Verifikation gegen aktuelle Arbeitsverzeichnisse
+und Code-Stand (2026-04-23):
+
+| Bug laut 125b | Status |
+|---|---|
+| ErbSt Härtefall § 19 Abs. 3 | ✅ erledigt in 115c (`berechneErbStMitHaertefall` + `ERBST_TARIF_STUFEN`) |
+| SchenkSt Härtefall (DRY) | ✅ erledigt in 115c (SchenkSt-Lib importiert Helper aus ErbSt-Lib) |
+| KESt Bundesland-Dropdown | ✅ erledigt in 117 (via `BUNDESLAENDER` + `kirchensteuersatzFuer` aus `einkommensteuer.ts`) |
+| AfA Degressiv-Cutoff § 7 Abs. 2 EStG | ✅ erledigt in 115c (Gate) + 116 (Deckel 20 %) + 117 (Sammelposten) |
+| Firmenwagen Plug-in-Hybrid | ⚠️ teilweise — **Konjunktion UND statt ODER** aktiv |
+
+→ **4/5 Bugs bereits erledigt**, kein Re-Implementieren. Nur ein echter
+Folge-Bug identifiziert, der durch das Audit selbst entstanden ist
+(Highlight-Zeile Z. 32 hatte fälschlich „UND" statt „ODER" notiert,
+115c hat dem Highlight statt dem Detail-Abschnitt Z. 162 gefolgt).
+
+### FW-02-Folgebug (Commit kommt)
+
+**Rechtsquelle gegengecheckt:**
+- [gesetze-im-internet.de/estg/__6.html](https://www.gesetze-im-internet.de/estg/__6.html)
+- [dejure.org/gesetze/EStG/6.html](https://dejure.org/gesetze/EStG/6.html)
+
+Gesetzestext § 6 Abs. 1 Nr. 4 Satz 2 Nr. 5 EStG (maßgeblich für
+Anschaffung ab 01.01.2025): *„eine Kohlendioxidemission von höchstens
+50 Gramm je gefahrenen Kilometer **hat oder** die Reichweite des
+Fahrzeugs unter ausschließlicher Nutzung der elektrischen
+Antriebsmaschine mindestens 80 Kilometer beträgt"*.
+
+**Korrektur:** Eine der beiden Bedingungen genügt — die beiden
+Quellen bestätigen übereinstimmend ODER-Konjunktion. Der Code
+[components/rechner/FirmenwagenRechner.tsx](../../components/rechner/FirmenwagenRechner.tsx)
+hatte das mit `&&` als UND-Konjunktion implementiert, zusammen mit
+irreführendem UI-Text und falscher §-Referenz (Nr. 3 statt Nr. 5).
+
+**Impact:** Ein Fahrzeug ab Anschaffung 2025 mit z. B. Reichweite
+85 km, aber CO₂ 55 g/km hätte die 0,5-%-Regel beanspruchen dürfen —
+der Rechner hat auf 1 % hochgestuft und Steuer überrechnet. Der
+typische Default-Fall (CO₂ 50 g/km + Reichweite 80 km) war unauffällig,
+weil beide Bedingungen grenzwertig erfüllt sind; verschoben wurde die
+Falschberechnung nur bei asymmetrischen Kombinationen.
+
+**Änderungen in FirmenwagenRechner.tsx:**
+- Z. 56: `&&` → `||` in der Bedingungsprüfung
+- Z. 15–18: Kommentar von UND auf ODER, §-Verweis auf Nr. 5
+- Z. 120–123: UI-Erklärtext „und" → „oder" + Klarstellung „Eine der beiden Bedingungen reicht aus"
+- Z. 143–145: Warn-Banner-Text präzisiert („weder die CO₂- noch die Reichweiten-Bedingung")
+- Z. 308: Fußnote der Vergleichstabelle „und" → „oder"
+
+**CLAUDE.md Z. 333** analog: Rechtsstand-Tabelle von UND auf ODER,
+§-Referenz auf Nr. 5, Deadline auf 01.01.2031 (Ende der Begünstigung).
+
+**Kein Verify-Script** — für FirmenwagenRechner existiert keine
+Regression-Suite (inline-Logik, keine dedizierte Lib). Manueller
+Inkognito-Cross-Check durch Karsten empfohlen:
+- BLP 45.000 €, Hybrid, 65 km Reichweite, 45 g CO₂ → 0,5 % (CO₂-OK)
+- BLP 45.000 €, Hybrid, 85 km Reichweite, 55 g CO₂ → 0,5 % (Reichweite-OK)
+- BLP 45.000 €, Hybrid, 65 km Reichweite, 55 g CO₂ → 1,0 % (Fallback)
+
+### Welle-Abschluss Stufe 4a (final)
+
+Mit 125b ist die Welle-1-Stufe-4a-Audit-Welle vollständig
+abgeschlossen. Rest-P3-Items im Backlog (siehe Nachtrag 117)
+bleiben User-Bedarfs-getrieben. Nächster Scope: Welle 2 oder
+Bürgergeld-Stichtag 01.07.2026 bzw. Prompt 120c
+(Wohngeld-Lib-Refactor).
