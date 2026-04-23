@@ -7,7 +7,7 @@ description: Template and checklist for building standardized online calculators
 
 Build standardized, SEO-optimized calculator pages for the German calculator portal rechenfix.de. Every calculator must follow this template to ensure consistency, completeness, and maximum SEO impact.
 
-**Aktueller Stand:** 169 Rechner in 9 Kategorien (Alltag 23, Finanzen 45, Gesundheit 17, Auto & Verkehr 10, Wohnen & Energie 25, Mathe & Schule 18, Arbeit & Recht 17, Kochen & Ernährung 12, Sport & Fitness 2).
+**Aktueller Stand:** 170 Rechner in 9 Kategorien (Alltag 23, Finanzen 44, Gesundheit 17, Auto & Verkehr 11, Wohnen & Energie 25, Mathe & Schule 18, Arbeit & Recht 18, Kochen & Ernährung 12, Sport & Fitness 2). Verschiebungen seit letztem Sync: Firmenwagen-Rechner nach Auto migriert (Prompt 126), Ehegattenunterhalt-Rechner neu in Arbeit.
 
 ## Tech Stack
 
@@ -96,6 +96,22 @@ werden vermieden.
   `rentenrechner` ein unnatürliches `rente-n-rechner` machen.
 - **URL-Slug ≠ Komponenten-Dateiname.** Dateiname folgt PascalCase
   (`RentenRechner.tsx`), Slug folgt Duden-Logik.
+
+### Hartkodierte URLs gegen SSOT prüfen (Prebuild-Hook seit 132.6)
+
+Jede hartkodierte URL (CrossLink-`href`, Markdown-Link, `Link`-Komponente,
+FAQ-Text) gegen die SSOT in `lib/rechner-config/<kategorie>.ts` prüfen,
+nicht aus der Display-Name-Erwartung ableiten. Häufige Verwechslungen:
+
+- `promillerechner` → `/arbeit/` (nicht `/gesundheit/` oder `/alltag/`)
+- `stundenlohn-rechner` → `/finanzen/` (nicht `/arbeit/`)
+- `einheiten-umrechner` → `/mathe/` (nicht `/alltag/`)
+- `unterhaltsrechner` → `/arbeit/` (nicht `/finanzen/`)
+
+Der Prebuild-Hook [scripts/slug-drift-scan.mjs](../../scripts/slug-drift-scan.mjs)
+bricht den Build bei jedem nicht-whitelisted Drift ab — aber eine
+Verify-im-Kopf-Runde vor dem Commit spart den Build-Break. Ad-hoc-Prüfung:
+`npm run lint:slugs`.
 
 ## When Building a New Rechner
 
@@ -896,6 +912,46 @@ Reale Vorfälle, die diese Regel nötig gemacht haben (alle 22.04.2026):
 - BAföG-Schätzwert 600 € in Beispielrechnung
 - BAföG-Geschwister-Anrechnungsquote 0,45 vs. korrekt 0,50 bei 0 Geschwistern (Prompt 121)
 - Wohngeld § 17 Nr. 1 Schwerbehinderten-FB 125 € statt korrekt 150 €/Monat (Prompt 120a-Rollback)
+- CO₂-Staffel § 9 Abs. 1 Nr. 2c KraftStG: „glatte" 2,5/3,0/3,5/4,0 €/g Delta wirkten plausibel, Gesetz hat 2,20/2,50/2,90/3,40 (Prompt 130)
+- § 3d KraftStG Elektro-Befreiung: Memory erinnerte 31.12.2030 (alte Fassung), aktuell 31.12.2035 seit 8. KraftStÄndG vom 04.12.2025 (Prompt 131)
+
+## Audit-Methodik (Welle 2 ab Prompt 130)
+
+Für **Audit-Arbeit an bestehenden Rechnern** (nicht Neubau) gilt eine
+reduzierte 4-Punkt-Methodik. Die Welle-1-7-Punkt-Methodik (Clamping,
+Barrierefreiheit, Copy-Button, Smoketest, …) ist für Audits zu
+umfangreich — die Infrastruktur-Punkte sind projektweit stabil und
+werden über Guards G1–G14 + Prebuild-Hooks abgesichert.
+
+**4-Punkt-Audit:**
+
+1. **Formel/Rechtsquelle** — Gegen Primärquelle prüfen (Gesetz im
+   Internet, BGBl.-Anlage, amtliche Tabelle). Regel 12 aus CLAUDE.md
+   („Claudes Memory ist keine Primärquelle") besonders beachten bei
+   Parametern, die nach Knowledge-Cutoff Januar 2026 geändert wurden.
+2. **Input-Validierung** — Min/Max/Schritt sinnvoll, Typecheck
+   korrekt, Clamping im State-Reducer (nicht nur HTML-`max`).
+3. **Edge Cases** — Leere Eingabe, Division durch null, Extremwerte,
+   Datumsgrenzen.
+4. **SSOT-Verwendung** — Nutzt der Rechner die zentrale Lib, oder
+   hartkodiert er Werte? Ist er konsistent mit anderen Rechnern?
+
+**Ablauf:** Audit-Prompt ohne Code-Fix → Bericht unter
+`docs/audit-arbeitspapiere/` mit Executive Summary (Bug-Zahlen
+P1/P2/P3), Pro-Rechner-Detail-Abschnitten, SSOT-Refactor-Kandidaten,
+Fix-Plan als Folge-Prompts. **Folge-Prompts** (P1-Eskalation sofort,
+P2-Polish-Batch danach, P3-UX-Extras bei Gelegenheit) greifen die
+Befunde auf.
+
+**Commits auf Folge-Prompts referenzieren den Detail-Abschnitt**
+(Datei:Zeile oder Abschnittstitel), nicht die Executive Summary —
+Summary-Paraphrasen können fehlerhaft sein (vgl. UND-vs-ODER-Slip
+in Welle 1 Stufe 4a, 5-vs-6-P2-Zählfehler in Welle 2 Stufe 1).
+
+Gilt für Welle 2 Stufe 1 Auto (Prompt 130, abgeschlossen 23.04.2026),
+Stufe 2 Gesundheit (kommend Prompt 140). Rechtsstand-Parameter werden
+nicht in SKILL.md dupliziert — siehe `CLAUDE.md` Abschnitt „Aktueller
+Rechtsstand" für verifizierte Werte.
 
 ## UI-Labels und rechtliche Tatbestände (Prompt 121-fix, 22.04.2026)
 
