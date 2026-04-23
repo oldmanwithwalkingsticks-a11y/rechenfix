@@ -22,6 +22,14 @@ const nextConfig = {
         destination: '/sport/herzfrequenz-zonen-rechner',
         permanent: true,
       },
+      {
+        // Kategorie- + Slug-Migration April 2026 (Prompt 126): Firmenwagen-
+        // Besteuerung ist thematisch Auto & Verkehr; Slug-Schreibweise an die
+        // 168 anderen Rechner angeglichen (Bindestrich statt zusammengeschrieben).
+        source: '/finanzen/firmenwagenrechner',
+        destination: '/auto/firmenwagen-rechner',
+        permanent: true,
+      },
     ];
   },
 

@@ -312,7 +312,7 @@ const rechnerKomponenten: Record<string, React.ComponentType> = {
   'arbeitslosengeld-rechner': ArbeitslosengeldRechner,
   'grundsteuer-rechner': GrundsteuerRechner,
   'midijob-rechner': MidijobRechner,
-  'firmenwagenrechner': FirmenwagenRechner,
+  'firmenwagen-rechner': FirmenwagenRechner,
   'elternzeit-rechner': ElternzeitRechner,
   'witwenrente-rechner': WitwenrenteRechner,
   'kurzarbeitergeld-rechner': KurzarbeitergeldRechner,

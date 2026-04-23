@@ -1035,23 +1035,6 @@ export const rechner: RechnerLight[] = [
     "icon": "💶"
   },
   {
-    "slug": "firmenwagenrechner",
-    "titel": "Firmenwagenrechner",
-    "beschreibung": "Firmenwagen-Steuer berechnen: Geldwerter Vorteil nach 1%-Regel für Verbrenner, Hybrid und Elektroauto.",
-    "kategorie": "Finanzen",
-    "kategorieSlug": "finanzen",
-    "keywords": [
-      "firmenwagenrechner",
-      "1 prozent regel",
-      "geldwerter vorteil",
-      "dienstwagen rechner",
-      "e-auto firmenwagen",
-      "0 25 prozent regel",
-      "firmenwagen steuer"
-    ],
-    "icon": "🚗"
-  },
-  {
     "slug": "witwenrente-rechner",
     "titel": "Witwenrente-Rechner",
     "beschreibung": "Witwenrente berechnen: Große und kleine Witwenrente, Einkommensanrechnung und Rentenanspruch.",
@@ -1853,6 +1836,24 @@ export const rechner: RechnerLight[] = [
       "taxi münchen"
     ],
     "icon": "🚕"
+  },
+  {
+    "slug": "firmenwagen-rechner",
+    "titel": "Firmenwagenrechner",
+    "beschreibung": "Firmenwagen-Steuer berechnen: Geldwerter Vorteil nach 1%-Regel für Verbrenner, Hybrid und Elektroauto.",
+    "kategorie": "Auto & Verkehr",
+    "kategorieSlug": "auto",
+    "keywords": [
+      "firmenwagen-rechner",
+      "firmenwagenrechner",
+      "1 prozent regel",
+      "geldwerter vorteil",
+      "dienstwagen rechner",
+      "e-auto firmenwagen",
+      "0 25 prozent regel",
+      "firmenwagen steuer"
+    ],
+    "icon": "🚗"
   },
   {
     "slug": "stromkosten-rechner",

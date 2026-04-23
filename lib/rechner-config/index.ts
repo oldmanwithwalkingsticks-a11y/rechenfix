@@ -36,7 +36,7 @@ Daneben finden Sie spezialisiertere Helfer: Countdown- und Geburtstags-Rechner f
 
 Der [Brutto-Netto-Rechner](/finanzen/brutto-netto-rechner) ist der meistgenutzte Rechner dieser Kategorie — er zeigt Ihnen, wie viel von Ihrem Bruttogehalt nach Steuern und Sozialabgaben übrig bleibt, inklusive Steuerklasse, Bundesland und Kirchensteuer. Für Immobilien- oder Konsumfinanzierungen ermittelt der [Kreditrechner](/finanzen/kreditrechner) Ihre monatliche Rate und die Gesamtkosten über die Laufzeit. Wer langfristig Vermögen aufbauen möchte, plant mit dem [ETF-Sparplanrechner](/finanzen/etf-sparplanrechner) inklusive Zinseszinseffekt.
 
-Daneben decken wir Spezialfälle ab: Elterngeld, Witwenrente, Kurzarbeitergeld, Einkommensteuer, Splitting, Pfändung, Minijob, Midijob, Firmenwagen und mehr. Alle Ergebnisse dienen der Orientierung; für die verbindliche Veranlagung wenden Sie sich an Ihren Steuerberater oder ELSTER.`,
+Daneben decken wir Spezialfälle ab: Elterngeld, Witwenrente, Kurzarbeitergeld, Einkommensteuer, Splitting, Pfändung, Minijob, Midijob und mehr. Alle Ergebnisse dienen der Orientierung; für die verbindliche Veranlagung wenden Sie sich an Ihren Steuerberater oder ELSTER.`,
   },
   {
     slug: 'gesundheit',
@@ -62,7 +62,7 @@ Darüber hinaus finden Sie Rechner für Körperfettanteil, Wasserbedarf, Schlafz
 
 Der [Spritkosten-Rechner](/auto/spritkosten-rechner) zeigt Ihnen, was eine bestimmte Strecke bei aktuellem Kraftstoffpreis und dem Verbrauch Ihres Fahrzeugs kostet — nützlich für Pendelfahrten, Urlaubsplanung oder beim Vergleich zweier Fahrzeugmodelle. Der [Kfz-Steuer-Rechner](/auto/kfz-steuer-rechner) ermittelt die jährliche Kraftfahrzeugsteuer nach den 2026 geltenden Regeln, abhängig von Hubraum und CO₂-Ausstoß. Für den Gesamtbetrieb eines Fahrzeugs rechnet der [Autokosten-Rechner](/auto/autokosten-rechner) alle regelmäßigen Posten zusammen — vom Wertverlust über Versicherung bis zur Wartung.
 
-Weitere Rechner helfen bei typischen Fragen rund ums Fahrzeug: KW-PS-Umrechnung, Bußgeld-Einschätzung bei Verkehrsverstößen, Gebrauchtwagen-Bewertung, THG-Prämie für E-Autos und Wallbox-Kosten. Alle Rechner sind kostenlos und beachten die 2026 gültigen Gesetze.`,
+Weitere Rechner helfen bei typischen Fragen rund ums Fahrzeug: der [Firmenwagen-Rechner](/auto/firmenwagen-rechner) zeigt den geldwerten Vorteil nach 1 %- bzw. 0,25 %-Regel für Dienstwagen, dazu kommen KW-PS-Umrechnung, Bußgeld-Einschätzung bei Verkehrsverstößen, Gebrauchtwagen-Bewertung, THG-Prämie für E-Autos und Wallbox-Kosten. Alle Rechner sind kostenlos und beachten die 2026 gültigen Gesetze.`,
   },
   {
     slug: 'wohnen',
@@ -188,7 +188,7 @@ export const neueRechnerSlugs = [
   'kurzarbeitergeld-rechner',
   'witwenrente-rechner',
   'elternzeit-rechner',
-  'firmenwagenrechner',
+  'firmenwagen-rechner',
   'midijob-rechner',
   'grundsteuer-rechner',
   'arbeitslosengeld-rechner',
@@ -400,14 +400,14 @@ const verwandteMap: Record<string, string[]> = {
   'arbeitslosengeld-rechner': ['kuendigungsfrist-rechner', 'abfindungsrechner', 'buergergeld-rechner', 'brutto-netto-rechner'],
   'grundsteuer-rechner': ['grunderwerbsteuer-rechner', 'baufinanzierung-rechner', 'nebenkosten-rechner', 'mietrechner'],
   'midijob-rechner': ['minijob-rechner', 'brutto-netto-rechner', 'stundenlohn-rechner', 'teilzeit-rechner'],
-  'firmenwagenrechner': ['autokosten-rechner', 'gmbh-geschaeftsfuehrer-rechner', 'gehaltserhoehung-rechner', 'brutto-netto-rechner'],
+  'firmenwagen-rechner': ['autokosten-rechner', 'gmbh-geschaeftsfuehrer-rechner', 'gehaltserhoehung-rechner', 'brutto-netto-rechner'],
   'elternzeit-rechner': ['elterngeld-rechner', 'mutterschutz-rechner', 'teilzeit-rechner', 'geburtstermin-rechner'],
   'witwenrente-rechner': ['rentenrechner', 'buergergeld-rechner', 'pflegegeld-rechner', 'erbschaftsteuer-rechner'],
   'kurzarbeitergeld-rechner': ['brutto-netto-rechner', 'arbeitslosengeld-rechner', 'buergergeld-rechner', 'teilzeit-rechner'],
   'riester-rechner': ['rentenrechner', 'etf-sparplanrechner', 'steuererstattung-rechner', 'sparrechner'],
   'protein-rechner': ['kalorienrechner', 'bmi-rechner', 'idealgewicht-rechner', 'wasserbedarf-rechner'],
   'fuehrerschein-rechner': ['autokosten-rechner', 'kfz-steuer-rechner', 'leasing-rechner', 'spritkosten-rechner'],
-  'nettolohn-optimierer': ['gehaltserhoehung-rechner', 'brutto-netto-rechner', 'firmenwagenrechner', 'pendlerpauschale-rechner'],
+  'nettolohn-optimierer': ['gehaltserhoehung-rechner', 'brutto-netto-rechner', 'firmenwagen-rechner', 'pendlerpauschale-rechner'],
   'mietpreisbremse-rechner': ['mietrechner', 'indexmiete-rechner', 'nebenkosten-rechner', 'wohngeld-rechner'],
   'kapitalertragsteuer-rechner': ['etf-sparplanrechner', 'sparrechner', 'zinsrechner', 'steuererstattung-rechner'],
   'schuhgroessen-rechner': ['einheiten-umrechner', 'waehrungsrechner', 'bmi-rechner', 'idealgewicht-rechner'],

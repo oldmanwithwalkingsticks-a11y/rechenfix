@@ -267,7 +267,7 @@ export default function NettolohnOptimiererRechner() {
 
       <CrossLink href="/finanzen/gehaltserhoehung-rechner" emoji="📈" text="Gehaltserhöhung-Rechner: Was bleibt netto von der Erhöhung?" />
       <CrossLink href="/finanzen/brutto-netto-rechner" emoji="💰" text="Brutto-Netto-Rechner: Alle Abzüge im Detail" />
-      <CrossLink href="/finanzen/firmenwagenrechner" emoji="🚗" text="Firmenwagen-Rechner: Lohnt sich der Dienstwagen?" />
+      <CrossLink href="/auto/firmenwagen-rechner" emoji="🚗" text="Firmenwagen-Rechner: Lohnt sich der Dienstwagen?" />
 
       <ErgebnisAktionen
         ergebnisText={sieger ? `Nettolohn-Optimierer: Bei ${fmt(betrag)} € AG-Budget ist "${sieger.label}" am besten — +${fmt2(sieger.nettoZugewinn)} €/Monat netto (${fmt2(vorteilVsBrutto)} € mehr als Brutto-Erhöhung)` : 'Nettolohn-Optimierer'}
