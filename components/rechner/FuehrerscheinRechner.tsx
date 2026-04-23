@@ -25,8 +25,10 @@ const NEBENKOSTEN = {
   antragsgebuehr: 45,
 };
 const NEBENKOSTEN_GESAMT = Object.values(NEBENKOSTEN).reduce((a, b) => a + b, 0);
-const THEORIEPRUEFUNG = 23;
-const PRAXISPRUEFUNG: number = 117;
+// Amtliche Prüfungsgebühren TÜV/DEKRA 2026 nach GebOSt-Anlage
+// (zweijährliche Anpassung, letzte Anhebung 2024).
+const THEORIEPRUEFUNG = 22.49;
+const PRAXISPRUEFUNG: number = 116.93;
 
 export default function FuehrerscheinRechner() {
   const [region, setRegion] = useState<Region>('vorort');
