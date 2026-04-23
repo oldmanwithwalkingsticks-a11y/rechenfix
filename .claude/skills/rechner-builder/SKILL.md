@@ -25,6 +25,40 @@ einer mechanischen Regel. Beide Muster kommen im Bestand vor und sind
 SEO-etabliert (Stand 23.04.2026: 178 Rechner-URLs, ~130 Bindestrich,
 ~27 Einwort, 7 Umrechner).
 
+### Display-Name vs. URL-Slug
+
+Display-Name (H1, Title-Tag, Mega-Menü, Config-Label) und URL-Slug sind
+zwei **unabhängige Artefakte** mit eigenen Regeln:
+
+- **Display-Name folgt Duden-Logik:** deutsche Komposita typischerweise
+  zusammengeschrieben — „Stundenlohnrechner", „Heizkostenrechner",
+  „Körperfettrechner", „Firmenwagenrechner". Liest sich im Menü und in
+  Überschriften natürlich.
+- **URL-Slug folgt SEO-Lesbarkeits-Konvention:** Bindestrich trennt
+  Wortstämme visuell — `stundenlohn-rechner`, `heizkosten-rechner`,
+  `koerperfett-rechner`, `firmenwagen-rechner`. Google behandelt beide
+  Varianten praktisch äquivalent (deutsche Komposita werden ohnehin als
+  zusammengehörig erkannt); der Bindestrich ist primär für menschliche
+  Lesbarkeit.
+
+**Abweichungen zwischen Display-Name und Slug sind kein Bug.** Im Bestand
+gibt es rund zehn Fälle mit Einwort-Display und Bindestrich-Slug — das ist
+so gewollt, nicht zu korrigieren.
+
+#### Keine Slug-Umbenennung zur bloßen Angleichung an den Display-Namen
+
+URL-Stabilität geht vor typografischer Konsistenz. Jede Slug-Änderung
+
+- kappt PageRank-Flow von Backlinks (auch per 301 nur teilweise kompensiert),
+- verwirrt die Google Search Console (GSC muss neu lernen),
+- erfordert 301-Redirect + Sitemap-Flush + interne Link-Updates,
+- bringt kein messbares SEO-Plus.
+
+Gründe für eine Slug-Änderung müssen **inhaltlich** sein — z. B. Kategorie-
+wechsel (vgl. Prompt 126, Firmenwagen von `/finanzen/` nach `/auto/`) —
+nicht typografisch. Reine „jetzt konsistent mit Display-Namen"-Umbenennungen
+werden vermieden.
+
 ### Regeln
 
 **Einfaches Kompositum aus 2 Wortstämmen → zusammen (Einwort):**
