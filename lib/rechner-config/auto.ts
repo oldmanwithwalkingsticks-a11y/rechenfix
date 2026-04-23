@@ -159,14 +159,14 @@ Bei der Kfz-Steuer spielt die kW-Zahl übrigens keine direkte Rolle — hier sin
     keywords: ['kfz steuer rechner', 'kfz steuer berechnen', 'kfz steuer 2026', 'autosteuer', 'kraftfahrzeugsteuer', 'co2 steuer auto'],
     icon: '🚙',
     formel: 'Kfz-Steuer = Sockelbetrag (Hubraum) + CO₂-Komponente (ab 95 g/km)',
-    beispiel: 'Beispiel: 1.498 ccm Benziner, 128 g/km CO₂ → Sockel: 15 × 2 € = 30 € + CO₂: 33 × 2 € = 66 € = 96 € / Jahr',
+    beispiel: 'Beispiel: 1.498 ccm Benziner, 128 g/km CO₂ → Sockel: 15 × 2,00 € = 30 € + CO₂: (20 × 2,00 €) + (13 × 2,20 €) = 40 € + 28,60 € = 68,60 € → Jahressteuer 98,60 €',
     erklaerung: `**Kfz-Steuer 2026 — was ändert sich?**
 
 Die Kraftfahrzeugsteuer ist eine jährliche Steuer, die jeder Fahrzeughalter in Deutschland zahlen muss. Sie wird vom Hauptzollamt erhoben und ist bei der Zulassung eines Fahrzeugs fällig. Die Höhe der Kfz-Steuer hängt seit der Reform von 2009 von zwei Faktoren ab: dem Hubraum des Motors und dem CO₂-Ausstoß des Fahrzeugs.
 
 Für das Jahr 2026 gelten im Wesentlichen die gleichen Regeln wie seit der letzten Anpassung. Fahrzeuge mit Erstzulassung ab dem 01.07.2009 werden nach dem kombinierten Hubraum-CO₂-Modell besteuert. Der CO₂-Freibetrag liegt bei 95 g/km — alles darüber wird progressiv besteuert. Je höher der Schadstoffausstoß, desto teurer wird die Steuer.
 
-Besonders relevant für 2026: Die Steuerbefreiung für reine Elektrofahrzeuge gilt weiterhin. Wer ein reines Elektroauto bis zum 31.12.2025 erstmals zugelassen hat, zahlt bis zu 10 Jahre lang keine Kfz-Steuer, längstens bis zum 31.12.2030. Danach wird eine gewichtsbasierte Besteuerung eingeführt. Für Plug-in-Hybride gilt diese Befreiung nicht — sie werden wie Verbrenner nach Hubraum und CO₂ besteuert.
+Besonders relevant für 2026: Die Steuerbefreiung für reine Elektrofahrzeuge gilt weiterhin. Wer ein reines Elektroauto mit Erstzulassung im Zeitraum 18.05.2011 bis 31.12.2030 zulässt, zahlt 10 Jahre lang keine Kfz-Steuer, längstens bis zum 31.12.2035 (§ 3d KraftStG in der Fassung des 8. KraftStÄndG vom 04.12.2025). Nach Ablauf gilt eine gewichtsbasierte Besteuerung nach § 9 Abs. 1 Nr. 2e KraftStG. Für Plug-in-Hybride gilt diese Befreiung nicht — sie werden wie Verbrenner nach Hubraum und CO₂ besteuert.
 
 Ältere Fahrzeuge mit Erstzulassung vor dem 01.07.2009 werden weiterhin rein nach Hubraum und Schadstoffklasse besteuert. Hier fallen je nach Emissionsstandard deutlich höhere Steuersätze an, insbesondere für Fahrzeuge ohne Feinstaubplakette.
 
@@ -178,28 +178,29 @@ Die Berechnung der Kfz-Steuer für Fahrzeuge ab Erstzulassung 01.07.2009 erfolgt
 
 Rechenbeispiel: Ein Benziner mit 1.498 ccm → aufgerundet 1.500 ccm → 15 × 2,00 € = 30,00 € Sockelbetrag. Ein Diesel mit 1.968 ccm → aufgerundet 2.000 ccm → 20 × 9,50 € = 190,00 € Sockelbetrag.
 
-**Schritt 2 — CO₂-Komponente:** Für jedes Gramm CO₂ über dem Freibetrag von 95 g/km wird ein progressiver Steuersatz fällig:
+**Schritt 2 — CO₂-Komponente:** Für jedes Gramm CO₂ über dem Freibetrag von 95 g/km wird ein progressiver Steuersatz nach § 9 Abs. 1 Nr. 2c KraftStG fällig (seit 01.01.2021):
 
 - **96–115 g/km:** 2,00 € pro g/km über dem Freibetrag
-- **116–135 g/km:** 2,50 € pro g/km
-- **136–155 g/km:** 3,00 € pro g/km
-- **156–175 g/km:** 3,50 € pro g/km
-- **über 175 g/km:** 4,00 € pro g/km
+- **116–135 g/km:** 2,20 € pro g/km
+- **136–155 g/km:** 2,50 € pro g/km
+- **156–175 g/km:** 2,90 € pro g/km
+- **176–195 g/km:** 3,40 € pro g/km
+- **ab 196 g/km:** 4,00 € pro g/km
 
 Die CO₂-Werte basieren seit September 2018 auf dem WLTP-Messverfahren (Worldwide Harmonized Light Vehicles Test Procedure), das realistischere Werte liefert als das alte NEFZ-Verfahren. Den WLTP-CO₂-Wert Ihres Fahrzeugs finden Sie in der Zulassungsbescheinigung Teil I (Feld V.7) oder im COC-Dokument (Certificate of Conformity).
 
 Rechenbeispiel komplett: Benziner, 1.498 ccm, 128 g/km CO₂:
 - Sockelbetrag: 15 × 2,00 € = 30,00 €
-- CO₂: 128 − 95 = 33 g/km über Freibetrag. Davon 20 g × 2,00 € = 40,00 € und 13 g × 2,50 € = 32,50 €. Gesamt CO₂: 72,50 €
-- Jahressteuer: 30,00 € + 72,50 € = 102,50 €
+- CO₂: 128 − 95 = 33 g/km über Freibetrag. Davon 20 g × 2,00 € = 40,00 € (96–115 g) und 13 g × 2,20 € = 28,60 € (116–128 g). Gesamt CO₂: 68,60 €
+- Jahressteuer: 30,00 € + 68,60 € = 98,60 €
 
 Für Fahrzeuge mit Erstzulassung vor dem 01.07.2009 wird die Steuer ausschließlich nach Hubraum und Schadstoffklasse berechnet. Die Sätze sind hier deutlich höher: Für einen Euro-4-Benziner fallen z. B. 6,75 € pro angefangene 100 ccm an, für einen Euro-4-Diesel 15,44 € pro angefangene 100 ccm.
 
 **Kfz-Steuer für Elektroautos**
 
-Elektrofahrzeuge genießen in Deutschland eine großzügige steuerliche Förderung. Reine Elektroautos (BEV — Battery Electric Vehicle) sind bei Erstzulassung bis zum 31.12.2025 für einen Zeitraum von 10 Jahren von der Kfz-Steuer befreit, maximal bis zum 31.12.2030.
+Elektrofahrzeuge genießen in Deutschland eine großzügige steuerliche Förderung. Reine Elektroautos (BEV — Battery Electric Vehicle) sind bei Erstzulassung im Zeitraum 18.05.2011 bis 31.12.2030 für 10 Jahre von der Kfz-Steuer befreit, längstens jedoch bis zum 31.12.2035 (§ 3d KraftStG in der Fassung des 8. KraftStÄndG vom 04.12.2025).
 
-Das bedeutet konkret: Wer im Jahr 2024 ein Elektroauto erstmals zugelassen hat, zahlt bis 2030 keine Kfz-Steuer. Wer bereits 2020 zugelassen hat, ist bis 2030 befreit. Nach Ablauf der Befreiung wird eine gewichtsbasierte Kfz-Steuer fällig, die sich am zulässigen Gesamtgewicht des Fahrzeugs orientiert.
+Das bedeutet konkret: Wer im Jahr 2024 ein Elektroauto erstmals zugelassen hat, ist bis 2034 steuerbefreit. Wer 2028 zulässt, profitiert bis 2035 (Deckel greift, 10-Jahres-Frist würde bis 2038 reichen). Wer 2020 zugelassen hat, ist bis 2030 befreit. Nach Ablauf der Befreiung wird eine gewichtsbasierte Kfz-Steuer nach § 9 Abs. 1 Nr. 2e KraftStG fällig, die sich am zulässigen Gesamtgewicht des Fahrzeugs orientiert.
 
 Wichtig zu wissen: Diese Befreiung gilt nur für rein batterieelektrische Fahrzeuge. Plug-in-Hybride (PHEV) sind davon ausgenommen und werden regulär nach Hubraum und CO₂ besteuert — allerdings profitieren sie oft von niedrigeren CO₂-Werten durch den Elektromotor. Auch Brennstoffzellenfahrzeuge (FCEV) fallen unter die Elektro-Befreiung.
 
@@ -210,11 +211,11 @@ Für Firmenwagen mit Elektroantrieb gilt zusätzlich ein reduzierter geldwerter 
 Die folgende Übersicht zeigt typische jährliche Kfz-Steuern für gängige Fahrzeugkonfigurationen (Erstzulassung ab 01.07.2009):
 
 - **Kleinwagen (1.000 ccm, 110 g/km, Benzin):** ca. 50 € / Jahr — Sockel 20 € + CO₂ 30 €
-- **Kompaktwagen (1.500 ccm, 128 g/km, Benzin):** ca. 103 € / Jahr — Sockel 30 € + CO₂ 73 €
-- **Mittelklasse (2.000 ccm, 145 g/km, Benzin):** ca. 177 € / Jahr — Sockel 40 € + CO₂ 137 €
-- **SUV (2.000 ccm, 175 g/km, Diesel):** ca. 518 € / Jahr — Sockel 190 € + CO₂ 328 €
-- **Oberklasse (3.000 ccm, 190 g/km, Benzin):** ca. 442 € / Jahr — Sockel 60 € + CO₂ 382 €
-- **Elektroauto (beliebig):** 0 € / Jahr (bis 2030 steuerbefreit)
+- **Kompaktwagen (1.500 ccm, 128 g/km, Benzin):** ca. 99 € / Jahr — Sockel 30 € + CO₂ 68,60 €
+- **Mittelklasse (2.000 ccm, 145 g/km, Benzin):** ca. 149 € / Jahr — Sockel 40 € + CO₂ 109 €
+- **SUV (2.000 ccm, 175 g/km, Diesel):** ca. 382 € / Jahr — Sockel 190 € + CO₂ 192 €
+- **Oberklasse (3.000 ccm, 190 g/km, Benzin):** ca. 303 € / Jahr — Sockel 60 € + CO₂ 243 €
+- **Elektroauto (beliebig, Erstzulassung bis 31.12.2030):** 0 € / Jahr (steuerbefreit längstens bis 31.12.2035)
 
 Je niedriger der CO₂-Ausstoß, desto günstiger die Steuer. Deshalb lohnt es sich, beim Neuwagenkauf auf sparsame Motorisierungen zu achten. Bereits wenige Gramm CO₂ weniger können durch die progressiven Steuerstufen einen spürbaren Unterschied bei der jährlichen Steuerbelastung ausmachen.
 
@@ -230,7 +231,7 @@ Die Kfz-Steuer wird vom Hauptzollamt per SEPA-Lastschrift eingezogen. Halbjährl
       },
       {
         frage: 'Sind Elektroautos steuerfrei?',
-        antwort: 'Ja, reine Elektroautos mit Erstzulassung bis 31.12.2025 sind für 10 Jahre von der Kfz-Steuer befreit, längstens bis 31.12.2030. Plug-in-Hybride sind davon ausgenommen und werden regulär besteuert.',
+        antwort: 'Ja, reine Elektroautos mit Erstzulassung im Zeitraum 18.05.2011 bis 31.12.2030 sind nach § 3d KraftStG für 10 Jahre von der Kfz-Steuer befreit, längstens jedoch bis 31.12.2035. Plug-in-Hybride sind davon ausgenommen und werden regulär nach Hubraum und CO₂ besteuert.',
       },
       {
         frage: 'Wo finde ich den CO₂-Wert meines Autos?',

@@ -15,13 +15,20 @@ export default function KfzSteuerRechner() {
   const [antrieb, setAntrieb] = useState<Antriebsart>('benzin');
   const [hubraum, setHubraum] = useState('1498');
   const [co2, setCo2] = useState('128');
+  const [erstzulassung, setErstzulassung] = useState('2024-01-01');
 
   const nHubraum = parseDeutscheZahl(hubraum);
   const nCo2 = parseDeutscheZahl(co2);
 
+  const erstzulassungsdatum = useMemo(() => {
+    if (antrieb !== 'elektro' || !erstzulassung) return undefined;
+    const d = new Date(erstzulassung);
+    return isNaN(d.getTime()) ? undefined : d;
+  }, [antrieb, erstzulassung]);
+
   const ergebnis = useMemo(
-    () => berechneKfzSteuer({ zulassung, antrieb, hubraum: nHubraum, co2: nCo2 }),
-    [zulassung, antrieb, nHubraum, nCo2]
+    () => berechneKfzSteuer({ zulassung, antrieb, hubraum: nHubraum, co2: nCo2, erstzulassungsdatum }),
+    [zulassung, antrieb, nHubraum, nCo2, erstzulassungsdatum]
   );
 
   const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -88,10 +95,30 @@ export default function KfzSteuerRechner() {
         </div>
       )}
 
+      {istElektro && (
+        <div className="mb-6">
+          <label htmlFor="kfzsteuer-erstzulassung" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            Erstzulassung
+          </label>
+          <input
+            id="kfzsteuer-erstzulassung"
+            type="date"
+            min="2011-05-18"
+            max="2030-12-31"
+            value={erstzulassung}
+            onChange={e => setErstzulassung(e.target.value)}
+            className="w-full sm:w-1/2 px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"
+          />
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            Förderzeitraum § 3d KraftStG: 18.05.2011 – 31.12.2030. Befreiung gilt 10 Jahre ab Erstzulassung, längstens bis 31.12.2035.
+          </p>
+        </div>
+      )}
+
       {/* Ergebnis */}
       {ergebnis && (
         <>
-          {/* Elektro-Befreiung */}
+          {/* Elektro: Befreiung oder Hinweis „keine Befreiung" */}
           {ergebnis.befreit ? (
             <div className="result-box mb-6">
               <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
@@ -108,6 +135,17 @@ export default function KfzSteuerRechner() {
                   </span>
                 </div>
               </div>
+            </div>
+          ) : istElektro && ergebnis.keineBefreiungGrund ? (
+            <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-6">
+              <p className="font-semibold text-amber-800 dark:text-amber-300 text-sm mb-1">
+                Keine Steuerbefreiung nach § 3d KraftStG
+              </p>
+              <p className="text-amber-800 dark:text-amber-300 text-sm">
+                {ergebnis.keineBefreiungGrund === 'vor-2011'
+                  ? 'Das Erstzulassungsdatum liegt vor dem 18.05.2011 — § 3d Abs. 1 KraftStG greift nicht.'
+                  : 'Das Erstzulassungsdatum liegt nach dem 31.12.2030 — die Förderung nach § 3d Abs. 1 KraftStG ist ausgelaufen. Elektrofahrzeuge werden dann gewichtsbasiert nach § 9 Abs. 1 Nr. 2e KraftStG besteuert. Dieser Rechner bildet die gewichtsbasierte Berechnung aktuell noch nicht ab.'}
+              </p>
             </div>
           ) : (nHubraum > 0) && (
             <>
@@ -156,9 +194,9 @@ export default function KfzSteuerRechner() {
           {/* Info-Box für Elektro */}
           {ergebnis.befreit && (
             <div className="bg-green-50 dark:bg-green-500/10 border border-green-200 dark:border-green-500/30 rounded-xl p-4 mb-6">
-              <p className="font-semibold text-green-700 dark:text-green-400 text-sm mb-1">Steuerbefreiung für Elektroautos</p>
+              <p className="font-semibold text-green-700 dark:text-green-400 text-sm mb-1">Steuerbefreiung für Elektroautos (§ 3d KraftStG)</p>
               <p className="text-gray-800 dark:text-gray-200 text-sm">
-                Reine Elektrofahrzeuge sind bei Erstzulassung bis 31.12.2025 für <strong>10 Jahre steuerbefreit</strong>, längstens bis zum 31.12.2030. Danach gilt eine gewichtsbasierte Besteuerung.
+                Reine Elektrofahrzeuge sind bei Erstzulassung zwischen 18.05.2011 und <strong>31.12.2030</strong> für 10 Jahre steuerbefreit, längstens jedoch bis zum <strong>31.12.2035</strong>. Danach gilt eine gewichtsbasierte Besteuerung nach § 9 Abs. 1 Nr. 2e KraftStG.
               </p>
             </div>
           )}
@@ -174,7 +212,13 @@ export default function KfzSteuerRechner() {
           </div>
 
           <ErgebnisAktionen
-            ergebnisText={ergebnis.befreit ? `Kfz-Steuer: 0,00 € (steuerbefreit bis ${ergebnis.befreitBis})` : `Kfz-Steuer: ${fmt(ergebnis.jahresSteuer)} € pro Jahr (${fmt(ergebnis.monatsSteuer)} € / Monat)`}
+            ergebnisText={
+              ergebnis.befreit
+                ? `Kfz-Steuer: 0,00 € (steuerbefreit bis ${ergebnis.befreitBis})`
+                : ergebnis.keineBefreiungGrund
+                  ? `Kfz-Steuer: keine § 3d-Befreiung (Erstzulassung außerhalb Förderzeitraum), gewichtsbasierte Steuer nach § 9 Abs. 1 Nr. 2e KraftStG`
+                  : `Kfz-Steuer: ${fmt(ergebnis.jahresSteuer)} € pro Jahr (${fmt(ergebnis.monatsSteuer)} € / Monat)`
+            }
             seitenTitel="Kfz-Steuer-Rechner"
           />
           <AiExplain
