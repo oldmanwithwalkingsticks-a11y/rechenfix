@@ -17,8 +17,12 @@ export default function KfzSteuerRechner() {
   const [co2, setCo2] = useState('128');
   const [erstzulassung, setErstzulassung] = useState('2024-01-01');
 
-  const nHubraum = parseDeutscheZahl(hubraum);
-  const nCo2 = parseDeutscheZahl(co2);
+  // Clamping auf realistische Obergrenze (10.000 ccm deckt auch US-Muscle-
+  // Imports ab). CO₂ wird bis 500 g/km akzeptiert — extreme Werte wirken
+  // sonst absurd im Ergebnis, werden aber von der Staffel-Logik sonst stur
+  // durchgerechnet.
+  const nHubraum = Math.min(parseDeutscheZahl(hubraum), 10000);
+  const nCo2 = Math.min(parseDeutscheZahl(co2), 500);
 
   const erstzulassungsdatum = useMemo(() => {
     if (antrieb !== 'elektro' || !erstzulassung) return undefined;
@@ -188,6 +192,15 @@ export default function KfzSteuerRechner() {
                   </tbody>
                 </table>
               </div>
+
+              {/* Vor-2009-Disclaimer: Annahme Euro 4+ */}
+              {zulassung === 'vor-2009' && (
+                <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-6">
+                  <p className="text-amber-800 dark:text-amber-300 text-xs leading-relaxed">
+                    <strong>Vereinfachung:</strong> Der Rechner nimmt Schadstoffklasse Euro 4 oder besser an (6,75 € Benzin / 15,44 € Diesel je angefangene 100 ccm). Für schlechtere Emissionsklassen (Euro 0 bis Euro 3, insbesondere Dieselfahrzeuge ohne Partikelfilter) gelten nach § 9 Abs. 1 Nr. 2a KraftStG deutlich höhere Sätze. Verbindlicher Bescheid beim Hauptzollamt.
+                  </p>
+                </div>
+              )}
             </>
           )}
 
