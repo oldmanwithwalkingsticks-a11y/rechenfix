@@ -4,13 +4,14 @@
   "private": true,
   "scripts": {
     "generate-client-data": "npx tsx scripts/generate-client-data.ts",
-    "prebuild": "node scripts/check-footer.mjs && node scripts/check-jahreswerte.mjs && npx tsx scripts/generate-client-data.ts",
+    "prebuild": "node scripts/check-footer.mjs && node scripts/check-jahreswerte.mjs && node scripts/slug-drift-scan.mjs && npx tsx scripts/generate-client-data.ts",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "lint:jahreswerte": "node scripts/check-jahreswerte.mjs",
-    "lint:footer": "node scripts/check-footer.mjs"
+    "lint:footer": "node scripts/check-footer.mjs",
+    "lint:slugs": "node scripts/slug-drift-scan.mjs"
   },
   "dependencies": {
     "@upstash/redis": "^1.37.0",

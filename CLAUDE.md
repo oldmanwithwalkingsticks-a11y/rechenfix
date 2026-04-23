@@ -477,9 +477,14 @@ Das `prebuild`-Script in [package.json](package.json) kettet folgende Checks, be
 
 1. `node scripts/check-footer.mjs` — Footer-Guards (G14)
 2. `node scripts/check-jahreswerte.mjs` — Jahreswerte-Guards (Sprint 1.5, contextKeywords-basiert)
-3. `npx tsx scripts/generate-client-data.ts` — Client-Data-Generation
+3. `node scripts/slug-drift-scan.mjs` — Slug-Drift-Guard (Prompt 132.6): prüft die gesamte Codebase gegen SSOT-Slugs aus `lib/rechner-config/*.ts`; schlägt fehl, wenn ein `/<kategorie>/<slug>`-Pfad weder in SSOT noch in einer statischen Route existiert und nicht explizit whitelisted ist. Ad-hoc via `npm run lint:slugs` oder mit `VERBOSE=1` für Status-Zeile auch bei Grün.
+4. `npx tsx scripts/generate-client-data.ts` — Client-Data-Generation
 
-Reihenfolge ist bewusst fail-fast: Schlägt ein Lint-Check fehl, wird die teurere Client-Data-Generation gar nicht erst gestartet. Greift lokal bei `npm run build` **und** auf Vercel bei jedem Deploy. Fehler blockieren den Build — kaputte Footer oder veraltete Jahreswerte erreichen nie die Produktion.
+Reihenfolge ist bewusst fail-fast: Schlägt ein Lint-Check fehl, wird die teurere Client-Data-Generation gar nicht erst gestartet. Greift lokal bei `npm run build` **und** auf Vercel bei jedem Deploy. Fehler blockieren den Build — kaputte Footer, veraltete Jahreswerte oder tote Slug-Links erreichen nie die Produktion.
+
+#### Whitelist-Regel für `slug-drift-scan.mjs`
+
+Neue Einträge in `WHITELIST` des Drift-Scans erfordern **explizites Karsten-OK** und einen Kommentar pro Eintrag (warum bewusste Ausnahme, welcher historische Kontext). Ohne Karsten-OK bitte stattdessen den Drift fixen. Hintergrund: Jeder Whitelist-Eintrag friert eine Drift-Ausnahme permanent ein und schwächt den Schutzmechanismus. Aktuell 4 Einträge (3 × dokumentierte historische Referenzen wie CLAUDE.md Rule 11, 1 × Regex-False-Positive bei Shortform-Notation — siehe Script-Kommentare).
 
 ## Architektur-Notes (dokumentierte technische Schulden)
 
