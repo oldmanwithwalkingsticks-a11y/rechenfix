@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import { BRUTTO_FAKTOR_REGULAER, NETTO_FAKTOR_REGULAER } from '@/lib/berechnungen/mwst';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
@@ -34,8 +35,8 @@ export default function LeasingRechner() {
     const km = parseDeutscheZahl(kmProJahr);
     const satz = parseDeutscheZahl(mehrKmSatz);
 
-    const netto = faktorModus === 'faktor' ? ((lp - az) * faktor) / 100 : rateDirekt / 1.19;
-    const brutto = netto * 1.19;
+    const netto = faktorModus === 'faktor' ? ((lp - az) * faktor) / 100 : rateDirekt * NETTO_FAKTOR_REGULAER;
+    const brutto = netto * BRUTTO_FAKTOR_REGULAER;
     const leasingrate = faktorModus === 'faktor' ? brutto : rateDirekt;
 
     const summeRaten = leasingrate * lzM;

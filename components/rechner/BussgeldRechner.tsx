@@ -40,13 +40,18 @@ export default function BussgeldRechner() {
   const [parkStufe, setParkStufe] = useState<ParkStufe>('unerlaubt');
 
   const ergebnis = useMemo(() => {
+    // Clamping gegen unrealistische Extremwerte: Überschreitungen > 100 km/h
+    // sind zwar technisch durch die letzte Staffel abgebildet, aber absurd;
+    // Abstand > 300 km/h ebenso.
+    const ueberschreitungClamped = Math.min(parseDeutscheZahl(ueberschreitung), 100);
+    const abstandGeschwindigkeitClamped = Math.min(parseDeutscheZahl(abstandGeschwindigkeit), 300);
     return berechneBussgeld({
       verstoss,
-      ueberschreitung: parseDeutscheZahl(ueberschreitung),
+      ueberschreitung: ueberschreitungClamped,
       ort,
       fahrzeug,
       rotlichtPhase,
-      abstandGeschwindigkeit: parseDeutscheZahl(abstandGeschwindigkeit),
+      abstandGeschwindigkeit: abstandGeschwindigkeitClamped,
       abstandStufe,
       alkoholStufe,
       handyStufe,

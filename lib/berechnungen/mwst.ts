@@ -1,3 +1,14 @@
+/**
+ * Umsatzsteuer-Sätze § 12 UStG. Stand 2026: Regelsatz 19 %, ermäßigter
+ * Satz 7 % (Gastronomie ist seit 01.01.2024 wieder regulär 19 %).
+ */
+export const MWST_REGULAER = 0.19;
+export const MWST_ERMAESSIGT = 0.07;
+
+/** Faktoren für Netto-/Brutto-Umrechnung bei Regelsatz. */
+export const BRUTTO_FAKTOR_REGULAER = 1 + MWST_REGULAER; // 1.19
+export const NETTO_FAKTOR_REGULAER = 1 / BRUTTO_FAKTOR_REGULAER; // ≈ 0.840336
+
 export interface MwStErgebnis {
   netto: number;
   mwstBetrag: number;
