@@ -1,3 +1,12 @@
+/**
+ * Stand der hier hinterlegten Taxitarife.
+ * Taxitarife werden kommunal per Taxenordnung festgelegt und können sich
+ * jederzeit ändern. Die vollständige Verifikation gegen die Einzel-
+ * Taxenordnungen erfolgt mit Prompt 133 (Stadt-Preset-UX-Refactor) und
+ * wird danach halbjährlich geprüft.
+ */
+export const TARIFE_STAND = '2026-04';
+
 export interface StadtTarif {
   id: string;
   name: string;

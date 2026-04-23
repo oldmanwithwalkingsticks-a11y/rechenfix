@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { berechneTaxi, TARIFE } from '@/lib/berechnungen/taxi';
+import { berechneTaxi, TARIFE, TARIFE_STAND } from '@/lib/berechnungen/taxi';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
@@ -132,12 +132,12 @@ export default function TaxiRechner() {
 
           <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-4">
             <p className="text-sm text-amber-800 dark:text-amber-300">
-              💡 Taxitarife sind Richtwerte und können durch Zuschläge (Großraumtaxi, Gepäck, Feiertag) abweichen. Die tatsächlichen Tarife werden von der jeweiligen Kommune festgelegt.
+              💡 Tarife Stand: {TARIFE_STAND} (zuletzt geprüft gegen Taxenordnungen). Taxitarife werden kommunal festgelegt und können sich jederzeit ändern — zusätzlich sind Zuschläge möglich (Großraumtaxi, Gepäck, Feiertag). Verbindliche Tarife beim Taxiunternehmen oder in der örtlichen Taxenordnung erfragen.
             </p>
           </div>
 
           <CrossLink href="/alltag/trinkgeld-rechner" emoji="💰" text="Trinkgeld berechnen" />
-          <CrossLink href="/auto/spritkostenrechner" emoji="⛽" text="Vergleich: Taxi vs. eigenes Auto" />
+          <CrossLink href="/auto/spritkosten-rechner" emoji="⛽" text="Vergleich: Taxi vs. eigenes Auto" />
 
           <ErgebnisAktionen
             ergebnisText={`Taxi ${ergebnis.stadt.name}: ${ergebnis.strecke.toLocaleString('de-DE')} km = ${fmt(ergebnis.fahrpreis)} € (mit Trinkgeld: ${fmt(ergebnis.gesamtMitTrinkgeld)} €)`}
