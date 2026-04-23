@@ -335,6 +335,8 @@ export function getAktuelleXxxParameter(stichtag: Date = new Date()): XxxParamet
 | Degressive AfA Maximalsatz | 20 % (bis 31.12.2025); ab 01.01.2026 nicht mehr zulässig | — | `AfaRechner.tsx` (Math.min-Clamp, Label) | § 7 Abs. 2 EStG n.F. (Wachstumschancengesetz) |
 | AfA Sammelposten-Pool § 6 Abs. 2a EStG | 20 % p. a. linear, 5 Jahre, WG 250,01 € bis 1.000 € netto | offen | `AfaRechner.tsx` (Methode `'sammelposten'`) | § 6 Abs. 2a EStG |
 | ErbSt Versorgungs-FB Kinder § 17 Abs. 2 ErbStG | Staffel 52k/41k/30,7k/20,5k/10,3k/0 € je nach Alter | selten | `erbschaftsteuer.ts` (`versorgungsfbKind`) | § 17 Abs. 2 ErbStG |
+| Kfz-Steuer CO₂-Staffel § 9 Abs. 1 Nr. 2c KraftStG | progressiv 95/115/135/155/175/195 g/km mit 2,00/2,20/2,50/2,90/3,40/4,00 €/g | selten (letzte Anpassung 01.01.2021) | `kfz-steuer-parameter.ts` (`CO2_STAFFEL_KRAFTSTG_9_NR2C` + `berechneCO2Komponente`) | § 9 Abs. 1 Nr. 2c KraftStG |
+| Kfz-Steuer Elektro-Befreiung § 3d KraftStG | 10 Jahre ab Erstzulassung, längstens **31.12.2035**; Zulassungsfenster 18.05.2011 – 31.12.2030 | 31.12.2030 (Zulassungs-Ende) bzw. 31.12.2035 (Max-Cap) | `kfz-steuer-parameter.ts` (`ELEKTRO_BEFREIUNG` + `berechneElektroBefreiungsende`) | § 3d KraftStG i.d.F. 8. KraftStÄndG (BT 04.12.2025, Drs. 21/2672) |
 
 **Stichtag-Switch automatisch:** Die fett markierten Parameter (Rentenwert 01.07.2026, Mindestlohn 01.01.2027, Pfändung 01.07.2026, Bürgergeld H2 01.07.2026-Skeleton) wechseln ohne Deploy durch das Stichtag-Switch-Pattern in den Libs. Nach den Stichtagen nur Spot-Check. Bei Bürgergeld H2 muss die „Neue Grundsicherung"-Reform-Verabschiedung abgewartet werden — aktuell sind H1- und H2-Werte identisch.
 
