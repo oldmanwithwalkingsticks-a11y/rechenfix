@@ -21,24 +21,28 @@ Rechenfix.de ist ein deutschsprachiges Online-Rechner-Portal mit aktuell **169 k
 
 ## Rechner-Inventar (Stand April 2026)
 
-**169 eigenständige Rechner in 9 Kategorien:**
+**170 eigenständige Rechner in 9 Kategorien** (Stand 24.04.2026, Quelle: Prompt 132.5 SSOT-Scan):
 
 | Kategorie | Slug | Anzahl |
 |---|---|---|
 | Alltag | `/alltag` | 23 |
-| Finanzen | `/finanzen` | 45 |
+| Finanzen | `/finanzen` | 44 |
 | Gesundheit | `/gesundheit` | 17 |
-| Auto & Verkehr | `/auto` | 10 |
+| Auto & Verkehr | `/auto` | 11 |
 | Wohnen & Energie | `/wohnen` | 25 |
 | Mathe & Schule | `/mathe` | 18 |
-| Arbeit & Recht | `/arbeit` | 17 |
+| Arbeit & Recht | `/arbeit` | 18 |
 | Kochen & Ernährung | `/kochen` | 12 |
 | Sport & Fitness | `/sport` | 2 |
-| **Summe** | | **169** |
+| **Summe** | | **170** |
 
-**Sitemap: 177 Rechner-URLs** — Differenz zu 169 erklärt sich durch Varianten-/Tabellen-Seiten unter `/finanzen/` (z.B. `2000-euro-brutto-netto` bis `5000-euro-brutto-netto`, `brutto-netto-tabelle`). Die dynamische Route `app/[kategorie]/[rechner]/page.tsx` rendert die URLs; Metadaten stehen in `lib/rechner-config/<kategorie>.ts`. Die URL `/gesundheit/herzfrequenz-rechner` wurde im April 2026 per 301-Redirect auf `/sport/herzfrequenz-zonen-rechner` konsolidiert (Feature-Obermenge).
+**Verschiebungen seit letztem Sync (Prompt 97, 19.04.2026):**
+- **Auto 10 → 11, Finanzen 45 → 44:** Firmenwagen-Rechner migriert aus der Finanzen- in die Auto-Kategorie und Slug-Schreibweise auf Bindestrich-Konvention normalisiert (Prompt 126, 301-Redirect in `next.config.mjs`).
+- **Arbeit 17 → 18:** Ehegattenunterhalt-Rechner neu hinzugekommen.
 
-**Ausnahme:** `/finanzen/wohngeld-rechner` läuft seit Prompt 120d (22.04.2026) als **statische Explainer-Seite** statt als interaktiver Rechner — die Wohngeld-Lib hat einen Architektur-Bug bei §§ 14–16 WoGG Pro-Person-Behandlung, das Lib-Refactoring ist als Prompt 120c für Juni 2026 reserviert (gebündelt mit Bürgergeld-Reform „Neue Grundsicherung" 01.07.2026). Die Explainer-Seite verlinkt auf den offiziellen BMWSB-Wohngeldrechner und zeigt Höchstbeträge + Rechengang. Der Sidebar-Counter bleibt bei 169 (Rechner zählt weiter als Kategorie-Eintrag, rendert aber statisch).
+**Sitemap: 178 Rechner-URLs** — Differenz zu 170 erklärt sich durch Varianten-/Tabellen-Seiten unter `/finanzen/` (z.B. `2000-euro-brutto-netto` bis `5000-euro-brutto-netto`, `brutto-netto-tabelle`, `mindestlohn-netto`). Die dynamische Route `app/[kategorie]/[rechner]/page.tsx` rendert die URLs; Metadaten stehen in `lib/rechner-config/<kategorie>.ts`. Die URL `/gesundheit/herzfrequenz-rechner` wurde im April 2026 per 301-Redirect auf `/sport/herzfrequenz-zonen-rechner` konsolidiert (Feature-Obermenge).
+
+**Ausnahme:** `/finanzen/wohngeld-rechner` läuft seit Prompt 120d (22.04.2026) als **statische Explainer-Seite** statt als interaktiver Rechner — die Wohngeld-Lib hat einen Architektur-Bug bei §§ 14–16 WoGG Pro-Person-Behandlung, das Lib-Refactoring ist als Prompt 120c für Juni 2026 reserviert (gebündelt mit Grundsicherungsgeld-Reform 01.07.2026). Die Explainer-Seite verlinkt auf den offiziellen BMWSB-Wohngeldrechner und zeigt Höchstbeträge + Rechengang. Der Sidebar-Counter zählt Wohngeld weiter als Kategorie-Eintrag mit.
 
 ## Zentrale Libs (SSOT, Stand April 2026)
 
@@ -60,9 +64,13 @@ Alle jahresabhängigen und gesetzlich definierten Werte liegen in `lib/berechnun
 | `abfindung.ts` **(überarbeitet 94)** | § 34 EStG Fünftelregelung | `berechneEStGrund`-basiert, ohne Steuerklassen-Faktor, `verheiratet: boolean` |
 | `splitting.ts` **(überarbeitet 94/94a)** | Ehegattensplitting | `berechneEStGrund`-basiert, WK+SA **pro Partner** |
 | `bafoeg-parameter.ts` **(neu, Prompt 121)** | SSOT BAföG § 13/13a/14b/23/25/29/51 mit Stichtag-Switch-Skeleton | `getAktuelleBafoegParameter(stichtag)`, `getAnrechnungsquote(geschwister)` (§ 25 Abs. 6: 0,50 − 0,05 × Kinder, Antragsteller zählt NICHT mit), `BAFOEG_AB_2024_08_01` |
-| `buergergeld-parameter.ts` **(neu, Prompt 121)** | SSOT Bürgergeld § 20 ff. SGB II mit H1/H2-Switch | `getAktuelleBuergergeldParameter(stichtag)`, `BUERGERGELD_2026_H1` + `BUERGERGELD_2026_H2` (01.07.2026 „Neue Grundsicherung" — H2 Skeleton bis Gesetzestext) |
-| `buergergeld.ts` **(erweitert, Prompt 121)** | Gesamt-Berechnung + Mehrbedarfe § 21 SGB II | `berechneBuergergeld(...)`, `berechneMehrbedarfe(eingabe, params)`, `MehrbedarfEingabe` (alle 6 Tatbestände inkl. Alleinerziehend-max-Logik + Deckel 60 %) |
+| `buergergeld-parameter.ts` **(neu 121, H2 befüllt 129)** | SSOT Bürgergeld/Grundsicherungsgeld § 20 ff. SGB II mit H1/H2-Switch. Union-Type `VermoegenParameter` mit Discriminator-Modus (Karenz-pauschal H1 vs. alter-gestaffelt H2 nach § 12 Abs. 2 SGB II n.F.) | `getAktuelleBuergergeldParameter(stichtag)`, `getSchonvermoegenProPerson(alter, staffeln)`, `BUERGERGELD_2026_H1`, `BUERGERGELD_2026_H2` |
+| `buergergeld.ts` **(erweitert 121 + 129)** | Gesamt-Berechnung + Mehrbedarfe § 21 SGB II + altersgestaffeltes Schonvermögen H2 | `berechneBuergergeld(...)` nimmt `erwachseneAlter?: number[]` für H2; Ergebnis-Felder `vermoegenModus` + `vermoegensAufschluesselung` pro Person; `berechneMehrbedarfe` alle 6 Tatbestände inkl. Alleinerziehend-max-Logik + Deckel 60 % |
 | `wohngeld.ts` **(Explainer-Mode seit 120d)** | **nicht produktiv für Berechnung** — Lib hat Architektur-Bug bei §§ 14–16 pro Person | `HOECHSTBETRAEGE_WOGG_2026`, `ZUSCHLAG_PRO_PERSON_WOGG_2026` (für Explainer-Tabelle exportiert) |
+| `kfz-steuer-parameter.ts` **(neu, Prompt 131)** | SSOT KraftStG — CO₂-Staffel § 9 Abs. 1 Nr. 2c + Elektro-Befreiung § 3d (8. KraftStÄndG vom 04.12.2025) | `CO2_STAFFEL_KRAFTSTG_9_NR2C` (7-stufige progressive Staffel), `ELEKTRO_BEFREIUNG`, `berechneCO2Komponente(gProKm)`, `berechneElektroBefreiungsende(erstzulassung)`, `SOCKEL_PRO_100CCM` |
+| `midijob-parameter.ts` **(neu, Prompt 125a)** | SSOT Midijob-Faktoren § 20a SGB IV mit Stichtag-Switch | `MIDIJOB_2026`, `getAktuelleMidijobParameter(stichtag)`, `getBeitragsFormeln()` (Koeffizienten aus G/OG/F abgeleitet) |
+| `midijob-uebergang.ts` **(neu, Prompt 125a)** | § 20a SGB IV BE-Formeln getrennt für Abs. 2 (Gesamt) und Abs. 2a (AN) | `berechneBemessungsgrundlageGesamt`, `berechneBemessungsgrundlageAN`, `getMidijobUntergrenze`, `MIDIJOB_OBERGRENZE_MONAT` |
+| `mwst.ts` **(erweitert, Prompt 132)** | § 12 UStG Regelsatz/ermäßigt + Brutto-/Netto-Faktoren | Konstanten `MWST_REGULAER` (0,19), `MWST_ERMAESSIGT` (0,07), `BRUTTO_FAKTOR_REGULAER`, `NETTO_FAKTOR_REGULAER`; Funktionen `berechneNettoZuBrutto`, `berechneBruttoZuNetto`, `berechneMultiMwSt` |
 | `lib/amazon-link.ts` **(neu, Prompt 122-amazon)** | Amazon-Partnerprogramm Suchlinks, Consent-abhängig | `createAmazonSearchLink(keyword, marketingConsentGranted)`, `AMAZON_TAG = 'rechenfix-21'` |
 
 **Verboten:** Eigene ESt-, LSt-, SV-, Kindergeld-, Pfändungs-, Mindestlohn- oder Pendler-Formeln in Komponenten. Siehe `CLAUDE.md` Abschnitt "Zentrale Libs (SSOT)" und die Audit-Welle-1-Anti-Patterns im `rechner-builder`-Skill.
@@ -324,14 +332,20 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
 - ✅ Sprint 1 — Tarif-Audit (Prompts 81–84a)
 - ✅ A11y-Sprint — Lighthouse 100/100, axe 0 auf 19 Stichproben (Prompts 78a–h + 78z-Serie + 34a–c)
 - ✅ Jahresparameter-Audit 2026 (Prompts 86–92)
-- ✅ **Welle-1-Audit Stufen 1+2** (Prompts 94/94a/95) — Steuer- und SV-Kern durchgeprüft, 3×P1 + 3×P2 + 2×P3 gefixt, 5 SSOT-Refactorings
-- ✅ **Welle-1-Audit Stufe 1.5** (Prompts 99a–c + 100 + 101) — Sekundär-Rechner nachgezogen, 5 P1 + 4 P2 + 18 P3 + ~35 SSOT-Refactorings; Lint-Script mit contextKeywords produktiv
+- ✅ **Welle 1 komplett** (Stufen 1+2+1.5+3+4a+4b, Prompts 94–125b, April 2026) — Steuer/SV/Familie/Arbeitsrecht/Spezial-Steuer/Sozialleistungen durchgeprüft; Lohnsteuer-Voll-PAP (Prompt 118), Midijob-SSOT (125a), Firmenwagen-§ 6 Abs. 1 Nr. 4 S. 2 Nr. 5 EStG-Fix (125b)
 - ✅ Card-Hover A11y/UX (Prompts 96/96a) — nur Shadow-Animation, kein Transform
 - ✅ Unterhaltsrechner DT 2026 (Prompt 67)
 - ✅ Verivox-Affiliate ETF/Rente/Spar (Prompts 45+46)
 - ✅ **SEO-Sprint Crawl-Discovery** (Prompts 103–105) — git-log-basierter lastmod, Priority-Staffelung, 9 Kategorie-Einleitungen live
 - ✅ **Affiliate-Erweiterung** (Prompt 106) — hotel.de, burda-Zahnzusatz, eventfloss-berlin auf 9 Rechnern platziert
 - ✅ **Footer-Lint + prebuild-Hook** (Prompts 107b + 107c) — Guard G14, `lint:footer`, CI-Hook blockiert Deploys bei Guard-Fail
+- ✅ **AdSense-Basis-Loader** (Prompt 110, 20.04.2026) — `<head>`-Script für Crawl-Erkennung
+- ✅ **Grundsicherungsgeld H2-Bucket** (Prompts 129/129-fix, 23.04.2026) — altersgestaffeltes Schonvermögen § 12 Abs. 2 SGB II n.F. ab 01.07.2026, Bezeichnung „Grundsicherungsgeld", FAQ + Content-Update; BGBl. 2026 I Nr. 107 als Primärquelle
+- ✅ **Firmenwagen-Migration** (Prompt 126, 23.04.2026) — Firmenwagen-Rechner aus der Finanzen- in die Auto-Kategorie migriert und Slug auf Bindestrich-Konvention normalisiert, 301-Redirect in `next.config.mjs`; Slug-Drift-Fixes systemweit
+- ✅ **Slug- und Display-Name-Konvention** (Prompts 127+128) — Duden-Logik für Display-Name, SEO-Lesbarkeit für URL-Slug, unabhängige Artefakte
+- ✅ **Welle 2 Stufe 1 Auto** (Prompts 130–132, 23.04.2026) — 10 Rechner-Audit, 3×P1 KfzSteuerRechner (CO₂-Staffel § 9 Abs. 1 Nr. 2c KraftStG, Elektro-Befreiung § 3d KraftStG bis 31.12.2035 statt 2030, UI-Text mit falschen Daten), 5×P2 + 3×P3 Polish
+- ✅ **Slug-Drift-Scan + Prebuild-Hook** (Prompts 132.5+132.6) — 22 systemweite Drifts gefixt (hauptsächlich Kategorien-Verwechslungen, z. B. Slug `promillerechner` in Gesundheit-Kategorie statt korrekt Arbeit-Kategorie), Auto-Schutz via `scripts/slug-drift-scan.mjs` in der prebuild-Kette, Whitelist mit Karsten-OK-Pflicht
+- ✅ **Doku-Sync** (Prompt 134) — CLAUDE.md / SKILL.md / dieses Dokument auf Stand nach Welle-2-Stufe-1-Abschluss
 
 **Parkend (wartet auf AdSense-Freigabe):**
 - ⏸ Prompt 68 — Google CMP + Consent Mode v2
@@ -342,10 +356,20 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
 - 🎯 GSC: Sitemap neu einreichen nach Deploy; CTR-Review der 3 neuen Awin-Partner ~20.05.2026
 - 🎯 Neue Rechner-Batches (thematisch offen)
 - 🎯 Jahresparameter-Audit 2027 (Frühjahr 2027): ESt-Tarif 2027, SV-Rechengrößen 2027, JAEG, Zusatzbeitrag, D-Ticket, Pfändung-Switch zum 01.07.2028
-- 🎯 **Prompt 120c (Juni 2026):** Wohngeld-Lib-Refactoring auf Pro-Person-Architektur §§ 14–16 WoGG, gebündelt mit Bürgergeld-Reform zur „Neuen Grundsicherung" (Switch 01.07.2026). Nach Umsetzung: `STATISCHE_OVERRIDES`-Ausschluss aufheben, dynamische Route rendert wieder den interaktiven Rechner
+- 🎯 **Welle 2 Stufe 2 Gesundheit** (Prompt 140, kommend): 17 Rechner-Audit nach 4-Punkt-Methodik, vermutliche Hot Spots blutdruck, kalorien, bmi, schwangerschaft
+- 🎯 **Prompt 133 TaxiRechner Stadt-Preset-UX:** 5 Städte-Presets (Karsten-Auswahl ausstehend), `taxi-preset-tarife.ts` mit Stichtag-Kommentar pro Stadt, CLAUDE.md-Wartungsregel halbjährlich. Vorbereitet durch `TARIFE_STAND` in `lib/berechnungen/taxi.ts` (Prompt 132 A5)
+- 🎯 **Prompt 120c (Juni 2026):** Wohngeld-Lib-Refactoring auf Pro-Person-Architektur §§ 14–16 WoGG, gebündelt mit Grundsicherungsgeld-Reform (Switch 01.07.2026). Nach Umsetzung: `STATISCHE_OVERRIDES`-Ausschluss aufheben, dynamische Route rendert wieder den interaktiven Rechner. KdU-1,5-Fache-Cap (§ 22 Abs. 1 SGB II n.F., aus Prompt 129 Teil B Nicht-Scope) könnte dabei als Nebenprodukt integriert werden
 - 🎯 **Prompt 121a (~August 2026 bei Bedarf):** BAföG WS 2026/27-Erhöhung einpflegen (neuer Bucket `BAFOEG_AB_2026_08_01` in `bafoeg-parameter.ts`, wenn Verordnung verabschiedet)
 - 🎯 **Prompt 122 P3-Polish:** echte § 11 Abs. 4 BAföG-Aufteilungsregel als zweites Input-Feld „geförderte Geschwister", Pfändung Obergrenze-Anzeige permanent, Regelsatz-Info-Tabelle aus Lib ableiten, Pfändung dynamische Beispieltabelle, Schüler-BAföG-Bedarfssatz-Hinweis
 - 🎯 **Amazon-Monitoring** 4/12/24 Wochen (ab 22.04.2026): Erste Klick-Stats, Conversion-Rate, Eskalation vor 19.10.2026-Deadline (siehe `docs/amazon-integration.md`)
+
+**Welle-Status:**
+- **Welle 1 (Hoch-Risiko, Steuer/SV/Familie/Arbeitsrecht/Spezial-Steuer/Sozialleistungen):** ✅ ABGESCHLOSSEN April 2026 (Stufen 1+2+1.5+3+4a+4b)
+- **Welle 2 (Mittel-Risiko):** Stufe 1 Auto ✅ ABGESCHLOSSEN 23.04.2026; Stufe 2 Gesundheit offen (Prompt 140 kommend)
+- **Welle 3 (Niedrig-Risiko-Stichprobe Alltag/Kochen/Mathe/Wohnen):** noch nicht begonnen — vorgesehen nach Welle 2
+
+**Neue Scripts seit letztem Sync:**
+- `scripts/slug-drift-scan.mjs` (Prompt 132.5, als Prebuild-Hook seit 132.6) — prüft hartkodierte `/<kategorie>/<slug>`-Pfade gegen SSOT, bricht Build bei nicht-whitelisted Drifts ab. Ad-hoc via `npm run lint:slugs`.
 
 ## Parkende Items (bis AdSense-Freigabe)
 
