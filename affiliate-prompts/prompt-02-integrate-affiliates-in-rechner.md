@@ -50,7 +50,7 @@ Integriere die `AffiliateBox`-Komponente (aus `src/components/AffiliateBox.tsx`)
     - `<AffiliateBox programId="wiso" context="default" variant="compact" />`
 
 ### Arbeit & Recht:
-14. **Stundenlohn-Rechner** (`/arbeit/stundenlohn-rechner`):
+14. **Stundenlohn-Rechner** (`/finanzen/stundenlohn-rechner`):
     - `<AffiliateBox programId="lexware" context="stundenlohn" />`
 
 15. **Arbeitszeitrechner** (`/arbeit/arbeitszeitrechner`):
