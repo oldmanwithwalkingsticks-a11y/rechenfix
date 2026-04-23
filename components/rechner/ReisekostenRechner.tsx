@@ -225,7 +225,7 @@ export default function ReisekostenRechner() {
           </div>
 
           {anreiseTyp === 'auto' && (
-            <CrossLink href="/auto/spritkostenrechner" emoji="⛽" text="Spritkosten detailliert berechnen" />
+            <CrossLink href="/auto/spritkosten-rechner" emoji="⛽" text="Spritkosten detailliert berechnen" />
           )}
           <CrossLink href="/alltag/waehrungsrechner" emoji="💱" text="Währung umrechnen für die Reise" />
           <CrossLink href="/alltag/trinkgeld-rechner" emoji="💰" text="Trinkgeld im Ausland berechnen" />

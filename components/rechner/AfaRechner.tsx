@@ -366,7 +366,7 @@ export default function AfaRechner() {
 
       <CrossLink href="/finanzen/mwst-rechner" emoji="🧾" text="MwSt-Rechner: Netto, brutto und Umsatzsteuer berechnen" />
       <CrossLink href="/finanzen/gmbh-geschaeftsfuehrer-rechner" emoji="💼" text="GmbH-Geschäftsführer: Vergütung und Steuer berechnen" />
-      <CrossLink href="/finanzen/freelancer-stundensatz-rechner" emoji="🧮" text="Freelancer-Stundensatz: Der faire Stundenlohn für Selbstständige" />
+      <CrossLink href="/arbeit/freelancer-stundensatz-rechner" emoji="🧮" text="Freelancer-Stundensatz: Der faire Stundenlohn für Selbstständige" />
 
       <ErgebnisAktionen ergebnisText={ergebnis} seitenTitel="AfA-Rechner" />
       <AiExplain

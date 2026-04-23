@@ -231,7 +231,7 @@ export default function BetriebskostenRechner() {
             </p>
           </div>
 
-          <CrossLink href="/finanzen/freelancer-stundensatz-rechner" emoji="💰" text="Freelancer-Stundensatz berechnen" />
+          <CrossLink href="/arbeit/freelancer-stundensatz-rechner" emoji="💰" text="Freelancer-Stundensatz berechnen" />
           <CrossLink href="/finanzen/mwst-rechner" emoji="🧾" text="Mehrwertsteuer berechnen" />
           <CrossLink href="/finanzen/gmbh-geschaeftsfuehrer-rechner" emoji="🏢" text="GmbH-Geschäftsführer-Gehalt berechnen" />
 

@@ -261,7 +261,7 @@ export default function NebenjobRechner() {
 
           <CrossLink href="/finanzen/minijob-rechner" emoji="👛" text="Minijob berechnen" />
           <CrossLink href="/finanzen/brutto-netto-rechner" emoji="💰" text="Brutto-Netto berechnen" />
-          <CrossLink href="/arbeit/stundenlohn-rechner" emoji="⏱️" text="Stundenlohn berechnen" />
+          <CrossLink href="/finanzen/stundenlohn-rechner" emoji="⏱️" text="Stundenlohn berechnen" />
 
           <ErgebnisAktionen
             ergebnisText={`Nebenjob-Rechner (${ergebnis.artLabel}): Brutto ${fmt(ergebnis.nebenjobBrutto)} € → Netto ${fmt(ergebnis.nebenjobNettoMonat)} € | Netto-Zuwachs/Monat: +${fmt(ergebnis.nettoZuwachsMonat)} € | +${fmt(ergebnis.nettoZuwachsJahr)} €/Jahr | Steuerbelastung: ${ergebnis.steuerbelastungNebenjob.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} %`}

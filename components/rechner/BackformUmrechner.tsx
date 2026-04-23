@@ -202,7 +202,7 @@ export default function BackformUmrechner() {
       <CrossLink href="/kochen/backzeit-rechner" emoji="⏲️" text="Backzeit anpassen" />
       <CrossLink href="/kochen/rezept-umrechner" emoji="📝" text="Rezept auf Portionen umrechnen" />
       <CrossLink href="/kochen/cups-umrechner" emoji="🥣" text="Cups in Gramm umrechnen" />
-      <CrossLink href="/alltag/flaechenrechner" emoji="📐" text="Flächenrechner" />
+      <CrossLink href="/mathe/flaechenrechner" emoji="📐" text="Flächenrechner" />
 
       <ErgebnisAktionen
         ergebnisText={`Backform-Umrechner: ${formBeschreibung(original)} (${fmt(ergebnis.flaecheOrig)} cm²) → ${formBeschreibung(ziel)} (${fmt(ergebnis.flaecheZiel)} cm²) | Faktor × ${fmt(ergebnis.faktor, 2)}`}

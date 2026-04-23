@@ -260,7 +260,7 @@ export default function BackzeitRechner() {
 
       <CrossLink href="/kochen/backform-umrechner" emoji="🎂" text="Backform umrechnen" />
       <CrossLink href="/kochen/rezept-umrechner" emoji="📝" text="Rezept auf Portionen umrechnen" />
-      <CrossLink href="/alltag/einheiten-umrechner" emoji="📏" text="Einheiten umrechnen (Temperatur)" />
+      <CrossLink href="/mathe/einheiten-umrechner" emoji="📏" text="Einheiten umrechnen (Temperatur)" />
 
       <ErgebnisAktionen
         ergebnisText={`Backzeit-Rechner: Original ${origTemp} °C / ${origZeit} Min → ${fmt(ergebnis.tempZiel)} °C (${zielHerdart === 'ou' ? 'O/U' : zielHerdart === 'umluft' ? 'Umluft' : `Gasmark ${celsiusZuGasmark(ergebnis.tempZiel)}`}) / ${ergebnis.zeitZiel} Min`}

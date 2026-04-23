@@ -203,7 +203,7 @@ export default function GrundsteuerRechner() {
       </div>
 
       <CrossLink href="/wohnen/grunderwerbsteuer-rechner" emoji="🏠" text="Beim Kauf: Grunderwerbsteuer berechnen" />
-      <CrossLink href="/finanzen/baufinanzierung-rechner" emoji="💰" text="Baufinanzierung berechnen" />
+      <CrossLink href="/wohnen/baufinanzierung-rechner" emoji="💰" text="Baufinanzierung berechnen" />
       <CrossLink href="/wohnen/nebenkosten-rechner" emoji="📊" text="Nebenkosten berechnen" />
 
       <ErgebnisAktionen

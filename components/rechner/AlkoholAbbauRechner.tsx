@@ -227,8 +227,8 @@ export default function AlkoholAbbauRechner() {
         )}
       </div>
 
-      <CrossLink href="/gesundheit/promillerechner" emoji="🍷" text="Promillerechner" />
-      <CrossLink href="/arbeit/bussgeldrechner" emoji="⚖️" text="Bußgeldrechner" />
+      <CrossLink href="/arbeit/promillerechner" emoji="🍷" text="Promillerechner" />
+      <CrossLink href="/auto/bussgeldrechner" emoji="⚖️" text="Bußgeldrechner" />
       <CrossLink href="/gesundheit/schlaf-rechner" emoji="😴" text="Schlafrechner" />
 
       <ErgebnisAktionen

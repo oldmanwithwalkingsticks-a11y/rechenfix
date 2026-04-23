@@ -217,7 +217,7 @@ export default function MalerkostenRechner() {
 
       <CrossLink href="/wohnen/tapetenbedarf-rechner" emoji="🧻" text="Tapetenbedarf-Rechner" />
       <CrossLink href="/wohnen/quadratmeter-rechner" emoji="📐" text="Quadratmeter-Rechner" />
-      <CrossLink href="/wohnen/umzugskosten-rechner" emoji="📦" text="Umzugskosten-Rechner" />
+      <CrossLink href="/alltag/umzugskosten-rechner" emoji="📦" text="Umzugskosten-Rechner" />
 
       <ErgebnisAktionen
         ergebnisText={`Malerkosten: ${fmtEur(ergebnis.gesamt)} ${maler ? '(mit Maler)' : '(selbst)'} für ${fmt(ergebnis.streichflaeche)} m²`}

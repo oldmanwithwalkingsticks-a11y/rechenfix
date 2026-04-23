@@ -325,7 +325,7 @@ export default function FirmenwagenRechner() {
         </p>
       </div>
 
-      <CrossLink href="/finanzen/autokosten-rechner" emoji="🚗" text="Gesamte Autokosten berechnen" />
+      <CrossLink href="/auto/autokosten-rechner" emoji="🚗" text="Gesamte Autokosten berechnen" />
       <CrossLink href="/finanzen/gmbh-geschaeftsfuehrer-rechner" emoji="💼" text="GF-Gehalt mit Firmenwagen" />
       <CrossLink href="/finanzen/gehaltserhoehung-rechner" emoji="📈" text="Firmenwagen vs. Gehaltserhöhung" />
 

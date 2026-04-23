@@ -240,7 +240,7 @@ export default function CupsUmrechner() {
       </div>
 
       <CrossLink href="/kochen/rezept-umrechner" emoji="📝" text="Rezept auf Portionen umrechnen" />
-      <CrossLink href="/alltag/einheiten-umrechner" emoji="📏" text="Einheiten umrechnen" />
+      <CrossLink href="/mathe/einheiten-umrechner" emoji="📏" text="Einheiten umrechnen" />
       <CrossLink href="/alltag/dreisatz-rechner" emoji="⚖️" text="Dreisatz-Rechner" />
       <CrossLink href="/alltag/waehrungsrechner" emoji="💱" text="Währungen umrechnen" />
 

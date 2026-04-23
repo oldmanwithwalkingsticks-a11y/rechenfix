@@ -271,7 +271,7 @@ export default function MinijobRechner() {
       </div>
 
       <CrossLink href="/finanzen/brutto-netto-rechner" emoji="💰" text="Brutto-Netto-Rechner für reguläre Gehälter" />
-      <CrossLink href="/arbeit/stundenlohn-rechner" emoji="⏱️" text="Stundenlohn berechnen" />
+      <CrossLink href="/finanzen/stundenlohn-rechner" emoji="⏱️" text="Stundenlohn berechnen" />
       <CrossLink href="/arbeit/teilzeit-rechner" emoji="📅" text="Teilzeit-Rechner: Gehalt bei reduzierter Arbeitszeit" />
 
       <ErgebnisAktionen

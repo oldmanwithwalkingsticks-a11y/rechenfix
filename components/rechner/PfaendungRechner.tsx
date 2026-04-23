@@ -282,7 +282,7 @@ export default function PfaendungRechner() {
 
       <CrossLink href="/finanzen/brutto-netto-rechner" emoji="💶" text="Brutto-Netto-Gehalt berechnen" />
       <CrossLink href="/finanzen/buergergeld-rechner" emoji="🤝" text="Bürgergeld berechnen" />
-      <CrossLink href="/finanzen/unterhaltsrechner" emoji="👨‍👩‍👧" text="Unterhalt berechnen" />
+      <CrossLink href="/arbeit/unterhaltsrechner" emoji="👨‍👩‍👧" text="Unterhalt berechnen" />
       <CrossLink href="/finanzen/kreditrechner" emoji="💳" text="Kredit- und Zinsrechner" />
 
       <ErgebnisAktionen

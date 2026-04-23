@@ -363,7 +363,7 @@ export default function AlkoholgehaltRechner() {
         </p>
       </div>
 
-      <CrossLink href="/alltag/promillerechner" emoji="🚗" text="Promillerechner: Blutalkohol berechnen" />
+      <CrossLink href="/arbeit/promillerechner" emoji="🚗" text="Promillerechner: Blutalkohol berechnen" />
       <CrossLink href="/gesundheit/kalorienrechner" emoji="🔥" text="Kalorienrechner: Tagesbedarf berechnen" />
       <CrossLink href="/kochen/rezept-umrechner" emoji="📝" text="Rezept auf Portionen umrechnen" />
 

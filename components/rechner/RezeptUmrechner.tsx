@@ -338,7 +338,7 @@ export default function RezeptUmrechner() {
       />
 
       <CrossLink href="/kochen/cups-umrechner" emoji="🥣" text="Cups in Gramm umrechnen" />
-      <CrossLink href="/alltag/einheiten-umrechner" emoji="📏" text="Einheiten umrechnen" />
+      <CrossLink href="/mathe/einheiten-umrechner" emoji="📏" text="Einheiten umrechnen" />
       <CrossLink href="/alltag/dreisatz-rechner" emoji="⚖️" text="Dreisatz-Rechner" />
 
       <ErgebnisAktionen
