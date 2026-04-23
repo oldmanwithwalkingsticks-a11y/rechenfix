@@ -349,7 +349,7 @@ Das Bürgergeld ist die zentrale Grundsicherungsleistung in Deutschland für erw
 
 Das Bürgergeld soll das soziokulturelle Existenzminimum sichern — also nicht nur Nahrung und Unterkunft, sondern auch die Teilhabe am gesellschaftlichen Leben. Es umfasst den monatlichen Regelbedarf für den Lebensunterhalt, die tatsächlichen Kosten der Unterkunft und Heizung (in angemessener Höhe) sowie gegebenenfalls Mehrbedarfe (z. B. für Schwangere, Alleinerziehende oder bei kostenaufwändiger Ernährung).
 
-Mit der Bürgergeld-Reform wurde der Fokus stärker auf Qualifizierung und nachhaltige Arbeitsmarktintegration gelegt. Es gibt eine Karenzzeit von 12 Monaten, in der höhere Vermögensfreibeträge gelten und die tatsächlichen Unterkunftskosten übernommen werden — unabhängig von der Angemessenheit.
+Mit der Bürgergeld-Reform wurde der Fokus stärker auf Qualifizierung und nachhaltige Arbeitsmarktintegration gelegt. Bis zum 30. Juni 2026 gilt eine Karenzzeit von 12 Monaten, in der höhere Vermögensfreibeträge greifen und die tatsächlichen Unterkunftskosten übernommen werden — unabhängig von der Angemessenheit. **Seit 1. Juli 2026 heißt die Leistung offiziell Grundsicherungsgeld** (13. Gesetz zur Änderung des SGB II, BGBl. 2026 I Nr. 107 vom 16. April 2026). Die Regelsätze bleiben unverändert; neu sind altersgestaffelte Vermögensfreibeträge (5.000 bis 20.000 Euro pro Person) und eine Deckelung der anerkannten Unterkunftskosten auf das 1,5-Fache der örtlichen Angemessenheitsgrenze auch innerhalb der Karenzzeit (§ 22 Abs. 1 SGB II n. F.).
 
 **Bürgergeld-Regelsätze 2026 im Überblick**
 
@@ -391,6 +391,17 @@ Nach Ablauf der Karenzzeit gelten die regulären Vermögensfreibeträge von 15.0
 
 Wer über den Freibeträgen liegt, muss sein Vermögen zunächst aufbrauchen, bevor ein Anspruch auf Bürgergeld besteht.
 
+**Neue Vermögensregeln ab 1. Juli 2026 (Grundsicherungsgeld)**
+
+Mit dem 13. Gesetz zur Änderung des SGB II wird die Karenzzeit-Regelung beim Vermögen abgeschafft und durch eine altersgestaffelte Freibetragsregelung ersetzt. Maßgeblich ist § 12 Absatz 2 SGB II in der neuen Fassung. Der Freibetrag pro Person in der Bedarfsgemeinschaft richtet sich ab dem ersten Bezugsmonat nach dem Lebensalter:
+
+- **Bis zur Vollendung des 30. Lebensjahres:** 5.000 Euro
+- **Ab dem 31. Lebensjahr:** 10.000 Euro
+- **Ab dem 41. Lebensjahr:** 12.500 Euro
+- **Ab dem 51. Lebensjahr:** 20.000 Euro
+
+Der jeweils höhere Freibetrag gilt ab Beginn des Monats, in dem die Altersgrenze erreicht wird. Die Freibeträge werden pro Person summiert — ein Paar mit 28 und 52 Jahren hat zusammen also 5.000 + 20.000 = 25.000 Euro Schonvermögen. Selbstgenutztes Hausgrundstück oder selbstgenutzte Eigentumswohnung bleiben während der Karenzzeit (erstes Bezugsjahr, § 22 Abs. 1 Satz 2 SGB II) unabhängig von der Größe zusätzlich geschützt (§ 12 Abs. 1 Satz 3 SGB II n. F.).
+
 **Bürgergeld beantragen — so geht's**
 
 - **Schritt 1 — Antrag stellen:** Den Antrag auf Bürgergeld stellen Sie bei Ihrem zuständigen Jobcenter. Dies kann persönlich, telefonisch, per Post oder in vielen Regionen auch online erfolgen. Ein formloser Antrag per E-Mail oder Telefon sichert den Leistungsbeginn, der schriftliche Hauptantrag muss nachgereicht werden.
@@ -413,11 +424,15 @@ Wer über den Freibeträgen liegt, muss sein Vermögen zunächst aufbrauchen, be
       },
       {
         frage: 'Wie viel Vermögen darf man beim Bürgergeld haben?',
-        antwort: 'In der Karenzzeit (erste 12 Monate) gilt ein Freibetrag von 40.000 Euro für die erste Person und 15.000 Euro für jede weitere Person in der Bedarfsgemeinschaft. Danach liegt der Freibetrag bei 15.000 Euro pro Person. Angemessener Hausrat, ein Auto und selbstgenutztes Wohneigentum sind geschützt.',
+        antwort: 'Bis 30. Juni 2026 gilt in der Karenzzeit (erste 12 Monate) ein Freibetrag von 40.000 Euro für die erste Person und 15.000 Euro für jede weitere Person der Bedarfsgemeinschaft; nach Karenzzeit 15.000 Euro pro Person. Ab 1. Juli 2026 (Grundsicherungsgeld) gilt eine Altersstaffel pro Person: 5.000 Euro bis 30 Jahre, 10.000 Euro ab 31, 12.500 Euro ab 41 und 20.000 Euro ab 51 Jahren — ohne Karenzzeit-Differenzierung. Angemessener Hausrat, ein Auto und selbstgenutztes Wohneigentum sind geschützt.',
+      },
+      {
+        frage: 'Heißt das jetzt Grundsicherungsgeld?',
+        antwort: 'Ja, seit dem 1. Juli 2026 wurde das Bürgergeld durch das 13. Gesetz zur Änderung des SGB II in Grundsicherungsgeld umbenannt (BGBl. 2026 I Nr. 107 vom 16. April 2026). Inhaltlich ändern sich vor allem das Schonvermögen (altersgestaffelt statt Karenzzeit-Modell), die Unterkunftskosten-Deckelung auf das 1,5-Fache der örtlichen Angemessenheit und die Sanktionsregeln. Die Regelsätze bleiben unverändert (Nullrunde 2026 durch Besitzschutz). Der Begriff „Bürgergeld" bleibt im Sprachgebrauch verbreitet und wird hier weiter genutzt, weil die Suchanfragen noch überwiegend unter diesem Namen laufen.',
       },
       {
         frage: 'Was ist der Unterschied zwischen Bürgergeld und Hartz IV?',
-        antwort: 'Das Bürgergeld hat Hartz IV (Arbeitslosengeld II) zum 1. Januar 2023 abgelöst. Die wichtigsten Änderungen: höhere Regelsätze, Karenzzeit von 12 Monaten mit großzügigeren Vermögensfreibeträgen, stärkerer Fokus auf Qualifizierung statt Vermittlung in Helferjobs, und ein Kooperationsplan statt der bisherigen Eingliederungsvereinbarung.',
+        antwort: 'Das Bürgergeld hat Hartz IV (Arbeitslosengeld II) zum 1. Januar 2023 abgelöst. Die wichtigsten Änderungen: höhere Regelsätze, Karenzzeit von 12 Monaten mit großzügigeren Vermögensfreibeträgen, stärkerer Fokus auf Qualifizierung statt Vermittlung in Helferjobs, und ein Kooperationsplan statt der bisherigen Eingliederungsvereinbarung. Seit 1. Juli 2026 heißt die Leistung Grundsicherungsgeld — Regelsätze und Grundstruktur bleiben erhalten, aber Vermögensregeln und Sanktionen wurden reformiert.',
       },
       {
         frage: 'Wie lange bekommt man Bürgergeld?',
