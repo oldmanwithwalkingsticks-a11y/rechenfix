@@ -194,7 +194,7 @@ Rechenbeispiel komplett: Benziner, 1.498 ccm, 128 g/km CO₂:
 - CO₂: 128 − 95 = 33 g/km über Freibetrag. Davon 20 g × 2,00 € = 40,00 € (96–115 g) und 13 g × 2,20 € = 28,60 € (116–128 g). Gesamt CO₂: 68,60 €
 - Jahressteuer: 30,00 € + 68,60 € = 98,60 €
 
-Für Fahrzeuge mit Erstzulassung vor dem 01.07.2009 wird die Steuer ausschließlich nach Hubraum und Schadstoffklasse berechnet. Die Sätze sind hier deutlich höher: Für einen Euro-4-Benziner fallen z. B. 6,75 € pro angefangene 100 ccm an, für einen Euro-4-Diesel 15,44 € pro angefangene 100 ccm.
+Für Fahrzeuge mit Erstzulassung vor dem 01.07.2009 wird die Steuer ausschließlich nach Hubraum und Schadstoffklasse berechnet. Die Sätze sind hier deutlich höher: Für einen Euro-4-Benziner fallen z. B. 6,75 € pro angefangene 100 ccm an, für einen Euro-4-Diesel 15,44 € pro angefangene 100 ccm. Unser Rechner setzt für den Vor-2009-Pfad die Schadstoffklasse Euro 4 (oder besser) voraus — für schlechtere Klassen (Euro 0 bis Euro 3) nennt § 9 Abs. 1 Nr. 2a KraftStG deutlich höhere Sätze, insbesondere bei Dieselfahrzeugen ohne Partikelfilter.
 
 **Kfz-Steuer für Elektroautos**
 
@@ -283,7 +283,13 @@ Für Fahranfänger in der zweijährigen Probezeit gelten strengere Regeln. Es gi
 
 **Toleranzabzug bei Geschwindigkeitsmessungen**
 
-Bei jeder Geschwindigkeitsmessung wird ein Toleranzabzug vorgenommen, um Messungenauigkeiten auszugleichen. Bei Geschwindigkeiten bis 100 km/h werden 3 km/h abgezogen, darüber 3 Prozent des Messwerts. Beispiel: Gemessene Geschwindigkeit 83 km/h in einer 50er-Zone → nach Toleranzabzug (3 km/h) gilt eine Überschreitung von 30 km/h. Bei Messungen durch Nachfahren (Polizeifahrzeug) ist der Toleranzabzug höher: 5 km/h bzw. 5 Prozent. Unser Rechner geht davon aus, dass der Toleranzabzug bereits berücksichtigt ist — geben Sie also die tatsächliche Überschreitung ein, nicht die gemessene Geschwindigkeit.`,
+Bei jeder Geschwindigkeitsmessung wird ein Toleranzabzug vorgenommen, um Messungenauigkeiten auszugleichen. Bei Geschwindigkeiten bis 100 km/h werden 3 km/h abgezogen, darüber 3 Prozent des Messwerts. Beispiel: Gemessene Geschwindigkeit 83 km/h in einer 50er-Zone → nach Toleranzabzug (3 km/h) gilt eine Überschreitung von 30 km/h. Bei Messungen durch Nachfahren (Polizeifahrzeug) ist der Toleranzabzug höher: 5 km/h bzw. 5 Prozent. Unser Rechner geht davon aus, dass der Toleranzabzug bereits berücksichtigt ist — geben Sie also die tatsächliche Überschreitung ein, nicht die gemessene Geschwindigkeit.
+
+**Vereinfachungen dieses Rechners**
+
+Für **Lkw und Busse** zeigt der Rechner eine pauschale Näherung von rund +30 Prozent gegenüber Pkw-Sätzen. Die BKatV differenziert in Lfd.Nr. 11.3.* feiner nach Fahrzeuggewicht und -art (z. B. Gefahrgut-Transport); diese Vereinfachung reicht für eine grobe Einordnung, ersetzt aber nicht den Blick in die BKatV-Anlage.
+
+Für **Parkverstöße** nennt der Rechner nur die häufigsten Grundsätze (z. B. 25 € für unerlaubtes Parken, 55 € für Park­en in zweiter Reihe / auf Geh­weg / in Feuer­wehr­zu­fahrt / auf Behinderten­park­plätzen, siehe BKatV Lfd.Nr. 52.1.*). Bei Behinderung anderer Verkehrsteilnehmer erhöht sich das Bußgeld um 15–25 €, bei Parkdauern über 1 Stunde kommen weitere 25 € hinzu. Diese Zusatzfälle sind im Rechner nicht einzeln konfigurierbar.`,
     faq: [
       {
         frage: 'Wie viel kostet eine Geschwindigkeitsüberschreitung?',

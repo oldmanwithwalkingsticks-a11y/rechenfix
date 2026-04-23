@@ -64,7 +64,11 @@ const GESCHWINDIGKEIT_AUSSERORTS_PKW: { bis: number; stufe: Stufe }[] = [
   { bis: Infinity, stufe: { bussgeld: 700, punkte: 2, fahrverbot: 3 } },
 ];
 
-// LKW: ~20-50% höhere Bußgelder
+// LKW: ~20-50% höhere Bußgelder.
+// Pauschale Näherung. BKatV Lfd.Nr. 11.3.* differenziert nach
+// Fahrzeuggewicht und -art; diese Vereinfachung ist für einen
+// Schätz-Rechner vertretbar. Quelle: BKatV 2013 i.d.F. der Novelle
+// vom 09.11.2021, gesetze-im-internet.de/bkatv_2013/anlage.html
 const LKW_FAKTOR = 1.3;
 
 function berechneGeschwindigkeit(kmh: number, ort: Ort, fahrzeug: Fahrzeug): BussgeldErgebnis {
