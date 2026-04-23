@@ -15,7 +15,7 @@
 |---|---|
 | Rechner geprüft | 10 |
 | **P1-Bugs** | 3 (alle in KfzSteuerRechner + Lib) |
-| **P2-Bugs** | 6 |
+| **P2-Bugs** | 5 (Korrektur 2026-04-23: ursprünglich fälschlich mit 6 gezählt — im Detail-Abschnitt sind 5 `[P2]`-Tags; siehe Abschluss-Status) |
 | **P3 / Polish** | 11 |
 | SSOT-Kandidaten | 0 neue — bestehende Libs sind adäquat |
 | Rückfragen Karsten | 2 (siehe Ende) |
@@ -348,3 +348,28 @@ Bericht sprengen. Konsequenz: **Empfehlung in Fix-Prompt 132 sollte
 Stichproben-Strategie explizit nennen — bei einem Bußgeld-Update-Prompt
 wäre eine Full-Reverifikation aller 50 Werte Pflicht, in diesem Audit
 genügt die Stichprobe.**
+
+---
+
+## Abschluss-Status
+
+**Prompt 131 (2026-04-23):** P1-Paket erledigt — CO₂-Staffel § 9 Abs. 1
+Nr. 2c KraftStG, Elektro-Befreiung § 3d KraftStG (31.12.2035 statt 2030),
+UI-Erklärtexte mit falschen Daten. Commits `b24ed75` + `cfda3d2`. Neue
+SSOT-Lib `lib/berechnungen/kfz-steuer-parameter.ts`, Verify-Script
+`scripts/verify-kfz-steuer-p1.ts` 30/30 grün.
+
+**Prompt 132 (2026-04-23):** P2-Paket (A1–A5) + P3-Auswahl (B1–B3)
+erledigt.
+- A1: FuehrerscheinRechner Gebühren cent-präzise (22,49 / 116,93 €) — Commit `90e2f08`.
+- A2+A3: BussgeldRechner LKW-Faktor- und Parken-Staffel-Disclaimer im Erklärtext — Commit `e46c6bb`.
+- A4+B1: KfzSteuerRechner Vor-2009-Euro-4-Disclaimer + Hubraum-/CO₂-Clamping — Commit `0502a94`.
+- A5: TaxiRechner Stand-Datum `TARIFE_STAND='2026-04'` + Disclaimer erweitert + CrossLink-Slug-Fix — Commit `1041572`.
+- B2+B3: BussgeldRechner Überschreitung-/Abstand-Clamping + LeasingRechner MwSt-SSOT aus `lib/berechnungen/mwst.ts` — Commit `f1d587e`.
+
+**Sanity-Check:** Summary-Count ursprünglich 6 × P2 genannt, im Detail nur 5 × `[P2]`-Tags. Oben korrigiert. Kein versteckter sechster P2 gefunden.
+
+**Offen:**
+- **Prompt 133** (TaxiRechner Stadt-Preset-UX): 5 Städte-Presets + `taxi-preset-tarife.ts` mit Stichtag-Kommentar pro Stadt + CLAUDE.md-Wartungsregel (halbjährlich). Vorbereitet durch `TARIFE_STAND` in A5.
+- **Teil C (Transparenz-P3)** aus Prompt 132 absichtlich übersprungen (SEO-Text-Rewrites, Karsten-Entscheidung offen). Umfasst: FuehrerscheinRechner Regions-Preise mit ADAC-Quelle, 1,5-Aufschlag-FAQ, ReichweitenRechner Faktoren-Herkunft + Strompreis-Quelle. Kann bei Gelegenheit nachgezogen werden.
+- **Prompt 140** (Welle 2 Stufe 2 Gesundheit, 17 Rechner).
