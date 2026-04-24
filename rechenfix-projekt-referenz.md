@@ -1,6 +1,6 @@
 # Rechenfix.de — Projekt-Referenz
 
-Stand: 22.04.2026
+Stand: 25.04.2026
 
 ## Was ist rechenfix.de?
 
@@ -72,6 +72,9 @@ Alle jahresabhängigen und gesetzlich definierten Werte liegen in `lib/berechnun
 | `midijob-uebergang.ts` **(neu, Prompt 125a)** | § 20a SGB IV BE-Formeln getrennt für Abs. 2 (Gesamt) und Abs. 2a (AN) | `berechneBemessungsgrundlageGesamt`, `berechneBemessungsgrundlageAN`, `getMidijobUntergrenze`, `MIDIJOB_OBERGRENZE_MONAT` |
 | `mwst.ts` **(erweitert, Prompt 132)** | § 12 UStG Regelsatz/ermäßigt + Brutto-/Netto-Faktoren | Konstanten `MWST_REGULAER` (0,19), `MWST_ERMAESSIGT` (0,07), `BRUTTO_FAKTOR_REGULAER`, `NETTO_FAKTOR_REGULAER`; Funktionen `berechneNettoZuBrutto`, `berechneBruttoZuNetto`, `berechneMultiMwSt` |
 | `lib/amazon-link.ts` **(neu, Prompt 122-amazon)** | Amazon-Partnerprogramm Suchlinks, Consent-abhängig | `createAmazonSearchLink(keyword, marketingConsentGranted)`, `AMAZON_TAG = 'rechenfix-21'` |
+| `bmi.ts` **(erweitert, Prompts 141 + 143)** | WHO-BMI-Kategorien + alters-adjustierter Optimal-Bereich (NRC 1989) | `bmiKategorien` (SSOT seit 143, auch von SchwangerschaftGewichtRechner konsumiert), `getOptimalerBereich(alter)` (SSOT seit 143, auch von idealgewicht.ts konsumiert), `BMI_ADULT_MIN_AGE = 18` (Erwachsenen-Gating, Prompt 141) |
+| `kalorien.ts` **(erweitert, Prompt 141)** | Mifflin-St Jeor mit Eating-Disorder-Floor | `berechneKalorien(...)`; neues Flag `zielGeklammertAufGrundumsatz`; `zielKalorien = Math.max(zielKalorienRoh, grundumsatz)` |
+| `schwangerschaft.ts` **(neu, Prompt 143 — Voll-Fusion)** | Konsolidiert die früheren `geburtstermin.ts` + `ssw.ts` (beide gelöscht). Naegele + erweiterte Naegele für Zykluslänge ≠ 28; SSW-Berechnung mit dokumentierter Semantik-Divergenz; Trimester; Meilensteine (inkl. Mutterschutz-Beginn/-Ende, Vorsorge-Termine § 24c SGB V); zeitzonen-sicher | `parseDatum(s)` (`+'T00:00:00'`), `berechneGeburtstermin(eingabe)` (SSW ab LMP+Zyklus-Korrektur — erweiterte Naegele), `berechneSsw(eingabe)` (SSW ab reinem LMP — gynäkologischer Standard), `defaultPeriodeDatum`, `defaultTerminDatum`, `Methode`, `SswMethode`, `Meilenstein`. Beide SSW-Konventionen klinisch korrekt — JSDoc dokumentiert die Divergenz, nicht versehentlich vereinheitlichen |
 
 **Verboten:** Eigene ESt-, LSt-, SV-, Kindergeld-, Pfändungs-, Mindestlohn- oder Pendler-Formeln in Komponenten. Siehe `CLAUDE.md` Abschnitt "Zentrale Libs (SSOT)" und die Audit-Welle-1-Anti-Patterns im `rechner-builder`-Skill.
 
@@ -346,6 +349,10 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
 - ✅ **Welle 2 Stufe 1 Auto** (Prompts 130–132, 23.04.2026) — 10 Rechner-Audit, 3×P1 KfzSteuerRechner (CO₂-Staffel § 9 Abs. 1 Nr. 2c KraftStG, Elektro-Befreiung § 3d KraftStG bis 31.12.2035 statt 2030, UI-Text mit falschen Daten), 5×P2 + 3×P3 Polish
 - ✅ **Slug-Drift-Scan + Prebuild-Hook** (Prompts 132.5+132.6) — 22 systemweite Drifts gefixt (hauptsächlich Kategorien-Verwechslungen, z. B. Slug `promillerechner` in Gesundheit-Kategorie statt korrekt Arbeit-Kategorie), Auto-Schutz via `scripts/slug-drift-scan.mjs` in der prebuild-Kette, Whitelist mit Karsten-OK-Pflicht
 - ✅ **Doku-Sync** (Prompt 134) — CLAUDE.md / SKILL.md / dieses Dokument auf Stand nach Welle-2-Stufe-1-Abschluss
+- ✅ **Welle 2 Stufe 2 Gesundheit** (Prompts 140–144b, 24.–25.04.2026) — 17 Rechner-Audit nach 4-Punkt-Methodik, **2 P1 + 9 P2 + 9 P3** alle gefixt + Feature-Add 144b. P1.1 Kalorien-Floor (`zielKalorien = max(zielKalorienRoh, grundumsatz)` als Eating-Disorder-Schutz), P1.2 BMI Alters-Gate <18 (SSOT-Konstante `BMI_ADULT_MIN_AGE = 18`, Kategorie-Anzeige unterdrückt, Verweis auf Kromeyer-Hauschild). SSOT-Konsolidierung in 143: `bmi.ts` exportiert `bmiKategorien` und `getOptimalerBereich` als zentral; `geburtstermin.ts` + `ssw.ts` zu `schwangerschaft.ts` fusioniert (Voll-Fusion, beide alten Files gelöscht). 21 Verify-Tests (7+6+8) gegen externe Primärquellen (WHO, ESH, DGE, IOM 2009, Naegele/§ 3 MuSchG). Wellbeing-Patterns dokumentiert: Verhütungs-Disclaimer als amber-Box, Eating-Disorder-Floor, Kinder-Gating, sys<dia-UI-Hinweis, Hyponatriämie-Warnung bei >4 l/Tag.
+- ✅ **CosmosDirekt-Affiliate** (Prompts 145 + 145b, 25.04.2026) — 12. Programm Awin Merchant 11893 (Icon 🛡️, `#0D6EFD`). 15 Produkt-Deeplinks: Tagesgeld, Altersvorsorge, Sparplan, Junior, Risikoleben, BU, Unfall, Sterbegeld, Privat-Haftpflicht, Hausrat, Wohngebäude, Bauherrenhaftpflicht, Tierhalter, Reiserücktritt, Default. **30 Einbauten** in 30 Rechnern (21 Group A Append nach bestehenden Boxen, 9 Group B Erstinstall; B6 MietRechner.tsx übersprungen — Datei existiert nicht). Sonderfälle: RentenRechner mit `variant="compact"` (4. Box, visuelle Last), SparRechner mit `context="tagesgeld"` statt `sparplan` (verivox bedient sparplan an Z. 138). AffiliateBox-Aufrufe gesamt: 87 → 117 in 73 Dateien.
+- ✅ **Casing-Hotfix** (Commit 7dd9934, 25.04.2026) — Latenter Casing-Bug behoben: `MwStRueckerstattungRechner.tsx` (großes St) lokal vs. `MwstRueckerstattungRechner.tsx` (kleines st) im git-Index. Vercel-Linux case-sensitive → `Module not found` auf Production. Zwei-Schritt-`git mv` für case-only-Rename auf Windows.
+- ✅ **Doku-Sync** (Prompt 146, 25.04.2026) — CLAUDE.md / SKILL.md / dieses Dokument nach Welle-2-Stufen-1+2 + CosmosDirekt
 
 **Parkend (wartet auf AdSense-Freigabe):**
 - ⏸ Prompt 68 — Google CMP + Consent Mode v2
@@ -365,7 +372,7 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
 
 **Welle-Status:**
 - **Welle 1 (Hoch-Risiko, Steuer/SV/Familie/Arbeitsrecht/Spezial-Steuer/Sozialleistungen):** ✅ ABGESCHLOSSEN April 2026 (Stufen 1+2+1.5+3+4a+4b)
-- **Welle 2 (Mittel-Risiko):** Stufe 1 Auto ✅ ABGESCHLOSSEN 23.04.2026; Stufe 2 Gesundheit offen (Prompt 140 kommend)
+- **Welle 2 (Mittel-Risiko):** Stufe 1 Auto ✅ ABGESCHLOSSEN 23.04.2026; **Stufe 2 Gesundheit ✅ ABGESCHLOSSEN 25.04.2026** (Prompts 140–144b, 17 Rechner, 2 P1 + 9 P2 + 9 P3 alle gefixt + Feature-Add Perioden-Länge); Stufe 3 offen (Kategorie noch zu wählen — Wohnen / Alltag / Mathe / Arbeit / Kochen / Sport)
 - **Welle 3 (Niedrig-Risiko-Stichprobe Alltag/Kochen/Mathe/Wohnen):** noch nicht begonnen — vorgesehen nach Welle 2
 
 **Neue Scripts seit letztem Sync:**
@@ -412,6 +419,7 @@ Publisher-ID: 2843240
 | hotel.de | 16018 | hotel.de | / |
 | burda-vergleicht (Zahnzusatz) | 121064 | zahn.burda-vergleicht.de | /campaign_600.html |
 | Nature's Way | 47173 | naturesway.de | /collections/all |
+| **CosmosDirekt** (neu, Prompts 145 + 145b, 25.04.2026) | **11893** | cosmosdirekt.de | /geldanlage/tagesgeld/, /flexinvest-altersvorsorge/, /flexinvest/, /flexinvest-einmalanlage/, /flexinvest-junior-sparplan/, /risikolebensversicherung/, /berufsunfaehigkeitsversicherung/, /unfallversicherung/, /sterbegeldversicherung/, /private-haftpflichtversicherung/, /hausratversicherung/, /wohngebaeudeversicherung/, /bauherrenhaftpflicht/, /tierhalterhaftpflicht/, /reiseruecktrittsversicherung/ |
 
 ### Amazon Partner-Programm (neben Awin, seit Prompt 122-amazon)
 
@@ -455,6 +463,49 @@ Publisher-ID: 2843240
 - Liest localStorage-Klick-Daten aus
 - Tabs: Nach Programm | Nach Rechner | Chronologisch
 - CSV-Export und Daten-Löschen-Funktion
+
+### CosmosDirekt-Einbau-Mapping (Prompt 145b, 25.04.2026, 30 Einbauten)
+
+**Group A — Append nach bestehender(n) Box(en) (21 Einbauten):**
+
+| # | Datei | Context |
+|---|---|---|
+| A1 | `AfaRechner.tsx` | wohngebaeude |
+| A2 | `BaufinanzierungRechner.tsx` | bauherrenhaftpflicht |
+| A3 | `ElterngeldRechner.tsx` | risikolebensversicherung |
+| A4 | `ErbschaftsteuerRechner.tsx` | sterbegeld |
+| A5 | `EtfSparplanRechner.tsx` | einmalanlage |
+| A6 | `GrunderwerbsteuerRechner.tsx` | wohngebaeude |
+| A7 | `GrundsteuerRechner.tsx` | wohngebaeude |
+| A8 | `KapitalertragsteuerRechner.tsx` | tagesgeld |
+| A9 | `KindergeldRechner.tsx` | juniorSparplan |
+| A10 | `KrankengeldRechner.tsx` | berufsunfaehigkeit |
+| A11 | `MietpreisbremseRechner.tsx` | privathaftpflicht |
+| A12 | `MietrenditeRechner.tsx` | wohngebaeude |
+| A13 | `MutterschutzRechner.tsx` | risikolebensversicherung |
+| A14 | `NebenkostenRechner.tsx` | hausrat |
+| A15 | `PflegegeldRechner.tsx` | berufsunfaehigkeit |
+| A16 | `RentenRechner.tsx` | altersvorsorge **(`variant="compact"` als 4. Box)** |
+| A17 | `RiesterRechner.tsx` | altersvorsorge |
+| A18 | `SchenkungssteuerRechner.tsx` | sterbegeld |
+| A19 | `SparRechner.tsx` | **tagesgeld** (NICHT sparplan — verivox bedient sparplan) |
+| A20 | `SteuererstattungRechner.tsx` | tagesgeld |
+| A21 | `VorfaelligkeitsentschaedigungRechner.tsx` | risikolebensversicherung |
+
+**Group B — Erstinstall (9 von 10 Einbauten; B6 übersprungen):**
+
+| # | Datei | Context |
+|---|---|---|
+| B1 | `ZinsRechner.tsx` | tagesgeld |
+| B2 | `WitwenrenteRechner.tsx` | risikolebensversicherung |
+| B3 | `InflationsRechner.tsx` | tagesgeld |
+| B4 | `MwStRueckerstattungRechner.tsx` | tagesgeld |
+| B5 | `PoolkostenRechner.tsx` | wohngebaeude |
+| B6 | ~~`MietRechner.tsx`~~ | **skipped — Datei existiert nicht im Repo** |
+| B7 | `HundejahreRechner.tsx` | tierhalterhaftpflicht |
+| B8 | `UmzugskostenRechner.tsx` | hausrat |
+| B9 | `ReisekostenRechner.tsx` | reiseruecktritt |
+| B10 | `BudgetRechner.tsx` | sparplan |
 
 ## Seitenstruktur jedes Rechners
 
@@ -596,7 +647,7 @@ Jeder Prompt für einen neuen Rechner enthält:
 
 ### Affiliate-Einnahmen
 - Kontextuelle AffiliateBox nach dem Rechenergebnis
-- Max. 2 Boxen pro Rechner-Seite
+- Max. 2–4 Boxen pro Rechner-Seite; ab der 4. Box `variant="compact"` (Beispiel RentenRechner mit 4 Boxen seit Prompt 145b)
 - Stärkste Programme nach EPC: KS Auxilia (5,94€), Lexware (5,12€)
 - Größtes Volumen-Potenzial: WISO/smartsteuer (Steuer-Rechner)
 - Breiteste Streuung: CHECK24 (Strom, Gas, Kfz, Kredit)

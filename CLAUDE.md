@@ -10,8 +10,8 @@
 7. Input-Felder min. 48px Höhe
 
 ## Affiliate-System
-- Komponente: `src/components/AffiliateBox.tsx`
-- Max. 2 AffiliateBoxen pro Rechner
+- Komponente: `components/AffiliateBox.tsx` (NICHT `src/components/...` — Pfad seit jeher unter `components/`)
+- Max. 2–4 AffiliateBoxen pro Rechner; ab der 4. Box `variant="compact"` (Beispiel: RentenRechner mit 4 Boxen)
 - "Anzeige"-Label Pflicht (deutsche Werbekennzeichnung)
 - `rel="noopener noreferrer sponsored"` auf allen Affiliate-Links
 - clickref = volle Seiten-URL via `usePathname()` Hook (NICHT window.location!)
@@ -35,6 +35,7 @@
 | burda-vergleicht (Zahnzusatz) | 121064 | zahn.burda-vergleicht.de |
 | Eventfloss Berlin | 27722 | eventfloss-berlin.de |
 | Nature's Way | 47173 | naturesway.de |
+| **CosmosDirekt** (neu, Prompt 145, 25.04.2026) | **11893** | cosmosdirekt.de — 15 Produkt-Deeplinks (Tagesgeld, Altersvorsorge, Sparplan, Junior, Risikoleben, BU, Unfall, Sterbegeld, Privat-Haftpflicht, Hausrat, Wohngebäude, Bauherrenhaftpflicht, Tierhalter, Reiserücktritt) |
 
 ## Amazon Partner-Programm (seit 22.04.2026, Prompt 122-amazon)
 
@@ -65,10 +66,12 @@ Affiliate ist erlaubt, wenn **thematischer Match** zum Rechner besteht. Entschei
 - Vercel Hosting
 - Anthropic Claude API für "Fix erklärt"
 
-## Projekt-Status (Stand April 2026)
+## Projekt-Status (Stand 25.04.2026)
 
-- **169 eigenständige Rechner in 9 Kategorien** (Alltag 23, Finanzen 45, Gesundheit 17, Auto & Verkehr 10, Wohnen & Energie 25, Mathe & Schule 18, Arbeit & Recht 17, Kochen & Ernährung 12, Sport & Fitness 2)
-- **177 Rechner-URLs** in der Sitemap (inkl. Varianten-Seiten wie `/finanzen/2000-euro-brutto-netto` bis `/5000-euro-brutto-netto` und `/finanzen/brutto-netto-tabelle`)
+- **170 eigenständige Rechner in 9 Kategorien** (Alltag 23, Finanzen 44, Gesundheit 17, Auto & Verkehr 11, Wohnen & Energie 25, Mathe & Schule 18, Arbeit & Recht 18, Kochen & Ernährung 12, Sport & Fitness 2)
+- **178 Rechner-URLs** in der Sitemap (inkl. Varianten-Seiten wie `/finanzen/2000-euro-brutto-netto` bis `/5000-euro-brutto-netto` und `/finanzen/brutto-netto-tabelle`)
+- **Welle-Status:** Welle 1 ✅ komplett (April 2026); **Welle 2 Stufe 1 Auto** ✅ (Prompts 130–132.6, 23.04.2026); **Welle 2 Stufe 2 Gesundheit** ✅ (Prompts 140–144b, 25.04.2026); Welle 2 Stufe 3 offen, Kategorie noch zu wählen
+- **AffiliateBox-Aufrufe:** 117 in 73 Dateien, 12 Programme inkl. CosmosDirekt (seit 25.04.2026, Prompt 145)
 - **Domain:** `https://www.rechenfix.de` (immer mit www, 308-Redirect von nicht-www)
 - **Stack:** Next.js 14 App Router, Tailwind, TypeScript, Vercel
 - **Smoketest v3.1** mit 9 Checks (C1–C9) als Regressions-Sweep über alle Rechner-URLs, Pflicht nach jeder Änderung
@@ -194,6 +197,10 @@ Alle jahresabhängigen und gesetzlich definierten Werte liegen in `lib/berechnun
 | `midijob-uebergang.ts` **(neu, Prompt 115a)** | § 20a SGB IV BE-Formel Midijob | `berechneBemessungsgrundlageAN`, `MIDIJOB_OBERGRENZE_MONAT`, `FAKTOR_F_2026`, `getMidijobUntergrenze` |
 | `steuerprogression.ts` | Grenz-/Durchschnittssteuersatz | nutzt `einkommensteuer.ts` |
 | `kfz-steuer.ts`, `balkon-solar.ts`, `waermepumpe.ts` | Domänen-spezifisch | |
+| `kfz-steuer-parameter.ts` **(neu, Prompt 131, Welle 2 Stufe 1)** | SSOT KraftStG: § 9 Abs. 1 Nr. 2c CO₂-Staffel + § 3d Elektro-Befreiung | `CO2_STAFFEL_KRAFTSTG_9_NR2C` (7-stufig progressiv 2,00/2,20/2,50/2,90/3,40/4,00 €/g), `ELEKTRO_BEFREIUNG`, `berechneCO2Komponente`, `berechneElektroBefreiungsende`, `SOCKEL_PRO_100CCM` |
+| `bmi.ts` **(erweitert, Prompt 141)** | WHO-BMI-Kategorien + Alters-adjustierter Optimalbereich (NRC 1989) | `bmiKategorien` (SSOT seit 143, auch von SchwangerschaftGewichtRechner konsumiert), `getOptimalerBereich(alter)` (SSOT seit 143, auch von idealgewicht.ts konsumiert), `BMI_ADULT_MIN_AGE = 18` (Erwachsenen-Gating, Prompt 141) |
+| `schwangerschaft.ts` **(neu, Prompt 143)** | Voll-Fusion aus früheren `geburtstermin.ts` + `ssw.ts` (beide gelöscht); Naegele-Regel + erweiterte Naegele für Zykluslänge ≠ 28; SSW-Berechnung; Trimester; Meilensteine | `parseDatum(s)` (zeitzonen-sicher mit `+'T00:00:00'`), `berechneGeburtstermin(eingabe)` (SSW ab LMP+Zyklus-Korrektur), `berechneSsw(eingabe)` (SSW ab reinem LMP, gynäkol. Standard), `defaultPeriodeDatum`, `defaultTerminDatum`, `Methode`, `SswMethode`, `Meilenstein` — Divergenz der SSW-Semantik bewusst erhalten |
+| `kalorien.ts` **(erweitert, Prompt 141)** | Mifflin-St Jeor mit Eating-Disorder-Floor | `berechneKalorien(...)` mit `zielKalorien = Math.max(zielKalorienRoh, grundumsatz)` und neuem Flag `zielGeklammertAufGrundumsatz` |
 | `erbschaftsteuer.ts` **(erweitert, Prompts 115c+116)** | § 19 ErbStG inkl. Abs. 3 Härtefall + § 14-Kumulation bei Vorschenkungen + § 13 Hausrat-FB | `berechneErbStMitHaertefall(stpflErwerb, klasse)`, `ERBST_TARIF_STUFEN`, `Steuerklasse`, `berechneErbschaftsteuer` (nutzt § 14 + Hausrat) |
 | `schenkungssteuer.ts` | § 16 ErbStG persönliche Freibeträge, § 13 Hausrat-FB | `berechneSchenkungssteuer(...)` (importiert Härtefall aus `erbschaftsteuer.ts`) |
 | `bafoeg-parameter.ts` **(neu, Prompt 121)** | SSOT für BAföG § 13/13a/14b/23/25/29/51 mit Stichtag-Switch-Skeleton (single-bucket `BAFOEG_AB_2024_08_01`, Platz für WS 2026/27) | `getAktuelleBafoegParameter(stichtag)`, `getAnrechnungsquote(geschwister, params)`, `BafoegParameter`, `BAFOEG_AB_2024_08_01` |
@@ -450,6 +457,15 @@ Bei Unsicherheit → mindestens zwei Extremwert-Testfälle durchrechnen (z. B. U
 
 15. **Slug-Kategorie-Intuition verführt zu falschen Pfaden** (Lehre aus Prompt 132.5 — 22 Drifts systemweit gefunden): Display-Name-Erwartung führt zu falscher Kategorie-Zuordnung beim hartkodierten Verlinken. Häufigste Muster: `promillerechner` wird unter `/gesundheit/` oder `/alltag/` erwartet, liegt aber in `/arbeit/`. `stundenlohn-rechner` wird unter `/arbeit/` erwartet, liegt aber in `/finanzen/`. `einheiten-umrechner` wird unter `/alltag/` erwartet, liegt aber in `/mathe/`. Lehre: Display-Name signalisiert **nicht** Kategorie — immer SSOT greppen. Auto-Schutz durch Slug-Drift-Scan (132.6) fängt neue Drifts auf, aber der Review-Schutz ist billiger als ein Build-Break.
 
+16. **Casing-Konsistenz Component-Datei vs. Import** (Lehre 25.04.2026 aus Prompt 145b → Commit 7dd9934): Lokales Windows-NTFS ist case-insensitive, **Vercel/Linux-Filesystem ist case-sensitive**. Wenn die Component-Datei lokal `MwStRueckerstattungRechner.tsx` heißt, aber git die Datei als `MwstRueckerstattungRechner.tsx` (kleines st) trackt, läuft der Build lokal grün und scheitert auf Vercel mit `Module not found`. **Entdeckung erst bei der nächsten Edit am File** (TypeScript `forceConsistentCasingInFileNames` greift nur, wenn der Import-Pfad neu aufgelöst wird). **Fix-Pattern:** Zwei-Schritt-`git mv` für case-only-Rename, weil case-only-Renames auf Windows nicht atomar sind:
+    ```bash
+    git mv File.tsx File_temp.tsx
+    git mv File_temp.tsx FILE.tsx
+    ```
+    **Vor jedem Edit an Component-Dateien:** mit `git ls-files | grep -i <name>` prüfen, ob das git-getrackte Casing zum lokalen Filesystem passt — Diskrepanzen sofort fixen, bevor sie sich in einem Folgeprompt rächen.
+
+17. **Welle-2-Audit-Pattern: Verify-Scripts pro Stufe + externe Quellen** (Lehre 25.04.2026 aus Welle 2 Stufe 2 Gesundheit, Prompts 140–144b): Pro Welle-2-Stufe entstehen **stufenspezifische Verify-Scripts** (`scripts/verify-<kategorie>-p1.ts`, `-p2.ts`, `-p3.ts`), die jeweils die P1-/P2-/P3-Findings des Audit-Berichts absichern. Alle Tests müssen gegen **externe Primärquellen** prüfen (WHO-Fact-Sheet, ESH-Leitlinie, DGE-Referenzwerte, IOM 2009, BGBl, BMF-Steuerrechner) — niemals zirkulär gegen die getestete Lib (Lehre #17 aus Welle-1-Stufe-4b/Prompt 120a). Beispiel-Stufe Gesundheit: 21 Tests (7+6+8) gegen externe Quellen; pro Folge-Prompt (141 P1-Fix, 142 P2-Label, 143 P2-SSOT, 144 P3-Polish, 144b Feature) wird das relevante Script grün gehalten und die anderen als Regressions-Check mitgelaufen.
+
 ## Unterhaltsrechner — Parameter 2026
 
 **Zentrale Konstanten in `lib/berechnungen/duesseldorfer-tabelle.ts`:**
@@ -594,3 +610,29 @@ Reihenfolge nach Freigabe: erst 85 (Warning wegräumen), dann 68 (CMP dazu).
 - **120d-sidebar** — Wohngeld-Erklärseite Kategorie-Sidebar wiederhergestellt (22.04.2026): Sidebar-Pattern 1:1 aus `app/[kategorie]/[rechner]/page.tsx` übernommen (`kategorien` + `getRechnerByKategorie` + `aria-current`), Wohngeld-Eintrag visuell als aktuelle Seite markiert (`AKTUELLER_SLUG = 'wohngeld-rechner'`), Breite auf `lg:w-64` angeglichen, AdSlot wandert in die Sidebar. Keine Content-Änderungen. Build 203/203 grün, Route weiterhin statisch gerendert. ✅
 - **122-amazon** — Amazon Partner-Programm (Tag `rechenfix-21`) integriert (22.04.2026): Rechtliches (Footer-Pflichthinweis, Datenschutz § 9b, Cookie-Banner Marketing-Kategorie); neue Komponente `components/AmazonBox.tsx` + Helper `lib/amazon-link.ts` (keyword-basierte Suchlinks, Tag nur bei Marketing-Consent); Integration in 16 Rechner (Kochen 6, Sport 2, Auto 2, Wohnen 3, Alltag 1, Arbeit 2). Keine AmazonBox auf Gesundheit/Finanzen/Mathe. 180-Tage-Frist für ersten Referral läuft bis ca. 19.10.2026. Vollständige Dokumentation in `docs/amazon-integration.md`. Build 203/203 grün. ✅
 - **122-doku-sync** — Doku-Sync nach Welle 1 Stufe 4b + Amazon (22.04.2026): CLAUDE.md + SKILL.md + Projekt-Referenz + Jahreswerte-Kalender auf Stand; neue Zeilen für BAföG- und Bürgergeld-Parameter, Amazon-Abschnitt, Anti-Patterns 9+10 (UI-Label-Rechtsbezug, statische Route-Sidebar), Regel 7+8 (Amazon-Consent, Zahlen-Erwartungen-Herkunft). Keine Code-Änderungen. ✅
+
+### Welle 2 Stufe 1 — Auto (23.04.2026)
+
+- **125a/125a-fix** — Midijob F-Faktor SSOT + Verdoppelung-Fix (Kinderlos-Zuschlag korrekt verdoppelt) ✅
+- **125b** — Firmenwagen § 6 Abs. 1 Nr. 4 S. 2 Nr. 5 EStG: UND-Bedingung CO₂≤50 ODER Reichweite≥80 ✅
+- **126** — Firmenwagen-Migration `/finanzen/firmenwagenrechner` → `/auto/firmenwagen-rechner` mit 301-Redirect; Slug-Drift-Aufräumen ✅
+- **127/128** — Slug- und Display-Name-Konvention dokumentiert (Duden-Logik im Display, SEO-Lesbarkeit im Slug, unabhängige Artefakte) ✅
+- **129/129-fix** — Grundsicherungsgeld H2-Bucket: altersgestaffeltes Schonvermögen § 12 Abs. 2 SGB II n.F. ab 01.07.2026 (BGBl. 2026 I Nr. 107) ✅
+- **130** — Welle 2 Stufe 1 Auto Audit: 10 Rechner, 4-Punkt-Methodik (Formel/Input/Edges/SSOT), 3 P1 + 5 P2 + 3 P3, Hot Spot KfzSteuerRechner ✅
+- **131** — Stufe-1 P1-Pass: KfzSteuerRechner — CO₂-Staffel § 9 Abs. 1 Nr. 2c (progressiv 2,00–4,00 €/g), § 3d Elektro-Befreiung bis 31.12.2035 (8. KraftStÄndG v. 04.12.2025), neue SSOT `kfz-steuer-parameter.ts`, UI-Text korrigiert ✅
+- **132** — Stufe-1 P2/P3-Polish: TaxiRechner Stand-Header, AfA Display-Polish, sonstige UX-Items ✅
+- **132.5/132.6** — Slug-Drift-Scan über 22 systemweite Drifts; `scripts/slug-drift-scan.mjs` als Prebuild-Hook eingebaut, Whitelist mit Karsten-OK-Pflicht ✅
+- **133/133-follow/133-follow-2** — TaxiRechner: Stadt-Tarife primärquellen-verifiziert (7 Großstädte), Stichtag-Switch + Phasen-Array für Köln 01.06.2026 + 01.03.2027 (9. ÄndVO via Amtsblatt 16/2026) ✅
+- **134** — Doku-Sync nach Welle 2 Stufe 1 (CLAUDE.md/SKILL.md/projekt-referenz) ✅
+
+### Welle 2 Stufe 2 — Gesundheit (24.–25.04.2026)
+
+- **140** — Audit-Bericht Gesundheit: 17 Rechner, 4-Punkt-Methodik, **2 P1 + 9 P2 + 9 P3** in `docs/audits/welle2-stufe2-gesundheit.md`. Hot Spots BMI (kein Alters-Gate für Kinder) + Kalorien (kein Mindestwert für zielKalorien). Keine erfundenen Formeln. ✅
+- **141** — P1.1 Kalorien-Floor + P1.2 BMI Alters-Gate <18: `zielKalorien = Math.max(zielKalorienRoh, grundumsatz)` mit Flag `zielGeklammertAufGrundumsatz`; UI-Hinweis bei Klammer; SSOT-Konstante `BMI_ADULT_MIN_AGE = 18` in `bmi.ts`; BMI-Rechner unterdrückt Kategorie-Anzeige + Optimal-Bereich + Skala bei `alter < 18`, zeigt stattdessen Info-Banner zu Kromeyer-Hauschild + Kinderärzt:in. Verify-Script `verify-gesundheit-p1.ts` 7/7. ✅
+- **142** — P2 Label-Präzisierungen: BMI-Prosa als NRC 1989 (nicht WHO-Standard), Kalorien-PAL als Harris-Benedict-Tradition (DGE-Werte 1,4–2,2 als Abgrenzung), Makro-Split 30/45/25 als „proteinbetont", Geburtstermin-Lib zeitzonen-sicher (`+'T00:00:00'`-Parser), Blutdruck-Klassifikation als ESH-2023/DHL (nicht WHO). Verify-Script `verify-gesundheit-p2.ts` 6/6. ✅
+- **143** — P2 SSOT-Konsolidierung mit bewusster Wert-Angleichung: BMI-Kategorien aus `bmi.ts` (zentral), `getOptimalerBereich` als SSOT (Idealgewicht-Spanne 175cm/25J jetzt 61,3–79,3 kg statt 61,3–76,6 kg, WHO-anschlussfähig); Voll-Fusion `geburtstermin.ts` + `ssw.ts` → `schwangerschaft.ts`; Public-API stabil; SSW-Semantik-Divergenz JSDoc-dokumentiert (geburtstermin: SSW ab LMP+Zyklus-Korrektur; ssw: ab reinem LMP). Verify-Script `verify-gesundheit-p3.ts` 8/8. ✅
+- **144/144b** — P2.9 Idealgewicht-Prosa entschärft + 9-Item P3-Sammelbatch (Schlaf 90-min als Mittelwert, Blutdruck ESC-2024-Hinweis, Schritte Paluch 2022, WHR NIH/AHA-Stufen, Wasserbedarf >4l-Hinweis, Körperfett Essentielles-Fett-Hinweis, Zyklus-Verhütungs-Disclaimer als amber-Box, Blutdruck sys<dia-UI-Hinweis, BMI-geschlecht-JSDoc, Raucher-Konstanten Review-Kommentar, LMP-Semantik-JSDoc) + Feature-Add 144b Perioden-Länge als Eingabeparameter im Zyklus-Rechner ✅
+- **145** — CosmosDirekt (Awin Merchant 11893) als 12. Affiliate-Programm in `components/AffiliateBox.tsx` ergänzt: Icon 🛡️, Farbe `#0D6EFD`, leerer Default-Deeplink (context-gesteuert wie check24); 15 Produkt-Deeplinks + Default; 15 kontextspezifische Taglines mit Testsieger-Hinweisen (Stiftung Warentest, Focus Money) ✅
+- **145b** — CosmosDirekt Phase 2: 30 Einbauten in 30 Rechnern (21 Group A Append nach bestehenden Boxen, 9 Group B Erstinstall; B6 MietRechner.tsx übersprungen — Datei existiert nicht). Sonderfälle: RentenRechner mit `variant="compact"` (4. Box), SparRechner mit `context="tagesgeld"` statt `sparplan` (verivox bedient sparplan). Bonus-Fix: Casing-Bug in `app/[kategorie]/[rechner]/page.tsx` (MwStRueckerstattungRechner-Import). AffiliateBox-Aufrufe gesamt 87 → 117 ✅
+- **7dd9934** (Hotfix nach 145b) — git mv für `MwStRueckerstattungRechner.tsx`-Casing (Vercel-Linux case-sensitive vs. Windows-NTFS case-insensitive), Zwei-Schritt-Rename ✅
+- **146** — Doku-Sync nach Welle-2-Stufen-1+2 + CosmosDirekt (CLAUDE.md / SKILL.md / projekt-referenz, Stand 25.04.2026) ✅
