@@ -134,26 +134,23 @@ export const TARIFE: StadtTarif[] = [
     ],
     warteMinute: 0.50,
     tarifHinweis:
-      'Einheitstarif rund um die Uhr (kein Nachtzuschlag). Großraumtaxi-Zuschlag: 6,00 €. Hinweis: Ab 01.06.2026 gilt ein neuer Tarif (Ratsbeschluss 19.03.2026).',
-    quelle: 'Stadt Köln, Rechtsverordnung über Beförderungsentgelte für Taxis',
+      'Einheitstarif rund um die Uhr (kein Nachtzuschlag). Großraumtaxi-Zuschlag: 6,00 €. Hinweis: Ab 01.06.2026 gilt ein neuer Tarif (9. Änderungsverordnung vom 02.04.2026, öffentl. Bekanntmachung 14.04.2026) — einheitlicher km-Preis 2,90 € ohne bisherige Staffelung ab 7 km.',
+    quelle: 'Stadt Köln, 9. Änderungsverordnung zum Kölner Taxitarif (02.04.2026)',
     quelleUrl:
-      'https://www.stadt-koeln.de/politik-und-verwaltung/presseservice/rat-beschliesst-anpassung-des-taxi-tarifs',
+      'https://www.stadt-koeln.de/mediaasset/content/bekanntmachungen/2026/2026.04.14_0066-01_koelner_taxitarif_2026.pdf',
     stand: '2022-09-01',
     gueltigBis: '2026-05-31',
     nachfolger: {
       grundTag: 4.90,
       grundNacht: 4.90,
       stufen: [
+        // § 2 Abs. 3 Nr. 2 der 9. ÄndVO v. 02.04.2026: einheitlicher km-Preis,
+        // die frühere 2-Stufen-Staffelung (bis 7 km / ab 8. km) ist aufgehoben.
         { abKm: 0, preisTag: 2.90, preisNacht: 2.90 },
-        // TODO: Staffelung km 7+ aus Kölner Amtsblatt verifizieren, sobald die
-        // Änderungsverordnung veröffentlicht ist (Ratsbeschluss 19.03.2026).
-        // Die Pressemitteilung nennt nur einen km-Preis; Annahme bis zur Klärung:
-        // Staffelung bleibt analog zum bisherigen Tarif mit 2,20 €/km ab 7 km.
-        { abKm: 7, preisTag: 2.20, preisNacht: 2.20 },
       ],
       warteMinute: 0.60,
       tarifHinweis:
-        'Einheitstarif rund um die Uhr (kein Nachtzuschlag). Erhöhung zum 01.06.2026 beschlossen. Zum 01.03.2027 erneute Anpassung: Grundpreis 5,00 €, km 3,00 €.',
+        'Einheitstarif rund um die Uhr (kein Nachtzuschlag). Einheitlicher km-Preis 2,90 € (§ 2 Abs. 3 Nr. 2 der 9. Änderungsverordnung vom 02.04.2026). Großraumtaxi-Zuschlag: 6,00 €. Tarifkorridor für Festpreise erweitert auf ±20 % (§ 2a). Zum 01.03.2027 in derselben Verordnung beschlossen: Grundpreis 5,00 €, km 3,00 €, Großraumtaxi +7,00 €.',
       stand: '2026-06-01',
     },
   },
