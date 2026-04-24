@@ -59,19 +59,21 @@ export function berechneGeburtstermin(eingabe: GeburtsterminEingabe): Geburtster
 
   if (eingabe.methode === 'periode') {
     if (!eingabe.periodeDatum) return null;
-    schwangerschaftsBeginn = new Date(eingabe.periodeDatum);
+    // Zeitzonen-sicherer Parser (analog ssw.ts): 'YYYY-MM-DD' + 'T00:00:00'
+    // wird als lokale Mitternacht interpretiert, sonst als UTC-Mitternacht.
+    schwangerschaftsBeginn = new Date(eingabe.periodeDatum + 'T00:00:00');
     const zyklusKorrektur = (eingabe.zyklusLaenge || 28) - 28;
     schwangerschaftsBeginn = addDays(schwangerschaftsBeginn, zyklusKorrektur);
   } else if (eingabe.methode === 'empfaengnis') {
     if (!eingabe.empfaengnisDatum) return null;
     // Empfängnis = ca. SSW 2+0, also Beginn = Empfängnis - 14 Tage
-    schwangerschaftsBeginn = addDays(new Date(eingabe.empfaengnisDatum), -14);
+    schwangerschaftsBeginn = addDays(new Date(eingabe.empfaengnisDatum + 'T00:00:00'), -14);
   } else if (eingabe.methode === 'ultraschall') {
     if (!eingabe.ultraschallDatum) return null;
     const wochen = eingabe.ultraschallWochen || 0;
     const tage = eingabe.ultraschallTage || 0;
     const vergangeneTage = wochen * 7 + tage;
-    schwangerschaftsBeginn = addDays(new Date(eingabe.ultraschallDatum), -vergangeneTage);
+    schwangerschaftsBeginn = addDays(new Date(eingabe.ultraschallDatum + 'T00:00:00'), -vergangeneTage);
   } else {
     return null;
   }

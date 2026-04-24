@@ -42,7 +42,7 @@ Die Weltgesundheitsorganisation (WHO) hat folgende Einteilung für Erwachsene fe
 - **Adipositas Grad II:** BMI 35,0 bis 39,9 — Hohes Gesundheitsrisiko. Behandlung dringend empfohlen.
 - **Adipositas Grad III:** BMI 40,0 und höher — Sehr hohes Gesundheitsrisiko (morbide Adipositas). Sofortige medizinische Betreuung ratsam.
 
-Für Kinder und Jugendliche gelten andere Referenzwerte, da sich der BMI mit dem Wachstum verändert. Auch für ältere Menschen wird der optimale BMI-Bereich etwas höher angesetzt, da ein leicht erhöhtes Gewicht im Alter als schützend gilt.
+Für Kinder und Jugendliche gelten andere Referenzwerte, da sich der BMI mit dem Wachstum verändert — dort sind BMI-Perzentilen nach Alter und Geschlecht (z. B. nach Kromeyer-Hauschild) maßgeblich. Für Erwachsene bleibt die WHO bei der einheitlichen Normalgewichts-Spanne von **18,5 bis 24,9** unabhängig vom Alter. Die in diesem Rechner zusätzlich angezeigte altersabhängige Staffelung (z. B. 19–24 für 19- bis 24-Jährige, etwa 24–29 für 65+) folgt einer Konvention aus der ernährungswissenschaftlichen Literatur (**NRC 1989** — National Research Council, *Diet and Health*) und ist als zusätzliche Orientierung zu verstehen, nicht als WHO-Empfehlung.
 
 **Kritik am BMI — wie aussagekräftig ist er?**
 
@@ -244,7 +244,7 @@ Die Formel berücksichtigt vier Schlüsselfaktoren: Körpergewicht in Kilogramm,
 
 **Wie beeinflusst das Aktivitätslevel den Kalorienbedarf?**
 
-Der Gesamtumsatz ergibt sich aus dem Grundumsatz multipliziert mit einem Aktivitätsfaktor (PAL-Wert: Physical Activity Level). Dieser Faktor reicht von 1,2 für überwiegend sitzende Tätigkeiten bis 1,9 für extreme körperliche Belastung. Bereits ein Wechsel von \"kaum aktiv\" zu \"leicht aktiv\" kann den täglichen Kalorienbedarf um **200 bis 300 kcal** erhöhen. Regelmäßige Bewegung steigert nicht nur den akuten Energieverbrauch, sondern erhöht langfristig auch den Grundumsatz durch den Aufbau von Muskelmasse.
+Der Gesamtumsatz ergibt sich aus dem Grundumsatz multipliziert mit einem Aktivitätsfaktor (PAL-Wert: Physical Activity Level). Unser Rechner nutzt die in Fitness- und Ernährungsliteratur verbreiteten **Harris-Benedict-Faktoren** von 1,2 (überwiegend sitzend) bis 1,9 (extreme körperliche Belastung). Die DGE (Deutsche Gesellschaft für Ernährung) setzt in ihren Referenzwerten etwas höhere PAL-Stufen von etwa 1,4 bis 2,2–2,4 an — beide Konventionen sind wissenschaftlich etabliert, die DGE-Werte fallen rund 10–15 % höher aus. Bereits ein Wechsel von \"kaum aktiv\" zu \"leicht aktiv\" kann den täglichen Kalorienbedarf um **200 bis 300 kcal** erhöhen. Regelmäßige Bewegung steigert nicht nur den akuten Energieverbrauch, sondern erhöht langfristig auch den Grundumsatz durch den Aufbau von Muskelmasse.
 
 **Kaloriendefizit: Wie viel ist gesund?**
 
@@ -252,7 +252,7 @@ Zum Abnehmen muss ein Kaloriendefizit erzielt werden — das bedeutet, weniger K
 
 **Makronährstoffverteilung: Protein, Kohlenhydrate, Fett**
 
-Neben der Gesamtkalorienmenge spielt die Verteilung auf die drei Makronährstoffe eine wichtige Rolle. Unser Rechner verwendet eine ausgewogene Verteilung: **30% Protein**, **45% Kohlenhydrate** und **25% Fett**. Proteine sind besonders wichtig beim Abnehmen, da sie die Muskelmasse erhalten und den Sättigungseffekt erhöhen. Kohlenhydrate liefern die Hauptenergie für Gehirn und Muskeln. Gesunde Fette sind essenziell für die Hormonproduktion und die Aufnahme fettlöslicher Vitamine.
+Neben der Gesamtkalorienmenge spielt die Verteilung auf die drei Makronährstoffe eine wichtige Rolle. Unser Rechner verwendet eine **proteinbetonte Verteilung** von **30 % Protein**, **45 % Kohlenhydrate** und **25 % Fett** — wie sie bei Abnehm- und Muskelaufbau-Zielen typischerweise empfohlen wird. Die allgemeine **DGE-Referenz** für Erwachsene liegt bei 10–20 % Protein, 50–55 % Kohlenhydrate und etwa 30 % Fett; für reine Erhaltungsernährung ohne sportliches Ziel ist die niedrigere Protein-Quote der DGE ausreichend. Proteine sind besonders wichtig beim Abnehmen, da sie die Muskelmasse erhalten und den Sättigungseffekt erhöhen. Kohlenhydrate liefern die Hauptenergie für Gehirn und Muskeln. Gesunde Fette sind essenziell für die Hormonproduktion und die Aufnahme fettlöslicher Vitamine.
 
 Für eine individuelle Anpassung der Makronährstoffverteilung — etwa bei einer ketogenen Diät oder bei Leistungssport — empfehlen wir die Rücksprache mit einem Ernährungsberater. Auch der [BMI-Rechner](/gesundheit/bmi-rechner) kann Ihnen helfen, Ihren aktuellen Körperstatus besser einzuordnen. Für eine ganzheitliche Betrachtung Ihrer Gesundheit werfen Sie auch einen Blick auf unseren [Schlafrechner](/gesundheit/schlaf-rechner), denn ausreichender Schlaf spielt eine entscheidende Rolle beim Stoffwechsel und der Gewichtsregulation.`,
     faq: [
@@ -408,7 +408,7 @@ Diese Formel berücksichtigt die Tatsache, dass der Stoffwechsel sich mit dem Al
 
 Die **BMI-basierte Idealgewicht-Spanne** gilt als die medizinisch fundierteste Methode. Sie basiert auf dem Body-Mass-Index (BMI), der von der Weltgesundheitsorganisation (WHO) als Standardmaß für die Gewichtsklassifikation anerkannt ist. Ein BMI zwischen 18,5 und 24,9 gilt als normalgewichtig.
 
-Unser Rechner geht noch einen Schritt weiter und verwendet **altersangepasste BMI-Bereiche**. Denn der optimale BMI verschiebt sich mit zunehmendem Alter leicht nach oben: Während für 19- bis 24-Jährige ein BMI von 19–24 ideal ist, liegt der Bereich für über 65-Jährige bei 24–29. Diese Anpassung spiegelt die medizinische Erkenntnis wider, dass ein etwas höheres Gewicht im Alter schützend wirkt. Für eine detaillierte BMI-Analyse nutzen Sie auch unseren [BMI-Rechner](/gesundheit/bmi-rechner).
+Unser Rechner geht noch einen Schritt weiter und verwendet zusätzlich eine **altersangepasste BMI-Staffelung**: Während für 19- bis 24-Jährige ein BMI von 19–24 als Zielbereich gilt, liegt er für über 65-Jährige bei 24–29. Diese Alters-Staffelung stammt aus der ernährungswissenschaftlichen Konvention **NRC 1989** (National Research Council) und wird von der WHO nicht offiziell übernommen — die WHO hält für alle Erwachsenen 18,5–24,9 aufrecht. Die Staffelung ist als zusätzliche Orientierung gedacht, die der empirischen Beobachtung folgt, dass im Alter ein etwas höheres Gewicht leicht schützend wirken kann. Für eine detaillierte BMI-Analyse nutzen Sie auch unseren [BMI-Rechner](/gesundheit/bmi-rechner).
 
 **Warum ändert sich das Idealgewicht mit dem Alter?**
 
@@ -1006,11 +1006,11 @@ Der WHR ist ein Screening-Werkzeug, keine Diagnose. Er funktioniert am besten be
   {
     slug: 'blutdruck-rechner',
     titel: 'Blutdruck-Rechner',
-    beschreibung: 'Blutdruckwerte einordnen: WHO-Klassifikation, Durchschnitt aus mehreren Messungen und Risikobewertung.',
+    beschreibung: 'Blutdruckwerte einordnen: Klassifikation nach ESH / Deutscher Hochdruckliga, Durchschnitt aus mehreren Messungen und Risikobewertung.',
     kategorie: 'Gesundheit',
     kategorieSlug: 'gesundheit',
-    metaTitle: 'Blutdruck-Rechner — Werte einordnen nach WHO',
-    metaDescription: 'Blutdruck einordnen nach WHO-Klassifikation — mit Durchschnitt aus mehreren Messungen, Pulsdruck und KI-Erklärung. Kostenlos.',
+    metaTitle: 'Blutdruck-Rechner — Werte einordnen nach ESH/DHL',
+    metaDescription: 'Blutdruck einordnen nach ESH-/DHL-Klassifikation — mit Durchschnitt aus mehreren Messungen, Pulsdruck und KI-Erklärung. Kostenlos.',
     keywords: ['blutdruck rechner', 'blutdruck einordnen', 'blutdruckwerte tabelle', 'hypertonie', 'blutdruck normal', 'blutdruck messen', 'systolisch diastolisch'],
     icon: '🩺',
     formel: 'Pulsdruck = Systolisch − Diastolisch | Mittlerer Druck = Diastolisch + Pulsdruck ÷ 3',
@@ -1019,9 +1019,9 @@ Der WHR ist ein Screening-Werkzeug, keine Diagnose. Er funktioniert am besten be
 
 Der Blutdruck beschreibt den Druck, den das Blut auf die Wände der Arterien ausübt. Er wird in Millimeter Quecksilbersäule (mmHg) angegeben und besteht aus zwei Werten: dem systolischen (oberen) und dem diastolischen (unteren) Wert. Der systolische Wert entsteht, wenn das Herz sich zusammenzieht und Blut in die Arterien pumpt. Der diastolische Wert wird gemessen, wenn das Herz sich entspannt und sich wieder mit Blut füllt.
 
-**WHO-Klassifikation der Blutdruckwerte**
+**Blutdruckklassifikation nach ESH / Deutscher Hochdruckliga**
 
-Die Weltgesundheitsorganisation (WHO) und die European Society of Hypertension (ESH) teilen Blutdruckwerte in sechs Kategorien ein:
+Die **European Society of Hypertension (ESH, Leitlinie 2023)** und die **Deutsche Hochdruckliga (DHL)** teilen Blutdruckwerte in sechs Kategorien ein (die WHO/ISH verwendet ein kompakteres 4-Stufen-Schema — in Deutschland ist jedoch die ESH-/DHL-Klassifikation maßgeblich):
 
 - **Optimal** (unter 120/80): Idealer Blutdruck mit dem geringsten kardiovaskulären Risiko.
 - **Normal** (120–129/80–84): Normaler Blutdruck, kein Handlungsbedarf.
@@ -1066,7 +1066,7 @@ Viele Faktoren beeinflussen den Blutdruck: Salzkonsum, Bewegung, Stress, Alkohol
       },
       {
         frage: 'Ersetzt der Rechner eine ärztliche Diagnose?',
-        antwort: 'Nein. Der Rechner ordnet Ihre Werte nach der WHO-Klassifikation ein — das ist eine Orientierung, keine Diagnose. Bei dauerhaft erhöhten Werten (ab 140/90 mmHg) oder Beschwerden wie Kopfschmerzen, Schwindel oder Sehstörungen sollten Sie unbedingt einen Arzt aufsuchen.',
+        antwort: 'Nein. Der Rechner ordnet Ihre Werte nach der ESH-/DHL-Klassifikation (Deutsche Hochdruckliga) ein — das ist eine Orientierung, keine Diagnose. Bei dauerhaft erhöhten Werten (ab 140/90 mmHg) oder Beschwerden wie Kopfschmerzen, Schwindel oder Sehstörungen sollten Sie unbedingt einen Arzt aufsuchen.',
       },
     ],
   },
