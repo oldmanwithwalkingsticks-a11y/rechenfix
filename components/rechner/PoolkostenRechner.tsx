@@ -5,6 +5,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
@@ -240,6 +241,8 @@ export default function PoolkostenRechner() {
 
       <CrossLink href="/wohnen/stromkosten-rechner" emoji="💡" text="Stromkosten-Rechner: Jahresverbrauch und Kosten" />
       <CrossLink href="/wohnen/photovoltaik-rechner" emoji="☀️" text="Photovoltaik-Rechner: Pool mit Solarstrom betreiben" />
+
+      <AffiliateBox programId="cosmosdirekt" context="wohngebaeude" />
 
       <ErgebnisAktionen
         ergebnisText={`Poolkosten: ${fmt0(ergebnis.gesamt)} €/Jahr (${fmt0(ergebnis.volumen)} m³ Pool) — ${fmt0(ergebnis.proMonat)} €/Monat`}

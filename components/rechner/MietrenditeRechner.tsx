@@ -315,6 +315,7 @@ export default function MietrenditeRechner() {
           </div>
 
           <AffiliateBox programId="check24" context="mietrendite" />
+          <AffiliateBox programId="cosmosdirekt" context="wohngebaeude" />
 
           <ErgebnisAktionen
             ergebnisText={`Mietrendite: Brutto ${fmtProzent(ergebnis.bruttomietrendite)}% | Netto ${fmtProzent(ergebnis.nettomietrendite)}% | Multiplikator: ${fmtProzent(ergebnis.mietmultiplikator)}${ergebnis.eigenkapitalrendite !== null ? ` | EK-Rendite: ${fmtProzent(ergebnis.eigenkapitalrendite)}%` : ''} | Cashflow: ${fmtEuro(ergebnis.monatsCashflow)} €/Monat`}

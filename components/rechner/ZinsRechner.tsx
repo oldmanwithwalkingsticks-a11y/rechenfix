@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
@@ -235,6 +236,8 @@ export default function ZinsRechner() {
 
           <CrossLink href="/finanzen/kreditrechner" emoji="💳" text="Kreditrechner: Zinsen und Rate bei Krediten" />
           <CrossLink href="/finanzen/etf-sparplanrechner" emoji="📈" text="ETF-Sparplan: Mehr Rendite als klassisches Sparen" />
+
+          <AffiliateBox programId="cosmosdirekt" context="tagesgeld" />
 
           <ErgebnisAktionen
             ergebnisText={`${fmt(nAnfang)} € Anfangskapital → ${fmt(ergebnis.endkapital)} € nach ${Math.floor(nLaufzeit)} Jahren (${fmt(ergebnis.gesamtzinsen)} € Zinsen)`}

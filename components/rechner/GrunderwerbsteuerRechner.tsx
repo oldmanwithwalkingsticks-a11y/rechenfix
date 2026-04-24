@@ -157,6 +157,7 @@ export default function GrunderwerbsteuerRechner() {
           <CrossLink href="/wohnen/baufinanzierung-rechner" emoji="🏗️" text="Finanzierung berechnen — Rate und Zinsen planen" />
           <CrossLink href="/finanzen/erbschaftsteuer-rechner" emoji="⚰️" text="Immobilie geerbt? Erbschaftsteuer berechnen" />
           <AffiliateBox programId="wiso" variant="compact" />
+          <AffiliateBox programId="cosmosdirekt" context="wohngebaeude" />
         </>
       )}
     </div>

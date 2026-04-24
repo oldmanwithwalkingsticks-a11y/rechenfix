@@ -5,6 +5,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 type Groesse = 'klein' | 'mittel' | 'gross' | 'riese';
@@ -151,6 +152,8 @@ export default function HundejahreRechner() {
       <CrossLink href="/alltag/tagerechner" emoji="📅" text="Tage zwischen zwei Daten" />
       <CrossLink href="/alltag/geburtstag-rechner" emoji="🎂" text="Geburtstag-Rechner" />
       <CrossLink href="/alltag/lebenszeit-rechner" emoji="⏳" text="Lebenszeit-Rechner" />
+
+      <AffiliateBox programId="cosmosdirekt" context="tierhalterhaftpflicht" />
 
       <ErgebnisAktionen
         ergebnisText={`Hundejahre: ${alter} Hundejahre entsprechen ${fmt(ergebnis.menschJahre)} Menschenjahren (${GROESSE_LABEL[groesse]})`}

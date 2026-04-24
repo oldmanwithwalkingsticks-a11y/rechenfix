@@ -305,6 +305,7 @@ export default function MutterschutzRechner() {
           <CrossLink href="/finanzen/elterngeld-rechner" emoji="💰" text="Elterngeld berechnen — wie viel steht Ihnen zu?" />
 
           <AffiliateBox programId="wiso" context="mutterschutz" />
+          <AffiliateBox programId="cosmosdirekt" context="risikolebensversicherung" />
 
           <ErgebnisAktionen
             ergebnisText={`Mutterschutz: ${fmtDatumKurz(ergebnis.beginn)} bis ${fmtDatumKurz(ergebnis.ende)} (${ergebnis.gesamtTage} Tage) | Einkommen: ${fmt(ergebnis.einkommenMonat)} €/Monat | Gesamt: ${fmt(ergebnis.gesamtEinkommen)} €`}

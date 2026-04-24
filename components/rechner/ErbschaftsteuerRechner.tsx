@@ -343,6 +343,7 @@ export default function ErbschaftsteuerRechner() {
 
       <AffiliateBox programId="wiso" context="erbschaft" />
       <AffiliateBox programId="smartsteuer" context="erbschaft" />
+      <AffiliateBox programId="cosmosdirekt" context="sterbegeld" />
 
       <AiExplain
         rechnerName="Erbschaftsteuer-Rechner"

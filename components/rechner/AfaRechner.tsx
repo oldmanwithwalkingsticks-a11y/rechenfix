@@ -387,6 +387,7 @@ export default function AfaRechner() {
 
       <div className="mt-6">
         <AffiliateBox programId="lexware" context="afa" />
+        <AffiliateBox programId="cosmosdirekt" context="wohngebaeude" />
       </div>
     </div>
   );

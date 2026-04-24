@@ -333,6 +333,7 @@ export default function KapitalertragsteuerRechner() {
       />
 
       <AffiliateBox programId="verivox" context="kapitalertrag" />
+      <AffiliateBox programId="cosmosdirekt" context="tagesgeld" />
 
       <AiExplain
         rechnerName="Kapitalertragsteuer-Rechner"

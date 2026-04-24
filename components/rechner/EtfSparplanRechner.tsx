@@ -320,6 +320,7 @@ export default function EtfSparplanRechner() {
           <CrossLink href="/finanzen/sparrechner" emoji="🏦" text="Klassischer Sparplan im Vergleich" />
 
           <AffiliateBox programId="verivox" context="etf" />
+          <AffiliateBox programId="cosmosdirekt" context="einmalanlage" />
 
           <ErgebnisAktionen
             ergebnisText={`ETF-Sparplan: ${fmt(nSparrate)} €/Monat, ${nAnlagedauer} Jahre, ${fmtDez(nRendite)}% Rendite → Endkapital: ${fmt(steuern ? ergebnis.endkapitalNachSteuern : ergebnis.endkapital)} € (Einzahlungen: ${fmt(ergebnis.summeEinzahlungen)} €, Rendite: +${fmt(ergebnis.renditeAnteil)} €)`}

@@ -136,6 +136,7 @@ export default function SparRechner() {
           <CrossLink href="/finanzen/rentenrechner" emoji="🏖️" text="Reicht das für die Rente? Rentenlücke berechnen" />
 
           <AffiliateBox programId="verivox" context="sparplan" />
+          <AffiliateBox programId="cosmosdirekt" context="tagesgeld" />
 
           <ErgebnisAktionen
             ergebnisText={`Endkapital nach ${ergebnis.jahre.length} Jahren: ${fmt(ergebnis.endkapital)} € (Eigenkapital: ${fmt(ergebnis.eigenkapital)} €, Zinserträge: ${fmt(ergebnis.gesamtzinsen)} €)`}

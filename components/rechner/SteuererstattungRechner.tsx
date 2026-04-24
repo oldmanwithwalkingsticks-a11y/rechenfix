@@ -295,6 +295,7 @@ export default function SteuererstattungRechner() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
             <AffiliateBox programId="wiso" context="steuererstattung" variant="full" />
             <AffiliateBox programId="smartsteuer" context="steuererstattung" variant="full" />
+            <AffiliateBox programId="cosmosdirekt" context="tagesgeld" />
           </div>
 
           <AiExplain

@@ -176,6 +176,7 @@ export default function KrankengeldRechner() {
       />
 
       <AffiliateBox programId="burdaZahn" context="krankengeld" />
+      <AffiliateBox programId="cosmosdirekt" context="berufsunfaehigkeit" />
     </div>
   );
 }

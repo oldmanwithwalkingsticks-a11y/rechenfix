@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 const FARBEN = ['bg-blue-500', 'bg-amber-500', 'bg-green-500', 'bg-purple-500', 'bg-red-400'];
@@ -229,6 +230,8 @@ export default function ReisekostenRechner() {
           )}
           <CrossLink href="/alltag/waehrungsrechner" emoji="💱" text="Währung umrechnen für die Reise" />
           <CrossLink href="/alltag/trinkgeld-rechner" emoji="💰" text="Trinkgeld im Ausland berechnen" />
+
+          <AffiliateBox programId="cosmosdirekt" context="reiseruecktritt" />
 
           <ErgebnisAktionen
             ergebnisText={`Reisekosten: ${fmt(ergebnis.gesamt)} € gesamt, ${fmt(ergebnis.proPerson)} € pro Person, ${fmt(ergebnis.proTag)} € pro Tag (${ergebnis.tage} Tage, ${ergebnis.personen} Pers.)`}

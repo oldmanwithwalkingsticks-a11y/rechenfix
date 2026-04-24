@@ -139,6 +139,7 @@ export default function VorfaelligkeitsentschaedigungRechner() {
 
       <div className="mt-6">
         <AffiliateBox programId="check24" context="vorfaelligkeit" />
+        <AffiliateBox programId="cosmosdirekt" context="risikolebensversicherung" />
       </div>
     </div>
   );

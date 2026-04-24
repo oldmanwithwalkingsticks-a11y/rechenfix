@@ -137,7 +137,7 @@ import BetriebskostenRechner from '@/components/rechner/BetriebskostenRechner';
 import FliesenbedarfRechner from '@/components/rechner/FliesenbedarfRechner';
 import LaminatRechner from '@/components/rechner/LaminatRechner';
 import WhrRechner from '@/components/rechner/WhrRechner';
-import MwstRueckerstattungRechner from '@/components/rechner/MwstRueckerstattungRechner';
+import MwstRueckerstattungRechner from '@/components/rechner/MwStRueckerstattungRechner';
 import PrimzahlRechner from '@/components/rechner/PrimzahlRechner';
 import QuersummeRechner from '@/components/rechner/QuersummeRechner';
 import PotenzRechner from '@/components/rechner/PotenzRechner';

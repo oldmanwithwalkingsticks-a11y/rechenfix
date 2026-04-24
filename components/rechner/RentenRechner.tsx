@@ -334,6 +334,7 @@ export default function RentenRechner() {
             <AffiliateBox programId="verivox" context="rente" variant="compact" />
           )}
           <AffiliateBox programId="burdaZahn" context="rente" variant="compact" />
+          <AffiliateBox programId="cosmosdirekt" context="altersvorsorge" variant="compact" />
 
           <ErgebnisAktionen
             ergebnisText={`Rentenrechner: Brutto-Rente ca. ${fmt(ergebnis.bruttoRente)} €/Monat | Netto ca. ${fmt(ergebnis.nettoRente)} € | ${fmtDez(ergebnis.gesamtRentenpunkte)} Rentenpunkte | Rentenlücke: ${ergebnis.rentenluecke > 0 ? fmt(ergebnis.rentenluecke) + ' €' : 'keine'}`}

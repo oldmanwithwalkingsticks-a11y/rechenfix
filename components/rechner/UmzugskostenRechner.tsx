@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import { AmazonBox } from '@/components/AmazonBox';
@@ -386,6 +387,8 @@ export default function UmzugskostenRechner() {
 
           <CrossLink href="/wohnen/mietrechner" emoji="🏠" text="Neue Miete berechnen" />
           <CrossLink href="/wohnen/nebenkosten-rechner" emoji="📋" text="Nebenkosten der neuen Wohnung" />
+
+          <AffiliateBox programId="cosmosdirekt" context="hausrat" />
 
           <ErgebnisAktionen
             ergebnisText={`Umzugskosten (${nWohnungsgroesse} m², ${nEntfernung} km, ${art === 'firma' ? 'Umzugsfirma' : 'selbst organisiert'}): ca. ${fmt(ergebnis.gesamtkosten)} €${art === 'firma' && ergebnis.vergleichSelbst ? ` | Selbst: ca. ${fmt(ergebnis.vergleichSelbst)} €` : ''}`}

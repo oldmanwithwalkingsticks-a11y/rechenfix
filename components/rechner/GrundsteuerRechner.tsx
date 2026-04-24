@@ -212,6 +212,7 @@ export default function GrundsteuerRechner() {
       />
 
       <AffiliateBox programId="wiso" context="grundsteuer" />
+      <AffiliateBox programId="cosmosdirekt" context="wohngebaeude" />
 
       <AiExplain
         rechnerName="Grundsteuer-Rechner"

@@ -258,6 +258,7 @@ export default function SchenkungssteuerRechner() {
 
       <AffiliateBox programId="wiso" context="schenkungssteuer" />
       <AffiliateBox programId="smartsteuer" context="schenkungssteuer" />
+      <AffiliateBox programId="cosmosdirekt" context="sterbegeld" />
 
       <AiExplain
         rechnerName="Schenkungssteuer-Rechner"

@@ -283,6 +283,7 @@ export default function KindergeldRechner() {
           />
 
           <AffiliateBox programId="wiso" context="kindergeld" />
+          <AffiliateBox programId="cosmosdirekt" context="juniorSparplan" />
 
           <AiExplain
             rechnerName="Kindergeld-Rechner"

@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 const fmt = (n: number) =>
@@ -440,6 +441,8 @@ export default function BudgetRechner() {
           <CrossLink href="/finanzen/sparrechner" emoji="💰" text="Überschuss anlegen – Sparrechner" />
           <CrossLink href="/alltag/abo-rechner" emoji="📱" text="Abos prüfen und Kosten senken" />
           <CrossLink href="/alltag/streaming-kosten-rechner" emoji="📺" text="Streaming-Kosten vergleichen" />
+
+          <AffiliateBox programId="cosmosdirekt" context="sparplan" />
 
           {/* 6. ErgebnisAktionen + AiExplain */}
           <ErgebnisAktionen

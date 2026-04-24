@@ -305,6 +305,7 @@ export default function ElterngeldRechner() {
       {ergebnis && !ergebnis.anspruchAusgeschlossen && (
         <AffiliateBox programId="wiso" variant="compact" />
       )}
+      <AffiliateBox programId="cosmosdirekt" context="risikolebensversicherung" />
     </div>
   );
 }

@@ -6,6 +6,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
@@ -187,6 +188,8 @@ export default function InflationsRechner() {
 
           <CrossLink href="/finanzen/sparrechner" emoji="🏦" text="Sparplan berechnen — Inflation mit Zinsen ausgleichen" />
           <CrossLink href="/finanzen/etf-sparplanrechner" emoji="📈" text="ETF-Sparplan: Rendite über Inflation" />
+
+          <AffiliateBox programId="cosmosdirekt" context="tagesgeld" />
 
           <ErgebnisAktionen
             ergebnisText={modus === 'kaufkraft'

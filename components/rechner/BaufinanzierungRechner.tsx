@@ -377,6 +377,7 @@ export default function BaufinanzierungRechner() {
           </div>
 
           <AffiliateBox programId="check24" context="baufinanzierung" />
+          <AffiliateBox programId="cosmosdirekt" context="bauherrenhaftpflicht" />
 
           <ErgebnisAktionen
             ergebnisText={`Baufinanzierung: ${fmt(nKaufpreis)} € Kaufpreis, ${fmt(ergebnis.darlehen)} € Darlehen → Rate: ${fmt(ergebnis.monatsrate)} €/Monat | Restschuld nach ${zinsbindung}J: ${fmt(ergebnis.restschuldNachZinsbindung)} € | Laufzeit: ~${Math.round(ergebnis.gesamtlaufzeitJahre)} Jahre`}

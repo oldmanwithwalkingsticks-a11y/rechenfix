@@ -5,6 +5,7 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import { getAktuellerRentenwert, RENTENWERT_AB_01_07_2026 } from '@/lib/berechnungen/rente';
@@ -213,6 +214,8 @@ export default function WitwenrenteRechner() {
 
           <CrossLink href="/finanzen/rentenrechner" emoji="👵" text="Eigene Rente berechnen" />
           <CrossLink href="/finanzen/buergergeld-rechner" emoji="💶" text="Bürgergeld prüfen — wenn die Witwenrente nicht reicht" />
+
+          <AffiliateBox programId="cosmosdirekt" context="risikolebensversicherung" />
 
           <ErgebnisAktionen
             ergebnisText={`${art === 'gross' ? 'Große' : 'Kleine'} Witwenrente: ${fmt(ergebnis.auszahlung)} €/Monat (Grundanspruch ${fmt(ergebnis.grundanspruch)} € − Anrechnung ${fmt(ergebnis.abzug)} €). Sterbevierteljahr: ${fmt(ergebnis.sterbevierteljahrMonat)} €/Monat.`}

@@ -294,6 +294,7 @@ export default function RiesterRechner() {
           <CrossLink href="/finanzen/rentenrechner" emoji="👵" text="Rentenlücke berechnen" />
 
           <AffiliateBox programId="verivox" context="riester" />
+          <AffiliateBox programId="cosmosdirekt" context="altersvorsorge" />
 
           <ErgebnisAktionen
             ergebnisText={`Riester: ${fmt(ergebnis.gesamtfoerderung)} €/Jahr Förderung bei ${fmt(ergebnis.eigenbeitrag)} € Eigenbeitrag (${fmtD(ergebnis.foerderquote)} % Förderquote). Zulagen ${fmt(ergebnis.effektiveZulagen)} € + Steuervorteil ${fmt(ergebnis.zusatzlicherSteuervorteil)} €.`}
