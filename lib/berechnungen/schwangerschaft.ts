@@ -96,6 +96,23 @@ function getTrimesterGeburtstermin(wochen: number): number {
   return 3;
 }
 
+/**
+ * Berechnet den voraussichtlichen Geburtstermin (ET) nach Naegele.
+ *
+ * Semantik-Hinweis: Wenn die Zykluslänge von 28 Tagen abweicht, wird die
+ * erweiterte Naegele-Regel angewandt — ET = LMP + (zyklus − 28) + 280 Tage.
+ * Die daraus im Ergebnis-Objekt ausgewiesene aktuelle SSW berücksichtigt
+ * die Zyklus-Korrektur ebenfalls (sie wird aus `schwangerschaftsBeginn` =
+ * LMP + Zyklus-Korrektur berechnet).
+ *
+ * Nicht zu verwechseln mit {@link berechneSsw} — dort wird die SSW streng
+ * ab dem reinen LMP ohne Zyklus-Korrektur berechnet, entsprechend der in
+ * der Gynäkologie gebräuchlichen Konvention für die Gestationsalter-Angabe.
+ * Beide Semantiken sind klinisch etabliert, dienen aber unterschiedlichen
+ * Zwecken (ET-Prognose vs. Gestationsalter-Ausweis). Die Divergenz ist
+ * bewusst erhalten; eine künstliche Vereinheitlichung würde einen der
+ * beiden medizinischen Standards brechen.
+ */
 export function berechneGeburtstermin(eingabe: GeburtsterminEingabe): GeburtsterminErgebnis | null {
   let schwangerschaftsBeginn: Date;
 
@@ -308,6 +325,21 @@ const VORSORGE: { label: string; sswAnfang: number; sswEnde: number }[] = [
   { label: 'Vorsorge wöchentlich bis Geburt',      sswAnfang: 36, sswEnde: 40 },
 ];
 
+/**
+ * Berechnet die aktuelle Schwangerschaftswoche (SSW) + Meilensteine aus LMP
+ * oder voraussichtlichem Geburtstermin.
+ *
+ * Semantik-Hinweis: Die SSW wird per gynäkologischer Konvention **ab dem
+ * reinen LMP** (erster Tag der letzten Menstruation) gerechnet, ohne Zyklus-
+ * Korrektur. Das ist der in der Schwangerschafts-Dokumentation, im Mutterpass
+ * und in Vorsorge-Terminen verwendete Maßstab — auch dann, wenn bekannt ist,
+ * dass die tatsächliche Empfängnis bei Zyklen ≠ 28 Tage früher oder später
+ * liegt. Der Zyklus-Korrektur-Input wirkt in dieser Funktion nur auf den
+ * abgeleiteten ET (Naegele mit erweitertem Term), nicht auf die SSW-Anzeige.
+ *
+ * Für die ET-Prognose mit dazu konsistenter SSW-Anzeige siehe
+ * {@link berechneGeburtstermin}.
+ */
 export function berechneSsw(eingabe: SswEingabe): SswErgebnis {
   const heute = eingabe.heute ?? new Date();
   heute.setHours(0, 0, 0, 0);

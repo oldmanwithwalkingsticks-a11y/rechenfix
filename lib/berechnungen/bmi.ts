@@ -8,6 +8,12 @@ export const BMI_ADULT_MIN_AGE = 18;
 export interface BmiEingabe {
   gewicht: number;
   groesse: number; // in cm
+  /**
+   * Reserviert für künftige geschlechtsspezifische BMI-Varianten
+   * (z. B. Fett-Schätzung, Muskelmasse-Adjustierung, Body-Composition).
+   * Wird aktuell in der BMI-Berechnung nicht genutzt — die klassische
+   * Quetelet-Formel kg/m² ist geschlechtsneutral.
+   */
   geschlecht: 'maennlich' | 'weiblich';
   alter?: number;
 }
@@ -59,6 +65,8 @@ export function getOptimalerBereich(alter?: number): { min: number; max: number 
 }
 
 export function berechneBmi(eingabe: BmiEingabe): BmiErgebnis | null {
+  // `geschlecht` ist im Interface reserviert, fließt aber nicht in die
+  // BMI-Formel ein (Quetelet 1832 ist geschlechtsneutral).
   const { gewicht, groesse, alter } = eingabe;
   if (gewicht <= 0 || groesse <= 0) return null;
 

@@ -53,6 +53,22 @@ export default function BlutdruckRechner() {
     }
   }, [modus, sys1, dia1, messungen]);
 
+  // P3.7b: Erkenne vertauschte Messungen (diastolisch > systolisch).
+  // Die Lib verwirft solche Messungen still (blutdruck.ts: systolisch > diastolisch-Filter).
+  // Hier warnen wir den User, falls mindestens eine eingegebene Messung so aussieht.
+  const hatVertauschteMessung = useMemo(() => {
+    if (modus === 'eine') {
+      const s = parseDeutscheZahl(sys1);
+      const d = parseDeutscheZahl(dia1);
+      return s > 0 && d > 0 && s < d;
+    }
+    return messungen.some((m) => {
+      const s = parseDeutscheZahl(m.sys);
+      const d = parseDeutscheZahl(m.dia);
+      return s > 0 && d > 0 && s < d;
+    });
+  }, [modus, sys1, dia1, messungen]);
+
   const updateMessung = (index: number, feld: 'sys' | 'dia', wert: string) => {
     setMessungen(prev => prev.map((m, i) => i === index ? { ...m, [feld]: wert } : m));
   };
@@ -99,6 +115,14 @@ export default function BlutdruckRechner() {
           </div>
         )}
       </div>
+
+      {hatVertauschteMessung && (
+        <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-4">
+          <p className="text-sm text-amber-800 dark:text-amber-300">
+            <strong>Hinweis:</strong> Bei {modus === 'eine' ? 'Ihrer Messung' : 'mindestens einer Ihrer Messungen'} ist der diastolische Wert höher als der systolische. Werte möglicherweise vertauscht? Systolisch ist der obere, diastolisch der untere Wert.
+          </p>
+        </div>
+      )}
 
       {ergebnis && (
         <>

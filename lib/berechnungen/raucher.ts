@@ -20,6 +20,11 @@ export interface RaucherErgebnis {
   investmentWert: number;
 }
 
+// Review: jährlich prüfen. Stand 2026.
+// Die Referenzpreise (Urlaub / iPhone / Kleinwagen) driften mit der Inflation,
+// die angenommene ETF-Rendite (5 % p. a.) entspricht dem langjährigen Mittel
+// breit diversifizierter Aktien-Indizes vor Steuern. Bei größeren Marktverschiebungen
+// (z. B. nach einem Audit oder Preis-Sprung) hier aktualisieren.
 const URLAUB_PREIS = 2000;
 const IPHONE_PREIS = 1200;
 const KLEINWAGEN_SCHWELLE = 15000;

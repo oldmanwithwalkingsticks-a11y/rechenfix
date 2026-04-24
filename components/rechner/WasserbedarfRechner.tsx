@@ -117,6 +117,15 @@ export default function WasserbedarfRechner() {
             </p>
           </div>
 
+          {/* Hyponatriämie-Hinweis bei > 4 l/Tag */}
+          {ergebnis.gesamtMl > 4000 && (
+            <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-xl p-4 mb-6">
+              <p className="text-sm text-blue-800 dark:text-blue-300">
+                <strong>Hinweis:</strong> Werte über 4 Liter pro Tag können bei normaler Aktivität zu einer Verdünnung des Natriumspiegels (Hyponatriämie) führen. Bei sehr hohem errechnetem Bedarf — z. B. durch extreme Eingaben — bitte die Annahmen überprüfen oder ärztlichen Rat einholen.
+              </p>
+            </div>
+          )}
+
           {/* Gläser-Visualisierung */}
           <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-blue-800 dark:text-blue-300 mb-3">Ihre {ergebnis.anzahlGlaeser} Gläser am Tag</h2>

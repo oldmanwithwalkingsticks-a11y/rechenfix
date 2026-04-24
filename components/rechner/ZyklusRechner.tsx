@@ -208,9 +208,14 @@ export default function ZyklusRechner() {
         </>
       )}
 
-      <p className="text-xs text-gray-500 mb-6">
-        ⚠️ Diese Berechnung basiert auf Durchschnittswerten. Der tatsächliche Eisprung kann variieren. Dieser Rechner ist KEIN zuverlässiges Verhütungsmittel und KEINE Garantie für eine Schwangerschaft.
-      </p>
+      <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-6">
+        <p className="text-sm font-semibold text-amber-800 dark:text-amber-300 mb-2">
+          Wichtig — nicht zur Verhütung geeignet
+        </p>
+        <p className="text-sm text-amber-800 dark:text-amber-300">
+          Dieser Rechner liefert eine statistische Orientierung über mögliche fruchtbare Tage. Die tatsächliche Fruchtbarkeit variiert je Zyklus und Person erheblich. Zur Empfängnisverhütung bitte ausschließlich medizinisch anerkannte Methoden verwenden (Kondom, hormonelle Verhütung, IUP, NFP nach ärztlicher Schulung). Dieser Rechner ist keine Garantie für oder gegen eine Schwangerschaft.
+        </p>
+      </div>
 
       <CrossLink href="/gesundheit/geburtstermin-rechner" emoji="📅" text="Geburtstermin-Rechner" />
       <CrossLink href="/gesundheit/ssw-rechner" emoji="🤰" text="SSW-Rechner" />

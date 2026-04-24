@@ -186,6 +186,10 @@ Die optimale Schlafdauer hängt vom Alter ab. Die Empfehlungen der National Slee
 
 Für die meisten Erwachsenen bedeutet das 5 Schlafzyklen (7,5 Stunden) — das ist der optimale Wert, der sowohl genug Tiefschlaf als auch ausreichend REM-Schlaf garantiert.
 
+**90-Minuten-Zyklus: Mittelwert, keine Konstante**
+
+Dieser Rechner nutzt die verbreitete 90-Minuten-Annahme für einen kompletten Schlafzyklus. In der Schlafforschung ist das ein **Mittelwert** — die tatsächliche Zykluslänge variiert individuell zwischen **70 und 120 Minuten** und kann sich im Laufe der Nacht sogar pro Zyklus unterscheiden (frühe Zyklen sind meist tiefschlaf-lastig, spätere REM-lastig). Die 90-Minuten-Einteilung liefert eine praktikable Annäherung, keine exakte Zielzeit.
+
 **Tipps für besseren Schlaf**
 
 Die sogenannte Schlafhygiene hat großen Einfluss auf Ihre Schlafqualität:
@@ -404,9 +408,9 @@ Die Creff-Formel ist eine Weiterentwicklung der Broca-Formel und berücksichtigt
 
 Diese Formel berücksichtigt die Tatsache, dass der Stoffwechsel sich mit dem Alter verändert und dass ein kräftiger Körperbau von Natur aus ein höheres Gewicht mit sich bringt. Die Creff-Formel ist damit differenzierter als die Broca-Formel, basiert jedoch nicht auf epidemiologischen Studien.
 
-**BMI-basierte Spanne: Medizinisch am aussagekräftigsten**
+**BMI-basierte Spanne: sinnvolle Orientierung für die Allgemeinbevölkerung**
 
-Die **BMI-basierte Idealgewicht-Spanne** gilt als die medizinisch fundierteste Methode. Sie basiert auf dem Body-Mass-Index (BMI), der von der Weltgesundheitsorganisation (WHO) als Standardmaß für die Gewichtsklassifikation anerkannt ist. Ein BMI zwischen 18,5 und 24,9 gilt als normalgewichtig.
+Die **BMI-basierte Idealgewicht-Spanne** basiert auf dem Body-Mass-Index, den die WHO als Standardmaß für die Gewichtsklassifikation etabliert hat. Ein BMI zwischen 18,5 und 24,9 gilt für Erwachsene als normalgewichtig. Für die breite Allgemeinbevölkerung ist diese Spanne eine sinnvolle erste Orientierung — sie ignoriert allerdings die Körperzusammensetzung (Muskel- vs. Fettmasse), Körperbau-Typen und ethnische Unterschiede. Für Leistungssportler:innen, sehr muskulöse Menschen oder spezielle Bevölkerungsgruppen ergänzen andere Kennzahlen (Körperfettanteil, Taillenumfang, WHR) das Bild.
 
 Unser Rechner geht noch einen Schritt weiter und verwendet zusätzlich eine **altersangepasste BMI-Staffelung**: Während für 19- bis 24-Jährige ein BMI von 18,5–24,9 als Zielbereich gilt, liegt er für über 65-Jährige bei 24,0–29,9. Diese Alters-Staffelung stammt aus der ernährungswissenschaftlichen Konvention **NRC 1989** (National Research Council) und wird von der WHO nicht offiziell übernommen — die WHO hält für alle Erwachsenen 18,5–24,9 aufrecht. Die Staffelung ist als zusätzliche Orientierung gedacht, die der empirischen Beobachtung folgt, dass im Alter ein etwas höheres Gewicht leicht schützend wirken kann. Für eine detaillierte BMI-Analyse nutzen Sie auch unseren [BMI-Rechner](/gesundheit/bmi-rechner).
 
@@ -953,9 +957,9 @@ Messen Sie morgens nüchtern, im Stehen und in Unterwäsche. Ziehen Sie den Bauc
 
 Beide Maße sollten Sie mehrmals nehmen und den Durchschnitt verwenden, um Messfehler zu minimieren.
 
-**WHO-Grenzwerte für das WHR**
+**WHR-Grenzwerte: WHO-Schwelle + NIH/AHA-3-Stufen-Einordnung**
 
-Die Weltgesundheitsorganisation (WHO) definiert folgende Grenzwerte für ein erhöhtes Risiko kardiovaskulärer Erkrankungen:
+Die **Weltgesundheitsorganisation (WHO)** kennt für das WHR nur zwei Stufen: unterhalb und oberhalb der Risiko-Schwelle (Frauen ≥ 0,85, Männer ≥ 1,00). Die in diesem Rechner verwendete **3-Stufen-Einordnung** (niedrig / moderat / erhöht) folgt der Konvention von **NIH und AHA** (National Institutes of Health / American Heart Association), die eine Zwischenstufe „moderates Risiko" für früh auffällige Werte definieren:
 - **Frauen:** WHR unter 0,80 gilt als niedriges Risiko, 0,80 bis 0,84 als moderat und ab 0,85 als erhöht.
 - **Männer:** WHR unter 0,90 gilt als niedriges Risiko, 0,90 bis 0,99 als moderat und ab 1,00 als erhöht.
 
@@ -1046,7 +1050,11 @@ Für aussagekräftige Ergebnisse sollten Sie mehrere Messungen zu verschiedenen 
 
 **Lebensstil und Blutdruck**
 
-Viele Faktoren beeinflussen den Blutdruck: Salzkonsum, Bewegung, Stress, Alkohol, Übergewicht und Rauchen. Eine Gewichtsreduktion von 10 kg kann den systolischen Wert um 5–20 mmHg senken. Regelmäßige Ausdauerbewegung (30 Minuten, 5× pro Woche) senkt den Blutdruck um 4–9 mmHg. Eine salzarme Ernährung (unter 6 g pro Tag) bringt 2–8 mmHg.`,
+Viele Faktoren beeinflussen den Blutdruck: Salzkonsum, Bewegung, Stress, Alkohol, Übergewicht und Rauchen. Eine Gewichtsreduktion von 10 kg kann den systolischen Wert um 5–20 mmHg senken. Regelmäßige Ausdauerbewegung (30 Minuten, 5× pro Woche) senkt den Blutdruck um 4–9 mmHg. Eine salzarme Ernährung (unter 6 g pro Tag) bringt 2–8 mmHg.
+
+**Hinweis zur Klassifikation: ESH 2023 vs. ESC 2024**
+
+Die **European Society of Cardiology (ESC)** hat 2024 eine neuere Leitlinie mit einem 3-Stufen-Schema (Non-elevated / Elevated / Hypertension) veröffentlicht. Die **Deutsche Hochdruckliga (DHL)** bleibt in ihrer aktuellen Empfehlung beim bewährten **6-Kategorien-Schema der ESH 2023** — und dieses Schema verwendet auch der Rechner. Wer die neueren ESC-2024-Kategorien braucht, sollte direkt die Leitlinie der European Society of Cardiology konsultieren.`,
     faq: [
       {
         frage: 'Was ist ein normaler Blutdruck?',
@@ -1094,9 +1102,9 @@ Exaktere Werte erhält man durch eigene Messung: 100 Schritte auf einer ebenen S
 
 **10.000 Schritte — woher kommt das Ziel?**
 
-Das 10.000-Schritte-Ziel stammt ursprünglich aus einer japanischen Marketingkampagne der 1960er-Jahre für einen Schrittzähler namens „Manpo-kei" (万歩計 = 10.000-Schritte-Messgerät). Inzwischen bestätigt die Forschung: 7.000–10.000 Schritte pro Tag senken das Risiko für Herz-Kreislauf-Erkrankungen, Diabetes Typ 2 und Gesamtsterblichkeit signifikant.
+Die 10.000er-Marke ist eine **populäre Faustregel, kein medizinischer Schwellenwert**. Sie stammt aus einer japanischen Marketingkampagne der 1960er-Jahre für den Schrittzähler „Manpo-kei" (万歩計 = 10.000-Schritte-Messgerät). Aktuelle Studien (**Paluch et al., The Lancet Public Health 2022**, und JAMA-Meta-Analyse 2023) zeigen, dass signifikante Gesundheitsvorteile bereits ab **4.000–7.000 Schritten/Tag** messbar sind: Mit jedem zusätzlichen 1.000 Schritte sinkt das Sterblichkeitsrisiko weiter, der Effekt flacht ab etwa 7.500–10.000 Schritten ab.
 
-Eine Meta-Analyse aus 2023 zeigt: Bereits 4.000 Schritte pro Tag reduzieren das Sterblichkeitsrisiko messbar. Mit jedem zusätzlichen 1.000 Schritte sinkt das Risiko um weitere 15 %. Der Effekt flacht ab etwa 10.000 Schritten ab — mehr hilft, aber der größte Nutzen liegt im Übergang von wenig zu mäßig aktiv.
+Die 10.000er-Marke bleibt als praktikable Zielsetzung sinnvoll — nicht weil sie ein Schwellenwert wäre, sondern weil sie leicht zu merken ist und den größten Teil des kardiovaskulären Nutzens abdeckt. Der größte Sprung kommt beim Übergang von „wenig" zu „mäßig aktiv", nicht zwischen 9.000 und 11.000 Schritten.
 
 **Kalorienverbrauch beim Gehen**
 

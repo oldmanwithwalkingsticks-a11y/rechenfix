@@ -294,6 +294,15 @@ export default function KoerperfettRechner() {
             </table>
           </div>
 
+          {/* Essentielles-Fett-Hinweis (sehr niedriger KFA) */}
+          {ergebnis.kategorie === 'Essentielles Fett' && (
+            <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-xl p-4 mb-6">
+              <p className="text-sm text-blue-800 dark:text-blue-300">
+                <strong>Hinweis:</strong> Körperfettanteile in diesem Bereich sind typisch für Leistungssportler:innen in Wettkampfphasen. Bei nicht-sportlichem Hintergrund oder dauerhaft niedrigen Werten kann ein Arztbesuch ratsam sein — sehr niedriger Körperfettanteil kann Hormonhaushalt, Immunsystem und Knochendichte beeinträchtigen.
+              </p>
+            </div>
+          )}
+
           {/* Hinweis */}
           <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-6">
             <p className="text-amber-800 dark:text-amber-300 text-xs">
