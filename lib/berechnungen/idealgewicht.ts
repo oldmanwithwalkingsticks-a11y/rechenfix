@@ -1,3 +1,5 @@
+import { getOptimalerBereich } from './bmi';
+
 export type Geschlecht = 'frau' | 'mann';
 export type Koerperbau = 'schmal' | 'normal' | 'kraeftig';
 
@@ -28,16 +30,6 @@ export interface IdealgewichtErgebnis {
   statusFarbe: 'green' | 'orange';
 }
 
-function getAltersBmiSpanne(alter: number): { unten: number; oben: number } {
-  if (alter < 19) return { unten: 19, oben: 24 };
-  if (alter <= 24) return { unten: 19, oben: 24 };
-  if (alter <= 34) return { unten: 20, oben: 25 };
-  if (alter <= 44) return { unten: 21, oben: 26 };
-  if (alter <= 54) return { unten: 22, oben: 27 };
-  if (alter <= 64) return { unten: 23, oben: 28 };
-  return { unten: 24, oben: 29 };
-}
-
 function getKoerperbauKoeffizient(kb: Koerperbau): number {
   if (kb === 'schmal') return 0.9;
   if (kb === 'kraeftig') return 1.1;
@@ -61,10 +53,10 @@ export function berechneIdealgewicht(eingabe: IdealgewichtEingabe): Idealgewicht
   const kbKoeff = getKoerperbauKoeffizient(koerperbau);
   const creff = round1(((groesse - 100) + (alter / 10)) * 0.9 * kbKoeff);
 
-  // 3. BMI-basierte Spanne
+  // 3. BMI-basierte Spanne (SSOT: getOptimalerBereich aus bmi.ts seit Prompt 143)
   const groesseM = groesse / 100;
   const groesseM2 = groesseM * groesseM;
-  const { unten: bmiUnten, oben: bmiOben } = getAltersBmiSpanne(alter);
+  const { min: bmiUnten, max: bmiOben } = getOptimalerBereich(alter);
   const gewichtUnten = round1(bmiUnten * groesseM2);
   const gewichtOben = round1(bmiOben * groesseM2);
 

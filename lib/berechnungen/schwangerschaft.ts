@@ -1,3 +1,218 @@
+/**
+ * SSOT für Schwangerschaftsberechnungen — konsolidiert aus früheren Libs
+ * `geburtstermin.ts` und `ssw.ts` (seit Prompt 143, Welle 2 Stufe 2).
+ *
+ * Enthält:
+ *   - Shared Helper: `parseDatum`, `addDays`, `diffDays` (zeitzonen-sicher)
+ *   - Naegele-Kern: LMP-basiert (+280 Tage) mit optionaler Zykluslängen-Korrektur
+ *   - Geburtstermin-API: `berechneGeburtstermin(eingabe)` + Typen
+ *   - SSW-API: `berechneSsw(eingabe)` + Typen + `defaultPeriodeDatum` / `defaultTerminDatum`
+ *
+ * Hinweis zur SSW-Semantik (vor-143-Divergenz, bewusst erhalten):
+ *  - `berechneGeburtstermin` berechnet die aktuelle SSW ab `schwangerschaftsBeginn`
+ *    (= LMP + Zyklus-Korrektur). Die Zyklus-Korrektur wirkt also auch auf die SSW.
+ *  - `berechneSsw` berechnet die SSW streng ab LMP (medizinischer Standard:
+ *    „seit letzter Periode"). Zyklus-Korrektur wirkt nur auf den ET.
+ *  Die Differenz beträgt wenige Tage. Eine Vereinheitlichung (z. B. beide auf
+ *  reinen LMP) ist ein P3-Kandidat für Prompt 144 und wird hier nicht
+ *  ausgeführt, um kein stilles Verhaltens-Change einzuführen.
+ */
+
+// ---------- Shared Helpers ----------
+
+/**
+ * Zeitzonen-sicherer Datums-Parser (seit Prompt 142 P2.4).
+ * `new Date('YYYY-MM-DD')` wird von JS als UTC-Mitternacht interpretiert,
+ * was in negativen Zeitzonen zum Vortag führt. `+ 'T00:00:00'` zwingt
+ * den Parser zu lokaler Mitternacht — konsistent mit `heute = new Date()`.
+ */
+export function parseDatum(s: string): Date | null {
+  if (!s) return null;
+  const d = new Date(s + 'T00:00:00');
+  return isNaN(d.getTime()) ? null : d;
+}
+
+function addDays(date: Date, days: number): Date {
+  const result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result;
+}
+
+function diffDays(a: Date, b: Date): number {
+  const msPerDay = 86400000;
+  return Math.floor((a.getTime() - b.getTime()) / msPerDay);
+}
+
+function fmtDatum(d: Date): string {
+  return d.toLocaleDateString('de-DE', { day: '2-digit', month: 'long', year: 'numeric' });
+}
+
+// ============================================================
+// Geburtstermin-API (vormals lib/berechnungen/geburtstermin.ts)
+// ============================================================
+
+export type Methode = 'periode' | 'empfaengnis' | 'ultraschall';
+
+export interface GeburtsterminEingabe {
+  methode: Methode;
+  // Periode
+  periodeDatum?: string;
+  zyklusLaenge?: number;
+  // Empfängnis
+  empfaengnisDatum?: string;
+  // Ultraschall
+  ultraschallDatum?: string;
+  ultraschallWochen?: number;
+  ultraschallTage?: number;
+}
+
+export interface Meilenstein {
+  icon: string;
+  label: string;
+  datum: Date;
+  beschreibung: string;
+  link?: { text: string; href: string };
+  aktiv: boolean;
+  vergangen: boolean;
+}
+
+export interface GeburtsterminErgebnis {
+  geburtstermin: Date;
+  schwangerschaftsBeginn: Date;
+  aktuelleSSW: number;
+  aktuelleTage: number;
+  trimester: number;
+  verbleibendeTage: number;
+  fortschrittProzent: number;
+  empfaengnisZeitraum: Date;
+  meilensteine: Meilenstein[];
+  terminVerstrichen: boolean;
+  ueberTermin: boolean;
+}
+
+function getTrimesterGeburtstermin(wochen: number): number {
+  if (wochen <= 12) return 1;
+  if (wochen <= 27) return 2;
+  return 3;
+}
+
+export function berechneGeburtstermin(eingabe: GeburtsterminEingabe): GeburtsterminErgebnis | null {
+  let schwangerschaftsBeginn: Date;
+
+  if (eingabe.methode === 'periode') {
+    if (!eingabe.periodeDatum) return null;
+    const p = parseDatum(eingabe.periodeDatum);
+    if (!p) return null;
+    schwangerschaftsBeginn = p;
+    const zyklusKorrektur = (eingabe.zyklusLaenge || 28) - 28;
+    schwangerschaftsBeginn = addDays(schwangerschaftsBeginn, zyklusKorrektur);
+  } else if (eingabe.methode === 'empfaengnis') {
+    if (!eingabe.empfaengnisDatum) return null;
+    const e = parseDatum(eingabe.empfaengnisDatum);
+    if (!e) return null;
+    // Empfängnis = ca. SSW 2+0, also Beginn = Empfängnis - 14 Tage
+    schwangerschaftsBeginn = addDays(e, -14);
+  } else if (eingabe.methode === 'ultraschall') {
+    if (!eingabe.ultraschallDatum) return null;
+    const u = parseDatum(eingabe.ultraschallDatum);
+    if (!u) return null;
+    const wochen = eingabe.ultraschallWochen || 0;
+    const tage = eingabe.ultraschallTage || 0;
+    const vergangeneTage = wochen * 7 + tage;
+    schwangerschaftsBeginn = addDays(u, -vergangeneTage);
+  } else {
+    return null;
+  }
+
+  const geburtstermin = addDays(schwangerschaftsBeginn, 280);
+  const heute = new Date();
+  heute.setHours(0, 0, 0, 0);
+
+  const vergangen = diffDays(heute, schwangerschaftsBeginn);
+  const aktuelleSSW = Math.floor(vergangen / 7);
+  const aktuelleTage = vergangen % 7;
+  const trimester = getTrimesterGeburtstermin(aktuelleSSW);
+  const verbleibendeTage = diffDays(geburtstermin, heute);
+  const fortschrittProzent = Math.min(Math.max((vergangen / 280) * 100, 0), 100);
+
+  // Empfängniszeitraum: ca. 2 Wochen nach Beginn (Eisprung)
+  const empfaengnisZeitraum = addDays(schwangerschaftsBeginn, 14);
+
+  const terminVerstrichen = verbleibendeTage < 0;
+  const ueberTermin = aktuelleSSW >= 42;
+
+  // Meilensteine
+  const meilensteine: Meilenstein[] = [
+    {
+      icon: '🔬',
+      label: 'Ersttrimester-Screening',
+      datum: addDays(schwangerschaftsBeginn, 11 * 7),
+      beschreibung: 'SSW 11–14: Nackenfaltenmessung und Bluttest',
+      aktiv: aktuelleSSW >= 11 && aktuelleSSW <= 14,
+      vergangen: aktuelleSSW > 14,
+    },
+    {
+      icon: '🍼',
+      label: 'Organscreening (Feindiagnostik)',
+      datum: addDays(schwangerschaftsBeginn, 19 * 7),
+      beschreibung: 'SSW 19–22: Detaillierte Ultraschalluntersuchung',
+      aktiv: aktuelleSSW >= 19 && aktuelleSSW <= 22,
+      vergangen: aktuelleSSW > 22,
+    },
+    {
+      icon: '💉',
+      label: 'Rhesusfaktor-Test',
+      datum: addDays(schwangerschaftsBeginn, 24 * 7),
+      beschreibung: 'SSW 24–27: Bluttest auf Antikörper',
+      aktiv: aktuelleSSW >= 24 && aktuelleSSW <= 27,
+      vergangen: aktuelleSSW > 27,
+    },
+    {
+      icon: '🏥',
+      label: 'Mutterschutz-Beginn',
+      datum: addDays(geburtstermin, -42),
+      beschreibung: '6 Wochen vor dem errechneten Termin',
+      link: { text: 'Elterngeld-Rechner →', href: '/finanzen/elterngeld-rechner' },
+      aktiv: false,
+      vergangen: heute >= addDays(geburtstermin, -42),
+    },
+    {
+      icon: '👶',
+      label: 'Errechneter Geburtstermin',
+      datum: geburtstermin,
+      beschreibung: 'Voraussichtlicher Entbindungstermin',
+      aktiv: false,
+      vergangen: terminVerstrichen,
+    },
+    {
+      icon: '🏥',
+      label: 'Mutterschutz-Ende',
+      datum: addDays(geburtstermin, 56),
+      beschreibung: '8 Wochen nach dem errechneten Termin',
+      aktiv: false,
+      vergangen: heute >= addDays(geburtstermin, 56),
+    },
+  ];
+
+  return {
+    geburtstermin,
+    schwangerschaftsBeginn,
+    aktuelleSSW,
+    aktuelleTage,
+    trimester,
+    verbleibendeTage,
+    fortschrittProzent,
+    empfaengnisZeitraum,
+    meilensteine,
+    terminVerstrichen,
+    ueberTermin,
+  };
+}
+
+// ====================================================
+// SSW-API (vormals lib/berechnungen/ssw.ts)
+// ====================================================
+
 export type SswMethode = 'periode' | 'termin';
 
 export interface SswEingabe {
@@ -93,22 +308,6 @@ const VORSORGE: { label: string; sswAnfang: number; sswEnde: number }[] = [
   { label: 'Vorsorge wöchentlich bis Geburt',      sswAnfang: 36, sswEnde: 40 },
 ];
 
-function addDays(date: Date, days: number): Date {
-  const d = new Date(date);
-  d.setDate(d.getDate() + days);
-  return d;
-}
-
-function parseDatum(s: string): Date | null {
-  if (!s) return null;
-  const d = new Date(s + 'T00:00:00');
-  return isNaN(d.getTime()) ? null : d;
-}
-
-function fmtDatum(d: Date): string {
-  return d.toLocaleDateString('de-DE', { day: '2-digit', month: 'long', year: 'numeric' });
-}
-
 export function berechneSsw(eingabe: SswEingabe): SswErgebnis {
   const heute = eingabe.heute ?? new Date();
   heute.setHours(0, 0, 0, 0);
@@ -120,8 +319,8 @@ export function berechneSsw(eingabe: SswEingabe): SswErgebnis {
     const p = parseDatum(eingabe.periodeDatum);
     if (!p) fehler = 'Bitte gültiges Datum der letzten Periode eingeben.';
     else {
-      // Zykluskorrektur: längerer Zyklus → Eisprung später → SSW-Beginn (= letzte Periode) bleibt gleich,
-      // aber der errechnete Termin verschiebt sich um (zyklus − 28) Tage nach hinten.
+      // SSW-Semantik: rein LMP-basiert (medizinischer Standard). Zyklus-Korrektur
+      // wirkt nur auf den ET, nicht auf die SSW-Anzeige.
       sswBeginn = p;
     }
   } else {
@@ -167,7 +366,6 @@ export function berechneSsw(eingabe: SswEingabe): SswErgebnis {
 
   const sswWochenRaw = Math.floor(vergangeneTage / 7);
   const sswTage = vergangeneTage % 7;
-  // "Aktuelle SSW" wird im Alltag als "X+Y" notiert, wobei X = vollendete Wochen
   const sswWochen = sswWochenRaw;
 
   let trimester: 1 | 2 | 3 = 1;

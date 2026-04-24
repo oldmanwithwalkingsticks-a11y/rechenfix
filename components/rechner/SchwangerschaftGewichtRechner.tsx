@@ -2,12 +2,19 @@
 
 import { useState, useMemo } from 'react';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import { bmiKategorien } from '@/lib/berechnungen/bmi';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
+/**
+ * Grobe BMI-Kategorie für die IOM-2009-Gewichtsempfehlung. Die IOM-Tabelle
+ * unterscheidet nicht nach Adipositas-Grad (alle Adipös → gleiche Empfehlung
+ * 5-9 kg Zunahme), daher fusionieren wir Adipositas I/II/III aus `bmiKategorien`
+ * zu einer einzigen Stufe.
+ */
 type BmiKat = 'unter' | 'normal' | 'ueber' | 'adipos';
 
 const GESAMT_EINLING: Record<BmiKat, [number, number]> = {
@@ -32,11 +39,18 @@ const PRO_WOCHE: Record<BmiKat, [number, number]> = {
   adipos: [0.17, 0.27],
 };
 
+/**
+ * Mapping: WHO-Kategorien aus `bmi.ts` → grobe IOM-Kategorie. Die Schwellen
+ * (18,5 / 25 / 30 / 35 / 40) stammen damit zentral aus `bmiKategorien` und
+ * driften nicht gegen die BMI-Haupt-Lib.
+ */
 function getKat(bmi: number): BmiKat {
-  if (bmi < 18.5) return 'unter';
-  if (bmi < 25) return 'normal';
-  if (bmi < 30) return 'ueber';
-  return 'adipos';
+  const k = bmiKategorien.find((cat) => bmi >= cat.min && bmi < cat.max);
+  if (!k) return 'adipos'; // über dem letzten Kategorie-Bereich
+  if (k.label === 'Untergewicht') return 'unter';
+  if (k.label === 'Normalgewicht') return 'normal';
+  if (k.label === 'Übergewicht') return 'ueber';
+  return 'adipos'; // alle Adipositas-Grade (I/II/III) fusionieren
 }
 
 const fmt = (n: number, d = 1) => n.toLocaleString('de-DE', { minimumFractionDigits: d, maximumFractionDigits: d });

@@ -1612,7 +1612,7 @@ export const rechner: RechnerLight[] = [
   {
     "slug": "blutdruck-rechner",
     "titel": "Blutdruck-Rechner",
-    "beschreibung": "Blutdruckwerte einordnen: WHO-Klassifikation, Durchschnitt aus mehreren Messungen und Risikobewertung.",
+    "beschreibung": "Blutdruckwerte einordnen: Klassifikation nach ESH / Deutscher Hochdruckliga, Durchschnitt aus mehreren Messungen und Risikobewertung.",
     "kategorie": "Gesundheit",
     "kategorieSlug": "gesundheit",
     "keywords": [

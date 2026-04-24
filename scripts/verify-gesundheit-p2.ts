@@ -19,8 +19,7 @@
  * Arithmetik (Date.setDate vs. getTime-Differenz) innerhalb *einer*
  * Zone bleibt sie exakt.
  */
-import { berechneGeburtstermin } from '../lib/berechnungen/geburtstermin';
-import { berechneSsw } from '../lib/berechnungen/ssw';
+import { berechneGeburtstermin, berechneSsw } from '../lib/berechnungen/schwangerschaft';
 
 interface Assertion {
   label: string;

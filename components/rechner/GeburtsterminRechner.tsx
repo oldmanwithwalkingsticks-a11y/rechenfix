@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
-import { berechneGeburtstermin, type Methode } from '@/lib/berechnungen/geburtstermin';
+import { berechneGeburtstermin, type Methode } from '@/lib/berechnungen/schwangerschaft';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';

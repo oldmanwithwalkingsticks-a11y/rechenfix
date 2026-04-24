@@ -6,7 +6,7 @@ import {
   defaultPeriodeDatum,
   defaultTerminDatum,
   type SswMethode,
-} from '@/lib/berechnungen/ssw';
+} from '@/lib/berechnungen/schwangerschaft';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';

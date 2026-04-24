@@ -37,7 +37,18 @@ export interface BmiErgebnis {
   optimalesGewichtMax: number;
 }
 
-function getOptimalerBereich(alter?: number): { min: number; max: number } {
+/**
+ * Altersabhängige BMI-Spanne — SSOT (seit Prompt 143).
+ *
+ * Quelle: Staffelung folgt der ernährungswissenschaftlichen Konvention NRC 1989
+ * (National Research Council, *Diet and Health*). Die WHO hält für alle Erwachsenen
+ * unabhängig vom Alter 18,5–24,9 aufrecht — die Altersstaffelung ist als zusätzliche
+ * Orientierung gedacht, nicht als WHO-Standard.
+ *
+ * Wird auch von `idealgewicht.ts` konsumiert (früher eigene Kopie `getAltersBmiSpanne`
+ * mit leicht abweichenden ganzzahligen Werten 19/24 statt 18,5/24,9 — in 143 entfernt).
+ */
+export function getOptimalerBereich(alter?: number): { min: number; max: number } {
   if (!alter || alter < 18) return { min: 18.5, max: 24.9 };
   if (alter <= 24) return { min: 18.5, max: 24.9 };
   if (alter <= 34) return { min: 20.0, max: 25.9 };
