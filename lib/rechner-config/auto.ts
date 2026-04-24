@@ -666,7 +666,7 @@ Der Rechner liefert eine fundierte Empfehlung, aber jedes Fahrrad sitzt etwas an
     keywords: ['taxi rechner', 'taxikosten berechnen', 'taxi preis', 'taxi tarif', 'taxifahrt kosten', 'taxi berlin', 'taxi münchen'],
     icon: '🚕',
     formel: 'Fahrpreis = Grundgebühr + Strecke × km-Preis + Wartezeit × Minutenpreis',
-    beispiel: 'Berlin, 10 km Tag: 3,90 € + 7 × 2,30 € + 3 × 1,65 € = 3,90 + 16,10 + 4,95 = 24,95 €. Mit 10 % Trinkgeld: 27,45 €.',
+    beispiel: 'Berlin, 10 km: 4,30 € + 3 × 2,80 € + 4 × 2,60 € + 3 × 2,10 € = 4,30 + 8,40 + 10,40 + 6,30 = 29,40 €. Mit 10 % Trinkgeld: 32,34 €.',
     erklaerung: `**Was berechnet der Taxi-Kosten-Rechner?**
 
 Der Rechner schätzt den Fahrpreis einer Taxifahrt in deutschen Großstädten. Er berücksichtigt die stadtspezifischen Tarife (Grundgebühr, Kilometerpreis gestaffelt, Wartezeit) und unterscheidet zwischen Tag- und Nachttarif. Zusätzlich wird eine Trinkgeld-Empfehlung (10 %) berechnet.
@@ -675,9 +675,9 @@ Der Rechner schätzt den Fahrpreis einer Taxifahrt in deutschen Großstädten. E
 
 Jede Taxifahrt besteht aus drei Kostenblöcken:
 
-- **Grundgebühr:** Fällt beim Einsteigen an, unabhängig von der Strecke. Je nach Stadt 3,50–4,70 €.
-- **Streckentarif:** Preis pro gefahrenem Kilometer, meist gestaffelt. Die ersten Kilometer (3–7 km je nach Stadt) kosten mehr als die folgenden.
-- **Wartezeit:** Wird berechnet, wenn das Taxi im Stau steht oder wartet. Üblich: 0,50–0,55 €/Minute.
+- **Grundgebühr:** Fällt beim Einsteigen an, unabhängig von der Strecke. Je nach Stadt 4,00–5,90 €.
+- **Streckentarif:** Preis pro gefahrenem Kilometer. Einige Städte (Berlin, Hamburg, Köln, Stuttgart) arbeiten mit Staffelung — die ersten 3–9 km kosten mehr als die folgenden. München, Frankfurt und Düsseldorf berechnen einen einheitlichen km-Preis.
+- **Wartezeit:** Wird berechnet, wenn das Taxi im Stau steht oder wartet. Üblich: 0,50–0,72 €/Minute (30–43 €/h).
 
 Die Tarife werden von der jeweiligen Kommune festgelegt und sind für alle Taxis in der Stadt verbindlich. Private Vereinbarungen über den Preis sind nicht erlaubt — es gilt der Taxameter.
 
@@ -685,9 +685,9 @@ Die Tarife werden von der jeweiligen Kommune festgelegt und sind für alle Taxis
 
 Die Tarife unterscheiden sich deutlich zwischen den Städten:
 
-- **Berlin:** Günstigste Großstadt. Grundgebühr 3,90 €, stark gestaffelter km-Preis (2,30 €/1,65 €). Kurzstreckentarif für Fahrten unter 2 km möglich.
-- **München:** Höchste Grundgebühr (4,70 €), aber moderate km-Preise. Staffelung ab km 6.
-- **Hamburg:** Mittlere Preise, Staffelung bereits ab km 5.
+- **Berlin:** Grundgebühr 4,30 €, 3-stufige Staffelung: 2,80 €/km (bis 3 km), 2,60 €/km (3–7 km), 2,10 €/km (ab 7 km). Kurzstreckentarif 6,00 € bis 2 km möglich (nur bei Heranwinken).
+- **München:** Höchste Grundgebühr (5,90 €, inkl. 1. Schalteinheit), einheitlicher km-Preis 2,70 €. Keine Tarif-Staffelung.
+- **Hamburg:** Grundgebühr 4,50 €, Staffelung ab km 9 (2,70 €/km bzw. 2,00 €/km ab km 9). Einheitstarif rund um die Uhr seit 01.02.2025.
 - **Stuttgart:** Niedrige Grundgebühr, aber höchste km-Preise (2,50 €). Staffelung ab km 4.
 
 **Tag vs. Nacht**
@@ -716,7 +716,7 @@ Für gelegentliche Fahrten ist das Taxi oft günstiger als ein eigenes Auto. Die
       },
       {
         frage: 'Gibt es einen Nachttarif?',
-        antwort: 'Das hängt von der Stadt ab. Berlin und München haben Einheitstarife rund um die Uhr. Köln und Düsseldorf berechnen nachts (22–6 Uhr) etwas höhere km-Preise. Der Rechner berücksichtigt die Tageszeit automatisch bei der Preisberechnung.',
+        antwort: 'In den sieben verifizierten Großstädten (Berlin, Hamburg, München, Köln, Frankfurt, Stuttgart, Düsseldorf) gilt aktuell ein Einheitstarif rund um die Uhr — keine Stadt erhebt 2026 einen Nacht-Zuschlag auf Grund- oder Kilometerpreis. Der Tag/Nacht-Umschalter im Rechner ändert das Ergebnis für diese Städte also nicht. Nur der Preset "Durchschnitt Deutschland" führt synthetische Nacht-Aufschläge als Orientierung für kleinere Kommunen — dort können örtliche Taxenordnungen einen Nachttarif vorsehen.',
       },
       {
         frage: 'Wie viel Trinkgeld gibt man im Taxi?',
