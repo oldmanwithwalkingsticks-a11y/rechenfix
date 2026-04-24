@@ -106,6 +106,15 @@ const AFFILIATE_PROGRAMS = {
     icon: '🌿',
     color: '#1F6B42',
   },
+  cosmosdirekt: {
+    name: 'CosmosDirekt',
+    tagline: 'Versicherungen und Geldanlage direkt vom Testsieger — ohne Vermittler-Aufschlag',
+    cta: 'CosmosDirekt ansehen',
+    baseUrl: 'https://www.awin1.com/cread.php?awinmid=11893&awinaffid=2843240',
+    deeplink: '',
+    icon: '🛡️',
+    color: '#0D6EFD',
+  },
 } as const;
 
 type ProgramId = keyof typeof AFFILIATE_PROGRAMS;
@@ -213,6 +222,23 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'mietpreisbremse': 'Miete zu hoch? KS Auxilia Rechtsschutz übernimmt die Kosten für die Durchsetzung der Mietpreisbremse.',
     'ehegattenunterhalt': 'Streit um Ehegattenunterhalt? KS Auxilia Rechtsschutz deckt Ihre Anwaltskosten im Familienrecht.',
   },
+  cosmosdirekt: {
+    'tagesgeld': 'Tagesgeld Plus von CosmosDirekt: 2,2 % Zinsen p.a. garantiert — täglich verfügbar und ohne Mindesteinlage.',
+    'altersvorsorge': 'Private Rentenversicherung flexibel gestalten — steuerliche Vorteile in der Ansparphase nutzen.',
+    'sparplan': 'FlexInvest SparPlan von CosmosDirekt — fondsgebunden ab 25 €/Monat und jederzeit flexibel anpassbar.',
+    'einmalanlage': 'FlexInvest Einmalanlage — größere Beträge renditeorientiert und steuerbegünstigt anlegen.',
+    'juniorSparplan': 'Junior-SparPlan: Früh für Ihr Kind vorsorgen — ab 25 €/Monat und flexibel in der Laufzeit.',
+    'risikolebensversicherung': 'Risikolebensversicherung von CosmosDirekt — mehrfach Testsieger bei Stiftung Warentest, zum Schutz Ihrer Familie.',
+    'berufsunfaehigkeit': 'Berufsunfähigkeitsversicherung — Einkommen absichern. Note 1,1 bei Stiftung Warentest (Finanztest 6/2024).',
+    'unfall': 'Unfallversicherung: Weltweiter 24/7-Schutz — fairster Schadenregulierer 2026 laut Focus Money.',
+    'sterbegeld': 'Sterbegeldversicherung — Angehörige von Bestattungskosten entlasten, mit frei wählbarer Versicherungssumme.',
+    'privathaftpflicht': 'Privat-Haftpflicht von CosmosDirekt — unverzichtbarer Grundschutz, fairster Schadenregulierer 2026.',
+    'hausrat': 'Hausratversicherung — Ihr Zuhause umfassend schützen gegen Einbruch, Feuer und Leitungswasser.',
+    'wohngebaeude': 'Wohngebäudeversicherung — Immobilien umfassend absichern, mit fairer Schadenregulierung laut Focus Money.',
+    'bauherrenhaftpflicht': 'Bauherren-Haftpflicht — Schäden gegenüber Dritten während der Bauphase zuverlässig abgesichert.',
+    'tierhalterhaftpflicht': 'Tierhalter-Haftpflicht — in mehreren Bundesländern für Hunde gesetzlich Pflicht. Jetzt günstig absichern.',
+    'reiseruecktritt': 'Reiserücktrittsversicherung — Stornokosten zurück bei Krankheit oder unerwarteten Ereignissen vor der Reise.',
+  },
 };
 
 // --- Kontextspezifische Deeplinks ---
@@ -243,6 +269,24 @@ const CONTEXT_DEEPLINKS: Partial<Record<ProgramId, Record<string, string>>> = {
     'etf': 'https://www.verivox.de/depot/etf-vergleich/',
     'kapitalertrag': 'https://www.verivox.de/depot/',
     'default': 'https://www.verivox.de/depot/',
+  },
+  cosmosdirekt: {
+    'tagesgeld': 'https://www.cosmosdirekt.de/geldanlage/tagesgeld/',
+    'altersvorsorge': 'https://www.cosmosdirekt.de/flexinvest-altersvorsorge/',
+    'sparplan': 'https://www.cosmosdirekt.de/flexinvest/',
+    'einmalanlage': 'https://www.cosmosdirekt.de/flexinvest-einmalanlage/',
+    'juniorSparplan': 'https://www.cosmosdirekt.de/flexinvest-junior-sparplan/',
+    'risikolebensversicherung': 'https://www.cosmosdirekt.de/risikolebensversicherung/',
+    'berufsunfaehigkeit': 'https://www.cosmosdirekt.de/berufsunfaehigkeitsversicherung/',
+    'unfall': 'https://www.cosmosdirekt.de/unfallversicherung/',
+    'sterbegeld': 'https://www.cosmosdirekt.de/sterbegeldversicherung/',
+    'privathaftpflicht': 'https://www.cosmosdirekt.de/private-haftpflichtversicherung/',
+    'hausrat': 'https://www.cosmosdirekt.de/hausratversicherung/',
+    'wohngebaeude': 'https://www.cosmosdirekt.de/wohngebaeudeversicherung/',
+    'bauherrenhaftpflicht': 'https://www.cosmosdirekt.de/bauherrenhaftpflicht/',
+    'tierhalterhaftpflicht': 'https://www.cosmosdirekt.de/tierhalterhaftpflicht/',
+    'reiseruecktritt': 'https://www.cosmosdirekt.de/reiseruecktrittsversicherung/',
+    'default': 'https://www.cosmosdirekt.de/',
   },
 };
 
