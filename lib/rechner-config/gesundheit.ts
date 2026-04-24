@@ -744,6 +744,8 @@ Der Zyklusrechner berechnet auf Basis des ersten Tages der letzten Periode und d
 
 Ein typischer Zyklus dauert 28 Tage, kann aber individuell zwischen 21 und 35 Tagen schwanken. Der Zyklus wird in vier Phasen unterteilt: Menstruation (Tag 1–5), Follikelphase (Tag 1–13), Ovulation/Eisprung (ca. Tag 14) und Lutealphase (Tag 15–28). Während die Lutealphase relativ konstant etwa 14 Tage dauert, ist die Follikelphase variabel — deshalb verschiebt sich bei längeren oder kürzeren Zyklen vor allem der Zeitpunkt des Eisprungs, nicht aber der Abstand zwischen Eisprung und Periode.
 
+Die **Perioden-Länge** variiert individuell zwischen 3 und 7 Tagen (Default im Rechner: 5). Der eingegebene Wert beeinflusst nur die Darstellung der Menstruations-Phase im Kalender — die Lage des fruchtbaren Fensters und der Eisprungtag hängen vom Ovulationszeitpunkt ab, nicht von der Dauer der Blutung.
+
 **Fruchtbare und unfruchtbare Tage**
 
 Für eine mögliche Schwangerschaft zählen vor allem die Tage rund um den Eisprung. Die höchste Wahrscheinlichkeit einer Befruchtung besteht an den zwei Tagen vor dem Eisprung und am Tag des Eisprungs selbst. Unser Rechner markiert dieses fruchtbare Fenster grün im Kalender, den Eisprungtag selbst mit einem Stern. Tage außerhalb dieses Fensters gelten als weniger fruchtbar, sind aber niemals vollständig „sicher" — besonders bei unregelmäßigen Zyklen.

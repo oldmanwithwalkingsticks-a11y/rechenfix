@@ -41,11 +41,25 @@ export default function ZyklusRechner() {
   // SSG-Hydration-Guard: Startdatum leer, erst client-seitig setzen.
   const [startDatum, setStartDatum] = useState('');
   const [laenge, setLaenge] = useState('28');
+  const [periode, setPeriode] = useState('5'); // P3.6: Perioden-Dauer in Tagen, Default 5
   const [modus, setModus] = useState<Modus>(3);
 
   useEffect(() => {
     setStartDatum(defaultStart());
   }, []);
+
+  // Parsen der Perioden-Länge ohne hartes Clamping — der Wert wird im Kalender
+  // angewendet, ein Warnhinweis erscheint ausserhalb des typischen Bereichs 2–10.
+  const periodenTage = useMemo(() => {
+    const p = parseInt(periode);
+    if (!Number.isFinite(p) || p <= 0) return 5;
+    return Math.max(1, Math.min(20, p)); // harte Untergrenze 1, Obergrenze 20 zur Crash-Sicherheit
+  }, [periode]);
+
+  const periodeAusserhalbRange = useMemo(() => {
+    const p = parseInt(periode);
+    return Number.isFinite(p) && (p < 2 || p > 10);
+  }, [periode]);
 
   const ergebnis = useMemo(() => {
     const l = Math.max(21, Math.min(35, parseInt(laenge) || 28));
@@ -78,7 +92,8 @@ export default function ZyklusRechner() {
   function getDayKind(date: Date): DayKind {
     if (!ergebnis) return 'normal';
     for (const z of ergebnis.zyklen) {
-      const periodenEnde = addDays(z.periodenBeginn, 4); // ~5 Tage Periode
+      // Perioden-Ende: Tag 1 = periodenBeginn, Tag N = Beginn + (N-1).
+      const periodenEnde = addDays(z.periodenBeginn, periodenTage - 1);
       if (date >= z.periodenBeginn && date <= periodenEnde) return 'period';
       if (date.toDateString() === z.eisprung.toDateString()) return 'ovulation';
       if (date >= z.fruchtbarVon && date <= z.fruchtbarBis) return 'fertile';
@@ -102,6 +117,26 @@ export default function ZyklusRechner() {
             {Array.from({ length: 15 }, (_, i) => 21 + i).map(n => <option key={n} value={n}>{n} Tage</option>)}
           </select>
           <p className="text-xs text-gray-500 mt-1">Vom ersten Tag der Periode bis zum Tag vor der nächsten Periode.</p>
+        </div>
+        <div>
+          <label htmlFor="zyklus-periode" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Länge der Periode (Tage)</label>
+          <input
+            id="zyklus-periode"
+            type="number"
+            inputMode="numeric"
+            min={2}
+            max={10}
+            step={1}
+            value={periode}
+            onChange={e => setPeriode(e.target.value)}
+            className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200"
+          />
+          <p className="text-xs text-gray-500 mt-1">Durchschnittliche Dauer der Menstruationsblutung. Typischer Bereich: 3–7 Tage.</p>
+          {periodeAusserhalbRange && (
+            <p className="text-xs text-amber-700 dark:text-amber-400 mt-1">
+              Ungewöhnlich {parseInt(periode) < 2 ? 'kurzer' : 'langer'} Wert — bitte prüfen. Die Berechnung läuft dennoch.
+            </p>
+          )}
         </div>
         <div>
           <RadioToggleGroup
@@ -231,6 +266,7 @@ export default function ZyklusRechner() {
         eingaben={{
           'Erster Tag letzte Periode': startDatum,
           'Zykluslänge': `${laenge} Tage`,
+          'Perioden-Länge': `${periodenTage} Tage`,
           'Vorausberechnung': `${modus} Zyklus/Zyklen`,
         }}
         ergebnis={ergebnis ? {
