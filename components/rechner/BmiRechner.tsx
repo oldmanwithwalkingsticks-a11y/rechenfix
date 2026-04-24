@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { berechneBmi, bmiKategorien } from '@/lib/berechnungen/bmi';
+import { berechneBmi, bmiKategorien, BMI_ADULT_MIN_AGE } from '@/lib/berechnungen/bmi';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
@@ -30,6 +30,11 @@ export default function BmiRechner() {
   const skalenPosition = ergebnis
     ? Math.min(Math.max(((ergebnis.bmi - 10) / 40) * 100, 0), 100)
     : 0;
+
+  // Altersgating: Für Kinder/Jugendliche (<18) werden WHO-Erwachsenen-Kategorien
+  // und der alters-adjustierte Optimalbereich unterdrückt — stattdessen Hinweis auf
+  // Perzentilen-Referenztabellen (Kromeyer-Hauschild) und Kinderärzt:in.
+  const istKind = nAlter !== undefined && nAlter > 0 && nAlter < BMI_ADULT_MIN_AGE;
 
   return (
     <div>
@@ -86,18 +91,36 @@ export default function BmiRechner() {
                 <p className="text-white/80 text-sm mb-1">Ihr Body Mass Index</p>
                 <p className="text-5xl font-bold">{fmt(ergebnis.bmi)}</p>
               </div>
-              <div className="sm:text-right">
-                <span
-                  className="inline-block px-3 py-1 rounded-lg text-sm font-semibold"
-                  style={{ backgroundColor: 'rgba(255,255,255,0.2)' }}
-                >
-                  {ergebnis.kategorie.label}
-                </span>
-              </div>
+              {!istKind && (
+                <div className="sm:text-right">
+                  <span
+                    className="inline-block px-3 py-1 rounded-lg text-sm font-semibold"
+                    style={{ backgroundColor: 'rgba(255,255,255,0.2)' }}
+                  >
+                    {ergebnis.kategorie.label}
+                  </span>
+                </div>
+              )}
             </div>
           </div>
 
+          {/* Kinder/Jugendliche-Hinweis (<18) */}
+          {istKind && (
+            <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-xl p-4 mb-6">
+              <p className="font-semibold text-blue-800 dark:text-blue-300 text-sm mb-2">
+                BMI bei Kindern und Jugendlichen
+              </p>
+              <p className="text-gray-700 dark:text-gray-200 text-sm mb-2">
+                Für Personen unter 18 Jahren gelten <strong>BMI-Perzentilen nach Alter und Geschlecht</strong> — nicht die Erwachsenen-Kategorien der WHO. Der oben berechnete BMI-Wert ist korrekt, die Einordnung in „Unter-/Normal-/Übergewicht“ lässt sich daraus bei Kindern aber nicht direkt ableiten.
+              </p>
+              <p className="text-gray-700 dark:text-gray-200 text-sm">
+                Eine fundierte Einschätzung ist nur mit altersspezifischen Referenztabellen (z. B. Kromeyer-Hauschild für Deutschland) möglich. Bitte wenden Sie sich für eine Beurteilung an Kinderärzt:in oder kinder- und jugendmedizinische Praxen.
+              </p>
+            </div>
+          )}
+
           {/* BMI-Skala */}
+          {!istKind && (
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">BMI-Einordnung</h2>
 
@@ -154,8 +177,10 @@ export default function BmiRechner() {
               ))}
             </div>
           </div>
+          )}
 
           {/* Optimaler Bereich */}
+          {!istKind && (
           <div className="bg-green-50 dark:bg-green-500/10 border border-green-200 dark:border-green-500/30 rounded-xl p-4 mb-6">
             <p className="font-semibold text-green-700 dark:text-green-400 text-sm mb-1">
               Optimaler BMI-Bereich{nAlter ? ` für Ihr Alter (${nAlter} Jahre)` : ''}
@@ -165,6 +190,7 @@ export default function BmiRechner() {
               <strong>{fmt(ergebnis.optimalesGewichtMin)} – {fmt(ergebnis.optimalesGewichtMax)} kg</strong> bei Ihrer Größe.
             </p>
           </div>
+          )}
 
           {/* Disclaimer */}
           <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4">
@@ -177,14 +203,18 @@ export default function BmiRechner() {
           <CrossLink href="/gesundheit/kalorienrechner" emoji="🔥" text="Kalorienbedarf berechnen" />
 
           <ErgebnisAktionen
-            ergebnisText={`BMI: ${fmt(ergebnis.bmi)} — ${ergebnis.kategorie.label}`}
+            ergebnisText={istKind
+              ? `BMI: ${fmt(ergebnis.bmi)} (Kinder/Jugendliche: Einordnung nur über alters- und geschlechtsspezifische Perzentilen möglich)`
+              : `BMI: ${fmt(ergebnis.bmi)} — ${ergebnis.kategorie.label}`}
             seitenTitel="BMI-Rechner"
           />
 
           <AiExplain
             rechnerName="BMI-Rechner"
             eingaben={{ gewicht: nGewicht, groesse: nGroesse, geschlecht, alter: nAlter }}
-            ergebnis={{ bmi: ergebnis.bmi, kategorie: ergebnis.kategorie.label, optimalesGewichtMin: ergebnis.optimalesGewichtMin, optimalesGewichtMax: ergebnis.optimalesGewichtMax }}
+            ergebnis={istKind
+              ? { bmi: ergebnis.bmi, hinweis: 'Unter 18 Jahren: Einordnung nur über BMI-Perzentilen (z. B. Kromeyer-Hauschild) möglich — Kategorie-Wertung unterdrückt.' }
+              : { bmi: ergebnis.bmi, kategorie: ergebnis.kategorie.label, optimalesGewichtMin: ergebnis.optimalesGewichtMin, optimalesGewichtMax: ergebnis.optimalesGewichtMax }}
           />
         </>
       )}

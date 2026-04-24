@@ -12,6 +12,12 @@ export interface KalorienErgebnis {
   gesamtumsatz: number;
   zielKalorien: number;
   differenz: number;
+  /**
+   * True, wenn `zielKalorien` auf den Grundumsatz angehoben wurde, weil das
+   * rechnerische Defizit (Ziel „abnehmen") den Wert darunter gedrückt hätte.
+   * BZgA/BfR-Richtwert: tägliche Aufnahme sollte nicht unter den Grundumsatz fallen.
+   */
+  zielGeklammertAufGrundumsatz: boolean;
   protein: number;
   kohlenhydrate: number;
   fett: number;
@@ -36,7 +42,12 @@ export function berechneKalorien(eingabe: KalorienEingabe): KalorienErgebnis | n
   if (ziel === 'abnehmen') differenz = -500;
   if (ziel === 'zunehmen') differenz = 300;
 
-  const zielKalorien = gesamtumsatz + differenz;
+  // Minimum-Klammer: zielKalorien darf nie unter den Grundumsatz fallen.
+  // Relevant bei niedrigem Grundumsatz + Defizit (Ziel "abnehmen"), wo 1.427 − 500 = 927 kcal
+  // das medizinische Minimum unterschreiten würde. Eating-Disorder-Prävention.
+  const zielKalorienRoh = gesamtumsatz + differenz;
+  const zielGeklammertAufGrundumsatz = zielKalorienRoh < grundumsatz;
+  const zielKalorien = Math.max(zielKalorienRoh, grundumsatz);
 
   // Makronährstoffverteilung
   const proteinKcal = zielKalorien * 0.30;
@@ -48,6 +59,7 @@ export function berechneKalorien(eingabe: KalorienEingabe): KalorienErgebnis | n
     gesamtumsatz: Math.round(gesamtumsatz),
     zielKalorien: Math.round(zielKalorien),
     differenz,
+    zielGeklammertAufGrundumsatz,
     protein: 30,
     kohlenhydrate: 45,
     fett: 25,

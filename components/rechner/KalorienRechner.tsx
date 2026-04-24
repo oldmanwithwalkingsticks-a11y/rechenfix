@@ -125,6 +125,15 @@ export default function KalorienRechner() {
             </div>
           </div>
 
+          {/* Minimum-Klammer-Hinweis */}
+          {ergebnis.zielGeklammertAufGrundumsatz && (
+            <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-xl p-4 mb-6">
+              <p className="text-sm text-blue-800 dark:text-blue-300">
+                <strong>Hinweis:</strong> Ihr eingegebenes Kalorienziel liegt rechnerisch unter dem Grundumsatz. Wir haben den Wert auf den Grundumsatz geklammert, da eine Aufnahme darunter gesundheitlich nicht empfohlen wird. Bei geplanter Gewichtsreduktion sind professionelle Begleitung und langsamere Defizite (≤ 500 kcal/Tag) sinnvoller.
+              </p>
+            </div>
+          )}
+
           {/* Aufschlüsselung */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Aufschlüsselung</h2>

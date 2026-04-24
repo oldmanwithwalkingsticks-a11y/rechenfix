@@ -1,3 +1,10 @@
+/**
+ * Mindestalter für die Anwendung der WHO-Erwachsenen-Kategorien.
+ * Für Jüngere gelten BMI-Perzentilen nach Alter und Geschlecht
+ * (siehe Kromeyer-Hauschild-Referenz für Deutschland).
+ */
+export const BMI_ADULT_MIN_AGE = 18;
+
 export interface BmiEingabe {
   gewicht: number;
   groesse: number; // in cm
