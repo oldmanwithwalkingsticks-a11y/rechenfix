@@ -22,6 +22,12 @@ import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
+// Validation-Range für Wohnfläche: 30 m² (kleine Wohnung) bis 1.000 m²
+// (großes EFH oder MFH-Einheit). Darüber → Gewerbe / Fachplanung,
+// nicht Scope dieses Konsumenten-Rechners.
+const WOHNFLAECHE_MIN = 30;
+const WOHNFLAECHE_MAX = 1000;
+
 export default function WaermepumpeRechner() {
   const [wohnflaeche, setWohnflaeche] = useState('120');
   const [daemmstandard, setDaemmstandard] = useState<Daemmstandard>('altbau-teilsaniert');
@@ -40,9 +46,19 @@ export default function WaermepumpeRechner() {
   const [foerderung, setFoerderung] = useState('30');
   const [jahre, setJahre] = useState('20');
 
+  // Roh-Wohnfläche für Warnung; effektive Wohnfläche für Berechnung wird
+  // hart auf MAX gecappt (Untergrenze nicht: User soll selbst korrigieren).
+  const wohnflaecheRoh = parseDeutscheZahl(wohnflaeche);
+  const wohnflaecheEffektiv = Math.min(WOHNFLAECHE_MAX, wohnflaecheRoh);
+  const wohnflaecheWarning: string | null = wohnflaecheRoh > WOHNFLAECHE_MAX
+    ? `Für Wohnflächen über ${WOHNFLAECHE_MAX.toLocaleString('de-DE')} m² (große Mehrfamilienhäuser, Gewerbe) ist eine individuelle Fachplanung erforderlich. Die Berechnung läuft mit ${WOHNFLAECHE_MAX.toLocaleString('de-DE')} m² weiter.`
+    : wohnflaecheRoh > 0 && wohnflaecheRoh < WOHNFLAECHE_MIN
+      ? `Bitte mindestens ${WOHNFLAECHE_MIN} m² eingeben — kleinere Einheiten werden in der Regel anders beheizt (Etagenheizung, Klimagerät).`
+      : null;
+
   const ergebnis = useMemo(
     () => berechneWaermepumpe({
-      wohnflaeche: parseDeutscheZahl(wohnflaeche),
+      wohnflaeche: wohnflaecheEffektiv,
       daemmstandard,
       alteHeizung,
       heizkostenBekannt,
@@ -53,7 +69,7 @@ export default function WaermepumpeRechner() {
       foerderungProzent: parseDeutscheZahl(foerderung),
       jahre: parseInt(jahre, 10) || 20,
     }),
-    [wohnflaeche, daemmstandard, alteHeizung, heizkostenBekannt, heizkostenAktuell, strompreis, gaspreis, anschaffung, foerderung, jahre],
+    [wohnflaecheEffektiv, daemmstandard, alteHeizung, heizkostenBekannt, heizkostenAktuell, strompreis, gaspreis, anschaffung, foerderung, jahre],
   );
 
   const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
@@ -81,6 +97,15 @@ export default function WaermepumpeRechner() {
           Wohnfläche
         </h2>
         <NummerEingabe value={wohnflaeche} onChange={setWohnflaeche} placeholder="120" einheit="m²" />
+        {wohnflaecheWarning && (
+          <div
+            role="alert"
+            aria-live="polite"
+            className="mt-2 rounded-lg border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/30 p-3 text-sm text-amber-800 dark:text-amber-300"
+          >
+            <strong>Hinweis:</strong> {wohnflaecheWarning}
+          </div>
+        )}
       </div>
 
       {/* === 2: Dämmstandard === */}
