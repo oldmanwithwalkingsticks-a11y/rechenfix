@@ -8,6 +8,9 @@ import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
+import { getStrompreis } from '@/lib/berechnungen/strompreis';
+
+const STROMPREIS_DEFAULT = String(getStrompreis('durchschnitt_bdew'));
 
 type Groesse = 'aufstell' | 'klein' | 'mittel' | 'gross' | 'eigen';
 type Heizung = 'keine' | 'waermepumpe' | 'solar';
@@ -42,7 +45,7 @@ export default function PoolkostenRechner() {
   const [heizung, setHeizung] = useState<Heizung>('keine');
   const [abdeckung, setAbdeckung] = useState(true);
   const [saison, setSaison] = useState<Saison>('mai-sep');
-  const [strompreis, setStrompreis] = useState('32');
+  const [strompreis, setStrompreis] = useState(STROMPREIS_DEFAULT);
   const [wasserpreis, setWasserpreis] = useState('4');
 
   const volumen = useMemo(() => {
@@ -189,7 +192,7 @@ export default function PoolkostenRechner() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Strompreis</label>
-          <NummerEingabe value={strompreis} onChange={setStrompreis} placeholder="32" einheit="ct/kWh" />
+          <NummerEingabe value={strompreis} onChange={setStrompreis} placeholder={STROMPREIS_DEFAULT} einheit="ct/kWh" />
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Wasserpreis</label>
