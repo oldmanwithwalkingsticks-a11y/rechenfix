@@ -7,6 +7,9 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
+import { getStrompreis } from '@/lib/berechnungen/strompreis';
+
+const STROMPREIS_DEFAULT = String(getStrompreis('durchschnitt_bdew'));
 
 interface Geraet {
   id: number;
@@ -36,7 +39,7 @@ export default function EnergiekostenRechner() {
   const [geraete, setGeraete] = useState<Geraet[]>([
     { id: makeId(), preset: 'eigene', leistung: '100', stunden: '4', tage: '7' },
   ]);
-  const [strompreis, setStrompreis] = useState<string>('32');
+  const [strompreis, setStrompreis] = useState<string>(STROMPREIS_DEFAULT);
 
   const updateGeraet = (id: number, patch: Partial<Geraet>) => {
     setGeraete(prev => prev.map(g => (g.id === id ? { ...g, ...patch } : g)));
@@ -164,8 +167,8 @@ export default function EnergiekostenRechner() {
       {/* Strompreis */}
       <div className="mb-6">
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Strompreis</label>
-        <NummerEingabe value={strompreis} onChange={setStrompreis} placeholder="32" einheit="ct/kWh" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Aktueller Durchschnitt in Deutschland: ca. 32 ct/kWh (Grundversorgung höher)</p>
+        <NummerEingabe value={strompreis} onChange={setStrompreis} placeholder={STROMPREIS_DEFAULT} einheit="ct/kWh" />
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">BDEW-Durchschnitt 2026 in Deutschland: ca. 37 ct/kWh (Festpreis-Neuvertrag günstiger, Grundversorgung höher)</p>
       </div>
 
       {/* Gesamt-Ergebnis */}

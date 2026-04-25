@@ -9,8 +9,10 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
+import { getStrompreis } from '@/lib/berechnungen/strompreis';
 
 const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const STROMPREIS_DEFAULT = String(getStrompreis('neukunden_festpreis'));
 
 export default function BalkonSolarRechner() {
   const [leistungModus, setLeistungModus] = useState('800');
@@ -18,7 +20,7 @@ export default function BalkonSolarRechner() {
   const [ausrichtung, setAusrichtung] = useState('sued');
   const [aufstellung, setAufstellung] = useState('aufstaenderung');
   const [stromverbrauch, setStromverbrauch] = useState('3000');
-  const [strompreis, setStrompreis] = useState('32');
+  const [strompreis, setStrompreis] = useState(STROMPREIS_DEFAULT);
   const [kosten, setKosten] = useState('600');
 
   const leistungWatt = leistungModus === 'eigene'
@@ -91,7 +93,7 @@ export default function BalkonSolarRechner() {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Strompreis (ct/kWh)</label>
-            <NummerEingabe value={strompreis} onChange={setStrompreis} placeholder="32" />
+            <NummerEingabe value={strompreis} onChange={setStrompreis} placeholder={STROMPREIS_DEFAULT} />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Anschaffungskosten (€)</label>

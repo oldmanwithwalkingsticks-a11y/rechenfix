@@ -74,6 +74,14 @@ export default function GrunderwerbsteuerRechner() {
             </p>
           </div>
 
+          {bundesland === 'he' && (
+            <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl p-4">
+              <p className="text-sm text-amber-800 dark:text-amber-300">
+                <strong>💡 Hessengeld:</strong> Hessen fördert den erstmaligen Erwerb von selbstgenutztem Wohneigentum mit bis zu <strong>10.000 € je erwachsenem Käufer + 5.000 € pro Kind</strong>. Aktiv seit September 2024. Mehr Infos auf der offiziellen Webseite des Landes Hessen unter dem Stichwort &bdquo;Hessengeld&ldquo;.
+              </p>
+            </div>
+          )}
+
           <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden">
             <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700/50">
               <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">Kaufnebenkosten</p>

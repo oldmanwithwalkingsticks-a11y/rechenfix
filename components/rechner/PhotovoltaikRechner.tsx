@@ -8,6 +8,13 @@ import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
+import { getMischVerguetung } from '@/lib/berechnungen/eeg-einspeiseverguetung';
+import { getStrompreis } from '@/lib/berechnungen/strompreis';
+
+// EEG-Vergütung und Eigenverbrauchs-Grenzwert aus zentralen SSOT-Libs
+// (lib/berechnungen/eeg-einspeiseverguetung.ts, strompreis.ts) — niemals
+// Beträge wie 7,78/6,73 ct oder 33 ct hartcodieren.
+const STROMPREIS_DEFAULT = String(getStrompreis('neukunden_festpreis'));
 
 const AUSRICHTUNGEN = [
   { id: 'sued', label: 'Süd (optimal)', faktor: 1.0 },
@@ -33,7 +40,7 @@ export default function PhotovoltaikRechner() {
   const [ausrichtung, setAusrichtung] = useState('sued');
   const [neigung, setNeigung] = useState('optimal');
   const [verbrauch, setVerbrauch] = useState('4000');
-  const [strompreis, setStrompreis] = useState('32');
+  const [strompreis, setStrompreis] = useState(STROMPREIS_DEFAULT);
   const [kwp, setKwp] = useState('');
   const [kosten, setKosten] = useState('');
   const [mitSpeicher, setMitSpeicher] = useState(false);
@@ -70,14 +77,10 @@ export default function PhotovoltaikRechner() {
     const einspeisung = Math.max(0, nettoErtrag - eigenverbrauch);
     const rest = Math.max(0, verb - eigenverbrauch);
 
-    // Einspeisevergütung 2026: 8,03 ct/kWh bis 10 kWp, darüber 6,95 ct/kWh
-    let verguetungCt: number;
-    if (kwpWert <= 10) {
-      verguetungCt = 8.03;
-    } else {
-      const bis10Anteil = 10 / kwpWert;
-      verguetungCt = bis10Anteil * 8.03 + (1 - bis10Anteil) * 6.95;
-    }
+    // EEG-Vergütung aus zentraler SSOT (Bundesnetzagentur, Stand 04/2026,
+    // halbjährliche Degression nach § 49 EEG 2023). Mischvergütung
+    // berücksichtigt automatisch den Anteil bis 10 kWp und darüber.
+    const verguetungCt = getMischVerguetung(kwpWert, 'teil');
 
     const ersparnis = eigenverbrauch * preis / 100;
     const einnahmen = einspeisung * verguetungCt / 100;
@@ -146,6 +149,9 @@ export default function PhotovoltaikRechner() {
         <div>
           <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Aktueller Strompreis</label>
           <NummerEingabe value={strompreis} onChange={setStrompreis} einheit="ct/kWh" />
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            Default {STROMPREIS_DEFAULT} ct = typischer Festpreis-Neuvertrag (Verivox/Check24, 04/2026).
+          </p>
         </div>
         <div>
           <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Anlagengröße (leer = automatisch)</label>

@@ -9,6 +9,7 @@ import AiExplain from '@/components/rechner/AiExplain';
 import StromSpartipp from '@/components/rechner/StromSpartipp';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
+import { getStrompreis } from '@/lib/berechnungen/strompreis';
 
 const SCHNELLWAHL = [
   { label: '1 Person', kwh: '1500' },
@@ -17,9 +18,11 @@ const SCHNELLWAHL = [
   { label: '4 Personen', kwh: '4500' },
 ];
 
+const STROMPREIS_DEFAULT = String(getStrompreis('durchschnitt_bdew'));
+
 export default function StromkostenRechner() {
   const [verbrauch, setVerbrauch] = useState('2500');
-  const [preisProKwh, setPreisProKwh] = useState('36');
+  const [preisProKwh, setPreisProKwh] = useState(STROMPREIS_DEFAULT);
   const [grundpreis, setGrundpreis] = useState('12');
 
   const ergebnis = useMemo(

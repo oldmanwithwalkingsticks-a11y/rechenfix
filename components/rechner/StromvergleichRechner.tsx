@@ -8,10 +8,13 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
+import { getStrompreis } from '@/lib/berechnungen/strompreis';
+
+const ARBEITSPREIS_DEFAULT = String(getStrompreis('durchschnitt_bdew'));
 
 export default function StromvergleichRechner() {
   const [verbrauch, setVerbrauch] = useState('2500');
-  const [arbeitspreis, setArbeitspreis] = useState('32');
+  const [arbeitspreis, setArbeitspreis] = useState(ARBEITSPREIS_DEFAULT);
   const [grundpreis, setGrundpreis] = useState('10');
   const [oekostrom, setOekostrom] = useState(false);
   const [ausgewaehlteGroesse, setAusgewaehlteGroesse] = useState(1);

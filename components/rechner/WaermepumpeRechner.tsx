@@ -8,6 +8,12 @@ import {
   type Daemmstandard,
   type AlteHeizung,
 } from '@/lib/berechnungen/waermepumpe';
+import { getStrompreis } from '@/lib/berechnungen/strompreis';
+import {
+  BEG_FOERDERUNG_2026,
+  berechneBegFoerderquote,
+  BEG_LAUTSTAERKE_HINWEIS_2026,
+} from '@/lib/berechnungen/beg-foerderung';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
@@ -22,7 +28,13 @@ export default function WaermepumpeRechner() {
   const [alteHeizung, setAlteHeizung] = useState<AlteHeizung>('gas');
   const [heizkostenBekannt, setHeizkostenBekannt] = useState(true);
   const [heizkostenAktuell, setHeizkostenAktuell] = useState('2000');
-  const [strompreis, setStrompreis] = useState('32');
+  // Wärmepumpenstrom-Spezialtarif (HT, separater Zähler) ist als Default
+  // realistischer als Haushaltsstrom — Nutzer kann hochklemmen.
+  const [strompreis, setStrompreis] = useState(String(getStrompreis('waermepumpen_tarif')));
+  // F1: BEG-Boni-Schalter — Förderquote berechnet sich daraus dynamisch
+  const [boniKlima, setBoniKlima] = useState(false);
+  const [boniEinkommen, setBoniEinkommen] = useState(false);
+  const [boniEffizienz, setBoniEffizienz] = useState(false);
   const [gaspreis, setGaspreis] = useState('12');
   const [anschaffung, setAnschaffung] = useState('30000');
   const [foerderung, setFoerderung] = useState('30');
@@ -140,9 +152,9 @@ export default function WaermepumpeRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">5</span>
           Strompreis
         </h2>
-        <NummerEingabe value={strompreis} onChange={setStrompreis} placeholder="32" einheit="ct/kWh" />
+        <NummerEingabe value={strompreis} onChange={setStrompreis} placeholder={String(getStrompreis('waermepumpen_tarif'))} einheit="ct/kWh" />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-          Wärmepumpen-Stromtarife sind oft günstiger (25–30 ct/kWh).
+          Wärmepumpen-Spezialtarife (HT, separater Zähler) liegen 2026 bei ca. 25–30 ct/kWh, Haushaltsstrom bei ca. 33–37 ct/kWh.
         </p>
       </div>
 
@@ -185,22 +197,67 @@ export default function WaermepumpeRechner() {
       <div className="mb-6">
         <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">8</span>
-          Förderung
+          BEG-Förderung 2026
         </h2>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+          Grundförderung {BEG_FOERDERUNG_2026.grundfoerderung} % erhält jeder Antragsteller. Boni sind kombinierbar — gedeckelt bei {BEG_FOERDERUNG_2026.maxGesamtfoerderung} %.
+        </p>
+        <fieldset className="border border-gray-200 dark:border-gray-700 rounded-lg p-3 mb-3">
+          <legend className="px-2 text-xs text-gray-600 dark:text-gray-400">Boni nach KfW 458</legend>
+          <label className="flex items-start gap-2 mb-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={boniKlima}
+              onChange={(e) => {
+                const next = { klimageschwindigkeit: e.target.checked, einkommen: boniEinkommen, effizienz: boniEffizienz };
+                setBoniKlima(e.target.checked);
+                setFoerderung(String(berechneBegFoerderquote(next)));
+              }}
+              className="mt-1 min-w-[20px] min-h-[20px]"
+            />
+            <span className="text-xs text-gray-700 dark:text-gray-300">
+              <strong>Klimageschwindigkeitsbonus +{BEG_FOERDERUNG_2026.klimageschwindigkeitsbonus} %</strong> — Tausch alte fossile Heizung (Öl, Gas, Kohle).
+            </span>
+          </label>
+          <label className="flex items-start gap-2 mb-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={boniEinkommen}
+              onChange={(e) => {
+                const next = { klimageschwindigkeit: boniKlima, einkommen: e.target.checked, effizienz: boniEffizienz };
+                setBoniEinkommen(e.target.checked);
+                setFoerderung(String(berechneBegFoerderquote(next)));
+              }}
+              className="mt-1 min-w-[20px] min-h-[20px]"
+            />
+            <span className="text-xs text-gray-700 dark:text-gray-300">
+              <strong>Einkommensbonus +{BEG_FOERDERUNG_2026.einkommensbonus} %</strong> — Brutto-Haushaltseinkommen unter {BEG_FOERDERUNG_2026.einkommensgrenze.toLocaleString('de-DE')} €.
+            </span>
+          </label>
+          <label className="flex items-start gap-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={boniEffizienz}
+              onChange={(e) => {
+                const next = { klimageschwindigkeit: boniKlima, einkommen: boniEinkommen, effizienz: e.target.checked };
+                setBoniEffizienz(e.target.checked);
+                setFoerderung(String(berechneBegFoerderquote(next)));
+              }}
+              className="mt-1 min-w-[20px] min-h-[20px]"
+            />
+            <span className="text-xs text-gray-700 dark:text-gray-300">
+              <strong>Effizienzbonus +{BEG_FOERDERUNG_2026.effizienzbonus} %</strong> — natürliches Kältemittel (z. B. Propan R290), Wasser/Erdreich/Abwasser als Wärmequelle.
+            </span>
+          </label>
+        </fieldset>
         <NummerEingabe value={foerderung} onChange={setFoerderung} placeholder="30" einheit="%" />
-        <div className="flex flex-wrap gap-2 mt-2">
-          {['30', '50', '70'].map(v => (
-            <button
-              key={v}
-              onClick={() => setFoerderung(v)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${foerderung === v ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
-            >
-              {v} %
-            </button>
-          ))}
-        </div>
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-          BEG-Förderung 2026: Grundförderung 30 %, Klimageschwindigkeitsbonus +20 %, Einkommensbonus +30 % — max. 70 %.
+        {parseInt(foerderung, 10) >= BEG_FOERDERUNG_2026.maxGesamtfoerderung && (
+          <p className="text-xs text-amber-700 dark:text-amber-400 mt-1">
+            ⓘ Maximalförderung erreicht (Cap bei {BEG_FOERDERUNG_2026.maxGesamtfoerderung} % nach BEG-Richtlinie).
+          </p>
+        )}
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+          {BEG_LAUTSTAERKE_HINWEIS_2026}
         </p>
       </div>
 

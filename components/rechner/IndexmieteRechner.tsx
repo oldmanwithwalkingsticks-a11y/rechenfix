@@ -10,11 +10,16 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { VPI_AKTUELL } from '@/lib/berechnungen/vpi';
+
+// VPI-Default aus zentraler SSOT (Destatis, monatlich aktualisiert).
+// Komma-Notation für deutsches Eingabefeld.
+const VPI_NEU_DEFAULT = String(VPI_AKTUELL.wert).replace('.', ',');
 
 export default function IndexmieteRechner() {
   const [kaltmiete, setKaltmiete] = useState('800');
   const [vpiAlt, setVpiAlt] = useState('117,4');
-  const [vpiNeu, setVpiNeu] = useState('127,8');
+  const [vpiNeu, setVpiNeu] = useState(VPI_NEU_DEFAULT);
   // SSG-Hydration-Guard: Datum leer initialisieren, client-seitig setzen.
   const [datumLetzteAnpassung, setDatumLetzteAnpassung] = useState('');
 
