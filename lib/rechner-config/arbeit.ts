@@ -1152,49 +1152,6 @@ Neben dem Tabellenunterhalt gibt es **Sonderbedarf** (einmalige, außergewöhnli
     ],
   },
   {
-    slug: 'arbeitslosengeld-rechner',
-    titel: 'Arbeitslosengeld-Rechner',
-    beschreibung: 'Arbeitslosengeld I berechnen: Höhe, Dauer und Auszahlungsbetrag basierend auf dem letzten Gehalt.',
-    kategorie: 'Finanzen',
-    kategorieSlug: 'finanzen',
-    metaTitle: 'Arbeitslosengeld-Rechner 2026 — Höhe & Dauer',
-    metaDescription: 'Arbeitslosengeld berechnen: ALG-I-Höhe, Bezugsdauer und Auszahlung ✓ 60 %/67 % ✓ Steuerklasse ✓ KI-Erklärung.',
-    keywords: ['arbeitslosengeld rechner', 'alg 1 rechner', 'alg i 2026', 'arbeitslosengeld berechnen', 'bezugsdauer alg', 'leistungsentgelt', 'sperrzeit'],
-    icon: '💶',
-    formel: 'Leistungsentgelt = Bemessungsentgelt − pauschale Lohnsteuer − 21 % SV-Pauschale | ALG = Leistungsentgelt × 60 % (ohne Kind) bzw. 67 % (mit Kind)',
-    beispiel: '3.500 € Brutto, Steuerklasse I, ohne Kind, 24 Monate Beschäftigung (Alter 40): ca. 1.420 € ALG I/Monat für 12 Monate = rund 17.000 € Gesamtanspruch.',
-    erklaerung: `**Arbeitslosengeld I — Höhe und Dauer 2026**
-
-Das Arbeitslosengeld I (ALG I) ist eine Versicherungsleistung aus der Arbeitslosenversicherung. Voraussetzung ist eine **Anwartschaftszeit** von mindestens 12 Monaten sozialversicherungspflichtiger Beschäftigung innerhalb der letzten 30 Monate (Rahmenfrist). Die Höhe richtet sich nach dem pauschalierten Netto (Leistungsentgelt) aus dem Durchschnittsbrutto der letzten 12 Monate — nicht nach dem tatsächlich erhaltenen Netto.
-
-**So wird das Leistungsentgelt berechnet**
-
-Vom Bruttoentgelt (max. bis zur Beitragsbemessungsgrenze der Rentenversicherung, 2026 einheitlich 8.450 €/Monat — seit 2025 keine West/Ost-Trennung mehr) werden pauschal abgezogen: **Lohnsteuer nach Steuerklasse**, **Solidaritätszuschlag**, **Sozialversicherungspauschale von 21 %** sowie ggf. **Kirchensteuer**. Das verbleibende tägliche Leistungsentgelt wird mit dem Leistungssatz multipliziert: **60 %** ohne Kind, **67 %** mit mindestens einem kindergeldberechtigten Kind. Daraus ergibt sich der monatliche ALG-Betrag (Tagesatz × 30).
-
-**Bezugsdauer nach Alter und Beschäftigung**
-
-Die **Bezugsdauer** hängt von der Beschäftigungsdauer in den letzten 5 Jahren und dem Lebensalter bei Arbeitslosmeldung ab. Grundregel: 12 Monate Beschäftigung → 6 Monate ALG, 24 Monate → 12 Monate ALG. Für ältere Arbeitnehmer gelten verlängerte Bezugszeiten: ab 50 Jahre bis zu 15 Monate, ab 55 bis zu 18 Monate, ab 58 bis zu **24 Monate**. Die Bezugsdauer wird verbraucht — Restansprüche können bei erneuter Arbeitslosigkeit innerhalb von 4 Jahren wieder aufleben.
-
-**Sperrzeit bei Eigenkündigung**
-
-Wer selbst kündigt oder einen Aufhebungsvertrag ohne wichtigen Grund schließt, riskiert eine **Sperrzeit von 12 Wochen** (§ 159 SGB III). In dieser Zeit wird kein ALG gezahlt — und die Gesamtanspruchsdauer verringert sich um bis zu ein Viertel. Bei kleineren Verstößen (z. B. verspätete Arbeitslosmeldung) gibt es kürzere Sperrzeiten von 1–3 Wochen. Wer über einen Aufhebungsvertrag verhandelt, sollte vorab den [Abfindungsrechner](/arbeit/abfindungsrechner) und den [Kündigungsfrist-Rechner](/arbeit/kuendigungsfrist-rechner) nutzen.
-
-**Nach dem ALG I — was kommt danach?**
-
-Ist der Anspruch auf ALG I aufgebraucht und wurde keine neue Anwartschaftszeit aufgebaut, greift das **Bürgergeld** (§ 19 SGB II). Anders als das ALG I ist das Bürgergeld eine bedarfsorientierte Grundsicherung: Eigenes Vermögen und Einkommen des Partners werden angerechnet, die Höhe richtet sich nicht nach dem früheren Gehalt, sondern nach Regelsatz, Miete und Nebenkosten. Unser [Bürgergeld-Rechner](/finanzen/buergergeld-rechner) hilft bei der Orientierung.
-
-**Hinweis zur Abfindung**
-
-Eine **Abfindung** bei einvernehmlicher Auflösung des Arbeitsverhältnisses wird in der Regel **nicht auf das ALG I angerechnet**, wenn die ordentliche Kündigungsfrist eingehalten wurde. Wird die Kündigungsfrist verkürzt, kann das ALG während der eigentlich geltenden Kündigungsfrist ruhen (§ 158 SGB III). Darüber hinaus unterliegt die Abfindung der **Fünftelregelung** als außerordentliche Einkünfte — das kann steuerlich günstig sein.`,
-    faq: [
-      { frage: 'Wie hoch ist das Arbeitslosengeld I?', antwort: 'Das ALG I beträgt 60 % des pauschalierten Netto (Leistungsentgelt) bzw. 67 % mit mindestens einem Kind. Grundlage ist das Durchschnittsbrutto der letzten 12 Monate. Bei 3.500 € Brutto und Steuerklasse I ergeben sich etwa 1.420 €/Monat. Nutzen Sie unseren Rechner für Ihren individuellen Wert.' },
-      { frage: 'Wie lange bekomme ich ALG I?', antwort: 'Die Bezugsdauer richtet sich nach Beschäftigungsdauer und Alter: 12 Monate Beschäftigung ergeben 6 Monate ALG, 24 Monate Beschäftigung 12 Monate ALG. Ältere Arbeitnehmer erhalten länger: ab 50 Jahre bis zu 15 Monate, ab 55 bis zu 18 Monate, ab 58 sogar bis zu 24 Monate.' },
-      { frage: 'Wird eine Abfindung auf das ALG I angerechnet?', antwort: 'Grundsätzlich nicht — solange die ordentliche Kündigungsfrist eingehalten wird. Wird die Kündigungsfrist verkürzt (z. B. im Aufhebungsvertrag), ruht das ALG bis zum fiktiven regulären Kündigungstermin (§ 158 SGB III). Steuerlich profitieren Abfindungen von der Fünftelregelung.' },
-      { frage: 'Was passiert bei Eigenkündigung?', antwort: 'Bei Eigenkündigung oder Aufhebungsvertrag ohne wichtigen Grund verhängt die Arbeitsagentur eine Sperrzeit von 12 Wochen. In dieser Zeit wird kein ALG gezahlt und die Gesamtanspruchsdauer verkürzt sich um bis zu ein Viertel. Ein wichtiger Grund (z. B. Mobbing, gesundheitliche Gründe) muss nachgewiesen werden.' },
-      { frage: 'Was kommt nach ALG I?', antwort: 'Ist der ALG-Anspruch aufgebraucht, greift das Bürgergeld als Grundsicherung (§ 19 SGB II). Anders als das ALG I ist es bedarfsorientiert: Höhe richtet sich nach Regelsatz, Miete und Nebenkosten; Vermögen und Partnereinkommen werden angerechnet. Nutzen Sie unseren Bürgergeld-Rechner für eine Schätzung.' },
-    ],
-  },
-  {
     slug: 'elternzeit-rechner',
     titel: 'Elternzeit-Rechner',
     beschreibung: 'Elternzeit berechnen: Anspruch, Aufteilung zwischen Partnern, Fristen und Meldetermine.',

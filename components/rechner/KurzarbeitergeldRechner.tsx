@@ -225,7 +225,7 @@ export default function KurzarbeitergeldRechner() {
             </p>
           </div>
 
-          <CrossLink href="/arbeit/arbeitslosengeld-rechner" emoji="📉" text="Nach Kurzarbeit: ALG I berechnen" />
+          <CrossLink href="/finanzen/arbeitslosengeld-rechner" emoji="📉" text="Nach Kurzarbeit: ALG I berechnen" />
 
           <ErgebnisAktionen
             ergebnisText={`Kurzarbeitergeld: ${fmt(ergebnis.kug)} €/Monat (${(ergebnis.satz * 100).toLocaleString('de-DE')} %). Gesamteinkommen: ${fmt(ergebnis.gesamtEinkommen)} € (Verlust ${fmt(ergebnis.verlust)} € / ${fmtP(ergebnis.verlustProzent)} %).`}
