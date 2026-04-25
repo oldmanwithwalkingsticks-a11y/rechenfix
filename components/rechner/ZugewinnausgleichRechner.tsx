@@ -7,14 +7,23 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
+import { indexiereVermoegen, getVpi, VPI_JAHRESDURCHSCHNITTE, VPI_AKTUELL } from '@/lib/berechnungen/vpi';
+
+// VPI-Range: erstes Jahr in den Lange-Reihen-Daten + laufendes Jahr (aktueller VPI-Monat).
+const VPI_JAHR_MIN = Math.min(...Object.keys(VPI_JAHRESDURCHSCHNITTE).map(Number));
+const VPI_JAHR_MAX = parseInt(VPI_AKTUELL.monat.slice(0, 4), 10);
 
 export default function ZugewinnausgleichRechner() {
+  const [heiratsjahr, setHeiratsjahr] = useState('2010');
+  const [endstichtagJahr, setEndstichtagJahr] = useState(String(VPI_JAHR_MAX));
   const [anfangP1, setAnfangP1] = useState('15000');
   const [endP1, setEndP1] = useState('80000');
   const [privilegP1, setPrivilegP1] = useState('0');
+  const [privilegJahrP1, setPrivilegJahrP1] = useState('2010');
   const [anfangP2, setAnfangP2] = useState('5000');
   const [endP2, setEndP2] = useState('120000');
   const [privilegP2, setPrivilegP2] = useState('0');
+  const [privilegJahrP2, setPrivilegJahrP2] = useState('2010');
 
   const ergebnis = useMemo(() => {
     const aP1 = parseDeutscheZahl(anfangP1);
@@ -23,10 +32,40 @@ export default function ZugewinnausgleichRechner() {
     const aP2 = parseDeutscheZahl(anfangP2);
     const eP2 = parseDeutscheZahl(endP2);
     const prP2 = parseDeutscheZahl(privilegP2);
+    const heirat = parseInt(heiratsjahr, 10);
+    const ende = parseInt(endstichtagJahr, 10);
+    const prJP1 = parseInt(privilegJahrP1, 10) || heirat;
+    const prJP2 = parseInt(privilegJahrP2, 10) || heirat;
 
-    // Bereinigtes Anfangsvermögen (inkl. privilegierter Erwerb)
-    const bereinAnfangP1 = aP1 + prP1;
-    const bereinAnfangP2 = aP2 + prP2;
+    // VPI-Range-Validierung — bei Out-of-Range fallen wir auf "keine
+    // Indexierung" zurück, damit der Rechner noch funktioniert; Hinweis
+    // im UI dazu (vpiFehler).
+    let vpiFehler: string | null = null;
+    let aP1Indexiert = aP1;
+    let prP1Indexiert = prP1;
+    let aP2Indexiert = aP2;
+    let prP2Indexiert = prP2;
+    let vpiHeirat = 0;
+    let vpiEnde = 0;
+    let indexFaktor = 1;
+    try {
+      vpiHeirat = getVpi(heirat);
+      vpiEnde = getVpi(ende);
+      indexFaktor = vpiEnde / vpiHeirat;
+      // § 1376 BGB: Anfangsvermögen × VPI(End) / VPI(Heirat)
+      aP1Indexiert = indexiereVermoegen(aP1, heirat, ende);
+      aP2Indexiert = indexiereVermoegen(aP2, heirat, ende);
+      // Privilegierter Erwerb wird mit dem VPI zum Erwerbsdatum indexiert
+      // (ständige Rechtsprechung BGH FamRZ 2002, 606).
+      prP1Indexiert = indexiereVermoegen(prP1, prJP1, ende);
+      prP2Indexiert = indexiereVermoegen(prP2, prJP2, ende);
+    } catch (e) {
+      vpiFehler = e instanceof Error ? e.message : 'VPI-Lookup-Fehler';
+    }
+
+    // Bereinigtes Anfangsvermögen (inkl. indexiertem privilegierten Erwerb)
+    const bereinAnfangP1 = aP1Indexiert + prP1Indexiert;
+    const bereinAnfangP2 = aP2Indexiert + prP2Indexiert;
 
     // Zugewinn (kann nicht negativ werden)
     const zugewinnP1 = Math.max(0, eP1 - bereinAnfangP1);
@@ -50,11 +89,16 @@ export default function ZugewinnausgleichRechner() {
     }
 
     return {
-      aP1, eP1, prP1, bereinAnfangP1, zugewinnP1,
-      aP2, eP2, prP2, bereinAnfangP2, zugewinnP2,
+      aP1, eP1, prP1, aP1Indexiert, prP1Indexiert, bereinAnfangP1, zugewinnP1,
+      aP2, eP2, prP2, aP2Indexiert, prP2Indexiert, bereinAnfangP2, zugewinnP2,
       differenz, ausgleichRoh, ausgleich, pflichtiger, berechtigter,
+      heirat, ende, vpiHeirat, vpiEnde, indexFaktor, vpiFehler,
     };
-  }, [anfangP1, endP1, privilegP1, anfangP2, endP2, privilegP2]);
+  }, [
+    anfangP1, endP1, privilegP1, privilegJahrP1,
+    anfangP2, endP2, privilegP2, privilegJahrP2,
+    heiratsjahr, endstichtagJahr,
+  ]);
 
   const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 
@@ -62,6 +106,37 @@ export default function ZugewinnausgleichRechner() {
 
   return (
     <div>
+      {/* === STICHTAGE === */}
+      <div className="mb-6">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+          <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">📅</span>
+          Stichtage
+        </h2>
+        <div className="space-y-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-4">
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Heiratsjahr</label>
+              <NummerEingabe value={heiratsjahr} onChange={setHeiratsjahr} placeholder="2010" />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Endstichtag (Scheidungsantrag)</label>
+              <NummerEingabe value={endstichtagJahr} onChange={setEndstichtagJahr} placeholder={String(VPI_JAHR_MAX)} />
+            </div>
+          </div>
+          <p className="text-xs text-gray-500 dark:text-gray-400">
+            Für die Indexierung des Anfangsvermögens nach § 1376 BGB. Verfügbarer VPI-Bereich: {VPI_JAHR_MIN}–{VPI_JAHR_MAX}.
+            {!ergebnis.vpiFehler && ergebnis.indexFaktor !== 1 && (
+              <> Index-Faktor {ergebnis.indexFaktor.toLocaleString('de-DE', { minimumFractionDigits: 3, maximumFractionDigits: 3 })} (VPI {ergebnis.vpiHeirat} → {ergebnis.vpiEnde}).</>
+            )}
+          </p>
+          {ergebnis.vpiFehler && (
+            <p role="alert" className="text-xs text-amber-700 dark:text-amber-400">
+              ⚠ {ergebnis.vpiFehler} — Berechnung läuft ohne Indexierung weiter.
+            </p>
+          )}
+        </div>
+      </div>
+
       {/* === PARTNER 1 === */}
       <div className="mb-6">
         <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
@@ -82,9 +157,12 @@ export default function ZugewinnausgleichRechner() {
           </div>
           <div>
             <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Privilegierter Erwerb (optional)</label>
-            <NummerEingabe value={privilegP1} onChange={setPrivilegP1} placeholder="0" einheit="€" />
+            <div className="grid grid-cols-2 gap-2">
+              <NummerEingabe value={privilegP1} onChange={setPrivilegP1} placeholder="0" einheit="€" />
+              <NummerEingabe value={privilegJahrP1} onChange={setPrivilegJahrP1} placeholder="2015" einheit="Jahr" />
+            </div>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              Erbschaften und Schenkungen während der Ehe werden dem Anfangsvermögen zugerechnet.
+              Erbschaften und Schenkungen während der Ehe werden dem Anfangsvermögen zugerechnet (mit VPI zum Erwerbsjahr indexiert).
             </p>
           </div>
         </div>
@@ -107,7 +185,10 @@ export default function ZugewinnausgleichRechner() {
           </div>
           <div>
             <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Privilegierter Erwerb (optional)</label>
-            <NummerEingabe value={privilegP2} onChange={setPrivilegP2} placeholder="0" einheit="€" />
+            <div className="grid grid-cols-2 gap-2">
+              <NummerEingabe value={privilegP2} onChange={setPrivilegP2} placeholder="0" einheit="€" />
+              <NummerEingabe value={privilegJahrP2} onChange={setPrivilegJahrP2} placeholder="2015" einheit="Jahr" />
+            </div>
           </div>
         </div>
       </div>
@@ -141,14 +222,21 @@ export default function ZugewinnausgleichRechner() {
             </thead>
             <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
               <tr>
-                <td className="px-3 py-2.5 text-gray-600 dark:text-gray-400">Anfangsvermögen</td>
+                <td className="px-3 py-2.5 text-gray-600 dark:text-gray-400">Anfangsvermögen ({ergebnis.heirat})</td>
                 <td className="px-3 py-2.5 text-right tabular-nums">{fmtEuro(ergebnis.aP1)} €</td>
                 <td className="px-3 py-2.5 text-right tabular-nums">{fmtEuro(ergebnis.aP2)} €</td>
               </tr>
+              {ergebnis.indexFaktor !== 1 && (
+                <tr>
+                  <td className="px-3 py-2.5 text-gray-600 dark:text-gray-400">↳ indexiert auf {ergebnis.ende} (× {ergebnis.indexFaktor.toFixed(3)})</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums">{fmtEuro(ergebnis.aP1Indexiert)} €</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums">{fmtEuro(ergebnis.aP2Indexiert)} €</td>
+                </tr>
+              )}
               <tr>
-                <td className="px-3 py-2.5 text-gray-600 dark:text-gray-400">+ Privilegierter Erwerb</td>
-                <td className="px-3 py-2.5 text-right tabular-nums">{fmtEuro(ergebnis.prP1)} €</td>
-                <td className="px-3 py-2.5 text-right tabular-nums">{fmtEuro(ergebnis.prP2)} €</td>
+                <td className="px-3 py-2.5 text-gray-600 dark:text-gray-400">+ Privilegierter Erwerb (indexiert)</td>
+                <td className="px-3 py-2.5 text-right tabular-nums">{fmtEuro(ergebnis.prP1Indexiert)} €</td>
+                <td className="px-3 py-2.5 text-right tabular-nums">{fmtEuro(ergebnis.prP2Indexiert)} €</td>
               </tr>
               <tr>
                 <td className="px-3 py-2.5 text-gray-600 dark:text-gray-400">= Bereinigtes Anfangsvermögen</td>
