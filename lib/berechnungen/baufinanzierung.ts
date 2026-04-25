@@ -1,3 +1,5 @@
+import { getGrEStSatzByLongKey } from './grunderwerbsteuer';
+
 export interface BaufinanzierungEingabe {
   kaufpreis: number;
   eigenkapital: number;
@@ -45,54 +47,47 @@ export interface BaufinanzierungErgebnis {
   warnungen: string[];
 }
 
-const GRUNDERWERBSTEUER: Record<string, number> = {
-  'bayern': 3.5,
-  'sachsen': 3.5,
-  'hamburg': 5.5,
-  'baden-wuerttemberg': 5.0,
-  'niedersachsen': 5.0,
-  'rheinland-pfalz': 5.0,
-  'bremen': 5.0,
-  'sachsen-anhalt': 5.0,
-  'thueringen': 5.0,
-  'hessen': 6.0,
-  'mecklenburg-vorpommern': 6.0,
-  'berlin': 6.0,
-  'nordrhein-westfalen': 6.5,
-  'saarland': 6.5,
-  'brandenburg': 6.5,
-  'schleswig-holstein': 6.5,
-};
-
 const NOTAR_SATZ = 2.0;
 const MAKLER_SATZ = 3.57;
 
+/**
+ * Bundesländer-Liste mit GrESt-Sätzen aus zentraler SSOT.
+ * Lang-Keys (z. B. `'bayern'`, `'sachsen'`) bleiben aus historischen Gründen
+ * (BaufinanzierungRechner-State, sitemap-Slugs) — die Sätze kommen aus
+ * `lib/berechnungen/grunderwerbsteuer.ts` (Stand: Bremen 5,5 % seit 01.07.2025,
+ * Sachsen 5,5 % seit 01.01.2023, Thüringen 5,0 % seit 01.01.2024).
+ */
 export const BUNDESLAENDER = [
-  { key: 'baden-wuerttemberg', label: 'Baden-Württemberg', satz: 5.0 },
-  { key: 'bayern', label: 'Bayern', satz: 3.5 },
-  { key: 'berlin', label: 'Berlin', satz: 6.0 },
-  { key: 'brandenburg', label: 'Brandenburg', satz: 6.5 },
-  { key: 'bremen', label: 'Bremen', satz: 5.0 },
-  { key: 'hamburg', label: 'Hamburg', satz: 5.5 },
-  { key: 'hessen', label: 'Hessen', satz: 6.0 },
-  { key: 'mecklenburg-vorpommern', label: 'Mecklenburg-Vorpommern', satz: 6.0 },
-  { key: 'niedersachsen', label: 'Niedersachsen', satz: 5.0 },
-  { key: 'nordrhein-westfalen', label: 'Nordrhein-Westfalen', satz: 6.5 },
-  { key: 'rheinland-pfalz', label: 'Rheinland-Pfalz', satz: 5.0 },
-  { key: 'saarland', label: 'Saarland', satz: 6.5 },
-  { key: 'sachsen', label: 'Sachsen', satz: 3.5 },
-  { key: 'sachsen-anhalt', label: 'Sachsen-Anhalt', satz: 5.0 },
-  { key: 'schleswig-holstein', label: 'Schleswig-Holstein', satz: 6.5 },
-  { key: 'thueringen', label: 'Thüringen', satz: 5.0 },
-];
+  { key: 'baden-wuerttemberg', label: 'Baden-Württemberg' },
+  { key: 'bayern', label: 'Bayern' },
+  { key: 'berlin', label: 'Berlin' },
+  { key: 'brandenburg', label: 'Brandenburg' },
+  { key: 'bremen', label: 'Bremen' },
+  { key: 'hamburg', label: 'Hamburg' },
+  { key: 'hessen', label: 'Hessen' },
+  { key: 'mecklenburg-vorpommern', label: 'Mecklenburg-Vorpommern' },
+  { key: 'niedersachsen', label: 'Niedersachsen' },
+  { key: 'nordrhein-westfalen', label: 'Nordrhein-Westfalen' },
+  { key: 'rheinland-pfalz', label: 'Rheinland-Pfalz' },
+  { key: 'saarland', label: 'Saarland' },
+  { key: 'sachsen', label: 'Sachsen' },
+  { key: 'sachsen-anhalt', label: 'Sachsen-Anhalt' },
+  { key: 'schleswig-holstein', label: 'Schleswig-Holstein' },
+  { key: 'thueringen', label: 'Thüringen' },
+].map(b => ({ ...b, satz: getGrEStSatzByLongKey(b.key) }));
 
 export function berechneBaufinanzierung(eingabe: BaufinanzierungEingabe): BaufinanzierungErgebnis | null {
   const { kaufpreis, eigenkapital, bundesland, sollzins, tilgung, zinsbindungJahre, sondertilgungMonat, nebenkostenEinrechnen } = eingabe;
 
   if (kaufpreis <= 0 || eigenkapital < 0 || sollzins < 0 || tilgung <= 0) return null;
 
-  // Nebenkosten
-  const grStSatz = GRUNDERWERBSTEUER[bundesland] || 5.0;
+  // Nebenkosten — GrESt-Satz aus zentraler SSOT (grunderwerbsteuer.ts)
+  let grStSatz: number;
+  try {
+    grStSatz = getGrEStSatzByLongKey(bundesland);
+  } catch {
+    grStSatz = 5.0; // Fallback bei unbekanntem Bundesland (Bundesdurchschnitt)
+  }
   const grunderwerbsteuer = kaufpreis * grStSatz / 100;
   const notar = kaufpreis * NOTAR_SATZ / 100;
   const makler = kaufpreis * MAKLER_SATZ / 100;
