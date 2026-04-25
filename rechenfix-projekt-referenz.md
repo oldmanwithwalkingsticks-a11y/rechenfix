@@ -1,10 +1,10 @@
 # Rechenfix.de — Projekt-Referenz
 
-Stand: 25.04.2026
+Stand: 26.04.2026
 
 ## Was ist rechenfix.de?
 
-Rechenfix.de ist ein deutschsprachiges Online-Rechner-Portal mit aktuell **169 kostenlosen Rechnern** in 9 Kategorien. Slogan: "Fix gerechnet!". Alleinstellungsmerkmal gegenüber Konkurrenz: **KI-Erklärungen** ("Fix erklärt") via Anthropic Claude API — kein anderer deutscher Rechner-Anbieter hat das. Alle Berechnungen erfolgen live im Browser ohne Submit-Button. WCAG 2.1 AA konform (Lighthouse ≥97).
+Rechenfix.de ist ein deutschsprachiges Online-Rechner-Portal mit aktuell **170 kostenlosen Rechnern** in 9 Kategorien. Slogan: "Fix gerechnet!". Alleinstellungsmerkmal gegenüber Konkurrenz: **KI-Erklärungen** ("Fix erklärt") via Anthropic Claude API — kein anderer deutscher Rechner-Anbieter hat das. Alle Berechnungen erfolgen live im Browser ohne Submit-Button. WCAG 2.1 AA konform (Lighthouse ≥97).
 
 - **URL:** https://www.rechenfix.de (IMMER mit www!)
 - **Hosting:** Vercel
@@ -19,26 +19,30 @@ Rechenfix.de ist ein deutschsprachiges Online-Rechner-Portal mit aktuell **169 k
 - **KI:** Anthropic Claude API (für "Fix erklärt"-Feature)
 - **Monetarisierung:** AdSense + Affiliate (Awin-Netzwerk)
 
-## Rechner-Inventar (Stand April 2026)
+## Rechner-Inventar (Stand 26.04.2026)
 
-**170 eigenständige Rechner in 9 Kategorien** (Stand 24.04.2026, Quelle: Prompt 132.5 SSOT-Scan):
+**170 eigenständige Rechner in 9 Kategorien** (Quelle: SSOT-Scan via `grep -c "slug: '" lib/rechner-config/*.ts`):
 
 | Kategorie | Slug | Anzahl |
 |---|---|---|
 | Alltag | `/alltag` | 23 |
-| Finanzen | `/finanzen` | 44 |
+| Finanzen | `/finanzen` | **45** |
 | Gesundheit | `/gesundheit` | 17 |
 | Auto & Verkehr | `/auto` | 11 |
 | Wohnen & Energie | `/wohnen` | 25 |
 | Mathe & Schule | `/mathe` | 18 |
-| Arbeit & Recht | `/arbeit` | 18 |
+| Arbeit & Recht | `/arbeit` | **17** |
 | Kochen & Ernährung | `/kochen` | 12 |
 | Sport & Fitness | `/sport` | 2 |
 | **Summe** | | **170** |
 
-**Verschiebungen seit letztem Sync (Prompt 97, 19.04.2026):**
-- **Auto 10 → 11, Finanzen 45 → 44:** Firmenwagen-Rechner migriert aus der Finanzen- in die Auto-Kategorie und Slug-Schreibweise auf Bindestrich-Konvention normalisiert (Prompt 126, 301-Redirect in `next.config.mjs`).
-- **Arbeit 17 → 18:** Ehegattenunterhalt-Rechner neu hinzugekommen.
+**Verschiebungen seit Prompt 146 (25.04.2026):**
+- **Arbeit 18 → 17, Finanzen 44 → 45:** arbeitslosengeld-rechner aus arbeit.ts → finanzen.ts migriert (Prompt 149a, 26.04.2026). Konfig deklarierte schon `kategorie: 'Finanzen'` — SSOT-Konsistenz pro Kategorie-Datei wiederhergestellt. Slug + URL `/finanzen/arbeitslosengeld-rechner` unverändert.
+
+**Verschiebungen seit Prompt 97 (19.04.2026):**
+- **Auto 10 → 11, Finanzen 45 → 44 (Prompt 126):** Firmenwagen-Rechner migriert aus der Finanzen- in die Auto-Kategorie und Slug-Schreibweise auf Bindestrich-Konvention normalisiert (301-Redirect in `next.config.mjs`).
+- **Arbeit 17 → 18 (Prompt 109):** Ehegattenunterhalt-Rechner neu hinzugekommen.
+- **Arbeit 18 → 17, Finanzen 44 → 45 (Prompt 149a, 26.04.2026):** arbeitslosengeld-Migration siehe oben.
 
 **Sitemap: 178 Rechner-URLs** — Differenz zu 170 erklärt sich durch Varianten-/Tabellen-Seiten unter `/finanzen/` (z.B. `2000-euro-brutto-netto` bis `5000-euro-brutto-netto`, `brutto-netto-tabelle`, `mindestlohn-netto`). Die dynamische Route `app/[kategorie]/[rechner]/page.tsx` rendert die URLs; Metadaten stehen in `lib/rechner-config/<kategorie>.ts`. Die URL `/gesundheit/herzfrequenz-rechner` wurde im April 2026 per 301-Redirect auf `/sport/herzfrequenz-zonen-rechner` konsolidiert (Feature-Obermenge).
 
@@ -68,6 +72,11 @@ Alle jahresabhängigen und gesetzlich definierten Werte liegen in `lib/berechnun
 | `buergergeld.ts` **(erweitert 121 + 129)** | Gesamt-Berechnung + Mehrbedarfe § 21 SGB II + altersgestaffeltes Schonvermögen H2 | `berechneBuergergeld(...)` nimmt `erwachseneAlter?: number[]` für H2; Ergebnis-Felder `vermoegenModus` + `vermoegensAufschluesselung` pro Person; `berechneMehrbedarfe` alle 6 Tatbestände inkl. Alleinerziehend-max-Logik + Deckel 60 % |
 | `wohngeld.ts` **(Explainer-Mode seit 120d)** | **nicht produktiv für Berechnung** — Lib hat Architektur-Bug bei §§ 14–16 pro Person | `HOECHSTBETRAEGE_WOGG_2026`, `ZUSCHLAG_PRO_PERSON_WOGG_2026` (für Explainer-Tabelle exportiert) |
 | `kfz-steuer-parameter.ts` **(neu, Prompt 131)** | SSOT KraftStG — CO₂-Staffel § 9 Abs. 1 Nr. 2c + Elektro-Befreiung § 3d (8. KraftStÄndG vom 04.12.2025) | `CO2_STAFFEL_KRAFTSTG_9_NR2C` (7-stufige progressive Staffel), `ELEKTRO_BEFREIUNG`, `berechneCO2Komponente(gProKm)`, `berechneElektroBefreiungsende(erstzulassung)`, `SOCKEL_PRO_100CCM` |
+| `strompreis.ts` **(neu, Prompt 147, Welle 2 Stufe 3 Wohnen)** | Strompreis-SSOT 4 Profile (BDEW-Mittel, Festpreis-Neukunden, Grundversorgung, WP-Tarif). Konsumiert von 8 Wohnen-Rechnern + heizkosten-Lib. | `STROMPREIS_2026` (durchschnitt_bdew=37, neukunden_festpreis=33, grundversorgung=40, waermepumpen_tarif=28 ct/kWh), `getStrompreis(profil?)` |
+| `eeg-einspeiseverguetung.ts` **(neu, Prompt 147)** | § 49 EEG 2023 Halbjahres-Schalter (1.2./1.8., −1 % Degression). BNetzA 04/2026: 7,78 ct/kWh bis 10 kWp Teil, 12,34 ct Voll; 6,73/10,35 ct 10–40 kWp; 5,50/10,35 ct 40–100 kWp. Prognose-Bucket für 01.08.2026. | `getEegSatz(stichtag?)` (gibt 6 Sätze + Prognose-Flag), `getMischVerguetung(kwp, modus, stichtag?)`, `EEG_DEGRESSION_HINWEIS` |
+| `beg-foerderung.ts` **(neu, Prompt 147)** | KfW 458 Förderquoten Heizungstausch (Grundförderung 30 % + Klima 20 % + Einkommen 30 % + Effizienz 5 %, Cap 70 %, Investitions-Cap 30.000 €/1. WE) | `BEG_FOERDERUNG_2026`, `berechneBegFoerderquote(boni)`, `berechneBegZuschuss(invest, boni, wohneinheiten)`, `BEG_LAUTSTAERKE_HINWEIS_2026` (10 dB unter Grenzwerten ab 01.01.2026) |
+| `vpi.ts` **(neu Prompt 147, erweitert Prompt 149b — Welle 2 Stufe 3 Arbeit)** | Verbraucherpreisindex Destatis Lange Reihe (Tabelle 61111-0001, Basisjahr 2020 = 100). Werte 1995–2025 + aktueller Monatsstand. Für § 1376 BGB Indexierung im Zugewinnausgleich-Rechner. | `VPI_AKTUELL`, `VPI_JAHRESDURCHSCHNITTE`, `getVpi(jahr)` (Fallback auf VPI_AKTUELL für laufendes Jahr, Throw bei Out-of-Range), **`indexiereVermoegen(betrag, jahrAnfang, jahrEnde)`** als § 1376 BGB-konformer Helper (BFH BFHE 217, 248) |
+| `pv-ertragsmodell.ts` **(neu, Prompt 147c)** | Mertens-Faktoren für PV-Ertragsschätzung (PR=0,85 nach VDI 6002 / IEC 61724 implizit im Basiswert eingebacken). 8 Ausrichtungs- × 5 Neigungsstufen. Konsumiert von photovoltaik- + dachflaechen-Rechner. Hinweis: balkon-solar-Lib nutzt bewusst eigenes BKW-Modell (950 kWh/kWp Brutto vor PR). | `PV_BASIS_ERTRAG_KWH_KWP = 850`, `AUSRICHTUNGS_FAKTOR` (Süd 1,00 / SO/SW 0,95 / O/W 0,85 / NO/NW 0,72 / Nord 0,65), `NEIGUNGS_FAKTOR` (87/94/100/97/91 %), `berechnePvErtrag({kwp, ausrichtung, neigung})`, `berechneSpezifischenErtrag(ausrichtung, neigung)` |
 | `midijob-parameter.ts` **(neu, Prompt 125a)** | SSOT Midijob-Faktoren § 20a SGB IV mit Stichtag-Switch | `MIDIJOB_2026`, `getAktuelleMidijobParameter(stichtag)`, `getBeitragsFormeln()` (Koeffizienten aus G/OG/F abgeleitet) |
 | `midijob-uebergang.ts` **(neu, Prompt 125a)** | § 20a SGB IV BE-Formeln getrennt für Abs. 2 (Gesamt) und Abs. 2a (AN) | `berechneBemessungsgrundlageGesamt`, `berechneBemessungsgrundlageAN`, `getMidijobUntergrenze`, `MIDIJOB_OBERGRENZE_MONAT` |
 | `mwst.ts` **(erweitert, Prompt 132)** | § 12 UStG Regelsatz/ermäßigt + Brutto-/Netto-Faktoren | Konstanten `MWST_REGULAER` (0,19), `MWST_ERMAESSIGT` (0,07), `BRUTTO_FAKTOR_REGULAER`, `NETTO_FAKTOR_REGULAER`; Funktionen `berechneNettoZuBrutto`, `berechneBruttoZuNetto`, `berechneMultiMwSt` |
@@ -353,6 +362,9 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
 - ✅ **CosmosDirekt-Affiliate** (Prompts 145 + 145b, 25.04.2026) — 12. Programm Awin Merchant 11893 (Icon 🛡️, `#0D6EFD`). 15 Produkt-Deeplinks: Tagesgeld, Altersvorsorge, Sparplan, Junior, Risikoleben, BU, Unfall, Sterbegeld, Privat-Haftpflicht, Hausrat, Wohngebäude, Bauherrenhaftpflicht, Tierhalter, Reiserücktritt, Default. **30 Einbauten** in 30 Rechnern (21 Group A Append nach bestehenden Boxen, 9 Group B Erstinstall; B6 MietRechner.tsx übersprungen — Datei existiert nicht). Sonderfälle: RentenRechner mit `variant="compact"` (4. Box, visuelle Last), SparRechner mit `context="tagesgeld"` statt `sparplan` (verivox bedient sparplan an Z. 138). AffiliateBox-Aufrufe gesamt: 87 → 117 in 73 Dateien.
 - ✅ **Casing-Hotfix** (Commit 7dd9934, 25.04.2026) — Latenter Casing-Bug behoben: `MwStRueckerstattungRechner.tsx` (großes St) lokal vs. `MwstRueckerstattungRechner.tsx` (kleines st) im git-Index. Vercel-Linux case-sensitive → `Module not found` auf Production. Zwei-Schritt-`git mv` für case-only-Rename auf Windows.
 - ✅ **Doku-Sync** (Prompt 146, 25.04.2026) — CLAUDE.md / SKILL.md / dieses Dokument nach Welle-2-Stufen-1+2 + CosmosDirekt
+- ✅ **Welle 2 Stufe 3 Wohnen** (Prompts 147 + 147b + 147c + 148 + 148b, 25.04.2026) — 25 Rechner (Block A 12 rechtssensitiv + Block B 13 Mengen). 5 neue SSOT-Libs (`strompreis.ts`, `eeg-einspeiseverguetung.ts`, `beg-foerderung.ts`, `vpi.ts`, `pv-ertragsmodell.ts` aus 147c). Hauptbefunde: PV-Einspeisevergütung 8,03 → 7,78 ct/kWh (war 2 Jahre veraltet), GrESt-Sätze Bremen/Sachsen/Thüringen aktualisiert, Mietpreisbremse-Verlängerung bis 31.12.2029 (BT-Drs. 21/322), Strompreis-Inkonsistenz 32/36 → systemweit 37 ct via SSOT, BEG-Wärmepumpenförderung max. 70 %/21.000 €. 147b Hotfix: balkon-solar 800-W-Cap, wärmepumpe 30–1000 m²-Range. 147c PV-Ertragsmodell mit Mertens-Faktoren. 148 Block B: dachflaechen 950 → 850 kWh/kWp, poolkosten 220 → 270 €. 148b Component-Drift: poolkosten/heizkosten/dachflaechen Component-Defaults via SSOT, balkon-solar Nord-Faktor 0,40 → 0,60. ~16 Commits, 87+ Verify-Tests grün. **Offen:** Mieterbund-Wert in nebenkosten-rechner (148c bei Gelegenheit)
+- 🟡 **Welle 2 Stufe 3 Arbeit** (Prompts 149a/b/c durch, 26.04.2026; 149d offen) — Block A Audit: 4× P1 + 6× P2 + 17× P3. 149a arbeitslosengeld-Migration arbeit.ts → finanzen.ts (SSOT-Konsistenz). 149c ehegattenunterhalt SB-Achse korrigiert von Trennungsphase auf Erwerbstätigkeit (gilt für Trennungs- UND nachehelichen Unterhalt gleichermaßen, erfundene „Bindung schwächer"-Begründung gestrichen). 149b zugewinnausgleich § 1376 BGB Indexierung Anfangsvermögen mit `vpi.ts`-Erweiterung (`indexiereVermoegen`-Helper, `getVpi(jahr)`). **Offen:** 149d scheidungskosten KostBRÄG 2025 (wartet auf externe Wert-Verifikation), 150 P2-Polish (Mutterschutz Fehlgeburt + Elternunterhalt-Update + Süd-OLG-Hinweis), 151 P3-UX-Sammelbatch
+- ✅ **Doku-Sync** (Prompt 154, 26.04.2026) — CLAUDE.md / SKILL.md / dieses Dokument / `welle-status-historie.md` nach Welle-2-Stufe-3-Wohnen-Abschluss und Welle-2-Stufe-3-Arbeit-P1-Block (149a/b/c). Neue Anti-Patterns (Backtick-Falle in Template-Literals, Slug-Drift in Kategorie-Datei, Phantom-Befund-Diagnose). Counts korrigiert.
 
 **Parkend (wartet auf AdSense-Freigabe):**
 - ⏸ Prompt 68 — Google CMP + Consent Mode v2
@@ -363,7 +375,9 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
 - 🎯 GSC: Sitemap neu einreichen nach Deploy; CTR-Review der 3 neuen Awin-Partner ~20.05.2026
 - 🎯 Neue Rechner-Batches (thematisch offen)
 - 🎯 Jahresparameter-Audit 2027 (Frühjahr 2027): ESt-Tarif 2027, SV-Rechengrößen 2027, JAEG, Zusatzbeitrag, D-Ticket, Pfändung-Switch zum 01.07.2028
-- 🎯 **Welle 2 Stufe 2 Gesundheit** (Prompt 140, kommend): 17 Rechner-Audit nach 4-Punkt-Methodik, vermutliche Hot Spots blutdruck, kalorien, bmi, schwangerschaft
+- 🎯 **Welle 2 Stufe 3 Arbeit Restanten:** 149d KostBRÄG-Update (wartet auf Wert-Verifikation), 150 P2-Polish (Mutterschutz Fehlgeburt + Elternunterhalt + Süd-OLG-Hinweis), 151 P3-UX-Sammelbatch
+- 🎯 **Welle 2 Stufe 3 weitere Kategorien** (Alltag, Mathe, Kochen, Sport): noch nicht gestartet
+- 🎯 **148c Mieterbund-Wert** in nebenkosten-rechner (Mini-Hotfix, sobald aktueller Wert von mieterbund.de vorliegt)
 - 🎯 **Prompt 133 TaxiRechner Stadt-Preset-UX:** 5 Städte-Presets (Karsten-Auswahl ausstehend), `taxi-preset-tarife.ts` mit Stichtag-Kommentar pro Stadt, CLAUDE.md-Wartungsregel halbjährlich. Vorbereitet durch `TARIFE_STAND` in `lib/berechnungen/taxi.ts` (Prompt 132 A5)
 - 🎯 **Prompt 120c (Juni 2026):** Wohngeld-Lib-Refactoring auf Pro-Person-Architektur §§ 14–16 WoGG, gebündelt mit Grundsicherungsgeld-Reform (Switch 01.07.2026). Nach Umsetzung: `STATISCHE_OVERRIDES`-Ausschluss aufheben, dynamische Route rendert wieder den interaktiven Rechner. KdU-1,5-Fache-Cap (§ 22 Abs. 1 SGB II n.F., aus Prompt 129 Teil B Nicht-Scope) könnte dabei als Nebenprodukt integriert werden
 - 🎯 **Prompt 121a (~August 2026 bei Bedarf):** BAföG WS 2026/27-Erhöhung einpflegen (neuer Bucket `BAFOEG_AB_2026_08_01` in `bafoeg-parameter.ts`, wenn Verordnung verabschiedet)
@@ -371,12 +385,25 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
 - 🎯 **Amazon-Monitoring** 4/12/24 Wochen (ab 22.04.2026): Erste Klick-Stats, Conversion-Rate, Eskalation vor 19.10.2026-Deadline (siehe `docs/amazon-integration.md`)
 
 **Welle-Status:**
-- **Welle 1 (Hoch-Risiko, Steuer/SV/Familie/Arbeitsrecht/Spezial-Steuer/Sozialleistungen):** ✅ ABGESCHLOSSEN April 2026 (Stufen 1+2+1.5+3+4a+4b)
-- **Welle 2 (Mittel-Risiko):** Stufe 1 Auto ✅ ABGESCHLOSSEN 23.04.2026; **Stufe 2 Gesundheit ✅ ABGESCHLOSSEN 25.04.2026** (Prompts 140–144b, 17 Rechner, 2 P1 + 9 P2 + 9 P3 alle gefixt + Feature-Add Perioden-Länge); Stufe 3 offen (Kategorie noch zu wählen — Wohnen / Alltag / Mathe / Arbeit / Kochen / Sport)
-- **Welle 3 (Niedrig-Risiko-Stichprobe Alltag/Kochen/Mathe/Wohnen):** noch nicht begonnen — vorgesehen nach Welle 2
+- **Welle 1 (Hoch-Risiko):** ✅ ABGESCHLOSSEN April 2026 (Stufen 1+2+1.5+3+4a+4b)
+- **Welle 2 (Mittel-Risiko):**
+  - Stufe 1 Auto ✅ ABGESCHLOSSEN 23.04.2026 (Prompts 130–132.6)
+  - Stufe 2 Gesundheit ✅ ABGESCHLOSSEN 25.04.2026 (Prompts 140–144b)
+  - **Stufe 3 Wohnen** ✅ ABGESCHLOSSEN 25.04.2026 (Prompts 147–148b, 25 Rechner)
+  - **Stufe 3 Arbeit** 🟡 LÄUFT — P1-Block 3/4 durch (149a/b/c, 26.04.2026), 149d offen (KostBRÄG); 150 P2 + 151 P3 offen
+  - Stufe 3 weitere Kategorien (Alltag, Mathe, Kochen, Sport): noch nicht begonnen
+- **Welle 3 (Niedrig-Risiko-Stichprobe + systematischer Validation-Sweep):** noch nicht begonnen — vorgesehen nach Welle-2-Vollabschluss. Vorab-Backlog aus Welle-2-Audits: Component-Drift-Scanner (Default-Werte gegen SSOT abgleichen), Hinweisbox-Texte vs. Konfig-Konsistenz, BKW-spezifisches PV-SSOT-Modul (aktuell `balkon-solar.ts` mit eigenständigem Modell)
 
-**Neue Scripts seit letztem Sync:**
-- `scripts/slug-drift-scan.mjs` (Prompt 132.5, als Prebuild-Hook seit 132.6) — prüft hartkodierte `/<kategorie>/<slug>`-Pfade gegen SSOT, bricht Build bei nicht-whitelisted Drifts ab. Ad-hoc via `npm run lint:slugs`.
+Vollständige Welle-Historie: [docs/audit-arbeitspapiere/welle-status-historie.md](docs/audit-arbeitspapiere/welle-status-historie.md).
+
+**Neue Scripts seit letztem Sync (146):**
+- `scripts/verify-wohnen-p1.ts` (Prompt 147), `verify-wohnen-block-b.ts` (148), `verify-pv-ertragsmodell.ts` (147c), `verify-ehegattenunterhalt.ts` (149c), `verify-zugewinnausgleich.ts` (149b) — alle gegen externe Primärquellen (BNetzA, BDEW, KfW, Mertens, Düsseldorfer Tabelle, BFH/BGB, Destatis Lange Reihe)
+
+**Build-Regel (verschärft seit 20.04.2026):** Lokal IMMER `npm run build`, NIE `npx next build`. Prebuild-Hooks: check-footer, check-jahreswerte, slug-drift-scan, generate-client-data — Fail-fast-Reihenfolge.
+
+**Workflow-Tools (seit 20.04.2026, persistent in Chrome bzw. claude.ai-Settings, nicht im Memory):**
+- Claude-in-Chrome Extension — Live-HTML-Inspektion, Console, Network. Modus „Ask before acting".
+- Vercel-MCP-Connector (`https://mcp.vercel.com`) — Deploy-Status, Logs, Toolbar-Threads.
 
 ## Parkende Items (bis AdSense-Freigabe)
 
@@ -633,11 +660,23 @@ Jeder Prompt für einen neuen Rechner enthält:
 ## docs-Verzeichnis
 
 - `docs/jahreswerte-kalender.md` — Governance-Kalender gesetzlicher Stichtage (Prompt 98)
-- `docs/audit-arbeitspapiere/` **(neu seit Prompt 107c)** — Stufenpläne der Welle-1-Audits (`stufe1-arbeitsblatt.md`, `welle1-stufenplan.md`, `welle1-stufe3-bericht.md`, `welle1-stufe4a-bericht.md`, `welle1-stufe4b-bericht.md`, `bafoeg-geschwister-analyse.md`); dienen bei weiteren Audits als Methodik-Referenz
+- `docs/audit-arbeitspapiere/` — Audit-Berichte:
+  - Welle-1-Audits: `stufe1-arbeitsblatt.md`, `welle1-stufenplan.md`, `welle1-stufe3-bericht.md`, `welle1-stufe4a-bericht.md`, `welle1-stufe4b-bericht.md`
+  - Spezial-Analysen: `bafoeg-geschwister-analyse.md`, `midijob-an-sv-analyse.md`, `lohnsteuer-v-vi-analyse.md`, `slug-drift-check-2026-04.md`, `prompt-129-grundsicherungsgeld-H2.md`, `afbg-rechner-bau.md`
+  - Welle-2-Audits: `welle2-stufe1-auto-bericht.md`, `welle2-stufe3-arbeit-blockA-audit.md`, `welle2-stufe3-arbeit-blockB-audit.md`
+  - **`welle-status-historie.md`** (neu seit 25.04.2026) — konsolidierte Übersicht aller Wellen mit Lessons-Learned; ersetzt mehrere Memory-Einträge
+- `docs/audits/` — abgeschlossene Welle-2-Berichte mit Folge-Prompts:
+  - `welle2-stufe2-gesundheit.md`
+  - `welle-2-stufe-3-wohnen-block-a.md`, `welle-2-stufe-3-wohnen-block-b.md`
 - `docs/jahresparameter-audit-2026-04.md` — Grep-Report Prompt 86
 - `docs/stufe1-rechner-semantik.md`, `docs/stufe1-5-rechner-semantik.md`, `docs/stufe2-rechner-semantik.md` — Welle-1-Audit-Artefakte
-- `docs/amazon-integration.md` **(neu seit Prompt 122-amazon)** — Amazon-Partner-Programm: rechtliche Basics, Komponente, 16 integrierte Rechner mit Keywords, Monitoring-Plan 4/12/24 Wochen, Selbstbezug-Reminder, 180-Tage-Deadline
+- `docs/amazon-integration.md` (Prompt 122-amazon) — Amazon-Partner-Programm: rechtliche Basics, Komponente, 16 integrierte Rechner mit Keywords, Monitoring-Plan 4/12/24 Wochen, Selbstbezug-Reminder, 180-Tage-Deadline
+- `docs/a11y-baseline-2026-04.md` — Accessibility-Status-Snapshot
 - `docs/referenzen/itzbund-README.md` — Jährlicher Update-Prozess für Lohnsteuer-PAP § 39b EStG
+
+## Casing-Bug-Pattern (Windows ↔ Linux/Vercel)
+
+Lokal Windows-NTFS = case-insensitive, Vercel-Linux = case-sensitive. Bei Component-Renames mit nur Case-Änderung: **Two-Step `git mv`** (`Foo.tsx` → `_tmp.tsx` → `foo.tsx`), `forceConsistentCasingInFileNames` greift erst bei nächster Edit. Referenz: Commit 7dd9934 (25.04.2026, MwStRueckerstattungRechner.tsx-Casing). Vor jedem Edit an Component-Dateien: `git ls-files | grep -i <name>` zur Bestätigung. Vollständige Doku: CLAUDE.md → Regel 16, SKILL.md → „Casing-Konsistenz".
 
 ## Monetarisierungs-Strategie
 

@@ -7,7 +7,7 @@ description: Template and checklist for building standardized online calculators
 
 Build standardized, SEO-optimized calculator pages for the German calculator portal rechenfix.de. Every calculator must follow this template to ensure consistency, completeness, and maximum SEO impact.
 
-**Aktueller Stand (25.04.2026):** 170 Rechner in 9 Kategorien (Alltag 23, Finanzen 44, Gesundheit 17, Auto & Verkehr 11, Wohnen & Energie 25, Mathe & Schule 18, Arbeit & Recht 18, Kochen & Ernährung 12, Sport & Fitness 2). **Welle-Status:** Welle 1 ✅ komplett; Welle 2 Stufe 1 Auto ✅ (130–132.6); **Welle 2 Stufe 2 Gesundheit ✅** (140–144b, 17 Rechner, 2 P1 + 9 P2 + 9 P3 alle gefixt + Feature-Add 144b). **Affiliate:** 12 Programme inkl. CosmosDirekt (Awin 11893, seit Prompt 145, 25.04.2026); 117 AffiliateBox-Aufrufe in 73 Dateien.
+**Aktueller Stand (26.04.2026):** 170 Rechner in 9 Kategorien (Alltag 23, Finanzen **45**, Gesundheit 17, Auto & Verkehr 11, Wohnen & Energie 25, Mathe & Schule 18, Arbeit & Recht **17**, Kochen & Ernährung 12, Sport & Fitness 2). **Welle-Status:** Welle 1 ✅ komplett; Welle 2 Stufe 1 Auto ✅ (130–132.6); Welle 2 Stufe 2 Gesundheit ✅ (140–144b); **Welle 2 Stufe 3 Wohnen ✅** (147–148b); **Welle 2 Stufe 3 Arbeit** läuft (149a/b/c durch, 149d offen — wartet auf KostBRÄG-2025-Werte). **Affiliate:** 12 Programme inkl. CosmosDirekt (Awin 11893); 117 AffiliateBox-Aufrufe in 73 Dateien. **AdSense** live seit 20.04.2026 (Publisher-ID `pub-1389746597486587`). Vollständige Welle-Historie: [docs/audit-arbeitspapiere/welle-status-historie.md](../../docs/audit-arbeitspapiere/welle-status-historie.md).
 
 ## Tech Stack
 
@@ -823,6 +823,86 @@ Immer die SSOT-Konstanten `GRUNDFREIBETRAG_2026` und `WK_PAUSCHALE_AN_2026`
 aus `einkommensteuer.ts`. Inline-Werte bleiben beim Jahreswechsel stehen
 (G11 deckt das ab, hier nur als Merk-Anker).
 
+### 🚫 Backtick-Falle in Template-Literal-Erklärtexten (Prompt 149b, 26.04.2026)
+
+```ts
+// FALSCH (in lib/rechner-config/<kat>.ts):
+erklaerung: `…wird wie folgt berechnet: `getVpi(jahr)` aus vpi.ts.…`,
+//                                       ^^^^^^^^^^^^^^^^
+//                                       Inline-Code-Backticks schließen
+//                                       das umgebende Template-Literal!
+```
+
+Das löst beim Build einen esbuild-Fehler aus
+(`ERROR: Expected "}" but found "..."`). Die `formel`/`beispiel`/`erklaerung`/
+`faq`-Felder in `lib/rechner-config/<kat>.ts` sind selbst Template-Literals
+mit Backticks — Inline-Code-Backticks darin müssen vermieden werden.
+
+**Korrekt:** Klartext oder typografische Apostrophe verwenden:
+
+```ts
+// RICHTIG:
+erklaerung: `…wird wie folgt berechnet: getVpi(jahr) aus vpi.ts.…`,
+// oder mit typografischen Anführungszeichen:
+erklaerung: `…Faktor = VPI(End) / VPI(Heirat).…`,
+```
+
+Bei Code-Beispielen, die unbedingt monospace dargestellt werden müssen:
+ggf. das ganze Feld vom Template-Literal auf einen normalen String mit
+`'…'` umstellen — dann sind Backticks im Inhalt erlaubt. In der Praxis
+ist Klartext aber meist ausreichend, weil die Anzeige im Browser ohnehin
+über einen Markdown-Renderer oder Plain-Text läuft.
+
+### 🚫 Slug-Drift in Kategorie-Datei (Prompt 149a, 26.04.2026)
+
+```ts
+// FALSCH (in lib/rechner-config/arbeit.ts):
+{
+  slug: 'arbeitslosengeld-rechner',
+  kategorie: 'Finanzen',          // ← stimmt nicht mit Datei überein
+  kategorieSlug: 'finanzen',      // ← stimmt nicht mit Datei überein
+  …
+}
+```
+
+Ein Eintrag in `arbeit.ts` muss `kategorie: 'Arbeit & Recht'` und
+`kategorieSlug: 'arbeit'` haben. Sonst wird die SSOT-Eigenschaft pro
+Kategorie-Datei verletzt — der Eintrag landet in der falschen Sidebar,
+Footer-Counts werden falsch, hartkodierte URLs (CrossLinks, Markdown-
+Links in Erklärtexten) zeigen auf nicht-existierende Pfade.
+
+**Korrekt:** Eintrag in die zur Kategorie-Slug passende Datei migrieren
+(siehe Prompt 149a für Beispiel: arbeitslosengeld-rechner aus
+arbeit.ts → finanzen.ts). Slug-Drift-Scan (Prebuild-Hook seit 132.6)
+fängt Folge-Effekte (hartkodierte CrossLinks auf alten Pfad) ab, aber
+das Konfig-Drift selbst kann er nicht entdecken — Audit-Disziplin nötig.
+
+### 🚫 Phantom-Befund-Diagnose ohne Code-Inspektion (149-Lehre, 26.04.2026)
+
+Audit-Befunde, die aus Screenshots oder visueller Intuition stammen,
+ohne dass der Code geprüft wurde, können falsch sein. Beispiel aus
+Welle 2 Stufe 3 PV: Audit behauptete „bei Wechsel Süd → Nord ändert
+sich kWp-Default automatisch von 8,8 auf 7,3" — Code-Inspektion
+zeigte: `kwpAuto = dach / 5,5` ist ausrichtungsunabhängig, der Befund
+war Phantom.
+
+**Regel:** Vor dem Fix den Code lesen und gegen den Audit-Befund
+abgleichen. Bei Diskrepanz STOP und Karsten zeigen — nicht „Phantom-
+Bugs" mit No-Op-Commits dokumentieren.
+
+### 🚫 Test-Soll-Werte gegen UI-Anzeige rechnen (149b-Lehre)
+
+UI-Anzeige rundet (z. B. „21.083,80 € → 21.084 €" via `Math.round`).
+Verify-Tests müssen gegen die unverrundete Berechnung prüfen, sonst
+schlagen sie an Floating-Point-Drift fehl. Beispiel: 8,8 × 950 × 0,65
+= 4.861,99... → `Math.round` = 4.862 (nicht 4.866 oder 4.861).
+
+**Regel:** Im Verify-Script den Soll-Wert exakt durchrechnen und mit
+der Lib-Logik (inkl. Math.round/floor/ceil) abgleichen. Bei Tol-Werten
+mindestens 1 Cent für Floating-Point-Drift einplanen, aber nie
+„auf den Test-Output anpassen" — das ist verbotenes Test-Adjusting
+gegen die Berechnungs-Wahrheit (siehe Prompt 120a Lehre).
+
 ### 📌 Meta-Lektion: Soli ohne Milderungszone — ein Wiederholungs-Bug
 
 Das Muster `est > 20350 ? est * 0.055 : 0` (harte Kante ohne Milderungszone)
@@ -1128,6 +1208,11 @@ Tarif-, SV-, Unterhalts-, Mindestlohn-, Renten- und Pfändungs-Rechner dürfen P
 - `lib/berechnungen/bafoeg-parameter.ts` **(neu, Prompt 121, 22.04.2026)** — `getAktuelleBafoegParameter(stichtag)`, `getAnrechnungsquote(geschwister)` (0,50 − 0,05 × Kinder, min/max-Clamp), single-bucket `BAFOEG_AB_2024_08_01` mit Skeleton für WS 2026/27. Antragsteller zählt NICHT mit.
 - `lib/berechnungen/buergergeld-parameter.ts` **(neu, Prompt 121, 22.04.2026)** — `getAktuelleBuergergeldParameter(stichtag)`, Zwei Buckets `BUERGERGELD_2026_H1` + `BUERGERGELD_2026_H2` (Switch 01.07.2026 auf „Neue Grundsicherung"; H2 derzeit identisch zu H1 als Skeleton bis Gesetzestext verabschiedet). Enthält Regelsätze RSS1–6, Vermögensfreibeträge, Mehrbedarfs-Sätze § 21 Abs. 2–7 SGB II.
 - `lib/berechnungen/kfz-steuer-parameter.ts` **(neu, Prompt 131, 23.04.2026)** — SSOT KraftStG: § 9 Abs. 1 Nr. 2c CO₂-Staffel + § 3d Elektro-Befreiung. Exports: `CO2_STAFFEL_KRAFTSTG_9_NR2C` (7-stufig progressiv 2,00/2,20/2,50/2,90/3,40/4,00 €/g), `ELEKTRO_BEFREIUNG`, `berechneCO2Komponente(gProKm)`, `berechneElektroBefreiungsende(erstzulassung)` (8. KraftStÄndG v. 04.12.2025 — bis 31.12.2035, Erstzulassung bis 31.12.2030), `SOCKEL_PRO_100CCM`.
+- `lib/berechnungen/strompreis.ts` **(neu, Prompt 147, 25.04.2026)** — BDEW-Mittel + Festpreis-Neukundentarif + Worst-Case Grundversorgung + Wärmepumpen-Spezialtarif. Exports: `STROMPREIS_2026` (4 Profile: durchschnitt_bdew=37, neukunden_festpreis=33, grundversorgung=40, waermepumpen_tarif=28 ct/kWh), `getStrompreis(profil?)`. Konsumiert von stromkosten-, stromvergleich-, balkon-solar-, energiekosten-, photovoltaik-, poolkosten-, waermepumpen-, heizkosten-Rechner.
+- `lib/berechnungen/eeg-einspeiseverguetung.ts` **(neu, Prompt 147)** — § 49 EEG 2023 Halbjahres-Schalter. Exports: `getEegSatz(stichtag?)` (gibt 6 Sätze für bis-10/40/100 kWp jeweils Teil-/Volleinspeisung zurück + Prognose-Flag), `getMischVerguetung(kwp, modus, stichtag?)`, `EEG_DEGRESSION_HINWEIS`. BNetzA 04/2026: 7,78 ct/kWh bis 10 kWp Teil, 12,34 ct Voll; 6,73 ct 10–40 kWp Teil, 10,35 ct Voll; 5,50 ct 40–100 kWp Teil, 10,35 ct Voll. Prognose-Bucket für 01.08.2026 (−1 % Degression).
+- `lib/berechnungen/beg-foerderung.ts` **(neu, Prompt 147)** — KfW 458 Förderquoten Heizungstausch. Exports: `BEG_FOERDERUNG_2026` (Konstanten: Grundförderung 30 %, Klimageschwindigkeit 20 %, Einkommen 30 %, Effizienz 5 %, Cap 70 %, Einkommensgrenze 40.000 €, max. förderfähige Kosten 30.000 €/1. WE), `berechneBegFoerderquote(boni)`, `berechneBegZuschuss(invest, boni, wohneinheiten)`, `BEG_LAUTSTAERKE_HINWEIS_2026` (10 dB unter Grenzwerten ab 01.01.2026 für Bestandsgebäude).
+- `lib/berechnungen/vpi.ts` **(neu Prompt 147, erweitert Prompt 149b)** — Verbraucherpreisindex Destatis Lange Reihe (Tabelle 61111-0001, Basisjahr 2020 = 100). Exports: `VPI_AKTUELL` (letzter Monatswert + Veränderung), `VPI_JAHRESDURCHSCHNITTE` (Jahre 1995–2025), **`getVpi(jahr)` mit Fallback auf VPI_AKTUELL für laufendes Jahr** und Throw bei Out-of-Range, **`indexiereVermoegen(betrag, jahrAnfang, jahrEnde)` als § 1376 BGB-konformer Helper** (Verwendung im Zugewinnausgleich-Rechner zur Anfangsvermögen-Indexierung; Identitäts-Test bei gleichem Stichtag).
+- `lib/berechnungen/pv-ertragsmodell.ts` **(neu, Prompt 147c, 25.04.2026)** — Mertens-Faktoren für PV-Ertragsschätzung (PR=0,85 nach VDI 6002 / IEC 61724 implizit im Basiswert 850 kWh/kWp/Jahr eingebacken). Exports: `PV_BASIS_ERTRAG_KWH_KWP = 850`, `AUSRICHTUNGS_FAKTOR` (8 Stufen: Süd 1,00 / SO/SW 0,95 / Ost/West 0,85 / NO/NW 0,72 / Nord 0,65), `NEIGUNGS_FAKTOR` (5 Stufen: 0–15° 0,87 / 15–25° 0,94 / 25–35° 1,00 / 35–45° 0,97 / 45°+ 0,91), Label-Maps für Dropdowns, `berechnePvErtrag({kwp, ausrichtung, neigung})`, `berechneSpezifischenErtrag(ausrichtung, neigung)`. Konsumiert von photovoltaik- und dachflaechen-Rechner. Hinweis: `lib/berechnungen/balkon-solar.ts` nutzt bewusst eigenes BKW-Modell (950 kWh/kWp Brutto vor PR + BKW-spezifische Aufstellungs-Faktoren), siehe Header-Doku in der Lib.
 - `lib/berechnungen/bmi.ts` **(erweitert, Prompts 141 + 143, 25.04.2026)** — WHO-BMI-Kategorien + alters-adjustierter Optimal-Bereich (NRC 1989). Exports: `bmiKategorien` (SSOT seit 143, auch von SchwangerschaftGewichtRechner konsumiert), `getOptimalerBereich(alter)` (SSOT seit 143, auch von idealgewicht.ts konsumiert), **`BMI_ADULT_MIN_AGE = 18`** (Erwachsenen-Gating, Component unterdrückt Kategorie/Skala/Optimal-Bereich bei `alter < 18` und zeigt Verweis auf BMI-Perzentilen Kromeyer-Hauschild).
 - `lib/berechnungen/kalorien.ts` **(erweitert, Prompt 141, 25.04.2026)** — Mifflin-St Jeor mit Eating-Disorder-Floor. `berechneKalorien(...)` setzt `zielKalorien = Math.max(zielKalorienRoh, grundumsatz)` und neues Flag `zielGeklammertAufGrundumsatz: boolean`; UI zeigt Hinweis bei Klammer.
 - `lib/berechnungen/schwangerschaft.ts` **(neu, Prompt 143, 25.04.2026 — Voll-Fusion)** — Konsolidiert die früheren `geburtstermin.ts` + `ssw.ts` (beide gelöscht). Enthält Naegele + erweiterte Naegele für Zykluslänge ≠ 28; SSW-Berechnung; Trimester; Meilensteine. Exports: `parseDatum(s)` (zeitzonen-sicher mit `+'T00:00:00'`), `berechneGeburtstermin(eingabe)` (SSW ab LMP+Zyklus-Korrektur), `berechneSsw(eingabe)` (SSW ab reinem LMP — gynäkologischer Standard), `defaultPeriodeDatum`, `defaultTerminDatum`, `Methode`, `SswMethode`, `Meilenstein`. **Beide SSW-Konventionen klinisch korrekt** — JSDoc dokumentiert die Divergenz, nicht versehentlich vereinheitlichen.
@@ -1164,3 +1249,4 @@ Ohne diesen Schritt geben Claude-Chat und Claude-Code inkonsistente Ratschläge 
 | 22.04.2026 | Prompt 122-doku-sync: BAföG/Bürgergeld Parameter-Libs im Pattern-Abschnitt, SSOT-Parameter-Lib-Muster mit Interface+Bucket+Getter, Amazon-Partner-Abschnitt (AmazonBox + Regeln), Audit-Lehre-Checkliste (Zahlen-Erwartungen nur aus Primärquelle/Oracle), UI-Label-Rechtsbezug (Prompt 121-fix Lehre), statische-Route-Sidebar (Prompt 120d-sidebar Lehre) | [ ] noch offen |
 | 24.04.2026 | Prompt 134: Welle-2-Stufe-1-Auto-Abschluss (Prompts 130–132.6), Slug-Drift-Scan-Prebuild-Hook, kfz-steuer-parameter.ts SSOT, Slug-/Display-Name-Konvention (Duden vs. SEO-Lesbarkeit), Anti-Pattern „Slug-Kategorie-Intuition" | [ ] noch offen |
 | 25.04.2026 | Prompt 146: Welle-2-Stufe-2-Gesundheit-Abschluss (Prompts 140–144b), CosmosDirekt als 12. Programm (Awin 11893), bmi.ts erweitert (`bmiKategorien` + `getOptimalerBereich` als SSOT, `BMI_ADULT_MIN_AGE = 18`), schwangerschaft.ts Voll-Fusion (geburtstermin.ts + ssw.ts gelöscht), Wellbeing-Patterns-Sektion (Eating-Disorder-Floor, Kinder-Gating, Verhütungs-Disclaimer, istKind-Flag), Casing-Konsistenz-Lehre (Windows-NTFS vs. Vercel-Linux, Zwei-Schritt-`git mv`), Verify-Script-Pattern pro Welle-2-Stufe (externe Primärquellen) | [ ] noch offen |
+| 26.04.2026 | Prompt 154: Welle-2-Stufe-3-Wohnen-Abschluss (Prompts 147–148b) + Welle-2-Stufe-3-Arbeit-Status (149a/b/c durch, 149d offen), 6 neue SSOT-Libs ergänzt (`strompreis.ts`, `eeg-einspeiseverguetung.ts`, `beg-foerderung.ts`, `vpi.ts` mit § 1376 BGB-Helper, `pv-ertragsmodell.ts`, plus `kfz-steuer-parameter.ts` aus Welle 2 Stufe 1), 4 neue Anti-Patterns (Backtick-Falle in Template-Literals, Slug-Drift in Kategorie-Datei, Phantom-Befund-Diagnose, Test-Soll-Werte gegen UI-Anzeige), Counts korrigiert (170 = Alltag 23 / Finanzen 45 / Gesundheit 17 / Auto 11 / Wohnen 25 / Mathe 18 / Arbeit 17 / Kochen 12 / Sport 2) | [ ] noch offen |

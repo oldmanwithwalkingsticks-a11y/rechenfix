@@ -4,11 +4,45 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 25.04.2026
+**Stand:** 26.04.2026
 
 ---
 
-## Welle 2 — ABGESCHLOSSEN April 2026
+## Welle 2 — Stufe 3 Arbeit (26.04.2026, läuft)
+
+### Block A — P1-Block (Prompts 149a + 149b + 149c)
+
+**Audit:** [welle2-stufe3-arbeit-blockA-audit.md](welle2-stufe3-arbeit-blockA-audit.md), 25.04.2026
+**Scope Block A:** 10 rechtssensitive Arbeit-Rechner
+**Befunde Block A:** 4× P1 + 6× P2 + ~17× P3
+**Commits gesamt P1-Block:** 3 atomic (aa05899 + a151a4c + ee14d93)
+**Verify-Tests:** 16/16 (149c) + 28/28 (149b) grün gegen externe Primärquellen (Düsseldorfer Tabelle 2026, § 1376 BGB, BFH BFHE 217, 248, BGH FamRZ 2002, 606, Destatis Lange Reihe)
+
+**Hauptbefunde P1-Block:**
+
+- **P1-A8 — arbeitslosengeld-rechner Migration** (Prompt 149a): Eintrag deklarierte `kategorie: 'Finanzen'`, lag aber in `arbeit.ts` → SSOT-Konsistenz pro Kategorie-Datei verletzt. Migration nach `finanzen.ts`, Slug + URL `/finanzen/arbeitslosengeld-rechner` unverändert. Bonus-Fixes: KurzarbeitergeldRechner CrossLink `/arbeit/...` → `/finanzen/...`, Markdown-Link in Erklärtext nachgezogen. Slug-Drift-Scan grün.
+
+- **P1-A10 — ehegattenunterhalt SB-Achse** (Prompt 149c): Selbstbehalts-Achse vertauscht. Konfig sagte „Trennung 1.600 € / nachehelich 1.475 € — niedriger weil Bindung schwächer" — die Bindung-schwächer-Begründung war erfunden. Korrekte DT-2026-Achse: 1.600 € (erwerbstätig) / 1.475 € (nicht erwerbstätig), gilt für Trennungsunterhalt UND nachehelich gleichermaßen. Component: neuer State `pflichtigerErwerbstaetig` + UI-Toggle. `art`-State (trennung/nachehelich) bleibt für andere fachliche Belange (§ 1614, § 1578b), beeinflusst aber nicht mehr den SB.
+
+- **P1-A6 — zugewinnausgleich § 1376 BGB Indexierung** (Prompt 149b): Ignorierte Indexierung des Anfangsvermögens nach § 1376 BGB komplett. Konfig sagte „Zugewinn = Endvermögen − Anfangsvermögen". Korrekt: indexiertes AV = AV × VPI(End) / VPI(Heirat). Bei längeren Ehen erheblicher Berechnungseffekt — Beispiel Heirat 2010 → Scheidung 2026 (Index-Faktor 1,405): AV 15.000 € → indexiert 21.084 € → Zugewinn 58.916 € statt 65.000 €; Beispiel-Ausgleich 27.028 € statt 25.000 €.
+  - **vpi.ts erweitert**: Werte 1995–2019 ergänzt (Destatis Lange Reihe, Tabelle 61111-0001), `getVpi(jahr)` mit Fallback auf VPI_AKTUELL für laufendes Jahr, `indexiereVermoegen(betrag, jahrAnfang, jahrEnde)`-Helper.
+  - **Component**: Heiratsjahr- und Endstichtag-Inputs + privilegJahr pro Partner; Detailtabelle mit Indexierungs-Zeile + Faktor-Anzeige; Out-of-Range-Fallback mit Hinweis-Box.
+
+- **P1-A5 — scheidungskosten KostBRÄG 2025**: **OFFEN (149d)** — wartet auf externe Verifikation der RVG/FamGKG-Tabellenwerte ab Stichtag 01.06.2025. Karsten checkt juris Prozesskostenrechner / BMJ-Tabellen RVG-Anlage 2 / famgkg-online.de.
+
+**Methodische Lehren aus 149-Block:**
+
+- **Backtick-Falle in Template-Literals** (149b-Erfahrung): Inline-Code-Backticks im Erklärtext schließen das umgebende Template-Literal vorzeitig → esbuild-Fehler. Ersetzt durch Klartext.
+- **Phantom-Befund-Vermeidung** (149c-Pre-Check, 147c-Pre-Check): Vor dem Fix Code lesen und gegen Audit-Befund abgleichen. Bei Diskrepanz STOP statt No-Op-Commit. (147c hatte zwei Phantom-Befunde P1.2/P2.1, die im Code nicht existierten.)
+- **Test-Soll-Werte unverrundet rechnen**: UI rundet via Math.round, Verify-Tests müssen exakt gegen die Lib-Logik prüfen (149b hatte 4 Tests mit eigener Math-Drift, korrigiert auf Lib-Output).
+
+**Offen P2/P3 Block A (für 150 + 151):**
+- P2: Mutterschutz Fehlgeburt 13./17./20. SSW (BGBl. 2025 I Nr. 59), Mutterschutz Behinderungs-Verlängerung Antragspflicht, Unterhalt Elternunterhalt Angehörigen-Entlastungsgesetz-Update, Elternzeit 30h/32h-Korrektur, Süd-OLG-Hinweis Ehegattenunterhalt
+- P3: 17 Items inkl. Mobilitätsprämie § 101 EStG, EuGH Kücükdeveci, BAG-Zugangsbeweis, § 1a Abs. 2 S. 3 KSchG, Muster 9
+
+---
+
+## Welle 2 — Stufe 3 Wohnen (25.04.2026, ABGESCHLOSSEN)
 
 ### Stufe 3 Wohnen (25.04.2026, Prompts 147 + 147b + 147c + 148 + 148b)
 

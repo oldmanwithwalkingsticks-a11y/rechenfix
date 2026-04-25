@@ -606,6 +606,23 @@ export const rechner: RechnerLight[] = [
     "icon": "👶"
   },
   {
+    "slug": "arbeitslosengeld-rechner",
+    "titel": "Arbeitslosengeld-Rechner",
+    "beschreibung": "Arbeitslosengeld I berechnen: Höhe, Dauer und Auszahlungsbetrag basierend auf dem letzten Gehalt.",
+    "kategorie": "Finanzen",
+    "kategorieSlug": "finanzen",
+    "keywords": [
+      "arbeitslosengeld rechner",
+      "alg 1 rechner",
+      "alg i 2026",
+      "arbeitslosengeld berechnen",
+      "bezugsdauer alg",
+      "leistungsentgelt",
+      "sperrzeit"
+    ],
+    "icon": "💶"
+  },
+  {
     "slug": "buergergeld-rechner",
     "titel": "Bürgergeld-Rechner",
     "beschreibung": "Bürgergeld 2026 berechnen: Aktuelle Regelsätze mit Einkommensanrechnung und Vermögensprüfung.",
@@ -2893,23 +2910,6 @@ export const rechner: RechnerLight[] = [
       "höherstufung unterhalt"
     ],
     "icon": "⚖️"
-  },
-  {
-    "slug": "arbeitslosengeld-rechner",
-    "titel": "Arbeitslosengeld-Rechner",
-    "beschreibung": "Arbeitslosengeld I berechnen: Höhe, Dauer und Auszahlungsbetrag basierend auf dem letzten Gehalt.",
-    "kategorie": "Finanzen",
-    "kategorieSlug": "finanzen",
-    "keywords": [
-      "arbeitslosengeld rechner",
-      "alg 1 rechner",
-      "alg i 2026",
-      "arbeitslosengeld berechnen",
-      "bezugsdauer alg",
-      "leistungsentgelt",
-      "sperrzeit"
-    ],
-    "icon": "💶"
   },
   {
     "slug": "elternzeit-rechner",
