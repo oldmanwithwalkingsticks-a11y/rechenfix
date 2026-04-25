@@ -1639,7 +1639,7 @@ Ein Balkonkraftwerk (auch Mini-PV-Anlage oder Steckersolargerät) ist eine klein
 
 In Deutschland erzeugt eine optimal ausgerichtete PV-Anlage etwa 950 kWh pro kWp (Kilowatt-Peak) und Jahr. Für ein 800-W-Balkonkraftwerk ergibt das theoretisch 760 kWh/Jahr. Der tatsächliche Ertrag hängt von Ausrichtung und Aufstellung ab:
 
-- **Ausrichtung:** Süd = 100 %, Süd-West/Ost = 85 %, West/Ost = 70 %, Nord = 40 %. Süd ist ideal, West/Ost erzeugt morgens/abends mehr (passt oft besser zum Verbrauchsprofil).
+- **Ausrichtung:** Süd = 100 %, Süd-West/Ost = 85 %, West/Ost = 70 %, Nord = 60 %. Süd ist ideal, West/Ost erzeugt morgens/abends mehr (passt oft besser zum Verbrauchsprofil). Nord-BKW lohnen sich bei guter Aufständerung weiterhin — der Branchenkonsens (ADAC, SolarScouts/PVGIS, Anker SOLIX) liegt hier bei rund 60 % vom Süd-Optimum.
 - **Aufstellung:** Senkrecht an der Brüstung = 70 % (schlechterer Winkel), Aufständerung 30° = 90 % (fast ideal), Flachdach/Garten = 100 % (optimaler Winkel möglich).
 
 **Eigenverbrauch — das Schlüsselthema**

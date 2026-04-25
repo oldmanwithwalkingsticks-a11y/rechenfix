@@ -19,11 +19,13 @@ import {
   berechneSpezifischenErtrag,
   berechnePvErtrag,
 } from '../lib/berechnungen/pv-ertragsmodell';
+import { berechneBalkonSolar } from '../lib/berechnungen/balkon-solar';
 
 const wohnenTs = readFileSync(join(process.cwd(), 'lib/rechner-config/wohnen.ts'), 'utf8');
 const dachflRechnerTs = readFileSync(join(process.cwd(), 'components/rechner/DachflaechenRechner.tsx'), 'utf8');
 const poolRechnerTs = readFileSync(join(process.cwd(), 'components/rechner/PoolkostenRechner.tsx'), 'utf8');
 const heizLibTs = readFileSync(join(process.cwd(), 'lib/berechnungen/heizkosten.ts'), 'utf8');
+const balkonLibTs = readFileSync(join(process.cwd(), 'lib/berechnungen/balkon-solar.ts'), 'utf8');
 
 // Block-B-Scope ist auf dachflaechen-rechner und poolkosten-rechner
 // begrenzt. Andere Rechner (z. B. balkon-solar) bleiben unangetastet.
@@ -289,6 +291,85 @@ cases.push({
   actual: dachflRechnerTs.includes('regelmäßige Dachformen'),
   expected: true,
   quelle: '148b P1.3 — neue präzise Formulierung',
+});
+
+// === GRUPPE 9b: balkon-solar Hybrid-Korrektur (148b P2.1) ===
+
+// Nord-Faktor von 0.40 → 0.60 (Branchenkonsens 04/2026)
+cases.push({
+  name: 'balkon-solar.ts: kein Nord-Faktor 0.40 mehr',
+  actual: balkonLibTs.includes('faktor: 0.40'),
+  expected: false,
+  quelle: '148b P2.1 — alter Wert war außerhalb Branchenkonsens',
+});
+cases.push({
+  name: 'balkon-solar.ts: Nord-Faktor 0.60 vorhanden',
+  actual: balkonLibTs.includes('faktor: 0.60'),
+  expected: true,
+  quelle: '148b P2.1 — SolarScouts/PVGIS, ADAC, Anker, DRBO',
+});
+cases.push({
+  name: 'balkon-solar.ts: Nord-Label "Nord (60 %)"',
+  actual: balkonLibTs.includes("label: 'Nord (60 %)'"),
+  expected: true,
+  quelle: '148b P2.1 — UI-Label konsistent mit Faktor',
+});
+cases.push({
+  name: 'balkon-solar.ts: Header-Marker "Branchenkonsens"',
+  actual: balkonLibTs.includes('Branchenkonsens'),
+  expected: true,
+  quelle: '148b P2.1 — Doku-Anker',
+});
+cases.push({
+  name: 'balkon-solar.ts: Header-Marker "Welle 3"',
+  actual: balkonLibTs.includes('Welle 3'),
+  expected: true,
+  quelle: '148b P2.1 — Tech-Debt-Marker',
+});
+cases.push({
+  name: 'balkon-solar.ts: Header-Marker "Brutto vor PR"',
+  actual: balkonLibTs.includes('Brutto vor PR'),
+  expected: true,
+  quelle: '148b P2.1 — Semantik der 950 dokumentiert',
+});
+
+// Süd-Faktor unverändert (Sanity-Check, keine ungewollte Drift)
+cases.push({
+  name: 'balkon-solar.ts: Süd-Faktor 1.0 unverändert',
+  actual: balkonLibTs.includes("{ id: 'sued', label: 'Süd (100 %)', faktor: 1.0 }"),
+  expected: true,
+  quelle: '148b P2.1 — Süd-Korrektur war nicht im Scope',
+});
+
+// Konfig-Erklärtext: "Nord = 40 %" raus, "Nord = 60 %" rein
+cases.push({
+  name: 'balkon-solar-Block: kein "Nord = 40 %" mehr im Erklärtext',
+  actual: blockOf('balkon-solar-rechner').includes('Nord = 40 %'),
+  expected: false,
+  quelle: '148b P2.1 — Konfig folgt Lib',
+});
+cases.push({
+  name: 'balkon-solar-Block: "Nord = 60 %" im Erklärtext',
+  actual: blockOf('balkon-solar-rechner').includes('Nord = 60 %'),
+  expected: true,
+  quelle: '148b P2.1 — Konfig konsistent zu Lib',
+});
+
+// Berechnungs-Konsistenz: Süd unverändert, Nord neu — synchroner Aufruf
+// statt dynamic import, damit die Tests im normalen cases-Array landen.
+const ergNord = berechneBalkonSolar(800, 'nord', 'aufstaenderung', 3000, 33, 600);
+const ergSued = berechneBalkonSolar(800, 'sued', 'aufstaenderung', 3000, 33, 600);
+cases.push({
+  name: 'Berechnung Nord: 800 W Aufständerung → 410 kWh (vorher 274)',
+  actual: ergNord?.jahresertragKwh ?? -1,
+  expected: 410,
+  quelle: '0,8 × 950 × 0,60 × 0,9 = 410,4 → 410',
+});
+cases.push({
+  name: 'Berechnung Süd: 800 W Aufständerung → 684 kWh (unverändert)',
+  actual: ergSued?.jahresertragKwh ?? -1,
+  expected: 684,
+  quelle: '0,8 × 950 × 1,0 × 0,9 = 684 (Sanity, kein Drift)',
 });
 
 // === GRUPPE 9: Walmdach-Mathematik (Sanity-Check) ===

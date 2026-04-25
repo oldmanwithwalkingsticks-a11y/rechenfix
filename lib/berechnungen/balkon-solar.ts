@@ -1,3 +1,22 @@
+/**
+ * BKW-Ertragsmodell für Balkonkraftwerke (kleine Module, feste Montage).
+ *
+ * Bewusst eigenes Modell statt Reuse von pv-ertragsmodell.ts (Aufdach-PV),
+ * weil:
+ *   - 950 kWh/kWp = Bruttoerzeugung VOR Performance Ratio (DWD-Globalstrahlung
+ *     × Modul-Wirkungsgrad), realistisch für moderne BKW-Module
+ *   - Aufstellungs-Faktoren (0,7–1,0) bilden BKW-spezifische Realität ab:
+ *     senkrechte Geländermontage, suboptimale Ausrichtung, Verschattung
+ *   - PR ist hier in den Aufstellungs-/Ausrichtungs-Faktoren implizit
+ *     mitkalkuliert (statt explizit wie bei Aufdach-PV)
+ *
+ * Faktoren-Kalibrierung gegen Branchenkonsens (ADAC, SolarScouts/PVGIS,
+ * Anker SOLIX, DRBO Greenenergy, Stand 04/2026) — siehe Audit-Bericht 148b.
+ *
+ * Tech-Debt für Welle 3: Reuse vs. eigenes BKW-SSOT-Modul evaluieren,
+ * eventuell standortabhängige Globalstrahlung integrieren.
+ */
+
 export interface BalkonSolarErgebnis {
   leistungWatt: number;
   leistungKwp: number;
@@ -19,7 +38,7 @@ export interface BalkonSolarErgebnis {
   co2ErsparungKg: number;
 }
 
-const SPEZIFISCHER_ERTRAG = 950; // kWh/kWp pro Jahr in Deutschland
+const SPEZIFISCHER_ERTRAG = 950; // kWh/kWp Brutto vor PR (DWD × Modul-η)
 const EIGENVERBRAUCH_QUOTE = 0.30; // 30% typisch ohne Speicher
 const CO2_FAKTOR = 0.38; // kg CO2 pro kWh
 
@@ -27,7 +46,9 @@ export const AUSRICHTUNGEN = [
   { id: 'sued', label: 'Süd (100 %)', faktor: 1.0 },
   { id: 'suedwestost', label: 'Süd-West / Süd-Ost (85 %)', faktor: 0.85 },
   { id: 'westost', label: 'West / Ost (70 %)', faktor: 0.70 },
-  { id: 'nord', label: 'Nord (40 %)', faktor: 0.40 },
+  // Nord: korrigiert 04/2026 von 0,40 → 0,60 (Branchenkonsens
+  // SolarScouts/PVGIS, ADAC, Anker SOLIX, DRBO; vorher zu pessimistisch).
+  { id: 'nord', label: 'Nord (60 %)', faktor: 0.60 },
 ];
 
 export const AUFSTELLUNGEN = [
