@@ -12,7 +12,7 @@ export const wohnenRechner: RechnerConfig[] = [
     keywords: ['stromkosten rechner', 'stromkosten berechnen', 'stromverbrauch kosten', 'strompreis rechner', 'kwh kosten'],
     icon: '⚡',
     formel: 'Stromkosten = Verbrauch (kWh) × Arbeitspreis (ct/kWh) + Grundpreis × 12',
-    beispiel: 'Beispiel: 2.500 kWh × 36 ct/kWh + 12 €/Monat Grundpreis = 1.044 € pro Jahr',
+    beispiel: 'Beispiel: 2.500 kWh × 37 ct/kWh + 12 €/Monat Grundpreis = 1.069 € pro Jahr',
     erklaerung: `**Stromkosten berechnen — so geht's**
 
 Der Stromkostenrechner berechnet Ihre jährlichen Stromkosten anhand Ihres Verbrauchs und Ihres Tarifs. Die Kosten setzen sich aus zwei Bestandteilen zusammen: dem Arbeitspreis (Cent pro verbrauchte Kilowattstunde) und dem Grundpreis (monatliche Pauschale für den Netzanschluss). Geben Sie einfach Ihren Jahresverbrauch in kWh ein sowie die Preise aus Ihrem Stromvertrag.
@@ -21,7 +21,7 @@ Die Schnellwahl ermöglicht es, typische Verbrauchswerte für verschiedene Haush
 
 **Strompreis in Deutschland 2026**
 
-Der durchschnittliche Strompreis für Haushaltskunden liegt 2026 bei rund 36 Cent pro Kilowattstunde. Darin enthalten sind Stromerzeugung, Netzentgelte, Stromsteuer, EEG-Umlage-Reste, Konzessionsabgabe und Mehrwertsteuer. Regional gibt es erhebliche Unterschiede: In Norddeutschland und ländlichen Gebieten sind die Netzentgelte tendenziell höher als in Ballungsräumen.
+Der durchschnittliche Strompreis für Haushaltskunden liegt 2026 bei rund 37 Cent pro Kilowattstunde (BDEW-Strompreisanalyse). Darin enthalten sind Stromerzeugung, Netzentgelte, Stromsteuer, EEG-Umlage-Reste, Konzessionsabgabe und Mehrwertsteuer. Regional gibt es erhebliche Unterschiede: In Norddeutschland und ländlichen Gebieten sind die Netzentgelte tendenziell höher als in Ballungsräumen.
 
 Der Grundpreis deckt die fixen Kosten des Netzbetreibers und liegt typischerweise zwischen 8 und 15 Euro pro Monat. Er fällt unabhängig vom Verbrauch an. Zusammen ergibt sich der effektive Strompreis, den unser Rechner zusätzlich berechnet.
 
@@ -39,7 +39,7 @@ Der Stromverbrauch hängt stark von der Anzahl der Personen im Haushalt und der 
     faq: [
       {
         frage: 'Wie berechnet man Stromkosten?',
-        antwort: 'Stromkosten = Verbrauch in kWh × Arbeitspreis in ct/kWh ÷ 100 + Grundpreis × 12 Monate. Beispiel: 2.500 kWh × 36 ct ÷ 100 = 900 € Arbeitspreis + 144 € Grundpreis = 1.044 € pro Jahr.',
+        antwort: 'Stromkosten = Verbrauch in kWh × Arbeitspreis in ct/kWh ÷ 100 + Grundpreis × 12 Monate. Beispiel: 2.500 kWh × 37 ct ÷ 100 = 925 € Arbeitspreis + 144 € Grundpreis = 1.069 € pro Jahr.',
       },
       {
         frage: 'Wie viel Strom verbraucht ein 2-Personen-Haushalt?',
@@ -47,7 +47,7 @@ Der Stromverbrauch hängt stark von der Anzahl der Personen im Haushalt und der 
       },
       {
         frage: 'Wie viel kostet eine kWh Strom 2026?',
-        antwort: 'Der durchschnittliche Strompreis für Haushaltskunden liegt 2026 bei rund 36 Cent pro kWh. Der Preis variiert je nach Anbieter und Region zwischen 30 und 45 Cent. Hinzu kommt der monatliche Grundpreis von ca. 8–15 Euro.',
+        antwort: 'Der BDEW-Durchschnittspreis für Haushaltskunden liegt 2026 bei rund 37 Cent pro kWh über alle Tarifgruppen (Bestand + Neu + Grundversorgung). Festpreis-Neuverträge starten ab ca. 33 ct, die Grundversorgung liegt bei ca. 40 ct. Hinzu kommt der monatliche Grundpreis von ca. 8–15 Euro.',
       },
       {
         frage: 'Was verbraucht am meisten Strom im Haushalt?',
@@ -171,7 +171,7 @@ Der Verbrauch wird in Kilowattstunden pro Quadratmeter und Jahr (kWh/m²/a) ange
 
 **Energieträger im Vergleich**
 
-Erdgas ist mit einem Anteil von rund 50% der häufigste Energieträger in Deutschland. Der Preis liegt bei etwa 12 Cent pro kWh. Heizöl kostet ähnlich, hat aber schwankende Preise. Fernwärme liegt bei ca. 14 ct/kWh, bietet aber wartungsfreien Komfort. Wärmepumpen verbrauchen zwar Strom (ca. 36 ct/kWh), benötigen aber dank der Nutzung von Umweltwärme nur ein Drittel der Energie konventioneller Heizungen. Pellets liegen mit etwa 8 ct/kWh am günstigsten, erfordern aber Lagerplatz.
+Erdgas ist mit einem Anteil von rund 50 % der häufigste Energieträger in Deutschland. Der Preis liegt bei etwa 12 Cent pro kWh. Heizöl kostet ähnlich, hat aber schwankende Preise. Fernwärme liegt bei ca. 14 ct/kWh, bietet aber wartungsfreien Komfort. Wärmepumpen verbrauchen zwar Strom (Wärmepumpen-Spezialtarif ca. 28 ct/kWh, sonst ca. 33–37 ct/kWh), benötigen aber dank der Nutzung von Umweltwärme nur ein Drittel der Energie konventioneller Heizungen. Pellets liegen mit etwa 8 ct/kWh am günstigsten, erfordern aber Lagerplatz.
 
 **Heizkosten senken — Tipps**
 
@@ -187,7 +187,7 @@ Erdgas ist mit einem Anteil von rund 50% der häufigste Energieträger in Deutsc
       },
       {
         frage: 'Welcher Energieträger ist am günstigsten?',
-        antwort: 'Pro kWh sind Pellets (ca. 8 ct), Gas (ca. 12 ct) und Öl (ca. 13 ct) am günstigsten. Wärmepumpen haben hohe Strompreise (36 ct/kWh), benötigen aber nur ein Drittel der Energie, sodass die Gesamtkosten vergleichbar oder niedriger sind.',
+        antwort: 'Pro kWh sind Pellets (ca. 8 ct), Gas (ca. 12 ct) und Öl (ca. 13 ct) am günstigsten. Wärmepumpen haben hohe Strompreise (Wärmepumpen-Tarif ca. 28 ct, Haushaltsstrom ca. 33–37 ct/kWh), benötigen aber nur ein Drittel der Energie, sodass die Gesamtkosten vergleichbar oder niedriger sind.',
       },
       {
         frage: 'Wie viel kWh Heizenergie braucht man pro m²?',
@@ -211,21 +211,34 @@ Erdgas ist mit einem Anteil von rund 50% der häufigste Energieträger in Deutsc
 
 Beim Kauf einer Immobilie fallen neben dem Kaufpreis erhebliche Nebenkosten an. Der Grunderwerbsteuerrechner berechnet alle Kaufnebenkosten auf einen Blick: Grunderwerbsteuer, Maklergebühren, Notarkosten und Grundbuchgebühren. Die Nebenkosten betragen je nach Bundesland insgesamt 8 bis 15 Prozent des Kaufpreises.
 
-Die Grunderwerbsteuer ist der größte Einzelposten und variiert je nach Bundesland zwischen 3,5% (Bayern) und 6,5% (Brandenburg, NRW, Saarland, Schleswig-Holstein). Sie wird beim Kauf von Grundstücken, Häusern und Eigentumswohnungen fällig und muss innerhalb eines Monats nach Erhalt des Steuerbescheids bezahlt werden.
+Die Grunderwerbsteuer ist der größte Einzelposten und variiert je nach Bundesland zwischen 3,5 % (Bayern) und 6,5 % (Brandenburg, NRW, Saarland, Schleswig-Holstein). Sie wird beim Kauf von Grundstücken, Häusern und Eigentumswohnungen fällig und muss innerhalb eines Monats nach Erhalt des Steuerbescheids bezahlt werden.
 
 **Kaufnebenkosten im Detail**
 
-Die Maklergebühren betragen in der Regel 3,57% inkl. MwSt pro Partei (seit 2020 werden sie bei Wohnimmobilien hälftig zwischen Käufer und Verkäufer geteilt). Bei einem Kaufpreis von 300.000 Euro sind das 10.710 Euro. In manchen Fällen — etwa beim Kauf direkt vom Bauträger — entfällt die Maklerprovision.
+Die Maklergebühren betragen in der Regel 3,57 % inkl. MwSt pro Partei (seit 2020 werden sie bei Wohnimmobilien hälftig zwischen Käufer und Verkäufer geteilt). Bei einem Kaufpreis von 300.000 Euro sind das 10.710 Euro. In manchen Fällen — etwa beim Kauf direkt vom Bauträger — entfällt die Maklerprovision.
 
-Die Notarkosten liegen bei ca. 1,5% des Kaufpreises und umfassen die Beurkundung des Kaufvertrags, die Grundschuldbestellung und verschiedene Vollzugstätigkeiten. Die Grundbuchgebühren (ca. 0,5%) fallen für die Eintragung des neuen Eigentümers und ggf. einer Grundschuld an.
+Die Notarkosten liegen bei ca. 1,5 % des Kaufpreises und umfassen die Beurkundung des Kaufvertrags, die Grundschuldbestellung und verschiedene Vollzugstätigkeiten. Die Grundbuchgebühren (ca. 0,5 %) fallen für die Eintragung des neuen Eigentümers und ggf. einer Grundschuld an.
 
 **Grunderwerbsteuersätze nach Bundesland (2026)**
 
-Die Steuersätze haben sich in den letzten Jahren mehrfach geändert — stets nach oben. Bayern ist mit 3,5% das günstigste Bundesland. Die teuersten Bundesländer mit 6,5% sind Brandenburg, NRW, Saarland und Schleswig-Holstein. Unser Rechner zeigt alle aktuellen Sätze in einer übersichtlichen Tabelle.
+Die Steuersätze haben sich in den letzten Jahren mehrfach geändert. Bayern ist mit 3,5 % seit 2006 unverändert das günstigste Bundesland. Die teuersten Bundesländer mit 6,5 % sind Brandenburg, Nordrhein-Westfalen, Saarland und Schleswig-Holstein.
+
+**Aktuelle Änderungen:**
+
+- **Thüringen** hat den Satz zum 01.01.2024 von 6,5 % auf **5,0 %** gesenkt — die bislang einzige Senkung in der Geschichte der Grunderwerbsteuer.
+- **Bremen** hat zum 01.07.2025 von 5,0 % auf **5,5 %** erhöht.
+- **Sachsen** hat zum 01.01.2023 von 3,5 % auf **5,5 %** erhöht.
+- **Hamburg** hat zum 01.01.2023 von 4,5 % auf 5,5 % erhöht.
+
+Unser Rechner zeigt alle aktuellen Sätze in einer übersichtlichen Tabelle und nutzt dieselbe SSOT, aus der auch der Baufinanzierungsrechner seine Werte zieht.
 
 **Tipp zur Grunderwerbsteuer**
 
-Bei einem Kaufpreis knapp über der Freigrenze für bewegliches Inventar (z. B. Einbauküche, Markisen, Gartenhaus) kann es sich lohnen, das Inventar separat auszuweisen. Auf bewegliches Inventar fällt keine Grunderwerbsteuer an. Der Wert muss im Kaufvertrag gesondert aufgeführt und realistisch beziffert werden.`,
+Bei einem Kaufpreis knapp über der Freigrenze für bewegliches Inventar (z. B. Einbauküche, Markisen, Gartenhaus) kann es sich lohnen, das Inventar separat auszuweisen. Auf bewegliches Inventar fällt keine Grunderwerbsteuer an. Der Wert muss im Kaufvertrag gesondert aufgeführt und realistisch beziffert werden.
+
+**Hessengeld: Förderung beim Erwerb von Wohneigentum in Hessen**
+
+In Hessen gibt es seit September 2024 das **Hessengeld**: bis zu 10.000 € je erwachsenem Käufer plus 5.000 € pro Kind, beim erstmaligen Erwerb selbstgenutzten Wohneigentums. Wer eine Immobilie in Hessen kauft, sollte vor dem Notartermin prüfen, ob die Antragsvoraussetzungen erfüllt sind — die Förderung kompensiert einen Teil der Grunderwerbsteuer.`,
     faq: [
       {
         frage: 'Wie hoch ist die Grunderwerbsteuer?',
@@ -263,7 +276,7 @@ Eine Baufinanzierung ist ein zweckgebundener Kredit zum Kauf oder Bau einer Immo
 
 **Kaufnebenkosten: Grunderwerbsteuer nach Bundesland**
 
-Beim Immobilienkauf fallen neben dem Kaufpreis erhebliche Nebenkosten an. Die Grunderwerbsteuer variiert je nach Bundesland zwischen 3,5% (Bayern, Sachsen) und 6,5% (NRW, Brandenburg, Saarland, Schleswig-Holstein). Hinzu kommen Notar- und Grundbuchkosten (ca. 2%) sowie die Maklerprovision (ca. 3,57% Käuferanteil). Insgesamt betragen die Nebenkosten 9 bis 12% des Kaufpreises. Diese Kosten müssen Sie in der Regel aus Eigenkapital finanzieren, da Banken sie nur ungern mitfinanzieren.
+Beim Immobilienkauf fallen neben dem Kaufpreis erhebliche Nebenkosten an. Die Grunderwerbsteuer variiert je nach Bundesland zwischen 3,5 % (Bayern) und 6,5 % (Brandenburg, NRW, Saarland, Schleswig-Holstein). Sachsen liegt seit 01.01.2023 bei 5,5 %, Thüringen seit 01.01.2024 bei 5,0 %, Bremen seit 01.07.2025 ebenfalls bei 5,5 %. Hinzu kommen Notar- und Grundbuchkosten (ca. 2 %) sowie die Maklerprovision (ca. 3,57 % Käuferanteil). Insgesamt betragen die Nebenkosten 9 bis 12 % des Kaufpreises. Diese Kosten müssen Sie in der Regel aus Eigenkapital finanzieren, da Banken sie nur ungern mitfinanzieren.
 
 **Wie viel Eigenkapital brauche ich?**
 
@@ -480,12 +493,12 @@ Breitrollen decken pro Bahn die doppelte Wandbreite ab. Dadurch benötigen Sie w
     keywords: ['stromvergleich rechner', 'stromanbieter vergleichen', 'stromkosten vergleich', 'strom sparen', 'günstiger strom', 'stromtarif vergleichen', 'ökostrom vergleich', 'strompreis vergleich', 'stromanbieter wechseln', 'stromvergleich 2026'],
     icon: '🔌',
     formel: 'Jahreskosten = (Verbrauch in kWh × Arbeitspreis in ct/kWh ÷ 100) + (Grundpreis × 12)',
-    beispiel: 'Beispiel: 2.500 kWh × 32 ct/kWh = 800 € + 120 € Grundpreis (10 €/Monat) = 920 €/Jahr. Günstigster Tarif: 820 €/Jahr → Sparpotenzial: 100 €.',
+    beispiel: 'Beispiel: 2.500 kWh × 37 ct/kWh = 925 € + 120 € Grundpreis (10 €/Monat) = 1.045 €/Jahr (BDEW-Mittel). Günstigster Festpreis-Neukunden-Tarif: 945 €/Jahr → Sparpotenzial: 100 €.',
     erklaerung: `Die Stromkosten sind für viele Haushalte einer der größten Posten bei den Nebenkosten. Trotzdem bleiben viele Verbraucher jahrelang beim selben Anbieter — und zahlen deutlich mehr als nötig. Unser Stromvergleich-Rechner zeigt Ihnen auf einen Blick, wie Ihr aktueller Tarif im Vergleich zum Markt abschneidet und wie viel Sie durch einen Wechsel sparen könnten.
 
 **Stromkosten in Deutschland 2026**
 
-Der durchschnittliche Strompreis für Haushaltskunden liegt 2026 bei rund 32 Cent pro Kilowattstunde. Für einen Zwei-Personen-Haushalt mit einem Verbrauch von 2.500 kWh bedeutet das Jahreskosten von etwa 920 Euro. Ein Vier-Personen-Haushalt mit 4.500 kWh zahlt rund 1.560 Euro pro Jahr. Die Preise variieren regional stark: In Norddeutschland sind die Netzentgelte oft höher als im Süden, was sich direkt auf den Endpreis auswirkt. Ökostromtarife liegen im Schnitt 1–3 Cent über konventionellem Strom, sind aber in vielen Fällen günstiger als der Grundversorgungstarif.
+Der BDEW-Durchschnittspreis für Haushaltskunden liegt 2026 bei rund 37 Cent pro Kilowattstunde über alle Tarifgruppen. Für einen Zwei-Personen-Haushalt mit einem Verbrauch von 2.500 kWh bedeutet das Jahreskosten von etwa 1.045 Euro. Ein Vier-Personen-Haushalt mit 4.500 kWh zahlt rund 1.785 Euro pro Jahr. Festpreis-Neuverträge starten bei ca. 33 ct/kWh, die Grundversorgung liegt bei ca. 40 ct. Die Preise variieren regional stark: In Norddeutschland sind die Netzentgelte oft höher als im Süden, was sich direkt auf den Endpreis auswirkt. Ökostromtarife liegen im Schnitt 1–3 Cent über konventionellem Strom, sind aber in vielen Fällen günstiger als der Grundversorgungstarif.
 
 **Wie setzt sich der Strompreis zusammen?**
 
@@ -509,7 +522,7 @@ Die Strompreisbremse des Bundes wurde 2023 eingeführt und inzwischen wieder aus
     faq: [
       {
         frage: 'Wie hoch sind die durchschnittlichen Stromkosten pro Jahr?',
-        antwort: 'Die durchschnittlichen Stromkosten hängen vom Verbrauch ab: Ein Single-Haushalt (1.500 kWh) zahlt ca. 600 €/Jahr, ein 2-Personen-Haushalt (2.500 kWh) ca. 920 €/Jahr, eine Familie mit 4 Personen (4.500 kWh) ca. 1.560 €/Jahr. Der Durchschnittspreis liegt 2026 bei ca. 32 ct/kWh plus Grundgebühr.',
+        antwort: 'Die durchschnittlichen Stromkosten hängen vom Verbrauch ab: Ein Single-Haushalt (1.500 kWh) zahlt ca. 675 €/Jahr, ein 2-Personen-Haushalt (2.500 kWh) ca. 1.045 €/Jahr, eine Familie mit 4 Personen (4.500 kWh) ca. 1.785 €/Jahr — jeweils inkl. Grundpreis. Der BDEW-Durchschnittspreis liegt 2026 bei ca. 37 ct/kWh, Festpreis-Neukundentarife ab 33 ct/kWh.',
       },
       {
         frage: 'Wie viel kann ich durch einen Stromanbieterwechsel sparen?',
@@ -596,18 +609,18 @@ Unser Rechner berücksichtigt bewusst keine steuerlichen Effekte, da diese sehr 
     keywords: ['indexmiete rechner', 'indexmiete berechnen', 'indexmietvertrag', 'vpi mieterhöhung', 'verbraucherpreisindex miete', 'mieterhöhung indexmiete', 'indexmiete erhöhung', 'staffelmiete vs indexmiete', 'destatis vpi', 'mietanpassung'],
     icon: '📈',
     formel: 'Neue Kaltmiete = Aktuelle Kaltmiete × (Aktueller VPI / Alter VPI) | VPI-Veränderung in % = (Aktueller VPI − Alter VPI) / Alter VPI × 100 | Basisjahr des VPI: 2020 = 100 Punkte.',
-    beispiel: 'Kaltmiete 800 € · VPI bei Vertragsabschluss 117,4 · aktueller VPI 127,8 → Veränderung +8,86 % → neue Kaltmiete 870,82 € (+70,82 €/Monat, +849,84 €/Jahr).',
+    beispiel: 'Kaltmiete 800 € · VPI bei Vertragsabschluss 117,4 · aktueller VPI 125,8 (Stand März 2026) → Veränderung +7,16 % → neue Kaltmiete 857,21 € (+57,21 €/Monat, +686,52 €/Jahr).',
     erklaerung: `**Was ist ein Indexmietvertrag?**
 
 Ein **Indexmietvertrag** ist eine besondere Form des Mietvertrags, bei der die Miete an die Entwicklung des **Verbraucherpreisindex (VPI)** gekoppelt ist. Geregelt ist die Indexmiete in § 557b BGB. Steigt der VPI, darf der Vermieter die Kaltmiete im gleichen Verhältnis anheben — fällt der Index, kann die Miete theoretisch auch sinken (in der Praxis selten). Der große Vorteil aus Vermietersicht: Die Miete passt sich automatisch der Inflation an, ohne dass ortsübliche Vergleichsmieten oder Modernisierungen als Begründung herhalten müssen. Für Mieter bringt die Indexmiete auf der einen Seite Planungssicherheit (keine überraschenden Mieterhöhungen auf Vergleichsmietenniveau), auf der anderen Seite aber in inflationären Zeiten spürbare Mehrkosten. Während einer normalen Mietzeit gilt: Solange der Indexmietvertrag wirksam vereinbart ist, sind Erhöhungen nach § 558 BGB (Vergleichsmiete) und nach § 559 BGB (Modernisierungsumlage, außer bei gesetzlich vorgeschriebenen Maßnahmen) ausgeschlossen.
 
 **Wie funktioniert die Indexmiete?**
 
-Die Berechnung ist denkbar einfach: Die prozentuale Veränderung des Verbraucherpreisindex zwischen Vertragsabschluss (bzw. der letzten Anpassung) und dem aktuellen Zeitpunkt wird 1:1 auf die Kaltmiete übertragen. Beispiel: Die Kaltmiete beträgt 800 Euro, der VPI lag bei Vertragsabschluss bei 117,4 Punkten (Basisjahr 2020 = 100) und ist aktuell auf 127,8 Punkte gestiegen. Das ist eine Steigerung von rund 8,86 Prozent. Die neue Kaltmiete berechnet sich dann zu 800 € × 127,8 / 117,4 = **870,82 Euro**. Das macht eine Mieterhöhung von rund 70,82 Euro pro Monat oder 849,84 Euro im Jahr. **Wichtig:** Die Erhöhung gilt nur für die Kaltmiete — Nebenkosten sind davon nicht betroffen, sie werden separat nach tatsächlichem Verbrauch abgerechnet. Ergänzend empfehlen wir unseren [Mietrechner](/wohnen/mietrechner) und den [Nebenkosten-Rechner](/wohnen/nebenkosten-rechner), um Ihre Gesamtbelastung zu überblicken.
+Die Berechnung ist denkbar einfach: Die prozentuale Veränderung des Verbraucherpreisindex zwischen Vertragsabschluss (bzw. der letzten Anpassung) und dem aktuellen Zeitpunkt wird 1:1 auf die Kaltmiete übertragen. Beispiel: Die Kaltmiete beträgt 800 Euro, der VPI lag bei Vertragsabschluss bei 117,4 Punkten (Basisjahr 2020 = 100) und ist aktuell auf 125,8 Punkte gestiegen (Stand März 2026, Destatis). Das ist eine Steigerung von rund 7,16 Prozent. Die neue Kaltmiete berechnet sich dann zu 800 € × 125,8 / 117,4 = **857,21 Euro**. Das macht eine Mieterhöhung von rund 57,21 Euro pro Monat oder 686,52 Euro im Jahr. **Wichtig:** Die Erhöhung gilt nur für die Kaltmiete — Nebenkosten sind davon nicht betroffen, sie werden separat nach tatsächlichem Verbrauch abgerechnet. Ergänzend empfehlen wir unseren [Mietrechner](/wohnen/mietrechner) und den [Nebenkosten-Rechner](/wohnen/nebenkosten-rechner), um Ihre Gesamtbelastung zu überblicken.
 
 **Verbraucherpreisindex (VPI) erklärt**
 
-Der **Verbraucherpreisindex** wird monatlich vom Statistischen Bundesamt (destatis.de) veröffentlicht und misst die durchschnittliche Preisentwicklung aller Waren und Dienstleistungen, die Privathaushalte für Konsumzwecke kaufen. Seit 2023 gilt das **Basisjahr 2020 = 100 Punkte**. Ein VPI-Wert von 127,8 bedeutet demnach, dass das allgemeine Preisniveau seit 2020 um 27,8 Prozent gestiegen ist. Der Index setzt sich aus rund 650 Güterarten zusammen — von Lebensmitteln über Wohnen und Energie bis zu Dienstleistungen und Freizeit. Für die Berechnung der Indexmiete ist ausschließlich der **Gesamtindex** relevant, nicht einzelne Unterindizes. Die aktuellen Werte finden Sie monatsgenau auf destatis.de unter "Preise → Verbraucherpreisindex". Wer die langfristige Entwicklung der Kaufkraft betrachten möchte, findet im [Inflationsrechner](/finanzen/inflationsrechner) ein passendes Werkzeug.
+Der **Verbraucherpreisindex** wird monatlich vom Statistischen Bundesamt (destatis.de) veröffentlicht und misst die durchschnittliche Preisentwicklung aller Waren und Dienstleistungen, die Privathaushalte für Konsumzwecke kaufen. Seit 2023 gilt das **Basisjahr 2020 = 100 Punkte**. Ein VPI-Wert von 125,8 (Stand März 2026) bedeutet demnach, dass das allgemeine Preisniveau seit 2020 um 25,8 Prozent gestiegen ist. Der Index setzt sich aus rund 650 Güterarten zusammen — von Lebensmitteln über Wohnen und Energie bis zu Dienstleistungen und Freizeit. Für die Berechnung der Indexmiete ist ausschließlich der **Gesamtindex** relevant, nicht einzelne Unterindizes. Die aktuellen Werte finden Sie monatsgenau auf destatis.de unter "Preise → Verbraucherpreisindex". Wer die langfristige Entwicklung der Kaufkraft betrachten möchte, findet im [Inflationsrechner](/finanzen/inflationsrechner) ein passendes Werkzeug.
 
 **Vor- und Nachteile eines Indexmietvertrags**
 
@@ -623,11 +636,11 @@ Neben der Indexmiete gibt es zwei weitere wichtige Mietformen: Die **Staffelmiet
       },
       {
         frage: 'Wie berechne ich die Indexmiete?',
-        antwort: 'Formel: Neue Kaltmiete = Aktuelle Kaltmiete × (Aktueller VPI / VPI bei Vertragsabschluss). Beispiel: Kaltmiete 800 €, VPI alt 117,4, VPI neu 127,8 → 800 × 127,8 / 117,4 = 870,82 €. Die prozentuale Steigerung des VPI (+8,86 %) wird 1:1 auf die Miete übertragen. Nebenkosten sind von der Berechnung ausgenommen, sie werden separat abgerechnet.',
+        antwort: 'Formel: Neue Kaltmiete = Aktuelle Kaltmiete × (Aktueller VPI / VPI bei Vertragsabschluss). Beispiel: Kaltmiete 800 €, VPI alt 117,4, VPI neu 125,8 (Stand März 2026) → 800 × 125,8 / 117,4 = 857,21 €. Die prozentuale Steigerung des VPI (+7,16 %) wird 1:1 auf die Miete übertragen. Nebenkosten sind von der Berechnung ausgenommen, sie werden separat abgerechnet.',
       },
       {
         frage: 'Wo finde ich den aktuellen Verbraucherpreisindex?',
-        antwort: 'Der VPI wird monatlich vom Statistischen Bundesamt veröffentlicht — unter www.destatis.de im Bereich "Preise → Verbraucherpreisindex". Seit 2023 gilt das Basisjahr 2020 = 100 Punkte. Der Wert von 127,8 bedeutet beispielsweise, dass das Preisniveau seit 2020 um 27,8 % gestiegen ist. Auch die Bundesbank und der Mieterbund informieren regelmäßig über die aktuellen VPI-Werte.',
+        antwort: 'Der VPI wird monatlich vom Statistischen Bundesamt veröffentlicht — unter www.destatis.de im Bereich "Preise → Verbraucherpreisindex". Seit 2023 gilt das Basisjahr 2020 = 100 Punkte. Der Wert von 125,8 (Stand März 2026) bedeutet beispielsweise, dass das Preisniveau seit 2020 um 25,8 % gestiegen ist. Auch die Bundesbank und der Mieterbund informieren regelmäßig über die aktuellen VPI-Werte.',
       },
       {
         frage: 'Wie oft darf die Indexmiete erhöht werden?',
@@ -650,14 +663,23 @@ Neben der Indexmiete gibt es zwei weitere wichtige Mietformen: Die **Staffelmiet
     keywords: ['wärmepumpe rechner', 'wärmepumpe kosten', 'wärmepumpe amortisation', 'beg förderung 2026', 'jahresarbeitszahl jaz', 'wärmepumpe altbau', 'wärmepumpe vs gas', 'wärmepumpen stromtarif', 'heizung tauschen', 'luft wasser wärmepumpe'],
     icon: '🔥',
     formel: 'Heizwärmebedarf = Wohnfläche × Heizlast (W/m²) × 1.800 Volllaststunden / 1.000 | Stromverbrauch Wärmepumpe = Heizwärmebedarf / JAZ | Betriebskosten WP = Stromverbrauch × Strompreis + 200 € Wartung | Amortisation = (Anschaffung − Förderung) / jährliche Ersparnis.',
-    beispiel: '120 m² Altbau teilsaniert (JAZ 3,0), 2.000 €/Jahr Gasheizung → Heizwärmebedarf ~19.500 kWh → WP-Stromkosten ~2.080 € + 200 € Wartung = 2.280 € vs. 2.300 € Gas (inkl. Wartung) → bei 30.000 € Anschaffung / 30 % Förderung = 21.000 € netto → Amortisation ca. 10–15 Jahre.',
+    beispiel: '120 m² Altbau teilsaniert (JAZ 3,0), 2.000 €/Jahr Gasheizung → Heizwärmebedarf ~19.500 kWh → WP-Stromkosten ~2.080 € + 200 € Wartung = 2.280 € vs. 2.300 € Gas (inkl. Wartung). Bei 30.000 € Anschaffung und nur 30 % Grundförderung verbleibt ein Eigenanteil von 21.000 €. Erst die Maximalförderung von 70 % (Grundförderung + Klimageschwindigkeit + Einkommen) senkt den Eigenanteil auf 9.000 € — entsprechend kürzere Amortisation. Realistisch typisch 10–15 Jahre, mit voller Boni-Kombi 5–8 Jahre.',
     erklaerung: `**Lohnt sich eine Wärmepumpe? Die Wirtschaftlichkeits-Analyse**
 
 Ob sich der Umstieg auf eine Wärmepumpe rechnet, hängt von **vier Hauptfaktoren** ab: dem Zustand Ihres Gebäudes, den aktuellen Energiepreisen, den Anschaffungskosten und der verfügbaren Förderung. Als Faustregel gilt: In einem **gut gedämmten Haus** (Neubau oder sanierter Altbau) amortisiert sich eine Wärmepumpe in 8–15 Jahren. In einem **unsanierten Altbau** mit hohem Wärmebedarf und ungeeigneten Heizkörpern kann es 20 Jahre oder länger dauern. Der entscheidende Faktor ist die **Jahresarbeitszahl (JAZ)** — sie gibt an, wie viel Wärmeenergie aus einer Kilowattstunde Strom erzeugt wird. Je höher die JAZ, desto effizienter und günstiger arbeitet die Wärmepumpe. Bei aktuellen Strompreisen von 30–35 ct/kWh und Gaspreisen um 10–12 ct/kWh lohnt sich eine Wärmepumpe ab einer JAZ von etwa 3,0. Wer zusätzlich eine Photovoltaikanlage besitzt oder einen speziellen [Wärmepumpen-Stromtarif](/wohnen/stromvergleich-rechner) nutzt, verbessert die Wirtschaftlichkeit deutlich.
 
 **BEG-Förderung 2026: Bis zu 70 Prozent Zuschuss**
 
-Die **Bundesförderung für effiziente Gebäude (BEG)** ist das wichtigste Förderinstrument für Wärmepumpen in Deutschland. 2026 setzt sich die maximale Förderung von **bis zu 70 Prozent** aus mehreren Bausteinen zusammen: **Grundförderung 30 Prozent**, **Klimageschwindigkeitsbonus +20 Prozent** (beim Austausch einer alten Öl-, Gas- oder Kohleheizung), **Einkommensbonus +30 Prozent** (bei Haushalten mit zu versteuerndem Jahreseinkommen unter 40.000 Euro) sowie in bestimmten Fällen ein **Effizienzbonus +5 Prozent** für besonders klimafreundliche Kältemittel. Die maximalen förderfähigen Investitionskosten liegen bei 30.000 Euro pro Wohneinheit. Das bedeutet: Wer alle Boni ausschöpft, bekommt bis zu **21.000 Euro Zuschuss**. Der Antrag muss **vor Vertragsunterschrift** beim KfW-Portal eingereicht werden. Ein Energieberater (Experten-Liste der BAFA) ist Pflicht und kostet selbst zusätzlich ca. 1.000–2.000 Euro — die Beratung ist aber wiederum zu 50 % förderfähig.
+Die **Bundesförderung für effiziente Gebäude (BEG)** ist das wichtigste Förderinstrument für Wärmepumpen in Deutschland. 2026 setzt sich die maximale Förderung aus mehreren kombinierbaren Bausteinen zusammen:
+
+- **Grundförderung 30 Prozent** — alle Antragsteller.
+- **Klimageschwindigkeitsbonus +20 Prozent** — beim Austausch einer alten Öl-, Gas- oder Kohleheizung. Absenkung ab 2029 vorgesehen.
+- **Einkommensbonus +30 Prozent** — Haushalte mit zu versteuerndem Jahreseinkommen unter 40.000 Euro.
+- **Effizienzbonus +5 Prozent** — natürliches Kältemittel (z. B. Propan R290) oder Wasser/Erdreich/Abwasser als Wärmequelle.
+
+Rechnerisch summieren sich diese Boni auf bis zu 85 Prozent — die Richtlinie deckelt die Gesamtförderung jedoch bei **70 Prozent**. Die maximalen förderfähigen Investitionskosten liegen bei 30.000 Euro pro Wohneinheit. Das bedeutet: Wer alle anrechenbaren Boni ausschöpft, bekommt bis zu **21.000 Euro Zuschuss**. Der Antrag muss **vor Vertragsunterschrift** beim KfW-Portal eingereicht werden. Ein Energieberater (Experten-Liste der BAFA) ist Pflicht und kostet selbst zusätzlich ca. 1.000–2.000 Euro — die Beratung ist aber wiederum zu 50 % förderfähig.
+
+**Hinweis ab 2026:** Seit 01.01.2026 werden Luft-Wasser-Wärmepumpen nur noch gefördert, wenn die Geräuschemissionen des Außengeräts mindestens **10 dB unter** den gesetzlichen Grenzwerten liegen (vorher 5 dB). Die Anforderung gilt nur für Bestandsgebäude, nicht für Neubauten. Bei Auswahl der Anlage auf das Datenblatt achten.
 
 **Jahresarbeitszahl (JAZ) erklärt**
 
@@ -669,7 +691,7 @@ Der hartnäckigste Mythos: "Im Altbau funktioniert eine Wärmepumpe nicht." **Da
 
 **Wärmepumpen-Stromtarife: So sparen Sie zusätzlich**
 
-Ein entscheidender Hebel für die Wirtschaftlichkeit ist der **Wärmepumpen-Stromtarif**. Diese Spezialtarife sind rund 20–30 Prozent günstiger als normale Haushaltsstromtarife — statt 32 ct/kWh zahlen Sie oft nur 25–28 ct/kWh. Voraussetzung ist ein **separater Zähler** für die Wärmepumpe oder ein intelligenter Zähler mit getrennter Messung. Die Stromversorger dürfen im Gegenzug die Wärmepumpe an wenigen Stunden pro Tag netzdienlich abschalten — in der Praxis merkt man das durch den Pufferspeicher kaum. Bei 5.000 kWh Wärmepumpenstrom pro Jahr sparen Sie durch einen Spezialtarif rund **250–350 Euro jährlich**. Vergleichen Sie Tarife regelmäßig über unseren [Stromvergleich-Rechner](/wohnen/stromvergleich-rechner) oder direkt über CHECK24. Wer zusätzlich eine PV-Anlage betreibt und einen Teil des Wärmepumpenstroms selbst erzeugt, senkt die Betriebskosten nochmals deutlich — eine Wärmepumpen-PV-Kombination amortisiert sich oft schon nach 8–12 Jahren.`,
+Ein entscheidender Hebel für die Wirtschaftlichkeit ist der **Wärmepumpen-Stromtarif**. Diese Spezialtarife sind rund 20–30 Prozent günstiger als normale Haushaltsstromtarife — statt 33–37 ct/kWh zahlen Sie oft nur 25–28 ct/kWh. Voraussetzung ist ein **separater Zähler** für die Wärmepumpe oder ein intelligenter Zähler mit getrennter Messung. Die Stromversorger dürfen im Gegenzug die Wärmepumpe an wenigen Stunden pro Tag netzdienlich abschalten — in der Praxis merkt man das durch den Pufferspeicher kaum. Bei 5.000 kWh Wärmepumpenstrom pro Jahr sparen Sie durch einen Spezialtarif rund **250–350 Euro jährlich**. Vergleichen Sie Tarife regelmäßig über unseren [Stromvergleich-Rechner](/wohnen/stromvergleich-rechner) oder direkt über CHECK24. Wer zusätzlich eine PV-Anlage betreibt und einen Teil des Wärmepumpenstroms selbst erzeugt, senkt die Betriebskosten nochmals deutlich — eine Wärmepumpen-PV-Kombination amortisiert sich oft schon nach 8–12 Jahren.`,
     faq: [
       {
         frage: 'Was kostet eine Wärmepumpe mit Einbau?',
@@ -677,7 +699,7 @@ Ein entscheidender Hebel für die Wirtschaftlichkeit ist der **Wärmepumpen-Stro
       },
       {
         frage: 'Wie viel Förderung bekomme ich für eine Wärmepumpe?',
-        antwort: 'Die BEG-Förderung 2026 bietet bis zu 70 % Zuschuss: 30 % Grundförderung, +20 % Klimageschwindigkeitsbonus (beim Austausch einer alten Heizung), +30 % Einkommensbonus (bei Haushaltseinkommen unter 40.000 € zu versteuerndem Einkommen), +5 % Effizienzbonus. Die maximalen förderfähigen Kosten betragen 30.000 € pro Wohneinheit — der maximale Zuschuss liegt also bei 21.000 €. Der Antrag muss vor Vertragsunterschrift bei der KfW gestellt werden.',
+        antwort: 'Die BEG-Förderung 2026 bietet bis zu 70 % Zuschuss (Cap nach Richtlinie). Bausteine: 30 % Grundförderung, +20 % Klimageschwindigkeitsbonus (beim Austausch einer alten Heizung), +30 % Einkommensbonus (bei Haushaltseinkommen unter 40.000 € zu versteuerndem Einkommen), +5 % Effizienzbonus. Rechnerisch wären das 85 %, die Richtlinie deckelt die Summe aber bei 70 %. Die maximalen förderfähigen Kosten betragen 30.000 € pro Wohneinheit — der maximale Zuschuss liegt also bei 21.000 €. Der Antrag muss vor Vertragsunterschrift bei der KfW gestellt werden.',
       },
       {
         frage: 'Was ist die Jahresarbeitszahl (JAZ)?',
@@ -689,7 +711,7 @@ Ein entscheidender Hebel für die Wirtschaftlichkeit ist der **Wärmepumpen-Stro
       },
       {
         frage: 'Wie hoch sind die Stromkosten einer Wärmepumpe?',
-        antwort: 'Bei einem typischen Einfamilienhaus mit 15.000–20.000 kWh Heizwärmebedarf und JAZ 3,0 benötigt die Wärmepumpe rund 5.000–6.700 kWh Strom pro Jahr. Bei 32 ct/kWh entstehen Stromkosten von 1.600–2.150 € jährlich. Mit einem günstigeren Wärmepumpen-Stromtarif (ca. 27 ct/kWh) reduzieren sich die Kosten um 20–25 %. Hinzu kommen etwa 200 € jährliche Wartungskosten.',
+        antwort: 'Bei einem typischen Einfamilienhaus mit 15.000–20.000 kWh Heizwärmebedarf und JAZ 3,0 benötigt die Wärmepumpe rund 5.000–6.700 kWh Strom pro Jahr. Bei Haushaltsstrom 37 ct/kWh entstehen Stromkosten von 1.850–2.480 € jährlich. Mit einem günstigeren Wärmepumpen-Stromtarif (ca. 28 ct/kWh) reduzieren sich die Kosten um 20–25 %. Hinzu kommen etwa 200 € jährliche Wartungskosten.',
       },
       {
         frage: 'Wann amortisiert sich eine Wärmepumpe?',
@@ -708,7 +730,7 @@ Ein entscheidender Hebel für die Wirtschaftlichkeit ist der **Wärmepumpen-Stro
     keywords: ['photovoltaik rechner', 'pv rechner', 'solaranlage berechnen', 'einspeisevergütung 2026', 'photovoltaik amortisation', 'solarrechner', 'pv ertrag berechnen', 'batteriespeicher rechner'],
     icon: '☀️',
     formel: 'Jahresertrag = kWp × 1.000 kWh × Ausrichtungsfaktor × 0,85 (Verluste) | Amortisation = Investition / (Ersparnis + Einspeisung − Wartung)',
-    beispiel: 'Eine 8 kWp-Anlage auf einem Süddach (30°) erzeugt ca. 6.800 kWh pro Jahr. Bei 30 % Eigenverbrauch und 32 ct/kWh Strompreis entstehen 653 € Ersparnis plus 382 € Einspeisung = 1.035 € Jahresertrag.',
+    beispiel: 'Eine 8 kWp-Anlage auf einem Süddach (30°) erzeugt ca. 6.800 kWh pro Jahr. Bei 30 % Eigenverbrauch und 33 ct/kWh Strompreis (Festpreis-Neuvertrag 2026) entstehen ca. 673 € Ersparnis plus rund 370 € Einspeisung (7,78 ct/kWh) = ca. 1.043 € Jahresertrag.',
     erklaerung: `**Lohnt sich Photovoltaik 2026?**
 
 Eine Photovoltaikanlage ist 2026 für die meisten Hausbesitzer eine lohnende Investition. Dank gesunkener Modulpreise, staatlicher Förderung und steigender Strompreise amortisieren sich moderne PV-Anlagen in 10–14 Jahren — bei einer Lebensdauer von 25–30 Jahren bleibt damit eine lange Gewinnphase. Unser Photovoltaik-Rechner hilft Ihnen, Ertrag, Eigenverbrauch, Einspeisevergütung und Amortisation für Ihre individuelle Situation zu berechnen.
@@ -723,11 +745,11 @@ Die Kosten einer schlüsselfertigen PV-Anlage liegen 2026 bei ca. **1.100–1.50
 
 **Einspeisevergütung 2026: Aktuelle Sätze**
 
-Für Anlagen bis 10 kWp, die ab Januar 2026 in Betrieb gehen, beträgt die Einspeisevergütung (Überschusseinspeisung) **8,03 ct/kWh** für den ins Netz eingespeisten Strom. Für Anlagenteile über 10 kWp sinkt sie auf 6,95 ct/kWh. Die Vergütung wird für 20 Jahre (plus Inbetriebnahme-Jahr) garantiert. Die Sätze werden halbjährlich um etwa 1 % abgesenkt — wer zögert, erhält weniger.
+Für Anlagen, die zwischen 01.02.2026 und 31.07.2026 in Betrieb gehen, beträgt die Einspeisevergütung (Überschusseinspeisung) **7,78 ct/kWh** bis 10 kWp und **6,73 ct/kWh** für Anlagenteile von 10 bis 40 kWp. Bei Volleinspeisung (kein Eigenverbrauch) sind es 12,34 bzw. 10,35 ct/kWh. Die Vergütung wird für 20 Jahre plus das Inbetriebnahme-Jahr garantiert. Nach § 49 EEG 2023 sinken die Sätze halbjährlich (jeweils zum 01.02. und 01.08.) um 1 % — wer mit der Inbetriebnahme zögert, erhält über die gesamten 20 Jahre weniger. Maßgeblich ist der Satz zum Zeitpunkt der Inbetriebnahme. Aktuelle Werte: Bundesnetzagentur (Veröffentlichung „EEG-Förderung & -Fördersätze").
 
 **Eigenverbrauch optimieren: So sparen Sie doppelt**
 
-Je mehr Strom Sie selbst verbrauchen, desto rentabler ist die PV-Anlage. Denn jede kWh Eigenverbrauch spart den aktuellen Haushaltsstrompreis (ca. 32 ct/kWh) — vier Mal so viel wie die Einspeisevergütung. Typische Eigenverbrauchsquoten:
+Je mehr Strom Sie selbst verbrauchen, desto rentabler ist die PV-Anlage. Denn jede kWh Eigenverbrauch spart den aktuellen Haushaltsstrompreis (typisch 33 ct/kWh als Festpreis-Neuvertrag, BDEW-Mittel 37 ct/kWh) — vier- bis fünfmal so viel wie die Einspeisevergütung. Typische Eigenverbrauchsquoten:
 
 - **Ohne Speicher:** 25–35 % — bei gutem Verhältnis von Ertrag zu Verbrauch.
 - **Mit Speicher (5–10 kWh):** 55–75 % — je größer der Speicher, desto höher die Quote.
@@ -742,6 +764,10 @@ Ein Batteriespeicher speichert überschüssigen Solarstrom für den Abend und er
 **PV und Wärmepumpe: Die perfekte Kombination**
 
 Wer Photovoltaik und Wärmepumpe kombiniert, nutzt Solarstrom auch zum Heizen. Moderne Systeme koordinieren Wärmepumpe und PV-Wechselrichter so, dass die Wärmepumpe bevorzugt dann läuft, wenn die Sonne scheint. Der Warmwasserspeicher dient als thermischer „Puffer". Das steigert den Eigenverbrauch auf 60–75 % und senkt die Heizkosten drastisch.
+
+**Solarpaket I: Was hat sich seit 16.05.2024 geändert?**
+
+Mit dem **Solarpaket I**, das am 16.05.2024 in Kraft getreten ist, hat der Gesetzgeber den Ausbau von Photovoltaik deutlich vereinfacht. Wichtige Punkte: vereinfachte MaStR-Anmeldung (Marktstammdatenregister), erleichterte Direktvermarktungsregeln, höhere Vergütung für Volleinspeisung, neue Grundlage für Balkonkraftwerke (800-W-Grenze, vereinfachte Anmeldung). Die zugrundeliegenden Vergütungssätze nach § 48 EEG 2023 unterliegen seither der halbjährlichen Degression nach § 49 EEG.
 
 **CO₂-Ersparnis: Beitrag zum Klimaschutz**
 
@@ -763,7 +789,7 @@ Unser Rechner liefert eine erste Orientierung. Der tatsächliche Ertrag hängt v
       },
       {
         frage: 'Wie hoch ist die Einspeisevergütung 2026?',
-        antwort: 'Für Anlagen bis 10 kWp beträgt die Einspeisevergütung 2026 ca. 8,03 ct/kWh für Überschusseinspeisung. Für Anteile über 10 kWp sinkt sie auf 6,95 ct/kWh. Die Vergütung ist für 20 Jahre garantiert. Genauen aktuellen Wert bitte bei der Bundesnetzagentur prüfen.',
+        antwort: 'Für Anlagen mit Inbetriebnahme zwischen 01.02.2026 und 31.07.2026 beträgt die Einspeisevergütung 7,78 ct/kWh bis 10 kWp und 6,73 ct/kWh für Anteile von 10 bis 40 kWp (Teileinspeisung mit Eigenverbrauch). Bei Volleinspeisung sind es 12,34 bzw. 10,35 ct/kWh. Maßgeblich ist der Satz zum Inbetriebnahme-Zeitpunkt — er gilt 20 Jahre lang. Halbjährliche Degression um 1 % zum 01.02. und 01.08. nach § 49 EEG 2023. Aktuelle Werte: Bundesnetzagentur.',
       },
       {
         frage: 'Lohnt sich ein Batteriespeicher?',
@@ -971,7 +997,7 @@ Die Grundsteuer ist nach der **Betriebskostenverordnung** umlagefähig auf Miete
     beispiel: 'Beispiel: Vergleichsmiete 10 €/m², aktuelle Miete 12 €/m², 65 m² → Max erlaubt: 11 €/m² = 715 €, Ist: 780 € → 65 €/Monat zu viel = 780 € pro Jahr.',
     erklaerung: `**Was ist die Mietpreisbremse?**
 
-Die Mietpreisbremse (§ 556d BGB) begrenzt in angespannten Wohnungsmärkten die Miete bei Neuvermietung. Sie darf in diesen Gebieten **höchstens 10 Prozent** über der ortsüblichen Vergleichsmiete liegen. Eingeführt wurde die Regelung 2015, seitdem immer wieder nachgeschärft. Für die Jahre ab 2026 bleibt die Mietpreisbremse in den meisten Großstädten und Ballungsräumen weiterhin gültig — welche konkreten Gebiete betroffen sind, regeln die Landesverordnungen. Ziel der Regelung: Mieter in nachgefragten Städten wie Berlin, München, Hamburg, Köln oder Frankfurt vor explodierenden Mietpreisen zu schützen. Unser Mietpreisbremse-Rechner zeigt Ihnen sofort, ob Ihre aktuelle Miete noch zulässig ist — und wenn nicht, wie viel Sie pro Monat und pro Jahr zu viel zahlen.
+Die Mietpreisbremse (§ 556d BGB) begrenzt in angespannten Wohnungsmärkten die Miete bei Neuvermietung. Sie darf in diesen Gebieten **höchstens 10 Prozent** über der ortsüblichen Vergleichsmiete liegen. Eingeführt wurde die Regelung mit dem Mietrechtsnovellierungsgesetz 2015. Mit dem **Gesetz zur Änderung der Regelungen über die zulässige Miethöhe bei Mietbeginn** (BT-Drs. 21/322 i.d.F. 21/631, Bundestag-Beschluss am 26.06.2025, Bundesrat-Billigung am 11.07.2025) wurde sie **bis zum 31.12.2029 verlängert**. Konkret wurde die bisherige Fünfjahresfrist für Landesverordnungen gestrichen und das Außerkrafttreten vom 31.12.2025 auf den 31.12.2029 verschoben. Die 10-Prozent-Grenze und die Ausnahmen nach §§ 556e, 556f BGB bleiben unverändert. Welche konkreten Gebiete als angespannter Wohnungsmarkt gelten, regeln weiterhin die Landesverordnungen. Der Koalitionsvertrag 2025 sieht zudem strengere Regeln für Indexmieten und möblierten Wohnraum vor — eine Expertengruppe soll bis Ende 2026 Vorschläge vorlegen. Unser Mietpreisbremse-Rechner zeigt Ihnen sofort, ob Ihre aktuelle Miete noch zulässig ist — und wenn nicht, wie viel Sie pro Monat und pro Jahr zu viel zahlen.
 
 **Wie wird die Mietpreisbremse berechnet?**
 
@@ -996,6 +1022,10 @@ Wer unsicher ist, ob die Mietpreisbremse greift und wie die Rüge formuliert wer
       {
         frage: 'Wie hoch darf die Miete laut Mietpreisbremse sein?',
         antwort: 'Die Miete darf höchstens 10 Prozent über der ortsüblichen Vergleichsmiete laut Mietspiegel liegen. Bei einer Vergleichsmiete von 10 €/m² sind also maximal 11 €/m² erlaubt. Die Mietpreisbremse gilt aber nur in Gebieten, die per Landesverordnung als angespannter Wohnungsmarkt ausgewiesen sind.',
+      },
+      {
+        frage: 'Wie lange gilt die Mietpreisbremse?',
+        antwort: 'Die Mietpreisbremse wurde mit dem Gesetz zur Änderung der Regelungen über die zulässige Miethöhe bei Mietbeginn (BT-Drs. 21/322 i.d.F. 21/631, Bundestag 26.06.2025, Bundesrat 11.07.2025) bis 31.12.2029 verlängert. Die bisherige Fünfjahresfrist für Landesverordnungen wurde gestrichen, das Außerkrafttreten vom 31.12.2025 auf 31.12.2029 verschoben. Die 10-Prozent-Grenze und die Ausnahmen (§§ 556e, 556f BGB) bleiben unverändert.',
       },
       {
         frage: 'Kann ich zu viel gezahlte Miete zurückfordern?',
@@ -1041,7 +1071,7 @@ Zu Saisonbeginn wird der Pool meist einmal komplett neu befüllt. Über die Sais
 
 **Stromkosten Filterpumpe**
 
-Die Filterpumpe muss täglich etwa **6 bis 10 Stunden** laufen, damit das Wasser sauber bleibt. Eine typische Pumpe für einen 40-m³-Pool hat 0,6 kW Leistung. Über 5 Monate Saison (153 Tage) summiert sich das auf ca. 730 kWh — bei 32 ct/kWh sind das **rund 234 €**. Energiesparende Umwälzpumpen mit Frequenzregelung kosten mehr, sparen aber bis zu 60 % Strom.
+Die Filterpumpe muss täglich etwa **6 bis 10 Stunden** laufen, damit das Wasser sauber bleibt. Eine typische Pumpe für einen 40-m³-Pool hat 0,6 kW Leistung. Über 5 Monate Saison (153 Tage) summiert sich das auf ca. 730 kWh — bei 37 ct/kWh sind das **rund 270 €**. Energiesparende Umwälzpumpen mit Frequenzregelung kosten mehr, sparen aber bis zu 60 % Strom.
 
 **Heizungskosten**
 
@@ -1118,7 +1148,7 @@ Wer eine **PV-Anlage** besitzt, kann Filterpumpe und Wärmepumpe überwiegend mi
     keywords: ['vorfälligkeitsentschädigung berechnen', 'vfe rechner', 'kredit ablösen', 'baufinanzierung vorzeitig kündigen', 'aktiv passiv methode', '10 jahre sonderkündigungsrecht', '§ 489 bgb', 'umschuldung', 'restschuld ablösen'],
     icon: '🏦',
     formel: 'Zinsmarge = Vertragszins − Marktzins. VFE ≈ Restschuld × Zinsmarge% × Restlaufzeit × 0,85 + Bearbeitungsgebühr (ca. 300 €). Bei Zinsmarge ≤ 0: keine VFE.',
-    beispiel: 'Restschuld 150.000 €, Vertragszins 2,5 %, Marktzins 3,5 %, Restlaufzeit 5 Jahre → Zinsmarge 0 %, keine VFE. Bei 4,0 % vs. 2,5 % → 1,5 % × 150.000 × 5 × 0,85 ≈ 9.562 € + 300 € Gebühr.',
+    beispiel: 'Restschuld 150.000 €, Vertragszins 2,5 %, Marktzins 3,5 %, Restlaufzeit 5 Jahre → Zinsmarge −1 % (Marktzins über Vertragszins → kein Zinsschaden, keine VFE). Umgekehrt bei Vertragszins 4,0 % und Marktzins 2,5 % → Zinsmarge 1,5 % × 150.000 × 5 × 0,85 ≈ 9.562 € + 300 € Gebühr.',
     erklaerung: `**Vorfälligkeitsentschädigung-Rechner — was Banken bei vorzeitiger Kreditablösung verlangen dürfen**
 
 Wer seinen Immobilienkredit **vor Ablauf der Zinsbindung** zurückzahlen möchte — sei es beim Hausverkauf, bei einer Erbschaft oder weil eine günstigere Finanzierung lockt —, muss der Bank in der Regel eine **Vorfälligkeitsentschädigung** (kurz: VFE) zahlen. Die Idee dahinter: Die Bank hat mit Ihnen einen festen Zinssatz über einen bestimmten Zeitraum vereinbart und darauf kalkuliert, über die Laufzeit Zinsen zu verdienen. Wird der Kredit vorzeitig abgelöst, muss sie das frei werdende Geld zu den aktuellen Konditionen neu anlegen. Liegen diese **unter** Ihrem Vertragszins, entgehen der Bank Zinseinnahmen — und genau diesen Schaden dürfen sie Ihnen in Rechnung stellen. Unser VFE-Rechner schätzt die Höhe nach der offiziellen **Aktiv-Passiv-Methode**.
@@ -1196,16 +1226,20 @@ Eine Umschuldung lohnt sich nur, wenn die **Zinsersparnis über die Restlaufzeit
     keywords: ['energiekosten rechner', 'stromkosten gerät berechnen', 'watt in kwh', 'verbrauch berechnen', 'standby kosten', 'kühlschrank stromkosten', 'waschmaschine stromkosten', 'stromverbrauch haushalt', 'kwh kosten'],
     icon: '⚡',
     formel: 'kWh/Jahr = Leistung(W) × Stunden/Tag × Nutzungstage/Woche × 52 / 1000. Kosten/Jahr = kWh/Jahr × Strompreis(ct/kWh) / 100.',
-    beispiel: 'Kühlschrank: 150 W × 24 h × 7 Tage × 52 / 1000 = 1.310 kWh/Jahr. Bei 32 ct/kWh = 419 €/Jahr — also ca. 35 €/Monat nur für den Kühlschrank.',
+    beispiel: 'PC im Homeoffice: 200 W × 6 h × 5 Tage × 52 / 1000 = 312 kWh/Jahr. Bei 37 ct/kWh (BDEW-Mittel 2026) = 115,44 €/Jahr — also ca. 9,60 €/Monat nur für den Arbeitsrechner.',
     erklaerung: `**Energiekosten-Rechner — was Ihre Haushaltsgeräte wirklich kosten**
 
-Die Strompreise in Deutschland gehören zu den höchsten in Europa. Bei rund **32 ct/kWh** (Stand 2026, durchschnittliche Grundversorgung teils über 40 ct) wird jedes Gerät im Haushalt zu einem echten Kostenfaktor — und nicht selten sind es die unscheinbaren Dauerläufer wie Router, Aquariumpumpe oder alte Gefriertruhe, die am Ende des Jahres die größten Löcher in die Stromrechnung reißen. Unser **Energiekosten-Rechner** zeigt Ihnen auf einen Blick, was einzelne Geräte kosten, welche die größten Stromfresser sind und wo Sparen lohnt.
+Die Strompreise in Deutschland gehören zu den höchsten in Europa. Bei rund **37 ct/kWh** (BDEW-Mittel 2026, Grundversorgung teils über 40 ct) wird jedes Gerät im Haushalt zu einem echten Kostenfaktor — und nicht selten sind es die unscheinbaren Dauerläufer wie Router, Aquariumpumpe oder alte Gefriertruhe, die am Ende des Jahres die größten Löcher in die Stromrechnung reißen. Unser **Energiekosten-Rechner** zeigt Ihnen auf einen Blick, was einzelne Geräte kosten, welche die größten Stromfresser sind und wo Sparen lohnt.
+
+**Wichtig: Anschlussleistung vs. tatsächlicher Verbrauch**
+
+Die auf einem Gerät angegebene Watt-Zahl ist die maximale Anschlussleistung, nicht der Dauerverbrauch. Geräte mit Compressor-Cycling (Kühlschrank, Gefriertruhe, Wärmepumpe) laufen typischerweise nur 30–50 % der Zeit unter Volllast. Für eine realistische Schätzung Verbrauchsmessgerät nutzen oder Herstellerangabe (kWh/Jahr) verwenden.
 
 **Die Formel ist einfacher als gedacht**
 
 Die Berechnung folgt einer simplen Logik: **Leistung (in Watt) × Nutzungsdauer (in Stunden) = Energie (in Wattstunden)**. Geteilt durch 1.000 kommt man zu Kilowattstunden (kWh) — der Einheit, die auf Ihrer Stromrechnung steht. Multipliziert mit dem Strompreis ergibt sich die Geldsumme. Wer sein Gerät nicht jeden Tag nutzt (Waschmaschine, Spülmaschine, Trockner), rechnet mit **Nutzungstagen pro Woche** — das bildet den tatsächlichen Haushalt realistisch ab.
 
-Eine Faustregel für die Überschlagsrechnung: **1 Watt Dauerlast = ca. 2,80 € Stromkosten pro Jahr** (bei 32 ct/kWh, 24/7). Ihr WLAN-Router mit 10 W kostet also rund **28 €/Jahr**, Ihr altes 20-W-Netzteil am Ladestecker sogar fast **56 €** — und zwar ohne dass Sie etwas davon haben.
+Eine Faustregel für die Überschlagsrechnung: **1 Watt Dauerlast = ca. 3,24 € Stromkosten pro Jahr** (bei 37 ct/kWh, 24/7). Ihr WLAN-Router mit 10 W kostet also rund **32 €/Jahr**, Ihr altes 20-W-Netzteil am Ladestecker sogar fast **65 €** — und zwar ohne dass Sie etwas davon haben.
 
 **Die größten Stromfresser im Haushalt**
 
@@ -1257,7 +1291,7 @@ Für den gesamten Haushaltsverbrauch nutzen Sie unseren [Stromkosten-Rechner](/w
     faq: [
       {
         frage: 'Wie rechne ich Watt in kWh und Stromkosten um?',
-        antwort: 'Die Formel: Leistung in Watt × Betriebsstunden ÷ 1.000 = kWh. Beispiel: Ein 2.000-W-Föhn, 10 Minuten täglich, ergibt 2.000 × 0,167 ÷ 1.000 = 0,333 kWh/Tag bzw. 122 kWh/Jahr. Bei 32 ct/kWh entspricht das 39 €/Jahr. Unser Rechner übernimmt diese Umrechnung automatisch inklusive Hochrechnung auf Monat und Jahr.',
+        antwort: 'Die Formel: Leistung in Watt × Betriebsstunden ÷ 1.000 = kWh. Beispiel: Ein 2.000-W-Föhn, 10 Minuten täglich, ergibt 2.000 × 0,167 ÷ 1.000 = 0,333 kWh/Tag bzw. 122 kWh/Jahr. Bei 37 ct/kWh entspricht das 45 €/Jahr. Unser Rechner übernimmt diese Umrechnung automatisch inklusive Hochrechnung auf Monat und Jahr.',
       },
       {
         frage: 'Welche Geräte sind die größten Stromfresser im Haushalt?',
@@ -1277,7 +1311,7 @@ Für den gesamten Haushaltsverbrauch nutzen Sie unseren [Stromkosten-Rechner](/w
       },
       {
         frage: 'Welcher Strompreis ist realistisch?',
-        antwort: 'Der Durchschnitt in Deutschland liegt 2026 bei etwa 32 ct/kWh. In der Grundversorgung zahlen viele Haushalte 35–45 ct/kWh, während günstige Neukundentarife teilweise bei 26–30 ct/kWh starten. Wer schon lange nicht mehr gewechselt hat, zahlt fast immer zu viel — ein Vergleich lohnt sich praktisch immer. Unser Rechner arbeitet mit dem Preis, den Sie eingeben; prüfen Sie ihn am besten einmal im Jahr auf Ihrer Abrechnung.',
+        antwort: 'Der BDEW-Durchschnitt in Deutschland liegt 2026 bei etwa 37 ct/kWh über alle Tarifgruppen. In der Grundversorgung zahlen viele Haushalte 38–45 ct/kWh, während günstige Festpreis-Neukundentarife typisch bei 33 ct/kWh starten. Wer schon lange nicht mehr gewechselt hat, zahlt fast immer zu viel — ein Vergleich lohnt sich praktisch immer. Unser Rechner arbeitet mit dem Preis, den Sie eingeben; prüfen Sie ihn am besten einmal im Jahr auf Ihrer Abrechnung.',
       },
     ],
   },
@@ -1586,14 +1620,14 @@ Der Rechner kalkuliert mit Durchschnittspreisen. Großmengen im Baustoffhandel s
     keywords: ['balkonkraftwerk rechner', 'balkon solar rechner', 'balkonkraftwerk ertrag', 'balkonkraftwerk amortisation', '800 watt balkonkraftwerk', 'mini pv anlage', 'stecker solaranlage'],
     icon: '☀️',
     formel: 'Jahresertrag = kWp × 950 × Ausrichtung × Aufstellung | Eigenverbrauch = Ertrag × 30 % | Ersparnis = Eigenverbrauch × Strompreis',
-    beispiel: '800 W, Süd, Aufständerung: 0,8 × 950 × 1,0 × 0,9 = 684 kWh/Jahr. Eigenverbrauch 205 kWh × 32 ct = 65,60 € Ersparnis.',
+    beispiel: '800 W, Süd, Aufständerung: 0,8 × 950 × 1,0 × 0,9 = 684 kWh/Jahr. Eigenverbrauch 205 kWh × 33 ct (Festpreis-Neuvertrag 2026) = 67,65 € Ersparnis.',
     erklaerung: `**Was berechnet der Balkon-Solar-Rechner?**
 
 Der Rechner ermittelt den erwarteten Jahresertrag, den nutzbaren Eigenverbrauch und die finanzielle Amortisation eines Balkonkraftwerks. Er berücksichtigt Anlagenleistung, Ausrichtung, Aufstellungsart und Ihren individuellen Stromverbrauch und Strompreis.
 
 **Balkonkraftwerk — was ist das?**
 
-Ein Balkonkraftwerk (auch Mini-PV-Anlage oder Steckersolargerät) ist eine kleine Photovoltaikanlage, die direkt über eine Steckdose ins Hausnetz einspeist. Seit 2024 dürfen in Deutschland Anlagen mit bis zu 800 Watt Wechselrichterleistung (vorher 600 W) ohne Elektriker angemeldet werden — die vereinfachte Anmeldung über das Marktstammdatenregister reicht aus.
+Ein Balkonkraftwerk (auch Mini-PV-Anlage oder Steckersolargerät) ist eine kleine Photovoltaikanlage, die direkt über eine Steckdose ins Hausnetz einspeist. Mit dem **Solarpaket I** (Inkrafttreten 16.05.2024) wurde die Bagatellgrenze von 600 W auf **800 Watt Wechselrichterleistung** angehoben und die Anmeldung deutlich vereinfacht: Eine kurze Online-Eintragung im Marktstammdatenregister (MaStR) der Bundesnetzagentur reicht aus, ein Elektriker ist nicht mehr nötig.
 
 **Ertrag — wie viel Strom produziert die Anlage?**
 
@@ -1610,7 +1644,7 @@ Durch gezieltes Lastmanagement (Waschmaschine, Geschirrspüler und Trockner tags
 
 **Amortisation — wann rechnet sich die Anlage?**
 
-Die Amortisationszeit hängt vom Strompreis und der Eigenverbrauchsquote ab. Bei 800 W, Südausrichtung mit Aufständerung und 32 ct/kWh Strompreis: ca. 9–10 Jahre. Danach produziert die Anlage reinen Gewinn. Die Lebensdauer moderner Solarmodule liegt bei 25–30 Jahren — über die gesamte Laufzeit spart ein 800-W-Balkonkraftwerk typischerweise 800–1.500 €.
+Die Amortisationszeit hängt vom Strompreis und der Eigenverbrauchsquote ab. Bei 800 W, Südausrichtung mit Aufständerung und 33 ct/kWh Strompreis (Festpreis-Neuvertrag 2026): ca. 8–10 Jahre. Bei 37 ct/kWh (BDEW-Mittel) entsprechend kürzer. Danach produziert die Anlage reinen Gewinn. Die Lebensdauer moderner Solarmodule liegt bei 25–30 Jahren — über die gesamte Laufzeit spart ein 800-W-Balkonkraftwerk typischerweise 1.000–1.700 €.
 
 **CO₂-Ersparnis**
 
@@ -1621,11 +1655,12 @@ Jede erzeugte Kilowattstunde Solarstrom spart ca. 0,38 kg CO₂ gegenüber dem d
 - Anlagen bis 800 W Wechselrichterleistung dürfen ohne Elektriker installiert werden.
 - Vereinfachte Anmeldung über das Marktstammdatenregister (MaStR) beim Netzbetreiber.
 - Der alte Ferraris-Zähler darf rückwärtslaufen, bis der Netzbetreiber einen Zweirichtungszähler einbaut (kostenlos).
-- Mieter dürfen Balkonkraftwerke installieren — seit 2024 hat der Vermieter kein Vetorecht mehr (privilegierte bauliche Veränderung nach WEG-Reform).`,
+- **Wohnungseigentümer (WEG):** § 20 Abs. 2 Nr. 5 WEG — Anspruch auf Zustimmung der Eigentümergemeinschaft als privilegierte bauliche Veränderung.
+- **Mieter:** § 554 BGB — Anspruch auf Zustimmung des Vermieters. Beide Regelungen wurden mit dem Solarpaket I am 16.05.2024 eingeführt. Der Vermieter bzw. die Eigentümergemeinschaft kann nur die Art der Installation regeln (Befestigung, Statik, Brandschutz), die Anbringung selbst aber nicht grundlos verweigern.`,
     faq: [
       {
         frage: 'Wie viel spart ein Balkonkraftwerk pro Jahr?',
-        antwort: 'Bei 800 W, Südausrichtung und 32 ct/kWh Strompreis: ca. 55–75 € pro Jahr (bei 30 % Eigenverbrauch). Wer stromintensive Geräte gezielt tagsüber laufen lässt, kann auf 80–100 € kommen. Über 20 Jahre summiert sich das auf 1.100–2.000 € — abzüglich der Anschaffungskosten von 400–900 €.',
+        antwort: 'Bei 800 W, Südausrichtung und 33 ct/kWh Strompreis (Festpreis-Neuvertrag 2026): ca. 60–80 € pro Jahr (bei 30 % Eigenverbrauch). Bei 37 ct/kWh (BDEW-Mittel) entsprechend mehr. Wer stromintensive Geräte gezielt tagsüber laufen lässt, kann auf 100–130 € kommen. Über 20 Jahre summiert sich das auf 1.200–2.600 € — abzüglich der Anschaffungskosten von 400–900 €.',
       },
       {
         frage: 'Wann rechnet sich ein Balkonkraftwerk?',
