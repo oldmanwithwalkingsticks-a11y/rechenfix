@@ -737,7 +737,13 @@ Eine Photovoltaikanlage ist 2026 für die meisten Hausbesitzer eine lohnende Inv
 
 **Wie viel Strom produziert eine PV-Anlage?**
 
-In Deutschland liefert eine PV-Anlage typischerweise 850–1.000 kWh pro installiertem kWp und Jahr — abhängig von Ausrichtung, Neigung, Verschattung und Wetter. Optimal Süd-ausgerichtete Anlagen mit 30° Neigung erreichen die obere Grenze, realistische Mischlagen liegen eher bei 850 kWh/kWp. West- oder Ost-Dächer erreichen rund 85 % des Optimums, Nord-Ost/Nord-West rund 65 %. Unser Rechner kalkuliert konservativ mit diesem realistischen Mittelwert; nach Abzug von Systemverlusten (Wechselrichter, Leitungen, Verschmutzung, ca. 15 %) ergibt sich der Netto-Jahresertrag.
+In Deutschland erzeugt eine PV-Anlage typischerweise 400–1.000 kWh pro installiertem kWp und Jahr — stark abhängig von Ausrichtung, Neigung und Verschattung. Unser Rechner kalkuliert auf Basis eines theoretischen Süd-Optimums (25–35° Neigung) von **850 kWh/kWp/Jahr** (inklusive Performance Ratio 0,85, deckt Modul-, Wechselrichter-, Leitungs-, Verschmutzungs- und Degradationsverluste ab nach VDI 6002 / IEC 61724). Davon ausgehend ergibt sich der individuelle Ertrag über Ausrichtungs- und Neigungsfaktoren:
+
+**Ausrichtungs-Faktoren:** Süd 100 % · Süd-Ost / Süd-West 95 % · Ost / West 85 % · Nord-Ost / Nord-West 72 % · Nord 65 %
+
+**Neigungs-Faktoren** (relativ zu 25–35°): Flach (0–15°) 87 % · Leicht (15–25°) 94 % · Optimal (25–35°) 100 % · Steil (35–45°) 97 % · Sehr steil (45°+) 91 %
+
+Beispiel: Eine 8 kWp-Anlage auf einem Süd-Dach mit 30° Neigung erzeugt 8 × 850 × 1,00 × 1,00 = **6.800 kWh/Jahr**. Dieselbe Anlage auf einem Nord-Dach mit 20° Neigung kommt auf 8 × 850 × 0,65 × 0,94 = **4.158 kWh/Jahr** — also rund 39 % weniger. Datengrundlage: Konrad Mertens, „Photovoltaik" (Hanser Verlag), aufbereitet anhand der 30-Jahres-Globalstrahlungs-Statistik des Deutschen Wetterdienstes.
 
 **Was kostet eine Photovoltaik-Anlage 2026?**
 
@@ -781,7 +787,7 @@ Unser Rechner liefert eine erste Orientierung. Der tatsächliche Ertrag hängt v
     faq: [
       {
         frage: 'Wie viel Strom produziert eine PV-Anlage?',
-        antwort: 'In Deutschland liefert eine PV-Anlage typischerweise 850–1.000 kWh pro kWp und Jahr, abhängig von Ausrichtung und Verschattung. Eine 8-kWp-Anlage erzeugt damit rund 6.800–8.000 kWh pro Jahr. Unser Rechner kalkuliert konservativ — die obere Grenze wird nur bei optimalem Süd-Dach mit 30° Neigung und ohne Verschattung erreicht. Reale Anlagen liegen meist näher am unteren Wert.',
+        antwort: 'In Deutschland liefert eine PV-Anlage typischerweise 400–1.000 kWh pro kWp und Jahr — stark abhängig von Ausrichtung, Neigung und Verschattung. Süd-Dächer mit 25–35° Neigung erreichen das Optimum (rund 850 kWh/kWp inkl. Performance Ratio 0,85), Nord-Dächer kommen auf rund 553 kWh/kWp (65 % des Optimums), Ost-/West-Dächer auf rund 720–800 kWh/kWp (85 %). Eine 8-kWp-Anlage erzeugt damit zwischen 3.200 kWh (Nord steil) und 6.800 kWh (Süd optimal) pro Jahr. Unser Rechner berücksichtigt Ihre konkrete Ausrichtung und Neigung über die Faktoren-Tabelle (Quelle: Mertens, „Photovoltaik", Hanser Verlag).',
       },
       {
         frage: 'Was kostet eine Photovoltaik-Anlage 2026?',
