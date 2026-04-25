@@ -1,3 +1,5 @@
+import { getStrompreis } from './strompreis';
+
 export type Energietraeger = 'gas' | 'oel' | 'fernwaerme' | 'waermepumpe' | 'pellets';
 
 export interface HeizkostenEingabe {
@@ -14,11 +16,15 @@ export interface HeizkostenErgebnis {
   kostenProQm: number;
 }
 
+// Wärmepumpen-Strompreis aus zentraler SSOT (lib/berechnungen/strompreis.ts):
+// 28 ct/kWh als typischer Wärmepumpen-Spezialtarif (HT, separater Zähler;
+// Verivox/Check24-Marktdaten 2026). User mit normalem Haushaltstarif passt
+// den Wert manuell an — das ist der Ausnahmefall.
 const DEFAULTS: Record<Energietraeger, { verbrauch: number; preis: number; label: string }> = {
   gas: { verbrauch: 140, preis: 12, label: 'Erdgas' },
   oel: { verbrauch: 150, preis: 13, label: 'Heizöl' },
   fernwaerme: { verbrauch: 120, preis: 14, label: 'Fernwärme' },
-  waermepumpe: { verbrauch: 40, preis: 36, label: 'Wärmepumpe (Strom)' },
+  waermepumpe: { verbrauch: 40, preis: getStrompreis('waermepumpen_tarif'), label: 'Wärmepumpe (Strom)' },
   pellets: { verbrauch: 130, preis: 8, label: 'Holzpellets' },
 };
 
