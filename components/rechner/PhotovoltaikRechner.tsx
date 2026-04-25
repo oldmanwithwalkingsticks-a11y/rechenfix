@@ -10,35 +10,29 @@ import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import { getMischVerguetung } from '@/lib/berechnungen/eeg-einspeiseverguetung';
 import { getStrompreis } from '@/lib/berechnungen/strompreis';
+import {
+  AUSRICHTUNG_LABELS,
+  NEIGUNG_LABELS,
+  berechnePvErtrag,
+  type Ausrichtung,
+  type Neigung,
+} from '@/lib/berechnungen/pv-ertragsmodell';
 
-// EEG-Vergütung und Eigenverbrauchs-Grenzwert aus zentralen SSOT-Libs
-// (lib/berechnungen/eeg-einspeiseverguetung.ts, strompreis.ts) — niemals
-// Beträge wie 7,78/6,73 ct oder 33 ct hartcodieren.
+// EEG-Vergütung, Strompreis und Ertragsfaktoren aus zentralen SSOT-Libs
+// (lib/berechnungen/eeg-einspeiseverguetung.ts, strompreis.ts,
+// pv-ertragsmodell.ts) — niemals Beträge oder Faktoren hartcodieren.
 const STROMPREIS_DEFAULT = String(getStrompreis('neukunden_festpreis'));
 
-const AUSRICHTUNGEN = [
-  { id: 'sued', label: 'Süd (optimal)', faktor: 1.0 },
-  { id: 'swso', label: 'Süd-West / Süd-Ost', faktor: 0.95 },
-  { id: 'wo', label: 'West / Ost', faktor: 0.85 },
-  { id: 'nwno', label: 'Nord-West / Nord-Ost', faktor: 0.65 },
-  { id: 'nord', label: 'Nord', faktor: 0.55 },
-];
-
-const NEIGUNGEN = [
-  { id: 'flach', label: 'Flachdach (0–10°)', faktor: 0.87 },
-  { id: 'leicht', label: 'Leicht geneigt (15–25°)', faktor: 0.95 },
-  { id: 'optimal', label: 'Optimal (30–35°)', faktor: 1.0 },
-  { id: 'steil', label: 'Steil (40–50°)', faktor: 0.95 },
-  { id: 'sehrsteil', label: 'Sehr steil (>50°)', faktor: 0.85 },
-];
+const AUSRICHTUNG_IDS = Object.keys(AUSRICHTUNG_LABELS) as Ausrichtung[];
+const NEIGUNG_IDS = Object.keys(NEIGUNG_LABELS) as Neigung[];
 
 const fmt = (n: number, d = 0) => n.toLocaleString('de-DE', { minimumFractionDigits: d, maximumFractionDigits: d });
 const fmtEur = (n: number) => fmt(Math.round(n)) + ' €';
 
 export default function PhotovoltaikRechner() {
   const [dachflaeche, setDachflaeche] = useState('40');
-  const [ausrichtung, setAusrichtung] = useState('sued');
-  const [neigung, setNeigung] = useState('optimal');
+  const [ausrichtung, setAusrichtung] = useState<Ausrichtung>('sued');
+  const [neigung, setNeigung] = useState<Neigung>('optimal');
   const [verbrauch, setVerbrauch] = useState('4000');
   const [strompreis, setStrompreis] = useState(STROMPREIS_DEFAULT);
   const [kwp, setKwp] = useState('');
@@ -57,12 +51,10 @@ export default function PhotovoltaikRechner() {
     const kostenAuto = kwpWert * 1300;
     const kostenWert = parseDeutscheZahl(kosten) || kostenAuto;
 
-    const aFaktor = AUSRICHTUNGEN.find(a => a.id === ausrichtung)?.faktor || 1;
-    const nFaktor = NEIGUNGEN.find(n => n.id === neigung)?.faktor || 1;
-    const ausrichtungsfaktor = aFaktor * nFaktor;
-
-    const bruttoErtrag = kwpWert * 1000 * ausrichtungsfaktor;
-    const nettoErtrag = bruttoErtrag * 0.85;
+    // Ertrag aus zentraler SSOT (lib/berechnungen/pv-ertragsmodell.ts):
+    // kwp × 850 kWh/kWp/Jahr × Ausrichtungsfaktor × Neigungsfaktor.
+    // Performance Ratio 0,85 (VDI 6002) ist im Basiswert eingebacken.
+    const nettoErtrag = berechnePvErtrag({ kwp: kwpWert, ausrichtung, neigung });
 
     // Eigenverbrauchsquote
     let quote: number;
@@ -100,7 +92,6 @@ export default function PhotovoltaikRechner() {
     return {
       kwpWert,
       kostenWert,
-      bruttoErtrag,
       nettoErtrag,
       quote,
       eigenverbrauch,
@@ -127,14 +118,14 @@ export default function PhotovoltaikRechner() {
         </div>
         <div>
           <label htmlFor="photovoltaik-select-1" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Dachausrichtung</label>
-          <select id="photovoltaik-select-1" value={ausrichtung} onChange={e => setAusrichtung(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
-            {AUSRICHTUNGEN.map(a => <option key={a.id} value={a.id}>{a.label}</option>)}
+          <select id="photovoltaik-select-1" value={ausrichtung} onChange={e => setAusrichtung(e.target.value as Ausrichtung)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+            {AUSRICHTUNG_IDS.map(id => <option key={id} value={id}>{AUSRICHTUNG_LABELS[id]}</option>)}
           </select>
         </div>
         <div>
           <label htmlFor="photovoltaik-select-2" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Dachneigung</label>
-          <select id="photovoltaik-select-2" value={neigung} onChange={e => setNeigung(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
-            {NEIGUNGEN.map(n => <option key={n.id} value={n.id}>{n.label}</option>)}
+          <select id="photovoltaik-select-2" value={neigung} onChange={e => setNeigung(e.target.value as Neigung)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+            {NEIGUNG_IDS.map(id => <option key={id} value={id}>{NEIGUNG_LABELS[id]}</option>)}
           </select>
         </div>
         <div>
