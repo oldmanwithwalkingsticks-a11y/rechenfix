@@ -161,7 +161,7 @@ export default function DachflaechenRechner() {
       </div>
 
       <p className="text-xs text-gray-500 mb-6">
-        ⚠️ Die Berechnung ist eine Näherung. Für genaue Werte bei Walmdächern oder komplexen Formen lassen Sie die Fläche von einem Dachdecker aufmessen.
+        ⚠️ Die Berechnung gilt für regelmäßige Dachformen mit gleichmäßiger Neigung. Für Walmdächer mit unterschiedlichen Neigungen, Krüppelwalme, Gauben oder komplexe Dachformen lassen Sie die Fläche von einem Dachdecker aufmessen.
       </p>
 
       <CrossLink href="/wohnen/photovoltaik-rechner" emoji="☀️" text="Photovoltaik-Rechner" />

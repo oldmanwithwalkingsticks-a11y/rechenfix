@@ -22,6 +22,8 @@ import {
 
 const wohnenTs = readFileSync(join(process.cwd(), 'lib/rechner-config/wohnen.ts'), 'utf8');
 const dachflRechnerTs = readFileSync(join(process.cwd(), 'components/rechner/DachflaechenRechner.tsx'), 'utf8');
+const poolRechnerTs = readFileSync(join(process.cwd(), 'components/rechner/PoolkostenRechner.tsx'), 'utf8');
+const heizLibTs = readFileSync(join(process.cwd(), 'lib/berechnungen/heizkosten.ts'), 'utf8');
 
 // Block-B-Scope ist auf dachflaechen-rechner und poolkosten-rechner
 // begrenzt. Andere Rechner (z. B. balkon-solar) bleiben unangetastet.
@@ -231,6 +233,62 @@ cases.push({
   expected: 272,
   tol: 3,
   quelle: 'P3.1 — Erklärtext nennt rund 270 €',
+});
+
+// === GRUPPE 9a: Component-Drift-Tests (148b P1.1+P1.2+P1.3) ===
+
+// P1.1 Pool: Strompreis-Default aus SSOT, kein hardcodiertes useState('32')
+cases.push({
+  name: 'PoolkostenRechner: kein useState(\'32\') als Strompreis-Default',
+  actual: poolRechnerTs.includes("useState('32')"),
+  expected: false,
+  quelle: '148b P1.1 — Migration auf STROMPREIS_2026',
+});
+cases.push({
+  name: 'PoolkostenRechner: importiert getStrompreis aus SSOT',
+  actual: poolRechnerTs.includes("from '@/lib/berechnungen/strompreis'"),
+  expected: true,
+  quelle: '148b P1.1 — SSOT-Konsumption',
+});
+cases.push({
+  name: 'PoolkostenRechner: kein placeholder="32" mehr',
+  actual: poolRechnerTs.includes('placeholder="32"'),
+  expected: false,
+  quelle: '148b P1.1 — placeholder folgt Default',
+});
+
+// P1.2 Heiz-Lib: WP-Preis aus SSOT statt hardcodierter 36
+cases.push({
+  name: 'heizkosten.ts: kein hardcodierter "preis: 36" mehr',
+  actual: heizLibTs.includes('preis: 36'),
+  expected: false,
+  quelle: '148b P1.2 — alter Pre-147-Wert raus',
+});
+cases.push({
+  name: 'heizkosten.ts: importiert getStrompreis aus SSOT',
+  actual: heizLibTs.includes("from './strompreis'"),
+  expected: true,
+  quelle: '148b P1.2 — SSOT-Konsumption',
+});
+cases.push({
+  name: 'heizkosten.ts: nutzt getStrompreis(\'waermepumpen_tarif\') für WP',
+  actual: heizLibTs.includes("getStrompreis('waermepumpen_tarif')"),
+  expected: true,
+  quelle: '148b P1.2 — WP-Tarif aus SSOT (28 ct)',
+});
+
+// P1.3 Dach: Hinweisbox-Text präzisiert
+cases.push({
+  name: 'DachflaechenRechner: kein "Berechnung ist eine Näherung" mehr',
+  actual: dachflRechnerTs.includes('Berechnung ist eine Näherung'),
+  expected: false,
+  quelle: '148b P1.3 — Walmdach ist exakt, nicht Näherung',
+});
+cases.push({
+  name: 'DachflaechenRechner: "regelmäßige Dachformen" im Hinweis',
+  actual: dachflRechnerTs.includes('regelmäßige Dachformen'),
+  expected: true,
+  quelle: '148b P1.3 — neue präzise Formulierung',
 });
 
 // === GRUPPE 9: Walmdach-Mathematik (Sanity-Check) ===
