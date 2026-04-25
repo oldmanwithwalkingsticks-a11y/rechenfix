@@ -737,7 +737,7 @@ Eine Photovoltaikanlage ist 2026 für die meisten Hausbesitzer eine lohnende Inv
 
 **Wie viel Strom produziert eine PV-Anlage?**
 
-In Deutschland liefert eine optimal ausgerichtete PV-Anlage (Süd, 30° Neigung) rund 950–1.050 kWh pro installiertem kWp und Jahr. Abweichungen entstehen durch Ausrichtung, Neigung, Verschattung und Wetter. West- oder Ost-Dächer erreichen rund 85 % des Optimums, Nord-Ost/Nord-West rund 65 %. Nach Abzug von Systemverlusten (Wechselrichter, Leitungen, Verschmutzung, ca. 15 %) ergibt sich der Netto-Jahresertrag.
+In Deutschland liefert eine PV-Anlage typischerweise 850–1.000 kWh pro installiertem kWp und Jahr — abhängig von Ausrichtung, Neigung, Verschattung und Wetter. Optimal Süd-ausgerichtete Anlagen mit 30° Neigung erreichen die obere Grenze, realistische Mischlagen liegen eher bei 850 kWh/kWp. West- oder Ost-Dächer erreichen rund 85 % des Optimums, Nord-Ost/Nord-West rund 65 %. Unser Rechner kalkuliert konservativ mit diesem realistischen Mittelwert; nach Abzug von Systemverlusten (Wechselrichter, Leitungen, Verschmutzung, ca. 15 %) ergibt sich der Netto-Jahresertrag.
 
 **Was kostet eine Photovoltaik-Anlage 2026?**
 
@@ -781,7 +781,7 @@ Unser Rechner liefert eine erste Orientierung. Der tatsächliche Ertrag hängt v
     faq: [
       {
         frage: 'Wie viel Strom produziert eine PV-Anlage?',
-        antwort: 'In Deutschland liefert eine optimal ausgerichtete PV-Anlage (Süddach, 30° Neigung) ca. 950–1.050 kWh pro kWp und Jahr. Eine 8-kWp-Anlage erzeugt damit rund 7.600–8.400 kWh pro Jahr. Abweichungen entstehen durch Ausrichtung, Neigung und Verschattung — unser Rechner berücksichtigt diese Faktoren automatisch.',
+        antwort: 'In Deutschland liefert eine PV-Anlage typischerweise 850–1.000 kWh pro kWp und Jahr, abhängig von Ausrichtung und Verschattung. Eine 8-kWp-Anlage erzeugt damit rund 6.800–8.000 kWh pro Jahr. Unser Rechner kalkuliert konservativ — die obere Grenze wird nur bei optimalem Süd-Dach mit 30° Neigung und ohne Verschattung erreicht. Reale Anlagen liegen meist näher am unteren Wert.',
       },
       {
         frage: 'Was kostet eine Photovoltaik-Anlage 2026?',
@@ -955,7 +955,7 @@ Zusätzlich zum reinen Farbbedarf zeigt Ihnen der Rechner eine vollständige Ein
     keywords: ['grundsteuer rechner', 'grundsteuer 2026', 'grundsteuerreform', 'bodenrichtwert', 'hebesatz', 'grundsteuerwert', 'bundesmodell grundsteuer', 'grundsteuer bayern', 'grundsteuer baden-württemberg'],
     icon: '🏠',
     formel: 'Bundesmodell: Grundsteuer = Grundsteuerwert × Steuermesszahl (0,031 % Wohnen) × Hebesatz | Bayern (Flächenmodell): Äquivalenzbetrag × 0,70 × Hebesatz | BW (Bodenwertmodell): Fläche × Bodenrichtwert × 0,091 ‰ × Hebesatz',
-    beispiel: 'Eigentumswohnung, 120 m² Wohnfläche, 400 m² Grundstück, Bodenrichtwert 200 €/m², Baujahr 1990, Hebesatz 500 %: Grundsteuerwert ca. 161.000 € → Messbetrag ca. 50 € → Grundsteuer ca. 250 €/Jahr.',
+    beispiel: 'Eigentumswohnung, 120 m² Wohnfläche, 400 m² Grundstück, Bodenrichtwert 200 €/m², Baujahr 1990, Hebesatz 500 %: Grundsteuerwert ca. 242.000 € → Messbetrag ca. 75 € → Grundsteuer ca. 375 €/Jahr.',
     erklaerung: `**Die neue Grundsteuer ab 2025 — Überblick**
 
 Seit dem 1. Januar 2025 gilt in Deutschland die **neue Grundsteuer**, nachdem das Bundesverfassungsgericht die bisherigen Einheitswerte 2018 für verfassungswidrig erklärt hatte. Die Berechnung erfolgt seither nach dem **Bundesmodell** oder — in fünf Ländern — nach **eigenen Landesmodellen**. Die meisten Bundesländer (darunter NRW, Niedersachsen, Schleswig-Holstein, Brandenburg, Mecklenburg-Vorpommern, Thüringen, Sachsen-Anhalt, Berlin, Bremen, Hessen mit Flächen-Faktor-Modell) nutzen das Bundesmodell. Bayern setzt auf ein reines Flächenmodell, Baden-Württemberg auf ein Bodenwertmodell, Hamburg auf ein Wohnlagemodell und Niedersachsen zusätzlich auf ein Flächen-Lage-Modell.
