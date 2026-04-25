@@ -6,6 +6,15 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { berechneSpezifischenErtrag } from '@/lib/berechnungen/pv-ertragsmodell';
+
+// Modulfläche pro kWp: ~5,5 m² bei modernen Modulen mit ~200 Wp/m²,
+// inkl. Abstände, Randbereiche, Wartungswege. Konservativer Wert für
+// durchschnittlichen Bestand (moderne Module liegen bei ~5,0).
+const MODULFLAECHE_PRO_KWP = 5.5;
+// Spezifischer Süd-Optimum-Ertrag aus zentraler SSOT (pv-ertragsmodell).
+// Konsistent mit photovoltaik-rechner: 850 kWh/kWp/Jahr inkl. PR 0,85.
+const PV_SPEZ_ERTRAG_OPTIMAL = berechneSpezifischenErtrag('sued', 'optimal');
 
 type Dachform = 'sattel' | 'pult' | 'walm' | 'flach';
 
@@ -46,10 +55,13 @@ export default function DachflaechenRechner() {
       flaeche = lGes * sparrenLaenge;
       beschreibung = 'Länge × Sparrenlänge';
     } else if (form === 'walm') {
-      // 2 Trapeze + 2 Dreiecke, vereinfachte Näherung = Grundfläche / cos(α)
+      // Bei gleicher Neigung an allen vier Seiten ist Grundfläche / cos(α)
+      // mathematisch exakt — jeder m² Grundfläche projiziert sich um den
+      // gleichen Faktor 1/cos(Neigung) auf die Dachfläche, unabhängig von
+      // der Neigungsrichtung.
       sparrenLaenge = (bGes / 2) * sparrenFaktor;
       flaeche = grundGes * sparrenFaktor;
-      beschreibung = 'Grundfläche / cos(Neigung) (Näherung)';
+      beschreibung = 'Grundfläche / cos(Neigung)';
     } else {
       // Flachdach
       sparrenLaenge = bGes;
@@ -63,10 +75,13 @@ export default function DachflaechenRechner() {
     const dachlatten = flaeche * 3.3; // lfm
     const unterspannbahn = Math.ceil(flaeche * 1.15);
 
-    // PV-Potenzial
+    // PV-Potenzial — spezifischer Ertrag aus zentraler SSOT
+    // (pv-ertragsmodell.ts) für Süd/Optimal-Annahme. Wer die genauen
+    // Werte für seine Ausrichtung/Neigung will, nutzt den Photovoltaik-
+    // Rechner mit dem vollständigen Mertens-Faktor-Modell.
     const pvNutzbar = form === 'flach' ? flaeche * 0.5 : flaeche * 0.7;
-    const kwpMax = pvNutzbar / 5.5; // ~5,5 m² pro kWp
-    const ertragKWh = kwpMax * 950;
+    const kwpMax = pvNutzbar / MODULFLAECHE_PRO_KWP;
+    const ertragKWh = Math.round(kwpMax * PV_SPEZ_ERTRAG_OPTIMAL);
 
     return {
       flaeche,
