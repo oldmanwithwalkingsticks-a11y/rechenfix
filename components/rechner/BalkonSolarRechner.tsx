@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import Link from 'next/link';
 import { berechneBalkonSolar, AUSRICHTUNGEN, AUFSTELLUNGEN } from '@/lib/berechnungen/balkon-solar';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
@@ -14,6 +15,12 @@ import { getStrompreis } from '@/lib/berechnungen/strompreis';
 const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const STROMPREIS_DEFAULT = String(getStrompreis('neukunden_festpreis'));
 
+// Solarpaket I (16.05.2024), § 8 Abs. 5a EEG 2023 i.V.m. VDE-AR-N 4105:
+// Steckersolargeräte sind auf 800 W Wechselrichter-Wirkleistung begrenzt.
+// Darüber: reguläre PV-Anlage, andere Anmelde-/Installationspflichten.
+const BALKON_LEISTUNG_MAX = 800;
+const BALKON_LEISTUNG_MIN = 100;
+
 export default function BalkonSolarRechner() {
   const [leistungModus, setLeistungModus] = useState('800');
   const [leistungEigen, setLeistungEigen] = useState('800');
@@ -23,9 +30,20 @@ export default function BalkonSolarRechner() {
   const [strompreis, setStrompreis] = useState(STROMPREIS_DEFAULT);
   const [kosten, setKosten] = useState('600');
 
-  const leistungWatt = leistungModus === 'eigene'
+  // Roh-Eingabewert (für Warnung) vs. effektive Leistung (für Berechnung,
+  // hart gecappt auf 800 W). Toggle-Werte 600/800 sind per se valide.
+  const leistungRoh = leistungModus === 'eigene'
     ? parseDeutscheZahl(leistungEigen)
     : parseInt(leistungModus);
+  const leistungWatt = leistungModus === 'eigene'
+    ? Math.min(BALKON_LEISTUNG_MAX, leistungRoh)
+    : leistungRoh;
+
+  const leistungWarning: string | null = leistungModus === 'eigene' && leistungRoh > BALKON_LEISTUNG_MAX
+    ? `Balkonkraftwerke sind auf ${BALKON_LEISTUNG_MAX} W Wechselrichter-Leistung begrenzt (Solarpaket I, § 8 EEG 2023 i.V.m. VDE-AR-N 4105). Die Berechnung läuft mit ${BALKON_LEISTUNG_MAX} W weiter — für größere Anlagen siehe den Photovoltaik-Rechner.`
+    : leistungModus === 'eigene' && leistungRoh > 0 && leistungRoh < BALKON_LEISTUNG_MIN
+      ? `Bitte mindestens ${BALKON_LEISTUNG_MIN} W eingeben (kleinste sinnvolle Modul-Konfiguration).`
+      : null;
 
   const ergebnis = useMemo(() => {
     const sv = parseDeutscheZahl(stromverbrauch);
@@ -53,7 +71,21 @@ export default function BalkonSolarRechner() {
         {leistungModus === 'eigene' && (
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Leistung (Watt)</label>
-            <NummerEingabe value={leistungEigen} onChange={setLeistungEigen} placeholder="800" />
+            <NummerEingabe value={leistungEigen} onChange={setLeistungEigen} placeholder="800" einheit="W" />
+            {leistungWarning && (
+              <div
+                role="alert"
+                aria-live="polite"
+                className="mt-2 rounded-lg border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/30 p-3 text-sm text-amber-800 dark:text-amber-300"
+              >
+                <strong>Hinweis:</strong> {leistungWarning}{' '}
+                {leistungRoh > BALKON_LEISTUNG_MAX && (
+                  <Link href="/wohnen/photovoltaik-rechner" className="underline font-medium">
+                    Zum Photovoltaik-Rechner
+                  </Link>
+                )}
+              </div>
+            )}
           </div>
         )}
 
