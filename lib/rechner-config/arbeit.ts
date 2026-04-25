@@ -1211,7 +1211,7 @@ Denken Sie daran: Die Elternzeit läuft **kalendarisch** — auch Wochenenden un
     metaDescription: 'Ehegattenunterhalt berechnen: Trennungsunterhalt und nachehelicher Unterhalt nach der 3/7-Methode mit Selbstbehalt.',
     keywords: ['ehegattenunterhalt', 'trennungsunterhalt berechnen', 'nachehelicher unterhalt', '3/7 methode', 'selbstbehalt ehegatte', 'differenzmethode unterhalt', 'unterhalt scheidung'],
     icon: '⚖️',
-    formel: 'Unterhalt = (Einkommen P1 − Einkommen P2) × 3/7, max. begrenzt durch Selbstbehalt P1 (1.600 € Trennung / 1.475 € nachehelich)',
+    formel: 'Unterhalt = (Einkommen P1 − Einkommen P2) × 3/7, max. begrenzt durch Selbstbehalt P1 (1.600 € erwerbstätig / 1.475 € nicht erwerbstätig — DT 2026)',
     beispiel: 'P1 verdient 3.500 €, P2 verdient 1.200 €. Differenz = 2.300 €. Unterhalt = 2.300 × 3/7 ≈ 986 €/Monat. P1 behält 2.514 €, deutlich über Selbstbehalt.',
     erklaerung: `**Ehegattenunterhalt — Trennungsunterhalt und nachehelicher Unterhalt erklärt**
 
@@ -1223,7 +1223,7 @@ Unser Ehegattenunterhalt-Rechner nimmt Ihnen die Mathematik ab — inklusive Sel
 
 Ab dem Tag, an dem sich die Ehepartner räumlich getrennt haben — das kann auch innerhalb derselben Wohnung sein, wenn Schlafen, Essen und Wirtschaften getrennt erfolgen —, kann der wirtschaftlich schwächere Ehegatte **Trennungsunterhalt** verlangen. Anspruchsgrundlage ist § 1361 BGB. Der Trennungsunterhalt soll den **ehelichen Lebensstandard** möglichst aufrechterhalten, bis das Scheidungsurteil rechtskräftig wird.
 
-Der berechtigte Partner muss im ersten Trennungsjahr **nicht arbeiten**, wenn er es vorher auch nicht getan hat. Erst ab dem zweiten Jahr besteht eine Erwerbsobliegenheit. Der Selbstbehalt des Unterhaltspflichtigen beträgt 2026 **1.600 €** (bei Erwerbstätigkeit).
+Der berechtigte Partner muss im ersten Trennungsjahr **nicht arbeiten**, wenn er es vorher auch nicht getan hat. Erst ab dem zweiten Jahr besteht eine Erwerbsobliegenheit. Der Selbstbehalt des Unterhaltspflichtigen beträgt 2026 **1.600 €** bei Erwerbstätigkeit, **1.475 €** wenn er nicht erwerbstätig ist (Düsseldorfer Tabelle 2026).
 
 **Nachehelicher Unterhalt nach § 1569 ff. BGB**
 
@@ -1236,7 +1236,7 @@ Mit Rechtskraft des Scheidungsurteils endet der Trennungsunterhalt. Ab diesem Ze
 - **Aufstockungsunterhalt** (§ 1573 Abs. 2 BGB) — wenn eigenes Einkommen niedriger ist als der eheliche Lebensstandard
 - **Ausbildungsunterhalt** (§ 1575 BGB) — für Aus- oder Weiterbildung
 
-Der Selbstbehalt beim nachehelichen Unterhalt beträgt 2026 **1.475 €** (Düsseldorfer Tabelle). Er ist niedriger als beim Trennungsunterhalt, weil die Bindung schwächer ist.
+Der Selbstbehalt gegenüber Ehegatten ist auch beim nachehelichen Unterhalt **1.600 €** bei Erwerbstätigkeit bzw. **1.475 €** wenn der Pflichtige nicht erwerbstätig ist (Düsseldorfer Tabelle 2026). Die Differenzierung ist also **nicht** zwischen Trennungs- und nachehelicher Phase, sondern nach Erwerbstätigkeit des Pflichtigen — derselbe Mechanismus wie im Kindesunterhalt.
 
 **Die 3/7-Methode — so wird gerechnet**
 
@@ -1246,9 +1246,9 @@ Die deutsche Rechtsprechung hat sich auf eine einfache Quote geeinigt: Der Unter
 - **Schritt 2:** Wenn Kindesunterhalt gezahlt wird und noch nicht abgezogen ist, diesen vom Einkommen des Pflichtigen abziehen.
 - **Schritt 3:** Differenz bilden: Einkommen P1 − Einkommen P2.
 - **Schritt 4:** Multiplikation mit 3/7 (= ca. 42,86 %).
-- **Schritt 5:** Selbstbehalt-Check: P1 muss nach Unterhalt mindestens 1.475 € (bzw. 1.600 € beim Trennungsunterhalt) behalten. Andernfalls wird der Unterhalt gekappt.
+- **Schritt 5:** Selbstbehalt-Check: P1 muss nach Unterhalt mindestens 1.600 € (bei Erwerbstätigkeit) bzw. 1.475 € (nicht erwerbstätig) behalten. Andernfalls wird der Unterhalt gekappt.
 
-Beispiel: Peter verdient 3.500 € netto (bereinigt), Anna 1.200 €. Differenz: 2.300 €. Unterhalt = 2.300 × 3/7 ≈ **986 €/Monat**. Peter behält 3.500 − 986 = 2.514 €, Anna hat 1.200 + 986 = 2.186 €. Der Selbstbehalt (1.600 € Trennung) ist weit unterschritten — kein Kappungsfall.
+Beispiel: Peter verdient 3.500 € netto (bereinigt) und ist erwerbstätig, Anna 1.200 €. Differenz: 2.300 €. Unterhalt = 2.300 × 3/7 ≈ **986 €/Monat**. Peter behält 3.500 − 986 = 2.514 €, Anna hat 1.200 + 986 = 2.186 €. Der Selbstbehalt (1.600 € erwerbstätig) ist weit unterschritten — kein Kappungsfall. Wäre Peter dagegen nicht erwerbstätig (z. B. Rentner), gälte der niedrigere Selbstbehalt von 1.475 € — ändert in diesem Beispiel nichts, weil keine Kappung greift.
 
 **Wichtige Feinheiten**
 
@@ -1271,7 +1271,7 @@ Beispiel: Peter verdient 3.500 € netto (bereinigt), Anna 1.200 €. Differenz:
       },
       {
         frage: 'Wie hoch ist der Selbstbehalt bei Ehegattenunterhalt?',
-        antwort: 'Beim Trennungsunterhalt liegt der Selbstbehalt 2026 bei 1.600 € monatlich (erwerbstätig). Beim nachehelichen Unterhalt sind es 1.475 €. In diesen Beträgen sind Miete, Nebenkosten und allgemeine Lebenshaltungskosten enthalten. Der Selbstbehalt darf auch bei hohem Unterhaltsanspruch des geschiedenen Partners nicht unterschritten werden — gegebenenfalls wird der Unterhalt gekappt.',
+        antwort: 'Der Selbstbehalt gegenüber Ehegatten richtet sich nach der Düsseldorfer Tabelle 2026 nach der Erwerbstätigkeit des Pflichtigen, nicht nach der Trennungsphase: 1.600 € wenn er erwerbstätig ist, 1.475 € wenn er nicht erwerbstätig ist (z. B. Rentner, Erwerbslose). Diese Differenzierung gilt für Trennungsunterhalt und nachehelichen Unterhalt gleichermaßen. In den Beträgen sind Miete, Nebenkosten und allgemeine Lebenshaltungskosten enthalten. Der Selbstbehalt darf auch bei hohem Unterhaltsanspruch des Partners nicht unterschritten werden — gegebenenfalls wird der Unterhalt gekappt.',
       },
       {
         frage: 'Was bedeutet die 3/7-Methode?',

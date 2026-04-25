@@ -11,19 +11,22 @@ import CrossLink from '@/components/ui/CrossLink';
 
 type Art = 'trennung' | 'nachehelich';
 
-// Selbstbehalt 2026 (Düsseldorfer Tabelle)
-// Trennungsunterhalt gegenüber Ehegatten: 1.600 € (erwerbstätig)
-// Nachehelicher Unterhalt gegenüber geschiedenem Ehegatten: 1.475 €
-const SELBSTBEHALT: Record<Art, number> = {
-  trennung: 1600,
-  nachehelich: 1475,
-};
+// Selbstbehalt gegenüber Ehegatten 2026 (Düsseldorfer Tabelle, Stand DT 2026):
+// 1.600 € — wenn der Pflichtige erwerbstätig ist
+// 1.475 € — wenn der Pflichtige nicht erwerbstätig ist
+// Die Differenzierung gilt für Trennungsunterhalt UND nachehelichen
+// Unterhalt gleichermaßen — Achse ist die Erwerbstätigkeit, NICHT die
+// Trennungsphase. Korrigiert mit Prompt 149c (P1-A10): vorher fälschlich
+// Trennung=1600 / nachehelich=1475 mit erfundener Begründung.
+const SELBSTBEHALT_ERWERBSTAETIG = 1600;
+const SELBSTBEHALT_NICHT_ERWERBSTAETIG = 1475;
 
 // Erwerbstätigenbonus: 1/10 wird vor der 3/7-Methode vom Erwerbseinkommen abgezogen
 // Damit ergibt sich faktisch die gängige Quote. Wir verwenden die klassische 3/7-Differenzmethode.
 
 export default function EhegattenunterhaltRechner() {
   const [art, setArt] = useState<Art>('trennung');
+  const [pflichtigerErwerbstaetig, setPflichtigerErwerbstaetig] = useState<boolean>(true);
   const [netto1, setNetto1] = useState<string>('3500');
   const [netto2, setNetto2] = useState<string>('1200');
   const [kuBeruecksichtigt, setKuBeruecksichtigt] = useState<boolean>(false);
@@ -38,7 +41,9 @@ export default function EhegattenunterhaltRechner() {
     const differenz = bereinigt1 - n2;
     const berechnet = Math.max(0, Math.round((differenz * 3) / 7));
 
-    const selbstbehalt = SELBSTBEHALT[art];
+    const selbstbehalt = pflichtigerErwerbstaetig
+      ? SELBSTBEHALT_ERWERBSTAETIG
+      : SELBSTBEHALT_NICHT_ERWERBSTAETIG;
     const maxUnterhalt = Math.max(0, bereinigt1 - selbstbehalt);
     const unterhalt = Math.min(berechnet, maxUnterhalt);
 
@@ -59,7 +64,7 @@ export default function EhegattenunterhaltRechner() {
       selbstbehalt,
       gekappt,
     };
-  }, [netto1, netto2, kuBeruecksichtigt, kindesunterhalt, art]);
+  }, [netto1, netto2, kuBeruecksichtigt, kindesunterhalt, pflichtigerErwerbstaetig]);
 
   const fmtEuro = (n: number) =>
     n.toLocaleString('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
@@ -81,6 +86,22 @@ export default function EhegattenunterhaltRechner() {
           ]}
           value={art}
           onChange={(v) => setArt(v as Art)}
+          columns={2}
+          fullWidth
+        />
+      </div>
+
+      {/* Erwerbstätigkeit des Pflichtigen — bestimmt den Selbstbehalt */}
+      <div className="mb-5">
+        <RadioToggleGroup
+          name="eheunterhalt-erwerbstaetig"
+          legend="Pflichtiger ist erwerbstätig?"
+          options={[
+            { value: 'ja', label: 'Ja (Selbstbehalt 1.600 €)' },
+            { value: 'nein', label: 'Nein (Selbstbehalt 1.475 €)' },
+          ]}
+          value={pflichtigerErwerbstaetig ? 'ja' : 'nein'}
+          onChange={(v) => setPflichtigerErwerbstaetig(v === 'ja')}
           columns={2}
           fullWidth
         />
@@ -141,7 +162,7 @@ export default function EhegattenunterhaltRechner() {
           </div>
         </div>
         <p className="mt-3 text-white/90 text-xs">
-          Selbstbehalt ({art === 'trennung' ? 'Trennungsunterhalt' : 'nachehelich'}): {fmtEuro(result.selbstbehalt)}
+          Selbstbehalt ({pflichtigerErwerbstaetig ? 'erwerbstätig' : 'nicht erwerbstätig'}): {fmtEuro(result.selbstbehalt)}
         </p>
       </div>
 
@@ -173,6 +194,7 @@ export default function EhegattenunterhaltRechner() {
         rechnerName="Ehegattenunterhalt-Rechner"
         eingaben={{
           Art: art === 'trennung' ? 'Trennungsunterhalt' : 'Nachehelicher Unterhalt',
+          'Pflichtiger erwerbstätig': pflichtigerErwerbstaetig ? 'ja' : 'nein',
           'Netto P1': `${result.n1} €`,
           'Netto P2': `${result.n2} €`,
           Kindesunterhalt: kuBeruecksichtigt ? 'bereits berücksichtigt' : `${result.ku} €`,
