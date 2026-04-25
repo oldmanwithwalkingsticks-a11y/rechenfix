@@ -837,7 +837,7 @@ Das Pultdach ist eine einzelne, geneigte Dachfläche. Es wird beliebter, weil es
 
 **Walmdach — repräsentativ, aber komplexer**
 
-Beim Walmdach sind alle vier Seiten geneigt. Die genaue Flächenberechnung erfordert Trapez- und Dreiecksflächen. Als schnelle **Näherung** verwenden wir: **Grundfläche / cos(Neigung)**, was gute Werte liefert, solange die Neigung aller Seiten gleich ist. Für komplexe Walmdächer mit unterschiedlichen Neigungen empfehlen wir eine fachliche Aufmessung.
+Beim Walmdach sind alle vier Seiten geneigt. Bei gleicher Neigung an allen vier Seiten gilt die einfache Formel: **Grundfläche / cos(Neigung)** — diese ist mathematisch exakt, da jeder Quadratmeter Grundfläche um den gleichen Faktor 1/cos(Neigung) auf die Dachfläche projiziert wird, unabhängig von der Neigungsrichtung. Für Walmdächer mit unterschiedlichen Neigungen oder Krüppelwalme mit teilweisem Walm empfehlen wir eine fachliche Aufmessung.
 
 **Flachdach — geometrisch einfach**
 
@@ -858,7 +858,7 @@ Als Richtwert gilt: Je nach Ziegelart (Doppel-S, Biberschwanz, Frankfurter Pfann
 
 **PV-Potenzial — wie viel Strom kann das Dach liefern?**
 
-Pro Kilowatt-Peak (kWp) einer modernen PV-Anlage benötigen Sie rund **5,5 m² Modulfläche**. Nicht die gesamte Dachfläche ist nutzbar — bei Schrägdächern sind es rund 70 %, bei Flachdächern (aufgeständert) nur 50 %, da die Module sich gegenseitig nicht verschatten dürfen. Der Ertrag liegt in Deutschland bei durchschnittlich **950 kWh/kWp/Jahr**. Ein Satteldach mit 98 m² Südausrichtung könnte also ca. 12 kWp liefern = rund 11.400 kWh/Jahr — mehr als der Verbrauch eines typischen Einfamilienhauses.
+Pro Kilowatt-Peak (kWp) einer modernen PV-Anlage benötigen Sie rund **5–5,5 m² Modulfläche** (bei modernen Modulen mit ~200 Wp/m²). Nicht die gesamte Dachfläche ist nutzbar — bei Schrägdächern sind es rund 70 %, bei Flachdächern (aufgeständert) nur 50 %, da die Module sich gegenseitig nicht verschatten dürfen. Der spezifische Ertrag liegt bei einem optimal Süd-ausgerichteten Dach mit 25–35° Neigung bei rund **850 kWh/kWp und Jahr** (inkl. Performance Ratio 0,85 nach VDI 6002). Ein Satteldach mit 98 m² Südausrichtung könnte also ca. 12 kWp liefern = rund **10.200 kWh/Jahr** Bruttoertrag. Das ist deutlich mehr als der typische Einfamilienhaus-Stromverbrauch von 4.000–5.000 kWh — der Überschuss wird ins Netz eingespeist (Vergütung 7,78 ct/kWh, Stand Feb 2026), oder mit Speicher selbst genutzt. Ohne Speicher liegt der Eigenverbrauchsanteil typischerweise bei 25–35 %. Die genauen Werte für Ihre Ausrichtung und Neigung kalkuliert unser [Photovoltaik-Rechner](/wohnen/photovoltaik-rechner) mit dem vollständigen Faktor-Modell nach Konrad Mertens.
 
 **Dachneigung und Niederschlagsabfluss**
 
@@ -880,7 +880,7 @@ Die Dachneigung beeinflusst, wie schnell Regen- und Schmelzwasser abfließen. Je
       },
       {
         frage: 'Wie groß kann meine PV-Anlage auf diesem Dach werden?',
-        antwort: 'Faustregel: Pro kWp benötigen Sie rund 5,5 m² Modulfläche. Bei Schrägdächern sind etwa 70 % der Fläche nutzbar (Abstände zu Rand, Kamin, Dachfenstern). Bei 100 m² Dachfläche ergibt das ca. 70 m² nutzbar → ~12 kWp Anlagengröße. Der Jahresertrag beträgt in Deutschland rund 950 kWh pro kWp. Unser Rechner zeigt das PV-Potenzial automatisch.',
+        antwort: 'Faustregel: Pro kWp benötigen Sie rund 5–5,5 m² Modulfläche. Bei Schrägdächern sind etwa 70 % der Fläche nutzbar (Abstände zu Rand, Kamin, Dachfenstern). Bei 100 m² Dachfläche ergibt das ca. 70 m² nutzbar → ~12 kWp Anlagengröße. Der spezifische Jahresertrag beträgt in Deutschland bei optimaler Süd-Ausrichtung rund 850 kWh pro kWp (inkl. Performance Ratio 0,85 nach VDI 6002). Unser Rechner zeigt das PV-Potenzial automatisch — mit dem vollständigen Faktor-Modell für Ihre Ausrichtung und Neigung arbeitet der Photovoltaik-Rechner.',
       },
       {
         frage: 'Was ist der Dachüberstand und warum wichtig?',
@@ -1066,7 +1066,7 @@ Wer unsicher ist, ob die Mietpreisbremse greift und wie die Rüge formuliert wer
     keywords: ['poolkosten rechner', 'pool betriebskosten', 'pool strom kosten', 'pool chemie kosten', 'pool wärmepumpe kosten', 'pool wasser kosten', 'pool unterhalt', 'swimmingpool kosten jahr'],
     icon: '🏊',
     formel: 'Wasser = Volumen × 1,2 × Wasserpreis | Filter = 8 h × Pumpe kW × Saison-Tage × Strompreis | Heizung (Wärmepumpe) ≈ 3–6 kWh/Tag × Saison-Tage',
-    beispiel: 'Beispiel: 40 m³ Pool, ohne Heizung, mit Abdeckung, Mai–September → Wasser ≈ 190 €, Filterstrom ≈ 220 €, Chemie ≈ 240 €, Wartung ≈ 410 €. Gesamt ≈ 1.060 €/Jahr.',
+    beispiel: 'Beispiel: 40 m³ Pool, ohne Heizung, mit Abdeckung, Mai–September → Wasser ≈ 190 €, Filterstrom ≈ 270 €, Chemie ≈ 325 €, Wartung ≈ 410 €. Gesamt ≈ 1.195 €/Jahr.',
     erklaerung: `**Was kostet ein Pool wirklich im Jahr?**
 
 Ein eigener Pool im Garten klingt nach Urlaub vor der Haustür — doch die laufenden Kosten werden oft unterschätzt. Neben der Anschaffung (1.500 € für einen Aufstellpool bis weit über 50.000 € für einen betonierten Einbaupool) fallen jedes Jahr **Betriebskosten** für Wasser, Strom, Chemie und Wartung an. Unser Poolkosten-Rechner zeigt Ihnen, mit welchen Ausgaben Sie pro Saison rechnen müssen — abhängig von Größe, Heizung, Abdeckung und Saisonlänge.
@@ -1077,7 +1077,7 @@ Zu Saisonbeginn wird der Pool meist einmal komplett neu befüllt. Über die Sais
 
 **Stromkosten Filterpumpe**
 
-Die Filterpumpe muss täglich etwa **6 bis 10 Stunden** laufen, damit das Wasser sauber bleibt. Eine typische Pumpe für einen 40-m³-Pool hat 0,6 kW Leistung. Über 5 Monate Saison (153 Tage) summiert sich das auf ca. 730 kWh — bei 37 ct/kWh sind das **rund 270 €**. Energiesparende Umwälzpumpen mit Frequenzregelung kosten mehr, sparen aber bis zu 60 % Strom.
+Die Filterpumpe muss täglich etwa **6 bis 10 Stunden** laufen (typischerweise 8 h), damit das Wasser sauber bleibt. Eine typische Pumpe für einen 40-m³-Pool hat 0,6 kW Leistung. Über 5 Monate Saison (153 Tage) bei 8 h täglich summiert sich das auf ca. 734 kWh — bei 37 ct/kWh sind das **rund 270 €**. Energiesparende Umwälzpumpen mit Frequenzregelung kosten mehr, sparen aber bis zu 60 % Strom.
 
 **Heizungskosten**
 
@@ -1131,7 +1131,7 @@ Wer eine **PV-Anlage** besitzt, kann Filterpumpe und Wärmepumpe überwiegend mi
       },
       {
         frage: 'Wie lange muss die Filterpumpe täglich laufen?',
-        antwort: 'Faustregel: Das gesamte Poolvolumen sollte etwa 2-mal pro Tag durch den Filter laufen. Bei einem 40-m³-Pool und einer 8-m³/h-Pumpe bedeutet das 10 Stunden pro Tag. An heißen Tagen und bei intensiver Nutzung kann mehr sinnvoll sein, nachts weniger. Moderne Pumpen laufen mit variabler Drehzahl und passen sich automatisch an — das spart bis zu 60 % Strom.',
+        antwort: 'Faustregel: Das gesamte Poolvolumen sollte etwa 2-mal pro Tag durch den Filter laufen. Bei einem 40-m³-Pool und einer 10-m³/h-Pumpe sind das ca. 8 Stunden, mit einer kleineren 8-m³/h-Pumpe entsprechend ca. 10 Stunden. Übliche Laufzeit: 6–10 h. An heißen Tagen und bei intensiver Nutzung kann mehr sinnvoll sein, nachts weniger. Moderne Pumpen laufen mit variabler Drehzahl und passen sich automatisch an — das spart bis zu 60 % Strom.',
       },
       {
         frage: 'Kann ich den Pool auch mit Photovoltaik betreiben?',
