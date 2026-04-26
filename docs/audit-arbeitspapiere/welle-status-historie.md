@@ -228,8 +228,9 @@ Volldetails im Audit-Bericht-Anhang („Lib-Audit Folge-Bundle 153c"-Sektion).
 | **Amazon-Tag-Integration** | Deadline ~19.10.26 |
 | **Prompt 150e** (Süd-OLG-UI-Toggle ehegattenunterhalt) | Wenn fachliche Differenzierung gewünscht; aktuelle Konfig-Hinweis-Variante ist scope-konform mit P2 |
 | **Prompt 151** (P3-Sammelbatch Block A — 17 Items) | Empfehlung: nach Block-B-Audit als gemeinsamer Sammelbatch A+B |
-| **Block B Welle 2 Stufe 3 Arbeit** (8 Rechner) | Audit-Session als nächster Block, ~60 Min |
-| **Welle 3 Validation-Sweep** | Großer Tech-Debt-Track: Range-Validation systemweit + SSOT-Konsumption-Inventur über alle Components |
+| **Prompt 152b** (`feiertage.ts` SSOT-Lib mit Gauß-Osterformel) | Akut Q4/2026 — Jahr-Dropdown ArbeitstageRechner.tsx bricht 01.01.2027; ~2-3 h, löst gleichzeitig P3-Lib-1 (freelancer-Feiertage-Konstante) |
+| **Prompt P3-B1** (ueberstunden-Netto-Refactor mit Steuerklasse + Bundesland) | Welle 3 — pauschale 40 %-Annahme durch realistische Lohnsteuer-Tabelle ersetzen, mehrere h Aufwand (UI-Erweiterung) |
+| **Welle 3 Validation-Sweep** | Großer Tech-Debt-Track: Range-Validation systemweit + SSOT-Konsumption-Inventur über alle Components, plus Cross-Check aller Welle-2-Rechner gegen externe Oracles (BMF, Stiftung Warentest, IHK, Steuerberater-Tools). Mehrere Sessions. |
 
 ---
 
@@ -300,3 +301,63 @@ Volldetails im Audit-Bericht-Anhang („Lib-Audit Folge-Bundle 153c"-Sektion).
 ### Casing-Bug-Pattern (aus 145b)
 - Windows-NTFS case-insensitive vs. Linux/Vercel case-sensitive
 - Fix bei case-only-Renames: Zwei-Schritt-`git mv` (mv→Zwischenname→mv)
+
+---
+
+## WELLE 2 FINAL — Session-Handover (26.04.2026)
+
+### Welle-2-Abschluss-Vermerk
+
+Welle 2 ist nach formal-gefassten Maßstäben **komplett abgeschlossen**.
+
+| Stufe | Prompts | Datum |
+|---|---|---|
+| Stufe 1 Auto | 130–132.6 | 23.04.2026 |
+| Stufe 2 Gesundheit | 140–144b | April 2026 |
+| Stufe 3 Wohnen | 147–148c | 25.+26.04.2026 |
+| Stufe 3 Arbeit | 149a-d, 150a-d, 152a, 153a/b/b-fix, 153c | 26.04.2026 |
+
+Drei Doku-Anker konsistent synchron:
+- `CLAUDE.md` Welle-Status-Bullet (Stufe 3 Arbeit ✅, geparkt: 152b + P3-B1)
+- `docs/audit-arbeitspapiere/welle-status-historie.md` (diese Datei)
+- Audit-Berichte: `welle2-stufe1-auto-bericht.md`, `welle2-stufe3-arbeit-blockA-audit.md`, `welle2-stufe3-arbeit-blockB-audit.md` (Stufen 2 + 3 Wohnen ohne separaten Bericht — Erkenntnisse direkt in dieser Historie integriert)
+
+Letzte Schluss-Patches:
+- **148c** (Commit `30f46a9`) — Mieterbund-Wert nebenkosten-rechner aktualisiert: 2,88 → 2,51 €/qm Durchschnitt + 3,15 €/qm bei voller Ausnutzung. Quelle: Deutscher Mieterbund, Betriebskostenspiegel 2023, +10 % gegenüber Vorjahr.
+- **153c** (Commits `1fffcb8` Bundle + `26298a0` Doku-Sync) — Lib-Audit-Bundle für 5 Block-B-Libs: 0 P1, 0 P2, 2 neue P3-Mini-Befunde + 4 Klärungen vorher offener Items.
+
+Methodik-Lehren der Session (nicht doppelt aufgelistet, um Doku-Drift zu vermeiden):
+- **Lehre 19 + 20 + 21** — siehe Welle-2-Stufe-3-Arbeit-Blöcke oben (Z. 83+, Z. 87+, Z. 91+)
+- **Lehre 22** (Wert-Recherche durch Claude direkt im Web) — siehe 148c-Schluss-Eintrag im Wohnen-Block (Z. 144)
+- **Konsolidierte Methodik-Tipps** — siehe Sektion „Lessons-Learned Welle 2 Stufe 3 Arbeit" (Z. 244+)
+
+### Welle-3-Backlog
+
+Vollständige Liste mit Trigger-Bedingungen siehe Tabelle „Geparkte Items" oben (Z. 220+). Empfohlene Akut-Reihenfolge bei freier Wahl:
+
+1. **152b** — `feiertage.ts` SSOT-Lib (akut Q4/2026, Jahr-Dropdown bricht 01.01.2027), ~2–3 h
+2. **151** — Block-A-P3-Sammelbatch (17 Items), ~1–2 h
+3. **150e** — Süd-OLG-UI-Toggle für ehegattenunterhalt, ~1 h
+4. **Welle 3 Validation-Sweep** — eigene Planungs-Session, mehrere Sessions
+5. **P3-B1** — ueberstunden-Netto-Refactor mit Steuerklasse-Input, mehrere h
+
+### Session-Handover-Anker für die nächste Chat-Session
+
+**Trigger-Wort:** „Start"
+
+In der nächsten Session bei „Start":
+1. Memory wird automatisch geladen (Welle-2-Status, Methodik-Lehren)
+2. Diese Datei lesen (Klartext-URL als raw.githubusercontent oder via `npm run audit:bundle <name>` falls passendes Bundle existiert)
+3. Nächsten Slot ableiten: Welle-3-Backlog (siehe Tabelle „Geparkte Items" Z. 220+) hat 5 Items mit klarem Scope
+4. Karsten fragen, welcher Slot dran ist; bei freier Wahl Akut-Reihenfolge vorschlagen (152b zuerst wegen Q4/2026-Druck)
+
+Falls Karsten beim Start den Slot offen lässt, Vorschlag bringen: *„Wir sind nach Welle-2-Abschluss. Welle-3-Backlog hat 5 Items mit klarem Scope. Akut wäre 152b (`feiertage.ts` SSOT) wegen Q4/2026-Druck. Was soll's heute sein?"*
+
+Repo-Snapshot zum Session-Wechsel (26.04.2026 ~23:30):
+- **Branch:** main
+- **Letzter Code-Commit:** `30f46a9` (Prompt 148c, Mieterbund-Wert)
+- **Vorletzter:** `26298a0` (Prompt 153c Doku-Sync), `1fffcb8` (Bundle), `01bbf4d` (CLAUDE.md Lehren 20/21)
+- **Build-Status:** grün, alle Prebuild-Hooks (footer, jahreswerte, slug-drift, client-data) durch
+- **Working tree:** clean
+
+*Dieses Dokument wurde beim Session-Handover am 26.04.2026 erstellt.*
