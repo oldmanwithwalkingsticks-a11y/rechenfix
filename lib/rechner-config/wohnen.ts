@@ -75,7 +75,7 @@ Die häufigsten Nebenkostenposten sind: Heizkosten (größter Posten, ca. 40% de
 
 **Nebenkosten pro Quadratmeter — was ist normal?**
 
-Laut Betriebskostenspiegel des Deutschen Mieterbunds betragen die durchschnittlichen Nebenkosten in Deutschland etwa 2,88 Euro pro Quadratmeter und Monat. Je nach Lage, Gebäudealter und Ausstattung können die Nebenkosten jedoch stark variieren — von 2,00 bis über 4,00 Euro pro m².
+Laut Betriebskostenspiegel 2023 des Deutschen Mieterbunds (aktuellster verfügbarer Stand) liegen die durchschnittlichen Nebenkosten in Deutschland bei 2,51 Euro pro Quadratmeter und Monat (umgelegte Posten im Schnitt) — ein Anstieg von rund 10 % gegenüber dem Vorjahr. Bei voller Ausnutzung aller umlagefähigen Kostenarten können bis zu 3,15 Euro pro Quadratmeter und Monat anfallen. Je nach Lage, Gebäudealter und Ausstattung schwanken die Werte regional erheblich — in NRW etwa liegt der Durchschnitt bei 2,45 Euro pro Quadratmeter, in günstigeren Lagen bei 2,00 Euro und in teuren Gebieten über 4,00 Euro pro Quadratmeter.
 
 Die Heizkosten machen den größten Teil der Nebenkosten aus und hängen stark vom Energieträger, dem Gebäudezustand und dem individuellen Heizverhalten ab. In schlecht gedämmten Altbauten können die Heizkosten doppelt so hoch sein wie in einem modernen Neubau.
 
@@ -95,7 +95,7 @@ Vermieter sind verpflichtet, jährlich eine Nebenkostenabrechnung zu erstellen. 
       },
       {
         frage: 'Wie hoch sind normale Nebenkosten pro m²?',
-        antwort: 'Im Durchschnitt liegen die Nebenkosten in Deutschland bei etwa 2,88 Euro pro Quadratmeter und Monat. Heizkosten machen mit ca. 1,00–1,50 €/m² den größten Anteil aus. Insgesamt variieren die Nebenkosten je nach Region und Gebäude zwischen 2,00 und 4,50 €/m².',
+        antwort: 'Laut Betriebskostenspiegel 2023 des Deutschen Mieterbunds (aktuellster verfügbarer Stand) liegen die durchschnittlichen Nebenkosten in Deutschland bei 2,51 €/m² und Monat (umgelegte Posten im Schnitt). Bei voller Ausnutzung aller umlagefähigen Kostenarten sind bis zu 3,15 €/m² möglich. Heizkosten machen mit ca. 1,00–1,50 €/m² den größten Anteil aus. Regional und je nach Gebäudezustand schwanken die Werte zwischen 2,00 und 4,50 €/m².',
       },
       {
         frage: 'Was ist der Unterschied zwischen Kaltmiete und Warmmiete?',

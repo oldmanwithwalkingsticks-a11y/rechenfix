@@ -141,7 +141,9 @@ Volldetails im Audit-Bericht-Anhang („Lib-Audit Folge-Bundle 153c"-Sektion).
 - dachflaechen Hinweisbox „Näherung" → „regelmäßige Dachformen"
 - balkon-solar Nord-Faktor 0,40 → **0,60** (Branchenkonsens-Korrektur, vorher außerhalb seriösem Spektrum)
 
-**Offen:** Mieterbund-Wert in nebenkosten-rechner (148c-Mini-Hotfix bei Gelegenheit, sobald Karsten den aktuellen Wert von mieterbund.de hat)
+**148c GESCHLOSSEN (26.04.2026):** Mieterbund-Wert im nebenkosten-rechner auf Betriebskostenspiegel 2023 aktualisiert (2,51 €/qm im Durchschnitt, bis 3,15 €/qm bei voller Ausnutzung). Recherche durch Claude direkt im Web (Mieterbund-Spiegel 2023, +10 % gegenüber Vorjahr; Sekundärquellen biallo.de und kampmeyer.com 2025). Welle 2 Stufe 3 Wohnen damit komplett abgeschlossen.
+
+**Methodik-Lehre 22 (Wert-Recherche, 26.04.2026):** Bei Werten, die durch Web-Suche eindeutig recherchierbar sind (Mieterbund, BMF, Statistisches Bundesamt, BDEW, etc.), kann Claude die Recherche direkt durchführen statt zu warten. Pflicht: (1) Aktualität-Hinweis im Quellen-Verweis (welcher Stand, wann veröffentlicht), (2) zwei Sekundärquellen für Konsistenz-Check, (3) Repo-Stand vor Patch-Generierung lesen.
 
 ### Stufe 2 Gesundheit (April 2026, Prompts 140-144b)
 - 4-Punkt-Audit: 2P1 + 9P2 + 9P3 + Feature
@@ -224,7 +226,6 @@ Volldetails im Audit-Bericht-Anhang („Lib-Audit Folge-Bundle 153c"-Sektion).
 | **Prompt 120c** (Wohngeld-Refactoring) | Juni 2026, parallel zu Bürgergeld-Reform 01.07.2026 |
 | **Prompt 146** (Doku-Sync) | Erstellt aber NICHT ausgeführt — Inhalt aus Memory rekonstruierbar |
 | **Amazon-Tag-Integration** | Deadline ~19.10.26 |
-| **Prompt 148c** (Mieterbund-Wert nebenkosten-rechner) | Wenn Karsten aktuellen Wert von mieterbund.de hat |
 | **Prompt 150e** (Süd-OLG-UI-Toggle ehegattenunterhalt) | Wenn fachliche Differenzierung gewünscht; aktuelle Konfig-Hinweis-Variante ist scope-konform mit P2 |
 | **Prompt 151** (P3-Sammelbatch Block A — 17 Items) | Empfehlung: nach Block-B-Audit als gemeinsamer Sammelbatch A+B |
 | **Block B Welle 2 Stufe 3 Arbeit** (8 Rechner) | Audit-Session als nächster Block, ~60 Min |
