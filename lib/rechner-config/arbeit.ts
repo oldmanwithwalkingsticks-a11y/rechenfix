@@ -569,7 +569,7 @@ Ein häufiges Missverständnis: Viele Freelancer orientieren sich am Stundenlohn
 
 **Kleinunternehmerregelung: Vor- und Nachteile**
 
-Die Kleinunternehmerregelung (§ 19 UStG) befreit Freelancer mit einem Jahresumsatz unter 25.000 Euro (ab 2025) von der Umsatzsteuer. Der Vorteil: Sie müssen keine Umsatzsteuervoranmeldung abgeben und können Privatkunden günstigere Preise anbieten, da keine 19 Prozent Umsatzsteuer aufgeschlagen werden. Der Nachteil: Sie können keine Vorsteuer aus Ihren Betriebsausgaben abziehen. Wenn Sie hohe Investitionen haben (Computer, Software, Büroausstattung), kann das teuer werden. Zudem wirken Rechnungen ohne Umsatzsteuer auf manche Geschäftskunden unprofessionell. Für die meisten Freelancer mit B2B-Kunden lohnt sich die Regelbesteuerung — denn die Umsatzsteuer ist für Geschäftskunden ein durchlaufender Posten, den sie selbst als Vorsteuer abziehen können.
+Die Kleinunternehmerregelung (§ 19 UStG) befreit Freelancer von der Umsatzsteuerpflicht. Maßgeblich sind seit dem Wachstumschancengesetz (gültig ab 01.01.2025) zwei Schwellen: Der Vorjahresumsatz darf 25.000 Euro nicht überstiegen haben, und der laufende Jahresumsatz darf voraussichtlich 100.000 Euro nicht übersteigen. Wird die zweite Schwelle unterjährig überschritten, fällt die Kleinunternehmer-Eigenschaft mit sofortiger Wirkung weg — alle übersteigenden Umsätze werden umsatzsteuerpflichtig. Der Vorteil: Sie müssen keine Umsatzsteuervoranmeldung abgeben und können Privatkunden günstigere Preise anbieten, da keine 19 Prozent Umsatzsteuer aufgeschlagen werden. Der Nachteil: Sie können keine Vorsteuer aus Ihren Betriebsausgaben abziehen. Wenn Sie hohe Investitionen haben (Computer, Software, Büroausstattung), kann das teuer werden. Zudem wirken Rechnungen ohne Umsatzsteuer auf manche Geschäftskunden unprofessionell. Für die meisten Freelancer mit B2B-Kunden lohnt sich die Regelbesteuerung — denn die Umsatzsteuer ist für Geschäftskunden ein durchlaufender Posten, den sie selbst als Vorsteuer abziehen können.
 
 **Häufiger Fehler: Nur das Netto-Wunschgehalt als Basis nehmen**
 
@@ -597,7 +597,7 @@ Kalkulieren Sie Ihren Stundensatz großzügig: Es ist einfacher, einen Rabatt zu
       },
       {
         frage: 'Soll ich als Freelancer die Kleinunternehmerregelung nutzen?',
-        antwort: 'Die Kleinunternehmerregelung (keine USt bis 25.000 € Jahresumsatz) lohnt sich vor allem bei Privatkunden und niedrigen Betriebsausgaben. Bei B2B-Kunden ist sie meist nachteilig: Die USt ist für Geschäftskunden ein durchlaufender Posten, und Sie können keine Vorsteuer aus Ihren Einkäufen abziehen. Für die meisten Freelancer empfiehlt sich die Regelbesteuerung.',
+        antwort: 'Die Kleinunternehmerregelung (keine USt, solange Vorjahresumsatz unter 25.000 € und laufender Jahresumsatz unter 100.000 € — § 19 UStG seit 01.01.2025) lohnt sich vor allem bei Privatkunden und niedrigen Betriebsausgaben. Bei B2B-Kunden ist sie meist nachteilig: Die USt ist für Geschäftskunden ein durchlaufender Posten, und Sie können keine Vorsteuer aus Ihren Einkäufen abziehen. Für die meisten Freelancer empfiehlt sich die Regelbesteuerung.',
       },
       {
         frage: 'Wie viele Stunden kann ich realistisch pro Monat fakturieren?',
@@ -728,7 +728,7 @@ Seit dem 1. Januar 2019 gibt es die sogenannte **Brückenteilzeit** (§ 9a TzBfG
 
 Teilzeit hat direkte Auswirkungen auf Ihre spätere Rente. Die Rentenversicherung berechnet **Entgeltpunkte** auf Basis Ihres Bruttoeinkommens. Wer in Teilzeit arbeitet, erwirbt weniger Entgeltpunkte und erhält somit eine niedrigere Rente. Bei einer Reduzierung von 40 auf 30 Stunden sinken die Rentenansprüche ebenfalls um 25 %. Über viele Jahre summiert sich dieser Unterschied erheblich.
 
-Ein Beispiel: Bei 3.500 € Vollzeit-Brutto erwirbt man etwa 0,9 Entgeltpunkte pro Jahr. In Teilzeit mit 30 Stunden (2.625 € Brutto) sind es nur noch etwa 0,68 Punkte. Nach 20 Jahren Teilzeit ergibt sich eine um ca. 170 € niedrigere monatliche Rente (Stand 2026). Private Vorsorge oder eine betriebliche Altersvorsorge können diese Lücke teilweise schließen.
+Ein Beispiel: Bei 3.500 € Vollzeit-Brutto erwirbt man etwa 0,81 Entgeltpunkte pro Jahr (Durchschnittsentgelt 2026 vorläufig 51.944 €). In Teilzeit mit 30 Stunden (2.625 € Brutto) sind es nur noch etwa 0,61 Punkte. Nach 20 Jahren Teilzeit ergibt sich eine um ca. 165 € niedrigere monatliche Rente (Stand 2026, Rentenwert 40,79 €). Private Vorsorge oder eine betriebliche Altersvorsorge können diese Lücke teilweise schließen.
 
 **Urlaubsanspruch bei Teilzeit richtig berechnen**
 
