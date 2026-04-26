@@ -1282,6 +1282,12 @@ Die deutsche Rechtsprechung hat sich auf eine einfache Quote geeinigt: Der Unter
 
 Beispiel: Peter verdient 3.500 € netto (bereinigt) und ist erwerbstätig, Anna 1.200 €. Differenz: 2.300 €. Unterhalt = 2.300 × 3/7 ≈ **986 €/Monat**. Peter behält 3.500 − 986 = 2.514 €, Anna hat 1.200 + 986 = 2.186 €. Der Selbstbehalt (1.600 € erwerbstätig) ist weit unterschritten — kein Kappungsfall. Wäre Peter dagegen nicht erwerbstätig (z. B. Rentner), gälte der niedrigere Selbstbehalt von 1.475 € — ändert in diesem Beispiel nichts, weil keine Kappung greift.
 
+**Süddeutsche Leitlinien — 45 % statt 3/7**
+
+Die 3/7-Quote (≈ 42,86 %) ist nicht bundesweit einheitlich. Die OLG-Bezirke **Bamberg, Karlsruhe, München, Nürnberg, Stuttgart und Zweibrücken** wenden in ihren **Süddeutschen Leitlinien** stattdessen einen Quotienten von **45 %** an. Die Differenz ist klein, aber bei höheren Einkommen spürbar: Bei einer Einkommensdifferenz von 2.300 € ergeben sich nach 3/7 rund 986 €/Monat, nach 45 % dagegen 1.035 €/Monat — also rund 49 € mehr. Bei größeren Einkommensdifferenzen wächst der Unterschied entsprechend.
+
+Unser Rechner verwendet bewusst die bundesweit gebräuchliche 3/7-Methode. Wenn Ihr Verfahren vor einem süddeutschen Familiengericht läuft, multiplizieren Sie das Ergebnis bitte näherungsweise mit dem Faktor 1,05 — oder lassen Sie es vom Anwalt mit der lokalen 45-%-Quote nachrechnen.
+
 **Wichtige Feinheiten**
 
 - **Erwerbstätigenbonus:** Wer erwerbstätig ist, darf 1/7 seines Einkommens vorab abziehen. Dies ist bereits in der 3/7-Quote berücksichtigt.
@@ -1320,6 +1326,10 @@ Beispiel: Peter verdient 3.500 € netto (bereinigt) und ist erwerbstätig, Anna
       {
         frage: 'Kann ich auf Trennungsunterhalt verzichten?',
         antwort: 'Nein — ein Verzicht auf Trennungsunterhalt im Voraus (z. B. im Ehevertrag) ist nach § 1614 BGB unwirksam. Anders beim nachehelichen Unterhalt: Hier kann in einem notariellen Ehevertrag oder einer Scheidungsfolgenvereinbarung wirksam verzichtet werden — allerdings prüfen Gerichte solche Verzichte auf Sittenwidrigkeit, besonders wenn ein Partner wirtschaftlich benachteiligt wird. Im Streitfall sollte ein Fachanwalt für Familienrecht hinzugezogen werden.',
+      },
+      {
+        frage: 'Gilt die 3/7-Methode bundesweit?',
+        antwort: 'Nein. Die OLG-Bezirke Bamberg, Karlsruhe, München, Nürnberg, Stuttgart und Zweibrücken wenden in ihren Süddeutschen Leitlinien einen Quotienten von 45 % statt 3/7 (≈ 42,86 %) an. Die Differenz ist klein, aber bei höheren Einkommen spürbar — bei 2.300 € Differenz sind es 1.035 € statt 986 €/Monat. Unser Rechner verwendet die bundesweit gebräuchliche 3/7-Methode; für süddeutsche Verfahren ist das Ergebnis um etwa 5 % zu erhöhen oder beim Anwalt mit der lokalen 45-%-Quote nachrechnen zu lassen.',
       },
     ],
   },
