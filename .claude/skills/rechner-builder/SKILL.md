@@ -7,7 +7,7 @@ description: Template and checklist for building standardized online calculators
 
 Build standardized, SEO-optimized calculator pages for the German calculator portal rechenfix.de. Every calculator must follow this template to ensure consistency, completeness, and maximum SEO impact.
 
-**Aktueller Stand (26.04.2026):** 170 Rechner in 9 Kategorien (Alltag 23, Finanzen **45**, Gesundheit 17, Auto & Verkehr 11, Wohnen & Energie 25, Mathe & Schule 18, Arbeit & Recht **17**, Kochen & Ernährung 12, Sport & Fitness 2). **Welle-Status:** Welle 1 ✅ komplett; Welle 2 Stufe 1 Auto ✅ (130–132.6); Welle 2 Stufe 2 Gesundheit ✅ (140–144b); **Welle 2 Stufe 3 Wohnen ✅** (147–148b); **Welle 2 Stufe 3 Arbeit** läuft (149a/b/c durch, 149d offen — wartet auf KostBRÄG-2025-Werte). **Affiliate:** 12 Programme inkl. CosmosDirekt (Awin 11893); 117 AffiliateBox-Aufrufe in 73 Dateien. **AdSense** live seit 20.04.2026 (Publisher-ID `pub-1389746597486587`). Vollständige Welle-Historie: [docs/audit-arbeitspapiere/welle-status-historie.md](../../docs/audit-arbeitspapiere/welle-status-historie.md).
+**Aktueller Stand (26.04.2026):** 170 Rechner in 9 Kategorien (Alltag 23, Finanzen **45**, Gesundheit 17, Auto & Verkehr 11, Wohnen & Energie 25, Mathe & Schule 18, Arbeit & Recht **17**, Kochen & Ernährung 12, Sport & Fitness 2). **Welle-Status:** Welle 1 ✅ komplett; **Welle 2 KOMPLETT abgeschlossen 26.04.2026** — Stufe 1 Auto (130–132.6), Stufe 2 Gesundheit (140–144b), Stufe 3 Wohnen (147–148c), Stufe 3 Arbeit (Block A 149a-d + 150a-d, Block B 152a + 153a/b/b-fix + 153c Lib-Audit). **Welle-3-Backlog mit klaren Scopes** (152b feiertage.ts SSOT akut Q4/26, P3-B1 ueberstunden-Netto-Refactor, 151 Block-A-P3 17 Items, 150e Süd-OLG-Toggle, Validation-Sweep). **Affiliate:** 12 Programme inkl. CosmosDirekt (Awin 11893); 117 AffiliateBox-Aufrufe in 73 Dateien. **AdSense** live seit 20.04.2026 (Publisher-ID `pub-1389746597486587`). Vollständige Welle-Historie + Welle-3-Backlog mit Detailspecs: [docs/audit-arbeitspapiere/welle-status-historie.md](../../docs/audit-arbeitspapiere/welle-status-historie.md).
 
 ## Tech Stack
 
@@ -1049,6 +1049,37 @@ IOM 2009, Naegele/§ 3 MuSchG, US-Navy Hodgdon-Beckett 1984, Fitzpatrick,
 Widmark 1932, NSF/Hirshkowitz 2015. Pro Folge-Prompt wird das relevante
 Script grün gehalten, die anderen als Regressions-Check mitgelaufen.
 
+**Verify-Skripte-Konvention (seit Lehre 149d, 26.04.2026):** Endung `.ts`
+(NICHT `.mjs`), Aufruf via `npx tsx scripts/verify-XYZ.ts` (NICHT `node`),
+Helper-Parameter explizit typisiert (z. B. `eq(name: string, ist: number,
+soll: number, tol = 0.005)`). Mjs-mit-`.ts`-Suffix-im-Import scheitert
+sowohl beim Loader als auch beim `next build` strict-typecheck.
+
+**Audit-Bundle-Pattern (seit Welle 2 Stufe 3 Arbeit Block B, 26.04.2026):**
+Bei Audits mit vielen Files (>5) ist ein vorgeneriertes Bundle in
+`docs/audit-bundles/<thema>.md` mit allen relevanten Datei-Inhalten als
+Code-Blöcke effizienter als URL-Listen pro Datei. **Eine** `web_fetch`-URL
+→ **alle** Files in einem Aufruf.
+
+- **Generator-Skript:** `scripts/build-audit-bundle.ts` (TypeScript, NICHT `.mjs`!)
+- **CLI:** `npm run audit:bundle <name>`
+- **Bundle-Definitionen:** `scripts/audit-bundles.ts` (zentrale Liste mit File-Pfaden pro Bundle-Name)
+- **Pflicht-Parameter** bei Bundles >100 KB: `text_content_token_limit: 300000` — Default reicht nicht und schneidet ohne sichtbare Warnung mitten im Inhalt ab
+- **Lib-Audit als Folge-Bundle abhängbar**, wenn Component+Konfig+Beispiel-Trio Konsistenz erlaubt — Beispiel-Werte aus dem Konfig-`beispiel`-Feld manuell nachrechnen reicht oft für indirekte Lib-Verifikation
+- **Beispiele aus 26.04.:** `block-b-arbeit` (149 KB, 13 Files), `block-b-libs` (16 KB, 5 Libs) — beide vollständig im Audit verarbeitet
+- **Methodik-Lehre 20** (CLAUDE.md → Gelernte Regeln): Audit-Bundle-Pattern via konsolidierte MD-Datei
+
+**Wert-Recherche durch Claude im Web (seit Lehre 22, 26.04.2026):** Bei
+Werten, die durch Web-Suche eindeutig recherchierbar sind (Mieterbund
+Betriebskostenspiegel, BMF-Tabellen, Destatis, BDEW, Bundesnetzagentur,
+Stiftung Warentest), kann Claude die Recherche direkt durchführen statt
+auf Karsten zu warten. **Pflicht:** (1) Aktualität-Hinweis im Quellen-
+Verweis, (2) zwei unabhängige Sekundärquellen für Konsistenz-Check, (3)
+Repo-Stand vor Patch-Generierung lesen. **URL-Permission-Workflow:**
+`web_fetch`-Permissions blockieren Pattern-Konstruktion auf URLs ohne
+User-Klartext-Freigabe — Karsten muss neue URLs als Klartext im Chat
+pasten, Screenshot-OCR aus Bildern zählt nicht.
+
 ## Wellbeing-sensible Rechner — Patterns (Welle 2 Stufe 2 Gesundheit, 25.04.2026)
 
 Templates aus dem Gesundheits-Audit, die als Kopiervorlage für künftige
@@ -1250,3 +1281,4 @@ Ohne diesen Schritt geben Claude-Chat und Claude-Code inkonsistente Ratschläge 
 | 24.04.2026 | Prompt 134: Welle-2-Stufe-1-Auto-Abschluss (Prompts 130–132.6), Slug-Drift-Scan-Prebuild-Hook, kfz-steuer-parameter.ts SSOT, Slug-/Display-Name-Konvention (Duden vs. SEO-Lesbarkeit), Anti-Pattern „Slug-Kategorie-Intuition" | [ ] noch offen |
 | 25.04.2026 | Prompt 146: Welle-2-Stufe-2-Gesundheit-Abschluss (Prompts 140–144b), CosmosDirekt als 12. Programm (Awin 11893), bmi.ts erweitert (`bmiKategorien` + `getOptimalerBereich` als SSOT, `BMI_ADULT_MIN_AGE = 18`), schwangerschaft.ts Voll-Fusion (geburtstermin.ts + ssw.ts gelöscht), Wellbeing-Patterns-Sektion (Eating-Disorder-Floor, Kinder-Gating, Verhütungs-Disclaimer, istKind-Flag), Casing-Konsistenz-Lehre (Windows-NTFS vs. Vercel-Linux, Zwei-Schritt-`git mv`), Verify-Script-Pattern pro Welle-2-Stufe (externe Primärquellen) | [ ] noch offen |
 | 26.04.2026 | Prompt 154: Welle-2-Stufe-3-Wohnen-Abschluss (Prompts 147–148b) + Welle-2-Stufe-3-Arbeit-Status (149a/b/c durch, 149d offen), 6 neue SSOT-Libs ergänzt (`strompreis.ts`, `eeg-einspeiseverguetung.ts`, `beg-foerderung.ts`, `vpi.ts` mit § 1376 BGB-Helper, `pv-ertragsmodell.ts`, plus `kfz-steuer-parameter.ts` aus Welle 2 Stufe 1), 4 neue Anti-Patterns (Backtick-Falle in Template-Literals, Slug-Drift in Kategorie-Datei, Phantom-Befund-Diagnose, Test-Soll-Werte gegen UI-Anzeige), Counts korrigiert (170 = Alltag 23 / Finanzen 45 / Gesundheit 17 / Auto 11 / Wohnen 25 / Mathe 18 / Arbeit 17 / Kochen 12 / Sport 2) | [ ] noch offen |
+| 26.04.2026 | Prompt 155: Welle-2-Komplett-Abschluss-Sync — Header-Stand auf „Welle 2 KOMPLETT abgeschlossen 26.04.2026" mit allen 4 Stufen ✅ und Welle-3-Backlog-Stichworten (152b/P3-B1/151/150e/Validation-Sweep). Audit-Methodik-Sektion ergänzt um Audit-Bundle-Pattern (Generator-Skript `scripts/build-audit-bundle.ts`, CLI `npm run audit:bundle <name>`, Bundle-Defs in `scripts/audit-bundles.ts`, 300k-text-Limit-Pflicht für Bundles >100 KB), Verify-Skripte-Konvention (Lehre 149d: `.ts` statt `.mjs`, `npx tsx`-Aufruf, typisierte Helper), Wert-Recherche-Disziplin durch Claude im Web (Lehre 22: Aktualität-Hinweis + zwei Sekundärquellen + URL-Permission-Workflow). | [ ] noch offen |
