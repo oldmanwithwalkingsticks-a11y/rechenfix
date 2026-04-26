@@ -88,6 +88,20 @@
 - Bei Patch-Application durch Claude Code wurden Stellen gefunden, die im Original-Audit übersehen waren (P3-B4: AiExplain-Key zusätzlich zur Result-Box). Audit-Berichte sollten Component-Search systematisch („alle Vorkommen von 'Werktage'") statt nur sichtbarer UI-Stellen prüfen — auch interne Object-Keys, AiExplain-Eingaben und ErgebnisAktionen-Strings.
 - Konsequenz für künftige Audits: Bei Begriffs-Korrekturen in Components grundsätzlich `grep -n` über alle Vorkommen im File, nicht nur visuell durchscannen.
 
+#### Lib-Audit Folge-Bundle 153c (26.04.2026, Commit `1fffcb8` Bundle + Doku-Sync-Commit)
+
+**Status:** Lib-seitig komplett geschlossen.
+
+5 Block-B-Libs geprüft (`arbeitszeit.ts`, `promille.ts`, `freelancer-stundensatz.ts`, `rechtsschutz.ts`, `ueberstunden.ts`) via Folge-Bundle `docs/audit-bundles/block-b-libs.md` (~16 KB, single-fetch ohne Token-Limit-Override). Bilanz: **0 P1, 0 P2, 2 neue P3-Mini-Befunde** (`P3-Lib-1` Feiertage-Konstante in freelancer-stundensatz, `P3-Lib-2` 5-Tage-Annahme in ueberstunden-Tagesindikator) + Klärungen für 4 vorher offene Items (P3-B5 SSOT-Korrektheit, P3-B6 Maximum-Widmark by design, P3-B7 Markt-Quelle bestätigt, P3-B10 geschlossen).
+
+Highlight: `arbeitszeit.ts` `pruefeHinweise`-Logik deckt § 3 + § 4 ArbZG vorbildlich ab, inklusive korrekter Edge-Case-Behandlung („mehr als 6h", nicht „ab 6h").
+
+Volldetails im Audit-Bericht-Anhang („Lib-Audit Folge-Bundle 153c"-Sektion).
+
+**Methodik-Lehre 21 (Lib-Audit als Folge-Bundle, 26.04.2026):**
+- Audit-Bundle-Pattern (Lehre 19) skaliert hervorragend für Folge-Audits. Erstes Bundle 13 Files / 149 KB → Token-Limit-Override 300k. Zweites Bundle 5 Files / 16 KB → single-fetch ohne Override. Generator-Skript handhabt beide Fälle mit derselben CLI (`npm run audit:bundle <name>`).
+- Lib-Audit nach Component+Konfig-Audit liefert oft hauptsächlich SSOT-Bestätigungen und Mini-Polish-Items, keine substanziellen Bugs — vorausgesetzt das Component-Audit hat Beispiel-Werte sauber nachgerechnet. Damit ist die Audit-Reihenfolge „Konfig+Component zuerst, Lib als Folge" effizient: substanzielle Bugs fallen früh auf, Lib-Audit ist die Bestätigungs-Schleife.
+
 ---
 
 ## Welle 2 — Stufe 3 Wohnen (25.04.2026, ABGESCHLOSSEN)

@@ -292,3 +292,57 @@ Claude-seitig: `web_fetch` mit `text_content_token_limit: 300000` (default reich
 
 Bei der Anwendung von 153b in Claude Code wurde eine zweite Stelle in `ArbeitstageRechner.tsx` gefunden: der `AiExplain`-`ergebnis`-Object-Key `'Werktage (Mo–Fr)'` (etwa Zeile 229). Im Original-Audit nicht erfasst, weil das Audit auf User-sichtbare Texte fokussiert war. Nachgezogen als 153b-fix. Lehre 20 in `welle-status-historie.md` dokumentiert die Methodik-Konsequenz: Bei Audit-Suchen nach Begriffen alle Vorkommen prüfen, nicht nur sichtbare UI-Stellen — auch interne Object-Keys, AiExplain-Eingaben und ErgebnisAktionen-Strings.
 
+---
+
+## Lib-Audit Folge-Bundle 153c (26.04.2026)
+
+**Audit-Bundle:** `docs/audit-bundles/block-b-libs.md` (Commit `1fffcb8`, ~16 KB, 5 Libs)
+**Methodik:** Welle-2-4-Punkt (Formel/Rechtsquelle · Input-Validierung · Edge Cases · SSOT) auf alle 5 Block-B-Libs angewendet.
+
+**Bilanz:** 0 P1, 0 P2, 2 neue P3-Mini-Befunde + Klärungen für 4 vorher offene Items.
+
+### Neue P3-Befunde
+
+**P3-Lib-1** (`lib/berechnungen/freelancer-stundensatz.ts:36`): Hartcodierter `const FEIERTAGE = 10`. Plausible Schätzung für bundesweite Werktagsfeiertage im Schnitt (2026: 8 bundesweite Feiertage auf Werktagen + ~2 Bundesland-Feiertage je nach BL = ~10). Bei zukünftiger `feiertage.ts`-SSOT-Lib (152b) auf `getFeiertage(jahr, bundesland).filter(istWerktag).length` umstellbar — derzeit aber nicht akut, weil bundesland-spezifische Berechnung im Component nicht angeboten wird. Niedrige Priorität, in 152b mitnehmbar.
+
+**P3-Lib-2** (`lib/berechnungen/ueberstunden.ts`, `berechneUeberstunden`): `tagesStunden = vertraglicheStunden / 5` — hartcodierte 5-Tage-Woche-Annahme für die „zusätzliche Tage pro Jahr"-Indikator-Berechnung. Component bietet kein Arbeitstage-pro-Woche-Eingabefeld, daher für Standard-User (5-Tage-Woche) korrekt. Bei 4-Tage- oder 6-Tage-Woche ist der Indikator ungenau. Sehr niedrige Priorität — betrifft nur den Anzeigewert, nicht die Überstunden-Vergütung.
+
+### Klärungen für vorher offene P3-Items
+
+**P3-B5** (Faktor 4,33 vs. SSOT `WOCHEN_PRO_MONAT`): ✅ **geschlossen.** `ueberstunden.ts` importiert `WOCHEN_PRO_MONAT` aus `_helpers.ts` korrekt (`proMonat = proWoche * WOCHEN_PRO_MONAT`). `arbeitszeit.ts` benötigt keinen Monats-Faktor (nur Tag/Woche-Berechnung). Keine SSOT-Verletzung. Erklärtexte mit „4,33" referenzieren bereits explizit „(52 Wochen ÷ 12 Monate)" als Quelle — Konsistenz wahr.
+
+**P3-B6** (Promille-Resorptionsdefizit-Faktor): ✅ **geklärt — bewusste Designentscheidung.** `promille.ts` rechnet die klassische Widmark-Formel ohne Resorptionsdefizit (kein 0,9-Faktor wie in der medizinischen Standard-Schätzung, kein 0,8-Faktor wie in der BGH-Pro-Reo-Linie). Das Ergebnis ist die obere Schranke (Maximum-BAK). Für einen Sicherheits-Rechner mit dem Ziel „User vom Fahren abhalten" ist die Maximum-Schätzung die richtige Designwahl. Component-Disclaimer macht das durch „Die tatsächlichen Werte können erheblich abweichen" und „Im Zweifelsfall: NICHT fahren!" transparent. Keine Code-Änderung nötig.
+
+**P3-B7** (Rechtsschutz Markt-Quelle): ⏳ **bestätigt, niedrige Priorität.** Bausteinpreise in `BAUSTEINE`-Konstante (privat 15/22 €, beruf 8 €, verkehr 5/7 €, miet 6/8 €) und Berufs-/SB-/Zahlweise-Faktoren liegen im plausiblen Marktbereich (vgl. Stiftung Warentest 03/2024). Lib-Header-Kommentar mit Quellen-Hinweis empfohlen für Welle-3-Refactor-Slot. Kein akuter Fix — Component-Disclaimer macht den Schätz-Charakter transparent.
+
+**P3-B10** (5 Libs nicht im Original-Bundle): ✅ **geschlossen** durch dieses Folge-Bundle.
+
+### Highlight: `arbeitszeit.ts` `pruefeHinweise`-Logik vorbildlich
+
+Die ArbZG-Hinweis-Funktion deckt alle relevanten Tatbestände korrekt ab:
+- § 3 ArbZG (10-Stunden-Höchstgrenze): `nettoMinuten > 600`
+- § 4 ArbZG (45 Min Pause ab 9h): `nettoMinuten > 540 && pauseMinuten < 45`
+- § 4 ArbZG (30 Min Pause ab 6h): `nettoMinuten > 360 && pauseMinuten < 30`
+
+Wichtig: Die else-if-Branch-Reihenfolge priorisiert den 45-Min-Hinweis korrekt über den 30-Min-Hinweis, wenn beide Bedingungen treffen. Edge Case bei genau 6h Arbeit ohne Pause korrekt behandelt — § 4 ArbZG gilt erst bei „mehr als sechs Stunden" (`> 360`, nicht `>= 360`). Keine Korrektur nötig.
+
+### Endbilanz Welle 2 Stufe 3 Arbeit Block B
+
+| Befund | Status | Anmerkung |
+|---|---|---|
+| P2-B1 | ✅ behoben | 152a (`12eb666`) |
+| P2-B2 | ⏳ geparkt | 152b `feiertage.ts` SSOT-Lib (Welle 3) |
+| P3-B1 | ⏳ geparkt | ueberstunden-Netto-Refactor mit Steuerklasse-Input (Welle 3) |
+| P3-B2 | ✅ behoben | 153a |
+| P3-B3 | ✅ behoben | 153a |
+| P3-B4 | ✅ behoben | 153b + 153b-fix |
+| P3-B5 | ✅ geschlossen | Lib korrekt mit SSOT-Import, Erklärtext nennt Quelle |
+| P3-B6 | ✅ geklärt | Maximum-Widmark by design, durch Disclaimer abgesichert |
+| P3-B7 | ⏳ niedrige Prio | Lib-Header-Quelle ergänzen (Welle-3-Slot) |
+| P3-B8/B9 | informativ | Slug-Inkonsistenzen historisch |
+| P3-B10 | ✅ geschlossen | durch Bundle 153c |
+| P3-Lib-1 | ⏳ niedrige Prio | Feiertage-Konstante in freelancer-stundensatz, in 152b mitnehmbar |
+| P3-Lib-2 | ⏳ sehr niedrige Prio | 5-Tage-Annahme in ueberstunden-Tagesindikator |
+
+**Stufe 3 Arbeit ist damit funktional, kosmetisch UND lib-seitig komplett geschlossen.** Alle geparkten Items sind im Welle-3-Backlog mit klarem Scope und sind keine Pflicht-Items.
+
