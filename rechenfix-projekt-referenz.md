@@ -362,9 +362,9 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
 - ✅ **CosmosDirekt-Affiliate** (Prompts 145 + 145b, 25.04.2026) — 12. Programm Awin Merchant 11893 (Icon 🛡️, `#0D6EFD`). 15 Produkt-Deeplinks: Tagesgeld, Altersvorsorge, Sparplan, Junior, Risikoleben, BU, Unfall, Sterbegeld, Privat-Haftpflicht, Hausrat, Wohngebäude, Bauherrenhaftpflicht, Tierhalter, Reiserücktritt, Default. **30 Einbauten** in 30 Rechnern (21 Group A Append nach bestehenden Boxen, 9 Group B Erstinstall; B6 MietRechner.tsx übersprungen — Datei existiert nicht). Sonderfälle: RentenRechner mit `variant="compact"` (4. Box, visuelle Last), SparRechner mit `context="tagesgeld"` statt `sparplan` (verivox bedient sparplan an Z. 138). AffiliateBox-Aufrufe gesamt: 87 → 117 in 73 Dateien.
 - ✅ **Casing-Hotfix** (Commit 7dd9934, 25.04.2026) — Latenter Casing-Bug behoben: `MwStRueckerstattungRechner.tsx` (großes St) lokal vs. `MwstRueckerstattungRechner.tsx` (kleines st) im git-Index. Vercel-Linux case-sensitive → `Module not found` auf Production. Zwei-Schritt-`git mv` für case-only-Rename auf Windows.
 - ✅ **Doku-Sync** (Prompt 146, 25.04.2026) — CLAUDE.md / SKILL.md / dieses Dokument nach Welle-2-Stufen-1+2 + CosmosDirekt
-- ✅ **Welle 2 Stufe 3 Wohnen** (Prompts 147 + 147b + 147c + 148 + 148b, 25.04.2026) — 25 Rechner (Block A 12 rechtssensitiv + Block B 13 Mengen). 5 neue SSOT-Libs (`strompreis.ts`, `eeg-einspeiseverguetung.ts`, `beg-foerderung.ts`, `vpi.ts`, `pv-ertragsmodell.ts` aus 147c). Hauptbefunde: PV-Einspeisevergütung 8,03 → 7,78 ct/kWh (war 2 Jahre veraltet), GrESt-Sätze Bremen/Sachsen/Thüringen aktualisiert, Mietpreisbremse-Verlängerung bis 31.12.2029 (BT-Drs. 21/322), Strompreis-Inkonsistenz 32/36 → systemweit 37 ct via SSOT, BEG-Wärmepumpenförderung max. 70 %/21.000 €. 147b Hotfix: balkon-solar 800-W-Cap, wärmepumpe 30–1000 m²-Range. 147c PV-Ertragsmodell mit Mertens-Faktoren. 148 Block B: dachflaechen 950 → 850 kWh/kWp, poolkosten 220 → 270 €. 148b Component-Drift: poolkosten/heizkosten/dachflaechen Component-Defaults via SSOT, balkon-solar Nord-Faktor 0,40 → 0,60. ~16 Commits, 87+ Verify-Tests grün. **Offen:** Mieterbund-Wert in nebenkosten-rechner (148c bei Gelegenheit)
-- 🟡 **Welle 2 Stufe 3 Arbeit** (Prompts 149a/b/c durch, 26.04.2026; 149d offen) — Block A Audit: 4× P1 + 6× P2 + 17× P3. 149a arbeitslosengeld-Migration arbeit.ts → finanzen.ts (SSOT-Konsistenz). 149c ehegattenunterhalt SB-Achse korrigiert von Trennungsphase auf Erwerbstätigkeit (gilt für Trennungs- UND nachehelichen Unterhalt gleichermaßen, erfundene „Bindung schwächer"-Begründung gestrichen). 149b zugewinnausgleich § 1376 BGB Indexierung Anfangsvermögen mit `vpi.ts`-Erweiterung (`indexiereVermoegen`-Helper, `getVpi(jahr)`). **Offen:** 149d scheidungskosten KostBRÄG 2025 (wartet auf externe Wert-Verifikation), 150 P2-Polish (Mutterschutz Fehlgeburt + Elternunterhalt-Update + Süd-OLG-Hinweis), 151 P3-UX-Sammelbatch
-- ✅ **Doku-Sync** (Prompt 154, 26.04.2026) — CLAUDE.md / SKILL.md / dieses Dokument / `welle-status-historie.md` nach Welle-2-Stufe-3-Wohnen-Abschluss und Welle-2-Stufe-3-Arbeit-P1-Block (149a/b/c). Neue Anti-Patterns (Backtick-Falle in Template-Literals, Slug-Drift in Kategorie-Datei, Phantom-Befund-Diagnose). Counts korrigiert.
+- ✅ **Welle 2 Stufe 3 Wohnen KOMPLETT** (Prompts 147 + 147b + 147c + 148 + 148b + 148c, 25.+26.04.2026) — 25 Rechner (Block A 12 rechtssensitiv + Block B 13 Mengen). 5 neue SSOT-Libs (`strompreis.ts`, `eeg-einspeiseverguetung.ts`, `beg-foerderung.ts`, `vpi.ts`, `pv-ertragsmodell.ts` aus 147c). Hauptbefunde: PV-Einspeisevergütung 8,03 → 7,78 ct/kWh (war 2 Jahre veraltet), GrESt-Sätze Bremen/Sachsen/Thüringen aktualisiert, Mietpreisbremse-Verlängerung bis 31.12.2029 (BT-Drs. 21/322), Strompreis-Inkonsistenz 32/36 → systemweit 37 ct via SSOT, BEG-Wärmepumpenförderung max. 70 %/21.000 €. 147b Hotfix: balkon-solar 800-W-Cap, wärmepumpe 30–1000 m²-Range. 147c PV-Ertragsmodell mit Mertens-Faktoren. 148 Block B: dachflaechen 950 → 850 kWh/kWp, poolkosten 220 → 270 €. 148b Component-Drift: poolkosten/heizkosten/dachflaechen Component-Defaults via SSOT, balkon-solar Nord-Faktor 0,40 → 0,60. **148c Schluss-Patch (26.04.):** Mieterbund-Wert im nebenkosten-rechner aktualisiert von 2,88 EUR/qm auf Betriebskostenspiegel 2023 (2,51 EUR/qm Durchschnitt, 3,15 EUR/qm bei voller Ausnutzung; Quelle: Deutscher Mieterbund DMB, +10 % gegenüber Vorjahr) — direkt durch Claude im Web recherchiert (Lehre 22). ~17 Commits, 87+ Verify-Tests grün.
+- ✅ **Welle 2 Stufe 3 Arbeit KOMPLETT** (Prompts 149a-d + 150a-d Block A + 152a + 153a/b/b-fix + 153c Block B, 26.04.2026, 14 Commits) — Block A Audit (`docs/audit-arbeitspapiere/welle2-stufe3-arbeit-blockA-audit.md`): 4× P1 + 6× P2 + 17× P3. **149a** arbeitslosengeld-Migration arbeit.ts → finanzen.ts (SSOT-Konsistenz). **149c** ehegattenunterhalt SB-Achse korrigiert von Trennungsphase auf Erwerbstätigkeit (gilt für Trennungs- UND nachehelichen Unterhalt gleichermaßen, erfundene „Bindung schwächer"-Begründung gestrichen). **149b** zugewinnausgleich § 1376 BGB Indexierung Anfangsvermögen mit `vpi.ts`-Erweiterung (`indexiereVermoegen`-Helper, `getVpi(jahr)`). **149d** scheidungskosten KostBRÄG 2025 (RVG/FamGKG-Tabellen aktualisiert auf Stichtag 01.06.2025). **150 (a-d)** P2-Polish: Mutterschutz Fehlgeburt-Schutzfristen 13./17./20. SSW (BGBl. 2025 I Nr. 59), Behinderungs-Verlängerung Antragspflicht, Elternunterhalt Angehörigen-Entlastungsgesetz, Elternzeit 30h→32h. **Block B Audit** (`welle2-stufe3-arbeit-blockB-audit.md`): 0 P1, 2 P2, 10 P3. **152a** urlaubstage BUrlG-Rundung. **153a** freelancer § 19 UStG-Schwelle + teilzeit EP-Werte. **153b** ArbeitstageRechner „Wochentage Mo-Fr". **153b-fix** AiExplain-Object-Key (Lehre 21: grep statt visueller Scan). **153c** Lib-Audit-Bundle für 5 Block-B-Libs: 0 P1, 0 P2, 2 neue P3-Mini-Befunde + 4 Klärungen.
+- ✅ **Doku-Sync** (Prompt 154 + 154-blockB + 154-153c + 155, 26.04.2026) — CLAUDE.md / SKILL.md / dieses Dokument / `welle-status-historie.md`. 154 nach Welle-2-Stufe-3-Wohnen-Abschluss und P1-Block (149a/b/c). 154-blockB nach Block-B-Patch-Sequenz (Commit f4d0687). 154-153c nach Lib-Audit (Commit 26298a0). 155 nach Welle-2-Komplett-Abschluss: Welle-Status-Bullet KOMPLETT, Lehre 22 (Wert-Recherche durch Claude im Web + URL-Permission-Workflow), Welle-3-Backlog mit klaren Scopes, Audit-Bundle-Pattern als Workflow-Tool. Drei Doku-Anker konsistent synchron (CLAUDE.md, welle-status-historie.md, Audit-Berichte).
 
 **Parkend (wartet auf AdSense-Freigabe):**
 - ⏸ Prompt 68 — Google CMP + Consent Mode v2
@@ -375,9 +375,8 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
 - 🎯 GSC: Sitemap neu einreichen nach Deploy; CTR-Review der 3 neuen Awin-Partner ~20.05.2026
 - 🎯 Neue Rechner-Batches (thematisch offen)
 - 🎯 Jahresparameter-Audit 2027 (Frühjahr 2027): ESt-Tarif 2027, SV-Rechengrößen 2027, JAEG, Zusatzbeitrag, D-Ticket, Pfändung-Switch zum 01.07.2028
-- 🎯 **Welle 2 Stufe 3 Arbeit Restanten:** 149d KostBRÄG-Update (wartet auf Wert-Verifikation), 150 P2-Polish (Mutterschutz Fehlgeburt + Elternunterhalt + Süd-OLG-Hinweis), 151 P3-UX-Sammelbatch
-- 🎯 **Welle 2 Stufe 3 weitere Kategorien** (Alltag, Mathe, Kochen, Sport): noch nicht gestartet
-- 🎯 **148c Mieterbund-Wert** in nebenkosten-rechner (Mini-Hotfix, sobald aktueller Wert von mieterbund.de vorliegt)
+- 🎯 **Welle-3-Backlog (geparkte Items mit klarem Scope, siehe eigene Sektion „Welle-3-Backlog" weiter unten):** 152b `feiertage.ts` SSOT (akut Q4/2026), P3-B1 ueberstunden-Netto-Refactor mit Steuerklasse, 151 Block-A-P3-Sammelbatch (17 Items), 150e Süd-OLG-UI-Toggle, Welle-3-Validation-Sweep aller Welle-2-Rechner gegen externe Oracles
+- 🎯 **Welle 2 Stufe 3 weitere Kategorien** (Alltag, Mathe, Kochen, Sport): noch nicht gestartet — bei Bedarf separate Audit-Sprints, ansonsten als Teil von Welle 3 Validation-Sweep
 - 🎯 **Prompt 133 TaxiRechner Stadt-Preset-UX:** 5 Städte-Presets (Karsten-Auswahl ausstehend), `taxi-preset-tarife.ts` mit Stichtag-Kommentar pro Stadt, CLAUDE.md-Wartungsregel halbjährlich. Vorbereitet durch `TARIFE_STAND` in `lib/berechnungen/taxi.ts` (Prompt 132 A5)
 - 🎯 **Prompt 120c (Juni 2026):** Wohngeld-Lib-Refactoring auf Pro-Person-Architektur §§ 14–16 WoGG, gebündelt mit Grundsicherungsgeld-Reform (Switch 01.07.2026). Nach Umsetzung: `STATISCHE_OVERRIDES`-Ausschluss aufheben, dynamische Route rendert wieder den interaktiven Rechner. KdU-1,5-Fache-Cap (§ 22 Abs. 1 SGB II n.F., aus Prompt 129 Teil B Nicht-Scope) könnte dabei als Nebenprodukt integriert werden
 - 🎯 **Prompt 121a (~August 2026 bei Bedarf):** BAföG WS 2026/27-Erhöhung einpflegen (neuer Bucket `BAFOEG_AB_2026_08_01` in `bafoeg-parameter.ts`, wenn Verordnung verabschiedet)
@@ -386,15 +385,64 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
 
 **Welle-Status:**
 - **Welle 1 (Hoch-Risiko):** ✅ ABGESCHLOSSEN April 2026 (Stufen 1+2+1.5+3+4a+4b)
-- **Welle 2 (Mittel-Risiko):**
-  - Stufe 1 Auto ✅ ABGESCHLOSSEN 23.04.2026 (Prompts 130–132.6)
-  - Stufe 2 Gesundheit ✅ ABGESCHLOSSEN 25.04.2026 (Prompts 140–144b)
-  - **Stufe 3 Wohnen** ✅ ABGESCHLOSSEN 25.04.2026 (Prompts 147–148b, 25 Rechner)
-  - **Stufe 3 Arbeit** 🟡 LÄUFT — P1-Block 3/4 durch (149a/b/c, 26.04.2026), 149d offen (KostBRÄG); 150 P2 + 151 P3 offen
-  - Stufe 3 weitere Kategorien (Alltag, Mathe, Kochen, Sport): noch nicht begonnen
-- **Welle 3 (Niedrig-Risiko-Stichprobe + systematischer Validation-Sweep):** noch nicht begonnen — vorgesehen nach Welle-2-Vollabschluss. Vorab-Backlog aus Welle-2-Audits: Component-Drift-Scanner (Default-Werte gegen SSOT abgleichen), Hinweisbox-Texte vs. Konfig-Konsistenz, BKW-spezifisches PV-SSOT-Modul (aktuell `balkon-solar.ts` mit eigenständigem Modell)
+- **Welle 2 (Mittel-Risiko):** ✅ **KOMPLETT ABGESCHLOSSEN 26.04.2026**
+  - Stufe 1 Auto ✅ (Prompts 130–132.6, 23.04.2026)
+  - Stufe 2 Gesundheit ✅ (Prompts 140–144b)
+  - Stufe 3 Wohnen ✅ (Prompts 147–148c, 25.+26.04.2026, 25 Rechner)
+  - Stufe 3 Arbeit ✅ (Block A 149a-d + 150a-d, Block B 152a + 153a/b/b-fix + 153c Lib-Audit, 26.04.2026, 14 Commits)
+- **Welle 3 (Validation-Sweep + geparkte Items):** vorbereitet, noch nicht gestartet — siehe eigene Sektion „Welle-3-Backlog" weiter unten. Ziel: alle Welle-2-Rechner gegen externe Oracles cross-checken (BMF-Rechner, Stiftung Warentest, IHK-Rechner etc.) plus geparkte Audit-Restanten abarbeiten (152b, 151, 150e, P3-B1).
 
 Vollständige Welle-Historie: [docs/audit-arbeitspapiere/welle-status-historie.md](docs/audit-arbeitspapiere/welle-status-historie.md).
+
+## Welle-3-Backlog (geparkte Items mit klarem Scope)
+
+Stand 26.04.2026 — fünf Items aus Welle-2-Audits geparkt mit konkreten Aufwänden, Akut-Faktoren und Migration-Punkten. Detaillierte Specs: `docs/audit-arbeitspapiere/welle-status-historie.md` Sektion „Welle-3-Backlog".
+
+### 152b — `feiertage.ts` SSOT-Lib mit Gauß-Osterformel
+
+- **Aufwand:** ~2–3 h
+- **Akut:** **Q4/2026** — Jahr-Dropdown im `ArbeitstageRechner.tsx` bricht zum 01.01.2027 ohne diesen Refactor (hartkodiertes `FEIERTAGE_2026`-Array mit 17 Einträgen)
+- **Scope:** Neue Lib `lib/berechnungen/feiertage.ts` mit Gauß-Osterformel für bewegliche Feiertage (Karfreitag, Ostermontag, Christi Himmelfahrt, Pfingstmontag, Fronleichnam) + 16-BL-Map für feste Feiertage + Buß-und-Bettag-Spezialregel (Mittwoch vor 23. November, nur SN)
+- **Migration nötig in:** `components/rechner/ArbeitstageRechner.tsx` (entfernt FEIERTAGE_2026-Array + Bundesland-Mapping, neuer Jahr-Dropdown 2026/27/28), `lib/berechnungen/freelancer-stundensatz.ts` (P3-Lib-1: `const FEIERTAGE = 10` hartkodiert)
+- **Test-Anforderung:** Gegen bekannte 2026-Daten (Karfreitag 03.04., Christi Himmelfahrt 14.05., Fronleichnam 04.06.) plus Cross-Check für 2027
+- **Löst gleichzeitig:** P2-B2 (Block B) + P3-Lib-1 (freelancer)
+
+### P3-B1 — ueberstunden-Netto-Refactor mit Steuerklasse-Input
+
+- **Aufwand:** mehrere h (UI-Erweiterung)
+- **Akut:** nein (Component-Disclaimer macht pauschale 40-%-Annahme transparent)
+- **Scope:** `UeberstundenRechner.tsx` um Steuerklasse + Bundesland-Inputs erweitern, `ueberstunden.ts` Netto-Berechnung von pauschal `× 0.6` auf realistische Lohnsteuer-Tabelle (via `lib/berechnungen/lohnsteuer.ts`) umstellen
+- **Risiko:** mittel — UI-Disruption, neue Pflichtfelder
+
+### 151 — Block-A-P3-Sammelbatch (17 Items)
+
+- **Aufwand:** ~1–2 h
+- **Akut:** nein (alle P3, kein Pflicht-Item)
+- **Scope:** 17 P3-Items aus dem Block-A-Audit von Welle 2 Stufe 3 Arbeit (Mobilitätsprämie § 101 EStG, EuGH Kücükdeveci, BAG-Zugangsbeweis, § 1a Abs. 2 S. 3 KSchG-Aufrundung, Muster 9 etc. — Mix aus Erklärtext-Korrekturen, kleinen Inkonsistenzen, Lib-Polish)
+- **Voraussetzung:** Block-A-Audit-Bericht muss vorliegen — entweder Klartext-URL zu `welle2-stufe3-arbeit-blockA-audit.md` oder Bundle via `npm run audit:bundle block-a-arbeit`
+
+### 150e — Süd-OLG-UI-Toggle für ehegattenunterhalt-Rechner
+
+- **Aufwand:** ~1 h
+- **Akut:** nein (Erklärtext deckt regionale Variante schon transparent ab)
+- **Scope:** `EhegattenunterhaltRechner.tsx` um Toggle „Bundesweite 3/7-Methode" vs. „Süddeutsche Leitlinien (45 %)" erweitern (für sechs Süd-OLG-Bezirke: Bamberg, Karlsruhe, München, Nürnberg, Stuttgart, Zweibrücken)
+- **Setzt um:** Methodik-Lehre 19 (regionale Variante) als UI-Feature
+- **Risiko:** niedrig — Default bleibt 3/7, neuer Schalter ist additive Erweiterung
+
+### Welle-3-Validation-Sweep aller Welle-2-Rechner gegen externe Oracles
+
+- **Aufwand:** mehrere Sessions
+- **Akut:** nein (Welle 2 ist funktional sauber; Welle 3 ist Cross-Check-Phase)
+- **Scope:** Alle Welle-2-Rechner gegen unabhängige externe Quellen (BMF-Rechner, Stiftung Warentest, IHK-Rechner, Steuerberater-Tools) cross-checken. Strukturiert in Stufen pro Kategorie analog Welle 2 (Auto → Gesundheit → Wohnen → Arbeit, oder umgekehrt nach Drift-Wahrscheinlichkeit)
+- **Vorbereitung beim Start von Welle 3:** Liste der externen Oracles pro Kategorie aufstellen, Verify-Skripte-Pattern aus Welle 2 anpassen (Lehre 149d: `.ts`-Endung, `npx tsx`-Aufruf, typisierte Helper)
+
+### Empfohlene Reihenfolge bei freier Wahl
+
+1. **152b** zuerst — akut bis Q4/2026, eigenständiger Scope, ~2–3 h
+2. **151** als zweites — schließt Block-A-P3 sauber ab, ~1–2 h
+3. **150e** als drittes — kleines Mini-Feature, lehre-19-UI-Closure, ~1 h
+4. **Welle 3 Validation-Sweep** als großer Sprint — eigene Planungs-Session
+5. **P3-B1** zuletzt — größter Aufwand, niedrigste Akut-Lage
 
 **Neue Scripts seit letztem Sync (146):**
 - `scripts/verify-wohnen-p1.ts` (Prompt 147), `verify-wohnen-block-b.ts` (148), `verify-pv-ertragsmodell.ts` (147c), `verify-ehegattenunterhalt.ts` (149c), `verify-zugewinnausgleich.ts` (149b) — alle gegen externe Primärquellen (BNetzA, BDEW, KfW, Mertens, Düsseldorfer Tabelle, BFH/BGB, Destatis Lange Reihe)
@@ -404,6 +452,16 @@ Vollständige Welle-Historie: [docs/audit-arbeitspapiere/welle-status-historie.m
 **Workflow-Tools (seit 20.04.2026, persistent in Chrome bzw. claude.ai-Settings, nicht im Memory):**
 - Claude-in-Chrome Extension — Live-HTML-Inspektion, Console, Network. Modus „Ask before acting".
 - Vercel-MCP-Connector (`https://mcp.vercel.com`) — Deploy-Status, Logs, Toolbar-Threads.
+
+**Audit-Bundle-Pattern (seit 26.04.2026, Welle 2 Stufe 3 Arbeit Block B):**
+- **Generator-Skript:** `scripts/build-audit-bundle.ts` (TypeScript, NICHT `.mjs`!) — erzeugt konsolidierte Markdown-Datei in `docs/audit-bundles/<thema>.md` mit allen relevanten Files als Code-Blöcke
+- **CLI:** `npm run audit:bundle <name>`
+- **Bundle-Definitionen:** `scripts/audit-bundles.ts` (zentrale Liste aller Bundle-Konfigurationen mit File-Listen)
+- **Aufruf:** Eine `web_fetch`-URL → ein Fetch → alle Files in einem Aufruf — spart Token und Reibung im Vergleich zu URL-Listen pro Datei
+- **Pflicht-Parameter** bei Bundles >100 KB: `text_content_token_limit: 300000` — Default reicht nicht und schneidet ohne sichtbare Warnung mitten im Inhalt ab
+- **Lib-Audit als Folge-Bundle:** Wenn Component+Konfig+Beispiel-Trio konsistent ist, kann der Lib-Audit nachgelagert als Folge-Bundle abgehängt werden — Beispiel-Werte aus `beispiel`-Feld manuell nachrechnen reicht oft für indirekte Lib-Verifikation
+- **Beispiele aus 26.04.:** `block-b-arbeit` (149 KB, 13 Files), `block-b-libs` (16 KB, 5 Libs)
+- **Methodik-Lehre 20** (CLAUDE.md → Gelernte Regeln): Audit-Bundle-Pattern via konsolidierte MD-Datei
 
 ## Parkende Items (bis AdSense-Freigabe)
 
