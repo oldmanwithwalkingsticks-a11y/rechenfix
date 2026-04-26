@@ -226,7 +226,7 @@ export default function ArbeitstageRechner() {
         }}
         ergebnis={{
           'Arbeitstage': String(ergebnis.arbeitstage),
-          'Werktage (Mo–Fr)': String(ergebnis.werktage),
+          'Wochentage Mo–Fr': String(ergebnis.werktage),
           'Feiertage abgezogen': String(ergebnis.feiertage),
         }}
       />
