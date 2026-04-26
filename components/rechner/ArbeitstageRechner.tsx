@@ -190,7 +190,7 @@ export default function ArbeitstageRechner() {
         <p className="text-white/80 text-sm mb-1">Arbeitstage</p>
         <p className="text-5xl font-bold">{ergebnis.arbeitstage}</p>
         <p className="text-white/80 text-sm mt-2">
-          davon {ergebnis.werktage} Werktage (Mo–Fr) · {ergebnis.feiertage} Feiertage abgezogen
+          davon {ergebnis.werktage} Wochentage Mo–Fr · {ergebnis.feiertage} Feiertage abgezogen
         </p>
       </div>
 
