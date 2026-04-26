@@ -66,6 +66,7 @@ const EXCLUDE_PATH_PREFIXES_REL = [
   'lib/rechner-config',                 // SSOT selbst
   '.claude/skills',                     // enthält Counter-Beispiele aus Prompt 127/128
   'docs/audit-arbeitspapiere',          // historische Audit-Dokumente
+  'docs/audit-bundles',                 // generierte Bundles (1:1-Reproduktion anderer Dateien)
   'reports',                            // historische Audit-Reports (generiert)
 ];
 const EXCLUDE_FILE_REGEX = [

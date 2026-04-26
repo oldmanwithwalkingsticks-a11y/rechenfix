@@ -11,7 +11,8 @@
     "lint": "next lint",
     "lint:jahreswerte": "node scripts/check-jahreswerte.mjs",
     "lint:footer": "node scripts/check-footer.mjs",
-    "lint:slugs": "node scripts/slug-drift-scan.mjs"
+    "lint:slugs": "node scripts/slug-drift-scan.mjs",
+    "audit:bundle": "npx tsx scripts/build-audit-bundle.ts"
   },
   "dependencies": {
     "@upstash/redis": "^1.37.0",
