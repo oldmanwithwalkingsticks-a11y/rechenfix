@@ -860,9 +860,19 @@ Die Mutterschutzfrist beginnt **6 Wochen vor dem errechneten Entbindungstermin**
 
 **Mutterschutz bei Frühgeburt: Verlängerung der Frist**
 
-Bei einer **Frühgeburt**, einer **Mehrlingsgeburt** oder wenn das Kind mit einer **Behinderung** zur Welt kommt, verlängert sich die Schutzfrist nach der Geburt auf **12 Wochen** statt 8 Wochen. Zusätzlich werden bei Frühgeburten die Tage, die vor der Geburt nicht in Anspruch genommen werden konnten, **nach der Geburt angehängt**. Kommt ein Kind beispielsweise 3 Wochen vor dem ET zur Welt, verlängert sich der Mutterschutz nach der Geburt um diese 21 Tage — zusätzlich zu den 12 Wochen.
+Bei einer **Frühgeburt** oder einer **Mehrlingsgeburt** verlängert sich die Schutzfrist nach der Geburt automatisch auf **12 Wochen** statt 8 Wochen. Bei einer **Behinderung des Kindes** funktioniert der Schutz anders: Wird innerhalb der ersten 8 Wochen nach der Geburt eine Behinderung **ärztlich festgestellt**, kann die Mutter **auf Antrag** eine Verlängerung um 4 zusätzliche Wochen erhalten — also ebenfalls bis zu 12 Wochen, aber eben nur antragsbasiert und nicht automatisch. Zusätzlich werden bei Frühgeburten die Tage, die vor der Geburt nicht in Anspruch genommen werden konnten, **nach der Geburt angehängt**. Kommt ein Kind beispielsweise 3 Wochen vor dem ET zur Welt, verlängert sich der Mutterschutz nach der Geburt um diese 21 Tage — zusätzlich zu den 12 Wochen.
 
 Kommt das Kind **nach dem errechneten Termin** zur Welt, verlängert sich der Mutterschutz ebenfalls: Die Schutzfrist vor der Geburt verlängert sich um die Tage der Überschreitung, und die 8 (bzw. 12) Wochen nach der Geburt beginnen erst ab dem tatsächlichen Geburtsdatum.
+
+**Mutterschutz nach Fehlgeburt — neue Schutzfristen seit 01.06.2025**
+
+Mit dem **Mutterschutzanpassungsgesetz vom 24.02.2025** (BGBl. 2025 I Nr. 59) gibt es seit dem 01.06.2025 erstmals gestaffelte Schutzfristen nach einer Fehlgeburt. Bisher galt: nur bei Totgeburten ab der 24. SSW (oder ab 500 g Geburtsgewicht) gab es Mutterschutz. Neu sind drei Stufen:
+
+- ab der **13. Schwangerschaftswoche** → 2 Wochen Schutzfrist
+- ab der **17. Schwangerschaftswoche** → 6 Wochen Schutzfrist
+- ab der **20. Schwangerschaftswoche** → 8 Wochen Schutzfrist
+
+In dieser Zeit gilt das Beschäftigungsverbot wie nach einer Geburt — die Schwangere muss nicht arbeiten und erhält weiter ihr volles Nettoeinkommen über Mutterschaftsgeld plus Arbeitgeberzuschuss. Zusätzlich besteht seit 2018 ein **erweiterter Kündigungsschutz nach Fehlgeburt ab der 12. SSW** (§ 17 MuSchG): Vier Monate ab der Fehlgeburt darf der Arbeitgeber nicht kündigen.
 
 **Mutterschaftsgeld: Wer zahlt wie viel?**
 
@@ -897,6 +907,10 @@ Nutzen Sie unseren [Geburtstermin-Rechner](/gesundheit/geburtstermin-rechner), u
       {
         frage: 'Was passiert, wenn mein Kind früher oder später kommt?',
         antwort: 'Kommt das Kind nach dem Termin, verlängert sich der Mutterschutz — die 8 Wochen nach der Geburt beginnen erst ab dem tatsächlichen Geburtsdatum. Bei Frühgeburt werden die nicht genutzten Tage vor der Geburt nach der Geburt angehängt, zusätzlich zu den 12 Wochen Nachfrist.',
+      },
+      {
+        frage: 'Habe ich nach einer Fehlgeburt Anspruch auf Mutterschutz?',
+        antwort: 'Ja, seit dem 01.06.2025 gibt es nach dem Mutterschutzanpassungsgesetz gestaffelte Schutzfristen nach Fehlgeburt: 2 Wochen ab der 13. SSW, 6 Wochen ab der 17. SSW und 8 Wochen ab der 20. SSW. In dieser Zeit erhalten Sie wie nach einer Geburt Mutterschaftsgeld plus Arbeitgeberzuschuss. Zusätzlich besteht ab der 12. SSW ein viermonatiger Kündigungsschutz nach § 17 MuSchG.',
       },
       {
         frage: 'Kann ich während des Mutterschutzes gekündigt werden?',
