@@ -35,4 +35,15 @@ export const BUNDLES: BundleDefinition[] = [
       'lib/berechnungen/_helpers.ts',
     ],
   },
+  {
+    name: 'block-b-libs',
+    description: 'Welle 2 Stufe 3 Arbeit Block B — 5 Berechnungs-Libs (Folge-Bundle 153c), schließt P3-B6/B7/B10-Audit-Lücke',
+    files: [
+      'lib/berechnungen/arbeitszeit.ts',
+      'lib/berechnungen/promille.ts',
+      'lib/berechnungen/freelancer-stundensatz.ts',
+      'lib/berechnungen/rechtsschutz.ts',
+      'lib/berechnungen/ueberstunden.ts',
+    ],
+  },
 ];
