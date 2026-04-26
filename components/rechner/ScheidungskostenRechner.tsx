@@ -241,7 +241,7 @@ export default function ScheidungskostenRechner() {
       {/* Hinweis */}
       <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-6">
         <p className="text-amber-800 dark:text-amber-300 text-xs">
-          <strong>⚠️ Hinweis:</strong> Diese Berechnung basiert auf dem FamGKG und RVG und ist eine Schätzung. Tatsächliche Kosten können abweichen, z.B. durch weitere Folgesachen, Gutachter, Mehrvergleichsgebühr oder individuelle Honorarvereinbarungen.
+          <strong>⚠️ Hinweis:</strong> Diese Berechnung basiert auf den aktuellen Tabellen nach FamGKG (Anlage 2 zu § 28 FamGKG) und RVG (Anlage 2 zu § 13 RVG) — Stand <strong>KostBRÄG 2025</strong>, gültig seit 01.06.2025. Es handelt sich um eine Schätzung; tatsächliche Kosten können abweichen, z.B. durch weitere Folgesachen, Gutachter, Mehrvergleichsgebühr oder individuelle Honorarvereinbarungen.
         </p>
       </div>
 
