@@ -1,5 +1,6 @@
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import type { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Über Rechenfix.de — Unabhängiges Rechnerportal aus Deutschland',
@@ -21,82 +22,197 @@ export default function UeberUnsSeite() {
     <div className="max-w-4xl mx-auto px-4 py-8">
       <Breadcrumbs items={[{ label: 'Über uns' }]} />
 
-      <div className="card p-6 md:p-8">
-        <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-8">
-          Über Rechenfix.de
-        </h1>
+      <h1 className="text-3xl md:text-4xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
+        Über Rechenfix.de
+      </h1>
+      <p className="text-gray-500 dark:text-gray-400 mb-8">
+        Unabhängiges Online-Rechnerportal aus Deutschland.
+      </p>
 
-        <div className="space-y-8 text-gray-700 dark:text-gray-300">
-          {/* Einleitung */}
-          <div className="text-base leading-relaxed space-y-4">
-            <p>
-              Rechenfix.de ist ein unabhängiges Rechnerportal aus Deutschland. Wir bieten kostenlose Online-Rechner für Finanzen, Alltag, Wohnen, Mathe und mehr. Alle Berechnungen erfolgen direkt in Ihrem Browser — schnell, privat und ohne Anmeldung.
-            </p>
-            <p>
-              Unser Ziel: Komplexe Berechnungen einfach und für jeden zugänglich machen. Alle Rechner werden regelmäßig auf Aktualität geprüft und an die neuesten Werte (Steuersätze, Sozialabgaben, Freibeträge) angepasst.
-            </p>
-            <p>
-              Rechenfix.de finanziert sich durch Werbung und Affiliate-Partnerschaften. Die Rechner-Ergebnisse werden davon nicht beeinflusst.
-            </p>
-          </div>
+      {/* 1. Hero */}
+      <section className="card p-6 md:p-8 mb-8">
+        <div className="prose prose-sm max-w-none text-gray-700 dark:text-gray-300 leading-relaxed">
+          <p className="mb-4">
+            Rechenfix.de ist ein unabhängiges Rechnerportal mit aktuell <strong>170 kostenlosen
+            Online-Rechnern</strong> in neun Kategorien: Alltag, Finanzen, Gesundheit,
+            Auto &amp; Verkehr, Wohnen &amp; Energie, Mathematik, Arbeit &amp; Recht, Kochen
+            und Sport.
+          </p>
+          <p className="mb-4">
+            Alle Berechnungen laufen <strong>direkt in Ihrem Browser</strong> — wir
+            übertragen keine Eingaben auf einen Server, keine Anmeldung ist nötig,
+            keine Daten werden gespeichert. Das Ziel ist einfach: komplexe Berechnungen
+            so zugänglich machen, dass Sie in Sekunden eine belastbare Orientierung
+            bekommen.
+          </p>
+          <p>
+            Eine Besonderheit von Rechenfix ist die KI-gestützte Erklärung
+            („Fix erklärt&rdquo;): Auf Wunsch erläutert eine KI die Berechnung individuell für
+            Ihre konkreten Eingaben — die zugrundeliegenden Formeln und Werte sind
+            jedoch <strong>nicht KI-generiert</strong>, sondern manuell aus
+            Primärquellen gepflegt (siehe <Link href="/qualitaet" className="text-primary-600 dark:text-primary-400 hover:underline">Qualität &amp; Methodik</Link>).
+          </p>
+        </div>
+      </section>
 
-          {/* Qualitätsstandards */}
+      {/* 2. Wer betreibt das Projekt */}
+      <section className="card p-6 md:p-8 mb-8">
+        <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+          Wer steht hinter Rechenfix.de?
+        </h2>
+        <div className="prose prose-sm max-w-none text-gray-700 dark:text-gray-300 leading-relaxed">
+          <p className="mb-4">
+            Rechenfix.de wird von <strong>Karsten Kautz</strong> aus Krefeld als
+            unabhängiges Software-Projekt betrieben. Es gibt kein Team, keinen Verlag,
+            keine Investoren — die Site wird von einer Einzelperson entwickelt,
+            gepflegt und finanziert.
+          </p>
+          <p className="mb-4">
+            Der fachliche Anspruch ist klar abgegrenzt: Karsten Kautz ist Software-Entwickler,
+            kein Steuerberater oder Rechtsanwalt. Die Genauigkeit der Rechner kommt
+            nicht aus persönlicher Beratungs-Expertise, sondern aus disziplinierter Pflege
+            gegen die offiziellen Primärquellen — siehe <Link href="/qualitaet" className="text-primary-600 dark:text-primary-400 hover:underline">Qualität &amp; Methodik</Link>.
+          </p>
+          <p>
+            Vollständige Anbieter-Angaben gemäß § 5 TMG inklusive Anschrift,
+            Telefonnummer und Umsatzsteuer-ID finden Sie im{' '}
+            <Link href="/impressum" className="text-primary-600 dark:text-primary-400 hover:underline">Impressum</Link>.
+          </p>
+        </div>
+      </section>
+
+      {/* 3. Wie wir Genauigkeit sicherstellen */}
+      <section className="card p-6 md:p-8 mb-8">
+        <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+          Wie wir Genauigkeit sicherstellen
+        </h2>
+        <div className="prose prose-sm max-w-none text-gray-700 dark:text-gray-300 leading-relaxed">
+          <p className="mb-4">
+            Rechenfix verwendet einen mehrstufigen Audit-Workflow, um Genauigkeit
+            und Aktualität sicherzustellen. Die Kernpraktiken in Kürze:
+          </p>
+          <ul className="list-disc pl-5 space-y-2 mb-4">
+            <li>
+              <strong>Primärquellen-Pflicht:</strong> Konkrete Werte (Beitragssätze,
+              Freibeträge, Steuersätze, Stichtage) werden gegen offizielle Quellen
+              wie Bundesgesetzblatt, Bundesfinanzministerium oder Statistisches
+              Bundesamt geprüft — nicht aus Sekundärartikeln übernommen.
+            </li>
+            <li>
+              <strong>Verify-Skripte:</strong> Sicherheitskritische Berechnungs-Logik
+              (Steuerformel, Sozialabgaben, Feiertage etc.) wird automatisiert gegen
+              externe Sollwerte getestet, bevor neue Versionen veröffentlicht werden.
+            </li>
+            <li>
+              <strong>Stichtag-Logik:</strong> Werte, die sich zu einem konkreten
+              Datum ändern (z. B. Mindestlohn, Rentenwert, Pfändungsfreigrenze),
+              sind im Code mit Stichtag-Switch hinterlegt — die Site rechnet
+              automatisch zum richtigen Tag mit dem neuen Wert.
+            </li>
+            <li>
+              <strong>Single Source of Truth:</strong> Beitragssätze und gemeinsame
+              Konstanten existieren genau einmal als zentrale Library und werden von
+              allen Rechnern referenziert — nicht pro Rechner dupliziert.
+            </li>
+          </ul>
+          <p>
+            Die ausführliche Darstellung dieses Workflows mit Quellen-Liste und
+            Update-Historie steht auf der Seite{' '}
+            <Link href="/qualitaet" className="text-primary-600 dark:text-primary-400 hover:underline">Qualität &amp; Methodik</Link>.
+          </p>
+        </div>
+      </section>
+
+      {/* 4. Unsere Quellen — Kurzübersicht */}
+      <section className="card p-6 md:p-8 mb-8">
+        <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+          Unsere Quellen (Auswahl)
+        </h2>
+        <p className="text-sm text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
+          Die folgenden Primärquellen werden für die zentralen Themen-Bereiche genutzt.
+          Eine vollständige Liste mit weiterführenden Erläuterungen findet sich auf{' '}
+          <Link href="/qualitaet" className="text-primary-600 dark:text-primary-400 hover:underline">/qualitaet</Link>.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
           <div>
-            <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              Unsere Qualitätsstandards
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-700/30 rounded-xl p-5">
-                <div className="text-2xl mb-2">📅</div>
-                <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-1">Aktuelle Daten (2026)</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Alle Rechner verwenden die aktuellen Werte für Steuersätze, Sozialversicherungsbeiträge, Freibeträge und gesetzliche Regelungen.
-                </p>
-              </div>
-              <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700/30 rounded-xl p-5">
-                <div className="text-2xl mb-2">✅</div>
-                <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-1">Geprüfte Formeln</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Jede Berechnung basiert auf dokumentierten Formeln und wird vor der Veröffentlichung gegen offizielle Quellen und Referenzwerte geprüft.
-                </p>
-              </div>
-              <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700/30 rounded-xl p-5">
-                <div className="text-2xl mb-2">🔄</div>
-                <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-1">Regelmäßige Updates</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Gesetzesänderungen, neue Steuersätze und aktualisierte Grenzwerte werden zeitnah in alle betroffenen Rechner eingepflegt.
-                </p>
-              </div>
-              <div className="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700/30 rounded-xl p-5">
-                <div className="text-2xl mb-2">🔒</div>
-                <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-1">DSGVO-konform</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Alle Berechnungen finden lokal in Ihrem Browser statt. Es werden keine persönlichen Daten an Server übertragen oder gespeichert.
-                </p>
-              </div>
-            </div>
+            <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-1.5">Steuern &amp; Recht</h3>
+            <ul className="list-disc pl-5 space-y-1 text-gray-600 dark:text-gray-400">
+              <li>Bundesfinanzministerium (BMF)</li>
+              <li>Bundesgesetzblatt (BGBl.)</li>
+              <li>gesetze-im-internet.de</li>
+            </ul>
           </div>
-
-          {/* Kontakt */}
           <div>
-            <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              Kontakt
-            </h2>
-            <p className="text-base leading-relaxed mb-3">
-              Sie haben Fragen, Feedback oder einen Fehler entdeckt? Wir freuen uns über Ihre Nachricht.
-            </p>
-            <a
-              href="mailto:info@rechenfix.de"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-              info@rechenfix.de
-            </a>
+            <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-1.5">Sozialversicherung</h3>
+            <ul className="list-disc pl-5 space-y-1 text-gray-600 dark:text-gray-400">
+              <li>GKV-Spitzenverband</li>
+              <li>Deutsche Rentenversicherung</li>
+              <li>BMAS</li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-1.5">Statistik &amp; Wirtschaft</h3>
+            <ul className="list-disc pl-5 space-y-1 text-gray-600 dark:text-gray-400">
+              <li>Statistisches Bundesamt (Destatis)</li>
+              <li>Deutsche Bundesbank</li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-1.5">Wohnen &amp; Energie</h3>
+            <ul className="list-disc pl-5 space-y-1 text-gray-600 dark:text-gray-400">
+              <li>Bundesnetzagentur</li>
+              <li>BDEW</li>
+              <li>KfW</li>
+              <li>Deutscher Mieterbund (Betriebskostenspiegel)</li>
+            </ul>
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* 5. Datenschutz und Transparenz */}
+      <section className="card p-6 md:p-8 mb-8">
+        <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+          Datenschutz und Transparenz
+        </h2>
+        <div className="prose prose-sm max-w-none text-gray-700 dark:text-gray-300 leading-relaxed">
+          <p className="mb-4">
+            <strong>Berechnungen erfolgen lokal in Ihrem Browser.</strong> Eingaben
+            werden nicht an Rechenfix übermittelt, nicht protokolliert und nicht
+            gespeichert. Sie können jeden Rechner nutzen, ohne sich anzumelden, ohne
+            ein Konto anzulegen und ohne Cookies zu akzeptieren.
+          </p>
+          <p className="mb-4">
+            <strong>Werbung und Affiliate-Links:</strong> Rechenfix.de finanziert
+            sich durch Werbeeinblendungen und Affiliate-Partnerschaften. Affiliate-Links
+            sind als solche gekennzeichnet. Die fachlichen Inhalte und Berechnungsergebnisse
+            werden davon nicht beeinflusst — Empfehlungen erfolgen ausschließlich nach
+            thematischer Passung, nicht nach Provisionshöhe.
+          </p>
+          <p>
+            Detaillierte Angaben zur Datenverarbeitung finden Sie in der{' '}
+            <Link href="/datenschutz" className="text-primary-600 dark:text-primary-400 hover:underline">Datenschutzerklärung</Link>.
+          </p>
+        </div>
+      </section>
+
+      {/* 6. Kontakt */}
+      <section className="card p-6 md:p-8 mb-8">
+        <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+          Kontakt
+        </h2>
+        <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
+          Fehler entdeckt, Verbesserungsvorschlag oder Wunsch für einen neuen
+          Rechner? Schreiben Sie an{' '}
+          <a href="mailto:info@rechenfix.de" className="text-primary-600 dark:text-primary-400 hover:underline">
+            info@rechenfix.de
+          </a>
+          . Antwort in der Regel innerhalb von 14 Tagen.
+        </p>
+        <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+          Anbieter-Angaben nach § 5 TMG:{' '}
+          <Link href="/impressum" className="text-primary-600 dark:text-primary-400 hover:underline">Impressum</Link>.
+        </p>
+      </section>
     </div>
   );
 }
