@@ -1261,7 +1261,7 @@ Die **Elternzeit** ist ein gesetzlich garantierter, unbezahlter Freistellungsans
 
 **Anmeldefrist: 7 Wochen oder 13 Wochen vor Beginn**
 
-Die Elternzeit muss beim Arbeitgeber **schriftlich angemeldet** werden. Für Elternzeit in den ersten drei Lebensjahren gilt eine Anmeldefrist von **7 Wochen vor Beginn**. Wer Elternzeit zwischen dem 3. und 8. Geburtstag nehmen möchte, muss sie **13 Wochen vor Beginn** anmelden. Bei der Anmeldung müssen Sie verbindlich festlegen, für welche Zeiträume innerhalb der ersten zwei Jahre Sie Elternzeit nehmen — das sogenannte **Bindungszeitraum**. Danach können Sie flexibler planen. **Wichtig:** Die Anmeldung ist verbindlich — eine nachträgliche Änderung ist nur mit Zustimmung des Arbeitgebers möglich. Für die Mutter wird der **Mutterschutz nach der Geburt (8 bzw. 12 Wochen) automatisch auf die Elternzeit angerechnet** — die Elternzeit der Mutter kann also frühestens nach Ende des Mutterschutzes beginnen. Für den Vater ist die Elternzeit dagegen **direkt ab Geburt** möglich.
+Die Elternzeit muss beim Arbeitgeber **schriftlich angemeldet** werden. Für Elternzeit in den ersten drei Lebensjahren gilt eine Anmeldefrist von **7 Wochen vor Beginn**. Wer Elternzeit zwischen dem 3. und 8. Geburtstag nehmen möchte, muss sie **13 Wochen vor Beginn** anmelden. Bei der Anmeldung müssen Sie verbindlich festlegen, für welche Zeiträume innerhalb der ersten zwei Jahre Sie Elternzeit nehmen — der sogenannte **verbindliche Festlegungszeitraum** (juristisch auch: Bindungswirkung der Anmeldung). Danach können Sie flexibler planen. **Wichtig:** Die Anmeldung ist verbindlich — eine nachträgliche Änderung ist nur mit Zustimmung des Arbeitgebers möglich. Für die Mutter wird der **Mutterschutz nach der Geburt (8 bzw. 12 Wochen) automatisch auf die Elternzeit angerechnet** — die Elternzeit der Mutter kann also frühestens nach Ende des Mutterschutzes beginnen. Für den Vater ist die Elternzeit dagegen **direkt ab Geburt** möglich.
 
 **Aufteilung zwischen Partnern & Partnermonate**
 
@@ -1285,7 +1285,7 @@ Unser [Teilzeit-Rechner](/arbeit/teilzeit-rechner) hilft beim Kalkulieren des re
 2. **Mutterschutz berechnen** — siehe [Mutterschutz-Rechner](/arbeit/mutterschutz-rechner)
 3. **Elternzeit beim Arbeitgeber anmelden** — schriftlich, 7 Wochen vor Beginn
 4. **Elterngeld beantragen** — spätestens 3 Monate nach Geburt bei der Elterngeldstelle
-5. **Bindungszeitraum festlegen** — welche Monate in den ersten 2 Jahren fest, welche flexibel
+5. **Verbindlichen Festlegungszeitraum bestimmen** — welche Monate in den ersten 2 Jahren fest, welche flexibel
 
 Denken Sie daran: Die Elternzeit läuft **kalendarisch** — auch Wochenenden und Feiertage zählen. Urlaubstage, die Sie vor der Elternzeit nicht genommen haben, dürfen **nach der Elternzeit übertragen** werden (§ 17 BEEG).`,
     faq: [
@@ -1295,6 +1295,14 @@ Denken Sie daran: Die Elternzeit läuft **kalendarisch** — auch Wochenenden un
       { frage: 'Wie wird der Mutterschutz auf die Elternzeit angerechnet?', antwort: 'Die 8 Wochen (bzw. 12 Wochen bei Früh-/Mehrlingsgeburt) Mutterschutz nach der Geburt werden vollständig auf die Elternzeit der Mutter angerechnet. Die Elternzeit der Mutter beginnt frühestens nach Ende des Mutterschutzes. Für den Vater gibt es diese Anrechnung nicht — seine Elternzeit kann direkt ab Geburt beginnen.' },
       { frage: 'Habe ich während der Elternzeit Kündigungsschutz?', antwort: 'Ja, nach § 18 BEEG besteht ein besonderer Kündigungsschutz ab Anmeldung der Elternzeit (frühestens 8 Wochen vor Beginn) bis zum Ende der Elternzeit. Eine Kündigung ist nur in absoluten Ausnahmefällen mit Zustimmung der zuständigen Landesbehörde zulässig — auch in der Probezeit und unabhängig von der Betriebsgröße.' },
       { frage: 'Was sind Partnermonate?', antwort: 'Für die vollen 14 Monate Basiselterngeld muss jeder Elternteil mindestens 2 Monate Elternzeit nehmen (die sogenannten Partnermonate). Nimmt nur ein Elternteil Elternzeit, gibt es maximal 12 Monate Elterngeld. Die Elternzeit kann auch länger dauern, aber ab dem 15. Monat unbezahlt.' },
+      {
+        frage: 'Wird mein Urlaub während der Elternzeit gekürzt?',
+        antwort: 'Der Arbeitgeber darf den Erholungsurlaub für jeden vollen Kalendermonat Elternzeit um ein Zwölftel kürzen (§ 17 Abs. 1 BEEG). Es ist ein Wahlrecht des Arbeitgebers, kein Automatismus — er muss die Kürzung gegenüber dem Arbeitnehmer ausdrücklich erklären. Übt der Arbeitgeber das Recht nicht aus, bleibt der volle Urlaubsanspruch bestehen. Die Kürzung greift nur bei vollen Kalendermonaten Elternzeit; angefangene Monate bleiben unberührt.',
+      },
+      {
+        frage: 'Kann ich die Elternzeit in mehrere Abschnitte aufteilen?',
+        antwort: 'Ja. § 16 Abs. 1 BEEG erlaubt die Aufteilung der Elternzeit in bis zu drei Zeitabschnitte je Elternteil. Der dritte Abschnitt kann auch zwischen dem dritten und achten Geburtstag des Kindes liegen — er ist nicht an die ersten drei Lebensjahre gebunden. Für eine Aufteilung in mehr als drei Abschnitte ist die Zustimmung des Arbeitgebers erforderlich.',
+      },
     ],
   },
   {
