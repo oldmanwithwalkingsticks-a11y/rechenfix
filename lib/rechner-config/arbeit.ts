@@ -696,6 +696,18 @@ Für die Planung Ihres verbleibenden Urlaubs nutzen Sie unseren [Urlaubstage-Rec
         frage: 'Was muss ich tun, wenn mir gekündigt wird?',
         antwort: 'Drei Sofortmaßnahmen: 1. Melden Sie sich innerhalb von 3 Tagen bei der Agentur für Arbeit arbeitssuchend (sonst droht Sperrzeit). 2. Prüfen Sie die Kündigung auf Formfehler (muss schriftlich sein, § 623 BGB). 3. Wenn Sie die Kündigung anfechten möchten, reichen Sie innerhalb von 3 Wochen eine Kündigungsschutzklage beim Arbeitsgericht ein.',
       },
+      {
+        frage: 'Werden Beschäftigungszeiten vor dem 25. Lebensjahr mitgezählt?',
+        antwort: 'Ja. § 622 Abs. 2 S. 2 BGB sieht zwar vor, dass Beschäftigungszeiten vor Vollendung des 25. Lebensjahres bei der Berechnung der gestaffelten Kündigungsfristen unberücksichtigt bleiben. Diese Regelung wurde aber vom Europäischen Gerichtshof in der Entscheidung Kücükdeveci (C-555/07 vom 19.01.2010) für unionsrechtswidrig erklärt — sie verstößt gegen das Verbot der Altersdiskriminierung. Praktisch bedeutet das: Alle Beschäftigungszeiten zählen, auch die vor dem 25. Lebensjahr. Der Rechner berücksichtigt das automatisch, wenn Sie Ihre vollständige Beschäftigungsdauer eingeben.',
+      },
+      {
+        frage: 'Gibt es Sonderregelungen für kleine Betriebe?',
+        antwort: 'Ja. Nach § 622 Abs. 5 Nr. 2 BGB können Arbeitgeber mit höchstens 20 Arbeitnehmern (Auszubildende zählen nicht mit) in den ersten zwei Jahren der Beschäftigung eine vereinfachte Kündigungsfrist von vier Wochen ohne Termin-Bindung vereinbaren — also kein Zwang, zum 15. oder Monatsende zu kündigen. Die Vereinbarung muss arbeits- oder tarifvertraglich erfolgen; sie greift nicht automatisch.',
+      },
+      {
+        frage: 'Wie weise ich nach, dass die Kündigung zugegangen ist?',
+        antwort: 'Maßgeblich ist die tatsächliche Zustellung an den Empfänger, nicht das Absenden. Das Bundesarbeitsgericht hat im Urteil vom 30.01.2025 (Az. 2 AZR 68/24) klargestellt: Der Online-Sendungsstatus eines Postdienstleisters reicht als Zugangsbeweis nicht aus. Erforderlich ist der unterschriebene Auslieferungsbeleg (Einschreiben mit Rückschein) oder die persönliche Übergabe gegen Empfangsquittung. Wichtig ist das insbesondere für die Berechnung der dreiwöchigen Klagefrist nach § 4 KSchG, die mit dem Zugang zu laufen beginnt.',
+      },
     ],
   },
   {
@@ -820,6 +832,10 @@ Die Verhandlungsposition hängt maßgeblich davon ab, ob die Kündigung vor dem 
 - Sonderkündigungsschutz (Schwangerschaft, Schwerbehinderung, Betriebsrat)
 - Drohende Kündigungsschutzklage mit guten Erfolgsaussichten
 
+**Aufrundung angefangener Jahre**
+
+Nach § 1a Abs. 2 S. 3 KSchG werden Beschäftigungs-Restzeiten von mehr als sechs Monaten auf ein volles Jahr aufgerundet. Beispiel: 7 Jahre und 7 Monate ergeben in der Berechnungsbasis 8 Jahre. Bei genau sechs Monaten oder weniger wird das angefangene Jahr nicht berücksichtigt.
+
 Für die Berechnung Ihrer Kündigungsfrist nutzen Sie unseren [Kündigungsfrist-Rechner](/arbeit/kuendigungsfrist-rechner). Eine detaillierte Netto-Berechnung Ihres regulären Gehalts finden Sie im [Brutto-Netto-Rechner](/finanzen/brutto-netto-rechner), und mit dem [Steuererstattungs-Rechner](/finanzen/steuererstattung-rechner) können Sie Ihre voraussichtliche Steuerrückerstattung berechnen.`,
     faq: [
       {
@@ -845,6 +861,10 @@ Für die Berechnung Ihrer Kündigungsfrist nutzen Sie unseren [Kündigungsfrist-
       {
         frage: 'Muss ich Sozialversicherungsbeiträge auf die Abfindung zahlen?',
         antwort: 'Nein. Echte Abfindungen für den Verlust des Arbeitsplatzes sind sozialversicherungsfrei — es fallen keine Beiträge zur Kranken-, Renten-, Pflege- oder Arbeitslosenversicherung an. Nur Einkommensteuer, ggf. Solidaritätszuschlag und Kirchensteuer werden fällig.',
+      },
+      {
+        frage: 'Wie werden angefangene Jahre bei der Abfindung berechnet?',
+        antwort: 'Nach § 1a Abs. 2 S. 3 KSchG werden Beschäftigungs-Restzeiten von mehr als sechs Monaten auf ein volles Jahr aufgerundet. Beispiel: 7 Jahre und 7 Monate Beschäftigung werden als 8 Jahre gerechnet. Bei genau sechs Monaten oder weniger wird das angefangene Jahr nicht berücksichtigt. Die Aufrundungsregel gilt für die gesetzliche Abfindung nach § 1a KSchG; bei Aufhebungsverträgen oder Sozialplänen können andere Regelungen vereinbart werden.',
       },
     ],
   },
