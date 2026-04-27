@@ -1211,7 +1211,11 @@ Neben dem Tabellenunterhalt gibt es **Sonderbedarf** (einmalige, außergewöhnli
 
 Mit dem **Angehörigen-Entlastungsgesetz vom 10.12.2019** (in Kraft seit 01.01.2020, § 94 Abs. 1a SGB XII) hat sich der Elternunterhalt grundlegend geändert. Erwachsene Kinder können erst dann zum Elternunterhalt herangezogen werden, wenn ihr **Bruttojahreseinkommen 100.000 €** übersteigt — und zwar **pro Kind einzeln** geprüft, nicht als Familieneinkommen. Liegt das Einkommen darunter, übernimmt der Sozialhilfeträger die ungedeckten Heim- oder Pflegekosten der Eltern, ohne Rückforderung beim Kind.
 
-Wird die 100.000-€-Schwelle überschritten, wird der Elternunterhalt nach der **„Hälfte über Selbstbehalt"-Methode** berechnet: Vom bereinigten Nettoeinkommen wird der **Selbstbehalt von 2.000 €** (Düsseldorfer Tabelle 2026) abgezogen, **die Hälfte des Überschusses** ist als Elternunterhalt zu zahlen — nicht mehr 30 % wie vor 2020 und nicht mehr ab dem alten Selbstbehalt von 2.650 €. Beispiel: Bruttojahreseinkommen 110.000 €, bereinigtes Netto 5.000 €/Monat → (5.000 − 2.000) × 50 % = 1.500 €/Monat. Wer den eigenen Bedarf prüfen möchte, kann den [Pfändungsrechner](/finanzen/pfaendungsrechner) zur groben Orientierung über das pfändungsfreie Existenzminimum nutzen.`,
+Wird die 100.000-€-Schwelle überschritten, wird der Elternunterhalt nach der **„Hälfte über Selbstbehalt"-Methode** berechnet: Vom bereinigten Nettoeinkommen wird der **Selbstbehalt von 2.000 €** (Düsseldorfer Tabelle 2026) abgezogen, **die Hälfte des Überschusses** ist als Elternunterhalt zu zahlen — nicht mehr 30 % wie vor 2020 und nicht mehr ab dem alten Selbstbehalt von 2.650 €. Beispiel: Bruttojahreseinkommen 110.000 €, bereinigtes Netto 5.000 €/Monat → (5.000 − 2.000) × 50 % = 1.500 €/Monat. Wer den eigenen Bedarf prüfen möchte, kann den [Pfändungsrechner](/finanzen/pfaendungsrechner) zur groben Orientierung über das pfändungsfreie Existenzminimum nutzen.
+
+**Rechtsgrundlage der Mindestunterhalts-Werte**
+
+Die Mindestunterhaltsbeträge der Düsseldorfer Tabelle 2026 basieren auf der 7. Mindestunterhaltsverordnung (7. MUVÄndV) vom 15.11.2024, BGBl. 2024 I Nr. 359. Sie beträgt 482 € (1. Altersstufe), 554 € (2. Altersstufe) und 649 € (3. Altersstufe) und entspricht 100 % der DT.`,
     faq: [
       { frage: 'Wie viel Kindesunterhalt muss ich 2026 zahlen?', antwort: 'Die Höhe richtet sich nach dem bereinigten Nettoeinkommen und dem Alter des Kindes. Bei 3.000 € Netto und einem 8-jährigen Kind ergibt sich nach Düsseldorfer Tabelle 2026 Einkommensgruppe 4 ein Tabellenbetrag von 642 € — minus 129,50 € hälftiges Kindergeld = 513 € Zahlbetrag. Unser Rechner zeigt den genauen Wert für Ihre Situation.' },
       { frage: 'Was ist die Düsseldorfer Tabelle?', antwort: 'Die Düsseldorfer Tabelle ist eine Leitlinie zur Berechnung des Kindesunterhalts in Deutschland, herausgegeben vom OLG Düsseldorf. Sie enthält Einkommensgruppen und Altersstufen und wird jährlich an die Entwicklung des Mindestbedarfs angepasst. Gerichte orientieren sich bundesweit an dieser Tabelle.' },
@@ -1224,6 +1228,18 @@ Wird die 100.000-€-Schwelle überschritten, wird der Elternunterhalt nach der 
       {
         frage: 'Muss ich für meine Eltern Unterhalt zahlen?',
         antwort: 'Seit dem Angehörigen-Entlastungsgesetz vom 10.12.2019 (§ 94 Abs. 1a SGB XII) gilt: Elternunterhalt wird erst ab einem Bruttojahreseinkommen von über 100.000 € pro Kind fällig. Liegt Ihr Einkommen darunter, übernimmt die Sozialhilfe die ungedeckten Pflege- oder Heimkosten Ihrer Eltern komplett. Über 100.000 € werden nach der „Hälfte über Selbstbehalt"-Methode 50 % des Überschusses des bereinigten Nettos über den Selbstbehalt von 2.000 € (DT 2026) als Unterhalt fällig — die alte 30 %-Formel und der alte 2.650-€-Selbstbehalt sind seit 2020 nicht mehr aktuell.',
+      },
+      {
+        frage: 'Was gilt bei sehr hohem Einkommen?',
+        antwort: 'Die Düsseldorfer Tabelle deckt das Nettoeinkommen bis 11.200 € ab. Liegt das bereinigte Nettoeinkommen darüber, gibt es nach § 1610 BGB keine schematische Fortschreibung der Tabelle: Stattdessen ist der konkrete Bedarf des Kindes individuell zu beziffern. Maßgeblich sind tatsächliche Lebensverhältnisse, Schul- und Freizeitkosten, Privatschule, Auslandsaufenthalte. Praxis: Detaillierte Aufstellung statt pauschalierter Quote.',
+      },
+      {
+        frage: 'Wann ändert sich der Unterhalt durch einen Geburtstag?',
+        antwort: 'Die Düsseldorfer Tabelle hat drei Altersstufen (0–5, 6–11, 12–17 Jahre). Beim Übergang in die nächste Stufe gilt nach § 1612a Abs. 3 BGB: Der höhere Unterhalt ist bereits für den ganzen Monat des Geburtstags zu zahlen — nicht erst ab dem Folgemonat. Beispiel: Wird das Kind am 20. März 12 Jahre alt, gilt der höhere Stufe-3-Betrag bereits für den gesamten März.',
+      },
+      {
+        frage: 'Welche Wohnkosten stecken im Selbstbehalt?',
+        antwort: 'Der notwendige Selbstbehalt nach DT 2026 (1.450 € erwerbstätig / 1.200 € nicht erwerbstätig gegenüber minderjährigen Kindern) enthält pauschal 390 € Kaltmiete plus 130 € Nebenkosten und Heizung — zusammen 520 € Wohnkosten. Wer höhere tatsächliche Wohnkosten nachweist, kann eine Erhöhung des Selbstbehalts geltend machen, soweit die Mehrkosten nicht durch günstigeren Wohnraum vermeidbar wären.',
       },
     ],
   },
