@@ -4,11 +4,11 @@ import { useState, useMemo } from 'react';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { getFeiertage, type Feiertag, type Bundesland } from '@/lib/berechnungen/feiertage';
 
 type Modus = 'monat' | 'zeitraum' | 'jahr';
-type BL = 'bw' | 'by' | 'be' | 'bb' | 'hb' | 'hh' | 'he' | 'mv' | 'ni' | 'nw' | 'rp' | 'sl' | 'sn' | 'st' | 'sh' | 'th';
 
-const BUNDESLAENDER: { slug: BL; name: string }[] = [
+const BUNDESLAENDER: { slug: Bundesland; name: string }[] = [
   { slug: 'bw', name: 'Baden-Württemberg' },
   { slug: 'by', name: 'Bayern' },
   { slug: 'be', name: 'Berlin' },
@@ -27,67 +27,45 @@ const BUNDESLAENDER: { slug: BL; name: string }[] = [
   { slug: 'th', name: 'Thüringen' },
 ];
 
-// Feiertage 2026 (Datum im Format MM-DD) + Länder-Liste. 'alle' = bundesweit.
-type Feiertag = { datum: string; name: string; laender: 'alle' | BL[] };
+const MONATE = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
 
-const FEIERTAGE_2026: Feiertag[] = [
-  { datum: '01-01', name: 'Neujahr', laender: 'alle' },
-  { datum: '01-06', name: 'Heilige Drei Könige', laender: ['bw', 'by', 'st'] },
-  { datum: '03-08', name: 'Internationaler Frauentag', laender: ['be', 'mv'] },
-  { datum: '04-03', name: 'Karfreitag', laender: 'alle' },
-  { datum: '04-06', name: 'Ostermontag', laender: 'alle' },
-  { datum: '05-01', name: 'Tag der Arbeit', laender: 'alle' },
-  { datum: '05-14', name: 'Christi Himmelfahrt', laender: 'alle' },
-  { datum: '05-25', name: 'Pfingstmontag', laender: 'alle' },
-  { datum: '06-04', name: 'Fronleichnam', laender: ['bw', 'by', 'he', 'nw', 'rp', 'sl'] },
-  { datum: '08-15', name: 'Mariä Himmelfahrt', laender: ['sl'] },
-  { datum: '09-20', name: 'Weltkindertag', laender: ['th'] },
-  { datum: '10-03', name: 'Tag der Deutschen Einheit', laender: 'alle' },
-  { datum: '10-31', name: 'Reformationstag', laender: ['bb', 'hb', 'hh', 'mv', 'ni', 'sn', 'st', 'sh', 'th'] },
-  { datum: '11-01', name: 'Allerheiligen', laender: ['bw', 'by', 'nw', 'rp', 'sl'] },
-  { datum: '11-18', name: 'Buß- und Bettag', laender: ['sn'] },
-  { datum: '12-25', name: '1. Weihnachtstag', laender: 'alle' },
-  { datum: '12-26', name: '2. Weihnachtstag', laender: 'alle' },
-];
+const JAHR_OPTIONEN = ['2024', '2025', '2026', '2027', '2028', '2029', '2030'];
 
-function isFeiertag(date: Date, bl: BL): Feiertag | null {
-  const m = String(date.getMonth() + 1).padStart(2, '0');
-  const d = String(date.getDate()).padStart(2, '0');
-  const key = `${m}-${d}`;
-  for (const f of FEIERTAGE_2026) {
-    if (f.datum === key && (f.laender === 'alle' || f.laender.includes(bl))) return f;
+function countArbeitstage(start: Date, end: Date, bl: Bundesland, arbeitstageProWoche: number[]) {
+  // Feiertage aller berührten Jahre vorab in Map cachen (Modus 'zeitraum'
+  // kann Jahresgrenzen überschreiten)
+  const feiertageMap = new Map<string, Feiertag>();
+  for (let j = start.getFullYear(); j <= end.getFullYear(); j++) {
+    for (const f of getFeiertage(j, bl)) {
+      const key = `${f.datum.getFullYear()}-${f.datum.getMonth()}-${f.datum.getDate()}`;
+      feiertageMap.set(key, f);
+    }
   }
-  return null;
-}
 
-function countArbeitstage(start: Date, end: Date, bl: BL, arbeitstageProWoche: number[]) {
   let at = 0;
   let wt = 0;
   let ft = 0;
-  const feiertage: { datum: string; name: string }[] = [];
+  const feiertageListe: { datum: string; name: string }[] = [];
   const d = new Date(start);
   while (d <= end) {
     const tag = d.getDay(); // 0=So 1=Mo…6=Sa
     const istArbeitswerktag = arbeitstageProWoche.includes(tag);
     if (tag !== 0 && tag !== 6) wt++;
-    const fe = isFeiertag(d, bl);
-    if (fe) {
-      if (tag !== 0 && tag !== 6) {
-        ft++;
-        feiertage.push({ datum: d.toLocaleDateString('de-DE'), name: fe.name });
-      }
+    const key = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+    const fe = feiertageMap.get(key);
+    if (fe && tag !== 0 && tag !== 6) {
+      ft++;
+      feiertageListe.push({ datum: d.toLocaleDateString('de-DE'), name: fe.name });
     }
     if (istArbeitswerktag && !fe) at++;
     d.setDate(d.getDate() + 1);
   }
-  return { arbeitstage: at, werktage: wt, feiertage: ft, feiertageListe: feiertage };
+  return { arbeitstage: at, werktage: wt, feiertage: ft, feiertageListe };
 }
-
-const MONATE = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
 
 export default function ArbeitstageRechner() {
   const [modus, setModus] = useState<Modus>('monat');
-  const [bl, setBl] = useState<BL>('nw');
+  const [bl, setBl] = useState<Bundesland>('nw');
   const [jahr, setJahr] = useState('2026');
   const [monat, setMonat] = useState('1');
   const [von, setVon] = useState('2026-01-01');
@@ -130,7 +108,7 @@ export default function ArbeitstageRechner() {
       <div className="space-y-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-6">
         <div>
           <label htmlFor="arbeitstage-select-1" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Bundesland</label>
-          <select id="arbeitstage-select-1" value={bl} onChange={e => setBl(e.target.value as BL)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+          <select id="arbeitstage-select-1" value={bl} onChange={e => setBl(e.target.value as Bundesland)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
             {BUNDESLAENDER.map(b => <option key={b.slug} value={b.slug}>{b.name}</option>)}
           </select>
         </div>
@@ -146,7 +124,7 @@ export default function ArbeitstageRechner() {
             <div>
               <label htmlFor="arbeitstage-select-3" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Jahr</label>
               <select id="arbeitstage-select-3" value={jahr} onChange={e => setJahr(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
-                <option value="2026">2026</option>
+                {JAHR_OPTIONEN.map(j => <option key={j} value={j}>{j}</option>)}
               </select>
             </div>
           </div>
@@ -156,7 +134,7 @@ export default function ArbeitstageRechner() {
           <div>
             <label htmlFor="arbeitstage-select-4" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Jahr</label>
             <select id="arbeitstage-select-4" value={jahr} onChange={e => setJahr(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
-              <option value="2026">2026</option>
+              {JAHR_OPTIONEN.map(j => <option key={j} value={j}>{j}</option>)}
             </select>
           </div>
         )}
