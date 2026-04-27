@@ -342,7 +342,11 @@ Die Pendlerpauschale wird in der Einkommensteuererklärung als Werbungskosten ei
 - Der **Arbeitnehmer-Pauschbetrag** von 1.230 € (Stand 2026) wird automatisch berücksichtigt. Die Pendlerpauschale lohnt sich erst, wenn sie zusammen mit anderen Werbungskosten diesen Betrag übersteigt.
 - Belege aufbewahren: Das Finanzamt kann Nachweise verlangen (z. B. Routenplaner-Ausdruck, Bescheinigung des Arbeitgebers über Homeoffice-Tage).
 
-Bei einem Arbeitsplatzwechsel im laufenden Jahr können die Pendlerpauschalen für beide Arbeitsstätten separat berechnet und addiert werden. Bei mehreren Tätigkeitsstätten wird nur die Entfernung zur ersten Tätigkeitsstätte berücksichtigt.`,
+Bei einem Arbeitsplatzwechsel im laufenden Jahr können die Pendlerpauschalen für beide Arbeitsstätten separat berechnet und addiert werden. Bei mehreren Tätigkeitsstätten wird nur die Entfernung zur ersten Tätigkeitsstätte berücksichtigt.
+
+**Mobilitätsprämie für Geringverdiener**
+
+Wer unter dem Grundfreibetrag (12.348 € in 2026) verdient, zahlt keine Einkommensteuer und profitiert daher nicht von der Pendlerpauschale als Werbungskosten-Abzug. Für diese Steuerpflichtigen wurde mit dem Steueränderungsgesetz 2025 (BGBl. I 2025 Nr. 363) die Mobilitätsprämie nach § 101 EStG unbefristet eingeführt: 14 % der Pendlerpauschalen ab dem 21. Kilometer als Direktauszahlung mit dem Steuerbescheid.`,
     faq: [
       {
         frage: 'Wie hoch ist die Pendlerpauschale 2026?',
@@ -367,6 +371,10 @@ Bei einem Arbeitsplatzwechsel im laufenden Jahr können die Pendlerpauschalen f�
       {
         frage: 'Wo trage ich die Pendlerpauschale in der Steuererklärung ein?',
         antwort: 'In der Anlage N (Einkünfte aus nichtselbständiger Arbeit), Zeile 31 ff. Geben Sie die Adresse der Arbeitsstätte, die Entfernung in km, die Anzahl der Arbeitstage und das genutzte Verkehrsmittel an.',
+      },
+      {
+        frage: 'Was, wenn ich keine Steuern zahle?',
+        antwort: 'Wer mit seinem zu versteuernden Einkommen unter dem Grundfreibetrag von 12.348 € (2026) liegt, zahlt keine Einkommensteuer und kann die Pendlerpauschale steuerlich nicht absetzen. In diesem Fall greift die Mobilitätsprämie nach § 101 EStG: Sie beträgt 14 % der Pendlerpauschalen ab dem 21. Kilometer und wird zusammen mit dem Steuerbescheid ausgezahlt. Die Mobilitätsprämie wurde durch das Steueränderungsgesetz 2025 (BGBl. I 2025 Nr. 363) unbefristet verlängert.',
       },
     ],
   },
