@@ -8,6 +8,48 @@
 
 ---
 
+## Welle 3 — Item 151 (28.04.2026, ABGESCHLOSSEN)
+
+**Scope:** P3-Sammelbatch Block A — 17 Memory-priorisierte Items aus dem Audit-Bericht `welle2-stufe3-arbeit-blockA-audit.md`. Reine Konfig-Text-Updates in arbeit.ts (alle 5 Cluster). arbeitslosengeld-rechner-Items blieben in 151 außen vor — siehe Sammelrest.
+
+**Aufteilung in 5 atomare Code-Commits + 1 Doku-Sync:**
+
+- **151a (Commit b268b93) pendlerpauschale:** Mobilitätsprämie § 101 EStG (StÄndG 2025, BGBl. I 2025 Nr. 363) — neue FAQ + Erklärtext-Absatz für Geringverdiener unter Grundfreibetrag.
+- **151b (Commit e7121d2) kuendigungsfrist + abfindung:** EuGH Kücükdeveci (C-555/07), § 622 Abs. 5 Nr. 2 BGB Kleinbetriebs-Ausnahme, BAG 2 AZR 68/24 Zugangsbeweis (Online-Sendungsstatus reicht nicht), § 1a Abs. 2 S. 3 KSchG Aufrundung > 6 Mon → volles Jahr.
+- **151c (Commit 17ca6bd) mutterschutz-Restpolish:** Frühgeburt-Definition (< 2.500 g / fehlende Reifezeichen), Muster 9 ab 01.01.2026, 99-Tage-Mindestschutz § 3 Abs. 2 MuSchG, Schülerinnen/Studentinnen seit 01.01.2018, Totgeburt-Sonderregelung (≥ 500 g / 24. SSW: 8 Wo, kein Mehrlingsbonus). Erklärtext-Aufzählung um Schülerinnen/Studentinnen ergänzt.
+- **151d (Commit d7a277d) unterhalt:** § 1610 BGB konkrete Bedarfsberechnung > NEK 11.200 €, § 1612a Abs. 3 BGB Alterssprung, Selbstbehalt-Wohnkosten DT 2026 spezifisch (390 + 130 € statt 520 € pauschal), 7. MUVÄndV 15.11.2024 (BGBl. 2024 I Nr. 359) als Rechtsquelle der Mindestunterhalts-Werte.
+- **151e (Commit 4e5b7d0) elternzeit:** § 17 Abs. 1 BEEG Urlaubskürzung 1/12 (AG-Wahlrecht), § 16 Abs. 1 BEEG bis zu 3 Zeitabschnitte, Terminologie-Fix „Bindungszeitraum" → „verbindlicher Festlegungszeitraum" (2x). Pre-Check ergab: „30 Stunden"-Erwähnungen 2x als bewusster historischer Hinweis (BEEG-Reform 01.09.2021, vorher 30 h) — kein Restposten von 150c, bewusst belassen.
+
+**Methodik-Lehre 28 (Audit-Cluster nach Memory-Priorität, 28.04.2026):** Wenn ein Audit mehr P3-Items enthält als der Memory-Backlog priorisiert, gilt die Memory-Auswahl als Scope-Definition. Nicht-priorisierte Items (im Audit als „Sammelrest" markiert) bleiben im Backlog für eine spätere Welle. Vorteil: kein Scope-Creep beim Sammelbatch, klare Soll-Erwartung bei Pre-Check und Commit-Anzahl.
+
+**151-Sammelrest (offen, niedrige Priorität):**
+
+Aus dem Block-A-Audit blieben ~25 weitere P3-Items außerhalb der Memory-17-Liste — überwiegend Norm-Zitierungs-Polish, Edge-Case-FAQs und SSOT-Refactor-Kandidaten:
+
+- A1 pendlerpauschale: P3-A1-2 (Norm-Zitat „§ 9 Abs. 1 Satz 3 Nr. 4 EStG" präziser), P3-A1-3 (SSOT-Konstante 0,38 €/km mit Stichtag-Switch)
+- A2 kuendigungsfrist: P3-A2-3 (§ 169 SGB IX Schwerbehinderten-Frist), P3-A2-4 (§ 113 InsO Insolvenz-Höchstfrist 3 Mon)
+- A3 abfindung: P3-A3-2 (§§ 9, 10 KSchG gerichtliche Auflösung 12/15/18 Monatsverdienste), P3-A3-3 (3-Wo-Klagefrist § 4 KSchG explizit)
+- A5 scheidungskosten: 5 Items (Härtefall § 1565 Abs. 2 BGB, VA-Mindest-VW 1.000 €, Folgesachen-Faustwert-Hinweis, VKH-Werte präzisieren, RVG Auslagen-Cap)
+- A6 zugewinnausgleich: 4 Items (§ 1379 Auskunftsanspruch, § 1375 Abs. 2 illoyale Vermögensminderung, § 1385 vorzeitiger Ausgleich, Beispiele Indexierung sichtbar)
+- A7 unterhalt: P3-A7-1 (Bsp „bereinigtes" klarstellen)
+- A8 arbeitslosengeld: 5 Items (§ 153 SGB III, § 147 SGB III, Höchstsatz ~2.940 €, Stkl-Stichtag 01.01., § 155 SGB III Nebenverdienstfreibetrag) — in finanzen.ts
+- A10 ehegattenunterhalt: 5 Items (Halbteilung Nicht-Erwerbseinkünfte, § 1574 Erwerbsobliegenheit, § 1577 Anrechnung, § 1573 Abs. 4 Anschlussunterhalt, Bsp mit Kindesunterhalt)
+
+Trigger zum Aufgreifen: separater Sprint, ggf. zusammen mit dem Validation-Sweep oder als „151-extension" in einer ruhigeren Session.
+
+**Welle-3-Backlog nach 151:**
+1. ~~152b — feiertage.ts SSOT~~ ✅
+2. ~~154 — LazySection-Removal~~ ✅
+3. ~~155 — Über-uns ausgebaut~~ ✅
+4. ~~156 — `/qualitaet` neu~~ ✅
+5. ~~151 — Block-A-P3-Sammelbatch (17 priorisierte)~~ ✅
+6. 150e — Süd-OLG-UI-Toggle ehegattenunterhalt
+7. 151-Sammelrest (~25 nicht-priorisierte P3-Items)
+8. P3-B1 — ueberstunden-Netto-Refactor mit Steuerklasse
+9. Validation-Sweep
+
+---
+
 ## Welle 3 — Items 155 + 156 (28.04.2026, ABGESCHLOSSEN)
 
 **Scope:** E-E-A-T-Härtung im Anschluss an AdSense-Reparatur 154.
