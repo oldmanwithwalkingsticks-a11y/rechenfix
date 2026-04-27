@@ -4,7 +4,39 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 27.04.2026
+**Stand:** 28.04.2026
+
+---
+
+## Welle 3 — Items 155 + 156 (28.04.2026, ABGESCHLOSSEN)
+
+**Scope:** E-E-A-T-Härtung im Anschluss an AdSense-Reparatur 154.
+
+**Hintergrund:** 154 hat das akute Content-Volumen-Problem behoben (Stichprobe nach Deploy: brutto-netto-rechner 5.497 → 13.033 chars sichtbarer Text, urlaubstage-rechner 10.050 chars, bmi-rechner 8.171 chars). 155+156 ergänzen die formalen Trust-Signale für YMYL-Themen — proaktiv, ohne auf das Re-Review-Ergebnis von 154 zu warten.
+
+### 155 (Commit 1a6e6ed) — `/ueber-uns` ausgebaut
+
+Bestehende Seite von ~2,2 KB auf ~7 KB sichtbarem Text erweitert. Sechs Sektionen: Hero, Solo-Founder-Statement mit klarer Abgrenzung zur Steuer-/Rechtsberater-Rolle, Audit-Workflow-Überblick, Quellenliste-Kurzfassung, Datenschutz-/Werbe-Transparenz, Kontakt. Cross-Links zu `/qualitaet`, `/impressum`, `/datenschutz`.
+
+### 156 (Commit fecadc4) — `/qualitaet` neu angelegt
+
+Neue statische Server-Component-Seite mit sieben Sektionen: Hero, Audit-Workflow (4-Punkt-Audit, Welle-Sprints), Primärquellen-Liste (gegliedert nach 6 Themenbereichen), Stichtag-Logik (Mindestlohn 14,60 € ab 01.01.2027, Rentenwert 42,52 € ab 01.07.2026, Pfändungsfreigrenze 1.587,40 € ab 01.07.2026, § 3d KraftStG bis 31.12.2035), A11y-Status (Lighthouse 100/100, axe 0 Findings, BFSG), Datenschutz/Performance, Disclaimer („Was Rechenfix nicht ist" — keine Steuer-/Rechts-/Medizin-/Anlageberatung).
+
+Footer-Link „Qualität &amp; Methodik" ergänzt vor `/barrierefreiheit`.
+
+**Verifikation:** Stichprobe nach Deploy zeigt erwartet `/ueber-uns` ≥ 5,5 K chars, `/qualitaet` ≥ 8 K chars sichtbaren Text.
+
+**Methodik-Lehre 28 (E-E-A-T-Substanz aus Memory rekonstruieren, 28.04.2026):** Trust-Signale für AdSense / YMYL erfordern öffentlich sichtbare Darstellung des Audit-Workflows, der Primärquellen und der Stichtag-Logik. Diese Substanz war bei Rechenfix bereits in der Audit-Methodik vorhanden, aber nur intern (in `welle-status-historie.md`, in `CLAUDE.md`, in den Verify-Skripten) dokumentiert. Auf eine öffentliche Quality-Page übertragen: kein neuer Audit-Aufwand, nur Sichtbar-Machen. Empfehlung für künftige Sites: Audit-Workflow von Anfang an mit öffentlicher Doku-Spur planen.
+
+**Welle-3-Backlog nach 156:**
+1. ~~152b — feiertage.ts SSOT~~ ✅
+2. ~~154 — LazySection-Removal~~ ✅
+3. ~~155 — Über-uns ausgebaut~~ ✅
+4. ~~156 — `/qualitaet` neu~~ ✅
+5. 151 — Block-A-P3-Sammelbatch (17 Items)
+6. 150e — Süd-OLG-UI-Toggle ehegattenunterhalt
+7. Validation-Sweep
+8. P3-B1 — ueberstunden-Netto-Refactor
 
 ---
 
