@@ -882,7 +882,7 @@ Für die Berechnung Ihrer Kündigungsfrist nutzen Sie unseren [Kündigungsfrist-
     beispiel: 'ET: 15. August 2026, Netto 2.500 € → Mutterschutz: 4. Juli – 10. Oktober 2026 (14 Wochen) → Einkommen: 2.500 €/Monat (volles Netto)',
     erklaerung: `**Was ist der Mutterschutz und wie lange dauert er?**
 
-Der Mutterschutz ist eine gesetzlich geregelte Schutzfrist für erwerbstätige Frauen vor und nach der Geburt ihres Kindes. Er ist im **Mutterschutzgesetz (MuSchG)** geregelt und gilt für alle Frauen in einem Arbeitsverhältnis — unabhängig davon, ob sie in Vollzeit, Teilzeit, einem Minijob oder befristet beschäftigt sind. Auch Auszubildende, Praktikantinnen und Heimarbeiterinnen fallen unter den Mutterschutz.
+Der Mutterschutz ist eine gesetzlich geregelte Schutzfrist für erwerbstätige Frauen vor und nach der Geburt ihres Kindes. Er ist im **Mutterschutzgesetz (MuSchG)** geregelt und gilt für alle Frauen in einem Arbeitsverhältnis — unabhängig davon, ob sie in Vollzeit, Teilzeit, einem Minijob oder befristet beschäftigt sind. Auch Auszubildende, Praktikantinnen und Heimarbeiterinnen fallen unter den Mutterschutz. Seit der MuSchG-Reform vom 30.05.2017 (in Kraft 01.01.2018) gilt er außerdem für Schülerinnen und Studentinnen.
 
 Die Mutterschutzfrist beginnt **6 Wochen vor dem errechneten Entbindungstermin** (ET) und endet **8 Wochen nach der Geburt**. Das ergibt eine Gesamtdauer von mindestens **14 Wochen**. Während der 6 Wochen vor der Geburt dürfen Schwangere auf eigenen Wunsch weiterarbeiten — nach der Geburt gilt ein absolutes Beschäftigungsverbot von 8 Wochen, auf das nicht verzichtet werden kann.
 
@@ -951,6 +951,26 @@ Nutzen Sie unseren [Geburtstermin-Rechner](/gesundheit/geburtstermin-rechner), u
       {
         frage: 'Was ist der Unterschied zwischen Mutterschutz und Elternzeit?',
         antwort: 'Der Mutterschutz ist eine gesetzliche Schutzfrist (6+8 Wochen), gilt nur für die Mutter und wird mit dem vollen Nettogehalt vergütet. Die Elternzeit schließt an den Mutterschutz an, kann von beiden Elternteilen genommen werden (bis zu 3 Jahre) und wird mit Elterngeld (65–67% des Netto, max. 1.800 €) vergütet.',
+      },
+      {
+        frage: 'Was zählt als Frühgeburt?',
+        antwort: 'Eine Geburt gilt als Frühgeburt, wenn das Kind ein Geburtsgewicht von weniger als 2.500 g hat oder wenn ärztlich fehlende Reifezeichen festgestellt werden. In beiden Fällen verlängert sich die Schutzfrist nach der Geburt von 8 auf 12 Wochen. Der ärztliche Nachweis erfolgt über die Geburtsdokumentation oder eine separate Bescheinigung.',
+      },
+      {
+        frage: 'Welcher Nachweis ist bei einer Fehl- oder Totgeburt nötig?',
+        antwort: 'Seit dem 01.01.2026 gibt es das bundeseinheitliche Muster 9 als Nachweis für Fehl- und Totgeburten. Es ersetzt die zuvor regional unterschiedlichen Übergangsbescheinigungen und vereinheitlicht den Anspruchsnachweis für Schutzfrist und Mutterschaftsgeld. Das Muster 9 wird vom behandelnden Arzt oder der Hebamme ausgestellt.',
+      },
+      {
+        frage: 'Gibt es einen Mindestschutz, wenn die Geburt sehr spät erfolgt?',
+        antwort: 'Ja. Auch bei einer Geburt nach dem berechneten Termin beträgt die Mindestschutzfrist nach § 3 Abs. 2 MuSchG insgesamt 99 Tage (Summe aus Vor- und Nachgeburtsschutz). Verkürzt sich der Vorgeburtsschutz wegen einer späten Geburt, verlängert sich der Nachgeburtsschutz entsprechend, sodass die 99-Tage-Untergrenze gewahrt bleibt.',
+      },
+      {
+        frage: 'Gilt der Mutterschutz auch für Schülerinnen und Studentinnen?',
+        antwort: 'Ja. Seit der MuSchG-Reform vom 30.05.2017 (in Kraft seit 01.01.2018) gilt der Mutterschutz auch für Schülerinnen und Studentinnen — Schutzfristen, Beschäftigungsverbote und Kündigungsschutz greifen analog zum Beschäftigungsverhältnis. Praxisrelevant ist insbesondere der Schutz vor Pflichtveranstaltungen während der Schutzfristen sowie der Anspruch auf Schutzfrist-Verschiebung von Prüfungen.',
+      },
+      {
+        frage: 'Was gilt bei einer Totgeburt?',
+        antwort: 'Eine Totgeburt liegt vor, wenn das Kind ab einem Gewicht von 500 g oder ab der vollendeten 24. Schwangerschaftswoche ohne Lebenszeichen geboren wird. Es gilt eine Schutzfrist von 8 Wochen nach der Geburt; der Mehrlings- oder Frühgeburts-Bonus (12 Wochen) greift bei einer Totgeburt nicht. Der erweiterte Kündigungsschutz nach § 17 MuSchG bleibt erhalten. Der Nachweis erfolgt seit 01.01.2026 über das bundeseinheitliche Muster 9.',
       },
     ],
   },
