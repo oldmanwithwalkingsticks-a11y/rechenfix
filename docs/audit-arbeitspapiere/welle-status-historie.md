@@ -8,6 +8,38 @@
 
 ---
 
+## Welle 3 — Item 154 (27.04.2026, ABGESCHLOSSEN)
+
+**Scope:** Akut-Fix für AdSense-Re-Review — `<LazySection>`-Wrapper um Erklärtext + FAQ entfernt.
+
+**Trigger:** AdSense-Ablehnung „Minderwertige Inhalte" am 27.04.2026. Stichprobe per curl auf `/finanzen/brutto-netto-rechner` ergab 5.497 Zeichen sichtbaren Text bei 140 KB HTML — Verhältnis 3,9 %.
+
+**Root Cause:** `components/ui/LazySection.tsx` ist eine `'use client'`-Komponente, die bei SSR ausschließlich ein leeres 200-px-hohes Placeholder-`<div>` rendert. Children werden erst nach Hydration + IntersectionObserver-Trigger (rootMargin 200 px) eingeblendet. Der AdSense-Crawler bewertet primär SSR-HTML — Erklärtext (3.000–5.000 Zeichen pro Rechner) und FAQ (5–8 substantielle Q&A) sind für ihn vollständig unsichtbar gewesen.
+
+**Fix (Commit 83792c0):**
+- `app/[kategorie]/[rechner]/page.tsx`: `<LazySection>`-Wrapper Z. 479–550 durch Fragment ersetzt, `no-print`-Klasse auf die zwei `<section>`-Elemente direkt migriert
+- `components/ui/LazySection.tsx`: gelöscht (verwaist)
+- Import-Statement Z. 9 entfernt
+
+**Verifikation:** Stichprobe nach Deploy auf 3 Rechner (`/finanzen/brutto-netto-rechner`, `/arbeit/urlaubstage-rechner`, `/gesundheit/bmi-rechner`) zeigt erwarteten Sprung von ~5–6 K auf 10–14 K Zeichen sichtbaren Text pro Seite, FAQ-Section im HTML enthalten.
+
+**Methodik-Lehre 26 (Lazy-Loading vs. AdSense-Crawler-Sichtbarkeit, 27.04.2026):** Content-relevante Sektionen (Erklärtext, FAQ, Disclaimer, Quellenangaben) NIEMALS in client-only Lazy-Wrappers verpacken. Faustregel: Lazy-Loading ist legitim für Bilder, Iframes, schwere Components mit Interactivity-Cost — aber NICHT für statischen Text-Content, der von Crawlern bewertet werden soll. SSR-Sichtbarkeit ist ein nicht verhandelbares Anforderungs-Kriterium für Content-Sektionen, das vor jeder Performance-Optimierung Vorrang hat.
+
+**Methodik-Lehre 27 (Klassen-Migration bei Wrapper-Removal, 27.04.2026):** Beim Entfernen einer Wrapper-Komponente, die nur ein `className`-Prop weitergibt (hier: `no-print`), Klasse auf alle direkt umschlossenen Kinder migrieren — nicht ersatzlos streichen. Sonst ändert sich Druck-Verhalten / Print-Layout / a11y-Sichtbarkeit unbeabsichtigt.
+
+**Welle-3-Backlog nach 154:**
+1. ~~152b — feiertage.ts SSOT~~ ✅
+2. ~~154 — LazySection-Removal~~ ✅
+3. 151 — Block-A-P3-Sammelbatch (17 Items)
+4. 150e — Süd-OLG-UI-Toggle ehegattenunterhalt
+5. Validation-Sweep
+6. P3-B1 — ueberstunden-Netto-Refactor
+7. **NEU geparkt** (nur falls AdSense-Re-Review trotz 154 nicht reicht):
+   - 155 — Über-uns-Seite ausbauen (E-E-A-T, Ziel ~6–8 KB sichtbarer Text)
+   - 156 — Methodik-/Qualitäts-Seite anlegen (Audit-Workflow öffentlich darstellen)
+
+---
+
 ## Welle 3 — Item 152b (27.04.2026, ABGESCHLOSSEN)
 
 **Scope:** SSOT-Refactor `feiertage.ts` + zwei Konsumenten-Migrationen.
