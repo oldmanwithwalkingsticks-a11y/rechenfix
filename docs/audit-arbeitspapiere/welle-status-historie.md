@@ -4,7 +4,69 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 26.04.2026
+**Stand:** 27.04.2026
+
+---
+
+## Welle 3 — Item 152b (27.04.2026, ABGESCHLOSSEN)
+
+**Scope:** SSOT-Refactor `feiertage.ts` + zwei Konsumenten-Migrationen.
+
+**Trigger:** ArbeitstageRechner.tsx Jahr-Dropdown bricht 01.01.2027 ohne
+Code-Change. Nebenwirkung: P3-Lib-1 (freelancer-Feiertage-Konstante)
+gleich mitgeschlossen.
+
+### 152b-1 (Commit ea3c9ce)
+
+Neue `lib/berechnungen/feiertage.ts`:
+- Spencer-Variante der Gauß-Osterformel (gültig 1583–4099)
+- 16-BL-Map für feste + bewegliche Feiertage
+- Helper: `getFeiertage`, `istFeiertag`, `anzahlFeiertage`,
+  `anzahlBundesweiterFeiertageMoBisFr`
+- Modellierungs-Vereinfachungen dokumentiert (Mariä HF in BY pauschal,
+  Fronleichnam nicht in SN/TH-Gemeinden, kein Augsburger Friedensfest)
+
+`scripts/verify-feiertage.ts`: 60 Tests grün gegen externe Sollwerte
+(BMF, kalender.de) — Ostern 2024–2030, alle 16 BL-Karten,
+Buß-und-Bettag inkl. 23.11.=Mi-Edge-Case (2022).
+
+### 152b-2 (Commit 9b1a947)
+
+ArbeitstageRechner.tsx Migration: hardkodiertes FEIERTAGE_2026-Array
+ersetzt durch Lib-Aufruf. Jahr-Dropdown statisch 2024–2030 (vorher: nur
+2026). countArbeitstage() cacht Feiertage pro Jahr in Map → robust gegen
+jahresgrenzen-überschreitende Zeiträume.
+
+**Wert-Verifikation manuell (Inkognito):**
+- NW 2027 Ganzjahr: Karfreitag 26.03., Ostermontag 29.03., Fronleichnam 27.05. ✓
+- BY 2026 Ganzjahr: 13 Feiertage inkl. Mariä HF 15.08. ✓
+- Zeitraum 15.12.2026–15.01.2027: enthält Weihnachten 2026 + Neujahr 2027 ✓
+
+### 152b-3 (Commit 03d7bda)
+
+freelancer-stundensatz.ts Migration: pauschale `FEIERTAGE=10` durch
+`anzahlBundesweiterFeiertageMoBisFr(jahr)` ersetzt. Tatsächlicher Wert
+variiert: 2026=7, 2027=5, 2028=8 Mo-Fr-Feiertage. Optionaler
+`jahr`-Parameter mit Default `new Date().getFullYear()` für
+Test-Determinismus. **Schließt P3-Lib-1.**
+
+**Methodik-Lehre 23 (deterministischer vs. dynamischer Default,
+27.04.2026):** Bei mathematisch-deterministischen Werten (Feiertage pro
+Jahr) ist `new Date().getFullYear()` als Default angemessen — anders als
+bei rechtlichen Stichtagen (mindestlohn.ts, rente.ts), wo ein expliziter
+Switch zur Quelle gehört. Daumenregel: Stichtag-Konstante immer dann,
+wenn der Wert sich an einem konkreten Datum durch externe (legislative)
+Entscheidung ändert; dynamischer Lookup, wenn der Wert eine Funktion des
+Jahres ist.
+
+**Methodik-Lehre 24 (Hydration-Safe Jahr-Dropdowns, 27.04.2026):**
+Statische Range im Modul-Scope ist hydration-sicher; `new Date()` auf
+Modul-Ebene in `'use client'`-Components riskiert Mismatch zwischen
+SSR-Build und Client-Render. Trade-off: alle 4–7 Jahre ein Wartungs-
+Bump. Akzeptabel für Dropdowns; nicht-akzeptabel für berechnungsrelevante
+Werte (siehe Lehre 23).
+
+**Offen aus 152b:** keine.
 
 ---
 
