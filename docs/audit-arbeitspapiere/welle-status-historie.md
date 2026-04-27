@@ -8,6 +8,47 @@
 
 ---
 
+## Welle 3 — Item 150e (28.04.2026, ABGESCHLOSSEN)
+
+**Scope:** UI-Toggle für Süddeutsche Leitlinien im ehegattenunterhalt-rechner.
+
+**Hintergrund:** 150d (25.04.2026) hat den Hinweistext zur 45-%-Quote in den OLG-Bezirken Bamberg, Karlsruhe, München, Nürnberg, Stuttgart, Zweibrücken bereits in arbeit.ts eingebaut, aber den UI-Toggle bewusst geparkt — die Berechnung selbst lief bisher ausschließlich mit der bundesweiten 3/7-Methode, der süddeutsche Workaround „Faktor 1,05 manuell anwenden" stand nur als Konfigtext-Hinweis. 150e schließt diese Lücke: Der Rechner unterscheidet jetzt funktional zwischen beiden Methoden.
+
+**Code-Commit (08017f8):**
+
+EhegattenunterhaltRechner.tsx:
+- Neuer State `methode: 'bundesweit' | 'sueddeutsch'`, Default `bundesweit`
+- Neuer RadioToggleGroup zwischen „Art" und „Erwerbstätigkeit", inkl. Hilfetext mit OLG-Bezirks-Liste
+- Konstanten `QUOTE_BUNDESWEIT = 3/7` und `QUOTE_SUEDDEUTSCH = 0.45` ersetzen die hardcoded `(differenz * 3) / 7`-Berechnung
+- Methodenname in Result-Box, Rechenweg-Header, ErgebnisAktionen-Text und AiExplain.eingaben/ergebnis sichtbar (auch das Detail-Label „Differenz × 3/7" bzw. „Differenz × 45 %" wechselt mit)
+
+arbeit.ts:
+- 150d-Workaround-Hinweis „Faktor 1,05 manuell anwenden" durch Verweis auf den neuen UI-Toggle ersetzt
+- Beispielzahlen (2.300 € → 986 € / 1.035 €) belassen, sind mit Toggle direkt nachvollziehbar
+
+**Sanity-Check der 4 Default-Werte (lokal nachgerechnet, deckungsgleich mit Spec):**
+- bundesweit, KU bereits berücksichtigt: 986 € ✓
+- süddeutsch, KU bereits berücksichtigt: 1.035 € ✓
+- bundesweit, mit KU-Abzug 400: 814 € ✓
+- süddeutsch, mit KU-Abzug 400: 855 € ✓
+
+Live-Verifikation per Inkognito-Browser nach Vercel-Deploy ausstehend.
+
+**Methodik-Lehre 29 (UI-Toggle als Folge-Commit zum Konfigtext, 28.04.2026):** Bei rechtssensitiven Rechnern mit regionaler/methodischer Differenzierung kann ein Hinweistext-Patch (wie 150d) als pragmatischer Erststand sinnvoll sein, wenn der Audit-Befund konservativ als P2 eingestuft ist. Der Folge-UI-Toggle (150e) hebt das auf das funktional vollständige Niveau — dabei sollte der ursprüngliche Workaround-Hinweis aktiv ersetzt werden, sonst stehen widersprüchliche Anweisungen nebeneinander („manuell × 1,05" vs. „Toggle nutzen"). Nach jedem Audit-Score-Hop von P2/Konfigtext zu P1/UI-Toggle gehört der Konfig-Refresh zum Patch.
+
+**Welle-3-Backlog nach 150e:**
+1. ~~152b — feiertage.ts SSOT~~ ✅
+2. ~~154 — LazySection-Removal~~ ✅
+3. ~~155 — Über-uns ausgebaut~~ ✅
+4. ~~156 — `/qualitaet` neu~~ ✅
+5. ~~151 — Block-A-P3-Sammelbatch~~ ✅
+6. ~~150e — Süd-OLG-UI-Toggle~~ ✅
+7. 151-Sammelrest (~25 nicht-priorisierte P3-Items)
+8. P3-B1 — ueberstunden-Netto-Refactor mit Steuerklasse
+9. Validation-Sweep
+
+---
+
 ## Welle 3 — Item 151 (28.04.2026, ABGESCHLOSSEN)
 
 **Scope:** P3-Sammelbatch Block A — 17 Memory-priorisierte Items aus dem Audit-Bericht `welle2-stufe3-arbeit-blockA-audit.md`. Reine Konfig-Text-Updates in arbeit.ts (alle 5 Cluster). arbeitslosengeld-rechner-Items blieben in 151 außen vor — siehe Sammelrest.
