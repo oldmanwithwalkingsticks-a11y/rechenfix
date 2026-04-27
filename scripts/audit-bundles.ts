@@ -46,4 +46,33 @@ export const BUNDLES: BundleDefinition[] = [
       'lib/berechnungen/ueberstunden.ts',
     ],
   },
+  {
+    name: 'blockA-arbeit-p3',
+    description: 'Welle 2 Stufe 3 Arbeit Block A — P3-Sammelbatch (Prompt 151): 10 rechtssensitive Rechner + Configs + Libs für 17+ P3-Items aus blockA-audit.md',
+    files: [
+      // Configs (arbeitslosengeld liegt seit 149a in finanzen.ts)
+      'lib/rechner-config/arbeit.ts',
+      'lib/rechner-config/finanzen.ts',
+      // 10 Block-A-Components
+      'components/rechner/AbfindungsRechner.tsx',
+      'components/rechner/ArbeitslosengeldRechner.tsx',
+      'components/rechner/EhegattenunterhaltRechner.tsx',
+      'components/rechner/ElternzeitRechner.tsx',
+      'components/rechner/KuendigungsfristRechner.tsx',
+      'components/rechner/MutterschutzRechner.tsx',
+      'components/rechner/PendlerpauschaleRechner.tsx',
+      'components/rechner/ScheidungskostenRechner.tsx',
+      'components/rechner/UnterhaltsRechner.tsx',
+      'components/rechner/ZugewinnausgleichRechner.tsx',
+      // Relevante Libs
+      'lib/berechnungen/abfindung.ts',
+      'lib/berechnungen/duesseldorfer-tabelle.ts',
+      'lib/berechnungen/elterngeld.ts',
+      'lib/berechnungen/kuendigungsfrist.ts',
+      'lib/berechnungen/mutterschutz.ts',
+      'lib/berechnungen/pendlerpauschale.ts',
+      'lib/berechnungen/scheidungskosten.ts',
+      'lib/berechnungen/vpi.ts',
+    ],
+  },
 ];
