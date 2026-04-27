@@ -1358,7 +1358,7 @@ Beispiel: Peter verdient 3.500 € netto (bereinigt) und ist erwerbstätig, Anna
 
 Die 3/7-Quote (≈ 42,86 %) ist nicht bundesweit einheitlich. Die OLG-Bezirke **Bamberg, Karlsruhe, München, Nürnberg, Stuttgart und Zweibrücken** wenden in ihren **Süddeutschen Leitlinien** stattdessen einen Quotienten von **45 %** an. Die Differenz ist klein, aber bei höheren Einkommen spürbar: Bei einer Einkommensdifferenz von 2.300 € ergeben sich nach 3/7 rund 986 €/Monat, nach 45 % dagegen 1.035 €/Monat — also rund 49 € mehr. Bei größeren Einkommensdifferenzen wächst der Unterschied entsprechend.
 
-Unser Rechner verwendet bewusst die bundesweit gebräuchliche 3/7-Methode. Wenn Ihr Verfahren vor einem süddeutschen Familiengericht läuft, multiplizieren Sie das Ergebnis bitte näherungsweise mit dem Faktor 1,05 — oder lassen Sie es vom Anwalt mit der lokalen 45-%-Quote nachrechnen.
+Unser Rechner unterstützt beide Methoden: Default ist die bundesweit gebräuchliche 3/7-Methode. Wenn Ihr Verfahren vor einem süddeutschen Familiengericht läuft, schalten Sie oben die Berechnungsmethode auf „Süddeutsch (45 %)" — der Rechner verwendet dann die in den Süddeutschen Leitlinien vorgesehene Quote.
 
 **Wichtige Feinheiten**
 

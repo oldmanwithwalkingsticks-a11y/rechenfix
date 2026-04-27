@@ -10,6 +10,7 @@ import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 type Art = 'trennung' | 'nachehelich';
+type Methode = 'bundesweit' | 'sueddeutsch';
 
 // Selbstbehalt gegenüber Ehegatten 2026 (Düsseldorfer Tabelle, Stand DT 2026):
 // 1.600 € — wenn der Pflichtige erwerbstätig ist
@@ -21,11 +22,19 @@ type Art = 'trennung' | 'nachehelich';
 const SELBSTBEHALT_ERWERBSTAETIG = 1600;
 const SELBSTBEHALT_NICHT_ERWERBSTAETIG = 1475;
 
+// Quoten für die Differenzmethode
+// Bundesweit: 3/7 (BGH-Standard, ≈ 42,857 %)
+// Süddeutsch: 0,45 (Süddeutsche Leitlinien, Stand 2026, OLG-Bezirke
+// Bamberg, Karlsruhe, München, Nürnberg, Stuttgart, Zweibrücken)
+const QUOTE_BUNDESWEIT = 3 / 7;
+const QUOTE_SUEDDEUTSCH = 0.45;
+
 // Erwerbstätigenbonus: 1/10 wird vor der 3/7-Methode vom Erwerbseinkommen abgezogen
 // Damit ergibt sich faktisch die gängige Quote. Wir verwenden die klassische 3/7-Differenzmethode.
 
 export default function EhegattenunterhaltRechner() {
   const [art, setArt] = useState<Art>('trennung');
+  const [methode, setMethode] = useState<Methode>('bundesweit');
   const [pflichtigerErwerbstaetig, setPflichtigerErwerbstaetig] = useState<boolean>(true);
   const [netto1, setNetto1] = useState<string>('3500');
   const [netto2, setNetto2] = useState<string>('1200');
@@ -39,7 +48,8 @@ export default function EhegattenunterhaltRechner() {
 
     const bereinigt1 = Math.max(0, n1 - ku);
     const differenz = bereinigt1 - n2;
-    const berechnet = Math.max(0, Math.round((differenz * 3) / 7));
+    const quote = methode === 'sueddeutsch' ? QUOTE_SUEDDEUTSCH : QUOTE_BUNDESWEIT;
+    const berechnet = Math.max(0, Math.round(differenz * quote));
 
     const selbstbehalt = pflichtigerErwerbstaetig
       ? SELBSTBEHALT_ERWERBSTAETIG
@@ -63,14 +73,17 @@ export default function EhegattenunterhaltRechner() {
       gesamt2,
       selbstbehalt,
       gekappt,
+      quote,
     };
-  }, [netto1, netto2, kuBeruecksichtigt, kindesunterhalt, pflichtigerErwerbstaetig]);
+  }, [netto1, netto2, kuBeruecksichtigt, kindesunterhalt, pflichtigerErwerbstaetig, methode]);
 
   const fmtEuro = (n: number) =>
     n.toLocaleString('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
 
   const ergebnis =
-    `Ehegattenunterhalt (${art === 'trennung' ? 'Trennungsunterhalt' : 'Nachehelicher Unterhalt'}): ${fmtEuro(result.unterhalt)} / Monat. ` +
+    `Ehegattenunterhalt (${art === 'trennung' ? 'Trennungsunterhalt' : 'Nachehelicher Unterhalt'}, ${
+      methode === 'sueddeutsch' ? 'Süddeutsche Leitlinien' : 'bundesweit 3/7'
+    }): ${fmtEuro(result.unterhalt)} / Monat. ` +
     `Einkommen P1 nach Unterhalt: ${fmtEuro(result.rest1)}. Einkommen P2 mit Unterhalt: ${fmtEuro(result.gesamt2)}.`;
 
   return (
@@ -89,6 +102,25 @@ export default function EhegattenunterhaltRechner() {
           columns={2}
           fullWidth
         />
+      </div>
+
+      {/* Methode — bestimmt die Quote */}
+      <div className="mb-5">
+        <RadioToggleGroup
+          name="eheunterhalt-methode"
+          legend="Berechnungsmethode"
+          options={[
+            { value: 'bundesweit', label: 'Bundesweit (3/7)' },
+            { value: 'sueddeutsch', label: 'Süddeutsch (45 %)' },
+          ]}
+          value={methode}
+          onChange={(v) => setMethode(v as Methode)}
+          columns={2}
+          fullWidth
+        />
+        <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+          Süddeutsche Leitlinien gelten in den OLG-Bezirken Bamberg, Karlsruhe, München, Nürnberg, Stuttgart und Zweibrücken — sonst die bundesweite 3/7-Methode.
+        </p>
       </div>
 
       {/* Erwerbstätigkeit des Pflichtigen — bestimmt den Selbstbehalt */}
@@ -162,13 +194,16 @@ export default function EhegattenunterhaltRechner() {
           </div>
         </div>
         <p className="mt-3 text-white/90 text-xs">
+          Methode: {methode === 'sueddeutsch' ? 'Süddeutsch (45 %)' : 'Bundesweit (3/7)'} ·
           Selbstbehalt ({pflichtigerErwerbstaetig ? 'erwerbstätig' : 'nicht erwerbstätig'}): {fmtEuro(result.selbstbehalt)}
         </p>
       </div>
 
       {/* Rechenweg */}
       <div className="mb-6 p-4 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800/50">
-        <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Rechenweg (3/7-Methode)</p>
+        <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          Rechenweg ({methode === 'sueddeutsch' ? '45-%-Methode' : '3/7-Methode'})
+        </p>
         <ul className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
           <li>1. Nettoeinkommen P1: {fmtEuro(result.n1)}</li>
           {!kuBeruecksichtigt && result.ku > 0 && (
@@ -176,7 +211,9 @@ export default function EhegattenunterhaltRechner() {
           )}
           <li>3. Nettoeinkommen P2: {fmtEuro(result.n2)}</li>
           <li>4. Differenz: {fmtEuro(result.bereinigt1)} − {fmtEuro(result.n2)} = {fmtEuro(result.differenz)}</li>
-          <li>5. Unterhalt = 3/7 × Differenz = {fmtEuro(result.berechnet)}</li>
+          <li>
+            5. Unterhalt = {methode === 'sueddeutsch' ? '45 %' : '3/7'} × Differenz = {fmtEuro(result.berechnet)}
+          </li>
           {result.gekappt && (
             <li className="text-amber-700 dark:text-amber-400">
               ⚠ Wegen Selbstbehalt gekappt auf {fmtEuro(result.unterhalt)}
@@ -194,6 +231,7 @@ export default function EhegattenunterhaltRechner() {
         rechnerName="Ehegattenunterhalt-Rechner"
         eingaben={{
           Art: art === 'trennung' ? 'Trennungsunterhalt' : 'Nachehelicher Unterhalt',
+          Methode: methode === 'sueddeutsch' ? 'Süddeutsche Leitlinien (45 %)' : 'Bundesweit (3/7)',
           'Pflichtiger erwerbstätig': pflichtigerErwerbstaetig ? 'ja' : 'nein',
           'Netto P1': `${result.n1} €`,
           'Netto P2': `${result.n2} €`,
@@ -201,7 +239,7 @@ export default function EhegattenunterhaltRechner() {
         }}
         ergebnis={{
           Ehegattenunterhalt: `${result.unterhalt} €/Monat`,
-          'Differenz × 3/7': `${result.berechnet} €`,
+          [methode === 'sueddeutsch' ? 'Differenz × 45 %' : 'Differenz × 3/7']: `${result.berechnet} €`,
           'P1 nach Unterhalt': `${result.rest1} €`,
           'P2 mit Unterhalt': `${result.gesamt2} €`,
           Selbstbehalt: `${result.selbstbehalt} €`,
