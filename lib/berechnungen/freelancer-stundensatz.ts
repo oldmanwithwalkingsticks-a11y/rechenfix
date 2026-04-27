@@ -1,3 +1,5 @@
+import { anzahlBundesweiterFeiertageMoBisFr } from './feiertage';
+
 export interface FreelancerEingabe {
   nettoWunsch: number;
   arbeitstageProWoche: number;
@@ -34,10 +36,12 @@ export interface FreelancerErgebnis {
   warnungNiedrig: boolean;
 }
 
-const FEIERTAGE = 10;
-
-export function berechneFreelancerStundensatz(e: FreelancerEingabe): FreelancerErgebnis {
-  const arbeitstageJahr = Math.max((e.arbeitstageProWoche * 52) - e.urlaubstage - e.krankheitstage - FEIERTAGE, 1);
+export function berechneFreelancerStundensatz(
+  e: FreelancerEingabe,
+  jahr: number = new Date().getFullYear()
+): FreelancerErgebnis {
+  const feiertageMoBisFr = anzahlBundesweiterFeiertageMoBisFr(jahr);
+  const arbeitstageJahr = Math.max((e.arbeitstageProWoche * 52) - e.urlaubstage - e.krankheitstage - feiertageMoBisFr, 1);
   const fakturierbareStundenJahr = arbeitstageJahr * e.produktiveStunden;
 
   const gesamtVorSteuernMonat = e.nettoWunsch + e.krankenversicherung + e.rentenvorsorge + e.betriebsausgaben;
