@@ -6,7 +6,6 @@ import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import ZurueckButton from '@/components/layout/ZurueckButton';
 import AdSlot from '@/components/ads/AdSlot';
 import StructuredData from '@/components/seo/StructuredData';
-import LazySection from '@/components/ui/LazySection';
 import FeedbackButtons from '@/components/ui/FeedbackButtons';
 import Prozentrechner from '@/components/rechner/Prozentrechner';
 import BruttoNettoRechner from '@/components/rechner/BruttoNettoRechner';
@@ -475,9 +474,9 @@ export default function RechnerSeite({ params }: Props) {
           {/* Ad Middle */}
           <AdSlot typ="rectangle" className="mb-8" />
 
-          {/* Erklaerung & FAQ — lazy-loaded */}
-          <LazySection className="no-print">
-            <section className="card p-6 md:p-8 mb-8">
+          {/* Erklaerung & FAQ — eager rendered für SSR-Sichtbarkeit (AdSense) */}
+          <>
+            <section className="card p-6 md:p-8 mb-8 no-print">
               <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">So funktioniert der {config.titel}</h2>
 
               <div className="bg-accent-50 dark:bg-accent-700/20 border border-accent-200 dark:border-accent-600/40 rounded-xl p-4 mb-6">
@@ -529,7 +528,7 @@ export default function RechnerSeite({ params }: Props) {
             </section>
 
             {/* FAQ */}
-            <section className="card p-6 md:p-8 mb-8">
+            <section className="card p-6 md:p-8 mb-8 no-print">
               <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Häufige Fragen</h2>
               <div className="space-y-4">
                 {config.faq.map((item, i) => (
@@ -547,7 +546,8 @@ export default function RechnerSeite({ params }: Props) {
                 ))}
               </div>
             </section>
-          </LazySection>
+          </>
+
 
           {/*
             Verwandte Rechner — auf dem wissenschaftlichen Taschenrechner bewusst
