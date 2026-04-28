@@ -300,7 +300,7 @@ Die Pendlerpauschale steht jedem Arbeitnehmer zu — unabhängig davon, ob er mi
 
 **Wie hoch ist die Pendlerpauschale 2026?**
 
-Seit dem 1. Januar 2026 gilt ein **einheitlicher Kilometersatz** (§ 9 Abs. 1 Nr. 4 EStG i.d.F. Steueränderungsgesetz 2025):
+Seit dem 1. Januar 2026 gilt ein **einheitlicher Kilometersatz** (§ 9 Abs. 1 Satz 3 Nr. 4 EStG i.d.F. Steueränderungsgesetz 2025):
 
 - **0,38 € pro Entfernungskilometer und Arbeitstag — ab dem ersten Kilometer.**
 
