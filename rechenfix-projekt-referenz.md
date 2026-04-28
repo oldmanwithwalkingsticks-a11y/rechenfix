@@ -380,7 +380,7 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
 - 🎯 GSC: Sitemap neu einreichen nach Deploy; CTR-Review der 3 neuen Awin-Partner ~20.05.2026
 - 🎯 Neue Rechner-Batches (thematisch offen)
 - 🎯 Jahresparameter-Audit 2027 (Frühjahr 2027): ESt-Tarif 2027, SV-Rechengrößen 2027, JAEG, Zusatzbeitrag, D-Ticket, Pfändung-Switch zum 01.07.2028
-- 🎯 **Welle-3-Backlog (geparkte Items mit klarem Scope, siehe eigene Sektion „Welle-3-Backlog" weiter unten):** 152b `feiertage.ts` SSOT (akut Q4/2026), P3-B1 ueberstunden-Netto-Refactor mit Steuerklasse, 151 Block-A-P3-Sammelbatch (17 Items), 150e Süd-OLG-UI-Toggle, Welle-3-Validation-Sweep aller Welle-2-Rechner gegen externe Oracles
+- 🎯 **Welle-3-Backlog (geparkte Items mit klarem Scope, siehe eigene Sektion „Welle-3-Backlog" weiter unten):** 152b `feiertage.ts` SSOT (akut Q4/2026), 151 Block-A-P3-Sammelbatch (17 Items), 150e Süd-OLG-UI-Toggle, Welle-3-Validation-Sweep aller Welle-2-Rechner gegen externe Oracles
 - 🎯 **Welle 2 Stufe 3 weitere Kategorien** (Alltag, Mathe, Kochen, Sport): noch nicht gestartet — bei Bedarf separate Audit-Sprints, ansonsten als Teil von Welle 3 Validation-Sweep
 - 🎯 **Prompt 133 TaxiRechner Stadt-Preset-UX:** 5 Städte-Presets (Karsten-Auswahl ausstehend), `taxi-preset-tarife.ts` mit Stichtag-Kommentar pro Stadt, CLAUDE.md-Wartungsregel halbjährlich. Vorbereitet durch `TARIFE_STAND` in `lib/berechnungen/taxi.ts` (Prompt 132 A5)
 - 🎯 **Prompt 120c (Juni 2026):** Wohngeld-Lib-Refactoring auf Pro-Person-Architektur §§ 14–16 WoGG, gebündelt mit Grundsicherungsgeld-Reform (Switch 01.07.2026). Nach Umsetzung: `STATISCHE_OVERRIDES`-Ausschluss aufheben, dynamische Route rendert wieder den interaktiven Rechner. KdU-1,5-Fache-Cap (§ 22 Abs. 1 SGB II n.F., aus Prompt 129 Teil B Nicht-Scope) könnte dabei als Nebenprodukt integriert werden
@@ -395,24 +395,24 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
   - Stufe 2 Gesundheit ✅ (Prompts 140–144b)
   - Stufe 3 Wohnen ✅ (Prompts 147–148c, 25.+26.04.2026, 25 Rechner)
   - Stufe 3 Arbeit ✅ (Block A 149a-d + 150a-d, Block B 152a + 153a/b/b-fix + 153c Lib-Audit, 26.04.2026, 14 Commits)
-- **Welle 3 (Validation-Sweep + geparkte Items + AdSense-Reparatur):** **6/9 abgeschlossen (Stand 28.04.2026)**
+- **Welle 3 (Validation-Sweep + geparkte Items + AdSense-Reparatur):** **7/9 abgeschlossen (Stand 28.04.2026)**
   - ✅ 152b feiertage.ts SSOT (27.04.2026)
   - ✅ 154 LazySection-Removal (AdSense-Reparatur, 27.04.2026)
   - ✅ 155 /ueber-uns ausgebaut (28.04.2026)
   - ✅ 156 /qualitaet neu angelegt + Footer-Link (28.04.2026)
   - ✅ 151 Block-A-P3-Sammelbatch (17 Items in 5 atomaren Konfig-Commits, 28.04.2026)
   - ✅ 150e Süd-OLG-UI-Toggle ehegattenunterhalt (28.04.2026)
+  - ✅ P3-B1 ueberstunden-Netto-Refactor mit Steuerklasse-Input (Commit 7c2426b, 28.04.2026)
   - ⬜ 151-Sammelrest (~25 nicht-priorisierte P3-Items aus Block-A-Audit)
-  - ⬜ P3-B1 ueberstunden-Netto-Refactor mit Steuerklasse-Input
   - ⬜ Welle-3-Validation-Sweep aller Welle-2-Rechner gegen externe Oracles
 
 Vollständige Welle-Historie: [docs/audit-arbeitspapiere/welle-status-historie.md](docs/audit-arbeitspapiere/welle-status-historie.md).
 
 ## Welle-3-Backlog (Stand 28.04.2026)
 
-**Geliefert (6/9):** 152b ✅, 154 ✅, 155 ✅, 156 ✅, 151 ✅, 150e ✅. Volldetails siehe „Status April 2026" oben und [docs/audit-arbeitspapiere/welle-status-historie.md](docs/audit-arbeitspapiere/welle-status-historie.md).
+**Geliefert (7/9):** 152b ✅, 154 ✅, 155 ✅, 156 ✅, 151 ✅, 150e ✅, P3-B1 ✅. Volldetails siehe „Status April 2026" oben und [docs/audit-arbeitspapiere/welle-status-historie.md](docs/audit-arbeitspapiere/welle-status-historie.md).
 
-**Offen (3/9):** 151-Sammelrest, P3-B1, Validation-Sweep — siehe unten mit Aufwänden, Akut-Faktoren und Scope-Specs.
+**Offen (2/9):** 151-Sammelrest, Validation-Sweep — siehe unten mit Aufwänden, Akut-Faktoren und Scope-Specs.
 
 ### 152b — `feiertage.ts` SSOT-Lib mit Gauß-Osterformel ✅ ABGESCHLOSSEN (27.04.2026)
 
@@ -420,12 +420,9 @@ Vollständige Welle-Historie: [docs/audit-arbeitspapiere/welle-status-historie.m
 - **Migration durchgeführt in:** `ArbeitstageRechner.tsx` (statisches Jahr-Dropdown 2024–2030, akuter Q4/2026-Bug behoben), `freelancer-stundensatz.ts` (hartkodierte `FEIERTAGE=10` durch `anzahlBundesweiterFeiertageMoBisFr(jahr)` ersetzt — variiert 7/5/8 für 2026/27/28; P3-Lib-1 geschlossen)
 - **Lehren:** 23 (Stichtag vs. dynamisch), 24 (Hydration-safe Year-Dropdowns)
 
-### P3-B1 — ueberstunden-Netto-Refactor mit Steuerklasse-Input
+### P3-B1 — ueberstunden-Netto-Refactor mit Steuerklasse-Input ✅ ABGESCHLOSSEN (28.04.2026)
 
-- **Aufwand:** mehrere h (UI-Erweiterung)
-- **Akut:** nein (Component-Disclaimer macht pauschale 40-%-Annahme transparent)
-- **Scope:** `UeberstundenRechner.tsx` um Steuerklasse + Bundesland-Inputs erweitern, `ueberstunden.ts` Netto-Berechnung von pauschal `× 0.6` auf realistische Lohnsteuer-Tabelle (via `lib/berechnungen/lohnsteuer.ts`) umstellen
-- **Risiko:** mittel — UI-Disruption, neue Pflichtfelder
+- **Geliefert:** Commit 7c2426b. `VerguetungEingabe` um `steuerklasse`/`bundesland`/`kirchensteuer` erweitert. Pauschale 40-%-Steuerabzug-Schätzung (`× 0.6`) durch Mehrbetrag-Methode `Netto(Brutto+Vergütung) − Netto(Brutto)` via `berechneBruttoNetto`-SSOT ersetzt. UI im Modus „Vergütung" um drei Inputs (Stkl/Bundesland/KSt) erweitert, Defaults Stkl I / NW / ohne KSt. Disclaimer-Text aktualisiert.
 
 ### 151 — Block-A-P3-Sammelbatch (17 priorisierte Items) ✅ ABGESCHLOSSEN (28.04.2026)
 
@@ -456,7 +453,6 @@ Vollständige Welle-Historie: [docs/audit-arbeitspapiere/welle-status-historie.m
 
 1. **151-Sammelrest** als erstes — Konfig-Polish, kann in einer ruhigen Session oder verteilt über mehrere Slots laufen
 2. **Welle 3 Validation-Sweep** als großer Sprint — eigene Planungs-Session, wenn AdSense-Re-Review durchgelaufen ist
-3. **P3-B1** zuletzt — größter UI-Refactor-Aufwand, niedrigste Akut-Lage
 
 **Neue Scripts seit Welle 2 Stufe 3:**
 - `scripts/verify-wohnen-p1.ts` (Prompt 147), `verify-wohnen-block-b.ts` (148), `verify-pv-ertragsmodell.ts` (147c), `verify-ehegattenunterhalt.ts` (149c), `verify-zugewinnausgleich.ts` (149b) — alle gegen externe Primärquellen (BNetzA, BDEW, KfW, Mertens, Düsseldorfer Tabelle, BFH/BGB, Destatis Lange Reihe)
