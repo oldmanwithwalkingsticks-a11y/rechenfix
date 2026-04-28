@@ -1,7 +1,7 @@
 # Audit-Bundle: block-b-arbeit
 
 **Beschreibung:** Welle 2 Stufe 3 Arbeit Block B — 8 Rechner ohne substanzielle P1-Befunde, Audit-Eingabe für Folge-Prompt
-**Generiert:** 2026-04-26T19:30:42.477Z
+**Generiert:** 2026-04-28T20:45:27.919Z
 **Dateien:** 13
 
 ## Inhalt
@@ -24,7 +24,7 @@
 
 ## `lib/rechner-config/arbeit.ts`
 
-*149.4 KB*
+*167.0 KB*
 
 ```ts
 import type { RechnerConfig } from './types';
@@ -130,12 +130,12 @@ Unser Wochenmodus eignet sich ideal als schnelle Kontrolle: Geben Sie Ihre Arbei
     keywords: ['urlaubstage rechner', 'urlaubsanspruch berechnen', 'resturlaub kündigung', 'urlaubsanspruch teilzeit', 'gesetzlicher mindesturlaub', 'zusatzurlaub schwerbehinderung', 'urlaubsabgeltung'],
     icon: '🏖️',
     formel: 'Urlaubsanspruch = Vertragstage × (Teilzeit-Tage ÷ Vollzeit-Tage) × (Monate ÷ 12) + Schwerbehinderten-Zusatzurlaub',
-    beispiel: '30 Urlaubstage, 3 von 5 Tagen Teilzeit, Eintritt am 01.04.: 30 × 3/5 × 9/12 = 13,5 → 13,5 Tage.',
+    beispiel: '30 Urlaubstage, 3 von 5 Tagen Teilzeit, Eintritt am 01.04.: 30 × 3/5 × 9/12 = 13,5 → 14 Tage (aufgerundet nach § 5 Abs. 2 BUrlG).',
     erklaerung: `**Urlaubsanspruch berechnen — so geht's**
 
 Der jährliche Urlaubsanspruch ergibt sich aus dem Arbeitsvertrag, Tarifvertrag oder einer Betriebsvereinbarung. Der Arbeitgeber darf den gesetzlichen Mindesturlaub nicht unterschreiten, kann aber mehr gewähren. Die Berechnung berücksichtigt mehrere Faktoren: die vertraglich vereinbarten Urlaubstage, die Anzahl der Arbeitstage pro Woche, eine eventuelle Teilzeitbeschäftigung und den Beschäftigungszeitraum im Kalenderjahr.
 
-Unser Rechner berechnet den Urlaubsanspruch automatisch auf Basis Ihrer Eingaben. Bei unterjährigem Eintritt oder Austritt wird der Urlaub anteilig nach § 5 BUrlG berechnet. Dabei zählen nur volle Beschäftigungsmonate — Bruchteile von Monaten werden nicht berücksichtigt, es sei denn, die Wartezeit von sechs Monaten wurde bereits erfüllt. Das Ergebnis wird auf halbe Tage gerundet, wie es in der Praxis üblich ist.
+Unser Rechner berechnet den Urlaubsanspruch automatisch auf Basis Ihrer Eingaben. Bei unterjährigem Eintritt oder Austritt wird der Urlaub anteilig nach § 5 BUrlG berechnet. Dabei zählen nur volle Beschäftigungsmonate — Bruchteile von Monaten werden nicht berücksichtigt, es sei denn, die Wartezeit von sechs Monaten wurde bereits erfüllt. Das Ergebnis wird BUrlG-konform gerundet: Bruchteile ab einem halben Tag werden auf den nächsten ganzen Tag aufgerundet (§ 5 Abs. 2 BUrlG), kleinere Bruchteile abgerundet — die Aufrundung wirkt immer zugunsten des Arbeitnehmers.
 
 **Gesetzlicher Mindesturlaub in Deutschland**
 
@@ -212,7 +212,7 @@ Unser Rechner berücksichtigt den Schwerbehinderten-Zusatzurlaub automatisch und
       },
       {
         frage: 'Wird der Urlaub auf halbe Tage gerundet?',
-        antwort: 'In der Praxis werden Bruchteile von Urlaubstagen häufig auf halbe Tage gerundet. Der Rechner rundet Ergebnisse auf halbe Tage. Wichtig: Bruchteile dürfen laut § 5 Abs. 2 BUrlG nicht zuungunsten des Arbeitnehmers gerundet werden — ab 0,5 wird aufgerundet.',
+        antwort: 'Nein — der Rechner rundet § 5 Abs. 2 BUrlG-konform auf ganze Urlaubstage. Bruchteile ab einem halben Tag werden auf den nächsten ganzen Tag aufgerundet, kleinere Bruchteile abgerundet. Beispiel: 13,5 Tage → 14 Tage. Eine Rundung auf halbe Tage ist eine vertragliche Kulanzregelung mancher Arbeitgeber, gesetzlich nicht vorgeschrieben.',
       },
     ],
   },
@@ -329,7 +329,7 @@ Die Pendlerpauschale steht jedem Arbeitnehmer zu — unabhängig davon, ob er mi
 
 **Wie hoch ist die Pendlerpauschale 2026?**
 
-Seit dem 1. Januar 2026 gilt ein **einheitlicher Kilometersatz** (§ 9 Abs. 1 Nr. 4 EStG i.d.F. Steueränderungsgesetz 2025):
+Seit dem 1. Januar 2026 gilt ein **einheitlicher Kilometersatz** (§ 9 Abs. 1 Satz 3 Nr. 4 EStG i.d.F. Steueränderungsgesetz 2025):
 
 - **0,38 € pro Entfernungskilometer und Arbeitstag — ab dem ersten Kilometer.**
 
@@ -371,7 +371,11 @@ Die Pendlerpauschale wird in der Einkommensteuererklärung als Werbungskosten ei
 - Der **Arbeitnehmer-Pauschbetrag** von 1.230 € (Stand 2026) wird automatisch berücksichtigt. Die Pendlerpauschale lohnt sich erst, wenn sie zusammen mit anderen Werbungskosten diesen Betrag übersteigt.
 - Belege aufbewahren: Das Finanzamt kann Nachweise verlangen (z. B. Routenplaner-Ausdruck, Bescheinigung des Arbeitgebers über Homeoffice-Tage).
 
-Bei einem Arbeitsplatzwechsel im laufenden Jahr können die Pendlerpauschalen für beide Arbeitsstätten separat berechnet und addiert werden. Bei mehreren Tätigkeitsstätten wird nur die Entfernung zur ersten Tätigkeitsstätte berücksichtigt.`,
+Bei einem Arbeitsplatzwechsel im laufenden Jahr können die Pendlerpauschalen für beide Arbeitsstätten separat berechnet und addiert werden. Bei mehreren Tätigkeitsstätten wird nur die Entfernung zur ersten Tätigkeitsstätte berücksichtigt.
+
+**Mobilitätsprämie für Geringverdiener**
+
+Wer unter dem Grundfreibetrag (12.348 € in 2026) verdient, zahlt keine Einkommensteuer und profitiert daher nicht von der Pendlerpauschale als Werbungskosten-Abzug. Für diese Steuerpflichtigen wurde mit dem Steueränderungsgesetz 2025 (BGBl. I 2025 Nr. 363) die Mobilitätsprämie nach § 101 EStG unbefristet eingeführt: 14 % der Pendlerpauschalen ab dem 21. Kilometer als Direktauszahlung mit dem Steuerbescheid.`,
     faq: [
       {
         frage: 'Wie hoch ist die Pendlerpauschale 2026?',
@@ -396,6 +400,10 @@ Bei einem Arbeitsplatzwechsel im laufenden Jahr können die Pendlerpauschalen f�
       {
         frage: 'Wo trage ich die Pendlerpauschale in der Steuererklärung ein?',
         antwort: 'In der Anlage N (Einkünfte aus nichtselbständiger Arbeit), Zeile 31 ff. Geben Sie die Adresse der Arbeitsstätte, die Entfernung in km, die Anzahl der Arbeitstage und das genutzte Verkehrsmittel an.',
+      },
+      {
+        frage: 'Was, wenn ich keine Steuern zahle?',
+        antwort: 'Wer mit seinem zu versteuernden Einkommen unter dem Grundfreibetrag von 12.348 € (2026) liegt, zahlt keine Einkommensteuer und kann die Pendlerpauschale steuerlich nicht absetzen. In diesem Fall greift die Mobilitätsprämie nach § 101 EStG: Sie beträgt 14 % der Pendlerpauschalen ab dem 21. Kilometer und wird zusammen mit dem Steuerbescheid ausgezahlt. Die Mobilitätsprämie wurde durch das Steueränderungsgesetz 2025 (BGBl. I 2025 Nr. 363) unbefristet verlängert.',
       },
     ],
   },
@@ -598,7 +606,7 @@ Ein häufiges Missverständnis: Viele Freelancer orientieren sich am Stundenlohn
 
 **Kleinunternehmerregelung: Vor- und Nachteile**
 
-Die Kleinunternehmerregelung (§ 19 UStG) befreit Freelancer mit einem Jahresumsatz unter 25.000 Euro (ab 2025) von der Umsatzsteuer. Der Vorteil: Sie müssen keine Umsatzsteuervoranmeldung abgeben und können Privatkunden günstigere Preise anbieten, da keine 19 Prozent Umsatzsteuer aufgeschlagen werden. Der Nachteil: Sie können keine Vorsteuer aus Ihren Betriebsausgaben abziehen. Wenn Sie hohe Investitionen haben (Computer, Software, Büroausstattung), kann das teuer werden. Zudem wirken Rechnungen ohne Umsatzsteuer auf manche Geschäftskunden unprofessionell. Für die meisten Freelancer mit B2B-Kunden lohnt sich die Regelbesteuerung — denn die Umsatzsteuer ist für Geschäftskunden ein durchlaufender Posten, den sie selbst als Vorsteuer abziehen können.
+Die Kleinunternehmerregelung (§ 19 UStG) befreit Freelancer von der Umsatzsteuerpflicht. Maßgeblich sind seit dem Wachstumschancengesetz (gültig ab 01.01.2025) zwei Schwellen: Der Vorjahresumsatz darf 25.000 Euro nicht überstiegen haben, und der laufende Jahresumsatz darf voraussichtlich 100.000 Euro nicht übersteigen. Wird die zweite Schwelle unterjährig überschritten, fällt die Kleinunternehmer-Eigenschaft mit sofortiger Wirkung weg — alle übersteigenden Umsätze werden umsatzsteuerpflichtig. Der Vorteil: Sie müssen keine Umsatzsteuervoranmeldung abgeben und können Privatkunden günstigere Preise anbieten, da keine 19 Prozent Umsatzsteuer aufgeschlagen werden. Der Nachteil: Sie können keine Vorsteuer aus Ihren Betriebsausgaben abziehen. Wenn Sie hohe Investitionen haben (Computer, Software, Büroausstattung), kann das teuer werden. Zudem wirken Rechnungen ohne Umsatzsteuer auf manche Geschäftskunden unprofessionell. Für die meisten Freelancer mit B2B-Kunden lohnt sich die Regelbesteuerung — denn die Umsatzsteuer ist für Geschäftskunden ein durchlaufender Posten, den sie selbst als Vorsteuer abziehen können.
 
 **Häufiger Fehler: Nur das Netto-Wunschgehalt als Basis nehmen**
 
@@ -626,7 +634,7 @@ Kalkulieren Sie Ihren Stundensatz großzügig: Es ist einfacher, einen Rabatt zu
       },
       {
         frage: 'Soll ich als Freelancer die Kleinunternehmerregelung nutzen?',
-        antwort: 'Die Kleinunternehmerregelung (keine USt bis 25.000 € Jahresumsatz) lohnt sich vor allem bei Privatkunden und niedrigen Betriebsausgaben. Bei B2B-Kunden ist sie meist nachteilig: Die USt ist für Geschäftskunden ein durchlaufender Posten, und Sie können keine Vorsteuer aus Ihren Einkäufen abziehen. Für die meisten Freelancer empfiehlt sich die Regelbesteuerung.',
+        antwort: 'Die Kleinunternehmerregelung (keine USt, solange Vorjahresumsatz unter 25.000 € und laufender Jahresumsatz unter 100.000 € — § 19 UStG seit 01.01.2025) lohnt sich vor allem bei Privatkunden und niedrigen Betriebsausgaben. Bei B2B-Kunden ist sie meist nachteilig: Die USt ist für Geschäftskunden ein durchlaufender Posten, und Sie können keine Vorsteuer aus Ihren Einkäufen abziehen. Für die meisten Freelancer empfiehlt sich die Regelbesteuerung.',
       },
       {
         frage: 'Wie viele Stunden kann ich realistisch pro Monat fakturieren?',
@@ -717,6 +725,26 @@ Für die Planung Ihres verbleibenden Urlaubs nutzen Sie unseren [Urlaubstage-Rec
         frage: 'Was muss ich tun, wenn mir gekündigt wird?',
         antwort: 'Drei Sofortmaßnahmen: 1. Melden Sie sich innerhalb von 3 Tagen bei der Agentur für Arbeit arbeitssuchend (sonst droht Sperrzeit). 2. Prüfen Sie die Kündigung auf Formfehler (muss schriftlich sein, § 623 BGB). 3. Wenn Sie die Kündigung anfechten möchten, reichen Sie innerhalb von 3 Wochen eine Kündigungsschutzklage beim Arbeitsgericht ein.',
       },
+      {
+        frage: 'Werden Beschäftigungszeiten vor dem 25. Lebensjahr mitgezählt?',
+        antwort: 'Ja. § 622 Abs. 2 S. 2 BGB sieht zwar vor, dass Beschäftigungszeiten vor Vollendung des 25. Lebensjahres bei der Berechnung der gestaffelten Kündigungsfristen unberücksichtigt bleiben. Diese Regelung wurde aber vom Europäischen Gerichtshof in der Entscheidung Kücükdeveci (C-555/07 vom 19.01.2010) für unionsrechtswidrig erklärt — sie verstößt gegen das Verbot der Altersdiskriminierung. Praktisch bedeutet das: Alle Beschäftigungszeiten zählen, auch die vor dem 25. Lebensjahr. Der Rechner berücksichtigt das automatisch, wenn Sie Ihre vollständige Beschäftigungsdauer eingeben.',
+      },
+      {
+        frage: 'Gibt es Sonderregelungen für kleine Betriebe?',
+        antwort: 'Ja. Nach § 622 Abs. 5 Nr. 2 BGB können Arbeitgeber mit höchstens 20 Arbeitnehmern (Auszubildende zählen nicht mit) in den ersten zwei Jahren der Beschäftigung eine vereinfachte Kündigungsfrist von vier Wochen ohne Termin-Bindung vereinbaren — also kein Zwang, zum 15. oder Monatsende zu kündigen. Die Vereinbarung muss arbeits- oder tarifvertraglich erfolgen; sie greift nicht automatisch.',
+      },
+      {
+        frage: 'Wie weise ich nach, dass die Kündigung zugegangen ist?',
+        antwort: 'Maßgeblich ist die tatsächliche Zustellung an den Empfänger, nicht das Absenden. Das Bundesarbeitsgericht hat im Urteil vom 30.01.2025 (Az. 2 AZR 68/24) klargestellt: Der Online-Sendungsstatus eines Postdienstleisters reicht als Zugangsbeweis nicht aus. Erforderlich ist der unterschriebene Auslieferungsbeleg (Einschreiben mit Rückschein) oder die persönliche Übergabe gegen Empfangsquittung. Wichtig ist das insbesondere für die Berechnung der dreiwöchigen Klagefrist nach § 4 KSchG, die mit dem Zugang zu laufen beginnt.',
+      },
+      {
+        frage: 'Welche Kündigungsfrist gilt für schwerbehinderte Arbeitnehmer?',
+        antwort: 'Bei schwerbehinderten Arbeitnehmern (Grad der Behinderung mindestens 50) gilt eine Mindestkündigungsfrist von 4 Wochen (§ 169 SGB IX) — sie kann nicht durch Tarif- oder Einzelarbeitsvertrag verkürzt werden. Wichtiger noch: Vor jeder ordentlichen Kündigung muss der Arbeitgeber die Zustimmung des Integrationsamts einholen (§ 168 SGB IX). Ohne diese Zustimmung ist die Kündigung unwirksam — unabhängig davon, ob die Frist eingehalten wurde. Der besondere Kündigungsschutz greift, sobald das Arbeitsverhältnis länger als sechs Monate besteht.',
+      },
+      {
+        frage: 'Was passiert mit der Kündigungsfrist im Insolvenzverfahren?',
+        antwort: 'Im eröffneten Insolvenzverfahren kann der Insolvenzverwalter Arbeitsverhältnisse mit einer Höchstfrist von drei Monaten zum Monatsende kündigen (§ 113 InsO) — auch dann, wenn arbeits- oder tarifvertraglich eine längere Frist vereinbart ist. § 113 InsO ist ein Frist-Cap nach oben, kein Cap nach unten: Greift nach § 622 BGB ohnehin eine kürzere Frist (z. B. zwei Monate bei fünf Jahren Betriebszugehörigkeit), bleibt diese bestehen.',
+      },
     ],
   },
   {
@@ -757,7 +785,7 @@ Seit dem 1. Januar 2019 gibt es die sogenannte **Brückenteilzeit** (§ 9a TzBfG
 
 Teilzeit hat direkte Auswirkungen auf Ihre spätere Rente. Die Rentenversicherung berechnet **Entgeltpunkte** auf Basis Ihres Bruttoeinkommens. Wer in Teilzeit arbeitet, erwirbt weniger Entgeltpunkte und erhält somit eine niedrigere Rente. Bei einer Reduzierung von 40 auf 30 Stunden sinken die Rentenansprüche ebenfalls um 25 %. Über viele Jahre summiert sich dieser Unterschied erheblich.
 
-Ein Beispiel: Bei 3.500 € Vollzeit-Brutto erwirbt man etwa 0,9 Entgeltpunkte pro Jahr. In Teilzeit mit 30 Stunden (2.625 € Brutto) sind es nur noch etwa 0,68 Punkte. Nach 20 Jahren Teilzeit ergibt sich eine um ca. 170 € niedrigere monatliche Rente (Stand 2026). Private Vorsorge oder eine betriebliche Altersvorsorge können diese Lücke teilweise schließen.
+Ein Beispiel: Bei 3.500 € Vollzeit-Brutto erwirbt man etwa 0,81 Entgeltpunkte pro Jahr (Durchschnittsentgelt 2026 vorläufig 51.944 €). In Teilzeit mit 30 Stunden (2.625 € Brutto) sind es nur noch etwa 0,61 Punkte. Nach 20 Jahren Teilzeit ergibt sich eine um ca. 165 € niedrigere monatliche Rente (Stand 2026, Rentenwert 40,79 €). Private Vorsorge oder eine betriebliche Altersvorsorge können diese Lücke teilweise schließen.
 
 **Urlaubsanspruch bei Teilzeit richtig berechnen**
 
@@ -825,8 +853,13 @@ In Deutschland gibt es **keinen generellen gesetzlichen Anspruch** auf eine Abfi
 
 - **Aufhebungsvertrag:** Arbeitgeber und Arbeitnehmer einigen sich einvernehmlich auf die Beendigung des Arbeitsverhältnisses, oft mit Abfindung.
 - **Kündigungsschutzklage:** Im Rahmen eines Vergleichs vor dem Arbeitsgericht wird häufig eine Abfindung vereinbart.
+- **§§ 9, 10 KSchG (gerichtliche Auflösung):** Hat eine Kündigungsschutzklage Erfolg, ist die Fortsetzung des Arbeitsverhältnisses für den Arbeitnehmer aber unzumutbar geworden, kann das Arbeitsgericht auf seinen Antrag das Arbeitsverhältnis gegen Zahlung einer Abfindung auflösen. Höchstgrenzen: bis zu 12 Monatsverdienste; bis zu 15 Monatsverdienste ab 50 Jahren mit mindestens 15 Jahren Betriebszugehörigkeit; bis zu 18 Monatsverdienste ab 55 Jahren mit mindestens 20 Jahren Betriebszugehörigkeit.
 - **§ 1a KSchG:** Bei betriebsbedingter Kündigung kann der Arbeitgeber im Kündigungsschreiben eine Abfindung von 0,5 Monatsgehältern pro Beschäftigungsjahr anbieten, wenn der Arbeitnehmer auf eine Klage verzichtet.
 - **Sozialplan:** Bei größeren Entlassungen regelt ein Sozialplan die Abfindungshöhe.
+
+**Wichtigste Frist: 3 Wochen nach Zugang der Kündigung**
+
+Eine Kündigungsschutzklage muss nach **§ 4 KSchG** innerhalb von **drei Wochen** nach Zugang der Kündigung beim Arbeitsgericht erhoben werden. Diese Frist ist die strategische Schlüsselgröße für jede Abfindung über den Klageweg: Wer sie versäumt, verliert nicht nur den Kündigungsschutz, sondern auch die Verhandlungsposition für einen Vergleich oder den Auflösungsantrag nach §§ 9, 10 KSchG. Die Frist beginnt mit dem tatsächlichen Zugang der Kündigung, nicht mit dem Datum des Kündigungsschreibens. Auch wenn Sie zunächst auf einen Aufhebungsvertrag setzen, sollten Sie eine vorsorgliche Klage erwägen — falls die Verhandlungen scheitern, ist die 3-Wochen-Frist sonst möglicherweise abgelaufen.
 
 **Abfindung und Arbeitslosengeld: Gibt es eine Sperrzeit?**
 
@@ -840,6 +873,10 @@ Die Verhandlungsposition hängt maßgeblich davon ab, ob die Kündigung vor dem 
 - Formfehler in der Kündigung (fehlende Betriebsratsanhörung, Sozialauswahl)
 - Sonderkündigungsschutz (Schwangerschaft, Schwerbehinderung, Betriebsrat)
 - Drohende Kündigungsschutzklage mit guten Erfolgsaussichten
+
+**Aufrundung angefangener Jahre**
+
+Nach § 1a Abs. 2 S. 3 KSchG werden Beschäftigungs-Restzeiten von mehr als sechs Monaten auf ein volles Jahr aufgerundet. Beispiel: 7 Jahre und 7 Monate ergeben in der Berechnungsbasis 8 Jahre. Bei genau sechs Monaten oder weniger wird das angefangene Jahr nicht berücksichtigt.
 
 Für die Berechnung Ihrer Kündigungsfrist nutzen Sie unseren [Kündigungsfrist-Rechner](/arbeit/kuendigungsfrist-rechner). Eine detaillierte Netto-Berechnung Ihres regulären Gehalts finden Sie im [Brutto-Netto-Rechner](/finanzen/brutto-netto-rechner), und mit dem [Steuererstattungs-Rechner](/finanzen/steuererstattung-rechner) können Sie Ihre voraussichtliche Steuerrückerstattung berechnen.`,
     faq: [
@@ -867,6 +904,14 @@ Für die Berechnung Ihrer Kündigungsfrist nutzen Sie unseren [Kündigungsfrist-
         frage: 'Muss ich Sozialversicherungsbeiträge auf die Abfindung zahlen?',
         antwort: 'Nein. Echte Abfindungen für den Verlust des Arbeitsplatzes sind sozialversicherungsfrei — es fallen keine Beiträge zur Kranken-, Renten-, Pflege- oder Arbeitslosenversicherung an. Nur Einkommensteuer, ggf. Solidaritätszuschlag und Kirchensteuer werden fällig.',
       },
+      {
+        frage: 'Wie werden angefangene Jahre bei der Abfindung berechnet?',
+        antwort: 'Nach § 1a Abs. 2 S. 3 KSchG werden Beschäftigungs-Restzeiten von mehr als sechs Monaten auf ein volles Jahr aufgerundet. Beispiel: 7 Jahre und 7 Monate Beschäftigung werden als 8 Jahre gerechnet. Bei genau sechs Monaten oder weniger wird das angefangene Jahr nicht berücksichtigt. Die Aufrundungsregel gilt für die gesetzliche Abfindung nach § 1a KSchG; bei Aufhebungsverträgen oder Sozialplänen können andere Regelungen vereinbart werden.',
+      },
+      {
+        frage: 'Was bedeutet der Auflösungsantrag nach §§ 9, 10 KSchG?',
+        antwort: 'Wenn ein Arbeitnehmer mit einer Kündigungsschutzklage erfolgreich ist (die Kündigung also unwirksam war), das Arbeitsverhältnis aber durch den Prozess so belastet ist, dass eine Fortsetzung unzumutbar erscheint, kann das Arbeitsgericht auf seinen Antrag (§ 9 KSchG) die Auflösung gegen Zahlung einer Abfindung anordnen. Die Höchstgrenzen nach § 10 KSchG: bis zu 12 Monatsverdienste; bis zu 15 Monatsverdienste, wenn der Arbeitnehmer mindestens 50 Jahre alt ist und mindestens 15 Jahre Betriebszugehörigkeit hat; bis zu 18 Monatsverdienste, wenn er mindestens 55 Jahre alt ist und mindestens 20 Jahre Betriebszugehörigkeit hat. Es handelt sich um Höchstgrenzen, die das Gericht im Einzelfall ausschöpft oder unterschreitet — nicht um einen gesetzlichen Mindestanspruch.',
+      },
     ],
   },
   {
@@ -883,7 +928,7 @@ Für die Berechnung Ihrer Kündigungsfrist nutzen Sie unseren [Kündigungsfrist-
     beispiel: 'ET: 15. August 2026, Netto 2.500 € → Mutterschutz: 4. Juli – 10. Oktober 2026 (14 Wochen) → Einkommen: 2.500 €/Monat (volles Netto)',
     erklaerung: `**Was ist der Mutterschutz und wie lange dauert er?**
 
-Der Mutterschutz ist eine gesetzlich geregelte Schutzfrist für erwerbstätige Frauen vor und nach der Geburt ihres Kindes. Er ist im **Mutterschutzgesetz (MuSchG)** geregelt und gilt für alle Frauen in einem Arbeitsverhältnis — unabhängig davon, ob sie in Vollzeit, Teilzeit, einem Minijob oder befristet beschäftigt sind. Auch Auszubildende, Praktikantinnen und Heimarbeiterinnen fallen unter den Mutterschutz.
+Der Mutterschutz ist eine gesetzlich geregelte Schutzfrist für erwerbstätige Frauen vor und nach der Geburt ihres Kindes. Er ist im **Mutterschutzgesetz (MuSchG)** geregelt und gilt für alle Frauen in einem Arbeitsverhältnis — unabhängig davon, ob sie in Vollzeit, Teilzeit, einem Minijob oder befristet beschäftigt sind. Auch Auszubildende, Praktikantinnen und Heimarbeiterinnen fallen unter den Mutterschutz. Seit der MuSchG-Reform vom 30.05.2017 (in Kraft 01.01.2018) gilt er außerdem für Schülerinnen und Studentinnen.
 
 Die Mutterschutzfrist beginnt **6 Wochen vor dem errechneten Entbindungstermin** (ET) und endet **8 Wochen nach der Geburt**. Das ergibt eine Gesamtdauer von mindestens **14 Wochen**. Während der 6 Wochen vor der Geburt dürfen Schwangere auf eigenen Wunsch weiterarbeiten — nach der Geburt gilt ein absolutes Beschäftigungsverbot von 8 Wochen, auf das nicht verzichtet werden kann.
 
@@ -953,6 +998,26 @@ Nutzen Sie unseren [Geburtstermin-Rechner](/gesundheit/geburtstermin-rechner), u
         frage: 'Was ist der Unterschied zwischen Mutterschutz und Elternzeit?',
         antwort: 'Der Mutterschutz ist eine gesetzliche Schutzfrist (6+8 Wochen), gilt nur für die Mutter und wird mit dem vollen Nettogehalt vergütet. Die Elternzeit schließt an den Mutterschutz an, kann von beiden Elternteilen genommen werden (bis zu 3 Jahre) und wird mit Elterngeld (65–67% des Netto, max. 1.800 €) vergütet.',
       },
+      {
+        frage: 'Was zählt als Frühgeburt?',
+        antwort: 'Eine Geburt gilt als Frühgeburt, wenn das Kind ein Geburtsgewicht von weniger als 2.500 g hat oder wenn ärztlich fehlende Reifezeichen festgestellt werden. In beiden Fällen verlängert sich die Schutzfrist nach der Geburt von 8 auf 12 Wochen. Der ärztliche Nachweis erfolgt über die Geburtsdokumentation oder eine separate Bescheinigung.',
+      },
+      {
+        frage: 'Welcher Nachweis ist bei einer Fehl- oder Totgeburt nötig?',
+        antwort: 'Seit dem 01.01.2026 gibt es das bundeseinheitliche Muster 9 als Nachweis für Fehl- und Totgeburten. Es ersetzt die zuvor regional unterschiedlichen Übergangsbescheinigungen und vereinheitlicht den Anspruchsnachweis für Schutzfrist und Mutterschaftsgeld. Das Muster 9 wird vom behandelnden Arzt oder der Hebamme ausgestellt.',
+      },
+      {
+        frage: 'Gibt es einen Mindestschutz, wenn die Geburt sehr spät erfolgt?',
+        antwort: 'Ja. Auch bei einer Geburt nach dem berechneten Termin beträgt die Mindestschutzfrist nach § 3 Abs. 2 MuSchG insgesamt 99 Tage (Summe aus Vor- und Nachgeburtsschutz). Verkürzt sich der Vorgeburtsschutz wegen einer späten Geburt, verlängert sich der Nachgeburtsschutz entsprechend, sodass die 99-Tage-Untergrenze gewahrt bleibt.',
+      },
+      {
+        frage: 'Gilt der Mutterschutz auch für Schülerinnen und Studentinnen?',
+        antwort: 'Ja. Seit der MuSchG-Reform vom 30.05.2017 (in Kraft seit 01.01.2018) gilt der Mutterschutz auch für Schülerinnen und Studentinnen — Schutzfristen, Beschäftigungsverbote und Kündigungsschutz greifen analog zum Beschäftigungsverhältnis. Praxisrelevant ist insbesondere der Schutz vor Pflichtveranstaltungen während der Schutzfristen sowie der Anspruch auf Schutzfrist-Verschiebung von Prüfungen.',
+      },
+      {
+        frage: 'Was gilt bei einer Totgeburt?',
+        antwort: 'Eine Totgeburt liegt vor, wenn das Kind ab einem Gewicht von 500 g oder ab der vollendeten 24. Schwangerschaftswoche ohne Lebenszeichen geboren wird. Es gilt eine Schutzfrist von 8 Wochen nach der Geburt; der Mehrlings- oder Frühgeburts-Bonus (12 Wochen) greift bei einer Totgeburt nicht. Der erweiterte Kündigungsschutz nach § 17 MuSchG bleibt erhalten. Der Nachweis erfolgt seit 01.01.2026 über das bundeseinheitliche Muster 9.',
+      },
     ],
   },
   {
@@ -969,23 +1034,23 @@ Nutzen Sie unseren [Geburtstermin-Rechner](/gesundheit/geburtstermin-rechner), u
     beispiel: 'Ehepaar, Netto 5.000 €/Monat gesamt, einvernehmliche Scheidung mit Versorgungsausgleich → Verfahrenswert 16.500 € → Gerichtskosten ca. 749 € + 1 Anwalt ca. 3.427 € brutto = rund 4.176 € gesamt bzw. 2.088 € pro Person.',
     erklaerung: `**Was kostet eine Scheidung in Deutschland?**
 
-Die Kosten einer Scheidung hängen hauptsächlich vom **Verfahrenswert** ab — dieser richtet sich in erster Linie nach dem gemeinsamen Nettoeinkommen beider Ehepartner. Als Faustregel gilt: **Verfahrenswert = 3 × gemeinsames monatliches Nettoeinkommen**, mindestens jedoch 3.000 Euro. Verdienen beide Partner zusammen 5.000 Euro netto im Monat, liegt der Verfahrenswert bei 15.000 Euro. Dazu kommen typischerweise noch **10 Prozent für den Versorgungsausgleich**, der gesetzlich der Regelfall ist und die Rentenansprüche aus der Ehezeit aufteilt. Aus dem Verfahrenswert ergeben sich die Gerichtskosten nach der Tabelle zum FamGKG (Anlage 2 zu § 28 FamGKG) sowie die Anwaltskosten nach dem RVG (Anlage 2 zu § 13 RVG). Beide Tabellen wurden mit dem **KostBRÄG 2025 zum 01.06.2025** um durchschnittlich 6 Prozent angehoben — dieser Rechner berücksichtigt die aktuellen Werte. Eine einvernehmliche Scheidung bei mittlerem Einkommen liegt seither meist zwischen **3.500 und 6.000 Euro Gesamtkosten**. Streitige Verfahren mit Folgesachen können dagegen schnell **10.000 bis 25.000 Euro** und mehr kosten.
+Die Kosten einer Scheidung hängen hauptsächlich vom **Verfahrenswert** ab — dieser richtet sich in erster Linie nach dem gemeinsamen Nettoeinkommen beider Ehepartner. Als Faustregel gilt: **Verfahrenswert = 3 × gemeinsames monatliches Nettoeinkommen**, mindestens jedoch 3.000 Euro. Verdienen beide Partner zusammen 5.000 Euro netto im Monat, liegt der Verfahrenswert bei 15.000 Euro. Dazu kommen typischerweise noch **10 Prozent für den Versorgungsausgleich**, der gesetzlich der Regelfall ist und die Rentenansprüche aus der Ehezeit aufteilt. Auch wenn der Versorgungsausgleich durch notariellen Vertrag ausgeschlossen wird, fällt ein **Mindestverfahrenswert von 1.000 Euro** für die VA-Sache an — denn das Familiengericht muss den Ausschluss formell prüfen. Aus dem Verfahrenswert ergeben sich die Gerichtskosten nach der Tabelle zum FamGKG (Anlage 2 zu § 28 FamGKG) sowie die Anwaltskosten nach dem RVG (Anlage 2 zu § 13 RVG). Beide Tabellen wurden mit dem **KostBRÄG 2025 zum 01.06.2025** um durchschnittlich 6 Prozent angehoben — dieser Rechner berücksichtigt die aktuellen Werte. Eine einvernehmliche Scheidung bei mittlerem Einkommen liegt seither meist zwischen **3.500 und 6.000 Euro Gesamtkosten**. Streitige Verfahren mit Folgesachen können dagegen schnell **10.000 bis 25.000 Euro** und mehr kosten.
 
 **Einvernehmliche vs. streitige Scheidung — der wichtigste Kostenfaktor**
 
-Der entscheidende Hebel, um Scheidungskosten zu reduzieren, ist die **Einvernehmlichkeit**. Bei einer einvernehmlichen Scheidung reicht **ein einziger Anwalt**, der den Antrag stellt — der andere Ehepartner stimmt ohne eigene anwaltliche Vertretung zu. Das halbiert die Anwaltskosten fast vollständig. Zusätzlich fällt bei Einvernehmen oft eine 1,0-Einigungsgebühr nach Nr. 1003 VV RVG an, die aber immer noch günstiger ist als ein zweiter Anwalt. Bei einer **streitigen Scheidung** muss jeder Partner einen eigenen Anwalt beauftragen (Anwaltszwang vor dem Familiengericht). Außerdem werden meist Folgesachen mitverhandelt: **Zugewinnausgleich** (+20 % Verfahrenswert), **Unterhalt** (+15 %), **Sorgerecht/Umgang** (+4.000 € pauschal) und **Ehewohnung/Hausrat** (+4.000 €). Jede Folgesache erhöht nicht nur den Verfahrenswert, sondern damit auch die Gerichtsgebühr und alle Anwaltsgebühren. Im Vergleich kann eine streitige Scheidung leicht **das 2- bis 4-fache** einer einvernehmlichen kosten. Wer frühzeitig über [Kündigungsfristen](/arbeit/kuendigungsfrist-rechner) oder eine [Abfindung](/arbeit/abfindungsrechner) spricht, bleibt auch bei wirtschaftlichen Fragen handlungsfähig.
+Der entscheidende Hebel, um Scheidungskosten zu reduzieren, ist die **Einvernehmlichkeit**. Bei einer einvernehmlichen Scheidung reicht **ein einziger Anwalt**, der den Antrag stellt — der andere Ehepartner stimmt ohne eigene anwaltliche Vertretung zu. Das halbiert die Anwaltskosten fast vollständig. Zusätzlich fällt bei Einvernehmen oft eine 1,0-Einigungsgebühr nach Nr. 1003 VV RVG an, die aber immer noch günstiger ist als ein zweiter Anwalt. Bei einer **streitigen Scheidung** muss jeder Partner einen eigenen Anwalt beauftragen (Anwaltszwang vor dem Familiengericht). Außerdem werden meist Folgesachen mitverhandelt: **Zugewinnausgleich** (+20 % Verfahrenswert), **Unterhalt** (+15 %), **Sorgerecht/Umgang** (+4.000 € pauschal) und **Ehewohnung/Hausrat** (+4.000 €). Diese Werte sind **Faustregeln** — der tatsächliche Verfahrenswert richtet sich nach der konkreten Forderung (etwa der Höhe des bestrittenen Zugewinnausgleichs); bei komplexen Vermögensauseinandersetzungen kann der Wert deutlich höher liegen. Jede Folgesache erhöht nicht nur den Verfahrenswert, sondern damit auch die Gerichtsgebühr und alle Anwaltsgebühren. Im Vergleich kann eine streitige Scheidung leicht **das 2- bis 4-fache** einer einvernehmlichen kosten. Wer frühzeitig über [Kündigungsfristen](/arbeit/kuendigungsfrist-rechner) oder eine [Abfindung](/arbeit/abfindungsrechner) spricht, bleibt auch bei wirtschaftlichen Fragen handlungsfähig.
 
 **Verfahrenswert, Gerichts- und Anwaltskosten im Detail**
 
-Der Verfahrenswert ist die Rechengröße, aus der sich die Gebühren ergeben — wichtig: **Gerichts- und Anwaltskosten werden aus zwei unterschiedlichen Tabellen berechnet**. Beispiel Verfahrenswert 15.000 Euro: Die 1,0-Gebühr nach **FamGKG-Tabelle** beträgt 344 Euro, die Gerichtskosten als 2,0-Gebühr also 688 Euro. Die 1,0-Gebühr nach **RVG-Tabelle** liegt bei 762 Euro — daraus berechnet sich der Anwalt: 1,3-Verfahrensgebühr (Nr. 3100 VV RVG) = 990,60 Euro, 1,2-Terminsgebühr (Nr. 3104 VV RVG) = 914,40 Euro, ggf. 1,0-Einigungsgebühr (Nr. 1003 VV RVG) = 762 Euro, dazu 20 Euro Auslagenpauschale (Nr. 7002 VV RVG) und 19 Prozent Mehrwertsteuer. Bei 15.000 Euro Verfahrenswert kostet ein Anwalt **einvernehmlich** rund 3.197 Euro brutto (mit Einigungsgebühr), **streitig** rund 2.290 Euro brutto pro Anwalt (ohne Einigungsgebühr — dafür dann 2 Anwälte). Die Kosten werden grundsätzlich **hälftig geteilt**, sofern keine abweichende Kostenentscheidung erfolgt. Unser Rechner zeigt Ihnen direkt den Anteil pro Person.
+Der Verfahrenswert ist die Rechengröße, aus der sich die Gebühren ergeben — wichtig: **Gerichts- und Anwaltskosten werden aus zwei unterschiedlichen Tabellen berechnet**. Beispiel Verfahrenswert 15.000 Euro: Die 1,0-Gebühr nach **FamGKG-Tabelle** beträgt 344 Euro, die Gerichtskosten als 2,0-Gebühr also 688 Euro. Die 1,0-Gebühr nach **RVG-Tabelle** liegt bei 762 Euro — daraus berechnet sich der Anwalt: 1,3-Verfahrensgebühr (Nr. 3100 VV RVG) = 990,60 Euro, 1,2-Terminsgebühr (Nr. 3104 VV RVG) = 914,40 Euro, ggf. 1,0-Einigungsgebühr (Nr. 1003 VV RVG) = 762 Euro, dazu eine Auslagenpauschale nach Nr. 7002 VV RVG in Höhe von **20 % der Gebühren, höchstens 20 Euro** (bei üblichen Verfahrenswerten regelmäßig die Höchstgrenze) und 19 Prozent Mehrwertsteuer. Bei 15.000 Euro Verfahrenswert kostet ein Anwalt **einvernehmlich** rund 3.197 Euro brutto (mit Einigungsgebühr), **streitig** rund 2.290 Euro brutto pro Anwalt (ohne Einigungsgebühr — dafür dann 2 Anwälte). Die Kosten werden grundsätzlich **hälftig geteilt**, sofern keine abweichende Kostenentscheidung erfolgt. Unser Rechner zeigt Ihnen direkt den Anteil pro Person.
 
 **Verfahrenskostenhilfe bei geringem Einkommen**
 
-Wer die Scheidung finanziell nicht allein tragen kann, hat Anspruch auf **Verfahrenskostenhilfe (VKH)** — vergleichbar mit der Prozesskostenhilfe in anderen Verfahren. Der Staat übernimmt dann die Gerichts- und Anwaltskosten ganz oder in Form eines zinslosen Darlehens mit monatlichen Raten. Maßgeblich ist das einzusetzende Einkommen nach Abzug von Miete, Unterhaltspflichten und Freibeträgen. Den Antrag stellt Ihr Anwalt direkt beim Familiengericht, zusammen mit dem Scheidungsantrag. Grobe Orientierung: Wer weniger als etwa 1.500 Euro netto zur Verfügung hat, erhält die VKH häufig ratenfrei. Bei darüber liegendem Einkommen wird in Monatsraten zurückgezahlt — maximal 48 Raten. Prüfen Sie dazu auch den [Bürgergeld-Rechner](/finanzen/buergergeld-rechner) oder [Wohngeld-Rechner](/finanzen/wohngeld-rechner), um Ihre gesamte finanzielle Situation zu überblicken.
+Wer die Scheidung finanziell nicht allein tragen kann, hat Anspruch auf **Verfahrenskostenhilfe (VKH)** — vergleichbar mit der Prozesskostenhilfe in anderen Verfahren. Der Staat übernimmt dann die Gerichts- und Anwaltskosten ganz oder in Form eines zinslosen Darlehens mit monatlichen Raten. Maßgeblich ist das einzusetzende Einkommen nach Abzug von Miete, Unterhaltspflichten und Freibeträgen. Den Antrag stellt Ihr Anwalt direkt beim Familiengericht, zusammen mit dem Scheidungsantrag. Maßgeblich sind die **VKH-Freibeträge nach § 115 ZPO** (vom Bundesministerium der Justiz jährlich angepasst): ein Freibetrag für den Antragsteller, ein Ehegatten-Freibetrag, ein Erwerbstätigen-Mehrbedarf, dazu die tatsächlichen Wohnkosten und Unterhaltsverpflichtungen für Kinder. Was nach diesen Abzügen vom Nettoeinkommen übrig bleibt, ist das einzusetzende Einkommen — daraus errechnen sich die Monatsraten (maximal 48 Raten). Eine pauschale Netto-Schwelle gibt es nicht; je nach Wohnkosten und Familiensituation kann derselbe Bruttowert einmal zu ratenfreier VKH und einmal zu erheblichen Raten führen. Prüfen Sie dazu auch den [Bürgergeld-Rechner](/finanzen/buergergeld-rechner) oder [Wohngeld-Rechner](/finanzen/wohngeld-rechner), um Ihre gesamte finanzielle Situation zu überblicken.
 
 **Trennungsjahr und Dauer des Verfahrens**
 
-Eine Scheidung setzt in Deutschland grundsätzlich ein **Trennungsjahr** voraus. Erst nach einem Jahr des Getrenntlebens (auch innerhalb derselben Wohnung möglich, mit strikter Trennung von Haushalt und Schlafbereich) kann der Scheidungsantrag gestellt werden. Einvernehmliche Verfahren dauern ab Antragstellung meist **3 bis 6 Monate**, streitige Verfahren mit Folgesachen **1 bis 2 Jahre** oder länger. Je früher Sie sich über die wesentlichen Punkte (Vermögensaufteilung, Unterhalt, Sorgerecht) einig werden, desto schneller und günstiger läuft das Verfahren. Eine **Rechtsschutzversicherung mit Familienrecht-Baustein** kann die Anwaltskosten im Streitfall übernehmen — allerdings nur, wenn der Baustein bereits vor Eintritt der Ehekrise bestand und die Wartezeit (meist 3 Jahre) eingehalten wurde.`,
+Eine Scheidung setzt in Deutschland grundsätzlich ein **Trennungsjahr** voraus. Erst nach einem Jahr des Getrenntlebens (auch innerhalb derselben Wohnung möglich, mit strikter Trennung von Haushalt und Schlafbereich) kann der Scheidungsantrag gestellt werden. Eine **Härtefall-Ausnahme** nach § 1565 Abs. 2 BGB lässt das Trennungsjahr entfallen, wenn die Fortsetzung der Ehe für den Antragsteller eine unzumutbare Härte wäre — etwa bei häuslicher Gewalt, schweren Drohungen oder Suchterkrankungen mit Konsequenzen für die Familie. Die Hürden sind in der Praxis hoch; bloße Differenzen oder der Auszug zu einem neuen Partner reichen nicht. Einvernehmliche Verfahren dauern ab Antragstellung meist **3 bis 6 Monate**, streitige Verfahren mit Folgesachen **1 bis 2 Jahre** oder länger. Je früher Sie sich über die wesentlichen Punkte (Vermögensaufteilung, Unterhalt, Sorgerecht) einig werden, desto schneller und günstiger läuft das Verfahren. Eine **Rechtsschutzversicherung mit Familienrecht-Baustein** kann die Anwaltskosten im Streitfall übernehmen — allerdings nur, wenn der Baustein bereits vor Eintritt der Ehekrise bestand und die Wartezeit (meist 3 Jahre) eingehalten wurde.`,
     faq: [
       {
         frage: 'Was kostet eine Scheidung in Deutschland?',
@@ -1039,7 +1104,7 @@ Für jeden Ehepartner wird der Zugewinn einzeln berechnet. Der Zugewinn kann nie
 
 **Anfangsvermögen und Endvermögen richtig bestimmen**
 
-Das klingt einfach, ist in der Praxis aber anspruchsvoll. Das Anfangsvermögen umfasst alle Aktiva (Geld, Konten, Immobilien, Aktien, Autos, wertvolle Gegenstände) abzüglich der Schulden (Kredite, Steuerschulden, offene Rechnungen). **Problem:** Nach Jahrzehnten ist das Anfangsvermögen oft schwer nachzuweisen. Deshalb empfiehlt sich schon bei der Heirat ein schriftliches **Vermögensverzeichnis**, das beide Partner unterschreiben. Gibt es später Streit über das Anfangsvermögen, muss derjenige, der ein höheres Vermögen behauptet, dieses beweisen — sonst wird es auf Null gesetzt. Das Endvermögen wird auf den **Stichtag der Zustellung des Scheidungsantrags** festgestellt. Beide Partner müssen sich gegenseitig Auskunft geben und auf Verlangen belegen. Für **Immobilien** wird der Verkehrswert (Marktwert) angesetzt, nicht der Einheitswert oder Kaufpreis. Bei **Unternehmen** ist eine professionelle Bewertung erforderlich — das ist oft der kostenintensivste Teil des Verfahrens. **Rentenanwartschaften** zählen nicht zum Endvermögen, sie laufen über den separaten Versorgungsausgleich.
+Das klingt einfach, ist in der Praxis aber anspruchsvoll. Das Anfangsvermögen umfasst alle Aktiva (Geld, Konten, Immobilien, Aktien, Autos, wertvolle Gegenstände) abzüglich der Schulden (Kredite, Steuerschulden, offene Rechnungen). **Problem:** Nach Jahrzehnten ist das Anfangsvermögen oft schwer nachzuweisen. Deshalb empfiehlt sich schon bei der Heirat ein schriftliches **Vermögensverzeichnis**, das beide Partner unterschreiben. Gibt es später Streit über das Anfangsvermögen, muss derjenige, der ein höheres Vermögen behauptet, dieses beweisen — sonst wird es auf Null gesetzt. Das Endvermögen wird auf den **Stichtag der Zustellung des Scheidungsantrags** festgestellt. Beide Partner müssen sich gegenseitig Auskunft geben und auf Verlangen belegen — der **Auskunftsanspruch nach § 1379 BGB** umfasst die Stichtage Heirat, Trennung und Ende der Zugewinngemeinschaft (Zustellung des Scheidungsantrags). Der Auskunfts-Stichtag „Trennung" ist besonders wichtig: **illoyale Vermögensminderungen nach Trennung** — etwa unentgeltliche Zuwendungen an Dritte ohne sittliche Pflicht, Verschwendung oder Handlungen in Schädigungsabsicht — werden nach **§ 1375 Abs. 2 BGB** dem Endvermögen wieder hinzugerechnet. Für **Immobilien** wird der Verkehrswert (Marktwert) angesetzt, nicht der Einheitswert oder Kaufpreis. Bei **Unternehmen** ist eine professionelle Bewertung erforderlich — das ist oft der kostenintensivste Teil des Verfahrens. **Rentenanwartschaften** zählen nicht zum Endvermögen, sie laufen über den separaten Versorgungsausgleich.
 
 **Privilegierter Erwerb: Erbschaften und Schenkungen**
 
@@ -1068,6 +1133,10 @@ Wer den Zugewinnausgleich ausschließen oder modifizieren will, kann das durch e
       {
         frage: 'Was passiert mit Schulden beim Zugewinnausgleich?',
         antwort: 'Seit 2009 darf das Anfangsvermögen negativ sein. Wer mit Schulden in die Ehe startet und diese während der Ehe abbaut, hat dadurch einen höheren Zugewinn — der Schuldenabbau wird als Vermögenszuwachs gewertet. Beispiel: Startschulden −20.000 €, Endvermögen +50.000 € → Zugewinn 70.000 €. Vor 2009 wurden negative Anfangsvermögen auf Null gesetzt, was verschuldet in die Ehe gegangene Partner benachteiligte. Auch das Endvermögen kann nie negativ sein — wer am Ende mehr Schulden als Vermögen hat, hat einen Zugewinn von Null.',
+      },
+      {
+        frage: 'Kann ich den Zugewinnausgleich schon vor der Scheidung einfordern?',
+        antwort: 'In Sonderfällen ja — über den **vorzeitigen Ausgleich nach § 1385 BGB**. Hauptanwendungsfall ist eine Trennung von mindestens drei Jahren. Daneben kommt der vorzeitige Ausgleich in Betracht, wenn der künftige Ausgleichsanspruch durch das Verhalten des anderen Ehegatten ernsthaft gefährdet ist — zum Beispiel durch nachhaltige Verweigerung der Auskunft, durch Handlungen, die das Endvermögen erheblich mindern, oder durch andere schwere Pflichtverletzungen aus dem Eheverhältnis. Wird der vorzeitige Ausgleich gerichtlich zugesprochen, endet die Zugewinngemeinschaft auch dann, wenn die Ehe formell weiterbesteht; ab diesem Zeitpunkt leben die Ehegatten in Gütertrennung.',
       },
     ],
   },
@@ -1155,7 +1224,7 @@ Ein gesetzlicher Feiertag, der auf einen Samstag oder Sonntag fällt, wird in De
     keywords: ['unterhaltsrechner', 'kindesunterhalt berechnen', 'düsseldorfer tabelle 2026', 'unterhalt 2026', 'elternunterhalt 2026', 'selbstbehalt unterhalt', 'kindergeld verrechnung', 'höherstufung unterhalt'],
     icon: '⚖️',
     formel: 'Tabellenwert = Math.ceil(Mindestbedarf × Gruppenprozent) · Zahlbetrag = Math.ceil(Tabellenwert − Kindergeld-Abzug − anrechenbares Eigeneinkommen) · Elternunterhalt: nur bei Bruttojahreseinkommen > 100.000 € (§ 94 Abs. 1a SGB XII), dann ≈ (bereinigtes Netto − Selbstbehalt 2.000 €) × 50 %',
-    beispiel: 'Netto 3.000 €, 1 Kind (8 Jahre), Kindergeld hälftig: Einkommensgruppe 4 → Tabellenbetrag 642 € − 129,50 € Kindergeld = 513 € Zahlbetrag/Monat.',
+    beispiel: 'Bereinigtes Netto 3.000 €, 1 Kind (8 Jahre), Kindergeld hälftig: Einkommensgruppe 4 → Tabellenbetrag 642 € − 129,50 € Kindergeld = 513 € Zahlbetrag/Monat.',
     erklaerung: `**Kindesunterhalt 2026 — Düsseldorfer Tabelle erklärt**
 
 Die Düsseldorfer Tabelle ist eine Leitlinie zur Bemessung des Kindesunterhalts in Deutschland. Sie wird vom Oberlandesgericht Düsseldorf in Abstimmung mit den anderen OLGs und dem Deutschen Familiengerichtstag herausgegeben und jährlich angepasst. Die Tabelle enthält Einkommensgruppen und Altersstufen — der Zahlbetrag ergibt sich aus dem bereinigten Nettoeinkommen des Unterhaltspflichtigen und dem Alter des Kindes.
@@ -1192,9 +1261,13 @@ Neben dem Tabellenunterhalt gibt es **Sonderbedarf** (einmalige, außergewöhnli
 
 Mit dem **Angehörigen-Entlastungsgesetz vom 10.12.2019** (in Kraft seit 01.01.2020, § 94 Abs. 1a SGB XII) hat sich der Elternunterhalt grundlegend geändert. Erwachsene Kinder können erst dann zum Elternunterhalt herangezogen werden, wenn ihr **Bruttojahreseinkommen 100.000 €** übersteigt — und zwar **pro Kind einzeln** geprüft, nicht als Familieneinkommen. Liegt das Einkommen darunter, übernimmt der Sozialhilfeträger die ungedeckten Heim- oder Pflegekosten der Eltern, ohne Rückforderung beim Kind.
 
-Wird die 100.000-€-Schwelle überschritten, wird der Elternunterhalt nach der **„Hälfte über Selbstbehalt"-Methode** berechnet: Vom bereinigten Nettoeinkommen wird der **Selbstbehalt von 2.000 €** (Düsseldorfer Tabelle 2026) abgezogen, **die Hälfte des Überschusses** ist als Elternunterhalt zu zahlen — nicht mehr 30 % wie vor 2020 und nicht mehr ab dem alten Selbstbehalt von 2.650 €. Beispiel: Bruttojahreseinkommen 110.000 €, bereinigtes Netto 5.000 €/Monat → (5.000 − 2.000) × 50 % = 1.500 €/Monat. Wer den eigenen Bedarf prüfen möchte, kann den [Pfändungsrechner](/finanzen/pfaendungsrechner) zur groben Orientierung über das pfändungsfreie Existenzminimum nutzen.`,
+Wird die 100.000-€-Schwelle überschritten, wird der Elternunterhalt nach der **„Hälfte über Selbstbehalt"-Methode** berechnet: Vom bereinigten Nettoeinkommen wird der **Selbstbehalt von 2.000 €** (Düsseldorfer Tabelle 2026) abgezogen, **die Hälfte des Überschusses** ist als Elternunterhalt zu zahlen — nicht mehr 30 % wie vor 2020 und nicht mehr ab dem alten Selbstbehalt von 2.650 €. Beispiel: Bruttojahreseinkommen 110.000 €, bereinigtes Netto 5.000 €/Monat → (5.000 − 2.000) × 50 % = 1.500 €/Monat. Wer den eigenen Bedarf prüfen möchte, kann den [Pfändungsrechner](/finanzen/pfaendungsrechner) zur groben Orientierung über das pfändungsfreie Existenzminimum nutzen.
+
+**Rechtsgrundlage der Mindestunterhalts-Werte**
+
+Die Mindestunterhaltsbeträge der Düsseldorfer Tabelle 2026 basieren auf der 7. Mindestunterhaltsverordnung (7. MUVÄndV) vom 15.11.2024, BGBl. 2024 I Nr. 359. Sie beträgt 482 € (1. Altersstufe), 554 € (2. Altersstufe) und 649 € (3. Altersstufe) und entspricht 100 % der DT.`,
     faq: [
-      { frage: 'Wie viel Kindesunterhalt muss ich 2026 zahlen?', antwort: 'Die Höhe richtet sich nach dem bereinigten Nettoeinkommen und dem Alter des Kindes. Bei 3.000 € Netto und einem 8-jährigen Kind ergibt sich nach Düsseldorfer Tabelle 2026 Einkommensgruppe 4 ein Tabellenbetrag von 642 € — minus 129,50 € hälftiges Kindergeld = 513 € Zahlbetrag. Unser Rechner zeigt den genauen Wert für Ihre Situation.' },
+      { frage: 'Wie viel Kindesunterhalt muss ich 2026 zahlen?', antwort: 'Die Höhe richtet sich nach dem bereinigten Nettoeinkommen und dem Alter des Kindes. Bei einem bereinigten Netto von 3.000 € und einem 8-jährigen Kind ergibt sich nach Düsseldorfer Tabelle 2026 Einkommensgruppe 4 ein Tabellenbetrag von 642 € — minus 129,50 € hälftiges Kindergeld = 513 € Zahlbetrag. Unser Rechner zeigt den genauen Wert für Ihre Situation.' },
       { frage: 'Was ist die Düsseldorfer Tabelle?', antwort: 'Die Düsseldorfer Tabelle ist eine Leitlinie zur Berechnung des Kindesunterhalts in Deutschland, herausgegeben vom OLG Düsseldorf. Sie enthält Einkommensgruppen und Altersstufen und wird jährlich an die Entwicklung des Mindestbedarfs angepasst. Gerichte orientieren sich bundesweit an dieser Tabelle.' },
       { frage: 'Wird das Kindergeld auf den Unterhalt angerechnet?', antwort: 'Ja. Bei minderjährigen Kindern wird das hälftige Kindergeld (129,50 € in 2026) vom Tabellenbetrag abgezogen, da beide Elternteile das Kind versorgen. Bei volljährigen Kindern wird das volle Kindergeld (259 € in 2026) angerechnet, weil es als Einkommen des Kindes gewertet wird.' },
       { frage: 'Was ist der Selbstbehalt beim Unterhalt?', antwort: 'Der Selbstbehalt ist der Mindestbetrag, der dem Unterhaltspflichtigen zum Leben bleiben muss. 2026 beträgt er 1.450 € monatlich für Erwerbstätige (nicht erwerbstätig: 1.200 €). Er enthält einen Wohnkostenanteil von 520 €. Liegt das Einkommen nach Unterhalt unter dem Selbstbehalt, liegt ein Mangelfall vor.' },
@@ -1205,6 +1278,18 @@ Wird die 100.000-€-Schwelle überschritten, wird der Elternunterhalt nach der 
       {
         frage: 'Muss ich für meine Eltern Unterhalt zahlen?',
         antwort: 'Seit dem Angehörigen-Entlastungsgesetz vom 10.12.2019 (§ 94 Abs. 1a SGB XII) gilt: Elternunterhalt wird erst ab einem Bruttojahreseinkommen von über 100.000 € pro Kind fällig. Liegt Ihr Einkommen darunter, übernimmt die Sozialhilfe die ungedeckten Pflege- oder Heimkosten Ihrer Eltern komplett. Über 100.000 € werden nach der „Hälfte über Selbstbehalt"-Methode 50 % des Überschusses des bereinigten Nettos über den Selbstbehalt von 2.000 € (DT 2026) als Unterhalt fällig — die alte 30 %-Formel und der alte 2.650-€-Selbstbehalt sind seit 2020 nicht mehr aktuell.',
+      },
+      {
+        frage: 'Was gilt bei sehr hohem Einkommen?',
+        antwort: 'Die Düsseldorfer Tabelle deckt das Nettoeinkommen bis 11.200 € ab. Liegt das bereinigte Nettoeinkommen darüber, gibt es nach § 1610 BGB keine schematische Fortschreibung der Tabelle: Stattdessen ist der konkrete Bedarf des Kindes individuell zu beziffern. Maßgeblich sind tatsächliche Lebensverhältnisse, Schul- und Freizeitkosten, Privatschule, Auslandsaufenthalte. Praxis: Detaillierte Aufstellung statt pauschalierter Quote.',
+      },
+      {
+        frage: 'Wann ändert sich der Unterhalt durch einen Geburtstag?',
+        antwort: 'Die Düsseldorfer Tabelle hat drei Altersstufen (0–5, 6–11, 12–17 Jahre). Beim Übergang in die nächste Stufe gilt nach § 1612a Abs. 3 BGB: Der höhere Unterhalt ist bereits für den ganzen Monat des Geburtstags zu zahlen — nicht erst ab dem Folgemonat. Beispiel: Wird das Kind am 20. März 12 Jahre alt, gilt der höhere Stufe-3-Betrag bereits für den gesamten März.',
+      },
+      {
+        frage: 'Welche Wohnkosten stecken im Selbstbehalt?',
+        antwort: 'Der notwendige Selbstbehalt nach DT 2026 (1.450 € erwerbstätig / 1.200 € nicht erwerbstätig gegenüber minderjährigen Kindern) enthält pauschal 390 € Kaltmiete plus 130 € Nebenkosten und Heizung — zusammen 520 € Wohnkosten. Wer höhere tatsächliche Wohnkosten nachweist, kann eine Erhöhung des Selbstbehalts geltend machen, soweit die Mehrkosten nicht durch günstigeren Wohnraum vermeidbar wären.',
       },
     ],
   },
@@ -1226,7 +1311,7 @@ Die **Elternzeit** ist ein gesetzlich garantierter, unbezahlter Freistellungsans
 
 **Anmeldefrist: 7 Wochen oder 13 Wochen vor Beginn**
 
-Die Elternzeit muss beim Arbeitgeber **schriftlich angemeldet** werden. Für Elternzeit in den ersten drei Lebensjahren gilt eine Anmeldefrist von **7 Wochen vor Beginn**. Wer Elternzeit zwischen dem 3. und 8. Geburtstag nehmen möchte, muss sie **13 Wochen vor Beginn** anmelden. Bei der Anmeldung müssen Sie verbindlich festlegen, für welche Zeiträume innerhalb der ersten zwei Jahre Sie Elternzeit nehmen — das sogenannte **Bindungszeitraum**. Danach können Sie flexibler planen. **Wichtig:** Die Anmeldung ist verbindlich — eine nachträgliche Änderung ist nur mit Zustimmung des Arbeitgebers möglich. Für die Mutter wird der **Mutterschutz nach der Geburt (8 bzw. 12 Wochen) automatisch auf die Elternzeit angerechnet** — die Elternzeit der Mutter kann also frühestens nach Ende des Mutterschutzes beginnen. Für den Vater ist die Elternzeit dagegen **direkt ab Geburt** möglich.
+Die Elternzeit muss beim Arbeitgeber **schriftlich angemeldet** werden. Für Elternzeit in den ersten drei Lebensjahren gilt eine Anmeldefrist von **7 Wochen vor Beginn**. Wer Elternzeit zwischen dem 3. und 8. Geburtstag nehmen möchte, muss sie **13 Wochen vor Beginn** anmelden. Bei der Anmeldung müssen Sie verbindlich festlegen, für welche Zeiträume innerhalb der ersten zwei Jahre Sie Elternzeit nehmen — der sogenannte **verbindliche Festlegungszeitraum** (juristisch auch: Bindungswirkung der Anmeldung). Danach können Sie flexibler planen. **Wichtig:** Die Anmeldung ist verbindlich — eine nachträgliche Änderung ist nur mit Zustimmung des Arbeitgebers möglich. Für die Mutter wird der **Mutterschutz nach der Geburt (8 bzw. 12 Wochen) automatisch auf die Elternzeit angerechnet** — die Elternzeit der Mutter kann also frühestens nach Ende des Mutterschutzes beginnen. Für den Vater ist die Elternzeit dagegen **direkt ab Geburt** möglich.
 
 **Aufteilung zwischen Partnern & Partnermonate**
 
@@ -1250,7 +1335,7 @@ Unser [Teilzeit-Rechner](/arbeit/teilzeit-rechner) hilft beim Kalkulieren des re
 2. **Mutterschutz berechnen** — siehe [Mutterschutz-Rechner](/arbeit/mutterschutz-rechner)
 3. **Elternzeit beim Arbeitgeber anmelden** — schriftlich, 7 Wochen vor Beginn
 4. **Elterngeld beantragen** — spätestens 3 Monate nach Geburt bei der Elterngeldstelle
-5. **Bindungszeitraum festlegen** — welche Monate in den ersten 2 Jahren fest, welche flexibel
+5. **Verbindlichen Festlegungszeitraum bestimmen** — welche Monate in den ersten 2 Jahren fest, welche flexibel
 
 Denken Sie daran: Die Elternzeit läuft **kalendarisch** — auch Wochenenden und Feiertage zählen. Urlaubstage, die Sie vor der Elternzeit nicht genommen haben, dürfen **nach der Elternzeit übertragen** werden (§ 17 BEEG).`,
     faq: [
@@ -1260,6 +1345,14 @@ Denken Sie daran: Die Elternzeit läuft **kalendarisch** — auch Wochenenden un
       { frage: 'Wie wird der Mutterschutz auf die Elternzeit angerechnet?', antwort: 'Die 8 Wochen (bzw. 12 Wochen bei Früh-/Mehrlingsgeburt) Mutterschutz nach der Geburt werden vollständig auf die Elternzeit der Mutter angerechnet. Die Elternzeit der Mutter beginnt frühestens nach Ende des Mutterschutzes. Für den Vater gibt es diese Anrechnung nicht — seine Elternzeit kann direkt ab Geburt beginnen.' },
       { frage: 'Habe ich während der Elternzeit Kündigungsschutz?', antwort: 'Ja, nach § 18 BEEG besteht ein besonderer Kündigungsschutz ab Anmeldung der Elternzeit (frühestens 8 Wochen vor Beginn) bis zum Ende der Elternzeit. Eine Kündigung ist nur in absoluten Ausnahmefällen mit Zustimmung der zuständigen Landesbehörde zulässig — auch in der Probezeit und unabhängig von der Betriebsgröße.' },
       { frage: 'Was sind Partnermonate?', antwort: 'Für die vollen 14 Monate Basiselterngeld muss jeder Elternteil mindestens 2 Monate Elternzeit nehmen (die sogenannten Partnermonate). Nimmt nur ein Elternteil Elternzeit, gibt es maximal 12 Monate Elterngeld. Die Elternzeit kann auch länger dauern, aber ab dem 15. Monat unbezahlt.' },
+      {
+        frage: 'Wird mein Urlaub während der Elternzeit gekürzt?',
+        antwort: 'Der Arbeitgeber darf den Erholungsurlaub für jeden vollen Kalendermonat Elternzeit um ein Zwölftel kürzen (§ 17 Abs. 1 BEEG). Es ist ein Wahlrecht des Arbeitgebers, kein Automatismus — er muss die Kürzung gegenüber dem Arbeitnehmer ausdrücklich erklären. Übt der Arbeitgeber das Recht nicht aus, bleibt der volle Urlaubsanspruch bestehen. Die Kürzung greift nur bei vollen Kalendermonaten Elternzeit; angefangene Monate bleiben unberührt.',
+      },
+      {
+        frage: 'Kann ich die Elternzeit in mehrere Abschnitte aufteilen?',
+        antwort: 'Ja. § 16 Abs. 1 BEEG erlaubt die Aufteilung der Elternzeit in bis zu drei Zeitabschnitte je Elternteil. Der dritte Abschnitt kann auch zwischen dem dritten und achten Geburtstag des Kindes liegen — er ist nicht an die ersten drei Lebensjahre gebunden. Für eine Aufteilung in mehr als drei Abschnitte ist die Zustimmung des Arbeitgebers erforderlich.',
+      },
     ],
   },
   {
@@ -1295,6 +1388,7 @@ Mit Rechtskraft des Scheidungsurteils endet der Trennungsunterhalt. Ab diesem Ze
 - **Unterhalt wegen Krankheit** (§ 1572 BGB)
 - **Unterhalt wegen Erwerbslosigkeit** (§ 1573 BGB) — bei unverschuldeter Arbeitslosigkeit
 - **Aufstockungsunterhalt** (§ 1573 Abs. 2 BGB) — wenn eigenes Einkommen niedriger ist als der eheliche Lebensstandard
+- **Anschlussunterhalt** (§ 1573 Abs. 4 BGB) — wenn ein zunächst befristet zugesprochener Aufstockungs- oder Krankheitsunterhalt endet, der Berechtigte aber durch ehebedingte Nachteile (etwa lange Kinderbetreuung oder Berufspause) noch nicht wirtschaftlich Tritt gefasst hat, kann erneuter Unterhalt geltend gemacht werden
 - **Ausbildungsunterhalt** (§ 1575 BGB) — für Aus- oder Weiterbildung
 
 Der Selbstbehalt gegenüber Ehegatten ist auch beim nachehelichen Unterhalt **1.600 €** bei Erwerbstätigkeit bzw. **1.475 €** wenn der Pflichtige nicht erwerbstätig ist (Düsseldorfer Tabelle 2026). Die Differenzierung ist also **nicht** zwischen Trennungs- und nachehelicher Phase, sondern nach Erwerbstätigkeit des Pflichtigen — derselbe Mechanismus wie im Kindesunterhalt.
@@ -1311,17 +1405,22 @@ Die deutsche Rechtsprechung hat sich auf eine einfache Quote geeinigt: Der Unter
 
 Beispiel: Peter verdient 3.500 € netto (bereinigt) und ist erwerbstätig, Anna 1.200 €. Differenz: 2.300 €. Unterhalt = 2.300 × 3/7 ≈ **986 €/Monat**. Peter behält 3.500 − 986 = 2.514 €, Anna hat 1.200 + 986 = 2.186 €. Der Selbstbehalt (1.600 € erwerbstätig) ist weit unterschritten — kein Kappungsfall. Wäre Peter dagegen nicht erwerbstätig (z. B. Rentner), gälte der niedrigere Selbstbehalt von 1.475 € — ändert in diesem Beispiel nichts, weil keine Kappung greift.
 
+Realistischer Fall mit Kindesunterhalt: Hat Peter zusätzlich ein Kind (8 Jahre) zu versorgen und zahlt 513 €/Monat Kindesunterhalt (Düsseldorfer Tabelle 2026, Einkommensgruppe 4, abzüglich hälftiges Kindergeld), wird der Kindesunterhalt vorab vom Einkommen abgezogen (§ 1609 BGB Vorrang): 3.500 − 513 = 2.987 € verbleibendes Einkommen. Differenz zu Anna: 2.987 − 1.200 = 1.787 €. Ehegattenunterhalt = 1.787 × 3/7 ≈ **766 €/Monat** — rund 220 € weniger als ohne Kindesunterhalt. Peter behält 3.500 − 513 − 766 = 2.221 €, weiter deutlich über dem Selbstbehalt.
+
 **Süddeutsche Leitlinien — 45 % statt 3/7**
 
 Die 3/7-Quote (≈ 42,86 %) ist nicht bundesweit einheitlich. Die OLG-Bezirke **Bamberg, Karlsruhe, München, Nürnberg, Stuttgart und Zweibrücken** wenden in ihren **Süddeutschen Leitlinien** stattdessen einen Quotienten von **45 %** an. Die Differenz ist klein, aber bei höheren Einkommen spürbar: Bei einer Einkommensdifferenz von 2.300 € ergeben sich nach 3/7 rund 986 €/Monat, nach 45 % dagegen 1.035 €/Monat — also rund 49 € mehr. Bei größeren Einkommensdifferenzen wächst der Unterschied entsprechend.
 
-Unser Rechner verwendet bewusst die bundesweit gebräuchliche 3/7-Methode. Wenn Ihr Verfahren vor einem süddeutschen Familiengericht läuft, multiplizieren Sie das Ergebnis bitte näherungsweise mit dem Faktor 1,05 — oder lassen Sie es vom Anwalt mit der lokalen 45-%-Quote nachrechnen.
+Unser Rechner unterstützt beide Methoden: Default ist die bundesweit gebräuchliche 3/7-Methode. Wenn Ihr Verfahren vor einem süddeutschen Familiengericht läuft, schalten Sie oben die Berechnungsmethode auf „Süddeutsch (45 %)" — der Rechner verwendet dann die in den Süddeutschen Leitlinien vorgesehene Quote.
 
 **Wichtige Feinheiten**
 
 - **Erwerbstätigenbonus:** Wer erwerbstätig ist, darf 1/7 seines Einkommens vorab abziehen. Dies ist bereits in der 3/7-Quote berücksichtigt.
 - **Vorrang des Kindesunterhalts:** Kindesunterhalt geht immer vor. Erst danach wird Ehegattenunterhalt gezahlt.
 - **Begrenzung und Befristung:** Nachehelicher Unterhalt kann zeitlich und höhenmäßig begrenzt werden (§ 1578b BGB), wenn er unter Billigkeitsgesichtspunkten nicht mehr gerechtfertigt ist — zum Beispiel bei kurzer Ehe ohne gemeinsame Kinder.
+- **Halbteilung bei Nicht-Erwerbseinkünften:** Renten, Mieteinnahmen, Kapitalerträge und ähnliche Einkünfte werden nicht mit der 3/7-Quote, sondern **hälftig (50 %)** geteilt — der Erwerbstätigenbonus (1/7) gilt nur für Einkommen aus tatsächlicher Erwerbsarbeit. Das ist besonders relevant bei Rentnern, Vermietern und Kapitalanlegern.
+- **Erwerbsobliegenheit (§ 1574 BGB):** Beim nachehelichen Unterhalt muss der Berechtigte eine angemessene Erwerbstätigkeit aufnehmen, soweit ihm das nach Ausbildung, Fähigkeiten, früherer Tätigkeit, Lebensalter und Gesundheit zumutbar ist. Verletzt er diese Obliegenheit, kann ein **fiktives Einkommen** angesetzt werden — der Unterhalt sinkt entsprechend.
+- **Anrechnung eigener Einkünfte und Vermögen (§ 1577 BGB):** Eigene Einkünfte des Berechtigten und der zumutbar einzusetzende Stamm seines Vermögens werden auf den Unterhaltsanspruch angerechnet. Das gilt auch für Wohnvorteile (mietfreies Wohnen im Eigentum).
 - **Verzichtserklärungen:** Auf Trennungsunterhalt kann man nicht wirksam im Voraus verzichten. Auf nachehelichen Unterhalt dagegen schon, etwa im Ehevertrag.
 
 **Was unser Rechner liefert**
@@ -1369,7 +1468,7 @@ Unser Rechner verwendet bewusst die bundesweit gebräuchliche 3/7-Methode. Wenn 
 
 ## `components/rechner/ArbeitstageRechner.tsx`
 
-*11.2 KB*
+*10.0 KB*
 
 ```tsx
 'use client';
@@ -1378,11 +1477,11 @@ import { useState, useMemo } from 'react';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { getFeiertage, type Feiertag, type Bundesland } from '@/lib/berechnungen/feiertage';
 
 type Modus = 'monat' | 'zeitraum' | 'jahr';
-type BL = 'bw' | 'by' | 'be' | 'bb' | 'hb' | 'hh' | 'he' | 'mv' | 'ni' | 'nw' | 'rp' | 'sl' | 'sn' | 'st' | 'sh' | 'th';
 
-const BUNDESLAENDER: { slug: BL; name: string }[] = [
+const BUNDESLAENDER: { slug: Bundesland; name: string }[] = [
   { slug: 'bw', name: 'Baden-Württemberg' },
   { slug: 'by', name: 'Bayern' },
   { slug: 'be', name: 'Berlin' },
@@ -1401,67 +1500,45 @@ const BUNDESLAENDER: { slug: BL; name: string }[] = [
   { slug: 'th', name: 'Thüringen' },
 ];
 
-// Feiertage 2026 (Datum im Format MM-DD) + Länder-Liste. 'alle' = bundesweit.
-type Feiertag = { datum: string; name: string; laender: 'alle' | BL[] };
+const MONATE = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
 
-const FEIERTAGE_2026: Feiertag[] = [
-  { datum: '01-01', name: 'Neujahr', laender: 'alle' },
-  { datum: '01-06', name: 'Heilige Drei Könige', laender: ['bw', 'by', 'st'] },
-  { datum: '03-08', name: 'Internationaler Frauentag', laender: ['be', 'mv'] },
-  { datum: '04-03', name: 'Karfreitag', laender: 'alle' },
-  { datum: '04-06', name: 'Ostermontag', laender: 'alle' },
-  { datum: '05-01', name: 'Tag der Arbeit', laender: 'alle' },
-  { datum: '05-14', name: 'Christi Himmelfahrt', laender: 'alle' },
-  { datum: '05-25', name: 'Pfingstmontag', laender: 'alle' },
-  { datum: '06-04', name: 'Fronleichnam', laender: ['bw', 'by', 'he', 'nw', 'rp', 'sl'] },
-  { datum: '08-15', name: 'Mariä Himmelfahrt', laender: ['sl'] },
-  { datum: '09-20', name: 'Weltkindertag', laender: ['th'] },
-  { datum: '10-03', name: 'Tag der Deutschen Einheit', laender: 'alle' },
-  { datum: '10-31', name: 'Reformationstag', laender: ['bb', 'hb', 'hh', 'mv', 'ni', 'sn', 'st', 'sh', 'th'] },
-  { datum: '11-01', name: 'Allerheiligen', laender: ['bw', 'by', 'nw', 'rp', 'sl'] },
-  { datum: '11-18', name: 'Buß- und Bettag', laender: ['sn'] },
-  { datum: '12-25', name: '1. Weihnachtstag', laender: 'alle' },
-  { datum: '12-26', name: '2. Weihnachtstag', laender: 'alle' },
-];
+const JAHR_OPTIONEN = ['2024', '2025', '2026', '2027', '2028', '2029', '2030'];
 
-function isFeiertag(date: Date, bl: BL): Feiertag | null {
-  const m = String(date.getMonth() + 1).padStart(2, '0');
-  const d = String(date.getDate()).padStart(2, '0');
-  const key = `${m}-${d}`;
-  for (const f of FEIERTAGE_2026) {
-    if (f.datum === key && (f.laender === 'alle' || f.laender.includes(bl))) return f;
+function countArbeitstage(start: Date, end: Date, bl: Bundesland, arbeitstageProWoche: number[]) {
+  // Feiertage aller berührten Jahre vorab in Map cachen (Modus 'zeitraum'
+  // kann Jahresgrenzen überschreiten)
+  const feiertageMap = new Map<string, Feiertag>();
+  for (let j = start.getFullYear(); j <= end.getFullYear(); j++) {
+    for (const f of getFeiertage(j, bl)) {
+      const key = `${f.datum.getFullYear()}-${f.datum.getMonth()}-${f.datum.getDate()}`;
+      feiertageMap.set(key, f);
+    }
   }
-  return null;
-}
 
-function countArbeitstage(start: Date, end: Date, bl: BL, arbeitstageProWoche: number[]) {
   let at = 0;
   let wt = 0;
   let ft = 0;
-  const feiertage: { datum: string; name: string }[] = [];
+  const feiertageListe: { datum: string; name: string }[] = [];
   const d = new Date(start);
   while (d <= end) {
     const tag = d.getDay(); // 0=So 1=Mo…6=Sa
     const istArbeitswerktag = arbeitstageProWoche.includes(tag);
     if (tag !== 0 && tag !== 6) wt++;
-    const fe = isFeiertag(d, bl);
-    if (fe) {
-      if (tag !== 0 && tag !== 6) {
-        ft++;
-        feiertage.push({ datum: d.toLocaleDateString('de-DE'), name: fe.name });
-      }
+    const key = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+    const fe = feiertageMap.get(key);
+    if (fe && tag !== 0 && tag !== 6) {
+      ft++;
+      feiertageListe.push({ datum: d.toLocaleDateString('de-DE'), name: fe.name });
     }
     if (istArbeitswerktag && !fe) at++;
     d.setDate(d.getDate() + 1);
   }
-  return { arbeitstage: at, werktage: wt, feiertage: ft, feiertageListe: feiertage };
+  return { arbeitstage: at, werktage: wt, feiertage: ft, feiertageListe };
 }
-
-const MONATE = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
 
 export default function ArbeitstageRechner() {
   const [modus, setModus] = useState<Modus>('monat');
-  const [bl, setBl] = useState<BL>('nw');
+  const [bl, setBl] = useState<Bundesland>('nw');
   const [jahr, setJahr] = useState('2026');
   const [monat, setMonat] = useState('1');
   const [von, setVon] = useState('2026-01-01');
@@ -1504,7 +1581,7 @@ export default function ArbeitstageRechner() {
       <div className="space-y-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-6">
         <div>
           <label htmlFor="arbeitstage-select-1" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Bundesland</label>
-          <select id="arbeitstage-select-1" value={bl} onChange={e => setBl(e.target.value as BL)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+          <select id="arbeitstage-select-1" value={bl} onChange={e => setBl(e.target.value as Bundesland)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
             {BUNDESLAENDER.map(b => <option key={b.slug} value={b.slug}>{b.name}</option>)}
           </select>
         </div>
@@ -1520,7 +1597,7 @@ export default function ArbeitstageRechner() {
             <div>
               <label htmlFor="arbeitstage-select-3" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Jahr</label>
               <select id="arbeitstage-select-3" value={jahr} onChange={e => setJahr(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
-                <option value="2026">2026</option>
+                {JAHR_OPTIONEN.map(j => <option key={j} value={j}>{j}</option>)}
               </select>
             </div>
           </div>
@@ -1530,7 +1607,7 @@ export default function ArbeitstageRechner() {
           <div>
             <label htmlFor="arbeitstage-select-4" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Jahr</label>
             <select id="arbeitstage-select-4" value={jahr} onChange={e => setJahr(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
-              <option value="2026">2026</option>
+              {JAHR_OPTIONEN.map(j => <option key={j} value={j}>{j}</option>)}
             </select>
           </div>
         )}
@@ -1564,7 +1641,7 @@ export default function ArbeitstageRechner() {
         <p className="text-white/80 text-sm mb-1">Arbeitstage</p>
         <p className="text-5xl font-bold">{ergebnis.arbeitstage}</p>
         <p className="text-white/80 text-sm mt-2">
-          davon {ergebnis.werktage} Werktage (Mo–Fr) · {ergebnis.feiertage} Feiertage abgezogen
+          davon {ergebnis.werktage} Wochentage Mo–Fr · {ergebnis.feiertage} Feiertage abgezogen
         </p>
       </div>
 
@@ -1600,7 +1677,7 @@ export default function ArbeitstageRechner() {
         }}
         ergebnis={{
           'Arbeitstage': String(ergebnis.arbeitstage),
-          'Werktage (Mo–Fr)': String(ergebnis.werktage),
+          'Wochentage Mo–Fr': String(ergebnis.werktage),
           'Feiertage abgezogen': String(ergebnis.feiertage),
         }}
       />
