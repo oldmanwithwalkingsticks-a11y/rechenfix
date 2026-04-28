@@ -1359,6 +1359,7 @@ Mit Rechtskraft des Scheidungsurteils endet der Trennungsunterhalt. Ab diesem Ze
 - **Unterhalt wegen Krankheit** (§ 1572 BGB)
 - **Unterhalt wegen Erwerbslosigkeit** (§ 1573 BGB) — bei unverschuldeter Arbeitslosigkeit
 - **Aufstockungsunterhalt** (§ 1573 Abs. 2 BGB) — wenn eigenes Einkommen niedriger ist als der eheliche Lebensstandard
+- **Anschlussunterhalt** (§ 1573 Abs. 4 BGB) — wenn ein zunächst befristet zugesprochener Aufstockungs- oder Krankheitsunterhalt endet, der Berechtigte aber durch ehebedingte Nachteile (etwa lange Kinderbetreuung oder Berufspause) noch nicht wirtschaftlich Tritt gefasst hat, kann erneuter Unterhalt geltend gemacht werden
 - **Ausbildungsunterhalt** (§ 1575 BGB) — für Aus- oder Weiterbildung
 
 Der Selbstbehalt gegenüber Ehegatten ist auch beim nachehelichen Unterhalt **1.600 €** bei Erwerbstätigkeit bzw. **1.475 €** wenn der Pflichtige nicht erwerbstätig ist (Düsseldorfer Tabelle 2026). Die Differenzierung ist also **nicht** zwischen Trennungs- und nachehelicher Phase, sondern nach Erwerbstätigkeit des Pflichtigen — derselbe Mechanismus wie im Kindesunterhalt.
@@ -1375,6 +1376,8 @@ Die deutsche Rechtsprechung hat sich auf eine einfache Quote geeinigt: Der Unter
 
 Beispiel: Peter verdient 3.500 € netto (bereinigt) und ist erwerbstätig, Anna 1.200 €. Differenz: 2.300 €. Unterhalt = 2.300 × 3/7 ≈ **986 €/Monat**. Peter behält 3.500 − 986 = 2.514 €, Anna hat 1.200 + 986 = 2.186 €. Der Selbstbehalt (1.600 € erwerbstätig) ist weit unterschritten — kein Kappungsfall. Wäre Peter dagegen nicht erwerbstätig (z. B. Rentner), gälte der niedrigere Selbstbehalt von 1.475 € — ändert in diesem Beispiel nichts, weil keine Kappung greift.
 
+Realistischer Fall mit Kindesunterhalt: Hat Peter zusätzlich ein Kind (8 Jahre) zu versorgen und zahlt 513 €/Monat Kindesunterhalt (Düsseldorfer Tabelle 2026, Einkommensgruppe 4, abzüglich hälftiges Kindergeld), wird der Kindesunterhalt vorab vom Einkommen abgezogen (§ 1609 BGB Vorrang): 3.500 − 513 = 2.987 € verbleibendes Einkommen. Differenz zu Anna: 2.987 − 1.200 = 1.787 €. Ehegattenunterhalt = 1.787 × 3/7 ≈ **766 €/Monat** — rund 220 € weniger als ohne Kindesunterhalt. Peter behält 3.500 − 513 − 766 = 2.221 €, weiter deutlich über dem Selbstbehalt.
+
 **Süddeutsche Leitlinien — 45 % statt 3/7**
 
 Die 3/7-Quote (≈ 42,86 %) ist nicht bundesweit einheitlich. Die OLG-Bezirke **Bamberg, Karlsruhe, München, Nürnberg, Stuttgart und Zweibrücken** wenden in ihren **Süddeutschen Leitlinien** stattdessen einen Quotienten von **45 %** an. Die Differenz ist klein, aber bei höheren Einkommen spürbar: Bei einer Einkommensdifferenz von 2.300 € ergeben sich nach 3/7 rund 986 €/Monat, nach 45 % dagegen 1.035 €/Monat — also rund 49 € mehr. Bei größeren Einkommensdifferenzen wächst der Unterschied entsprechend.
@@ -1386,6 +1389,9 @@ Unser Rechner unterstützt beide Methoden: Default ist die bundesweit gebräuchl
 - **Erwerbstätigenbonus:** Wer erwerbstätig ist, darf 1/7 seines Einkommens vorab abziehen. Dies ist bereits in der 3/7-Quote berücksichtigt.
 - **Vorrang des Kindesunterhalts:** Kindesunterhalt geht immer vor. Erst danach wird Ehegattenunterhalt gezahlt.
 - **Begrenzung und Befristung:** Nachehelicher Unterhalt kann zeitlich und höhenmäßig begrenzt werden (§ 1578b BGB), wenn er unter Billigkeitsgesichtspunkten nicht mehr gerechtfertigt ist — zum Beispiel bei kurzer Ehe ohne gemeinsame Kinder.
+- **Halbteilung bei Nicht-Erwerbseinkünften:** Renten, Mieteinnahmen, Kapitalerträge und ähnliche Einkünfte werden nicht mit der 3/7-Quote, sondern **hälftig (50 %)** geteilt — der Erwerbstätigenbonus (1/7) gilt nur für Einkommen aus tatsächlicher Erwerbsarbeit. Das ist besonders relevant bei Rentnern, Vermietern und Kapitalanlegern.
+- **Erwerbsobliegenheit (§ 1574 BGB):** Beim nachehelichen Unterhalt muss der Berechtigte eine angemessene Erwerbstätigkeit aufnehmen, soweit ihm das nach Ausbildung, Fähigkeiten, früherer Tätigkeit, Lebensalter und Gesundheit zumutbar ist. Verletzt er diese Obliegenheit, kann ein **fiktives Einkommen** angesetzt werden — der Unterhalt sinkt entsprechend.
+- **Anrechnung eigener Einkünfte und Vermögen (§ 1577 BGB):** Eigene Einkünfte des Berechtigten und der zumutbar einzusetzende Stamm seines Vermögens werden auf den Unterhaltsanspruch angerechnet. Das gilt auch für Wohnvorteile (mietfreies Wohnen im Eigentum).
 - **Verzichtserklärungen:** Auf Trennungsunterhalt kann man nicht wirksam im Voraus verzichten. Auf nachehelichen Unterhalt dagegen schon, etwa im Ehevertrag.
 
 **Was unser Rechner liefert**
