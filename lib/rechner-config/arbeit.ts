@@ -708,6 +708,14 @@ Für die Planung Ihres verbleibenden Urlaubs nutzen Sie unseren [Urlaubstage-Rec
         frage: 'Wie weise ich nach, dass die Kündigung zugegangen ist?',
         antwort: 'Maßgeblich ist die tatsächliche Zustellung an den Empfänger, nicht das Absenden. Das Bundesarbeitsgericht hat im Urteil vom 30.01.2025 (Az. 2 AZR 68/24) klargestellt: Der Online-Sendungsstatus eines Postdienstleisters reicht als Zugangsbeweis nicht aus. Erforderlich ist der unterschriebene Auslieferungsbeleg (Einschreiben mit Rückschein) oder die persönliche Übergabe gegen Empfangsquittung. Wichtig ist das insbesondere für die Berechnung der dreiwöchigen Klagefrist nach § 4 KSchG, die mit dem Zugang zu laufen beginnt.',
       },
+      {
+        frage: 'Welche Kündigungsfrist gilt für schwerbehinderte Arbeitnehmer?',
+        antwort: 'Bei schwerbehinderten Arbeitnehmern (Grad der Behinderung mindestens 50) gilt eine Mindestkündigungsfrist von 4 Wochen (§ 169 SGB IX) — sie kann nicht durch Tarif- oder Einzelarbeitsvertrag verkürzt werden. Wichtiger noch: Vor jeder ordentlichen Kündigung muss der Arbeitgeber die Zustimmung des Integrationsamts einholen (§ 168 SGB IX). Ohne diese Zustimmung ist die Kündigung unwirksam — unabhängig davon, ob die Frist eingehalten wurde. Der besondere Kündigungsschutz greift, sobald das Arbeitsverhältnis länger als sechs Monate besteht.',
+      },
+      {
+        frage: 'Was passiert mit der Kündigungsfrist im Insolvenzverfahren?',
+        antwort: 'Im eröffneten Insolvenzverfahren kann der Insolvenzverwalter Arbeitsverhältnisse mit einer Höchstfrist von drei Monaten zum Monatsende kündigen (§ 113 InsO) — auch dann, wenn arbeits- oder tarifvertraglich eine längere Frist vereinbart ist. § 113 InsO ist ein Frist-Cap nach oben, kein Cap nach unten: Greift nach § 622 BGB ohnehin eine kürzere Frist (z. B. zwei Monate bei fünf Jahren Betriebszugehörigkeit), bleibt diese bestehen.',
+      },
     ],
   },
   {
@@ -816,8 +824,13 @@ In Deutschland gibt es **keinen generellen gesetzlichen Anspruch** auf eine Abfi
 
 - **Aufhebungsvertrag:** Arbeitgeber und Arbeitnehmer einigen sich einvernehmlich auf die Beendigung des Arbeitsverhältnisses, oft mit Abfindung.
 - **Kündigungsschutzklage:** Im Rahmen eines Vergleichs vor dem Arbeitsgericht wird häufig eine Abfindung vereinbart.
+- **§§ 9, 10 KSchG (gerichtliche Auflösung):** Hat eine Kündigungsschutzklage Erfolg, ist die Fortsetzung des Arbeitsverhältnisses für den Arbeitnehmer aber unzumutbar geworden, kann das Arbeitsgericht auf seinen Antrag das Arbeitsverhältnis gegen Zahlung einer Abfindung auflösen. Höchstgrenzen: bis zu 12 Monatsverdienste; bis zu 15 Monatsverdienste ab 50 Jahren mit mindestens 15 Jahren Betriebszugehörigkeit; bis zu 18 Monatsverdienste ab 55 Jahren mit mindestens 20 Jahren Betriebszugehörigkeit.
 - **§ 1a KSchG:** Bei betriebsbedingter Kündigung kann der Arbeitgeber im Kündigungsschreiben eine Abfindung von 0,5 Monatsgehältern pro Beschäftigungsjahr anbieten, wenn der Arbeitnehmer auf eine Klage verzichtet.
 - **Sozialplan:** Bei größeren Entlassungen regelt ein Sozialplan die Abfindungshöhe.
+
+**Wichtigste Frist: 3 Wochen nach Zugang der Kündigung**
+
+Eine Kündigungsschutzklage muss nach **§ 4 KSchG** innerhalb von **drei Wochen** nach Zugang der Kündigung beim Arbeitsgericht erhoben werden. Diese Frist ist die strategische Schlüsselgröße für jede Abfindung über den Klageweg: Wer sie versäumt, verliert nicht nur den Kündigungsschutz, sondern auch die Verhandlungsposition für einen Vergleich oder den Auflösungsantrag nach §§ 9, 10 KSchG. Die Frist beginnt mit dem tatsächlichen Zugang der Kündigung, nicht mit dem Datum des Kündigungsschreibens. Auch wenn Sie zunächst auf einen Aufhebungsvertrag setzen, sollten Sie eine vorsorgliche Klage erwägen — falls die Verhandlungen scheitern, ist die 3-Wochen-Frist sonst möglicherweise abgelaufen.
 
 **Abfindung und Arbeitslosengeld: Gibt es eine Sperrzeit?**
 
@@ -865,6 +878,10 @@ Für die Berechnung Ihrer Kündigungsfrist nutzen Sie unseren [Kündigungsfrist-
       {
         frage: 'Wie werden angefangene Jahre bei der Abfindung berechnet?',
         antwort: 'Nach § 1a Abs. 2 S. 3 KSchG werden Beschäftigungs-Restzeiten von mehr als sechs Monaten auf ein volles Jahr aufgerundet. Beispiel: 7 Jahre und 7 Monate Beschäftigung werden als 8 Jahre gerechnet. Bei genau sechs Monaten oder weniger wird das angefangene Jahr nicht berücksichtigt. Die Aufrundungsregel gilt für die gesetzliche Abfindung nach § 1a KSchG; bei Aufhebungsverträgen oder Sozialplänen können andere Regelungen vereinbart werden.',
+      },
+      {
+        frage: 'Was bedeutet der Auflösungsantrag nach §§ 9, 10 KSchG?',
+        antwort: 'Wenn ein Arbeitnehmer mit einer Kündigungsschutzklage erfolgreich ist (die Kündigung also unwirksam war), das Arbeitsverhältnis aber durch den Prozess so belastet ist, dass eine Fortsetzung unzumutbar erscheint, kann das Arbeitsgericht auf seinen Antrag (§ 9 KSchG) die Auflösung gegen Zahlung einer Abfindung anordnen. Die Höchstgrenzen nach § 10 KSchG: bis zu 12 Monatsverdienste; bis zu 15 Monatsverdienste, wenn der Arbeitnehmer mindestens 50 Jahre alt ist und mindestens 15 Jahre Betriebszugehörigkeit hat; bis zu 18 Monatsverdienste, wenn er mindestens 55 Jahre alt ist und mindestens 20 Jahre Betriebszugehörigkeit hat. Es handelt sich um Höchstgrenzen, die das Gericht im Einzelfall ausschöpft oder unterschreitet — nicht um einen gesetzlichen Mindestanspruch.',
       },
     ],
   },
