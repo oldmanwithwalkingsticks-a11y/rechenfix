@@ -66,13 +66,13 @@ Affiliate ist erlaubt, wenn **thematischer Match** zum Rechner besteht. Entschei
 - Vercel Hosting
 - Anthropic Claude API für "Fix erklärt"
 
-## Projekt-Status (Stand 26.04.2026)
+## Projekt-Status (Stand 28.04.2026)
 
 - **170 eigenständige Rechner in 9 Kategorien** (Alltag 23, Finanzen **45**, Gesundheit 17, Auto & Verkehr 11, Wohnen & Energie 25, Mathe & Schule 18, Arbeit & Recht **17**, Kochen & Ernährung 12, Sport & Fitness 2). Verschiebung 26.04.2026 (Prompt 149a): arbeitslosengeld-rechner aus Arbeit nach Finanzen migriert (Konfig deklarierte schon `kategorie: 'Finanzen'` — SSOT-Konsistenz pro Kategorie-Datei wiederhergestellt).
 - **178 Rechner-URLs** in der Sitemap (inkl. Varianten-Seiten wie `/finanzen/2000-euro-brutto-netto` bis `/5000-euro-brutto-netto` und `/finanzen/brutto-netto-tabelle`)
 - **Welle-Status:** Welle 1 ✅ komplett (April 2026); **Welle 2 KOMPLETT abgeschlossen 26.04.2026 ✅** — alle vier Stufen durch: Stufe 1 Auto (130–132.6, 23.04.), Stufe 2 Gesundheit (140–144b), Stufe 3 Wohnen (147–148c, 25.+26.04. — 148c Mieterbund-Schluss auf Betriebskostenspiegel 2023), Stufe 3 Arbeit (Block A 149a-d + 150a-d, Block B 152a + 153a/b/b-fix + 153c Lib-Audit). **Welle 3 angefangen 27.04.2026:** 152b `feiertage.ts` SSOT-Lib ✅, 154 LazySection-Removal für AdSense-Crawler-Sichtbarkeit ✅, 155 `/ueber-uns` ausgebaut ✅, 156 `/qualitaet` neu angelegt + Footer-Link ✅, 151 Block-A-P3-Sammelbatch (17 priorisierte Items, 5 atomare Konfig-Commits 151a–e) ✅, 150e Süd-OLG-UI-Toggle für ehegattenunterhalt ✅. **Welle-3-Backlog (offen):** P3-B1 ueberstunden-Netto-Refactor mit Steuerklasse-Input, 151-Sammelrest (~25 nicht-priorisierte P3-Items), Welle-3-Validation-Sweep aller Welle-2-Rechner gegen externe Oracles. Vollständige Welle-Historie + Welle-3-Backlog mit Detailspecs: [docs/audit-arbeitspapiere/welle-status-historie.md](https://github.com/oldmanwithwalkingsticks-a11y/rechenfix/blob/main/docs/audit-arbeitspapiere/welle-status-historie.md).
 - **AffiliateBox-Aufrufe:** 117 in 73 Dateien, 12 Programme inkl. CosmosDirekt (seit 25.04.2026, Prompt 145)
-- **AdSense:** live seit 20.04.2026, Publisher-ID `pub-1389746597486587` (1–3 Wochen Review-Phase)
+- **AdSense:** Script live seit 20.04.2026, Publisher-ID `pub-1389746597486587`. Erste Prüfung 27.04.2026 negativ („Minderwertige Inhalte"); Root Cause: `<LazySection>`-Wrapper machte Erklärtext + FAQ im SSR unsichtbar. Drei-Maßnahmen-Sprint 154+155+156 (28.04.2026): LazySection-Removal, /ueber-uns ausgebaut, /qualitaet neu. Re-Review-Anfrage steht aus (Karsten triggert nach Vercel-Deploy). Prompts 68 (Google CMP) und 85 (next/script) bleiben parkend bis Approval.
 - **Domain:** `https://www.rechenfix.de` (immer mit www, 308-Redirect von nicht-www)
 - **Stack:** Next.js 14 App Router, Tailwind, TypeScript, Vercel
 - **Smoketest v3.1** mit 9 Checks (C1–C9) als Regressions-Sweep über alle Rechner-URLs, Pflicht nach jeder Änderung
@@ -103,6 +103,8 @@ Affiliate ist erlaubt, wenn **thematischer Match** zum Rechner besteht. Entschei
 - Selects ohne sichtbares `<label>`
 - `text-gray-400` als Sekundärtextfarbe auf weißem Grund
 - Ergebnis-Updates ohne aria-live-Region
+- Erklärtext, FAQ, Disclaimer oder andere Crawler-relevante Text-Sektionen in client-only Lazy-Wrappern (`<LazySection>`, `IntersectionObserver`-gated Render) — bei SSR liefern solche Wrapper nur einen leeren Placeholder, AdSense-Crawler bewertet die Seite als „thin content" (Lehre 25 / Vorfall 27.04.2026, Sprint 154+155+156)
+- `new Date()` auf Modul-Ebene in `'use client'`-Components für Year-Dropdowns o. Ä. — Hydration-Mismatch-Risiko, statische Range bevorzugen (Lehre 24)
 
 ## Accessibility (WCAG 2.1 AA)
 
@@ -443,6 +445,20 @@ Gelernt aus Prompt 125a → 125a-fix: Die 125a-Commit-Message hatte eine verdopp
 Bei Unsicherheit → mindestens zwei Extremwert-Testfälle durchrechnen (z. B. UG und OG bei Midijob) und die beiden €-Werte beide nennen. Das verhindert Größenordnungs-Fehler wie 125a.
 
 ## Gelernte Regeln (Sprint 1, April 2026)
+
+**Welle-3-Konsolidierungs-Index (Lehren 23–29, 27.–28.04.2026):**
+
+| # | Kurz | Quelle |
+|---|---|---|
+| 23 | Stichtag-Konstante vs. dynamischer Default in Lib-Konstanten | 152b |
+| 24 | Hydration-safe statische Year-Dropdowns (kein `new Date()` im Modul-Scope von `'use client'`) | 152b |
+| 25 | Lazy-Loading-Verbot für Content-Sektionen (Erklärtext, FAQ, Disclaimer eager im SSR) | 154 |
+| 26 | Klassen-Migration bei Wrapper-Removal (`className`-Prop auf direkte Kinder, nicht ersatzlos streichen) | 154 |
+| 27 | E-E-A-T-Substanz aus interner Doku auf öffentliche Quality-Page übertragen | 155+156 |
+| 28 | Audit-Cluster nach Memory-Priorität abarbeiten (Memory-Backlog ist Scope-Definition) | 151 |
+| 29 | UI-Toggle als Folge-Commit muss Konfig-Refresh des Workaround-Hinweises atomisch mitnehmen | 150e |
+
+Volltext der Lehren 23–29 unten in dieser Liste; Volltext der Welle-3-Sprints + Sub-Commits in [docs/audit-arbeitspapiere/welle-status-historie.md](docs/audit-arbeitspapiere/welle-status-historie.md). Welle-2-Lehren (19–22) sind in der Liste vorhanden, Welle-1-Lehren (1–17) ebenfalls.
 
 1. **Input-Clamping**: HTML `min`/`max` reicht nicht. React-onChange-Handler muss aktiv klammern. Controlled component mit `value={state}`, nicht `defaultValue`. (Smoketest C3)
 
