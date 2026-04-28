@@ -7,7 +7,7 @@ description: Template and checklist for building standardized online calculators
 
 Build standardized, SEO-optimized calculator pages for the German calculator portal rechenfix.de. Every calculator must follow this template to ensure consistency, completeness, and maximum SEO impact.
 
-**Aktueller Stand (26.04.2026):** 170 Rechner in 9 Kategorien (Alltag 23, Finanzen **45**, Gesundheit 17, Auto & Verkehr 11, Wohnen & Energie 25, Mathe & Schule 18, Arbeit & Recht **17**, Kochen & Ernährung 12, Sport & Fitness 2). **Welle-Status:** Welle 1 ✅ komplett; **Welle 2 KOMPLETT abgeschlossen 26.04.2026** — Stufe 1 Auto (130–132.6), Stufe 2 Gesundheit (140–144b), Stufe 3 Wohnen (147–148c), Stufe 3 Arbeit (Block A 149a-d + 150a-d, Block B 152a + 153a/b/b-fix + 153c Lib-Audit). **Welle-3-Backlog mit klaren Scopes** (152b feiertage.ts SSOT akut Q4/26, P3-B1 ueberstunden-Netto-Refactor, 151 Block-A-P3 17 Items, 150e Süd-OLG-Toggle, Validation-Sweep). **Affiliate:** 12 Programme inkl. CosmosDirekt (Awin 11893); 117 AffiliateBox-Aufrufe in 73 Dateien. **AdSense** live seit 20.04.2026 (Publisher-ID `pub-1389746597486587`). Vollständige Welle-Historie + Welle-3-Backlog mit Detailspecs: [docs/audit-arbeitspapiere/welle-status-historie.md](../../docs/audit-arbeitspapiere/welle-status-historie.md).
+**Aktueller Stand (28.04.2026):** 170 Rechner in 9 Kategorien (Alltag 23, Finanzen **45**, Gesundheit 17, Auto & Verkehr 11, Wohnen & Energie 25, Mathe & Schule 18, Arbeit & Recht **17**, Kochen & Ernährung 12, Sport & Fitness 2). **Welle-Status:** Welle 1 ✅ komplett; **Welle 2 KOMPLETT abgeschlossen 26.04.2026** — Stufe 1 Auto (130–132.6), Stufe 2 Gesundheit (140–144b), Stufe 3 Wohnen (147–148c), Stufe 3 Arbeit (Block A 149a-d + 150a-d, Block B 152a + 153a/b/b-fix + 153c Lib-Audit). **Welle 3 6/9 abgeschlossen (28.04.2026):** ✅ 152b feiertage.ts SSOT, ✅ 154 LazySection-Removal (AdSense-Trigger), ✅ 155 /ueber-uns ausgebaut, ✅ 156 /qualitaet neu, ✅ 151 Block-A-P3-Sammelbatch (17 Items in 5 atomaren Konfig-Commits), ✅ 150e Süd-OLG-UI-Toggle ehegattenunterhalt. **Welle-3-Backlog (offen):** 151-Sammelrest (~25 nicht-priorisierte P3), P3-B1 ueberstunden-Netto-Refactor, Validation-Sweep. **Affiliate:** 12 Programme inkl. CosmosDirekt (Awin 11893); 117 AffiliateBox-Aufrufe in 73 Dateien. **AdSense** live seit 20.04.2026 (Publisher-ID `pub-1389746597486587`); erste Prüfung 27.04.2026 negativ („Minderwertige Inhalte"), Drei-Maßnahmen-Sprint 154+155+156 als Reaktion. Vollständige Welle-Historie + Welle-3-Backlog mit Detailspecs: [docs/audit-arbeitspapiere/welle-status-historie.md](../../docs/audit-arbeitspapiere/welle-status-historie.md).
 
 ## Tech Stack
 
@@ -903,6 +903,138 @@ mindestens 1 Cent für Floating-Point-Drift einplanen, aber nie
 „auf den Test-Output anpassen" — das ist verbotenes Test-Adjusting
 gegen die Berechnungs-Wahrheit (siehe Prompt 120a Lehre).
 
+### 🚫 Content-Sektionen in client-only Lazy-Wrapper (Lehre 26 aus Prompt 154, 27.04.2026)
+
+```tsx
+// FALSCH (in app/[kategorie]/[rechner]/page.tsx):
+<LazySection className="no-print">
+  <section className="card …">
+    <h2>So funktioniert der {config.titel}</h2>
+    {/* Erklärtext + FAQ — wird bei SSR nur als leeres Placeholder-div gerendert */}
+  </section>
+</LazySection>
+```
+
+`<LazySection>` und ähnliche `'use client'`-Wrapper mit IntersectionObserver
+liefern bei SSR nur ein leeres 200-px-Placeholder-`<div>`. Der Content
+erscheint erst nach Hydration + Scroll-Trigger im Client-Render. Der
+**AdSense-Crawler bewertet primär SSR-HTML** und sieht den Erklärtext + FAQ
+deshalb nie — Konsequenz: Bewertung als „Minderwertige Inhalte"
+(Ablehnung 27.04.2026, Sprint 154+155+156 als Reaktion).
+
+**Regel:** Erklärtext, FAQ, Disclaimer, Quellenangaben oder andere für
+Crawler relevante Text-Sektionen rendern **eager im SSR**. Lazy-Loading
+bleibt nur für Bilder, Iframes oder schwere interaktive Components mit
+echtem Interactivity-Cost legitim. SSR-Sichtbarkeit für Content-Sektionen
+hat Vorrang vor jeder Performance-Mikro-Optimierung.
+
+```tsx
+// RICHTIG:
+<>
+  <section className="card … no-print">
+    <h2>So funktioniert der {config.titel}</h2>
+    {/* Erklärtext eager rendered, im SSR sichtbar */}
+  </section>
+  <section className="card … no-print">
+    <h2>Häufige Fragen</h2>
+    {/* FAQ eager rendered */}
+  </section>
+</>
+```
+
+### 🚫 Klasse auf Wrapper statt auf direkte Kinder (Lehre 27 aus Prompt 154, 27.04.2026)
+
+```tsx
+// FALSCH — beim Wrapper-Removal die no-print-Klasse einfach gestrichen:
+- <LazySection className="no-print">
++ <>
+    <section className="card …">
+      …
+    </section>
++ </>
+```
+
+Beim Entfernen einer Wrapper-Komponente, die nur ein `className` durchreicht
+(z. B. `no-print`, `aria-hidden`, semantische Wrapper-Klassen), die Klasse
+auf alle direkt umschlossenen Kinder migrieren — **nicht ersatzlos
+streichen**. Sonst ändert sich Druck-Verhalten, A11y-Sichtbarkeit oder
+Print-Layout unbeabsichtigt.
+
+```tsx
+// RICHTIG:
+- <LazySection className="no-print">
+-   <section className="card …">
++ <>
++   <section className="card … no-print">
+      …
+    </section>
++ </>
+```
+
+### 🚫 `new Date()` auf Modul-Ebene in `'use client'`-Components (Lehre 24 aus Prompt 152b, 27.04.2026)
+
+```tsx
+// FALSCH (Modul-Scope eines 'use client'-Components):
+'use client';
+
+const JAHR_OPTIONEN = Array.from({ length: 10 }, (_, i) => String(new Date().getFullYear() - 2 + i));
+//                                                          ^^^^^^^^^^
+//                                                          Server-Build-Output kann sich
+//                                                          zwischen 23:59 und 00:01 verschieben
+//                                                          → Hydration-Mismatch im Client
+```
+
+Year-Dropdowns und ähnliche Auswahllisten in `'use client'`-Components als
+**statische Konstante** im Modul-Scope definieren. `new Date()` zur Laufzeit
+auf Modul-Ebene erzeugt Hydration-Mismatch zwischen SSR-Build-Output und
+Client-Render (Jahresgrenze, Zeitzonen-Drift). Wartungsaufwand „alle
+4–7 Jahre Konstanten-Bump" ist akzeptabel; Hydration-Bugs sind es nicht.
+
+```tsx
+// RICHTIG:
+'use client';
+
+const JAHR_OPTIONEN = ['2024', '2025', '2026', '2027', '2028', '2029', '2030'];
+// Wartung: nächster Bump ~2030 (oder im jahreswerte-kalender.md eintragen).
+```
+
+Ausnahme: In **Berechnungs-Libs** (kein `'use client'`, server- oder
+testbar) ist `new Date().getFullYear()` als Default für mathematisch-
+deterministische Werte (z. B. `anzahlBundesweiterFeiertageMoBisFr(jahr)`)
+zulässig — siehe Lehre 23.
+
+### 🚫 Stichtag-Wert als dynamischer Lookup verkleidet (Lehre 23 aus Prompt 152b, 27.04.2026)
+
+Die zwei Default-Strategien für jahresabhängige Werte sauber trennen:
+
+| Wertart | Default | Beispiele |
+|---|---|---|
+| **Stichtag-Wert** (legislativ/extern entschieden) | Stichtag-Konstante mit Quelle + Wechseldatum, Switch über `getAktuelle…(stichtag)` | Mindestlohn (`mindestlohn.ts`), Rentenwert (`rente.ts`), Pfändungsfreigrenze (`pfaendung.ts`), Bürgergeld-Regelsätze, BAföG-Sätze |
+| **Berechenbarer Wert** (mathematische Funktion des Jahres) | Dynamisch `new Date().getFullYear()` mit Test-Override-Möglichkeit | Anzahl Mo-Fr-Feiertage, Ostersonntag (Spencer-Formel), Indexierungs-Faktor aus VPI |
+
+**Faustregel:** Stichtag, wenn der Wert sich an einem konkreten Datum durch
+externe (legislative) Entscheidung ändert. Dynamisch, wenn der Wert eine
+reine Funktion des Jahres ist.
+
+```ts
+// FALSCH (legislativer Wert als dynamischer Lookup verkleidet):
+export function getMindestlohn(jahr: number = new Date().getFullYear()) {
+  return jahr >= 2027 ? 14.60 : 13.90;
+  //   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  //   Lückenhaft: keine Quelle, keine Begründung, kein Audit-Anker.
+}
+
+// RICHTIG (Stichtag-Konstante mit Switch):
+// Quelle: § 1 MiLoG i.V.m. Beschluss der Mindestlohnkommission v. 26.06.2025.
+const MINDESTLOHN_BIS_STICHTAG = 13.90;
+const MINDESTLOHN_AB_STICHTAG = 14.60;
+const SWITCH = new Date(2027, 0, 1); // 01.01.2027
+
+export function getAktuellerMindestlohn(stichtag: Date = new Date()) {
+  return stichtag >= SWITCH ? MINDESTLOHN_AB_STICHTAG : MINDESTLOHN_BIS_STICHTAG;
+}
+```
+
 ### 📌 Meta-Lektion: Soli ohne Milderungszone — ein Wiederholungs-Bug
 
 Das Muster `est > 20350 ? est * 0.055 : 0` (harte Kante ohne Milderungszone)
@@ -1282,3 +1414,4 @@ Ohne diesen Schritt geben Claude-Chat und Claude-Code inkonsistente Ratschläge 
 | 25.04.2026 | Prompt 146: Welle-2-Stufe-2-Gesundheit-Abschluss (Prompts 140–144b), CosmosDirekt als 12. Programm (Awin 11893), bmi.ts erweitert (`bmiKategorien` + `getOptimalerBereich` als SSOT, `BMI_ADULT_MIN_AGE = 18`), schwangerschaft.ts Voll-Fusion (geburtstermin.ts + ssw.ts gelöscht), Wellbeing-Patterns-Sektion (Eating-Disorder-Floor, Kinder-Gating, Verhütungs-Disclaimer, istKind-Flag), Casing-Konsistenz-Lehre (Windows-NTFS vs. Vercel-Linux, Zwei-Schritt-`git mv`), Verify-Script-Pattern pro Welle-2-Stufe (externe Primärquellen) | [ ] noch offen |
 | 26.04.2026 | Prompt 154: Welle-2-Stufe-3-Wohnen-Abschluss (Prompts 147–148b) + Welle-2-Stufe-3-Arbeit-Status (149a/b/c durch, 149d offen), 6 neue SSOT-Libs ergänzt (`strompreis.ts`, `eeg-einspeiseverguetung.ts`, `beg-foerderung.ts`, `vpi.ts` mit § 1376 BGB-Helper, `pv-ertragsmodell.ts`, plus `kfz-steuer-parameter.ts` aus Welle 2 Stufe 1), 4 neue Anti-Patterns (Backtick-Falle in Template-Literals, Slug-Drift in Kategorie-Datei, Phantom-Befund-Diagnose, Test-Soll-Werte gegen UI-Anzeige), Counts korrigiert (170 = Alltag 23 / Finanzen 45 / Gesundheit 17 / Auto 11 / Wohnen 25 / Mathe 18 / Arbeit 17 / Kochen 12 / Sport 2) | [ ] noch offen |
 | 26.04.2026 | Prompt 155: Welle-2-Komplett-Abschluss-Sync — Header-Stand auf „Welle 2 KOMPLETT abgeschlossen 26.04.2026" mit allen 4 Stufen ✅ und Welle-3-Backlog-Stichworten (152b/P3-B1/151/150e/Validation-Sweep). Audit-Methodik-Sektion ergänzt um Audit-Bundle-Pattern (Generator-Skript `scripts/build-audit-bundle.ts`, CLI `npm run audit:bundle <name>`, Bundle-Defs in `scripts/audit-bundles.ts`, 300k-text-Limit-Pflicht für Bundles >100 KB), Verify-Skripte-Konvention (Lehre 149d: `.ts` statt `.mjs`, `npx tsx`-Aufruf, typisierte Helper), Wert-Recherche-Disziplin durch Claude im Web (Lehre 22: Aktualität-Hinweis + zwei Sekundärquellen + URL-Permission-Workflow). | [ ] noch offen |
+| 28.04.2026 | Prompt 158a: Welle-3-Lehren-Sync — Header-Stand auf 28.04.2026 mit Welle 3 6/9 ✅ (152b, 154, 155, 156, 151, 150e). Vier neue Anti-Pattern-Blöcke ergänzt: Content-Sektionen in client-only Lazy-Wrapper (Lehre 26 / 154 — AdSense-Trigger), Klasse auf Wrapper statt direkten Kindern (Lehre 27 / 154), `new Date()` auf Modul-Ebene in `'use client'`-Components (Lehre 24 / 152b — Hydration-Mismatch-Risiko), Stichtag-Wert als dynamischer Lookup verkleidet (Lehre 23 / 152b — Stichtag vs. berechenbar mit Decision-Tabelle). AdSense-Status im Header: erste Prüfung 27.04.2026 negativ, Drei-Maßnahmen-Sprint 154+155+156 als Reaktion. | [ ] noch offen |
