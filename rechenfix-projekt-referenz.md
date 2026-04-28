@@ -368,7 +368,9 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
 - ✅ **Welle 3 Item 152b feiertage.ts SSOT** (27.04.2026, Commits ea3c9ce/9b1a947/03d7bda) — Neue Lib `lib/berechnungen/feiertage.ts` mit Spencer-Variante der Gauß-Osterformel + 16-BL-Map + 4 Helper. `scripts/verify-feiertage.ts` 60/60 grün gegen externe Sollwerte (BMF, kalender.de). ArbeitstageRechner.tsx auf SSOT migriert, Jahr-Dropdown 2024–2030 (akuter Q4/2026-Bug behoben). freelancer-stundensatz.ts: hartkodierte FEIERTAGE=10 durch dynamischen Lookup ersetzt (P3-Lib-1 geschlossen). Lehren 23 + 24.
 - ✅ **AdSense-Reparatur-Sprint** (Prompt 154, 27.04.2026, Commits 83792c0 + 4ae7b38) — AdSense-Erstprüfung am 27.04.2026 negativ („Minderwertige Inhalte"). Root Cause: `<LazySection>`-Wrapper um Erklärtext + FAQ in `app/[kategorie]/[rechner]/page.tsx` Z. 479–550 — `'use client'`-Component, rendert bei SSR nur leeres 200-px-Placeholder-`<div>`, Crawler sieht 5.497 Zeichen statt erwartete ~13 K. Fix: Wrapper durch Fragment ersetzt, `no-print` auf zwei `<section>`-Elemente migriert, `components/ui/LazySection.tsx` gelöscht (verwaist). Live-Verifikation nach Deploy: brutto-netto-rechner 5.497 → 13.033 chars, urlaubstage 10.050, bmi 8.171 — alle drei mit „So funktioniert" + „Häufige Fragen" im SSR-HTML. Lehren 25 + 26.
 - ✅ **E-E-A-T-Sprint** (Prompts 155 + 156, 28.04.2026, Commits 1a6e6ed + fecadc4 + 3079c43) — Trust-Signale für YMYL-Themen ergänzt: 155 baut `/ueber-uns` von ~2,2 KB auf ~7 KB sichtbaren Text aus (sechs Card-Sektionen: Hero, Solo-Founder-Statement mit Beratungs-Abgrenzung, Audit-Workflow-Überblick, Quellenliste, Datenschutz/Werbe-Transparenz, Kontakt). 156 legt neue statische Server-Component `/qualitaet` an (sieben Sektionen: Hero, Audit-Workflow + 4-Punkt-Audit, Primärquellen-Liste in 6 Themenbereichen, Stichtag-Logik mit Beispielen, A11y-Status, Datenschutz, Disclaimer „Was Rechenfix nicht ist"). Footer-Link „Qualität & Methodik" vor `/barrierefreiheit` ergänzt. Lehre 27.
-- ✅ **Welle 3 Item 151 — Block-A-P3-Sammelbatch** (28.04.2026, Commits b268b93 / e7121d2 / 17ca6bd / d7a277d / 4e5b7d0 / 2171564) — 17 Memory-priorisierte P3-Items aus Block-A-Audit in 5 atomaren Konfig-Commits + Doku-Sync: 151a pendlerpauschale Mobilitätsprämie § 101 EStG, 151b kuendigungsfrist (3) + abfindung (1) = 4 Items, 151c mutterschutz-Restpolish (5), 151d unterhalt (4), 151e elternzeit (3). ~25 nicht-priorisierte Items als „151-Sammelrest" geparkt. Lehre 28.
+- ✅ **Welle 3 Item 151 — Block-A-P3-Sammelbatch** (28.04.2026, Commits b268b93 / e7121d2 / 17ca6bd / d7a277d / 4e5b7d0 / 2171564) — 17 Memory-priorisierte P3-Items aus Block-A-Audit in 5 atomaren Konfig-Commits + Doku-Sync: 151a pendlerpauschale Mobilitätsprämie § 101 EStG, 151b kuendigungsfrist (3) + abfindung (1) = 4 Items, 151c mutterschutz-Restpolish (5), 151d unterhalt (4), 151e elternzeit (3). ~25 nicht-priorisierte P3-Items aus dem gleichen Block-A-Audit später durch Item 157 ✅ erledigt. Lehre 28.
+- ✅ **Welle 3 Item 157 — P3-Sammelrest aus Block-A-Audit** (28.04.2026, Commits c4c1846 / 566a095 / d3eca80 / e4810ec / 965c519 / 6689668 + a750bf4 Doku-Sync) — 25 nicht-priorisierte P3-Items aus Block-A-Audit in 6 atomaren Konfig-Commits + Doku-Sync: 157a pendlerpauschale § 9 Abs. 1 Satz 3 Nr. 4 EStG (Standard-Zitierweise), 157b kuendigungsfrist + abfindung (§ 169 SGB IX, § 113 InsO, §§ 9/10 KSchG, § 4 KSchG), 157c scheidungskosten (§ 1565 Abs. 2 BGB, VA-Mindest-VW, VKH § 115 ZPO, RVG-Auslagen-Cap), 157d zugewinnausgleich + unterhalt (§§ 1379/1375/1385 BGB, „bereinigtes Netto"), 157e ehegattenunterhalt (Halbteilung Nicht-Erwerb, §§ 1573 Abs. 4/1574/1577 BGB, Beispiel mit Kindesunterhalt-Vorabzug), 157f arbeitslosengeld (§§ 153/147/155 SGB III, Höchstsatz, Stkl-Stichtag, Nebenverdienst). Schließt 151-Sammelrest semantisch.
+- ✅ **Welle 3 Item P3-B1 — ueberstunden-Netto-Refactor** (28.04.2026, Commit 7c2426b + c6876c1 Doku-Sync) — Pauschale 40-%-Steuerabzug-Schätzung im Vergütungs-Modus durch Mehrbetrag-Methode `Netto(Brutto+Vergütung) − Netto(Brutto)` via `berechneBruttoNetto`-SSOT ersetzt. UI im Modus „Vergütung" um Steuerklasse + Bundesland + Kirchensteuer-Inputs erweitert (Defaults Stkl I / NW / ohne KSt). Schließt P3-B1 aus dem Welle-2-Stufe-3-Arbeit-Block-B-Backlog.
 - ✅ **Welle 3 Item 150e — Süd-OLG-UI-Toggle ehegattenunterhalt** (28.04.2026, Commits 08017f8 + 3ae42c1) — Neuer RadioToggleGroup „Berechnungsmethode" mit zwei Optionen (Bundesweit 3/7 ≈ 42,86 % vs. Süddeutsch 45 %, OLG-Bezirke Bamberg/Karlsruhe/München/Nürnberg/Stuttgart/Zweibrücken). Konstanten `QUOTE_BUNDESWEIT`/`QUOTE_SUEDDEUTSCH` ersetzen hardcoded `(differenz * 3) / 7`. 150d-Workaround „Faktor 1,05 manuell anwenden" durch Toggle-Verweis ersetzt. Sanity-Check 4 Default-Werte deckungsgleich mit Spec. Lehre 29.
 
 **Parkend (wartet auf AdSense-Freigabe):**
@@ -380,7 +382,7 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
 - 🎯 GSC: Sitemap neu einreichen nach Deploy; CTR-Review der 3 neuen Awin-Partner ~20.05.2026
 - 🎯 Neue Rechner-Batches (thematisch offen)
 - 🎯 Jahresparameter-Audit 2027 (Frühjahr 2027): ESt-Tarif 2027, SV-Rechengrößen 2027, JAEG, Zusatzbeitrag, D-Ticket, Pfändung-Switch zum 01.07.2028
-- 🎯 **Welle-3-Backlog (geparkte Items mit klarem Scope, siehe eigene Sektion „Welle-3-Backlog" weiter unten):** 152b `feiertage.ts` SSOT (akut Q4/2026), 151 Block-A-P3-Sammelbatch (17 Items), 150e Süd-OLG-UI-Toggle, Welle-3-Validation-Sweep aller Welle-2-Rechner gegen externe Oracles
+- 🎯 **Welle-3-Backlog (geparkte Items mit klarem Scope, siehe eigene Sektion „Welle-3-Backlog" weiter unten):** 152b `feiertage.ts` SSOT (akut Q4/2026), 151 Block-A-P3-Sammelbatch (17 Items), 150e Süd-OLG-UI-Toggle, 157 P3-Sammelrest (25 Items in 6 atomaren Konfig-Commits 157a–f), 152c Pendlerpauschalen-SSOT (geparkt), Validation-Sweep — Scoping ✅ 28.04.2026 (siehe `docs/audit-arbeitspapiere/validation-sweep-scoping.md`), 7 Module priorisiert
 - 🎯 **Welle 2 Stufe 3 weitere Kategorien** (Alltag, Mathe, Kochen, Sport): noch nicht gestartet — bei Bedarf separate Audit-Sprints, ansonsten als Teil von Welle 3 Validation-Sweep
 - 🎯 **Prompt 133 TaxiRechner Stadt-Preset-UX:** 5 Städte-Presets (Karsten-Auswahl ausstehend), `taxi-preset-tarife.ts` mit Stichtag-Kommentar pro Stadt, CLAUDE.md-Wartungsregel halbjährlich. Vorbereitet durch `TARIFE_STAND` in `lib/berechnungen/taxi.ts` (Prompt 132 A5)
 - 🎯 **Prompt 120c (Juni 2026):** Wohngeld-Lib-Refactoring auf Pro-Person-Architektur §§ 14–16 WoGG, gebündelt mit Grundsicherungsgeld-Reform (Switch 01.07.2026). Nach Umsetzung: `STATISCHE_OVERRIDES`-Ausschluss aufheben, dynamische Route rendert wieder den interaktiven Rechner. KdU-1,5-Fache-Cap (§ 22 Abs. 1 SGB II n.F., aus Prompt 129 Teil B Nicht-Scope) könnte dabei als Nebenprodukt integriert werden
@@ -395,24 +397,27 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
   - Stufe 2 Gesundheit ✅ (Prompts 140–144b)
   - Stufe 3 Wohnen ✅ (Prompts 147–148c, 25.+26.04.2026, 25 Rechner)
   - Stufe 3 Arbeit ✅ (Block A 149a-d + 150a-d, Block B 152a + 153a/b/b-fix + 153c Lib-Audit, 26.04.2026, 14 Commits)
-- **Welle 3 (Validation-Sweep + geparkte Items + AdSense-Reparatur):** **7/9 abgeschlossen (Stand 28.04.2026)**
+- **Welle 3 (Validation-Sweep + geparkte Items + AdSense-Reparatur):** **8/10 abgeschlossen (Stand 28.04.2026)** — 1 geparkt, 1 priorisiert
   - ✅ 152b feiertage.ts SSOT (27.04.2026)
   - ✅ 154 LazySection-Removal (AdSense-Reparatur, 27.04.2026)
   - ✅ 155 /ueber-uns ausgebaut (28.04.2026)
   - ✅ 156 /qualitaet neu angelegt + Footer-Link (28.04.2026)
   - ✅ 151 Block-A-P3-Sammelbatch (17 Items in 5 atomaren Konfig-Commits, 28.04.2026)
   - ✅ 150e Süd-OLG-UI-Toggle ehegattenunterhalt (28.04.2026)
+  - ✅ 157 P3-Sammelrest (25 Items in 6 atomaren Konfig-Commits 157a–f, 28.04.2026)
   - ✅ P3-B1 ueberstunden-Netto-Refactor mit Steuerklasse-Input (Commit 7c2426b, 28.04.2026)
-  - ⬜ 151-Sammelrest (~25 nicht-priorisierte P3-Items aus Block-A-Audit)
-  - ⬜ Welle-3-Validation-Sweep aller Welle-2-Rechner gegen externe Oracles
+  - 🅿️ 152c Pendlerpauschalen-SSOT — geparkt, Trigger: Verabschiedung der 45-Cent-Reform
+  - ⬜ Validation-Sweep — Scoping ✅ 28.04.2026, 7 Module priorisiert (M1 Backtick-Hook, M2 Norm-Zitate, M3 SSOT-Konsumption, M4 Meta-Routen, M5 Affiliate-Konsistenz, M6 FAQ-Drift, M7 A11y-Stichprobe), Folge-Sessions ausstehend
 
 Vollständige Welle-Historie: [docs/audit-arbeitspapiere/welle-status-historie.md](docs/audit-arbeitspapiere/welle-status-historie.md).
 
 ## Welle-3-Backlog (Stand 28.04.2026)
 
-**Geliefert (7/9):** 152b ✅, 154 ✅, 155 ✅, 156 ✅, 151 ✅, 150e ✅, P3-B1 ✅. Volldetails siehe „Status April 2026" oben und [docs/audit-arbeitspapiere/welle-status-historie.md](docs/audit-arbeitspapiere/welle-status-historie.md).
+**Geliefert (8/10):** 152b ✅, 154 ✅, 155 ✅, 156 ✅, 151 ✅, 150e ✅, 157 ✅, P3-B1 ✅. Volldetails siehe „Status April 2026" oben und [docs/audit-arbeitspapiere/welle-status-historie.md](docs/audit-arbeitspapiere/welle-status-historie.md).
 
-**Offen (2/9):** 151-Sammelrest, Validation-Sweep — siehe unten mit Aufwänden, Akut-Faktoren und Scope-Specs.
+**Geparkt (1/10):** 152c Pendlerpauschalen-SSOT (Trigger: Reform-Verabschiedung).
+
+**Priorisiert (1/10):** Validation-Sweep — Scoping ✅ 28.04.2026, 7 Module priorisiert (M1 Backtick-Hook, M2 Norm-Zitate, M3 SSOT-Konsumption, M4 Meta-Routen, M5 Affiliate-Konsistenz, M6 FAQ-Drift, M7 A11y-Stichprobe). Volldetails siehe unten mit Aufwand und Scope-Specs.
 
 ### 152b — `feiertage.ts` SSOT-Lib mit Gauß-Osterformel ✅ ABGESCHLOSSEN (27.04.2026)
 
@@ -427,14 +432,19 @@ Vollständige Welle-Historie: [docs/audit-arbeitspapiere/welle-status-historie.m
 ### 151 — Block-A-P3-Sammelbatch (17 priorisierte Items) ✅ ABGESCHLOSSEN (28.04.2026)
 
 - **Geliefert:** 5 atomare Konfig-Commits + 1 Doku-Sync. 151a pendlerpauschale Mobilitätsprämie § 101 EStG (StÄndG 2025); 151b kuendigungsfrist + abfindung — EuGH Kücükdeveci, § 622 Abs. 5 Nr. 2 BGB Kleinbetriebs-Ausnahme, BAG 2 AZR 68/24 Zugangsbeweis, § 1a Abs. 2 S. 3 KSchG Aufrundung; 151c mutterschutz-Restpolish — Frühgeburt-Definition, Muster 9 ab 01.01.2026, 99-Tage-Mindestschutz, Schülerinnen/Studentinnen, Totgeburt-Sonderregelung; 151d unterhalt — § 1610 BGB > 11.200 € NEK, § 1612a Abs. 3 BGB Alterssprung, SB-Wohnkosten 390+130 €, 7. MUVÄndV als Rechtsquelle; 151e elternzeit — § 17 Abs. 1 BEEG Urlaubskürzung, § 16 Abs. 1 BEEG bis zu 3 Zeitabschnitte, Terminologie „Bindungszeitraum" → „verbindlicher Festlegungszeitraum"
-- **Memory-Priorisierung:** Audit hatte 42 P3-Items, davon 17 im Memory-Backlog priorisiert; Rest als „151-Sammelrest" geparkt (siehe unten)
+- **Memory-Priorisierung:** Audit hatte 42 P3-Items, davon 17 im Memory-Backlog priorisiert; restliche 25 später durch Item 157 ✅ erledigt (siehe unten)
 - **Lehre:** 28 (Audit-Cluster nach Memory-Priorität — Memory-Backlog ist Scope-Definition)
 
-### 151-Sammelrest — ~25 nicht-priorisierte P3-Items aus Block-A-Audit (offen)
+### 157 — P3-Sammelrest aus Block-A-Audit ✅ ABGESCHLOSSEN (28.04.2026)
 
-- **Aufwand:** mehrere h, in einer ruhigen Session oder mit Validation-Sweep zusammen
-- **Akut:** nein (alles P3)
-- **Scope:** Norm-Zitierungs-Polish, Edge-Case-FAQs, SSOT-Refactor-Kandidaten, A8-arbeitslosengeld-Items (5 Stück, in finanzen.ts) — gegliedert nach Cluster (A1 2x, A2 2x, A3 2x, A5 5x, A6 4x, A7 1x, A8 5x, A10 5x). Volldetails siehe `welle-status-historie.md` Sektion „151-Sammelrest"
+- **Geliefert:** 6 atomare Konfig-Commits 157a–f + Doku-Sync (Commits c4c1846, 566a095, d3eca80, e4810ec, 965c519, 6689668, a750bf4). 25 P3-Items aus Block-A-Audit (kein Berechnungslogik-Touch).
+  - **157a** pendlerpauschale: § 9 Abs. 1 Satz 3 Nr. 4 EStG (Standard-Zitierweise BMF/Finanzgerichte, P3-A1-2)
+  - **157b** kuendigungsfrist + abfindung: § 169 SGB IX Schwerbehinderten-Mindestfrist + Integrationsamt, § 113 InsO Insolvenz-Höchstfrist 3 Mon, §§ 9/10 KSchG gerichtliche Auflösung 12/15/18 Monatsverdienste, § 4 KSchG 3-Wo-Klagefrist (P3-A2-3, P3-A2-4, P3-A3-2, P3-A3-3)
+  - **157c** scheidungskosten: § 1565 Abs. 2 BGB Härtefall, VA-Mindest-VW 1.000 €, Folgesachen-Faustwert-Hinweis, VKH § 115 ZPO, Nr. 7002 VV RVG Auslagen-Cap (P3-A5-1..5)
+  - **157d** zugewinnausgleich + unterhalt: § 1379 BGB Auskunftsanspruch, § 1375 Abs. 2 BGB illoyale Vermögensminderung, § 1385 BGB vorzeitiger Ausgleich, „bereinigtes Netto"-Klarstellung (P3-A6-1..3, P3-A7-1)
+  - **157e** ehegattenunterhalt: Beispiel mit Kindesunterhalt-Vorabzug, § 1573 Abs. 4 BGB Anschlussunterhalt, Halbteilung Nicht-Erwerb, § 1574 BGB Erwerbsobliegenheit, § 1577 BGB Anrechnung (P3-A10-1..5)
+  - **157f** arbeitslosengeld: §§ 153/147/155 SGB III, Höchstsatz ~2.940 €/Monat, Steuerklasse-Stichtag 01.01., Nebenverdienst 165 € + 15-h-Schwelle (P3-A8-1..5)
+- **Schließt:** den 151-Sammelrest semantisch (~25 nicht-priorisierte P3-Items aus dem gleichen Block-A-Audit)
 
 ### 150e — Süd-OLG-UI-Toggle für ehegattenunterhalt-Rechner ✅ ABGESCHLOSSEN (28.04.2026)
 
@@ -442,17 +452,24 @@ Vollständige Welle-Historie: [docs/audit-arbeitspapiere/welle-status-historie.m
 - **Sanity-Check 4 Default-Werte deckungsgleich mit Spec:** BW/KU=0: 986 €, Süd/KU=0: 1.035 €, BW/KU=400: 814 €, Süd/KU=400: 855 €
 - **Lehre:** 29 (UI-Toggle als Folge-Commit muss Konfig-Refresh atomisch mitnehmen)
 
+### 152c — Pendlerpauschalen-SSOT (geparkt)
+
+- **Status:** geparkt (28.04.2026)
+- **Aufwand:** ~30 Min
+- **Trigger zum Aufgreifen:** Verabschiedung der 45-Cent-Reform der Pendlerpauschale (Stand 28.04.2026 nur angekündigt, noch nicht im BGBl)
+- **Scope:** Neue SSOT-Konstante `PENDLERPAUSCHALE_PRO_KM = 0.38` in `lib/berechnungen/pendlerpauschale.ts` mit Stichtag-Switch-Pattern; bestehende Konfig-Touchpoints (`finanzen.ts`, `arbeit.ts`) auf SSOT-Import umstellen
+- **Begründung Park-Status:** Ohne Reform-Verabschiedung kein konkreter Lese-Wert. P3-A1-3 aus dem Block-A-Audit bewusst geparkt statt sofort umgesetzt.
+
 ### Welle-3-Validation-Sweep aller Welle-2-Rechner gegen externe Oracles
 
-- **Aufwand:** mehrere Sessions
-- **Akut:** nein (Welle 2 ist funktional sauber; Welle 3 ist Cross-Check-Phase)
-- **Scope:** Alle Welle-2-Rechner gegen unabhängige externe Quellen (BMF-Rechner, Stiftung Warentest, IHK-Rechner, Steuerberater-Tools) cross-checken. Strukturiert in Stufen pro Kategorie analog Welle 2 (Auto → Gesundheit → Wohnen → Arbeit, oder umgekehrt nach Drift-Wahrscheinlichkeit)
-- **Vorbereitung beim Start von Welle 3:** Liste der externen Oracles pro Kategorie aufstellen, Verify-Skripte-Pattern aus Welle 2 anpassen (Lehre 149d: `.ts`-Endung, `npx tsx`-Aufruf, typisierte Helper)
+- **Scoping ✅ ABGESCHLOSSEN (28.04.2026, Commit 867b92f):** 7 Module priorisiert — M1 Backtick-Hook, M2 Norm-Zitate, M3 SSOT-Konsumption, M4 Meta-Routen, M5 Affiliate-Konsistenz, M6 FAQ-Drift, M7 A11y-Stichprobe. Volldetails: [docs/audit-arbeitspapiere/validation-sweep-scoping.md](docs/audit-arbeitspapiere/validation-sweep-scoping.md). Out-of-Scope: Deploy-Sync-Check, Verify-Coverage-Lücke (eigene Welle 4).
+- **Aufwand:** 4–6 Folge-Sessions (~9–12 h Sweep-Zeit netto, plus optionale Fix-Sessions je nach M3-Drift-Cluster)
+- **Akut:** nein (Welle 2 ist funktional sauber; Welle 3 ist Cross-Check-Phase). Empfehlung Session A zuerst (M1 Backtick-Hook wegen Build-Break-Risiko).
 
 ### Empfohlene Reihenfolge der verbleibenden Items (Stand 28.04.2026)
 
-1. **151-Sammelrest** als erstes — Konfig-Polish, kann in einer ruhigen Session oder verteilt über mehrere Slots laufen
-2. **Welle 3 Validation-Sweep** als großer Sprint — eigene Planungs-Session, wenn AdSense-Re-Review durchgelaufen ist
+1. **Welle 3 Validation-Sweep** — Scoping ✅, Folge-Sessions A/B/C bündeln M1+M2 / M3+M4 / M5+M6+M7. Session A zuerst wegen Backtick-Hook-Build-Schutz.
+2. **152c** — wartet auf Trigger (Reform-Verabschiedung).
 
 **Neue Scripts seit Welle 2 Stufe 3:**
 - `scripts/verify-wohnen-p1.ts` (Prompt 147), `verify-wohnen-block-b.ts` (148), `verify-pv-ertragsmodell.ts` (147c), `verify-ehegattenunterhalt.ts` (149c), `verify-zugewinnausgleich.ts` (149b) — alle gegen externe Primärquellen (BNetzA, BDEW, KfW, Mertens, Düsseldorfer Tabelle, BFH/BGB, Destatis Lange Reihe)
