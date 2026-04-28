@@ -1,4 +1,6 @@
 import { WOCHEN_PRO_MONAT } from './_helpers';
+import { berechneBruttoNetto, type BruttoNettoEingabe } from './brutto-netto';
+import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from './sv-parameter';
 
 // ── Modus 1: Überstunden berechnen ──
 
@@ -58,6 +60,9 @@ export interface VerguetungEingabe {
   bruttogehalt: number;
   monatsstunden: number;
   zuschlag: number; // in %
+  steuerklasse: 1 | 2 | 3 | 4 | 5 | 6;
+  bundesland: string;
+  kirchensteuer: boolean;
 }
 
 export interface ZuschlagSzenario {
@@ -75,20 +80,56 @@ export interface VerguetungErgebnis {
   szenarien: ZuschlagSzenario[];
 }
 
+function kirchensteuersatz(bundesland: string): 8 | 9 {
+  return (bundesland === 'BY' || bundesland === 'BW') ? 8 : 9;
+}
+
+function makeBnEingabe(
+  brutto: number,
+  steuerklasse: VerguetungEingabe['steuerklasse'],
+  bundesland: string,
+  kirchensteuer: boolean,
+): BruttoNettoEingabe {
+  return {
+    bruttoMonat: brutto,
+    steuerklasse,
+    kirchensteuer,
+    kirchensteuersatz: kirchensteuersatz(bundesland),
+    kinderfreibetraege: 0,
+    bundesland,
+    kvArt: 'gesetzlich',
+    kvZusatzbeitrag: KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT,
+    kvPrivatBeitrag: 0,
+    rvBefreit: false,
+    abrechnungszeitraum: 'monat',
+  };
+}
+
 export function berechneVerguetung(eingabe: VerguetungEingabe): VerguetungErgebnis | null {
-  const { ueberstunden, bruttogehalt, monatsstunden, zuschlag } = eingabe;
+  const { ueberstunden, bruttogehalt, monatsstunden, zuschlag, steuerklasse, bundesland, kirchensteuer } = eingabe;
   if (ueberstunden <= 0 || bruttogehalt <= 0 || monatsstunden <= 0) return null;
 
   const stundenlohn = bruttogehalt / monatsstunden;
 
+  // Netto-Basis ohne Vergütung — einmal pro Aufruf, für Mehrbetrag-Methode
+  const nettoBasis = berechneBruttoNetto(
+    makeBnEingabe(bruttogehalt, steuerklasse, bundesland, kirchensteuer),
+  ).nettoMonat;
+
   const calc = (z: number): ZuschlagSzenario => {
     const ul = stundenlohn * (1 + z / 100);
     const brutto = ueberstunden * ul;
+    // Mehrbetrag-Methode: Netto(Brutto+Vergütung) − Netto(Brutto)
+    // BAG-konform für Lohnsteuerprogression — Überstundenvergütung ist normales Arbeitsentgelt
+    const nettoMitVerguetung = berechneBruttoNetto(
+      makeBnEingabe(bruttogehalt + brutto, steuerklasse, bundesland, kirchensteuer),
+    ).nettoMonat;
+    const verguetungNetto = nettoMitVerguetung - nettoBasis;
     return {
       zuschlag: z,
       ueberstundenlohn: ul,
       verguetungBrutto: brutto,
-      verguetungNetto: brutto * 0.6,
+      verguetungNetto,
     };
   };
 

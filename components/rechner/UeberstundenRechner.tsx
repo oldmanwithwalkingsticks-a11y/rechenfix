@@ -11,6 +11,25 @@ import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
+const BUNDESLAENDER = [
+  { kuerzel: 'BW', name: 'Baden-Württemberg' },
+  { kuerzel: 'BY', name: 'Bayern' },
+  { kuerzel: 'BE', name: 'Berlin' },
+  { kuerzel: 'BB', name: 'Brandenburg' },
+  { kuerzel: 'HB', name: 'Bremen' },
+  { kuerzel: 'HH', name: 'Hamburg' },
+  { kuerzel: 'HE', name: 'Hessen' },
+  { kuerzel: 'MV', name: 'Mecklenburg-Vorpommern' },
+  { kuerzel: 'NI', name: 'Niedersachsen' },
+  { kuerzel: 'NW', name: 'Nordrhein-Westfalen' },
+  { kuerzel: 'RP', name: 'Rheinland-Pfalz' },
+  { kuerzel: 'SL', name: 'Saarland' },
+  { kuerzel: 'SN', name: 'Sachsen' },
+  { kuerzel: 'ST', name: 'Sachsen-Anhalt' },
+  { kuerzel: 'SH', name: 'Schleswig-Holstein' },
+  { kuerzel: 'TH', name: 'Thüringen' },
+];
+
 type Modus = 'berechnen' | 'verguetung';
 type EingabeArt = 'gesamt' | 'tageweise';
 
@@ -38,6 +57,9 @@ export default function UeberstundenRechner() {
   const [bruttogehalt, setBruttogehalt] = useState('3500');
   const [monatsstunden, setMonatsstunden] = useState('173.33');
   const [zuschlag, setZuschlag] = useState('0');
+  const [steuerklasse, setSteuerklasse] = useState<1 | 2 | 3 | 4 | 5 | 6>(1);
+  const [bundesland, setBundesland] = useState('NW');
+  const [kirchensteuer, setKirchensteuer] = useState(false);
 
   const tatsaechlicheStunden = useMemo(() => {
     if (eingabeArt === 'gesamt') return parseFloat(tatsaechlich.replace(',', '.')) || 0;
@@ -56,7 +78,10 @@ export default function UeberstundenRechner() {
     bruttogehalt: parseFloat(bruttogehalt.replace(',', '.')) || 0,
     monatsstunden: parseFloat(monatsstunden.replace(',', '.')) || 0,
     zuschlag: parseFloat(zuschlag.replace(',', '.')) || 0,
-  }), [ueberstunden, bruttogehalt, monatsstunden, zuschlag]);
+    steuerklasse,
+    bundesland,
+    kirchensteuer,
+  }), [ueberstunden, bruttogehalt, monatsstunden, zuschlag, steuerklasse, bundesland, kirchensteuer]);
 
   const updateTag = (idx: number, val: string) => {
     setTagesStunden(prev => prev.map((v, i) => i === idx ? val : v));
@@ -355,6 +380,49 @@ export default function UeberstundenRechner() {
             </div>
           </div>
 
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+            <div>
+              <label htmlFor="ueberstunden-select-stkl" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Steuerklasse</label>
+              <select
+                id="ueberstunden-select-stkl"
+                value={steuerklasse}
+                onChange={e => setSteuerklasse(parseInt(e.target.value, 10) as 1 | 2 | 3 | 4 | 5 | 6)}
+                className="input-field w-full"
+              >
+                {[1, 2, 3, 4, 5, 6].map(sk => (
+                  <option key={sk} value={sk}>
+                    Stkl. {sk === 1 ? 'I' : sk === 2 ? 'II' : sk === 3 ? 'III' : sk === 4 ? 'IV' : sk === 5 ? 'V' : 'VI'}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="ueberstunden-select-bl" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Bundesland</label>
+              <select
+                id="ueberstunden-select-bl"
+                value={bundesland}
+                onChange={e => setBundesland(e.target.value)}
+                className="input-field w-full"
+              >
+                {BUNDESLAENDER.map(bl => (
+                  <option key={bl.kuerzel} value={bl.kuerzel}>{bl.name}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="ueberstunden-select-kst" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Kirchensteuer</label>
+              <select
+                id="ueberstunden-select-kst"
+                value={kirchensteuer ? 'ja' : 'nein'}
+                onChange={e => setKirchensteuer(e.target.value === 'ja')}
+                className="input-field w-full"
+              >
+                <option value="nein">Nein</option>
+                <option value="ja">Ja</option>
+              </select>
+            </div>
+          </div>
+
           {/* Ergebnis */}
           {ergebnis2 && (
             <div className="space-y-4">
@@ -419,7 +487,7 @@ export default function UeberstundenRechner() {
               </div>
 
               <p className="text-xs text-gray-600 dark:text-gray-500 text-center">
-                Die Nettoschätzung basiert auf einem pauschalen Abzug von ca. 40% und dient nur zur Orientierung.
+                Die Nettoschätzung basiert auf der echten Lohnsteuer-Berechnung mit Steuerklasse, Bundesland und Kirchensteuer (Mehrbetrag gegenüber dem Bruttogehalt ohne Vergütung). KV-Zusatzbeitrag durchschnittlich 2026.
               </p>
 
               <ErgebnisAktionen
