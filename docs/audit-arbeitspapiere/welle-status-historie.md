@@ -8,6 +8,38 @@
 
 ---
 
+## Welle 3 — Item 157 P3-Sammelrest (28.04.2026, ABGESCHLOSSEN)
+
+**Scope:** 151-Sammelrest aus Block-A-Audit — 25 nicht-priorisierte P3-Items in 8 Rechnern aus zwei Konfig-Files (`arbeit.ts` + `finanzen.ts`). Reine Erklärtext- und FAQ-Polish, kein Berechnungslogik-Touch. Pre-Check ergab: P3-A6-4 (Beispiele Indexierung sichtbar) bereits durch P1-A6-Fix (149 zugewinnausgleich-§ 1376 BGB) erledigt — aus dem Sammelrest fiel ein Item raus, finaler Count 25 statt 26.
+
+**Aufteilung in 6 atomare Code-Commits + 1 Doku-Sync:**
+
+- **157a (Commit c4c1846) pendlerpauschale:** Norm-Zitat „§ 9 Abs. 1 **Satz 3** Nr. 4 EStG" (Standard-Zitierweise BMF/Finanzgerichte) — P3-A1-2.
+- **157b (Commit 566a095) kuendigungsfrist + abfindung:** § 169 SGB IX Schwerbehinderten-Mindestfrist + Integrationsamt; § 113 InsO Insolvenz-Höchstfrist 3 Mon; §§ 9, 10 KSchG gerichtliche Auflösung 12/15/18 Monatsverdienste; § 4 KSchG 3-Wo-Klagefrist als Strategie-Frist (P3-A2-3, P3-A2-4, P3-A3-2, P3-A3-3).
+- **157c (Commit d3eca80) scheidungskosten:** § 1565 Abs. 2 BGB Härtefall, VA-Mindest-VW 1.000 €, Folgesachen-Faustwert-Hinweis, VKH-Werte präzisiert (irreführende 1.500-€-Pauschale durch § 115 ZPO-Mechanik ersetzt), Nr. 7002 VV RVG Cap (P3-A5-1..5).
+- **157d (Commit e4810ec) zugewinnausgleich + unterhalt:** § 1379 BGB Auskunftsanspruch zu Stichtagen Heirat/Trennung/Ende; § 1375 Abs. 2 BGB illoyale Vermögensminderung; § 1385 BGB vorzeitiger Ausgleich (neue FAQ); unterhalt: „bereinigtes Netto" in Beispiel und FAQ klargestellt (P3-A6-1, P3-A6-2, P3-A6-3, P3-A7-1).
+- **157e (Commit 965c519) ehegattenunterhalt:** Beispiel mit Kindesunterhalt-Vorabzug (513 € KU → 766 € Ehegatten statt 986 €); § 1573 Abs. 4 BGB Anschlussunterhalt (Tatbestände-Liste); Halbteilung bei Nicht-Erwerbseinkünften (Renten/Mieten/Kapital), § 1574 BGB Erwerbsobliegenheit, § 1577 BGB Anrechnung in „Wichtige Feinheiten" (P3-A10-1..5).
+- **157f (Commit 6689668) arbeitslosengeld:** § 153 SGB III als Rechtsquelle Leistungsentgelt; § 147 SGB III als Rechtsquelle Bezugsdauer-Staffel; Höchstsatz ~2.940 €/Monat (BBG voll, Stkl III mit Kind, 67 %); Steuerklasse-Stichtag 01.01. als FAQ; § 155 SGB III Nebenverdienstfreibetrag 165 € + 15-Wochen-Schwelle als FAQ (P3-A8-1..5).
+
+**Backlog-Erweiterung:**
+
+Geparkter Slot **152c** ergänzt: SSOT-Konstante `PENDLERPAUSCHALE_PRO_KM = 0.38` in `lib/berechnungen/pendlerpauschale.ts` mit Stichtag-Switch (für die im April 2026 angekündigte 45-Cent-Reform). Trigger: Verabschiedung des entsprechenden Steueränderungsgesetzes — Stand 28.04.2026 nur angekündigt, noch nicht im BGBl. Aufwand ~30 Min. Ohne Reform-Verabschiedung kein Lese-Wert; daher Audit-Empfehlung P3-A1-3 bewusst geparkt statt sofort umgesetzt.
+
+**Welle-3-Backlog nach 157:**
+
+1. ~~152b — feiertage.ts SSOT~~ ✅
+2. ~~154 — LazySection-Removal~~ ✅
+3. ~~155 — Über-uns ausgebaut~~ ✅
+4. ~~156 — `/qualitaet` neu~~ ✅
+5. ~~151 — Block-A-P3-Sammelbatch (17 priorisiert)~~ ✅
+6. ~~150e — Süd-OLG-UI-Toggle~~ ✅
+7. ~~157 — 151-Sammelrest (25 nicht-priorisierte P3)~~ ✅
+8. 152c — Pendlerpauschalen-SSOT (geparkt, Trigger: Reform-Verabschiedung)
+9. P3-B1 — ueberstunden-Netto-Refactor mit Steuerklasse
+10. Validation-Sweep
+
+---
+
 ## Welle 3 — Item 150e (28.04.2026, ABGESCHLOSSEN)
 
 **Scope:** UI-Toggle für Süddeutsche Leitlinien im ehegattenunterhalt-rechner.
@@ -570,3 +602,76 @@ Repo-Snapshot zum Session-Wechsel (26.04.2026 ~23:30):
 - **Working tree:** clean
 
 *Dieses Dokument wurde beim Session-Handover am 26.04.2026 erstellt.*
+
+---
+
+## WELLE 3 — Session-Handover (28.04.2026, ~02:00 Uhr)
+
+### Sechs Welle-3-Items in einer Session abgeschlossen
+
+| Slot | Commits | Inhalt |
+|---|---|---|
+| 152b | ea3c9ce, 9b1a947, 03d7bda, 7061da7 | feiertage.ts SSOT mit Gauß-Osterformel + 16-BL-Map; ArbeitstageRechner & freelancer-stundensatz migriert |
+| 154 | 83792c0, 4ae7b38 | LazySection-Removal — AdSense-Akut-Fix für SSR-Sichtbarkeit von Erklärtext+FAQ |
+| 155 | 1a6e6ed | Über-uns-Seite ausgebaut von ~2,2 K auf ~5 K Zeichen sichtbarem Text (E-E-A-T) |
+| 156 | fecadc4 | Neue /qualitaet-Seite mit Audit-Workflow, Primärquellen, Stichtag-Logik (E-E-A-T) |
+| 151 | b268b93, e7121d2, 17ca6bd, d7a277d, 4e5b7d0, 2171564 | Block-A-P3-Sammelbatch — 17 Memory-priorisierte Items in 5 thematischen Clustern |
+| 150e | 08017f8, 3ae42c1 | Süd-OLG-UI-Toggle für ehegattenunterhalt-rechner (3/7 vs. 0,45) |
+
+Alle sechs Items live verifiziert. Build durchgehend grün. Doku-Sync pro Slot.
+
+### AdSense-Status
+
+- Erste Prüfung **27.04.2026 NEGATIV** mit Begründung „Minderwertige Inhalte"
+- Root-Cause identifiziert: `<LazySection>` wrappte Erklärtext + FAQ als `'use client'` mit IntersectionObserver, SSR rendert nur leeres 200-px-Placeholder-`<div>` → AdSense-Crawler sah 5,5 K statt 13 K Zeichen Content
+- Drei-Maßnahmen-Sprint 154 + 155 + 156 (28.04.2026):
+  - 154 — LazySection-Removal: brutto-netto-rechner 5.497 → 13.033 Zeichen sichtbar (2,4×); urlaubstage 10.050; bmi 8.171
+  - 155 — Über-uns von 2.179 → 5.010 Zeichen, sechs Sektionen mit Solo-Founder-Statement, Audit-Workflow-Überblick, Primärquellen-Kurzliste
+  - 156 — neue /qualitaet-Seite mit 6.814 Zeichen, sieben Sektionen + Footer-Link
+- **Re-Review-Beantragung steht ggf. noch offen** — Karsten muss im AdSense-Backend „Ich bestätige, dass ich die Probleme behoben habe" + „Überprüfung beantragen" auslösen, falls noch nicht geschehen
+- Re-Review-Fenster erfahrungsgemäß 1–3 Wochen
+- Prompts 68 (Google CMP + Consent Mode v2) und 85 (next/script-Migration) bleiben parkend bis AdSense-Approval
+
+### Welle-3-Backlog
+
+| Item | Aufwand | Trigger zum Aufgreifen |
+|---|---|---|
+| **151-Sammelrest** | ~1–2 h | ~25 nicht-priorisierte P3-Items aus Block-A-Audit (Norm-Zitierungs-Polish, Edge-Case-FAQs, kleine SSOT-Refactor-Kandidaten). Detaillierte Liste im 151-Sammelrest-Abschnitt im 151-Block oben. Kein externer Druck. |
+| **P3-B1** | mehrere h | ueberstunden-rechner: pauschale 40 %-Netto-Schätzung durch realistische Lohnsteuer-Tabelle ersetzen. Erfordert UI-Erweiterung (Steuerklasse + Bundesland als Inputs), Anbindung an `lib/berechnungen/lohnsteuer.ts`. |
+| **Validation-Sweep** | mehrere Sessions | Range-Validation systemweit über alle 170 Rechner + SSOT-Konsumption-Inventur + Cross-Check gegen externe Oracles (BMF, Stiftung Warentest, IHK, Steuerberater-Tools). |
+
+Alle drei Items sind elastisch — kein externer Druck, keine Stichtage.
+
+### Methodik-Lehre 25 (nachgereicht aus Vorfall 28.04.2026, ArbeitstageRechner)
+
+**Smoketest-Soll-Werte auf Component-Layer referenzieren, nicht auf Lib-Layer.**
+
+Beim Live-Test des ArbeitstageRechners nach 152b zeigte der Rechner für Bayern 2026 in der Liste „Berücksichtigte Feiertage" 9 Einträge — das hatte Karsten irritiert, weil mein Smoketest-Akzeptanzkriterium 13 versprochen hatte. Tatsächlich hat die Lib `anzahlFeiertage(2026, 'by')` korrekt **13** geliefert (alle Feiertage in BY 2026), aber das Component zeigt nur die **Mo-Fr-Untermenge** (9), weil ein Sa/So-Feiertag keinen Arbeitstag „abzieht". Beide Werte sind richtig — auf unterschiedlichen Layern.
+
+**Konsequenz:** Bei Smoketest-Anweisungen aus Sicht des sichtbaren UI-Outputs formulieren, nicht aus Sicht der Lib-Tests. Lib-Funktion und UI-Filter können unterschiedliche Sichten auf dieselben Daten haben. Ergänzung zu Lehre 20 (Reviewer findet Bonus-Bugs durch grep).
+
+### Repo-Snapshot zum Session-Wechsel
+
+- **Branch:** main
+- **Letzter Commit:** `3ae42c1` (Prompt 150e-2 Doku-Sync)
+- **Vorletzter:** `08017f8` (Prompt 150e-1 Code: Süd-OLG-UI-Toggle)
+- **Build-Status:** grün, alle Prebuild-Hooks (footer + jahreswerte + slug-drift + generate-client-data) durch
+- **Working tree:** clean
+
+### Session-Handover-Anker für die nächste Chat-Session
+
+**Trigger-Wort:** „Start"
+
+In der nächsten Session bei „Start":
+
+1. Memory wird automatisch geladen (Welle-3-Status #16, AdSense-Stand #13, Methodik-Lehren 20–29 #28)
+2. Diese Datei lesen — der „WELLE 3 — Session-Handover (28.04.2026)"-Block (dieser hier) gibt den vollen Stand
+3. Karsten klärt zuerst, ob AdSense-Re-Review schon beantragt wurde (Backend-Status) — falls nicht, erinnern, dass die Maßnahme nach 154+155+156 ansteht
+4. Welle-3-Backlog hat noch 3 Items: 151-Sammelrest, P3-B1, Validation-Sweep
+5. Karsten fragen, welcher Slot dran ist; bei freier Wahl Reihenfolge-Vorschlag bringen
+
+Bei freier Wahl: **151-Sammelrest** ist der natürlichste nächste Slot (gleiche Methodik wie 151 selbst, atomic Konfig-Patches, kein Verify-Skript, kalkulierbare Session-Länge ~1–2 h). **P3-B1** ist substantieller (UI-Refactor + Steuerklasse-Input). **Validation-Sweep** ist mehrere Sessions und sollte als eigenständige Planungs-Session gestartet werden.
+
+Falls AdSense-Re-Review zwischenzeitlich approved: keine Folge-Aktion nötig, der Re-Review-Status wird einfach im AdSense-Backend angezeigt. Falls negativ: erst dann hat es Sinn, weitere E-E-A-T-Maßnahmen anzufassen (z. B. Author-Bio pro Rechner-Seite, expliziter Update-Log).
+
+*Dieses Dokument wurde beim Session-Handover am 28.04.2026 erstellt.*
