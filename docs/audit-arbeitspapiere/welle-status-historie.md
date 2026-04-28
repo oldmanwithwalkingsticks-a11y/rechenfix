@@ -8,6 +8,14 @@
 
 ---
 
+## Welle 3 — Tail (28.04.2026, LAUFEND)
+
+Sammel-Block für Welle-3-Tail-Aktivitäten nach Abschluss der einzeln dokumentierten Items 152b/154/155/156/151/150e/157. Enthält Scoping-Outputs, Mini-Module und kurze Folge-Aktionen ohne eigenen Top-Block.
+
+- Validation-Sweep Scoping ✅ 28.04.26 — siehe validation-sweep-scoping.md, 7 Module priorisiert (M1 Backtick, M2 Norm-Zitate, M3 SSOT-Konsumption, M4 Meta-Routen, M5 Affiliate-Konsistenz, M6 FAQ-Drift, M7 A11y-Stichprobe). Geschätzt 4–6 Folge-Sessions. Out-of-Scope: Deploy-Sync-Check, Verify-Coverage-Lücke (eigene Welle 4).
+
+---
+
 ## Welle 3 — Item 157 P3-Sammelrest (28.04.2026, ABGESCHLOSSEN)
 
 **Scope:** 151-Sammelrest aus Block-A-Audit — 25 nicht-priorisierte P3-Items in 8 Rechnern aus zwei Konfig-Files (`arbeit.ts` + `finanzen.ts`). Reine Erklärtext- und FAQ-Polish, kein Berechnungslogik-Touch. Pre-Check ergab: P3-A6-4 (Beispiele Indexierung sichtbar) bereits durch P1-A6-Fix (149 zugewinnausgleich-§ 1376 BGB) erledigt — aus dem Sammelrest fiel ein Item raus, finaler Count 25 statt 26.
