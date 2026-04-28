@@ -1,7 +1,7 @@
 # Audit-Bundle: block-b-libs
 
 **Beschreibung:** Welle 2 Stufe 3 Arbeit Block B — 5 Berechnungs-Libs (Folge-Bundle 153c), schließt P3-B6/B7/B10-Audit-Lücke
-**Generiert:** 2026-04-26T20:53:13.494Z
+**Generiert:** 2026-04-28T20:49:04.009Z
 **Dateien:** 5
 
 ## Inhalt
@@ -269,9 +269,11 @@ export function berechnePromille(eingabe: PromilleEingabe): PromilleErgebnis | n
 
 ## `lib/berechnungen/freelancer-stundensatz.ts`
 
-*3.0 KB*
+*3.2 KB*
 
 ```ts
+import { anzahlBundesweiterFeiertageMoBisFr } from './feiertage';
+
 export interface FreelancerEingabe {
   nettoWunsch: number;
   arbeitstageProWoche: number;
@@ -308,10 +310,12 @@ export interface FreelancerErgebnis {
   warnungNiedrig: boolean;
 }
 
-const FEIERTAGE = 10;
-
-export function berechneFreelancerStundensatz(e: FreelancerEingabe): FreelancerErgebnis {
-  const arbeitstageJahr = Math.max((e.arbeitstageProWoche * 52) - e.urlaubstage - e.krankheitstage - FEIERTAGE, 1);
+export function berechneFreelancerStundensatz(
+  e: FreelancerEingabe,
+  jahr: number = new Date().getFullYear()
+): FreelancerErgebnis {
+  const feiertageMoBisFr = anzahlBundesweiterFeiertageMoBisFr(jahr);
+  const arbeitstageJahr = Math.max((e.arbeitstageProWoche * 52) - e.urlaubstage - e.krankheitstage - feiertageMoBisFr, 1);
   const fakturierbareStundenJahr = arbeitstageJahr * e.produktiveStunden;
 
   const gesamtVorSteuernMonat = e.nettoWunsch + e.krankenversicherung + e.rentenvorsorge + e.betriebsausgaben;

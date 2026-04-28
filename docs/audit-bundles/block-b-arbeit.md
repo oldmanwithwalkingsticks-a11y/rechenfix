@@ -1,7 +1,7 @@
 # Audit-Bundle: block-b-arbeit
 
 **Beschreibung:** Welle 2 Stufe 3 Arbeit Block B — 8 Rechner ohne substanzielle P1-Befunde, Audit-Eingabe für Folge-Prompt
-**Generiert:** 2026-04-28T20:45:27.919Z
+**Generiert:** 2026-04-28T20:48:59.067Z
 **Dateien:** 13
 
 ## Inhalt
