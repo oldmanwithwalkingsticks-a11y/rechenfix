@@ -338,7 +338,7 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
 
 **Amtliche Gegenprobe:** [BMF-Steuerrechner](https://www.bmf-steuerrechner.de/ekst/) mit identischen Inputs.
 
-## Status April 2026
+## Status April 2026 (Stand 28.04.2026)
 
 **Abgeschlossen:**
 - ✅ Sprint 1 — Tarif-Audit (Prompts 81–84a)
@@ -365,6 +365,11 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
 - ✅ **Welle 2 Stufe 3 Wohnen KOMPLETT** (Prompts 147 + 147b + 147c + 148 + 148b + 148c, 25.+26.04.2026) — 25 Rechner (Block A 12 rechtssensitiv + Block B 13 Mengen). 5 neue SSOT-Libs (`strompreis.ts`, `eeg-einspeiseverguetung.ts`, `beg-foerderung.ts`, `vpi.ts`, `pv-ertragsmodell.ts` aus 147c). Hauptbefunde: PV-Einspeisevergütung 8,03 → 7,78 ct/kWh (war 2 Jahre veraltet), GrESt-Sätze Bremen/Sachsen/Thüringen aktualisiert, Mietpreisbremse-Verlängerung bis 31.12.2029 (BT-Drs. 21/322), Strompreis-Inkonsistenz 32/36 → systemweit 37 ct via SSOT, BEG-Wärmepumpenförderung max. 70 %/21.000 €. 147b Hotfix: balkon-solar 800-W-Cap, wärmepumpe 30–1000 m²-Range. 147c PV-Ertragsmodell mit Mertens-Faktoren. 148 Block B: dachflaechen 950 → 850 kWh/kWp, poolkosten 220 → 270 €. 148b Component-Drift: poolkosten/heizkosten/dachflaechen Component-Defaults via SSOT, balkon-solar Nord-Faktor 0,40 → 0,60. **148c Schluss-Patch (26.04.):** Mieterbund-Wert im nebenkosten-rechner aktualisiert von 2,88 EUR/qm auf Betriebskostenspiegel 2023 (2,51 EUR/qm Durchschnitt, 3,15 EUR/qm bei voller Ausnutzung; Quelle: Deutscher Mieterbund DMB, +10 % gegenüber Vorjahr) — direkt durch Claude im Web recherchiert (Lehre 22). ~17 Commits, 87+ Verify-Tests grün.
 - ✅ **Welle 2 Stufe 3 Arbeit KOMPLETT** (Prompts 149a-d + 150a-d Block A + 152a + 153a/b/b-fix + 153c Block B, 26.04.2026, 14 Commits) — Block A Audit (`docs/audit-arbeitspapiere/welle2-stufe3-arbeit-blockA-audit.md`): 4× P1 + 6× P2 + 17× P3. **149a** arbeitslosengeld-Migration arbeit.ts → finanzen.ts (SSOT-Konsistenz). **149c** ehegattenunterhalt SB-Achse korrigiert von Trennungsphase auf Erwerbstätigkeit (gilt für Trennungs- UND nachehelichen Unterhalt gleichermaßen, erfundene „Bindung schwächer"-Begründung gestrichen). **149b** zugewinnausgleich § 1376 BGB Indexierung Anfangsvermögen mit `vpi.ts`-Erweiterung (`indexiereVermoegen`-Helper, `getVpi(jahr)`). **149d** scheidungskosten KostBRÄG 2025 (RVG/FamGKG-Tabellen aktualisiert auf Stichtag 01.06.2025). **150 (a-d)** P2-Polish: Mutterschutz Fehlgeburt-Schutzfristen 13./17./20. SSW (BGBl. 2025 I Nr. 59), Behinderungs-Verlängerung Antragspflicht, Elternunterhalt Angehörigen-Entlastungsgesetz, Elternzeit 30h→32h. **Block B Audit** (`welle2-stufe3-arbeit-blockB-audit.md`): 0 P1, 2 P2, 10 P3. **152a** urlaubstage BUrlG-Rundung. **153a** freelancer § 19 UStG-Schwelle + teilzeit EP-Werte. **153b** ArbeitstageRechner „Wochentage Mo-Fr". **153b-fix** AiExplain-Object-Key (Lehre 21: grep statt visueller Scan). **153c** Lib-Audit-Bundle für 5 Block-B-Libs: 0 P1, 0 P2, 2 neue P3-Mini-Befunde + 4 Klärungen.
 - ✅ **Doku-Sync** (Prompt 154 + 154-blockB + 154-153c + 155, 26.04.2026) — CLAUDE.md / SKILL.md / dieses Dokument / `welle-status-historie.md`. 154 nach Welle-2-Stufe-3-Wohnen-Abschluss und P1-Block (149a/b/c). 154-blockB nach Block-B-Patch-Sequenz (Commit f4d0687). 154-153c nach Lib-Audit (Commit 26298a0). 155 nach Welle-2-Komplett-Abschluss: Welle-Status-Bullet KOMPLETT, Lehre 22 (Wert-Recherche durch Claude im Web + URL-Permission-Workflow), Welle-3-Backlog mit klaren Scopes, Audit-Bundle-Pattern als Workflow-Tool. Drei Doku-Anker konsistent synchron (CLAUDE.md, welle-status-historie.md, Audit-Berichte).
+- ✅ **Welle 3 Item 152b feiertage.ts SSOT** (27.04.2026, Commits ea3c9ce/9b1a947/03d7bda) — Neue Lib `lib/berechnungen/feiertage.ts` mit Spencer-Variante der Gauß-Osterformel + 16-BL-Map + 4 Helper. `scripts/verify-feiertage.ts` 60/60 grün gegen externe Sollwerte (BMF, kalender.de). ArbeitstageRechner.tsx auf SSOT migriert, Jahr-Dropdown 2024–2030 (akuter Q4/2026-Bug behoben). freelancer-stundensatz.ts: hartkodierte FEIERTAGE=10 durch dynamischen Lookup ersetzt (P3-Lib-1 geschlossen). Lehren 23 + 24.
+- ✅ **AdSense-Reparatur-Sprint** (Prompt 154, 27.04.2026, Commits 83792c0 + 4ae7b38) — AdSense-Erstprüfung am 27.04.2026 negativ („Minderwertige Inhalte"). Root Cause: `<LazySection>`-Wrapper um Erklärtext + FAQ in `app/[kategorie]/[rechner]/page.tsx` Z. 479–550 — `'use client'`-Component, rendert bei SSR nur leeres 200-px-Placeholder-`<div>`, Crawler sieht 5.497 Zeichen statt erwartete ~13 K. Fix: Wrapper durch Fragment ersetzt, `no-print` auf zwei `<section>`-Elemente migriert, `components/ui/LazySection.tsx` gelöscht (verwaist). Live-Verifikation nach Deploy: brutto-netto-rechner 5.497 → 13.033 chars, urlaubstage 10.050, bmi 8.171 — alle drei mit „So funktioniert" + „Häufige Fragen" im SSR-HTML. Lehren 25 + 26.
+- ✅ **E-E-A-T-Sprint** (Prompts 155 + 156, 28.04.2026, Commits 1a6e6ed + fecadc4 + 3079c43) — Trust-Signale für YMYL-Themen ergänzt: 155 baut `/ueber-uns` von ~2,2 KB auf ~7 KB sichtbaren Text aus (sechs Card-Sektionen: Hero, Solo-Founder-Statement mit Beratungs-Abgrenzung, Audit-Workflow-Überblick, Quellenliste, Datenschutz/Werbe-Transparenz, Kontakt). 156 legt neue statische Server-Component `/qualitaet` an (sieben Sektionen: Hero, Audit-Workflow + 4-Punkt-Audit, Primärquellen-Liste in 6 Themenbereichen, Stichtag-Logik mit Beispielen, A11y-Status, Datenschutz, Disclaimer „Was Rechenfix nicht ist"). Footer-Link „Qualität & Methodik" vor `/barrierefreiheit` ergänzt. Lehre 27.
+- ✅ **Welle 3 Item 151 — Block-A-P3-Sammelbatch** (28.04.2026, Commits b268b93 / e7121d2 / 17ca6bd / d7a277d / 4e5b7d0 / 2171564) — 17 Memory-priorisierte P3-Items aus Block-A-Audit in 5 atomaren Konfig-Commits + Doku-Sync: 151a pendlerpauschale Mobilitätsprämie § 101 EStG, 151b kuendigungsfrist (3) + abfindung (1) = 4 Items, 151c mutterschutz-Restpolish (5), 151d unterhalt (4), 151e elternzeit (3). ~25 nicht-priorisierte Items als „151-Sammelrest" geparkt. Lehre 28.
+- ✅ **Welle 3 Item 150e — Süd-OLG-UI-Toggle ehegattenunterhalt** (28.04.2026, Commits 08017f8 + 3ae42c1) — Neuer RadioToggleGroup „Berechnungsmethode" mit zwei Optionen (Bundesweit 3/7 ≈ 42,86 % vs. Süddeutsch 45 %, OLG-Bezirke Bamberg/Karlsruhe/München/Nürnberg/Stuttgart/Zweibrücken). Konstanten `QUOTE_BUNDESWEIT`/`QUOTE_SUEDDEUTSCH` ersetzen hardcoded `(differenz * 3) / 7`. 150d-Workaround „Faktor 1,05 manuell anwenden" durch Toggle-Verweis ersetzt. Sanity-Check 4 Default-Werte deckungsgleich mit Spec. Lehre 29.
 
 **Parkend (wartet auf AdSense-Freigabe):**
 - ⏸ Prompt 68 — Google CMP + Consent Mode v2
@@ -390,22 +395,30 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
   - Stufe 2 Gesundheit ✅ (Prompts 140–144b)
   - Stufe 3 Wohnen ✅ (Prompts 147–148c, 25.+26.04.2026, 25 Rechner)
   - Stufe 3 Arbeit ✅ (Block A 149a-d + 150a-d, Block B 152a + 153a/b/b-fix + 153c Lib-Audit, 26.04.2026, 14 Commits)
-- **Welle 3 (Validation-Sweep + geparkte Items):** vorbereitet, noch nicht gestartet — siehe eigene Sektion „Welle-3-Backlog" weiter unten. Ziel: alle Welle-2-Rechner gegen externe Oracles cross-checken (BMF-Rechner, Stiftung Warentest, IHK-Rechner etc.) plus geparkte Audit-Restanten abarbeiten (152b, 151, 150e, P3-B1).
+- **Welle 3 (Validation-Sweep + geparkte Items + AdSense-Reparatur):** **6/9 abgeschlossen (Stand 28.04.2026)**
+  - ✅ 152b feiertage.ts SSOT (27.04.2026)
+  - ✅ 154 LazySection-Removal (AdSense-Reparatur, 27.04.2026)
+  - ✅ 155 /ueber-uns ausgebaut (28.04.2026)
+  - ✅ 156 /qualitaet neu angelegt + Footer-Link (28.04.2026)
+  - ✅ 151 Block-A-P3-Sammelbatch (17 Items in 5 atomaren Konfig-Commits, 28.04.2026)
+  - ✅ 150e Süd-OLG-UI-Toggle ehegattenunterhalt (28.04.2026)
+  - ⬜ 151-Sammelrest (~25 nicht-priorisierte P3-Items aus Block-A-Audit)
+  - ⬜ P3-B1 ueberstunden-Netto-Refactor mit Steuerklasse-Input
+  - ⬜ Welle-3-Validation-Sweep aller Welle-2-Rechner gegen externe Oracles
 
 Vollständige Welle-Historie: [docs/audit-arbeitspapiere/welle-status-historie.md](docs/audit-arbeitspapiere/welle-status-historie.md).
 
-## Welle-3-Backlog (geparkte Items mit klarem Scope)
+## Welle-3-Backlog (Stand 28.04.2026)
 
-Stand 26.04.2026 — fünf Items aus Welle-2-Audits geparkt mit konkreten Aufwänden, Akut-Faktoren und Migration-Punkten. Detaillierte Specs: `docs/audit-arbeitspapiere/welle-status-historie.md` Sektion „Welle-3-Backlog".
+**Geliefert (6/9):** 152b ✅, 154 ✅, 155 ✅, 156 ✅, 151 ✅, 150e ✅. Volldetails siehe „Status April 2026" oben und [docs/audit-arbeitspapiere/welle-status-historie.md](docs/audit-arbeitspapiere/welle-status-historie.md).
 
-### 152b — `feiertage.ts` SSOT-Lib mit Gauß-Osterformel
+**Offen (3/9):** 151-Sammelrest, P3-B1, Validation-Sweep — siehe unten mit Aufwänden, Akut-Faktoren und Scope-Specs.
 
-- **Aufwand:** ~2–3 h
-- **Akut:** **Q4/2026** — Jahr-Dropdown im `ArbeitstageRechner.tsx` bricht zum 01.01.2027 ohne diesen Refactor (hartkodiertes `FEIERTAGE_2026`-Array mit 17 Einträgen)
-- **Scope:** Neue Lib `lib/berechnungen/feiertage.ts` mit Gauß-Osterformel für bewegliche Feiertage (Karfreitag, Ostermontag, Christi Himmelfahrt, Pfingstmontag, Fronleichnam) + 16-BL-Map für feste Feiertage + Buß-und-Bettag-Spezialregel (Mittwoch vor 23. November, nur SN)
-- **Migration nötig in:** `components/rechner/ArbeitstageRechner.tsx` (entfernt FEIERTAGE_2026-Array + Bundesland-Mapping, neuer Jahr-Dropdown 2026/27/28), `lib/berechnungen/freelancer-stundensatz.ts` (P3-Lib-1: `const FEIERTAGE = 10` hartkodiert)
-- **Test-Anforderung:** Gegen bekannte 2026-Daten (Karfreitag 03.04., Christi Himmelfahrt 14.05., Fronleichnam 04.06.) plus Cross-Check für 2027
-- **Löst gleichzeitig:** P2-B2 (Block B) + P3-Lib-1 (freelancer)
+### 152b — `feiertage.ts` SSOT-Lib mit Gauß-Osterformel ✅ ABGESCHLOSSEN (27.04.2026)
+
+- **Geliefert:** Neue Lib `lib/berechnungen/feiertage.ts` mit Spencer-Variante der Gauß-Osterformel (gültig 1583–4099) + 16-BL-Map. Helper: `berechneOstersonntag`, `getFeiertage`, `istFeiertag`, `anzahlFeiertage`, `anzahlBundesweiterFeiertageMoBisFr`. `scripts/verify-feiertage.ts` 60/60 grün gegen externe Sollwerte (BMF, kalender.de) — Ostern 2024–2030, alle 16 BL-Karten, Buß-und-Bettag inkl. 23.11.=Mi-Edge-Case (2022).
+- **Migration durchgeführt in:** `ArbeitstageRechner.tsx` (statisches Jahr-Dropdown 2024–2030, akuter Q4/2026-Bug behoben), `freelancer-stundensatz.ts` (hartkodierte `FEIERTAGE=10` durch `anzahlBundesweiterFeiertageMoBisFr(jahr)` ersetzt — variiert 7/5/8 für 2026/27/28; P3-Lib-1 geschlossen)
+- **Lehren:** 23 (Stichtag vs. dynamisch), 24 (Hydration-safe Year-Dropdowns)
 
 ### P3-B1 — ueberstunden-Netto-Refactor mit Steuerklasse-Input
 
@@ -414,20 +427,23 @@ Stand 26.04.2026 — fünf Items aus Welle-2-Audits geparkt mit konkreten Aufwä
 - **Scope:** `UeberstundenRechner.tsx` um Steuerklasse + Bundesland-Inputs erweitern, `ueberstunden.ts` Netto-Berechnung von pauschal `× 0.6` auf realistische Lohnsteuer-Tabelle (via `lib/berechnungen/lohnsteuer.ts`) umstellen
 - **Risiko:** mittel — UI-Disruption, neue Pflichtfelder
 
-### 151 — Block-A-P3-Sammelbatch (17 Items)
+### 151 — Block-A-P3-Sammelbatch (17 priorisierte Items) ✅ ABGESCHLOSSEN (28.04.2026)
 
-- **Aufwand:** ~1–2 h
-- **Akut:** nein (alle P3, kein Pflicht-Item)
-- **Scope:** 17 P3-Items aus dem Block-A-Audit von Welle 2 Stufe 3 Arbeit (Mobilitätsprämie § 101 EStG, EuGH Kücükdeveci, BAG-Zugangsbeweis, § 1a Abs. 2 S. 3 KSchG-Aufrundung, Muster 9 etc. — Mix aus Erklärtext-Korrekturen, kleinen Inkonsistenzen, Lib-Polish)
-- **Voraussetzung:** Block-A-Audit-Bericht muss vorliegen — entweder Klartext-URL zu `welle2-stufe3-arbeit-blockA-audit.md` oder Bundle via `npm run audit:bundle block-a-arbeit`
+- **Geliefert:** 5 atomare Konfig-Commits + 1 Doku-Sync. 151a pendlerpauschale Mobilitätsprämie § 101 EStG (StÄndG 2025); 151b kuendigungsfrist + abfindung — EuGH Kücükdeveci, § 622 Abs. 5 Nr. 2 BGB Kleinbetriebs-Ausnahme, BAG 2 AZR 68/24 Zugangsbeweis, § 1a Abs. 2 S. 3 KSchG Aufrundung; 151c mutterschutz-Restpolish — Frühgeburt-Definition, Muster 9 ab 01.01.2026, 99-Tage-Mindestschutz, Schülerinnen/Studentinnen, Totgeburt-Sonderregelung; 151d unterhalt — § 1610 BGB > 11.200 € NEK, § 1612a Abs. 3 BGB Alterssprung, SB-Wohnkosten 390+130 €, 7. MUVÄndV als Rechtsquelle; 151e elternzeit — § 17 Abs. 1 BEEG Urlaubskürzung, § 16 Abs. 1 BEEG bis zu 3 Zeitabschnitte, Terminologie „Bindungszeitraum" → „verbindlicher Festlegungszeitraum"
+- **Memory-Priorisierung:** Audit hatte 42 P3-Items, davon 17 im Memory-Backlog priorisiert; Rest als „151-Sammelrest" geparkt (siehe unten)
+- **Lehre:** 28 (Audit-Cluster nach Memory-Priorität — Memory-Backlog ist Scope-Definition)
 
-### 150e — Süd-OLG-UI-Toggle für ehegattenunterhalt-Rechner
+### 151-Sammelrest — ~25 nicht-priorisierte P3-Items aus Block-A-Audit (offen)
 
-- **Aufwand:** ~1 h
-- **Akut:** nein (Erklärtext deckt regionale Variante schon transparent ab)
-- **Scope:** `EhegattenunterhaltRechner.tsx` um Toggle „Bundesweite 3/7-Methode" vs. „Süddeutsche Leitlinien (45 %)" erweitern (für sechs Süd-OLG-Bezirke: Bamberg, Karlsruhe, München, Nürnberg, Stuttgart, Zweibrücken)
-- **Setzt um:** Methodik-Lehre 19 (regionale Variante) als UI-Feature
-- **Risiko:** niedrig — Default bleibt 3/7, neuer Schalter ist additive Erweiterung
+- **Aufwand:** mehrere h, in einer ruhigen Session oder mit Validation-Sweep zusammen
+- **Akut:** nein (alles P3)
+- **Scope:** Norm-Zitierungs-Polish, Edge-Case-FAQs, SSOT-Refactor-Kandidaten, A8-arbeitslosengeld-Items (5 Stück, in finanzen.ts) — gegliedert nach Cluster (A1 2x, A2 2x, A3 2x, A5 5x, A6 4x, A7 1x, A8 5x, A10 5x). Volldetails siehe `welle-status-historie.md` Sektion „151-Sammelrest"
+
+### 150e — Süd-OLG-UI-Toggle für ehegattenunterhalt-Rechner ✅ ABGESCHLOSSEN (28.04.2026)
+
+- **Geliefert:** Neuer RadioToggleGroup „Berechnungsmethode" mit zwei Optionen „Bundesweit (3/7)" vs. „Süddeutsch (45 %)" — Konstanten `QUOTE_BUNDESWEIT = 3/7` und `QUOTE_SUEDDEUTSCH = 0.45` ersetzen hardcoded `(differenz * 3) / 7`. Default `bundesweit`. Methodenname an 5 Stellen sichtbar: Result-Box, Rechenweg-Header, Rechenweg-Item, ergebnis-String, AiExplain. 150d-Workaround „Faktor 1,05 manuell anwenden" durch Toggle-Verweis ersetzt.
+- **Sanity-Check 4 Default-Werte deckungsgleich mit Spec:** BW/KU=0: 986 €, Süd/KU=0: 1.035 €, BW/KU=400: 814 €, Süd/KU=400: 855 €
+- **Lehre:** 29 (UI-Toggle als Folge-Commit muss Konfig-Refresh atomisch mitnehmen)
 
 ### Welle-3-Validation-Sweep aller Welle-2-Rechner gegen externe Oracles
 
@@ -436,16 +452,15 @@ Stand 26.04.2026 — fünf Items aus Welle-2-Audits geparkt mit konkreten Aufwä
 - **Scope:** Alle Welle-2-Rechner gegen unabhängige externe Quellen (BMF-Rechner, Stiftung Warentest, IHK-Rechner, Steuerberater-Tools) cross-checken. Strukturiert in Stufen pro Kategorie analog Welle 2 (Auto → Gesundheit → Wohnen → Arbeit, oder umgekehrt nach Drift-Wahrscheinlichkeit)
 - **Vorbereitung beim Start von Welle 3:** Liste der externen Oracles pro Kategorie aufstellen, Verify-Skripte-Pattern aus Welle 2 anpassen (Lehre 149d: `.ts`-Endung, `npx tsx`-Aufruf, typisierte Helper)
 
-### Empfohlene Reihenfolge bei freier Wahl
+### Empfohlene Reihenfolge der verbleibenden Items (Stand 28.04.2026)
 
-1. **152b** zuerst — akut bis Q4/2026, eigenständiger Scope, ~2–3 h
-2. **151** als zweites — schließt Block-A-P3 sauber ab, ~1–2 h
-3. **150e** als drittes — kleines Mini-Feature, lehre-19-UI-Closure, ~1 h
-4. **Welle 3 Validation-Sweep** als großer Sprint — eigene Planungs-Session
-5. **P3-B1** zuletzt — größter Aufwand, niedrigste Akut-Lage
+1. **151-Sammelrest** als erstes — Konfig-Polish, kann in einer ruhigen Session oder verteilt über mehrere Slots laufen
+2. **Welle 3 Validation-Sweep** als großer Sprint — eigene Planungs-Session, wenn AdSense-Re-Review durchgelaufen ist
+3. **P3-B1** zuletzt — größter UI-Refactor-Aufwand, niedrigste Akut-Lage
 
-**Neue Scripts seit letztem Sync (146):**
+**Neue Scripts seit Welle 2 Stufe 3:**
 - `scripts/verify-wohnen-p1.ts` (Prompt 147), `verify-wohnen-block-b.ts` (148), `verify-pv-ertragsmodell.ts` (147c), `verify-ehegattenunterhalt.ts` (149c), `verify-zugewinnausgleich.ts` (149b) — alle gegen externe Primärquellen (BNetzA, BDEW, KfW, Mertens, Düsseldorfer Tabelle, BFH/BGB, Destatis Lange Reihe)
+- `scripts/verify-feiertage.ts` (Prompt 152b, 27.04.2026, 60 Tests grün gegen BMF + kalender.de — Ostern 2024–2030, alle 16 BL-Karten, Buß-und-Bettag inkl. 23.11.=Mi-Edge-Case 2022)
 
 **Build-Regel (verschärft seit 20.04.2026):** Lokal IMMER `npm run build`, NIE `npx next build`. Prebuild-Hooks: check-footer, check-jahreswerte, slug-drift-scan, generate-client-data — Fail-fast-Reihenfolge.
 
