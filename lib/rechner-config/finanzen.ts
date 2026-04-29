@@ -438,7 +438,7 @@ Wer über den Freibeträgen liegt, muss sein Vermögen zunächst aufbrauchen, be
 
 **Neue Vermögensregeln ab 1. Juli 2026 (Grundsicherungsgeld)**
 
-Mit dem 13. Gesetz zur Änderung des SGB II wird die Karenzzeit-Regelung beim Vermögen abgeschafft und durch eine altersgestaffelte Freibetragsregelung ersetzt. Maßgeblich ist § 12 Absatz 2 SGB II in der neuen Fassung. Der Freibetrag pro Person in der Bedarfsgemeinschaft richtet sich ab dem ersten Bezugsmonat nach dem Lebensalter:
+Mit dem 13. Gesetz zur Änderung des SGB II wird die Karenzzeit-Regelung beim Vermögen abgeschafft und durch eine altersgestaffelte Freibetragsregelung ersetzt. Maßgeblich ist § 12 Abs. 2 SGB II in der neuen Fassung. Der Freibetrag pro Person in der Bedarfsgemeinschaft richtet sich ab dem ersten Bezugsmonat nach dem Lebensalter:
 
 - **Bis zur Vollendung des 30. Lebensjahres:** 5.000 Euro
 - **Ab dem 31. Lebensjahr:** 10.000 Euro

@@ -698,7 +698,7 @@ Für die Planung Ihres verbleibenden Urlaubs nutzen Sie unseren [Urlaubstage-Rec
       },
       {
         frage: 'Werden Beschäftigungszeiten vor dem 25. Lebensjahr mitgezählt?',
-        antwort: 'Ja. § 622 Abs. 2 S. 2 BGB sieht zwar vor, dass Beschäftigungszeiten vor Vollendung des 25. Lebensjahres bei der Berechnung der gestaffelten Kündigungsfristen unberücksichtigt bleiben. Diese Regelung wurde aber vom Europäischen Gerichtshof in der Entscheidung Kücükdeveci (C-555/07 vom 19.01.2010) für unionsrechtswidrig erklärt — sie verstößt gegen das Verbot der Altersdiskriminierung. Praktisch bedeutet das: Alle Beschäftigungszeiten zählen, auch die vor dem 25. Lebensjahr. Der Rechner berücksichtigt das automatisch, wenn Sie Ihre vollständige Beschäftigungsdauer eingeben.',
+        antwort: 'Ja. § 622 Abs. 2 Satz 2 BGB sieht zwar vor, dass Beschäftigungszeiten vor Vollendung des 25. Lebensjahres bei der Berechnung der gestaffelten Kündigungsfristen unberücksichtigt bleiben. Diese Regelung wurde aber vom Europäischen Gerichtshof in der Entscheidung Kücükdeveci (C-555/07 vom 19.01.2010) für unionsrechtswidrig erklärt — sie verstößt gegen das Verbot der Altersdiskriminierung. Praktisch bedeutet das: Alle Beschäftigungszeiten zählen, auch die vor dem 25. Lebensjahr. Der Rechner berücksichtigt das automatisch, wenn Sie Ihre vollständige Beschäftigungsdauer eingeben.',
       },
       {
         frage: 'Gibt es Sonderregelungen für kleine Betriebe?',
@@ -847,7 +847,7 @@ Die Verhandlungsposition hängt maßgeblich davon ab, ob die Kündigung vor dem 
 
 **Aufrundung angefangener Jahre**
 
-Nach § 1a Abs. 2 S. 3 KSchG werden Beschäftigungs-Restzeiten von mehr als sechs Monaten auf ein volles Jahr aufgerundet. Beispiel: 7 Jahre und 7 Monate ergeben in der Berechnungsbasis 8 Jahre. Bei genau sechs Monaten oder weniger wird das angefangene Jahr nicht berücksichtigt.
+Nach § 1a Abs. 2 Satz 3 KSchG werden Beschäftigungs-Restzeiten von mehr als sechs Monaten auf ein volles Jahr aufgerundet. Beispiel: 7 Jahre und 7 Monate ergeben in der Berechnungsbasis 8 Jahre. Bei genau sechs Monaten oder weniger wird das angefangene Jahr nicht berücksichtigt.
 
 Für die Berechnung Ihrer Kündigungsfrist nutzen Sie unseren [Kündigungsfrist-Rechner](/arbeit/kuendigungsfrist-rechner). Eine detaillierte Netto-Berechnung Ihres regulären Gehalts finden Sie im [Brutto-Netto-Rechner](/finanzen/brutto-netto-rechner), und mit dem [Steuererstattungs-Rechner](/finanzen/steuererstattung-rechner) können Sie Ihre voraussichtliche Steuerrückerstattung berechnen.`,
     faq: [
@@ -877,7 +877,7 @@ Für die Berechnung Ihrer Kündigungsfrist nutzen Sie unseren [Kündigungsfrist-
       },
       {
         frage: 'Wie werden angefangene Jahre bei der Abfindung berechnet?',
-        antwort: 'Nach § 1a Abs. 2 S. 3 KSchG werden Beschäftigungs-Restzeiten von mehr als sechs Monaten auf ein volles Jahr aufgerundet. Beispiel: 7 Jahre und 7 Monate Beschäftigung werden als 8 Jahre gerechnet. Bei genau sechs Monaten oder weniger wird das angefangene Jahr nicht berücksichtigt. Die Aufrundungsregel gilt für die gesetzliche Abfindung nach § 1a KSchG; bei Aufhebungsverträgen oder Sozialplänen können andere Regelungen vereinbart werden.',
+        antwort: 'Nach § 1a Abs. 2 Satz 3 KSchG werden Beschäftigungs-Restzeiten von mehr als sechs Monaten auf ein volles Jahr aufgerundet. Beispiel: 7 Jahre und 7 Monate Beschäftigung werden als 8 Jahre gerechnet. Bei genau sechs Monaten oder weniger wird das angefangene Jahr nicht berücksichtigt. Die Aufrundungsregel gilt für die gesetzliche Abfindung nach § 1a KSchG; bei Aufhebungsverträgen oder Sozialplänen können andere Regelungen vereinbart werden.',
       },
       {
         frage: 'Was bedeutet der Auflösungsantrag nach §§ 9, 10 KSchG?',
