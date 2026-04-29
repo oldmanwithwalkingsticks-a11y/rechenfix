@@ -2,12 +2,15 @@
 
 import { useState, useMemo } from 'react';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import { getStrompreis } from '@/lib/berechnungen/strompreis';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
+
+const STROMPREIS_DEFAULT = String(getStrompreis('neukunden_festpreis'));
 
 type Fahrprofil = 'stadt' | 'gemischt' | 'autobahn';
 type TempBereich = 'unter0' | '0bis10' | '10bis25' | 'ueber25';
@@ -38,7 +41,7 @@ export default function ReichweitenRechner() {
   const [profil, setProfil] = useState<Fahrprofil>('gemischt');
   const [temp, setTemp] = useState<TempBereich>('10bis25');
   const [klima, setKlima] = useState(false);
-  const [strompreis, setStrompreis] = useState('32');
+  const [strompreis, setStrompreis] = useState(STROMPREIS_DEFAULT);
 
   const nAkku = parseDeutscheZahl(akku);
   const nWltp = parseDeutscheZahl(wltp);

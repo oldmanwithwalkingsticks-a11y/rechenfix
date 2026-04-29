@@ -537,7 +537,7 @@ Der kritischste Moment für E-Auto-Reichweite ist der **Winter**. Kalte Batterie
 
 Die Kosten pro 100 km hängen vom Strompreis und Ladepunkt ab:
 
-- **Zuhause an der Wallbox** (Haushaltstrom ≈ 32 ct/kWh): 4–6 € pro 100 km bei 15–18 kWh/100 km.
+- **Zuhause an der Wallbox** (Haushaltstrom ≈ 33 ct/kWh): 4–6 € pro 100 km bei 15–18 kWh/100 km.
 - **Wallbox-Sondertarif** (ca. 28 ct): 3,50–5 €.
 - **Öffentliche AC-Säule** (ca. 45 ct): 7–9 €.
 - **DC-Schnelllader** (ca. 60–80 ct): 9–15 €.

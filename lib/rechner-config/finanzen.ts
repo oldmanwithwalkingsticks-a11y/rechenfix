@@ -1245,14 +1245,14 @@ Die Wohngeldformel nach § 19 WoGG lautet: Wohngeld = 1,15 × (M − (a + b×M +
     keywords: ['bafög rechner', 'bafög berechnen', 'bafög 2026', 'bafög anspruch', 'bafög höhe', 'bafög höchstsatz', 'bafög elterneinkommen', 'bafög rückzahlung', 'studenten bafög', 'schüler bafög'],
     icon: '🎓',
     formel: 'BAföG = Gesamtbedarf − Anrechnung Einkommen − Anrechnung Vermögen − Anrechnung Elterneinkommen | Studium (eigene Wohnung): 934 € Bedarf | Studien-BAföG: 50% Zuschuss + 50% zinsloses Darlehen (max. 10.010 € Rückzahlung)',
-    beispiel: 'Student, eigene Wohnung, familienversichert, Eltern verdienen 50.000 € brutto zusammen → Bedarf: 934 € | Elternanrechnung: ca. 302 € | BAföG: ca. 632 €/Monat (316 € Zuschuss + 316 € Darlehen).',
+    beispiel: 'Student, eigene Wohnung, familienversichert, Eltern verdienen 50.000 € brutto zusammen → Bedarf: 855 € | Elternanrechnung: ca. 302 € | BAföG: ca. 553 €/Monat (276,50 € Zuschuss + 276,50 € Darlehen).',
     erklaerung: `**Wer hat Anspruch auf BAföG?**
 
 BAföG (Bundesausbildungsförderungsgesetz) unterstützt Studierende und Schüler, deren Eltern die Ausbildung nicht allein finanzieren können. Grundsätzlich haben alle deutschen Staatsangehörigen und viele ausländische Studierende Anspruch, wenn das Einkommen der Eltern unter bestimmten Grenzen liegt. Auch EU-Bürger mit Daueraufenthaltsrecht und anerkannte Flüchtlinge können BAföG beantragen. Die Altersgrenze liegt bei 45 Jahren zu Beginn des Studiums. Das BAföG wird als Kombination aus Zuschuss und zinslosem Darlehen gezahlt — bei Studierenden je 50 Prozent, bei Schülern als reiner Zuschuss ohne Rückzahlung.
 
 **BAföG-Höchstsatz 2026: Was steht Ihnen zu?**
 
-Der aktuelle BAföG-Höchstsatz für Studierende in eigener Wohnung beträgt **934 Euro pro Monat**. Dieser setzt sich zusammen aus dem Grundbedarf von 554 Euro und einer Wohnpauschale von 380 Euro. Wer sich selbst krankenversichern muss (ab 25 Jahre oder bei privatem Vertrag), erhält zusätzlich 94 Euro KV-Zuschlag und 28 Euro PV-Zuschlag. Mit Kindern gibt es einen Betreuungszuschlag von 160 Euro pro Kind. Der maximale BAföG-Satz mit KV-Zuschlag und einem Kind liegt somit bei **1.216 Euro monatlich**. Für Schüler gelten niedrigere Sätze: 262 Euro bei den Eltern oder 632 Euro in eigener Wohnung. Vergleichen Sie auch Ihren [Nettolohn](/finanzen/brutto-netto-rechner) mit den BAföG-Sätzen.
+Der aktuelle BAföG-Höchstsatz für Studierende in eigener Wohnung beträgt **992 Euro pro Monat** (mit KV+PV-Zuschlag). Der Grundbedarf liegt bei 475 Euro, die Wohnpauschale bei 380 Euro. Wer sich selbst krankenversichern muss (ab 25 Jahre oder bei privatem Vertrag), erhält zusätzlich 102 Euro KV-Zuschlag und 35 Euro PV-Zuschlag. Mit Kindern gibt es einen Betreuungszuschlag von 160 Euro pro Kind. Der maximale BAföG-Satz mit KV-Zuschlag und einem Kind liegt somit bei **1.152 Euro monatlich**. Für Schüler gelten niedrigere Sätze: 276 Euro bei den Eltern oder 666 Euro in eigener Wohnung. Vergleichen Sie auch Ihren [Nettolohn](/finanzen/brutto-netto-rechner) mit den BAföG-Sätzen.
 
 **Elternunabhängiges BAföG: Wann ist das möglich?**
 
@@ -1260,11 +1260,11 @@ Normalerweise wird das Einkommen der Eltern auf das BAföG angerechnet. In besti
 
 **BAföG-Rückzahlung: Wie viel muss ich zurückzahlen?**
 
-Studien-BAföG besteht zu 50 Prozent aus einem zinslosen Darlehen. Die Rückzahlung beginnt fünf Jahre nach dem Ende der Förderungshöchstdauer in Raten von mindestens 130 Euro pro Monat. Die maximale Rückzahlungssumme ist auf **10.010 Euro gedeckelt** — unabhängig davon, wie viel BAföG Sie insgesamt erhalten haben. Bei einem Regelstudium von 6 Semestern mit 934 Euro monatlich beträgt das Gesamtdarlehen 16.812 Euro — Sie müssen aber maximal 10.010 Euro zurückzahlen. Bei vorzeitiger Rückzahlung in einer Summe gibt es einen **Nachlass von bis zu 50 Prozent**. Wer weniger als 1.605 Euro netto verdient, kann sich von der Rückzahlung freistellen lassen. Schüler-BAföG muss **nicht zurückgezahlt** werden — es ist ein reiner Zuschuss.
+Studien-BAföG besteht zu 50 Prozent aus einem zinslosen Darlehen. Die Rückzahlung beginnt fünf Jahre nach dem Ende der Förderungshöchstdauer in Raten von mindestens 130 Euro pro Monat. Die maximale Rückzahlungssumme ist auf **10.010 Euro gedeckelt** — unabhängig davon, wie viel BAföG Sie insgesamt erhalten haben. Bei einem BAföG-Vollbezug von 992 Euro über 6 Semester (18 Monate) ergibt sich ein Darlehensanteil von 8.928 Euro (= halber Auszahlungsbetrag). Bei vorzeitiger Rückzahlung in einer Summe gibt es einen **Nachlass von bis zu 50 Prozent**. Wer weniger als 1.605 Euro netto verdient, kann sich von der Rückzahlung freistellen lassen. Schüler-BAföG muss **nicht zurückgezahlt** werden — es ist ein reiner Zuschuss.
 
 **BAföG und Nebenjob: Wie viel darf ich verdienen?**
 
-Neben dem BAföG dürfen Sie bis zu **6.456 Euro im Jahr** hinzuverdienen, ohne dass Ihr BAföG gekürzt wird. Das entspricht einem monatlichen Freibetrag von etwa 538 Euro. Ein Minijob bis 538 Euro ist daher problemlos möglich. Wird der Freibetrag überschritten, wird das überschüssige Einkommen abzüglich einer Sozialversicherungspauschale von 22,5 Prozent auf das BAföG angerechnet. Ein Werkstudentenjob mit höherem Verdienst kann sich trotzdem lohnen — rechnen Sie nach, ob das zusätzliche Einkommen die BAföG-Kürzung überwiegt. Prüfen Sie auch Ihren Anspruch auf [Wohngeld](/finanzen/wohngeld-rechner) als Alternative, falls Ihr BAföG-Anspruch gering ausfällt.
+Der BAföG-Freibetrag für eigenes Einkommen liegt bei **330 Euro monatlich** (3.960 Euro jährlich) nach § 23 BAföG. Ein Minijob bis 603 Euro (Stand 2026) ist daneben grundsätzlich möglich; die anrechnungsfreie Grenze beim BAföG bleibt davon unberührt. Wird der Freibetrag überschritten, wird das überschüssige Einkommen abzüglich einer Sozialversicherungspauschale von 22,5 Prozent auf das BAföG angerechnet. Ein Werkstudentenjob mit höherem Verdienst kann sich trotzdem lohnen — rechnen Sie nach, ob das zusätzliche Einkommen die BAföG-Kürzung überwiegt. Prüfen Sie auch Ihren Anspruch auf [Wohngeld](/finanzen/wohngeld-rechner) als Alternative, falls Ihr BAföG-Anspruch gering ausfällt.
 
 **BAföG beantragen: So geht's**
 
@@ -1272,7 +1272,7 @@ Den BAföG-Antrag stellen Sie beim zuständigen Studenten- oder Schülerwerk (be
     faq: [
       {
         frage: 'Wie viel BAföG bekomme ich?',
-        antwort: 'Die Höhe hängt von Ausbildungsart, Wohnsituation, eigenem Einkommen/Vermögen und dem Einkommen der Eltern ab. Der Höchstsatz für Studierende in eigener Wohnung liegt bei 934 € (2026). Mit KV-Zuschlag und Kindern kann er auf über 1.200 € steigen. Schüler erhalten maximal 632 € in eigener Wohnung.',
+        antwort: 'Die Höhe hängt von Ausbildungsart, Wohnsituation, eigenem Einkommen/Vermögen und dem Einkommen der Eltern ab. Der Höchstsatz für Studierende in eigener Wohnung liegt bei 992 € (2026, mit KV+PV-Zuschlag). Mit Kinderbetreuungszuschlag steigt er auf 1.152 €. Schüler erhalten maximal 666 € in eigener Wohnung.',
       },
       {
         frage: 'Wie viel dürfen meine Eltern verdienen, damit ich BAföG bekomme?',
@@ -1284,7 +1284,7 @@ Den BAföG-Antrag stellen Sie beim zuständigen Studenten- oder Schülerwerk (be
       },
       {
         frage: 'Wie viel darf ich neben dem BAföG verdienen?',
-        antwort: 'Sie dürfen bis zu 6.456 € im Jahr (ca. 538 €/Monat) hinzuverdienen, ohne BAföG-Kürzung. Ein Minijob ist problemlos möglich. Bei höherem Verdienst wird das überschüssige Einkommen abzüglich 22,5% Sozialversicherungspauschale angerechnet.',
+        antwort: 'Der BAföG-Freibetrag für eigenes Einkommen liegt nach § 23 BAföG bei 330 €/Monat (3.960 €/Jahr). Ein Minijob bis 603 € (Stand 2026) ist daneben grundsätzlich möglich; die anrechnungsfreie Grenze beim BAföG bleibt davon unberührt. Bei höherem Verdienst wird das überschüssige Einkommen abzüglich 22,5% Sozialversicherungspauschale angerechnet.',
       },
       {
         frage: 'Wie viel Vermögen darf ich haben?',
@@ -1368,7 +1368,7 @@ Der Antrag wird beim zuständigen Landesamt für Ausbildungsförderung gestellt 
     metaDescription: 'Kindergeld 2026: 259 € pro Kind ✓ Günstigerprüfung Kindergeld vs. Kinderfreibetrag ✓ ab wann lohnt sich der Freibetrag ✓ KI-Erklärung.',
     keywords: ['kindergeld rechner', 'kindergeld 2026', 'kindergeld berechnen', 'kinderfreibetrag', 'günstigerprüfung', 'kindergeld höhe', '259 euro kindergeld', 'kinderfreibetrag 2026', 'kindergeld steuer', 'familienkasse'],
     icon: '👶',
-    formel: 'Kindergeld 2026 = 259 € × Anzahl Kinder (pro Monat) | Günstigerprüfung: Steuerersparnis durch Kinderfreibetrag (7.806 € bzw. 15.612 € pro Kind) vs. Kindergeld/Jahr — das Finanzamt wählt automatisch die günstigere Variante.',
+    formel: 'Kindergeld 2026 = 259 € × Anzahl Kinder (pro Monat) | Günstigerprüfung: Steuerersparnis durch Kinderfreibetrag (4.878 € bzw. 9.756 € pro Kind) vs. Kindergeld/Jahr — das Finanzamt wählt automatisch die günstigere Variante.',
     beispiel: 'Familie, zwei Kinder, 60.000 € Brutto, Zusammenveranlagung → Kindergeld: 518 €/Monat = 6.216 €/Jahr | Steuerersparnis Freibetrag: ca. 4.700 € → Kindergeld ist günstiger.',
     erklaerung: `**Kindergeld 2026: 259 Euro pro Kind**
 
@@ -1388,7 +1388,7 @@ Das deutsche Steuerrecht bietet Eltern zwei Vorteile: **Kindergeld** oder **Kind
 
 **Kinderfreibetrag 2026: 9.756 Euro pro Kind**
 
-Der Kinderfreibetrag setzt sich aus zwei Teilen zusammen: dem eigentlichen Freibetrag für das sächliche Existenzminimum (**4.878 Euro** pro Elternteil) und dem Freibetrag für Betreuung, Erziehung und Ausbildung (**2.928 Euro** pro Elternteil, der sogenannte BEA-Freibetrag). Bei Einzelveranlagung beträgt der Freibetrag pro Kind also 7.806 Euro pro Elternteil — bei Zusammenveranlagung verheirateter Eltern wird der volle doppelte Freibetrag von **15.612 Euro pro Kind** vom zu versteuernden Einkommen abgezogen. Das reduziert die Steuerlast und damit auch den Solidaritätszuschlag und die Kirchensteuer.
+Der Kinderfreibetrag setzt sich aus zwei Teilen zusammen: dem eigentlichen Freibetrag für das sächliche Existenzminimum (**3.414 Euro** pro Elternteil, zusammen 6.828 Euro) und dem Freibetrag für Betreuung, Erziehung und Ausbildung (**1.464 Euro** pro Elternteil, zusammen 2.928 Euro, der sogenannte BEA-Freibetrag). Bei Einzelveranlagung beträgt der Freibetrag also **4.878 Euro pro Elternteil und Kind** — bei Zusammenveranlagung verheirateter Eltern wird der volle doppelte Freibetrag von **9.756 Euro pro Kind** vom zu versteuernden Einkommen abgezogen. Das reduziert die Steuerlast und damit auch den Solidaritätszuschlag und die Kirchensteuer.
 
 **Ab wann lohnt sich der Kinderfreibetrag?**
 
@@ -1412,7 +1412,7 @@ Neben Kindergeld und Kinderfreibetrag gibt es weitere Hilfen: den **Kinderzuschl
       },
       {
         frage: 'Wie hoch ist der Kinderfreibetrag 2026?',
-        antwort: 'Der Kinderfreibetrag beträgt 2026 pro Elternteil 4.878 € plus 2.928 € BEA-Freibetrag, also 7.806 € pro Elternteil und Kind. Bei Zusammenveranlagung wird der volle Freibetrag von 15.612 € pro Kind vom zu versteuernden Einkommen abgezogen.',
+        antwort: 'Der Kinderfreibetrag beträgt 2026 pro Elternteil 3.414 € sächlich plus 1.464 € BEA-Freibetrag, also 4.878 € pro Elternteil und Kind. Bei Zusammenveranlagung wird der volle Freibetrag von 9.756 € pro Kind vom zu versteuernden Einkommen abgezogen.',
       },
       {
         frage: 'Bis wann gibt es Kindergeld?',
