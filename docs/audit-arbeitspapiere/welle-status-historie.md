@@ -14,6 +14,7 @@ Sammel-Block für Welle-3-Tail-Aktivitäten nach Abschluss der einzeln dokumenti
 
 - Validation-Sweep Scoping ✅ 28.04.26 — siehe validation-sweep-scoping.md, 7 Module priorisiert (M1 Backtick, M2 Norm-Zitate, M3 SSOT-Konsumption, M4 Meta-Routen, M5 Affiliate-Konsistenz, M6 FAQ-Drift, M7 A11y-Stichprobe). Geschätzt 4–6 Folge-Sessions. Out-of-Scope: Deploy-Sync-Check, Verify-Coverage-Lücke (eigene Welle 4).
 - P3-B1 ueberstunden-Netto-Refactor ✅ 28.04.26 (Commit 7c2426b) — Pauschale 40-%-Steuerabzug-Schätzung im Vergütungs-Modus durch Mehrbetrag-Methode (Netto(Brutto+Vergütung) − Netto(Brutto)) via berechneBruttoNetto-SSOT ersetzt. UI im Modus „Vergütung" um Steuerklasse + Bundesland + Kirchensteuer-Inputs erweitert. Schließt P3-B1 aus dem Welle-2-Stufe-3-Arbeit-Block-B-Backlog.
+- Validation-Sweep M1 Backtick ✅ 28.04.26 (Commit 91da7a6) — scripts/check-backticks.mjs als prebuild-Hook eingehängt vor slug-drift-scan. AST-basierte Detection (parse-error + Inline-Backtick-Walk) auf erklaerung/formel/beispiel/faq-Properties. 0 aktuelle Treffer, reine Zukunfts-Absicherung. Schließt M1 aus dem Validation-Sweep-Scoping.
 
 ---
 
