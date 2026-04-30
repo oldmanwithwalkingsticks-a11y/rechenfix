@@ -397,7 +397,7 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
   - Stufe 2 Gesundheit ✅ (Prompts 140–144b)
   - Stufe 3 Wohnen ✅ (Prompts 147–148c, 25.+26.04.2026, 25 Rechner)
   - Stufe 3 Arbeit ✅ (Block A 149a-d + 150a-d, Block B 152a + 153a/b/b-fix + 153c Lib-Audit, 26.04.2026, 14 Commits)
-- **Welle 3 (Validation-Sweep + geparkte Items + AdSense-Reparatur):** **8/10 abgeschlossen (Stand 28.04.2026)** — 1 geparkt, 1 priorisiert
+- **Welle 3 (Validation-Sweep + geparkte Items + AdSense-Reparatur):** **9/10 abgeschlossen (Stand 30.04.2026)** — 1 geparkt (152c)
   - ✅ 152b feiertage.ts SSOT (27.04.2026)
   - ✅ 154 LazySection-Removal (AdSense-Reparatur, 27.04.2026)
   - ✅ 155 /ueber-uns ausgebaut (28.04.2026)
@@ -407,17 +407,17 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
   - ✅ 157 P3-Sammelrest (25 Items in 6 atomaren Konfig-Commits 157a–f, 28.04.2026)
   - ✅ P3-B1 ueberstunden-Netto-Refactor mit Steuerklasse-Input (Commit 7c2426b, 28.04.2026)
   - 🅿️ 152c Pendlerpauschalen-SSOT — geparkt, Trigger: Verabschiedung der 45-Cent-Reform
-  - ⬜ Validation-Sweep — Scoping ✅ 28.04.2026, 7 Module priorisiert: M1 Backtick-Hook ✅, M2 Norm-Zitate ✅, M3 SSOT-Konsumption ✅, M4 Meta-Routen ✅, M5 Affiliate-Konsistenz ✅, M6 FAQ-Drift ✅, M7 A11y-Stichprobe offen — 6/7 abgeschlossen
+  - ✅ **Validation-Sweep KOMPLETT (30.04.2026)** — 7/7 Module abgeschlossen: M1 Backtick-Hook ✅, M2 Norm-Zitate ✅, M3 SSOT-Konsumption ✅ (L-30 + L-31), M4 Meta-Routen ✅, M5 Affiliate-Konsistenz ✅, M6 FAQ-Drift ✅, M7 A11y-Stichprobe ✅ (0 Regressions-Treffer auf 44/44 Runs)
 
 Vollständige Welle-Historie: [docs/audit-arbeitspapiere/welle-status-historie.md](docs/audit-arbeitspapiere/welle-status-historie.md).
 
-## Welle-3-Backlog (Stand 28.04.2026)
+## Welle-3-Backlog (Stand 30.04.2026)
 
-**Geliefert (8/10):** 152b ✅, 154 ✅, 155 ✅, 156 ✅, 151 ✅, 150e ✅, 157 ✅, P3-B1 ✅. Volldetails siehe „Status April 2026" oben und [docs/audit-arbeitspapiere/welle-status-historie.md](docs/audit-arbeitspapiere/welle-status-historie.md).
+**Geliefert (9/10):** 152b ✅, 154 ✅, 155 ✅, 156 ✅, 151 ✅, 150e ✅, 157 ✅, P3-B1 ✅, **Validation-Sweep KOMPLETT (7/7) ✅ 30.04.2026**. Volldetails siehe „Status April 2026" oben und [docs/audit-arbeitspapiere/welle-status-historie.md](docs/audit-arbeitspapiere/welle-status-historie.md).
 
 **Geparkt (1/10):** 152c Pendlerpauschalen-SSOT (Trigger: Reform-Verabschiedung).
 
-**Priorisiert (1/10):** Validation-Sweep — Scoping ✅ 28.04.2026, 7 Module priorisiert: M1 Backtick-Hook ✅, M2 Norm-Zitate ✅, M3 SSOT-Konsumption ✅, M4 Meta-Routen ✅, M5 Affiliate-Konsistenz ✅, M6 FAQ-Drift ✅, M7 A11y-Stichprobe offen — 6/7 abgeschlossen. Volldetails siehe unten mit Aufwand und Scope-Specs.
+**Geliefert (Stand 30.04.2026):** Validation-Sweep **KOMPLETT ✅** — 7/7 Module abgeschlossen (M1+M2+M3+M4+M5+M6+M7). Welle 3 reduziert sich auf den einen geparkten Slot 152c (Pendlerpauschalen-SSOT, Trigger: Verabschiedung der 45-Cent-Reform). Volldetails siehe unten mit Aufwand und Scope-Specs.
 
 ### 152b — `feiertage.ts` SSOT-Lib mit Gauß-Osterformel ✅ ABGESCHLOSSEN (27.04.2026)
 
