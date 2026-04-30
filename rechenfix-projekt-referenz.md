@@ -408,6 +408,7 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
   - ✅ P3-B1 ueberstunden-Netto-Refactor mit Steuerklasse-Input (Commit 7c2426b, 28.04.2026)
   - 🅿️ 152c Pendlerpauschalen-SSOT — geparkt, Trigger: Verabschiedung der 45-Cent-Reform
   - ✅ **Validation-Sweep KOMPLETT (30.04.2026)** — 7/7 Module abgeschlossen: M1 Backtick-Hook ✅, M2 Norm-Zitate ✅, M3 SSOT-Konsumption ✅ (L-30 + L-31), M4 Meta-Routen ✅, M5 Affiliate-Konsistenz ✅, M6 FAQ-Drift ✅, M7 A11y-Stichprobe ✅ (0 Regressions-Treffer auf 44/44 Runs)
+- **Welle 4 (Verify-Coverage-Backfill):** **angefangen 01.05.2026 — Scoping ✅** unter [docs/audit-arbeitspapiere/welle4-scoping.md](docs/audit-arbeitspapiere/welle4-scoping.md). 6 Module priorisiert (M0 Anomalie-Klärung, M1 Trivial-Verify, M2 Sozial-/Familien-Recht, M3 Edge-Case-Komplex, M4 Lohnsteuer-Tail, M5 Bilanz-Closure). Geschätzt ~22 neue Verify-Scripts, ~16–22 h auf 4–6 Sessions. Out-of-Scope: 6 Lib-Extractions auf Welle 5 ausgelagert (firmenwagen, afa, riester, mietpreisbremse, VFE, grundsteuer); ~62 OFFEN-MENGEN + ~14 OFFEN-MARKT bewusst ohne Verify-Sprint. Eingangs-Inventar 30.04.26 unter [docs/audit-arbeitspapiere/welle4-inventar-pre-scoping.md](docs/audit-arbeitspapiere/welle4-inventar-pre-scoping.md).
 
 Vollständige Welle-Historie: [docs/audit-arbeitspapiere/welle-status-historie.md](docs/audit-arbeitspapiere/welle-status-historie.md).
 

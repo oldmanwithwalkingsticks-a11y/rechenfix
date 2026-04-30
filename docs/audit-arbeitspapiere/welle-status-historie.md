@@ -25,6 +25,14 @@ Sammel-Block für Welle-3-Tail-Aktivitäten nach Abschluss der einzeln dokumenti
 
 ---
 
+## Welle 4 — Verify-Coverage-Backfill (01.05.2026, LAUFEND)
+
+Sammel-Block für Welle-4-Aktivitäten. Trigger: Validation-Sweep KOMPLETT am 30.04.2026, Welle-3 reduziert auf 152c-Slot. Welle-4-Scope: ~22 neue Verify-Scripts gegen existierende Libs in `lib/berechnungen/`, Bündelung nach Lib-Komplexität.
+
+- Welle-4-Scoping ✅ 01.05.26 — siehe `docs/audit-arbeitspapiere/welle4-scoping.md`, 6 Module priorisiert (M0 Anomalie-Klärung, M1 Trivial-Verify, M2 Sozial-/Familien-Recht, M3 Edge-Case-Komplex, M4 Lohnsteuer-Tail, M5 Bilanz-Closure). Eingangs-Inventar 30.04.26 unter `docs/audit-arbeitspapiere/welle4-inventar-pre-scoping.md` (35 ABGEDECKT, 21 TEILABGEDECKT, ~38 OFFEN-ORACLE als Welle-4-Hauptscope, ~62 OFFEN-MENGEN + ~14 OFFEN-MARKT bewusst out-of-scope). Geschätzt 4–6 Folge-Sessions, ~16–22 h gesamt. Out-of-Scope: 6 Lib-Extractions auf Welle 5 verschoben (firmenwagen, afa, riester, mietpreisbremse, VFE, grundsteuer); OFFEN-MENGEN (~62) und OFFEN-MARKT (~14) bewusst ohne Verify-Sprint. Strategie-Entscheidungen: E1 Pure-Verify-Backfill (kein Refactor in Welle 4), E3 Bündelung nach Lib-Komplexität (nicht Kategorie), E4 beide Verify-Idiome (`eq()` + `cases[]`) zulassen, E6 Externe-Quellen-Pflicht im JSDoc-Header, E8 L-30 + L-31 + Pre-5a/5b als etablierte Audit-Praxis übernommen.
+
+---
+
 ## Welle 3 — Item 157 P3-Sammelrest (28.04.2026, ABGESCHLOSSEN)
 
 **Scope:** 151-Sammelrest aus Block-A-Audit — 25 nicht-priorisierte P3-Items in 8 Rechnern aus zwei Konfig-Files (`arbeit.ts` + `finanzen.ts`). Reine Erklärtext- und FAQ-Polish, kein Berechnungslogik-Touch. Pre-Check ergab: P3-A6-4 (Beispiele Indexierung sichtbar) bereits durch P1-A6-Fix (149 zugewinnausgleich-§ 1376 BGB) erledigt — aus dem Sammelrest fiel ein Item raus, finaler Count 25 statt 26.
