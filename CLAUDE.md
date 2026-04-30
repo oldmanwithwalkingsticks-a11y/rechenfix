@@ -56,7 +56,7 @@ Affiliate ist erlaubt, wenn **thematischer Match** zum Rechner besteht. Entschei
 - ✅ Zahnzusatz auf Gesundheits-Rechnern mit thematischer Brücke (Raucher → Parodontitis, Schlaf → Bruxismus) — erlaubt
 - ❌ Finanzwerbung (Kredit, Steuer-Software, Versicherung) auf Gesundheits-Rechnern — verboten
 - ❌ Mathe/Schule bleibt komplett ohne Affiliate (kein Kaufintent bei Schul-/Studium-Traffic)
-- Max. 2–3 AffiliateBoxen pro Rechner, erste `full`, weitere `compact`
+- Max. 2–4 AffiliateBoxen pro Rechner, erste `full`, weitere `compact`
 - Pflege zentral in `components/AffiliateBox.tsx` (Programme + `CONTEXT_TEXTS` + `CONTEXT_DEEPLINKS`), Platzierung pro Rechner-Komponente als JSX nach `AiExplain`/`ErgebnisAktionen`
 
 **Neue Partner (April 2026, Prompt 106):** hotel.de (MID 16018), burda-Zahnzusatz (MID 121064), eventfloss-berlin (MID 27722). Vollständige MID-Tabelle und Platzierungs-Zuordnung pro Rechner: siehe [rechenfix-projekt-referenz.md](rechenfix-projekt-referenz.md) → Abschnitt „Affiliate-System".
