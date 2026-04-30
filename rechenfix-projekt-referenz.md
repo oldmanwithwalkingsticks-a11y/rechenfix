@@ -407,7 +407,7 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
   - ✅ 157 P3-Sammelrest (25 Items in 6 atomaren Konfig-Commits 157a–f, 28.04.2026)
   - ✅ P3-B1 ueberstunden-Netto-Refactor mit Steuerklasse-Input (Commit 7c2426b, 28.04.2026)
   - 🅿️ 152c Pendlerpauschalen-SSOT — geparkt, Trigger: Verabschiedung der 45-Cent-Reform
-  - ⬜ Validation-Sweep — Scoping ✅ 28.04.2026, 7 Module priorisiert: M1 Backtick-Hook ✅, M2 Norm-Zitate ✅, M3 SSOT-Konsumption ✅, M4 Meta-Routen ✅, M5 Affiliate-Konsistenz ✅, M6 FAQ-Drift offen, M7 A11y-Stichprobe offen — 5/7 abgeschlossen
+  - ⬜ Validation-Sweep — Scoping ✅ 28.04.2026, 7 Module priorisiert: M1 Backtick-Hook ✅, M2 Norm-Zitate ✅, M3 SSOT-Konsumption ✅, M4 Meta-Routen ✅, M5 Affiliate-Konsistenz ✅, M6 FAQ-Drift ✅, M7 A11y-Stichprobe offen — 6/7 abgeschlossen
 
 Vollständige Welle-Historie: [docs/audit-arbeitspapiere/welle-status-historie.md](docs/audit-arbeitspapiere/welle-status-historie.md).
 
@@ -417,7 +417,7 @@ Vollständige Welle-Historie: [docs/audit-arbeitspapiere/welle-status-historie.m
 
 **Geparkt (1/10):** 152c Pendlerpauschalen-SSOT (Trigger: Reform-Verabschiedung).
 
-**Priorisiert (1/10):** Validation-Sweep — Scoping ✅ 28.04.2026, 7 Module priorisiert: M1 Backtick-Hook ✅, M2 Norm-Zitate ✅, M3 SSOT-Konsumption ✅, M4 Meta-Routen ✅, M5 Affiliate-Konsistenz ✅, M6 FAQ-Drift offen, M7 A11y-Stichprobe offen — 5/7 abgeschlossen. Volldetails siehe unten mit Aufwand und Scope-Specs.
+**Priorisiert (1/10):** Validation-Sweep — Scoping ✅ 28.04.2026, 7 Module priorisiert: M1 Backtick-Hook ✅, M2 Norm-Zitate ✅, M3 SSOT-Konsumption ✅, M4 Meta-Routen ✅, M5 Affiliate-Konsistenz ✅, M6 FAQ-Drift ✅, M7 A11y-Stichprobe offen — 6/7 abgeschlossen. Volldetails siehe unten mit Aufwand und Scope-Specs.
 
 ### 152b — `feiertage.ts` SSOT-Lib mit Gauß-Osterformel ✅ ABGESCHLOSSEN (27.04.2026)
 
