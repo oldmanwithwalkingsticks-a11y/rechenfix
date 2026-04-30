@@ -467,10 +467,12 @@ Vollständige Welle-Historie: [docs/audit-arbeitspapiere/welle-status-historie.m
 - **Aufwand:** 4–6 Folge-Sessions (~9–12 h Sweep-Zeit netto, plus optionale Fix-Sessions je nach M3-Drift-Cluster)
 - **Akut:** nein (Welle 2 ist funktional sauber; Welle 3 ist Cross-Check-Phase). Empfehlung Session A zuerst (M1 Backtick-Hook wegen Build-Break-Risiko).
 
-### Empfohlene Reihenfolge der verbleibenden Items (Stand 28.04.2026)
+### Empfohlene Reihenfolge der verbleibenden Items (Stand 01.05.2026)
 
-1. **Welle 3 Validation-Sweep** — Scoping ✅, Folge-Sessions A/B/C bündeln M1+M2 / M3+M4 / M5+M6+M7. Session A zuerst wegen Backtick-Hook-Build-Schutz.
-2. **152c** — wartet auf Trigger (Reform-Verabschiedung).
+1. **Welle 4 M0 — Anomalie-Klärung** (~30 Min, Pre-Sprint): A-01 (`verify-ehegattenunterhalt.ts` ohne Lib-Import), A-03 (`COMPONENT_SLUG_OVERRIDES`-Map für 8 Camel/Kebab-Mismatches), A-07 (Underscore-Helper-Konvention). Output: stabile Slug-Inventur, M1-Modul-Liste final.
+2. **Welle 4 M1 — Trivial-Verify** (~5–7 h): 5 Slugs (`mwst-rechner`, `gewerbesteuer-rechner`, `kindergeld-rechner`, `inflationsrechner`, `herzfrequenz-zonen-rechner`). 1 neues `verify-*.ts` pro Slug.
+3. **152c** — wartet auf Trigger (Verabschiedung der 45-Cent-Reform via BGBl., extern).
+4. **AdSense-Re-Review** — Karsten triggert im Backend, Antwortfrist 1–3 Wochen. Bei Approval: Prompts 68 (Google CMP + Consent Mode v2) + 85 (next/script-Migration) aktivierbar — beide haben höhere Prio als Welle-4-Fortsetzung.
 
 **Neue Scripts seit Welle 2 Stufe 3:**
 - `scripts/verify-wohnen-p1.ts` (Prompt 147), `verify-wohnen-block-b.ts` (148), `verify-pv-ertragsmodell.ts` (147c), `verify-ehegattenunterhalt.ts` (149c), `verify-zugewinnausgleich.ts` (149b) — alle gegen externe Primärquellen (BNetzA, BDEW, KfW, Mertens, Düsseldorfer Tabelle, BFH/BGB, Destatis Lange Reihe)
