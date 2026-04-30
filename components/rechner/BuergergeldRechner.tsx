@@ -725,7 +725,7 @@ export default function BuergergeldRechner() {
             }}
           />
 
-          <AffiliateBox programId="check24" variant="compact" />
+          <AffiliateBox programId="check24" context="strom" variant="compact" />
         </div>
       )}
     </div>

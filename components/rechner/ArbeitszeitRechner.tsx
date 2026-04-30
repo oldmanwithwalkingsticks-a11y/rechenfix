@@ -413,7 +413,7 @@ export default function ArbeitszeitRechner() {
       )}
 
       {(tagesErgebnis || wochenErgebnis) && (
-        <AffiliateBox programId="lexware" variant="compact" />
+        <AffiliateBox programId="lexware" context="arbeitszeitrechner" variant="compact" />
       )}
 
       {(tagesErgebnis || wochenErgebnis) && (

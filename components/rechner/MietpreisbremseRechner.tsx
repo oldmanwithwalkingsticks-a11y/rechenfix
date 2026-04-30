@@ -193,7 +193,7 @@ export default function MietpreisbremseRechner() {
       />
 
       <AffiliateBox programId="ks-auxilia" context="mietpreisbremse" />
-      <AffiliateBox programId="cosmosdirekt" context="privathaftpflicht" />
+      <AffiliateBox programId="cosmosdirekt" context="hausrat" />
 
       <AiExplain
         rechnerName="Mietpreisbremse-Rechner"

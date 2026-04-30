@@ -502,7 +502,7 @@ export default function UeberstundenRechner() {
       {(ergebnis1 || ergebnis2) && (
         <>
           <AffiliateBox programId="ks-auxilia" context="ueberstunden" />
-          <AffiliateBox programId="lexware" variant="compact" />
+          <AffiliateBox programId="lexware" context="ueberstunden" variant="compact" />
         </>
       )}
 

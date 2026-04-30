@@ -300,7 +300,7 @@ export default function PflegegeldRechner() {
       />
 
       <AffiliateBox programId="burdaZahn" context="pflegegeld" />
-      <AffiliateBox programId="cosmosdirekt" context="berufsunfaehigkeit" />
+      <AffiliateBox programId="cosmosdirekt" context="tagesgeld" />
     </div>
   );
 }

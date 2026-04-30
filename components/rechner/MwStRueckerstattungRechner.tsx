@@ -7,7 +7,6 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
-import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 type GebuehrenTyp = 'keine' | 'global-blue' | 'planet';
@@ -156,8 +155,6 @@ export default function MwstRueckerstattungRechner() {
 
           <CrossLink href="/finanzen/mwst-rechner" emoji="🧾" text="Mehrwertsteuer berechnen" />
           <CrossLink href="/alltag/waehrungsrechner" emoji="💱" text="Währungsrechner" />
-
-          <AffiliateBox programId="cosmosdirekt" context="tagesgeld" />
 
           <ErgebnisAktionen
             ergebnisText={`MwSt-Rückerstattung: ${fmt(ergebnis.erstattungNetto)} € netto (von ${fmt(ergebnis.mwstAnteil)} € MwSt, abzgl. ${fmt(ergebnis.gebuehrenGesamt)} € Gebühren) bei ${fmt(parseDeutscheZahl(kaufbetrag))} € Einkauf (${mwstSatz} % MwSt) — effektive Ersparnis: ${fmt(ergebnis.effektiveErsparnisProzent)} %`}
