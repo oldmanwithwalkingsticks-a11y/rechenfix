@@ -164,6 +164,9 @@ Referenz-Implementation: [lib/berechnungen/spenden.ts](lib/berechnungen/spenden.
 ### Berechnungs-interne Helfer in `_helpers.ts`
 Helfer, die nur innerhalb der `lib/berechnungen/`-Schicht benötigt werden (Rundungen, kalendarische Durchschnitte, Formel-Bausteine) wandern in [lib/berechnungen/_helpers.ts](lib/berechnungen/_helpers.ts). Der Unterstrich-Prefix signalisiert: privates Modul, keine direkten Imports aus Rechner-Komponenten. Seit Prompt 113 enthält die Datei `rundeBuRlGKonform` (§ 5 Abs. 2 BUrlG) und `WOCHEN_PRO_MONAT` (52/12). Rechner-Komponenten importieren über die jeweilige Domain-Lib (z. B. `teilzeit.ts`, `urlaubstage.ts`, `stundenlohn.ts`).
 
+### Underscore-Lib-Helper-Konvention (A-07, Welle 4 M0)
+**Underscore-Prefix-Konvention für Lib-Helper.** Lib-Files unter `lib/berechnungen/` mit `_`-Prefix (z. B. `_helpers.ts`, `_lohnsteuer-pap-2026.ts`) sind nicht-zu-verifizierende Helper — Utility-Funktionen, Konstanten-Tabellen, intern verwendete PAP-Programme ohne eigene Berechnungslogik. Welle-4-Coverage-Bilanz und künftige Inventur-Sweeps filtern sie über [scripts/welle4-overrides.ts](scripts/welle4-overrides.ts) (Funktion `isUnderscoreLibHelper`) aus dem Verify-Scope aus. Konvention etabliert in Welle 4 M0 (03.05.2026).
+
 ### Individuelle Pauschalen als Eingabefeld
 Pauschal-Werte mit hoher individueller Variation (PKV-Beitrag, Nebenjob-Netto) sollten als Eingabefeld realisiert werden:
 - State mit realistischem Default (z. B. `'650'` für PKV)
