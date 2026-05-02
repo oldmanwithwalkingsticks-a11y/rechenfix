@@ -2,24 +2,25 @@
 
 import { useState, useMemo } from 'react';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import { berechneHerzfrequenzZonen, type Formel } from '@/lib/berechnungen/herzfrequenz-zonen';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 import { AmazonBox } from '@/components/AmazonBox';
 
-type Formel = 'standard' | 'tanaka' | 'karvonen';
 type Sportart = 'laufen' | 'radfahren' | 'schwimmen';
 
 const fmt = (n: number): string => Math.round(n).toString();
 
-const ZONEN = [
-  { nr: 1, name: 'Regeneration',        min: 0.50, max: 0.60, farbe: 'bg-green-200 dark:bg-green-800',     textFarbe: 'text-green-950 dark:text-green-50',   beschreibung: 'Sehr locker, Regeneration nach hartem Training' },
-  { nr: 2, name: 'Grundlagenausdauer',  min: 0.60, max: 0.70, farbe: 'bg-green-500 dark:bg-green-800',     textFarbe: 'text-green-950 dark:text-white',      beschreibung: 'Lockeres Tempo, Fettverbrennung, 80 % des Trainings' },
-  { nr: 3, name: 'Aerobe Zone',         min: 0.70, max: 0.80, farbe: 'bg-yellow-400 dark:bg-yellow-800',   textFarbe: 'text-yellow-950 dark:text-white',     beschreibung: 'Wettkampftempo für lange Distanzen, noch kontrollierbar' },
-  { nr: 4, name: 'Anaerobe Schwelle',   min: 0.80, max: 0.90, farbe: 'bg-orange-500 dark:bg-orange-800',   textFarbe: 'text-orange-950 dark:text-white',     beschreibung: 'Hartes Training, Intervalle, Tempodauerläufe' },
-  { nr: 5, name: 'Maximum',             min: 0.90, max: 1.00, farbe: 'bg-red-700 dark:bg-red-900',         textFarbe: 'text-white dark:text-white',          beschreibung: 'Sprint, Maximalintensität, nur kurze Zeit haltbar' },
-];
+/** UI-Styling pro Zonen-Nummer (Farben werden in der Lib bewusst nicht modelliert). */
+const ZONEN_STYLE: Record<number, { farbe: string; textFarbe: string }> = {
+  1: { farbe: 'bg-green-200 dark:bg-green-800',   textFarbe: 'text-green-950 dark:text-green-50' },
+  2: { farbe: 'bg-green-500 dark:bg-green-800',   textFarbe: 'text-green-950 dark:text-white' },
+  3: { farbe: 'bg-yellow-400 dark:bg-yellow-800', textFarbe: 'text-yellow-950 dark:text-white' },
+  4: { farbe: 'bg-orange-500 dark:bg-orange-800', textFarbe: 'text-orange-950 dark:text-white' },
+  5: { farbe: 'bg-red-700 dark:bg-red-900',       textFarbe: 'text-white dark:text-white' },
+};
 
 export default function HerzfrequenzZonenRechner() {
   const [alter, setAlter] = useState('30');
@@ -29,47 +30,16 @@ export default function HerzfrequenzZonenRechner() {
   const [sportart, setSportart] = useState<Sportart>('laufen');
 
   const ergebnis = useMemo(() => {
-    const a = parseDeutscheZahl(alter);
-    const rp = parseDeutscheZahl(ruhepuls);
-    const eigen = parseDeutscheZahl(hfmaxEigen);
-
-    let hfmax: number;
-    if (eigen > 0) {
-      hfmax = eigen;
-    } else {
-      switch (formel) {
-        case 'standard': hfmax = 220 - a; break;
-        case 'tanaka':   hfmax = 208 - 0.7 * a; break;
-        case 'karvonen': hfmax = 208 - 0.7 * a; break;
-      }
-    }
-
-    const hfStandard = 220 - a;
-    const hfTanaka = 208 - 0.7 * a;
-
-    // Zonen berechnen
-    const zonenBerechnet = ZONEN.map(z => {
-      let min: number;
-      let max: number;
-      if (formel === 'karvonen' && rp > 0) {
-        min = rp + (hfmax - rp) * z.min;
-        max = rp + (hfmax - rp) * z.max;
-      } else {
-        min = hfmax * z.min;
-        max = hfmax * z.max;
-      }
-      return { ...z, bpmMin: min, bpmMax: max };
+    const lib = berechneHerzfrequenzZonen({
+      alter: parseDeutscheZahl(alter),
+      ruhepuls: parseDeutscheZahl(ruhepuls),
+      hfmaxEigen: parseDeutscheZahl(hfmaxEigen),
+      formel,
     });
 
-    return {
-      hfmax,
-      hfStandard,
-      hfTanaka,
-      hfReserve: hfmax - rp,
-      ruhepuls: rp,
-      zonen: zonenBerechnet,
-      formel,
-    };
+    // UI-Styling überlagern (Farben sind nicht Teil der Lib).
+    const zonen = lib.zonen.map(z => ({ ...z, ...ZONEN_STYLE[z.nr] }));
+    return { ...lib, zonen };
   }, [alter, ruhepuls, hfmaxEigen, formel]);
 
   const sportartHinweis = useMemo(() => {
