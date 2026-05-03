@@ -6,37 +6,10 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
-import { berechneEStGrund, berechneSoli } from '@/lib/berechnungen/einkommensteuer';
-import { BBG_RV_MONAT } from '@/lib/berechnungen/brutto-netto';
-
-type Steuerklasse = 'I' | 'II' | 'III' | 'IV' | 'V' | 'VI';
-
-// Vereinfachte Jahreslohnsteuer: nutzt den zentralen 2026-Tarif
-// (§ 32a EStG) aus lib/berechnungen/einkommensteuer.ts und wendet die
-// bekannten Steuerklassen-Multiplikatoren an.
-// TODO: SK V/VI Faktor 1,15 ist eine grobe Näherung. Exakte Werte nach
-// § 39b PAP liegen bei ~1,4–1,6. Für präzise SK-V/VI-Berechnung müsste
-// berechneLohnsteuer aus lohnsteuer.ts verwendet werden. Offener Punkt
-// für zukünftiges Refactoring (nicht Teil von Prompt 95).
-function lohnsteuerJahr(zvE: number, klasse: Steuerklasse): number {
-  const zvEff = klasse === 'III' ? zvE / 2 : zvE;
-  let steuer = berechneEStGrund(Math.max(0, zvEff), 2026);
-  if (klasse === 'III') steuer *= 2;
-  if (klasse === 'V' || klasse === 'VI') steuer *= 1.15;
-  return Math.max(0, steuer);
-}
-
-function bezugsdauerMonate(alter: number, beschMonate: number): number {
-  // Tabelle nach § 147 SGB III
-  if (alter >= 58 && beschMonate >= 48) return 24;
-  if (alter >= 55 && beschMonate >= 36) return 18;
-  if (alter >= 50 && beschMonate >= 30) return 15;
-  if (beschMonate >= 24) return 12;
-  if (beschMonate >= 20) return 10;
-  if (beschMonate >= 16) return 8;
-  if (beschMonate >= 12) return 6;
-  return 0;
-}
+import {
+  berechneArbeitslosengeld,
+  type Steuerklasse,
+} from '@/lib/berechnungen/arbeitslosengeld';
 
 export default function ArbeitslosengeldRechner() {
   const [brutto, setBrutto] = useState('3500');
@@ -46,45 +19,14 @@ export default function ArbeitslosengeldRechner() {
   const [beschDauer, setBeschDauer] = useState('24');
   const [kirchensteuer, setKirchensteuer] = useState(false);
 
-  const ergebnis = useMemo(() => {
-    const b = parseDeutscheZahl(brutto) || 0;
-    const a = parseDeutscheZahl(alter) || 0;
-    const beschMonate = parseDeutscheZahl(beschDauer) || 0;
-
-    // BBG Rentenversicherung 2026 (einheitlich, aus zentraler Lib)
-    const bemessung = Math.min(b, BBG_RV_MONAT);
-
-    // Jahres-Lohnsteuer vereinfacht
-    const jahresBrutto = bemessung * 12;
-    const lstJahr = lohnsteuerJahr(jahresBrutto, klasse);
-    const lstMonat = lstJahr / 12;
-    // Soli mit Freigrenze (§ 4 SolzG): 20.350 € Grundtarif / 40.700 € Splittingtarif,
-    // inkl. Milderungszone. Splittingtarif greift bei SK III.
-    const splittingtarif = klasse === 'III';
-    const soliJahr = berechneSoli(lstJahr, splittingtarif, 2026);
-    const soli = soliJahr / 12;
-    const kiSt = kirchensteuer ? lstMonat * 0.09 : 0;
-
-    // Sozialversicherungspauschale 21 %
-    const svPauschale = bemessung * 0.21;
-
-    const leistungsentgeltMonat = Math.max(0, bemessung - lstMonat - soli - kiSt - svPauschale);
-    const tagesLeistungsentgelt = leistungsentgeltMonat / 30;
-
-    const satz = mitKind ? 0.67 : 0.60;
-    const algTag = tagesLeistungsentgelt * satz;
-    const algMonat = algTag * 30;
-
-    const dauer = bezugsdauerMonate(a, beschMonate);
-    const gesamt = algMonat * dauer;
-
-    // Einfaches Netto (letztes Gehalt) als Vergleich
-    const letztesNetto = Math.max(0, bemessung - lstMonat - soli - kiSt - svPauschale);
-    const verlust = letztesNetto - algMonat;
-    const verlustProzent = letztesNetto > 0 ? (verlust / letztesNetto) * 100 : 0;
-
-    return { algMonat, algTag, dauer, gesamt, letztesNetto, verlust, verlustProzent, bemessung, satz };
-  }, [brutto, klasse, mitKind, alter, beschDauer, kirchensteuer]);
+  const ergebnis = useMemo(() => berechneArbeitslosengeld({
+    brutto: parseDeutscheZahl(brutto) || 0,
+    klasse,
+    mitKind,
+    alter: parseDeutscheZahl(alter) || 0,
+    beschMonate: parseDeutscheZahl(beschDauer) || 0,
+    kirchensteuer,
+  }), [brutto, klasse, mitKind, alter, beschDauer, kirchensteuer]);
 
   const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 
