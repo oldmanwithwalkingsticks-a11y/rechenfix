@@ -57,3 +57,22 @@ export const UNDERSCORE_LIB_HELPER_REGEX = /^_/;
 export function isUnderscoreLibHelper(libBasename: string): boolean {
   return UNDERSCORE_LIB_HELPER_REGEX.test(libBasename);
 }
+
+/**
+ * Datum → ISO-Date-String (YYYY-MM-DD) in LOKALER Zeitzone.
+ *
+ * Workaround für UTC-Shift-Falle: `Date.toISOString().slice(0,10)` konvertiert
+ * nach UTC, was bei CEST/CET (UTC+1/+2) Datums-Strings um 1 Tag verschiebt.
+ * Beispiel: lokal 30.06.2025 00:00 CEST → UTC 29.06.2025 22:00 → toISOString
+ * liefert "2025-06-29". Diese Funktion verwendet stattdessen die lokalen
+ * Date-Komponenten und liefert das korrekte lokale Datum.
+ *
+ * Etabliert als Welle-4-Standard nach M2a kuendigungsfrist-Hotfix
+ * (Commit `0564eb2`, 03.05.2026).
+ */
+export function isoDateLocal(date: Date): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
