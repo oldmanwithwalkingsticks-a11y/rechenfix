@@ -2,6 +2,10 @@
 
 import { useState, useMemo, useEffect } from 'react';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import {
+  berechneElternzeit,
+  MUTTERSCHUTZ_ENDE_TAGE_NACH_GEBURT,
+} from '@/lib/berechnungen/elternzeit';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
@@ -19,12 +23,6 @@ function defaultGeburt(): string {
 
 function fmtKurz(d: Date): string {
   return d.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
-}
-
-function addMonate(d: Date, m: number): Date {
-  const r = new Date(d);
-  r.setMonth(r.getMonth() + m);
-  return r;
 }
 
 function addTage(d: Date, t: number): Date {
@@ -47,13 +45,13 @@ export default function ElternzeitRechner() {
     setGeburt(defaultGeburt());
   }, []);
 
-  // Default-Vorschläge basierend auf Geburt
+  // Default-Vorschläge basierend auf Geburt (UI-Display für Date-Inputs)
   const effP1Beginn = useMemo(() => {
     if (p1Beginn) return p1Beginn;
     if (!geburt) return '';
     const g = new Date(geburt);
     if (isNaN(g.getTime())) return '';
-    return toIso(addTage(g, 56)); // Mutterschutz-Ende: 8 Wochen nach Geburt
+    return toIso(addTage(g, MUTTERSCHUTZ_ENDE_TAGE_NACH_GEBURT));
   }, [geburt, p1Beginn]);
 
   const effP2Beginn = useMemo(() => {
@@ -61,60 +59,13 @@ export default function ElternzeitRechner() {
     return geburt;
   }, [geburt, p2Beginn]);
 
-  const ergebnis = useMemo(() => {
-    const g = new Date(geburt);
-    if (isNaN(g.getTime())) return null;
-
-    const achterGeburtstag = new Date(g);
-    achterGeburtstag.setFullYear(achterGeburtstag.getFullYear() + 8);
-
-    const p1Mon = Math.max(0, Math.min(36, Math.round(parseDeutscheZahl(p1Monate) || 0)));
-    const p2Mon = Math.max(0, Math.min(36, Math.round(parseDeutscheZahl(p2Monate) || 0)));
-
-    const p1B = new Date(effP1Beginn);
-    const p1E = addMonate(p1B, p1Mon);
-    const p2B = new Date(effP2Beginn);
-    const p2E = addMonate(p2B, p2Mon);
-
-    // Anmeldefristen: 7 Wochen vor Beginn in den ersten 3 Lebensjahren, sonst 13 Wochen
-    const dritterGeburtstag = new Date(g);
-    dritterGeburtstag.setFullYear(dritterGeburtstag.getFullYear() + 3);
-
-    const anmeldungP1 = addTage(p1B, p1B < dritterGeburtstag ? -49 : -91);
-    const anmeldungP2 = addTage(p2B, p2B < dritterGeburtstag ? -49 : -91);
-
-    // Kündigungsschutz: ab frühestens 8 Wochen vor Beginn (Anmeldung) bis Ende
-    const kSchutzBeginnP1 = addTage(p1B, -56);
-    const kSchutzBeginnP2 = addTage(p2B, -56);
-    const kSchutzEndeP1 = p1E;
-    const kSchutzEndeP2 = p2E;
-
-    // Gesamtanspruch: 36 Monate pro Elternteil bis zum 8. Geburtstag
-    const gesamtAnspruchProElternteil = 36;
-    const verbleibendP1 = Math.max(0, gesamtAnspruchProElternteil - p1Mon);
-    const verbleibendP2 = Math.max(0, gesamtAnspruchProElternteil - p2Mon);
-
-    // Partnermonate-Check: mind. 2 Monate muss der andere nehmen für volle 14 Monate Elterngeld
-    const partnermonateOk = p1Mon >= 2 && p2Mon >= 2;
-
-    // Mutterschutz-Überlappung-Hinweis: Wenn P1 oder P2 vor Tag 57 nach Geburt beginnt
-    const mutterschutzEnde = addTage(g, 56);
-    const ueberlappung = p1B < mutterschutzEnde || p2B < mutterschutzEnde;
-
-    return {
-      g,
-      achterGeburtstag,
-      p1B, p1E, p1Mon,
-      p2B, p2E, p2Mon,
-      anmeldungP1, anmeldungP2,
-      kSchutzBeginnP1, kSchutzBeginnP2, kSchutzEndeP1, kSchutzEndeP2,
-      verbleibendP1, verbleibendP2,
-      partnermonateOk,
-      mutterschutzEnde,
-      ueberlappung,
-      gesamtMonate: p1Mon + p2Mon,
-    };
-  }, [geburt, effP1Beginn, effP2Beginn, p1Monate, p2Monate]);
+  const ergebnis = useMemo(() => berechneElternzeit({
+    geburt,
+    p1Beginn: effP1Beginn || undefined,
+    p1Monate: parseDeutscheZahl(p1Monate) || 0,
+    p2Beginn: effP2Beginn || undefined,
+    p2Monate: parseDeutscheZahl(p2Monate) || 0,
+  }), [geburt, effP1Beginn, effP2Beginn, p1Monate, p2Monate]);
 
   return (
     <div>
