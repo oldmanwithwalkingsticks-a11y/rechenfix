@@ -2,6 +2,10 @@
 
 import { useState, useMemo } from 'react';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import {
+  berechneEhegattenunterhalt,
+  type EhegattenunterhaltMethode,
+} from '@/lib/berechnungen/ehegattenunterhalt';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
@@ -10,27 +14,7 @@ import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 type Art = 'trennung' | 'nachehelich';
-type Methode = 'bundesweit' | 'sueddeutsch';
-
-// Selbstbehalt gegenüber Ehegatten 2026 (Düsseldorfer Tabelle, Stand DT 2026):
-// 1.600 € — wenn der Pflichtige erwerbstätig ist
-// 1.475 € — wenn der Pflichtige nicht erwerbstätig ist
-// Die Differenzierung gilt für Trennungsunterhalt UND nachehelichen
-// Unterhalt gleichermaßen — Achse ist die Erwerbstätigkeit, NICHT die
-// Trennungsphase. Korrigiert mit Prompt 149c (P1-A10): vorher fälschlich
-// Trennung=1600 / nachehelich=1475 mit erfundener Begründung.
-const SELBSTBEHALT_ERWERBSTAETIG = 1600;
-const SELBSTBEHALT_NICHT_ERWERBSTAETIG = 1475;
-
-// Quoten für die Differenzmethode
-// Bundesweit: 3/7 (BGH-Standard, ≈ 42,857 %)
-// Süddeutsch: 0,45 (Süddeutsche Leitlinien, Stand 2026, OLG-Bezirke
-// Bamberg, Karlsruhe, München, Nürnberg, Stuttgart, Zweibrücken)
-const QUOTE_BUNDESWEIT = 3 / 7;
-const QUOTE_SUEDDEUTSCH = 0.45;
-
-// Erwerbstätigenbonus: 1/10 wird vor der 3/7-Methode vom Erwerbseinkommen abgezogen
-// Damit ergibt sich faktisch die gängige Quote. Wir verwenden die klassische 3/7-Differenzmethode.
+type Methode = EhegattenunterhaltMethode;
 
 export default function EhegattenunterhaltRechner() {
   const [art, setArt] = useState<Art>('trennung');
@@ -41,41 +25,14 @@ export default function EhegattenunterhaltRechner() {
   const [kuBeruecksichtigt, setKuBeruecksichtigt] = useState<boolean>(false);
   const [kindesunterhalt, setKindesunterhalt] = useState<string>('400');
 
-  const result = useMemo(() => {
-    const n1 = parseDeutscheZahl(netto1) || 0;
-    const n2 = parseDeutscheZahl(netto2) || 0;
-    const ku = kuBeruecksichtigt ? 0 : (parseDeutscheZahl(kindesunterhalt) || 0);
-
-    const bereinigt1 = Math.max(0, n1 - ku);
-    const differenz = bereinigt1 - n2;
-    const quote = methode === 'sueddeutsch' ? QUOTE_SUEDDEUTSCH : QUOTE_BUNDESWEIT;
-    const berechnet = Math.max(0, Math.round(differenz * quote));
-
-    const selbstbehalt = pflichtigerErwerbstaetig
-      ? SELBSTBEHALT_ERWERBSTAETIG
-      : SELBSTBEHALT_NICHT_ERWERBSTAETIG;
-    const maxUnterhalt = Math.max(0, bereinigt1 - selbstbehalt);
-    const unterhalt = Math.min(berechnet, maxUnterhalt);
-
-    const rest1 = bereinigt1 - unterhalt;
-    const gesamt2 = n2 + unterhalt;
-    const gekappt = berechnet > maxUnterhalt;
-
-    return {
-      n1,
-      n2,
-      ku,
-      bereinigt1,
-      differenz,
-      berechnet,
-      unterhalt,
-      rest1,
-      gesamt2,
-      selbstbehalt,
-      gekappt,
-      quote,
-    };
-  }, [netto1, netto2, kuBeruecksichtigt, kindesunterhalt, pflichtigerErwerbstaetig, methode]);
+  const result = useMemo(() => berechneEhegattenunterhalt({
+    netto1: parseDeutscheZahl(netto1) || 0,
+    netto2: parseDeutscheZahl(netto2) || 0,
+    kindesunterhalt: parseDeutscheZahl(kindesunterhalt) || 0,
+    kuBeruecksichtigt,
+    pflichtigerErwerbstaetig,
+    methode,
+  }), [netto1, netto2, kuBeruecksichtigt, kindesunterhalt, pflichtigerErwerbstaetig, methode]);
 
   const fmtEuro = (n: number) =>
     n.toLocaleString('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
