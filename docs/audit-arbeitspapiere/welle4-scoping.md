@@ -181,3 +181,22 @@ Kurze Vorschau, damit das Welle-4-Scoping nicht den Eindruck erweckt, die Lib-Ex
 **Welle-5-Trigger:** Empfehlung: nach Welle 4. Aber kein harter Trigger — Welle 5 könnte auch in Themen-Sprints aufgeteilt werden (z. B. Wohnen-Block-C-Audit zieht mietpreisbremse + VFE + grundsteuer mit). Karsten-Entscheidung beim Welle-4-Abschluss.
 
 **Geschätzter Welle-5-Aufwand:** ~21 h (6 Slugs × ~3,5 h Durchschnitt).
+
+### 7b. Welle-5-Track-B: Drift-Fix-Items aus Welle-4-Tail
+
+Vier Drift-Fix-Items aus den Welle-4-Modulen M2c/M3a/M4, gesammelt im Welle-4-Tail-Backlog. Charakteristik anders als Track-A (Lib-Extraktionen): hier sind die Libs bereits da und verifiziert, Fix betrifft die Lib-Logik selbst.
+
+| # | Item | Lib | Welle-4-Modul-Befund | Aufwand-Schätzung |
+|---|---|---|---|---|
+| 1 | Stkl V/VI-Faktor 1,15-Approximation (TODO im Code, echter PAP § 39b ~1,4–1,6) | arbeitslosengeld | M2c (Refactor `0301e7b` + Verify `8af742c`) | ~1 h (Cross-Check gegen `verify-tarif-2026.ts`-Stkl-Logik, ggf. Konsum von `berechneLohnsteuerJahr` aus lohnsteuer.ts statt Inline-Approximation) |
+| 2 | KiSt 9 % pauschal über alle Bundesländer statt 8 % BY/BW | arbeitslosengeld | M2c (Verify-Header `8af742c`) | ~30 Min (Bundesland-Lookup über `kirchensteuersatzFuer` aus einkommensteuer.ts einbauen) |
+| 3 | DT-SB ehegattenunterhalt hard-coded statt aus duesseldorfer-tabelle.ts gezogen | ehegattenunterhalt | M3a (Refactor `d8f4ac1`, L-36-Vorgriff im Lib-Header) | ~1 h (DT-Lib `SELBSTBEHALT_EHEGATTE_ERWERBSTAETIG`/`_NICHT_ERWERBSTAETIG`-Export hinzufügen + Konsumption + Verify-Cross-Comp aktivieren) |
+| 4 | `berechneGrenzsteuersatz` Math.floor-Artefakt (diskret 0/100 statt mathematisch 42/45 %) | steuerprogression | M4 (Verify `cee3207`, L-34-Sanity-Check Cluster C+D) | ~1 h (Refactor: Δ ≥ 100 € statt Δ = 1 € ODER analytische Tarif-Formel-Ableitung; Tests anpassen weg von Lib-Realität-Snapshot zu mathematischer Erwartung) |
+
+**Welle-5-Track-B-Gesamt-Aufwand:** ~3,5 h.
+
+**Reihenfolge-Empfehlung:** Items 1 + 2 + 4 als gemeinsamer Lohnsteuer-/ALG-Tail-Fix-Sprint (zusammen ~2,5 h, alle in Lohnsteuer-/ALG-/Tarif-Domäne, gemeinsame Cross-Check-Quellen `verify-tarif-2026.ts` + `berechneLohnsteuerJahr`). Item 3 separat als Mini-Sprint (~1 h, isolierte DT-Lib-Erweiterung).
+
+**Track-A vs. Track-B:** Welle-5 läuft in zwei parallelen Tracks. Track-A ist Lib-Extraktion (6 Slugs aus Sektion 7), Track-B ist Drift-Fix (4 Items hier). Karsten entscheidet beim Welle-5-Start die Reihenfolge oder Verschachtelung beider Tracks.
+
+**Welle-5-Gesamt-Aufwand (Track-A + Track-B):** ~24,5 h (~21 h Lib-Extraktion + ~3,5 h Drift-Fix).
