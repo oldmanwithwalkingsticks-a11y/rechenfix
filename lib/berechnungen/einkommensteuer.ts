@@ -25,6 +25,45 @@ export const WK_PAUSCHALE_AN_2026 = 1230;
 // immer berechneEStGrund verwenden, nicht manuell abziehen.
 export const GRUNDFREIBETRAG_2026 = 12348;
 
+/**
+ * Tarif-Konstanten 2026 für die Einkommensteuer-Zonen nach § 32a Abs. 1 EStG
+ * i.d.F. StÄndG 2024.
+ *
+ * Quellen:
+ *   - § 32a EStG: https://www.gesetze-im-internet.de/estg/__32a.html
+ *   - Implementiert in berechneESt2026 (Z. 70–89, Inline-Konstanten)
+ *
+ * Stand: 01.01.2026.
+ *
+ * Verwendung: SSOT für analytische Tarif-Berechnungen (z. B.
+ * berechneGrenzsteuersatz in steuerprogression.ts). berechneESt2026 selbst
+ * nutzt aktuell noch Inline-Konstanten — Refactor auf TARIF_2026-Konsum ist
+ * Welle-2-Pattern und außerhalb Welle-5-Track-B-Scope (B4, 04.05.2026).
+ */
+export const TARIF_2026 = {
+  /** Grundfreibetrag (Zone 1-Ende = Zone 2-Beginn). */
+  gfb: 12348,
+  /** Zone 2-Ende = Zone 3-Beginn (Marginal-Rate steigt linear 14 → 24 %). */
+  z2_ende: 17799,
+  /** Zone 3-Ende = Zone 4-Beginn (Marginal-Rate steigt linear 24 → 42 %). */
+  z3_ende: 69878,
+  /** Zone 4-Ende = Zone 5-Beginn (Marginal-Rate konstant 42 %, dann 45 %). */
+  z4_ende: 277825,
+  /** Zone 2-Polynom: ESt = (z2_a · y + z2_b) · y, y = (zvE − gfb) / 10.000. */
+  z2_a: 914.51,
+  z2_b: 1400,
+  /** Zone 3-Polynom: ESt = (z3_a · z + z3_b) · z + z3_c, z = (zvE − z2_ende) / 10.000. */
+  z3_a: 173.10,
+  z3_b: 2397,
+  z3_c: 1034.87,
+  /** Zone 4-Geraden: ESt = z4_m · zvE − z4_b. */
+  z4_m: 0.42,
+  z4_b: 11135.63,
+  /** Zone 5-Geraden: ESt = z5_m · zvE − z5_b. */
+  z5_m: 0.45,
+  z5_b: 19470.38,
+} as const;
+
 export function kirchensteuersatzFuer(bundesland: Bundesland): 8 | 9 {
   return KIRCHENSTEUER_8_LAENDER.includes(bundesland) ? 8 : 9;
 }

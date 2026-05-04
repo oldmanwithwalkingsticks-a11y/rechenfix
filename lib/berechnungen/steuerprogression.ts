@@ -2,6 +2,7 @@ import {
   berechneEStGrund,
   berechneSoli as berechneSoliZentral,
   berechneKirchensteuerByBundesland,
+  TARIF_2026,
   type Bundesland,
 } from './einkommensteuer';
 
@@ -49,11 +50,41 @@ function berechneKiSt(est: number, kirchensteuer: boolean, bundesland: Bundeslan
   return berechneKirchensteuerByBundesland(est, bundesland);
 }
 
-// Grenzsteuersatz: Steuer auf den nächsten Euro
+/**
+ * Berechnet den Grenzsteuersatz (Marginal-Rate) für ein zu versteuerndes
+ * Einkommen gemäß § 32a Abs. 1 EStG 2026 — analytisch aus den Tarif-
+ * Polynom-Koeffizienten abgeleitet, nicht über numerische Δ-Approximation.
+ *
+ * Vor B4 (Welle 5 Track-B, 04.05.2026): nutzte Δ-Trick mit +1-Step, der
+ * wegen Math.floor-Rundung in berechneESt2026 immer 0 oder 1 € Differenz
+ * lieferte → ×100 = 0 % oder 100 % (M4-Befund Welle 4 — einziger echter
+ * Lib-Bug). Analytische Ableitung eliminiert das Math.floor-Artefakt.
+ *
+ * Splittingtarif: ESt(zvE) = 2 · ESt_Grund(zvE/2) ⇒ dESt/dzvE
+ *   = 2 · ESt_Grund'(zvE/2) · (1/2) = ESt_Grund'(zvE/2). Marginal-Rate im
+ *   Splittingtarif ist identisch zur Grund-Marginal-Rate bei zvE/2.
+ *
+ * @param zvE Zu versteuerndes Einkommen (€/Jahr)
+ * @param splitting Splittingtarif (Verheiratete, Zusammenveranlagung)
+ * @returns Marginal-Rate in Prozent (0–45)
+ */
 function berechneGrenzsteuersatz(zvE: number, splitting: boolean): number {
-  const estJetzt = berechneEStMitSplitting(zvE, splitting);
-  const estNaechster = berechneEStMitSplitting(zvE + 1, splitting);
-  return (estNaechster - estJetzt) * 100; // als Prozent
+  const T = TARIF_2026;
+  const x = splitting ? zvE / 2 : zvE;
+  if (x <= T.gfb) return 0;
+  if (x <= T.z2_ende) {
+    // Zone 2: ESt = (z2_a · y + z2_b) · y, y = (x − gfb) / 10000
+    // dESt/dx = (2 · z2_a · y + z2_b) / 10000 ⇒ × 100 für Prozent
+    const y = (x - T.gfb) / 10000;
+    return (2 * T.z2_a * y + T.z2_b) / 100;
+  }
+  if (x <= T.z3_ende) {
+    // Zone 3: ESt = (z3_a · z + z3_b) · z + z3_c, z = (x − z2_ende) / 10000
+    const z = (x - T.z2_ende) / 10000;
+    return (2 * T.z3_a * z + T.z3_b) / 100;
+  }
+  if (x <= T.z4_ende) return T.z4_m * 100; // Zone 4: konstant 42 %
+  return T.z5_m * 100;                      // Zone 5: konstant 45 %
 }
 
 function berechneEStMitSplitting(zvE: number, splitting: boolean): number {
