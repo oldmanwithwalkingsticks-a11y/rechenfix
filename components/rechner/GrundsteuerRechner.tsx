@@ -2,6 +2,11 @@
 
 import { useState, useMemo } from 'react';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import {
+  berechneGrundsteuer,
+  type GrundsteuerModell,
+  type Grundstuecksart,
+} from '@/lib/berechnungen/grundsteuer';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
@@ -9,15 +14,7 @@ import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
-type Modell = 'bund' | 'bayern' | 'bw';
-type Grundstuecksart = 'efh' | 'etw' | 'miet' | 'unbebaut';
-
-function mietePerM2(baujahr: number): number {
-  if (baujahr < 1949) return 6.50;
-  if (baujahr <= 1978) return 7.00;
-  if (baujahr <= 2000) return 7.50;
-  return 8.50;
-}
+type Modell = GrundsteuerModell;
 
 export default function GrundsteuerRechner() {
   const [modell, setModell] = useState<Modell>('bund');
@@ -28,42 +25,19 @@ export default function GrundsteuerRechner() {
   const [baujahr, setBaujahr] = useState('1990');
   const [hebesatz, setHebesatz] = useState('500');
 
-  const ergebnis = useMemo(() => {
-    const brw = parseDeutscheZahl(bodenrichtwert) || 0;
-    const gfl = parseDeutscheZahl(grundflaeche) || 0;
-    const wfl = parseDeutscheZahl(wohnflaeche) || 0;
-    const bj = parseDeutscheZahl(baujahr) || 2000;
-    const hs = parseDeutscheZahl(hebesatz) || 0;
-
-    let grundsteuerwert = 0;
-    let messbetrag = 0;
-
-    if (modell === 'bund') {
-      const bodenwert = gfl * brw;
-      let gebaeudewert = 0;
-      if (art !== 'unbebaut') {
-        const miete = mietePerM2(bj);
-        const jahresrohertrag = wfl * miete * 12;
-        gebaeudewert = jahresrohertrag * 15; // Kapitalisierungsfaktor vereinfacht
-      }
-      grundsteuerwert = bodenwert + gebaeudewert;
-      const steuermesszahl = art === 'unbebaut' ? 0.00034 : 0.00031;
-      messbetrag = grundsteuerwert * steuermesszahl;
-    } else if (modell === 'bayern') {
-      const aequivalenz = gfl * 0.04 + wfl * 0.50;
-      grundsteuerwert = aequivalenz;
-      messbetrag = art === 'unbebaut' ? aequivalenz : aequivalenz * 0.70;
-    } else {
-      grundsteuerwert = gfl * brw;
-      messbetrag = art === 'unbebaut' ? grundsteuerwert * 0.0013 : grundsteuerwert * 0.00091;
-    }
-
-    const grundsteuerJahr = messbetrag * (hs / 100);
-    const quartal = grundsteuerJahr / 4;
-    const monat = grundsteuerJahr / 12;
-
-    return { grundsteuerwert, messbetrag, grundsteuerJahr, quartal, monat };
-  }, [modell, art, bodenrichtwert, grundflaeche, wohnflaeche, baujahr, hebesatz]);
+  const ergebnis = useMemo(
+    () =>
+      berechneGrundsteuer({
+        modell,
+        art,
+        bodenrichtwert: parseDeutscheZahl(bodenrichtwert) || 0,
+        grundflaeche: parseDeutscheZahl(grundflaeche) || 0,
+        wohnflaeche: parseDeutscheZahl(wohnflaeche) || 0,
+        baujahr: parseDeutscheZahl(baujahr) || 2000,
+        hebesatz: parseDeutscheZahl(hebesatz) || 0,
+      }),
+    [modell, art, bodenrichtwert, grundflaeche, wohnflaeche, baujahr, hebesatz],
+  );
 
   const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
   const fmtEuro2 = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
