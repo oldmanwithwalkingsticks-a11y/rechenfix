@@ -76,23 +76,85 @@ cases.push(
   { name: 'B-03 splittingVergleich undefined bei Splittingtarif',    actual: b3!.splittingVergleich === undefined ? 1 : 0, expected: 1 },
 );
 
-// === Cluster C: Grenzsteuersatz § 32a EStG (L-35-Diskrepanz dokumentiert) ===
+// === Cluster C: Grenzsteuersatz § 32a EStG (analytisch, B4-Refactor 04.05.26) ===
 //
-// **L-35-Diskrepanz Lib-Realität vs. mathematische Erwartung:**
-// `berechneGrenzsteuersatz` differenziert zwischen `est(zvE)` und `est(zvE+1)`.
-// Da `berechneEStGrund` intern `Math.floor` verwendet, ergibt das diskrete
-// Werte 0 oder 100 (statt der mathematischen Marginal-Rate 42 % oder 45 %).
-// Tests verifizieren die Lib-Realität, nicht die mathematische Wahrheit.
-// Refactor-Kandidat für Welle-4-Closure-Backlog: berechneGrenzsteuersatz
-// mit Δ ≥ 100 € statt Δ = 1 €, oder analytische Tarif-Formel-Ableitung.
+// **Welle 5 Track-B B4 (04.05.2026):** berechneGrenzsteuersatz Δ-Trick durch
+// analytische Marginal-Rate-Ableitung aus § 32a Abs. 1 EStG 2026 i.d.F.
+// StÄndG 2024 ersetzt. Tests prüfen jetzt die mathematisch korrekten
+// Zonen-Werte (Zone-Mitten + Stetigkeits-Cases an Übergängen) statt der
+// alten 0/100-Snapshot-Werte aus dem Math.floor-Artefakt.
+//
+// Tarif-Konstanten aus TARIF_2026 (einkommensteuer.ts):
+//   Zone 1: zvE ≤ 12.348 → 0 %
+//   Zone 2: 12.349–17.799 → linear 14 → 24 % via (2·914,51·y + 1400) / 100
+//   Zone 3: 17.800–69.878 → linear 24 → 42 % via (2·173,10·z + 2397) / 100
+//   Zone 4: 69.879–277.825 → konstant 42 %
+//   Zone 5: ab 277.826 → konstant 45 %
+//
+// Erwartungswerte mathematisch berechnet (nicht Lib-Snapshot, nicht
+// Hand-Schätzung — Cross-Check via Polynom-Ableitung). Tolerance 0,05 %
+// für Floating-Precision an Zonen-Übergängen.
 
-const c1 = berechneSteuerprogression(0, false, false);
-const c2 = berechneSteuerprogression(100_000, false, false);
-const c3 = berechneSteuerprogression(300_000, false, false);
+// Zone 1: unter und auf GFB → 0 %
+const cz1a = berechneSteuerprogression(8_000, false, false);
+const cz1b = berechneSteuerprogression(12_348, false, false);
 cases.push(
-  { name: 'C-01 zvE 0 (Grundfreibetrag): grenzsteuersatz = 0',                    actual: c1!.grenzsteuersatz, expected: 0, tolerance: 0.01 },
-  { name: 'C-02 zvE 100k (Zone 4): grenzsteuersatz = 0 (Lib-Realität floor-Δ)',  actual: c2!.grenzsteuersatz, expected: 0, tolerance: 0.01 },
-  { name: 'C-03 zvE 300k (Zone 5): grenzsteuersatz = 100 (Lib-Realität floor-Δ)',actual: c3!.grenzsteuersatz, expected: 100, tolerance: 0.01 },
+  { name: 'C-X1 zvE 8.000 (Zone 1, unter GFB): grenz = 0 %',           actual: cz1a!.grenzsteuersatz, expected: 0, tolerance: 0.01 },
+  { name: 'C-X2 zvE 12.348 (Zone 1-Ende = GFB): grenz = 0 %',           actual: cz1b!.grenzsteuersatz, expected: 0, tolerance: 0.01 },
+);
+
+// Zone 2: linear 14 → 24 %
+// y(12349) = 0.0001 → (2·914.51·0.0001 + 1400) / 100 = 14.0018 %
+// y(15000) = 0.2652 → (2·914.51·0.2652 + 1400) / 100 = 18.851 %
+// y(17799) = 0.5451 → (2·914.51·0.5451 + 1400) / 100 = 23.970 %
+const cz2a = berechneSteuerprogression(12_349, false, false);
+const cz2b = berechneSteuerprogression(15_000, false, false);
+const cz2c = berechneSteuerprogression(17_799, false, false);
+cases.push(
+  { name: 'C-X3 zvE 12.349 (Zone 2-Start, knapp über GFB): grenz ≈ 14 %', actual: cz2a!.grenzsteuersatz, expected: 14.0018, tolerance: 0.05 },
+  { name: 'C-X4 zvE 15.000 (Zone 2-Mitte): grenz ≈ 18,85 %',              actual: cz2b!.grenzsteuersatz, expected: 18.851, tolerance: 0.05 },
+  { name: 'C-X5 zvE 17.799 (Zone 2-Ende = Zone 3-Start): grenz ≈ 24 %',   actual: cz2c!.grenzsteuersatz, expected: 23.970, tolerance: 0.05 },
+);
+
+// Zone 3: linear 24 → 42 %
+// z(17800) = 0.0001 → (2·173.10·0.0001 + 2397) / 100 = 23.970 % (Stetigkeit zu Z2-Ende)
+// z(50000) = 3.2201 → (2·173.10·3.2201 + 2397) / 100 = 35.118 %
+// z(69878) = 5.2079 → (2·173.10·5.2079 + 2397) / 100 = 42.000 %
+const cz3a = berechneSteuerprogression(17_800, false, false);
+const cz3b = berechneSteuerprogression(50_000, false, false);
+const cz3c = berechneSteuerprogression(69_878, false, false);
+cases.push(
+  { name: 'C-X6 zvE 17.800 (Zone 3-Start, Stetigkeit zu Z2): grenz ≈ 24 %', actual: cz3a!.grenzsteuersatz, expected: 23.970, tolerance: 0.05 },
+  { name: 'C-X7 zvE 50.000 (Zone 3-Mitte): grenz ≈ 35,12 %',                actual: cz3b!.grenzsteuersatz, expected: 35.118, tolerance: 0.05 },
+  { name: 'C-X8 zvE 69.878 (Zone 3-Ende = Zone 4-Start): grenz ≈ 42 %',     actual: cz3c!.grenzsteuersatz, expected: 42.000, tolerance: 0.05 },
+);
+
+// Zone 4: konstant 42 %
+const cz4a = berechneSteuerprogression(69_879, false, false);
+const cz4b = berechneSteuerprogression(100_000, false, false);
+const cz4c = berechneSteuerprogression(277_825, false, false);
+cases.push(
+  { name: 'C-X9 zvE 69.879 (Zone 4-Start, Stetigkeit zu Z3): grenz = 42 %',  actual: cz4a!.grenzsteuersatz, expected: 42, tolerance: 0.05 },
+  { name: 'C-X10 zvE 100.000 (Zone 4-Mitte): grenz = 42 %',                  actual: cz4b!.grenzsteuersatz, expected: 42, tolerance: 0.05 },
+  { name: 'C-X11 zvE 277.825 (Zone 4-Ende): grenz = 42 %',                   actual: cz4c!.grenzsteuersatz, expected: 42, tolerance: 0.05 },
+);
+
+// Zone 5: konstant 45 % (Sprung 42 → 45 % bei zvE > 277.825)
+const cz5a = berechneSteuerprogression(277_826, false, false);
+const cz5b = berechneSteuerprogression(500_000, false, false);
+cases.push(
+  { name: 'C-X12 zvE 277.826 (Zone 5-Start, Sprung 42→45 %): grenz = 45 %',  actual: cz5a!.grenzsteuersatz, expected: 45, tolerance: 0.05 },
+  { name: 'C-X13 zvE 500.000 (Zone 5): grenz = 45 %',                        actual: cz5b!.grenzsteuersatz, expected: 45, tolerance: 0.05 },
+);
+
+// Splittingtarif: Marginal-Rate(splitting, zvE) = Marginal-Rate(grund, zvE/2)
+// zvE 100k Splitting → ESt'(50k) = 35.118 % (Zone 3-Mitte)
+// zvE 300k Splitting → ESt'(150k) = 42 % (Zone 4)
+const cz6a = berechneSteuerprogression(100_000, true, false);
+const cz6b = berechneSteuerprogression(300_000, true, false);
+cases.push(
+  { name: 'C-X14 zvE 100k Splitting: grenz = grenz(50k Grund) ≈ 35,12 %',    actual: cz6a!.grenzsteuersatz, expected: 35.118, tolerance: 0.05 },
+  { name: 'C-X15 zvE 300k Splitting: grenz = grenz(150k Grund) = 42 %',      actual: cz6b!.grenzsteuersatz, expected: 42, tolerance: 0.05 },
 );
 
 // === Cluster D: Durchschnittssteuersatz Strukturtest ===
