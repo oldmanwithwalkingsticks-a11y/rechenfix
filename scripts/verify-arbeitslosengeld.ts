@@ -45,11 +45,11 @@ import {
 } from '../lib/berechnungen/arbeitslosengeld';
 import { BBG_RV_MONAT } from '../lib/berechnungen/brutto-netto';
 import {
-  berechneEStGrund,
   berechneKirchensteuerByBundesland,
   kirchensteuersatzFuer,
   type Bundesland,
 } from '../lib/berechnungen/einkommensteuer';
+import { berechneLohnsteuerJahr } from '../lib/berechnungen/lohnsteuer';
 
 type TestCase = {
   name: string;
@@ -209,13 +209,15 @@ cases.push(
 );
 
 // E-02: brutto=1200 Klasse I mitKind, alter=40, beschMonate=24, kirche=false
-//   bemessung = 1200, jahresBrutto = 14.400 (Zone 2 § 32a EStG)
-//   Soll-Wert für ESt aus berechneEStGrund (verifiziert via verify-tarif-2026 etc.)
-//   verwenden — KEIN Hand-Rechnung der Zone-2-Formel (vermeidet Floating-Precision-
-//   Drift wie in M2c-Initial-Run aufgetreten).
+//   bemessung = 1200, jahresBrutto = 14.400.
+//   Welle-5 Track-B B2: L-36 Cross-Lib-Computation gegen berechneLohnsteuerJahr
+//   aus lohnsteuer.ts (PAP § 39b voll-konform via verify-lohnsteuer-pap.ts
+//   bzw. verify-tarif-2026.ts). PAP zieht intern §-9a-WK + §-10c-SO + Vorsorge
+//   ab → bei brutto 14.400 Stkl I liegt zvE deutlich unter Grundfreibetrag,
+//   lstJahr ≈ 0.
 
 const e2 = calc({ brutto: 1200, klasse: 'I', mitKind: true, alter: 40, beschMonate: 24 });
-const e2_lstJahrSoll = berechneEStGrund(14_400, 2026); // unabhängig verifizierte Lib
+const e2_lstJahrSoll = berechneLohnsteuerJahr(14_400, 1, 0); // PAP-Cross-Comp
 const e2_lstMonatSoll = e2_lstJahrSoll / 12;
 const e2_svPauschale = 1200 * SV_PAUSCHALE_PROZENT;
 const e2_letztesNettoSoll = 1200 - e2_lstMonatSoll - 0 - 0 - e2_svPauschale; // soli=0, kiSt=0
@@ -223,7 +225,7 @@ const e2_algMonatSoll = (e2_letztesNettoSoll / 30) * 0.67 * 30;
 cases.push(
   { name: 'E-02 brutto=1200 Klasse I mitKind: bemessung',     actual: e2.bemessung,    expected: 1200 },
   { name: 'E-02 satz = 0,67',                                  actual: e2.satz,         expected: 0.67, tolerance: 0.0001 },
-  { name: 'E-02 letztesNetto = 1200 − lstMonat(EStG-Lib) − 252', actual: e2.letztesNetto, expected: e2_letztesNettoSoll, tolerance: 0.005 },
+  { name: 'E-02 letztesNetto = 1200 − lstMonat(PAP) − 252',    actual: e2.letztesNetto, expected: e2_letztesNettoSoll, tolerance: 0.005 },
   { name: 'E-02 algMonat = letztesNetto/30 × 0,67 × 30',       actual: e2.algMonat,     expected: e2_algMonatSoll, tolerance: 0.005 },
 );
 
@@ -240,29 +242,42 @@ cases.push(
   { name: 'F-03 algTag × 30 = algMonat',                       actual: f1.algTag * 30,               expected: f1.algMonat, tolerance: 0.005 },
 );
 
-// === Cluster G: berechneVereinfachteLohnsteuerJahr-Strukturtests ===
+// === Cluster G: berechneVereinfachteLohnsteuerJahr-PAP-Strukturtests ===
 //
-// Klasse I: keine Modifikation (Faktor 1)
-// Klasse III: zvE wird halbiert, ESt mal 2 (Splittingtarif-Imitation)
-// Klasse V/VI: ESt × 1,15 (L-35-Approximation)
-//
-// Test mit zvE = 24.000 € (Zone 3):
-//   est_klasse_I = est(24.000) — call lib direkt
-// Wir testen, dass:
-//   lstKl_III = 2 × est(12.000) — und 12.000 ≤ Grundfreibetrag → est=0
-//     also lstKl_III = 0 (echter Effekt von Splittingtarif bei niedrigem zvE)
-//   lstKl_V = est(24.000) × 1,15
+// Welle-5 Track-B B2: Helper delegiert auf berechneLohnsteuerJahr (PAP-Voll).
+// L-36 Cross-Lib-Computation gegen lohnsteuer.ts (verifiziert via
+// verify-lohnsteuer-pap.ts + verify-tarif-2026.ts). Die alte 1,15-Approximation
+// für V/VI ist durch echte PAP-Tabellen ersetzt — strukturelle Tests:
+// Stkl V > Stkl I bei mittlerem Brutto (V hat keinen Grundfreibetrag),
+// Stkl III < Stkl I bei mittlerem Brutto (Splittingtarif).
+// Roman→Numeric-Mapping wird durch den Helper-Wrapper transparent gemacht.
 
-const lstI  = berechneVereinfachteLohnsteuerJahr(24_000, 'I');
-const lstIV = berechneVereinfachteLohnsteuerJahr(24_000, 'IV');
-const lstIII = berechneVereinfachteLohnsteuerJahr(24_000, 'III');
-const lstV  = berechneVereinfachteLohnsteuerJahr(24_000, 'V');
-const lstVI = berechneVereinfachteLohnsteuerJahr(24_000, 'VI');
+const lstI  = berechneVereinfachteLohnsteuerJahr(36_000, 'I');
+const lstIV = berechneVereinfachteLohnsteuerJahr(36_000, 'IV');
+const lstIII = berechneVereinfachteLohnsteuerJahr(36_000, 'III');
+const lstV  = berechneVereinfachteLohnsteuerJahr(36_000, 'V');
+const lstVI = berechneVereinfachteLohnsteuerJahr(36_000, 'VI');
+
+// L-36 Cross-Computation gegen lohnsteuer.ts direkt
 cases.push(
-  { name: 'G-01 Klasse I = Klasse IV (kein Faktor)',           actual: lstI - lstIV, expected: 0, tolerance: 0.005 },
-  { name: 'G-02 Klasse III: zvE/2=12000 ≤ GFB → 2×0 = 0',      actual: lstIII,       expected: 0, tolerance: 0.005 },
-  { name: 'G-03 Klasse V = Klasse I × 1,15 (Approximation)',  actual: lstV,         expected: lstI * 1.15, tolerance: 0.005 },
-  { name: 'G-04 Klasse VI = Klasse V (gleicher Faktor 1,15)',  actual: lstVI - lstV, expected: 0, tolerance: 0.005 },
+  { name: 'G-01 Helper-Wrapper Stkl I ↔ PAP berechneLohnsteuerJahr', actual: lstI,  expected: berechneLohnsteuerJahr(36_000, 1, 0), tolerance: 0.005 },
+  { name: 'G-01b Stkl IV ↔ PAP',                                     actual: lstIV, expected: berechneLohnsteuerJahr(36_000, 4, 0), tolerance: 0.005 },
+  { name: 'G-01c Stkl V ↔ PAP',                                      actual: lstV,  expected: berechneLohnsteuerJahr(36_000, 5, 0), tolerance: 0.005 },
+);
+
+// Strukturelle PAP-Eigenschaften (an § 39b verankert)
+cases.push(
+  { name: 'G-02 PAP Stkl I = Stkl IV (gleicher Tarif)',         actual: lstI - lstIV,     expected: 0, tolerance: 0.005 },
+  { name: 'G-03 PAP Stkl III < Stkl I (Splittingtarif günstig)',actual: lstIII < lstI ? 1 : 0, expected: 1 },
+  { name: 'G-04 PAP Stkl V > Stkl I (kein Grundfreibetrag)',    actual: lstV > lstI ? 1 : 0,   expected: 1 },
+  { name: 'G-05 PAP Stkl VI ≥ Stkl V',                          actual: lstVI >= lstV ? 1 : 0, expected: 1 },
+  { name: 'G-06 PAP Stkl III ≥ 0 (nicht-negativ)',              actual: lstIII >= 0 ? 1 : 0,   expected: 1 },
+);
+
+// Edge: brutto = 0 → lstJahr = 0 (alle Stkl)
+cases.push(
+  { name: 'G-07 Edge brutto=0: Stkl I → 0',                     actual: berechneVereinfachteLohnsteuerJahr(0, 'I'),  expected: 0 },
+  { name: 'G-07 Edge brutto=0: Stkl V → 0',                     actual: berechneVereinfachteLohnsteuerJahr(0, 'V'),  expected: 0 },
 );
 
 // === Cluster H: Edge-Cases ===
