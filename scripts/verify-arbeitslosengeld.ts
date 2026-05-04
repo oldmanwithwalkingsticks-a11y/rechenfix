@@ -42,10 +42,14 @@ import {
   ALG_SATZ_OHNE_KIND,
   ALG_SATZ_MIT_KIND,
   SV_PAUSCHALE_PROZENT,
-  KIRCHENSTEUER_ANTEIL_PAUSCHAL,
 } from '../lib/berechnungen/arbeitslosengeld';
 import { BBG_RV_MONAT } from '../lib/berechnungen/brutto-netto';
-import { berechneEStGrund } from '../lib/berechnungen/einkommensteuer';
+import {
+  berechneEStGrund,
+  berechneKirchensteuerByBundesland,
+  kirchensteuersatzFuer,
+  type Bundesland,
+} from '../lib/berechnungen/einkommensteuer';
 
 type TestCase = {
   name: string;
@@ -63,6 +67,7 @@ const calc = (params: {
   alter?: number;
   beschMonate?: number;
   kirchensteuer?: boolean;
+  bundesland?: Bundesland;
 }) => berechneArbeitslosengeld({
   brutto: params.brutto,
   klasse: params.klasse ?? 'I',
@@ -70,6 +75,7 @@ const calc = (params: {
   alter: params.alter ?? 40,
   beschMonate: params.beschMonate ?? 24,
   kirchensteuer: params.kirchensteuer ?? false,
+  bundesland: params.bundesland,
 });
 
 // === Cluster A: Konstanten gegen SGB III §§ 149, 153 ===
@@ -78,7 +84,54 @@ cases.push(
   { name: 'A-01 ALG_SATZ_OHNE_KIND (§ 149 SGB III)',           actual: ALG_SATZ_OHNE_KIND,          expected: 0.60, tolerance: 0.0001 },
   { name: 'A-02 ALG_SATZ_MIT_KIND (§ 149 SGB III)',            actual: ALG_SATZ_MIT_KIND,           expected: 0.67, tolerance: 0.0001 },
   { name: 'A-03 SV_PAUSCHALE_PROZENT (§ 153 Abs. 1 SGB III)',  actual: SV_PAUSCHALE_PROZENT,        expected: 0.21, tolerance: 0.0001 },
-  { name: 'A-04 KIRCHENSTEUER_ANTEIL_PAUSCHAL',                 actual: KIRCHENSTEUER_ANTEIL_PAUSCHAL, expected: 0.09, tolerance: 0.0001 },
+);
+
+// === Cluster A2: KiSt-Bundesland-Differenzierung (Welle-5 Track-B B1) ===
+//
+// L-36 Cross-Lib-Computation: Erwartung über `berechneKirchensteuerByBundesland`
+// (transitive Abdeckung via verify-tarif-2026.ts). KiSt = lstMonat × Satz/100,
+// wobei Satz = 8 für BY/BW, 9 sonst.
+//
+// Strukturtest pro BL: aktiviere KiSt mit fixem Brutto, vergleiche Lib-Output
+// mit Cross-Lib-Erwartung gleicher Eingaben.
+
+const a2_brutto = 3500;
+const a2_lstJahr = berechneVereinfachteLohnsteuerJahr(Math.min(a2_brutto, BBG_RV_MONAT) * 12, 'I');
+const a2_lstMonat = a2_lstJahr / 12;
+const a2_for = (bl: Bundesland) => calc({ brutto: a2_brutto, kirchensteuer: true, bundesland: bl });
+const a2_kiStExpected = (bl: Bundesland) => berechneKirchensteuerByBundesland(a2_lstMonat, bl);
+
+const a2_by = a2_for('Bayern');
+const a2_bw = a2_for('Baden-Württemberg');
+const a2_nw = a2_for('Nordrhein-Westfalen');
+const a2_be = a2_for('Berlin');
+
+cases.push(
+  { name: 'A2-01 Bayern: kistSatzFuer = 8',                    actual: kirchensteuersatzFuer('Bayern'), expected: 8, tolerance: 0 },
+  { name: 'A2-02 Baden-Württemberg: kistSatzFuer = 8',         actual: kirchensteuersatzFuer('Baden-Württemberg'), expected: 8, tolerance: 0 },
+  { name: 'A2-03 Nordrhein-Westfalen: kistSatzFuer = 9',       actual: kirchensteuersatzFuer('Nordrhein-Westfalen'), expected: 9, tolerance: 0 },
+  { name: 'A2-04 Berlin: kistSatzFuer = 9',                    actual: kirchensteuersatzFuer('Berlin'), expected: 9, tolerance: 0 },
+);
+
+// L-36 Cross-Lib: KiSt-Differenzierung im algMonat-Output.
+// Bei BY (8 %): kiSt-Abzug ist niedriger → letztesNetto und algMonat höher
+// als bei NRW (9 %). Strukturtest: BY-algMonat > NRW-algMonat.
+cases.push(
+  { name: 'A2-05 BY (8 %): algMonat > NRW (9 %) — niedrigere KiSt → höheres Netto', actual: a2_by.algMonat > a2_nw.algMonat ? 1 : 0, expected: 1, tolerance: 0 },
+  { name: 'A2-06 BY = BW (gleiche 8 %): algMonat identisch',   actual: a2_by.algMonat,                expected: a2_bw.algMonat, tolerance: 0.005 },
+  { name: 'A2-07 NRW = Berlin (gleiche 9 %): algMonat identisch', actual: a2_nw.algMonat,             expected: a2_be.algMonat, tolerance: 0.005 },
+);
+
+// L-36 strukturell: letztesNetto = bemessung − lstMonat − soli − kiSt − svPauschale.
+// Bei NRW (kirchensteuer=true): kiSt = berechneKirchensteuerByBundesland(lstMonat, NRW).
+// Wir ziehen das Cross-Comp-Erwartete kiSt aus der unabhängig verifizierten
+// einkommensteuer.ts (verify-tarif-2026.ts) und prüfen, dass der Lib-Output
+// die identische KiSt im Differenzfeld zwischen letztesNetto-Pfad reflektiert.
+
+const a2_kein = calc({ brutto: a2_brutto, kirchensteuer: false });
+cases.push(
+  { name: 'A2-08 KiSt-Differenz NRW = berechneKirchensteuerByBundesland(NRW)', actual: a2_kein.letztesNetto - a2_nw.letztesNetto, expected: a2_kiStExpected('Nordrhein-Westfalen'), tolerance: 0.005 },
+  { name: 'A2-09 KiSt-Differenz BY = berechneKirchensteuerByBundesland(BY)',  actual: a2_kein.letztesNetto - a2_by.letztesNetto, expected: a2_kiStExpected('Bayern'),               tolerance: 0.005 },
 );
 
 // === Cluster B: § 147 Abs. 2 SGB III bezugsdauerMonate-Tabelle ===
