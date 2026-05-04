@@ -8,6 +8,14 @@
 
 ---
 
+## Welle 6 — TARIF_2026-Konsumption (04.05.2026, LAUFEND)
+
+Sammel-Block für Welle-6-Aktivitäten. Trigger: Welle 5 KOMPLETT am 04.05.2026, technische Schuld aus B4 (berechneESt2026 nutzt Inline-Konstanten statt TARIF_2026-Konsum) als kompakte Single-Item-Welle konsolidieren.
+
+- Welle-6-Scoping ✅ 04.05.26 — siehe , Single-Item W6.1 (berechneESt2026 → TARIF_2026-Konsum). Geschätzt ~1–1,5 h, drei-stufig (Pre-Phase + Lib-Refactor + Verify-Sanity-Run). Out-of-Scope: berechneESt2025, andere Tarif-Inline-Konstanten, L-35-Sammelblock. Strategie-Entscheidungen: E1 Pure-Single-Item, E2 L-34-inverse-Pflicht, E3 L-37 als Doppel-Sanity-Check, E4 Verify-Migration optional, E5 atomic 3-Commit-Struktur, E6 Aufwand-Erwartung Faktor-1,5× = ~60–90 Min.
+
+---
+
 ## Welle 5 KOMPLETT (01.05.2026 – 04.05.2026)
 
 Welle 5 vollständig abgeschlossen am 04.05.2026. Drei Sub-Sprints:
