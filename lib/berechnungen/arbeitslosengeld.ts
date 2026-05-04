@@ -18,11 +18,6 @@
  * nicht identisch):
  *   - § 155 SGB III Nebeneinkommen-Schwelle 165 €/Mon NICHT modelliert
  *     (Konfig erwähnt es, Lib hat keine Anrechnungs-Logik).
- *   - Stkl V/VI-Lohnsteuer-Faktor ×1,15 ist eine grobe Näherung
- *     (echter PAP § 39b liegt bei ~1,4–1,6). TODO im ursprünglichen
- *     Component-Code (siehe Pre-Refactor ArbeitslosengeldRechner Z. 17–20).
- *     Verify-Tests fokussieren bewusst auf Klassen ohne diesen Faktor (I, IV);
- *     V/VI-Tests sind als "Approximation-touched" markiert.
  *
  * Welle-4 M2c — Lib-Extraktion aus ArbeitslosengeldRechner.tsx (03.05.2026).
  * Component zuvor PARTIAL-KEINE-LIB: importierte einkommensteuer + brutto-netto
@@ -35,15 +30,25 @@
  *   einkommensteuer.ts (BY/BW: 8 %, übrige 14 BL: 9 %). Interface um
  *   `bundesland?: Bundesland` erweitert (Default 'Nordrhein-Westfalen').
  *   SSOT-Pattern nach CLAUDE.md Z. 147–154.
+ *
+ * Welle-5 Track-B B2 (04.05.2026) — Stkl V/VI-PAP-Konsum (Variante a):
+ *   `berechneVereinfachteLohnsteuerJahr`-Helper (mit V/VI-Approximation
+ *   ×1,15) entfernt; ersetzt durch `berechneLohnsteuerJahr` aus
+ *   `lohnsteuer.ts` (PAP § 39b 2026 voll-konform via berechneLohnsteuerPAP2026
+ *   → ITZBund-XML). Transitive Verify-Kette via `verify-tarif-2026.ts`
+ *   bzw. `verify-lohnsteuer-pap.ts`. Roman-Stkl-Strings (`'I'..'VI'`)
+ *   intern auf numerische Stkl (`1..6`) gemappt — Component-API
+ *   bleibt unverändert. L-36-Pattern in Verify-Cluster „V/VI-Faktoren"
+ *   angewandt.
  */
 
 import {
-  berechneEStGrund,
   berechneSoli,
   berechneKirchensteuerByBundesland,
   type Bundesland,
 } from './einkommensteuer';
 import { BBG_RV_MONAT } from './brutto-netto';
+import { berechneLohnsteuerJahr } from './lohnsteuer';
 
 export type Steuerklasse = 'I' | 'II' | 'III' | 'IV' | 'V' | 'VI';
 
@@ -115,21 +120,29 @@ export function bezugsdauerMonate(alter: number, beschMonate: number): number {
 }
 
 /**
- * Vereinfachte Jahres-Lohnsteuer für ALG-Berechnung.
- *
- * **L-35-Anti-Pattern (dokumentiert):** Faktor 1,15 für Stkl V/VI ist eine
- * grobe Näherung. Der echte PAP § 39b liegt bei ~1,4–1,6. Pre-Welle-4-TODO
- * im ursprünglichen Component-Code; ein Refactor auf
- * `berechneLohnsteuerJahr` aus `lohnsteuer.ts` würde die exakte PAP-Berechnung
- * liefern. Bewusst nicht in M2c-Scope (M2c ist Verify-Backfill, nicht
- * Lib-Korrektur).
+ * Mapping von Roman-Stkl-Strings (Component-API) auf numerische Stkl
+ * (lohnsteuer.ts-API, intern PAP-konform).
  */
-export function berechneVereinfachteLohnsteuerJahr(zvE: number, klasse: Steuerklasse): number {
-  const zvEff = klasse === 'III' ? zvE / 2 : zvE;
-  let steuer = berechneEStGrund(Math.max(0, zvEff), 2026);
-  if (klasse === 'III') steuer *= 2;
-  if (klasse === 'V' || klasse === 'VI') steuer *= 1.15;
-  return Math.max(0, steuer);
+const KLASSE_TO_NUMERIC: Record<Steuerklasse, 1 | 2 | 3 | 4 | 5 | 6> = {
+  I: 1,
+  II: 2,
+  III: 3,
+  IV: 4,
+  V: 5,
+  VI: 6,
+};
+
+/**
+ * Jahres-Lohnsteuer-Wrapper für ALG-Berechnung.
+ *
+ * Welle-5 Track-B B2: konsumiert `berechneLohnsteuerJahr` aus `lohnsteuer.ts`
+ * (PAP § 39b 2026 voll-konform via berechneLohnsteuerPAP2026 → ITZBund-XML),
+ * mappt Roman-Stkl auf numerisch. `jahresfreibetrag = 0` → keine eingearbeiteten
+ * Lohnsteuerfreibeträge (PAP zieht Pauschalen § 9a/§ 10c/Vorsorge intern ab).
+ */
+export function berechneVereinfachteLohnsteuerJahr(jahresBrutto: number, klasse: Steuerklasse): number {
+  if (jahresBrutto <= 0) return 0;
+  return berechneLohnsteuerJahr(jahresBrutto, KLASSE_TO_NUMERIC[klasse], 0);
 }
 
 export function berechneArbeitslosengeld(eingabe: ArbeitslosengeldEingabe): ArbeitslosengeldErgebnis {
