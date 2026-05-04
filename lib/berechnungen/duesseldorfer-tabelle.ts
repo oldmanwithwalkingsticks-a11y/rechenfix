@@ -60,6 +60,11 @@ export const SELBSTBEHALT_2026 = {
   elternunterhalt_pflichtiger: 2650,
   /** NEU 2026: Elternunterhalt — Ehegatte des pflichtigen Kindes. */
   elternunterhalt_ehegatte: 2120,
+  /** Ehegattenunterhalt erwerbstätig (Trennungs- + nachehelich gleich,
+   *  149c-Korrektur 28.04.2026). BGB §§ 1361, 1569 ff. */
+  ehegatte_erwerbstaetig: 1600,
+  /** Ehegattenunterhalt nicht erwerbstätig. BGB §§ 1361, 1569 ff. */
+  ehegatte_nicht_erwerbstaetig: 1475,
 } as const;
 
 /** Anteil des oberhalb des Selbstbehalts liegenden Einkommens, der anrechnungsfrei bleibt. */

@@ -20,14 +20,22 @@
  *   - § 1573 BGB Anschlussunterhalt (Übergangs-Logik) NICHT modelliert
  *   - § 1574 BGB Erwerbsobliegenheit (fiktives Einkommen) NICHT modelliert
  *   - § 1577 BGB Anrechnung eigenes Vermögen NICHT modelliert
- *   - DT-Selbstbehalt-Werte sind als Konstanten hard-coded, NICHT aus
- *     `duesseldorfer-tabelle.ts` gezogen (DT-Lib hat aktuell keinen
- *     `SELBSTBEHALT_EHEGATTE`-Export — falls künftig hinzugefügt, hier
- *     auf Cross-Lib-Computation umstellen, L-36-Vorgriff)
  *
  * Welle-4 M3a — Lib-Extraktion aus EhegattenunterhaltRechner.tsx (03.05.2026).
  * Component zuvor KEINE-LIB mit 255 LoC inline-Logik.
+ *
+ * Welle-5 Track-B B3 (04.05.2026) — DT-SB-Konsumption:
+ *   Inline-Konstanten `SELBSTBEHALT_ERWERBSTAETIG = 1600` und
+ *   `SELBSTBEHALT_NICHT_ERWERBSTAETIG = 1475` entfernt; ersetzt durch
+ *   `SELBSTBEHALT_2026.ehegatte_erwerbstaetig` und `.ehegatte_nicht_erwerbstaetig`
+ *   aus `duesseldorfer-tabelle.ts`. SSOT-konsolidiert: SB-Werte stammen
+ *   fachlich aus DT 2026 (Stand 01.01.2026), gehören in die DT-Lib. Schließt
+ *   M3a-L-36-Vorgriff (DT-Lib-`SELBSTBEHALT_EHEGATTE`-Export jetzt vorhanden).
+ *   Naming folgt der DT-Object-Property-Konvention (snake_case in
+ *   `SELBSTBEHALT_2026`).
  */
+
+import { SELBSTBEHALT_2026 } from './duesseldorfer-tabelle';
 
 /** Berechnungsmethode für die Differenzunterhalts-Quote. */
 export type EhegattenunterhaltMethode = 'bundesweit' | 'sueddeutsch';
@@ -37,12 +45,6 @@ export const QUOTE_BUNDESWEIT = 3 / 7;
 /** Süddeutsche Leitlinien (45 %), gilt in OLG-Bezirken Bamberg, Karlsruhe,
  *  München, Nürnberg, Stuttgart, Zweibrücken. */
 export const QUOTE_SUEDDEUTSCH = 0.45;
-
-/** Selbstbehalt gegenüber Ehegatten 2026 (Düsseldorfer Tabelle):
- *  1.600 € wenn der Pflichtige erwerbstätig ist. */
-export const SELBSTBEHALT_ERWERBSTAETIG = 1600;
-/** Selbstbehalt gegenüber Ehegatten 2026: 1.475 € wenn nicht erwerbstätig. */
-export const SELBSTBEHALT_NICHT_ERWERBSTAETIG = 1475;
 
 export interface EhegattenunterhaltEingabe {
   /** Netto-Einkommen Pflichtiger (€/Monat) */
@@ -98,8 +100,8 @@ export function berechneEhegattenunterhalt(eingabe: EhegattenunterhaltEingabe): 
   const berechnet = Math.max(0, Math.round(differenz * quote));
 
   const selbstbehalt = pflichtigerErwerbstaetig
-    ? SELBSTBEHALT_ERWERBSTAETIG
-    : SELBSTBEHALT_NICHT_ERWERBSTAETIG;
+    ? SELBSTBEHALT_2026.ehegatte_erwerbstaetig
+    : SELBSTBEHALT_2026.ehegatte_nicht_erwerbstaetig;
   const maxUnterhalt = Math.max(0, bereinigt1 - selbstbehalt);
   const unterhalt = Math.min(berechnet, maxUnterhalt);
 
