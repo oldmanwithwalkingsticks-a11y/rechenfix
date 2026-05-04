@@ -8,6 +8,14 @@
 
 ---
 
+## Welle 5 Track-A Block-C — Wohnen-Sprint (04.05.2026, LAUFEND)
+
+Sammel-Block für Welle-5-Track-A-Block-C-Aktivitäten. Trigger: Welle-5-Track-B KOMPLETT am 04.05.2026, Wohnen-Themen-Bündelung als erster Track-A-Sprint priorisiert. Block-C-Scope: 3 Lib-Extraktionen (C1 mietpreisbremse, C2 grundsteuer, C3 vorfaelligkeitsentschaedigung). Track-A-Tail (firmenwagen + afa + riester, ~10 h) bleibt für späteren Steuer-Block-Sprint.
+
+- Welle-5-Track-A-Block-C-Scoping ✅ 04.05.26 — siehe `welle5-track-a-block-c-scoping.md`, 3 Lib-Extraktionen C1–C3 priorisiert (Komplexitäts-Order). Geschätzt 3–4 atomic Sessions, ~10–11 h gesamt. Out-of-Scope: Track-A-Tail, andere Welle-5-Items, 152c, AdSense-Re-Review-Folge-Aktionen. Strategie-Entscheidungen: E1 Block-C-Scope = 3 Wohnen-Slugs, E2 Komplexitäts-Order, E3 Welle-2-Pattern fünf-stufig pro Slug, E4 L-37-Pflicht in Pre-Phase, E5 cases[]-Verify-Pattern, E6 Externe-Quellen-Pflicht im JSDoc, E7 L-30-Sweep-Tail pro Slug, E8 Lehren L-30 bis L-37 übernehmen.
+
+---
+
 ## Welle 5 Track-B — Drift-Fix-Backlog (04.05.2026, KOMPLETT)
 
 Sammel-Block für Welle-5-Track-B-Aktivitäten. Trigger: Welle 4 KOMPLETT am 04.05.2026, 4 Drift-Fix-Items aus M2c/M3a/M4-Tail eskaliert. Track-B-Scope: 4 atomic Mini-Module (B1 KiSt-BL arbeitslosengeld, B2 Stkl V/VI arbeitslosengeld, B3 DT-SB ehegattenunterhalt, B4 Grenzsteuersatz steuerprogression). Track-A (6 Lib-Extraktionen, ~21 h) bleibt für separate Sessions.
