@@ -4,7 +4,15 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 28.04.2026
+**Stand:** 04.05.2026
+
+---
+
+## Welle 5 Track-B — Drift-Fix-Backlog (04.05.2026, LAUFEND)
+
+Sammel-Block für Welle-5-Track-B-Aktivitäten. Trigger: Welle 4 KOMPLETT am 04.05.2026, 4 Drift-Fix-Items aus M2c/M3a/M4-Tail eskaliert. Track-B-Scope: 4 atomic Mini-Module (B1 KiSt-BL arbeitslosengeld, B2 Stkl V/VI arbeitslosengeld, B3 DT-SB ehegattenunterhalt, B4 Grenzsteuersatz steuerprogression). Track-A (6 Lib-Extraktionen, ~21 h) bleibt für separate Sessions.
+
+- Welle-5-Track-B-Scoping ✅ 04.05.26 — siehe `welle5-track-b-scoping.md`, 4 Mini-Module B1–B4 priorisiert (Komplexitäts-Order). Geschätzt 4 atomic Sessions, ~3–3,5 h gesamt. Out-of-Scope: Track-A, neue Verify-Scripts, neue Lib-Extraktionen, 152c, übrige 9 Welle-4-L-35-Diskrepanzen. Strategie-Entscheidungen: E1 Komplexitäts-Order statt Domain-Bündelung, E2 B2-Variante in Pre-Phase entscheiden, E3 DT-Lib-Refactor mit zwei neuen Konstanten-Exports, E4 B4 analytische Tarif-Formel statt Δ-Trick, E6 L-34 inverse Anwendung (Fix-Korrektheit sanity-checken), E7 L-36 Pflicht in B2+B3.
 
 ---
 
