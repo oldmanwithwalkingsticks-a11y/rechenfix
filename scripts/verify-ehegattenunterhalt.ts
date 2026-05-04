@@ -32,9 +32,8 @@ import {
   berechneEhegattenunterhalt,
   QUOTE_BUNDESWEIT,
   QUOTE_SUEDDEUTSCH,
-  SELBSTBEHALT_ERWERBSTAETIG,
-  SELBSTBEHALT_NICHT_ERWERBSTAETIG,
 } from '../lib/berechnungen/ehegattenunterhalt';
+import { SELBSTBEHALT_2026 } from '../lib/berechnungen/duesseldorfer-tabelle';
 
 type TestCase = {
   name: string;
@@ -62,12 +61,16 @@ const calc = (params: {
 });
 
 // === Cluster A: Konstanten gegen DT 2026 + BGH-Standard + Süd-OLG ===
+//
+// Welle-5 Track-B B3: SB-Konstanten konsumieren jetzt aus duesseldorfer-tabelle.ts
+// (SELBSTBEHALT_2026.ehegatte_erwerbstaetig / .ehegatte_nicht_erwerbstaetig).
+// Tests gegen DT-Lib direkt — L-36 Cross-Lib-Computation.
 
 cases.push(
-  { name: 'A-01 QUOTE_BUNDESWEIT = 3/7 (BGH-Standard)',                  actual: QUOTE_BUNDESWEIT,                expected: 3 / 7, tolerance: 0.0001 },
-  { name: 'A-02 QUOTE_SUEDDEUTSCH = 0,45 (Süd-OLG-Leitlinien)',          actual: QUOTE_SUEDDEUTSCH,               expected: 0.45,  tolerance: 0.0001 },
-  { name: 'A-03 SELBSTBEHALT_ERWERBSTAETIG = 1.600 € (DT 2026)',         actual: SELBSTBEHALT_ERWERBSTAETIG,      expected: 1600,  tolerance: 0 },
-  { name: 'A-04 SELBSTBEHALT_NICHT_ERWERBSTAETIG = 1.475 € (DT 2026)',   actual: SELBSTBEHALT_NICHT_ERWERBSTAETIG, expected: 1475,  tolerance: 0 },
+  { name: 'A-01 QUOTE_BUNDESWEIT = 3/7 (BGH-Standard)',                                 actual: QUOTE_BUNDESWEIT,                              expected: 3 / 7, tolerance: 0.0001 },
+  { name: 'A-02 QUOTE_SUEDDEUTSCH = 0,45 (Süd-OLG-Leitlinien)',                         actual: QUOTE_SUEDDEUTSCH,                             expected: 0.45,  tolerance: 0.0001 },
+  { name: 'A-03 DT-Lib SELBSTBEHALT_2026.ehegatte_erwerbstaetig = 1.600 €',             actual: SELBSTBEHALT_2026.ehegatte_erwerbstaetig,      expected: 1600,  tolerance: 0 },
+  { name: 'A-04 DT-Lib SELBSTBEHALT_2026.ehegatte_nicht_erwerbstaetig = 1.475 €',       actual: SELBSTBEHALT_2026.ehegatte_nicht_erwerbstaetig, expected: 1475,  tolerance: 0 },
 );
 
 // === Cluster B: 3/7-Methode bundesweit (BGH-Standard) ===
@@ -144,6 +147,11 @@ cases.push(
 
 // === Cluster D: Selbstbehalt-Klemme ===
 //
+// Welle-5 Track-B B3: SB-Werte werden via L-36 Cross-Lib-Computation aus
+// SELBSTBEHALT_2026.ehegatte_erwerbstaetig (1.600 €) bzw.
+// SELBSTBEHALT_2026.ehegatte_nicht_erwerbstaetig (1.475 €) gezogen
+// statt hard-coded.
+//
 // n1=2000, n2=0, erwt=true: differenz=2000; berechnet=round(2000 × 3/7)=round(857,143)=857
 //   max = 2000 − 1600 = 400; unterhalt = min(857, 400) = 400 (gekappt)
 // n1=2000, n2=0, erwt=false (SB 1475): max = 525; unterhalt = min(857, 525) = 525 (gekappt)
@@ -155,13 +163,13 @@ const d1 = calc({ n1: 2000, n2: 0, erwt: true });
 cases.push(
   { name: 'D-01 2000/0 erwt: berechnet=857, max=400, unterhalt=400 (gekappt)', actual: d1.unterhalt,  expected: 400 },
   { name: 'D-01: gekappt = true',                                actual: d1.gekappt ? 1 : 0, expected: 1 },
-  { name: 'D-01: selbstbehalt = 1600 (erwerbstätig)',            actual: d1.selbstbehalt, expected: 1600 },
+  { name: 'D-01: selbstbehalt = DT.ehegatte_erwerbstaetig (L-36)', actual: d1.selbstbehalt, expected: SELBSTBEHALT_2026.ehegatte_erwerbstaetig },
 );
 
 const d2 = calc({ n1: 2000, n2: 0, erwt: false });
 cases.push(
   { name: 'D-02 2000/0 NICHT erwt: max = 525, unterhalt = 525 (gekappt)', actual: d2.unterhalt, expected: 525 },
-  { name: 'D-02: selbstbehalt = 1475 (nicht erwerbstätig)',      actual: d2.selbstbehalt, expected: 1475 },
+  { name: 'D-02: selbstbehalt = DT.ehegatte_nicht_erwerbstaetig (L-36)', actual: d2.selbstbehalt, expected: SELBSTBEHALT_2026.ehegatte_nicht_erwerbstaetig },
 );
 
 const d3 = calc({ n1: 1700, n2: 0, erwt: true });
@@ -175,9 +183,10 @@ cases.push(
   { name: 'D-04: gekappt = true (berechnet > 0)',                actual: d4.gekappt ? 1 : 0, expected: 1 },
 );
 
-const d5 = calc({ n1: 1600, n2: 0, erwt: true });
+// L-36 Cross-Comp: n1 = SELBSTBEHALT genau auf der Schwelle → max=0, unterhalt=0
+const d5 = calc({ n1: SELBSTBEHALT_2026.ehegatte_erwerbstaetig, n2: 0, erwt: true });
 cases.push(
-  { name: 'D-05 1600/0 erwt (genau SB): max=0, unterhalt=0',     actual: d5.unterhalt, expected: 0 },
+  { name: 'D-05 n1=DT.ehegatte_erwerbstaetig (genau SB): max=0, unterhalt=0', actual: d5.unterhalt, expected: 0 },
 );
 
 // === Cluster E: Edge-Cases ===
