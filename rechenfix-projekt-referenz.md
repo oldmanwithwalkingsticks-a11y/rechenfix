@@ -19,7 +19,7 @@ Rechenfix.de ist ein deutschsprachiges Online-Rechner-Portal mit aktuell **170 k
 - **KI:** Anthropic Claude API (für "Fix erklärt"-Feature)
 - **Monetarisierung:** AdSense + Affiliate (Awin-Netzwerk)
 
-## Rechner-Inventar (Stand 26.04.2026)
+## Rechner-Inventar (Stand 04.05.2026)
 
 **170 eigenständige Rechner in 9 Kategorien** (Quelle: SSOT-Scan via `grep -c "slug: '" lib/rechner-config/*.ts`):
 
@@ -338,7 +338,7 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
 
 **Amtliche Gegenprobe:** [BMF-Steuerrechner](https://www.bmf-steuerrechner.de/ekst/) mit identischen Inputs.
 
-## Status April 2026 (Stand 28.04.2026)
+## Status Mai 2026 (Stand 04.05.2026)
 
 **Abgeschlossen:**
 - ✅ Sprint 1 — Tarif-Audit (Prompts 81–84a)
@@ -392,12 +392,12 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
 
 **Welle-Status:**
 - **Welle 1 (Hoch-Risiko):** ✅ ABGESCHLOSSEN April 2026 (Stufen 1+2+1.5+3+4a+4b)
-- **Welle 2 (Mittel-Risiko):** ✅ **KOMPLETT ABGESCHLOSSEN 26.04.2026**
+- **Welle 2 (Mittel-Risiko):** ✅ KOMPLETT ABGESCHLOSSEN 26.04.2026
   - Stufe 1 Auto ✅ (Prompts 130–132.6, 23.04.2026)
   - Stufe 2 Gesundheit ✅ (Prompts 140–144b)
   - Stufe 3 Wohnen ✅ (Prompts 147–148c, 25.+26.04.2026, 25 Rechner)
   - Stufe 3 Arbeit ✅ (Block A 149a-d + 150a-d, Block B 152a + 153a/b/b-fix + 153c Lib-Audit, 26.04.2026, 14 Commits)
-- **Welle 3 (Validation-Sweep + geparkte Items + AdSense-Reparatur):** **9/10 abgeschlossen (Stand 30.04.2026)** — 1 geparkt (152c)
+- **Welle 3 (Validation-Sweep + geparkte Items + AdSense-Reparatur):** ✅ KOMPLETT 30.04.2026 — 9/10 abgeschlossen, 1 geparkt (152c)
   - ✅ 152b feiertage.ts SSOT (27.04.2026)
   - ✅ 154 LazySection-Removal (AdSense-Reparatur, 27.04.2026)
   - ✅ 155 /ueber-uns ausgebaut (28.04.2026)
@@ -407,8 +407,29 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
   - ✅ 157 P3-Sammelrest (25 Items in 6 atomaren Konfig-Commits 157a–f, 28.04.2026)
   - ✅ P3-B1 ueberstunden-Netto-Refactor mit Steuerklasse-Input (Commit 7c2426b, 28.04.2026)
   - 🅿️ 152c Pendlerpauschalen-SSOT — geparkt, Trigger: Verabschiedung der 45-Cent-Reform
-  - ✅ **Validation-Sweep KOMPLETT (30.04.2026)** — 7/7 Module abgeschlossen: M1 Backtick-Hook ✅, M2 Norm-Zitate ✅, M3 SSOT-Konsumption ✅ (L-30 + L-31), M4 Meta-Routen ✅, M5 Affiliate-Konsistenz ✅, M6 FAQ-Drift ✅, M7 A11y-Stichprobe ✅ (0 Regressions-Treffer auf 44/44 Runs)
-- **Welle 4 (Verify-Coverage-Backfill):** **angefangen 01.05.2026 — Scoping ✅** unter [docs/audit-arbeitspapiere/welle4-scoping.md](docs/audit-arbeitspapiere/welle4-scoping.md). 6 Module priorisiert (M0 Anomalie-Klärung, M1 Trivial-Verify, M2 Sozial-/Familien-Recht, M3 Edge-Case-Komplex, M4 Lohnsteuer-Tail, M5 Bilanz-Closure). Geschätzt ~22 neue Verify-Scripts, ~16–22 h auf 4–6 Sessions. Out-of-Scope: 6 Lib-Extractions auf Welle 5 ausgelagert (firmenwagen, afa, riester, mietpreisbremse, VFE, grundsteuer); ~62 OFFEN-MENGEN + ~14 OFFEN-MARKT bewusst ohne Verify-Sprint. Eingangs-Inventar 30.04.26 unter [docs/audit-arbeitspapiere/welle4-inventar-pre-scoping.md](docs/audit-arbeitspapiere/welle4-inventar-pre-scoping.md).
+  - ✅ Validation-Sweep KOMPLETT (30.04.2026) — 7/7 Module abgeschlossen
+- **Welle 4 (Verify-Coverage-Backfill):** ✅ **KOMPLETT 04.05.2026** — 6 Module M0–M5 abgeschlossen. Real-Aufwand ~14 h vs. 16–22 h Scoping. **51 ABGEDECKT-Slugs**, 13 dokumentierte L-35-Diskrepanzen Konfig-vs-Lib (alle akzeptiert, kein Fix-Sprint im Verify-Modul). **Lehren L-32 bis L-36 etabliert:** L-32 Multi-Line-Konsumenten-Sweep (M0b), L-33 TestCase-Helper-Type, L-34 Sanity-Check vor Drift-Behauptung, L-35 Lib-Realität schlägt Konfig-Erklärtext, L-36 Cross-Lib-Computation in Test-Erwartungen. Closure-Commit `574237c`. M4 hat einen einzigen echten Lib-Bug aus Welle 4 gefunden (Math.floor-Artefakt in `berechneGrenzsteuersatz`) — als Track-B-Item B4 später in Welle 5 gefixt.
+- **Welle 5 (Drift-Fix + Welle-2-Lib-Extraktionen):** ✅ **KOMPLETT 04.05.2026** — 10 Items über drei Sub-Sprints. Real-Aufwand ~10,25 h vs. 24,5 h Scoping = **Faktor 2,4× schneller**. Coverage 51→57 (+6).
+  - **Track-B (4 Drift-Fixes, ~3 h):** B1 KiSt-BL-Differenzierung arbeitslosengeld → `berechneKirchensteuerByBundesland`-Cross-Lib (`5fde1af` + `36d89ae`); B2 Stkl V/VI-PAP-Konsum arbeitslosengeld → `berechneLohnsteuerJahr`-Cross-Lib (`497cc74` + `e7887ae`); B3 DT-SB ehegattenunterhalt → `SELBSTBEHALT_2026.ehegatte_*`-DT-Lib-Konsum (`84259a1` + `a499122`); B4 Math.floor-Artefakt steuerprogression → `TARIF_2026`-analytische-Marginal-Rate (`8fc8956` + `b1e4cf0` + `3560d58`). Alle 4 Welle-4-Tail-L-35-Diskrepanzen aufgelöst. M4-einziger-echter-Lib-Bug aus Welle 4 geschlossen.
+  - **Track-A-Block-C (3 Wohnen-Lib-Extraktionen, ~3,5 h):** C1 mietpreisbremse (`9a3706c` + `1a8ae76` + `ec51537` + `f3fcaed`), C2 grundsteuer (`184e608` + `7d6a0d9` + `c3c5097` + `79309dc`), C3 vorfaelligkeitsentschaedigung (`d31cba3` + `f146e01` + `0538690` + `d53ffa1`). Welle-2-Pattern fünf-stufig etabliert. **C1-Lehre etabliert** (Lib-Funktions-Boundary aus Bestand-Component lesen, nicht aus Norm-Erklärtexten ableiten).
+  - **Track-A-Tail (3 Steuer-Lib-Extraktionen, ~3,75 h):** D1 firmenwagen (`c18c41d` + `012ef6f` + `0cd4b8a` + `e255eff`), D2 afa (`40badef` + `fd9069d` + `e93b6b9` + `8ed7437`), D3 riester (`67f438c` + `976a313` + `3050658` + `4d83ca5`). **User-Eingabe-Pattern für externe Werte 6/6 Datenpunkte bestätigt** (Mietspiegel + Hebesatz + Bodenrichtwert + Pfandbrief-Rendite + Listenpreis + Nutzungsdauer + Vorjahres-Brutto).
+  - **Lehren etabliert:** L-37 (SSOT-Werte-Lookup vor Scoping-Schreiben, Track-B-B4-Pre-Phase, Mini-Commit `a4da2aa`); L-38 (User-Eingabe-Pattern für externe Werte in Track-A-Slugs, Tail-Closure, Mini-Commit `a4da2aa`). Drei Pre-Phase-Pflichten konsolidiert: L-37 + C1-Lehre + L-38.
+  - **Drift-Bilanz Welle 5 gesamt:** 4 echte Lib-Bugs/Approximationen gefixt (Track-B), 4 Sekundär-Drifts in L-34-inverse-Anwendung gefangen (B2: 4 in E-02 + Cluster G), 0 echte Lib-Drifts in 6 Welle-2-Lib-Extraktionen (refactor-only), 36 L-35-Diskrepanzen dokumentiert (15 Block-C + 21 Tail) — Welle-7-Sammelblock-Kandidat.
+- **Welle 6 (TARIF_2026-Konsumption):** **LAUFEND seit 04.05.2026** — Single-Item-Welle, schließt B4-technische-Schuld ab. Scoping ✅ (Commit `f5cbde8`). W6.1 berechneESt2026 → TARIF_2026-Konsum (Welle-2-Refactor-only, drei-stufig: Pre-Phase + Lib-Refactor + Verify-Sanity-Run). Aufwand-Erwartung ~60–90 Min. Pflicht-Disziplin: L-37 Doppel-Sanity-Check (Inline-Werte vs. TARIF_2026 identisch verifizieren), L-34 inverse (0 Sekundär-Drifts erwartet).
+
+**Welle-7-Kandidaten (informativ):**
+- L-35-Sammelblock-Auflösung (36 dokumentierte Tatbestände aus Welle 5)
+- Neue Rechner-Batches (170 → 175 → 180)
+- berechneESt2025-Refactor (falls Welle-6-W6.1-Pre-Phase strukturell identisch bestätigt)
+- AdSense-Re-Review-Folge-Aktionen (nach Approval)
+- 152c Pendlerpauschalen-SSOT (nach 45-Cent-Reform-BGBl)
+
+**Methodische Lehren etabliert in Welle 5:**
+- **L-37** (Track-B-B4-Pre-Phase, 04.05.2026): SSOT-Werte-Lookup vor Scoping-Schreiben. Tarif-, Konstanten-, Schwellen-Werte aus Lib lesen, nicht aus Memory rekonstruieren. **Pflicht-Disziplin** in künftigen Scoping-Sprints. Vollständig in CLAUDE.md Lehre L-37.
+- **L-38** (Welle-5-Track-A-Closure, 04.05.2026, 6 Datenpunkte): User-Eingabe-Pattern für externe Werte in Track-A-Slugs. Marktwerte gehören als User-Input mit Hint-Text, nicht als statische Lib-Tabellen. **Pflicht-Anwendung** in künftigen Track-A-artigen Lib-Extraktionen. Vollständig in CLAUDE.md Lehre L-38.
+
+**Drei Pre-Phase-Pflichten für Welle-2-artige Lib-Extraktionen** (etabliert nach Welle 5): L-37 (SSOT-Werte aus Lib) + C1-Lehre (Lib-Funktions-Boundary aus Bestand-Component) + L-38 (User-Eingabe-Pattern als Default). Detailliert in CLAUDE.md.
+
 
 Vollständige Welle-Historie: [docs/audit-arbeitspapiere/welle-status-historie.md](docs/audit-arbeitspapiere/welle-status-historie.md).
 

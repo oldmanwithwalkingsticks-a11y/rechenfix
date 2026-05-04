@@ -185,6 +185,32 @@ Der Rechner muss als **controlled component** arbeiten — `value={state}` statt
 
 Grund: Smoketest v3 Check C3 fängt fehlendes Clamping ab (Lesson aus Prompt 84a, April 2026).
 
+### Step 3b: Externe Werte als User-Eingabe (L-38-Pflicht, etabliert Welle 5)
+
+**Default für Marktwerte, Steuersätze und drift-anfällige externe Werte:** User-Input-Feld mit Hint-Text auf Primärquelle.
+
+Diese Werte gehören als User-Eingabe (mit Default + Hint), **nicht** als Statiktabelle in der Lib:
+
+- **Marktwerte:** Mietspiegel-€/m², Bodenrichtwerte, Listenpreise, Pfandbrief-Renditen, Marktzinsen
+- **Kommunale Werte:** Hebesätze, GrSt-Sätze, gemeindliche Pauschalen
+- **Steuersätze für Schätzungen:** Grenzsteuersatz (für Schätz-Rechner mit Günstigerprüfung), Vorjahres-Brutto-Werte
+- **AfA-Werte:** Nutzungsdauer-Jahre (mit Hint auf BMF-AfA-Tabellen)
+
+**Begründung:** rechenfix ist Schätz-Rechner für Selbst-Anwender, externe Werte sind drift-anfällig und marktbewegt. Statiktabellen wären Wartungs-Last und müssen jedes Jahr aktualisiert werden.
+
+**Erlaubte Ausnahme:** Default-Liste mit User-Override (z. B. AfA-Default-Sätze für Standard-Kategorien wie PKW=6 J, Computer=3 J, mit Möglichkeit zum Überschreiben). Volle Tabelle wäre Scope-Erweiterung und braucht fachliche Begründung.
+
+**Hint-Text-Pattern:**
+```jsx
+<input ... />
+<p className="text-xs text-gray-500 mt-1">
+  Aktueller Wert aus Bundesbank-Zeitreihe BBK01.WT3320, alternativ
+  Steuerbescheid der Gemeinde, BMF-AfA-Tabelle, etc.
+</p>
+```
+
+**Verbindlich seit:** Welle 5 Track-A-Closure (04.05.2026), 6/6 Bestätigungs-Datenpunkte aus Welle-2-Lib-Extraktionen.
+
 ### Step 4: Live Calculation
 
 - Calculate on **every input change** — NO submit button
@@ -339,6 +365,9 @@ After creating the calculator, verify:
 - [ ] "Fix erklärt"-Button erscheint erst, nachdem der `ergebnis`-State gefüllt ist — das ist **kein Bug**, sondern gewollt
 
 ### Step 11b: SSOT-Import-Audit (Pflicht vor Commit)
+
+**Bei Erweiterung bestehender Berechnungs-Libs:** drei Pre-Phase-Pflichten beachten (L-37 + C1-Lehre + L-38, etabliert in Welle 5). Werte aus der Lib lesen (nicht Memory), Lib-Funktions-Boundary klären (nicht Norm-Erklärtext), externe Werte als User-Eingabe (nicht Statiktabelle). Siehe CLAUDE.md Sektion „Drei Pre-Phase-Pflichten für Welle-2-artige Lib-Extraktionen".
+
 
 Vor dem `git commit` die neue oder geänderte Berechnungs-Lib auf
 versteckte Duplikate prüfen:
@@ -1390,6 +1419,8 @@ Tarif-, SV-, Unterhalts-, Mindestlohn-, Renten- und Pfändungs-Rechner dürfen P
 Die drei Tarif-Rechner (Brutto-Netto, Lohnsteuer, Einkommensteuer) sind eine **Rechner-Gruppe** mit geteilter Logik. Änderungen an zentralen Parametern wirken auf alle drei. Siehe auch G10 (keine Dubletten zentraler Werte).
 
 ## Skill-Synchronisation
+
+**Letzte Aktualisierung:** 04.05.2026 nach Welle-5-Closure und Welle-6-Eröffnung. Drei Pre-Phase-Pflichten (L-37 + C1-Lehre + L-38) als neue Step 3b ergänzt. SSOT-Import-Audit-Hinweis um Welle-5-Lehren erweitert. Bei künftigen Wellen-Closures Skill auf neue Lehren prüfen.
 
 Dieser Skill existiert in zwei Kopien:
 

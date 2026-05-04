@@ -66,11 +66,11 @@ Affiliate ist erlaubt, wenn **thematischer Match** zum Rechner besteht. Entschei
 - Vercel Hosting
 - Anthropic Claude API für "Fix erklärt"
 
-## Projekt-Status (Stand 28.04.2026)
+## Projekt-Status (Stand 04.05.2026)
 
 - **170 eigenständige Rechner in 9 Kategorien** (Alltag 23, Finanzen **45**, Gesundheit 17, Auto & Verkehr 11, Wohnen & Energie 25, Mathe & Schule 18, Arbeit & Recht **17**, Kochen & Ernährung 12, Sport & Fitness 2). Verschiebung 26.04.2026 (Prompt 149a): arbeitslosengeld-rechner aus Arbeit nach Finanzen migriert (Konfig deklarierte schon `kategorie: 'Finanzen'` — SSOT-Konsistenz pro Kategorie-Datei wiederhergestellt).
 - **178 Rechner-URLs** in der Sitemap (inkl. Varianten-Seiten wie `/finanzen/2000-euro-brutto-netto` bis `/5000-euro-brutto-netto` und `/finanzen/brutto-netto-tabelle`)
-- **Welle-Status:** Welle 1 ✅ komplett (April 2026); **Welle 2 KOMPLETT abgeschlossen 26.04.2026 ✅** — alle vier Stufen durch: Stufe 1 Auto (130–132.6, 23.04.), Stufe 2 Gesundheit (140–144b), Stufe 3 Wohnen (147–148c, 25.+26.04. — 148c Mieterbund-Schluss auf Betriebskostenspiegel 2023), Stufe 3 Arbeit (Block A 149a-d + 150a-d, Block B 152a + 153a/b/b-fix + 153c Lib-Audit). **Welle 3 angefangen 27.04.2026 — 9/10 abgeschlossen (Stand 30.04.2026):** 152b `feiertage.ts` SSOT-Lib ✅, 154 LazySection-Removal für AdSense-Crawler-Sichtbarkeit ✅, 155 `/ueber-uns` ausgebaut ✅, 156 `/qualitaet` neu angelegt + Footer-Link ✅, 151 Block-A-P3-Sammelbatch (17 priorisierte Items, 5 atomare Konfig-Commits 151a–e) ✅, 150e Süd-OLG-UI-Toggle für ehegattenunterhalt ✅, 157 P3-Sammelrest (25 Items in 6 atomaren Konfig-Commits 157a–f) ✅, P3-B1 ueberstunden-Netto-Refactor (Commit 7c2426b) ✅. **Welle-3-Backlog:** **Validation-Sweep KOMPLETT ✅ 30.04.26** — 7/7 Module abgeschlossen (M1 Backtick-Hook ✅, M2 Norm-Zitate ✅, M3 SSOT-Konsumption ✅, M4 Meta-Routen ✅, M5 Affiliate-Konsistenz ✅, M6 FAQ-Drift ✅, M7 A11y-Stichprobe ✅). Lehren L-30 + L-31 aus M3 generiert, durch M6 erneut bestätigt. **Welle 3 reduziert sich damit auf den einen geparkten Slot:** 152c Pendlerpauschalen-SSOT (Trigger: Verabschiedung der 45-Cent-Reform). **Welle 4 angefangen 01.05.2026 — Verify-Coverage-Backfill:** Scoping ✅ 01.05.26 unter `docs/audit-arbeitspapiere/welle4-scoping.md` (6 Module M0–M5, ~22 neue Verify-Scripts, ~16–22 h auf 4–6 Sessions, Lib-Extractions auf Welle 5 ausgelagert). Vollständige Welle-Historie + Welle-Backlogs mit Detailspecs: [docs/audit-arbeitspapiere/welle-status-historie.md](https://github.com/oldmanwithwalkingsticks-a11y/rechenfix/blob/main/docs/audit-arbeitspapiere/welle-status-historie.md).
+- **Welle-Status:** Welle 1 ✅ komplett (April 2026); Welle 2 ✅ KOMPLETT 26.04.2026; Welle 3 ✅ KOMPLETT 30.04.2026 (Validation-Sweep 7/7 + 9/10 Backlog-Items, 152c Pendlerpauschalen-SSOT geparkt bis 45-Cent-Reform-BGBl); **Welle 4 ✅ KOMPLETT 04.05.2026** (Verify-Coverage-Backfill, 6 Module M0–M5, 51 ABGEDECKT-Slugs, ~14 h, Lehren L-32 bis L-36); **Welle 5 ✅ KOMPLETT 04.05.2026** (10 Items: Track-B 4 Drift-Fixes B1–B4 + Track-A-Block-C 3 Wohnen-Lib-Extraktionen C1–C3 + Track-A-Tail 3 Steuer-Lib-Extraktionen D1–D3, ~10,25 h vs. 24,5 h Scoping = Faktor 2,4× schneller, Coverage 51→57, Lehren L-37 + L-38 etabliert, 36 L-35-Diskrepanzen dokumentiert als Welle-7-Sammelblock-Kandidat); **Welle 6 LAUFEND seit 04.05.2026** — Single-Item-Welle, W6.1 berechneESt2026 → TARIF_2026-Konsumption (schließt B4-technische-Schuld), Scoping `f5cbde8`, ~60–90 Min Aufwand-Erwartung. Vollständige Welle-Historie + Welle-Backlogs mit Detailspecs: [docs/audit-arbeitspapiere/welle-status-historie.md](https://github.com/oldmanwithwalkingsticks-a11y/rechenfix/blob/main/docs/audit-arbeitspapiere/welle-status-historie.md).
 - **AffiliateBox-Aufrufe:** 116 in 72 Dateien (Stand 30.04.2026 nach M5-Validation-Sweep — 1 Box aus MwStRueckerstattungRechner entfernt, Import-Cleanup leerte 1 Datei), 12 Programme inkl. CosmosDirekt (seit 25.04.2026, Prompt 145)
 - **AdSense:** Script live seit 20.04.2026, Publisher-ID `pub-1389746597486587`. Erste Prüfung 27.04.2026 negativ („Minderwertige Inhalte"); Root Cause: `<LazySection>`-Wrapper machte Erklärtext + FAQ im SSR unsichtbar. Drei-Maßnahmen-Sprint 154+155+156 (28.04.2026): LazySection-Removal, /ueber-uns ausgebaut, /qualitaet neu. Re-Review-Anfrage steht aus (Karsten triggert nach Vercel-Deploy). Prompts 68 (Google CMP) und 85 (next/script) bleiben parkend bis Approval.
 - **Domain:** `https://www.rechenfix.de` (immer mit www, 308-Redirect von nicht-www)
@@ -377,12 +377,18 @@ export function getAktuelleXxxParameter(stichtag: Date = new Date()): XxxParamet
 
 ## Tarif-Parameter 2026 (Referenzwerte)
 
-### Einkommensteuer-Tarif §32a EStG 2026
-- Grundfreibetrag: **12.348 €**
-- Zone-2-Formel (12.349 – 17.799 €): `(914,51 · y + 1.400) · y`, y = (zvE − 12.348) / 10.000
-- Zone-3-Formel (17.800 – 69.878 €): `(173,10 · z + 2.397) · z + 1.034,87`, z = (zvE − 17.799) / 10.000
-- Zone-4-Formel (69.879 – 277.825 €): `0,42 · x − 11.135,63`
-- Zone-5-Formel (ab 277.826 €): `0,45 · x − 19.470,38`
+### Einkommensteuer-Tarif §32a EStG 2026 (gem. StÄndG 2024)
+
+**SSOT in der Lib:** `TARIF_2026` in `lib/berechnungen/einkommensteuer.ts` (etabliert in Welle-5-B4, Z. 70–89). Werte hier aus der Lib zitiert (L-37-Pflicht).
+
+- Grundfreibetrag (`gfb`): **12.348 €** (Single) / **24.696 €** (Splitting, Verheiratete)
+- Zone 1: 0 % (bis Grundfreibetrag)
+- Zone 2: 14 → 24 % progressiv (12.348 → **17.799 €**), Polynom-Koeffizienten `z2_a = 914,51`, `z2_b = 1.400`
+- Zone 3: 24 → 42 % progressiv (**17.799 → 69.878 €**), Polynom-Koeffizienten `z3_a = 173,10`, `z3_b = 2.397`, `z3_c = 1.034,87`
+- Zone 4: 42 % linear (**69.878 → 277.825 €**), `z4_m = 0,42`, `z4_b = 11.135,63`
+- Zone 5: 45 % linear (ab 277.825 €), `z5_m = 0,45`, `z5_b = 19.470,38`
+
+**Werte-Drift-Hinweis:** Vor B4 standen hier 17.443 / 68.481 als Zone-Grenzen — das sind die **2025er**-Werte (sichtbar in `berechneESt2025` Z. 95/99). B4-Pre-Phase hat den Drift gefangen, korrigiert auf 2026er-Werte aus `berechneESt2026` Z. 70–89. **L-37-Anker.**
 
 ### Sozialversicherung 2026 (AN-Anteile, bundeseinheitlich)
 - RV: 9,3 % (BBG 101.400 €/Jahr)
@@ -546,6 +552,20 @@ Volltext der Lehren 23–29 unten in dieser Liste; Volltext der Welle-3-Sprints 
 37. **SSOT-Werte-Lookup vor Scoping-Schreiben** (Lehre 04.05.2026 aus Welle-5-Track-B B4-Pre-Phase-S2-Befund): Beim Schreiben von Scoping-Dokumenten dürfen Tarif-, Konstanten-, Schwellen- oder Stichtags-Werte nicht aus Memory rekonstruiert werden, sondern müssen explizit aus der Lib gelesen werden. **Konkretes Beispiel:** `welle5-track-b-scoping.md` Modul B4 nahm Zone-Grenzen 17.443 / 68.481 / 277.825 für die § 32a EStG 2026-Tarif-Zonen an — tatsächlich sind 17.443 / 68.481 die **2025er**-Werte (sichtbar in `berechneESt2025` Z. 95/99 in `lib/berechnungen/einkommensteuer.ts`). Korrekte 2026er-Werte standen in `berechneESt2026` Z. 70–89 (`z2_ende=17799`, `z3_ende=69878`, `z4_ende=277825`). Pre-Phase-S2-STOP fing die Drift, kostete aber ~10 Min Korrektur-Aufwand. **Pflicht-Disziplin:** Beim Scoping-Schreiben werden Werte explizit aus der Lib gegrep't und im Scoping mit Quellen-Zeile zitiert (z. B. `berechneESt2026` Z. 70–89). **Generalisierung:** L-32 (Multi-Line-Konsumenten-Sweep auf Verify-Coverage-Ebene) und L-35 (Lib-Realität schlägt Konfig-Erklärtext auf Verify-Cases-Ebene) werden durch L-37 auf den **Pre-Scoping-Schritt** ausgedehnt — drei Stufen der Audit-Pipeline (Scoping → Verify-Coverage → Verify-Cases) verlangen jetzt einheitlich Lib-Realität-Lookup statt Memory. **Pflicht in künftigen Scoping-Sprints:** vor jedem Werte-Soll-Patch ein SSOT-Lookup-Schritt im Pre-Phase-Plan, der die Werte explizit aus der Lib zitiert. Etabliert in Welle 5 Track-B B4, durch Pre-Phase-Befund S2 (B4-Code-Run vom 04.05.26).
 
 38. **User-Eingabe-Pattern für externe Werte in Track-A-Slugs** (Lehre 04.05.2026, etabliert in Welle 5 Track-A-Closure nach sechs Datenpunkten Block-C + Tail): Bei Welle-2-Lib-Extraktionen aus Bestand-Components ist die Default-Erwartung, dass externe Marktwerte (Mietspiegel-Sätze, Hebesätze, Bodenrichtwerte, Marktzinssätze, Listenpreise, AfA-Nutzungsdauern, Vorjahres-Brutto, Pfandbrief-Renditen, Grenzsteuersätze) als User-Eingabe-Felder mit Hint-Text auf Primärquelle modelliert sind, **nicht** als statische Lib-Tabellen. **Konkrete Datenpunkte:** C1 Mietspiegel-€/m² User-Eingabe; C2 Hebesatz Default 500 % / Bodenrichtwert Default 200 €/m² User-Eingabe; C3 Pfandbrief-/Markt-Rendite User-Eingabe; D1 Listenpreis User-Eingabe; D2 Nutzungsdauer-Jahre User-Eingabe; D3 Vorjahres-Brutto + Grenzsteuersatz User-Eingabe (6/6 Bestätigungs-Datenpunkte). **Begründung:** rechenfix ist ein Schätz-Rechner für Selbst-Anwender, externe Werte sind drift-anfällig und marktbewegt — statische Tabellen wären Wartungs-Last. **Pflicht-Anwendung:** in künftigen Track-A-artigen Lib-Extraktionen Pre-Phase-Default-Erwartung User-Eingabe-Pattern; Statiktabellen nur als bewusste Ausnahme mit fachlicher Begründung (z. B. AfA-BMF-Tabellen-Default-Liste mit User-Override wäre legitim, volle Tabelle wäre Scope-Erweiterung). **Generalisierung:** L-37 + C1-Lehre + L-38 sind drei Pre-Phase-Pflichten für Welle-2-Lib-Extraktionen: L-37 (SSOT-Werte aus Lib lesen), C1-Lehre (Lib-Funktions-Boundary aus Bestand-Component klären), L-38 (User-Eingabe-Pattern als Default-Architektur). Etabliert in Welle 5 Track-A-Closure (04.05.26).
+
+## Drei Pre-Phase-Pflichten für Welle-2-artige Lib-Extraktionen (etabliert nach Welle 5)
+
+Bei Welle-2-artigen Sprints (Inline-Component-Logik in neue Lib extrahieren) gelten **drei Pre-Phase-Pflichten**, die zusammen das Risiko von Memory-Drift und Scope-Inflation eliminieren:
+
+1. **L-37 — SSOT-Werte aus Lib lesen, nicht aus Memory rekonstruieren.** Beim Schreiben des Scoping-Dokuments und vor jedem Werte-Soll-Patch werden Tarif-, Konstanten-, Schwellen- und Stichtagswerte explizit aus der Lib gegrep't und mit Quellen-Zeile zitiert. **Anker:** B4-Pre-Phase-S2-Befund (2025er-vs-2026er-Tarif-Zonen).
+
+2. **C1-Lehre — Lib-Funktions-Boundary aus Bestand-Component klären, nicht aus Norm-Erklärtexten ableiten.** In der Pre-Phase wird **vorab** geklärt, welche Methoden/Sondertatbestände/Bewertungs-Modelle die Component konkret implementiert. Nicht-modellierte Tatbestände werden als L-35-Diskrepanzen dokumentiert, nicht in der Lib-Extraktion ergänzt. **Anker:** C1-§559 (Modernisierungszuschlag in Konfig-Erklärtext, aber nicht in Component) — bestätigt durch C2 (3/6 BL-Modelle), C3 (1/2 BGH-Methoden), D1 (5/7 Methoden), D2 (5/5 Methoden), D3 (9/13 Förderkomponenten).
+
+3. **L-38 — User-Eingabe-Default für externe Werte.** Default-Erwartung in der Pre-Phase: externe Marktwerte (Mietspiegel, Hebesätze, Bodenrichtwerte, Marktzinssätze, Listenpreise, AfA-Nutzungsdauern, Vorjahres-Brutto, Pfandbrief-Renditen, Grenzsteuersätze) sind als User-Eingabe-Felder mit Hint-Text auf Primärquelle modelliert. Statiktabellen sind bewusste Ausnahme mit fachlicher Begründung, nicht der Standard. **Anker:** 6/6 Bestätigungs-Datenpunkte aus Welle-5-Block-C+Tail.
+
+**Reihenfolge in Pre-Phase:** L-37 zuerst (SSOT-Werte verifizieren) → C1-Lehre als zweites (Boundary klären) → L-38 als drittes (User-Eingabe-Pattern verifizieren). **Pflicht-Übergabe-Inhalt** pro Welle-2-Sprint: L-37-Werte-Tabelle + Methoden-/Komponenten-Bilanz + Pattern-Bestätigung.
+
+**Welle-5-Aufwand-Datenpunkt:** Welle-2-Lib-Extraktionen brauchen real ~Faktor 3 weniger Aufwand als naiv-pessimistische Norm-Komplettmodellierung-Schätzungen (Block-C 200 Min vs. 600 Min Scoping, Tail 225 Min vs. 600 Min Scoping). Track-B-artige Drift-Fixes liegen bei Faktor ~1,2× (Welle-5-Track-B 3 h vs. 3,5 h Scoping). Refactor-only-Lib-internes-Item (z. B. Welle 6 W6.1) zwischen ~1,5× erwartbar.
 
 ## Unterhaltsrechner — Parameter 2026
 
