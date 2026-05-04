@@ -2,31 +2,19 @@
 
 import { useState, useMemo } from 'react';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import {
+  berechneAfa,
+  WOHNGEBAEUDE_SATZ_PROZENT,
+  SAMMELPOSTEN_JAHRE,
+  type AfaMethode,
+} from '@/lib/berechnungen/afa';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
-type Methode = 'linear' | 'degressiv' | 'gwg' | 'wohngebaeude-5' | 'sammelposten';
-
-// Wohngebäude-Sonder-AfA § 7 Abs. 5a EStG: 5 % linear p. a. für neue
-// Mietwohngebäude mit Bauantrag 01.10.2023 bis 30.09.2029.
-const WOHNGEBAEUDE_SATZ_PROZENT = 5;
-
-// Sammelposten-Pool § 6 Abs. 2a EStG: WG mit Anschaffungskosten netto
-// 250,01 € bis 1.000 € werden in einem Pool zusammengefasst und über
-// 5 Jahre linear mit 20 % p. a. abgeschrieben. Keine anteilige Jahres-AfA.
-const SAMMELPOSTEN_MIN = 250.01;
-const SAMMELPOSTEN_MAX = 1000;
-const SAMMELPOSTEN_JAHRE = 5;
-
-interface JahresRow {
-  jahr: number;
-  afa: number;
-  kumuliert: number;
-  restwert: number;
-}
+type Methode = AfaMethode;
 
 export default function AfaRechner() {
   const [kosten, setKosten] = useState<string>('10000');
@@ -36,138 +24,31 @@ export default function AfaRechner() {
   const [datum, setDatum] = useState<string>('2026-01-01');
 
   const result = useMemo(() => {
-    const k = parseDeutscheZahl(kosten) || 0;
-    const nd = Math.max(1, Math.round(parseDeutscheZahl(nutzungsdauer) || 1));
     const startDate = new Date(datum || '2026-01-01');
     const startMonat = isNaN(startDate.getTime()) ? 1 : startDate.getMonth() + 1;
     const startJahr = isNaN(startDate.getTime()) ? 2026 : startDate.getFullYear();
-    const restMonate = 13 - startMonat; // z.B. 01. Januar -> 12 Monate
-    const anteilErstjahr = restMonate / 12;
-
-    // § 7 Abs. 2 EStG n.F. (Wachstumschancengesetz): degressive AfA für
-    // bewegliche Wirtschaftsgüter ist für Anschaffungen ab 01.01.2026
-    // nicht mehr zulässig. Fallback auf linear, Button-State bleibt als
-    // User-Intention erhalten.
-    const degressivGesperrt = methode === 'degressiv' && startJahr >= 2026;
-    const methodeEffektiv: Methode = degressivGesperrt ? 'linear' : methode;
-
-    const rows: JahresRow[] = [];
-
-    // Sammelposten-Pool § 6 Abs. 2a EStG: 20 % linear über 5 Jahre,
-    // keine anteilige Erstjahres-AfA (Pool wird zum Jahresende angelegt).
-    if (methodeEffektiv === 'sammelposten') {
-      const sammelOk = k >= SAMMELPOSTEN_MIN && k <= SAMMELPOSTEN_MAX;
-      if (sammelOk) {
-        const jaehrlich = k / SAMMELPOSTEN_JAHRE;
-        let kum = 0;
-        let rest = k;
-        for (let i = 0; i < SAMMELPOSTEN_JAHRE; i++) {
-          const afa = Math.min(jaehrlich, rest);
-          kum += afa;
-          rest -= afa;
-          rows.push({ jahr: startJahr + i, afa, kumuliert: kum, restwert: rest });
-        }
-      }
-      return {
-        k, nd, methode: methodeEffektiv, rows,
-        jaehrlich: sammelOk ? k / SAMMELPOSTEN_JAHRE : 0,
-        linSatz: sammelOk ? 100 / SAMMELPOSTEN_JAHRE : 0,
-        degSatzNum: 0, anteilErstjahr, startJahr,
-        gwgOk: sammelOk, degressivGesperrt,
-      };
-    }
-
-    // GWG (bis 800€ netto): sofort
-    if (methodeEffektiv === 'gwg') {
-      if (k <= 800) {
-        rows.push({ jahr: startJahr, afa: k, kumuliert: k, restwert: 0 });
-      } else {
-        // Über 800 € nicht zulässig — Hinweis, kein Plan
-      }
-      const jaehrlich = k <= 800 ? k : 0;
-      return {
-        k, nd, methode: methodeEffektiv, rows, jaehrlich,
-        linSatz: 0, degSatzNum: 0, anteilErstjahr, startJahr,
-        gwgOk: k <= 800, degressivGesperrt,
-      };
-    }
-
-    if (methodeEffektiv === 'linear') {
-      const jaehrlich = k / nd;
-      let kum = 0;
-      let rest = k;
-      // Erstes Jahr anteilig
-      const erstAfa = Math.min(jaehrlich * anteilErstjahr, rest);
-      kum += erstAfa;
-      rest -= erstAfa;
-      rows.push({ jahr: startJahr, afa: erstAfa, kumuliert: kum, restwert: rest });
-
-      let jahr = startJahr + 1;
-      while (rest > 0.01 && rows.length < 60) {
-        const afa = Math.min(jaehrlich, rest);
-        kum += afa;
-        rest -= afa;
-        rows.push({ jahr, afa, kumuliert: kum, restwert: rest });
-        jahr++;
-      }
-      return { k, nd, methode: methodeEffektiv, rows, jaehrlich, linSatz: 100 / nd, degSatzNum: 0, anteilErstjahr, startJahr, gwgOk: true, degressivGesperrt };
-    }
-
-    if (methodeEffektiv === 'wohngebaeude-5') {
-      // § 7 Abs. 5a EStG: 5 % linear p. a., Laufzeit automatisch 20 Jahre.
-      // Der nd-Input wird ignoriert, weil der Satz durch das Gesetz fest ist.
-      const jaehrlich = k * (WOHNGEBAEUDE_SATZ_PROZENT / 100);
-      let kum = 0;
-      let rest = k;
-      const erstAfa = Math.min(jaehrlich * anteilErstjahr, rest);
-      kum += erstAfa;
-      rest -= erstAfa;
-      rows.push({ jahr: startJahr, afa: erstAfa, kumuliert: kum, restwert: rest });
-      let jahr = startJahr + 1;
-      while (rest > 0.01 && rows.length < 60) {
-        const afa = Math.min(jaehrlich, rest);
-        kum += afa;
-        rest -= afa;
-        rows.push({ jahr, afa, kumuliert: kum, restwert: rest });
-        jahr++;
-      }
-      return {
-        k, nd, methode: methodeEffektiv, rows, jaehrlich,
-        linSatz: WOHNGEBAEUDE_SATZ_PROZENT, degSatzNum: 0,
-        anteilErstjahr, startJahr, gwgOk: true, degressivGesperrt,
-      };
-    }
-
-    // Degressiv — Wechsel zu linear, wenn günstiger
-    const linSatz = 100 / nd;
-    const degNum = Math.min(parseDeutscheZahl(degSatz) || 0, 20);
-    let rest = k;
-    let kum = 0;
-    // Erstes Jahr anteilig
-    const ersteAfa = Math.min(rest * (degNum / 100) * anteilErstjahr, rest);
-    kum += ersteAfa;
-    rest -= ersteAfa;
-    rows.push({ jahr: startJahr, afa: ersteAfa, kumuliert: kum, restwert: rest });
-    let jahr = startJahr + 1;
-    let restJahre = nd - anteilErstjahr;
-    let inLinear = false;
-    while (rest > 0.01 && rows.length < 60) {
-      const deg = rest * (degNum / 100);
-      const lin = rest / Math.max(1, restJahre);
-      let afa = deg;
-      if (inLinear || lin > deg) {
-        afa = lin;
-        inLinear = true;
-      }
-      afa = Math.min(afa, rest);
-      kum += afa;
-      rest -= afa;
-      rows.push({ jahr, afa, kumuliert: kum, restwert: rest });
-      jahr++;
-      restJahre -= 1;
-      if (restJahre <= 0) break;
-    }
-    return { k, nd, methode: methodeEffektiv, rows, jaehrlich: rows[1]?.afa ?? ersteAfa, linSatz, degSatzNum: degNum, anteilErstjahr, startJahr, gwgOk: true, degressivGesperrt };
+    const ergebnis = berechneAfa({
+      anschaffungskosten: parseDeutscheZahl(kosten) || 0,
+      nutzungsdauerJahre: parseDeutscheZahl(nutzungsdauer) || 1,
+      methode,
+      degressivSatzProzent: parseDeutscheZahl(degSatz) || 0,
+      startJahr,
+      startMonat,
+    });
+    // Lib-API auf Component-API mappen (Backwards-Compat zur Pre-Refactor-Struktur)
+    return {
+      k: ergebnis.anschaffungskosten,
+      nd: ergebnis.nutzungsdauerJahre,
+      methode: ergebnis.methodeEffektiv,
+      rows: ergebnis.rows,
+      jaehrlich: ergebnis.jaehrlich,
+      linSatz: ergebnis.linSatzProzent,
+      degSatzNum: ergebnis.degressivSatzEffektivProzent,
+      anteilErstjahr: ergebnis.anteilErstjahr,
+      startJahr: ergebnis.startJahr,
+      gwgOk: ergebnis.gwgOk,
+      degressivGesperrt: ergebnis.degressivGesperrt,
+    };
   }, [kosten, nutzungsdauer, methode, degSatz, datum]);
 
   const fmtEuro = (n: number) =>
