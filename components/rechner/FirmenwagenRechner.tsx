@@ -2,6 +2,13 @@
 
 import { useState, useMemo } from 'react';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import {
+  berechneFirmenwagen,
+  HYBRID_CO2_GRENZE_G_KM,
+  HYBRID_REICHWEITE_MIN_KM,
+  type FirmenwagenAntriebsart,
+  type FirmenwagenArbeitswegMethode,
+} from '@/lib/berechnungen/firmenwagen';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
@@ -9,29 +16,8 @@ import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
-type Antrieb = 'verbrenner' | 'hybrid' | 'eAutoUnter70' | 'eAutoUeber70';
-type Methode = 'pauschal' | 'einzel';
-
-// § 6 Abs. 1 Nr. 4 Satz 2 Nr. 5 EStG (ab 01.01.2025): Plug-in-Hybrid darf die
-// 0,5-%-Regel anwenden, wenn CO2-Ausstoß ≤ 50 g/km ODER rein elektrische
-// Mindestreichweite ≥ 80 km. Gesetzestext: "hat oder ... beträgt" — eine der
-// beiden Bedingungen genügt.
-const HYBRID_CO2_GRENZE_G_KM = 50;
-const HYBRID_REICHWEITE_MIN_KM = 80;
-
-const SATZ: Record<Antrieb, number> = {
-  verbrenner: 0.01,
-  hybrid: 0.005,
-  eAutoUnter70: 0.0025,
-  eAutoUeber70: 0.005,
-};
-
-const FAKTOR: Record<Antrieb, number> = {
-  verbrenner: 1.0,
-  hybrid: 0.5,
-  eAutoUnter70: 0.25,
-  eAutoUeber70: 0.5,
-};
+type Antrieb = FirmenwagenAntriebsart;
+type Methode = FirmenwagenArbeitswegMethode;
 
 export default function FirmenwagenRechner() {
   const [blp, setBlp] = useState('45000');
@@ -44,43 +30,21 @@ export default function FirmenwagenRechner() {
   const [co2, setCo2] = useState('50');
   const [reichweite, setReichweite] = useState('80');
 
-  const ergebnis = useMemo(() => {
-    const bruttoListenpreis = parseDeutscheZahl(blp) || 0;
-    const entfernung = parseDeutscheZahl(km) || 0;
-    const fahrtenProMonat = parseDeutscheZahl(fahrten) || 0;
-    const zuz = parseDeutscheZahl(zuzahlung) || 0;
-    const gSatz = (parseDeutscheZahl(grenzsteuersatz) || 0) / 100;
-    const co2Wert = parseDeutscheZahl(co2) || 0;
-    const reichweiteWert = parseDeutscheZahl(reichweite) || 0;
-
-    // § 6 Abs. 1 Nr. 4 S. 2 Nr. 5 EStG: "hat oder ... beträgt" — eine
-    // der beiden Bedingungen (CO2 oder Reichweite) genügt.
-    const hybridBedingungenErfuellt =
-      co2Wert <= HYBRID_CO2_GRENZE_G_KM || reichweiteWert >= HYBRID_REICHWEITE_MIN_KM;
-
-    const berechneFuer = (a: Antrieb) => {
-      const privat = bruttoListenpreis * SATZ[a];
-      const arbeitsweg = methode === 'pauschal'
-        ? bruttoListenpreis * 0.0003 * entfernung * FAKTOR[a]
-        : bruttoListenpreis * 0.00002 * entfernung * fahrtenProMonat * FAKTOR[a];
-      const gwv = Math.max(0, privat + arbeitsweg - zuz);
-      const steuerMonat = gwv * gSatz;
-      return { privat, arbeitsweg, gwv, steuerMonat };
-    };
-
-    // Fallback: Hybrid ohne erfüllte Bedingungen wird wie Verbrenner (1 %) gerechnet.
-    // Die Vergleichs-Spalte "Hybrid" bleibt pädagogisch beim Idealfall 0,5 %.
-    const aktuell = antrieb === 'hybrid' && !hybridBedingungenErfuellt
-      ? berechneFuer('verbrenner')
-      : berechneFuer(antrieb);
-    const verbrenner = berechneFuer('verbrenner');
-    const hybrid = berechneFuer('hybrid');
-    const eAuto = berechneFuer(bruttoListenpreis <= 70000 ? 'eAutoUnter70' : 'eAutoUeber70');
-
-    const ersparnisEAuto = verbrenner.steuerMonat - eAuto.steuerMonat;
-
-    return { aktuell, verbrenner, hybrid, eAuto, ersparnisEAuto, hybridBedingungenErfuellt };
-  }, [blp, antrieb, km, fahrten, methode, zuzahlung, grenzsteuersatz, co2, reichweite]);
+  const ergebnis = useMemo(
+    () =>
+      berechneFirmenwagen({
+        bruttoListenpreis: parseDeutscheZahl(blp) || 0,
+        antrieb,
+        entfernungKm: parseDeutscheZahl(km) || 0,
+        arbeitswegMethode: methode,
+        fahrtenProMonat: parseDeutscheZahl(fahrten) || 0,
+        zuzahlungProMonat: parseDeutscheZahl(zuzahlung) || 0,
+        grenzsteuersatz: (parseDeutscheZahl(grenzsteuersatz) || 0) / 100,
+        co2GKm: parseDeutscheZahl(co2) || 0,
+        reichweiteKm: parseDeutscheZahl(reichweite) || 0,
+      }),
+    [blp, antrieb, km, fahrten, methode, zuzahlung, grenzsteuersatz, co2, reichweite],
+  );
 
   const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 
