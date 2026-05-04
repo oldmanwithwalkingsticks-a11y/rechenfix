@@ -8,6 +8,14 @@
 
 ---
 
+## Welle 5 Track-A Tail — Steuer-Sprint (04.05.2026, LAUFEND)
+
+Sammel-Block für Welle-5-Track-A-Tail-Aktivitäten. Trigger: Welle-5-Track-A-Block-C KOMPLETT am 04.05.2026, finaler Track-A-Sprint. Tail-Scope: 3 Lib-Extraktionen (D1 firmenwagen, D2 afa, D3 riester). Schließt Track-A vollständig ab und triggert Welle-5-KOMPLETT.
+
+- Welle-5-Track-A-Tail-Scoping ✅ 04.05.26 — siehe `welle5-track-a-tail-scoping.md`, 3 Lib-Extraktionen D1–D3 priorisiert (Komplexitäts-Order). Geschätzt 3 atomic Sessions, ~3,5–4 h gesamt (Block-C-korrigiert von ursprünglich ~10 h). Out-of-Scope: alle anderen Welle-5-Items, L-35-Diskrepanzen-Fix-Sprints, C3-Edge-Befund-Fix. Strategie-Entscheidungen: E1 Tail = 3 Steuer-Slugs, E2 Komplexitäts-Order, E3 Welle-2-Pattern fünf-stufig, E4 L-37-Pflicht, E5 AfA-Tabellen-Pattern als Pre-Phase-Frage in D2 (Pattern (a)/(b)/(c) zu klären), E6 Externe-Quellen-Pflicht im JSDoc, E7 L-30-Sweep-Tail pro Slug, E8 Block-C-Lehren übernehmen (insb. C1-Lehre als Pre-Phase-Pflicht). Aufwand-Schätzung Block-C-korrigiert: ~70 Min/Slug Standard, +20 Min bei AfA-Tabellen-Pattern (c).
+
+---
+
 ## Welle 5 Track-A Block-C — Wohnen-Sprint (04.05.2026, KOMPLETT)
 
 Sammel-Block für Welle-5-Track-A-Block-C-Aktivitäten. Trigger: Welle-5-Track-B KOMPLETT am 04.05.2026, Wohnen-Themen-Bündelung als erster Track-A-Sprint priorisiert. Block-C-Scope: 3 Lib-Extraktionen (C1 mietpreisbremse, C2 grundsteuer, C3 vorfaelligkeitsentschaedigung). Track-A-Tail (firmenwagen + afa + riester, ~10 h) bleibt für späteren Steuer-Block-Sprint.
