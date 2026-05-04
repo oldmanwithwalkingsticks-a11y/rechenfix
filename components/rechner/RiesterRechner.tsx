@@ -2,6 +2,10 @@
 
 import { useState, useMemo } from 'react';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import {
+  berechneRiester,
+  type RiesterFamilienstand,
+} from '@/lib/berechnungen/riester';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
@@ -9,13 +13,7 @@ import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
-type Familienstand = 'alleinstehend' | 'ein-partner' | 'beide-partner';
-
-const GRUNDZULAGE = 175;
-const KINDERZULAGE_VOR_2008 = 185;
-const KINDERZULAGE_AB_2008 = 300;
-const MAX_FOERDER = 2100; // jährlich
-const SOCKEL = 60;
+type Familienstand = RiesterFamilienstand;
 
 export default function RiesterRechner() {
   const [brutto, setBrutto] = useState('40000');
@@ -30,70 +28,18 @@ export default function RiesterRechner() {
   const grenz = parseInt(grenzsteuersatz, 10) / 100;
   const kAnzahl = parseInt(kinderAnzahl, 10) || 0;
 
-  const ergebnis = useMemo(() => {
-    if (b <= 0) return null;
-
-    // Zulagen berechnen
-    const personen = familienstand === 'beide-partner' ? 2 : 1;
-    const grundzulagen = GRUNDZULAGE * personen;
-
-    let kinderzulagen = 0;
-    for (let i = 0; i < kAnzahl; i++) {
-      kinderzulagen += kinderAb2008[i] ? KINDERZULAGE_AB_2008 : KINDERZULAGE_VOR_2008;
-    }
-
-    const zulagenGesamt = grundzulagen + kinderzulagen;
-
-    // Optimaler Eigenbeitrag: 4 % des Vorjahres-Brutto − Zulagen, mind. 60 €, max. 2.100 − Zulagen
-    const vierProzent = b * 0.04;
-    const optimalerEigenbeitrag = Math.max(
-      SOCKEL,
-      Math.min(vierProzent - zulagenGesamt, MAX_FOERDER - zulagenGesamt),
-    );
-
-    // Genutzter Eigenbeitrag: Wenn 0 eingegeben → optimal, sonst Eingabe
-    const eigenbeitrag = ebEingabe > 0 ? ebEingabe : optimalerEigenbeitrag;
-
-    // Voller Zulagenanspruch nur wenn Eigenbeitrag ≥ optimalerEigenbeitrag
-    // Vereinfachung: Wenn weniger gezahlt, werden Zulagen anteilig gekürzt (pro rata 4 % des Einkommens)
-    const mindestEigenbeitrag = Math.max(SOCKEL, vierProzent - zulagenGesamt);
-    const zulagenQuote = mindestEigenbeitrag > 0
-      ? Math.min(1, eigenbeitrag / mindestEigenbeitrag)
-      : 1;
-    const effektiveZulagen = zulagenGesamt * zulagenQuote;
-
-    // Sonderausgabenabzug: Eigenbeitrag + Zulagen, max. 2.100 €
-    const sonderausgaben = Math.min(MAX_FOERDER, eigenbeitrag + effektiveZulagen);
-    const steuerersparnis = sonderausgaben * grenz;
-
-    // Günstigerprüfung: Nur wenn Steuerersparnis > Zulagen → zusätzlicher Vorteil
-    const zusatzlicherSteuervorteil = Math.max(0, steuerersparnis - effektiveZulagen);
-
-    const gesamtfoerderung = effektiveZulagen + zusatzlicherSteuervorteil;
-    const foerderquote = eigenbeitrag > 0 ? (gesamtfoerderung / eigenbeitrag) * 100 : 0;
-
-    let lohntSich: 'gruen' | 'gelb' | 'rot' = 'rot';
-    if (foerderquote >= 30) lohntSich = 'gruen';
-    else if (foerderquote >= 15) lohntSich = 'gelb';
-
-    return {
-      personen,
-      grundzulagen,
-      kinderzulagen,
-      zulagenGesamt,
-      effektiveZulagen,
-      optimalerEigenbeitrag,
-      eigenbeitrag,
-      mindestEigenbeitrag,
-      sonderausgaben,
-      steuerersparnis,
-      zusatzlicherSteuervorteil,
-      gesamtfoerderung,
-      foerderquote,
-      lohntSich,
-      vierProzent,
-    };
-  }, [b, familienstand, kAnzahl, kinderAb2008, ebEingabe, grenz]);
+  const ergebnis = useMemo(
+    () =>
+      berechneRiester({
+        vorjahresBrutto: b,
+        familienstand,
+        kinderAnzahl: kAnzahl,
+        kinderAb2008,
+        eigenbeitrag: ebEingabe,
+        grenzsteuersatz: grenz,
+      }),
+    [b, familienstand, kAnzahl, kinderAb2008, ebEingabe, grenz],
+  );
 
   const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
   const fmtD = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
