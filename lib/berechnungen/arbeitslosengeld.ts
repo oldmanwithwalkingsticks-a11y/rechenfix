@@ -23,15 +23,26 @@
  *     Component-Code (siehe Pre-Refactor ArbeitslosengeldRechner Z. 17–20).
  *     Verify-Tests fokussieren bewusst auf Klassen ohne diesen Faktor (I, IV);
  *     V/VI-Tests sind als "Approximation-touched" markiert.
- *   - Kirchensteuer als pauschale 9 % über alle Bundesländer (statt 8 % BY/BW).
  *
  * Welle-4 M2c — Lib-Extraktion aus ArbeitslosengeldRechner.tsx (03.05.2026).
  * Component zuvor PARTIAL-KEINE-LIB: importierte einkommensteuer + brutto-netto
  * aus verifizierten Libs, aber alle SGB-III-spezifischen Funktionen
  * (lohnsteuerJahr, bezugsdauerMonate, ALG-Berechnung) inline.
+ *
+ * Welle-5 Track-B B1 (04.05.2026) — KiSt-Bundesland-Differenzierung:
+ *   `KIRCHENSTEUER_ANTEIL_PAUSCHAL = 0.09` (pauschal über alle BL) ersetzt
+ *   durch `berechneKirchensteuerByBundesland(est, bundesland)` aus
+ *   einkommensteuer.ts (BY/BW: 8 %, übrige 14 BL: 9 %). Interface um
+ *   `bundesland?: Bundesland` erweitert (Default 'Nordrhein-Westfalen').
+ *   SSOT-Pattern nach CLAUDE.md Z. 147–154.
  */
 
-import { berechneEStGrund, berechneSoli } from './einkommensteuer';
+import {
+  berechneEStGrund,
+  berechneSoli,
+  berechneKirchensteuerByBundesland,
+  type Bundesland,
+} from './einkommensteuer';
 import { BBG_RV_MONAT } from './brutto-netto';
 
 export type Steuerklasse = 'I' | 'II' | 'III' | 'IV' | 'V' | 'VI';
@@ -47,6 +58,9 @@ export interface ArbeitslosengeldEingabe {
   /** Versicherungspflichtige Monate in den letzten 5 Jahren */
   beschMonate: number;
   kirchensteuer: boolean;
+  /** Bundesland für KiSt-Differenzierung (BY/BW 8 %, sonst 9 %).
+   *  Default: 'Nordrhein-Westfalen' (9 %) bei undefined. */
+  bundesland?: Bundesland;
 }
 
 export interface ArbeitslosengeldErgebnis {
@@ -74,8 +88,6 @@ export const ALG_SATZ_OHNE_KIND = 0.60;
 export const ALG_SATZ_MIT_KIND = 0.67;
 /** § 153 Abs. 1 Satz 2 Nr. 1 SGB III: pauschalierter Sozialabzug */
 export const SV_PAUSCHALE_PROZENT = 0.21;
-/** Kirchensteuer-Anteil pauschal 9 % der Lohnsteuer (vereinfacht, ohne BY/BW-Sonderfall) */
-export const KIRCHENSTEUER_ANTEIL_PAUSCHAL = 0.09;
 
 /**
  * § 147 Abs. 2 SGB III: Anspruchsdauer-Tabelle.
@@ -122,6 +134,7 @@ export function berechneVereinfachteLohnsteuerJahr(zvE: number, klasse: Steuerkl
 
 export function berechneArbeitslosengeld(eingabe: ArbeitslosengeldEingabe): ArbeitslosengeldErgebnis {
   const { brutto, klasse, mitKind, alter, beschMonate, kirchensteuer } = eingabe;
+  const bundesland: Bundesland = eingabe.bundesland ?? 'Nordrhein-Westfalen';
 
   // § 153 SGB III: Bemessungsentgelt = brutto, gedeckelt auf BBG-RV
   const bemessung = Math.min(Math.max(0, brutto), BBG_RV_MONAT);
@@ -136,8 +149,9 @@ export function berechneArbeitslosengeld(eingabe: ArbeitslosengeldEingabe): Arbe
   const soliJahr = berechneSoli(lstJahr, splittingtarif, 2026);
   const soli = soliJahr / 12;
 
-  // Kirchensteuer (vereinfacht 9 %, ohne BY/BW-Sonderfall)
-  const kiSt = kirchensteuer ? lstMonat * KIRCHENSTEUER_ANTEIL_PAUSCHAL : 0;
+  // § 51a EStG Kirchensteuer mit Bundesland-Differenzierung (BY/BW 8 %, sonst 9 %)
+  // Welle-5 Track-B B1: SSOT-Pattern via berechneKirchensteuerByBundesland
+  const kiSt = kirchensteuer ? berechneKirchensteuerByBundesland(lstMonat, bundesland) : 0;
 
   // § 153 SGB III: pauschalierter Sozialabzug
   const svPauschale = bemessung * SV_PAUSCHALE_PROZENT;

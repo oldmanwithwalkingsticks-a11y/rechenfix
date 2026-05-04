@@ -10,6 +10,7 @@ import {
   berechneArbeitslosengeld,
   type Steuerklasse,
 } from '@/lib/berechnungen/arbeitslosengeld';
+import { BUNDESLAENDER, type Bundesland } from '@/lib/berechnungen/einkommensteuer';
 
 export default function ArbeitslosengeldRechner() {
   const [brutto, setBrutto] = useState('3500');
@@ -18,6 +19,9 @@ export default function ArbeitslosengeldRechner() {
   const [alter, setAlter] = useState('40');
   const [beschDauer, setBeschDauer] = useState('24');
   const [kirchensteuer, setKirchensteuer] = useState(false);
+  const [bundesland, setBundesland] = useState<Bundesland>('Nordrhein-Westfalen');
+
+  const kistSatzProzent = bundesland === 'Bayern' || bundesland === 'Baden-Württemberg' ? 8 : 9;
 
   const ergebnis = useMemo(() => berechneArbeitslosengeld({
     brutto: parseDeutscheZahl(brutto) || 0,
@@ -26,7 +30,8 @@ export default function ArbeitslosengeldRechner() {
     alter: parseDeutscheZahl(alter) || 0,
     beschMonate: parseDeutscheZahl(beschDauer) || 0,
     kirchensteuer,
-  }), [brutto, klasse, mitKind, alter, beschDauer, kirchensteuer]);
+    bundesland,
+  }), [brutto, klasse, mitKind, alter, beschDauer, kirchensteuer, bundesland]);
 
   const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 
@@ -115,7 +120,7 @@ export default function ArbeitslosengeldRechner() {
           Kirchensteuer
         </h2>
         <div className="flex gap-2">
-          {([[true, 'Ja'], [false, 'Nein']] as const).map(([val, label]) => (
+          {([[true, `Ja (${kistSatzProzent} %)`], [false, 'Nein']] as const).map(([val, label]) => (
             <button
               key={String(val)}
               onClick={() => setKirchensteuer(val)}
@@ -125,6 +130,24 @@ export default function ArbeitslosengeldRechner() {
             </button>
           ))}
         </div>
+        {kirchensteuer && (
+          <div className="mt-3">
+            <label htmlFor="arbeitslosengeld-bundesland" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Bundesland</label>
+            <select
+              id="arbeitslosengeld-bundesland"
+              value={bundesland}
+              onChange={e => setBundesland(e.target.value as Bundesland)}
+              className="w-full sm:w-2/3 min-h-[48px] px-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 text-sm text-gray-800 dark:text-gray-200"
+            >
+              {BUNDESLAENDER.map(bl => (
+                <option key={bl} value={bl}>{bl}</option>
+              ))}
+            </select>
+            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+              Bayern und Baden-Württemberg: 8 %. Übrige 14 Bundesländer: 9 %.
+            </p>
+          </div>
+        )}
       </div>
 
       {/* ERGEBNIS */}
