@@ -2,14 +2,17 @@
 
 import { useState, useMemo } from 'react';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import {
+  berechneVorfaelligkeitsentschaedigung,
+  VFE_BEARBEITUNGSGEBUEHR_EUR,
+} from '@/lib/berechnungen/vorfaelligkeitsentschaedigung';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
-const BEARBEITUNG = 300;
-const FAKTOR_KOSTEN = 0.85;
+const BEARBEITUNG = VFE_BEARBEITUNGSGEBUEHR_EUR;
 
 export default function VorfaelligkeitsentschaedigungRechner() {
   const [restschuld, setRestschuld] = useState<string>('150000');
@@ -18,20 +21,23 @@ export default function VorfaelligkeitsentschaedigungRechner() {
   const [marktZins, setMarktZins] = useState<string>('3,5');
 
   const result = useMemo(() => {
-    const rs = parseDeutscheZahl(restschuld) || 0;
-    const alt = parseDeutscheZahl(altZins) || 0;
-    const rl = parseDeutscheZahl(restlaufzeit) || 0;
-    const markt = parseDeutscheZahl(marktZins) || 0;
-
-    const zinsmarge = alt - markt;
-    const keineVfe = zinsmarge <= 0;
-
-    const jaehrlicherVerlust = keineVfe ? 0 : (rs * zinsmarge) / 100;
-    const vfe = keineVfe ? 0 : jaehrlicherVerlust * rl * FAKTOR_KOSTEN;
-    const gesamt = keineVfe ? 0 : vfe + BEARBEITUNG;
-
+    const ergebnis = berechneVorfaelligkeitsentschaedigung({
+      restschuld: parseDeutscheZahl(restschuld) || 0,
+      vertragszins: parseDeutscheZahl(altZins) || 0,
+      restlaufzeitJahre: parseDeutscheZahl(restlaufzeit) || 0,
+      marktzins: parseDeutscheZahl(marktZins) || 0,
+    });
+    // Lib-API auf Component-API mappen (Backwards-Compat zur Pre-Refactor-Struktur)
     return {
-      rs, alt, rl, markt, zinsmarge, keineVfe, jaehrlicherVerlust, vfe, gesamt,
+      rs: ergebnis.restschuld,
+      alt: ergebnis.vertragszins,
+      rl: ergebnis.restlaufzeitJahre,
+      markt: ergebnis.marktzins,
+      zinsmarge: ergebnis.zinsmarge,
+      keineVfe: ergebnis.keineVfe,
+      jaehrlicherVerlust: ergebnis.jaehrlicherVerlust,
+      vfe: ergebnis.vfe,
+      gesamt: ergebnis.gesamt,
     };
   }, [restschuld, altZins, restlaufzeit, marktZins]);
 
