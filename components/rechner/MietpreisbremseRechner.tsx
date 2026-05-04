@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import { berechneMietpreisbremse } from '@/lib/berechnungen/mietpreisbremse';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
@@ -28,24 +29,17 @@ export default function MietpreisbremseRechner() {
   const nMiete = parseDeutscheZahl(aktuelleMiete);
   const nFlaeche = parseDeutscheZahl(wohnflaeche);
 
-  const ergebnis = useMemo(() => {
-    const maxProM2 = nVergleich * 1.1;
-    const ueberhoehungProM2 = Math.max(0, nMiete - maxProM2);
-    const maxMonat = maxProM2 * nFlaeche;
-    const istMonat = nMiete * nFlaeche;
-    const ueberhoehungMonat = ueberhoehungProM2 * nFlaeche;
-    const ueberhoehungJahr = ueberhoehungMonat * 12;
-    const greiftBremse = giltBremse && ausnahme === 'keine';
-    return {
-      maxProM2,
-      maxMonat,
-      istMonat,
-      ueberhoehungProM2,
-      ueberhoehungMonat,
-      ueberhoehungJahr,
-      greiftBremse,
-    };
-  }, [nVergleich, nMiete, nFlaeche, giltBremse, ausnahme]);
+  const ergebnis = useMemo(
+    () =>
+      berechneMietpreisbremse({
+        vergleichsmiete: nVergleich,
+        aktuelleMiete: nMiete,
+        wohnflaeche: nFlaeche,
+        giltBremse,
+        ausnahme,
+      }),
+    [nVergleich, nMiete, nFlaeche, giltBremse, ausnahme],
+  );
 
   const fmt = (n: number) =>
     n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
