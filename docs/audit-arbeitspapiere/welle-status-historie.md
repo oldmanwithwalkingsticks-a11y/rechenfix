@@ -4,11 +4,39 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 04.05.2026
+**Stand:** 05.05.2026
 
 ---
 
-## Welle 6 — TARIF_2026-Konsumption (04.05.2026, LAUFEND)
+## Welle 6 KOMPLETT — TARIF_2026-Konsumption (05.05.2026)
+
+Welle 6 vollständig abgeschlossen am 05.05.2026. Single-Item-Welle:
+
+- **W6.1 berechneESt2026 TARIF_2026-Konsumption** ✅ — B4-technische-Schuld geschlossen. Refactor-only, 0 Sekundär-Drifts.
+
+**Drift-Bilanz:** 0 echte Lib-Bugs, 0 Sekundär-Drifts (L-34-inverse erfolgreich), 0 neue L-35-Diskrepanzen, 1 technische Schuld geschlossen.
+
+**Lehren-Liste-Update:** keine neue Lehre — W6.1 ist Anwendung etablierter Lehren L-32 + L-34 + L-37.
+
+**Coverage-Bilanz:** ABGEDECKT 57 → 57 (kein Slug-Status-Wechsel).
+
+**Real-Aufwand Welle 6 gesamt:** ~40 Min vs. Scoping-Schätzung ~60–90 Min — **unter Korridor** (Single-Item-Disziplin + 0-Sekundär-Drift-Pfad).
+
+**Externe Trigger weiterhin offen:**
+- AdSense-Re-Review (Prompts 68 + 85 geparkt bis Approval)
+- 152c Pendlerpauschalen-SSOT (geparkt bis 45-Cent-Reform-BGBl)
+
+**Welle-7-Kandidaten:**
+- L-35-Sammelblock-Auflösung (36 dokumentierte Tatbestände aus Welle 5)
+- Neue Rechner-Batches (170 → 175 → 180)
+- **TARIF_2025 + TARIF_2024 etablieren + berechneESt2025/2024-Refactor** (W6.1-S4-Befund: beide strukturell identisch zu berechneESt2026, nur Konstanten unterscheiden sich — analoger Welle-2-Refactor-Pfad)
+- **GRUNDFREIBETRAG_2026-Konsum** in `steuerklassen-vergleich.ts:84` + `gehaltsvergleich.ts:63` (W6.1-S3-Befund: 12348-Inline-Verwendungen, bereits exportierte Konstante existiert in `einkommensteuer.ts:26`)
+- AdSense-Re-Review-Folge-Aktionen (nach Approval)
+- 152c Pendlerpauschalen-SSOT (nach BGBl)
+
+---
+
+## Welle 6 KOMPLETT — TARIF_2026-Konsumption (05.05.2026)
 
 Sammel-Block für Welle-6-Aktivitäten. Trigger: Welle 5 KOMPLETT am 04.05.2026, technische Schuld aus B4 (berechneESt2026 nutzt Inline-Konstanten statt TARIF_2026-Konsum) als kompakte Single-Item-Welle konsolidieren.
 
