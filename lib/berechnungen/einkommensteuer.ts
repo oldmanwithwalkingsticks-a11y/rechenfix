@@ -26,6 +26,12 @@ export const WK_PAUSCHALE_AN_2026 = 1230;
 export const GRUNDFREIBETRAG_2026 = 12348;
 
 /**
+ * § 10c EStG — Sonderausgabenpauschale 2026 (für nicht spezifizierte Sonderausgaben).
+ * Verwendung: Lohnsteuer-Berechnung (steuerklassen-vergleich.ts), Schätz-Vereinfachung.
+ */
+export const SA_PAUSCHALE_2026 = 36;
+
+/**
  * Tarif-Konstanten 2026 für die Einkommensteuer-Zonen nach § 32a Abs. 1 EStG
  * i.d.F. StÄndG 2024.
  *

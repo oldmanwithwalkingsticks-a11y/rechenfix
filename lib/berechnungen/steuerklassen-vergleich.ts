@@ -1,4 +1,4 @@
-import { berechneEStGrund, berechneSoli, WK_PAUSCHALE_AN_2026, GRUNDFREIBETRAG_2026 } from './einkommensteuer';
+import { berechneEStGrund, berechneSoli, WK_PAUSCHALE_AN_2026, GRUNDFREIBETRAG_2026, SA_PAUSCHALE_2026 } from './einkommensteuer';
 import {
   KV_BASISSATZ_AN_2026,
   RV_SATZ_AN_2026,
@@ -52,7 +52,7 @@ function berechneLohnsteuerSK1Jahr(bruttoJahr: number): number {
   if (bruttoJahr <= 0) return 0;
   // Arbeitnehmer-Pauschbetrag (1.230 €) + Sonderausgaben (36 €) + Vorsorgepauschale (vereinfacht 12 %)
   const werbungskosten = WK_PAUSCHALE_AN_2026;
-  const sonderausgaben = 36;
+  const sonderausgaben = SA_PAUSCHALE_2026;
   const vorsorgepauschale = Math.min(bruttoJahr * 0.12, 15000);
   const zvE = Math.max(0, bruttoJahr - werbungskosten - sonderausgaben - vorsorgepauschale);
   return berechneEStGrund(zvE, 2026);
@@ -62,7 +62,7 @@ function berechneLohnsteuerSK1Jahr(bruttoJahr: number): number {
 function berechneLohnsteuerSK3Jahr(bruttoJahr: number): number {
   if (bruttoJahr <= 0) return 0;
   const werbungskosten = WK_PAUSCHALE_AN_2026;
-  const sonderausgaben = 36;
+  const sonderausgaben = SA_PAUSCHALE_2026;
   const vorsorgepauschale = Math.min(bruttoJahr * 0.12, 15000);
   const zvE = Math.max(0, bruttoJahr - werbungskosten - sonderausgaben - vorsorgepauschale);
   // Splitting-Effekt: ESt auf halbes zvE, mal 2
@@ -74,7 +74,7 @@ function berechneLohnsteuerSK3Jahr(bruttoJahr: number): number {
 function berechneLohnsteuerSK5Jahr(bruttoJahr: number): number {
   if (bruttoJahr <= 0) return 0;
   const werbungskosten = WK_PAUSCHALE_AN_2026;
-  const sonderausgaben = 36;
+  const sonderausgaben = SA_PAUSCHALE_2026;
   const vorsorgepauschale = Math.min(bruttoJahr * 0.12, 15000);
   const bruttoNachAbzug = Math.max(0, bruttoJahr - werbungskosten - sonderausgaben - vorsorgepauschale);
 
