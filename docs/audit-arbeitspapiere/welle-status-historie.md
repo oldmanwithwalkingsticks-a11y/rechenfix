@@ -8,6 +8,50 @@
 
 ---
 
+## Welle 7 KOMPLETT — TARIF_2025/2024 + GRUNDFREIBETRAG_2026-Konsum (05.05.2026)
+
+Welle 7 vollständig abgeschlossen am 05.05.2026. Triple-Sub-Item-Welle:
+
+- **W7.1 GRUNDFREIBETRAG_2026-Konsum** ✅ — 1 File (Phantom-Befund-korrigiert).
+- **W7.2 TARIF_2025 + berechneESt2025** ✅ — Lib-Etablierung + Konsum.
+- **W7.3 TARIF_2024 + berechneESt2024** ✅ — Cookie-Cutter aus W7.2.
+
+**Drift-Bilanz:** 0 echte Lib-Bugs, 0 Sekundär-Drifts (L-34-inverse by-construction garantiert), 0 neue L-35-Diskrepanzen, 1 W6.1-S3-Phantom-Befund korrigiert, 2 technische Schulden geschlossen (berechneESt2025 + berechneESt2024 jetzt SSOT-Konsumenten — zusammen mit W6.1-berechneESt2026 sind alle 3 ESt-Tarif-Funktionen auf TARIF-Object-SSOT umgestellt).
+
+**Lehren-Liste-Update:**
+- **L-39 (etabliert in W7.0-Pre-Phase, 05.05.2026):** Phantom-Befund-Pflicht in L-32-Sweep — Substring-Pattern muss gegen Float-False-Positives geprüft werden, Tiefen-Grep + cat/Read-der-Match-Zeile vor Klassifikation, nicht nur ripgrep-Output vertrauen. Generalisiert L-37 auf den L-32-Sweep-Schritt. **Anlass:** W6.1-S3-Befund „gehaltsvergleich.ts:63" stellte sich in W7.0-Pre-Phase als False-Positive heraus (Abramowitz-Stegun-Polynom-Koeffizient `4.374664141464968e+00` enthält "12348" als Substring).
+- **L-37b (formal etabliert nach Re-Bestätigung in W7.0):** Z.-Bereich-Verifikation ist Pre-Phase-Pflicht. Scoping-Schätzungen veralten durch Lib-Edits. **Anlass:** W6.1-JSDoc-Kürzung verschob alle einkommensteuer.ts-Funktionen um -2 Z. nach unten, was W7.0-Pre-Phase fangen musste.
+
+**Coverage-Bilanz:** ABGEDECKT 57 → 57 (kein Slug-Status-Wechsel — reine technische-Schuld-Auflösung).
+
+**Real-Aufwand Welle 7 gesamt:** ~34 Min (Code-Phase ~22 Min + Doku-Phase ~12 Min) vs. Scoping-Schätzung ~80–110 Min — **deutlich unter Korridor (Faktor ~3×)** dank W6.1-Pattern + W7.2-Cookie-Cutter für W7.3 + Phantom-Befund-Korrektur in W7.1.
+
+**Externe Trigger weiterhin offen:**
+- AdSense-Re-Review (Prompts 68 + 85 geparkt bis Approval)
+- 152c Pendlerpauschalen-SSOT (geparkt bis 45-Cent-BGBl)
+
+**Welle-8-Kandidaten:**
+- L-35-Sammelblock-Auflösung (36 dokumentierte Tatbestände aus Welle 5)
+- **SteuerprogressionsRechner.tsx ZONEN-Visualisierung** (Z. 29) — 2025-veraltet (`12096/29538/66153/255810`), zudem 3 der 4 Werte (`29538/66153/255810`) sind keine § 32a-Endpunkte sondern Visualisierungs-Approximationen. Echter Drift, Boundary-Verifikation gegen TARIF_2026 + analoge ZONEN-Listen für 2025/2024 nötig.
+- **SA_PAUSCHALE_2026-Export** für § 10c EStG (36 €) — Inline in `steuerklassen-vergleich.ts:65+77`, Mini-Refactor analog GRUNDFREIBETRAG_2026.
+- **Verify-Cluster-Erweiterung** um jahr=2025/2024-Cases (E4-Erwägung aus W7-Pre-Phase — 4 bestehende Scripts testen ausschließlich jahr=2026; in Welle 7 bewusst out-of-scope, Pragmatismus-Entscheidung).
+- Neue Rechner-Batches (170 → 175 → 180)
+- AdSense-Re-Review-Folge-Aktionen (nach Approval)
+- 152c Pendlerpauschalen-SSOT (nach BGBl)
+
+---
+
+## Welle 7 KOMPLETT — TARIF_2025/2024 + GRUNDFREIBETRAG_2026-Konsum (05.05.2026)
+
+Sammel-Block für Welle-7-Aktivitäten. Trigger: Welle 6 KOMPLETT am 05.05.2026, W6.1-S3-Befund (GRUNDFREIBETRAG_2026-Konsum-Kandidaten) + W6.1-S4-Befund (berechneESt2025/2024 strukturell identisch zu berechneESt2026, Welle-2-Refactor-Pfad analog) als Triple-Sub-Item-Welle konsolidieren.
+
+- Welle-7-Scoping ✅ 05.05.26 (Commit `0e6ad39`) — siehe `welle7-scoping.md`. 3 Sub-Module W7.1 (GRUNDFREIBETRAG_2026-Konsum) + W7.2 (TARIF_2025) + W7.3 (TARIF_2024). Geschätzt ~80–110 Min, drei-stufig pro Sub-Modul (Pre-Phase + Code + Verify). Out-of-Scope: Lohnsteuer-PAP-Files (1:1-XML-Treue), L-35-Sammelblock, AdSense-Re-Review-Folge. Strategie-Entscheidungen: E1 Triple-Sub-Item-Welle, E2 L-34-inverse-Pflicht, E3 L-37-Pre-Phase als Werte-Tabelle 13×3, E4 keine neuen Verify-Cases für jahr=2025/2024 (refactor-only Pragmatismus), E5 atomic 4-Commit-Struktur (3 Code + 1 Doku).
+- W7.1 GRUNDFREIBETRAG_2026-Konsum ✅ 05.05.26 (Commit `24a1462`) — `steuerklassen-vergleich.ts:84` (2 Inline-12348-Verwendungen) durch GRUNDFREIBETRAG_2026-Import aus einkommensteuer.ts ersetzt. **W6.1-S3-Phantom-Befund korrigiert:** `gehaltsvergleich.ts` war False-Positive aus L-32-Substring-Sweep (Abramowitz-Stegun-Polynom-Koeffizient `4.374664141464968e+00` enthält "12348" als Substring) — kein echter Refactor-Kandidat. W7.1 reduziert auf 1 File (-50 % Aufwand). **L-39 etabliert.** Out-of-Scope: 36 € § 10c EStG-Sonderausgabenpauschale (Welle-8-Mini-Kandidat SA_PAUSCHALE_2026). Build 205/205. Real-Aufwand ~5 Min.
+- W7.2 TARIF_2025 + berechneESt2025-Konsum ✅ 05.05.26 (Commit `1d1ade8`) — TARIF_2025-Object etabliert (13 Konstanten, B4-Pattern für TARIF_2026). berechneESt2025 (Z. 129–144) Inline → Property-Zugriffe. **L-37-Pre-Phase-Werte-Tabelle 13×3 als SSOT.** L-34-inverse: 97/97 strict-grün, by-construction-Garantie (Math.floor-Identität durch Inline=Property — 4 bestehende Verify-Scripts testen ausschließlich jahr=2026, daher unbeeinflusst). Strukturkonstanten z4_ende=277825 / z2_b=1400 / z3_b=2397 / z4_m=0.42 / z5_m=0.45 by-design dupliziert (§ 32a EStG-Strukturparameter). Build 205/205. Real-Aufwand ~10 Min.
+- W7.3 TARIF_2024 + berechneESt2024-Konsum ✅ 05.05.26 (Commit `2869d99`) — TARIF_2024-Object etabliert (Cookie-Cutter aus W7.2). berechneESt2024 (Z. 147–162) Inline → Property-Zugriffe. L-34-inverse: 97/97 strict-grün. Schließt W6.1-S4-Befund komplett ab (alle 3 ESt-Tarif-Funktionen 2024/2025/2026 nutzen jetzt TARIF-Object-SSOT). Build 205/205. Real-Aufwand ~7 Min.
+
+---
+
 ## Welle 6 KOMPLETT — TARIF_2026-Konsumption (05.05.2026)
 
 Welle 6 vollständig abgeschlossen am 05.05.2026. Single-Item-Welle:
