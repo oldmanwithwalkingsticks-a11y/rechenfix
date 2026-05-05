@@ -62,6 +62,28 @@ export const TARIF_2026 = {
   z5_b: 19470.38,
 } as const;
 
+/**
+ * § 32a EStG-Tarif 2025 (Werte aus berechneESt2025, via Welle-7-Pre-Phase verifiziert).
+ * Strukturkonstanten z4_ende, z2_b, z3_b, z4_m, z5_m identisch zu TARIF_2026 by-design
+ * (§ 32a EStG-Strukturparameter — Reichensteuer-Endpunkt + Polynom-b-Koeffizienten +
+ * Marginal-Sätze 42 %/45 %).
+ */
+export const TARIF_2025 = {
+  gfb: 12096,
+  z2_ende: 17443,
+  z3_ende: 68480,
+  z4_ende: 277825,
+  z2_a: 932.30,
+  z2_b: 1400,
+  z3_a: 176.64,
+  z3_b: 2397,
+  z3_c: 1015.13,
+  z4_m: 0.42,
+  z4_b: 10911.92,
+  z5_m: 0.45,
+  z5_b: 19246.67,
+} as const;
+
 export function kirchensteuersatzFuer(bundesland: Bundesland): 8 | 9 {
   return KIRCHENSTEUER_8_LAENDER.includes(bundesland) ? 8 : 9;
 }
@@ -125,22 +147,22 @@ function berechneESt2026(zvE: number): number {
   return Math.floor(T.z5_m * zvE - T.z5_b);
 }
 
-// Einkommensteuer 2025 (Grundfreibetrag 12.096 € — Werte praktisch identisch zu 2026 bis auf Details)
+// Einkommensteuer 2025 (Grundfreibetrag 12.096 €) — konsumiert TARIF_2025 (W7.2)
 function berechneESt2025(zvE: number): number {
-  const gf = 12096;
-  if (zvE <= gf) return 0;
-  if (zvE <= 17443) {
-    const y = (zvE - gf) / 10000;
-    return Math.floor((932.30 * y + 1400) * y);
+  const T = TARIF_2025;
+  if (zvE <= T.gfb) return 0;
+  if (zvE <= T.z2_ende) {
+    const y = (zvE - T.gfb) / 10000;
+    return Math.floor((T.z2_a * y + T.z2_b) * y);
   }
-  if (zvE <= 68480) {
-    const z = (zvE - 17443) / 10000;
-    return Math.floor((176.64 * z + 2397) * z + 1015.13);
+  if (zvE <= T.z3_ende) {
+    const z = (zvE - T.z2_ende) / 10000;
+    return Math.floor((T.z3_a * z + T.z3_b) * z + T.z3_c);
   }
-  if (zvE <= 277825) {
-    return Math.floor(0.42 * zvE - 10911.92);
+  if (zvE <= T.z4_ende) {
+    return Math.floor(T.z4_m * zvE - T.z4_b);
   }
-  return Math.floor(0.45 * zvE - 19246.67);
+  return Math.floor(T.z5_m * zvE - T.z5_b);
 }
 
 // Einkommensteuer 2024 (Grundfreibetrag 11.604 €)
