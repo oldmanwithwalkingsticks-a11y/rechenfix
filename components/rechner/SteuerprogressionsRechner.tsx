@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useId } from 'react';
 import { berechneSteuerprogression } from '@/lib/berechnungen/steuerprogression';
-import { BUNDESLAENDER, type Bundesland } from '@/lib/berechnungen/einkommensteuer';
+import { BUNDESLAENDER, type Bundesland, TARIF_2026 } from '@/lib/berechnungen/einkommensteuer';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
@@ -24,12 +24,12 @@ const CHART_H = SVG_H - PAD_TOP - PAD_BOTTOM;
 const MAX_EINKOMMEN = 200000;
 const MAX_SATZ = 50; // %
 
-// Tariff zone boundaries (zvE values)
+// Tariff zone boundaries (zvE values) — § 32a EStG-Endpunkte aus TARIF_2026 (W8.2)
 const ZONEN = [
-  { bis: 12096, farbe: '#f0fdf4' },   // Grundfreibetrag (grün)
-  { bis: 29538, farbe: '#eff6ff' },   // Zone 1 14-24% (blau)
-  { bis: 66153, farbe: '#fefce8' },   // Zone 2 ~24-42% (gelb)
-  { bis: 255810, farbe: '#fff7ed' },  // Zone 3 42% (orange)
+  { bis: TARIF_2026.gfb,     farbe: '#f0fdf4' }, // Grundfreibetrag (grün)
+  { bis: TARIF_2026.z2_ende, farbe: '#eff6ff' }, // Zone 2 14-24% (blau)
+  { bis: TARIF_2026.z3_ende, farbe: '#fefce8' }, // Zone 3 24-42% (gelb)
+  { bis: TARIF_2026.z4_ende, farbe: '#fff7ed' }, // Zone 4 42% (orange)
 ];
 
 function xPos(einkommen: number): number {
