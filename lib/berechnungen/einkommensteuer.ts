@@ -31,14 +31,12 @@ export const GRUNDFREIBETRAG_2026 = 12348;
  *
  * Quellen:
  *   - § 32a EStG: https://www.gesetze-im-internet.de/estg/__32a.html
- *   - Implementiert in berechneESt2026 (Z. 70–89, Inline-Konstanten)
  *
  * Stand: 01.01.2026.
  *
  * Verwendung: SSOT für analytische Tarif-Berechnungen (z. B.
- * berechneGrenzsteuersatz in steuerprogression.ts). berechneESt2026 selbst
- * nutzt aktuell noch Inline-Konstanten — Refactor auf TARIF_2026-Konsum ist
- * Welle-2-Pattern und außerhalb Welle-5-Track-B-Scope (B4, 04.05.2026).
+ * berechneGrenzsteuersatz in steuerprogression.ts) und für berechneESt2026
+ * selbst (W6.1, 05.05.2026 — schließt B4-technische-Schuld ab).
  */
 export const TARIF_2026 = {
   /** Grundfreibetrag (Zone 1-Ende = Zone 2-Beginn). */
@@ -107,24 +105,24 @@ const PARAMS: Record<Steuerjahr, { grundfreibetrag: number; soliFreigrenze: numb
 
 // Einkommensteuer nach § 32a EStG i. d. F. v. 2024 — Formelberechnung 2026
 function berechneESt2026(zvE: number): number {
-  const gf = 12348;
-  if (zvE <= gf) return 0;
+  const T = TARIF_2026;
+  if (zvE <= T.gfb) return 0;
   // Zone 2: 12.349 – 17.799 €
-  if (zvE <= 17799) {
-    const y = (zvE - gf) / 10000;
-    return Math.floor((914.51 * y + 1400) * y);
+  if (zvE <= T.z2_ende) {
+    const y = (zvE - T.gfb) / 10000;
+    return Math.floor((T.z2_a * y + T.z2_b) * y);
   }
   // Zone 3: 17.800 – 69.878 €
-  if (zvE <= 69878) {
-    const z = (zvE - 17799) / 10000;
-    return Math.floor((173.10 * z + 2397) * z + 1034.87);
+  if (zvE <= T.z3_ende) {
+    const z = (zvE - T.z2_ende) / 10000;
+    return Math.floor((T.z3_a * z + T.z3_b) * z + T.z3_c);
   }
   // Zone 4: 69.879 – 277.825 €
-  if (zvE <= 277825) {
-    return Math.floor(0.42 * zvE - 11135.63);
+  if (zvE <= T.z4_ende) {
+    return Math.floor(T.z4_m * zvE - T.z4_b);
   }
   // Zone 5: ab 277.826 €
-  return Math.floor(0.45 * zvE - 19470.38);
+  return Math.floor(T.z5_m * zvE - T.z5_b);
 }
 
 // Einkommensteuer 2025 (Grundfreibetrag 12.096 € — Werte praktisch identisch zu 2026 bis auf Details)
