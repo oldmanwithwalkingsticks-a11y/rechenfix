@@ -1,4 +1,4 @@
-import { berechneEStGrund, berechneSoli, WK_PAUSCHALE_AN_2026 } from './einkommensteuer';
+import { berechneEStGrund, berechneSoli, WK_PAUSCHALE_AN_2026, GRUNDFREIBETRAG_2026 } from './einkommensteuer';
 import {
   KV_BASISSATZ_AN_2026,
   RV_SATZ_AN_2026,
@@ -81,7 +81,7 @@ function berechneLohnsteuerSK5Jahr(bruttoJahr: number): number {
   // Näherungsformel SK5: Differenz der Splittingsteuer zwischen (bruttoNachAbzug + 40.000) und 40.000,
   // aber kein Grundfreibetrag — vereinfachte Approximation via "SK4 × 1,55"-Faktor
   // Genauer: SK5-Tabelle orientiert sich an der Annahme, dass der Partner viel verdient
-  const estOhneGF = berechneEStGrund(bruttoNachAbzug + 12348, 2026) - berechneEStGrund(12348, 2026);
+  const estOhneGF = berechneEStGrund(bruttoNachAbzug + GRUNDFREIBETRAG_2026, 2026) - berechneEStGrund(GRUNDFREIBETRAG_2026, 2026);
   return Math.max(estOhneGF, bruttoNachAbzug * 0.14);
 }
 
