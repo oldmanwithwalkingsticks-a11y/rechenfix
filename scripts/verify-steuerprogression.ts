@@ -228,6 +228,20 @@ cases.push(
   { name: 'G-04 zvE = 0: durchschnittssteuersatz = 0',           actual: g4!.durchschnittssteuersatz, expected: 0 },
 );
 
+// === Cluster H: Tarif-Jahre 2025/2024 — direkter berechneEStGrund-Schutz (W9.1) ===
+// Schließt L-34-inverse-Schutz-Lücke für TARIF_2025/2024-Konsumenten aus W7.2/W7.3.
+// Wrapper-Funktionen berechneSteuerprogression et al. hardcodieren jahr=2026, daher
+// hier direkter Lib-Aufruf gegen mathematisch hergeleitete Polynom-Erwartungen
+// (Pre-Phase-Verifikation: alle 6 Werte aus § 32a-Polynom + Konstanten 1:1 reproduziert).
+cases.push(
+  { name: 'H-01 ESt 2025 zvE 15.000 (Z2)',  actual: berechneEStGrund(15_000, 2025),  expected: 485,   tolerance: 0.5 },
+  { name: 'H-02 ESt 2025 zvE 50.000 (Z3)',  actual: berechneEStGrund(50_000, 2025),  expected: 10691, tolerance: 0.5 },
+  { name: 'H-03 ESt 2025 zvE 200.000 (Z4)', actual: berechneEStGrund(200_000, 2025), expected: 73088, tolerance: 0.5 },
+  { name: 'H-04 ESt 2024 zvE 15.000 (Z2)',  actual: berechneEStGrund(15_000, 2024),  expected: 581,   tolerance: 0.5 },
+  { name: 'H-05 ESt 2024 zvE 50.000 (Z3)',  actual: berechneEStGrund(50_000, 2024),  expected: 10906, tolerance: 0.5 },
+  { name: 'H-06 ESt 2024 zvE 200.000 (Z4)', actual: berechneEStGrund(200_000, 2024), expected: 73397, tolerance: 0.5 },
+);
+
 // === Ausgabe ===
 let passed = 0;
 let failed = 0;
