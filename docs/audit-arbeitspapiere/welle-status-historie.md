@@ -8,6 +8,45 @@
 
 ---
 
+## Welle 8 KOMPLETT — SA_PAUSCHALE_2026 + SteuerprogressionsRechner-ZONEN (05.05.2026)
+
+Welle 8 vollständig abgeschlossen am 05.05.2026. Dual-Sub-Item-Welle:
+
+- **W8.1 SA_PAUSCHALE_2026-Export + Konsum** ✅ — § 10c EStG-Sonderausgabenpauschale jetzt als SSOT (3 Konsumenten in steuerklassen-vergleich.ts).
+- **W8.2 SteuerprogressionsRechner-ZONEN Variante A** ✅ — UI-Drift korrigiert via TARIF_2026-Property-Konsum, alle 4 ZONEN-Werte jetzt echte § 32a-Endpunkte.
+
+**Drift-Bilanz:** 0 echte Lib-Bugs, 0 Sekundär-Drifts (W8.1 by-construction, W8.2 keine Verify-Cluster betroffen), 0 neue L-35-Diskrepanzen, **2 echte UI/Logik-Drifts korrigiert** (3 Inline-36-Magic-Numbers + 4 ZONEN-Magic-Numbers), 2 W7-Out-of-Scope-Items geschlossen.
+
+**Lehren-Liste-Update:** keine neue Lehre — W8 ist Anwendung etablierter Lehren L-32 + L-34 + L-37 + L-37b + L-39. Methodische Bestätigung: L-39-Pattern für generische Werte (`36`) funktioniert zuverlässig mit kontextuellem Pattern-Bau (sonderausgaben-Bezug + Zeilen-Anker).
+
+**Coverage-Bilanz:** ABGEDECKT 57 → 57 (kein Slug-Status-Wechsel — technische-Schuld-Auflösung + UI-Drift-Korrektur).
+
+**Real-Aufwand Welle 8 gesamt:** ~37 Min (Pre-Phase ~15 + Code-Phase ~10 + Doku-Phase ~12) vs. Scoping-Schätzung ~80–110 Min — **deutlich unter Korridor (Faktor ~2,5–3×)** dank klarer Pre-Phase-Variante-A-Decision + W7-Pattern-Treue + by-construction-Refactor-Charakter.
+
+**Externe Trigger weiterhin offen:**
+- AdSense-Re-Review (Prompts 68 + 85 geparkt bis Approval)
+- 152c Pendlerpauschalen-SSOT (geparkt bis 45-Cent-BGBl)
+
+**Welle-9-Kandidaten:**
+- **Verify-Cluster-Erweiterung jahr=2025/2024** (W7-E4-Erwägung, jetzt natürlicher nächster Slot — schließt L-34-inverse-Schutz-Lücke für die in W7 etablierten TARIF_2025/2024-Konsumenten)
+- L-35-Sammelblock-Auflösung (36 dokumentierte Tatbestände aus W5)
+- MAX_EINKOMMEN=255810 in SteuerprogressionsRechner.tsx fachlich reviewen (out-of-W8-Scope) — passt der Wert noch zur neuen Tarif-Visualisierung mit korrekten Endpunkten?
+- Neue Rechner-Batches (170 → 175 → 180)
+- AdSense-Re-Review-Folge (nach Approval)
+- 152c Pendlerpauschalen-SSOT (nach BGBl)
+
+---
+
+## Welle 8 KOMPLETT — SA_PAUSCHALE_2026 + SteuerprogressionsRechner-ZONEN (05.05.2026)
+
+Sammel-Block für Welle-8-Aktivitäten. Trigger: Welle 7 KOMPLETT am 05.05.2026, 2 W7-Out-of-Scope-Items (SA_PAUSCHALE_2026-Export für § 10c EStG, SteuerprogressionsRechner-ZONEN-Drift-Korrektur) als Dual-Sub-Item-Welle konsolidieren.
+
+- Welle-8-Scoping ✅ 05.05.26 (Commit `f574847`) — siehe `welle8-scoping.md`. 2 Sub-Module W8.1 (SA_PAUSCHALE_2026-Export+Konsum) + W8.2 (SteuerprogressionsRechner-ZONEN-Drift-Korrektur). Geschätzt ~80–110 Min, drei-stufig (Pre-Phase + Code + Doku). Out-of-Scope: Verify-Cluster-Erweiterung jahr=2025/2024 (Welle 9), L-35-Sammelblock, Lohnsteuer-PAP-Konstanten, MAX_EINKOMMEN-Review. Strategie-Entscheidungen: E1 Dual-Sub-Item sequenziell (W8.1 → W8.2), E2 L-34-inverse-Pflicht, E3 L-37-Pre-Phase mit umgekehrter Richtung für W8.1 + Variante-Decision für W8.2, E4 keine neuen Verify-Scripts (Welle 9), E5 atomic 3-Commit-Struktur, E6 Aufwand-Erwartung Faktor-1,5×.
+- W8.1 SA_PAUSCHALE_2026-Export + Konsum ✅ 05.05.26 (Commit `720e285`) — SA_PAUSCHALE_2026=36 als Top-Level-Konstante in einkommensteuer.ts exportiert (§ 10c EStG-Sonderausgabenpauschale, Schätz-Vereinfachung, Naming analog GRUNDFREIBETRAG_2026/WK_PAUSCHALE_AN_2026). 3 Inline-36-Verwendungen in steuerklassen-vergleich.ts (Z. 55/65/77 in berechneLohnsteuerSK1Jahr/SK3Jahr/SK5Jahr) durch Import ersetzt. **L-37b-Drift gefangen:** Pre-Phase fand 3 Stellen statt 2 im Scoping (+1 Edit-Punkt, kein Konzept-Aufwand). **L-39-Pattern** `^.{0,5}=\s*36\s*[;,]|sonderausgaben\s*=\s*36|SA_PAUSCHALE` ergab 0 False-Positives bei 3 echten Treffern. Schließt W7-Out-of-Scope-Item ab. Build 205/205. By-construction L-34-inverse 97/97 unverändert grün. Real-Aufwand ~5 Min.
+- W8.2 SteuerprogressionsRechner-ZONEN-Drift-Korrektur (Variante A) ✅ 05.05.26 (Commit `98fa376`) — ZONEN-Liste (Z. 28–33) Inline-Werte 12096/29538/66153/255810 durch TARIF_2026.gfb/z2_ende/z3_ende/z4_ende ersetzt (12348/17799/69878/277825). **Karsten-Decision Variante A** nach Pre-Phase-S2-STOP. Begründung: Z. 27-Kommentar nennt explizit „Tariff zone boundaries" (Soll = echte § 32a-Endpunkte); 29538/66153/255810 waren weder § 32a-Endpunkte noch dokumentierte Approximationen (Pre-Phase-Heuristik-Test ergebnislos: 28 % / 40,7 % / 42 % Grenzsätze passen zu keiner ableitbaren Regel). Drift-Korrektur: 12096 war 2025-veraltet, andere 3 waren Magic Numbers ohne fachliche Grundlage. Inline-Kommentare 1-basiert → 2-basiert (Lib-Naming z2/z3/z4). Reine SVG-Background-Verwendung (Z. 237–241 einzige Verwendung), keine Berechnungslogik betroffen, keine Verify-Cluster betroffen. Visualisierungs-Δ akzeptiert (Chart zeigt jetzt korrekten § 32a-Tarif statt schiefer Approximation). MAX_EINKOMMEN=255810 unverändert (out-of-scope). Build 205/205. Real-Aufwand ~5 Min.
+
+---
+
 ## Welle 7 KOMPLETT — TARIF_2025/2024 + GRUNDFREIBETRAG_2026-Konsum (05.05.2026)
 
 Welle 7 vollständig abgeschlossen am 05.05.2026. Triple-Sub-Item-Welle:
