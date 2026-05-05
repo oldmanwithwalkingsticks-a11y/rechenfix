@@ -8,6 +8,46 @@
 
 ---
 
+## Welle 9 KOMPLETT — Verify-Cluster-Erweiterung jahr=2025/2024 (05.05.2026)
+
+Welle 9 vollständig abgeschlossen am 05.05.2026. Single-Item-Welle:
+
+- **W9.1 Cluster H — Tarif-Jahre 2025/2024-Schutz** ✅ — +6 Cases in verify-steuerprogression.ts, direkter berechneEStGrund-Aufruf-Pattern.
+
+**Drift-Bilanz:** 0 echte Lib-Bugs, 0 Sekundär-Drifts, 0 neue L-35-Diskrepanzen, **L-34-inverse-Schutz-Lücke für TARIF_2025/2024-Konsumenten geschlossen** (W7.2/W7.3-Folge-Härtung).
+
+**Lehren-Liste-Update:** keine neue Lehre — W9 ist Anwendung etablierter Lehren L-34 + Anti-Tautologie-Pflicht. Methodische Bestätigung: Pre-Phase mit freiwilliger Polynom-Hand-Rechnung gegen Lib-Output ist sehr robust (alle 6 Werte 1:1 reproduziert).
+
+**Coverage-Bilanz:** ABGEDECKT 57 → 57 (Test-Coverage-Erweiterung, kein Slug-Status-Wechsel).
+
+**Verify-Bilanz:** 97 → **103/103 strict-grün** (über alle 4 Scripts; verify-tarif-2026.ts Console-Print unverändert).
+
+**Real-Aufwand Welle 9 gesamt:** ~29 Min (Pre-Phase ~10 + Code-Phase ~9 + Doku-Phase ~10) vs. Scoping-Schätzung ~50–80 Min — **deutlich unter Korridor (Faktor ~1,7–2,7×)** dank klarer Pre-Phase-Polynom-Verifikation + Single-File-Edit-Charakter.
+
+**Externe Trigger weiterhin offen:**
+- AdSense-Re-Review (Prompts 68 + 85 geparkt)
+- 152c Pendlerpauschalen-SSOT (geparkt bis 45-Cent-BGBl)
+
+**Welle-10-Kandidaten:**
+- L-35-Sammelblock-Auflösung (36 dokumentierte Tatbestände aus W5)
+- MAX_EINKOMMEN=255810 in SteuerprogressionsRechner.tsx fachlich reviewen (W8.2-Out-of-Scope, weiterhin offen)
+- Neue Rechner-Batches (170 → 175 → 180)
+- AdSense-Re-Review-Folge (nach Approval)
+- 152c Pendlerpauschalen-SSOT (nach BGBl)
+- Backlink-Building-Sprint (orthogonal, geschäftsrelevant)
+- Berechnungs-Wrapper-jahr-Hardcoding-Refactor (eigene technische Schuld: berechneSteuerprogression / berechneSplittingVergleich / berechneSteuerklassenVergleich akzeptieren keinen jahr-Parameter, immer 2026 hardcoded)
+
+---
+
+## Welle 9 KOMPLETT — Verify-Cluster-Erweiterung jahr=2025/2024 (05.05.2026)
+
+Sammel-Block für Welle-9-Aktivitäten. Trigger: Welle 8 KOMPLETT am 05.05.2026, W7-E4-Erwägung (Verify-Cluster-Erweiterung um jahr=2025/2024-Cases) als natürlicher nächster Slot — schließt L-34-inverse-Schutz-Lücke für TARIF_2025/2024-Konsumenten aus W7.2/W7.3.
+
+- Welle-9-Scoping ✅ 05.05.26 (Commit `55eff1e`) — siehe `welle9-scoping.md`. Single-Item W9.1 (Verify-Cluster-Erweiterung). Geschätzt ~50–80 Min, drei-stufig (Pre-Phase + Code + Doku). Out-of-Scope: neue Verify-Scripts (E4), Refactor von Berechnungs-Wrapper-jahr-Hardcoding (eigene techn. Schuld), L-35-Sammelblock. Strategie-Entscheidungen: E1 Single-File-Edit, E2 L-34-inverse-Pflicht, E3 L-37-Pre-Phase mit Polynom-Hand-Rechnung gegen Tautologie, E4 keine neuen Scripts, E5 atomic 2-Commit-Struktur (Code + Doku), E6 Aufwand-Erwartung Faktor-1,5× = ~50–80 Min.
+- W9.1 Cluster H — Tarif-Jahre 2025/2024-Schutz ✅ 05.05.26 (Commit `011e5ae`) — Cluster H in `scripts/verify-steuerprogression.ts` eingefügt, +6 Cases (H-01 bis H-06, zvE 15.000/50.000/200.000 für jahr=2025+2024). **Variante 1 (V1) per Karsten-Decision** nach Pre-Phase-API-Restriktion-Befund: Berechnungs-Wrapper (`berechneSteuerprogression` et al.) hardcodieren intern `jahr=2026`, daher direkter `berechneEStGrund(zvE, jahr)`-Aufruf-Pattern. V2 (alle 3 Scripts) wäre redundant, V3 (neuer Script) E4-Verstoß. Schließt L-34-inverse-Schutz-Lücke für TARIF_2025/2024-Konsumenten aus W7.2/W7.3 ab. **Anti-Tautologie erfüllt:** Erwartungswerte (485/10691/73088/581/10906/73397) aus Polynom-Hand-Rechnung mit § 32a-Konstanten hergeleitet, in Pre-Phase 6/6 mit Lib-Output verifiziert (alle 3 Zonen Z2/Z3/Z4 pro Jahr). Bilanz 97 → 103 strict-grün (verify-steuerprogression 42 → 48 + verify-splitting 34 + verify-steuerklassen-vergleich 21 unverändert + verify-tarif-2026.ts Console-Print unverändert per Format-Decision Option c). Build 205/205. Real-Aufwand ~9 Min.
+
+---
+
 ## Welle 8 KOMPLETT — SA_PAUSCHALE_2026 + SteuerprogressionsRechner-ZONEN (05.05.2026)
 
 Welle 8 vollständig abgeschlossen am 05.05.2026. Dual-Sub-Item-Welle:
