@@ -115,7 +115,7 @@ export default function SteuerprogressionsRechner() {
   }, [ergebnis, zve]);
 
   // X-Achsen-Labels
-  const xLabels = [0, 50000, 100000, 150000, 200000];
+  const xLabels = [0, 50000, 100000, 150000, 200000, 250000, 300000];
   // Y-Achsen-Labels
   const yLabels = [0, 10, 20, 30, 40, 50];
 
@@ -142,9 +142,9 @@ export default function SteuerprogressionsRechner() {
               id={sliderId}
               type="range"
               min={0}
-              max={200000}
+              max={300000}
               step={1000}
-              value={Math.min(Math.max(0, Math.round(zve / 1000) * 1000), 200000)}
+              value={Math.min(Math.max(0, Math.round(zve / 1000) * 1000), 300000)}
               onChange={handleSliderChange}
               className="w-full h-2 bg-gray-200 dark:bg-gray-600 rounded-lg appearance-none cursor-pointer accent-primary-600"
               aria-label="Zu versteuerndes Einkommen per Schieberegler"
