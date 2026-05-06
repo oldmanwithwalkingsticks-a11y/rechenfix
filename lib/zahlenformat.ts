@@ -24,12 +24,12 @@
  *   "1.5"         → 1.5      (R4)
  *   "1.000.000"   → 1000000  (R2)
  *
- * Gibt NaN zurück bei leerer oder ungültiger Eingabe.
+ * Empty/Whitespace-String → 0 (UX-Default für Initial-State, W12-Hotfix);
+ * ungültige Eingaben (`'abc'` etc.) → NaN.
  */
 export function parseDeutscheZahl(wert: string): number {
-  if (!wert) return NaN;
+  if (!wert || wert.trim() === '') return 0;  // Backwards-Compat (W12-Hotfix)
   const trimmed = wert.trim();
-  if (trimmed === '') return NaN;
 
   // R1: Komma vorhanden → Komma=Dezimal, alle Punkte=Tausender
   if (trimmed.includes(',')) {

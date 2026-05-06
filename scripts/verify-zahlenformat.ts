@@ -42,7 +42,7 @@ const clusterA: Case[] = [
   { name: 'A-07 "12,34" → 12.34 (R1)',                    actual: parseDeutscheZahl('12,34'),       expected: 12.34 },
   { name: 'A-08 "1.500,50" → 1500.50 (R1)',               actual: parseDeutscheZahl('1.500,50'),    expected: 1500.5 },
   { name: 'A-09 "1.000.000,99" → 1000000.99 (R1)',        actual: parseDeutscheZahl('1.000.000,99'), expected: 1000000.99 },
-  { name: 'A-10 "" → NaN (edge)',                         actual: parseDeutscheZahl(''),            expected: NaN },
+  { name: 'A-10 "" → 0 (Backwards-Compat, W12-Hotfix)',   actual: parseDeutscheZahl(''),            expected: 0 },
   { name: 'A-11 "abc" → NaN (edge)',                      actual: parseDeutscheZahl('abc'),         expected: NaN },
   { name: 'A-12 "-150.000" → -150000 (R3 mit Minus)',     actual: parseDeutscheZahl('-150.000'),    expected: -150000 },
 ];
@@ -57,9 +57,10 @@ const clusterB: Case[] = roundTripWerte.map((n) => ({
 
 // --- Cluster C: Edge-Cases (Whitespace, Negativ-Strings) ---
 const clusterC: Case[] = [
-  { name: 'C-01 "  150  " → 150 (Whitespace-Trim)',       actual: parseDeutscheZahl('  150  '),     expected: 150 },
-  { name: 'C-02 "  " → NaN (nur Whitespace)',             actual: parseDeutscheZahl('  '),          expected: NaN },
+  { name: 'C-01 "  150  " → 150 (Trim + Parse)',          actual: parseDeutscheZahl('  150  '),     expected: 150 },
+  { name: 'C-02 "  " → 0 (Whitespace-only, W12-Hotfix)',  actual: parseDeutscheZahl('  '),          expected: 0 },
   { name: 'C-03 "  1.500,50  " → 1500.5 (Trim + R1)',     actual: parseDeutscheZahl('  1.500,50  '), expected: 1500.5 },
+  { name: 'C-04 "  abc  " → NaN (Trim + Ungültig-Anker)', actual: parseDeutscheZahl('  abc  '),     expected: NaN },
 ];
 
 const alleCluster: Array<{ name: string; cases: Case[] }> = [
