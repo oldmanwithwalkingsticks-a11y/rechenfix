@@ -100,6 +100,10 @@ function berechneDurchschnittssteuersatz(est: number, zvE: number): number {
   return Math.round((est / zvE) * 10000) / 100; // 2 Dezimalstellen
 }
 
+// X-Achsen-MAX für Tarif-Visualisierung; ~22k über TARIF_2026.z4_ende,
+// Reichensteuer-Schwelle (Z4→Z5) sichtbar. SSOT (W11.3).
+export const PLOT_MAX_EINKOMMEN = 300000;
+
 export function berechneSteuerprogression(
   zvE: number,
   splitting: boolean,
@@ -141,18 +145,18 @@ export function berechneSteuerprogression(
     };
   }
 
-  // Kurvendaten: 0 bis 200.000 in 2.000er-Schritten
+  // Kurvendaten: 0 bis 300.000 (PLOT_MAX_EINKOMMEN) in 2.000er-Schritten
   const kurvenDaten: SteuerprogressionsErgebnis['kurvenDaten'] = [];
-  for (let einkommen = 0; einkommen <= 200000; einkommen += 2000) {
+  for (let einkommen = 0; einkommen <= PLOT_MAX_EINKOMMEN; einkommen += 2000) {
     const est = berechneEStMitSplitting(einkommen, splitting);
     const durchschnitt = berechneDurchschnittssteuersatz(est, einkommen);
     const grenz = berechneGrenzsteuersatz(einkommen, splitting);
     kurvenDaten.push({ einkommen, durchschnitt, grenz });
   }
 
-  // Tabellendaten: 10.000er-Schritte von 10.000 bis 200.000
+  // Tabellendaten: 10.000er-Schritte von 10.000 bis 300.000 (PLOT_MAX_EINKOMMEN)
   const tabelleDaten: SteuerprogressionsErgebnis['tabelleDaten'] = [];
-  for (let einkommen = 10000; einkommen <= 200000; einkommen += 10000) {
+  for (let einkommen = 10000; einkommen <= PLOT_MAX_EINKOMMEN; einkommen += 10000) {
     const est = berechneEStMitSplitting(einkommen, splitting);
     const durchschnitt = berechneDurchschnittssteuersatz(est, einkommen);
     const grenz = berechneGrenzsteuersatz(einkommen, splitting);

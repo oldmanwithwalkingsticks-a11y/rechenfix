@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo, useId } from 'react';
-import { berechneSteuerprogression } from '@/lib/berechnungen/steuerprogression';
+import { berechneSteuerprogression, PLOT_MAX_EINKOMMEN } from '@/lib/berechnungen/steuerprogression';
 import { BUNDESLAENDER, type Bundesland, TARIF_2026 } from '@/lib/berechnungen/einkommensteuer';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
@@ -21,10 +21,6 @@ const PAD_BOTTOM = 40;
 const CHART_W = SVG_W - PAD_LEFT - PAD_RIGHT;
 const CHART_H = SVG_H - PAD_TOP - PAD_BOTTOM;
 
-// X-Achsen-MAX für Tarif-Visualisierung. Liegt ~22k über
-// TARIF_2026.z4_ende (277.825 €), sodass Reichensteuer-
-// Schwelle (Z4→Z5) im SVG-Chart sichtbar bleibt. W11 (06.05.26).
-const MAX_EINKOMMEN = 300000;
 const MAX_SATZ = 50; // %
 
 // Tariff zone boundaries (zvE values) — § 32a EStG-Endpunkte aus TARIF_2026 (W8.2)
@@ -36,7 +32,7 @@ const ZONEN = [
 ];
 
 function xPos(einkommen: number): number {
-  return PAD_LEFT + (einkommen / MAX_EINKOMMEN) * CHART_W;
+  return PAD_LEFT + (einkommen / PLOT_MAX_EINKOMMEN) * CHART_W;
 }
 
 function yPos(satz: number): number {
@@ -98,7 +94,7 @@ export default function SteuerprogressionsRechner() {
   }, [ergebnis]);
 
   // Current zvE x position (clamped)
-  const currentX = xPos(Math.min(zve, MAX_EINKOMMEN));
+  const currentX = xPos(Math.min(zve, PLOT_MAX_EINKOMMEN));
   const currentDurchschnitt = ergebnis ? yPos(ergebnis.durchschnittssteuersatz) : PAD_TOP + CHART_H;
   const currentGrenz = ergebnis ? yPos(ergebnis.grenzsteuersatz) : PAD_TOP + CHART_H;
 
@@ -153,6 +149,7 @@ export default function SteuerprogressionsRechner() {
               <span>0 €</span>
               <span>100.000 €</span>
               <span>200.000 €</span>
+              <span>300.000 €</span>
             </div>
           </div>
         </div>
@@ -239,7 +236,7 @@ export default function SteuerprogressionsRechner() {
                 {/* Tariff zone backgrounds */}
                 {ZONEN.map((zone, i) => {
                   const vonEink = i === 0 ? 0 : ZONEN[i - 1].bis;
-                  const bisEink = Math.min(zone.bis, MAX_EINKOMMEN);
+                  const bisEink = Math.min(zone.bis, PLOT_MAX_EINKOMMEN);
                   const x1 = xPos(vonEink);
                   const x2 = xPos(bisEink);
                   return (
@@ -321,7 +318,7 @@ export default function SteuerprogressionsRechner() {
                 />
 
                 {/* Vertikale Linie am aktuellen zvE */}
-                {zve >= 0 && zve <= MAX_EINKOMMEN && (
+                {zve >= 0 && zve <= PLOT_MAX_EINKOMMEN && (
                   <>
                     <line
                       x1={currentX}
