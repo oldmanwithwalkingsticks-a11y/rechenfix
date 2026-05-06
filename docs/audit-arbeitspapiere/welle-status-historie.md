@@ -8,6 +8,58 @@
 
 ---
 
+## Welle 11 KOMPLETT — MAX_EINKOMMEN-Review + PLOT_MAX_EINKOMMEN-SSOT-Refactor (06.05.2026)
+
+Welle 11 als drei-stufige Welle abgeschlossen am 06.05.2026:
+
+- **W11.1 MAX_EINKOMMEN 200k→300k** ✅ — `components/rechner/SteuerprogressionsRechner.tsx` Z.24, Wert 200000 auf 300000 angehoben + 3-Z. Inline-Kommentar (UX-Decision für Reichensteuer-Schwelle-Sichtbarkeit). Commit `81651d1`. **Pre-Phase fing zwei Memory-Drifts (B4-Pre-Phase-S2-Lehre):** Wert 255810 (im Welle-10-Block-Outlook + Pre-Phase-Prompt-Annahme) war falsch — Code-Wert war 200000. File-Pfad `app/components/SteuerprogressionsRechner.tsx` war falsch — tatsächlich `components/rechner/SteuerprogressionsRechner.tsx`.
+
+- **W11.2 Slider-MAX + X-Achsen-Tick-Werte 200k→300k** ✅ — Slider-Input `max="200000"` + Achsen-Tick-Beschriftungen auf 0/50k/100k/150k/200k/250k/300k erweitert. Live-Verifikation zeigte **Pre-Phase-1-Lücke**: `\b200000\b`-grep fand nicht alle 200k-Treffer; insbesondere die formatierten Slider-Beschriftungs-Spans `<span>200.000 €</span>` und die Plot-Loop-Boundary in der Lib `lib/berechnungen/steuerprogression.ts` waren neben dem MAX_EINKOMMEN-Refactor stehen geblieben.
+
+- **W11.3 PLOT_MAX_EINKOMMEN-SSOT-Refactor + Slider-Labels** ✅ — Pre-Phase-S3-STOP von Code identifizierte sauber: Plot-Loop liegt nicht in Component, sondern in `lib/berechnungen/steuerprogression.ts` Z.146 + Z.155 (Polyline + Tabellen-Loops). **Decision Pfad β-full** (Welle-2-Pattern analog W8.2-ZONEN→TARIF_2026): Lib exportiert neue Top-Level-Konstante `PLOT_MAX_EINKOMMEN = 300000`, Lib-Loops konsumieren sie, Component-MAX_EINKOMMEN-Konstante entfernt + Konsum auf `PLOT_MAX_EINKOMMEN` umgestellt (4 Verwendungs-Sites). Plus **Slider-Beschriftungs-Labels** von 3 auf 4 Spans erweitert (0/100/200/**300** k €).
+
+**Lehren-Liste-Update:**
+
+- **L-41 (etabliert in W11.2/W11.3, 06.05.2026):** Pre-Phase-Inventur muss nicht nur Konstanten-Verwendungen, sondern auch **semantisch gleichwertige Magic Numbers in beiden Formen** erfassen — sowohl als Numbers (`200000`) als auch als formatierte Strings (`200.000`) sowie in **transitiven Lib-Konsumenten** (nicht nur in der primär-edidierten Datei). Vor jeder Konstanten-Wert-Anpassung pflicht: zusätzlich `grep -nE '\b<oldvalue>\b' <file>` plus `grep -nE '"<oldvalue-formatted>"' <file>` über die ganze Component **plus Lib-Konsumenten-Sweep** über alle Files, die die Component oder ihre Lib-Funktionen importieren. **Anlass:** W11.2 06.05.26 — `MAX_EINKOMMEN`-Refactor fand 4 Verwendungs-Sites, übersah aber Slider-Labels (formatierte Strings) und Plot-Loop in der Lib (semantisch gleicher Wert ohne Konstanten-Bezug, anderes File). Generalisiert L-39 (Phantom-Befund-Pflicht) auf das Spiegel-Problem: nicht nur „False-Positives wegen Float-Substring", sondern auch „False-Negatives wegen Magic-Number-Duplikate ohne Konstanten-Referenz".
+
+**Drift-Bilanz:** 1 Live-UI-Bug (Z4- + Reichensteuer-Visualisierung seit W8.2-ZONEN-Refactor abgeschnitten) komplett behoben. 0 Sekundär-Drifts. 0 neue L-35-Diskrepanzen. **DRY-Schuld geschlossen:** Lib-Konstante `PLOT_MAX_EINKOMMEN` als SSOT für künftige MAX-Anpassungen — eine zukünftige Änderung der Tarif-Achsen-MAX erfordert nur noch 1 Lib-Edit (statt vorher 5 Stellen über 2 Files).
+
+**Coverage-Bilanz:** ABGEDECKT 57 → 57 (UI-Refactor + DRY-Schuld-Auflösung, kein Slug-Status-Wechsel).
+
+**Live-Smoketest-Verifikation 06.05.2026 ~23:35:**
+- Slider 0–300.000 € mit 4 Labels (0/100k/200k/300k) ✓
+- X-Achse 0/50k/100k/150k/200k/250k/300k ✓
+- Polylines durchgehend bis 300k (statt vorher Cut-Off bei 200k) ✓
+- **Reichensteuer-Schwelle Z4→Z5 als Knick in roter Grenzsteuer-Linie bei ~278k sichtbar** ✓ (Sprung von ~42 % auf ~45 %)
+- Manuelle Einkommens-Eingabe ohne Tausender-Punkt funktioniert korrekt ✓
+
+**Neuer Live-UX-Befund (W12-Trigger, separat von W11):**
+- **Eingabefeld-Tausender-Punkt-Parser-Bug:** Slider-Drag-Round-Trip → Eingabefeld zeigt formatierten Tausender-Punkt-String (z. B. „150.000"), Parser verschluckt den Punkt → State wird auf 150 zurückgesetzt → Bullet springt zurück auf links
+- Manuelle Eingabe ohne Punkt: funktioniert
+- **Bestands-Bug**, vor W11 unsichtbar weil bei MAX=200k weniger Slider-Drag-Notwendigkeit; jetzt durch erweitertes 0–300k-Range stärker getriggert
+- Vermutete Ursache: `parseInt(s)` statt deutsch-lokalisierungs-awarem Parser im onChange-Handler des Eingabefelds
+- → **Akute Welle-12-Priorität** (Live-UX, betrifft alle User des Steuerprogressions-Rechners; vermutlich auch andere Rechner mit ähnlichem Eingabefeld-Pattern → Konsumenten-Sweep nötig)
+
+**Aufwand-Bilanz Welle 11:**
+- W11.1 Pre-Phase + Code: ~25 Min (Pre-Phase mit zwei Memory-Drift-Funden + Edit + Build + Doku)
+- W11.2 Pre-Phase + Code: ~15 Min (Inventur + 2 Edit-Stellen + Build)
+- W11.3 Pre-Phase-S3-STOP + Decision-Antwort + Code: ~25 Min (Pre-Phase 5 + Decision 5 + Code 10 + Build 5)
+- Doku-Phase: ~10 Min
+- **Real-Aufwand gesamt:** ~75 Min vs. ursprüngliche Schätzung 30 Min (Welle 11 war als Single-File-Welle gedacht; durch zwei aufgedeckte Pre-Phase-Lücken realistisch 2,5×). **Mehraufwand komplett im L-41-Erkenntnis-Wert begründet** — saubere Disziplin (zwei STOP-Befunde + Decision-Iterationen) statt blindem Hardcode-Edit.
+
+**Verschiebung der Welle-Reihenfolge:**
+- W12 = **Eingabefeld-Tausender-Punkt-Parser-Fix** (Lokalisierung, Live-UX-Akut, vermutlich systemweit über mehrere Rechner) — neuer Slot, nach Live-Smoketest hinzugekommen
+- W13 = Berechnungs-Wrapper-jahr-Hardcoding-Refactor (eigene technische Schuld, war W12)
+- W14 = L-35-Sammelblock-Auflösung (~36 Tatbestände aus W5, war W13)
+
+**Externe Trigger weiterhin offen:**
+- AdSense-Re-Review (Prompts 68 + 85 geparkt bis Approval)
+- 152c Pendlerpauschalen-SSOT (geparkt bis 45-Cent-BGBl)
+
+**Welle-12-Outlook:** Eingabefeld-Parser-Bug ist vermutlich systemweit (alle Rechner mit Tausender-Punkt-formatierten Eingabefeldern). Welle-2-Pattern-Kandidat: zentralen Format-/Parse-Helper in `lib/utils/` extrahieren, alle Eingabefeld-Konsumenten umstellen, Verify-Cluster für Round-Trip-Konsistenz (`parse(format(n)) === n`). Erwartung: Pre-Phase ~15 Min Inventur + Decision (Helper-Naming, Lokalisierungs-Strategie), Code ~30–60 Min je nach Konsumenten-Anzahl, Doku ~10 Min — Korridor 60–90 Min.
+
+---
+
 ## Welle 10 KOMPLETT — Sitemap-lastmod-Diversifizierung via VERCEL_DEEP_CLONE (06.05.2026)
 
 Welle 10 als Akzeptanz-Variante (Skizze-Pfad 1) abgeschlossen am 06.05.2026. Single-Item-Welle:
