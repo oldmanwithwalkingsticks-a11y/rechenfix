@@ -9,23 +9,68 @@
 
 /**
  * Wandelt eine Benutzereingabe im deutschen Zahlenformat in eine Zahl um.
- * Akzeptiert sowohl Komma als auch Punkt als Dezimaltrennzeichen.
- * Gibt 0 zurück, wenn die Eingabe ungültig ist.
+ * Folgt DIN 5008: Punkt = Tausendertrenner, Komma = Dezimaltrennzeichen.
+ *
+ * Heuristik (W12, L-41-Folge):
+ *   R1: Komma vorhanden → Komma=Dezimal, alle Punkte=Tausender (entfernt)
+ *   R2: Mehrere Punkte → alle Tausenderpunkte (entfernt)
+ *   R3: Ein Punkt + GENAU 3 Ziffern danach → Tausenderpunkt (entfernt)
+ *   R4: Sonst (1 Punkt, ≠3 Ziffern) → Punkt=Dezimal (US-Toleranz)
+ *
+ * Beispiele:
+ *   "150"         → 150
+ *   "150.000"     → 150000   (R3)
+ *   "1.500,50"    → 1500.5   (R1)
+ *   "1.5"         → 1.5      (R4)
+ *   "1.000.000"   → 1000000  (R2)
+ *
+ * Gibt NaN zurück bei leerer oder ungültiger Eingabe.
  */
 export function parseDeutscheZahl(wert: string): number {
-  if (!wert || wert.trim() === '') return 0;
-  // Komma durch Punkt ersetzen, dann parsen
-  const bereinigt = wert.replace(',', '.');
-  const zahl = parseFloat(bereinigt);
-  return isNaN(zahl) ? 0 : zahl;
+  if (!wert) return NaN;
+  const trimmed = wert.trim();
+  if (trimmed === '') return NaN;
+
+  // R1: Komma vorhanden → Komma=Dezimal, alle Punkte=Tausender
+  if (trimmed.includes(',')) {
+    const ohneTausender = trimmed.replace(/\./g, '');
+    const mitDezimalpunkt = ohneTausender.replace(',', '.');
+    const zahl = parseFloat(mitDezimalpunkt);
+    return isNaN(zahl) ? NaN : zahl;
+  }
+
+  const punkte = trimmed.match(/\./g);
+  const anzPunkte = punkte ? punkte.length : 0;
+
+  // R2: ≥2 Punkte → alle Tausenderpunkte
+  if (anzPunkte >= 2) {
+    const ohnePunkte = trimmed.replace(/\./g, '');
+    const zahl = parseFloat(ohnePunkte);
+    return isNaN(zahl) ? NaN : zahl;
+  }
+
+  // R3: 1 Punkt + GENAU 3 Ziffern danach → Tausenderpunkt
+  if (anzPunkte === 1) {
+    const teile = trimmed.split('.');
+    if (/^\d{3}$/.test(teile[1])) {
+      const ohnePunkt = teile[0] + teile[1];
+      const zahl = parseFloat(ohnePunkt);
+      return isNaN(zahl) ? NaN : zahl;
+    }
+  }
+
+  // R4 / kein Punkt: direkt parsen (Punkt = Dezimal als US-Toleranz)
+  const zahl = parseFloat(trimmed);
+  return isNaN(zahl) ? NaN : zahl;
 }
 
 /**
  * Prüft, ob die Eingabe ein gültiges deutsches Zahlenformat ist.
- * Erlaubt: Ziffern, ein Komma oder Punkt, optionales Minus am Anfang.
+ * Erlaubt: Ziffern, beliebige Anzahl Tausenderpunkte, max. 1 Komma als
+ * Dezimaltrenner, optionales Minus am Anfang.
  */
 export function istGueltigeZahleneingabe(wert: string): boolean {
-  return /^-?\d*[,.]?\d*$/.test(wert);
+  return /^-?[\d.]*,?\d*$/.test(wert);
 }
 
 /**
