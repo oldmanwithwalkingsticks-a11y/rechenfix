@@ -21,7 +21,10 @@ const PAD_BOTTOM = 40;
 const CHART_W = SVG_W - PAD_LEFT - PAD_RIGHT;
 const CHART_H = SVG_H - PAD_TOP - PAD_BOTTOM;
 
-const MAX_EINKOMMEN = 200000;
+// X-Achsen-MAX für Tarif-Visualisierung. Liegt ~22k über
+// TARIF_2026.z4_ende (277.825 €), sodass Reichensteuer-
+// Schwelle (Z4→Z5) im SVG-Chart sichtbar bleibt. W11 (06.05.26).
+const MAX_EINKOMMEN = 300000;
 const MAX_SATZ = 50; // %
 
 // Tariff zone boundaries (zvE values) — § 32a EStG-Endpunkte aus TARIF_2026 (W8.2)
