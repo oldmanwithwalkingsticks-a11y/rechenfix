@@ -4,7 +4,58 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 06.05.2026
+**Stand:** 07.05.2026
+
+---
+
+## Welle 12 KOMPLETT — parseDeutscheZahl-DIN-5008-Heuristik + Empty-Backwards-Compat (07.05.2026)
+
+Welle 12 als zwei-stufige Welle abgeschlossen am 07.05.2026 (von Mitternacht durchgezogen):
+
+- **W12.1 parseDeutscheZahl-DIN-5008-Heuristik** ✅ — `lib/zahlenformat.ts` Z.10-65: parseDeutscheZahl neu mit R1-R4-Regelsystem (R1 Komma=Dezimal+Punkte=Tausender, R2 mehrere Punkte=alle-Tausender, R3 EIN Punkt+GENAU 3 Ziffern+Eingabe-Ende=Tausender, R4 sonst=Dezimal/US-Toleranz). `istGueltigeZahleneingabe` Regex erweitert (Z.72) für Tausenderpunkt-Patterns. Cluster B Round-Trip 9/9 grün gegen `Number.toLocaleString('de-DE')` (genauer Bug-Auslöser-Pfad in `SteuerprogressionsRechner.tsx` Z.74 `setZveStr(val.toLocaleString('de-DE'))`). **137 latent-Konsumenten** profitieren transparent vom Lib-Fix ohne eigene Edits. Commit `206bfb1`.
+
+- **W12.2 Hotfix Empty/Whitespace → 0 Backwards-Compat** ✅ — Empty-Guard in parseDeutscheZahl Z.22-23 ergänzt (`if (!wert || wert.trim() === '') return 0;`). Cluster A-10 + Cluster C umgestellt: Empty/Whitespace → 0 (UX-Default für Initial-State, vor-W12-Verhalten wiederhergestellt), echte Ungültigkeit (`"abc"`, etc.) → NaN bleibt für semantische Klarheit. Cluster C-04 neu: `"  abc  "` → NaN als expliziter Empty-vs-NaN-Trim-Kontext-Anker (parallel zu A-11 ohne Trim). Commit `c7526ef`.
+
+**Lehren-Liste-Update:**
+
+Keine neue Lehre — W12 ist Anwendung von **L-39** (Anti-Tautologie via vorab-tabellarisch-fixierter Erwartungswerte im Code-Phase-Prompt) + **L-41** (Konsumenten-Sweep für transparente Lib-Fix-Wirkung; Round-Trip gegen System-Standard `Number.toLocaleString('de-DE')` als ehrliche Bidirektionalitäts-Validierung). **Methodische Bestätigung:** Lib-Fix mit Verify-Cluster (Cluster A Tabelle + Cluster B Round-Trip + Cluster C Negativ/Edge) erreicht systemweite Wirkung ohne Konsumenten-Sweep-Aufwand. Pre-Phase-Disziplin (NaN-Verhaltensänderung explizit als Risiko geflagged) machte den Hotfix W12.2 vorhersehbar statt Notfall — **Risiko-Disclosure-Pflicht** als implizite Verschärfung von L-37b.
+
+**Drift-Bilanz:**
+- 1 echter Lib-Bug (parseFloat-Tausenderpunkt-blind in `lib/zahlenformat.ts:18`) komplett behoben
+- 1 W12-Verhaltens-Regression (Empty → NaN statt vor-W12 → 0) im Hotfix W12.2 backwards-kompatibel aufgelöst
+- 0 Sekundär-Drifts
+- **DRY-Schuld geschlossen:** parseDeutscheZahl jetzt SSOT für deutsche Zahleneingaben mit Tausenderpunkt-Awareness
+
+**Coverage-Bilanz:** ABGEDECKT 57 → 57 (Lib-Fix + Verify-Cluster, kein Slug-Status-Wechsel).
+
+**Verify-Bilanz:** Bestand 103/103 unverändert grün; **neu `verify-zahlenformat.ts` mit 25 Cases in 3 Clustern (12 + 9 + 4)**; Total über alle 5 Verify-Scripts **128/128 strict-grün**.
+
+**Konsumenten-Sweep-Bilanz (L-41):**
+- 5 Files mit `<input type="range">`: nur SteuerprogressionsRechner (max=300000) Tausenderpunkt-relevant; PizzateigRechner/Pflegegeld/Gewerbesteuer/EtfSparplan haben max < 1000
+- 3 Files mit `setX(...toLocaleString('de-DE'))`: SteuerprogressionsRechner (Bug-Auslöser), AutokostenRechner (Kraftstoffpreis < 10€, irrelevant), GeburtstagRechner (display-only)
+- ~137 latent-Konsumenten via parseDeutscheZahl: alle profitieren transparent vom Lib-Fix
+
+**Live-Smoketest-Verifikation 07.05.2026 ~00:30:**
+- Brutto-Netto-Rechner Eingabe `45000` → 24.510,34 € Netto, alle Aufschlüsselungs-Werte sinnvoll, keine NaN ✓
+- SteuerprogressionsRechner Slider-Drag-Test grün ✓ (W12-Hauptzweck: Bullet bleibt bei gewähltem Wert nach Slider-Drag)
+- SteuerprogressionsRechner Initial-State post-Hotfix: Bullet links + zve=0 (Render-Bedingung greift sauber) ✓
+
+**Aufwand-Bilanz Welle 12:**
+- Pre-Phase + Decision: ~20 Min (3-Pattern-Konsumenten-Sweep + DIN-5008-Heuristik-Aufbereitung mit Edge-Case-Tabellen)
+- W12.1 Code-Phase + Verify-Cluster: ~25 Min (Lib-Edit + 24 Verify-Cases + Build)
+- W12.2 Hotfix: ~10 Min (Empty-Guard + Cluster-C-Update + Verify + Build)
+- Doku-Phase: ~10 Min
+- **Real-Aufwand gesamt:** ~65 Min vs. Pre-Phase-Schätzung 25-35 Min (W12.1 only). Mit Hotfix-Welle realistisch +15-20 Min wegen vorhergesehener Backwards-Compat-Notwendigkeit. **Komplett im Korridor**, weil Pre-Phase das NaN-Risiko ehrlich offengelegt hatte → Hotfix war vorbereitet, kein Notfall.
+
+**Verschiebung der Welle-Reihenfolge:**
+- W13 = Berechnungs-Wrapper-jahr-Hardcoding-Refactor (eigene technische Schuld: `berechneSteuerprogression`/`berechneSplittingVergleich`/`berechneSteuerklassenVergleich` akzeptieren keinen jahr-Parameter, immer 2026 hardcoded)
+- W14 = L-35-Sammelblock-Auflösung (~36 Tatbestände aus W5)
+
+**Externe Trigger weiterhin offen:**
+- AdSense-Re-Review (Prompts 68 + 85 geparkt bis Approval)
+- 152c Pendlerpauschalen-SSOT (geparkt bis 45-Cent-BGBl)
+
+**Welle-13-Outlook:** Berechnungs-Wrapper-jahr-Hardcoding-Refactor — die drei Aggregat-Funktionen sollen optionalen `jahr`-Parameter mit Default 2026 erhalten, intern auf TARIF_JAHR konsumieren statt fix `berechneESt2026` aufzurufen. Welle-2-Pattern-Kandidat. Konsumenten-Sweep über alle drei Funktionen (Component + Verify-Scripts) — analog W11.3-Pre-Phase mit Lib-Konsumenten-grep. Erwartung: Pre-Phase ~10 Min, Code ~30-45 Min (3 Wrapper-Funktionen + ggf. Verify-Cluster-Erweiterung jahr=2025/2024 falls W9-Cluster-H-Pattern übertragen), Doku ~10 Min — Korridor 50-65 Min.
 
 ---
 
