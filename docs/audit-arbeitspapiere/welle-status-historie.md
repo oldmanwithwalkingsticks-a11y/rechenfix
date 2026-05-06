@@ -4,7 +4,49 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 05.05.2026
+**Stand:** 06.05.2026
+
+---
+
+## Welle 10 KOMPLETT — Sitemap-lastmod-Diversifizierung via VERCEL_DEEP_CLONE (06.05.2026)
+
+Welle 10 als Akzeptanz-Variante (Skizze-Pfad 1) abgeschlossen am 06.05.2026. Single-Item-Welle:
+
+- **W10.1 VERCEL_DEEP_CLONE-Aktivierung** ✅ — Env-Var `VERCEL_DEEP_CLONE=1` in Vercel Project-Settings → Environment Variables (Production) gesetzt + Re-Deploy ausgelöst. Sitemap-distinkte-lastmods **1 → 12** (über alle 189 URLs). Live-Verifikation 06.05.26 ~21:00.
+
+**Diagnose-Bilanz:** Vercel-Default-Shallow-Clone (`--depth=10`) bestätigt als Root-Cause. Offizielle Vercel-Doku schweigt zur Setting (kein UI-Eintrag), aber Env-Var `VERCEL_DEEP_CLONE=1` ist die etablierte Workaround-Variante (kreuz-bestätigt durch Drittanbieter-Doku, z. B. Zudoku, die exakt diesen Use-Case beschreiben). Re-Deploy nötig (Build-Cache).
+
+**Live-Verifikations-Bilanz:**
+- Distinkte `<lastmod>`-Werte: 1 → 12
+- Häufigster Bucket: 58 URLs auf `2026-04-29T21:32:04` (Welle-3-LazySection-Sprint-Bulk-Commit)
+- Stichprobe firmenwagen-rechner: zeigt 29.04. (D1-Tail-Sprint vom 04.05. unsichtbar, weil nur `lib/berechnungen/firmenwagen.ts` + `components/FirmenwagenRechner.tsx` touched, **nicht** `lib/rechner-config/<kat>.ts`)
+- W7+8+9 (05.05.) ähnlich unsichtbar: `lib/einkommensteuer.ts`-Refactor + Verify-Scripts ohne Config-Touch
+
+**Architektur-Limit dokumentiert (NEU als L-40):**
+- **L-40 (etabliert in W10, 06.05.2026):** Sitemap-mtime-Aggregations-Granularität ist Architektur-Decision, nicht Bug. `app/sitemap.ts` mappt 189 Rechner-Slugs auf 11 `lib/rechner-config/<kat>.ts`-Files (Cluster-Aggregation per Kategorie, im Sitemap-Code als bewusste Strategie kommentiert). Welle-2-Refactors (Lib + Component) werden nur sichtbar, wenn sie auch die Kategorie-Config touchen. **Bewusste Akzeptanz:** Cluster-Signal reicht für Re-Crawl-Hint, Per-Slug-Granularität ist SEO-Hebel-2.-Ordnung. **Pfad-3-Verschärfung** (Multi-File-mtime-Aggregation in `app/sitemap.ts` mit Heuristik über `app/<kat>/<slug>/page.tsx` + `components/<X>Rechner.tsx` + `lib/berechnungen/<X>.ts`, geschätzt ~30–45 Min Code) als **geparkte Erwägung** — Trigger: GSC-„Crawled, currently not indexed"-Fraktion bei Steuer-Slugs nach 14-Tage-Beobachtung unverändert hoch.
+
+**Aufwand-Bilanz:**
+- Recherche (Vercel-Mechanismus): ~5 Min (Vercel-Doku + web_search)
+- Vercel-UI-Konfiguration (Karsten): ~5 Min (Env-Var + Re-Deploy)
+- Live-Verifikation V1+V2 (curl-basiert): ~5 Min
+- Diagnose-Folgeschritt (`app/sitemap.ts`-Inhalt analysiert, L-40 abgeleitet): ~10 Min
+- Doku-Phase: ~5 Min
+- **Real-Aufwand gesamt:** ~30 Min vs. Skizzen-Korridor 5 Min (Option A) bis 60 Min (Option B). Pfad-1-Akzeptanz hat sich als ROI-optimal erwiesen.
+
+**Verschiebung der Welle-Reihenfolge:**
+- W11 = MAX_EINKOMMEN=255810 fachlicher Review (war seit Welle-9 offener Kandidat, jetzt nächster aktiver Slot — `SteuerprogressionsRechner.tsx`-MAX-Achse, prüfen ob Wert noch zur § 32a-Tarif-Visualisierung mit korrekten Endpunkten passt)
+- W12 = Berechnungs-Wrapper-jahr-Hardcoding-Refactor (eigene technische Schuld: `berechneSteuerprogression` / `berechneSplittingVergleich` / `berechneSteuerklassenVergleich` akzeptieren keinen jahr-Parameter, immer 2026 hardcoded)
+- W13 = L-35-Sammelblock-Auflösung (~36 dokumentierte Tatbestände aus Welle 5)
+
+**Externe Folge-Aktion (Karsten):**
+- Google Search Console → linke Sidebar „Sitemaps" → bei `https://www.rechenfix.de/sitemap.xml` auf „⋯" → „Erneut einreichen" für frischen Last-Read (beschleunigt Re-Crawl-Trigger)
+- 14-Tage-Beobachtung in GSC „Coverage": Steuer-Cluster-Slugs (Brutto-Netto, Lohnsteuer, Splitting, Steuerklassen-Vergleich) auf Re-Crawl-Verhalten checken. Bei Stagnation der „Crawled, currently not indexed"-Fraktion → Pfad-3-Erwägung aktivieren.
+
+**Externe Trigger weiterhin offen:**
+- AdSense-Re-Review (Prompts 68 + 85 geparkt bis Approval)
+- 152c Pendlerpauschalen-SSOT (geparkt bis 45-Cent-Reform-BGBl-Verabschiedung)
+
+**Welle-11-Outlook:** MAX_EINKOMMEN=255810-Review ist eine fachlich-kompakte Single-File-Analyse (`app/components/SteuerprogressionsRechner.tsx`) mit klarer W8.2-Anschluss-Frage: passt der MAX-Wert noch zur in W8.2 korrigierten ZONEN-Visualisierung mit echten § 32a-Endpunkten? Erwartung: ~30–45 Min, drei-stufig (Pre-Phase-Heuristik-Test + Decision + Code/Doku).
 
 ---
 
