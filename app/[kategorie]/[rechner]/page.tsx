@@ -7,6 +7,7 @@ import ZurueckButton from '@/components/layout/ZurueckButton';
 import AdSlot from '@/components/ads/AdSlot';
 import StructuredData from '@/components/seo/StructuredData';
 import FeedbackButtons from '@/components/ui/FeedbackButtons';
+import { AffiliateBox } from '@/components/AffiliateBox';
 import Prozentrechner from '@/components/rechner/Prozentrechner';
 import BruttoNettoRechner from '@/components/rechner/BruttoNettoRechner';
 import MwStRechner from '@/components/rechner/MwStRechner';
@@ -558,6 +559,13 @@ export default function RechnerSeite({ params }: Props) {
               </div>
             </section>
           </>
+          )}
+
+          {/* Affiliate-Box — nach Content für AdSense-konforme Position (W13.2+).
+              Rechner mit eigenem Custom-Affiliate-Layout (z. B. brutto-netto-rechner)
+              setzen kein affiliate-Property in der Config und bleiben unverändert. */}
+          {config.affiliate && (
+            <AffiliateBox programId={config.affiliate.programId} context={config.affiliate.context} />
           )}
 
 

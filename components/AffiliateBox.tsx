@@ -117,7 +117,7 @@ const AFFILIATE_PROGRAMS = {
   },
 } as const;
 
-type ProgramId = keyof typeof AFFILIATE_PROGRAMS;
+export type ProgramId = keyof typeof AFFILIATE_PROGRAMS;
 
 // --- Kontextuelle Beschreibungen ---
 

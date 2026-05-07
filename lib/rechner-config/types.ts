@@ -1,3 +1,5 @@
+import type { ProgramId } from '@/components/AffiliateBox';
+
 export interface RechnerConfig {
   slug: string;
   titel: string;
@@ -12,6 +14,18 @@ export interface RechnerConfig {
   beispiel: string;
   erklaerung: string;
   faq: { frage: string; antwort: string }[];
+  /**
+   * Optional: Affiliate-Konfiguration für diesen Rechner.
+   * Wird in der Page nach FAQ-Card und vor Verwandte-Rechner-Section gerendert
+   * (AdSense-konforme Position: substanzieller Content kommt vor Affiliate).
+   * Eingeführt mit W13.2 (MwSt). Rechner mit Custom-Layout (z. B. brutto-netto-rechner
+   * mit 2 Boxen) können diese Property weglassen und stattdessen ihre eigenen
+   * AffiliateBox-Render-Blöcke inline in der Component behalten.
+   */
+  affiliate?: {
+    programId: ProgramId;
+    context: string;
+  };
 }
 
 export interface KategorieConfig {

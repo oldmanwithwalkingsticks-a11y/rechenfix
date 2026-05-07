@@ -104,6 +104,7 @@ Unser Brutto-Netto-Rechner liefert eine gute Orientierung, basiert jedoch auf ve
     icon: '🧾',
     formel: 'Brutto = Netto × (1 + MwSt-Satz ÷ 100) | Netto = Brutto ÷ (1 + MwSt-Satz ÷ 100)',
     beispiel: 'Beispiel: 100 € netto + 19% MwSt = 100 × 1,19 = 119 € brutto. Umgekehrt: 119 € brutto ÷ 1,19 = 100 € netto.',
+    affiliate: { programId: 'lexware', context: 'mwst' },
     erklaerung: `Die Mehrwertsteuer (MwSt), auch Umsatzsteuer (USt) genannt, ist die wichtigste indirekte Steuer in Deutschland. Sie wird auf nahezu alle Waren und Dienstleistungen erhoben und macht einen erheblichen Teil der Steuereinnahmen des Bundes aus. Unser MwSt-Rechner hilft Ihnen, schnell und fehlerfrei zwischen Netto- und Bruttobeträgen umzurechnen — einzeln oder für ganze Rechnungen.
 
 **MwSt-Sätze in Deutschland 2026**
@@ -122,9 +123,23 @@ Die Berechnung der MwSt folgt einfachen Formeln, die jedoch oft verwechselt werd
 - **Brutto → Netto:** Netto = Brutto ÷ (1 + MwSt-Satz ÷ 100). Beispiel: 119 € ÷ 1,19 = 100 € netto.
 - **MwSt-Betrag aus Brutto:** MwSt = Brutto − (Brutto ÷ 1,19). Beispiel: 119 − 100 = 19 € MwSt.
 
-**Achtung: Der häufigste Fehler bei der MwSt-Berechnung**
+**Anwendungsfälle: Wann brauchen Sie den MwSt-Rechner?**
 
-Viele Menschen machen folgenden Fehler: Sie ziehen einfach 19% vom Bruttobetrag ab. Das ist falsch! 119 € − 19% = 119 × 0,81 = 96,39 € — das ist nicht der korrekte Nettobetrag. Richtig ist: 119 ÷ 1,19 = 100 €. Der Unterschied von 3,61 € mag bei kleinen Beträgen gering erscheinen, kann bei Rechnungen über tausende Euro jedoch erheblich sein. Unser Rechner zeigt diesen Unterschied im Brutto→Netto-Modus automatisch an.
+Der MwSt-Rechner ist Pflicht-Werkzeug für viele Berufs- und Alltagssituationen — hier fünf konkrete Anwendungsfälle:
+
+- **Selbstständige beim Rechnung schreiben:** Sie müssen auf jeder Ausgangsrechnung Netto, MwSt-Betrag und Brutto separat ausweisen. Der Rechner zeigt sofort alle drei Werte aus jedem Ausgangswert — Netto, Brutto oder MwSt-Anteil.
+- **Konsumenten beim Preis-Vergleich:** Beim Vergleich von B2B- und B2C-Angeboten lohnt sich die Umrechnung: 1.000 € netto sind 1.190 € brutto, 1.000 € brutto nur 840,34 € netto. Bei größeren Anschaffungen — Möbel, Elektronik, Auto — entscheidet das spürbar über die Gesamtkosten.
+- **Hotelier und Gastronomie:** Hotelübernachtungen werden mit 7 % besteuert, Frühstück mit 19 %, Restaurant-Speisen vor Ort seit 2024 wieder mit 19 %, To-Go-Speisen mit 7 %. Der Multi-Rechner berechnet gemischte Rechnungen in einem Schritt.
+- **Online-Shop-Betreiber:** Bei Verkäufen ins EU-Ausland gelten ab dem OSS-Schwellenwert von 10.000 € pro Jahr die MwSt-Sätze des Empfängerlandes. Der Rechner mit „Eigen"-Satz unterstützt frei einstellbare MwSt-Sätze für jedes Zielland.
+- **Buchhalter beim Vorsteuerabzug:** Aus Eingangsrechnungen muss die enthaltene Vorsteuer korrekt herausgerechnet werden. Bei einer Sammelrechnung mit gemischten Sätzen (19 % und 7 %) verhindert der Multi-Rechner Rechenfehler in der Umsatzsteuer-Voranmeldung.
+
+**Häufige Fehler bei der MwSt-Berechnung**
+
+- **MwSt einfach vom Brutto abziehen.** Der häufigste Fehler: 119 € − 19 % = 96,39 €. Falsch — der korrekte Nettobetrag ist 119 ÷ 1,19 = 100 €. Bei kleinen Beträgen wirkt das harmlos, bei Rechnungen über tausende Euro wird der Unterschied schnell dreistellig.
+- **Falscher MwSt-Satz für Restaurant-Speisen.** Seit 1. Januar 2024 gilt für verzehrfertige Speisen vor Ort wieder der Regelsatz 19 %. Der reduzierte Satz 7 % greift nur noch für Speisen außer Haus (To-Go, Lieferung), Grundnahrungsmittel und Hotelübernachtungen.
+- **Reverse-Charge bei B2B-Auslandsgeschäften übersehen.** Bei Leistungen an Unternehmen im EU-Ausland geht die Steuerschuld auf den Empfänger über (§ 13b UStG). Auf der Ausgangsrechnung wird keine MwSt ausgewiesen, der Hinweis „Steuerschuldnerschaft des Leistungsempfängers" muss aber zwingend stehen.
+- **Vorsteuerabzug ohne korrekte Rechnung.** Für den Vorsteuerabzug verlangt das Finanzamt eine Rechnung, die alle Pflichtangaben nach § 14 Abs. 4 UStG enthält: Anschriften, Steuernummer/USt-ID, Leistungsbeschreibung, Datum, Netto, MwSt-Betrag, Brutto. Fehlt eine Angabe, kann das Finanzamt den Vorsteuerabzug verweigern.
+- **Kleinunternehmer-Regelung falsch angewendet.** Wer als Kleinunternehmer nach § 19 UStG agiert, darf keine MwSt auf Rechnungen ausweisen — auch nicht freiwillig. Wird trotzdem MwSt ausgewiesen, schuldet der Kleinunternehmer diese dem Finanzamt nach § 14c UStG, ohne sie als Vorsteuer abziehen zu können.
 
 **Multi-Rechner: Mehrere Positionen auf einmal**
 
@@ -132,7 +147,7 @@ Für Selbstständige, Freiberufler und Unternehmer bietet unser MwSt-Rechner ein
 
 **Wann Sie die MwSt ausweisen müssen**
 
-Jeder Unternehmer, der umsatzsteuerpflichtige Leistungen erbringt, muss die MwSt auf seinen Rechnungen gesondert ausweisen (§ 14 Abs. 4 UStG). Ausnahmen gelten für Kleinunternehmer nach § 19 UStG (Umsatz unter 22.000 € im Vorjahr), die keine MwSt berechnen und ausweisen dürfen. Auch für innergemeinschaftliche Lieferungen und bestimmte Ausfuhrlieferungen entfällt die MwSt.
+Jeder Unternehmer, der umsatzsteuerpflichtige Leistungen erbringt, muss die MwSt auf seinen Rechnungen gesondert ausweisen (§ 14 Abs. 4 UStG). Ausnahmen gelten für Kleinunternehmer nach § 19 UStG (Umsatz unter 25.000 € im Vorjahr und unter 100.000 € im laufenden Kalenderjahr, Stand 2026 nach Wachstumschancengesetz), die keine MwSt berechnen und ausweisen dürfen. Auch für innergemeinschaftliche Lieferungen und bestimmte Ausfuhrlieferungen entfällt die MwSt.
 
 **Vorsteuerabzug: So holen Sie sich die MwSt zurück**
 
@@ -160,7 +175,19 @@ Wenn Sie als Unternehmer Waren oder Dienstleistungen einkaufen, zahlen Sie auf d
       },
       {
         frage: 'Muss ich als Kleinunternehmer MwSt berechnen?',
-        antwort: 'Nein. Kleinunternehmer nach § 19 UStG (Umsatz unter 22.000 € im Vorjahr) sind von der Umsatzsteuer befreit und dürfen keine MwSt auf ihren Rechnungen ausweisen. Sie haben dafür aber auch keinen Vorsteuerabzug.',
+        antwort: 'Nein. Kleinunternehmer nach § 19 UStG (Umsatz unter 25.000 € im Vorjahr und unter 100.000 € im laufenden Kalenderjahr, Stand 2026) sind von der Umsatzsteuer befreit und dürfen keine MwSt auf ihren Rechnungen ausweisen. Sie haben dafür aber auch keinen Vorsteuerabzug. Die Grenzen wurden zum 1. Januar 2025 durch das Wachstumschancengesetz von 22.000 €/50.000 € auf 25.000 €/100.000 € angehoben.',
+      },
+      {
+        frage: 'Welche MwSt gilt im Restaurant 2026?',
+        antwort: 'Für Speisen, die vor Ort verzehrt werden, gilt seit 1. Januar 2024 wieder der Regelsteuersatz von 19 %. Für Speisen außer Haus (To-Go, Lieferung) sowie für Grundnahrungsmittel im Supermarkt bleibt der reduzierte Satz von 7 %. Getränke werden im Restaurant grundsätzlich mit 19 % besteuert — auch beim Mitnehmen. Hotelübernachtungen bleiben unverändert bei 7 %; das Frühstück im Hotel wird jedoch wieder mit 19 % besteuert.',
+      },
+      {
+        frage: 'Was ist Reverse-Charge bei MwSt?',
+        antwort: 'Beim Reverse-Charge-Verfahren (§ 13b UStG) wird die Steuerschuld vom leistenden Unternehmer auf den Empfänger umgekehrt. Typische Anwendungsfälle: B2B-Leistungen an Unternehmen im EU-Ausland, Bauleistungen zwischen Bauunternehmen, Lieferungen von Schrott und Altmetall. Die Rechnung wird ohne MwSt ausgestellt, muss aber den Hinweis „Steuerschuldnerschaft des Leistungsempfängers" enthalten. Der Empfänger berechnet und führt die MwSt selbst ab.',
+      },
+      {
+        frage: 'Welche Pflichtangaben muss eine Rechnung für den Vorsteuerabzug enthalten?',
+        antwort: 'Nach § 14 Abs. 4 UStG: vollständige Anschrift von Rechnungssteller und -empfänger, Steuernummer oder USt-ID des Ausstellers, Rechnungsdatum und fortlaufende Rechnungsnummer, Beschreibung der Leistung, Liefer- oder Leistungszeitraum, Nettobetrag aufgeschlüsselt nach Steuersätzen, MwSt-Satz und MwSt-Betrag, Bruttobetrag. Bei Kleinbetragsrechnungen bis 250 € reichen reduzierte Angaben (§ 33 UStDV). Fehlt eine Pflichtangabe, kann das Finanzamt den Vorsteuerabzug verweigern.',
       },
     ],
   },
