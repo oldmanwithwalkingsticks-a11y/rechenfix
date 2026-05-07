@@ -533,6 +533,56 @@ export default function BruttoNettoRechner() {
           <CrossLink href="/finanzen/steuererstattung-rechner" emoji="💰" text="Wie viel bekommen Sie vom Finanzamt zurück?" />
           <CrossLink href="/finanzen/gehaltsvergleich" emoji="📊" text="Verdienen Sie genug? Gehalt vergleichen" />
 
+          {/* KI-Buttons (W13.1.2 — Hebel A) — in Calculator-Card hochgezogen,
+              Pattern-Konsistenz mit MwSt-Rechner. Above-the-fold-USP-Sichtbarkeit. */}
+          <div className="mt-4 no-print flex flex-wrap gap-3">
+            <AiExplain
+              rechnerName="Brutto-Netto-Rechner"
+              eingaben={{
+                bruttogehalt: bruttoNum,
+                steuerklasse,
+                bundesland: bl?.name ?? bundesland,
+                kirchensteuer,
+                kinder,
+                kvArt,
+                kvZusatzbeitrag: kvZusatzbeitragNum,
+              }}
+              ergebnis={{
+                nettogehalt: ergebnis.nettoMonat,
+                lohnsteuer: ergebnis.lohnsteuer,
+                solidaritaetszuschlag: ergebnis.solidaritaet,
+                kirchensteuerBetrag: ergebnis.kirchensteuer,
+                krankenversicherung: ergebnis.krankenversicherung,
+                rentenversicherung: ergebnis.rentenversicherung,
+                arbeitslosenversicherung: ergebnis.arbeitslosenversicherung,
+                pflegeversicherung: ergebnis.pflegeversicherung,
+                gesamtabzuegeProzent: ergebnis.abzuegeProzent,
+              }}
+            />
+            <WasWaereWenn
+              eingaben={{
+                bruttogehalt: bruttoNum,
+                steuerklasse,
+                bundesland: bl?.name ?? bundesland,
+                kirchensteuer,
+                kinder,
+                kvArt,
+                kvZusatzbeitrag: kvZusatzbeitragNum,
+              }}
+              ergebnis={{
+                nettogehalt: ergebnis.nettoMonat,
+                lohnsteuer: ergebnis.lohnsteuer,
+                solidaritaetszuschlag: ergebnis.solidaritaet,
+                kirchensteuerBetrag: ergebnis.kirchensteuer,
+                krankenversicherung: ergebnis.krankenversicherung,
+                rentenversicherung: ergebnis.rentenversicherung,
+                arbeitslosenversicherung: ergebnis.arbeitslosenversicherung,
+                pflegeversicherung: ergebnis.pflegeversicherung,
+                gesamtabzuegeProzent: ergebnis.abzuegeProzent,
+              }}
+            />
+          </div>
+
           {/* Konsolidierter Erklär-Block (W13.1.1) — server-rendered für AdSense-Quality
               5 h2-Sections: So funktioniert / Anwendungsfälle / Häufige Fehler / Tipps / FAQ */}
 
@@ -685,53 +735,6 @@ export default function BruttoNettoRechner() {
             />
           </section>
 
-          <div className="mt-8 no-print flex flex-wrap gap-3">
-            <AiExplain
-              rechnerName="Brutto-Netto-Rechner"
-              eingaben={{
-                bruttogehalt: bruttoNum,
-                steuerklasse,
-                bundesland: bl?.name ?? bundesland,
-                kirchensteuer,
-                kinder,
-                kvArt,
-                kvZusatzbeitrag: kvZusatzbeitragNum,
-              }}
-              ergebnis={{
-                nettogehalt: ergebnis.nettoMonat,
-                lohnsteuer: ergebnis.lohnsteuer,
-                solidaritaetszuschlag: ergebnis.solidaritaet,
-                kirchensteuerBetrag: ergebnis.kirchensteuer,
-                krankenversicherung: ergebnis.krankenversicherung,
-                rentenversicherung: ergebnis.rentenversicherung,
-                arbeitslosenversicherung: ergebnis.arbeitslosenversicherung,
-                pflegeversicherung: ergebnis.pflegeversicherung,
-                gesamtabzuegeProzent: ergebnis.abzuegeProzent,
-              }}
-            />
-            <WasWaereWenn
-              eingaben={{
-                bruttogehalt: bruttoNum,
-                steuerklasse,
-                bundesland: bl?.name ?? bundesland,
-                kirchensteuer,
-                kinder,
-                kvArt,
-                kvZusatzbeitrag: kvZusatzbeitragNum,
-              }}
-              ergebnis={{
-                nettogehalt: ergebnis.nettoMonat,
-                lohnsteuer: ergebnis.lohnsteuer,
-                solidaritaetszuschlag: ergebnis.solidaritaet,
-                kirchensteuerBetrag: ergebnis.kirchensteuer,
-                krankenversicherung: ergebnis.krankenversicherung,
-                rentenversicherung: ergebnis.rentenversicherung,
-                arbeitslosenversicherung: ergebnis.arbeitslosenversicherung,
-                pflegeversicherung: ergebnis.pflegeversicherung,
-                gesamtabzuegeProzent: ergebnis.abzuegeProzent,
-              }}
-            />
-          </div>
         </>
       )}
 
