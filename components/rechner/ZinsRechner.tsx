@@ -237,26 +237,25 @@ export default function ZinsRechner() {
           <CrossLink href="/finanzen/etf-sparplanrechner" emoji="📈" text="ETF-Sparplan: Mehr Rendite als klassisches Sparen" />
 
           {/* Hebel A (W13.3) — AiExplain in Calculator-Card, Pattern-Konsistenz mit MwSt/BN.
-              W13.3.3: pt-4 + h-px-Sentinel umgehen CSS-margin-collapse hart (Padding kann nicht
-              collapsen, der unsichtbare 1px-Sentinel etabliert eine Block-Boundary). */}
-          <div aria-hidden="true" className="h-px no-print" />
-          <div className="pt-4 no-print">
-            <AiExplain
-              rechnerName="Zinsrechner"
-              eingaben={{
-                anfangskapital: nAnfang,
-                zinssatz: nZins,
-                laufzeit: nLaufzeit,
-                zinseszins,
-                sparrate: nSparrate,
-              }}
-              ergebnis={{
-                endkapital: ergebnis.endkapital,
-                gesamtzinsen: ergebnis.gesamtzinsen,
-                eigenkapital: ergebnis.eigenkapital,
-              }}
-            />
-          </div>
+              W13.3.4: Explicit-Height-Spacer-Block (24px) als sichtbares DOM-Element zwischen
+              ETF-Sparplan-CrossLink und AiExplain. Block-Element mit fester Höhe ist immun
+              gegen jede margin-collapse-Logik und CSS-Cache-Quirks. */}
+          <div aria-hidden="true" style={{ height: '24px', flexShrink: 0 }} />
+          <AiExplain
+            rechnerName="Zinsrechner"
+            eingaben={{
+              anfangskapital: nAnfang,
+              zinssatz: nZins,
+              laufzeit: nLaufzeit,
+              zinseszins,
+              sparrate: nSparrate,
+            }}
+            ergebnis={{
+              endkapital: ergebnis.endkapital,
+              gesamtzinsen: ergebnis.gesamtzinsen,
+              eigenkapital: ergebnis.eigenkapital,
+            }}
+          />
 
           <ErgebnisAktionen
             ergebnisText={`${fmt(nAnfang)} € Anfangskapital → ${fmt(ergebnis.endkapital)} € nach ${Math.floor(nLaufzeit)} Jahren (${fmt(ergebnis.gesamtzinsen)} € Zinsen)`}
