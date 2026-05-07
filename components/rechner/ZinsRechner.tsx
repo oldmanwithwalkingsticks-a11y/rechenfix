@@ -236,19 +236,7 @@ export default function ZinsRechner() {
           <CrossLink href="/finanzen/kreditrechner" emoji="💳" text="Kreditrechner: Zinsen und Rate bei Krediten" />
           <CrossLink href="/finanzen/etf-sparplanrechner" emoji="📈" text="ETF-Sparplan: Mehr Rendite als klassisches Sparen" />
 
-          {/* Hebel A (W13.3) — AiExplain in Calculator-Card, Pattern-Konsistenz mit MwSt/BN.
-              W13.3.5: Diagnose-Variante. Falls dieser Spacer NICHT sichtbar ist obwohl Live-HTML
-              ihn bestätigt, dann liefert der lokale Browser-Cache veraltetes HTML — kein Code-Bug. */}
-          <div
-            aria-hidden="true"
-            style={{
-              height: '60px',
-              display: 'block',
-              flexShrink: 0,
-              borderTop: '1px solid rgba(0,0,0,0.04)',
-              marginTop: '8px',
-            }}
-          />
+          {/* Hebel A (W13.3) — AiExplain in Calculator-Card, Pattern-Konsistenz mit MwSt/BN. */}
           <AiExplain
             rechnerName="Zinsrechner"
             eingaben={{
@@ -265,10 +253,15 @@ export default function ZinsRechner() {
             }}
           />
 
-          <ErgebnisAktionen
-            ergebnisText={`${fmt(nAnfang)} € Anfangskapital → ${fmt(ergebnis.endkapital)} € nach ${Math.floor(nLaufzeit)} Jahren (${fmt(ergebnis.gesamtzinsen)} € Zinsen)`}
-            seitenTitel="Zinsrechner"
-          />
+          {/* W13.3.6: Sichtbarer Abstand ZWISCHEN Fix-erklärt-Button und Action-Buttons
+              (Ergebnis kopieren / Teilen / Feedback). ErgebnisAktionen rendert mit
+              flex-Container ohne margin-top, deshalb expliziter Wrapper. */}
+          <div className="mt-6">
+            <ErgebnisAktionen
+              ergebnisText={`${fmt(nAnfang)} € Anfangskapital → ${fmt(ergebnis.endkapital)} € nach ${Math.floor(nLaufzeit)} Jahren (${fmt(ergebnis.gesamtzinsen)} € Zinsen)`}
+              seitenTitel="Zinsrechner"
+            />
+          </div>
         </>
       )}
     </div>
