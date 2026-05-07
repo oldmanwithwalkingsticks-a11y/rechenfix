@@ -202,19 +202,23 @@ export default function BmiRechner() {
           <CrossLink href="/gesundheit/idealgewicht-rechner" emoji="⚖️" text="Idealgewicht berechnen" />
           <CrossLink href="/gesundheit/kalorienrechner" emoji="🔥" text="Kalorienbedarf berechnen" />
 
+          {/* Hebel A (W13.4) — AiExplain in Calculator-Card, Pattern-Konsistenz mit MwSt/BN/Zinsrechner.
+              mt-4-Wrapper direkt mit-eingebaut (W13.3.1-Lerneffekt). */}
+          <div className="mt-4">
+            <AiExplain
+              rechnerName="BMI-Rechner"
+              eingaben={{ gewicht: nGewicht, groesse: nGroesse, geschlecht, alter: nAlter }}
+              ergebnis={istKind
+                ? { bmi: ergebnis.bmi, hinweis: 'Unter 18 Jahren: Einordnung nur über BMI-Perzentilen (z. B. Kromeyer-Hauschild) möglich — Kategorie-Wertung unterdrückt.' }
+                : { bmi: ergebnis.bmi, kategorie: ergebnis.kategorie.label, optimalesGewichtMin: ergebnis.optimalesGewichtMin, optimalesGewichtMax: ergebnis.optimalesGewichtMax }}
+            />
+          </div>
+
           <ErgebnisAktionen
             ergebnisText={istKind
               ? `BMI: ${fmt(ergebnis.bmi)} (Kinder/Jugendliche: Einordnung nur über alters- und geschlechtsspezifische Perzentilen möglich)`
               : `BMI: ${fmt(ergebnis.bmi)} — ${ergebnis.kategorie.label}`}
             seitenTitel="BMI-Rechner"
-          />
-
-          <AiExplain
-            rechnerName="BMI-Rechner"
-            eingaben={{ gewicht: nGewicht, groesse: nGroesse, geschlecht, alter: nAlter }}
-            ergebnis={istKind
-              ? { bmi: ergebnis.bmi, hinweis: 'Unter 18 Jahren: Einordnung nur über BMI-Perzentilen (z. B. Kromeyer-Hauschild) möglich — Kategorie-Wertung unterdrückt.' }
-              : { bmi: ergebnis.bmi, kategorie: ergebnis.kategorie.label, optimalesGewichtMin: ergebnis.optimalesGewichtMin, optimalesGewichtMax: ergebnis.optimalesGewichtMax }}
           />
         </>
       )}

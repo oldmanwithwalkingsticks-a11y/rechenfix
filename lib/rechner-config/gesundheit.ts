@@ -44,6 +44,24 @@ Die Weltgesundheitsorganisation (WHO) hat folgende Einteilung für Erwachsene fe
 
 Für Kinder und Jugendliche gelten andere Referenzwerte, da sich der BMI mit dem Wachstum verändert — dort sind BMI-Perzentilen nach Alter und Geschlecht (z. B. nach Kromeyer-Hauschild) maßgeblich. Für Erwachsene bleibt die WHO bei der einheitlichen Normalgewichts-Spanne von **18,5 bis 24,9** unabhängig vom Alter. Die in diesem Rechner zusätzlich angezeigte altersabhängige Staffelung (z. B. 19–24 für 19- bis 24-Jährige, etwa 24–29 für 65+) folgt einer Konvention aus der ernährungswissenschaftlichen Literatur (**NRC 1989** — National Research Council, *Diet and Health*) und ist als zusätzliche Orientierung zu verstehen, nicht als WHO-Empfehlung.
 
+**Anwendungsfälle: Wann brauchen Sie den BMI-Rechner?**
+
+Der BMI-Rechner ist als Orientierungswert in vielen Lebenssituationen hilfreich — hier fünf typische Anwendungsfälle:
+
+- **Vorbereitung auf den Hausarzt-Termin.** Vor Vorsorgeuntersuchungen oder Routinechecks ist es nützlich, den eigenen BMI zu kennen. Viele Hausärzte nutzen den BMI als Erstindikator. Wer den Wert vorab berechnet, kann beim Termin gezielt Fragen stellen — etwa zur Bedeutung der Kategorie oder zu weiteren Untersuchungen wie Blutdruck oder Blutzucker.
+- **Sportler und muskulöse Personen.** Wer regelmäßig Krafttraining macht, hat oft einen BMI im Übergewichtsbereich, ohne tatsächlich übergewichtig zu sein. Muskelgewebe ist schwerer als Fettgewebe. Hier ist der BMI alleine wenig aussagekräftig — der Körperfettanteil oder der Taillenumfang sind bessere Indikatoren. Der Rechner zeigt zumindest den Wert; die Einordnung sollte aber im Kontext erfolgen.
+- **Senioren ab 65 Jahren.** Im Alter verändert sich die Körperzusammensetzung — Muskelmasse nimmt ab, Fettanteil zu. Studien zeigen, dass ein leicht höherer BMI (etwa 24–29) bei älteren Menschen mit besserer Gesundheit und höherer Lebenserwartung verbunden sein kann. Dieser Rechner berücksichtigt das Alter und zeigt einen alters-adjustierten Optimal-Bereich.
+- **Während Schwangerschaft und Stillzeit.** Während der Schwangerschaft ist der BMI nicht aussagekräftig — die natürliche Gewichtszunahme verfälscht den Wert. Sinnvoll ist er aber **vor** der Schwangerschaft (Ausgangs-BMI als Basis für die empfohlene Gewichtszunahme) und einige Monate **nach** der Geburt. Der Rechner kann hier Orientierung bieten, ärztliche Beratung ersetzt er nicht.
+- **Eltern, die den BMI ihres Kindes prüfen.** Bei Kindern und Jugendlichen unter 18 Jahren gelten **nicht** die WHO-Erwachsenenkategorien, sondern altersspezifische BMI-Perzentilen (z. B. nach Kromeyer-Hauschild). Dieser Rechner erkennt Kinder automatisch und zeigt einen entsprechenden Hinweis statt einer falschen Kategorisierung. Eine fundierte Einschätzung ist nur über die Kinderärzt:in möglich.
+
+**Häufige Fehler bei der BMI-Berechnung**
+
+- **Größe in Zentimetern statt Metern.** Der häufigste Eingabefehler: 175 statt 1,75 wird in der Formel kg ÷ m² eingesetzt. Das ergibt absurde Werte. Manche Rechner (auch dieser hier) erwarten cm — bei eigener Berechnung mit der Formel aber unbedingt in Metern rechnen, sonst entsteht ein BMI im Promille-Bereich.
+- **Muskelmasse nicht berücksichtigt.** Ein durchtrainierter Sportler mit BMI 28 ist nicht zwingend übergewichtig — Muskelgewebe wiegt mehr als Fettgewebe. Wer regelmäßig Kraftsport macht, sollte den BMI durch Messung des Körperfettanteils ergänzen, etwa mit einer Bioimpedanz-Waage oder beim Hausarzt.
+- **Bauchumfang nicht gemessen.** Der BMI sagt nichts über die Fettverteilung. Viszerales Bauchfett ist gesundheitlich relevanter als Fett an Hüfte und Oberschenkel. Faustregel: Taillenumfang bei Männern unter 94 cm, bei Frauen unter 80 cm. Wer einen Normal-BMI hat, aber starken Bauchumfang, sollte das ärztlich abklären lassen.
+- **Alter ignoriert.** Der WHO-Optimal-Bereich (18,5–24,9) gilt für alle Erwachsenen — manche Studien empfehlen aber bei Senioren leicht höhere Werte (24–29 bei 65+). Wer den BMI ohne Alterskontext bewertet, übersieht diese Nuance. Dieser Rechner berücksichtigt das Alter, sofern eingegeben.
+- **Erwachsenen-Tabelle bei Kindern angewendet.** Ein zehnjähriges Kind mit BMI 19 ist **nicht** automatisch übergewichtig — bei Kindern gelten Perzentilen nach Alter und Geschlecht. Wer die WHO-Erwachsenenkategorien auf Kinder anwendet, kommt zu falschen Schlüssen. Bei Sorgen immer mit der Kinderärzt:in sprechen.
+
 **Kritik am BMI — wie aussagekräftig ist er?**
 
 Obwohl der BMI weltweit verwendet wird, hat er einige bekannte Schwächen:
@@ -74,6 +92,18 @@ Trotz dieser Einschränkungen bleibt der BMI ein nützliches Screening-Werkzeug 
       {
         frage: 'Ab welchem BMI sollte man zum Arzt?',
         antwort: 'Bei einem BMI unter 18,5 (Untergewicht) oder ab 30 (Adipositas) ist eine ärztliche Beratung empfehlenswert. Auch bei einem BMI zwischen 25 und 30 sollte man aufmerksam sein, besonders wenn weitere Risikofaktoren wie Bluthochdruck oder Diabetes vorliegen.',
+      },
+      {
+        frage: 'Wie berechne ich den BMI bei Kindern?',
+        antwort: 'Bei Kindern und Jugendlichen unter 18 Jahren wird der BMI zwar mit derselben Formel berechnet (Gewicht in Kilogramm geteilt durch Körpergröße in Metern zum Quadrat), aber die WHO-Erwachsenenkategorien gelten nicht. Stattdessen werden die berechneten Werte in alters- und geschlechtsspezifische Referenztabellen eingeordnet — sogenannte BMI-Perzentilen. In Deutschland sind die Perzentilen nach Kromeyer-Hauschild gebräuchlich. Eine fundierte Einschätzung ist nur durch Kinderärzt:innen oder kinder- und jugendmedizinische Praxen möglich, die diese Tabellen routinemäßig nutzen. Eltern sollten den BMI eines Kindes nicht selbst nach Erwachsenenkategorien bewerten — das führt häufig zu falschen Schlüssen.',
+      },
+      {
+        frage: 'Welcher BMI ist während der Schwangerschaft gesund?',
+        antwort: 'Während der Schwangerschaft ist der BMI nicht aussagekräftig, weil die natürliche Gewichtszunahme den Wert verfälscht. Was Ärzt:innen interessiert, ist der Ausgangs-BMI vor der Schwangerschaft — er bestimmt, wie viel Gewichtszunahme medizinisch empfohlen wird. Bei einem Ausgangs-BMI von 18,5–24,9 (Normalgewicht) gelten 11,5–16 kg als typischer Bereich; bei Übergewicht weniger, bei Untergewicht etwas mehr. Diese Werte sind nur Orientierungswerte — die individuelle Begleitung durch Frauenärzt:in oder Hebamme ist entscheidend. Nach der Geburt kann der BMI etwa nach 6 Monaten wieder als Orientierung dienen, sollte aber nicht zur frühzeitigen Selbstbewertung herangezogen werden.',
+      },
+      {
+        frage: 'Was ist aussagekräftiger — BMI oder Bauchumfang?',
+        antwort: 'Der Bauchumfang ist in vielen Fällen aussagekräftiger als der BMI, weil er etwas über die Fettverteilung verrät. Viszerales Bauchfett (das tief im Bauchraum liegt und Organe umschließt) ist gesundheitlich deutlich riskanter als subkutanes Fett an Hüfte oder Oberschenkel. Faustregel der WHO: Taillenumfang unter 94 cm bei Männern und unter 80 cm bei Frauen gilt als unbedenklich; ab 102 cm bzw. 88 cm liegt ein deutlich erhöhtes Risiko für Herz-Kreislauf-Erkrankungen und Diabetes Typ 2 vor. In der Praxis werden BMI und Bauchumfang gerne kombiniert: der BMI liefert eine schnelle Gesamteinschätzung, der Bauchumfang verfeinert das Bild. Wer einen Normal-BMI, aber einen hohen Taillenumfang hat, sollte das ärztlich abklären lassen.',
       },
     ],
   },
