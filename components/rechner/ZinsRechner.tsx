@@ -236,22 +236,25 @@ export default function ZinsRechner() {
           <CrossLink href="/finanzen/kreditrechner" emoji="💳" text="Kreditrechner: Zinsen und Rate bei Krediten" />
           <CrossLink href="/finanzen/etf-sparplanrechner" emoji="📈" text="ETF-Sparplan: Mehr Rendite als klassisches Sparen" />
 
-          {/* Hebel A (W13.3) — AiExplain in Calculator-Card, Pattern-Konsistenz mit MwSt/BN */}
-          <AiExplain
-            rechnerName="Zinsrechner"
-            eingaben={{
-              anfangskapital: nAnfang,
-              zinssatz: nZins,
-              laufzeit: nLaufzeit,
-              zinseszins,
-              sparrate: nSparrate,
-            }}
-            ergebnis={{
-              endkapital: ergebnis.endkapital,
-              gesamtzinsen: ergebnis.gesamtzinsen,
-              eigenkapital: ergebnis.eigenkapital,
-            }}
-          />
+          {/* Hebel A (W13.3) — AiExplain in Calculator-Card, Pattern-Konsistenz mit MwSt/BN.
+              mt-4-Wrapper (W13.3.1) für sichtbaren Abstand zum ETF-Sparplan-CrossLink (BN-W13.1.2-Pattern). */}
+          <div className="mt-4">
+            <AiExplain
+              rechnerName="Zinsrechner"
+              eingaben={{
+                anfangskapital: nAnfang,
+                zinssatz: nZins,
+                laufzeit: nLaufzeit,
+                zinseszins,
+                sparrate: nSparrate,
+              }}
+              ergebnis={{
+                endkapital: ergebnis.endkapital,
+                gesamtzinsen: ergebnis.gesamtzinsen,
+                eigenkapital: ergebnis.eigenkapital,
+              }}
+            />
+          </div>
 
           <ErgebnisAktionen
             ergebnisText={`${fmt(nAnfang)} € Anfangskapital → ${fmt(ergebnis.endkapital)} € nach ${Math.floor(nLaufzeit)} Jahren (${fmt(ergebnis.gesamtzinsen)} € Zinsen)`}
