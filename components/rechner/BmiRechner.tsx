@@ -214,12 +214,16 @@ export default function BmiRechner() {
             />
           </div>
 
-          <ErgebnisAktionen
-            ergebnisText={istKind
-              ? `BMI: ${fmt(ergebnis.bmi)} (Kinder/Jugendliche: Einordnung nur über alters- und geschlechtsspezifische Perzentilen möglich)`
-              : `BMI: ${fmt(ergebnis.bmi)} — ${ergebnis.kategorie.label}`}
-            seitenTitel="BMI-Rechner"
-          />
+          {/* W13.4.1: mt-6-Wrapper für Abstand zwischen Fix-erklärt-Button und Action-Buttons
+              (Pattern-Konsistenz mit Zinsrechner-W13.3.6). */}
+          <div className="mt-6">
+            <ErgebnisAktionen
+              ergebnisText={istKind
+                ? `BMI: ${fmt(ergebnis.bmi)} (Kinder/Jugendliche: Einordnung nur über alters- und geschlechtsspezifische Perzentilen möglich)`
+                : `BMI: ${fmt(ergebnis.bmi)} — ${ergebnis.kategorie.label}`}
+              seitenTitel="BMI-Rechner"
+            />
+          </div>
         </>
       )}
     </div>
