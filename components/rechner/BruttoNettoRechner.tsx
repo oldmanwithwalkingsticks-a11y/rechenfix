@@ -15,6 +15,44 @@ import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 const TABELLEN_WERTE = [1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 6000];
 
+const STATIC_FAQ: { frage: string; antwort: string }[] = [
+  {
+    frage: 'Welche Steuerklasse habe ich automatisch?',
+    antwort:
+      'Ledige ohne Kinder sind in Steuerklasse 1. Alleinerziehende kommen in Klasse 2 (mit Entlastungsbetrag). Verheiratete starten standardmäßig in 4/4 — können aber zu 3/5 oder zum Faktorverfahren wechseln. Welche Klasse für Sie eingetragen ist, sehen Sie auf Ihrer monatlichen Lohnabrechnung oben rechts.',
+  },
+  {
+    frage: 'Was zählt zu den Sozialabgaben?',
+    antwort:
+      'Vier Pflichtbeiträge: Krankenversicherung (paritätisch 7,3 % plus halber Zusatzbeitrag), Rentenversicherung (paritätisch 9,3 %), Arbeitslosenversicherung (paritätisch 1,3 %) und Pflegeversicherung (paritätisch 1,8 %, plus 0,6 % Kinderlosenzuschlag, den nur Sie tragen). Arbeitgeber und Arbeitnehmer teilen sich die Beiträge — Ihr Arbeitnehmer-Anteil liegt 2026 bei rund 21 % vom Brutto.',
+  },
+  {
+    frage: 'Warum ist mein Netto in Steuerklasse 5 so niedrig?',
+    antwort:
+      'Steuerklasse 5 ist bewusst hoch besteuert. Die Idee: Der Partner in Klasse 3 zahlt fast keine Lohnsteuer, der in Klasse 5 viel — zusammen ergibt sich etwa dieselbe Summe wie bei 4/4. Die endgültige Steuerlast wird in der gemeinsamen Veranlagung am Jahresende abgerechnet. Wer 3/5 wählt, hat monatlich zwar mehr Netto im Hauptverdiener-Konto, riskiert aber eine Nachzahlung bei der Steuererklärung.',
+  },
+  {
+    frage: 'Wie viel von einer Gehaltserhöhung bleibt netto übrig?',
+    antwort:
+      'Bei mittleren Einkommen kommen rund 50–60 % der Brutto-Erhöhung als Netto an. Bei höheren Einkommen sinkt das durch die progressive Lohnsteuer auf 45–55 %. Konkret: Aus 200 € Brutto-Erhöhung werden meist 100–115 € Netto.',
+  },
+  {
+    frage: 'Lohnt sich der Kirchenaustritt finanziell?',
+    antwort:
+      'Bei 3.000 € Brutto sparen Sie je nach Bundesland 25–35 € monatlich, bei 5.000 € sind es 60–80 €. Über 30 Jahre Berufsleben kommen schnell 15.000 € oder mehr zusammen. Der Austritt erfolgt beim Standesamt oder Amtsgericht, kostet einmalig 25–60 € Verwaltungsgebühr und wirkt ab dem Folgemonat.',
+  },
+  {
+    frage: 'Welche Freibeträge berücksichtigt der Rechner?',
+    antwort:
+      'Der Rechner rechnet automatisch mit dem Grundfreibetrag (2026: 12.348 € Single, 24.696 € verheiratet), dem Kinderfreibetrag bei eingetragenen Kindern und dem Entlastungsbetrag für Alleinerziehende. Individuelle Freibeträge auf der Lohnsteuerkarte — etwa für hohe Werbungskosten oder die Pendlerpauschale — müssen Sie separat eintragen, falls vorhanden.',
+  },
+  {
+    frage: 'Was ist der Unterschied zwischen Brutto-Lohn und Brutto-Gehalt?',
+    antwort:
+      'Sprachlich unterschiedlich, rechnerisch gleich: „Lohn" wird oft für Stunden- oder Wochenabrechnungen verwendet (typisch Handwerk, Industrie), „Gehalt" für feste Monatsbeträge (Angestellte, Beamte). Steuerlich macht das keinen Unterschied — beides wird identisch versteuert und mit Sozialabgaben belegt.',
+  },
+];
+
 function berechneSchnell(brutto: number, sk: 1 | 3 | 5): BruttoNettoErgebnis {
   return berechneBruttoNetto({
     bruttoMonat: brutto,
@@ -470,7 +508,104 @@ export default function BruttoNettoRechner() {
           <CrossLink href="/finanzen/steuererstattung-rechner" emoji="💰" text="Wie viel bekommen Sie vom Finanzamt zurück?" />
           <CrossLink href="/finanzen/gehaltsvergleich" emoji="📊" text="Verdienen Sie genug? Gehalt vergleichen" />
 
-          <div className="mt-4 no-print flex flex-wrap gap-3">
+          {/* Statischer Erklär-Block (W13.1) — server-rendered für AdSense-Quality */}
+          <section className="mt-8 no-print">
+            <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">So funktioniert die Brutto-Netto-Berechnung</h2>
+            <div className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed space-y-4">
+              <p>
+                Brutto ist Ihr vereinbartes Gehalt — Netto das, was nach Abzügen tatsächlich auf Ihrem Konto landet. Vier Posten werden vom Brutto abgezogen:
+              </p>
+              <ol className="list-decimal pl-5 space-y-1.5">
+                <li><strong className="text-gray-800 dark:text-gray-100">Lohnsteuer</strong> — abhängig von Steuerklasse, Bundesland und Freibeträgen</li>
+                <li><strong className="text-gray-800 dark:text-gray-100">Solidaritätszuschlag</strong> — nur bei höheren Einkommen (2026: ab ca. 73.500 € Jahresbrutto Single)</li>
+                <li><strong className="text-gray-800 dark:text-gray-100">Kirchensteuer</strong> — 8 % (Bayern, Baden-Württemberg) bzw. 9 % (übrige Bundesländer) auf die Lohnsteuer, nur bei Kirchenzugehörigkeit</li>
+                <li><strong className="text-gray-800 dark:text-gray-100">Sozialabgaben</strong> — Kranken-, Pflege-, Renten- und Arbeitslosenversicherung, in Summe rund 21 % vom Brutto (Arbeitnehmer-Anteil)</li>
+              </ol>
+              <p>
+                <strong className="text-gray-800 dark:text-gray-100">Formel:</strong> Netto = Brutto − Lohnsteuer − Soli − Kirchensteuer − Sozialabgaben
+              </p>
+              <p>
+                <strong className="text-gray-800 dark:text-gray-100">Beispiel:</strong> Bei 4.000 € Brutto in Steuerklasse 1 (ledig, kinderlos, NRW, kein Kirchenmitglied) bleiben rund <strong className="text-gray-800 dark:text-gray-100">2.625 € Netto</strong> übrig — also etwa 65 % des Brutto. Die Quote sinkt mit höherem Einkommen, weil die Lohnsteuer progressiv steigt, und kann bei niedrigen Gehältern bei knapp 75 % liegen.
+              </p>
+            </div>
+          </section>
+
+          <section className="mt-8 no-print">
+            <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Anwendungsfälle: Wann brauchen Sie den Brutto-Netto-Rechner?</h2>
+            <div className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed space-y-4">
+              <p>
+                <strong className="text-gray-800 dark:text-gray-100">1. Jobwechsel oder Gehaltsverhandlung.</strong> Sie bekommen ein Angebot über 4.500 € brutto — was bedeutet das netto? Vergleichen Sie mit Ihrem aktuellen Nettogehalt, bevor Sie zusagen. Eine Bruttoerhöhung von 500 € pro Monat bringt durch die Steuerprogression oft nur 250–300 € mehr netto — das macht den Unterschied zwischen &bdquo;lohnt sich&ldquo; und &bdquo;kaum spürbar&ldquo;.
+              </p>
+              <p>
+                <strong className="text-gray-800 dark:text-gray-100">2. Steuerklassen-Wechsel nach Heirat.</strong> Frisch verheiratete Paare können zwischen 4/4, 3/5 oder dem Faktorverfahren wählen. Bei großem Einkommensunterschied bringt 3/5 monatlich mehr Netto für den Hauptverdiener — die endgültige Steuerlast wird allerdings erst in der gemeinsamen Steuererklärung am Jahresende abgerechnet. Berechnen Sie beide Varianten, um die monatlich günstigere Kombination zu finden.
+              </p>
+              <p>
+                <strong className="text-gray-800 dark:text-gray-100">3. Umzug in ein anderes Bundesland.</strong> Bayern und Baden-Württemberg erheben 8 % Kirchensteuer, alle anderen Bundesländer 9 %. Auch der Krankenkassen-Zusatzbeitrag variiert je Kasse — von etwa 1,5 % bis über 3 %. Ein Umzug oder Kassenwechsel kann einige hundert Euro pro Jahr ausmachen.
+              </p>
+              <p>
+                <strong className="text-gray-800 dark:text-gray-100">4. Kirchenein- oder -austritt.</strong> Wer aus der Kirche austritt, spart die Kirchensteuer komplett. Bei 3.500 € Brutto sind das je nach Bundesland 25–40 € monatlich, bei höheren Einkommen schnell 60–100 €. Über 30 Jahre Berufsleben kommen so leicht 15.000 € oder mehr zusammen.
+              </p>
+              <p>
+                <strong className="text-gray-800 dark:text-gray-100">5. Familienplanung.</strong> Mit der Geburt eines Kindes ändern sich Freibeträge: der Kinderfreibetrag (2026: 6.826 € pro Kind), der Entlastungsbetrag für Alleinerziehende und der Wegfall des Pflegeversicherungs-Zuschlags für Kinderlose. Der Rechner berücksichtigt diese Faktoren und zeigt Ihnen das neue Netto sofort.
+              </p>
+            </div>
+          </section>
+
+          <section className="mt-8 no-print">
+            <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Häufige Fehler bei der Brutto-Netto-Berechnung</h2>
+            <ul className="list-disc pl-5 space-y-3 text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+              <li>
+                <strong className="text-gray-800 dark:text-gray-100">Steuerklasse falsch angegeben.</strong> Verheiratete sind nicht automatisch in Klasse 4. Wer 3/5 gewählt hat, hat in der höheren Klasse mehr Netto, in der niedrigeren weniger. Welche Klasse Sie tatsächlich haben, steht oben rechts auf Ihrer Lohnabrechnung.
+              </li>
+              <li>
+                <strong className="text-gray-800 dark:text-gray-100">Sozialabgaben unterschätzt.</strong> Viele rechnen mit pauschal 20 %. Tatsächlich liegt der Arbeitnehmer-Anteil 2026 bei rund 21 % — abhängig vom Krankenkassen-Zusatzbeitrag und mit zusätzlich 0,6 % Aufschlag für Kinderlose ab 23 Jahren.
+              </li>
+              <li>
+                <strong className="text-gray-800 dark:text-gray-100">Solidaritätszuschlag pauschal abgezogen.</strong> Seit 2021 zahlen rund 90 % der Steuerzahler keinen Soli mehr. Erst ab einer Jahres-Lohnsteuer von 20.350 € (Single 2026) bzw. 40.700 € (gemeinsam) wird er fällig — das entspricht etwa 73.500 € Jahresbrutto Single.
+              </li>
+              <li>
+                <strong className="text-gray-800 dark:text-gray-100">Beitragsbemessungsgrenze ignoriert.</strong> Bei Bruttogehältern über 5.812,50 € pro Monat zahlen Sie nicht weiter mehr in Kranken- und Pflegeversicherung ein (RV und ALV: bis 8.450 € pro Monat). Wer das nicht weiß, rechnet sein Netto bei hohen Gehältern zu niedrig.
+              </li>
+              <li>
+                <strong className="text-gray-800 dark:text-gray-100">Bundesland-Unterschiede vergessen.</strong> Kirchensteuer ist 8 % in Bayern und Baden-Württemberg, 9 % in allen anderen Bundesländern. Beim Umzug ändert sich das automatisch — auch ohne Kirchenwechsel.
+              </li>
+            </ul>
+          </section>
+
+          <section className="mt-8 no-print">
+            <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Häufige Fragen zur Brutto-Netto-Berechnung</h2>
+            <div className="space-y-4">
+              {STATIC_FAQ.map((item, i) => (
+                <details key={i} className="group border border-gray-100 dark:border-gray-700 rounded-xl">
+                  <summary className="cursor-pointer p-4 font-medium text-gray-800 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors list-none flex justify-between items-center">
+                    {item.frage}
+                    <svg className="w-5 h-5 text-gray-600 group-open:rotate-180 transition-transform shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </summary>
+                  <div className="px-4 pb-4 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                    {item.antwort}
+                  </div>
+                </details>
+              ))}
+            </div>
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify({
+                  '@context': 'https://schema.org',
+                  '@type': 'FAQPage',
+                  mainEntity: STATIC_FAQ.map(item => ({
+                    '@type': 'Question',
+                    name: item.frage,
+                    acceptedAnswer: { '@type': 'Answer', text: item.antwort },
+                  })),
+                }),
+              }}
+            />
+          </section>
+
+          <div className="mt-8 no-print flex flex-wrap gap-3">
             <AiExplain
               rechnerName="Brutto-Netto-Rechner"
               eingaben={{
