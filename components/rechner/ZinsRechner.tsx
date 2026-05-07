@@ -237,10 +237,18 @@ export default function ZinsRechner() {
           <CrossLink href="/finanzen/etf-sparplanrechner" emoji="📈" text="ETF-Sparplan: Mehr Rendite als klassisches Sparen" />
 
           {/* Hebel A (W13.3) — AiExplain in Calculator-Card, Pattern-Konsistenz mit MwSt/BN.
-              W13.3.4: Explicit-Height-Spacer-Block (24px) als sichtbares DOM-Element zwischen
-              ETF-Sparplan-CrossLink und AiExplain. Block-Element mit fester Höhe ist immun
-              gegen jede margin-collapse-Logik und CSS-Cache-Quirks. */}
-          <div aria-hidden="true" style={{ height: '24px', flexShrink: 0 }} />
+              W13.3.5: Diagnose-Variante. Falls dieser Spacer NICHT sichtbar ist obwohl Live-HTML
+              ihn bestätigt, dann liefert der lokale Browser-Cache veraltetes HTML — kein Code-Bug. */}
+          <div
+            aria-hidden="true"
+            style={{
+              height: '60px',
+              display: 'block',
+              flexShrink: 0,
+              borderTop: '1px solid rgba(0,0,0,0.04)',
+              marginTop: '8px',
+            }}
+          />
           <AiExplain
             rechnerName="Zinsrechner"
             eingaben={{
