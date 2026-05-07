@@ -203,6 +203,7 @@ Wenn Sie als Unternehmer Waren oder Dienstleistungen einkaufen, zahlen Sie auf d
     icon: '📈',
     formel: 'Mit Zinseszins: K = K₀ × (1 + p/100)ⁿ | Ohne: K = K₀ × (1 + p/100 × n)',
     beispiel: 'Beispiel: 10.000 € bei 3,5% für 10 Jahre mit Zinseszins = 10.000 × 1,035¹⁰ = 14.105,99 €',
+    affiliate: { programId: 'cosmosdirekt', context: 'tagesgeld' },
     erklaerung: `**Zins und Zinseszins einfach erklärt**
 
 Zinsen sind das Entgelt, das Sie für die Überlassung von Kapital erhalten — oder zahlen. Wenn Sie Geld auf einem Sparkonto, in einem Festgeld oder einem Fonds anlegen, erhalten Sie dafür Zinsen von der Bank oder dem Anbieter. Der Zinssatz wird in Prozent pro Jahr (p.a.) angegeben und bestimmt, wie viel Rendite Ihr Kapital erwirtschaftet.
@@ -228,6 +229,24 @@ Für die einfache Verzinsung ohne Zinseszins lautet die Formel: **K = K₀ × (1
 Wenn Sie zusätzlich eine monatliche Sparrate einzahlen, wird die Berechnung komplexer. Jede monatliche Einzahlung wird anteilig verzinst, je nachdem, wie viele Monate des Jahres sie bereits angelegt war. Die Formel für den Sparplananteil lautet vereinfacht: Jede Rate wird mit dem Zinssatz für die verbleibende Restlaufzeit im Jahr verzinst.
 
 Ein konkretes Rechenbeispiel: Sie legen 10.000 € zu 3,5% Zinsen für 10 Jahre an, mit Zinseszins und ohne zusätzliche Sparrate. Die Berechnung: 10.000 × 1,035¹⁰ = 10.000 × 1,41060 = 14.105,99 €. Ihre Zinserträge betragen 4.105,99 €. Ohne Zinseszins wären es nur 10.000 × (1 + 0,035 × 10) = 13.500 € — also 605,99 € weniger.
+
+**Anwendungsfälle: Wann brauchen Sie den Zinsrechner?**
+
+Der Zinsrechner hilft bei vielen finanziellen Entscheidungen — hier fünf konkrete Anwendungsfälle:
+
+- **Sparplan für die Altersvorsorge.** Wer mit 30 Jahren beginnt, monatlich 200 € zur Seite zu legen, kommt bei 5 % Rendite mit 65 Jahren auf rund 228.000 €. Der Rechner zeigt sofort, wie sich Anfangsalter, Sparrate und Renditeerwartung auf das Endkapital auswirken — die Grundlage jeder fundierten Vorsorgeplanung.
+- **Tagesgeld vs. Festgeld vergleichen.** Tagesgeld bietet 2,0 % Zinsen flexibel verfügbar, Festgeld 3,2 % bei 3 Jahren Bindung — was lohnt sich? Bei 20.000 € Anlagebetrag macht das nach 3 Jahren rund 730 € Unterschied. Der Rechner mit Zinseszins-Toggle vergleicht beide Szenarien transparent.
+- **Eigenkapital für Immobilien aufbauen.** Sie wollen in 10 Jahren 50.000 € Eigenkapital ansparen. Bei 4 % Rendite müssen Sie monatlich rund 340 € sparen, bei 2 % Rendite rund 380 € — die Differenz beträgt über 10 Jahre 4.800 €. Der Rechner ermittelt die nötige Sparrate für ein Sparziel.
+- **Erbschaft oder Bonus richtig anlegen.** Sie haben 25.000 € einmalig zur Verfügung und wollen das Geld in 15 Jahren brauchen. Mit Zinseszins bei 4 % Rendite werden daraus rund 45.000 €, ohne Zinseszins nur 40.000 € — der Effekt der Wiederanlage macht 5.000 € Unterschied.
+- **Inflationsausgleich prüfen.** Bei 2 % Inflation pro Jahr verliert Geld in 10 Jahren rund 18 % seiner Kaufkraft. Welche Rendite brauchen Sie mindestens, damit Ihr Vermögen real nicht schrumpft? Der Rechner mit Vergleichswerten zeigt sofort, ob eine Anlage Inflation schlägt oder nur nominal Rendite bringt.
+
+**Häufige Fehler bei der Zinsberechnung**
+
+- **Inflation nicht berücksichtigt.** Eine nominale Rendite von 3 % bei 2 % Inflation ergibt nur 1 % reale Rendite — die Kaufkraft Ihres Endkapitals. Wer langfristig plant, sollte immer mit der realen Rendite rechnen, sonst überschätzt er seinen späteren Kaufkraft-Gewinn deutlich.
+- **Abgeltungssteuer übersehen.** Auf Kapitalerträge fallen 25 % Abgeltungssteuer plus Soli (insgesamt 26,375 %, mit Kirchensteuer rund 28 %) an. Aus 10.000 € Bruttozinsen werden netto nur etwa 7.200 €. Wer das nicht einrechnet, kalkuliert sein Endkapital systematisch zu hoch.
+- **Einfache mit Zinseszins-Verzinsung verwechseln.** Werbeangebote mit „bis zu 5 % Zinsen" rechnen oft ohne Zinseszins. Bei 10 Jahren Laufzeit fehlen so 1.300 € Endkapital ggü. der echten Zinseszins-Rechnung. Immer prüfen, ob Zinseszins eingeschlossen ist.
+- **72er-Regel als exakte Formel verstanden.** Die Faustregel „72 ÷ Zinssatz = Verdopplungsjahre" ist eine Näherung, kein exakter Wert. Bei 5 % Zinsen sagt sie 14,4 Jahre, exakt sind es 14,21. Bei niedrigen Zinssätzen unter 2 % wird die Abweichung größer — dort lieber direkt mit dem Rechner prüfen.
+- **Notgroschen-Liquidität geopfert.** Wer eine zu hohe Sparrate ansetzt und dann bei einer ungeplanten Ausgabe verkaufen muss, verliert oft an Wert (besonders bei volatilen Anlagen). Daumenregel: 3 Monatsgehälter als Notgroschen auf dem Tagesgeld liegen lassen, erst dann den langfristigen Sparplan starten.
 
 **Der Effekt des Zinseszins — Beispiel**
 
@@ -260,11 +279,23 @@ Wichtig zu beachten: In der Praxis mindern die Abgeltungssteuer (25% plus Solida
       },
       {
         frage: 'Muss ich Steuern auf Zinsen zahlen?',
-        antwort: 'Ja, in Deutschland fällt auf Kapitalerträge die Abgeltungssteuer von 25% plus Solidaritätszuschlag (5,5% davon) an, insgesamt ca. 26,375%. Der Sparerpauschbetrag von 1.000 € pro Person (2.000 € für Ehepaare) ist steuerfrei.',
+        antwort: 'Ja, in Deutschland fällt auf Kapitalerträge die Abgeltungssteuer von 25 % plus Solidaritätszuschlag (5,5 % davon) an, insgesamt 26,375 %. Bei Kirchenmitgliedern kommt zusätzlich die Kirchensteuer (8 % in Bayern und Baden-Württemberg, sonst 9 %) hinzu — die Gesamtbelastung steigt damit auf rund 28 %. Der Sparerpauschbetrag von 1.000 € pro Person (2.000 € für Ehepaare) bleibt steuerfrei. Stellen Sie bei Ihrer Bank einen Freistellungsauftrag, damit Erträge bis zu dieser Grenze ohne Steuerabzug ausgezahlt werden.',
       },
       {
         frage: 'Wie lange dauert es, bis sich mein Kapital verdoppelt?',
         antwort: 'Die Faustregel lautet: 72 geteilt durch den Zinssatz ergibt die ungefähre Verdopplungszeit in Jahren. Bei 3% Zinsen: 72 ÷ 3 = ca. 24 Jahre. Bei 6% Zinsen: 72 ÷ 6 = ca. 12 Jahre. Bei 1% Zinsen: 72 ÷ 1 = ca. 72 Jahre.',
+      },
+      {
+        frage: 'Wann lohnt sich der Zinseszins-Effekt am meisten?',
+        antwort: 'Der Zinseszins-Effekt entfaltet sich exponentiell — er wird stärker, je länger die Laufzeit und je höher der Zinssatz. Bei 10 Jahren Laufzeit bringt Zinseszins gegenüber einfacher Verzinsung etwa 5–15 % mehr Endkapital. Bei 30 Jahren sind es 70–80 %, bei 40 Jahren über 100 %. Faustregel: Erst ab 10–15 Jahren Anlagedauer wird der Effekt richtig spürbar. Wer früh und regelmäßig anlegt, profitiert am meisten — ein 25-Jähriger mit 200 € pro Monat zu 5 % Rendite hat mit 65 über 300.000 €, ein 35-jähriger Starter unter denselben Bedingungen nur 166.000 €.',
+      },
+      {
+        frage: 'Wie wirkt sich Inflation auf den Zinseszins aus?',
+        antwort: 'Inflation reduziert die Kaufkraft Ihres Endkapitals — die nominale Rendite (Bruttozins) ist nicht gleich der realen Rendite (Kaufkraftzuwachs). Beispiel: 3,5 % Zinsen bei 2 % Inflation ergeben nur etwa 1,5 % reale Rendite. Bei langen Laufzeiten zehrt Inflation einen erheblichen Teil der nominellen Erträge auf. Faustregel: Subtrahieren Sie die durchschnittliche Inflationsrate vom Zinssatz, um die reale Rendite zu schätzen. Aktien und Immobilien gelten als bessere Inflationsschutz-Anlagen als Tages- oder Festgeld, sind dafür aber mit höherem Risiko verbunden.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen Tagesgeld und Festgeld?',
+        antwort: 'Tagesgeld ist täglich verfügbar — Sie können jederzeit Geld abheben oder einzahlen. Der Zinssatz ist variabel und kann sich kurzfristig ändern. Tagesgeld eignet sich für den Notgroschen und Geld, das Sie kurz- bis mittelfristig brauchen könnten. Festgeld bindet Ihr Geld für eine feste Laufzeit (z. B. 6 Monate, 1, 3 oder 5 Jahre). Dafür erhalten Sie meist einen höheren, garantierten Zinssatz. Während der Laufzeit kommen Sie nicht oder nur mit Zinsverlust an Ihr Geld. Festgeld lohnt sich, wenn Sie das Geld nicht akut brauchen und höhere Sicherheit beim Zinssatz möchten.',
       },
     ],
   },
