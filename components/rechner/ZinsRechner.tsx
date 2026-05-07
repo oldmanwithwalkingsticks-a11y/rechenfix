@@ -237,9 +237,10 @@ export default function ZinsRechner() {
           <CrossLink href="/finanzen/etf-sparplanrechner" emoji="📈" text="ETF-Sparplan: Mehr Rendite als klassisches Sparen" />
 
           {/* Hebel A (W13.3) — AiExplain in Calculator-Card, Pattern-Konsistenz mit MwSt/BN.
-              flex-Wrapper (W13.3.2) verhindert margin-collapse zwischen outer mt-4 und AiExplain's
-              eigenem mt-4 — identisch zu BN-W13.1.2-Pattern, sichtbarer Abstand zum ETF-Sparplan-CrossLink. */}
-          <div className="mt-4 no-print flex flex-wrap gap-3">
+              W13.3.3: pt-4 + h-px-Sentinel umgehen CSS-margin-collapse hart (Padding kann nicht
+              collapsen, der unsichtbare 1px-Sentinel etabliert eine Block-Boundary). */}
+          <div aria-hidden="true" className="h-px no-print" />
+          <div className="pt-4 no-print">
             <AiExplain
               rechnerName="Zinsrechner"
               eingaben={{
