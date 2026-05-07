@@ -17,9 +17,14 @@ const TABELLEN_WERTE = [1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 6000];
 
 const STATIC_FAQ: { frage: string; antwort: string }[] = [
   {
-    frage: 'Welche Steuerklasse habe ich automatisch?',
+    frage: 'Wie viel Netto bleibt von meinem Brutto?',
     antwort:
-      'Ledige ohne Kinder sind in Steuerklasse 1. Alleinerziehende kommen in Klasse 2 (mit Entlastungsbetrag). Verheiratete starten standardmäßig in 4/4 — können aber zu 3/5 oder zum Faktorverfahren wechseln. Welche Klasse für Sie eingetragen ist, sehen Sie auf Ihrer monatlichen Lohnabrechnung oben rechts.',
+      'Das hängt von Steuerklasse, Bundesland, Kirchensteuerpflicht und Krankenversicherung ab. Als Faustregel: In Steuerklasse 1 bleiben bei 3.500 € brutto rund 60–67 % als Netto übrig (ca. 2.300 €). Bei höheren Gehältern sinkt der Netto-Anteil durch die progressive Lohnsteuer. Bei niedrigen Einkommen kann er bei knapp 75 % liegen.',
+  },
+  {
+    frage: 'Welche Steuerklasse habe ich?',
+    antwort:
+      'Ledige ohne Kinder sind in Steuerklasse 1. Alleinerziehende mit mindestens einem Kind kommen in Klasse 2 (mit Entlastungsbetrag). Verheiratete starten standardmäßig in 4/4 — können aber zu 3/5 oder zum Faktorverfahren wechseln. Steuerklasse 6 gilt für Zweit- und Nebenjobs. Welche Klasse für Sie eingetragen ist, sehen Sie auf Ihrer monatlichen Lohnabrechnung oben rechts.',
   },
   {
     frage: 'Was zählt zu den Sozialabgaben?',
@@ -27,9 +32,24 @@ const STATIC_FAQ: { frage: string; antwort: string }[] = [
       'Vier Pflichtbeiträge: Krankenversicherung (paritätisch 7,3 % plus halber Zusatzbeitrag), Rentenversicherung (paritätisch 9,3 %), Arbeitslosenversicherung (paritätisch 1,3 %) und Pflegeversicherung (paritätisch 1,8 %, plus 0,6 % Kinderlosenzuschlag, den nur Sie tragen). Arbeitgeber und Arbeitnehmer teilen sich die Beiträge — Ihr Arbeitnehmer-Anteil liegt 2026 bei rund 21 % vom Brutto.',
   },
   {
-    frage: 'Warum ist mein Netto in Steuerklasse 5 so niedrig?',
+    frage: 'Was ist die Beitragsbemessungsgrenze?',
     antwort:
-      'Steuerklasse 5 ist bewusst hoch besteuert. Die Idee: Der Partner in Klasse 3 zahlt fast keine Lohnsteuer, der in Klasse 5 viel — zusammen ergibt sich etwa dieselbe Summe wie bei 4/4. Die endgültige Steuerlast wird in der gemeinsamen Veranlagung am Jahresende abgerechnet. Wer 3/5 wählt, hat monatlich zwar mehr Netto im Hauptverdiener-Konto, riskiert aber eine Nachzahlung bei der Steuererklärung.',
+      'Die BBG ist die Einkommensgrenze, bis zu der Sozialabgaben berechnet werden. 2026: Kranken- und Pflegeversicherung 5.812,50 €/Monat (69.750 €/Jahr), Renten- und Arbeitslosenversicherung einheitlich 8.450 €/Monat (101.400 €/Jahr). Einkommen oberhalb der Grenze bleibt sozialabgabenfrei. Seit 2025 gilt die BBG bundesweit einheitlich — die frühere Trennung West/Ost wurde aufgehoben.',
+  },
+  {
+    frage: 'Was ist der Solidaritätszuschlag?',
+    antwort:
+      'Der Soli beträgt 5,5 % der Lohnsteuer. Seit 2021 fällt er für rund 90 % der Steuerzahler weg. Erst ab einer Jahres-Lohnsteuer von 20.350 € (Single 2026) bzw. 40.700 € (gemeinsam) wird er wieder fällig — das entspricht etwa 73.500 € Jahresbrutto in Steuerklasse 1. Auf Kapitalerträge fällt der Soli unverändert weiter an, wenn Kapitalertragsteuer einbehalten wird.',
+  },
+  {
+    frage: 'Warum unterscheidet sich mein Netto je nach Bundesland?',
+    antwort:
+      'Es gibt einen Hauptgrund: Der Kirchensteuersatz beträgt in Bayern und Baden-Württemberg 8 %, in allen anderen Bundesländern 9 % — das wirkt sich nur bei Kirchenmitgliedschaft aus. Frühere Unterschiede bei der Beitragsbemessungsgrenze West/Ost wurden seit 2025 abgeschafft, die BBG gilt nun bundesweit einheitlich. Auch der Krankenkassen-Zusatzbeitrag variiert je nach Kasse zwischen etwa 1,5 % und über 3 %.',
+  },
+  {
+    frage: 'Lohnt sich die Steuerklassenkombination 3/5?',
+    antwort:
+      'Bei großem Einkommensunterschied bringt 3/5 dem Hauptverdiener monatlich mehr Netto, weil der Partner in Klasse 3 fast keine Lohnsteuer zahlt. Steuerklasse 5 ist bewusst hoch besteuert — zusammen ergibt sich aber etwa dieselbe Steuersumme wie bei 4/4. Achtung: Die endgültige Steuerlast wird in der gemeinsamen Veranlagung am Jahresende abgerechnet, die Steuererklärung ist bei 3/5 Pflicht und kann zu Nachzahlungen führen. Bei ähnlichem Einkommen ist 4/4 monatlich neutral und einfacher.',
   },
   {
     frage: 'Wie viel von einer Gehaltserhöhung bleibt netto übrig?',
@@ -37,19 +57,24 @@ const STATIC_FAQ: { frage: string; antwort: string }[] = [
       'Bei mittleren Einkommen kommen rund 50–60 % der Brutto-Erhöhung als Netto an. Bei höheren Einkommen sinkt das durch die progressive Lohnsteuer auf 45–55 %. Konkret: Aus 200 € Brutto-Erhöhung werden meist 100–115 € Netto.',
   },
   {
+    frage: 'Welche Freibeträge berücksichtigt der Rechner?',
+    antwort:
+      'Der Rechner rechnet automatisch mit dem Grundfreibetrag (2026: 12.348 € Single, 24.696 € verheiratet), dem Kinderfreibetrag bei eingetragenen Kindern und dem Entlastungsbetrag für Alleinerziehende. Individuelle Freibeträge auf der Lohnsteuerkarte — etwa für hohe Werbungskosten, die Pendlerpauschale oder außergewöhnliche Belastungen — müssen Sie separat eintragen, falls sie für Sie zutreffen.',
+  },
+  {
+    frage: 'Wie wirken sich Kinderfreibeträge konkret auf mein Netto aus?',
+    antwort:
+      'Kinderfreibeträge senken die monatlichen Abzüge bei der Pflegeversicherung — der 0,6-%-Kinderlosenzuschlag entfällt, ab dem zweiten Kind wird der AN-Anteil zusätzlich um 0,25 Prozentpunkte je Kind reduziert (bis maximal 5 Kinder). Steuerlich nimmt das Finanzamt eine Günstigerprüfung vor: Es prüft automatisch, ob Kindergeld oder der Kinderfreibetrag (2026: 6.826 € pro Kind) günstiger für Sie ist und gewährt das Bessere.',
+  },
+  {
     frage: 'Lohnt sich der Kirchenaustritt finanziell?',
     antwort:
       'Bei 3.000 € Brutto sparen Sie je nach Bundesland 25–35 € monatlich, bei 5.000 € sind es 60–80 €. Über 30 Jahre Berufsleben kommen schnell 15.000 € oder mehr zusammen. Der Austritt erfolgt beim Standesamt oder Amtsgericht, kostet einmalig 25–60 € Verwaltungsgebühr und wirkt ab dem Folgemonat.',
   },
   {
-    frage: 'Welche Freibeträge berücksichtigt der Rechner?',
+    frage: 'Wie berechne ich mein Netto pro Stunde?',
     antwort:
-      'Der Rechner rechnet automatisch mit dem Grundfreibetrag (2026: 12.348 € Single, 24.696 € verheiratet), dem Kinderfreibetrag bei eingetragenen Kindern und dem Entlastungsbetrag für Alleinerziehende. Individuelle Freibeträge auf der Lohnsteuerkarte — etwa für hohe Werbungskosten oder die Pendlerpauschale — müssen Sie separat eintragen, falls vorhanden.',
-  },
-  {
-    frage: 'Was ist der Unterschied zwischen Brutto-Lohn und Brutto-Gehalt?',
-    antwort:
-      'Sprachlich unterschiedlich, rechnerisch gleich: „Lohn" wird oft für Stunden- oder Wochenabrechnungen verwendet (typisch Handwerk, Industrie), „Gehalt" für feste Monatsbeträge (Angestellte, Beamte). Steuerlich macht das keinen Unterschied — beides wird identisch versteuert und mit Sozialabgaben belegt.',
+      'Teilen Sie Ihr monatliches Nettogehalt durch Ihre durchschnittlichen Arbeitsstunden pro Monat. Bei einer 40-Stunden-Woche sind das ca. 174 Stunden (40 × 52 Wochen ÷ 12 Monate). Beispiel: 2.340 € netto ÷ 174 = 13,45 € netto/Stunde. Unser Rechner zeigt diesen Wert automatisch im Ergebnis-Bereich an.',
   },
 ];
 
@@ -508,7 +533,10 @@ export default function BruttoNettoRechner() {
           <CrossLink href="/finanzen/steuererstattung-rechner" emoji="💰" text="Wie viel bekommen Sie vom Finanzamt zurück?" />
           <CrossLink href="/finanzen/gehaltsvergleich" emoji="📊" text="Verdienen Sie genug? Gehalt vergleichen" />
 
-          {/* Statischer Erklär-Block (W13.1) — server-rendered für AdSense-Quality */}
+          {/* Konsolidierter Erklär-Block (W13.1.1) — server-rendered für AdSense-Quality
+              5 h2-Sections: So funktioniert / Anwendungsfälle / Häufige Fehler / Tipps / FAQ */}
+
+          {/* Section 4: So funktioniert die Brutto-Netto-Berechnung */}
           <section className="mt-8 no-print">
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">So funktioniert die Brutto-Netto-Berechnung</h2>
             <div className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed space-y-4">
@@ -525,11 +553,46 @@ export default function BruttoNettoRechner() {
                 <strong className="text-gray-800 dark:text-gray-100">Formel:</strong> Netto = Brutto − Lohnsteuer − Soli − Kirchensteuer − Sozialabgaben
               </p>
               <p>
-                <strong className="text-gray-800 dark:text-gray-100">Beispiel:</strong> Bei 4.000 € Brutto in Steuerklasse 1 (ledig, kinderlos, NRW, kein Kirchenmitglied) bleiben rund <strong className="text-gray-800 dark:text-gray-100">2.625 € Netto</strong> übrig — also etwa 65 % des Brutto. Die Quote sinkt mit höherem Einkommen, weil die Lohnsteuer progressiv steigt, und kann bei niedrigen Gehältern bei knapp 75 % liegen.
+                <strong className="text-gray-800 dark:text-gray-100">Beispiel:</strong> Bei 4.000 € Brutto in Steuerklasse 1 (ledig, kinderlos, NRW, ohne Kirchensteuer) bleiben rund <strong className="text-gray-800 dark:text-gray-100">2.598 € Netto</strong> übrig — also etwa 65 % des Brutto. Die Quote sinkt mit höherem Einkommen, weil die Lohnsteuer progressiv steigt, und kann bei niedrigen Gehältern bei knapp 75 % liegen.
+              </p>
+
+              <h3 className="text-base font-bold text-gray-800 dark:text-gray-100 mt-6 mb-3">Alle Abzüge im Detail (2026)</h3>
+              <ul className="list-disc pl-5 space-y-1.5">
+                <li><strong className="text-gray-800 dark:text-gray-100">Lohnsteuer:</strong> Progressive Besteuerung nach dem Einkommensteuertarif § 32a EStG. Grundfreibetrag 2026: 12.348 €. Der Eingangssteuersatz beträgt 14 %, der Spitzensteuersatz 42 % (ab 69.879 €) und der Reichensteuersatz 45 % (ab 277.826 €).</li>
+                <li><strong className="text-gray-800 dark:text-gray-100">Solidaritätszuschlag:</strong> 5,5 % der Lohnsteuer. Seit 2021 für ca. 90 % der Steuerzahler abgeschafft (Freigrenze 2026: 20.350 € Jahressteuer).</li>
+                <li><strong className="text-gray-800 dark:text-gray-100">Kirchensteuer:</strong> 8 % der Lohnsteuer in Baden-Württemberg und Bayern, 9 % in allen anderen Bundesländern. Nur bei Kirchenmitgliedschaft.</li>
+                <li><strong className="text-gray-800 dark:text-gray-100">Krankenversicherung (GKV):</strong> Allgemeiner Beitragssatz 14,6 % (Arbeitnehmeranteil: 7,3 %) + kassenindividueller Zusatzbeitrag (Durchschnitt 2026: 2,9 %, AN-Anteil: 1,45 %). Beitragsbemessungsgrenze: 5.812,50 €/Monat.</li>
+                <li><strong className="text-gray-800 dark:text-gray-100">Rentenversicherung:</strong> 18,6 % (Arbeitnehmeranteil: 9,3 %). BBG 2026 einheitlich: 8.450 €/Monat (seit 2025 keine West/Ost-Trennung mehr).</li>
+                <li><strong className="text-gray-800 dark:text-gray-100">Arbeitslosenversicherung:</strong> 2,6 % (Arbeitnehmeranteil: 1,3 %). Gleiche BBG wie RV.</li>
+                <li><strong className="text-gray-800 dark:text-gray-100">Pflegeversicherung:</strong> 3,6 % (Arbeitnehmeranteil: 1,8 %). Kinderlose ab 23 Jahren zahlen einen Zuschlag von 0,6 %. Ab dem 2. Kind Abschlag von 0,25 pp pro Kind (bis 5. Kind, unter 25 J.). BBG wie KV.</li>
+              </ul>
+
+              <h3 className="text-base font-bold text-gray-800 dark:text-gray-100 mt-6 mb-3">Die 6 Steuerklassen erklärt</h3>
+              <p>
+                Die Steuerklasse bestimmt, wie viel Lohnsteuer monatlich einbehalten wird. Sie beeinflusst nicht die jährliche Steuerlast (die wird über die Steuererklärung ausgeglichen), sondern nur die monatliche Verteilung:
+              </p>
+              <ul className="list-disc pl-5 space-y-1.5">
+                <li><strong className="text-gray-800 dark:text-gray-100">Steuerklasse 1:</strong> Ledige, Geschiedene, Verwitwete — die Standardklasse für Alleinstehende.</li>
+                <li><strong className="text-gray-800 dark:text-gray-100">Steuerklasse 2:</strong> Alleinerziehende mit mindestens einem Kind im Haushalt. Bietet den Entlastungsbetrag für Alleinerziehende (4.260 €).</li>
+                <li><strong className="text-gray-800 dark:text-gray-100">Steuerklasse 3:</strong> Verheiratete mit deutlich höherem Einkommen als der Partner. Günstigste Steuerklasse, aber nur in Kombination mit SK5 für den Partner.</li>
+                <li><strong className="text-gray-800 dark:text-gray-100">Steuerklasse 4:</strong> Verheiratete mit ähnlich hohem Einkommen. Beide Partner werden wie in SK1 besteuert.</li>
+                <li><strong className="text-gray-800 dark:text-gray-100">Steuerklasse 5:</strong> Verheiratete mit deutlich niedrigerem Einkommen. Höchste monatliche Abzüge, gleicht sich aber über die Steuererklärung aus.</li>
+                <li><strong className="text-gray-800 dark:text-gray-100">Steuerklasse 6:</strong> Für Zweit- und Nebenjobs. Keine Freibeträge, daher die höchsten Abzüge.</li>
+              </ul>
+
+              <h3 className="text-base font-bold text-gray-800 dark:text-gray-100 mt-6 mb-3">Gesetzliche vs. Private Krankenversicherung</h3>
+              <p>
+                In der gesetzlichen Krankenversicherung (GKV) richtet sich der Beitrag nach dem Einkommen (bis zur BBG). Der Arbeitgeber übernimmt die Hälfte des allgemeinen Beitrags. In der privaten Krankenversicherung (PKV) hängt der Beitrag von Alter, Gesundheitszustand und gewähltem Tarif ab. Der Arbeitgeberzuschuss ist auf den maximalen GKV-Beitrag begrenzt. Beamte, Selbstständige und Arbeitnehmer mit einem Bruttoeinkommen über der Versicherungspflichtgrenze (Jahresarbeitsentgeltgrenze 77.400 €/Jahr bzw. 6.450 €/Monat, Stand 2026) können in die PKV wechseln.
+              </p>
+
+              <h3 className="text-base font-bold text-gray-800 dark:text-gray-100 mt-6 mb-3">Hinweis zur Genauigkeit</h3>
+              <p>
+                Unser Brutto-Netto-Rechner liefert eine gute Orientierung, basiert jedoch auf vereinfachten Berechnungen. Die exakte Lohnsteuer wird vom Finanzamt nach dem offiziellen Lohnsteuertarif berechnet, der deutlich komplexer ist. Für eine exakte Berechnung empfehlen wir den Lohnsteuerrechner des BMF oder Ihren Steuerberater.
               </p>
             </div>
           </section>
 
+          {/* Section 5: Anwendungsfälle */}
           <section className="mt-8 no-print">
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Anwendungsfälle: Wann brauchen Sie den Brutto-Netto-Rechner?</h2>
             <div className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed space-y-4">
@@ -551,6 +614,7 @@ export default function BruttoNettoRechner() {
             </div>
           </section>
 
+          {/* Section 6: Häufige Fehler */}
           <section className="mt-8 no-print">
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Häufige Fehler bei der Brutto-Netto-Berechnung</h2>
             <ul className="list-disc pl-5 space-y-3 text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
@@ -572,6 +636,22 @@ export default function BruttoNettoRechner() {
             </ul>
           </section>
 
+          {/* Section 7: Tipps: Mehr Netto vom Brutto (h3 → h2 promoted aus Existing-Pos 20) */}
+          <section className="mt-8 no-print">
+            <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Tipps: Mehr Netto vom Brutto</h2>
+            <div className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed space-y-4">
+              <p>Es gibt legale Wege, Ihr Nettogehalt zu optimieren:</p>
+              <ul className="list-disc pl-5 space-y-1.5">
+                <li><strong className="text-gray-800 dark:text-gray-100">Steuerklassenwechsel:</strong> Verheiratete können durch die Kombination 3/5 statt 4/4 das monatliche Netto des Hauptverdieners deutlich erhöhen.</li>
+                <li><strong className="text-gray-800 dark:text-gray-100">Kinderfreibeträge eintragen lassen:</strong> Reduziert die monatliche Pflegeversicherung und kann steuerlich günstiger sein als Kindergeld.</li>
+                <li><strong className="text-gray-800 dark:text-gray-100">Steuererklärung machen:</strong> Viele Arbeitnehmer erhalten im Schnitt ca. 1.100 € Erstattung pro Jahr.</li>
+                <li><strong className="text-gray-800 dark:text-gray-100">Betriebliche Altersvorsorge:</strong> Beiträge zur bAV werden vor Steuern und Sozialabgaben abgezogen.</li>
+                <li><strong className="text-gray-800 dark:text-gray-100">Sachbezüge:</strong> Der Arbeitgeber kann bis zu 50 € monatlich steuerfrei als Sachbezug gewähren (z. B. Tankgutschein, Jobticket).</li>
+              </ul>
+            </div>
+          </section>
+
+          {/* Section 8: Häufige Fragen — 12 konsolidierte Q&A + FAQPage Schema.org */}
           <section className="mt-8 no-print">
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Häufige Fragen zur Brutto-Netto-Berechnung</h2>
             <div className="space-y-4">

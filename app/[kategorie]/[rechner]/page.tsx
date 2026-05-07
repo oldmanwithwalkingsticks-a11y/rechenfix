@@ -189,6 +189,11 @@ interface Props {
 // der Ausschluss hier vermeidet doppelten Prerender und hält den Build schlank.
 const STATISCHE_OVERRIDES = new Set<string>(['wohngeld-rechner']);
 
+// Rechner, die ihren Erklär-Text + FAQ inline in der Component rendern (W13.1.1+)
+// und deshalb HIER weder die Config-erklaerung-Section noch die Config-FAQ-Section
+// noch das Config-FAQPage-JSON-LD ausliefern sollen — sonst Doppelung im Live-HTML.
+const INLINE_ERKLAERUNG_SLUGS = new Set<string>(['brutto-netto-rechner']);
+
 export function generateStaticParams() {
   return alleRechner
     .filter(r => !STATISCHE_OVERRIDES.has(r.slug))
@@ -394,8 +399,11 @@ export default function RechnerSeite({ params }: Props) {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      {/* Structured Data */}
-      <StructuredData data={generateFAQSchema(config.faq)} />
+      {/* Structured Data — FAQPage-Schema NUR wenn Config-FAQ auch sichtbar gerendert wird
+          (Inline-Erklär-Slugs liefern eigene FAQPage über die Component, sonst gäbe es 2× FAQPage). */}
+      {!INLINE_ERKLAERUNG_SLUGS.has(config.slug) && (
+        <StructuredData data={generateFAQSchema(config.faq)} />
+      )}
       <StructuredData data={generateWebApplicationSchema(config)} />
       <StructuredData data={generateBreadcrumbSchema(breadcrumbItems)} />
 
@@ -474,7 +482,10 @@ export default function RechnerSeite({ params }: Props) {
           {/* Ad Middle */}
           <AdSlot typ="rectangle" className="mb-8" />
 
-          {/* Erklaerung & FAQ — eager rendered für SSR-Sichtbarkeit (AdSense) */}
+          {/* Erklaerung & FAQ — eager rendered für SSR-Sichtbarkeit (AdSense)
+              Inline-Erklär-Slugs (W13.1.1+) skippen diesen Block, weil ihre Component
+              den Erklär-Text + FAQ bereits selbst inline rendert. */}
+          {!INLINE_ERKLAERUNG_SLUGS.has(config.slug) && (
           <>
             <section className="card p-6 md:p-8 mb-8 no-print">
               <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">So funktioniert der {config.titel}</h2>
@@ -547,6 +558,7 @@ export default function RechnerSeite({ params }: Props) {
               </div>
             </section>
           </>
+          )}
 
 
           {/*
