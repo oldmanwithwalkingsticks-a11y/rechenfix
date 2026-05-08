@@ -127,11 +127,30 @@ Beim **antiproportionalen Dreisatz** gilt: \u201EJe mehr, desto weniger\u201C. W
 
 Die Erkennung, ob eine Zuordnung proportional oder antiproportional ist, ist der entscheidende Schritt. Fragen Sie sich einfach: Wenn ich den einen Wert verdopple \u2014 verdoppelt sich dann auch der andere (proportional) oder halbiert er sich (antiproportional)?
 
-**3 Beispielrechnungen aus dem Alltag**
+**Anwendungsfälle in Beruf und Alltag**
 
-- **Einkaufen:** 250\u00A0g Käse kosten 3,50\u00A0\u20AC. Was kosten 400\u00A0g? \u2192 Proportional: (3,50 \u00F7 250) \u00D7 400 = 5,60\u00A0\u20AC.
-- **Kochen:** Ein Rezept für 4 Personen braucht 300\u00A0g Mehl. Wie viel Mehl braucht man für 6 Personen? \u2192 Proportional: (300 \u00F7 4) \u00D7 6 = 450\u00A0g.
-- **Arbeit:** 6 Maler streichen ein Haus in 10 Tagen. Wie lange brauchen 4 Maler? \u2192 Antiproportional: (10 \u00D7 6) \u00F7 4 = 15 Tage.`,
+Der Dreisatz ist eine der vielseitigsten Rechenmethoden überhaupt — überall dort, wo zwei Größen in einem festen Verhältnis stehen, ist er das richtige Werkzeug. Die folgenden Beispiele decken die häufigsten Anwendungsfelder ab:
+
+- **Einkaufen und Preisvergleich:** 250 g Käse kosten 3,50 €. Was kosten 400 g? → Proportional: (3,50 ÷ 250) × 400 = 5,60 €. Besonders nützlich beim Vergleich verschiedener Packungsgrößen — ein Rechner-Klick zeigt, welche Größe je 100 g am günstigsten ist.
+- **Kochen und Rezepte umrechnen:** Ein Rezept für 4 Personen braucht 300 g Mehl. Wie viel braucht man für 6 Personen? → Proportional: (300 ÷ 4) × 6 = 450 g. Wer eine Familienfeier mit zehn Gästen plant, rechnet jede Zutat einmal durch und vermeidet das nervige Über- oder Untermessen.
+- **Schule und Mathe-Hausaufgaben:** Der Dreisatz ist Pflichtstoff der 5./6. Klasse und tritt in Mathearbeiten regelmäßig auf — sowohl als reine Dreisatz-Aufgabe als auch versteckt in Sachaufgaben (Geschwindigkeit, Maßstab, Mischungsverhältnisse). Wer das Schema sicher beherrscht, löst auch komplexere Aufgaben in unter einer Minute.
+- **Handwerk und Materialbedarf:** Wie viel Farbe braucht man für 60 m², wenn 5 L für 40 m² reichen? → Proportional: (5 ÷ 40) × 60 = 7,5 L. Funktioniert ebenso für Tapete (Rollen pro m²), Pflastersteine pro Fläche, Fliesen, Laminat oder Beton — überall mit Material-pro-Fläche-Bezug.
+- **WG- und Gruppenkosten anteilig verteilen:** 4 Personen zahlen zusammen 1.200 € Miete. Was zahlt eine Person? → 1.200 ÷ 4 = 300 €. Bei unterschiedlichen Zimmergrößen wird der Dreisatz interessanter: Wenn das große Zimmer 25 m² hat und das kleine 12 m², werden die Anteile nach Quadratmetern berechnet statt pro Kopf.
+- **Arbeit und Personalplanung:** 6 Maler streichen ein Haus in 10 Tagen. Wie lange brauchen 4 Maler? → Antiproportional: (10 × 6) ÷ 4 = 15 Tage. Die antiproportionale Variante ist die typische „Mehr Leute = weniger Zeit"-Rechnung — funktioniert in der Praxis aber nur bis zu einem Punkt (siehe „Häufige Fehler").
+- **Sport und Trainingspläne:** Wer normalerweise 30 Minuten 5 km läuft, braucht für 8 km wie lange? → Proportional: (30 ÷ 5) × 8 = 48 Minuten. Auch sinnvoll bei Kraftraum-Steigerungen (Wiederholungen × Sätze) oder Ernährungs-Skalierungen (Kalorien pro kg Körpergewicht).
+- **Logistik und Lieferzeiten:** 200 km Lieferweg in 3 Stunden. Wie lange dauern 350 km? → Proportional: (3 ÷ 200) × 350 = 5,25 Stunden. Funktioniert für Pendelwege, Versandfahrten oder Tour-Planungen mit konstanter Durchschnittsgeschwindigkeit.
+- **Währungsumrechnung:** 100 € entsprechen 108 USD. Was sind 250 €? → Proportional: (108 ÷ 100) × 250 = 270 USD. Auch ohne aktuellen Kurs aus dem Kopf: einmal beim Geldwechsel den Wechselkurs notieren, dann reicht der Dreisatz für alle weiteren Beträge.
+
+**Häufige Fehler beim Dreisatz**
+
+Der Dreisatz wirkt einfach, hat aber typische Fallstricke — diese sechs treten am häufigsten auf:
+
+- **Proportional und antiproportional verwechseln.** Der häufigste Fehler. Faustregel: Verdoppelungs-Test. Wenn sich Wert A verdoppelt — verdoppelt sich Wert B (proportional) oder halbiert er sich (antiproportional)? „6 Maler in 10 Tagen → 12 Maler in 20 Tagen" ist offensichtlich falsch (mehr Maler brauchen weniger, nicht mehr Zeit) — also antiproportional. Wer den Test im Kopf macht, vermeidet 80 % der Dreisatz-Fehler.
+- **Wertepaare beim Aufschreiben vertauschen.** Wer das Schema „A1 → B1, A2 → ?" durcheinanderwirft, kommt auf den Kehrwert des korrekten Ergebnisses. Empfehlung: konsequent in zwei Spalten links/rechts schreiben, mit Pfeilen die Zuordnung markieren — nicht im Kopf operieren.
+- **Einheiten nicht angleichen.** Klassischer Stolperstein: 250 g Käse kosten 3,50 €, was kosten 2 kg? Wer einfach 2 in die Formel einsetzt, bekommt 0,028 € — Cent statt Euro. Vor jeder Dreisatz-Rechnung Einheiten harmonisieren: g mit g, kg mit kg, Cent mit Cent, Minuten mit Minuten.
+- **Linearität annehmen, wo keine ist.** Nicht alles ist proportional. Trocknungszeit von Farbe ist nicht linear zur Schichtdicke (doppelt so dick = mehr als doppelt so lange), Kochzeit von Fleisch nicht linear zur Masse (großes Stück = überproportional länger), zusätzliche Köche verkürzen die Kochzeit nur bis zu einem Punkt. Vor dem Dreisatz fragen: Gilt der lineare Zusammenhang im fraglichen Bereich überhaupt?
+- **Rundungsfehler durch zu frühes Runden.** Wer im zweiten Schritt von 3,50 ÷ 250 = 0,014 rundet und dann × 400 rechnet, kommt auf 5,60 €. Bei größeren Mengen oder ungeraden Werten kann das spürbar daneben liegen. Empfehlung: Zwischenergebnisse mit voller Stellenanzahl weiterrechnen, erst am Ende sinnvoll runden.
+- **Mehrfacher Dreisatz ohne strukturierte Zwischenrechnung.** Wenn drei Größen ineinander verschachtelt sind (5 Maler streichen 200 m² in 8 Stunden — wie lange brauchen 7 Maler für 350 m²?), wird oft im Kopf operiert und Vorzeichen vertauscht. Besser: in zwei separaten Dreisatz-Schritten lösen, dazwischen das Zwischenergebnis bewusst hinschreiben.`,
     faq: [
       {
         frage: 'Was ist der Dreisatz und wofür braucht man ihn?',
@@ -151,7 +170,19 @@ Die Erkennung, ob eine Zuordnung proportional oder antiproportional ist, ist der
       },
       {
         frage: 'Kann der Dreisatzrechner auch mit Kommazahlen rechnen?',
-        antwort: 'Ja, unser Dreisatzrechner unterstützt beliebige Dezimalzahlen. Geben Sie Kommazahlen einfach mit einem Punkt als Dezimaltrennzeichen ein (z.\u00A0B. 3.5 statt 3,5).',
+        antwort: 'Ja, unser Dreisatzrechner unterstützt beliebige Dezimalzahlen. Geben Sie Kommazahlen einfach mit einem Punkt als Dezimaltrennzeichen ein (z. B. 3.5 statt 3,5).',
+      },
+      {
+        frage: 'Wann nutze ich den Dreisatz statt Prozentrechnung?',
+        antwort: 'Beide Methoden lösen ähnliche Probleme, aber mit unterschiedlichem Schwerpunkt. Den Dreisatz nutzt man, wenn das Verhältnis zweier konkreter Größen bekannt ist (3 Äpfel kosten 6 €, was kosten 7?) und die Bezugsgröße nicht 100 ist. Die Prozentrechnung passt, wenn von vornherein in Hundertstel-Anteilen gedacht wird (15 % Rabatt auf 80 €) — sie ist letztlich ein Spezialfall des Dreisatzes mit dem Grundwert 100. Faustregel: Bei Mengen, Längen, Zeiten und Bedarfsrechnungen ist der Dreisatz natürlicher; bei Steuern, Rabatten, Wachstumsraten und Anteilen ist die Prozentrechnung etablierter und schneller im Kopf zu führen.',
+      },
+      {
+        frage: 'Funktioniert der Dreisatz immer?',
+        antwort: 'Nur dann, wenn die beiden Größen tatsächlich proportional oder antiproportional zusammenhängen — also wenn der eine Wert linear vom anderen abhängt. Viele Alltagssituationen sind nichtlinear: Trocknungszeit von Farbe steigt nicht linear mit der Schichtdicke, Bremsweg eines Autos wächst quadratisch mit der Geschwindigkeit, neun Frauen können kein Kind in einem Monat bekommen. Vor jeder Dreisatz-Anwendung lohnt der Verdoppelungs-Test: Verdoppelt sich der eine Wert wirklich, wenn ich den anderen verdopple? Wenn nein, ist es kein klassischer Dreisatz, und das Ergebnis wäre falsch. In solchen Fällen braucht es Funktionsgleichungen, Tabellen oder empirische Werte.',
+      },
+      {
+        frage: 'Ist der Dreisatz dasselbe wie eine lineare Funktion?',
+        antwort: 'Im Kern ja: Der proportionale Dreisatz beschreibt eine Ursprungsgerade — also eine lineare Funktion der Form y = m × x ohne y-Achsen-Abschnitt. Der Faktor m ist dabei der „Stückpreis" oder „Verbrauch pro Einheit". Der antiproportionale Dreisatz entspricht einer Hyperbel (y = k ÷ x), bei der das Produkt der beiden Werte konstant bleibt. Die Schule führt den Dreisatz typisch in der 6. Klasse als praktisches Werkzeug ein, lange bevor lineare Funktionen formal in der 7./8. Klasse behandelt werden — viele Erwachsene erkennen erst später, dass beide Konzepte mathematisch dasselbe beschreiben, nur mit unterschiedlicher Notation.',
       },
     ],
   },
