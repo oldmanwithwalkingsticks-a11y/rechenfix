@@ -4,7 +4,21 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 07.05.2026
+**Stand:** 08.05.2026
+
+---
+
+## AdSense-Welle 13 (Static-Content-Goldstandard) — Sub-Welle W13.5 Stundenlohnrechner (08.05.2026)
+
+> Hinweis: Diese „AdSense-Welle 13" ist die parallel laufende Static-Content-/Pattern-Replikations-Linie (W13.1=BN, W13.2=MwSt, W13.3=Zinsrechner, W13.4=BMI, W13.5=Stundenlohn) — getrennt von der unten in der Welle-12-Outlook-Sektion geplanten internen Audit-Welle 13 (Berechnungs-Wrapper-jahr-Hardcoding-Refactor). Beide W13-Linien koexistieren.
+
+- **W13.5 Stundenlohnrechner Static-Content + FAQ-Erweiterung** ✅ — `lib/rechner-config/finanzen.ts` Z.547-635, slug `stundenlohn-rechner`. Nach Mindestlohn-Section + vor Berufsgruppen-Tabelle eingefügt: zwei neue Subsections im Goldstandard-Bold-Lead-Pattern — „Anwendungsfälle: Wann brauchen Sie den Stundenlohnrechner?" (5 Bullets: Jobangebote vergleichen, Gehaltsverhandlung, Teilzeit/Vollzeit, Freelancer vs. Angestellte, regionale Unterschiede) + „Häufige Fehler bei der Stundenlohn-Berechnung" (5 Bullets: Faktor 4 statt 4,33, Brutto/Netto-Verwechslung, Urlaub/Feiertage, branchenspezifische Mindestlöhne, Lebenshaltungskosten-Kontext). FAQ 5 → 8 mit drei neuen Q&A (nominaler vs. effektiver Stundenlohn, Netto-Stundenlohn-Herleitung, Branchen mit höheren Tarif-Mindestlöhnen als 13,90 €/Std.). **NUR Lib-Edit, keine Component-Änderung.** Static-Content-Wortzahl: **1.735 Wörter** (Erklärung 1.177 + FAQ 558), Ziel ≥ 1.500 deutlich übertroffen. Commit `88594b1`.
+
+**Pattern-Beobachtungen (kein Hotfix nötig):**
+- **FAQ-Schema-Doppel:** Stundenlohn-Slug ist NICHT in `INLINE_ERKLAERUNG_SLUGS` (`app/[kategorie]/[rechner]/page.tsx` Z.196 — aktuell nur `brutto-netto-rechner`). Die FAQPage-JSON-LD-Emission läuft genau einmal aus der Config (Z.405-407). **Kein Doppel auf der Stundenlohn-Page.**
+- **Affiliate-Position:** `stundenlohn-rechner`-Config hat **kein** `affiliate?:`-Property. Die `{config.affiliate && ...}`-Render in der dynamischen Route Z.567-569 emittiert daher gar keine AffiliateBox. Static-Content liegt in der Config (nicht in der Component) und wird durch die dynamische Route NACH dem Component-Block und VOR den Cross-Links („Das könnte Sie auch interessieren") gerendert. Reihenfolge: Component → Erklärung-Section → FAQ-Section → (Affiliate würde hier rendern, fehlt aber) → Cross-Links. Kein Pos-Konflikt.
+
+**Build-Gate:** `npm run build` 205/205 grün. Slug-Drift-Scan / Footer-Lint / Jahreswerte-Lint alle durchgelaufen.
 
 ---
 
