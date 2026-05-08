@@ -8,9 +8,19 @@
 
 ---
 
-## AdSense-Welle 13 (Static-Content-Goldstandard) — Sub-Welle W13.5 Stundenlohnrechner (08.05.2026)
+## AdSense-Welle 13 (Static-Content-Goldstandard) — Sub-Welle W13.5 + W13.5.1 Stundenlohnrechner (08.05.2026)
 
 > Hinweis: Diese „AdSense-Welle 13" ist die parallel laufende Static-Content-/Pattern-Replikations-Linie (W13.1=BN, W13.2=MwSt, W13.3=Zinsrechner, W13.4=BMI, W13.5=Stundenlohn) — getrennt von der unten in der Welle-12-Outlook-Sektion geplanten internen Audit-Welle 13 (Berechnungs-Wrapper-jahr-Hardcoding-Refactor). Beide W13-Linien koexistieren.
+
+- **W13.5.1 Hotfix Stundenlohn-Affiliate-Pattern-Migration** ✅ — Pre-W13.2-Pattern (Component-interne `<AffiliateBox programId="lexware" context="stundenlohn" />`) führte nach W13.5-Static-Content-Insertion zu Render-Pos-Drift: Box landete zwischen Calculator und Erklärung statt nach FAQ. Fix: `components/rechner/StundenlohnRechner.tsx` — Import (Z.9) + JSX-Block (Z.268-270 vor Edit) entfernt. `lib/rechner-config/finanzen.ts` Stundenlohn-Eintrag um `affiliate: { programId: 'lexware', context: 'stundenlohn' }` ergänzt (Pattern analog MwSt). Render-Reihenfolge jetzt korrekt: Component → Erklärung → FAQ → AffiliateBox (Lexware) → Cross-Links (per dynamischer Route Z.567-569). Build 205/205 grün. Commit `4c9ee32`.
+
+**Neue Lehre L-42 — Component-interne AffiliateBox als Pos-Drift-Risiko bei Static-Content-Insertion:**
+
+Components mit hartkodiertem `<AffiliateBox … />` (Pre-W13.2-Pattern, Standard war damals: Box am Component-Ende innerhalb `{ergebnis && (...)}`) erzeugen nach Static-Content-Erweiterung in der Lib eine Render-Pos-Verschiebung — die Component-interne Box bleibt am Component-Ende, der Static-Content (Erklärung + FAQ) wird durch die dynamische Route NACH der Component eingefügt, und der Page-Slot `{config.affiliate && ...}` (Z.567-569) bleibt leer (kein `affiliate`-Property gesetzt). Ergebnis: Box rendert zwischen Calculator und Erklärung statt nach FAQ.
+
+**Pflicht für künftige W13.x-Sprints:** In der Pre-Phase IMMER `grep -n 'AffiliateBox' components/rechner/<Component>.tsx` laufen lassen. Wenn vorhanden → Migration zu `config.affiliate` gehört in den **gleichen** Sprint, NICHT in einen separaten Hotfix. Sonst entsteht der Pos-Drift sofort beim Static-Content-Push, der Hotfix kommt einen Commit zu spät, Live-Deploy zwischen Push und Hotfix zeigt das kaputte Layout.
+
+**Anwendungs-Disziplin für W13.6:** Vor Spritkosten-Sprint zwingend `grep -n 'AffiliateBox' components/rechner/SpritkostenRechner.tsx` — falls vorhanden, Migration in W13.6 selbst einplanen.
 
 - **W13.5 Stundenlohnrechner Static-Content + FAQ-Erweiterung** ✅ — `lib/rechner-config/finanzen.ts` Z.547-635, slug `stundenlohn-rechner`. Nach Mindestlohn-Section + vor Berufsgruppen-Tabelle eingefügt: zwei neue Subsections im Goldstandard-Bold-Lead-Pattern — „Anwendungsfälle: Wann brauchen Sie den Stundenlohnrechner?" (5 Bullets: Jobangebote vergleichen, Gehaltsverhandlung, Teilzeit/Vollzeit, Freelancer vs. Angestellte, regionale Unterschiede) + „Häufige Fehler bei der Stundenlohn-Berechnung" (5 Bullets: Faktor 4 statt 4,33, Brutto/Netto-Verwechslung, Urlaub/Feiertage, branchenspezifische Mindestlöhne, Lebenshaltungskosten-Kontext). FAQ 5 → 8 mit drei neuen Q&A (nominaler vs. effektiver Stundenlohn, Netto-Stundenlohn-Herleitung, Branchen mit höheren Tarif-Mindestlöhnen als 13,90 €/Std.). **NUR Lib-Edit, keine Component-Änderung.** Static-Content-Wortzahl: **1.735 Wörter** (Erklärung 1.177 + FAQ 558), Ziel ≥ 1.500 deutlich übertroffen. Commit `88594b1`.
 
