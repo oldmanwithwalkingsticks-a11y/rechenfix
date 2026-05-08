@@ -824,7 +824,25 @@ Liegt Ihr Gehalt deutlich unter dem Median Ihrer Vergleichsgruppe, kann eine Geh
 
 **Hinweis zur Datengrundlage**
 
-Die verwendeten Daten basieren auf der Verdienststrukturerhebung des Statistischen Bundesamtes und sind Annäherungswerte. Individuelle Gehälter können je nach Unternehmensgröße, Tarifbindung, Berufserfahrung und weiteren Faktoren abweichen.`,
+Die verwendeten Daten basieren auf der Verdienststrukturerhebung des Statistischen Bundesamtes und sind Annäherungswerte. Individuelle Gehälter können je nach Unternehmensgröße, Tarifbindung, Berufserfahrung und weiteren Faktoren abweichen.
+
+**Anwendungsfälle: Wann lohnt sich der Gehaltsvergleich?**
+
+Der Gehaltsvergleich ist mehr als eine Neugier-Frage — er liefert konkrete Argumente und Entscheidungsgrundlagen in mehreren Lebenssituationen:
+
+- **Vor der Gehaltsverhandlung.** Wer in das Jahresgespräch geht, sollte die eigene Position im Berufsgruppen-Median kennen. Liegt das eigene Gehalt im 40. Perzentil der Vergleichsgruppe, ist das ein hartes Argument für eine Anhebung um 5–10 %. Wer schon im 70. Perzentil liegt, sollte mit moderaten Erwartungen verhandeln und stärker auf nicht-monetäre Benefits (Homeoffice, Weiterbildung, Urlaub) setzen.
+- **Beim Job-Wechsel.** Stellenanzeigen geben oft eine Gehaltsspanne („50.000–65.000 €") an — der Vergleich mit dem Median der Berufsgruppe und Region zeigt, ob die Spanne marktgerecht ist oder ob Druck auf das obere Ende möglich ist. Faustregel: Beim Wechsel sind +10–20 % gegenüber dem aktuellen Gehalt üblich, sofern die Berufsgruppe das hergibt.
+- **Regionale Unterschiede einordnen.** Wer einen Umzug von Sachsen nach Bayern erwägt, muss nicht nur die Mietspiegel-Differenz beachten — auch das Gehaltsniveau ist regional sehr unterschiedlich. 3.500 € Bruttogehalt in Leipzig sind statistisch ein anderes Perzentil als 3.500 € in München. Der Vergleich liefert die Basis für die Frage „Lohnt sich der Umzug netto-real?".
+- **Nach Weiterbildung oder Qualifikationssprung.** Wer einen Master-Abschluss, eine Zertifizierung oder Führungserfahrung nachweist, sollte das Gehalt mit der gehobenen Berufsgruppe vergleichen, nicht mehr mit dem Einstiegslevel. Häufig fällt erst durch den Vergleich auf, dass die Gehaltsanpassung an die neue Qualifikation noch nicht erfolgt ist.
+- **Branchen-Tarif vs. AT-Gehalt einordnen.** In tarifgebundenen Branchen (Metall, IG-BCE, Öffentlicher Dienst) gibt es feste Gehaltsstufen. Wer im AT-Bereich (außertariflich) arbeitet, sollte dennoch wissen, was der Tariflohn der vergleichbaren Stufe wäre — der AT-Aufschlag liegt typisch bei 10–25 % auf den Tariflohn der nächsthöheren Stufe.
+
+**Häufige Fehler beim Gehaltsvergleich**
+
+- **Brutto und Netto verwechseln.** Der Gehaltsvergleich nutzt durchgehend Brutto-Werte (so erfasst Destatis). Wer das eigene Netto eingibt, landet automatisch im niedrigeren Perzentil und unterschätzt seine Position. Vor dem Vergleich Brutto aus der Lohnabrechnung übernehmen, nicht den ausgezahlten Betrag.
+- **Region nicht beachten.** Bundesweite Median-Werte sind irreführend, wenn die Region stark abweicht. Wer in Sachsen 3.000 € verdient, liegt regional im oberen Mittelfeld — bundesweit aber nur knapp am Median. Beim Vergleich immer mit der eigenen Region matchen, nicht mit dem Bundesschnitt.
+- **Berufserfahrung nicht einberechnen.** Ein 25-Jähriger und ein 50-Jähriger derselben Berufsgruppe haben in der Regel deutlich unterschiedliche Median-Werte. Wer den Vergleich ohne Altersfilter zieht, vergleicht sich falsch — entweder zu optimistisch (Berufseinsteiger) oder zu pessimistisch (Erfahrene).
+- **Tarifgehalt mit AT-Gehalt mischen.** Tarif-Gehälter sind oft niedriger als AT-Gehälter derselben Aufgabenebene, dafür mit besseren Sozialleistungen (Urlaubsgeld, Weihnachtsgeld, Tariferhöhungen). Der reine Brutto-Vergleich verzerrt zugunsten des AT-Bereichs. Bei Tarif-Vergleichen Sondervergütungen einrechnen.
+- **Sondervergütungen ignorieren.** Boni, Tantieme, Aktienoptionen, betriebliche Altersvorsorge und Dienstwagen-Privatnutzung sind in vielen Branchen (Bank, Pharma, Tech) ein erheblicher Teil der Gesamtvergütung. Wer nur das Grundgehalt vergleicht, übersieht 10–30 % Total-Comp und liegt im Vergleich zu niedrig.`,
     faq: [
       {
         frage: 'Woher stammen die Gehaltsdaten?',

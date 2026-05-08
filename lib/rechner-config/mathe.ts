@@ -1159,12 +1159,28 @@ Die n-te Wurzel fragt: Welche Zahl ergibt mit sich selbst n-mal multipliziert de
 
 Der Logarithmus fragt: Mit welchem Exponenten muss die Basis potenziert werden, um die Zahl zu erhalten? log₁₀(1000) = 3, denn 10³ = 1000. Der dekadische Logarithmus (Basis 10) und der natürliche Logarithmus (Basis e ≈ 2,718) sind die gebräuchlichsten. Logarithmen verwandeln Multiplikation in Addition und sind daher in Wissenschaft, Technik und Finanzen allgegenwärtig.
 
-**Anwendungen in der Praxis**
+**Potenzgesetze im Detail**
 
-- **Zinseszins:** Das Kapital wächst exponentiell: K = K₀ × (1 + p/100)ⁿ. Wie lange dauert eine Verdopplung? → Logarithmus: n = log(2) / log(1 + p/100).
-- **Physik:** Erdbebenstärke (Richter-Skala), Lautstärke (Dezibel) und pH-Wert sind logarithmische Skalen.
-- **Informatik:** Binäre Suche hat O(log₂ n) Schritte, Speicheradressen nutzen Zweierpotenzen.
-- **Geometrie:** Flächen wachsen quadratisch (r²), Volumina kubisch (r³) mit dem Radius.`,
+Die Potenzgesetze sind das Werkzeug, mit dem sich komplexe Ausdrücke vereinfachen lassen — ohne sie wäre höhere Mathematik kaum praktikabel. Die wichtigsten Regeln:
+
+- **Multiplikation gleicher Basen:** aⁿ × aᵐ = aⁿ⁺ᵐ. Beispiel: 2³ × 2⁴ = 2⁷ = 128. Die Exponenten werden addiert, weil die Basen identisch sind und sich die Multiplikationen kumulieren.
+- **Division gleicher Basen:** aⁿ ÷ aᵐ = aⁿ⁻ᵐ. Beispiel: 5⁶ ÷ 5² = 5⁴ = 625. Die Exponenten werden subtrahiert.
+- **Potenz einer Potenz:** (aⁿ)ᵐ = aⁿ·ᵐ. Beispiel: (3²)⁴ = 3⁸ = 6.561. Die Exponenten werden multipliziert.
+- **Negative Exponenten:** a⁻ⁿ = 1/aⁿ. Beispiel: 2⁻³ = 1/8 = 0,125. Ein negativer Exponent bedeutet Kehrwert.
+- **Sonderfall Null:** a⁰ = 1 für alle a ≠ 0. Begründung: aⁿ ÷ aⁿ = aⁿ⁻ⁿ = a⁰, und jede Zahl durch sich selbst ergibt 1. Der Ausdruck 0⁰ ist je nach Kontext entweder undefiniert oder per Konvention 1 (in der Kombinatorik).
+- **Wurzeln als Potenzen:** ⁿ√a = a^(1/n). Beispiel: √16 = 16^(1/2) = 4. Diese Schreibweise erlaubt es, Potenz- und Wurzelgesetze einheitlich anzuwenden.
+
+**Anwendungsfälle in Wissenschaft und Alltag**
+
+Potenzen, Wurzeln und Logarithmen erscheinen in vielen Lebensbereichen — meist ohne dass das mathematische Werkzeug bewusst erkannt wird:
+
+- **Zinseszins (Finanzen).** Das Kapital wächst exponentiell: K = K₀ × (1 + p/100)ⁿ. Wer wissen will, wie lange eine Verdopplung dauert, nutzt den Logarithmus: n = log(2) ÷ log(1 + p/100). Bei 5 % Zinsen sind das log(2)/log(1,05) ≈ 14,2 Jahre. Die Faustregel „72 ÷ Zinssatz" ist eine logarithmische Näherung.
+- **Bytes, KB, MB, GB (Informatik).** Speichergrößen sind Zweierpotenzen: 1 KB = 2¹⁰ Byte = 1.024 Byte, 1 MB = 2²⁰ Byte ≈ 1 Mio., 1 GB = 2³⁰ Byte ≈ 1 Mrd. Auch Bildschirmauflösungen (1024 × 768, 1920 × 1080) und Speicheradressen folgen Zweierpotenzen, weil Computer binär arbeiten.
+- **Wissenschaftliche Notation.** In Physik und Chemie werden Zahlen in der Form a × 10ⁿ geschrieben, um Größenordnungen handhabbar zu machen. Lichtgeschwindigkeit ≈ 3 × 10⁸ m/s, Avogadrozahl ≈ 6,022 × 10²³ Teilchen/Mol, Elementarladung ≈ 1,602 × 10⁻¹⁹ Coulomb. Ohne Potenzschreibweise wäre der Umgang mit solchen Werten praktisch unmöglich.
+- **Geometrie — Flächen und Volumina.** Eine Quadratseite r ergibt eine Fläche von r², ein Würfel mit Kantenlänge r ein Volumen von r³. Verdoppelt man die Kante, vervierfacht sich die Fläche und verachtfacht sich das Volumen — exponentielles Wachstum mit dem Radius. Bei einer Kugel sind Oberfläche (4πr²) und Volumen (4/3·πr³) ebenfalls Potenzfunktionen.
+- **Logarithmische Skalen in der Naturwissenschaft.** Erdbebenstärke (Richter-Skala), Lautstärke (Dezibel) und Säurestärke (pH-Wert) sind logarithmisch skaliert: jede ganze Stufe entspricht einem 10-fachen Anstieg der zugrundeliegenden Größe. Magnitude 7 ist 10× stärker als Magnitude 6, ein Anstieg um 10 dB ist eine 10-fache Schallintensität.
+- **Halbwertszeit (Physik & Pharmakologie).** Beim radioaktiven Zerfall halbiert sich die Substanz alle T Sekunden: N(t) = N₀ × (1/2)^(t/T). Dieselbe Logik gilt für die Konzentration eines Medikaments im Blut. Wer wissen will, wann nur noch 10 % verbleiben, löst nach t = T × log(0,1) ÷ log(0,5).
+- **Bevölkerungswachstum und Epidemiologie.** Eine konstante Wachstumsrate führt zu exponentiellem Wachstum: Bevölkerung wächst gemäß N(t) = N₀ × (1 + r)^t. Das R-Wert-Konzept aus der Pandemie-Berichterstattung ist mathematisch gesehen die Basis einer Exponentialfunktion — R > 1 bedeutet Ausbreitung, R < 1 Eindämmung.`,
     faq: [
       {
         frage: 'Was ist eine Potenz?',

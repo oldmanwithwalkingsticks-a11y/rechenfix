@@ -271,7 +271,29 @@ Erdgas ist mit einem Anteil von rund 50 % der häufigste Energieträger in Deuts
 - **Richtig lüften:** Stoßlüften statt Kipplüften spart bis zu 200 Euro pro Jahr.
 - **Heizung entlüften:** Gluckernde Heizkörper arbeiten ineffizient. Regelmäßiges Entlüften verbessert die Leistung.
 - **Thermostatventile nutzen:** Programmierbare Thermostate senken die Temperatur automatisch nachts und bei Abwesenheit.
-- **Dichtungen prüfen:** Undichte Fenster und Türen verursachen erhebliche Wärmeverluste.`,
+- **Dichtungen prüfen:** Undichte Fenster und Türen verursachen erhebliche Wärmeverluste.
+
+**Anwendungsfälle: Energieträger im Kostenvergleich für ein 100-m²-Haus**
+
+Bei einem typischen 100-m²-Haus mit 140 kWh/m²/Jahr Heizwärmebedarf (modernisierter Altbau) ergibt sich folgender Jahreskostenvergleich für die wichtigsten Energieträger:
+
+- **Erdgas (~12 ct/kWh):** 100 × 140 × 0,12 = **1.680 €/Jahr**. Standard in Deutschland, gute Effizienz, planbare Kosten. Risiko: starke Preisschwankungen seit 2022.
+- **Heizöl (~13 ct/kWh äquivalent):** 100 × 140 × 0,13 = **1.820 €/Jahr**. Erfordert Tank und Lagerplatz, Preise stark vom Weltmarkt abhängig (Tagesschwankung 5–15 %). Sinnvoll bei verfügbarer Lagerinfrastruktur.
+- **Fernwärme (~14 ct/kWh):** 100 × 140 × 0,14 = **1.960 €/Jahr**. Kein Heizungstausch nötig, aber Versorger-Bindung und Preisanpassungen mit kurzer Frist möglich. Komfortabel, oft etwas teurer.
+- **Wärmepumpe (JAZ 3,5, Wärmepumpen-Spezialtarif 28 ct/kWh):** 100 × 140 / 3,5 × 0,28 = **1.120 €/Jahr**. Stromverbrauch nur etwa ein Drittel des Heizwärmebedarfs. Hohe Anschaffungskosten (15–35 k€), aber laufende Kosten am niedrigsten. BEG-Förderung möglich.
+- **Pellets (~8 ct/kWh):** 100 × 140 × 0,08 = **1.120 €/Jahr**. Günstig im Verbrauch, aber Lagerplatz und jährliche Wartung nötig. Preise saisonal schwankend, im Sommer oft 15–20 % günstiger.
+
+**Häufige Fehler bei der Heizkosten-Berechnung**
+
+- **kWh-Verbrauch grob schätzen statt vom Zähler ablesen.** Faustregel-Werte (140 kWh/m²) können um 30–40 % danebenliegen. Realistisch: Heizkostenabrechnung der letzten zwei Jahre mitteln oder den Energieausweis konsultieren — beides liefert den tatsächlichen Verbrauch je m².
+- **Heizöl-Preisschwankungen ignorieren.** Ölpreise schwanken im Jahresverlauf um 20–35 %. Wer im teuren Winter tankt statt im günstigen Frühling, zahlt schnell mehrere Hundert Euro Aufschlag pro Tank. Vor der Jahres-Hochrechnung lohnt der Blick auf den 12-Monats-Durchschnitt von Heizöl-Vergleichsplattformen.
+- **Wirkungsgrad der Heizung außer Acht.** Eine alte Gasheizung liefert bei 100 kWh Brennstoffeinsatz nur 75–85 kWh Wärme; ein moderner Brennwertkessel kommt auf 95–98 %. Wer mit dem Brennstoffverbrauch rechnet, übersieht den Wirkungsgrad — vor allem bei alten Anlagen wird die Realbelastung deutlich höher als die kWh-Rechnung suggeriert.
+- **Warmwasser nicht separat ausweisen.** In vielen Haushalten macht die Warmwasserbereitung 15–25 % des Gesamtverbrauchs aus. Wer das mit der Raumheizung verrechnet, vergleicht Energieträger schief — Wärmepumpen mit Warmwasser-Modul stehen anders da als reine Heiz-Lösungen mit elektrischem Durchlauferhitzer.
+- **Bestandsaufnahme vor Heizungstausch ohne Hydraulischen Abgleich.** Vor jedem Tausch sollte ein hydraulischer Abgleich erfolgen — er senkt den Verbrauch um typisch 5–15 %, ohne dass die Heizung selbst getauscht werden muss. Wer ohne Abgleich auf Wärmepumpe wechselt, kalkuliert mit überhöhtem alten Verbrauch und unterschätzt das Sparpotenzial der bestehenden Anlage.
+
+**Förderung und CO₂-Komponente 2026**
+
+Die BEG-Förderung (KfW 458) bezuschusst den Heizungstausch auf erneuerbare Wärme mit 30 % Grundförderung, plus Klimageschwindigkeitsbonus (20 %, bei Tausch alter fossiler Anlagen vor 2029), Einkommensbonus (30 % bei zvE unter 40.000 €) und Effizienzbonus (5 %), gedeckelt bei 70 % der förderfähigen Investitionskosten und maximal 30.000 € pro Wohneinheit. Eine 25.000-€-Wärmepumpe kann nach Abzug der Förderung netto nur 7.500 € kosten — das verschiebt die Wirtschaftlichkeitsrechnung deutlich. Zusätzlich wirkt seit 2024 der CO₂-Preis im nationalen Emissionshandel: Heizöl und Erdgas wurden 2026 mit 55 €/Tonne CO₂ belastet, was Erdgas um etwa 1,2 ct/kWh und Heizöl um 1,5 ct/kWh verteuert. Bis 2027 steigt der CO₂-Preis nach BEHG-Plan weiter. Wer heute Heizöl oder Gas einkauft, sollte die langfristige Kostenentwicklung mit einplanen — die Wirtschaftlichkeit erneuerbarer Heizsysteme verbessert sich jedes Jahr.`,
     faq: [
       {
         frage: 'Wie viel kosten Heizkosten pro m²?',
@@ -284,6 +306,14 @@ Erdgas ist mit einem Anteil von rund 50 % der häufigste Energieträger in Deuts
       {
         frage: 'Wie viel kWh Heizenergie braucht man pro m²?',
         antwort: 'Neubau (KfW-Standard): 30–50 kWh/m²/Jahr. Modernisierter Altbau: 80–120 kWh/m². Unsanierter Altbau: 150–250 kWh/m². Der Energieausweis des Gebäudes gibt den genauen Wert an.',
+      },
+      {
+        frage: 'Wie hoch sind typische Heizkosten pro m² im Jahr?',
+        antwort: 'Bei aktuellen Energiepreisen 2026 liegen die jährlichen Heizkosten bei 12–22 €/m² für Gas, 13–23 €/m² für Heizöl, 14–25 €/m² für Fernwärme, 8–14 €/m² für Pellets und 11–18 €/m² für Wärmepumpe (mit Spezialtarif). Die Spanne kommt durch den Gebäudezustand: ein modernisierter Altbau liegt am unteren Rand, ein unsanierter Altbau am oberen. Wer deutlich darüber liegt, sollte einen Energieberater hinzuziehen — die KfW-Förderung trägt 50 % der Kosten bis 1.300 €.',
+      },
+      {
+        frage: 'Lohnt sich eine Wärmepumpe gegenüber Gas 2026?',
+        antwort: 'Bei Neubau oder gut gedämmtem Altbau (Heizlast unter 100 kWh/m²) ist die Wärmepumpe heute fast immer wirtschaftlicher: laufende Kosten 1.100–1.400 €/Jahr für 100 m² gegenüber 1.500–1.800 € bei Gas. Bei unsaniertem Altbau (Heizlast 200+ kWh/m²) und ohne Niedertemperatur-Heizkörper bleibt Gas oft günstiger, weil die Wärmepumpe mit hohen Vorlauftemperaturen ineffizient arbeitet (JAZ unter 3,0). Die BEG-Förderung 2026 deckt bis zu 70 % der Investitionskosten der Wärmepumpe ab (Grundförderung 30 % + Klimageschwindigkeitsbonus 20 % + Einkommensbonus bis 30 %, gedeckelt bei 30.000 € förderfähigen Kosten). Faustregel: Bei Heizungstausch nach 2026 die Wärmepumpe nur dann skippen, wenn der hydraulische Abgleich klar zeigt, dass die Vorlauftemperaturen über 55 °C liegen müssen.',
       },
     ],
   },
