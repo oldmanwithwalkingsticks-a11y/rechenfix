@@ -555,6 +555,7 @@ Der jeweils höhere Freibetrag gilt ab Beginn des Monats, in dem die Altersgrenz
     icon: '🕐',
     formel: 'Stundenlohn = Monatsgehalt / (Wochenstunden × 4,33)',
     beispiel: 'Beispiel: 3.500 € Monatsgehalt / (40 Std × 4,33) = 20,21 € Stundenlohn',
+    affiliate: { programId: 'lexware', context: 'stundenlohn' },
     erklaerung: `**Stundenlohn berechnen — so geht's**
 
 Der Stundenlohnrechner hilft Ihnen, Ihr monatliches oder jährliches Bruttogehalt in einen Stundenlohn umzurechnen — oder umgekehrt. Das ist besonders nützlich, wenn Sie Jobangebote vergleichen, eine Gehaltsverhandlung vorbereiten oder prüfen möchten, ob Ihr Gehalt über dem gesetzlichen Mindestlohn liegt.
