@@ -1453,3 +1453,101 @@ Ohne diesen Schritt geben Claude-Chat und Claude-Code inkonsistente Ratschläge 
 | 26.04.2026 | Prompt 154: Welle-2-Stufe-3-Wohnen-Abschluss (Prompts 147–148b) + Welle-2-Stufe-3-Arbeit-Status (149a/b/c durch, 149d offen), 6 neue SSOT-Libs ergänzt (`strompreis.ts`, `eeg-einspeiseverguetung.ts`, `beg-foerderung.ts`, `vpi.ts` mit § 1376 BGB-Helper, `pv-ertragsmodell.ts`, plus `kfz-steuer-parameter.ts` aus Welle 2 Stufe 1), 4 neue Anti-Patterns (Backtick-Falle in Template-Literals, Slug-Drift in Kategorie-Datei, Phantom-Befund-Diagnose, Test-Soll-Werte gegen UI-Anzeige), Counts korrigiert (170 = Alltag 23 / Finanzen 45 / Gesundheit 17 / Auto 11 / Wohnen 25 / Mathe 18 / Arbeit 17 / Kochen 12 / Sport 2) | [ ] noch offen |
 | 26.04.2026 | Prompt 155: Welle-2-Komplett-Abschluss-Sync — Header-Stand auf „Welle 2 KOMPLETT abgeschlossen 26.04.2026" mit allen 4 Stufen ✅ und Welle-3-Backlog-Stichworten (152b/P3-B1/151/150e/Validation-Sweep). Audit-Methodik-Sektion ergänzt um Audit-Bundle-Pattern (Generator-Skript `scripts/build-audit-bundle.ts`, CLI `npm run audit:bundle <name>`, Bundle-Defs in `scripts/audit-bundles.ts`, 300k-text-Limit-Pflicht für Bundles >100 KB), Verify-Skripte-Konvention (Lehre 149d: `.ts` statt `.mjs`, `npx tsx`-Aufruf, typisierte Helper), Wert-Recherche-Disziplin durch Claude im Web (Lehre 22: Aktualität-Hinweis + zwei Sekundärquellen + URL-Permission-Workflow). | [ ] noch offen |
 | 28.04.2026 | Prompt 158a: Welle-3-Lehren-Sync — Header-Stand auf 28.04.2026 mit Welle 3 6/9 ✅ (152b, 154, 155, 156, 151, 150e). Vier neue Anti-Pattern-Blöcke ergänzt: Content-Sektionen in client-only Lazy-Wrapper (Lehre 26 / 154 — AdSense-Trigger), Klasse auf Wrapper statt direkten Kindern (Lehre 27 / 154), `new Date()` auf Modul-Ebene in `'use client'`-Components (Lehre 24 / 152b — Hydration-Mismatch-Risiko), Stichtag-Wert als dynamischer Lookup verkleidet (Lehre 23 / 152b — Stichtag vs. berechenbar mit Decision-Tabelle). AdSense-Status im Header: erste Prüfung 27.04.2026 negativ, Drei-Maßnahmen-Sprint 154+155+156 als Reaktion. | [ ] noch offen |
+
+---
+
+## Pattern-Goldstandard (Welle 13, Stand 08.05.2026)
+
+Top-10-Rechner (BN, MwSt, Zins, BMI etc.) folgen einem etablierten Layout-Pattern für AdSense-Konformität und maximale Conversion. Bei neuen Rechnern oder Updates bestehender Rechner gilt:
+
+### Component-Layout (`components/rechner/<Name>Rechner.tsx`)
+
+Innerhalb des `{ergebnis && (...)}`-Blocks in dieser Reihenfolge:
+
+1. **Result-Box** (blau, Hauptzahl + Kategorie-Badge)
+2. **Custom-UI** rechner-spezifisch (z.B. Aufschlüsselung, Skala, Tabelle, dynamische Hinweise)
+3. **CrossLinks** zu verwandten Rechnern
+4. **AiExplain im `mt-4`-Wrapper:**
+   ```tsx
+   <div className="mt-4">
+     <AiExplain rechnerName="..." eingaben={{...}} ergebnis={{...}} />
+   </div>
+   ```
+5. **ErgebnisAktionen im `mt-6`-Wrapper:**
+   ```tsx
+   <div className="mt-6">
+     <ErgebnisAktionen ergebnisText="..." seitenTitel="..." />
+   </div>
+   ```
+
+**Wichtig:** Beide Wrapper IMMER zusammen setzen. Nur `mt-4` oder nur `mt-6` führt zu Spacing-Hotfix-Bedarf (Lerneffekt aus W13.3.1, W13.3.6, W13.4.1).
+
+### Page-Layout (durch `app/[kategorie]/[rechner]/page.tsx` automatisch gerendert)
+
+1. AdSlot Rectangle
+2. h2 „So funktioniert..." + `config.formel` + `config.beispiel`
+3. `config.erklaerung` mit Existing + NEU-Sektionen
+4. h2 „Häufige Fragen" mit `config.faq`
+5. **`{config.affiliate && <AffiliateBox {...config.affiliate} />}`** — AdSense-konform nach Content
+6. „Das könnte Sie auch interessieren" + Sidebar
+
+### Inhalts-Standards für Top-Rechner
+
+Jeder Top-Rechner (BN, MwSt, Zins, BMI etc.) hat in `config.erklaerung`:
+
+- **Existing-Sektionen** (rechner-spezifische Grundlagen, Formel, Tabellen)
+- **„Anwendungsfälle: Wann brauchen Sie den X-Rechner?"** (NEU, ~250W, 5 konkrete Szenarien als Bold-Lead-Liste)
+- **„Häufige Fehler bei der X-Berechnung"** (NEU, ~150W, 5 Stichpunkte als Bold-Lead-Liste)
+
+`config.faq` mit mindestens 8 Q&A (5 Existing + 3 rechner-spezifische NEU-Fragen).
+
+### Bold-Lead-Listen-Pattern
+
+```markdown
+- **Punkt-Titel.** Erklärungs-Text mit konkreten Werten/Beispielen für ein Mini-Mehrwert-Element.
+```
+
+Markdown-Render in `page.tsx` parsiert dieses Pattern korrekt — gilt kategorie-übergreifend.
+
+### Affiliate-Architektur
+
+| Pattern | Wann | Wo |
+|---|---|---|
+| Single-Box via `config.affiliate` | 1 Affiliate-Box pro Rechner | Property in `lib/rechner-config/<kategorie>.ts` |
+| Multi-Box-Custom | 2+ Affiliate-Boxen mit eigenem Layout | Inline im Component |
+| Kein Affiliate | Affiliate-frei (z.B. Gesundheit) | Property einfach undefined lassen |
+
+Custom-Multi-Box ist BN-Pattern (WISO + smartsteuer). W14 erweitert auf `affiliate?: AffiliateConfig[]` (Array-Variante) für Multi-Box-via-Property.
+
+### Sensitivitäts-Layer
+
+Bei Gesundheits-, Finanz-, Familien- und ähnlichen sensiblen Themen:
+- Keine wertende Sprache, keine Empfehlungen zur Verhaltensänderung
+- Verweise auf Fachpersonen (Arzt, Hebamme, Steuerberater) statt eigener Empfehlungen
+- Limitierungen klar benennen
+
+---
+
+## Operative Disziplin
+
+### Verify-Modus
+
+Nach jedem Deploy macht **nur Karsten** Live-Verify per Inkognito-Browser. **Claude macht keine eigenen web_fetch-Aussagen** zum Live-Stand, weil web_fetch session-übergreifend stale-cached.
+
+- Karstens Inkognito-Screenshots = ground truth
+- Claude beschränkt sich auf statische Code-Analyse + Prompt-Generierung
+- Bei Konflikt zwischen web_fetch und Karsten-Screenshot: Karsten gewinnt
+
+### Working-Tree-Disziplin
+
+- `lib/rechner-config/client-data.ts` ist auto-generierter Datums-Stempel-Drift — **NICHT mit-committen** (in jeder Sub-Welle vor `git add` prüfen)
+- Atomic-Commits: ein Sub-Wellen-Commit, prägnante Message
+- Working-Tree nach Commit clean (außer client-data.ts-Drift)
+
+### Beispielrechnungen
+
+Werte für Beispiele in Specs IMMER aus Live-Calculator ziehen, nicht schätzen. Drift zwischen Spec-Wert und Live-Calculator wäre fachlich peinlich.
+
+### Pre-Phase-Pflicht
+
+Vor jeder neuen Rechner-Sub-Welle: Component-Code-Upload + Config-Eintrag-Audit + Live-Audit der Seite. Daraus ergibt sich der individuelle Plan (nicht blind nach Schablone arbeiten — Lerneffekt aus W13.1).

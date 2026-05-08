@@ -165,3 +165,74 @@ KI-Prompt-Kontext für Fix erklärt:
 das Ergebnis und gib Tipps für Arbeitnehmer. Weise darauf hin
 dass dies keine Rechtsberatung ist.
 Max 120 Wörter. Deutsch, Siezen, keine Markdown-Formatierung."
+
+---
+
+## Welle-13-Patterns (Stand 08.05.2026)
+
+### KI-Button + Action-Bar mit Spacing-Doppel-Wrapper
+
+```tsx
+// Am Ende des {ergebnis && (...)}-Blocks im Component:
+
+<CrossLink href="/.../..." emoji="..." text="..." />
+<CrossLink href="/.../..." emoji="..." text="..." />
+
+<div className="mt-4">
+  <AiExplain
+    rechnerName="<Name>"
+    eingaben={{ /* Calculator-Inputs */ }}
+    ergebnis={{ /* Calculator-Outputs */ }}
+  />
+</div>
+
+<div className="mt-6">
+  <ErgebnisAktionen
+    ergebnisText="..."
+    seitenTitel="<Name>"
+  />
+</div>
+```
+
+### RechnerConfig mit Affiliate-Property
+
+```ts
+// In lib/rechner-config/<kategorie>.ts:
+{
+  slug: 'mein-rechner',
+  titel: '...',
+  beschreibung: '...',
+  // ... weitere Properties ...
+  affiliate: { programId: 'lexware', context: 'mwst' },  // Optional
+  formel: '...',
+  beispiel: '...',
+  erklaerung: `...`,
+  faq: [ /* mindestens 8 Q&A */ ],
+}
+```
+
+### Bold-Lead-Listen-Markdown für Anwendungsfälle
+
+```markdown
+**Anwendungsfälle: Wann brauchen Sie den <Name>-Rechner?**
+
+Der <Name>-Rechner ist in vielen Lebenssituationen hilfreich — hier fünf konkrete Anwendungsfälle:
+
+- **Szenario-Titel A.** Erklärungs-Text mit Werten und Beispielen, ~50 Wörter pro Stichpunkt.
+- **Szenario-Titel B.** Erklärungs-Text...
+- **Szenario-Titel C.** Erklärungs-Text...
+- **Szenario-Titel D.** Erklärungs-Text...
+- **Szenario-Titel E.** Erklärungs-Text...
+```
+
+### Bold-Lead-Listen-Markdown für Häufige Fehler
+
+```markdown
+**Häufige Fehler bei der <Name>-Berechnung**
+
+- **Fehler A.** Erklärung des Fehlers + Konsequenz, ~30 Wörter.
+- **Fehler B.** Erklärung...
+- **Fehler C.** Erklärung...
+- **Fehler D.** Erklärung...
+- **Fehler E.** Erklärung...
+```

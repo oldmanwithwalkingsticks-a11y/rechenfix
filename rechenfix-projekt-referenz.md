@@ -807,3 +807,114 @@ Lokal Windows-NTFS = case-insensitive, Vercel-Linux = case-sensitive. Bei Compon
 - Geburtstermin → Mutterschutz → Elterngeld (kein Affiliate → WISO → WISO)
 - Stromkosten → Stromvergleich (CHECK24 → CHECK24)
 - Auto: Sprit → Autokosten → Kfz-Steuer (alle CHECK24)
+
+---
+
+## Pattern-Goldstandard (Welle 13, Stand 08.05.2026)
+
+Etabliert über vier Top-Rechner (Brutto-Netto, MwSt, Zinsrechner, BMI). Detaildokumentation in `docs/audit-arbeitspapiere/welle-status-historie.md`.
+
+### Component-Pfade
+
+| Rechner | Component | Config | Affiliate-Pattern |
+|---|---|---|---|
+| Brutto-Netto | `components/rechner/BruttoNettoRechner.tsx` | `lib/rechner-config/finanzen.ts` (Z. ~40–95) | Multi-Box-Custom (WISO + smartsteuer inline) |
+| MwSt | `components/rechner/MwStRechner.tsx` | `lib/rechner-config/finanzen.ts` (Z. ~95–166) | Single-Box via `config.affiliate` (lexware) |
+| Zinsrechner | `components/rechner/ZinsRechner.tsx` | `lib/rechner-config/finanzen.ts` (Z. ~167–243) | Single-Box via `config.affiliate` (cosmosdirekt) |
+| BMI | `components/rechner/BmiRechner.tsx` | `lib/rechner-config/gesundheit.ts` (Z. 5–79) | kein Affiliate |
+
+### Architektur-Patterns
+
+#### `RechnerConfig.affiliate?:` Property (W13.2)
+
+```ts
+// In lib/rechner-config/types.ts
+export interface RechnerConfig {
+  // ... existing properties ...
+  affiliate?: {
+    programId: ProgramId;  // exportiert aus components/AffiliateBox.tsx
+    context: string;
+  };
+}
+```
+
+Page rendert in `app/[kategorie]/[rechner]/page.tsx` zwischen FAQ-Card-Ende und Verwandte-Rechner-Section:
+
+```tsx
+{config.affiliate && <AffiliateBox {...config.affiliate} />}
+```
+
+#### `INLINE_ERKLAERUNG_SLUGS`-Whitelist (W13.1.1)
+
+In `app/[kategorie]/[rechner]/page.tsx` deaktiviert die Whitelist das config-basierte Erklärung+FAQ-Render für Rechner mit Inline-Sections im Component:
+
+```ts
+const INLINE_ERKLAERUNG_SLUGS = new Set(['brutto-netto-rechner']);
+```
+
+Aktuell nur für BN. Bei zukünftigen Rechnern mit Inline-Konsolidierung erweitern.
+
+#### Spacing-Doppel-Wrapper (W13.3.1 + W13.3.6 + W13.4.1)
+
+In jedem Top-Rechner-Component:
+```tsx
+<div className="mt-4">
+  <AiExplain ... />
+</div>
+<div className="mt-6">
+  <ErgebnisAktionen ... />
+</div>
+```
+
+#### Bold-Lead-Listen-Markdown-Pattern
+
+In `config.erklaerung` für Anwendungsfälle und Häufige Fehler:
+```markdown
+- **Punkt-Titel.** Erklärungs-Text...
+```
+
+Page-Render parsiert kategorie-übergreifend (`finanzen.ts`, `gesundheit.ts` etc.).
+
+### Component-Pattern-Referenzen
+
+- `components/AffiliateBox.tsx` — exportiert `ProgramId`-Type (public seit W13.2)
+- `components/rechner/AiExplain.tsx` — KI-Button („Fix erklärt"), `'use client'`, KI-on-demand
+- `components/ui/ErgebnisAktionen.tsx` — Action-Bar (Copy/Share/PDF, Feedback)
+- `components/ui/CrossLink.tsx` — Cross-Link zu verwandten Rechnern
+- `components/ui/RadioToggleGroup.tsx` — Toggle-Gruppe (z.B. Geschlecht, Rechner-Tab)
+- `components/ui/NummerEingabe.tsx` — Nummer-Eingabefeld (mit DIN-5008-Heuristik aus W12)
+
+---
+
+## Affiliate-Programm-Zuordnungen (Stand 08.05.2026)
+
+| Rechner | programId | context | Architektur-Pattern |
+|---|---|---|---|
+| Brutto-Netto | `wiso` + `smartsteuer` | `brutto-netto` | Multi-Box-Custom inline |
+| MwSt | `lexware` | `mwst` | via `config.affiliate` |
+| Zinsrechner | `cosmosdirekt` | `tagesgeld` | via `config.affiliate` |
+| BMI | — | — | kein Affiliate |
+
+Pflege: bei neuen Rechnern in `lib/rechner-config/<kategorie>.ts` ergänzen.
+W14-Erweiterung: Array-Property `affiliate?: AffiliateConfig[]` für Multi-Box-via-Property (BN-Migration).
+
+---
+
+## Welle-Verlauf-Übersicht
+
+| Welle | Datum | Inhalt | Status |
+|---|---|---|---|
+| W12 | 07.05.2026 | parseDeutscheZahl-DIN-5008 + Hotfix, 128/128 grün | ✅ |
+| W13.1 | 07.05.2026 | BN W13.1-NEU-Sektionen | ✅ |
+| W13.1.1 | 07.05.2026 | BN-Konsolidierung, Drift-Fixes (Soli, BBG-Ost, Stunden) | ✅ |
+| W13.2 | 07.05.2026 | MwSt-Erweiterung + AffiliateBox-Architektur | ✅ |
+| W13.1.2 | 07.05.2026 | BN Hebel A | ✅ |
+| W13.3 + .1 + .6 | 07./08.05.2026 | Zinsrechner-Erweiterung + 2 Spacing-Hotfixes | ✅ |
+| W13.4 | 08.05.2026 | BMI-Rechner-Erweiterung | ✅ |
+| W13.4.1 | 08.05.2026 | BMI Spacing-Hotfix (mt-6 ErgebnisAktionen) | ✅ |
+| W13.5–W13.10 | TBD | Stundenlohn, Sprit, Tage, Dreisatz, Mieten, Strom | 📋 |
+| W13.B | TBD | Lib-Werte-Audit gegen 2026-Stand | 📋 |
+| AdSense-Re-Submission | nach W13.B | nach Stichproben-Audit Long-Tail | 📋 |
+| W14 | nach AdSense-Approval | Conversion-Optimization (Affiliate-Reposition, Array-Property) | 📋 |
+
+Detail-Historie: `docs/audit-arbeitspapiere/welle-status-historie.md`

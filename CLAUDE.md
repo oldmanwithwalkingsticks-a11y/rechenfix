@@ -802,3 +802,79 @@ Reihenfolge nach Freigabe: erst 85 (Warning wegräumen), dann 68 (CMP dazu).
 - **Validation-Sweep-Scoping** (Commit 867b92f) — Scoping-Dokument für Welle-3-Tail unter `docs/audit-arbeitspapiere/validation-sweep-scoping.md` (7 Module: M1 Backtick-Hook, M2 Norm-Zitate, M3 SSOT-Konsumption, M4 Meta-Routen, M5 Affiliate-Konsistenz, M6 FAQ-Drift, M7 A11y-Stichprobe). Tail-Container in welle-status-historie angelegt ✅
 - **P3-B1-Doku-Sync** (Commit c6876c1) — P3-B1 ueberstunden-Refactor in 4 Doku-Ankern nachgetragen (welle-status-historie, CLAUDE.md, projekt-referenz, SKILL.md); Numerik 7/9 ✅, Welle-3-Backlog-Counts und Detail-Sektion-Header synchron ✅
 - **Welle-3-Tail-Anker-Sync** (Commit 0c426b6) — Welle-3-Tail Doku-Anker konsolidiert: 157 in projekt-referenz/SKILL.md/CLAUDE.md ergänzt, 152c-Eintrag in CLAUDE.md/projekt-referenz/SKILL.md ergänzt, Validation-Sweep mit Scoping-Bullet-Schablone in 3 Doku-Ankern verankert, P3-B1-Lücke in projekt-referenz-Done-Liste geschlossen, Numerik durchgängig auf 8/10 harmonisiert ✅
+
+---
+
+## Pattern-Goldstandard (Welle 13, Stand 08.05.2026)
+
+Top-10-Rechner sind nach Welle 13 auf konsistentem Pattern. Bei Updates und neuen Rechnern muss dieser Pattern eingehalten werden.
+
+### Calculator-Component-Pattern
+
+Innerhalb des `{ergebnis && (...)}`-Blocks:
+
+1. Result-Box
+2. Custom-UI (rechner-spezifisch)
+3. CrossLinks
+4. `<div className="mt-4"><AiExplain /></div>` ← ZWINGEND mit mt-4
+5. `<div className="mt-6"><ErgebnisAktionen /></div>` ← ZWINGEND mit mt-6
+
+**Beide Wrapper sind Pflicht.** Hintergrund: W13.3.1 + W13.3.6 + W13.4.1 waren drei Spacing-Hotfixes für genau diese Lücke.
+
+### Affiliate-Architektur
+
+- **Single-Box:** via `config.affiliate?:` Property in `RechnerConfig` (Standard ab W13.2)
+- **Multi-Box-Custom:** im Component direkt (BN-Pattern, W14: Array-Variante geplant)
+- **Kein Affiliate:** Property undefined lassen
+
+### Inhalts-Pattern
+
+Top-Rechner-Erklärungen enthalten:
+- Existing-Sektionen (rechner-spezifisch)
+- „Anwendungsfälle: Wann brauchen Sie den X-Rechner?" (5 Bold-Lead-Stichpunkte)
+- „Häufige Fehler bei der X-Berechnung" (5 Bold-Lead-Stichpunkte)
+
+FAQ ≥ 8 Q&A. Bold-Lead-Pattern: `- **Titel.** Text...`
+
+### Sensitivitäts-Regel
+
+Bei Gesundheits-/Finanz-/Familien-Themen: keine wertende Sprache, Verweis auf Fachpersonen, Limitierungen klar benennen.
+
+---
+
+## Operative Disziplin
+
+### Verify-Modus nach Deploy
+
+- **Karstens Inkognito-Browser-Screenshots = ground truth**
+- Claude macht **keine eigenen `web_fetch`-Aussagen** zu Live-Stand (web_fetch session-übergreifend stale-cached)
+- Bei Konflikt zwischen `web_fetch` und Karsten-Screenshot: Karsten gewinnt
+
+### Working-Tree-Disziplin
+
+- `lib/rechner-config/client-data.ts` ist auto-generiertes File (Datums-Stempel-Drift) — **NICHT mit-committen**
+- Vor `git add` immer `git status` prüfen, ob client-data.ts dirty ist
+- Atomic-Commits: ein Sub-Wellen-Commit, prägnante Message
+
+### Pre-Phase-Pflicht
+
+Vor jeder neuen Rechner-Sub-Welle:
+1. Component-Code-Upload anfordern
+2. Config-Datei-Auszug erbitten
+3. Live-Audit durch Karsten-Inkognito
+4. Existing-Content-Inventar + Drift-Audit + Custom-UI-Inventar
+
+Nicht blind nach Schablone arbeiten — individueller Plan pro Rechner.
+
+### Beispielrechnungen
+
+Werte aus Live-Calculator ziehen, nicht schätzen. Live-Test ist Teil der Pre-Phase.
+
+### Sub-Wellen-Konvention
+
+Pro Sub-Welle:
+- Spec-File: `welle<N>-w<N>-<sub>-<rechner>-spec.md` (umfangreich, Volltexte)
+- Prompt-File: `welle<N>-w<N>-<sub>-prompt.md` (Hauptteil ≤ 3.000 Zeichen)
+- Hotfix-Prompt: `welle<N>-w<N>-<sub>-<sub2>-hotfix-prompt.md`
+
+Lokale Ablage: `docs/welle<N>/`
