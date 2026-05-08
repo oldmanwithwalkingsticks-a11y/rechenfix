@@ -199,7 +199,27 @@ Der Tagerechner ist ein vielseitiges Werkzeug für den Alltag, das Berufsleben u
 - **Vertragsfristen:** Wann läuft ein Vertrag, eine Garantie oder eine Probezeit ab? Viele Fristen werden in Tagen, Wochen oder Monaten angegeben.
 - **Altersberechnung:** Wie viele Tage bin ich alt? Geben Sie Ihr Geburtsdatum als Start und das heutige Datum als Ende ein.
 
-Unser Tagerechner unterstützt beliebige Datumsbereiche und berechnet auch sehr lange Zeiträume von mehreren Jahrzehnten zuverlässig. Die Umrechnung in Monate berücksichtigt dabei die unterschiedlichen Monatslängen korrekt.`,
+Unser Tagerechner unterstützt beliebige Datumsbereiche und berechnet auch sehr lange Zeiträume von mehreren Jahrzehnten zuverlässig. Die Umrechnung in Monate berücksichtigt dabei die unterschiedlichen Monatslängen korrekt.
+
+**Häufige Fehler bei der Tageberechnung**
+
+Datumsdifferenzen wirken trivial, sind aber überraschend fehleranfällig — vor allem bei Fristen, Verträgen und langfristigen Planungen. Diese fünf Fehler treten besonders häufig auf:
+
+- **Schaltjahre vergessen.** Wer mit pauschal 365 Tagen pro Jahr rechnet, verpasst alle vier Jahre einen Tag. Über 10 Jahre summiert sich das zu zwei bis drei Tagen Differenz — bei Geburtstags-Tagezählungen oder Vertragslaufzeiten kann das im konkreten Anwendungsfall zur falschen Wochentag-Erwartung oder zur knapp verpassten Frist führen. Der Tagerechner berücksichtigt Schaltjahre automatisch.
+- **Mitzählen-Toggle bei Fristen falsch verstanden.** Bei juristischen Fristen wird der Starttag in der Regel nicht mitgezählt (§ 187 Abs. 1 BGB), bei Veranstaltungsdauern oder Urlauben dagegen schon. Wer den Toggle „Start + Endtag mitzählen" aus Gewohnheit aktiviert lässt, kommt bei einer Kündigungsfrist auf einen Tag zu viel. Faustregel: Frist = ohne Starttag, Dauer/Urlaub = mit beiden Tagen.
+- **Feiertage bei Arbeitstagen nicht abgezogen.** Der Rechner zeigt Arbeitstage als Mo–Fr, ohne gesetzliche Feiertage. Wer für ein konkretes Bundesland Arbeitstage braucht (z. B. für Lieferzeit-Berechnung oder Werktagsfristen), muss die regionale Feiertage-Anzahl manuell abziehen — in Bayern bis zu 13, in Hamburg/Niedersachsen nur 9. Bei einem Jahr macht das schnell vier Werktage Unterschied.
+- **Zeitzonen-Effekte bei Reise- oder Lieferdatum ignoriert.** Wer ein Versandvor­haben in den USA aufgibt und das Lieferdatum hier in Deutschland berechnet, verschiebt sich um 6–9 Stunden — bei knappen Stichtags-Lieferungen kann das einen Kalendertag bedeuten. Der Tagerechner arbeitet in lokaler deutscher Zeit; bei internationalen Vorgängen Datum bewusst auf die Empfänger-Zeitzone normalisieren, bevor die Differenz gerechnet wird.
+- **Sommer-/Winterzeit-Übergänge bei stundengenauen Rechnungen unterschätzt.** Am letzten Sonntag im März „verschwindet" eine Stunde (2:00 → 3:00), am letzten Sonntag im Oktober kommt eine zurück (3:00 → 2:00). Bei Tag-zu-Stunden-Umrechnung über solche Übergänge hinweg fehlt oder kommt eine Stunde extra — bei Schichtdienst-Plänen oder Reise-Ankunftszeiten der häufigste „Eine-Stunde-zu-spät"-Fehler.
+- **Monatsenden missverstanden, vor allem im Februar.** „Ein Monat ab dem 31.01." endet am 28.02. (oder 29.02. im Schaltjahr) — nicht am 31.02. (gibt's nicht) und auch nicht am 03.03. Viele Datumsroutinen rollen automatisch über; bei Vertragsfristen, die kalendarisch korrekt enden müssen, ist das eine Fehlerquelle. Der Tagerechner umgeht das, weil er reine Tage zählt — bei Monatsangaben aber bewusst Tage als Basis verwenden.
+
+**Spezialfälle: Schaltjahre, Monatslängen, Zeitumstellung**
+
+Drei kalendarische Eigenheiten erklären die meisten „seltsamen" Tagerechnungs-Ergebnisse — wer sie kennt, vermeidet Fehlannahmen:
+
+- **Die Schaltjahr-Regel im Detail.** Ein Jahr ist ein Schaltjahr, wenn es durch 4 teilbar ist — mit zwei Ausnahmen: durch 100 teilbar = kein Schaltjahr, außer es ist auch durch 400 teilbar. Konsequenz: 2000 war ein Schaltjahr (durch 400), 1900 und 2100 sind keine. 2024 und 2028 sind Schaltjahre, 2026 und 2027 nicht. Diese Regel stammt vom Gregorianischen Kalender (1582 eingeführt) und korrigiert den kleinen Drift gegen das Sonnenjahr (365,2422 Tage). Wer am 29. Februar geboren ist, hat juristisch in Deutschland am 1. März in Nicht-Schaltjahren Geburtstag (für Volljährigkeit etc.); kulturell wird oft der 28.02. gefeiert.
+- **Monatslängen und die Knöchel-Eselsbrücke.** Die deutsche Monatslängen-Regel ist 31-30-31-30-31-30-31-31-30-31-30-31 — mit Ausnahme des Februar (28/29). Eselsbrücke: linke Hand zur Faust ballen, vom kleinen Finger beginnend abwechselnd Knöchel (31 Tage) und Vertiefung (30 Tage) abzählen — Januar = Knöchel, Februar = Vertiefung (28/29), März = Knöchel, … Juli = Knöchel (rechte Faust dazu), August = wieder Knöchel beginnend, … Dezember = Knöchel. Diese Methode merkt sich an einem Nachmittag und hält ein Leben lang.
+- **Zeitumstellung in Deutschland.** Sommerzeit beginnt am letzten Sonntag im März um 2:00 Uhr (Uhren springen auf 3:00, der Tag hat 23 Stunden) und endet am letzten Sonntag im Oktober um 3:00 Uhr (Uhren zurück auf 2:00, der Tag hat 25 Stunden). Für die reine Tageszählung egal — ein Tag bleibt ein Tag. Für Stunden-/Minuten-Genauigkeit über die Übergänge hinweg muss die Verschiebung manuell berücksichtigt werden. Die EU hat die Abschaffung 2019 beschlossen, ein Inkrafttreten steht aber weiterhin aus.
+- **Wochentag-Wiederholungen.** Ein Datum fällt nach 6, 11 oder 28 Jahren wieder auf denselben Wochentag — abhängig davon, wie viele Schaltjahre dazwischen liegen. Faustregel für „normale" Verläufe: nach 11 Jahren ist Ihr Geburtstag mit hoher Wahrscheinlichkeit wieder am gleichen Wochentag. Die 28-Jahre-Regel gilt strikt nur, wenn beide Daten nach dem Schalt-Ausnahmejahr-Pattern (1900/2100/…) liegen — innerhalb eines Jahrhunderts trifft sie meist exakt zu.`,
     faq: [
       {
         frage: 'Wie berechne ich die Tage zwischen zwei Daten?',
@@ -216,6 +236,22 @@ Unser Tagerechner unterstützt beliebige Datumsbereiche und berechnet auch sehr 
       {
         frage: 'Wie viele Arbeitstage hat ein Jahr?',
         antwort: 'Ein normales Jahr hat ca. 261 Arbeitstage (365 minus 104 Wochenendtage). Abzüglich gesetzlicher Feiertage (je nach Bundesland 9–13) bleiben ca. 248–252 Arbeitstage. Ein Schaltjahr hat 262 Arbeitstage vor Feiertagsabzug.',
+      },
+      {
+        frage: 'Was ist ein Schaltjahr und warum gibt es sie?',
+        antwort: 'Ein Schaltjahr hat 366 statt 365 Tage — der zusätzliche Tag (29. Februar) gleicht die Differenz zwischen Kalenderjahr und Sonnenjahr aus. Ein Sonnenjahr (Erdumlauf um die Sonne) dauert rund 365,2422 Tage. Würde man das ignorieren, würden die Jahreszeiten über Jahrhunderte aus dem Kalender wandern. Die Regel: Schaltjahr ist jedes durch 4 teilbare Jahr — Ausnahme: durch 100 teilbar = kein Schaltjahr, Ausnahme von der Ausnahme: durch 400 teilbar = doch Schaltjahr. Konkret: 2024 ja, 2025 nein, 2026 nein, 2027 nein, 2028 ja. Das Jahr 2000 war Schaltjahr (durch 400), 1900 und 2100 sind keine. Diese Regelung wurde 1582 mit dem Gregorianischen Kalender eingeführt und reduziert den Drift gegen das Sonnenjahr auf rund 1 Tag in 3.000 Jahren.',
+      },
+      {
+        frage: 'Wie viele Tage liegen zwischen zwei Geburtstagen?',
+        antwort: 'In normalen Jahren liegen genau 365 Tage zwischen zwei Geburtstagen, in Schaltjahren 366 — sofern der 29. Februar im Zeitraum liegt. Wer auf der Suche nach „Wie viele Tage bin ich alt?" ist: Geben Sie das Geburtsdatum als Start und das heutige Datum als Ende ein. Bei einem 30-Jährigen sind das rund 10.957 Tage, bei einem 50-Jährigen 18.262 Tage, bei einem 80-Jährigen rund 29.220 Tage — die Schwankungen entstehen durch die Zahl der dazwischenliegenden Schaltjahre. Beliebt: der eigene 10.000., 20.000. oder 30.000. Lebenstag als Anlass — den 10.000. Tag erreichen Sie mit 27 Jahren und etwa 5 Monaten.',
+      },
+      {
+        frage: 'Wirkt sich die Sommerzeit auf die Tageberechnung aus?',
+        antwort: 'Auf reine Tagezählungen nicht — ein Kalendertag bleibt ein Kalendertag, unabhängig davon, ob er 23, 24 oder 25 Stunden hat. Auf Stunden-/Minutengenauigkeit aber sehr wohl: Am letzten Sonntag im März fehlt eine Stunde (Uhren springen 2:00 → 3:00), am letzten Sonntag im Oktober kommt eine zurück (3:00 → 2:00). Wer Tage in Stunden umrechnet und der Zeitraum überschneidet sich mit einer Umstellung, muss eine Stunde manuell addieren oder abziehen. Beispiel: Vom 28. März 0:00 Uhr bis 28. März 24:00 Uhr in einem Sommerzeit-Beginn-Jahr sind es 23 Stunden, nicht 24. Bei mehrtägigen Zeiträumen über die Umstellung hinweg gleichen sich die +1 und −1 jährlich aus.',
+      },
+      {
+        frage: 'Wie weit zurück oder voraus kann der Tagerechner rechnen?',
+        antwort: 'Der Rechner unterstützt Daten von etwa 1900 bis 2100 zuverlässig. Innerhalb dieses Bereichs werden Schaltjahr-Regel, Monatslängen und Wochentag-Berechnung korrekt berücksichtigt. Für historische Daten vor 1582 (Einführung des Gregorianischen Kalenders) liefert der Rechner zwar einen mathematisch korrekten Tag-Differenzwert, aber das damals real verwendete Datum (Julianischer Kalender) weicht ab — vom 4. auf den 15. Oktober 1582 wurde damals 10 Tage übersprungen. Für rein kalendarische Tagezählung im Alltag (Geburtstag, Vertragslaufzeit, Projektplanung über Jahrzehnte) ist der Rechner ohne Einschränkung nutzbar.',
       },
     ],
   },
