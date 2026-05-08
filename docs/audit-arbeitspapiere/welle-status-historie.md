@@ -8,6 +8,16 @@
 
 ---
 
+## AdSense-Welle 13 (Static-Content-Goldstandard) — Sub-Welle W13.8 Dreisatzrechner (08.05.2026)
+
+> Hinweis: Diese „AdSense-Welle 13" ist die parallel laufende Static-Content-/Pattern-Replikations-Linie (W13.1=BN, W13.2=MwSt, W13.3=Zinsrechner, W13.4=BMI, W13.5=Stundenlohn, W13.6=Spritkosten, W13.7=Tagerechner, W13.8=Dreisatz) — getrennt von der unten in der Welle-12-Outlook-Sektion geplanten internen Audit-Welle 13.
+
+- **W13.8 Dreisatzrechner Static-Content + FAQ-Erweiterung** ✅ — `lib/rechner-config/alltag.ts`, slug `dreisatz-rechner`. Reiner Content-Sprint (0 AffiliateBox-Treffer in der Pre-Phase, L-43-Branch 0 verifiziert, Component unverändert). Bestehende Mini-Beispielrechnungen-Sektion zu vollwertiger „Anwendungsfälle"-Section ausgebaut (9 Bullets mit Berufs- und Alltags-Spektrum), neue „Häufige Fehler"-Section ergänzt (6 Bullets), FAQ 5 → 8. Static-Content-Wortzahl: **1.632 Wörter** (Erklärung 1.136 + FAQ 496). Commit `50fb6d6`.
+
+**Pattern-Hinweis Editing-Tool:** Datei nutzt im Quelltext literale `\\u00A0`/`\\u20AC`/`\\u2192`-Escape-Sequenzen innerhalb von Template-Literals (statt direkter UTF-8-Zeichen). Edit-Tool stolperte beim ersten Versuch über Escape-vs-Klartext-Mismatch (probierte beide Formen, fand keine, weil Datei tatsächlich literale `\\u`-Sequenzen enthält). Workaround: Patch-Skript per Node mit exakter Substring-Replacement durchgeführt. Für künftige Edits an alltag.ts (und vermutlich weiteren älteren Lib-Files mit gleichem Encoding-Stil) entweder Read → Bytewert prüfen oder direkt Node-Patch verwenden.
+
+---
+
 ## AdSense-Welle 13 (Static-Content-Goldstandard) — Sub-Welle W13.7 Tagerechner (08.05.2026)
 
 > Hinweis: Diese „AdSense-Welle 13" ist die parallel laufende Static-Content-/Pattern-Replikations-Linie (W13.1=BN, W13.2=MwSt, W13.3=Zinsrechner, W13.4=BMI, W13.5=Stundenlohn, W13.6=Spritkosten, W13.7=Tagerechner) — getrennt von der unten in der Welle-12-Outlook-Sektion geplanten internen Audit-Welle 13 (Berechnungs-Wrapper-jahr-Hardcoding-Refactor).
