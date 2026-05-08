@@ -8,6 +8,38 @@
 
 ---
 
+## AdSense-Welle 13 (Static-Content-Goldstandard) — KOMPLETT 08.05.2026
+
+**10/10 Content-Sprints + 2 Hotfixes erledigt.** Alle Top-10-Rechner auf Goldstandard-Pattern (Anwendungsfälle + Häufige Fehler + ggf. Spezialfälle/Rechtliche Aspekte, Bold-Lead-Bullets, FAQ ≥ 8, Static-Content-Wortzahl ≥ 1.500).
+
+| Sprint | Rechner | Wortzahl | FAQ | Affiliate-Pfad |
+|---|---|---|---|---|
+| W13.1 | Brutto-Netto | (W13.1.1+ inline) | inline | inline-Custom |
+| W13.2 | MwSt | bestand | bestand | config (Lexware) |
+| W13.3 | Zinsrechner | bestand | bestand | config (CosmosDirekt) |
+| W13.4 + .4.1 | BMI | bestand | bestand | kein |
+| W13.5 + .5.1 | Stundenlohn | 1.735 | 8 | config (Lexware, L-42) |
+| W13.6 | Spritkosten | 1.858 | 8 | Multi-Box (L-43, → W14) |
+| W13.7 | Tagerechner | 1.882 | 8 | kein |
+| W13.8 | Dreisatz | 1.632 | 8 | kein |
+| W13.9 | Mietrechner | 1.939 | 8 | kein |
+| W13.10 | Stromkosten | 1.836 | 8 | config (check24, L-42) |
+
+**Welle-Lehren-Bilanz:**
+- **L-42** (Single-AffiliateBox-Migration im gleichen Sprint, kein Folge-Hotfix) — etabliert in W13.5.1, sauber angewendet in W13.10.
+- **L-43** (Multi-Box-Rechner unverändert lassen, W14-Sammelpunkt für Array-Property-Refactor) — etabliert in W13.6.
+- **Drei-Wege-Pre-Phase-Branch** (0/1/≥2 AffiliateBox-Treffer) konsolidiert — alle drei Branches in der Welle real angewendet.
+
+**W14-Backlog:** RechnerConfig.affiliate von Single-Object auf Array-Property erweitern, dann Multi-Box-Components (SpritkostenRechner + ggf. weitere) in Refactor-Commit migrieren.
+
+**Externer Trigger (parkend):** AdSense-Re-Submission durch Karsten — alle Top-10 jetzt mit ≥ 1.500 Wörtern Static-Content (typisch 1.700–1.900) und FAQ-Schema-LD pro Seite.
+
+---
+
+- **W13.10 Stromkostenrechner Static-Content + L-42-Migration check24** ✅ — Doppelter Inhalt im selben Commit: L-42-Migration (Component-AffiliateBox raus, `config.affiliate: { programId: 'check24', context: 'strom' }` ergänzt) plus zwei neue Sections (Anwendungsfälle für 7 Haushalts-Profile inkl. E-Auto/Wärmepumpe/Home-Office/Nachtspeicher, Häufige Fehler mit 7 Bullets) plus FAQ 4 → 8 (Anbieterwechsel, E-Auto-Verbrauch, PV-Eigenverbrauch, dynamische Tarife). Static-Content-Wortzahl: **1.836 Wörter** (Erklärung 1.151 + FAQ 685). Erste W13-Sub-Welle, die L-42-Pattern auf wohnen.ts anwendet (vorher 0 affiliate-Property-Einträge in der Datei). Commit `effcc2c`.
+
+---
+
 ## AdSense-Welle 13 (Static-Content-Goldstandard) — Sub-Welle W13.9 Mietrechner (08.05.2026)
 
 > Hinweis: Diese „AdSense-Welle 13" ist die parallel laufende Static-Content-/Pattern-Replikations-Linie (W13.1=BN, W13.2=MwSt, W13.3=Zinsrechner, W13.4=BMI, W13.5=Stundenlohn, W13.6=Spritkosten, W13.7=Tagerechner, W13.8=Dreisatz, W13.9=Mietrechner) — getrennt von der unten in der Welle-12-Outlook-Sektion geplanten internen Audit-Welle 13.
