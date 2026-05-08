@@ -68,11 +68,11 @@ Unser Brutto-Netto-Rechner liefert eine gute Orientierung, basiert jedoch auf ve
       },
       {
         frage: 'Warum unterscheidet sich mein Netto je nach Bundesland?',
-        antwort: 'Zwei Gründe: 1) Der Kirchensteuersatz ist in Baden-Württemberg und Bayern 8%, in allen anderen Bundesländern 9%. 2) Die Beitragsbemessungsgrenze der Rentenversicherung ist in Ostdeutschland etwas niedriger als im Westen.',
+        antwort: 'Der Kirchensteuersatz ist in Baden-Württemberg und Bayern 8%, in allen anderen Bundesländern 9% — das ist der einzige bundeslandabhängige Faktor in der Brutto-Netto-Rechnung. Die früher unterschiedliche Beitragsbemessungsgrenze (BBG) Ost/West in der Rentenversicherung ist seit 2025 vereinheitlicht (8.450 €/Monat bzw. 101.400 €/Jahr bundesweit).',
       },
       {
         frage: 'Was ist der Solidaritätszuschlag?',
-        antwort: 'Der Soli beträgt 5,5% der Lohnsteuer. Seit 2021 fällt er für ca. 90% der Steuerzahler weg (Freigrenze: 18.130 € Jahres-Lohnsteuer). Das entspricht etwa 73.000 € Jahresbrutto in Steuerklasse 1.',
+        antwort: 'Der Soli beträgt 5,5% der Lohnsteuer. Seit 2021 fällt er für ca. 90% der Steuerzahler weg (Freigrenze 2026: 20.350 € Jahres-Lohnsteuer bei Einzelveranlagung, 40.700 € bei Splitting). Das entspricht etwa 73.000 € zu versteuerndem Einkommen in Steuerklasse 1.',
       },
       {
         frage: 'Lohnt sich die Steuerklassenkombination 3/5?',
@@ -2543,7 +2543,7 @@ Bei Zusammenveranlagung (Ehegattensplitting) wird das gemeinsame zvE halbiert, d
 **Solidaritätszuschlag und Kirchensteuer**
 
 Zusätzlich zur Einkommensteuer können anfallen:
-- **Solidaritätszuschlag**: 5,5 % der ESt, mit Freigrenze (18.130 € ESt) und Milderungszone. Seit 2021 zahlen ca. 90 % der Steuerzahler keinen Soli mehr.
+- **Solidaritätszuschlag**: 5,5 % der ESt, mit Freigrenze (20.350 € ESt 2026 Einzelveranlagung, 40.700 € bei Splitting) und Milderungszone. Seit 2021 zahlen ca. 90 % der Steuerzahler keinen Soli mehr.
 - **Kirchensteuer**: 8 % (Bayern, Baden-Württemberg) oder 9 % (übrige Bundesländer) der ESt.
 
 **Tipps zur Steueroptimierung**
@@ -2864,7 +2864,7 @@ Die Gewerbesteuererklärung muss bis zum 31. Juli des Folgejahres beim Finanzamt
     metaDescription: 'Einkommensteuer 2026 kostenlos berechnen: Grundtabelle oder Splitting, Soli, Kirchensteuer, Grenz- und Durchschnittssteuersatz — mit KI-Erklärung.',
     keywords: ['einkommensteuer rechner', 'einkommensteuer berechnen', 'est rechner', '32a estg', 'einkommensteuer 2026', 'einkommensteuer tabelle', 'grenzsteuersatz rechner', 'durchschnittssteuersatz', 'einkommensteuer splitting', 'grundtabelle'],
     icon: '📋',
-    formel: 'Zone 2 (12.097–17.443 €): (932,30·y+1.400)·y | Zone 3 (17.444–66.760 €): (176,86·z+2.397)·z+1.015,42 | Zone 4 (66.761–277.825 €): 0,42·zvE−10.636,30 | Zone 5 (ab 277.826 €): 0,45·zvE−18.970,05',
+    formel: 'Zone 2 (12.349–17.799 €): (914,51·y+1.400)·y | Zone 3 (17.800–69.878 €): (173,10·z+2.397)·z+1.034,87 | Zone 4 (69.879–277.825 €): 0,42·zvE−11.135,63 | Zone 5 (ab 277.826 €): 0,45·zvE−19.470,38',
     beispiel: '50.000 € zvE, Einzelveranlagung 2026: Einkommensteuer 9.758 €, Grenzsteuersatz ca. 30,5 %, Durchschnittssteuersatz 19,5 %. Mit Splitting (Paar mit zvE 50k): nur 5.030 € — Splitting-Vorteil ca. 4.700 €.',
     erklaerung: `**Einkommensteuer berechnen nach § 32a EStG**
 
