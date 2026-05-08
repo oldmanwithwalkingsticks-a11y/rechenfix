@@ -581,6 +581,24 @@ Bei einer 40-Stunden-Woche entspricht der Mindestlohn einem monatlichen Bruttoge
 
 Unser Rechner vergleicht Ihren errechneten Stundenlohn automatisch mit dem aktuellen Mindestlohn und zeigt an, ob Ihr Verdienst darüber oder darunter liegt.
 
+**Anwendungsfälle: Wann brauchen Sie den Stundenlohnrechner?**
+
+Der Stundenlohnrechner ist im Berufsalltag und bei finanziellen Entscheidungen ein Werkzeug mit überraschend vielen Einsatzgebieten — hier fünf typische Anwendungsfälle:
+
+- **Jobangebote objektiv vergleichen.** Zwei Stellenangebote sind selten direkt vergleichbar: Job A bietet 3.800 € Monatsgehalt bei 40 Stunden, Job B 3.400 € bei 35 Stunden. Auf den ersten Blick liegt A vorne — auf den Stundenlohn umgerechnet aber: A = 21,94 €/Std., B = 22,44 €/Std. Bei gleichem Aufwand ist B besser bezahlt. Der Rechner deckt solche Verzerrungen sofort auf.
+- **Gehaltsverhandlung vorbereiten.** Wer eine Gehaltserhöhung verlangen möchte, braucht harte Zahlen. Der eigene Stundenlohn im Vergleich zum Branchenschnitt (siehe Berufsgruppen-Tabelle unten) ist ein konkretes Argument. „Ich liege bei 19,80 € pro Stunde — Branchenschnitt für meine Position ist 23 €" ist überzeugender als „Ich verdiene zu wenig". Der Rechner liefert die Zahl in Sekunden.
+- **Teilzeit oder Vollzeit — was lohnt sich?** Bei Reduzierung von 40 auf 30 Stunden sollte der Stundenlohn unverändert bleiben — wenn nicht, wird Teilzeit relativ schlechter bezahlt. Der Rechner zeigt: 3.500 € bei 40 Std = 20,21 €/Std., 2.625 € bei 30 Std = ebenfalls 20,21 €/Std. Liegt das Teilzeit-Angebot darunter, ist das Verhandlungsspielraum.
+- **Freelancer vs. Angestellte vergleichen.** Ein Freelance-Stundensatz von 65 € klingt nach viel — bis man Krankenversicherung, Rentenvorsorge, Urlaub, Krankheit, Akquise und Steuerberater einrechnet. Der Stundenlohnrechner zeigt den Brutto-Stundenlohn als Angestellter; dem stellen Sie den Freelance-Satz nach Kosten gegenüber. Faustregel: Freelance-Stundensatz × ca. 0,55 entspricht dem vergleichbaren Brutto-Angestellten-Stundenlohn.
+- **Regionale Lohn-Unterschiede einordnen.** Ein Stundenlohn von 22 € in München ist nicht dasselbe wie 22 € in Görlitz. Wer einen Umzug plant oder ein Angebot in einer anderen Region prüft, sollte den Stundenlohn relativ zu den dortigen Lebenshaltungskosten betrachten. Mietspiegel + Stundenlohn ergeben zusammen die wahre Kaufkraft. Der Rechner liefert die Stundenlohn-Zahl, der Vergleich erfolgt über regionale Statistiken.
+
+**Häufige Fehler bei der Stundenlohn-Berechnung**
+
+- **Faktor 4 statt 4,33 verwendet.** Der häufigste Rechenfehler: 3.500 € ÷ (40 × 4) = 21,88 €/Std. statt korrekt 20,21 €/Std. — eine Überschätzung um 8 %. Grund: Ein Monat hat im Schnitt 4,33 Wochen (52 ÷ 12), nicht 4. Bei Jahresvergleichen entsteht so ein scheinbarer Lohnvorteil, der in Wirklichkeit gar nicht existiert.
+- **Brutto und netto verwechseln.** Der Rechner liefert den Brutto-Stundenlohn — was tatsächlich aufs Konto geht, ist netto deutlich weniger (je nach Steuerklasse 50–70 % des Brutto bei mittleren Einkommen). Wer ein Stundenlohn-Angebot mit dem aktuellen Netto vergleicht, landet bei falschen Schlüssen. Für den fairen Vergleich entweder beide Werte brutto oder beide netto rechnen.
+- **Urlaub und Feiertage beim Effektiv-Lohn übersehen.** Der nominale Stundenlohn rechnet mit allen 52 Wochen im Jahr. Tatsächlich arbeiten Sie aber nur etwa 46 Wochen (30 Urlaubstage + ca. 9 Feiertage = 6 Wochen Ausfall, weiterhin bezahlt). Der effektive Stundenlohn — gerechnet auf tatsächlich geleistete Stunden — liegt damit rund 13 % höher als der nominale. Bei Vergleichen mit Freelancern (die keinen bezahlten Urlaub haben) ist das relevant.
+- **Branchen-spezifische Mindestlöhne übersehen.** Der gesetzliche Mindestlohn ist mit 13,90 €/Std. (2026) nur die Untergrenze. Im Bauhauptgewerbe gelten 15,40 €/Std. (Werker) bzw. 19,90 €/Std. (Fachwerker), in der Pflege 16,10 €/Std. (Hilfskraft) bis 19,50 €/Std. (Fachkraft Akut), bei Gerüstbauern und Dachdeckern eigene Tarif-Mindestlöhne. Wer in einer dieser Branchen arbeitet und nur den allgemeinen Mindestlohn als Referenz nimmt, unterschätzt seinen Anspruch.
+- **Stundenlohn ohne Lebenshaltungskosten-Kontext bewerten.** 25 €/Std. in Stuttgart sind real weniger wert als 22 €/Std. in Magdeburg, weil die Mieten in Stuttgart leicht doppelt so hoch sind. Wer Jobangebote über Regionen hinweg vergleicht, sollte zusätzlich Mietspiegel, ÖPNV-Kosten und Pendelaufwand einrechnen. Der Stundenlohn ist nur die halbe Miete der Job-Bewertung.
+
 **Stundenlohn-Tabelle nach Berufsgruppen**
 
 Die Stundenlöhne in Deutschland variieren stark nach Branche, Qualifikation und Region. Als grobe Orientierung gelten folgende Brutto-Stundenlöhne: Im Einzelhandel und in der Gastronomie liegen die Löhne typischerweise bei 14 bis 18 Euro. Handwerkliche Berufe werden mit 16 bis 22 Euro vergütet. In Büro- und Verwaltungsberufen sind 18 bis 25 Euro üblich. Pflegekräfte verdienen je nach Qualifikation 18 bis 28 Euro. In der IT und Softwareentwicklung liegen die Stundenlöhne bei 28 bis 45 Euro, im Ingenieurwesen ähnlich. Ärzte und Unternehmensberater erreichen 35 bis 65 Euro pro Stunde.
@@ -608,6 +626,18 @@ Beachten Sie, dass ein hoher Stundenlohn allein noch kein aussagekräftiger Verg
       {
         frage: 'Wie rechne ich Teilzeit-Gehalt in Stundenlohn um?',
         antwort: 'Die Formel ist dieselbe wie bei Vollzeit: Stundenlohn = Monatsgehalt ÷ (Wochenstunden × 4,33). Bei 20 Stunden Teilzeit und 1.800 € Gehalt: 1.800 ÷ (20 × 4,33) = 1.800 ÷ 86,6 = 20,79 € pro Stunde. Der Stundenlohn sollte bei gleicher Tätigkeit unabhängig von der Arbeitszeit identisch sein.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen nominalem und effektivem Stundenlohn?',
+        antwort: 'Der nominale Stundenlohn rechnet das Monatsgehalt durch alle bezahlten Wochenstunden (40 × 4,33 = 173,2 Std./Monat) — das ist der Wert, den unser Rechner standardmäßig liefert. Der effektive Stundenlohn berücksichtigt zusätzlich, dass Sie Urlaub und Feiertage bezahlt bekommen, ohne in dieser Zeit zu arbeiten. Bei 30 Urlaubstagen plus etwa 9 bundesweit-relevanten Feiertagen (Mo–Fr, je nach Bundesland 7 bis 13) fallen rund 6 Arbeitswochen weg. Der effektive Stundenlohn liegt damit etwa 13 % höher als der nominale: Aus 20,21 €/Std. nominal werden ca. 22,80 €/Std. effektiv. Diese Sicht ist beim Vergleich mit Freelancern, Honorarkräften oder bei Jobs ohne bezahlten Urlaub wichtig.',
+      },
+      {
+        frage: 'Wie berechne ich den Netto-Stundenlohn?',
+        antwort: 'Erst Brutto-Monatsgehalt mit unserem Brutto-Netto-Rechner ins Netto umrechnen (abhängig von Steuerklasse, Bundesland, Kirchenzugehörigkeit, Krankenkassen-Zusatzbeitrag und Kinderzahl), dann Netto-Monatsgehalt durch (Wochenstunden × 4,33) teilen. Beispiel: 3.500 € brutto in Steuerklasse I, NRW, ohne Kirche ergeben rund 2.350 € netto. Bei 40 Wochenstunden: 2.350 ÷ 173,2 = 13,57 € Netto-Stundenlohn. Faustregel: Bei mittleren Einkommen liegt der Netto-Stundenlohn etwa 30–45 % unter dem Brutto-Stundenlohn. Bei niedrigen Einkommen nahe dem Mindestlohn ist der Abstand kleiner (rund 20–25 %), bei sehr hohen Einkommen größer.',
+      },
+      {
+        frage: 'Welche Branchen haben höhere Mindestlöhne als 13,90 €/Std.?',
+        antwort: 'Mehrere Branchen haben durch Allgemeinverbindlich-Erklärungen (AVE) eigene Tarif-Mindestlöhne, die über dem gesetzlichen Mindestlohn liegen. Beispiele 2026: Bauhauptgewerbe 15,40 €/Std. (Werker) bzw. 19,90 €/Std. (Fachwerker), Dachdeckerhandwerk 15,60 €/Std. (ungelernt) bzw. 17,40 €/Std. (Geselle), Gerüstbau 14,55 €/Std., Pflegebranche 16,10 €/Std. (Hilfskraft) bis 19,50 €/Std. (Pflegefachkraft Akutpflege), Maler- und Lackiererhandwerk 14,15 €/Std. (Helfer) bzw. 16,15 €/Std. (Geselle), Gebäudereinigung 14,25 €/Std. (Innenreinigung) bzw. 17,65 €/Std. (Glas- und Fassadenreinigung). Auch in der Leiharbeit gelten Branchenzuschläge nach Einsatzbranche. Wer in einer dieser Branchen tätig ist, hat einen tariflichen Anspruch über dem allgemeinen Mindestlohn — auch ohne Tarifbindung des eigenen Arbeitgebers, sofern AVE vorliegt.',
       },
     ],
   },
