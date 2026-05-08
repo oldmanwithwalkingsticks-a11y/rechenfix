@@ -8,6 +8,14 @@
 
 ---
 
+## AdSense-Welle 13 (Static-Content-Goldstandard) — Sub-Welle W13.9 Mietrechner (08.05.2026)
+
+> Hinweis: Diese „AdSense-Welle 13" ist die parallel laufende Static-Content-/Pattern-Replikations-Linie (W13.1=BN, W13.2=MwSt, W13.3=Zinsrechner, W13.4=BMI, W13.5=Stundenlohn, W13.6=Spritkosten, W13.7=Tagerechner, W13.8=Dreisatz, W13.9=Mietrechner) — getrennt von der unten in der Welle-12-Outlook-Sektion geplanten internen Audit-Welle 13.
+
+- **W13.9 Mietrechner Static-Content + FAQ-Erweiterung** ✅ — `lib/rechner-config/wohnen.ts`, slug `mietrechner`. Reiner Content-Sprint (0 AffiliateBox-Treffer, L-43-Branch 0). Größte Content-Lücke der Welle geschlossen: drei neue Sections (Anwendungsfälle für 5 Lebenssituations-Profile, Häufige Fehler mit 8 Bullets, Rechtliche Aspekte zu Mietspiegel/Mietpreisbremse/Indexmiete) plus FAQ 3 → 8. Static-Content-Wortzahl: **1.939 Wörter** (Erklärung 1.274 + FAQ 665). Commit `6ddde21`.
+
+---
+
 ## AdSense-Welle 13 (Static-Content-Goldstandard) — Sub-Welle W13.8 Dreisatzrechner (08.05.2026)
 
 > Hinweis: Diese „AdSense-Welle 13" ist die parallel laufende Static-Content-/Pattern-Replikations-Linie (W13.1=BN, W13.2=MwSt, W13.3=Zinsrechner, W13.4=BMI, W13.5=Stundenlohn, W13.6=Spritkosten, W13.7=Tagerechner, W13.8=Dreisatz) — getrennt von der unten in der Welle-12-Outlook-Sektion geplanten internen Audit-Welle 13.
