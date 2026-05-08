@@ -8,6 +8,34 @@
 
 ---
 
+## AdSense-Welle 13 — Phase C Quick-Fix (W13.C.1) — 09.05.2026
+
+- **W13.C.1 Quick-Fix-Sprint 3 KRITISCH-Rechner** ✅ — alle drei aus W13.C-Audit auf OK-Schwelle gehoben (≥700 W `erklaerung`, ≥5 FAQ). Bewusst Quick-Fix-Pattern, NICHT voller W13-Goldstandard (volle Erweiterung wandert ins W14-Backlog). Commit `6a3420b`.
+
+| Rechner | vorher | nachher | Δ |
+|---|---|---|---|
+| heizkosten-rechner | 236 W / 3 FAQ | 757 W / 5 FAQ | +521 W / +2 FAQ |
+| gehaltsvergleich | 291 W / 5 FAQ | 755 W / 5 FAQ | +464 W |
+| potenz-rechner | 299 W / 5 FAQ | 770 W / 5 FAQ | +471 W |
+
+**Pre-Phase AffiliateBox-Befund:**
+- `HeizkostenRechner.tsx` 2 Treffer (`<AffiliateBox programId="check24">` + `<AmazonBox>`) — **L-43-Branch (Multi-Box)** angewendet, Component unverändert, Drift für **W14-Array-Property-Refactor-Sammelpunkt** dokumentiert.
+- `GehaltsvergleichRechner.tsx` 0 Treffer — reiner Content-Sprint.
+- `PotenzRechner.tsx` 0 Treffer — reiner Content-Sprint.
+
+**Quick-Fix-Pattern für künftige Sprints:** Wer einen Rechner aus dem KRITISCH- in den OK-Bereich bringen will, ergänzt typisch zwei Sub-Sections (Anwendungsfälle ~200 W, Häufige Fehler ~150 W, optional Spezialfälle ~150–200 W) plus ggf. 2 FAQ. Reichweite ~700–800 W gesamt-`erklaerung`. Volle Goldstandard-Erweiterung (W13-Stand: 1.500 W gesamt + 8 FAQ) wandert als W14-Long-Tail ins Backlog — nach Traffic-Priorität abarbeiten.
+
+**W13-Welle FINAL-Bilanz:** 0 KRITISCH-Rechner verbleiben (von 170 Rechnern). AdSense-Submission-Reife erreicht ✅.
+
+**W14-Backlog-Items (akkumuliert über die W13-Welle):**
+1. **W14.A** — Affiliate-Array-Property: `RechnerConfig.affiliate` von Single-Object auf `Array<{ programId, context, variant? }>` erweitern, dann Multi-Box-Components (SpritkostenRechner, HeizkostenRechner, ggf. weitere bei Pre-Phase-Sweep entdeckte) in Refactor-Commit auf das Array-Pattern migrieren. Sammelpunkt aus L-43.
+2. **W14.B** — Long-Tail-DÜNN-Hebung: 137 DÜNN-Rechner schrittweise nach Traffic-Priorität auf OK-Niveau heben (bei Bedarf nach W13.C.1-Quick-Fix-Pattern, ~10–15 Min pro Rechner).
+3. **W14.C** — Optional: Quick-Fix-Drei (heizkosten / gehaltsvergleich / potenz) auf vollen W13-Goldstandard nachziehen, falls AdSense bei nochmaliger Ablehnung Random-Sampling auf Long-Tail durchführt.
+
+**Nächster Schritt:** AdSense-Re-Submission durch Karsten (Search Console / AdSense-Dashboard).
+
+---
+
 ## AdSense-Welle 13 — Phase C Audit (W13.C Phase A) — 09.05.2026
 
 - **W13.C Phase-A Wortzahl-Audit** ✅ (nur Befund, keine Code-Edits) — Skript-Inventur über alle 170 Rechner-Configs (`lib/rechner-config/*.ts`). Pro Rechner: `erklaerung`-Wortzahl, FAQ-Anzahl, Status. Bericht: [docs/audit-arbeitspapiere/welle13-c-wortzahl-audit-bericht.md](docs/audit-arbeitspapiere/welle13-c-wortzahl-audit-bericht.md). Verteilung: 3 🔴 KRITISCH / 137 ⚠ DÜNN / 30 ✅ OK / 0 ⭐ GOLDSTANDARD (strikte Prompt-Definition `erklaerung` ≥1.500 W). Nach W13-Realdefinition (Static-Content gesamt ≥1.500 + FAQ ≥8) erfüllen 9 Rechner den Goldstandard. Top-3 KRITISCH: heizkosten-rechner (236 W / 3 FAQ), gehaltsvergleich (291 W / 5 FAQ), potenz-rechner (299 W / 5 FAQ). Median-Wortzahl 555 W (DÜNN-Klasse ist statistisch der Normalfall, kein Akut-Risiko). **Empfehlung: W13.C.1 Quick-Fix-Sprint (~30 Min, Option A) für die 3 KRITISCH-Rechner vor AdSense-Re-Submission.**
