@@ -8,6 +8,12 @@
 
 ---
 
+## AdSense-Welle 13 — Phase C Audit (W13.C Phase A) — 09.05.2026
+
+- **W13.C Phase-A Wortzahl-Audit** ✅ (nur Befund, keine Code-Edits) — Skript-Inventur über alle 170 Rechner-Configs (`lib/rechner-config/*.ts`). Pro Rechner: `erklaerung`-Wortzahl, FAQ-Anzahl, Status. Bericht: [docs/audit-arbeitspapiere/welle13-c-wortzahl-audit-bericht.md](docs/audit-arbeitspapiere/welle13-c-wortzahl-audit-bericht.md). Verteilung: 3 🔴 KRITISCH / 137 ⚠ DÜNN / 30 ✅ OK / 0 ⭐ GOLDSTANDARD (strikte Prompt-Definition `erklaerung` ≥1.500 W). Nach W13-Realdefinition (Static-Content gesamt ≥1.500 + FAQ ≥8) erfüllen 9 Rechner den Goldstandard. Top-3 KRITISCH: heizkosten-rechner (236 W / 3 FAQ), gehaltsvergleich (291 W / 5 FAQ), potenz-rechner (299 W / 5 FAQ). Median-Wortzahl 555 W (DÜNN-Klasse ist statistisch der Normalfall, kein Akut-Risiko). **Empfehlung: W13.C.1 Quick-Fix-Sprint (~30 Min, Option A) für die 3 KRITISCH-Rechner vor AdSense-Re-Submission.**
+
+---
+
 ## AdSense-Welle 13 — Phase B Fix (W13.B.1) — 08.05.2026
 
 - **W13.B.1 Phase-B-Fix-Sprint** ✅ — alle 3 DRIFT-Befunde aus W13.B Phase-A-Bericht behoben in `lib/rechner-config/finanzen.ts` + 1 Bonus-Befund (BBG Ost/West). Konsolidierter Code-Commit `0dd36c0`. Berechnungs-Libs unverändert (waren schon korrekt) — nur Anzeigetexte und FAQ-Antworten gefixt:
