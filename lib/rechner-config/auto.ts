@@ -55,7 +55,26 @@ Mit einer bewussten Fahrweise lässt sich der Spritverbrauch deutlich senken —
 - **Motor bei längeren Stopps abstellen:** Bei Wartezeiten über 30 Sekunden lohnt sich das Abschalten des Motors. Moderne Autos mit Start-Stopp-Automatik machen das bereits automatisch.
 - **Kurzstrecken vermeiden:** Ein kalter Motor verbraucht deutlich mehr Sprit. Für kurze Wege sind Fahrrad oder öffentliche Verkehrsmittel oft die bessere und günstigere Wahl.
 
-Diese Maßnahmen summieren sich: Bei einer jährlichen Fahrleistung von 15.000 km und einem Verbrauch von 7,5 L/100km sparen Sie durch 20% weniger Verbrauch rund 225 Liter Sprit pro Jahr — das sind bei einem Benzinpreis von 1,65 €/L etwa 370 € Ersparnis.`,
+Diese Maßnahmen summieren sich: Bei einer jährlichen Fahrleistung von 15.000 km und einem Verbrauch von 7,5 L/100km sparen Sie durch 20% weniger Verbrauch rund 225 Liter Sprit pro Jahr — das sind bei einem Benzinpreis von 1,65 €/L etwa 370 € Ersparnis.
+
+**Anwendungsfälle: Wann brauchen Sie den Spritkostenrechner?**
+
+Spritkosten sind einer der größten variablen Kostenposten beim Autofahren — und einer der einfachsten, den man durch bewusste Entscheidungen beeinflussen kann. Hier sechs typische Anwendungsfälle:
+
+- **Pendlerkosten monatlich und jährlich kalkulieren.** Wer 30 km einfache Strecke pendelt, fährt im Jahr rund 13.200 km nur fürs Berufspendeln (220 Arbeitstage × 60 km). Bei 7,0 L/100km und 1,75 €/L Benzin sind das rund 1.617 € Spritkosten pro Jahr — Pendlerpauschale rechnet davon nur einen Teil gegen. Der Rechner zeigt die Größenordnung in Sekunden, was für Steuererklärung, Gehaltsverhandlung („Standortvorteil") und Standortentscheidungen relevant ist.
+- **Urlaubsreise-Budgetierung.** Vor einer Urlaubsfahrt ist das Sprit-Budget oft der unterschätzte Posten. Köln–Toskana und zurück sind rund 2.000 km — bei einem SUV mit 9 L/100km und 1,80 €/L Diesel landet man bei 324 € Sprit allein für die Anreise. Wer das vor der Buchung kalkuliert, sieht Tankkosten als realen Block neben Unterkunft und Mautgebühren stehen.
+- **Auto-Vergleich beim Kauf (TCO als Entscheidungsfaktor).** Zwischen zwei Modellen entscheidet selten der Listenpreis allein, sondern die Total Cost of Ownership über 5–8 Jahre Haltedauer. Ein Auto mit 6 L/100km vs. eines mit 9 L/100km macht bei 15.000 km/Jahr und 1,75 €/L knapp 790 €/Jahr Differenz — über 6 Jahre rund 4.700 €. Der Rechner liefert den Sprit-Anteil dieser TCO-Rechnung.
+- **Geschäftsreise und Reisekostenabrechnung.** Wer mit dem Privat-Pkw dienstlich fährt, kann pauschal 0,30 €/km nach § 9 EStG abrechnen — das deckt nur grob die Spritkosten plus einen kleinen Anteil Verschleiß. Wer den realen Verbrauch ermittelt, erkennt sofort, ob die Pauschale die echten Kosten deckt oder ob Bahn/Mietwagen für die Strecke wirtschaftlicher wäre.
+- **Break-Even Diesel vs. Benziner.** Diesel-Aufpreis bei Anschaffung gegen Spritersparnis pro Jahr — der Rechner zeigt für beide Verbräuche, wann der Mehrpreis amortisiert ist. Bei 2.500 € Diesel-Aufpreis und 350 €/Jahr Spritersparnis liegt der Break-Even bei rund 7 Jahren — kürzer bei Vielfahrern, deutlich länger bei Wenigfahrern. Ein einfacher Vergleich verhindert Fehlkäufe.
+- **Spritkosten vs. E-Auto-Stromkosten.** Vergleich auf 100 km Basis: 7 L Benzin × 1,75 € = 12,25 €/100km. E-Auto mit 18 kWh/100km × 0,32 €/kWh Haushaltsstrom = 5,76 €/100km — bei Wallbox-Sondertarif noch günstiger. Wer den Spritkosten-Wert als Referenz hat, kann das E-Auto-Angebot präziser bewerten und Werbeversprechen einordnen.
+
+**Häufige Fehler bei der Spritkosten-Berechnung**
+
+- **Herstellerverbrauch (WLTP) statt Realverbrauch eingesetzt.** Die offiziellen WLTP-Angaben liegen typisch 15–25 % unter dem realen Verbrauch — bei Plug-in-Hybriden noch deutlicher (oft Faktor 2). Wer mit Datenblatt-Werten rechnet, unterschätzt die Spritkosten systematisch. Besser: zwei bis drei eigene Tankfüllungen über mehrere Wochen mitteln, oder den Bordcomputer-Langzeitwert nutzen.
+- **Schwankende Spritpreise nicht berücksichtigt.** Spritpreise variieren wochentags und untertags um 15–25 ct/L (typisch günstiger 18–20 Uhr, teurer am Morgen). Wer mit dem aktuellen Höchstpreis rechnet, überschätzt die Jahreskosten; wer mit dem Tiefpreis rechnet, unterschätzt sie. Realistisch: 4-Wochen-Durchschnitt von ADAC-Tankstellenpreisen oder eigene Tank-App-Statistik nutzen.
+- **Dachbox-, Fahrradträger- und Anhänger-Mehrverbrauch ignoriert.** Eine Dachbox erhöht den Verbrauch je nach Geschwindigkeit um 1–2 L/100km (10–20 % Mehrverbrauch), ein Heckträger mit Fahrrädern um 0,5–1,5 L/100km, ein Wohnwagen-Anhänger oft um 30–50 %. Wer für die Urlaubsfahrt mit Dachbox den normalen Verbrauch ansetzt, kalkuliert das Sprit-Budget rund 100–200 € zu niedrig.
+- **Stadt-, Land- und Autobahn-Verbrauch pauschalisiert.** Stadtfahrten verbrauchen meist 30–50 % mehr als Autobahn-Fahrten bei 110–120 km/h, ab 130 km/h kehrt sich das wieder um (Luftwiderstand). Wer einen pauschalen Mischwert nutzt, kommt bei einer reinen Autobahnreise aufs falsche Ergebnis. Faustregel: für reine Autobahnstrecken Bordcomputer-Wert „Autobahn" verwenden, für reine Stadtstrecken den höheren Stadtverbrauch.
+- **Kaltstart-Effekt bei Kurzstrecken unterschätzt.** Auf den ersten 4–5 km nach einem Kaltstart verbraucht ein Verbrenner 30–80 % mehr als im warmen Betriebszustand. Wer nur Kurzstrecken fährt (Schule, Einkauf, kurze Fahrten zur Arbeit), liegt im Jahresverbrauch oft 1–2 L/100km über dem Bordcomputer-Wert, der den Anteil des Kaltlaufs nicht prominent ausweist.`,
     faq: [
       {
         frage: 'Wie berechne ich die Spritkosten für eine Strecke?',
@@ -76,6 +95,18 @@ Diese Maßnahmen summieren sich: Bei einer jährlichen Fahrleistung von 15.000 k
       {
         frage: 'Lohnt sich ein Diesel oder Benziner mehr?',
         antwort: 'Diesel lohnt sich vor allem bei hohen Fahrleistungen (ab ca. 15.000–20.000 km/Jahr), da der Verbrauch niedriger und der Dieselpreis oft günstiger ist. Dafür sind Anschaffung, Kfz-Steuer und Wartung beim Diesel teurer. Für Wenigfahrer ist ein Benziner oft wirtschaftlicher.',
+      },
+      {
+        frage: 'Wie wirken sich Spritpreis-Schwankungen auf die Jahreskosten aus?',
+        antwort: 'Bei einer typischen Jahresfahrleistung von 15.000 km und 7,0 L/100km tankt man rund 1.050 Liter pro Jahr. Schwankt der Spritpreis im Jahresverlauf um 20 ct/L (realistisch zwischen Tief- und Hochpreis-Phasen), entspricht das einer Differenz von rund 210 € auf die Jahreskosten — bei Vielfahrern mit 30.000 km/Jahr und 9 L/100km schon über 540 €. Wer am Wochenrhythmus tankt, statt nur bei leerem Tank, spart über das Jahr 80–150 € durch bessere Tagespreise. Sinnvolle Praxis: Vergleichs-Apps wie Tankerkönig oder ADAC-Spritpreismonitor nutzen, in den günstigen Tageszeiten 17–19 Uhr tanken, kein Dauer-Stammtanken nur bei einer Marke.',
+      },
+      {
+        frage: 'Wie viel mehr verbraucht man mit Dachbox oder Anhänger?',
+        antwort: 'Eine Dachbox erhöht den Spritverbrauch je nach Geschwindigkeit um 1–2 L/100km — bei höheren Tempi (130+ km/h) eher Richtung Obergrenze, weil der Luftwiderstand quadratisch mit der Geschwindigkeit steigt. Ein Heckträger mit zwei bis drei Fahrrädern liegt bei rund 0,5–1,5 L/100km Mehrverbrauch — günstiger als die Dachbox, weil weniger Stirnfläche zusätzlich. Ein Wohnwagen-Anhänger schlägt deutlich kräftiger durch: typisch 30–50 % Mehrverbrauch gegenüber dem Solofahrzeug, je nach Anhänger-Größe und Geschwindigkeit. Faustregel für die Urlaubskalkulation: Mit Dachbox 1,5 L/100km dazurechnen, mit Wohnwagen den Standardverbrauch um 40 % erhöhen. Auf 2.000 km Reise summiert sich das schnell zu 50–150 € Mehrkosten.',
+      },
+      {
+        frage: 'Lohnt der Wechsel zum E-Auto bei meinem Verbrauchsprofil?',
+        antwort: 'Auf 100 km gerechnet: ein Mittelklasse-Benziner mit 7 L/100km bei 1,75 €/L kostet 12,25 € Sprit; ein vergleichbares E-Auto mit 18 kWh/100km bei 0,32 €/kWh Haushaltsstrom kostet 5,76 € — Differenz etwa 6,50 € pro 100 km. Bei 15.000 km/Jahr sind das knapp 1.000 € Energiekosten-Ersparnis pro Jahr. Wer eine eigene Wallbox plus Dynamic-Tarif (zeitvariable Stromtarife, oft 0,20–0,25 €/kWh) hat, fährt nochmals 30 % günstiger. Aber: Anschaffungspreis ist beim E-Auto typisch 5.000–10.000 € höher als beim Verbrenner, Wertverlust unsicher, Reichweite/Lade-Infrastruktur prüfen. Break-Even bei reiner Energiekosten-Differenz liegt grob bei 5–10 Jahren — wer überwiegend Kurzstrecken fährt und zu Hause laden kann, profitiert schneller; Vielfahrer auf Langstrecken-Routen rechnen mit Schnellladekosten (0,55–0,75 €/kWh) anders.',
       },
     ],
   },
