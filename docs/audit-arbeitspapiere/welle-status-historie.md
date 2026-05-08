@@ -8,6 +8,12 @@
 
 ---
 
+## AdSense-Welle 13 — Phase B Audit (W13.B Phase A) — 08.05.2026
+
+- **W13.B Phase-A Lib-Werte-Audit** ✅ (nur Befund, keine Code-Edits) — Drift-Prüfung über `lib/berechnungen/*.ts` (30 Konstanten) und `lib/rechner-config/*.ts` (~60 Beispielzahlen-Treffer). Bericht-File: [docs/audit-arbeitspapiere/welle13-b-werte-audit-bericht.md](docs/audit-arbeitspapiere/welle13-b-werte-audit-bericht.md). Bilanz: 30/30 Lib-Konstanten OK (zentrale Berechnungs-Libs sauber, SSOT-Disziplin durchgehalten); in den Konfig-Beispielzahlen 3 DRIFT + 1 UNKLAR. Top-3 DRIFT: (1) `finanzen.ts:75` Soli-Freigrenze 18.130 → 20.350 €, (2) `finanzen.ts:2546` selbe Drift, (3) `finanzen.ts:2867` ESt-Rechner `formel`-Feld mit 2025er-Tarifzonen statt 2026 (Polynom-Koeffizienten und Zonen-Grenzen). UNKLAR: Pendlerpauschale-Soll-Wert im Audit-Prompt war veraltet (Pre-Reform-Staffel statt 0,38 €/km einheitlich seit 01.01.2026) — Code+Konfig sind aber korrekt 2026. Empfohlene Folge-Sprints: W13.B.1 (Soli-Freigrenze, P1) + W13.B.2 (ESt-formel, P1) zusammen ~15 Min, W13.B.3 (Stilistik) optional.
+
+---
+
 ## AdSense-Welle 13 (Static-Content-Goldstandard) — KOMPLETT 08.05.2026
 
 **10/10 Content-Sprints + 2 Hotfixes erledigt.** Alle Top-10-Rechner auf Goldstandard-Pattern (Anwendungsfälle + Häufige Fehler + ggf. Spezialfälle/Rechtliche Aspekte, Bold-Lead-Bullets, FAQ ≥ 8, Static-Content-Wortzahl ≥ 1.500).
