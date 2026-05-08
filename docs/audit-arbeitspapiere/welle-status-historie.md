@@ -8,6 +8,18 @@
 
 ---
 
+## AdSense-Welle 13 (Static-Content-Goldstandard) — Sub-Welle W13.7 Tagerechner (08.05.2026)
+
+> Hinweis: Diese „AdSense-Welle 13" ist die parallel laufende Static-Content-/Pattern-Replikations-Linie (W13.1=BN, W13.2=MwSt, W13.3=Zinsrechner, W13.4=BMI, W13.5=Stundenlohn, W13.6=Spritkosten, W13.7=Tagerechner) — getrennt von der unten in der Welle-12-Outlook-Sektion geplanten internen Audit-Welle 13 (Berechnungs-Wrapper-jahr-Hardcoding-Refactor).
+
+- **W13.7 Tagerechner Static-Content + FAQ-Erweiterung** ✅ — `lib/rechner-config/alltag.ts` Z.159–254, slug `tagerechner`. **Reiner Content-Sprint** — Pre-Phase-Grep auf Component zeigte 0 AffiliateBox/AmazonBox-Treffer (L-43-Branch 0 verifiziert), Component bleibt unverändert. Am Ende der erklaerung (nach Anwendungsfälle-Section) eingefügt: zwei neue Subsections — „Häufige Fehler bei der Tageberechnung" (6 Bullets: Schaltjahre vergessen, Mitzählen-Toggle bei juristischen Fristen, Feiertage bei Arbeitstagen nicht abgezogen, Zeitzonen-Effekte bei Reise-/Lieferdatum, Sommer-/Winterzeit-Übergänge bei stundengenauen Rechnungen, Monatsenden im Februar) + „Spezialfälle: Schaltjahre, Monatslängen, Zeitumstellung" (4 Bullets: Schaltjahr-Regel im Detail mit Gregorianischem-Kalender-Hintergrund 1582, Knöchel-Eselsbrücke für Monatslängen, Sommer-/Winterzeit-Mechanik in Deutschland mit EU-Abschaffungs-Stand 2019, Wochentag-Wiederholungs-Faustregel 6/11/28 Jahre). FAQ 4 → 8 (Schaltjahr-Definition + Hintergrund, Tage-zwischen-Geburtstagen mit 10.000-Lebenstag-Anker, Sommerzeit-Wirkung auf Tageberechnung, Rechner-Reichweite 1900–2100). Static-Content-Wortzahl: **1.882 Wörter** (Erklärung 1.289 + FAQ 593), Ziel ≥ 1.500 deutlich übertroffen. Commit `7cef210`.
+
+**Pattern-Beobachtungen:**
+- **FAQ-Schema-Doppel:** Tagerechner-Slug NICHT in `INLINE_ERKLAERUNG_SLUGS` — FAQPage-JSON-LD wird genau einmal aus der Config emittiert. Kein Doppel.
+- **Affiliate-Pre-Phase:** 0 Treffer im Component bestätigt. Drei-Wege-Branch L-42/L-43 sauber angewendet: 0 = kein Affiliate-Schritt, Component unverändert. Erste W13.x-Sub-Welle, die den 0-Treffer-Pfad sauber durchläuft (nach Single-Box-W13.5/W13.5.1 und Multi-Box-W13.6).
+
+---
+
 ## AdSense-Welle 13 (Static-Content-Goldstandard) — Sub-Welle W13.6 Spritkostenrechner (08.05.2026)
 
 > Hinweis: Diese „AdSense-Welle 13" ist die parallel laufende Static-Content-/Pattern-Replikations-Linie (W13.1=BN, W13.2=MwSt, W13.3=Zinsrechner, W13.4=BMI, W13.5=Stundenlohn, W13.6=Spritkosten) — getrennt von der unten in der Welle-12-Outlook-Sektion geplanten internen Audit-Welle 13 (Berechnungs-Wrapper-jahr-Hardcoding-Refactor).
