@@ -8,6 +8,30 @@
 
 ---
 
+## AdSense-Welle 13 (Static-Content-Goldstandard) — Sub-Welle W13.6 Spritkostenrechner (08.05.2026)
+
+> Hinweis: Diese „AdSense-Welle 13" ist die parallel laufende Static-Content-/Pattern-Replikations-Linie (W13.1=BN, W13.2=MwSt, W13.3=Zinsrechner, W13.4=BMI, W13.5=Stundenlohn, W13.6=Spritkosten) — getrennt von der unten in der Welle-12-Outlook-Sektion geplanten internen Audit-Welle 13 (Berechnungs-Wrapper-jahr-Hardcoding-Refactor).
+
+- **W13.6 Spritkostenrechner Static-Content + FAQ-Erweiterung** ✅ — `lib/rechner-config/auto.ts` Z.5–105, slug `spritkosten-rechner`. Am Ende der erklaerung (nach Spartipps-Section) eingefügt: zwei neue Subsections im Goldstandard-Bold-Lead-Pattern — „Anwendungsfälle: Wann brauchen Sie den Spritkostenrechner?" (6 Bullets: Pendlerkosten, Urlaubsbudget, TCO-Vergleich beim Auto-Kauf, Dienstreise/§9-EStG-Pauschale, Diesel-Benziner-Break-Even, E-Auto-Stromkosten-Vergleich) + „Häufige Fehler bei der Spritkosten-Berechnung" (5 Bullets: WLTP/Realverbrauch-Drift, Spritpreis-Tagesschwankungen, Dachbox-/Anhänger-Mehrverbrauch ignoriert, Stadt-/Autobahn-Pauschalisierung, Kaltstart-Effekt bei Kurzstrecken). FAQ 5 → 8 (Spritpreis-Schwankungs-Wirkung auf Jahreskosten, Dachbox/Anhänger-Mehrverbrauch quantitativ, E-Auto-Wechsel-Lohnen-sich-Rechnung). Static-Content-Wortzahl: **1.858 Wörter** (Erklärung 1.284 + FAQ 574), Ziel ≥ 1.500 deutlich übertroffen. Commit `e65c2cd`.
+
+**Pattern-Beobachtungen:**
+- **FAQ-Schema-Doppel:** Spritkosten-Slug NICHT in `INLINE_ERKLAERUNG_SLUGS` — FAQPage-JSON-LD wird genau einmal aus der Config emittiert. Kein Doppel.
+- **Multi-Box-Drift (bewusst stehen gelassen):** `components/rechner/SpritkostenRechner.tsx` Z.9-10 (Imports) + Z.159-161 (JSX) hat 3 hartkodierte Boxen — `<AffiliateBox programId="check24">`, `<AffiliateBox programId="hotelde" variant="compact">`, `<AmazonBox>`. Pos-Drift identisch zu W13.5.1-Befund (Boxen rendern zwischen Calculator und Erklärung statt nach FAQ), wird aber **nicht in W13.6 gefixt** — Multi-Box-Pattern lässt sich nicht auf das aktuelle `config.affiliate?: { programId, context }` (Single) abbilden. Sammelpunkt: **W14** (Array-Property-Refactor für `config.affiliate`).
+
+**Neue Lehre L-43 — Multi-Box-Rechner bleiben in W13.x mit Component-Drift, Refactor wandert nach W14:**
+
+Components mit ≥ 2 hartkodierten Affiliate/Amazon-Boxen (z. B. SpritkostenRechner mit check24 + hotelde + Amazon) lassen sich NICHT 1:1 auf das aktuelle `config.affiliate`-Single-Property migrieren. Im W13.x-Sprint Component **unverändert** lassen, Drift dokumentieren, Sammelpunkt W14 markieren.
+
+**Pflicht-Disziplin in der Pre-Phase künftiger W13.x-Sprints:**
+- `grep -nE 'AffiliateBox|AmazonBox' components/rechner/<Component>.tsx`
+- **0 Treffer** → kein Affiliate auf dem Rechner; Static-Content-Sprint ohne Affiliate-Schritt
+- **1 Treffer** → Single-Box-Pattern; **L-42** anwenden (Migration zu `config.affiliate` im gleichen Sprint, kein Folge-Hotfix)
+- **≥ 2 Treffer** → Multi-Box-Pattern; **L-43** anwenden (Component unverändert, Drift in welle-status-historie dokumentieren, W14-Backlog-Eintrag)
+
+W14-Outlook (für später, nicht in W13.x): `RechnerConfig.affiliate` von Single-Object auf `Array<{ programId, context, variant? }>` erweitern; dynamische Route Z.567-569 mit `.map`-Render auf den Array umstellen; alle Multi-Box-Components (SpritkostenRechner + ggf. weitere bei Pre-Phase-Sweep entdeckte) in einem Refactor-Commit auf das Array-Pattern umstellen.
+
+---
+
 ## AdSense-Welle 13 (Static-Content-Goldstandard) — Sub-Welle W13.5 + W13.5.1 Stundenlohnrechner (08.05.2026)
 
 > Hinweis: Diese „AdSense-Welle 13" ist die parallel laufende Static-Content-/Pattern-Replikations-Linie (W13.1=BN, W13.2=MwSt, W13.3=Zinsrechner, W13.4=BMI, W13.5=Stundenlohn) — getrennt von der unten in der Welle-12-Outlook-Sektion geplanten internen Audit-Welle 13 (Berechnungs-Wrapper-jahr-Hardcoding-Refactor). Beide W13-Linien koexistieren.
