@@ -8,6 +8,20 @@
 
 ---
 
+## AdSense-Welle 13 — Phase B Fix (W13.B.1) — 08.05.2026
+
+- **W13.B.1 Phase-B-Fix-Sprint** ✅ — alle 3 DRIFT-Befunde aus W13.B Phase-A-Bericht behoben in `lib/rechner-config/finanzen.ts` + 1 Bonus-Befund (BBG Ost/West). Konsolidierter Code-Commit `0dd36c0`. Berechnungs-Libs unverändert (waren schon korrekt) — nur Anzeigetexte und FAQ-Antworten gefixt:
+  - Z.71 brutto-netto FAQ: BBG-Ost/West-Hinweis durch bundeseinheitliche Aussage ersetzt (Vereinheitlichung seit 2025).
+  - Z.75 brutto-netto FAQ: Soli-Freigrenze 18.130 → 20.350 € + Splitting 40.700 € + „Jahresbrutto" → „zu versteuerndes Einkommen".
+  - Z.2546 einkommensteuer-rechner Erklärung: Soli-Freigrenze 18.130 → 20.350 € + Splitting.
+  - Z.2867 einkommensteuer-rechner `formel`-Feld: Tarifzonen 2025 → 2026 (Zonen-Grenzen 12.349/17.799/69.878/277.825 + Polynom-Koeffizienten 914,51/173,10 + Subtrahenden 11.135,63/19.470,38 gemäß `TARIF_2026`).
+
+**Konsistenz-Sweep:** „18.130" außerhalb `finanzen.ts` nur in `lib/berechnungen/einkommensteuer.ts:149` (`PARAMS[2024]`, historisch korrekt) und in Audit-Doku-Snapshots (nicht zu fixen). „12,82" alle als historischer Vergleichshinweis akzeptabel. Sweep clean.
+
+**W13-Welle-Werte: 2026-konsistent** ✅. Nächster Schritt: AdSense-Re-Submission durch Karsten.
+
+---
+
 ## AdSense-Welle 13 — Phase B Audit (W13.B Phase A) — 08.05.2026
 
 - **W13.B Phase-A Lib-Werte-Audit** ✅ (nur Befund, keine Code-Edits) — Drift-Prüfung über `lib/berechnungen/*.ts` (30 Konstanten) und `lib/rechner-config/*.ts` (~60 Beispielzahlen-Treffer). Bericht-File: [docs/audit-arbeitspapiere/welle13-b-werte-audit-bericht.md](docs/audit-arbeitspapiere/welle13-b-werte-audit-bericht.md). Bilanz: 30/30 Lib-Konstanten OK (zentrale Berechnungs-Libs sauber, SSOT-Disziplin durchgehalten); in den Konfig-Beispielzahlen 3 DRIFT + 1 UNKLAR. Top-3 DRIFT: (1) `finanzen.ts:75` Soli-Freigrenze 18.130 → 20.350 €, (2) `finanzen.ts:2546` selbe Drift, (3) `finanzen.ts:2867` ESt-Rechner `formel`-Feld mit 2025er-Tarifzonen statt 2026 (Polynom-Koeffizienten und Zonen-Grenzen). UNKLAR: Pendlerpauschale-Soll-Wert im Audit-Prompt war veraltet (Pre-Reform-Staffel statt 0,38 €/km einheitlich seit 01.01.2026) — Code+Konfig sind aber korrekt 2026. Empfohlene Folge-Sprints: W13.B.1 (Soli-Freigrenze, P1) + W13.B.2 (ESt-formel, P1) zusammen ~15 Min, W13.B.3 (Stilistik) optional.
