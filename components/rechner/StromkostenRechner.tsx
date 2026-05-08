@@ -7,7 +7,6 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import StromSpartipp from '@/components/rechner/StromSpartipp';
-import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import { getStrompreis } from '@/lib/berechnungen/strompreis';
 
@@ -184,7 +183,6 @@ export default function StromkostenRechner() {
         <>
           <CrossLink href="/wohnen/stromvergleich-rechner" emoji="🔌" text="Stromanbieter wechseln und bis zu 500 € sparen" />
           <CrossLink href="/wohnen/photovoltaik-rechner" emoji="☀️" text="Eigenen Strom produzieren mit PV-Anlage" />
-          <AffiliateBox programId="check24" context="strom" />
         </>
       )}
     </div>

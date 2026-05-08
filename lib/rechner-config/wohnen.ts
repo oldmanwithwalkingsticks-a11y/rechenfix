@@ -13,6 +13,7 @@ export const wohnenRechner: RechnerConfig[] = [
     icon: '⚡',
     formel: 'Stromkosten = Verbrauch (kWh) × Arbeitspreis (ct/kWh) + Grundpreis × 12',
     beispiel: 'Beispiel: 2.500 kWh × 37 ct/kWh + 12 €/Monat Grundpreis = 1.069 € pro Jahr',
+    affiliate: { programId: 'check24', context: 'strom' },
     erklaerung: `**Stromkosten berechnen — so geht's**
 
 Der Stromkostenrechner berechnet Ihre jährlichen Stromkosten anhand Ihres Verbrauchs und Ihres Tarifs. Die Kosten setzen sich aus zwei Bestandteilen zusammen: dem Arbeitspreis (Cent pro verbrauchte Kilowattstunde) und dem Grundpreis (monatliche Pauschale für den Netzanschluss). Geben Sie einfach Ihren Jahresverbrauch in kWh ein sowie die Preise aus Ihrem Stromvertrag.
@@ -35,7 +36,31 @@ Der Grundpreis deckt die fixen Kosten des Netzbetreibers und liegt typischerweis
 
 **Durchschnittlicher Stromverbrauch nach Haushaltsgröße**
 
-Der Stromverbrauch hängt stark von der Anzahl der Personen im Haushalt und der Warmwasserbereitung ab. In Wohnungen ohne elektrische Warmwasserbereitung verbraucht ein Single etwa 1.300 kWh, mit Durchlauferhitzer steigt der Wert auf 1.800 kWh. Bei vier Personen sind es 3.500 bis 5.000 kWh. In Einfamilienhäusern liegt der Verbrauch meist 20-30% höher als in Wohnungen, da zusätzliche Verbraucher wie Gartenpumpen, Außenbeleuchtung und größere Wohnflächen hinzukommen. Unsere Tabelle zeigt die typischen Durchschnittswerte, die Ihnen als Orientierung dienen.`,
+Der Stromverbrauch hängt stark von der Anzahl der Personen im Haushalt und der Warmwasserbereitung ab. In Wohnungen ohne elektrische Warmwasserbereitung verbraucht ein Single etwa 1.300 kWh, mit Durchlauferhitzer steigt der Wert auf 1.800 kWh. Bei vier Personen sind es 3.500 bis 5.000 kWh. In Einfamilienhäusern liegt der Verbrauch meist 20-30% höher als in Wohnungen, da zusätzliche Verbraucher wie Gartenpumpen, Außenbeleuchtung und größere Wohnflächen hinzukommen. Unsere Tabelle zeigt die typischen Durchschnittswerte, die Ihnen als Orientierung dienen.
+
+**Anwendungsfälle in der Praxis**
+
+Der Stromverbrauch unterscheidet sich nach Lebenssituation und Gebäudetyp deutlich stärker, als die einfache „kWh pro Person"-Faustregel vermuten lässt. Diese sieben Profile decken die häufigsten Konstellationen ab:
+
+- **Single in der Wohnung:** Typisch 1.300–1.800 kWh pro Jahr — Beleuchtung, Kühlschrank, Waschmaschine, Unterhaltungselektronik plus Warmwasser bei Durchlauferhitzer. Bei 37 ct/kWh und 11 €/Monat Grundpreis liegen die Jahreskosten zwischen 612 € und 798 €. Wer viel im Home-Office arbeitet (Laptop, Bildschirm, Heizlüfter) kommt schnell auf 2.000–2.300 kWh.
+- **Familie mit Kindern im EFH:** 4–5-Personen-Haushalte im Einfamilienhaus liegen typisch bei 4.500–6.500 kWh. Der „EFH-Aufschlag" gegenüber Wohnungen beträgt 20–30 % wegen Außenbeleuchtung, Gartenpumpe, Garagentor, mehr Kühl- und Gefriergeräten und größerer beheizter Wohnfläche bei elektrischer Warmwasserbereitung. Bei 37 ct/kWh sind das 1.665–2.405 € Jahresstromkosten — vor E-Auto und Wärmepumpe.
+- **WG-Haushalt:** 3er-WGs verbrauchen oft nur 2.500–3.000 kWh statt der erwarteten 3 × Single-Verbrauch (3.900–5.400 kWh). Grund: gemeinsam genutzte Geräte (ein Kühlschrank, eine Waschmaschine, ein Backofen) und die Tatsache, dass selten alle gleichzeitig zu Hause sind. Der Pro-Kopf-Stromverbrauch ist in WGs deutlich niedriger als in Single-Haushalten.
+- **E-Auto-Haushalt:** Eine Wallbox mit 11 kW Anschluss und 15.000 km Jahresfahrleistung schlägt mit 2.000–3.000 kWh Mehrverbrauch zu Buche (E-Auto-Verbrauch typisch 18 kWh/100 km × 150 = 2.700 kWh). Bei Standardtarif 37 ct/kWh entstehen 740–1.110 € Mehrkosten — mit Wallbox-Spezialtarif (28–32 ct/kWh) deutlich weniger. Lohnt einen separaten Zähler bzw. Sub-Zähler hinter der Wallbox.
+- **Wärmepumpen-Haushalt:** Eine Wärmepumpe für Heizung + Warmwasser braucht je nach Gebäudezustand 3.000–6.000 kWh zusätzlich pro Jahr. Spezielle Wärmepumpen-Stromtarife liegen bei 24–28 ct/kWh (statt 37 ct Haushalts-Standard). Voraussetzung ist ein zweiter, separater Zähler oder ein Smart-Meter mit Wärmepumpen-Modul. Die Tarif-Differenz spart bei 4.000 kWh Wärmepumpen-Verbrauch rund 360–520 €/Jahr.
+- **Home-Office-Effekt:** Tägliches Arbeiten von zu Hause erhöht den Stromverbrauch um 200–500 kWh pro Jahr — Laptop + zwei Monitore (etwa 100–150 W über 8 h × 220 Tage = 175–265 kWh), zusätzliche Heizung im Arbeitszimmer wenn elektrisch, mehr Beleuchtung, Kaffeemaschine, eventuell Heizlüfter. Bei 37 ct/kWh sind das 75–185 € Mehrkosten — eine Position, die viele bei der Tarifvergleich-Schätzung vergessen.
+- **Nachtspeicher-Heizung mit Doppeltarif:** Ältere Häuser mit Nachtspeicher-Öfen haben oft einen zweiten Zähler für Heizstrom mit deutlich günstigerem Nachttarif (typisch 18–22 ct/kWh) gegenüber Tagstrom (37 ct). Der Heizstrom-Verbrauch liegt bei einem 100-m²-Haus schnell bei 8.000–15.000 kWh — die Tarif-Differenz macht 1.200–2.000 €/Jahr aus. Beide Zähler müssen getrennt erfasst und getrennt im Vertrag berücksichtigt werden.
+
+**Häufige Fehler bei der Strom-Berechnung**
+
+Beim Vergleich von Stromtarifen und der Schätzung von Jahreskosten gibt es einige typische Fallstricke — diese sieben treten am häufigsten auf:
+
+- **Brutto- und Netto-Preis verwechseln.** Endkundentarife enthalten 19 % Mehrwertsteuer — der ausgewiesene Preis ist meistens brutto. Manche Anbieter werben aber mit netto-Preisen (besonders bei Geschäftskunden-Marketing für Selbstständige). Wer 31 ct/kWh netto in den Rechner einträgt statt der echten Endabrechnung 36,89 ct brutto, schätzt die Jahreskosten 19 % zu niedrig.
+- **Grundpreis vergessen oder doppelt zählen.** Der Grundpreis (8–15 €/Monat) ist vom Verbrauch unabhängig und wird zusätzlich zum Arbeitspreis berechnet. Manche Tarif-Vergleichsseiten zeigen einen „Mischpreis" pro kWh, der den Grundpreis bei Standardverbrauch bereits einbezieht — wer dann Grundpreis nochmal addiert, doppelt sich. Faustregel: separat eingeben (Arbeitspreis ct/kWh + Grundpreis €/Monat) und den Rechner die Summe bilden lassen.
+- **kWh-Verbrauch grob schätzen statt vom Zähler ablesen.** Schätzwerte aus Haushaltsgrößen-Tabellen können um 30–50 % danebenliegen, je nach Geräte-Effizienz, Heizsystem und Nutzungsverhalten. Vor der Tarifrechnung Zählerstand notieren, gleiches Datum nächstes Jahr wieder ablesen — die Differenz ist der echte Jahresverbrauch. Auf den Stromrechnungen findet sich der Vorjahresverbrauch ebenfalls als Vergleichswert.
+- **Heizstrom mit Haushaltsstrom verrechnen.** Wer Nachtspeicher, Wärmepumpe oder Durchlauferhitzer hat, hat oft einen zweiten Zähler mit anderem Tarif. Beide Verbrauchsmengen in einem Topf zu rechnen führt zu einem unrealistischen Mischpreis und falschen Vergleichen. Heizstrom und Haushaltsstrom getrennt erfassen.
+- **Tarifänderungen unterm Jahr nicht eingerechnet.** Stromanbieter-Wechsel oder Anpassungen mitten im Abrechnungsjahr bedeuten zwei verschiedene Tarife für unterschiedliche Verbrauchsperioden. Der Jahresverbrauch lässt sich nur sauber zuordnen, wenn der Zählerstand zum Wechseltag dokumentiert wird — sonst wird die Berechnung Schätzwerk.
+- **Alte Verbrauchszahlen nach E-Auto- oder Wärmepumpen-Anschaffung weiterverwenden.** Nach einer Wallbox- oder Wärmepumpen-Installation steigt der Jahresverbrauch um 2.000–6.000 kWh — die Tarifrechnung mit dem Vor-Anschaffungs-Wert ist dann grob falsch. Die ersten 12 Monate nach Anschaffung als Übergangsjahr behandeln, dann den realen neuen Verbrauch nutzen.
+- **Dynamische Tarife mit pauschalen Mittelwerten kalkulieren.** Bei dynamischen Tarifen (Tibber, awattar etc.) variiert der Arbeitspreis stündlich nach Börsenstrompreis — der Jahresdurchschnitt liegt typisch 10–25 % unter dem Standardtarif, kann aber je nach Verbrauchsverhalten deutlich abweichen. Wer den Mittelwert in den Rechner eingibt, ohne den Lastprofil-Effekt einzuplanen (Verbrauch tagsüber bei höheren Preisen vs. nachts bei niedrigen), kommt auf eine schöne, aber unrealistische Schätzung.`,
     faq: [
       {
         frage: 'Wie berechnet man Stromkosten?',
@@ -52,6 +77,22 @@ Der Stromverbrauch hängt stark von der Anzahl der Personen im Haushalt und der 
       {
         frage: 'Was verbraucht am meisten Strom im Haushalt?',
         antwort: 'Die größten Stromverbraucher im Haushalt sind: Kühl- und Gefriergeräte (10–15%), Waschmaschine und Trockner (10–15%), Warmwasserbereitung/Durchlauferhitzer (bis 25%), Beleuchtung (8–12%), Unterhaltungselektronik (8–10%) und Kochen (8–10%).',
+      },
+      {
+        frage: 'Wann lohnt sich der Stromanbieter-Wechsel?',
+        antwort: 'Ein Stromanbieter-Wechsel lohnt sich fast immer, wenn man noch in der teureren Grundversorgung ist (rund 40 ct/kWh) oder seit Jahren beim selben Anbieter ohne Tarif-Update bleibt. Der Wechsel zu einem Festpreis-Neukundentarif (33–35 ct/kWh) spart bei einem 3.000-kWh-Haushalt rund 150–250 € pro Jahr; bei 5.000 kWh bis zu 400 €. Der Wechsel ist gesetzlich kostenfrei (§ 41 EnWG), die Kündigungsfrist beim Altanbieter beträgt typisch zwei Wochen zum Monatsende oder, im Sondertarif, mit einer Vertragslaufzeit. Der neue Anbieter kümmert sich um die Abmeldung beim Altanbieter, der Mieter muss nichts weiter tun. Wichtig: Bonusprämien des Neuvertrags realistisch über 24 Monate verteilen, nicht als Rabatt im ersten Jahr verbuchen — manche Anbieter zahlen den Bonus erst nach 12 Monaten Vertragstreue aus.',
+      },
+      {
+        frage: 'Wieviel Strom verbraucht ein E-Auto pro Jahr?',
+        antwort: 'Bei 15.000 km Jahresfahrleistung und einem Mittelklasse-E-Auto mit 18 kWh/100 km Verbrauch (ab Wallbox gemessen, inklusive Ladeverluste) sind das etwa 2.700 kWh pro Jahr. Kleinwagen kommen mit rund 2.250 kWh aus, große SUV oder Sportlimousinen brauchen 3.000–3.500 kWh. Wer überwiegend zu Hause an der Wallbox lädt und 11 kW Anschluss hat, kann einen Wärmepumpen- oder Wallbox-Spezialtarif nutzen (24–32 ct/kWh statt 37 ct Standard) — das spart bei 2.700 kWh rund 135–270 €/Jahr. Mit eigener Photovoltaik-Anlage und intelligentem Laden tagsüber sinken die effektiven Stromkosten weiter, weil ein Teil des Ladestroms aus eigenem Eigenverbrauch stammt. Schnellladen unterwegs (Ionity, EnBW HyperCharger etc.) liegt bei 55–75 ct/kWh und ist deutlich teurer.',
+      },
+      {
+        frage: 'Wie wirkt sich Photovoltaik-Eigenverbrauch auf die Stromkosten aus?',
+        antwort: 'Eine PV-Anlage senkt die Stromkosten in zwei Schritten: Erstens durch direkten Eigenverbrauch des erzeugten Stroms (statt Bezug aus dem Netz, gespart wird der volle Endkundenpreis von 37 ct/kWh), zweitens durch Einspeisevergütung des Überschusses (aktuell 7,78 ct/kWh für Anlagen bis 10 kWp Teilüberschuss, Stand 04/2026). Eine typische 6-kWp-Anlage in Süddeutschland erzeugt 5.500–6.500 kWh/Jahr; ohne Speicher liegt der Eigenverbrauchsanteil bei 25–35 % (etwa 1.700 kWh selbst genutzt), mit Speicher steigt er auf 60–75 % (3.500–4.500 kWh). Bei einem 4-Personen-Haushalt mit 4.000 kWh Jahresverbrauch und Speicher-Anlage decken die Anlage rund 60–70 % des eigenen Verbrauchs — Stromkosten sinken auf rund 600 € (statt 1.480 € ohne PV), zusätzlich gibt es 200–400 € Einspeisevergütung. Die Wirtschaftlichkeit hängt stark vom Speicherpreis und der Eigenverbrauchsquote ab.',
+      },
+      {
+        frage: 'Was sind dynamische Stromtarife und für wen lohnen sie sich?',
+        antwort: 'Dynamische Stromtarife (z. B. Tibber, awattar, Octopus Go) koppeln den Arbeitspreis stündlich an den Börsenstrompreis statt einen Festpreis zu vereinbaren. Der Mieter zahlt einen kleinen Aufschlag (typisch 1–2 ct/kWh) plus den jeweiligen Stundenpreis — der zwischen 5 ct (nachts/Sonntag/viel Wind) und 35 ct (Werktag-Spitzen 18–20 Uhr) schwanken kann. Voraussetzung: ein intelligentes Messsystem (Smart-Meter), das ab 6.000 kWh Verbrauch oder bei E-Auto/Wärmepumpe ohnehin verpflichtend ist. Lohnt sich besonders für Haushalte mit verschiebbarem Verbrauch (Wärmepumpe nachts, E-Auto-Wallbox mit Lade-Steuerung, Geschirrspüler/Waschmaschine zeitlich flexibel) und großem Jahresverbrauch ab 4.000 kWh. Typische Ersparnis: 10–25 % gegenüber Standardtarif. Wer hauptsächlich abends zu den Spitzenzeiten verbraucht und nicht steuern kann, fährt mit Festpreistarif besser. Tools wie Home-Assistant oder das Energie-Management vieler Wallboxen automatisieren das Lastverschieben heute weitgehend.',
       },
     ],
   },
