@@ -8,6 +8,32 @@
 
 ---
 
+## Welle 14 — Multi-Box-Affiliate-Refactor (W14.A.4) — 09.05.2026
+
+- **W14.A.4 Wohnen-Cluster Multi-Box-Migration** ✅ — 7 Components × 2 Boxen = 14 Boxen, alle in `wohnen.ts`. Kein SKIP, ein Compact-Variant-Erhalt, ein Margin-Wrapper-Removal.
+
+  **Migrierte Components (7, alle als Array):**
+
+  | Component | Slug | Boxen |
+  |---|---|---|
+  | BaufinanzierungRechner | `baufinanzierung-rechner` | 2 (check24 + cosmosdirekt `bauherrenhaftpflicht`) |
+  | GrunderwerbsteuerRechner | `grunderwerbsteuer-rechner` | 2 (cosmosdirekt `wohngebaeude` + wiso **`compact`**) |
+  | GrundsteuerRechner | `grundsteuer-rechner` | 2 (wiso + cosmosdirekt `wohngebaeude`) |
+  | MietpreisbremseRechner | `mietpreisbremse-rechner` | 2 (ks-auxilia + cosmosdirekt `hausrat`) |
+  | MietrenditeRechner | `mietrendite-rechner` | 2 (check24 + cosmosdirekt `wohngebaeude`) |
+  | NebenkostenRechner | `nebenkosten-rechner` | 2 (check24 + cosmosdirekt `hausrat`) |
+  | VorfaelligkeitsentschaedigungRechner | `vorfaelligkeitsentschaedigung-rechner` | 2 (check24 + cosmosdirekt `wohngebaeude`) |
+
+  **GrunderwerbsteuerRechner: `variant: 'compact'`** auf der zweiten Box (wiso) explizit übernommen — erstes Beispiel im Cluster A.4 für nicht-Default-Variante in der Array-Konfig. **VorfaelligkeitsentschaedigungRechner: reiner Margin-Wrapper** `<div className="mt-6">` um die 2 Boxen entfernt (analog AfaRechner-Befund A.3, kein Layout-Mischfall).
+
+  **Bilanz:** 7 migriert, 0 SKIP, 0 blockiert. Box-Counts decken sich exakt mit W14.A-Discovery (alle 7 × 2 = 14).
+
+  **Build:** 205/205 grün.
+
+  **Folge-Sub-Sprint:** W14.A.5 Familie/Sozial (Elterngeld, Mutterschutz, Krankengeld, Pflegegeld, Kindergeld, Ueberstunden, Urlaubstage).
+
+---
+
 ## Welle 14 — Multi-Box-Affiliate-Refactor (W14.A.3) — 09.05.2026
 
 - **W14.A.3 Steuer-Cluster II Spezial Multi-Box-Migration** ✅ — 6 Components, ~14 Boxen total, reine Mechanik. Kein Sonderfall im Cluster, kein SKIP. Pattern aus W14.A.1/A.2 unverändert angewendet.
