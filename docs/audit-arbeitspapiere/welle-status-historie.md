@@ -8,6 +8,96 @@
 
 ---
 
+## Welle 14 — Multi-Box-Affiliate-Refactor (W14.A.6 + W14.A-WELLEN-ABSCHLUSS) — 10.05.2026
+
+- **W14.A.6 Vorsorge/Rente-Cluster Multi-Box-Migration (Final)** ✅ — 5 Components, 12 Boxen total. 4 cleane Standard-Migrationen + 1 Hybrid (RentenRechner, neuer Sub-Pattern 4b). Damit ist W14.A komplett abgeschlossen — **L-43 (Multi-Box-Drift) ist repo-weit eliminiert**.
+
+  **Lib-Datei-Verteilung (Pre-Phase-Lookup):**
+
+  | Component | Slug | Lib-Datei |
+  |---|---|---|
+  | KfzSteuerRechner | `kfz-steuer-rechner` | `auto.ts` |
+  | SparRechner | `sparrechner` | `finanzen.ts` |
+  | EtfSparplanRechner | `etf-sparplanrechner` | `finanzen.ts` |
+  | RentenRechner | `rentenrechner` | `finanzen.ts` |
+  | RiesterRechner | `riester-rechner` | `finanzen.ts` |
+
+  **Migrierte Components (4 Standard + 1 Hybrid):**
+
+  | Component | Migration | Boxen |
+  |---|---|---|
+  | RentenRechner | **Hybrid (Pattern 4b)** | 3 ins Array (wiso + burdaZahn `compact` + cosmosdirekt `altersvorsorge` `compact`) + 1 inline conditional (verivox `compact` auf `ergebnis.rentenluecke > 0`) |
+  | RiesterRechner | Array | 2 (verivox + cosmosdirekt `altersvorsorge`) |
+  | SparRechner | Array | 2 (verivox `sparplan` + cosmosdirekt `tagesgeld`) |
+  | EtfSparplanRechner | Array | 2 (verivox `etf` + cosmosdirekt `einmalanlage`) |
+  | KfzSteuerRechner | Array | 2 (check24 + wiso **`compact`**) |
+
+  **RentenRechner: Hybrid (Pattern 4b).** 3 unconditional Boxen (wiso/burdaZahn/cosmosdirekt) ins `config.affiliate`-Array migriert. Box 2 (verivox `compact`, conditional auf `ergebnis.rentenluecke > 0`) bleibt inline an [Component-Z.333](../../components/rechner/RentenRechner.tsx). AdSense-Position-Verbesserung für 3 Boxen, Conditional-Logik der verivox-Privat-Renten-Pitch erhalten. AffiliateBox-Import bleibt im File. **W14-Conversion-Optimization-Backlog:** Re-Eval, ob die conditional verivox-Box durch ein anderes Pitch-Pattern ersetzbar ist (z. B. dynamischer Description-Text statt Conditional).
+
+  **Bilanz W14.A.6:** 5 Components (4 Standard + 1 Hybrid), 0 SKIPs, 0 blockiert. Box-Counts decken sich exakt mit W14.A-Discovery (4/2/2/2/2 = 12).
+
+  **Build:** 205/205 grün.
+
+  ### W14.A WELLEN-BILANZ (Final, 10.05.2026)
+
+  Welle 14 Phase A ist über 6 Sub-Sprints (W14.A.1 bis W14.A.6) komplett. Alle Multi-Box-Components sind entweder migriert oder via vier Sonderfall-Patterns bewusst SKIP/Hybrid.
+
+  **Sprint-Verlauf:**
+  - **W14.A.1** — Type-Refactor + Renderer + 5 Amazon-Multi-Box (Arbeitszeit, Heizkosten, Pendlerpauschale, Spritkosten, Umzugskosten)
+  - **W14.A.2** — Steuer-Cluster I (5 Components migriert + BN SKIP, Steuererstattung-Position-Doku)
+  - **W14.A.3** — Steuer-Cluster II Spezial (6 Components: ErbSt, SchenkSt, KESt, GewSt, Abfindung, Afa)
+  - **W14.A.4** — Wohnen-Cluster (7 Components: Bau, GrunderwerbSt, GrundSt, Mietpreisbremse, Mietrendite, Nebenkosten, Vorfälligkeit)
+  - **W14.A.5** — Familie/Sozial-Cluster (6 Components migriert + ElterngeldRechner SKIP, neue Lehre L-45)
+  - **W14.A.6** — Vorsorge/Rente-Cluster (4 Standard + RentenRechner Hybrid, L-45 verfeinert auf 4a/4b)
+
+  **Pattern-Verteilung (alle SKIPs/Hybrids):**
+
+  | Pattern | Beschreibung | Components |
+  |---|---|---|
+  | **P1 (BN)** — SKIP | Post-FAQ-Position + Pre-Affiliate-Content substantiell, AWIN-Top-Earner | BruttoNettoRechner |
+  | **P2 (Steuererstattung)** — Standard-Migration | Pre-Static-Content + AdSense-Risiko, Custom-Grid-Layout-Verlust akzeptiert | SteuererstattungRechner |
+  | **P3 (Afa, Vorfälligkeit)** — Standard mit Margin-Wrapper-Removal | Reiner Margin-Wrapper ohne Layout-Logik | AfaRechner, VorfaelligkeitsentschaedigungRechner |
+  | **P4a (Elterngeld)** — SKIP | Render-Conditional auf User-Input-State, Mehrheit-Conditional | ElterngeldRechner |
+  | **P4b (Renten)** — Hybrid | Render-Conditional, 3+ Boxen mit Mehrheit-unconditional, einzelne Conditional inline | RentenRechner |
+
+  **Component-Bilanz Phase A:** 31 Components mit Multi-Box-Affiliate-JSX waren in W14.A-Scope.
+  - 28 voll migriert auf `config.affiliate` (Single-Object oder Array)
+  - 2 SKIPs (P1: BN, P4a: Elterngeld) — Inline-JSX vollständig erhalten
+  - 1 Hybrid (P4b: Renten) — 3 Boxen migriert, 1 Box inline conditional
+
+  **L-43 Status: ELIMINIERT.** Künftige Component-Edits, die AffiliateBox/AmazonBox neu hinzufügen, fallen unter Lehre L-46.
+
+  ### Lehre L-45 (verfeinert nach W14.A.6 RentenRechner) — Render-Conditional-Sonderfall, Sub-Pattern 4a/4b
+
+  **4a — Mehrheit-Conditional oder ≤2 Boxen mit Conditional:** SKIP gesamter Component, Inline-JSX bewahrt vollständig. Präzedenz: ElterngeldRechner (1:1 unconditional:conditional).
+
+  **4b — 3+ Boxen mit Mehrheit-unconditional, einzelne Conditional:** Hybrid-Migration. Unconditional-Boxen ins `config.affiliate`-Array, Conditional-Box bleibt inline mit ihrem Render-Block. AffiliateBox-Import bleibt im Component. Source-of-Truth-Splitting ist proportional unkritisch, weil Standard-Pattern dominiert und Sonderfall durch Conditional-JSX selbsterklärend abgegrenzt ist. Präzedenz: RentenRechner (3:1 unconditional:conditional).
+
+  Architektur-Erweiterung um `config.affiliate.condition`-Property weiterhin NICHT vorgenommen — String-basierte Conditional-Eval bleibt fragiler Code-Smell. Sub-Pattern 4a/4b deckt bekannte Fälle sauber ab.
+
+  ### Lehre L-46 — Pre-Phase-grep AffiliateBox/AmazonBox bleibt Pflicht für künftige Component-Edits
+
+  L-43 ist mit W14.A eliminiert, aber das Risiko von neuen Multi-Box-Drifts in künftig hinzugefügten oder umgebauten Components bleibt bestehen. **Pflicht-Disziplin:** bei jedem Component-Edit, der AffiliateBox oder AmazonBox berührt, ein `grep -nE '<AffiliateBox|<AmazonBox' components/rechner/<File>.tsx` als Pre-Phase-Schritt. Bei jedem hartkodierten Treffer entweder:
+
+  1. **Standard-Migration** ins `config.affiliate`-Array (Default für neue/erweiterte Components ohne Custom-Layout/Conditional)
+  2. **Sonderfall-Triage** nach den 4 Patterns (P1 BN-Position-Erhalt, P2 Steuererstattung-Position-Wechsel, P3 Margin-Wrapper-Removal, P4a/P4b Conditional)
+
+  Damit verhindert sich repo-weit, dass Multi-Box-Pattern erneut driften. Im Zweifel STOP, Karsten fragen — die Triage ist mit 5 Präzedenzen (BN, Steuererstattung, Afa, Vorfälligkeit, Elterngeld, Renten) gut belegt.
+
+  ### W14-Backlog (konsolidiert nach Phase-A-Abschluss)
+
+  Folgende Items sind als W14.B / W15 / „Conversion-Optimization-Welle nach AdSense-Approval" reserviert:
+
+  - **BN-Affiliate-Position re-evaluieren** (Pattern P1) — A/B-Test Inline (W13.2-Slot, post-FAQ-pre-Tabelle) vs. Page-Renderer-Slot (Standard-W14.A.1-Pattern, post-Tabelle-post-Beispiele).
+  - **Steuererstattung-Affiliate-Position re-evaluieren** (Pattern P2) — A/B-Test Pre-FAQ-Grid (3-Box, 2-Column auf md+) vs. Post-FAQ-Stack. Bei signifikantem CTR-Vorteil: Renderer-Erweiterung um `config.affiliateLayout`-Hint prüfen.
+  - **Conditional-Render-Pattern repo-weit kartieren** (Pattern P4) — bei ≥3 weiteren Fundstellen mit Struktur `{state && condition && <AffiliateBox />}` Architektur-Erweiterung erwägen (Type-sicherer Discriminated Union statt String-Eval). Aktueller Stand: 2 Fundstellen (Elterngeld, Renten verivox-Box).
+  - **RentenRechner verivox-Conditional Re-Eval** (Pattern P4b) — prüfen, ob die conditional verivox-Box durch ein anderes Pitch-Pattern ersetzbar ist (z. B. dynamischer Description-Text statt Conditional). Bei Lösung wäre RentenRechner vollständig auf P-Standard hebbar.
+  - **Slug-Konsistenz-Audit** — drei Slugs ohne Bindestrich (`sparrechner`, `rentenrechner`, `etf-sparplanrechner` hybrid), zwei mit (`kfz-steuer-rechner`, `riester-rechner`). Audit + Konsolidierung NACH AdSense-Approval, mit 301-Redirects für alte URLs. Während AdSense-Review nicht anfassen (URL-Konsistenz wäre Reject-Risiko).
+
+  **Nächster Schritt nach W14.A-Abschluss:** AdSense-Submission-Status checken / Backlinks / 50-Ideen-Liste / Long-Tail-Pages-Phase-1 (nach AdSense-Approval).
+
+---
+
 ## Welle 14 — Multi-Box-Affiliate-Refactor (W14.A.5) — 10.05.2026
 
 - **W14.A.5 Familie/Sozial-Cluster Multi-Box-Migration** ✅ — 7 Components × 2 Boxen = 14 Boxen, gemischt `arbeit.ts` (3) + `finanzen.ts` (4). 6 migriert, 1 SKIP (ElterngeldRechner — neuer Sonderfall-Pattern 4).
