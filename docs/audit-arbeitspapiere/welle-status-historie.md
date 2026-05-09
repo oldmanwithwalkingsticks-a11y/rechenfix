@@ -8,6 +8,44 @@
 
 ---
 
+## Welle 14 — Multi-Box-Affiliate-Refactor (W14.A.2) — 09.05.2026
+
+- **W14.A.2 Steuer-Cluster I Multi-Box-Migration** ✅ — 5 von 6 Cluster-Components auf das W14.A.1-Pattern (`config.affiliate` als Single-Object oder Array) migriert. BN als bewusstes SKIP erhalten.
+
+  **Migrierte Components (5):**
+
+  | Component | Slug | Migration | Boxen |
+  |---|---|---|---|
+  | EinkommensteuerRechner | `einkommensteuer-rechner` | Array | 2 (wiso + smartsteuer) |
+  | LohnsteuerRechner | `lohnsteuer-rechner` | Single-Object | 1 (wiso) |
+  | SplittingRechner | `splitting-rechner` | Array | 2 (wiso + smartsteuer) |
+  | SteuererstattungRechner | `steuererstattung-rechner` | Array | 3 (wiso `full` + smartsteuer `full` + cosmosdirekt `tagesgeld`) |
+  | SteuerklassenVergleichRechner | `steuerklassen-vergleich-rechner` | Single-Object | 1 (wiso) |
+
+  Alle in `lib/rechner-config/finanzen.ts`. JSX + Imports in den Components vollständig entfernt.
+
+  **SteuererstattungRechner: Standard-Migration trotz Custom-Grid-Layout.** Position-Wechsel von Calculator-Block (Pre-Static-Content, zwischen `ErgebnisAktionen` und `AiExplain`) zu Page-Slot (Post-FAQ via Standard-Renderer) bewusst gewählt — AdSense-Risiko-Reduktion priorisiert über Layout-Erhalt. Das ehemalige `<div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">`-Wrapper-Element komplett entfernt; 3 Boxen werden im Page-Slot vertikal gestackt. CTR-Re-Eval als W14-Backlog vermerkt (siehe unten).
+
+  **BN (BruttoNettoRechner): SKIP-erneuert (W14.A.2 OP-A5 SKIP).** BruttoNettoRechner.tsx Z. 741–747 bleibt UNVERÄNDERT (Inline-JSX-Fragment mit wiso + smartsteuer). `finanzen.ts` Brutto-Netto-Eintrag bekommt KEIN `affiliate`-Property.
+
+    **Echter Grund nach Pre-Phase-Befund:** Position-Erhalt zwischen FAQ und Brutto-Netto-Tabelle als bewusster CTR-Slot. WISO + smartsteuer sind AWIN-Top-Earner auf dem traffic-stärksten Rechner der Site. Bei Migration würde die Affiliate-Position via Standard-Page-Renderer ~2 Sektionen nach unten rutschen (hinter Brutto-Netto-Tabelle und Beliebte-Gehaltsbeispiele-Card) — Conversion-Verschlechterung ohne klaren AdSense-Mehrwert (substanzielle `erklaerung` + FAQ stehen ohnehin vor den Boxen).
+
+    Die ursprüngliche W13.2-OP-A5-Begründung „2-Box-Custom-Card mit besonderem Styling" war ungenau. Tatsächlicher historischer Grund: `config.affiliate?: { programId, context }` war damals Single-Object und konnte nur eine Box transportieren. Mit W14.A.1-Union-Type wurde diese Limitation aufgelöst — der SKIP ist seitdem keine Architektur-Zwangs-Entscheidung mehr, sondern bewusste Layout-Entscheidung.
+
+    **Re-Evaluation:** nach AdSense-Approval als Teil der W14-Conversion-Optimization-Welle (A/B-Test Position 4 vs. Position 6, mit echten Conversion-Daten).
+
+  **Bilanz:** 5 migriert, 1 SKIP (BN), 0 blockiert. Pattern aus W14.A.1 ist SSOT — Mechanik durchgezogen, Mischfall-STOP einmal ausgelöst (Steuererstattung Custom-Grid → Karsten-Entscheidung A: Standard-Migration).
+
+  **Build:** 205/205 grün.
+
+  **Folge-Sub-Sprints:** W14.A.3 Steuer-Cluster II Spezial (Erbschaft, Schenkung, Kapitalertrag, Gewerbesteuer, Abfindung, Afa) — reine Mechanik, gleiches Pattern, kein erwarteter Sonderfall.
+
+  **W14-Backlog (Conversion-Optimization-Welle nach AdSense-Approval):**
+  - **BN-Affiliate-Position re-evaluieren** — Conversion-Optimization-Welle, A/B-Test Inline (W13.2-Slot, post-FAQ-pre-Tabelle) vs. Page-Renderer-Slot (Standard-W14.A.1-Pattern, post-Tabelle-post-Beispiele).
+  - **Steuererstattung-Affiliate-Position re-evaluieren** — Conversion-Optimization-Welle. A/B-Test Pre-FAQ-Grid (3-Box, 2-Column auf md+) vs. Post-FAQ-Stack. Bei signifikantem CTR-Vorteil des Grids: Renderer-Erweiterung um `affiliate`-Layout-Hint (z. B. `config.affiliateLayout: 'grid-2col' | 'stack'`) prüfen.
+
+---
+
 ## Welle 14 — Multi-Box-Affiliate-Refactor (W14.A.1) — 09.05.2026
 
 - **W14.A.1 Type-Refactor + Renderer + 5 Amazon-Multi-Box-Migration** ✅ — Multi-Box-Drift (L-43) durch Union-Type `RechnerConfig.affiliate: AffiliateConfig | AffiliateConfig[]` und neue Property `amazonProducts?: AmazonProductConfig[]` geschlossen. AdSense-neutral: Render-Output identisch, nur Source-of-Truth wechselt vom Component in die Lib-Konfig.
