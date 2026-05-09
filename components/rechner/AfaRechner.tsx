@@ -11,7 +11,6 @@ import {
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
-import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 type Methode = AfaMethode;
@@ -266,10 +265,6 @@ export default function AfaRechner() {
         }}
       />
 
-      <div className="mt-6">
-        <AffiliateBox programId="lexware" context="afa" />
-        <AffiliateBox programId="cosmosdirekt" context="wohngebaeude" />
-      </div>
     </div>
   );
 }

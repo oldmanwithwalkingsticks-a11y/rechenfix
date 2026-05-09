@@ -5,7 +5,6 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
-import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import { BUNDESLAENDER, kirchensteuersatzFuer, type Bundesland } from '@/lib/berechnungen/einkommensteuer';
@@ -331,9 +330,6 @@ export default function KapitalertragsteuerRechner() {
         ergebnisText={`Kapitalertragsteuer: Bei ${fmt0(nErtrag)} € ${art.label} = ${fmt0(ergebnis.steuerGesamt)} € Steuern (effektiv ${ergebnis.effektiverSatz.toFixed(2)} %) → Netto ${fmt0(ergebnis.nettoErtrag)} €`}
         seitenTitel="Kapitalertragsteuer-Rechner"
       />
-
-      <AffiliateBox programId="verivox" context="kapitalertrag" />
-      <AffiliateBox programId="cosmosdirekt" context="tagesgeld" />
 
       <AiExplain
         rechnerName="Kapitalertragsteuer-Rechner"

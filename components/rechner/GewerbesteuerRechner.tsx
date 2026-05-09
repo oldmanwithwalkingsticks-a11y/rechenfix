@@ -7,7 +7,6 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
-import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -275,9 +274,6 @@ export default function GewerbesteuerRechner() {
         ergebnisText={`Gewerbesteuer: ${fmtEuro(ergebnis.gewerbesteuer)} € | Gewinn: ${fmtEuro0(ergebnis.gewinn)} € | Hebesatz: ${fmtEuro0(ergebnis.hebesatz)} % | Steuermessbetrag: ${fmtEuro(ergebnis.steuermessbetrag)} €${ergebnis.hatAnrechnung ? ` | ESt-Anrechnung: ${fmtEuro(ergebnis.estAnrechnung)} € | Effektive Belastung: ${fmtEuro(ergebnis.effektiveBelastung)} €` : ''}`}
         seitenTitel="Gewerbesteuer-Rechner"
       />
-
-      <AffiliateBox programId="lexware" context="gewerbesteuer" />
-      <AffiliateBox programId="wiso" context="gewerbesteuer" />
 
       <AiExplain
         rechnerName="Gewerbesteuer-Rechner"

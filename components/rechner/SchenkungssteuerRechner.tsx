@@ -13,7 +13,6 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
-import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 const VERWANDTSCHAFT_OPTIONEN: { value: SchenkungsVerwandtschaft; label: string; kl: string }[] = [
@@ -255,10 +254,6 @@ export default function SchenkungssteuerRechner() {
         ergebnisText={`Schenkungssteuer: ${fmtEuro(ergebnis.schenkungssteuer)} € | Schenkungswert: ${fmtEuro(ergebnis.schenkungswert)} € | Freibetrag: ${fmtEuro(ergebnis.freibetrag)} € | Steuerklasse ${ergebnis.steuerklasse}, Satz ${ergebnis.steuersatz} % | Effektiv: ${fmtProzent(ergebnis.effektiverSteuersatz)} % | Netto: ${fmtEuro(ergebnis.nettoSchenkung)} €`}
         seitenTitel="Schenkungssteuer-Rechner"
       />
-
-      <AffiliateBox programId="wiso" context="schenkungssteuer" />
-      <AffiliateBox programId="smartsteuer" context="schenkungssteuer" />
-      <AffiliateBox programId="cosmosdirekt" context="tagesgeld" />
 
       <AiExplain
         rechnerName="Schenkungssteuer-Rechner"

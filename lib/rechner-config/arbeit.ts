@@ -892,6 +892,10 @@ Für die Berechnung Ihrer Kündigungsfrist nutzen Sie unseren [Kündigungsfrist-
         antwort: 'Wenn ein Arbeitnehmer mit einer Kündigungsschutzklage erfolgreich ist (die Kündigung also unwirksam war), das Arbeitsverhältnis aber durch den Prozess so belastet ist, dass eine Fortsetzung unzumutbar erscheint, kann das Arbeitsgericht auf seinen Antrag (§ 9 KSchG) die Auflösung gegen Zahlung einer Abfindung anordnen. Die Höchstgrenzen nach § 10 KSchG: bis zu 12 Monatsverdienste; bis zu 15 Monatsverdienste, wenn der Arbeitnehmer mindestens 50 Jahre alt ist und mindestens 15 Jahre Betriebszugehörigkeit hat; bis zu 18 Monatsverdienste, wenn er mindestens 55 Jahre alt ist und mindestens 20 Jahre Betriebszugehörigkeit hat. Es handelt sich um Höchstgrenzen, die das Gericht im Einzelfall ausschöpft oder unterschreitet — nicht um einen gesetzlichen Mindestanspruch.',
       },
     ],
+    affiliate: [
+      { programId: 'ks-auxilia', context: 'abfindung' },
+      { programId: 'wiso', context: 'abfindung' },
+    ],
   },
   {
     slug: 'mutterschutz-rechner',

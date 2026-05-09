@@ -6,7 +6,6 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
-import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 export default function AbfindungsRechner() {
@@ -260,9 +259,6 @@ export default function AbfindungsRechner() {
 
           <CrossLink href="/arbeit/kuendigungsfrist-rechner" emoji="📅" text="Kündigungsfrist berechnen" />
           <CrossLink href="/finanzen/steuererstattung-rechner" emoji="💰" text="Fünftelregelung? Steuererstattung berechnen" />
-
-          <AffiliateBox programId="ks-auxilia" context="abfindung" />
-          <AffiliateBox programId="wiso" context="abfindung" />
 
           <ErgebnisAktionen
             ergebnisText={`Abfindung: ${fmt(ergebnis.bruttoAbfindung)} € brutto → ${fmt(ergebnis.nettoMitFuenftel)} € netto (Fünftelregelung) | Steuerersparnis: ${fmt(ergebnis.steuerErsparnis)} € gegenüber Normalbesteuerung`}

@@ -1663,6 +1663,11 @@ Das ErbStG unterscheidet drei **Steuerklassen**: Klasse I (enge Verwandte wie Eh
         antwort: 'Klasse I: Ehepartner, Kinder, Enkel, Eltern/Großeltern (bei Erbschaft) — Sätze 7–30 %. Klasse II: Geschwister, Nichten, Neffen, Stiefeltern, Schwiegereltern, geschiedene Ehepartner, Eltern (bei Schenkung) — Sätze 15–43 %. Klasse III: Alle anderen, auch nicht verwandte Lebenspartner — Sätze 30–50 %. Je höher die Steuerklasse, desto höher auch der Steuersatz bei gleichem Erwerb.',
       },
     ],
+    affiliate: [
+      { programId: 'wiso', context: 'erbschaft' },
+      { programId: 'smartsteuer', context: 'erbschaft' },
+      { programId: 'cosmosdirekt', context: 'sterbegeld' },
+    ],
   },
   {
     slug: 'minijob-rechner',
@@ -2310,6 +2315,10 @@ Verluste aus Kapitalvermögen werden bei Ihrer Bank in einem separaten Verlustve
         antwort: 'Ja. Nach § 32d EStG mindert die gezahlte Kirchensteuer die Bemessungsgrundlage der Abgeltungssteuer (sie wirkt wie eine Sonderausgabe). Deshalb liegt die effektive Abgeltungssteuer mit KiSt nicht bei 25 + 2 %, sondern bei rund 24,45 %. Die Gesamtbelastung inkl. Soli und KiSt beträgt etwa 27,82 % (8 % KiSt) bzw. 27,99 % (9 % KiSt).',
       },
     ],
+    affiliate: [
+      { programId: 'verivox', context: 'kapitalertrag' },
+      { programId: 'cosmosdirekt', context: 'tagesgeld' },
+    ],
   },
   {
     slug: 'afa-rechner',
@@ -2382,6 +2391,10 @@ Als Selbstständige oder Unternehmerin sollten Sie Ihre Anlagegüter sauber in e
         frage: 'Gilt die AfA auch für Vermieter?',
         antwort: 'Ja. Vermieter einer Immobilie können die Gebäude-AfA als Werbungskosten in der Anlage V geltend machen. Für Bestandsgebäude gelten 2 % (Baujahr ab 1925) oder 2,5 % (älter). Für neue Wohngebäude ab Baujahr 2023 sind es 3 % linear, optional 5 % degressiv in den ersten Jahren. Der Grundstücksanteil wird nicht abgeschrieben — er muss aus dem Kaufpreis herausgerechnet werden. Die AfA ist bei vermieteten Immobilien einer der größten steuerlichen Hebel.',
       },
+    ],
+    affiliate: [
+      { programId: 'lexware', context: 'afa' },
+      { programId: 'cosmosdirekt', context: 'wohngebaeude' },
     ],
   },
   {
@@ -2804,6 +2817,11 @@ Sowohl Schenker als auch Beschenkter müssen die Schenkung innerhalb von drei Mo
         antwort: 'Das Finanzamt bewertet Immobilien nach dem Bewertungsgesetz (BewG) — entweder im Vergleichswertverfahren, Ertragswertverfahren oder Sachwertverfahren. Der ermittelte Wert liegt oft unter dem tatsächlichen Marktwert. Sie können ein eigenes Gutachten vorlegen, wenn der Finanzamtswert zu hoch ausfällt.',
       },
     ],
+    affiliate: [
+      { programId: 'wiso', context: 'schenkungssteuer' },
+      { programId: 'smartsteuer', context: 'schenkungssteuer' },
+      { programId: 'cosmosdirekt', context: 'tagesgeld' },
+    ],
   },
   {
     slug: 'gewerbesteuer-rechner',
@@ -2879,6 +2897,10 @@ Die Gewerbesteuererklärung muss bis zum 31. Juli des Folgejahres beim Finanzamt
         frage: 'Wie hoch ist der durchschnittliche Hebesatz in Deutschland?',
         antwort: 'Der bundesweite Durchschnitt liegt bei etwa 400 %. In Großstädten wie München (490 %), Frankfurt (460 %) oder Berlin (410 %) ist er höher. Ländliche Gemeinden liegen oft bei 300–350 %. Einige kleine Gemeinden bieten den Mindesthebesatz von 200 %.',
       },
+    ],
+    affiliate: [
+      { programId: 'lexware', context: 'gewerbesteuer' },
+      { programId: 'wiso', context: 'gewerbesteuer' },
     ],
   },
   {

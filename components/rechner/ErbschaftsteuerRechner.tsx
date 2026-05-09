@@ -12,7 +12,6 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
-import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
@@ -340,10 +339,6 @@ export default function ErbschaftsteuerRechner() {
         ergebnisText={`${erwerbsart === 'erbschaft' ? 'Erbschaftsteuer' : 'Schenkungsteuer'}: ${fmtEuro(ergebnis.steuerbetrag)} € | Wert: ${fmtEuro(ergebnis.wert)} € | Freibetrag: ${fmtEuro(ergebnis.gesamtFreibetrag)} € | Steuerklasse ${ergebnis.steuerklasse}, Satz ${ergebnis.steuersatz}% | Netto: ${fmtEuro(ergebnis.nettoErbschaft)} €`}
         seitenTitel="Erbschaftsteuer-Rechner"
       />
-
-      <AffiliateBox programId="wiso" context="erbschaft" />
-      <AffiliateBox programId="smartsteuer" context="erbschaft" />
-      <AffiliateBox programId="cosmosdirekt" context="sterbegeld" />
 
       <AiExplain
         rechnerName="Erbschaftsteuer-Rechner"
