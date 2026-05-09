@@ -4,7 +4,37 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 08.05.2026
+**Stand:** 09.05.2026
+
+---
+
+## Welle 14 — Multi-Box-Affiliate-Refactor (W14.A.1) — 09.05.2026
+
+- **W14.A.1 Type-Refactor + Renderer + 5 Amazon-Multi-Box-Migration** ✅ — Multi-Box-Drift (L-43) durch Union-Type `RechnerConfig.affiliate: AffiliateConfig | AffiliateConfig[]` und neue Property `amazonProducts?: AmazonProductConfig[]` geschlossen. AdSense-neutral: Render-Output identisch, nur Source-of-Truth wechselt vom Component in die Lib-Konfig.
+
+  **Type-Refactor** (`lib/rechner-config/types.ts`): neue Interfaces `AffiliateConfig` (mit `variant?: 'compact' | 'full'`) und `AmazonProductConfig` extrahiert. Single-Object-Form bleibt abwärtskompatibel (mwst, festgeld unverändert).
+
+  **Renderer-Update** (`app/[kategorie]/[rechner]/page.tsx` Z. 565–599): Array-Check via `Array.isArray(config.affiliate)` mit `.map()` für Mehrfach, plus Fragment-Block für `config.amazonProducts?.map(...)`. AmazonBox-Import ergänzt.
+
+  **Migrierte Components (5):**
+
+  | Component | Slug | Konfig | Box-Counts |
+  |---|---|---|---|
+  | ArbeitszeitRechner | `arbeitszeitrechner` | `arbeit.ts` | 1 Aff (compact) + 1 Amz |
+  | HeizkostenRechner | `heizkosten-rechner` | `wohnen.ts` | 1 Aff + 1 Amz |
+  | PendlerpauschaleRechner | `pendlerpauschale-rechner` | `arbeit.ts` | 1 Aff + 1 Amz |
+  | SpritkostenRechner | `spritkosten-rechner` | `auto.ts` | 2 Aff (compact, Array) + 1 Amz |
+  | UmzugskostenRechner | `umzugskosten-rechner` | `alltag.ts` | 1 Aff + 1 Amz |
+
+  Spritkosten ist der erste Slug mit `affiliate`-Array (≥ 2 AffiliateBoxen). Imports + JSX in den Components vollständig entfernt, Lib-Konfig mit `affiliate` + `amazonProducts` befüllt.
+
+  **Bonus-Fix** (Build-Unblocker): `scripts/slug-drift-scan.mjs` `EXCLUDE_DIRS` um `.claude/` erweitert — Worktree-Kopien unter `.claude/worktrees/` triggerten False-Positives in untracked Worktree-Dateien.
+
+  **Build:** 205/205 grün. **Scoping-Doc:** [docs/audit-arbeitspapiere/scoping-w14-a-1.md](scoping-w14-a-1.md).
+
+  **Folge-Sub-Sprints (reine Mechanik nach Erfolg):** W14.A.2 Steuer-Cluster I, W14.A.3 Steuer-Cluster II, W14.A.4 Wohnen, W14.A.5 Familie/Sozial, W14.A.6 Vorsorge/Rente.
+
+  **Lehre L-44 — Multi-Box-Affiliate-Pattern:** Multi-Box-Affiliate via Union-Type `config.affiliate (AffiliateConfig | AffiliateConfig[])` und neuer Property `amazonProducts`. Renderer in `page.tsx` Z. ~567 mit Array-Check. **L-43 (Multi-Box-Drift) durch L-44 obsolet** — gilt: jeder AffiliateBox/AmazonBox-Treffer bei Pre-Phase wird im Sprint migriert, unabhängig von Anzahl. **L-42 erweitert auf Array-Form:** Single-Box bleibt `config.affiliate` (Object), Multi-Box wird `config.affiliate` (Array), AmazonBox via `config.amazonProducts`.
 
 ---
 
