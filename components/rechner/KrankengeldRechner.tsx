@@ -5,7 +5,6 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
-import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import { BBG_KV_MONAT } from '@/lib/berechnungen/brutto-netto';
@@ -175,8 +174,6 @@ export default function KrankengeldRechner() {
         }}
       />
 
-      <AffiliateBox programId="burdaZahn" context="krankengeld" />
-      <AffiliateBox programId="cosmosdirekt" context="berufsunfaehigkeit" />
     </div>
   );
 }

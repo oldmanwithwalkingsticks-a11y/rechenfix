@@ -7,7 +7,6 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
-import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 function toIso(d: Date): string {
@@ -303,9 +302,6 @@ export default function MutterschutzRechner() {
           </div>
 
           <CrossLink href="/finanzen/elterngeld-rechner" emoji="💰" text="Elterngeld berechnen — wie viel steht Ihnen zu?" />
-
-          <AffiliateBox programId="wiso" context="mutterschutz" />
-          <AffiliateBox programId="cosmosdirekt" context="risikolebensversicherung" />
 
           <ErgebnisAktionen
             ergebnisText={`Mutterschutz: ${fmtDatumKurz(ergebnis.beginn)} bis ${fmtDatumKurz(ergebnis.ende)} (${ergebnis.gesamtTage} Tage) | Einkommen: ${fmt(ergebnis.einkommenMonat)} €/Monat | Gesamt: ${fmt(ergebnis.gesamtEinkommen)} €`}

@@ -11,7 +11,6 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
-import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 export default function KindergeldRechner() {
@@ -281,9 +280,6 @@ export default function KindergeldRechner() {
             ergebnisText={`Kindergeld: ${fmtEuro(ergebnis.kindergeldMonat)} €/Monat (${fmtEuro(ergebnis.kindergeldJahr)} €/Jahr) für ${anzahlKinder} ${anzahlKinder === 1 ? 'Kind' : 'Kinder'} | Günstiger: ${ergebnis.gewinner === 'kindergeld' ? 'Kindergeld' : 'Kinderfreibetrag'} | Steuerersparnis Freibetrag: ${fmtEuro(ergebnis.steuerersparnisFreibetrag)} €`}
             seitenTitel="Kindergeld-Rechner"
           />
-
-          <AffiliateBox programId="wiso" context="kindergeld" />
-          <AffiliateBox programId="cosmosdirekt" context="juniorSparplan" />
 
           <AiExplain
             rechnerName="Kindergeld-Rechner"

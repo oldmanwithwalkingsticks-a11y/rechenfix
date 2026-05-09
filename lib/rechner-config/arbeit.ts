@@ -190,6 +190,10 @@ Unser Rechner berücksichtigt den Schwerbehinderten-Zusatzurlaub automatisch und
         antwort: 'Nein — der Rechner rundet § 5 Abs. 2 BUrlG-konform auf ganze Urlaubstage. Bruchteile ab einem halben Tag werden auf den nächsten ganzen Tag aufgerundet, kleinere Bruchteile abgerundet. Beispiel: 13,5 Tage → 14 Tage. Eine Rundung auf halbe Tage ist eine vertragliche Kulanzregelung mancher Arbeitgeber, gesetzlich nicht vorgeschrieben.',
       },
     ],
+    affiliate: [
+      { programId: 'ks-auxilia', context: 'urlaubstage' },
+      { programId: 'hotelde', context: 'urlaubstage', variant: 'compact' },
+    ],
   },
   {
     slug: 'ueberstunden-rechner',
@@ -280,6 +284,10 @@ In der Praxis bedeutet das: Bei einer 40-Stunden-Woche und 5 Arbeitstagen sind m
         frage: 'Wie werden Überstunden versteuert?',
         antwort: 'Überstundenvergütung ist normales Arbeitsentgelt und wird regulär versteuert und sozialversichert. Es gibt keinen Steuerfreibetrag für Überstunden. Nur bestimmte Zuschläge (Sonn-, Feiertags- und Nachtarbeit) können nach § 3b EStG steuerfrei sein.',
       },
+    ],
+    affiliate: [
+      { programId: 'ks-auxilia', context: 'ueberstunden' },
+      { programId: 'lexware', context: 'ueberstunden', variant: 'compact' },
     ],
   },
   {
@@ -1001,6 +1009,10 @@ Nutzen Sie unseren [Geburtstermin-Rechner](/gesundheit/geburtstermin-rechner), u
         frage: 'Was gilt bei einer Totgeburt?',
         antwort: 'Eine Totgeburt liegt vor, wenn das Kind ab einem Gewicht von 500 g oder ab der vollendeten 24. Schwangerschaftswoche ohne Lebenszeichen geboren wird. Es gilt eine Schutzfrist von 8 Wochen nach der Geburt; der Mehrlings- oder Frühgeburts-Bonus (12 Wochen) greift bei einer Totgeburt nicht. Der erweiterte Kündigungsschutz nach § 17 MuSchG bleibt erhalten. Der Nachweis erfolgt seit 01.01.2026 über das bundeseinheitliche Muster 9.',
       },
+    ],
+    affiliate: [
+      { programId: 'wiso', context: 'mutterschutz' },
+      { programId: 'cosmosdirekt', context: 'risikolebensversicherung' },
     ],
   },
   {

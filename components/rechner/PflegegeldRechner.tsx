@@ -11,7 +11,6 @@ import {
 } from '@/lib/berechnungen/pflegegeld';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
-import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
@@ -299,8 +298,6 @@ export default function PflegegeldRechner() {
         }}
       />
 
-      <AffiliateBox programId="burdaZahn" context="pflegegeld" />
-      <AffiliateBox programId="cosmosdirekt" context="tagesgeld" />
     </div>
   );
 }

@@ -1543,6 +1543,10 @@ Neben Kindergeld und Kinderfreibetrag gibt es weitere Hilfen: den **Kinderzuschl
         antwort: 'Ja, wenn Sie vom Kinderfreibetrag profitieren. Das Finanzamt berechnet die Steuer mit Kinderfreibetrag und zieht dann das bereits gezahlte Kindergeld von der Steuerersparnis ab. Ist der Freibetrag günstiger, erhalten Sie die Differenz erstattet. Ist das Kindergeld günstiger, bleibt es bei der Auszahlung durch die Familienkasse und der Freibetrag wird nicht angewendet.',
       },
     ],
+    affiliate: [
+      { programId: 'wiso', context: 'kindergeld' },
+      { programId: 'cosmosdirekt', context: 'juniorSparplan' },
+    ],
   },
   {
     slug: 'pflegegeld-rechner',
@@ -1604,6 +1608,10 @@ Neben dem Pflegegeld haben alle Pflegegrade (auch Grad 1) Anspruch auf den **Ent
         frage: 'Wie beantrage ich einen höheren Pflegegrad?',
         antwort: 'Formlos per Brief, Telefon oder Online-Formular bei der Pflegekasse der eigenen Krankenkasse. Die Kasse beauftragt den MD mit einer erneuten Begutachtung. Tipp: Führen Sie vorher ein Pflegetagebuch über 1–2 Wochen, in dem Sie alle Hilfen und den zeitlichen Aufwand dokumentieren. Das hilft bei der Begutachtung. Bei Ablehnung haben Sie einen Monat Zeit für einen kostenfreien Widerspruch.',
       },
+    ],
+    affiliate: [
+      { programId: 'burdaZahn', context: 'pflegegeld' },
+      { programId: 'cosmosdirekt', context: 'tagesgeld' },
     ],
   },
   {
@@ -1847,6 +1855,10 @@ Für die Berechnung Ihres regulären Nettogehalts nutzen Sie den Brutto-Netto-Re
         frage: 'Was kommt nach 78 Wochen Krankengeld?',
         antwort: 'Nach Ablauf der 78 Wochen endet der Krankengeldanspruch (Aussteuerung). Je nach Situation kommen dann in Frage: Arbeitslosengeld (wenn Sie wieder arbeitsfähig sind), Erwerbsminderungsrente (wenn nicht) oder Bürgergeld (als Grundsicherung). Ein Antrag auf Reha-Maßnahmen ist oft der erste Schritt.',
       },
+    ],
+    affiliate: [
+      { programId: 'burdaZahn', context: 'krankengeld' },
+      { programId: 'cosmosdirekt', context: 'berufsunfaehigkeit' },
     ],
   },
   {

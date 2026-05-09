@@ -9,7 +9,6 @@ import {
 } from '@/lib/berechnungen/urlaubstage';
 import { clampInputValue } from '@/lib/zahlenformat';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
-import { AffiliateBox } from '@/components/AffiliateBox';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 
@@ -397,13 +396,6 @@ export default function UrlaubstageRechner() {
             </div>
           )}
         </div>
-      )}
-
-      {(anspruchErgebnis || resturlaubErgebnis) && (
-        <>
-          <AffiliateBox programId="ks-auxilia" context="urlaubstage" />
-          <AffiliateBox programId="hotelde" context="urlaubstage" variant="compact" />
-        </>
       )}
 
       {/* Disclaimer */}

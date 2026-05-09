@@ -8,7 +8,6 @@ import {
 import { clampInputValue } from '@/lib/zahlenformat';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
-import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 const BUNDESLAENDER = [
@@ -497,13 +496,6 @@ export default function UeberstundenRechner() {
             </div>
           )}
         </div>
-      )}
-
-      {(ergebnis1 || ergebnis2) && (
-        <>
-          <AffiliateBox programId="ks-auxilia" context="ueberstunden" />
-          <AffiliateBox programId="lexware" context="ueberstunden" variant="compact" />
-        </>
       )}
 
       {/* Disclaimer */}
