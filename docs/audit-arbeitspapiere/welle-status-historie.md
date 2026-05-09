@@ -8,6 +8,56 @@
 
 ---
 
+## Welle 14 — Multi-Box-Affiliate-Refactor (W14.A.5) — 10.05.2026
+
+- **W14.A.5 Familie/Sozial-Cluster Multi-Box-Migration** ✅ — 7 Components × 2 Boxen = 14 Boxen, gemischt `arbeit.ts` (3) + `finanzen.ts` (4). 6 migriert, 1 SKIP (ElterngeldRechner — neuer Sonderfall-Pattern 4).
+
+  **Lib-Datei-Verteilung (Pre-Phase-Lookup):**
+
+  | Component | Lib-Datei |
+  |---|---|
+  | UrlaubstageRechner, UeberstundenRechner, MutterschutzRechner | `arbeit.ts` |
+  | ElterngeldRechner, KindergeldRechner, PflegegeldRechner, KrankengeldRechner | `finanzen.ts` |
+
+  **Migrierte Components (6, alle als Array):**
+
+  | Component | Slug | Boxen |
+  |---|---|---|
+  | MutterschutzRechner | `mutterschutz-rechner` | 2 (wiso + cosmosdirekt `risikolebensversicherung`) |
+  | KrankengeldRechner | `krankengeld-rechner` | 2 (burdaZahn + cosmosdirekt `berufsunfaehigkeit`) |
+  | PflegegeldRechner | `pflegegeld-rechner` | 2 (burdaZahn + cosmosdirekt `tagesgeld`) |
+  | KindergeldRechner | `kindergeld-rechner` | 2 (wiso + cosmosdirekt `juniorSparplan`) |
+  | UeberstundenRechner | `ueberstunden-rechner` | 2 (ks-auxilia + lexware **`compact`**) |
+  | UrlaubstageRechner | `urlaubstage-rechner` | 2 (ks-auxilia + hotelde **`compact`**) |
+
+  **ElterngeldRechner: SKIP (Pattern 4 — Conditional-Logik).** Inline-JSX unverändert ([Z.305-308](../../components/rechner/ElterngeldRechner.tsx)). Box 2 (wiso `mutterschutz` `compact`) ist auf `!ergebnis.anspruchAusgeschlossen` konditioniert — Inline-JSX bewahrt semantische Präzision für die Mutterschutz-Pitch-Untergruppe (theoretisch Elterngeld-berechtigt, aber im konkreten Fall ausgeschlossen ⇒ keine Pitch). W14-Conversion-Optimization-Backlog: Re-Eval, falls Conditional-Pattern repo-weit häufiger auftritt — dann Architektur-Erweiterung erwägen.
+
+  **Bilanz:** 6 migriert, 1 SKIP, 0 blockiert. Box-Counts decken sich exakt mit W14.A-Discovery (7 × 2 = 14).
+
+  **Build:** 205/205 grün.
+
+  **Folge-Sub-Sprint:** W14.A.6 Vorsorge/Rente (Renten ×4, Riester, Spar, EtfSparplan, KfzSteuer, ggf. Restposten) — letzter Cluster-Sprint.
+
+  **Lehre L-45 — Render-Conditionals als vierter Sonderfall-Typ.**
+
+  Multi-Box-Components mit Box-Rendering, das von User-Input-State abhängt (z. B. `{state && !state.exclusion && <AffiliateBox />}`), sind nicht durch Standard-Array-Pattern abbildbar — der Page-Renderer spielt `config.affiliate`-Arrays unconditional aus. Bei semantisch sinnvollen Conditionals SKIP-Pattern anwenden, Conditional-Logik im Component erhalten.
+
+  Erste Anwendung: ElterngeldRechner (W14.A.5), Box 2 (wiso mutterschutz compact) ist auf `!ergebnis.anspruchAusgeschlossen` konditioniert — gezielte Pitch nur für Untergruppe mit theoretischem Elterngeld-Pfad. Pauschal-Anzeige bei ausgeschlossenem Anspruch wäre semantisch unsauber und AWIN-compliance-relevant.
+
+  **Erweiterte Sonderfall-Triage (Stand W14.A.5):**
+
+  1. Post-FAQ-Position + substantielle Pre-Affiliate-Content → **SKIP** (BN-Pattern, W14.A.2 OP-A5)
+  2. Pre-Static-Content + AdSense-Risiko → **Standard-Migration** trotz Layout-Verlust (Steuererstattung-Pattern, W14.A.2)
+  3. Reiner Margin-Wrapper ohne Layout-Logik → **mit Boxen entfernen** (Afa-Pattern W14.A.3, Vorfälligkeit W14.A.4)
+  4. Render-Conditional auf User-Input-State → **SKIP** (Elterngeld-Pattern W14.A.5) **[NEU]**
+
+  Architektur-Erweiterung um `config.affiliate.condition`-Property bewusst NICHT vorgenommen — String-basierte Conditional-Eval wäre fragiler Code-Smell ohne klare Semantik. SKIP ist der saubere Weg.
+
+  **W14-Backlog (Conversion-Optimization-Welle nach AdSense-Approval):**
+  - **Conditional-Render-Pattern repo-weit kartieren:** Bei ≥3 weiteren Components mit gleicher Struktur (`{state && condition && <AffiliateBox />}`) Architektur-Erweiterung erwägen — Type-sicherer Discriminated Union (`config.affiliate: AffiliateConfig | AffiliateConfigConditional`) statt String-Eval. Trigger-Schwelle: 3 weitere Fundstellen.
+
+---
+
 ## Welle 14 — Multi-Box-Affiliate-Refactor (W14.A.4) — 09.05.2026
 
 - **W14.A.4 Wohnen-Cluster Multi-Box-Migration** ✅ — 7 Components × 2 Boxen = 14 Boxen, alle in `wohnen.ts`. Kein SKIP, ein Compact-Variant-Erhalt, ein Margin-Wrapper-Removal.
