@@ -8,7 +8,6 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
-import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -250,8 +249,6 @@ export default function SteuerklassenVergleichRechner() {
         ergebnisText={`Steuerklassen-Vergleich: Empfehlung ${ergebnis.empfehlung} | III/V: ${fmtEuro0(ergebnis.kombinationen[0].nettoGesamtMonat)} €/Mo | V/III: ${fmtEuro0(ergebnis.kombinationen[1].nettoGesamtMonat)} €/Mo | IV/IV mit Faktor: ${fmtEuro0(ergebnis.kombinationen[2].nettoGesamtMonat)} €/Mo`}
         seitenTitel="Steuerklassen-Vergleich-Rechner"
       />
-
-      <AffiliateBox programId="wiso" context="steuerklassen" />
 
       <AiExplain
         rechnerName="Steuerklassen-Vergleich-Rechner"

@@ -8,7 +8,6 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
-import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -330,8 +329,6 @@ export default function LohnsteuerRechner() {
         ergebnisText={`Lohnsteuer (Klasse ${steuerklasse}): ${fmtEuro(ergebnis.lohnsteuerMonat)} €/Monat | Brutto: ${fmtEuro(ergebnis.bruttoMonat)} €/Monat | Soli: ${fmtEuro(ergebnis.solidaritaetszuschlagMonat)} € | KiSt: ${fmtEuro(ergebnis.kirchensteuerMonat)} € | Gesamt-Steuer: ${fmtEuro(ergebnis.gesamtabzuegeMonat)} €/Monat (${fmtEuro(ergebnis.gesamtabzuegeJahr)} €/Jahr)`}
         seitenTitel="Lohnsteuer-Rechner"
       />
-
-      <AffiliateBox programId="wiso" context="lohnsteuer" />
 
       <AiExplain
         rechnerName="Lohnsteuer-Rechner"

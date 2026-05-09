@@ -8,7 +8,6 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
-import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -329,9 +328,6 @@ export default function EinkommensteuerRechner() {
         ergebnisText={`Einkommensteuer (${ergebnis.jahr}): ${fmtEuro(ergebnis.einkommensteuer)} € | zvE: ${fmtEuro0(ergebnis.zvE)} € | Soli: ${fmtEuro(ergebnis.solidaritaetszuschlag)} € | KiSt: ${fmtEuro(ergebnis.kirchensteuer)} € | Gesamt: ${fmtEuro(ergebnis.gesamtbelastung)} € | Grenzsteuersatz: ${fmtProzent(ergebnis.grenzsteuersatz)} % | Durchschnittssteuersatz: ${fmtProzent(ergebnis.durchschnittssteuersatz)} %`}
         seitenTitel="Einkommensteuer-Rechner"
       />
-
-      <AffiliateBox programId="wiso" context="einkommensteuer" />
-      <AffiliateBox programId="smartsteuer" context="einkommensteuer" />
 
       <AiExplain
         rechnerName="Einkommensteuer-Rechner"

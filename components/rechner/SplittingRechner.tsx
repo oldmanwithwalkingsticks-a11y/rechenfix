@@ -7,7 +7,6 @@ import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
-import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 const KINDERFREIBETRAG_OPTIONEN = ['0', '0,5', '1', '1,5', '2', '2,5', '3', '3,5', '4'];
@@ -273,9 +272,6 @@ export default function SplittingRechner() {
           </div>
 
           <CrossLink href="/finanzen/steuererstattung-rechner" emoji="💰" text="Steuererstattung berechnen" />
-
-          <AffiliateBox programId="wiso" context="splitting" />
-          <AffiliateBox programId="smartsteuer" context="splitting" />
 
           <ErgebnisAktionen
             ergebnisText={`Ehegattensplitting: ${ergebnis.vorteilGesamt > 0 ? `${fmtEuro(ergebnis.vorteilGesamt)} € Steuervorteil` : 'Kein Vorteil'} | Einzelveranlagung: ${fmtEuro(ergebnis.gesamtEinzel)} € | Zusammenveranlagung: ${fmtEuro(ergebnis.gesamtSplitting)} € | Empfehlung: ${ergebnis.empfehlung}`}

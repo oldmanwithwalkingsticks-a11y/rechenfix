@@ -987,6 +987,11 @@ Der Arbeitnehmer-Pauschbetrag von 1.230 Euro wird automatisch von Ihrem zu verst
         antwort: 'Für einfache Steuerfälle (Gehalt, Pendlerpauschale, Homeoffice) reicht eine Steuersoftware für 15–40 €/Jahr völlig aus. Programme wie WISO Steuer oder smartsteuer führen Sie Schritt für Schritt. Ein Steuerberater (300–800 €) lohnt sich bei komplexen Fällen: Immobilienbesitz, Vermietung, Nebenerwerb oder hohe Kapitalerträge.',
       },
     ],
+    affiliate: [
+      { programId: 'wiso', context: 'steuererstattung', variant: 'full' },
+      { programId: 'smartsteuer', context: 'steuererstattung', variant: 'full' },
+      { programId: 'cosmosdirekt', context: 'tagesgeld' },
+    ],
   },
   {
     slug: 'kreditrechner',
@@ -1277,6 +1282,10 @@ Seit dem Beschluss des Bundesverfassungsgerichts 2013 und der „Ehe für alle" 
         frage: 'Was ist das Faktorverfahren bei Steuerklasse IV/IV?',
         antwort: 'Beim Faktorverfahren wird der voraussichtliche Splitting-Vorteil bereits auf die monatliche Lohnsteuer umgerechnet. Beide Partner behalten Steuerklasse IV, aber mit einem Faktor unter 1, der die Steuerlast senkt. So wird der Splitting-Effekt monatlich berücksichtigt und Nachzahlungen werden vermieden.',
       },
+    ],
+    affiliate: [
+      { programId: 'wiso', context: 'splitting' },
+      { programId: 'smartsteuer', context: 'splitting' },
     ],
   },
   {
@@ -2958,6 +2967,10 @@ Die Kirchensteuer beträgt 9 % der ESt in 14 Bundesländern und 8 % in Baden-Wü
         antwort: 'Der Spitzensteuersatz von 42 % gilt ab einem zvE von 66.761 € (Einzelveranlagung) bzw. 133.522 € (Splitting). Ab 277.826 € (Einzelveranlagung) bzw. 555.652 € (Splitting) greift zusätzlich die sogenannte „Reichensteuer" mit 45 %.',
       },
     ],
+    affiliate: [
+      { programId: 'wiso', context: 'einkommensteuer' },
+      { programId: 'smartsteuer', context: 'einkommensteuer' },
+    ],
   },
   {
     slug: 'steuerklassen-vergleich-rechner',
@@ -3036,6 +3049,7 @@ Wichtig: Die Jahressteuer bleibt unabhängig von der Steuerklasse identisch. Die
         antwort: 'Ja, bei der Kombination III/V ist die Steuererklärung Pflicht (§ 46 Abs. 2 Nr. 3a EStG). Grund: Die monatliche Lohnsteuer bei III/V entspricht meist nicht der Jahressteuer — oft resultiert eine Nachzahlung. Bei IV/IV ohne Faktor oder mit Faktor ist die Erklärung nur in bestimmten Fällen Pflicht.',
       },
     ],
+    affiliate: { programId: 'wiso', context: 'steuerklassen' },
   },
   {
     slug: 'pfaendungsrechner',
@@ -3220,5 +3234,6 @@ Das geht mit dem Formular „Antrag auf Lohnsteuer-Ermäßigung" (online über E
         antwort: 'Der Grundfreibetrag 2026 beträgt 12.348 € (2025 waren es 12.096 €). Bis zu diesem Jahresbetrag fällt keine Einkommensteuer an (in Klasse I, II, IV). In Klasse III ist der Grundfreibetrag verdoppelt (24.696 €, Splitting). Klasse V und VI haben keinen Grundfreibetrag.',
       },
     ],
+    affiliate: { programId: 'wiso', context: 'lohnsteuer' },
   },
 ];

@@ -6,7 +6,6 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
-import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 const STEUERKLASSEN = [
@@ -290,13 +289,6 @@ export default function SteuererstattungRechner() {
             ergebnisText={`Geschätzte Steuererstattung: ca. ${fmt(ergebnis.geschaetzteErstattung)} € (Werbungskosten: ${fmt(ergebnis.werbungskostenGesamt)} €, Grenzsteuersatz: ${(ergebnis.grenzsteuersatz * 100).toFixed(0)}%)`}
             seitenTitel="Steuererstattungs-Rechner"
           />
-
-          {/* Affiliate-Boxen nebeneinander */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-            <AffiliateBox programId="wiso" context="steuererstattung" variant="full" />
-            <AffiliateBox programId="smartsteuer" context="steuererstattung" variant="full" />
-            <AffiliateBox programId="cosmosdirekt" context="tagesgeld" />
-          </div>
 
           <AiExplain
             rechnerName="Steuererstattungs-Rechner"
