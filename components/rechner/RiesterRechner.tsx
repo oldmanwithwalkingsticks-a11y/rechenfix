@@ -9,7 +9,6 @@ import {
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
-import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
@@ -238,9 +237,6 @@ export default function RiesterRechner() {
           </div>
 
           <CrossLink href="/finanzen/rentenrechner" emoji="👵" text="Rentenlücke berechnen" />
-
-          <AffiliateBox programId="verivox" context="riester" />
-          <AffiliateBox programId="cosmosdirekt" context="altersvorsorge" />
 
           <ErgebnisAktionen
             ergebnisText={`Riester: ${fmt(ergebnis.gesamtfoerderung)} €/Jahr Förderung bei ${fmt(ergebnis.eigenbeitrag)} € Eigenbeitrag (${fmtD(ergebnis.foerderquote)} % Förderquote). Zulagen ${fmt(ergebnis.effektiveZulagen)} € + Steuervorteil ${fmt(ergebnis.zusatzlicherSteuervorteil)} €.`}

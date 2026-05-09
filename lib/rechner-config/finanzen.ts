@@ -717,6 +717,10 @@ Regelmäßiges Sparen ist der Schlüssel zum Vermögensaufbau. Hier einige bewä
         antwort: 'Ein Sparplan lohnt sich ab jedem Betrag — viele Broker und Banken bieten ETF-Sparpläne ab 1 Euro an. Üblich sind Einstiegsbeträge von 25 oder 50 Euro monatlich. Durch den Zinseszins-Effekt summieren sich auch kleine Beträge über lange Zeiträume erheblich. 50 Euro monatlich bei 7% Rendite ergeben nach 30 Jahren über 60.000 Euro.',
       },
     ],
+    affiliate: [
+      { programId: 'verivox', context: 'sparplan' },
+      { programId: 'cosmosdirekt', context: 'tagesgeld' },
+    ],
   },
   {
     slug: 'inflationsrechner',
@@ -1151,6 +1155,10 @@ Ergänzend können Sie mit unserem [Zinsrechner](/finanzen/zinsrechner) verschie
         antwort: 'Ja, absolut. Viele Broker bieten Sparpläne bereits ab 1 € oder 25 € pro Monat an. Selbst kleine Beträge lohnen sich langfristig: 50 € monatlich über 30 Jahre bei 7 % Rendite ergeben ca. 61.000 € — bei nur 18.000 € Eigeneinzahlung. Entscheidend ist, frühzeitig anzufangen und regelmäßig dabei zu bleiben. Die Sparrate kann jederzeit erhöht werden.',
       },
     ],
+    affiliate: [
+      { programId: 'verivox', context: 'etf' },
+      { programId: 'cosmosdirekt', context: 'einmalanlage' },
+    ],
   },
   {
     slug: 'rentenrechner',
@@ -1216,6 +1224,11 @@ Ja, Renten unterliegen der nachgelagerten Besteuerung. Der steuerpflichtige Ante
         frage: 'Wird meine Rente besteuert?',
         antwort: 'Ja, Renten werden nachgelagert besteuert. Der steuerpflichtige Anteil hängt vom Renteneintrittsjahr ab: 2026 sind 83% steuerpflichtig, dieser Anteil steigt jährlich um 0,5%. Zusätzlich fallen ca. 10% für Kranken- und Pflegeversicherung an. Bei einer Brutto-Rente von 1.500 € bleiben netto ca. 1.250-1.350 € übrig.',
       },
+    ],
+    affiliate: [
+      { programId: 'wiso', context: 'rente' },
+      { programId: 'burdaZahn', context: 'rente', variant: 'compact' },
+      { programId: 'cosmosdirekt', context: 'altersvorsorge', variant: 'compact' },
     ],
   },
   {
@@ -2182,6 +2195,10 @@ Wer für sich zu dem Schluss kommt, dass Riester sich nicht lohnt, hat mehrere A
       { frage: 'Lohnt sich Riester überhaupt noch?', antwort: 'Für Familien mit Kindern und Geringverdiener meist ja, weil Kinderzulage und geringer Eigenbeitrag eine sehr hohe Förderquote ergeben. Gutverdiener mit 42 % Grenzsteuersatz profitieren stark über den Steuervorteil. Weniger lohnend ist Riester für Singles mit mittlerem Einkommen ohne Kinder — hier ist oft ein ETF-Sparplan die bessere Wahl.' },
       { frage: 'Wie gebe ich Riester in der Steuererklärung an?', antwort: 'In der Anlage AV (Altersvorsorge). Dort tragen Sie die von Ihrem Riester-Anbieter ausgestellte Bescheinigung nach § 10a EStG ein. Das Finanzamt führt dann die Günstigerprüfung automatisch durch. Wichtig: Ohne Anlage AV gibt es nur die Zulagen, aber keinen zusätzlichen Steuervorteil.' },
       { frage: 'Was passiert mit dem Riester-Guthaben bei Tod?', antwort: 'Bei Tod in der Ansparphase geht das Guthaben nur eingeschränkt auf die Erben über: Ehepartner können das Guthaben steuer- und förderunschädlich auf einen eigenen Riester-Vertrag übertragen. Andere Erben erhalten das Guthaben nur abzüglich aller erhaltenen Förderung. Das ist ein häufig kritisierter Punkt an der Riester-Rente.' },
+    ],
+    affiliate: [
+      { programId: 'verivox', context: 'riester' },
+      { programId: 'cosmosdirekt', context: 'altersvorsorge' },
     ],
   },
   {

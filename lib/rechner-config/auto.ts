@@ -284,6 +284,10 @@ Die Kfz-Steuer wird vom Hauptzollamt per SEPA-Lastschrift eingezogen. Halbjährl
         antwort: 'Nein, die Kfz-Steuer wird standardmäßig jährlich per SEPA-Lastschrift eingezogen. Halbjährliche Zahlung ist möglich (3% Zuschlag), vierteljährlich ab 500 € Jahressteuer (6% Zuschlag). Monatliche Zahlung gibt es nicht.',
       },
     ],
+    affiliate: [
+      { programId: 'check24', context: 'kfz-steuer' },
+      { programId: 'wiso', context: 'kfz-steuer', variant: 'compact' },
+    ],
   },
   {
     slug: 'bussgeldrechner',

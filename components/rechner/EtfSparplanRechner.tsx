@@ -8,7 +8,6 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
-import { AffiliateBox } from '@/components/AffiliateBox';
 
 export default function EtfSparplanRechner() {
   const [sparrate, setSparrate] = useState('200');
@@ -318,9 +317,6 @@ export default function EtfSparplanRechner() {
 
           <CrossLink href="/finanzen/rentenrechner" emoji="🏖️" text="Reicht das für die Rente? Rentenlücke berechnen" />
           <CrossLink href="/finanzen/sparrechner" emoji="🏦" text="Klassischer Sparplan im Vergleich" />
-
-          <AffiliateBox programId="verivox" context="etf" />
-          <AffiliateBox programId="cosmosdirekt" context="einmalanlage" />
 
           <ErgebnisAktionen
             ergebnisText={`ETF-Sparplan: ${fmt(nSparrate)} €/Monat, ${nAnlagedauer} Jahre, ${fmtDez(nRendite)}% Rendite → Endkapital: ${fmt(steuern ? ergebnis.endkapitalNachSteuern : ergebnis.endkapital)} € (Einzahlungen: ${fmt(ergebnis.summeEinzahlungen)} €, Rendite: +${fmt(ergebnis.renditeAnteil)} €)`}
