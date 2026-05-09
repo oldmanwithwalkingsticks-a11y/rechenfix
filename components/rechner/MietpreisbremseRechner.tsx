@@ -6,7 +6,6 @@ import { berechneMietpreisbremse } from '@/lib/berechnungen/mietpreisbremse';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
-import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 type Ausnahme = 'keine' | 'neubau' | 'modernisierung' | 'vormiete';
@@ -185,9 +184,6 @@ export default function MietpreisbremseRechner() {
         }
         seitenTitel="Mietpreisbremse-Rechner"
       />
-
-      <AffiliateBox programId="ks-auxilia" context="mietpreisbremse" />
-      <AffiliateBox programId="cosmosdirekt" context="hausrat" />
 
       <AiExplain
         rechnerName="Mietpreisbremse-Rechner"

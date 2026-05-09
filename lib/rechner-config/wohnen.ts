@@ -147,6 +147,10 @@ Vermieter sind verpflichtet, jährlich eine Nebenkostenabrechnung zu erstellen. 
         antwort: 'Als Faustregel gilt: Die Warmmiete sollte maximal 30% des Nettoeinkommens betragen. In Großstädten wie München, Hamburg oder Berlin liegt die Mietbelastung jedoch oft bei 35–40%. Über 40% gilt als kritisch — es bleibt zu wenig für andere Ausgaben.',
       },
     ],
+    affiliate: [
+      { programId: 'check24', context: 'nebenkosten' },
+      { programId: 'cosmosdirekt', context: 'hausrat' },
+    ],
   },
   {
     slug: 'mietrechner',
@@ -383,6 +387,10 @@ In Hessen gibt es seit September 2024 das **Hessengeld**: bis zu 10.000 € je e
         antwort: 'Bei einer selbstgenutzten Immobilie ist die Grunderwerbsteuer leider nicht steuerlich absetzbar. Bei vermieteten Immobilien können die Kaufnebenkosten (inkl. Grunderwerbsteuer) über die Gebäudeabschreibung steuerlich geltend gemacht werden.',
       },
     ],
+    affiliate: [
+      { programId: 'cosmosdirekt', context: 'wohngebaeude' },
+      { programId: 'wiso', context: 'grunderwerbsteuer', variant: 'compact' },
+    ],
   },
   {
     slug: 'baufinanzierung-rechner',
@@ -452,6 +460,10 @@ Nach Ablauf der Zinsbindung bleibt in der Regel eine Restschuld, die Sie weiterf
         frage: 'Wie hoch sind die Kaufnebenkosten in meinem Bundesland?',
         antwort: 'Die Nebenkosten setzen sich zusammen aus Grunderwerbsteuer (3,5-6,5% je nach Bundesland), Notar und Grundbuch (ca. 2%) und Makler (ca. 3,57%). In Bayern betragen die Nebenkosten ca. 9%, in NRW ca. 12%. Bei 350.000 € Kaufpreis sind das zwischen 31.500 € und 42.000 €.',
       },
+    ],
+    affiliate: [
+      { programId: 'check24', context: 'baufinanzierung' },
+      { programId: 'cosmosdirekt', context: 'bauherrenhaftpflicht' },
     ],
   },
   {
@@ -722,6 +734,10 @@ Unser Rechner berücksichtigt bewusst keine steuerlichen Effekte, da diese sehr 
         frage: 'Wie beeinflusst die Finanzierung meine Rendite?',
         antwort: 'Durch den Leverage-Effekt (Hebelwirkung) kann eine Kreditfinanzierung die Eigenkapitalrendite steigern — solange die Gesamtrendite über dem Kreditzins liegt. Gleichzeitig sinkt aber der monatliche Cashflow durch die Kreditrate, und der Hebel wirkt auch bei Verlusten verstärkt. Je mehr Eigenkapital, desto sicherer, aber desto geringer die EK-Rendite.',
       },
+    ],
+    affiliate: [
+      { programId: 'check24', context: 'mietrendite' },
+      { programId: 'cosmosdirekt', context: 'wohngebaeude' },
     ],
   },
   {
@@ -1114,6 +1130,10 @@ Die Grundsteuer ist nach der **Betriebskostenverordnung** umlagefähig auf Miete
       { frage: 'Unterscheiden sich die Bundesländer?', antwort: 'Ja. 11 Länder nutzen das Bundesmodell. Bayern hat ein reines Flächenmodell ohne Berücksichtigung von Bodenrichtwerten, Baden-Württemberg ein Bodenwertmodell ohne Gebäudebewertung, Hamburg ein Wohnlagemodell. Niedersachsen und Hessen nutzen Flächen-Lage-Modelle mit Zuschlägen für gute Lagen.' },
       { frage: 'Wann muss ich die Grundsteuer zahlen?', antwort: 'Die Grundsteuer wird grundsätzlich quartalsweise gezahlt: 15. Februar, 15. Mai, 15. August und 15. November. Auf Antrag ist auch eine jährliche Zahlung zum 1. Juli möglich. Bei vermieteten Wohnungen kann die Grundsteuer auf die Mieter umgelegt werden.' },
     ],
+    affiliate: [
+      { programId: 'wiso', context: 'grundsteuer' },
+      { programId: 'cosmosdirekt', context: 'wohngebaeude' },
+    ],
   },
   {
     slug: 'mietpreisbremse-rechner',
@@ -1179,6 +1199,10 @@ Wer unsicher ist, ob die Mietpreisbremse greift und wie die Rüge formuliert wer
         frage: 'Was kostet ein Verfahren gegen den Vermieter?',
         antwort: 'Bei einem Streitwert von 1.000 € liegen die Anwalts- und Gerichtskosten bei rund 500 bis 800 € pro Instanz. Eine Rechtsschutzversicherung mit Mietrecht übernimmt diese Kosten. Ein Mieterverein bietet für rund 50 bis 90 € Jahresbeitrag kompetente Beratung und einfache Schriftsätze — oft reicht das bereits, um die Sache außergerichtlich zu klären.',
       },
+    ],
+    affiliate: [
+      { programId: 'ks-auxilia', context: 'mietpreisbremse' },
+      { programId: 'cosmosdirekt', context: 'hausrat' },
     ],
   },
   {
@@ -1345,6 +1369,10 @@ Eine Umschuldung lohnt sich nur, wenn die **Zinsersparnis über die Restlaufzeit
         frage: 'Kann die Bank die VFE frei berechnen?',
         antwort: 'Nein. Der Bundesgerichtshof hat in mehreren Urteilen (u. a. XI ZR 388/14) klare Vorgaben gemacht. Die Bank muss von der Zinsschadenssumme die ersparten Verwaltungskosten, das ersparte Risiko und die Möglichkeit von Sondertilgungen abziehen. Eine zu hoch berechnete VFE ist nicht selten. Lassen Sie sich die Berechnung immer schriftlich aufschlüsseln. Die Verbraucherzentrale bietet günstige Prüfungen an, mit denen sich oft mehrere Tausend Euro sparen lassen. Im Streitfall hilft ein Fachanwalt für Bankrecht weiter.',
       },
+    ],
+    affiliate: [
+      { programId: 'check24', context: 'vorfaelligkeit' },
+      { programId: 'cosmosdirekt', context: 'wohngebaeude' },
     ],
   },
   {

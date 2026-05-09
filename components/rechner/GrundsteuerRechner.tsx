@@ -10,7 +10,6 @@ import {
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
-import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
@@ -184,9 +183,6 @@ export default function GrundsteuerRechner() {
         ergebnisText={`Grundsteuer 2026 (${modell === 'bund' ? 'Bundesmodell' : modell === 'bayern' ? 'Bayern' : 'BW'}): ${fmtEuro(ergebnis.grundsteuerJahr)} €/Jahr | Grundsteuerwert ${fmtEuro(ergebnis.grundsteuerwert)} € | Messbetrag ${fmtEuro2(ergebnis.messbetrag)} € × Hebesatz ${parseDeutscheZahl(hebesatz)} %`}
         seitenTitel="Grundsteuer-Rechner"
       />
-
-      <AffiliateBox programId="wiso" context="grundsteuer" />
-      <AffiliateBox programId="cosmosdirekt" context="wohngebaeude" />
 
       <AiExplain
         rechnerName="Grundsteuer-Rechner"

@@ -6,7 +6,6 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
-import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 export default function NebenkostenRechner() {
@@ -167,8 +166,6 @@ export default function NebenkostenRechner() {
         <>
           <CrossLink href="/wohnen/mietrechner" emoji="🏠" text="Warmmiete berechnen" />
           <CrossLink href="/wohnen/stromvergleich-rechner" emoji="🔌" text="Strom-Nebenkosten mit Anbieterwechsel senken" />
-          <AffiliateBox programId="check24" context="nebenkosten" />
-          <AffiliateBox programId="cosmosdirekt" context="hausrat" />
         </>
       )}
     </div>

@@ -11,7 +11,6 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
-import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
@@ -313,9 +312,6 @@ export default function MietrenditeRechner() {
               <strong>⚠️ Hinweis:</strong> Steuerliche Vorteile (AfA, Werbungskosten) sind nicht berücksichtigt. Diese können den Cashflow deutlich verbessern. Auch Wertsteigerungen der Immobilie sind nicht eingerechnet. Für eine vollständige Analyse sprechen Sie mit einem Steuerberater.
             </p>
           </div>
-
-          <AffiliateBox programId="check24" context="mietrendite" />
-          <AffiliateBox programId="cosmosdirekt" context="wohngebaeude" />
 
           <ErgebnisAktionen
             ergebnisText={`Mietrendite: Brutto ${fmtProzent(ergebnis.bruttomietrendite)}% | Netto ${fmtProzent(ergebnis.nettomietrendite)}% | Multiplikator: ${fmtProzent(ergebnis.mietmultiplikator)}${ergebnis.eigenkapitalrendite !== null ? ` | EK-Rendite: ${fmtProzent(ergebnis.eigenkapitalrendite)}%` : ''} | Cashflow: ${fmtEuro(ergebnis.monatsCashflow)} €/Monat`}

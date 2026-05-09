@@ -6,7 +6,6 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
-import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 export default function GrunderwerbsteuerRechner() {
@@ -164,8 +163,6 @@ export default function GrunderwerbsteuerRechner() {
         <>
           <CrossLink href="/wohnen/baufinanzierung-rechner" emoji="🏗️" text="Finanzierung berechnen — Rate und Zinsen planen" />
           <CrossLink href="/finanzen/erbschaftsteuer-rechner" emoji="⚰️" text="Immobilie geerbt? Erbschaftsteuer berechnen" />
-          <AffiliateBox programId="cosmosdirekt" context="wohngebaeude" />
-          <AffiliateBox programId="wiso" context="grunderwerbsteuer" variant="compact" />
         </>
       )}
     </div>

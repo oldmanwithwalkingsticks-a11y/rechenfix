@@ -9,7 +9,6 @@ import {
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
-import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
 const BEARBEITUNG = VFE_BEARBEITUNGSGEBUEHR_EUR;
@@ -143,10 +142,6 @@ export default function VorfaelligkeitsentschaedigungRechner() {
         }}
       />
 
-      <div className="mt-6">
-        <AffiliateBox programId="check24" context="vorfaelligkeit" />
-        <AffiliateBox programId="cosmosdirekt" context="wohngebaeude" />
-      </div>
     </div>
   );
 }

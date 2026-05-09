@@ -6,7 +6,6 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
-import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
@@ -375,9 +374,6 @@ export default function BaufinanzierungRechner() {
               <strong>Hinweis:</strong> Diese Berechnung dient der Orientierung. Tatsächliche Konditionen hängen von Bonität, Objektbewertung und Kreditgeber ab. Die Kaufnebenkosten (Makler, Notar) können regional variieren.
             </p>
           </div>
-
-          <AffiliateBox programId="check24" context="baufinanzierung" />
-          <AffiliateBox programId="cosmosdirekt" context="bauherrenhaftpflicht" />
 
           <ErgebnisAktionen
             ergebnisText={`Baufinanzierung: ${fmt(nKaufpreis)} € Kaufpreis, ${fmt(ergebnis.darlehen)} € Darlehen → Rate: ${fmt(ergebnis.monatsrate)} €/Monat | Restschuld nach ${zinsbindung}J: ${fmt(ergebnis.restschuldNachZinsbindung)} € | Laufzeit: ~${Math.round(ergebnis.gesamtlaufzeitJahre)} Jahre`}
