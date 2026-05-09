@@ -6,10 +6,8 @@ import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
-import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
-import { AmazonBox } from '@/components/AmazonBox';
 
 const GROESSE_SCHNELLWAHL = [
   { label: '30 m² (1 Zi.)', wert: 30 },
@@ -380,15 +378,8 @@ export default function UmzugskostenRechner() {
             </p>
           </div>
 
-          <AmazonBox
-            keyword="umzugskartons 30 stück"
-            description="Stabile Umzugskartons im Mehrfach-Set sind günstiger als einzeln gekauft und lassen sich nach dem Umzug zusammenfalten."
-          />
-
           <CrossLink href="/wohnen/mietrechner" emoji="🏠" text="Neue Miete berechnen" />
           <CrossLink href="/wohnen/nebenkosten-rechner" emoji="📋" text="Nebenkosten der neuen Wohnung" />
-
-          <AffiliateBox programId="cosmosdirekt" context="hausrat" />
 
           <ErgebnisAktionen
             ergebnisText={`Umzugskosten (${nWohnungsgroesse} m², ${nEntfernung} km, ${art === 'firma' ? 'Umzugsfirma' : 'selbst organisiert'}): ca. ${fmt(ergebnis.gesamtkosten)} €${art === 'firma' && ergebnis.vergleichSelbst ? ` | Selbst: ca. ${fmt(ergebnis.vergleichSelbst)} €` : ''}`}

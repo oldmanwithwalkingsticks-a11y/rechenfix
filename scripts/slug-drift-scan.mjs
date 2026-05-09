@@ -92,7 +92,7 @@ for (const k of KATEGORIEN) {
 }
 
 // --- Datei-Ausschlüsse ---
-const EXCLUDE_DIRS = new Set(['node_modules', '.next', '.git', 'public']);
+const EXCLUDE_DIRS = new Set(['node_modules', '.next', '.git', 'public', '.claude']);
 const EXCLUDE_FILES_REL = new Set([
   'next.config.mjs',                    // Redirect-source-Pfade sind absichtlich Alt-Slugs
   'next.config.ts',

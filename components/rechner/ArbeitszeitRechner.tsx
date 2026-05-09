@@ -6,8 +6,6 @@ import { clampInputValue, clampNumber } from '@/lib/zahlenformat';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
-import { AffiliateBox } from '@/components/AffiliateBox';
-import { AmazonBox } from '@/components/AmazonBox';
 
 type Modus = 'tag' | 'woche';
 
@@ -410,17 +408,6 @@ export default function ArbeitszeitRechner() {
             </div>
           )}
         </div>
-      )}
-
-      {(tagesErgebnis || wochenErgebnis) && (
-        <AffiliateBox programId="lexware" context="arbeitszeitrechner" variant="compact" />
-      )}
-
-      {(tagesErgebnis || wochenErgebnis) && (
-        <AmazonBox
-          keyword="zeiterfassung stempeluhr"
-          description="Für Handwerk, Praxis oder kleine Teams: Physische Stempeluhren erfassen Arbeitszeiten DSGVO-konform ohne Cloud-Abo."
-        />
       )}
 
       {/* Disclaimer */}

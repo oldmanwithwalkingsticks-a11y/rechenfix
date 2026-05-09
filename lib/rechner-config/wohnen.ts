@@ -316,6 +316,10 @@ Die BEG-Förderung (KfW 458) bezuschusst den Heizungstausch auf erneuerbare Wär
         antwort: 'Bei Neubau oder gut gedämmtem Altbau (Heizlast unter 100 kWh/m²) ist die Wärmepumpe heute fast immer wirtschaftlicher: laufende Kosten 1.100–1.400 €/Jahr für 100 m² gegenüber 1.500–1.800 € bei Gas. Bei unsaniertem Altbau (Heizlast 200+ kWh/m²) und ohne Niedertemperatur-Heizkörper bleibt Gas oft günstiger, weil die Wärmepumpe mit hohen Vorlauftemperaturen ineffizient arbeitet (JAZ unter 3,0). Die BEG-Förderung 2026 deckt bis zu 70 % der Investitionskosten der Wärmepumpe ab (Grundförderung 30 % + Klimageschwindigkeitsbonus 20 % + Einkommensbonus bis 30 %, gedeckelt bei 30.000 € förderfähigen Kosten). Faustregel: Bei Heizungstausch nach 2026 die Wärmepumpe nur dann skippen, wenn der hydraulische Abgleich klar zeigt, dass die Vorlauftemperaturen über 55 °C liegen müssen.',
       },
     ],
+    affiliate: { programId: 'check24', context: 'heizkosten' },
+    amazonProducts: [
+      { keyword: 'heizkörperthermostat', description: 'Programmierbare Thermostatköpfe senken die Nachttemperatur automatisch — pro Raum je nach Nutzungsmuster 5–10 % Heizenergie.' },
+    ],
   },
   {
     slug: 'grunderwerbsteuer-rechner',

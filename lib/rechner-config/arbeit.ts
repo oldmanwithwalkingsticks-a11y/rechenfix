@@ -89,6 +89,10 @@ Unser Wochenmodus eignet sich ideal als schnelle Kontrolle: Geben Sie Ihre Arbei
         antwort: 'Ja, seit 2023 sind Arbeitgeber in Deutschland verpflichtet, Beginn, Ende und Dauer der täglichen Arbeitszeit aller Beschäftigten systematisch zu erfassen. Die Aufzeichnungen müssen mindestens zwei Jahre aufbewahrt werden.',
       },
     ],
+    affiliate: { programId: 'lexware', context: 'arbeitszeitrechner', variant: 'compact' },
+    amazonProducts: [
+      { keyword: 'zeiterfassung stempeluhr', description: 'Für Handwerk, Praxis oder kleine Teams: Physische Stempeluhren erfassen Arbeitszeiten DSGVO-konform ohne Cloud-Abo.' },
+    ],
   },
   {
     slug: 'urlaubstage-rechner',
@@ -376,6 +380,10 @@ Wer unter dem Grundfreibetrag (12.348 € in 2026) verdient, zahlt keine Einkomm
         frage: 'Was, wenn ich keine Steuern zahle?',
         antwort: 'Wer mit seinem zu versteuernden Einkommen unter dem Grundfreibetrag von 12.348 € (2026) liegt, zahlt keine Einkommensteuer und kann die Pendlerpauschale steuerlich nicht absetzen. In diesem Fall greift die Mobilitätsprämie nach § 101 EStG: Sie beträgt 14 % der Pendlerpauschalen ab dem 21. Kilometer und wird zusammen mit dem Steuerbescheid ausgezahlt. Die Mobilitätsprämie wurde durch das Steueränderungsgesetz 2025 (BGBl. I 2025 Nr. 363) unbefristet verlängert.',
       },
+    ],
+    affiliate: { programId: 'wiso', context: 'pendlerpauschale' },
+    amazonProducts: [
+      { keyword: 'handyhalterung auto', description: 'Für den täglichen Pendelweg: Sichere Handyhalterung im Auto erleichtert Navigation und hält die Hände frei — verkehrssicherheitskonform.' },
     ],
   },
   {

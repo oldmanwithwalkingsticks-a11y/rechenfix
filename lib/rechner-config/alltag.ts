@@ -881,6 +881,10 @@ Tipp: Umzüge am Monatsanfang oder unter der Woche sind oft günstiger als am Mo
         antwort: 'Neben den reinen Umzugskosten sollten Sie einplanen: Kaution für die neue Wohnung (3 Nettokaltmieten), Renovierung der alten Wohnung (ca. 3-8 €/m²), Nachsendeauftrag (30 €), doppelte Miete im Übergangsmonat, neue Möbel/Einrichtung und ggf. Ummeldung des Kfz (ca. 30 €). Planen Sie einen Puffer von 15-20% ein.',
       },
     ],
+    affiliate: { programId: 'cosmosdirekt', context: 'hausrat' },
+    amazonProducts: [
+      { keyword: 'umzugskartons 30 stück', description: 'Stabile Umzugskartons im Mehrfach-Set sind günstiger als einzeln gekauft und lassen sich nach dem Umzug zusammenfalten.' },
+    ],
   },
   {
     slug: 'trinkgeld-rechner',
