@@ -8,6 +8,31 @@
 
 ---
 
+## Welle 14 — Multi-Box-Affiliate-Refactor (W14.A.3) — 09.05.2026
+
+- **W14.A.3 Steuer-Cluster II Spezial Multi-Box-Migration** ✅ — 6 Components, ~14 Boxen total, reine Mechanik. Kein Sonderfall im Cluster, kein SKIP. Pattern aus W14.A.1/A.2 unverändert angewendet.
+
+  **Migrierte Components (6, alle als Array):**
+
+  | Component | Slug | Konfig | Boxen |
+  |---|---|---|---|
+  | ErbschaftsteuerRechner | `erbschaftsteuer-rechner` | `finanzen.ts` | 3 (wiso + smartsteuer + cosmosdirekt `sterbegeld`) |
+  | SchenkungssteuerRechner | `schenkungssteuer-rechner` | `finanzen.ts` | 3 (wiso + smartsteuer + cosmosdirekt `tagesgeld`) |
+  | KapitalertragsteuerRechner | `kapitalertragsteuer-rechner` | `finanzen.ts` | 2 (verivox + cosmosdirekt `tagesgeld`) |
+  | GewerbesteuerRechner | `gewerbesteuer-rechner` | `finanzen.ts` | 2 (lexware + wiso) |
+  | AbfindungsRechner | `abfindungsrechner` | `arbeit.ts` | 2 (ks-auxilia + wiso) |
+  | AfaRechner | `afa-rechner` | `finanzen.ts` | 2 (lexware + cosmosdirekt `wohngebaeude`) |
+
+  Alle 6 ohne `variant` (default `'full'`). AfaRechner hatte einen reinen Margin-Wrapper `<div className="mt-6">` um die 2 Boxen — wurde mit den Boxen entfernt, kein Layout-Mischfall (Spacing wird im Standard-Renderer durch interne Margin der AffiliateBox gewährleistet).
+
+  **Bilanz Cluster II:** 6 migriert, 0 SKIP, 0 blockiert. Box-Counts decken sich exakt mit W14.A-Discovery (3/3/2/2/2/2 = 14).
+
+  **Build:** 205/205 grün.
+
+  **Folge-Sub-Sprint:** W14.A.4 Wohnen (Baufinanzierung, Grunderwerbsteuer, Grundsteuer, Mietpreisbremse, Mietrendite, Nebenkosten, Vorfälligkeit) — reine Mechanik.
+
+---
+
 ## Welle 14 — Multi-Box-Affiliate-Refactor (W14.A.2) — 09.05.2026
 
 - **W14.A.2 Steuer-Cluster I Multi-Box-Migration** ✅ — 5 von 6 Cluster-Components auf das W14.A.1-Pattern (`config.affiliate` als Single-Object oder Array) migriert. BN als bewusstes SKIP erhalten.
