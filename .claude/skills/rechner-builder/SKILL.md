@@ -263,7 +263,11 @@ Layout: 4 in a row on desktop, 2×2 on mobile.
 Place below the calculator (below the fold). Include:
 
 - **H2 headings** for structure (3-5 sections)
-- **Minimum 600 words** of unique, helpful content
+- **Content-Mindestumfang für AdSense-Konformität (seit W13.C-Audit, 09.05.2026):**
+  - `erklaerung` + FAQ kombiniert: **MINDESTENS 750 Wörter**
+  - Ideal: **1.000–1.500 Wörter** (Pattern-Goldstandard der Top-10-Rechner)
+  - Begründung: W13.C-Audit hat ergeben, dass Rechner mit <700 W AdSense-Reject-Risiko haben („Minderwertige Inhalte"). 750 W ist die sichere Untergrenze.
+  - Wortzählung pro Rechner manuell oder via `scripts/word-count.mjs` (falls vorhanden) verifizierbar.
 - **Formel-Box:** Show the formula used in a highlighted box
 - **Rechenbeispiel-Box:** Show a worked example
 - **Internal links** to related calculators within the text
@@ -271,7 +275,7 @@ Place below the calculator (below the fold). Include:
 
 ### Step 8: FAQ Section
 
-- Minimum **5 questions** relevant to the calculator topic
+- **FAQ-Umfang: 5–8 Fragen** (Empfehlung 6, Top-10-Rechner ≥ 8 — Pattern-Goldstandard)
 - Implement as expandable accordion (click to open/close)
 - Add **FAQPage Schema.org** structured data:
 
@@ -349,8 +353,8 @@ After creating the calculator, verify:
 - [ ] "Fix erklärt" button is present
 - [ ] Feedback buttons are present
 - [ ] 4 related calculators shown at bottom
-- [ ] SEO text is minimum 600 words
-- [ ] FAQ section has minimum 5 questions
+- [ ] `erklaerung` + FAQ kombiniert ≥ 750 Wörter (Ideal 1.000–1.500 W)
+- [ ] FAQ-Section: 5–8 Fragen (Empfehlung 6, Top-Rechner ≥ 8)
 - [ ] Schema.org (FAQPage + WebApplication + BreadcrumbList) is present
 - [ ] Meta title and description are set
 - [ ] Canonical URL uses www.rechenfix.de
@@ -1103,10 +1107,42 @@ For detailed templates per calculator type, see `references/templates.md`.
 
 Affiliate-Platzierungs-Regel: thematischer Match zum Rechner erforderlich. Details, verbotene Kombinationen und aktuelle Partner-Liste (12 Programme inkl. CosmosDirekt seit Prompt 145): siehe CLAUDE.md → Abschnitt »Affiliate-Programme (Awin)«.
 
-**Stack-Konventionen** (seit Prompt 145b, 25.04.2026):
-- Max. 2–4 AffiliateBoxen pro Rechner. Erste Box `variant="full"` (Default). Ab der 4. Box `variant="compact"` (Beispiel: RentenRechner mit 4 Boxen — wiso/verivox/burdaZahn/cosmosdirekt, alle compact außer der ersten).
+**Affiliate-Boxen werden NIE hartkodiert im Component eingebaut.** Stattdessen via `config.affiliate`-Property in der jeweiligen `lib/rechner-config/<kat>.ts` deklariert. Der Renderer in [`app/[kategorie]/[rechner]/page.tsx`](../../../app/[kategorie]/[rechner]/page.tsx) Z. ~565 macht den `Array.isArray`-Check automatisch und rendert post-FAQ-Position (etabliert in W14.A.1, 09.05.2026).
+
+```ts
+// Single-Box (1 AffiliateBox):
+affiliate: { programId: 'wiso', context: '<slug-oder-context>' }
+// optional: variant: 'compact' | 'full' (Default 'full')
+
+// Multi-Box (≥2 AffiliateBoxes):
+affiliate: [
+  { programId: 'wiso', context: '<context>' },
+  { programId: 'cosmosdirekt', context: '<context>', variant: 'compact' },
+]
+
+// AmazonBox (eine oder mehrere) — separates Property:
+amazonProducts: [
+  { keyword: '<keyword>', description: '<text>' },
+  // optional: headline
+]
+
+// Kein Affiliate (z. B. Gesundheit, Mathe):
+// Properties einfach weglassen (undefined).
+```
+
+**Stack-Konventionen** (seit Prompt 145b, 25.04.2026, erweitert W14.A.1):
+- Max. 2–4 AffiliateBoxen pro Rechner. Erste Box `variant: 'full'` (Default). Ab der 4. Box `variant: 'compact'` (Beispiel: RentenRechner mit 4 Boxen — wiso/verivox/burdaZahn/cosmosdirekt, alle compact außer der ersten).
 - **Context-Konflikte vermeiden:** Wenn ein bestehendes Programm bereits einen bestimmten Context bedient, weicht das neu hinzukommende Programm thematisch aus. Beispiel: SparRechner → verivox bedient `sparplan`, CosmosDirekt nimmt `tagesgeld`.
-- **Reihenfolge im JSX:** Neue Boxen werden **nach** allen bestehenden Boxen append-ed (kein Re-Sort, keine Replacement-Edits).
+- **Reihenfolge im Array:** entspricht der vom Renderer ausgespielten Reihenfolge (post-FAQ, top-to-bottom).
+
+**Sonderfall-Patterns (W14.A — gelten NUR für dokumentierte Bestands-Sonderfälle, nicht für neue Rechner):**
+- **P1 (BN-Position-Erhalt):** Component-Inline-JSX bleibt, kein `config.affiliate` — historisches CTR-Slot-Argument.
+- **P2 (Steuererstattung):** Standard-Migration trotz Custom-Grid-Layout-Verlust — AdSense-Risiko-Reduktion priorisiert.
+- **P3 (Margin-Wrapper-Removal):** Reiner `<div className="mt-N">`-Wrapper ohne Layout-Logik wird mit den Boxen entfernt.
+- **P4a (ElterngeldRechner):** Conditional auf `!ergebnis.anspruchAusgeschlossen` — gesamter Component SKIP, Inline-JSX bewahrt.
+- **P4b (RentenRechner):** Hybrid — 3 unconditional Boxen ins Array, 1 Conditional-Box (verivox auf `rentenluecke > 0`) inline behalten.
+
+Neue Rechner nutzen ausschließlich das Standard-Pattern (Single-Object oder Array via `config.affiliate`). Sonderfall-Patterns werden nicht aktiv für Neubauten gewählt — siehe welle-status-historie für die Präzedenz-Begründungen.
 
 ### Amazon-Partner-Programm (seit Prompt 122-amazon, 22.04.2026)
 
@@ -1488,7 +1524,7 @@ Innerhalb des `{ergebnis && (...)}`-Blocks in dieser Reihenfolge:
 2. h2 „So funktioniert..." + `config.formel` + `config.beispiel`
 3. `config.erklaerung` mit Existing + NEU-Sektionen
 4. h2 „Häufige Fragen" mit `config.faq`
-5. **`{config.affiliate && <AffiliateBox {...config.affiliate} />}`** — AdSense-konform nach Content
+5. **`config.affiliate` (Single-Object oder Array) + `config.amazonProducts` (Array)** — AdSense-konform post-FAQ; Renderer macht `Array.isArray`-Check automatisch (seit W14.A.1)
 6. „Das könnte Sie auch interessieren" + Sidebar
 
 ### Inhalts-Standards für Top-Rechner
@@ -1509,15 +1545,21 @@ Jeder Top-Rechner (BN, MwSt, Zins, BMI etc.) hat in `config.erklaerung`:
 
 Markdown-Render in `page.tsx` parsiert dieses Pattern korrekt — gilt kategorie-übergreifend.
 
-### Affiliate-Architektur
+### Affiliate-Architektur (Stand W14.A-Abschluss, 10.05.2026)
 
 | Pattern | Wann | Wo |
 |---|---|---|
-| Single-Box via `config.affiliate` | 1 Affiliate-Box pro Rechner | Property in `lib/rechner-config/<kategorie>.ts` |
-| Multi-Box-Custom | 2+ Affiliate-Boxen mit eigenem Layout | Inline im Component |
-| Kein Affiliate | Affiliate-frei (z.B. Gesundheit) | Property einfach undefined lassen |
+| Single-Box via `config.affiliate` (Object) | 1 Affiliate-Box pro Rechner | Property in `lib/rechner-config/<kat>.ts` |
+| Multi-Box via `config.affiliate` (Array) | 2+ Affiliate-Boxen | Array-Property in `lib/rechner-config/<kat>.ts` |
+| AmazonBox via `config.amazonProducts` | 1+ Amazon-Box (Keyword-Suchlinks) | Array-Property in `lib/rechner-config/<kat>.ts` |
+| Kein Affiliate | Affiliate-frei (z. B. Gesundheit/Mathe) | Properties weglassen (undefined) |
+| **P1 Inline-Custom (Bestandsschutz)** | BN-Pattern (Position-Erhalt als CTR-Slot) | Inline-JSX im Component, kein `config.affiliate` |
+| **P4a Inline-Conditional (Bestandsschutz)** | Render-Conditional auf User-Input-State (≤1:1 unconditional:conditional) | Inline-JSX im Component, kein `config.affiliate` (ElterngeldRechner) |
+| **P4b Hybrid (Bestandsschutz)** | 3+ Boxen mit Mehrheit-unconditional + 1 Conditional | Mehrheit ins `config.affiliate`-Array, Conditional inline (RentenRechner) |
 
-Custom-Multi-Box ist BN-Pattern (WISO + smartsteuer). W14 erweitert auf `affiliate?: AffiliateConfig[]` (Array-Variante) für Multi-Box-via-Property.
+Neue Rechner nutzen **ausschließlich** die ersten 4 Zeilen (Standard-Pattern). Patterns P1/P4a/P4b sind Bestandsschutz für dokumentierte Sonderfälle aus W14.A — keine neuen Anwendungen.
+
+L-43 (Multi-Box-Drift) ist mit W14.A.6 eliminiert. **L-46-Pflicht:** Bei jedem Component-Edit, der `AffiliateBox` oder `AmazonBox` berührt, `grep -nE '<AffiliateBox|<AmazonBox' components/rechner/<File>.tsx` als Pre-Phase. Bei hartkodierten Treffern entweder Standard-Migration oder Sonderfall-Triage (P1/P2/P3/P4a/P4b — siehe welle-status-historie).
 
 ### Sensitivitäts-Layer
 

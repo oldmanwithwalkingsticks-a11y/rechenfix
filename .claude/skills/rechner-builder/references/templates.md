@@ -194,22 +194,60 @@ Max 120 Wörter. Deutsch, Siezen, keine Markdown-Formatierung."
 </div>
 ```
 
-### RechnerConfig mit Affiliate-Property
+### RechnerConfig mit Affiliate-/Amazon-Property (Stand W14.A-Abschluss, 10.05.2026)
+
+Affiliate-Boxen werden NIE hartkodiert im Component eingebaut, sondern als `config.affiliate` deklariert. Renderer macht `Array.isArray`-Check automatisch.
 
 ```ts
-// In lib/rechner-config/<kategorie>.ts:
+// In lib/rechner-config/<kategorie>.ts — Single-Box-Variante:
 {
   slug: 'mein-rechner',
   titel: '...',
   beschreibung: '...',
   // ... weitere Properties ...
-  affiliate: { programId: 'lexware', context: 'mwst' },  // Optional
   formel: '...',
   beispiel: '...',
   erklaerung: `...`,
-  faq: [ /* mindestens 8 Q&A */ ],
+  faq: [ /* 5–8 Q&A, idealerweise 8 für Top-Rechner */ ],
+  affiliate: { programId: 'lexware', context: 'mwst' },
+  // optional: variant: 'compact' | 'full' (Default 'full')
 }
 ```
+
+```ts
+// Multi-Box-Variante (≥2 AffiliateBoxes):
+{
+  // ... übrige Properties ...
+  affiliate: [
+    { programId: 'wiso', context: 'einkommensteuer' },
+    { programId: 'smartsteuer', context: 'einkommensteuer' },
+    { programId: 'cosmosdirekt', context: 'tagesgeld', variant: 'compact' },
+  ],
+}
+```
+
+```ts
+// Mit AmazonBox (Keyword-Suchlinks, separates Property):
+{
+  // ... übrige Properties ...
+  affiliate: [
+    { programId: 'check24', context: 'spritkosten', variant: 'compact' },
+    { programId: 'hotelde', context: 'spritkosten', variant: 'compact' },
+  ],
+  amazonProducts: [
+    { keyword: 'kraftstoffzusatz', description: 'Injektorreiniger und Kraftstoffzusätze können bei älteren Motoren helfen.' },
+    // optional: headline (Default 'Passende Produkte auf Amazon')
+  ],
+}
+```
+
+**Anti-Pattern:** `<AffiliateBox />` oder `<AmazonBox />` JSX direkt im Component-File hartkodieren. Vor jedem Component-Edit Pre-Phase-grep durchführen (L-46):
+
+```bash
+grep -nE '<AffiliateBox|<AmazonBox' components/rechner/<Name>Rechner.tsx
+```
+
+Hartkodierte Treffer ⇒ entweder Standard-Migration via `config.affiliate` oder Sonderfall-Triage (P1 BN, P2 Steuererstattung, P3 Margin-Wrapper, P4a Elterngeld-Conditional, P4b Renten-Hybrid — siehe welle-status-historie).
 
 ### Bold-Lead-Listen-Markdown für Anwendungsfälle
 
