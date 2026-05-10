@@ -8,6 +8,33 @@
 
 ---
 
+## Skill-Update — rechner-builder auf W14.A-Pattern + AdSense-Wortzahl — 10.05.2026
+
+- **rechner-builder-Skill auf W14.A-Pattern aktualisiert.** Drei Updates eingebaut, damit alle künftigen Rechner automatisch konform sind und keine Bestands-Drifts erneut auftreten.
+
+  **Geänderte Skill-Dateien:**
+  - [`.claude/skills/rechner-builder/SKILL.md`](../../.claude/skills/rechner-builder/SKILL.md) — Affiliate-Platzierung-Sektion + Page-Layout-Renderer-Beschreibung + Step 7 SEO-Content + Step 8 FAQ + Step 11 Integration-Checklist + Affiliate-Architektur-Tabelle
+  - [`.claude/skills/rechner-builder/references/templates.md`](../../.claude/skills/rechner-builder/references/templates.md) — RechnerConfig-Snippets für Single-Box / Multi-Box-Array / AmazonBox + Anti-Pattern-Box mit L-46-grep
+  - [`.claude/skills/rechner-builder/references/checklist.md`](../../.claude/skills/rechner-builder/references/checklist.md) — SEO-Sektion Wortzahl + FAQ-Range + Inhalts-Standards + Architektur-Standards (Affiliate)
+
+  **Neue Standards für alle künftigen Rechner:**
+  1. **Affiliate-Architektur:** `config.affiliate` als Single-Object oder Array statt hartkodierter `<AffiliateBox />`-JSX. `config.amazonProducts`-Array für Amazon-Boxen. Renderer in `page.tsx` macht `Array.isArray`-Check automatisch.
+  2. **Mindest-Content 750 Wörter** (`erklaerung` + FAQ kombiniert) für AdSense-Konformität — Ideal 1.000–1.500 W, Begründung aus W13.C-Audit (Rechner mit <700 W = Reject-Risiko).
+  3. **FAQ 5–8 Fragen** (Empfehlung 6, Top-Rechner ≥ 8).
+  4. **L-46-Pre-Phase-grep** als Pflicht bei jedem Component-Edit, der AffiliateBox/AmazonBox berührt.
+
+  **Sonderfall-Patterns (P1 BN / P2 Steuererstattung / P3 Margin-Wrapper / P4a Elterngeld / P4b Renten) sind dokumentierter Bestandsschutz** — neue Rechner nutzen ausschließlich das Standard-Pattern.
+
+  **Bestehende 12-Step-Template-Struktur erhalten** — nur die zwei Standards (Affiliate-Pattern, Wortzahl) integriert, Template-Logik nicht umgebaut.
+
+  ### ⚠️ Pflicht-Erinnerung für Karsten
+
+  **Skill-Update im Claude.ai-Skills-UI manuell synchronisieren.** Die Repo-Änderungen unter `.claude/skills/rechner-builder/` müssen separat im Claude.ai-Skills-Web-UI eingepflegt werden — der Skill in der Claude.ai-Oberfläche zieht NICHT automatisch aus dem Repo. Diese Memory-Regel gilt seit der ersten Skill-Anlage und ist in der rechenfix-Memory („SKILL.md braucht noch manuellen claude.ai-UI-Sync") mehrfach dokumentiert.
+
+  **Workflow:** Repo-Skill-Files öffnen → kopieren → Claude.ai-Skills-UI → rechner-builder → Inhalt ersetzen → speichern. Erst danach gilt der Skill im Claude.ai-Chat als aktualisiert.
+
+---
+
 ## Welle 14 — Multi-Box-Affiliate-Refactor (W14.A.6 + W14.A-WELLEN-ABSCHLUSS) — 10.05.2026
 
 - **W14.A.6 Vorsorge/Rente-Cluster Multi-Box-Migration (Final)** ✅ — 5 Components, 12 Boxen total. 4 cleane Standard-Migrationen + 1 Hybrid (RentenRechner, neuer Sub-Pattern 4b). Damit ist W14.A komplett abgeschlossen — **L-43 (Multi-Box-Drift) ist repo-weit eliminiert**.
