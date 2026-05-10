@@ -7,6 +7,9 @@ Kopiere diese Checkliste und arbeite jeden Punkt ab:
 - [ ] URL-Slug gewählt (kebab-case, deutsch, z.B. "kaffee-kosten-rechner")
 - [ ] 4 verwandte Rechner identifiziert
 - [ ] Datenquellen/Formeln recherchiert
+- [ ] **Gesetzes-Bezüge identifiziert** (relevante §§ aus EStG/SGB/BGB/etc.) und im Code-Kommentar mit Stand + Quelle dokumentiert
+- [ ] **Alle Tabellen-Werte/Sätze/Grenzen** als named constants am File-Anfang (oder SSOT-Import aus `lib/berechnungen/`) — KEINE magic numbers inline
+- [ ] **Jeder gesetzlich bestimmte Wert** hat Inline-Begründung mit Paragraf + Stand + Quelle
 
 ## Seite erstellen
 - [ ] /app/[kategorie]/[slug]/page.tsx erstellt
@@ -83,6 +86,15 @@ Vor jeder neuen Rechner-Implementierung oder Sub-Wellen-Update:
 - [ ] AiExplain in `<div className="mt-4">`-Wrapper
 - [ ] ErgebnisAktionen in `<div className="mt-6">`-Wrapper
 - [ ] AiExplain-Position: nach CrossLinks, vor ErgebnisAktionen
+
+### Gesetzes- & Tabellen-Standards (Skill v2, 10.05.2026)
+
+- [ ] **Gesetzes-Bezüge recherchiert** und im Code-Kommentar mit Paragraf + Stand + Quelle dokumentiert (gesetze-im-internet.de / bundesfinanzministerium.de / BMAS / DRV / BGBl-PDFs)
+- [ ] **Alle verwendeten Tabellen-Werte/Sätze/Grenzen** als named constants am File-Anfang gesammelt — KEINE magic numbers inline
+- [ ] **Jeder gesetzlich bestimmte Wert** hat Inline-Begründung mit Paragraf + Stand + Quelle (auch in zentralen Libs)
+- [ ] Wo möglich SSOT-Import aus `lib/berechnungen/<domain>.ts` statt eigener Hardcode (CLAUDE.md → „Zentrale Libs (SSOT)")
+- [ ] Bei unterjährig wechselnden Werten: Stichtag-Switch-Pattern (`getAktuelle…(stichtag)`) statt nackter Konstante
+- [ ] Audit-Vorbereitung: `grep -rn "Stand: " lib/berechnungen/` zeigt alle Stichtage des Repos — neue Datei muss dort auftauchen
 
 ### Verify-Standards
 

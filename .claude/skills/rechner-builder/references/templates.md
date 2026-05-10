@@ -274,3 +274,86 @@ Der <Name>-Rechner ist in vielen Lebenssituationen hilfreich — hier fünf konk
 - **Fehler D.** Erklärung...
 - **Fehler E.** Erklärung...
 ```
+
+---
+
+## Welle-14-Patterns (Stand 10.05.2026) — Gesetzes-Stichtag + Tabellen-Constants
+
+### Gesetzes-Bezug im Code-Kommentar (UPDATE-3)
+
+Bei jedem gesetzlich bestimmten Wert/Algorithmus Pflicht-Header vor der Implementation:
+
+```ts
+/**
+ * Berechnung X nach § <Norm> Abs. <Y>.
+ * Stand: <DD.MM.YYYY>. Quelle: <Gesetzes-URL oder BGBl-Referenz>.
+ *
+ * Letzte Änderung: <DD.MM.YYYY> durch <Gesetz oder VO>.
+ */
+export function berechneX(...) { ... }
+```
+
+**Beispiel:**
+
+```ts
+/**
+ * Soli-Berechnung nach § 4 SolzG mit Milderungszone.
+ * Stand: 09.05.2026. Quelle: gesetze-im-internet.de/solzg_1995/__4.html
+ *
+ * Aktuelle Werte 2026:
+ * - Freigrenze Grundtarif: 20.350 €
+ * - Freigrenze Splittingtarif: 40.700 €
+ * - Milderungssatz: 11,9 % auf ESt-Differenz
+ * - Milderungs-Obergrenze: Freigrenze × 1,859375
+ */
+export function berechneSoli(est: number, splitting: boolean, jahr: number): number { ... }
+```
+
+### Tabellen-Werte als named constants (UPDATE-4)
+
+Drift-anfällige Standardwerte am File-Anfang sammeln, KEINE magic numbers inline:
+
+```ts
+// ===========================================
+// Standardwerte 2026 (Stichtag-dokumentiert)
+// ===========================================
+
+// BBG RV/AV (bundeseinheitlich seit 2025) 2026: 101.400 €/Jahr.
+// Stand: 09.05.2026. Quelle: SV-Rechengrößen-VO 2026, BGBl. I 2025 Nr. 367.
+export const BBG_RV_JAHR_2026 = 101_400;
+export const BBG_RV_MONAT_2026 = 8_450;
+
+// BBG KV/PV 2026: 69.750 €/Jahr.
+// Stand: 09.05.2026. Quelle: SV-Rechengrößen-VO 2026.
+export const BBG_KV_JAHR_2026 = 69_750;
+export const BBG_KV_MONAT_2026 = 5_812.50;
+
+// Mindestlohn ab 01.01.2026: 13,90 €/h. Ab 01.01.2027: 14,60 €/h.
+// Stand: 09.05.2026. Quelle: 6. Mindestlohnanpassungsverordnung (BMAS).
+// Stichtag-Switch via getAktuellerMindestlohn() in mindestlohn.ts.
+export const MINDESTLOHN_2026 = 13.90;
+export const MINDESTLOHN_2027 = 14.60;
+```
+
+**Anti-Pattern — magic number inline:**
+
+```ts
+// ❌ Schlecht: Wert ohne Bezeichnung, Stichtag, Quelle
+const netto = brutto - 12348 - (brutto * 0.073);
+
+// ✅ Gut: Named constants mit Stichtag-Header, oder SSOT-Import
+import { GRUNDFREIBETRAG_2026 } from '@/lib/berechnungen/einkommensteuer';
+import { KV_BASISSATZ_AN_2026 } from '@/lib/berechnungen/brutto-netto';
+const netto = brutto - GRUNDFREIBETRAG_2026 - (brutto * KV_BASISSATZ_AN_2026);
+```
+
+**Audit-Workflow (Januar jährlich):**
+
+```bash
+# Alle dokumentierten Stichtage finden
+grep -rn "Stand: " lib/berechnungen/
+
+# Alle Vorjahres-Werte finden (Beispiel: Januar 2027 sucht 2026)
+grep -rn "Stand: .*\.2026" lib/berechnungen/
+grep -rn "_2026 = " lib/berechnungen/
+```

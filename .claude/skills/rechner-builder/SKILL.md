@@ -7,6 +7,25 @@ description: Template and checklist for building standardized online calculators
 
 Build standardized, SEO-optimized calculator pages for the German calculator portal rechenfix.de. Every calculator must follow this template to ensure consistency, completeness, and maximum SEO impact.
 
+## WARUM diese Standards existieren (Skill v2, 10.05.2026)
+
+Diese Standards wurden nach den W13/W14-Audit-Wellen etabliert, in denen veraltete Affiliate-Verteilung, zu kurze Content-Texte, veraltete Gesetzes-Werte und schlecht dokumentierte Tabellen-Werte wochenlange Korrektur-Sprints nötig machten. Konsequente Befolgung ab Build-Phase erspart spätere Audits.
+
+**Vier Standards für jeden neuen Rechner:**
+
+1. **Affiliate-Architektur:** `config.affiliate` (Single-Object oder Array) statt hartkodierter `<AffiliateBox />`-JSX. `config.amazonProducts` für Amazon-Boxen. Siehe „Affiliate-Platzierung"-Sektion.
+2. **Content-Wortzahl:** `erklaerung` + FAQ kombiniert ≥ 750 W (Ideal 1.000–1.500 W), FAQ 5–8 Fragen. Siehe Step 7 + 8.
+3. **Aktuelle Gesetze:** Vor dem Code-Schreiben relevante Paragraphen recherchieren und im Code-Kommentar mit § + Stand + Quelle dokumentieren. Siehe „Pre-Build: Gesetzes-Recherche".
+4. **Tabellen/Sätze/Grenzen:** Als named constants am File-Anfang mit Stichtag + Quelle, KEINE magic numbers inline. Siehe „Pre-Build: Tabellen-Aktualität".
+
+**Bei jährlichem Januar-Audit greift folgender Workflow:**
+
+1. Repo nach `Stand: <Vorjahr>` durchsuchen → Liste der aktualisierungsbedürftigen Werte
+2. Pro Wert: aktuelle Quelle prüfen, Wert anpassen, Stichtag aktualisieren
+3. Build-Gate 205/205, Live-Stichprobe, Commit
+
+Wenn diese Standards befolgt werden, dauert der Januar-Audit 1–2 Tage statt 2–3 Wochen.
+
 **Aktueller Stand (01.05.2026):** 170 Rechner in 9 Kategorien (Alltag 23, Finanzen **45**, Gesundheit 17, Auto & Verkehr 11, Wohnen & Energie 25, Mathe & Schule 18, Arbeit & Recht **17**, Kochen & Ernährung 12, Sport & Fitness 2). **Welle-Status:** Welle 1 ✅ komplett; **Welle 2 KOMPLETT abgeschlossen 26.04.2026** — Stufe 1 Auto (130–132.6), Stufe 2 Gesundheit (140–144b), Stufe 3 Wohnen (147–148c), Stufe 3 Arbeit (Block A 149a-d + 150a-d, Block B 152a + 153a/b/b-fix + 153c Lib-Audit). **Welle 3 9/10 abgeschlossen (30.04.2026):** ✅ 152b feiertage.ts SSOT, ✅ 154 LazySection-Removal (AdSense-Trigger), ✅ 155 /ueber-uns ausgebaut, ✅ 156 /qualitaet neu, ✅ 151 Block-A-P3-Sammelbatch (17 Items in 5 atomaren Konfig-Commits), ✅ 150e Süd-OLG-UI-Toggle ehegattenunterhalt, ✅ 157 P3-Sammelrest (25 Items in 6 atomaren Konfig-Commits 157a–f), ✅ P3-B1 ueberstunden-Netto-Refactor (Commit 7c2426b), ✅ **Validation-Sweep KOMPLETT 30.04.2026** — 7/7 Module abgeschlossen (M1 Backtick-Hook, M2 Norm-Zitate, M3 SSOT-Konsumption inkl. Lehren L-30 + L-31, M4 Meta-Routen, M5 Affiliate-Konsistenz, M6 FAQ-Drift, M7 A11y-Stichprobe). **Welle-3-Backlog:** nur noch 152c Pendlerpauschalen-SSOT (geparkt — Trigger: Reform-Verabschiedung). **Welle 4 angefangen 01.05.2026 — Verify-Coverage-Backfill:** Scoping ✅ 01.05.26, 6 Module M0–M5, ~22 neue Verify-Scripts, ~16–22 h auf 4–6 Sessions. Lib-Extractions auf Welle 5 ausgelagert. Volldetails: [docs/audit-arbeitspapiere/welle4-scoping.md](../../docs/audit-arbeitspapiere/welle4-scoping.md). **Affiliate:** 12 Programme inkl. CosmosDirekt (Awin 11893); 116 AffiliateBox-Aufrufe in 72 Dateien (M5-Stand 30.04.2026 nach Box-Removal MwStRueckerstattungRechner). **AdSense** live seit 20.04.2026 (Publisher-ID `pub-1389746597486587`); erste Prüfung 27.04.2026 negativ („Minderwertige Inhalte"), Drei-Maßnahmen-Sprint 154+155+156 als Reaktion. Vollständige Welle-Historie + Welle-3-Backlog mit Detailspecs: [docs/audit-arbeitspapiere/welle-status-historie.md](../../docs/audit-arbeitspapiere/welle-status-historie.md).
 
 ## Tech Stack
@@ -112,6 +131,98 @@ Der Prebuild-Hook [scripts/slug-drift-scan.mjs](../../scripts/slug-drift-scan.mj
 bricht den Build bei jedem nicht-whitelisted Drift ab — aber eine
 Verify-im-Kopf-Runde vor dem Commit spart den Build-Break. Ad-hoc-Prüfung:
 `npm run lint:slugs`.
+
+## Pre-Build: Gesetzes-Recherche (Pflicht, Skill v2)
+
+**Vor dem Code-Schreiben** identifizieren: Welche gesetzlichen Vorgaben beeinflussen den Rechner? Typische Domänen:
+
+- **Steuerrecht** — EStG (§ 9, § 32a, § 38b, § 66, § 101 etc.), UStG, SolzG, KraftStG, ErbStG, GrEStG
+- **Sozialversicherungsrecht** — SGB II (Bürgergeld), SGB III (ALG I), SGB IV (Versicherungspflicht, Midijob § 20a), SGB V (KV), SGB VI (RV, Witwenrente, Rentenwert § 68), SGB IX (Schwerbehinderung)
+- **Arbeitsrecht** — BUrlG (Urlaub), ArbZG (Arbeitszeit), MuSchG (Mutterschutz), BEEG (Eltern­geld + Elternzeit), KSchG (Kündigungsschutz), MiLoG (Mindestlohn), BGB §§ 622/626 (Kündigungs­frist)
+- **Mietrecht / Bauen** — BGB §§ 556d–558e (Miet­preis­bremse, Mieterhöhung), WoGG (Wohngeld), EEG (Einspeise­vergütung), GEG (Gebäude­energie), KostBRÄG (Notar/Anwalt)
+- **Verkehrsrecht** — StVG, KraftStG (§ 3d Elektro, § 9 CO₂-Staffel), StVZO
+
+**Für jeden relevanten Paragraphen oder Wert:**
+
+1. **Aktuellen Stand recherchieren.** Quellen in Reihenfolge der Vertrauenswürdigkeit:
+   - [gesetze-im-internet.de](https://www.gesetze-im-internet.de) — amtlicher Wortlaut
+   - [bundesfinanzministerium.de](https://www.bundesfinanzministerium.de) — BMF-Schreiben + Tarif-Tabellen
+   - [bmas.de](https://www.bmas.de) — Arbeit/Soziales
+   - Bundesregierung-PDFs / BGBl. — Verkündungs-Datum + Inkraft­treten
+   - Sozialversicherungsträger (DRV, BMG) — Rechengrößen­verordnungen
+2. **Im Code-Kommentar dokumentieren** — Format:
+
+   ```ts
+   // § <Norm> Abs. <Y>: <Regelung kurz>. Stand: <DD.MM.YYYY>. Quelle: <URL oder Kurzangabe>
+   ```
+
+3. **Bei Werten/Sätzen/Grenzen** zusätzlich Inline-Kommentar mit Stichtag direkt am Konstantenwert.
+
+**Beispiel:**
+
+```ts
+// Grundfreibetrag 2026 nach § 32a Abs. 1 Nr. 1 EStG.
+// Stand: 09.05.2026. Quelle: BMF Steueränderungsgesetz 2025, BGBl. I 2025 Nr. 363.
+const GRUNDFREIBETRAG_2026 = 12348;
+```
+
+**Ziel:** Beim jährlichen Audit (Januar) sofort sichtbar, welche Werte auf neuen Stand gehoben werden müssen — `grep -rn "Stand: " lib/berechnungen/` listet alle Stichtage.
+
+---
+
+## Pre-Build: Tabellen-Aktualität (Pflicht, Skill v2)
+
+**Vor dem Code-Schreiben prüfen,** welche der folgenden Standardwerte verwendet werden — diese sind häufig drift-anfällig:
+
+| Wert-Gruppe | Rechtsgrundlage |
+|---|---|
+| Beitragsbemessungsgrenzen KV/PV/RV/AV (bundeseinheitlich seit 2025) | § 159 SGB VI + SV-Rechengrößen-VO |
+| ESt-Tarifzonen (Grundfreibetrag, Polynom-Koeffizienten, Zonen-Grenzen) | § 32a EStG |
+| Lohnsteuer-PAP (jährliches ITZBund-XML) | § 39b EStG |
+| Steuerklassen-Logik + Faktoren | § 38b EStG |
+| Mindestlohn (allgemein + Branchenverordnungen) | MiLoG + BranchenMiLoV |
+| Kindergeld-Sätze + Kinderfreibetrag | § 66 EStG + § 32 Abs. 6 EStG |
+| Pendlerpauschale-Sätze | § 9 Abs. 1 Nr. 4 EStG |
+| Soli-Freigrenze + Milderungszone | SolzG § 4 |
+| Pflichtversicherungsgrenze (JAEG) | § 6 SGB V |
+| Mehrwertsteuersätze (Regel + ermäßigt) | § 12 UStG |
+| Pfändungstabelle § 850c ZPO (2-Jahres-Anpassung 01.07.) | ZPO + BGBl-VO |
+| Düsseldorfer Tabelle (jährliche Anpassung 01.01.) | OLG Düsseldorf |
+| Rentenwert (Anpassung 01.07.) | § 68 SGB VI + BMAS-VO |
+
+**Für jeden verwendeten Wert PFLICHT-Format im Code-Kommentar:**
+
+```ts
+// <Wert-Bezeichnung> <Jahr>: <Wert>. Stand: <DD.MM.YYYY>. Quelle: <URL>
+```
+
+**Beispiel:**
+
+```ts
+// BBG RV/AV (bundeseinheitlich) 2026: 101.400 €/Jahr (8.450 €/Monat).
+// Stand: 09.05.2026. Quelle: SV-Rechengrößen-VO 2026, BGBl. I 2025 Nr. 367.
+export const BBG_RV_JAHR = 101_400;
+export const BBG_RV_MONAT = 8_450;
+```
+
+**Architektur-Regel:** Tabellen-Werte **bevorzugt als named constants am File-Anfang** sammeln (nicht inline-magic-numbers), damit nächster Audit-Durchgang in einer Datei alle Werte sieht. Bei jahresabhängigen Werten Stichtag-Switch-Pattern anwenden (siehe Step 12a + CLAUDE.md).
+
+**Anti-Pattern** — magic numbers inline:
+
+```ts
+// ❌ Schlecht: Wert ohne Bezeichnung, Stichtag, Quelle
+const ergebnis = brutto - 12348;
+
+// ✅ Gut: Named constant mit Stichtag + Quelle
+// Grundfreibetrag 2026 nach § 32a Abs. 1 Nr. 1 EStG.
+// Stand: 09.05.2026. Quelle: BMF StÄndG 2025.
+const GRUNDFREIBETRAG_2026 = 12_348;
+const ergebnis = brutto - GRUNDFREIBETRAG_2026;
+```
+
+Im Idealfall liegt der Wert bereits in einer zentralen Lib (`lib/berechnungen/<domain>.ts`) — siehe CLAUDE.md → „Zentrale Libs (SSOT)". Eigene Hardcodes nur, wenn der Wert nirgendwo zentral verfügbar ist; dann Inline-Constants mit Stichtag.
+
+---
 
 ## When Building a New Rechner
 
