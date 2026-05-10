@@ -8,6 +8,45 @@
 
 ---
 
+## Skill-Update v2 — rechner-builder vollständige Audit-Prävention — 10.05.2026
+
+- **rechner-builder-Skill v2 etabliert.** Vier Standards für alle künftigen Rechner. Erweitert das v1-Update (Affiliate + Wortzahl) um zwei zusätzliche Audit-Präventiv-Standards (Gesetze + Tabellen-Constants) plus einen Audit-Hinweis am Skill-Anfang als Begründungs-Block. Ziel: Januar-Audit 1–2 Tage statt 2–3 Wochen.
+
+  **Geänderte Skill-Dateien:**
+  - [`.claude/skills/rechner-builder/SKILL.md`](../../.claude/skills/rechner-builder/SKILL.md) — neuer „WARUM diese Standards existieren"-Block am Anfang + zwei neue Pre-Build-Sections (Gesetzes-Recherche + Tabellen-Aktualität) vor Step 1
+  - [`.claude/skills/rechner-builder/references/templates.md`](../../.claude/skills/rechner-builder/references/templates.md) — neue Welle-14-Patterns-Sektion mit Gesetzes-Stichtag-JSDoc-Snippet + Tabellen-Constants-Beispiel + Anti-Pattern-Box + Audit-Workflow-Befehle
+  - [`.claude/skills/rechner-builder/references/checklist.md`](../../.claude/skills/rechner-builder/references/checklist.md) — 3 neue Items in „Vor dem Erstellen" + neue Sektion „Gesetzes- & Tabellen-Standards" mit 6 Items
+
+  **Vier Standards für alle künftigen Rechner (Stand v2):**
+
+  1. **Affiliate-Architektur** (v1, W14.A-Pattern): `config.affiliate` als Single-Object oder Array statt hartkodierter `<AffiliateBox />`-JSX. `config.amazonProducts` für Amazon-Boxen. Renderer macht `Array.isArray`-Check.
+  2. **Mindest-Content 750 W** (v1, W13.C-Audit): `erklaerung` + FAQ kombiniert ≥ 750 W, Ideal 1.000–1.500 W. FAQ 5–8 Fragen (Empfehlung 6, Top-Rechner ≥ 8).
+  3. **Aktuelle Gesetze** (v2, NEU): Vor Code-Schreiben relevante §§ (EStG/SGB/BGB/etc.) identifizieren. Im Code-Kommentar mit Paragraf + Stand + Quelle dokumentieren. Format: `// § X Abs. Y: <Regelung>. Stand: <Datum>. Quelle: <URL>`.
+  4. **Tabellen/Sätze/Grenzen** (v2, NEU): Drift-anfällige Standardwerte (BBG, ESt-Tarif, Mindestlohn, Kindergeld, Pendlerpauschale, Soli-Freigrenze etc.) als named constants am File-Anfang mit Stichtag + Quelle — KEINE magic numbers inline. Wo möglich SSOT-Import aus `lib/berechnungen/<domain>.ts`.
+
+  **Audit-Workflow (Januar jährlich) — durch v2-Standards ermöglicht:**
+
+  ```bash
+  # Alle dokumentierten Stichtage finden
+  grep -rn "Stand: " lib/berechnungen/
+
+  # Alle Vorjahres-Werte finden (Beispiel: Januar 2027 sucht 2026)
+  grep -rn "Stand: .*\.2026" lib/berechnungen/
+  grep -rn "_2026 = " lib/berechnungen/
+  ```
+
+  **Begründung:** Audit-Schmerz aus W13.B (veraltete Soli-Freigrenze 18.130 € statt 20.350 €, ESt-Tarifzonen 2025 statt 2026 in finanzen.ts:2867, BBG-Werte) hatte gezeigt, dass undokumentierte Tabellen-Werte den jährlichen Audit von 1–2 Tagen auf 2–3 Wochen aufblasen. v2-Standards machen die drift-anfälligen Werte sofort sichtbar.
+
+  **Konsistenz mit Bestand:** Bestehende 12-Step-Template-Struktur erhalten. Neue Updates als Erweiterungen vor Step 1 (zwei Pre-Build-Sections) und im Header-Block — die 14 bestehenden Schritte sind unverändert. Sonderfall-Patterns P1–P4b bleiben als Bestandsschutz dokumentiert; neue Rechner nutzen Standard-Pattern.
+
+  ### ⚠️ Pflicht-Erinnerung für Karsten
+
+  **Skill v2 im Claude.ai-Skills-UI manuell synchronisieren.** Die Repo-Änderungen unter `.claude/skills/rechner-builder/` müssen separat im Claude.ai-Skills-Web-UI eingepflegt werden — der Skill in der Claude.ai-Oberfläche zieht NICHT automatisch aus dem Repo. Memory-Regel mehrfach in rechenfix-Memory dokumentiert.
+
+  **Workflow:** Repo-Skill-Files öffnen → kopieren → Claude.ai-Skills-UI → rechner-builder → Inhalt ersetzen → speichern. Erst danach gilt der v2-Skill im Claude.ai-Chat als aktiv.
+
+---
+
 ## Skill-Update — rechner-builder auf W14.A-Pattern + AdSense-Wortzahl — 10.05.2026
 
 - **rechner-builder-Skill auf W14.A-Pattern aktualisiert.** Drei Updates eingebaut, damit alle künftigen Rechner automatisch konform sind und keine Bestands-Drifts erneut auftreten.
