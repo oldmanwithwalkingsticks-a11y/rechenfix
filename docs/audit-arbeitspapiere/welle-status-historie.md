@@ -159,6 +159,14 @@
   - **Conditional-Render-Pattern repo-weit kartieren** (Pattern P4) — bei ≥3 weiteren Fundstellen mit Struktur `{state && condition && <AffiliateBox />}` Architektur-Erweiterung erwägen (Type-sicherer Discriminated Union statt String-Eval). Aktueller Stand: 2 Fundstellen (Elterngeld, Renten verivox-Box).
   - **RentenRechner verivox-Conditional Re-Eval** (Pattern P4b) — prüfen, ob die conditional verivox-Box durch ein anderes Pitch-Pattern ersetzbar ist (z. B. dynamischer Description-Text statt Conditional). Bei Lösung wäre RentenRechner vollständig auf P-Standard hebbar.
   - **Slug-Konsistenz-Audit** — drei Slugs ohne Bindestrich (`sparrechner`, `rentenrechner`, `etf-sparplanrechner` hybrid), zwei mit (`kfz-steuer-rechner`, `riester-rechner`). Audit + Konsolidierung NACH AdSense-Approval, mit 301-Redirects für alte URLs. Während AdSense-Review nicht anfassen (URL-Konsistenz wäre Reject-Risiko).
+  - **Mobile Performance-Sprint** (nach AdSense-Entscheidung, hinzugefügt 11.05.2026 nach PageSpeed-Befund):
+    - Ziel: PageSpeed Mobile Score 74 → 85+
+    - Hauptpunkt **LCP: 5,3 s / 6,6 s → unter 2,5 s**
+    - Größter Hebel: **577 KiB nicht verwendetes JavaScript** reduzieren (Code-Splitting + dynamic imports + Vendor-Bundle-Refactor)
+    - Quick wins: Cache-Header, veraltete JS-Polyfills, Render-blocking Resources entfernen
+    - Globales Problem (beide getesteten Pages identisch Score 74) → vermutlich Layout-Component oder globale Bundle-Konfiguration
+    - Aufwand-Schätzung: 1–2 Tage gezielter Sprint
+    - Quelle: PageSpeed Insights Mobile Reports vom 11.05.2026
 
   **Nächster Schritt nach W14.A-Abschluss:** AdSense-Submission-Status checken / Backlinks / 50-Ideen-Liste / Long-Tail-Pages-Phase-1 (nach AdSense-Approval).
 
