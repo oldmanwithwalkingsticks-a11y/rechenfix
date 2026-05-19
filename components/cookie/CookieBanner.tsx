@@ -6,20 +6,18 @@ import { useCookieConsent } from './CookieConsentProvider';
 
 export default function CookieBanner() {
   const { bannerVisible, settingsVisible, consent, saveConsent, closeSettings } = useCookieConsent();
-  const [analytics, setAnalytics] = useState(false);
   const [marketing, setMarketing] = useState(false);
 
   // Toggles mit gespeichertem Consent synchronisieren wenn Settings geöffnet werden
   useEffect(() => {
     if (settingsVisible) {
-      setAnalytics(consent?.analytics ?? false);
       setMarketing(consent?.marketing ?? false);
     }
   }, [settingsVisible, consent]);
 
-  const acceptAll = () => saveConsent({ analytics: true, marketing: true });
-  const acceptNecessary = () => saveConsent({ analytics: false, marketing: false });
-  const saveSelection = () => saveConsent({ analytics, marketing });
+  const acceptAll = () => saveConsent({ marketing: true });
+  const acceptNecessary = () => saveConsent({ marketing: false });
+  const saveSelection = () => saveConsent({ marketing });
 
   return (
     <>
@@ -97,19 +95,10 @@ export default function CookieBanner() {
                   onChange={() => {}}
                 />
 
-                {/* Analyse */}
-                <CookieToggle
-                  label="Analyse-Cookies (Google Analytics)"
-                  description="Helfen uns zu verstehen, wie Besucher die Website nutzen. Daten werden anonymisiert erfasst."
-                  checked={analytics}
-                  disabled={false}
-                  onChange={setAnalytics}
-                />
-
                 {/* Marketing */}
                 <CookieToggle
-                  label="Marketing-Cookies (Google AdSense, Amazon Associates)"
-                  description="Ermöglichen die Anzeige personalisierter Werbung, die Erfassung von Affiliate-Klicks in Google Analytics und das Setzen des Amazon-Partner-Tags (rechenfix-21) für Zuordnung von Käufen aus dem Amazon-Partnerprogramm."
+                  label="Werbung (Google AdSense)"
+                  description="Ermöglichen die Anzeige personalisierter Werbung über Google AdSense sowie das Setzen des Amazon-Partner-Tags (rechenfix-21) für die Zuordnung von Käufen aus dem Amazon-Partnerprogramm."
                   checked={marketing}
                   disabled={false}
                   onChange={setMarketing}

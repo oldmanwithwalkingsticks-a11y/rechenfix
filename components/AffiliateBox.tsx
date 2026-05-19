@@ -2,7 +2,6 @@
 
 import { useCallback, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
-import { useCookieConsent } from '@/components/cookie/CookieConsentProvider';
 
 // --- Affiliate-Programm-Daten ---
 
@@ -323,7 +322,6 @@ export function AffiliateBox({ programId, context, variant = 'full' }: Affiliate
   const program = AFFILIATE_PROGRAMS[programId];
   const description = getDescription(programId, context);
   const pathname = usePathname();
-  const { marketingAllowed } = useCookieConsent();
 
   const clickref = useMemo(() => {
     return `https://www.rechenfix.de${pathname}`;
@@ -349,21 +347,7 @@ export function AffiliateBox({ programId, context, variant = 'full' }: Affiliate
         keepalive: true,
       }).catch(() => { /* ignore */ });
     } catch { /* ignore */ }
-
-    // GA-Event nur mit Marketing-Consent
-    if (marketingAllowed) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const w = window as any;
-      if (typeof window !== 'undefined' && w.gtag) {
-        w.gtag('event', 'affiliate_click', {
-          event_category: 'affiliate',
-          event_label: programId,
-          affiliate_program: programId,
-          rechner_page: window.location.pathname,
-        });
-      }
-    }
-  }, [programId, context, marketingAllowed]);
+  }, [programId, context]);
 
   if (variant === 'compact') {
     return (

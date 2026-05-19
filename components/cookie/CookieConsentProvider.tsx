@@ -4,7 +4,6 @@ import { createContext, useContext, useEffect, useState, useCallback } from 'rea
 
 interface CookieConsent {
   necessary: boolean;
-  analytics: boolean;
   marketing: boolean;
   timestamp: string;
 }
@@ -12,7 +11,6 @@ interface CookieConsent {
 interface CookieConsentContextType {
   consent: CookieConsent | null;
   consentGiven: boolean;
-  analyticsAllowed: boolean;
   marketingAllowed: boolean;
   bannerVisible: boolean;
   settingsVisible: boolean;
@@ -29,7 +27,6 @@ const CONSENT_MAX_AGE_DAYS = 365;
 const CookieConsentContext = createContext<CookieConsentContextType>({
   consent: null,
   consentGiven: false,
-  analyticsAllowed: false,
   marketingAllowed: false,
   bannerVisible: false,
   settingsVisible: false,
@@ -81,7 +78,6 @@ export default function CookieConsentProvider({ children }: { children: React.Re
   const saveConsent = useCallback((partial: Omit<CookieConsent, 'necessary' | 'timestamp'>) => {
     const full: CookieConsent = {
       necessary: true,
-      analytics: partial.analytics,
       marketing: partial.marketing,
       timestamp: new Date().toISOString(),
     };
@@ -118,7 +114,6 @@ export default function CookieConsentProvider({ children }: { children: React.Re
       value={{
         consent,
         consentGiven: consent !== null,
-        analyticsAllowed: consent?.analytics ?? false,
         marketingAllowed: consent?.marketing ?? false,
         bannerVisible,
         settingsVisible,

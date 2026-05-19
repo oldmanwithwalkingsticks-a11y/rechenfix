@@ -26,7 +26,7 @@ export default function DatenschutzSeite() {
         <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
           Datenschutzerklärung
         </h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: April 2026</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: Mai 2026</p>
 
         <div className="space-y-10 text-gray-700 dark:text-gray-300 text-[15px] leading-relaxed">
 
@@ -42,7 +42,6 @@ export default function DatenschutzSeite() {
             <ul className="list-disc pl-5 space-y-1 mt-3">
               <li>Bereitstellung der Website und Gewährleistung ihrer Funktionalität</li>
               <li>Hosting und technische Infrastruktur</li>
-              <li>Analyse des Nutzerverhaltens (nur nach Einwilligung)</li>
               <li>Anzeige personalisierter Werbung (nur nach Einwilligung)</li>
               <li>Einbindung von Affiliate-Links</li>
               <li>Serverseitige, anonyme Nutzungsstatistik (Klicks, Feedback, Berechnungszähler)</li>
@@ -56,7 +55,7 @@ export default function DatenschutzSeite() {
             <p>Wir verarbeiten personenbezogene Daten auf Grundlage folgender Rechtsgrundlagen gemäß Art. 6 Abs. 1 DSGVO:</p>
             <ul className="list-disc pl-5 space-y-2 mt-3">
               <li>
-                <strong>Einwilligung (Art. 6 Abs. 1 lit. a DSGVO):</strong> Für den Einsatz von Google Analytics, Google AdSense und nicht-essenzielle Cookies. Die Einwilligung kann jederzeit über unseren Cookie-Banner oder per E-Mail an uns widerrufen werden.
+                <strong>Einwilligung (Art. 6 Abs. 1 lit. a DSGVO):</strong> Für den Einsatz von Google AdSense und nicht-essenzielle Cookies. Die Einwilligung kann jederzeit über unseren Cookie-Banner oder per E-Mail an uns widerrufen werden.
               </li>
               <li>
                 <strong>Vertragserfüllung (Art. 6 Abs. 1 lit. b DSGVO):</strong> Soweit die Verarbeitung zur Bereitstellung unserer kostenlosen Online-Rechner erforderlich ist.
@@ -134,11 +133,6 @@ export default function DatenschutzSeite() {
                     <td className="p-3">Art. 6 Abs. 1 lit. f DSGVO</td>
                   </tr>
                   <tr>
-                    <td className="p-3">Analyse</td>
-                    <td className="p-3">Google Analytics 4</td>
-                    <td className="p-3">Art. 6 Abs. 1 lit. a DSGVO</td>
-                  </tr>
-                  <tr>
                     <td className="p-3">Werbung</td>
                     <td className="p-3">Google AdSense</td>
                     <td className="p-3">Art. 6 Abs. 1 lit. a DSGVO</td>
@@ -146,26 +140,6 @@ export default function DatenschutzSeite() {
                 </tbody>
               </table>
             </div>
-          </Section>
-
-          {/* 7. Google Analytics */}
-          <Section nr="7" titel="Google Analytics 4">
-            <p>
-              Wir verwenden Google Analytics 4, einen Webanalysedienst der Google Ireland Limited (Gordon House, Barrow Street, Dublin 4, Irland). Google Analytics wird <strong>ausschließlich nach Ihrer ausdrücklichen Einwilligung</strong> über unseren Cookie-Banner aktiviert.
-            </p>
-            <p className="mt-3">Google Analytics verwendet Cookies, um eine Analyse der Benutzung der Website zu ermöglichen. Dabei werden folgende Daten erfasst:</p>
-            <ul className="list-disc pl-5 space-y-1 mt-3">
-              <li>Besuchte Seiten und Verweildauer</li>
-              <li>Verwendetes Endgerät, Betriebssystem und Browser</li>
-              <li>Ungefährer Standort (Land/Stadt, basierend auf anonymisierter IP-Adresse)</li>
-              <li>Referrer (woher Sie auf unsere Website gekommen sind)</li>
-            </ul>
-            <p className="mt-3">
-              Wir haben die <strong>IP-Anonymisierung</strong> aktiviert. Ihre IP-Adresse wird von Google innerhalb der EU/des EWR vor der Übermittlung in die USA gekürzt. Google ist unter dem EU-US Data Privacy Framework zertifiziert.
-            </p>
-            <p className="mt-3">
-              Rechtsgrundlage ist Ihre Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO. Sie können Ihre Einwilligung jederzeit über den Cookie-Banner widerrufen.
-            </p>
           </Section>
 
           {/* 8. Google AdSense */}
@@ -227,7 +201,7 @@ export default function DatenschutzSeite() {
               Bei Klick auf einen Affiliate-Link werden Sie auf die Website des Anbieters weitergeleitet. Dort gelten die Datenschutzbestimmungen des jeweiligen Anbieters. Die Affiliate-Links werden über das Netzwerk der <strong>Awin AG</strong> (Eichhornstraße 3, 10785 Berlin) vermittelt. Awin kann dabei einen Tracking-Cookie setzen, um die Zuordnung des Kaufs zu ermöglichen.
             </p>
             <p className="mt-3">
-              Zusätzlich speichern wir bei Klick auf einen Affiliate-Link anonymisierte Klickdaten (Programm-ID, Rechner-Seitenpfad, Zeitstempel) auf unserem Server, um die Nutzung der Empfehlungen intern statistisch auszuwerten. Es werden <strong>keine IP-Adressen, keine User-Agents und keine sonstigen personenbezogenen Daten</strong> gespeichert. Eine Zuordnung zu einer konkreten Person ist uns nicht möglich. Die technische Speicherung erfolgt bei unserem Auftragsverarbeiter <strong>Upstash, Inc.</strong> in einer Redis-Datenbank mit Standort in der Europäischen Union (Frankfurt/Irland). Mit Upstash besteht ein Auftragsverarbeitungsvertrag gemäß Art. 28 DSGVO. Die Liste ist auf maximal 20.000 Einträge begrenzt; ältere Einträge werden automatisch überschrieben. Sofern Sie der Nutzung von Google Analytics zugestimmt haben, wird der Klick zusätzlich als Analytics-Event erfasst.
+              Zusätzlich speichern wir bei Klick auf einen Affiliate-Link anonymisierte Klickdaten (Programm-ID, Rechner-Seitenpfad, Zeitstempel) auf unserem Server, um die Nutzung der Empfehlungen intern statistisch auszuwerten. Es werden <strong>keine IP-Adressen, keine User-Agents und keine sonstigen personenbezogenen Daten</strong> gespeichert. Eine Zuordnung zu einer konkreten Person ist uns nicht möglich. Die technische Speicherung erfolgt bei unserem Auftragsverarbeiter <strong>Upstash, Inc.</strong> in einer Redis-Datenbank mit Standort in der Europäischen Union (Frankfurt/Irland). Mit Upstash besteht ein Auftragsverarbeitungsvertrag gemäß Art. 28 DSGVO. Die Liste ist auf maximal 20.000 Einträge begrenzt; ältere Einträge werden automatisch überschrieben.
             </p>
             <p className="mt-3">
               Die Einbindung von Affiliate-Links erfolgt auf Grundlage unseres berechtigten Interesses an der Finanzierung unseres kostenlosen Angebots (Art. 6 Abs. 1 lit. f DSGVO). Affiliate-Links sind auf unserer Website stets als &bdquo;Anzeige&ldquo; gekennzeichnet.
