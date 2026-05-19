@@ -2,13 +2,12 @@
 
 import { useEffect, useRef } from 'react';
 import { useCookieConsent } from '@/components/cookie/CookieConsentProvider';
+import { ADSENSE_PUBLISHER_ID } from '@/lib/adsense-config';
 
 interface AdSlotProps {
   typ: 'leaderboard' | 'rectangle' | 'sidebar';
   className?: string;
 }
-
-const ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_ID || 'ca-pub-1389746597486587';
 
 const adConfig = {
   leaderboard: {
@@ -55,7 +54,7 @@ export default function AdSlot({ typ, className = '' }: AdSlotProps) {
         ref={adRef}
         className="adsbygoogle"
         style={config.style}
-        data-ad-client={ADSENSE_ID}
+        data-ad-client={ADSENSE_PUBLISHER_ID}
         data-ad-format={config.format}
         data-full-width-responsive="true"
       />
