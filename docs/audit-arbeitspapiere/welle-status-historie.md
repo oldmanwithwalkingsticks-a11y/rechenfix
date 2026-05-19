@@ -4,7 +4,64 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 09.05.2026
+**Stand:** 19.05.2026
+
+---
+
+## W14 Track A — GA-Entfernung & Vercel Analytics — 19.05.2026
+
+**Anlass:** AdSense-Ablehnung 19.05.2026 wegen „minderwertige Inhalte". Hands-Off-Modus aufgehoben, vor nächster Submission Google Analytics komplett raus (Datenschutz + Trust-Signal) und Vercel Analytics als cookieloser Ersatz rein.
+
+**Scoping:** [docs/audit-arbeitspapiere/w14a-ga-removal-scoping.md](w14a-ga-removal-scoping.md) — Phase-1-Treffer in 4 Kategorien (GA-Script-Loader, Cookie-Banner-Toggle, Datenschutz-Abschnitt, gtag-Event-Calls) plus False-Positive-Liste.
+
+### Commit 1 — `chore: remove google analytics (datenschutz)` (`20ef5fe`)
+
+**Code (5 Files):**
+- [components/cookie/ConsentScripts.tsx](../../components/cookie/ConsentScripts.tsx) — GA-Block + `GA_ID`-Konstante entfernt, AdSense-Loader unverändert
+- [components/cookie/CookieBanner.tsx](../../components/cookie/CookieBanner.tsx) — Analyse-Toggle ganz entfernt, Marketing-Toggle umbenannt zu „Werbung (Google AdSense)" mit angepasstem Description-Text
+- [components/cookie/CookieConsentProvider.tsx](../../components/cookie/CookieConsentProvider.tsx) — `analytics`-Feld aus `CookieConsent`-Interface, `analyticsAllowed` aus Context-Type, beide Felder aus `saveConsent` und Context-Provider-Value entfernt. Migrations-Code nicht nötig — alte `localStorage`-Einträge mit `analytics`-Feld werden durch `JSON.parse` stillschweigend ignoriert
+- [components/AffiliateBox.tsx](../../components/AffiliateBox.tsx) — gtag-Event-Block in `handleClick` entfernt, `useCookieConsent`-Hook und Import gelöscht (nicht mehr benötigt, da `marketingAllowed` nur für gtag gebraucht wurde). Serverseitige `/api/track`-Klickerfassung unverändert
+- [components/AmazonBox.tsx](../../components/AmazonBox.tsx) — **unangetastet**, wird in Track B komplett entfernt (Hook + Tag-Übermittlung). Scope-Trennung bewusst gewählt
+
+**Datenschutz ([app/datenschutz/page.tsx](../../app/datenschutz/page.tsx)):**
+- Stand: April → Mai 2026
+- Übersicht 2: Bullet „Analyse des Nutzerverhaltens (nur nach Einwilligung)" entfernt
+- Rechtsgrundlagen 3 lit. a: „Google Analytics" gestrichen
+- Cookie-Tabelle 6.3: Zeile „Analyse — Google Analytics 4" entfernt
+- Abschnitt 7 „Google Analytics 4" komplett entfernt (Renumerierung erst in Commit 2)
+- Abschnitt 9 Affiliate: letzter Satz „Sofern Sie der Nutzung von Google Analytics zugestimmt haben…" gestrichen
+
+### Commit 2 — `feat: add vercel analytics (privacy-friendly)` (`09c0cd2`)
+
+**Setup:**
+- `npm install @vercel/analytics` (^2.0.1)
+- [app/layout.tsx](../../app/layout.tsx): `import { Analytics } from '@vercel/analytics/next'` + `<Analytics />` direkt vor `</body>` eingefügt (außerhalb des `ThemeProvider`-Trees, damit unabhängig von Consent-Logik)
+
+**Datenschutz-Erweiterung:**
+- Übersicht 2: neuer Bullet „Anonyme Reichweitenmessung über Vercel Analytics (cookielos, ohne Personenbezug)"
+- Rechtsgrundlagen 3 lit. f: Vercel Analytics als berechtigtes Interesse ergänzt
+- **NEUER Abschnitt 6 „Vercel Analytics (anonyme Reichweitenmessung)"** direkt nach Hosting platziert (Vercel-Familie, cookielos). Beschreibt: aggregierte Daten (Pageviews/Verweildauer/Land/Gerät/Referrer), kein IP-Storage, anonymer Tageshash, keine geräte- oder sitzungsübergreifende Verfolgung, § 25 TDDDG einwilligungsfrei wegen fehlendem Personenbezug, Rechtsgrundlage Art. 6 Abs. 1 lit. f DSGVO, Link auf Vercel-Datenschutzhinweise
+- Renumerierung: Cookies-Abschnitt 6 → 7 (inkl. 7.1/7.2/7.3-Unterüberschriften). AdSense bleibt 8, Affiliate-Block 9/9a/9b unverändert. Anschluss-Abschnitte 10–14 unverändert
+- 7.3-Tabelle: Fußnoten-Hinweis, dass Vercel Analytics cookielos arbeitet und deshalb nicht in der Cookie-Tabelle steht
+
+### Vercel-Analytics-Setup-Schritte (Phase 4 — Karsten manuell)
+
+1. **Vercel Dashboard → Project → Analytics → Enable** (sonst sammelt der eingebundene `<Analytics />`-Component nichts)
+2. **Vercel Env-Var `NEXT_PUBLIC_GA_ID` löschen** (Default-Fallback war `G-CNVMHDZM4S`, nicht mehr referenziert)
+3. **Google Analytics Property in GA-Konsole archivieren/löschen**
+4. **Search Console:** GA-Verknüpfung trennen, falls verknüpft
+5. **Doku-Update CLAUDE.md / `rechenfix-projekt-referenz.md`:** GA-Erwähnung gegen Vercel Analytics tauschen
+
+### Verifikation
+
+- `npm run build` nach Commit 1 grün, 205/205 statische Seiten generiert
+- `npm run build` nach Commit 2 grün, 205/205 statische Seiten generiert (First-Load-JS +0,03 kB durch `<Analytics />`)
+- Resttreffer-Check: kein `gtag` / `GA_ID` / `googletagmanager` / `google-analytics` im Produktiv-Code außerhalb AmazonBox.tsx (Track-B-Scope)
+- Alle Prebuild-Hooks (Footer-Lint, Jahreswerte-Lint, Backtick-Lint, Slug-Drift-Scan) durchgelaufen
+
+### L-Lehren
+
+Keine neuen Lehren — Sprint war straight-forward Refactor entlang bekannter Patterns. Anmerkung: Die bewusste **Scope-Trennung Track A / Track B** (AmazonBox-gtag bleibt in W14-Track-A drin, weil das Programm in Track B sowieso komplett entfernt wird) ist ein Beispiel für L-46-artige atomische Sprint-Disziplin — keine vorausschauenden Touches an Code, der bald ohnehin verschwindet.
 
 ---
 
