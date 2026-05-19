@@ -90,9 +90,6 @@ Unser Wochenmodus eignet sich ideal als schnelle Kontrolle: Geben Sie Ihre Arbei
       },
     ],
     affiliate: { programId: 'lexware', context: 'arbeitszeitrechner', variant: 'compact' },
-    amazonProducts: [
-      { keyword: 'zeiterfassung stempeluhr', description: 'Für Handwerk, Praxis oder kleine Teams: Physische Stempeluhren erfassen Arbeitszeiten DSGVO-konform ohne Cloud-Abo.' },
-    ],
   },
   {
     slug: 'urlaubstage-rechner',
@@ -390,9 +387,6 @@ Wer unter dem Grundfreibetrag (12.348 € in 2026) verdient, zahlt keine Einkomm
       },
     ],
     affiliate: { programId: 'wiso', context: 'pendlerpauschale' },
-    amazonProducts: [
-      { keyword: 'handyhalterung auto', description: 'Für den täglichen Pendelweg: Sichere Handyhalterung im Auto erleichtert Navigation und hält die Hände frei — verkehrssicherheitskonform.' },
-    ],
   },
   {
     slug: 'promillerechner',

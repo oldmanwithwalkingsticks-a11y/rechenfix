@@ -321,9 +321,6 @@ Die BEG-Förderung (KfW 458) bezuschusst den Heizungstausch auf erneuerbare Wär
       },
     ],
     affiliate: { programId: 'check24', context: 'heizkosten' },
-    amazonProducts: [
-      { keyword: 'heizkörperthermostat', description: 'Programmierbare Thermostatköpfe senken die Nachttemperatur automatisch — pro Raum je nach Nutzungsmuster 5–10 % Heizenergie.' },
-    ],
   },
   {
     slug: 'grunderwerbsteuer-rechner',

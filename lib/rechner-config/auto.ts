@@ -113,9 +113,6 @@ Spritkosten sind einer der größten variablen Kostenposten beim Autofahren — 
       { programId: 'check24', context: 'spritkosten', variant: 'compact' },
       { programId: 'hotelde', context: 'spritkosten', variant: 'compact' },
     ],
-    amazonProducts: [
-      { keyword: 'kraftstoffzusatz', description: 'Injektorreiniger und Kraftstoffzusätze können bei älteren Motoren helfen, Ablagerungen zu lösen und den Verbrauch zu senken.' },
-    ],
   },
   {
     slug: 'kw-ps-umrechner',

@@ -882,9 +882,6 @@ Tipp: Umzüge am Monatsanfang oder unter der Woche sind oft günstiger als am Mo
       },
     ],
     affiliate: { programId: 'cosmosdirekt', context: 'hausrat' },
-    amazonProducts: [
-      { keyword: 'umzugskartons 30 stück', description: 'Stabile Umzugskartons im Mehrfach-Set sind günstiger als einzeln gekauft und lassen sich nach dem Umzug zusammenfalten.' },
-    ],
   },
   {
     slug: 'trinkgeld-rechner',

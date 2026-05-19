@@ -13,18 +13,6 @@ export interface AffiliateConfig {
   variant?: 'compact' | 'full';
 }
 
-/**
- * Amazon-Partner-Box-Konfiguration. Eingeführt mit W14.A.1. Renderer
- * spielt jeden Eintrag nach den Affiliate-Boxen, vor „Verwandte Rechner"
- * aus.
- */
-export interface AmazonProductConfig {
-  keyword: string;
-  /** Default „Passende Produkte auf Amazon" (in der AmazonBox-Component). */
-  headline?: string;
-  description?: string;
-}
-
 export interface RechnerConfig {
   slug: string;
   titel: string;
@@ -48,12 +36,6 @@ export interface RechnerConfig {
    * Property weg und behalten ihre eigenen AffiliateBox-Render-Blöcke inline.
    */
   affiliate?: AffiliateConfig | AffiliateConfig[];
-  /**
-   * Optional: Amazon-Partner-Boxen (Suchlink-basiert via `rechenfix-21`-Tag).
-   * Werden vom Renderer nach den Affiliate-Boxen ausgespielt. Eingeführt
-   * mit W14.A.1.
-   */
-  amazonProducts?: AmazonProductConfig[];
 }
 
 export interface KategorieConfig {
