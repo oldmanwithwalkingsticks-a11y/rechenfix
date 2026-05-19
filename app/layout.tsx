@@ -16,6 +16,7 @@ import ScrollToTop from '@/components/layout/ScrollToTop';
 import ConsentScripts from '@/components/cookie/ConsentScripts';
 import StructuredData from '@/components/seo/StructuredData';
 import { generateWebsiteSchema } from '@/lib/seo';
+import { Analytics } from '@vercel/analytics/next';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -118,6 +119,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <ScrollToTop />
           </CookieConsentProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

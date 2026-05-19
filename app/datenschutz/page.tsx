@@ -42,6 +42,7 @@ export default function DatenschutzSeite() {
             <ul className="list-disc pl-5 space-y-1 mt-3">
               <li>Bereitstellung der Website und Gewährleistung ihrer Funktionalität</li>
               <li>Hosting und technische Infrastruktur</li>
+              <li>Anonyme Reichweitenmessung über Vercel Analytics (cookielos, ohne Personenbezug)</li>
               <li>Anzeige personalisierter Werbung (nur nach Einwilligung)</li>
               <li>Einbindung von Affiliate-Links</li>
               <li>Serverseitige, anonyme Nutzungsstatistik (Klicks, Feedback, Berechnungszähler)</li>
@@ -61,7 +62,7 @@ export default function DatenschutzSeite() {
                 <strong>Vertragserfüllung (Art. 6 Abs. 1 lit. b DSGVO):</strong> Soweit die Verarbeitung zur Bereitstellung unserer kostenlosen Online-Rechner erforderlich ist.
               </li>
               <li>
-                <strong>Berechtigte Interessen (Art. 6 Abs. 1 lit. f DSGVO):</strong> Für technisch notwendige Cookies, das Hosting der Website, die SSL/TLS-Verschlüsselung sowie die Einbindung von Affiliate-Links zur Finanzierung des Angebots.
+                <strong>Berechtigte Interessen (Art. 6 Abs. 1 lit. f DSGVO):</strong> Für technisch notwendige Cookies, das Hosting der Website, die SSL/TLS-Verschlüsselung, die anonyme Reichweitenmessung über Vercel Analytics sowie die Einbindung von Affiliate-Links zur Finanzierung des Angebots.
               </li>
             </ul>
           </Section>
@@ -101,14 +102,33 @@ export default function DatenschutzSeite() {
             </Hinweisbox>
           </Section>
 
-          {/* 6. Cookies */}
-          <Section nr="6" titel="Cookies und Einwilligung">
-            <h3 className="font-bold text-gray-800 dark:text-gray-100 mt-4 mb-2">6.1 Was sind Cookies?</h3>
+          {/* 6. Vercel Analytics */}
+          <Section nr="6" titel="Vercel Analytics (anonyme Reichweitenmessung)">
+            <p>
+              Wir nutzen <strong>Vercel Analytics</strong>, einen Dienst der Vercel Inc. (440 N Barranca Avenue #4133, Covina, CA 91723, USA), zur anonymen Reichweitenmessung. Vercel Analytics erfasst aggregierte Nutzungsdaten wie Seitenaufrufe, Verweildauer, ungefähren Standort (Land), Gerätekategorie sowie Referrer.
+            </p>
+            <p className="mt-3">
+              Die Messung erfolgt <strong>cookielos</strong> und <strong>ohne Personenbezug</strong>. IP-Adressen werden nicht gespeichert; statt eindeutiger Kennungen wird ein anonymer Tageshash gebildet, der keine wiederkehrenden Nutzer identifiziert. Es findet kein Tracking über Geräte oder Sitzungen hinweg statt.
+            </p>
+            <p className="mt-3">
+              Da keine personenbezogenen Daten verarbeitet werden, ist eine Einwilligung nach § 25 TDDDG nicht erforderlich. Rechtsgrundlage für die Verarbeitung ist unser berechtigtes Interesse an einer datensparsamen Messung der Reichweite und Performance unseres Angebots gemäß Art. 6 Abs. 1 lit. f DSGVO.
+            </p>
+            <p className="mt-3">
+              Weitere Informationen finden Sie in den{' '}
+              <a href="https://vercel.com/docs/analytics/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-400 underline">
+                Datenschutzhinweisen zu Vercel Analytics
+              </a>.
+            </p>
+          </Section>
+
+          {/* 7. Cookies */}
+          <Section nr="7" titel="Cookies und Einwilligung">
+            <h3 className="font-bold text-gray-800 dark:text-gray-100 mt-4 mb-2">7.1 Was sind Cookies?</h3>
             <p>
               Cookies sind kleine Textdateien, die auf Ihrem Endgerät gespeichert werden. Sie richten keinen Schaden an und enthalten keine Viren. Cookies ermöglichen es, unser Angebot nutzerfreundlicher und effektiver zu gestalten.
             </p>
 
-            <h3 className="font-bold text-gray-800 dark:text-gray-100 mt-6 mb-2">6.2 Cookie-Consent-Banner</h3>
+            <h3 className="font-bold text-gray-800 dark:text-gray-100 mt-6 mb-2">7.2 Cookie-Consent-Banner</h3>
             <p>
               Wir verwenden einen <strong>selbst programmierten Cookie-Consent-Banner</strong> (kein Drittanbieter-Tool). Beim ersten Besuch unserer Website werden Sie gefragt, ob Sie der Verwendung nicht-essenzieller Cookies zustimmen. Ihre Entscheidung wird in einem lokalen Cookie gespeichert, sodass Sie nicht bei jedem Besuch erneut gefragt werden.
             </p>
@@ -116,7 +136,7 @@ export default function DatenschutzSeite() {
               Sie können Ihre Einwilligung jederzeit widerrufen, indem Sie den entsprechenden Cookie in Ihrem Browser löschen oder uns per E-Mail kontaktieren.
             </p>
 
-            <h3 className="font-bold text-gray-800 dark:text-gray-100 mt-6 mb-2">6.3 Arten von Cookies</h3>
+            <h3 className="font-bold text-gray-800 dark:text-gray-100 mt-6 mb-2">7.3 Arten von Cookies</h3>
             <div className="overflow-x-auto mt-3">
               <table className="w-full text-sm border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
                 <thead>
@@ -139,6 +159,9 @@ export default function DatenschutzSeite() {
                   </tr>
                 </tbody>
               </table>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+                Vercel Analytics ist nicht in dieser Tabelle aufgeführt, da der Dienst cookielos arbeitet (siehe Abschnitt 6).
+              </p>
             </div>
           </Section>
 
