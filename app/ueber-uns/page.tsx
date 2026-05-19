@@ -1,6 +1,29 @@
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
+import { existsSync } from 'fs';
+import path from 'path';
+
+// ============================================================================
+// TODO KARSTEN — Platzhalter mit eigenen Werten ersetzen.
+// Suchstring: "PLACEHOLDER_"
+// ============================================================================
+const PLACEHOLDER_ALTER = '{ALTER}';
+const PLACEHOLDER_BERUFLICHER_HINTERGRUND = '{BERUFLICHER_HINTERGRUND}';
+const PLACEHOLDER_PROJEKT_TYP = '{WOCHENEND-PROJEKT / ABENDPROJEKT / HAUPTPROJEKT}';
+const PLACEHOLDER_MOTIVATION = '{2–3 SÄTZE: Was begeistert dich an Rechnern? Welche Beispiele aus deinem Alltag haben dich zum Thema gebracht?}';
+const PLACEHOLDER_STORY_ZEITPUNKT = '{ZEITPUNKT}';
+const PLACEHOLDER_STORY_SITUATION = '{KONKRETE SITUATION AUS DEINEM ALLTAG: z. B. "vor einer Steuererklärung saß und für jeden einzelnen Rechenschritt eine andere Website mit Werbeflut und unklaren Erklärungen aufrufen musste"}';
+const PLACEHOLDER_STORY_EIGENSCHAFTEN = '{DREI EIGENSCHAFTEN: z. B. "klare Erklärungen liefert, mobil sauber funktioniert und nicht nur Affiliate-Links verkauft"}';
+const PLACEHOLDER_STORY_STATUS = '{STATUS HEUTE: Anzahl Rechner, Kategorien, was als nächstes geplant ist}';
+
+// LAST_UPDATED manuell pflegen bei substantiellen Änderungen.
+const LAST_UPDATED = '20. Mai 2026';
+
+// Server-side Foto-Check: rendert <Image>, sobald public/about/karsten-kautz.jpg
+// existiert. Solange nicht: Placeholder-Div mit identischer Grössen-Reserve.
+const fotoExists = existsSync(path.join(process.cwd(), 'public/about/karsten-kautz.jpg'));
 
 export const metadata: Metadata = {
   title: 'Über Rechenfix.de — Unabhängiges Rechnerportal aus Deutschland',
@@ -29,7 +52,7 @@ export default function UeberUnsSeite() {
         Unabhängiges Online-Rechnerportal aus Deutschland.
       </p>
 
-      {/* 1. Hero */}
+      {/* 1. Hero + Author-Block (BESTEHEND Hero, NEU Author-Block) */}
       <section className="card p-6 md:p-8 mb-8">
         <div className="prose prose-sm max-w-none text-gray-700 dark:text-gray-300 leading-relaxed">
           <p className="mb-4">
@@ -53,27 +76,56 @@ export default function UeberUnsSeite() {
             Primärquellen gepflegt (siehe <Link href="/qualitaet" className="text-primary-600 dark:text-primary-400 hover:underline">Qualität &amp; Methodik</Link>).
           </p>
         </div>
+
+        {/* Author-Block — Foto links, Name/Untertitel/Ort rechts */}
+        <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700 flex flex-col sm:flex-row items-start gap-5">
+          {fotoExists ? (
+            <Image
+              src="/about/karsten-kautz.jpg"
+              alt="Karsten Kautz, Gründer von Rechenfix.de"
+              width={200}
+              height={200}
+              className="rounded-2xl shrink-0"
+              priority
+            />
+          ) : (
+            <div
+              className="w-[200px] h-[200px] rounded-2xl bg-gray-200 dark:bg-gray-700 shrink-0 flex items-center justify-center text-gray-500 dark:text-gray-400 text-sm"
+              role="img"
+              aria-label="Foto folgt"
+            >
+              Foto folgt
+            </div>
+          )}
+          <div className="pt-1">
+            <div className="font-bold text-lg text-gray-800 dark:text-gray-100">Karsten Kautz</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+              Gründer und alleiniger Betreiber von Rechenfix
+            </div>
+            <div className="text-sm text-gray-500 dark:text-gray-500 mt-0.5">Krefeld</div>
+          </div>
+        </div>
       </section>
 
-      {/* 2. Wer betreibt das Projekt */}
+      {/* 2. Wer ich bin (NEU, persönlich, mit Platzhaltern) */}
       <section className="card p-6 md:p-8 mb-8">
         <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-          Wer steht hinter Rechenfix.de?
+          Wer ich bin
         </h2>
         <div className="prose prose-sm max-w-none text-gray-700 dark:text-gray-300 leading-relaxed">
           <p className="mb-4">
-            Rechenfix.de wird von <strong>Karsten Kautz</strong> aus Krefeld als
-            unabhängiges Software-Projekt betrieben. Es gibt kein Team, keinen Verlag,
-            keine Investoren — die Site wird von einer Einzelperson entwickelt,
-            gepflegt und finanziert.
+            Ich heiße Karsten Kautz, bin {PLACEHOLDER_ALTER} Jahre alt und lebe in Krefeld.
+            Beruflich bin ich {PLACEHOLDER_BERUFLICHER_HINTERGRUND}. Rechenfix ist mein {PLACEHOLDER_PROJEKT_TYP} seit 2026.
           </p>
           <p className="mb-4">
-            Der fachliche Anspruch ist klar abgegrenzt: Karsten Kautz ist Software-Entwickler,
-            kein Steuerberater oder Rechtsanwalt. Die Genauigkeit der Rechner kommt
-            nicht aus persönlicher Beratungs-Expertise, sondern aus disziplinierter Pflege
-            gegen die offiziellen Primärquellen — siehe <Link href="/qualitaet" className="text-primary-600 dark:text-primary-400 hover:underline">Qualität &amp; Methodik</Link>.
+            {PLACEHOLDER_MOTIVATION}
           </p>
           <p>
+            Wichtige Abgrenzung: Ich bin Software-Entwickler, kein Steuerberater oder
+            Rechtsanwalt. Die Genauigkeit der Rechner kommt nicht aus persönlicher
+            Beratungs-Expertise, sondern aus disziplinierter Pflege gegen die offiziellen
+            Primärquellen — siehe{' '}
+            <Link href="/qualitaet" className="text-primary-600 dark:text-primary-400 hover:underline">Qualität &amp; Methodik</Link>.
             Vollständige Anbieter-Angaben gemäß § 5 TMG inklusive Anschrift,
             Telefonnummer und Umsatzsteuer-ID finden Sie im{' '}
             <Link href="/impressum" className="text-primary-600 dark:text-primary-400 hover:underline">Impressum</Link>.
@@ -81,7 +133,54 @@ export default function UeberUnsSeite() {
         </div>
       </section>
 
-      {/* 3. Wie wir Genauigkeit sicherstellen */}
+      {/* 3. Wie Rechenfix entstanden ist (NEU, Founder-Story mit Platzhaltern) */}
+      <section className="card p-6 md:p-8 mb-8">
+        <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+          Wie Rechenfix entstanden ist
+        </h2>
+        <div className="prose prose-sm max-w-none text-gray-700 dark:text-gray-300 leading-relaxed">
+          <p className="mb-4">
+            Die Idee zu Rechenfix kam {PLACEHOLDER_STORY_ZEITPUNKT}, als ich {PLACEHOLDER_STORY_SITUATION}.
+          </p>
+          <p className="mb-4">
+            Mir fehlte ein deutsches Rechner-Portal, das {PLACEHOLDER_STORY_EIGENSCHAFTEN}.
+          </p>
+          <p>
+            Im Frühjahr 2026 habe ich begonnen, die ersten Rechner selbst zu programmieren. {PLACEHOLDER_STORY_STATUS}.
+          </p>
+        </div>
+      </section>
+
+      {/* 4. Was Rechenfix anders macht (NEU, 3 Bold-Lead-Bullets) */}
+      <section className="card p-6 md:p-8 mb-8">
+        <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+          Was Rechenfix anders macht
+        </h2>
+        <ul className="space-y-4 text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+          <li>
+            <strong className="text-gray-800 dark:text-gray-100">Aktuelle Werte ohne Verzögerung.</strong>{' '}
+            Steuersätze 2026, Beitragsbemessungsgrenzen 2026, Mindestlohn 2026 —
+            gesetzliche Änderungen werden eingepflegt, sobald sie wirksam werden.
+            Stichtage wie der 01.07. (Rentenwert) oder 01.01. (Tarif) schalten
+            automatisch um, ohne dass die Site neu deployed werden muss.
+          </li>
+          <li>
+            <strong className="text-gray-800 dark:text-gray-100">„Fix erklärt&ldquo;: Antworten in einfacher Sprache.</strong>{' '}
+            Wer wissen will, warum sein Bruttogehalt anders versteuert wird als gedacht,
+            bekommt eine Erklärung in zwei Sätzen statt eines Steuergesetz-Auszugs. Die
+            Erklärung läuft über eine KI, die zugrundeliegende Rechnung läuft aber über
+            geprüften Code.
+          </li>
+          <li>
+            <strong className="text-gray-800 dark:text-gray-100">Werbefinanziert, aber nicht werbeüberladen.</strong>{' '}
+            Eine dezente Werbeanzeige unter dem Ergebnis hält den Betrieb am Laufen.
+            Keine Pop-ups, keine Newsletter-Aufdringlichkeit, keine
+            „Premium-Versionen&ldquo;, keine Tracking-Banner über die ganze Seite.
+          </li>
+        </ul>
+      </section>
+
+      {/* 5. Wie wir Genauigkeit sicherstellen (BESTEHEND, war S3) */}
       <section className="card p-6 md:p-8 mb-8">
         <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
           Wie wir Genauigkeit sicherstellen
@@ -123,7 +222,7 @@ export default function UeberUnsSeite() {
         </div>
       </section>
 
-      {/* 4. Unsere Quellen — Kurzübersicht */}
+      {/* 6. Unsere Quellen — Kurzübersicht (BESTEHEND, war S4) */}
       <section className="card p-6 md:p-8 mb-8">
         <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
           Unsere Quellen (Auswahl)
@@ -169,7 +268,7 @@ export default function UeberUnsSeite() {
         </div>
       </section>
 
-      {/* 5. Datenschutz und Transparenz */}
+      {/* 7. Datenschutz und Transparenz (BESTEHEND, war S5) */}
       <section className="card p-6 md:p-8 mb-8">
         <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
           Datenschutz und Transparenz
@@ -195,7 +294,7 @@ export default function UeberUnsSeite() {
         </div>
       </section>
 
-      {/* 6. Kontakt */}
+      {/* 8. Kontakt (BESTEHEND, war S6) */}
       <section className="card p-6 md:p-8 mb-8">
         <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
           Kontakt
@@ -213,6 +312,11 @@ export default function UeberUnsSeite() {
           <Link href="/impressum" className="text-primary-600 dark:text-primary-400 hover:underline">Impressum</Link>.
         </p>
       </section>
+
+      {/* 9. Aktualisiert-Block (NEU, ganz am Ende) */}
+      <p className="text-xs text-gray-500 dark:text-gray-400 text-right mt-2">
+        Diese Seite zuletzt aktualisiert: {LAST_UPDATED}
+      </p>
     </div>
   );
 }
