@@ -80,8 +80,7 @@ Vor jeder neuen Rechner-Implementierung oder Sub-Wellen-Update:
 ### Architektur-Standards (Affiliate seit W14.A-Abschluss, 10.05.2026)
 
 - [ ] `config.affiliate` gesetzt — Single-Object bei 1 Box, Array bei ≥ 2 Boxen (oder weggelassen falls Affiliate-frei)
-- [ ] `config.amazonProducts`-Array gesetzt, falls AmazonBox benötigt
-- [ ] **AffiliateBox/AmazonBox NICHT im Component hartkodiert** (L-46-Pflicht: Pre-Phase-grep `grep -nE '<AffiliateBox|<AmazonBox' components/rechner/<Name>Rechner.tsx` durchgeführt)
+- [ ] **AffiliateBox NICHT im Component hartkodiert** (L-46-Pflicht: Pre-Phase-grep `grep -nE '<AffiliateBox' components/rechner/<Name>Rechner.tsx` durchgeführt)
 - [ ] Bei hartkodierten Treffern: Standard-Migration ins `config.affiliate`-Array ODER bewusste Sonderfall-Triage (P1/P2/P3/P4a/P4b — siehe welle-status-historie)
 - [ ] AiExplain in `<div className="mt-4">`-Wrapper
 - [ ] ErgebnisAktionen in `<div className="mt-6">`-Wrapper

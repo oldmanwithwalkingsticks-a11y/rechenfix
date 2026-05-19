@@ -80,7 +80,6 @@ Alle jahresabhängigen und gesetzlich definierten Werte liegen in `lib/berechnun
 | `midijob-parameter.ts` **(neu, Prompt 125a)** | SSOT Midijob-Faktoren § 20a SGB IV mit Stichtag-Switch | `MIDIJOB_2026`, `getAktuelleMidijobParameter(stichtag)`, `getBeitragsFormeln()` (Koeffizienten aus G/OG/F abgeleitet) |
 | `midijob-uebergang.ts` **(neu, Prompt 125a)** | § 20a SGB IV BE-Formeln getrennt für Abs. 2 (Gesamt) und Abs. 2a (AN) | `berechneBemessungsgrundlageGesamt`, `berechneBemessungsgrundlageAN`, `getMidijobUntergrenze`, `MIDIJOB_OBERGRENZE_MONAT` |
 | `mwst.ts` **(erweitert, Prompt 132)** | § 12 UStG Regelsatz/ermäßigt + Brutto-/Netto-Faktoren | Konstanten `MWST_REGULAER` (0,19), `MWST_ERMAESSIGT` (0,07), `BRUTTO_FAKTOR_REGULAER`, `NETTO_FAKTOR_REGULAER`; Funktionen `berechneNettoZuBrutto`, `berechneBruttoZuNetto`, `berechneMultiMwSt` |
-| `lib/amazon-link.ts` **(neu, Prompt 122-amazon)** | Amazon-Partnerprogramm Suchlinks, Consent-abhängig | `createAmazonSearchLink(keyword, marketingConsentGranted)`, `AMAZON_TAG = 'rechenfix-21'` |
 | `bmi.ts` **(erweitert, Prompts 141 + 143)** | WHO-BMI-Kategorien + alters-adjustierter Optimal-Bereich (NRC 1989) | `bmiKategorien` (SSOT seit 143, auch von SchwangerschaftGewichtRechner konsumiert), `getOptimalerBereich(alter)` (SSOT seit 143, auch von idealgewicht.ts konsumiert), `BMI_ADULT_MIN_AGE = 18` (Erwachsenen-Gating, Prompt 141) |
 | `kalorien.ts` **(erweitert, Prompt 141)** | Mifflin-St Jeor mit Eating-Disorder-Floor | `berechneKalorien(...)`; neues Flag `zielGeklammertAufGrundumsatz`; `zielKalorien = Math.max(zielKalorienRoh, grundumsatz)` |
 | `schwangerschaft.ts` **(neu, Prompt 143 — Voll-Fusion)** | Konsolidiert die früheren `geburtstermin.ts` + `ssw.ts` (beide gelöscht). Naegele + erweiterte Naegele für Zykluslänge ≠ 28; SSW-Berechnung mit dokumentierter Semantik-Divergenz; Trimester; Meilensteine (inkl. Mutterschutz-Beginn/-Ende, Vorsorge-Termine § 24c SGB V); zeitzonen-sicher | `parseDatum(s)` (`+'T00:00:00'`), `berechneGeburtstermin(eingabe)` (SSW ab LMP+Zyklus-Korrektur — erweiterte Naegele), `berechneSsw(eingabe)` (SSW ab reinem LMP — gynäkologischer Standard), `defaultPeriodeDatum`, `defaultTerminDatum`, `Methode`, `SswMethode`, `Meilenstein`. Beide SSW-Konventionen klinisch korrekt — JSDoc dokumentiert die Divergenz, nicht versehentlich vereinheitlichen |
@@ -278,18 +277,6 @@ Gleichzeitig: Affiliate-Regel von „kein Affiliate in Gesundheit/Mathe" umgeste
 - **UI-Labels an Rechtstatbestand koppeln** — Alleinerziehend-Mehrbedarf braucht explizite User-Bestätigung, nicht Auto-Aktivierung aus Kontext (Prompt 121-fix)
 - **Statische Routes müssen Kategorie-Sidebar explizit rendern** — Prompts müssen „inkl. Sidebar" nennen, „passt optisch zu anderen Rechnern" reicht nicht (Prompt 120d-sidebar)
 
-### Amazon-Partner-Integration (22.04.2026) ✅ ABGESCHLOSSEN
-
-**Prompt 122-amazon** — Neues Partnerprogramm neben Awin integriert. Tag-ID `rechenfix-21`.
-
-- **Rechtliche Basics:** Footer-Pflichthinweis „Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.", Datenschutzerklärung §9b Amazon-Partnerprogramm, Cookie-Banner Marketing-Kategorie erweitert (Amazon Associates mit expliziter Tag-Nennung)
-- **Komponente:** [`components/AmazonBox.tsx`](components/AmazonBox.tsx) — keyword-basiert, Amazon-Orange `#FF9900`, „Anzeige"-Kennzeichnung, `rel="sponsored noopener noreferrer"`, SSR-fest
-- **Helper:** [`lib/amazon-link.ts`](lib/amazon-link.ts) — `createAmazonSearchLink(keyword, marketingConsentGranted)`. Tag wird **nur** bei erteiltem Marketing-Consent angehängt; ohne Consent funktioniert der Link weiter, aber ohne Provision
-- **16 integrierte Rechner:** Kochen (6) + Sport (2) + Auto (2) + Wohnen (3) + Alltag (1) + Arbeit (2). Keine AmazonBox auf Gesundheit/Finanzen/Mathe
-- **180-Tage-Frist:** Erster qualifizierter Referral bis ca. **19.10.2026**, sonst Account-Schließung
-- **Selbstbezug verboten** (Teilnahmebedingungen) — Testklicks im Inkognito ohne Marketing-Consent (Tag wird dann nicht übermittelt)
-- **Vollständige Dokumentation:** [`docs/amazon-integration.md`](docs/amazon-integration.md) mit Rechner-Tabelle, Keywords, Platzierungs-Pattern, Monitoring-Plan 4/12/24 Wochen
-
 ### Meta-Lektion aus dem April-Audit
 
 Der **Soli-ohne-Milderungszone-Bug** tauchte **5× auf** (ALG, GmbhGf, nebenjob-3×, spenden). Das Anti-Pattern war im Skill dokumentiert — trotzdem haben Bestandsfälle es nicht verhindert. **Das technische Sicherheitsnetz (Lint-Script mit `contextKeywords`) ist der primäre Schutz**, die Doku ist ergänzend.
@@ -388,7 +375,6 @@ Diese Werte dienen als Smoketest-Baseline für die Tarif-Rechner-Gruppe. Jede Ab
 - 🎯 **Prompt 120c (Juni 2026):** Wohngeld-Lib-Refactoring auf Pro-Person-Architektur §§ 14–16 WoGG, gebündelt mit Grundsicherungsgeld-Reform (Switch 01.07.2026). Nach Umsetzung: `STATISCHE_OVERRIDES`-Ausschluss aufheben, dynamische Route rendert wieder den interaktiven Rechner. KdU-1,5-Fache-Cap (§ 22 Abs. 1 SGB II n.F., aus Prompt 129 Teil B Nicht-Scope) könnte dabei als Nebenprodukt integriert werden
 - 🎯 **Prompt 121a (~August 2026 bei Bedarf):** BAföG WS 2026/27-Erhöhung einpflegen (neuer Bucket `BAFOEG_AB_2026_08_01` in `bafoeg-parameter.ts`, wenn Verordnung verabschiedet)
 - 🎯 **Prompt 122 P3-Polish:** echte § 11 Abs. 4 BAföG-Aufteilungsregel als zweites Input-Feld „geförderte Geschwister", Pfändung Obergrenze-Anzeige permanent, Regelsatz-Info-Tabelle aus Lib ableiten, Pfändung dynamische Beispieltabelle, Schüler-BAföG-Bedarfssatz-Hinweis
-- 🎯 **Amazon-Monitoring** 4/12/24 Wochen (ab 22.04.2026): Erste Klick-Stats, Conversion-Rate, Eskalation vor 19.10.2026-Deadline (siehe `docs/amazon-integration.md`)
 
 **Welle-Status:**
 - **Welle 1 (Hoch-Risiko):** ✅ ABGESCHLOSSEN April 2026 (Stufen 1+2+1.5+3+4a+4b)
@@ -558,22 +544,6 @@ Publisher-ID: 2843240
 | Nature's Way | 47173 | naturesway.de | /collections/all |
 | **CosmosDirekt** (neu, Prompts 145 + 145b, 25.04.2026) | **11893** | cosmosdirekt.de | /geldanlage/tagesgeld/, /flexinvest-altersvorsorge/, /flexinvest/, /flexinvest-einmalanlage/, /flexinvest-junior-sparplan/, /risikolebensversicherung/, /berufsunfaehigkeitsversicherung/, /unfallversicherung/, /sterbegeldversicherung/, /private-haftpflichtversicherung/, /hausratversicherung/, /wohngebaeudeversicherung/, /bauherrenhaftpflicht/, /tierhalterhaftpflicht/, /reiseruecktrittsversicherung/ |
 
-### Amazon Partner-Programm (neben Awin, seit Prompt 122-amazon)
-
-| Aspekt | Wert |
-|---|---|
-| Tag-ID | `rechenfix-21` |
-| Partnernetz | Amazon Associates Germany (Amazon EU S.à r.l., Luxemburg) |
-| Mechanik | Suchlinks mit Keyword (keine festen ASINs, selbstheilend) |
-| Komponente | `components/AmazonBox.tsx` (eigenständig, nicht in AffiliateBox integriert) |
-| Helper | `lib/amazon-link.ts` — `createAmazonSearchLink(keyword, marketingConsentGranted)` |
-| Consent-Kopplung | Tag nur bei `useCookieConsent().marketingAllowed === true`. Box bleibt immer sichtbar. |
-| Einsatz-Kategorien | Kochen, Sport, Auto, Wohnen, Alltag, Arbeit |
-| Verboten auf | Gesundheit, Finanzen, Mathe |
-| Integrierte Rechner | 16 (Stand 22.04.2026) — vollständige Tabelle in [`docs/amazon-integration.md`](docs/amazon-integration.md) |
-| 180-Tage-Deadline | ca. 19.10.2026 — erster qualifizierter Referral nötig, sonst Account-Schließung |
-| Selbstbezug | verboten (Teilnahmebedingungen) — Testklicks im Inkognito ohne Marketing-Consent |
-
 ### WICHTIG zu CHECK24
 - Awin-Links leiten auf **check24.net** weiter, NICHT auf check24.de
 - Nur 4 Deeplink-Pfade verfügbar: /strom/, /gas/, /kfz-versicherung/, /kredit/
@@ -688,13 +658,12 @@ Pflicht-Elemente in dieser Reihenfolge:
 
 ## Rechtliches
 
-- **Datenschutzerklärung:** Abschnitt 9 zu Awin-Affiliate-Links + Abschnitt 9b Amazon-Partnerprogramm (seit Prompt 122-amazon, 22.04.2026)
+- **Datenschutzerklärung:** Abschnitt 6 zu Vercel Analytics, Abschnitt 8 zu Google AdSense, Abschnitt 9 zu Awin-Affiliate-Links
 - **Impressum:** Enthält Hinweis zu Affiliate-Links
 - **Über-uns:** Enthält Finanzierungshinweis
 - **Barrierefreiheitserklärung:** `/barrierefreiheit` (seit April 2026)
-- **Cookie-Banner:** Marketing-Cookies als eigene Kategorie (listet Google AdSense + Amazon Associates mit expliziter Tag-Nennung)
-- **Werbekennzeichnung:** Alle AffiliateBoxen **und** AmazonBoxen zeigen "Anzeige"-Label
-- **Footer-Pflichthinweis** (seit 22.04.2026): „Als Amazon-Partner verdiene ich an qualifizierten Verkäufen." — unter dem Copyright, Teilnahmebedingung
+- **Cookie-Banner:** Marketing-Cookies als eigene Kategorie (Google AdSense)
+- **Werbekennzeichnung:** Alle AffiliateBoxen zeigen "Anzeige"-Label
 - Sprache: Deutsch, formale "Sie"-Anrede
 
 ## Entwicklung mit Claude Code
@@ -780,7 +749,6 @@ Jeder Prompt für einen neuen Rechner enthält:
   - `welle-2-stufe-3-wohnen-block-a.md`, `welle-2-stufe-3-wohnen-block-b.md`
 - `docs/jahresparameter-audit-2026-04.md` — Grep-Report Prompt 86
 - `docs/stufe1-rechner-semantik.md`, `docs/stufe1-5-rechner-semantik.md`, `docs/stufe2-rechner-semantik.md` — Welle-1-Audit-Artefakte
-- `docs/amazon-integration.md` (Prompt 122-amazon) — Amazon-Partner-Programm: rechtliche Basics, Komponente, 16 integrierte Rechner mit Keywords, Monitoring-Plan 4/12/24 Wochen, Selbstbezug-Reminder, 180-Tage-Deadline
 - `docs/a11y-baseline-2026-04.md` — Accessibility-Status-Snapshot
 - `docs/referenzen/itzbund-README.md` — Jährlicher Update-Prozess für Lohnsteuer-PAP § 39b EStG
 

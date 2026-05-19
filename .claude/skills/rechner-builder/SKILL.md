@@ -13,7 +13,7 @@ Diese Standards wurden nach den W13/W14-Audit-Wellen etabliert, in denen veralte
 
 **Vier Standards für jeden neuen Rechner:**
 
-1. **Affiliate-Architektur:** `config.affiliate` (Single-Object oder Array) statt hartkodierter `<AffiliateBox />`-JSX. `config.amazonProducts` für Amazon-Boxen. Siehe „Affiliate-Platzierung"-Sektion.
+1. **Affiliate-Architektur:** `config.affiliate` (Single-Object oder Array) statt hartkodierter `<AffiliateBox />`-JSX. Siehe „Affiliate-Platzierung"-Sektion.
 2. **Content-Wortzahl:** `erklaerung` + FAQ kombiniert ≥ 750 W (Ideal 1.000–1.500 W), FAQ 5–8 Fragen. Siehe Step 7 + 8.
 3. **Aktuelle Gesetze:** Vor dem Code-Schreiben relevante Paragraphen recherchieren und im Code-Kommentar mit § + Stand + Quelle dokumentieren. Siehe „Pre-Build: Gesetzes-Recherche".
 4. **Tabellen/Sätze/Grenzen:** Als named constants am File-Anfang mit Stichtag + Quelle, KEINE magic numbers inline. Siehe „Pre-Build: Tabellen-Aktualität".
@@ -1231,14 +1231,8 @@ affiliate: [
   { programId: 'cosmosdirekt', context: '<context>', variant: 'compact' },
 ]
 
-// AmazonBox (eine oder mehrere) — separates Property:
-amazonProducts: [
-  { keyword: '<keyword>', description: '<text>' },
-  // optional: headline
-]
-
 // Kein Affiliate (z. B. Gesundheit, Mathe):
-// Properties einfach weglassen (undefined).
+// Property einfach weglassen (undefined).
 ```
 
 **Stack-Konventionen** (seit Prompt 145b, 25.04.2026, erweitert W14.A.1):
@@ -1254,34 +1248,6 @@ amazonProducts: [
 - **P4b (RentenRechner):** Hybrid — 3 unconditional Boxen ins Array, 1 Conditional-Box (verivox auf `rentenluecke > 0`) inline behalten.
 
 Neue Rechner nutzen ausschließlich das Standard-Pattern (Single-Object oder Array via `config.affiliate`). Sonderfall-Patterns werden nicht aktiv für Neubauten gewählt — siehe welle-status-historie für die Präzedenz-Begründungen.
-
-### Amazon-Partner-Programm (seit Prompt 122-amazon, 22.04.2026)
-
-Separates Partnerprogramm neben Awin. Tag-ID: **`rechenfix-21`**. Mechanik: keyword-basierte Suchlinks (keine ASINs), Consent-abhängig.
-
-**Komponente:** `components/AmazonBox.tsx` mit Prop `keyword` (+ optional `headline`/`description`).
-
-```tsx
-import { AmazonBox } from '@/components/AmazonBox';
-
-// Im Rechner-JSX, nach dem Ergebnisblock:
-<AmazonBox
-  keyword="digitale küchenwaage"
-  description="Kurzer thematischer Kontextsatz."
-/>
-```
-
-**Helper:** `lib/amazon-link.ts` exportiert `createAmazonSearchLink(keyword, consent)`. Tag wird nur bei erteiltem Marketing-Consent (`useCookieConsent().marketingAllowed`) angehängt.
-
-**Regeln:**
-- **Keine AmazonBox auf Gesundheit/Finanzen/Mathe** (konsistent mit Awin-Platzierungsregel)
-- **Box bleibt immer sichtbar**, unabhängig vom Consent — nur der Tag wird bei fehlendem Consent weggelassen (User-Service vor Provision)
-- **Werbe-Kennzeichnung „Anzeige" Pflicht** (DE-Werbekennzeichnung, in der Box oben rechts)
-- **Link-Attribute:** `rel="sponsored noopener noreferrer"` und `target="_blank"`
-- **Platzierung:** Unterhalb des Ergebnisblocks. Mit bestehender AffiliateBox → AmazonBox nach der letzten AffiliateBox gestapelt (nicht konkurrierend). Ohne AffiliateBox → AmazonBox vor den CrossLinks am Ende des Ergebnisbereichs.
-- **Selbstbezug verboten** (Amazon-Teilnahmebedingungen) — keine Eigen-Käufe über den Tag, auch nicht im Familienumfeld
-
-**Integration-Registry:** Vollständige Tabelle der 16 integrierten Rechner mit Keywords: [`docs/amazon-integration.md`](../../docs/amazon-integration.md).
 
 ## Audit-Lehre-Checkliste (Prompts 120d, 121-analyse, 22.04.2026)
 
@@ -1635,7 +1601,7 @@ Innerhalb des `{ergebnis && (...)}`-Blocks in dieser Reihenfolge:
 2. h2 „So funktioniert..." + `config.formel` + `config.beispiel`
 3. `config.erklaerung` mit Existing + NEU-Sektionen
 4. h2 „Häufige Fragen" mit `config.faq`
-5. **`config.affiliate` (Single-Object oder Array) + `config.amazonProducts` (Array)** — AdSense-konform post-FAQ; Renderer macht `Array.isArray`-Check automatisch (seit W14.A.1)
+5. **`config.affiliate` (Single-Object oder Array)** — AdSense-konform post-FAQ; Renderer macht `Array.isArray`-Check automatisch (seit W14.A.1)
 6. „Das könnte Sie auch interessieren" + Sidebar
 
 ### Inhalts-Standards für Top-Rechner
@@ -1662,15 +1628,14 @@ Markdown-Render in `page.tsx` parsiert dieses Pattern korrekt — gilt kategorie
 |---|---|---|
 | Single-Box via `config.affiliate` (Object) | 1 Affiliate-Box pro Rechner | Property in `lib/rechner-config/<kat>.ts` |
 | Multi-Box via `config.affiliate` (Array) | 2+ Affiliate-Boxen | Array-Property in `lib/rechner-config/<kat>.ts` |
-| AmazonBox via `config.amazonProducts` | 1+ Amazon-Box (Keyword-Suchlinks) | Array-Property in `lib/rechner-config/<kat>.ts` |
-| Kein Affiliate | Affiliate-frei (z. B. Gesundheit/Mathe) | Properties weglassen (undefined) |
+| Kein Affiliate | Affiliate-frei (z. B. Gesundheit/Mathe) | Property weglassen (undefined) |
 | **P1 Inline-Custom (Bestandsschutz)** | BN-Pattern (Position-Erhalt als CTR-Slot) | Inline-JSX im Component, kein `config.affiliate` |
 | **P4a Inline-Conditional (Bestandsschutz)** | Render-Conditional auf User-Input-State (≤1:1 unconditional:conditional) | Inline-JSX im Component, kein `config.affiliate` (ElterngeldRechner) |
 | **P4b Hybrid (Bestandsschutz)** | 3+ Boxen mit Mehrheit-unconditional + 1 Conditional | Mehrheit ins `config.affiliate`-Array, Conditional inline (RentenRechner) |
 
 Neue Rechner nutzen **ausschließlich** die ersten 4 Zeilen (Standard-Pattern). Patterns P1/P4a/P4b sind Bestandsschutz für dokumentierte Sonderfälle aus W14.A — keine neuen Anwendungen.
 
-L-43 (Multi-Box-Drift) ist mit W14.A.6 eliminiert. **L-46-Pflicht:** Bei jedem Component-Edit, der `AffiliateBox` oder `AmazonBox` berührt, `grep -nE '<AffiliateBox|<AmazonBox' components/rechner/<File>.tsx` als Pre-Phase. Bei hartkodierten Treffern entweder Standard-Migration oder Sonderfall-Triage (P1/P2/P3/P4a/P4b — siehe welle-status-historie).
+L-43 (Multi-Box-Drift) ist mit W14.A.6 eliminiert. **L-46-Pflicht:** Bei jedem Component-Edit, der `AffiliateBox` berührt, `grep -nE '<AffiliateBox' components/rechner/<File>.tsx` als Pre-Phase. Bei hartkodierten Treffern entweder Standard-Migration oder Sonderfall-Triage (P1/P2/P3/P4a/P4b — siehe welle-status-historie).
 
 ### Sensitivitäts-Layer
 

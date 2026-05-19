@@ -98,7 +98,7 @@ export default function CookieBanner() {
                 {/* Marketing */}
                 <CookieToggle
                   label="Werbung (Google AdSense)"
-                  description="Ermöglichen die Anzeige personalisierter Werbung über Google AdSense sowie das Setzen des Amazon-Partner-Tags (rechenfix-21) für die Zuordnung von Käufen aus dem Amazon-Partnerprogramm."
+                  description="Ermöglichen die Anzeige personalisierter Werbung über Google AdSense."
                   checked={marketing}
                   disabled={false}
                   onChange={setMarketing}
