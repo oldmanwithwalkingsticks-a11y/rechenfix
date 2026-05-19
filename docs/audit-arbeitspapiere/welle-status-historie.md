@@ -4,7 +4,61 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 19.05.2026
+**Stand:** 20.05.2026
+
+---
+
+## W15A Track 1 — Über-uns-Hybrid-Ergänzung für E-E-A-T — 20.05.2026
+
+**Anlass:** AdSense-Ablehnung 19.05.2026 → Welle-15-Tiefenanalyse Killer-Faktor 1 (E-E-A-T-Vakuum). Wettbewerber blitzrechner.de hat AdSense aktiv mit explizitem E-E-A-T-Setup (Foto, Bio, Methodik, Quellen) — Rechenfix Über-uns hatte zwar seit Sprint 155 substantielle ~730W Inhalt, aber der Personalisierungs-Layer (Foto + Founder-Story + persönliche Bio) fehlte.
+
+**Scoping:** [docs/audit-arbeitspapiere/w15a1-ueberuns-scoping.md](w15a1-ueberuns-scoping.md) — Phase 1 hat zwei wichtige Überraschungs-Befunde gegen die Prompt-Annahmen aufgedeckt:
+
+1. **Über-uns war nicht mehr „150W generische Bullets".** Sprint 155 (Commit `1a6e6ed`) hatte sie auf ~730W mit 6 Sections (Hero / Wer steht dahinter / Methodik / Quellen / Datenschutz / Kontakt) ausgebaut. Die Methodik- und Quellen-Sections waren bereits genau das, was AdSense-Reviewer für E-E-A-T sehen wollen — wegwerfen wäre Wert-Vernichtung gewesen.
+2. **Footer-Drift „40/7" ist Vercel-Cache-Reliquie, kein Code-Defizit.** Es gibt nur einen Footer-Code ([components/layout/Footer.tsx](../../components/layout/Footer.tsx)), der über `app/layout.tsx:117` global gerendert wird und Counts dynamisch aus [client-data.ts](../../lib/rechner-config/client-data.ts) liest (170/9 aktuell). Die Über-uns-Page hat keinen eigenen Footer-Import. Drift räumt sich beim nächsten Deploy ohne Build-Cache von selbst auf (L-W14.5-3-Pattern).
+
+### Commit 1 — `feat: über-uns komplett neu für e-e-a-t` (`1c8246d`)
+
+**Strategie:** Hybrid-Ergänzung statt Komplett-Neuschreibung. Bestehende substantielle Sections bleiben, Personalisierungs-Layer kommt on-top.
+
+**NEU hinzugefügt (~500W):**
+
+- **Author-Block im Hero:** Foto links (200x200, rounded-2xl) + Karsten Kautz / Gründer / Krefeld rechts. `existsSync`-Server-Check in der Server-Component rendert `<Image>`, sobald [public/about/karsten-kautz.jpg](../../public/about/karsten-kautz.jpg) existiert, sonst Placeholder-Div mit „Foto folgt"-Text und identischer Größen-Reserve. Karsten hat das Foto während Phase 2 hochgeladen, Foto rendert seither.
+- **Section „Wer ich bin":** persönliche Bio mit Platzhaltern (ALTER, BERUFLICHER_HINTERGRUND, PROJEKT_TYP, MOTIVATION) + integrierte Steuerberater-Abgrenzung aus alter Section 2 + Verweise auf /qualitaet und /impressum.
+- **Section „Wie Rechenfix entstanden ist":** Founder-Story mit Platzhaltern (STORY_ZEITPUNKT, STORY_SITUATION, STORY_EIGENSCHAFTEN, STORY_STATUS).
+- **Section „Was Rechenfix anders macht":** 3 Bold-Lead-Bullets — Aktuelle Werte ohne Verzögerung / „Fix erklärt"-KI / Werbefinanziert ohne Überladung.
+- **Aktualisiert-Block** am Seitenende: „Diese Seite zuletzt aktualisiert: 20. Mai 2026" via `LAST_UPDATED`-Konstante am Dateianfang. Nur für ueber-uns eingeführt — Datenschutz-Page bleibt auf hartkodiertem „Stand: Mai 2026"-String (out of scope).
+
+**ENTFERNT (Redundanz nach Erweiterung):** Bestehende Section 2 „Wer steht hinter Rechenfix?" — ihre Inhalte (Karsten/Krefeld/Software-Entwickler-Abgrenzung) sind in neuer „Wer ich bin"-Section integriert.
+
+**BEIBEHALTEN unverändert** (substantielle Inhalte aus Sprint 155): Hero (3 Absätze), Methodik („Wie wir Genauigkeit sicherstellen", 4 Bullets), Quellen (4-Themen-Grid), Datenschutz/Transparenz, Kontakt.
+
+**Wortzahl-Bilanz:** ~730W (vorher) + ~500W neu = ~1.230W. Deutlich über AdSense-Mindesttiefen-Schwelle. Gegenüber den ~150W vor Sprint 155 ein E-E-A-T-Sprung um Faktor 8.
+
+**Style-Konventionen aus Scoping:** `max-w-4xl` Container (konsistent mit Datenschutz), `card p-6 md:p-8 mb-8` Section-Pattern, `prose-sm` für Body-Text, Inline-`<section>` ohne extra Section-Component.
+
+**Platzhalter-Konvention:** 8 `const PLACEHOLDER_*` am Dateianfang in einem klaren TODO-Block. Karsten ersetzt die Werte später, Suchstring `PLACEHOLDER_`. Im JSX werden die Konstanten interpoliert — gerendert wird der Klammer-Text als sichtbarer Platzhalter, keine Stage-2-Edits an JSX nötig.
+
+**Build-Hotfix während Phase 2:** Zwei `react/no-unescaped-entities`-Fehler bei Anführungs-Bullets (`„Fix erklärt": …` und `„Premium-Versionen", …`) durch `&ldquo;` ersetzt.
+
+### Verifikation
+
+- `npm run build` grün, Page als `○ (Static)` prerendered
+- Browser-Preview (`/ueber-uns` auf localhost:3001) verifiziert: Foto rendert via next/image-Optimizer, alle neuen Sections in korrekter Reihenfolge, Platzhalter sichtbar als Klammer-Text, keine Hydration-Errors, keine Console-Errors
+- Footer-Drift-Check (Inkognito-Live-Verify auf www.rechenfix.de mit „Use existing Build Cache" unchecked) ist Phase 4 Karsten manuell
+
+### Phase 4 — Karsten manuell
+
+1. **Foto-Upload** ✓ (während Phase 2 erledigt — `public/about/karsten-kautz.jpg` 112 KB)
+2. **Platzhalter-Einfüllen:** 8 `PLACEHOLDER_*`-Konstanten am Dateianfang von [app/ueber-uns/page.tsx](../../app/ueber-uns/page.tsx) durch eigene Werte ersetzen
+3. **Footer-Drift-Verify nach Vercel-Deploy:** ueber-uns, datenschutz, impressum, Homepage im Inkognito öffnen — alle vier müssen „170 Rechner in 9 Kategorien" zeigen. Falls weiterhin abweichend: Redeploy mit „Use existing Build Cache" unchecked
+4. **Lighthouse-Mobile-Score:** prüfen, dass Score nicht schlechter geworden ist als vor dem Sprint (Build-Gate aus Prompt)
+
+### L-Lehren neu
+
+- **L-W15A.1-1 (`existsSync`-Pattern für Optional-Assets in Server-Components):** Bei Optional-Bildern, die Karsten manuell hochlädt, ist der Server-side `existsSync(path.join(process.cwd(), '<public-pfad>'))`-Check in der Server-Component das saubere Pattern. Conditional Render mit `<Image>` bei vorhandenem File oder Placeholder-Div mit identischer Größen-Reserve sonst. Vorteil: kein Code-Change nötig, sobald das File hochgeladen wird — beim nächsten Page-Build wird automatisch das `<Image>` gerendert. Nachteil: nur in Server-Components nutzbar, nicht in Client-Components.
+- **L-W15A.1-2 (Scoping-Pflicht vor „Komplett-Neuschreibung"):** Der Prompt nahm „150W generische Bullets" an. Tatsächlich waren es 730W substantieller Inhalt aus Sprint 155. Hätte ich naive Komplett-Neuschreibung gemacht, hätte ich die Methodik- und Quellen-Sections (genau E-E-A-T-Material!) weggeworfen. **Pflicht-Disziplin:** Vor jeder „Neu"-Annahme im Prompt erst Phase-1-Scoping mit IST-Bestand-Lesung, dann strategische Entscheidung Hybrid vs. Komplett-Ersatz. Bei substantiellem Bestand: Hybrid bevorzugen.
+- **L-W15A.1-3 (Welle-Dossier-Befunde gegen Repo-Realität sanity-checken):** Das Welle-15-Dossier-Item „Footer-Drift 40/7" suggerierte einen Code-Defizit. Repo-Analyse hat es als reine Vercel-Cache-Reliquie identifiziert — kein Code-Fix nötig. Generalisierung von L-34 (Sanity-Check vor Drift-Behauptung in Verify-Scripts) auf den **Dossier-Befund-zu-Sprint-Übertragung-Schritt**. Pflicht: jeder Dossier-Befund vor Sprint-Start gegen Code-Realität greppen.
 
 ---
 
