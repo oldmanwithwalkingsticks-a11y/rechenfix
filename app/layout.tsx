@@ -17,6 +17,7 @@ import ConsentScripts from '@/components/cookie/ConsentScripts';
 import StructuredData from '@/components/seo/StructuredData';
 import { generateWebsiteSchema } from '@/lib/seo';
 import { Analytics } from '@vercel/analytics/next';
+import { ADSENSE_PUBLISHER_ID } from '@/lib/adsense-config';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -83,7 +84,7 @@ export const metadata: Metadata = {
     google: '_ZYnL2qqwrcx4Nz7KxkPG2cTlBOapbWbi7IdX3dzHFI',
   },
   other: {
-    'google-adsense-account': 'ca-pub-1389746597486587',
+    'google-adsense-account': ADSENSE_PUBLISHER_ID,
   },
 };
 
@@ -97,7 +98,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             Prompt 68 nach Freigabe. */}
         <script
           async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1389746597486587"
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_PUBLISHER_ID}`}
           crossOrigin="anonymous"
         />
       </head>
