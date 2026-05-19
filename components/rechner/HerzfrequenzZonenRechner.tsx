@@ -7,7 +7,6 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
-import { AmazonBox } from '@/components/AmazonBox';
 
 type Sportart = 'laufen' | 'radfahren' | 'schwimmen';
 
@@ -210,11 +209,6 @@ export default function HerzfrequenzZonenRechner() {
           <strong>ℹ️ Hinweis:</strong> Formeln sind Schätzungen — die echte HFmax kann ±10 bpm abweichen. Für genaue Werte ist ein medizinischer Belastungstest nötig. Bei Herz-Kreislauf-Erkrankungen vor Trainingsbeginn den Arzt konsultieren.
         </p>
       </div>
-
-      <AmazonBox
-        keyword="sportuhr pulsmesser"
-        description="Um in der gewünschten Zone zu trainieren, brauchen Sie die Zahl live am Handgelenk. Sportuhren mit Brustgurt sind beim Puls am genauesten."
-      />
 
       <CrossLink href="/sport/pace-rechner" emoji="🏃" text="Pace beim Laufen berechnen" />
       <CrossLink href="/gesundheit/blutdruck-rechner" emoji="🩺" text="Blutdruck einordnen" />

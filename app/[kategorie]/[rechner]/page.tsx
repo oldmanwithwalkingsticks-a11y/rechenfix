@@ -8,7 +8,6 @@ import AdSlot from '@/components/ads/AdSlot';
 import StructuredData from '@/components/seo/StructuredData';
 import FeedbackButtons from '@/components/ui/FeedbackButtons';
 import { AffiliateBox } from '@/components/AffiliateBox';
-import { AmazonBox } from '@/components/AmazonBox';
 import Prozentrechner from '@/components/rechner/Prozentrechner';
 import BruttoNettoRechner from '@/components/rechner/BruttoNettoRechner';
 import MwStRechner from '@/components/rechner/MwStRechner';
@@ -586,17 +585,6 @@ export default function RechnerSeite({ params }: Props) {
               />
             )
           )}
-
-          {/* Amazon-Partner-Boxen — nach Affiliate, vor Verwandte-Rechner (W14.A.1). */}
-          {config.amazonProducts && config.amazonProducts.map((p, i) => (
-            <AmazonBox
-              key={`amazon-${p.keyword}-${i}`}
-              keyword={p.keyword}
-              headline={p.headline}
-              description={p.description}
-            />
-          ))}
-
 
           {/*
             Verwandte Rechner — auf dem wissenschaftlichen Taschenrechner bewusst
