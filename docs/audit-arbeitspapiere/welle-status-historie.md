@@ -8,6 +8,67 @@
 
 ---
 
+## W14.5 — Secret-Hardening + Vercel-Rotation — 19.05.2026
+
+**Anlass:** Vercel zeigt seit April-2026-Vorfall „Needs Attention"-Badges bei Env-Vars ohne Sensitive-Flag. Best-Practice-Aufräumarbeit vor AdSense-Resubmission, damit der Trust-Stack auf Secret-Side sauber ist.
+
+**Scoping:** [docs/audit-arbeitspapiere/w14-5-secret-scan.md](w14-5-secret-scan.md) — Phase-0 Pre-Flight-Bilanz: **0 KRITISCH**, **3 VERDÄCHTIG** (2× AdSense-ID-Fallback-Duplikat, 1× zu enge `.gitignore`-Regel), Rest harmlos. Connection-Strings (postgres/redis/mongodb/mysql) im Repo: 0. `NEXT_PUBLIC_*KEY/SECRET/TOKEN`: 0. Keine echten Secret-Leaks im Repo-Stand.
+
+### Phase 0 — Pre-Flight Secret-Scan
+
+Vier Suchblöcke gegen den Produktiv-Tree (ohne `node_modules/`, `.git/`, `.next/`, `.claude/worktrees/`):
+
+1. **API-Key-Pattern** (`sk-ant-`, `re_`, `sk_live_`, `sk_test_`, `pk_`, `G-…`, `postgres://`, `redis://`, `mongodb://`): 0 echte Treffer. Alle Matches waren false positives (BAföG-UI-Identifier `'5_jahre_erwerbstaetig'`, Test-Tag-Names `BG-STICHTAG`/`MJ-AG-PARITAET`, Doku-Erwähnungen der entfernten GA-ID).
+2. **Hardcoded-Fallback-Pattern** (`process.env.X || '…'`): zwei AdSense-ID-Fallback-Duplikate ([ConsentScripts.tsx:6](../../components/cookie/ConsentScripts.tsx), [AdSlot.tsx:11](../../components/ads/AdSlot.tsx)) + `ADMIN_STATS_PASSWORD || ''` (fail-secure, kein Bypass).
+3. **Falsche Public-Prefixes** (`NEXT_PUBLIC_*KEY/SECRET/TOKEN/PASSWORD`): 0 Treffer.
+4. **`.env`-Files Status:** Keine getrackten oder lokalen `.env`-Files. Gitignore-Regel `.env*.local` deckte aber nur `.local`-Varianten ab (`.env`, `.env.production` wären durchgerutscht).
+
+Verbleibendes potenzielles Restrisiko aus Block 5.2: drei `Dokumente/*.docx`/`.pdf`-Files aus dem Initial-Commit `3623a5f`, später entfernt, aber via `git show <old-commit>:<file>` weiterhin recoverable — User-Check off-repo durchgeführt, keine Plaintext-Secrets enthalten, kein History-Rewrite nötig.
+
+### Mini-Sprint W14.5.0 — Code-Hygiene
+
+**Commit `a687fe9` — `chore: adsense-id konsolidiert in lib/adsense-config.ts`:** Neue SSOT-Lib mit `export const ADSENSE_PUBLISHER_ID = 'ca-pub-1389746597486587';` — Publisher-ID ist per Design öffentlich (steht in jedem `adsbygoogle.js`-Script-Tag), deshalb keine Env-Var nötig. Konsumenten ConsentScripts.tsx und AdSlot.tsx auf Import umgestellt.
+
+**Commit `a547dfb` — `chore: .gitignore härtet env-files`:** Regel von `.env*.local` auf `.env` + `.env.*` + `!.env.example` erweitert. Pre-Check `git ls-files | grep -iE "\.env"` → keine getrackten Files, kein `git rm --cached` nötig.
+
+**Commit `aa3e06c` — `chore: adsense-id auch in layout.tsx konsolidiert`:** Folge-Commit nach Bonus-Befund — der W14.5.0-Bericht hatte zwei AdSense-Stellen erfasst, tatsächlich waren es **vier**: zusätzlich [app/layout.tsx:99](../../app/layout.tsx) (Crawler-Basis-Loader) und [app/layout.tsx:86](../../app/layout.tsx) (`metadata.other.'google-adsense-account'`). Beide auf `ADSENSE_PUBLISHER_ID` umgestellt. Komplette Drift-Eliminierung im Repo.
+
+### Phase 1 — Vercel-Storage-Check (Karsten manuell)
+
+`rechenfix-stats` (Upstash for Redis Free Tier) als aktive Vercel-Integration identifiziert. Stellt `KV_REST_API_URL` + `KV_REST_API_TOKEN` (+ 3 weitere) für die `/api/track`-, `/api/feedback`-, `/api/stats`-, `/api/monthly-report`-Routes bereit (Konsument: [lib/redis.ts:6–7](../../lib/redis.ts)).
+
+### Phase 2 — Vercel Env-Var-Rotation (Karsten manuell)
+
+**2A — `ADMIN_STATS_PASSWORD`:** neu generiert, Sensitive-Flag ✓ gesetzt. Konsumenten: [app/api/stats/route.ts:37+67](../../app/api/stats/route.ts) (GET + DELETE) mit fail-secure Auth-Check.
+
+**2B — `ANTHROPIC_API_KEY`:** in Anthropic Console rotiert, alter Key revoked, Sensitive-Flag ✓ gesetzt. Konsument: [app/api/explain/route.ts:118](../../app/api/explain/route.ts) (Fix-erklärt-Endpoint).
+
+**2C — `RESEND_API_KEY`:** auf resend.com rotiert, alter Key revoked, Sensitive-Flag ✓ gesetzt. Konsumenten: [app/api/feedback/route.ts:39](../../app/api/feedback/route.ts) + [app/api/monthly-report/route.ts:17](../../app/api/monthly-report/route.ts).
+
+**2D — KV-Credentials (Upstash-Integration):** via Upstash-UI → „Rotate Integration Secrets". 5 Variablen synchronisiert (`KV_REST_API_URL`, `KV_REST_API_TOKEN`, `KV_REST_API_READ_ONLY_TOKEN`, `KV_URL`, `REDIS_URL`). Redeploy ohne Build-Cache nötig (Container hatte alte Connection gecached — `/api/track` schlug fehl, bis Redeploy mit unchecked „Use existing Build Cache" durch war).
+
+### L-Lehren neu
+
+- **L-W14.5-1 (Sensitive-Flag-Best-Practice):** Vercel zeigt „Needs Attention"-Badges für Secret-Env-Vars ohne Sensitive-Flag seit April-2026-Vorfall. Pflicht-Disziplin bei neuen Env-Vars: Sensitive-Flag immer setzen, wenn der Inhalt ein Secret ist (API Keys, Passwörter, Tokens, DB-URLs mit Credentials). Auch nachträglich für Bestands-Vars setzen.
+- **L-W14.5-2 (Integration-Managed Vars):** Bei Vercel-Integrations-Vars (z. B. Upstash KV: `KV_REST_API_URL`, `KV_REST_API_TOKEN` etc.) ist die Sensitive-Flag-Option in der Vercel-UI **nicht editierbar** — die Vars werden von der Integration verwaltet. Trade-off bewusst akzeptieren: Integration bleibt aktiv und übernimmt die Auto-Rotation via „Rotate Integration Secrets". Alternative wäre, die Integration zu lösen und manuell zu verwalten — höhere Maintenance, kein klarer Security-Gewinn.
+- **L-W14.5-3 (Redeploy ohne Cache nach Token-Rotation):** Bei Rotation von Integration-managed Tokens (Upstash, andere) reicht ein normaler Vercel-Redeploy nicht — der laufende Container cached die alte Connection. Pflicht-Schritt: beim Redeploy „Use existing Build Cache" **unchecken**, sonst läuft `/api/track` weiter mit altem Token-Wert ins Leere bis nächster Force-Push.
+- **L-W14.5-4 (AdSense-Publisher-ID-Drift):** Die AdSense-Publisher-ID war historisch in **vier** Repo-Stellen hartkodiert (`ConsentScripts.tsx`, `AdSlot.tsx`, `layout.tsx` 2× — Loader-URL + `metadata.other`). SSOT-Konsolidierung in [lib/adsense-config.ts](../../lib/adsense-config.ts) schließt das Drift-Risiko. Pre-Flight-Scans sollten künftig auch nicht-`process.env`-Vorkommen erfassen (string-literal-Suche auf Wert-Ebene, nicht nur Fallback-Pattern).
+
+### Status
+
+**AdSense-Trust-Stack auf Secret-Side sauber.** Repo-State und Vercel-Env beide auf Best-Practice-Niveau, bereit für **W15A-Sprints** (AdSense-Resubmission-Vorbereitung). Verbleibende offene Items aus W14.5 — keine.
+
+### Verifikation
+
+- `npm run build` nach Commit `a687fe9` grün, 205/205 Pages
+- `npm run build` nach Commit `a547dfb` grün, 205/205 Pages
+- `npm run build` nach Commit `aa3e06c` grün, 205/205 Pages
+- Repo-weite Grep nach `'ca-pub-1389746597486587'` → nur noch 1 Treffer: `lib/adsense-config.ts` (SSOT)
+- Repo-weite Grep nach `process.env.NEXT_PUBLIC_ADSENSE_ID` → 0 Treffer
+- `/api/track` nach Redeploy-ohne-Cache grün (Phase 2D)
+
+---
+
 ## W14 Track B — Amazon-Affiliate-Komplettausbau — 19.05.2026
 
 **Anlass:** AdSense-Ablehnung 19.05.2026. Hypothese: Affiliate-Dichte (insb. Amazon-Pflicht-Disclosure-Footer + 16 AmazonBox-Renderings) als Primärsignal für AdSense-Klassifikator „minderwertige Inhalte". Strategie: sämtliche Amazon-Affiliate-Integration entfernen, AWIN-Affiliates bleiben unangetastet (anderes Risiko-Profil — AWIN-Boxen weniger sichtbar, kein Site-weiter Disclosure-Footer).
