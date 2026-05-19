@@ -8,6 +8,85 @@
 
 ---
 
+## W14 Track B — Amazon-Affiliate-Komplettausbau — 19.05.2026
+
+**Anlass:** AdSense-Ablehnung 19.05.2026. Hypothese: Affiliate-Dichte (insb. Amazon-Pflicht-Disclosure-Footer + 16 AmazonBox-Renderings) als Primärsignal für AdSense-Klassifikator „minderwertige Inhalte". Strategie: sämtliche Amazon-Affiliate-Integration entfernen, AWIN-Affiliates bleiben unangetastet (anderes Risiko-Profil — AWIN-Boxen weniger sichtbar, kein Site-weiter Disclosure-Footer).
+
+**Scoping:** [docs/audit-arbeitspapiere/w14b-amazon-removal-scoping.md](w14b-amazon-removal-scoping.md) — 16 AmazonBox-Einbauten verteilt auf 11 hartkodierte Component-Renderings + 5 `amazonProducts`-Configs (geplante W14.A-Migration aller 16 auf Config-Pattern war nicht abgeschlossen; W14-Track-B räumt beide Pfade gleichzeitig aus).
+
+**Goldene Regel:** **KEINE AWIN-Änderungen.** Alle `config.affiliate`-Properties in den 5 betroffenen Configs blieben unverändert; nur die darunter liegenden `amazonProducts`-Blöcke wurden entfernt.
+
+### Commit 1 — `chore: remove amazon box component` (`3db040c`)
+
+**Components (11 Files):**
+- BackformUmrechner, BackzeitRechner, BrotbackRechner, KochzeitRechner, PizzateigRechner, RezeptUmrechner (Kochen, 6 Files)
+- FahrradRahmenRechner, HerzfrequenzZonenRechner, PaceRechner (Sport, 3 Files)
+- MalerkostenRechner, TapetenbedarfRechner (Wohnen, 2 Files)
+
+Pro Component: `import { AmazonBox } from '@/components/AmazonBox';` + `<AmazonBox …/>`-JSX entfernt.
+
+**Page-Renderer:**
+- [app/[kategorie]/[rechner]/page.tsx](../../app/[kategorie]/[rechner]/page.tsx): Import (Z. 11) + Renderer-Block `{config.amazonProducts?.map(...)}` (Z. 590–598) entfernt
+
+**Component-Datei:**
+- [components/AmazonBox.tsx](../../components/AmazonBox.tsx) (105 Z.) gelöscht
+
+### Commit 2 — `chore: remove amazonProducts from rechner configs` (`9b1ff48`)
+
+**5 Config-Blöcke entfernt (5 Rechner):**
+
+| Datei | Rechner-Slug | Keyword |
+|---|---|---|
+| `lib/rechner-config/alltag.ts` | umzug | `umzugskartons 30 stück` |
+| `lib/rechner-config/arbeit.ts` | arbeitszeit | `zeiterfassung stempeluhr` |
+| `lib/rechner-config/arbeit.ts` | pendlerpauschale | `handyhalterung auto` |
+| `lib/rechner-config/auto.ts` | spritkosten | `kraftstoffzusatz` |
+| `lib/rechner-config/wohnen.ts` | heizkosten | `heizkörperthermostat` |
+
+In allen 5 Configs blieb die `affiliate`-Property direkt darüber unverändert (AWIN-Programme: cosmosdirekt/lexware/wiso/check24+hotelde-Array/check24).
+
+**Type-Cleanup ([lib/rechner-config/types.ts](../../lib/rechner-config/types.ts)):**
+- `AmazonProductConfig`-Interface entfernt
+- `amazonProducts?: AmazonProductConfig[]`-Property aus `RechnerConfig` entfernt
+
+**Helper-Datei:**
+- [lib/amazon-link.ts](../../lib/amazon-link.ts) (34 Z., `AMAZON_TAG = 'rechenfix-21'` + `createAmazonSearchLink`) gelöscht
+
+### Commit 3 — `chore: remove amazon references from infra & docs` (`a111434`)
+
+**Infrastruktur (3 Files):**
+- [app/datenschutz/page.tsx](../../app/datenschutz/page.tsx): Abschnitt 9b „Amazon-Partnerprogramm" komplett raus (5 `<p>`-Blöcke mit Tag-Logik, Suchlink-Mechanik, Amazon-Datenschutz-Verweis); Verweis-Satz „Zusätzlich nehmen wir am Amazon Partner-Programm teil…" aus Abschnitt 9 entfernt
+- [components/cookie/CookieBanner.tsx](../../components/cookie/CookieBanner.tsx): Marketing-Toggle-Description auf reinen AdSense-Text gekürzt (kein „Amazon-Partner-Tag (rechenfix-21)" mehr)
+- [components/layout/Footer.tsx](../../components/layout/Footer.tsx): Pflicht-Hinweis „Als Amazon-Partner verdiene ich an qualifizierten Verkäufen." entfernt; `space-y-1` raus (nur noch eine Zeile im Copyright-Block); Block-Kommentar auf „Copyright" gekürzt
+
+**Doku (4 Files + 1 Löschung):**
+- [CLAUDE.md](../../CLAUDE.md): Amazon-Partner-Programm-Sektion (~13 Z.) entfernt; Regel 7 (Amazon-Partnerprogramm) entfernt, Regeln 8–38 zu 7–37 renumeriert
+- [rechenfix-projekt-referenz.md](../../rechenfix-projekt-referenz.md): amazon-link-Lib-Zeile in SSOT-Tabelle, „Amazon-Partner-Integration"-Abschnitt, Amazon-Monitoring-Item, „Amazon Partner-Programm"-Tabelle und Amazon-Erwähnungen im Rechtliches-Block komplett entfernt
+- [docs/amazon-integration.md](../../docs/amazon-integration.md) (113 Z.) gelöscht
+- Skill-Files: [SKILL.md](../../.claude/skills/rechner-builder/SKILL.md) Amazon-Sektion (~28 Z.) + Architektur-Tabellen-Zeile + Page-Layout-Mapping + L-46-grep-Hinweis bereinigt; [templates.md](../../.claude/skills/rechner-builder/references/templates.md) AmazonBox-Snippet-Block + Anti-Pattern auf nur AffiliateBox reduziert; [checklist.md](../../.claude/skills/rechner-builder/references/checklist.md) `amazonProducts`-Checkpunkt und L-46-grep ohne AmazonBox
+
+**Skill-Files-Notiz:** Repo-State ist konsistent, Claude.ai-Skills-UI-Sync ist Karstens manueller Folge-Schritt (Memory-Pflicht aus rechner-builder-v2-Workflow).
+
+### Phase 4 — Karsten manuell
+
+1. **Vercel Env-Vars prüfen** (sehr wahrscheinlich keine Amazon-Env-Var vorhanden — `rechenfix-21` war hartkodiert in `lib/amazon-link.ts`)
+2. **Amazon PartnerNet:** rechenfix-Site abmelden, falls dort registriert
+3. **Skill-UI-Sync:** Repo-State von `.claude/skills/rechner-builder/SKILL.md` + `templates.md` + `checklist.md` ins Claude.ai-Skills-UI übertragen
+
+### Verifikation
+
+- `npm run build` nach Commit 1 grün, 205/205 statische Seiten generiert
+- `npm run build` nach Commit 2 grün, 205/205 statische Seiten generiert
+- `npm run build` nach Commit 3 grün, 205/205 statische Seiten generiert (First-Load-JS ≈ 0 kB-Diff, Footer-Bundle 1 Zeile kürzer)
+- Resttreffer-Check: kein `AmazonBox` / `amazonProducts` / `amazon-link` / `AMAZON_TAG` / `createAmazonSearchLink` / `AmazonProductConfig` in `app/` `components/` `lib/`
+- Einziger verbleibender Amazon-Treffer im Repo: Changelog-Eintrag SKILL.md Z. 1563 (historisch, Datum 22.04.2026)
+
+### L-Lehren
+
+Keine neuen Lehren — Sprint war ein straight-forward Removal entlang Track-A-Pattern (Code → Doku → Welle-Historie). Anmerkung: **Renumber-Bug in einer Bash-Iteration** (Reihenfolge high-to-low statt low-to-high beim mass-renumber von Markdown-Listen via Node-Skript) — kein neuer L-Lehre-Anker, aber Reminder dass Mass-Renumbering immer von der niedrigsten Zahl aufwärts gehen muss (`8→7, 9→8, …, 38→37`), sonst werden bereits umnummerierte Items beim nächsten Pass nochmal erfasst.
+
+---
+
 ## W14 Track A — GA-Entfernung & Vercel Analytics — 19.05.2026
 
 **Anlass:** AdSense-Ablehnung 19.05.2026 wegen „minderwertige Inhalte". Hands-Off-Modus aufgehoben, vor nächster Submission Google Analytics komplett raus (Datenschutz + Trust-Signal) und Vercel Analytics als cookieloser Ersatz rein.
