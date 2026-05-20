@@ -5,19 +5,6 @@ import Image from 'next/image';
 import { existsSync } from 'fs';
 import path from 'path';
 
-// ============================================================================
-// TODO KARSTEN — Platzhalter mit eigenen Werten ersetzen.
-// Suchstring: "PLACEHOLDER_"
-// ============================================================================
-const PLACEHOLDER_ALTER = '{ALTER}';
-const PLACEHOLDER_BERUFLICHER_HINTERGRUND = '{BERUFLICHER_HINTERGRUND}';
-const PLACEHOLDER_PROJEKT_TYP = '{WOCHENEND-PROJEKT / ABENDPROJEKT / HAUPTPROJEKT}';
-const PLACEHOLDER_MOTIVATION = '{2–3 SÄTZE: Was begeistert dich an Rechnern? Welche Beispiele aus deinem Alltag haben dich zum Thema gebracht?}';
-const PLACEHOLDER_STORY_ZEITPUNKT = '{ZEITPUNKT}';
-const PLACEHOLDER_STORY_SITUATION = '{KONKRETE SITUATION AUS DEINEM ALLTAG: z. B. "vor einer Steuererklärung saß und für jeden einzelnen Rechenschritt eine andere Website mit Werbeflut und unklaren Erklärungen aufrufen musste"}';
-const PLACEHOLDER_STORY_EIGENSCHAFTEN = '{DREI EIGENSCHAFTEN: z. B. "klare Erklärungen liefert, mobil sauber funktioniert und nicht nur Affiliate-Links verkauft"}';
-const PLACEHOLDER_STORY_STATUS = '{STATUS HEUTE: Anzahl Rechner, Kategorien, was als nächstes geplant ist}';
-
 // LAST_UPDATED manuell pflegen bei substantiellen Änderungen.
 const LAST_UPDATED = '20. Mai 2026';
 
@@ -81,7 +68,7 @@ export default function UeberUnsSeite() {
         <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700 flex flex-col sm:flex-row items-start gap-5">
           {fotoExists ? (
             <Image
-              src="public/about/karsten-kautz.jpg"
+              src="/about/karsten-kautz.jpg"
               alt="Karsten Kautz, Gründer von Rechenfix.de"
               width={200}
               height={200}
