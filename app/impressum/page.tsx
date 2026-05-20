@@ -95,22 +95,20 @@ export default function ImpressumSeite() {
               Hinweis zu Affiliate-Links
             </h2>
             <p>
-              Diese Website enthält Affiliate-Links. Bei einem Kauf über diese Links erhalten wir eine Provision. Affiliate-Links sind als &bdquo;Anzeige&ldquo; gekennzeichnet.
+              Rechenfix.de finanziert sich über Werbeanzeigen und Affiliate-Partnerschaften. Für die Werbung wird Google AdSense genutzt — Anzeigen sind als &bdquo;Anzeige&ldquo; gekennzeichnet.
             </p>
-          </section>
-
-          {/* Quelle */}
-          <section className="pt-4 border-t border-gray-200 dark:border-gray-700">
-            <p className="text-sm text-gray-500 dark:text-gray-500">
-              Quelle:{' '}
+            <p className="mt-3">
+              Bei einigen Rechnern verlinken wir zu thematisch passenden Anbietern (u.&nbsp;a. CHECK24, WISO Steuer, smartsteuer, Cosmos Direkt) über das Affiliate-Netzwerk Awin. Klickt jemand auf einen solchen Link und schließt einen Vertrag ab, erhalten wir eine Vergütung. Für Nutzer entstehen dadurch keine Mehrkosten.
+            </p>
+            <p className="mt-3">
+              Welcher Affiliate-Link bei welchem Rechner angezeigt wird, entscheiden wir nach thematischer Passung — nicht nach Provisionshöhe. Die vollständige Liste aller Partner-Programme mit Anbieter-Adressen und Rechtsgrundlage steht in der{' '}
               <a
-                href="https://www.e-recht24.de"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/datenschutz"
                 className="text-primary-600 dark:text-primary-400 underline"
               >
-                e-recht24.de
+                Datenschutzerklärung
               </a>
+              .
             </p>
           </section>
         </div>
