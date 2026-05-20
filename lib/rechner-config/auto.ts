@@ -109,6 +109,11 @@ Spritkosten sind einer der größten variablen Kostenposten beim Autofahren — 
         antwort: 'Auf 100 km gerechnet: ein Mittelklasse-Benziner mit 7 L/100km bei 1,75 €/L kostet 12,25 € Sprit; ein vergleichbares E-Auto mit 18 kWh/100km bei 0,32 €/kWh Haushaltsstrom kostet 5,76 € — Differenz etwa 6,50 € pro 100 km. Bei 15.000 km/Jahr sind das knapp 1.000 € Energiekosten-Ersparnis pro Jahr. Wer eine eigene Wallbox plus Dynamic-Tarif (zeitvariable Stromtarife, oft 0,20–0,25 €/kWh) hat, fährt nochmals 30 % günstiger. Aber: Anschaffungspreis ist beim E-Auto typisch 5.000–10.000 € höher als beim Verbrenner, Wertverlust unsicher, Reichweite/Lade-Infrastruktur prüfen. Break-Even bei reiner Energiekosten-Differenz liegt grob bei 5–10 Jahren — wer überwiegend Kurzstrecken fährt und zu Hause laden kann, profitiert schneller; Vielfahrer auf Langstrecken-Routen rechnen mit Schnellladekosten (0,55–0,75 €/kWh) anders.',
       },
     ],
+    quellen: [
+      { titel: 'Statistisches Bundesamt: Preisstatistiken', url: 'https://www.destatis.de/DE/Themen/Wirtschaft/Preise/_inhalt.html', hinweis: 'Verbraucherpreisindex inkl. Erzeugerpreise für Mineralölprodukte (Tabelle 61111)' },
+      { titel: 'Energiesteuergesetz (EnergieStG)', url: 'https://www.gesetze-im-internet.de/energiestg/', hinweis: 'Steueranteil im Kraftstoffpreis (Benzin: 65,45 ct/L, Diesel: 47,04 ct/L Energiesteuer)' },
+      { titel: 'ADAC: Durchschnittsverbrauch und Spritspar-Tipps', hinweis: 'Jährliche ADAC-Tests + Verbrauchsstatistiken, abrufbar über adac.de Themenbereich Verkehr → Tanken' },
+    ],
     affiliate: [
       { programId: 'check24', context: 'spritkosten', variant: 'compact' },
       { programId: 'hotelde', context: 'spritkosten', variant: 'compact' },

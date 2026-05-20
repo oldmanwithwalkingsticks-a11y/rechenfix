@@ -106,6 +106,12 @@ Trotz dieser Einschränkungen bleibt der BMI ein nützliches Screening-Werkzeug 
         antwort: 'Der Bauchumfang ist in vielen Fällen aussagekräftiger als der BMI, weil er etwas über die Fettverteilung verrät. Viszerales Bauchfett (das tief im Bauchraum liegt und Organe umschließt) ist gesundheitlich deutlich riskanter als subkutanes Fett an Hüfte oder Oberschenkel. Faustregel der WHO: Taillenumfang unter 94 cm bei Männern und unter 80 cm bei Frauen gilt als unbedenklich; ab 102 cm bzw. 88 cm liegt ein deutlich erhöhtes Risiko für Herz-Kreislauf-Erkrankungen und Diabetes Typ 2 vor. In der Praxis werden BMI und Bauchumfang gerne kombiniert: der BMI liefert eine schnelle Gesamteinschätzung, der Bauchumfang verfeinert das Bild. Wer einen Normal-BMI, aber einen hohen Taillenumfang hat, sollte das ärztlich abklären lassen.',
       },
     ],
+    quellen: [
+      { titel: 'WHO Fact Sheet: Obesity and Overweight', url: 'https://www.who.int/news-room/fact-sheets/detail/obesity-and-overweight', hinweis: 'BMI-Klassifikation für Erwachsene: Übergewicht ≥ 25, Adipositas ≥ 30' },
+      { titel: 'Kromeyer-Hauschild Perzentilen', hinweis: 'In Deutschland gebräuchliche alters- und geschlechtsspezifische BMI-Referenztabellen für Kinder und Jugendliche (Monatsschrift Kinderheilkunde 2001)' },
+      { titel: 'Deutsche Adipositas-Gesellschaft: S3-Leitlinie Prävention und Therapie der Adipositas', hinweis: 'Klinische Klassifikation Grad I–III, Therapieindikationen (AWMF-Register 050-001)' },
+      { titel: 'Robert Koch-Institut: Übergewicht und Adipositas in Deutschland', hinweis: 'Aktuelle DEGS- und KiGGS-Studienergebnisse zu Adipositas-Prävalenz, abrufbar über rki.de Themenbereich Nicht-übertragbare Krankheiten' },
+    ],
   },
   {
     slug: 'raucher-rechner',

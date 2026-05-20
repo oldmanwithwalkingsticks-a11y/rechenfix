@@ -91,6 +91,12 @@ Unser Brutto-Netto-Rechner liefert eine gute Orientierung, basiert jedoch auf ve
         antwort: 'Teilen Sie Ihr monatliches Nettogehalt durch Ihre Arbeitsstunden pro Monat. Bei einer 40-Stunden-Woche sind das ca. 160 Stunden. Beispiel: 2.340 € netto ÷ 160 = 14,63 € netto/Stunde. Unser Rechner zeigt diesen Wert automatisch an.',
       },
     ],
+    quellen: [
+      { titel: '§ 32a EStG: Einkommensteuertarif (Grundtabelle 2026)', url: 'https://www.gesetze-im-internet.de/estg/__32a.html' },
+      { titel: '§ 39b EStG: Einbehaltung der Lohnsteuer', url: 'https://www.gesetze-im-internet.de/estg/__39b.html' },
+      { titel: 'BMF: Programmablaufplan für den Lohnsteuerabzug 2026', url: 'https://www.bundesfinanzministerium.de/Web/DE/Themen/Steuern/Steuerarten/Lohnsteuer/Programmablaufplan/programmablaufplan.html', hinweis: 'Verbindliche Berechnungsvorschrift für Lohnsteuer + Solidaritätszuschlag + Kirchensteuer' },
+      { titel: 'Sozialversicherungs-Rechengrößenverordnung 2026', hinweis: 'BBG, Beitragsbemessungsgrenzen, BMAS-Bekanntmachung im Bundesgesetzblatt' },
+    ],
   },
   {
     slug: 'mwst-rechner',
@@ -189,6 +195,11 @@ Wenn Sie als Unternehmer Waren oder Dienstleistungen einkaufen, zahlen Sie auf d
         frage: 'Welche Pflichtangaben muss eine Rechnung für den Vorsteuerabzug enthalten?',
         antwort: 'Nach § 14 Abs. 4 UStG: vollständige Anschrift von Rechnungssteller und -empfänger, Steuernummer oder USt-ID des Ausstellers, Rechnungsdatum und fortlaufende Rechnungsnummer, Beschreibung der Leistung, Liefer- oder Leistungszeitraum, Nettobetrag aufgeschlüsselt nach Steuersätzen, MwSt-Satz und MwSt-Betrag, Bruttobetrag. Bei Kleinbetragsrechnungen bis 250 € reichen reduzierte Angaben (§ 33 UStDV). Fehlt eine Pflichtangabe, kann das Finanzamt den Vorsteuerabzug verweigern.',
       },
+    ],
+    quellen: [
+      { titel: '§ 12 UStG: Steuersätze (Regelsatz 19 %, ermäßigt 7 %)', url: 'https://www.gesetze-im-internet.de/ustg_1980/__12.html' },
+      { titel: '§ 10 UStG: Bemessungsgrundlage für Lieferungen und sonstige Leistungen', url: 'https://www.gesetze-im-internet.de/ustg_1980/__10.html' },
+      { titel: 'BMF: Umsatzsteuer-Anwendungserlass (UStAE)', hinweis: 'Verwaltungsanweisung des BMF zum ermäßigten Steuersatz für Lebensmittel, Bücher, Gastronomie etc.' },
     ],
   },
   {
@@ -297,6 +308,12 @@ Wichtig zu beachten: In der Praxis mindern die Abgeltungssteuer (25% plus Solida
         frage: 'Was ist der Unterschied zwischen Tagesgeld und Festgeld?',
         antwort: 'Tagesgeld ist täglich verfügbar — Sie können jederzeit Geld abheben oder einzahlen. Der Zinssatz ist variabel und kann sich kurzfristig ändern. Tagesgeld eignet sich für den Notgroschen und Geld, das Sie kurz- bis mittelfristig brauchen könnten. Festgeld bindet Ihr Geld für eine feste Laufzeit (z. B. 6 Monate, 1, 3 oder 5 Jahre). Dafür erhalten Sie meist einen höheren, garantierten Zinssatz. Während der Laufzeit kommen Sie nicht oder nur mit Zinsverlust an Ihr Geld. Festgeld lohnt sich, wenn Sie das Geld nicht akut brauchen und höhere Sicherheit beim Zinssatz möchten.',
       },
+    ],
+    quellen: [
+      { titel: '§ 246 BGB: Gesetzlicher Zinssatz (4 % p. a.)', url: 'https://www.gesetze-im-internet.de/bgb/__246.html' },
+      { titel: '§ 247 BGB: Basiszinssatz', url: 'https://www.gesetze-im-internet.de/bgb/__247.html' },
+      { titel: 'Deutsche Bundesbank: Aktueller Basiszinssatz', url: 'https://www.bundesbank.de/de/bundesbank/organisation/agb-und-regelungen/basiszinssatz-607820', hinweis: 'Halbjährliche Veröffentlichung gemäß § 247 Abs. 2 BGB' },
+      { titel: 'Bronstein, Semendjajew: Taschenbuch der Mathematik', hinweis: 'Standard-Referenz für Zinseszinsformel K_n = K_0 × (1 + p/100)^n' },
     ],
   },
   {
@@ -640,6 +657,11 @@ Beachten Sie, dass ein hoher Stundenlohn allein noch kein aussagekräftiger Verg
         frage: 'Welche Branchen haben höhere Mindestlöhne als 13,90 €/Std.?',
         antwort: 'Mehrere Branchen haben durch Allgemeinverbindlich-Erklärungen (AVE) eigene Tarif-Mindestlöhne, die über dem gesetzlichen Mindestlohn liegen. Beispiele 2026: Bauhauptgewerbe 15,40 €/Std. (Werker) bzw. 19,90 €/Std. (Fachwerker), Dachdeckerhandwerk 15,60 €/Std. (ungelernt) bzw. 17,40 €/Std. (Geselle), Gerüstbau 14,55 €/Std., Pflegebranche 16,10 €/Std. (Hilfskraft) bis 19,50 €/Std. (Pflegefachkraft Akutpflege), Maler- und Lackiererhandwerk 14,15 €/Std. (Helfer) bzw. 16,15 €/Std. (Geselle), Gebäudereinigung 14,25 €/Std. (Innenreinigung) bzw. 17,65 €/Std. (Glas- und Fassadenreinigung). Auch in der Leiharbeit gelten Branchenzuschläge nach Einsatzbranche. Wer in einer dieser Branchen tätig ist, hat einen tariflichen Anspruch über dem allgemeinen Mindestlohn — auch ohne Tarifbindung des eigenen Arbeitgebers, sofern AVE vorliegt.',
       },
+    ],
+    quellen: [
+      { titel: '§ 1 MiLoG: Mindestlohn (Anspruch auf Mindestentgelt)', url: 'https://www.gesetze-im-internet.de/milog/__1.html' },
+      { titel: 'Mindestlohn-Anpassungsverordnung 2026', hinweis: '13,90 €/h ab 01.01.2026, 14,60 €/h ab 01.01.2027 (Stichtag-Switch in lib/berechnungen/mindestlohn.ts)' },
+      { titel: 'Arbeitszeitgesetz (ArbZG)', url: 'https://www.gesetze-im-internet.de/arbzg/', hinweis: 'Höchstarbeitszeit, Pausen, Ruhezeiten' },
     ],
   },
   {

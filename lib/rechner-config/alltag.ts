@@ -185,6 +185,10 @@ Der Dreisatz wirkt einfach, hat aber typische Fallstricke — diese sechs treten
         antwort: 'Im Kern ja: Der proportionale Dreisatz beschreibt eine Ursprungsgerade — also eine lineare Funktion der Form y = m × x ohne y-Achsen-Abschnitt. Der Faktor m ist dabei der „Stückpreis" oder „Verbrauch pro Einheit". Der antiproportionale Dreisatz entspricht einer Hyperbel (y = k ÷ x), bei der das Produkt der beiden Werte konstant bleibt. Die Schule führt den Dreisatz typisch in der 6. Klasse als praktisches Werkzeug ein, lange bevor lineare Funktionen formal in der 7./8. Klasse behandelt werden — viele Erwachsene erkennen erst später, dass beide Konzepte mathematisch dasselbe beschreiben, nur mit unterschiedlicher Notation.',
       },
     ],
+    quellen: [
+      { titel: 'Bronstein, Semendjajew: Taschenbuch der Mathematik', hinweis: 'Standard-Referenz für Proportionalitätsrechnungen und lineare Funktionen (Verlag Harri Deutsch, jährliche Neuauflagen)' },
+      { titel: 'KMK-Bildungsstandards Mathematik für den mittleren Bildungsabschluss', hinweis: 'Leitidee „Funktionaler Zusammenhang" — proportionale und antiproportionale Zuordnungen ab Klasse 6 (Beschluss der Kultusministerkonferenz 2003, fortgeschrieben 2022)' },
+    ],
   },
   {
     slug: 'tagerechner',
@@ -284,6 +288,11 @@ Drei kalendarische Eigenheiten erklären die meisten „seltsamen" Tagerechnungs
         frage: 'Wie weit zurück oder voraus kann der Tagerechner rechnen?',
         antwort: 'Der Rechner unterstützt Daten von etwa 1900 bis 2100 zuverlässig. Innerhalb dieses Bereichs werden Schaltjahr-Regel, Monatslängen und Wochentag-Berechnung korrekt berücksichtigt. Für historische Daten vor 1582 (Einführung des Gregorianischen Kalenders) liefert der Rechner zwar einen mathematisch korrekten Tag-Differenzwert, aber das damals real verwendete Datum (Julianischer Kalender) weicht ab — vom 4. auf den 15. Oktober 1582 wurde damals 10 Tage übersprungen. Für rein kalendarische Tagezählung im Alltag (Geburtstag, Vertragslaufzeit, Projektplanung über Jahrzehnte) ist der Rechner ohne Einschränkung nutzbar.',
       },
+    ],
+    quellen: [
+      { titel: '§ 187 BGB: Fristbeginn', url: 'https://www.gesetze-im-internet.de/bgb/__187.html' },
+      { titel: '§ 188 BGB: Fristende', url: 'https://www.gesetze-im-internet.de/bgb/__188.html' },
+      { titel: 'ISO 8601: Datums- und Zeitformat-Standard', hinweis: 'Internationaler Standard für Kalenderdaten, Wochennummerierung, Zeiträume; in Deutschland als DIN ISO 8601 übernommen' },
     ],
   },
   {

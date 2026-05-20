@@ -95,6 +95,11 @@ Beim Vergleich von Stromtarifen und der Schätzung von Jahreskosten gibt es eini
         antwort: 'Dynamische Stromtarife (z. B. Tibber, awattar, Octopus Go) koppeln den Arbeitspreis stündlich an den Börsenstrompreis statt einen Festpreis zu vereinbaren. Der Mieter zahlt einen kleinen Aufschlag (typisch 1–2 ct/kWh) plus den jeweiligen Stundenpreis — der zwischen 5 ct (nachts/Sonntag/viel Wind) und 35 ct (Werktag-Spitzen 18–20 Uhr) schwanken kann. Voraussetzung: ein intelligentes Messsystem (Smart-Meter), das ab 6.000 kWh Verbrauch oder bei E-Auto/Wärmepumpe ohnehin verpflichtend ist. Lohnt sich besonders für Haushalte mit verschiebbarem Verbrauch (Wärmepumpe nachts, E-Auto-Wallbox mit Lade-Steuerung, Geschirrspüler/Waschmaschine zeitlich flexibel) und großem Jahresverbrauch ab 4.000 kWh. Typische Ersparnis: 10–25 % gegenüber Standardtarif. Wer hauptsächlich abends zu den Spitzenzeiten verbraucht und nicht steuern kann, fährt mit Festpreistarif besser. Tools wie Home-Assistant oder das Energie-Management vieler Wallboxen automatisieren das Lastverschieben heute weitgehend.',
       },
     ],
+    quellen: [
+      { titel: 'Erneuerbare-Energien-Gesetz (EEG 2023)', url: 'https://www.gesetze-im-internet.de/eeg_2014/', hinweis: 'EEG-Umlage seit 01.07.2022 auf 0 ct/kWh, Einspeisevergütung § 49 EEG' },
+      { titel: 'Stromsteuergesetz (StromStG)', url: 'https://www.gesetze-im-internet.de/stromstg/', hinweis: 'Stromsteuer-Komponente: 2,05 ct/kWh Regelsatz' },
+      { titel: 'Bundesnetzagentur: Elektrizität und Gas', url: 'https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html', hinweis: 'Netzentgelte, Strompreis-Monitoring, BDEW-Strompreisanalyse' },
+    ],
   },
   {
     slug: 'nebenkosten-rechner',
@@ -245,6 +250,12 @@ Bei der Mietbeurteilung helfen drei rechtliche Werkzeuge, die jeder Mieter kenne
         frage: 'Indexmiete vs. Staffelmiete — wo liegen die Unterschiede?',
         antwort: 'Bei der Indexmiete (§ 557b BGB) steigt die Miete mit dem Verbraucherpreisindex (VPI) — der Vermieter kann die Miete frühestens nach 12 Monaten mit dem aktuellen Index erhöhen, indem er den Anstieg in Prozent ausweist und schriftlich verlangt. Bei der Staffelmiete (§ 557a BGB) sind die Erhöhungen schon im Vertrag fest vereinbart (z. B. +20 €/Jahr oder +3 % alle zwei Jahre) und werden ohne weitere Zustimmung wirksam. Beide Varianten schließen reguläre Mieterhöhungen nach § 558 BGB (Anpassung an ortsübliche Vergleichsmiete) aus. Praxis-Vergleich: Indexmiete ist bei niedriger Inflation günstiger für Mieter, bei hoher Inflation ungünstiger; Staffelmiete bietet Planungssicherheit für beide Seiten, kann aber bei moderaterer Inflation deutlich über dem ortsüblichen Niveau enden. Mietpreisbremse gilt bei beiden Varianten für die Anfangsmiete.',
       },
+    ],
+    quellen: [
+      { titel: '§ 558 BGB: Mieterhöhung bis zur ortsüblichen Vergleichsmiete', url: 'https://www.gesetze-im-internet.de/bgb/__558.html' },
+      { titel: '§ 558d BGB: Qualifizierter Mietspiegel', url: 'https://www.gesetze-im-internet.de/bgb/__558d.html' },
+      { titel: '§ 556d BGB: Mietpreisbremse — zulässige Miethöhe bei Mietbeginn', url: 'https://www.gesetze-im-internet.de/bgb/__556d.html', hinweis: 'Verlängert bis 31.12.2029 (BT-Drs. 21/322 i.d.F. 21/631)' },
+      { titel: 'Mietspiegelverordnung (MsV)', hinweis: 'Verordnung vom 28.10.2021 (BGBl. I S. 4779) — wissenschaftliche Grundsätze für qualifizierte Mietspiegel' },
     ],
   },
   {
