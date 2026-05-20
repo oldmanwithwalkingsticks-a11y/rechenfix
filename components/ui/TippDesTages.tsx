@@ -28,12 +28,12 @@ const mindestlohnNetto = Math.round(
 
 const tipps = [
   {
-    text: 'Bei 3.500 € brutto spart ein Wechsel von Steuerklasse 1 zu 3 über 300 € pro Monat.',
+    text: 'Verheiratete mit ungleichem Einkommen können durch die Steuerklassen-Kombination III/V monatlich Liquidität gewinnen. Die endgültige Jahressteuer bleibt durch die Steuererklärung aber identisch.',
     link: '/finanzen/brutto-netto-rechner',
     linkText: 'Zum Brutto-Netto-Rechner →',
   },
   {
-    text: 'Durch spritsparende Fahrweise (niedrige Drehzahlen, Reifendruck prüfen) können Sie bis zu 20 % Spritkosten sparen.',
+    text: 'Vorausschauendes Fahren senkt den Spritverbrauch je nach Fahrstil um 5 bis 15 %. Die größten Einsparungen bringen frühes Hochschalten, konstantes Tempo und das Vermeiden von Vollgas-Beschleunigung.',
     link: '/auto/spritkosten-rechner',
     linkText: 'Zum Spritkosten-Rechner →',
   },
@@ -63,7 +63,7 @@ const tipps = [
     linkText: 'Zum Sparrechner →',
   },
   {
-    text: 'Die Pendlerpauschale beträgt 0,30 € pro km (ab dem 21. km: 0,38 €). Bei 30 km einfacher Strecke sind das über 2.600 € Steuerentlastung pro Jahr.',
+    text: 'Seit 2026 beträgt die Pendlerpauschale einheitlich 0,38 € pro Entfernungskilometer ab dem ersten Kilometer (StÄndG 2025). Diese gilt als Werbungskosten — die tatsächliche Steuerersparnis hängt vom persönlichen Grenzsteuersatz ab und liegt typischerweise zwischen 25 und 42 % der geltend gemachten Pauschale.',
     link: '/arbeit/pendlerpauschale-rechner',
     linkText: 'Zum Pendlerpauschale-Rechner →',
   },
