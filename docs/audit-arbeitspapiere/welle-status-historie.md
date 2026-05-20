@@ -4,7 +4,71 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 20.05.2026
+**Stand:** 21.05.2026
+
+---
+
+## W15A Track 4 — Affiliate-Disclosure + KI-Branding-Mitigation — 21.05.2026
+
+**Anlass:** AdSense-Ablehnung 19.05.2026 → Welle-15-Tiefenanalyse Sekundärfaktoren: (a) Affiliate-Disclosure im Impressum ist generisches e-recht24-Boilerplate, (b) Marketing-Behauptung „Deutschlands erster Rechner mit KI-Erklärungen" auf Homepage ist unbelegt und verstärkt AI-Content-Detection-Risiko.
+
+**Scoping:** [docs/audit-arbeitspapiere/w15a4-disclosure-ki-scoping.md](w15a4-disclosure-ki-scoping.md) — exhaustive Scan über Affiliate-Disclosure (3 Hauptstellen) und KI-Branding (mehr als nur die Dossier-Stellen, insgesamt 4 zu umformulieren + 4 zu verstecken). Datenschutz Section 9 (nach Track-B-Cleanup) und Ueber-uns „Datenschutz und Transparenz" (W15A.1) bereits sauber.
+
+### Commit 1 — `chore: impressum-disclosure eigene formulierung` (`c9b22d9`)
+
+Q2 + Q3 zusammen.
+
+**[app/impressum/page.tsx](../../app/impressum/page.tsx) Z. 92–100 Affiliate-Hinweis:** 1-Absatz-e-recht24-Generic → 3 Absätze mit AdSense+Anzeige-Kennzeichnung / Awin-Netzwerk + konkrete Partner (CHECK24, WISO Steuer, smartsteuer, Cosmos Direkt) + thematische-Passung-Statt-Provisionshöhe + Verweis auf Datenschutz.
+
+**Z. 102–115 e-recht24-Quellen-Footer:** komplett entfernt. Rechtlich nicht erforderlich, eigene Formulierung macht Quellenhinweis hinfällig, signalisierte bisher „generisches Boilerplate" an AdSense-Reviewer.
+
+### Commit 2 — `refactor: ki-branding entschärft` (`a73c9e2`)
+
+Q1 + Q4 + Q5 zusammen.
+
+**Tagline-Refactor [app/page.tsx](../../app/page.tsx):**
+- 3× Metadata-Description (head/openGraph/twitter): `"Deutschlands erster Rechner mit KI-Erklärungen"` → `"170 Online-Rechner für Deutschland — mit Erklärungen statt blanker Zahlen. Kostenlos, ohne Anmeldung, Ergebnisse direkt im Browser."`
+- Hero-Subtitle Z. 41: dynamisch via `{alleRechner.length}` — kein Drift-Risiko bei nächster Rechner-Welle
+- KI-Banner Z. 52–71 (Gradient + „Rechenfrage? Einfach der KI stellen!" + CTA auf `/ki-rechner`) komplett entfernt — konsistent mit Mittel-Versteckung. **Reverse-Reminder:** in dezenter Form nach AdSense-Approval (Welle 16) wieder einbauen
+
+**/ki-rechner Mittel-Versteckung (4 Stellen):**
+- [app/ki-rechner/page.tsx](../../app/ki-rechner/page.tsx): metadata um `robots: { index: false, follow: false }` ergänzt. Page-Body unangetastet — bleibt via Direkt-Link erreichbar
+- [app/sitemap.ts](../../app/sitemap.ts): hartkodierter `/ki-rechner`-Entry (priority 0.8) entfernt, Inline-Kommentar als Erinnerung
+- [components/layout/Header.tsx](../../components/layout/Header.tsx): KI-Rechner-Gradient-Button (Z. 67–77) entfernt. „Alle Rechner"-Button bleibt prominent
+- [components/layout/Footer.tsx](../../components/layout/Footer.tsx): KI-Rechner-Link in „Mehr"-Spalte entfernt. Spalte hat jetzt Über-uns + Feedback geben
+
+**BEHALTEN (Feature-Name + Mitigation = E-E-A-T-Material):**
+- [components/rechner/AiExplain.tsx](../../components/rechner/AiExplain.tsx): Button-Text „Fix erklärt", KI-Loading-Indicator, Panel-Header — Feature-Name als Brand
+- [app/ueber-uns/page.tsx](../../app/ueber-uns/page.tsx) Hero-Absatz 3: „...KI-gestützte Erklärung (Fix erklärt): ... die zugrundeliegenden Formeln und Werte sind jedoch **nicht KI-generiert**, sondern manuell aus Primärquellen gepflegt" — **exakte Mitigation**, signalisiert AdSense „Inhalt von Code generiert, nicht von AI"
+- [app/feedback/FeedbackClient.tsx](../../app/feedback/FeedbackClient.tsx): KI-Feedback-Kategorie als legitime Userresearch
+- [app/barrierefreiheit/page.tsx](../../app/barrierefreiheit/page.tsx): A11y-Doku
+
+**Robots.txt-Entscheidung (Q4):** Nur Metadata-Variante, kein zusätzlicher Disallow in `app/robots.ts`. Begründung: `noindex` reicht. Zusätzlicher Disallow hätte den Nebeneffekt, dass Google die Page gar nicht crawlt — wir wollen aber, dass Crawler die Page sehen und die `noindex`-Direktive respektieren (sauberer Signal-Pfad).
+
+### Verifikation
+
+- `npm run build` 205/205 grün nach Commit 1 und Commit 2
+- Browser-Preview Server-Side-Check via `fetch('/', { cache: 'no-store' })`: **`kiCountInRawHtml: 0`** — Server-Output liefert keine `/ki-rechner`-Links mehr im Markup
+- Hero-Subtitle korrekt: „170 Online-Rechner für Deutschland — mit Erklärungen statt blanker Zahlen."
+- KI-Banner-Gradient nicht mehr im Markup
+
+**Browser-DOM-Cache-Anomalie beobachtet:** Trotz sauberem Server-Output zeigten zwei aufeinanderfolgende Preview-Server-Neustarts + `.next`-Cache-Delete weiterhin die alten Links im Browser-DOM. Root Cause: Browser-/RSC-Cache (Page-Snapshot aus erster Session blieb hängen). **Server-Side-Check (`fetch + 'no-store'`) ist die maßgebliche Verifikations-Quelle** — Browser-DOM-Query kann veraltete Snapshot zeigen.
+
+### Karsten Phase 4 — Manuelle Verifikation (Inkognito nach Deploy)
+
+**4.1 Homepage `/`:** kein KI-Banner mehr (Gradient mit „Rechenfrage? Einfach der KI stellen!"), neue Tagline sichtbar, Header ohne KI-Rechner-Button
+
+**4.2 Impressum `/impressum`:** neue Disclosure-Formulierung (3 Absätze), kein „Quelle: e-recht24.de"-Link mehr am Seitenende
+
+**4.3 KI-Rechner `/ki-rechner`:** Page erreichbar, View Source zeigt `<meta name="robots" content="noindex,nofollow">`, Header/Footer ohne KI-Rechner-Link
+
+**4.4 Sitemap `https://www.rechenfix.de/sitemap.xml`:** kein `/ki-rechner`-Entry mehr
+
+### L-Lehren neu
+
+- **L-W15A.4-1 (Server-Side-Check schlägt Browser-DOM-Query bei RSC-Cache):** Nach Code-Refactor, der Header/Footer/global-Components anfasst, kann der Browser-DOM trotz Server-Reload und `.next`-Cache-Delete noch alte Renderings zeigen (Browser-/RSC-Page-Cache). **Verifikation muss serverseitig erfolgen** — `fetch('/', { cache: 'no-store' })` und `match`/`grep` über das raw HTML zeigt den wahren Server-State. DOM-Query auf `document.querySelector` kann veraltete Snapshot lesen.
+- **L-W15A.4-2 (Mittel-Versteckung-Pattern: Page bleibt + noindex + Nav-hide + Sitemap-remove):** Für Pages, die User über Direkt-Link weiter erreichen sollen, aber aus dem Crawl-Index/Discovery raus müssen: 4-Punkt-Pattern (1) Page-Body unangetastet, (2) `robots: { index: false, follow: false }` in Metadata, (3) Sitemap-Entry entfernen, (4) Header- und Footer-Navigation-Links entfernen. KEIN robots.txt-Disallow zusätzlich — würde das saubere Signal stören (Crawler sollen Page sehen + noindex-Direktive respektieren).
+- **L-W15A.4-3 (Reverse-Reminder bei strategischen Removals):** Bei Removals, die nach Externer-Approval (AdSense, Partner-Programm-Reaktivierung etc.) rückgängig gemacht werden könnten/sollten, einen **Reverse-Reminder** in der Welle-Historie verankern statt in einer Memory-Notiz. Memory-Notes gehen verloren, Welle-Historie ist der zentrale Anker. Beispiel hier: KI-Banner kann nach AdSense-Approval in dezenter Form (ohne Gradient/Marketing-Hyperbole) wieder eingebaut werden — Hinweis in Commit-Message + Welle-Historie.
 
 ---
 
