@@ -149,12 +149,15 @@ export default function UeberUnsSeite() {
             wirklich hilft und wann es nur Eindruck schinden soll.
           </p>
           <p>
-            Mein Anspruch war von Anfang an klar: Ein Rechner-Portal, das (1) erklärt, was die Zahl bedeutet — nicht nur ausspuckt, 
-            (2) aktuell ist, sobald sich gesetzliche Werte ändern, und (3) so gestaltet ist, dass man auch unterwegs schnell zum Ergebnis kommt, 
-            ohne sich durch Werbeflächen klicken zu müssen.
+            Mein Anspruch war von Anfang an klar: Ein Rechner-Portal, das
           </p>
+          <ol className="list-decimal pl-6 space-y-2 my-4">
+            <li>erklärt, was die Zahl bedeutet — nicht nur ausspuckt,</li>
+            <li>aktuell ist, sobald sich gesetzliche Werte ändern, und</li>
+            <li>so gestaltet ist, dass die Bedienung schnell und auf jedem Gerät funktioniert — Werbung finanziert den Betrieb, soll aber nicht das Ergebnis verdecken.</li>
+          </ol>
           <p>
-            Heute, im Mai 2026, sind es 170 Rechner in neun Kategorien — von Brutto-Netto und Mehrwertsteuer über BMI und Spritkosten 
+            Heute, im Mai 2026, sind es 170 Rechner in neun Kategorien — von Brutto-Netto und Mehrwertsteuer über BMI und Spritkosten
             bis zu Backzeit und Pace. Neue Rechner kommen regelmäßig dazu, bestehende werden gepflegt und bei gesetzlichen Änderungen aktualisiert.
           </p>
         </div>
