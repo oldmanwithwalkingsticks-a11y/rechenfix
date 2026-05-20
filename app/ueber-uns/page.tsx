@@ -168,7 +168,7 @@ export default function UeberUnsSeite() {
         <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
           Was Rechenfix anders macht
         </h2>
-        <ul className="space-y-4 text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+        <ul className="space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed">
           <li>
             <strong className="text-gray-800 dark:text-gray-100">1. Erklärungen statt blanker Zahlen.</strong>{' '}
             Jeder Rechner liefert auf Wunsch eine Erklärung in einfacher Sprache: Warum kommt dieses Ergebnis heraus? 
@@ -240,15 +240,15 @@ export default function UeberUnsSeite() {
         <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
           Unsere Quellen (Auswahl)
         </h2>
-        <p className="text-sm text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
+        <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
           Die folgenden Primärquellen werden für die zentralen Themen-Bereiche genutzt.
           Eine vollständige Liste mit weiterführenden Erläuterungen findet sich auf{' '}
           <Link href="/qualitaet" className="text-primary-600 dark:text-primary-400 hover:underline">/qualitaet</Link>.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-1.5">Steuern &amp; Recht</h3>
-            <ul className="list-disc pl-5 space-y-1 text-gray-600 dark:text-gray-400">
+            <ul className="list-disc pl-5 space-y-1 text-gray-700 dark:text-gray-300">
               <li>Bundesfinanzministerium (BMF)</li>
               <li>Bundesgesetzblatt (BGBl.)</li>
               <li>gesetze-im-internet.de</li>
@@ -256,7 +256,7 @@ export default function UeberUnsSeite() {
           </div>
           <div>
             <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-1.5">Sozialversicherung</h3>
-            <ul className="list-disc pl-5 space-y-1 text-gray-600 dark:text-gray-400">
+            <ul className="list-disc pl-5 space-y-1 text-gray-700 dark:text-gray-300">
               <li>GKV-Spitzenverband</li>
               <li>Deutsche Rentenversicherung</li>
               <li>BMAS</li>
@@ -264,14 +264,14 @@ export default function UeberUnsSeite() {
           </div>
           <div>
             <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-1.5">Statistik &amp; Wirtschaft</h3>
-            <ul className="list-disc pl-5 space-y-1 text-gray-600 dark:text-gray-400">
+            <ul className="list-disc pl-5 space-y-1 text-gray-700 dark:text-gray-300">
               <li>Statistisches Bundesamt (Destatis)</li>
               <li>Deutsche Bundesbank</li>
             </ul>
           </div>
           <div>
             <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-1.5">Wohnen &amp; Energie</h3>
-            <ul className="list-disc pl-5 space-y-1 text-gray-600 dark:text-gray-400">
+            <ul className="list-disc pl-5 space-y-1 text-gray-700 dark:text-gray-300">
               <li>Bundesnetzagentur</li>
               <li>BDEW</li>
               <li>KfW</li>
@@ -312,7 +312,7 @@ export default function UeberUnsSeite() {
         <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
           Kontakt
         </h2>
-        <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
+        <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
           Fehler entdeckt, Verbesserungsvorschlag oder Wunsch für einen neuen
           Rechner? Schreiben Sie an{' '}
           <a href="mailto:info@rechenfix.de" className="text-primary-600 dark:text-primary-400 hover:underline">
@@ -320,7 +320,7 @@ export default function UeberUnsSeite() {
           </a>
           . Antwort in der Regel innerhalb von 14 Tagen.
         </p>
-        <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+        <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
           Anbieter-Angaben nach § 5 TMG:{' '}
           <Link href="/impressum" className="text-primary-600 dark:text-primary-400 hover:underline">Impressum</Link>.
         </p>
