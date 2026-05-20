@@ -135,11 +135,6 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/ki-rechner" className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm">
-                    KI-Rechner
-                  </Link>
-                </li>
-                <li>
                   <Link href="/feedback" className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm">
                     Feedback geben
                   </Link>

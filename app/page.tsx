@@ -7,11 +7,11 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Rechenfix.de — Kostenlose Online-Rechner',
-  description: 'Kostenlose Online-Rechner für Finanzen, Alltag, Auto und Gesundheit. Sofort-Ergebnisse ohne Anmeldung. Deutschlands erster Rechner mit KI-Erklärungen.',
+  description: '170 Online-Rechner für Deutschland — mit Erklärungen statt blanker Zahlen. Kostenlos, ohne Anmeldung, Ergebnisse direkt im Browser.',
   alternates: { canonical: 'https://www.rechenfix.de' },
   openGraph: {
     title: 'Rechenfix.de — Kostenlose Online-Rechner',
-    description: 'Kostenlose Online-Rechner für Finanzen, Alltag, Auto und Gesundheit. Sofort-Ergebnisse ohne Anmeldung. Deutschlands erster Rechner mit KI-Erklärungen.',
+    description: '170 Online-Rechner für Deutschland — mit Erklärungen statt blanker Zahlen. Kostenlos, ohne Anmeldung, Ergebnisse direkt im Browser.',
     url: 'https://www.rechenfix.de',
     siteName: 'Rechenfix.de',
     type: 'website',
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Rechenfix.de — Kostenlose Online-Rechner',
-    description: 'Kostenlose Online-Rechner für Finanzen, Alltag, Auto und Gesundheit. Sofort-Ergebnisse ohne Anmeldung. Deutschlands erster Rechner mit KI-Erklärungen.',
+    description: '170 Online-Rechner für Deutschland — mit Erklärungen statt blanker Zahlen. Kostenlos, ohne Anmeldung, Ergebnisse direkt im Browser.',
     images: ['https://www.rechenfix.de/opengraph-image'],
   },
 };
@@ -38,7 +38,7 @@ export default function Startseite() {
           rechenfix.de — Fix gerechnet!
         </h1>
         <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto mb-8">
-          Kostenlose Online-Rechner für Finanzen, Alltag, Auto und Gesundheit. Sofort-Ergebnisse ohne Anmeldung. Deutschlands erster Rechner mit KI-Erklärungen (Fix erklärt).
+          {alleRechner.length} Online-Rechner für Deutschland — mit Erklärungen statt blanker Zahlen.
         </p>
         <SearchBar grosse="gross" className="mx-auto w-full" style={{ maxWidth: '600px' }} />
         <BerechnungsZaehler />
@@ -47,27 +47,6 @@ export default function Startseite() {
       {/* Tipp des Tages */}
       <section className="mb-12">
         <TippDesTages />
-      </section>
-
-      {/* KI-Banner */}
-      <section className="mb-12">
-        <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-xl p-6 text-center">
-          <p className="text-xl sm:text-2xl font-extrabold text-white mb-2">
-            Rechenfrage? Einfach der KI stellen!
-          </p>
-          <p className="text-white/80 text-sm sm:text-base max-w-xl mx-auto mb-5">
-            Stellen Sie Ihre Rechenfrage in nat&uuml;rlicher Sprache &mdash; die KI liefert die Antwort und verlinkt Sie zum passenden Rechner.
-          </p>
-          <Link
-            href="/ki-rechner"
-            className="inline-flex items-center gap-2 px-6 py-2.5 bg-white text-indigo-700 font-semibold text-sm rounded-lg hover:bg-indigo-50 transition-colors shadow-md"
-          >
-            Jetzt Frage stellen
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-            </svg>
-          </Link>
-        </div>
       </section>
 
       {/* Kategorien als Kacheln */}

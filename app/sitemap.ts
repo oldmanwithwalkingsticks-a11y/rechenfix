@@ -35,12 +35,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 1.0,
     },
-    {
-      url: `${SITE_URL}/ki-rechner`,
-      lastModified: gitMtime('app/ki-rechner/page.tsx'),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
+    // /ki-rechner bewusst nicht in Sitemap (W15A.4: noindex + nav-hide)
   ];
 
   // Long-Tail SEO-Seiten (Brutto-Netto für spezifische Beträge)
