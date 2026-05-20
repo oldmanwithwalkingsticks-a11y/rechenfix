@@ -13,6 +13,23 @@ export interface AffiliateConfig {
   variant?: 'compact' | 'full';
 }
 
+/**
+ * Quellen-Eintrag für Top-10-Rechner (W15A.3). Wird vom Page-Renderer
+ * post-FAQ als nummerierte Liste in eigener Card ausgespielt — als
+ * E-E-A-T-Material für AdSense-Reviewer und Nutzer-Transparenz.
+ *
+ * Pflege: nur Primärquellen (gesetze-im-internet.de, BMF, Destatis,
+ * WHO, RKI, Bundesnetzagentur etc.), keine Wikipedia.
+ */
+export interface QuelleConfig {
+  /** Sichtbarer Titel, z. B. „§ 32a EStG: Einkommensteuertarif" */
+  titel: string;
+  /** Optional: URL zur Primärquelle. Wenn vorhanden, wird als „Originaltext"-Link gerendert. */
+  url?: string;
+  /** Optional: Zusatz-Hinweis (Stichtag, Versions-Info, BGBl.-Fundstelle) — als kleiner grauer Subtext. */
+  hinweis?: string;
+}
+
 export interface RechnerConfig {
   slug: string;
   titel: string;
@@ -36,6 +53,12 @@ export interface RechnerConfig {
    * Property weg und behalten ihre eigenen AffiliateBox-Render-Blöcke inline.
    */
   affiliate?: AffiliateConfig | AffiliateConfig[];
+  /**
+   * Optional: Primärquellen-Liste für Top-10-Rechner. Wird vom Page-
+   * Renderer als nummerierte Liste in eigener Card post-FAQ ausgespielt.
+   * Eingeführt mit W15A.3.
+   */
+  quellen?: QuelleConfig[];
 }
 
 export interface KategorieConfig {

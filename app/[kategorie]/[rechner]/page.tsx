@@ -8,6 +8,7 @@ import AdSlot from '@/components/ads/AdSlot';
 import StructuredData from '@/components/seo/StructuredData';
 import FeedbackButtons from '@/components/ui/FeedbackButtons';
 import { AffiliateBox } from '@/components/AffiliateBox';
+import Quellen from '@/components/Quellen';
 import Prozentrechner from '@/components/rechner/Prozentrechner';
 import BruttoNettoRechner from '@/components/rechner/BruttoNettoRechner';
 import MwStRechner from '@/components/rechner/MwStRechner';
@@ -560,6 +561,11 @@ export default function RechnerSeite({ params }: Props) {
             </section>
           </>
           )}
+
+          {/* Quellen-Sektion — nach FAQ, vor Affiliate (W15A.3 E-E-A-T-Material).
+              Nur Top-10-Rechner (und später Top-20) haben config.quellen gesetzt;
+              alle anderen rendern hier nichts. */}
+          {config.quellen && <Quellen quellen={config.quellen} />}
 
           {/* Affiliate-Boxen — nach Content für AdSense-konforme Position (W13.2+ / W14.A.1).
               Single-Object für 1 Box, Array für Multi-Box. Rechner mit eigenem
