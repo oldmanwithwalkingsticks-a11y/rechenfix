@@ -8,6 +8,78 @@
 
 ---
 
+## W15A Track 3 — Quellen-Sektion + Tipp-des-Tages-Fix — 21.05.2026
+
+**Anlass:** Welle-15-Tiefenanalyse Sekundärfaktoren: (a) Tipp-des-Tages enthält faktische Fehler (SK 1→3-Wechsel ohne Heirat-Hinweis; Pendlerpauschale mit veraltetem 0,30/0,38-Split und Werbungskosten/Steuerentlastung verwechselt), (b) keine strukturierten Quellen auf Rechner-Seiten — Wettbewerber blitzrechner.de zitiert Bundesgesetze und Normen direkt nach jedem Rechner.
+
+**Scoping:** [docs/audit-arbeitspapiere/w15a3-quellen-tipps-scoping.md](w15a3-quellen-tipps-scoping.md) — Tipp-Faktencheck (2 KRITISCH, 1 UNGENAU, 5 KORREKT), Quellen-Component existierte nicht, 10 Top-10-Rechner mit URL-Vorschlägen + 5 Slug-Korrekturen gegenüber Karsten-Memory.
+
+### Commit 1 — `fix: tipp-des-tages faktische korrekturen (3 tipps)` (`3869636`)
+
+[components/ui/TippDesTages.tsx](../../components/ui/TippDesTages.tsx):
+
+- **Tipp 1 (SK 1→3, KRITISCH):** ALT „spart über 300 € pro Monat" → NEU „Verheiratete mit ungleichem Einkommen können durch die Steuerklassen-Kombination III/V monatlich Liquidität gewinnen. Die endgültige Jahressteuer bleibt durch die Steuererklärung aber identisch." Faktencheck: SK 3 setzt zwingend Heirat voraus (§ 38b Abs. 1 Nr. 3 EStG), Partner zahlt in SK 5 mehr — Jahres-Netto identisch zu SK 4/4.
+- **Tipp 2 (Sprit „bis zu 20 %", UNGENAU):** auf konservative ADAC-Bandbreite „5 bis 15 %" + konkrete Tipps (frühes Hochschalten, konstantes Tempo, kein Vollgas-Beschleunigen) umformuliert.
+- **Tipp 8 (Pendlerpauschale 0,30/0,38, KRITISCH):** ALT mit veraltetem Tarif-Split + Werbungskosten/Steuerentlastung-Verwechslung („2.600 € Entlastung") → NEU „einheitlich 0,38 €/km ab dem ersten Kilometer (StÄndG 2025) ... Werbungskosten ... Steuerersparnis hängt vom Grenzsteuersatz ab (25–42 %)".
+
+Tipps 3–7 unangetastet (alle KORREKT oder Tipp 6 bereits dynamisch).
+
+### Commit 2 — `feat: quellen-component für rechner-seiten` (`77b0eb2`)
+
+Infrastruktur ohne Daten:
+
+- **Type-Erweiterung** [lib/rechner-config/types.ts](../../lib/rechner-config/types.ts): neues `QuelleConfig { titel; url?; hinweis? }` Interface + `quellen?: QuelleConfig[]` Property in `RechnerConfig`. JSDoc beschreibt Pflege-Regel (nur Primärquellen, keine Wikipedia).
+- **Neue Component** [components/Quellen.tsx](../../components/Quellen.tsx): Server-Component, Card-Pattern (`card p-6 md:p-8 mb-8 no-print`), H2 „Quellen & Rechtsgrundlagen", nummerierte `<ol>` mit `list-decimal pl-6 space-y-3`. Pro Item: titel + optional „Originaltext"-Link (`target="_blank" rel="noopener noreferrer"`) + optional grauer Hinweis-Subtext. Early-return `null` bei leerem Array.
+- **Renderer-Integration** [app/[kategorie]/[rechner]/page.tsx](../../app/[kategorie]/[rechner]/page.tsx): Import + Render-Block zwischen FAQ-Section (Z. 560) und Affiliate-Renderer (Z. 568), `{config.quellen && <Quellen quellen={config.quellen} />}`. Position konform mit AdSense-Pattern (substanzieller Content vor Affiliate).
+
+### Commit 3 — `data: quellen für top-10 rechner` (`866b34a`)
+
+10 Configs in 5 Kategorie-Files mit Primärquellen-Listen befüllt — aktiviert Commit-2-Infrastruktur:
+
+| Rechner | Datei | Quellen | URLs |
+|---|---|---|---|
+| brutto-netto-rechner | finanzen.ts | § 32a EStG, § 39b EStG, BMF Programmablaufplan, SV-Rechengrößen-VO | 3/4 |
+| mwst-rechner | finanzen.ts | § 12 UStG, § 10 UStG, BMF UStAE | 2/3 |
+| zinsrechner | finanzen.ts | § 246 BGB, § 247 BGB, Bundesbank Basiszinssatz, Bronstein-Semendjajew | 3/4 |
+| stundenlohn-rechner | finanzen.ts | § 1 MiLoG, MiLoV3 2026, ArbZG | 2/3 |
+| bmi-rechner | gesundheit.ts | WHO obesity-and-overweight, Kromeyer-Hauschild, DAG S3-Leitlinie, RKI | 1/4 |
+| spritkosten-rechner | auto.ts | Destatis Preisstatistiken, EnergieStG, ADAC | 2/3 |
+| dreisatz-rechner | alltag.ts | Bronstein-Semendjajew, KMK-Bildungsstandards | 0/2 |
+| tagerechner | alltag.ts | § 187 BGB, § 188 BGB, ISO 8601 | 2/3 |
+| mietrechner | wohnen.ts | § 558 BGB, § 558d BGB, § 556d BGB, MsV | 3/4 |
+| stromkosten-rechner | wohnen.ts | EEG 2023, StromStG, BNetzA Energie | 3/3 |
+
+**Slug-Korrekturen gegenüber Karsten-Memory** (5 von 10): `mehrwertsteuer-rechner`→`mwst-rechner`, `stundenlohnrechner`→`stundenlohn-rechner`, `spritrechner`→`spritkosten-rechner`, `dreisatzrechner`→`dreisatz-rechner`, `stromrechner`→`stromkosten-rechner`.
+
+### URL-Verifikation (Q1: WebFetch ALLE URLs)
+
+**20 URLs OK** (alle gesetze-im-internet.de-Paragraphen, WHO obesity-and-overweight, Bundesbank Basiszinssatz, Destatis Preise-Hauptseite, BNetzA Elektrizitaet-und-Gas-Hauptseite, BMF Programmablaufplan).
+
+**1 URL ausgetauscht:** WHO BMI von `a-healthy-lifestyle-…` (Inhalt war nur generelle Lifestyle-Empfehlung ohne BMI-Klassifikation) auf `obesity-and-overweight` (enthält explizit „Übergewicht ≥ 25, Adipositas ≥ 30").
+
+**3 URLs Fallback auf „Hinweis ohne Link":** RKI Adipositas (alle 3 URL-Varianten 404 — Themen-Restrukturierung der rki.de), BNetzA Vportal-Strompreise (404), Destatis Erdgas-Strom-Unterseite (404). Für alle drei wurde im Hinweis-Feld erklärt, wo auf der Top-Level-Seite die Inhalte zu finden sind.
+
+### Verifikation
+
+- `npm run build` 205/205 grün nach allen drei Code-Commits
+- Browser-Preview Server-Side-Check (`fetch + cache: no-store`):
+  - `/finanzen/brutto-netto-rechner`: Quellen-Section mit 4 Items + 3 Links + 1 Hinweis-Only
+  - Stichprobe 4 weitere (`/gesundheit/bmi-rechner`, `/wohnen/mietrechner`, `/auto/spritkosten-rechner`, `/alltag/tagerechner`): alle haben Quellen-Section im Markup
+
+### Karsten Phase 4 — Manuelle Verifikation (Inkognito nach Deploy)
+
+1. Stichproben 3 Top-10-Rechner aufrufen: `/finanzen/brutto-netto-rechner`, `/finanzen/zinsrechner`, `/auto/spritkosten-rechner` — Quellen-Card nach FAQ, vor Affiliate sichtbar
+2. 2 verlinkte URLs pro Rechner anklicken — alle erreichbar?
+3. Homepage Tipp-des-Tages mehrmals refreshen — keine der 3 korrigierten Tipps zeigt mehr die alte (falsche) Aussage
+
+### L-Lehren neu
+
+- **L-W15A.3-1 (URL-Verifikation per WebFetch lohnt sich):** Die Strategie „ALLE URLs vor Commit verifizieren" (statt Stichprobe) hat 4 Treffer geliefert — 1 inhaltlich falsche URL (WHO BMI hatte nur Fragmente statt Klassifikation) + 3 echte 404s (RKI, BNetzA-Subseite, Destatis-Subseite). Hätte Karsten in Phase 4 manuell prüfen müssen, mit Risiko dass kaputte Links live gehen. Tool-Kosten ~25 WebFetch-Calls, alle innerhalb der parallelen Tool-Batches.
+- **L-W15A.3-2 (Top-Level-URLs sind stabiler als Subseiten):** Bundesministerien und Bundesbehörden (BNetzA, RKI, Destatis) restrukturieren ihre Themen-Subseiten häufig (URL-Drift). Top-Level-Themen-Hubs (z. B. `bundesnetzagentur.de/.../Fachthemen/ElektrizitaetundGas/start.html` statt `Vportal/Energie/Verbrauch/start.html`) sind langlebiger. Für Quellen-Verweise robuste Top-Level-URL + zusätzlicher `hinweis`-Subtext, wo das spezifische Thema im Hub zu finden ist.
+- **L-W15A.3-3 (Tipp-/Erklärtext-Faktencheck nach Welle-Lehre-Pattern):** Die Pendlerpauschale-Tipp-Drift (alter 0,30/0,38-Split nach StÄndG 2025-Reform) ist ein klassischer L-32-Drift-Fall — Konsumenten-Text driftet nach SSOT-Refactor. Bei künftigen Tarif-Reformen Pflicht: nicht nur Lib-Konstanten + Component-Defaults updaten, sondern auch Marketing-/Tipp-Texte (TippDesTages.tsx, Erklärtexte, FAQ) systematisch greppen. Generalisierung von L-29 (Konsumenten-Sweep nach SSOT-Refactor).
+
+---
+
 ## W15A Track 4 — Affiliate-Disclosure + KI-Branding-Mitigation — 21.05.2026
 
 **Anlass:** AdSense-Ablehnung 19.05.2026 → Welle-15-Tiefenanalyse Sekundärfaktoren: (a) Affiliate-Disclosure im Impressum ist generisches e-recht24-Boilerplate, (b) Marketing-Behauptung „Deutschlands erster Rechner mit KI-Erklärungen" auf Homepage ist unbelegt und verstärkt AI-Content-Detection-Risiko.
