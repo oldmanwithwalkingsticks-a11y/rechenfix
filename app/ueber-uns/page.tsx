@@ -49,7 +49,7 @@ export default function UeberUnsSeite() {
         Über Rechenfix.de
       </h1>
       <p className="text-gray-500 dark:text-gray-400 mb-8">
-        Unabhängiges Online-Rechnerportal aus Deutschland.
+        170 deutsche Online-Rechner — die nicht nur Zahlen ausspucken, sondern erklären, was dahintersteckt.
       </p>
 
       {/* 1. Hero + Author-Block (BESTEHEND Hero, NEU Author-Block) */}
@@ -81,7 +81,7 @@ export default function UeberUnsSeite() {
         <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700 flex flex-col sm:flex-row items-start gap-5">
           {fotoExists ? (
             <Image
-              src="/about/karsten-kautz.jpg"
+              src="public/about/karsten-kautz.jpg"
               alt="Karsten Kautz, Gründer von Rechenfix.de"
               width={200}
               height={200}
@@ -114,11 +114,21 @@ export default function UeberUnsSeite() {
         </h2>
         <div className="prose prose-sm max-w-none text-gray-700 dark:text-gray-300 leading-relaxed">
           <p className="mb-4">
-            Ich heiße Karsten Kautz, bin {PLACEHOLDER_ALTER} Jahre alt und lebe in Krefeld.
-            Beruflich bin ich {PLACEHOLDER_BERUFLICHER_HINTERGRUND}. Rechenfix ist mein {PLACEHOLDER_PROJEKT_TYP} seit 2026.
+            Ich heiße Karsten Kautz, bin 57 Jahre alt und lebe in Krefeld.
           </p>
           <p className="mb-4">
-            {PLACEHOLDER_MOTIVATION}
+            Mein beruflicher Weg ist nicht geradlinig: Ursprünglich Bürokaufmann gelernt, 
+            dann viele Jahre ins Management der Systemgastronomie gewechselt, später Filialleiter im Einzelhandel. 
+            Parallel habe ich mir Softwareentwicklung autodidaktisch beigebracht — aus Neugier zuerst, später aus Notwendigkeit, 
+            weil ich verstehen wollte, wie die Tools funktionieren, mit denen ich täglich arbeitete. Heute verbinde ich beides: 
+            Ich arbeite als Freelancer im Crowd-Testing Bereich, also im professionellen Aufspüren von Software-Schwächen, und baue
+            parallel Rechenfix als eigenes Projekt.
+          </p>
+          <p className="mb-4">
+            Diese Doppel-Perspektive prägt Rechenfix: Wenn man jahrelang professionell 
+            schlechte Software bewertet und gleichzeitig selbst entwickelt, entwickelt 
+            man ein klares Gefühl dafür, warum so viele Online-Tools an ihren Nutzern 
+            vorbei gebaut sind. Ein guter Rechner ist mehr als eine Formel mit Eingabefeldern.
           </p>
           <p>
             Wichtige Abgrenzung: Ich bin Software-Entwickler, kein Steuerberater oder
@@ -140,13 +150,25 @@ export default function UeberUnsSeite() {
         </h2>
         <div className="prose prose-sm max-w-none text-gray-700 dark:text-gray-300 leading-relaxed">
           <p className="mb-4">
-            Die Idee zu Rechenfix kam {PLACEHOLDER_STORY_ZEITPUNKT}, als ich {PLACEHOLDER_STORY_SITUATION}.
+            Die Idee zu Rechenfix kam im Frühjahr 2026. Online-Rechner gibt es reichlich im Netz 
+            und alle werfen Zahlen aus — das ist nichts Neues. Was mir aber an fast allen fehlte: Was bedeutet das Ergebnis konkret?
+            Wie wirkt es sich auf die eigene Situation aus? Diese Erklärungs-Ebene fehlt bei den 
+            meisten deutschen Rechner-Portalen komplett.
           </p>
           <p className="mb-4">
-            Mir fehlte ein deutsches Rechner-Portal, das {PLACEHOLDER_STORY_EIGENSCHAFTEN}.
+            Mit 57 bin ich kein typischer Tech-Gründer — und genau das ist Teil der Sache. 
+            Die meisten Online-Rechner werden von Entwicklern gebaut, denen die Nutzer-Perspektive fehlt. 
+            Ich habe lange genug im Management und Einzelhandel gearbeitet, um zu wissen, wann ein Tool
+            wirklich hilft und wann es nur Eindruck schinden soll.
           </p>
           <p>
-            Im Frühjahr 2026 habe ich begonnen, die ersten Rechner selbst zu programmieren. {PLACEHOLDER_STORY_STATUS}.
+            Mein Anspruch war von Anfang an klar: Ein Rechner-Portal, das (1) erklärt, was die Zahl bedeutet — nicht nur ausspuckt, 
+            (2) aktuell ist, sobald sich gesetzliche Werte ändern, und (3) so gestaltet ist, dass man auch unterwegs schnell zum Ergebnis kommt, 
+            ohne sich durch Werbeflächen klicken zu müssen.
+          </p>
+          <p>
+            Heute, im Mai 2026, sind es 170 Rechner in neun Kategorien — von Brutto-Netto und Mehrwertsteuer über BMI und Spritkosten 
+            bis zu Backzeit und Pace. Neue Rechner kommen regelmäßig dazu, bestehende werden gepflegt und bei gesetzlichen Änderungen aktualisiert.
           </p>
         </div>
       </section>
@@ -158,21 +180,22 @@ export default function UeberUnsSeite() {
         </h2>
         <ul className="space-y-4 text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
           <li>
-            <strong className="text-gray-800 dark:text-gray-100">Aktuelle Werte ohne Verzögerung.</strong>{' '}
+            <strong className="text-gray-800 dark:text-gray-100">1. Erklärungen statt blanker Zahlen.</strong>{' '}
+            Jeder Rechner liefert auf Wunsch eine Erklärung in einfacher Sprache: Warum kommt dieses Ergebnis heraus? 
+            Wie wirkt es sich auf die persönliche Situation aus? Was ist daran überraschend? 
+            Eine Zahl ohne Kontext hilft niemandem weiter. Wer wissen will, warum sein Bruttogehalt anders versteuert wird als gedacht, 
+            bekommt eine Erklärung in zwei Sätzen statt eines Steuergesetz-Auszugs. Die Erklärung läuft über eine KI, 
+            die zugrundeliegende Rechnung läuft aber über geprüften Code.
+          </li>
+          <li>
+            <strong className="text-gray-800 dark:text-gray-100">2. Aktuelle Werte ohne Verzögerung.</strong>{' '}
             Steuersätze 2026, Beitragsbemessungsgrenzen 2026, Mindestlohn 2026 —
             gesetzliche Änderungen werden eingepflegt, sobald sie wirksam werden.
             Stichtage wie der 01.07. (Rentenwert) oder 01.01. (Tarif) schalten
             automatisch um, ohne dass die Site neu deployed werden muss.
           </li>
           <li>
-            <strong className="text-gray-800 dark:text-gray-100">„Fix erklärt&ldquo;: Antworten in einfacher Sprache.</strong>{' '}
-            Wer wissen will, warum sein Bruttogehalt anders versteuert wird als gedacht,
-            bekommt eine Erklärung in zwei Sätzen statt eines Steuergesetz-Auszugs. Die
-            Erklärung läuft über eine KI, die zugrundeliegende Rechnung läuft aber über
-            geprüften Code.
-          </li>
-          <li>
-            <strong className="text-gray-800 dark:text-gray-100">Werbefinanziert, aber nicht werbeüberladen.</strong>{' '}
+            <strong className="text-gray-800 dark:text-gray-100">3. Werbefinanziert, aber nicht werbeüberladen.</strong>{' '}
             Eine dezente Werbeanzeige unter dem Ergebnis hält den Betrieb am Laufen.
             Keine Pop-ups, keine Newsletter-Aufdringlichkeit, keine
             „Premium-Versionen&ldquo;, keine Tracking-Banner über die ganze Seite.
