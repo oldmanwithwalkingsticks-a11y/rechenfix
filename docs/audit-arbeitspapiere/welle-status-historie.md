@@ -8,6 +8,60 @@
 
 ---
 
+## W15A Track 2 — Trust-Tags (Author-Mini-Bio + Aktualisiert-Datum) — 21.05.2026
+
+**Anlass:** Welle-15-Tiefenanalyse Sekundärfaktoren: (a) „Aktualisiert"-Datum als Aktualitäts-Signal fehlte auf allen Rechner-Seiten, (b) Author-Mini-Bio mit Foto/Tagline fehlte auf Top-10-Rechnern. Beides E-E-A-T-Trust-Material, das blitzrechner auf jeder Rechner-Seite hat. Ursprünglich enthielt der Sprint zusätzlich „Footer-Drift-Fix" — vollständig entfallen, weil Cache-Phantom (L-W15A.1-3).
+
+**Scoping:** [docs/audit-arbeitspapiere/w15a2-trust-tags-scoping.md](w15a2-trust-tags-scoping.md) — JSON-LD-Bestandsaufnahme (3 Schemas pro Rechner-Seite, `dateModified` fehlte in `generateWebApplicationSchema`), Foto-Pfad-Konflikt zwischen Prompt und Repo-Realität (Cache-Bust-Suffix `-v2`), 7 Klärungsfragen.
+
+### Commit 1 — `feat: foundation für trust-tags (types + format-date + foto-konstante)` (`b093649`)
+
+Bauteile ohne User-Impact:
+
+- **[lib/rechner-config/types.ts](../../lib/rechner-config/types.ts):** Zwei neue optionale Properties in `RechnerConfig` — `letzteAktualisierung?: string` (ISO `YYYY-MM-DD`) und `zeigtAuthorBio?: boolean` (default false).
+- **[lib/format-date.ts](../../lib/format-date.ts) (NEU):** Helper `formatGermanDate(iso)` mit Render-Safety-Fallback bei ungültigen Inputs.
+- **[lib/site-config.ts](../../lib/site-config.ts) (NEU):** Konstante `KARSTEN_PHOTO_PATH = '/about/karsten-kautz-v2.jpg'` als Single Source of Truth für Foto-Pfad (Cache-Bust-Versionierungs-Pattern).
+- **[app/ueber-uns/page.tsx](../../app/ueber-uns/page.tsx):** Inline-Pfade auf `KARSTEN_PHOTO_PATH`-Import umgestellt (existsSync + `<Image src={...}>`).
+
+### Commit 2 — `feat: aktualisiert-datum + schema.org dateModified für alle 170 rechner` (`9311c6b`)
+
+„Aktualisiert am …"-Hinweis sichtbar auf allen 170 Rechner-Seiten + `dateModified` als Google-Signal:
+
+- **[components/StandHinweis.tsx](../../components/StandHinweis.tsx) (NEU):** Server-Component, rendert dezenten `text-xs text-gray-500 mb-3 no-print` mit `formatGermanDate`-Output.
+- **[app/[kategorie]/[rechner]/page.tsx](../../app/[kategorie]/[rechner]/page.tsx):** Render-Block zwischen Breadcrumbs und Layout-Wrapper (Karsten-Vorgabe Q3 Option A — vor Zurück-Button). Konditional `{config.letzteAktualisierung && <StandHinweis …/>}`.
+- **[lib/seo.ts](../../lib/seo.ts):** `generateWebApplicationSchema` um `dateModified: rechner.letzteAktualisierung ?? '2026-05-21'` erweitert (Fallback per Q4-Entscheidung).
+- **170 Configs in 9 Kategorie-Files mit `letzteAktualisierung: '2026-05-21'`:** alltag.ts 23, arbeit.ts 17, auto.ts 11, finanzen.ts 45, gesundheit.ts 17, kochen.ts 12, mathe.ts 18, sport.ts 2, wohnen.ts 25 = **exakt 170 (= Soll)**. Bulk-Insertion via temporärem Node-Script mit Slug-Anker + Indent-Preservation, Skript nach Lauf gelöscht.
+
+### Commit 3 — `feat: author-mini-bio component + top-10-aktivierung` (`8a861dc`)
+
+Author-Mini-Bio auf Top-10-Rechner-Seiten sichtbar:
+
+- **[components/AuthorBio.tsx](../../components/AuthorBio.tsx) (NEU):** Server-Component, Card-Style mit border + `bg-gray-50`, Foto 72×72 `rounded-full` (kleinere Variante als Über-uns 200×200), `existsSync`-Pattern (L-W15A.1-1). Inhalt: „Karsten Kautz · Gründer und Betreiber von Rechenfix.de" + Tagline „Pflegt alle Rechner aktuell und prüft die Werte jährlich anhand der Primärquellen." + „Mehr über mich →"-Link. Trenner Mittelpunkt `·` statt Pipe (Q6).
+- **[app/[kategorie]/[rechner]/page.tsx](../../app/[kategorie]/[rechner]/page.tsx):** Render-Block zwischen Quellen-Card und Affiliate-Boxen (Q2 Option 2 — Substanz→Citations→Authorship→Commercial-Hierarchie). Konditional `{config.zeigtAuthorBio && <AuthorBio />}`.
+- **10 Top-10-Configs in 5 Kategorie-Files mit `zeigtAuthorBio: true`:** finanzen.ts 4 (brutto-netto, mwst, zins, stundenlohn), gesundheit.ts 1 (bmi), auto.ts 1 (spritkosten), alltag.ts 2 (dreisatz, tag), wohnen.ts 2 (miet, stromkosten) = **exakt 10 (= Soll, identische Liste wie W15A.3 Quellen)**. Bulk via Node-Skript mit Slug-Whitelist + Anker-Pattern.
+
+### Verifikation
+
+- `npm run build` 205/205 grün nach allen drei Code-Commits
+- Browser-Preview Server-Side-Check (`fetch + cache: no-store`):
+  - Top-10 `/finanzen/brutto-netto-rechner`: StandHinweis im HTML, AuthorBio mit Foto-URL `karsten-kautz-v2.jpg`, Schema.org `"dateModified":"2026-05-21"` im WebApplication-JSON-LD
+  - Non-Top-10 `/finanzen/spenden-rechner`: StandHinweis sichtbar, **keine** AuthorBio (= gewünschtes Verhalten)
+- HTML-Markup-Detail: React rendert `Aktualisiert am <!-- -->21. Mai 2026` mit Comment-Node-Trennung zwischen statischem und dynamischem Text — nicht ein literaler String. Erst-Test mit `includes('Aktualisiert am 21. Mai 2026')` schlug deshalb fehl, Adjusted-Test mit getrennten Substrings grün.
+
+### Karsten Phase 4 — Manuelle Verifikation (Inkognito nach Vercel-Deploy)
+
+1. **3 Top-10-Rechner aufrufen** (brutto-netto-rechner, bmi-rechner, mietrechner): Stand-Hinweis sichtbar + AuthorBio mit Foto + Link auf /ueber-uns funktioniert
+2. **1 Non-Top-10-Rechner** (z. B. spenden-rechner): Stand-Hinweis sichtbar, KEINE AuthorBio
+3. **View Source eines Top-10-Rechners** → Strg+F „dateModified" findet das Feld im WebApplication-JSON-LD-Block mit Wert `2026-05-21`
+
+### L-Lehren neu
+
+- **L-W15A.2-1 (Bulk-Config-Edits via deterministisches Pattern-Script statt manuell):** Bei Massen-Property-Insertions in 170 Configs ist ein temporäres Node-Script mit Anker-Pattern + Indent-Preservation **sicherer** als 170 manuelle Edits. Anker-Wahl: schon-existierende eindeutige Property pro Config (hier: `slug: 'xxx'`-Zeile). Script-Lebensdauer: temporär, nach Lauf löschen. Karstens Prompt-Vorbehalt „keine find-replace-Massenoperation" zielt auf unkontrollierte Pattern (Reihenfolge-Zerstörung, ungewollte Treffer). Deterministisches Slug-Anker-Pattern erfüllt seinen Intent (Property-Reihenfolge konsistent direkt nach slug, kein Vergessen möglich) bei massivem Zeitgewinn.
+- **L-W15A.2-2 (React Comment-Nodes brechen einfache `string.includes`-Tests):** Bei serverseitiger Verifikation von gerendertem HTML via `fetch + no-store` muss berücksichtigt werden, dass React zwischen statischem JSX-Text und dynamisch interpoliertem Text einen Comment-Node `<!-- -->` einfügt. Test `html.includes('Aktualisiert am 21. Mai 2026')` schlägt fehl, obwohl der Text sichtbar ist. **Pflicht:** bei Multi-Token-Strings im JSX (z. B. `Text {variable}`) Verifikations-Test mit getrennten Substrings (`includes('Aktualisiert am')` UND `includes('21. Mai 2026')`) oder Regex mit `[\s\S]*?` zwischen den Tokens.
+- **L-W15A.2-3 (Site-weite Konstanten in `lib/site-config.ts`):** Pattern für Site-weite Werte, die in mehreren Pages/Components referenziert werden — eigene Datei `lib/site-config.ts` statt Inline-Strings oder verstreut in mehreren Configs. Beispiel: `KARSTEN_PHOTO_PATH` mit Versions-Suffix-Pattern. Bei nächster Foto-Version (v3) reicht **eine** Änderung; alle Konsumenten (Über-uns + AuthorBio) bumpen automatisch mit. Generalisierung von L-W14.5-4 (AdSense-Publisher-ID-SSOT) auf nicht-Secret-Konstanten.
+
+---
+
 ## W15A Track 3 — Quellen-Sektion + Tipp-des-Tages-Fix — 21.05.2026
 
 **Anlass:** Welle-15-Tiefenanalyse Sekundärfaktoren: (a) Tipp-des-Tages enthält faktische Fehler (SK 1→3-Wechsel ohne Heirat-Hinweis; Pendlerpauschale mit veraltetem 0,30/0,38-Split und Werbungskosten/Steuerentlastung verwechselt), (b) keine strukturierten Quellen auf Rechner-Seiten — Wettbewerber blitzrechner.de zitiert Bundesgesetze und Normen direkt nach jedem Rechner.
