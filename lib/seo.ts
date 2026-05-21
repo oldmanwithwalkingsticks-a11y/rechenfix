@@ -108,6 +108,9 @@ export function generateWebApplicationSchema(rechner: RechnerConfig) {
       name: SITE_NAME,
       url: SITE_URL,
     },
+    // W15A.2: dateModified als Google-Signal (aus config.letzteAktualisierung
+    // oder Initial-Set-Datum als Fallback).
+    dateModified: rechner.letzteAktualisierung ?? '2026-05-21',
   };
 }
 

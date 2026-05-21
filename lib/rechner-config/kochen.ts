@@ -3,6 +3,7 @@ import type { RechnerConfig } from './types';
 export const kochenRechner: RechnerConfig[] = [
   {
     slug: 'rezept-umrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Rezept-Umrechner',
     beschreibung: 'Rezept auf beliebige Portionen umrechnen: Zutatenmengen automatisch skalieren mit intelligenter Rundung.',
     kategorie: 'Kochen & Ernährung',
@@ -78,6 +79,7 @@ Auch Flüssigkeiten skalieren bei großen Mengen nicht exakt linear. Bei der Ver
   },
   {
     slug: 'cups-umrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Cups-Umrechner',
     beschreibung: 'Cups in Gramm und Milliliter umrechnen: Zutatspezifische Dichten für amerikanische Rezepte — Mehl, Zucker, Butter etc.',
     kategorie: 'Kochen & Ernährung',
@@ -176,6 +178,7 @@ Unterschiede im ml-Bereich fallen bei kleinen Gewürzmengen kaum ins Gewicht.`,
   },
   {
     slug: 'backform-umrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Backform-Umrechner',
     beschreibung: 'Backform umrechnen: Rund ↔ eckig ↔ Kasten, Teigmenge anpassen, Flächenvergleich mit Umrechnungsfaktor.',
     kategorie: 'Kochen & Ernährung',
@@ -268,6 +271,7 @@ Für die exakte Anpassung nutzen Sie unseren Backzeit-Rechner.
   },
   {
     slug: 'backzeit-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Backzeit-Rechner',
     beschreibung: 'Backzeit und Temperatur anpassen: Umluft ↔ Ober-/Unterhitze, Gasmark, Formgröße, Faustregeln.',
     kategorie: 'Kochen & Ernährung',
@@ -369,6 +373,7 @@ Bei sehr saftigen Kuchen (Brownies, Schokokuchen) soll das Stäbchen nicht ganz 
   },
   {
     slug: 'kochzeit-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Kochzeit-Rechner',
     beschreibung: 'Kochzeit für Ei, Nudeln, Reis, Kartoffeln und Gemüse: Sorten-Datenbank mit Schritt-für-Schritt-Anleitungen.',
     kategorie: 'Kochen & Ernährung',
@@ -487,6 +492,7 @@ In sehr großen Höhen (über 3.000 m, z. B. in La Paz) dauert selbst ein einfac
   },
   {
     slug: 'hefe-umrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Hefe-Umrechner',
     beschreibung: 'Hefe umrechnen: Frischhefe ↔ Trockenhefe ↔ Lievito Madre mit Mengentabellen und Verarbeitungstipps.',
     kategorie: 'Kochen & Ernährung',
@@ -574,6 +580,7 @@ Test bei Zweifel: Etwas Hefe in lauwarmem Wasser mit einer Prise Zucker auflöse
   },
   {
     slug: 'pizzateig-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Pizzateig-Rechner',
     beschreibung: 'Pizzateig mit Bäckerprozenten: Mehl, Wasser, Salz, Hefe für 1–8 Pizzen — mit Hydration-Slider und Zeitplan.',
     kategorie: 'Kochen & Ernährung',
@@ -682,6 +689,7 @@ Ohne Pizzastein: Backblech umgekehrt im Ofen vorheizen, Pizza direkt darauf back
   },
   {
     slug: 'brotback-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Brotback-Rechner',
     beschreibung: 'Zutaten für 5 Brottypen berechnen: Weißbrot, Mischbrot, Roggenbrot, Sauerteigbrot, Toastbrot — mit Hefe oder Sauerteig.',
     kategorie: 'Kochen & Ernährung',
@@ -771,6 +779,7 @@ Beim Backen verliert Brot durch Wasserverdunstung ca. 10–15 % seines Gewichts.
   },
   {
     slug: 'alkoholgehalt-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Alkoholgehalt-Rechner',
     beschreibung: 'Alkoholgehalt von Cocktails berechnen und Restalkohol beim Kochen ermitteln — mit Kalorien und Standardgläsern.',
     kategorie: 'Kochen & Ernährung',
@@ -870,6 +879,7 @@ Alkohol wird im Körper bevorzugt verbrannt — bevor Fett oder Kohlenhydrate al
   },
   {
     slug: 'naehrwert-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Nährwert-Rechner',
     beschreibung: 'Nährwerte pro Portion berechnen: Kalorien, Protein, KH und Fett für selbst gekochte Rezepte — mit 47 Lebensmitteln.',
     kategorie: 'Kochen & Ernährung',
@@ -962,6 +972,7 @@ Für präzise Kalorienzählerei empfiehlt es sich, Lebensmittel vor dem Kochen z
   },
   {
     slug: 'zucker-umrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Zucker-Umrechner',
     beschreibung: 'Zucker durch Honig, Ahornsirup, Stevia oder Erythrit ersetzen — mit Mengenangaben, Kalorien-Vergleich und Backtipps.',
     kategorie: 'Kochen & Ernährung',
@@ -1043,6 +1054,7 @@ Ein niedriger glykämischer Index bedeutet einen langsameren Blutzuckeranstieg �
   },
   {
     slug: 'gefrierdauer-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Gefrierdauer-Rechner',
     beschreibung: 'Wie lange ist Tiefkühlkost haltbar? Einfriedatum eingeben und Haltbarkeitsdatum mit Ampel-Anzeige berechnen.',
     kategorie: 'Kochen & Ernährung',

@@ -3,6 +3,7 @@ import type { RechnerConfig } from './types';
 export const arbeitRechner: RechnerConfig[] = [
   {
     slug: 'arbeitszeitrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Arbeitszeitrechner',
     beschreibung: 'Arbeitszeit berechnen: Tägliche und wöchentliche Arbeitszeit mit Pausen, Dezimalzeit und gesetzlichen Hinweisen.',
     kategorie: 'Arbeit & Recht',
@@ -93,6 +94,7 @@ Unser Wochenmodus eignet sich ideal als schnelle Kontrolle: Geben Sie Ihre Arbei
   },
   {
     slug: 'urlaubstage-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Urlaubstage-Rechner',
     beschreibung: 'Urlaubsanspruch berechnen: Gesetzlicher und vertraglicher Urlaub, Teilzeit, Schwerbehinderung & Resturlaub bei Kündigung.',
     kategorie: 'Arbeit & Recht',
@@ -194,6 +196,7 @@ Unser Rechner berücksichtigt den Schwerbehinderten-Zusatzurlaub automatisch und
   },
   {
     slug: 'ueberstunden-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Überstunden-Rechner',
     beschreibung: 'Überstunden berechnen: Pro Woche, Monat und Jahr mit Vergütung, Zuschlag und Stundenlohn-Ermittlung.',
     kategorie: 'Arbeit & Recht',
@@ -289,6 +292,7 @@ In der Praxis bedeutet das: Bei einer 40-Stunden-Woche und 5 Arbeitstagen sind m
   },
   {
     slug: 'pendlerpauschale-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Pendlerpauschale-Rechner',
     beschreibung: 'Pendlerpauschale 2026 berechnen: Entfernungspauschale, Steuerersparnis und Vergleich mit der Homeoffice-Pauschale.',
     kategorie: 'Arbeit & Recht',
@@ -390,6 +394,7 @@ Wer unter dem Grundfreibetrag (12.348 € in 2026) verdient, zahlt keine Einkomm
   },
   {
     slug: 'promillerechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Promillerechner',
     beschreibung: 'Blutalkohol berechnen: Nach Bier, Wein oder Schnaps den Promillewert schätzen, mit Abbau-Countdown und Grenzwert-Hinweisen.',
     kategorie: 'Arbeit & Recht',
@@ -497,6 +502,7 @@ Bei einem Unfall unter Alkoholeinfluss verschärfen sich die Strafen erheblich. 
   },
   {
     slug: 'rechtsschutz-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Rechtsschutz-Rechner',
     beschreibung: 'Rechtsschutzversicherung berechnen: Geschätzte Kosten nach Bausteinen, Selbstbeteiligung und Lebenssituation.',
     kategorie: 'Arbeit & Recht',
@@ -561,6 +567,7 @@ Mit diesen Strategien reduzieren Sie Ihre Beiträge: Kombinieren Sie mehrere Bau
   },
   {
     slug: 'freelancer-stundensatz-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Freelancer-Stundensatz-Rechner',
     beschreibung: 'Freelancer-Stundensatz berechnen: Vom Wunsch-Netto zum nötigen Stundensatz inkl. Steuern, Versicherungen und Betriebskosten.',
     kategorie: 'Arbeit & Recht',
@@ -625,6 +632,7 @@ Kalkulieren Sie Ihren Stundensatz großzügig: Es ist einfacher, einen Rabatt zu
   },
   {
     slug: 'kuendigungsfrist-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Kündigungsfrist-Rechner',
     beschreibung: 'Gesetzliche Kündigungsfrist berechnen: Für Arbeitnehmer und Arbeitgeber, mit frühestmöglichem Austrittsdatum und relevanten Fristen.',
     kategorie: 'Arbeit & Recht',
@@ -730,6 +738,7 @@ Für die Planung Ihres verbleibenden Urlaubs nutzen Sie unseren [Urlaubstage-Rec
   },
   {
     slug: 'teilzeit-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Teilzeit-Rechner',
     beschreibung: 'Teilzeitgehalt berechnen: Brutto, geschätztes Netto, Stundenlohn und Urlaubstage bei Reduzierung der Arbeitszeit.',
     kategorie: 'Arbeit & Recht',
@@ -802,6 +811,7 @@ Für die genaue Berechnung Ihrer Urlaubstage nutzen Sie unseren [Urlaubstage-Rec
   },
   {
     slug: 'abfindungsrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Abfindungsrechner',
     beschreibung: 'Abfindung berechnen: Regelabfindung, Netto-Abfindung nach Fünftelregelung und steuerliche Auswirkungen auf einen Blick.',
     kategorie: 'Arbeit & Recht',
@@ -901,6 +911,7 @@ Für die Berechnung Ihrer Kündigungsfrist nutzen Sie unseren [Kündigungsfrist-
   },
   {
     slug: 'mutterschutz-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Mutterschutz-Rechner',
     beschreibung: 'Mutterschutz berechnen: Beginn, Ende, Dauer und Mutterschaftsgeld — mit allen Fristen auf einen Blick.',
     kategorie: 'Arbeit & Recht',
@@ -1011,6 +1022,7 @@ Nutzen Sie unseren [Geburtstermin-Rechner](/gesundheit/geburtstermin-rechner), u
   },
   {
     slug: 'scheidungskosten-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Scheidungskosten-Rechner',
     beschreibung: 'Scheidungskosten berechnen: Gerichtskosten, Anwaltskosten, Verfahrenswert — einvernehmlich vs. streitig im Vergleich.',
     kategorie: 'Arbeit & Recht',
@@ -1069,6 +1081,7 @@ Eine Scheidung setzt in Deutschland grundsätzlich ein **Trennungsjahr** voraus.
   },
   {
     slug: 'zugewinnausgleich-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Zugewinnausgleich-Rechner',
     beschreibung: 'Zugewinnausgleich berechnen: Zugewinn beider Ehepartner und Ausgleichsanspruch bei Scheidung oder Erbfall.',
     kategorie: 'Arbeit & Recht',
@@ -1131,6 +1144,7 @@ Wer den Zugewinnausgleich ausschließen oder modifizieren will, kann das durch e
   },
   {
     slug: 'arbeitstage-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Arbeitstage-Rechner',
     beschreibung: 'Arbeitstage pro Monat, Jahr oder Zeitraum berechnen — mit Feiertagen nach Bundesland und individueller Wochenarbeitszeit.',
     kategorie: 'Arbeit & Recht',
@@ -1204,6 +1218,7 @@ Ein gesetzlicher Feiertag, der auf einen Samstag oder Sonntag fällt, wird in De
   },
   {
     slug: 'unterhaltsrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Unterhaltsrechner',
     beschreibung: 'Kindesunterhalt nach Düsseldorfer Tabelle 2026 berechnen — mit Kindergeld-Verrechnung, Höherstufung und Elternunterhalt-Abschnitt.',
     kategorie: 'Arbeit & Recht',
@@ -1284,6 +1299,7 @@ Die Mindestunterhaltsbeträge der Düsseldorfer Tabelle 2026 basieren auf der 7.
   },
   {
     slug: 'elternzeit-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Elternzeit-Rechner',
     beschreibung: 'Elternzeit berechnen: Anspruch, Aufteilung zwischen Partnern, Fristen und Meldetermine.',
     kategorie: 'Arbeit & Recht',
@@ -1346,6 +1362,7 @@ Denken Sie daran: Die Elternzeit läuft **kalendarisch** — auch Wochenenden un
   },
   {
     slug: 'ehegattenunterhalt-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Ehegattenunterhalt-Rechner',
     beschreibung: 'Ehegattenunterhalt berechnen: Trennungsunterhalt und nachehelicher Unterhalt nach der 3/7-Methode mit Selbstbehalt-Check.',
     kategorie: 'Arbeit & Recht',

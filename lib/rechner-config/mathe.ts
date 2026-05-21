@@ -3,6 +3,7 @@ import type { RechnerConfig } from './types';
 export const matheRechner: RechnerConfig[] = [
   {
     slug: 'bruchrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Bruchrechner',
     beschreibung: 'Brüche berechnen: Addieren, subtrahieren, multiplizieren, dividieren. Mit Rechenweg, Kürzen und Umrechnung.',
     kategorie: 'Mathe & Schule',
@@ -94,6 +95,7 @@ Bruchrechnung ist eine der wichtigsten Grundlagen der Mathematik. Wer Brüche si
   },
   {
     slug: 'einheiten-umrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Einheiten-Umrechner',
     beschreibung: 'Einheiten umrechnen: Länge, Gewicht, Volumen, Fläche, Temperatur, Zeit, Geschwindigkeit und Daten.',
     kategorie: 'Mathe & Schule',
@@ -186,6 +188,7 @@ Neben den hier gezeigten Kategorien unterstützt unser Rechner auch Flächen (m�
   },
   {
     slug: 'notenschluessel-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Notenschlüssel-Rechner',
     beschreibung: 'Punkte in Noten umrechnen, Notenschlüssel erstellen und Notendurchschnitt berechnen. Schulnoten, IHK & Uni.',
     kategorie: 'Mathe & Schule',
@@ -265,6 +268,7 @@ Der Notendurchschnitt bestimmt in vielen Bereichen den weiteren Bildungsweg: Sch
   },
   {
     slug: 'durchschnitt-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Durchschnittsrechner',
     beschreibung: 'Durchschnitt berechnen: Arithmetisches & gewichtetes Mittel, Median, Modus und Standardabweichung.',
     kategorie: 'Mathe & Schule',
@@ -356,6 +360,7 @@ In der Praxis bedeutet das: Die meisten Werte liegen im Bereich 5,4 ± 2,42, als
   },
   {
     slug: 'wissenschaftlicher-taschenrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Wissenschaftlicher Taschenrechner',
     beschreibung: 'Wissenschaftlicher Taschenrechner online: Trigonometrie, Logarithmen, Potenzen, Klammern und mehr.',
     kategorie: 'Mathe & Schule',
@@ -444,6 +449,7 @@ Potenzen werden mit der xʸ-Taste eingegeben: 2 xʸ 10 = 1024. Die Kurzformen x�
   },
   {
     slug: 'flaechenrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Flächenrechner',
     beschreibung: 'Fläche und Umfang berechnen: Für Rechteck, Dreieck, Kreis, Trapez, Parallelogramm und weitere Formen.',
     kategorie: 'Mathe & Schule',
@@ -502,6 +508,7 @@ Bei der Flächenberechnung ist die korrekte Einheitenumrechnung entscheidend. Wi
   },
   {
     slug: 'prozentuale-veraenderung-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Prozentuale-Veränderung-Rechner',
     beschreibung: 'Prozentuale Veränderung berechnen: Zu- oder Abnahme zwischen zwei Werten in Prozent, mit Rechenweg.',
     kategorie: 'Mathe & Schule',
@@ -562,6 +569,7 @@ Der Faktor (auch Multiplikator) gibt an, das Wievielfache der neue Wert vom alte
   },
   {
     slug: 'volumenrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Volumen-Rechner',
     beschreibung: 'Volumen und Oberfläche berechnen: Für Quader, Zylinder, Kugel, Kegel, Pyramide und weitere Körper.',
     kategorie: 'Mathe & Schule',
@@ -626,6 +634,7 @@ Für reine Flächenberechnungen (Dreieck, Kreis, Rechteck) nutzen Sie den Fläch
   },
   {
     slug: 'abi-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Abi-Notenrechner',
     beschreibung: 'Abitur-Durchschnittsnote berechnen: Von Punkten zur Abi-Note — mit Block I (Kurse) und Block II (Prüfungen).',
     kategorie: 'Mathe & Schule',
@@ -708,6 +717,7 @@ Wer das Abitur nicht besteht, kann die Qualifikationsphase unter bestimmten Vora
   },
   {
     slug: 'binaer-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Binär-Rechner',
     beschreibung: 'Zahlen zwischen Dezimal, Binär, Oktal und Hexadezimal live umrechnen — mit Rechenweg und ASCII-Code.',
     kategorie: 'Mathe & Schule',
@@ -789,6 +799,7 @@ Der **ASCII-Code** (American Standard Code for Information Interchange) ordnet j
   },
   {
     slug: 'pythagoras-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Pythagoras-Rechner',
     beschreibung: 'Satz des Pythagoras berechnen: Fehlende Seite im rechtwinkligen Dreieck — mit Rechenweg und Grafik.',
     kategorie: 'Mathe & Schule',
@@ -891,6 +902,7 @@ Die Winkelsumme im Dreieck beträgt immer 180°, also ergibt α + β + 90° = 18
   },
   {
     slug: 'gleichungsrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Gleichungslöser',
     beschreibung: 'Lineare und quadratische Gleichungen lösen — mit vollständigem Rechenweg, Mitternachtsformel und Parabel-Grafik.',
     kategorie: 'Mathe & Schule',
@@ -995,6 +1007,7 @@ Auch außerhalb der Schule spielen Gleichungen eine Rolle, wenn man es nicht sof
   },
   {
     slug: 'primzahl-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Primzahl-Rechner',
     beschreibung: 'Primzahlen prüfen und finden: Ist eine Zahl prim? Primfaktorzerlegung und Primzahlen in einem Bereich.',
     kategorie: 'Mathe & Schule',
@@ -1064,6 +1077,7 @@ Das Sieb des Eratosthenes ist ein antiker Algorithmus (ca. 240 v. Chr.), um alle
   },
   {
     slug: 'quersumme-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Quersumme-Rechner',
     beschreibung: 'Quersumme berechnen: Einstellige und alternierende Quersumme — mit Teilbarkeitsregeln.',
     kategorie: 'Mathe & Schule',
@@ -1133,6 +1147,7 @@ Die Neunerprobe nutzt die Quersumme zur schnellen Überprüfung von Rechnungen: 
   },
   {
     slug: 'potenz-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Potenz-Rechner',
     beschreibung: 'Potenzen, Wurzeln und Logarithmen berechnen mit Rechenweg und Potenzgesetzen.',
     kategorie: 'Mathe & Schule',
@@ -1206,6 +1221,7 @@ Potenzen, Wurzeln und Logarithmen erscheinen in vielen Lebensbereichen — meist
   },
   {
     slug: 'ggt-kgv-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'ggT/kgV-Rechner',
     beschreibung: 'Größten gemeinsamen Teiler und kleinstes gemeinsames Vielfaches berechnen.',
     kategorie: 'Mathe & Schule',
@@ -1268,6 +1284,7 @@ Alternativ lassen sich ggT und kgV über die Primfaktorzerlegung bestimmen: Der 
   },
   {
     slug: 'zufallszahl-generator',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Zufallszahl-Generator',
     beschreibung: 'Zufallszahlen generieren: Zahlen, Würfel, Münzwurf, Losziehung und Passwort-Generator.',
     kategorie: 'Mathe & Schule',
@@ -1332,6 +1349,7 @@ Computer nutzen deterministische Algorithmen (PRNG — Pseudo Random Number Gene
   },
   {
     slug: 'noten-international',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Noten-Umrechner (international)',
     beschreibung: 'Noten international umrechnen: Deutsche Note ↔ GPA (USA) ↔ UK Classification ↔ ECTS-Grade.',
     kategorie: 'Mathe & Schule',

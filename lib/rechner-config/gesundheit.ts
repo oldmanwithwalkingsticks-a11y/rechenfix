@@ -3,6 +3,7 @@ import type { RechnerConfig } from './types';
 export const gesundheitRechner: RechnerConfig[] = [
   {
     slug: 'bmi-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'BMI-Rechner',
     beschreibung: 'Body Mass Index berechnen: Mit WHO-Einordnung, farbiger Skala und optimalem BMI-Bereich für Ihr Alter.',
     kategorie: 'Gesundheit',
@@ -115,6 +116,7 @@ Trotz dieser Einschränkungen bleibt der BMI ein nützliches Screening-Werkzeug 
   },
   {
     slug: 'raucher-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Raucher-Rechner',
     beschreibung: 'Berechnen Sie, wie viel Geld Sie fürs Rauchen ausgeben — und was Sie sich stattdessen leisten könnten.',
     kategorie: 'Gesundheit',
@@ -169,6 +171,7 @@ Schon wenige Wochen nach dem Rauchstopp verbessern sich Kreislauf und Lungenfunk
   },
   {
     slug: 'schlaf-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Schlafrechner',
     beschreibung: 'Optimale Schlafenszeit berechnen: Wann ins Bett gehen, um ausgeruht aufzuwachen? Basierend auf 90-Minuten-Schlafzyklen.',
     kategorie: 'Gesundheit',
@@ -260,6 +263,7 @@ Die sogenannte Schlafhygiene hat großen Einfluss auf Ihre Schlafqualität:
   },
   {
     slug: 'kalorienrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Kalorienrechner',
     beschreibung: 'Täglichen Kalorienbedarf berechnen: Grundumsatz und Gesamtumsatz basierend auf der Mifflin-St Jeor-Formel.',
     kategorie: 'Gesundheit',
@@ -324,6 +328,7 @@ Für eine individuelle Anpassung der Makronährstoffverteilung — etwa bei eine
   },
   {
     slug: 'geburtstermin-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Geburtstermin-Rechner',
     beschreibung: 'Geburtstermin berechnen: Nach der Naegele-Regel mit drei Methoden — letzte Periode, Empfängnisdatum oder Ultraschall.',
     kategorie: 'Gesundheit',
@@ -416,6 +421,7 @@ Für Ihre allgemeine Gesundheit während der Schwangerschaft kann auch unser [BM
   },
   {
     slug: 'idealgewicht-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Idealgewicht-Rechner',
     beschreibung: 'Idealgewicht berechnen nach verschiedenen Formeln: Broca, Creff und BMI-basiert — mit persönlicher Idealgewicht-Spanne.',
     kategorie: 'Gesundheit',
@@ -492,6 +498,7 @@ Ergänzend können Sie mit unserem [Kalorienrechner](/gesundheit/kalorienrechner
   },
   {
     slug: 'wasserbedarf-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Wasserbedarf-Rechner',
     beschreibung: 'Täglichen Wasserbedarf berechnen: Empfohlene Trinkmenge basierend auf Gewicht, Aktivität und individuellen Faktoren.',
     kategorie: 'Gesundheit',
@@ -556,6 +563,7 @@ Nicht empfehlenswert als Durstlöscher sind zuckerhaltige Getränke, Limonaden u
   },
   {
     slug: 'koerperfett-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Körperfettrechner',
     beschreibung: 'Körperfettanteil schätzen mit der Navy-Methode: KFA in Prozent basierend auf Körpermaßen, mit Einordnung und Vergleich.',
     kategorie: 'Gesundheit',
@@ -610,6 +618,7 @@ Der effektivste Weg, den Körperfettanteil zu senken, ist eine Kombination aus l
   },
   {
     slug: 'ssw-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'SSW-Rechner',
     beschreibung: 'Schwangerschaftswoche berechnen: Aktuelle SSW, Trimester und Entwicklung Ihres Babys Woche für Woche.',
     kategorie: 'Gesundheit',
@@ -672,6 +681,7 @@ So hilfreich SSW-Rechner und Schwangerschafts-Apps auch sind — sie ersetzen ke
   },
   {
     slug: 'schwangerschaft-gewicht-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Gewichtszunahme-Rechner (Schwangerschaft)',
     beschreibung: 'Gewichtszunahme in der Schwangerschaft berechnen: Empfohlene Zunahme nach BMI, aktueller Stand und Verlaufskurve.',
     kategorie: 'Gesundheit',
@@ -762,6 +772,7 @@ Der Mehrbedarf an Kalorien ist geringer als oft gedacht: Im 2. Trimester nur etw
   },
   {
     slug: 'zyklusrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Zyklusrechner',
     beschreibung: 'Eisprung, fruchtbares Fenster und nächste Periode berechnen — mit Kalenderansicht für 1, 3 oder 6 Zyklen.',
     kategorie: 'Gesundheit',
@@ -826,6 +837,7 @@ Wir weisen ausdrücklich darauf hin: Der Zyklusrechner darf nicht als alleinige 
   },
   {
     slug: 'alkohol-abbau-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Alkohol-Abbau-Rechner',
     beschreibung: 'Maximale Promille, Abbauzeit und wann Sie wieder nüchtern sind — berechnet nach der Widmark-Formel.',
     kategorie: 'Gesundheit',
@@ -903,6 +915,7 @@ Wenn Sie Alkohol getrunken haben, gilt eine einfache Regel: **Nicht ans Steuer.*
   },
   {
     slug: 'protein-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Protein-Rechner',
     beschreibung: 'Täglichen Proteinbedarf berechnen: Empfohlene Eiweißmenge nach Gewicht, Aktivität und Trainingsziel.',
     kategorie: 'Gesundheit',
@@ -973,6 +986,7 @@ Für Menschen mit **gesunden Nieren** ist eine hohe Proteinzufuhr unbedenklich. 
   },
   {
     slug: 'whr-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'WHR-Rechner',
     beschreibung: 'Taille-Hüfte-Verhältnis berechnen: WHR als Indikator für gesundheitliches Risiko — aussagekräftiger als der BMI.',
     kategorie: 'Gesundheit',
@@ -1047,6 +1061,7 @@ Der WHR ist ein Screening-Werkzeug, keine Diagnose. Er funktioniert am besten be
   },
   {
     slug: 'blutdruck-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Blutdruck-Rechner',
     beschreibung: 'Blutdruckwerte einordnen: Klassifikation nach ESH / Deutscher Hochdruckliga, Durchschnitt aus mehreren Messungen und Risikobewertung.',
     kategorie: 'Gesundheit',
@@ -1118,6 +1133,7 @@ Die **European Society of Cardiology (ESC)** hat 2024 eine neuere Leitlinie mit 
   },
   {
     slug: 'schritte-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Schritte-Rechner',
     beschreibung: 'Schritte in Kilometer und Kalorien umrechnen: Tagesziel prüfen und Kalorienverbrauch durch Gehen berechnen.',
     kategorie: 'Gesundheit',
@@ -1186,6 +1202,7 @@ Die Gehgeschwindigkeit beeinflusst die Dauer, aber kaum den Kalorienverbrauch pr
   },
   {
     slug: 'sonnenschutz-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Sonnenschutz-Rechner',
     beschreibung: 'Sonnenschutz berechnen: Eigenschutzzeit, empfohlener Lichtschutzfaktor und maximale Sonnenzeit.',
     kategorie: 'Gesundheit',

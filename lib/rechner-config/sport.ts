@@ -3,6 +3,7 @@ import type { RechnerConfig } from './types';
 export const sportRechner: RechnerConfig[] = [
   {
     slug: 'pace-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Pace-Rechner',
     beschreibung: 'Pace, Zeit oder Distanz beim Laufen berechnen: min/km, km/h, Split-Zeiten und Zielzeit-Tabellen.',
     kategorie: 'Sport & Fitness',
@@ -86,6 +87,7 @@ Amerikanische und britische Läufer verwenden oft min/mi (Minuten pro Meile). Um
   },
   {
     slug: 'herzfrequenz-zonen-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Herzfrequenz-Zonen-Rechner',
     beschreibung: 'Trainingszonen berechnen: HFmax nach Tanaka und Karvonen, 5 Zonen, 80/20-Training und Fettverbrennungszone.',
     kategorie: 'Sport & Fitness',

@@ -3,6 +3,7 @@ import type { RechnerConfig } from './types';
 export const finanzenRechner: RechnerConfig[] = [
   {
     slug: 'brutto-netto-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Brutto-Netto-Rechner',
     beschreibung: 'Nettogehalt berechnen: Mit Steuerklasse, Bundesland, Kirchensteuer, KV und allen Sozialabgaben.',
     kategorie: 'Finanzen',
@@ -100,6 +101,7 @@ Unser Brutto-Netto-Rechner liefert eine gute Orientierung, basiert jedoch auf ve
   },
   {
     slug: 'mwst-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'MwSt-Rechner',
     beschreibung: 'Mehrwertsteuer berechnen: Brutto ↔ Netto, MwSt herausrechnen, Multi-Rechner für Rechnungen.',
     kategorie: 'Finanzen',
@@ -204,6 +206,7 @@ Wenn Sie als Unternehmer Waren oder Dienstleistungen einkaufen, zahlen Sie auf d
   },
   {
     slug: 'zinsrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Zinsrechner',
     beschreibung: 'Zinsen und Zinseszins berechnen: Mit Sparplan, Jahr-für-Jahr-Tabelle und Zinseszins-Vergleich.',
     kategorie: 'Finanzen',
@@ -318,6 +321,7 @@ Wichtig zu beachten: In der Praxis mindern die Abgeltungssteuer (25% plus Solida
   },
   {
     slug: 'elterngeld-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Elterngeld-Rechner',
     beschreibung: 'Elterngeld 2026 berechnen: Basiselterngeld & ElterngeldPlus mit Geschwisterbonus und Mehrlingszuschlag.',
     kategorie: 'Finanzen',
@@ -408,6 +412,7 @@ Beide Zuschläge werden unabhängig von der Höhe des regulären Elterngeldes ge
   },
   {
     slug: 'arbeitslosengeld-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Arbeitslosengeld-Rechner',
     beschreibung: 'Arbeitslosengeld I berechnen: Höhe, Dauer und Auszahlungsbetrag basierend auf dem letzten Gehalt.',
     kategorie: 'Finanzen',
@@ -453,6 +458,7 @@ Eine **Abfindung** bei einvernehmlicher Auflösung des Arbeitsverhältnisses wir
   },
   {
     slug: 'buergergeld-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Bürgergeld-Rechner',
     beschreibung: 'Bürgergeld 2026 berechnen: Aktuelle Regelsätze mit Einkommensanrechnung und Vermögensprüfung.',
     kategorie: 'Finanzen',
@@ -562,6 +568,7 @@ Der jeweils höhere Freibetrag gilt ab Beginn des Monats, in dem die Altersgrenz
   },
   {
     slug: 'stundenlohn-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Stundenlohnrechner',
     beschreibung: 'Stundenlohn aus Monatsgehalt berechnen oder umgekehrt — mit Mindestlohn-Vergleich und effektivem Stundenlohn.',
     kategorie: 'Finanzen',
@@ -666,6 +673,7 @@ Beachten Sie, dass ein hoher Stundenlohn allein noch kein aussagekräftiger Verg
   },
   {
     slug: 'sparrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Sparrechner',
     beschreibung: 'Sparplan berechnen mit Zinseszins: Monatliche Sparrate, Dynamik und Jahr-für-Jahr-Entwicklung.',
     kategorie: 'Finanzen',
@@ -746,6 +754,7 @@ Regelmäßiges Sparen ist der Schlüssel zum Vermögensaufbau. Hier einige bewä
   },
   {
     slug: 'inflationsrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Inflationsrechner',
     beschreibung: 'Kaufkraftverlust und Preisanstieg durch Inflation berechnen — mit Jahr-für-Jahr-Tabelle.',
     kategorie: 'Finanzen',
@@ -814,6 +823,7 @@ Da Inflation die Kaufkraft von Bargeld und niedrig verzinsten Spareinlagen auffr
   },
   {
     slug: 'gehaltsvergleich',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Gehaltsvergleich',
     beschreibung: 'Vergleichen Sie Ihr Gehalt mit dem Durchschnitt Ihrer Berufsgruppe, Ihres Bundeslandes und Ihrer Altersgruppe.',
     kategorie: 'Finanzen',
@@ -894,6 +904,7 @@ Der Gehaltsvergleich ist mehr als eine Neugier-Frage — er liefert konkrete Arg
   },
   {
     slug: 'wahrer-stundenlohn',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Wahrer Stundenlohn Rechner',
     beschreibung: 'Was verdienen Sie wirklich pro Stunde? Berechnen Sie Ihren wahren Stundenlohn inklusive Pendelzeit, Fahrtkosten und Überstunden.',
     kategorie: 'Finanzen',
@@ -952,6 +963,7 @@ Der Rechner zeigt nicht nur das Problem, sondern auch die Hebel: Homeoffice-Tage
   },
   {
     slug: 'steuererstattung-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Steuererstattungs-Rechner',
     beschreibung: 'Steuererstattung schätzen: Mögliche Rückzahlung vom Finanzamt anhand Ihrer Ausgaben berechnen.',
     kategorie: 'Finanzen',
@@ -1021,6 +1033,7 @@ Der Arbeitnehmer-Pauschbetrag von 1.230 Euro wird automatisch von Ihrem zu verst
   },
   {
     slug: 'kreditrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Kreditrechner',
     beschreibung: 'Kreditrate, Gesamtkosten und Tilgungsplan berechnen — für Ratenkredite, Autokredite und Konsumkredite.',
     kategorie: 'Finanzen',
@@ -1106,6 +1119,7 @@ Ergänzend können Sie mit dem **Zinsrechner** die Kraft des Zinseszins für Ihr
   },
   {
     slug: 'etf-sparplanrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'ETF-Sparplanrechner',
     beschreibung: 'ETF-Sparplan berechnen: Endkapital, Rendite und Vermögensentwicklung für Ihren monatlichen Sparplan simulieren.',
     kategorie: 'Finanzen',
@@ -1184,6 +1198,7 @@ Ergänzend können Sie mit unserem [Zinsrechner](/finanzen/zinsrechner) verschie
   },
   {
     slug: 'rentenrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Rentenrechner',
     beschreibung: 'Gesetzliche Rente schätzen: Voraussichtliche Monatsrente, Rentenpunkte und Rentenlücke berechnen.',
     kategorie: 'Finanzen',
@@ -1255,6 +1270,7 @@ Ja, Renten unterliegen der nachgelagerten Besteuerung. Der steuerpflichtige Ante
   },
   {
     slug: 'splitting-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Splitting-Rechner',
     beschreibung: 'Ehegattensplitting berechnen: Steuervorteil durch Zusammenveranlagung im Vergleich zur Einzelveranlagung.',
     kategorie: 'Finanzen',
@@ -1325,6 +1341,7 @@ Seit dem Beschluss des Bundesverfassungsgerichts 2013 und der „Ehe für alle" 
   },
   {
     slug: 'wohngeld-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Wohngeld-Rechner',
     beschreibung: 'Wohngeld berechnen: Prüfen Sie Ihren Anspruch und die voraussichtliche Höhe des Wohngelds nach dem Wohngeld-Plus-Gesetz 2026.',
     kategorie: 'Finanzen',
@@ -1387,6 +1404,7 @@ Die Wohngeldformel nach § 19 WoGG lautet: Wohngeld = 1,15 × (M − (a + b×M +
   },
   {
     slug: 'bafoeg-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'BAföG-Rechner',
     beschreibung: 'BAföG berechnen: Anspruch und voraussichtliche Höhe der Ausbildungsförderung für Studierende und Schüler.',
     kategorie: 'Finanzen',
@@ -1449,6 +1467,7 @@ Den BAföG-Antrag stellen Sie beim zuständigen Studenten- oder Schülerwerk (be
   },
   {
     slug: 'aufstiegs-bafoeg-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Aufstiegs-BAföG-Rechner',
     beschreibung: 'Aufstiegs-BAföG („Meister-BAföG") berechnen: Zuschuss, Darlehen und Unterhaltsbeitrag für Meister, Techniker, Fachwirt und vergleichbare Aufstiegsfortbildungen.',
     kategorie: 'Finanzen',
@@ -1511,6 +1530,7 @@ Der Antrag wird beim zuständigen Landesamt für Ausbildungsförderung gestellt 
   },
   {
     slug: 'kindergeld-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Kindergeld-Rechner',
     beschreibung: 'Kindergeld 2026 berechnen und Günstigerprüfung: Kindergeld oder Kinderfreibetrag — was lohnt sich für Ihr Einkommen?',
     kategorie: 'Finanzen',
@@ -1585,6 +1605,7 @@ Neben Kindergeld und Kinderfreibetrag gibt es weitere Hilfen: den **Kinderzuschl
   },
   {
     slug: 'pflegegeld-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Pflegegeld-Rechner',
     beschreibung: 'Pflegegeld berechnen: Leistungen der Pflegeversicherung nach Pflegegrad — Pflegegeld, Pflegesachleistung und Kombinationsleistung.',
     kategorie: 'Finanzen',
@@ -1651,6 +1672,7 @@ Neben dem Pflegegeld haben alle Pflegegrade (auch Grad 1) Anspruch auf den **Ent
   },
   {
     slug: 'erbschaftsteuer-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Erbschaftsteuer-Rechner',
     beschreibung: 'Erbschaftsteuer und Schenkungsteuer berechnen: Freibetrag, Steuersatz und Steuerlast nach Verwandtschaftsgrad.',
     kategorie: 'Finanzen',
@@ -1714,6 +1736,7 @@ Das ErbStG unterscheidet drei **Steuerklassen**: Klasse I (enge Verwandte wie Eh
   },
   {
     slug: 'minijob-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Minijob-Rechner',
     beschreibung: 'Minijob-Abgaben berechnen: Verdienst, Abgaben für Arbeitgeber und Arbeitnehmer sowie Übergang zum Midijob.',
     kategorie: 'Finanzen',
@@ -1776,6 +1799,7 @@ Zwischen 603,01 Euro und 2.000 Euro Monatsverdienst beginnt der sogenannte **Mid
   },
   {
     slug: 'gehaltserhoehung-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Gehaltserhöhung-Rechner',
     beschreibung: 'Gehaltserhöhung berechnen: Wie viel Netto bleibt von Ihrer Brutto-Erhöhung — mit Steuer- und Abgabeneffekt.',
     kategorie: 'Finanzen',
@@ -1834,6 +1858,7 @@ Weil die Grenzbelastung so hoch ist, lohnen sich steuerfreie Zusatzleistungen of
   },
   {
     slug: 'krankengeld-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Krankengeld-Rechner',
     beschreibung: 'Krankengeld berechnen: Tägliches und monatliches Krankengeld bei Arbeitsunfähigkeit — mit Netto-Vergleich.',
     kategorie: 'Finanzen',
@@ -1898,6 +1923,7 @@ Für die Berechnung Ihres regulären Nettogehalts nutzen Sie den Brutto-Netto-Re
   },
   {
     slug: 'gmbh-geschaeftsfuehrer-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'GmbH-Geschäftsführer-Rechner',
     beschreibung: 'Netto-Gehalt des GmbH-Geschäftsführers berechnen: Mit Sozialversicherungsfreiheit, Firmenwagen, PKV und Einkommensteuer.',
     kategorie: 'Finanzen',
@@ -1964,6 +1990,7 @@ Ein GGF kann sein Einkommen aus der GmbH auf zwei Wegen ziehen: als **Gehalt** (
   },
   {
     slug: 'hochrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Hochrechner (Gehalt)',
     beschreibung: 'Rechnen Sie Stunden-, Tages-, Wochen-, Monats- oder Jahreslohn ineinander um — inkl. Mindestlohn-Vergleich 2026.',
     kategorie: 'Finanzen',
@@ -2033,6 +2060,7 @@ Auch Freelancer können den Hochrechner nutzen, um Ihren Tages- oder Stundensatz
   },
   {
     slug: 'midijob-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Midijob-Rechner',
     beschreibung: 'Midijob-Abgaben berechnen: Reduzierte Sozialversicherungsbeiträge im Übergangsbereich von 603,01 bis 2.000 Euro.',
     kategorie: 'Finanzen',
@@ -2072,6 +2100,7 @@ Der Midijob lohnt sich vor allem für Personen, die **mehr als einen Minijob** l
   },
   {
     slug: 'witwenrente-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Witwenrente-Rechner',
     beschreibung: 'Witwenrente berechnen: Große und kleine Witwenrente, Einkommensanrechnung und Rentenanspruch.',
     kategorie: 'Finanzen',
@@ -2128,6 +2157,7 @@ In vielen Fällen reicht die Witwenrente allein nicht aus, um den Lebensunterhal
   },
   {
     slug: 'kurzarbeitergeld-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Kurzarbeitergeld-Rechner',
     beschreibung: 'Kurzarbeitergeld berechnen: KuG-Höhe basierend auf Ihrem Gehalt und der Arbeitszeitreduzierung.',
     kategorie: 'Finanzen',
@@ -2177,6 +2207,7 @@ Ja, aber mit Einschränkungen. Ein **neuer Nebenjob**, der während der Kurzarbe
   },
   {
     slug: 'riester-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Riester-Rechner',
     beschreibung: 'Riester-Rente berechnen: Zulage, Eigenbeitrag, Steuerersparnis und ob sich Riestern für Sie lohnt.',
     kategorie: 'Finanzen',
@@ -2225,6 +2256,7 @@ Wer für sich zu dem Schluss kommt, dass Riester sich nicht lohnt, hat mehrere A
   },
   {
     slug: 'nettolohn-optimierer',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Nettolohn-Optimierer',
     beschreibung: 'Nettolohn optimieren: Vergleich Gehaltserhöhung vs. steuerfreie Sachbezüge — was bringt mehr Netto?',
     kategorie: 'Finanzen',
@@ -2293,6 +2325,7 @@ Gehen Sie mit einer konkreten Liste in die Verhandlung. Viele Arbeitgeber sind b
   },
   {
     slug: 'kapitalertragsteuer-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Kapitalertragsteuer-Rechner',
     beschreibung: 'Abgeltungssteuer auf Zinsen, Dividenden und Kursgewinne berechnen — inkl. Sparerpauschbetrag, Teilfreistellung und Kirchensteuer.',
     kategorie: 'Finanzen',
@@ -2373,6 +2406,7 @@ Verluste aus Kapitalvermögen werden bei Ihrer Bank in einem separaten Verlustve
   },
   {
     slug: 'afa-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'AfA-Rechner',
     beschreibung: 'Abschreibung berechnen: Lineare und degressive AfA für Anlagegüter, Immobilien und GWG mit AfA-Plan und Rechenweg.',
     kategorie: 'Finanzen',
@@ -2450,6 +2484,7 @@ Als Selbstständige oder Unternehmerin sollten Sie Ihre Anlagegüter sauber in e
   },
   {
     slug: 'betriebskosten-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Betriebskosten-Rechner',
     beschreibung: 'Monatliche Betriebskosten für Selbstständige und Gewerbe kalkulieren — mit Break-Even-Analyse.',
     kategorie: 'Finanzen',
@@ -2519,6 +2554,7 @@ IT-Freelancer kommen mit 800–1.200 € Fixkosten aus (Home-Office, Cloud-Tools
   },
   {
     slug: 'mwst-rueckerstattung-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'MwSt-Rückerstattungs-Rechner',
     beschreibung: 'Tax-Free-Shopping berechnen: MwSt-Erstattung für Nicht-EU-Touristen beim Einkauf in Deutschland.',
     kategorie: 'Finanzen',
@@ -2594,6 +2630,7 @@ Bündeln Sie Ihre Einkäufe bei wenigen Händlern, um den Mindestbetrag sicher z
   },
   {
     slug: 'steuerprogression-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Steuerprogression-Rechner',
     beschreibung: 'Steuerprogression visualisieren: Durchschnitts- und Grenzsteuersatz für jedes Einkommen berechnen.',
     kategorie: 'Finanzen',
@@ -2665,6 +2702,7 @@ Der Grenzsteuersatz zeigt, wie stark eine Gehaltserhöhung besteuert wird. Liegt
   },
   {
     slug: 'spenden-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Spenden-Rechner',
     beschreibung: 'Steuerersparnis durch Spenden berechnen: Wie viel bekommen Sie von Ihrer Spende über die Steuererklärung zurück?',
     kategorie: 'Finanzen',
@@ -2727,6 +2765,7 @@ Bündeln Sie mehrere kleinere Spenden in einem Jahr statt sie zu verteilen. Durc
   },
   {
     slug: 'nebenjob-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Nebenjob-Rechner',
     beschreibung: 'Nebenjob-Steuer berechnen: Auswirkung eines Nebenjobs auf Steuern und Sozialversicherung neben dem Hauptjob.',
     kategorie: 'Finanzen',
@@ -2793,6 +2832,7 @@ Für die meisten Arbeitnehmer ist der Minijob die attraktivste Option — 100 % 
   },
   {
     slug: 'schenkungssteuer-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Schenkungssteuer-Rechner',
     beschreibung: 'Schenkungssteuer berechnen: Freibeträge, Steuerklassen und 10-Jahres-Regel bei Schenkungen an Verwandte.',
     kategorie: 'Finanzen',
@@ -2876,6 +2916,7 @@ Sowohl Schenker als auch Beschenkter müssen die Schenkung innerhalb von drei Mo
   },
   {
     slug: 'gewerbesteuer-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Gewerbesteuer-Rechner',
     beschreibung: 'Gewerbesteuer berechnen: Hebesatz, Steuermessbetrag, Freibetrag und ESt-Anrechnung für Gewerbetreibende.',
     kategorie: 'Finanzen',
@@ -2956,6 +2997,7 @@ Die Gewerbesteuererklärung muss bis zum 31. Juli des Folgejahres beim Finanzamt
   },
   {
     slug: 'einkommensteuer-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Einkommensteuer-Rechner',
     beschreibung: 'Einkommensteuer berechnen: Grundtabelle, Splitting, Soli, Kirchensteuer und Grenzsteuersatz nach § 32a EStG.',
     kategorie: 'Finanzen',
@@ -3047,6 +3089,7 @@ Die Kirchensteuer beträgt 9 % der ESt in 14 Bundesländern und 8 % in Baden-Wü
   },
   {
     slug: 'steuerklassen-vergleich-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Steuerklassen-Vergleich-Rechner',
     beschreibung: 'Steuerklassen-Kombinationen vergleichen: III/V, V/III und IV/IV mit Faktor — welche Wahl bringt das höchste monatliche Netto?',
     kategorie: 'Finanzen',
@@ -3126,6 +3169,7 @@ Wichtig: Die Jahressteuer bleibt unabhängig von der Steuerklasse identisch. Die
   },
   {
     slug: 'pfaendungsrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Pfändungsrechner',
     beschreibung: 'Pfändungsfreies Einkommen berechnen: Freibetrag nach § 850c ZPO, Erhöhung bei Unterhaltspflichten, P-Konto.',
     kategorie: 'Finanzen',
@@ -3224,6 +3268,7 @@ Die Bescheinigung ist bei der Bank einzureichen. Die Bank muss den erhöhten Fre
   },
   {
     slug: 'lohnsteuer-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Lohnsteuer-Rechner',
     beschreibung: 'Lohnsteuer berechnen: Steuerklasse I–VI, Bundesland, Kirchensteuer, Kinderfreibeträge — monatlich oder jährlich.',
     kategorie: 'Finanzen',

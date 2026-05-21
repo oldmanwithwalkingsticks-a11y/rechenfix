@@ -3,6 +3,7 @@ import type { RechnerConfig } from './types';
 export const alltagRechner: RechnerConfig[] = [
   {
     slug: 'prozentrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Prozentrechner',
     beschreibung: 'Prozente berechnen: Prozentwert, Grundwert, Prozentsatz, Aufschlag & Rabatt — mit Rechenweg.',
     kategorie: 'Alltag',
@@ -91,6 +92,7 @@ Unser Prozentrechner zeigt bei jedem Ergebnis den vollständigen Rechenweg an. S
   },
   {
     slug: 'dreisatz-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Dreisatzrechner',
     beschreibung: 'Dreisatz online berechnen: proportional und antiproportional, mit Rechenweg Schritt für Schritt.',
     kategorie: 'Alltag',
@@ -192,6 +194,7 @@ Der Dreisatz wirkt einfach, hat aber typische Fallstricke — diese sechs treten
   },
   {
     slug: 'tagerechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Tagerechner',
     beschreibung: 'Tage zwischen zwei Daten berechnen: Kalendertage, Arbeitstage, Wochen und Monate auf einen Blick.',
     kategorie: 'Alltag',
@@ -297,6 +300,7 @@ Drei kalendarische Eigenheiten erklären die meisten „seltsamen" Tagerechnungs
   },
   {
     slug: 'rabattrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Rabattrechner',
     beschreibung: 'Rabatt berechnen: Endpreis, Ersparnis in Euro, Rabatt in Prozent & Doppelrabatt — mit Rechenweg.',
     kategorie: 'Alltag',
@@ -372,6 +376,7 @@ Für weiterführende Berechnungen nutzen Sie unseren **Prozentrechner** (für al
   },
   {
     slug: 'countdown',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Countdown-Rechner',
     beschreibung: 'Wie viele Tage bis Weihnachten, Ostern, Silvester oder Ihrem Geburtstag? Live-Countdown mit Sekunden-Anzeige.',
     kategorie: 'Alltag',
@@ -434,6 +439,7 @@ Countdown-Rechner sind besonders beliebt in der Vorweihnachtszeit, vor Schulferi
   },
   {
     slug: 'lebenszeit-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Lebenszeit-Rechner',
     beschreibung: 'Wie viele Tage haben Sie bereits gelebt? Überraschende Fakten über Ihre Lebenszeit, Herzschläge und verbleibende Wochenenden.',
     kategorie: 'Alltag',
@@ -492,6 +498,7 @@ Der Lebenszeit-Rechner gehört zu den meistgeteilten Online-Tools. Die überrasc
   },
   {
     slug: 'streaming-kosten-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Streaming-Kosten-Rechner',
     beschreibung: 'Berechnen Sie Ihre monatlichen Streaming-Kosten: Netflix, Disney+, Spotify und mehr auf einen Blick.',
     kategorie: 'Alltag',
@@ -558,6 +565,7 @@ Der Streaming-Kosten-Rechner hilft Ihnen, den Überblick zu behalten und bewusst
   },
   {
     slug: 'kaffee-kosten-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Kaffee-Kosten-Rechner',
     beschreibung: 'Berechnen Sie Ihre täglichen, monatlichen und jährlichen Kaffeekosten — mit Spartipps und Vergleichen.',
     kategorie: 'Alltag',
@@ -626,6 +634,7 @@ Der Kaffee-Kosten-Rechner zeigt: Bereits kleine Veränderungen im Konsumverhalte
   },
   {
     slug: 'lieferservice-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Lieferservice-Rechner',
     beschreibung: 'Berechnen Sie Ihre Lieferservice-Kosten pro Monat und Jahr — mit Vergleich zum Selberkochen und Spartipps.',
     kategorie: 'Alltag',
@@ -694,6 +703,7 @@ Der Lieferservice-Rechner macht die Kosten sichtbar und hilft Ihnen, eine inform
   },
   {
     slug: 'abo-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Abo-Rechner',
     beschreibung: 'Alle Abos auf einen Blick: Berechnen Sie Ihre monatlichen und jährlichen Abo-Kosten — mit Ranking und Spartipps.',
     kategorie: 'Alltag',
@@ -767,6 +777,7 @@ Der Abo-Rechner macht Ihre monatlichen Verpflichtungen sichtbar. Allein das Aufs
   },
   {
     slug: 'handykosten-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Handykosten-Rechner',
     beschreibung: 'Handykosten berechnen: Effektive Monatskosten, Jahreskosten und Kostenaufschlüsselung für Ihren Mobilfunkvertrag.',
     kategorie: 'Alltag',
@@ -837,6 +848,7 @@ Der Preis pro Gigabyte ist eine gute Kennzahl, um Tarife zu vergleichen. In Deut
   },
   {
     slug: 'umzugskosten-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Umzugskosten-Rechner',
     beschreibung: 'Umzugskosten berechnen: Geschätzte Kosten für Umzugsfirma, Transporter, Verpackung und Nebenkosten.',
     kategorie: 'Alltag',
@@ -894,6 +906,7 @@ Tipp: Umzüge am Monatsanfang oder unter der Woche sind oft günstiger als am Mo
   },
   {
     slug: 'trinkgeld-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Trinkgeld-Rechner',
     beschreibung: 'Trinkgeld berechnen: Prozent oder fester Betrag, Rechnung teilen, auf glatten Betrag aufrunden.',
     kategorie: 'Alltag',
@@ -952,6 +965,7 @@ Wenn der Service gut war, zeigen Sie es mit einem angemessenen Trinkgeld. Bedenk
   },
   {
     slug: 'geburtstag-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Geburtstags-Rechner',
     beschreibung: 'Geburtstag berechnen: Alter in Tagen, Stunden und Minuten, Wochentag der Geburt, Sternzeichen und nächster runder Geburtstag.',
     kategorie: 'Alltag',
@@ -1010,6 +1024,7 @@ Die Ergebnisse des Geburtstags-Rechners eignen sich perfekt zum Teilen — über
   },
   {
     slug: 'skontorechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Skontorechner',
     beschreibung: 'Skonto berechnen: Ersparnis durch Skonto und effektiven Jahreszins — lohnt sich die frühzeitige Zahlung?',
     kategorie: 'Alltag',
@@ -1070,6 +1085,7 @@ Für Umsatzsteuer-Berechnungen nutzen Sie unseren MwSt-Rechner. Allgemeine Proze
   },
   {
     slug: 'uhrzeitrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Uhrzeitrechner',
     beschreibung: 'Uhrzeiten berechnen: Zeitdifferenz, Stunden addieren/subtrahieren und Zeitzonen umrechnen.',
     kategorie: 'Alltag',
@@ -1165,6 +1181,7 @@ Hinweis: Diese Werte gelten ohne Berücksichtigung der Sommerzeit. In der Sommer
   },
   {
     slug: 'hundejahre-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Hundejahre-Rechner',
     beschreibung: 'Hundejahre in Menschenjahre umrechnen — differenziert nach Größe und Rasse. Vergessen Sie die alte 1:7-Formel!',
     kategorie: 'Alltag',
@@ -1253,6 +1270,7 @@ Ein älterer Hund hat andere Bedürfnisse als ein junger: **weichere Gelenke**, 
   },
   {
     slug: 'waehrungsrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Währungsrechner',
     beschreibung: 'Beträge zwischen 29 Währungen umrechnen — mit statischen Referenzkursen vom 14.04.2026.',
     kategorie: 'Alltag',
@@ -1315,6 +1333,7 @@ Ergänzend zum Währungsrechner sind unser Einheiten-Umrechner (für Längen, Ge
   },
   {
     slug: 'schuhgroessen-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Schuhgrößen-Umrechner',
     beschreibung: 'Schuhgrößen umrechnen: EU, US, UK und cm — für Damen, Herren und Kinder mit vollständiger Tabelle.',
     kategorie: 'Alltag',
@@ -1394,6 +1413,7 @@ Kinderfüße wachsen in den ersten Lebensjahren rasant. Die Deutsche Gesellschaf
   },
   {
     slug: 'kleidergroessen-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Kleidergrößen-Umrechner',
     beschreibung: 'Kleidergrößen umrechnen: DE, EU, US, UK und IT für Damen und Herren mit Maßtabelle und Empfehlung.',
     kategorie: 'Alltag',
@@ -1484,6 +1504,7 @@ Wenn Ihre Körpermaße genau zwischen zwei Größen liegen, empfiehlt sich in de
   },
   {
     slug: 'reisekosten-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Reisekosten-Rechner',
     beschreibung: 'Reisekosten berechnen: Gesamtbudget für Anreise, Unterkunft, Essen und Aktivitäten planen.',
     kategorie: 'Alltag & Leben',
@@ -1559,6 +1580,7 @@ Der Rechner deckt die Hauptkostenblöcke ab. Zusätzlich können anfallen: Trans
   },
   {
     slug: 'zeitwert-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Zeitwert-Rechner',
     beschreibung: 'Zeitwert gebrauchter Gegenstände berechnen: Restwert für Versicherung, Verkauf oder Schadensersatz.',
     kategorie: 'Alltag & Leben',
@@ -1636,6 +1658,7 @@ Der rechnerische Zeitwert weicht vom tatsächlichen Marktwert (was jemand bereit
   },
   {
     slug: 'budget-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Budget-Rechner',
     beschreibung: 'Haushaltsbudget berechnen: Einnahmen vs. Ausgaben aufschlüsseln, Sparpotenzial identifizieren und 50/30/20-Regel prüfen.',
     kategorie: 'Alltag',

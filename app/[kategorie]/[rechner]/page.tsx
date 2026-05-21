@@ -9,6 +9,7 @@ import StructuredData from '@/components/seo/StructuredData';
 import FeedbackButtons from '@/components/ui/FeedbackButtons';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import Quellen from '@/components/Quellen';
+import StandHinweis from '@/components/StandHinweis';
 import Prozentrechner from '@/components/rechner/Prozentrechner';
 import BruttoNettoRechner from '@/components/rechner/BruttoNettoRechner';
 import MwStRechner from '@/components/rechner/MwStRechner';
@@ -418,6 +419,11 @@ export default function RechnerSeite({ params }: Props) {
           ]}
         />
       </div>
+
+      {/* Aktualisiert-Datum (W15A.2 E-E-A-T-Trust-Signal) */}
+      {config.letzteAktualisierung && (
+        <StandHinweis letzteAktualisierung={config.letzteAktualisierung} />
+      )}
 
       {/* Layout: Hauptinhalt + Sidebar */}
       <div className="flex flex-col lg:flex-row gap-8">

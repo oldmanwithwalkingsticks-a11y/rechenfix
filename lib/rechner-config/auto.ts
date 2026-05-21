@@ -3,6 +3,7 @@ import type { RechnerConfig } from './types';
 export const autoRechner: RechnerConfig[] = [
   {
     slug: 'spritkosten-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Spritkostenrechner',
     beschreibung: 'Spritkosten und Fahrtkosten berechnen: Benzinverbrauch, Kosten pro Kilometer und Gesamtkosten für jede Strecke.',
     kategorie: 'Auto & Verkehr',
@@ -121,6 +122,7 @@ Spritkosten sind einer der größten variablen Kostenposten beim Autofahren — 
   },
   {
     slug: 'kw-ps-umrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'KW-PS-Umrechner',
     beschreibung: 'KW in PS umrechnen und umgekehrt: Sofort-Ergebnis mit Umrechnungstabelle für gängige Fahrzeuge.',
     kategorie: 'Auto & Verkehr',
@@ -190,6 +192,7 @@ Bei der Kfz-Steuer spielt die kW-Zahl übrigens keine direkte Rolle — hier sin
   },
   {
     slug: 'kfz-steuer-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Kfz-Steuer-Rechner',
     beschreibung: 'Kfz-Steuer 2026 berechnen: Für Benziner, Diesel, Elektro und Hybrid. Mit Aufschlüsselung nach Hubraum und CO₂.',
     kategorie: 'Auto & Verkehr',
@@ -293,6 +296,7 @@ Die Kfz-Steuer wird vom Hauptzollamt per SEPA-Lastschrift eingezogen. Halbjährl
   },
   {
     slug: 'bussgeldrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Bußgeldrechner',
     beschreibung: 'Bußgeld, Punkte und Fahrverbot für Verkehrsverstöße berechnen — basierend auf dem aktuellen Bußgeldkatalog 2026.',
     kategorie: 'Auto & Verkehr',
@@ -363,6 +367,7 @@ Für **Parkverstöße** nennt der Rechner nur die häufigsten Grundsätze (z. B.
   },
   {
     slug: 'autokosten-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Autokosten-Rechner',
     beschreibung: 'Autokosten berechnen: Monatliche und jährliche Gesamtkosten Ihres Autos — von Versicherung über Sprit bis Wertverlust.',
     kategorie: 'Auto & Verkehr',
@@ -429,6 +434,7 @@ Ein eigenes Auto lohnt sich finanziell erst ab einer gewissen Fahrleistung und w
   },
   {
     slug: 'leasing-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Leasing-Rechner',
     beschreibung: 'Leasing berechnen: Leasingrate, Gesamtkosten und Vergleich Leasing vs. Finanzierung für Ihr Wunschfahrzeug.',
     kategorie: 'Auto & Verkehr',
@@ -489,6 +495,7 @@ Möchten Sie die Gesamtkosten Ihres Autos inkl. Versicherung, Steuer und Sprit b
   },
   {
     slug: 'fuehrerschein-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Führerscheinkosten-Rechner',
     beschreibung: 'Führerscheinkosten berechnen: Gesamtkosten für Klasse B mit Fahrstunden, Prüfungsgebühren und Sehtest.',
     kategorie: 'Auto & Verkehr',
@@ -545,6 +552,7 @@ Grundsätzlich nein — der Führerschein Klasse B gilt als Kosten der privaten 
   },
   {
     slug: 'reichweiten-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Reichweiten-Rechner (E-Auto)',
     beschreibung: 'Realistische E-Auto-Reichweite berechnen — abhängig von Temperatur, Fahrprofil und Verbrauch.',
     kategorie: 'Auto & Verkehr',
@@ -634,6 +642,7 @@ Weniger attraktiv wird die Rechnung bei häufigen Langstrecken mit Schnelllader-
   },
   {
     slug: 'fahrrad-rahmengroesse-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Fahrrad-Rahmengröße-Rechner',
     beschreibung: 'Optimale Fahrrad-Rahmengröße berechnen: Nach Körpergröße und Schrittlänge — für Rennrad, MTB, City und E-Bike.',
     kategorie: 'Auto & Verkehr',
@@ -701,6 +710,7 @@ Der Rechner liefert eine fundierte Empfehlung, aber jedes Fahrrad sitzt etwas an
   },
   {
     slug: 'taxi-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Taxi-Kosten-Rechner',
     beschreibung: 'Taxikosten schätzen: Fahrpreis nach Strecke, Tarif und Stadt.',
     kategorie: 'Auto & Verkehr',
@@ -778,6 +788,7 @@ Für gelegentliche Fahrten ist das Taxi oft günstiger als ein eigenes Auto. Die
   },
   {
     slug: 'firmenwagen-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Firmenwagenrechner',
     beschreibung: 'Firmenwagen-Steuer berechnen: Geldwerter Vorteil nach 1%-Regel für Verbrenner, Hybrid und Elektroauto.',
     kategorie: 'Auto & Verkehr',

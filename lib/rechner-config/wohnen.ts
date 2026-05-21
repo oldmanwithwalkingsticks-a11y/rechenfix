@@ -3,6 +3,7 @@ import type { RechnerConfig } from './types';
 export const wohnenRechner: RechnerConfig[] = [
   {
     slug: 'stromkosten-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Stromkostenrechner',
     beschreibung: 'Stromkosten berechnen: Jahresverbrauch, Arbeitspreis und Grundpreis — mit Haushaltsgröße-Schnellwahl.',
     kategorie: 'Wohnen & Energie',
@@ -103,6 +104,7 @@ Beim Vergleich von Stromtarifen und der Schätzung von Jahreskosten gibt es eini
   },
   {
     slug: 'nebenkosten-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Nebenkostenrechner',
     beschreibung: 'Mietnebenkosten berechnen: Alle Posten von Heizung bis Müll — mit Warmmiete und Kosten pro m².',
     kategorie: 'Wohnen & Energie',
@@ -159,6 +161,7 @@ Vermieter sind verpflichtet, jährlich eine Nebenkostenabrechnung zu erstellen. 
   },
   {
     slug: 'mietrechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Mietrechner',
     beschreibung: 'Warmmiete berechnen und Mietbelastung prüfen: Kaltmiete, Nebenkosten und Mietbelastungsquote.',
     kategorie: 'Wohnen & Energie',
@@ -260,6 +263,7 @@ Bei der Mietbeurteilung helfen drei rechtliche Werkzeuge, die jeder Mieter kenne
   },
   {
     slug: 'heizkosten-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Heizkostenrechner',
     beschreibung: 'Heizkosten berechnen: Gas, Öl, Fernwärme, Wärmepumpe oder Pellets — mit Energieträger-Vergleich.',
     kategorie: 'Wohnen & Energie',
@@ -335,6 +339,7 @@ Die BEG-Förderung (KfW 458) bezuschusst den Heizungstausch auf erneuerbare Wär
   },
   {
     slug: 'grunderwerbsteuer-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Grunderwerbsteuerrechner',
     beschreibung: 'Grunderwerbsteuer und Kaufnebenkosten berechnen: Nach Bundesland mit Makler, Notar und Grundbuch.',
     kategorie: 'Wohnen & Energie',
@@ -402,6 +407,7 @@ In Hessen gibt es seit September 2024 das **Hessengeld**: bis zu 10.000 € je e
   },
   {
     slug: 'baufinanzierung-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Baufinanzierungs-Rechner',
     beschreibung: 'Baufinanzierung berechnen: Monatsrate, Gesamtkosten, Restschuld und Tilgungsplan für Ihre Immobilienfinanzierung.',
     kategorie: 'Wohnen & Energie',
@@ -476,6 +482,7 @@ Nach Ablauf der Zinsbindung bleibt in der Regel eine Restschuld, die Sie weiterf
   },
   {
     slug: 'quadratmeter-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Quadratmeter-Rechner',
     beschreibung: 'Fläche in m² berechnen: Rechteck, Kreis, Dreieck, L-Form, Trapez. Mehrere Flächen addieren.',
     kategorie: 'Wohnen & Energie',
@@ -554,6 +561,7 @@ In der Praxis begegnen Ihnen vor allem m² (Wohnung, Zimmer), Ar (kleine Grundst
   },
   {
     slug: 'tapetenbedarf-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Tapetenbedarf-Rechner',
     beschreibung: 'Tapetenbedarf berechnen: Rollen-Anzahl mit Rapport, Verschnitt und Abzügen für Fenster & Türen.',
     kategorie: 'Wohnen & Energie',
@@ -630,6 +638,7 @@ Breitrollen decken pro Bahn die doppelte Wandbreite ab. Dadurch benötigen Sie w
   },
   {
     slug: 'stromvergleich-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Stromvergleich-Rechner',
     beschreibung: 'Stromanbieter vergleichen: Aktuelle Kosten berechnen, Sparpotenzial ermitteln und günstigere Tarife finden.',
     kategorie: 'Wohnen & Energie',
@@ -690,6 +699,7 @@ Die Strompreisbremse des Bundes wurde 2023 eingeführt und inzwischen wieder aus
   },
   {
     slug: 'mietrendite-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Mietrendite-Rechner',
     beschreibung: 'Mietrendite berechnen: Brutto- und Nettomietrendite für Immobilien als Kapitalanlage, mit Cashflow-Analyse.',
     kategorie: 'Wohnen & Energie',
@@ -750,6 +760,7 @@ Unser Rechner berücksichtigt bewusst keine steuerlichen Effekte, da diese sehr 
   },
   {
     slug: 'indexmiete-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Indexmiete-Rechner',
     beschreibung: 'Indexmiete berechnen: Mieterhöhung bei Indexmietvertrag basierend auf dem Verbraucherpreisindex (VPI).',
     kategorie: 'Wohnen & Energie',
@@ -804,6 +815,7 @@ Neben der Indexmiete gibt es zwei weitere wichtige Mietformen: Die **Staffelmiet
   },
   {
     slug: 'waermepumpen-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Wärmepumpen-Rechner',
     beschreibung: 'Wärmepumpe berechnen: Betriebskosten, Amortisation und Kostenvergleich mit Gasheizung — lohnt sich der Umstieg?',
     kategorie: 'Wohnen & Energie',
@@ -871,6 +883,7 @@ Ein entscheidender Hebel für die Wirtschaftlichkeit ist der **Wärmepumpen-Stro
   },
   {
     slug: 'photovoltaik-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Photovoltaik-Rechner',
     beschreibung: 'Photovoltaik-Anlage berechnen: Ertrag, Eigenverbrauch, Einspeisevergütung und Amortisation Ihrer Solaranlage.',
     kategorie: 'Wohnen & Energie',
@@ -963,6 +976,7 @@ Unser Rechner liefert eine erste Orientierung. Der tatsächliche Ertrag hängt v
   },
   {
     slug: 'dachflaechen-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Dachflächen-Rechner',
     beschreibung: 'Dachfläche berechnen: Satteldach, Pultdach, Walmdach oder Flachdach — mit Material- und PV-Potenzial.',
     kategorie: 'Wohnen & Energie',
@@ -1040,6 +1054,7 @@ Die Dachneigung beeinflusst, wie schnell Regen- und Schmelzwasser abfließen. Je
   },
   {
     slug: 'malerkosten-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Malerkosten-Rechner',
     beschreibung: 'Streichkosten für Wand und Decke berechnen — Farbbedarf, Material und Malerkosten mit Einkaufsliste.',
     kategorie: 'Wohnen & Energie',
@@ -1102,6 +1117,7 @@ Zusätzlich zum reinen Farbbedarf zeigt Ihnen der Rechner eine vollständige Ein
   },
   {
     slug: 'grundsteuer-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Grundsteuer-Rechner',
     beschreibung: 'Neue Grundsteuer berechnen: Grundsteuerwert, Steuermessbetrag und jährliche Grundsteuer nach dem Bundesmodell.',
     kategorie: 'Wohnen & Energie',
@@ -1145,6 +1161,7 @@ Die Grundsteuer ist nach der **Betriebskostenverordnung** umlagefähig auf Miete
   },
   {
     slug: 'mietpreisbremse-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Mietpreisbremse-Rechner',
     beschreibung: 'Mietpreisbremse prüfen: Ist Ihre Miete zulässig und wie viel können Sie zurückfordern?',
     kategorie: 'Wohnen & Energie',
@@ -1215,6 +1232,7 @@ Wer unsicher ist, ob die Mietpreisbremse greift und wie die Rüge formuliert wer
   },
   {
     slug: 'poolkosten-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Poolkosten-Rechner',
     beschreibung: 'Jährliche Betriebskosten für Pool: Wasser, Strom, Chemie und Wartung — mit Heizung und Abdeckung.',
     kategorie: 'Wohnen & Energie',
@@ -1303,6 +1321,7 @@ Wer eine **PV-Anlage** besitzt, kann Filterpumpe und Wärmepumpe überwiegend mi
   },
   {
     slug: 'vorfaelligkeitsentschaedigung-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Vorfälligkeitsentschädigung-Rechner',
     beschreibung: 'Vorfälligkeitsentschädigung berechnen: Geschätzte Kosten bei vorzeitiger Kreditablösung nach der Aktiv-Passiv-Methode.',
     kategorie: 'Wohnen & Energie',
@@ -1385,6 +1404,7 @@ Eine Umschuldung lohnt sich nur, wenn die **Zinsersparnis über die Restlaufzeit
   },
   {
     slug: 'energiekosten-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Energiekosten-Rechner',
     beschreibung: 'Stromkosten für einzelne Geräte berechnen: Tägliche, monatliche und jährliche Energiekosten pro Gerät.',
     kategorie: 'Wohnen & Energie',
@@ -1485,6 +1505,7 @@ Für den gesamten Haushaltsverbrauch nutzen Sie unseren [Stromkosten-Rechner](/w
   },
   {
     slug: 'fliesenbedarf-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Fliesenbedarf-Rechner',
     beschreibung: 'Fliesenbedarf berechnen: Anzahl Fliesen, Fliesenkleber und Fugenmasse für Boden und Wand.',
     kategorie: 'Wohnen & Energie',
@@ -1563,6 +1584,7 @@ Kaufen Sie immer 1–2 Fliesen extra als Reserve. Fliesen aus unterschiedlichen 
   },
   {
     slug: 'laminat-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Laminat-Rechner',
     beschreibung: 'Laminat- und Parkettbedarf berechnen: Pakete, Verschnitt und Materialkosten.',
     kategorie: 'Wohnen & Energie',
@@ -1634,6 +1656,7 @@ Kaufen Sie ein Paket extra als Reserve — für spätere Reparaturen. Laminat au
   },
   {
     slug: 'beton-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Beton-Rechner',
     beschreibung: 'Betonmenge berechnen: Kubikmeter und benötigte Säcke für Fundament, Bodenplatte und Pfosten.',
     kategorie: 'Wohnen & Energie',
@@ -1702,6 +1725,7 @@ Der Rechner bietet 0 %, 5 % und 10 % Zuschlag. 10 % ist empfohlen, weil: Schalun
   },
   {
     slug: 'estrich-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Estrich-Rechner',
     beschreibung: 'Estrich- und Putzmenge berechnen: Materialbedarf in kg und Säcke für Boden und Wand.',
     kategorie: 'Wohnen & Energie',
@@ -1779,6 +1803,7 @@ Der Rechner kalkuliert mit Durchschnittspreisen. Großmengen im Baustoffhandel s
   },
   {
     slug: 'balkon-solar-rechner',
+    letzteAktualisierung: '2026-05-21',
     titel: 'Balkon-Solar-Rechner',
     beschreibung: 'Balkon-Solaranlage berechnen: Ertrag, Eigenverbrauch und Amortisation für 600W/800W Balkonkraftwerke.',
     kategorie: 'Wohnen & Energie',
