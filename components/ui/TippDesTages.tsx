@@ -69,19 +69,19 @@ const tipps = [
   },
 ];
 
-function getTippIndex(): number {
-  const start = new Date(2026, 0, 1).getTime();
-  const now = Date.now();
-  const tage = Math.floor((now - start) / 86400000);
-  return tage % tipps.length;
+function getRandomTippIndex(): number {
+  return Math.floor(Math.random() * tipps.length);
 }
 
 export default function TippDesTages() {
   const mounted = useMounted();
-  // Erst nach Mount den datumsabhängigen Tipp anzeigen — sonst Hydration-Mismatch
-  // (SSG backt den Build-Tag-Tipp ins HTML, Client würde den heutigen auswählen).
-  // Index 0 als stabiler Fallback für den Server-Pass und den ersten Client-Render.
-  const tipp = mounted ? tipps[getTippIndex()] : tipps[0];
+  // Bei jedem Mount (Page-Reload, Browser-Back, Re-Navigation) wird ein
+  // zufälliger Tipp gewählt — kein deterministisches Datum-Modulo mehr.
+  // Hydration-safe: Server-Pass + erster Client-Render zeigen immer Tipp[0],
+  // der Random-Pick aktiviert nach `useMounted()` greift. Der Label-Text
+  // bleibt „Tipp des Tages" als bekannter UI-Anker, auch wenn der Tipp
+  // jetzt pro Mount rotiert.
+  const tipp = mounted ? tipps[getRandomTippIndex()] : tipps[0];
 
   return (
     <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-2xl p-5">
