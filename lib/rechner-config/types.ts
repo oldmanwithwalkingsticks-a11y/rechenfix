@@ -59,6 +59,20 @@ export interface RechnerConfig {
    * Eingeführt mit W15A.3.
    */
   quellen?: QuelleConfig[];
+  /**
+   * Optional: ISO-Datum (YYYY-MM-DD) der letzten substantiellen Aktualisierung
+   * dieses Rechners. Wird zwischen Breadcrumbs und Zurück-Button als
+   * „Aktualisiert am …" gerendert und in Schema.org WebApplication.dateModified
+   * ausgespielt (Google-Signal). Initial in W15A.2 für alle 170 Rechner gesetzt;
+   * bei Sprint-Änderungen pro betroffenem Rechner bumpen.
+   */
+  letzteAktualisierung?: string;
+  /**
+   * Optional: Wenn true, wird Author-Mini-Bio (Karsten-Foto + Tagline + Verweis
+   * auf /ueber-uns) zwischen Quellen-Card und Affiliate-Boxen gerendert.
+   * Default false. Initial in W15A.2 nur für Top-10-Rechner aktiviert.
+   */
+  zeigtAuthorBio?: boolean;
 }
 
 export interface KategorieConfig {

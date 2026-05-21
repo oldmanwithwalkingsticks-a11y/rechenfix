@@ -4,16 +4,16 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { existsSync } from 'fs';
 import path from 'path';
+import { KARSTEN_PHOTO_PATH } from '@/lib/site-config';
 
 // LAST_UPDATED manuell pflegen bei substantiellen Änderungen.
 const LAST_UPDATED = '20. Mai 2026';
 
-// Server-side Foto-Check: rendert <Image>, sobald public/about/karsten-kautz-v2.jpg
-// existiert. Solange nicht: Placeholder-Div mit identischer Grössen-Reserve.
-// Versions-Suffix "-v2" als Cache-Bust gegen Vercel-Image-Optimizer-Caching
-// (minimumCacheTTL = 30 Tage in next.config.mjs). Bei Foto-Tausch nach v2:
-// File auf "-v3.jpg" umbenennen + diesen Pfad mit-bumpen.
-const fotoExists = existsSync(path.join(process.cwd(), 'public/about/karsten-kautz-v2.jpg'));
+// Server-side Foto-Check: rendert <Image>, sobald das in lib/site-config
+// referenzierte Foto existiert. Solange nicht: Placeholder-Div mit
+// identischer Grössen-Reserve. Pfad-Versionierung wird zentral in
+// lib/site-config.ts gepflegt (Cache-Bust-Strategie).
+const fotoExists = existsSync(path.join(process.cwd(), 'public', KARSTEN_PHOTO_PATH));
 
 export const metadata: Metadata = {
   title: 'Über Rechenfix.de — Unabhängiges Rechnerportal aus Deutschland',
@@ -71,7 +71,7 @@ export default function UeberUnsSeite() {
         <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700 flex flex-col sm:flex-row items-start gap-5">
           {fotoExists ? (
             <Image
-              src="/about/karsten-kautz-v2.jpg"
+              src={KARSTEN_PHOTO_PATH}
               alt="Karsten Kautz, Gründer von Rechenfix.de"
               width={200}
               height={200}
