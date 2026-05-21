@@ -4,6 +4,7 @@ export const autoRechner: RechnerConfig[] = [
   {
     slug: 'spritkosten-rechner',
     letzteAktualisierung: '2026-05-21',
+    zeigtAuthorBio: true,
     titel: 'Spritkostenrechner',
     beschreibung: 'Spritkosten und Fahrtkosten berechnen: Benzinverbrauch, Kosten pro Kilometer und Gesamtkosten für jede Strecke.',
     kategorie: 'Auto & Verkehr',

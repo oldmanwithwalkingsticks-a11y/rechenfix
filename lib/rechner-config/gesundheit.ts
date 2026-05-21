@@ -4,6 +4,7 @@ export const gesundheitRechner: RechnerConfig[] = [
   {
     slug: 'bmi-rechner',
     letzteAktualisierung: '2026-05-21',
+    zeigtAuthorBio: true,
     titel: 'BMI-Rechner',
     beschreibung: 'Body Mass Index berechnen: Mit WHO-Einordnung, farbiger Skala und optimalem BMI-Bereich für Ihr Alter.',
     kategorie: 'Gesundheit',

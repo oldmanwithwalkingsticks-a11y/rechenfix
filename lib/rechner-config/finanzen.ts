@@ -4,6 +4,7 @@ export const finanzenRechner: RechnerConfig[] = [
   {
     slug: 'brutto-netto-rechner',
     letzteAktualisierung: '2026-05-21',
+    zeigtAuthorBio: true,
     titel: 'Brutto-Netto-Rechner',
     beschreibung: 'Nettogehalt berechnen: Mit Steuerklasse, Bundesland, Kirchensteuer, KV und allen Sozialabgaben.',
     kategorie: 'Finanzen',
@@ -102,6 +103,7 @@ Unser Brutto-Netto-Rechner liefert eine gute Orientierung, basiert jedoch auf ve
   {
     slug: 'mwst-rechner',
     letzteAktualisierung: '2026-05-21',
+    zeigtAuthorBio: true,
     titel: 'MwSt-Rechner',
     beschreibung: 'Mehrwertsteuer berechnen: Brutto ↔ Netto, MwSt herausrechnen, Multi-Rechner für Rechnungen.',
     kategorie: 'Finanzen',
@@ -207,6 +209,7 @@ Wenn Sie als Unternehmer Waren oder Dienstleistungen einkaufen, zahlen Sie auf d
   {
     slug: 'zinsrechner',
     letzteAktualisierung: '2026-05-21',
+    zeigtAuthorBio: true,
     titel: 'Zinsrechner',
     beschreibung: 'Zinsen und Zinseszins berechnen: Mit Sparplan, Jahr-für-Jahr-Tabelle und Zinseszins-Vergleich.',
     kategorie: 'Finanzen',
@@ -569,6 +572,7 @@ Der jeweils höhere Freibetrag gilt ab Beginn des Monats, in dem die Altersgrenz
   {
     slug: 'stundenlohn-rechner',
     letzteAktualisierung: '2026-05-21',
+    zeigtAuthorBio: true,
     titel: 'Stundenlohnrechner',
     beschreibung: 'Stundenlohn aus Monatsgehalt berechnen oder umgekehrt — mit Mindestlohn-Vergleich und effektivem Stundenlohn.',
     kategorie: 'Finanzen',

@@ -10,6 +10,7 @@ import FeedbackButtons from '@/components/ui/FeedbackButtons';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import Quellen from '@/components/Quellen';
 import StandHinweis from '@/components/StandHinweis';
+import AuthorBio from '@/components/AuthorBio';
 import Prozentrechner from '@/components/rechner/Prozentrechner';
 import BruttoNettoRechner from '@/components/rechner/BruttoNettoRechner';
 import MwStRechner from '@/components/rechner/MwStRechner';
@@ -572,6 +573,11 @@ export default function RechnerSeite({ params }: Props) {
               Nur Top-10-Rechner (und später Top-20) haben config.quellen gesetzt;
               alle anderen rendern hier nichts. */}
           {config.quellen && <Quellen quellen={config.quellen} />}
+
+          {/* Author-Mini-Bio — nach Quellen, vor Affiliate (W15A.2 E-E-A-T-Trust).
+              Nur Top-10-Rechner mit zeigtAuthorBio=true. Hierarchie:
+              Substanz (Rechner) → Citations (Quellen) → Authorship (Bio) → Commercial. */}
+          {config.zeigtAuthorBio && <AuthorBio />}
 
           {/* Affiliate-Boxen — nach Content für AdSense-konforme Position (W13.2+ / W14.A.1).
               Single-Object für 1 Box, Array für Multi-Box. Rechner mit eigenem

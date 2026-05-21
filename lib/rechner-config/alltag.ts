@@ -93,6 +93,7 @@ Unser Prozentrechner zeigt bei jedem Ergebnis den vollständigen Rechenweg an. S
   {
     slug: 'dreisatz-rechner',
     letzteAktualisierung: '2026-05-21',
+    zeigtAuthorBio: true,
     titel: 'Dreisatzrechner',
     beschreibung: 'Dreisatz online berechnen: proportional und antiproportional, mit Rechenweg Schritt für Schritt.',
     kategorie: 'Alltag',
@@ -195,6 +196,7 @@ Der Dreisatz wirkt einfach, hat aber typische Fallstricke — diese sechs treten
   {
     slug: 'tagerechner',
     letzteAktualisierung: '2026-05-21',
+    zeigtAuthorBio: true,
     titel: 'Tagerechner',
     beschreibung: 'Tage zwischen zwei Daten berechnen: Kalendertage, Arbeitstage, Wochen und Monate auf einen Blick.',
     kategorie: 'Alltag',

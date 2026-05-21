@@ -4,6 +4,7 @@ export const wohnenRechner: RechnerConfig[] = [
   {
     slug: 'stromkosten-rechner',
     letzteAktualisierung: '2026-05-21',
+    zeigtAuthorBio: true,
     titel: 'Stromkostenrechner',
     beschreibung: 'Stromkosten berechnen: Jahresverbrauch, Arbeitspreis und Grundpreis — mit Haushaltsgröße-Schnellwahl.',
     kategorie: 'Wohnen & Energie',
@@ -162,6 +163,7 @@ Vermieter sind verpflichtet, jährlich eine Nebenkostenabrechnung zu erstellen. 
   {
     slug: 'mietrechner',
     letzteAktualisierung: '2026-05-21',
+    zeigtAuthorBio: true,
     titel: 'Mietrechner',
     beschreibung: 'Warmmiete berechnen und Mietbelastung prüfen: Kaltmiete, Nebenkosten und Mietbelastungsquote.',
     kategorie: 'Wohnen & Energie',
