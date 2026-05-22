@@ -13,6 +13,7 @@
     "lint:footer": "node scripts/check-footer.mjs",
     "lint:slugs": "node scripts/slug-drift-scan.mjs",
     "audit:bundle": "npx tsx scripts/build-audit-bundle.ts",
+    "audit:wortzahl": "npx tsx scripts/wortzahl-audit.mjs > docs/audit-arbeitspapiere/w15c-wortzahl-audit.csv",
     "longtail:diff": "node scripts/longtail-diff-check.mjs"
   },
   "dependencies": {
