@@ -359,3 +359,31 @@ Karsten erlaubte in Phase 1 explizit die Installation von `@next/bundle-analyzer
 Phase 1 ist hier zu Ende. **Karsten entscheidet, ob T2-Sprint losgehen darf** und welchen Scope (alle 4 Top-Items oder nur C1 als Solo-Sprint).
 
 Erwartetes Phase-2-Gesamt-Aufwand: 3–6 h (T2 + T3 zusammen), davon ~2 h für den C1-Bulk-Edit.
+
+---
+
+## Update 23.05.2026 — Phase 2 abgeschlossen
+
+Alle 4 Fix-Items umgesetzt in 4 atomaren Commits:
+
+| Fix | Commit | Build-Vergleich |
+|---|---|---|
+| C1 dynamic-Imports | `1eb1719` | Page-Chunk 2.118 KB → 28,5 KB (−98,7 %), First Load JS 547 KB → 117 KB (−78,6 %) |
+| H1 Foto-WebP | `d6161b0` | Karsten-Foto 928,6 KB JPG → 87,4 KB WebP (−90,6 %) |
+| M1 TippDesTages | `d442587` | Homepage First Load JS 139 KB → 122 KB (−12 %) |
+| M4 Mega-Menu dynamic | `7159392` | Header-Bundle aus shared chunk ausgelagert (Effekt erst bei Footer/SearchBar-Refactor sichtbar) |
+
+**Build-Bilanz Hauptbefund (Rechner-Route `/[kategorie]/[rechner]`):**
+- **First Load JS: 547 KB → 117 KB (−78,6 %)**
+- **Page-Size: 418 KB → 5,86 KB (−98,6 %)**
+- **Mega-Chunk: 2.118 KB → 28,5 KB (−98,7 %)**
+- Total Chunks: 14 → 213 (170 neue Component-Chunks via Code-Splitting)
+
+**Methodische Lehre (neu):** Im App Router führt `dynamic()` in einer Server Component zu KEINEM Code-Split — der erste Versuch landete weiterhin im 2,1 MB-Chunk. Erst die Auslagerung in eine `'use client'`-Wrapper-Component (`RechnerLoader.tsx`) erzeugte 170 separate Chunks. Pattern: Lookup-Maps mit dynamic-Imports gehören grundsätzlich in `'use client'`-Datei, nicht in Server-Components.
+
+**Karsten-Verify (Phase 4) ausstehend:**
+- PageSpeed Insights für alle 6 Test-URLs neu messen (Ziel: LCP < 4 s, idealerweise < 2,5 s)
+- Funktionaler Smoke-Test (5 zufällige Rechner)
+- Über-uns-Foto rendert als WebP
+- Mega-Menu klappt auf
+- View-Source-Stichprobe (SSR liefert echtes Rechner-HTML)

@@ -2130,3 +2130,72 @@ Bei freier Wahl: **151-Sammelrest** ist der natürlichste nächste Slot (gleiche
 Falls AdSense-Re-Review zwischenzeitlich approved: keine Folge-Aktion nötig, der Re-Review-Status wird einfach im AdSense-Backend angezeigt. Falls negativ: erst dann hat es Sinn, weitere E-E-A-T-Maßnahmen anzufassen (z. B. Author-Bio pro Rechner-Seite, expliziter Update-Log).
 
 *Dieses Dokument wurde beim Session-Handover am 28.04.2026 erstellt.*
+
+---
+
+## WELLE 15C T1 — Performance-Fix-Sprint Phase 2 (23.05.2026)
+
+**Status:** ✓ abgeschlossen
+**Vorbedingung:** T1 Phase 1 Diagnose (Commit `58ceec0`, 22.05.2026) hatte 2,1 MB JS-Chunk auf der dynamischen Rechner-Route als Haupt-LCP-Killer identifiziert.
+
+### Was geliefert
+
+4 atomare Performance-Commits + 1 Doku-Commit:
+
+| # | Commit | Fix | Ergebnis |
+|---|---|---|---|
+| 1 | `1eb1719` | **C1**: 170 statische Rechner-Imports in `app/[kategorie]/[rechner]/page.tsx` → `dynamic()` via `'use client'`-Wrapper `RechnerLoader.tsx` | Page-Chunk 2.118 KB → 28,5 KB (−98,7 %), First Load JS 547 KB → 117 KB (−78,6 %) |
+| 2 | `d6161b0` | **H1**: Karsten-Foto 928 KB JPG → 87 KB WebP (sharp 0.34.5 als devDependency) | −90,6 % Foto-Größe, KARSTEN_PHOTO_PATH auf `-v3.webp` gebumpt |
+| 3 | `d442587` | **M1**: TippDesTages auf Build-Time-Konstanten via `generate-tipp-constants.ts` umgestellt — decimal.js raus aus Homepage | Homepage First Load JS 139 KB → 122 KB (−12 %) |
+| 4 | `7159392` | **M4**: Mega-Menu-Inhalt in `MegaMenuContent.tsx` ausgelagert + dynamic-loaded | Header-Bundle aus shared chunk, Effekt erst bei künftigem Footer/SearchBar-Refactor sichtbar |
+
+### Methodische Lehre (NEU, L-W15C-T1-1): App-Router-`dynamic()`-Splitting
+
+Im Next.js App Router führt `next/dynamic` in einer Server Component zu KEINEM Code-Split. Erster Refactor-Versuch (direkt die Map in `page.tsx`) landete trotz 170 dynamic-Imports weiterhin im 2,1 MB-Chunk. Erst die Auslagerung in eine `'use client'`-Wrapper-Component (`RechnerLoader.tsx`) erzeugte 170 separate Chunks.
+
+**Pattern für künftige Refactorings:** Lookup-Maps mit `dynamic()` gehören grundsätzlich in eine `'use client'`-Datei, nicht in Server Components. Bei Server-seitig benötigtem Slug-Check (notFound) muss der Check über andere Strategien laufen — z. B. SSOT-Slug-Drift-Scan im Prebuild-Hook oder ein separates non-client Set.
+
+### Methodische Lehre (NEU, L-W15C-T1-2): Build-Time-Konstanten statt Runtime-Berechnung in Client-Components
+
+TippDesTages brauchte zwei Zahlen aus `berechneBruttoNetto` — und zog damit die ganze Lib-Kette inkl. `decimal.js` (~100 KB) in das Homepage-Client-Bundle. Generator-Script (`scripts/generate-tipp-constants.ts`) im Prebuild-Hook löst das deterministisch: Werte werden zur Build-Zeit einmal berechnet, in `lib/tipp-konstanten.ts` geschrieben, der Component importiert nur die Konstanten. Beim Stichtag-Switch (z. B. Mindestlohn 01.01.2027) regeneriert der nächste Build automatisch.
+
+**Pattern:** Wenn ein Client-Component nur statische Werte einer schweren Lib braucht, ist ein Build-Time-Konstanten-Generator die saubere Lösung — kein decimal.js / heavy-lib im Client-Bundle, automatische Aktualisierung beim Build.
+
+### Methodische Lehre (BESTÄTIGT, L-15-Casing): Component-Datei-Casing vs. lokaler Import-Identifier
+
+Beim ersten Refactor-Script-Lauf trat der Casing-Bug aus Lehre 15 wieder auf: lokaler Import-Identifier `MwstRueckerstattungRechner` (klein st) vs. File-Pfad `MwStRueckerstattungRechner.tsx` (groß St). Bei `dynamic(() => import('@/components/rechner/X'))` muss X der echte File-Pfad sein. Fix im Refactor-Script: aus jedem Original-Import-Statement den File-Pfad-Teil extrahieren statt den Identifier zu raten.
+
+### Build-Output-Vergleich
+
+```
+Vorher:                                  Nachher:
+/                       3.08 kB  139 kB  /                       3.23 kB  122 kB  (−17 KB)
+/[kategorie]/[rechner]  418 kB   547 kB  /[kategorie]/[rechner]  5.89 kB  117 kB  (−430 KB)
+```
+
+### Phase-4-Verify (ausstehend, Karsten manuell)
+
+1. **PageSpeed Insights** für alle 6 Test-URLs neu messen — Ziel LCP < 4 s (Mindest), idealerweise < 2,5 s:
+   - Homepage (war 7,1 s)
+   - /finanzen/brutto-netto-rechner (war 4,5 s)
+   - /finanzen/3000-euro-brutto-netto (war 5,0 s)
+   - /gesundheit/bmi-rechner (war 8,0 s)
+   - /wohnen/mietrechner (war 6,8 s)
+   - /ueber-uns (war 5,5 s)
+2. **Funktionaler Smoke-Test** — 5 zufällige Rechner aufrufen, jeweils Berechnung durchführen, keine Hydration-Errors in Console
+3. **Über-uns + AuthorBio** — Foto rendert sichtbar, Network-Tab zeigt WebP < 100 KB
+4. **Mega-Menu** — klappt bei Klick auf, Links funktionieren, Mobile-Hamburger weiterhin OK
+5. **View-Source-Stichprobe** — `view-source:https://www.rechenfix.de/finanzen/brutto-netto-rechner` enthält echtes Rechner-Markup (`<input>`-Felder, FAQ-Texte), NICHT leere Loading-Hülle
+
+### Repo-Snapshot Session-Ende
+
+- **Branch:** main
+- **Letzter Commit:** Doku-Commit (folgt direkt nach diesem Eintrag)
+- **Working tree:** clean nach Doku-Commit
+- **Build-Status:** grün, alle Prebuild-Hooks durch (footer + jahreswerte + backticks + slug-drift + generate-client-data + generate-tipp-constants)
+
+### Backlog nach Phase 2
+
+- **T2/T3 Cleanup** (NIEDRIG): T1 H3 Tailwind-CSS-Diet (103 KB → ggf. 60 KB), T5 Cleanup-Sprint mit 2 MITTEL + 8 NIEDRIG aus Sauberkeit-Audit (~30–45 Min)
+- **T4** (geparkt bis AdSense-Approval): H2 next/script-Refactor für AdSense (Prompt 85)
+- **W15C T6** (optional, ~3 h): Wortzahl-Polish countdown + 20 Grenzfälle (siehe w15c-t3-wortzahl-audit.md)
