@@ -4,7 +4,105 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 21.05.2026
+**Stand:** 22.05.2026
+
+---
+
+## W15B — Long-Tail Content-Aufwertung — 22.05.2026
+
+**Anlass:** Welle-15-Killer-Faktor #4 — Long-Tail-Thin-Content auf 6 Pages (`2000-` bis `5000-euro-brutto-netto`) unter 400 Wörtern. Letzter Block vor AdSense-Resubmit. Pre-Phase-Datenbasis-v2 mit Destatis-Daten, Mietspiegel-Q1-2026, DACH-Vergleich und Erwerbstätigen-Freibeträgen lag bereits am 11.05. lokal vor.
+
+**Scoping:** [docs/audit-arbeitspapiere/w15b-longtail-scoping.md](w15b-longtail-scoping.md) — Architektur-Hauptbefund: Karstens Vorgabe #1 (6 Pages als Config-Slugs in `lib/rechner-config/finanzen.ts`) war falsch — die Pages sind **eigene Page-Routes** in `app/finanzen/<NNNN>-euro-brutto-netto/page.tsx` mit geteilter `<BruttoNettoLongTail>`-Component. Strategie-Wechsel: **Option B** (spezifischer Content als ReactNode-Prop pro Page-Datei) statt Config-Refactor.
+
+### Commit 1 — `docs: w15b long-tail pre-phase-datenbasis v2 ins repo` (`59331ee`)
+
+Pre-Phase-Recherche-Datei [`w15-longtail-pre-phase-datenbasis-v2.md`](w15-longtail-pre-phase-datenbasis-v2.md) (647 Z.) ins Repo. Quelle für alle Werte in Commit 3+4 — Destatis Median-Daten 2025/2026, Stadt-pro-Page-Mietspiegel Q1 2026 (Chemnitz/Leipzig/Hannover/Dresden/Köln/München), DACH-Vergleich für 3k-5k-Pages, Erwerbstätigen-Freibeträge nach § 11b SGB II für 2k+2.5k-Pages, konkrete Berufsbeispiele mit Tarif-Quellen.
+
+### Commit 2 — `feat: w15b infrastructure — component-refactor + webpage-schema + diff-script` (`ed4387c`)
+
+Bauteile ohne User-Impact:
+
+- **[lib/seo.ts](../../lib/seo.ts):** Neuer Helper `generateWebPageSchema({ url, name, description, dateModified })` für Minimal-`WebPage`-JSON-LD mit `dateModified` als Google-Signal. `SITE_URL` + `SITE_NAME` als `export const` umgestellt für Konsumenten-Imports.
+- **[components/seo/BruttoNettoLongTail.tsx](../../components/seo/BruttoNettoLongTail.tsx):** Vier neue optional-Props (`spezifischerContent: ReactNode`, `subtypBlock?: ReactNode`, `letzteAktualisierung?: string`, `zeigtAuthorBio?: boolean`). StandHinweis direkt nach Breadcrumbs. WebPage-Schema parallel zu BreadcrumbList+FAQPage. AuthorBio nach „Weitere Gehaltsberechnungen", vor unterem AdSlot (Authorship→Commercial-Hierarchie analog W15A.2). Alle Props optional → bestehende Pages laufen bis Commit 3+4 weiter.
+- **[components/seo/StandardBruttoNettoBlock.tsx](../../components/seo/StandardBruttoNettoBlock.tsx) (NEU):** Sub-Component aus bisher hartkodiertem SEO-Text-Block extrahiert — deterministisch identisch für alle 6 Pages, kein Drift möglich.
+- **[scripts/longtail-diff-check.mjs](../../scripts/longtail-diff-check.mjs) (NEU):** Jaccard-Coefficient-Diff zwischen Pilot 3000€ und 5 Folge-Pages, Stoppwort- + JSX-Tag- + Interpolations-Filter, Schwellwert `< 0.40` = >60 % Differenz. Marker-Pattern `// W15B-SPEZIFIK-START/END`. NPM-Script `longtail:diff`.
+
+### Commit 3 — `feat: w15b pilot — 3000-euro-page auf 1200W aufgewertet` (`d7083d8`)
+
+[app/finanzen/3000-euro-brutto-netto/page.tsx](../../app/finanzen/3000-euro-brutto-netto/page.tsx) als Pilot:
+- `BRUTTO = 3000`, `LETZTE_AKTUALISIERUNG = '2026-05-22'`
+- 8 gehaltsspezifische FAQs (statt 4 generischer)
+- `spezifischerContent`: ~700 W mit Median-Einordnung, 3 Berufsbeispielen (Industriemechaniker / Bürokauffrau / IT-Support), Hannover-Mietspiegel mit Stadtteilen, Solo + Familie 1 Kind, Sparpotenzial mit Altersvorsorgedepot-Reform 2026 (BT-Drs. 21/4088), Karriere-Perspektive
+- `subtypBlock`: DACH-Vergleich mit DE / AT / CH-Brutto-Äquivalenten und realer Kaufkraft
+- `zeigtAuthorBio: true`
+
+### Commit 4 — `feat: w15b — 5 folge-pages auf 1200W aufgewertet (4k/5k/2k/2.5k/3.5k)` (`c46a05d`)
+
+Sammel-Commit für 5 Folge-Pages nach Pilot-Template:
+
+| Page | Stadt | Subtyp | Jaccard zu Pilot |
+|---|---|---|---|
+| 2000€ | Chemnitz | Bürgergeld § 11b SGB II | 0.232 |
+| 2500€ | Leipzig | Bürgergeld § 11b SGB II | 0.301 |
+| 3500€ | Dresden | DACH-Vergleich | 0.370 |
+| 4000€ | Köln | DACH-Vergleich | 0.347 |
+| 5000€ | München | DACH-Vergleich | 0.252 |
+
+**Diff-Check:** Alle 5 Pages erreichen >60 % Differenz zu Pilot (Jaccard < 0.40). 3500€ am ähnlichsten (0.370, knapp unter Schwellwert) — wie erwartet, weil näher zum Pilot, deshalb bewusst zuletzt gebaut. 2000€ am unterschiedlichsten (0.232) wegen Bürgergeld-Subtyp.
+
+**Werte-Disziplin (L-37):** Alle Zahlen aus Pre-Phase-Datenbasis-v2 — Destatis-Verdienststrukturerhebung, ImmoScout24 Q1 2026, Engel & Völkers, qualifizierte Mietspiegel der Städte, BMAS-Mindestlohn-VO 2026, Bundestag-Drucksachen zu Altersvorsorgedepot.
+
+**Build-Hotfix während Phase 2:**
+- 4000€-Page `seoText`-Attribut: deutsche Anführungs-Schließquote (`"`) hat ASCII-Quote im JSX-Attribut vorzeitig geschlossen. Fix: `seoText={'...'}` (JSX-Expression statt String-Attribut).
+- Bulk-Fix: 10 deutsche Anführungs-Paare `„..."` in JSX-Text → `„...&ldquo;` via temporäres Node-Script. Skript nach Lauf gelöscht.
+
+### Commit 5 — `docs: welle 15b dokumentiert` (dieser Commit)
+
+Welle-Historie-Block + Scoping-Datei-Status-Update.
+
+### Verifikation
+
+- `npm run build` 205/205 grün nach Commit 2, 3, 4
+- `npm run longtail:diff` exit-code 0 nach Commit 4 — alle 5 Folge-Pages erreichen Schwellwert
+- 6 Page-Files haben jeweils 1 W15B-SPEZIFIK-START/END-Marker-Paar
+
+### Karsten Phase 4 — Manuelle Verifikation (Inkognito nach Vercel-Deploy)
+
+1. **Alle 6 Long-Tail-Pages aufrufen:**
+   - https://www.rechenfix.de/finanzen/3000-euro-brutto-netto (Pilot)
+   - https://www.rechenfix.de/finanzen/4000-euro-brutto-netto (Duplikat-Status — höchste Re-Indexierung-Priorität)
+   - https://www.rechenfix.de/finanzen/5000-euro-brutto-netto
+   - https://www.rechenfix.de/finanzen/2000-euro-brutto-netto
+   - https://www.rechenfix.de/finanzen/2500-euro-brutto-netto
+   - https://www.rechenfix.de/finanzen/3500-euro-brutto-netto
+
+   Pro Page prüfen:
+   - StandHinweis „Aktualisiert am 22. Mai 2026" oben unter Breadcrumbs
+   - Spezifischer Content-Block mit Stadt + Berufen + Subtyp (Bürgergeld bei 2k/2.5k, DACH bei 3k-5k)
+   - 8 FAQs, gehaltsspezifische Fragen
+   - AuthorBio nach „Weitere Gehaltsberechnungen"-Card, vor unterem AdSlot
+
+2. **View Source eines Top-Folge-Rechners (z. B. 4000€):**
+   - Strg+F „dateModified" → Treffer im WebPage-JSON-LD mit `2026-05-22`
+   - Drei JSON-LD-Blöcke sichtbar (BreadcrumbList + FAQPage + WebPage)
+
+3. **Search Console Re-Indexierung** (~10 Anforderungen/Tag-Limit):
+   ```
+   https://www.rechenfix.de/finanzen/4000-euro-brutto-netto   ← Priorität #1
+   https://www.rechenfix.de/finanzen/3000-euro-brutto-netto   ← Pilot
+   https://www.rechenfix.de/finanzen/2000-euro-brutto-netto
+   https://www.rechenfix.de/finanzen/2500-euro-brutto-netto
+   https://www.rechenfix.de/finanzen/3500-euro-brutto-netto
+   https://www.rechenfix.de/finanzen/5000-euro-brutto-netto
+   ```
+
+4. **AdSense-Resubmit** kann nach erfolgreichem Re-Indexierungs-Check angestoßen werden — das ist Karstens eigene Aktion außerhalb dieses Sprints.
+
+### L-Lehren neu
+
+- **L-W15B-1 (Phase-1-Architektur-Annahmen scharf gegen Repo prüfen):** Karstens Phase-1-Prompt-Vorgabe #1 (Pages als Config-Slugs) war falsch — die Pages sind eigene Routes mit geteilter Component. Phase-1-Scoping hat das aufgedeckt; ohne den Check wäre Phase-2 in falscher Architektur gestartet (Config-Edits ohne Wirkung). Generalisierung von L-W15A.1-3 (Welle-Dossier-Befunde gegen Repo verifizieren) auf Karsten-Prompt-Vorgaben.
+- **L-W15B-2 (Deutsche Anführungszeichen in JSX-Attribut-Strings sind brüchig):** `seoText="...„...""..."` schließt das Attribut vorzeitig, weil das schließende `"` (U+0022, ASCII straight) das öffnende `"` matched, nicht die typografische öffnende `„`. Lösung: bei JSX-Attribut-Strings mit deutschen Anführungszeichen den Wert als JSX-Expression `seoText={'...'}` schreiben. In JSX-Text-Content greift zusätzlich die ESLint-Regel `react/no-unescaped-entities`, die schließendes `"` zu `&ldquo;` zwingt.
+- **L-W15B-3 (Diff-Schwellwert sinnvoll wählen):** Jaccard `< 0.40` bei ~220-Wort-Vergleichen entspricht ungefähr „60 % Diff" intuitiv — aber bei kleineren Wortmengen wäre der Wert anders. Für künftige Long-Tail-Sprints mit anderen Page-Größen den Schwellwert ggf. anpassen (z. B. `< 0.35` bei größeren Pages mit mehr gemeinsamen Standard-Begriffen). Marker-Pattern `// W15B-SPEZIFIK-START/END` macht den Vergleich tolerant gegen Strukturwechsel — ohne Marker müsste der gesamte Page-Inhalt verglichen werden, was zu mehr false-positive-Ähnlichkeiten führen würde.
 
 ---
 
