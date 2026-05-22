@@ -2,29 +2,19 @@
 
 import Link from 'next/link';
 import { useMounted } from '@/lib/hooks/useMounted';
-import { MINDESTLOHN } from '@/lib/berechnungen/mindestlohn';
-import { berechneBruttoNetto } from '@/lib/berechnungen/brutto-netto';
-import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from '@/lib/berechnungen/sv-parameter';
+import {
+  MINDESTLOHN_TIPP_STUNDE as MINDESTLOHN,
+  MINDESTLOHN_TIPP_BRUTTO as mindestlohnBrutto,
+  MINDESTLOHN_TIPP_NETTO as mindestlohnNetto,
+} from '@/lib/tipp-konstanten';
 
-// Mindestlohn-Tipp: Brutto dynamisch aus MINDESTLOHN, Netto live aus zentraler Lib
-// (SK I, kinderlos, NRW, GKV mit Durchschnitts-Zusatzbeitrag, ohne Kirchensteuer).
-// So läuft der Tipp automatisch beim 01.01.2027-Wechsel auf 14,60 € mit.
-const mindestlohnBrutto = Math.round(MINDESTLOHN * 40 * 4.33);
-const mindestlohnNetto = Math.round(
-  berechneBruttoNetto({
-    bruttoMonat: mindestlohnBrutto,
-    steuerklasse: 1,
-    kirchensteuer: false,
-    kirchensteuersatz: 9,
-    kinderfreibetraege: 0,
-    bundesland: 'NW',
-    kvArt: 'gesetzlich',
-    kvZusatzbeitrag: KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT,
-    kvPrivatBeitrag: 0,
-    rvBefreit: false,
-    abrechnungszeitraum: 'monat',
-  }).nettoMonat,
-);
+// Mindestlohn-Tipp: Werte stammen aus lib/tipp-konstanten.ts, das vom
+// Prebuild-Hook (scripts/generate-tipp-constants.ts) bei jedem Build neu
+// generiert wird. Dadurch landet weder berechneBruttoNetto noch decimal.js
+// im Homepage-Client-Bundle (W15C-T1-Phase-2-M1).
+//
+// Beim 01.01.2027-Mindestlohn-Wechsel (13,90 → 14,60 € via Stichtag-Switch
+// in mindestlohn.ts) regeneriert der nächste Build automatisch die Werte.
 
 const tipps = [
   {
