@@ -14,4 +14,4 @@
  *
  * Genutzt in: app/ueber-uns/page.tsx, components/AuthorBio.tsx.
  */
-export const KARSTEN_PHOTO_PATH = '/about/karsten-kautz-v2.jpg';
+export const KARSTEN_PHOTO_PATH = '/about/karsten-kautz-v3.webp';
