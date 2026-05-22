@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 import { berechneBruttoNetto } from '@/lib/berechnungen/brutto-netto';
 import type { BruttoNettoErgebnis } from '@/lib/berechnungen/brutto-netto';
 import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from '@/lib/berechnungen/sv-parameter';
@@ -6,7 +7,10 @@ import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import ZurueckButton from '@/components/layout/ZurueckButton';
 import AdSlot from '@/components/ads/AdSlot';
 import StructuredData from '@/components/seo/StructuredData';
-import { generateBreadcrumbSchema, generateFAQSchema } from '@/lib/seo';
+import StandardBruttoNettoBlock from '@/components/seo/StandardBruttoNettoBlock';
+import StandHinweis from '@/components/StandHinweis';
+import AuthorBio from '@/components/AuthorBio';
+import { generateBreadcrumbSchema, generateFAQSchema, generateWebPageSchema, SITE_URL } from '@/lib/seo';
 
 const steuerklassen: { sk: 1 | 2 | 3 | 4 | 5 | 6; label: string; beschreibung: string }[] = [
   { sk: 1, label: 'Steuerklasse 1', beschreibung: 'Ledig, geschieden, verwitwet' },
@@ -45,13 +49,30 @@ interface Props {
   brutto: number;
   seoText: string;
   faq: { frage: string; antwort: string }[];
+  /** NEU W15B: 700W gehaltsspezifischer Block. Wird zwischen Standard-Block und FAQ gerendert. */
+  spezifischerContent?: ReactNode;
+  /** NEU W15B: Subtyp-Block (Bürgergeld bei 2k+2.5k, DACH bei 3k-5k). Optional. */
+  subtypBlock?: ReactNode;
+  /** NEU W15B: ISO YYYY-MM-DD. Rendert StandHinweis + WebPage-Schema. */
+  letzteAktualisierung?: string;
+  /** NEU W15B: Wenn true, rendert AuthorBio nach Verwandte-Seiten-Card. */
+  zeigtAuthorBio?: boolean;
 }
 
 const GEHALTSSTUFEN = [2000, 2500, 3000, 3500, 4000, 5000];
 
-export default function BruttoNettoLongTail({ brutto, seoText, faq }: Props) {
+export default function BruttoNettoLongTail({
+  brutto,
+  seoText,
+  faq,
+  spezifischerContent,
+  subtypBlock,
+  letzteAktualisierung,
+  zeigtAuthorBio = false,
+}: Props) {
   const bruttoFmt = fmtBrutto(brutto);
   const slug = `${brutto}-euro-brutto-netto`;
+  const pageUrl = `${SITE_URL}/finanzen/${slug}`;
   const stufenIndex = GEHALTSSTUFEN.indexOf(brutto);
   const vorherige = stufenIndex > 0 ? GEHALTSSTUFEN[stufenIndex - 1] : null;
   const naechste = stufenIndex < GEHALTSSTUFEN.length - 1 ? GEHALTSSTUFEN[stufenIndex + 1] : null;
@@ -71,6 +92,16 @@ export default function BruttoNettoLongTail({ brutto, seoText, faq }: Props) {
     <div className="max-w-6xl mx-auto px-4 py-8">
       <StructuredData data={generateBreadcrumbSchema(breadcrumbItems)} />
       <StructuredData data={generateFAQSchema(faq)} />
+      {letzteAktualisierung && (
+        <StructuredData
+          data={generateWebPageSchema({
+            url: pageUrl,
+            name: `${bruttoFmt} Euro brutto netto`,
+            description: `Brutto-Netto-Erklärseite für ${bruttoFmt} € Bruttogehalt mit Stadt- und Berufsbeispielen.`,
+            dateModified: letzteAktualisierung,
+          })}
+        />
+      )}
 
       <Breadcrumbs
         items={[
@@ -78,6 +109,11 @@ export default function BruttoNettoLongTail({ brutto, seoText, faq }: Props) {
           { label: `${bruttoFmt} € brutto netto` },
         ]}
       />
+
+      {/* Aktualisiert-Datum (W15B) — oben unter Breadcrumbs, analog Rechner-Seiten */}
+      {letzteAktualisierung && (
+        <StandHinweis letzteAktualisierung={letzteAktualisierung} />
+      )}
 
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="flex-1 min-w-0">
@@ -141,30 +177,14 @@ export default function BruttoNettoLongTail({ brutto, seoText, faq }: Props) {
             </div>
           </div>
 
-          {/* SEO-Text */}
-          <section className="card p-6 md:p-8 mb-8">
-            <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              {bruttoFmt} Euro brutto in netto — das müssen Sie wissen
-            </h2>
-            <div className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed space-y-4">
-              <p>{seoText}</p>
-              <p>
-                In <strong className="text-gray-800 dark:text-gray-100">Steuerklasse 1</strong> (Ledige) behalten Sie von {bruttoFmt} € brutto ca. {fmt(ergebnisse[0].ergebnis.nettoMonat)} € netto. Das entspricht rund {(100 - ergebnisse[0].ergebnis.abzuegeProzent).toFixed(0)}% Ihres Bruttogehalts. Die Abzüge setzen sich aus Lohnsteuer ({fmt(ergebnisse[0].ergebnis.lohnsteuer)} €), Krankenversicherung ({fmt(ergebnisse[0].ergebnis.krankenversicherung)} €), Rentenversicherung ({fmt(ergebnisse[0].ergebnis.rentenversicherung)} €), Arbeitslosenversicherung ({fmt(ergebnisse[0].ergebnis.arbeitslosenversicherung)} €) und Pflegeversicherung ({fmt(ergebnisse[0].ergebnis.pflegeversicherung)} €) zusammen.
-              </p>
-              <p>
-                Deutlich günstiger fahren <strong className="text-gray-800 dark:text-gray-100">Verheiratete in Steuerklasse 3</strong>: Hier bleiben ca. {fmt(ergebnisse[2].ergebnis.nettoMonat)} € netto — das sind {fmt(ergebnisse[2].ergebnis.nettoMonat - ergebnisse[0].ergebnis.nettoMonat)} € mehr pro Monat als in Steuerklasse 1.
-              </p>
-              <p>
-                Am wenigsten Netto bleibt in <strong className="text-gray-800 dark:text-gray-100">Steuerklasse 5 und 6</strong>. Steuerklasse 5 ist das Gegenstück zu SK3 für den geringverdienenden Partner, während SK6 für Zweit- und Nebenjobs gilt — hier entfallen alle Freibeträge.
-              </p>
-              <p>
-                <strong className="text-gray-800 dark:text-gray-100">Wichtig zu wissen:</strong> Die Steuerklasse beeinflusst nur die monatlichen Abzüge, nicht die tatsächliche Jahressteuer. Über die Steuererklärung gleicht das Finanzamt die Differenz aus.
-              </p>
-              <p>
-                Nutzen Sie unseren <Link href="/finanzen/brutto-netto-rechner" className="text-primary-600 hover:text-primary-600 font-medium">Brutto-Netto-Rechner</Link> für eine individuelle Berechnung mit allen Parametern wie Kirchensteuer, Bundesland und privater Krankenversicherung.
-              </p>
-            </div>
-          </section>
+          {/* Standard-Block (extrahiert in Sub-Component, deterministisch identisch für alle Pages) */}
+          <StandardBruttoNettoBlock bruttoFmt={bruttoFmt} seoText={seoText} ergebnisse={ergebnisse} />
+
+          {/* Spezifischer Content-Block (W15B) — 700W gehaltsspezifisch */}
+          {spezifischerContent}
+
+          {/* Subtyp-Block (W15B) — Bürgergeld (2k+2.5k) oder DACH (3k-5k) */}
+          {subtypBlock}
 
           {/* FAQ */}
           <section className="card p-6 md:p-8 mb-8">
@@ -241,6 +261,9 @@ export default function BruttoNettoLongTail({ brutto, seoText, faq }: Props) {
               ))}
             </div>
           </section>
+
+          {/* AuthorBio (W15B) — Authorship → Commercial-Hierarchie analog W15A.2 */}
+          {zeigtAuthorBio && <AuthorBio />}
 
           <AdSlot typ="leaderboard" />
         </div>

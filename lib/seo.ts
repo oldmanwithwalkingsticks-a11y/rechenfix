@@ -1,8 +1,8 @@
 import { RechnerConfig, KategorieConfig } from './rechner-config';
 import type { Metadata } from 'next';
 
-const SITE_URL = 'https://www.rechenfix.de';
-const SITE_NAME = 'Rechenfix.de';
+export const SITE_URL = 'https://www.rechenfix.de';
+export const SITE_NAME = 'Rechenfix.de';
 const OG_IMAGE = `${SITE_URL}/opengraph-image`;
 
 export function generateRechnerMetadata(rechner: RechnerConfig): Metadata {
@@ -124,6 +124,39 @@ export function generateBreadcrumbSchema(items: { name: string; url: string }[])
       name: item.name,
       item: `${SITE_URL}${item.url}`,
     })),
+  };
+}
+
+/**
+ * Minimales WebPage-Schema für Erklär-Seiten ohne interaktive Calculator-
+ * Funktion (z. B. Long-Tail-Pages 2000-euro-brutto-netto etc.).
+ * NICHT für Rechner-Seiten — die nutzen generateWebApplicationSchema.
+ * Eingeführt mit W15B.
+ */
+export function generateWebPageSchema(params: {
+  url: string;
+  name: string;
+  description: string;
+  dateModified: string;  // ISO YYYY-MM-DD
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: params.name,
+    description: params.description,
+    url: params.url,
+    inLanguage: 'de',
+    dateModified: params.dateModified,
+    author: {
+      '@type': 'Person',
+      name: 'Karsten Kautz',
+      url: `${SITE_URL}/ueber-uns`,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
   };
 }
 

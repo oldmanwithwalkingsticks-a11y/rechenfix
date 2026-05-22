@@ -12,7 +12,8 @@
     "lint:jahreswerte": "node scripts/check-jahreswerte.mjs",
     "lint:footer": "node scripts/check-footer.mjs",
     "lint:slugs": "node scripts/slug-drift-scan.mjs",
-    "audit:bundle": "npx tsx scripts/build-audit-bundle.ts"
+    "audit:bundle": "npx tsx scripts/build-audit-bundle.ts",
+    "longtail:diff": "node scripts/longtail-diff-check.mjs"
   },
   "dependencies": {
     "@upstash/redis": "^1.37.0",
