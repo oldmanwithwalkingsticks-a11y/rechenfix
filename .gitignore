@@ -47,3 +47,12 @@ next-env.d.ts
 
 # Generierte Reports (Quell-Code ist committed, Output nicht)
 /reports/
+
+# Lokale Working-Files / persönliche Arbeitskopien (W15C-T5 Cleanup)
+# Diese Dateien entstehen lokal beim Recherchieren/Debuggen und gehören
+# nicht ins Repo. Falls Du eine davon teilen willst, in docs/ verschieben
+# und bewusst committen.
+/brutto-netto-raw.html
+/history-check.*
+/sitemap-live-*.xml
+/doku-sync-*-patch.md

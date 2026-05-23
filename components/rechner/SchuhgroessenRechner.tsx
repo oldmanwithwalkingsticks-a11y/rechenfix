@@ -96,7 +96,10 @@ export default function SchuhgroessenRechner() {
       }
     }
     return best;
-  }, [typ, system, wert, tabelle]);
+    // `tabelle` ist aus `typ` abgeleitet (Z. 84 const tabelle = TABELLE[typ]).
+    // ESLint kann das nicht sehen, deshalb `typ` raus aus den Deps und `tabelle`
+    // bleibt — semantisch deckungsgleich, kein unnötiger Re-Compute (W15C-T5 I2).
+  }, [system, wert, tabelle]);
 
   const changeTyp = (t: Typ) => {
     setTyp(t);

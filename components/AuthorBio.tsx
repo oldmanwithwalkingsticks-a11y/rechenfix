@@ -27,6 +27,7 @@ export default function AuthorBio() {
             alt="Karsten Kautz, Gründer von Rechenfix.de"
             width={72}
             height={72}
+            sizes="72px"
             className="rounded-full flex-shrink-0"
           />
         ) : (

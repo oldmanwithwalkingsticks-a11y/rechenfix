@@ -30,6 +30,15 @@ const nextConfig = {
         destination: '/auto/firmenwagen-rechner',
         permanent: true,
       },
+      {
+        // W15C-T5-B-extra (23.05.2026): Externe Backlinks zeigen auf den
+        // falschen Pfad /alltag/einheiten-umrechner — der Rechner liegt
+        // tatsächlich unter /mathe/einheiten-umrechner (Display-Name
+        // suggeriert Alltag, Slug-Kategorie ist Mathe; Lehre 14).
+        source: '/alltag/einheiten-umrechner',
+        destination: '/mathe/einheiten-umrechner',
+        permanent: true,
+      },
     ];
   },
 

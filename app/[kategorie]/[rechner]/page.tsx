@@ -96,9 +96,14 @@ export default function RechnerSeite({ params }: Props) {
 
           {/* Rechner */}
           <div className="card p-6 md:p-8 mb-8">
-            {/* Print-Header mit Logo — nur im Druck sichtbar */}
+            {/* Print-Header mit Logo — nur im Druck sichtbar. Raw <img> ist hier
+                bewusst statt next/image: Print-Stylesheet (@media print) braucht
+                ein direktes HTML-Element ohne Next.js-Optimizer-Wrapper, damit
+                der Browser im Druckdialog das SVG sofort einbettet. LCP-irrelevant,
+                weil nur in der Druckansicht sichtbar. */}
             <div className="hidden print-only mb-3">
               <div className="flex items-center gap-2 pb-2 border-b border-gray-300">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/logo.svg" alt="Rechenfix" width={32} height={32} />
                 <div>
                   <span className="text-lg font-extrabold text-gray-800">Rechen<span className="text-emerald-600">fix</span><span className="text-sm font-normal text-gray-600">.de</span></span>
