@@ -17,6 +17,7 @@ import ConsentScripts from '@/components/cookie/ConsentScripts';
 import StructuredData from '@/components/seo/StructuredData';
 import { generateWebsiteSchema } from '@/lib/seo';
 import { Analytics } from '@vercel/analytics/next';
+import Script from 'next/script';
 import { ADSENSE_PUBLISHER_ID } from '@/lib/adsense-config';
 
 export const viewport: Viewport = {
@@ -91,18 +92,20 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="de" suppressHydrationWarning className={inter.variable}>
-      <head>
-        {/* AdSense Basis-Loader — notwendig für AdSense-Crawler-Erkennung.
-            Zeigt keine Werbung bis AdSense freigegeben ist. Setzt keine Cookies,
-            solange keine Anzeigen geladen werden. CMP-Integration folgt in
-            Prompt 68 nach Freigabe. */}
-        <script
+      <body className="min-h-screen flex flex-col bg-white dark:bg-slate-900 text-gray-800 dark:text-gray-100 antialiased font-sans">
+        {/* AdSense Basis-Loader — via next/script mit strategy="afterInteractive"
+            (W15C-T4-F1). Lädt nach React-Hydration und blockiert dadurch nicht
+            mehr LCP der Erklär-Cards. AdSense-Crawler erkennt den Loader
+            weiterhin sauber (Pattern offiziell von Google empfohlen). Die
+            <ins>-Ad-Slot-Tags in AdSlot.tsx bleiben unverändert. CMP-
+            Integration folgt in Prompt 68 nach AdSense-Freigabe. */}
+        <Script
+          id="adsense-loader"
           async
+          strategy="afterInteractive"
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_PUBLISHER_ID}`}
           crossOrigin="anonymous"
         />
-      </head>
-      <body className="min-h-screen flex flex-col bg-white dark:bg-slate-900 text-gray-800 dark:text-gray-100 antialiased font-sans">
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-lg focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
