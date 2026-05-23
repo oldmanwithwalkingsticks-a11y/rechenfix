@@ -2199,3 +2199,58 @@ Vorher:                                  Nachher:
 - **T2/T3 Cleanup** (NIEDRIG): T1 H3 Tailwind-CSS-Diet (103 KB → ggf. 60 KB), T5 Cleanup-Sprint mit 2 MITTEL + 8 NIEDRIG aus Sauberkeit-Audit (~30–45 Min)
 - **T4** (geparkt bis AdSense-Approval): H2 next/script-Refactor für AdSense (Prompt 85)
 - **W15C T6** (optional, ~3 h): Wortzahl-Polish countdown + 20 Grenzfälle (siehe w15c-t3-wortzahl-audit.md)
+
+---
+
+## WELLE 15C T5 — Cleanup-Batch (23.05.2026)
+
+**Status:** ✓ abgeschlossen
+**Vorbedingung:** T5-Sauberkeit-Audit (Commit `b910fb2`) lieferte 0 KRITISCH, 2 MITTEL, 8 NIEDRIG.
+
+### Was geliefert
+
+Atomarer Sammel-Commit `9763a89`: 10 Items in einem Batch.
+
+**MITTEL:**
+- **C1**: 4 tote Slug-Verweise `herzfrequenz-rechner` aus `lib/rechner-config/index.ts` entfernt (1× `neueRechnerSlugs` Z. 179, 1× `verwandteMap`-Key Z. 414, 2× als VALUE in `verwandteMap[pace-rechner]` + `verwandteMap[herzfrequenz-zonen-rechner]`). Replacement-Slugs aus dem natürlichen Pool (bmi, idealgewicht).
+- **C2**: `components/layout/HeaderSearch.tsx` gelöscht (Dead-Component, kein Import-Statement im Repo).
+
+**NIEDRIG:**
+- **B1**: Leere Override-Verzeichnisse `app/finanzen/brutto-netto-rechner/` + `app/finanzen/mwst-rechner/` gelöscht.
+- **C3**: `.gitignore` um 4 Pattern erweitert (`brutto-netto-raw.html`, `history-check.*`, `sitemap-live-*.xml`, `doku-sync-*-patch.md`).
+- **H1**: `app/robots.ts` um `disallow: '/ki-rechner'` ergänzt — belt-and-suspenders zur bestehenden noindex-Meta + Sitemap-Exclusion.
+- **I1**: ESLint-Suppress + erklärender Kommentar für print-only `<img>` in `app/[kategorie]/[rechner]/page.tsx` Z. 102.
+- **I2**: `useMemo`-Deps in `SchuhgroessenRechner.tsx` Z. 99 bereinigt (`typ` raus, `tabelle` bleibt).
+- **F-extra**: `components/AuthorBio.tsx` `<Image>` um `sizes="72px"` Hint erweitert.
+- **B-extra**: 301-Redirect `/alltag/einheiten-umrechner` → `/mathe/einheiten-umrechner` in `next.config.mjs` ergänzt — schließt real meldenden Soft-404 aus externen Backlinks (Lehre 14).
+
+### Quality-Bilanz nach Cleanup
+
+- **0** Dead-Slug-Verweise (war: 4)
+- **0** Dead-Components (war: 1)
+- **0** ESLint-Warnings (war: 2)
+- **0** Leere Override-Dirs (war: 2)
+- Cleaner Working-Tree: 4 lokale Working-Files jetzt von `.gitignore` abgedeckt
+- `/ki-rechner` zweifach geschützt (noindex-Meta + robots-Disallow)
+- 1 echter Soft-404 weniger in Search Console (sobald Vercel deployed + Re-Crawl ist)
+
+### Phase-4-Verify (ausstehend, Karsten manuell)
+
+1. **Smoke-Test**: 3 zufällige Rechner-Pages aufrufen, Funktionalität OK
+2. **Robots-Test**: `https://www.rechenfix.de/robots.txt` zeigt `Disallow: /ki-rechner`
+3. **404-Test**: `https://www.rechenfix.de/alltag/einheiten-umrechner` liefert jetzt 301-Redirect auf `/mathe/einheiten-umrechner`
+4. **AuthorBio-Stichprobe**: Top-10-Rechner (z. B. `/finanzen/brutto-netto-rechner`) — Foto rendert korrekt
+
+### Repo-Snapshot
+
+- **Branch:** main
+- **Letzter Commit:** Doku-Commit (folgt nach diesem Eintrag)
+- **Build:** grün, `npm run lint` ✔ 0 warnings
+- **Working tree:** clean nach Doku-Commit (lokale Working-Files jetzt ignored)
+
+### Backlog nach T5-Cleanup
+
+- **T2/T3**: T1 H3 Tailwind-CSS-Diet (103 KB → ggf. 60 KB), ~1–2 h, niedrige Akut-Lage
+- **T4**: H2 next/script-Refactor für AdSense — geparkt bis AdSense-Approval
+- **T6**: optional ~3 h Wortzahl-Polish für countdown + 20 Grenzfälle aus T3-Audit
+- **AdSense-Resubmit**: nach Karsten-Verify der W15C-T1-Phase-2 + W15C-T5-Cleanup-Effekte
