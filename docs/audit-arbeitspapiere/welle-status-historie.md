@@ -2254,3 +2254,80 @@ Atomarer Sammel-Commit `9763a89`: 10 Items in einem Batch.
 - **T4**: H2 next/script-Refactor für AdSense — geparkt bis AdSense-Approval
 - **T6**: optional ~3 h Wortzahl-Polish für countdown + 20 Grenzfälle aus T3-Audit
 - **AdSense-Resubmit**: nach Karsten-Verify der W15C-T1-Phase-2 + W15C-T5-Cleanup-Effekte
+
+---
+
+## WELLE 15C T4 — Performance-Polish (AdSense + CLS + Polyfills) (24.05.2026)
+
+**Status:** ✓ abgeschlossen
+**Vorbedingung:** T1 Phase 3 lieferte STOP-Diagnose (Commit `fc24f4d`), Karsten hat PSI-Diagnostics-Liste nachgeliefert:
+
+| URL | Median-Score | Median-LCP | CLS |
+|---|---|---|---|
+| BMI-Rechner | 62 (32/62/79) | 6,4 s | **0,446** |
+| Mietrechner | 76 (50/76/79) | 2,4 s | **0,446** |
+
+PSI-Diagnostics gaben **eindeutige Single-Cause-Diagnose**: AdSense-Script-Stack dominiert Performance + CLS (~295 KB JS, davon 191 KB unused; 344 ms forced reflow; 4,4 s main-thread; LCP-Element „So funktioniert"-Card mit 3.310 ms Render-Delay; CLS 0,446 von genau dieser Card durch AdSense-Lade-Cascade).
+
+### Was geliefert
+
+3 atomare Performance-Commits + 1 Doku-Commit:
+
+| # | Commit | Fix | Erwarteter Impact |
+|---|---|---|---|
+| F1 | `74d5250` | AdSense-Loader via `next/script` mit `strategy="afterInteractive"` aus `<head>` zu `<body>` verschoben | LCP −2 bis −3 s, Score +20–30 |
+| F2 | `8ef6096` | AdSlot-Container immer-reserviert mit `min-h-[90/280/250]` Tailwind-Klassen, `<ins>` conditional | CLS 0,446 → <0,05 |
+| F3 | `3bcc4e1` | `package.json` um modernen `browserslist`-Block erweitert (chrome 87+ / firefox 78+ / safari 14+ / edge 88+) | Legacy-Polyfills 11,6 KB raus |
+
+### Methodische Lehre (NEU, L-W15C-T4-1): AdSlot-CLS-Pattern
+
+**`if (!consent) return null` ist ein CLS-Anti-Pattern.** Ein conditional komplett unsichtbarer Container hat 0 px Initial-Höhe — sobald sich der Consent-Status ändert oder die Ad-Lib `<ins>` füllt, springt das Layout. PSI bestraft das mit hohem CLS-Score (hier 0,446 = "Poor").
+
+**Pattern:** Container-`<div>` IMMER rendern mit reservierter Mindesthöhe (Tailwind `min-h-[XXpx]`-Klasse, NICHT inline-Style auf der inneren `<ins>`). Conditional-Render nur das innere Ad-Element. `aria-hidden` setzen, wenn kein Ad geladen wird.
+
+### Methodische Lehre (NEU, L-W15C-T4-2): Konservative Prompt-Sperren prüfen, nicht akzeptieren
+
+Prompt 85 (AdSense-Script-Refactor) war monatelang in der Liste der „Gesperrte Prompts" (siehe `CLAUDE.md`-Abschnitt) mit Begründung „Script-Loader-Änderung könnte AdSense-Review beeinträchtigen". Diese Vorsicht war konservativ-falsch. AdSense-Crawler erkennt `next/script`-Pattern offiziell sauber (Google-Empfehlung). Karsten hat den Refactor jetzt freigegeben mit der Erkenntnis: **der LCP-Killer war so dominierend, dass er sogar den AdSense-Approval gefährdet hätte** (PSI-Score < 70 ist negatives Signal für Reviewer).
+
+**Pattern:** Bei Prompts mit Begründung „könnte X stören" konkret prüfen ob es Belege dafür gibt. Hier war die Befürchtung unbelegt — und blockierte einen kritischen Fix für 30+ Tage.
+
+### Phase-4-Verify (ausstehend, Karsten manuell)
+
+**Wichtigster Verify: PSI Re-Measurement** (3 Messungen pro URL, Median):
+
+- `https://www.rechenfix.de/gesundheit/bmi-rechner`
+- `https://www.rechenfix.de/wohnen/mietrechner`
+
+Plus Stichprobe ob andere Pages nicht verschlechtert wurden:
+- `https://www.rechenfix.de/finanzen/brutto-netto-rechner`
+- `https://www.rechenfix.de/`
+
+**Erfolgs-Kriterien:**
+- BMI + Mietrechner: Median-Score 85+ (vorher 62/76)
+- LCP: < 4 s, idealerweise < 2,5 s
+- **CLS: < 0,1** (vorher 0,446) — wichtigstes Signal
+- Andere Pages: unverändert oder besser
+- Diagnostics: „Legacy JavaScript" sollte verschwinden, „Reduce unused JavaScript" für AdSense sollte ohne LCP-Tag erscheinen
+
+**Sekundär:**
+1. **AdSense funktioniert noch:** auf einer Page warten bis Ads laden (kann 5–30 Sek dauern nach `afterInteractive`-Strategy). Ad-Slots zeigen Werbung wie vorher.
+2. **Smoke-Test:** BMI- und Mietrechner-Berechnung funktioniert wie vorher.
+3. **AdSense-Reviewer-Submission:** sobald PSI-Werte stabil grün sind, AdSense-Re-Review beantragen.
+
+### Repo-Snapshot Session-Ende
+
+- **Branch:** main
+- **Letzter Commit:** Doku-Commit (folgt nach diesem Eintrag)
+- **Build:** grün, `npm run lint` ✔ 0 warnings
+- **Working tree:** clean
+
+### Backlog nach T4
+
+- **T2/T3 Tailwind-CSS-Diet** (~1–2 h, niedrige Akut-Lage) — Welle 16
+- **T6 Wortzahl-Polish** countdown + 20 Grenzfälle (~3 h optional) — Welle 16
+- **AdSense-Resubmit**: nach Karsten-Verify der T4-Effekte
+- **Prompt 68 CMP/Consent Mode v2**: nach AdSense-Approval
+
+### Update CLAUDE.md "Gesperrte Prompts"-Abschnitt
+
+Prompt 85 ist mit T4-F1 effektiv erledigt — der `<script async>`-zu-`<Script strategy="afterInteractive">`-Refactor ist umgesetzt. Bei nächstem Doku-Sync (Karsten-Initiative): Eintrag aus dem „Gesperrte Prompts"-Abschnitt entfernen, dafür ggf. erwähnen dass die ursprüngliche Sperre-Begründung sich als unbelegt herausgestellt hat.
