@@ -2331,3 +2331,99 @@ Plus Stichprobe ob andere Pages nicht verschlechtert wurden:
 ### Update CLAUDE.md "Gesperrte Prompts"-Abschnitt
 
 Prompt 85 ist mit T4-F1 effektiv erledigt — der `<script async>`-zu-`<Script strategy="afterInteractive">`-Refactor ist umgesetzt. Bei nächstem Doku-Sync (Karsten-Initiative): Eintrag aus dem „Gesperrte Prompts"-Abschnitt entfernen, dafür ggf. erwähnen dass die ursprüngliche Sperre-Begründung sich als unbelegt herausgestellt hat.
+
+---
+
+## WELLE 15C T6 — Final-Polish vor AdSense-Resubmit (24.05.2026)
+
+**Status:** ✓ abgeschlossen (Code), Verify steht aus (Karsten)
+**Vorbedingung:** T4-Sprint (`74d5250..2d800dc`) hat PSI massiv verbessert, aber Re-Measurement zeigte Rest-Probleme:
+
+| Page | Score | LCP | CLS |
+|---|---|---|---|
+| Homepage | 76 | 2,1 s | 0,021 ✅ |
+| Brutto-Netto | 93 | 3,0 s | 0 ✅ |
+| Mietrechner | 83 | 1,8–2,4 s | **0,3** ⚠️ |
+| BMI-Rechner | 62 | 2,1–7,6 s | **0,3** ⚠️ |
+
+Drei Probleme identifiziert: (1) CLS 0,3 auf BMI + Mietrechner, (2) PSI „Legacy JavaScript -12 KiB" weiter aktiv, (3) BMI-LCP schwankt 2,1–7,6 s.
+
+### Phase 1 — Mini-Diagnose mit STOP
+
+Phase-1-READ-ONLY-Audit lieferte für CLS keine eindeutige Antwort und ich habe — Prompt-konform — STOP gemeldet mit drei Klärungsfragen. Befunde vor STOP:
+
+- **AdSlot.tsx ist L-W15C-T4-1-konform**: Container `min-h-[280px]` wird immer gerendert, nur `<ins>` ist conditional. Pattern korrekt.
+- **Browserslist sauber**: nur `package.json`, keine Drift, kein Override.
+- **BMI-LCP-Hypothese widerlegt**: keine schwere SVG-Gauge in `BmiRechner.tsx`, nur 6 Inline-`<div>`-Bars als Skala. „Tachometer/Gauge"-Hypothese aus dem Prompt war Code-frei.
+
+Karsten hat geantwortet (Klärungsantworten siehe Prompt-File `welle15c-t6-final-polish-prompt.md`):
+- PSI war **Inkognito ohne Consent** → leerer AdSlot-Container, kein Ad geladen
+- Layout shift culprit war **nur** der Middle-AdSlot-Container, Score exakt 0,300
+- PSI-Chunk-Pfad: `chunks/2117-f9f72d37753c0de2.js`
+- Karstens eigener `web_fetch`-Vergleich der SSR-HTMLs zeigte: BMI 5 `<input>`-Felder im SSR-HTML, Brutto-Netto 10 `<input>` → **Brutto-Netto rendert seinen Calculator statisch im Page-Template** (`INLINE_ERKLAERUNG_SLUGS`-Whitelist), die anderen Rechner über den dynamic-Wrapper
+
+→ **Heureka:** `RechnerLoader.tsx` ist `'use client'` mit 170 `dynamic()`-Imports ohne Skeleton. SSR liefert Höhe 0 für den Calculator-Bereich. Bei Hydration schiebt die echte Component (~600 px) den darunter liegenden Middle-AdSlot um 280 px nach unten → CLS exakt 0,300 = Container-Höhe rectangle.
+
+### Was geliefert (Phase 2)
+
+1 atomarer Code-Commit + 1 Doku-Commit (Karsten-Vorgabe „F2 ggf. ganz weglassen, F3 erst nach Verify"):
+
+| # | Commit | Fix | Erwarteter Impact |
+|---|---|---|---|
+| C1 | `60b0b94` | `dyn()`-Helper kapselt alle 170 `dynamic()`-Aufrufe und setzt `RechnerSkeleton` mit `min-h-[600px]` als loading-Fallback | CLS 0,3 → < 0,1 auf BMI + Mietrechner |
+| F2 | — | Analyse `chunks/2117-f9f72d37753c0de2.js`: **kein** Polyfill-Chunk (0 core-js/polyfill-Strings). Der echte Polyfill-Chunk `polyfills-42372ed130431b0a.js` wird mit `noModule=""` ausgeliefert → moderne Browser laden ihn nicht. Next.js-intern hardcoded in `node_modules/next/dist/build/polyfills/`, T4-F3-Browserslist hat darauf 0 Effekt. **Akzeptiert.** | — |
+| F3 | — | Nicht angefasst. Karsten-Hypothese: wenn C1 CLS löst, stabilisiert sich BMI-LCP automatisch, weil die Page nach Hydration nicht mehr massiv umlayoutet. Nach Verify entscheiden. | — |
+| D | (folgt) | Doku-Sync in welle-status-historie | — |
+
+### Methodische Lehre (NEU, L-W15C-T6-1): `dynamic()` in `'use client'` braucht Skeleton
+
+**`next/dynamic` ohne explizites `loading`-Prop in einer `'use client'`-Boundary rendert SSR-Höhe 0.** Auch mit Default `ssr: true` wird die geladene Component im initialen SSR nicht synchron eingehängt — der Browser sieht einen leeren Slot, der bei Hydration auf seine echte Höhe wächst und alles darunter verschiebt.
+
+**Pattern:** Jedes `dynamic()` in einer Client-Boundary bekommt ein `loading: () => <div className="min-h-[Xpx]" />`. X = typische Endhöhe der geladenen Component. Bei Rechner-Karten 600 px (Eingabe-Felder + Default-Ergebnis-Block). Per-Slug-Höhe ist Option B falls einzelne Ausreißer bleiben.
+
+Diese Lehre ist die strukturelle Vervollständigung von L-W15C-T4-1 (AdSlot-Container immer reservieren). T4-F2 hat den AdSlot selbst SSR-stabil gemacht; T6-C1 macht den Calculator-Bereich oberhalb des AdSlots SSR-stabil. Ohne beide Patterns zusammen bleibt CLS hoch.
+
+### Methodische Lehre (NEU, L-W15C-T6-2): PSI-Chunk-Pfade verifizieren
+
+**PSI's „Avoid serving legacy JavaScript to modern browsers" referenziert nicht immer den echten Polyfill-Chunk.** In T6 war der gemeldete Pfad `chunks/2117-f9f72d37753c0de2.js` der gemeinsame Vendor-Chunk (31,7 kB Wire, regulärer App-Code, 0 core-js-Strings). Der echte Polyfill-Chunk hat den Pfad `chunks/polyfills-42372ed130431b0a.js` und wird mit `noModule=""` ausgeliefert.
+
+**Pattern:** Bei PSI-„Legacy JavaScript"-Befunden den Chunk lokal greppen (`grep -c "core-js\|polyfill" .next/static/chunks/<file>.js`) statt blind die Build-Config umstellen. Wenn der Treffer 0 ist: PSI hat den falschen Chunk identifiziert oder der Befund ist Next.js-intern und nicht über `package.json`-Browserslist behebbar.
+
+### Phase-4-Verify (ausstehend, Karsten manuell)
+
+PSI Re-Measurement (3 Messungen pro URL, Median):
+
+- `https://www.rechenfix.de/gesundheit/bmi-rechner`
+- `https://www.rechenfix.de/wohnen/mietrechner`
+
+Plus Stichprobe:
+- `https://www.rechenfix.de/finanzen/brutto-netto-rechner`
+- `https://www.rechenfix.de/`
+
+**Erfolgs-Kriterien (AdSense-Resubmit-Ready):**
+
+| Metrik | Ziel | Härte |
+|---|---|---|
+| CLS auf BMI + Mietrechner | < 0,1 | **MUSS** |
+| LCP auf BMI + Mietrechner | < 4 s | MUSS |
+| Score-Median BMI + Mietrechner | 75+ | SOLL |
+| Andere Pages unverändert/besser | — | MUSS |
+| PSI „Legacy JavaScript" | bleibt (akzeptiert) | dokumentiert |
+
+Wenn MUSS erfüllt → AdSense-Resubmit-Ready. Wenn ein MUSS fehlschlägt → STOP, Befund melden, ggf. Option B (per-Slug-Höhe via `config.rechnerHoehe`).
+
+### Repo-Snapshot Session-Ende
+
+- **Branch:** main
+- **Letzter Commit:** Doku-Commit (folgt)
+- **Build:** grün, alle Prebuild-Hooks ✔
+- **Working tree:** clean (außer auto-generierter `client-data.ts` und Untracked-Audit-Files)
+
+### Backlog nach T6
+
+- **AdSense-Resubmit:** nach Karsten-Verify der T6-Effekte
+- **Option B** (per-Slug-Skeleton-Höhe): nur falls Verify einzelne CLS-Ausreißer zeigt
+- **F3 BMI-LCP-Separatmaßnahme:** nur falls Verify zeigt dass LCP weiter > 4 s schwankt trotz C1
+- **T2/T3 Tailwind-CSS-Diet** (~1–2 h, niedrige Akut-Lage) — Welle 16
+- **T6 Wortzahl-Polish** countdown + 20 Grenzfälle (~3 h optional) — Welle 16
+- **Prompt 68 CMP/Consent Mode v2:** nach AdSense-Approval
