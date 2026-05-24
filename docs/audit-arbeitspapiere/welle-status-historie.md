@@ -2427,3 +2427,117 @@ Wenn MUSS erfüllt → AdSense-Resubmit-Ready. Wenn ein MUSS fehlschlägt → ST
 - **T2/T3 Tailwind-CSS-Diet** (~1–2 h, niedrige Akut-Lage) — Welle 16
 - **T6 Wortzahl-Polish** countdown + 20 Grenzfälle (~3 h optional) — Welle 16
 - **Prompt 68 CMP/Consent Mode v2:** nach AdSense-Approval
+
+---
+
+## WELLE 15C T7 — Render-Blocking-CSS Fix (24.05.2026)
+
+**Status:** ✓ abgeschlossen (Code), Visual-Regression + PSI-Verify stehen aus (Karsten)
+**Vorbedingung:** T6 hat CLS auf 0 gebracht (Karsten-Re-Measurement bestätigt). Verbleibendes Problem: LCP schwankt extrem (Mietrechner 2,1–7,4 s, BMI 5,4–7,5 s) wegen render-blocking CSS-Round-Trip.
+
+**PSI-Diagnose vor T7:**
+
+```
+Render blocking requests — Est savings of 150-370 ms
+  css/207d14f0a40e4e48.css   15,7 KiB   160–790 ms   ← Tailwind-Output
+  css/3add334ee59f67ac.css    1,3 KiB   450–490 ms   ← Inter Font-CSS
+```
+
+### Phase 1 — Diagnose ✓
+
+CSS-Files identifiziert via `head -c 300 .next/static/css/*.css`:
+- `207d14f0a40e4e48.css` (100 KB unminified / 15,7 KB Wire) = Tailwind-Reset + Utilities
+- `3add334ee59f67ac.css` (2,2 KB unminified / 1,3 KB Wire) = Inter Font-CSS (von `next/font/google`)
+- `next.config.mjs` ohne `experimental.optimizeCss`, `tailwind.config.ts` sauber
+
+### Phase 2 — Maßnahme B (experimental.optimizeCss) zuerst versucht, wirkungslos
+
+1. `experimental.optimizeCss: true` in `next.config.mjs` aktiviert
+2. `critters@^0.0.23` als devDependency installiert (Module-Error sonst beim Build)
+3. Build grün, aber Production-Server-Output (`curl http://localhost:3000/gesundheit/bmi-rechner`) zeigt:
+   - **0 Inline-`<style>`-Blocks**
+   - Beide `<link rel="stylesheet">` weiterhin render-blocking
+
+**Befund:** Bekanntes Next.js-Issue (#63635). `experimental.optimizeCss` greift in Next 14 App Router mit statisch generierten Pages NICHT. Sauber gerollbackt (next.config + critters deinstalliert), kein Commit.
+
+### Phase 2 — Maßnahme β (Inline-CSS-Selfbuild) gewählt und umgesetzt
+
+Karsten-Entscheidung nach STOP-Bericht: Maßnahme D aus dem Prompt-Katalog war als „hohes Risiko, nicht empfohlen" markiert; Maßnahme β (eigenes Build-Script statt Critters/Beasties-Plugin) als pragmatischer Mittelweg.
+
+| # | Commit | Inhalt |
+|---|---|---|
+| 1 | `faad40b` | `scripts/build-critical-css.mjs` kompiliert `app/globals.css` via Tailwind-CLI `--minify` und schreibt das Resultat als `CRITICAL_CSS`-String-Konstante nach `lib/critical-css.ts`. `prebuild`-Hook in `package.json` ergänzt. `.gitignore` schließt `lib/critical-css.ts` + `/tmp/` aus (Auto-Drift, analog zu `client-data.ts`). |
+| 2 | `fff81e6` | `app/layout.tsx`: `import './globals.css'` raus, `import { CRITICAL_CSS } from '@/lib/critical-css'` rein, neues explizites `<head>`-JSX mit `<style dangerouslySetInnerHTML={{ __html: CRITICAL_CSS }} />` vor dem Body. |
+| 3 | `96c2ead` | `scripts/verify-critical-css.mjs` testet 4 URLs gegen lokalen Production-Server: `<style>` ≥ 1 UND `<link rel="stylesheet">` ≤ 1. Manueller Lokal-Run alle 4 ✓ (Homepage, BMI, Mietrechner, Brutto-Netto). |
+| 4 | (folgt) | Doku-Sync |
+
+### Lokal-Verifikation (alle Tests grün)
+
+- `.next/static/css/` enthält nur noch das 2,2 KB Inter Font-CSS (Tailwind-File ist weg)
+- HTML-Größe BMI: 128 KB → 330 KB unminified
+- Gzip-Wire-Größe: vorheriges externes CSS 15,7 KB / Inline-Variante 15,9 KB (+0,2 KB durch JS-String-Escape, fast deckungsgleich)
+- 1 HTTP-Request weniger pro Page-Aufruf (CSS-Round-Trip entfällt)
+- `<style>`-Position: vor `</head>` und vor `<body` → korrekt im Head
+
+### Methodische Lehre (NEU, L-W15C-T7-1): `experimental.optimizeCss` ist in Next 14 App Router No-Op
+
+**Critters via `experimental.optimizeCss: true` greift in Next.js 14 App Router mit statisch generierten Pages NICHT.** Die Critters-Dependency wird beim Build geladen (sonst Module-Error), aber die App-Router-HTML-Pipeline umgeht das Critters-Webpack-Plugin. Build bleibt grün, der HTML-Output ist identisch — Schein-Sicherheit.
+
+**Pattern:** Bei Performance-Flag-Aktivierungen IMMER vor Commit lokal verifizieren (`npm start` + `curl` + Diff). Build-Erfolg allein ist kein Wirkungsnachweis. Bei No-Op: rollbacken, kein Schein-Code committen.
+
+Verifizierungs-Schritt jetzt als wiederverwendbares Verify-Script `scripts/verify-critical-css.mjs` im Repo.
+
+### Methodische Lehre (NEU, L-W15C-T7-2): Inline-CSS via Build-Script umgeht Plugin-Lücken
+
+**Wenn Next.js' built-in Optimizer (Critters/Beasties) für die eigene Setup-Konstellation nicht greift, ist ein eigenes Build-Script + Inline-Konstante die robusteste Lösung.** Der Trade-off ist explizit:
+
+- HTML wird ~16 KB Wire größer (Initial-Visit)
+- Browser-CSS-Cache geht für Re-Visits verloren
+- Aber: 1 Round-Trip weniger, sofortiger Render ohne Block
+
+Bei statischen Content-Sites mit hoher SEO-Wichtigkeit (Crawler, neue Visitors) ist der Trade-off klar gewonnen. Bei interaktiven Apps mit hoher Repeat-Visit-Quote wäre die Bewertung anders.
+
+**Pattern:** Wenn ein Standard-Performance-Flag in der eigenen Stack-Konstellation nicht funktioniert, vor Eskalation zu Framework-Upgrade einen Self-Build prüfen. Tailwind-CLI ist hier der Hebel — die Output-Größe ist klein genug, dass Inline-CSS in jedem Page-HTML akzeptabel ist.
+
+### Phase-4-Verify (ausstehend, Karsten manuell)
+
+**Visual-Regression** auf 5 Pages im Inkognito mit Hard-Refresh (`Strg + Shift + R`):
+- `/`
+- `/gesundheit/bmi-rechner`
+- `/wohnen/mietrechner`
+- `/finanzen/brutto-netto-rechner`
+- `/ueber-uns`
+
+Bei sichtbarer Regression: SOFORT `git revert 96c2ead fff81e6 faad40b` oder Vercel-Rollback.
+
+**PSI Re-Measurement** je 3 Messungen Median:
+- `https://www.rechenfix.de/gesundheit/bmi-rechner`
+- `https://www.rechenfix.de/wohnen/mietrechner`
+- `https://www.rechenfix.de/finanzen/brutto-netto-rechner`
+- `https://www.rechenfix.de/`
+
+**Erfolgs-Kriterien (definitiv letzter Sprint vor AdSense-Resubmit):**
+
+| Metrik | Ziel | Härte |
+|---|---|---|
+| PSI „Render blocking requests" | verschwunden oder nur 1,3 KB Font-CSS | **MUSS** |
+| LCP-Median BMI + Mietrechner | < 4 s | **MUSS** |
+| LCP-Streuung max | 2 s zwischen Messungen | SOLL |
+| Score-Median BMI + Mietrechner | 80+ | SOLL |
+| CLS bleibt 0 | — | **MUSS** |
+| Andere Pages unverändert/besser | — | **MUSS** |
+
+### Repo-Snapshot Session-Ende
+
+- **Branch:** main
+- **Letzte Commits:** `faad40b` `fff81e6` `96c2ead` + Doku-Commit (folgt)
+- **Build:** grün, Verify-Script alle 4 URLs ✓
+- **Working tree:** clean (außer auto-generierter `client-data.ts` + `lib/critical-css.ts` jetzt zusätzlich in .gitignore)
+
+### Backlog nach T7
+
+- **AdSense-Resubmit:** nach Karsten-Verify der T7-Effekte (definitiv letzter Performance-Sprint)
+- **Option A Preload-Hints** (Maßnahme A aus T7-Phase-2-Prompt): nicht nötig, β hat das Ziel erreicht
+- **T2/T3 Tailwind-CSS-Diet** (~1–2 h, niedrige Akut-Lage) — Welle 16
+- **T6 Wortzahl-Polish** countdown + 20 Grenzfälle (~3 h optional) — Welle 16
+- **Prompt 68 CMP/Consent Mode v2:** nach AdSense-Approval
