@@ -56,3 +56,8 @@ next-env.d.ts
 /history-check.*
 /sitemap-live-*.xml
 /doku-sync-*-patch.md
+
+# W15C-T7 — Auto-generierte Inline-Critical-CSS (siehe scripts/build-critical-css.mjs)
+# Wird per `prebuild`-Hook bei jedem `npm run build` neu erzeugt.
+/lib/critical-css.ts
+/tmp/
