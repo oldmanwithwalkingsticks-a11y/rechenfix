@@ -4,7 +4,29 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 22.05.2026
+**Stand:** 26.05.2026
+
+---
+
+## W15A.5 — Aktualisierungen-Seite + Feedback-Log — 26.05.2026
+
+**Anlass:** Public-Sichtbar-Machen des Nutzer-Feedback-Workflows als E-E-A-T-Asset vor AdSense-Resubmit. Erster dokumentierter Eintrag: Abi-Rechner-Hotfix (Nachkommastellen 1 → 2, Commit [ff103be](../../components/rechner/AbiRechner.tsx)) als Trigger für diese Welle.
+
+**Scope:**
+- Neue SSOT [`lib/feedback-log.ts`](../../lib/feedback-log.ts) — `FeedbackEntry`-Typ + `FeedbackStatus`-Union + statisches Array + `getLatestFeedbackDate()`-Helper.
+- Neue Public-Page [`app/aktualisierungen/page.tsx`](../../app/aktualisierungen/page.tsx) (Server Component): chronologisch absteigend sortierte Cards mit Status-Badge, Bereichs-Verlinkung (Pattern `kategorie/slug` → interner Link), Datum-Anfrage + optional Umsetzungs-Datum via [`formatGermanDate`](../../lib/format-date.ts).
+- Schema.org: `WebPage` + `BreadcrumbList` via bestehendem [`generateWebPageSchema`](../../lib/seo.ts) (W15B-Helper, kein neuer Code).
+- [`app/sitemap.ts`](../../app/sitemap.ts) erweitert: `/aktualisierungen` mit `lastModified=new Date(getLatestFeedbackDate())`, `priority=0.6`, `changeFrequency='monthly'`.
+- [`components/layout/Footer.tsx`](../../components/layout/Footer.tsx): Link in „Mehr"-Sektion zwischen „Über uns" und „Feedback geben".
+- [`scripts/slug-drift-scan.mjs`](../../scripts/slug-drift-scan.mjs) `META_ROUTES` um `aktualisierungen` ergänzt (Prebuild-Guard, M4-Pflege).
+
+**Commit:** `01b2de8` (Code-Commit, 5 Dateien, +239 Zeilen).
+
+**Spec-Drift dokumentiert:**
+- Prompt nannte `formatDate` aus `lib/format-date.ts`; Bestand exportiert `formatGermanDate` mit Lang-Form „26. Mai 2026" (nicht TT.MM.YYYY). Bestand verwendet, weil rechenfix-weit konsistent.
+- Prompt nannte `name`-Prop für Breadcrumbs; Bestand erwartet `label` (`{label, href?}`). Bestand verwendet, current page ohne `href` → automatisch fett gerendert.
+
+**Build-Status:** ✓ (`/aktualisierungen` als 651 B statische Route, kein TS-Fehler, alle 178 Rechner-URLs unverändert).
 
 ---
 
