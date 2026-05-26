@@ -20,12 +20,12 @@ const PUNKTE_NOTEN: { p: number; note: string }[] = [
 
 function punkteZuAbiNote(gesamtpunkte: number): number {
   const note = 17 / 3 - gesamtpunkte / 180;
-  const gerundet = Math.round(note * 10) / 10;
+  const gerundet = Math.round(note * 100) / 100;
   return Math.max(1.0, Math.min(4.0, gerundet));
 }
 
 function formatNote(n: number): string {
-  return n.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  return n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 export default function AbiRechner() {
