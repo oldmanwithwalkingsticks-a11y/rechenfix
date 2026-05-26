@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import { execSync } from 'node:child_process';
 import { kategorien, rechner } from '@/lib/rechner-config';
+import { getLatestFeedbackDate } from '@/lib/feedback-log';
 
 const SITE_URL = 'https://www.rechenfix.de';
 
@@ -34,6 +35,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: startseiteMtime,
       changeFrequency: 'weekly',
       priority: 1.0,
+    },
+    {
+      url: `${SITE_URL}/aktualisierungen`,
+      lastModified: new Date(getLatestFeedbackDate()),
+      changeFrequency: 'monthly',
+      priority: 0.6,
     },
     // /ki-rechner bewusst nicht in Sitemap (W15A.4: noindex + nav-hide)
   ];

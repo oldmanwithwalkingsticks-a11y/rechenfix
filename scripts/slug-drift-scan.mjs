@@ -56,6 +56,7 @@ const META_ROUTES = new Set([
   'barrierefreiheit',
   'qualitaet',
   'ueber-uns',
+  'aktualisierungen',
   // Sonder-Targets (Next.js-generated oder Metadata-only Routes)
   'opengraph-image',
   'sitemap.xml',
