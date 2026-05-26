@@ -8,6 +8,46 @@
 
 ---
 
+## 26.05.2026 — W15A.5 + W15B-Final abgeschlossen
+
+**W15A.5 (Code-Sprint):**
+- Hotfix Abi-Rechner: Alle Werte (Block-I, Block-II,
+  Gesamtdurchschnitt) von 1 → 2 Nachkommastellen (User-Feedback)
+- Neue Public-Page /aktualisierungen mit lib/feedback-log.ts
+  (statisches FEEDBACK_LOG-Array, FeedbackEntry-Typ,
+  getLatestFeedbackDate-Helper)
+- Page mit Status-Badges (umgesetzt/in-umsetzung/eingegangen/
+  abgelehnt), Bereichs-Verlinkung, formatDate aus W15A.2
+- WebPage + BreadcrumbList Schema (kein WebApplication-Duplikat)
+- Sitemap-Eintrag + Footer-Link in "Mehr"-Sektion (nach
+  "Über uns", vor "Impressum")
+- Erster Eintrag: Abi-Rechner-Hotfix selbst
+- Pattern: Bei künftigen Nutzer-Feedback-Hotfixes neuen Eintrag
+  in FEEDBACK_LOG ergänzen
+
+**W15B Final-Verify (Search Console):**
+- A) Mobile-Usability: CrUX-Daten noch nicht verfügbar
+  (normal, 28d Sammelperiode nach W15-Performance-Sprint)
+- B) Sitemap: 195 URLs, ✓ erfolgreich, heute gelesen
+- C) Index-Coverage: 175 indexiert, KEINE Fehler-Kategorien,
+  alle 6 W15B-Long-Tails indexiert; /aktualisierungen +
+  Über-uns zur Indexierung beantragt
+- Status-204-Bug aus W14-Backlog: scheinbar mit
+  Re-Indexierung mitgesäubert (keine Umleitungs-Fehler mehr)
+
+**Stand vor AdSense-Resubmit:**
+- Strukturell stärkste Submission, die rechenfix je hatte
+- Alle 4 Dossier-Killer-Faktoren adressiert (E-E-A-T,
+  Footer-Drift, Affiliate-Dichte, Long-Tail-Thin-Content)
+- E-E-A-T-Signale verstärkt um Reaktivität (Abi-Fix in Stunden)
+  und Transparenz (öffentliches Feedback-Log)
+
+**Wartephase:**
+1-5 Tage bis /aktualisierungen + Über-uns indexiert, dann
+AdSense-Resubmit via "Erneut beantragen".
+
+---
+
 ## W15A.5 — Aktualisierungen-Seite + Feedback-Log — 26.05.2026
 
 **Anlass:** Public-Sichtbar-Machen des Nutzer-Feedback-Workflows als E-E-A-T-Asset vor AdSense-Resubmit. Erster dokumentierter Eintrag: Abi-Rechner-Hotfix (Nachkommastellen 1 → 2, Commit [ff103be](../../components/rechner/AbiRechner.tsx)) als Trigger für diese Welle.
