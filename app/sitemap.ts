@@ -85,6 +85,52 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
+  // Meta-Pages (E-E-A-T + Rechtliches). W15A.6: in Sitemap aufgenommen,
+  // damit Google von uns ein aktives Indexierungs-Signal mit lastmod
+  // erhält — vorher rein über Footer-Crawl erreichbar.
+  // Bewusst NICHT in Sitemap:
+  //   - /ki-rechner (noindex seit W15A.4)
+  //   - /admin/affiliate-stats (intern)
+  //   - /aktualisierungen (steht bereits in staticPages)
+  const metaPages: MetadataRoute.Sitemap = [
+    {
+      url: `${SITE_URL}/ueber-uns`,
+      lastModified: gitMtime('app/ueber-uns/page.tsx'),
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
+    {
+      url: `${SITE_URL}/qualitaet`,
+      lastModified: gitMtime('app/qualitaet/page.tsx'),
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
+    {
+      url: `${SITE_URL}/feedback`,
+      lastModified: gitMtime('app/feedback/page.tsx'),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+    {
+      url: `${SITE_URL}/barrierefreiheit`,
+      lastModified: gitMtime('app/barrierefreiheit/page.tsx'),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+    {
+      url: `${SITE_URL}/impressum`,
+      lastModified: gitMtime('app/impressum/page.tsx'),
+      changeFrequency: 'yearly',
+      priority: 0.2,
+    },
+    {
+      url: `${SITE_URL}/datenschutz`,
+      lastModified: gitMtime('app/datenschutz/page.tsx'),
+      changeFrequency: 'yearly',
+      priority: 0.2,
+    },
+  ];
+
   // Rechner: mtime der Config-Datei ihrer Kategorie (dasselbe Datum wie die
   // Kategorieseite — Content-Änderung an einem Rechner aktualisiert lastmod
   // für die ganze Kategorie, was ein starkes Re-Crawl-Signal ist).
@@ -95,5 +141,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...longTailPages, ...sonderseiten, ...kategoriePages, ...rechnerPages];
+  return [...staticPages, ...longTailPages, ...sonderseiten, ...kategoriePages, ...metaPages, ...rechnerPages];
 }
