@@ -27,9 +27,9 @@ export type FeedbackEntry = {
 
 export const FEEDBACK_LOG: FeedbackEntry[] = [
   {
-    id: '2026-05-26-02',
-    datumAnfrage: '2026-05-26',
-    datumUmsetzung: '2026-05-26',
+    id: '2026-05-31-01',
+    datumAnfrage: '2026-05-31',
+    datumUmsetzung: '2026-05-31',
     status: 'umgesetzt',
     bereich: 'auto/reichweiten-rechner',
     wunsch:
