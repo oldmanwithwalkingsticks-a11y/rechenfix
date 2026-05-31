@@ -35,12 +35,33 @@ const TEMP_LABEL: Record<TempBereich, string> = {
   ueber25: 'Über 25 °C (mit Klima)',
 };
 
+/**
+ * Fahrstil-Faktoren (Divisor-Logik analog FAHRPROFIL_FAKTOR).
+ * Quellen: ADAC E-Auto-Reichweiten-Tests, AutoScout24-
+ * Reichweiten-Doku, enivio Reichweitenrechner.
+ * Stichtag: 26.05.2026.
+ *
+ * sparsam:   vorausschauend, konsequente Rekuperation
+ *            → ~12 % weniger Verbrauch → Divisor 1/0,88 ≈ 1,14
+ * normal:    Referenz
+ * sportlich: häufige Beschleunigung, späte Bremsmanöver
+ *            → ~15 % mehr Verbrauch → Divisor 1/1,15 ≈ 0,87
+ */
+const FAHRSTIL_FAKTOR = {
+  sparsam: 1.14,
+  normal: 1.00,
+  sportlich: 0.87,
+} as const;
+
+type Fahrstil = keyof typeof FAHRSTIL_FAKTOR;
+
 export default function ReichweitenRechner() {
   const [akku, setAkku] = useState('60');
   const [wltp, setWltp] = useState('400');
   const [profil, setProfil] = useState<Fahrprofil>('gemischt');
   const [temp, setTemp] = useState<TempBereich>('10bis25');
   const [klima, setKlima] = useState(false);
+  const [fahrstil, setFahrstil] = useState<Fahrstil>('normal');
   const [strompreis, setStrompreis] = useState(STROMPREIS_DEFAULT);
 
   const nAkku = parseDeutscheZahl(akku);
@@ -52,7 +73,11 @@ export default function ReichweitenRechner() {
       return null;
     }
     const wltpVerbrauch = (nAkku / nWltp) * 100; // kWh/100km WLTP
-    const gesamtFaktor = FAHRPROFIL_FAKTOR[profil] * TEMP_FAKTOR[temp] * (klima ? 0.90 : 1.00);
+    const gesamtFaktor =
+        FAHRPROFIL_FAKTOR[profil]
+      * TEMP_FAKTOR[temp]
+      * (klima ? 0.90 : 1.00)
+      * FAHRSTIL_FAKTOR[fahrstil];
     const realVerbrauch = wltpVerbrauch / gesamtFaktor;
     const realReichweite = (nAkku / realVerbrauch) * 100;
     const ladekosten100 = (realVerbrauch * nPreis) / 100;
@@ -68,7 +93,7 @@ export default function ReichweitenRechner() {
       verlust,
       verlustProzent,
     };
-  }, [nAkku, nWltp, profil, temp, klima, nPreis]);
+  }, [nAkku, nWltp, profil, temp, klima, fahrstil, nPreis]);
 
   const fmt = (n: number) =>
     n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -144,6 +169,22 @@ export default function ReichweitenRechner() {
         />
       </div>
 
+      {/* Fahrstil (W16.0-rev2) */}
+      <div className="mb-5">
+        <RadioToggleGroup
+          name="reichweite-fahrstil"
+          legend="Fahrstil"
+          options={[
+            { value: 'sparsam', label: 'Sparsam' },
+            { value: 'normal', label: 'Normal' },
+            { value: 'sportlich', label: 'Sportlich' },
+          ]}
+          value={fahrstil}
+          onChange={(v) => setFahrstil(v as Fahrstil)}
+          columns={3}
+        />
+      </div>
+
       {/* Strompreis */}
       <div className="mb-6">
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Strompreis</label>
@@ -216,6 +257,7 @@ export default function ReichweitenRechner() {
           fahrprofil: profil,
           temperatur: TEMP_LABEL[temp],
           klimaHeizung: klima ? 'An' : 'Aus',
+          fahrstil: fahrstil,
           strompreisCtProKwh: fmt(nPreis),
         }}
         ergebnis={
