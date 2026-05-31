@@ -27,6 +27,27 @@ export type FeedbackEntry = {
 
 export const FEEDBACK_LOG: FeedbackEntry[] = [
   {
+    id: '2026-05-26-02',
+    datumAnfrage: '2026-05-26',
+    datumUmsetzung: '2026-05-26',
+    status: 'umgesetzt',
+    bereich: 'auto/reichweiten-rechner',
+    wunsch:
+      'Erweiterte Faktoren für realistischere ' +
+      'Reichweiten-Berechnung',
+    kommentar:
+      'Nutzer-Hinweis bezog sich darauf, dass zu wenige Faktoren ' +
+      'berücksichtigt würden. Tatsächlich waren Fahrprofil, ' +
+      'Außentemperatur und Klimaanlage bereits als Eingaben ' +
+      'enthalten — das ging aus der Bedienung möglicherweise ' +
+      'nicht klar genug hervor. Neu hinzugefügt: Fahrstil ' +
+      '(sparsam/normal/sportlich) als vierter Faktor analog ' +
+      'ADAC- und AutoScout24-Standard. Mitfahrer-Gewicht und ' +
+      'Straßenbelag haben physikalisch nur sehr geringen ' +
+      'Einfluss (1-3 %) und werden im FAQ transparent ' +
+      'eingeordnet.',
+  },
+  {
     id: '2026-05-26-01',
     datumAnfrage: '2026-05-26',
     datumUmsetzung: '2026-05-26',
