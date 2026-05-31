@@ -613,7 +613,13 @@ Weniger attraktiv wird die Rechnung bei häufigen Langstrecken mit Schnelllader-
 - Die **realistische Reichweite** in km — abhängig von Ihrem Fahrprofil
 - Den **Realverbrauch** in kWh/100 km
 - Die **Ladekosten** pro 100 km und pro voller Ladung
-- Den **Abschlag gegenüber WLTP** in Prozent`,
+- Den **Abschlag gegenüber WLTP** in Prozent
+
+**Welche Faktoren der Rechner berücksichtigt**
+
+Der Reichweiten-Rechner kombiniert vier Praxis-Faktoren mit dem WLTP-Wert deines Fahrzeugs: **Fahrprofil** (Stadt, gemischt, Autobahn), **Außentemperatur**, **Klimaanlage oder Heizung** und **Fahrstil**. Die Größenordnungen der Korrekturen orientieren sich an den E-Auto-Reichweiten-Tests des ADAC und an Praxis-Daten weiterer Anbieter.
+
+Manchmal werden zusätzliche Eingaben wie Mitfahrer-Anzahl oder Straßenbelag gewünscht. Beides hat in der Praxis nur sehr geringen Effekt: Eine zusätzliche Person erhöht den Verbrauch auf der Autobahn um etwa ein bis zwei Prozent, der Straßenbelag variiert im Alltag (durchgängig Asphalt) kaum messbar. Auch der ADAC-Reichweiten-Rechner und vergleichbare Tools verzichten deshalb bewusst auf diese Inputs — sie würden die Bedienung verkomplizieren, ohne die Vorhersage spürbar genauer zu machen.`,
     faq: [
       {
         frage: 'Warum erreiche ich die WLTP-Reichweite nie?',
@@ -638,6 +644,18 @@ Weniger attraktiv wird die Rechnung bei häufigen Langstrecken mit Schnelllader-
       {
         frage: 'Wie groß sollte der Akku sein?',
         antwort: 'Für reine Pendler reichen 40–50 kWh völlig aus (200–300 km real). Wer regelmäßig Langstrecken fährt, sollte 70 kWh aufwärts anpeilen — bessere Realreichweite, weniger Ladestopps. Riesige 100-kWh-Akkus haben Nachteile: höheres Gewicht, höhere Anschaffungskosten, längere Ladezeit zu Hause. Die beste Wahl richtet sich nach Ihrem 95-%-Fahrprofil, nicht nach seltenen Langstrecken-Ausnahmen.',
+      },
+      {
+        frage: 'Warum berücksichtigt der Rechner nicht die Anzahl der Mitfahrer?',
+        antwort: 'Das Gewicht zusätzlicher Personen wirkt sich auf den Energieverbrauch eines E-Autos nur geringfügig aus — auf der Autobahn etwa ein bis zwei Prozent pro Person. Geschwindigkeit, Temperatur, Klimaanlage und Fahrstil haben einen deutlich größeren Effekt und sind deshalb als Eingaben vorgesehen. Auch der ADAC-Reichweiten-Rechner verzichtet aus demselben Grund auf eine Mitfahrer-Eingabe.',
+      },
+      {
+        frage: 'Was bedeutet ein „sparsamer" Fahrstil konkret?',
+        antwort: 'Sparsam fährt, wer vorausschauend rollt statt zu bremsen, frühzeitig vom Gas geht und die Rekuperation konsequent nutzt. Konstante Geschwindigkeiten und sanftes Beschleunigen senken den Verbrauch um rund 12 Prozent gegenüber einer durchschnittlichen Fahrweise. Sportliches Fahren mit häufigen Beschleunigungen und späten Bremsmanövern liegt rund 15 Prozent über dem Normalwert.',
+      },
+      {
+        frage: 'Welche Faktoren wirken am stärksten auf die reale Reichweite?',
+        antwort: 'Den größten Einfluss haben Fahrprofil und Außentemperatur. Auf der Autobahn bei 130 km/h liegt der Verbrauch rund 25 Prozent über dem Stadtwert, bei minus zehn Grad kosten Heizung und langsamere Batteriechemie weitere etwa 25 Prozent. Klimaanlage und Fahrstil verändern die Reichweite jeweils um rund 10 bis 15 Prozent. Mitfahrer-Gewicht und Straßenbelag wirken dagegen nur im einstelligen Prozentbereich und sind deshalb keine eigenen Eingaben.',
       },
     ],
   },
