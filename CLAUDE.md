@@ -801,6 +801,20 @@ Reihenfolge nach Freigabe: erst 85 (Warning wegräumen), dann 68 (CMP dazu).
 - **P3-B1-Doku-Sync** (Commit c6876c1) — P3-B1 ueberstunden-Refactor in 4 Doku-Ankern nachgetragen (welle-status-historie, CLAUDE.md, projekt-referenz, SKILL.md); Numerik 7/9 ✅, Welle-3-Backlog-Counts und Detail-Sektion-Header synchron ✅
 - **Welle-3-Tail-Anker-Sync** (Commit 0c426b6) — Welle-3-Tail Doku-Anker konsolidiert: 157 in projekt-referenz/SKILL.md/CLAUDE.md ergänzt, 152c-Eintrag in CLAUDE.md/projekt-referenz/SKILL.md ergänzt, Validation-Sweep mit Scoping-Bullet-Schablone in 3 Doku-Ankern verankert, P3-B1-Lücke in projekt-referenz-Done-Liste geschlossen, Numerik durchgängig auf 8/10 harmonisiert ✅
 
+### Welle 17A — Social-Media Pipeline (Juni 2026)
+
+- **W17A.C1** (Commit 132c90a) — `lib/social/schema.ts` (SocialPost + PostsFile v1) + `lib/social/config.ts` (SOCIAL_CONFIG) + leeres `lib/social/posts.json`. Karsten füllt 10 Phase-0-Posts parallel via `docs/welle17a-phase0-captions.md` ✅
+- **W17A.C2** (Commit bf0189c) — `lib/social/instagram.ts` (2-Step Publish: Container → media_publish) + `lib/social/facebook.ts` (/photos Single-Call). Beide via fetch (kein SDK), 30 s AbortController-Timeout, gemeinsame `MetaApiError`-Klasse mit `.code` / `.platform` / `.step` ✅
+- **W17A.C3** (Commit 5d7a72e) — `lib/social/utils.ts` (Berlin-Zone via Intl.DateTimeFormat 'en-CA') + `lib/social/state.ts` (KV-Wrapper auf bestehender `redis`-Instance in `lib/redis.ts`, Keys `social:posted:{date}:{platform}` + `social:errors:...`) + `lib/social/publisher.ts` (`getPostForToday` + `publishToBothPlatforms`; IG/FB unabhängig, kein Short-Circuit). Smoketest UTC↔Berlin + Rotation 10-Posts alle Asserts ✓ ✅
+- **W17A.C4** (Commit b075cc7) — `app/api/cron/social-post/route.ts` (GET-Handler, Bearer-Auth via CRON_SECRET, `?force=true` / `?test=true` + `?admin=…` für Production-Dry-Run) + `vercel.json` neu angelegt (Schedule `0 17 * * *` = 19 Berlin Sommer / 18 Winter, DST-Drift akzeptiert). Bei Plattform-Fehler Resend-Mail an ADMIN_NOTIFICATION_EMAIL, 503-Response ✅
+- **W17A.C5** (folgt in diesem Commit) — Doku-Sync: `docs/social-pipeline.md` neu (9 Sektionen Architektur/Token-Generation/ENVs/Skalierung/Troubleshooting/KV-Schema), CLAUDE.md L-Lehren W17A.1–3, Welle-Status-Historie W17A-Eintrag
+
+### Methodische Lehren (NEU, Welle 17A)
+
+- **L-W17A.1: IG↔FB-Verknüpfung blockiert wegen Werbekonto-Restriction.** Im Business-Portfolio von Rechenfix war die automatische Instagram-zu-Facebook-Crosspost-Verknüpfung blockiert (Meta-Support-Ticket vom 03.06.2026). Ursache war eine Werbekonto-Restriction, die in Meta-Business-Settings sichtbar wurde, sobald wir das automatische Cross-Posting aktivieren wollten. **Pattern für vergleichbare Fälle:** vor Annahme „IG postet automatisch auf FB" konkret in den Business-Settings prüfen, ob die Verknüpfung wirklich aktiv ist — sonst silent failure ohne API-Fehler.
+- **L-W17A.2: Variante B (2 API-Calls) robuster als Crosspost.** Statt auf die Crosspost-Verknüpfung zu warten haben wir die Pipeline auf zwei separate API-Calls (Instagram Graph API + Facebook Page API) gebaut. Vorteile: (a) jede Plattform unabhängig deploybar/debugbar, (b) bei IG-Fehler trotzdem FB-Post (kein Short-Circuit im Publisher), (c) keine Verknüpfungs-Drift bei Meta-Policy-Changes. Trade-off: 2 ENV-Vars + 2 Error-Pfade statt einem. Bei Welle 17B (TikTok) analog: lieber eigener API-Call statt Crosspost-Magie.
+- **L-W17A.3: MVP-Datenbasis mit 10 Initial-Posts ausreicht für Pipeline-Live.** Statt mit 30+ Posts zu starten haben wir mit 10 Phase-0-Posts live geschaltet. Die Pipeline rotiert dann alle 10 Tage durch denselben Pool — akzeptabler Initial-Cycle. Erweiterung auf 30+ und 170 Posts in eigenem Sprint (17A.X). **Pattern:** bei MVP-Pipelines lieber **früh live mit Minimum-Datensatz** als **spät live mit voller Datenbasis**. Pipeline-Bugs zeigen sich erst im Live-Betrieb (z. B. Rate-Limits, DST-Drift, Token-Drift); ein 10-Post-Live-Run liefert dieselben Lessons-Learned wie ein 170-Post-Live-Run, schneller und billiger.
+
 ---
 
 ## Pattern-Goldstandard (Welle 13, Stand 08.05.2026)

@@ -2603,3 +2603,60 @@ Bei sichtbarer Regression: SOFORT `git revert 96c2ead fff81e6 faad40b` oder Verc
 - **T2/T3 Tailwind-CSS-Diet** (~1–2 h, niedrige Akut-Lage) — Welle 16
 - **T6 Wortzahl-Polish** countdown + 20 Grenzfälle (~3 h optional) — Welle 16
 - **Prompt 68 CMP/Consent Mode v2:** nach AdSense-Approval
+
+---
+
+## WELLE 17A — Social-Media Pipeline (Juni 2026)
+
+**Status:** Code 5/5 Commits durch, Live-Test + posts.json-Fill steht aus (Karsten).
+**Vorbedingung:** Phase 0 abgeschlossen (10 manuelle Instagram-Posts erfolgreich, 04.06.2026). Variante B (2 separate API-Calls IG + FB) gewählt, weil IG↔FB-Verknüpfung im Business-Portfolio blockiert ist (L-W17A.1).
+
+**Architektur-Eckpunkte (fest):**
+- Variante B: separate API-Calls für Instagram Graph API + Facebook Page API
+- MVP-Datenbasis: 10 Phase-0-Posts initial, Rotation `(today_Berlin − startDate) mod posts.length`
+- Long-Lived Page Access Token (never expires) für beide Plattformen
+- Vercel KV (Upstash via Vercel-Integration) als State (Idempotenz + Error-Log)
+- Vercel Cron, 1× täglich um 17 UTC = 19 Berlin Sommer (DST-Drift akzeptiert)
+- Resend für Admin-Fehlermails, wiederverwendet bestehender `RESEND_API_KEY`
+
+### Code-Commits (alle gepusht)
+
+| # | Commit | Inhalt |
+|---|---|---|
+| C1 | `132c90a` | `lib/social/schema.ts` (SocialPost + PostsFile v1) + `lib/social/config.ts` (SOCIAL_CONFIG mit START_DATE 2026-06-05) + leeres `lib/social/posts.json` |
+| C2 | `bf0189c` | `lib/social/instagram.ts` (2-Step Publish) + `lib/social/facebook.ts` (Single-Call /photos). `MetaApiError`-Klasse mit `.code` / `.platform` / `.step`. 30 s AbortController-Timeout. Keine Retries. |
+| C3 | `5d7a72e` | `lib/social/utils.ts` (Berlin-Date via `Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Berlin' })` + Rotations-Modulo mit Negativ-Fix) + `lib/social/state.ts` (KV-Wrapper auf bestehender `redis`-Instance) + `lib/social/publisher.ts` (Orchestration, IG/FB unabhängig) |
+| C4 | `b075cc7` | `app/api/cron/social-post/route.ts` (Bearer-Auth via CRON_SECRET, `?force=true` / `?test=true` + `?admin=…` Auth, Resend-Mail bei Fehler) + `vercel.json` neu angelegt (Schedule `0 17 * * *`) |
+| C5 | folgt | Doku: `docs/social-pipeline.md` neu, CLAUDE.md L-Lehren W17A.1–3, dieser Eintrag |
+
+### Methodische Lehren
+
+- **L-W17A.1**: IG↔FB-Verknüpfung blockiert wegen Werbekonto-Restriction → Variante B als Workaround
+- **L-W17A.2**: Variante B (2 API-Calls) robuster als Crosspost (kein Short-Circuit, unabhängige Plattform-Fehler-Behandlung)
+- **L-W17A.3**: MVP-Datenbasis mit 10 Initial-Posts ausreicht für Pipeline-Live; Erweiterung iterativ in 17A.X
+
+Volltext in CLAUDE.md → „Methodische Lehren (NEU, Welle 17A)".
+
+### Was steht noch aus
+
+**Karsten parallel:**
+1. **Meta-Setup (P1)**: Token generieren (siehe `docs/social-pipeline.md` § 2), 4 ENV-Vars in Vercel setzen (META_PAGE_ACCESS_TOKEN, META_PAGE_ID, META_INSTAGRAM_USER_ID, ADMIN_NOTIFICATION_EMAIL), plus CRON_SECRET + ADMIN_PASSWORD generieren falls nicht da.
+2. **Phase-0-Assets (P3)**: 10 PNGs `01-brutto-netto.png` … `10-stromkosten.png` als `001.png` … `010.png` in `public/social-posts/` ablegen; Captions in `docs/welle17a-phase0-captions.md` einpflegen.
+3. **posts.json-Fill** (durch Claude, sobald Captions-Doku da ist): die 10 Phase-0-Einträge ins leere `posts.json`-Array übernehmen.
+4. **Live-Test (mit Karsten zusammen)**: `curl -H "Authorization: Bearer $CRON_SECRET" "https://www.rechenfix.de/api/cron/social-post?force=true"` → IG + FB Live-Post verifizieren.
+
+### Repo-Snapshot Session-Ende
+
+- **Branch:** main
+- **Letzte Commits:** `132c90a` `bf0189c` `5d7a72e` `b075cc7` + Doku-Commit (dieser)
+- **Build:** grün, alle Prebuild-Hooks ✔
+- **Working tree:** clean (außer auto-generierter `client-data.ts` + `lib/critical-css.ts` + Untracked-Stack)
+
+### Backlog nach W17A
+
+- **W17A-Posts-Fill**: 10 Phase-0-Posts in `posts.json` einpflegen (sobald Captions-Doku da)
+- **W17A-Live-Test**: erster Karsten-+-Claude-Live-Test über `?force=true`
+- **W17A.X**: Erweiterung auf 30+ und später 170 Posts; Python-Image-Builder portieren
+- **W17A.Y**: AI-Caption-Generator (Anthropic-API)
+- **W17B**: TikTok-Pipeline (Remotion-Videos)
+- **W17C**: Analytics + A/B-Tests
