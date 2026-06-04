@@ -9,9 +9,16 @@
  *   social:posted:{YYYY-MM-DD}:facebook  → postId  (string)
  *   social:errors:{YYYY-MM-DD}:instagram → JSON { error, code, step, ts }
  *   social:errors:{YYYY-MM-DD}:facebook  → JSON { error, code, step, ts }
+ *   social:done:{slug}                   → YYYY-MM-DD (Datum des erfolg. Posts)
  *
- * Idempotenz: wasPostedToday() vor jedem API-Call → Skip falls true.
- * Force-Override im Cron-Endpoint via ?force=true.
+ * Idempotenz pro Tag/Plattform: wasPostedToday() vor jedem API-Call
+ * → Skip falls true. Force-Override im Cron-Endpoint via ?force=true.
+ *
+ * Done-Marken pro Slug (W17A.1): nach mindestens einem erfolgreichen
+ * Plattform-Post wird der Slug als „durch" markiert und in der Pipeline
+ * nie wieder ausgewählt. Damit keine Wiederholungen — anders als die
+ * Modulo-Rotation aus W17A. Queue-Reset = manuelles Löschen aller
+ * social:done:* Keys (siehe docs/social-pipeline.md §6).
  */
 
 import { redis } from '@/lib/redis';
@@ -32,6 +39,10 @@ function postedKey(date: string, platform: Platform): string {
 
 function errorKey(date: string, platform: Platform): string {
   return `social:errors:${date}:${platform}`;
+}
+
+function doneKey(slug: string): string {
+  return `social:done:${slug}`;
 }
 
 /**
@@ -74,4 +85,25 @@ export async function logError(
     ts: new Date().toISOString(),
   };
   await redis.set(errorKey(date, platform), JSON.stringify(entry));
+}
+
+/**
+ * Prüft, ob ein Slug bereits über die Pipeline gepostet wurde
+ * (mindestens eine Plattform-Erfolg). Verwendet vom Publisher
+ * für die Queue-Iteration: ein Slug mit Done-Marke wird übersprungen.
+ */
+export async function isSlugDone(slug: string): Promise<boolean> {
+  const v = await redis.get(doneKey(slug));
+  return v !== null && v !== undefined;
+}
+
+/**
+ * Markiert einen Slug als „durch". Speichert das Berlin-Datum des
+ * Erst-Posts als Wert (für späteres Reporting).
+ *
+ * Aufruf-Stelle: Publisher, nachdem mindestens IG ODER FB success war
+ * (kein Re-Post bei Teil-Fehler).
+ */
+export async function markSlugDone(slug: string, dateBerlin: string): Promise<void> {
+  await redis.set(doneKey(slug), dateBerlin);
 }
