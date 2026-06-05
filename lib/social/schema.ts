@@ -38,3 +38,36 @@ export interface PostsFile {
   /** Posts in fester Reihenfolge. Rotation = (today − startDate) mod posts.length. */
   posts: SocialPost[];
 }
+
+// =============================================================
+// W17A.1 — Auto-Content-Pipeline-Schema
+// =============================================================
+
+/**
+ * Queue-File: Seeded-Shuffle aller eligible Slugs (siehe
+ * scripts/build-social-queue.ts). Slug-Reihenfolge ist deterministisch
+ * und nicht mehr modulo, sondern „erster Eintrag ohne Done-Marke".
+ */
+export interface QueueFile {
+  version: 1;
+  seed: number;
+  generatedAt: string; // YYYY-MM-DD
+  excludedSlugs: string[];
+  queue: string[];
+}
+
+/**
+ * Captions-File: pro Slug die fertig formulierten IG/FB-Captions
+ * + Hashtags. Erzeugt durch scripts/social-caption-builder.mjs
+ * (lokal, Anthropic-API) und committed.
+ */
+export interface CaptionEntry {
+  captionIg: string;
+  captionFb: string;
+  hashtags: string;
+}
+
+export interface CaptionsFile {
+  version: 1;
+  captions: Record<string, CaptionEntry>;
+}

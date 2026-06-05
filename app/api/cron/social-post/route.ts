@@ -41,7 +41,9 @@ async function sendErrorMail(result: PublishResult): Promise<void> {
   }
 
   const lines: string[] = [
-    `Social-Pipeline-Fehler am ${result.date} (postIndex: ${result.postIndex ?? 'n/a'}).`,
+    `Social-Pipeline-Fehler am ${result.date} (slug: ${result.slug ?? 'n/a'}).`,
+    `Queue erschöpft: ${result.queueExhausted ? 'JA' : 'nein'}`,
+    `Bild vorhanden: ${result.imageExists ?? false} · Caption vorhanden: ${result.captionExists ?? false}`,
     '',
     `Instagram: ${result.instagram.success ? 'OK' : 'FAIL'}`,
     `  postId/skipped: ${result.instagram.postId ?? (result.instagram.skipped ? 'skipped' : '-')}`,
@@ -108,9 +110,24 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   // 4) Publish
   const result = await publishToBothPlatforms(force, dryRun);
 
-  // 5) Mail bei Fehler (nur wenn nicht dryRun und mindestens eine Plattform failed)
+  // 5) Dry-Run: keine Mail, kein 503 — auch wenn Queue erschöpft oder
+  // Bild/Caption fehlt. Wir wollen die Diagnose-Info im JSON sehen.
+  if (dryRun) {
+    return NextResponse.json(result);
+  }
+
+  // 6) Queue-erschöpft ist KEIN Fehler-Email-Anlass (alle Slugs sind durch).
+  // Bild/Caption-Fehlen IST ein Fehler (Daten-Lücke).
+  if (result.queueExhausted) {
+    return NextResponse.json(
+      { ...result, note: 'queue erschöpft — alle Slugs gepostet, keine Action nötig' },
+      { status: 200 },
+    );
+  }
+
+  // 7) Mail bei Fehler (mind. eine Plattform failed ODER Daten-Lücke)
   const anyFail = !result.instagram.success || !result.facebook.success;
-  if (!dryRun && anyFail) {
+  if (anyFail) {
     await sendErrorMail(result);
     return NextResponse.json(result, { status: 503 });
   }

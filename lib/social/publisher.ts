@@ -1,30 +1,48 @@
 /**
- * W17A — Publisher: Rotation + Cross-Platform-Orchestration.
+ * W17A.1 — Publisher: Queue-Iteration + Cross-Platform-Orchestration.
  *
- * - getPostForToday(now?) wählt den Post aus posts.json basierend auf
- *   (Berlin-Heute − START_DATE) mod posts.length.
- * - publishToBothPlatforms(force, dryRun) postet IG zuerst, FB danach;
- *   die beiden Plattformen sind unabhängig — wenn IG scheitert, wird
- *   FB trotzdem versucht.
+ * Ablöse des W17A-Modulo-Rotations-Patterns:
  *
- * Idempotenz über state.wasPostedToday(). Force ?=true im Endpoint
- * überspringt den Check (z. B. für manuellen Live-Test mit Karsten).
+ *   ALT (W17A): post = posts[(today − startDate) mod posts.length]
+ *   NEU (17A.1): post = ersten Slug in queue.json ohne Done-Marke
+ *                in KV (social:done:{slug}). Queue erschöpft → null.
+ *
+ * Datenquellen:
+ *   - lib/social/queue.json        : 160 Slug-Reihenfolge (Seeded-Shuffle)
+ *   - lib/social/captions.json     : pro Slug captionIg/captionFb/hashtags
+ *   - lib/rechner-config (rechner) : titel, kategorieSlug, slug, icon …
+ *   - public/social-posts/{slug}.png : Bild-File-Existenz (fs.existsSync)
+ *
+ * Plattform-Posten unabhängig (kein Short-Circuit). Done-Marke wird
+ * gesetzt, sobald MINDESTENS eine Plattform Success ist — sonst wäre
+ * der Slug am nächsten Tag erneut auf der erfolgreichen Plattform
+ * → Duplikat.
  */
 
-import postsFile from './posts.json';
-import type { PostsFile, SocialPost } from './schema';
+import { existsSync } from 'fs';
+import { join } from 'path';
+import queueFile from './queue.json';
+import captionsFile from './captions.json';
+import type { QueueFile, CaptionsFile, SocialPost } from './schema';
 import { SOCIAL_CONFIG } from './config';
-import { getBerlinDate, getPostIndexForDay } from './utils';
+import { rechner } from '@/lib/rechner-config';
+import { getBerlinDate } from './utils';
 import { publishToInstagram } from './instagram';
 import { publishToFacebook } from './facebook';
 import {
   wasPostedToday,
   markPosted,
   logError,
+  isSlugDone,
+  markSlugDone,
   type Platform,
 } from './state';
 
-const POSTS = postsFile as unknown as PostsFile;
+const QUEUE = queueFile as unknown as QueueFile;
+const CAPTIONS = captionsFile as unknown as CaptionsFile;
+
+/** Pfad-Konstante für Bild-Existenz-Check zur Laufzeit (Vercel-Lambda). */
+const IMAGES_DIR = join(process.cwd(), 'public', 'social-posts');
 
 export interface PlatformResult {
   success: boolean;
@@ -36,22 +54,77 @@ export interface PlatformResult {
 
 export interface PublishResult {
   date: string;
-  postIndex: number | null;
+  /** Slug des heutigen Posts, oder null wenn Queue erschöpft / Daten fehlen. */
+  slug: string | null;
+  /** True wenn alle Slugs in der Queue eine Done-Marke haben. */
+  queueExhausted: boolean;
+  /** True wenn das Bild für den ausgewählten Slug auf Disk existiert. */
+  imageExists?: boolean;
+  /** True wenn ein Captions-Eintrag für den ausgewählten Slug vorhanden ist. */
+  captionExists?: boolean;
   instagram: PlatformResult;
   facebook: PlatformResult;
 }
 
 /**
- * Wählt den Post für ein gegebenes Berlin-Datum.
- * Returns null wenn posts.json leer ist (Pre-Phase-0-Fill).
+ * Liefert einen build-fertigen SocialPost zu einem Slug,
+ * oder null wenn (a) Bild fehlt oder (b) Caption fehlt oder
+ * (c) Rechner-Config-Eintrag fehlt.
+ *
+ * Index = Position in der Queue (1-basiert) — nur für Logging,
+ * keine Rotations-Bedeutung mehr.
  */
-export function getPostForToday(now: Date = new Date()): SocialPost | null {
-  if (POSTS.posts.length === 0) {
+function buildPostForSlug(slug: string): SocialPost | null {
+  const r = rechner.find((x) => x.slug === slug);
+  const caption = CAPTIONS.captions[slug];
+  if (!r || !caption) {
     return null;
   }
-  const today = getBerlinDate(now);
-  const idx = getPostIndexForDay(today, POSTS.startDate, POSTS.posts.length);
-  return POSTS.posts[idx];
+  const idx = QUEUE.queue.indexOf(slug);
+  return {
+    index: idx >= 0 ? idx + 1 : 0,
+    slug,
+    category: r.kategorieSlug,
+    url: `https://www.rechenfix.de/${r.kategorieSlug}/${r.slug}`,
+    image: `${slug}.png`,
+    captionIg: caption.captionIg,
+    captionFb: caption.captionFb,
+    hashtags: caption.hashtags,
+  };
+}
+
+/**
+ * Wählt den nächsten zu postenden Slug aus der Queue:
+ * iteriert in Queue-Reihenfolge, gibt den ersten Slug ohne
+ * Done-Marke zurück. Returnt null, wenn alle Queue-Slugs done.
+ */
+export async function pickNextSlug(): Promise<string | null> {
+  for (const slug of QUEUE.queue) {
+    const done = await isSlugDone(slug);
+    if (!done) return slug;
+  }
+  return null;
+}
+
+/**
+ * Bequeme Single-Slug-Auflösung: kombiniert pickNextSlug +
+ * buildPostForSlug. Returnt zusätzlich die Existenz-Flags, damit
+ * der Cron-Endpoint im Dry-Run aussagekräftig antworten kann.
+ */
+export async function resolveTodayPost(): Promise<{
+  slug: string | null;
+  post: SocialPost | null;
+  imageExists: boolean;
+  captionExists: boolean;
+}> {
+  const slug = await pickNextSlug();
+  if (!slug) {
+    return { slug: null, post: null, imageExists: false, captionExists: false };
+  }
+  const imageExists = existsSync(join(IMAGES_DIR, `${slug}.png`));
+  const captionExists = !!CAPTIONS.captions[slug];
+  const post = imageExists && captionExists ? buildPostForSlug(slug) : null;
+  return { slug, post, imageExists, captionExists };
 }
 
 async function publishToOne(
@@ -78,8 +151,6 @@ async function publishToOne(
     return { success: true, postId: externalId };
   } catch (err) {
     if (!dryRun) {
-      // Best-effort Logging; falls KV down ist, soll der Error trotzdem
-      // an den Caller (Cron-Endpoint) durchgereicht werden.
       try {
         await logError(date, platform, err);
       } catch {
@@ -96,27 +167,69 @@ async function publishToOne(
 }
 
 /**
- * Postet einen SocialPost auf Instagram UND Facebook.
+ * Postet den heutigen Queue-Eintrag auf Instagram UND Facebook.
  * Plattformen unabhängig (kein Short-Circuit bei IG-Fehler).
+ * Setzt die Done-Marke, sobald MIN. eine Plattform success war.
  */
 export async function publishToBothPlatforms(
   force = false,
   dryRun = false,
 ): Promise<PublishResult> {
   const date = getBerlinDate();
-  const post = getPostForToday();
-  if (!post) {
+  const { slug, post, imageExists, captionExists } = await resolveTodayPost();
+
+  if (slug === null) {
     return {
       date,
-      postIndex: null,
-      instagram: { success: false, error: 'posts.json ist leer' },
-      facebook: { success: false, error: 'posts.json ist leer' },
+      slug: null,
+      queueExhausted: true,
+      imageExists: false,
+      captionExists: false,
+      instagram: { success: false, error: 'queue erschöpft — alle Slugs done' },
+      facebook: { success: false, error: 'queue erschöpft — alle Slugs done' },
+    };
+  }
+
+  if (!post) {
+    const errMsg =
+      !imageExists && !captionExists
+        ? `Bild + Caption fehlen für '${slug}'`
+        : !imageExists
+          ? `Bild fehlt: public/social-posts/${slug}.png`
+          : `Caption fehlt für '${slug}' in lib/social/captions.json`;
+    return {
+      date,
+      slug,
+      queueExhausted: false,
+      imageExists,
+      captionExists,
+      instagram: { success: false, error: errMsg },
+      facebook: { success: false, error: errMsg },
     };
   }
 
   const instagram = await publishToOne(date, 'instagram', post, force, dryRun);
   const facebook = await publishToOne(date, 'facebook', post, force, dryRun);
-  return { date, postIndex: post.index, instagram, facebook };
+
+  // Done-Marke setzen, sobald mind. eine Plattform success war
+  // (skipped zählt auch — dann gab's vorher schon Erfolg).
+  if (!dryRun && (instagram.success || facebook.success)) {
+    try {
+      await markSlugDone(slug, date);
+    } catch {
+      /* ignore — KV-Down ist Pipeline-Fehler, nicht Plattform-Fehler */
+    }
+  }
+
+  return {
+    date,
+    slug,
+    queueExhausted: false,
+    imageExists: true,
+    captionExists: true,
+    instagram,
+    facebook,
+  };
 }
 
 // Re-exports für Tests + Cron-Endpoint
