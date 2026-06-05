@@ -262,6 +262,7 @@ Kalendar-Reminder in [docs/jahreswerte-kalender.md](./jahreswerte-kalender.md) e
 | `social:errors:{YYYY-MM-DD}:{platform}` | JSON | `{"error":"...", "code":190, "step":"container", "ts":"2026-06-05T17:00:12.345Z"}` |
 | `social:done:{slug}:instagram` | string (Berlin-Datum) | `2026-06-05` |
 | `social:done:{slug}:facebook`  | string (Berlin-Datum) | `2026-06-05` |
+| `social:current-bio-slug` | string (Rechner-Slug) | `autokosten-rechner` |
 
 Done-Marken pro Slug+Plattform (seit W17A.2.x — vorher slug-only). Ein Slug gilt erst als „fully done", wenn BEIDE Plattform-Marken existieren. Damit kann ein Slug, der z. B. nur FB erfolgreich war, im nächsten Cron-Lauf noch einen IG-Retry bekommen — FB wird dabei per Plattform-Done-Marke übersprungen.
 
@@ -331,7 +332,29 @@ Erwartung: `{ "slug": "…", "imageExists": true, "captionExists": true, "instag
 
 ---
 
-## 10. Out-of-Scope (kommt später)
+## 10. Bio-Hub-Seite `/social` (W17A.3)
+
+Instagram macht Caption-Links nicht klickbar — nur den EINEN Bio-Link. Die Pipeline-Lösung:
+
+1. **IG-Bio-Link** zeigt permanent auf [`https://www.rechenfix.de/social`](https://www.rechenfix.de/social). Wird **einmal manuell** im IG-Profil gesetzt und nie wieder geändert.
+2. **`/social` ist eine Server Component** mit `dynamic = 'force-dynamic'` — KV-Read bei jedem Request.
+3. **Publisher schreibt** nach jedem erfolgreichen IG-Post `social:current-bio-slug = <slug>` (nur bei IG, FB braucht den Pointer nicht — dort sind URLs in Captions klickbar).
+4. **Seite rendert** oben „Heute auf Instagram" mit dem aktuellen Slug als großem Button (Kategorie-Farbe aus `lib/social/kategorie-farben.json`), darunter die Top-10 (`EXCLUDED_SLUGS` aus `lib/social/config.ts`), Footer-Link zur Startseite.
+
+**SEO:** `noindex/nofollow` via `metadata.robots` (Pattern wie `/ki-rechner`). Reine Funktionsseite, kein Index-Wert, verhindert Thin-Content-Signal.
+
+**Fallback bei leerem KV:** Block „Heute auf Instagram" wird komplett ausgeblendet (kein Crash, kein leerer Default-Block). Top-10 + Footer sind immer da.
+
+**Manuelle Override** (z. B. nach Queue-Reset, wenn der erste neue Post noch nicht gelaufen ist):
+
+```
+SET social:current-bio-slug "<slug>"
+DEL social:current-bio-slug
+```
+
+---
+
+## 11. Out-of-Scope (kommt später)
 
 - **17A.X**: Erweiterung auf 30+ und später 170 Posts (mit Python-Image-Builder)
 - **17A.Y**: AI-Caption-Generator über Anthropic-API

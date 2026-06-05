@@ -2762,3 +2762,51 @@ Volltext in CLAUDE.md → „Methodische Lehren (NEU, Welle 17A.2)".
 ### Backlog nach W17A.2
 
 - Sobald Karsten die Caption-Build-Stichprobe gesehen hat: optional Stilkalibrierung am System-Prompt (Headline-Style noch knapper? Eyebrow-Tonalität?)
+
+---
+
+## WELLE 17A.3 — Bio-Hub-Seite /social (06.06.2026)
+
+**Status:** Code 3/3 + Doku durch. Live wirksam ab erstem IG-Post, sobald die Pipeline scharfgeschaltet ist.
+**Vorbedingung:** Erste echte Live-Posts haben bestätigt: IG-Caption-Links sind nicht klickbar. Phase 0 hatte dieses Loch (keine sinnvolle Bio-Verlinkung). Karstens W17A.3-Auftrag schließt es.
+
+### Architektur
+
+- IG-Bio-Link zeigt PERMANENT auf `https://www.rechenfix.de/social` — wird einmal manuell in IG gesetzt, nie wieder geändert
+- `/social`-Seite (Server Component, force-dynamic) liest `social:current-bio-slug` aus KV bei jedem Request
+- Publisher schreibt nach IG-Erfolg in `publishToOne()` → `setCurrentBioSlug(post.slug)`
+- Bewusst nur IG-Hook, nicht FB: FB-Captions enthalten echten URL, brauchen keinen Bio-Workaround
+
+### Code-Commits
+
+| # | Hash | Inhalt |
+|---|---|---|
+| 1 | `d12ec02` | `app/social/page.tsx` (Server Component, noindex, Mobile-first, Header/Block-1/Block-2/Footer, Inline-RGB-Styling aus kategorie-farben.json), `lib/social/state.ts` mit `setCurrentBioSlug` + `getCurrentBioSlug` auf bestehender redis-Instance, `slug-drift-scan` META_ROUTES um `social` |
+| 2 | `3bc330d` | Publisher-Hook in `publishToOne` — `setCurrentBioSlug(post.slug)` direkt nach erfolgreichem IG-Post (best-effort, Plattform-Erfolg bleibt unabhängig von KV-Fehler) |
+| 3 | (dieser) | Doku-Sync: social-pipeline.md §10 mit Bio-Hub-Erklärung + Manual-Override-CLI, CLAUDE.md W17A.3-Block + L-W17A.3.1, Welle-Status-Historie |
+
+### Realitäts-Abgleich (vor Code, alle ✓)
+
+- `/social` existierte nicht
+- noindex-Pattern aus `/ki-rechner` adaptiert: `metadata.robots: { index: false, follow: false }`
+- `lib/redis.ts` exportiert bestehende `redis`-Instance + `KEYS`-Map — keinen neuen Wrapper angelegt
+- Top-10-Slugs aus `EXCLUDED_SLUGS` in `lib/social/config.ts` (schon Drift-frei verifiziert)
+- `kategorie-farben.json` mit 9/9 Kategorien (W17A.1.F bereits verifiziert)
+
+### Lehre
+
+- **L-W17A.3.1**: IG-Caption-Links nicht klickbar → Bio-Hub-Seite mit dynamischem Top-Inhalt aus KV. Pattern für vergleichbare Plattform-Restriktionen: eigene Index-Seite vorhalten + serverseitig auf richtigen Inhalt verzweigen. 1× Bio-Link setzen, nie wieder ändern.
+
+Volltext in CLAUDE.md → „Methodische Lehren (NEU, Welle 17A.3)".
+
+### Karsten muss noch tun
+
+1. **IG-Bio-Link manuell setzen:** Instagram-App → Profil → Profil bearbeiten → Website → `https://www.rechenfix.de/social`
+2. **Pipeline scharfschalten** (Vercel-ENV `SOCIAL_PIPELINE_ENABLED=true` + Redeploy)
+3. Erster echter IG-Post setzt automatisch `social:current-bio-slug` → Seite zeigt Top-Button dynamisch
+
+### Backlog nach W17A.3
+
+- Optional: Stichprobe-Ansicht von `/social` im Smartphone-Browser (Lighthouse-mobile, manuelle Tap-Test) nach erstem Live-Post
+- Out-of-Scope: Caption-Format-Umbau (separate Welle)
+- Out-of-Scope: Bio-Link-Automatik via IG-API (nicht nötig, Bio-Link ist statisch)
