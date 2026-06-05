@@ -9,16 +9,20 @@
  *   social:posted:{YYYY-MM-DD}:facebook  → postId  (string)
  *   social:errors:{YYYY-MM-DD}:instagram → JSON { error, code, step, ts }
  *   social:errors:{YYYY-MM-DD}:facebook  → JSON { error, code, step, ts }
- *   social:done:{slug}                   → YYYY-MM-DD (Datum des erfolg. Posts)
+ *   social:done:{slug}:instagram         → YYYY-MM-DD (Datum des erfolg. Posts)
+ *   social:done:{slug}:facebook          → YYYY-MM-DD (Datum des erfolg. Posts)
  *
  * Idempotenz pro Tag/Plattform: wasPostedToday() vor jedem API-Call
  * → Skip falls true. Force-Override im Cron-Endpoint via ?force=true.
  *
- * Done-Marken pro Slug (W17A.1): nach mindestens einem erfolgreichen
- * Plattform-Post wird der Slug als „durch" markiert und in der Pipeline
- * nie wieder ausgewählt. Damit keine Wiederholungen — anders als die
- * Modulo-Rotation aus W17A. Queue-Reset = manuelles Löschen aller
- * social:done:* Keys (siehe docs/social-pipeline.md §6).
+ * Done-Marken pro Slug+Plattform (W17A.2.x — vorher slug-only):
+ * Nach erfolgreichem Plattform-Post wird die Marke
+ * social:done:{slug}:{platform} gesetzt. Ein Slug gilt erst dann als
+ * vollständig durch („fully done"), wenn BEIDE Plattformen markiert
+ * sind. Damit kann der Retry-Cron eine ausgefallene Plattform
+ * (z. B. IG-Fehler 9007 trotz FB-Erfolg) nachholen, ohne FB doppelt
+ * zu posten. Queue-Reset = manuelles Löschen aller social:done:*
+ * Keys (siehe docs/social-pipeline.md).
  */
 
 import { redis } from '@/lib/redis';
@@ -41,8 +45,8 @@ function errorKey(date: string, platform: Platform): string {
   return `social:errors:${date}:${platform}`;
 }
 
-function doneKey(slug: string): string {
-  return `social:done:${slug}`;
+function doneKey(slug: string, platform: Platform): string {
+  return `social:done:${slug}:${platform}`;
 }
 
 /**
@@ -88,22 +92,41 @@ export async function logError(
 }
 
 /**
- * Prüft, ob ein Slug bereits über die Pipeline gepostet wurde
- * (mindestens eine Plattform-Erfolg). Verwendet vom Publisher
- * für die Queue-Iteration: ein Slug mit Done-Marke wird übersprungen.
+ * Prüft, ob ein Slug auf EINER bestimmten Plattform bereits durch ist.
+ * Wird vom Publisher in publishToOne() verwendet, um einzelne
+ * Plattformen zu überspringen, an denen ein Re-Try unerwünscht wäre.
  */
-export async function isSlugDone(slug: string): Promise<boolean> {
-  const v = await redis.get(doneKey(slug));
+export async function isSlugDoneOn(
+  slug: string,
+  platform: Platform,
+): Promise<boolean> {
+  const v = await redis.get(doneKey(slug, platform));
   return v !== null && v !== undefined;
 }
 
 /**
- * Markiert einen Slug als „durch". Speichert das Berlin-Datum des
- * Erst-Posts als Wert (für späteres Reporting).
- *
- * Aufruf-Stelle: Publisher, nachdem mindestens IG ODER FB success war
- * (kein Re-Post bei Teil-Fehler).
+ * Prüft, ob ein Slug auf BEIDEN Plattformen durch ist („fully done").
+ * Wird von pickNextSlug() verwendet — nur fully-done-Slugs werden
+ * komplett übersprungen.
  */
-export async function markSlugDone(slug: string, dateBerlin: string): Promise<void> {
-  await redis.set(doneKey(slug), dateBerlin);
+export async function isSlugFullyDone(slug: string): Promise<boolean> {
+  const [ig, fb] = await Promise.all([
+    isSlugDoneOn(slug, 'instagram'),
+    isSlugDoneOn(slug, 'facebook'),
+  ]);
+  return ig && fb;
+}
+
+/**
+ * Markiert eine Slug+Plattform-Kombination als „durch". Speichert das
+ * Berlin-Datum des Erst-Posts als Wert (für späteres Reporting).
+ *
+ * Aufruf-Stelle: Publisher, direkt nach erfolgreichem Plattform-Post.
+ */
+export async function markSlugDoneOn(
+  slug: string,
+  platform: Platform,
+  dateBerlin: string,
+): Promise<void> {
+  await redis.set(doneKey(slug, platform), dateBerlin);
 }

@@ -33,8 +33,9 @@ import {
   wasPostedToday,
   markPosted,
   logError,
-  isSlugDone,
-  markSlugDone,
+  isSlugDoneOn,
+  isSlugFullyDone,
+  markSlugDoneOn,
   type Platform,
 } from './state';
 
@@ -94,14 +95,17 @@ function buildPostForSlug(slug: string): SocialPost | null {
 }
 
 /**
- * Wählt den nächsten zu postenden Slug aus der Queue:
- * iteriert in Queue-Reihenfolge, gibt den ersten Slug ohne
- * Done-Marke zurück. Returnt null, wenn alle Queue-Slugs done.
+ * Wählt den nächsten zu postenden Slug aus der Queue.
+ * Iteriert in Queue-Reihenfolge und gibt den ersten Slug zurück, der
+ * NICHT auf beiden Plattformen done ist (Plattform-Done-Marken seit
+ * W17A.2.x). Damit kann ein Slug, der z. B. nur FB erfolgreich war,
+ * im nächsten Lauf noch einen IG-Retry bekommen.
+ * Returnt null, wenn alle Queue-Slugs vollständig durch sind.
  */
 export async function pickNextSlug(): Promise<string | null> {
   for (const slug of QUEUE.queue) {
-    const done = await isSlugDone(slug);
-    if (!done) return slug;
+    const fully = await isSlugFullyDone(slug);
+    if (!fully) return slug;
   }
   return null;
 }
@@ -135,6 +139,14 @@ async function publishToOne(
   dryRun: boolean,
 ): Promise<PlatformResult> {
   if (!force) {
+    // Plattform-Done-Marke gewinnt (W17A.2.x): Slug ist auf dieser
+    // Plattform schon erfolgreich → skip ohne Re-Post, auch tageübergreifend.
+    const platformDone = await isSlugDoneOn(post.slug, platform);
+    if (platformDone) {
+      return { success: true, skipped: true };
+    }
+    // Zweiter Schutz: Same-Day-Idempotenz (z. B. mehrere Cron-Trigger
+    // am selben Berlin-Tag durch manuelles ?force=true ohne Done-Marke).
     const already = await wasPostedToday(date, platform);
     if (already) {
       return { success: true, skipped: true };
@@ -147,6 +159,18 @@ async function publishToOne(
         : await publishToFacebook(post, dryRun);
     if (!dryRun) {
       await markPosted(date, platform, externalId);
+      // Plattform-Done-Marke direkt nach Erfolg setzen (W17A.2.x).
+      // Best-effort: KV-Fehler hier sollen den Erfolgs-Return nicht
+      // entwerten, würden aber zu Re-Posts führen — also nicht stillschweigend
+      // schlucken, sondern in Log werfen.
+      try {
+        await markSlugDoneOn(post.slug, platform, date);
+      } catch (kvErr) {
+        console.error(
+          `[social] markSlugDoneOn fehlgeschlagen für ${post.slug}/${platform}:`,
+          kvErr,
+        );
+      }
     }
     return { success: true, postId: externalId };
   } catch (err) {
@@ -211,15 +235,8 @@ export async function publishToBothPlatforms(
   const instagram = await publishToOne(date, 'instagram', post, force, dryRun);
   const facebook = await publishToOne(date, 'facebook', post, force, dryRun);
 
-  // Done-Marke setzen, sobald mind. eine Plattform success war
-  // (skipped zählt auch — dann gab's vorher schon Erfolg).
-  if (!dryRun && (instagram.success || facebook.success)) {
-    try {
-      await markSlugDone(slug, date);
-    } catch {
-      /* ignore — KV-Down ist Pipeline-Fehler, nicht Plattform-Fehler */
-    }
-  }
+  // Plattform-Done-Marken werden seit W17A.2.x direkt in publishToOne()
+  // gesetzt — kein Blanket-Done nach beiden Plattformen mehr.
 
   return {
     date,
