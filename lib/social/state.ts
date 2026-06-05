@@ -11,6 +11,7 @@
  *   social:errors:{YYYY-MM-DD}:facebook  → JSON { error, code, step, ts }
  *   social:done:{slug}:instagram         → YYYY-MM-DD (Datum des erfolg. Posts)
  *   social:done:{slug}:facebook          → YYYY-MM-DD (Datum des erfolg. Posts)
+ *   social:current-bio-slug              → slug des aktuell auf IG verlinkten Rechners
  *
  * Idempotenz pro Tag/Plattform: wasPostedToday() vor jedem API-Call
  * → Skip falls true. Force-Override im Cron-Endpoint via ?force=true.
@@ -129,4 +130,24 @@ export async function markSlugDoneOn(
   dateBerlin: string,
 ): Promise<void> {
   await redis.set(doneKey(slug, platform), dateBerlin);
+}
+
+/**
+ * W17A.3 — Bio-Hub-Pointer.
+ *
+ * IG erlaubt nur EINEN klickbaren Link in der Bio. Wir setzen den
+ * permanent auf `https://www.rechenfix.de/social`. Die /social-Seite
+ * liest diesen KV-Wert und zeigt den aktuell auf IG geposteten Rechner
+ * als großen Top-Button. Dadurch landet ein „Link in Bio"-Klick gezielt
+ * beim Tages-Thema, ohne dass der IG-Bio-Link je geändert werden muss.
+ */
+const CURRENT_BIO_KEY = 'social:current-bio-slug';
+
+export async function setCurrentBioSlug(slug: string): Promise<void> {
+  await redis.set(CURRENT_BIO_KEY, slug);
+}
+
+export async function getCurrentBioSlug(): Promise<string | null> {
+  const v = await redis.get<string>(CURRENT_BIO_KEY);
+  return typeof v === 'string' && v.length > 0 ? v : null;
 }

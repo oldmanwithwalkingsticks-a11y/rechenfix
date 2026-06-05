@@ -57,6 +57,10 @@ const META_ROUTES = new Set([
   'qualitaet',
   'ueber-uns',
   'aktualisierungen',
+  // W17A.3 Bio-Hub-Seite — Ziel für IG-Bio-Link, noindex/nofollow.
+  // Wird nicht intern verlinkt, aber als Meta-Route registriert für
+  // den Fall, dass künftig irgendwo eine /social-Referenz auftaucht.
+  'social',
   // Sonder-Targets (Next.js-generated oder Metadata-only Routes)
   'opengraph-image',
   'sitemap.xml',
