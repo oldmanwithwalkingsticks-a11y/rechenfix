@@ -154,26 +154,58 @@ export async function setCurrentBioSlug(slug: string): Promise<void> {
 }
 
 export async function getCurrentBioSlug(): Promise<string | null> {
+  console.log('[social/getCurrentBioSlug/v2] start, using redisRaw instance');
   let raw: unknown;
   try {
     raw = await redisRaw.get(CURRENT_BIO_KEY);
   } catch (err) {
-    console.error('[social/getCurrentBioSlug] Redis-Read-Fehler:', err);
+    console.error('[social/getCurrentBioSlug/v2] Redis-Read-Fehler:', err);
     return null;
   }
-  if (raw === null || raw === undefined) return null;
-  if (typeof raw !== 'string') return null;
+  console.log(
+    '[social/getCurrentBioSlug/v2] raw=',
+    JSON.stringify(raw),
+    'typeof=',
+    typeof raw,
+    'isNull=',
+    raw === null,
+    'isUndefined=',
+    raw === undefined,
+  );
+  if (raw === null || raw === undefined) {
+    console.log('[social/getCurrentBioSlug/v2] EXIT: raw is null/undefined → null');
+    return null;
+  }
+  if (typeof raw !== 'string') {
+    console.log(
+      '[social/getCurrentBioSlug/v2] EXIT: typeof !== string (got',
+      typeof raw,
+      ') → null',
+    );
+    return null;
+  }
   const value = raw.trim();
-  if (value.length === 0) return null;
-  // Edge-Case: Wert wurde von außen mit Outer-Quotes gesetzt (z. B. CLI
-  // SET key "slug" — manche Clients setzen die Quotes mit ein). Unescape.
+  if (value.length === 0) {
+    console.log('[social/getCurrentBioSlug/v2] EXIT: empty after trim → null');
+    return null;
+  }
   if (value.length >= 2 && value.startsWith('"') && value.endsWith('"')) {
     try {
       const parsed = JSON.parse(value);
-      if (typeof parsed === 'string' && parsed.length > 0) return parsed;
+      if (typeof parsed === 'string' && parsed.length > 0) {
+        console.log(
+          '[social/getCurrentBioSlug/v2] EXIT: JSON-unwrapped value=',
+          parsed,
+        );
+        return parsed;
+      }
     } catch {
-      /* fallthrough — value bleibt der getrimmte String */
+      console.warn(
+        '[social/getCurrentBioSlug/v2] outer-quotes aber nicht JSON-parsebar:',
+        value,
+      );
     }
   }
+  console.log('[social/getCurrentBioSlug/v2] EXIT: returning raw string value=', value);
   return value;
 }
