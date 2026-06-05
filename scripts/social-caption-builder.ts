@@ -1,9 +1,14 @@
 /**
- * W17A.1 — Caption-Builder (lokal, Anthropic-API).
+ * W17A.1 + W17A.2 — Caption-Builder (lokal, Anthropic-API).
  *
- * Generiert pro Slug aus lib/social/queue.json eine Caption-Entry
- * (captionIg + captionFb + hashtags) und schreibt sie nach
- * lib/social/captions.json.
+ * Generiert pro Slug aus lib/social/queue.json eine Caption-Entry mit
+ * 5 Feldern (captionIg + captionFb + hashtags + socialHeadline +
+ * socialEyebrow) und schreibt sie nach lib/social/captions.json.
+ *
+ * W17A.2 (06.06.2026): socialHeadline + socialEyebrow ergänzt. Vorher
+ * hat der Image-Builder beide Felder aus rechner.beispiel geparst —
+ * Trefferquote nur ~50 % (leere Highlights, abgeschnittener Text,
+ * themenfremde Slug-Hash-Eyebrows). Lehre L-W17A.2.1.
  *
  * Resumable: bereits gefüllte Slugs werden übersprungen — bei
  * Abbruch einfach erneut starten. Schreibt nach jedem Slug die
@@ -43,23 +48,41 @@ if (!apiKey) {
 
 const MODEL = process.env.ANTHROPIC_MODEL ?? DEFAULT_MODEL;
 
-const SYSTEM_PROMPT = `Du schreibst kurze deutsche Social-Media-Captions für rechenfix.de.
+const SYSTEM_PROMPT = `Du schreibst kurze deutsche Social-Media-Captions UND Bild-Texte für rechenfix.de.
 
 WICHTIG: Antworte AUSSCHLIESSLICH mit einem rohen JSON-Objekt, OHNE Markdown-Code-Block, OHNE einleitenden Text. Format:
 {
   "captionIg": "...",
   "captionFb": "...",
-  "hashtags": "#tag1 #tag2 #tag3 …"
+  "hashtags": "#tag1 #tag2 #tag3 …",
+  "socialHeadline": "...",
+  "socialEyebrow": "..."
 }
 
-Regeln:
+Captions:
 - Du-Form, hilfreich, konkret, kein Marketing-Sprech, keine Floskeln
 - Hook (1 Zeile, Frage oder Fakt), dann 2–3 Zeilen konkreter Nutzen, dann Call-to-Action
 - captionIg endet mit „👉 Link in Bio" (Instagram erlaubt keine klickbaren Links im Caption-Text)
 - captionFb endet mit der echten Rechner-URL (FB erlaubt Links)
 - Max 600 Zeichen pro Caption (ohne Hashtags)
-- hashtags: 9–15 Stück, mit # und Leerzeichen getrennt, Mix aus rechner-spezifisch + breit (z. B. #rechnen #rechenfix), Kleinbuchstaben
-- Keine Emojis im Übermaß: max 2 in der Caption (Hook oder CTA)`;
+- Keine Emojis im Übermaß: max 2 in der Caption (Hook oder CTA)
+
+Hashtags:
+- 9–15 Stück, mit # und Leerzeichen getrennt
+- Mix aus rechner-spezifisch + breit (z. B. #rechnen #rechenfix)
+- Kleinbuchstaben
+
+socialHeadline (Bild-Highlight, wird groß über die ganze Bildbreite gerendert):
+- MAX 22 Zeichen inkl. Einheit, Symbol, Leerzeichen
+- EINE konkrete Zahl ODER eine knappe Kernaussage — KEIN Satz, KEIN Punkt am Ende
+- Beispiele: "1.815 € / Jahr", "BMI 24,7", "= 119 €", "14 Tage", "2,5 Std", "17,34 €/Std", "= 1.330 €/Jahr"
+- Wenn dem Rechner keine sinnvolle Zahl entlockbar ist: knappes Konzept-Schlagwort wie "Schnell vergleichbar" oder "Sofort sichtbar" (auch max 22 Zeichen)
+
+socialEyebrow (kleine Überzeile, wird letter-spaced in Versalien gerendert):
+- 1 ODER 2 Wörter, kurz und prägnant
+- Inhaltlich zum Rechner-Thema passend (NICHT generisch)
+- Beispiele: "Faustregel" (Steuer/Recht), "Selbst-Check" (Gesundheit), "Wusstest du?" (Überraschungs-Fakt), "Schnell gerechnet" (Alltagsrechner), "Pendler-Realität" (Auto/Sprit), "Rechenbeispiel" (Mathe), "Klassiker" (bekannte Formel), "Mal nachgerechnet" (überraschendes Ergebnis), "Jahres-Bilanz" (laufende Kosten)
+- Wähle DAS Stichwort, das thematisch am besten zum konkreten Rechner passt — nicht eines aus der Liste, falls keines passt`;
 
 interface AnthropicResponse {
   content?: Array<{ type: string; text?: string }>;
@@ -96,6 +119,11 @@ async function callAnthropic(userPrompt: string): Promise<string> {
   return text;
 }
 
+/** Maximale tolerierte Länge der Bild-Headline (Ziel 22, Soft-Limit für Retry). */
+const HEADLINE_HARD_LIMIT = 40;
+/** Maximale tolerierte Länge des Eyebrow (Soft-Limit für Retry). */
+const EYEBROW_HARD_LIMIT = 30;
+
 function parseCaptionJson(raw: string): CaptionEntry {
   // Strip eventuelle Markdown-Code-Block-Wrapper, obwohl der System-Prompt
   // sie verbietet — sicher ist sicher.
@@ -104,13 +132,35 @@ function parseCaptionJson(raw: string): CaptionEntry {
     .replace(/```\s*$/i, '')
     .trim();
   const obj = JSON.parse(stripped) as Partial<CaptionEntry>;
-  if (!obj.captionIg || !obj.captionFb || !obj.hashtags) {
-    throw new Error(`Antwort fehlt captionIg/captionFb/hashtags: ${stripped.slice(0, 200)}`);
+  const missing: string[] = [];
+  for (const key of ['captionIg', 'captionFb', 'hashtags', 'socialHeadline', 'socialEyebrow'] as const) {
+    if (!obj[key] || typeof obj[key] !== 'string' || obj[key]!.trim() === '') {
+      missing.push(key);
+    }
+  }
+  if (missing.length > 0) {
+    throw new Error(`Antwort fehlt/leer: ${missing.join(', ')} — ${stripped.slice(0, 200)}`);
+  }
+  // Längen-Validierung mit Soft-Limit → Retry kickt, wenn dramatisch über Ziel.
+  // Die exakte 22/22 wird vom Image-Builder über Shrink-Cascade weichgepuffert.
+  const headline = obj.socialHeadline!.trim();
+  const eyebrow = obj.socialEyebrow!.trim();
+  if (headline.length > HEADLINE_HARD_LIMIT) {
+    throw new Error(
+      `socialHeadline zu lang (${headline.length} > ${HEADLINE_HARD_LIMIT}): "${headline}"`,
+    );
+  }
+  if (eyebrow.length > EYEBROW_HARD_LIMIT) {
+    throw new Error(
+      `socialEyebrow zu lang (${eyebrow.length} > ${EYEBROW_HARD_LIMIT}): "${eyebrow}"`,
+    );
   }
   return {
-    captionIg: obj.captionIg.trim(),
-    captionFb: obj.captionFb.trim(),
-    hashtags: obj.hashtags.trim(),
+    captionIg: obj.captionIg!.trim(),
+    captionFb: obj.captionFb!.trim(),
+    hashtags: obj.hashtags!.trim(),
+    socialHeadline: headline,
+    socialEyebrow: eyebrow,
   };
 }
 

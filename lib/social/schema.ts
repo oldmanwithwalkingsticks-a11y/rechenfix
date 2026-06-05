@@ -57,14 +57,34 @@ export interface QueueFile {
 }
 
 /**
- * Captions-File: pro Slug die fertig formulierten IG/FB-Captions
- * + Hashtags. Erzeugt durch scripts/social-caption-builder.mjs
+ * Captions-File: pro Slug die fertig formulierten IG/FB-Captions,
+ * Hashtags und Bild-Texte. Erzeugt durch scripts/social-caption-builder.ts
  * (lokal, Anthropic-API) und committed.
+ *
+ * W17A.2 (06.06.2026): socialHeadline + socialEyebrow ergänzt. Der
+ * Image-Builder liest beide Felder direkt aus captions.json statt sie
+ * aus dem rechner.beispiel-Feld zu parsen (Trefferquote nur ~50 %,
+ * abgeschnittener Text, themen-fremde Eyebrows). Lehre L-W17A.2.1.
  */
 export interface CaptionEntry {
+  /** IG-Text mit „👉 Link in Bio"-CTA. */
   captionIg: string;
+  /** FB-Text mit echter Rechner-URL als CTA. */
   captionFb: string;
+  /** 9–15 Hashtags, Leerzeichen-getrennt, Kleinbuchstaben. */
   hashtags: string;
+  /**
+   * Bild-Headline (Highlight-Block, Bold 110 px im Image-Builder).
+   * Maximal 22 Zeichen inkl. Einheit/Symbol; eine Zahl oder Kernaussage,
+   * KEIN Satz. Beispiele: „1.815 € / Jahr", „BMI 24,7", „= 119 €".
+   */
+  socialHeadline: string;
+  /**
+   * Eyebrow über der Headline (Bold 42 px, letter-spaced caps).
+   * 1–2 kontextpassende Worte. Beispiele: „Faustregel", „Schnell gerechnet",
+   * „Selbst-Check", „Pendler-Realität".
+   */
+  socialEyebrow: string;
 }
 
 export interface CaptionsFile {
