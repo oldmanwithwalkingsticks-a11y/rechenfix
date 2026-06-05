@@ -26,7 +26,7 @@
  * Keys (siehe docs/social-pipeline.md).
  */
 
-import { redis } from '@/lib/redis';
+import { redis, redisRaw } from '@/lib/redis';
 import { MetaApiError } from './instagram';
 
 export type Platform = 'instagram' | 'facebook';
@@ -140,85 +140,40 @@ export async function markSlugDoneOn(
  * liest diesen KV-Wert und zeigt den aktuell auf IG geposteten Rechner
  * als großen Top-Button. Dadurch landet ein „Link in Bio"-Klick gezielt
  * beim Tages-Thema, ohne dass der IG-Bio-Link je geändert werden muss.
+ *
+ * Beide Funktionen nutzen `redisRaw` (Auto-Deserialization aus). Damit:
+ * - `setCurrentBioSlug(slug)` schreibt den rohen String, ohne JSON-Wrap
+ * - `getCurrentBioSlug()` liest den rohen String, auch wenn er per CLI
+ *   ohne Quotes gesetzt wurde (verifiziert durch das Karsten-Debug am
+ *   06.06.2026, das null statt Slug zurückbekam)
  */
 const CURRENT_BIO_KEY = 'social:current-bio-slug';
 
 export async function setCurrentBioSlug(slug: string): Promise<void> {
-  await redis.set(CURRENT_BIO_KEY, slug);
+  await redisRaw.set(CURRENT_BIO_KEY, slug);
 }
 
-/**
- * Read-Helper, robust gegen alle gespeicherten Encoding-Varianten:
- *
- * 1. Roher String `autokosten-rechner` (manueller Upstash-CLI-SET ohne Quotes)
- * 2. JSON-Wrapped `"autokosten-rechner"` (Upstash-CLI-SET mit Quotes oder
- *    automatische Serialisierung der @upstash/redis-SDK beim setCurrentBioSlug)
- * 3. @upstash/redis-SDK liefert bei JSON.parse-Fehler manchmal `null` zurück
- *    (Auto-Deserialization-Edge-Case).
- *
- * Damit jeder dieser Wege funktioniert, lesen wir mit `redis.get` ohne
- * Generic-Type-Hint (nicht <string>) und prüfen den Wert manuell.
- * Logging mit `[social/getCurrentBioSlug]`-Prefix landet in Vercel-Function-
- * Logs — Karsten kann pro Request sehen, was die SDK geliefert hat.
- */
 export async function getCurrentBioSlug(): Promise<string | null> {
   let raw: unknown;
   try {
-    raw = await redis.get(CURRENT_BIO_KEY);
+    raw = await redisRaw.get(CURRENT_BIO_KEY);
   } catch (err) {
     console.error('[social/getCurrentBioSlug] Redis-Read-Fehler:', err);
     return null;
   }
-
-  console.log(
-    '[social/getCurrentBioSlug] raw=',
-    JSON.stringify(raw),
-    '| typeof=',
-    typeof raw,
-  );
-
-  if (raw === null || raw === undefined) {
-    return null;
-  }
-
-  if (typeof raw !== 'string') {
-    console.warn(
-      '[social/getCurrentBioSlug] unerwarteter Typ (kein string):',
-      typeof raw,
-      raw,
-    );
-    return null;
-  }
-
+  if (raw === null || raw === undefined) return null;
+  if (typeof raw !== 'string') return null;
   const value = raw.trim();
-  if (value.length === 0) {
-    return null;
-  }
-
-  // Falls JSON-wrapped (`"slug"` mit Outer-Quotes): unescapen.
-  if (
-    value.length >= 2 &&
-    value.startsWith('"') &&
-    value.endsWith('"')
-  ) {
+  if (value.length === 0) return null;
+  // Edge-Case: Wert wurde von außen mit Outer-Quotes gesetzt (z. B. CLI
+  // SET key "slug" — manche Clients setzen die Quotes mit ein). Unescape.
+  if (value.length >= 2 && value.startsWith('"') && value.endsWith('"')) {
     try {
       const parsed = JSON.parse(value);
-      if (typeof parsed === 'string' && parsed.length > 0) {
-        console.log(
-          '[social/getCurrentBioSlug] JSON-unwrapped value=',
-          parsed,
-        );
-        return parsed;
-      }
+      if (typeof parsed === 'string' && parsed.length > 0) return parsed;
     } catch {
-      // Trotz Outer-Quotes nicht JSON-parsebar — Fallback unten.
-      console.warn(
-        '[social/getCurrentBioSlug] Outer-Quotes aber nicht JSON-parsebar:',
-        value,
-      );
+      /* fallthrough — value bleibt der getrimmte String */
     }
   }
-
-  console.log('[social/getCurrentBioSlug] returning raw string value=', value);
   return value;
 }

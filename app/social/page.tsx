@@ -101,19 +101,6 @@ export default async function SocialBioHubPage() {
   const currentSlug = await getCurrentBioSlug();
   const current = currentSlug ? resolveRechner(currentSlug) : null;
 
-  // W17A.3-Debug — landet in Vercel-Function-Logs. Karsten kann nach
-  // einem /social-Request in der Vercel-Dashboard-Logs-Ansicht sehen,
-  // welcher Slug aus KV kam und ob er auflösbar war. Nach erfolgreicher
-  // Verifikation kann das Logging wieder entfernt werden (eigener Commit).
-  console.log(
-    '[social/page] currentSlug=',
-    JSON.stringify(currentSlug),
-    '| resolved=',
-    current ? `OK slug=${current.slug} kat=${current.kategorieSlug}` : 'NULL',
-    '| rechner.length=',
-    rechner.length,
-  );
-
   const top10 = EXCLUDED_SLUGS.map((slug) => resolveRechner(slug)).filter(
     (r): r is RechnerLite => r !== null,
   );
