@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "note": "W17A.1.F — Hintergrund- + Akzentfarbe pro Kategorie für Social-Post-Bild-Layout (1080x1080). RGB als Tupel [r,g,b]. Keys MÜSSEN exakt den kategorieSlug-Werten aus lib/rechner-config entsprechen — Verify: npx tsx scripts/verify-kategorie-slugs.ts (Pflicht bei Add/Rename einer Kategorie).",
+  "farben": {
+    "finanzen":   { "bg": [232, 245, 233], "accent": [46, 125, 50] },
+    "gesundheit": { "bg": [252, 228, 236], "accent": [194, 24, 91] },
+    "auto":       { "bg": [236, 239, 241], "accent": [55, 71, 79] },
+    "alltag":     { "bg": [255, 248, 225], "accent": [245, 124, 0] },
+    "mathe":      { "bg": [243, 229, 245], "accent": [106, 27, 154] },
+    "wohnen":     { "bg": [227, 242, 253], "accent": [21, 101, 192] },
+    "arbeit":     { "bg": [232, 234, 246], "accent": [40, 53, 147] },
+    "kochen":     { "bg": [251, 233, 231], "accent": [216, 67, 21] },
+    "sport":      { "bg": [224, 242, 241], "accent": [0, 105, 92] }
+  }
+}
