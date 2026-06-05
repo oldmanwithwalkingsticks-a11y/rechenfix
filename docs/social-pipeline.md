@@ -203,6 +203,9 @@ curl -H "Authorization: Bearer $CRON_SECRET" \
 | **-10** | Permission Denied | Permissions im Token fehlen — Token via Graph API Explorer neu generieren mit allen 5 Scopes (siehe §2 Schritt 3) |
 | **190** | Token expired / invalid | Page Token im Token Debugger prüfen. „Never expires" muss stehen. Falls expired: User Token + Page Token komplett neu generieren |
 | **4** | Rate Limit | Wartezeit ~1 h. Bei wiederholtem Auftreten: Posts-Frequenz reduzieren oder API-Quota im Meta-Dashboard prüfen |
+| **9007** | „Media ID is not available" (IG) | Timing-Problem: Container noch nicht fertig verarbeitet beim Publish. Seit W17A.2.x über Container-Status-Polling abgefangen — sollte nicht mehr auftreten. Falls doch: POLL_MAX_ATTEMPTS in `lib/social/instagram.ts` erhöhen |
+| **POLL_TIMEOUT** | IG-Container nach ~30 s nicht FINISHED | Image-URL nicht erreichbar oder Meta-Backend hängt. Image-URL manuell `curl`en; bei Meta-Hänger einfach neuen Cron-Lauf abwarten |
+| **EXPIRED** / **ERROR** | IG-Container Status im Polling | Container kann beim Image-Upload defekt sein (z. B. PNG-Encoding fishy). Image lokal `python scripts/social-image-builder.py --slug X` neu bauen + committen |
 | **NO_CONTAINER_ID** | IG Step-1 ohne `id` | Image-URL nicht erreichbar (Server-Down? Image fehlt in `public/social-posts/`?). curl die URL manuell testen |
 | **NO_MEDIA_ID** | IG Step-2 ohne `id` | Container war erstellt, Publish hat aber geknallt. Meist Token-Permission-Drift. Logs in KV checken |
 | **NO_POST_ID** | FB ohne `post_id`/`id` | Selten — FB-API-Inkonsistenz. Manuell Page-Wall prüfen ob der Post trotzdem angekommen ist |
@@ -254,16 +257,37 @@ Kalendar-Reminder in [docs/jahreswerte-kalender.md](./jahreswerte-kalender.md) e
 | `social:posted:{YYYY-MM-DD}:instagram` | string (mediaId) | `17841...` |
 | `social:posted:{YYYY-MM-DD}:facebook` | string (postId) | `1127...XYZ_98...` |
 | `social:errors:{YYYY-MM-DD}:{platform}` | JSON | `{"error":"...", "code":190, "step":"container", "ts":"2026-06-05T17:00:12.345Z"}` |
-| `social:done:{slug}` | string (Berlin-Datum) | `2026-06-05` |
+| `social:done:{slug}:instagram` | string (Berlin-Datum) | `2026-06-05` |
+| `social:done:{slug}:facebook`  | string (Berlin-Datum) | `2026-06-05` |
 
-Keine TTL — Keys bleiben dauerhaft. Manuelle Bereinigung (z. B. „älter als 90 Tage löschen") wäre eine spätere Wartungs-Maßnahme; aktuell ignoriert, weil das KV-Volume klein bleibt (max. 3 Keys/Tag × 365 = ~1100 Keys/Jahr, plus 160 langlebige Done-Marken).
+Done-Marken pro Slug+Plattform (seit W17A.2.x — vorher slug-only). Ein Slug gilt erst als „fully done", wenn BEIDE Plattform-Marken existieren. Damit kann ein Slug, der z. B. nur FB erfolgreich war, im nächsten Cron-Lauf noch einen IG-Retry bekommen — FB wird dabei per Plattform-Done-Marke übersprungen.
+
+Keine TTL — Keys bleiben dauerhaft. Manuelle Bereinigung (z. B. „älter als 90 Tage löschen") wäre eine spätere Wartungs-Maßnahme; aktuell ignoriert, weil das KV-Volume klein bleibt (max. 3 Keys/Tag × 365 = ~1100 Keys/Jahr, plus 2 × 160 langlebige Done-Marken).
 
 **Queue-Reset** (Pool nach 160 Posts neu starten): alle `social:done:*` Keys löschen → Pipeline startet wieder vorn in der Queue-Reihenfolge. KV-CLI:
 
 ```
 SCAN 0 MATCH social:done:* COUNT 1000
-DEL social:done:<slug1> social:done:<slug2> …
+DEL social:done:<slug1>:instagram social:done:<slug1>:facebook …
 ```
+
+**Migration alter Done-Marken** (Pre-W17A.2.x existieren noch slug-only-Marken in KV). Pro betroffener Marke:
+
+```
+GET social:done:<slug>                        → Berlin-Datum, z. B. "2026-06-05"
+SET social:done:<slug>:<platform-die-success-hatte> "2026-06-05"
+DEL social:done:<slug>
+```
+
+Bekannter Fall **autokosten-rechner** (FB success, IG offen):
+
+```
+GET social:done:autokosten-rechner            → Datum lesen
+SET social:done:autokosten-rechner:facebook   "<gelesenes Datum>"
+DEL social:done:autokosten-rechner
+```
+
+Danach nächster Cron-Lauf: `pickNextSlug` greift autokosten-rechner wieder auf, FB wird per Plattform-Done-Marke übersprungen, IG bekommt den Retry mit dem Container-Polling-Fix.
 
 ---
 
