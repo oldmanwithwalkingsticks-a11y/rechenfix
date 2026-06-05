@@ -172,18 +172,47 @@ function kvEnv(): { url: string; token: string } {
  * Direktes Upstash-REST-GET, SDK komplett umgangen.
  * Liefert den rohen String oder null (bei fehlendem Key, leerem Wert
  * oder HTTP-Fehler).
+ *
+ * KV-DEBUG (06.06.2026): loggt KV-Host (NICHT Token), HTTP-Status und
+ * rohen Response-Body. Karsten-Verdacht: Vercel-ENV zeigt ggf. auf
+ * eine andere Upstash-DB als seine Console „erklaerfix"
+ * (apt-tahr-124200.upstash.io). Logs landen in Vercel-Function-Logs.
+ * Wieder entfernen sobald der KV-Host verifiziert ist.
  */
 async function kvRestGet(key: string): Promise<string | null> {
   const { url, token } = kvEnv();
+
+  let kvHost = 'unparsed';
+  try {
+    kvHost = new URL(url).host;
+  } catch {
+    /* ignore — wir loggen 'unparsed' */
+  }
+  console.log('[social/kv-debug] GET host=', kvHost, 'key=', key);
+
   const res = await fetch(`${url}/get/${encodeURIComponent(key)}`, {
     method: 'GET',
     headers: { Authorization: `Bearer ${token}` },
     cache: 'no-store',
   });
+  const bodyText = await res.text();
+  console.log(
+    '[social/kv-debug] GET status=',
+    res.status,
+    'body=',
+    bodyText.length > 500 ? bodyText.slice(0, 500) + '…' : bodyText,
+  );
+
   if (!res.ok) {
-    throw new Error(`Upstash GET HTTP ${res.status}: ${await res.text()}`);
+    throw new Error(`Upstash GET HTTP ${res.status}: ${bodyText}`);
   }
-  const json = (await res.json()) as { result?: string | null };
+  let json: { result?: string | null };
+  try {
+    json = JSON.parse(bodyText) as { result?: string | null };
+  } catch (err) {
+    console.error('[social/kv-debug] body parse error:', err);
+    return null;
+  }
   return typeof json.result === 'string' && json.result.length > 0
     ? json.result
     : null;
