@@ -61,3 +61,10 @@ next-env.d.ts
 # Wird per `prebuild`-Hook bei jedem `npm run build` neu erzeugt.
 /lib/critical-css.ts
 /tmp/
+
+# W17A.1.F — Auto-generierter Rechner-Snapshot für Python-Image-Builder
+# (scripts/dump-rechner-data.ts). Wird pro Image-Build neu erzeugt.
+/lib/social/_rechner-snapshot.json
+# Generierte Social-Bilder (160 Slugs) — separat in eigener Konvention,
+# Karsten committed sie nach social-image-builder.py-Run gesammelt.
+# Initial NICHT auf gitignore-Liste, damit die Bilder versioniert werden.
