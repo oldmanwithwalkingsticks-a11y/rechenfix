@@ -6,18 +6,27 @@
  * Auth: Authorization: Bearer ${CRON_SECRET} (Vercel setzt das automatisch
  *       beim Cron-Trigger; bei manuellem curl ebenfalls erforderlich).
  *
+ * Pause-Schalter (06.06.2026):
+ *   ENV SOCIAL_PIPELINE_ENABLED — nur Wert "true" lässt echte Posts durch.
+ *   Fehlt oder ist anders → Cron returnt HTTP 200 { paused: true } ohne
+ *   API-Call und ohne KV-Write. FAIL-SAFE-Default: bei fehlender ENV
+ *   passiert NICHTS auf IG/FB. Dry-Run (?test=true) läuft trotzdem durch,
+ *   damit Karsten Bilder/Captions verifizieren kann, ohne scharfzuschalten.
+ *
  * Query-Parameter:
  *   ?force=true   — überspringt wasPostedToday()-Check (manueller Re-Trigger)
  *   ?test=true    — dryRun (kein API-Call, kein KV-Write)
  *                   in production zusätzlich ?admin=${ADMIN_PASSWORD} nötig
  *
  * Response:
- *   200: { date, postIndex, instagram, facebook }
+ *   200: { date, postIndex, instagram, facebook }         — normaler Lauf
+ *   200: { paused: true, … }                              — Pause aktiv
  *   401: { error: 'unauthorized' }
- *   503: { error, instagram?, facebook? }
+ *   503: { error, instagram?, facebook? }                 — Plattform-Fehler
  *
  * Bei Fehler (eine der Plattformen success=false): Resend-Email an
  * ADMIN_NOTIFICATION_EMAIL. KV-Error-Log läuft bereits im Publisher.
+ * Bei Pause: KEINE Mail (gewollter Zustand).
  */
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -107,16 +116,33 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     }
   }
 
-  // 4) Publish
+  // 4) Pause-Schalter (06.06.2026)
+  // Default fail-safe: fehlt die ENV oder ist != "true" → keine Posts.
+  // Dry-Run umgeht den Schalter, damit Karsten die Pipeline ohne
+  // Scharfschaltung verifizieren kann.
+  const enabled = process.env.SOCIAL_PIPELINE_ENABLED === 'true';
+  if (!enabled && !dryRun) {
+    return NextResponse.json(
+      {
+        paused: true,
+        reason:
+          'SOCIAL_PIPELINE_ENABLED ist nicht "true" — Cron postet nichts. Zum Scharfschalten Vercel-ENV SOCIAL_PIPELINE_ENABLED=true setzen und Redeploy auslösen.',
+        envValue: process.env.SOCIAL_PIPELINE_ENABLED ?? null,
+      },
+      { status: 200 },
+    );
+  }
+
+  // 5) Publish
   const result = await publishToBothPlatforms(force, dryRun);
 
-  // 5) Dry-Run: keine Mail, kein 503 — auch wenn Queue erschöpft oder
+  // 6) Dry-Run: keine Mail, kein 503 — auch wenn Queue erschöpft oder
   // Bild/Caption fehlt. Wir wollen die Diagnose-Info im JSON sehen.
   if (dryRun) {
     return NextResponse.json(result);
   }
 
-  // 6) Queue-erschöpft ist KEIN Fehler-Email-Anlass (alle Slugs sind durch).
+  // 7) Queue-erschöpft ist KEIN Fehler-Email-Anlass (alle Slugs sind durch).
   // Bild/Caption-Fehlen IST ein Fehler (Daten-Lücke).
   if (result.queueExhausted) {
     return NextResponse.json(
@@ -125,7 +151,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     );
   }
 
-  // 7) Mail bei Fehler (mind. eine Plattform failed ODER Daten-Lücke)
+  // 8) Mail bei Fehler (mind. eine Plattform failed ODER Daten-Lücke)
   const anyFail = !result.instagram.success || !result.facebook.success;
   if (anyFail) {
     await sendErrorMail(result);

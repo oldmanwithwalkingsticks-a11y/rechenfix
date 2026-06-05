@@ -95,6 +95,7 @@ Alle ENV-Vars in der Vercel-Dashboard-UI setzen (Settings → Environment Variab
 | `ADMIN_NOTIFICATION_EMAIL` | `info@rechenfix.de` (oder andere Empfangs-Adresse) | Production + Preview |
 | `CRON_SECRET` | Random 32-Zeichen-String, manuell generieren (`openssl rand -hex 16`) | Production + Preview |
 | `ADMIN_PASSWORD` | Random String — schützt `?test=true` in Production | Production + Preview |
+| **`SOCIAL_PIPELINE_ENABLED`** | **`"true"` (String, exakt) → live; alles andere oder unset → pausiert.** Siehe §10. | Production + Preview |
 | `RESEND_API_KEY` | bereits gesetzt, wird für Fehler-Mails wiederverwendet | bereits live |
 | `KV_REST_API_URL` / `KV_REST_API_TOKEN` | aus Vercel-KV-Integration, bereits gesetzt | bereits live |
 
@@ -266,7 +267,44 @@ DEL social:done:<slug1> social:done:<slug2> …
 
 ---
 
-## 9. Out-of-Scope (kommt später)
+## 9. Pipeline scharfschalten / pausieren
+
+Der Cron-Endpoint prüft VOR dem ersten API-Call die ENV-Var **`SOCIAL_PIPELINE_ENABLED`**:
+
+| Wert | Verhalten |
+|---|---|
+| `"true"` (String, exakt) | Live — postet IG + FB nach normalem Ablauf |
+| `"false"` / unset / sonst | Pausiert — kein API-Call, kein KV-Write, kein Mail, HTTP 200 mit `paused: true` |
+
+**Fail-Safe-Default:** Bei fehlender ENV gilt **pausiert**. Eine versehentliche Deploy-Aktion (z. B. Vercel-ENV-Migration) kann nie zu ungewollten Posts führen.
+
+### Scharfschalten
+
+1. Vercel-Dashboard → Project → Settings → Environment Variables
+2. `SOCIAL_PIPELINE_ENABLED` = `true` (sowohl Production als auch Preview)
+3. Redeploy auslösen (kommt automatisch beim nächsten Push, oder manuell „Redeploy" in der Deployments-Liste)
+4. Verify: nächster Cron-Lauf oder manueller `?force=true`-Trigger postet wirklich
+
+### Pausieren
+
+1. `SOCIAL_PIPELINE_ENABLED` auf `false` setzen (oder ENV entfernen)
+2. Redeploy auslösen
+3. Verify: `curl … ?force=true` returnt `{ paused: true, reason: "…", envValue: "false" }`
+
+### Dry-Run umgeht den Schalter
+
+Auch bei pausierter Pipeline läuft `?test=true` durch und liefert die volle Diagnose-Antwort (slug, imageExists, captionExists, dry-ig-X/dry-fb-X). Damit kannst du die Pipeline vor Scharfschaltung end-to-end verifizieren:
+
+```bash
+curl -H "Authorization: Bearer $CRON_SECRET" \
+     "https://www.rechenfix.de/api/cron/social-post?test=true&admin=$ADMIN_PASSWORD"
+```
+
+Erwartung: `{ "slug": "…", "imageExists": true, "captionExists": true, "instagram": { "success": true, "postId": "dry-ig-…" }, "facebook": { "success": true, "postId": "dry-fb-…" } }`.
+
+---
+
+## 10. Out-of-Scope (kommt später)
 
 - **17A.X**: Erweiterung auf 30+ und später 170 Posts (mit Python-Image-Builder)
 - **17A.Y**: AI-Caption-Generator über Anthropic-API
