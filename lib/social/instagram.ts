@@ -24,6 +24,19 @@ const TIMEOUT_MS = 30_000;
 const API_BASE = `https://graph.facebook.com/${SOCIAL_CONFIG.GRAPH_API_VERSION}`;
 
 /**
+ * W17A.2.x — Container-Status-Polling-Parameter.
+ *
+ * Hintergrund: Beim ersten Live-Post auf autokosten-rechner kam IG-Fehler
+ * 9007 „Media ID is not available" — das ist die klassische Timing-
+ * Konstellation, in der `media_publish` schneller losläuft als der
+ * Container im Backend fertig verarbeitet ist. Lösung: zwischen Step 1
+ * (Container) und Step 2 (Publish) den Container-Status pollen bis
+ * `FINISHED` (oder ERROR/EXPIRED → abort).
+ */
+const POLL_INTERVAL_MS = 3_000;
+const POLL_MAX_ATTEMPTS = 10; // 10 × 3 s = ~30 s total
+
+/**
  * Custom-Error mit Meta-Fehlercode (Code -10, 190, 4 etc.).
  * Siehe docs/social-pipeline.md Troubleshooting für die häufigsten Codes.
  */
@@ -96,6 +109,88 @@ async function metaFetch(
 }
 
 /**
+ * Holt den Container-Status (FINISHED / IN_PROGRESS / ERROR / EXPIRED /
+ * PUBLISHED) per GET. Eigene Funktion statt `metaFetch`, weil die einen
+ * POST mit form-body erwartet.
+ */
+async function getContainerStatus(
+  creationId: string,
+  token: string,
+): Promise<string> {
+  const url =
+    `${API_BASE}/${creationId}?fields=status_code` +
+    `&access_token=${encodeURIComponent(token)}`;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
+  let res: Response;
+  try {
+    res = await fetch(url, { method: 'GET', signal: controller.signal });
+  } catch (err) {
+    clearTimeout(timeout);
+    throw new MetaApiError(
+      `Network/timeout (poll): ${err instanceof Error ? err.message : String(err)}`,
+      undefined,
+      'instagram',
+      'poll',
+    );
+  }
+  clearTimeout(timeout);
+
+  let json: { status_code?: string } & MetaErrorBody;
+  try {
+    json = await res.json();
+  } catch {
+    throw new MetaApiError(
+      `Non-JSON response (poll, HTTP ${res.status})`,
+      res.status,
+      'instagram',
+      'poll',
+    );
+  }
+  if (!res.ok || json.error) {
+    throw new MetaApiError(
+      json.error?.message ?? `HTTP ${res.status} (poll)`,
+      json.error?.code ?? res.status,
+      'instagram',
+      'poll',
+    );
+  }
+  return json.status_code ?? 'UNKNOWN';
+}
+
+/**
+ * Wartet, bis der IG-Container im Status FINISHED ist (oder ERROR/EXPIRED
+ * → wirft). Schlägt nach POLL_MAX_ATTEMPTS × POLL_INTERVAL_MS fehl.
+ *
+ * PUBLISHED akzeptieren wir auch als grünes Licht — sollte bei unserem
+ * 2-Step-Flow eigentlich nicht vorkommen (wir publishen ja noch nicht),
+ * aber wenn doch (Race-Condition durch Re-Trigger), darf der Flow nicht
+ * stehen bleiben.
+ */
+async function waitUntilFinished(creationId: string, token: string): Promise<void> {
+  for (let attempt = 1; attempt <= POLL_MAX_ATTEMPTS; attempt++) {
+    await new Promise((resolve) => setTimeout(resolve, POLL_INTERVAL_MS));
+    const status = await getContainerStatus(creationId, token);
+    if (status === 'FINISHED' || status === 'PUBLISHED') return;
+    if (status === 'ERROR' || status === 'EXPIRED') {
+      throw new MetaApiError(
+        `Container-Status ${status} nach ${attempt} Poll(s)`,
+        status,
+        'instagram',
+        'poll',
+      );
+    }
+    // IN_PROGRESS oder UNKNOWN → weiter pollen
+  }
+  throw new MetaApiError(
+    `Container nicht FINISHED nach ${POLL_MAX_ATTEMPTS}×${POLL_INTERVAL_MS}ms`,
+    'POLL_TIMEOUT',
+    'instagram',
+    'poll',
+  );
+}
+
+/**
  * Postet einen SocialPost auf Instagram.
  *
  * @param post     Daten aus posts.json
@@ -141,6 +236,9 @@ export async function publishToInstagram(
       'container',
     );
   }
+
+  // Step 1.5: Polling bis FINISHED (Fix für Code 9007).
+  await waitUntilFinished(creationId, token);
 
   // Step 2: Publish
   const publishJson = await metaFetch(
