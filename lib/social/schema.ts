@@ -26,8 +26,16 @@ export interface SocialPost {
   captionIg: string;
   /** Facebook-Caption inkl. echtem URL, max. 2200 Zeichen. */
   captionFb: string;
-  /** Hashtag-String (9–15 Tags, Leerzeichen-getrennt). */
-  hashtags: string;
+  /**
+   * @deprecated W17A.2.y — durch `hashtagsIg` + `hashtagsFb` ersetzt.
+   * Wrapper fällt darauf zurück + trimmt selbst (7/3), wenn die neuen
+   * Felder bei vor-W17A.2.y-Captions fehlen.
+   */
+  hashtags?: string;
+  /** IG-Hashtag-String, max 7 Tags. */
+  hashtagsIg?: string;
+  /** FB-Hashtag-String, max 3 Tags. */
+  hashtagsFb?: string;
 }
 
 export interface PostsFile {
@@ -71,8 +79,23 @@ export interface CaptionEntry {
   captionIg: string;
   /** FB-Text mit echter Rechner-URL als CTA. */
   captionFb: string;
-  /** 9–15 Hashtags, Leerzeichen-getrennt, Kleinbuchstaben. */
-  hashtags: string;
+  /**
+   * @deprecated W17A.2.y (06.06.2026) — durch `hashtagsIg` + `hashtagsFb`
+   * ersetzt. Bleibt im Schema für Backwards-Compat mit vor-W17A.2.y
+   * erzeugten Captions (160 Initial-Build); IG/FB-Wrapper fallen auf
+   * dieses Feld zurück + trimmen selbst, wenn die neuen fehlen.
+   */
+  hashtags?: string;
+  /**
+   * IG-Hashtags, maximal **7** Stück, Leerzeichen-getrennt, Kleinbuchstaben.
+   * Thematisch spezifisch — generische Füller wie #rechnen vermeiden.
+   */
+  hashtagsIg: string;
+  /**
+   * FB-Hashtags, maximal **3** Stück, Leerzeichen-getrennt, Kleinbuchstaben.
+   * Die thematisch wichtigsten Drei — FB-Algorithmus mag wenig, präzise Tags.
+   */
+  hashtagsFb: string;
   /**
    * Bild-Headline (Highlight-Block, Bold 110 px im Image-Builder).
    * Maximal 22 Zeichen inkl. Einheit/Symbol; eine Zahl oder Kernaussage,

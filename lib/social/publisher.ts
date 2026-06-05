@@ -91,6 +91,8 @@ function buildPostForSlug(slug: string): SocialPost | null {
     captionIg: caption.captionIg,
     captionFb: caption.captionFb,
     hashtags: caption.hashtags,
+    hashtagsIg: caption.hashtagsIg,
+    hashtagsFb: caption.hashtagsFb,
   };
 }
 

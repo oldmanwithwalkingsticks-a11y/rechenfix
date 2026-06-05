@@ -54,7 +54,8 @@ WICHTIG: Antworte AUSSCHLIESSLICH mit einem rohen JSON-Objekt, OHNE Markdown-Cod
 {
   "captionIg": "...",
   "captionFb": "...",
-  "hashtags": "#tag1 #tag2 #tag3 …",
+  "hashtagsIg": "#tag1 #tag2 …",
+  "hashtagsFb": "#tag1 #tag2 #tag3",
   "socialHeadline": "...",
   "socialEyebrow": "..."
 }
@@ -67,10 +68,19 @@ Captions:
 - Max 600 Zeichen pro Caption (ohne Hashtags)
 - Keine Emojis im Übermaß: max 2 in der Caption (Hook oder CTA)
 
-Hashtags:
-- 9–15 Stück, mit # und Leerzeichen getrennt
-- Mix aus rechner-spezifisch + breit (z. B. #rechnen #rechenfix)
+hashtagsIg (Instagram-Hashtags):
+- GENAU 5 bis 7 Stück (Hard-Limit 7), mit # und Leerzeichen getrennt
 - Kleinbuchstaben
+- Thematisch zum Rechner — KEINE generischen Füller wie #rechnen, #budget,
+  #geld, #alltag, #fakten, #wissen, #motivation. #rechenfix als Brand-Tag
+  ist ok, aber höchstens einmal und nur wenn Platz übrig
+
+hashtagsFb (Facebook-Hashtags):
+- GENAU 2 bis 3 Stück (Hard-Limit 3), mit # und Leerzeichen getrennt
+- Kleinbuchstaben
+- Die thematisch DREI wichtigsten Tags — FB-Algorithmus mag wenig, präzise
+  Tags besser als viele
+- Keine Generika; #rechenfix nur wenn die anderen 2 sehr eng am Thema sind
 
 socialHeadline (Bild-Highlight, wird groß über die ganze Bildbreite gerendert):
 - MAX 22 Zeichen inkl. Einheit, Symbol, Leerzeichen
@@ -123,6 +133,16 @@ async function callAnthropic(userPrompt: string): Promise<string> {
 const HEADLINE_HARD_LIMIT = 40;
 /** Maximale tolerierte Länge des Eyebrow (Soft-Limit für Retry). */
 const EYEBROW_HARD_LIMIT = 30;
+/** Maximale Hashtag-Anzahl pro Plattform (W17A.2.y). */
+const HASHTAG_LIMIT_IG = 7;
+const HASHTAG_LIMIT_FB = 3;
+
+/** Zählt nur `#…`-Tokens, getrennt durch Leerzeichen — robust gegen leere Tokens. */
+function countHashtags(line: string): number {
+  return line
+    .split(/\s+/)
+    .filter((t) => t.startsWith('#') && t.length > 1).length;
+}
 
 function parseCaptionJson(raw: string): CaptionEntry {
   // Strip eventuelle Markdown-Code-Block-Wrapper, obwohl der System-Prompt
@@ -133,7 +153,14 @@ function parseCaptionJson(raw: string): CaptionEntry {
     .trim();
   const obj = JSON.parse(stripped) as Partial<CaptionEntry>;
   const missing: string[] = [];
-  for (const key of ['captionIg', 'captionFb', 'hashtags', 'socialHeadline', 'socialEyebrow'] as const) {
+  for (const key of [
+    'captionIg',
+    'captionFb',
+    'hashtagsIg',
+    'hashtagsFb',
+    'socialHeadline',
+    'socialEyebrow',
+  ] as const) {
     if (!obj[key] || typeof obj[key] !== 'string' || obj[key]!.trim() === '') {
       missing.push(key);
     }
@@ -141,10 +168,11 @@ function parseCaptionJson(raw: string): CaptionEntry {
   if (missing.length > 0) {
     throw new Error(`Antwort fehlt/leer: ${missing.join(', ')} — ${stripped.slice(0, 200)}`);
   }
-  // Längen-Validierung mit Soft-Limit → Retry kickt, wenn dramatisch über Ziel.
-  // Die exakte 22/22 wird vom Image-Builder über Shrink-Cascade weichgepuffert.
   const headline = obj.socialHeadline!.trim();
   const eyebrow = obj.socialEyebrow!.trim();
+  const hashtagsIg = obj.hashtagsIg!.trim();
+  const hashtagsFb = obj.hashtagsFb!.trim();
+
   if (headline.length > HEADLINE_HARD_LIMIT) {
     throw new Error(
       `socialHeadline zu lang (${headline.length} > ${HEADLINE_HARD_LIMIT}): "${headline}"`,
@@ -155,10 +183,25 @@ function parseCaptionJson(raw: string): CaptionEntry {
       `socialEyebrow zu lang (${eyebrow.length} > ${EYEBROW_HARD_LIMIT}): "${eyebrow}"`,
     );
   }
+  // Hashtag-Anzahl-Limits (W17A.2.y) — Retry bei Überschreitung
+  const igCount = countHashtags(hashtagsIg);
+  const fbCount = countHashtags(hashtagsFb);
+  if (igCount === 0 || igCount > HASHTAG_LIMIT_IG) {
+    throw new Error(
+      `hashtagsIg-Anzahl ${igCount} außerhalb 1..${HASHTAG_LIMIT_IG}: "${hashtagsIg}"`,
+    );
+  }
+  if (fbCount === 0 || fbCount > HASHTAG_LIMIT_FB) {
+    throw new Error(
+      `hashtagsFb-Anzahl ${fbCount} außerhalb 1..${HASHTAG_LIMIT_FB}: "${hashtagsFb}"`,
+    );
+  }
+
   return {
     captionIg: obj.captionIg!.trim(),
     captionFb: obj.captionFb!.trim(),
-    hashtags: obj.hashtags!.trim(),
+    hashtagsIg,
+    hashtagsFb,
     socialHeadline: headline,
     socialEyebrow: eyebrow,
   };
