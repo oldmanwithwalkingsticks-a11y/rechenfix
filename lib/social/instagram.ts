@@ -24,6 +24,33 @@ const TIMEOUT_MS = 30_000;
 const API_BASE = `https://graph.facebook.com/${SOCIAL_CONFIG.GRAPH_API_VERSION}`;
 
 /**
+ * W17A.2.y — Hashtag-Selektion mit Plattform-Limit + Fallback-Trim.
+ *
+ * Bevorzugt das plattform-spezifische Feld (`hashtagsIg` / `hashtagsFb`).
+ * Wenn das fehlt — z. B. weil die Caption noch aus dem W17A.2-Initial-
+ * Build mit dem alten `hashtags`-Feld stammt — wird auf das alte Feld
+ * zurückgefallen und die ersten N Tokens werden genommen. Das stellt
+ * sicher, dass das 7/3-Limit auch ohne Voll-Neulauf der Captions
+ * sofort wirksam ist (Trim per Wrapper, Karsten kann eskalieren auf
+ * Voll-Neulauf für KI-optimierte Top-N statt First-N).
+ */
+export function pickHashtagsForPlatform(
+  post: { hashtagsIg?: string; hashtagsFb?: string; hashtags?: string },
+  platform: 'instagram' | 'facebook',
+  limit: number,
+): string {
+  const preferred =
+    (platform === 'instagram' ? post.hashtagsIg : post.hashtagsFb) ?? '';
+  if (preferred.trim()) return preferred.trim();
+  const fallback = (post.hashtags ?? '').trim();
+  if (!fallback) return '';
+  const tokens = fallback
+    .split(/\s+/)
+    .filter((t) => t.startsWith('#') && t.length > 1);
+  return tokens.slice(0, limit).join(' ');
+}
+
+/**
  * W17A.2.x — Container-Status-Polling-Parameter.
  *
  * Hintergrund: Beim ersten Live-Post auf autokosten-rechner kam IG-Fehler
@@ -218,7 +245,10 @@ export async function publishToInstagram(
   }
 
   const imageUrl = `${SITE_URL}/social-posts/${post.image}`;
-  const caption = `${post.captionIg}\n\n${post.hashtags}`.trim();
+  // Hashtags (W17A.2.y): bevorzugt das neue hashtagsIg-Feld, sonst fallback
+  // auf das alte hashtags-Feld auf die ersten 7 getrimmt.
+  const tags = pickHashtagsForPlatform(post, 'instagram', 7);
+  const caption = `${post.captionIg}\n\n${tags}`.trim();
 
   // Step 1: Container
   const containerJson = await metaFetch(

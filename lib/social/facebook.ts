@@ -15,7 +15,7 @@
 import { SOCIAL_CONFIG } from './config';
 import type { SocialPost } from './schema';
 import { SITE_URL } from '@/lib/seo';
-import { MetaApiError } from './instagram';
+import { MetaApiError, pickHashtagsForPlatform } from './instagram';
 
 const TIMEOUT_MS = 30_000;
 const API_BASE = `https://graph.facebook.com/${SOCIAL_CONFIG.GRAPH_API_VERSION}`;
@@ -48,7 +48,10 @@ export async function publishToFacebook(
   }
 
   const imageUrl = `${SITE_URL}/social-posts/${post.image}`;
-  const message = `${post.captionFb}\n\n${post.hashtags}`.trim();
+  // Hashtags (W17A.2.y): bevorzugt das neue hashtagsFb-Feld, sonst fallback
+  // auf das alte hashtags-Feld auf die ersten 3 getrimmt.
+  const tags = pickHashtagsForPlatform(post, 'facebook', 3);
+  const message = `${post.captionFb}\n\n${tags}`.trim();
 
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
