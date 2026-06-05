@@ -9,14 +9,17 @@ Portierung von scripts/build_phase0_posts.py:
   - Layout-Helper (render_emoji, render_bolt_mini, render_post)
     unverändert übernommen — Pixel-perfekte Phase-0-Optik.
 
-Datenquellen (von zwei TS-Helper-Scripts erzeugt):
+Datenquellen:
   - lib/social/queue.json                (Slug-Reihenfolge)
   - lib/social/kategorie-farben.json     (bg + accent pro Kategorie)
-  - lib/social/_rechner-snapshot.json    (titel, icon, beispiel pro Slug)
+  - lib/social/_rechner-snapshot.json    (titel, icon pro Slug — TS-Dump)
+  - lib/social/captions.json             (socialHeadline + socialEyebrow
+                                          pro Slug, KI-generiert)
 
 Pflicht-Voraussetzungen:
-  1. npx tsx scripts/verify-kategorie-slugs.ts   (exit 0)
-  2. npx tsx scripts/dump-rechner-data.ts        (erzeugt _rechner-snapshot.json)
+  1. npx tsx scripts/verify-kategorie-slugs.ts        (exit 0)
+  2. npx tsx scripts/dump-rechner-data.ts             (Snapshot)
+  3. npx tsx scripts/social-caption-builder.ts        (Captions + Headlines)
 
 Aufruf:
   python scripts/social-image-builder.py
@@ -36,7 +39,6 @@ Dependencies:  pip install Pillow
 import argparse
 import json
 import os
-import re
 import sys
 from pathlib import Path
 
@@ -212,56 +214,14 @@ def render_bolt_mini(size, bolt_png_path):
 
 
 # ============================================================
-# W17A.1: Content-Ableitung aus Rechner-Config
+# W17A.2: Content kommt aus captions.json (KI-generiert)
 # ============================================================
-EYEBROWS = [
-    "Wusstest du?",
-    "Schnell gerechnet",
-    "Mal nachgerechnet",
-    "Selbst-Check",
-    "Rechenbeispiel",
-    "Klassiker",
-    "Faustregel",
-    "Praktisch",
-]
-
-
-def pick_eyebrow(slug: str) -> str:
-    """Deterministisch rotierend, damit Re-Builds stabil bleiben."""
-    # Summe der CodePoints ist robust gegen Slugs mit identischem ersten Buchstaben
-    h = sum(ord(c) for c in slug)
-    return EYEBROWS[h % len(EYEBROWS)]
-
-
-# Strip führender „Beispiel: " oder „z. B. "-Marker
-_LEAD_RE = re.compile(r"^(Beispiel\s*[:\-—]\s*|z\.\s*B\.\s*)", re.IGNORECASE)
-
-
-def extract_highlight(beispiel: str) -> str:
-    """
-    Heuristik: nimm den Teil nach dem letzten =, → oder ≈.
-    Splitte an Satzende-Markern, cap auf 28 Zeichen.
-    Returns "" wenn nichts Sinnvolles ableitbar.
-    """
-    if not beispiel:
-        return ""
-    s = _LEAD_RE.sub("", beispiel.strip())
-    # letztes Vorkommen eines Marker-Zeichens finden
-    positions = [s.rfind(m) for m in ["=", "→", "≈"]]
-    pos = max(positions)
-    if pos < 0:
-        return ""
-    after = s[pos + 1:].strip()
-    # Splitten an Pipe + Punkt-mit-Leerzeichen + Newline
-    for sep in [" | ", "|", "\n", ". "]:
-        if sep in after:
-            after = after.split(sep)[0].strip()
-    after = after.rstrip(".,;:")
-    if len(after) < 3:
-        return ""
-    if len(after) > 28:
-        after = after[:26].rstrip() + "…"
-    return after
+# Vorher (W17A.1) wurden Eyebrow + Highlight aus rechner.beispiel
+# geparst — Trefferquote ~50 %. Seit W17A.2 liefert der Caption-
+# Builder pro Slug eine socialHeadline + socialEyebrow mit, der
+# Image-Builder liest sie direkt. Default-Eyebrow bei fehlendem
+# Eintrag (Pipeline robust gegen Teil-Befüllungen).
+DEFAULT_EYEBROW = "Rechenfix.de"
 
 
 def wrap_title(titel: str, max_chars_per_line: int = 22) -> list[str]:
@@ -285,8 +245,19 @@ def wrap_title(titel: str, max_chars_per_line: int = 22) -> list[str]:
 # ============================================================
 # Spec-Builder pro Slug
 # ============================================================
-def build_spec(slug: str, snapshot: dict, farben: dict) -> dict | None:
-    """Returnt spec oder None bei harten Daten-Fehlern."""
+def build_spec(
+    slug: str,
+    snapshot: dict,
+    farben: dict,
+    captions: dict,
+) -> dict | None:
+    """Returnt spec oder None bei harten Daten-Fehlern.
+
+    eyebrow + highlight kommen aus captions[slug] (W17A.2).
+    Wenn der Slug noch keinen Captions-Eintrag hat (Pipeline mit
+    Teil-Befüllung), greifen sanfte Defaults: eyebrow="Rechenfix.de",
+    highlight leer (Highlight-Block wird einfach weggelassen).
+    """
     r = snapshot.get(slug)
     if not r:
         print(f"  ✗ {slug:35} kein Snapshot-Eintrag", file=sys.stderr)
@@ -299,14 +270,17 @@ def build_spec(slug: str, snapshot: dict, farben: dict) -> dict | None:
             file=sys.stderr,
         )
         return None
+    caption = captions.get(slug) or {}
+    eyebrow = (caption.get("socialEyebrow") or "").strip() or DEFAULT_EYEBROW
+    highlight = (caption.get("socialHeadline") or "").strip()
     return {
         "slug": slug,
         "emoji": r.get("icon") or "📊",
         "bg": tuple(farben_eintrag["bg"]),
         "accent": tuple(farben_eintrag["accent"]),
-        "eyebrow": pick_eyebrow(slug),
+        "eyebrow": eyebrow,
         "lines": wrap_title(r["titel"]),
-        "highlight": extract_highlight(r.get("beispiel", "")),
+        "highlight": highlight,
     }
 
 
@@ -460,9 +434,31 @@ def main():
     with open(snapshot_path, encoding="utf-8") as f:
         snapshot = json.load(f)["rechner"]
 
+    # Captions (W17A.2): socialHeadline + socialEyebrow pro Slug.
+    # Bei leerem captions.json (Pre-Build-Stand) greifen sanfte Defaults
+    # im build_spec — Pipeline läuft trotzdem, Bilder sehen aber dürftig
+    # aus. Hinweis vor Build, damit Karsten weiß, was zu tun ist.
+    captions_path = project_root / "lib" / "social" / "captions.json"
+    if not captions_path.is_file():
+        sys.exit(
+            "FEHLER: lib/social/captions.json fehlt.\n"
+            "Erst ausführen: npx tsx scripts/social-caption-builder.ts"
+        )
+    with open(captions_path, encoding="utf-8") as f:
+        captions = json.load(f).get("captions") or {}
+
     # Drift-Check
     if not verify_repo_state(queue, farben, snapshot):
         sys.exit("Drift erkannt — Build abgebrochen.")
+
+    # Caption-Coverage-Report (informativ, kein exit)
+    missing_caption = [s for s in queue["queue"] if s not in captions]
+    if missing_caption:
+        print(
+            f"  ℹ {len(missing_caption)} von {len(queue['queue'])} Slugs ohne Caption — "
+            f"diese Bilder bekommen Default-Eyebrow + keinen Highlight-Block. "
+            f"Caption-Build laufen lassen: npx tsx scripts/social-caption-builder.ts"
+        )
 
     # Fonts + Bolt-PNG (Bolt wird einmalig pillow-only erzeugt, falls fehlt)
     try:
@@ -493,7 +489,7 @@ def main():
         if args.skip_existing and out_path.is_file():
             skipped += 1
             continue
-        spec = build_spec(slug, snapshot, farben)
+        spec = build_spec(slug, snapshot, farben, captions)
         if spec is None:
             failed.append(slug)
             continue
