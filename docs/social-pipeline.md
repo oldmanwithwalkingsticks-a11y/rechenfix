@@ -139,7 +139,7 @@ git add lib/social/queue.json && git commit -m "chore(social): queue regen"
 
 Bei gleichem `SHUFFLE_SEED = 17` ist die Queue für gleichen EXCLUDED-Stand deterministisch identisch. Done-Marken überleben den Rebuild (sind slug-basiert, nicht index-basiert).
 
-### 5b. Captions bauen
+### 5b. Captions + Bild-Texte bauen (W17A.2)
 
 ```bash
 ANTHROPIC_API_KEY=… npx tsx scripts/social-caption-builder.ts
@@ -147,7 +147,17 @@ ANTHROPIC_API_KEY=… npx tsx scripts/social-caption-builder.ts
 node --env-file=.env.local --import tsx/esm scripts/social-caption-builder.ts
 ```
 
-Das Script ist resumable: bei Abbruch einfach erneut starten, bereits gefüllte Slugs werden übersprungen. Output: [lib/social/captions.json](../lib/social/captions.json).
+Pro Slug erzeugt die KI **fünf** Felder in [lib/social/captions.json](../lib/social/captions.json):
+
+| Feld | Zweck | Limit |
+|---|---|---|
+| `captionIg` | IG-Post-Text mit „Link in Bio" | ≤ 600 Zeichen |
+| `captionFb` | FB-Post-Text mit echter URL | ≤ 600 Zeichen |
+| `hashtags` | 9–15 Tags, Kleinbuchstaben | – |
+| `socialHeadline` | Bild-Highlight, eine Zahl/Aussage | Ziel 22, Hard-Limit 40 |
+| `socialEyebrow` | Bild-Überzeile, 1–2 thematische Wörter | Hard-Limit 30 |
+
+Das Script ist resumable (bereits gefüllte Slugs werden übersprungen) und schreibt Write-Through nach jedem Slug. Bei Schema-Verletzung (leere Felder, Überlänge) greift `RETRY_MAX = 1`.
 
 ```bash
 git add lib/social/captions.json && git commit -m "feat(social): captions <N> slugs"

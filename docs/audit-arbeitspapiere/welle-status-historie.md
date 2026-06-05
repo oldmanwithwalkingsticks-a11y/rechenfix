@@ -2714,3 +2714,51 @@ Volltext in CLAUDE.md → „Methodische Lehren (NEU, Welle 17A.1)".
 - **W17A.1.F**: Image-Builder ins Repo + Karsten-Run für 160 Bilder
 - **W17A.X**: weitere Slug-Quellen, neue Kategorien beim Hinzufügen automatisch eingebunden
 - **W17A.Y**: TikTok-Pipeline (W17B-Vorbereitung)
+
+---
+
+## WELLE 17A.2 — Bild-Texte aus KI statt Beispiel-Parsing (06.06.2026)
+
+**Status:** Code 2/2 Commits + Doku durch, Re-Build der Captions steht aus (Karsten).
+**Vorbedingung:** W17A.1.F (Image-Builder) ist im Repo. Erste Bild-Stichprobe zeigte: Eyebrow + Highlight aus `rechner.beispiel`-Parsing nur ~50 % Trefferquote. Karsten-Befunde: leere Highlights bei baufinanzierung/brotback/durchschnitt, abgeschnittene Texte > 28 Zeichen, „*" beim binaer-rechner, themenfremde Slug-Hash-Eyebrows wie „KLASSIKER" auf blutdruck-rechner.
+
+### Architektur-Wechsel
+
+| Vorher (W17A.1) | Nachher (W17A.2) |
+|---|---|
+| Image-Builder parst `extract_highlight(beispiel)` mit Regex nach `=` / `→` / `≈` | Image-Builder liest `captions[slug].socialHeadline` direkt |
+| `pick_eyebrow(slug)` mit Hash-Rotation über 8er-Liste | `captions[slug].socialEyebrow` (KI hat kontextpassend gewählt) |
+| `CaptionEntry` mit 3 Pflichtfeldern | `CaptionEntry` mit 5 Pflichtfeldern (2 neu: `socialHeadline`, `socialEyebrow`) |
+
+### Commits
+
+| # | Hash | Inhalt |
+|---|---|---|
+| 1 | `5ec2b88` | Schema-Erweiterung + Caption-Builder: SYSTEM_PROMPT um Regeln für `socialHeadline` (≤ 22 Ziel) + `socialEyebrow` (1–2 Wörter, kontextpassend), `parseCaptionJson` validiert 5 Felder mit Längen-Hard-Limits 40/30 (Soft → Retry) |
+| 2 | `f9b3821` | Image-Builder: `EYEBROWS`-Liste + `pick_eyebrow` + `extract_highlight` + `_LEAD_RE` + `import re` raus, Lookup in captions.json mit Default-Eyebrow „Rechenfix.de", Caption-Coverage-Report vor Build, Shrink-Cascade als zweites Sicherheitsnetz |
+| 3 | (dieser) | Doku-Sync: social-pipeline.md §5b-Tabelle für 5 Caption-Felder, CLAUDE.md W17A.2-Block + L-W17A.2.1, Welle-Historie |
+
+### Lehre
+
+- **L-W17A.2.1**: Das `beispiel`-Feld ist Rechner-Kontext, kein Social-tauglicher Text. Heuristisches Parsen lieferte ~50 % Trefferquote — eigene KI-generierte Felder lösen das sauber. **Pattern:** unter 80 % Heuristik-Trefferquote ist immer das falsche Werkzeug; Eigenschaft-spezifische Felder erzeugen statt aus Mehrzweck-Feldern parsen.
+
+Volltext in CLAUDE.md → „Methodische Lehren (NEU, Welle 17A.2)".
+
+### Was steht noch aus
+
+**Karsten:**
+1. **Captions neu bauen** (wegen Schema-Wechsel — die alten 3-Feld-Captions wären schema-invalid, aber `captions.json` ist leer → kein Migrationsproblem):
+   ```bash
+   ANTHROPIC_API_KEY=… npx tsx scripts/social-caption-builder.ts
+   ```
+   ~10–20 Min für 160 Slugs (gleich wie W17A.1, jetzt mit 5 Feldern statt 3).
+2. **Image-Build neu starten** — Bilder sollten jetzt aussagekräftige Headlines + Eyebrows haben:
+   ```bash
+   python scripts/social-image-builder.py --limit 5    # Sichtprüfung
+   python scripts/social-image-builder.py              # Full 160
+   ```
+3. **Commit + Push** der neuen `captions.json` + `public/social-posts/*.png`.
+
+### Backlog nach W17A.2
+
+- Sobald Karsten die Caption-Build-Stichprobe gesehen hat: optional Stilkalibrierung am System-Prompt (Headline-Style noch knapper? Eyebrow-Tonalität?)

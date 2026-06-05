@@ -818,6 +818,15 @@ Reihenfolge nach Freigabe: erst 85 (Warning wegräumen), dann 68 (CMP dazu).
 - **W17A.1.F** (offen) — `scripts/social-image-builder.py` (Python + Pillow): wartet auf Karstens `build_phase0_posts.py`-Ablage in scripts/, dann Portierung von 10 hartcodierten POSTS auf Queue-Iteration + Kategorie-Farb-Mapping
 - **W17A.1.G** (dieser Commit) — Doku-Sync: `docs/social-pipeline.md` erweitert um §1 Queue+Done-Marken, §5 neuer Workflow (queue regen → caption build → image build), §8 Done-Key-Schema + Queue-Reset-CLI; CLAUDE.md L-Lehren W17A.1.1–3; Welle-Status-Historie
 
+### Welle 17A.2 — Bild-Texte aus KI statt Beispiel-Parsing (Juni 2026)
+
+- **W17A.2.1** (Commit 5ec2b88) — `CaptionEntry` um `socialHeadline` (≤ 22 Zeichen Ziel, 40 hart) + `socialEyebrow` (1–2 Wörter, kontextpassend) erweitert. Caption-Builder-System-Prompt + `parseCaptionJson` validiert jetzt 5 Pflichtfelder mit Längen-Soft-Limits; bei Überlänge throw → Retry kickt ✅
+- **W17A.2.2** (Commit f9b3821) — Image-Builder: `EYEBROWS`-Liste + `pick_eyebrow(slug)`-Hash-Rotation + `extract_highlight(beispiel)`-Regex-Heuristik komplett raus. Stattdessen Lookup in `captions.json` mit Default-Eyebrow `Rechenfix.de` bei fehlendem Eintrag. Caption-Coverage-Report vor Build, Shrink-Cascade bleibt als zweites Sicherheitsnetz ✅
+
+### Methodische Lehren (NEU, Welle 17A.2)
+
+- **L-W17A.2.1: Das rechner.`beispiel`-Feld ist Rechner-Kontext, kein Social-tauglicher Text.** Der Image-Builder hat versucht, Eyebrow + Headline aus `beispiel` zu extrahieren (Heuristik nach letztem `=` / `→` / `≈`, Slug-Hash-Eyebrow). Realität: Trefferquote ~50 %. Konkrete Failure-Modi: abgeschnittener Text bei kompakten Beispielen („8,50 Dezimalstunden"), Müll-Highlights bei nicht-numerischen Formeln (`*` beim binaer-rechner), leere Highlights bei langen Prosa-Beispielen (baufinanzierung, brotback, durchschnitt), und themenfremde Hash-Eyebrows wie „KLASSIKER" auf blutdruck-rechner. **Lehre:** Für Bild-Texte braucht es eigene KI-generierte Kurzformen. Das `beispiel`-Feld liefert den KONTEXT für die KI, nicht den Ausgabe-Text. **Pattern:** wenn Heuristik mehrfach schlechtere als 80 % Trefferquote liefert, ist sie das falsche Werkzeug — Eigenschaft-spezifische KI-Felder erzeugen statt aus Mehrzweck-Feldern parsen.
+
 ### Methodische Lehren (NEU, Welle 17A.1)
 
 - **L-W17A.1.1: Seeded Shuffle mit Code-konstantem Seed für reproduzierbare Pipeline-Reihenfolge.** Statt jeden Tag eine zufällige Auswahl zu machen (zwei-Touch-Risiko bei Reload, Debugging-Hölle), wird die Queue einmal seeded gemischt (Mulberry32 + Fisher-Yates, Seed `17` in `lib/social/config.ts`). Jeder Build mit gleichem Seed UND gleichem EXCLUDED_SLUGS-Set liefert identische Queue. Bei EXCLUDED-Änderung (z. B. weitere manuelle Posts) ändert sich die Reihenfolge — Done-Marken überleben das aber, weil sie slug-basiert sind und nicht index-basiert. **Pattern:** für jede deterministische Reihenfolge-Generierung Seed im Code festnageln, niemals via `Date.now()` oder `Math.random()` initialisieren.
