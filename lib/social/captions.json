@@ -1,4 +1,1125 @@
 {
   "version": 1,
-  "captions": {}
+  "captions": {
+    "autokosten-rechner": {
+      "captionIg": "💰 Weißt du, was dein Auto wirklich kostet? Die meisten unterschätzen ihre wahren Autokosten massiv. Unser Rechner zeigt dir alle versteckten Kosten: Wertverlust, Sprit, Versicherung, Wartung und mehr. So siehst du sofort, ob sich ein Neuwagen lohnt oder ob du mit dem aktuellen Auto günstiger fährst. 👉 Link in Bio",
+      "captionFb": "💰 Weißt du, was dein Auto wirklich kostet? Die meisten unterschätzen ihre wahren Autokosten massiv. Unser Rechner zeigt dir alle versteckten Kosten: Wertverlust, Sprit, Versicherung, Wartung und mehr. So siehst du sofort, ob sich ein Neuwagen lohnt oder ob du mit dem aktuellen Auto günstiger fährst. 👉 https://www.rechenfix.de/auto/autokosten-rechner",
+      "hashtags": "#autokosten #autokauf #rechenfix #autofinanzierung #spritkosten #wertverlust #versicherung #fahrzeugkosten #mobilität #neuwagen #gebrauchtwagen #kostentransparenz #rechnen #finanzen #budget",
+      "socialHeadline": "571 €/Monat",
+      "socialEyebrow": "Mal nachgerechnet"
+    },
+    "cups-umrechner": {
+      "captionIg": "Amerikanisches Rezept gefunden, aber was ist 1 Cup Mehl in Gramm? 🤔 Der Cups-Umrechner kennt die spezifische Dichte für über 20 Zutaten — von Mehl bis Butter. So wird jedes US-Rezept zum Erfolg! 👉 Link in Bio",
+      "captionFb": "Amerikanisches Rezept gefunden, aber was ist 1 Cup Mehl in Gramm? 🤔 Der Cups-Umrechner kennt die spezifische Dichte für über 20 Zutaten — von Mehl bis Butter. So wird jedes US-Rezept zum Erfolg! https://www.rechenfix.de/kochen/cups-umrechner",
+      "hashtags": "#cups #umrechnen #kochen #backen #rezepte #amerikanisch #mehl #zucker #butter #küche #rechenfix #gramm #milliliter #zutaten #backhelfer",
+      "socialHeadline": "1 Cup = 125 g Mehl",
+      "socialEyebrow": "US-Rezepte"
+    },
+    "whr-rechner": {
+      "captionIg": "Ist dein WHR gesünder als dein BMI? 🤔\n\nDer Taille-Hüfte-Quotient zeigt dein Bauchfett-Risiko genauer als der BMI. Miss einfach Taille und Hüfte — fertig ist die bessere Gesundheits-Einschätzung.\n\nBerechne jetzt dein WHR 👉 Link in Bio",
+      "captionFb": "Ist dein WHR gesünder als dein BMI? 🤔\n\nDer Taille-Hüfte-Quotient zeigt dein Bauchfett-Risiko genauer als der BMI. Miss einfach Taille und Hüfte — fertig ist die bessere Gesundheits-Einschätzung.\n\nBerechne jetzt dein WHR: https://www.rechenfix.de/gesundheit/whr-rechner",
+      "hashtags": "#whr #taillehüfteverhältnis #bauchfett #gesundheit #bmi #körperfett #risiko #gesundheitscheck #abnehmen #fitness #ernährung #rechenfix #rechnen #gesund #körperanalyse",
+      "socialHeadline": "WHR 0,78",
+      "socialEyebrow": "Selbst-Check"
+    },
+    "schwangerschaft-gewicht-rechner": {
+      "captionIg": "Wie viel Gewichtszunahme ist in der Schwangerschaft normal? 🤰 Der Rechner zeigt dir basierend auf deinem BMI vor der Schwangerschaft die empfohlene Zunahme und den aktuellen Verlauf. So behältst du entspannt den Überblick und weißt, ob du im gesunden Bereich liegst. 👉 Link in Bio",
+      "captionFb": "Wie viel Gewichtszunahme ist in der Schwangerschaft normal? 🤰 Der Rechner zeigt dir basierend auf deinem BMI vor der Schwangerschaft die empfohlene Zunahme und den aktuellen Verlauf. So behältst du entspannt den Überblick und weißt, ob du im gesunden Bereich liegst. https://www.rechenfix.de/gesundheit/schwangerschaft-gewicht-rechner",
+      "hashtags": "#schwangerschaft #gewichtszunahme #schwanger #bmi #gesundheit #mama #schwangerschaftsverlauf #baby #rechenfix #rechner #normalgewicht #ssw #babybauch",
+      "socialHeadline": "11,5–16 kg normal",
+      "socialEyebrow": "Schwangerschaft"
+    },
+    "einkommensteuer-rechner": {
+      "captionIg": "Wusstest du, dass Verheiratete bei 50.000 € nur halb so viel Steuer zahlen? 🤔 Bei 50k zvE zahlst du ledig 9.758 € Einkommensteuer, mit Ehegattensplitting nur 5.030 €. Das sind 4.700 € weniger pro Jahr! Berechne deine exakte Steuerlast für 2026 mit allen Freibeträgen und sieh den Splitting-Vorteil. 👉 Link in Bio",
+      "captionFb": "Wusstest du, dass Verheiratete bei 50.000 € nur halb so viel Steuer zahlen? 🤔 Bei 50k zvE zahlst du ledig 9.758 € Einkommensteuer, mit Ehegattensplitting nur 5.030 €. Das sind 4.700 € weniger pro Jahr! Berechne deine exakte Steuerlast für 2026 mit allen Freibeträgen und sieh den Splitting-Vorteil. https://www.rechenfix.de/finanzen/einkommensteuer-rechner",
+      "hashtags": "#einkommensteuer #steuern #ehegattensplitting #steuerberechnung #rechenfix #finanzen #steuerlast #grenzsteuersatz #splitting #steuerersparnis #estg #steuerrecht #rechner #geld #steuertipps",
+      "socialHeadline": "9.758 € Steuerlast",
+      "socialEyebrow": "Steuer-Check"
+    },
+    "lieferservice-rechner": {
+      "captionIg": "Wie viel gibst du wirklich für Lieferservice aus? 🍕 Rechne nach: 3× wöchentlich à 30 € summieren sich auf fast 5.000 € pro Jahr! Unser Rechner zeigt dir die echten Kosten und vergleicht sie mit Selberkochen. 👉 Link in Bio",
+      "captionFb": "Wie viel gibst du wirklich für Lieferservice aus? 🍕 Rechne nach: 3× wöchentlich à 30 € summieren sich auf fast 5.000 € pro Jahr! Unser Rechner zeigt dir die echten Kosten und vergleicht sie mit Selberkochen. https://www.rechenfix.de/alltag/lieferservice-rechner",
+      "hashtags": "#lieferservice #essenslieferung #haushaltskosten #sparen #rechenfix #geldsparen #kochen #budget #alltagsrechner #lieferando #ubereats #fooddelivery #monatsausgaben #spartipps #rechnen",
+      "socialHeadline": "4.680 € / Jahr",
+      "socialEyebrow": "Mal nachgerechnet"
+    },
+    "krankengeld-rechner": {
+      "captionIg": "Wie viel Krankengeld bekommst du eigentlich? 💰 Bei 3.500 € Brutto sind das etwa 72 € netto pro Tag – macht rund 2.158 € im Monat. Deutlich weniger als dein normales Gehalt! Rechne jetzt dein individuelles Krankengeld aus und sieh, womit du rechnen musst. 👉 Link in Bio",
+      "captionFb": "Wie viel Krankengeld bekommst du eigentlich? 💰 Bei 3.500 € Brutto sind das etwa 72 € netto pro Tag – macht rund 2.158 € im Monat. Deutlich weniger als dein normales Gehalt! Rechne jetzt dein individuelles Krankengeld aus und sieh, womit du rechnen musst. https://www.rechenfix.de/finanzen/krankengeld-rechner",
+      "hashtags": "#krankengeld #arbeitsunfähigkeit #krankenversicherung #gehalt #finanzen #nettolohn #sozialversicherung #krankheit #geld #rechner #rechenfix #gesundheit #arbeitnehmer #einkommen #finanzplanung",
+      "socialHeadline": "≈ 2.158 €/Monat",
+      "socialEyebrow": "Krankheitsfall"
+    },
+    "kfz-steuer-rechner": {
+      "captionIg": "💰 Wie viel Kfz-Steuer zahlst du wirklich? Unser Rechner zeigt dir die exakte Jahressteuer für dein Auto – aufgeschlüsselt nach Hubraum und CO₂-Werten. Egal ob Benziner, Diesel, Elektro oder Hybrid: Du siehst sofort, was dich erwartet. 👉 Link in Bio",
+      "captionFb": "💰 Wie viel Kfz-Steuer zahlst du wirklich? Unser Rechner zeigt dir die exakte Jahressteuer für dein Auto – aufgeschlüsselt nach Hubraum und CO₂-Werten. Egal ob Benziner, Diesel, Elektro oder Hybrid: Du siehst sofort, was dich erwartet. https://www.rechenfix.de/auto/kfz-steuer-rechner",
+      "hashtags": "#kfzsteuer #autosteuer #rechenfix #rechner #steuer #auto #benziner #diesel #elektroauto #hybrid #co2 #hubraum #jahressteuer #kfz #autokauf",
+      "socialHeadline": "98,60 € / Jahr",
+      "socialEyebrow": "Steuer-Check"
+    },
+    "riester-rechner": {
+      "captionIg": "Riester-Rente: Lohnt sich das noch? 🤔 Berechne deine Zulagen, Steuerersparnis und den tatsächlichen Eigenbeitrag. Mit Kindern besonders interessant – pro Kind gibt's 300€ extra! Finde heraus, ob Riestern für dich sinnvoll ist. 👉 Link in Bio",
+      "captionFb": "Riester-Rente: Lohnt sich das noch? 🤔 Berechne deine Zulagen, Steuerersparnis und den tatsächlichen Eigenbeitrag. Mit Kindern besonders interessant – pro Kind gibt's 300€ extra! Finde heraus, ob Riestern für dich sinnvoll ist. https://www.rechenfix.de/finanzen/riester-rechner",
+      "hashtags": "#riester #riesterrente #altersvorsorge #rente #steuerersparnis #zulage #finanzen #vorsorge #rechenfix #geldanlage #steuer #pension #absicherung #finanzplanung",
+      "socialHeadline": "560 € Förderung",
+      "socialEyebrow": "Riester-Check"
+    },
+    "urlaubstage-rechner": {
+      "captionIg": "Wie viele Urlaubstage stehen dir wirklich zu? 🏖️ Bei Teilzeit, später Einstellung oder Kündigung wird's kompliziert. Unser Rechner berücksichtigt alle gesetzlichen Regeln und rechnet dir deinen exakten Anspruch aus. 👉 Link in Bio",
+      "captionFb": "Wie viele Urlaubstage stehen dir wirklich zu? 🏖️ Bei Teilzeit, später Einstellung oder Kündigung wird's kompliziert. Unser Rechner berücksichtigt alle gesetzlichen Regeln und rechnet dir deinen exakten Anspruch aus. https://www.rechenfix.de/arbeit/urlaubstage-rechner",
+      "hashtags": "#urlaubstage #arbeitsrecht #teilzeit #urlaubsanspruch #rechenfix #rechnen #urlaub #gesetz #burlog #kündigung #resturlaub #arbeitszeit #rechner #anspruch #urlaubsberechnung",
+      "socialHeadline": "14 Urlaubstage",
+      "socialEyebrow": "Dein Anspruch"
+    },
+    "skontorechner": {
+      "captionIg": "Skonto nehmen oder lieber warten? 🤔 Bei einer 5.000 € Rechnung mit 2% Skonto sparst du 100 € – das entspricht einem effektiven Jahreszins von 36,7%! Der Skontorechner zeigt dir, ob sich die frühe Zahlung lohnt oder ob du das Geld besser anders anlegst. 👉 Link in Bio",
+      "captionFb": "Skonto nehmen oder lieber warten? 🤔 Bei einer 5.000 € Rechnung mit 2% Skonto sparst du 100 € – das entspricht einem effektiven Jahreszins von 36,7%! Der Skontorechner zeigt dir, ob sich die frühe Zahlung lohnt oder ob du das Geld besser anders anlegst. https://www.rechenfix.de/alltag/skontorechner",
+      "hashtags": "#skonto #skontorechner #frühzahlung #rechnung #sparen #finanzen #geld #jahreszins #zahlung #rechenfix #alltag #geschäft #unternehmen #buchhaltung",
+      "socialHeadline": "100 € sparen",
+      "socialEyebrow": "Schnell gerechnet"
+    },
+    "leasing-rechner": {
+      "captionIg": "Leasing oder Finanzierung – was ist günstiger? 🚗 Mit dem Leasing-Rechner siehst du sofort deine monatliche Rate und die Gesamtkosten. Inklusive direktem Vergleich zur klassischen Finanzierung, damit du die beste Entscheidung triffst. 👉 Link in Bio",
+      "captionFb": "Leasing oder Finanzierung – was ist günstiger? 🚗 Mit dem Leasing-Rechner siehst du sofort deine monatliche Rate und die Gesamtkosten. Inklusive direktem Vergleich zur klassischen Finanzierung, damit du die beste Entscheidung triffst. https://www.rechenfix.de/auto/leasing-rechner",
+      "hashtags": "#leasing #leasingrate #autofinanzierung #fahrzeugfinanzierung #neuwagen #gebrauchtwagen #autokauf #rechnen #rechenfix #autokosten #finanzierung #vergleich #sparen #geld",
+      "socialHeadline": "354,03 € / Monat",
+      "socialEyebrow": "Leasing-Check"
+    },
+    "abfindungsrechner": {
+      "captionIg": "💰 Wie viel Abfindung steht dir wirklich zu? Mit der Fünftelregelung sparst du oft mehrere tausend Euro Steuern. Unser Rechner zeigt dir sofort brutto und netto – inklusive aller steuerlichen Tricks. 👉 Link in Bio",
+      "captionFb": "💰 Wie viel Abfindung steht dir wirklich zu? Mit der Fünftelregelung sparst du oft mehrere tausend Euro Steuern. Unser Rechner zeigt dir sofort brutto und netto – inklusive aller steuerlichen Tricks. https://www.rechenfix.de/arbeit/abfindungsrechner",
+      "hashtags": "#abfindung #kündigung #arbeitsrecht #fünftelregelung #steuern #nettolohn #arbeitnehmer #rechnen #rechenfix #jobwechsel #aufhebungsvertrag #arbeitslos #geld #finanzen #steuerersparnis",
+      "socialHeadline": "ca. 10.300 € netto",
+      "socialEyebrow": "Faustregel"
+    },
+    "kalorienrechner": {
+      "captionIg": "Kennst du deinen täglichen Kalorienbedarf? 🤔 Mit dem Kalorienrechner erfährst du, wie viele Kalorien dein Körper wirklich braucht – für den Grundumsatz und je nach Aktivitätslevel. Beispiel: Eine 30-jährige Frau (165cm, 65kg, leicht aktiv) benötigt 1.862 kcal pro Tag. 👉 Link in Bio",
+      "captionFb": "Kennst du deinen täglichen Kalorienbedarf? 🤔 Mit dem Kalorienrechner erfährst du, wie viele Kalorien dein Körper wirklich braucht – für den Grundumsatz und je nach Aktivitätslevel. Beispiel: Eine 30-jährige Frau (165cm, 65kg, leicht aktiv) benötigt 1.862 kcal pro Tag. https://www.rechenfix.de/gesundheit/kalorienrechner",
+      "hashtags": "#kalorienrechner #kalorienbedarf #grundumsatz #gesamtumsatz #gesundheit #ernährung #abnehmen #fitness #diät #kalorien #rechnen #rechenfix #stoffwechsel #körper #gesundleben",
+      "socialHeadline": "1.862 kcal / Tag",
+      "socialEyebrow": "Selbst-Check"
+    },
+    "balkon-solar-rechner": {
+      "captionIg": "💡 Lohnt sich ein Balkonkraftwerk für dich? Mit 800W Balkon-Solar kannst du etwa 680 kWh im Jahr erzeugen. Bei einem Eigenverbrauch von 30% sparst du rund 68 € jährlich bei den Stromkosten. Der Rechner zeigt dir Ertrag, Eigenverbrauch und wann sich deine Anlage amortisiert hat. 👉 Link in Bio",
+      "captionFb": "💡 Lohnt sich ein Balkonkraftwerk für dich? Mit 800W Balkon-Solar kannst du etwa 680 kWh im Jahr erzeugen. Bei einem Eigenverbrauch von 30% sparst du rund 68 € jährlich bei den Stromkosten. Der Rechner zeigt dir Ertrag, Eigenverbrauch und wann sich deine Anlage amortisiert hat. https://www.rechenfix.de/wohnen/balkon-solar-rechner",
+      "hashtags": "#balkonkraftwerk #balkonsolar #solarenergie #eigenverbrauch #stromsparen #energie #nachhaltigkeit #rechenfix #rechner #photovoltaik #balkon #solar #energiewende #stromkosten #erneuerbar",
+      "socialHeadline": "684 kWh / Jahr",
+      "socialEyebrow": "Balkon-Solar"
+    },
+    "waehrungsrechner": {
+      "captionIg": "Wie viel sind 100 € in Dollar? 💱 Mit unserem Währungsrechner rechnest du blitzschnell zwischen 29 Währungen um. Perfekt für Urlaub, Online-Shopping oder Business. 👉 Link in Bio",
+      "captionFb": "Wie viel sind 100 € in Dollar? 💱 Mit unserem Währungsrechner rechnest du blitzschnell zwischen 29 Währungen um. Perfekt für Urlaub, Online-Shopping oder Business. https://www.rechenfix.de/alltag/waehrungsrechner",
+      "hashtags": "#währungsrechner #rechenfix #währung #euro #dollar #urlaub #reisen #umrechnen #wechselkurs #geld #finanzen #rechnen #ausland #shopping #alltag",
+      "socialHeadline": "100 € = 108 $",
+      "socialEyebrow": "Schnell umgerechnet"
+    },
+    "durchschnitt-rechner": {
+      "captionIg": "Welcher Durchschnitt ist der richtige? 🤔 Arithmetisches Mittel, Median oder Modus – je nach Situation brauchst du verschiedene Werte. Unser Rechner zeigt dir alle auf einmal und erklärt die Unterschiede. Perfekt für Schule, Uni oder wenn du Daten richtig interpretieren willst. 👉 Link in Bio",
+      "captionFb": "Welcher Durchschnitt ist der richtige? 🤔 Arithmetisches Mittel, Median oder Modus – je nach Situation brauchst du verschiedene Werte. Unser Rechner zeigt dir alle auf einmal und erklärt die Unterschiede. Perfekt für Schule, Uni oder wenn du Daten richtig interpretieren willst. https://www.rechenfix.de/mathe/durchschnitt-rechner",
+      "hashtags": "#durchschnitt #mittelwert #median #modus #statistik #mathe #rechnen #schule #uni #datenanalyse #rechenfix #mathematik #lernen #bildung #zahlen",
+      "socialHeadline": "Mittelwert = 5,4",
+      "socialEyebrow": "Rechenbeispiel"
+    },
+    "umzugskosten-rechner": {
+      "captionIg": "Wusstest du, dass Umzüge oft teurer werden als geplant? 💸 Unser Rechner zeigt dir vorab alle Kostenpunkte: Umzugsfirma vs. Selbstumzug, Transporter, Verpackung, Etagen-Aufschlag. So kannst du dein Budget richtig planen und böse Überraschungen vermeiden. 👉 Link in Bio",
+      "captionFb": "Wusstest du, dass Umzüge oft teurer werden als geplant? 💸 Unser Rechner zeigt dir vorab alle Kostenpunkte: Umzugsfirma vs. Selbstumzug, Transporter, Verpackung, Etagen-Aufschlag. So kannst du dein Budget richtig planen und böse Überraschungen vermeiden. https://www.rechenfix.de/alltag/umzugskosten-rechner",
+      "hashtags": "#umzug #umzugskosten #umziehen #wohnungswechsel #umzugsfirma #transporter #umzugsplanung #kosten #budgetplanung #rechenfix #alltag #rechner #geldsparen #haushalt #wohnen",
+      "socialHeadline": "1.650 € vs. 355 €",
+      "socialEyebrow": "Umzug-Vergleich"
+    },
+    "zufallszahl-generator": {
+      "captionIg": "Brauchst du schnell eine Zufallszahl? 🎲 Ob für Spiele, Losverfahren oder den Schulunterricht – der Generator erstellt dir alles: einzelne Zahlen, Würfelwürfe, Münzentscheidungen oder sogar Lotto-Tipps. Einfach Bereich eingeben und los geht's! 👉 Link in Bio",
+      "captionFb": "Brauchst du schnell eine Zufallszahl? 🎲 Ob für Spiele, Losverfahren oder den Schulunterricht – der Generator erstellt dir alles: einzelne Zahlen, Würfelwürfe, Münzentscheidungen oder sogar Lotto-Tipps. Einfach Bereich eingeben und los geht's! https://www.rechenfix.de/mathe/zufallszahl-generator",
+      "hashtags": "#zufallszahl #würfel #generator #zufall #spiele #lotto #mathe #schule #rechenfix #losverfahren #münzwurf #rechnen #mathematik #online",
+      "socialHeadline": "42 von 100",
+      "socialEyebrow": "Zufall"
+    },
+    "geburtstag-rechner": {
+      "captionIg": "Weißt du, wie viele Tage du bereits gelebt hast? 🎂 Der Geburtstags-Rechner zeigt dir dein Alter in Tagen, Stunden und sogar Sekunden. Plus: Wochentag deiner Geburt, Sternzeichen und wann dein nächster runder Geburtstag ansteht. Perfekt für Geburtstagskinder und Neugierige! 👉 Link in Bio",
+      "captionFb": "Weißt du, wie viele Tage du bereits gelebt hast? 🎂 Der Geburtstags-Rechner zeigt dir dein Alter in Tagen, Stunden und sogar Sekunden. Plus: Wochentag deiner Geburt, Sternzeichen und wann dein nächster runder Geburtstag ansteht. Perfekt für Geburtstagskinder und Neugierige! https://www.rechenfix.de/alltag/geburtstag-rechner",
+      "hashtags": "#geburtstag #alter #geburtstagrechner #lebenszeit #tage #stunden #sternzeichen #wochentag #geburtstagskind #rechenfix #rechner #alltag #neugier #zeit #leben",
+      "socialHeadline": "13.087 Tage",
+      "socialEyebrow": "Lebenszeit"
+    },
+    "raucher-rechner": {
+      "captionIg": "Rauchst du täglich eine halbe Packung Zigaretten? 💸 Das sind bei 9€ pro Packung satte 2.464€ im Jahr! Damit könntest du einen ganzen Urlaub finanzieren oder dir was richtig Schönes gönnen. Rechne deine Kosten aus und lass dich überraschen! 👉 Link in Bio",
+      "captionFb": "Rauchst du täglich eine halbe Packung Zigaretten? 💸 Das sind bei 9€ pro Packung satte 2.464€ im Jahr! Damit könntest du einen ganzen Urlaub finanzieren oder dir was richtig Schönes gönnen. Rechne deine Kosten aus und lass dich überraschen! https://www.rechenfix.de/gesundheit/raucher-rechner",
+      "hashtags": "#raucher #rauchkosten #geldsparen #zigaretten #gesundheit #rechenfix #sparen #jahreskosten #rechnen #rauchenaufhören #kosten #budget #finanzen #ausgaben #geld",
+      "socialHeadline": "2.464 € / Jahr",
+      "socialEyebrow": "Wusstest du?"
+    },
+    "wasserbedarf-rechner": {
+      "captionIg": "Wusstest du, dass du als 75-kg-Person mit Sport mindestens 3,3 Liter am Tag trinken solltest? 💧 Der Wasserbedarf hängt von deinem Gewicht, deiner Aktivität und weiteren Faktoren ab. Mit dem Rechner findest du deine persönliche Trinkmenge und siehst sofort, wie viele Gläser das sind. 👉 Link in Bio",
+      "captionFb": "Wusstest du, dass du als 75-kg-Person mit Sport mindestens 3,3 Liter am Tag trinken solltest? 💧 Der Wasserbedarf hängt von deinem Gewicht, deiner Aktivität und weiteren Faktoren ab. Mit dem Rechner findest du deine persönliche Trinkmenge und siehst sofort, wie viele Gläser das sind. https://www.rechenfix.de/gesundheit/wasserbedarf-rechner",
+      "hashtags": "#wasserbedarf #trinken #gesundheit #hydration #rechenfix #gesundleben #fitness #sport #wasser #trinkmenge #körper #rechner #gesundheitstipp #flüssigkeit #lifestyle",
+      "socialHeadline": "3,3 Liter / Tag",
+      "socialEyebrow": "Selbst-Check"
+    },
+    "elterngeld-rechner": {
+      "captionIg": "💰 Weißt du, wie viel Elterngeld dir zusteht? Mit unserem Rechner findest du es in 2 Minuten heraus. Berechne Basiselterngeld, ElterngeldPlus und alle Boni für 2026. Einfach Nettoeinkommen eingeben und sofort deine monatliche Unterstützung sehen. 👉 Link in Bio",
+      "captionFb": "💰 Weißt du, wie viel Elterngeld dir zusteht? Mit unserem Rechner findest du es in 2 Minuten heraus. Berechne Basiselterngeld, ElterngeldPlus und alle Boni für 2026. Einfach Nettoeinkommen eingeben und sofort deine monatliche Unterstützung sehen. ➡️ https://www.rechenfix.de/finanzen/elterngeld-rechner",
+      "hashtags": "#elterngeld #elterngeldrechner #elternzeit #baby #schwanger #finanzplanung #familienfinanzen #eltern #nachwuchs #geld #rechnen #rechenfix #familie #babygeld #elterngeldbezug",
+      "socialHeadline": "1.625 € / Monat",
+      "socialEyebrow": "Familienförderung"
+    },
+    "einheiten-umrechner": {
+      "captionIg": "Wie viele Meter sind 5 km? 🤔 Mit dem Einheiten-Umrechner sparst du dir das Kopfrechnen: Länge, Gewicht, Volumen, Temperatur und mehr – einfach eingeben und sofort das Ergebnis sehen. Perfekt für Schule, Beruf oder den Alltag! 👉 Link in Bio",
+      "captionFb": "Wie viele Meter sind 5 km? 🤔 Mit dem Einheiten-Umrechner sparst du dir das Kopfrechnen: Länge, Gewicht, Volumen, Temperatur und mehr – einfach eingeben und sofort das Ergebnis sehen. Perfekt für Schule, Beruf oder den Alltag! https://www.rechenfix.de/mathe/einheiten-umrechner",
+      "hashtags": "#einheiten #umrechner #mathe #rechnen #schule #meter #kilogramm #liter #temperatur #länge #gewicht #volumen #rechenfix #mathematik #umrechnung",
+      "socialHeadline": "10 km = 10.000 m",
+      "socialEyebrow": "Schnell umgerechnet"
+    },
+    "schuhgroessen-rechner": {
+      "captionIg": "Kennst du deine Schuhgröße in US oder UK? 👠 Beim Online-Shopping im Ausland brauchst du oft andere Größensysteme. Unser Rechner zeigt dir sofort deine Größe in EU, US, UK und cm — für Damen, Herren und Kinder. Nie wieder falsche Größe bestellen! 👉 Link in Bio",
+      "captionFb": "Kennst du deine Schuhgröße in US oder UK? 👠 Beim Online-Shopping im Ausland brauchst du oft andere Größensysteme. Unser Rechner zeigt dir sofort deine Größe in EU, US, UK und cm — für Damen, Herren und Kinder. Nie wieder falsche Größe bestellen! https://www.rechenfix.de/alltag/schuhgroessen-rechner",
+      "hashtags": "#schuhgröße #schuhe #onlineshopping #größentabelle #schuhkauf #umrechnen #shopping #mode #rechenfix #größe #usa #uk #eu #schuheinkaufen #alltag",
+      "socialHeadline": "EU 39 = US 8,5",
+      "socialEyebrow": "Größen-Check"
+    },
+    "dachflaechen-rechner": {
+      "captionIg": "Wie groß ist eigentlich dein Dach? 🏠 Egal ob Satteldach, Pultdach oder Walmdach — mit dem richtigen Winkel und den Hausmaßen kriegst du schnell die exakte Dachfläche raus. Perfekt für Materialplanung oder um zu checken, ob sich Solarpanels lohnen. 👉 Link in Bio",
+      "captionFb": "Wie groß ist eigentlich dein Dach? 🏠 Egal ob Satteldach, Pultdach oder Walmdach — mit dem richtigen Winkel und den Hausmaßen kriegst du schnell die exakte Dachfläche raus. Perfekt für Materialplanung oder um zu checken, ob sich Solarpanels lohnen. https://www.rechenfix.de/wohnen/dachflaechen-rechner",
+      "hashtags": "#dachfläche #hausbau #dachsanierung #solarpanel #photovoltaik #eigenheim #bauen #renovierung #dach #hauseigentümer #pv #rechenfix #rechner #wohnen #energie",
+      "socialHeadline": "97,7 m²",
+      "socialEyebrow": "Schnell gerechnet"
+    },
+    "alkohol-abbau-rechner": {
+      "captionIg": "Wann bin ich wieder nüchtern? 🤔 Der Alkohol-Abbau-Rechner zeigt dir deine maximalen Promille und berechnet, ab wann du wieder fahrtüchtig bist. Basiert auf der wissenschaftlichen Widmark-Formel und berücksichtigt dein Gewicht und die getrunkene Menge. 👉 Link in Bio",
+      "captionFb": "Wann bin ich wieder nüchtern? 🤔 Der Alkohol-Abbau-Rechner zeigt dir deine maximalen Promille und berechnet, ab wann du wieder fahrtüchtig bist. Basiert auf der wissenschaftlichen Widmark-Formel und berücksichtigt dein Gewicht und die getrunkene Menge. ➡️ https://www.rechenfix.de/gesundheit/alkohol-abbau-rechner",
+      "hashtags": "#alkoholabbau #promillerechner #rechenfix #nüchtern #fahrtüchtig #widmarkformel #alkohol #gesundheit #rechnen #verkehrssicherheit #autofahren #promille #abbauzeit #sicherheit #verantwortung",
+      "socialHeadline": "0,99 ‰ → 6,6 Std",
+      "socialEyebrow": "Selbst-Check"
+    },
+    "betriebskosten-rechner": {
+      "captionIg": "💸 Weißt du, was dein Business pro Monat wirklich kostet? Fixkosten, variable Kosten, dein eigenes Gehalt — alles zusammen ergibt deine echten Betriebskosten. Mit unserem Rechner findest du heraus, welchen Stundensatz du mindestens brauchst, um kostendeckend zu arbeiten. 👉 Link in Bio",
+      "captionFb": "💸 Weißt du, was dein Business pro Monat wirklich kostet? Fixkosten, variable Kosten, dein eigenes Gehalt — alles zusammen ergibt deine echten Betriebskosten. Mit unserem Rechner findest du heraus, welchen Stundensatz du mindestens brauchst, um kostendeckend zu arbeiten. 👉 https://www.rechenfix.de/finanzen/betriebskosten-rechner",
+      "hashtags": "#betriebskosten #selbstständig #stundensatz #breakeven #kalkulation #gewerbe #fixkosten #unternehmen #freelancer #rechenfix #kosten #business #finanzen #existenzgründung #buchhaltung",
+      "socialHeadline": "≈ 37,80 €/Std",
+      "socialEyebrow": "Break-Even"
+    },
+    "zugewinnausgleich-rechner": {
+      "captionIg": "📊 Scheidung oder Erbfall: Wer zahlt wem wie viel beim Zugewinnausgleich? Unser Rechner berücksichtigt die Inflation seit der Heirat und zeigt dir, welcher Partner welchen Ausgleichsanspruch hat. Einfach Anfangs- und Endvermögen beider Partner eingeben – fertig. 👉 Link in Bio",
+      "captionFb": "📊 Scheidung oder Erbfall: Wer zahlt wem wie viel beim Zugewinnausgleich? Unser Rechner berücksichtigt die Inflation seit der Heirat und zeigt dir, welcher Partner welchen Ausgleichsanspruch hat. Einfach Anfangs- und Endvermögen beider Partner eingeben – fertig. https://www.rechenfix.de/arbeit/zugewinnausgleich-rechner",
+      "hashtags": "#zugewinnausgleich #scheidung #erbfall #ehepartner #vermögensausgleich #familienrecht #scheidungsrecht #ehe #rechenfix #rechnen #finanzen #geld #rechtliches #partnerschaft",
+      "socialHeadline": "27.028 € Ausgleich",
+      "socialEyebrow": "Zugewinn-Check"
+    },
+    "schlaf-rechner": {
+      "captionIg": "Warum fühlst du dich trotz 8 Stunden Schlaf oft müde? 🛌 Der Trick liegt in den 90-Minuten-Schlafzyklen! Wenn du mitten im Tiefschlaf geweckt wirst, bist du gerädert. Besser: 6 oder 7,5 Stunden schlafen und zwischen den Zyklen aufwachen. 👉 Link in Bio",
+      "captionFb": "Warum fühlst du dich trotz 8 Stunden Schlaf oft müde? 🛌 Der Trick liegt in den 90-Minuten-Schlafzyklen! Wenn du mitten im Tiefschlaf geweckt wirst, bist du gerädert. Besser: 6 oder 7,5 Stunden schlafen und zwischen den Zyklen aufwachen. https://www.rechenfix.de/gesundheit/schlaf-rechner",
+      "hashtags": "#schlaf #schlafzyklen #ausgeschlafen #gesunderschlaf #schlafrechner #aufwachen #müdigkeit #biorhythmus #schlafqualität #rechenfix #rechnen #gesundheit #schlaftipps #erholung #wohlbefinden",
+      "socialHeadline": "22:15 Uhr ins Bett",
+      "socialEyebrow": "Schlaf-Tipp"
+    },
+    "prozentrechner": {
+      "captionIg": "Wie viel sind 25% von 200? 🤔 Unser Prozentrechner zeigt dir nicht nur das Ergebnis (50), sondern auch den kompletten Rechenweg. Egal ob Rabatt im Sale, Trinkgeld oder Steuern — nie wieder kopfzerbrechen bei Prozenten! 👉 Link in Bio",
+      "captionFb": "Wie viel sind 25% von 200? 🤔 Unser Prozentrechner zeigt dir nicht nur das Ergebnis (50), sondern auch den kompletten Rechenweg. Egal ob Rabatt im Sale, Trinkgeld oder Steuern — nie wieder kopfzerbrechen bei Prozenten! https://www.rechenfix.de/alltag/prozentrechner",
+      "hashtags": "#prozentrechner #prozente #rechnen #rechenfix #mathe #rabatt #sale #shopping #alltag #mathematik #grundrechnen #kopfrechnen #prozentsatz #rechenweg #schnellrechnen",
+      "socialHeadline": "25% von 200 = 50",
+      "socialEyebrow": "Klassiker"
+    },
+    "fahrrad-rahmengroesse-rechner": {
+      "captionIg": "Passt dein Fahrrad wirklich zu dir? 🚴‍♀️ Mit der richtigen Rahmengröße fährst du entspannter, effizienter und rückenschonender. Einfach Körpergröße und Schrittlänge eingeben — der Rechner zeigt dir die optimale Größe für Rennrad, MTB, City-Bike oder E-Bike. 👉 Link in Bio",
+      "captionFb": "Passt dein Fahrrad wirklich zu dir? 🚴‍♀️ Mit der richtigen Rahmengröße fährst du entspannter, effizienter und rückenschonender. Einfach Körpergröße und Schrittlänge eingeben — der Rechner zeigt dir die optimale Größe für Rennrad, MTB, City-Bike oder E-Bike. https://www.rechenfix.de/auto/fahrrad-rahmengroesse-rechner",
+      "hashtags": "#fahrrad #rahmengröße #bike #rennrad #mtb #ebike #citybike #fahrradkauf #rechenfix #rechner #fahrradfahren #bikefitting #radfahren #fahrradberatung #cycling",
+      "socialHeadline": "Größe M (55,4 cm)",
+      "socialEyebrow": "Bike-Fitting"
+    },
+    "steuerklassen-vergleich-rechner": {
+      "captionIg": "Welche Steuerklasse bringt dir mehr Netto? 🤔 Mit dem richtigen Steuerklassen-Mix holst du als Paar mehrere hundert Euro pro Monat raus. Aber Vorsicht: Manche Kombinationen können zur Nachzahlungs-Falle werden. Vergleiche III/V, V/III und IV/IV mit Faktor direkt miteinander. 👉 Link in Bio",
+      "captionFb": "Welche Steuerklasse bringt dir mehr Netto? 🤔 Mit dem richtigen Steuerklassen-Mix holst du als Paar mehrere hundert Euro pro Monat raus. Aber Vorsicht: Manche Kombinationen können zur Nachzahlungs-Falle werden. Vergleiche III/V, V/III und IV/IV mit Faktor direkt miteinander. https://www.rechenfix.de/finanzen/steuerklassen-vergleich-rechner",
+      "hashtags": "#steuerklasse #steuerklassen #nettolohn #steuern #steuervergleich #finanzen #rechenfix #steueroptimierung #ehepaar #steuertipp #geld #finanzplanung #steuerberatung",
+      "socialHeadline": "+ 350 € / Monat",
+      "socialEyebrow": "Steuer-Optimierung"
+    },
+    "arbeitstage-rechner": {
+      "captionIg": "Wusstest du, dass Januar 2026 nur 21 Arbeitstage in NRW hat? 🗓️ Unser Arbeitstage-Rechner zieht automatisch alle Feiertage deines Bundeslandes ab und berücksichtigt deine individuelle Wochenarbeitszeit. Perfekt für Urlaubsplanung, Zeiterfassung oder Gehaltsabrechnungen. 👉 Link in Bio",
+      "captionFb": "Wusstest du, dass Januar 2026 nur 21 Arbeitstage in NRW hat? 🗓️ Unser Arbeitstage-Rechner zieht automatisch alle Feiertage deines Bundeslandes ab und berücksichtigt deine individuelle Wochenarbeitszeit. Perfekt für Urlaubsplanung, Zeiterfassung oder Gehaltsabrechnungen. https://www.rechenfix.de/arbeit/arbeitstage-rechner",
+      "hashtags": "#arbeitstage #werktage #feiertage #arbeitszeit #urlaubsplanung #zeiterfassung #gehaltsabrechnung #arbeitsrecht #rechenfix #rechner #kalender #bundesland #nrw #arbeit",
+      "socialHeadline": "21 Arbeitstage",
+      "socialEyebrow": "Januar 2026"
+    },
+    "backform-umrechner": {
+      "captionIg": "Rezept für 26 cm Springform, aber du hast nur eine 20 cm Form? 🤔 Mit dem Backform-Umrechner rechnest du Zutatenmengen automatisch um - egal ob rund, eckig oder Kastenform. Schluss mit raten und misslungenen Kuchen! 👉 Link in Bio",
+      "captionFb": "Rezept für 26 cm Springform, aber du hast nur eine 20 cm Form? 🤔 Mit dem Backform-Umrechner rechnest du Zutatenmengen automatisch um - egal ob rund, eckig oder Kastenform. Schluss mit raten und misslungenen Kuchen! https://www.rechenfix.de/kochen/backform-umrechner",
+      "hashtags": "#backform #umrechnen #backen #kuchen #rezept #backrezept #springform #kastenform #backtipps #küche #zutaten #mehl #backhelfer #rechenfix #kochen",
+      "socialHeadline": "Faktor 0,59",
+      "socialEyebrow": "Back-Mathe"
+    },
+    "elternzeit-rechner": {
+      "captionIg": "Wann muss die Elternzeit angemeldet werden? 🍼 Viele übersehen die 7-Wochen-Frist beim Arbeitgeber. Unser Rechner zeigt dir alle wichtigen Termine, optimale Aufteilung zwischen den Partnern und wie du die vollen 14 Monate Elterngeld ausschöpfst. 👉 Link in Bio",
+      "captionFb": "Wann muss die Elternzeit angemeldet werden? 🍼 Viele übersehen die 7-Wochen-Frist beim Arbeitgeber. Unser Rechner zeigt dir alle wichtigen Termine, optimale Aufteilung zwischen den Partnern und wie du die vollen 14 Monate Elterngeld ausschöpfst. https://www.rechenfix.de/arbeit/elternzeit-rechner",
+      "hashtags": "#elternzeit #elterngeld #mutterschutz #vaterschaftsurlaub #baby #geburt #arbeitsrecht #eltern #familie #schwangerschaft #rechenfix #rechner #anmeldung #fristen",
+      "socialHeadline": "14 Monate möglich",
+      "socialEyebrow": "Elternzeit"
+    },
+    "malerkosten-rechner": {
+      "captionIg": "Wie viel kostet es eigentlich, ein Zimmer streichen zu lassen? 🎨 Unser Malerkosten-Rechner zeigt dir die Streichfläche, den Farbbedarf und die Kosten - sowohl für Selbermachen als auch mit Maler. Plus praktische Einkaufsliste für den Baumarkt! 👉 Link in Bio",
+      "captionFb": "Wie viel kostet es eigentlich, ein Zimmer streichen zu lassen? 🎨 Unser Malerkosten-Rechner zeigt dir die Streichfläche, den Farbbedarf und die Kosten - sowohl für Selbermachen als auch mit Maler. Plus praktische Einkaufsliste für den Baumarkt! https://www.rechenfix.de/wohnen/malerkosten-rechner",
+      "hashtags": "#malerkosten #streichen #renovierung #heimwerken #malern #farbbedarf #wohnen #renovieren #diy #handwerker #rechenfix #rechner #kosten #wohnungsrenovierung #streichfläche",
+      "socialHeadline": "Material ~135 €",
+      "socialEyebrow": "Renovierungs-Check"
+    },
+    "primzahl-rechner": {
+      "captionIg": "Ist 97 eine Primzahl? 🤔 Unser Rechner prüft jede Zahl blitzschnell auf Primzahlen-Eigenschaften, zerlegt sie in Primfaktoren und findet alle Primzahlen in einem Bereich. Perfekt für Mathe-Hausaufgaben oder wenn du einfach neugierig bist! 👉 Link in Bio",
+      "captionFb": "Ist 97 eine Primzahl? 🤔 Unser Rechner prüft jede Zahl blitzschnell auf Primzahlen-Eigenschaften, zerlegt sie in Primfaktoren und findet alle Primzahlen in einem Bereich. Perfekt für Mathe-Hausaufgaben oder wenn du einfach neugierig bist! https://www.rechenfix.de/mathe/primzahl-rechner",
+      "hashtags": "#primzahl #primzahlen #mathe #mathematik #rechnen #rechenfix #schule #hausaufgaben #primfaktoren #zahlentheorie #lernen #mathelernen #bildung",
+      "socialHeadline": "97 ist prim ✓",
+      "socialEyebrow": "Zahlencheck"
+    },
+    "steuerprogression-rechner": {
+      "captionIg": "Wie viel Steuern zahlst du wirklich? 🤔 Bei 50.000 € zu versteuerndem Einkommen sind es etwa 21,8 % im Durchschnitt – aber jeder zusätzliche Euro wird mit 33,3 % besteuert. Unser Rechner zeigt dir Durchschnitts- und Grenzsteuersatz für jedes Einkommen. 👉 Link in Bio",
+      "captionFb": "Wie viel Steuern zahlst du wirklich? 🤔 Bei 50.000 € zu versteuerndem Einkommen sind es etwa 21,8 % im Durchschnitt – aber jeder zusätzliche Euro wird mit 33,3 % besteuert. Unser Rechner zeigt dir Durchschnitts- und Grenzsteuersatz für jedes Einkommen. https://www.rechenfix.de/finanzen/steuerprogression-rechner",
+      "hashtags": "#steuerprogression #einkommensteuer #steuersatz #grenzsteuersatz #steuerrechner #finanzen #steuern #rechenfix #rechnen #geld #einkommen #steuererklarung #steuerberatung",
+      "socialHeadline": "21,8 % Durchschnitt",
+      "socialEyebrow": "Faustregel"
+    },
+    "countdown": {
+      "captionIg": "🕐 Wie viele Tage sind es noch bis Weihnachten? Unser Countdown-Rechner zeigt dir präzise die verbleibenden Tage, Wochen und sogar Sekunden bis zu deinem Wunschtermin. Perfekt für Geburtstage, Feiertage oder wichtige Events. 👉 Link in Bio",
+      "captionFb": "🕐 Wie viele Tage sind es noch bis Weihnachten? Unser Countdown-Rechner zeigt dir präzise die verbleibenden Tage, Wochen und sogar Sekunden bis zu deinem Wunschtermin. Perfekt für Geburtstage, Feiertage oder wichtige Events. ➡️ https://www.rechenfix.de/alltag/countdown",
+      "hashtags": "#countdown #rechenfix #tage #weihnachten #geburtstag #feiertage #zeitrechnung #alltag #rechner #silvester #ostern #termine #planen #vorfreude #event",
+      "socialHeadline": "263 Tage",
+      "socialEyebrow": "Countdown"
+    },
+    "wahrer-stundenlohn": {
+      "captionIg": "Verdienst du wirklich 25 €/Stunde? 🤔 Rechne Pendelzeit, Fahrtkosten und Überstunden mit ein – das Ergebnis überrascht! Viele denken, sie verdienen mehr als sie tatsächlich bekommen. Der wahre Stundenlohn zeigt die Realität. 👉 Link in Bio",
+      "captionFb": "Verdienst du wirklich 25 €/Stunde? 🤔 Rechne Pendelzeit, Fahrtkosten und Überstunden mit ein – das Ergebnis überrascht! Viele denken, sie verdienen mehr als sie tatsächlich bekommen. Der wahre Stundenlohn zeigt die Realität. ➡️ https://www.rechenfix.de/finanzen/wahrer-stundenlohn",
+      "hashtags": "#stundenlohn #gehalt #lohn #pendeln #finanzen #rechenfix #arbeit #verdienst #job #karriere #geld #rechnen #arbeitszeit",
+      "socialHeadline": "9,20 € / Stunde",
+      "socialEyebrow": "Pendler-Realität"
+    },
+    "grunderwerbsteuer-rechner": {
+      "captionIg": "💸 Weißt du, was der Hauskauf neben dem Kaufpreis wirklich kostet? Die Nebenkosten können schnell 10-15% des Kaufpreises ausmachen! Mit unserem Rechner siehst du alle versteckten Kosten auf einen Blick: Grunderwerbsteuer je Bundesland, Makler, Notar und Grundbuchgebühren. So planst du dein Budget realistisch und erlebst keine bösen Überraschungen. 👉 Link in Bio",
+      "captionFb": "💸 Weißt du, was der Hauskauf neben dem Kaufpreis wirklich kostet? Die Nebenkosten können schnell 10-15% des Kaufpreises ausmachen! Mit unserem Rechner siehst du alle versteckten Kosten auf einen Blick: Grunderwerbsteuer je Bundesland, Makler, Notar und Grundbuchgebühren. So planst du dein Budget realistisch und erlebst keine bösen Überraschungen. https://www.rechenfix.de/wohnen/grunderwerbsteuer-rechner",
+      "hashtags": "#grunderwerbsteuer #hauskauf #immobilien #nebenkosten #kaufnebenkosten #immobilienfinanzierung #eigenheim #hausbau #immobilienkauf #rechnen #rechenfix #finanzen #budgetplanung #steuer",
+      "socialHeadline": "36.210 € Nebenkosten",
+      "socialEyebrow": "Kaufnebenkosten"
+    },
+    "mietpreisbremse-rechner": {
+      "captionIg": "💰 Zahlst du zu viel Miete? Die Mietpreisbremse schützt dich vor überteuerten Neuvermietungen. Prüfe schnell, ob deine Miete zulässig ist und wie viel du zurückfordern kannst. Bei 65 €/Monat zu viel sind das 780 € im Jahr! 👉 Link in Bio",
+      "captionFb": "💰 Zahlst du zu viel Miete? Die Mietpreisbremse schützt dich vor überteuerten Neuvermietungen. Prüfe schnell, ob deine Miete zulässig ist und wie viel du zurückfordern kannst. Bei 65 €/Monat zu viel sind das 780 € im Jahr! https://www.rechenfix.de/wohnen/mietpreisbremse-rechner",
+      "hashtags": "#mietpreisbremse #miete #wohnen #mietrecht #zurückfordern #geld #sparen #vermieter #nebenkosten #rechenfix #rechner #wohnung #immobilien #recht #finanzen",
+      "socialHeadline": "780 € / Jahr zurück",
+      "socialEyebrow": "Mietcheck"
+    },
+    "bussgeldrechner": {
+      "captionIg": "26 km/h zu schnell innerorts = 180 € + 1 Punkt + 1 Monat Fahrverbot? 😬 Unser Bußgeldrechner zeigt dir sofort, was dich ein Verstoß kostet — basierend auf dem aktuellen Katalog 2026. Bußgeld, Punkte und Fahrverbot auf einen Blick. 👉 Link in Bio",
+      "captionFb": "26 km/h zu schnell innerorts = 180 € + 1 Punkt + 1 Monat Fahrverbot? 😬 Unser Bußgeldrechner zeigt dir sofort, was dich ein Verstoß kostet — basierend auf dem aktuellen Katalog 2026. Bußgeld, Punkte und Fahrverbot auf einen Blick. https://www.rechenfix.de/auto/bussgeldrechner",
+      "hashtags": "#bußgeld #verkehrsverstoß #punkte #flensburg #fahrverbot #geschwindigkeitskontrolle #auto #verkehr #rechenfix #rechner #strafzettel #verkehrsrecht #bußgeldkatalog #autofahren #verkehrssicherheit",
+      "socialHeadline": "180 € + 1 Punkt",
+      "socialEyebrow": "Bußgeld-Check"
+    },
+    "kleidergroessen-rechner": {
+      "captionIg": "Kennst du das? Du willst online bestellen, aber die Größe ist in US angegeben 🤔 Unser Kleidergrößen-Umrechner zeigt dir sofort, welche deutsche Größe zu US, UK, IT und EU passt. Funktioniert für Damen und Herren mit übersichtlicher Maßtabelle. 👉 Link in Bio",
+      "captionFb": "Kennst du das? Du willst online bestellen, aber die Größe ist in US angegeben 🤔 Unser Kleidergrößen-Umrechner zeigt dir sofort, welche deutsche Größe zu US, UK, IT und EU passt. Funktioniert für Damen und Herren mit übersichtlicher Maßtabelle. 👉 https://www.rechenfix.de/alltag/kleidergroessen-rechner",
+      "hashtags": "#kleidergrößen #größentabelle #onlineshopping #kleider #mode #größenumrechner #shopping #rechenfix #alltag #größe #kleidung #maßtabelle #modeberatung #größenhilfe #umrechnung",
+      "socialHeadline": "DE 38 = US 6",
+      "socialEyebrow": "Shopping-Hilfe"
+    },
+    "quersumme-rechner": {
+      "captionIg": "Weißt du noch, was eine Quersumme ist? 🤔 Du addierst alle Ziffern einer Zahl — super praktisch für Teilbarkeitsregeln! Beispiel: 123456789 → 1+2+3+4+5+6+7+8+9 = 45. Unser Rechner macht's automatisch und zeigt auch die alternierende Quersumme. 👉 Link in Bio",
+      "captionFb": "Weißt du noch, was eine Quersumme ist? 🤔 Du addierst alle Ziffern einer Zahl — super praktisch für Teilbarkeitsregeln! Beispiel: 123456789 → 1+2+3+4+5+6+7+8+9 = 45. Unser Rechner macht's automatisch und zeigt auch die alternierende Quersumme. https://www.rechenfix.de/mathe/quersumme-rechner",
+      "hashtags": "#quersumme #mathe #rechnen #schule #teilbarkeit #mathematik #grundschule #kopfrechnen #rechenfix #lernen #zahlen #rechenhilfe #schulmathe",
+      "socialHeadline": "QS = 45",
+      "socialEyebrow": "Rechenbeispiel"
+    },
+    "reisekosten-rechner": {
+      "captionIg": "Weißt du schon, was deine nächste Reise kostet? 💸 Plane dein komplettes Budget von Anreise über Hotel bis hin zu Aktivitäten. So erlebst du vor Ort keine bösen Überraschungen und kannst entspannt genießen. 👉 Link in Bio",
+      "captionFb": "Weißt du schon, was deine nächste Reise kostet? 💸 Plane dein komplettes Budget von Anreise über Hotel bis hin zu Aktivitäten. So erlebst du vor Ort keine bösen Überraschungen und kannst entspannt genießen. https://www.rechenfix.de/alltag/reisekosten-rechner",
+      "hashtags": "#reisekosten #urlaubsplanung #budget #reisebudget #kostenplanung #urlaubskosten #reisen #urlaubstipps #geld #sparen #rechenfix #rechner #finanzen #planung #urlaub",
+      "socialHeadline": "1.832,50 €",
+      "socialEyebrow": "Reise-Budget"
+    },
+    "pythagoras-rechner": {
+      "captionIg": "Rechtwinkliges Dreieck und eine Seite fehlt? 📐 Der Pythagoras-Rechner zeigt dir Schritt für Schritt, wie du die fehlende Seite berechnest — mit Rechenweg und grafischer Darstellung. Perfekt für Hausaufgaben oder zum Auffrischen! 👉 Link in Bio",
+      "captionFb": "Rechtwinkliges Dreieck und eine Seite fehlt? 📐 Der Pythagoras-Rechner zeigt dir Schritt für Schritt, wie du die fehlende Seite berechnest — mit Rechenweg und grafischer Darstellung. Perfekt für Hausaufgaben oder zum Auffrischen! https://www.rechenfix.de/mathe/pythagoras-rechner",
+      "hashtags": "#pythagoras #mathe #dreieck #geometrie #rechnen #schule #hausaufgaben #mathematik #rechenfix #lernen #formel #rechner #geometrierechner #mathenachhilfe #satzdespythagoras",
+      "socialHeadline": "a² + b² = c²",
+      "socialEyebrow": "Klassiker"
+    },
+    "kuendigungsfrist-rechner": {
+      "captionIg": "Wie lange ist eigentlich deine Kündigungsfrist? 🤔 Je nach Betriebszugehörigkeit gelten unterschiedliche gesetzliche Fristen – von 4 Wochen bis zu 7 Monaten. Unser Rechner zeigt dir sofort das frühestmögliche Austrittsdatum und alle relevanten Fristen für deine Situation. 👉 Link in Bio",
+      "captionFb": "Wie lange ist eigentlich deine Kündigungsfrist? 🤔 Je nach Betriebszugehörigkeit gelten unterschiedliche gesetzliche Fristen – von 4 Wochen bis zu 7 Monaten. Unser Rechner zeigt dir sofort das frühestmögliche Austrittsdatum und alle relevanten Fristen für deine Situation. https://www.rechenfix.de/arbeit/kuendigungsfrist-rechner",
+      "hashtags": "#kündigungsfrist #kündigung #arbeitsrecht #arbeitnehmer #arbeitgeber #betriebszugehörigkeit #austrittsdatum #gesetzlichefrist #jobwechsel #arbeitsvertrag #kündigungsschutz #rechenfix #rechnen #beruf #arbeitsplatz",
+      "socialHeadline": "31. Mai 2026",
+      "socialEyebrow": "Austrittsdatum"
+    },
+    "wohngeld-rechner": {
+      "captionIg": "💰 Hast du Anspruch auf Wohngeld? Viele wissen nicht, dass sie monatlich bis zu 250€ vom Staat bekommen könnten. Unser Rechner zeigt dir in wenigen Klicks, ob und wie viel Wohngeld dir zusteht - komplett nach dem neuen Wohngeld-Plus-Gesetz 2026. 👉 Link in Bio",
+      "captionFb": "💰 Hast du Anspruch auf Wohngeld? Viele wissen nicht, dass sie monatlich bis zu 250€ vom Staat bekommen könnten. Unser Rechner zeigt dir in wenigen Klicks, ob und wie viel Wohngeld dir zusteht - komplett nach dem neuen Wohngeld-Plus-Gesetz 2026. https://www.rechenfix.de/finanzen/wohngeld-rechner",
+      "hashtags": "#wohngeld #wohngeldrechner #staatlichehilfe #miete #wohngeldplus #sozialleistungen #geld #finanzen #rechenfix #rechner #staatszuschuss #wohnen #haushalt #einkommen #unterstützung",
+      "socialHeadline": "bis zu 250 €/Monat",
+      "socialEyebrow": "Staatshilfe"
+    },
+    "koerperfett-rechner": {
+      "captionIg": "Wie hoch ist dein Körperfettanteil wirklich? 🤔 Mit der Navy-Methode kannst du deinen KFA einfach per Maßband bestimmen – ganz ohne teure Waage. Du misst nur Bauch- und Halsumfang, der Rechner zeigt dir sofort dein Ergebnis mit Einordnung. 👉 Link in Bio",
+      "captionFb": "Wie hoch ist dein Körperfettanteil wirklich? 🤔 Mit der Navy-Methode kannst du deinen KFA einfach per Maßband bestimmen – ganz ohne teure Waage. Du misst nur Bauch- und Halsumfang, der Rechner zeigt dir sofort dein Ergebnis mit Einordnung. https://www.rechenfix.de/gesundheit/koerperfett-rechner",
+      "hashtags": "#körperfett #navy #körperfettanteil #fitness #gesundheit #abnehmen #körperanalyse #maßband #rechenfix #rechnen #gesund #körper #kfa #fitnessziele #selbstcheck",
+      "socialHeadline": "KFA 18,3%",
+      "socialEyebrow": "Navy-Methode"
+    },
+    "pace-rechner": {
+      "captionIg": "Wie schnell läufst du wirklich? 🏃‍♀️ Egal ob 5K, 10K oder Marathon – der Pace-Rechner zeigt dir dein exaktes Tempo in min/km und km/h. Plus: Zielzeit-Tabellen für deine nächste Laufstrecke. 👉 Link in Bio",
+      "captionFb": "Wie schnell läufst du wirklich? 🏃‍♀️ Egal ob 5K, 10K oder Marathon – der Pace-Rechner zeigt dir dein exaktes Tempo in min/km und km/h. Plus: Zielzeit-Tabellen für deine nächste Laufstrecke. https://www.rechenfix.de/sport/pace-rechner",
+      "hashtags": "#pace #laufen #running #marathon #jogging #fitness #sport #lauftraining #tempo #rechenfix #rechnen #halbmarathon #10km #5km #laufzeit",
+      "socialHeadline": "5:30 min/km",
+      "socialEyebrow": "Lauf-Tempo"
+    },
+    "kapitalertragsteuer-rechner": {
+      "captionIg": "💰 Wieviel bleibt von deinen Dividenden nach Steuern übrig? Der Kapitalertragsteuer-Rechner zeigt dir exakt, was nach Abgeltungssteuer, Soli und Co. in deiner Tasche landet. Sparerpauschbetrag wird automatisch berücksichtigt. 👉 Link in Bio",
+      "captionFb": "💰 Wieviel bleibt von deinen Dividenden nach Steuern übrig? Der Kapitalertragsteuer-Rechner zeigt dir exakt, was nach Abgeltungssteuer, Soli und Co. in deiner Tasche landet. Sparerpauschbetrag wird automatisch berücksichtigt. https://www.rechenfix.de/finanzen/kapitalertragsteuer-rechner",
+      "hashtags": "#kapitalertragsteuer #abgeltungssteuer #dividenden #aktien #sparerpauschbetrag #steuern #anlegen #finanzen #rechenfix #investment #depot #rechnen #geld #zinsen #etf",
+      "socialHeadline": "= 527,50 € Steuern",
+      "socialEyebrow": "Anleger-Realität"
+    },
+    "binaer-rechner": {
+      "captionIg": "Wie wird 42 zu 101010? 🤔 Unser Binär-Rechner wandelt Zahlen zwischen Dezimal, Binär, Oktal und Hexadezimal um — live und mit Rechenweg. Plus ASCII-Code für Programmierer und Informatik-Studis. 👉 Link in Bio",
+      "captionFb": "Wie wird 42 zu 101010? 🤔 Unser Binär-Rechner wandelt Zahlen zwischen Dezimal, Binär, Oktal und Hexadezimal um — live und mit Rechenweg. Plus ASCII-Code für Programmierer und Informatik-Studis. ➡️ https://www.rechenfix.de/mathe/binaer-rechner",
+      "hashtags": "#binärrechner #binär #dezimal #hexadezimal #oktal #zahlensysteme #informatik #programmieren #ascii #rechenfix #mathe #umrechnen #binärcode #digitaltechnik #rechnen",
+      "socialHeadline": "42 = 101010",
+      "socialEyebrow": "Zahlensysteme"
+    },
+    "baufinanzierung-rechner": {
+      "captionIg": "💰 Wie viel kostet deine Traumimmobilie wirklich? Der Baufinanzierungs-Rechner zeigt dir sofort: monatliche Rate, Nebenkosten und wie lange du abzahlst. Keine bösen Überraschungen beim Banktermin! 👉 Link in Bio",
+      "captionFb": "💰 Wie viel kostet deine Traumimmobilie wirklich? Der Baufinanzierungs-Rechner zeigt dir sofort: monatliche Rate, Nebenkosten und wie lange du abzahlst. Keine bösen Überraschungen beim Banktermin! https://www.rechenfix.de/wohnen/baufinanzierung-rechner",
+      "hashtags": "#baufinanzierung #immobilie #hausbau #eigenheim #finanzierung #hauskredit #darlehen #zinsen #tilgung #rechnen #rechenfix #wohnen #nebenkosten #traumhaus #immobilienkredit",
+      "socialHeadline": "1.476 € / Monat",
+      "socialEyebrow": "Finanzcheck"
+    },
+    "hundejahre-rechner": {
+      "captionIg": "🐕 Ist dein 5-jähriger Hund wirklich 35 Jahre alt? Die alte 1:7-Regel stimmt nicht! Große Hunde altern anders als kleine — ein 5-jähriger Labrador entspricht 42 Menschenjahren, ein Chihuahua nur 36. Berechne das echte Alter deines Vierbeiners mit der neuen, wissenschaftlich korrekten Formel! 👉 Link in Bio",
+      "captionFb": "🐕 Ist dein 5-jähriger Hund wirklich 35 Jahre alt? Die alte 1:7-Regel stimmt nicht! Große Hunde altern anders als kleine — ein 5-jähriger Labrador entspricht 42 Menschenjahren, ein Chihuahua nur 36. Berechne das echte Alter deines Vierbeiners mit der neuen, wissenschaftlich korrekten Formel! https://www.rechenfix.de/alltag/hundejahre-rechner",
+      "hashtags": "#hundejahre #hundealter #hund #hundebesitzer #haustier #tierliebe #hundeerziehung #hundefakten #labrador #chihuahua #rechenfix #rechner #wissenswertes #tiergesundheit",
+      "socialHeadline": "42 Menschenjahre",
+      "socialEyebrow": "Wusstest du?"
+    },
+    "flaechenrechner": {
+      "captionIg": "Wie groß ist deine Terrasse wirklich? 🤔 Mit dem Flächenrechner berechnest du schnell Fläche und Umfang von Rechtecken, Dreiecken, Kreisen und mehr. Perfekt für Renovierung, Garten oder Mathehausaufgaben! 👉 Link in Bio",
+      "captionFb": "Wie groß ist deine Terrasse wirklich? 🤔 Mit dem Flächenrechner berechnest du schnell Fläche und Umfang von Rechtecken, Dreiecken, Kreisen und mehr. Perfekt für Renovierung, Garten oder Mathehausaufgaben! https://www.rechenfix.de/mathe/flaechenrechner",
+      "hashtags": "#flächenrechner #geometrie #mathe #rechnen #fläche #umfang #rechteck #dreieck #kreis #rechenfix #mathematik #schule #hausaufgaben #renovierung #garten",
+      "socialHeadline": "15 cm²",
+      "socialEyebrow": "Rechenbeispiel"
+    },
+    "scheidungskosten-rechner": {
+      "captionIg": "💰 Was kostet eine Scheidung wirklich? Bei einem typischen Ehepaar mit 5.000 € Netto gemeinsam fallen bei einvernehmlicher Scheidung etwa 4.176 € an Gesamtkosten an. Das sind nur 2.088 € pro Person! Berechne deine individuellen Scheidungskosten und plane entsprechend. 👉 Link in Bio",
+      "captionFb": "💰 Was kostet eine Scheidung wirklich? Bei einem typischen Ehepaar mit 5.000 € Netto gemeinsam fallen bei einvernehmlicher Scheidung etwa 4.176 € an Gesamtkosten an. Das sind nur 2.088 € pro Person! Berechne deine individuellen Scheidungskosten und plane entsprechend. https://www.rechenfix.de/arbeit/scheidungskosten-rechner",
+      "hashtags": "#scheidungskosten #scheidung #anwaltskosten #gerichtskosten #verfahrenswert #rechtskosten #familienrecht #recht #rechenfix #rechner #kosten #einvernehmlich #streitig #versorgungsausgleich #trennung",
+      "socialHeadline": "2.088 € pro Person",
+      "socialEyebrow": "Rechts-Check"
+    },
+    "rentenrechner": {
+      "captionIg": "💰 Wie hoch wird deine gesetzliche Rente? Mit unserem Rentenrechner siehst du in Sekunden deine voraussichtliche Monatsrente, Rentenpunkte und Rentenlücke. Berechne jetzt, was dich im Alter erwartet und plane rechtzeitig vor. 👉 Link in Bio",
+      "captionFb": "💰 Wie hoch wird deine gesetzliche Rente? Mit unserem Rentenrechner siehst du in Sekunden deine voraussichtliche Monatsrente, Rentenpunkte und Rentenlücke. Berechne jetzt, was dich im Alter erwartet und plane rechtzeitig vor. https://www.rechenfix.de/finanzen/rentenrechner",
+      "hashtags": "#rente #rentenrechner #gesetzlicherente #altersvorsorge #rentenlücke #rentenpunkte #finanzen #rechenfix #ruhestand #geld #vorsorge #renten #finanzplanung #zukunft #rechnen",
+      "socialHeadline": "1.170 € Netto-Rente",
+      "socialEyebrow": "Alters-Check"
+    },
+    "arbeitslosengeld-rechner": {
+      "captionIg": "Wusstest du, dass dein Arbeitslosengeld oft höher ist als gedacht? 💡 Bei 3.500€ Brutto bekommst du etwa 1.420€ pro Monat – das sind über 17.000€ in einem Jahr. Rechne jetzt deine individuelle Höhe und Bezugsdauer aus! 👉 Link in Bio",
+      "captionFb": "Wusstest du, dass dein Arbeitslosengeld oft höher ist als gedacht? 💡 Bei 3.500€ Brutto bekommst du etwa 1.420€ pro Monat – das sind über 17.000€ in einem Jahr. Rechne jetzt deine individuelle Höhe und Bezugsdauer aus! https://www.rechenfix.de/finanzen/arbeitslosengeld-rechner",
+      "hashtags": "#arbeitslosengeld #alg1 #arbeitslos #sozialleistungen #gehalt #finanzen #geld #rechner #rechenfix #arbeitsrecht #beruf #job #einkommen #versicherung #arbeit",
+      "socialHeadline": "1.420 € / Monat",
+      "socialEyebrow": "Anspruchshöhe"
+    },
+    "nettolohn-optimierer": {
+      "captionIg": "Wusstest du, dass 200 € AG-Budget als Essenszuschuss etwa 40 € mehr Netto bringen als eine normale Gehaltserhöhung? 💰 Der Nettolohn-Optimierer zeigt dir, ob Sachbezüge wie Jobticket oder Essensgutscheine lukrativer sind als Brutto-Erhöhung. Vergleiche beide Optionen und hole das Maximum aus deinem Gehalt raus! 👉 Link in Bio",
+      "captionFb": "Wusstest du, dass 200 € AG-Budget als Essenszuschuss etwa 40 € mehr Netto bringen als eine normale Gehaltserhöhung? 💰 Der Nettolohn-Optimierer zeigt dir, ob Sachbezüge wie Jobticket oder Essensgutscheine lukrativer sind als Brutto-Erhöhung. Vergleiche beide Optionen und hole das Maximum aus deinem Gehalt raus! https://www.rechenfix.de/finanzen/nettolohn-optimierer",
+      "hashtags": "#nettolohn #gehaltserhöhung #sachbezüge #steueroptimierung #finanzen #gehalt #rechenfix #geld #steuern #jobticket #essenszuschuss #lohnoptimierung #nettomehr #rechnen #arbeitnehmer",
+      "socialHeadline": "+ 40 € netto/Monat",
+      "socialEyebrow": "Gehalts-Trick"
+    },
+    "pflegegeld-rechner": {
+      "captionIg": "Kennst du deine Ansprüche bei häuslicher Pflege? 💡 Mit dem richtigen Pflegegrad bekommst du bis zu 901 € Pflegegeld monatlich plus weitere Leistungen wie Verhinderungs- und Kurzzeitpflege. Unser Rechner zeigt dir alle Beträge auf einen Blick. 👉 Link in Bio",
+      "captionFb": "Kennst du deine Ansprüche bei häuslicher Pflege? 💡 Mit dem richtigen Pflegegrad bekommst du bis zu 901 € Pflegegeld monatlich plus weitere Leistungen wie Verhinderungs- und Kurzzeitpflege. Unser Rechner zeigt dir alle Beträge auf einen Blick. https://www.rechenfix.de/finanzen/pflegegeld-rechner",
+      "hashtags": "#pflegegeld #pflegeversicherung #pflegegrad #häuslichepflege #pflegeleistungen #angehörigenpflege #sozialversicherung #pflegebedürftig #entlastungsbetrag #verhinderungspflege #kurzzeitpflege #rechenfix #rechner #finanzen #pflege",
+      "socialHeadline": "573 € / Monat",
+      "socialEyebrow": "Anspruchs-Check"
+    },
+    "waermepumpen-rechner": {
+      "captionIg": "Wärmepumpe vs. Gasheizung: Was kostet dich das wirklich? 🔥 Bei einem 120m² Altbau sparst du oft nur 20€ im Jahr – aber mit der richtigen Förderung (bis 70%!) amortisiert sich die Investition in 5-8 statt 15 Jahren. Rechne deine echten Kosten und Amortisation durch! 👉 Link in Bio",
+      "captionFb": "Wärmepumpe vs. Gasheizung: Was kostet dich das wirklich? 🔥 Bei einem 120m² Altbau sparst du oft nur 20€ im Jahr – aber mit der richtigen Förderung (bis 70%!) amortisiert sich die Investition in 5-8 statt 15 Jahren. Rechne deine echten Kosten und Amortisation durch! https://www.rechenfix.de/wohnen/waermepumpen-rechner",
+      "hashtags": "#wärmepumpe #gasheizung #heizkosten #förderung #amortisation #heizen #energiekosten #altbau #sanierung #rechenfix #kostenvergleich #heizung #energiewende #wohnen #energie",
+      "socialHeadline": "5-8 Jahre",
+      "socialEyebrow": "Amortisation"
+    },
+    "estrich-rechner": {
+      "captionIg": "Wie viel Estrich brauchst du wirklich? 🤔 Unser Rechner zeigt dir genau: Volumen, Gewicht und Anzahl Säcke für dein Projekt. Schluss mit Nachkaufen oder Verschwendung! 👉 Link in Bio",
+      "captionFb": "Wie viel Estrich brauchst du wirklich? 🤔 Unser Rechner zeigt dir genau: Volumen, Gewicht und Anzahl Säcke für dein Projekt. Schluss mit Nachkaufen oder Verschwendung! 👉 https://www.rechenfix.de/wohnen/estrich-rechner",
+      "hashtags": "#estrich #bauen #hausbau #renovation #diy #handwerk #rechenfix #rechner #baustoff #zementestrich #materialbedarf #heimwerken #sanierung #boden",
+      "socialHeadline": "53 Säcke",
+      "socialEyebrow": "Materialbedarf"
+    },
+    "schritte-rechner": {
+      "captionIg": "Wie viele Kilometer sind deine 10.000 Schritte wirklich? 🚶‍♀️ Der Schritte-Rechner zeigt dir nicht nur die Strecke, sondern auch deinen Kalorienverbrauch beim Gehen. Einfach Körpergröße und Gewicht eingeben – schon siehst du deine Tagesbilanz. 👉 Link in Bio",
+      "captionFb": "Wie viele Kilometer sind deine 10.000 Schritte wirklich? 🚶‍♀️ Der Schritte-Rechner zeigt dir nicht nur die Strecke, sondern auch deinen Kalorienverbrauch beim Gehen. Einfach Körpergröße und Gewicht eingeben – schon siehst du deine Tagesbilanz. https://www.rechenfix.de/gesundheit/schritte-rechner",
+      "hashtags": "#schritte #gesundheit #walking #kalorienverbrauch #fitness #gehen #tagesziel #schrittezähler #abnehmen #bewegung #gesundleben #rechenfix #rechner #sport #wellness",
+      "socialHeadline": "5,81 km = 392 kcal",
+      "socialEyebrow": "Selbst-Check"
+    },
+    "zeitwert-rechner": {
+      "captionIg": "💰 Was ist dein altes Smartphone noch wert? Der Zeitwert-Rechner zeigt dir den fairen Restwert für Verkauf, Versicherung oder Schadenersatz. Einfach Kaufpreis, Alter und Zustand eingeben – fertig! 👉 Link in Bio",
+      "captionFb": "💰 Was ist dein altes Smartphone noch wert? Der Zeitwert-Rechner zeigt dir den fairen Restwert für Verkauf, Versicherung oder Schadenersatz. Einfach Kaufpreis, Alter und Zustand eingeben – fertig! 👉 https://www.rechenfix.de/alltag/zeitwert-rechner",
+      "hashtags": "#zeitwert #restwert #gebraucht #verkaufen #versicherung #schadenersatz #rechenfix #rechnen #wert #gegenstand #laptop #smartphone #haushalt #alltag #geld",
+      "socialHeadline": "= 300 €",
+      "socialEyebrow": "Restwert"
+    },
+    "bruchrechner": {
+      "captionIg": "Bruchrechnen war schon in der Schule dein Alptraum? 😅 Unser Bruchrechner zeigt dir Schritt für Schritt, wie Addieren, Subtrahieren, Multiplizieren und Dividieren mit Brüchen funktioniert. Plus automatisches Kürzen und den kompletten Rechenweg. 👉 Link in Bio",
+      "captionFb": "Bruchrechnen war schon in der Schule dein Alptraum? 😅 Unser Bruchrechner zeigt dir Schritt für Schritt, wie Addieren, Subtrahieren, Multiplizieren und Dividieren mit Brüchen funktioniert. Plus automatisches Kürzen und den kompletten Rechenweg. https://www.rechenfix.de/mathe/bruchrechner",
+      "hashtags": "#bruchrechner #bruchrechnen #mathe #mathematik #schule #hausaufgaben #lernen #rechenweg #brüche #rechnen #rechenfix #nachhilfe #mathehilfe #algebra #grundlagen",
+      "socialHeadline": "1/3 + 2/5 = 11/15",
+      "socialEyebrow": "Rechenbeispiel"
+    },
+    "ehegattenunterhalt-rechner": {
+      "captionIg": "Wie viel Ehegattenunterhalt steht dir zu? 💰 Die 3/7-Methode rechnet schnell aus, ob und wie viel Unterhalt fällig wird. Plus Selbstbehalt-Check, damit beide finanziell abgesichert bleiben. 👉 Link in Bio",
+      "captionFb": "Wie viel Ehegattenunterhalt steht dir zu? 💰 Die 3/7-Methode rechnet schnell aus, ob und wie viel Unterhalt fällig wird. Plus Selbstbehalt-Check, damit beide finanziell abgesichert bleiben. https://www.rechenfix.de/arbeit/ehegattenunterhalt-rechner",
+      "hashtags": "#ehegattenunterhalt #unterhalt #trennung #scheidung #recht #familienrecht #unterhaltspflicht #selbstbehalt #rechnen #rechenfix #trennungsunterhalt #nachehelich #finanzen #geld #berechnung",
+      "socialHeadline": "986 € / Monat",
+      "socialEyebrow": "Rechtslage"
+    },
+    "wissenschaftlicher-taschenrechner": {
+      "captionIg": "Brauchst du schnell komplexe Berechnungen? 📊 Unser wissenschaftlicher Taschenrechner kann Trigonometrie, Logarithmen, Potenzen und mehr - direkt im Browser ohne App-Download. Perfekt für Schule, Studium oder berufliche Aufgaben. 👉 Link in Bio",
+      "captionFb": "Brauchst du schnell komplexe Berechnungen? 📊 Unser wissenschaftlicher Taschenrechner kann Trigonometrie, Logarithmen, Potenzen und mehr - direkt im Browser ohne App-Download. Perfekt für Schule, Studium oder berufliche Aufgaben. 👉 https://www.rechenfix.de/mathe/wissenschaftlicher-taschenrechner",
+      "hashtags": "#wissenschaftlicherrechner #taschenrechner #mathe #trigonometrie #logarithmus #potenz #rechnen #schule #studium #mathematik #online #rechenfix #wissenschaft #formeln #berechnung",
+      "socialHeadline": "sin(30°) = 0,5",
+      "socialEyebrow": "Wissenschaftlich"
+    },
+    "geburtstermin-rechner": {
+      "captionIg": "Wann kommt dein Baby zur Welt? 🤱 Mit der bewährten Naegele-Regel berechnest du deinen Geburtstermin ganz einfach — egal ob du das Datum deiner letzten Periode, den Empfängnistag oder Ultraschall-Werte hast. Drei Methoden, ein Ergebnis! 👉 Link in Bio",
+      "captionFb": "Wann kommt dein Baby zur Welt? 🤱 Mit der bewährten Naegele-Regel berechnest du deinen Geburtstermin ganz einfach — egal ob du das Datum deiner letzten Periode, den Empfängnistag oder Ultraschall-Werte hast. Drei Methoden, ein Ergebnis! https://www.rechenfix.de/gesundheit/geburtstermin-rechner",
+      "hashtags": "#geburtstermin #schwangerschaft #baby #naegele #ssw #geburt #rechner #gesundheit #rechenfix #schwanger #mama #eltern #geburtsdatum #ultraschall #periode",
+      "socialHeadline": "08.10.2026",
+      "socialEyebrow": "Baby-Termin"
+    },
+    "spenden-rechner": {
+      "captionIg": "💰 Wusstest du, dass du einen großen Teil deiner Spende zurückbekommst? Bei einer 500€-Spende sparst du mit 50.000€ Jahreseinkommen etwa 165€ Steuern – deine echten Kosten sind also nur 335€. Der Rechner zeigt dir sofort, wie viel du wirklich zahlst und wie der Staat deine gute Tat belohnt. 👉 Link in Bio",
+      "captionFb": "💰 Wusstest du, dass du einen großen Teil deiner Spende zurückbekommst? Bei einer 500€-Spende sparst du mit 50.000€ Jahreseinkommen etwa 165€ Steuern – deine echten Kosten sind also nur 335€. Der Rechner zeigt dir sofort, wie viel du wirklich zahlst und wie der Staat deine gute Tat belohnt. https://www.rechenfix.de/finanzen/spenden-rechner",
+      "hashtags": "#spenden #steuern #steuerersparnis #steuererklärung #rechenfix #geldsparen #finanzen #rechnen #steuervorteile #spendenbescheinigung #einkommensteuer #steuerrechner #charity #steuertipps #finanzrechner",
+      "socialHeadline": "165 € zurück",
+      "socialEyebrow": "Steuer-Bonus"
+    },
+    "rabattrechner": {
+      "captionIg": "Wie viel sparst du bei 30% Rabatt auf 199 €? 🤔 Endpreis, Ersparnis in Euro oder Prozent – unser Rabattrechner zeigt dir alles auf einen Blick. Auch bei Doppelrabatten behältst du den Überblick! 👉 Link in Bio",
+      "captionFb": "Wie viel sparst du bei 30% Rabatt auf 199 €? 🤔 Endpreis, Ersparnis in Euro oder Prozent – unser Rabattrechner zeigt dir alles auf einen Blick. Auch bei Doppelrabatten behältst du den Überblick! 👉 https://www.rechenfix.de/alltag/rabattrechner",
+      "hashtags": "#rabatt #schnäppchen #sparen #einkaufen #prozentrechnung #sale #reduziert #shopping #rabattrechner #rechenfix #rechnen #prozent #euro #preisvergleich #angebot",
+      "socialHeadline": "30,00 € gespart",
+      "socialEyebrow": "Schnäppchen-Check"
+    },
+    "gewerbesteuer-rechner": {
+      "captionIg": "💼 Gewerbesteuer zahlen oder nicht? Bei 80.000 € Gewinn und 400 % Hebesatz fallen theoretisch 7.770 € an. Aber: Einzelunternehmer bekommen diese oft komplett über die Einkommensteuer-Anrechnung zurück. Rechne deine echte Belastung aus! 👉 Link in Bio",
+      "captionFb": "💼 Gewerbesteuer zahlen oder nicht? Bei 80.000 € Gewinn und 400 % Hebesatz fallen theoretisch 7.770 € an. Aber: Einzelunternehmer bekommen diese oft komplett über die Einkommensteuer-Anrechnung zurück. Rechne deine echte Belastung aus! ➡️ https://www.rechenfix.de/finanzen/gewerbesteuer-rechner",
+      "hashtags": "#gewerbesteuer #einzelunternehmer #steuer #selbstständig #gewerbetreibende #hebesatz #freibetrag #anrechnung #steuerberatung #gewerbe #finanzen #rechenfix #steuern",
+      "socialHeadline": "7.770 € → 0 €",
+      "socialEyebrow": "Anrechnung"
+    },
+    "aufstiegs-bafoeg-rechner": {
+      "captionIg": "💡 Weißt du, was dir bei der Meisterausbildung zusteht? Das Aufstiegs-BAföG unterstützt dich mit bis zu 15.000 € – teils als Zuschuss, teils als zinsgünstiges Darlehen. Plus monatlicher Unterhaltsbeitrag! Berechne jetzt deine Förderung und starte durch. 👉 Link in Bio",
+      "captionFb": "💡 Weißt du, was dir bei der Meisterausbildung zusteht? Das Aufstiegs-BAföG unterstützt dich mit bis zu 15.000 € – teils als Zuschuss, teils als zinsgünstiges Darlehen. Plus monatlicher Unterhaltsbeitrag! Berechne jetzt deine Förderung und starte durch. https://www.rechenfix.de/finanzen/aufstiegs-bafoeg-rechner",
+      "hashtags": "#aufstiegsbafoeg #meisterbafoeg #weiterbildung #förderung #meister #techniker #fachwirt #fortbildung #rechenfix #rechner #bildung #karriere #handwerk #kfw #zuschuss",
+      "socialHeadline": "6.000 € + 1.019 €/Mon.",
+      "socialEyebrow": "Förder-Check"
+    },
+    "promillerechner": {
+      "captionIg": "Wie viel Promille hast du nach 2 Bier? 🍺 Unser Promillerechner zeigt dir deinen ungefähren Blutalkoholwert und wann du wieder fahrtüchtig bist. Wichtig: Das ist nur eine Schätzung – im Zweifel lieber das Auto stehen lassen! 👉 Link in Bio",
+      "captionFb": "Wie viel Promille hast du nach 2 Bier? 🍺 Unser Promillerechner zeigt dir deinen ungefähren Blutalkoholwert und wann du wieder fahrtüchtig bist. Wichtig: Das ist nur eine Schätzung – im Zweifel lieber das Auto stehen lassen! https://www.rechenfix.de/arbeit/promillerechner",
+      "hashtags": "#promille #alkohol #fahrtüchtigkeit #verkehrssicherheit #blutalkohol #autofahren #verkehrsrecht #sicherheit #rechner #rechenfix #promillerechner #alkoholtest #verantwortung #verkehr",
+      "socialHeadline": "0,44 ‰",
+      "socialEyebrow": "Selbst-Check"
+    },
+    "pendlerpauschale-rechner": {
+      "captionIg": "Weißt du, wie viel Steuern du als Pendler sparen kannst? 🚗 Bei 25 km Arbeitsweg und 220 Arbeitstagen im Jahr sind das über 730 € Ersparnis! Der Rechner zeigt dir deine exakte Pendlerpauschale und vergleicht sie mit der Homeoffice-Pauschale. 👉 Link in Bio",
+      "captionFb": "Weißt du, wie viel Steuern du als Pendler sparen kannst? 🚗 Bei 25 km Arbeitsweg und 220 Arbeitstagen im Jahr sind das über 730 € Ersparnis! Der Rechner zeigt dir deine exakte Pendlerpauschale und vergleicht sie mit der Homeoffice-Pauschale. Jetzt berechnen: https://www.rechenfix.de/arbeit/pendlerpauschale-rechner",
+      "hashtags": "#pendlerpauschale #steuern #steuerersparnis #pendeln #arbeit #homeoffice #entfernungspauschale #steuererklärung #arbeitsweg #rechnen #rechenfix #finanzen #geld #sparen #steuerrecht",
+      "socialHeadline": "731,50 € sparen",
+      "socialEyebrow": "Pendler-Realität"
+    },
+    "kindergeld-rechner": {
+      "captionIg": "💰 Kindergeld oder Kinderfreibetrag — was bringt dir mehr? Bei 60.000 € Brutto und zwei Kindern sind das 518 € Kindergeld pro Monat vs. 4.700 € Steuerersparnis beim Freibetrag. Der Kindergeld-Rechner zeigt dir sofort, welche Variante für dein Einkommen günstiger ist und wie viel du jährlich sparst. 👉 Link in Bio",
+      "captionFb": "💰 Kindergeld oder Kinderfreibetrag — was bringt dir mehr? Bei 60.000 € Brutto und zwei Kindern sind das 518 € Kindergeld pro Monat vs. 4.700 € Steuerersparnis beim Freibetrag. Der Kindergeld-Rechner zeigt dir sofort, welche Variante für dein Einkommen günstiger ist und wie viel du jährlich sparst. https://www.rechenfix.de/finanzen/kindergeld-rechner",
+      "hashtags": "#kindergeld #kinderfreibetrag #steuer #familie #eltern #kinder #finanzen #steuererklarung #rechenfix #geld #sparen #steuerersparnis #familienfinanzen #rechner #günstigerprüfung",
+      "socialHeadline": "518 € / Monat",
+      "socialEyebrow": "Günstigerprüfung"
+    },
+    "sparrechner": {
+      "captionIg": "100 € im Monat sparen – wie viel wird daraus? 💰 Mit Zinseszins werden aus 12.000 € eingezahlten 15.528 € in 10 Jahren. Der Rechner zeigt dir Jahr für Jahr, wie dein Vermögen wächst und was verschiedene Sparraten bewirken. 👉 Link in Bio",
+      "captionFb": "100 € im Monat sparen – wie viel wird daraus? 💰 Mit Zinseszins werden aus 12.000 € eingezahlten 15.528 € in 10 Jahren. Der Rechner zeigt dir Jahr für Jahr, wie dein Vermögen wächst und was verschiedene Sparraten bewirken. https://www.rechenfix.de/finanzen/sparrechner",
+      "hashtags": "#sparrechner #sparen #zinseszins #vermögensaufbau #finanzen #geldanlage #sparplan #rechenfix #rechnen #finanzplanung #geld #investment #rendite #zinsen #altersvorsorge",
+      "socialHeadline": "15.528 € in 10 Jahren",
+      "socialEyebrow": "Zinseszins-Effekt"
+    },
+    "ggt-kgv-rechner": {
+      "captionIg": "Wie findet man schnell den größten gemeinsamen Teiler? 🤔 Mit dem ggT/kgV-Rechner löst du Mathe-Aufgaben in Sekunden. Einfach Zahlen eingeben und sofort Ergebnis + Rechenweg erhalten. Perfekt für Schule, Studium oder wenn's mal wieder hakt! 👉 Link in Bio",
+      "captionFb": "Wie findet man schnell den größten gemeinsamen Teiler? 🤔 Mit dem ggT/kgV-Rechner löst du Mathe-Aufgaben in Sekunden. Einfach Zahlen eingeben und sofort Ergebnis + Rechenweg erhalten. Perfekt für Schule, Studium oder wenn's mal wieder hakt! https://www.rechenfix.de/mathe/ggt-kgv-rechner",
+      "hashtags": "#ggt #kgv #mathe #mathematik #rechnen #schule #studium #primfaktoren #teiler #vielfache #rechenweg #mathehilfe #rechenfix #lernen #aufgaben",
+      "socialHeadline": "ggT(24,36) = 12",
+      "socialEyebrow": "Rechenbeispiel"
+    },
+    "midijob-rechner": {
+      "captionIg": "Wusstest du, dass du bei einem Midijob zwischen 603 und 2.000 Euro weniger Sozialabgaben zahlst? 💰 Bei 1.500 Euro sparst du etwa 30 Euro monatlich gegenüber einer regulären Anstellung. Gleichzeitig sammelst du trotzdem volle Rentenpunkte! 👉 Link in Bio",
+      "captionFb": "Wusstest du, dass du bei einem Midijob zwischen 603 und 2.000 Euro weniger Sozialabgaben zahlst? 💰 Bei 1.500 Euro sparst du etwa 30 Euro monatlich gegenüber einer regulären Anstellung. Gleichzeitig sammelst du trotzdem volle Rentenpunkte! https://www.rechenfix.de/finanzen/midijob-rechner",
+      "hashtags": "#midijob #sozialversicherung #abgaben #nettolohn #übergangsbereich #gleitzone #arbeitnehmer #finanzen #rechnen #rechenfix #lohn #gehalt #steuern #rente",
+      "socialHeadline": "~ 30 € gespart",
+      "socialEyebrow": "Midijob-Vorteil"
+    },
+    "streaming-kosten-rechner": {
+      "captionIg": "Zahlst du wirklich nur 10 € für Streaming? 📺 Netflix, Spotify, Disney+ und Co. summieren sich schnell auf 30-50 € monatlich. Unser Rechner zeigt dir auf einen Blick, was deine Abos wirklich kosten – und wo du sparen könntest. 👉 Link in Bio",
+      "captionFb": "Zahlst du wirklich nur 10 € für Streaming? 📺 Netflix, Spotify, Disney+ und Co. summieren sich schnell auf 30-50 € monatlich. Unser Rechner zeigt dir auf einen Blick, was deine Abos wirklich kosten – und wo du sparen könntest. https://www.rechenfix.de/alltag/streaming-kosten-rechner",
+      "hashtags": "#streaming #netflix #spotify #disneyplus #abos #kosten #sparen #rechenfix #rechner #budget #haushalt #geld #finanzen #alltag #monatlichekosten",
+      "socialHeadline": "431,64 € / Jahr",
+      "socialEyebrow": "Abo-Realität"
+    },
+    "mutterschutz-rechner": {
+      "captionIg": "Wann beginnt eigentlich der Mutterschutz? 🤱 Mit dem Entbindungstermin kennst du alle wichtigen Daten: Mutterschutzfrist, Rückkehr zur Arbeit und dein Mutterschaftsgeld. Einfach ET eingeben und sofort alle Fristen im Überblick haben. 👉 Link in Bio",
+      "captionFb": "Wann beginnt eigentlich der Mutterschutz? 🤱 Mit dem Entbindungstermin kennst du alle wichtigen Daten: Mutterschutzfrist, Rückkehr zur Arbeit und dein Mutterschaftsgeld. Einfach ET eingeben und sofort alle Fristen im Überblick haben. ➡️ https://www.rechenfix.de/arbeit/mutterschutz-rechner",
+      "hashtags": "#mutterschutz #mutterschaftsgeld #schwangerschaft #mutterschutzfrist #baby #geburt #arbeit #recht #fristen #schwanger #elternzeit #mama #rechenfix #rechnen #familienplanung",
+      "socialHeadline": "14 Wochen",
+      "socialEyebrow": "Mutterschutz"
+    },
+    "lebenszeit-rechner": {
+      "captionIg": "Wie viele Tage hast du eigentlich schon gelebt? 🤔 Der Lebenszeit-Rechner zeigt dir überraschende Fakten: deine gelebten Tage, Herzschläge und wie viele Wochenenden dir noch bleiben. Manchmal hilft ein neuer Blick auf die Zeit, um bewusster zu leben. 👉 Link in Bio",
+      "captionFb": "Wie viele Tage hast du eigentlich schon gelebt? 🤔 Der Lebenszeit-Rechner zeigt dir überraschende Fakten: deine gelebten Tage, Herzschläge und wie viele Wochenenden dir noch bleiben. Manchmal hilft ein neuer Blick auf die Zeit, um bewusster zu leben. ➡️ https://www.rechenfix.de/alltag/lebenszeit-rechner",
+      "hashtags": "#lebenszeit #rechenfix #zeit #rechnen #leben #bewusstsein #alltag #fakten #herzschlag #wochenende #lebenserwartung #tage #mathematik #selbstcheck #zeitmanagement",
+      "socialHeadline": "13.170 Tage gelebt",
+      "socialEyebrow": "Mal nachgerechnet"
+    },
+    "mwst-rueckerstattung-rechner": {
+      "captionIg": "Sparst du als Tourist beim Shoppen in Deutschland MwSt? 🛍️ Mit Tax-Free-Shopping holst du dir bis zu 19% MwSt zurück - aber Achtung: Service-Gebühren reduzieren die Erstattung. Unser Rechner zeigt dir den echten Betrag nach allen Abzügen. 👉 Link in Bio",
+      "captionFb": "Sparst du als Tourist beim Shoppen in Deutschland MwSt? 🛍️ Mit Tax-Free-Shopping holst du dir bis zu 19% MwSt zurück - aber Achtung: Service-Gebühren reduzieren die Erstattung. Unser Rechner zeigt dir den echten Betrag nach allen Abzügen. https://www.rechenfix.de/finanzen/mwst-rueckerstattung-rechner",
+      "hashtags": "#taxfree #mwst #mehrwertsteuer #tourist #shopping #deutschland #erstattung #rechenfix #rechner #finanzen #sparen #einkauf #globalblue #steuer #reise",
+      "socialHeadline": "75,13 € Erstattung",
+      "socialEyebrow": "Tax-Free"
+    },
+    "brotback-rechner": {
+      "captionIg": "Weißt du, wie viel Mehl für dein perfektes Brot? 🍞 Unser Brotback-Rechner kalkuliert alle Zutaten für 5 Brottypen — egal ob mit Hefe oder Sauerteig. Einfach Brotart und Teiggewicht eingeben, fertig sind die exakten Mengen. 👉 Link in Bio",
+      "captionFb": "Weißt du, wie viel Mehl für dein perfektes Brot? 🍞 Unser Brotback-Rechner kalkuliert alle Zutaten für 5 Brottypen — egal ob mit Hefe oder Sauerteig. Einfach Brotart und Teiggewicht eingeben, fertig sind die exakten Mengen. https://www.rechenfix.de/kochen/brotback-rechner",
+      "hashtags": "#brotbacken #backen #brot #sauerteig #hefe #rezept #zutaten #kochen #backtipps #hausgemacht #selbstgemacht #küche #ernährung #rechenfix #rechner",
+      "socialHeadline": "527 g Mehl",
+      "socialEyebrow": "Rezept-Rechner"
+    },
+    "ueberstunden-rechner": {
+      "captionIg": "Machst du regelmäßig Überstunden? 📊 Dann solltest du wissen, was dir zusteht. Unser Rechner zeigt dir deine Überstunden pro Woche, Monat und Jahr – inklusive Vergütung und Zuschlägen. Einfach Arbeitszeit eingeben und sofort sehen, was bei dir rauskommt. 👉 Link in Bio",
+      "captionFb": "Machst du regelmäßig Überstunden? 📊 Dann solltest du wissen, was dir zusteht. Unser Rechner zeigt dir deine Überstunden pro Woche, Monat und Jahr – inklusive Vergütung und Zuschlägen. Einfach Arbeitszeit eingeben und sofort sehen, was bei dir rauskommt. https://www.rechenfix.de/arbeit/ueberstunden-rechner",
+      "hashtags": "#überstunden #arbeitsrecht #gehalt #stundenlohn #arbeitgeber #arbeitszeit #vergütung #zuschlag #rechenfix #rechner #arbeit #lohn #überstundenvergütung #arbeitsvertrag #geld",
+      "socialHeadline": "126,19 € brutto",
+      "socialEyebrow": "Überstunden-Check"
+    },
+    "noten-international": {
+      "captionIg": "🎓 Deutsche 2,0 = amerikanische 3.0 GPA? Studierst du im Ausland oder bewirbst dich international? Mit dem Noten-Umrechner wandelst du deutsche Noten blitzschnell in GPA, UK Classifications oder ECTS-Grades um. Schluss mit dem Rätselraten! 👉 Link in Bio",
+      "captionFb": "🎓 Deutsche 2,0 = amerikanische 3.0 GPA? Studierst du im Ausland oder bewirbst dich international? Mit dem Noten-Umrechner wandelst du deutsche Noten blitzschnell in GPA, UK Classifications oder ECTS-Grades um. Schluss mit dem Rätselraten! https://www.rechenfix.de/mathe/noten-international",
+      "hashtags": "#notenumrechner #gpa #studium #auslandsstudium #noten #ects #university #student #bewerbung #international #rechenfix #rechnen #studieren #hochschule #ausland",
+      "socialHeadline": "Note 2,0 = GPA 3.0",
+      "socialEyebrow": "International"
+    },
+    "erbschaftsteuer-rechner": {
+      "captionIg": "Wie viel Erbschaftsteuer musst du zahlen? 💰 Der Rechner zeigt dir Freibetrag, Steuerklasse und genaue Steuerlast je nach Verwandtschaftsgrad. So planst du Erbschaft oder Schenkung richtig. 👉 Link in Bio",
+      "captionFb": "Wie viel Erbschaftsteuer musst du zahlen? 💰 Der Rechner zeigt dir Freibetrag, Steuerklasse und genaue Steuerlast je nach Verwandtschaftsgrad. So planst du Erbschaft oder Schenkung richtig. https://www.rechenfix.de/finanzen/erbschaftsteuer-rechner",
+      "hashtags": "#erbschaftsteuer #schenkungsteuer #freibetrag #steuerklasse #erben #schenken #steuern #nachlassplanung #vermögen #finanzen #steuerberatung #rechenfix #rechner",
+      "socialHeadline": "27.280 € Steuer",
+      "socialEyebrow": "Erben"
+    },
+    "vorfaelligkeitsentschaedigung-rechner": {
+      "captionIg": "Kredit vorzeitig ablösen? 💰 Die Vorfälligkeitsentschädigung kann teuer werden – oder sogar entfallen! Unser Rechner zeigt dir die geschätzten Kosten nach der Aktiv-Passiv-Methode. So kannst du besser planen und böse Überraschungen vermeiden. 👉 Link in Bio",
+      "captionFb": "Kredit vorzeitig ablösen? 💰 Die Vorfälligkeitsentschädigung kann teuer werden – oder sogar entfallen! Unser Rechner zeigt dir die geschätzten Kosten nach der Aktiv-Passiv-Methode. So kannst du besser planen und böse Überraschungen vermeiden. https://www.rechenfix.de/wohnen/vorfaelligkeitsentschaedigung-rechner",
+      "hashtags": "#vorfälligkeitsentschädigung #kreditablösung #baufinanzierung #immobilienkredit #rechnen #rechenfix #zinsen #umschuldung #kredit #immobilie #hausbau #finanzierung #geld #sparen #vorfällig",
+      "socialHeadline": "9.562 € + Gebühr",
+      "socialEyebrow": "Kreditausstieg"
+    },
+    "protein-rechner": {
+      "captionIg": "Wie viel Protein brauchst du wirklich? 🤔 Der Bedarf hängt stark von Gewicht, Aktivität und Trainingszielen ab. Unser Rechner zeigt dir deine persönliche Eiweißmenge – und rechnet sogar aus, welche Lebensmittel diese Menge decken. Schluss mit dem Rätselraten! 👉 Link in Bio",
+      "captionFb": "Wie viel Protein brauchst du wirklich? 🤔 Der Bedarf hängt stark von Gewicht, Aktivität und Trainingszielen ab. Unser Rechner zeigt dir deine persönliche Eiweißmenge – und rechnet sogar aus, welche Lebensmittel diese Menge decken. Schluss mit dem Rätselraten! https://www.rechenfix.de/gesundheit/protein-rechner",
+      "hashtags": "#protein #eiweiss #proteinbedarf #fitness #muskelaufbau #krafttraining #ernährung #gesundheit #rechner #rechenfix #sporternährung #abnehmen #diät #fitnessziele #gesundeernährung",
+      "socialHeadline": "135 g / Tag",
+      "socialEyebrow": "Protein-Check"
+    },
+    "pfaendungsrechner": {
+      "captionIg": "💰 Wie viel deines Gehalts ist bei einer Pfändung geschützt? Der Pfändungsrechner zeigt dir deinen exakten Freibetrag nach § 850c ZPO. Berücksichtigt auch Unterhaltspflichten und P-Konto-Schutz. So weißt du sofort, welcher Betrag dir sicher bleibt. 👉 Link in Bio",
+      "captionFb": "💰 Wie viel deines Gehalts ist bei einer Pfändung geschützt? Der Pfändungsrechner zeigt dir deinen exakten Freibetrag nach § 850c ZPO. Berücksichtigt auch Unterhaltspflichten und P-Konto-Schutz. So weißt du sofort, welcher Betrag dir sicher bleibt. ➡️ https://www.rechenfix.de/finanzen/pfaendungsrechner",
+      "hashtags": "#pfändung #freibetrag #pkonto #schuldenschutz #gläubiger #vollstreckung #finanzen #recht #einkommen #schufa #insolvenz #rechnen #rechenfix #geld #schulden",
+      "socialHeadline": "1.838,50 € geschützt",
+      "socialEyebrow": "Freibetrag"
+    },
+    "notenschluessel-rechner": {
+      "captionIg": "38 von 50 Punkten – welche Note ist das? 🤔 Mit dem Notenschlüssel-Rechner findest du es sofort heraus! Egal ob Schulnoten, IHK-Prüfung oder Uni – einfach Punkte eingeben und die Note wird automatisch berechnet. Bonus: Notendurchschnitt mit Gewichtung gleich mit dazu. 👉 Link in Bio",
+      "captionFb": "38 von 50 Punkten – welche Note ist das? 🤔 Mit dem Notenschlüssel-Rechner findest du es sofort heraus! Egal ob Schulnoten, IHK-Prüfung oder Uni – einfach Punkte eingeben und die Note wird automatisch berechnet. Bonus: Notendurchschnitt mit Gewichtung gleich mit dazu. https://www.rechenfix.de/mathe/notenschluessel-rechner",
+      "hashtags": "#notenschlüssel #noten #punkte #schule #uni #ihk #prüfung #notendurchschnitt #rechnen #rechenfix #mathe #bewertung #zeugnis",
+      "socialHeadline": "76 % = Note 3",
+      "socialEyebrow": "Rechenbeispiel"
+    },
+    "kochzeit-rechner": {
+      "captionIg": "Wie lange kocht eigentlich Brokkoli? 🥦 Mit dem Kochzeit-Rechner findest du für über 50 Lebensmittel die perfekte Garzeit. Ei, Nudeln, Reis, Kartoffeln, Gemüse - alles mit Schritt-für-Schritt-Anleitung. Nie wieder matschige Nudeln oder harte Kartoffeln! 👉 Link in Bio",
+      "captionFb": "Wie lange kocht eigentlich Brokkoli? 🥦 Mit dem Kochzeit-Rechner findest du für über 50 Lebensmittel die perfekte Garzeit. Ei, Nudeln, Reis, Kartoffeln, Gemüse - alles mit Schritt-für-Schritt-Anleitung. Nie wieder matschige Nudeln oder harte Kartoffeln! https://www.rechenfix.de/kochen/kochzeit-rechner",
+      "hashtags": "#kochzeit #kochen #nudeln #reis #kartoffeln #gemüse #ei #küche #kochhilfe #garzeit #kochrezepte #küchentipps #rechenfix #kochtipps #zubereitung",
+      "socialHeadline": "Brokkoli: 5–7 Min",
+      "socialEyebrow": "Küchen-Guide"
+    },
+    "zyklusrechner": {
+      "captionIg": "Wann ist dein nächster Eisprung? 🗓️ Gib einfach den ersten Tag deiner letzten Periode und deine Zykluslänge ein. Der Rechner zeigt dir Eisprung, fruchtbare Tage und nächste Periode — übersichtlich im Kalender für bis zu 6 Zyklen. Perfekt für Familienplanung oder einfach zum Planen. 👉 Link in Bio",
+      "captionFb": "Wann ist dein nächster Eisprung? 🗓️ Gib einfach den ersten Tag deiner letzten Periode und deine Zykluslänge ein. Der Rechner zeigt dir Eisprung, fruchtbare Tage und nächste Periode — übersichtlich im Kalender für bis zu 6 Zyklen. Perfekt für Familienplanung oder einfach zum Planen. https://www.rechenfix.de/gesundheit/zyklusrechner",
+      "hashtags": "#zyklusrechner #eisprung #fruchtbaretage #periode #zyklus #familienplanung #frauengesundheit #kalender #gesundheit #rechenfix #verhütung #kinderwunsch #menstruation #zyklustracking #gesundheitsrechner",
+      "socialHeadline": "15. April Eisprung",
+      "socialEyebrow": "Zyklus-Check"
+    },
+    "splitting-rechner": {
+      "captionIg": "Verheiratet = automatisch weniger Steuern? 🤔 Nicht immer! Mit dem Splitting-Rechner siehst du sofort, ob sich die Zusammenveranlagung für euch lohnt oder ob getrennte Steuererklärungen günstiger sind. Bei unterschiedlichen Einkommen winken oft mehrere tausend Euro Ersparnis pro Jahr. 👉 Link in Bio",
+      "captionFb": "Verheiratet = automatisch weniger Steuern? 🤔 Nicht immer! Mit dem Splitting-Rechner siehst du sofort, ob sich die Zusammenveranlagung für euch lohnt oder ob getrennte Steuererklärungen günstiger sind. Bei unterschiedlichen Einkommen winken oft mehrere tausend Euro Ersparnis pro Jahr. Jetzt berechnen: https://www.rechenfix.de/finanzen/splitting-rechner",
+      "hashtags": "#ehegattensplitting #steuern #steuerersparnis #zusammenveranlagung #einzelveranlagung #steuervorteil #finanzen #steuerrechner #rechnen #rechenfix #verheiratet #steuererklärung #geldsparen",
+      "socialHeadline": "2.460 € gespart",
+      "socialEyebrow": "Splitting-Vorteil"
+    },
+    "fliesenbedarf-rechner": {
+      "captionIg": "Wie viele Fliesen brauchst du wirklich? 🤔 Unser Rechner kalkuliert nicht nur die Anzahl der Fliesen, sondern auch Kleber und Fugenmasse – inklusive Verschnitt. So vermeidest du teure Nachkäufe oder Materialverschwendung. Einfach Raummaße und Fliesengröße eingeben! 👉 Link in Bio",
+      "captionFb": "Wie viele Fliesen brauchst du wirklich? 🤔 Unser Rechner kalkuliert nicht nur die Anzahl der Fliesen, sondern auch Kleber und Fugenmasse – inklusive Verschnitt. So vermeidest du teure Nachkäufe oder Materialverschwendung. Einfach Raummaße und Fliesengröße eingeben! https://www.rechenfix.de/wohnen/fliesenbedarf-rechner",
+      "hashtags": "#fliesenbedarf #fliesen #badezimmer #küche #renovierung #heimwerken #bauen #sanierung #fliesenkleber #fugenmasse #materialbedarf #rechnen #rechenfix #diy #baumarkt",
+      "socialHeadline": "44 Fliesen + Kleber",
+      "socialEyebrow": "Material-Check"
+    },
+    "idealgewicht-rechner": {
+      "captionIg": "Welches ist dein Idealgewicht? 🤔 Der Rechner zeigt dir 3 verschiedene Formeln (Broca, Creff, BMI-basiert) und deine persönliche Gewichtsspanne. So siehst du auf einen Blick, wo du stehst und welcher Wert zu dir passt. 👉 Link in Bio",
+      "captionFb": "Welches ist dein Idealgewicht? 🤔 Der Rechner zeigt dir 3 verschiedene Formeln (Broca, Creff, BMI-basiert) und deine persönliche Gewichtsspanne. So siehst du auf einen Blick, wo du stehst und welcher Wert zu dir passt. https://www.rechenfix.de/gesundheit/idealgewicht-rechner",
+      "hashtags": "#idealgewicht #gesundheit #bmi #gewicht #abnehmen #fitness #gesundleben #körpergewicht #rechenfix #rechner #broca #creff #normalgewicht #gewichtskontrolle #selbstcheck",
+      "socialHeadline": "57,8–72,3 kg",
+      "socialEyebrow": "Selbst-Check"
+    },
+    "abo-rechner": {
+      "captionIg": "Zahlst du mehr als 1.000 € im Jahr für Abos? 💸 Mit dem Abo-Rechner behältst du den Überblick über Netflix, Spotify, Gym & Co. Sieh auf einen Blick, welche Abos am teuersten sind und wo du sparen kannst. 👉 Link in Bio",
+      "captionFb": "Zahlst du mehr als 1.000 € im Jahr für Abos? 💸 Mit dem Abo-Rechner behältst du den Überblick über Netflix, Spotify, Gym & Co. Sieh auf einen Blick, welche Abos am teuersten sind und wo du sparen kannst. https://www.rechenfix.de/alltag/abo-rechner",
+      "hashtags": "#abo #rechenfix #sparen #netflix #spotify #fitnessstudio #handy #geld #finanzen #budget #rechner #spartipps #haushalt #kosten #alltag",
+      "socialHeadline": "972 € / Jahr",
+      "socialEyebrow": "Abo-Bilanz"
+    },
+    "gehaltsvergleich": {
+      "captionIg": "💰 Verdienst du über oder unter dem Durchschnitt? Unser Gehaltsvergleich zeigt dir, wie dein Gehalt im Vergleich zu anderen in deinem Beruf, deiner Altersgruppe und deinem Bundesland abschneidet. Einfach deine Daten eingeben und sofort sehen, wo du stehst. 👉 Link in Bio",
+      "captionFb": "💰 Verdienst du über oder unter dem Durchschnitt? Unser Gehaltsvergleich zeigt dir, wie dein Gehalt im Vergleich zu anderen in deinem Beruf, deiner Altersgruppe und deinem Bundesland abschneidet. Einfach deine Daten eingeben und sofort sehen, wo du stehst. 👉 https://www.rechenfix.de/finanzen/gehaltsvergleich",
+      "hashtags": "#gehaltsvergleich #gehalt #lohn #verdienst #beruf #finanzen #karriere #arbeitnehmer #gehaltscheck #einkommen #rechenfix #rechnen #vergleich #arbeitsmarkt",
+      "socialHeadline": "55 % verdienen weniger",
+      "socialEyebrow": "Gehaltsspiegel"
+    },
+    "mietrendite-rechner": {
+      "captionIg": "Lohnt sich deine Immobilie wirklich als Investment? 📊 Mit dem Mietrendite-Rechner siehst du sofort, ob Brutto- und Nettomietrendite stimmen – plus Cashflow und Eigenkapital-Rendite. Schluss mit Bauchgefühl bei 6-stelligen Entscheidungen! 👉 Link in Bio",
+      "captionFb": "Lohnt sich deine Immobilie wirklich als Investment? 📊 Mit dem Mietrendite-Rechner siehst du sofort, ob Brutto- und Nettomietrendite stimmen – plus Cashflow und Eigenkapital-Rendite. Schluss mit Bauchgefühl bei 6-stelligen Entscheidungen! https://www.rechenfix.de/wohnen/mietrendite-rechner",
+      "hashtags": "#mietrendite #immobilien #kapitalanlage #investment #immobilieninvestment #rendite #cashflow #eigenkapital #vermietung #immobilienkauf #geldanlage #investieren #rechenfix #rechnen #finanzen",
+      "socialHeadline": "Rendite 5,5%",
+      "socialEyebrow": "Investment-Check"
+    },
+    "arbeitszeitrechner": {
+      "captionIg": "Wie lange warst du heute wirklich am Arbeitsplatz? ⏰ Unser Arbeitszeitrechner zeigt dir auf den Punkt, wie viele Stunden du täglich und wöchentlich arbeitest – inklusive Pausen und Dezimalzeit. Perfekt für Stundenzettel, Zeiterfassung oder einfach den Überblick. 👉 Link in Bio",
+      "captionFb": "Wie lange warst du heute wirklich am Arbeitsplatz? ⏰ Unser Arbeitszeitrechner zeigt dir auf den Punkt, wie viele Stunden du täglich und wöchentlich arbeitest – inklusive Pausen und Dezimalzeit. Perfekt für Stundenzettel, Zeiterfassung oder einfach den Überblick. https://www.rechenfix.de/arbeit/arbeitszeitrechner",
+      "hashtags": "#arbeitszeit #zeiterfassung #stundenzettel #arbeitsrecht #dezimalzeit #pausen #arbeitgeber #arbeitnehmer #zeitmanagement #arbeitsplatz #rechenfix #rechner #büro #arbeiten #überstunden",
+      "socialHeadline": "8,50 Std netto",
+      "socialEyebrow": "Zeiterfassung"
+    },
+    "rechtsschutz-rechner": {
+      "captionIg": "💡 Weißt du, was eine Rechtsschutzversicherung kostet? Mit unserem Rechner findest du es in 30 Sekunden heraus. Einfach Lebenssituation eingeben, Bausteine auswählen und Selbstbeteiligung festlegen. So planst du deine Absicherung realistisch. 👉 Link in Bio",
+      "captionFb": "💡 Weißt du, was eine Rechtsschutzversicherung kostet? Mit unserem Rechner findest du es in 30 Sekunden heraus. Einfach Lebenssituation eingeben, Bausteine auswählen und Selbstbeteiligung festlegen. So planst du deine Absicherung realistisch. https://www.rechenfix.de/arbeit/rechtsschutz-rechner",
+      "hashtags": "#rechtsschutz #versicherung #rechtschutzversicherung #kosten #absicherung #recht #beratung #finanzplanung #versicherungsvergleich #rechnen #rechenfix #geld #budget #vorsorge #sicherheit",
+      "socialHeadline": "302 € / Jahr",
+      "socialEyebrow": "Kostencheck"
+    },
+    "volumenrechner": {
+      "captionIg": "Wie viele Liter passen in eine 20×30×40 cm Box? 📐 Mit dem Volumen-Rechner findest du es sofort heraus – für Quader, Zylinder, Kugeln und mehr. Plus automatische Umrechnung in Liter! 👉 Link in Bio",
+      "captionFb": "Wie viele Liter passen in eine 20×30×40 cm Box? 📐 Mit dem Volumen-Rechner findest du es sofort heraus – für Quader, Zylinder, Kugeln und mehr. Plus automatische Umrechnung in Liter! https://www.rechenfix.de/mathe/volumenrechner",
+      "hashtags": "#volumen #mathematik #geometrie #rechnen #rechenfix #schule #mathe #quader #zylinder #kugel #liter #oberfläche #körper #berechnen #umrechnung",
+      "socialHeadline": "60 cm³ = 0,06 Liter",
+      "socialEyebrow": "Rechenbeispiel"
+    },
+    "herzfrequenz-zonen-rechner": {
+      "captionIg": "Trainierst du noch nach Gefühl oder schon nach Plan? 🎯 Mit den richtigen Herzfrequenz-Zonen holst du mehr aus jedem Training raus: gezielter Fettabbau, bessere Ausdauer, weniger Überbelastung. Gib einfach Alter und Ruhepuls ein – fertig ist dein persönlicher Trainingsplan! 👉 Link in Bio",
+      "captionFb": "Trainierst du noch nach Gefühl oder schon nach Plan? 🎯 Mit den richtigen Herzfrequenz-Zonen holst du mehr aus jedem Training raus: gezielter Fettabbau, bessere Ausdauer, weniger Überbelastung. Gib einfach Alter und Ruhepuls ein – fertig ist dein persönlicher Trainingsplan! https://www.rechenfix.de/sport/herzfrequenz-zonen-rechner",
+      "hashtags": "#herzfrequenz #trainingszonen #ausdauer #fettverbrennung #cardio #laufen #fitness #sport #training #herzfrequenzmessung #grundlagenausdauer #rechenfix #rechnen #trainingsplan #puls",
+      "socialHeadline": "138-147 bpm",
+      "socialEyebrow": "Zone 2"
+    },
+    "indexmiete-rechner": {
+      "captionIg": "Wie viel mehr Miete musst du bei einem Indexmietvertrag zahlen? 📈 Der Verbraucherpreisindex steigt – und damit automatisch deine Miete. Berechne schnell, um wie viel sich deine Kaltmiete erhöht und was das pro Jahr bedeutet. 👉 Link in Bio",
+      "captionFb": "Wie viel mehr Miete musst du bei einem Indexmietvertrag zahlen? 📈 Der Verbraucherpreisindex steigt – und damit automatisch deine Miete. Berechne schnell, um wie viel sich deine Kaltmiete erhöht und was das pro Jahr bedeutet. https://www.rechenfix.de/wohnen/indexmiete-rechner",
+      "hashtags": "#indexmiete #mieterhöhung #verbraucherpreisindex #miete #wohnen #mietvertrag #kaltmiete #inflation #rechenfix #rechnen #wohnkosten #mieter #mietrecht #wohnungssuche #immobilien",
+      "socialHeadline": "+ 57,21 € / Monat",
+      "socialEyebrow": "Miet-Realität"
+    },
+    "afa-rechner": {
+      "captionIg": "Wie viel Abschreibung kannst du dieses Jahr steuerlich geltend machen? 🤔 Mit dem AfA-Rechner ermittelst du die exakte Abschreibungssumme für deine Anlagegüter – egal ob linear oder degressiv, mit Monatsgenauigkeit und komplettem AfA-Plan. Spart Zeit bei der Steuererklärung! 👉 Link in Bio",
+      "captionFb": "Wie viel Abschreibung kannst du dieses Jahr steuerlich geltend machen? 🤔 Mit dem AfA-Rechner ermittelst du die exakte Abschreibungssumme für deine Anlagegüter – egal ob linear oder degressiv, mit Monatsgenauigkeit und komplettem AfA-Plan. Spart Zeit bei der Steuererklärung! https://www.rechenfix.de/finanzen/afa-rechner",
+      "hashtags": "#afa #abschreibung #steuer #steuererklärung #anlagegüter #unternehmen #selbstständig #buchführung #finanzamt #steuerberatung #rechenfix #rechnen #finanzen #steuern #buchhaltung",
+      "socialHeadline": "800 € / Jahr",
+      "socialEyebrow": "Abschreibung"
+    },
+    "gleichungsrechner": {
+      "captionIg": "Gleichungen lösen ist doch gar nicht so schwer! 📐 Unser Gleichungsrechner zeigt dir den kompletten Lösungsweg — von einfachen linearen bis hin zu quadratischen Gleichungen mit Mitternachtsformel. Plus: Du siehst die Parabel grafisch und verstehst, warum es manchmal zwei Lösungen gibt. 👉 Link in Bio",
+      "captionFb": "Gleichungen lösen ist doch gar nicht so schwer! 📐 Unser Gleichungsrechner zeigt dir den kompletten Lösungsweg — von einfachen linearen bis hin zu quadratischen Gleichungen mit Mitternachtsformel. Plus: Du siehst die Parabel grafisch und verstehst, warum es manchmal zwei Lösungen gibt. https://www.rechenfix.de/mathe/gleichungsrechner",
+      "hashtags": "#gleichungen #mathe #algebra #rechenweg #mitternachtsformel #quadratisch #linear #rechnen #schule #mathematik #rechenfix #lernen #lösen #formel #parabel",
+      "socialHeadline": "x₁ = 2, x₂ = 3",
+      "socialEyebrow": "Schritt für Schritt"
+    },
+    "blutdruck-rechner": {
+      "captionIg": "Weißt du, was deine Blutdruckwerte wirklich bedeuten? 🩺 Unser Rechner ordnet deine Messwerte nach medizinischen Standards ein und berechnet wichtige Zusatzwerte wie Pulsdruck und mittleren arteriellen Druck. So erkennst du sofort, ob Handlungsbedarf besteht. 👉 Link in Bio",
+      "captionFb": "Weißt du, was deine Blutdruckwerte wirklich bedeuten? 🩺 Unser Rechner ordnet deine Messwerte nach medizinischen Standards ein und berechnet wichtige Zusatzwerte wie Pulsdruck und mittleren arteriellen Druck. So erkennst du sofort, ob Handlungsbedarf besteht. https://www.rechenfix.de/gesundheit/blutdruck-rechner",
+      "hashtags": "#blutdruck #blutdruckwerte #gesundheit #herz #kreislauf #bluthochdruck #hypotonie #gesundheitscheck #medizin #vorsorge #herzgesundheit #rechenfix #rechner",
+      "socialHeadline": "130/85 = Hochnormal",
+      "socialEyebrow": "Selbst-Check"
+    },
+    "lohnsteuer-rechner": {
+      "captionIg": "💰 Warum zahlt dein Kollege bei gleichem Gehalt weniger Steuern? Die Steuerklasse macht's! Bei 3.500€ brutto sind das 390€ in Klasse I, aber 590€ in Klasse VI. Berechne deine genaue Lohnsteuer für alle Steuerklassen und Bundesländer. 👉 Link in Bio",
+      "captionFb": "💰 Warum zahlt dein Kollege bei gleichem Gehalt weniger Steuern? Die Steuerklasse macht's! Bei 3.500€ brutto sind das 390€ in Klasse I, aber 590€ in Klasse VI. Berechne deine genaue Lohnsteuer für alle Steuerklassen und Bundesländer. https://www.rechenfix.de/finanzen/lohnsteuer-rechner",
+      "hashtags": "#lohnsteuer #steuerklasse #bruttolohn #nettolohn #steuern #finanzen #gehalt #steuerrechner #rechenfix #geld #lohnabrechnung #steuerberatung #finanzplanung #gehaltsabrechnung #steuertipps",
+      "socialHeadline": "390 € / Monat",
+      "socialEyebrow": "Steuer-Check"
+    },
+    "nebenkosten-rechner": {
+      "captionIg": "Weißt du, was deine Nebenkosten wirklich kosten? 💡 Unser Rechner zeigt dir alle Posten von Heizung bis Müll auf einen Blick. So behältst du deine Wohnkosten im Griff und kannst gezielt sparen. 👉 Link in Bio",
+      "captionFb": "Weißt du, was deine Nebenkosten wirklich kosten? 💡 Unser Rechner zeigt dir alle Posten von Heizung bis Müll auf einen Blick. So behältst du deine Wohnkosten im Griff und kannst gezielt sparen. 👉 https://www.rechenfix.de/wohnen/nebenkosten-rechner",
+      "hashtags": "#nebenkosten #miete #wohnen #warmmiete #heizkosten #betriebskosten #mietnebenkosten #wohnkosten #rechnen #rechenfix #sparen #haushalt #mietwohnung #kostencheck #budgetplaning",
+      "socialHeadline": "850 € Warmmiete",
+      "socialEyebrow": "Kostencheck"
+    },
+    "zucker-umrechner": {
+      "captionIg": "Backst du gerne, aber suchst Alternativen zu normalem Zucker? 🍯 Unser Zucker-Umrechner zeigt dir exakt, wie viel Honig, Ahornsirup, Stevia oder Erythrit du stattdessen brauchst. Plus: Kalorien-Vergleich und wichtige Backtipps, damit dein Kuchen perfekt gelingt. 👉 Link in Bio",
+      "captionFb": "Backst du gerne, aber suchst Alternativen zu normalem Zucker? 🍯 Unser Zucker-Umrechner zeigt dir exakt, wie viel Honig, Ahornsirup, Stevia oder Erythrit du stattdessen brauchst. Plus: Kalorien-Vergleich und wichtige Backtipps, damit dein Kuchen perfekt gelingt. https://www.rechenfix.de/kochen/zucker-umrechner",
+      "hashtags": "#zuckerersatz #backen #honig #stevia #erythrit #ahornsirup #gesundbacken #zuckerfrei #kalorien #backrezepte #kochen #rechenfix #küche #süßen #backtipps",
+      "socialHeadline": "1 g Stevia-Pulver",
+      "socialEyebrow": "Back-Tipp"
+    },
+    "budget-rechner": {
+      "captionIg": "Weißt du, wie viel du wirklich sparen könntest? 💰 Mit dem Budget-Rechner schlüsselst du alle Einnahmen und Ausgaben auf – und findest versteckte Sparpotenziale. Die 50/30/20-Regel zeigt dir, ob deine Verteilung stimmt. Verschaffe dir endlich Klarheit über deine Finanzen! 👉 Link in Bio",
+      "captionFb": "Weißt du, wie viel du wirklich sparen könntest? 💰 Mit dem Budget-Rechner schlüsselst du alle Einnahmen und Ausgaben auf – und findest versteckte Sparpotenziale. Die 50/30/20-Regel zeigt dir, ob deine Verteilung stimmt. Verschaffe dir endlich Klarheit über deine Finanzen! https://www.rechenfix.de/alltag/budget-rechner",
+      "hashtags": "#budgetrechner #sparen #haushaltsbudget #budgetplaner #geld #finanzen #sparplan #rechenfix #geldsparen #budgetieren #sparpotenzial #finanzplanung #haushaltsbuch",
+      "socialHeadline": "655 € Überschuss",
+      "socialEyebrow": "Haushalts-Check"
+    },
+    "gehaltserhoehung-rechner": {
+      "captionIg": "Weißt du, wie viel von deiner Gehaltserhöhung wirklich ankommt? 💰 Bei 300 € mehr brutto bleiben oft nur 167 € netto — der Rest geht an Steuern und Abgaben. Berechne deine echte Erhöhung und plane realistisch! 👉 Link in Bio",
+      "captionFb": "Weißt du, wie viel von deiner Gehaltserhöhung wirklich ankommt? 💰 Bei 300 € mehr brutto bleiben oft nur 167 € netto — der Rest geht an Steuern und Abgaben. Berechne deine echte Erhöhung und plane realistisch! https://www.rechenfix.de/finanzen/gehaltserhoehung-rechner",
+      "hashtags": "#gehaltserhöhung #nettolohn #steuern #gehalt #finanzen #rechenfix #bruttolohn #abgaben #grenzsteuersatz #geld #verdienst #lohnsteuer #arbeitsvertrag #gehaltsverhandlung #rechnen",
+      "socialHeadline": "+167 € netto",
+      "socialEyebrow": "Realitäts-Check"
+    },
+    "energiekosten-rechner": {
+      "captionIg": "💡 Weißt du, was dein Homeoffice-PC pro Jahr kostet? Bei 6 Stunden täglich entstehen schnell über 115 € Stromkosten! Mit unserem Rechner siehst du sofort, welches Gerät wieviel verbraucht und kannst gezielt Energie sparen. 👉 Link in Bio",
+      "captionFb": "💡 Weißt du, was dein Homeoffice-PC pro Jahr kostet? Bei 6 Stunden täglich entstehen schnell über 115 € Stromkosten! Mit unserem Rechner siehst du sofort, welches Gerät wieviel verbraucht und kannst gezielt Energie sparen. https://www.rechenfix.de/wohnen/energiekosten-rechner",
+      "hashtags": "#energiekosten #stromkosten #energiesparen #homeoffice #stromrechnung #energierechner #wohnen #haushalt #rechenfix #energie #verbrauchsrechner #stromverbrauch #kosten #geld #sparen",
+      "socialHeadline": "115 €/Jahr",
+      "socialEyebrow": "Versteckte Kosten"
+    },
+    "tapetenbedarf-rechner": {
+      "captionIg": "Wie viele Rollen brauchst du wirklich? 🎨 Der Tapetenbedarf-Rechner berücksichtigt Rapport, Verschnitt und zieht sogar Fenster und Türen ab. So kaufst du nie wieder zu viel oder zu wenig. 👉 Link in Bio",
+      "captionFb": "Wie viele Rollen brauchst du wirklich? 🎨 Der Tapetenbedarf-Rechner berücksichtigt Rapport, Verschnitt und zieht sogar Fenster und Türen ab. So kaufst du nie wieder zu viel oder zu wenig. https://www.rechenfix.de/wohnen/tapetenbedarf-rechner",
+      "hashtags": "#tapetenbedarf #tapezieren #renovieren #heimwerken #wohnen #rechenfix #tapeten #rechner #diy #hausbau #einrichten #wohnungsrenovierung #tapete",
+      "socialHeadline": "10 Rollen",
+      "socialEyebrow": "Renovierungs-Tipp"
+    },
+    "steuererstattung-rechner": {
+      "captionIg": "Weißt du, wie viel Geld vom Finanzamt zurückkommt? 💰 Werbungskosten, Homeoffice-Pauschale und Fahrtkosten summieren sich schnell über den Grundfreibetrag. Schon 1.000 € extra können bei 30% Grenzsteuersatz rund 300 € Erstattung bedeuten. 👉 Link in Bio",
+      "captionFb": "Weißt du, wie viel Geld vom Finanzamt zurückkommt? 💰 Werbungskosten, Homeoffice-Pauschale und Fahrtkosten summieren sich schnell über den Grundfreibetrag. Schon 1.000 € extra können bei 30% Grenzsteuersatz rund 300 € Erstattung bedeuten. https://www.rechenfix.de/finanzen/steuererstattung-rechner",
+      "hashtags": "#steuererstattung #steuer #finanzamt #werbungskosten #homeoffice #pendler #steuererklärung #geld #finanzen #rechenfix #steuerberatung #erstattung #rechnen #sparen #steuertipps",
+      "socialHeadline": "≈ 306 € Erstattung",
+      "socialEyebrow": "Faustregel"
+    },
+    "heizkosten-rechner": {
+      "captionIg": "Welcher Energieträger heizt deine 80 m² am günstigsten? 🔥 Mit dem Heizkostenrechner vergleichst du Gas, Öl, Fernwärme, Wärmepumpe und Pellets direkt. Gib einfach deine Wohnfläche und den Verbrauch ein — schon siehst du die Jahreskosten aller Heizarten. 👉 Link in Bio",
+      "captionFb": "Welcher Energieträger heizt deine 80 m² am günstigsten? 🔥 Mit dem Heizkostenrechner vergleichst du Gas, Öl, Fernwärme, Wärmepumpe und Pellets direkt. Gib einfach deine Wohnfläche und den Verbrauch ein — schon siehst du die Jahreskosten aller Heizarten. https://www.rechenfix.de/wohnen/heizkosten-rechner",
+      "hashtags": "#heizkosten #heizen #energiekosten #gas #öl #wärmepumpe #pellets #fernwärme #energievergleich #wohnen #hausbau #sanierung #energiesparen #rechenfix #rechnen",
+      "socialHeadline": "1.344 € / Jahr",
+      "socialEyebrow": "Energie-Vergleich"
+    },
+    "trinkgeld-rechner": {
+      "captionIg": "🍽️ Wie viel Trinkgeld gibst du normalerweise? Mit dem Trinkgeld-Rechner siehst du sofort, wie viel bei 10%, 15% oder 20% rauskommt. Plus: Rechnung fair auf alle Personen aufteilen und auf glatte Beträge aufrunden. Schluss mit Kopfrechnen am Restauranttisch! 👉 Link in Bio",
+      "captionFb": "🍽️ Wie viel Trinkgeld gibst du normalerweise? Mit dem Trinkgeld-Rechner siehst du sofort, wie viel bei 10%, 15% oder 20% rauskommt. Plus: Rechnung fair auf alle Personen aufteilen und auf glatte Beträge aufrunden. Schluss mit Kopfrechnen am Restauranttisch! https://www.rechenfix.de/alltag/trinkgeld-rechner",
+      "hashtags": "#trinkgeld #restaurant #rechnen #rechenfix #service #essen #gastronomie #alltag #rechnung #teilen #prozent #aufrunden #tipp #bedienung #kellner",
+      "socialHeadline": "4,50 € Trinkgeld",
+      "socialEyebrow": "Schnell gerechnet"
+    },
+    "taxi-rechner": {
+      "captionIg": "Was kostet die Taxifahrt wirklich? 🚕 Unser Rechner zeigt dir den genauen Fahrpreis für deine Strecke – inklusive Grundtarif, Kilometer und sogar Trinkgeld. Einfach Start, Ziel und Stadt eingeben und du weißt sofort, was dich die Fahrt kostet. 👉 Link in Bio",
+      "captionFb": "Was kostet die Taxifahrt wirklich? 🚕 Unser Rechner zeigt dir den genauen Fahrpreis für deine Strecke – inklusive Grundtarif, Kilometer und sogar Trinkgeld. Einfach Start, Ziel und Stadt eingeben und du weißt sofort, was dich die Fahrt kostet. https://www.rechenfix.de/auto/taxi-rechner",
+      "hashtags": "#taxi #taxikosten #fahrpreis #berlin #hamburg #münchen #verkehr #transport #öpnv #stadtverkehr #rechenfix #rechner #kostenrechner #mobilität #taxifahrt",
+      "socialHeadline": "32,34 € (mit Trinkgeld)",
+      "socialEyebrow": "Taxi-Realität"
+    },
+    "kurzarbeitergeld-rechner": {
+      "captionIg": "Kurzarbeitergeld = 60% der Differenz zwischen Soll- und Ist-Netto 💰 Bei 50% Kurzarbeit und 3.500€ Brutto sind das etwa 612€ KuG. Berechne jetzt deine individuelle KuG-Höhe! 👉 Link in Bio",
+      "captionFb": "Kurzarbeitergeld = 60% der Differenz zwischen Soll- und Ist-Netto 💰 Bei 50% Kurzarbeit und 3.500€ Brutto sind das etwa 612€ KuG. Berechne jetzt deine individuelle KuG-Höhe! https://www.rechenfix.de/finanzen/kurzarbeitergeld-rechner",
+      "hashtags": "#kurzarbeitergeld #kug #kurzarbeit #arbeitsamt #gehalt #finanzen #geld #arbeitslosengeld #sozialleistungen #rechner #rechenfix #corona #arbeit #einkommen #netto",
+      "socialHeadline": "612 € KuG",
+      "socialEyebrow": "Krisenzeit"
+    },
+    "buergergeld-rechner": {
+      "captionIg": "Wie hoch ist dein Bürgergeld-Anspruch 2026? 🤔 Unser Rechner berücksichtigt alle aktuellen Regelsätze, dein Einkommen und deine Wohnkosten. So siehst du sofort, mit welcher Unterstützung du rechnen kannst. Beispiel: Als Alleinstehende Person mit 530 € Miete erhältst du 1.093 € im Monat. 👉 Link in Bio",
+      "captionFb": "Wie hoch ist dein Bürgergeld-Anspruch 2026? 🤔 Unser Rechner berücksichtigt alle aktuellen Regelsätze, dein Einkommen und deine Wohnkosten. So siehst du sofort, mit welcher Unterstützung du rechnen kannst. Beispiel: Als Alleinstehende Person mit 530 € Miete erhältst du 1.093 € im Monat. https://www.rechenfix.de/finanzen/buergergeld-rechner",
+      "hashtags": "#bürgergeld #sozialleistungen #hartz4 #existenzminimum #grundsicherung #arbeitslosengeld #jobcenter #regelsatz #finanzhilfe #sozialrecht #rechenfix #rechner #finanzen #geld #unterstützung",
+      "socialHeadline": "1.093 € / Monat",
+      "socialEyebrow": "Anspruch-Check"
+    },
+    "firmenwagen-rechner": {
+      "captionIg": "Wie viel Steuern zahlst du wirklich für deinen Firmenwagen? 🚗 Die 1%-Regel bestimmt den geldwerten Vorteil - aber je nach Auto-Typ, Arbeitsweg und Steuersatz kann das richtig ins Geld gehen. Unser Rechner zeigt dir sofort, was dich dein Dienstwagen netto kostet. 👉 Link in Bio",
+      "captionFb": "Wie viel Steuern zahlst du wirklich für deinen Firmenwagen? 🚗 Die 1%-Regel bestimmt den geldwerten Vorteil - aber je nach Auto-Typ, Arbeitsweg und Steuersatz kann das richtig ins Geld gehen. Unser Rechner zeigt dir sofort, was dich dein Dienstwagen netto kostet. https://www.rechenfix.de/auto/firmenwagen-rechner",
+      "hashtags": "#firmenwagen #dienstwagen #geldwertervorteil #steuer #lohnsteuer #1prozentreegel #autosteuer #rechenfix #rechnen #steuertipp #arbeitsweg #hybridauto #elektroauto #firmenwagensteuer #steuerlast",
+      "socialHeadline": "252 € Steuer/Monat",
+      "socialEyebrow": "Firmenwagensteuer"
+    },
+    "potenz-rechner": {
+      "captionIg": "Kennst du noch die Potenzgesetze aus der Schule? 📚 Mit diesem Rechner löst du Potenzen, Wurzeln und Logarithmen blitzschnell – inklusive Rechenweg und allen wichtigen Regeln. Perfekt für Hausaufgaben oder zum Auffrischen! 👉 Link in Bio",
+      "captionFb": "Kennst du noch die Potenzgesetze aus der Schule? 📚 Mit diesem Rechner löst du Potenzen, Wurzeln und Logarithmen blitzschnell – inklusive Rechenweg und allen wichtigen Regeln. Perfekt für Hausaufgaben oder zum Auffrischen! https://www.rechenfix.de/mathe/potenz-rechner",
+      "hashtags": "#potenzen #wurzeln #logarithmus #mathe #schule #hausaufgaben #potenzgesetze #rechnen #mathematik #lernen #rechenfix #studium #abitur #algebra #potenzrechner",
+      "socialHeadline": "2¹⁰ = 1.024",
+      "socialEyebrow": "Potenzgesetze"
+    },
+    "hefe-umrechner": {
+      "captionIg": "Hast du schon mal ein Rezept nicht gemacht, weil du nur Trockenhefe hattest? 🤔 Mit diesem Rechner rechnest du Frischhefe, Trockenhefe und Lievito Madre blitzschnell um. Inklusive Mengentabellen und Tipps zur Verarbeitung. Nie wieder Backen ausfallen lassen! 👉 Link in Bio",
+      "captionFb": "Hast du schon mal ein Rezept nicht gemacht, weil du nur Trockenhefe hattest? 🤔 Mit diesem Rechner rechnest du Frischhefe, Trockenhefe und Lievito Madre blitzschnell um. Inklusive Mengentabellen und Tipps zur Verarbeitung. Nie wieder Backen ausfallen lassen! https://www.rechenfix.de/kochen/hefe-umrechner",
+      "hashtags": "#hefe #backen #brot #pizza #hefeteig #kochen #frischhefe #trockenhefe #sauerteig #lievitomadre #backrezepte #umrechnen #rechenfix #küchenhilfe #backtools",
+      "socialHeadline": "42 g → 14 g → 200 g",
+      "socialEyebrow": "Hefe-Umrechnung"
+    },
+    "backzeit-rechner": {
+      "captionIg": "Backst du noch mit Raterei oder schon mit System? 🤔 Der Backzeit-Rechner wandelt Temperaturen zwischen Ober-/Unterhitze und Umluft um, passt Zeiten an andere Formgrößen an und hilft bei Gasmark-Umrechnungen. Schluss mit verbrannten oder rohen Kuchen! 👉 Link in Bio",
+      "captionFb": "Backst du noch mit Raterei oder schon mit System? 🤔 Der Backzeit-Rechner wandelt Temperaturen zwischen Ober-/Unterhitze und Umluft um, passt Zeiten an andere Formgrößen an und hilft bei Gasmark-Umrechnungen. Schluss mit verbrannten oder rohen Kuchen! 👉 https://www.rechenfix.de/kochen/backzeit-rechner",
+      "hashtags": "#backzeit #backen #kuchen #umluft #oberhitze #backtemperatur #backform #gasmark #kuchenbacken #backtipps #hobbybäcker #backrechner #rechenfix #kochen #küche",
+      "socialHeadline": "160 °C Umluft",
+      "socialEyebrow": "Back-Tipp"
+    },
+    "naehrwert-rechner": {
+      "captionIg": "Wie viele Kalorien hat dein selbst gekochtes Essen wirklich? 🤔 Mit dem Nährwert-Rechner findest du es heraus: Einfach Zutaten eingeben, Portionsanzahl festlegen – fertig! Zeigt dir Kalorien, Protein, Kohlenhydrate und Fett pro Portion an. Perfekt für bewusste Ernährung ohne Rätselraten. 👉 Link in Bio",
+      "captionFb": "Wie viele Kalorien hat dein selbst gekochtes Essen wirklich? 🤔 Mit dem Nährwert-Rechner findest du es heraus: Einfach Zutaten eingeben, Portionsanzahl festlegen – fertig! Zeigt dir Kalorien, Protein, Kohlenhydrate und Fett pro Portion an. Perfekt für bewusste Ernährung ohne Rätselraten. https://www.rechenfix.de/kochen/naehrwert-rechner",
+      "hashtags": "#nährwerte #kalorien #kochen #ernährung #gesundessen #rezepte #protein #kohlenhydrate #fett #portionen #selbstgekocht #rechenfix #rechnen #gesundheit #bewusstessen",
+      "socialHeadline": "312 kcal / Portion",
+      "socialEyebrow": "Selbst-Check"
+    },
+    "grundsteuer-rechner": {
+      "captionIg": "Weißt du schon, was dich die neue Grundsteuer kostet? 🏠 Mit unserem Rechner findest du es in 2 Minuten heraus: Grundsteuerwert, Messbetrag und Jahresbetrag nach dem Bundesmodell. Einfach Wohnfläche, Grundstücksgröße und Bodenrichtwert eingeben. 👉 Link in Bio",
+      "captionFb": "Weißt du schon, was dich die neue Grundsteuer kostet? 🏠 Mit unserem Rechner findest du es in 2 Minuten heraus: Grundsteuerwert, Messbetrag und Jahresbetrag nach dem Bundesmodell. Einfach Wohnfläche, Grundstücksgröße und Bodenrichtwert eingeben. https://www.rechenfix.de/wohnen/grundsteuer-rechner",
+      "hashtags": "#grundsteuer #grundsteuerrechner #immobilie #eigentum #wohnen #hausbesitzer #grundsteuerwert #hebesatz #rechenfix #immobilienbesitzer #steuerrechner #wohneigentum #haus #wohnung #grundbesitz",
+      "socialHeadline": "375 € / Jahr",
+      "socialEyebrow": "Grundsteuer"
+    },
+    "rezept-umrechner": {
+      "captionIg": "Kennst du das? Rezept für 4 Personen, aber es kommen 6 zum Essen 🤔 Unser Rezept-Umrechner skaliert alle Zutatenmengen automatisch auf deine Wunsch-Portionszahl - mit intelligenter Rundung für praktische Mengen. Schluss mit Kopfrechnen in der Küche! 👉 Link in Bio",
+      "captionFb": "Kennst du das? Rezept für 4 Personen, aber es kommen 6 zum Essen 🤔 Unser Rezept-Umrechner skaliert alle Zutatenmengen automatisch auf deine Wunsch-Portionszahl - mit intelligenter Rundung für praktische Mengen. Schluss mit Kopfrechnen in der Küche! https://www.rechenfix.de/kochen/rezept-umrechner",
+      "hashtags": "#rezeptumrechner #kochen #rezept #portionen #küche #backen #zutaten #rechenfix #kochenhilfe #rezepte #küchentipps #portionsrechner #kochtipps #rezeptehilfe #küchentools",
+      "socialHeadline": "Faktor 1,5",
+      "socialEyebrow": "Küchen-Tool"
+    },
+    "kaffee-kosten-rechner": {
+      "captionIg": "Wusstest du, dass dein täglicher Kaffee-to-go richtig ins Geld gehen kann? 📈 Bei 2 Kaffees à 3,50 € täglich sind das über 2.500 € pro Jahr! Unser Rechner zeigt dir deine echten Kaffeekosten und gibt Spartipps für deinen perfekten Kaffee-Genuss. 👉 Link in Bio",
+      "captionFb": "Wusstest du, dass dein täglicher Kaffee-to-go richtig ins Geld gehen kann? 📈 Bei 2 Kaffees à 3,50 € täglich sind das über 2.500 € pro Jahr! Unser Rechner zeigt dir deine echten Kaffeekosten und gibt Spartipps für deinen perfekten Kaffee-Genuss. https://www.rechenfix.de/alltag/kaffee-kosten-rechner",
+      "hashtags": "#kaffeekosten #kaffeesparen #rechenfix #kaffeeliebe #geldsparen #haushaltsbuch #finanzcheck #alltagsrechner #kaffee #spartipps #budgetplaner #haushaltsrechnung #rechnen #kaffeepause #finanzplanung",
+      "socialHeadline": "2.555 € / Jahr",
+      "socialEyebrow": "Kaffee-Bilanz"
+    },
+    "teilzeit-rechner": {
+      "captionIg": "Wie viel bleibt bei Teilzeit übrig? 🤔 Unser Rechner zeigt dir sofort dein neues Brutto-Gehalt, geschätztes Netto und wie sich Stundenlohn und Urlaubstage ändern. Einfach aktuelle Daten eingeben und alle Zahlen auf einen Blick sehen. 👉 Link in Bio",
+      "captionFb": "Wie viel bleibt bei Teilzeit übrig? 🤔 Unser Rechner zeigt dir sofort dein neues Brutto-Gehalt, geschätztes Netto und wie sich Stundenlohn und Urlaubstage ändern. Einfach aktuelle Daten eingeben und alle Zahlen auf einen Blick sehen. https://www.rechenfix.de/arbeit/teilzeit-rechner",
+      "hashtags": "#teilzeit #gehalt #teilzeitrechner #arbeitszeit #gehaltrechner #nettolohn #stundenlohn #urlaubstage #arbeitundrecht #berufstätig #arbeitsvertrag #rechenfix #rechnen #karriere #worklifebalance",
+      "socialHeadline": "2.625 € statt 3.500 €",
+      "socialEyebrow": "Teilzeit-Realität"
+    },
+    "pizzateig-rechner": {
+      "captionIg": "🍕 Wie viel Hefe braucht perfekter Pizzateig? Mit Bäckerprozenten und dem richtigen Hydrations-Verhältnis wird deine Pizza endlich wie beim Italiener. Weniger Hefe bedeutet mehr Aroma — der Rechner zeigt dir die exakten Mengen für 1–8 Pizzen und einen optimalen Zeitplan. 👉 Link in Bio",
+      "captionFb": "🍕 Wie viel Hefe braucht perfekter Pizzateig? Mit Bäckerprozenten und dem richtigen Hydrations-Verhältnis wird deine Pizza endlich wie beim Italiener. Weniger Hefe bedeutet mehr Aroma — der Rechner zeigt dir die exakten Mengen für 1–8 Pizzen und einen optimalen Zeitplan. https://www.rechenfix.de/kochen/pizzateig-rechner",
+      "hashtags": "#pizzateig #pizza #backen #kochen #bäckerprozente #hydration #hefe #teig #italienisch #rezept #rechenfix #küche #selbstgemacht #foodie #pizzabacken",
+      "socialHeadline": "626 g Mehl",
+      "socialEyebrow": "Bäcker-Formel"
+    },
+    "schenkungssteuer-rechner": {
+      "captionIg": "Wusstest du, dass eine Schenkung von 250.000 € völlig unterschiedlich besteuert wird? 🤔 An dein Kind: komplett steuerfrei dank 400.000 € Freibetrag. An deinen Neffen: 46.000 € Schenkungssteuer! Der Verwandtschaftsgrad entscheidet über Freibeträge und Steuerklassen. Rechne deine Schenkung vorher durch und nutze die 10-Jahres-Regel clever. 👉 Link in Bio",
+      "captionFb": "Wusstest du, dass eine Schenkung von 250.000 € völlig unterschiedlich besteuert wird? 🤔 An dein Kind: komplett steuerfrei dank 400.000 € Freibetrag. An deinen Neffen: 46.000 € Schenkungssteuer! Der Verwandtschaftsgrad entscheidet über Freibeträge und Steuerklassen. Rechne deine Schenkung vorher durch und nutze die 10-Jahres-Regel clever: https://www.rechenfix.de/finanzen/schenkungssteuer-rechner",
+      "hashtags": "#schenkungssteuer #freibetrag #steuerklasse #schenkung #verwandtschaftsgrad #steuern #finanzen #erbschaft #steuerplanung #zehnjahrensregel #steuertipp #rechnen #rechenfix #steuerberatung #vermögen",
+      "socialHeadline": "46.000 € Steuer",
+      "socialEyebrow": "Verwandten-Check"
+    },
+    "unterhaltsrechner": {
+      "captionIg": "Wie viel Kindesunterhalt musst du zahlen? 🤔 Mit dem Unterhaltsrechner findest du es sofort heraus: Düsseldorfer Tabelle 2026, automatische Kindergeld-Verrechnung und alle Einkommensgruppen. Einfach Netto-Einkommen und Kinderdaten eingeben — fertig! 👉 Link in Bio",
+      "captionFb": "Wie viel Kindesunterhalt musst du zahlen? 🤔 Mit dem Unterhaltsrechner findest du es sofort heraus: Düsseldorfer Tabelle 2026, automatische Kindergeld-Verrechnung und alle Einkommensgruppen. Einfach Netto-Einkommen und Kinderdaten eingeben — fertig! 👉 https://www.rechenfix.de/arbeit/unterhaltsrechner",
+      "hashtags": "#unterhalt #kindesunterhalt #düsseldorfertabelle #unterhaltspflicht #trennung #scheidung #kindergeld #familienrecht #unterhaltsrechner #rechenfix #rechnen #unterhaltszahlung #eltern #kinder #recht",
+      "socialHeadline": "513 € / Monat",
+      "socialEyebrow": "Faustregel"
+    },
+    "alkoholgehalt-rechner": {
+      "captionIg": "Wieviel Prozent hat dein selbstgemachter Cocktail? 🍹 Mit dem Alkoholgehalt-Rechner siehst du sofort den genauen Vol.-%, die Kalorien und wieviel Restalkohol nach dem Kochen noch übrig ist. Perfekt für Cocktail-Fans und Hobby-Köche! 👉 Link in Bio",
+      "captionFb": "Wieviel Prozent hat dein selbstgemachter Cocktail? 🍹 Mit dem Alkoholgehalt-Rechner siehst du sofort den genauen Vol.-%, die Kalorien und wieviel Restalkohol nach dem Kochen noch übrig ist. Perfekt für Cocktail-Fans und Hobby-Köche! https://www.rechenfix.de/kochen/alkoholgehalt-rechner",
+      "hashtags": "#alkoholgehalt #cocktail #kochen #alkohol #prozent #kalorien #restalkohol #mischen #cocktails #rechenfix #rechnen #küche #ernährung #getränke #hobby",
+      "socialHeadline": "4,2 % vol",
+      "socialEyebrow": "Mischrechnung"
+    },
+    "freelancer-stundensatz-rechner": {
+      "captionIg": "Wie viel musst du als Freelancer pro Stunde verlangen? 🤔 Viele verschätzen sich bei der Kalkulation und vergessen Steuern, Krankenversicherung oder Rücklagen. Mit dem richtigen Stundensatz deckst du alle Kosten und erreichst dein Netto-Ziel. 👉 Link in Bio",
+      "captionFb": "Wie viel musst du als Freelancer pro Stunde verlangen? 🤔 Viele verschätzen sich bei der Kalkulation und vergessen Steuern, Krankenversicherung oder Rücklagen. Mit dem richtigen Stundensatz deckst du alle Kosten und erreichst dein Netto-Ziel. 👉 https://www.rechenfix.de/arbeit/freelancer-stundensatz-rechner",
+      "hashtags": "#freelancer #stundensatz #selbstständig #kalkulation #rechenfix #honorar #freiberufler #arbeit #rechnen #preiskalkulation #businesstipp #selbstständigkeit #freelancing #stundenhonorar #kostenrechnung",
+      "socialHeadline": "56,43 €/Std",
+      "socialEyebrow": "Kalkulation"
+    },
+    "handykosten-rechner": {
+      "captionIg": "📱 Zahlst du wirklich nur 15 € für dein Handy? Viele vergessen: Smartphone-Finanzierung, Versicherung und Zusatzoptionen treiben die echten Kosten schnell auf 40-50 € monatlich. Rechne deine wahren Handykosten aus und erkenne versteckte Kostenfallen. 👉 Link in Bio",
+      "captionFb": "📱 Zahlst du wirklich nur 15 € für dein Handy? Viele vergessen: Smartphone-Finanzierung, Versicherung und Zusatzoptionen treiben die echten Kosten schnell auf 40-50 € monatlich. Rechne deine wahren Handykosten aus und erkenne versteckte Kostenfallen. 👉 https://www.rechenfix.de/alltag/handykosten-rechner",
+      "hashtags": "#handykosten #mobilfunk #handyvertrag #smartphone #kosten #sparen #geld #rechenfix #tarif #handy #mobilfunkvertrag #kostenrechner #finanzcheck",
+      "socialHeadline": "540 € / Jahr",
+      "socialEyebrow": "Kostencheck"
+    },
+    "nebenjob-rechner": {
+      "captionIg": "Lohnt sich ein Nebenjob wirklich? 🤔 Mit unserem Nebenjob-Rechner siehst du sofort, wie viel vom Zweitjob netto übrig bleibt. Minijob oder Steuerkarte – rechne alle Varianten durch und triff die richtige Entscheidung für dein Einkommen. 👉 Link in Bio",
+      "captionFb": "Lohnt sich ein Nebenjob wirklich? 🤔 Mit unserem Nebenjob-Rechner siehst du sofort, wie viel vom Zweitjob netto übrig bleibt. Minijob oder Steuerkarte – rechne alle Varianten durch und triff die richtige Entscheidung für dein Einkommen. https://www.rechenfix.de/finanzen/nebenjob-rechner",
+      "hashtags": "#nebenjob #minijob #steuern #nettoeinkommen #zweitjob #rechenfix #rechnen #finanzen #steuerklasse #sozialversicherung #geld #einkommen #steuerfrei #nebenverdienstst #450euro",
+      "socialHeadline": "+ 250 € netto/Monat",
+      "socialEyebrow": "Nebenjob-Check"
+    },
+    "kw-ps-umrechner": {
+      "captionIg": "Wusstest du, dass dein 150-PS-Auto nur 110 kW hat? 🚗 Die Umrechnung zwischen Kilowatt und Pferdestärken verwirrt viele – dabei ist es ganz einfach mit der richtigen Formel. Spare dir das Kopfrechnen und rechne blitzschnell um! 👉 Link in Bio",
+      "captionFb": "Wusstest du, dass dein 150-PS-Auto nur 110 kW hat? 🚗 Die Umrechnung zwischen Kilowatt und Pferdestärken verwirrt viele – dabei ist es ganz einfach mit der richtigen Formel. Spare dir das Kopfrechnen und rechne blitzschnell um! https://www.rechenfix.de/auto/kw-ps-umrechner",
+      "hashtags": "#kwpsumrechner #auto #pferdestärken #kilowatt #motorleistung #fahrzeug #autorechner #rechenfix #umrechnung #kfz #leistung #motor #rechnen #autokauf #technik",
+      "socialHeadline": "150 PS = 110,33 kW",
+      "socialEyebrow": "Umrechnung"
+    },
+    "reichweiten-rechner": {
+      "captionIg": "Wie weit kommst du mit deinem E-Auto wirklich? 🚗\n\nDie WLTP-Angabe ist eine Sache – die Realität oft eine andere. Unser Rechner berücksichtigt Temperatur, Fahrstil und echten Verbrauch für deine tatsächliche Reichweite.\n\nKeine bösen Überraschungen mehr an der nächsten Ladesäule! 👉 Link in Bio",
+      "captionFb": "Wie weit kommst du mit deinem E-Auto wirklich? 🚗\n\nDie WLTP-Angabe ist eine Sache – die Realität oft eine andere. Unser Rechner berücksichtigt Temperatur, Fahrstil und echten Verbrauch für deine tatsächliche Reichweite.\n\nKeine bösen Überraschungen mehr an der nächsten Ladesäule! https://www.rechenfix.de/auto/reichweiten-rechner",
+      "hashtags": "#eauto #reichweite #elektromobilität #wltp #realverbrauch #ladesäule #elektroauto #batterie #rechenfix #rechner #winter #autobahn #elektrofahrzeug #emobilität #nachhaltigkeit",
+      "socialHeadline": "~215 km real",
+      "socialEyebrow": "Ehrliche Rechnung"
+    },
+    "sonnenschutz-rechner": {
+      "captionIg": "Wie lange kannst du ungeschützt in der Sonne bleiben? ☀️ Deine Eigenschutzzeit hängt vom Hauttyp und UV-Index ab. Mit dem richtigen LSF verlängerst du sie um ein Vielfaches. Berechne deine persönliche Sonnenzeit und vermeide Sonnenbrand. 👉 Link in Bio",
+      "captionFb": "Wie lange kannst du ungeschützt in der Sonne bleiben? ☀️ Deine Eigenschutzzeit hängt vom Hauttyp und UV-Index ab. Mit dem richtigen LSF verlängerst du sie um ein Vielfaches. Berechne deine persönliche Sonnenzeit und vermeide Sonnenbrand. https://www.rechenfix.de/gesundheit/sonnenschutz-rechner",
+      "hashtags": "#sonnenschutz #uv #lichtschutzfaktor #hauttyp #sonnenbrand #gesundheit #sonne #sommer #hautschutz #rechenfix #rechnen #uvindex #sonnenzeit #hautpflege #gesund",
+      "socialHeadline": "126 Min. geschützt",
+      "socialEyebrow": "Hautschutz"
+    },
+    "stromvergleich-rechner": {
+      "captionIg": "Zahlst du zu viel für Strom? 💡 Mit dem aktuellen BDEW-Mittelwert von 37 ct/kWh plus Grundgebühr kommst du bei 2.500 kWh auf über 1.000 € im Jahr. Günstige Festpreis-Tarife liegen oft 100–200 € darunter. Vergleiche jetzt deinen aktuellen Tarif und finde heraus, wie viel du sparen kannst. 👉 Link in Bio",
+      "captionFb": "Zahlst du zu viel für Strom? 💡 Mit dem aktuellen BDEW-Mittelwert von 37 ct/kWh plus Grundgebühr kommst du bei 2.500 kWh auf über 1.000 € im Jahr. Günstige Festpreis-Tarife liegen oft 100–200 € darunter. Vergleiche jetzt deinen aktuellen Tarif und finde heraus, wie viel du sparen kannst. https://www.rechenfix.de/wohnen/stromvergleich-rechner",
+      "hashtags": "#stromvergleich #strom #sparen #energie #stromkosten #tarife #vergleich #rechenfix #wohnen #haushalt #geld #stromrechnung #energiekosten #rechner #finanzen",
+      "socialHeadline": "100 € Sparpotenzial",
+      "socialEyebrow": "Tarif-Check"
+    },
+    "photovoltaik-rechner": {
+      "captionIg": "Lohnt sich eine Solaranlage für dich? 🌞 Mit dem Photovoltaik-Rechner siehst du sofort: Jahresertrag, Eigenverbrauch, Einspeisevergütung und wann sich die Anlage amortisiert. Einfach Dachgröße, Ausrichtung und Stromverbrauch eingeben – fertig! 👉 Link in Bio",
+      "captionFb": "Lohnt sich eine Solaranlage für dich? 🌞 Mit dem Photovoltaik-Rechner siehst du sofort: Jahresertrag, Eigenverbrauch, Einspeisevergütung und wann sich die Anlage amortisiert. Einfach Dachgröße, Ausrichtung und Stromverbrauch eingeben – fertig! https://www.rechenfix.de/wohnen/photovoltaik-rechner",
+      "hashtags": "#photovoltaik #solaranlage #eigenverbrauch #einspeisevergütung #solarertrag #energiewende #nachhaltig #stromkosten #sparen #rechenfix #rechner #solar #pv #amortisation #energiekosten",
+      "socialHeadline": "1.043 € / Jahr",
+      "socialEyebrow": "Solar-Bilanz"
+    },
+    "ssw-rechner": {
+      "captionIg": "Welche SSW bin ich gerade? 🤱 Mit dem SSW-Rechner findest du es sekundenschnell heraus: Einfach den ersten Tag deiner letzten Periode eingeben und du siehst deine aktuelle Schwangerschaftswoche, das Trimester und sogar wie groß dein Baby gerade ist. Perfekt für alle werdenden Mamas! 👉 Link in Bio",
+      "captionFb": "Welche SSW bin ich gerade? 🤱 Mit dem SSW-Rechner findest du es sekundenschnell heraus: Einfach den ersten Tag deiner letzten Periode eingeben und du siehst deine aktuelle Schwangerschaftswoche, das Trimester und sogar wie groß dein Baby gerade ist. Perfekt für alle werdenden Mamas! https://www.rechenfix.de/gesundheit/ssw-rechner",
+      "hashtags": "#ssw #schwangerschaftswoche #schwanger #schwangerschaft #baby #mama #werdendeMama #trimester #geburtstermin #babyentwicklung #schwangerschaftsrechner #rechenfix #rechnen",
+      "socialHeadline": "SSW 14+3",
+      "socialEyebrow": "Werdende Mama"
+    },
+    "gmbh-geschaeftsfuehrer-rechner": {
+      "captionIg": "GmbH-Geschäftsführer zahlen andere Steuern und Abgaben als normale Angestellte 💼 Sozialversicherungsfreiheit, PKV-Pflicht und geldwerte Vorteile wie Firmenwagen machen die Berechnung komplex. Unser Rechner zeigt dir, was netto übrig bleibt – inklusive aller Besonderheiten. 👉 Link in Bio",
+      "captionFb": "GmbH-Geschäftsführer zahlen andere Steuern und Abgaben als normale Angestellte 💼 Sozialversicherungsfreiheit, PKV-Pflicht und geldwerte Vorteile wie Firmenwagen machen die Berechnung komplex. Unser Rechner zeigt dir, was netto übrig bleibt – inklusive aller Besonderheiten. Jetzt berechnen: https://www.rechenfix.de/finanzen/gmbh-geschaeftsfuehrer-rechner",
+      "hashtags": "#gmbh #geschäftsführer #nettolohn #gehaltsrechner #firmenwagen #pkv #sozialversicherung #steuerklasse #geldwertervorteil #selbstständig #unternehmen #finanzen #rechnen #rechenfix #bruttonetto",
+      "socialHeadline": "≈ 4.200 € netto",
+      "socialEyebrow": "GGF-Realität"
+    },
+    "laminat-rechner": {
+      "captionIg": "Wie viele Pakete Laminat brauchst du wirklich? 🤔 Der Laminat-Rechner kalkuliert exakt: Raumfläche + Verschnitt + Pakete + Materialkosten. So kaufst du nicht zu viel und nicht zu wenig. 👉 Link in Bio",
+      "captionFb": "Wie viele Pakete Laminat brauchst du wirklich? 🤔 Der Laminat-Rechner kalkuliert exakt: Raumfläche + Verschnitt + Pakete + Materialkosten. So kaufst du nicht zu viel und nicht zu wenig. ➡️ https://www.rechenfix.de/wohnen/laminat-rechner",
+      "hashtags": "#laminat #parkett #renovierung #heimwerken #wohnen #bodenbelag #rechenfix #hausbau #sanierung #verschnitt #materialkosten #rechnen #wohnung #haus #diy",
+      "socialHeadline": "9 Pakete = 270 €",
+      "socialEyebrow": "Renovierungs-Rechner"
+    },
+    "quadratmeter-rechner": {
+      "captionIg": "Wie viele Quadratmeter hat dein Wohnzimmer wirklich? 📐 Mit dem Quadratmeter-Rechner findest du es in Sekunden heraus – egal ob rechteckig, rund oder L-förmig. Perfekt für Renovierung, Möbelkauf oder einfach zum Wissen. 👉 Link in Bio",
+      "captionFb": "Wie viele Quadratmeter hat dein Wohnzimmer wirklich? 📐 Mit dem Quadratmeter-Rechner findest du es in Sekunden heraus – egal ob rechteckig, rund oder L-förmig. Perfekt für Renovierung, Möbelkauf oder einfach zum Wissen. https://www.rechenfix.de/wohnen/quadratmeter-rechner",
+      "hashtags": "#quadratmeter #fläche #wohnen #renovierung #grundriss #wohnfläche #rechnen #rechenfix #zuhause #immobilie #einrichten #bauen #wohnraum #mathe",
+      "socialHeadline": "20 m²",
+      "socialEyebrow": "Schnell gerechnet"
+    },
+    "kreditrechner": {
+      "captionIg": "Was kostet dich ein 10.000 € Kredit wirklich? 💰 Mit dem Kreditrechner siehst du sofort: Monatsrate, Gesamtkosten und wie viel Zinsen du zahlst. Verschiedene Laufzeiten vergleichen und das beste Angebot finden. 👉 Link in Bio",
+      "captionFb": "Was kostet dich ein 10.000 € Kredit wirklich? 💰 Mit dem Kreditrechner siehst du sofort: Monatsrate, Gesamtkosten und wie viel Zinsen du zahlst. Verschiedene Laufzeiten vergleichen und das beste Angebot finden. ➡️ https://www.rechenfix.de/finanzen/kreditrechner",
+      "hashtags": "#kreditrechner #kredit #ratkredit #autokredit #zinsen #finanzplanung #geldsparen #rechenfix #finanzen #kreditvergleich #monatsrate #darlehen #konsumkredit #finanzcheck #budgetplanung",
+      "socialHeadline": "192,80 € / Monat",
+      "socialEyebrow": "Realitäts-Check"
+    },
+    "bafoeg-rechner": {
+      "captionIg": "💰 Steht dir BAföG zu? Viele Studierende verschenken Geld, weil sie denken, sie hätten keinen Anspruch. Unser Rechner zeigt dir schnell, ob und wie viel BAföG du bekommen könntest. Einfach Einkommen der Eltern, Wohnsituation und paar weitere Daten eingeben – schon siehst du deinen möglichen monatlichen Betrag. 👉 Link in Bio",
+      "captionFb": "💰 Steht dir BAföG zu? Viele Studierende verschenken Geld, weil sie denken, sie hätten keinen Anspruch. Unser Rechner zeigt dir schnell, ob und wie viel BAföG du bekommen könntest. Einfach Einkommen der Eltern, Wohnsituation und paar weitere Daten eingeben – schon siehst du deinen möglichen monatlichen Betrag. https://www.rechenfix.de/finanzen/bafoeg-rechner",
+      "hashtags": "#baföG #studienfinanzierung #student #studium #ausbildungsförderung #studieren #studententipps #geld #finanzierung #rechner #rechenfix #finanzen #studierende #bildung #förderung",
+      "socialHeadline": "553 €/Monat",
+      "socialEyebrow": "Anspruch-Check"
+    },
+    "witwenrente-rechner": {
+      "captionIg": "Wusstest du, dass bei der Witwenrente dein eigenes Einkommen angerechnet wird? 📊 Unser Rechner zeigt dir sofort, ob du Anspruch auf große oder kleine Witwenrente hast und wie viel davon wirklich bei dir ankommt. Freibeträge, Sterbevierteljahr und alle aktuellen Regelungen sind bereits berücksichtigt. 👉 Link in Bio",
+      "captionFb": "Wusstest du, dass bei der Witwenrente dein eigenes Einkommen angerechnet wird? 📊 Unser Rechner zeigt dir sofort, ob du Anspruch auf große oder kleine Witwenrente hast und wie viel davon wirklich bei dir ankommt. Freibeträge, Sterbevierteljahr und alle aktuellen Regelungen sind bereits berücksichtigt. https://www.rechenfix.de/finanzen/witwenrente-rechner",
+      "hashtags": "#witwenrente #hinterbliebenenrente #rente #altersvorsorge #anspruchsrechnung #freibetrag #witwer #witwengeld #rechenfix #rentenberechnung #sozialrecht #rentenkasse #hinterbliebene #rentenanspruch #finanzen",
+      "socialHeadline": "536 €/Monat",
+      "socialEyebrow": "Anspruchsrechnung"
+    },
+    "abi-rechner": {
+      "captionIg": "Wie wird aus deinen Abi-Punkten eigentlich die Endnote? 📚 Der Rechner zeigt dir sofort, ob du bestanden hast und welche Note rauskommt. Block I (Kurse) und Block II (Prüfungen) werden automatisch verrechnet — du siehst auf einen Blick, wo du stehst. 👉 Link in Bio",
+      "captionFb": "Wie wird aus deinen Abi-Punkten eigentlich die Endnote? 📚 Der Rechner zeigt dir sofort, ob du bestanden hast und welche Note rauskommt. Block I (Kurse) und Block II (Prüfungen) werden automatisch verrechnet — du siehst auf einen Blick, wo du stehst. https://www.rechenfix.de/mathe/abi-rechner",
+      "hashtags": "#abi #abitur #abinote #punkterechner #schule #oberstufe #abschluss #noten #rechnen #rechenfix #schulrechner #abiturrechner #gymnasium",
+      "socialHeadline": "Note 2,4",
+      "socialEyebrow": "Rechenbeispiel"
+    },
+    "poolkosten-rechner": {
+      "captionIg": "💰 Wie teuer ist dein Pool wirklich? Viele unterschätzen die laufenden Kosten: Wasser, Strom für Filter, Chemie und Wartung summieren sich schnell. Bei einem 40 m³ Pool kommst du auf ca. 1.200 € pro Jahr – ohne Heizung! Mit dem Rechner siehst du deine echten Poolkosten. 👉 Link in Bio",
+      "captionFb": "💰 Wie teuer ist dein Pool wirklich? Viele unterschätzen die laufenden Kosten: Wasser, Strom für Filter, Chemie und Wartung summieren sich schnell. Bei einem 40 m³ Pool kommst du auf ca. 1.200 € pro Jahr – ohne Heizung! Mit dem Rechner siehst du deine echten Poolkosten. https://www.rechenfix.de/wohnen/poolkosten-rechner",
+      "hashtags": "#poolkosten #pool #betriebskosten #poolpflege #schwimmbad #wohnen #hausbesitzer #garten #rechenfix #rechner #kosten #finanzen #energie #wasser",
+      "socialHeadline": "≈ 1.195 €/Jahr",
+      "socialEyebrow": "Jahres-Bilanz"
+    },
+    "minijob-rechner": {
+      "captionIg": "Wie viel bleibt bei einem 600€-Minijob wirklich übrig? 🤔 Bei der Rentenversicherungspflicht ziehen sie dir 3,6% ab – macht bei 600€ etwa 21,60€ weniger netto. Dafür sammelst du aber Rentenpunkte. Rechne deinen Minijob durch und sieh, ob sich die RV-Pflicht lohnt! 👉 Link in Bio",
+      "captionFb": "Wie viel bleibt bei einem 600€-Minijob wirklich übrig? 🤔 Bei der Rentenversicherungspflicht ziehen sie dir 3,6% ab – macht bei 600€ etwa 21,60€ weniger netto. Dafür sammelst du aber Rentenpunkte. Rechne deinen Minijob durch und sieh, ob sich die RV-Pflicht lohnt! https://www.rechenfix.de/finanzen/minijob-rechner",
+      "hashtags": "#minijob #450eurojob #nebenjob #teilzeit #rentenversicherung #nettolohn #arbeitgeber #midijob #geringfügig #rechenfix #rechner #finanzen #gehalt",
+      "socialHeadline": "581,29 € netto",
+      "socialEyebrow": "Minijob-Realität"
+    },
+    "gefrierdauer-rechner": {
+      "captionIg": "Wie lange ist dein eingefrorenes Fleisch noch gut? 🧊 Mit dem Gefrierdauer-Rechner siehst du sofort, ob deine Tiefkühlkost noch genießbar ist oder schon entsorgt werden sollte. Einfach Einfriedatum und Lebensmittel eingeben - fertig! 👉 Link in Bio",
+      "captionFb": "Wie lange ist dein eingefrorenes Fleisch noch gut? 🧊 Mit dem Gefrierdauer-Rechner siehst du sofort, ob deine Tiefkühlkost noch genießbar ist oder schon entsorgt werden sollte. Einfach Einfriedatum und Lebensmittel eingeben - fertig! https://www.rechenfix.de/kochen/gefrierdauer-rechner",
+      "hashtags": "#gefrierdauer #einfrieren #tiefkühlkost #haltbarkeit #lebensmittelverschwendung #kochen #küche #haushalt #ernährung #rechenfix #rechner #food #meal #prep",
+      "socialHeadline": "9-12 Monate",
+      "socialEyebrow": "Tiefkühl-Check"
+    },
+    "hochrechner": {
+      "captionIg": "Wie viel verdienst du eigentlich im Jahr? 🤔 Gib einfach deinen Stundenlohn ein und lass dir alle anderen Werte automatisch berechnen. Plus: Sofortiger Mindestlohn-Vergleich für 2026. 👉 Link in Bio",
+      "captionFb": "Wie viel verdienst du eigentlich im Jahr? 🤔 Gib einfach deinen Stundenlohn ein und lass dir alle anderen Werte automatisch berechnen. Plus: Sofortiger Mindestlohn-Vergleich für 2026. https://www.rechenfix.de/finanzen/hochrechner",
+      "hashtags": "#hochrechner #gehalt #stundenlohn #jahresgehalt #mindestlohn #lohnrechner #finanzen #rechnen #rechenfix #verdienst #arbeitszeit #bruttolohn #gehaltsrechner #finanzplanung",
+      "socialHeadline": "41.600 € / Jahr",
+      "socialEyebrow": "Mal nachgerechnet"
+    },
+    "prozentuale-veraenderung-rechner": {
+      "captionIg": "Wie viel Prozent ist das eigentlich mehr oder weniger? 📊 Mit diesem Rechner findest du blitzschnell heraus, um wie viel Prozent sich ein Wert verändert hat. Einfach alten und neuen Wert eingeben – fertig! 👉 Link in Bio",
+      "captionFb": "Wie viel Prozent ist das eigentlich mehr oder weniger? 📊 Mit diesem Rechner findest du blitzschnell heraus, um wie viel Prozent sich ein Wert verändert hat. Einfach alten und neuen Wert eingeben – fertig! https://www.rechenfix.de/mathe/prozentuale-veraenderung-rechner",
+      "hashtags": "#prozent #prozentrechnung #mathematik #rechnen #rechenfix #schule #mathe #veränderung #unterschied #prozentsatz #berechnen #lernen #bildung",
+      "socialHeadline": "+ 25 %",
+      "socialEyebrow": "Rechenbeispiel"
+    },
+    "uhrzeitrechner": {
+      "captionIg": "Wie lange arbeitest du heute? 🕐 Mit dem Uhrzeitrechner findest du sekundenschnell heraus, wie viel Zeit zwischen zwei Uhrzeiten liegt. Plus: Zeitzonen umrechnen und Stunden zu Uhrzeiten addieren. Perfekt für Arbeitszeit, Reiseplanung oder Termine. 👉 Link in Bio",
+      "captionFb": "Wie lange arbeitest du heute? 🕐 Mit dem Uhrzeitrechner findest du sekundenschnell heraus, wie viel Zeit zwischen zwei Uhrzeiten liegt. Plus: Zeitzonen umrechnen und Stunden zu Uhrzeiten addieren. Perfekt für Arbeitszeit, Reiseplanung oder Termine. 👉 https://www.rechenfix.de/alltag/uhrzeitrechner",
+      "hashtags": "#uhrzeitrechner #zeit #arbeitszeit #zeitberechnung #uhrzeit #zeitzonen #rechenfix #rechner #alltag #termin #reise #planung #stunden #minuten",
+      "socialHeadline": "8 h 30 min",
+      "socialEyebrow": "Schnell gerechnet"
+    },
+    "inflationsrechner": {
+      "captionIg": "Wusstest du, dass 1.000 € heute in 10 Jahren nur noch 820 € wert sind? 📉 Bei 2% Inflation verlierst du schleichend 180 € Kaufkraft. Unser Inflationsrechner zeigt dir Jahr für Jahr, wie dein Geld an Wert verliert und hilft dir beim Vermögensaufbau. 👉 Link in Bio",
+      "captionFb": "Wusstest du, dass 1.000 € heute in 10 Jahren nur noch 820 € wert sind? 📉 Bei 2% Inflation verlierst du schleichend 180 € Kaufkraft. Unser Inflationsrechner zeigt dir Jahr für Jahr, wie dein Geld an Wert verliert und hilft dir beim Vermögensaufbau. https://www.rechenfix.de/finanzen/inflationsrechner",
+      "hashtags": "#inflation #kaufkraft #geld #finanzen #rechenfix #rechner #vermögen #sparen #zinsen #euro #wirtschaft #geldentwertung #finanzplanung #investment #finanzwissen",
+      "socialHeadline": "820 € in 10 Jahren",
+      "socialEyebrow": "Kaufkraftverlust"
+    },
+    "fuehrerschein-rechner": {
+      "captionIg": "Wie viel kostet ein Führerschein wirklich? 💰 Fahrstunden, Prüfungsgebühren, Sehtest – schnell summiert sich das auf über 3.000 €. Mit unserem Rechner siehst du alle Kostenpunkte auf einen Blick und kannst gezielt für deinen Führerschein sparen. 👉 Link in Bio",
+      "captionFb": "Wie viel kostet ein Führerschein wirklich? 💰 Fahrstunden, Prüfungsgebühren, Sehtest – schnell summiert sich das auf über 3.000 €. Mit unserem Rechner siehst du alle Kostenpunkte auf einen Blick und kannst gezielt für deinen Führerschein sparen. https://www.rechenfix.de/auto/fuehrerschein-rechner",
+      "hashtags": "#führerschein #führerscheinkosten #autoführerschein #fahrschule #fahrstunden #klasse b #sparen #kostenrechner #rechenfix #auto #verkehr #prüfungsgebühren #fahren #lernen #jugendliche",
+      "socialHeadline": "ca. 3.087 €",
+      "socialEyebrow": "Realitäts-Check"
+    },
+    "etf-sparplanrechner": {
+      "captionIg": "Wie viel bringst du mit 200 € monatlich zusammen? 🤔 Nach 20 Jahren hättest du 48.000 € eingezahlt, aber dein ETF-Depot wäre ca. 104.000 € wert. Das sind 56.000 € Rendite durch den Zinseszinseffekt! Rechne deine eigene ETF-Strategie durch und sieh, wie sich dein Vermögen entwickelt. 👉 Link in Bio",
+      "captionFb": "Wie viel bringst du mit 200 € monatlich zusammen? 🤔 Nach 20 Jahren hättest du 48.000 € eingezahlt, aber dein ETF-Depot wäre ca. 104.000 € wert. Das sind 56.000 € Rendite durch den Zinseszinseffekt! Rechne deine eigene ETF-Strategie durch und sieh, wie sich dein Vermögen entwickelt: https://www.rechenfix.de/finanzen/etf-sparplanrechner",
+      "hashtags": "#etf #sparplan #geldanlage #vermögensaufbau #zinseszins #finanzen #sparen #rendite #depot #rechenfix #finanzrechner #etfsparplan #langfristsparen #kapitalanlage #investieren",
+      "socialHeadline": "104.000 € nach 20 J.",
+      "socialEyebrow": "Zinseszins"
+    },
+    "beton-rechner": {
+      "captionIg": "💡 Wie viel Beton brauchst du wirklich für dein Bauvorhaben? Mit dem Beton-Rechner findest du es in Sekunden heraus: Einfach Maße eingeben und du bekommst Kubikmeter, Gewicht und die Anzahl der benötigten Säcke angezeigt. Plus 10% Verschnitt sind automatisch eingerechnet. 👉 Link in Bio",
+      "captionFb": "💡 Wie viel Beton brauchst du wirklich für dein Bauvorhaben? Mit dem Beton-Rechner findest du es in Sekunden heraus: Einfach Maße eingeben und du bekommst Kubikmeter, Gewicht und die Anzahl der benötigten Säcke angezeigt. Plus 10% Verschnitt sind automatisch eingerechnet. https://www.rechenfix.de/wohnen/beton-rechner",
+      "hashtags": "#beton #betonrechner #bauvorhaben #fundament #bodenplatte #bauen #heimwerken #rechenfix #rechner #hausbau #garten #betonmenge #diy #baustoffe #bauplanung",
+      "socialHeadline": "0,99 m³ + 83 Säcke",
+      "socialEyebrow": "Bauplanung"
+    }
+  }
 }
