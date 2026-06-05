@@ -36,6 +36,7 @@ import {
   isSlugDoneOn,
   isSlugFullyDone,
   markSlugDoneOn,
+  setCurrentBioSlug,
   type Platform,
 } from './state';
 
@@ -172,6 +173,20 @@ async function publishToOne(
           `[social] markSlugDoneOn fehlgeschlagen für ${post.slug}/${platform}:`,
           kvErr,
         );
+      }
+      // W17A.3 — IG-Erfolg setzt den Bio-Hub-Pointer für die /social-Seite.
+      // Bewusst nur IG: FB-Posts erlauben echte URL in der Caption, brauchen
+      // also keinen Bio-Workaround. Best-effort: KV-Fehler ändert NICHTS am
+      // Plattform-Erfolg (Bio-Hub würde dann den vorherigen Slug weiter zeigen).
+      if (platform === 'instagram') {
+        try {
+          await setCurrentBioSlug(post.slug);
+        } catch (kvErr) {
+          console.error(
+            `[social] setCurrentBioSlug fehlgeschlagen für ${post.slug}:`,
+            kvErr,
+          );
+        }
       }
     }
     return { success: true, postId: externalId };
