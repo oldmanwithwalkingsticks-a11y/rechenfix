@@ -2660,3 +2660,57 @@ Volltext in CLAUDE.md → „Methodische Lehren (NEU, Welle 17A)".
 - **W17A.Y**: AI-Caption-Generator (Anthropic-API)
 - **W17B**: TikTok-Pipeline (Remotion-Videos)
 - **W17C**: Analytics + A/B-Tests
+
+---
+
+## WELLE 17A.1 — Auto-Content-Pipeline (Juni 2026)
+
+**Status:** Code 5/6 Commits durch (Image-Builder F offen), Live-Befüllung steht aus.
+**Vorbedingung:** W17A live + verifiziert (Dry-Run hat `posts.json ist leer` korrekt gemeldet, ENVs in Vercel gesetzt). Diese Welle ersetzt die manuelle Phase-0-Daten-Befüllung durch automatische Content-Erzeugung.
+
+**Architektur-Wechsel ggü. W17A:**
+- Modulo-Rotation `(today_Berlin − startDate) mod posts.length` → **Queue mit Done-Marken** (Slug-basiert, „jedes Item genau einmal")
+- `lib/social/posts.json` (manuelle Liste) → **3 Datenquellen**: `queue.json` (Slug-Reihenfolge) + `captions.json` (pro-Slug Texte) + `public/social-posts/<slug>.png` (Bilder)
+- Caption-Erzeugung: **pre-generiert lokal** mit Anthropic-API, kein KI-Call im Vercel-Build
+
+**Repo-Realität (Pre-Sprint verifiziert):**
+- 170 Rechner total über alle 9 Kategorien (Alltag 23 + Arbeit 17 + Auto 11 + Finanzen 45 + Gesundheit 17 + Kochen 12 + Mathe 18 + Sport 2 + Wohnen 25)
+- 10 EXCLUDED_SLUGS (Phase-0-Top-10) alle vorhanden → 160 zu verarbeiten
+- `ANTHROPIC_API_KEY`-Pattern bereits etabliert (`app/api/explain/route.ts`)
+- `build_phase0_posts.py` (Bild-Layout-Vorlage) ist NICHT im Repo — Karsten liefert parallel
+
+### Code-Commits
+
+| # | Commit | Inhalt |
+|---|---|---|
+| A | `e9dad20` | EXCLUDED_SLUGS + SHUFFLE_SEED=17 in `config.ts`, `scripts/build-social-queue.ts` (Mulberry32 + Fisher-Yates), `lib/social/queue.json` (160 Slugs, deterministisch) |
+| B | `b25a8d5` | `state.ts`: `isSlugDone` + `markSlugDone` + Key `social:done:{slug}` |
+| C | `77b489a` | Publisher-Umbau: `pickNextSlug` + `resolveTodayPost` + neue `PublishResult`-Struktur (slug/queueExhausted/imageExists/captionExists). `posts.json` gelöscht. `captions.json` leer-initialisiert. Cron-Endpoint angepasst, Queue-erschöpft = 200 mit Note, Dry-Run liefert volle Diagnose ohne 503. |
+| E | `072bf8b` | `scripts/social-caption-builder.ts` (lokal, Anthropic-Sonnet-4 mit Override, resumable Write-Through, 1500 ms Sleep + 1× Retry) |
+| F | (offen) | `scripts/social-image-builder.py` — wartet auf Karstens `build_phase0_posts.py`-Ablage |
+| G | (dieser Commit) | Doku-Sync |
+
+**Sprung über D** (Cron-Dry-Run-Erweiterung): semantisch zu C dazugehörig — Schema-Change `postIndex → slug + queueExhausted + imageExists + captionExists` zog die Cron-Anpassung zwingend nach, separater Commit wäre Build-rot gewesen. Inhaltlich vollständig in C drin.
+
+### Lehren
+
+- **L-W17A.1.1**: Seeded Shuffle mit Code-konstantem Seed (Mulberry32 + Seed 17), reproduzierbar bei identischem EXCLUDED-Set
+- **L-W17A.1.2**: Done-Marken pro Slug statt Index/Datum-Rotation für „genau einmal"-Anforderung
+- **L-W17A.1.3**: tsconfig-Stolperer in Scripts (Set-Spread, top-level-await) zeigen sich erst beim Prebuild, nicht im Editor — Pattern in Scripts vermeiden
+
+Volltext in CLAUDE.md → „Methodische Lehren (NEU, Welle 17A.1)".
+
+### Was steht noch aus
+
+**Karsten:**
+1. **`build_phase0_posts.py`-Ablage** in `scripts/` — danach Commit F (Python-Portierung mit Queue-Iteration + Kategorie-Farb-Mapping)
+2. **Caption-Build lokal laufen** (~8–15 Min für 160 Slugs): `ANTHROPIC_API_KEY=… npx tsx scripts/social-caption-builder.ts` → `git add lib/social/captions.json && git commit`
+3. **Image-Build lokal laufen** (sobald F durch): `python scripts/social-image-builder.py` → `git add public/social-posts/ && git commit`
+4. **Verify**: Cron-Dry-Run im Preview → `imageExists: true`, `captionExists: true`, `instagram.postId: dry-ig-<index>` für die ersten Queue-Slugs
+5. **Live-Test mit `?force=true`** → erster Auto-Content-Post
+
+### Backlog nach W17A.1
+
+- **W17A.1.F**: Image-Builder ins Repo + Karsten-Run für 160 Bilder
+- **W17A.X**: weitere Slug-Quellen, neue Kategorien beim Hinzufügen automatisch eingebunden
+- **W17A.Y**: TikTok-Pipeline (W17B-Vorbereitung)

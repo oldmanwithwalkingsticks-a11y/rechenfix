@@ -1,6 +1,6 @@
-# Social-Media Pipeline (Welle 17A)
+# Social-Media Pipeline (Welle 17A + 17A.1)
 
-Vollautomatische tägliche Posts auf Instagram (@rechenfix) und Facebook (Rechenfix-Page). Live seit Welle 17A (Juni 2026).
+Vollautomatische tägliche Posts auf Instagram (@rechenfix) und Facebook (Rechenfix-Page). Live seit Welle 17A (Juni 2026). Auto-Content-Generierung seit Welle 17A.1.
 
 ---
 
@@ -36,8 +36,8 @@ Vollautomatische tägliche Posts auf Instagram (@rechenfix) und Facebook (Rechen
 ```
 
 - **Variante B** (zwei separate API-Calls, kein IG↔FB-Crosspost). Begründung siehe L-W17A.1 in CLAUDE.md.
-- **Rotation**: `(today_Berlin - startDate) mod posts.length`. Posts in `lib/social/posts.json` deterministisch durchlaufen, kein Random.
-- **Idempotenz**: KV-Key `social:posted:{YYYY-MM-DD}:{platform}` wird vor jedem API-Call geprüft. Ein erneuter Cron-Trigger am selben Berlin-Tag tut nichts (außer mit `?force=true`).
+- **Queue + Done-Marken** (W17A.1, ersetzt Modulo-Rotation): Slug-Reihenfolge in [lib/social/queue.json](../lib/social/queue.json) (seeded shuffle, 160 Einträge). Pipeline wählt den ersten Slug ohne Done-Marke. Jeder Rechner wird **genau einmal** gepostet — Queue erschöpft → keine Wiederholung.
+- **Idempotenz**: KV-Key `social:posted:{YYYY-MM-DD}:{platform}` wird vor jedem API-Call geprüft. Ein erneuter Cron-Trigger am selben Berlin-Tag tut nichts (außer mit `?force=true`). Zusätzlich KV-Key `social:done:{slug}` für die Slug-Uniqueness.
 - **State**: Vercel-KV-Integration über die bestehende `redis`-Instance in [lib/redis.ts](../lib/redis.ts) (basiert auf `@upstash/redis`, ENV-Vars `KV_REST_API_URL` + `KV_REST_API_TOKEN`).
 - **Cron**: Vercel Cron Jobs, definiert in [vercel.json](../vercel.json). Skalierung auf 2/3× über Schedule-Änderung, kein Code-Refactor.
 - **Error-Handling**: keine Retries, KV-Log (`social:errors:...`), Resend-Mail an `ADMIN_NOTIFICATION_EMAIL`. Manueller Re-Trigger über `?force=true`.
@@ -124,16 +124,64 @@ UTC-↔-Berlin: 17 UTC = 19 Berlin im Sommer, 18 Berlin im Winter. DST-Drift bew
 
 ---
 
-## 5. Neue Posts hinzufügen
+## 5. Neue Posts hinzufügen / Pipeline mit Inhalt befüllen
 
-1. Bild erstellen — 1080×1080 PNG, RGB. Dateiname `NNN.png` (3-stellig padded), nach [public/social-posts/](../public/social-posts/) ablegen. **Wichtig:** Image muss public unter `https://www.rechenfix.de/social-posts/NNN.png` erreichbar sein, sonst „Container creation failed".
-2. Eintrag in [lib/social/posts.json](../lib/social/posts.json) anhängen — `index` ist 1-basierte fortlaufende Nummer, `slug` und `category` matchen den Rechner, `url` ist die vollständige Production-URL.
-3. `captionIg` enthält den Hinweis „👉 Link in Bio" (IG erlaubt keine klickbaren Links im Caption-Text).
-4. `captionFb` enthält den echten Rechner-URL (FB erlaubt Links).
-5. Hashtags 9–15 Stück, Leerzeichen-getrennt.
-6. Commit + Push.
+**Seit W17A.1: Datenquelle ist queue.json + captions.json + public/social-posts/<slug>.png** (nicht mehr posts.json). Drei Schritte pro Slug:
 
-Nach dem Deploy rotiert die Pipeline automatisch durch das erweiterte Array. **Index-Anpassung nicht vergessen**, sonst Duplicate-Index.
+### 5a. Queue erweitern (nur bei Slug-Pool-Änderung)
+
+```bash
+# Eintrag in lib/social/config.ts → EXCLUDED_SLUGS ggf. ergänzen
+# (z. B. weitere manuell schon gepostete Slugs)
+npx tsx scripts/build-social-queue.ts
+git add lib/social/queue.json && git commit -m "chore(social): queue regen"
+```
+
+Bei gleichem `SHUFFLE_SEED = 17` ist die Queue für gleichen EXCLUDED-Stand deterministisch identisch. Done-Marken überleben den Rebuild (sind slug-basiert, nicht index-basiert).
+
+### 5b. Captions bauen
+
+```bash
+ANTHROPIC_API_KEY=… npx tsx scripts/social-caption-builder.ts
+# oder via Node-20+-ENV-Datei:
+node --env-file=.env.local --import tsx/esm scripts/social-caption-builder.ts
+```
+
+Das Script ist resumable: bei Abbruch einfach erneut starten, bereits gefüllte Slugs werden übersprungen. Output: [lib/social/captions.json](../lib/social/captions.json).
+
+```bash
+git add lib/social/captions.json && git commit -m "feat(social): captions <N> slugs"
+```
+
+### 5c. Bilder bauen
+
+```bash
+# scripts/social-image-builder.py (Python + Pillow)
+python scripts/social-image-builder.py
+```
+
+Output: `public/social-posts/<slug>.png` pro Eintrag in queue.json. Layout 1080×1080 RGB analog Phase-0-Optik. Image-URL muss public unter `https://www.rechenfix.de/social-posts/<slug>.png` erreichbar sein, sonst Meta-Code „Container creation failed".
+
+```bash
+git add public/social-posts/ && git commit -m "feat(social): images <N> slugs"
+```
+
+### Verify vor Deploy
+
+```bash
+# Lokaler Smoketest der Datenauflösung
+npx tsx scripts/smoketest-social-publisher.ts
+# Erwartung: Queue 160 / Rechner-Lücken 0 / Caption-Lücken <X> / Bild-Lücken über Cron-Dry-Run prüfen
+
+# Cron-Dry-Run auf Preview
+curl -H "Authorization: Bearer $CRON_SECRET" \
+     "https://preview-url/api/cron/social-post?test=true&admin=$ADMIN_PASSWORD"
+# Erwartung: { slug: "…", imageExists: true, captionExists: true, instagram: {success:true, postId:"dry-ig-…"}, … }
+```
+
+### Slug-Queue „neu mischen" (sehr selten)
+
+`SHUFFLE_SEED` in [lib/social/config.ts](../lib/social/config.ts) ändern → `npx tsx scripts/build-social-queue.ts` neu. **Achtung:** verändert die Posting-Reihenfolge für künftige Slugs. Bereits geposteten Slugs (Done-Marke) sind nicht betroffen.
 
 ---
 
@@ -195,8 +243,16 @@ Kalendar-Reminder in [docs/jahreswerte-kalender.md](./jahreswerte-kalender.md) e
 | `social:posted:{YYYY-MM-DD}:instagram` | string (mediaId) | `17841...` |
 | `social:posted:{YYYY-MM-DD}:facebook` | string (postId) | `1127...XYZ_98...` |
 | `social:errors:{YYYY-MM-DD}:{platform}` | JSON | `{"error":"...", "code":190, "step":"container", "ts":"2026-06-05T17:00:12.345Z"}` |
+| `social:done:{slug}` | string (Berlin-Datum) | `2026-06-05` |
 
-Keine TTL — Keys bleiben dauerhaft. Manuelle Bereinigung (z. B. „älter als 90 Tage löschen") wäre eine spätere Wartungs-Maßnahme; aktuell ignoriert, weil das KV-Volume klein bleibt (max. 2 Keys/Tag × 365 = 730 Keys/Jahr).
+Keine TTL — Keys bleiben dauerhaft. Manuelle Bereinigung (z. B. „älter als 90 Tage löschen") wäre eine spätere Wartungs-Maßnahme; aktuell ignoriert, weil das KV-Volume klein bleibt (max. 3 Keys/Tag × 365 = ~1100 Keys/Jahr, plus 160 langlebige Done-Marken).
+
+**Queue-Reset** (Pool nach 160 Posts neu starten): alle `social:done:*` Keys löschen → Pipeline startet wieder vorn in der Queue-Reihenfolge. KV-CLI:
+
+```
+SCAN 0 MATCH social:done:* COUNT 1000
+DEL social:done:<slug1> social:done:<slug2> …
+```
 
 ---
 
