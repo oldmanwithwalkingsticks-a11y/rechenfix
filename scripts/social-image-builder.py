@@ -27,13 +27,13 @@ ENV-Overrides für Font-Pfade (Linux/Windows-Unterschiede):
   SOCIAL_FONT_BOLD   = absoluter Pfad zur Bold-TTF
   SOCIAL_FONT_REG    = absoluter Pfad zur Regular-TTF
   SOCIAL_FONT_EMOJI  = absoluter Pfad zur Color-Emoji-TTF
-  SOCIAL_BOLT_SVG    = absoluter Pfad zur Bolt-SVG (Default: public/bolt.svg)
+  SOCIAL_BOLT_PNG    = absoluter Pfad zur Bolt-PNG (Default: public/bolt-footer.png)
 
-Dependencies:  pip install Pillow cairosvg
+Dependencies:  pip install Pillow
+(cairosvg/libcairo NICHT mehr nötig — der Bolt wird Pillow-only nachgezeichnet.)
 """
 
 import argparse
-import io
 import json
 import os
 import re
@@ -44,11 +44,6 @@ try:
     from PIL import Image, ImageDraw, ImageFont
 except ImportError:
     sys.exit("FEHLER: Pillow nicht installiert. Run: pip install Pillow")
-
-try:
-    import cairosvg
-except ImportError:
-    sys.exit("FEHLER: cairosvg nicht installiert. Run: pip install cairosvg")
 
 
 # ============================================================
@@ -115,14 +110,58 @@ def get_fonts():
     return bold, reg, emoji
 
 
-def get_bolt_svg() -> str:
-    env = os.environ.get("SOCIAL_BOLT_SVG")
+# ============================================================
+# Bolt-PNG (Pillow-only, kein cairosvg/libcairo nötig)
+# ============================================================
+# Polygon-Daten 1:1 aus public/bolt.svg (viewBox 0 0 48 48):
+#   <polygon points="28,6 14,26 22,26 18,42 34,20 26,20 30,6"
+#            fill="url(#bolt)" stroke="#1e40af" stroke-width="1.5" />
+#   gradient: #FBBF24 (251,191,36) → #F59E0B (245,158,11)
+# Wir approximieren den Gradient mit der Mittel-Farbe — bei der
+# Display-Größe 54×54 Footer ist der Gradient ohnehin nicht sichtbar.
+BOLT_POLYGON_48 = [
+    (28, 6), (14, 26), (22, 26), (18, 42),
+    (34, 20), (26, 20), (30, 6),
+]
+BOLT_FILL = (248, 174, 24)       # Mittel zwischen #FBBF24 und #F59E0B
+BOLT_STROKE = (30, 64, 175)      # #1e40af
+BOLT_VIEWBOX = 48
+BOLT_CACHE_SIZE = 256            # Master-Größe, wird beim Render downsized
+
+
+def _generate_bolt_png(target_path: Path, size: int = BOLT_CACHE_SIZE) -> None:
+    """Zeichnet den Bolt mit Pillow direkt nach (kein SVG-Parsing).
+
+    Polygon-Koords aus public/bolt.svg viewBox 0 0 48 48 werden auf
+    size×size skaliert. Solid-Fill (Gradient-Mittel) + Stroke #1e40af
+    proportional skaliert. Output PNG mit Alpha-Kanal, transparenter
+    Hintergrund.
+    """
+    scale = size / BOLT_VIEWBOX
+    pts = [
+        (int(round(x * scale)), int(round(y * scale)))
+        for x, y in BOLT_POLYGON_48
+    ]
+    img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(img)
+    stroke_w = max(2, int(round(1.5 * scale)))
+    draw.polygon(pts, fill=BOLT_FILL, outline=BOLT_STROKE, width=stroke_w)
+    target_path.parent.mkdir(parents=True, exist_ok=True)
+    img.save(target_path, "PNG", optimize=True)
+
+
+def get_bolt_png() -> Path:
+    """Liefert Pfad zu bolt-footer.png. Erzeugt es einmalig wenn fehlt."""
+    env = os.environ.get("SOCIAL_BOLT_PNG")
     if env and Path(env).is_file():
-        return env
-    default = Path(__file__).resolve().parent.parent / "public" / "bolt.svg"
+        return Path(env)
+    default = (
+        Path(__file__).resolve().parent.parent / "public" / "bolt-footer.png"
+    )
     if not default.is_file():
-        raise RuntimeError(f"Bolt-SVG nicht gefunden: {default}")
-    return str(default)
+        print(f"  ℹ {default.name} fehlt — erzeuge aus Bolt-Polygon …")
+        _generate_bolt_png(default)
+    return default
 
 
 # ============================================================
@@ -161,13 +200,15 @@ def render_emoji(emoji_char, target_size, emoji_font_path):
     return tile.resize((new_w, new_h), Image.LANCZOS)
 
 
-def render_bolt_mini(size, bolt_svg_path):
-    png_bytes = cairosvg.svg2png(
-        url=bolt_svg_path,
-        output_width=size,
-        output_height=size,
-    )
-    return Image.open(io.BytesIO(png_bytes)).convert("RGBA")
+def render_bolt_mini(size, bolt_png_path):
+    """Lädt das transparente Bolt-PNG und skaliert auf Footer-Größe.
+
+    Ersetzt die ehemalige cairosvg-Variante (libcairo-Dependency
+    war auf Windows nicht trivial installierbar — OSError: no library
+    called 'cairo-2'). Pillow-LANCZOS gibt sauberes Downsizing.
+    """
+    img = Image.open(bolt_png_path).convert("RGBA")
+    return img.resize((size, size), Image.LANCZOS)
 
 
 # ============================================================
@@ -272,7 +313,7 @@ def build_spec(slug: str, snapshot: dict, farben: dict) -> dict | None:
 # ============================================================
 # Post-Renderer (Pixel-perfekte Phase-0-Optik, leicht erweitert)
 # ============================================================
-def render_post(spec, fonts, bolt_svg_path):
+def render_post(spec, fonts, bolt_png_path):
     font_bold_path, _font_reg_path, font_emoji_path = fonts
 
     img = Image.new("RGBA", (CANVAS, CANVAS), spec["bg"] + (255,))
@@ -337,7 +378,7 @@ def render_post(spec, fonts, bolt_svg_path):
     # ---- Footer ----
     footer_y = CANVAS - 90
     font_url = ImageFont.truetype(font_bold_path, 42)
-    bolt = render_bolt_mini(54, bolt_svg_path)
+    bolt = render_bolt_mini(54, bolt_png_path)
     bw = bolt.size[0]
     gap = 14
     url = "rechenfix.de"
@@ -423,10 +464,10 @@ def main():
     if not verify_repo_state(queue, farben, snapshot):
         sys.exit("Drift erkannt — Build abgebrochen.")
 
-    # Fonts + Bolt-SVG
+    # Fonts + Bolt-PNG (Bolt wird einmalig pillow-only erzeugt, falls fehlt)
     try:
         fonts = get_fonts()
-        bolt_svg = get_bolt_svg()
+        bolt_png = get_bolt_png()
     except RuntimeError as err:
         sys.exit(f"FEHLER: {err}")
 
@@ -457,7 +498,7 @@ def main():
             failed.append(slug)
             continue
         try:
-            img = render_post(spec, fonts, bolt_svg)
+            img = render_post(spec, fonts, bolt_png)
             img.save(out_path, "PNG", optimize=True)
             print(f"  ✓ {slug:35} → {out_path.relative_to(project_root)}")
             ok += 1
