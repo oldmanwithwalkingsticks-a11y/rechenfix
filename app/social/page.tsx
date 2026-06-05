@@ -100,33 +100,8 @@ function CalcButton({
 }
 
 export default async function SocialBioHubPage() {
-  console.log(
-    '[social/page/v2] render start ts=',
-    new Date().toISOString(),
-    'rechner.length=',
-    rechner.length,
-  );
-
   const currentSlug = await getCurrentBioSlug();
-  console.log(
-    '[social/page/v2] after getCurrentBioSlug:',
-    'currentSlug=',
-    JSON.stringify(currentSlug),
-    'typeof=',
-    typeof currentSlug,
-    'truthy=',
-    Boolean(currentSlug),
-  );
-
   const current = currentSlug ? resolveRechner(currentSlug) : null;
-  console.log(
-    '[social/page/v2] after resolveRechner:',
-    current
-      ? `OK slug=${current.slug} kat=${current.kategorieSlug} titel=${current.titel}`
-      : 'NULL',
-    '| Block-1-Render-Bedingung (current truthy) =',
-    Boolean(current),
-  );
 
   const top10 = EXCLUDED_SLUGS.map((slug) => resolveRechner(slug)).filter(
     (r): r is RechnerLite => r !== null,

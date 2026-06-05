@@ -26,7 +26,7 @@
  * Keys (siehe docs/social-pipeline.md).
  */
 
-import { redis, redisRaw } from '@/lib/redis';
+import { redis } from '@/lib/redis';
 import { MetaApiError } from './instagram';
 
 export type Platform = 'instagram' | 'facebook';
@@ -138,74 +138,102 @@ export async function markSlugDoneOn(
  * IG erlaubt nur EINEN klickbaren Link in der Bio. Wir setzen den
  * permanent auf `https://www.rechenfix.de/social`. Die /social-Seite
  * liest diesen KV-Wert und zeigt den aktuell auf IG geposteten Rechner
- * als großen Top-Button. Dadurch landet ein „Link in Bio"-Klick gezielt
- * beim Tages-Thema, ohne dass der IG-Bio-Link je geändert werden muss.
+ * als großen Top-Button.
  *
- * Beide Funktionen nutzen `redisRaw` (Auto-Deserialization aus). Damit:
- * - `setCurrentBioSlug(slug)` schreibt den rohen String, ohne JSON-Wrap
- * - `getCurrentBioSlug()` liest den rohen String, auch wenn er per CLI
- *   ohne Quotes gesetzt wurde (verifiziert durch das Karsten-Debug am
- *   06.06.2026, das null statt Slug zurückbekam)
+ * Implementation (Hotfix 06.06.2026, Karsten-Pfad-A):
+ * Sowohl set als auch get gehen DIREKT über die Upstash-REST-API,
+ * NICHT über die @upstash/redis-SDK. Grund: die SDK macht beim
+ * `get()` ein automatisches `JSON.parse()` auf den Wert und liefert
+ * `null` zurück, wenn das fehlschlägt — selbst mit der dokumentierten
+ * Option `automaticDeserialization: false`. Karsten-Debug zeigte:
+ *   raw= null typeof= object isNull= true
+ * obwohl in Redis ein rohes "autokosten-rechner" stand.
+ *
+ * Direkter REST-Bypass mit fetch löst das endgültig:
+ * - GET  `${URL}/get/<key>`  → `{"result": "<string>" | null}`
+ * - POST `${URL}/`  Body `["SET","<key>","<value>"]`  → `{"result":"OK"}`
+ *
+ * Damit ist garantiert: was per CLI als roher String gesetzt wird,
+ * kommt als roher String wieder raus. Setzt die Pipeline neu, kommt
+ * ebenfalls roher String raus.
  */
 const CURRENT_BIO_KEY = 'social:current-bio-slug';
 
+function kvEnv(): { url: string; token: string } {
+  const url = process.env.KV_REST_API_URL;
+  const token = process.env.KV_REST_API_TOKEN;
+  if (!url || !token) {
+    throw new Error('KV_REST_API_URL oder KV_REST_API_TOKEN fehlt');
+  }
+  return { url, token };
+}
+
+/**
+ * Direktes Upstash-REST-GET, SDK komplett umgangen.
+ * Liefert den rohen String oder null (bei fehlendem Key, leerem Wert
+ * oder HTTP-Fehler).
+ */
+async function kvRestGet(key: string): Promise<string | null> {
+  const { url, token } = kvEnv();
+  const res = await fetch(`${url}/get/${encodeURIComponent(key)}`, {
+    method: 'GET',
+    headers: { Authorization: `Bearer ${token}` },
+    cache: 'no-store',
+  });
+  if (!res.ok) {
+    throw new Error(`Upstash GET HTTP ${res.status}: ${await res.text()}`);
+  }
+  const json = (await res.json()) as { result?: string | null };
+  return typeof json.result === 'string' && json.result.length > 0
+    ? json.result
+    : null;
+}
+
+/**
+ * Direktes Upstash-REST-SET via Generic-Command-Body (`["SET", key, value]`).
+ * Setzt den rohen String — KEIN JSON-Wrap, kein Auto-Encoding.
+ */
+async function kvRestSet(key: string, value: string): Promise<void> {
+  const { url, token } = kvEnv();
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(['SET', key, value]),
+    cache: 'no-store',
+  });
+  if (!res.ok) {
+    throw new Error(`Upstash SET HTTP ${res.status}: ${await res.text()}`);
+  }
+}
+
 export async function setCurrentBioSlug(slug: string): Promise<void> {
-  await redisRaw.set(CURRENT_BIO_KEY, slug);
+  await kvRestSet(CURRENT_BIO_KEY, slug);
 }
 
 export async function getCurrentBioSlug(): Promise<string | null> {
-  console.log('[social/getCurrentBioSlug/v2] start, using redisRaw instance');
-  let raw: unknown;
+  let raw: string | null;
   try {
-    raw = await redisRaw.get(CURRENT_BIO_KEY);
+    raw = await kvRestGet(CURRENT_BIO_KEY);
   } catch (err) {
-    console.error('[social/getCurrentBioSlug/v2] Redis-Read-Fehler:', err);
+    console.error('[social/getCurrentBioSlug] REST-Read-Fehler:', err);
     return null;
   }
-  console.log(
-    '[social/getCurrentBioSlug/v2] raw=',
-    JSON.stringify(raw),
-    'typeof=',
-    typeof raw,
-    'isNull=',
-    raw === null,
-    'isUndefined=',
-    raw === undefined,
-  );
-  if (raw === null || raw === undefined) {
-    console.log('[social/getCurrentBioSlug/v2] EXIT: raw is null/undefined → null');
-    return null;
-  }
-  if (typeof raw !== 'string') {
-    console.log(
-      '[social/getCurrentBioSlug/v2] EXIT: typeof !== string (got',
-      typeof raw,
-      ') → null',
-    );
-    return null;
-  }
+  if (raw === null) return null;
   const value = raw.trim();
-  if (value.length === 0) {
-    console.log('[social/getCurrentBioSlug/v2] EXIT: empty after trim → null');
-    return null;
-  }
+  if (value.length === 0) return null;
+  // Edge-Case: Wenn jemand außerhalb der Pipeline mit Outer-Quotes
+  // gesetzt hat (z. B. SET key "\"slug\"" via einem Tool, das die
+  // Escape-Sequenzen unverändert ablegt), unescapen.
   if (value.length >= 2 && value.startsWith('"') && value.endsWith('"')) {
     try {
       const parsed = JSON.parse(value);
-      if (typeof parsed === 'string' && parsed.length > 0) {
-        console.log(
-          '[social/getCurrentBioSlug/v2] EXIT: JSON-unwrapped value=',
-          parsed,
-        );
-        return parsed;
-      }
+      if (typeof parsed === 'string' && parsed.length > 0) return parsed;
     } catch {
-      console.warn(
-        '[social/getCurrentBioSlug/v2] outer-quotes aber nicht JSON-parsebar:',
-        value,
-      );
+      /* fallthrough — value bleibt der getrimmte String */
     }
   }
-  console.log('[social/getCurrentBioSlug/v2] EXIT: returning raw string value=', value);
   return value;
 }
