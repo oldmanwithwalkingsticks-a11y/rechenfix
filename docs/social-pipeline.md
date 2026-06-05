@@ -148,17 +148,20 @@ ANTHROPIC_API_KEY=… npx tsx scripts/social-caption-builder.ts
 node --env-file=.env.local --import tsx/esm scripts/social-caption-builder.ts
 ```
 
-Pro Slug erzeugt die KI **fünf** Felder in [lib/social/captions.json](../lib/social/captions.json):
+Pro Slug erzeugt die KI **sechs** Felder in [lib/social/captions.json](../lib/social/captions.json):
 
 | Feld | Zweck | Limit |
 |---|---|---|
 | `captionIg` | IG-Post-Text mit „Link in Bio" | ≤ 600 Zeichen |
 | `captionFb` | FB-Post-Text mit echter URL | ≤ 600 Zeichen |
-| `hashtags` | 9–15 Tags, Kleinbuchstaben | – |
+| `hashtagsIg` | Instagram-Hashtags, thematisch | **5–7 Tags** (Hard 7) |
+| `hashtagsFb` | Facebook-Hashtags, die wichtigsten Tags | **2–3 Tags** (Hard 3) |
 | `socialHeadline` | Bild-Highlight, eine Zahl/Aussage | Ziel 22, Hard-Limit 40 |
 | `socialEyebrow` | Bild-Überzeile, 1–2 thematische Wörter | Hard-Limit 30 |
 
-Das Script ist resumable (bereits gefüllte Slugs werden übersprungen) und schreibt Write-Through nach jedem Slug. Bei Schema-Verletzung (leere Felder, Überlänge) greift `RETRY_MAX = 1`.
+Das `hashtags`-Feld (alt: 9–15 Tags) bleibt im Schema **deprecated optional** für Backwards-Compat mit Pre-W17A.2.y-Captions. IG/FB-Wrapper fallen auf das alte Feld zurück + trimmen selbst auf 7/3, falls die neuen Felder fehlen.
+
+Das Script ist resumable (bereits gefüllte Slugs werden übersprungen) und schreibt Write-Through nach jedem Slug. Bei Schema-Verletzung (leere Felder, Überlänge, Hashtag-Anzahl > Limit) greift `RETRY_MAX = 1`.
 
 ```bash
 git add lib/social/captions.json && git commit -m "feat(social): captions <N> slugs"
