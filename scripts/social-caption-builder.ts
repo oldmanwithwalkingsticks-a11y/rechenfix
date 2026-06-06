@@ -28,6 +28,11 @@
  * Stichproben-Modus (nur die ersten n offenen Slugs bauen):
  *   ANTHROPIC_API_KEY=… npx tsx scripts/social-caption-builder.ts --limit 3
  *
+ * Voll-Neulauf ALLER Slugs (überschreibt vorhandene — nötig nach Format-/
+ * Prompt-Änderung, wenn captions.json schon voll, aber veraltet ist):
+ *   ANTHROPIC_API_KEY=… npx tsx scripts/social-caption-builder.ts --all
+ * OHNE --all ist der Voll-Lauf resumable und überspringt vorhandene Slugs.
+ *
  * Oder via --env-file (Node 20+):
  *   node --env-file=.env.local --import tsx/esm \
  *        scripts/social-caption-builder.ts
@@ -401,6 +406,16 @@ function getSlugArg(): string | null {
 }
 
 /**
+ * `--all` umgeht den Resume-Skip: ALLE Queue-Slugs werden (neu) gebaut und
+ * vorhandene Einträge überschrieben. Ohne Flag baut der Voll-Lauf nur Slugs,
+ * die noch nicht in captions.json stehen (resumable). Nötig z. B. nach einer
+ * Format-/Prompt-Änderung, wenn die Datei schon voll, aber veraltet ist.
+ */
+function hasAllFlag(): boolean {
+  return process.argv.slice(2).includes('--all');
+}
+
+/**
  * Liest `--limit <n>` bzw. `--limit=<n>` (Stichprobenlauf im Voll-Modus).
  * Returnt null, wenn nicht gesetzt oder ungültig (= kein Limit).
  */
@@ -457,14 +472,17 @@ async function main(): Promise<void> {
     return;
   }
 
-  // ---- Voll-Lauf-Modus (resumable) --------------------------
-  const open = queue.filter((slug) => !captions.captions[slug]);
+  // ---- Voll-Lauf-Modus --------------------------------------
+  // --all: alle Queue-Slugs (neu) bauen, vorhandene überschreiben.
+  // ohne --all: resumable, nur fehlende Slugs bauen.
+  const all = hasAllFlag();
+  const base = all ? [...queue] : queue.filter((slug) => !captions.captions[slug]);
   const limit = getLimitArg();
-  const todo = limit ? open.slice(0, limit) : open;
+  const todo = limit ? base.slice(0, limit) : base;
 
   console.log(`Total Slugs:  ${queue.length}`);
-  console.log(`Existing:     ${queue.length - open.length}`);
-  console.log(`Open:         ${open.length}`);
+  console.log(`Existing:     ${queue.length - queue.filter((s) => !captions.captions[s]).length}`);
+  console.log(`Mode:         ${all ? 'ALL (überschreibt vorhandene)' : 'resumable (nur fehlende)'}`);
   if (limit) console.log(`Limit:        ${limit} (Stichprobe)`);
   console.log(`To build:     ${todo.length}`);
   console.log(`Model:        ${MODEL}`);
