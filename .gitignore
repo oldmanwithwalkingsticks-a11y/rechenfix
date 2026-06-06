@@ -35,6 +35,11 @@ yarn-error.log*
 Dokumente/Claude Api Key.txt
 Dokumente/GitHub Token.txt
 
+# Secrets / Tokens (nie committen) — W17A
+docs/audit-arbeitspapiere/welle17a-tokens.txt
+*tokens.txt
+*.secret
+
 # vercel
 .vercel
 
