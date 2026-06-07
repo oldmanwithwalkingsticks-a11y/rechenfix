@@ -1,10 +1,11 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
-// W15C-T7: globals.css NICHT mehr per import einbinden — der entsprechende
-// <link rel="stylesheet"> war render-blocking (PSI 488 ms). Stattdessen wird
-// der Tailwind-Output via build-critical-css.mjs als CRITICAL_CSS-Konstante
-// generiert und unten im <head> als <style>-Block inline eingebettet.
-import { CRITICAL_CSS } from '@/lib/critical-css';
+// fix/critical-css (W14): kleines Critical-CSS (~24 KB, above-the-fold) inline
+// für sofortiges, FOUC-freies Rendern; das volle Tailwind-Output wird über
+// FULL_CSS_HREF NON-BLOCKING nachgeladen (preload + JS-Append im <head>) und
+// ist über alle Seiten/Wiederbesuche gecacht. Erzeugt von
+// scripts/build-critical-css.mjs.
+import { CRITICAL_CSS, FULL_CSS_HREF } from '@/lib/critical-css';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -97,11 +98,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="de" suppressHydrationWarning className={inter.variable}>
       <head>
-        {/* W15C-T7: Critical-CSS inline statt render-blocking <link rel="stylesheet">.
-            Tailwind-Output (gzip ~16 KB) wird beim Build via scripts/build-critical-css.mjs
-            erzeugt. Browser kann sofort rendern ohne CSS-Round-Trip (PSI: −488 ms LCP).
-            Font-CSS (Inter, 1.3 KB) bleibt extern via next/font/google. */}
+        {/* fix/critical-css: kleines Critical inline (above-the-fold, FOUC-frei). */}
         <style dangerouslySetInnerHTML={{ __html: CRITICAL_CSS }} />
+        {/* Volles CSS non-blocking nachladen: preload startet den Fetch früh,
+            das inline-Script hängt es als <link rel=stylesheet> an — dynamisch
+            angehängte Stylesheets blockieren das initiale Paint NICHT. noscript
+            sorgt für JS-deaktivierte Clients/Crawler. */}
+        <link rel="preload" as="style" href={FULL_CSS_HREF} />
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html: `<link rel="stylesheet" href="${FULL_CSS_HREF}">`,
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var l=document.createElement('link');l.rel='stylesheet';l.href=${JSON.stringify(
+              FULL_CSS_HREF,
+            )};document.head.appendChild(l);})();`,
+          }}
+        />
       </head>
       <body className="min-h-screen flex flex-col bg-white dark:bg-slate-900 text-gray-800 dark:text-gray-100 antialiased font-sans">
         {/* AdSense Basis-Loader — via next/script mit strategy="afterInteractive"

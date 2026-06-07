@@ -62,9 +62,10 @@ next-env.d.ts
 /sitemap-live-*.xml
 /doku-sync-*-patch.md
 
-# W15C-T7 — Auto-generierte Inline-Critical-CSS (siehe scripts/build-critical-css.mjs)
-# Wird per `prebuild`-Hook bei jedem `npm run build` neu erzeugt.
+# W15C-T7 / fix/critical-css — Auto-generierte CSS-Artefakte (siehe
+# scripts/build-critical-css.mjs). Pro `npm run build` neu erzeugt.
 /lib/critical-css.ts
+/public/styles/
 /tmp/
 
 # W17A.1.F — Auto-generierter Rechner-Snapshot für Python-Image-Builder
