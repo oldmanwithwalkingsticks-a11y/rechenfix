@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
-// fix/critical-css (W14): kleines Critical-CSS (~24 KB, above-the-fold) inline
+// fix/critical-css (W14): Critical-CSS (~50 KB, above-the-fold) inline
 // für sofortiges, FOUC-freies Rendern; das volle Tailwind-Output wird über
 // FULL_CSS_HREF NON-BLOCKING nachgeladen (preload + JS-Append im <head>) und
 // ist über alle Seiten/Wiederbesuche gecacht. Erzeugt von

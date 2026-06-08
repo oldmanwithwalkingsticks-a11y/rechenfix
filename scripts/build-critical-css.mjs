@@ -5,9 +5,10 @@
 // auf Mobile.
 //
 // JETZT: zwei Outputs —
-//  1) CRITICAL_CSS  (~24 KB): reduzierter content-Scope (tailwind.critical.
-//     config.ts → nur Shell/above-the-fold-Dateien). Wird inline in layout.tsx
-//     eingebettet → sofortiges, FOUC-freies Rendern des above-the-fold.
+//  1) CRITICAL_CSS  (~50 KB): reduzierter content-Scope (tailwind.critical.
+//     config.ts → alle Seiten + alle Nicht-Rechner-Komponenten, deckt das
+//     komplette above-the-fold ab). Wird inline in layout.tsx eingebettet →
+//     sofortiges, FOUC-freies Rendern des above-the-fold.
 //  2) public/styles/app.[hash].css (~100 KB): volles Tailwind-Output als
 //     gehashtes, langfristig cachebares Asset. Wird in layout.tsx NON-BLOCKING
 //     nachgeladen (preload + JS-Append) → blockiert das initiale Paint nicht
