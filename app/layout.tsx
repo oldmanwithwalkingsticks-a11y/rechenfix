@@ -20,6 +20,7 @@ import CookieBanner from '@/components/cookie/CookieBanner';
 import ScrollToTop from '@/components/layout/ScrollToTop';
 import ConsentScripts from '@/components/cookie/ConsentScripts';
 import StructuredData from '@/components/seo/StructuredData';
+import CssLoader from '@/components/CssLoader';
 import { generateWebsiteSchema } from '@/lib/seo';
 import { Analytics } from '@vercel/analytics/next';
 import Script from 'next/script';
@@ -100,23 +101,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         {/* fix/critical-css: kleines Critical inline (above-the-fold, FOUC-frei). */}
         <style dangerouslySetInnerHTML={{ __html: CRITICAL_CSS }} />
-        {/* Volles CSS non-blocking nachladen: preload startet den Fetch früh,
-            das inline-Script hängt es als <link rel=stylesheet> an — dynamisch
-            angehängte Stylesheets blockieren das initiale Paint NICHT. noscript
-            sorgt für JS-deaktivierte Clients/Crawler. */}
+        {/* Volles CSS non-blocking: preload startet den Fetch früh; der
+            CssLoader (Client-Component im body) hängt es nach Hydration als
+            Stylesheet an. noscript-Fallback für JS-deaktivierte Clients/Crawler.
+            KEIN raw head-<script> mehr — das brach den App-Router-Prerender. */}
         <link rel="preload" as="style" href={FULL_CSS_HREF} />
-        <noscript
-          dangerouslySetInnerHTML={{
-            __html: `<link rel="stylesheet" href="${FULL_CSS_HREF}">`,
-          }}
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){var l=document.createElement('link');l.rel='stylesheet';l.href=${JSON.stringify(
-              FULL_CSS_HREF,
-            )};document.head.appendChild(l);})();`,
-          }}
-        />
+        <noscript>
+          <link rel="stylesheet" href={FULL_CSS_HREF} />
+        </noscript>
       </head>
       <body className="min-h-screen flex flex-col bg-white dark:bg-slate-900 text-gray-800 dark:text-gray-100 antialiased font-sans">
         {/* AdSense Basis-Loader — via next/script mit strategy="afterInteractive"
@@ -132,6 +124,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_PUBLISHER_ID}`}
           crossOrigin="anonymous"
         />
+        {/* Non-blocking Voll-CSS-Loader (prerender-sicher, ersetzt head-script). */}
+        <CssLoader href={FULL_CSS_HREF} />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-lg focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
