@@ -2810,3 +2810,58 @@ Volltext in CLAUDE.md → „Methodische Lehren (NEU, Welle 17A.3)".
 - Optional: Stichprobe-Ansicht von `/social` im Smartphone-Browser (Lighthouse-mobile, manuelle Tap-Test) nach erstem Live-Post
 - Out-of-Scope: Caption-Format-Umbau (separate Welle)
 - Out-of-Scope: Bio-Link-Automatik via IG-API (nicht nötig, Bio-Link ist statisch)
+## Welle 14 — Mobile-Performance: Critical-CSS + CLS — 09.06.2026
+
+### Architektur
+- Critical-CSS: 52 KB kuratiert inline + Voll-CSS extern non-blocking via
+  components/CssLoader.tsx ('use client', hängt Voll-CSS nach Hydration an <head>).
+  Ersetzt das alte ~100 KB-Tailwind-Inline (war render-blocking in jeder Seite).
+- Ad-Slot-CLS: AdSlot.tsx adConfig — Mobile-min-height an reale AdSense-Höhe.
+  AdSense liefert via data-full-width-responsive="true" auf Mobile ein 400px-Quadrat,
+  unabhängig vom angeforderten Format. Reservierung daher leaderboard
+  min-h-[400px] md:min-h-[90px], rectangle min-h-[400px] md:min-h-[280px].
+  sidebar unverändert (lg-only, nicht im Mobile-Shift).
+- Logo-Image: feste Tailwind-w/h (Header w-10 h-10, Footer w-9 h-9) erzwingen CSS-Box
+  vor SVG-Load (Next <Image> setzt bei SVG keine feste Box vor Load → Shift).
+
+### Code-Commits
+| # | Hash | Inhalt |
+|---|---|---|
+| 1 | d97bb90 | perf(css): kuratiertes Critical-CSS inline + Voll-CSS non-blocking (Weg a) |
+| 2 | a1b22c0 | fix(css): Critical-Scope erweitert gegen FOUC |
+| 3 | 90f5c84 | fix(css): non-blocking CSS prerender-sicher via Client-Loader (CssLoader) — Merge → main |
+| 4 | 0d99614 | fix(cls): feste w/h am Logo-Image (Header+Footer) gegen Layout-Shift bei SVG-Load |
+| 5 | 7b5d526 | fix(cls): Mobile-min-height der Ad-Slots auf reale 400px (leaderboard+rectangle), Desktop schlank via md: |
+| 6 | (dieser) | Doku-Sync welle-status-historie W14 |
+
+### Realitäts-Abgleich (gemessen)
+- Critical-CSS validiert via Vercel-Preview + Protection-Bypass (lokaler Build durch
+  Windows-Casing blockiert): Mobile Score 96, FCP/LCP 2,2s, CLS 0, TBT 0 — konsistent
+  über 3 Seitentypen (Home, brutto-netto-rechner, 3000-euro-brutto-netto).
+- CLS-Verursacher per DevTools-Element-Picker am Production-DOM bestätigt:
+  leaderboard-Slot reservierte 90px, AdSense lieferte 400px (aswift_host 400×400);
+  rectangle reservierte 280px, lieferte ebenfalls 400px.
+- Nach Fix Production (Inkognito, 5 Läufe, leerer Cache): CLS 0,242 → 0–0,004,
+  Score-Median ~88–93, LCP ~2,2s. Werbung füllt 400px exakt, kein Leerraum,
+  data-adsbygoogle-status="done" (kein AdSense-Fehler).
+- Ausgangswert vorher: Score 61, LCP 8,0s, CLS bis 0,242.
+
+### Lehre
+- **L-W14.1:** Performance-Messung NIE über lokalen Windows-Build (useContext/Casing
+  blockiert ihn) — Vercel-Preview + Protection-Bypass-Token + Lighthouse ist der
+  valide und schnelle Weg. Vercel baut sauber (Linux, ein Pfad).
+- **L-W14.2:** AdSense + data-full-width-responsive liefert auf Mobile 400px-Quadrate
+  unabhängig vom angeforderten Slot-Format. Container-min-height an reale Höhe
+  reservieren, sonst CLS. md:-Breakpoint hält Desktop schlank.
+- **L-W14.3:** CLS-Lab-Werte schwanken (Cache-Treffer = kein Shift). Immer mehrfach
+  mit leerem Cache messen, nicht aus einem einzelnen Lauf schließen.
+- **L-W14.4:** Rest-Score-Schwankung (TBT 250–460ms) ist AdSense-Drittanbieter-Last
+  (adsbygoogle.js + FundingChoices), kein Layout/CSS-Problem.
+
+### Karsten muss noch tun / Backlog nach W14
+- next.config.mjs: webpack-Alias (import path + react/react-dom resolve, if(!isServer))
+  ist toter Code aus dem Casing-Debugging — entfernen + committen.
+- Lokales Windows-Build-Casing (useContext): NICHT weiter jagen, rein lokal, Vercel
+  baut sauber. Falls lokal nötig: kompletter Cache-Reset (node_modules + .next + lock).
+- Optional TBT-Feintuning (AdSense-Loading) für stabil >90 — niedrige Prio.
+- AdSense-Resubmit (Top-Prio): Mobile-Performance zahlt darauf ein (LCP 2,2s, CLS ~0).
