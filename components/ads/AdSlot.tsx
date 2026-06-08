@@ -26,11 +26,11 @@ interface AdSlotProps {
 const adConfig = {
   leaderboard: {
     format: 'horizontal' as const,
-    minHeightClass: 'min-h-[90px]',
+    minHeightClass: 'min-h-[400px] md:min-h-[90px]',
   },
   rectangle: {
     format: 'rectangle' as const,
-    minHeightClass: 'min-h-[280px]',
+    minHeightClass: 'min-h-[400px] md:min-h-[280px]',
   },
   sidebar: {
     format: 'vertical' as const,
