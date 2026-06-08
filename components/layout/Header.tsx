@@ -46,7 +46,7 @@ export default function Header() {
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 shrink-0" onClick={() => setMenuOpen(false)}>
-            <Image src="/logo.svg" alt="Rechenfix Logo" width={40} height={40} className="shrink-0" priority />
+            <Image src="/logo.svg" alt="Rechenfix Logo" width={40} height={40} className="shrink-0 w-10 h-10" priority />
             <div className="flex flex-col">
               <div className="flex items-center gap-0.5">
                 <span className="text-3xl font-extrabold text-primary-600">Rechen</span>

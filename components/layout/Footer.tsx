@@ -21,7 +21,7 @@ export default function Footer() {
           {/* Logo & Beschreibung */}
           <div>
             <div className="mb-3 flex items-center gap-2.5">
-              <Image src="/logo.svg" alt="Rechenfix Logo" width={36} height={36} className="shrink-0" />
+              <Image src="/logo.svg" alt="Rechenfix Logo" width={36} height={36} className="shrink-0 w-9 h-9" />
               <div>
                 <div className="flex items-center gap-0.5">
                   <span className="text-2xl font-extrabold text-white">Rechen</span>
