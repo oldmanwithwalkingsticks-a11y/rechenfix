@@ -22,7 +22,7 @@ Diese Standards wurden nach den W13/W14-Audit-Wellen etabliert, in denen veralte
 
 1. Repo nach `Stand: <Vorjahr>` durchsuchen → Liste der aktualisierungsbedürftigen Werte
 2. Pro Wert: aktuelle Quelle prüfen, Wert anpassen, Stichtag aktualisieren
-3. Build-Gate 205/205, Live-Stichprobe, Commit
+3. Build-Gate grün (alle Seiten erfolgreich prerendert, keine neuen Errors), Live-Stichprobe, Commit
 
 Wenn diese Standards befolgt werden, dauert der Januar-Audit 1–2 Tage statt 2–3 Wochen.
 
