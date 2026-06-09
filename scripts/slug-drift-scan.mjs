@@ -53,6 +53,10 @@ const META_ROUTES = new Set([
   'feedback',
   'impressum',
   'datenschutz',
+  // Nutzungsbedingungen (ToS) — neue statische Rechtsseite (Welle 18).
+  // Pflichtfeld für TikTok Content Posting API + AdSense-Pluspunkt. Wird im
+  // Footer-Rechtliches-Block verlinkt, daher hier als Meta-Route registriert.
+  'nutzungsbedingungen',
   'barrierefreiheit',
   'qualitaet',
   'ueber-uns',
