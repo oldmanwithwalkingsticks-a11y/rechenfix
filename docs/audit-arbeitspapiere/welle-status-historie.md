@@ -2865,3 +2865,14 @@ Volltext in CLAUDE.md → „Methodische Lehren (NEU, Welle 17A.3)".
   baut sauber. Falls lokal nötig: kompletter Cache-Reset (node_modules + .next + lock).
 - Optional TBT-Feintuning (AdSense-Loading) für stabil >90 — niedrige Prio.
 - AdSense-Resubmit (Top-Prio): Mobile-Performance zahlt darauf ein (LCP 2,2s, CLS ~0).
+### Nachtrag 09.06.2026 — Config-Klammer-Bug beim Alias-Cleanup
+- Beim Entfernen des toten webpack-Alias (Commit eff9918) wurde versehentlich die
+  schließende Klammer `},` der `async headers()`-Funktion mitgelöscht → next.config.mjs
+  syntaktisch kaputt (`SyntaxError: Unexpected token ';'`).
+- Lokaler Build hätte es gefangen, war aber durch das Windows-Casing-Problem blockiert
+  → Fehler fiel erst bei Vercel auf. Zwei rote Builds (eff9918, Redeploy Ejot5U3by).
+- Fix: fehlende `  },` zwischen `];` (return-Array) und `};` (nextConfig) ergänzt.
+- Commit 045c4c0 — Vercel-Build **grün/Ready/Production** verifiziert. Live.
+- **L-W14.5:** Bei Config-Änderungen, die lokal nicht baubar sind (Windows-Casing),
+  IMMER auf Vercel-grün warten, bevor abgehakt wird. "Committet" ≠ "gebaut".
+  Klammer-Struktur von headers() vor Commit prüfen (Get-Content -Tail 6).
