@@ -3133,4 +3133,19 @@ nächstem Skill-Sync nachziehen.
 kreis=Anteile, linie=Zeitverlauf, **gestapelt**=Zusammensetzung über Kategorien,
 **wasserfall**=schrittweise Zu-/Abnahme (z. B. Brutto → Abzüge → Netto). Einsatz erst bei
 künftigen Rechnern; bestehende Goldstandard-Balken unverändert.
+
+### Erste Varianten-Einsätze: zins → Linie/Kreis, bmi → Kreis (10.06.2026)
+Sichtprobe der neuen Varianten an echten Rechnern — NUR `variante`-Feld umgestellt, Daten/
+Renderer/Wortzahl unverändert (Self-Check zins 1.559 / bmi 1.568 weiterhin OK).
+- **f1d5241** zinsrechner: „So wächst Ihr Kapital über die Zeit" (5/10/20/30/40 J.)
+  balken → **linie** (klassischer Zeitverlauf); „Eingezahlt vs. Zinsertrag nach 30 Jahren"
+  balken → **kreis** (zwei Teile EINES Ganzen = Endkapital, Donut zeigt das Verhältnis).
+- **616debd** bmi-rechner: BMI-Verteilung (47/35/18 %, summiert auf 100 %) balken → **kreis**
+  (idealer Donut-Fall). Sensitivität gewahrt — reine Beobachtungsstatistik, nur andere
+  Darstellung, keine Wertung.
+- spritkosten-Monatskosten bleibt bewusst **balken** (echter Kategorienvergleich Fahrzeugklassen).
+
+Damit sind balken/kreis/linie live im Einsatz erprobt; gestapelt/wasserfall warten auf den
+ersten passenden Rechner (z. B. wasserfall für Brutto → Abzüge → Netto). Karsten-Sichtprobe
+entscheidet über breiteren Varianten-Einsatz.
   Klammer-Struktur von headers() vor Commit prüfen (Get-Content -Tail 6).
