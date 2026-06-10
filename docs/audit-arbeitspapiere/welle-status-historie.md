@@ -3163,4 +3163,22 @@ Renderer-Fix (ContentBlockRenderer.tsx), Daten/Type/andere Varianten unberührt.
 - Karsten-Verifikation: /finanzen/zinsrechner — 70400 € vollständig sichtbar, „nach 40 Jahren"
   nicht abgeschnitten, Donut zentriert + Legende eng; /gesundheit/bmi-rechner — Donut + Legende
   sauber (47/35/18 %).
+
+### Kreisdiagramm finalisiert: Zentrierung + kontrastreiche Palette (11.06.2026)
+Zweite Sichtprobe zeigte: Donut+Legende kleben links (rechts Leerraum) und zwei ähnliche
+Blautöne bei 2-Segment-Donuts (zins) schlecht trennbar. Reiner Renderer-Fix.
+- **275c115** — Palette `SEGMENT_FILL` (Tailwind-`fill-…`-Klassen) → `SEGMENT_HEX` (feste
+  Hex-`fill`-Attribute, purge-sicher, kontrast-optimierte Reihenfolge: #2563EB Blau /
+  #F59E0B Amber / #10B981 Emerald / #1A365D Navy / #93C5FD Hellblau / #FCD34D Hellgelb).
+  Schon 2-Segment-Donuts trennen jetzt klar (Blau vs. Amber). Umgestellt in KreisDiagramm
+  (Donut-`<path>` + Legenden-`<rect>`) UND GestapeltDiagramm (Balken-`<rect>` + Legende);
+  `SEGMENT_FILL` restlos entfernt (grep leer, kein ESLint-Toter-Code).
+  KreisDiagramm-Layout: äußeres `justify-center` zentriert die Gruppe in der breiten Karte,
+  innere Gruppe ohne `w-full` (nimmt nur nötige Breite), Legende `min-w-[12rem]` + Wert
+  `ml-auto pl-4` (moderater, nicht maximaler Abstand). Donut-Geometrie (cx/cy/rO/rI)
+  unverändert; Balken/Linie/Wasserfall unberührt.
+- ESLint exit 0, tsc unverändert (1 vorbestehender app/layout.tsx-Fehler).
+- Karsten-Verifikation: zins „Eingezahlt vs. Zinsertrag" — Donut+Legende mittig, Blau vs.
+  Amber klar getrennt; bmi — drei klar getrennte Farben (Blau/Amber/Grün); Mobil — Donut
+  oben, Legende darunter, zentriert.
   Klammer-Struktur von headers() vor Commit prüfen (Get-Content -Tail 6).
