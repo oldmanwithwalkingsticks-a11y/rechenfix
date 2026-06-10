@@ -3063,4 +3063,19 @@ sondern ~1.550+ für Renderer-Messdrift-Reserve.
 
 **Goldstandard-Stand:** mwst 1.559, zins 1.559, stundenlohn 1.580, bmi 1.568 — alle ≥ 1.500.
 Offen mit echten Zahlen: tage 385, spritkosten 411 W.
+
+### Goldstandard tage (10.06.2026)
+- **b9fcde3** tagerechner Goldstandard (gemessen 385 → **1.539 W**, 13 Bausteine, Leitformat
+  „Anwendungsfall-Sammlung"): 4 Beispielrechnungen (Urlaubsdauer 01.–14.07. = 14 KT/10 AT/4 WE,
+  Zahlungsziel +14/+30, Naegele 01.03.+280 = 06.12., Countdown 11.06.→24.12. = 196 T/28 Wo)
+  + 7 text-Blöcke (wofür man zählt, Wochen/Monate/Jahre umrechnen, Lebenstag-Zähler,
+  Kalender-/Werk-/Arbeitstage, Schaltjahre, lange Zeiträume/Gregorianik 1582, Fristen-
+  Stolperfallen) + Checkliste + Infobox. KEINE Tabellen, KEIN Diagramm (Abgrenzung zu
+  mwst/zins/bmi). Beispiele exakt konsistent zu lib/berechnungen/tage.ts (Arbeitstage Mo–Fr,
+  Start inkl./Ende exkl., OHNE Feiertagsabzug — ehrlich so benannt). Keine Rechtsberatung
+  (rechtslastige Kündigungsfrist-Rechnung entfernt; Fristen nur als Rechen-Anwendung mit
+  Verweis auf individuelle/fachliche Prüfung). Self-Check iterativ: 972 → 1.446 → 1.539.
+
+**Goldstandard-Stand:** mwst 1.559, zins 1.559, stundenlohn 1.580, bmi 1.568, tage 1.539 —
+alle ≥ 1.500. Letzter offener W19-Rechner: spritkosten (411 W, der ursprüngliche Pilot).
   Klammer-Struktur von headers() vor Commit prüfen (Get-Content -Tail 6).
