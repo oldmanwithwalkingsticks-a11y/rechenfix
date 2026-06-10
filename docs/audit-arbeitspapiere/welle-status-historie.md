@@ -2875,4 +2875,36 @@ Volltext in CLAUDE.md → „Methodische Lehren (NEU, Welle 17A.3)".
 - Commit 045c4c0 — Vercel-Build **grün/Ready/Production** verifiziert. Live.
 - **L-W14.5:** Bei Config-Änderungen, die lokal nicht baubar sind (Windows-Casing),
   IMMER auf Vercel-grün warten, bevor abgehakt wird. "Committet" ≠ "gebaut".
+
+## Welle 19 — ContentBlock-System + Migration (10.06.2026)
+
+Behebt die Ursache der 4. AdSense-Ablehnung („minderwertige Inhalte"): ein einziger
+`erklaerung`-String über 170 strukturgleiche Seiten = Thin-Content-/AI-Massen-Verdacht.
+Lösung: modulare `contentBloecke` in pro Rechner unterschiedlicher Komposition.
+
+### Pilot + Design (Commits 6299c7f→386e846)
+- **6299c7f** ContentBlock-System (types.ts `ContentBlock`-Union + `contentBloecke?`,
+  `ContentBlockRenderer.tsx` Server-Component, page.tsx-Einhängung, spritkosten-Pilot,
+  `spritpreise-parameter.ts` SSOT, check-jahreswerte Freshness-Warnung).
+- **628dd56** (W19.0d) leerer Ad-Block oben entfernt + AdSlot min-h nur bei Consent.
+- **361faba** (W19.0b) Marken-Design (Karten, Akzente).
+- **8549b8b** (W19.0e) freistehende Kacheln (Außenbox nur noch im Fallback-Pfad).
+- **15a6300** (W19.0f) Polish: Titel über Kachel, mehr Abstand, dezenter Schatten.
+- **2f8532c** (W19.0g) durchgängiger Karten-Stil (shadow-md überall, Block-Titel blau).
+- **386e846** (W19.0h) Kacheln nutzen zentrale `.card` (Hover-Lift) + Titel `primary-600`.
+- **1191a48** Skill-Update: contentBloecke-Muster in rechner-builder/SKILL.md dokumentiert
+  (Karsten synchronisiert SKILL.md noch manuell in der Claude.ai-Skills-UI).
+
+### Tranche 1 — 5 Rechner migriert (je eigene Baustein-Komposition)
+- **783c3c8** mwst-rechner (text/tabelle/beispielrechnung/vergleich/text/checkliste/infobox/text)
+- **13dd7b4** zinsrechner (text/beispielrechnung/diagramm/text/statistik/tabelle/checkliste/infobox)
+- **2a92caa** stundenlohn-rechner (text/beispielrechnung/infobox/tabelle/text/vergleich/checkliste/tabelle)
+- **d506790** bmi-rechner (text/beispielrechnung/tabelle/text/vergleich/checkliste/infobox — sensitiv: WHO deskriptiv, Arzt-Verweis, kein Diagramm-Filler)
+- **0ea153c** tagerechner (text/beispielrechnung/tabelle/statistik/text/checkliste/infobox)
+
+Jeweils `erklaerung`/`faq`/`quellen`/`affiliate`/`zeigtAuthorBio` unverändert als Fallback/Bestand.
+YMYL gegen Primärquelle verifiziert (mwst § 12 UStG, stundenlohn § 1 MiLoG via mindestlohn.ts).
+tsc je Rechner clean (einziger Rest-Fehler: vorbestehender layout.tsx FULL_CSS_HREF, lokal-only).
+**NICHT in Tranche 1:** brutto-netto (Inline-Sonderfall), spritkosten (Pilot, fertig).
+Build-Gate ausschließlich Vercel (lokaler Windows-Build bricht: useContext-Casing).
   Klammer-Struktur von headers() vor Commit prüfen (Get-Content -Tail 6).
