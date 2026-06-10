@@ -28,14 +28,14 @@ export default function ContentBlockRenderer({ bloecke }: { bloecke: ContentBloc
   );
 }
 
-/** Kachel-Klasse für Daten-Bausteine — .card-Optik ohne Hover, mit dezentem Schatten. */
-const KACHEL =
-  'bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl shadow-md p-5 md:p-6';
+/** Kachel-Klasse für Daten-Bausteine — zentrale .card-Klasse (Grundschatten + Hover-Lift,
+ *  identisch zu den FAQ/Quellen-Boxen). .card setzt KEIN Padding → p-5 md:p-6 bleibt explizit. */
+const KACHEL = 'card p-5 md:p-6';
 
 /** Block-Überschrift im Marken-Ton — steht ÜBER der Kachel (W19.0f), groß. */
 function BlockTitel({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="text-xl md:text-2xl font-bold text-primary-700 dark:text-primary-300 mb-3">{children}</h3>
+    <h3 className="text-xl md:text-2xl font-bold text-primary-600 dark:text-primary-300 mb-3">{children}</h3>
   );
 }
 
