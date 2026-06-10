@@ -2907,4 +2907,31 @@ YMYL gegen Primärquelle verifiziert (mwst § 12 UStG, stundenlohn § 1 MiLoG vi
 tsc je Rechner clean (einziger Rest-Fehler: vorbestehender layout.tsx FULL_CSS_HREF, lokal-only).
 **NICHT in Tranche 1:** brutto-netto (Inline-Sonderfall), spritkosten (Pilot, fertig).
 Build-Gate ausschließlich Vercel (lokaler Windows-Build bricht: useContext-Casing).
+
+### Tranche-1-Nacharbeit — eigenes Leitformat pro Rechner
+Befund nach der ersten Migration: Die 5 Rechner waren fachlich korrekt, aber strukturell
+fast gleich — derselbe Baustein-Satz (text·beispiel·tabelle·vergleich·checkliste·infobox)
+nur anders sortiert. Reihenfolge-Permutation derselben Typen ≠ Einzigartigkeit und löst den
+AI-Massen-Verdacht NICHT. Nacharbeit: jeder Rechner bekommt ein **eigenes Leitformat**
+(andere dominante Darstellungsform + anderer Schwerpunkt), Zielkorridor 1.200–1.400 Wörter.
+
+- **db55aee** mwst — Leitformat „Referenz-Nachschlagewerk": 3 dominante Tabellen
+  (Steuersatz-Übersicht nach Ware, Reverse-Charge § 13b, Pflichtangaben § 14), KEIN Diagramm.
+- **2ea13b2** zins — Leitformat „Visueller Zeitverlauf": 2 Diagramme (Kapitalwachstum,
+  Einzahlung vs. Zinsertrag), Tabelle stützend, Abgeltungsteuer § 32d/§ 43, KEIN Vergleich.
+- **b6d7046** stundenlohn — Leitformat „Vergleich & Einordnung": 2 Vergleiche (Vollzeit/Teilzeit,
+  Brutto/Netto) + Statistik Mindestlohn-Reihe 2024–2027 (aus mindestlohn.ts SSOT), KEIN Diagramm.
+- **c1d79b9** bmi — Leitformat „Risiko- & Kontext-Seite": NEU Diagramm BMI-Verteilung DE
+  (Destatis Mikrozensus 2025: 53,4 % BMI ≥ 25, davon 17,9 % adipös — Primärquelle gefetcht,
+  deskriptiv als Faktum, keine Wertung), WHO-Tabelle + Taillenumfang-Vergleich.
+- **78a80a4** tage — Leitformat „Anwendungsfall-Sammlung": 4 Beispielrechnungen
+  (Kündigungsfrist, Zahlungsziel, Urlaubstage Werktage/Kalendertage, Naegele-Geburtstermin),
+  KEINE großen Tabellen, KEIN Diagramm. Datums-Mathematik je nachgerechnet.
+
+**L-W19.Leitformat:** Strukturelle Einzigartigkeit über 170 Seiten entsteht nicht durch
+Permutation derselben Bausteine, sondern durch ein pro Rechner verschiedenes DOMINANTES
+Format (Tabellen / Diagramme / Vergleiche / Beispielrechnungen) + eigenen inhaltlichen
+Schwerpunkt. An der Form müssen die Seiten unterscheidbar sein, nicht nur an den Werten.
+YMYL-Statistik (BMI-Verteilung) gegen Destatis-Primärquelle per WebFetch verifiziert, nicht
+aus Memory. tsc je Rechner clean (Rest-Fehler layout.tsx lokal-only). Build-Gate nur Vercel.
   Klammer-Struktur von headers() vor Commit prüfen (Get-Content -Tail 6).
