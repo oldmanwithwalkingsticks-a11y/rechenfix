@@ -333,47 +333,32 @@ function donutSegment(
 
 function KreisDiagramm({ block }: { block: Extract<ContentBlock, { typ: 'diagramm' }> }) {
   const daten = block.daten ?? [];
-  const summe = daten.reduce((s, d) => s + d.wert, 0) || 1;
+  const summe = daten.reduce((s, dd) => s + dd.wert, 0) || 1;
   const cx = 90, cy = 90, rO = 80, rI = 48;
   let acc = 0;
   return (
-    <div className="flex flex-col sm:flex-row items-center gap-5">
-      <svg
-        viewBox="0 0 180 180"
-        width={180}
-        height={180}
-        className="shrink-0 w-40 h-40"
-        role="img"
-        aria-label={block.titel ?? 'Kreisdiagramm'}
-      >
-        {daten.map((d, i) => {
-          const start = (acc / summe) * 360;
-          acc += d.wert;
-          const end = (acc / summe) * 360;
-          return (
-            <path
-              key={i}
-              d={donutSegment(cx, cy, rO, rI, start, end)}
-              className={SEGMENT_FILL[i % SEGMENT_FILL.length]}
-            />
-          );
+    <div className="flex flex-col sm:flex-row sm:items-center gap-6">
+      <svg viewBox="0 0 180 180" width={180} height={180}
+        className="shrink-0 w-44 h-44 mx-auto sm:mx-0"
+        role="img" aria-label={block.titel ?? 'Kreisdiagramm'}>
+        {daten.map((dd, i) => {
+          const s = (acc / summe) * 360; acc += dd.wert; const e = (acc / summe) * 360;
+          return <path key={i} d={donutSegment(cx, cy, rO, rI, s, e)}
+            className={SEGMENT_FILL[i % SEGMENT_FILL.length]} />;
         })}
       </svg>
-      <ul className="space-y-1.5 w-full">
-        {daten.map((d, i) => {
-          const dot = SEGMENT_FILL[i % SEGMENT_FILL.length];
-          return (
-            <li key={i} className="flex items-center gap-2 text-sm">
-              <svg width={12} height={12} className="shrink-0" aria-hidden="true">
-                <rect width={12} height={12} rx={3} className={dot} />
-              </svg>
-              <span className="text-gray-700 dark:text-gray-300">{d.label}</span>
-              <span className="ml-auto font-semibold text-gray-800 dark:text-gray-100">
-                {d.wert}{d.einheit ? ` ${d.einheit}` : ' %'}
-              </span>
-            </li>
-          );
-        })}
+      <ul className="space-y-2 w-full sm:max-w-xs">
+        {daten.map((dd, i) => (
+          <li key={i} className="flex items-baseline gap-2 text-sm">
+            <svg width={12} height={12} className="shrink-0 self-center" aria-hidden="true">
+              <rect width={12} height={12} rx={3} className={SEGMENT_FILL[i % SEGMENT_FILL.length]} />
+            </svg>
+            <span className="text-gray-700 dark:text-gray-300 flex-1">{dd.label}</span>
+            <span className="font-semibold text-gray-800 dark:text-gray-100 tabular-nums">
+              {dd.wert}{dd.einheit ? ` ${dd.einheit}` : ' %'}
+            </span>
+          </li>
+        ))}
       </ul>
     </div>
   );
@@ -381,10 +366,11 @@ function KreisDiagramm({ block }: { block: Extract<ContentBlock, { typ: 'diagram
 
 function LinienDiagramm({ block }: { block: Extract<ContentBlock, { typ: 'diagramm' }> }) {
   const d = block.daten ?? [];
-  const W = 480, H = 240, padL = 44, padR = 16, padT = 16, padB = 36;
+  // padT groß genug fürs Wert-Label über dem höchsten Punkt; padL/padR für End-x-Labels.
+  const W = 520, H = 260, padL = 40, padR = 40, padT = 34, padB = 40;
   const plotW = W - padL - padR, plotH = H - padT - padB;
   const werte = d.map((p) => p.wert);
-  const max = Math.max(...werte), min = Math.min(...werte);
+  const max = Math.max(...werte, 0), min = Math.min(...werte, 0);
   const span = max - min || 1;
   const xy = d.map((p, i) => {
     const x = padL + (d.length > 1 ? (i / (d.length - 1)) * plotW : plotW / 2);
@@ -393,35 +379,33 @@ function LinienDiagramm({ block }: { block: Extract<ContentBlock, { typ: 'diagra
   });
   const poly = xy.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' ');
   return (
-    <svg
-      viewBox={`0 0 ${W} ${H}`}
-      width={W}
-      height={H}
-      className="w-full h-auto"
-      role="img"
-      aria-label={block.titel ?? 'Liniendiagramm'}
-    >
-      {/* Grundlinie */}
+    <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="w-full h-auto"
+      role="img" aria-label={block.titel ?? 'Liniendiagramm'}>
       <line x1={padL} y1={padT + plotH} x2={W - padR} y2={padT + plotH}
         className="stroke-gray-200 dark:stroke-gray-700" strokeWidth={1} />
-      {/* Linie */}
       <polyline points={poly} fill="none"
         className="stroke-primary-500 dark:stroke-primary-400" strokeWidth={2.5}
         strokeLinejoin="round" strokeLinecap="round" />
-      {/* Punkte + Werte + x-Label */}
-      {xy.map(([x, y], i) => (
-        <g key={i}>
-          <circle cx={x} cy={y} r={4} className="fill-primary-600 dark:fill-primary-300" />
-          <text x={x} y={y - 9} fontSize={12} textAnchor="middle"
-            className="fill-gray-800 dark:fill-gray-100 font-semibold">
-            {d[i].wert}{d[i].einheit ? ` ${d[i].einheit}` : ''}
-          </text>
-          <text x={x} y={H - 12} fontSize={12} textAnchor="middle"
-            className="fill-gray-500 dark:fill-gray-400">
-            {d[i].label}
-          </text>
-        </g>
-      ))}
+      {xy.map(([x, y], i) => {
+        const erster = i === 0;
+        const letzter = i === d.length - 1;
+        // End-Labels einrücken, damit sie nicht über den Rand laufen.
+        const anchor = erster ? 'start' : letzter ? 'end' : 'middle';
+        const labelX = erster ? x - 2 : letzter ? x + 2 : x;
+        return (
+          <g key={i}>
+            <circle cx={x} cy={y} r={4} className="fill-primary-600 dark:fill-primary-300" />
+            <text x={labelX} y={y - 10} fontSize={12} textAnchor={anchor}
+              className="fill-gray-800 dark:fill-gray-100 font-semibold">
+              {d[i].wert}{d[i].einheit ? ` ${d[i].einheit}` : ''}
+            </text>
+            <text x={labelX} y={H - 14} fontSize={12} textAnchor={anchor}
+              className="fill-gray-500 dark:fill-gray-400">
+              {d[i].label}
+            </text>
+          </g>
+        );
+      })}
     </svg>
   );
 }
