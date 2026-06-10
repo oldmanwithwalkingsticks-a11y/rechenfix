@@ -162,6 +162,79 @@ Jeder Unternehmer, der umsatzsteuerpflichtige Leistungen erbringt, muss die MwSt
 **Vorsteuerabzug: So holen Sie sich die MwSt zurück**
 
 Wenn Sie als Unternehmer Waren oder Dienstleistungen einkaufen, zahlen Sie auf diese Einkäufe MwSt — die sogenannte Vorsteuer. Diese können Sie in Ihrer Umsatzsteuervoranmeldung geltend machen und vom Finanzamt zurückfordern. Voraussetzung ist eine ordnungsgemäße Rechnung mit gesondertem Ausweis der MwSt. Der Vorsteuerabzug ist einer der wichtigsten steuerlichen Vorteile für Selbstständige.`,
+    // W19-Tranche-1: modulare Content-Bausteine. MwSt-Sätze sind stabile Rechtskonstanten
+    // (§ 12 UStG, seit 2007 unverändert) mit §-Zitat im Text — kein Parameter-File nötig.
+    // erklaerung bleibt als Fallback befüllt.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Mehrwertsteuer einfach erklärt',
+        html: `<p>Die Mehrwertsteuer (MwSt) — amtlich Umsatzsteuer (USt) — ist die wichtigste indirekte Steuer in Deutschland und eine der größten Einnahmequellen des Bundes. Sie wird auf nahezu jede Ware und Dienstleistung erhoben und vom Endverbraucher getragen, während Unternehmen sie nur einziehen und ans Finanzamt abführen.</p><p>Geregelt ist sie im Umsatzsteuergesetz (UStG). Für Selbstständige, Online-Händler und die Buchhaltung ist das saubere Umrechnen zwischen Netto und Brutto Pflicht — ein einziger Rechenfehler zieht sich sonst durch jede Umsatzsteuer-Voranmeldung. Unser Rechner übernimmt das fehlerfrei, einzeln oder für ganze Rechnungen mit gemischten Sätzen.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Die MwSt-Sätze 2026 im Überblick',
+        kopf: ['Satz', 'Rechtsgrundlage', 'Gilt für (Auswahl)'],
+        zeilen: [
+          ['19 % Regelsatz', '§ 12 Abs. 1 UStG', 'Elektronik, Kleidung, Handwerk, Getränke, Restaurant-Speisen vor Ort'],
+          ['7 % ermäßigt', '§ 12 Abs. 2 UStG', 'Lebensmittel, Bücher, Zeitungen, ÖPNV, Hotelübernachtung, Kultur'],
+          ['0 % befreit', '§ 4 UStG', 'Ärztliche Leistungen, Wohnraummiete, Versicherungen, Ausfuhrlieferungen'],
+        ],
+        fussnote: 'Stand 2026. Restaurant-Speisen vor Ort seit 01.01.2024 wieder 19 % (zuvor 7 % als Corona-Maßnahme).',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'MwSt aus dem Bruttobetrag herausrechnen',
+        schritte: [
+          { label: 'Bruttobetrag (inkl. 19 % MwSt)', formel: '119,00 €', ergebnis: '119,00 €' },
+          { label: 'Nettobetrag = Brutto ÷ 1,19', formel: '119,00 € ÷ 1,19', ergebnis: '100,00 €' },
+          { label: 'MwSt-Betrag = Brutto − Netto', formel: '119,00 € − 100,00 €', ergebnis: '19,00 €' },
+        ],
+        fazit: 'Wichtig: Niemals einfach 19 % vom Brutto abziehen (119 € − 19 % = 96,39 € wäre falsch). Die 19 % beziehen sich immer auf den Nettowert, deshalb wird durch 1,19 geteilt.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Regelsatz 19 % vs. ermäßigter Satz 7 %',
+        spalteA: 'Regelsatz 19 %',
+        spalteB: 'Ermäßigt 7 %',
+        zeilen: [
+          { kriterium: 'Rechtsgrundlage', a: '§ 12 Abs. 1 UStG', b: '§ 12 Abs. 2 UStG' },
+          { kriterium: 'Typische Güter', a: 'Elektronik, Kleidung, Möbel', b: 'Lebensmittel, Bücher, ÖPNV' },
+          { kriterium: 'Im Restaurant', a: 'Speisen vor Ort, alle Getränke', b: 'Speisen außer Haus (To-Go)' },
+          { kriterium: 'Aus 100 € netto wird', a: '119,00 € brutto', b: '107,00 € brutto' },
+          { kriterium: 'In 100 € brutto steckt', a: '15,97 € MwSt', b: '6,54 € MwSt' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Die drei Formeln — und der häufigste Fehler',
+        html: `<p><strong>Netto → Brutto:</strong> Brutto = Netto × (1 + Satz ÷ 100). Aus 100 € netto werden bei 19 % also 119 €.</p><p><strong>Brutto → Netto:</strong> Netto = Brutto ÷ (1 + Satz ÷ 100). Aus 119 € brutto werden 100 € netto.</p><p><strong>MwSt-Betrag:</strong> MwSt = Brutto − Netto. Bei 119 € brutto sind das 19 €.</p><p>Der mit Abstand häufigste Fehler ist, die MwSt direkt vom Bruttobetrag abzuziehen. Bei kleinen Beträgen fällt der Unterschied kaum auf, bei vierstelligen Rechnungen werden daraus schnell zweistellige Eurobeträge, die in der Umsatzsteuer-Voranmeldung nicht mehr aufgehen.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Pflichtangaben auf der Rechnung (§ 14 Abs. 4 UStG)',
+        punkte: [
+          'Vollständige Anschrift von Rechnungssteller und Empfänger',
+          'Steuernummer oder USt-Identifikationsnummer des Ausstellers',
+          'Rechnungsdatum und fortlaufende, einmalige Rechnungsnummer',
+          'Menge und Art der Leistung sowie Liefer- oder Leistungszeitraum',
+          'Nettobetrag, aufgeschlüsselt nach Steuersätzen',
+          'Angewandter Steuersatz und der MwSt-Betrag in Euro',
+          'Bei Rechnungen bis 250 € genügen reduzierte Angaben (§ 33 UStDV)',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Kleinunternehmer? Dann keine MwSt ausweisen',
+        text: 'Wer die Kleinunternehmerregelung nach § 19 UStG nutzt (Umsatz unter 25.000 € im Vorjahr und unter 100.000 € im laufenden Kalenderjahr, seit 01.01.2025 nach dem Wachstumschancengesetz), darf keine MwSt auf Rechnungen ausweisen — auch nicht freiwillig. Wird sie trotzdem ausgewiesen, schuldet man den Betrag dem Finanzamt nach § 14c UStG, ohne im Gegenzug Vorsteuer abziehen zu können.',
+      },
+      {
+        typ: 'text',
+        titel: 'Vorsteuerabzug, Reverse-Charge und Gastronomie',
+        html: `<p><strong>Vorsteuerabzug:</strong> Die MwSt, die ein Unternehmen auf eigene Einkäufe zahlt (Vorsteuer), holt es sich über die Umsatzsteuer-Voranmeldung vom Finanzamt zurück — Voraussetzung ist eine ordnungsgemäße Rechnung mit gesondertem MwSt-Ausweis. Das ist einer der wichtigsten steuerlichen Vorteile für Selbstständige.</p><p><strong>Reverse-Charge (§ 13b UStG):</strong> Bei B2B-Leistungen an Unternehmen im EU-Ausland sowie bei Bauleistungen und Schrott-/Altmetalllieferungen kehrt sich die Steuerschuld um. Die Rechnung wird ohne MwSt gestellt, muss aber den Hinweis „Steuerschuldnerschaft des Leistungsempfängers“ tragen.</p><p><strong>Gastronomie:</strong> Speisen, die vor Ort verzehrt werden, unterliegen seit dem 1. Januar 2024 wieder dem Regelsatz von 19 %. Der ermäßigte Satz von 7 % gilt nur noch für Speisen außer Haus und Grundnahrungsmittel; Getränke werden ohnehin stets mit 19 % besteuert.</p>`,
+      },
+    ],
     faq: [
       {
         frage: 'Wie berechne ich die Mehrwertsteuer?',
