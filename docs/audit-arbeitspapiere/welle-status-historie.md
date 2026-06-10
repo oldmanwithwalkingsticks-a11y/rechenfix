@@ -3148,4 +3148,19 @@ Renderer/Wortzahl unverändert (Self-Check zins 1.559 / bmi 1.568 weiterhin OK).
 Damit sind balken/kreis/linie live im Einsatz erprobt; gestapelt/wasserfall warten auf den
 ersten passenden Rechner (z. B. wasserfall für Brutto → Abzüge → Netto). Karsten-Sichtprobe
 entscheidet über breiteren Varianten-Einsatz.
+
+### Diagramm-Fix nach Sichtprobe: Linie-Clipping + Kreis-Legende (11.06.2026)
+Inkognito-Sichtprobe der ersten Einsätze deckte zwei Darstellungsfehler auf — reiner
+Renderer-Fix (ContentBlockRenderer.tsx), Daten/Type/andere Varianten unberührt.
+- **0b1e504** — LinienDiagramm: oberster Wert-Label (zins „70400 €") wurde oben abgeschnitten
+  (padT zu klein) und das letzte x-Label („nach 40 Jahren") lief rechts über den Rand.
+  Fix: Geometrie auf W=520/H=260, padT 16→34, padL/padR je 40; End-Labels mit
+  `textAnchor` start (erster) / end (letzter) statt durchweg middle → kein Rand-Überlauf.
+  KreisDiagramm: Donut w-40→w-44 (etwas größer, mobil zentriert via `mx-auto`), Legende
+  `sm:max-w-xs`-begrenzt + `flex-1` am Label statt `ml-auto` → Wert rückt näher ans Label
+  (kein Auseinanderreißen), `tabular-nums` für saubere Zahlen-Ausrichtung.
+- ESLint exit 0, tsc unverändert (1 vorbestehender app/layout.tsx-Fehler, kein Eigenbeitrag).
+- Karsten-Verifikation: /finanzen/zinsrechner — 70400 € vollständig sichtbar, „nach 40 Jahren"
+  nicht abgeschnitten, Donut zentriert + Legende eng; /gesundheit/bmi-rechner — Donut + Legende
+  sauber (47/35/18 %).
   Klammer-Struktur von headers() vor Commit prüfen (Get-Content -Tail 6).
