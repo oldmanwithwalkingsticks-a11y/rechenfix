@@ -44,7 +44,16 @@ export type ContentBlock =
   | { typ: 'text'; titel?: string; html: string }
   | { typ: 'tabelle'; titel?: string; kopf: string[]; zeilen: string[][]; fussnote?: string }
   | { typ: 'statistik'; titel?: string; werte: { label: string; wert: string; hinweis?: string }[] }
-  | { typ: 'diagramm'; titel?: string; variante: 'balken'; daten: { label: string; wert: number; einheit?: string }[]; fussnote?: string }
+  // 'balken' = Kategorienvergleich; 'kreis' = Anteile (Werte werden relativ zur Summe als
+  // Donut-Segmente gezeichnet — sinnvoll, wenn die Werte ein Ganzes ergeben); 'linie' =
+  // Zeitverlauf (daten-Reihenfolge = x-Achse, label = x-Beschriftung).
+  | {
+      typ: 'diagramm';
+      titel?: string;
+      variante: 'balken' | 'kreis' | 'linie';
+      daten: { label: string; wert: number; einheit?: string }[];
+      fussnote?: string;
+    }
   | { typ: 'vergleich'; titel?: string; spalteA: string; spalteB: string; zeilen: { kriterium: string; a: string; b: string }[] }
   | { typ: 'beispielrechnung'; titel?: string; schritte: { label: string; formel: string; ergebnis: string }[]; fazit?: string }
   | { typ: 'checkliste'; titel?: string; punkte: string[] }

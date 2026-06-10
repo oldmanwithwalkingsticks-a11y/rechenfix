@@ -122,7 +122,7 @@ function ContentBlockItem({ block }: { block: ContentBlock }) {
       );
 
     case 'diagramm':
-      return <BalkenDiagramm block={block} />;
+      return <DiagrammBlock block={block} />;
 
     case 'vergleich':
       return (
@@ -212,7 +212,30 @@ function ContentBlockItem({ block }: { block: ContentBlock }) {
   }
 }
 
-function BalkenDiagramm({
+// Dispatcher: wählt die Diagramm-Variante und teilt den Karten-Rahmen + die fussnote
+// für alle drei Varianten (additiv eingeführt W19 — 'balken' bleibt geometrisch unverändert).
+function DiagrammBlock({
+  block,
+}: {
+  block: Extract<ContentBlock, { typ: 'diagramm' }>;
+}) {
+  return (
+    <DatenKachel titel={block.titel}>
+      {block.variante === 'kreis' ? (
+        <KreisDiagramm block={block} />
+      ) : block.variante === 'linie' ? (
+        <LinienDiagramm block={block} />
+      ) : (
+        <Balken block={block} />
+      )}
+      {block.fussnote && (
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">{block.fussnote}</p>
+      )}
+    </DatenKachel>
+  );
+}
+
+function Balken({
   block,
 }: {
   block: Extract<ContentBlock, { typ: 'diagramm' }>;
@@ -230,56 +253,171 @@ function BalkenDiagramm({
   const H = daten.length * rowH + 8;
 
   return (
-    <DatenKachel titel={block.titel}>
+    <svg
+      viewBox={`0 0 ${W} ${H}`}
+      width={W}
+      height={H}
+      className="w-full h-auto"
+      role="img"
+      aria-label={block.titel ?? 'Balkendiagramm'}
+    >
+      {daten.map((d, i) => {
+        const y = i * rowH + 8;
+        const barW = Math.max((d.wert / max) * barAreaW, 2);
+        const cy = y + barH / 2;
+        return (
+          <g key={i}>
+            <text
+              x={0}
+              y={cy}
+              fontSize={13}
+              dominantBaseline="middle"
+              className="fill-gray-600 dark:fill-gray-300"
+            >
+              {d.label}
+            </text>
+            <rect
+              x={labelW}
+              y={y}
+              width={barW}
+              height={barH}
+              rx={4}
+              className="fill-primary-500 dark:fill-primary-400"
+            />
+            <text
+              x={labelW + barW + 6}
+              y={cy}
+              fontSize={13}
+              dominantBaseline="middle"
+              className="fill-gray-800 dark:fill-gray-100 font-semibold"
+            >
+              {d.wert}
+              {d.einheit ? ` ${d.einheit}` : ''}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+// Marken-Farbpalette für Kreissegmente (primary-Skala + amber/emerald-Akzente).
+const SEGMENT_FILL = [
+  'fill-primary-500 dark:fill-primary-400',
+  'fill-primary-300 dark:fill-primary-300',
+  'fill-amber-400 dark:fill-amber-400',
+  'fill-emerald-400 dark:fill-emerald-400',
+  'fill-primary-700 dark:fill-primary-200',
+  'fill-amber-200 dark:fill-amber-200',
+];
+
+function polarToXY(cx: number, cy: number, r: number, angleDeg: number): [number, number] {
+  const a = ((angleDeg - 90) * Math.PI) / 180;
+  return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+}
+
+function donutSegment(
+  cx: number, cy: number, rO: number, rI: number, startDeg: number, endDeg: number,
+): string {
+  const [x1, y1] = polarToXY(cx, cy, rO, startDeg);
+  const [x2, y2] = polarToXY(cx, cy, rO, endDeg);
+  const [x3, y3] = polarToXY(cx, cy, rI, endDeg);
+  const [x4, y4] = polarToXY(cx, cy, rI, startDeg);
+  const large = endDeg - startDeg > 180 ? 1 : 0;
+  return `M ${x1.toFixed(2)} ${y1.toFixed(2)} A ${rO} ${rO} 0 ${large} 1 ${x2.toFixed(2)} ${y2.toFixed(2)} L ${x3.toFixed(2)} ${y3.toFixed(2)} A ${rI} ${rI} 0 ${large} 0 ${x4.toFixed(2)} ${y4.toFixed(2)} Z`;
+}
+
+function KreisDiagramm({ block }: { block: Extract<ContentBlock, { typ: 'diagramm' }> }) {
+  const summe = block.daten.reduce((s, d) => s + d.wert, 0) || 1;
+  const cx = 90, cy = 90, rO = 80, rI = 48;
+  let acc = 0;
+  return (
+    <div className="flex flex-col sm:flex-row items-center gap-5">
       <svg
-        viewBox={`0 0 ${W} ${H}`}
-        width={W}
-        height={H}
-        className="w-full h-auto"
+        viewBox="0 0 180 180"
+        width={180}
+        height={180}
+        className="shrink-0 w-40 h-40"
         role="img"
-        aria-label={block.titel ?? 'Balkendiagramm'}
+        aria-label={block.titel ?? 'Kreisdiagramm'}
       >
-        {daten.map((d, i) => {
-          const y = i * rowH + 8;
-          const barW = Math.max((d.wert / max) * barAreaW, 2);
-          const cy = y + barH / 2;
+        {block.daten.map((d, i) => {
+          const start = (acc / summe) * 360;
+          acc += d.wert;
+          const end = (acc / summe) * 360;
           return (
-            <g key={i}>
-              <text
-                x={0}
-                y={cy}
-                fontSize={13}
-                dominantBaseline="middle"
-                className="fill-gray-600 dark:fill-gray-300"
-              >
-                {d.label}
-              </text>
-              <rect
-                x={labelW}
-                y={y}
-                width={barW}
-                height={barH}
-                rx={4}
-                className="fill-primary-500 dark:fill-primary-400"
-              />
-              <text
-                x={labelW + barW + 6}
-                y={cy}
-                fontSize={13}
-                dominantBaseline="middle"
-                className="fill-gray-800 dark:fill-gray-100 font-semibold"
-              >
-                {d.wert}
-                {d.einheit ? ` ${d.einheit}` : ''}
-              </text>
-            </g>
+            <path
+              key={i}
+              d={donutSegment(cx, cy, rO, rI, start, end)}
+              className={SEGMENT_FILL[i % SEGMENT_FILL.length]}
+            />
           );
         })}
       </svg>
-      {block.fussnote && (
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">{block.fussnote}</p>
-      )}
-    </DatenKachel>
+      <ul className="space-y-1.5 w-full">
+        {block.daten.map((d, i) => {
+          const dot = SEGMENT_FILL[i % SEGMENT_FILL.length];
+          return (
+            <li key={i} className="flex items-center gap-2 text-sm">
+              <svg width={12} height={12} className="shrink-0" aria-hidden="true">
+                <rect width={12} height={12} rx={3} className={dot} />
+              </svg>
+              <span className="text-gray-700 dark:text-gray-300">{d.label}</span>
+              <span className="ml-auto font-semibold text-gray-800 dark:text-gray-100">
+                {d.wert}{d.einheit ? ` ${d.einheit}` : ' %'}
+              </span>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
+
+function LinienDiagramm({ block }: { block: Extract<ContentBlock, { typ: 'diagramm' }> }) {
+  const d = block.daten;
+  const W = 480, H = 240, padL = 44, padR = 16, padT = 16, padB = 36;
+  const plotW = W - padL - padR, plotH = H - padT - padB;
+  const werte = d.map((p) => p.wert);
+  const max = Math.max(...werte), min = Math.min(...werte);
+  const span = max - min || 1;
+  const xy = d.map((p, i) => {
+    const x = padL + (d.length > 1 ? (i / (d.length - 1)) * plotW : plotW / 2);
+    const y = padT + plotH - ((p.wert - min) / span) * plotH;
+    return [x, y] as [number, number];
+  });
+  const poly = xy.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' ');
+  return (
+    <svg
+      viewBox={`0 0 ${W} ${H}`}
+      width={W}
+      height={H}
+      className="w-full h-auto"
+      role="img"
+      aria-label={block.titel ?? 'Liniendiagramm'}
+    >
+      {/* Grundlinie */}
+      <line x1={padL} y1={padT + plotH} x2={W - padR} y2={padT + plotH}
+        className="stroke-gray-200 dark:stroke-gray-700" strokeWidth={1} />
+      {/* Linie */}
+      <polyline points={poly} fill="none"
+        className="stroke-primary-500 dark:stroke-primary-400" strokeWidth={2.5}
+        strokeLinejoin="round" strokeLinecap="round" />
+      {/* Punkte + Werte + x-Label */}
+      {xy.map(([x, y], i) => (
+        <g key={i}>
+          <circle cx={x} cy={y} r={4} className="fill-primary-600 dark:fill-primary-300" />
+          <text x={x} y={y - 9} fontSize={12} textAnchor="middle"
+            className="fill-gray-800 dark:fill-gray-100 font-semibold">
+            {d[i].wert}{d[i].einheit ? ` ${d[i].einheit}` : ''}
+          </text>
+          <text x={x} y={H - 12} fontSize={12} textAnchor="middle"
+            className="fill-gray-500 dark:fill-gray-400">
+            {d[i].label}
+          </text>
+        </g>
+      ))}
+    </svg>
   );
 }
 
