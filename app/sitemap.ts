@@ -129,6 +129,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly',
       priority: 0.2,
     },
+    {
+      url: `${SITE_URL}/nutzungsbedingungen`,
+      lastModified: gitMtime('app/nutzungsbedingungen/page.tsx'),
+      changeFrequency: 'yearly',
+      priority: 0.2,
+    },
   ];
 
   // Rechner: mtime der Config-Datei ihrer Kategorie (dasselbe Datum wie die
