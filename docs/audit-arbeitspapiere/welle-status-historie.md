@@ -2994,4 +2994,21 @@ layout.tsx).
 ~1.500-W-Tiefe nicht allein über Diagramme — Diagramme tragen wenig Fließtext. Bei diesen
 Leitformaten von vornherein mehr/tiefere text-Fachblöcke einplanen (verifizierte Sonderthemen
 wie Vorabpauschale/Effektivzins), statt nur Bausteinzahl zu erhöhen.
+
+### Goldstandard stundenlohn (10.06.2026)
+- **3b2d7ca** stundenlohn-rechner Goldstandard (~1.500 W, 10 Bausteine, Leitformat „Vergleich
+  & Einordnung"): 2 Vergleiche (Brutto/Netto, Vollzeit/Teilzeit @ 18 €/h) + Statistik
+  (Mindestlohn-Reihe 2024–2027 aus mindestlohn.ts-SSOT) dominant, KEIN Diagramm (Abgrenzung zu
+  zins), keine 3-Tabellen-Dominanz (Abgrenzung zu mwst). L-W19.Diagramm-wortarm beachtet:
+  3 tiefe text-Fachblöcke (Was der Stundenlohn aussagt; Abzüge im Detail; Brutto ≠ realer
+  Verdienst) tragen die Wortzahl, weil Vergleiche/Statistik wortarm sind.
+- **YMYL exakt:** SV-Sätze AN-Anteil 2026 (RV 9,3 % § 158 SGB VI, ALV 1,3 % § 341 SGB III,
+  KV 7,3 % + ½ Zusatz ⌀ 1,45 % § 241/242a SGB V, PV 1,8 %/2,4 % § 55 SGB XI) — deckungsgleich
+  mit CLAUDE.md-SSOT. Mindestlohn aus mindestlohn.ts gespiegelt (Vierte MiLoV; Prompt-Variante
+  „Fünfte MiLoV 29.10.2025" NICHT übernommen, da SSOT „Vierte" führt — daten-disziplin).
+  Beispiel realer Stundenlohn nachgerechnet (45 h statt 40 → 17,96 €).
+
+**Goldstandard-Stand:** mwst ✅, zins ✅, stundenlohn ✅ (~1.500 W). Offen: bmi, tage
+(noch Nacharbeit-Niveau). bmi braucht beim Hochziehen erneut Sensitivitäts-Sorgfalt +
+Primärquellen-Refresh der Verteilungswerte.
   Klammer-Struktur von headers() vor Commit prüfen (Get-Content -Tail 6).
