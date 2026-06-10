@@ -2979,4 +2979,19 @@ aktualisieren (Karsten gemeldet).
 Goldstandard-Niveau: stundenlohn, bmi, tage noch beim dünneren Nacharbeit-Stand (~600–900 W).
 mwst + zins sind die Niveau-Referenz. Build je Commit Vercel-grün (lokal nur tsc, Rest-Fehler
 layout.tsx).
+
+### zins-Nachbesserung auf ~1.500 W (10.06.2026)
+- **79f98d0** Der zins-Goldstandard war mit ~915 W (Fließtext ~521 W) zu kurz fürs
+  1.500-Ziel — das Diagramm-Leitformat ist wortarm. Nachbesserung hebt NUR die Textsubstanz
+  (Diagramme/Tabelle/Statistik/Leitformat unverändert, weiterhin kein Vergleich):
+  3 vorhandene text-Blöcke vertieft (Zins/Zinseszins +Zahlenvergleich 30 J., Früh-Anfangen
+  +zweites Szenario ~365 €/Mon nachgerechnet, Steuern +Freistellungsauftrag-Beispiel) und
+  2 neue Fachblöcke ergänzt: **Vorabpauschale** (§ 18 InvStG, Basiszins 2026 = 3,20 % — BMF
+  13.01.2026/Bundesbank per WebSearch verifiziert; Basisertrag = Wert × Zins × 70 %) und
+  **Sollzins vs. Effektivzins** (§ 6 PAngV). Jetzt 12 Bausteine.
+
+**L-W19.Diagramm-wortarm:** Diagramm-dominierte Leitformate (zins, ggf. bmi) erreichen die
+~1.500-W-Tiefe nicht allein über Diagramme — Diagramme tragen wenig Fließtext. Bei diesen
+Leitformaten von vornherein mehr/tiefere text-Fachblöcke einplanen (verifizierte Sonderthemen
+wie Vorabpauschale/Effektivzins), statt nur Bausteinzahl zu erhöhen.
   Klammer-Struktur von headers() vor Commit prüfen (Get-Content -Tail 6).
