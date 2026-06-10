@@ -851,64 +851,61 @@ Die Stundenlöhne in Deutschland variieren stark nach Branche, Qualifikation und
 Regionale Unterschiede sind ebenfalls erheblich: In Süddeutschland (Bayern, Baden-Württemberg) und in Ballungsräumen wie München, Frankfurt oder Hamburg sind die Löhne durchschnittlich 15 bis 25 Prozent höher als in ländlichen Regionen oder in den ostdeutschen Bundesländern. Diese Unterschiede spiegeln teilweise die höheren Lebenshaltungskosten wider.
 
 Beachten Sie, dass ein hoher Stundenlohn allein noch kein aussagekräftiger Vergleich ist — auch die Arbeitszeit, Zusatzleistungen (Urlaubs- und Weihnachtsgeld, betriebliche Altersvorsorge, Boni), die Pendelzeit und die Lebenshaltungskosten am Arbeitsort spielen eine wichtige Rolle bei der Bewertung eines Jobangebots.`,
-    // W19-Tranche-1-Nacharbeit: Leitformat „Vergleich & Einordnung" — 2 Vergleiche + Statistik
-    // dominant, KEIN Diagramm. Mindestlohn-Reihe gespiegelt aus lib/berechnungen/mindestlohn.ts
-    // (§ 1 MiLoG, Vierte MiLoV 27.06.2025). Faktor 4,33 = 52/12. erklaerung bleibt Fallback.
+    // W19-Goldstandard: stundenlohn-rechner auf volle Tiefe (~1.500 W, 10 Bausteine), Leitformat
+    // „Vergleich & Einordnung" — 2 Vergleiche + Statistik dominant, KEIN Diagramm. Mindestlohn-Reihe
+    // aus lib/berechnungen/mindestlohn.ts (§ 1 MiLoG, Vierte MiLoV 27.06.2025; 2026 = 13,90 €,
+    // 2027 = 14,60 €). SV-Sätze AN-Anteil 2026 (Stand 06/2026): RV 9,3 % (§ 158 SGB VI), ALV 1,3 %
+    // (§ 341 SGB III), KV 7,3 % + ½ Zusatz ⌀ 1,45 % (§ 241/242a SGB V), PV 1,8 % bzw. 2,4 % kinderlos
+    // (§ 55 SGB XI). Faktor 4,33 = 52/12. erklaerung bleibt Fallback.
     contentBloecke: [
       {
         typ: 'text',
-        titel: 'Stundenlohn — was Ihr Gehalt pro Stunde wirklich wert ist',
-        html: `<p>Ob ein Gehalt gut bezahlt ist, zeigt erst der Stundenlohn — denn 3.500 € bei 40 Stunden sind etwas anderes als 3.500 € bei 35 Stunden. Der Stundenlohnrechner macht Jobangebote vergleichbar, untermauert Gehaltsverhandlungen mit Zahlen und prüft den Abstand zum Mindestlohn.</p><p>Der Schlüssel ist der Faktor <strong>4,33</strong>: 52 Wochen ÷ 12 Monate = 4,33 Wochen pro Monat im Schnitt. Wer mit 4 statt 4,33 rechnet, überschätzt den Stundenlohn um rund 8 %.</p>`,
+        titel: 'Was der Stundenlohn wirklich aussagt',
+        html: `<p>Der Stundenlohn beantwortet eine einfache, aber entscheidende Frage: Wie viel Geld verdienen Sie für eine Stunde Ihrer Arbeitszeit? Anders als das Monatsgehalt, das die dahinterstehende Arbeitszeit verschleiert, macht der Stundenlohn Jobs unmittelbar vergleichbar. 3.500 € bei einer 40-Stunden-Woche und 3.500 € bei einer 35-Stunden-Woche klingen gleich — pro Stunde liegen jedoch Welten dazwischen.</p><p>Berechnet wird der Stundenlohn aus dem Bruttogehalt und den monatlichen Arbeitsstunden. Diese ergeben sich aus den Wochenstunden multipliziert mit dem Faktor <strong>4,33</strong> — dem Durchschnitt von 52 Wochen geteilt durch 12 Monate. Ein Monat hat also im Schnitt 4,33 Arbeitswochen, nicht 4; wer mit 4 rechnet, überschätzt den Stundenlohn um rund 8 %.</p><p>Wichtig ist die Unterscheidung zwischen <strong>brutto und netto</strong>. Der Brutto-Stundenlohn ist die ehrlichste Größe, um Stellenangebote zu vergleichen, weil er unabhängig von der persönlichen Steuersituation ist. Der Netto-Stundenlohn zeigt dagegen, was am Ende tatsächlich auf dem Konto landet — und der hängt stark von Steuerklasse, Kinderzahl und Krankenkasse ab. Wer Angebote vergleicht, sollte immer dieselbe Größe verwenden: brutto mit brutto oder netto mit netto, niemals gemischt.</p>`,
       },
       {
         typ: 'beispielrechnung',
-        titel: 'Monatsgehalt → Stundenlohn',
+        titel: 'Monatsgehalt in Stundenlohn umrechnen',
         schritte: [
-          { label: 'Stunden pro Monat = Wochenstunden × 4,33', formel: '40 × 4,33', ergebnis: '173,2 Std.' },
+          { label: 'Monatsstunden = Wochenstunden × 4,33', formel: '40 × 4,33', ergebnis: '173,2 Std.' },
           { label: 'Stundenlohn = Monatsgehalt ÷ Stunden', formel: '3.500 € ÷ 173,2', ergebnis: '20,21 €/Std.' },
         ],
-        fazit: 'Gegenprobe: 20,21 € × 40 × 4,33 = 3.500 €. Häufigster Fehler ist Faktor 4 statt 4,33 — das ergäbe 21,88 €/Std. und damit 8 % zu viel.',
-      },
-      {
-        typ: 'tabelle',
-        titel: 'Wochenstunden → Monatsstunden (Faktor 4,33)',
-        kopf: ['Modell', 'Wochenstunden', 'Monatsstunden (× 4,33)'],
-        zeilen: [
-          ['Vollzeit', '40', '173,2'],
-          ['35-Stunden-Woche', '35', '151,6'],
-          ['Teilzeit', '30', '129,9'],
-          ['Teilzeit', '20', '86,6'],
-          ['Minijob (ca.)', '12', '52,0'],
-        ],
-        fussnote: 'Monatsstunden = Wochenstunden × 4,33. Durch diese Zahl wird das Monatsgehalt zum Stundenlohn geteilt.',
-      },
-      {
-        typ: 'vergleich',
-        titel: 'Vollzeit vs. Teilzeit bei gleichem Stundensatz (20 €/Std.)',
-        spalteA: 'Vollzeit (40 h)',
-        spalteB: 'Teilzeit (20 h)',
-        zeilen: [
-          { kriterium: 'Monatsstunden (× 4,33)', a: '173,2', b: '86,6' },
-          { kriterium: 'Monatsbrutto', a: '3.464 €', b: '1.732 €' },
-          { kriterium: 'Jahresbrutto', a: '41.568 €', b: '20.784 €' },
-          { kriterium: 'Stundenlohn', a: '20,00 €', b: '20,00 €' },
-        ],
+        fazit: 'Dasselbe Gehalt bei 35 Std./Woche: 3.500 € ÷ (35 × 4,33) = 23,09 €/Std. Gleiche Zahl auf dem Vertrag, anderer Stundenlohn — genau deshalb ist der Stundenlohn die ehrlichere Vergleichsgröße.',
       },
       {
         typ: 'vergleich',
         titel: 'Brutto- vs. Netto-Stundenlohn',
         spalteA: 'Brutto',
-        spalteB: 'Netto (StKl I, NRW)',
+        spalteB: 'Netto (ca.)',
         zeilen: [
-          { kriterium: 'Monatsgehalt', a: '3.500 €', b: 'rund 2.350 €' },
-          { kriterium: 'Stundenlohn (40 h)', a: '20,21 €', b: 'rund 13,57 €' },
-          { kriterium: 'Was bleibt', a: '100 %', b: 'rund 67 %' },
-          { kriterium: 'Hängt ab von', a: '—', b: 'Steuerklasse, Bundesland, Kirche, Kinder' },
+          { kriterium: 'Stundenlohn', a: '20,00 €', b: 'rund 13–15 €' },
+          { kriterium: 'Monatswert (40 h)', a: '3.464 €', b: 'rund 2.300–2.600 €' },
+          { kriterium: 'Was abgezogen wird', a: '—', b: 'Lohnsteuer + Soli, RV 9,3 %, KV 8,75 %, PV 1,8 %, ALV 1,3 %' },
+          { kriterium: 'Hängt ab von', a: 'fix', b: 'Steuerklasse, Kinder, KV-Zusatzbeitrag, Bundesland' },
+          { kriterium: 'Wofür gut', a: 'Angebote vergleichen', b: 'sehen, was real bleibt' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Welche Abzüge den Netto-Stundenlohn senken',
+        html: `<p>Vom Brutto-Stundenlohn bleibt netto nur ein Teil übrig, weil zwei Blöcke abgezogen werden: Sozialabgaben und Lohnsteuer. Die <strong>Sozialversicherungsbeiträge</strong> teilen sich Arbeitgeber und Arbeitnehmer grundsätzlich je zur Hälfte. Für Arbeitnehmer fallen 2026 an: Rentenversicherung 9,3 % (von insgesamt 18,6 %), Arbeitslosenversicherung 1,3 % (von 2,6 %), Krankenversicherung 7,3 % plus den halben Zusatzbeitrag von durchschnittlich rund 1,45 % sowie Pflegeversicherung 1,8 %. Kinderlose über 23 Jahre zahlen bei der Pflege einen Zuschlag und kommen auf 2,4 %. In Summe sind das rund 21 % allein an Sozialabgaben.</p><p>Dazu kommt die <strong>Lohnsteuer</strong> samt Solidaritätszuschlag und gegebenenfalls Kirchensteuer. Wie hoch sie ausfällt, hängt von der Steuerklasse, der Kinderzahl und der Höhe des Einkommens ab — und genau deshalb kann derselbe Bruttolohn zu sehr unterschiedlichen Nettobeträgen führen. Eine alleinstehende Person in Steuerklasse I zahlt deutlich mehr als ein Verheirateter in Klasse III mit Kindern. Als grobe Faustregel bleiben vom Brutto-Stundenlohn etwa 60 bis 75 % netto übrig.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Vollzeit vs. Teilzeit bei gleichem Stundensatz (18 €/Std.)',
+        spalteA: 'Vollzeit (40 h)',
+        spalteB: 'Teilzeit (20 h)',
+        zeilen: [
+          { kriterium: 'Monatsstunden (× 4,33)', a: '173,2', b: '86,6' },
+          { kriterium: 'Monatsbrutto', a: '3.118 €', b: '1.559 €' },
+          { kriterium: 'Stundenlohn', a: '18,00 €', b: '18,00 €' },
+          { kriterium: 'Urlaub & Lohnfortzahlung', a: 'voll', b: 'anteilig (pro Stunde gleich)' },
+          { kriterium: 'Sozialversicherung', a: 'voll pflichtig', b: 'pflichtig über Minijob-Grenze (603 €)' },
         ],
       },
       {
         typ: 'statistik',
-        titel: 'Mindestlohn-Entwicklung (§ 1 MiLoG)',
+        titel: 'Mindestlohn-Entwicklung in Deutschland (§ 1 MiLoG)',
         werte: [
           { label: '2024', wert: '12,41 €', hinweis: 'MiLoV 2023' },
           { label: '2025', wert: '12,82 €', hinweis: 'MiLoV 2023, Stufe 2' },
@@ -917,20 +914,43 @@ Beachten Sie, dass ein hoher Stundenlohn allein noch kein aussagekräftiger Verg
         ],
       },
       {
+        typ: 'tabelle',
+        titel: 'Wochenstunden → Monatsstunden (Faktor 4,33)',
+        kopf: ['Wochenstunden', 'Monatsstunden (× 4,33)'],
+        zeilen: [
+          ['10', '43,3'],
+          ['15', '65,0'],
+          ['20', '86,6'],
+          ['25', '108,3'],
+          ['30', '129,9'],
+          ['35', '151,6'],
+          ['38,5', '166,7'],
+          ['40', '173,2'],
+        ],
+        fussnote: 'Faktor 4,33 = 52 Wochen ÷ 12 Monate. Das Monatsgehalt geteilt durch die Monatsstunden ergibt den Stundenlohn.',
+      },
+      {
         typ: 'text',
-        titel: 'Der Mindestlohn als Untergrenze',
-        html: `<p>Der gesetzliche Mindestlohn (§ 1 MiLoG) liegt 2026 bei <strong>13,90 €/Std.</strong> und steigt zum 1. Januar 2027 auf 14,60 € (Vierte Mindestlohnanpassungsverordnung, Beschluss vom 27.06.2025). Bei 40 Wochenstunden entspricht das rund 2.407 € Monatsbrutto bzw. etwa 28.891 € im Jahr.</p><p>Das ist nur die Untergrenze: Viele Branchen haben durch Allgemeinverbindlich-Erklärungen höhere Tarif-Mindestlöhne — etwa im Bauhauptgewerbe, in der Pflege oder im Dachdeckerhandwerk. Wer dort arbeitet, hat oft einen tariflichen Anspruch über dem allgemeinen Mindestlohn, auch ohne eigene Tarifbindung des Arbeitgebers.</p>`,
+        titel: 'Brutto-Stundenlohn ist nicht gleich Verdienst pro geleisteter Stunde',
+        html: `<p>Der berechnete Brutto-Stundenlohn geht von der vertraglich vereinbarten Arbeitszeit aus. Der tatsächliche Verdienst pro <strong>real geleisteter</strong> Stunde kann jedoch deutlich darunter liegen — nämlich dann, wenn Sie mehr Zeit aufwenden, als bezahlt wird.</p><p>Ein Beispiel: Bei einem 40-Stunden-Vertrag mit 3.500 € brutto liegt der rechnerische Stundenlohn bei 20,21 €. Leisten Sie regelmäßig fünf unbezahlte Überstunden pro Woche, arbeiten Sie faktisch 45 Stunden — der reale Stundenlohn sinkt auf 3.500 ÷ (45 × 4,33) = 17,96 €. Aus 20,21 € werden also knapp 18 €, ohne dass sich am Gehalt etwas ändert.</p><p>Auch andere Zeiten drücken den wahren Satz: unbezahlte Pausen, die faktisch Anwesenheit bedeuten, lange Fahrt- oder Rüstzeiten, Rufbereitschaft und ständige Erreichbarkeit nach Feierabend oder Pflicht-Weiterbildung in der Freizeit. Wer seinen echten Stundenlohn kennen will, sollte all diese Zeiten gegen das Gehalt rechnen — nicht nur die vertraglich vereinbarten Stunden.</p>`,
       },
       {
         typ: 'checkliste',
-        titel: 'Was den echten Stundenlohn drückt',
+        titel: 'Was Ihren echten Stundenlohn senkt',
         punkte: [
-          'Unbezahlte Überstunden — sie verteilen den Monatslohn auf mehr Stunden',
+          'Unbezahlte Überstunden — sie verteilen das Gehalt auf mehr Stunden',
           'Unbezahlte Pausen, die faktisch Anwesenheit bedeuten',
-          'Pendelzeit, die nicht vergütet wird (versteckter Stundenabzug)',
-          'Rufbereitschaft und Erreichbarkeit außerhalb der Arbeitszeit',
+          'Pendelzeit zur Arbeit, die nicht vergütet wird',
+          'Rüst- und Vorbereitungszeit vor dem eigentlichen Arbeitsbeginn',
+          'Ständige Erreichbarkeit und Rufbereitschaft nach Feierabend',
           'Pflicht-Weiterbildung, die in die Freizeit fällt',
         ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Mindestlohn 2026: 13,90 €',
+        text: 'Der gesetzliche Mindestlohn beträgt seit dem 1. Januar 2026 13,90 € pro Zeitstunde (§ 1 MiLoG) und steigt zum 1. Januar 2027 auf 14,60 €. Er gilt für nahezu alle Beschäftigten ab 18 Jahren — unabhängig von Branche und Wochenstundenzahl. Ausgenommen sind unter anderem bestimmte Pflichtpraktika, freiwillige Praktika bis drei Monate, Auszubildende (für sie gilt die Ausbildungsvergütung) und Langzeitarbeitslose in den ersten sechs Monaten einer Beschäftigung.',
       },
     ],
     faq: [
