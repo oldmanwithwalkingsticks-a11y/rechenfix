@@ -30,7 +30,7 @@ export default function ContentBlockRenderer({ bloecke }: { bloecke: ContentBloc
 
 /** Kachel-Klasse für Daten-Bausteine — .card-Optik ohne Hover, mit dezentem Schatten. */
 const KACHEL =
-  'bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl shadow-sm p-5 md:p-6';
+  'bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl shadow-md p-5 md:p-6';
 
 /** Block-Überschrift im Marken-Ton — steht ÜBER der Kachel (W19.0f), groß. */
 function BlockTitel({ children }: { children: React.ReactNode }) {

@@ -120,7 +120,7 @@ export default function RechnerSeite({ params }: Props) {
           {/* Beliebte Gehaltsbeispiele (nur auf Brutto-Netto-Rechner) */}
           {config.slug === 'brutto-netto-rechner' && (
             <section className="card p-6 md:p-8 mb-8 no-print">
-              <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Beliebte Gehaltsbeispiele</h2>
+              <h2 className="text-xl md:text-2xl font-bold text-primary-700 dark:text-primary-300 mb-4">Beliebte Gehaltsbeispiele</h2>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                 {[
                   { href: '/finanzen/2000-euro-brutto-netto', label: '2.000 € brutto' },
@@ -165,7 +165,7 @@ export default function RechnerSeite({ params }: Props) {
             ) : (
             /* FALLBACK-PFAD: unverändert — Außenbox + Formel-Box + Rechenbeispiel-Box + erklaerung-Split. */
             <section className="card p-6 md:p-8 mb-8 no-print">
-              <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">So funktioniert der {config.titel}</h2>
+              <h2 className="text-xl md:text-2xl font-bold text-primary-700 dark:text-primary-300 mb-4">So funktioniert der {config.titel}</h2>
 
               <div className="bg-accent-50 dark:bg-accent-700/20 border border-accent-200 dark:border-accent-600/40 rounded-xl p-4 mb-6">
                 <p className="font-semibold text-accent-700 dark:text-accent-400 text-sm mb-1">Formel</p>
@@ -218,7 +218,7 @@ export default function RechnerSeite({ params }: Props) {
 
             {/* FAQ */}
             <section className="card p-6 md:p-8 mb-8 no-print">
-              <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Häufige Fragen</h2>
+              <h2 className="text-xl md:text-2xl font-bold text-primary-700 dark:text-primary-300 mb-4">Häufige Fragen</h2>
               <div className="space-y-4">
                 {config.faq.map((item, i) => (
                   <details key={i} className="group border border-gray-100 dark:border-gray-700 rounded-xl">
@@ -282,7 +282,7 @@ export default function RechnerSeite({ params }: Props) {
           */}
           {config.slug !== 'wissenschaftlicher-taschenrechner' && (
             <section className="card p-6 md:p-8 mb-8 no-print">
-              <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Das könnte Sie auch interessieren</h2>
+              <h2 className="text-xl md:text-2xl font-bold text-primary-700 dark:text-primary-300 mb-4">Das könnte Sie auch interessieren</h2>
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
                 {verwandteRechner.map(r => (
                   <Link
