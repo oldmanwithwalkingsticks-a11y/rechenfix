@@ -162,66 +162,73 @@ Jeder Unternehmer, der umsatzsteuerpflichtige Leistungen erbringt, muss die MwSt
 **Vorsteuerabzug: So holen Sie sich die MwSt zurück**
 
 Wenn Sie als Unternehmer Waren oder Dienstleistungen einkaufen, zahlen Sie auf diese Einkäufe MwSt — die sogenannte Vorsteuer. Diese können Sie in Ihrer Umsatzsteuervoranmeldung geltend machen und vom Finanzamt zurückfordern. Voraussetzung ist eine ordnungsgemäße Rechnung mit gesondertem Ausweis der MwSt. Der Vorsteuerabzug ist einer der wichtigsten steuerlichen Vorteile für Selbstständige.`,
-    // W19-Tranche-1: modulare Content-Bausteine. MwSt-Sätze sind stabile Rechtskonstanten
-    // (§ 12 UStG, seit 2007 unverändert) mit §-Zitat im Text — kein Parameter-File nötig.
-    // erklaerung bleibt als Fallback befüllt.
+    // W19-Tranche-1-Nacharbeit: Leitformat „Referenz-Nachschlagewerk" — dominant Tabellen,
+    // KEIN Diagramm/Vergleich/Statistik. MwSt-Sätze stabile Rechtskonstanten (§ 12 UStG) mit
+    // §-Zitat; Reverse-Charge § 13b, Pflichtangaben § 14. erklaerung bleibt Fallback.
     contentBloecke: [
       {
         typ: 'text',
-        titel: 'Mehrwertsteuer einfach erklärt',
-        html: `<p>Die Mehrwertsteuer (MwSt) — amtlich Umsatzsteuer (USt) — ist die wichtigste indirekte Steuer in Deutschland und eine der größten Einnahmequellen des Bundes. Sie wird auf nahezu jede Ware und Dienstleistung erhoben und vom Endverbraucher getragen, während Unternehmen sie nur einziehen und ans Finanzamt abführen.</p><p>Geregelt ist sie im Umsatzsteuergesetz (UStG). Für Selbstständige, Online-Händler und die Buchhaltung ist das saubere Umrechnen zwischen Netto und Brutto Pflicht — ein einziger Rechenfehler zieht sich sonst durch jede Umsatzsteuer-Voranmeldung. Unser Rechner übernimmt das fehlerfrei, einzeln oder für ganze Rechnungen mit gemischten Sätzen.</p>`,
+        titel: 'Mehrwertsteuer — das Nachschlagewerk',
+        html: `<p>Die Mehrwertsteuer (MwSt) — amtlich Umsatzsteuer (USt) — ist die wichtigste indirekte Steuer in Deutschland und eine der größten Einnahmequellen des Bundes. Sie wird auf nahezu jede Ware und Dienstleistung erhoben, vom Endverbraucher getragen und von Unternehmen nur eingezogen und ans Finanzamt abgeführt.</p><p>Welcher Satz gilt, ob das Reverse-Charge-Verfahren greift und welche Angaben eine Rechnung für den Vorsteuerabzug braucht — das sind die drei Fragen, an denen sich in der Praxis fast alle MwSt-Fehler entscheiden. Die folgenden Tabellen beantworten sie nachschlagbar, jeweils mit Rechtsgrundlage aus dem Umsatzsteuergesetz (UStG).</p>`,
       },
       {
         typ: 'tabelle',
-        titel: 'Die MwSt-Sätze 2026 im Überblick',
-        kopf: ['Satz', 'Rechtsgrundlage', 'Gilt für (Auswahl)'],
+        titel: 'Welcher Steuersatz gilt? — Übersicht nach Ware/Leistung',
+        kopf: ['Ware / Leistung', 'Satz', 'Rechtsgrundlage'],
         zeilen: [
-          ['19 % Regelsatz', '§ 12 Abs. 1 UStG', 'Elektronik, Kleidung, Handwerk, Getränke, Restaurant-Speisen vor Ort'],
-          ['7 % ermäßigt', '§ 12 Abs. 2 UStG', 'Lebensmittel, Bücher, Zeitungen, ÖPNV, Hotelübernachtung, Kultur'],
-          ['0 % befreit', '§ 4 UStG', 'Ärztliche Leistungen, Wohnraummiete, Versicherungen, Ausfuhrlieferungen'],
+          ['Lebensmittel (Grundnahrung)', '7 %', '§ 12 Abs. 2 Nr. 1 (Anlage 2)'],
+          ['Getränke (Wasser, Säfte, Alkohol)', '19 %', '§ 12 Abs. 1'],
+          ['Bücher, E-Books, Zeitungen', '7 %', '§ 12 Abs. 2 Nr. 1 + Nr. 14'],
+          ['Restaurant: Speisen vor Ort', '19 %', '§ 12 Abs. 1 (seit 01.01.2024)'],
+          ['Speisen außer Haus / To-Go', '7 %', '§ 12 Abs. 2 Nr. 1'],
+          ['Hotelübernachtung', '7 %', '§ 12 Abs. 2 Nr. 11'],
+          ['Frühstück im Hotel', '19 %', '§ 12 Abs. 1'],
+          ['Personennahverkehr (ÖPNV)', '7 %', '§ 12 Abs. 2 Nr. 10'],
+          ['Kultur: Theater, Konzert, Museum', '7 %', '§ 12 Abs. 2 Nr. 7'],
+          ['Handwerker- und Dienstleistungen', '19 %', '§ 12 Abs. 1'],
+          ['Arzt, Wohnraummiete, Versicherung', 'befreit', '§ 4'],
         ],
-        fussnote: 'Stand 2026. Restaurant-Speisen vor Ort seit 01.01.2024 wieder 19 % (zuvor 7 % als Corona-Maßnahme).',
+        fussnote: 'Stand 2026. Der Regelsatz beträgt 19 %, der ermäßigte Satz 7 %. Die vollständige Liste der 7 %-Güter steht in Anlage 2 zum UStG.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Reverse-Charge: Wer schuldet die Umsatzsteuer? (§ 13b UStG)',
+        kopf: ['Fall', 'Schuldner der USt', 'Rechtsgrundlage'],
+        zeilen: [
+          ['Bauleistungen zwischen Bauunternehmen', 'Leistungsempfänger', '§ 13b Abs. 2 Nr. 4'],
+          ['Sonstige Leistung an EU-Unternehmen', 'Empfänger im Ausland', '§ 13b Abs. 1'],
+          ['Lieferung von Schrott / Altmetall', 'Leistungsempfänger', '§ 13b Abs. 2 Nr. 7'],
+          ['Gebäudereinigung (B2B)', 'Leistungsempfänger', '§ 13b Abs. 2 Nr. 8'],
+          ['Mobilfunk/Tablets/Konsolen ab 5.000 €', 'Leistungsempfänger', '§ 13b Abs. 2 Nr. 10'],
+        ],
+        fussnote: 'Beim Reverse-Charge wird die Rechnung ohne USt gestellt — Pflichthinweis „Steuerschuldnerschaft des Leistungsempfängers". Der Empfänger berechnet und führt die USt selbst ab.',
       },
       {
         typ: 'beispielrechnung',
-        titel: 'MwSt aus dem Bruttobetrag herausrechnen',
+        titel: 'Brutto → Netto herausrechnen (ohne Denkfehler)',
         schritte: [
-          { label: 'Bruttobetrag (inkl. 19 % MwSt)', formel: '119,00 €', ergebnis: '119,00 €' },
-          { label: 'Nettobetrag = Brutto ÷ 1,19', formel: '119,00 € ÷ 1,19', ergebnis: '100,00 €' },
-          { label: 'MwSt-Betrag = Brutto − Netto', formel: '119,00 € − 100,00 €', ergebnis: '19,00 €' },
+          { label: 'Bruttobetrag (inkl. 19 % MwSt)', formel: '1.190,00 €', ergebnis: '1.190,00 €' },
+          { label: 'Falscher Weg: 19 % vom Brutto abziehen', formel: '1.190 € × 0,81', ergebnis: '963,90 € ✗' },
+          { label: 'Richtig: Netto = Brutto ÷ 1,19', formel: '1.190 € ÷ 1,19', ergebnis: '1.000,00 €' },
+          { label: 'MwSt = Brutto − Netto', formel: '1.190 € − 1.000 €', ergebnis: '190,00 €' },
         ],
-        fazit: 'Wichtig: Niemals einfach 19 % vom Brutto abziehen (119 € − 19 % = 96,39 € wäre falsch). Die 19 % beziehen sich immer auf den Nettowert, deshalb wird durch 1,19 geteilt.',
+        fazit: 'Der Denkfehler „19 % vom Brutto abziehen" liefert 963,90 € statt 1.000 € — bei dieser Rechnung 36,10 € zu wenig Netto. Die 19 % beziehen sich immer auf den Nettowert, deshalb wird durch 1,19 geteilt.',
       },
       {
-        typ: 'vergleich',
-        titel: 'Regelsatz 19 % vs. ermäßigter Satz 7 %',
-        spalteA: 'Regelsatz 19 %',
-        spalteB: 'Ermäßigt 7 %',
+        typ: 'tabelle',
+        titel: 'Pflichtangaben einer Rechnung für den Vorsteuerabzug (§ 14 Abs. 4 UStG)',
+        kopf: ['Pflichtangabe', 'Erläuterung'],
         zeilen: [
-          { kriterium: 'Rechtsgrundlage', a: '§ 12 Abs. 1 UStG', b: '§ 12 Abs. 2 UStG' },
-          { kriterium: 'Typische Güter', a: 'Elektronik, Kleidung, Möbel', b: 'Lebensmittel, Bücher, ÖPNV' },
-          { kriterium: 'Im Restaurant', a: 'Speisen vor Ort, alle Getränke', b: 'Speisen außer Haus (To-Go)' },
-          { kriterium: 'Aus 100 € netto wird', a: '119,00 € brutto', b: '107,00 € brutto' },
-          { kriterium: 'In 100 € brutto steckt', a: '15,97 € MwSt', b: '6,54 € MwSt' },
+          ['Name + Anschrift', 'von Rechnungssteller UND Empfänger, jeweils vollständig'],
+          ['Steuernummer / USt-IdNr.', 'des leistenden Unternehmers'],
+          ['Rechnungsdatum', 'Ausstellungsdatum der Rechnung'],
+          ['Rechnungsnummer', 'fortlaufend und einmalig vergeben'],
+          ['Leistungsbeschreibung', 'Menge und Art der Lieferung/Leistung'],
+          ['Leistungszeitpunkt', 'Liefer- oder Leistungsdatum bzw. -zeitraum'],
+          ['Nettobetrag', 'aufgeschlüsselt nach Steuersätzen'],
+          ['Steuersatz + Steuerbetrag', 'angewandter Satz und USt in Euro'],
         ],
-      },
-      {
-        typ: 'text',
-        titel: 'Die drei Formeln — und der häufigste Fehler',
-        html: `<p><strong>Netto → Brutto:</strong> Brutto = Netto × (1 + Satz ÷ 100). Aus 100 € netto werden bei 19 % also 119 €.</p><p><strong>Brutto → Netto:</strong> Netto = Brutto ÷ (1 + Satz ÷ 100). Aus 119 € brutto werden 100 € netto.</p><p><strong>MwSt-Betrag:</strong> MwSt = Brutto − Netto. Bei 119 € brutto sind das 19 €.</p><p>Der mit Abstand häufigste Fehler ist, die MwSt direkt vom Bruttobetrag abzuziehen. Bei kleinen Beträgen fällt der Unterschied kaum auf, bei vierstelligen Rechnungen werden daraus schnell zweistellige Eurobeträge, die in der Umsatzsteuer-Voranmeldung nicht mehr aufgehen.</p>`,
-      },
-      {
-        typ: 'checkliste',
-        titel: 'Pflichtangaben auf der Rechnung (§ 14 Abs. 4 UStG)',
-        punkte: [
-          'Vollständige Anschrift von Rechnungssteller und Empfänger',
-          'Steuernummer oder USt-Identifikationsnummer des Ausstellers',
-          'Rechnungsdatum und fortlaufende, einmalige Rechnungsnummer',
-          'Menge und Art der Leistung sowie Liefer- oder Leistungszeitraum',
-          'Nettobetrag, aufgeschlüsselt nach Steuersätzen',
-          'Angewandter Steuersatz und der MwSt-Betrag in Euro',
-          'Bei Rechnungen bis 250 € genügen reduzierte Angaben (§ 33 UStDV)',
-        ],
+        fussnote: 'Bei Kleinbetragsrechnungen bis 250 € genügen reduzierte Angaben (§ 33 UStDV). Fehlt eine Pflichtangabe, kann das Finanzamt den Vorsteuerabzug verweigern.',
       },
       {
         typ: 'infobox',
@@ -231,8 +238,8 @@ Wenn Sie als Unternehmer Waren oder Dienstleistungen einkaufen, zahlen Sie auf d
       },
       {
         typ: 'text',
-        titel: 'Vorsteuerabzug, Reverse-Charge und Gastronomie',
-        html: `<p><strong>Vorsteuerabzug:</strong> Die MwSt, die ein Unternehmen auf eigene Einkäufe zahlt (Vorsteuer), holt es sich über die Umsatzsteuer-Voranmeldung vom Finanzamt zurück — Voraussetzung ist eine ordnungsgemäße Rechnung mit gesondertem MwSt-Ausweis. Das ist einer der wichtigsten steuerlichen Vorteile für Selbstständige.</p><p><strong>Reverse-Charge (§ 13b UStG):</strong> Bei B2B-Leistungen an Unternehmen im EU-Ausland sowie bei Bauleistungen und Schrott-/Altmetalllieferungen kehrt sich die Steuerschuld um. Die Rechnung wird ohne MwSt gestellt, muss aber den Hinweis „Steuerschuldnerschaft des Leistungsempfängers“ tragen.</p><p><strong>Gastronomie:</strong> Speisen, die vor Ort verzehrt werden, unterliegen seit dem 1. Januar 2024 wieder dem Regelsatz von 19 %. Der ermäßigte Satz von 7 % gilt nur noch für Speisen außer Haus und Grundnahrungsmittel; Getränke werden ohnehin stets mit 19 % besteuert.</p>`,
+        titel: 'Vorsteuerabzug und Gastronomie-Sonderfall',
+        html: `<p><strong>Vorsteuerabzug:</strong> Die MwSt, die ein Unternehmen auf eigene Einkäufe zahlt (Vorsteuer), holt es sich über die Umsatzsteuer-Voranmeldung vom Finanzamt zurück — Voraussetzung ist eine ordnungsgemäße Rechnung mit gesondertem MwSt-Ausweis (siehe Pflichtangaben oben). Das ist einer der wichtigsten steuerlichen Vorteile für Selbstständige und Unternehmen.</p><p><strong>Gastronomie:</strong> Speisen, die vor Ort verzehrt werden, unterliegen seit dem 1. Januar 2024 wieder dem Regelsatz von 19 % (zuvor war der Satz als Corona-Hilfe auf 7 % gesenkt). Der ermäßigte Satz von 7 % gilt nur noch für Speisen außer Haus und Grundnahrungsmittel im Handel; Getränke werden im Restaurant ohnehin stets mit 19 % besteuert — auch beim Mitnehmen.</p>`,
       },
     ],
     faq: [
