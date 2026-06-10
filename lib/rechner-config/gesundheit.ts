@@ -74,23 +74,25 @@ Obwohl der BMI weltweit verwendet wird, hat er einige bekannte Schwächen:
 - **Ethnische Unterschiede:** Studien zeigen, dass verschiedene ethnische Gruppen unterschiedliche Gesundheitsrisiken bei gleichen BMI-Werten haben.
 
 Trotz dieser Einschränkungen bleibt der BMI ein nützliches Screening-Werkzeug für die breite Bevölkerung. Für eine individuelle Gesundheitsbewertung sollte er aber immer durch weitere Untersuchungen ergänzt werden, etwa durch die Messung des Körperfettanteils, des Taillenumfangs oder Blutuntersuchungen.`,
-    // W19-Tranche-1: modulare Content-Bausteine. Sensitiv (Gesundheit): WHO-Klassen rein
-    // deskriptiv, keine Diät-/Kalorienzahlen, Arzt-Verweis. Kein erfundenes „Verteilungs"-
-    // Diagramm (Leitplanke: nur Bausteine mit echtem Mehrwert). erklaerung bleibt Fallback.
+    // W19-Tranche-1-Nacharbeit: Leitformat „Risiko- & Kontext-Seite" — Diagramm (BMI-Verteilung
+    // DE, Quelle Destatis Mikrozensus 2025) + Risiko-Kontext. SENSITIV: WHO-Klassen rein deskriptiv,
+    // KEINE Diät-/Kalorien-/Gewichtsziel-Zahlen, keine Wertung, Arzt-Verweis. erklaerung bleibt Fallback.
     contentBloecke: [
       {
         typ: 'text',
         titel: 'Was ist der BMI?',
-        html: `<p>Der Body Mass Index (BMI) ist eine Maßzahl für das Verhältnis von Körpergewicht zu Körpergröße. Entwickelt im 19. Jahrhundert vom belgischen Mathematiker Adolphe Quetelet, ist er heute das weltweit gängigste Screening-Werkzeug, um Gewicht grob einzuordnen.</p><p>Die Weltgesundheitsorganisation (WHO) empfiehlt den BMI als erste Orientierung. Wichtig: Er ist ein <strong>vereinfachtes Maß</strong> — er unterscheidet nicht zwischen Muskel- und Fettmasse und sagt nichts über die Fettverteilung, den Knochenbau oder die ethnische Herkunft aus.</p>`,
+        html: `<p>Der Body Mass Index (BMI) ist eine Maßzahl für das Verhältnis von Körpergewicht zu Körpergröße. Entwickelt im 19. Jahrhundert vom belgischen Mathematiker Adolphe Quetelet, ist er heute das weltweit gängigste Screening-Werkzeug, um Gewicht grob einzuordnen.</p><p>Die Weltgesundheitsorganisation (WHO) empfiehlt ihn als erste Orientierung. Wichtig: Er ist ein <strong>vereinfachtes Maß</strong> — er unterscheidet nicht zwischen Muskel- und Fettmasse und sagt nichts über die Fettverteilung, den Knochenbau oder die ethnische Herkunft aus.</p>`,
       },
       {
-        typ: 'beispielrechnung',
-        titel: 'BMI berechnen — Schritt für Schritt',
-        schritte: [
-          { label: 'Körpergröße quadrieren', formel: '1,80 m × 1,80 m', ergebnis: '3,24' },
-          { label: 'Gewicht ÷ Größe²', formel: '80 kg ÷ 3,24', ergebnis: '24,69' },
+        typ: 'diagramm',
+        variante: 'balken',
+        titel: 'BMI-Verteilung der Erwachsenen in Deutschland',
+        daten: [
+          { label: 'Normal-/Untergewicht (< 25)', wert: 47, einheit: '%' },
+          { label: 'Übergewicht (25–30)', wert: 35, einheit: '%' },
+          { label: 'Adipositas (≥ 30)', wert: 18, einheit: '%' },
         ],
-        fazit: 'Ein BMI von 24,69 liegt im WHO-Bereich Normalgewicht (18,5–24,9). Wichtig: die Größe in Metern einsetzen — mit 180 statt 1,80 entsteht ein unsinniger Wert.',
+        fussnote: 'Erwachsene ab 18 Jahren. Quelle: Statistisches Bundesamt (Destatis), Mikrozensus 2025 — 53,4 % mit BMI ≥ 25, davon 17,9 % adipös. Reine Beobachtungsstatistik, keine Bewertung.',
       },
       {
         typ: 'tabelle',
@@ -107,9 +109,13 @@ Trotz dieser Einschränkungen bleibt der BMI ein nützliches Screening-Werkzeug 
         fussnote: 'Gilt für Erwachsene. Für Kinder und Jugendliche unter 18 gelten altersabhängige Perzentilen (Kromeyer-Hauschild), nicht diese Kategorien.',
       },
       {
-        typ: 'text',
-        titel: 'Grenzen des BMI',
-        html: `<p>Der BMI hat bekannte Schwächen, die man bei der Einordnung kennen sollte: Er <strong>unterscheidet nicht zwischen Muskel- und Fettgewebe</strong> — durchtrainierte Personen können einen hohen BMI bei niedrigem Körperfett haben. Er berücksichtigt die <strong>Fettverteilung</strong> nicht, obwohl Bauchfett gesundheitlich relevanter ist als Fett an Hüfte und Oberschenkeln.</p><p>Auch <strong>Alter, Geschlecht und ethnische Herkunft</strong> spielen eine Rolle: Frauen haben von Natur aus einen höheren Körperfettanteil, im Alter verschiebt sich die Körperzusammensetzung, und verschiedene Bevölkerungsgruppen zeigen bei gleichem BMI unterschiedliche Risiken. Der BMI bleibt ein Screening-Wert — keine Diagnose.</p>`,
+        typ: 'beispielrechnung',
+        titel: 'BMI berechnen — Schritt für Schritt',
+        schritte: [
+          { label: 'Körpergröße quadrieren', formel: '1,80 m × 1,80 m', ergebnis: '3,24' },
+          { label: 'Gewicht ÷ Größe²', formel: '80 kg ÷ 3,24', ergebnis: '24,69' },
+        ],
+        fazit: 'Ein BMI von 24,69 liegt im WHO-Bereich Normalgewicht (18,5–24,9). Wichtig: die Größe in Metern einsetzen — mit 180 statt 1,80 entsteht ein unsinniger Wert.',
       },
       {
         typ: 'vergleich',
@@ -119,10 +125,16 @@ Trotz dieser Einschränkungen bleibt der BMI ein nützliches Screening-Werkzeug 
         zeilen: [
           { kriterium: 'Was wird gemessen', a: 'Gewicht im Verhältnis zur Größe', b: 'Menge des Bauchfetts' },
           { kriterium: 'Aussage zur Fettverteilung', a: 'keine', b: 'ja (viszerales Bauchfett)' },
+          { kriterium: 'Bei viel Muskelmasse', a: 'kann das Risiko überschätzen', b: 'misst nur Bauchfett, unverzerrt' },
           { kriterium: 'Orientierung Männer', a: '18,5 – 24,9', b: 'unter 94 cm (ab 102 cm hoch)' },
           { kriterium: 'Orientierung Frauen', a: '18,5 – 24,9', b: 'unter 80 cm (ab 88 cm hoch)' },
           { kriterium: 'Beste Nutzung', a: 'schnelle Gesamteinschätzung', b: 'verfeinert das Bild' },
         ],
+      },
+      {
+        typ: 'text',
+        titel: 'Grenzen des BMI',
+        html: `<p>Der BMI hat bekannte Schwächen, die man bei der Einordnung kennen sollte: Er <strong>unterscheidet nicht zwischen Muskel- und Fettgewebe</strong> — durchtrainierte Personen können einen hohen BMI bei niedrigem Körperfett haben. Er berücksichtigt die <strong>Fettverteilung</strong> nicht, obwohl Bauchfett gesundheitlich relevanter ist als Fett an Hüfte und Oberschenkeln.</p><p>Auch <strong>Alter, Geschlecht und ethnische Herkunft</strong> spielen eine Rolle: Frauen haben von Natur aus einen höheren Körperfettanteil, im Alter verschiebt sich die Körperzusammensetzung, und für einige Bevölkerungsgruppen empfiehlt die WHO niedrigere Schwellenwerte, weil gesundheitliche Risiken dort bereits bei niedrigerem BMI auftreten. Der BMI bleibt ein Screening-Wert — keine Diagnose.</p>`,
       },
       {
         typ: 'checkliste',
