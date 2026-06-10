@@ -86,13 +86,26 @@ Spritkosten sind einer der größten variablen Kostenposten beim Autofahren — 
 - **Dachbox-, Fahrradträger- und Anhänger-Mehrverbrauch ignoriert.** Eine Dachbox erhöht den Verbrauch je nach Geschwindigkeit um 1–2 L/100km (10–20 % Mehrverbrauch), ein Heckträger mit Fahrrädern um 0,5–1,5 L/100km, ein Wohnwagen-Anhänger oft um 30–50 %. Wer für die Urlaubsfahrt mit Dachbox den normalen Verbrauch ansetzt, kalkuliert das Sprit-Budget rund 100–200 € zu niedrig.
 - **Stadt-, Land- und Autobahn-Verbrauch pauschalisiert.** Stadtfahrten verbrauchen meist 30–50 % mehr als Autobahn-Fahrten bei 110–120 km/h, ab 130 km/h kehrt sich das wieder um (Luftwiderstand). Wer einen pauschalen Mischwert nutzt, kommt bei einer reinen Autobahnreise aufs falsche Ergebnis. Faustregel: für reine Autobahnstrecken Bordcomputer-Wert „Autobahn" verwenden, für reine Stadtstrecken den höheren Stadtverbrauch.
 - **Kaltstart-Effekt bei Kurzstrecken unterschätzt.** Auf den ersten 4–5 km nach einem Kaltstart verbraucht ein Verbrenner 30–80 % mehr als im warmen Betriebszustand. Wer nur Kurzstrecken fährt (Schule, Einkauf, kurze Fahrten zur Arbeit), liegt im Jahresverbrauch oft 1–2 L/100km über dem Bordcomputer-Wert, der den Anteil des Kaltlaufs nicht prominent ausweist.`,
-    // W19-Pilot: Modulare Content-Bausteine. Werte aus SPRITPREISE_REFERENZ
-    // (ADAC-Bundesschnitt) zur Build-Zeit eingesetzt. erklaerung bleibt als Fallback.
+    // W19-Pilot → Goldstandard (~1.500 W): Modulare Content-Bausteine. Benzin/Diesel-Werte
+    // aus SPRITPREISE_REFERENZ (ADAC-Bundesschnitt, Stand 08.06.2026) zur Build-Zeit eingesetzt.
+    // Strom-Vergleich ist eine ANNAHME (Haushaltsstrom ~0,35 €/kWh, ~18 kWh/100km, Stand 06/2026)
+    // — im Text als Annahme gekennzeichnet, reine Energiekosten ohne Anschaffung/Steuer/Wartung.
+    // erklaerung bleibt als Fallback.
     contentBloecke: [
       {
         typ: 'text',
         titel: 'Was kostet eine Fahrt wirklich?',
-        html: `<p>Der Spritkostenrechner zeigt in Sekunden, was eine Strecke tatsächlich kostet — egal ob Urlaubsreise, täglicher Arbeitsweg oder Reisekostenabrechnung. Sie geben Entfernung, Durchschnittsverbrauch und den aktuellen Spritpreis ein, optional erweitert auf Hin- und Rückfahrt.</p><p>Sofort erhalten Sie die Gesamtkosten, den Verbrauch in Litern und die Kosten pro Kilometer. Der größte Hebel für ein realistisches Ergebnis ist Ihr <strong>tatsächlicher</strong> Verbrauch: Die Herstellerangaben nach WLTP liegen in der Praxis meist 15–25 % darunter. Wer den Bordcomputer-Langzeitwert oder zwei bis drei eigene Tankfüllungen mittelt, rechnet deutlich genauer.</p>`,
+        html: `<p>Der Spritkostenrechner zeigt in Sekunden, was eine Strecke tatsächlich kostet — egal ob Urlaubsreise, täglicher Arbeitsweg oder Reisekostenabrechnung. Sie geben Entfernung, Durchschnittsverbrauch und den aktuellen Spritpreis ein, optional erweitert auf Hin- und Rückfahrt.</p><p>Sofort erhalten Sie die Gesamtkosten, den Verbrauch in Litern und die Kosten pro Kilometer. Der größte Hebel für ein realistisches Ergebnis ist Ihr <strong>tatsächlicher</strong> Verbrauch: Die Herstellerangaben nach WLTP liegen in der Praxis meist 15–25 % darunter. Wer den Bordcomputer-Langzeitwert oder zwei bis drei eigene Tankfüllungen mittelt, rechnet deutlich genauer.</p><p>Warum die Herstellerangabe so oft danebenliegt, hat mehrere Gründe. Der WLTP-Normzyklus wird unter standardisierten Laborbedingungen ermittelt; reale Fahrten weichen davon ab. <strong>Stadtverkehr</strong> mit ständigem Anfahren treibt den Verbrauch nach oben, schnelle <strong>Autobahnfahrt</strong> ebenfalls, während gleichmäßige Landstraßenfahrt am sparsamsten ist. Dazu kommen <strong>Beladung</strong>, Dachträger und die <strong>Jahreszeit</strong>: Im Winter erhöhen kalter Motor, Sitzheizung und höherer Rollwiderstand den Verbrauch spürbar. Der eigene Bordcomputer-Langzeitwert bildet all das bereits ab und ist deshalb die beste Eingabe für den Rechner.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Was den Spritverbrauch in der Praxis beeinflusst',
+        html: `<p>Der Verbrauch ist keine feste Zahl, sondern hängt von vielen Faktoren ab — die meisten davon kann man beeinflussen.</p><p><strong>Fahrweise:</strong> Gleichmäßiges, vorausschauendes Fahren spart gegenüber aggressivem Beschleunigen und Bremsen leicht 10 bis 20 %. <strong>Kurzstrecke und Kaltstart:</strong> Auf den ersten Kilometern nach einem Kaltstart verbraucht der Motor deutlich mehr — bei reinen Kurzstrecken kann der Mehrverbrauch 30 bis 80 % betragen. <strong>Reifendruck:</strong> Zu niedriger Druck erhöht den Rollwiderstand und den Verbrauch um bis zu 5 %.</p><p><strong>Klimaanlage und Heizung:</strong> Die Klimaanlage kostet je nach Außentemperatur 0,5 bis 1,5 L/100km. <strong>Dachbox und Ballast:</strong> Eine Dachbox erhöht den Luftwiderstand und schlägt mit 1 bis 2 L/100km zu Buche; jedes zusätzliche Gewicht kostet ebenfalls Sprit. <strong>Geschwindigkeit:</strong> Der Luftwiderstand steigt mit dem Quadrat der Geschwindigkeit — wer auf der Autobahn von 130 auf 160 km/h beschleunigt, erhöht den Verbrauch überproportional. Schon 10 bis 20 km/h weniger machen sich an der Tankstelle bemerkbar.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Die Formel — und worauf der Rechner basiert',
+        html: `<p>Hinter dem Rechner steht eine einfache Formel: Spritkosten = (Strecke ÷ 100) × Verbrauch × Preis. Die Strecke wird durch 100 geteilt, weil der Verbrauch auf 100 Kilometer bezogen ist; das Ergebnis mal Verbrauch ergibt die getankten Liter, mal Literpreis die Kosten.</p><p>Drei Eingaben bestimmen also das Ergebnis — und jede sollte realistisch gewählt sein. Bei der <strong>Strecke</strong> lohnt der Blick auf die tatsächlich gefahrene Distanz statt der Luftlinie; Umwege, Staus und Parkplatzsuche kommen in der Praxis hinzu. Über den Schalter für <strong>Hin- und Rückfahrt</strong> verdoppelt der Rechner die Strecke automatisch.</p><p>Besonders nützlich ist der ausgewiesene Wert <strong>Kosten pro Kilometer</strong>. Er macht Fahrten unterschiedlicher Länge vergleichbar und ist die Basis für Reisekostenabrechnungen oder den Vergleich mit Bahn, Mietwagen oder Carsharing. Wer regelmäßig dienstlich fährt, kann so schnell prüfen, ob die übliche Kilometerpauschale die realen Kosten überhaupt deckt.</p>`,
       },
       {
         typ: 'statistik',
@@ -112,6 +125,16 @@ Spritkosten sind einer der größten variablen Kostenposten beim Autofahren — 
           { label: 'mal Dieselpreis', formel: `40,25 L × ${eur(SPRITPREISE_REFERENZ.diesel, 3)} €/L`, ergebnis: `${eur(5.75 * 7.0 * SPRITPREISE_REFERENZ.diesel)} €` },
         ],
         fazit: `Einfache Fahrt rund ${eur(5.75 * 7.0 * SPRITPREISE_REFERENZ.diesel, 0)} €, hin und zurück etwa ${eur(5.75 * 7.0 * SPRITPREISE_REFERENZ.diesel * 2, 0)} €. Kosten pro Kilometer: ${eur((5.75 * 7.0 * SPRITPREISE_REFERENZ.diesel) / 575)} €.`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: Jährliche Pendlerkosten',
+        schritte: [
+          { label: 'Jahresfahrleistung (30 km × 2 × 220 Tage)', formel: '30 × 2 × 220', ergebnis: '13.200 km' },
+          { label: 'Spritverbrauch (7 L/100km)', formel: '132 × 7 L', ergebnis: '924 L' },
+          { label: 'mal Super E10', formel: `924 L × ${eur(SPRITPREISE_REFERENZ.superE10, 3)} €/L`, ergebnis: `${eur(132 * 7 * SPRITPREISE_REFERENZ.superE10, 0)} €` },
+        ],
+        fazit: `Rund ${eur(132 * 7 * SPRITPREISE_REFERENZ.superE10, 0)} € Spritkosten pro Jahr allein fürs Pendeln (30 km einfache Strecke, Benziner). Die Entfernungspauschale — 2026 einheitlich 0,38 €/km ab dem 1. Kilometer für die einfache Strecke — federt einen Teil davon steuerlich ab; die Details klärt die Steuererklärung.`,
       },
       {
         typ: 'tabelle',
@@ -139,6 +162,16 @@ Spritkosten sind einer der größten variablen Kostenposten beim Autofahren — 
         fussnote: `Annahme: 1.000 km/Monat, Super E10 ${eur(SPRITPREISE_REFERENZ.superE10, 3)} €/L (ADAC, Stand ${STAND_DE}). Reale Kosten variieren mit Fahrweise und Tagespreis.`,
       },
       {
+        typ: 'text',
+        titel: 'Benzin, Diesel oder Elektro — die Kosten pro 100 km',
+        html: `<p>Wie viel kostet die Energie für 100 Kilometer — unabhängig von Anschaffung, Steuer und Wartung? Ein grober Vergleich auf Basis der aktuellen Preise zeigt die Größenordnung.</p><p>Ein <strong>Benziner</strong> mit 7 Litern Super E10 auf 100 km kommt bei ${eur(SPRITPREISE_REFERENZ.superE10, 3)} €/L auf rund ${eur(7 * SPRITPREISE_REFERENZ.superE10)} € pro 100 km. Ein <strong>Diesel</strong> mit 6 Litern auf 100 km liegt bei ${eur(SPRITPREISE_REFERENZ.diesel, 3)} €/L bei etwa ${eur(6 * SPRITPREISE_REFERENZ.diesel)} €. Ein <strong>Elektroauto</strong> mit einem angenommenen Verbrauch von 18 kWh/100 km kostet bei einem Haushaltsstrompreis von rund 0,35 €/kWh etwa 6,30 € pro 100 km — wer zu Hause mit einem günstigeren Tarif oder eigenem Solarstrom lädt, fährt noch günstiger, beim teuren Schnellladen unterwegs dagegen deutlich teurer.</p><p>Wichtig zur Einordnung: Das ist ein <strong>reiner Energiekosten-Vergleich</strong>. Anschaffungspreis, Wertverlust, Kfz-Steuer, Versicherung und Wartung sind hier nicht enthalten und können das Gesamtbild stark verschieben. Der Vergleich ersetzt also keine Kaufentscheidung, zeigt aber den laufenden Energiekosten-Unterschied bei heutigen Preisen.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Spritkosten über das Jahr — die größere Rechnung',
+        html: `<p>Eine einzelne Fahrt wirkt überschaubar — über ein ganzes Jahr summieren sich die Spritkosten aber zu einem der größten variablen Posten beim Autofahren. Bei einer durchschnittlichen Fahrleistung von rund 15.000 km im Jahr und 7 Litern Super E10 auf 100 km kommt ein Benziner bei ${eur(SPRITPREISE_REFERENZ.superE10, 3)} €/L auf etwa ${eur(150 * 7 * SPRITPREISE_REFERENZ.superE10, 0)} € pro Jahr. Ein vergleichbarer Diesel mit 6 Litern liegt bei ${eur(SPRITPREISE_REFERENZ.diesel, 3)} €/L bei rund ${eur(150 * 6 * SPRITPREISE_REFERENZ.diesel, 0)} €.</p><p>Diese Jahresbetrachtung macht klar, warum schon kleine Unterschiede ins Gewicht fallen: Ein Liter Mehrverbrauch auf 100 km bedeutet bei 15.000 km rund 150 zusätzliche Liter im Jahr — beim aktuellen Preis also gut ${eur(150 * SPRITPREISE_REFERENZ.superE10, 0)} € extra. Wer Fahrzeuge vergleicht oder über einen Wechsel nachdenkt, sollte deshalb nicht die einzelne Tankfüllung, sondern die Jahreskosten betrachten.</p><p>Der oft diskutierte Diesel-Vorteil entsteht genau hier: Der niedrigere Verbrauch und meist günstigere Literpreis machen sich vor allem bei hoher Fahrleistung bemerkbar. Höhere Anschaffung, Kfz-Steuer und Wartung können den Vorteil bei Wenigfahrern allerdings aufzehren — die reine Spritrechnung ist nur ein Teil des Gesamtbildes.</p><p>Für einen vollständigen Kostenüberblick gehört zur Spritrechnung deshalb der Blick auf die weiteren Posten: Wertverlust, Versicherung, Kfz-Steuer, Wartung und Reparaturen machen über das Jahr oft mehr aus als der Sprit selbst. Der Spritkostenrechner deckt den variabelsten und am leichtesten beeinflussbaren Teil ab — die übrigen laufenden Kosten lassen sich mit einem Autokosten-Rechner ergänzen.</p>`,
+      },
+      {
         typ: 'vergleich',
         titel: 'Kurzstrecke vs. Langstrecke',
         spalteA: 'Kurzstrecke (< 5 km)',
@@ -149,6 +182,16 @@ Spritkosten sind einer der größten variablen Kostenposten beim Autofahren — 
           { kriterium: 'Kaltstart-Anteil', a: 'prägt die gesamte Fahrt', b: 'fällt kaum ins Gewicht' },
           { kriterium: 'Empfehlung', a: 'Rad oder ÖPNV oft günstiger', b: 'Pkw meist wirtschaftlich' },
         ],
+      },
+      {
+        typ: 'text',
+        titel: 'Spritpreise verstehen: Tagesschwankung & Zusammensetzung',
+        html: `<p>Wer aufmerksam tankt, bemerkt: Der Preis an derselben Tankstelle schwankt im Tagesverlauf erheblich. Typischerweise ist Sprit <strong>morgens am teuersten</strong> und <strong>abends zwischen 17 und 19 Uhr am günstigsten</strong> — der Unterschied kann bis zu rund 13 Cent pro Liter betragen (ADAC). Über ein Jahr summiert sich das bei regelmäßigem Tanken zu einem dreistelligen Betrag.</p><p>Auch die <strong>Zusammensetzung</strong> des Literpreises ist aufschlussreich. Nur ein Teil entfällt auf den eigentlichen Produktpreis für den Kraftstoff. Hinzu kommen feste Steuern und Abgaben: die Energiesteuer, der CO₂-Preis und obendrauf die Mehrwertsteuer von 19 %, die auch auf die anderen Bestandteile erhoben wird. Steuern und Abgaben machen damit einen erheblichen Anteil des Preises an der Zapfsäule aus.</p><p>Eine Besonderheit gilt 2026: Seit dem 1. Mai 2026 senkt eine Energiesteuersenkung den Literpreis um rund 17 Cent. Diese Entlastung ist in den hier genannten ADAC-Referenzwerten bereits enthalten. Tagesaktuelle Preise zeigen Tank-Apps wie Tankerkönig oder der ADAC-Spritpreismonitor.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Tanken an der Autobahn und im Ausland',
+        html: `<p>Wo man tankt, beeinflusst den Preis fast so stark wie wann. <strong>Autobahn-Tankstellen</strong> sind im Schnitt deutlich teurer als Tankstellen abseits der Autobahn — Aufschläge von 15 bis 25 Cent pro Liter sind keine Seltenheit. Wer es einrichten kann, tankt günstiger an einer Abfahrt im Ort statt direkt an der Raststätte.</p><p>Auch <strong>im Ausland</strong> unterscheiden sich die Preise erheblich, weil Steuern und Abgaben von Land zu Land variieren. In manchen Nachbarländern ist Sprit spürbar günstiger, in anderen teurer als in Deutschland. Für Grenzregionen und auf Urlaubsfahrten kann sich der Blick auf die dortigen Preise lohnen — viele Tank-Apps zeigen auch ausländische Tankstellen an.</p><p>In jedem Fall gilt: Der größte Hebel beim Tankpreis ist nicht die Marke, sondern Zeitpunkt und Standort. Ein kurzer Blick in eine Spritpreis-App vor dem Tanken spart über das Jahr oft mehr als jeder einzelne Spar-Tipp am Fahrstil.</p>`,
       },
       {
         typ: 'checkliste',
