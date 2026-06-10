@@ -417,7 +417,7 @@ Wichtig zu beachten: In der Praxis mindern die Abgeltungssteuer (25% plus Solida
       },
       {
         typ: 'diagramm',
-        variante: 'balken',
+        variante: 'linie',
         titel: 'So wächst Ihr Kapital über die Zeit',
         daten: [
           { label: 'nach 5 Jahren', wert: Math.round(10000 * Math.pow(1.05, 5)), einheit: '€' },
@@ -435,7 +435,7 @@ Wichtig zu beachten: In der Praxis mindern die Abgeltungssteuer (25% plus Solida
       },
       {
         typ: 'diagramm',
-        variante: 'balken',
+        variante: 'kreis',
         titel: 'Eingezahlt vs. Zinsertrag nach 30 Jahren',
         daten: [
           { label: 'Eingezahlt', wert: 10000 + 200 * 12 * 30, einheit: '€' },
