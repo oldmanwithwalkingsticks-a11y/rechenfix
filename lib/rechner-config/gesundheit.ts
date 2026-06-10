@@ -116,7 +116,7 @@ Trotz dieser Einschränkungen bleibt der BMI ein nützliches Screening-Werkzeug 
       },
       {
         typ: 'diagramm',
-        variante: 'balken',
+        variante: 'kreis',
         titel: 'BMI-Verteilung der Erwachsenen in Deutschland',
         daten: [
           { label: 'Normal-/Untergewicht (< 25)', wert: 47, einheit: '%' },
