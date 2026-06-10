@@ -260,49 +260,53 @@ Drei kalendarische Eigenheiten erklären die meisten „seltsamen" Tagerechnungs
 - **Monatslängen und die Knöchel-Eselsbrücke.** Die deutsche Monatslängen-Regel ist 31-30-31-30-31-30-31-31-30-31-30-31 — mit Ausnahme des Februar (28/29). Eselsbrücke: linke Hand zur Faust ballen, vom kleinen Finger beginnend abwechselnd Knöchel (31 Tage) und Vertiefung (30 Tage) abzählen — Januar = Knöchel, Februar = Vertiefung (28/29), März = Knöchel, … Juli = Knöchel (rechte Faust dazu), August = wieder Knöchel beginnend, … Dezember = Knöchel. Diese Methode merkt sich an einem Nachmittag und hält ein Leben lang.
 - **Zeitumstellung in Deutschland.** Sommerzeit beginnt am letzten Sonntag im März um 2:00 Uhr (Uhren springen auf 3:00, der Tag hat 23 Stunden) und endet am letzten Sonntag im Oktober um 3:00 Uhr (Uhren zurück auf 2:00, der Tag hat 25 Stunden). Für die reine Tageszählung egal — ein Tag bleibt ein Tag. Für Stunden-/Minuten-Genauigkeit über die Übergänge hinweg muss die Verschiebung manuell berücksichtigt werden. Die EU hat die Abschaffung 2019 beschlossen, ein Inkrafttreten steht aber weiterhin aus.
 - **Wochentag-Wiederholungen.** Ein Datum fällt nach 6, 11 oder 28 Jahren wieder auf denselben Wochentag — abhängig davon, wie viele Schaltjahre dazwischen liegen. Faustregel für „normale" Verläufe: nach 11 Jahren ist Ihr Geburtstag mit hoher Wahrscheinlichkeit wieder am gleichen Wochentag. Die 28-Jahre-Regel gilt strikt nur, wenn beide Daten nach dem Schalt-Ausnahmejahr-Pattern (1900/2100/…) liegen — innerhalb eines Jahrhunderts trifft sie meist exakt zu.`,
-    // W19-Tranche-1: modulare Content-Bausteine. Kalendarische Fakten (§ 187/188 BGB,
-    // Gregorianische Schaltjahr-Regel, 9 bundeseinheitliche Feiertage) sind stabil. erklaerung bleibt Fallback.
+    // W19-Tranche-1-Nacharbeit: Leitformat „Anwendungsfall-Sammlung" — mehrere Beispielrechnungen
+    // dominant, KEINE großen Datentabellen, KEIN Diagramm. Kalendarische Fakten (§ 187 BGB, Naegele
+    // 280 Tage) stabil; Datums-Mathematik nachgerechnet. erklaerung bleibt Fallback.
     contentBloecke: [
       {
         typ: 'text',
-        titel: 'Tage zwischen zwei Daten berechnen',
-        html: `<p>Der Tagerechner ermittelt die exakte Anzahl der Tage zwischen zwei Daten — und rechnet das Ergebnis zusätzlich in Wochen, Monate, Jahre und Stunden um. Auch Arbeitstage (Montag bis Freitag) und Wochenendtage werden getrennt ausgewiesen.</p><p>Standardmäßig wird der <strong>Starttag nicht mitgezählt</strong> — das entspricht der üblichen Fristberechnung. Über einen Toggle lässt sich umstellen, dass beide Tage zählen, etwa um die Dauer eines Urlaubs zu bestimmen. Schaltjahre und unterschiedliche Monatslängen berücksichtigt der Rechner automatisch.</p>`,
+        titel: 'Datumsdifferenz — worauf es ankommt',
+        html: `<p>Der Tagerechner ermittelt die exakte Anzahl der Tage zwischen zwei Daten und rechnet sie in Wochen, Monate und Werktage um. In der Praxis geht es dabei fast immer um konkrete Stichtage: Wann endet die Kündigungsfrist? Bis wann muss die Rechnung bezahlt sein? Wie viele Werktage umfasst der Urlaub?</p><p>Entscheidend ist eine Frage: Zählt der Starttag mit? Bei <strong>Fristen</strong> wird er üblicherweise nicht mitgezählt (§ 187 Abs. 1 BGB), bei einer <strong>Dauer</strong> wie Urlaub dagegen schon. Die folgenden Fälle zeigen das jeweils konkret durchgerechnet.</p>`,
       },
       {
         typ: 'beispielrechnung',
-        titel: 'Beispiel: vom 01.01.2026 bis 31.12.2026',
+        titel: 'Fall 1: Kündigungsfrist (3 Monate zum Monatsende)',
         schritte: [
-          { label: 'Differenz = Enddatum − Startdatum', formel: '31.12.2026 − 01.01.2026', ergebnis: '364 Tage' },
-          { label: 'Mit Start + Endtag (+1)', formel: '364 + 1', ergebnis: '365 Tage' },
-          { label: 'In Wochen', formel: '364 ÷ 7', ergebnis: '52 Wochen' },
+          { label: 'Kündigung geht zu am', formel: '15.03.2026', ergebnis: '15.03.2026' },
+          { label: '+ 3 Monate', formel: '15.03. + 3 Monate', ergebnis: '15.06.2026' },
+          { label: 'zum nächsten Monatsende', formel: 'Ende Juni', ergebnis: '30.06.2026' },
         ],
-        fazit: 'Ohne Mitzählung sind es 364 Tage (Fristberechnung nach § 187 Abs. 1 BGB). Für eine Dauer wie Urlaub oder Veranstaltung den Toggle aktivieren — dann zählen beide Tage: 365 Tage.',
+        fazit: 'Bei einer Frist „3 Monate zum Monatsende" endet das Arbeitsverhältnis nicht am 15.06., sondern am nächsten Monatsende danach — dem 30.06.2026.',
       },
       {
-        typ: 'tabelle',
-        titel: 'Kalendertage vs. Arbeitstage pro Jahr',
-        kopf: ['Größe', 'Pro Jahr'],
-        zeilen: [
-          ['Kalendertage', '365 (366 im Schaltjahr)'],
-          ['Wochenendtage (Sa + So)', '104'],
-          ['Arbeitstage (Mo–Fr)', 'rund 261'],
-          ['abzüglich Feiertage', 'rund 248–252'],
+        typ: 'beispielrechnung',
+        titel: 'Fall 2: Zahlungsziel einer Rechnung',
+        schritte: [
+          { label: 'Rechnungsdatum', formel: '10.06.2026', ergebnis: '10.06.2026' },
+          { label: '+ 30 Tage (netto)', formel: '10.06. + 30 Tage', ergebnis: '10.07.2026' },
+          { label: 'Alternativ + 14 Tage', formel: '10.06. + 14 Tage', ergebnis: '24.06.2026' },
         ],
-        fussnote: 'Der Rechner zählt Arbeitstage als Mo–Fr ohne Feiertage (diese sind bundeslandabhängig) — die regionalen Feiertage daher manuell abziehen.',
+        fazit: 'Ein Zahlungsziel „30 Tage netto" ab Rechnungsdatum ist am 10.07.2026 fällig. Als Fristbeginn gilt meist das Rechnungs- bzw. Zugangsdatum.',
       },
       {
-        typ: 'statistik',
-        titel: 'Gesetzliche Feiertage in Deutschland',
-        werte: [
-          { label: 'Bundesweit einheitlich', wert: '9', hinweis: 'u. a. Neujahr, 1. Mai, 3. Oktober, beide Weihnachtsfeiertage' },
-          { label: 'Wenigste (z. B. Hamburg)', wert: '9–10', hinweis: 'norddeutsche Bundesländer' },
-          { label: 'Meiste (Bayern)', wert: 'bis 13', hinweis: 'inklusive regionaler Feiertage' },
+        typ: 'beispielrechnung',
+        titel: 'Fall 3: Urlaubstage — Werktage vs. Kalendertage',
+        schritte: [
+          { label: 'Zeitraum 13.07. bis 24.07.2026', formel: '24.07. − 13.07. + 1', ergebnis: '12 Kalendertage' },
+          { label: 'davon Wochenendtage (Sa + So)', formel: '1 Wochenende', ergebnis: '2 Tage' },
+          { label: 'Werktage (Mo–Fr)', formel: '12 − 2', ergebnis: '10 Werktage' },
         ],
+        fazit: 'Für den Urlaubsantrag zählen meist die 10 Werktage, nicht die 12 Kalendertage. Gesetzliche Feiertage im Zeitraum sind zusätzlich abzuziehen.',
       },
       {
-        typ: 'text',
-        titel: 'Schaltjahre, Monatslängen & Zeitumstellung',
-        html: `<p><strong>Schaltjahr-Regel:</strong> Ein Jahr ist ein Schaltjahr, wenn es durch 4 teilbar ist — Ausnahme: durch 100 teilbar = keins, außer zusätzlich durch 400 teilbar (dann doch). 2024 und 2028 sind Schaltjahre, 2026 und 2027 nicht; 2000 war eins, 1900 und 2100 sind keine. Die Regel stammt aus dem Gregorianischen Kalender (1582) und korrigiert den Drift gegen das Sonnenjahr (365,2422 Tage).</p><p><strong>Monatslängen:</strong> 31-30-Wechsel mit Ausnahme des Februar (28 bzw. 29 Tage). „Ein Monat ab dem 31.01." endet am 28.02., nicht am 03.03. — bei Monatsfristen Tage als Basis nehmen.</p><p><strong>Zeitumstellung:</strong> Für reine Tagezählung irrelevant (ein Tag bleibt ein Tag). Nur bei stundengenauer Umrechnung über den letzten Märzsonntag (−1 Std.) bzw. Oktobersonntag (+1 Std.) muss die Stunde manuell berücksichtigt werden.</p>`,
+        typ: 'beispielrechnung',
+        titel: 'Fall 4: Errechneter Geburtstermin (Naegele-Regel)',
+        schritte: [
+          { label: '1. Tag der letzten Periode', formel: '01.03.2026', ergebnis: '01.03.2026' },
+          { label: '+ 280 Tage (40 Wochen)', formel: '01.03. + 280 Tage', ergebnis: '06.12.2026' },
+        ],
+        fazit: 'Die Naegele-Regel rechnet 280 Tage ab dem ersten Tag der letzten Periode. Das ist ein statistischer Richtwert — nur wenige Geburten erfolgen exakt am errechneten Termin.',
       },
       {
         typ: 'checkliste',
@@ -319,8 +323,8 @@ Drei kalendarische Eigenheiten erklären die meisten „seltsamen" Tagerechnungs
       {
         typ: 'infobox',
         variante: 'hinweis',
-        titel: 'Frist oder Dauer? Der Mitzähl-Toggle',
-        text: 'Bei juristischen Fristen wird der Starttag in der Regel nicht mitgezählt (§ 187 Abs. 1 BGB) — eine 14-Tage-Frist ab Montag endet am übernächsten Montag. Bei einer Dauer wie Urlaub oder Veranstaltung zählen dagegen beide Tage. Faustregel: Frist = ohne Starttag, Dauer = mit beiden Tagen. Der Toggle „Start + Endtag mitzählen" stellt genau das um.',
+        titel: 'Werktage, Kalendertage und Schaltjahre',
+        text: 'Warum weicht ein Ergebnis manchmal ab? Erstens: Werktage (Mo–Fr) sind weniger als Kalendertage — gesetzliche Feiertage zählt der Rechner nicht ab, weil sie bundeslandabhängig sind (je nach Land 9 bis 13). Zweitens: Schaltjahre — 2024 und 2028 haben 366 Tage, 2026 und 2027 nur 365 (Regel: durch 4 teilbar, außer durch 100 und nicht durch 400). Drittens: Bei Fristen zählt der Starttag nicht mit (§ 187 Abs. 1 BGB), bei einer Dauer schon.',
       },
     ],
     faq: [
