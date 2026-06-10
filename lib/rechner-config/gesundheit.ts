@@ -74,25 +74,31 @@ Obwohl der BMI weltweit verwendet wird, hat er einige bekannte Schwächen:
 - **Ethnische Unterschiede:** Studien zeigen, dass verschiedene ethnische Gruppen unterschiedliche Gesundheitsrisiken bei gleichen BMI-Werten haben.
 
 Trotz dieser Einschränkungen bleibt der BMI ein nützliches Screening-Werkzeug für die breite Bevölkerung. Für eine individuelle Gesundheitsbewertung sollte er aber immer durch weitere Untersuchungen ergänzt werden, etwa durch die Messung des Körperfettanteils, des Taillenumfangs oder Blutuntersuchungen.`,
-    // W19-Tranche-1-Nacharbeit: Leitformat „Risiko- & Kontext-Seite" — Diagramm (BMI-Verteilung
-    // DE, Quelle Destatis Mikrozensus 2025) + Risiko-Kontext. SENSITIV: WHO-Klassen rein deskriptiv,
-    // KEINE Diät-/Kalorien-/Gewichtsziel-Zahlen, keine Wertung, Arzt-Verweis. erklaerung bleibt Fallback.
+    // W19-Goldstandard: bmi-rechner auf volle Tiefe (~1.500 W, 10 Bausteine), Leitformat
+    // „Risiko- & Kontext-Seite" — Diagramm (BMI-Verteilung DE) + Risiko-Kontext. SENSITIV:
+    // WHO-Klassen rein deskriptiv, KEINE Diät-/Kalorien-/Gewichtsziel-Zahlen, keine Wertung,
+    // durchgehend Arzt-Verweis. Verteilungswerte: Destatis Mikrozensus 2025 (Stand 06/2026):
+    // 53,4 % BMI ≥ 25, 17,9 % adipös; M 62,6/19,9 %, F 43,8/15,8 %; Ø 1,73 m / 78,3 kg.
+    // erklaerung bleibt Fallback.
     contentBloecke: [
       {
         typ: 'text',
-        titel: 'Was ist der BMI?',
-        html: `<p>Der Body Mass Index (BMI) ist eine Maßzahl für das Verhältnis von Körpergewicht zu Körpergröße. Entwickelt im 19. Jahrhundert vom belgischen Mathematiker Adolphe Quetelet, ist er heute das weltweit gängigste Screening-Werkzeug, um Gewicht grob einzuordnen.</p><p>Die Weltgesundheitsorganisation (WHO) empfiehlt ihn als erste Orientierung. Wichtig: Er ist ein <strong>vereinfachtes Maß</strong> — er unterscheidet nicht zwischen Muskel- und Fettmasse und sagt nichts über die Fettverteilung, den Knochenbau oder die ethnische Herkunft aus.</p>`,
+        titel: 'Was der BMI misst — und was nicht',
+        html: `<p>Der Body-Mass-Index (BMI) ist eine Maßzahl, die das Körpergewicht ins Verhältnis zur Körpergröße setzt. Berechnet wird er als Gewicht in Kilogramm geteilt durch das Quadrat der Körpergröße in Metern. Entwickelt wurde die Formel bereits im 19. Jahrhundert vom belgischen Mathematiker und Statistiker Adolphe Quetelet — ursprünglich nicht als medizinisches, sondern als bevölkerungsstatistisches Werkzeug.</p><p>Heute nutzt die Weltgesundheitsorganisation (WHO) den BMI als einfaches <strong>Screening-Instrument</strong>, um das Gewicht von Erwachsenen grob in Kategorien einzuordnen. Sein großer Vorteil ist die Einfachheit: Zwei Werte genügen, und das Ergebnis ist weltweit vergleichbar. Genau diese Einfachheit ist aber auch seine Grenze.</p><p>Denn der BMI <strong>misst nur Gewicht und Größe</strong> — sonst nichts. Er unterscheidet nicht zwischen Muskel- und Fettmasse, sagt nichts über die Verteilung des Körperfetts und berücksichtigt weder Alter noch Geschlecht, Knochenbau oder ethnische Herkunft. Zwei Menschen mit identischem BMI können körperlich völlig unterschiedlich gebaut sein. Der BMI liefert deshalb eine erste Orientierung, ersetzt aber keine genauere Betrachtung und schon gar keine ärztliche Einschätzung.</p><p>Trotz dieser Einschränkungen ist der BMI so weit verbreitet, weil er <strong>schnell, kostenlos und überall</strong> verfügbar ist: Waage, Maßband, eine kurze Rechnung — fertig. Für eine erste grobe Einordnung auf Bevölkerungsebene oder als Ausgangspunkt für ein Gespräch mit der Ärztin oder dem Arzt ist das oft ausreichend. Probleme entstehen erst, wenn man die eine Zahl überinterpretiert.</p>`,
       },
       {
-        typ: 'diagramm',
-        variante: 'balken',
-        titel: 'BMI-Verteilung der Erwachsenen in Deutschland',
-        daten: [
-          { label: 'Normal-/Untergewicht (< 25)', wert: 47, einheit: '%' },
-          { label: 'Übergewicht (25–30)', wert: 35, einheit: '%' },
-          { label: 'Adipositas (≥ 30)', wert: 18, einheit: '%' },
+        typ: 'text',
+        titel: 'Vom Quetelet-Index zum weltweiten Standard',
+        html: `<p>Die Idee hinter dem BMI ist fast 200 Jahre alt. Der belgische Universalgelehrte Adolphe Quetelet suchte in den 1830er-Jahren nach einer Formel, um den „mittleren Menschen" statistisch zu beschreiben. Er fand, dass das Gewicht bei Erwachsenen ungefähr mit dem Quadrat der Körpergröße zunimmt — und prägte damit den nach ihm benannten Quetelet-Index.</p><p>Zum medizinischen Allzweckwerkzeug wurde die Kennzahl aber erst viel später. 1972 untersuchte der amerikanische Physiologe Ancel Keys verschiedene Gewichts-Größen-Indizes und befand den Quetelet-Index als den brauchbarsten einfachen Näherungswert für den Körperfettanteil. Er taufte ihn <strong>Body-Mass-Index</strong>. In den folgenden Jahrzehnten übernahmen Forschung, Krankenkassen und schließlich die WHO den BMI als Standard für Bevölkerungsstatistiken und als grobes Screening.</p><p>Seine Karriere verdankt der BMI vor allem der Praktikabilität: Er ist mit Maßband und Waage überall erhebbar, kostet nichts und liefert weltweit vergleichbare Zahlen. Gerade weil er so einfach ist, blieb er trotz aller bekannten Schwächen bis heute das verbreitetste Maß — als schneller erster Anhaltspunkt, nicht als abschließendes Urteil.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'BMI Schritt für Schritt',
+        schritte: [
+          { label: 'Körpergröße quadrieren', formel: '1,80 m × 1,80 m', ergebnis: '3,24' },
+          { label: 'Gewicht ÷ Größe²', formel: '80 kg ÷ 3,24', ergebnis: '24,69' },
         ],
-        fussnote: 'Erwachsene ab 18 Jahren. Quelle: Statistisches Bundesamt (Destatis), Mikrozensus 2025 — 53,4 % mit BMI ≥ 25, davon 17,9 % adipös. Reine Beobachtungsstatistik, keine Bewertung.',
+        fazit: 'Ein BMI von 24,69 liegt im WHO-Bereich Normalgewicht (18,5–24,9). Wichtig: die Größe in Metern einsetzen — mit 180 statt 1,80 entsteht ein unsinniger Wert im Promillebereich.',
       },
       {
         typ: 'tabelle',
@@ -109,13 +115,30 @@ Trotz dieser Einschränkungen bleibt der BMI ein nützliches Screening-Werkzeug 
         fussnote: 'Gilt für Erwachsene. Für Kinder und Jugendliche unter 18 gelten altersabhängige Perzentilen (Kromeyer-Hauschild), nicht diese Kategorien.',
       },
       {
-        typ: 'beispielrechnung',
-        titel: 'BMI berechnen — Schritt für Schritt',
-        schritte: [
-          { label: 'Körpergröße quadrieren', formel: '1,80 m × 1,80 m', ergebnis: '3,24' },
-          { label: 'Gewicht ÷ Größe²', formel: '80 kg ÷ 3,24', ergebnis: '24,69' },
+        typ: 'diagramm',
+        variante: 'balken',
+        titel: 'BMI-Verteilung der Erwachsenen in Deutschland',
+        daten: [
+          { label: 'Normal-/Untergewicht (< 25)', wert: 47, einheit: '%' },
+          { label: 'Übergewicht (25–30)', wert: 35, einheit: '%' },
+          { label: 'Adipositas (≥ 30)', wert: 18, einheit: '%' },
         ],
-        fazit: 'Ein BMI von 24,69 liegt im WHO-Bereich Normalgewicht (18,5–24,9). Wichtig: die Größe in Metern einsetzen — mit 180 statt 1,80 entsteht ein unsinniger Wert.',
+        fussnote: 'Erwachsene ab 18 Jahren. Quelle: Statistisches Bundesamt (Destatis), Mikrozensus 2025 — 53,4 % mit BMI ≥ 25, davon 17,9 % adipös. Werte auf Basis von Selbstauskunft, reine Beobachtungsstatistik ohne Bewertung.',
+      },
+      {
+        typ: 'text',
+        titel: 'Übergewicht in Deutschland — die Zahlen einordnen',
+        html: `<p>Wie verteilt sich das Gewicht in der Bevölkerung? Der Mikrozensus 2025 des Statistischen Bundesamtes (Destatis) liefert dazu aktuelle Zahlen: <strong>53,4 %</strong> der Erwachsenen ab 18 Jahren haben einen BMI von 25 oder höher, gelten nach WHO-Einteilung also als übergewichtig. <strong>17,9 %</strong> erreichen einen BMI von 30 oder mehr und fallen damit in den Adipositas-Bereich.</p><p>Zwischen den Geschlechtern zeigt sich ein deutlicher Unterschied: Bei den Männern liegen 62,6 % im Bereich BMI ≥ 25 und 19,9 % im Adipositas-Bereich, bei den Frauen sind es 43,8 % beziehungsweise 15,8 %. Der oder die durchschnittliche Erwachsene ist laut Erhebung 1,73 m groß und wiegt 78,3 kg.</p><p>Ein methodischer Hinweis gehört zur Einordnung dazu: Die Daten beruhen auf <strong>Selbstauskunft</strong> der Befragten. Studien zeigen, dass Menschen ihr Gewicht tendenziell etwas zu niedrig und ihre Größe etwas zu hoch angeben — der tatsächliche Anteil mit Adipositas dürfte daher eher höher liegen, als die Selbstauskunft ausweist. Die Zahlen sind als sachliche Beobachtung der Bevölkerung zu verstehen, nicht als Bewertung einzelner Personen.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Was die WHO-Kategorien aussagen — und was nicht',
+        html: `<p>Die Einteilung der WHO in Unter-, Normalgewicht, Präadipositas und Adipositas geht auf große Bevölkerungsstudien zurück, die statistische Zusammenhänge zwischen BMI-Bereichen und gesundheitlichen Kennzahlen untersucht haben. Wichtig ist das Wort <strong>statistisch</strong>: Die Kategorien beschreiben Durchschnittswerte über viele Menschen hinweg, nicht das Schicksal einer einzelnen Person.</p><p>Ein bestimmter BMI-Wert ist deshalb kein Urteil über die Gesundheit eines konkreten Menschen. Innerhalb jeder Kategorie gibt es eine große Bandbreite — Menschen mit identischem BMI können sich in Fitness, Stoffwechsel, Muskelanteil und Blutwerten stark unterscheiden. Die Kategorie sagt nur, in welchem rechnerischen Bereich jemand liegt, nicht, wie es um die individuelle Gesundheit bestellt ist.</p><p>Für eine tatsächliche Einschätzung des Gesundheitszustands ziehen Ärztinnen und Ärzte neben dem BMI weitere Faktoren heran: Taillenumfang, Blutdruck, Blutzucker- und Blutfettwerte, Bewegungsverhalten und die Familiengeschichte. Der BMI ist in diesem Zusammenspiel ein erster, schnell verfügbarer Anhaltspunkt — mehr nicht. Wer seine Werte einordnen möchte, ist mit einem ärztlichen Gespräch besser beraten als mit einer einzelnen Zahl.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Warum der BMI nur ein grober Richtwert ist',
+        html: `<p>Der BMI ist praktisch, aber an mehreren Stellen ungenau — wer ihn deutet, sollte seine Schwächen kennen.</p><p><strong>Muskel- statt Fettmasse:</strong> Muskelgewebe ist schwerer als Fettgewebe. Menschen mit viel Muskulatur, etwa nach intensivem Krafttraining, können einen hohen BMI haben, obwohl ihr Körperfettanteil niedrig ist. Der BMI würde sie rechnerisch in eine höhere Kategorie einordnen, als es ihrer Körperzusammensetzung entspricht. Ein anschauliches Beispiel: Eine durchtrainierte Person von 1,80 m und 95 kg käme rechnerisch auf einen BMI von 29,3 — fast an der Adipositas-Grenze —, obwohl dieser Wert nahezu vollständig aus Muskelmasse stammt und der Körperfettanteil sehr niedrig ist. Umgekehrt kann jemand mit wenig Muskulatur trotz normalem BMI einen überdurchschnittlich hohen Fettanteil haben. Die gleiche Zahl kann also Gegensätzliches bedeuten.</p><p><strong>Fettverteilung:</strong> Der BMI sagt nichts darüber, wo das Fett sitzt. Aus medizinischer Sicht ist das Bauchfett (viszerales Fett) bedeutsamer als Fett an Hüften und Oberschenkeln — zwei Personen mit gleichem BMI können hier sehr unterschiedlich sein. Deshalb wird der BMI oft mit dem Taillenumfang ergänzt.</p><p><strong>Alter, Geschlecht und Herkunft:</strong> Mit dem Alter verschiebt sich die Körperzusammensetzung, der Muskelanteil nimmt tendenziell ab. Frauen haben von Natur aus einen höheren Körperfettanteil als Männer. Und für einige Bevölkerungsgruppen empfiehlt die WHO niedrigere Schwellenwerte, weil gesundheitliche Risiken dort bereits bei niedrigerem BMI beobachtet werden. All das fließt in die einfache Formel nicht ein — der BMI bleibt ein grober Richtwert, kein Präzisionsinstrument.</p>`,
       },
       {
         typ: 'vergleich',
@@ -126,15 +149,15 @@ Trotz dieser Einschränkungen bleibt der BMI ein nützliches Screening-Werkzeug 
           { kriterium: 'Was wird gemessen', a: 'Gewicht im Verhältnis zur Größe', b: 'Menge des Bauchfetts' },
           { kriterium: 'Aussage zur Fettverteilung', a: 'keine', b: 'ja (viszerales Bauchfett)' },
           { kriterium: 'Bei viel Muskelmasse', a: 'kann das Risiko überschätzen', b: 'misst nur Bauchfett, unverzerrt' },
-          { kriterium: 'Orientierung Männer', a: '18,5 – 24,9', b: 'unter 94 cm (ab 102 cm hoch)' },
-          { kriterium: 'Orientierung Frauen', a: '18,5 – 24,9', b: 'unter 80 cm (ab 88 cm hoch)' },
+          { kriterium: 'Orientierung Männer', a: '18,5 – 24,9', b: 'ab 94 cm erhöht, ab 102 cm deutlich' },
+          { kriterium: 'Orientierung Frauen', a: '18,5 – 24,9', b: 'ab 80 cm erhöht, ab 88 cm deutlich' },
           { kriterium: 'Beste Nutzung', a: 'schnelle Gesamteinschätzung', b: 'verfeinert das Bild' },
         ],
       },
       {
         typ: 'text',
-        titel: 'Grenzen des BMI',
-        html: `<p>Der BMI hat bekannte Schwächen, die man bei der Einordnung kennen sollte: Er <strong>unterscheidet nicht zwischen Muskel- und Fettgewebe</strong> — durchtrainierte Personen können einen hohen BMI bei niedrigem Körperfett haben. Er berücksichtigt die <strong>Fettverteilung</strong> nicht, obwohl Bauchfett gesundheitlich relevanter ist als Fett an Hüfte und Oberschenkeln.</p><p>Auch <strong>Alter, Geschlecht und ethnische Herkunft</strong> spielen eine Rolle: Frauen haben von Natur aus einen höheren Körperfettanteil, im Alter verschiebt sich die Körperzusammensetzung, und für einige Bevölkerungsgruppen empfiehlt die WHO niedrigere Schwellenwerte, weil gesundheitliche Risiken dort bereits bei niedrigerem BMI auftreten. Der BMI bleibt ein Screening-Wert — keine Diagnose.</p>`,
+        titel: 'Was außer dem BMI noch gemessen wird',
+        html: `<p>Weil der BMI nur Gewicht und Größe kennt, gibt es ergänzende Maße, die ein genaueres Bild zeichnen — jedes mit eigenem Blickwinkel.</p><p>Der <strong>Taillenumfang</strong> erfasst, wie viel Fett sich im Bauchraum sammelt. Da dieses viszerale Fett aus medizinischer Sicht bedeutsamer ist als Fett an Hüfte und Beinen, ergänzt der Taillenumfang den BMI sinnvoll. Eng verwandt ist das <strong>Taille-Hüft-Verhältnis</strong> sowie das Verhältnis von Taille zu Körpergröße, das den Bauchumfang in Relation zur Statur setzt.</p><p>Genauer, aber aufwendiger ist die direkte Messung des <strong>Körperfettanteils</strong> — etwa über Bioimpedanz-Waagen, Hautfaltenmessung oder spezielle Verfahren in Sportmedizin und Forschung. Diese Methoden unterscheiden zwischen Fett- und Magermasse, die dem BMI verborgen bleibt. Welches Maß im Einzelfall sinnvoll ist, hängt von der Fragestellung ab: Für eine schnelle Selbsteinordnung reichen BMI und Taillenumfang, für eine medizinische Beurteilung gehört die Auswahl der passenden Methode in fachliche Hände.</p>`,
       },
       {
         typ: 'checkliste',
@@ -148,10 +171,15 @@ Trotz dieser Einschränkungen bleibt der BMI ein nützliches Screening-Werkzeug 
         ],
       },
       {
+        typ: 'text',
+        titel: 'BMI bei Kindern, Älteren und in der Schwangerschaft',
+        html: `<p>In bestimmten Lebensphasen ist der erwachsene BMI-Maßstab nicht der richtige.</p><p><strong>Kinder und Jugendliche unter 18:</strong> Hier gelten <strong>nicht</strong> die WHO-Erwachsenenkategorien. Weil sich Körpergröße und Körperzusammensetzung während des Wachstums laufend verändern, wird der BMI in alters- und geschlechtsspezifische Referenzkurven eingeordnet — sogenannte Perzentilen. In Deutschland sind die Perzentilen nach Kromeyer-Hauschild gebräuchlich. Eine fundierte Einschätzung gehört in die Hände der Kinderärztin oder des Kinderarztes; Eltern sollten den BMI ihres Kindes nicht selbst nach Erwachsenenkategorien bewerten.</p><p><strong>Ältere Menschen:</strong> Im höheren Alter verschiebt sich die Körperzusammensetzung, und manche Studien sehen einen leicht höheren BMI-Bereich als unbedenklich. Eine pauschale Grenze gibt es hier nicht.</p><p><strong>Schwangerschaft:</strong> Während der Schwangerschaft ist der BMI nicht aussagekräftig, weil die natürliche Gewichtszunahme den Wert verändert. Sinnvoll ist allenfalls der Ausgangs-BMI vor der Schwangerschaft. Die Begleitung erfolgt durch Frauenärztin, Frauenarzt oder Hebamme.</p><p>In all diesen Lebensphasen gilt dasselbe Prinzip: Die einfache Erwachsenenformel führt leicht in die Irre, und die richtige Einordnung gehört in fachkundige Hände — bei Kindern und Jugendlichen in die der Kinder- und Jugendmedizin, in Schwangerschaft und höherem Alter in die der jeweils betreuenden Fachperson.</p>`,
+      },
+      {
         typ: 'infobox',
         variante: 'warnung',
         titel: 'Kein Diagnose-Werkzeug',
-        text: 'Der BMI ist ein grobes Screening-Maß, keine Diagnose. Er ersetzt keine ärztliche Untersuchung. Für Kinder und Jugendliche unter 18 gelten Perzentilen nach Kromeyer-Hauschild, nicht die Erwachsenenkategorien. Nutzen Sie den Wert nur zur Orientierung und besprechen Sie Auffälligkeiten mit Ihrer Ärztin oder Ihrem Arzt — eine fundierte Bewertung des Gewichts gehört in fachliche Hände.',
+        text: 'Der BMI ist ein grobes Screening-Maß, keine Diagnose. Er ersetzt keine ärztliche Untersuchung und sagt für sich allein nichts über den Gesundheitszustand eines einzelnen Menschen aus. Für Kinder und Jugendliche unter 18 gelten Perzentilen nach Kromeyer-Hauschild, nicht die Erwachsenenkategorien. Nutzen Sie den Wert nur zur groben Orientierung und besprechen Sie Auffälligkeiten mit Ihrer Ärztin oder Ihrem Arzt — eine fundierte Bewertung des Gewichts gehört in fachliche Hände.',
       },
     ],
     faq: [
