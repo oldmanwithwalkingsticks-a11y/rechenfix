@@ -7,7 +7,9 @@ description: Template and checklist for building standardized online calculators
 
 Build standardized, SEO-optimized calculator pages for the German calculator portal rechenfix.de. Every calculator must follow this template to ensure consistency, completeness, and maximum SEO impact.
 
-## WARUM diese Standards existieren (Skill v2, 10.05.2026)
+## WARUM diese Standards existieren (Skill v2, 10.05.2026 · Content-Bausteine-Update Welle 19, 10.06.2026)
+
+> **Welle 19 (10.06.2026):** Neue Rechner und Migrationen nutzen den Content-Baustein-Standard (`contentBloecke`) statt des Thin-`erklaerung`-String-Pfads, der die 4. AdSense-Ablehnung verursacht hat. Details im Abschnitt „Content-Bausteine (contentBloecke) — Standard ab Welle 19" weiter unten.
 
 Diese Standards wurden nach den W13/W14-Audit-Wellen etabliert, in denen veraltete Affiliate-Verteilung, zu kurze Content-Texte, veraltete Gesetzes-Werte und schlecht dokumentierte Tabellen-Werte wochenlange Korrektur-Sprints nötig machten. Konsequente Befolgung ab Build-Phase erspart spätere Audits.
 
@@ -1614,6 +1616,8 @@ Jeder Top-Rechner (BN, MwSt, Zins, BMI etc.) hat in `config.erklaerung`:
 
 `config.faq` mit mindestens 8 Q&A (5 Existing + 3 rechner-spezifische NEU-Fragen).
 
+> **Welle-19-Hinweis:** Neue und neu zu überarbeitende Top-Rechner nutzen statt der `erklaerung`-NEU-Sektionen das Content-Baustein-Muster (`contentBloecke`, siehe eigener Abschnitt „Content-Bausteine" weiter unten). Der hier beschriebene Bold-Lead-Listen-Weg in `erklaerung` bleibt **Bestandsschutz** für die noch nicht migrierten Rechner.
+
 ### Bold-Lead-Listen-Pattern
 
 ```markdown
@@ -1643,6 +1647,60 @@ Bei Gesundheits-, Finanz-, Familien- und ähnlichen sensiblen Themen:
 - Keine wertende Sprache, keine Empfehlungen zur Verhaltensänderung
 - Verweise auf Fachpersonen (Arzt, Hebamme, Steuerberater) statt eigener Empfehlungen
 - Limitierungen klar benennen
+
+---
+
+## Content-Bausteine (contentBloecke) — Standard ab Welle 19 (10.06.2026)
+
+**Neuer Content-Standard für neue Rechner und Migrationen.** Statt des einzelnen `erklaerung`-Strings tragen Rechner ihren Fachinhalt in modularen Bausteinen (`contentBloecke`). Das Baustein-System ist live (Pilot: `spritkosten-rechner`), Gestaltung/Renderer sind final (Commits 6299c7f→386e846) — Baustein-Arbeit ist ausschließlich **Content im Config-Eintrag**.
+
+### Warum
+
+Ein einziger `erklaerung`-String über 170 strukturgleiche Seiten erzeugt Thin-Content- bzw. AI-Massen-Verdacht — die Ursache der 4. AdSense-Ablehnung. Lösung: modulare Bausteine in **pro Rechner unterschiedlicher Komposition**, sodass jede Seite strukturell einzigartig wird. **Nicht** Wortzahl strecken, **nicht** noindex. Ziel pro Rechner: **~1.250 Wörter, nie unter 1.000**.
+
+### Die 8 Block-Typen (exakte Feldnamen aus `lib/rechner-config/types.ts`)
+
+```ts
+type ContentBlock =
+  | { typ: 'text'; titel?: string; html: string }
+  | { typ: 'tabelle'; titel?: string; kopf: string[]; zeilen: string[][]; fussnote?: string }
+  | { typ: 'statistik'; titel?: string; werte: { label: string; wert: string; hinweis?: string }[] }
+  | { typ: 'diagramm'; titel?: string; variante: 'balken'; daten: { label: string; wert: number; einheit?: string }[]; fussnote?: string }
+  | { typ: 'vergleich'; titel?: string; spalteA: string; spalteB: string; zeilen: { kriterium: string; a: string; b: string }[] }
+  | { typ: 'beispielrechnung'; titel?: string; schritte: { label: string; formel: string; ergebnis: string }[]; fazit?: string }
+  | { typ: 'checkliste'; titel?: string; punkte: string[] }
+  | { typ: 'infobox'; variante: 'tipp' | 'warnung' | 'hinweis'; titel?: string; text: string };
+```
+
+Optionales Feld in `RechnerConfig`: `contentBloecke?: ContentBlock[]`. Bei gesetzter Länge rendert `page.tsx` den `ContentBlockRenderer` (freistehende Kacheln); sonst greift der Fallback-Pfad (Außenbox + Formel + Beispiel + `erklaerung`-Split).
+
+### Komposition-Regel
+
+Jeder Rechner wählt eine **eigene Auswahl + Reihenfolge** der Bausteine — nicht alle 8, nicht immer gleich. Das ist der Kern der strukturellen Einzigartigkeit. **Pflicht-Mindestmix:**
+
+- mindestens **1 Tabelle ODER Diagramm**
+- mindestens **1 Beispielrechnung**
+- mindestens **1 Checkliste oder Infobox**
+- `text`-Blöcke tragen den recherchierten Fachinhalt (Hauptanteil der Wörter)
+
+### Daten-Disziplin
+
+- Markt-/Zahlenwerte in Bausteinen als **SSOT-Konstante** in `lib/berechnungen/<thema>-parameter.ts` (Muster: `SPRITPREISE_REFERENZ`), mit **Stichtag + Quelle** im Kommentar. Im Config über Helper einsetzen (z. B. `eur()`/`STAND_DE` im Auto-Pilot), nicht hartkodieren.
+- **Rechtsdaten (YMYL) NIE aus Memory** — Primärquelle prüfen (L-37, siehe CLAUDE.md).
+- `scripts/check-jahreswerte.mjs` warnt (soft, im Prebuild) bei einem Markt-Stichtag > 45 Tage.
+- Für externe Marktwerte gilt weiter L-38 (User-Eingabe-Default, Step 3b): redaktionelle Referenzwerte in Bausteinen ergänzen die User-Eingabe, ersetzen sie nicht.
+
+### erklaerung-Fallback bleibt Pflicht
+
+Auch bei gesetzten `contentBloecke` das `erklaerung`-Feld **befüllt lassen** (Schema-Konsistenz + Sicherheit). Der Renderer zeigt `erklaerung` nicht, solange `contentBloecke?.length` greift — es bleibt der Fallback-Pfad für alle nicht-migrierten Rechner.
+
+### Referenz-Beispiel (Goldstandard-Komposition)
+
+`lib/rechner-config/auto.ts`, Eintrag `spritkosten-rechner` (`contentBloecke` ab Z.91): 8 Bausteine (text → statistik → beispielrechnung → tabelle → diagramm → vergleich → checkliste → infobox), Werte aus `SPRITPREISE_REFERENZ` über die `eur()`/`STAND_DE`-Helper. Als Kopiervorlage für Komposition + Daten-Disziplin nutzen.
+
+### Renderer/Design NICHT anfassen
+
+Gestaltung ist final (Commits 6299c7f→386e846): `ContentBlockRenderer.tsx` (Server-Component, Kachel = `card p-5 md:p-6` mit Hover-Lift, Titel `primary-600`). Baustein-Arbeit = **ausschließlich Content** im Config-Eintrag der jeweiligen Kategorie-Datei (`lib/rechner-config/<kategorie>.ts`) — nur die Auto-Kategorie selbst liegt in `auto.ts`.
 
 ---
 
