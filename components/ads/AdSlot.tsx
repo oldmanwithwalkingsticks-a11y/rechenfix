@@ -59,13 +59,19 @@ export default function AdSlot({ typ, className = '' }: AdSlotProps) {
 
   const config = adConfig[typ];
 
-  // Container immer rendern (Layout-Platz reservieren, kein CLS), aber das
-  // <ins>-Tag nur ausspielen wenn Marketing-Consent erteilt ist. Ohne
-  // Consent bleibt der Container leer + aria-hidden, sodass Screenreader
-  // ihn nicht ankündigen.
+  // min-h NUR reservieren, wenn Marketing-Consent erteilt ist (W19.0d).
+  // - marketingAllowed === true: minHeightClass greift → CLS-Schutz EXAKT wie
+  //   bisher (W15C): Container reserviert Platz, bevor das <ins> die Anzeige
+  //   nachlädt, kein Shift beim Befüllen.
+  // - marketingAllowed === false: KEINE min-h → Container kollabiert (h 0).
+  //   CLS-sicher, weil ohne Consent NIE ein <ins> rendert und damit nie eine
+  //   Anzeige nachlädt — es gibt schlicht nichts, was später einschieben könnte.
+  //   Behebt zugleich den leeren 400px-Block oben auf Mobil ohne Consent.
+  const heightClass = marketingAllowed ? config.minHeightClass : '';
+
   return (
     <div
-      className={`w-full ${config.minHeightClass} overflow-hidden no-print ${className}`}
+      className={`w-full ${heightClass} overflow-hidden no-print ${className}`}
       aria-hidden={!marketingAllowed || undefined}
     >
       {marketingAllowed && (

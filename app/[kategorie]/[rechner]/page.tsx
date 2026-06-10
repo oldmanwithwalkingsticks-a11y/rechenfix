@@ -87,9 +87,6 @@ export default function RechnerSeite({ params }: Props) {
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Hauptinhalt */}
         <div className="flex-1 min-w-0">
-          {/* Ad Top */}
-          <AdSlot typ="leaderboard" className="mb-6 no-print" />
-
           {/* Zurück-Button */}
           <div className="no-print">
             <ZurueckButton fallbackHref={`/${config.kategorieSlug}`} label={`Zurück`} />
