@@ -366,6 +366,7 @@ export function getAktuelleXxxParameter(stichtag: Date = new Date()): XxxParamet
 | ALG-I BBG (Rechengröße) | 8.450 €/Mon bundeseinheitlich (West/Ost-Trennung aufgehoben) | 01.01.2027 | `brutto-netto.ts` (`BBG_RV_MONAT`) | SV-Rechengrößen-VO 2026 |
 | KostBRÄG 2025 RVG/FamGKG-Tabellen | ~+6 % gegenüber Vor-2025-Werten | bleibt | inline (`ScheidungskostenRechner` — aktualisiert in Prompt 149d, 26.04.2026) | KostBRÄG 04.06.2025, gültig ab 01.06.2025 |
 | § 19 UStG Kleinunternehmer | Vorjahr ≤ 25.000 € **und** laufendes Jahr ≤ 100.000 € (keine USt-Pflicht) | offen | inline (`MwStRueckerstattungRechner` etc.) | Wachstumschancengesetz, gültig ab 01.01.2025 |
+| Gastronomie-USt (Speisen) | **7 % ab 01.01.2026** — Restaurant-/Verpflegungsdienstleistungen einheitlich (vor Ort, to-go, Lieferung, Hotel-Frühstück-Speisen); **Getränke bleiben 19 %**. Ersetzt den Stand „19 % vor Ort seit 01.01.2024" (war 2024/25 korrekt) | keine bekannt | inline (`mwst-rechner` contentBloecke + erklaerung) | § 12 Abs. 2 Nr. 15 UStG i.d.F. Steueränderungsgesetz 2025, BGBl. I Nr. 363 (BR-Zustimmung 19.12.2025); ZDH/Bundesregierung, Stand 06/2026 |
 | Mietpreisbremse | bis **31.12.2029** verlängert (Streichung 5-J-Frist + Außerkrafttreten verschoben von 31.12.2025) | 31.12.2029 | inline (`wohnen.ts` `mietpreisbremse-rechner` erklaerung+FAQ) | Gesetz zur Änderung der Regelungen über die zulässige Miethöhe bei Mietbeginn — BT-Drs. 21/322 i.d.F. 21/631 (BT 26.06.2025, BR 11.07.2025) |
 | Düsseldorfer Tabelle 2026 SB Ehegatten | erwerbstätig 1.600 € / nicht erwerbstätig 1.475 € (gilt für Trennungsunterhalt UND nachehelich gleichermaßen — Achse Erwerbstätigkeit, NICHT Trennungsphase) | 01.01.2027 | inline (`EhegattenunterhaltRechner` + `arbeit.ts` `ehegattenunterhalt-rechner`) | Düsseldorfer Tabelle 2026, OLG Düsseldorf |
 | § 1376 BGB Indexierung Anfangsvermögen | indexiertes AV = AV × VPI(Endstichtag) / VPI(Heirat) — und privilegierter Erwerb mit VPI zum Erwerbsdatum | unverändert | `vpi.ts` (`indexiereVermoegen`, `getVpi`), konsumiert von `ZugewinnausgleichRechner` | § 1376 BGB + ständige Rechtsprechung BFH BFHE 217, 248; BGH FamRZ 2002, 606 |
@@ -886,6 +887,12 @@ Top-Rechner-Erklärungen enthalten:
 - „Häufige Fehler bei der X-Berechnung" (5 Bold-Lead-Stichpunkte)
 
 FAQ ≥ 8 Q&A. Bold-Lead-Pattern: `- **Titel.** Text...`
+
+### Content-Bausteine-Tiefe (W19-Standard, ab 10.06.2026)
+
+Migrierte Rechner (`contentBloecke`, siehe SKILL.md) zielen auf **~1.500 Wörter sichtbaren Text** (Fließtext + Tabellenzellen + Beispielschritte) mit einem **eigenen Leitformat** pro Rechner (dominante Darstellungsform — Tabellen / Diagramme / Vergleiche / Beispielrechnungen — plus eigener inhaltlicher Schwerpunkt). Leitformate sind gegeneinander abzugrenzen, nicht zu vereinheitlichen.
+
+**L-W19.Wortbudget:** Strukturelle Einzigartigkeit (Leitformat) UND Fachtiefe (Wortzahl) sind **zwei getrennte Anforderungen**. Bausteine allein lösen Thin-Content nicht, wenn die `text`-Blöcke zu kurz bleiben (Befund: mwst-Nacharbeit nur ~239 W Fließtext trotz 7 Bausteinen). Konsequenz: **Wort-Budget je text-Baustein verbindlich** festlegen (z. B. Intro 180–220 W, Fach-Blöcke 130–200 W), nicht als Richtwert. Goldstandard-Referenz: `mwst-rechner` (10 Bausteine, ~1.300–1.500 W) in `lib/rechner-config/finanzen.ts`.
 
 ### Sensitivitäts-Regel
 
