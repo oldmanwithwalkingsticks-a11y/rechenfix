@@ -3097,4 +3097,23 @@ Leitformat (Tabellen / Diagramme / Vergleiche / Szenarien / Risiko-Kontext / gem
 Pflicht-Self-Check vor Commit (L-W19.SelfCheck). Damit ist die W19-Pilot-Tranche (6 Rechner)
 auf Goldstandard-Niveau abgeschlossen; offene Punkte projektweit: Minijob-Lib-Bug
 (Math.round → Math.ceil, Backlog) und der Vollausbau weiterer Kategorien als künftige Tranchen.
+
+### Diagramm-Varianten-Modul (10.06.2026)
+- **01867eb** ContentBlockRenderer um Diagramm-Varianten **Kreis (Donut)** und **Linie**
+  erweitert — ADDITIV, `variante: 'balken'` geometrisch unverändert (Bestandsschutz: die
+  Goldstandard-Rechner mit Balken bleiben optisch gleich). Nur `types.ts` (Union um
+  `'kreis' | 'linie'` erweitert) + `ContentBlockRenderer.tsx`. Umbau: alter `BalkenDiagramm`
+  → `Balken` (gibt nur noch das `<svg>` zurück); neuer Dispatcher `DiagrammBlock` teilt
+  DatenKachel-Rahmen + fussnote für alle drei Varianten. Kreis = Donut-Segmente + Legende
+  (Anteile relativ zur Summe), Linie = Polyline mit Punkten/Werten (Zeitverlauf). CLS-sicher
+  (feste viewBox), role="img" + aria-label, primary-Skala + dark-mode wie Bestand.
+- **Abweichung vom 1:1-Code:** unbenutzte `const pct` im Kreis-Legenden-Map entfernt
+  (toter Code, Vercel-ESLint-`no-unused-vars`-Risiko). Verhaltensneutral. ESLint + tsc clean.
+
+**Einsatz-Leitlinie (L-W19.DiagrammVariante):** pro Rechner die passende Variante wählen →
+visuelle Einzigartigkeit gegen AI-Massenverdacht. **kreis** = Anteile, die ein Ganzes ergeben
+(z. B. Kostenaufteilung, Verteilungs-%); **linie** = Zeitverlauf/Entwicklung (z. B. Preis- oder
+Wert-Reihe über Jahre); **balken** = Kategorienvergleich nebeneinander. Verfügbar ab sofort;
+Einsatz bei künftigen Rechnern. SKILL.md-ContentBlock-Sektion (nennt noch nur `'balken'`) bei
+nächstem Skill-Sync nachziehen.
   Klammer-Struktur von headers() vor Commit prüfen (Get-Content -Tail 6).
