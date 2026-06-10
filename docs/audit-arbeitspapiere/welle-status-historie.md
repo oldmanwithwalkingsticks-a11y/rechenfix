@@ -3078,4 +3078,23 @@ Offen mit echten Zahlen: tage 385, spritkosten 411 W.
 
 **Goldstandard-Stand:** mwst 1.559, zins 1.559, stundenlohn 1.580, bmi 1.568, tage 1.539 —
 alle ≥ 1.500. Letzter offener W19-Rechner: spritkosten (411 W, der ursprüngliche Pilot).
+
+### Goldstandard spritkosten — Pilot + Tranche komplett (10.06.2026)
+- **d5f75f7** spritkosten-rechner Goldstandard (gemessen 411 → **1.537 W**): bestehende
+  8 Bausteine (Leitformat gemischt: statistik/tabelle/diagramm/vergleich) BLEIBEN, Block 1
+  vertieft (WLTP vs. Realverbrauch, Stadt/Land/Autobahn, Jahreszeit) + 6 neue Blöcke:
+  Praxis-Verbrauchsfaktoren, die Formel/Kosten-pro-km, Benzin/Diesel/Elektro-Energiekosten
+  pro 100 km (Benzin/Diesel aus SPRITPREISE_REFERENZ, Strom als gekennzeichnete Annahme
+  ~0,35 €/kWh / 18 kWh/100km — kein YMYL-Recht, keine Kaufberatung), Spritpreis-Tagesschwankung
+  & -Zusammensetzung (Energiesteuersenkung ~17 ct seit 01.05.2026), Jahres-/Pendlerkosten
+  (Entfernungspauschale 0,38 €/km nur erwähnt, keine Steuerberatung), Tanken Autobahn/Ausland.
+  Zweite beispielrechnung „Jährliche Pendlerkosten" ergänzt. Self-Check iterativ: 1.022 →
+  1.485 → 1.537. Benzin/Diesel-Werte ausschließlich aus SPRITPREISE_REFERENZ (Stand 08.06.2026).
+
+**W19 Goldstandard-Tiefe KOMPLETT (gemessen, alle ≥ 1.500 W):** mwst 1.559, zins 1.559,
+stundenlohn 1.580, bmi 1.568, tage 1.539, spritkosten 1.537. Jeder Rechner mit eigenem
+Leitformat (Tabellen / Diagramme / Vergleiche / Szenarien / Risiko-Kontext / gemischt) und
+Pflicht-Self-Check vor Commit (L-W19.SelfCheck). Damit ist die W19-Pilot-Tranche (6 Rechner)
+auf Goldstandard-Niveau abgeschlossen; offene Punkte projektweit: Minijob-Lib-Bug
+(Math.round → Math.ceil, Backlog) und der Vollausbau weiterer Kategorien als künftige Tranchen.
   Klammer-Struktur von headers() vor Commit prüfen (Get-Content -Tail 6).
