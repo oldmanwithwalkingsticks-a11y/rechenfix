@@ -225,6 +225,10 @@ function DiagrammBlock({
         <KreisDiagramm block={block} />
       ) : block.variante === 'linie' ? (
         <LinienDiagramm block={block} />
+      ) : block.variante === 'gestapelt' ? (
+        <GestapeltDiagramm block={block} />
+      ) : block.variante === 'wasserfall' ? (
+        <WasserfallDiagramm block={block} />
       ) : (
         <Balken block={block} />
       )}
@@ -240,7 +244,7 @@ function Balken({
 }: {
   block: Extract<ContentBlock, { typ: 'diagramm' }>;
 }) {
-  const daten = block.daten;
+  const daten = block.daten ?? [];
   const max = Math.max(...daten.map((d) => d.wert), 1);
 
   // Feste viewBox-Geometrie → Intrinsic-Aspect-Ratio → kein CLS.
@@ -328,7 +332,8 @@ function donutSegment(
 }
 
 function KreisDiagramm({ block }: { block: Extract<ContentBlock, { typ: 'diagramm' }> }) {
-  const summe = block.daten.reduce((s, d) => s + d.wert, 0) || 1;
+  const daten = block.daten ?? [];
+  const summe = daten.reduce((s, d) => s + d.wert, 0) || 1;
   const cx = 90, cy = 90, rO = 80, rI = 48;
   let acc = 0;
   return (
@@ -341,7 +346,7 @@ function KreisDiagramm({ block }: { block: Extract<ContentBlock, { typ: 'diagram
         role="img"
         aria-label={block.titel ?? 'Kreisdiagramm'}
       >
-        {block.daten.map((d, i) => {
+        {daten.map((d, i) => {
           const start = (acc / summe) * 360;
           acc += d.wert;
           const end = (acc / summe) * 360;
@@ -355,7 +360,7 @@ function KreisDiagramm({ block }: { block: Extract<ContentBlock, { typ: 'diagram
         })}
       </svg>
       <ul className="space-y-1.5 w-full">
-        {block.daten.map((d, i) => {
+        {daten.map((d, i) => {
           const dot = SEGMENT_FILL[i % SEGMENT_FILL.length];
           return (
             <li key={i} className="flex items-center gap-2 text-sm">
@@ -375,7 +380,7 @@ function KreisDiagramm({ block }: { block: Extract<ContentBlock, { typ: 'diagram
 }
 
 function LinienDiagramm({ block }: { block: Extract<ContentBlock, { typ: 'diagramm' }> }) {
-  const d = block.daten;
+  const d = block.daten ?? [];
   const W = 480, H = 240, padL = 44, padR = 16, padT = 16, padB = 36;
   const plotW = W - padL - padR, plotH = H - padT - padB;
   const werte = d.map((p) => p.wert);
@@ -441,5 +446,99 @@ function Infobox({ block }: { block: Extract<ContentBlock, { typ: 'infobox' }> }
         <p className="text-gray-700 dark:text-gray-300">{block.text}</p>
       </div>
     </section>
+  );
+}
+
+function GestapeltDiagramm({ block }: { block: Extract<ContentBlock, { typ: 'diagramm' }> }) {
+  const reihen = block.gestapelt ?? [];
+  const W = 480, labelW = 120, rowH = 46, barH = 26;
+  const barAreaW = W - labelW - 20;
+  const maxSum = Math.max(...reihen.map((r) => r.segmente.reduce((s, x) => s + x.wert, 0)), 1);
+  const H = reihen.length * rowH + 6;
+  const namen = reihen[0]?.segmente.map((s) => s.name) ?? [];
+  return (
+    <>
+      <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="w-full h-auto"
+        role="img" aria-label={block.titel ?? 'Gestapeltes Balkendiagramm'}>
+        {reihen.map((r, ri) => {
+          const y = ri * rowH + 6;
+          let x = labelW;
+          return (
+            <g key={ri}>
+              <text x={0} y={y + barH / 2} fontSize={13} dominantBaseline="middle"
+                className="fill-gray-600 dark:fill-gray-300">{r.label}</text>
+              {r.segmente.map((seg, si) => {
+                const w = (seg.wert / maxSum) * barAreaW;
+                const rx = si === 0 ? 4 : 0;
+                const rect = (
+                  <rect key={si} x={x} y={y} width={Math.max(w, 0)} height={barH} rx={rx}
+                    className={SEGMENT_FILL[si % SEGMENT_FILL.length]} />
+                );
+                x += w;
+                return rect;
+              })}
+            </g>
+          );
+        })}
+      </svg>
+      {namen.length > 0 && (
+        <ul className="flex flex-wrap gap-x-4 gap-y-1 mt-3">
+          {namen.map((n, i) => (
+            <li key={i} className="flex items-center gap-1.5 text-xs text-gray-600 dark:text-gray-300">
+              <svg width={11} height={11} aria-hidden="true">
+                <rect width={11} height={11} rx={2} className={SEGMENT_FILL[i % SEGMENT_FILL.length]} />
+              </svg>
+              {n}
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
+  );
+}
+
+function WasserfallDiagramm({ block }: { block: Extract<ContentBlock, { typ: 'diagramm' }> }) {
+  const steps = block.wasserfall ?? [];
+  const W = 480, H = 260, padT = 16, padB = 40;
+  const plotH = H - padT - padB;
+  const colW = steps.length > 0 ? (W - 20) / steps.length : W;
+  const barW = Math.min(colW * 0.6, 70);
+  let run = 0, maxStand = 1;
+  for (const d of steps) {
+    if (d.art === 'delta') run += d.wert; else run = d.wert;
+    maxStand = Math.max(maxStand, run, d.art !== 'delta' ? d.wert : 0);
+  }
+  run = 0;
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="w-full h-auto"
+      role="img" aria-label={block.titel ?? 'Wasserfalldiagramm'}>
+      <line x1={10} y1={padT + plotH} x2={W - 10} y2={padT + plotH}
+        className="stroke-gray-200 dark:stroke-gray-700" strokeWidth={1} />
+      {steps.map((d, i) => {
+        let top: number, bottom: number, fill: string;
+        if (d.art === 'delta') {
+          const start = run; run += d.wert;
+          top = Math.max(start, run); bottom = Math.min(start, run);
+          fill = d.wert < 0 ? 'fill-red-400 dark:fill-red-400' : 'fill-emerald-400 dark:fill-emerald-400';
+        } else {
+          run = d.wert; top = d.wert; bottom = 0;
+          fill = 'fill-primary-500 dark:fill-primary-400';
+        }
+        const x = 10 + i * colW + (colW - barW) / 2;
+        const yTop = padT + plotH - (top / maxStand) * plotH;
+        const h = Math.max(((top - bottom) / maxStand) * plotH, 2);
+        return (
+          <g key={i}>
+            <rect x={x} y={yTop} width={barW} height={h} rx={3} className={fill} />
+            <text x={x + barW / 2} y={yTop - 6} fontSize={11} textAnchor="middle"
+              className="fill-gray-800 dark:fill-gray-100 font-semibold">
+              {d.art === 'delta' && d.wert > 0 ? '+' : ''}{d.wert}{block.einheit ? ` ${block.einheit}` : ''}
+            </text>
+            <text x={x + barW / 2} y={H - 14} fontSize={11} textAnchor="middle"
+              className="fill-gray-500 dark:fill-gray-400">{d.label}</text>
+          </g>
+        );
+      })}
+    </svg>
   );
 }

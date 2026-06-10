@@ -44,14 +44,21 @@ export type ContentBlock =
   | { typ: 'text'; titel?: string; html: string }
   | { typ: 'tabelle'; titel?: string; kopf: string[]; zeilen: string[][]; fussnote?: string }
   | { typ: 'statistik'; titel?: string; werte: { label: string; wert: string; hinweis?: string }[] }
-  // 'balken' = Kategorienvergleich; 'kreis' = Anteile (Werte werden relativ zur Summe als
-  // Donut-Segmente gezeichnet — sinnvoll, wenn die Werte ein Ganzes ergeben); 'linie' =
-  // Zeitverlauf (daten-Reihenfolge = x-Achse, label = x-Beschriftung).
+  // 'balken' = Kategorienvergleich; 'kreis' = Anteile (Donut, Werte relativ zur Summe);
+  // 'linie' = Zeitverlauf (daten-Reihenfolge = x-Achse); 'gestapelt' = Zusammensetzung pro
+  // Kategorie (mehrere Segmente je Balken); 'wasserfall' = schrittweise Zu-/Abnahme
+  // (z. B. Brutto → Netto, art='start'|'delta'|'summe').
   | {
       typ: 'diagramm';
       titel?: string;
-      variante: 'balken' | 'kreis' | 'linie';
-      daten: { label: string; wert: number; einheit?: string }[];
+      variante: 'balken' | 'kreis' | 'linie' | 'gestapelt' | 'wasserfall';
+      /** balken/kreis/linie: flache Werte. label = Kategorie bzw. x-Achse. */
+      daten?: { label: string; wert: number; einheit?: string }[];
+      /** 'gestapelt': pro Kategorie mehrere Segmente. */
+      gestapelt?: { label: string; segmente: { name: string; wert: number }[] }[];
+      /** 'wasserfall': Schritte; art='start'|'delta'|'summe', wert bei delta auch negativ. */
+      wasserfall?: { label: string; wert: number; art: 'start' | 'delta' | 'summe' }[];
+      einheit?: string;
       fussnote?: string;
     }
   | { typ: 'vergleich'; titel?: string; spalteA: string; spalteB: string; zeilen: { kriterium: string; a: string; b: string }[] }
