@@ -305,14 +305,17 @@ function Balken({
   );
 }
 
-// Marken-Farbpalette für Kreissegmente (primary-Skala + amber/emerald-Akzente).
-const SEGMENT_FILL = [
-  'fill-primary-500 dark:fill-primary-400',
-  'fill-primary-300 dark:fill-primary-300',
-  'fill-amber-400 dark:fill-amber-400',
-  'fill-emerald-400 dark:fill-emerald-400',
-  'fill-primary-700 dark:fill-primary-200',
-  'fill-amber-200 dark:fill-amber-200',
+/**
+ * Diagramm-Palette (feste Hex-Werte als fill-Attribut → purge-sicher, kontrolliert).
+ * Reihenfolge auf maximalen Kontrast optimiert, damit schon 2-Segment-Donuts klar trennen.
+ */
+const SEGMENT_HEX = [
+  '#2563EB', // Blau (primary-500)
+  '#F59E0B', // Amber (accent-500)
+  '#10B981', // Emerald
+  '#1A365D', // Navy (primary-700)
+  '#93C5FD', // Hellblau (primary-300)
+  '#FCD34D', // Hellgelb (accent-300)
 ];
 
 function polarToXY(cx: number, cy: number, r: number, angleDeg: number): [number, number] {
@@ -337,29 +340,33 @@ function KreisDiagramm({ block }: { block: Extract<ContentBlock, { typ: 'diagram
   const cx = 90, cy = 90, rO = 80, rI = 48;
   let acc = 0;
   return (
-    <div className="flex flex-col sm:flex-row sm:items-center gap-6">
-      <svg viewBox="0 0 180 180" width={180} height={180}
-        className="shrink-0 w-44 h-44 mx-auto sm:mx-0"
-        role="img" aria-label={block.titel ?? 'Kreisdiagramm'}>
-        {daten.map((dd, i) => {
-          const s = (acc / summe) * 360; acc += dd.wert; const e = (acc / summe) * 360;
-          return <path key={i} d={donutSegment(cx, cy, rO, rI, s, e)}
-            className={SEGMENT_FILL[i % SEGMENT_FILL.length]} />;
-        })}
-      </svg>
-      <ul className="space-y-2 w-full sm:max-w-xs">
-        {daten.map((dd, i) => (
-          <li key={i} className="flex items-baseline gap-2 text-sm">
-            <svg width={12} height={12} className="shrink-0 self-center" aria-hidden="true">
-              <rect width={12} height={12} rx={3} className={SEGMENT_FILL[i % SEGMENT_FILL.length]} />
-            </svg>
-            <span className="text-gray-700 dark:text-gray-300 flex-1">{dd.label}</span>
-            <span className="font-semibold text-gray-800 dark:text-gray-100 tabular-nums">
-              {dd.wert}{dd.einheit ? ` ${dd.einheit}` : ' %'}
-            </span>
-          </li>
-        ))}
-      </ul>
+    // Äußerer Wrapper zentriert die Gruppe horizontal in der breiten Karte.
+    <div className="flex justify-center">
+      {/* Kompakte Einheit: nimmt nur nötige Breite, steht dadurch mittig. */}
+      <div className="flex flex-col items-center sm:flex-row sm:items-center gap-6 sm:gap-8">
+        <svg viewBox="0 0 180 180" width={180} height={180}
+          className="shrink-0 w-44 h-44"
+          role="img" aria-label={block.titel ?? 'Kreisdiagramm'}>
+          {daten.map((dd, i) => {
+            const s = (acc / summe) * 360; acc += dd.wert; const e = (acc / summe) * 360;
+            return <path key={i} d={donutSegment(cx, cy, rO, rI, s, e)}
+              fill={SEGMENT_HEX[i % SEGMENT_HEX.length]} />;
+          })}
+        </svg>
+        <ul className="space-y-2 text-sm min-w-[12rem]">
+          {daten.map((dd, i) => (
+            <li key={i} className="flex items-center gap-2.5">
+              <svg width={12} height={12} className="shrink-0" aria-hidden="true">
+                <rect width={12} height={12} rx={3} fill={SEGMENT_HEX[i % SEGMENT_HEX.length]} />
+              </svg>
+              <span className="text-gray-700 dark:text-gray-300">{dd.label}</span>
+              <span className="ml-auto pl-4 font-semibold text-gray-800 dark:text-gray-100 tabular-nums">
+                {dd.wert}{dd.einheit ? ` ${dd.einheit}` : ' %'}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
@@ -456,7 +463,7 @@ function GestapeltDiagramm({ block }: { block: Extract<ContentBlock, { typ: 'dia
                 const rx = si === 0 ? 4 : 0;
                 const rect = (
                   <rect key={si} x={x} y={y} width={Math.max(w, 0)} height={barH} rx={rx}
-                    className={SEGMENT_FILL[si % SEGMENT_FILL.length]} />
+                    fill={SEGMENT_HEX[si % SEGMENT_HEX.length]} />
                 );
                 x += w;
                 return rect;
@@ -470,7 +477,7 @@ function GestapeltDiagramm({ block }: { block: Extract<ContentBlock, { typ: 'dia
           {namen.map((n, i) => (
             <li key={i} className="flex items-center gap-1.5 text-xs text-gray-600 dark:text-gray-300">
               <svg width={11} height={11} aria-hidden="true">
-                <rect width={11} height={11} rx={2} className={SEGMENT_FILL[i % SEGMENT_FILL.length]} />
+                <rect width={11} height={11} rx={2} fill={SEGMENT_HEX[i % SEGMENT_HEX.length]} />
               </svg>
               {n}
             </li>
