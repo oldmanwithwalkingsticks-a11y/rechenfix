@@ -260,6 +260,69 @@ Drei kalendarische Eigenheiten erklären die meisten „seltsamen" Tagerechnungs
 - **Monatslängen und die Knöchel-Eselsbrücke.** Die deutsche Monatslängen-Regel ist 31-30-31-30-31-30-31-31-30-31-30-31 — mit Ausnahme des Februar (28/29). Eselsbrücke: linke Hand zur Faust ballen, vom kleinen Finger beginnend abwechselnd Knöchel (31 Tage) und Vertiefung (30 Tage) abzählen — Januar = Knöchel, Februar = Vertiefung (28/29), März = Knöchel, … Juli = Knöchel (rechte Faust dazu), August = wieder Knöchel beginnend, … Dezember = Knöchel. Diese Methode merkt sich an einem Nachmittag und hält ein Leben lang.
 - **Zeitumstellung in Deutschland.** Sommerzeit beginnt am letzten Sonntag im März um 2:00 Uhr (Uhren springen auf 3:00, der Tag hat 23 Stunden) und endet am letzten Sonntag im Oktober um 3:00 Uhr (Uhren zurück auf 2:00, der Tag hat 25 Stunden). Für die reine Tageszählung egal — ein Tag bleibt ein Tag. Für Stunden-/Minuten-Genauigkeit über die Übergänge hinweg muss die Verschiebung manuell berücksichtigt werden. Die EU hat die Abschaffung 2019 beschlossen, ein Inkrafttreten steht aber weiterhin aus.
 - **Wochentag-Wiederholungen.** Ein Datum fällt nach 6, 11 oder 28 Jahren wieder auf denselben Wochentag — abhängig davon, wie viele Schaltjahre dazwischen liegen. Faustregel für „normale" Verläufe: nach 11 Jahren ist Ihr Geburtstag mit hoher Wahrscheinlichkeit wieder am gleichen Wochentag. Die 28-Jahre-Regel gilt strikt nur, wenn beide Daten nach dem Schalt-Ausnahmejahr-Pattern (1900/2100/…) liegen — innerhalb eines Jahrhunderts trifft sie meist exakt zu.`,
+    // W19-Tranche-1: modulare Content-Bausteine. Kalendarische Fakten (§ 187/188 BGB,
+    // Gregorianische Schaltjahr-Regel, 9 bundeseinheitliche Feiertage) sind stabil. erklaerung bleibt Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Tage zwischen zwei Daten berechnen',
+        html: `<p>Der Tagerechner ermittelt die exakte Anzahl der Tage zwischen zwei Daten — und rechnet das Ergebnis zusätzlich in Wochen, Monate, Jahre und Stunden um. Auch Arbeitstage (Montag bis Freitag) und Wochenendtage werden getrennt ausgewiesen.</p><p>Standardmäßig wird der <strong>Starttag nicht mitgezählt</strong> — das entspricht der üblichen Fristberechnung. Über einen Toggle lässt sich umstellen, dass beide Tage zählen, etwa um die Dauer eines Urlaubs zu bestimmen. Schaltjahre und unterschiedliche Monatslängen berücksichtigt der Rechner automatisch.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: vom 01.01.2026 bis 31.12.2026',
+        schritte: [
+          { label: 'Differenz = Enddatum − Startdatum', formel: '31.12.2026 − 01.01.2026', ergebnis: '364 Tage' },
+          { label: 'Mit Start + Endtag (+1)', formel: '364 + 1', ergebnis: '365 Tage' },
+          { label: 'In Wochen', formel: '364 ÷ 7', ergebnis: '52 Wochen' },
+        ],
+        fazit: 'Ohne Mitzählung sind es 364 Tage (Fristberechnung nach § 187 Abs. 1 BGB). Für eine Dauer wie Urlaub oder Veranstaltung den Toggle aktivieren — dann zählen beide Tage: 365 Tage.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Kalendertage vs. Arbeitstage pro Jahr',
+        kopf: ['Größe', 'Pro Jahr'],
+        zeilen: [
+          ['Kalendertage', '365 (366 im Schaltjahr)'],
+          ['Wochenendtage (Sa + So)', '104'],
+          ['Arbeitstage (Mo–Fr)', 'rund 261'],
+          ['abzüglich Feiertage', 'rund 248–252'],
+        ],
+        fussnote: 'Der Rechner zählt Arbeitstage als Mo–Fr ohne Feiertage (diese sind bundeslandabhängig) — die regionalen Feiertage daher manuell abziehen.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Gesetzliche Feiertage in Deutschland',
+        werte: [
+          { label: 'Bundesweit einheitlich', wert: '9', hinweis: 'u. a. Neujahr, 1. Mai, 3. Oktober, beide Weihnachtsfeiertage' },
+          { label: 'Wenigste (z. B. Hamburg)', wert: '9–10', hinweis: 'norddeutsche Bundesländer' },
+          { label: 'Meiste (Bayern)', wert: 'bis 13', hinweis: 'inklusive regionaler Feiertage' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Schaltjahre, Monatslängen & Zeitumstellung',
+        html: `<p><strong>Schaltjahr-Regel:</strong> Ein Jahr ist ein Schaltjahr, wenn es durch 4 teilbar ist — Ausnahme: durch 100 teilbar = keins, außer zusätzlich durch 400 teilbar (dann doch). 2024 und 2028 sind Schaltjahre, 2026 und 2027 nicht; 2000 war eins, 1900 und 2100 sind keine. Die Regel stammt aus dem Gregorianischen Kalender (1582) und korrigiert den Drift gegen das Sonnenjahr (365,2422 Tage).</p><p><strong>Monatslängen:</strong> 31-30-Wechsel mit Ausnahme des Februar (28 bzw. 29 Tage). „Ein Monat ab dem 31.01." endet am 28.02., nicht am 03.03. — bei Monatsfristen Tage als Basis nehmen.</p><p><strong>Zeitumstellung:</strong> Für reine Tagezählung irrelevant (ein Tag bleibt ein Tag). Nur bei stundengenauer Umrechnung über den letzten Märzsonntag (−1 Std.) bzw. Oktobersonntag (+1 Std.) muss die Stunde manuell berücksichtigt werden.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Typische Anwendungsfälle',
+        punkte: [
+          'Countdown bis Urlaub, Hochzeit, Geburtstag oder Weihnachten',
+          'Kündigungs- und Vertragsfristen bis zum letzten gültigen Tag bestimmen',
+          'Urlaubsdauer inklusive Start- und Endtag berechnen',
+          'Altersberechnung — „Wie viele Tage bin ich alt?"',
+          'Projektplanung mit realistischer Arbeitstage-Zahl',
+          'Ablauf von Garantie, Probezeit oder Widerrufsfrist ermitteln',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Frist oder Dauer? Der Mitzähl-Toggle',
+        text: 'Bei juristischen Fristen wird der Starttag in der Regel nicht mitgezählt (§ 187 Abs. 1 BGB) — eine 14-Tage-Frist ab Montag endet am übernächsten Montag. Bei einer Dauer wie Urlaub oder Veranstaltung zählen dagegen beide Tage. Faustregel: Frist = ohne Starttag, Dauer = mit beiden Tagen. Der Toggle „Start + Endtag mitzählen" stellt genau das um.',
+      },
+    ],
     faq: [
       {
         frage: 'Wie berechne ich die Tage zwischen zwei Daten?',
