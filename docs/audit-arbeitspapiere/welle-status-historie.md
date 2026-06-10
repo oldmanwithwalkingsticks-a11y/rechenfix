@@ -3046,4 +3046,21 @@ Self-Check hatte aufgedeckt, dass beide trotz „Goldstandard"-Label darunter la
 (`check-contentbloecke-wortzahl.mjs`). Offen mit echten Zahlen: bmi 459, tage 385,
 spritkosten 411 W. Buffer-Lehre: nicht knapp auf 1.500 zielen (mwst lag erst bei 1.501),
 sondern ~1.550+ für Renderer-Messdrift-Reserve.
+
+### Goldstandard bmi (10.06.2026)
+- **48bf7e3** bmi-rechner Goldstandard (gemessen 459 → **1.568 W**, 13 Bausteine, Leitformat
+  „Risiko- & Kontext-Seite"): Diagramm BMI-Verteilung DE (Destatis Mikrozensus 2025: 53,4 %
+  BMI ≥ 25, 17,9 % adipös; M 62,6/19,9 %, F 43,8/15,8 %; Ø 1,73 m/78,3 kg) + WHO-Tabelle +
+  BMI/Taillenumfang-Vergleich. Tiefe über 6 text-Blöcke: Was der BMI misst, Geschichte
+  (Quetelet 1830er → Ancel Keys 1972 prägt „Body-Mass-Index"), Zahlen einordnen (mit
+  Selbstauskunft-Methodenhinweis), was die WHO-Kategorien aussagen/nicht aussagen, Grenzen
+  (Sportler-Beispiel 1,80 m/95 kg = BMI 29,3 aus Muskelmasse), weitere Messgrößen
+  (Taillenumfang/WHtR/Körperfett), BMI in Kindheit/Alter/Schwangerschaft.
+- **SENSITIVITÄT durchgehend gewahrt:** keine Diät-/Kalorien-/Gewichtsziel-Zahlen, keine
+  Wertung, Verteilung als Faktum statt Appell, Klassen deskriptiv, durchgängig Arzt-Verweis,
+  Kinder/Jugendliche → Kromeyer-Hauschild-Perzentilen. Self-Check iterativ: 947 → 1.250 →
+  1.524 → 1.568 (Schätzung „im Kopf" hätte erneut „~1.500" gemeldet — Skript zwingt zur Tiefe).
+
+**Goldstandard-Stand:** mwst 1.559, zins 1.559, stundenlohn 1.580, bmi 1.568 — alle ≥ 1.500.
+Offen mit echten Zahlen: tage 385, spritkosten 411 W.
   Klammer-Struktur von headers() vor Commit prüfen (Get-Content -Tail 6).
