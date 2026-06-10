@@ -2934,4 +2934,30 @@ Format (Tabellen / Diagramme / Vergleiche / Beispielrechnungen) + eigenen inhalt
 Schwerpunkt. An der Form müssen die Seiten unterscheidbar sein, nicht nur an den Werten.
 YMYL-Statistik (BMI-Verteilung) gegen Destatis-Primärquelle per WebFetch verifiziert, nicht
 aus Memory. tsc je Rechner clean (Rest-Fehler layout.tsx lokal-only). Build-Gate nur Vercel.
+
+### Goldstandard-Vorlage — mwst auf volle Tiefe (~1.300 W, 10 Bausteine)
+Zweiter Befund: Die Nacharbeit hatte zwar je ein eigenes Leitformat, aber zu DÜNN
+(mwst ~239 W Fließtext statt ~1.200). mwst-rechner als Goldstandard-Vorlage ausgebaut
+(Commit **a06f3df**): 10 Bausteine, ~1.300 W, Leitformat „Tabellen-Nachschlagewerk".
+
+- **Aktualitäts-Highlight Gastronomie-Reform 2026:** StÄndG 2025 (BGBl. I Nr. 363),
+  § 12 Abs. 2 Nr. 15 UStG — ab 01.01.2026 alle Speisen 7 %, Getränke 19 % (einheitlich
+  vor Ort/to-go/Lieferung). Korrigiert den bis dahin gepflegten Stand „Speisen vor Ort
+  19 % seit 01.01.2024" (war für 2024/25 korrekt, ab 2026 überholt). Per WebSearch +
+  WebFetch gegen Bundesregierung/Bundestag/ZDH verifiziert; Hotel-Frühstück-Speisen 7 %
+  (entgegen Prompt-Vorgabe „19 %" — Primärquelle schlägt Prompt-Annahme, L-11/L-37).
+- Tabellen vertieft: Steuersatz-Übersicht 15 Zeilen (inkl. PV 0 %, kuriose Anlage-2-
+  Ausnahmen Kaviar/Hummer/Süßkartoffel 19 %), Reverse-Charge § 13b 7 Zeilen, Pflichtangaben
+  § 14 Abs. 4 10 Zeilen.
+
+**L-W19.Wortbudget:** Strukturelle Einzigartigkeit (Leitformat) UND Fachtiefe (Wortzahl)
+sind ZWEI getrennte Anforderungen — Bausteine allein lösen Thin-Content nicht, wenn die
+text-Blöcke zu kurz bleiben. Konsequenz: Wort-Budget pro text-Baustein verbindlich
+festlegen (z. B. Intro 180–220 W, Fach-Blöcke 130–200 W), nicht als Richtwert behandeln.
+Zielkorridor pro migriertem Rechner ~1.200–1.400 W sichtbarer Text. mwst ist die
+Niveau-Referenz für die restlichen 4 (zins/stundenlohn/bmi/tage) und künftige Tranchen.
+
+**Doku-Folgebedarf:** CLAUDE.md Rechtsstand-Tabelle führt noch „Gastronomie 19 % seit
+01.01.2024" — bei nächstem Doku-Sync auf § 12 Abs. 2 Nr. 15 / Speisen 7 % ab 01.01.2026
+aktualisieren (Karsten gemeldet).
   Klammer-Struktur von headers() vor Commit prüfen (Get-Content -Tail 6).
