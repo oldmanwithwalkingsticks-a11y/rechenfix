@@ -361,78 +361,73 @@ Besonders eindrucksvoll wird es mit einer zusätzlichen monatlichen Sparrate. We
 Für die Altersvorsorge bedeutet das: Jedes Jahr, das Sie früher beginnen, macht einen erheblichen Unterschied. Ein 25-Jähriger, der 200 € monatlich spart, hat bei 5% Rendite mit 65 Jahren über 300.000 €. Beginnt er erst mit 35, sind es nur rund 166.000 € — trotz nur 10 Jahren Unterschied.
 
 Wichtig zu beachten: In der Praxis mindern die Abgeltungssteuer (25% plus Solidaritätszuschlag) die tatsächlichen Erträge. Der Sparerpauschbetrag von 1.000 € (bzw. 2.000 € für Ehepaare) bleibt steuerfrei. Inflation verringert zudem die Kaufkraft des Endkapitals. Trotzdem bleibt der Zinseszins das mächtigste Werkzeug für den langfristigen Vermögensaufbau.`,
-    // W19-Tranche-1: modulare Content-Bausteine. Steuer-/Rechtswerte mit §-Zitat,
-    // Zinseszins-Werte nachgerechnet (10.000 € @ 5 %). erklaerung bleibt Fallback.
+    // W19-Tranche-1-Nacharbeit: Leitformat „Visueller Zeitverlauf" — 2 Diagramme dominant,
+    // Tabelle stützend, KEIN Vergleich. Zinseszins-Werte nachgerechnet (10.000 € @ 5 %),
+    // Abgeltungsteuer § 32d/§ 43 EStG. erklaerung bleibt Fallback.
     contentBloecke: [
       {
         typ: 'text',
-        titel: 'Zins und Zinseszins — der Unterschied',
-        html: `<p>Zinsen sind das Entgelt für überlassenes Kapital, angegeben in Prozent pro Jahr (p. a.). Bei der <strong>einfachen Verzinsung</strong> werden Zinsen nur auf das Anfangskapital berechnet — das Kapital wächst gleichmäßig (linear).</p><p>Beim <strong>Zinseszins</strong> werden die Zinsen am Jahresende dem Kapital zugeschlagen und im Folgejahr mitverzinst: Sie bekommen Zinsen auf Ihre Zinsen. Dadurch wächst das Kapital exponentiell, also mit zunehmender Geschwindigkeit. Je länger die Laufzeit und je höher der Satz, desto stärker der Effekt — der Grund, warum frühes, regelmäßiges Sparen so wirkungsvoll ist.</p>`,
-      },
-      {
-        typ: 'beispielrechnung',
-        titel: 'Beispiel: 10.000 € zu 3,5 % über 10 Jahre',
-        schritte: [
-          { label: 'Anfangskapital', formel: '10.000,00 €', ergebnis: '10.000,00 €' },
-          { label: 'Mit Zinseszins: K₀ × 1,035¹⁰', formel: '10.000 € × 1,41060', ergebnis: '14.105,99 €' },
-          { label: 'Ohne Zinseszins: K₀ × (1 + 0,035 × 10)', formel: '10.000 € × 1,35', ergebnis: '13.500,00 €' },
-        ],
-        fazit: 'Der Zinseszins bringt hier 605,99 € mehr als die einfache Verzinsung — allein durch die Wiederanlage der jährlichen Zinsen. Über längere Laufzeiten wächst dieser Vorsprung dramatisch.',
+        titel: 'Der Zinseszins über die Zeit',
+        html: `<p>Zinsen sind das Entgelt für überlassenes Kapital (Prozent pro Jahr, p. a.). Bei <strong>einfacher Verzinsung</strong> fallen Zinsen nur auf das Anfangskapital an — das Vermögen wächst linear. Beim <strong>Zinseszins</strong> werden die Zinsen jedes Jahr dem Kapital zugeschlagen und mitverzinst: Sie bekommen Zinsen auf Ihre Zinsen, das Wachstum verläuft exponentiell.</p><p>Die folgenden Diagramme machen das sichtbar — wie aus einem Startbetrag über die Jahre ein Vielfaches wird, und welcher Anteil davon auf Ihre Einzahlungen und welcher auf die Zinsen entfällt.</p>`,
       },
       {
         typ: 'diagramm',
         variante: 'balken',
-        titel: 'Zinseszins-Effekt: 10.000 € bei 5 % p. a.',
+        titel: 'Kapitalwachstum: 10.000 € bei 5 % p. a. (mit Zinseszins)',
         daten: [
           { label: 'nach 10 Jahren', wert: 16289, einheit: '€' },
           { label: 'nach 20 Jahren', wert: 26533, einheit: '€' },
           { label: 'nach 30 Jahren', wert: 43219, einheit: '€' },
-          { label: 'nach 40 Jahren', wert: 70400, einheit: '€' },
         ],
-        fussnote: 'Endkapital aus 10.000 € Startkapital mit Zinseszins. Ohne Zinseszins wären es nach 40 Jahren nur 30.000 € — der Zinseszins versiebenfacht statt verdreifacht.',
+        fussnote: 'Endkapital aus 10.000 € Startkapital. Ohne Zinseszins wären es nach 30 Jahren nur 25.000 € — der Zinseszins steuert die zusätzlichen 18.219 € bei.',
       },
       {
-        typ: 'text',
-        titel: 'Warum früh anfangen den größten Hebel hat',
-        html: `<p>Weil der Zinseszins exponentiell wirkt, zählt vor allem die Zeit. Ein 25-Jähriger, der monatlich 200 € zu 5 % anlegt, hat mit 65 über 300.000 € — wer erst mit 35 startet, kommt unter sonst gleichen Bedingungen nur auf rund 166.000 €. Zehn Jahre früher zu beginnen verdoppelt hier nahezu das Endkapital.</p><p>Wer zusätzlich zu 10.000 € Startkapital monatlich 200 € spart (5 %, Zinseszins), erreicht nach 30 Jahren über 210.000 € — bei nur 82.000 € Einzahlungen. Der Zinseszins erzeugt damit mehr als das eingezahlte Kapital an zusätzlichem Gewinn.</p>`,
-      },
-      {
-        typ: 'statistik',
-        titel: 'Steuer & Freibetrag auf Kapitalerträge',
-        werte: [
-          { label: 'Abgeltungssteuer', wert: '26,375 %', hinweis: '25 % + Soli; mit Kirchensteuer rund 28 %' },
-          { label: 'Sparerpauschbetrag', wert: '1.000 €', hinweis: '2.000 € für Ehepaare; Freistellungsauftrag stellen' },
-          { label: 'Gesetzl. Zinssatz', wert: '4 % p. a.', hinweis: '§ 246 BGB, sofern nichts vereinbart ist' },
+        typ: 'beispielrechnung',
+        titel: 'Zinseszins Schritt für Schritt (1.000 € zu 5 %)',
+        schritte: [
+          { label: 'Jahr 1: 1.000 € + 5 %', formel: '1.000 € × 1,05', ergebnis: '1.050,00 €' },
+          { label: 'Jahr 2: 1.050 € + 5 %', formel: '1.050 € × 1,05', ergebnis: '1.102,50 €' },
+          { label: 'Jahr 3: 1.102,50 € + 5 %', formel: '1.102,50 € × 1,05', ergebnis: '1.157,63 €' },
         ],
+        fazit: 'Im dritten Jahr werden bereits Zinsen auf die zuvor gutgeschriebenen Zinsen gezahlt. Einfache Verzinsung läge bei 1.150 € (3 × 50 €) — der Zinseszins bringt hier 7,63 € mehr, und der Vorsprung wächst mit jedem Jahr.',
       },
       {
         typ: 'tabelle',
-        titel: '72er-Regel: Wann verdoppelt sich das Kapital?',
-        kopf: ['Zinssatz', '72er-Näherung', 'Exakter Wert'],
+        titel: 'Einfache Verzinsung vs. Zinseszins (10.000 € bei 5 %)',
+        kopf: ['Jahre', 'Einfach', 'Zinseszins', 'Differenz'],
         zeilen: [
-          ['1 %', '72 Jahre', '69,7 Jahre'],
-          ['3 %', '24 Jahre', '23,4 Jahre'],
-          ['5 %', '14,4 Jahre', '14,2 Jahre'],
-          ['6 %', '12 Jahre', '11,9 Jahre'],
+          ['10', '15.000 €', '16.289 €', '1.289 €'],
+          ['20', '20.000 €', '26.533 €', '6.533 €'],
+          ['30', '25.000 €', '43.219 €', '18.219 €'],
+          ['40', '30.000 €', '70.400 €', '40.400 €'],
         ],
-        fussnote: 'Die 72er-Regel (72 ÷ Zinssatz) ist eine Näherung. Bei niedrigen Sätzen unter 2 % wächst die Abweichung — dann direkt mit dem Rechner prüfen.',
+        fussnote: 'Einfache Verzinsung berechnet Zinsen nur auf die 10.000 € Anfangskapital. Beim Zinseszins werden die jährlichen Zinsen mitverzinst — die Differenz wächst exponentiell.',
       },
       {
-        typ: 'checkliste',
-        titel: 'Vor dem Sparplan beachten',
-        punkte: [
-          'Zuerst rund 3 Monatsgehälter Notgroschen auf dem Tagesgeld halten, erst dann langfristig binden',
-          'Freistellungsauftrag bei der Bank stellen (Erträge bis 1.000 € bleiben steuerfrei)',
-          'Prüfen, ob ein Angebot mit oder ohne Zinseszins rechnet',
-          'Reale statt nur nominale Rendite betrachten (Zinssatz minus Inflation)',
-          'Abgeltungssteuer von rund 26,375 % ins Endkapital einplanen',
+        typ: 'diagramm',
+        variante: 'balken',
+        titel: 'Sparplan über 30 Jahre: Einzahlung vs. Zinsertrag',
+        daten: [
+          { label: 'Eingezahlt', wert: 82000, einheit: '€' },
+          { label: 'Zinsertrag', wert: 128000, einheit: '€' },
+          { label: 'Endkapital', wert: 210000, einheit: '€' },
+        ],
+        fussnote: '10.000 € Startkapital plus 200 €/Monat über 30 Jahre bei 5 % p. a. Von rund 210.000 € Endkapital sind nur 82.000 € eigene Einzahlung — der Rest ist Zinseszins.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Eckwerte zum Zinseszins',
+        werte: [
+          { label: 'Verdopplung bei 5 %', wert: '14,4 Jahre', hinweis: '72er-Regel (72 ÷ 5); exakt 14,2 Jahre' },
+          { label: '1 % mehr Zins (30 J.)', wert: '+33 %', hinweis: 'bei 10.000 €: 32.434 € (4 %) → 43.219 € (5 %)' },
+          { label: 'Sparerpauschbetrag', wert: '1.000 €', hinweis: '2.000 € für Ehepaare, steuerfrei' },
         ],
       },
       {
         typ: 'infobox',
         variante: 'hinweis',
-        titel: 'Nominale vs. reale Rendite',
-        text: 'Inflation mindert die Kaufkraft des Endkapitals. Eine nominale Rendite von 3,5 % bei 2 % Inflation ergibt nur rund 1,5 % reale Rendite. Faustregel: durchschnittliche Inflationsrate vom Zinssatz abziehen. Tages- und Festgeld schlagen die Inflation oft nur knapp; Aktien und Immobilien gelten langfristig als besserer Inflationsschutz, allerdings mit höherem Risiko.',
+        titel: 'Steuer auf Kapitalerträge',
+        text: 'Auf Zinsen, Dividenden und Kursgewinne fällt die Abgeltungsteuer von 25 % plus Solidaritätszuschlag an — zusammen 26,375 %, mit Kirchensteuer rund 28 % (§ 43, § 32d EStG). Der Sparerpauschbetrag von 1.000 € pro Person (2.000 € für Ehepaare) bleibt steuerfrei; dafür bei der Bank einen Freistellungsauftrag stellen. Ohne Freibetrag bleiben aus 10.000 € Bruttozinsen netto rund 7.363 €.',
       },
     ],
     faq: [
