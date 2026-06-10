@@ -3,21 +3,24 @@ import type { ContentBlock } from '@/lib/rechner-config/types';
 /**
  * Server-Component (KEIN 'use client'): rendert modulare Content-Bausteine
  * server-seitig ins SSR-HTML, damit Crawler (AdSense) und Nutzer den Inhalt
- * ohne Hydration sehen. Eingeführt W19-Pilot, gestalterisch aufgewertet W19.0b.
+ * ohne Hydration sehen. Eingeführt W19-Pilot, gestalterisch aufgewertet W19.0b,
+ * Feinschliff W19.0f (Titel über der Kachel, mehr Abstand, dezenter Schatten).
  *
- * Design (W19.0b): inhaltsschwere Blöcke (tabelle, statistik, diagramm,
- * vergleich, beispielrechnung) sitzen in abgesetzten Karten (.card-Optik ohne
- * Hover-Shadow, da nicht klickbar). Überschriften im Marken-Ton (primary),
- * Statistik-Kacheln mit rotierenden Akzentfarben, Diagramm-Balken + Tabellen-
- * Header in primary. Nur vorhandene Tailwind-Tokens, keine neuen Farben.
+ * Design: Daten-Bausteine (tabelle, statistik, diagramm, vergleich,
+ * beispielrechnung) sitzen in freistehenden Kacheln (.card-Optik ohne Hover,
+ * + shadow-sm), die Überschrift steht GRÖSSER ÜBER der Kachel im Fluss.
+ * Callouts (checkliste, infobox) sind in sich geschlossen und tragen ihren
+ * Titel innen. text bleibt Fließtext ohne Kachel. Nur vorhandene Tailwind-
+ * Tokens, keine neuen Farben.
  *
  * CLS-Disziplin (Lehre W14): Statistik-Kacheln haben feste Mindesthöhe,
  * Inline-SVG-Diagramme tragen Intrinsic-width/height-Attribute + `w-full h-auto`,
- * sodass der Browser den Platz vor dem Paint reserviert. Keine Bilder/Embeds.
+ * sodass der Browser den Platz vor dem Paint reserviert. shadow-sm ändert kein
+ * Layout. Keine Bilder/Embeds.
  */
 export default function ContentBlockRenderer({ bloecke }: { bloecke: ContentBlock[] }) {
   return (
-    <div className="space-y-6 md:space-y-8">
+    <div className="space-y-10 md:space-y-12">
       {bloecke.map((block, i) => (
         <ContentBlockItem key={i} block={block} />
       ))}
@@ -25,29 +28,34 @@ export default function ContentBlockRenderer({ bloecke }: { bloecke: ContentBloc
   );
 }
 
-/** Karten-Wrapper für inhaltsschwere Blöcke — .card-Optik ohne Hover-Shadow. */
-function Card({ children }: { children: React.ReactNode }) {
+/** Kachel-Klasse für Daten-Bausteine — .card-Optik ohne Hover, mit dezentem Schatten. */
+const KACHEL =
+  'bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl shadow-sm p-5 md:p-6';
+
+/** Block-Überschrift im Marken-Ton — steht ÜBER der Kachel (W19.0f), groß. */
+function BlockTitel({ children }: { children: React.ReactNode }) {
   return (
-    <section className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl p-5 md:p-6">
-      {children}
-    </section>
+    <h3 className="text-xl md:text-2xl font-bold text-primary-700 dark:text-primary-300 mb-3">{children}</h3>
   );
 }
 
-/** Block-Überschrift im Marken-Ton (orientiert an .section-title, eine Stufe kleiner). */
-function Heading({ children }: { children: React.ReactNode }) {
+/** Daten-Kachel: Titel außerhalb (über) der Karte, Inhalt in der Karte. */
+function DatenKachel({ titel, children }: { titel?: string; children: React.ReactNode }) {
   return (
-    <h3 className="text-lg md:text-xl font-bold text-primary-700 dark:text-primary-300 mb-4">{children}</h3>
+    <section>
+      {titel && <BlockTitel>{titel}</BlockTitel>}
+      <div className={KACHEL}>{children}</div>
+    </section>
   );
 }
 
 function ContentBlockItem({ block }: { block: ContentBlock }) {
   switch (block.typ) {
     case 'text':
-      // Fließtext bleibt ohne Karten-Wrapper (atmet frei).
+      // Fließtext bleibt ohne Kachel (atmet frei); Titel drüber, groß.
       return (
         <section>
-          {block.titel && <Heading>{block.titel}</Heading>}
+          {block.titel && <BlockTitel>{block.titel}</BlockTitel>}
           <div
             className="leading-relaxed [&_p]:mb-4 [&_p:last-child]:mb-0 [&_strong]:font-semibold [&_strong]:text-gray-800 dark:[&_strong]:text-gray-100"
             dangerouslySetInnerHTML={{ __html: block.html }}
@@ -57,8 +65,7 @@ function ContentBlockItem({ block }: { block: ContentBlock }) {
 
     case 'tabelle':
       return (
-        <Card>
-          {block.titel && <Heading>{block.titel}</Heading>}
+        <DatenKachel titel={block.titel}>
           <div className="overflow-x-auto">
             <table className="w-full text-sm border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
               <thead>
@@ -86,13 +93,12 @@ function ContentBlockItem({ block }: { block: ContentBlock }) {
           {block.fussnote && (
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">{block.fussnote}</p>
           )}
-        </Card>
+        </DatenKachel>
       );
 
     case 'statistik':
       return (
-        <Card>
-          {block.titel && <Heading>{block.titel}</Heading>}
+        <DatenKachel titel={block.titel}>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {block.werte.map((w, j) => {
               // Rotierende Marken-Akzente (Index % 3): primary / amber / emerald.
@@ -112,7 +118,7 @@ function ContentBlockItem({ block }: { block: ContentBlock }) {
               );
             })}
           </div>
-        </Card>
+        </DatenKachel>
       );
 
     case 'diagramm':
@@ -120,8 +126,7 @@ function ContentBlockItem({ block }: { block: ContentBlock }) {
 
     case 'vergleich':
       return (
-        <Card>
-          {block.titel && <Heading>{block.titel}</Heading>}
+        <DatenKachel titel={block.titel}>
           <div className="overflow-x-auto">
             <table className="w-full text-sm border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
               <thead>
@@ -142,13 +147,12 @@ function ContentBlockItem({ block }: { block: ContentBlock }) {
               </tbody>
             </table>
           </div>
-        </Card>
+        </DatenKachel>
       );
 
     case 'beispielrechnung':
       return (
-        <Card>
-          {block.titel && <Heading>{block.titel}</Heading>}
+        <DatenKachel titel={block.titel}>
           <ol className="space-y-3">
             {block.schritte.map((s, j) => (
               <li key={j} className="flex gap-3 items-start">
@@ -168,11 +172,11 @@ function ContentBlockItem({ block }: { block: ContentBlock }) {
               {block.fazit}
             </div>
           )}
-        </Card>
+        </DatenKachel>
       );
 
     case 'checkliste':
-      // Eigener Tipp-Karten-Look (emerald), kein neutraler Card-Wrapper.
+      // Callout (emerald): in sich geschlossen, Titel INNEN — bewusst keine Daten-Kachel.
       return (
         <section className="bg-emerald-50 dark:bg-emerald-500/10 rounded-2xl p-5 md:p-6">
           {block.titel && (
@@ -200,7 +204,7 @@ function ContentBlockItem({ block }: { block: ContentBlock }) {
       );
 
     case 'infobox':
-      // Hat schon eigenen farbigen Rahmen — kein zusätzlicher Karten-Wrapper.
+      // Callout: hat eigenen farbigen Rahmen + internen Titel — kein Daten-Kachel-Wrapper.
       return <Infobox block={block} />;
 
     default:
@@ -226,8 +230,7 @@ function BalkenDiagramm({
   const H = daten.length * rowH + 8;
 
   return (
-    <Card>
-      {block.titel && <Heading>{block.titel}</Heading>}
+    <DatenKachel titel={block.titel}>
       <svg
         viewBox={`0 0 ${W} ${H}`}
         width={W}
@@ -276,7 +279,7 @@ function BalkenDiagramm({
       {block.fussnote && (
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">{block.fussnote}</p>
       )}
-    </Card>
+    </DatenKachel>
   );
 }
 
