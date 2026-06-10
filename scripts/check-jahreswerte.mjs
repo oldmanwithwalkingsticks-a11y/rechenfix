@@ -23,6 +23,30 @@ const CYAN = '\x1b[36m';
 const DIM = '\x1b[2m';
 const RESET = '\x1b[0m';
 
+// --- Soft-Freshness-Check (W19): redaktionelle Spritpreis-Referenz ---
+// Reines Pattern-Lint (kein Import): liest den `stand`-Wert aus
+// spritpreise-parameter.ts per Regex und warnt, wenn er älter als 45 Tage ist.
+// Bewusst NUR console.warn — kein Exit-Code-Einfluss (redaktioneller Wert, kein
+// gesetzlicher Stichtag). Pflege monatlich, Quelle ADAC.
+(function checkSpritpreisFreshness() {
+  try {
+    const spritFile = join(ROOT, 'lib/berechnungen/spritpreise-parameter.ts');
+    const src = readFileSync(spritFile, 'utf8');
+    const m = src.match(/stand:\s*'(\d{4}-\d{2}-\d{2})'/);
+    if (!m) return;
+    const stand = new Date(`${m[1]}T00:00:00`);
+    const ageDays = Math.floor((Date.now() - stand.getTime()) / 86400000);
+    if (ageDays > 45) {
+      console.warn(
+        `${YELLOW}⚠ Spritpreis-Referenz (SPRITPREISE_REFERENZ.stand = ${m[1]}) ist ${ageDays} Tage alt ` +
+        `(> 45). Bitte gegen ADAC-Bundesschnitt aktualisieren: lib/berechnungen/spritpreise-parameter.ts${RESET}`,
+      );
+    }
+  } catch {
+    // Datei fehlt o. Ä. — Freshness-Check still überspringen, niemals den Build brechen.
+  }
+})();
+
 // --- Allowlist-Matching (einfacher Glob → Regex) ---
 function globToRegex(pattern) {
   const escaped = pattern

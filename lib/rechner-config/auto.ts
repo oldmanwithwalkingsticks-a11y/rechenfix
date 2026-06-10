@@ -1,9 +1,18 @@
 import type { RechnerConfig } from './types';
+import { SPRITPREISE_REFERENZ } from '@/lib/berechnungen/spritpreise-parameter';
+
+// Lokale Helfer für deutsche Zahlformatierung in den W19-Content-Bausteinen
+// (Komma als Dezimaltrenner). Nur in diesem Modul verwendet.
+const eur = (n: number, dezimal = 2) => n.toFixed(dezimal).replace('.', ',');
+const datumDe = (iso: string) => iso.split('-').reverse().join('.');
+
+// Spritpreise: ADAC-Bundesschnitt, Stand laut SPRITPREISE_REFERENZ.stand
+const STAND_DE = datumDe(SPRITPREISE_REFERENZ.stand);
 
 export const autoRechner: RechnerConfig[] = [
   {
     slug: 'spritkosten-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-10',
     zeigtAuthorBio: true,
     titel: 'Spritkostenrechner',
     beschreibung: 'Spritkosten und Fahrtkosten berechnen: Benzinverbrauch, Kosten pro Kilometer und Gesamtkosten für jede Strecke.',
@@ -77,6 +86,90 @@ Spritkosten sind einer der größten variablen Kostenposten beim Autofahren — 
 - **Dachbox-, Fahrradträger- und Anhänger-Mehrverbrauch ignoriert.** Eine Dachbox erhöht den Verbrauch je nach Geschwindigkeit um 1–2 L/100km (10–20 % Mehrverbrauch), ein Heckträger mit Fahrrädern um 0,5–1,5 L/100km, ein Wohnwagen-Anhänger oft um 30–50 %. Wer für die Urlaubsfahrt mit Dachbox den normalen Verbrauch ansetzt, kalkuliert das Sprit-Budget rund 100–200 € zu niedrig.
 - **Stadt-, Land- und Autobahn-Verbrauch pauschalisiert.** Stadtfahrten verbrauchen meist 30–50 % mehr als Autobahn-Fahrten bei 110–120 km/h, ab 130 km/h kehrt sich das wieder um (Luftwiderstand). Wer einen pauschalen Mischwert nutzt, kommt bei einer reinen Autobahnreise aufs falsche Ergebnis. Faustregel: für reine Autobahnstrecken Bordcomputer-Wert „Autobahn" verwenden, für reine Stadtstrecken den höheren Stadtverbrauch.
 - **Kaltstart-Effekt bei Kurzstrecken unterschätzt.** Auf den ersten 4–5 km nach einem Kaltstart verbraucht ein Verbrenner 30–80 % mehr als im warmen Betriebszustand. Wer nur Kurzstrecken fährt (Schule, Einkauf, kurze Fahrten zur Arbeit), liegt im Jahresverbrauch oft 1–2 L/100km über dem Bordcomputer-Wert, der den Anteil des Kaltlaufs nicht prominent ausweist.`,
+    // W19-Pilot: Modulare Content-Bausteine. Werte aus SPRITPREISE_REFERENZ
+    // (ADAC-Bundesschnitt) zur Build-Zeit eingesetzt. erklaerung bleibt als Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was kostet eine Fahrt wirklich?',
+        html: `<p>Der Spritkostenrechner zeigt in Sekunden, was eine Strecke tatsächlich kostet — egal ob Urlaubsreise, täglicher Arbeitsweg oder Reisekostenabrechnung. Sie geben Entfernung, Durchschnittsverbrauch und den aktuellen Spritpreis ein, optional erweitert auf Hin- und Rückfahrt.</p><p>Sofort erhalten Sie die Gesamtkosten, den Verbrauch in Litern und die Kosten pro Kilometer. Der größte Hebel für ein realistisches Ergebnis ist Ihr <strong>tatsächlicher</strong> Verbrauch: Die Herstellerangaben nach WLTP liegen in der Praxis meist 15–25 % darunter. Wer den Bordcomputer-Langzeitwert oder zwei bis drei eigene Tankfüllungen mittelt, rechnet deutlich genauer.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Aktuelle Spritpreise (ADAC-Bundesschnitt)',
+        werte: [
+          { label: 'Super E10', wert: `${eur(SPRITPREISE_REFERENZ.superE10, 3)} €/L`, hinweis: SPRITPREISE_REFERENZ.tankrabattHinweis },
+          { label: 'Diesel', wert: `${eur(SPRITPREISE_REFERENZ.diesel, 3)} €/L`, hinweis: SPRITPREISE_REFERENZ.tankrabattHinweis },
+          { label: 'Stand', wert: STAND_DE, hinweis: `Quelle: ${SPRITPREISE_REFERENZ.quelle}` },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: Köln–München (575 km)',
+        schritte: [
+          { label: 'Strecke durch 100 teilen', formel: '575 km ÷ 100', ergebnis: '5,75' },
+          { label: 'mal Verbrauch (Diesel, 7,0 L/100km)', formel: '5,75 × 7,0 L', ergebnis: '40,25 L' },
+          { label: 'mal Dieselpreis', formel: `40,25 L × ${eur(SPRITPREISE_REFERENZ.diesel, 3)} €/L`, ergebnis: `${eur(5.75 * 7.0 * SPRITPREISE_REFERENZ.diesel)} €` },
+        ],
+        fazit: `Einfache Fahrt rund ${eur(5.75 * 7.0 * SPRITPREISE_REFERENZ.diesel, 0)} €, hin und zurück etwa ${eur(5.75 * 7.0 * SPRITPREISE_REFERENZ.diesel * 2, 0)} €. Kosten pro Kilometer: ${eur((5.75 * 7.0 * SPRITPREISE_REFERENZ.diesel) / 575)} €.`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Durchschnittsverbrauch nach Fahrzeugklasse',
+        kopf: ['Klasse', 'Benzin (L/100km)', 'Diesel (L/100km)', 'Beispielmodelle'],
+        zeilen: [
+          ['Kleinwagen', '5,0–6,5', '4,0–5,0', 'VW Polo, Opel Corsa'],
+          ['Kompaktklasse', '6,0–7,5', '4,5–5,5', 'VW Golf, Ford Focus'],
+          ['Mittelklasse', '7,0–9,0', '5,0–6,5', 'BMW 3er, Mercedes C-Klasse'],
+          ['SUV', '8,0–11,0', '6,0–8,0', 'VW Tiguan, BMW X3'],
+          ['Van/Transporter', '9,0–13,0', '7,0–9,0', 'VW Sharan, Mercedes Sprinter'],
+        ],
+        fussnote: 'Richtwerte — der reale Verbrauch hängt stark von Fahrweise, Beladung und Streckenprofil ab.',
+      },
+      {
+        typ: 'diagramm',
+        variante: 'balken',
+        titel: 'Monatliche Spritkosten bei 1.000 km/Monat (Super E10)',
+        daten: [
+          { label: 'Kleinwagen', wert: Math.round(5.5 * 10 * SPRITPREISE_REFERENZ.superE10), einheit: '€' },
+          { label: 'Kompaktklasse', wert: Math.round(6.75 * 10 * SPRITPREISE_REFERENZ.superE10), einheit: '€' },
+          { label: 'Mittelklasse', wert: Math.round(8.0 * 10 * SPRITPREISE_REFERENZ.superE10), einheit: '€' },
+          { label: 'SUV', wert: Math.round(9.5 * 10 * SPRITPREISE_REFERENZ.superE10), einheit: '€' },
+        ],
+        fussnote: `Annahme: 1.000 km/Monat, Super E10 ${eur(SPRITPREISE_REFERENZ.superE10, 3)} €/L (ADAC, Stand ${STAND_DE}). Reale Kosten variieren mit Fahrweise und Tagespreis.`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Kurzstrecke vs. Langstrecke',
+        spalteA: 'Kurzstrecke (< 5 km)',
+        spalteB: 'Langstrecke (> 20 km)',
+        zeilen: [
+          { kriterium: 'Verbrauch', a: 'deutlich höher (Kaltlauf)', b: 'niedriger (Betriebstemperatur erreicht)' },
+          { kriterium: 'Motorverschleiß', a: 'erhöht (Kondenswasser, Kaltstart)', b: 'gering' },
+          { kriterium: 'Kaltstart-Anteil', a: 'prägt die gesamte Fahrt', b: 'fällt kaum ins Gewicht' },
+          { kriterium: 'Empfehlung', a: 'Rad oder ÖPNV oft günstiger', b: 'Pkw meist wirtschaftlich' },
+        ],
+      },
+      {
+        typ: 'checkliste',
+        titel: '7 Tipps zum Spritsparen',
+        punkte: [
+          'Abends tanken — das Tagestief liegt oft zwischen 17 und 19 Uhr, bis zu ~13 Cent/L günstiger als am Morgen (ADAC).',
+          'Reifendruck alle vier Wochen prüfen — zu niedriger Druck erhöht den Verbrauch um bis zu 5 %.',
+          'Ballast und Dachbox entfernen, wenn nicht gebraucht — jedes Kilo und jede zusätzliche Stirnfläche kostet Sprit.',
+          'Vorausschauend fahren — gleichmäßiges Tempo statt ständigem Bremsen und Beschleunigen.',
+          'Früh hochschalten — bei 1.500–2.000 U/min in den nächsten Gang, niedertourig fahren spart spürbar.',
+          'Klimaanlage gezielt einsetzen — sie kostet 0,5–1,5 L/100km; bei milden Temperaturen reicht oft die Lüftung.',
+          'Tank-Apps nutzen — Dienste wie Tankerkönig oder der ADAC-Spritpreismonitor zeigen die günstigste Tankstelle in der Nähe.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Stand & Quelle',
+        text: `Spritpreise schwanken täglich. Die hier genannten Referenzwerte sind ADAC-Bundesschnitt, Stand ${STAND_DE}. Aktuelle Tagespreise finden Sie beim ADAC oder über eine Tank-App.`,
+      },
+    ],
     faq: [
       {
         frage: 'Wie berechne ich die Spritkosten für eine Strecke?',

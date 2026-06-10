@@ -12,6 +12,7 @@ import Quellen from '@/components/Quellen';
 import StandHinweis from '@/components/StandHinweis';
 import AuthorBio from '@/components/AuthorBio';
 import RechnerLoader from '@/components/rechner/RechnerLoader';
+import ContentBlockRenderer from '@/components/rechner/ContentBlockRenderer';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -171,7 +172,10 @@ export default function RechnerSeite({ params }: Props) {
               </div>
 
               <div className="max-w-none text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                {config.erklaerung.split('\n\n').map((absatz, i) => {
+                {config.contentBloecke?.length ? (
+                  <ContentBlockRenderer bloecke={config.contentBloecke} />
+                ) : (
+                config.erklaerung.split('\n\n').map((absatz, i) => {
                   const istUeberschrift = absatz.startsWith('**') && absatz.indexOf('**', 2) === absatz.length - 2;
                   const hatFetttext = absatz.includes('**');
 
@@ -204,7 +208,8 @@ export default function RechnerSeite({ params }: Props) {
                     );
                   }
                   return <p key={i} className="mb-4">{absatz}</p>;
-                })}
+                })
+                )}
               </div>
             </section>
 

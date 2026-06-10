@@ -30,6 +30,26 @@ export interface QuelleConfig {
   hinweis?: string;
 }
 
+/**
+ * Modulare Content-Bausteine (W19). Ein diskriminierter Union-Typ: jeder
+ * Baustein rendert über `components/rechner/ContentBlockRenderer.tsx` als
+ * eigenständiges, server-gerendertes HTML-Element (SSR-sichtbar, AdSense-relevant).
+ *
+ * Zweck: Rechnerseiten strukturell einzigartig gestalten (Tabellen, Statistiken,
+ * Diagramme, Vergleiche) statt 170× denselben „ein langer erklaerung-String"-Aufbau.
+ * Additiv eingeführt — Rechner ohne `contentBloecke` rendern unverändert den
+ * erklaerung-String-Split.
+ */
+export type ContentBlock =
+  | { typ: 'text'; titel?: string; html: string }
+  | { typ: 'tabelle'; titel?: string; kopf: string[]; zeilen: string[][]; fussnote?: string }
+  | { typ: 'statistik'; titel?: string; werte: { label: string; wert: string; hinweis?: string }[] }
+  | { typ: 'diagramm'; titel?: string; variante: 'balken'; daten: { label: string; wert: number; einheit?: string }[]; fussnote?: string }
+  | { typ: 'vergleich'; titel?: string; spalteA: string; spalteB: string; zeilen: { kriterium: string; a: string; b: string }[] }
+  | { typ: 'beispielrechnung'; titel?: string; schritte: { label: string; formel: string; ergebnis: string }[]; fazit?: string }
+  | { typ: 'checkliste'; titel?: string; punkte: string[] }
+  | { typ: 'infobox'; variante: 'tipp' | 'warnung' | 'hinweis'; titel?: string; text: string };
+
 export interface RechnerConfig {
   slug: string;
   titel: string;
@@ -44,6 +64,12 @@ export interface RechnerConfig {
   beispiel: string;
   erklaerung: string;
   faq: { frage: string; antwort: string }[];
+  /**
+   * Optional (W19): Modulare Content-Bausteine. Wenn gesetzt (Länge > 0), rendert
+   * der Page-Renderer DIESE statt des erklaerung-String-Splits. `erklaerung` bleibt
+   * Pflichtfeld und dient als Fallback für alle Rechner ohne `contentBloecke`.
+   */
+  contentBloecke?: ContentBlock[];
   /**
    * Optional: Affiliate-Konfiguration für diesen Rechner.
    * Wird in der Page nach FAQ-Card und vor Verwandte-Rechner-Section gerendert
