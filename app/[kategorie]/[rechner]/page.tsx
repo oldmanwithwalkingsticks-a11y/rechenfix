@@ -155,6 +155,15 @@ export default function RechnerSeite({ params }: Props) {
               den Erklär-Text + FAQ bereits selbst inline rendert. */}
           {!INLINE_ERKLAERUNG_SLUGS.has(config.slug) && (
           <>
+            {config.contentBloecke?.length ? (
+              /* BAUSTEIN-PFAD (W19.0e): keine Außenbox, keine Formel-/Rechenbeispiel-Box.
+                 Die einzelnen Block-Karten (W19.0b) werden zu freistehenden Kacheln mit
+                 space-y-Abstand direkt im Seitenfluss. */
+              <div className="mb-8 no-print">
+                <ContentBlockRenderer bloecke={config.contentBloecke} />
+              </div>
+            ) : (
+            /* FALLBACK-PFAD: unverändert — Außenbox + Formel-Box + Rechenbeispiel-Box + erklaerung-Split. */
             <section className="card p-6 md:p-8 mb-8 no-print">
               <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">So funktioniert der {config.titel}</h2>
 
@@ -169,10 +178,7 @@ export default function RechnerSeite({ params }: Props) {
               </div>
 
               <div className="max-w-none text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                {config.contentBloecke?.length ? (
-                  <ContentBlockRenderer bloecke={config.contentBloecke} />
-                ) : (
-                config.erklaerung.split('\n\n').map((absatz, i) => {
+                {config.erklaerung.split('\n\n').map((absatz, i) => {
                   const istUeberschrift = absatz.startsWith('**') && absatz.indexOf('**', 2) === absatz.length - 2;
                   const hatFetttext = absatz.includes('**');
 
@@ -205,10 +211,10 @@ export default function RechnerSeite({ params }: Props) {
                     );
                   }
                   return <p key={i} className="mb-4">{absatz}</p>;
-                })
-                )}
+                })}
               </div>
             </section>
+            )}
 
             {/* FAQ */}
             <section className="card p-6 md:p-8 mb-8 no-print">
