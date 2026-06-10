@@ -3032,4 +3032,18 @@ einen Nachschlag (Backlog). spritkosten 411, bmi 459, tage 385 ohnehin.
 **Nebenbefund (Lib-Bug, Backlog):** `lib/berechnungen/mindestlohn.ts` `getMinijobGrenzeMonat`
 nutzt `Math.round(13,90 × 130 / 3)` = 602 €, korrekt wäre `Math.ceil` = 603 € (§ 8 Abs. 1a
 SGB IV: aufgerundet). Kommentar in der Lib nennt schon 603, die Funktion liefert 602.
+
+### mwst + zins auf echte ≥ 1.500 W nachgezogen (10.06.2026)
+Self-Check hatte aufgedeckt, dass beide trotz „Goldstandard"-Label darunter lagen.
+- **9075f8c** mwst 1.091 → **1.559 W**: Block 1 (Aufkommen > 250 Mrd. €, Mehrwertsteuer-
+  prinzip seit 1968), Block 2 (ermäßigter-Satz-Beispiel + Steueranteil 15,97 % / 6,54 %),
+  Gastronomie-Block (Getränke-Ausnahmen Milch ≥ 75 % / Leitungswasser 7 %), Reverse-Charge
+  (+ OSS-Verfahren, Lieferschwelle 10.000 €) + neuer Block „Vorsteuerabzug & USt-Voranmeldung".
+- **526272f** zins 1.394 → **1.559 W**: Sparraten-Dynamik (Block „Früh anfangen"),
+  Kreditbeispiel Soll-/Effektivzins (6,0 → 6,3–6,5 %), Vorabpauschale-Praxishinweis.
+
+**Goldstandard-Trio gemessen:** mwst 1.559, zins 1.559, stundenlohn 1.580 — alle ≥ 1.500
+(`check-contentbloecke-wortzahl.mjs`). Offen mit echten Zahlen: bmi 459, tage 385,
+spritkosten 411 W. Buffer-Lehre: nicht knapp auf 1.500 zielen (mwst lag erst bei 1.501),
+sondern ~1.550+ für Renderer-Messdrift-Reserve.
   Klammer-Struktur von headers() vor Commit prüfen (Get-Content -Tail 6).
