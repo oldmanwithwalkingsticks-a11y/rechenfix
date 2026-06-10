@@ -3116,4 +3116,21 @@ visuelle Einzigartigkeit gegen AI-Massenverdacht. **kreis** = Anteile, die ein G
 Wert-Reihe über Jahre); **balken** = Kategorienvergleich nebeneinander. Verfügbar ab sofort;
 Einsatz bei künftigen Rechnern. SKILL.md-ContentBlock-Sektion (nennt noch nur `'balken'`) bei
 nächstem Skill-Sync nachziehen.
+
+### Diagramm-Varianten Gestapelt + Wasserfall (10.06.2026)
+- **762bbaa** Renderer um zwei Spezial-Diagramme erweitert — ADDITIV, balken/kreis/linie
+  bleiben 1:1. types.ts: `variante` um `'gestapelt' | 'wasserfall'`, `daten` jetzt OPTIONAL
+  (`daten?`), neue Felder `gestapelt?` (Kategorie → mehrere Segmente) + `wasserfall?` (Schritte
+  mit `art: 'start'|'delta'|'summe'`, delta auch negativ) + diagramm-weite `einheit?`.
+  ContentBlockRenderer: Dispatcher um zwei Zweige vor Balken-Fallback; neue Funktionen
+  `GestapeltDiagramm` (gestapelte Balken + Legende, SEGMENT_FILL) und `WasserfallDiagramm`
+  (delta grün/rot je Vorzeichen, start/summe primary). CLS-sicher (feste viewBox), aria-label.
+- **Build-Risiko-Disziplin (aus Vorrunde):** `daten?` optional → Balken/Kreis/Linien auf
+  `block.daten ?? []` abgesichert (sonst „possibly undefined"). Keine ungenutzten Vars.
+  ESLint + tsc clean.
+
+**5 Diagramm-Varianten verfügbar (L-W19.DiagrammVariante erweitert):** balken=Vergleich,
+kreis=Anteile, linie=Zeitverlauf, **gestapelt**=Zusammensetzung über Kategorien,
+**wasserfall**=schrittweise Zu-/Abnahme (z. B. Brutto → Abzüge → Netto). Einsatz erst bei
+künftigen Rechnern; bestehende Goldstandard-Balken unverändert.
   Klammer-Struktur von headers() vor Commit prüfen (Get-Content -Tail 6).
