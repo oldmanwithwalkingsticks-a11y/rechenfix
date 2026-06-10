@@ -3,7 +3,13 @@ import type { ContentBlock } from '@/lib/rechner-config/types';
 /**
  * Server-Component (KEIN 'use client'): rendert modulare Content-Bausteine
  * server-seitig ins SSR-HTML, damit Crawler (AdSense) und Nutzer den Inhalt
- * ohne Hydration sehen. Eingeführt W19-Pilot.
+ * ohne Hydration sehen. Eingeführt W19-Pilot, gestalterisch aufgewertet W19.0b.
+ *
+ * Design (W19.0b): inhaltsschwere Blöcke (tabelle, statistik, diagramm,
+ * vergleich, beispielrechnung) sitzen in abgesetzten Karten (.card-Optik ohne
+ * Hover-Shadow, da nicht klickbar). Überschriften im Marken-Ton (primary),
+ * Statistik-Kacheln mit rotierenden Akzentfarben, Diagramm-Balken + Tabellen-
+ * Header in primary. Nur vorhandene Tailwind-Tokens, keine neuen Farben.
  *
  * CLS-Disziplin (Lehre W14): Statistik-Kacheln haben feste Mindesthöhe,
  * Inline-SVG-Diagramme tragen Intrinsic-width/height-Attribute + `w-full h-auto`,
@@ -11,7 +17,7 @@ import type { ContentBlock } from '@/lib/rechner-config/types';
  */
 export default function ContentBlockRenderer({ bloecke }: { bloecke: ContentBlock[] }) {
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 md:space-y-8">
       {bloecke.map((block, i) => (
         <ContentBlockItem key={i} block={block} />
       ))}
@@ -19,15 +25,26 @@ export default function ContentBlockRenderer({ bloecke }: { bloecke: ContentBloc
   );
 }
 
+/** Karten-Wrapper für inhaltsschwere Blöcke — .card-Optik ohne Hover-Shadow. */
+function Card({ children }: { children: React.ReactNode }) {
+  return (
+    <section className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl p-5 md:p-6">
+      {children}
+    </section>
+  );
+}
+
+/** Block-Überschrift im Marken-Ton (orientiert an .section-title, eine Stufe kleiner). */
 function Heading({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="text-base font-bold text-gray-800 dark:text-gray-100 mb-3">{children}</h3>
+    <h3 className="text-lg md:text-xl font-bold text-primary-700 dark:text-primary-300 mb-4">{children}</h3>
   );
 }
 
 function ContentBlockItem({ block }: { block: ContentBlock }) {
   switch (block.typ) {
     case 'text':
+      // Fließtext bleibt ohne Karten-Wrapper (atmet frei).
       return (
         <section>
           {block.titel && <Heading>{block.titel}</Heading>}
@@ -40,14 +57,14 @@ function ContentBlockItem({ block }: { block: ContentBlock }) {
 
     case 'tabelle':
       return (
-        <section>
+        <Card>
           {block.titel && <Heading>{block.titel}</Heading>}
           <div className="overflow-x-auto">
             <table className="w-full text-sm border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
               <thead>
-                <tr className="bg-gray-50 dark:bg-gray-700/50">
+                <tr className="bg-primary-50 dark:bg-primary-500/10">
                   {block.kopf.map((h, j) => (
-                    <th key={j} className="text-left p-3 font-semibold text-gray-800 dark:text-gray-200 whitespace-nowrap">
+                    <th key={j} className="text-left p-3 font-semibold text-primary-800 dark:text-primary-200 whitespace-nowrap">
                       {h}
                     </th>
                   ))}
@@ -69,28 +86,33 @@ function ContentBlockItem({ block }: { block: ContentBlock }) {
           {block.fussnote && (
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">{block.fussnote}</p>
           )}
-        </section>
+        </Card>
       );
 
     case 'statistik':
       return (
-        <section>
+        <Card>
           {block.titel && <Heading>{block.titel}</Heading>}
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {block.werte.map((w, j) => (
-              <div
-                key={j}
-                className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 min-h-[6rem] flex flex-col"
-              >
-                <span className="text-xs text-gray-500 dark:text-gray-400">{w.label}</span>
-                <span className="text-xl font-bold text-gray-800 dark:text-gray-100 mt-0.5">{w.wert}</span>
-                {w.hinweis && (
-                  <span className="text-xs text-gray-500 dark:text-gray-400 mt-auto pt-2">{w.hinweis}</span>
-                )}
-              </div>
-            ))}
+            {block.werte.map((w, j) => {
+              // Rotierende Marken-Akzente (Index % 3): primary / amber / emerald.
+              const akzent = [
+                { box: 'bg-primary-50 dark:bg-primary-500/10', label: 'text-primary-700 dark:text-primary-300' },
+                { box: 'bg-amber-50 dark:bg-amber-500/10', label: 'text-amber-700 dark:text-amber-300' },
+                { box: 'bg-emerald-50 dark:bg-emerald-500/10', label: 'text-emerald-700 dark:text-emerald-300' },
+              ][j % 3];
+              return (
+                <div key={j} className={`${akzent.box} rounded-xl p-4 min-h-[6rem] flex flex-col`}>
+                  <span className={`text-xs font-medium ${akzent.label}`}>{w.label}</span>
+                  <span className="text-2xl font-bold text-gray-800 dark:text-gray-100 mt-0.5">{w.wert}</span>
+                  {w.hinweis && (
+                    <span className="text-xs text-gray-500 dark:text-gray-400 mt-auto pt-2">{w.hinweis}</span>
+                  )}
+                </div>
+              );
+            })}
           </div>
-        </section>
+        </Card>
       );
 
     case 'diagramm':
@@ -98,15 +120,15 @@ function ContentBlockItem({ block }: { block: ContentBlock }) {
 
     case 'vergleich':
       return (
-        <section>
+        <Card>
           {block.titel && <Heading>{block.titel}</Heading>}
           <div className="overflow-x-auto">
             <table className="w-full text-sm border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
               <thead>
-                <tr className="bg-gray-50 dark:bg-gray-700/50">
-                  <th className="text-left p-3 font-semibold text-gray-800 dark:text-gray-200">Kriterium</th>
-                  <th className="text-left p-3 font-semibold text-gray-800 dark:text-gray-200">{block.spalteA}</th>
-                  <th className="text-left p-3 font-semibold text-gray-800 dark:text-gray-200">{block.spalteB}</th>
+                <tr className="bg-primary-50 dark:bg-primary-500/10">
+                  <th className="text-left p-3 font-semibold text-primary-800 dark:text-primary-200">Kriterium</th>
+                  <th className="text-left p-3 font-semibold text-primary-800 dark:text-primary-200">{block.spalteA}</th>
+                  <th className="text-left p-3 font-semibold text-primary-800 dark:text-primary-200">{block.spalteB}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -120,12 +142,12 @@ function ContentBlockItem({ block }: { block: ContentBlock }) {
               </tbody>
             </table>
           </div>
-        </section>
+        </Card>
       );
 
     case 'beispielrechnung':
       return (
-        <section>
+        <Card>
           {block.titel && <Heading>{block.titel}</Heading>}
           <ol className="space-y-3">
             {block.schritte.map((s, j) => (
@@ -142,17 +164,22 @@ function ContentBlockItem({ block }: { block: ContentBlock }) {
             ))}
           </ol>
           {block.fazit && (
-            <div className="mt-4 bg-primary-50 dark:bg-primary-500/10 border border-primary-200 dark:border-primary-500/30 rounded-xl p-4 text-gray-800 dark:text-gray-200">
+            <div className="mt-4 bg-primary-50 dark:bg-primary-500/10 border border-primary-200 dark:border-primary-500/30 rounded-xl p-4 font-medium text-gray-800 dark:text-gray-100">
               {block.fazit}
             </div>
           )}
-        </section>
+        </Card>
       );
 
     case 'checkliste':
+      // Eigener Tipp-Karten-Look (emerald), kein neutraler Card-Wrapper.
       return (
-        <section>
-          {block.titel && <Heading>{block.titel}</Heading>}
+        <section className="bg-emerald-50 dark:bg-emerald-500/10 rounded-2xl p-5 md:p-6">
+          {block.titel && (
+            <h3 className="text-lg md:text-xl font-bold text-emerald-800 dark:text-emerald-300 mb-4">
+              {block.titel}
+            </h3>
+          )}
           <ul className="space-y-2">
             {block.punkte.map((p, j) => (
               <li key={j} className="flex gap-2.5 items-start">
@@ -165,7 +192,7 @@ function ContentBlockItem({ block }: { block: ContentBlock }) {
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                <span className="text-gray-700 dark:text-gray-300">{p}</span>
+                <span className="text-emerald-900 dark:text-emerald-100">{p}</span>
               </li>
             ))}
           </ul>
@@ -173,6 +200,7 @@ function ContentBlockItem({ block }: { block: ContentBlock }) {
       );
 
     case 'infobox':
+      // Hat schon eigenen farbigen Rahmen — kein zusätzlicher Karten-Wrapper.
       return <Infobox block={block} />;
 
     default:
@@ -198,7 +226,7 @@ function BalkenDiagramm({
   const H = daten.length * rowH + 8;
 
   return (
-    <section>
+    <Card>
       {block.titel && <Heading>{block.titel}</Heading>}
       <svg
         viewBox={`0 0 ${W} ${H}`}
@@ -229,7 +257,7 @@ function BalkenDiagramm({
                 width={barW}
                 height={barH}
                 rx={4}
-                className="fill-emerald-500 dark:fill-emerald-400"
+                className="fill-primary-500 dark:fill-primary-400"
               />
               <text
                 x={labelW + barW + 6}
@@ -248,7 +276,7 @@ function BalkenDiagramm({
       {block.fussnote && (
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">{block.fussnote}</p>
       )}
-    </section>
+    </Card>
   );
 }
 
