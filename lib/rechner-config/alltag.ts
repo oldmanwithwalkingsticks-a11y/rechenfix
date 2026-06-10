@@ -260,71 +260,103 @@ Drei kalendarische Eigenheiten erklären die meisten „seltsamen" Tagerechnungs
 - **Monatslängen und die Knöchel-Eselsbrücke.** Die deutsche Monatslängen-Regel ist 31-30-31-30-31-30-31-31-30-31-30-31 — mit Ausnahme des Februar (28/29). Eselsbrücke: linke Hand zur Faust ballen, vom kleinen Finger beginnend abwechselnd Knöchel (31 Tage) und Vertiefung (30 Tage) abzählen — Januar = Knöchel, Februar = Vertiefung (28/29), März = Knöchel, … Juli = Knöchel (rechte Faust dazu), August = wieder Knöchel beginnend, … Dezember = Knöchel. Diese Methode merkt sich an einem Nachmittag und hält ein Leben lang.
 - **Zeitumstellung in Deutschland.** Sommerzeit beginnt am letzten Sonntag im März um 2:00 Uhr (Uhren springen auf 3:00, der Tag hat 23 Stunden) und endet am letzten Sonntag im Oktober um 3:00 Uhr (Uhren zurück auf 2:00, der Tag hat 25 Stunden). Für die reine Tageszählung egal — ein Tag bleibt ein Tag. Für Stunden-/Minuten-Genauigkeit über die Übergänge hinweg muss die Verschiebung manuell berücksichtigt werden. Die EU hat die Abschaffung 2019 beschlossen, ein Inkrafttreten steht aber weiterhin aus.
 - **Wochentag-Wiederholungen.** Ein Datum fällt nach 6, 11 oder 28 Jahren wieder auf denselben Wochentag — abhängig davon, wie viele Schaltjahre dazwischen liegen. Faustregel für „normale" Verläufe: nach 11 Jahren ist Ihr Geburtstag mit hoher Wahrscheinlichkeit wieder am gleichen Wochentag. Die 28-Jahre-Regel gilt strikt nur, wenn beide Daten nach dem Schalt-Ausnahmejahr-Pattern (1900/2100/…) liegen — innerhalb eines Jahrhunderts trifft sie meist exakt zu.`,
-    // W19-Tranche-1-Nacharbeit: Leitformat „Anwendungsfall-Sammlung" — mehrere Beispielrechnungen
-    // dominant, KEINE großen Datentabellen, KEIN Diagramm. Kalendarische Fakten (§ 187 BGB, Naegele
-    // 280 Tage) stabil; Datums-Mathematik nachgerechnet. erklaerung bleibt Fallback.
+    // W19-Goldstandard: tagerechner auf volle Tiefe (~1.500 W, 10 Bausteine), Leitformat
+    // „Anwendungsfall-Sammlung" — mehrere Beispielrechnungen + Text-Tiefe, KEINE großen Tabellen,
+    // KEIN Diagramm. Beispiele konsistent zur lib/berechnungen/tage.ts (Arbeitstage Mo–Fr, Start
+    // inkl./Ende exkl., OHNE Feiertagsabzug; mitzaehlen = +1). Keine Rechtsberatung. erklaerung bleibt Fallback.
     contentBloecke: [
       {
         typ: 'text',
-        titel: 'Datumsdifferenz — worauf es ankommt',
-        html: `<p>Der Tagerechner ermittelt die exakte Anzahl der Tage zwischen zwei Daten und rechnet sie in Wochen, Monate und Werktage um. In der Praxis geht es dabei fast immer um konkrete Stichtage: Wann endet die Kündigungsfrist? Bis wann muss die Rechnung bezahlt sein? Wie viele Werktage umfasst der Urlaub?</p><p>Entscheidend ist eine Frage: Zählt der Starttag mit? Bei <strong>Fristen</strong> wird er üblicherweise nicht mitgezählt (§ 187 Abs. 1 BGB), bei einer <strong>Dauer</strong> wie Urlaub dagegen schon. Die folgenden Fälle zeigen das jeweils konkret durchgerechnet.</p>`,
+        titel: 'Wofür man Tage zwischen zwei Daten zählt',
+        html: `<p>Die Frage „Wie viele Tage liegen zwischen zwei Daten?" taucht im Alltag, im Beruf und im Privaten ständig auf — und ist überraschend fehleranfällig, wenn man sie im Kopf rechnet. Der Tagerechner nimmt einem das ab und gibt das Ergebnis gleich in mehreren Einheiten aus: Kalendertage, volle Wochen mit Resttagen, Monate und Jahre sowie getrennt die Arbeitstage (Montag bis Freitag) und die Wochenendtage.</p><p>Die Anwendungen sind vielfältig. Im <strong>Alltag</strong> geht es um die Dauer eines Urlaubs, einer Reise oder die Zeit bis zu einem Ereignis. Im <strong>Beruf</strong> um Projektlaufzeiten, Zahlungsziele oder das Prüfen von Fristen. Im <strong>Privaten</strong> um Jubiläen, Geburtstage oder die Schwangerschaftswoche.</p><p>Zwei Dinge beeinflussen das Ergebnis maßgeblich. Erstens die Frage, ob man <strong>Kalendertage oder Arbeitstage</strong> zählt — denn Wochenenden machen über längere Zeiträume einen großen Unterschied. Zweitens, ob der <strong>Start- und der Endtag mitgezählt</strong> werden: Ein Zeitraum „vom 1. bis zum 14." umfasst 14 Tage, wenn beide Tage zählen, aber nur 13, wenn der Starttag ausgenommen wird. Beide Varianten sind je nach Anwendungsfall richtig — der Rechner bietet deshalb einen Schalter dafür.</p><p>Gerade weil scheinbar einfache Datumsrechnungen so leicht danebengehen — vergessene Schalttage, falsch gezählte Randtage, verwechselte Monatslängen —, lohnt sich ein Werkzeug, das all das automatisch berücksichtigt. Die folgenden Beispiele zeigen typische Anwendungsfälle, jeweils konkret durchgerechnet.</p>`,
       },
       {
         typ: 'beispielrechnung',
-        titel: 'Fall 1: Kündigungsfrist (3 Monate zum Monatsende)',
+        titel: 'Urlaubsdauer in Arbeitstagen',
         schritte: [
-          { label: 'Kündigung geht zu am', formel: '15.03.2026', ergebnis: '15.03.2026' },
-          { label: '+ 3 Monate', formel: '15.03. + 3 Monate', ergebnis: '15.06.2026' },
-          { label: 'zum nächsten Monatsende', formel: 'Ende Juni', ergebnis: '30.06.2026' },
+          { label: 'Zeitraum 01.07. bis 14.07.2026 (mit Start + Endtag)', formel: '14.07. − 01.07. + 1', ergebnis: '14 Kalendertage' },
+          { label: 'davon Wochenendtage (Sa + So)', formel: '2 Wochenenden', ergebnis: '4 Tage' },
+          { label: 'Arbeitstage (Mo–Fr)', formel: '14 − 4', ergebnis: '10 Arbeitstage' },
         ],
-        fazit: 'Bei einer Frist „3 Monate zum Monatsende" endet das Arbeitsverhältnis nicht am 15.06., sondern am nächsten Monatsende danach — dem 30.06.2026.',
+        fazit: 'Wichtig: Gesetzliche Feiertage zählt der Rechner als normalen Arbeitstag mit — fällt einer in den Zeitraum, müssen Sie ihn für die exakte Urlaubstage-Zahl selbst abziehen.',
       },
       {
         typ: 'beispielrechnung',
-        titel: 'Fall 2: Zahlungsziel einer Rechnung',
+        titel: 'Zahlungsziel einer Rechnung',
         schritte: [
           { label: 'Rechnungsdatum', formel: '10.06.2026', ergebnis: '10.06.2026' },
+          { label: '+ 14 Tage (netto)', formel: '10.06. + 14 Tage', ergebnis: '24.06.2026' },
           { label: '+ 30 Tage (netto)', formel: '10.06. + 30 Tage', ergebnis: '10.07.2026' },
-          { label: 'Alternativ + 14 Tage', formel: '10.06. + 14 Tage', ergebnis: '24.06.2026' },
         ],
-        fazit: 'Ein Zahlungsziel „30 Tage netto" ab Rechnungsdatum ist am 10.07.2026 fällig. Als Fristbeginn gilt meist das Rechnungs- bzw. Zugangsdatum.',
+        fazit: 'Zahlungsziele werden fast immer in Kalendertagen gerechnet, nicht in Werktagen — Wochenenden zählen also mit. Als Fristbeginn gilt meist das Rechnungs- bzw. Zugangsdatum.',
       },
       {
         typ: 'beispielrechnung',
-        titel: 'Fall 3: Urlaubstage — Werktage vs. Kalendertage',
-        schritte: [
-          { label: 'Zeitraum 13.07. bis 24.07.2026', formel: '24.07. − 13.07. + 1', ergebnis: '12 Kalendertage' },
-          { label: 'davon Wochenendtage (Sa + So)', formel: '1 Wochenende', ergebnis: '2 Tage' },
-          { label: 'Werktage (Mo–Fr)', formel: '12 − 2', ergebnis: '10 Werktage' },
-        ],
-        fazit: 'Für den Urlaubsantrag zählen meist die 10 Werktage, nicht die 12 Kalendertage. Gesetzliche Feiertage im Zeitraum sind zusätzlich abzuziehen.',
-      },
-      {
-        typ: 'beispielrechnung',
-        titel: 'Fall 4: Errechneter Geburtstermin (Naegele-Regel)',
+        titel: 'Errechneter Geburtstermin (Naegele-Regel)',
         schritte: [
           { label: '1. Tag der letzten Periode', formel: '01.03.2026', ergebnis: '01.03.2026' },
           { label: '+ 280 Tage (40 Wochen)', formel: '01.03. + 280 Tage', ergebnis: '06.12.2026' },
         ],
-        fazit: 'Die Naegele-Regel rechnet 280 Tage ab dem ersten Tag der letzten Periode. Das ist ein statistischer Richtwert — nur wenige Geburten erfolgen exakt am errechneten Termin.',
+        fazit: 'Die Naegele-Regel rechnet 280 Tage ab dem ersten Tag der letzten Periode. Das ist ein statistischer Richtwert; maßgeblich ist die ärztliche Bestätigung — nur wenige Geburten erfolgen exakt am errechneten Termin.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Countdown bis zu einem Ereignis',
+        schritte: [
+          { label: 'Vom 11.06.2026 bis Heiligabend', formel: '24.12.2026 − 11.06.2026', ergebnis: '196 Tage' },
+          { label: 'In volle Wochen', formel: '196 ÷ 7', ergebnis: 'genau 28 Wochen' },
+        ],
+        fazit: 'Praktisch für Reiseplanung, Jubiläen oder das Zählen bis zu einem Geburtstag. Wer den Zieltag mitzählen möchte, aktiviert den Schalter „Start + Endtag mitzählen" — dann sind es 197 Tage.',
+      },
+      {
+        typ: 'text',
+        titel: 'Tage in Wochen, Monate und Jahre umrechnen',
+        html: `<p>Der Tagerechner gibt das Ergebnis nicht nur in Tagen aus, sondern rechnet es automatisch in verschiedene Einheiten um — das macht eine Zeitspanne anschaulicher. 100 Tage sind zum Beispiel 14 Wochen und 2 Tage; 500 Tage sind gut ein Jahr und vier Monate.</p><p>Bei Wochen ist die Umrechnung eindeutig: Tage geteilt durch 7 ergibt die vollen Wochen, der Rest sind die übrigen Tage. Bei <strong>Monaten und Jahren</strong> wird es kniffliger, weil Monate unterschiedlich lang sind — von 28 bis 31 Tagen. Eine Spanne lässt sich deshalb nicht einfach durch 30 teilen. Der Rechner geht stattdessen kalendarisch vor: Er zählt, wie viele volle Monate und Jahre zwischen den beiden Daten liegen, und gibt den Rest in Tagen an.</p><p>Das erklärt auch, warum „ein Monat" je nach Ausgangsdatum unterschiedlich viele Tage hat. Ein Monat ab dem 31. Januar endet am 28. Februar (oder 29. im Schaltjahr), umfasst also nur 28 Tage; ein Monat ab dem 1. März dagegen 31 Tage. Für eine exakte Planung ist es deshalb oft sinnvoller, mit Tagen statt mit Monaten zu rechnen — genau diese Grundlage liefert der Tagerechner.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Der Lebenstag-Zähler: Wie viele Tage bin ich alt?',
+        html: `<p>Eine beliebte Spielart der Tageszählung ist die Frage „Wie viele Tage bin ich schon alt?". Dazu gibt man einfach das eigene Geburtsdatum als Startdatum und das heutige Datum als Enddatum ein — der Rechner liefert die Zahl der gelebten Tage.</p><p>Die Ergebnisse sind oft erstaunlich: Wer 30 Jahre alt ist, hat bereits rund 10.957 Tage gelebt, mit 50 Jahren sind es etwa 18.262 Tage und mit 80 Jahren rund 29.220. Die genaue Zahl hängt davon ab, wie viele Schaltjahre im eigenen Leben lagen.</p><p>Manche Menschen feiern runde Tageszahlen als kleine persönliche Meilensteine — den 10.000., 20.000. oder 30.000. Lebenstag. Den 10.000. Tag erreicht man übrigens im Alter von etwa 27 Jahren und fünf Monaten. Solche Zahlen haben keinen praktischen Nutzen, machen aber Spaß und zeigen, wie viel Zeit hinter scheinbar gewöhnlichen Jahren steckt.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Kalendertage, Werktage, Arbeitstage — die Unterschiede',
+        html: `<p>Drei Begriffe werden oft durcheinandergeworfen, meinen aber Verschiedenes — und je nach Kontext ist mal der eine, mal der andere gemeint.</p><p><strong>Kalendertage</strong> sind schlicht alle Tage: Montag bis Sonntag, einschließlich Feiertagen. Wenn ein Vertrag oder ein Zahlungsziel von „30 Tagen" spricht, sind in aller Regel Kalendertage gemeint — Wochenenden zählen mit.</p><p><strong>Werktage</strong> sind die Tage, an denen üblicherweise gearbeitet wird. Hier wird es uneindeutig: In manchen Definitionen umfassen Werktage Montag bis Samstag (alle Tage außer Sonn- und Feiertagen), in anderen nur Montag bis Freitag. Im Versandhandel etwa wird der Samstag häufig als Werktag mitgezählt, in der Lohnabrechnung oft nicht.</p><p><strong>Arbeitstage</strong> meinen im engeren Sinn die Wochenarbeitstage Montag bis Freitag. Genau diese zählt der Tagerechner: Er gibt die Anzahl der Tage von Montag bis Freitag im gewählten Zeitraum aus. <strong>Feiertage zieht er dabei nicht ab</strong>, weil diese je nach Bundesland unterschiedlich sind. Wer eine feiertagsgenaue Zahl braucht — etwa für Urlaubstage oder Lieferfristen —, muss die regionalen Feiertage selbst berücksichtigen.</p><p>Ein praktisches Beispiel: Über ein ganzes Jahr mit 365 Tagen entfallen 104 Tage auf Wochenenden, sodass rund 261 Wochentage (Mo–Fr) übrig bleiben. Zieht man die je nach Bundesland 9 bis 13 gesetzlichen Feiertage ab, die auf einen Wochentag fallen, kommt man auf etwa 248 bis 252 echte Arbeitstage im Jahr — eine Zahl, die für Projektplanung und Kapazitätsrechnungen oft gebraucht wird.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Schaltjahre und warum der Februar manchmal 29 Tage hat',
+        html: `<p>Wer Tage über eine Jahresgrenze hinweg zählt, stößt früher oder später auf das Schaltjahr. Ein normales Jahr hat 365 Tage, ein Schaltjahr 366 — der zusätzliche Tag ist der 29. Februar.</p><p>Der Grund ist astronomisch: Die Erde umrundet die Sonne nicht in genau 365, sondern in rund 365,2422 Tagen. Würde man diesen Rest ignorieren, würden sich die Jahreszeiten über Jahrhunderte langsam durch den Kalender schieben. Der Schalttag fängt das ab.</p><p>Die Regel dafür ist dreistufig: Ein Jahr ist ein Schaltjahr, wenn es durch 4 teilbar ist — mit einer Ausnahme: Volle Jahrhundertjahre sind nur dann Schaltjahre, wenn sie zusätzlich durch 400 teilbar sind. Deshalb war das Jahr 2000 ein Schaltjahr, 1900 und 2100 dagegen nicht. Die nächsten Schaltjahre sind 2028, 2032 und 2036; 2026 und 2027 sind keine. Für Tagesdifferenzen heißt das: Liegt ein 29. Februar im gewählten Zeitraum, kommt ein Tag hinzu, den es in anderen Jahren nicht gibt.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Datumsdifferenzen über lange Zeiträume',
+        html: `<p>Über kurze Zeiträume ist die Tageszählung trivial, über lange wird sie anspruchsvoller — vor allem wegen der Schaltjahre. Zwischen zwei Daten, die mehrere Jahrzehnte auseinanderliegen, summieren sich die eingeschobenen Schalttage spürbar: In 40 Jahren liegen je nach Lage rund zehn Schalttage, die mitgezählt werden müssen. Wer pauschal mit 365 Tagen pro Jahr rechnet, verzählt sich über solche Zeiträume um mehrere Tage.</p><p>Der Tagerechner berücksichtigt das automatisch, weil er mit den tatsächlichen Kalenderdaten arbeitet und nicht mit einer Pauschale. Innerhalb des heutigen Kalenders — des gregorianischen, der 1582 eingeführt wurde — sind die Ergebnisse zuverlässig.</p><p>Eine historische Kuriosität am Rande: Beim Wechsel vom julianischen zum gregorianischen Kalender wurden 1582 in mehreren Ländern zehn Tage übersprungen — auf den 4. Oktober folgte direkt der 15. Oktober. Für Datumsberechnungen vor dieser Umstellung weicht das rechnerische Ergebnis deshalb vom historisch tatsächlich verwendeten Datum ab. Für alle praktischen Zwecke im Alltag spielt das keine Rolle.</p>`,
       },
       {
         typ: 'checkliste',
-        titel: 'Typische Anwendungsfälle',
+        titel: 'Typische Anwendungsfälle des Tagerechners',
         punkte: [
-          'Countdown bis Urlaub, Hochzeit, Geburtstag oder Weihnachten',
-          'Kündigungs- und Vertragsfristen bis zum letzten gültigen Tag bestimmen',
-          'Urlaubsdauer inklusive Start- und Endtag berechnen',
-          'Altersberechnung — „Wie viele Tage bin ich alt?"',
-          'Projektplanung mit realistischer Arbeitstage-Zahl',
-          'Ablauf von Garantie, Probezeit oder Widerrufsfrist ermitteln',
+          'Urlaubsplanung — Arbeitstage zwischen zwei Daten ermitteln',
+          'Kündigungs- und Vertragsfristen prüfen (Vertrag bzw. Gesetz beachten)',
+          'Zahlungsziele von Rechnungen bestimmen',
+          'Projektlaufzeiten und Meilensteine planen',
+          'Schwangerschaftswoche und errechneten Termin abschätzen',
+          'Jubiläen, Geburtstage und Countdowns berechnen',
+          'Aufbewahrungsfristen für Unterlagen im Blick behalten',
+          'Reisedauer und Aufenthalte planen',
         ],
+      },
+      {
+        typ: 'text',
+        titel: 'Fristen richtig zählen — die häufigsten Stolperfallen',
+        html: `<p>Beim Zählen von Fristen passieren immer wieder dieselben Fehler — meist, weil unklar ist, welcher Tag mitzählt.</p><p><strong>Beginnt die Frist am Ereignistag oder am Folgetag?</strong> Bei vielen Fristen wird der Tag des auslösenden Ereignisses nicht mitgezählt, die Frist beginnt erst am Tag danach. Eine „14-Tage-Frist" ab einem Montag kann deshalb je nach Regelung am übernächsten Montag oder einen Tag früher enden. Wer den Starttag versehentlich mitzählt, kommt auf einen Tag zu wenig.</p><p><strong>Was, wenn das Fristende auf ein Wochenende oder einen Feiertag fällt?</strong> In vielen Bereichen verschiebt sich das Fristende dann auf den nächsten Werktag. Diese Verschiebung gilt aber nicht überall gleich — sie hängt von der jeweiligen Regelung ab.</p><p>Wichtig: Der Tagerechner ist ein Hilfsmittel zum Zählen, keine Rechtsberatung. Welche Frist konkret gilt, wie sie beginnt und ob sie sich verschiebt, ergibt sich aus dem jeweiligen Vertrag oder Gesetz. Bei rechtlich bedeutsamen Fristen — etwa Kündigung, Widerruf oder Einspruch — sollten Sie im Zweifel fachkundigen Rat einholen, statt sich allein auf eine berechnete Tageszahl zu verlassen.</p>`,
       },
       {
         typ: 'infobox',
         variante: 'hinweis',
-        titel: 'Werktage, Kalendertage und Schaltjahre',
-        text: 'Warum weicht ein Ergebnis manchmal ab? Erstens: Werktage (Mo–Fr) sind weniger als Kalendertage — gesetzliche Feiertage zählt der Rechner nicht ab, weil sie bundeslandabhängig sind (je nach Land 9 bis 13). Zweitens: Schaltjahre — 2024 und 2028 haben 366 Tage, 2026 und 2027 nur 365 (Regel: durch 4 teilbar, außer durch 100 und nicht durch 400). Drittens: Bei Fristen zählt der Starttag nicht mit (§ 187 Abs. 1 BGB), bei einer Dauer schon.',
+        titel: 'So zählt dieser Rechner',
+        text: 'Dieser Rechner zählt die Arbeitstage als Wochentage von Montag bis Freitag und zieht gesetzliche Feiertage nicht ab, weil diese je nach Bundesland verschieden sind. Standardmäßig wird die reine Differenz zwischen Start- und Enddatum gebildet; über den Schalter „Start + Endtag mitzählen" können Sie beide Randtage einbeziehen. Für eine feiertagsgenaue Planung — etwa von Urlaubstagen oder Lieferfristen — berücksichtigen Sie die Feiertage Ihres Bundeslandes zusätzlich selbst.',
       },
     ],
     faq: [
