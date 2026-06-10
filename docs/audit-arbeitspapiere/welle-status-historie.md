@@ -2960,4 +2960,23 @@ Niveau-Referenz für die restlichen 4 (zins/stundenlohn/bmi/tage) und künftige 
 **Doku-Folgebedarf:** CLAUDE.md Rechtsstand-Tabelle führt noch „Gastronomie 19 % seit
 01.01.2024" — bei nächstem Doku-Sync auf § 12 Abs. 2 Nr. 15 / Speisen 7 % ab 01.01.2026
 aktualisieren (Karsten gemeldet).
+
+### Goldstandard zins + CLAUDE.md-Stand (10.06.2026)
+- **ed7890b** CLAUDE.md: Rechtsstand-Tabelle um Gastro-USt-Zeile ergänzt (§ 12 Abs. 2 Nr. 15
+  UStG, Speisen 7 % ab 01.01.2026, Getränke 19 %; ersetzt den Stand „19 % vor Ort seit
+  01.01.2024"). Neuer W19-Content-Tiefe-Standard im Pattern-Goldstandard verankert
+  (~1.500 W, eigenes Leitformat, verbindliches Wort-Budget je text-Baustein). Der historische
+  Prompt-117-Log bleibt unangetastet (war April 2026 korrekt).
+- **5711338** zinsrechner Goldstandard-Tiefe (~1.500 W, 10 Bausteine, Leitformat „Visueller
+  Zeitverlauf"): 2 Diagramme dominant (Kapitalwachstum 5/10/20/30/40 J., Eingezahlt vs.
+  Zinsertrag nach 30 J.), KEIN Vergleich-Baustein (Abgrenzung zu stundenlohn gewahrt).
+  Diagrammwerte im Code aus der Zinseszinsformel berechnet (Math.pow, jährliche Verzinsung
+  konsistent mit lib/berechnungen/zinsen.ts). Steuer-Block exakt nach Primärquelle:
+  Abgeltungsteuer 26,375 % (§ 32d Abs. 1 EStG), Sparerpauschbetrag 1.000/2.000 € (§ 20 Abs. 9
+  EStG), Günstigerprüfung (§ 32d Abs. 6 EStG), Vorabpauschale erwähnt.
+
+**Content-Tiefe-Standard auf ~1.500 W angehoben.** Restliche Tranche-1-Rechner auf
+Goldstandard-Niveau: stundenlohn, bmi, tage noch beim dünneren Nacharbeit-Stand (~600–900 W).
+mwst + zins sind die Niveau-Referenz. Build je Commit Vercel-grün (lokal nur tsc, Rest-Fehler
+layout.tsx).
   Klammer-Struktur von headers() vor Commit prüfen (Get-Content -Tail 6).
