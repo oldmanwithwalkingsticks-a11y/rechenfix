@@ -3011,4 +3011,25 @@ wie Vorabpauschale/Effektivzins), statt nur Bausteinzahl zu erhöhen.
 **Goldstandard-Stand:** mwst ✅, zins ✅, stundenlohn ✅ (~1.500 W). Offen: bmi, tage
 (noch Nacharbeit-Niveau). bmi braucht beim Hochziehen erneut Sensitivitäts-Sorgfalt +
 Primärquellen-Refresh der Verteilungswerte.
+
+### Self-Check-Mechanismus + stundenlohn-Nachbesserung (10.06.2026)
+- **85d1909** Neues Mess-Skript `scripts/check-contentbloecke-wortzahl.mjs` (standalone node,
+  zählt sichtbare Wörter aller contentBloecke eines Rechners). Aufruf:
+  `node scripts/check-contentbloecke-wortzahl.mjs <slug> --min 1500`.
+- **cdb8093** stundenlohn von gemessenen 766 → **1580 W** vertieft: 3 text-Blöcke ausgebaut
+  (Zwei-Jobs-Beispiel, Brutto→Netto-Durchrechnung 20 €/h mit SV-Sätzen + Kl. I vs. III,
+  Pendelzeit/Rufbereitschaft, KV-Zusatzbeitrag, Regionalwirkung) + 2 neue text-Blöcke
+  (Branchenvergleich qualitativ mit Verweis auf Entgeltatlas/Destatis; Gehaltsverhandlung)
+  + infobox Minijob-Grenze 603 € (verifiziert AOK/TK/DGB; Prompt-Wert 556 € war 2025).
+
+**L-W19.SelfCheck (verbindlich):** Wort-Budget-Schätzung „im Kopf" überschätzt die reale
+Wortzahl systematisch um 30–50 %. Vor JEDEM Commit eines contentBloecke-Rechners
+`check-contentbloecke-wortzahl.mjs <slug> --min 1500` laufen lassen; bei „UNTER SCHWELLE"
+weiter vertiefen, ERST committen bei „OK". **Objektiv-Befund beim Skript-Einführen:** mwst
+1.091 W, zins 1.394 W lagen trotz „Goldstandard"-Label ebenfalls unter 1.500 — beide brauchen
+einen Nachschlag (Backlog). spritkosten 411, bmi 459, tage 385 ohnehin.
+
+**Nebenbefund (Lib-Bug, Backlog):** `lib/berechnungen/mindestlohn.ts` `getMinijobGrenzeMonat`
+nutzt `Math.round(13,90 × 130 / 3)` = 602 €, korrekt wäre `Math.ceil` = 603 € (§ 8 Abs. 1a
+SGB IV: aufgerundet). Kommentar in der Lib nennt schon 603, die Funktion liefert 602.
   Klammer-Struktur von headers() vor Commit prüfen (Get-Content -Tail 6).
