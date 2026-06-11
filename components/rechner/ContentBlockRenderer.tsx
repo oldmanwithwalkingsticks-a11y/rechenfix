@@ -1,4 +1,5 @@
 import type { ContentBlock } from '@/lib/rechner-config/types';
+import WasserfallSvg from '@/components/rechner/WasserfallSvg';
 
 /**
  * Server-Component (KEIN 'use client'): rendert modulare Content-Bausteine
@@ -488,48 +489,8 @@ function GestapeltDiagramm({ block }: { block: Extract<ContentBlock, { typ: 'dia
   );
 }
 
+// Wasserfall: nutzt die ausgelagerte WasserfallSvg (W19, von BruttoNettoRechner geteilt).
+// DatenKachel-Wrapper + fussnote bleiben im DiagrammBlock-Dispatcher.
 function WasserfallDiagramm({ block }: { block: Extract<ContentBlock, { typ: 'diagramm' }> }) {
-  const steps = block.wasserfall ?? [];
-  const W = 480, H = 260, padT = 16, padB = 40;
-  const plotH = H - padT - padB;
-  const colW = steps.length > 0 ? (W - 20) / steps.length : W;
-  const barW = Math.min(colW * 0.6, 70);
-  let run = 0, maxStand = 1;
-  for (const d of steps) {
-    if (d.art === 'delta') run += d.wert; else run = d.wert;
-    maxStand = Math.max(maxStand, run, d.art !== 'delta' ? d.wert : 0);
-  }
-  run = 0;
-  return (
-    <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="w-full h-auto"
-      role="img" aria-label={block.titel ?? 'Wasserfalldiagramm'}>
-      <line x1={10} y1={padT + plotH} x2={W - 10} y2={padT + plotH}
-        className="stroke-gray-200 dark:stroke-gray-700" strokeWidth={1} />
-      {steps.map((d, i) => {
-        let top: number, bottom: number, fill: string;
-        if (d.art === 'delta') {
-          const start = run; run += d.wert;
-          top = Math.max(start, run); bottom = Math.min(start, run);
-          fill = d.wert < 0 ? 'fill-red-400 dark:fill-red-400' : 'fill-emerald-400 dark:fill-emerald-400';
-        } else {
-          run = d.wert; top = d.wert; bottom = 0;
-          fill = 'fill-primary-500 dark:fill-primary-400';
-        }
-        const x = 10 + i * colW + (colW - barW) / 2;
-        const yTop = padT + plotH - (top / maxStand) * plotH;
-        const h = Math.max(((top - bottom) / maxStand) * plotH, 2);
-        return (
-          <g key={i}>
-            <rect x={x} y={yTop} width={barW} height={h} rx={3} className={fill} />
-            <text x={x + barW / 2} y={yTop - 6} fontSize={11} textAnchor="middle"
-              className="fill-gray-800 dark:fill-gray-100 font-semibold">
-              {d.art === 'delta' && d.wert > 0 ? '+' : ''}{d.wert}{block.einheit ? ` ${block.einheit}` : ''}
-            </text>
-            <text x={x + barW / 2} y={H - 14} fontSize={11} textAnchor="middle"
-              className="fill-gray-500 dark:fill-gray-400">{d.label}</text>
-          </g>
-        );
-      })}
-    </svg>
-  );
+  return <WasserfallSvg steps={block.wasserfall ?? []} einheit={block.einheit} />;
 }
