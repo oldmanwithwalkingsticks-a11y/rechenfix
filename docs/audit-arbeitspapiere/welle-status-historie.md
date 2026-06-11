@@ -8,6 +8,36 @@
 
 ---
 
+## 11.06.2026 — W19 buergergeld-rechner Goldstandard (Regelbedarf+Reform-Leitformat)
+
+- **Was gebaut:** buergergeld-rechner (finanzen.ts) hat jetzt 10 eigene
+  `contentBloecke` im eigenständigen **„Regelbedarf- & Reform-Leitformat"**:
+  Folge `text-statistik-tabelle-beispielrechnung-text-text-vergleich-text-checkliste-infobox-infobox`.
+  Dominant: tabelle (Regelbedarfsstufen) + beispielrechnung (Gesamtbedarf) +
+  vergleich (Bürgergeld H1 bis 30.06. vs. Grundsicherungsgeld H2 ab 01.07.) +
+  infobox warnung (Reform). ~1.502 W (Self-Check OK).
+- **Werte gespiegelt aus `buergergeld-parameter.ts`:** RBS1 563 / RBS2 506 /
+  RBS3 451 / RBS4 471 / RBS5 390 / RBS6 357 €; Vermögen H1 Karenz 40.000/15.000,
+  H2 Altersstaffel 5.000–20.000 € pro Person; Einkommensfreibetrag § 11b (100 €
+  + 20/30/10 %, Jugendliche 556 €). Familien-Beispiel via `berechneBuergergeld`
+  (Paar + 2 Kinder, KdU 1.100 €, Einkommen 1.000 €) = **2.187 €** Anspruch.
+- **Reform H1/H2 neutral abgebildet:** Umbenennung Grundsicherungsgeld zum
+  01.07.2026 (13. SGB II-ÄndG, BGBl. 2026 I Nr. 107), Regelsätze unverändert,
+  Wegfall Vermögens-Karenz, Mietdeckel 1,5-fach, verschärfte Sanktionen —
+  sachlich, keine Wertung (YMYL/Neutralität).
+- **L-W19.Struktur angewandt:** Die zunächst geplante Folge kollidierte mit
+  elterngeld (Ähnlichkeit **0,95**). Ein content-justifizierter **statistik**-Block
+  (Schlüsselzahlen, Typ den elterngeld nicht hat) senkte die Ähnlichkeit zu
+  elterngeld auf **0,80**; arbeitslosengeld nicht mehr in Top-5. Verbleibende
+  0,95-Paarung mit stundenlohn ist ein Artefakt des **komposition-basierten**
+  (order-unabhängigen) Scores bei geteilter Heavy-Block-Palette — die Folgen
+  sind sichtbar verschieden; Score ist laut Skript-Design kein Gate.
+- **Verify:** tsc sauber für finanzen.ts (pre-existing `FULL_CSS_HREF` bleibt).
+  Build-Gate Vercel-grün. `letzteAktualisierung` 2026-06-11.
+- **Offen (Migrations-Kandidaten):** prozent, dreisatz.
+
+---
+
 ## 11.06.2026 — Struktur-Fingerabdruck-Skript + arbeitslosengeld entzerrt
 
 - **Neues Skript `scripts/check-contentbloecke-struktur.mjs`:** listet die
