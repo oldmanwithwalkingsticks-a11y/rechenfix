@@ -8,6 +8,28 @@
 
 ---
 
+## 11.06.2026 — config.quellen für 5 Rechner + Quellen-Pflicht im Skill
+
+- **Was:** Quellen-Sektion („Quellen & Rechtsgrundlagen", rendert nur bei
+  gesetztem `config.quellen`) für die 5 frisch migrierten Goldstandard-Rechner
+  nachgetragen: kreditrechner, elterngeld-, arbeitslosengeld-, buergergeld-rechner
+  (finanzen.ts) + prozentrechner (alltag.ts). Vorher fehlend → inkonsistent +
+  verschenktes E-E-A-T bei YMYL.
+- **Quellen:** YMYL-Rechner mit Primärquellen-Links (PAngV §§ 6/6a, BGB § 491,
+  BEEG §§ 1/2, SGB III §§ 142/147/149/153, SGB II §§ 12/20/22, Bundesbank
+  MFI-Zinsstatistik, 13. SGB II-ÄndG); prozentrechner didaktisch (2 `hinweis`
+  ohne url, kein YMYL). Format `QuelleConfig { titel, url?, hinweis? }`.
+- **Skill-Verankerung:** SKILL.md neue Subsektion „Quellen-Pflicht (ab 06/2026)"
+  im contentBloecke-Standard — `config.quellen` ist ab jetzt fester
+  Goldstandard-Bestandteil neben contentBloecke + Self-Check.
+- **Commits:** `a5f56be` (config), `7f24293` (skill), dieser Doku-Commit.
+- **⚠️ Skill-Sync nötig:** Der Repo-Commit aktualisiert die Claude.ai-Skill-Version
+  NICHT automatisch — Karsten muss die aktualisierte SKILL.md zusätzlich über die
+  Skills-UI / als ZIP synchronisieren.
+- **Verify:** tsc sauber (QuelleConfig-Shape passt), Build-Gate Vercel-grün.
+
+---
+
 ## 11.06.2026 — W19 kreditrechner Goldstandard (Kosten-Mechanik-Leitformat)
 
 - **Was gebaut:** kreditrechner (finanzen.ts) hat jetzt eigene `contentBloecke`
