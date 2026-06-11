@@ -3,7 +3,12 @@ import type { RechnerConfig } from './types';
 export const arbeitRechner: RechnerConfig[] = [
   {
     slug: 'arbeitszeitrechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-12',
+    quellen: [
+      { titel: '§ 3 ArbZG: Arbeitszeit der Arbeitnehmer (Höchstarbeitszeit)', url: 'https://www.gesetze-im-internet.de/arbzg/__3.html' },
+      { titel: '§ 4 ArbZG: Ruhepausen', url: 'https://www.gesetze-im-internet.de/arbzg/__4.html' },
+      { titel: '§ 5 ArbZG: Ruhezeit', url: 'https://www.gesetze-im-internet.de/arbzg/__5.html' },
+    ],
     titel: 'Arbeitszeitrechner',
     beschreibung: 'Arbeitszeit berechnen: Tägliche und wöchentliche Arbeitszeit mit Pausen, Dezimalzeit und gesetzlichen Hinweisen.',
     kategorie: 'Arbeit & Recht',
@@ -57,13 +62,91 @@ Das ArbZG begrenzt die tägliche und wöchentliche Arbeitszeit:
 
 Unser Rechner zeigt eine Warnung an, wenn die tägliche Arbeitszeit 10 Stunden überschreitet.
 
-**Arbeitszeit dokumentieren — Pflicht seit 2023**
+**Arbeitszeit dokumentieren — die Aufzeichnungspflicht**
 
-Seit dem Urteil des Bundesarbeitsgerichts (BAG) vom September 2022 und der darauf basierenden Gesetzgebung sind Arbeitgeber in Deutschland verpflichtet, die Arbeitszeit ihrer Beschäftigten systematisch zu erfassen. Das betrifft Beginn, Ende und Dauer der täglichen Arbeitszeit sowie Pausen.
+Nach dem Urteil des Bundesarbeitsgerichts (BAG) vom 13. September 2022 (1 ABR 22/21) sind Arbeitgeber in Deutschland verpflichtet, die Arbeitszeit ihrer Beschäftigten systematisch zu erfassen — Beginn, Ende und Dauer. Das Gericht leitet diese Pflicht aus § 3 Abs. 2 Nr. 1 ArbSchG ab, im Anschluss an das EuGH-Urteil von 2019. Die Pflicht gilt damit bereits, unabhängig von Betriebsgröße oder Branche; leitende Angestellte sind in der Regel ausgenommen.
 
-Die Dokumentationspflicht gilt für alle Arbeitnehmer — unabhängig von Betriebsgröße oder Branche. Leitende Angestellte sind in der Regel ausgenommen. Die Aufzeichnungen müssen mindestens zwei Jahre aufbewahrt werden.
+Eine eigene, ausdrückliche Regelung im Arbeitszeitgesetz — die unter anderem die (grundsätzlich elektronische) Form und Ausnahmen festlegen soll — ist als Reform geplant, Stand 2026 aber noch nicht in Kraft. Bis dahin genügt eine objektive, verlässliche und zugängliche Aufzeichnung; bestehende Aufbewahrungsfristen (etwa zwei Jahre für Überstunden-Nachweise nach § 16 ArbZG) bleiben unberührt.
 
 Unser Wochenmodus eignet sich ideal als schnelle Kontrolle: Geben Sie Ihre Arbeitszeiten der Woche ein und prüfen Sie, ob Pausen und Höchstarbeitszeit eingehalten werden. Für die dauerhafte Dokumentation empfehlen sich spezialisierte Zeiterfassungstools.`,
+    // contentBloecke (W19): „Regel-Schwellen-Leitformat" — Pausenregel-Tabelle (§ 4)
+    // + Netto-Beispielrechnung + 2 Warn-Infoboxen (Höchstzeit/Tarif), kein Diagramm.
+    // Schwellen gespiegelt aus arbeitszeit.ts (>6 h → 30 min, >9 h → 45 min, >10 h
+    // unzulässig). Rechtsstand ArbZG §§ 3/4/5/6, Stand 06/2026; Zeiterfassungs-Reform
+    // als geplant gekennzeichnet (BAG 1 ABR 22/21 begründet die Pflicht schon heute).
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was als Arbeitszeit zählt — und was nicht',
+        html: `<p><strong>Arbeitszeit</strong> ist nach dem Arbeitszeitgesetz (ArbZG) die Zeit von Beginn bis Ende der Arbeit — <strong>ohne die Ruhepausen</strong>. Man unterscheidet die <strong>Brutto-Arbeitszeit</strong> (die reine Anwesenheit von Kommen bis Gehen) und die <strong>Netto-Arbeitszeit</strong> (Brutto minus Pausen). Nur die Netto-Arbeitszeit ist die tatsächlich geleistete Arbeit, die für Lohn, Überstunden und die gesetzlichen Höchstgrenzen zählt.</p><p>Ruhepausen zählen ausdrücklich <strong>nicht</strong> zur Arbeitszeit. Sie sind in der Regel unbezahlt (sofern Arbeits- oder Tarifvertrag nichts anderes regeln) und müssen so liegen, dass man frei über sie verfügen kann — also nicht in ständiger Rufbereitschaft. Anders verhält es sich mit kurzen <strong>Betriebsunterbrechungen</strong> oder angeordneter Bereitschaft am Arbeitsplatz: Diese gelten weiter als Arbeitszeit.</p><p>Bei Wegezeiten und Umkleiden kommt es auf den Einzelfall an: Der normale Arbeitsweg von zu Hause zählt nicht, eine vom Arbeitgeber angeordnete Dienstreise oder das Umziehen in eine vorgeschriebene Schutzkleidung im Betrieb dagegen oft schon. Wer seine Zeiten sauber erfassen will, trennt deshalb von Anfang an klar: Anwesenheit, Pausen und tatsächlich geleistete Arbeit sind drei verschiedene Größen. Genau diese Trennung nimmt der Rechner ab — er zieht die eingegebenen Pausen ab und weist die Netto-Arbeitszeit in Stunden und in Dezimalform aus.</p><p>Eine eigene Kategorie ist die <strong>Bereitschaft</strong>, bei der drei Formen zu unterscheiden sind: <strong>Arbeitsbereitschaft</strong> (wache Aufmerksamkeit am Arbeitsplatz, etwa Kassieren in ruhigen Phasen) und <strong>Bereitschaftsdienst</strong> (Aufenthalt an einem bestimmten Ort, um bei Bedarf sofort tätig zu werden, z. B. im Krankenhaus) gelten in vollem Umfang als Arbeitszeit. Die <strong>Rufbereitschaft</strong> dagegen — man darf sich frei aufhalten, muss nur erreichbar sein — zählt grundsätzlich nicht als Arbeitszeit; nur der tatsächliche Einsatz wird angerechnet. Diese Abgrenzung ist nicht akademisch: Sie entscheidet darüber, ob die Höchstarbeitszeit eingehalten wird und ob die Zeit vergütet werden muss.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Gesetzliche Pausenregelung (§ 4 ArbZG)',
+        kopf: ['Arbeitszeit (netto)', 'Mindestpause'],
+        zeilen: [
+          ['bis 6 Stunden', 'keine Pflichtpause'],
+          ['mehr als 6 bis 9 Stunden', '30 Minuten'],
+          ['mehr als 9 Stunden', '45 Minuten'],
+        ],
+        fussnote: 'Die Pause kann in Abschnitte von je mindestens 15 Minuten aufgeteilt werden und darf nicht an den Anfang oder das Ende der Arbeitszeit gelegt werden. § 4 ArbZG, Stand 06/2026.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Netto-Arbeitszeit berechnen',
+        schritte: [
+          { label: 'Arbeitsbeginn und -ende', formel: '17:00 − 8:00', ergebnis: '9 h brutto (540 min)' },
+          { label: 'Pflichtpause ab 9 h Arbeitszeit abziehen', formel: '540 min − 45 min', ergebnis: '495 min' },
+          { label: 'Netto-Arbeitszeit', formel: '495 min ÷ 60', ergebnis: '8 h 15 min (8,25 h)' },
+        ],
+        fazit: 'Aus 9 Stunden Anwesenheit werden 8 Stunden 15 Minuten gezählte Arbeitszeit. Die Pause reduziert die Netto-Arbeitszeit, denn Ruhepausen zählen nach dem ArbZG nicht zur Arbeitszeit und sind in der Regel unbezahlt. In Dezimalschreibweise (Industriezeit) entspricht das 8,25 Stunden — praktisch für die Lohnabrechnung und den Vergleich mit der vertraglichen Sollarbeitszeit.',
+      },
+      {
+        typ: 'text',
+        titel: 'Höchstarbeitszeit und der 8/10-Stunden-Rahmen (§ 3)',
+        html: `<p>Das ArbZG begrenzt die tägliche Arbeitszeit klar: Grundsätzlich sind <strong>8 Stunden pro Werktag</strong> erlaubt. Eine Verlängerung auf bis zu <strong>10 Stunden</strong> ist nur zulässig, wenn sie über einen Ausgleichszeitraum von <strong>6 Kalendermonaten oder 24 Wochen</strong> wieder ausgeglichen wird — im Schnitt dürfen also 8 Stunden werktäglich nicht überschritten werden. Die 10 Stunden sind dabei eine absolute Obergrenze, keine zweite Regelgrenze.</p><p>Wichtig ist der Begriff <strong>Werktag</strong>: Das Gesetz rechnet mit sechs Werktagen (Montag bis Samstag), der Samstag zählt also mit. Daraus ergibt sich eine Regel-Wochenhöchstarbeitszeit von <strong>48 Stunden</strong> (6 × 8 h); vorübergehend sind im Rahmen des Ausgleichs bis zu 60 Stunden pro Woche möglich, sofern der Durchschnitt eingehalten wird.</p><p>Eine oft übersehene Regel betrifft <strong>mehrere Arbeitsverhältnisse</strong>: Wer zwei Jobs hat, dessen Arbeitszeiten werden für die Höchstgrenzen <strong>zusammengerechnet</strong>. Die Summe darf die gesetzlichen Grenzen nicht überschreiten. Verstöße gegen die Höchstarbeitszeit treffen den Arbeitgeber und können mit Bußgeldern (bis zu 30.000 €) geahndet werden — der Schutz gilt also unabhängig davon, ob Beschäftigte freiwillig länger arbeiten würden.</p><p>Für echte <strong>Notfälle und außergewöhnliche Fälle</strong> (§ 14 ArbZG) — etwa Naturkatastrophen, drohende Schäden an Rohstoffen oder unaufschiebbare Arbeiten — darf vorübergehend von den Grenzen abgewichen werden; auch das ist aber die Ausnahme und keine Dauerlösung. Außerdem gelten besondere Schutzregeln für bestimmte Personengruppen: Für <strong>Jugendliche</strong> gilt das strengere Jugendarbeitsschutzgesetz, für <strong>werdende und stillende Mütter</strong> das Mutterschutzgesetz — beide sehen niedrigere Höchstgrenzen und zusätzliche Pausen vor. Das ArbZG selbst gilt nicht für leitende Angestellte und einige weitere Gruppen, deren Arbeitszeit vom Gesetz ausgenommen ist.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Ruhezeit zwischen zwei Arbeitstagen (§ 5)',
+        html: `<p>Neben der täglichen Höchstarbeitszeit schreibt das Gesetz eine <strong>Ruhezeit</strong> vor: Zwischen dem Ende eines Arbeitstags und dem Beginn des nächsten müssen mindestens <strong>11 Stunden ununterbrochen</strong> liegen. Wer also abends um 22 Uhr Feierabend macht, darf frühestens um 9 Uhr am nächsten Morgen wieder beginnen. Diese Regel ist getrennt von den Pausen zu sehen: Pausen unterbrechen den Arbeitstag, die Ruhezeit liegt zwischen zwei Arbeitstagen.</p><p>Der Sinn dahinter ist der <strong>Gesundheits- und Erholungsschutz</strong>: Der Körper braucht eine zusammenhängende Erholungsphase, kurze Nächte über längere Zeit erhöhen das Unfall- und Krankheitsrisiko. Schon ein kurzes berufliches Telefonat oder Mails am späten Abend können die Ruhezeit rechtlich unterbrechen und neu starten lassen.</p><p>In bestimmten Branchen — etwa Krankenhäusern, Pflege, Gastronomie oder Landwirtschaft — darf die Ruhezeit um bis zu eine Stunde auf 10 Stunden verkürzt werden, wenn der Ausfall innerhalb eines festgelegten Zeitraums durch eine entsprechend längere Ruhezeit ausgeglichen wird. Tarifverträge können hier zusätzliche Spielräume eröffnen, ohne den Schutzzweck auszuhöhlen.</p><p>Ein praktisches Beispiel zeigt, wie eng das werden kann: Endet eine Spätschicht um 23 Uhr, darf die Frühschicht am nächsten Tag frühestens um 10 Uhr beginnen — sonst ist die 11-Stunden-Ruhezeit verletzt. Genau deshalb sind kurzfristige Schichtwechsel von Spät auf Früh ohne ausreichende Pause dazwischen rechtlich problematisch. Wer Schichtpläne erstellt oder prüft, sollte die Ruhezeit immer mitdenken: Sie ist neben der täglichen Höchstarbeitszeit die zweite harte Grenze, an der viele Pläne in der Praxis scheitern.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Mehr als 10 Stunden sind unzulässig',
+        text: 'Die tägliche Arbeitszeit darf 10 Stunden grundsätzlich nicht überschreiten — und das auch nur, wenn der Schnitt über 6 Monate bzw. 24 Wochen bei 8 Stunden bleibt (§ 3 ArbZG). Ein dauerhafter 10-Stunden-Tag ohne Ausgleich ist nicht zulässig. Verantwortlich ist der Arbeitgeber: Verstöße können als Ordnungswidrigkeit mit Bußgeldern bis zu 30.000 €, in schweren Fällen sogar strafrechtlich geahndet werden.',
+      },
+      {
+        typ: 'text',
+        titel: 'Nacht-, Schicht- und Sonntagsarbeit',
+        html: `<p>Als <strong>Nachtzeit</strong> gilt nach dem ArbZG die Zeit von <strong>23 bis 6 Uhr</strong> (in Bäckereien und Konditoreien 22 bis 5 Uhr). Wer regelmäßig in dieser Zeit arbeitet, ist Nachtarbeitnehmer und genießt besonderen Schutz: Anspruch auf einen angemessenen <strong>Zuschlag oder Freizeitausgleich</strong>, das Recht auf regelmäßige arbeitsmedizinische Untersuchungen und auf Umsetzung auf einen Tagesarbeitsplatz, wenn die Gesundheit es erfordert oder die Betreuung von Kindern bzw. pflegebedürftigen Angehörigen es nötig macht.</p><p><strong>Sonn- und Feiertage</strong> sind grundsätzlich arbeitsfrei — das schützt sowohl die Gesundheit als auch die gesellschaftliche Bedeutung dieser Tage. Es gibt jedoch zahlreiche <strong>Ausnahmen</strong> für Branchen, in denen die Arbeit nicht aufgeschoben werden kann: Gesundheitswesen und Pflege, Gastronomie, Verkehr, Energieversorgung, Rettungsdienste, Medien oder die Landwirtschaft. Wer an einem Sonntag arbeitet, hat Anspruch auf einen <strong>Ersatzruhetag</strong> innerhalb eines gesetzlich festgelegten Zeitraums. Auch hier konkretisieren häufig Tarifverträge die Zuschläge und Ausgleichsregeln.</p><p>Selbst in Branchen mit erlaubter Sonntagsarbeit gilt eine wichtige Schutzgrenze: Mindestens <strong>15 Sonntage im Jahr</strong> müssen beschäftigungsfrei bleiben. Ein häufiges Missverständnis betrifft die Steuer: Zuschläge für Sonntags-, Feiertags- und Nachtarbeit sind innerhalb gesetzlicher Grenzen steuer- und sozialabgabenfrei — das betrifft aber nur den <strong>Zuschlag</strong>, nicht den Grundlohn. Der Anspruch auf einen solchen Zuschlag selbst ergibt sich in der Regel nicht direkt aus dem ArbZG (das nur für Nachtarbeit einen angemessenen Ausgleich verlangt), sondern aus Tarif- oder Arbeitsvertrag. Wer unregelmäßig zu diesen Zeiten arbeitet, sollte die konkrete Regelung im eigenen Vertrag prüfen.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Arbeitszeit korrekt erfassen',
+        punkte: [
+          'Arbeitsbeginn, Arbeitsende und alle Pausen genau notieren — nicht nur die Gesamtdauer.',
+          'Pflichtpausen nach § 4 ArbZG einhalten (30 Min. ab 6 h, 45 Min. ab 9 h).',
+          'Die 11-stündige Ruhezeit zwischen zwei Arbeitstagen beachten.',
+          'Die tägliche Grenze von 10 Stunden nicht überschreiten und den 8-Stunden-Schnitt im Blick behalten.',
+          'Überstunden gesondert dokumentieren — auch zur eigenen Absicherung.',
+          'Bei mehreren Jobs die Arbeitszeiten für die Höchstgrenzen zusammenrechnen.',
+          'Aufzeichnungen aufbewahren; für die dauerhafte Erfassung ein geeignetes Zeiterfassungssystem nutzen.',
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Ausblick: geplante Reform der Arbeitszeit',
+        html: `<p>Das deutsche Arbeitszeitrecht steht vor einer möglichen Modernisierung. Im Gespräch sind vor allem zwei Punkte: der Übergang von einer <strong>täglichen</strong> zu einer <strong>wöchentlichen</strong> Höchstarbeitszeit (mehr Flexibilität bei der Verteilung der Stunden über die Woche, innerhalb der europäischen Vorgaben) und eine ausdrückliche, grundsätzlich <strong>elektronische Pflicht zur Arbeitszeiterfassung</strong> mit klaren Vorgaben und Ausnahmen.</p><p>Wichtig zur Einordnung: Diese Punkte sind <strong>Stand 2026 geplant, aber noch nicht in Kraft</strong> — es gilt weiterhin das bestehende ArbZG mit täglicher Höchstgrenze. Die Pflicht, die Arbeitszeit überhaupt zu erfassen, besteht allerdings bereits heute, abgeleitet aus dem BAG-Urteil von 2022. Bis eine Neuregelung verabschiedet ist, bleiben die in diesem Rechner abgebildeten Grenzen maßgeblich.</p><p>Den Rahmen für eine Reform setzt die <strong>EU-Arbeitszeitrichtlinie</strong>: Sie schreibt unter anderem eine maximale durchschnittliche Wochenarbeitszeit von 48 Stunden (inklusive Überstunden), tägliche Ruhezeiten und Mindesturlaub vor. Eine Umstellung auf eine wöchentliche Höchstgrenze müsste sich innerhalb dieser europäischen Vorgaben bewegen — eine grenzenlose Flexibilisierung ist also auch künftig nicht zu erwarten. Wer Planungssicherheit braucht, sollte die Entwicklung verfolgen, sich aber bis zum Inkrafttreten einer Reform weiterhin am geltenden ArbZG orientieren.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Tarif- und Arbeitsvertrag können abweichen',
+        text: 'Das Arbeitszeitgesetz legt nur den gesetzlichen Mindestschutz fest. Tarifverträge, Betriebsvereinbarungen und Arbeitsverträge können für Beschäftigte günstigere Regelungen vorsehen — etwa längere Pausen, kürzere Höchstarbeitszeiten oder zusätzliche Zuschläge. Dieser Rechner bildet den gesetzlichen Rahmen ab und liefert eine Orientierung; verbindlich ist im Zweifel die für Sie geltende vertragliche oder tarifliche Regelung. Er ersetzt keine arbeitsrechtliche Beratung.',
+      },
+    ],
     faq: [
       {
         frage: 'Wie berechne ich meine tägliche Arbeitszeit?',
@@ -87,7 +170,7 @@ Unser Wochenmodus eignet sich ideal als schnelle Kontrolle: Geben Sie Ihre Arbei
       },
       {
         frage: 'Muss der Arbeitgeber die Arbeitszeit erfassen?',
-        antwort: 'Ja, seit 2023 sind Arbeitgeber in Deutschland verpflichtet, Beginn, Ende und Dauer der täglichen Arbeitszeit aller Beschäftigten systematisch zu erfassen. Die Aufzeichnungen müssen mindestens zwei Jahre aufbewahrt werden.',
+        antwort: 'Ja. Nach dem BAG-Urteil vom September 2022 (1 ABR 22/21) müssen Arbeitgeber Beginn, Ende und Dauer der täglichen Arbeitszeit systematisch erfassen — abgeleitet aus § 3 Abs. 2 Nr. 1 ArbSchG. Eine ausdrückliche Regelung im Arbeitszeitgesetz, die unter anderem die elektronische Form vorschreibt, ist als Reform geplant, Stand 2026 aber noch nicht in Kraft.',
       },
     ],
     affiliate: { programId: 'lexware', context: 'arbeitszeitrechner', variant: 'compact' },
