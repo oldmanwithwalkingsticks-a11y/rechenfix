@@ -8,6 +8,32 @@
 
 ---
 
+## 11.06.2026 — Self-Check-Bug behoben (findeBlockQuelle respektiert Slug-Grenze)
+
+- **Fix:** `findeBlockQuelle` in `scripts/check-contentbloecke-wortzahl.mjs`
+  begrenzt die `contentBloecke:`-Suche jetzt auf den aktuellen Eintrag (Grenze =
+  nächstes `slug: '`). Zuvor griff `indexOf('contentBloecke:', slugIdx)` ohne
+  obere Grenze den Block des NÄCHSTEN Rechners → Fremdblock-Zuordnung, falsche
+  „OK"-Reports für nicht-migrierte Rechner.
+- **Frühere Fehl-Reports waren falsch:** `arbeitslosengeld-rechner`,
+  `buergergeld-rechner` (je ~1.580, geborgt von stundenlohn),
+  `prozentrechner`, `dreisatz-rechner` (je ~1.539, geborgt aus alltag.ts)
+  melden jetzt korrekt „keine contentBloecke (Fallback)". Diese vier sind
+  normale **Migrations-Kandidaten** (kein Live-Fehler — sie rendern den
+  korrekten erklaerung-Fallback) und kommen als nächste Tranche.
+- **Zusatzbefund (über Prompt-Erwartung hinaus):** `brutto-netto-rechner`
+  meldet ebenfalls — korrekt — „Fallback". Sein Inhalt liegt NICHT in config-
+  `contentBloecke`, sondern in der handgebauten `BruttoNettoRechner.tsx`
+  (INLINE_ERKLAERUNG_SLUGS); der Self-Check misst nur config-Bausteine. Die
+  Prompt-Liste führte brutto-netto fälschlich als „echt migriert" — auch das
+  war ein Artefakt desselben Bugs.
+- **Stand nach Fix — Rechner mit EIGENEN config-contentBloecke (7, alle OK
+  ≥1.500 W):** mwst, zins, elterngeld, stundenlohn, bmi, tage, spritkosten.
+  `--all` meldet 0 Rechner unter Schwelle.
+- Reines Skript, kein Build/Vercel nötig.
+
+---
+
 ## 11.06.2026 — W19 elterngeld-rechner: eigene contentBloecke (Varianten-Leitformat)
 
 - **Was gebaut:** elterngeld-rechner (finanzen.ts) hat jetzt 11 eigene
