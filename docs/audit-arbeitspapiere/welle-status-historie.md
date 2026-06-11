@@ -8,6 +8,31 @@
 
 ---
 
+## 11.06.2026 — W19 dreisatz-rechner Goldstandard + Tranche KOMPLETT
+
+- **Was gebaut:** dreisatz-rechner (alltag.ts) hat jetzt eigene `contentBloecke`
+  im **„Proportionalitäts- & Vergleich-Leitformat"**, vergleich-geprägt. Folge:
+  `text-vergleich-beispielrechnung-vergleich-diagramm-text-beispielrechnung-text-checkliste-infobox-text`.
+  Prägend: 2 vergleich (proportional vs. antiproportional; gerader vs. ungerader
+  Dreisatz) + 1 linie-Diagramm. Bewusst KEINE tabelle (grenzt von prozent ab).
+  ~1.506 W (Self-Check OK).
+- **Beispiele konsistent zu `lib/berechnungen/dreisatz.ts`:** proportional
+  B2 = B1×A2÷A1 (3 Brötchen 1,20 € → 7 = 2,80 €); antiproportional B2 = B1×A1÷A2
+  (4 Maler 6 Tage → 3 Maler = 8 Tage). Kein YMYL.
+- **Struktur (L-W19.Struktur):** Folge eindeutig; prozent nicht in Top-5 (klarer
+  Bruch aus dessen Cluster). Höchster Score 0,85 zu bmi — Komposition-Artefakt
+  (bmi mit tabelle + single vergleich, dreisatz vergleich-geprägt ohne tabelle,
+  öffnet mit text-vergleich). Wie im Prompt vorgesehen: Liste zählt, Score-Artefakt
+  ignoriert, Folge NICHT zum Drücken der Metrik geändert.
+- **Verify:** tsc sauber für alltag.ts (pre-existing `FULL_CSS_HREF` bleibt).
+  Build-Gate Vercel-grün. `letzteAktualisierung` 2026-06-11.
+
+**Tranche KOMPLETT:** elterngeld, arbeitslosengeld, buergergeld, prozent, dreisatz
+migriert. Inkl. brutto-netto-Wasserfall + Struktur-Fingerabdruck-Skript ist der
+W19-Block dieser Session abgeschlossen.
+
+---
+
 ## 11.06.2026 — W19 prozentrechner Goldstandard (Grundtypen-/Formel-Leitformat)
 
 - **Was gebaut:** prozentrechner (alltag.ts) hat jetzt eigene `contentBloecke`
