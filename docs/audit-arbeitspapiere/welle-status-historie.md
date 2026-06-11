@@ -8,6 +8,32 @@
 
 ---
 
+## 11.06.2026 — W19 arbeitslosengeld-rechner Goldstandard (Staffelungs-Leitformat)
+
+- **Was gebaut:** arbeitslosengeld-rechner (finanzen.ts) hat jetzt 11 eigene
+  `contentBloecke` im eigenständigen **„Voraussetzungs- & Staffelungs-Leitformat"**
+  (dominant `tabelle` Bezugsdauer-Staffel § 147 + `beispielrechnung` ×2 +
+  `checkliste` + Sperrzeit-/Nebenverdienst-Texte). ~1.505 W (Self-Check OK).
+- **Werte gespiegelt aus `lib/berechnungen/arbeitslosengeld.ts`:** Satz 60 %/67 %
+  (§ 149), Bemessungsdeckel BBG_RV 8.450 €/Monat (2026), Bezugsdauer-Staffel
+  12→6/16→8/20→10/24→12, ab 50/30→15, ab 55/36→18, ab 58/48→24 (§ 147).
+  Beispiel via `berechneArbeitslosengeld(3000 €, Kl. I)`: Leistungsentgelt
+  2.072 € → 60 % = 1.243,20 €, 67 % = 1.388,24 €, Dauer 12 Mon.
+- **Prompt-Abweichung (Lehre 34 — Lib-Realität schlägt Prompt):** Der Prompt nannte
+  die SV-Pauschale mit **20 %**; Lib (`SV_PAUSCHALE_PROZENT = 0.21`), bestehende
+  `erklaerung` und `formel` nennen einheitlich **21 %** (§ 153 Abs. 1 S. 2 Nr. 1
+  SGB III). Übernommen wurde **21 %**. Dadurch liegt das Beispiel bei 1.243 €,
+  nicht beim Prompt-Schätzwert „~1.170 €". § 155-Nebenverdienst (165 €) bleibt
+  Konfig-Info — Lib modelliert keine Anrechnung (L-35-Disziplin).
+- **Unberührt:** erklaerung/faq (bereits korrekt), Renderer/types/Design.
+  `letzteAktualisierung` auf 2026-06-11 gebumpt.
+- **Verify:** tsc sauber für finanzen.ts (einzige Tree-Fehlermeldung `FULL_CSS_HREF`
+  in app/layout.tsx ist pre-existing). Build-Gate Vercel-grün; Karsten verifiziert
+  per Inkognito.
+- **Offen (Migrations-Kandidaten):** buergergeld, prozent, dreisatz.
+
+---
+
 ## 11.06.2026 — Self-Check-Bug behoben (findeBlockQuelle respektiert Slug-Grenze)
 
 - **Fix:** `findeBlockQuelle` in `scripts/check-contentbloecke-wortzahl.mjs`
