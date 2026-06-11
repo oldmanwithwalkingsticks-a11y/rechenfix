@@ -8,6 +8,30 @@
 
 ---
 
+## 11.06.2026 — W19 kreditrechner Goldstandard (Kosten-Mechanik-Leitformat)
+
+- **Was gebaut:** kreditrechner (finanzen.ts) hat jetzt eigene `contentBloecke`
+  im **„Kosten-Mechanik-Leitformat"**. Folge:
+  `text-statistik-beispielrechnung-tabelle-text-text-tabelle-text-checkliste-infobox-text`.
+  Prägend: statistik (Zinsniveau 2026) + ZWEI Tabellen (Tilgungsplan-Auszug +
+  Bonität-Zinsspanne), kein vergleich, kein Diagramm. ~1.501 W (Self-Check OK).
+- **Werte aus `berechneKredit`:** 20.000 € / 6 % Sollzins / 72 Mon. → Rate
+  331,46 €, Gesamtzins 3.864,96 €, Effektiv 6,17 %. Tilgungsplan-Auszug
+  (Monat 1/12/24/36/48/60/72) und Bonität-Raten (5/7/10 % Soll → 322/341/371 €)
+  ebenfalls aus der Lib gerechnet. Laufzeit-Effekt (36 vs. 96 Mon.) in der
+  Warn-Infobox.
+- **YMYL-Finanz:** keine Kreditberatung/Empfehlung, Zinsen als Spannen mit
+  Stichtag (Bundesbank-Neugeschäft, EZB-Leitzins), § 6/6a PAngV (Soll-/Effektiv-/
+  Zweidrittelzins), CCD II ab 20.11.2026. Affiliate unberührt (nur via config).
+- **Struktur (L-W19.Struktur):** Folge eindeutig; höchster Score 0,85 zu mwst —
+  Komposition-Artefakt (mwst = 3 Tabellen ohne statistik; kredit öffnet mit
+  statistik + 2 Tabellen). Liste zählt, Folge nicht zur Metrik geändert.
+- **Verify:** tsc sauber für finanzen.ts (pre-existing `FULL_CSS_HREF` bleibt).
+  Build-Gate Vercel-grün (Deploy-Hook). `letzteAktualisierung` 2026-06-11.
+- **Tranche-Fortschritt 1/5:** kredit ✅; offen strom, kalorien, arbeitszeit, pizzateig.
+
+---
+
 ## 11.06.2026 — W19 dreisatz-rechner Goldstandard + Tranche KOMPLETT
 
 - **Was gebaut:** dreisatz-rechner (alltag.ts) hat jetzt eigene `contentBloecke`
