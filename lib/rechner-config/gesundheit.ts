@@ -403,9 +403,9 @@ Die Formel berücksichtigt vier Schlüsselfaktoren: Körpergewicht in Kilogramm,
 
 Der Gesamtumsatz ergibt sich aus dem Grundumsatz multipliziert mit einem Aktivitätsfaktor (PAL-Wert: Physical Activity Level). Unser Rechner nutzt die in Fitness- und Ernährungsliteratur verbreiteten **Harris-Benedict-Faktoren** von 1,2 (überwiegend sitzend) bis 1,9 (extreme körperliche Belastung). Die DGE (Deutsche Gesellschaft für Ernährung) setzt in ihren Referenzwerten etwas höhere PAL-Stufen von etwa 1,4 bis 2,2–2,4 an — beide Konventionen sind wissenschaftlich etabliert, die DGE-Werte fallen rund 10–15 % höher aus. Bereits ein Wechsel von \"kaum aktiv\" zu \"leicht aktiv\" kann den täglichen Kalorienbedarf um **200 bis 300 kcal** erhöhen. Regelmäßige Bewegung steigert nicht nur den akuten Energieverbrauch, sondern erhöht langfristig auch den Grundumsatz durch den Aufbau von Muskelmasse.
 
-**Kaloriendefizit: Wie viel ist gesund?**
+**Energiebedarf und Gewicht — gesund und nachhaltig**
 
-Zum Abnehmen muss ein Kaloriendefizit erzielt werden — das bedeutet, weniger Kalorien aufzunehmen als der Körper verbraucht. Ein moderates Defizit von **500 kcal pro Tag** entspricht einem Gewichtsverlust von etwa 0,5 kg pro Woche und gilt als gesund und nachhaltig. Wichtig: Die tägliche Kalorienaufnahme sollte **niemals unter den Grundumsatz fallen**, da dies den Stoffwechsel verlangsamt, Muskelmasse abbaut und langfristig zum gefürchteten Jo-Jo-Effekt führt. Der Körper schaltet bei zu starkem Defizit in einen Sparmodus, der das Abnehmen paradoxerweise erschwert.
+Wer abnehmen möchte, nimmt weniger Energie auf, als der Körper verbraucht. Wie groß eine sinnvolle Veränderung ist, hängt von der individuellen Situation ab und sollte mit ärztlicher oder ernährungsfachlicher Begleitung bestimmt werden — nicht über pauschale Richtwerte. Wichtig ist vor allem: Die tägliche Kalorienaufnahme sollte **niemals dauerhaft unter den Grundumsatz fallen**. Bei zu starker Einschränkung schaltet der Körper in einen Sparmodus, der das Abnehmen erschwert und einen Jo-Jo-Effekt begünstigt; zudem können Müdigkeit, Haarausfall und Hormonstörungen auftreten. Eine gesunde Gewichtsveränderung verläuft langsam und nachhaltig — ein ausgewogenes, langfristig durchhaltbares Essverhalten ist dafür hilfreicher als starre Kalorienvorgaben.
 
 **Makronährstoffverteilung: Protein, Kohlenhydrate, Fett**
 
@@ -517,11 +517,11 @@ Für eine individuelle Anpassung der Makronährstoffverteilung — etwa bei eine
       },
       {
         frage: 'Wie viele Kalorien brauche ich zum Abnehmen?',
-        antwort: 'Für eine gesunde Gewichtsabnahme empfiehlt sich ein moderates Kaloriendefizit von etwa 500 kcal pro Tag. Das entspricht einem Gewichtsverlust von ca. 0,5 kg pro Woche. Unser Rechner berechnet automatisch die reduzierte Kalorienmenge, wenn Sie das Ziel „Abnehmen" wählen. Wichtig: Essen Sie nie unter Ihrem Grundumsatz.',
+        antwort: 'Wer abnehmen möchte, nimmt weniger Energie auf, als der Körper verbraucht. Wie groß eine sinnvolle Veränderung ist, hängt von der individuellen Situation ab und sollte am besten mit ärztlicher oder ernährungsfachlicher Begleitung bestimmt werden — nicht über pauschale Richtwerte. Eine gesunde Gewichtsveränderung verläuft langsam und nachhaltig; ein ausgewogenes, langfristig durchhaltbares Essverhalten ist dafür hilfreicher als starre Kalorienvorgaben. Wichtig in jedem Fall: nicht dauerhaft unter den Grundumsatz gehen.',
       },
       {
         frage: 'Warum sollte ich nicht unter meinem Grundumsatz essen?',
-        antwort: 'Wenn Sie dauerhaft weniger Kalorien aufnehmen als Ihr Grundumsatz, schaltet der Körper in einen Sparmodus: Der Stoffwechsel verlangsamt sich, Muskelmasse wird abgebaut statt Fett, und es droht der Jo-Jo-Effekt. Zudem können Nährstoffmangel, Müdigkeit, Haarausfall und Hormonstörungen auftreten. Ein moderates Defizit unterhalb des Gesamtumsatzes, aber oberhalb des Grundumsatzes, ist der gesündere Weg.',
+        antwort: 'Wenn Sie dauerhaft weniger Kalorien aufnehmen als Ihr Grundumsatz, schaltet der Körper in einen Sparmodus: Der Stoffwechsel verlangsamt sich, Muskelmasse wird abgebaut statt Fett, und es droht der Jo-Jo-Effekt. Zudem können Nährstoffmangel, Müdigkeit, Haarausfall und Hormonstörungen auftreten. Deshalb sollte die Energiezufuhr dauerhaft nicht unter den Grundumsatz fallen.',
       },
       {
         frage: 'Wie genau ist der Kalorienrechner?',
