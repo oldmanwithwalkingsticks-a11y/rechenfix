@@ -3,7 +3,7 @@ import type { RechnerConfig } from './types';
 export const alltagRechner: RechnerConfig[] = [
   {
     slug: 'prozentrechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-11',
     titel: 'Prozentrechner',
     beschreibung: 'Prozente berechnen: Prozentwert, Grundwert, Prozentsatz, Aufschlag & Rabatt — mit Rechenweg.',
     kategorie: 'Alltag',
@@ -55,6 +55,127 @@ Unser Prozentrechner zeigt bei jedem Ergebnis den vollständigen Rechenweg an. S
 - **Prozent auf Prozent:** Eine Erhöhung um 50% und anschließende Senkung um 50% ergibt nicht den Ausgangswert! 100 + 50% = 150, dann 150 − 50% = 75 (nicht 100).
 - **Prozent vs. Prozentpunkte:** Eine Steigerung von 20% auf 25% ist eine Steigerung um 5 Prozentpunkte, aber um 25% (relativ).
 - **Grundwert verwechseln:** Achten Sie darauf, welcher Wert die 100%-Basis bildet. Bei Rabatten ist es der Originalpreis, bei Aufschlägen der Nettopreis.`,
+    // contentBloecke (W19): eigenständiges „Grundtypen- & Formel-Leitformat" —
+    // beispielrechnung-dominiert, je Rechenart ein Beispiel. Bewusst KEIN vergleich-
+    // Block und KEINE vergleich-Dominanz (das bleibt dreisatz vorbehalten), kein
+    // Diagramm. Beispiele konsistent zu lib/berechnungen/prozent.ts (Prozentwert
+    // G×p/100, Prozentsatz (W/G)×100, Grundwert (W/p)×100, Auf-/Abschlag).
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Prozentrechnung: die drei Grundgrößen',
+        html: `<p>Fast jede Prozentaufgabe dreht sich um drei Größen, die zusammengehören: den <strong>Grundwert</strong>, den <strong>Prozentwert</strong> und den <strong>Prozentsatz</strong>. Der Grundwert ist das Ganze, die Basis, die immer <strong>100 %</strong> entspricht — zum Beispiel der ursprüngliche Preis einer Ware. Der Prozentsatz gibt an, welcher Anteil davon betrachtet wird (etwa 19 %). Und der Prozentwert ist der konkrete Betrag, der diesem Anteil entspricht (die 19 % in Euro).</p><p>Der Trick der gesamten Prozentrechnung: Kennt man zwei dieser drei Größen, lässt sich die dritte immer berechnen. Daraus ergeben sich genau drei Grundaufgaben — den Prozentwert suchen, den Prozentsatz suchen oder den Grundwert suchen. Alle drei beruhen auf derselben Beziehung: Prozentwert geteilt durch Grundwert ergibt den Prozentsatz (als Dezimalzahl). Stellt man diese Gleichung um, erhält man die jeweils gesuchte Größe.</p><p>Wer sich diese Dreiteilung einprägt, löst praktisch jede Prozentaufgabe sicher — egal ob es um Rabatte, Mehrwertsteuer, Zinsen oder Notenschnitte geht. Der erste Schritt ist immer derselbe: Welche der drei Größen ist gegeben, und welche wird gesucht? Erst danach wählt man die passende Formel. Genau diese Reihenfolge — erst zuordnen, dann rechnen — verhindert die meisten Fehler.</p><p>Ein Bild hilft beim Einprägen: Stellen Sie sich den Grundwert als ganzen Kuchen vor (100 %), den Prozentsatz als die Größe eines Stücks in Prozent und den Prozentwert als das tatsächliche Stück auf dem Teller. Wer den ganzen Kuchen und die Stückgröße kennt, berechnet das Stück (Prozentwert). Wer Kuchen und Stück kennt, berechnet die Stückgröße (Prozentsatz). Und wer Stück und Stückgröße kennt, schließt auf den ganzen Kuchen zurück (Grundwert). Diese drei Blickrichtungen decken jede Prozentaufgabe ab, die im Alltag vorkommt.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Prozentwert berechnen',
+        schritte: [
+          { label: 'Gesucht: 19 % von 250 € (Grundwert 250 €, Prozentsatz 19 %)', formel: 'Prozentwert = G × (p ÷ 100)', ergebnis: '250 € × 0,19' },
+          { label: 'Ausrechnen', formel: '250 € × 0,19', ergebnis: '47,50 €' },
+        ],
+        fazit: '19 % von 250 € sind 47,50 €. So bestimmt man jeden Prozentwert: Grundwert mal Prozentsatz, geteilt durch 100. Das ist der häufigste Fall im Alltag — etwa die Mehrwertsteuer auf einen Nettopreis, ein Rabattbetrag im Sale oder der Zinsbetrag auf ein Guthaben. Wer die Dezimalform nutzt (19 % = 0,19), spart sich das Teilen durch 100 und multipliziert direkt: 250 € × 0,19.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Prozentsatz berechnen',
+        schritte: [
+          { label: 'Gesucht: Welcher Anteil sind 30 von 120? (Prozentwert 30, Grundwert 120)', formel: 'Prozentsatz = (W ÷ G) × 100', ergebnis: '(30 ÷ 120) × 100' },
+          { label: 'Ausrechnen', formel: '0,25 × 100', ergebnis: '25 %' },
+        ],
+        fazit: '30 sind 25 % von 120. Der Prozentsatz beantwortet die Frage „Wie viel Prozent ist der eine Wert vom anderen?" — nützlich etwa beim Berechnen einer Quote, eines Marktanteils, einer Bestehensquote in einer Prüfung oder des erreichten Anteils an einem Sparziel. Wichtig: Der Grundwert (hier 120) steht immer im Nenner, der Prozentwert (hier 30) im Zähler.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Grundwert berechnen',
+        schritte: [
+          { label: 'Gesucht: 45 sind 15 % von welchem Ganzen? (Prozentwert 45, Prozentsatz 15 %)', formel: 'Grundwert = (W ÷ p) × 100', ergebnis: '(45 ÷ 15) × 100' },
+          { label: 'Ausrechnen', formel: '3 × 100', ergebnis: '300' },
+        ],
+        fazit: 'Wenn 45 genau 15 % sind, beträgt der Grundwert (100 %) 300. Hier sucht man die Basis, von der ein bekannter Anteil stammt — zum Beispiel den ursprünglichen Bruttopreis, wenn nur der Steueranteil oder der Rabattbetrag bekannt ist.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Prozent, Bruch und Dezimalzahl',
+        kopf: ['Prozent', 'Bruch', 'Dezimalzahl'],
+        zeilen: [
+          ['10 %', '1/10', '0,1'],
+          ['12,5 %', '1/8', '0,125'],
+          ['25 %', '1/4', '0,25'],
+          ['50 %', '1/2', '0,5'],
+          ['75 %', '3/4', '0,75'],
+          ['100 %', '1/1', '1'],
+        ],
+        fussnote: 'Prozent heißt wörtlich „von hundert" (lateinisch per centum): 1 % = 1/100 = 0,01. Wer die Dezimalform kennt, multipliziert direkt — 30 % von 80 = 0,3 × 80 = 24.',
+      },
+      {
+        typ: 'text',
+        titel: 'Aufschlag und Abschlag: Erhöhen und Vermindern',
+        html: `<p>Zwei besonders häufige Varianten der Prozentrechnung sind der <strong>Aufschlag</strong> und der <strong>Abschlag</strong>. Beim Aufschlag wird ein Prozentsatz zum Grundwert hinzugerechnet — so entsteht aus dem Nettopreis der Bruttopreis (Aufschlag der Mehrwertsteuer) oder aus dem Einkaufs- der Verkaufspreis (Gewinnaufschlag). Beim Abschlag wird ein Prozentsatz abgezogen, etwa beim Rabatt im Sale, beim Skonto auf einer Rechnung oder beim Mengenrabatt.</p><p>Rechnerisch gilt: Ein Aufschlag von 19 % bedeutet, den Grundwert mit <strong>1,19</strong> zu multiplizieren; ein Abschlag von 20 % bedeutet, mit <strong>0,80</strong> zu multiplizieren. Diese „Faktor-Methode" ist schneller als der Umweg über den Prozentwert und weniger fehleranfällig.</p><p>Der häufigste Denkfehler lauert beim Hintereinanderschalten: Wer einen Preis um 20 % erhöht und danach um 20 % senkt, landet <strong>nicht</strong> wieder beim Ausgangswert. Aus 100 € werden mit +20 % erst 120 €, danach mit −20 % nur 96 € — denn die zweite Prozentzahl bezieht sich auf den bereits veränderten, höheren Wert. Bei Prozenten kommt es also immer darauf an, auf welche Basis sie sich beziehen.</p><p>Die Faktor-Methode hilft auch beim Zurückrechnen: Wenn ein Bruttopreis 119 € beträgt und 19 % Mehrwertsteuer enthält, teilt man durch 1,19 und erhält den Nettopreis von 100 € — nicht etwa, indem man 19 % von 119 € abzieht (das ergäbe fälschlich 96,39 €). Dieser Unterschied zwischen „Prozent draufrechnen" und „Prozent herausrechnen" ist eine der häufigsten Fehlerquellen bei Rechnungen, Kassenbons und in der Buchhaltung. Merksatz: Aufschlagen heißt multiplizieren, Herausrechnen heißt dividieren.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Rabatt und Mehrwertsteuer kombiniert',
+        schritte: [
+          { label: 'Ausgangspreis 80 €, 20 % Rabatt abziehen', formel: '80 € − (80 € × 0,20)', ergebnis: '64,00 €' },
+          { label: 'Auf den rabattierten Preis 19 % MwSt aufschlagen', formel: '64 € × 1,19', ergebnis: '76,16 €' },
+        ],
+        fazit: 'Reihenfolge und Basis entscheiden: Die 19 % MwSt werden auf den bereits rabattierten Preis (64 €) gerechnet, nicht auf die ursprünglichen 80 €. Rabatt und Aufschlag beziehen sich auf verschiedene Grundwerte — deshalb lässt sich ein Prozentsatz nie einfach von einem anderen abziehen.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Häufige Auf- und Abschläge als Faktor',
+        kopf: ['Veränderung', 'Faktor', 'Beispiel: 200 € →'],
+        zeilen: [
+          ['+ 19 % (MwSt)', '× 1,19', '238,00 €'],
+          ['+ 7 % (ermäßigte MwSt)', '× 1,07', '214,00 €'],
+          ['− 3 % (Skonto)', '× 0,97', '194,00 €'],
+          ['− 10 % (Rabatt)', '× 0,90', '180,00 €'],
+          ['− 20 % (Rabatt)', '× 0,80', '160,00 €'],
+          ['+ 100 % (Verdopplung)', '× 2,00', '400,00 €'],
+        ],
+        fussnote: 'Die Faktor-Methode ist schneller und sicherer als der Umweg über den Prozentwert: einmal multiplizieren genügt. Zum Herausrechnen eines Aufschlags durch denselben Faktor teilen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Prozentuale Veränderung berechnen',
+        html: `<p>Sehr oft will man wissen, um wie viel Prozent sich ein Wert verändert hat — der Spritpreis gegenüber dem Vormonat, der Umsatz gegenüber dem Vorjahr, das Gewicht gegenüber dem Jahresanfang. Die Formel dafür lautet: <strong>Veränderung in Prozent = (neuer Wert − alter Wert) ÷ alter Wert × 100</strong>. Entscheidend ist, dass der <strong>alte Wert</strong> die Basis (100 %) bildet — er steht im Nenner.</p><p>Ein Beispiel: Steigt eine Miete von 800 € auf 880 €, beträgt die Veränderung (880 − 800) ÷ 800 × 100 = 10 %. Sinkt ein Preis von 50 € auf 40 €, sind das (40 − 50) ÷ 50 × 100 = −20 %. Ein negatives Ergebnis bedeutet eine Abnahme, ein positives eine Zunahme. Wer Basis und Vergleichswert vertauscht, erhält ein falsches Ergebnis — deshalb immer zuerst festlegen, welcher Wert „vorher" und welcher „nachher" ist.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Prozentpunkte sind nicht dasselbe wie Prozent',
+        html: `<p>Eine der hartnäckigsten Verwechslungen betrifft den Unterschied zwischen <strong>Prozentpunkten</strong> und <strong>Prozent</strong>. Steigt ein Zinssatz von 4 % auf 6 %, dann ist das eine Erhöhung um <strong>2 Prozentpunkte</strong> — gemessen an der absoluten Differenz der beiden Sätze. Relativ betrachtet ist es aber eine Steigerung um <strong>50 %</strong>, denn von 4 ausgehend sind 2 die Hälfte.</p><p>Beide Aussagen sind richtig, sie beschreiben nur Verschiedenes: Der Prozentpunkt ist die schlichte Differenz zweier Prozentzahlen, das Prozent die relative Veränderung. In Nachrichten zu Zinsen, Wahlergebnissen, Arbeitslosen- oder Inflationsraten wird das oft durcheinandergebracht. Wer genau liest, erkennt am Wort „Prozentpunkte", dass eine Differenz gemeint ist — und rechnet im Zweifel selbst nach, um die relative Veränderung einzuordnen.</p><p>Ein Wahlbeispiel macht den Unterschied greifbar: Erhält eine Partei statt 10 % nun 12 % der Stimmen, hat sie 2 Prozentpunkte zugelegt — aber ihr Ergebnis ist relativ um 20 % gestiegen. Beim Bauzins wiegt der Unterschied finanziell schwer: Ein Anstieg von 3 % auf 4 % sind nur 1 Prozentpunkt, bedeutet aber rund ein Drittel mehr Zinskosten. Faustregel für den Alltag: Prozentpunkte beschreiben den Abstand zwischen zwei Prozentzahlen, Prozent die Veränderung relativ zum Ausgangswert. Wer beide Angaben kennt, lässt sich von Schlagzeilen nicht in die Irre führen.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Brutto, netto und der richtige Bezugswert',
+        html: `<p>Viele Prozentfehler entstehen, weil unklar bleibt, welcher Wert die 100 %-Basis ist. Beim <strong>Rabatt</strong> ist es der Originalpreis, beim <strong>Mehrwertsteuer-Aufschlag</strong> der Nettopreis, beim <strong>Trinkgeld</strong> die Rechnungssumme und bei einer <strong>Gehaltserhöhung</strong> das bisherige Bruttogehalt. Wechselt die Basis, ändert sich das Ergebnis — obwohl derselbe Prozentsatz im Spiel ist.</p><p>Besonders tückisch ist die Mehrwertsteuer: Sie wird stets auf den Nettopreis aufgeschlagen, nicht auf den Bruttopreis. Wer aus einem Bruttobetrag die enthaltene Steuer ermitteln will, darf deshalb nicht einfach 19 % vom Brutto abziehen, sondern muss durch 1,19 teilen. Im Zweifel hilft die Kontrollfrage: „Hundert Prozent — wovon eigentlich?" Wer diese Frage vor jeder Rechnung beantwortet, wählt automatisch den richtigen Grundwert und vermeidet den häufigsten Prozentfehler überhaupt.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Typische Prozent-Aufgaben im Alltag',
+        punkte: [
+          'Rabatt im Sale: Wie viel spare ich, und was kostet die Ware danach?',
+          'Trinkgeld: 5 bis 10 % der Rechnungssumme schnell überschlagen.',
+          'Mehrwertsteuer heraus- oder aufrechnen (÷ 1,19 bzw. × 1,19).',
+          'Zinsen auf Spar- oder Kreditbeträge pro Jahr berechnen.',
+          'Anteile im Notenschnitt oder bei Umfragen als Prozent ausdrücken.',
+          'Gehaltserhöhung in Euro umrechnen (Brutto × Prozentsatz).',
+          'Tank- oder Mengenrabatt pro Liter bzw. Stück bewerten.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Schnell im Kopf: der 10-%-Trick',
+        text: '10 % einer Zahl bekommt man, indem man das Komma eine Stelle nach links schiebt: 10 % von 80 € sind 8 €. Davon ausgehend rechnet man die meisten Alltagsprozente im Kopf — 5 % sind die Hälfte davon (4 €), 20 % das Doppelte (16 €), 15 % die Summe aus 10 % und 5 % (12 €). So lässt sich ein Rabatt oder ein Trinkgeld in Sekunden überschlagen.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Welcher Wert ist gesucht?',
+        text: 'Bevor Sie rechnen, klären Sie: Suche ich den Prozentwert (den Anteil in Euro), den Prozentsatz (wie viel Prozent) oder den Grundwert (das Ganze)? Erst diese Zuordnung entscheidet, welche der drei Grundformeln greift. Dieser Rechner nimmt Ihnen die Formelwahl ab — Sie wählen einfach die Rechenart.',
+      },
+    ],
     faq: [
       {
         frage: 'Wie berechne ich Prozent?',
