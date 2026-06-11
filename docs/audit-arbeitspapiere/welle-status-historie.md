@@ -8,6 +8,34 @@
 
 ---
 
+## 11.06.2026 — W19 stromkosten-rechner Goldstandard (erste wohnen-Migration)
+
+- **Was gebaut:** stromkosten-rechner (wohnen.ts) hat jetzt eigene `contentBloecke`
+  im **„Zusammensetzungs-Leitformat"**. Folge:
+  `text-diagramm-beispielrechnung-text-tabelle-diagramm-text-text-checkliste-infobox-infobox`.
+  Prägend: kreis-Diagramm (Preisanteile) + balken-Diagramm (Kosten nach Verbrauch)
+  + Verbrauchstabelle. ~1.501 W (Self-Check OK), inkl. `config.quellen`.
+- **Werte gespiegelt aus `strompreis.ts`** (`STROMPREIS_2026.durchschnitt_bdew = 37`)
+  und `berechneStromkosten(3.500 kWh, 37 ct, 12 €/Mon)` = 1.439 €/Jahr, ~119,92 €/Mon,
+  effektiv 41,1 ct/kWh. Balken-/Tabellen-Werte (1.500→699 / 2.500→1.069 /
+  3.500→1.439 / 4.250→1.717 €) konsistent gerechnet. Preisanteile BDEW 2026
+  (Beschaffung/Vertrieb 41 %, Steuern/Abgaben/Umlagen 34 %, Netzentgelte 25 %).
+- **quellen-Befund:** Der Eintrag hatte **bereits** ein `quellen`-Feld (EEG/StromStG/
+  BNetzA) — der Prompt nahm „keine" an. Folge: TS1117-Duplikat-Fehler beim ersten
+  Build-Check. Konsolidiert auf die prompt-spezifizierte, BDEW-geführte Version
+  (BDEW-Strompreisanalyse + BNetzA + § 3 StromStG); die EEG-Umlage-0-Aussage bleibt
+  im Erklärtext (Baustein 7). Lehre: vor quellen-Nachtrag prüfen, ob das Feld schon
+  existiert (nicht nur bei den Geschwister-Slugs).
+- **Struktur-Sättigung dokumentiert:** Bei jetzt 12 Datenrechnern und nur 8
+  Bausteintypen ist ein Score ~0,9 normal (zinsrechner 0,92) — die FOLGE ist
+  distinkt, das genügt (L-W19.Struktur: Liste zählt, Score-Höhe ignorieren).
+- **Verify:** tsc sauber für wohnen.ts (pre-existing `FULL_CSS_HREF` bleibt).
+  Build-Gate Vercel-grün. Kein Autorenblock (kein Top-10). `letzteAktualisierung`
+  2026-06-11. Affiliate (check24 strom) unberührt.
+- **Tranche-Fortschritt 2/5:** kredit ✅, stromkosten ✅; offen kalorien, arbeitszeit, pizzateig.
+
+---
+
 ## 11.06.2026 — config.quellen für 5 Rechner + Quellen-Pflicht im Skill
 
 - **Was:** Quellen-Sektion („Quellen & Rechtsgrundlagen", rendert nur bei
