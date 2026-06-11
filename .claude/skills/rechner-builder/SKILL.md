@@ -7,7 +7,7 @@ description: Template and checklist for building standardized online calculators
 
 Build standardized, SEO-optimized calculator pages for the German calculator portal rechenfix.de. Every calculator must follow this template to ensure consistency, completeness, and maximum SEO impact.
 
-## WARUM diese Standards existieren (Skill v2, 10.05.2026 · Content-Bausteine-Update Welle 19, 10.06.2026)
+## WARUM diese Standards existieren (Skill v2, 10.05.2026 · Content-Bausteine-Update Welle 19, 10.06.2026 · Goldstandard-Update 11.06.2026)
 
 > **Welle 19 (10.06.2026):** Neue Rechner und Migrationen nutzen den Content-Baustein-Standard (`contentBloecke`) statt des Thin-`erklaerung`-String-Pfads, der die 4. AdSense-Ablehnung verursacht hat. Details im Abschnitt „Content-Bausteine (contentBloecke) — Standard ab Welle 19" weiter unten.
 
@@ -1656,7 +1656,9 @@ Bei Gesundheits-, Finanz-, Familien- und ähnlichen sensiblen Themen:
 
 ### Warum
 
-Ein einziger `erklaerung`-String über 170 strukturgleiche Seiten erzeugt Thin-Content- bzw. AI-Massen-Verdacht — die Ursache der 4. AdSense-Ablehnung. Lösung: modulare Bausteine in **pro Rechner unterschiedlicher Komposition**, sodass jede Seite strukturell einzigartig wird. **Nicht** Wortzahl strecken, **nicht** noindex. Ziel pro Rechner: **~1.250 Wörter, nie unter 1.000**.
+Ein einziger `erklaerung`-String über 170 strukturgleiche Seiten erzeugt Thin-Content- bzw. AI-Massen-Verdacht — die Ursache der 4. AdSense-Ablehnung. Lösung: modulare Bausteine, bei denen **jeder Rechner ein eigenes Leitformat** trägt (siehe „Leitformat-Prinzip"), sodass jede Seite strukturell einzigartig wird. **Nicht** Wortzahl strecken, **nicht** noindex. Ziel pro Rechner: **~1.500 Wörter sichtbarer Text, nie unter 1.500** (mit Self-Check vor jedem Commit erzwungen, siehe unten).
+
+> **Goldstandard-Erkenntnis (11.06.2026, Pilot-Tranche mwst/zins/stundenlohn/bmi/tage/spritkosten):** Das ursprüngliche Wortziel 1.250 und der bloße „Mindestmix" reichten nicht. Zwei Fehler traten reproduzierbar auf: (1) Dieselben Bausteine nur neu sortiert → Seiten sahen weiter gleich aus (Mindestmix erzeugt Schablonen). (2) Wort-Budgets wurden konsequent unterschätzt — real lagen vermeintlich „~1.500 W"-Seiten bei 766–1.394 W. Beide Fehler sind unten durch das **Leitformat-Prinzip** und den **Self-Check** behoben.
 
 ### Die 8 Block-Typen (exakte Feldnamen aus `lib/rechner-config/types.ts`)
 
@@ -1665,7 +1667,7 @@ type ContentBlock =
   | { typ: 'text'; titel?: string; html: string }
   | { typ: 'tabelle'; titel?: string; kopf: string[]; zeilen: string[][]; fussnote?: string }
   | { typ: 'statistik'; titel?: string; werte: { label: string; wert: string; hinweis?: string }[] }
-  | { typ: 'diagramm'; titel?: string; variante: 'balken'; daten: { label: string; wert: number; einheit?: string }[]; fussnote?: string }
+  | { typ: 'diagramm'; titel?: string; variante: 'balken' | 'kreis' | 'linie' | 'gestapelt' | 'wasserfall'; daten?: { label: string; wert: number; einheit?: string }[]; gestapelt?: { label: string; segmente: { name: string; wert: number }[] }[]; wasserfall?: { label: string; wert: number; art: 'start' | 'delta' | 'summe' }[]; einheit?: string; fussnote?: string }
   | { typ: 'vergleich'; titel?: string; spalteA: string; spalteB: string; zeilen: { kriterium: string; a: string; b: string }[] }
   | { typ: 'beispielrechnung'; titel?: string; schritte: { label: string; formel: string; ergebnis: string }[]; fazit?: string }
   | { typ: 'checkliste'; titel?: string; punkte: string[] }
@@ -1674,14 +1676,39 @@ type ContentBlock =
 
 Optionales Feld in `RechnerConfig`: `contentBloecke?: ContentBlock[]`. Bei gesetzter Länge rendert `page.tsx` den `ContentBlockRenderer` (freistehende Kacheln); sonst greift der Fallback-Pfad (Außenbox + Formel + Beispiel + `erklaerung`-Split).
 
-### Komposition-Regel
+### Leitformat-Prinzip (Kern der Einzigartigkeit)
 
-Jeder Rechner wählt eine **eigene Auswahl + Reihenfolge** der Bausteine — nicht alle 8, nicht immer gleich. Das ist der Kern der strukturellen Einzigartigkeit. **Pflicht-Mindestmix:**
+Jeder Rechner bekommt **ein eigenes Leitformat** — eine dominante Darstellungsform + einen inhaltlichen Schwerpunkt, plus **bewusst weggelassene** Bausteintypen. NICHT dieselben Bausteine neu sortieren (das erzeugt Schablonen). Erprobte Leitformate der Pilot-Tranche:
 
-- mindestens **1 Tabelle ODER Diagramm**
-- mindestens **1 Beispielrechnung**
-- mindestens **1 Checkliste oder Infobox**
-- `text`-Blöcke tragen den recherchierten Fachinhalt (Hauptanteil der Wörter)
+- **Tabellen-Nachschlagewerk** (mwst): mehrere Tabellen, KEIN Diagramm. Für Referenz-/Übersichtsthemen (Sätze, Fristen, Kategorien).
+- **Visueller Zeitverlauf** (zins): Diagramme dominant (Linie/Balken), KEIN Vergleich. Für Entwicklung über Zeit.
+- **Vergleich & Einordnung** (stundenlohn): mehrere Vergleiche + Statistik, KEIN Diagramm. Für „X im Verhältnis zu Y".
+- **Risiko- & Kontext** (bmi): Verteilungs-Diagramm (Kreis) + erklärender Kontext. Für sensible/deskriptive Themen.
+- **Anwendungsfall-Sammlung** (tage): mehrere Beispielrechnungen + Checklisten, KEINE großen Datentabellen, KEIN Diagramm. Für „wofür man das braucht".
+
+Wähle pro neuem Rechner das thematisch passende Leitformat und grenze es durch ausgelassene Typen von den Nachbarn ab. Mindestens vorhanden sein sollten: 3–4 gehaltvolle `text`-Blöcke (Hauptanteil der Wörter) + 1 `beispielrechnung` + mindestens 1 Daten-/Visual-Baustein (tabelle/diagramm/vergleich/statistik) + 1 Callout (checkliste/infobox).
+
+### Diagramm-Varianten (5 Typen, je eigener Erkenntniswert)
+
+`variante` wählen nach Datenform — das variiert Diagramme zwischen Rechnern (visuelle Einzigartigkeit):
+
+- **balken** — Kategorienvergleich nebeneinander (Kosten, Verbrauch je Klasse)
+- **kreis** (Donut) — Anteile, die ein Ganzes ergeben (Verteilung, Kostenaufteilung; Werte summieren sinnvoll); nutzt `daten`
+- **linie** — Zeitverlauf/Entwicklung über Jahre; `daten`-Reihenfolge = x-Achse
+- **gestapelt** — Zusammensetzung über Kategorien; nutzt `gestapelt`-Feld (Kategorie → Segmente)
+- **wasserfall** — schrittweise Zu-/Abnahme (z. B. Brutto → Abzüge → Netto); nutzt `wasserfall`-Feld (`art: 'start'|'delta'|'summe'`, delta auch negativ)
+
+balken/kreis/linie nutzen das flache `daten`-Feld; gestapelt/wasserfall ihre eigenen Felder. **Wichtig:** Diagramm-/Vergleich-/Statistik-Bausteine sind **wortarm** — wer sie dominant einsetzt (zins, stundenlohn), muss von vornherein mehr und tiefere `text`-Blöcke einplanen, sonst reißt die Seite das 1.500-Wort-Ziel.
+
+### Self-Check (Pflicht vor jedem Commit) — L-W19.SelfCheck
+
+Wort-Budgets werden beim Bauen konsequent unterschätzt. Daher **objektiv messen, nicht schätzen**:
+
+```
+node scripts/check-contentbloecke-wortzahl.mjs <slug> --min 1500
+```
+
+Muss „OK" zeigen, BEVOR committet wird. Bei „UNTER SCHWELLE" die `text`-Bausteine vertiefen (echte Fachsubstanz, kein Fülltext) und erneut messen. Auf ~1.500–1.560 puffern, nicht knapp auf der Schwelle committen (Mess-Reserve). Das Skript zählt sichtbaren Text aller Bausteine (html ohne Tags, Tabellenzellen, Labels, Schritte, Punkte).
 
 ### Daten-Disziplin
 
@@ -1694,13 +1721,20 @@ Jeder Rechner wählt eine **eigene Auswahl + Reihenfolge** der Bausteine — nic
 
 Auch bei gesetzten `contentBloecke` das `erklaerung`-Feld **befüllt lassen** (Schema-Konsistenz + Sicherheit). Der Renderer zeigt `erklaerung` nicht, solange `contentBloecke?.length` greift — es bleibt der Fallback-Pfad für alle nicht-migrierten Rechner.
 
-### Referenz-Beispiel (Goldstandard-Komposition)
+### Referenz-Beispiele (Goldstandard-Tranche, 11.06.2026)
 
-`lib/rechner-config/auto.ts`, Eintrag `spritkosten-rechner` (`contentBloecke` ab Z.91): 8 Bausteine (text → statistik → beispielrechnung → tabelle → diagramm → vergleich → checkliste → infobox), Werte aus `SPRITPREISE_REFERENZ` über die `eur()`/`STAND_DE`-Helper. Als Kopiervorlage für Komposition + Daten-Disziplin nutzen.
+Sechs fertige Goldstandard-Rechner als Kopiervorlage (je >1.500 W, eigenes Leitformat, primärquellen-verifiziert):
+
+- `lib/rechner-config/finanzen.ts`: **mwst-rechner** (Tabellen-Nachschlagewerk), **zinsrechner** (Zeitverlauf, Linie+Kreis), **stundenlohn-rechner** (Vergleich & Einordnung)
+- `lib/rechner-config/gesundheit.ts`: **bmi-rechner** (Risiko-/Kontext, Kreis, sensibel-deskriptiv)
+- `lib/rechner-config/alltag.ts`: **tagerechner** (Anwendungsfall-Sammlung, mehrere Beispielrechnungen)
+- `lib/rechner-config/auto.ts`: **spritkosten-rechner** (gemischt, Pilot)
+
+Für Komposition + Daten-Disziplin diese als Muster nehmen — nicht den ursprünglichen dünnen Pilot-Stand.
 
 ### Renderer/Design NICHT anfassen
 
-Gestaltung ist final (Commits 6299c7f→386e846): `ContentBlockRenderer.tsx` (Server-Component, Kachel = `card p-5 md:p-6` mit Hover-Lift, Titel `primary-600`). Baustein-Arbeit = **ausschließlich Content** im Config-Eintrag der jeweiligen Kategorie-Datei (`lib/rechner-config/<kategorie>.ts`) — nur die Auto-Kategorie selbst liegt in `auto.ts`.
+Gestaltung ist final: `ContentBlockRenderer.tsx` (Server-Component, Kachel = `card p-5 md:p-6` mit Hover-Lift, Titel `primary-600`). Der Renderer beherrscht 5 Diagramm-Varianten (balken/kreis/linie/gestapelt/wasserfall, CLS-sicher, kontrastreiche Hex-Palette, Donut zentriert) — diese werden über das `variante`-Feld im Config gesteuert, NICHT durch Renderer-Änderungen. Baustein-Arbeit = **ausschließlich Content** im Config-Eintrag der jeweiligen Kategorie-Datei (`lib/rechner-config/<kategorie>.ts`) — nur die Auto-Kategorie selbst liegt in `auto.ts`.
 
 ---
 
