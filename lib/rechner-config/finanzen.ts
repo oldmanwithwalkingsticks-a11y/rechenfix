@@ -891,7 +891,7 @@ Eine **Abfindung** bei einvernehmlicher Auflösung des Arbeitsverhältnisses wir
   },
   {
     slug: 'buergergeld-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-11',
     titel: 'Bürgergeld-Rechner',
     beschreibung: 'Bürgergeld 2026 berechnen: Aktuelle Regelsätze mit Einkommensanrechnung und Vermögensprüfung.',
     kategorie: 'Finanzen',
@@ -968,6 +968,115 @@ Der jeweils höhere Freibetrag gilt ab Beginn des Monats, in dem die Altersgrenz
 - **Schritt 3 — Erstgespräch:** Das Jobcenter lädt Sie zu einem Beratungsgespräch ein. Gemeinsam werden Ihre Situation besprochen und ein Kooperationsplan erstellt, der Ihre Pflichten und die Unterstützungsangebote des Jobcenters festhält.
 - **Schritt 4 — Bescheid:** Die Bearbeitungszeit beträgt in der Regel 2–4 Wochen. Sie erhalten einen schriftlichen Bescheid, gegen den Sie innerhalb eines Monats Widerspruch einlegen können.
 - **Schritt 5 — Weiterbewilligungsantrag:** Bürgergeld wird in der Regel für 12 Monate bewilligt. Vor Ablauf des Bewilligungszeitraums müssen Sie einen Weiterbewilligungsantrag stellen.`,
+    // contentBloecke (W19): eigenständiges „Regelbedarf- & Reform-Leitformat" —
+    // dominant tabelle (Regelbedarfsstufen) + beispielrechnung (Gesamtbedarf) +
+    // vergleich (Bürgergeld H1 bis 30.06.2026 vs. Grundsicherungsgeld H2 ab
+    // 01.07.2026) + infobox warnung (Reform). Werte gespiegelt aus
+    // lib/berechnungen/buergergeld-parameter.ts (REGELSAETZE_2026: RBS1 563,
+    // RBS2 506, RBS3 451, RBS4 471, RBS5 390, RBS6 357; Vermögen H1 Karenz
+    // 40.000/15.000, H2 Altersstaffel 5.000–20.000; Einkommensfreibetrag § 11b).
+    // Familien-Beispiel via berechneBuergergeld(paar-mit-kindern, 2 Kinder,
+    // KdU 1.100 €, Einkommen 1.000 €) = 2.187 € Anspruch. Reform: 13. SGB II-ÄndG
+    // (BGBl. 2026 I Nr. 107). Neutral, keine Wertung. Rechtsstand SGB II, Stand 06/2026.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was Bürgergeld bzw. Grundsicherungsgeld ist',
+        html: `<p>Bürgergeld ist die bedarfsorientierte Grundsicherung nach dem Zweiten Sozialgesetzbuch (SGB II). Es sichert das soziokulturelle Existenzminimum für erwerbsfähige Menschen, die ihren Lebensunterhalt nicht oder nicht vollständig aus eigenem Einkommen und Vermögen decken können — und für die mit ihnen in einer Bedarfsgemeinschaft lebenden Angehörigen. Seit dem 1. Januar 2023 hat das Bürgergeld die frühere Grundsicherung für Arbeitsuchende („Hartz IV") abgelöst.</p><p>Anders als das Arbeitslosengeld I ist Bürgergeld <strong>nicht beitragsfinanziert und nicht einkommensabhängig</strong>: Es kommt nicht darauf an, wie viel man früher verdient oder eingezahlt hat. Maßgeblich ist allein der aktuelle Bedarf — Regelbedarf plus angemessene Kosten für Unterkunft und Heizung — abzüglich des anrechenbaren Einkommens und Vermögens. ALG I dagegen ist eine Versicherungsleistung (SGB III), die sich nach dem letzten Gehalt richtet. Beide Leistungen können nacheinander relevant werden: Wer nach dem Auslaufen des ALG I weiter bedürftig ist, kann Bürgergeld beziehen.</p><p>Anspruch hat, wer das 15. Lebensjahr vollendet hat, die Altersgrenze für die Regelaltersrente noch nicht erreicht hat, <strong>erwerbsfähig</strong> ist (mindestens drei Stunden täglich arbeiten kann), hilfebedürftig ist und seinen gewöhnlichen Aufenthalt in Deutschland hat. Nicht erwerbsfähige Angehörige im selben Haushalt — etwa Kinder — erhalten die Leistung als <strong>Sozialgeld</strong> innerhalb der Bedarfsgemeinschaft. Die Bedarfsgemeinschaft ist der zentrale Begriff: Sie umfasst alle Personen, die zusammen wohnen und gemeinsam wirtschaften; für sie wird der Gesamtbedarf gemeinsam ermittelt und dem gemeinsamen Einkommen gegenübergestellt.</p><p>Zum <strong>1. Juli 2026</strong> wird die Leistung im Zuge des 13. Gesetzes zur Änderung des SGB II in <strong>„Grundsicherungsgeld"</strong> umbenannt. Die Regelsätze ändern sich durch die Reform nicht; geändert werden vor allem die Regeln zu Vermögen, Unterkunftskosten und Sanktionen. Die folgenden Abschnitte bilden beide Phasen sachlich ab.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Bürgergeld bzw. Grundsicherungsgeld 2026 in Zahlen',
+        werte: [
+          { label: 'Regelsatz Alleinstehende', wert: '563 €', hinweis: 'pro Monat (RBS 1)' },
+          { label: 'Regelsatz je Partner', wert: '506 €', hinweis: 'Paar-Bedarfsgemeinschaft (RBS 2)' },
+          { label: 'Regelsatz-Anpassung 2026', wert: '0 %', hinweis: 'Nullrunde via Besitzschutz' },
+          { label: 'Reform-Stichtag', wert: '01.07.2026', hinweis: 'Umbenennung in Grundsicherungsgeld' },
+          { label: 'Einkommens-Grundfreibetrag', wert: '100 €', hinweis: 'anrechnungsfrei (§ 11b SGB II)' },
+          { label: 'Vermögen ab 01.07.2026', wert: '5.000–20.000 €', hinweis: 'altersgestaffelt pro Person' },
+        ],
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Regelbedarfsstufen 2026',
+        kopf: ['Stufe', 'Wer', 'Regelsatz / Monat'],
+        zeilen: [
+          ['RBS 1', 'Alleinstehende und Alleinerziehende', '563 €'],
+          ['RBS 2', 'Paare, je Partner', '506 €'],
+          ['RBS 3', 'Erwachsene ohne eigenen Haushalt (z. B. 18–24 J. bei den Eltern)', '451 €'],
+          ['RBS 4', 'Jugendliche 14–17 Jahre', '471 €'],
+          ['RBS 5', 'Kinder 6–13 Jahre', '390 €'],
+          ['RBS 6', 'Kinder 0–5 Jahre', '357 €'],
+        ],
+        fussnote: 'Nullrunde 2026 über den Besitzschutz nach § 28a SGB XII — der höhere Vorjahreswert bleibt erhalten. Die Beträge gelten vor und nach der Reform unverändert. Kosten für Unterkunft und Heizung kommen separat hinzu. Werte aus zentraler SSOT, Stand 06/2026.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Gesamtbedarf einer Familie (Paar + 2 Kinder)',
+        schritte: [
+          { label: 'Regelbedarf Paar (2 × 506 €)', formel: '2 × 506 €', ergebnis: '1.012 €' },
+          { label: 'Regelbedarf 2 Kinder (9 J. + 4 J.)', formel: '390 € + 357 €', ergebnis: '747 €' },
+          { label: 'angemessene Unterkunft + Heizung', formel: '950 € + 150 €', ergebnis: '1.100 €' },
+          { label: 'Gesamtbedarf', formel: '1.012 € + 747 € + 1.100 €', ergebnis: '2.859 €' },
+          { label: 'minus anrechenbares Einkommen (1.000 € − 328 € Freibetrag)', formel: '2.859 € − 672 €', ergebnis: '2.187 €' },
+        ],
+        fazit: 'Die Familie erhält rund 2.187 € im Monat. Vom Erwerbseinkommen von 1.000 € bleiben über die Freibeträge nach § 11b SGB II 328 € anrechnungsfrei, sodass nur 672 € den Anspruch mindern. Kindergeld würde zusätzlich als Einkommen der Kinder angerechnet (hier zur Vereinfachung ausgeklammert). Maßgeblich ist stets die vom Jobcenter anerkannte Miete: Liegt die tatsächliche Warmmiete über der örtlichen Angemessenheitsgrenze, wird zunächst nur der angemessene Teil übernommen, und der Anspruch fällt entsprechend niedriger aus. Schon dieses Beispiel zeigt, warum eine pauschale Aussage über „die" Höhe des Bürgergeldes nicht möglich ist — sie hängt immer von Haushaltsgröße, Miete, Alter der Kinder und Einkommen ab.',
+      },
+      {
+        typ: 'text',
+        titel: 'Was zum Regelsatz dazukommt: Unterkunft, Heizung, Mehrbedarfe',
+        html: `<p>Der Regelsatz deckt den laufenden Lebensunterhalt — Ernährung, Kleidung, Strom, Hausrat, Mobilität, Teilhabe. Daneben übernimmt das Jobcenter die <strong>Kosten für Unterkunft und Heizung</strong> (§ 22 SGB II), soweit sie <strong>angemessen</strong> sind. Was als angemessen gilt, legt jedes Jobcenter über örtliche Mietobergrenzen fest; die tatsächlich anerkannte Miete kann deshalb unter der gezahlten Miete liegen.</p><p>Für besondere Lebenslagen gibt es <strong>Mehrbedarfe</strong> (§ 21 SGB II), die prozentual auf den Regelsatz aufgeschlagen werden: für <strong>Alleinerziehende</strong> je nach Zahl und Alter der Kinder 36 % bis maximal 60 %, für <strong>Schwangere</strong> ab der 13. Schwangerschaftswoche 17 %, bei einer <strong>Behinderung</strong> mit Teilhabeleistungen 35 %, dazu Zuschläge für dezentrale Warmwasserbereitung und kostenaufwändige Ernährung aus medizinischen Gründen. Hinzu kommen einmalige Bedarfe, etwa für die Erstausstattung einer Wohnung oder bei Schwangerschaft und Geburt. Während des Bezugs übernimmt das Jobcenter außerdem die Beiträge zur <strong>Kranken- und Pflegeversicherung</strong>, sodass kein Versicherungsschutz verloren geht.</p><p>Für Kinder und Jugendliche gibt es zusätzlich Leistungen für <strong>Bildung und Teilhabe</strong> (das sogenannte Bildungspaket): Zuschüsse für Schulausflüge und mehrtägige Klassenfahrten, ein jährlicher Schulbedarf, Lernförderung, ein Zuschuss zum Mittagessen in Schule oder Kita sowie ein monatlicher Beitrag für Sport-, Kultur- und Freizeitaktivitäten. Diese Leistungen werden gesondert beantragt und sind nicht im Regelsatz enthalten. Wichtig ist die Faustregel: Der Regelsatz ist eine Pauschale, aus der laufende Ausgaben selbst eingeteilt werden müssen — größere oder unabweisbare Sonderbedarfe können dagegen separat geltend gemacht oder als Darlehen gewährt werden.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Wie Einkommen und Vermögen angerechnet werden',
+        html: `<p>Eigenes <strong>Einkommen</strong> wird grundsätzlich auf den Bedarf angerechnet — aber nicht vollständig. Nach § 11b SGB II bleiben vom Erwerbseinkommen Freibeträge anrechnungsfrei: die ersten <strong>100 Euro</strong> pauschal, danach <strong>20 %</strong> des Einkommens zwischen 100 und 520 Euro, <strong>30 %</strong> zwischen 520 und 1.000 Euro und <strong>10 %</strong> zwischen 1.000 und 1.200 Euro (mit Kind bis 1.500 Euro). Für Schüler, Auszubildende und Studierende unter 25 Jahren gilt ein erhöhter Freibetrag in Höhe der Minijob-Grenze (2026: 556 Euro). Kindergeld zählt als Einkommen des Kindes und mindert dessen Bedarf.</p><p>Auch <strong>Vermögen</strong> wird geprüft, aber erst oberhalb von Freibeträgen. Bis zum 30. Juni 2026 gilt eine <strong>Karenzzeit</strong> im ersten Bezugsjahr mit einem Freibetrag von 40.000 Euro für die erste Person und 15.000 Euro für jede weitere; danach sinken die Freibeträge. Ab dem <strong>1. Juli 2026</strong> entfällt diese Karenzzeit: Mit dem Grundsicherungsgeld gilt von Beginn an ein altersgestaffelter Freibetrag von 5.000 Euro (bis 30 Jahre), 10.000 Euro (ab 31 Jahre), 12.500 Euro (ab 41 Jahre) und 20.000 Euro (ab 51 Jahre) pro Person der Bedarfsgemeinschaft. Selbstgenutztes Wohneigentum in angemessener Größe bleibt geschützt.</p><p>Nicht jedes Einkommen wird angerechnet: Bestimmte Einnahmen bleiben nach § 11a SGB II außer Betracht, etwa das Pflegegeld für die Pflege Angehöriger, Teile des Kindergeldzuschlags oder zweckbestimmte Einnahmen. Ferienjobs von Schülerinnen und Schülern sind innerhalb bestimmter Grenzen vollständig anrechnungsfrei. Liegt das anrechenbare Einkommen über dem Gesamtbedarf, besteht kein Anspruch; liegt es darunter, wird die Differenz gezahlt. Genau dieses Zusammenspiel aus Bedarf, Freibeträgen und Anrechnung macht die Berechnung individuell — zwei Haushalte mit gleichem Brutto können sehr unterschiedliche Ansprüche haben, je nach Miete, Kinderzahl und Erwerbssituation.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Bürgergeld (bis 30.06.2026) vs. Grundsicherungsgeld (ab 01.07.2026)',
+        spalteA: 'Bürgergeld',
+        spalteB: 'Grundsicherungsgeld',
+        zeilen: [
+          { kriterium: 'Gültig', a: 'bis 30.06.2026', b: 'ab 01.07.2026' },
+          { kriterium: 'Regelsatz Alleinstehende', a: '563 €', b: '563 € (unverändert)' },
+          { kriterium: 'Vermögen im 1. Jahr', a: 'Karenz: 40.000 € + 15.000 €/weitere Person', b: 'keine Karenz — Altersstaffel 5.000–20.000 €/Person ab Tag 1' },
+          { kriterium: 'Unterkunftskosten', a: 'tatsächliche, angemessene Kosten (§ 22)', b: 'Deckel auf das 1,5-Fache der Angemessenheit ab Tag 1' },
+          { kriterium: 'Sanktionen', a: 'gestuft (30 % bei 1. Pflichtverletzung)', b: 'verschärft — bis zum vollständigen Entzug des Regelbedarfs möglich' },
+          { kriterium: 'Rechtsgrundlage', a: 'SGB II', b: '13. SGB II-ÄndG (BGBl. 2026 I Nr. 107)' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Sanktionen und Mitwirkungspflichten',
+        html: `<p>Wer Bürgergeld bezieht, hat <strong>Mitwirkungspflichten</strong>: Termine beim Jobcenter wahrnehmen, vereinbarte Bewerbungen und Eigenbemühungen nachweisen, an Maßnahmen teilnehmen und zumutbare Arbeit annehmen. Diese Pflichten werden in einem Kooperationsplan festgehalten. Kommt man ihnen ohne wichtigen Grund nicht nach, kann das Jobcenter <strong>Leistungsminderungen</strong> aussprechen.</p><p>Mit der Reform werden die Minderungen ab dem 1. Juli 2026 strenger gefasst: Bei der <strong>ersten Pflichtverletzung</strong> wird der Regelbedarf um <strong>30 %</strong> für drei Monate gemindert (rund 168,90 € bei RBS 1). Wer eine zumutbare Arbeit willentlich verweigert, riskiert seit dem 23. April 2026 bis zum <strong>vollständigen Entzug</strong> des Regelbedarfs. Geschützt bleibt eine Restzahlung für Unterkunft und Heizung, die in solchen Fällen direkt an den Vermieter überwiesen werden kann (1-Euro-Schutzregel nach § 31a SGB II). Die Darstellung gibt allein die geltende Rechtslage wieder.</p><p>Gegen eine Leistungsminderung kann man <strong>Widerspruch</strong> einlegen; eine Minderung setzt zudem voraus, dass das Jobcenter zuvor über die Folgen einer Pflichtverletzung belehrt hat und kein <strong>wichtiger Grund</strong> für das Verhalten vorlag. Bei <strong>Meldeversäumnissen</strong> (verpasster Termin ohne Entschuldigung) fällt die Minderung niedriger aus als bei der Verletzung einer im Kooperationsplan festgelegten Pflicht. Wer einen Termin nicht wahrnehmen kann, sollte das Jobcenter vorab informieren — das ist der einfachste Weg, eine Minderung zu vermeiden. Mitwirkung lohnt sich auch finanziell: Wer an Weiterbildungen teilnimmt, kann ein Weiterbildungsgeld erhalten, und für nachhaltige Arbeitsaufnahmen gibt es unter Umständen einen Bonus.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Bürgergeld beantragen: was Sie brauchen',
+        punkte: [
+          'Antrag beim örtlich zuständigen Jobcenter stellen (persönlich oder online).',
+          'Einkommensnachweise aller Mitglieder der Bedarfsgemeinschaft (Gehalt, Rente, Kindergeld, Unterhalt).',
+          'Vermögensnachweise: Kontoauszüge der letzten Monate, Sparguthaben, Versicherungen, Fahrzeuge.',
+          'Mietvertrag und letzte Betriebskosten-/Heizkostenabrechnung für die Kosten der Unterkunft.',
+          'Personaldokumente: Personalausweis, Geburtsurkunden der Kinder, Sozialversicherungsnachweise.',
+          'Bedarfsgemeinschaft vollständig angeben — wer zusammen wohnt und wirtschaftet, zählt mit.',
+          'Mitwirkungspflichten und Termine ernst nehmen und bei Verhinderung vorab absagen, um Leistungsminderungen zu vermeiden.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Reform zum 1. Juli 2026',
+        text: 'Zum 1. Juli 2026 wird das Bürgergeld in „Grundsicherungsgeld" umbenannt (13. SGB II-ÄndG, BGBl. 2026 I Nr. 107). Die Regelsätze bleiben unverändert (Alleinstehende 563 €). Geändert werden vor allem: Die Vermögens-Karenzzeit im ersten Bezugsjahr entfällt und wird durch einen altersgestaffelten Freibetrag ersetzt; die Unterkunftskosten werden ab Tag 1 auf das 1,5-Fache der örtlichen Angemessenheit gedeckelt; die Sanktionen bei Pflichtverletzungen werden verschärft. Die Angaben geben die geltende Rechtslage wieder.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Rechner liefert Orientierung',
+        text: 'Der tatsächliche Anspruch hängt vom individuellen Bedarf, vom anrechenbaren Einkommen und Vermögen sowie von den örtlich anerkannten Unterkunftskosten ab. Dieser Rechner liefert eine fundierte Schätzung — verbindlich ist allein der Bescheid Ihres Jobcenters.',
+      },
+    ],
     faq: [
       {
         frage: 'Wie hoch ist der Bürgergeld-Regelsatz 2026?',
