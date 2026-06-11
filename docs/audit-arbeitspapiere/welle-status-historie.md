@@ -8,6 +8,31 @@
 
 ---
 
+## 11.06.2026 — W19 kalorienrechner Goldstandard (sensibel, kein Defizit-Inhalt)
+
+- **Was gebaut:** kalorienrechner (gesundheit.ts) hat jetzt eigene `contentBloecke`
+  im **„Bedarf-verstehen-Leitformat"**. Folge:
+  `text-beispielrechnung-vergleich-text-tabelle-text-text-checkliste-infobox-infobox-text`.
+  Prägend: vergleich (Grund- vs. Gesamtumsatz) + PAL-Tabelle. **Bewusst KEIN
+  Diagramm** (nüchtern bei sensiblem Thema). ~1.502 W (Self-Check OK), inkl. `quellen`.
+- **Sensibilität (Disordered-Eating-Prävention) durchgehalten:** keine
+  Defizit-Schritt-Anleitung, keine „minus 500 kcal"-Formel als Handlungsplan,
+  keine Abnehm-/Crash-Diät-Inhalte. Stattdessen Fokus „Energiebedarf verstehen",
+  Verweis auf fachliche Begleitung, ruhige hinweis-Infobox. Die Grundumsatz-Klammer
+  der Lib (`zielKalorien = Math.max(roh, grundumsatz)`) wird positiv als
+  eingebaute **Schutzgrenze** erklärt (eigene tipp-Infobox).
+- **Formel gespiegelt aus `kalorien.ts`** (Mifflin-St Jeor): Beispiel
+  35 J./175 cm/75 kg (Mann) → 1.674 kcal BMR, bei PAL 1,55 → ~2.594 kcal TDEE.
+  PAL-Tabelle 1,2–1,9. Schätzwert-Charakter (±10–15 %) betont.
+- **quellen NEU** (Eintrag hatte keins): Mifflin-St Jeor 1990 (AJCN) + DGE-
+  Referenzwerte. Kein Autorenblock (kein Top-10), kein Affiliate (Gesundheit).
+- **Verify:** tsc sauber für gesundheit.ts (pre-existing `FULL_CSS_HREF` bleibt).
+  Build-Gate Vercel-grün. `letzteAktualisierung` 2026-06-11.
+- **Tranche-Fortschritt 3/5:** kredit ✅, stromkosten ✅, kalorien ✅; offen
+  arbeitszeit, pizzateig.
+
+---
+
 ## 11.06.2026 — W19 stromkosten-rechner Goldstandard (erste wohnen-Migration)
 
 - **Was gebaut:** stromkosten-rechner (wohnen.ts) hat jetzt eigene `contentBloecke`
