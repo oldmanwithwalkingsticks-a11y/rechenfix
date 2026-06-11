@@ -545,7 +545,7 @@ Wichtig zu beachten: In der Praxis mindern die Abgeltungssteuer (25% plus Solida
   },
   {
     slug: 'elterngeld-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-11',
     titel: 'Elterngeld-Rechner',
     beschreibung: 'Elterngeld 2026 berechnen: Basiselterngeld & ElterngeldPlus mit Geschwisterbonus und Mehrlingszuschlag.',
     kategorie: 'Finanzen',
@@ -603,6 +603,104 @@ Beide Zuschläge werden unabhängig von der Höhe des regulären Elterngeldes ge
 - **Schritt 3 — Unterlagen zusammenstellen:** Sie benötigen Geburtsurkunde, Einkommensnachweise (Gehaltsabrechnungen der letzten 12 Monate vor Geburt), Bescheinigung der Krankenkasse über Mutterschaftsgeld und ggf. Arbeitgeberbescheinigung zur Elternzeit.
 - **Schritt 4 — Antrag einreichen:** Reichen Sie den Antrag bei der Elterngeldstelle ein — persönlich, per Post oder je nach Bundesland auch online. Elterngeld wird rückwirkend maximal für 3 Lebensmonate vor dem Monat der Antragstellung gezahlt.
 - **Schritt 5 — Bescheid abwarten:** Die Bearbeitungszeit beträgt je nach Bundesland 4–8 Wochen. Sie erhalten einen schriftlichen Bescheid mit der Berechnung.`,
+    // contentBloecke (W19): eigenständiges „Varianten- & Entscheidungs-Leitformat" —
+    // dominant vergleich + beispielrechnung + tabelle (Basis vs. Plus vs. Bonus). Werte
+    // gespiegelt aus lib/berechnungen/elterngeld.ts (Einkommensgrenze 175.000 €,
+    // Vor-Geburt-Deckel 2.770 €, Ersatzrate 65–100 %, Plateau 67 % bei 1.000–1.240 € Netto).
+    // Rechtsstand: BEEG, Stand 06/2026; Einkommensgrenze § 1 Abs. 8 BEEG.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was Elterngeld ist und wer es bekommt',
+        html: `<p>Elterngeld ist eine staatliche Leistung, die den Einkommensverlust nach der Geburt teilweise ausgleicht. Es ermöglicht Müttern und Vätern, sich in den ersten Lebensmonaten um ihr Kind zu kümmern, ohne in eine finanzielle Lücke zu fallen. Geregelt ist es im Bundeselterngeld- und Elternzeitgesetz (BEEG); ausgezahlt wird es von der Elterngeldstelle des jeweiligen Bundeslandes. Elterngeld ersetzt einen Teil des wegfallenden Erwerbseinkommens — es ist also kein Almosen, sondern eine an das frühere Einkommen gekoppelte Familienleistung. Genau deshalb fällt es für jede Familie unterschiedlich hoch aus: Es spiegelt wider, wie viel Einkommen tatsächlich wegfällt.</p><p>Anspruch haben nicht nur Arbeitnehmerinnen und Arbeitnehmer, sondern auch <strong>Selbstständige, Beamte, Erwerbslose und Studierende</strong>. Voraussetzung ist, dass die Eltern ihr Kind nach der Geburt selbst betreuen, mit ihm in einem Haushalt leben, in Deutschland wohnen und während des Bezugs höchstens 32 Wochenstunden im Durchschnitt arbeiten. In besonderen Fällen können auch Adoptiv- und Pflegeeltern sowie Verwandte bis zum dritten Grad Elterngeld erhalten. Auch Eltern ganz ohne vorheriges Erwerbseinkommen erhalten den Mindestbetrag von 300 Euro — die Leistung ist also nicht an einen früheren Job gebunden.</p><p>Wichtig ist die Einbettung in den Gesamtfahrplan: Zuerst greift der <strong>Mutterschutz</strong> (sechs Wochen vor und acht Wochen nach der Geburt mit Mutterschaftsgeld), erst danach beginnen Elternzeit und Elterngeld. Das Mutterschaftsgeld wird auf das Elterngeld angerechnet, sodass es für dieselben Wochen nicht doppelt fließt. Die Elternzeit ist dabei der arbeitsrechtliche Rahmen (die unbezahlte Freistellung beim Arbeitgeber), das Elterngeld die finanzielle Absicherung darin — beide werden getrennt beantragt. Steuerlich ist Elterngeld zwar steuerfrei, unterliegt aber dem <strong>Progressionsvorbehalt</strong>: Es erhöht den Steuersatz auf das übrige Einkommen und kann so im Folgejahr zu einer Nachzahlung führen.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Wie sich die Höhe berechnet',
+        html: `<p>Bemessungsgrundlage ist das <strong>durchschnittliche Nettoeinkommen der zwölf Monate vor der Geburt</strong> aus Erwerbstätigkeit. Auf diesen Betrag wird die Ersatzrate angewendet. Sie liegt zwischen <strong>65 % und 100 %</strong>: Der gesetzliche Regelfall ist ein Plateau von 67 % für ein Netto zwischen 1.000 und 1.240 Euro. Wer darunter verdient hat, bekommt eine höhere Rate — pro 2 Euro unter 1.000 Euro steigt sie um 0,1 Prozentpunkte bis maximal 100 %. Wer darüber liegt, dessen Rate sinkt schrittweise bis zur Untergrenze von 65 %, die mittlere und höhere Einkommen praktisch immer erreichen. Diese Staffelung sorgt dafür, dass kleine Einkommen relativ stärker abgesichert werden als hohe.</p><p>Ein häufiges Missverständnis: Das „Elterngeld-Netto" ist <strong>nicht</strong> das Netto vom Lohnzettel. Die Elterngeldstelle ermittelt es eigenständig — beim Bruttoeinkommen werden pauschale Abzüge für Steuern (nach der Steuerklasse), für die Sozialversicherung sowie eine Werbungskostenpauschale angesetzt. Dadurch weicht das Elterngeld-Netto oft spürbar vom tatsächlichen Auszahlungsbetrag ab. <strong>Sonderzahlungen</strong> wie Weihnachts- oder Urlaubsgeld und Boni zählen nicht mit, weil sie nach der Lohnsteuer als „sonstige Bezüge" gelten. Bei Selbstständigen tritt an die Stelle der zwölf Monatsgehälter in der Regel der Gewinn des letzten abgeschlossenen Wirtschaftsjahres.</p><p>Der Betrag wird in jedem Fall gedeckelt: Basiselterngeld beträgt mindestens 300 Euro und höchstens 1.800 Euro im Monat. Der Höchstbetrag wird ab rund 2.770 Euro Elterngeld-Netto erreicht — denn nach § 2 Abs. 3 BEEG wird das anrechenbare Vor-Geburt-Einkommen auf 2.770 Euro pro Monat gedeckelt, selbst wenn faktisch mehr verdient wurde. Wer während der Elternzeit in Teilzeit arbeitet, dem wird der Zuverdienst gegengerechnet; maßgeblich für die Ersatzrate bleibt aber das Einkommen vor der Geburt, nicht der Unterschiedsbetrag. So bleibt von einem Teilzeit-Gehalt während des Bezugs unterm Strich häufig mehr übrig, als viele zunächst erwarten.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Elterngeld bei 2.000 € Netto',
+        schritte: [
+          { label: 'Durchschnittliches Netto der 12 Monate vor der Geburt', formel: '2.000 € / Monat', ergebnis: '2.000 €' },
+          { label: 'Ersatzrate über 1.240 € Netto: Untergrenze 65 %', formel: '2.000 € × 65 %', ergebnis: '1.300 €' },
+          { label: 'Gegenbeispiel Geringverdiener (Plateau): 1.000 € Netto', formel: '1.000 € × 67 %', ergebnis: '670 €' },
+          { label: 'Unter 1.000 € Netto steigt die Rate: 900 € Netto', formel: '900 € × 72 %', ergebnis: '648 €' },
+        ],
+        fazit: 'Der Monatsbetrag ist beim Basiselterngeld immer auf 300 bis 1.800 Euro gedeckelt. Je höher das Vor-Geburt-Netto, desto näher rückt die Ersatzrate an die Untergrenze von 65 %. Geringverdiener werden über die steigende Ersatzrate aufgestockt — bis hin zu 100 % ihres Elterngeld-Nettos. Praktisch heißt das: Ab etwa 2.770 Euro Elterngeld-Netto ändert sich der Basisbetrag nicht mehr, weil der Deckel greift; zwischen 1.000 und 1.240 Euro liegt das stabile 67-%-Plateau, und erst darunter wird die Ersatzrate spürbar großzügiger. Die Beispiele sind Orientierungswerte — der genaue Wert hängt von Steuerklasse und individuellen Pauschalen ab.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Basiselterngeld vs. ElterngeldPlus',
+        spalteA: 'Basiselterngeld',
+        spalteB: 'ElterngeldPlus',
+        zeilen: [
+          { kriterium: 'Monatsbetrag', a: 'voller Satz', b: 'halber Satz (ein Basismonat = zwei Plus-Monate)' },
+          { kriterium: 'Mindest- / Höchstbetrag', a: '300 – 1.800 €', b: '150 – 900 €' },
+          { kriterium: 'Bezugsdauer (Paar)', a: 'bis 14 Monate', b: 'bis 28 Monate' },
+          { kriterium: 'Teilzeit-Eignung', a: 'eher bei kompletter Pause', b: 'ideal bei Teilzeit bis 32 Wochenstunden' },
+          { kriterium: 'Wann sinnvoll', a: 'kurze, intensive Auszeit direkt nach der Geburt', b: 'langer, gleitender Wiedereinstieg in Teilzeit' },
+        ],
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Die drei Varianten im Überblick',
+        kopf: ['Variante', 'Monatsbetrag', 'Dauer', 'Ideal für'],
+        zeilen: [
+          ['Basiselterngeld', '300 – 1.800 €', 'bis 14 Monate (Paar)', 'Eltern, die nach der Geburt pausieren'],
+          ['ElterngeldPlus', '150 – 900 €', 'bis 28 Monate (Paar)', 'Teilzeit bis 32 Wochenstunden'],
+          ['Partnerschaftsbonus', 'wie ElterngeldPlus', '+4 Plus-Monate', 'beide Eltern parallel 24–32 h/Woche'],
+        ],
+        fussnote: 'Die Varianten sind frei kombinierbar. Stand 06/2026, §§ 4–4b BEEG.',
+      },
+      {
+        typ: 'text',
+        titel: 'Partnerschaftsbonus und Partnermonate',
+        html: `<p>Die <strong>14-Monate-Regel</strong> ist der Kern der Partnerlogik: Ein einzelner Elternteil kann bis zu zwölf Monate Basiselterngeld beziehen. Die vollen 14 Monate gibt es nur, wenn sich beide Eltern beteiligen und jeder mindestens zwei Monate nimmt — die sogenannten <strong>Partnermonate</strong> (umgangssprachlich oft „Vätermonate", weil sie historisch Väter zur Beteiligung motivieren sollten). Die beiden zusätzlichen Monate verfallen, wenn nur ein Elternteil bezieht; sie sind also ein Anreiz, die Betreuung zu teilen. Alleinerziehende erhalten die 14 Monate allein, weil bei ihnen kein zweiter Elternteil mitwirken kann.</p><p>Der <strong>Partnerschaftsbonus</strong> belohnt geteilte Verantwortung zusätzlich: Arbeiten beide Eltern gleichzeitig für vier aufeinanderfolgende Monate jeweils zwischen 24 und 32 Wochenstunden, gibt es vier weitere ElterngeldPlus-Monate obendrauf. So lässt sich der gemeinsame Wiedereinstieg in Teilzeit finanziell abfedern; fällt einer der Partner in einem Bonusmonat unter 24 oder über 32 Stunden, kann der Bonus rückwirkend entfallen. Zu beachten ist eine Neuregelung für Geburten ab 2024/2026: Der <strong>parallele Bezug von Basiselterngeld</strong> beider Eltern ist in den ersten zwölf Lebensmonaten nur noch für einen gemeinsamen Monat möglich. Wer länger gleichzeitig zu Hause bleiben will, weicht auf ElterngeldPlus oder den Partnerschaftsbonus aus — diese Begrenzung betrifft ausdrücklich nur das gleichzeitige Basiselterngeld, nicht die Aufteilung der Monate insgesamt.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Bezugsdauer-Kombination',
+        schritte: [
+          { label: 'Basiselterngeld für 10 Monate', formel: '10 × 1.300 €', ergebnis: '13.000 €' },
+          { label: 'Statt 2 Basismonaten: 4 ElterngeldPlus-Monate', formel: '4 × 650 €', ergebnis: '2.600 €' },
+          { label: 'Bezugsdauer insgesamt', formel: '10 + 4 Monate', ergebnis: '14 Monate' },
+        ],
+        fazit: 'Ein Monat Basiselterngeld lässt sich in zwei ElterngeldPlus-Monate umwandeln: Der Monatsbetrag halbiert sich (650 statt 1.300 Euro), dafür streckt sich die Bezugsdauer. Wer in dieser Zeit in Teilzeit (höchstens 32 Wochenstunden) arbeitet, kombiniert Gehalt und ElterngeldPlus über den gesamten Zeitraum oft günstiger als ein kurzes Basiselterngeld. Die Kombination ist frei wählbar — viele Familien legen die Basismonate auf die Zeit direkt nach der Geburt (volle Betreuung) und die Plus-Monate auf den späteren, gleitenden Wiedereinstieg. So bleibt der finanzielle Polster länger erhalten, ohne dass am Monatsende eine größere Lücke entsteht.',
+      },
+      {
+        typ: 'text',
+        titel: 'Zuschläge: Geschwisterbonus und Mehrlinge',
+        html: `<p>Familien mit weiteren kleinen Kindern erhalten den <strong>Geschwisterbonus</strong>: Das Elterngeld erhöht sich um 10 %, mindestens aber um 75 Euro beim Basiselterngeld bzw. 37,50 Euro beim ElterngeldPlus pro Monat. Voraussetzung ist mindestens ein weiteres Kind unter drei Jahren, zwei weitere Kinder unter sechs Jahren oder ein Kind mit Behinderung unter 14 Jahren im Haushalt. Der Bonus wird automatisch berechnet und auch dann gezahlt, wenn nur der Mindestbetrag bezogen wird. Sobald das maßgebliche Geschwisterkind die Altersgrenze überschreitet, entfällt der Bonus für die restlichen Bezugsmonate — er ist also an die laufende Voraussetzung gebunden, nicht ein für alle Mal festgeschrieben.</p><p>Bei <strong>Mehrlingsgeburten</strong> kommt ein eigener Zuschlag hinzu: 300 Euro beim Basiselterngeld bzw. 150 Euro beim ElterngeldPlus für jedes weitere Mehrlingskind und Monat. Bei Zwillingen sind das also 300 Euro zusätzlich, bei Drillingen 600 Euro. Wichtig dabei: Mehrlinge begründen einen gemeinsamen Elterngeldanspruch, nicht je Kind einen eigenen — der Mehrlingszuschlag ist die gezielte Anerkennung des Mehraufwands. Geschwisterbonus und Mehrlingszuschlag werden unabhängig von der Höhe des regulären Elterngeldes gewährt und lassen sich miteinander kombinieren; sie sind echte Aufschläge auf den errechneten Grundbetrag und werden nicht in die Mindest- und Höchstgrenzen eingerechnet.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Vor dem Elterngeld-Antrag',
+        punkte: [
+          'Geburtsurkunde des Kindes beim Standesamt besorgen (Pflichtdokument für den Antrag).',
+          'Einkommensnachweise der zwölf Monate vor der Geburt zusammenstellen (Gehaltsabrechnungen, bei Selbstständigen der Steuerbescheid).',
+          'Variante und Kombination überlegen: Basiselterngeld, ElterngeldPlus oder Partnerschaftsbonus — je nach geplantem Teilzeit-Umfang.',
+          'Antrag bei der Elterngeldstelle des eigenen Bundeslandes stellen (teils auch online möglich).',
+          'Fristen beachten: Elterngeld wird rückwirkend höchstens für drei Lebensmonate vor dem Antragsmonat gezahlt.',
+          'Bescheinigung der Krankenkasse über das Mutterschaftsgeld bereithalten — es wird auf das Elterngeld angerechnet.',
+          'Die Einkommensgrenze von 175.000 € zu versteuerndem Jahreseinkommen prüfen, bevor man mit einem Anspruch plant.',
+          'Geplante Teilzeit während des Bezugs frühzeitig mit dem Arbeitgeber abstimmen — sie beeinflusst sowohl die Variantenwahl als auch die Höhe des Elterngeldes.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Einkommensgrenze 2026: 175.000 €',
+        text: 'Seit 01.04.2025 gilt eine einheitliche Einkommensgrenze von 175.000 Euro zu versteuerndem Jahreseinkommen (§ 1 Abs. 8 BEEG) — für Paare und Alleinerziehende gleichermaßen. Für Geburten ab 01.01.2026 greift sie in allen Fällen. Wer darüber liegt, hat keinen Anspruch auf Elterngeld. Maßgeblich ist das zvE aus dem Steuerbescheid des Kalenderjahres vor der Geburt. Elterngeld bleibt steuerfrei, erhöht über den Progressionsvorbehalt aber den Steuersatz auf das übrige Einkommen.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Elterngeld ist kein Lohnsteuer-Netto',
+        text: 'Die Elterngeldstelle rechnet mit eigenen Pauschalen, nicht mit dem Netto vom Lohnzettel. Sonderzahlungen zählen nicht mit. Dieser Rechner liefert deshalb eine fundierte Orientierung zur Höhe und zur Variantenwahl — die verbindliche Berechnung trifft am Ende die Elterngeldstelle Ihres Bundeslandes.',
+      },
+    ],
     faq: [
       {
         frage: 'Wer hat 2026 keinen Elterngeldanspruch mehr?',
