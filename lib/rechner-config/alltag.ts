@@ -213,7 +213,7 @@ Unser Prozentrechner zeigt bei jedem Ergebnis den vollständigen Rechenweg an. S
   },
   {
     slug: 'dreisatz-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-11',
     zeigtAuthorBio: true,
     titel: 'Dreisatzrechner',
     beschreibung: 'Dreisatz online berechnen: proportional und antiproportional, mit Rechenweg Schritt für Schritt.',
@@ -275,6 +275,111 @@ Der Dreisatz wirkt einfach, hat aber typische Fallstricke — diese sechs treten
 - **Linearität annehmen, wo keine ist.** Nicht alles ist proportional. Trocknungszeit von Farbe ist nicht linear zur Schichtdicke (doppelt so dick = mehr als doppelt so lange), Kochzeit von Fleisch nicht linear zur Masse (großes Stück = überproportional länger), zusätzliche Köche verkürzen die Kochzeit nur bis zu einem Punkt. Vor dem Dreisatz fragen: Gilt der lineare Zusammenhang im fraglichen Bereich überhaupt?
 - **Rundungsfehler durch zu frühes Runden.** Wer im zweiten Schritt von 3,50 ÷ 250 = 0,014 rundet und dann × 400 rechnet, kommt auf 5,60 €. Bei größeren Mengen oder ungeraden Werten kann das spürbar daneben liegen. Empfehlung: Zwischenergebnisse mit voller Stellenanzahl weiterrechnen, erst am Ende sinnvoll runden.
 - **Mehrfacher Dreisatz ohne strukturierte Zwischenrechnung.** Wenn drei Größen ineinander verschachtelt sind (5 Maler streichen 200 m² in 8 Stunden — wie lange brauchen 7 Maler für 350 m²?), wird oft im Kopf operiert und Vorzeichen vertauscht. Besser: in zwei separaten Dreisatz-Schritten lösen, dazwischen das Zwischenergebnis bewusst hinschreiben.`,
+    // contentBloecke (W19): eigenständiges „Proportionalitäts- & Vergleich-Leitformat" —
+    // prägend ZWEI vergleich-Blöcke (proportional vs. antiproportional; gerader vs.
+    // ungerader Dreisatz) + ein linie-Diagramm. Bewusst KEINE tabelle (grenzt von prozent
+    // ab, das beispielrechnung-/tabellen-lastig ist). Beispiele konsistent zu
+    // lib/berechnungen/dreisatz.ts: proportional B2 = B1×A2÷A1, antiproportional B2 = B1×A1÷A2.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was der Dreisatz ist',
+        html: `<p>Der Dreisatz ist eine der ältesten und nützlichsten Rechentechniken überhaupt: Aus <strong>drei bekannten Werten</strong> schließt man auf einen vierten, unbekannten. Sein Name kommt genau daher — man rechnet in drei Schritten („Sätzen") zur Lösung. Die Grundidee ist die <strong>Verhältnisgleichheit</strong>: Zwei Größen stehen in einem festen Verhältnis zueinander, und dieses Verhältnis bleibt gleich, egal wie groß oder klein die Mengen werden.</p><p>Ein einfaches Bild: Wenn 3 Brötchen 1,20 € kosten, dann kostet jedes Brötchen einen festen Betrag — und aus diesem Einheitspreis lässt sich der Preis für jede beliebige Menge berechnen. Genau dieser Umweg über die <strong>Einheit (1)</strong> ist der Kern des Dreisatzes: erst herunterrechnen auf eine Einheit, dann hochrechnen auf die gesuchte Menge.</p><p>Im Alltag steckt der Dreisatz überall: beim Umrechnen von Preisen und Mengen im Supermarkt, beim Anpassen von Kochrezepten auf eine andere Personenzahl, beim Berechnen von Arbeitszeiten, Verbrauch, Maßstäben auf Landkarten oder Währungsumrechnungen. Entscheidend ist nur eine Vorfrage, die über den richtigen Rechenweg bestimmt: Verändern sich beide Größen in dieselbe Richtung oder in entgegengesetzte? Daraus ergeben sich die zwei Varianten des Dreisatzes — der proportionale und der antiproportionale.</p><p>Der Dreisatz ist deshalb so mächtig, weil er ohne Formelwissen auskommt: Man muss weder eine Gleichung aufstellen noch eine Unbekannte isolieren. Es genügt, in zwei kleinen Schritten zu denken — erst auf eine Einheit, dann auf die Zielmenge. Diese Schlichtheit macht ihn zur ersten Wahl im Kopf oder auf einem Zettel, lange bevor man zum Taschenrechner greift. Genau deshalb wird er in der Schule früh und gründlich geübt: Wer den Dreisatz beherrscht, löst später Prozent-, Zins- und Maßstabsaufgaben fast nebenbei mit.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Proportional vs. antiproportional',
+        spalteA: 'Proportional — je mehr, desto mehr',
+        spalteB: 'Antiproportional — je mehr, desto weniger',
+        zeilen: [
+          { kriterium: 'Grundidee', a: 'beide Größen wachsen im gleichen Verhältnis', b: 'eine Größe wächst, die andere schrumpft im gleichen Verhältnis' },
+          { kriterium: 'Typisches Beispiel', a: 'mehr Brötchen → mehr Geld', b: 'mehr Arbeiter → weniger Zeit' },
+          { kriterium: 'Rechenweg', a: 'auf 1 dividieren, dann auf Ziel multiplizieren', b: 'auf 1 multiplizieren, dann auf Ziel dividieren' },
+          { kriterium: 'Formel', a: 'B2 = B1 × A2 ÷ A1', b: 'B2 = B1 × A1 ÷ A2' },
+          { kriterium: 'Woran erkennbar', a: 'verdoppelt sich A, verdoppelt sich B', b: 'verdoppelt sich A, halbiert sich B' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Proportionaler Dreisatz',
+        schritte: [
+          { label: 'Ausgangswerte', formel: '3 Brötchen = 1,20 €', ergebnis: '1,20 € für 3 Stück' },
+          { label: 'Auf 1 Brötchen herunter (÷ 3)', formel: '1,20 € ÷ 3', ergebnis: '0,40 € je Brötchen' },
+          { label: 'Auf 7 Brötchen hoch (× 7)', formel: '0,40 € × 7', ergebnis: '2,80 €' },
+        ],
+        fazit: 'Sieben Brötchen kosten 2,80 €. Beim proportionalen Dreisatz führt der Weg immer über den Einheitswert: erst auf 1 herunterrechnen (dividieren), dann auf die Zielmenge hochrechnen (multiplizieren). Kurzformel: B2 = B1 × A2 ÷ A1. Probe gefällig? Der Preis je Brötchen (0,40 €) bleibt in jeder Zeile gleich — dieser konstante Quotient pro Stück bestätigt, dass die Rechnung stimmt und der Zusammenhang tatsächlich proportional ist.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Gerader vs. ungerader Dreisatz: die Rechenrichtung',
+        spalteA: 'Gerader Dreisatz',
+        spalteB: 'Ungerader Dreisatz',
+        zeilen: [
+          { kriterium: 'Entspricht', a: 'proportional', b: 'antiproportional' },
+          { kriterium: 'Schritt auf die Einheit (1)', a: 'dividieren (÷ A1)', b: 'multiplizieren (× A1)' },
+          { kriterium: 'Schritt auf die Zielmenge', a: 'multiplizieren (× A2)', b: 'dividieren (÷ A2)' },
+          { kriterium: 'Pfeil-Bild', a: 'beide Spalten gleiche Richtung', b: 'Spalten gegenläufig' },
+          { kriterium: 'Häufige Verwechslung', a: 'antiproportionale Aufgabe gerade gerechnet', b: 'gerade Aufgabe antiproportional gerechnet' },
+        ],
+      },
+      {
+        typ: 'diagramm',
+        variante: 'linie',
+        titel: 'Proportionaler Zusammenhang: Menge und Preis',
+        daten: [
+          { label: '1 Stück', wert: 0.4, einheit: '€' },
+          { label: '2', wert: 0.8, einheit: '€' },
+          { label: '3', wert: 1.2, einheit: '€' },
+          { label: '5', wert: 2.0, einheit: '€' },
+          { label: '10', wert: 4.0, einheit: '€' },
+        ],
+        fussnote: 'Die gerade Linie durch den Nullpunkt ist das Kennzeichen der Proportionalität: doppelte Menge = doppelter Preis, halbe Menge = halber Preis. Bei antiproportionalen Zusammenhängen wäre die Kurve dagegen nicht gerade, sondern fallend gebogen (eine Hyperbel), weil das Produkt der beiden Größen konstant bleibt.',
+      },
+      {
+        typ: 'text',
+        titel: 'Antiproportional erkennen und rechnen',
+        html: `<p>Beim <strong>antiproportionalen</strong> Dreisatz (auch „ungerader Dreisatz") verhalten sich die beiden Größen gegenläufig: Wird die eine größer, wird die andere im gleichen Verhältnis kleiner. Das klassische Beispiel sind Arbeiter und Zeit — je mehr Personen an einer Aufgabe arbeiten, desto weniger Zeit brauchen sie. Ähnlich ist es bei Geschwindigkeit und Fahrzeit (schneller fahren, kürzer unterwegs) oder bei der Anzahl der Portionen und der Vorratsdauer.</p><p>Rechnerisch sind hier die beiden Schritte gegenüber dem proportionalen Fall <strong>vertauscht</strong>: Statt erst zu dividieren und dann zu multiplizieren, multipliziert man zuerst (um auf eine Einheit hochzurechnen) und dividiert anschließend (um auf die Zielmenge zu kommen). Anschaulich: Ein einzelner Arbeiter braucht am längsten, also rechnet man von „4 Arbeiter, 6 Tage" zunächst auf „1 Arbeiter" hoch — der bräuchte das Vierfache.</p><p>Der häufigste Fehler ist, eine antiproportionale Aufgabe wie eine proportionale zu behandeln. Dann käme heraus, dass weniger Arbeiter weniger Zeit brauchen — was offensichtlich unsinnig ist. Genau deshalb steht am Anfang jeder Dreisatz-Aufgabe die Frage: Bedeutet „mehr" hier auch „mehr" — oder bedeutet „mehr" hier „weniger"?</p><p>Weitere antiproportionale Klassiker aus dem Alltag: Ein Vorrat reicht für eine bestimmte Zahl von Personen — kommen mehr Esser hinzu, reicht er entsprechend kürzer. Eine feste Strecke wird mit höherer Geschwindigkeit in kürzerer Zeit zurückgelegt. Eine Wassermenge füllt einen Tank über mehrere Leitungen schneller als über eine. Allen gemeinsam ist: Das <strong>Produkt</strong> der beiden Größen bleibt konstant (Arbeiter × Tage, km/h × Stunden, Personen × Tage Vorrat). Dieses konstante Produkt ist die rechnerische Signatur der Antiproportionalität — beim proportionalen Dreisatz ist es dagegen der <strong>Quotient</strong>, der konstant bleibt.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Antiproportionaler Dreisatz',
+        schritte: [
+          { label: 'Ausgangswerte', formel: '4 Maler = 6 Tage', ergebnis: '6 Tage bei 4 Malern' },
+          { label: 'Auf 1 Maler hoch (× 4)', formel: '6 Tage × 4', ergebnis: '24 Tage (1 Maler)' },
+          { label: 'Auf 3 Maler herunter (÷ 3)', formel: '24 Tage ÷ 3', ergebnis: '8 Tage' },
+        ],
+        fazit: 'Drei Maler brauchen 8 Tage — weniger Arbeiter, mehr Zeit. Beim antiproportionalen Dreisatz sind die Rechenschritte vertauscht: erst multiplizieren (auf 1 hoch), dann dividieren (auf die Zielmenge). Kurzformel: B2 = B1 × A1 ÷ A2. Die Gegenprobe: Arbeiter mal Tage ergibt in jeder Zeile 24 (4×6, 1×24, 3×8) — dieses konstante Produkt ist der Beweis, dass der Zusammenhang antiproportional ist und richtig gerechnet wurde.',
+      },
+      {
+        typ: 'text',
+        titel: 'Dreisatz, Prozent und Zuordnung',
+        html: `<p>Dreisatz und Prozentrechnung sind eng verwandt — viele Prozentaufgaben lassen sich als Dreisatz lösen und umgekehrt. „19 % von 250 €" ist nichts anderes als die Zuordnung „100 % entsprechen 250 €, wie viel entsprechen 19 %?", also ein proportionaler Dreisatz. Wer mit dem Dreisatz sicher ist, hat damit automatisch ein Werkzeug für die meisten Prozentfragen. Mehr dazu im <a href="/alltag/prozentrechner">Prozentrechner</a>.</p><p>Wann ist der Dreisatz die einfachere Wahl? Immer dann, wenn keine der drei Prozent-Grundgrößen direkt gegeben ist, sondern schlicht ein Verhältnis vorliegt — etwa beim Umrechnen von Rezeptmengen, Maßstäben oder Verbrauchswerten. Der Dreisatz verlangt kein Vorwissen über Grundwert oder Prozentsatz; er funktioniert allein über das Verhältnis der bekannten Werte. Das macht ihn zum vielleicht universellsten Alltagsrechner.</p><p>Umgekehrt hilft die Prozent-Brille beim Dreisatz: Wer erkennt, dass eine Zuordnung „pro Stück", „pro Kilogramm" oder „pro Stunde" gemeint ist, hat den Einheitswert schon gefunden — und damit den entscheidenden Zwischenschritt. Ob man die Aufgabe am Ende „Dreisatz" oder „Prozentrechnung" nennt, ist zweitrangig; beide beschreiben dieselbe proportionale Beziehung aus unterschiedlichen Blickwinkeln. Praktisch heißt das: Eine Methode reicht, um beide Aufgabentypen souverän zu lösen.</p><p>Ein kurzes Rechenbeispiel zeigt die Brücke: „Im Sale sind 30 % Rabatt, die Ware kostet danach 49 € — wie hoch war der ursprüngliche Preis?" Als Dreisatz gedacht entsprechen 70 % (der reduzierte Anteil) genau 49 €. Dann entspricht 1 % dem Wert 49 € ÷ 70 = 0,70 €, und 100 % (der Originalpreis) sind 0,70 € × 100 = 70 €. Derselbe Drei-Schritt-Weg wie beim Brötchen-Beispiel — nur dass die „Menge" hier in Prozent gemessen wird. Wer diese Übertragung einmal verstanden hat, sieht in fast jeder Rabatt-, Trinkgeld- oder Steuerfrage einen verkappten Dreisatz.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Dreisatz in 3 Schritten lösen',
+        punkte: [
+          'Die bekannten Werte ordnen: Welche zwei Größen gehören zusammen, und welcher Wert ist gesucht?',
+          'Art bestimmen: Verändern sich beide Größen gleichläufig (proportional) oder gegenläufig (antiproportional)?',
+          'Auf die Einheit (1) zurückrechnen — bei proportional dividieren, bei antiproportional multiplizieren.',
+          'Auf die Zielmenge hochrechnen — bei proportional multiplizieren, bei antiproportional dividieren.',
+          'Einheiten vorab angleichen (g mit g, € mit €) und erst am Ende sinnvoll runden.',
+          'Plausibilität prüfen: Passt das Ergebnis zur Richtung (mehr/weniger)?',
+          'Gegenprobe: Bei proportional bleibt der Quotient, bei antiproportional das Produkt der beiden Größen in jeder Zeile konstant.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Erst fragen: mehr = mehr oder mehr = weniger?',
+        text: 'Bevor Sie eine einzige Zahl notieren, beantworten Sie die eine entscheidende Frage: Wenn die eine Größe größer wird — wird die andere dann auch größer (proportional) oder kleiner (antiproportional)? Diese Frage legt fest, ob im Zwischenschritt multipliziert oder dividiert wird. Wer sie zuerst klärt, vermeidet den mit Abstand häufigsten Dreisatz-Fehler — nämlich eine gegenläufige Beziehung versehentlich gleichläufig zu rechnen und so ein unsinniges Ergebnis zu erhalten.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum der Dreisatz so verlässlich ist',
+        html: `<p>Die Stärke des Dreisatzes liegt in seiner <strong>Verhältnistreue</strong>: Solange der zugrunde liegende Zusammenhang tatsächlich linear ist, liefert er exakte Ergebnisse — unabhängig von der Größenordnung der Zahlen. Genau deshalb ist er seit Jahrhunderten fester Bestandteil des Rechnens im Handel, Handwerk und Haushalt. Die einzige echte Voraussetzung ist, dass die Proportionalität im betrachteten Bereich wirklich gilt; wo sie das nicht tut (etwa bei Trocknungs- oder Kochzeiten), führt der Dreisatz in die Irre. Wer diese Grenze kennt und die richtige Variante wählt, hat mit dem Dreisatz ein Werkzeug, das fast jede Alltagsrechnung sicher löst.</p><p>Für komplexere Fälle gibt es den <strong>mehrgliedrigen Dreisatz</strong> (Kettensatz): Hängt die gesuchte Größe von mehreren Faktoren ab — etwa „5 Maler streichen 200 m² in 8 Stunden, wie lange brauchen 7 Maler für 350 m²?" —, löst man die Aufgabe in mehreren aufeinanderfolgenden Dreisatz-Schritten. Dabei prüft man für jeden Faktor einzeln, ob er proportional oder antiproportional wirkt: Mehr Fläche bedeutet mehr Zeit (proportional), mehr Maler bedeutet weniger Zeit (antiproportional). Wer jeden Schritt sauber hinschreibt und das Zwischenergebnis notiert, hält selbst verschachtelte Aufgaben zuverlässig im Griff — die Grundlogik aus Ordnen, Art bestimmen und über die Einheit rechnen bleibt in jedem einzelnen Teilschritt exakt dieselbe.</p>`,
+      },
+    ],
     faq: [
       {
         frage: 'Was ist der Dreisatz und wofür braucht man ihn?',
