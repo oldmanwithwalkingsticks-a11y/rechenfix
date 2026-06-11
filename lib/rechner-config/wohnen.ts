@@ -3,7 +3,12 @@ import type { RechnerConfig } from './types';
 export const wohnenRechner: RechnerConfig[] = [
   {
     slug: 'stromkosten-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-11',
+    quellen: [
+      { titel: 'BDEW-Strompreisanalyse 2026 (Bundesverband der Energie- und Wasserwirtschaft)', hinweis: 'Durchschnittlicher Haushaltsstrompreis 37,2 ct/kWh, Preiszusammensetzung, Referenzverbrauch 3.500 kWh/Jahr.' },
+      { titel: 'Bundesnetzagentur (BNetzA): Netzentgelte und Strommarkt', url: 'https://www.bundesnetzagentur.de/DE/Vportal/Energie/start.html' },
+      { titel: '§ 3 StromStG: Stromsteuer (2,05 ct/kWh)', url: 'https://www.gesetze-im-internet.de/stromstg/__3.html' },
+    ],
     zeigtAuthorBio: true,
     titel: 'Stromkostenrechner',
     beschreibung: 'Stromkosten berechnen: Jahresverbrauch, Arbeitspreis und Grundpreis — mit Haushaltsgröße-Schnellwahl.',
@@ -63,6 +68,105 @@ Beim Vergleich von Stromtarifen und der Schätzung von Jahreskosten gibt es eini
 - **Tarifänderungen unterm Jahr nicht eingerechnet.** Stromanbieter-Wechsel oder Anpassungen mitten im Abrechnungsjahr bedeuten zwei verschiedene Tarife für unterschiedliche Verbrauchsperioden. Der Jahresverbrauch lässt sich nur sauber zuordnen, wenn der Zählerstand zum Wechseltag dokumentiert wird — sonst wird die Berechnung Schätzwerk.
 - **Alte Verbrauchszahlen nach E-Auto- oder Wärmepumpen-Anschaffung weiterverwenden.** Nach einer Wallbox- oder Wärmepumpen-Installation steigt der Jahresverbrauch um 2.000–6.000 kWh — die Tarifrechnung mit dem Vor-Anschaffungs-Wert ist dann grob falsch. Die ersten 12 Monate nach Anschaffung als Übergangsjahr behandeln, dann den realen neuen Verbrauch nutzen.
 - **Dynamische Tarife mit pauschalen Mittelwerten kalkulieren.** Bei dynamischen Tarifen (Tibber, awattar etc.) variiert der Arbeitspreis stündlich nach Börsenstrompreis — der Jahresdurchschnitt liegt typisch 10–25 % unter dem Standardtarif, kann aber je nach Verbrauchsverhalten deutlich abweichen. Wer den Mittelwert in den Rechner eingibt, ohne den Lastprofil-Effekt einzuplanen (Verbrauch tagsüber bei höheren Preisen vs. nachts bei niedrigen), kommt auf eine schöne, aber unrealistische Schätzung.`,
+    // contentBloecke (W19): „Zusammensetzungs-Leitformat" — Preis-Anteile (kreis) +
+    // Verbrauchs-Skalierung (balken) + Haushalts-Tabelle. Werte gespiegelt aus
+    // lib/berechnungen/strompreis.ts (STROMPREIS_2026.durchschnitt_bdew = 37 ct).
+    // Beispiel via berechneStromkosten(3.500 kWh, 37 ct, 12 €/Mon) = 1.439 €/Jahr,
+    // ~119,92 €/Mon, effektiv 41,1 ct/kWh. Quelle BDEW-Strompreisanalyse 2026,
+    // Stand 06/2026. Preise als Durchschnitt/Spanne, kein Beratungs-YMYL.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Wie sich Ihre Stromkosten zusammensetzen',
+        html: `<p>Die jährliche Stromrechnung setzt sich aus zwei Posten zusammen: dem <strong>Arbeitspreis</strong> und dem <strong>Grundpreis</strong>. Der Arbeitspreis ist der Preis pro verbrauchter Kilowattstunde (ct/kWh) — er fällt nur an, wenn auch wirklich Strom fließt. Der Grundpreis ist ein fester monatlicher Betrag (€/Monat), der unabhängig vom Verbrauch gezahlt wird; er deckt Zählermiete, Abrechnung und die Bereitstellung des Anschlusses. Die Formel lautet: <strong>Jahreskosten = Arbeitspreis × Verbrauch + Grundpreis × 12</strong>.</p><p>Aus dieser Zweiteilung folgt ein wichtiger Effekt: Der <strong>effektive</strong> Preis pro Kilowattstunde liegt immer etwas über dem reinen Arbeitspreis, weil der feste Grundpreis auf alle verbrauchten Kilowattstunden umgelegt wird. Wer wenig verbraucht, spürt das stärker — bei 1.500 kWh wiegt ein Grundpreis von 144 € im Jahr deutlich schwerer pro kWh als bei 4.000 kWh. Deshalb sind Tarife mit niedrigem Grundpreis für Wenigverbraucher oft günstiger, während Vielverbraucher eher auf einen niedrigen Arbeitspreis achten sollten.</p><p>Genau hier setzt der Rechner an: Er trennt beide Posten sauber und zeigt neben den Jahres-, Monats- und Tageskosten auch den effektiven kWh-Preis. So lassen sich zwei Tarife mit unterschiedlicher Aufteilung aus Grund- und Arbeitspreis erst sinnvoll vergleichen — nämlich bezogen auf den eigenen, realen Jahresverbrauch.</p><p>In der Praxis zahlt man die Stromkosten nicht jährlich auf einen Schlag, sondern in monatlichen <strong>Abschlägen</strong>: Der Versorger schätzt den Jahresverbrauch und teilt die erwarteten Kosten in zwölf gleiche Raten. Einmal im Jahr folgt die <strong>Jahresabrechnung</strong>, bei der der tatsächlich abgelesene Verbrauch gegengerechnet wird — daraus ergibt sich eine Gutschrift oder eine Nachzahlung. Wer seinen Abschlag zu niedrig ansetzt, riskiert eine hohe Nachzahlung; ein zu hoher Abschlag bindet dagegen unnötig Geld. Der Rechner hilft, einen realistischen Abschlag zu bestimmen, indem er die Jahreskosten auf den Monat herunterbricht.</p>`,
+      },
+      {
+        typ: 'diagramm',
+        variante: 'kreis',
+        titel: 'Woraus der Strompreis besteht',
+        daten: [
+          { label: 'Beschaffung & Vertrieb', wert: 41, einheit: '%' },
+          { label: 'Steuern, Abgaben & Umlagen', wert: 34, einheit: '%' },
+          { label: 'Netzentgelte', wert: 25, einheit: '%' },
+        ],
+        fussnote: 'Anteile am Haushaltsstrompreis, BDEW 2026. Rund 59 % (Steuern/Abgaben/Umlagen + Netzentgelte) sind staatlich bzw. netzseitig festgelegt — nur etwa 41 % lassen sich über die Anbieterwahl beeinflussen.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Jahreskosten bei 3.500 kWh',
+        schritte: [
+          { label: 'Arbeitspreis: 3.500 kWh × 37 ct/kWh', formel: '3.500 × 0,37 €', ergebnis: '1.295,00 €' },
+          { label: 'Grundpreis: 12 €/Monat × 12 Monate', formel: '12 € × 12', ergebnis: '144,00 €' },
+          { label: 'Jahreskosten gesamt', formel: '1.295 € + 144 €', ergebnis: '1.439,00 €' },
+          { label: 'Effektiver kWh-Preis', formel: '1.439 € ÷ 3.500 kWh', ergebnis: '41,1 ct/kWh' },
+        ],
+        fazit: 'Bei 3.500 kWh, einem Arbeitspreis von 37 ct/kWh und 12 €/Monat Grundpreis ergeben sich rund 1.439 € im Jahr — knapp 120 € im Monat. Der effektive kWh-Preis (41,1 ct) liegt über dem reinen Arbeitspreis, weil der Grundpreis auf jede Kilowattstunde umgelegt wird. Bei weniger Verbrauch fällt dieser Aufschlag pro kWh noch deutlicher aus — und genau deshalb lohnt es sich, beim Tarifvergleich nicht nur auf den Arbeitspreis, sondern auf diese effektive Gesamtgröße zu schauen. Ein Tarif mit niedrigerem Arbeitspreis, aber höherem Grundpreis kann unterm Strich teurer sein.',
+      },
+      {
+        typ: 'text',
+        titel: 'Grundpreis und Arbeitspreis verstehen',
+        html: `<p>Der <strong>Grundpreis</strong> ist der verbrauchsunabhängige Teil des Tarifs. Er wird als fester Betrag pro Monat oder Jahr berechnet und ändert sich nicht, egal ob die Wohnung leer steht oder rund um die Uhr Geräte laufen. Typisch sind 8–15 €/Monat. Der Grundpreis deckt die Kosten, die der Versorger unabhängig von der gelieferten Menge hat — vor allem Messung, Abrechnung und Netzbereitstellung.</p><p>Der <strong>Arbeitspreis</strong> dagegen ist der verbrauchsabhängige Teil: jede gelieferte Kilowattstunde kostet einen festen Centbetrag. Hier schlagen Beschaffung, Steuern, Umlagen und ein Teil der Netzentgelte durch. Weil beide Preisbestandteile zusammenwirken, lässt sich ein Tarif <strong>nie am Arbeitspreis allein</strong> bewerten: Ein Lockangebot mit sehr niedrigem Arbeitspreis, aber hohem Grundpreis kann für einen Single mit wenig Verbrauch teurer sein als ein Tarif mit moderatem Arbeitspreis und niedrigem Grundpreis.</p><p>Der einzig faire Vergleich führt deshalb über die <strong>Gesamtkosten beim eigenen Jahresverbrauch</strong>. Genau das rechnet dieser Rechner aus — und macht damit sichtbar, welcher Tarif für den konkreten Haushalt wirklich günstiger ist. Wer seinen Jahresverbrauch nicht kennt, findet ihn auf der letzten Jahresabrechnung oder schätzt ihn über die Haushaltsgröße (siehe Tabelle).</p><p>Beim Tarifvergleich lohnt der Blick auf zwei weitere Bedingungen, die der reine Preis nicht zeigt: die <strong>Preisgarantie</strong> und die <strong>Vertragslaufzeit</strong>. Eine eingeschränkte Preisgarantie deckt oft nur Beschaffung und Vertrieb ab, nicht aber Steuern und Umlagen — steigen diese, steigt trotz „Garantie" der Preis. Lange Erstlaufzeiten mit automatischer Verlängerung können einen Wechsel erschweren, während kurze Kündigungsfristen flexibel halten. Auch Boni (Neukunden- oder Sofortbonus) verzerren den Erstjahrespreis: Sie senken die Kosten im ersten Jahr, fallen danach aber weg. Für einen ehrlichen Vergleich rechnet man den Bonus heraus und betrachtet den Preis im zweiten Vertragsjahr.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Typischer Verbrauch nach Haushaltsgröße',
+        kopf: ['Haushalt', 'Verbrauch (kWh/Jahr)', '~Kosten/Jahr'],
+        zeilen: [
+          ['1 Person', '~1.500', '~699 €'],
+          ['2 Personen', '~2.500', '~1.069 €'],
+          ['3 Personen', '~3.500', '~1.439 €'],
+          ['4 Personen', '~4.250', '~1.717 €'],
+        ],
+        fussnote: 'Orientierungswerte, gerechnet mit 37 ct/kWh + 12 €/Monat Grundpreis. Mit elektrischer Warmwasserbereitung, Wärmepumpe oder E-Auto liegt der Verbrauch deutlich höher.',
+      },
+      {
+        typ: 'diagramm',
+        variante: 'balken',
+        titel: 'Stromkosten nach Verbrauch',
+        daten: [
+          { label: '1.500 kWh', wert: 699, einheit: '€' },
+          { label: '2.500 kWh', wert: 1069, einheit: '€' },
+          { label: '3.500 kWh', wert: 1439, einheit: '€' },
+          { label: '4.250 kWh', wert: 1717, einheit: '€' },
+        ],
+        fussnote: 'Jahreskosten bei 37 ct/kWh + 12 €/Monat Grundpreis. Der Grundpreis (144 €/Jahr) bildet den Sockel, die Kosten steigen darüber linear mit dem Verbrauch.',
+      },
+      {
+        typ: 'text',
+        titel: 'Was den Strompreis beeinflusst — und was nicht',
+        html: `<p>Ein großer Teil des Strompreises ist <strong>nicht verhandelbar</strong>. Rund 59 % entfallen auf Steuern, Abgaben, Umlagen und Netzentgelte: die Stromsteuer (unverändert 2,05 ct/kWh nach § 3 StromStG), die Mehrwertsteuer von 19 % auf den Gesamtpreis, diverse Umlagen sowie die regional unterschiedlichen Netzentgelte. Diese Bestandteile zahlt jeder Haushalt, unabhängig vom Anbieter — sie sind staatlich bzw. behördlich festgelegt.</p><p>Beeinflussbar sind die übrigen rund 41 % für <strong>Beschaffung und Vertrieb</strong>. Hier entscheidet die Anbieter- und Tarifwahl. 2026 ist der Durchschnittspreis laut BDEW auf rund 37,2 ct/kWh gesunken (von 39,3 ct im Vorjahr, etwa 6 % günstiger), unter anderem weil die Netzentgelte durch einen Bundeszuschuss um rund 15 % zurückgingen. Trotzdem bleibt eine erhebliche Spanne: Die Grundversorgung liegt oft bei 34–40 ct/kWh, günstige Tarife beginnen bei rund 26 ct.</p><p>Auffällig ist der Unterschied zwischen <strong>Bestands- und Neukunden</strong>: Wer jahrelang im selben (oft teuren) Tarif bleibt, zahlt regelmäßig mehr als jemand, der aktiv vergleicht und wechselt. Die Grundversorgung ist dabei selten die günstigste Option — sie ist nur der Standardtarif, in dem man ohne aktive Wahl landet.</p><p>Hinter den staatlichen Bestandteilen stecken mehrere Posten: Neben der Stromsteuer und der Mehrwertsteuer fließen verschiedene <strong>Umlagen</strong> in den Preis ein, etwa für Kraft-Wärme-Kopplung oder für Netzbetreiber-Pflichten. Die früher prominente EEG-Umlage zur Förderung erneuerbarer Energien wird seit 2022 nicht mehr über den Strompreis erhoben, sondern aus dem Bundeshaushalt finanziert — das hat die Rechnung spürbar entlastet. Gleichzeitig schwanken die <strong>Beschaffungskosten</strong> mit dem Börsenstrompreis: Nach den Spitzen der Energiekrise haben sie sich 2026 wieder beruhigt, was den leichten Rückgang des Durchschnittspreises miterklärt. Solche Bewegungen treffen vor allem den beeinflussbaren 41-%-Anteil — ein weiterer Grund, den Tarif regelmäßig zu prüfen.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Strom sparen: wo es sich wirklich lohnt',
+        html: `<p>Beim Stromsparen lohnt der Blick auf die <strong>größten Verbraucher</strong>. Mit Abstand am meisten zieht alles, was elektrisch heizt oder Wasser erwärmt: Durchlauferhitzer, elektrische Warmwasserboiler, Nachtspeicheröfen und Heizlüfter. Danach folgen Kühl- und Gefriergeräte (laufen rund um die Uhr), Wäschetrockner, Geschirrspüler und Waschmaschine. Wer hier auf effiziente Geräte und volle Beladung achtet, senkt den Verbrauch spürbar.</p><p>Kleinere, aber stetige Posten sind der <strong>Standby-Betrieb</strong> vieler Geräte und veraltete Beleuchtung. Abschaltbare Steckdosenleisten und der Umstieg auf LED bringen über das Jahr zusammengerechnet ebenfalls einen messbaren Betrag. Diese Maßnahmen wirken auf die verbrauchte Menge — und damit auf den Arbeitspreis-Anteil der Rechnung.</p><p>Der zweite große Hebel ist nicht der Verbrauch, sondern der <strong>Preis</strong>: ein Tarifvergleich mit anschließendem Wechsel. Weil rund 41 % des Preises über die Anbieterwahl beeinflussbar sind, bringt ein Wechsel aus der Grundversorgung in einen günstigen Tarif bei durchschnittlichem Verbrauch schnell mehrere hundert Euro im Jahr — oft mehr als jede einzelne Sparmaßnahme am Gerät.</p><p>Wer wissen will, welche Geräte im eigenen Haushalt am meisten ziehen, kann mit einem einfachen <strong>Strommessgerät</strong> (Steckdosen-Messgerät) einzelne Verbraucher über einige Tage messen und auf das Jahr hochrechnen. Häufig entlarvt das stille Dauerläufer: einen alten Zweitkühlschrank im Keller, eine in die Jahre gekommene Heizungs-Umwälzpumpe oder einen Router und TV-Geräte, die nie ganz ausgehen. Schon der Austausch eines einzigen ineffizienten Dauerverbrauchers kann mehr bringen als viele kleine Verhaltensänderungen. Sinnvoll ist deshalb die Reihenfolge: zuerst die größten und am längsten laufenden Geräte prüfen, dann den Tarif optimieren — und beides zusammen ergibt die größte Ersparnis.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Stromkosten senken',
+        punkte: [
+          'Den eigenen Jahresverbrauch kennen (Zählerstand ablesen oder letzte Abrechnung prüfen).',
+          'Tarife mindestens einmal jährlich vergleichen — Bestandskunden zahlen oft mehr als Neukunden.',
+          'Immer Grund- UND Arbeitspreis zusammen rechnen, nie nur den Arbeitspreis vergleichen.',
+          'Die Grundversorgung verlassen, wenn ein günstigerer Tarif verfügbar ist.',
+          'Standby-Verbrauch mit abschaltbaren Steckdosenleisten reduzieren.',
+          'Auf effiziente Geräte achten (Kühlen, Waschen, Trocknen) und volle Beladung nutzen.',
+          'Den monatlichen Abschlag an den tatsächlichen Verbrauch anpassen, um hohe Nachzahlungen am Jahresende zu vermeiden.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Vergleichen lohnt sich',
+        text: 'Die Differenz zwischen Grundversorgung und einem günstigen Tarif kann mehrere Cent pro Kilowattstunde betragen. Auf einen Jahresverbrauch von 3.500 kWh hochgerechnet sind das schnell mehrere hundert Euro Ersparnis. Wichtig beim Vergleich: immer den Gesamtpreis aus Grund- und Arbeitspreis bezogen auf den eigenen Verbrauch betrachten — nicht nur den beworbenen Arbeitspreis. Achten Sie zusätzlich auf die Vertragslaufzeit und darauf, ob ein Neukundenbonus den günstig wirkenden Erstjahrespreis verzerrt.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Regionale Unterschiede',
+        text: 'Die Netzentgelte werden pro Netzgebiet festgelegt und unterscheiden sich je nach Wohnort zum Teil deutlich. Derselbe Verbrauch kann deshalb in zwei Regionen unterschiedlich viel kosten — ein Grund, warum bundesweite Durchschnittspreise immer nur eine Orientierung sind und der eigene Tarifvergleich am Wohnort die belastbare Zahl liefert. Tendenziell sind die Netzentgelte in ländlichen Regionen mit langen Leitungen und in Gebieten mit viel Wind- oder Solarausbau höher als in dicht besiedelten Städten.',
+      },
+    ],
     faq: [
       {
         frage: 'Wie berechnet man Stromkosten?',
@@ -96,11 +200,6 @@ Beim Vergleich von Stromtarifen und der Schätzung von Jahreskosten gibt es eini
         frage: 'Was sind dynamische Stromtarife und für wen lohnen sie sich?',
         antwort: 'Dynamische Stromtarife (z. B. Tibber, awattar, Octopus Go) koppeln den Arbeitspreis stündlich an den Börsenstrompreis statt einen Festpreis zu vereinbaren. Der Mieter zahlt einen kleinen Aufschlag (typisch 1–2 ct/kWh) plus den jeweiligen Stundenpreis — der zwischen 5 ct (nachts/Sonntag/viel Wind) und 35 ct (Werktag-Spitzen 18–20 Uhr) schwanken kann. Voraussetzung: ein intelligentes Messsystem (Smart-Meter), das ab 6.000 kWh Verbrauch oder bei E-Auto/Wärmepumpe ohnehin verpflichtend ist. Lohnt sich besonders für Haushalte mit verschiebbarem Verbrauch (Wärmepumpe nachts, E-Auto-Wallbox mit Lade-Steuerung, Geschirrspüler/Waschmaschine zeitlich flexibel) und großem Jahresverbrauch ab 4.000 kWh. Typische Ersparnis: 10–25 % gegenüber Standardtarif. Wer hauptsächlich abends zu den Spitzenzeiten verbraucht und nicht steuern kann, fährt mit Festpreistarif besser. Tools wie Home-Assistant oder das Energie-Management vieler Wallboxen automatisieren das Lastverschieben heute weitgehend.',
       },
-    ],
-    quellen: [
-      { titel: 'Erneuerbare-Energien-Gesetz (EEG 2023)', url: 'https://www.gesetze-im-internet.de/eeg_2014/', hinweis: 'EEG-Umlage seit 01.07.2022 auf 0 ct/kWh, Einspeisevergütung § 49 EEG' },
-      { titel: 'Stromsteuergesetz (StromStG)', url: 'https://www.gesetze-im-internet.de/stromstg/', hinweis: 'Stromsteuer-Komponente: 2,05 ct/kWh Regelsatz' },
-      { titel: 'Bundesnetzagentur: Elektrizität und Gas', url: 'https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html', hinweis: 'Netzentgelte, Strompreis-Monitoring, BDEW-Strompreisanalyse' },
     ],
   },
   {
