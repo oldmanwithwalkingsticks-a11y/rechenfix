@@ -372,7 +372,11 @@ Die sogenannte Schlafhygiene hat großen Einfluss auf Ihre Schlafqualität:
   },
   {
     slug: 'kalorienrechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-11',
+    quellen: [
+      { titel: 'Mifflin MD, St Jeor ST et al. (1990): A new predictive equation for resting energy expenditure', hinweis: 'Grundlage der heute gebräuchlichsten BMR-Schätzformel für gesunde Erwachsene (American Journal of Clinical Nutrition).' },
+      { titel: 'Deutsche Gesellschaft für Ernährung (DGE): Referenzwerte Energiezufuhr', url: 'https://www.dge.de/wissenschaft/referenzwerte/energie/' },
+    ],
     titel: 'Kalorienrechner',
     beschreibung: 'Täglichen Kalorienbedarf berechnen: Grundumsatz und Gesamtumsatz basierend auf der Mifflin-St Jeor-Formel.',
     kategorie: 'Gesundheit',
@@ -408,6 +412,100 @@ Zum Abnehmen muss ein Kaloriendefizit erzielt werden — das bedeutet, weniger K
 Neben der Gesamtkalorienmenge spielt die Verteilung auf die drei Makronährstoffe eine wichtige Rolle. Unser Rechner verwendet eine **proteinbetonte Verteilung** von **30 % Protein**, **45 % Kohlenhydrate** und **25 % Fett** — wie sie bei Abnehm- und Muskelaufbau-Zielen typischerweise empfohlen wird. Die allgemeine **DGE-Referenz** für Erwachsene liegt bei 10–20 % Protein, 50–55 % Kohlenhydrate und etwa 30 % Fett; für reine Erhaltungsernährung ohne sportliches Ziel ist die niedrigere Protein-Quote der DGE ausreichend. Proteine sind besonders wichtig beim Abnehmen, da sie die Muskelmasse erhalten und den Sättigungseffekt erhöhen. Kohlenhydrate liefern die Hauptenergie für Gehirn und Muskeln. Gesunde Fette sind essenziell für die Hormonproduktion und die Aufnahme fettlöslicher Vitamine.
 
 Für eine individuelle Anpassung der Makronährstoffverteilung — etwa bei einer ketogenen Diät oder bei Leistungssport — empfehlen wir die Rücksprache mit einem Ernährungsberater. Auch der [BMI-Rechner](/gesundheit/bmi-rechner) kann Ihnen helfen, Ihren aktuellen Körperstatus besser einzuordnen. Für eine ganzheitliche Betrachtung Ihrer Gesundheit werfen Sie auch einen Blick auf unseren [Schlafrechner](/gesundheit/schlaf-rechner), denn ausreichender Schlaf spielt eine entscheidende Rolle beim Stoffwechsel und der Gewichtsregulation.`,
+    // contentBloecke (W19): „Bedarf-verstehen-Leitformat" — bewusst nüchtern bei
+    // sensiblem Thema (Disordered-Eating-Prävention): KEINE Defizit-/Diät-Anleitung,
+    // Fokus auf Energiebedarf verstehen. Prägend: vergleich (Grund- vs. Gesamtumsatz)
+    // + PAL-Tabelle, kein Diagramm. Formel gespiegelt aus kalorien.ts (Mifflin-St Jeor).
+    // Grundumsatz-Klammer (zielKalorien >= grundumsatz) als Schutzlogik positiv erklärt.
+    // Quelle: Mifflin-St Jeor 1990 (PubMed), DGE-Referenzwerte. Stand 06/2026.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was Grundumsatz und Kalorienbedarf bedeuten',
+        html: `<p>Der <strong>Grundumsatz</strong> (englisch BMR, Basal Metabolic Rate) ist die Energiemenge, die der Körper in völliger Ruhe verbraucht — also nur, um am Leben zu bleiben. Damit sind Atmung, Herzschlag, Körpertemperatur, die Arbeit der Organe und der gesamte Stoffwechsel gemeint. Auch wer einen ganzen Tag im Bett verbringt, verbraucht diese Energie. Der Grundumsatz macht mit rund <strong>60–75 %</strong> den größten Teil des täglichen Energiebedarfs aus (DGE).</p><p>Der gesamte Tagesbedarf — der <strong>Gesamtumsatz</strong> — ergibt sich, wenn man zum Grundumsatz die Energie für Alltag und Bewegung addiert: Aufstehen, Arbeiten, Gehen, Sport, sogar Verdauung. Wie groß dieser Aufschlag ist, hängt vom Aktivitätsniveau ab und wird über einen Faktor abgebildet (mehr dazu weiter unten).</p><p>Gemessen wird Energie in <strong>Kilokalorien</strong> (kcal) oder Kilojoule (kJ); 1 kcal entspricht rund 4,18 kJ. Der Körper gewinnt diese Energie aus den drei Hauptnährstoffen: Kohlenhydrate und Eiweiß liefern je etwa 4 kcal pro Gramm, Fett rund 9 kcal. Ein kleiner Teil des Tagesumsatzes — die sogenannte <strong>nahrungsinduzierte Thermogenese</strong> — entfällt sogar auf die Verdauung selbst, also auf die Energie, die der Körper aufwendet, um Nahrung zu verarbeiten. All diese Komponenten zusammen ergeben den täglichen Energiebedarf, den der Rechner schätzt.</p><p>Wichtig ist, dass der Kalorienbedarf <strong>individuell</strong> ist und sich im Lauf des Lebens verändert. Körpergröße, Gewicht, Geschlecht, Alter und vor allem der Anteil an Muskelmasse beeinflussen ihn deutlich. Ein Rechner liefert deshalb keine exakte Zahl, sondern eine gut begründete Schätzung — eine Orientierung, um den eigenen Energiehaushalt besser zu verstehen, nicht eine feste Vorgabe, an die man sich strikt halten müsste.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Grundumsatz nach Mifflin-St Jeor',
+        schritte: [
+          { label: 'Beispielperson: Mann, 35 Jahre, 175 cm, 75 kg', formel: '(10 × kg) + (6,25 × cm) − (5 × Alter) + 5', ergebnis: 'Formel (Mann)' },
+          { label: 'Werte einsetzen', formel: '(10 × 75) + (6,25 × 175) − (5 × 35) + 5', ergebnis: '750 + 1.094 − 175 + 5' },
+          { label: 'Grundumsatz (BMR)', formel: '750 + 1.094 − 175 + 5', ergebnis: '≈ 1.674 kcal/Tag' },
+        ],
+        fazit: 'Der Grundumsatz dieser Beispielperson liegt bei rund 1.674 kcal pro Tag — so viel Energie verbraucht der Körper allein im Ruhezustand. Für Frauen endet die Formel mit −161 statt +5, da sie im Mittel einen etwas niedrigeren Grundumsatz haben. Der tatsächliche Tagesbedarf liegt höher, weil Alltag und Bewegung hinzukommen. Bei einem mäßig aktiven Alltag (Faktor 1,55) käme die Beispielperson auf einen Gesamtbedarf von rund 2.594 kcal. Die Formel verlangt nur Geschlecht, Alter, Größe und Gewicht — keine Angaben, die über den eigenen Körper hinausgehen.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Grundumsatz vs. Gesamtumsatz',
+        spalteA: 'Grundumsatz (BMR)',
+        spalteB: 'Gesamtumsatz (TDEE)',
+        zeilen: [
+          { kriterium: 'Was es ist', a: 'Energie in völliger Ruhe', b: 'Grundumsatz plus Alltag und Bewegung' },
+          { kriterium: 'Deckt ab', a: 'Atmung, Herzschlag, Organe, Stoffwechsel', b: 'zusätzlich Arbeit, Sport, jede Bewegung' },
+          { kriterium: 'Anteil am Tagesbedarf', a: 'rund 60–75 %', b: '100 % (der volle Bedarf)' },
+          { kriterium: 'Berechnung', a: 'Mifflin-St-Jeor-Formel', b: 'Grundumsatz × Aktivitätsfaktor (PAL)' },
+          { kriterium: 'Bedeutung', a: 'absolute Untergrenze der Energiezufuhr', b: 'realistischer Tagesbedarf' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Der Aktivitätsfaktor (PAL)',
+        html: `<p>Um vom Grundumsatz auf den tatsächlichen Tagesbedarf zu kommen, wird er mit dem <strong>Aktivitätsfaktor</strong> multipliziert — dem PAL-Wert (Physical Activity Level). Er bildet ab, wie viel Energie über die reine Ruheenergie hinaus für Bewegung verbraucht wird. Ein überwiegend sitzender Tag liegt bei einem Faktor um 1,2, ein körperlich sehr aktiver Alltag bei 1,7 oder mehr. Die Spanne ist also erheblich: Dieselbe Person kann je nach Aktivität mehrere Hundert Kalorien Unterschied im Tagesbedarf haben.</p><p>Der PAL-Wert fasst dabei den <strong>ganzen Tag</strong> zusammen, nicht nur das Training. Ein Bürojob mit dreimal Sport pro Woche ergibt im Mittel einen anderen Faktor als ein Job auf dem Bau. Genau hier liegt aber auch die größte Unsicherheit: Die Selbsteinschätzung der eigenen Aktivität fällt vielen Menschen schwer und tendiert oft nach oben. Wer unsicher ist, wählt im Zweifel die niedrigere Stufe — und beobachtet über mehrere Wochen, ob die Schätzung zum eigenen Alltag passt. Die folgende Tabelle ordnet die gängigen Stufen ein.</p><p>Ein häufiger Denkfehler ist, einzelne Sporteinheiten zu hoch zu gewichten: Drei Stunden Training pro Woche fühlen sich nach viel an, machen über den ganzen Tag und die ganze Woche gerechnet aber einen kleineren Unterschied als ein durchgehend aktiver Alltag mit viel Gehen, Stehen und Treppensteigen. Auch die unbewusste Alltagsbewegung — vom Zappeln bis zum Einkaufen zu Fuß — summiert sich. Wer einen Schreibtischjob hat und ansonsten wenig in Bewegung ist, liegt realistisch eher bei 1,2 bis 1,375, selbst mit gelegentlichem Sport. Diese ehrliche Einordnung schützt davor, den Bedarf zu überschätzen.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'PAL-Faktoren nach Aktivität',
+        kopf: ['Stufe', 'Beschreibung', 'Faktor'],
+        zeilen: [
+          ['Sitzend', 'überwiegend sitzend, kaum Bewegung, kein Sport', '1,2'],
+          ['Leicht aktiv', 'sitzend mit etwas Bewegung oder 1–3× Sport/Woche', '1,375'],
+          ['Mäßig aktiv', 'stehende Tätigkeit oder 3–5× Sport/Woche', '1,55'],
+          ['Sehr aktiv', 'körperliche Arbeit oder 6–7× Sport/Woche', '1,725'],
+          ['Extrem aktiv', 'schwere körperliche Arbeit plus tägliches Training', '1,9'],
+        ],
+        fussnote: 'Schätzwerte. Die tatsächliche Aktivität schwankt von Tag zu Tag, und die Einordnung ist subjektiv — eine Abweichung von ±10–15 % ist normal.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum es nur Schätzwerte sind',
+        html: `<p>Alle Bedarfsformeln — auch die im Rechner verwendete Mifflin-St-Jeor-Formel, die als genaueste Schätzformel für gesunde Erwachsene gilt — beruhen auf <strong>Bevölkerungsdurchschnitten</strong>. Sie treffen für die Mehrheit gut zu, können im Einzelfall aber spürbar daneben liegen. Realistisch ist eine individuelle Abweichung von <strong>±10–15 %</strong>; bei 2.000 kcal sind das schon 200–300 kcal in jede Richtung.</p><p>Die Gründe liegen in Faktoren, die eine einfache Formel nicht erfassen kann: der <strong>Anteil an Muskelmasse</strong> (Muskeln verbrauchen mehr Energie als Fettgewebe, auch in Ruhe), die Schilddrüsen- und Hormonlage, Medikamente, das Alter und sogar die Außentemperatur. Eine wirklich exakte Messung wäre nur im Labor über die sogenannte Kalorimetrie möglich — für den Alltag ist das weder nötig noch praktikabel.</p><p>Deshalb sollte man die ausgegebene Zahl als das nehmen, was sie ist: ein gut begründeter <strong>Ausgangspunkt</strong>. Sie hilft, ein Gefühl für die eigene Größenordnung zu bekommen — nicht mehr und nicht weniger. Wer den Wert über Wochen mit dem eigenen Befinden abgleicht, bekommt ein verlässlicheres Bild als jede Formel allein liefern kann.</p><p>Auch das Körpergewicht selbst schwankt im Tagesverlauf um ein bis zwei Kilogramm — durch Flüssigkeit, Mahlzeiten und den Füllstand des Verdauungstrakts. Diese Schwankungen sagen nichts über den Energiehaushalt aus und sollten nicht überbewertet werden. Wer Entwicklungen beobachten möchte, achtet besser auf längere Zeiträume und das allgemeine Wohlbefinden als auf einzelne Tageswerte. Genau wie der berechnete Kalorienbedarf ist auch die Waage nur eines von mehreren Signalen — und keines davon erzählt für sich allein die ganze Geschichte.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Gesunder Umgang mit dem Kalorienbedarf',
+        html: `<p>Der Kalorienbedarf ist eine <strong>Orientierungsgröße, kein strenges Limit</strong>. Es geht darum, den eigenen Energiehaushalt zu verstehen — nicht darum, Zahlen möglichst klein zu halten. Ein gesundes Verhältnis zum Essen bedeutet, dem Körper ausreichend und ausgewogen Energie zu geben, auf Hunger- und Sättigungssignale zu achten und Ernährung nicht auf eine einzige Zahl zu reduzieren.</p><p>Besonders wichtig: Die tägliche Energiezufuhr sollte <strong>dauerhaft nicht unter den Grundumsatz</strong> fallen. Der Körper braucht diese Energie für seine Grundfunktionen; eine anhaltende Unterschreitung kann dem Stoffwechsel, der Muskelmasse und dem Wohlbefinden schaden. Genau deshalb geht dieser Rechner bewusst nie unter den Grundumsatz hinunter — eine eingebaute Schutzgrenze.</p><p>Wer seine Ernährung verändern möchte — ob zum Zu- oder Abnehmen — fährt am besten mit fachlicher Begleitung: Ärztin, Arzt oder eine qualifizierte Ernährungsberatung können individuell und sicher unterstützen. Veränderungen dürfen langsam und nachhaltig sein. Wenn das Thema Essen belastend wird oder das Zählen von Kalorien Druck erzeugt, ist das ein Signal, sich Unterstützung zu holen — das ist ein Zeichen von Fürsorge sich selbst gegenüber, nicht von Schwäche.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Den eigenen Bedarf realistisch einschätzen',
+        punkte: [
+          'Grundumsatz und Gesamtumsatz unterscheiden — der Grundumsatz ist die Ruheenergie, der Gesamtumsatz der volle Tagesbedarf.',
+          'Das eigene Aktivitätsniveau ehrlich einschätzen und im Zweifel die niedrigere Stufe wählen.',
+          'Den ausgegebenen Wert als Schätzung verstehen (±10–15 % sind normal), nicht als exakte Vorgabe.',
+          'Veränderungen der Ernährung langsam und nachhaltig angehen, nicht über Nacht und nicht mit Druck.',
+          'Auf Körpersignale wie Hunger, Sättigung, Energie, Konzentration und Schlaf achten — sie sagen oft mehr als jede Zahl.',
+          'Die Energiezufuhr dauerhaft nicht unter den Grundumsatz fallen lassen.',
+          'Bei Unsicherheit oder belastendem Essverhalten ärztlichen oder ernährungsfachlichen Rat suchen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Orientierung, kein medizinischer Rat',
+        text: 'Die berechneten Werte sind Schätzungen auf Basis von Durchschnittsformeln und ersetzen keine ärztliche oder ernährungsfachliche Beratung. Bei gesundheitlichen Fragen, geplanten Ernährungsumstellungen oder einem belastenden Verhältnis zum Essen sollten Sie ärztlichen Rat suchen. Eine tägliche Energiezufuhr dauerhaft unter dem Grundumsatz ist nicht empfehlenswert — der Körper braucht diese Energie für seine Grundfunktionen.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Der Grundumsatz ist die Untergrenze',
+        text: 'Dieser Rechner geht bewusst nie unter den Grundumsatz: Selbst wenn rechnerisch ein niedrigerer Wert herauskäme, wird er auf den Grundumsatz angehoben. Diese Energie braucht der Körper für Atmung, Herzschlag und Stoffwechsel — sie ist keine Stellschraube, an der man sparen sollte.',
+      },
+      {
+        typ: 'text',
+        titel: 'Grundumsatz im Alltag',
+        html: `<p>Der Energiebedarf ist nichts Festes: Er verändert sich mit der <strong>Lebensphase</strong> und dem <strong>Aktivitätsniveau</strong>. Mit zunehmendem Alter sinkt der Grundumsatz tendenziell leicht, vor allem wenn die Muskelmasse abnimmt; mehr Bewegung und Krafttraining wirken dem entgegen. Auch Gewichtsveränderungen, eine neue Arbeitssituation oder die Jahreszeit können den Bedarf verschieben. Es lohnt sich deshalb, die eigene Schätzung von Zeit zu Zeit neu vorzunehmen, statt sich dauerhaft an einer einmal berechneten Zahl festzuhalten. Entscheidend bleibt das Gesamtbild aus Energie, Bewegung, Schlaf und Wohlbefinden — die Kalorienzahl ist davon nur ein Baustein.</p><p>So genutzt, ist der Rechner ein hilfreiches Werkzeug: Er macht greifbar, wie viel Energie der Körper ungefähr braucht, und schafft ein Bewusstsein für die eigene Größenordnung. Er ersetzt aber weder das Gespür für den eigenen Körper noch eine fachliche Begleitung, wenn es um gezielte Veränderungen geht. Am meisten bringt er, wenn man ihn locker als Orientierung versteht und nicht als Vorschrift, die täglich punktgenau erfüllt werden müsste.</p>`,
+      },
+    ],
     faq: [
       {
         frage: 'Wie berechne ich meinen täglichen Kalorienbedarf?',
