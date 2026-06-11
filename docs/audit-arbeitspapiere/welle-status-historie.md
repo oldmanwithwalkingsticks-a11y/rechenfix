@@ -8,6 +8,40 @@
 
 ---
 
+## 11.06.2026 — W19 elterngeld-rechner: eigene contentBloecke (Varianten-Leitformat)
+
+- **Was gebaut:** elterngeld-rechner (finanzen.ts) hat jetzt 11 eigene
+  `contentBloecke` im eigenständigen **„Varianten- & Entscheidungs-Leitformat"**
+  (dominant vergleich + beispielrechnung + tabelle: Basis vs. Plus vs. Bonus).
+  ~1.504 W (Self-Check `check-contentbloecke-wortzahl.mjs --min 1500` → OK).
+  Werte gespiegelt aus `lib/berechnungen/elterngeld.ts`: Einkommensgrenze
+  175.000 € (§ 1 Abs. 8 BEEG), Vor-Geburt-Deckel 2.770 € (§ 2 Abs. 3 BEEG),
+  Ersatzrate 65–100 % mit 67-%-Plateau (1.000–1.240 € Netto), Min/Max
+  300–1.800 € (Basis) / 150–900 € (Plus), Stand 06/2026.
+- **Befund-Korrektur zur Prompt-Prämisse:** Der Eintrag trug **keinen**
+  kopierten Stundenlohn-Content. Er hatte schlicht **gar keine `contentBloecke`**
+  und renderte die (korrekte) `erklaerung` als Fallback — live war also nie
+  falscher Inhalt sichtbar. Der „Stundenlohn"-Verdacht stammt aus einem
+  **Attributionsfehler im Self-Check**: `findeBlockQuelle` in
+  `scripts/check-contentbloecke-wortzahl.mjs` sucht das erste `contentBloecke:`
+  NACH dem Slug ohne obere Grenze am nächsten `slug:`. Für einen Eintrag ohne
+  eigene Bausteine greift es den Block des NÄCHSTEN Eintrags (hier: stundenlohn,
+  ~1.580 W) und meldet fälschlich „OK".
+- **Self-Check-Bug → Folgen:** Mehrere Slugs ohne eigene `contentBloecke` zeigen
+  identische, geborgte Wortzahlen und falsche OK-Meldungen — verifiziert:
+  `arbeitslosengeld-rechner` + `buergergeld-rechner` (je ~1.580, geborgt von
+  stundenlohn), `prozentrechner` + `dreisatz-rechner` (je ~1.539, geborgt vom
+  nächsten alltag.ts-Block). Diese vier sind die echten **Migrations-Kandidaten**
+  (eigene contentBloecke fehlen), NICHT „falscher Content live". Empfehlung:
+  `findeBlockQuelle` an der nächsten `slug:`-Grenze kappen (separater Task).
+- **Unberührt:** erklaerung/faq des elterngeld-Eintrags (waren bereits korrekt),
+  Renderer/types/Design. `letzteAktualisierung` auf 2026-06-11 gebumpt.
+- **Verify:** tsc sauber für finanzen.ts (einzige Tree-Fehlermeldung
+  `FULL_CSS_HREF` in app/layout.tsx ist pre-existing). Build-Gate Vercel-grün;
+  Karsten verifiziert per Inkognito.
+
+---
+
 ## 11.06.2026 — W19 brutto-netto: Wasserfall Brutto→Netto (Weg C)
 
 - **Entscheidung:** brutto-netto rendert seinen Content über die handgebaute
