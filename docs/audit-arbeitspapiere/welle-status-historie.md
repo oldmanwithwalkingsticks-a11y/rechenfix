@@ -4,7 +4,26 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 26.05.2026
+**Stand:** 11.06.2026
+
+---
+
+## 11.06.2026 — Minijob-Lib-Bug behoben (round → ceil, § 8 SGB IV)
+
+- `lib/berechnungen/mindestlohn.ts` `getMinijobGrenzeMonat`:
+  `Math.round` → `Math.ceil`. § 8 Abs. 1a Satz 2 SGB IV verlangt
+  „auf volle Euro **aufgerundet**", nicht kaufmännisch gerundet.
+- Impact 2026 (Mindestlohn 13,90 €): 13,90 × 130/3 = 602,33 →
+  vorher fälschlich **602 €**, jetzt korrekt **603 €**.
+- Gegenprobe alle Jahre: 2024 → 538 €, 2025 → 556 € (round/ceil
+  identisch), 2026 → 603 €, 2027 → 633 €. JSDoc-Kommentar +
+  Header-Tabelle entsprechend korrigiert (2024-Zeile ergänzt).
+- Konsumenten (MinijobRechner, midijob-uebergang.ts, minijob.ts)
+  ziehen über den Helper — zeigen ab jetzt automatisch 603 €,
+  kein weiterer Code-Change nötig.
+- check-jahreswerte.mjs unberührt (kein 602/603-Eintrag).
+- Build-Gate: Vercel-grün (lokaler Windows-Build bricht wegen
+  useContext-Casing). Karsten verifiziert per Inkognito.
 
 ---
 
