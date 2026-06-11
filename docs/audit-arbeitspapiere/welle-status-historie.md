@@ -8,6 +8,32 @@
 
 ---
 
+## 11.06.2026 — W19 prozentrechner Goldstandard (Grundtypen-/Formel-Leitformat)
+
+- **Was gebaut:** prozentrechner (alltag.ts) hat jetzt eigene `contentBloecke`
+  im **„Grundtypen- & Formel-Leitformat"**, beispielrechnung-dominiert: je ein
+  Beispiel pro Rechenart (Prozentwert, Prozentsatz, Grundwert, Rabatt+MwSt),
+  dazu 2 tabellen (Prozent–Bruch–Dezimal + Faktor-Methode) und Texte zu
+  Grundgrößen, Auf-/Abschlag, Prozentpunkten, prozentualer Veränderung und
+  Bezugswert. ~1.502 W (Self-Check OK). Folge:
+  `text-bsp-bsp-bsp-tabelle-text-bsp-tabelle-text-text-text-checkliste-infobox-infobox`.
+- **Beispiele konsistent zu `lib/berechnungen/prozent.ts`:** 19 % von 250 €
+  = 47,50 €; 30 von 120 = 25 %; 45 = 15 % von 300; 80 € −20 % = 64 €, +19 %
+  = 76,16 €. Kein YMYL.
+- **Abgrenzung (L-W19.Struktur):** bewusst KEIN vergleich-Block und keine
+  vergleich-Dominanz (bleibt dreisatz vorbehalten), kein Diagramm. Folge sichtbar
+  distinkt von allen anderen. Der coarse Score zeigt 0,89 zu tagerechner — beide
+  beispielrechnung-dominiert; die Sequenzen sind aber klar verschieden (prozent
+  mit 2 eingestreuten tabellen + infobox-infobox-Ende vs. tagerechner 4×bsp +
+  5×text + Einzel-infobox). Artefakt akzeptiert wie im Prompt vorgesehen
+  („Liste zählt, Score-Artefakte ignorieren").
+- **Verify:** tsc sauber für alltag.ts (pre-existing `FULL_CSS_HREF` bleibt).
+  Build-Gate Vercel-grün. `letzteAktualisierung` 2026-06-11.
+- **Offen (Migrations-Kandidat):** dreisatz (bewusst anders: Proportionalitäts-/
+  Vergleich-Leitformat).
+
+---
+
 ## 11.06.2026 — W19 buergergeld-rechner Goldstandard (Regelbedarf+Reform-Leitformat)
 
 - **Was gebaut:** buergergeld-rechner (finanzen.ts) hat jetzt 10 eigene
