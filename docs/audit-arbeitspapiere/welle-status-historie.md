@@ -8,6 +8,28 @@
 
 ---
 
+## 11.06.2026 — kalorienrechner Sensibilitäts-Nachbesserung (Defizit-Anleitungen raus)
+
+- **Anlass:** Die Migration ließ konkrete Abnehm-/Defizit-Anleitungen im
+  **erklaerung-Fallback** und vor allem in der **FAQ** stehen (FAQ wird immer
+  gerendert + speist Schema.org FAQPage): „moderates Defizit von 500 kcal/Tag
+  = 0,5 kg/Woche", „für eine gesunde Gewichtsabnahme empfiehlt sich …". Bei
+  Disordered-Eating-Risiko unzulässig.
+- **Fix:** erklaerung-Abschnitt (Überschrift + Absatz) und 2 FAQ-Antworten
+  entschärft — alle konkreten Defizit-Zahlen und Defizit→Gewichtsverlust-
+  Kopplungen entfernt, Verweis auf ärztliche/ernährungsfachliche Begleitung
+  ergänzt. Der **warnende Schutzkontext bleibt** (nie unter Grundumsatz,
+  Sparmodus/Jo-Jo, Müdigkeit/Haarausfall/Hormonstörungen) — nur ohne Defizit-Zahl.
+- **Befund:** Die neuen `contentBloecke` (Migration) waren bereits clean — die
+  Problemstellen lagen im Bestand (erklaerung + FAQ), den die Migration nicht
+  angefasst hatte. Lehre: bei sensiblen Migrationen auch erklaerung + FAQ des
+  Bestands mit-auditieren, nicht nur die neu geschriebenen Bausteine.
+- **Verify:** Grep über den Eintrag → kein „500 kcal", keine Gewichtsverlust-
+  Kopplung mehr. Wortzahl unverändert 1.502 (contentBloecke nicht berührt). tsc
+  sauber. Struktur/PAL-Tabelle/BMR-Beispiel/Quellen unverändert. Vercel-grün.
+
+---
+
 ## 11.06.2026 — W19 kalorienrechner Goldstandard (sensibel, kein Defizit-Inhalt)
 
 - **Was gebaut:** kalorienrechner (gesundheit.ts) hat jetzt eigene `contentBloecke`
