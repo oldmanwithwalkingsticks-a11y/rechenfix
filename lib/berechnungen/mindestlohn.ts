@@ -26,14 +26,16 @@ export function getAktuellerMindestlohn(stichtag: Date = new Date()): number {
 }
 
 /**
- * Minijob-Monatsgrenze nach § 8 Abs. 1a SGB IV: Mindestlohn × 130 / 3,
- * kaufmännisch auf volle Euro gerundet.
+ * Minijob-Monatsgrenze nach § 8 Abs. 1a Satz 2 SGB IV: Mindestlohn × 130 / 3,
+ * auf volle Euro AUFGERUNDET (nicht kaufmännisch).
+ *   2024: 538 €
  *   2025: 556 €
  *   2026: 603 €
  *   2027: 633 €
  */
 export function getMinijobGrenzeMonat(stichtag: Date = new Date()): number {
-  return Math.round((getAktuellerMindestlohn(stichtag) * 130) / 3);
+  // § 8 Abs. 1a SGB IV: Mindestlohn × 130 / 3, auf volle Euro AUFGERUNDET (nicht kaufmännisch).
+  return Math.ceil((getAktuellerMindestlohn(stichtag) * 130) / 3);
 }
 
 export const MINDESTLOHN = getAktuellerMindestlohn();
