@@ -8,6 +8,38 @@
 
 ---
 
+## 11.06.2026 — Struktur-Fingerabdruck-Skript + arbeitslosengeld entzerrt
+
+- **Neues Skript `scripts/check-contentbloecke-struktur.mjs`:** listet die
+  Baustein-Folge (Fingerabdruck) jedes migrierten Rechners + groben gewichteten
+  Ähnlichkeits-Score (charakterisierende Bausteine wie vergleich/statistik/diagramm/
+  tabelle/beispielrechnung betont). **Score ist KEIN Gate** (zu unscharf) — die
+  Folgen-Liste ist die Entscheidungsgrundlage. Aufruf: `node scripts/check-contentbloecke-struktur.mjs [slug]`.
+- **Anlass:** elterngeld und arbeitslosengeld hatten fast identische Folgen
+  (Ähnlichkeit **0,87**) → Schablonen-Annäherung. Nach Umstellung **0,76**, keine
+  Paarung > 0,85 mehr.
+- **arbeitslosengeld umstrukturiert (Inhalt/Werte unverändert):** Folge von
+  `text-text-beispielrechnung-tabelle-…` auf
+  `text-tabelle-diagramm-beispielrechnung-text-text-beispielrechnung-infobox-text-checkliste-text-infobox`.
+  Bezugsdauer-**Tabelle nach vorne** (Pos 2, Kernelement), neues **balken-Diagramm**
+  der Bezugsdauer-Staffel (Pos 3, Werte konsistent zur Tabelle), Sperrzeit-Warnung
+  in den Fluss gezogen (nach 2. Beispielrechnung), Orientierungs-Tipp ans Ende.
+  Self-Check Wortzahl weiter OK (~1.565 W, Diagramm-Labels erhöhen leicht).
+- **Verify:** tsc sauber für finanzen.ts (pre-existing `FULL_CSS_HREF`-Fehler
+  bleibt). Build-Gate Vercel-grün.
+
+### L-W19.Struktur — Leitformat = eigene Anordnung, nicht nur eigener Inhalt
+
+Beim Planen eines neuen/zu migrierenden Rechners VOR dem Bau die Fingerabdruck-
+Übersicht (`check-contentbloecke-struktur.mjs`) ansehen. Die geplante Baustein-Folge
+muss sich **sichtbar von bestehenden unterscheiden** — eigenes Leitformat heißt
+eigene Anordnung UND eigene charakterisierende Bausteine, nicht dieselbe Folge neu
+befüllt. Der Score ist nur grober Hinweis (> 0,85 genauer ansehen); maßgeblich ist
+die Folgen-Liste. Anlass: elterngeld↔arbeitslosengeld 0,87 (Schablonen-Drift),
+nach Entzerrung 0,76.
+
+---
+
 ## 11.06.2026 — W19 arbeitslosengeld-rechner Goldstandard (Staffelungs-Leitformat)
 
 - **Was gebaut:** arbeitslosengeld-rechner (finanzen.ts) hat jetzt 11 eigene
