@@ -8,6 +8,38 @@
 
 ---
 
+## 12.06.2026 — W19 pizzateig-rechner Goldstandard + TRANCHE 5/5 KOMPLETT
+
+- **Was gebaut:** pizzateig-rechner (kochen.ts, erste kochen-Migration) hat jetzt
+  eigene `contentBloecke` im **„Rezept-Mechanik-Leitformat"**. Folge:
+  `text-beispielrechnung-text-tabelle-vergleich-text-text-checkliste-infobox-text-infobox`.
+  Prägend: Bäckerprozent-Beispiel + Hydration/Mehl-Tabelle + Stil-Vergleich
+  (neapolitanisch vs. New York), kein Diagramm. ~1.501 W (Self-Check OK), inkl. `quellen`.
+- **Werte gespiegelt aus `PizzateigRechner.tsx`** (Mehl = Gesamtteig ÷ Faktor):
+  4 × 270 g, 65 % Hydration, 24h → 644 g Mehl, 419 g Wasser, 16 g Salz,
+  1,3 g Frischhefe. Backkunde, kein YMYL.
+- **Bestand-Korrektur (Lehre kalorien angewandt):** Das `beispiel`-Feld trug
+  **veraltete Werte** (626 g Mehl / 407 g Wasser) — passten nicht mehr zur
+  aktuellen Component-Formel. Per node nachgerechnet und auf 644 g / 419 g
+  korrigiert. Außerdem Tippfehler „optinal" → „optional" in der erklaerung gefixt.
+- **quellen NEU** (AVPN-Disciplinare + Bäckerprozent-Methode; Apostroph in
+  „Bakers Percentage" bewusst weggelassen). Kein Autorenblock, kein Affiliate.
+- **Struktur:** Score 1,00 zu kalorien — reines Komposition-Artefakt (Folgen
+  sichtbar verschieden: Reihenfolge tabelle/vergleich + Tail unterschiedlich,
+  Themen völlig verschieden). Folge NICHT identisch → konform.
+- **Verify:** Wortzahl 1.501, tsc sauber für kochen.ts (pre-existing
+  `FULL_CSS_HREF`), Vercel-grün. `letzteAktualisierung` 2026-06-12.
+
+**TRANCHE 5/5 KOMPLETT:** kredit · stromkosten · kalorien · arbeitszeit · pizzateig
+migriert (+ kalorien-Sensibilitäts- und arbeitszeit-ArbSchG-Nachbesserung). Damit
+sind die contentBloecke-Goldstandard-Rechner auf 17 angewachsen (mwst, zins,
+stundenlohn, bmi, tage, spritkosten, elterngeld, arbeitslosengeld, buergergeld,
+prozent, dreisatz, kredit, stromkosten, kalorien, arbeitszeit, pizzateig — plus
+brutto-netto via Standalone-Component). Erste Migration je Kategorie: Finanzen,
+Alltag, Wohnen, Gesundheit, Arbeit, Kochen abgedeckt.
+
+---
+
 ## 12.06.2026 — W19 arbeitszeitrechner Goldstandard (erste arbeit-Migration)
 
 - **Was gebaut:** arbeitszeitrechner (arbeit.ts) hat jetzt eigene `contentBloecke`
