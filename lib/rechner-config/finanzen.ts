@@ -1694,7 +1694,7 @@ Der Arbeitnehmer-Pauschbetrag von 1.230 Euro wird automatisch von Ihrem zu verst
   },
   {
     slug: 'kreditrechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-11',
     titel: 'Kreditrechner',
     beschreibung: 'Kreditrate, Gesamtkosten und Tilgungsplan berechnen — für Ratenkredite, Autokredite und Konsumkredite.',
     kategorie: 'Finanzen',
@@ -1751,6 +1751,107 @@ Beim Vergleich von Kreditangeboten sollten Sie auf folgende Punkte achten:
 Nutzen Sie unseren Kreditrechner, um verschiedene Szenarien durchzuspielen — mit unterschiedlichen Laufzeiten, Zinssätzen und Sondertilgungen. So finden Sie die optimale Kombination für Ihre Situation.
 
 Ergänzend können Sie mit dem **Zinsrechner** die Kraft des Zinseszins für Ihre Sparanlagen berechnen und mit dem **Sparrechner** langfristige Sparpläne simulieren. Der **Inflationsrechner** zeigt Ihnen, wie die Inflation den realen Wert Ihres Geldes über die Zeit verändert.`,
+    // contentBloecke (W19): eigenständiges „Kosten-Mechanik-Leitformat" — prägend
+    // statistik (Zinsniveau 2026) + ZWEI Tabellen (Tilgungsplan-Auszug + Bonität-
+    // Zinsspanne), kein vergleich, kein Diagramm. Beispielwerte aus
+    // berechneKredit(20.000 €, 6 % Sollzins, 72 Monate): Rate 331,46 €, Gesamtzins
+    // 3.864,96 €, Effektiv 6,17 %; Bonität-Raten (5/7/10 % Soll) ebenfalls aus der Lib.
+    // YMYL-Finanz: keine Kreditberatung/Empfehlung, Zinswerte als Spanne mit Stichtag.
+    // Rechtsstand: PAngV §§ 6/6a, CCD II ab 20.11.2026, Stand 06/2026.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Wie ein Ratenkredit funktioniert',
+        html: `<p>Ein Ratenkredit (auch Konsumenten- oder Annuitätenkredit) wird in <strong>gleichbleibenden Monatsraten</strong> zurückgezahlt. Jede Rate besteht aus zwei Teilen: einem <strong>Zinsanteil</strong> und einem <strong>Tilgungsanteil</strong>. Der Zins wird immer auf die noch offene Restschuld berechnet — und weil diese Restschuld mit jeder Rate kleiner wird, sinkt der Zinsanteil von Monat zu Monat. Da die Gesamtrate aber konstant bleibt, steigt im Gegenzug der Tilgungsanteil. Man spricht deshalb von einer <strong>Annuität</strong>: gleiche Rate außen, sich verschiebende Zusammensetzung innen.</p><p>Am Anfang der Laufzeit ist die Rate also zinslastig, gegen Ende fast reine Tilgung. Dieses Prinzip erklärt zwei wichtige Effekte: Erstens baut man zu Beginn die Schuld nur langsam ab. Zweitens lohnt sich eine vorzeitige Rückzahlung in den ersten Jahren besonders, weil dann noch viel Zins auf einer hohen Restschuld läuft.</p><p>Drei Größen bestimmen die Rate: die <strong>Kreditsumme</strong>, der <strong>Zinssatz</strong> und die <strong>Laufzeit</strong>. Verändert man eine davon, ändern sich Rate und Gesamtkosten. Eine längere Laufzeit senkt die Monatsrate, erhöht aber die gesamten Zinskosten — ein Zielkonflikt, den der Rechner sichtbar macht. Genau dafür ist er gedacht: verschiedene Kombinationen aus Summe, Zins und Laufzeit durchspielen und die Auswirkungen auf Rate und Gesamtkosten vergleichen.</p><p>Der klassische Ratenkredit ist ein <strong>unbesicherter</strong> Kredit zur freien Verwendung: Anders als bei einer Immobilienfinanzierung dient keine Sicherheit wie ein Grundstück als Pfand, weshalb die Zinsen höher liegen als beim Baukredit. Einen <strong>zweckgebundenen</strong> Kredit (etwa einen Autokredit) gibt es oft günstiger, weil das finanzierte Objekt als Sicherheit dient. Verbraucherkredite unterliegen besonderen Schutzregeln der §§ 491 ff. BGB — dazu gehören ein vorvertragliches Informationsblatt nach europäischem Standard, ein <strong>14-tägiges Widerrufsrecht</strong> und das Recht auf jederzeitige vorzeitige Rückzahlung. Diese Regeln gelten unabhängig davon, bei welcher Bank der Kredit abgeschlossen wird.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Kreditzinsen 2026 im Überblick',
+        werte: [
+          { label: 'Marktdurchschnitt Ratenkredit', wert: '~6–8,5 %', hinweis: 'Effektivzins p.a. (Bundesbank-Neugeschäft)' },
+          { label: 'Bonitätsspanne', wert: '3,9–9,9 %', hinweis: 'Top-Bonität bis schwache Bonität' },
+          { label: 'EZB-Leitzins', wert: '2,0–2,15 %', hinweis: 'Stand 2026, beeinflusst das Zinsniveau' },
+          { label: 'Faustregel Rate', wert: '≤ 35 %', hinweis: 'des verfügbaren Nettoeinkommens (nur Orientierung)' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Rate und Gesamtkosten bei 20.000 €',
+        schritte: [
+          { label: 'Kreditsumme 20.000 €, Sollzins 6 % p.a., Laufzeit 72 Monate', formel: 'Monatszins = 6 % ÷ 12', ergebnis: '0,5 % pro Monat' },
+          { label: 'Annuität (Monatsrate) nach der Annuitätenformel', formel: '20.000 € × 0,005 × 1,005^72 ÷ (1,005^72 − 1)', ergebnis: '331,46 €' },
+          { label: 'Gesamtkosten über die Laufzeit', formel: '331,46 € × 72', ergebnis: '23.864,96 €' },
+          { label: 'Gesamtzins (Kosten des Kredits)', formel: '23.864,96 € − 20.000 €', ergebnis: '3.864,96 €' },
+        ],
+        fazit: 'Die Monatsrate beträgt 331,46 €, über sechs Jahre fallen rund 3.865 € Zinsen an. Der Sollzins von 6 % entspricht hier einem Effektivzins von 6,17 % (durch die monatliche Verzinsung). Belastbar vergleichbar ist immer nur der Effektivzins — warum, erklärt der übernächste Abschnitt. Zur Einordnung: Bei gleicher Summe und Laufzeit, aber 5 % statt 6 % Sollzins läge die Rate bei rund 322 € und der Gesamtzins bei nur etwa 3.190 € — schon ein Prozentpunkt weniger spart hier über 670 €.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'So entwickelt sich der Tilgungsplan',
+        kopf: ['Zeitpunkt', 'Zinsanteil / Monat', 'Tilgungsanteil / Monat', 'Restschuld'],
+        zeilen: [
+          ['Monat 1', '100,00 €', '231,46 €', '19.768,54 €'],
+          ['Monat 12', '86,95 €', '244,51 €', '17.144,84 €'],
+          ['Monat 24', '71,87 €', '259,59 €', '14.113,58 €'],
+          ['Monat 36', '55,85 €', '275,60 €', '10.895,35 €'],
+          ['Monat 48', '38,86 €', '292,60 €', '7.478,64 €'],
+          ['Monat 60', '20,81 €', '310,65 €', '3.851,19 €'],
+          ['Monat 72', '1,65 €', '329,81 €', '0,00 €'],
+        ],
+        fussnote: 'Beispiel 20.000 € / 6 % Sollzins / 72 Monate, Monatsrate konstant 331,46 €. Gut sichtbar: Am Anfang ist die Rate zinslastig, am Ende fast reine Tilgung.',
+      },
+      {
+        typ: 'text',
+        titel: 'Sollzins, Effektivzins und der Zweidrittelzins',
+        html: `<p>Beim Vergleich von Krediten führt kein Weg am Unterschied zwischen Sollzins und Effektivzins vorbei. Der <strong>Sollzins</strong> (auch Nominalzins) ist der reine Zins auf die Kreditsumme. Der <strong>Effektivzins</strong> rechnet zusätzlich alle preisbestimmenden Nebenkosten ein — etwa die Art der Verzinsung und Auszahlung — und ist nach <strong>§ 6 PAngV</strong> die gesetzlich vorgeschriebene Vergleichsgröße. Nur der Effektivzins ist belastbar; vergleichen Sie deshalb immer <strong>Effektiv gegen Effektiv</strong>, nie Sollzins gegen Effektivzins.</p><p>Vorsicht bei beworbenen „ab"-Zinsen: Das sind Tiefstzinsen, die nur Kunden mit Top-Bonität erhalten (oft nur 1–10 % der Antragsteller). Aussagekräftiger ist der <strong>Zweidrittelzins</strong> nach <strong>§ 6a PAngV</strong> — der repräsentative Effektivzins, den mindestens zwei Drittel der Kunden tatsächlich bekommen. Seriöse Anbieter müssen ihn neben dem „ab"-Zins angeben. Wer Angebote vergleicht, sollte deshalb auf den Zweidrittelzins schauen, nicht auf die Lockzahl in der Werbung.</p><p>Ein weiterer Posten, der den effektiven Preis treibt, ist die häufig mitangebotene <strong>Restschuldversicherung</strong> (RSV). Sie soll die Raten bei Arbeitslosigkeit, Krankheit oder Tod absichern, ist aber oft teuer und nicht verpflichtend. Wird ihre Prämie in die Kreditsumme eingerechnet, verteuert das den realen Kreditpreis spürbar — und seit der Rechtsprechung muss sie unter bestimmten Voraussetzungen in den Effektivzins einfließen. Prüfen Sie ein RSV-Angebot deshalb getrennt vom Kredit und rechnen Sie aus, ob der Schutz seinen Preis wert ist. Im Zweifel hilft ein Vergleich des Effektivzinses mit und ohne Versicherung, ergänzt um die Frage, ob bestehende Versicherungen (etwa eine Berufsunfähigkeits- oder Risikolebensversicherung) das gleiche Risiko nicht ohnehin schon abdecken.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Bonität und Schufa: was den Zins bestimmt',
+        html: `<p>Welchen Zins eine Bank anbietet, hängt vor allem von der <strong>Bonität</strong> ab — also der Einschätzung, wie wahrscheinlich der Kredit zuverlässig zurückgezahlt wird. In sie fließen der Schufa-Score, das regelmäßige Einkommen, die Beschäftigungssituation und bereits bestehende Verpflichtungen ein. Vereinfacht gilt: gute Bonität führt zu Zinsen um die 5 %, schwächere Bonität zu 9 % und mehr. Deshalb ist der individuelle Zins erst nach einer Prüfung bekannt — pauschale Angaben sind immer nur Orientierung.</p><p>Wichtig ist der Unterschied zwischen zwei Anfragearten: Eine <strong>Konditionsanfrage</strong> („Anfrage Kreditkonditionen") ist <strong>Schufa-neutral</strong> — sie taucht nur für Sie selbst auf, beeinflusst den Score nicht und wird nach zwölf Monaten gelöscht. So lassen sich mehrere Angebote gefahrlos einholen. Eine echte <strong>Kreditanfrage</strong> dagegen wird vermerkt und kann den Score kurzfristig beeinflussen. Vergleichen Sie deshalb zuerst über Konditionsanfragen und stellen Sie die verbindliche Kreditanfrage erst beim ausgewählten Angebot.</p><p>Den eigenen Schufa-Score kann man einmal jährlich kostenlos einsehen (Datenkopie nach Art. 15 DSGVO) und vorab prüfen. Häufige Gründe für einen schwächeren Score sind alte, nicht gelöschte Einträge, viele parallel laufende Verträge oder ungenutzte, aber offene Kreditkarten- und Dispolinien. Wer vor einem geplanten Kredit aufräumt — etwa nicht benötigte Konten schließt und offene Forderungen begleicht —, verbessert oft die Ausgangslage. Auch ein zweiter Kreditnehmer mit gutem Einkommen kann die Kondition verbessern. All das ändert nichts an der Grundregel: Der konkrete Zins steht erst nach dem individuellen Angebot der Bank fest, und nur dieses ist verbindlich.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Zinsspanne nach Bonität',
+        kopf: ['Bonität', 'typischer Effektivzins', 'Monatsrate (20.000 €, 72 Mon.)', 'Gesamtzins'],
+        zeilen: [
+          ['gute Bonität', 'rund 5 %', '322 €', '~3.190 €'],
+          ['mittlere Bonität', 'rund 7 %', '341 €', '~4.550 €'],
+          ['schwächere Bonität', '10 % und mehr', '371 €', '~6.680 €'],
+        ],
+        fussnote: 'Beispielwerte für 20.000 € über 72 Monate, gerechnet mit dem Kreditrechner — der reale Zins ist individuell. Schon der Unterschied zwischen guter und schwacher Bonität verdoppelt hier die Zinskosten.',
+      },
+      {
+        typ: 'text',
+        titel: 'Sondertilgung: schneller schuldenfrei',
+        html: `<p>Eine <strong>Sondertilgung</strong> ist eine zusätzliche Zahlung über die reguläre Rate hinaus. Sie wirkt direkt auf die Restschuld — und weil der Zins immer nur auf die verbleibende Restschuld läuft, senkt jede Sondertilgung sowohl die <strong>Restlaufzeit</strong> als auch den <strong>Gesamtzins</strong>. Je früher in der Laufzeit sie erfolgt, desto größer der Effekt, weil dann noch viel Zins auf einer hohen Restschuld liegt.</p><p>Bei Verbraucherkrediten ist die vorzeitige Rückzahlung gesetzlich abgesichert: Kreditnehmer dürfen ihren Kredit jederzeit ganz oder teilweise ablösen. Die Bank darf dafür eine <strong>Vorfälligkeitsentschädigung</strong> verlangen, die jedoch gesetzlich gedeckelt ist (höchstens 1 % der vorzeitig zurückgezahlten Summe, bei Restlaufzeit unter einem Jahr 0,5 %). Viele Ratenkredite erlauben Sondertilgungen sogar kostenlos. Der Kreditrechner zeigt über das Feld „Sondertilgung", wie sich eine monatliche Zusatzzahlung auf Laufzeit und Zinsersparnis auswirkt.</p><p>Ein Rechenbeispiel verdeutlicht den Hebel: Wer beim 20.000-€-Kredit zusätzlich zur Rate monatlich 100 € sondertilgt, ist deutlich früher schuldenfrei und spart spürbar Zinsen, weil die Restschuld schneller sinkt. Wichtig ist nur, die Sondertilgung nicht mit der eigenen Liquidität zu überdehnen — ein Notgroschen sollte erhalten bleiben. Als Faustregel gilt: erst eine kleine Rücklage aufbauen, dann mit dem freien Betrag sondertilgen. Wer unregelmäßig Geld übrig hat (etwa aus Bonus oder Steuererstattung), kann auch jährliche Einmal-Sondertilgungen nutzen, sofern der Vertrag sie zulässt.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Vor dem Kreditabschluss prüfen',
+        punkte: [
+          'Effektivzins vergleichen — nie den Sollzins, und immer Effektiv gegen Effektiv.',
+          '35-%-Faustregel im Blick behalten: Rate möglichst unter 35 % des verfügbaren Nettoeinkommens.',
+          'Laufzeit nicht unnötig lang wählen — niedrige Rate bedeutet höhere Gesamtkosten.',
+          'Auf kostenlose Sondertilgung und vorzeitige Ablösung achten.',
+          'Restschuldversicherung kritisch prüfen: oft teuer und nicht verpflichtend.',
+          'Erst über Schufa-neutrale Konditionsanfragen vergleichen, dann verbindlich anfragen.',
+          'Gesamtkosten betrachten, nicht nur die Monatsrate.',
+          '14-tägiges Widerrufsrecht kennen: Ein Verbraucherkredit kann nach Abschluss ohne Angabe von Gründen widerrufen werden.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Lange Laufzeit kostet mehr',
+        text: 'Eine niedrige Monatsrate ist verlockend, aber sie erkauft man sich mit deutlich höheren Zinskosten. Beispiel 20.000 € bei 6 % Sollzins: Über 36 Monate beträgt die Rate 608 €, der Gesamtzins aber nur rund 1.900 €. Über 96 Monate sinkt die Rate auf 263 €, der Gesamtzins steigt jedoch auf rund 5.200 € — fast das Dreifache. Wählen Sie die Laufzeit deshalb so kurz, wie es die Haushaltskasse zuverlässig zulässt — und planen Sie einen Puffer für unerwartete Ausgaben ein.',
+      },
+      {
+        typ: 'text',
+        titel: 'Ab November 2026: neue Kreditregeln (CCD II)',
+        html: `<p>Zum <strong>20. November 2026</strong> tritt die neue EU-Verbraucherkreditrichtlinie <strong>CCD II</strong> (umgesetzt in den §§ 491 ff. BGB) in Kraft. Sie verschärft die <strong>Kreditwürdigkeitsprüfung</strong> und weitet den Verbraucherschutz aus: Erstmals reguliert werden auch <strong>„Buy now, pay later"-Angebote</strong> (BNPL), zinslose 0-%-Finanzierungen und Kleinkredite unter 200 € — Produkte, die bisher weitgehend außerhalb der strengen Kreditregeln lagen. Für Verbraucher bedeutet das mehr Transparenz und klarere Informationspflichten vor dem Abschluss, möglicherweise aber auch etwas gründlichere Prüfungen. Praktisch heißt das: Bei BNPL-Angeboten an der Online-Kasse müssen Anbieter künftig deutlicher auf Kosten und Risiken hinweisen, und auch sehr kleine oder vermeintlich kostenlose Finanzierungen fallen unter die Kreditwürdigkeitsprüfung. Die Grundmechanik eines Ratenkredits — Annuität, Effektivzins, Tilgungsplan — bleibt von der Reform unberührt; der Rechner bildet sie unverändert ab.</p>`,
+      },
+    ],
     faq: [
       {
         frage: 'Wie berechne ich meine monatliche Kreditrate?',
