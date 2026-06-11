@@ -1721,6 +1721,10 @@ Muss „OK" zeigen, BEVOR committet wird. Bei „UNTER SCHWELLE" die `text`-Baus
 
 Auch bei gesetzten `contentBloecke` das `erklaerung`-Feld **befüllt lassen** (Schema-Konsistenz + Sicherheit). Der Renderer zeigt `erklaerung` nicht, solange `contentBloecke?.length` greift — es bleibt der Fallback-Pfad für alle nicht-migrierten Rechner.
 
+### Quellen-Pflicht (ab 06/2026)
+
+Jeder Goldstandard-Rechner setzt `config.quellen` (2–4 Einträge, `{ titel, url?, hinweis? }` aus `types.ts`). Bei YMYL-Themen Primärquellen mit Link (gesetze-im-internet.de, BMF, Destatis, Bundesbank, BEEG/SGB/BGB/PAngV); bei Mathe/Alltag ohne Gesetzesbezug genügt ein didaktischer `hinweis` ohne `url`. Die Sektion „Quellen & Rechtsgrundlagen" rendert automatisch über das Page-Template (`app/[kategorie]/[rechner]/page.tsx`), sobald `config.quellen` gesetzt ist — fehlt das Feld, bleibt die Sektion leer und verschenkt E-E-A-T (gerade bei YMYL). Pflicht-Bestandteil neben `contentBloecke` + Self-Check.
+
 ### Referenz-Beispiele (Goldstandard-Tranche, 11.06.2026)
 
 Sechs fertige Goldstandard-Rechner als Kopiervorlage (je >1.500 W, eigenes Leitformat, primärquellen-verifiziert):
