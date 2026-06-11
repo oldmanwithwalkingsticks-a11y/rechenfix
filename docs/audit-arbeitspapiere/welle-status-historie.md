@@ -8,6 +8,35 @@
 
 ---
 
+## 11.06.2026 — W19 brutto-netto: Wasserfall Brutto→Netto (Weg C)
+
+- **Entscheidung:** brutto-netto rendert seinen Content über die handgebaute
+  Standalone-Component `BruttoNettoRechner.tsx` (INLINE_ERKLAERUNG_SLUGS,
+  contentBloecke-Pfad bewusst geskippt). Architektur bleibt — eingebaut wurde
+  nur das fehlende visuelle Element, der Wasserfall, gefüttert mit den LIVE
+  berechneten Component-Werten.
+- **Refactor (Commit `01b4855`):** Wasserfall-Zeichenlogik aus der internen
+  `WasserfallDiagramm`-Funktion in `ContentBlockRenderer.tsx` in eine eigene,
+  geteilte Komponente `components/rechner/WasserfallSvg.tsx` ausgelagert. Der
+  Renderer ruft sie jetzt nur noch auf (DatenKachel-Wrapper + fussnote bleiben im
+  DiagrammBlock-Dispatcher). Reines Refactoring — andere Diagramm-Varianten
+  (balken/kreis/linie/gestapelt) unberührt. Fills jetzt feste Hex
+  (#2563EB Start/Summe, #F87171 Abzug, #34D399 Zuschlag), purge-sicher und
+  konsistent zur kontrastreichen Diagramm-Palette.
+- **Feature (Commit `7042391`):** In `BruttoNettoRechner.tsx` direkt VOR der
+  „Aufschlüsselung (monatlich)"-Box (`id="brutto-netto-tabelle"`) eine neue
+  Wasserfall-Visualisierung „Vom Brutto zum Netto": Brutto (blau) → Steuern
+  (rot, LSt+Soli+KiSt) → Sozialabgaben (rot) → Netto (blau). Werte aus
+  `ergebnis.*` (sozialabgabenGesamt etc.) → aktualisiert sich live bei
+  Brutto-/Steuerklassen-Änderung. Tabelle daneben bleibt die exakte Quelle.
+- **Unberührt:** 5 h2-Content-Sektionen + 12 FAQ der Component,
+  INLINE_ERKLAERUNG_SLUGS, die toten contentBloecke im Config (späteres Aufräumen).
+- **Verify:** tsc sauber für alle 3 Files (einzige Fehlermeldung `FULL_CSS_HREF`
+  in app/layout.tsx ist pre-existing/critical-css-Branch, nicht in diesem Scope).
+  Build-Gate Vercel-grün; Karsten verifiziert per Inkognito.
+
+---
+
 ## 11.06.2026 — Minijob-Lib-Bug behoben (round → ceil, § 8 SGB IV)
 
 - `lib/berechnungen/mindestlohn.ts` `getMinijobGrenzeMonat`:
