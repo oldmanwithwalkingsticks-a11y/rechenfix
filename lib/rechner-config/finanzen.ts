@@ -783,22 +783,6 @@ Eine **Abfindung** bei einvernehmlicher Auflösung des Arbeitsverhältnisses wir
         html: `<p>Das <strong>Arbeitslosengeld I (ALG I)</strong> ist eine echte Versicherungsleistung. Wer sozialversicherungspflichtig beschäftigt ist, zahlt über die Arbeitslosenversicherung Beiträge ein und erwirbt damit einen Anspruch — geregelt im Dritten Sozialgesetzbuch (SGB III) und ausgezahlt von der Agentur für Arbeit. Die Höhe richtet sich nach dem früheren Verdienst, nicht nach Bedürftigkeit. Es ist also kein Almosen, sondern eine vorher erworbene Gegenleistung für gezahlte Beiträge.</p><p>Genau das unterscheidet ALG I vom <strong>Bürgergeld</strong> (SGB II): Bürgergeld ist eine bedarfsorientierte Grundsicherung. Sie wird erst nach einer Vermögensprüfung und unter Anrechnung des Partnereinkommens gezahlt und bemisst sich nach Regelsatz, Miete und Nebenkosten — unabhängig vom letzten Gehalt. ALG I dagegen ist <strong>einkommensabhängig</strong>: Wer mehr verdient hat, bekommt mehr. Erst wenn der ALG-I-Anspruch aufgebraucht ist und keine neue Anwartschaft aufgebaut wurde, folgt das Bürgergeld.</p><p>Steuerlich ist ALG I <strong>steuerfrei</strong>, unterliegt aber dem <strong>Progressionsvorbehalt</strong>: Es erhöht den Steuersatz auf das übrige Einkommen im selben Kalenderjahr. Wer im Bezugsjahr noch Gehalt bezogen hat oder mit dem Partner zusammen veranlagt wird, sollte deshalb mit einer möglichen Steuernachzahlung rechnen und das bezogene ALG in der Steuererklärung angeben.</p><p>Finanziert wird die Leistung aus dem Beitrag zur Arbeitslosenversicherung, den Arbeitgeber und Arbeitnehmer je zur Hälfte tragen. Schon deshalb ist ALG I keine Sozialhilfe: Es ist ein Anspruch, den man sich über Jahre der Beschäftigung erarbeitet hat. Während des Bezugs bleibt man kranken-, pflege- und rentenversichert — die Agentur für Arbeit übernimmt die Beiträge, sodass keine Lücke in der Sozialversicherung entsteht.</p>`,
       },
       {
-        typ: 'text',
-        titel: 'Wer Anspruch hat: die Anwartschaftszeit',
-        html: `<p>Der Anspruch auf ALG I setzt eine erfüllte <strong>Anwartschaftszeit</strong> voraus (§ 142 SGB III): mindestens <strong>zwölf Monate</strong> versicherungspflichtige Beschäftigung innerhalb der letzten <strong>30 Monate</strong> vor der Arbeitslosmeldung. Dieser Zeitraum heißt Rahmenfrist. Die zwölf Monate müssen nicht am Stück liegen — auch mehrere kürzere Beschäftigungen werden zusammengezählt, solange sie in die Rahmenfrist fallen.</p><p>Für Menschen mit überwiegend kurzen Befristungen gibt es eine <strong>verkürzte Anwartschaft</strong>: Unter bestimmten Voraussetzungen genügen schon sechs Monate. Neben der Anwartschaft müssen weitere Bedingungen erfüllt sein: Man muss <strong>arbeitslos gemeldet</strong> und der Arbeitsvermittlung verfügbar sein, aktiv eine Beschäftigung suchen und darf nur <strong>weniger als 15 Wochenstunden</strong> arbeiten — wer mehr arbeitet, gilt nicht mehr als arbeitslos.</p><p>Wichtig ist die rechtzeitige Meldung: Man muss sich <strong>spätestens drei Monate vor dem Ende</strong> des Arbeitsverhältnisses arbeitsuchend melden, bei kürzerer Kündigungsfrist innerhalb von drei Tagen nach Kenntnis. Versäumt man das, droht eine Sperrzeit. Die persönliche Arbeitslosmeldung muss spätestens am ersten Tag der Arbeitslosigkeit erfolgen, denn das ALG wird frühestens ab dem Tag der Meldung gezahlt.</p>`,
-      },
-      {
-        typ: 'beispielrechnung',
-        titel: 'ALG I bei 3.000 € brutto (ohne Kind)',
-        schritte: [
-          { label: 'Bemessungsentgelt = Brutto (max. BBG 8.450 €)', formel: '3.000 € / Monat', ergebnis: '3.000 €' },
-          { label: 'minus SV-Pauschale 21 % (§ 153 SGB III)', formel: '3.000 € − 630 €', ergebnis: '2.370 €' },
-          { label: 'minus Lohnsteuer Steuerklasse I (Soli 0 €)', formel: '2.370 € − 298 €', ergebnis: '2.072 €' },
-          { label: 'Leistungssatz 60 % ohne Kind (§ 149 SGB III)', formel: '2.072 € × 60 %', ergebnis: '1.243,20 €' },
-        ],
-        fazit: 'Aus 3.000 € brutto werden rund 1.243 € ALG I im Monat — der Tagessatz (41,44 €) wird dabei immer mit 30 multipliziert, unabhängig von der echten Monatslänge. Mit mindestens einem Kind steigt der Satz auf 67 % (siehe nächstes Beispiel). Das Leistungsentgelt von 2.072 € ist ein pauschaliertes Netto und weicht vom tatsächlichen Lohn-Netto ab.',
-      },
-      {
         typ: 'tabelle',
         titel: 'Bezugsdauer nach Versicherungszeit und Alter',
         kopf: ['Versicherungsmonate (in 5 Jahren)', 'Alter', 'Anspruch auf ALG I'],
@@ -812,6 +796,37 @@ Eine **Abfindung** bei einvernehmlicher Auflösung des Arbeitsverhältnisses wir
           ['48 Monate', 'ab 58 Jahre', '24 Monate'],
         ],
         fussnote: 'Höhere Stufen gelten nur, wenn Versicherungszeit UND Alter erreicht sind. Unter 12 Versicherungsmonaten besteht kein Anspruch. § 147 Abs. 2 SGB III, Stand 06/2026.',
+      },
+      {
+        typ: 'diagramm',
+        variante: 'balken',
+        titel: 'Bezugsdauer-Staffel im Überblick',
+        daten: [
+          { label: '12 Mon. versichert', wert: 6, einheit: 'Mon.' },
+          { label: '16 Mon. versichert', wert: 8, einheit: 'Mon.' },
+          { label: '20 Mon. versichert', wert: 10, einheit: 'Mon.' },
+          { label: '24 Mon. versichert', wert: 12, einheit: 'Mon.' },
+          { label: '30 Mon. (ab 50)', wert: 15, einheit: 'Mon.' },
+          { label: '36 Mon. (ab 55)', wert: 18, einheit: 'Mon.' },
+          { label: '48 Mon. (ab 58)', wert: 24, einheit: 'Mon.' },
+        ],
+        fussnote: 'Anspruchsdauer in Monaten je Stufe — sie verdoppelt sich von 6 auf 24 Monate. Werte konsistent zur Tabelle oben. § 147 Abs. 2 SGB III.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'ALG I bei 3.000 € brutto (ohne Kind)',
+        schritte: [
+          { label: 'Bemessungsentgelt = Brutto (max. BBG 8.450 €)', formel: '3.000 € / Monat', ergebnis: '3.000 €' },
+          { label: 'minus SV-Pauschale 21 % (§ 153 SGB III)', formel: '3.000 € − 630 €', ergebnis: '2.370 €' },
+          { label: 'minus Lohnsteuer Steuerklasse I (Soli 0 €)', formel: '2.370 € − 298 €', ergebnis: '2.072 €' },
+          { label: 'Leistungssatz 60 % ohne Kind (§ 149 SGB III)', formel: '2.072 € × 60 %', ergebnis: '1.243,20 €' },
+        ],
+        fazit: 'Aus 3.000 € brutto werden rund 1.243 € ALG I im Monat — der Tagessatz (41,44 €) wird dabei immer mit 30 multipliziert, unabhängig von der echten Monatslänge. Mit mindestens einem Kind steigt der Satz auf 67 % (siehe Beispiel mit Kind weiter unten). Das Leistungsentgelt von 2.072 € ist ein pauschaliertes Netto und weicht vom tatsächlichen Lohn-Netto ab.',
+      },
+      {
+        typ: 'text',
+        titel: 'Wer Anspruch hat: die Anwartschaftszeit',
+        html: `<p>Der Anspruch auf ALG I setzt eine erfüllte <strong>Anwartschaftszeit</strong> voraus (§ 142 SGB III): mindestens <strong>zwölf Monate</strong> versicherungspflichtige Beschäftigung innerhalb der letzten <strong>30 Monate</strong> vor der Arbeitslosmeldung. Dieser Zeitraum heißt Rahmenfrist. Die zwölf Monate müssen nicht am Stück liegen — auch mehrere kürzere Beschäftigungen werden zusammengezählt, solange sie in die Rahmenfrist fallen.</p><p>Für Menschen mit überwiegend kurzen Befristungen gibt es eine <strong>verkürzte Anwartschaft</strong>: Unter bestimmten Voraussetzungen genügen schon sechs Monate. Neben der Anwartschaft müssen weitere Bedingungen erfüllt sein: Man muss <strong>arbeitslos gemeldet</strong> und der Arbeitsvermittlung verfügbar sein, aktiv eine Beschäftigung suchen und darf nur <strong>weniger als 15 Wochenstunden</strong> arbeiten — wer mehr arbeitet, gilt nicht mehr als arbeitslos.</p><p>Wichtig ist die rechtzeitige Meldung: Man muss sich <strong>spätestens drei Monate vor dem Ende</strong> des Arbeitsverhältnisses arbeitsuchend melden, bei kürzerer Kündigungsfrist innerhalb von drei Tagen nach Kenntnis. Versäumt man das, droht eine Sperrzeit. Die persönliche Arbeitslosmeldung muss spätestens am ersten Tag der Arbeitslosigkeit erfolgen, denn das ALG wird frühestens ab dem Tag der Meldung gezahlt.</p>`,
       },
       {
         typ: 'text',
@@ -829,14 +844,15 @@ Eine **Abfindung** bei einvernehmlicher Auflösung des Arbeitsverhältnisses wir
         fazit: 'Der höhere Satz von 67 % gilt, sobald für mindestens ein Kind ein Kindergeld- oder Kinderfreibetrag-Anspruch besteht — das eigene Kind oder das des Partners genügt. Über 12 Bezugsmonate macht der Kinder-Bonus hier rund 1.740 Euro mehr aus.',
       },
       {
-        typ: 'text',
-        titel: 'Sperrzeit vermeiden',
-        html: `<p>Die teuerste Falle beim ALG I ist die <strong>Sperrzeit</strong> (§ 159 SGB III). Wer das Arbeitsverhältnis selbst löst — durch Eigenkündigung oder einen Aufhebungsvertrag — ohne einen wichtigen Grund, bekommt in der Regel eine Sperrzeit von <strong>12 Wochen</strong>. In dieser Zeit wird kein ALG gezahlt, und die Gesamtanspruchsdauer verkürzt sich zusätzlich um <strong>ein Viertel</strong>. Bei einem Zwölf-Monats-Anspruch sind das also drei Monate weniger Leistung — gerechnet auf mittlere ALG-Sätze schnell ein vierstelliger Verlust.</p><p>Ein <strong>wichtiger Grund</strong> kann die Sperrzeit abwenden: etwa nachgewiesenes Mobbing, gesundheitliche Gründe, eine drohende betriebsbedingte Kündigung (der man durch einen Aufhebungsvertrag mit Abfindung nur zuvorkommt) oder ein Umzug zum Ehepartner. Diese Gründe muss man belegen können. Kleinere Pflichtverstöße wie eine verspätete Arbeitslosmeldung führen zu kürzeren Sperrzeiten von ein bis drei Wochen.</p><p>Der praktische Rat: Vor jeder Eigenkündigung und vor der Unterschrift unter einen Aufhebungsvertrag die Agentur für Arbeit oder eine Beratungsstelle einschalten. Wer über einen Aufhebungsvertrag verhandelt, sollte zusätzlich den Abfindungsrechner und den Kündigungsfrist-Rechner nutzen, um die finanziellen Folgen vorab zu kennen. Zu beachten ist außerdem das <strong>Ruhen des Anspruchs</strong> (§ 158 SGB III): Wird im Aufhebungsvertrag die ordentliche Kündigungsfrist verkürzt und eine Abfindung gezahlt, ruht das ALG bis zu dem Tag, an dem das Arbeitsverhältnis bei Einhaltung der Frist regulär geendet hätte. Sperrzeit und Ruhen sind zwei verschiedene Mechanismen, die im ungünstigsten Fall zusammentreffen.</p>`,
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Sperrzeit bei Eigenkündigung',
+        text: 'Eigenkündigung oder Aufhebungsvertrag ohne wichtigen Grund lösen in der Regel eine Sperrzeit von 12 Wochen aus (§ 159 SGB III): In dieser Zeit wird kein ALG gezahlt, und die Gesamt-Bezugsdauer verkürzt sich um ein Viertel. Ein wichtiger Grund (z. B. Mobbing, gesundheitliche Gründe, drohende betriebsbedingte Kündigung) kann die Sperrzeit abwenden, muss aber nachgewiesen werden. Vor jeder selbst veranlassten Beendigung des Arbeitsverhältnisses sollten Sie deshalb die Agentur für Arbeit oder eine Beratungsstelle einschalten.',
       },
       {
         typ: 'text',
-        titel: 'Nebenverdienst während ALG I',
-        html: `<p>Ein begrenzter Zuverdienst ist während des ALG-I-Bezugs erlaubt, aber an klare Regeln gebunden (§ 155 SGB III). Anrechnungsfrei bleibt ein Nebenverdienst von bis zu <strong>165 Euro im Monat</strong> (netto). Jeder Euro darüber wird <strong>eins zu eins</strong> vom ALG abgezogen — der Zuverdienst lohnt sich oberhalb der Freigrenze also finanziell kaum.</p><p>Entscheidend ist außerdem der zeitliche Umfang: Die Nebenbeschäftigung darf <strong>weniger als 15 Wochenstunden</strong> betragen. Wer 15 Stunden oder mehr arbeitet, gilt nicht mehr als arbeitslos — dann entfällt der ALG-Anspruch vollständig, nicht nur der überschießende Betrag. Jede Nebentätigkeit muss vorab der Agentur für Arbeit gemeldet werden; wer das versäumt, riskiert eine Rückforderung und unter Umständen einen Bußgeldbescheid.</p><p>Ein Sonderfall ist die <strong>kurzzeitige Beschäftigung</strong> während des Bezugs: Wer einen befristeten Aushilfsjob unter 15 Wochenstunden annimmt, behält den ALG-Anspruch und meldet nur die Stunden und den Verdienst. Übt man die Nebentätigkeit dagegen schon mindestens 18 Monate vor der Arbeitslosigkeit aus, gilt ein günstigerer Freibetrag, der sich am durchschnittlichen früheren Nebenverdienst orientiert. In Zweifelsfällen lohnt sich vorab ein Anruf bei der Agentur, bevor man eine Nebentätigkeit aufnimmt.</p>`,
+        titel: 'Sperrzeit vermeiden',
+        html: `<p>Die teuerste Falle beim ALG I ist die <strong>Sperrzeit</strong> (§ 159 SGB III). Wer das Arbeitsverhältnis selbst löst — durch Eigenkündigung oder einen Aufhebungsvertrag — ohne einen wichtigen Grund, bekommt in der Regel eine Sperrzeit von <strong>12 Wochen</strong>. In dieser Zeit wird kein ALG gezahlt, und die Gesamtanspruchsdauer verkürzt sich zusätzlich um <strong>ein Viertel</strong>. Bei einem Zwölf-Monats-Anspruch sind das also drei Monate weniger Leistung — gerechnet auf mittlere ALG-Sätze schnell ein vierstelliger Verlust.</p><p>Ein <strong>wichtiger Grund</strong> kann die Sperrzeit abwenden: etwa nachgewiesenes Mobbing, gesundheitliche Gründe, eine drohende betriebsbedingte Kündigung (der man durch einen Aufhebungsvertrag mit Abfindung nur zuvorkommt) oder ein Umzug zum Ehepartner. Diese Gründe muss man belegen können. Kleinere Pflichtverstöße wie eine verspätete Arbeitslosmeldung führen zu kürzeren Sperrzeiten von ein bis drei Wochen.</p><p>Der praktische Rat: Vor jeder Eigenkündigung und vor der Unterschrift unter einen Aufhebungsvertrag die Agentur für Arbeit oder eine Beratungsstelle einschalten. Wer über einen Aufhebungsvertrag verhandelt, sollte zusätzlich den Abfindungsrechner und den Kündigungsfrist-Rechner nutzen, um die finanziellen Folgen vorab zu kennen. Zu beachten ist außerdem das <strong>Ruhen des Anspruchs</strong> (§ 158 SGB III): Wird im Aufhebungsvertrag die ordentliche Kündigungsfrist verkürzt und eine Abfindung gezahlt, ruht das ALG bis zu dem Tag, an dem das Arbeitsverhältnis bei Einhaltung der Frist regulär geendet hätte. Sperrzeit und Ruhen sind zwei verschiedene Mechanismen, die im ungünstigsten Fall zusammentreffen.</p>`,
       },
       {
         typ: 'checkliste',
@@ -852,10 +868,9 @@ Eine **Abfindung** bei einvernehmlicher Auflösung des Arbeitsverhältnisses wir
         ],
       },
       {
-        typ: 'infobox',
-        variante: 'warnung',
-        titel: 'Sperrzeit bei Eigenkündigung',
-        text: 'Eigenkündigung oder Aufhebungsvertrag ohne wichtigen Grund lösen in der Regel eine Sperrzeit von 12 Wochen aus (§ 159 SGB III): In dieser Zeit wird kein ALG gezahlt, und die Gesamt-Bezugsdauer verkürzt sich um ein Viertel. Ein wichtiger Grund (z. B. Mobbing, gesundheitliche Gründe, drohende betriebsbedingte Kündigung) kann die Sperrzeit abwenden, muss aber nachgewiesen werden. Vor jeder selbst veranlassten Beendigung des Arbeitsverhältnisses sollten Sie deshalb die Agentur für Arbeit oder eine Beratungsstelle einschalten.',
+        typ: 'text',
+        titel: 'Nebenverdienst während ALG I',
+        html: `<p>Ein begrenzter Zuverdienst ist während des ALG-I-Bezugs erlaubt, aber an klare Regeln gebunden (§ 155 SGB III). Anrechnungsfrei bleibt ein Nebenverdienst von bis zu <strong>165 Euro im Monat</strong> (netto). Jeder Euro darüber wird <strong>eins zu eins</strong> vom ALG abgezogen — der Zuverdienst lohnt sich oberhalb der Freigrenze also finanziell kaum.</p><p>Entscheidend ist außerdem der zeitliche Umfang: Die Nebenbeschäftigung darf <strong>weniger als 15 Wochenstunden</strong> betragen. Wer 15 Stunden oder mehr arbeitet, gilt nicht mehr als arbeitslos — dann entfällt der ALG-Anspruch vollständig, nicht nur der überschießende Betrag. Jede Nebentätigkeit muss vorab der Agentur für Arbeit gemeldet werden; wer das versäumt, riskiert eine Rückforderung und unter Umständen einen Bußgeldbescheid.</p><p>Ein Sonderfall ist die <strong>kurzzeitige Beschäftigung</strong> während des Bezugs: Wer einen befristeten Aushilfsjob unter 15 Wochenstunden annimmt, behält den ALG-Anspruch und meldet nur die Stunden und den Verdienst. Übt man die Nebentätigkeit dagegen schon mindestens 18 Monate vor der Arbeitslosigkeit aus, gilt ein günstigerer Freibetrag, der sich am durchschnittlichen früheren Nebenverdienst orientiert. In Zweifelsfällen lohnt sich vorab ein Anruf bei der Agentur, bevor man eine Nebentätigkeit aufnimmt.</p>`,
       },
       {
         typ: 'infobox',
