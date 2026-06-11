@@ -546,6 +546,12 @@ Wichtig zu beachten: In der Praxis mindern die Abgeltungssteuer (25% plus Solida
   {
     slug: 'elterngeld-rechner',
     letzteAktualisierung: '2026-06-11',
+    quellen: [
+      { titel: 'BEEG: Bundeselterngeld- und Elternzeitgesetz', url: 'https://www.gesetze-im-internet.de/beeg/' },
+      { titel: '§ 2 BEEG: Höhe des Elterngeldes (Ersatzrate, Mindest-/Höchstbetrag)', url: 'https://www.gesetze-im-internet.de/beeg/__2.html' },
+      { titel: '§ 1 Abs. 8 BEEG: Einkommensgrenze (175.000 € zvE ab 2026)', url: 'https://www.gesetze-im-internet.de/beeg/__1.html' },
+      { titel: 'Bundesministerium für Familie, Senioren, Frauen und Jugend (BMFSFJ): Elterngeld', hinweis: 'Offizielle Informationen zu Basiselterngeld, ElterngeldPlus und Partnerschaftsbonus.' },
+    ],
     titel: 'Elterngeld-Rechner',
     beschreibung: 'Elterngeld 2026 berechnen: Basiselterngeld & ElterngeldPlus mit Geschwisterbonus und Mehrlingszuschlag.',
     kategorie: 'Finanzen',
@@ -735,6 +741,12 @@ Beide Zuschläge werden unabhängig von der Höhe des regulären Elterngeldes ge
   {
     slug: 'arbeitslosengeld-rechner',
     letzteAktualisierung: '2026-06-11',
+    quellen: [
+      { titel: '§ 149 SGB III: Höhe des Arbeitslosengeldes (60/67 %)', url: 'https://www.gesetze-im-internet.de/sgb_3/__149.html' },
+      { titel: '§ 142 SGB III: Anwartschaftszeit', url: 'https://www.gesetze-im-internet.de/sgb_3/__142.html' },
+      { titel: '§ 147 SGB III: Dauer des Anspruchs (Bezugsdauer-Staffel)', url: 'https://www.gesetze-im-internet.de/sgb_3/__147.html' },
+      { titel: '§ 153 SGB III: Leistungsentgelt (pauschalierter Sozialabzug 21 %)', url: 'https://www.gesetze-im-internet.de/sgb_3/__153.html' },
+    ],
     titel: 'Arbeitslosengeld-Rechner',
     beschreibung: 'Arbeitslosengeld I berechnen: Höhe, Dauer und Auszahlungsbetrag basierend auf dem letzten Gehalt.',
     kategorie: 'Finanzen',
@@ -892,6 +904,12 @@ Eine **Abfindung** bei einvernehmlicher Auflösung des Arbeitsverhältnisses wir
   {
     slug: 'buergergeld-rechner',
     letzteAktualisierung: '2026-06-11',
+    quellen: [
+      { titel: '§ 20 SGB II: Regelbedarf zur Sicherung des Lebensunterhalts', url: 'https://www.gesetze-im-internet.de/sgb_2/__20.html' },
+      { titel: '§ 22 SGB II: Bedarfe für Unterkunft und Heizung', url: 'https://www.gesetze-im-internet.de/sgb_2/__22.html' },
+      { titel: '§ 12 SGB II: Zu berücksichtigendes Vermögen', url: 'https://www.gesetze-im-internet.de/sgb_2/__12.html' },
+      { titel: '13. SGB II-Änderungsgesetz (Neue Grundsicherung ab 01.07.2026)', hinweis: 'BGBl. 2026 I Nr. 107 v. 16.04.2026 — Umbenennung in Grundsicherungsgeld, Reform der Vermögens-/Sanktionsregeln. Regelsatz 2026 unverändert (Besitzschutz § 28a SGB XII).' },
+    ],
     titel: 'Bürgergeld-Rechner',
     beschreibung: 'Bürgergeld 2026 berechnen: Aktuelle Regelsätze mit Einkommensanrechnung und Vermögensprüfung.',
     kategorie: 'Finanzen',
@@ -1695,6 +1713,12 @@ Der Arbeitnehmer-Pauschbetrag von 1.230 Euro wird automatisch von Ihrem zu verst
   {
     slug: 'kreditrechner',
     letzteAktualisierung: '2026-06-11',
+    quellen: [
+      { titel: '§ 6 PAngV: Effektiver Jahreszins (Pflichtangabe für Verbraucherkredite)', url: 'https://www.gesetze-im-internet.de/pangv_2022/__6.html' },
+      { titel: '§ 6a PAngV: Repräsentatives Beispiel (Zweidrittelzins)', url: 'https://www.gesetze-im-internet.de/pangv_2022/__6a.html' },
+      { titel: '§§ 491 ff. BGB: Verbraucherdarlehensvertrag', url: 'https://www.gesetze-im-internet.de/bgb/__491.html' },
+      { titel: 'Deutsche Bundesbank: MFI-Zinsstatistik (Konsumentenkredite, Neugeschäft)', hinweis: 'Durchschnittszinsen für Ratenkredite, Stand 2026 — bonitätsabhängige Spanne, nur zur Orientierung.' },
+    ],
     titel: 'Kreditrechner',
     beschreibung: 'Kreditrate, Gesamtkosten und Tilgungsplan berechnen — für Ratenkredite, Autokredite und Konsumkredite.',
     kategorie: 'Finanzen',

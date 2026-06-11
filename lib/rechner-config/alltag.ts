@@ -4,6 +4,10 @@ export const alltagRechner: RechnerConfig[] = [
   {
     slug: 'prozentrechner',
     letzteAktualisierung: '2026-06-11',
+    quellen: [
+      { titel: 'Grundbegriffe der Prozentrechnung (Grundwert, Prozentwert, Prozentsatz)', hinweis: 'Standard-Schulmathematik (Sekundarstufe I). Prozent = Anteil von hundert; die drei Grundgrößen über die Grundgleichung verbunden.' },
+      { titel: 'Prozentpunkte vs. Prozent', hinweis: 'Unterschied zwischen absoluter (Prozentpunkte) und relativer (Prozent) Änderung — gängige Fehlerquelle.' },
+    ],
     titel: 'Prozentrechner',
     beschreibung: 'Prozente berechnen: Prozentwert, Grundwert, Prozentsatz, Aufschlag & Rabatt — mit Rechenweg.',
     kategorie: 'Alltag',
