@@ -9,6 +9,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import AiExplain from '@/components/rechner/AiExplain';
 import WasWaereWenn from '@/components/rechner/WasWaereWenn';
 import SchnellCheck from '@/components/rechner/SchnellCheck';
+import WasserfallSvg from '@/components/rechner/WasserfallSvg';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
@@ -409,6 +410,22 @@ export default function BruttoNettoRechner() {
               <span className="flex items-center gap-1"><span className="w-2 h-2 rounded bg-red-600 inline-block" /> Steuern</span>
               <span className="flex items-center gap-1"><span className="w-2 h-2 rounded bg-amber-600 inline-block" /> Sozialabgaben</span>
             </div>
+          </div>
+
+          {/* Wasserfall: Brutto → Abzüge → Netto (visuelle Ergänzung zur Aufschlüsselung) */}
+          <div className="card p-5 md:p-6 mb-4">
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">
+              Vom Brutto zum Netto
+            </h2>
+            <WasserfallSvg
+              einheit="€"
+              steps={[
+                { label: 'Brutto', wert: ergebnis.bruttoMonat, art: 'start' },
+                { label: 'Steuern', wert: -(ergebnis.lohnsteuer + ergebnis.solidaritaet + ergebnis.kirchensteuer), art: 'delta' },
+                { label: 'Sozialabg.', wert: -ergebnis.sozialabgabenGesamt, art: 'delta' },
+                { label: 'Netto', wert: ergebnis.nettoMonat, art: 'summe' },
+              ]}
+            />
           </div>
 
           {/* Aufschlüsselung */}
