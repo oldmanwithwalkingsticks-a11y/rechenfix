@@ -4,7 +4,35 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 11.06.2026
+**Stand:** 12.06.2026
+
+---
+
+## 12.06.2026 — W19 arbeitszeitrechner Goldstandard (erste arbeit-Migration)
+
+- **Was gebaut:** arbeitszeitrechner (arbeit.ts) hat jetzt eigene `contentBloecke`
+  im **„Regel-Schwellen-Leitformat"**. Folge:
+  `text-tabelle-beispielrechnung-text-text-infobox-text-checkliste-text-infobox`.
+  Prägend: Pausenregel-Tabelle (§ 4) + Netto-Beispielrechnung + 2 Warn-Infoboxen
+  (Höchstzeit/Tarif), kein Diagramm. ~1.501 W (Self-Check OK), inkl. `quellen`.
+- **Schwellen gespiegelt aus `arbeitszeit.ts`** (>6 h → 30 min, >9 h → 45 min,
+  >10 h unzulässig). Beispiel 8:00–17:00 (9 h) − 45 min = 8 h 15 min (8,25 h).
+  Rechtsstand ArbZG §§ 3/4/5/6. Reform-Ausblick (wöchentliche Höchstzeit +
+  E-Zeiterfassung) als **geplant, NICHT in Kraft** gekennzeichnet.
+- **Bestand-Korrektur (Lehre kalorien angewandt):** erklaerung + FAQ behaupteten
+  eine Zeiterfassungs-„Pflicht seit 2023 / der darauf basierenden Gesetzgebung" —
+  irreführend, weil keine ArbZG-Novelle verabschiedet ist. Korrigiert: Die
+  Aufzeichnungspflicht folgt aus **BAG 1 ABR 22/21 (13.09.2022)** über
+  § 3 Abs. 2 Nr. 1 ArbSchG (EuGH 2019); die gesetzliche Regelung mit
+  (elektronischer) Form ist **geplant, aber noch nicht in Kraft** — jetzt
+  konsistent zum neuen Ausblick-Baustein.
+- **quellen NEU** (kein Feld vorhanden): ArbZG §§ 3/4/5. Kein Autorenblock,
+  Affiliate (lexware) unberührt.
+- **Verify:** Folge = ZIEL (distinkt), Wortzahl 1.501, tsc sauber für arbeit.ts
+  (pre-existing `FULL_CSS_HREF`), Grep bestätigt: keine veralteten Pflicht-Claims
+  mehr. Vercel-grün. `letzteAktualisierung` 2026-06-12.
+- **Tranche-Fortschritt 4/5:** kredit ✅, stromkosten ✅, kalorien ✅,
+  arbeitszeit ✅; offen pizzateig.
 
 ---
 
