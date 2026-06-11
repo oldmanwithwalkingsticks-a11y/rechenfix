@@ -580,7 +580,11 @@ Test bei Zweifel: Etwas Hefe in lauwarmem Wasser mit einer Prise Zucker auflöse
   },
   {
     slug: 'pizzateig-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-12',
+    quellen: [
+      { titel: 'Associazione Verace Pizza Napoletana (AVPN): Disciplinare Pizza Napoletana', hinweis: 'Internationaler Standard für die echte neapolitanische Pizza (Mehl Tipo 00, Hydration, Salz, Gare).' },
+      { titel: 'Bäckerprozent-Methode (Bakers Percentage)', hinweis: 'Mehl = 100 %, alle weiteren Zutaten als Prozentsatz des Mehlgewichts — Standard zum Skalieren von Teigrezepten.' },
+    ],
     titel: 'Pizzateig-Rechner',
     beschreibung: 'Pizzateig mit Bäckerprozenten: Mehl, Wasser, Salz, Hefe für 1–8 Pizzen — mit Hydration-Slider und Zeitplan.',
     kategorie: 'Kochen & Ernährung',
@@ -590,7 +594,7 @@ Test bei Zweifel: Etwas Hefe in lauwarmem Wasser mit einer Prise Zucker auflöse
     keywords: ['pizzateig rechner', 'pizzateig berechnen', 'bäckerprozente pizza', 'pizza napoletana rezept', 'pizzateig hydration', 'pizzateig mehl wasser', 'pizzateig gehzeit', 'hefe pizza', 'pizza teig rechner'],
     icon: '🍕',
     formel: 'Mehl = Gesamtteig ÷ (1 + Hydration/100 + Salz/100 + Öl/100 + Hefe/100) | Bäckerprozente: alle Mengen relativ zu Mehl = 100 %',
-    beispiel: '4 Pizzen à 270 g = 1.080 g Teig, 65 % Hydration, 24h Gehzeit: Mehl 626 g, Wasser 407 g, Salz 16 g, Frischhefe 1,3 g (0,2 % vom Mehl). Weniger Hefe = mehr Aroma.',
+    beispiel: '4 Pizzen à 270 g = 1.080 g Teig, 65 % Hydration, 24h Gehzeit: Mehl 644 g, Wasser 419 g, Salz 16 g, Frischhefe 1,3 g (0,2 % vom Mehl). Weniger Hefe = mehr Aroma.',
     erklaerung: `**Pizzateig nach Bäckerprozenten — das Handwerk der Pizzaioli**
 
 Wer eine wirklich gute Pizza backen möchte, kommt am Prinzip der Bäckerprozente nicht vorbei. Professionelle Bäcker und Pizzaioli geben alle Zutatenmengen als Prozentwert des Mehlgewichts an. Das ermöglicht das einfache Skalieren eines Rezepts — egal ob für 2 oder 20 Pizzen.
@@ -603,7 +607,7 @@ Das Mehl gilt als 100 %. Jede andere Zutat wird als Prozentsatz des Mehlgewichts
 - Wasser: 60–65 % (= Hydration)
 - Salz: 2,5–3 %
 - Hefe (frisch): 0,1–1 % (je nach Gehzeit)
-- Olivenöl: 0–2 % (optinal, nicht im STG-Original)
+- Olivenöl: 0–2 % (optional, nicht im STG-Original)
 
 Der Vorteil: Wenn Sie die Mehlmenge verdoppeln, verdoppeln sich alle anderen Zutaten automatisch proportional.
 
@@ -660,6 +664,101 @@ Pizza braucht extreme Hitze. Ein echter Holzofen erreicht 400–500 °C — eine
 - **Backzeit:** 6–10 Min bei 260–280 °C
 
 Ohne Pizzastein: Backblech umgekehrt im Ofen vorheizen, Pizza direkt darauf backen. Funktioniert deutlich besser als ein kaltes Blech.`,
+    // contentBloecke (W19): „Rezept-Mechanik-Leitformat" — Bäckerprozent-Beispiel +
+    // Hydration/Mehl-Tabelle + Stil-Vergleich, kein Diagramm. Werte/Logik gespiegelt
+    // aus components/rechner/PizzateigRechner.tsx (Mehl = Gesamtteig ÷ Faktor; 4×270 g
+    // 65 % / 24h → 644 g Mehl, 419 g Wasser, 16 g Salz, 1,3 g Frischhefe). Backkunde,
+    // kein YMYL. Quelle: AVPN-Standard / Bäckerprozent, Stand 06/2026.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Warum das Verhältnis über den Teig entscheidet',
+        html: `<p>Pizzateig besteht aus nur vier Zutaten — <strong>Mehl, Wasser, Salz und Hefe</strong> — plus der wichtigsten „Zutat" überhaupt: <strong>Zeit</strong>. Was eine mittelmäßige von einer hervorragenden Pizza unterscheidet, ist nicht ein geheimes Extra, sondern das <strong>Verhältnis</strong> dieser Komponenten zueinander und die Dauer der Teigreife. Genau dieses Verhältnis macht der Rechner sichtbar und berechenbar.</p><p>Das Werkzeug dafür ist die <strong>Bäckerprozent-Methode</strong>: Das Mehl gilt immer als 100 %, und jede andere Zutat wird als Prozentsatz des Mehlgewichts angegeben. Eine Hydration von 65 % bedeutet also 65 g Wasser auf 100 g Mehl, 2,5 % Salz bedeutet 2,5 g auf 100 g Mehl. Der große Vorteil: Ein einmal gefundenes Rezept lässt sich beliebig <strong>skalieren</strong> — für zwei Pizzen genauso wie für zwanzig —, ohne dass sich das Ergebnis ändert.</p><p>Der Rechner geht dabei rückwärts vor: Aus der gewünschten Gesamtteigmenge (Anzahl der Pizzen × Gewicht pro Teigling) und den Prozentangaben für Wasser, Salz und Hefe ermittelt er, wie viel Mehl die Basis bildet — und daraus dann die exakten Gramm jeder Zutat. So muss man nicht selbst mit Prozenten jonglieren, sondern gibt nur an, wie viele Pizzen man backen möchte und wie der Teig werden soll.</p><p>Warum überhaupt Prozente statt fester Grammangaben? Weil sie ein Rezept <strong>vergleichbar und reproduzierbar</strong> machen. Zwei Pizzaioli können über „65 % Hydration, 2,5 % Salz" exakt denselben Teig meinen — unabhängig davon, ob der eine für zwei und der andere für hundert Pizzen backt. Genau deshalb ist die Bäckerprozent-Schreibweise in Pizzerien und Bäckereien weltweit Standard. Wer sie einmal verstanden hat, liest jedes Profirezept mühelos und kann es sofort auf die eigene Küche übertragen.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Mengen für 4 Teiglinge (Bäckerprozent)',
+        schritte: [
+          { label: 'Gesamtteig: 4 Teiglinge × 270 g', formel: '4 × 270 g', ergebnis: '1.080 g' },
+          { label: 'Anteile addieren (Wasser 65 %, Salz 2,5 %, Hefe 0,2 %)', formel: '1 + 0,65 + 0,025 + 0,002', ergebnis: 'Faktor 1,677' },
+          { label: 'Mehl (100 %) = Gesamtteig ÷ Faktor', formel: '1.080 g ÷ 1,677', ergebnis: '≈ 644 g' },
+          { label: 'Wasser (65 % vom Mehl)', formel: '644 g × 0,65', ergebnis: '≈ 419 g' },
+          { label: 'Salz (2,5 %) und Frischhefe (0,2 %)', formel: '644 × 0,025  /  644 × 0,002', ergebnis: '16 g  /  1,3 g' },
+        ],
+        fazit: 'Aus vier Teiglingen à 270 g werden rund 644 g Mehl, 419 g Wasser, 16 g Salz und 1,3 g Frischhefe (entspricht etwa 0,4 g Trockenhefe). Weil alle Zutaten als Prozent des Mehls definiert sind, lässt sich das Rezept beliebig skalieren — auf zwei oder zwanzig Pizzen, ganz ohne ein neues Rezept zu suchen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Hydration: der Wasseranteil',
+        html: `<p>Die <strong>Hydration</strong> ist der wichtigste Stellhebel für den Charakter des Teigs. Sie gibt an, wie viel Wasser im Verhältnis zum Mehl enthalten ist. Ein höherer Wasseranteil macht die Krume <strong>luftiger und offenporiger</strong> — der typische, großblasige Rand (Cornicione) der neapolitanischen Pizza entsteht so. Gleichzeitig wird der Teig mit steigender Hydration aber auch <strong>weicher und klebriger</strong> und damit schwerer von Hand zu formen.</p><p>Für Einsteiger sind rund <strong>60 % Hydration</strong> ein guter Startpunkt: Der Teig ist formstabil und verzeiht Fehler. Wer mehr Übung hat, arbeitet sich an <strong>65 bis 70 %</strong> heran und wird mit einer leichteren, luftigeren Krume belohnt. Entscheidend ist dabei das Mehl: Nur ein <strong>proteinreiches Mehl</strong> kann viel Wasser binden, ohne dass der Teig zerläuft. Das Gluten — das Eiweißgerüst des Mehls — bildet das Netz, das Wasser und Gärgase hält. Mit schwachem Mehl und hoher Hydration entsteht dagegen ein zäher, schwer zu bändigender Teig.</p><p>Praktisch hilft beim Umgang mit feuchten Teigen die <strong>nasse Hand</strong> statt zusätzlichem Mehl: Wer beim Formen die Finger anfeuchtet, verhindert das Kleben, ohne den Teig mit Mehl zu „verschließen" und damit die Krume zu beschweren. Auch eine kurze <strong>Autolyse</strong> — Mehl und Wasser vorab 20 bis 40 Minuten ruhen lassen, bevor Salz und Hefe dazukommen — erleichtert die Wasseraufnahme und macht selbst höhere Hydrationen handhabbar. So lässt sich der luftige Charakter erreichen, ohne dass der Teig zur Geduldsprobe wird.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Hydration und Mehl im Überblick',
+        kopf: ['Hydration', 'Ergebnis', 'Empfohlenes Mehl'],
+        zeilen: [
+          ['58–60 %', 'fester Teig, einfach zu formen', 'Type 550 oder Tipo 00'],
+          ['62–65 %', 'Standard neapolitanisch, guter Rand', 'Tipo 00'],
+          ['68–70 %', 'luftiger, offenporiger, mehr Übung nötig', 'proteinstarkes Tipo 00'],
+          ['75 % und mehr', 'sehr luftig, klebrig (Profi, Blech/römisch)', 'sehr proteinreiches Mehl'],
+        ],
+        fussnote: 'Je höher die Hydration, desto schwerer ist der Teig von Hand zu formen — und desto mehr Protein (Gluten) braucht das Mehl, um das Wasser zu binden. Tipo 00 (Eiweiß ~12–13 %) entspricht etwa deutschem Type 550; Type 405 hat für hohe Hydration zu wenig Protein.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Pizza-Stile im Vergleich',
+        spalteA: 'Neapolitanisch',
+        spalteB: 'New York',
+        zeilen: [
+          { kriterium: 'Hydration', a: '58–65 %', b: '60–62 %' },
+          { kriterium: 'Mehl', a: 'Tipo 00', b: 'proteinreiches Brot-/Pizzamehl' },
+          { kriterium: 'Öl & Zucker', a: 'klassisch ohne', b: 'etwas Öl und Zucker im Teig' },
+          { kriterium: 'Backtemperatur', a: 'sehr heiß, über 430 °C', b: 'heiß, etwa 250–300 °C' },
+          { kriterium: 'Charakter', a: 'dünn, weich, luftiger Rand (Cornicione)', b: 'größer, faltbar, etwas knuspriger' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Hefe und Gehzeit: Zeit ist die wichtigste Zutat',
+        html: `<p>Bei der Hefe gilt eine Regel, die Anfänger oft überrascht: <strong>Je länger die Gehzeit, desto weniger Hefe</strong>. Hefe ist kein Geschmacksträger, sondern ein Triebmittel — sie produziert das Kohlendioxid, das den Teig lockert. Das eigentliche Aroma entsteht über die <strong>Zeit</strong>, während der Teig reift. Eine kleine Hefemenge über viele Stunden ergibt ein komplexeres, runderes Aroma als viel Hefe in kurzer Zeit, die schnell einen hefigen Beigeschmack hinterlässt.</p><p>Besonders empfehlenswert ist die <strong>lange, kalte Gare</strong>: Der Teig reift 24 bis 48 Stunden im Kühlschrank. Die Kälte verlangsamt die Hefe, sodass sich in Ruhe mehr Aromastoffe bilden; nebenbei wird der Teig <strong>bekömmlicher</strong>, weil mehr Zeit für den Abbau von Stärke und Klebereiweiß bleibt. Ein Hinweis zur Hefeart: <strong>Frischhefe</strong> und <strong>Trockenhefe</strong> sind nicht gleich dosiert — man rechnet grob mit dem Verhältnis 3 : 1, eine Angabe für Frischhefe entspricht also etwa einem Drittel an Trockenhefe. Vor dem Backen sollte der gekühlte Teig ein bis zwei Stunden Raumtemperatur annehmen, sonst reißt er beim Ausziehen.</p><p>Beim Gehen unterscheidet man zwei Phasen: die <strong>Stockgare</strong> (der gesamte Teig ruht im Stück) und die <strong>Stückgare</strong> (die Teiglinge sind bereits abgeteilt und geformt). Bei der Kühlschrankmethode reift der Teig meist im Stück und wird erst einige Stunden vor dem Backen zu Kugeln geformt, die dann bei Raumtemperatur nachgehen. Diese Teiglinge sollten dabei abgedeckt sein, damit die Oberfläche nicht austrocknet und eine Haut bildet. Wassertemperatur und Raumwärme steuern das Tempo mit: An einem warmen Sommertag geht derselbe Teig deutlich schneller als im kühlen Winter — ein Grund mehr, die Hefemenge nicht stur, sondern mit Blick auf die Umgebung zu wählen.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Salz und Öl richtig einsetzen',
+        html: `<p><strong>Salz</strong> ist mehr als ein Geschmacksgeber: Es <strong>strafft das Glutennetz</strong>, macht den Teig dadurch stabiler und formbarer und <strong>bremst die Hefe</strong>, was die Gärung gleichmäßiger macht. Üblich sind 2 bis 3 % vom Mehlgewicht; nahe am AVPN-Standard liegt man bei rund 2,5 %. Ein wichtiges Handwerks-Detail: Salz und Hefe sollten <strong>nicht direkt miteinander in Kontakt</strong> kommen, da Salz die Hefe in konzentrierter Form abtöten kann. In der Praxis löst man das Salz im Wasser oder mischt es erst zum Mehl, bevor die Hefe dazukommt.</p><p><strong>Öl</strong> ist optional und eine Stilfrage. Die klassische neapolitanische Pizza kommt <strong>ohne Öl im Teig</strong> aus. Beim New-York-Stil dagegen gehören etwas Olivenöl (und oft eine Prise Zucker) dazu — das Öl macht den Teig geschmeidiger und den fertigen Boden etwas knuspriger und faltbar. Wer experimentiert, fügt Öl mit 1 bis 2 % hinzu; mehr macht den Teig schnell schwer.</p><p>Eine kleine Menge <strong>Zucker oder Malz</strong> (unter 1 %) ist im New-York- und im Blechstil ebenfalls verbreitet: Sie gibt der Hefe zusätzliche Nahrung und fördert eine gleichmäßige Bräunung der Kruste — gerade dann hilfreich, wenn der Heimofen nicht die extreme Hitze eines Holzofens erreicht. Bei der klassischen neapolitanischen Pizza, die bei über 430 °C in Sekunden bräunt, ist beides überflüssig.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Schritt für Schritt zum guten Teig',
+        punkte: [
+          'Die Mengen über die Bäckerprozent-Methode bestimmen (Mehl = 100 %).',
+          'Ein Mehl mit genügend Protein wählen — Tipo 00 oder Type 550, für hohe Hydration proteinstark.',
+          'Wasser temperiert einsetzen (lauwarm bei kurzer, kühl bei langer Gare).',
+          'Salz und Hefe getrennt zugeben, nicht direkt in Kontakt bringen.',
+          'Kneten, bis der Teig glatt und elastisch ist und sich vom Rand löst.',
+          'Eine lange, am besten kalte Gare (24–48 h im Kühlschrank) einplanen.',
+          'Die Teiglinge ein bis zwei Stunden vor dem Backen auf Raumtemperatur bringen.',
+          'So heiß wie möglich backen — Pizzastein oder Stahlplatte gut vorheizen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Lange Gare lohnt sich',
+        text: 'Wer Zeit mitbringt, wird belohnt: Eine kalte Gare von 24 bis 48 Stunden im Kühlschrank gibt der Pizza ein deutlich runderes Aroma und macht den Teig bekömmlicher — bei nur einem Bruchteil der Hefe. Für 24 Stunden genügen rund 0,2 % Frischhefe vom Mehl, für 48 Stunden etwa 0,1 %. Planen heißt hier alles: Der Teig wartet geduldig auf Sie.',
+      },
+      {
+        typ: 'text',
+        titel: 'Mit Übung zum eigenen Lieblingsteig',
+        html: `<p>Die Werte im Rechner sind ein <strong>Ausgangspunkt</strong>, kein unverrückbares Gesetz. Pizzabacken ist Handwerk, und das eigene Lieblingsergebnis findet man am besten durch Ausprobieren. Ein bewährter Weg: mit einer moderaten Hydration starten und sie von Mal zu Mal um ein paar Prozentpunkte steigern, sobald das Formen sicher gelingt. Auch die Gehzeit, das Mehl und die Ofentemperatur lassen sich nach und nach anpassen. Teig verzeiht erstaunlich viel — und jede Runde bringt Erfahrung, die kein Rechner ersetzen kann. Mit der Zeit entwickelt man ein Gefühl dafür, wie sich ein gut gereifter Teig anfühlen muss.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Richtwerte, kein starres Rezept',
+        text: 'Mehlsorten, Ofentypen, Raumtemperatur und Luftfeuchtigkeit unterscheiden sich von Küche zu Küche — dieselben Mengen ergeben deshalb nicht überall exakt dasselbe Ergebnis. Der Rechner liefert verlässliche Richtwerte und ein stimmiges Verhältnis der Zutaten; die Feinabstimmung an die eigene Küche gehört zum Pizzabacken dazu.',
+      },
+    ],
     faq: [
       {
         frage: 'Was sind Bäckerprozente beim Pizzateig?',
