@@ -35,8 +35,15 @@ function findeBlockQuelle(slug) {
     try { inhalt = readFileSync(join(CONFIG_DIR, datei), 'utf8'); } catch { continue; }
     const slugIdx = inhalt.indexOf(`slug: '${slug}'`);
     if (slugIdx === -1) continue;
+    // Grenze = Anfang des nächsten Eintrags (nächstes "slug: '"). Ohne diese Grenze
+    // würde indexOf('contentBloecke:') über den Eintrag hinweg den Block des NÄCHSTEN
+    // Rechners greifen → Fremdblock-Zuordnung, falsche „OK"-Reports für nicht-migrierte
+    // Rechner (Fallback-Renderer). +7 = Länge von "slug: '".
+    const naechsterSlug = inhalt.indexOf("slug: '", slugIdx + 7);
+    const grenze = naechsterSlug === -1 ? inhalt.length : naechsterSlug;
     const cbIdx = inhalt.indexOf('contentBloecke:', slugIdx);
-    if (cbIdx === -1) return { datei, quelle: null };
+    // contentBloecke nur gültig, wenn es VOR dem nächsten Slug liegt.
+    if (cbIdx === -1 || cbIdx >= grenze) return { datei, quelle: null };
     const start = inhalt.indexOf('[', cbIdx);
     let tiefe = 0, i = start;
     for (; i < inhalt.length; i++) {
