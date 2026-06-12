@@ -8,6 +8,38 @@
 
 ---
 
+## 13.06.2026 — W19 Nachschärfung A: Block-Gate + bruchrechner auf 13 Blöcke (L-W19.Granularitaet)
+
+- **Hintergrund:** bruch/herzfrequenz/heizkosten erreichten das 1.500-Wort-Ziel
+  mit nur 7–8 Blöcken über aufgeblähte `text`-Wände → wirkten trotz eigenem
+  Leitformat generisch (kurzes Skelett scheint durch). Neue Regel
+  (SKILL.md L-W19.Granularitaet, 12.06.2026): **≥ 11 Blöcke, kein `text`-Block
+  > ~170 W, Leitformat-Baustein ≥ 2–3×.**
+- **Schritt 1 — Block-Gate im Struktur-Script:** `scripts/check-contentbloecke-
+  struktur.mjs` zeigt je Rechner jetzt die Folge-Länge `[N]` hinter der Sequenz
+  und hängt bei N < 11 ein `WARN <11` an. Sichtbar gemacht: heizkosten [8],
+  bruchrechner [8→13], arbeitszeit [10], herzfrequenz-zonen [7] tragen die
+  Warnung (Nachschärfung B/C-Kandidaten). Cosine-Hinweis unverändert.
+- **Schritt 2 — bruchrechner nachgeschärft:** Folge von 8 auf **13 Blöcke**
+  umgebaut: `text-beispielrechnung-beispielrechnung-text-beispielrechnung-
+  beispielrechnung-tabelle-text-beispielrechnung-beispielrechnung-tabelle-
+  checkliste-infobox`. **beispielrechnung 6× dominant** (Addition, Subtraktion,
+  Multiplikation, Division, Kürzen, Gemischt↔unecht); die drei `text`-Blöcke
+  auf je **≤ 170 W gesplittet** (gemessen 129/121/115 W); zweite `tabelle`
+  (Bruchtypen) ergänzt. Diagramm/vergleich/statistik weiterhin weggelassen
+  (mathe-Profil). ~1.515 W (Self-Check OK), `quellen` unverändert.
+- **Lib-Treue:** Beispielwerte deckungsgleich mit `lib/berechnungen/
+  bruchrechnung.ts` — neu hinzugekommen 5/6 − 1/4 = 7/12 (kgV 12), 12/18 = 2/3
+  (ggT 6); übrige aus dem Vorstand wiederverwendet.
+- **Splice-Methodik:** Array-Austausch per balanced-bracket-Splice (node);
+  Stolperstein dabei: doppeltes Komma `],,` vor `quellen` (Slice ohne
+  Trailing-Comma + Temp mit `],`) → sofort gefixt, tsx-Import danach sauber.
+- **Verify:** Wortzahl 1.515 (≥1.500 OK), Struktur 13 Blöcke **kein WARN <11**,
+  3/3 text-Blöcke ≤170 W, tsx-Import mathe.ts sauber (13 Bausteine, 1 quelle),
+  Folge nicht identisch zu bestehendem Goldstandard, Vercel-grün.
+
+---
+
 ## 13.06.2026 — W19 heizkosten-rechner Goldstandard (Energieträger-Vergleich-Leitformat)
 
 - **Was gebaut:** heizkosten-rechner (wohnen.ts) hat jetzt eigene `contentBloecke`
