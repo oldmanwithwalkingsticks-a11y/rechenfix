@@ -8,6 +8,41 @@
 
 ---
 
+## 13.06.2026 — W19 Nachschärfung C: heizkosten-rechner auf 13 Blöcke + Tranche abgeschlossen (L-W19.Granularitaet)
+
+- **Was gebaut:** heizkosten-rechner (wohnen.ts) von 8 auf **13 Blöcke**
+  umgebaut. Folge: `text-vergleich-tabelle-beispielrechnung-text-vergleich-
+  diagramm-beispielrechnung-text-vergleich-infobox-checkliste-infobox`.
+  **Leitformat vergleich dominant (3×: Gas/Wärmepumpe, Altbau/Neubau,
+  Öl/Pellets)** + visuell durch neuen `diagramm`-Block (variante `gestapelt`,
+  Kostenanteile Grundpreis/Arbeitspreis/Abgaben, schematisch). Zweite
+  beispielrechnung (Wärmepumpe 120 m²). ~1.506 W, `quellen` (Destatis + BMWK,
+  mit url) + affiliate (check24/heizkosten) unverändert.
+- **Granularität (L-W19.Granularitaet) erfüllt:** 13 Blöcke (≥11, kein
+  WARN <11), Leitformat-Baustein vergleich 3×, alle drei `text`-Blöcke
+  **≤ 170 W** (gemessen 154/166/155 W).
+- **Lib-Treue:** Werte exakt aus `lib/berechnungen/heizkosten.ts` +
+  `strompreis.ts`-SSOT. Neue WP-Beispielrechnung 120 m²: 120 × 40 = 4.800 kWh
+  → × 28 ct = 1.344 €/J → 112 €/M → 11,20 €/m² (per tsx gegen die Lib
+  bestätigt). diagramm-Summen (Gas 1.680, WP 1.120) sind lib-faithful; die
+  interne Aufteilung Grund-/Arbeitspreis ist als **schematisches Beispiel**
+  ausgewiesen (Rechner rechnet intern mit Mischpreis je kWh — Fußnote).
+- **Splice ohne Trailing-Comma** (wie Nachschärfung B): kein doppeltes `],,`.
+  Edit nach Splice erforderte Re-Read (node-Schreibzugriff außerhalb Edit-
+  Tracking) — danach saubere Edits.
+- **Verify:** Wortzahl 1.506 (OK), Struktur 13 Blöcke kein WARN <11, 3/3 text
+  ≤170 W, tsx-Import wohnen.ts sauber (13 Bausteine, 2 quellen, affiliate
+  intakt), Folge nicht identisch, Vercel-grün.
+
+**TRANCHE-NACHSCHÄRFUNG ABGESCHLOSSEN:** Die drei mit nur 7–8 Blöcken gebauten
+Goldstandard-Rechner sind jetzt alle ≥ 11 Blöcke: bruchrechner [13],
+herzfrequenz-zonen-rechner [12], heizkosten-rechner [13]. Damit ist
+L-W19.Granularitaet auf der auslösenden Tranche durchgesetzt. Verbleibender
+WARN-<11-Kandidat aus früheren W19-Tranchen: arbeitszeitrechner [10]
+(separates Backlog-Item, nicht Teil dieser Nachschärfung).
+
+---
+
 ## 13.06.2026 — W19 Nachschärfung B: herzfrequenz-zonen-rechner auf 12 Blöcke (L-W19.Granularitaet)
 
 - **Was gebaut:** herzfrequenz-zonen-rechner (sport.ts) von 7 auf **12 Blöcke**
