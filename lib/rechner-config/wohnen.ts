@@ -503,8 +503,8 @@ Die BEG-Förderung (KfW 458) bezuschusst den Heizungstausch auf erneuerbare Wär
         variante: 'gestapelt',
         einheit: '€/Jahr',
         gestapelt: [
-          { label: 'Erdgas (100 m²)', segmente: [ { name: 'Grundpreis', wert: 180 }, { name: 'Arbeitspreis (Energie)', wert: 1300 }, { name: 'CO₂-Preis & Abgaben', wert: 200 } ] },
-          { label: 'Wärmepumpe (100 m²)', segmente: [ { name: 'Grundpreis', wert: 120 }, { name: 'Arbeitspreis (Strom)', wert: 940 }, { name: 'Netzentgelte & Abgaben', wert: 60 } ] },
+          { label: 'Erdgas', segmente: [ { name: 'Grundpreis', wert: 180 }, { name: 'Arbeitspreis (Energie)', wert: 1300 }, { name: 'CO₂-Preis & Abgaben', wert: 200 } ] },
+          { label: 'Wärmepumpe', segmente: [ { name: 'Grundpreis', wert: 120 }, { name: 'Arbeitspreis (Strom)', wert: 940 }, { name: 'Netzentgelte & Abgaben', wert: 60 } ] },
         ],
         fussnote: 'Schematische Beispielaufteilung; die Summen (Gas 1.680 €, Wärmepumpe 1.120 €) entsprechen den Standardwerten des Rechners, der intern mit einem Mischpreis je kWh rechnet. Die reale Aufteilung in Grund- und Arbeitspreis variiert je Tarif und Anbieter — beim Gas trägt der CO₂-Preis einen wachsenden Anteil, bei der Wärmepumpe dominiert der Stromarbeitspreis. Wichtig für den Vergleich: Der Grundpreis fällt unabhängig vom Verbrauch an und macht sich bei geringem Verbrauch (gut gedämmtes Haus) prozentual stärker bemerkbar als bei hohem.',
       },

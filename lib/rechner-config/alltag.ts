@@ -842,7 +842,7 @@ Der Lebenszeit-Rechner gehört zu den meistgeteilten Online-Tools. Die überrasc
         variante: 'gestapelt',
         einheit: 'Jahre',
         gestapelt: [
-          { label: 'Lebenszeit (80 Jahre)', segmente: [
+          { label: '80 Jahre', segmente: [
             { name: 'Schlaf', wert: 26.7 },
             { name: 'Übrige Zeit (Kindheit, Freizeit, Familie)', wert: 24.5 },
             { name: 'Bildschirm / Smartphone', wert: 13.3 },
@@ -856,7 +856,7 @@ Der Lebenszeit-Rechner gehört zu den meistgeteilten Online-Tools. Die überrasc
         typ: 'statistik',
         titel: 'Beeindruckende Zahlen einer 40-jährigen Person',
         werte: [
-          { label: 'Gelebte Tage', wert: '14.609', hinweis: 'rund 40 Jahre, über 350.000 Stunden' },
+          { label: 'Gelebte Tage', wert: '14.609', hinweis: 'rund 40 Jahre, über 350.000 Stunden oder 21 Millionen Minuten' },
           { label: 'Herzschläge', wert: '≈ 1,47 Mrd', hinweis: '70 pro Minute, etwa 100.000 am Tag' },
           { label: 'Atemzüge', wert: '≈ 316 Mio', hinweis: '15 pro Minute, rund 21.600 am Tag' },
           { label: 'Bereits geschlafen', wert: '≈ 13,3 Jahre', hinweis: 'ein Drittel der bisherigen Lebenszeit, etwa 4.870 Nächte' },
