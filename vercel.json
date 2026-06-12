@@ -1,5 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- ':(exclude)docs/**' ':(exclude)*.md' ':(exclude).github/**' && exit 0 || exit 1",
   "crons": [
     {
       "path": "/api/cron/social-post",
