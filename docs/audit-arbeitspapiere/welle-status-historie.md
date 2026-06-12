@@ -4,7 +4,42 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 12.06.2026
+**Stand:** 13.06.2026
+
+---
+
+## 13.06.2026 — W19 heizkosten-rechner Goldstandard (Energieträger-Vergleich-Leitformat)
+
+- **Was gebaut:** heizkosten-rechner (wohnen.ts) hat jetzt eigene `contentBloecke`
+  im **„Vergleich-Leitformat"** (Energieträger gegenübergestellt). Folge:
+  `text-vergleich-tabelle-beispielrechnung-text-vergleich-infobox-checkliste`
+  (8 Bausteine). Prägend: zwei `vergleich`-Blöcke (Gas vs. Wärmepumpe +
+  Altbau vs. Neubau) als Dominanzformat, gestützt durch 5-Energieträger-Tabelle.
+  ~1.534 W (Self-Check OK), inkl. `quellen` (Destatis + BMWK, mit url, YMYL-nah).
+  Kein Autorenblock. Affiliate (check24/heizkosten) unverändert erhalten.
+- **Werte 1:1 aus SSOT gespiegelt** (`lib/berechnungen/heizkosten.ts` +
+  `strompreis.ts`): Gas 140 kWh/m²/12 ct, Öl 150/13, Fernwärme 120/14,
+  Wärmepumpe 40/`getStrompreis('waermepumpen_tarif')`=28, Pellets 130/8.
+  Tabellen-/Beispielwerte per tsx gegen die Lib nachgerechnet: bei 100 m²
+  Gas 1.680 €, Öl 1.950 €, Fernwärme 1.680 €, WP 1.120 €, Pellets 1.040 €;
+  Gas-Beispiel 14.000 kWh → 1.680 €/J → 140 €/M → 16,80 €/m². L-37 angewandt
+  (Werte aus Lib statt Memory; WP-Verbrauch 40 = post-JAZ-Strombedarf, NICHT
+  140 — kein Hartkodieren abweichend vom SSOT).
+- **Bestand-Audit (Pre-Phase Schritt 3):** Bestehende `erklaerung` + 5 FAQ
+  geprüft — Preisangaben (Gas 12, Öl 13, Fernwärme 14, WP 28/33–37, Pellets 8)
+  **SSOT-konsistent und aktuell**, beispiel-Feld (80×140×12=1.344) korrekt.
+  **Kein Fix nötig.** `erklaerung` bleibt als Fallback (contentBloecke rendert
+  statt erklaerung); FAQ bleibt separat sichtbar.
+- **Struktur:** Folge NICHT identisch zu bestehendem Goldstandard (Cosinus 0,91
+  zu kalorien/pizzateig/stundenlohn ist Komposition-Artefakt — andere Reihenfolge
+  und Bausteinzahl; Score-Höhe laut Prompt egal, nur Nicht-Identität ist Gate)
+  → konform.
+- **Verify:** Wortzahl 1.534 (≥1.500 OK), tsx-Import wohnen.ts sauber
+  (8 Bausteine, 2 quellen, affiliate intakt, Typen-Folge bestätigt), Vercel-grün.
+
+**Zweiter Wohnen-Goldstandard** (nach stromkosten-rechner) → contentBloecke-
+Goldstandard-Rechner jetzt 20. Eigenes Vergleich-Leitformat, abgegrenzt vom
+diagramm-lastigen stromkosten-rechner.
 
 ---
 
