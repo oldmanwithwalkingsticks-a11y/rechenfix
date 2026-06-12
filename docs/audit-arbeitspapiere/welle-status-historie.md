@@ -8,6 +8,42 @@
 
 ---
 
+## 13.06.2026 — Build-CPU-Sparplan (A + C gelandet, B blockiert durch Token-Scope)
+
+Drei kostenneutrale Maßnahmen zur Senkung der Vercel-Build-CPU, ohne Schutz-Checks
+oder Deployment-Artefakte zu verlieren.
+
+- **A — Doku-only-Pushes überspringen den Build (gelandet):** `vercel.json` um
+  additives `ignoreCommand` erweitert (crons + $schema unverändert):
+  `git diff --quiet HEAD^ HEAD -- ':(exclude)docs/**' ':(exclude)*.md' ':(exclude).github/**' && exit 0 || exit 1`.
+  Berührt ein Push nur docs/, *.md oder .github/, hat der Code-Diff keine
+  Änderung → exit 0 → Build wird übersprungen. Code-Änderungen → exit 1 → Build.
+  Fehlendes HEAD^ → git-Fehler → `|| exit 1` → baut (sicher). Lokal verifiziert
+  (Code-HEAD → exit 1/Build). **Größter Hebel.**
+- **C — Timestamp-Cache-Killer entfernt (gelandet):** `scripts/generate-client-data.ts`
+  Header trug `Generated: <YYYY-MM-DD>` → die generierte `client-data.ts` änderte
+  sich an jedem Kalendertag und brach den Build-Cache grundlos. Datum durch
+  statischen Text ersetzt; Daten unverändert. `client-data.ts` bleibt generiert
+  + ungetrackt.
+- **B — Gate-Checks in GitHub Action auslagern (BLOCKIERT, Handoff):** Geplant:
+  neue `.github/workflows/checks.yml` (push main + PRs, Node 20, `npm ci`, dann
+  die 4 Gate-Checks footer/jahreswerte/backticks/slug-drift), prebuild gekürzt
+  auf die 3 Generierungs-Schritte (client-data, tipp-constants, critical-css),
+  neuer `precommit-checks`-npm-Script als lokales Netz. **Konnte nicht gepusht
+  werden:** der GitHub-PAT hat keinen `workflow`-Scope („refusing to allow a
+  Personal Access Token to create or update workflow … without workflow scope").
+  Bis das behoben ist, bleibt der prebuild bewusst unverändert (alle 4 Checks
+  gaten weiter auf Vercel — kein Gating-Verlust). Die fertige `checks.yml` liegt
+  als untracked Datei im Repo. **Handoff an Karsten:** entweder PAT mit
+  `workflow`-Scope neu ausstellen und `git add .github/workflows/checks.yml`
+  pushen, oder die Datei über die GitHub-Web-UI anlegen; danach prebuild auf
+  `npx tsx scripts/generate-client-data.ts && npx tsx scripts/generate-tipp-constants.ts && node scripts/build-critical-css.mjs`
+  kürzen und `precommit-checks` ergänzen.
+- **Test A:** Dieser Doku-Push berührt nur `*.md` → laut `ignoreCommand` soll er
+  KEINEN Build auslösen (Selbsttest der Maßnahme).
+
+---
+
 ## 13.06.2026 — W19 lebenszeit-rechner Goldstandard (diagramm:gestapelt erstmals dominant)
 
 - **Was gebaut:** lebenszeit-rechner (alltag.ts) hat jetzt `contentBloecke` +
