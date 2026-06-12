@@ -42,7 +42,7 @@ for (const datei of DATEIEN) {
 }
 const ziel = process.argv[2];
 console.log('=== Struktur-Fingerabdruck (Baustein-Folge je Rechner) ===');
-for (const r of migriert) console.log(`${(r.slug + (ziel===r.slug?' *':'')).padEnd(26)} ${r.seq.join('-')}`);
+for (const r of migriert) console.log(`${(r.slug + (ziel===r.slug?' *':'')).padEnd(26)} ${r.seq.join('-')}  [${r.seq.length}]${r.seq.length<11?'  WARN <11':''}`);
 console.log(`\n${migriert.length} migrierte Rechner.`);
 const pairs = [];
 for (let i=0;i<migriert.length;i++) for (let j=i+1;j<migriert.length;j++) {
