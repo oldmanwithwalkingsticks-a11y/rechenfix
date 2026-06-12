@@ -8,6 +8,40 @@
 
 ---
 
+## 13.06.2026 — W19 Nachschärfung B: herzfrequenz-zonen-rechner auf 12 Blöcke (L-W19.Granularitaet)
+
+- **Was gebaut:** herzfrequenz-zonen-rechner (sport.ts) von 7 auf **12 Blöcke**
+  umgebaut. Folge: `text-tabelle-statistik-beispielrechnung-text-tabelle-
+  beispielrechnung-tabelle-text-infobox-checkliste-infobox`. **Leitformat
+  tabelle dominant (3×)** + datenlastig durch neuen `statistik`-Block
+  (polarisierte Trainingswoche, Zeitanteile je Zone). Zwei beispielrechnungen
+  (Karvonen mit Ruhepuls + einfache %-HFmax-Methode), neue Alters-Richtwert-
+  Tabelle. diagramm/vergleich weggelassen (sport-Profil). ~1.505 W, `quellen`
+  (3 Studien) unverändert.
+- **Granularität (L-W19.Granularitaet) erfüllt:** 12 Blöcke (≥11, kein
+  WARN <11), Leitformat-Baustein tabelle 3×, alle drei `text`-Blöcke
+  **≤ 170 W** (gemessen 145/150/154 W) — die alten Prosa-Wände in mehrere
+  Bausteine aufgeteilt.
+- **Lib-Treue:** Werte exakt aus `lib/berechnungen/herzfrequenz-zonen.ts`.
+  Karvonen 40 J/Ruhepuls 60 → Zone 2 = 132–144 bpm; einfache %-Methode 40 J →
+  Zone 3 126–144, Zone 4 144–162 bpm; Alters-Tabelle 20–60 J (HFmax Tanaka
+  194/187/180/173/166, Zone 2 jeweils 60–70 %) per node berechnet. Beide
+  Methoden (mit/ohne Ruhepuls) sind lib-faithful und in den Blöcken explizit
+  als unterschiedliche Verfahren ausgewiesen (keine widersprüchlichen Werte).
+- **Wellbeing-Pflicht:** sportwissenschaftlich-neutral, keine Abnehm-/Defizit-
+  Frames. Zone 2 als Grundlagenausdauer/Fettstoffwechsel rein trainings-
+  physiologisch (Tabellen-Fußnote). `infobox(warnung)` zu ärztlicher Abklärung
+  bei Vorerkrankung/Betablocker/Schwangerschaft erhalten; neue `infobox(tipp)`
+  Brustgurt vs. Handgelenk-Sensor (kein Gesundheitsversprechen).
+- **Splice-Methodik (aus Nachschärfung A gelernt):** Temp-Array ohne Trailing-
+  Comma (`]` statt `],`) → der bestehende Komma vor `quellen` bleibt, kein
+  doppeltes `],,` wie bei bruchrechner. tsx-Import direkt sauber.
+- **Verify:** Wortzahl 1.505 (OK), Struktur 12 Blöcke kein WARN <11, 3/3 text
+  ≤170 W, tsx-Import sport.ts sauber (12 Bausteine, 3 quellen), Folge nicht
+  identisch, Vercel-grün.
+
+---
+
 ## 13.06.2026 — W19 Nachschärfung A: Block-Gate + bruchrechner auf 13 Blöcke (L-W19.Granularitaet)
 
 - **Hintergrund:** bruch/herzfrequenz/heizkosten erreichten das 1.500-Wort-Ziel
