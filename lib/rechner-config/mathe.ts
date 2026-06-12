@@ -92,6 +92,89 @@ Bruchrechnung ist eine der wichtigsten Grundlagen der Mathematik. Wer Brüche si
         antwort: 'Man multipliziert mit dem Kehrwert des zweiten Bruchs. Den Kehrwert erhält man, indem Zähler und Nenner getauscht werden. Beispiel: 3/4 ÷ 2/5 = 3/4 × 5/2 = 15/8.',
       },
     ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Bruchrechnung verstehen: Zähler, Nenner und die vier Bruchtypen',
+        html: `<p>Ein <strong>Bruch</strong> beschreibt einen Teil eines Ganzen. Er besteht aus zwei Zahlen, die durch einen Bruchstrich getrennt sind: Über dem Strich steht der <strong>Zähler</strong>, darunter der <strong>Nenner</strong>. Der Nenner sagt, in wie viele gleich große Teile das Ganze zerlegt wird; der Zähler sagt, wie viele dieser Teile gemeint sind. Bei 3/4 ist das Ganze in vier Viertel geteilt und drei davon sind ausgewählt — gesprochen „drei Viertel".</p><p>Es lohnt sich, vier Bruchtypen sauber zu unterscheiden, weil sie beim Rechnen unterschiedlich behandelt werden. Ein <strong>echter Bruch</strong> hat einen Zähler, der kleiner als der Nenner ist (2/3, 5/8) — sein Wert liegt zwischen 0 und 1. Ein <strong>unechter Bruch</strong> hat einen Zähler, der größer oder gleich dem Nenner ist (7/4, 9/9) — sein Wert ist mindestens 1. Eine <strong>gemischte Zahl</strong> schreibt einen unechten Bruch als Summe aus ganzer Zahl und echtem Bruch, etwa 1¾ statt 7/4. Und ein <strong>Scheinbruch</strong> wie 6/3 oder 8/8 lässt sich vollständig zu einer ganzen Zahl kürzen.</p><p>Für das Rechnen gilt eine zentrale Faustregel: <strong>Multiplizieren und Dividieren sind unkompliziert</strong>, weil man dabei einfach Zähler und Nenner verarbeitet. <strong>Addieren und Subtrahieren brauchen Vorarbeit</strong>, weil die Brüche erst denselben Nenner — den Hauptnenner — bekommen müssen. Genau an dieser Stelle scheitern die meisten Rechnungen, deshalb zeigt der Rechner jeden Zwischenschritt: Hauptnenner, Erweitern, Rechnen und am Ende das Kürzen. Wer diese Reihenfolge verinnerlicht, rechnet Brüche zuverlässig — und versteht zugleich, warum gemischte Zahlen vor dem Rechnen immer zuerst in unechte Brüche umgewandelt werden.</p><p>Brüche und <strong>Dezimalzahlen</strong> sind zwei Schreibweisen für denselben Sachverhalt: Jeder Bruch lässt sich durch Teilen von Zähler durch Nenner in eine Dezimalzahl überführen (3/4 = 0,75), und viele Dezimalzahlen lassen sich umgekehrt als Bruch über einer Zehnerpotenz schreiben und kürzen (0,75 = 75/100 = 3/4). Manche Brüche ergeben dabei <strong>periodische</strong> Dezimalzahlen, etwa 1/3 = 0,333… — ein Hinweis darauf, dass der Bruch die exaktere Darstellung ist, weil er den Wert ohne Rundung festhält. Genau deshalb wird in der Mathematik so oft mit Brüchen statt mit gerundeten Kommazahlen gerechnet: Sie bleiben präzise, solange man sie nicht in eine Dezimalzahl umwandelt. Im Alltag begegnen einem Brüche ständig — ein halber Liter Milch, ein Viertel Stunde, drei Viertel des Wegs —, und genau dieses Gespür für Anteile ist die Grundlage, auf der Prozentrechnung, Wahrscheinlichkeiten und Algebra später aufbauen.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Addition ungleichnamiger Brüche: 1/3 + 2/5',
+        schritte: [
+          { label: 'Hauptnenner bestimmen (kgV der Nenner 3 und 5)', formel: 'kgV(3, 5) = 15', ergebnis: 'Hauptnenner 15' },
+          { label: 'Ersten Bruch erweitern (× 5 in Zähler und Nenner)', formel: '1/3 = (1×5)/(3×5)', ergebnis: '5/15' },
+          { label: 'Zweiten Bruch erweitern (× 3 in Zähler und Nenner)', formel: '2/5 = (2×3)/(5×3)', ergebnis: '6/15' },
+          { label: 'Zähler addieren, Nenner beibehalten', formel: '5/15 + 6/15', ergebnis: '11/15' },
+          { label: 'Kürzen prüfen (ggT von 11 und 15)', formel: 'ggT(11, 15) = 1', ergebnis: 'bereits gekürzt' },
+        ],
+        fazit: 'Das Ergebnis ist 11/15 ≈ 0,733. Entscheidend ist Schritt 1: Nur über den gemeinsamen Hauptnenner werden die beiden Brüche vergleichbar. Der Nenner wird beim Addieren nie mitaddiert — er bleibt 15. Weil 11 und 15 keinen gemeinsamen Teiler außer 1 haben, ist der Bruch schon vollständig gekürzt. Die Subtraktion läuft Schritt für Schritt identisch ab, nur im vierten Schritt zieht man die Zähler voneinander ab statt sie zu addieren: 6/15 − 5/15 ergäbe entsprechend 1/15.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Multiplikation und Division: 2/3 × 3/4 und 3/4 ÷ 2/5',
+        schritte: [
+          { label: 'Multiplikation: Zähler mal Zähler, Nenner mal Nenner', formel: '2/3 × 3/4 = (2×3)/(3×4)', ergebnis: '6/12' },
+          { label: 'Ergebnis kürzen (ggT von 6 und 12 ist 6)', formel: '6/12 = (6÷6)/(12÷6)', ergebnis: '1/2' },
+          { label: 'Division: durch einen Bruch teilen = mit Kehrwert mal nehmen', formel: '3/4 ÷ 2/5 = 3/4 × 5/2', ergebnis: 'Kehrwert von 2/5 ist 5/2' },
+          { label: 'Zähler und Nenner multiplizieren', formel: '(3×5)/(4×2)', ergebnis: '15/8' },
+          { label: 'Als gemischte Zahl darstellen', formel: '15/8 = 8/8 + 7/8', ergebnis: '1 7/8' },
+        ],
+        fazit: 'Multiplizieren heißt „über Kreuz nicht nötig" — einfach geradeaus Zähler und Nenner malnehmen, danach kürzen. Bei der Division wird der zweite Bruch gestürzt (Zähler und Nenner getauscht) und dann multipliziert. Der Merksatz lautet: „Durch einen Bruch teilen heißt mit seinem Kehrwert multiplizieren." 15/8 ist ein unechter Bruch und entspricht der gemischten Zahl 1 7/8 = 1,875. Praktischer Vorteil der Multiplikation: Man kann schon vor dem Malnehmen „über Kreuz" kürzen — bei 2/3 × 3/4 lassen sich die 3 im Zähler und die 3 im Nenner streichen —, wodurch die Zwischenzahlen klein bleiben und das Endergebnis oft gar nicht mehr gekürzt werden muss.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Die vier Grundrechenarten mit Brüchen im Überblick',
+        kopf: ['Operation', 'Vorgehen', 'Beispiel'],
+        zeilen: [
+          ['Addition (+)', 'Auf Hauptnenner erweitern, dann Zähler addieren', '1/3 + 2/5 = 5/15 + 6/15 = 11/15'],
+          ['Subtraktion (−)', 'Auf Hauptnenner erweitern, dann Zähler subtrahieren', '3/4 − 1/2 = 3/4 − 2/4 = 1/4'],
+          ['Multiplikation (×)', 'Zähler mal Zähler, Nenner mal Nenner, dann kürzen', '2/3 × 3/4 = 6/12 = 1/2'],
+          ['Division (÷)', 'Mit dem Kehrwert des zweiten Bruchs multiplizieren', '3/4 ÷ 2/5 = 3/4 × 5/2 = 15/8'],
+        ],
+        fussnote: 'Nur Addition und Subtraktion verlangen gleiche Nenner. Multiplikation und Division funktionieren mit beliebigen Nennern direkt. In allen vier Fällen steht das Kürzen am Ende — nie zwischendrin, solange noch erweitert oder multipliziert wird.',
+      },
+      {
+        typ: 'text',
+        titel: 'Kürzen und Hauptnenner: ggT und kgV als Werkzeuge',
+        html: `<p>Zwei Begriffe tauchen beim Bruchrechnen immer wieder auf — der <strong>größte gemeinsame Teiler (ggT)</strong> zum Kürzen und das <strong>kleinste gemeinsame Vielfache (kgV)</strong> zum Erweitern. Beide klingen abstrakt, sind aber schnell erklärt. Der ggT zweier Zahlen ist die größte Zahl, durch die sich beide ohne Rest teilen lassen. Der kgV ist die kleinste Zahl, in der beide Ausgangszahlen als Vielfache enthalten sind.</p><p><strong>Kürzen</strong> bedeutet, Zähler und Nenner durch denselben Wert — am besten gleich durch den ggT — zu teilen. Der Wert des Bruchs ändert sich dabei nicht, nur seine Schreibweise wird einfacher. Aus 12/18 wird mit dem ggT 6 sofort 2/3, statt mehrfach durch 2 und durch 3 zu teilen. Ein Bruch heißt <strong>vollständig gekürzt</strong>, wenn Zähler und Nenner außer der 1 keinen gemeinsamen Teiler mehr haben. Das ist die Standardform, in der ein Ergebnis angegeben wird.</p><p>Den <strong>Hauptnenner</strong> beim Addieren findet man über den kgV der Nenner. Für 1/3 und 2/5 ist der kgV von 3 und 5 die Zahl 15 — also der kleinste Nenner, auf den sich beide Brüche bringen lassen. Man könnte zwar immer das Produkt der Nenner nehmen (3 × 5 = 15, hier identisch), bei größeren Zahlen führt das jedoch zu unnötig großen Werten: Für 1/4 + 1/6 ist das Produkt 24, der kgV aber nur 12 — die Rechnung bleibt mit 12 deutlich übersichtlicher. Der Rechner ermittelt ggT und kgV automatisch und macht beide Schritte im Rechenweg sichtbar, sodass man die Logik nachvollziehen statt auswendig lernen kann.</p><p>Wie findet man den ggT von Hand? Zwei Wege sind üblich. Bei der <strong>Primfaktorzerlegung</strong> zerlegt man beide Zahlen in ihre Primfaktoren und multipliziert die gemeinsamen: 12 = 2 × 2 × 3 und 18 = 2 × 3 × 3 haben die gemeinsamen Faktoren 2 und 3, also ggT = 2 × 3 = 6. Schneller geht der <strong>euklidische Algorithmus</strong>: Man teilt die größere durch die kleinere Zahl und rechnet mit dem Rest weiter, bis dieser 0 ist. Für 18 und 12 ergibt 18 geteilt durch 12 den Rest 6, dann 12 geteilt durch 6 den Rest 0 — der letzte Teiler 6 ist der ggT. Beide Verfahren liefern dasselbe Ergebnis; der euklidische Algorithmus ist bei großen Zahlen deutlich effizienter und steckt genau deshalb auch im Rechner. Wer den ggT sicher bestimmen kann, kürzt Brüche in einem einzigen Schritt — statt sich umständlich durch wiederholtes Halbieren und Dritteln zu tasten.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Gemischte Zahl und unechter Bruch umwandeln',
+        schritte: [
+          { label: 'Gemischt → unecht: ganze Zahl mit Nenner malnehmen', formel: '2¾ → 2 × 4', ergebnis: '8 Viertel' },
+          { label: 'Zähler addieren — Nenner bleibt gleich', formel: '(2×4 + 3)/4', ergebnis: '11/4' },
+          { label: 'Unecht → gemischt: Zähler durch Nenner teilen (ganzzahlig)', formel: '11 ÷ 4 = 2 Rest 3', ergebnis: 'ganzer Anteil 2' },
+          { label: 'Rest über den Nenner anhängen', formel: '2 + 3/4', ergebnis: '2¾' },
+        ],
+        fazit: 'Beide Richtungen sind Gegenstücke: 2¾ und 11/4 bezeichnen exakt denselben Wert (2,75). Vor dem Multiplizieren oder Dividieren wandelt man gemischte Zahlen grundsätzlich in unechte Brüche um — sonst rechnet man versehentlich nur mit dem Bruchteil und verliert den ganzen Anteil. Umgekehrt gibt man ein Endergebnis oft als gemischte Zahl an, weil 2¾ anschaulicher ist als 11/4: Man sieht auf einen Blick, dass der Wert knapp unter 3 liegt. Wichtig dabei: Der Bruchanteil einer gemischten Zahl sollte stets ein echter, vollständig gekürzter Bruch sein.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Häufige Fehler beim Bruchrechnen — und wie man sie vermeidet',
+        punkte: [
+          'Nenner mitaddiert: Bei 1/3 + 1/3 ist das Ergebnis 2/3, nicht 2/6. Beim Addieren werden nur die Zähler addiert, der gemeinsame Nenner bleibt unverändert.',
+          'Ohne Hauptnenner addiert: 1/2 + 1/3 ist nicht 2/5. Erst auf den Hauptnenner 6 erweitern (3/6 + 2/6 = 5/6), dann rechnen.',
+          'Bei der Division nicht gestürzt: 3/4 ÷ 2/5 wird zu 3/4 × 5/2 — der zweite Bruch wird zum Kehrwert, nicht der erste.',
+          'Gemischte Zahl direkt verrechnet: 2¾ muss vor Multiplikation und Division zu 11/4 werden, sonst fällt der ganze Anteil unter den Tisch.',
+          'Zu früh oder unvollständig gekürzt: Kürzen gehört ans Ende. Und 12/18 zu 6/9 zu kürzen reicht nicht — vollständig gekürzt ist erst 2/3.',
+          'Vorzeichen verloren: 1/4 − 3/4 = −2/4 = −1/2. Wird der größere Bruch abgezogen, ist das Ergebnis negativ; das Minus gehört in den Zähler.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Merkregel: Kürzen immer zuletzt',
+        text: 'Kürze nie mitten in einer Additions- oder Subtraktionsrechnung, sondern erst das Endergebnis. Wer beim Erweitern gleichzeitig kürzt, verliert leicht den Überblick über Erweiterungsfaktoren und Hauptnenner. Reihenfolge beim Addieren: Hauptnenner finden → erweitern → Zähler rechnen → einmal am Schluss vollständig kürzen. Beim Multiplizieren ist das „über Kreuz"-Kürzen vor dem Malnehmen dagegen ausdrücklich erlaubt und sogar empfehlenswert — es hält die Zahlen klein, ändert aber nichts am Prinzip, dass die vollständig gekürzte einfachste Form immer das Ziel der Angabe ist. Eine gute Kontrolle: Rechne das Ergebnis am Ende als Dezimalzahl nach und vergleiche es mit einer groben Schätzung der Ausgangsbrüche.',
+      },
+    ],
+    quellen: [
+      {
+        titel: 'Bruchrechnung — Grundregeln der Arithmetik',
+        hinweis: 'Standard-Schulmathematik (Sekundarstufe I); die Regeln zu Hauptnenner (kgV), Kürzen (ggT) und Kehrwert-Division sind allgemeingültig und nicht an eine konkrete Quelle gebunden.',
+      },
+    ],
   },
   {
     slug: 'einheiten-umrechner',
