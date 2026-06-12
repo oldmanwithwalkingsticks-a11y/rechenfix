@@ -8,6 +8,45 @@
 
 ---
 
+## 12.06.2026 — W19 herzfrequenz-zonen-rechner Goldstandard (ERSTER sport-Goldstandard)
+
+- **Was gebaut:** herzfrequenz-zonen-rechner (sport.ts) hat jetzt eigene
+  `contentBloecke` im **„Tabelle-Leitformat"** (Zonen-Matrix dominiert). Folge:
+  `text-tabelle-beispielrechnung-text-tabelle-infobox-checkliste` (7 Bausteine).
+  Prägend: zwei Tabellen (5-Zonen-Matrix + HFmax-Formel-Vergleich) als
+  Dominanzformat; Diagramm/Vergleich/Statistik bewusst WEGGELASSEN → sport-eigen.
+  ~1.544 W (Self-Check OK), inkl. `quellen` (3 Studien). Kein Autorenblock
+  (nicht Top-10), kein Affiliate.
+- **ERSTER sport-Goldstandard** → sport-Profil etabliert: tabelle-dominant,
+  studienbasierte Quellen, Wellbeing-neutral. contentBloecke-Goldstandard-
+  Rechner jetzt 19; Erst-Migration nun in 8 Kategorien (Finanzen, Alltag,
+  Wohnen, Gesundheit, Arbeit, Kochen, Mathe, **Sport**).
+- **Formel-Wahrheit gespiegelt aus `lib/berechnungen/herzfrequenz-zonen.ts`:**
+  Fox 220−Alter, Tanaka 208−0,7×Alter, Karvonen = Ruhepuls + (HFmax−Ruhepuls)×
+  Intensität; ZONEN_ANTEILE 1–5 (0,50/0,60/0,70/0,80/0,90/1,00). Beispiel
+  (40 J, Ruhepuls 60): HFmax Tanaka 180, HFR 120, Zone 2 = 132–144 bpm —
+  per node gegen die Lib nachgerechnet, alle Werte deckungsgleich.
+- **Wellbeing-Handling (Gesundheit/YMYL):** Sportwissenschaftlich-neutral,
+  KEINE Abnehm-/Defizit-Frames. Zone 2 als „Grundlagenausdauer/Fettstoffwechsel"
+  rein trainingsphysiologisch, explizit NICHT als Diät-Werkzeug (Fußnote in
+  Zonen-Tabelle). Eigene `infobox(warnung)`: ärztliche Abklärung bei
+  Herz-Kreislauf-Vorerkrankung, Betablocker, Schwangerschaft, Symptomen;
+  Belastung ans Fitnesslevel anpassen.
+- **Bestand-Fix (Pre-Phase Schritt 3):** Das `beispiel`-Feld trug einen
+  **Karvonen-Rechenfehler** — Zone-2-Obergrenze stand auf „147 bpm", korrekt
+  ist 150 bpm (65 + (187−65)×0,7 = 150,4). Auf 150 korrigiert. Zugleich das
+  Diät-Framing „Für Fettverbrennung ideal" → „Ideal für den Grundlagenausdauer-
+  Aufbau" neutralisiert. Bestehende `erklaerung` + 6 FAQ sonst fachlich
+  korrekt (bleiben als Fallback-Feld; contentBloecke rendert statt erklaerung).
+- **Struktur:** Folge `text-tabelle-beispielrechnung-text-tabelle-infobox-
+  checkliste` NICHT identisch zu einem bestehenden Goldstandard (Cosinus 0,98
+  zu mwst ist reines Komposition-Artefakt — mwst hat 11 Bausteine inkl. 3×
+  tabelle; Score-Höhe laut Prompt egal, nur Nicht-Identität ist Gate) → konform.
+- **Verify:** Wortzahl 1.544 (≥1.500 OK), tsx-Import sport.ts sauber
+  (7 Bausteine, 3 quellen, Typen-Folge bestätigt), Vercel-grün.
+
+---
+
 ## 12.06.2026 — W19 bruchrechner Goldstandard (erste mathe-Migration)
 
 - **Was gebaut:** bruchrechner (mathe.ts) hat jetzt eigene `contentBloecke` im
