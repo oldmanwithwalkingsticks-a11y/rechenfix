@@ -8,6 +8,40 @@
 
 ---
 
+## 13.06.2026 — W19 autokosten-rechner Goldstandard (statistik-Leitformat, Granularität v2)
+
+- **Was gebaut:** autokosten-rechner (auto.ts) hat jetzt `contentBloecke` +
+  `quellen` (Neueintrag, vorher beides ungesetzt). **13 Blöcke** direkt nach
+  L-W19.Granularitaet gebaut (≥11, kein WARN). Folge: `text-statistik-text-
+  statistik-beispielrechnung-tabelle-statistik-text-beispielrechnung-tabelle-
+  checkliste-infobox-infobox`. **Leitformat statistik dominant (3×:
+  Kostenblöcke-Aufschlüsselung, Restwert-Staffel nach Haltedauer,
+  Fixkosten-vs-variable-Kosten)** + 2 beispielrechnung + 2 tabelle. ~1.519 W,
+  alle drei `text`-Blöcke ≤ 170 W (max 167).
+- **Abgrenzung zu spritkosten (Pflicht laut Prompt):** spritkosten ist
+  diagramm-/vergleich-lastig (15 Blöcke mit diagramm + vergleich); autokosten
+  trägt das statistik-Leitformat und lässt diagramm/vergleich bewusst weg.
+  Folge nicht identisch.
+- **Lib-Treue:** Alle Zahlen per tsx aus `lib/berechnungen/autokosten.ts`
+  gerechnet (Beispielfahrzeug 25.000 € Neuwagen, 15.000 km/Jahr, 7 l/100 km
+  Benzin @ 1,75 €/l = `STANDARD_PREISE.benzin`): gesamtJahr 6.599 €,
+  0,44 €/km, 18,08 €/Tag, 550 €/Monat; Kostenblöcke Wertverlust 2.427 (37 %) /
+  Kraftstoff 1.838 (28 %) / Versicherung 960 (15 %) / Wartung&Reifen 650 /
+  Parken&Pflege 540 / Steuer&TÜV 185; Restwert-Staffel 19.000/14.877/12.866/
+  10.686 € (76/60/51/43 % bei Haltedauer 1/3/5/8 J); Viel-/Wenigfahrer
+  5.374 €→1,07 €/km (5.000 km) vs. 7.212 €→0,36 €/km (20.000 km).
+- **Bestand-Fix:** Das `beispiel`-Feld trug **gedriftete Werte** (Wertverlust
+  245 €/Mon, Sprit 181 €/Mon, Gesamt 571 €/Mon, 0,46 €/km) — passten nicht zur
+  Lib mit Standard-Benzinpreis 1,75. Auf lib-exakt korrigiert (202/153/550 €,
+  0,44 €/km) mit explizit genannten Eingaben. `erklaerung` + 7 FAQ sonst
+  fachlich konsistent (24 %/13 %-Wertverlustkurve = `WERTVERLUST_NEUWAGEN`),
+  bleiben als Fallback.
+- **Verify:** Wortzahl 1.519 (OK), Struktur 13 Blöcke kein WARN <11
+  (Gesamt-Sweep weiterhin 0× WARN), 3/3 text ≤170 W, tsx-Import auto.ts sauber
+  (13 Bausteine, 2 quellen), Folge nicht identisch zu spritkosten, Vercel-grün.
+
+---
+
 ## 13.06.2026 — W19 Nachschärfung D: arbeitszeitrechner (Altlast, Gate-Treffer [10]→[12])
 
 - **Was gebaut:** arbeitszeitrechner (arbeit.ts) von 10 auf **12 Blöcke**
