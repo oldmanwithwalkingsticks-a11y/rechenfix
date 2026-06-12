@@ -8,6 +8,42 @@
 
 ---
 
+## 12.06.2026 — W19 bruchrechner Goldstandard (erste mathe-Migration)
+
+- **Was gebaut:** bruchrechner (mathe.ts) hat jetzt eigene `contentBloecke` im
+  **„Beispielrechnung-Leitformat"**. Folge:
+  `text-beispielrechnung-beispielrechnung-tabelle-text-beispielrechnung-checkliste-infobox`
+  (8 Bausteine). Prägend: drei Schritt-für-Schritt-Rechnungen (Addition
+  ungleichnamig via kgV, Multiplikation+Division mit Kehrwert, Gemischt↔unecht)
+  als Dominanzformat; Diagramm/Vergleich bewusst WEGGELASSEN → mathe-eigen.
+  ~1.530 W (Self-Check OK), inkl. `quellen`. Kein Autorenblock (nicht Top-10),
+  kein Affiliate (Mathe/Schule bleibt affiliate-frei).
+- **Formel-Wahrheit gespiegelt aus `lib/berechnungen/bruchrechnung.ts`:**
+  ggt/kgv/kuerzen/gemischtZuBruch/bruchZuDezimal. Keine erfundenen Rechenregeln.
+  Beispielwerte deckungsgleich mit Lib: 1/3+2/5=11/15 (HN 15), 2/3×3/4=1/2,
+  3/4÷2/5=15/8=1⅞, 12/18=2/3 (ggT 6), 2¾=11/4.
+- **Bestand-Audit (Pre-Phase Schritt 3):** Bestehende `erklaerung` + 6 FAQ
+  gegen Lib geprüft — **keine fachlichen Fehler**, alle Werte korrekt
+  (Hauptnenner/Kürzen/Kehrwert-Division/Dezimal-Umwandlung). Kein Fix nötig;
+  `erklaerung` bleibt unverändert als Fallback-Feld neben den neuen Bausteinen.
+- **quellen NEU:** didaktischer Eintrag OHNE url (Mathe/Alltag-Regel) —
+  „Bruchrechnung — Grundregeln der Arithmetik", Hinweis auf Sekundarstufe-I-
+  Allgemeingültigkeit (kgV/ggT/Kehrwert nicht an konkrete Quelle gebunden).
+- **Struktur:** Score 0,99 zu prozentrechner — reines Komposition-Artefakt
+  (beide beispielrechnung-dominant), Folge aber NICHT identisch (prozent hat
+  3× beispielrechnung + 2× tabelle + 13 Bausteine vs. bruch 8 Bausteine).
+  Score-Höhe laut Prompt egal, nur Nicht-Identität ist Gate → konform.
+- **Verify:** Wortzahl 1.530 (≥1.500 OK), tsx-Import von mathe.ts sauber
+  (8 Bausteine, 1 quelle, Typen-Folge bestätigt), Vercel-grün.
+  `letzteAktualisierung` bleibt 2026-05-21 (kein inhaltlicher Rechner-Change,
+  nur additive Content-Bausteine).
+
+**Erste mathe-Migration** → contentBloecke-Goldstandard-Rechner jetzt 18. Damit
+sind Erst-Migrationen in 7 Kategorien abgedeckt: Finanzen, Alltag, Wohnen,
+Gesundheit, Arbeit, Kochen, **Mathe**.
+
+---
+
 ## 12.06.2026 — W19 pizzateig-rechner Goldstandard + TRANCHE 5/5 KOMPLETT
 
 - **Was gebaut:** pizzateig-rechner (kochen.ts, erste kochen-Migration) hat jetzt
