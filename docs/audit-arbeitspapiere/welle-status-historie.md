@@ -8,6 +8,47 @@
 
 ---
 
+## 13.06.2026 — W19 lebenszeit-rechner Goldstandard (diagramm:gestapelt erstmals dominant)
+
+- **Was gebaut:** lebenszeit-rechner (alltag.ts) hat jetzt `contentBloecke` +
+  `quellen` (Neueintrag). **13 Blöcke**, gebaut nach L-W19.Granularitaet
+  (≥11, kein WARN). Folge: `text-diagramm-statistik-text-tabelle-diagramm-text-
+  statistik-beispielrechnung-beispielrechnung-infobox-checkliste-infobox`.
+  **Leitformat diagramm:gestapelt erstmals dominant (2×: Lebensanteile 80 J,
+  Tagesaufteilung 24 h Werktag/Wochenende)** + statistik-betont (2×). vergleich
+  bewusst weggelassen. ~1.502 W, alle drei `text`-Blöcke ≤ 170 W (max 160).
+- **Erster gestapelt-dominanter Goldstandard** → erhöht die strukturelle Vielfalt
+  im Migrations-Set (bisher dominierten beispielrechnung/tabelle/vergleich/
+  statistik). diagramm-Variante `gestapelt` jetzt als Leitformat erprobt.
+- **Lib-Treue:** Werte exakt aus `lib/berechnungen/lebenszeit.ts`, per tsx mit
+  Beispielperson (40 J, geb. 1986-06-13) gerechnet: 14.609 gelebte Tage,
+  ≈ 1,47 Mrd Herzschläge (70/min), ≈ 316 Mio Atemzüge (15/min), 13,3 Schlafjahre
+  (1/3), LE 78,5 (M) / 83,2 (F), verbleibend 14.063 Tage / 2.009 Wochenenden /
+  51 % gelebt (Mann) bzw. 15.780 Tage / 2.254 WE / 48 % (Frau). 80-Jahre-
+  Lebensanteile Schlaf 26,7 / übrige 24,5 / Bildschirm 13,3 / Arbeit 10,5 /
+  Essen 5 (Summe 80).
+- **Wellbeing (Thema verbleibende Lebenszeit):** durchgängig sachlich-staunend,
+  Fokus Perspektive/Bewusstsein. KEINE Countdown-/Angst-Frames; explizit
+  formuliert „kein Countdown, sondern eine Einladung" und „nicht aus Angst vor
+  dem Ende, sondern aus Wertschätzung". `infobox(hinweis)` betont
+  Durchschnittscharakter (keine persönliche Prognose), `infobox(tipp)`
+  Wochenenden als greifbares Maß.
+- **Bestand-Audit:** `erklaerung` + 4 FAQ geprüft — alle Werte lib-konsistent
+  (LE 78,5/83,2, Schlaf 1/3, Herz 70/min, 40-j. Mann „≈ 2.000 WE" = lib 2.009).
+  Das date-abhängige `beispiel`-Feld ist ein eingefrorener Snapshot (driftet
+  systembedingt täglich), intern konsistent (13.170 Tage → 1,33 Mrd) — **kein
+  Fix** (Aktualisieren würde nur neu einfrieren). erklaerung/FAQ bleiben Fallback.
+- **Verify:** Wortzahl 1.502 (OK), Struktur 13 Blöcke kein WARN <11
+  (Gesamt-Sweep 0× WARN), 3/3 text ≤170 W, tsx-Import alltag.ts sauber
+  (13 Bausteine, 2 quellen), Folge nicht identisch, Vercel-grün.
+
+**5er-Tranche (t01–t05) komplett:** bruchrechner (mathe), herzfrequenz-zonen
+(sport), heizkosten (wohnen), autokosten (auto), lebenszeit (alltag) — alle auf
+Granularität-v2-Goldstandard (≥11 Blöcke, text ≤170 W). contentBloecke-
+Goldstandard-Rechner damit auf 21.
+
+---
+
 ## 13.06.2026 — W19 autokosten-rechner Goldstandard (statistik-Leitformat, Granularität v2)
 
 - **Was gebaut:** autokosten-rechner (auto.ts) hat jetzt `contentBloecke` +
