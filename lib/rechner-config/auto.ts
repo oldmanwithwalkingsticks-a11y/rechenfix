@@ -514,7 +514,7 @@ Für **Parkverstöße** nennt der Rechner nur die häufigsten Grundsätze (z. B.
     keywords: ['autokosten rechner', 'autokosten berechnen', 'was kostet ein auto im monat', 'autokosten pro km', 'kosten auto pro monat', 'wertverlust auto', 'unterhaltskosten auto', 'kfz kosten rechner', 'auto gesamtkosten', 'kosten pro kilometer'],
     icon: '🚗',
     formel: 'Gesamtkosten/Monat = (Wertverlust + Kraftstoff + Versicherung + Steuer + Wartung + Sonstige) / 12 | Kosten/km = Jahreskosten / Fahrleistung',
-    beispiel: 'Neuwagen 25.000 €, 5 Jahre Haltedauer, 15.000 km/Jahr, 7l/100km Benzin → Wertverlust: 245 €/Mon. | Sprit: 181 €/Mon. | Versicherung: 80 €/Mon. | Gesamt: ca. 571 €/Monat = 0,46 €/km.',
+    beispiel: 'Neuwagen 25.000 €, 5 Jahre Haltedauer, 15.000 km/Jahr, 7 l/100 km Benzin (1,75 €/l) → Wertverlust 202 €/Mon. | Sprit 153 €/Mon. | Versicherung 80 €/Mon. | Gesamt ca. 550 €/Monat = 0,44 €/km.',
     erklaerung: `**Was kostet ein Auto wirklich? Die versteckten Kosten**
 
 Ein Auto ist für viele Deutsche ein täglicher Begleiter — aber die wenigsten kennen die tatsächlichen Gesamtkosten. Laut ADAC kostet ein durchschnittlicher Neuwagen der Kompaktklasse zwischen **400 und 600 Euro pro Monat** — und das ist oft mehr, als man denkt. Der Grund: Neben den offensichtlichen Kosten wie Sprit und Versicherung gibt es zahlreiche versteckte Posten. Der mit Abstand größte ist der **Wertverlust**: Ein Neuwagen für 30.000 Euro verliert im ersten Jahr allein rund 7.200 Euro an Wert — das sind 600 Euro pro Monat, mehr als die meisten für Sprit ausgeben. Unser Rechner erfasst alle Kostenblöcke und zeigt Ihnen die wahren Kosten pro Monat und pro Kilometer.
@@ -566,6 +566,132 @@ Ein eigenes Auto lohnt sich finanziell erst ab einer gewissen Fahrleistung und w
       {
         frage: 'Lohnt sich ein eigenes Auto oder ist Carsharing günstiger?',
         antwort: 'In der Stadt liegt die Grenze bei ca. 10.000–12.000 km/Jahr. Darunter ist ÖPNV + Carsharing (Deutschlandticket 63 €/Monat seit 2026 + Carsharing bei Bedarf) günstiger. Darüber lohnt sich das eigene Auto. Auf dem Land ohne ÖPNV ist das eigene Auto praktisch alternativlos.',
+      },
+    ],
+    quellen: [
+      { titel: 'ADAC — Autokosten / Kostenvergleich', url: 'https://www.adac.de', hinweis: 'Vollkostenmethodik (TCO) für Pkw' },
+      { titel: 'Destatis — Kraftfahrzeughaltungskosten', url: 'https://www.destatis.de', hinweis: 'Durchschnittliche Haltungskosten privater Haushalte' },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'TCO: die wahren Kosten eines Autos',
+        html: `<p>Die meisten Autofahrer kennen ihre Tankrechnung und die Versicherungsprämie — aber nicht die <strong>Gesamtbetriebskosten</strong> (englisch Total Cost of Ownership, TCO). Genau die entscheiden, was ein Auto wirklich kostet. Laut ADAC liegt ein durchschnittlicher Kompaktwagen bei rund <strong>400 bis 600 Euro im Monat</strong>, und der größte Posten ist meist unsichtbar: der Wertverlust.</p><p>Der Rechner addiert alle Kostenblöcke zur Jahres- und Monatssumme und teilt sie auf die Fahrleistung um — das ergibt die aussagekräftigste Kennzahl, die <strong>Kosten pro Kilometer</strong>. Sechs Gruppen fließen ein: Wertverlust (oder Finanzierungsrate), Kraftstoff, Versicherung, Kfz-Steuer, Wartung mit Reifen und TÜV sowie sonstige Kosten wie Parken und Pflege. Erst diese Vollkostenrechnung macht verschiedene Fahrzeuge und auch die Alternative zum eigenen Auto fair vergleichbar. Die folgenden Beispiele rechnen mit einem Neuwagen für 25.000 Euro, 15.000 km im Jahr und 7 l/100 km Benzin zu 1,75 €/l. Alle Werte lassen sich im Rechner durch die eigenen ersetzen — das Beispiel dient nur als Orientierung für die Größenordnung der einzelnen Posten.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Kostenblöcke eines Beispielfahrzeugs (25.000 €, 15.000 km/Jahr)',
+        werte: [
+          { label: 'Wertverlust', wert: '2.427 €/Jahr', hinweis: '37 % — der mit Abstand größte Posten' },
+          { label: 'Kraftstoff', wert: '1.838 €/Jahr', hinweis: '28 % — 7 l/100 km zu 1,75 €/l' },
+          { label: 'Versicherung', wert: '960 €/Jahr', hinweis: '15 % — Haftpflicht plus Kasko, je nach SF-Klasse' },
+          { label: 'Wartung & Reifen', wert: '650 €/Jahr', hinweis: '10 % — Inspektion, Verschleiß, Reifenwechsel' },
+          { label: 'Parken & Pflege', wert: '540 €/Jahr', hinweis: '8 % — Stellplatzmiete, Waschanlage, Pflege' },
+          { label: 'Kfz-Steuer & TÜV', wert: '185 €/Jahr', hinweis: '3 % — gesetzlich, kaum beeinflussbar' },
+          { label: 'Gesamt', wert: '6.599 €/Jahr', hinweis: '≈ 550 €/Monat = 0,44 €/km bei 15.000 km Jahresfahrleistung' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Wertverlust — der größte und stillste Posten',
+        html: `<p>Der <strong>Wertverlust</strong> ist bei den meisten Autos der größte einzelne Kostenfaktor — oft 30 bis 50 Prozent der Gesamtkosten. Er tut nicht weh, weil kein Geld vom Konto abgeht; trotzdem ist er real und schlägt beim Verkauf voll durch. Ein Neuwagen verliert im <strong>ersten Jahr rund 24 Prozent</strong> seines Werts, im zweiten weitere 13 Prozent, danach pendelt sich der jährliche Verlust bei 6 bis 8 Prozent ein.</p><p>Daraus folgt eine einfache Spar-Logik: Den steilsten Wertverlust trägt der Erstkäufer. Wer einen zwei bis vier Jahre alten <strong>Gebrauchtwagen</strong> kauft, überspringt genau diese teuerste Phase und bekommt das beste Verhältnis aus geringem Wertverlust und noch hoher Zuverlässigkeit. Auch die Haltedauer wirkt: Je länger man ein Auto fährt, desto stärker verteilt sich der einmalige Wertverlust auf viele Jahre — ein Auto acht statt fünf Jahre zu fahren senkt den jährlichen Wertverlust deutlich. Bei einer Finanzierung tritt an die Stelle des Wertverlusts die monatliche Rate als Belastung — der Rechner setzt dann die Rate an, damit die Anschaffung nicht doppelt gezählt wird.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Restwert eines 25.000-€-Neuwagens nach Haltedauer',
+        werte: [
+          { label: 'Nach 1 Jahr', wert: '19.000 €', hinweis: '76 % — allein im ersten Jahr −24 %' },
+          { label: 'Nach 3 Jahren', wert: '14.877 €', hinweis: '60 % — Ende der steilsten Phase, idealer Gebrauchtkauf-Zeitpunkt' },
+          { label: 'Nach 5 Jahren', wert: '12.866 €', hinweis: '51 % — gut die Hälfte des Neupreises ist weg' },
+          { label: 'Nach 8 Jahren', wert: '10.686 €', hinweis: '43 % — Verlust verlangsamt sich auf 6 bis 8 % pro Jahr' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Kosten pro Kilometer berechnen',
+        schritte: [
+          { label: 'Alle Kostenblöcke zur Jahressumme addieren', formel: 'Wertverlust + laufende Kosten', ergebnis: '6.599 €/Jahr' },
+          { label: 'Auf die Fahrleistung umlegen', formel: '6.599 € ÷ 15.000 km', ergebnis: '0,44 €/km' },
+          { label: 'Auf den Tag umlegen', formel: '6.599 € ÷ 365', ergebnis: '18,08 €/Tag' },
+          { label: 'Auf den Monat umlegen', formel: '6.599 € ÷ 12', ergebnis: '549,94 €/Monat' },
+        ],
+        fazit: 'Das Beispielfahrzeug kostet rund 0,44 € pro gefahrenem Kilometer, etwa 18 € pro Tag oder 550 € im Monat. Der Kilometersatz ist das fairste Vergleichsmaß, weil er Anschaffung und laufende Kosten zusammenfasst. Bei den meisten Autos liegt der Vollkosten-Kilometersatz zwischen 0,30 und 0,60 €/km — wer deutlich darüber liegt, fährt entweder wenig oder ein teures Fahrzeug. Zum Vergleich: Die steuerliche Pendlerpauschale von 0,30 €/km (ab dem 21. Kilometer 0,38 €) deckt die realen Vollkosten oft nicht ab, sondern nur einen Teil davon — ein gutes Argument, die eigenen Kosten einmal ehrlich durchzurechnen.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Energiekosten nach Antriebsart (typische Werte)',
+        kopf: ['Antrieb', 'Typischer Verbrauch', 'Energiepreis', 'Energiekosten/100 km'],
+        zeilen: [
+          ['Benzin', '7 l/100 km', '1,75 €/l', '12,25 €'],
+          ['Diesel', '5,5 l/100 km', '1,65 €/l', '9,08 €'],
+          ['Elektro', '18 kWh/100 km', '0,35 €/kWh', '6,30 €'],
+          ['Hybrid', '5 l/100 km', '1,75 €/l', '8,75 €'],
+        ],
+        fussnote: 'Energiepreise als Standardwerte des Rechners (Benzin 1,75 €/l, Diesel 1,65 €/l, Strom 0,35 €/kWh); der Verbrauch ist ein typischer Beispielwert und im Rechner frei einstellbar. Die Tabelle zeigt nur die Energiekosten, nicht die Gesamtkosten — Diesel und Elektro haben oft höhere Anschaffung bzw. Steuer/Versicherung, die sich erst über die Fahrleistung rechnen. Beim Elektroauto hängt der Preis pro 100 km zudem stark davon ab, ob zu Hause günstig oder unterwegs am teuren Schnelllader geladen wird — die Spanne ist hier größer als bei Benzin oder Diesel.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Fixkosten gegen variable Kosten (Beispielfahrzeug)',
+        werte: [
+          { label: 'Fixkosten', wert: '4.112 €/Jahr', hinweis: '62 % — fallen an, ob man fährt oder nicht: Wertverlust, Versicherung, Kfz-Steuer, TÜV-Anteil und Stellplatzmiete' },
+          { label: 'Variable Kosten', wert: '2.488 €/Jahr', hinweis: '38 % — steigen mit jedem Kilometer: Kraftstoff, verschleißabhängige Wartung und Reifen' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Fixkosten: unabhängig von der Fahrleistung',
+        html: `<p>Ein entscheidender Punkt für die Wirtschaftlichkeit: Ein großer Teil der Autokosten ist <strong>fix</strong> — er fällt an, egal ob das Auto bewegt wird oder in der Garage steht. Wertverlust, Versicherung, Kfz-Steuer, der TÜV-Anteil und die Stellplatzmiete laufen weiter. Im Beispiel sind das rund 62 Prozent der Gesamtkosten. Nur die <strong>variablen Kosten</strong> — Kraftstoff sowie verschleißabhängige Wartung und Reifen — hängen direkt an den gefahrenen Kilometern.</p><p>Diese Aufteilung erklärt ein scheinbares Paradox: <strong>Wenigfahrer zahlen pro Kilometer am meisten</strong>. Wer nur 5.000 km im Jahr fährt, verteilt dieselben Fixkosten auf wenige Kilometer — der Kilometersatz steigt stark. Genau hier liegt die Grenze zum Carsharing: In der Stadt ist unterhalb von etwa 10.000 bis 12.000 km im Jahr die Kombination aus Deutschlandticket und gelegentlichem Carsharing oft günstiger als ein eigenes Auto. Auf dem Land ohne ÖPNV-Anbindung ändert sich diese Rechnung, weil das Auto dort oft alternativlos ist und der Zeitgewinn zusätzlich zählt. Auch der Zweitwagen lohnt sich finanziell selten, wenn er nur wenige tausend Kilometer im Jahr bewegt wird.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Vielfahrer gegen Wenigfahrer: derselbe Wagen, anderer Kilometersatz',
+        schritte: [
+          { label: 'Wenigfahrer (5.000 km/Jahr)', formel: '5.374 € ÷ 5.000 km', ergebnis: '1,07 €/km' },
+          { label: 'Durchschnitt (15.000 km/Jahr)', formel: '6.599 € ÷ 15.000 km', ergebnis: '0,44 €/km' },
+          { label: 'Vielfahrer (20.000 km/Jahr)', formel: '7.212 € ÷ 20.000 km', ergebnis: '0,36 €/km' },
+        ],
+        fazit: 'Es ist dasselbe Auto — nur die Fahrleistung ändert sich. Beim Wenigfahrer kostet der Kilometer mit 1,07 € fast das Dreifache des Vielfahrers (0,36 €), weil sich die hohen Fixkosten auf viel weniger Kilometer verteilen. Die Jahressumme steigt mit den Kilometern nur moderat (von 5.374 auf 7.212 €), weil allein der variable Kraftstoffanteil mitwächst. Wer ein Auto kaum nutzt, sollte den Kilometersatz ehrlich kalkulieren. Genau dieser Effekt erklärt auch, warum sich ein teurer Diesel oder ein Elektroauto mit höherer Anschaffung erst ab vielen Kilometern lohnt: Der niedrigere Energiepreis pro Kilometer muss erst die höheren Fixkosten wieder einspielen.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Kostenposten-Übersicht: typische Höhe und Stellschrauben',
+        kopf: ['Kostenposten', 'Typisch €/Jahr', 'Beeinflussbar?'],
+        zeilen: [
+          ['Wertverlust', '~2.400 €', 'bedingt — Modellwahl, Haltedauer, Gebrauchtkauf'],
+          ['Kraftstoff / Strom', '~1.800 €', 'ja — Antrieb, Fahrweise, Tankstellenwahl'],
+          ['Versicherung', '~960 €', 'ja — Tarifvergleich, SF-Klasse, Selbstbeteiligung'],
+          ['Wartung & Reifen', '~650 €', 'bedingt — freie statt Vertragswerkstatt'],
+          ['Parken & Pflege', '~540 €', 'ja — Stellplatz, Eigenpflege'],
+          ['Kfz-Steuer', '~120 €', 'nein — gesetzlich nach Hubraum/CO₂'],
+          ['TÜV / HU+AU', '~65 €', 'nein — Pflicht alle zwei Jahre'],
+        ],
+        fussnote: 'Richtwerte aus dem Beispielfahrzeug; die tatsächliche Höhe hängt stark von Modell, Region und Fahrprofil ab. Die größten Stellschrauben sind die Modell- bzw. Gebrauchtwahl (Wertverlust) und der jährliche Versicherungsvergleich. Die gesetzlich fixen Posten — Kfz-Steuer und TÜV — sind klein und kaum beeinflussbar; den Hebel hat man bei den großen Blöcken Wertverlust, Kraftstoff und Versicherung.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Autokosten realistisch kalkulieren',
+        punkte: [
+          'Den Wertverlust immer mitrechnen — er ist meist größer als die Spritkosten, auch wenn er nicht auffällt.',
+          'Mit Vollkosten pro Kilometer rechnen, nicht nur mit dem Tankpreis: Versicherung, Steuer, Wartung und Wertverlust gehören dazu.',
+          'Die eigene Fahrleistung ehrlich schätzen — sie entscheidet über den Kilometersatz und damit über die Carsharing-Grenze.',
+          'Versicherung jährlich vergleichen; ein Wechsel spart oft 300 bis 500 € pro Jahr (Sonderkündigungsrecht meist im November).',
+          'Beim Antrieb die Gesamtkosten betrachten, nicht nur den Energiepreis: Diesel und Elektro rechnen sich erst ab höherer Fahrleistung.',
+          'Bei Finanzierung oder Leasing die Rate statt des Wertverlusts ansetzen — sonst zählt man die Anschaffung doppelt.',
+          'Reifen, TÜV und größere Inspektionen als jährlichen Durchschnitt ansetzen, auch wenn sie nur alle ein bis zwei Jahre anfallen.',
+          'Den Restwert nicht zu optimistisch schätzen — gerade bei beliebten Modellen verleitet der hohe Wiederverkaufswert dazu, den Wertverlust zu unterschätzen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Kosten pro Kilometer schlagen die Monatsrate',
+        text: 'Wer Fahrzeuge oder die Alternative zum eigenen Auto vergleicht, sollte auf die Kosten pro Kilometer schauen, nicht auf die monatliche Rate. Eine niedrige Leasingrate sagt nichts über die Gesamtkosten, weil Sprit, Versicherung, Wartung und Mehrkilometer außen vor bleiben. Der Vollkosten-Kilometersatz dagegen fasst alles zusammen und macht ein sparsames Wenigfahrer-Auto und einen genutzten Vielfahrer-Wagen direkt vergleichbar — auch gegenüber Carsharing, das meist mit einem Kilometer- plus Zeitpreis abrechnet. Faustformel für den Schnellvergleich: Jahreskosten geteilt durch Jahreskilometer ergibt den eigenen Kilometersatz — liegt er über dem, was Carsharing oder ein Mietwagen für die gleiche Strecke kostet, lohnt sich das eigene Auto bei dieser Nutzung kaum. Auch beim Vergleich zweier Fahrzeuge ist der Kilometersatz ehrlicher als der Listenpreis: Ein günstiger Wagen mit hohem Verbrauch und schlechtem Wiederverkaufswert kann pro Kilometer teurer sein als ein teureres, sparsames Modell.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Referenzwerte sind Marktdurchschnitte — eigene Zahlen einsetzen',
+        text: 'Die hier gezeigten Beträge beruhen auf einem Beispielfahrzeug und typischen Marktdurchschnitten. Versicherungsprämie, Kfz-Steuer, Wartungskosten und vor allem der Wertverlust hängen stark vom konkreten Modell, der Region und dem Fahrprofil ab. Setzen Sie im Rechner Ihre eigenen Werte ein — Kaufpreis, Versicherungsbeitrag aus der Police, Steuer aus dem Bescheid und die realistische Jahresfahrleistung —, dann wird aus der Überschlagsrechnung eine belastbare Kalkulation für genau Ihr Auto. Den Restwert nach der geplanten Haltedauer schätzt der Rechner aus typischen Wertverlustkurven; wer einen konkreten Wiederverkaufswert kennt (etwa aus einer Händler- oder Online-Bewertung), kann den Wertverlust damit noch genauer einordnen.',
       },
     ],
   },
