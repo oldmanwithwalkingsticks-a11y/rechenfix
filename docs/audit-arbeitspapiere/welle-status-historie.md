@@ -8,6 +8,45 @@
 
 ---
 
+## 13.06.2026 — W19 Nachschärfung D: arbeitszeitrechner (Altlast, Gate-Treffer [10]→[12])
+
+- **Was gebaut:** arbeitszeitrechner (arbeit.ts) von 10 auf **12 Blöcke**
+  umgebaut. Folge: `text-beispielrechnung-tabelle-beispielrechnung-text-
+  beispielrechnung-tabelle-text-infobox-checkliste-infobox-text`. **Leitformat
+  beispielrechnung dominant (3×: Tagesarbeitszeit, langer Tag mit Mindestpause,
+  Wochenarbeitszeit)** + zweiter Daten-Baustein (2 `tabelle`: Pausenregel § 4 +
+  Dezimalstunden-Umrechnung). Vorher: 5× text-Wände, 1× beispielrechnung, kein
+  echtes Leitformat. ~1.508 W, `quellen` (§§ 3/4/5 ArbZG) + affiliate
+  (lexware/compact) unverändert.
+- **Granularität (L-W19.Granularitaet) erfüllt:** 12 Blöcke (≥11, kein
+  WARN <11), Leitformat-Baustein beispielrechnung 3×, alle vier `text`-Blöcke
+  **≤ 170 W** (max 160 W) — die fünf alten Prosa-Wände auf vier knappe
+  text-Blöcke + Bausteine verteilt.
+- **Lib-Treue:** Werte exakt aus `lib/berechnungen/arbeitszeit.ts` (Brutto −
+  Pause = Netto, Dezimal = min/60 auf 2 Stellen, Wochenaggregat). Per tsx gegen
+  die Lib bestätigt: 8:00–17:00/60 min → 8,00 h; 7:30–17:30/45 min → 9,25 h
+  (kein Hinweis, da ≤10 h und 45-min-Regel erfüllt); 5× (8:00–16:30/30 min) →
+  40,00 h, Schnitt 8,00 h.
+- **Bestand-Audit (RECHT/Wellbeing):** Laut Handoff sollte hier fälschlich eine
+  „Zeiterfassungspflicht seit 2023" behauptet sein. **Befund: nicht vorhanden** —
+  die migrierte Fassung (12.06.2026) schreibt die Aufzeichnungspflicht korrekt
+  dem BAG-Urteil 13.09.2022 (1 ABR 22/21) i.V.m. § 3 Abs. 2 Nr. 1 ArbSchG zu
+  und kennzeichnet die ausdrückliche ArbZG-Regelung als „geplant, Stand 2026
+  noch nicht in Kraft". ArbZG-Schwellen gegen gesetze-im-internet.de
+  verifiziert: § 4 (>6 h → 30 min, >9 h → 45 min), § 3 (8 h, auf 10 h bei
+  Ausgleich), § 5 (11 h Ruhezeit) — alle korrekt. Neue `infobox(warnung)`
+  „Keine Rechtsberatung — maßgeblich ist das ArbZG".
+- **Verify:** Wortzahl 1.508 (OK), Struktur 12 Blöcke kein WARN <11, 4/4 text
+  ≤170 W, tsx-Import arbeit.ts sauber (12 Bausteine, 3 quellen, affiliate
+  intakt), Folge nicht identisch, Vercel-grün.
+
+**ALLE GOLDSTANDARD-RECHNER ≥ 11 BLÖCKE:** Der Struktur-Gate-Lauf meldet
+**0× WARN <11** über alle migrierten Rechner. Mit arbeitszeitrechner [12] ist
+auch der letzte Altlast-Treffer aus früheren W19-Tranchen behoben; L-W19.
+Granularitaet ist damit projektweit durchgesetzt.
+
+---
+
 ## 13.06.2026 — W19 Nachschärfung C: heizkosten-rechner auf 13 Blöcke + Tranche abgeschlossen (L-W19.Granularitaet)
 
 - **Was gebaut:** heizkosten-rechner (wohnen.ts) von 8 auf **13 Blöcke**
