@@ -44,6 +44,42 @@ oder Deployment-Artefakte zu verlieren.
 
 ---
 
+## 14.06.2026 — W19 nebenkosten-rechner Goldstandard (statistik-Leitformat, YMYL, t08)
+
+- **Was gebaut:** nebenkosten-rechner (wohnen.ts) hat jetzt `contentBloecke` +
+  `quellen` (Neueintrag). **15 Blöcke** nach L-W19.Granularitaet (≥11, kein
+  WARN). Folge: `text-statistik-tabelle-beispielrechnung-text-statistik-tabelle-
+  text-beispielrechnung-text-statistik-infobox-checkliste-infobox-infobox`.
+  **Leitformat statistik dominant (3×:** Postenverteilung, Durchschnitt DE,
+  Spar-Stellschrauben) + **tabelle-betont (2×:** umlagefähige Posten § 2 BetrKV,
+  nicht umlagefähige Kosten). diagramm/vergleich-Block weggelassen. ~1.531 W,
+  alle vier `text`-Blöcke ≤170 W (max 145).
+- **YMYL — Primärquellen gegen gesetze-im-internet.de verifiziert** (nicht aus
+  Memory): **§ 2 BetrKV** (17 Kategorien umlagefähiger Betriebskosten,
+  abschließende Aufzählung) und **§ 556 Abs. 3 BGB** (Abrechnungsfrist 12 Monate;
+  nach Fristablauf Nachforderungsausschluss außer nicht zu vertreten;
+  Einwendungsfrist des Mieters 12 Monate ab Zugang). `quellen` mit beiden URLs.
+  Disclaimer „keine Rechtsberatung" in zwei Bausteinen.
+- **Bestand-Audit (Verwaltungskosten-Falle):** `erklaerung` + 5 FAQ geprüft —
+  schließen Verwaltungskosten, Reparaturen und Instandhaltung bereits korrekt
+  als nicht umlagefähig aus (§ 2 BetrKV). **Kein Fix nötig.** Mieterbund-
+  Betriebskostenspiegel-Werte (2,51 / bis 3,15 €/m²) konsistent zur Bestand-
+  Recherche (Lehre 22, Prompt 148c). Neu ergänzt: Mischposten-Hinweis Hauswart
+  (Betrieb umlagefähig, Reparatur nicht), CO₂-Kostenaufteilungsgesetz seit 2023,
+  HeizkostenV 50–70 % Verbrauchsanteil.
+- **Lib-Treue:** Beispiel 70-m²-Wohnung exakt aus
+  `lib/berechnungen/nebenkosten.ts` (8 Posten Summe 195 €/Mon → 2.340 €/Jahr →
+  2,79 €/m²; Warmmiete 895 € bei 700 € Kalt, Anteil ~22 %). Nachzahlung-vs-
+  Guthaben-Beispiel als Abrechnungs-Arithmetik (Vorauszahlung × 12 gegen Ist),
+  explizit abgegrenzt — der Rechner ermittelt die laufende Monatsbelastung,
+  nicht die Jahresabrechnung.
+- **Verify:** Wortzahl 1.531 (OK ≥1500), Struktur 15 Blöcke kein WARN <11,
+  statistik 3× dominant, 4/4 text ≤170 W, 0 ASCII-Apostroph-Risiko, Folge nicht
+  identisch (Cosinus 1,00 zu autokosten = statistik-Familie, kein Gate),
+  Vercel-grün. contentBloecke-Goldstandard-Rechner damit auf 24.
+
+---
+
 ## 14.06.2026 — W19 trinkgeld-rechner Goldstandard (tabelle-Leitformat, t07)
 
 - **Was gebaut:** trinkgeld-rechner hat jetzt `contentBloecke` + `quellen`
