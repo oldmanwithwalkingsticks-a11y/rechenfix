@@ -204,7 +204,7 @@ Beim Vergleich von Stromtarifen und der Schätzung von Jahreskosten gibt es eini
   },
   {
     slug: 'nebenkosten-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-14',
     titel: 'Nebenkostenrechner',
     beschreibung: 'Mietnebenkosten berechnen: Alle Posten von Heizung bis Müll — mit Warmmiete und Kosten pro m².',
     kategorie: 'Wohnen & Energie',

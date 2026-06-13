@@ -1138,7 +1138,7 @@ Auch außerhalb der Schule spielen Gleichungen eine Rolle, wenn man es nicht sof
   },
   {
     slug: 'primzahl-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-14',
     titel: 'Primzahl-Rechner',
     beschreibung: 'Primzahlen prüfen und finden: Ist eine Zahl prim? Primfaktorzerlegung und Primzahlen in einem Bereich.',
     kategorie: 'Mathe & Schule',

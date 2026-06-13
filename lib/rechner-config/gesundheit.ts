@@ -705,7 +705,7 @@ Ergänzend können Sie mit unserem [Kalorienrechner](/gesundheit/kalorienrechner
   },
   {
     slug: 'wasserbedarf-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-14',
     titel: 'Wasserbedarf-Rechner',
     beschreibung: 'Täglichen Wasserbedarf berechnen: Empfohlene Trinkmenge basierend auf Gewicht, Aktivität und individuellen Faktoren.',
     kategorie: 'Gesundheit',
@@ -905,7 +905,7 @@ Nicht empfehlenswert als Durstlöscher sind zuckerhaltige Getränke, Limonaden u
   },
   {
     slug: 'koerperfett-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-14',
     titel: 'Körperfettrechner',
     beschreibung: 'Körperfettanteil schätzen mit der Navy-Methode: KFA in Prozent basierend auf Körpermaßen, mit Einordnung und Vergleich.',
     kategorie: 'Gesundheit',

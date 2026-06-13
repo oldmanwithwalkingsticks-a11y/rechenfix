@@ -1378,7 +1378,7 @@ Tipp: Umzüge am Monatsanfang oder unter der Woche sind oft günstiger als am Mo
   },
   {
     slug: 'trinkgeld-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-14',
     titel: 'Trinkgeld-Rechner',
     beschreibung: 'Trinkgeld berechnen: Prozent oder fester Betrag, Rechnung teilen, auf glatten Betrag aufrunden.',
     kategorie: 'Alltag',
