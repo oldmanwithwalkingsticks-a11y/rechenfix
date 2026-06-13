@@ -916,45 +916,189 @@ Nicht empfehlenswert als Durstlöscher sind zuckerhaltige Getränke, Limonaden u
     icon: '📏',
     formel: 'Männer: KFA = 495 / (1,0324 − 0,19077 × log₁₀(Bauch − Hals) + 0,15456 × log₁₀(Größe)) − 450 | Frauen: KFA = 495 / (1,29579 − 0,35004 × log₁₀(Bauch + Hüfte − Hals) + 0,22100 × log₁₀(Größe)) − 450',
     beispiel: 'Mann, 178 cm, Bauchumfang 85 cm, Halsumfang 38 cm → KFA ≈ 18,3% (Durchschnittlich)',
-    erklaerung: `**Was ist ein gesunder Körperfettanteil?**
+    erklaerung: `**Was der Körperfettanteil beschreibt**
 
-Der Körperfettanteil (KFA) gibt an, welcher Anteil des Körpergewichts aus Fettgewebe besteht. Im Gegensatz zum BMI, der nur Größe und Gewicht berücksichtigt, ist der KFA ein deutlich aussagekräftigerer Wert für die Beurteilung der Körperzusammensetzung. Ein Bodybuilder mit viel Muskelmasse hat laut BMI „Übergewicht" — sein Körperfettanteil kann trotzdem im athletischen Bereich liegen. Für Männer gilt ein KFA von **14 bis 24 Prozent** als gesund, für Frauen **21 bis 31 Prozent**. Der höhere Anteil bei Frauen ist biologisch bedingt: Frauen haben mehr essentielles Fett, das für den Hormonhaushalt und die Fortpflanzung notwendig ist. Ein zu niedriger KFA (unter 5% bei Männern, unter 13% bei Frauen) ist gesundheitlich bedenklich und tritt fast nur bei Leistungssportlern oder in Wettkampfphasen auf.
+Der Körperfettanteil (KFA) gibt an, welcher Anteil des Körpergewichts aus Fettgewebe besteht — der Rest ist Magermasse aus Muskeln, Knochen, Organen und Wasser. Fett ist dabei kein bloßer Speicher: Ein Teil davon ist **essentielles Fett**, das der Körper für Hormonhaushalt, Organschutz und Nervenfunktion braucht. Anders als das reine Gewicht oder der BMI trennt der KFA Fett- und Magermasse und bietet damit eine zusätzliche Blickrichtung auf den Körper. Für sich genommen ist ein einzelner Wert allerdings nur ein Marker unter vielen und sagt nichts allein über Gesundheit oder Fitness aus.
 
-**Die Navy-Methode erklärt: Wie funktioniert sie?**
+**Die US-Navy-Methode**
 
-Die US-Navy-Methode wurde in den 1980er Jahren vom US-Militär entwickelt, um den Körperfettanteil von Soldaten schnell und ohne teure Geräte einzuschätzen. Sie basiert auf einer logarithmischen Formel, die den Zusammenhang zwischen bestimmten Körperumfängen und dem Körperfettanteil nutzt. Bei Männern werden Bauchumfang, Halsumfang und Körpergröße gemessen, bei Frauen zusätzlich der Hüftumfang. Die Methode nutzt die Erkenntnis, dass das Verhältnis von Bauch- zu Halsumfang stark mit dem viszeralen Fettanteil korreliert. Die Formel wurde anhand von hydrostatischen Wiegungen (dem damaligen Goldstandard) kalibriert und liefert bei den meisten Menschen eine Genauigkeit von ±3 bis 4 Prozentpunkten. Wichtig für korrekte Ergebnisse: Messen Sie immer morgens nüchtern, an den gleichen Stellen, und verwenden Sie ein flexibles Maßband.
+Dieser Rechner nutzt die US-Navy-Umfangmethode (Hodgdon & Beckett, 1984). Aus Körpergröße sowie Hals- und Bauchumfang — bei Frauen zusätzlich dem Hüftumfang — schätzt eine logarithmische Formel den Körperfettanteil. Sie kommt ohne Geräte aus und braucht nur ein Maßband. Wichtig ist das Wort Schätzung: Die typische Abweichung gegenüber einem DEXA-Scan liegt bei ±3 bis 4 Prozentpunkten, bei sehr muskulösen oder sehr schlanken Personen kann sie größer ausfallen. Für vergleichbare Ergebnisse misst man immer zur gleichen Tageszeit und an denselben Stellen.
 
-**Methoden zur Körperfettmessung im Vergleich**
+**Orientierungsspannen, kein Zielwert**
 
-Es gibt verschiedene Methoden zur Bestimmung des Körperfettanteils mit unterschiedlicher Genauigkeit und unterschiedlichem Aufwand. Der **DEXA-Scan** (Dual-Röntgen-Absorptiometrie) gilt als genaueste verfügbare Methode und zeigt sogar die Fettverteilung im Körper. Er kostet allerdings 50 bis 150 Euro pro Messung und ist nur in spezialisierten Praxen verfügbar. Die **Caliper-Messung** (Hautfaltenmessung) ist günstiger und bei erfahrenen Anwendern recht genau (±3%). Dabei werden mit einer speziellen Zange Hautfalten an mehreren Stellen gemessen. **Bioelektrische Impedanzanalyse (BIA)** — wie in vielen Körperwaagen verbaut — sendet einen schwachen Strom durch den Körper und misst den Widerstand. Die Genauigkeit schwankt stark je nach Hydrationszustand und Gerät. Die **Navy-Methode** unseres Rechners ist kostenlos, braucht nur ein Maßband und liefert für die meisten Menschen brauchbare Ergebnisse. Für eine präzise Verlaufskontrolle empfiehlt es sich, immer die gleiche Methode unter gleichen Bedingungen zu verwenden.
+Die im Rechner gezeigten Spannen (nach dem American Council on Exercise) sind statistische Orientierungsbereiche — keine Vorgaben und kein anzustrebender Wert. Frauen liegen physiologisch höher als Männer, weil der weibliche Körper von Natur aus mehr essentielles Fett trägt; mit dem Alter steigen die Durchschnittswerte. Diese Zahlen helfen lediglich beim Einordnen einer Messung. Sie bewerten keine Person, und sie unterscheiden nicht zwischen Menschen mit unterschiedlichem Körperbau, Trainingszustand oder Lebenssituation.
 
-**Körperfett vs. BMI: Warum der KFA aussagekräftiger ist**
+**Wofür der Wert nicht gedacht ist**
 
-Der Body-Mass-Index (BMI) berechnet sich einfach aus Gewicht geteilt durch Größe zum Quadrat. Das Problem: Er unterscheidet nicht zwischen Fett- und Muskelmasse. Ein durchtrainierter Sportler mit 90 kg bei 180 cm hat einen BMI von 27,8 — laut WHO-Tabelle „übergewichtig". Sein Körperfettanteil liegt aber vielleicht bei 12 Prozent, was athletisch ist. Umgekehrt kann eine Person mit wenig Muskelmasse und viel viszeralem Fett einen „normalen" BMI haben, aber einen zu hohen KFA — das sogenannte „Skinny Fat"-Phänomen. Der KFA ist daher besonders für sportliche Personen und für die Einschätzung gesundheitlicher Risiken deutlich besser geeignet als der BMI allein. Nutzen Sie unseren [BMI-Rechner](/gesundheit/bmi-rechner) als Ergänzung, um beide Werte zu vergleichen.
-
-**Wie kann man den Körperfettanteil senken?**
-
-Der effektivste Weg, den Körperfettanteil zu senken, ist eine Kombination aus leichtem Kaloriendefizit und regelmäßigem Krafttraining. Ein Kaloriendefizit von 300 bis 500 kcal pro Tag führt zu einem gesunden Fettverlust von etwa 0,5 kg pro Woche — ohne übermäßigen Muskelabbau. Krafttraining ist dabei wichtiger als Ausdauertraining, weil es Muskelmasse erhält und sogar aufbaut, was den Grundumsatz erhöht. Mit dem [Kalorienrechner](/gesundheit/kalorienrechner) können Sie Ihren täglichen Kalorienbedarf ermitteln. Ausreichend Protein (1,6 bis 2,2 g pro kg Körpergewicht) unterstützt den Muskelerhalt während einer Diät. Auch guter Schlaf und Stressmanagement spielen eine Rolle: Schlafmangel und chronischer Stress erhöhen den Cortisolspiegel, der die Fetteinlagerung — besonders am Bauch — fördert. Der [Idealgewicht-Rechner](/gesundheit/idealgewicht-rechner) kann Ihnen ein realistisches Zielgewicht zeigen, und der [Wasserbedarf-Rechner](/gesundheit/wasserbedarf-rechner) hilft bei der optimalen Flüssigkeitszufuhr während einer Diätphase.`,
+Der Rechner liefert Information, keine Anleitung zur Selbstoptimierung. Ein einzelner Schätzwert eignet sich nicht, um daraus in Eigenregie Ernährungs- oder Trainingsziele abzuleiten. Wer sich Sorgen um Gewicht, Körper oder Essverhalten macht, findet bei Ärztinnen und Ärzten oder bei Beratungsstellen verlässlichere und sicherere Begleitung als bei einer wiederholten Selbstmessung. Den BMI als ergänzende Kennzahl zeigt der [BMI-Rechner](/gesundheit/bmi-rechner) — auch er ist nur ein grober Anhaltspunkt und ersetzt keine ärztliche Einschätzung.`,
     faq: [
       {
-        frage: 'Wie messe ich meinen Körperfettanteil?',
-        antwort: 'Für die Navy-Methode benötigen Sie nur ein flexibles Maßband. Messen Sie morgens nüchtern: Bauchumfang auf Nabelhöhe (nicht einziehen), Halsumfang unterhalb des Kehlkopfes, und bei Frauen zusätzlich den Hüftumfang an der breitesten Stelle. Für genauere Ergebnisse empfehlen sich Caliper-Messung oder DEXA-Scan.',
+        frage: 'Wie messe ich für die US-Navy-Methode richtig?',
+        antwort: 'Sie brauchen nur ein flexibles Maßband. Messen Sie am besten morgens vor dem Essen und Trinken, immer an denselben Stellen: Bauchumfang auf Nabelhöhe (entspannt, nicht einziehen), Halsumfang knapp unterhalb des Kehlkopfs, bei Frauen zusätzlich den Hüftumfang an der breitesten Stelle. Auch die Körpergröße fließt in die Formel ein. Gleiche Bedingungen machen wiederholte Messungen vergleichbar.',
       },
       {
-        frage: 'Was ist ein normaler Körperfettanteil?',
-        antwort: 'Für Männer gilt 14-24% als normaler Bereich, für Frauen 21-31%. Athletische Werte liegen bei 6-13% (Männer) bzw. 14-20% (Frauen). Unter 5% (Männer) bzw. 13% (Frauen) spricht man von essentiellem Fett — dieser Bereich ist gesundheitlich bedenklich und sollte nur kurzfristig im Wettkampf erreicht werden.',
+        frage: 'Was bedeuten die Körperfett-Spannen?',
+        antwort: 'Die angezeigten Bereiche (nach dem American Council on Exercise) sind statistische Orientierungsspannen — kein Urteil und kein Zielwert. Sie unterscheiden sich nach Geschlecht, weil Frauen physiologisch mehr essentielles Fett tragen. Sehr niedrige Werte unterschreiten das essentielle Fett, das der Körper für lebenswichtige Funktionen benötigt. Ein einzelner Wert sagt für sich genommen nichts über Gesundheit oder Fitness aus.',
       },
       {
-        frage: 'Wie genau ist die Navy-Methode?',
-        antwort: 'Die Navy-Methode hat eine typische Abweichung von ±3 bis 4 Prozentpunkten im Vergleich zum DEXA-Scan. Sie ist für die meisten Menschen ausreichend genau, kann aber bei sehr muskulösen Personen zu hohe Werte und bei Personen mit viel viszeralem Fett zu niedrige Werte liefern. Für eine Verlaufskontrolle ist sie gut geeignet.',
+        frage: 'Wie genau ist die US-Navy-Methode?',
+        antwort: 'Sie weicht typischerweise um ±3 bis 4 Prozentpunkte von einem DEXA-Scan ab. Bei sehr muskulösen Personen kann sie höhere, bei sehr schlanken niedrigere Werte liefern. Sie ist eine grobe Schätzung aus Körperumfängen — für eine wiederholte Messung unter gleichen Bedingungen geeignet, aber kein medizinischer Befund.',
       },
       {
-        frage: 'Was ist der Unterschied zwischen Körperfett und BMI?',
-        antwort: 'Der BMI berechnet sich aus Gewicht und Größe und unterscheidet nicht zwischen Fett und Muskeln. Der Körperfettanteil (KFA) misst dagegen den tatsächlichen Fettanteil. Ein muskulöser Mensch kann laut BMI übergewichtig sein, aber einen niedrigen KFA haben. Der KFA ist daher aussagekräftiger für die Gesundheitsbewertung.',
+        frage: 'Körperfettanteil oder BMI — was sagt mehr aus?',
+        antwort: 'Beide sind grobe Kennzahlen. Der BMI nutzt nur Gewicht und Größe und unterscheidet nicht zwischen Fett und Muskelmasse; der Körperfettanteil schätzt den Fettanteil und trennt ihn von der Magermasse. Sie liefern also unterschiedliche Blickwinkel. Keiner der beiden Werte beurteilt für sich allein die Gesundheit eines Menschen — dafür braucht es eine ärztliche Gesamteinschätzung.',
       },
       {
-        frage: 'Wie kann ich meinen Körperfettanteil senken?',
-        antwort: 'Ein leichtes Kaloriendefizit (300-500 kcal/Tag) kombiniert mit Krafttraining ist am effektivsten. Krafttraining erhält Muskelmasse und erhöht den Grundumsatz. Ausreichend Protein (1,6-2,2 g/kg), guter Schlaf und Stressreduktion unterstützen den Fettabbau. Vermeiden Sie Crash-Diäten, da diese vor allem Muskelmasse abbauen.',
+        frage: 'Sagt der Körperfettanteil etwas über meine Gesundheit aus?',
+        antwort: 'Allein nicht. Der Körperfettanteil ist ein Marker unter vielen und obendrein nur grob geschätzt. Er eignet sich nicht als Grundlage, um in Eigenregie Ernährungs- oder Trainingsziele festzulegen. Wer sich Sorgen um Gewicht, Körper oder Essverhalten macht, sollte ärztliche oder therapeutische Begleitung suchen — das ist verlässlicher und sicherer als eine Selbstmessung. Hausärztinnen und Beratungsstellen sind gute erste Anlaufstellen.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was Körperfett ist und welche Funktion es hat',
+        html: `<p>Körperfett ist weit mehr als ein Energiespeicher. Ein Teil davon ist <strong>essentielles Fett</strong>, das der Körper unbedingt braucht — es schützt Organe, ist am Hormonhaushalt beteiligt und umhüllt Nervenbahnen. Daneben gibt es <strong>Speicherfett</strong>, das Energie für Phasen geringerer Zufuhr bereithält, und Unterhautfettgewebe, das den Körper unter anderem vor Kälte schützt.</p><p>Der Körperfettanteil (KFA) gibt an, welcher Anteil des Körpergewichts aus diesem Fettgewebe besteht — der Rest ist <strong>Magermasse</strong> aus Muskeln, Knochen, Organen und Wasser. Anders als das reine Gewicht oder der BMI trennt der KFA also Fett- und Magermasse und ist damit eine zusätzliche Blickrichtung auf den Körper. Für sich genommen bleibt er aber ein Marker unter vielen und sagt nichts allein über Gesundheit oder Fitness aus. Dieser Rechner schätzt den Wert aus einfachen Umfängen, die sich mit einem Maßband ermitteln lassen. Der Körperfettanteil schwankt zudem natürlicherweise — er hängt von Geschlecht, Alter, Veranlagung und Lebensphase ab und ist bei zwei Menschen mit gleichem Gewicht oft ganz unterschiedlich.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Die Messpunkte der US-Navy-Methode',
+        kopf: ['Maß', 'Wo messen', 'Hinweis'],
+        zeilen: [
+          ['Körpergröße', 'aufrecht, ohne Schuhe', 'fließt in die Formel ein'],
+          ['Halsumfang', 'knapp unterhalb des Kehlkopfs', 'Maßband waagerecht halten'],
+          ['Bauchumfang', 'auf Nabelhöhe', 'entspannt atmen, nicht einziehen'],
+          ['Hüftumfang (nur Frauen)', 'an der breitesten Stelle', 'für die Formel bei Frauen nötig'],
+        ],
+        fussnote: 'Die US-Navy-Formel braucht nur diese Umfänge plus die Körpergröße — kein Gewicht und keine Geräte. Entscheidend für vergleichbare Werte ist eine gleichbleibende Maßband-Lage und die gleiche Tageszeit; schon wenige Zentimeter Unterschied verändern das Ergebnis spürbar. Optional lässt sich zusätzlich das Gewicht angeben — dann teilt der Rechner das geschätzte Gewicht rechnerisch in Fett- und Magermasse auf, was die Größenordnung anschaulicher macht, an der Schätz-Unsicherheit aber nichts ändert.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'US-Navy-Schätzung an einem Beispiel',
+        schritte: [
+          { label: 'Bauchumfang minus Halsumfang (Mann)', formel: '90 cm − 40 cm', ergebnis: '50 cm' },
+          { label: 'In die Formel einsetzen (Körpergröße 180 cm)', formel: '495 / (1,0324 − 0,19077·log₁₀(50) + 0,15456·log₁₀(180)) − 450', ergebnis: '≈ 18,4 %' },
+          { label: 'In die Orientierungsspanne einordnen', formel: '18,4 % liegt im Bereich 18–24 %', ergebnis: 'Durchschnittsbereich' },
+        ],
+        fazit: 'Für dieses Beispiel schätzt die Formel rund 18,4 % — ein Wert, der in der Männer-Tabelle in den Durchschnittsbereich fällt. Mehr als eine grobe Verortung ist das nicht: Die Methode hat eine Fehlerspanne von ±3 bis 4 Prozentpunkten, der wahre Wert könnte also ebenso bei 15 oder 22 Prozent liegen. Die Zahl ist ein Anhaltspunkt, kein exaktes Messergebnis — und sie sagt für sich genommen nichts über Gesundheit oder Fitness der Person aus. Gut zu sehen ist auch, wie die Formel arbeitet: Sie verwendet die Differenz aus Bauch- und Halsumfang als Hauptgröße und setzt sie ins Verhältnis zur Körpergröße. Schon kleine Messunterschiede an diesen beiden Stellen verschieben das Ergebnis — ein Grund mehr, das Maßband ruhig und an derselben Stelle anzulegen und Einzelwerte nicht auf die Nachkommastelle genau zu nehmen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum es nur eine Schätzung ist',
+        html: `<p>Die US-Navy-Methode ist bewusst einfach: Sie leitet den Körperfettanteil aus Umfängen und Körpergröße ab, statt das Fett direkt zu messen. Das macht sie überall mit einem Maßband durchführbar — aber auch ungenau. Die typische Abweichung gegenüber einem <strong>DEXA-Scan</strong>, der genauesten verbreiteten Referenz, liegt bei <strong>±3 bis 4 Prozentpunkten</strong>.</p><p>Die Formel unterstellt eine durchschnittliche Fettverteilung. Bei sehr muskulösen Menschen mit kräftigem Rumpf kann sie den Wert überschätzen, bei sehr schlanken unterschätzen. Auch Tagesform, Mahlzeiten, Flüssigkeitsstand und die genaue Maßband-Lage verändern das Ergebnis. Eine einzelne Messung ist deshalb ein grober Anhaltspunkt, keine exakte Zahl. Aussagekräftiger als der absolute Wert ist die Tendenz über mehrere Messungen unter möglichst gleichen Bedingungen — und auch die bleibt eine Schätzung und kein medizinischer Befund. Wer den Wert über die Zeit beobachten möchte, sollte deshalb weniger auf die einzelne Prozentzahl achten als auf die Richtung über mehrere Wochen — und selbst die nur als groben Hinweis, nicht als präzise Verlaufskurve verstehen.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Orientierungsspannen für Männer (neutral)',
+        kopf: ['Bereich', 'Körperfettanteil'],
+        zeilen: [
+          ['Essentielles Fett', '2–5 %'],
+          ['Athletischer Bereich', '6–13 %'],
+          ['Fitness-Bereich', '14–17 %'],
+          ['Durchschnittsbereich', '18–24 %'],
+          ['Oberhalb des Durchschnitts', 'ab 25 %'],
+        ],
+        fussnote: 'Statistische Orientierungsspannen nach dem American Council on Exercise — keine Bewertung der Person und kein Zielwert. Die Bereiche helfen lediglich, eine Messung grob einzuordnen; sie sagen für sich genommen nichts über Gesundheit oder Fitness aus.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Orientierungsspannen für Frauen (neutral)',
+        kopf: ['Bereich', 'Körperfettanteil'],
+        zeilen: [
+          ['Essentielles Fett', '10–13 %'],
+          ['Athletischer Bereich', '14–20 %'],
+          ['Fitness-Bereich', '21–24 %'],
+          ['Durchschnittsbereich', '25–31 %'],
+          ['Oberhalb des Durchschnitts', 'ab 32 %'],
+        ],
+        fussnote: 'Die Frauen-Spannen liegen durchgehend höher als die der Männer — das ist physiologisch begründet (siehe nächster Abschnitt) und kein Nachteil. Auch hier gilt: Orientierung nach dem American Council on Exercise, keine Wertung und kein anzustrebender Wert.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum Frauen natürlicherweise mehr Körperfett haben',
+        html: `<p>In allen Bereichen liegen die Werte für Frauen rund 8 bis 10 Prozentpunkte höher als für Männer — das ist <strong>physiologisch normal</strong> und kein Nachteil. Der weibliche Körper trägt von Natur aus mehr <strong>essentielles Fett</strong>.</p><p>Dieses zusätzliche Fett erfüllt wichtige Aufgaben: Es ist am Hormonhaushalt beteiligt, unter anderem an der Bildung von Östrogen, und spielt für den Menstruationszyklus und eine mögliche Schwangerschaft eine Rolle. Auch die geschlechtsspezifische Fettverteilung gehört dazu. Deshalb sind Männer- und Frauen-Spannen nicht miteinander vergleichbar und werden getrennt ausgewiesen: Ein Wert, der für eine Frau im mittleren Bereich liegt, bedeutet für einen Mann eine ganz andere Einordnung. Wer eine Messung einordnet, sollte daher immer die zum eigenen Geschlecht passende Tabelle heranziehen — und im Hinterkopf behalten, dass es sich um Durchschnitts-Orientierung handelt und nicht um eine persönliche Bewertung. Auch innerhalb eines Geschlechts gibt es große natürliche Unterschiede, etwa durch Veranlagung oder Lebensphase; der Wert eines einzelnen Menschen lässt sich daher nicht sinnvoll mit dem einer anderen Person vergleichen.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Durchschnittswerte nach Alter (Orientierung)',
+        werte: [
+          { label: '20 Jahre', wert: 'M ~15 % · F ~22 %' },
+          { label: '30 Jahre', wert: 'M ~19 % · F ~24 %' },
+          { label: '40 Jahre', wert: 'M ~21 % · F ~26 %' },
+          { label: '50 Jahre', wert: 'M ~23 % · F ~28 %' },
+          { label: '60 Jahre', wert: 'M ~25 % · F ~30 %' },
+          { label: '70 Jahre', wert: 'M ~27 % · F ~32 %', hinweis: 'Orientierungswerte, steigen altersbedingt' },
+        ],
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Messmethoden im Vergleich',
+        spalteA: 'US-Navy (Maßband)',
+        spalteB: 'DEXA-Scan',
+        zeilen: [
+          { kriterium: 'Aufwand', a: 'Maßband, zu Hause möglich', b: 'Termin in Praxis oder Klinik' },
+          { kriterium: 'Kosten', a: 'kostenlos', b: 'ca. 50–150 € pro Messung' },
+          { kriterium: 'Genauigkeit', a: '±3–4 Prozentpunkte (Schätzung)', b: 'genaueste verbreitete Referenz' },
+          { kriterium: 'Ergebnis', a: 'ein einzelner Schätzwert', b: 'auch die Fettverteilung im Körper' },
+          { kriterium: 'Geeignet für', a: 'grobe Tendenz über die Zeit', b: 'genaue Einzelmessung' },
+        ],
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Was der Körperfettanteil aussagt — und was nicht',
+        kopf: ['Frage', 'Was der Wert dazu sagt'],
+        zeilen: [
+          ['Wie gesund bin ich?', 'allein nichts — er ist ein Marker unter vielen'],
+          ['Wie fit bin ich?', 'nichts direkt — Ausdauer und Kraft misst er nicht'],
+          ['Fett oder Muskelmasse?', 'trennt beide grob, anders als das reine Gewicht'],
+          ['Wo sitzt das Fett?', 'nicht erkennbar — dafür braucht es bildgebende Verfahren'],
+          ['Wie genau ist der Wert?', 'eine Schätzung mit ±3–4 Prozentpunkten'],
+        ],
+        fussnote: 'Der Körperfettanteil beantwortet nur eine eng begrenzte Frage — wie viel Prozent des Gewichts grob geschätzt Fettgewebe sind. Aussagen über Gesundheit, Fitness oder Lebensstil lassen sich daraus nicht ableiten; dafür braucht es ärztliche Untersuchungen, Blutwerte, Belastungstests und das Gesamtbild. Die Tabelle macht bewusst, wie schmal der Informationsgehalt einer einzelnen Zahl ist.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Ein Marker unter vielen — nicht zur Selbstoptimierung',
+        text: 'Der Körperfettanteil ist nur einer von vielen Hinweisen auf die Körperzusammensetzung und obendrein grob geschätzt. Er eignet sich nicht dafür, daraus in Eigenregie Ernährungs- oder Trainingsziele abzuleiten oder sich selbst zu bewerten. Wer sich Sorgen um Gewicht, Körper oder Essverhalten macht — oder merkt, dass Zahlen rund um den Körper einen starken Einfluss auf das eigene Wohlbefinden gewinnen — findet bei Ärztinnen und Ärzten, in Beratungsstellen oder bei Psychotherapeutinnen verlässliche und sichere Begleitung. Das ist der bessere Weg als eine wiederholte Selbstmessung. Ein einzelner Prozentwert ist außerdem kein guter Maßstab, um sich mit anderen zu vergleichen: Körperbau, Veranlagung und Lebenssituation sind zu verschieden, als dass eine Zahl sie abbilden könnte. Dieser Rechner liefert Orientierung, keine medizinische oder ernährungsbezogene Empfehlung — und ausdrücklich keine Aufforderung, den eigenen Körper zu verändern.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Schätzung mit Fehlerspanne — kein medizinischer Befund',
+        text: 'Die berechnete Zahl ist eine statistische Schätzung aus Körperumfängen, kein gemessener Wert. Je nach Körperbau kann sie um mehrere Prozentpunkte daneben liegen; auch einfache Körperwaagen mit Bioimpedanz-Messung (BIA) schwanken je nach Flüssigkeitsstand und Gerät stark. Unterschiedliche Methoden liefern daher unterschiedliche Werte — sinnvoll vergleichbar sind nur Messungen mit derselben Methode unter gleichen Bedingungen. Für eine belastbare Einordnung der Körperzusammensetzung ist eine ärztliche oder sportmedizinische Untersuchung zuständig. Auch zwei Messungen an verschiedenen Tagen können sich allein durch Tagesform, Mahlzeiten oder Wasserhaushalt um ein bis zwei Prozentpunkte unterscheiden, ohne dass sich am Körper irgendetwas geändert hätte — das gehört zur Natur einer Schätzung dazu.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Richtig und reproduzierbar messen',
+        punkte: [
+          'Immer zur gleichen Tageszeit messen, am besten morgens vor dem Essen und Trinken.',
+          'Das Maßband eng, aber ohne einzuschnüren anlegen und waagerecht halten.',
+          'Bauchumfang auf Nabelhöhe entspannt messen — den Bauch dabei nicht einziehen.',
+          'Halsumfang knapp unterhalb des Kehlkopfs nehmen, bei Frauen zusätzlich den Hüftumfang an der breitesten Stelle.',
+          'Jede Messung zwei- bis dreimal wiederholen und den Mittelwert verwenden.',
+          'Für den Vergleich über die Zeit dieselbe Methode und dieselben Bedingungen beibehalten.',
+          'Einzelwerte nicht überbewerten — die Tendenz über mehrere Messungen sagt mehr als eine einzelne Zahl.',
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Wann eine ärztliche Einordnung sinnvoll ist',
+        html: `<p>Eine Selbstmessung mit dem Maßband ersetzt keine fachliche Einschätzung. <strong>Ärztlich einordnen</strong> lassen sollte man Fragen zur Körperzusammensetzung immer dann, wenn gesundheitliche Beschwerden, Vorerkrankungen oder Unsicherheit im Spiel sind — etwa bei Stoffwechsel-, Herz- oder Hormonthemen.</p><p>Sinnvoll ist der ärztliche Weg auch, wenn sich Gewicht oder Körperform ungewollt und unerklärlich verändern, denn dahinter können sehr unterschiedliche Ursachen stehen. Und er ist der richtige, wenn Gedanken an Körper, Gewicht oder Essen viel Raum einnehmen oder belasten: Dann geben Hausärztinnen und Hausärzte, Beratungsstellen oder Psychotherapeutinnen verlässliche Orientierung. Eine Zahl aus einem Rechner kann ein Gespräch anstoßen, aber weder eine Diagnose noch eine Einschätzung der individuellen Situation leisten. Im Zweifel ist die fachliche Begleitung immer der sicherere Weg als das alleinige Deuten von Messwerten.</p>`,
+      },
+    ],
+    quellen: [
+      {
+        titel: 'Hodgdon & Beckett (1984), US Navy — Umfangmethode',
+        hinweis: 'Grundlage der Schätzformel für den Körperfettanteil aus Körperumfängen.',
+      },
+      {
+        titel: 'American Council on Exercise (ACE) — Body-Fat-Kategorien',
+        hinweis: 'Quelle der nach Geschlecht getrennten Orientierungsspannen.',
+      },
+      {
+        titel: 'WHO — Body composition (Hintergrund)',
+        url: 'https://www.who.int',
+        hinweis: 'Einordnung der Körperzusammensetzung als einer von mehreren Markern.',
       },
     ],
   },
