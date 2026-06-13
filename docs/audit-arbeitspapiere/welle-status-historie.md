@@ -44,6 +44,40 @@ oder Deployment-Artefakte zu verlieren.
 
 ---
 
+## 14.06.2026 — W19 trinkgeld-rechner Goldstandard (tabelle-Leitformat, t07)
+
+- **Was gebaut:** trinkgeld-rechner hat jetzt `contentBloecke` + `quellen`
+  (Neueintrag, vorher beides ungesetzt). **15 Blöcke** nach L-W19.Granularitaet
+  (≥11, kein WARN). Folge: `text-tabelle-beispielrechnung-text-tabelle-
+  beispielrechnung-tabelle-tabelle-text-text-beispielrechnung-statistik-
+  checkliste-infobox-infobox`. **Leitformat tabelle dominant (4×:** Sätze nach
+  Anlass, Vergleich 50 €, international, Schnelltabelle nach Rechnungshöhe) +
+  3 beispielrechnung. diagramm/vergleich-Block bewusst weggelassen (Vergleich
+  läuft über tabelle). ~1.542 W, alle vier `text`-Blöcke ≤170 W (max 144).
+- **Slug-Drift dokumentiert (CLAUDE.md Lehre 10/14):** Der t07-Prompt nahm
+  `kochen/trinkgeld-rechner` an und nannte kochen.ts als Commit-Ziel. SSOT
+  (`lib/rechner-config/alltag.ts`, `kategorieSlug: 'alltag'`) verortet den Slug
+  in **Alltag**. Am realen Ort gebaut, Abweichung nicht stillschweigend
+  korrigiert, sondern in Commit-Message + hier vermerkt.
+- **Lib-Treue:** Vergleichstabelle nutzt die im Code fest verdrahteten Sätze
+  `[5, 10, 15, 20]` % aus `lib/berechnungen/trinkgeld.ts` (50 € → 2,50/5,00/
+  7,50/10,00 € Trinkgeld). Beispielrechnungen: 10 % auf 48,50 € = 4,85 €
+  (Gesamt 53,35 €); 92 € auf 4 Personen mit 10 % = 25,30 €/Kopf; Aufrunden
+  47,30 € → 50 € als Modus „fester Betrag" (Differenz 2,70 € ≈ 5,7 %).
+- **Fidelitäts-Klarstellung Aufrunden:** Die Lib-Option `aufrunden` macht
+  `Math.ceil` auf den **nächsten vollen Euro** (47,30 → 48), NICHT auf eine
+  runde Zehnerstelle. Das „→ 50 €"-Beispiel ist die manuelle „stimmt so"-
+  Konvention (Modus Betrag); der Unterschied ist im fazit explizit benannt,
+  damit kein falscher Eindruck der Aufrunden-Funktion entsteht.
+- **Bestand-Audit:** `erklaerung` + 5 FAQ bleiben als Fallback unverändert,
+  fachlich konsistent (5–10 % Standard, § 3 Nr. 51 EStG Steuerfreiheit).
+- **Verify:** Wortzahl 1.542 (OK ≥1500), Struktur 15 Blöcke kein WARN <11,
+  4/4 text ≤170 W, tabelle 4× dominant, 0 ASCII-Apostroph-Risiko, Folge nicht
+  identisch zu herzfrequenz, Vercel-grün. contentBloecke-Goldstandard-Rechner
+  damit auf 23.
+
+---
+
 ## 14.06.2026 — W19 primzahl-rechner Goldstandard (beispielrechnung-Leitformat, t06)
 
 - **Was gebaut:** primzahl-rechner (mathe.ts) hat jetzt `contentBloecke` +
