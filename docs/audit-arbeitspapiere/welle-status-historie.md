@@ -44,6 +44,39 @@ oder Deployment-Artefakte zu verlieren.
 
 ---
 
+## 14.06.2026 — W19 wasserbedarf-rechner Goldstandard (statistik-Leitformat, Wellbeing, t09)
+
+- **Was gebaut:** wasserbedarf-rechner (gesundheit.ts) hat jetzt `contentBloecke`
+  + `quellen` (Neueintrag). **14 Blöcke** nach L-W19.Granularitaet (≥11, kein
+  WARN). Folge: `text-statistik-beispielrechnung-text-tabelle-statistik-
+  beispielrechnung-text-text-statistik-infobox-checkliste-infobox-infobox`.
+  **Leitformat statistik dominant (3×:** Wasseranteil im Körper, Wasserquellen
+  Getränke/Nahrung, Wassergehalt von Lebensmitteln) + 1 tabelle (Bedarf nach
+  Aktivität). ~1.549 W, alle vier `text`-Blöcke ≤170 W (max 141).
+- **Wellbeing-Handling (Übertrinken):** Die Wellbeing-Vorgabe „mehr ist immer
+  besser ist FALSCH" konsequent umgesetzt — eigener `infobox(warnung)`-Block zu
+  **Hyponatriämie** (Natriumverdünnung bei exzessivem Trinken, v. a. Ausdauer-
+  Wettkämpfe) und ein `text`-Block „Anzeichen für zu wenig — und für zu viel".
+  **Kein Diät-/Abnehm-Frame:** der „Mythen"-Block entkräftet Wasser-als-
+  Abnehmtrick und die 8-Gläser-Regel explizit. Schwangerschaft/Stillen sachlich
+  (Zuschläge +300/+700 ml). Mehrfacher Hinweis auf **ärztliche Rücksprache bei
+  Nieren-/Herzerkrankung** (Warnung + checkliste + text).
+- **Lib-Treue:** Beispiele exakt aus `lib/berechnungen/wasserbedarf.ts`:
+  Grundbedarf 70 kg × 30 ml/kg = 2.100 ml = 2,1 L = 9 Gläser; Sportler 70 kg
+  mäßig (40) + 60 Min Sport (+700) + Hitze (+500) = 4.000 ml = 4,0 L. Faktoren
+  30/35/40/45/50 ml/kg, Sport +350 ml/30 min, Hitze +500, schwanger +300,
+  stillend +700, Gläser = ceil(ml/250). Aktivitäts-Tabelle 70 kg cent-genau.
+- **Bestand-Audit:** `erklaerung` + 5 FAQ fachlich korrekt (Hyponatriämie als
+  selten/„über 5–6 L in wenigen Stunden", Kaffee/Tee zählen mit, 30–35 ml/kg,
+  DGE 1,5 L) und bereits Wellbeing-conform — **kein Fix nötig**, bleiben als
+  Fallback. quellen EFSA (2,0/2,5 L total) + DGE (1,5 L Getränke) mit URL.
+- **Verify:** Wortzahl 1.549 (OK ≥1500), 14 Blöcke kein WARN <11, statistik 3×
+  dominant, 4/4 text ≤170 W, 0 ASCII-Apostroph-Risiko, Cosinus 0,98 zu
+  nebenkosten/autokosten = statistik-Familie (kein Gate), Vercel-grün.
+  contentBloecke-Goldstandard-Rechner damit auf 25.
+
+---
+
 ## 14.06.2026 — W19 nebenkosten-rechner Goldstandard (statistik-Leitformat, YMYL, t08)
 
 - **Was gebaut:** nebenkosten-rechner (wohnen.ts) hat jetzt `contentBloecke` +
