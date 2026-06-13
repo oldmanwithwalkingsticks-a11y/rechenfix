@@ -44,6 +44,47 @@ oder Deployment-Artefakte zu verlieren.
 
 ---
 
+## 14.06.2026 — W19 koerperfett-rechner Goldstandard (tabelle-Leitformat, HEIKEL/Wellbeing, t10)
+
+- **Was gebaut:** koerperfett-rechner (gesundheit.ts) hat jetzt `contentBloecke`
+  + `quellen` (Neueintrag). **14 Blöcke** nach L-W19.Granularitaet (≥11, kein
+  WARN). Folge: `text-tabelle-beispielrechnung-text-tabelle-tabelle-text-
+  statistik-vergleich-tabelle-infobox-infobox-checkliste-text`. **Leitformat
+  tabelle dominant (4×:** US-Navy-Messpunkte, Orientierungsspannen Männer,
+  Orientierungsspannen Frauen, „was der Wert aussagt — und was nicht") +
+  1 vergleich (US-Navy vs. DEXA). ~1.530 W, alle vier `text`-Blöcke ≤170 W.
+- **STRENGE WELLBEING-SCHUTZAUFLAGE angewandt** (disordered-eating-nah):
+  - **Bestand gesäubert:** Die komplette erklaerung-Sektion „Wie kann man den
+    Körperfettanteil senken?" (Kaloriendefizit 300–500 kcal, Krafttraining,
+    Protein-Gramm, „Diätphase", „Zielgewicht") **ersatzlos entfernt**. Die
+    FAQ „Wie kann ich meinen KFA senken?" (Diätplan, floss in Schema.org
+    FAQPage) durch neutrale **Schutz-FAQ** ersetzt („Sagt der KFA etwas über
+    meine Gesundheit aus?" → Verweis auf fachliche Hilfe). Alle Wertungen
+    („gesund", „zu niedrig", „bedenklich", „zu hoch", „Skinny Fat") getilgt.
+  - **Verifiziert:** Regex-Scan über das gesamte Slug-Segment (erklaerung + FAQ
+    + Blöcke) = **0 Wellbeing-Risiko-Treffer**.
+  - **Kategorien neutral** wiedergegeben (Essentielles Fett / Athletischer /
+    Fitness- / Durchschnitts-Bereich / „oberhalb des Durchschnitts") — das
+    lib-Label „Übergewichtig" wird im Content NICHT reproduziert.
+  - Prominenter `infobox(warnung)`-Schutzhinweis: ein Marker unter vielen, nicht
+    zur Selbstoptimierung, bei Sorge um Gewicht/Essverhalten ärztliche/
+    therapeutische Begleitung statt Selbstmessung. KFA durchgängig als grobe
+    Schätzung (±3–4 pp) gerahmt, keine Verknüpfung zu Attraktivität/Disziplin.
+- **Lib-Treue:** US-Navy-Formel exakt aus `lib/berechnungen/koerperfett.ts`
+  (Mann 180/90/40 cm → ≈ 18,4 %); ACE-Spannen M 2-5/6-13/14-17/18-24/25+ und
+  F 10-13/14-20/21-24/25-31/32+ neutral wiedergegeben; Alters-Durchschnitt
+  (Interpolation) als statistik. quellen: Hodgdon & Beckett (1984), ACE, WHO.
+- **RESIDUAL (out of scope):** Die Lib `koerperfett.ts` gibt weiterhin das
+  wertende Kategorie-Label „Übergewichtig" (rot) im Calc-Output aus. Das ist
+  Komponenten-/Lib-Verhalten, nicht config — bewusst nicht angefasst (Commit-
+  Scope = gesundheit.ts; Lib-Änderung würde Calc-Output ändern + Re-Verify
+  erfordern). **Folge-Kandidat:** neutrales Relabeling im Lib in eigenem Prompt.
+- **Verify:** Wortzahl 1.530 (OK ≥1500), 14 Blöcke kein WARN <11, tabelle 4×
+  dominant, 4/4 text ≤170 W, 0 ASCII-Apostroph-Risiko, 0 Wellbeing-Treffer,
+  Vercel-grün. contentBloecke-Goldstandard-Rechner damit auf 26.
+
+---
+
 ## 14.06.2026 — W19 wasserbedarf-rechner Goldstandard (statistik-Leitformat, Wellbeing, t09)
 
 - **Was gebaut:** wasserbedarf-rechner (gesundheit.ts) hat jetzt `contentBloecke`
