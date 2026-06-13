@@ -44,6 +44,35 @@ oder Deployment-Artefakte zu verlieren.
 
 ---
 
+## 14.06.2026 — W19 primzahl-rechner Goldstandard (beispielrechnung-Leitformat, t06)
+
+- **Was gebaut:** primzahl-rechner (mathe.ts) hat jetzt `contentBloecke` +
+  `quellen` (Neueintrag, vorher beides ungesetzt). **13 Blöcke** nach
+  L-W19.Granularitaet (≥11, kein WARN). Folge: `text-beispielrechnung-
+  beispielrechnung-text-beispielrechnung-beispielrechnung-tabelle-text-
+  beispielrechnung-tabelle-checkliste-infobox-infobox`. **Leitformat
+  beispielrechnung dominant (5×)** + 2 tabelle. diagramm/vergleich/statistik
+  bewusst weggelassen (Mathe-Profil). ~1.572 W, alle drei `text`-Blöcke ≤170 W.
+- **Lib-Treue:** Rechenwege exakt aus `lib/berechnungen/primzahl.ts` gespiegelt
+  (`pruefePrimzahl`, `primfaktorzerlegung`, `primzahlenImBereich`). Die fünf
+  Beispielrechnungen: Primtest 17 (prim, kein Teiler bis √17 ≈ 4), Primtest 91
+  (Teiler 7 → 7 × 13, zusammengesetzt), Zerlegung 360 = 2³ × 3² × 5, Zerlegung
+  84 = 2² × 3 × 7, Sieb des Eratosthenes bis 30 (10 Primzahlen). tabelle
+  „Primzahlen bis 50" = 15 Stück (4/4/2/2/3), konsistent mit lib-Sieb.
+- **Abgrenzung bruchrechner:** Beide sind Mathe-beispielrechnung-Leitformate mit
+  hohem Struktur-Cosinus (1,00, kein Gate — Mathe-Profil ohne diagramm/vergleich/
+  statistik klustert zwangsläufig, vgl. prozentrechner 0,99 / tagerechner 0,92).
+  Inhaltlich vollständig getrennt: bruchrechner = Grundrechenarten/Kürzen/
+  gemischte Zahlen; primzahl = Primzahltest, Primfaktorzerlegung, Sieb. Themen
+  der Beispielrechnungen disjunkt.
+- **Bestand-Audit:** `erklaerung` + 6 FAQ bleiben als Fallback unverändert,
+  fachlich lib-konsistent (97 prim, 360 = 2³ × 3² × 5, 25 Primzahlen bis 100).
+- **Verify:** Wortzahl 1.572 (OK ≥1500), Struktur 13 Blöcke kein WARN <11,
+  3/3 text ≤170 W, beispielrechnung 5×, Folge nicht identisch zu bruchrechner,
+  Vercel-grün. contentBloecke-Goldstandard-Rechner damit auf 22.
+
+---
+
 ## 13.06.2026 — W19 lebenszeit-rechner Goldstandard (diagramm:gestapelt erstmals dominant)
 
 - **Was gebaut:** lebenszeit-rechner (alltag.ts) hat jetzt `contentBloecke` +
