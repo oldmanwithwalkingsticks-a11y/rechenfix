@@ -44,6 +44,26 @@ oder Deployment-Artefakte zu verlieren.
 
 ---
 
+## 14.06.2026 — A11y-Fix CookieBanner: Landmark + Dialog-Semantik (axe-Regel `region`)
+
+- **Was gefixt:** [components/cookie/CookieBanner.tsx](components/cookie/CookieBanner.tsx)
+  — der Cookie-Banner-Text lag außerhalb jeder Landmark (axe-Regel `region`:
+  Screenreader sprangen ihn nicht an). Der Banner-Wrapper war ein nacktes
+  `<div>`, der Consent-Dialog ebenso.
+- **Änderung (nur Semantik):**
+  - Banner-Wrapper `<div class="…z-[100]…">` → `<aside role="region"
+    aria-label="Cookie-Hinweis">` (schließendes Tag-Paar mitgezogen, JSX balanciert).
+  - Consent-Dialog `<div class="…z-[110]…">` → `role="dialog"`
+    `aria-modal="true"` `aria-labelledby="cookie-dialog-title"`; der `<h2>`
+    („Cookie-Einstellungen") bekam die passende `id="cookie-dialog-title"`.
+- **Keine** Logik-, Styling- oder Text-Änderung — `className` unverändert, nur
+  ARIA-/Rollen-Attribute ergänzt. Banner + Dialog rendern optisch identisch.
+- **Verify:** `<aside>`/`</aside>` genau ein Paar (Z. 26/54), `aria-labelledby`
+  referenziert die `<h2>`-id korrekt. Live-Verify (Banner + Dialog optisch
+  unverändert) via Karsten-Inkognito; Vercel-grün.
+
+---
+
 ## 14.06.2026 — W19 koerperfett-rechner Goldstandard (tabelle-Leitformat, HEIKEL/Wellbeing, t10)
 
 - **Was gebaut:** koerperfett-rechner (gesundheit.ts) hat jetzt `contentBloecke`
