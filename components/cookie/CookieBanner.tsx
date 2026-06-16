@@ -23,7 +23,7 @@ export default function CookieBanner() {
     <>
       {/* Banner — nur sichtbar wenn noch kein Consent gegeben */}
       {bannerVisible && (
-        <div className="fixed bottom-0 inset-x-0 z-[100] animate-fade-in">
+        <aside role="region" aria-label="Cookie-Hinweis" className="fixed bottom-0 inset-x-0 z-[100] animate-fade-in">
           <div className="max-w-5xl mx-auto px-4 pb-4">
             <div className="bg-gray-900 dark:bg-gray-800 text-white rounded-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.3)] p-5 md:p-6">
               <div className="flex flex-col md:flex-row md:items-center gap-4">
@@ -51,12 +51,12 @@ export default function CookieBanner() {
               </div>
             </div>
           </div>
-        </div>
+        </aside>
       )}
 
       {/* Settings Modal — kann unabhängig vom Banner geöffnet werden (z.B. Footer-Link) */}
       {settingsVisible && (
-        <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 animate-fade-in">
+        <div role="dialog" aria-modal="true" aria-labelledby="cookie-dialog-title" className="fixed inset-0 z-[110] flex items-center justify-center p-4 animate-fade-in">
           {/* Backdrop */}
           <div
             className="absolute inset-0 bg-black/60 backdrop-blur-sm"
@@ -67,7 +67,7 @@ export default function CookieBanner() {
           <div className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100">
+                <h2 id="cookie-dialog-title" className="text-xl font-bold text-gray-800 dark:text-gray-100">
                   Cookie-Einstellungen
                 </h2>
                 <button
