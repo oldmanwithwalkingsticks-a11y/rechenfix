@@ -5,18 +5,19 @@
  *  - `BUERGERGELD_2026_H1` ab 01.01.2026 (Nullrunde via § 28a-Besitzschutz)
  *  - `BUERGERGELD_2026_H2` ab 01.07.2026 (Übergang zur „Neuen Grundsicherung")
  *
- * H2 ist bewusst als SKELETON angelegt: Parameter inhaltlich identisch zu H1,
- * lediglich Bezeichnung + Quelle unterscheiden sich. Sobald der Gesetzestext
- * der Neuen Grundsicherung verabschiedet ist, werden hier die konkreten
- * Werte-Differenzen nachgetragen (erwartete Änderungen: Sanktionsregeln,
- * evtl. Hinzuverdienst-Anpassungen — Regelsätze bleiben vorerst gleich).
+ * H2 trägt die verkündeten Werte der Neuen Grundsicherung (13. SGB II-ÄndG,
+ * BGBl. 2026 I Nr. 107 v. 22.04.2026): neue Bezeichnung „Grundsicherungsgeld"
+ * und altersgestaffeltes Schonvermögen (§ 12 Abs. 2 SGB II n.F.). Die Regelsätze
+ * bleiben gegenüber H1 bewusst unverändert (Nullrunde 2026 via § 28a-Besitzschutz)
+ * — die Reform ändert § 20 SGB II nicht. Sanktions-/Vermittlungs-Verschärfungen
+ * der Reform wirken im Leistungs-/Vermittlungsrecht, nicht in diesen Bemessungs-Parametern.
  */
 
 /**
  * Schonvermögen-Modus: H1 (Bürgergeld bis 30.06.2026) kennt pauschale
  * Karenzzeit-Freibeträge pro Person; H2 (Grundsicherungsgeld ab 01.07.2026,
  * § 12 Abs. 2 SGB II n.F. nach 13. SGB II-ÄndG, BGBl. 2026 I Nr. 107 v.
- * 16.04.2026) staffelt den Freibetrag nach Lebensalter.
+ * 22.04.2026) staffelt den Freibetrag nach Lebensalter.
  */
 export type VermoegenParameter =
   | {
@@ -149,7 +150,7 @@ const VERMOEGEN_H1: VermoegenParameter = {
 
 /**
  * Altersstaffel H2 (ab 01.07.2026): § 12 Abs. 2 SGB II n.F. nach 13. SGB II-ÄndG
- * (BGBl. 2026 I Nr. 107 v. 16.04.2026). Jede Person der BG erhält den
+ * (BGBl. 2026 I Nr. 107 v. 22.04.2026). Jede Person der BG erhält den
  * altersabhängigen Freibetrag; erhöhte Stufe gilt ab Beginn des Monats, in
  * dem die Altersgrenze erreicht wird (§ 12 Abs. 2 Satz 2 SGB II n.F.).
  *
@@ -214,7 +215,7 @@ export const BUERGERGELD_2026_H1: BuergergeldParameter = {
 
 /**
  * Grundsicherungsgeld ab 01.07.2026 — verabschiedet im 13. Gesetz zur Änderung
- * des SGB II (BGBl. 2026 I Nr. 107 v. 16.04.2026). Regelsätze und Mehrbedarfe
+ * des SGB II (BGBl. 2026 I Nr. 107 v. 22.04.2026). Regelsätze und Mehrbedarfe
  * unverändert (Nullrunde 2026 durch § 28a-Besitzschutz, Reform ändert keine
  * Regelsatzbeträge); Schonvermögen komplett neu als Altersstaffel § 12 Abs. 2
  * SGB II n.F. (siehe `VERMOEGEN_H2`).
@@ -225,7 +226,7 @@ export const BUERGERGELD_2026_H2: BuergergeldParameter = {
   vermoegen: VERMOEGEN_H2,
   einkommensfreibetrag: EINKOMMENSFREIBETRAG_2026,
   mehrbedarfe: MEHRBEDARFE_2026,
-  quelle: "13. Gesetz zur Änderung des SGB II (BGBl. 2026 I Nr. 107 v. 16.04.2026), § 12 Abs. 2 SGB II n.F.; Regelsätze unverändert durch § 28a-Besitzschutz",
+  quelle: "13. Gesetz zur Änderung des SGB II (BGBl. 2026 I Nr. 107 v. 22.04.2026), § 12 Abs. 2 SGB II n.F.; Regelsätze unverändert durch § 28a-Besitzschutz",
   gueltigAb: new Date("2026-07-01"),
 };
 
