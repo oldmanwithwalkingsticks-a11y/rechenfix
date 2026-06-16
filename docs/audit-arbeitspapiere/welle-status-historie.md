@@ -44,6 +44,39 @@ oder Deployment-Artefakte zu verlieren.
 
 ---
 
+## 16.06.2026 — W19 pace-rechner Goldstandard (tabelle-Leitformat, t11) — sport 2/2 komplett
+
+- **Was gebaut:** pace-rechner (sport.ts) hat jetzt `contentBloecke` + `quellen`
+  (Neueintrag). **14 Blöcke** nach L-W19.Granularitaet (≥11, kein WARN). Folge:
+  `text-tabelle-beispielrechnung-tabelle-text-tabelle-beispielrechnung-tabelle-
+  text-beispielrechnung-statistik-checkliste-infobox-infobox`. **Leitformat
+  tabelle dominant (4×:** Pace↔Geschwindigkeit, Split-Tabelle 10 km @ 5:30,
+  Zielzeiten je Distanz, typische Pace-Bereiche) + 3 beispielrechnung.
+  diagramm/vergleich bewusst weggelassen. ~1.570 W, alle drei `text`-Blöcke
+  ≤170 W (max 167).
+- **Rechen-Treue (inline-Logik, nicht angefasst):** Pace = Zeit ÷ Distanz;
+  km/h = 60 ÷ Pace; Zielzeit = Pace × Distanz; Marathon-Hochrechnung via
+  **Riegel-Formel** (T₂ = T₁ × (D₂/D₁)^1,06). Werte exakt gerechnet: 10 km in
+  55:00 → 5:30 min/km = 10,9 km/h; Zielzeiten-Tabelle (6:00/5:30/5:00/4:30
+  min/km × 5k/10k/HM/M) cent-/sekundengenau; Marathon aus 55-min-10k naiv
+  3:52:04 vs. Riegel ≈ 4:13; Negativ-Split 10 km in 50:00 (25:30 + 24:30).
+- **Wellbeing (Sport, moderat):** durchgängig neutral — kein Leistungsdruck-
+  und kein Abnehm-Frame. Pace als individuell + Orientierung gerahmt
+  (Charakter-Spalten ohne Skill-Wertung, „kein Maßstab"-`infobox(hinweis)`,
+  einsteiger-freundlich „Pace anfangs ruhig ignorieren", Belastung an Fitness
+  anpassen, ärztliche Abklärung bei Einschränkungen). Volkslauf-Statistik
+  explizit als „grobe Orientierung, kein Maßstab".
+- **Bestand-Audit:** `erklaerung` + 6 FAQ geprüft — fachlich korrekt, kein
+  Abnehm-/Druck-Frame, bleiben als Fallback. quellen didaktisch (Pace-Grundlagen
+  + Riegel-Formel-Hinweis).
+- **Verify:** Wortzahl 1.570 (OK ≥1500), 14 Blöcke kein WARN <11, tabelle 4×
+  dominant, 3/3 text ≤170 W, 0 ASCII-Apostroph-Risiko, Cosinus-Cluster zu
+  trinkgeld/herzfrequenz (kein Gate; Themen disjunkt), Vercel-grün.
+  **Kategorie Sport damit 2/2 migriert** (pace + herzfrequenz-zonen).
+  contentBloecke-Goldstandard-Rechner auf 27.
+
+---
+
 ## 16.06.2026 — YMYL-Audit buergergeld-rechner: Grundsicherungsgeld-Stichtag 01.07.2026
 
 - **Was korrigiert:** Faktencheck des `buergergeld-rechner` zum Reform-Stichtag
