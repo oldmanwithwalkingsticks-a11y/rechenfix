@@ -903,12 +903,12 @@ Eine **Abfindung** bei einvernehmlicher Auflösung des Arbeitsverhältnisses wir
   },
   {
     slug: 'buergergeld-rechner',
-    letzteAktualisierung: '2026-06-11',
+    letzteAktualisierung: '2026-06-16',
     quellen: [
       { titel: '§ 20 SGB II: Regelbedarf zur Sicherung des Lebensunterhalts', url: 'https://www.gesetze-im-internet.de/sgb_2/__20.html' },
       { titel: '§ 22 SGB II: Bedarfe für Unterkunft und Heizung', url: 'https://www.gesetze-im-internet.de/sgb_2/__22.html' },
       { titel: '§ 12 SGB II: Zu berücksichtigendes Vermögen', url: 'https://www.gesetze-im-internet.de/sgb_2/__12.html' },
-      { titel: '13. SGB II-Änderungsgesetz (Neue Grundsicherung ab 01.07.2026)', hinweis: 'BGBl. 2026 I Nr. 107 v. 16.04.2026 — Umbenennung in Grundsicherungsgeld, Reform der Vermögens-/Sanktionsregeln. Regelsatz 2026 unverändert (Besitzschutz § 28a SGB XII).' },
+      { titel: '13. SGB II-Änderungsgesetz (Neue Grundsicherung ab 01.07.2026)', url: 'https://www.gesetze-im-internet.de/sgb_2/', hinweis: 'BGBl. 2026 I Nr. 107 v. 22.04.2026 — Umbenennung in Grundsicherungsgeld, Reform der Vermögens-/Sanktions-/Vermittlungsregeln (Vermittlungsvorrang). Regelsatz 2026 unverändert (Besitzschutz § 28a SGB XII).' },
     ],
     titel: 'Bürgergeld-Rechner',
     beschreibung: 'Bürgergeld 2026 berechnen: Aktuelle Regelsätze mit Einkommensanrechnung und Vermögensprüfung.',
@@ -926,7 +926,7 @@ Das Bürgergeld ist die zentrale Grundsicherungsleistung in Deutschland für erw
 
 Das Bürgergeld soll das soziokulturelle Existenzminimum sichern — also nicht nur Nahrung und Unterkunft, sondern auch die Teilhabe am gesellschaftlichen Leben. Es umfasst den monatlichen Regelbedarf für den Lebensunterhalt, die tatsächlichen Kosten der Unterkunft und Heizung (in angemessener Höhe) sowie gegebenenfalls Mehrbedarfe (z. B. für Schwangere, Alleinerziehende oder bei kostenaufwändiger Ernährung).
 
-Mit der Bürgergeld-Reform wurde der Fokus stärker auf Qualifizierung und nachhaltige Arbeitsmarktintegration gelegt. Bis zum 30. Juni 2026 gilt eine Karenzzeit von 12 Monaten, in der höhere Vermögensfreibeträge greifen und die tatsächlichen Unterkunftskosten übernommen werden — unabhängig von der Angemessenheit. **Seit 1. Juli 2026 heißt die Leistung offiziell Grundsicherungsgeld** (13. Gesetz zur Änderung des SGB II, BGBl. 2026 I Nr. 107 vom 16. April 2026). Die Regelsätze bleiben unverändert; neu sind altersgestaffelte Vermögensfreibeträge (5.000 bis 20.000 Euro pro Person) und eine Deckelung der anerkannten Unterkunftskosten auf das 1,5-Fache der örtlichen Angemessenheitsgrenze auch innerhalb der Karenzzeit (§ 22 Abs. 1 SGB II n. F.).
+Die Bürgergeld-Reform 2023 hatte den Fokus stärker auf Qualifizierung und nachhaltige Arbeitsmarktintegration gelegt. Bis zum 30. Juni 2026 gilt eine Karenzzeit von 12 Monaten, in der höhere Vermögensfreibeträge greifen und die tatsächlichen Unterkunftskosten übernommen werden — unabhängig von der Angemessenheit. **Seit 1. Juli 2026 heißt die Leistung offiziell Grundsicherungsgeld** (13. Gesetz zur Änderung des SGB II, BGBl. 2026 I Nr. 107 vom 22. April 2026). Die Regelsätze bleiben unverändert; geändert wurden vor allem die Vermögensregeln (altersgestaffelte Freibeträge von 5.000 bis 20.000 Euro pro Person), die Deckelung der anerkannten Unterkunftskosten auf das 1,5-Fache der örtlichen Angemessenheitsgrenze auch innerhalb der Karenzzeit (§ 22 Abs. 1 SGB II n. F.) sowie die Sanktionen. Zudem gilt wieder ein **Vermittlungsvorrang**: Die Vermittlung in Arbeit hat grundsätzlich Vorrang vor Weiterbildung und Maßnahmen.
 
 **Bürgergeld-Regelsätze 2026 im Überblick**
 
@@ -1060,7 +1060,9 @@ Der jeweils höhere Freibetrag gilt ab Beginn des Monats, in dem die Altersgrenz
           { kriterium: 'Regelsatz Alleinstehende', a: '563 €', b: '563 € (unverändert)' },
           { kriterium: 'Vermögen im 1. Jahr', a: 'Karenz: 40.000 € + 15.000 €/weitere Person', b: 'keine Karenz — Altersstaffel 5.000–20.000 €/Person ab Tag 1' },
           { kriterium: 'Unterkunftskosten', a: 'tatsächliche, angemessene Kosten (§ 22)', b: 'Deckel auf das 1,5-Fache der Angemessenheit ab Tag 1' },
-          { kriterium: 'Sanktionen', a: 'gestuft (30 % bei 1. Pflichtverletzung)', b: 'verschärft — bis zum vollständigen Entzug des Regelbedarfs möglich' },
+          { kriterium: 'Sanktionen', a: 'gestuft (30 % bei 1. Pflichtverletzung)', b: 'verschärft — bei Totalverweigerung bis 100 % Entzug des Regelbedarfs möglich' },
+          { kriterium: 'Förderlogik', a: 'Vorrang für Qualifizierung und Weiterbildung', b: 'Vermittlungsvorrang — Arbeitsaufnahme geht vor Maßnahme' },
+          { kriterium: 'Zumutbarkeit für Eltern', a: 'i. d. R. ab dem 3. Geburtstag des Kindes', b: 'ab vollendetem 14. Lebensmonat (bei gesicherter Betreuung)' },
           { kriterium: 'Rechtsgrundlage', a: 'SGB II', b: '13. SGB II-ÄndG (BGBl. 2026 I Nr. 107)' },
         ],
       },
@@ -1086,7 +1088,7 @@ Der jeweils höhere Freibetrag gilt ab Beginn des Monats, in dem die Altersgrenz
         typ: 'infobox',
         variante: 'warnung',
         titel: 'Reform zum 1. Juli 2026',
-        text: 'Zum 1. Juli 2026 wird das Bürgergeld in „Grundsicherungsgeld" umbenannt (13. SGB II-ÄndG, BGBl. 2026 I Nr. 107). Die Regelsätze bleiben unverändert (Alleinstehende 563 €). Geändert werden vor allem: Die Vermögens-Karenzzeit im ersten Bezugsjahr entfällt und wird durch einen altersgestaffelten Freibetrag ersetzt; die Unterkunftskosten werden ab Tag 1 auf das 1,5-Fache der örtlichen Angemessenheit gedeckelt; die Sanktionen bei Pflichtverletzungen werden verschärft. Die Angaben geben die geltende Rechtslage wieder.',
+        text: 'Zum 1. Juli 2026 wird das Bürgergeld in „Grundsicherungsgeld" umbenannt (13. SGB II-ÄndG, BGBl. 2026 I Nr. 107). Die Regelsätze bleiben unverändert (Alleinstehende 563 €). Geändert werden vor allem: Die Vermögens-Karenzzeit im ersten Bezugsjahr entfällt und wird durch einen altersgestaffelten Freibetrag ersetzt; die Unterkunftskosten werden ab Tag 1 auf das 1,5-Fache der örtlichen Angemessenheit gedeckelt; die Sanktionen bei Pflichtverletzungen werden verschärft (bei anhaltender Totalverweigerung sind Kürzungen bis 100 % möglich). Außerdem gilt wieder ein Vermittlungsvorrang (Arbeitsaufnahme vor Maßnahme), und Erwerbstätigkeit ist Eltern künftig ab dem vollendeten 14. Lebensmonat des Kindes zumutbar (bei gesicherter Betreuung). Wer am 1. Juli 2026 bereits bezieht, muss in der Regel keinen neuen Antrag stellen — laufende Bewilligungen (§ 41 SGB II, meist 12 Monate) laufen weiter. Die Angaben geben die geltende Rechtslage wieder und sind keine Rechtsberatung.',
       },
       {
         typ: 'infobox',
@@ -1114,11 +1116,11 @@ Der jeweils höhere Freibetrag gilt ab Beginn des Monats, in dem die Altersgrenz
       },
       {
         frage: 'Heißt das jetzt Grundsicherungsgeld?',
-        antwort: 'Ja, seit dem 1. Juli 2026 wurde das Bürgergeld durch das 13. Gesetz zur Änderung des SGB II in Grundsicherungsgeld umbenannt (BGBl. 2026 I Nr. 107 vom 16. April 2026). Inhaltlich ändern sich vor allem das Schonvermögen (altersgestaffelt statt Karenzzeit-Modell), die Unterkunftskosten-Deckelung auf das 1,5-Fache der örtlichen Angemessenheit und die Sanktionsregeln. Die Regelsätze bleiben unverändert (Nullrunde 2026 durch Besitzschutz). Der Begriff „Bürgergeld" bleibt im Sprachgebrauch verbreitet und wird hier weiter genutzt, weil die Suchanfragen noch überwiegend unter diesem Namen laufen.',
+        antwort: 'Ja, seit dem 1. Juli 2026 wurde das Bürgergeld durch das 13. Gesetz zur Änderung des SGB II in Grundsicherungsgeld umbenannt (BGBl. 2026 I Nr. 107 vom 22. April 2026). Inhaltlich ändern sich vor allem das Schonvermögen (altersgestaffelt statt Karenzzeit-Modell), die Unterkunftskosten-Deckelung auf das 1,5-Fache der örtlichen Angemessenheit und die Sanktionsregeln. Die Regelsätze bleiben unverändert (Nullrunde 2026 durch Besitzschutz). Der Begriff „Bürgergeld" bleibt im Sprachgebrauch verbreitet und wird hier weiter genutzt, weil die Suchanfragen noch überwiegend unter diesem Namen laufen.',
       },
       {
         frage: 'Was ist der Unterschied zwischen Bürgergeld und Hartz IV?',
-        antwort: 'Das Bürgergeld hat Hartz IV (Arbeitslosengeld II) zum 1. Januar 2023 abgelöst. Die wichtigsten Änderungen: höhere Regelsätze, Karenzzeit von 12 Monaten mit großzügigeren Vermögensfreibeträgen, stärkerer Fokus auf Qualifizierung statt Vermittlung in Helferjobs, und ein Kooperationsplan statt der bisherigen Eingliederungsvereinbarung. Seit 1. Juli 2026 heißt die Leistung Grundsicherungsgeld — Regelsätze und Grundstruktur bleiben erhalten, aber Vermögensregeln und Sanktionen wurden reformiert.',
+        antwort: 'Das Bürgergeld hat Hartz IV (Arbeitslosengeld II) zum 1. Januar 2023 abgelöst. Die wichtigsten Änderungen: höhere Regelsätze, Karenzzeit von 12 Monaten mit großzügigeren Vermögensfreibeträgen, zunächst ein stärkerer Fokus auf Qualifizierung statt schneller Vermittlung, und ein Kooperationsplan statt der bisherigen Eingliederungsvereinbarung. Seit 1. Juli 2026 heißt die Leistung Grundsicherungsgeld — Regelsätze und Grundstruktur bleiben erhalten, aber Vermögensregeln und Sanktionen wurden reformiert und der Vermittlungsvorrang wieder eingeführt: Die Vermittlung in Arbeit hat nun grundsätzlich Vorrang vor Weiterbildung und Maßnahmen.',
       },
       {
         frage: 'Wie lange bekommt man Bürgergeld?',
