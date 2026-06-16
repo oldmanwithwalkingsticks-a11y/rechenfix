@@ -44,6 +44,33 @@ oder Deployment-Artefakte zu verlieren.
 
 ---
 
+## 16.06.2026 — W19 backform-umrechner Goldstandard (vergleich-Leitformat erstmals, t15)
+
+- **Was gebaut:** backform-umrechner (kochen.ts) hat jetzt `contentBloecke` +
+  `quellen` (Neueintrag). **13 Blöcke** nach L-W19.Granularitaet (≥11, kein WARN).
+  Folge: `text-vergleich-beispielrechnung-tabelle-vergleich-text-beispielrechnung-
+  tabelle-vergleich-text-checkliste-infobox-infobox`. **Leitformat vergleich
+  dominant (3×:** 26 vs. 28 cm rund, rund vs. eckig, Kastenform vs. Springform)
+  + 2 beispielrechnung + 2 tabelle. **Erster vergleich-dominanter Rechner im
+  Migrations-Set** — erhöht die strukturelle Vielfalt. ~1.548 W, alle drei
+  `text`-Blöcke ≤170 W (max 170).
+- **Lib-Treue (inline-Flächenverhältnis, nicht angefasst):** rund A = π × r²,
+  eckig L × B, Faktor = Fläche_neu ÷ Fläche_alt. Werte exakt: 26 cm = 531 cm²,
+  28 cm = 616 cm² (Faktor 1,16), 24 cm = 452 cm², 20 cm = 314 cm²; 26→20 = 0,59;
+  28→24 = 0,73; 20×20 = 400 cm² (0,75 vs. 26 rund). Fachkern: Durchmesser wirkt
+  **quadratisch** (Fläche), nicht linear — 2 cm mehr = 16 % mehr Teig.
+- **Wellbeing (Kochen, neutral):** kein Diät-/Wertungs-Frame; rein praktische
+  Backhilfe (Teighöhe, Stäbchenprobe, Backzeit-Anpassung).
+- **Bestand-Audit:** `erklaerung` + 5 FAQ geprüft — Flächenwerte und Faktoren
+  korrekt, keine veralteten Mengen, kein Fix nötig, bleiben als Fallback.
+- **Verify:** Wortzahl 1.548 (OK ≥1500), 13 Blöcke kein WARN <11, vergleich 3×
+  dominant, 3/3 text ≤170 W, 0 ASCII-Apostroph-Risiko, Cosinus moderat (≤0,94,
+  kein Gate), Vercel-grün. contentBloecke-Goldstandard-Rechner damit auf 31.
+- **Tranche-Stand:** kochen-Migration läuft (backform Goldstandard); Gesamt-
+  Goldstandard-Set 31 Rechner.
+
+---
+
 ## 16.06.2026 — W19 kw-ps-umrechner Goldstandard (tabelle-Leitformat, t14)
 
 - **Was gebaut:** kw-ps-umrechner (auto.ts) hat jetzt `contentBloecke` + `quellen`
