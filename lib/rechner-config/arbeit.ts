@@ -307,6 +307,130 @@ Unser Rechner berücksichtigt den Schwerbehinderten-Zusatzurlaub automatisch und
         antwort: 'Nein — der Rechner rundet § 5 Abs. 2 BUrlG-konform auf ganze Urlaubstage. Bruchteile ab einem halben Tag werden auf den nächsten ganzen Tag aufgerundet, kleinere Bruchteile abgerundet. Beispiel: 13,5 Tage → 14 Tage. Eine Rundung auf halbe Tage ist eine vertragliche Kulanzregelung mancher Arbeitgeber, gesetzlich nicht vorgeschrieben.',
       },
     ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Der gesetzliche Mindesturlaub nach § 3 BUrlG',
+        html: `<p>Das Bundesurlaubsgesetz (BUrlG) garantiert jedem Arbeitnehmer einen <strong>bezahlten Mindesturlaub</strong>. Nach § 3 BUrlG beträgt er <strong>24 Werktage</strong> pro Jahr. Werktage sind dabei alle Kalendertage außer Sonn- und gesetzlichen Feiertagen — der Samstag zählt also mit. 24 Werktage entsprechen genau <strong>vier Wochen</strong> Urlaub.</p><p>Weil die meisten Menschen heute an fünf Tagen pro Woche arbeiten, rechnet man die 24 Werktage auf die tatsächlichen Arbeitstage um: Bei einer <strong>5-Tage-Woche sind das 20 Arbeitstage</strong>, bei einer 6-Tage-Woche bleiben es 24. In allen Fällen sind es vier Wochen bezahlte Freistellung. Der Anspruch gilt für alle Arbeitnehmer, Auszubildenden und arbeitnehmerähnlichen Personen; für Jugendliche gelten nach dem Jugendarbeitsschutzgesetz höhere Sätze. Der Arbeitgeber darf dieses Minimum nie unterschreiten — mehr Urlaub vereinbaren darf er aber jederzeit. Für Jugendliche gelten nach dem Jugendarbeitsschutzgesetz höhere Mindestsätze (30 Werktage unter 16, 27 unter 17 und 25 unter 18 Jahren). Dieser Rechner ermittelt den Anspruch aus Wochenarbeitstagen, Vertragsurlaub, Teilzeit und Beschäftigungsdauer. Er ersetzt keine Rechtsberatung.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Gesetzlicher Mindesturlaub nach Arbeitswoche',
+        kopf: ['Arbeitswoche', 'Mindesturlaub (§ 3 BUrlG)', 'in Arbeitstagen'],
+        zeilen: [
+          ['6-Tage-Woche', '24 Werktage', '24 Arbeitstage'],
+          ['5-Tage-Woche', '24 Werktage', '20 Arbeitstage'],
+          ['4-Tage-Woche', '24 Werktage', '16 Arbeitstage'],
+          ['3-Tage-Woche', '24 Werktage', '12 Arbeitstage'],
+        ],
+        fussnote: 'Das Gesetz nennt einheitlich 24 Werktage (alle Tage außer Sonn-/Feiertagen). Umgerechnet auf die tatsächlichen Arbeitstage ergeben sich immer dieselben vier Wochen Urlaub — nur die Zahl der Tage unterscheidet sich je nach Verteilung der Arbeitswoche.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Vollzeit, 5-Tage-Woche: gesetzlich vs. vertraglich',
+        schritte: [
+          { label: 'Gesetzlicher Mindesturlaub (5-Tage-Woche)', formel: '24 Werktage × 5/6', ergebnis: '20 Arbeitstage = 4 Wochen' },
+          { label: 'Typischer vertraglicher Urlaub', formel: 'in der Praxis oft 28–30 Tage', ergebnis: '30 Tage = 6 Wochen' },
+          { label: 'Vorteil über dem Gesetz', formel: '30 − 20', ergebnis: '10 Tage zusätzlich' },
+        ],
+        fazit: 'Gesetzlich stehen einer Vollzeitkraft in der 5-Tage-Woche 20 Arbeitstage (vier Wochen) zu. In der Praxis liegt der vertragliche Urlaub meist höher — 28 bis 30 Tage sind verbreitet, viele Tarifverträge sehen 30 Tage (sechs Wochen) vor. Was im Arbeits- oder Tarifvertrag steht, gilt, solange es das gesetzliche Minimum nicht unterschreitet. Der Rechner zeigt deshalb beide Größen: den vertraglichen Anspruch, den man einträgt, und das gesetzliche Minimum als Vergleich. Gut zu wissen: Der gesetzliche Mindesturlaub und ein eventueller vertraglicher Mehrurlaub können rechtlich unterschiedlich behandelt werden — etwa beim Verfall am Jahresende. Wer genau wissen will, welcher Teil seines Urlaubs welchen Regeln unterliegt, schaut in den Arbeits- oder Tarifvertrag.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Teilzeit, 3-Tage-Woche: anteiliger Anspruch',
+        schritte: [
+          { label: 'Vollzeit-Urlaub (5-Tage-Woche)', formel: '30 Tage', ergebnis: '30 Tage' },
+          { label: 'Teilzeit-Faktor (3 von 5 Tagen)', formel: '3 ÷ 5', ergebnis: '0,6' },
+          { label: 'Urlaubstage Teilzeit', formel: '30 × 0,6', ergebnis: '18 Tage' },
+          { label: 'In Wochen umgerechnet', formel: '18 ÷ 3', ergebnis: '6 Wochen' },
+        ],
+        fazit: 'Bei Teilzeit zählt die Verteilung auf die Wochentage, nicht die tägliche Stundenzahl. Wer an drei statt fünf Tagen arbeitet, erhält mit 18 statt 30 Tagen zwar weniger Urlaubstage — die Urlaubsdauer bleibt aber gleich: 18 ÷ 3 = sechs Wochen, genau wie bei Vollzeit (30 ÷ 5). Niemand wird durch Teilzeit beim Urlaub benachteiligt; die Tage werden nur proportional umgerechnet. Wer an mehr Stunden pro Tag, aber weniger Tagen arbeitet, bekommt entsprechend weniger Tage bei gleicher Wochenzahl. Heikel wird es nur, wenn sich die Verteilung der Arbeitstage während des Jahres ändert — etwa von fünf auf drei Tage: Dann ist der bereits erworbene Urlaub auf die neue Tageszahl umzurechnen, damit weder Vor- noch Nachteil entsteht. Im Zweifel hilft hier ein Blick in den Arbeitsvertrag oder eine arbeitsrechtliche Beratung.',
+      },
+      {
+        typ: 'text',
+        titel: 'Anteiliger Urlaub bei Ein- und Austritt unterm Jahr',
+        html: `<p>Wer nicht das ganze Kalenderjahr beschäftigt ist, hat in der Regel nur einen <strong>anteiligen</strong> Urlaubsanspruch. Nach § 5 BUrlG gilt die <strong>Zwölftelung</strong>: Für jeden vollen Beschäftigungsmonat gibt es ein Zwölftel des Jahresurlaubs. Drei volle Monate ergeben also drei Zwölftel des Jahresanspruchs.</p><p>Der <strong>volle</strong> Jahresanspruch entsteht erst nach der <strong>Wartezeit von sechs Monaten</strong> (§ 4 BUrlG). Beim Austritt unterscheidet das Gesetz nach dem Zeitpunkt: Wer in der <strong>ersten Jahreshälfte</strong> (bis 30. Juni) ausscheidet, bekommt anteilig ein Zwölftel pro Monat; wer in der <strong>zweiten Jahreshälfte</strong> (ab Juli) ausscheidet und die Wartezeit erfüllt hat, behält den vollen Jahresurlaub (§ 5 Abs. 1 BUrlG). Bruchteile von mindestens einem halben Tag werden zugunsten des Arbeitnehmers auf volle Tage aufgerundet (§ 5 Abs. 2 BUrlG), kleinere abgerundet. Als voller Monat zählt dabei jeder Beschäftigungsmonat, der vollständig im Arbeitsverhältnis liegt; angebrochene Monate bleiben außer Betracht. Der Rechner bildet diese Zwölftelung ab — Sonderfälle der Rechtsprechung kann er nicht ersetzen.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Eintritt im Mai: Zwölftelung des Jahresurlaubs',
+        schritte: [
+          { label: 'Jahresurlaub bei Vollzeit', formel: '30 Tage', ergebnis: '30 Tage' },
+          { label: 'Volle Beschäftigungsmonate (Mai–Dezember)', formel: '8 Monate', ergebnis: '8/12' },
+          { label: 'Anteiliger Anspruch (Zwölftelung)', formel: '30 ÷ 12 × 8', ergebnis: '20 Tage' },
+        ],
+        fazit: 'Bei Eintritt am 1. Mai sind bis Jahresende acht volle Monate beschäftigt — anteilig also 30 ÷ 12 × 8 = 20 Tage. So rechnet der Rechner. Wichtig zu wissen: Sobald die sechsmonatige Wartezeit erfüllt ist (hier ab November), kann nach der Rechtsprechung für ein Eintrittsjahr in der ersten Jahreshälfte sogar der volle Jahresanspruch entstehen. Der tatsächliche Anspruch kann daher höher liegen als die reine Zwölftelung; im Zweifel lohnt der Blick in den Arbeitsvertrag oder eine arbeitsrechtliche Beratung. Dies ist keine Rechtsberatung.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Austritt im August: voller Anspruch (2. Jahreshälfte)',
+        schritte: [
+          { label: 'Jahresurlaub', formel: '30 Tage', ergebnis: '30 Tage' },
+          { label: 'Austritt 31.08. → zweite Jahreshälfte (ab Juli)', formel: '§ 5 Abs. 1 BUrlG', ergebnis: 'voller Anspruch 30 Tage' },
+          { label: 'Bereits genommen', formel: '30 − 12', ergebnis: '18 Resturlaubstage' },
+        ],
+        fazit: 'Wer in der zweiten Jahreshälfte ausscheidet und die sechsmonatige Wartezeit erfüllt hat, behält den vollen Jahresurlaub — hier 30 Tage. Nach Abzug der bereits genommenen 12 Tage bleiben 18 Resturlaubstage. Wären sie nicht mehr nehmbar, müssten sie nach § 7 Abs. 4 BUrlG in Geld abgegolten werden. Bei Austritt in der ersten Jahreshälfte (bis Juni) gilt dagegen die Zwölftelung. Der Rechner entscheidet anhand des Austrittsmonats automatisch — die Wartezeit-Voraussetzung für den vollen Anspruch sollte man im Einzelfall prüfen. Ein häufiger Irrtum: Der volle Anspruch bei Austritt in der zweiten Jahreshälfte bedeutet nicht, dass der Arbeitgeber den Urlaub kürzen darf, weil das Arbeitsverhältnis ja endet — das Gesetz gewährt ihn bewusst ungekürzt. Umgekehrt kann der Arbeitgeber verlangen, dass offener Urlaub vor dem Austritt genommen wird, statt ihn auszuzahlen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Übertragung und Verfall — § 7 Abs. 3 BUrlG',
+        html: `<p>Urlaub ist nach § 7 Abs. 3 BUrlG grundsätzlich <strong>im laufenden Kalenderjahr</strong> zu nehmen. Was bis zum 31. Dezember nicht genommen wurde, verfällt im Grundsatz. Eine <strong>Übertragung ins Folgejahr</strong> ist nur möglich, wenn <strong>dringende betriebliche</strong> oder <strong>in der Person des Arbeitnehmers liegende Gründe</strong> sie rechtfertigen — etwa volle Auftragsbücher oder eine längere Krankheit.</p><p>Im Fall der Übertragung muss der Urlaub in den <strong>ersten drei Monaten</strong> des Folgejahres genommen werden, also bis zum <strong>31. März</strong>. Danach verfällt er. Eine wichtige Ausnahme hat die Rechtsprechung gesetzt: Der Urlaub verfällt nur, wenn der Arbeitgeber den Arbeitnehmer rechtzeitig und konkret aufgefordert hat, den Urlaub zu nehmen, und auf den drohenden Verfall hingewiesen hat (siehe Warnhinweis). Bei langer Krankheit gilt zudem eine verlängerte Frist von 15 Monaten nach Ende des Urlaubsjahres. Dieser Rechner bildet die Stichtage ab, ersetzt aber keine Rechtsberatung.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Resturlaub ins Folgejahr übertragen',
+        schritte: [
+          { label: 'Jahresurlaub', formel: '30 Tage', ergebnis: '30 Tage' },
+          { label: 'Bis zum 31.12. genommen', formel: '30 − 22', ergebnis: '8 Resttage' },
+          { label: 'Übertragung nur bei dringenden Gründen (§ 7 Abs. 3)', formel: 'zu nehmen bis 31.03.', ergebnis: '8 Tage übertragbar' },
+          { label: 'Nicht bis 31.03. genommen', formel: 'grundsätzlich Verfall', ergebnis: 'außer AG-Hinweis fehlte' },
+        ],
+        fazit: 'Von 30 Tagen sind 22 genommen, 8 bleiben zum Jahresende offen. Ohne Übertragungsgrund würden sie am 31.12. verfallen; liegt ein dringender betrieblicher oder persönlicher Grund vor, verlängert sich die Frist bis zum 31. März. Entscheidend ist aber die Rechtsprechung: Hat der Arbeitgeber nicht rechtzeitig auf den drohenden Verfall hingewiesen, bleibt der Resturlaub bestehen und verfällt nicht. Wer offene Urlaubstage hat, sollte sie früh einplanen — und im Streitfall die Hinweispflicht des Arbeitgebers prüfen.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Verfall nur bei Hinweis des Arbeitgebers (EuGH/BAG)',
+        text: 'Nach der Rechtsprechung von EuGH und Bundesarbeitsgericht verfällt gesetzlicher Urlaub am Jahresende (bzw. zum 31. März) nur dann, wenn der Arbeitgeber seiner Mitwirkungsobliegenheit nachgekommen ist: Er muss den Arbeitnehmer rechtzeitig und klar auffordern, den Urlaub zu nehmen, und ausdrücklich auf den drohenden Verfall hinweisen. Unterlässt er das, bleibt der Urlaubsanspruch bestehen und kann sich über Jahre ansammeln. Bei langer Erkrankung verfällt Urlaub erst 15 Monate nach Ende des Urlaubsjahres. Diese Angaben geben die geltende Rechtslage wieder und sind keine Rechtsberatung — im Einzelfall hilft eine Gewerkschaft oder Fachanwältin für Arbeitsrecht.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Urlaubsanspruch Schritt für Schritt prüfen',
+        punkte: [
+          'Arbeits- oder Tarifvertrag prüfen: Wie viele Urlaubstage sind vereinbart? (mindestens das gesetzliche Minimum)',
+          'Arbeitstage pro Woche festhalten — sie bestimmen die Umrechnung zwischen Werk- und Arbeitstagen.',
+          'Bei Teilzeit den Anteil der Wochenarbeitstage einrechnen (proportionale Umrechnung).',
+          'Bei Ein- oder Austritt unterm Jahr die vollen Beschäftigungsmonate zählen (Zwölftelung, § 5 BUrlG).',
+          'Schwerbehinderung mit GdB ≥ 50? Dann 5 Zusatztage (5-Tage-Woche) berücksichtigen.',
+          'Resturlaub vor Jahresende einplanen — sonst droht Verfall (außer der Arbeitgeber hat nicht hingewiesen).',
+          'Bei Kündigung: nicht genommenen Urlaub abgelten lassen (§ 7 Abs. 4 BUrlG).',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Vertraglicher Urlaub darf über dem Gesetz liegen',
+        text: 'Das BUrlG legt nur die Untergrenze fest. Arbeits- und Tarifverträge gewähren oft deutlich mehr als die gesetzlichen vier Wochen — 28 bis 30 Tage sind in vielen Branchen üblich, manche Tarifverträge gehen darüber hinaus. Maßgeblich für den eigenen Anspruch ist immer die günstigste Regelung. Wichtig ist die Unterscheidung zwischen gesetzlichem und vertraglichem Mehrurlaub: Für den gesetzlichen Teil gelten die strengen Verfalls- und Abgeltungsregeln; beim vertraglichen Mehrurlaub können Arbeitgeber abweichende Regelungen treffen, etwa einen früheren Verfall — aber nur, wenn der Vertrag das klar vorsieht.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Schwerbehinderung: 5 Tage Zusatzurlaub (§ 208 SGB IX)',
+        text: 'Schwerbehinderte Menschen mit einem Grad der Behinderung von mindestens 50 haben nach § 208 SGB IX Anspruch auf eine Arbeitswoche zusätzlichen Urlaub — bei einer 5-Tage-Woche also 5 Tage, bei abweichender Verteilung anteilig (z. B. 3 Tage bei einer 3-Tage-Woche). Der Zusatzurlaub kommt zum gesetzlichen und vertraglichen Urlaub hinzu. Gleichgestellte Menschen (Grad der Behinderung 30 bis 49 mit Gleichstellung) haben diesen Anspruch nicht. Besteht die Schwerbehinderung nicht das ganze Jahr, wird auch der Zusatzurlaub anteilig berechnet. Der Rechner berücksichtigt ihn auf Wunsch automatisch.',
+      },
+    ],
+    quellen: [
+      {
+        titel: '§ 3 BUrlG: Dauer des Urlaubs',
+        url: 'https://www.gesetze-im-internet.de/burlg/__3.html',
+        hinweis: 'Mindesturlaub 24 Werktage (= 4 Wochen).',
+      },
+      {
+        titel: '§ 7 BUrlG: Zeitpunkt, Übertragbarkeit und Abgeltung',
+        url: 'https://www.gesetze-im-internet.de/burlg/__7.html',
+        hinweis: 'Übertragung bis 31.03., Verfall, Abgeltung bei Beendigung.',
+      },
+    ],
     affiliate: [
       { programId: 'ks-auxilia', context: 'urlaubstage' },
       { programId: 'hotelde', context: 'urlaubstage', variant: 'compact' },
