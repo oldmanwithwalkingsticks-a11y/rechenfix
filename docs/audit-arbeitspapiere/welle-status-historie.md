@@ -44,6 +44,44 @@ oder Deployment-Artefakte zu verlieren.
 
 ---
 
+## 16.06.2026 — YMYL-Audit buergergeld-rechner: Grundsicherungsgeld-Stichtag 01.07.2026
+
+- **Was korrigiert:** Faktencheck des `buergergeld-rechner` zum Reform-Stichtag
+  01.07.2026 (Bürgergeld → „Grundsicherungsgeld", 13. SGB II-ÄndG). **Keine
+  Rechenlogik geändert** — der Stichtag-Switch `getAktuelleBuergergeldParameter`
+  und die Schonvermögen-Altersstaffel sind korrekt. Nur Datums-/Faktenfehler.
+- **Primärquellen-Verifikation (web, Stand 16.06.2026):** Independent bestätigt —
+  BGBl. 2026 I Nr. 107 **vom 22.04.2026** (NICHT 16.04.); die Reform führt den
+  **Vermittlungsvorrang wieder ein** (Arbeitsaufnahme vor Maßnahme/Qualifizierung);
+  verschärfte Sanktionen (teils ab 23.04.2026 in Kraft, Rest 01.07.); Zumutbarkeit
+  für Eltern künftig ab vollendetem 14. Lebensmonat. Quelle u. a. buerger-geld.org,
+  gegen-hartz.de.
+- **FIX 1 + 2 (Commit `929f816`, lib/berechnungen/buergergeld-parameter.ts):**
+  Verkündungsdatum 16.04. → 22.04.2026 an 4 Stellen; veralteten „H2 ist SKELETON,
+  identisch zu H1"-Kopfkommentar neu gefasst (H2 trägt verkündete Werte:
+  Bezeichnung Grundsicherungsgeld + Altersstaffel § 12 Abs. 2 SGB II n.F.;
+  Regelsätze bewusst unverändert via Nullrunde § 28a). Keine Code-Werte geändert.
+- **FIX 3 + 4 (Commit `0081d31`, lib/rechner-config/finanzen.ts):**
+  - 3a) Datum 16.04. → 22.04.2026 in `quellen`, `erklaerung` und FAQ — inkl. der
+    **ausgeschriebenen Form „16. April 2026"**, die die numerische `grep "16.04"`
+    übersieht (Lehre 20: alle Formen greppen; FAQ + erklaerung speisen Schema.org).
+    `quellen`-Eintrag um `url` (gesetze-im-internet.de/sgb_2) ergänzt.
+  - 3b) **Falschaussage korrigiert:** „stärkerer Fokus auf Qualifizierung statt
+    Vermittlung" stand als aktueller Stand → war FALSCH HERUM. Jetzt als
+    2023-Historie gerahmt; der **2026er Vermittlungsvorrang** in erklaerung, FAQ
+    und einer neuen `vergleich`-Zeile „Förderlogik" korrekt dargestellt.
+  - 4) In bestehende Blöcke eingearbeitet (keine neue Schablone, Folge stabil):
+    Sanktionen bis 100 % bei Totalverweigerung (`vergleich` + `infobox`),
+    Zumutbarkeit Eltern ab 14. Lebensmonat (`vergleich` + `infobox`),
+    Bestandsschutz (kein neuer Antrag, § 41 SGB II) in `infobox(warnung)`.
+    Durchgängig „keine Rechtsberatung".
+- **Checks:** `grep "16.04"`/„16. April" → 0; Wortzahl ~1.594 (OK ≥1500); Struktur
+  11 Blöcke, kein WARN, Folge unverändert; alte Falschaussage 0 Treffer,
+  Vermittlungsvorrang 5×; 0 neue Apostroph-Risiken; `letzteAktualisierung`
+  2026-06-16. Atomar in 2 Code-Commits getrennt (lib / config). Vercel-grün.
+
+---
+
 ## 14.06.2026 — A11y-Fix CookieBanner: Landmark + Dialog-Semantik (axe-Regel `region`)
 
 - **Was gefixt:** [components/cookie/CookieBanner.tsx](components/cookie/CookieBanner.tsx)
