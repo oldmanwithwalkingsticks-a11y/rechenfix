@@ -44,6 +44,37 @@ oder Deployment-Artefakte zu verlieren.
 
 ---
 
+## 16.06.2026 — W19 flaechenrechner Goldstandard (beispielrechnung-Leitformat, t13)
+
+- **Was gebaut:** flaechenrechner (mathe.ts) hat jetzt `contentBloecke` +
+  `quellen` (Neueintrag). **13 Blöcke** nach L-W19.Granularitaet (≥11, kein WARN).
+  Folge: `text-beispielrechnung-beispielrechnung-tabelle-beispielrechnung-text-
+  beispielrechnung-beispielrechnung-tabelle-text-checkliste-infobox-infobox`.
+  **Leitformat beispielrechnung dominant (5×:** Rechteck/Quadrat, Dreieck
+  (a×h)/2, Kreis d→r, Heron 5-6-7, Trapez) + 2 tabelle (Formel-Übersicht,
+  Flächeneinheiten). diagramm/statistik/vergleich weggelassen (Mathe-Profil).
+  ~1.551 W, alle drei `text`-Blöcke ≤170 W (max 170).
+- **Lib-Treue:** Formeln + Werte exakt aus `lib/berechnungen/flaeche.ts`
+  gespiegelt: Rechteck A=a×b (8×5=40 m², Umfang 26, Diagonale √89≈9,43);
+  Dreieck (6×4)/2=12 cm²; Kreis π×5²≈78,54 cm²; Heron s=(5+6+7)/2=9 → √216≈
+  14,70 cm²; Trapez (8+4)×3/2=18 m². Formel-Tabelle deckt alle 8 Rechner-Formen
+  ab (inkl. Parallelogramm/Raute/Sechseck).
+- **Abgrenzung bruch/primzahl:** alle drei sind Mathe-beispielrechnung-
+  Leitformate mit hohem Struktur-Cosinus (1,00, kein Gate — Mathe-Profil ohne
+  diagramm/statistik/vergleich klustert zwangsläufig). Inhaltlich disjunkt:
+  Geometrie/Flächen vs. Bruchrechnung vs. Primzahlen; Beispielrechnungs-Themen
+  vollständig getrennt.
+- **Bestand-Audit:** `erklaerung` + 5 FAQ geprüft — fachlich korrekt (alle
+  Formeln, Heron, Einheiten-Quadrierung), kein Fix nötig, bleiben als Fallback.
+  Heron-Beispiel im Bestand nutzt 3-4-5 (A=6), die neue Beispielrechnung 5-6-7
+  (A≈14,70) — bewusst unterschiedlich.
+- **Verify:** Wortzahl 1.551 (OK ≥1500), 13 Blöcke kein WARN <11, beispielrechnung
+  5× dominant, 3/3 text ≤170 W, 0 ASCII-Apostroph-Risiko, Cosinus-Cluster zu
+  bruch/primzahl (kein Gate; Themen disjunkt), Vercel-grün. contentBloecke-
+  Goldstandard-Rechner damit auf 29.
+
+---
+
 ## 16.06.2026 — W19 urlaubstage-rechner Goldstandard (beispielrechnung-Leitformat, YMYL, t12)
 
 - **Was gebaut:** urlaubstage-rechner (arbeit.ts) hat jetzt `contentBloecke` +
