@@ -44,6 +44,34 @@ oder Deployment-Artefakte zu verlieren.
 
 ---
 
+## 16.06.2026 — W19 kw-ps-umrechner Goldstandard (tabelle-Leitformat, t14)
+
+- **Was gebaut:** kw-ps-umrechner (auto.ts) hat jetzt `contentBloecke` + `quellen`
+  (Neueintrag). **14 Blöcke** nach L-W19.Granularitaet (≥11, kein WARN). Folge:
+  `text-tabelle-beispielrechnung-tabelle-beispielrechnung-text-tabelle-tabelle-
+  text-beispielrechnung-statistik-checkliste-infobox-infobox`. **Leitformat
+  tabelle dominant (4×:** Schnellumrechnung kW→PS, PS→kW, typische
+  Fahrzeugklassen, Faustregel-Genauigkeit) + 3 beispielrechnung.
+  diagramm/vergleich weggelassen. ~1.563 W, alle drei `text`-Blöcke ≤170 W.
+- **Lib-Treue:** Faktoren exakt aus `lib/berechnungen/kw-ps.ts`
+  (`KW_ZU_PS = 1.35962`, `PS_ZU_KW = 0.73550`, 2-Dezimal-Rundung). Werte
+  gerechnet: 110 kW = 149,56 PS; 150 PS = 110,33 kW; 81 kW (Feld P.2) =
+  110,13 PS; Tabellen 50/75/100/150/200 kW → 68/102/136/204/272 PS.
+- **Fachlich/YMYL-nah:** kW = gesetzliche SI-Einheit, PS nur ergänzend zulässig
+  (DIN 66036, 1 PS = 0,7355 kW); Nennleistung im Fahrzeugschein Feld P.2 in kW;
+  metrische PS ≠ angloamerikanische hp (1 hp = 1,0139 PS) als `infobox(hinweis)`.
+  statistik Neuwagen-Durchschnitt **~110 kW (~150 PS) 2024**, ~55 kW 1990,
+  ~18 % über 200 PS — **web-verifiziert** (KBA/Statista-Größenordnung, als
+  „Orientierung" gerahmt). quellen DIN 66036 (didaktisch) + KBA mit URL.
+- **Bestand-Audit:** `erklaerung` + 4 FAQ geprüft — Faktoren und Fachangaben
+  (P.2, hp/PS 1,0139, SI/EU) korrekt, kein Fix nötig, bleiben als Fallback.
+- **Verify:** Wortzahl 1.563 (OK ≥1500), 14 Blöcke kein WARN <11, tabelle 4×
+  dominant, 3/3 text ≤170 W, 0 ASCII-Apostroph-Risiko, Cosinus-Cluster zu
+  pace/trinkgeld (kein Gate; Themen disjunkt), Vercel-grün. contentBloecke-
+  Goldstandard-Rechner damit auf 30.
+
+---
+
 ## 16.06.2026 — W19 flaechenrechner Goldstandard (beispielrechnung-Leitformat, t13)
 
 - **Was gebaut:** flaechenrechner (mathe.ts) hat jetzt `contentBloecke` +
