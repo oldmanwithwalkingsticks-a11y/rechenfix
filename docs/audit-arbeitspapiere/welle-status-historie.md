@@ -44,6 +44,40 @@ oder Deployment-Artefakte zu verlieren.
 
 ---
 
+## 16.06.2026 — W19 urlaubstage-rechner Goldstandard (beispielrechnung-Leitformat, YMYL, t12)
+
+- **Was gebaut:** urlaubstage-rechner (arbeit.ts) hat jetzt `contentBloecke` +
+  `quellen` (Neueintrag). **13 Blöcke** nach L-W19.Granularitaet (≥11, kein WARN).
+  Folge: `text-tabelle-beispielrechnung-beispielrechnung-text-beispielrechnung-
+  beispielrechnung-text-beispielrechnung-infobox-checkliste-infobox-infobox`.
+  **Leitformat beispielrechnung dominant (5×:** Vollzeit 5-Tage, Teilzeit 3-Tage,
+  Eintritt Mai/Zwölftelung, Austritt August/voller Anspruch, Resturlaub-
+  Übertragung) + 1 tabelle. ~1.558 W, alle drei `text`-Blöcke ≤170 W (max 150).
+- **YMYL — Primärquellen gegen gesetze-im-internet.de verifiziert** (nicht aus
+  Memory): **§ 3 BUrlG** (Mindesturlaub 24 Werktage; Werktage = alle Kalendertage
+  außer Sonn-/Feiertagen → lib 24/20 korrekt) und **§ 7 Abs. 3/4 BUrlG**
+  (Urlaub im laufenden Jahr; Übertragung nur bei dringenden Gründen, Frist bis
+  31.03.; Abgeltung bei Beendigung). `quellen` mit beiden URLs. EuGH/BAG-
+  Mitwirkungsobliegenheit (Verfall nur bei rechtzeitigem AG-Hinweis) als
+  `infobox(warnung)`; „keine Rechtsberatung" durchgängig.
+- **Lib-Treue + L-35-Nuance:** Beispiele exakt aus `lib/berechnungen/
+  urlaubstage.ts` (gesetzl. Min 24 Werktage = 20 Arbeitstage; Teilzeit-Faktor
+  3/5 → 18 Tage; Eintritt 01.05. → 30÷12×8 = 20; Austritt 2. Jahreshälfte →
+  voller Anspruch; § 5 Abs. 2-Rundung). **Dokumentierte Lib-vs-Recht-Divergenz:**
+  Die Lib rechnet bei unterjährigem Eintritt reine Zwölftelung; nach erfüllter
+  6-Monats-Wartezeit kann nach BAG der volle Jahresanspruch entstehen. Im
+  Eintritt-Mai-`fazit` als Caveat offengelegt (rechner-treu + ehrlich), nicht
+  „korrigiert" — der Rechner gibt 20, der echte Anspruch kann höher liegen.
+- **Bestand-Audit:** `erklaerung` + 6 FAQ geprüft — fachlich korrekt
+  (24/20 Werktage, Teilzeit-Proportion, § 5/§ 7-Regeln, § 208 SGB IX), kein
+  Fix nötig, bleiben als Fallback.
+- **Verify:** Wortzahl 1.558 (OK ≥1500), 13 Blöcke kein WARN <11, beispielrechnung
+  5× dominant, 3/3 text ≤170 W, 0 ASCII-Apostroph-Risiko, Cosinus-Cluster zu
+  bruch/primzahl (kein Gate; Themen disjunkt), Vercel-grün. contentBloecke-
+  Goldstandard-Rechner damit auf 28.
+
+---
+
 ## 16.06.2026 — W19 pace-rechner Goldstandard (tabelle-Leitformat, t11) — sport 2/2 komplett
 
 - **Was gebaut:** pace-rechner (sport.ts) hat jetzt `contentBloecke` + `quellen`
