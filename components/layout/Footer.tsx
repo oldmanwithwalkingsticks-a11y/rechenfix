@@ -28,7 +28,7 @@ export default function Footer() {
                   <span className="text-2xl font-extrabold text-accent-400">fix</span>
                   <span className="text-sm text-primary-300">.de</span>
                 </div>
-                <span className="text-[11px] tracking-widest uppercase text-primary-300 dark:text-gray-500 font-medium">
+                <span className="text-[11px] tracking-widest uppercase text-primary-300 dark:text-gray-500 font-medium -mt-1">
                   Fix gerechnet!
                 </span>
               </div>
