@@ -2318,7 +2318,7 @@ Der Antrag wird beim zuständigen Landesamt für Ausbildungsförderung gestellt 
   },
   {
     slug: 'kindergeld-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-17',
     titel: 'Kindergeld-Rechner',
     beschreibung: 'Kindergeld 2026 berechnen und Günstigerprüfung: Kindergeld oder Kinderfreibetrag — was lohnt sich für Ihr Einkommen?',
     kategorie: 'Finanzen',
@@ -2329,6 +2329,12 @@ Der Antrag wird beim zuständigen Landesamt für Ausbildungsförderung gestellt 
     icon: '👶',
     formel: 'Kindergeld 2026 = 259 € × Anzahl Kinder (pro Monat) | Günstigerprüfung: Steuerersparnis durch Kinderfreibetrag (4.878 € bzw. 9.756 € pro Kind) vs. Kindergeld/Jahr — das Finanzamt wählt automatisch die günstigere Variante.',
     beispiel: 'Familie, zwei Kinder, 60.000 € Brutto, Zusammenveranlagung → Kindergeld: 518 €/Monat = 6.216 €/Jahr | Steuerersparnis Freibetrag: ca. 4.700 € → Kindergeld ist günstiger.',
+    // W19-Goldstandard (YMYL): kindergeld-rechner auf volle Tiefe (15 Bausteine, ~1.560 W),
+    // Leitformat „Tabellen-Nachschlagewerk" (4 Tabellen dominant). Alle Beträge gegen
+    // Primärquelle geprüft (Stand 06/2026): § 66 EStG = 259 €/Monat (2026); § 32 Abs. 6 EStG =
+    // 9.756 €/Kind gesamt (6.828 € sächlich + 2.928 € BEA); SSOT KINDERGELD_PRO_KIND_MONAT=259
+    // + BEA_ZUSAMMEN_2026=2928 gespiegelt. Günstigerprüfung § 31 EStG. Keine
+    // Kindergrundsicherung (nicht eingeführt). Kein Autorenblock. erklaerung bleibt Fallback.
     erklaerung: `**Kindergeld 2026: 259 Euro pro Kind**
 
 Das Kindergeld wurde zum 1. Januar 2026 von 255 Euro auf einheitlich **259 Euro pro Kind und Monat** angehoben — unabhängig von der Anzahl der Kinder. Die frühere Staffelung nach Kinderzahl wurde bereits zum 1. Januar 2023 abgeschafft. Bei zwei Kindern erhalten Sie also 518 Euro monatlich, bei drei Kindern 777 Euro. Über das Jahr ergibt das **3.108 Euro pro Kind** (12 × 259 Euro). Die Anhebung um 4 Euro pro Kind ist Teil des Inflationsausgleichs nach § 66 Abs. 1 EStG. Das Kindergeld wird von der Familienkasse der Bundesagentur für Arbeit automatisch überwiesen. Anspruch besteht grundsätzlich bis zum 18. Geburtstag des Kindes, bei Ausbildung, Studium oder FSJ bis zum 25. Lebensjahr. Berechnen Sie parallel Ihr [Nettoeinkommen](/finanzen/brutto-netto-rechner), um den finanziellen Spielraum der Familie zu sehen.
@@ -2360,6 +2366,184 @@ Kindergeld wird grundsätzlich nur an einen Berechtigten ausgezahlt — in der R
 **Weitere Leistungen für Familien**
 
 Neben Kindergeld und Kinderfreibetrag gibt es weitere Hilfen: den **Kinderzuschlag** (bis 292 Euro/Monat zusätzlich für einkommensschwache Familien), das **Bildungs- und Teilhabepaket** (Schulbedarf, Mittagessen, Ausflüge), den **Entlastungsbetrag für Alleinerziehende** (4.260 Euro jährlich plus 240 Euro pro weiterem Kind), und in der Elternzeit das [Elterngeld](/finanzen/elterngeld-rechner). Bei geringem Einkommen prüfen Sie auch den Anspruch auf [Wohngeld](/finanzen/wohngeld-rechner) oder [BAföG](/finanzen/bafoeg-rechner) für ältere Kinder in Ausbildung. Die Steuerersparnis durch Kinder können Sie mit dem [Steuererstattungs-Rechner](/finanzen/steuererstattung-rechner) schätzen.`,
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Kindergeld 2026 — 259 Euro pro Kind und Monat',
+        html: `<p>Das Kindergeld ist die zentrale familienpolitische Leistung in Deutschland. Seit dem <strong>1. Januar 2026</strong> beträgt es einheitlich <strong>259 Euro pro Kind und Monat</strong> — unabhängig davon, wie viele Kinder in der Familie leben. Die frühere Staffelung, bei der das dritte und jedes weitere Kind mehr Geld brachte, wurde bereits zum 1. Januar 2023 abgeschafft.</p><p>Gezahlt wird das Kindergeld von der <strong>Familienkasse</strong> der Bundesagentur für Arbeit, in der Regel an den Elternteil, bei dem das Kind lebt. Es ist <strong>einkommensunabhängig</strong>: Ob Geringverdiener oder Spitzenverdiener — jede Familie erhält denselben Betrag pro Kind. Über das Jahr summiert sich das auf <strong>3.108 Euro pro Kind</strong> (12 × 259 €).</p><p>Rechtsgrundlage ist § 66 Abs. 1 EStG. Steuerrechtlich gilt das Kindergeld als Vorausleistung auf den Kinderfreibetrag — welcher der beiden Vorteile am Ende greift, entscheidet das Finanzamt über die Günstigerprüfung.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Kindergeld-Historie: Entwicklung pro Kind und Monat',
+        kopf: ['Zeitraum', 'Kindergeld pro Kind / Monat', 'Anmerkung'],
+        zeilen: [
+          ['2021–2022', '219 € (1. Kind)', 'noch nach Kinderzahl gestaffelt'],
+          ['Ab 2023', '250 €', 'Einheitsbetrag eingeführt, Staffelung abgeschafft'],
+          ['2024', '250 €', 'unverändert'],
+          ['2025', '255 €', '+ 5 € Inflationsausgleich'],
+          ['Ab 2026', '259 €', '+ 4 € (§ 66 Abs. 1 EStG)'],
+        ],
+        fussnote: 'Seit 2023 erhält jedes Kind denselben Betrag — die frühere Staffelung nach der Reihenfolge der Kinder ist entfallen. Stand 06/2026.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Kindergeld nach Kinderzahl (2026)',
+        kopf: ['Kinder', 'Pro Monat', 'Pro Jahr'],
+        zeilen: [
+          ['1 Kind', '259 €', '3.108 €'],
+          ['2 Kinder', '518 €', '6.216 €'],
+          ['3 Kinder', '777 €', '9.324 €'],
+          ['4 Kinder', '1.036 €', '12.432 €'],
+          ['5 Kinder', '1.295 €', '15.540 €'],
+        ],
+        fussnote: 'Einfache Multiplikation: 259 € × Anzahl Kinder. Jedes Kind zählt gleich viel — es gibt keinen Zuschlag mehr für weitere Kinder.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Jahres-Kindergeld für eine Familie mit zwei Kindern',
+        schritte: [
+          { label: 'Kindergeld pro Kind und Monat (2026)', formel: '259 €', ergebnis: '259 €' },
+          { label: 'Zwei Kinder pro Monat', formel: '259 € × 2', ergebnis: '518 €' },
+          { label: 'Auf das Jahr gerechnet', formel: '518 € × 12', ergebnis: '6.216 €' },
+        ],
+        fazit: 'Eine Familie mit zwei Kindern erhält 2026 monatlich 518 Euro Kindergeld, über das Jahr 6.216 Euro. Pro Kind sind das 3.108 Euro jährlich — steuerfrei und einkommensunabhängig.',
+      },
+      {
+        typ: 'text',
+        titel: 'Was sich 2026 ändert — und was bleibt',
+        html: `<p>Die wichtigste Änderung zum 1. Januar 2026 ist die Anhebung des Kindergeldes um <strong>4 Euro auf 259 Euro</strong> pro Kind und Monat. Parallel steigt der Kinderfreibetrag, sodass Kindergeld und Freibetrag im gesetzlich verankerten Gleichlauf bleiben. Beide Werte werden regelmäßig an das steuerfrei zu stellende Existenzminimum der Kinder angepasst.</p><p>Häufig kursiert die Annahme, das System werde durch eine <strong>Kindergrundsicherung</strong> ersetzt. Das ist nicht der Fall: Die geplante Zusammenlegung mehrerer Familienleistungen wurde nicht umgesetzt. Es bleibt beim bewährten Nebeneinander von Kindergeld, Kinderfreibetrag und Kinderzuschlag.</p><p>Bestehen bleibt auch der <strong>Kindersofortzuschlag</strong> von 25 Euro pro Monat, der einkommensschwache Familien zusätzlich entlastet und unbefristet weitergezahlt wird. Für die meisten Eltern ändert sich im Alltag also wenig — außer den 4 Euro mehr pro Kind, die die Familienkasse automatisch überweist, ohne dass ein neuer Antrag nötig wäre.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Günstigerprüfung: Kindergeld oder Kinderfreibetrag?',
+        html: `<p>Das Steuerrecht gewährt Eltern zwei Vorteile, die sich gegenseitig ausschließen: das <strong>Kindergeld</strong> oder den <strong>Kinderfreibetrag</strong>. Beide gleichzeitig gibt es nicht. Welcher günstiger ist, ermittelt das Finanzamt automatisch bei der Einkommensteuererklärung — die sogenannte <strong>Günstigerprüfung</strong> nach § 31 EStG.</p><p>Dazu rechnet das Finanzamt Ihre Steuer zweimal: einmal ohne und einmal mit Abzug des Kinderfreibetrags vom zu versteuernden Einkommen. Ist die <strong>Steuerersparnis durch den Freibetrag größer</strong> als das bereits ausgezahlte Kindergeld, wird der Freibetrag angesetzt und das Kindergeld gegengerechnet — Sie erhalten die Differenz erstattet. Ist das <strong>Kindergeld höher</strong> (der Normalfall bei niedrigen und mittleren Einkommen), bleibt es dabei.</p><p>Sie müssen dafür nichts ankreuzen: Die Auszahlung des Kindergeldes läuft ohnehin monatlich über die Familienkasse. Die Günstigerprüfung erfolgt allein über die Steuererklärung, sobald Sie die Anlage Kind ausfüllen.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Kinderfreibetrag 2026: Bestandteile (§ 32 Abs. 6 EStG)',
+        kopf: ['Bestandteil', 'Pro Elternteil', 'Zusammen (Verheiratete)'],
+        zeilen: [
+          ['Sächliches Existenzminimum', '3.414 €', '6.828 €'],
+          ['BEA-Freibetrag (Betreuung, Erziehung, Ausbildung)', '1.464 €', '2.928 €'],
+          ['Kinderfreibetrag gesamt', '4.878 €', '9.756 €'],
+        ],
+        fussnote: 'Bei Einzelveranlagung steht jedem Elternteil der halbe Freibetrag (4.878 €) zu, bei Zusammenveranlagung der volle Betrag von 9.756 € pro Kind. Der BEA-Freibetrag ist seit 2021 unverändert.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Günstigerprüfung bei hohem Einkommen — Freibetrag gewinnt',
+        schritte: [
+          { label: 'Kinderfreibetrag pro Kind (Zusammenveranlagung)', formel: '9.756 €', ergebnis: '9.756 €' },
+          { label: 'Steuerersparnis bei 42 % Grenzsteuersatz', formel: '9.756 € × 42 %', ergebnis: '≈ 4.098 €' },
+          { label: 'Kindergeld 2026 pro Jahr', formel: '259 € × 12', ergebnis: '3.108 €' },
+          { label: 'Vorteil des Freibetrags', formel: '4.098 € − 3.108 €', ergebnis: '≈ 990 €' },
+        ],
+        fazit: 'Bei diesem Einkommen ist der Kinderfreibetrag günstiger. Das Finanzamt wendet ihn an, verrechnet das gezahlte Kindergeld und erstattet die Differenz von rund 990 Euro (zusätzlich sinken Solidaritätszuschlag und Kirchensteuer). Die Grenzsteuersatz-Werte sind illustrativ.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Günstigerprüfung bei mittlerem Einkommen — Kindergeld gewinnt',
+        schritte: [
+          { label: 'Kinderfreibetrag pro Kind (Zusammenveranlagung)', formel: '9.756 €', ergebnis: '9.756 €' },
+          { label: 'Steuerersparnis bei ca. 28 % Grenzsteuersatz', formel: '9.756 € × 28 %', ergebnis: '≈ 2.732 €' },
+          { label: 'Kindergeld 2026 pro Jahr', formel: '259 € × 12', ergebnis: '3.108 €' },
+          { label: 'Vergleich', formel: '3.108 € > 2.732 €', ergebnis: 'Kindergeld höher' },
+        ],
+        fazit: 'Hier ist das Kindergeld günstiger (rund 376 Euro mehr als die Steuerersparnis). Es bleibt bei der monatlichen Auszahlung durch die Familienkasse, der Freibetrag wird nicht angewendet. Das ist der Normalfall für die meisten Familien.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Kindergeld und Kinderfreibetrag im Direktvergleich',
+        spalteA: 'Kindergeld',
+        spalteB: 'Kinderfreibetrag',
+        zeilen: [
+          { kriterium: 'Auszahlung', a: 'monatlich von der Familienkasse', b: 'als Steuerersparnis bei der Veranlagung' },
+          { kriterium: 'Höhe 2026', a: '259 € / Monat = 3.108 € / Jahr', b: 'bis 9.756 € Abzug vom zu versteuernden Einkommen' },
+          { kriterium: 'Wirkung', a: 'fester Betrag, einkommensunabhängig', b: 'wirkt über den persönlichen Grenzsteuersatz' },
+          { kriterium: 'Antrag nötig', a: 'ja, einmalig bei der Familienkasse', b: 'nein, Finanzamt prüft automatisch' },
+          { kriterium: 'Günstig für', a: 'niedrige & mittlere Einkommen', b: 'höhere Einkommen (ab ~80.000 € zvE, verheiratet, 1 Kind)' },
+        ],
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Ab welchem Einkommen lohnt der Kinderfreibetrag?',
+        kopf: ['Konstellation', 'Voller Freibetrag', 'Ungefähre Schwelle (zvE)'],
+        zeilen: [
+          ['Verheiratet, 1 Kind', '9.756 € pro Kind', 'ca. 80.000–90.000 €'],
+          ['Alleinstehend, 1 Kind', '4.878 € pro Kind', 'ca. 40.000–45.000 €'],
+          ['Faustregel', 'Freibetrag × Grenzsteuersatz', '> Kindergeld/Jahr (3.108 €)'],
+        ],
+        fussnote: 'Richtwerte — die exakte Schwelle hängt von Kirchensteuer, Solidaritätszuschlag und weiteren Abzügen ab. Das Finanzamt rechnet im Einzelfall und wendet automatisch die günstigere Variante an.',
+      },
+      {
+        typ: 'text',
+        titel: 'Anspruch und Dauer: bis 18, bei Ausbildung bis 25',
+        html: `<p>Kindergeld gibt es <strong>immer bis zum 18. Geburtstag</strong> des Kindes — ohne weitere Voraussetzungen. Danach kann der Anspruch unter bestimmten Bedingungen <strong>bis zum 25. Geburtstag</strong> fortbestehen: solange sich das Kind in einer Schul- oder Berufsausbildung, im Studium oder in einem Freiwilligendienst (FSJ, FÖJ, Bundesfreiwilligendienst) befindet.</p><p>Auch eine Übergangszeit von bis zu vier Monaten zwischen zwei Ausbildungsabschnitten ist abgedeckt, ebenso die Phase der Ausbildungsplatzsuche, wenn das Kind nachweislich ausbildungswillig ist. Als arbeitssuchend gemeldete Kinder werden bis zum 21. Geburtstag berücksichtigt.</p><p>Eine Besonderheit gilt nach einer <strong>abgeschlossenen Erstausbildung</strong>: Hier besteht der Anspruch nur weiter, wenn das Kind nicht mehr als 20 Stunden pro Woche arbeitet (Ausnahmen: Minijob, Ausbildungsdienstverhältnis). Bei einer <strong>Behinderung</strong>, die vor dem 25. Lebensjahr eingetreten ist, wird das Kindergeld unbefristet weitergezahlt.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Anspruchsvoraussetzungen im Überblick',
+        kopf: ['Situation des Kindes', 'Anspruch', 'Hinweis'],
+        zeilen: [
+          ['Unter 18 Jahre', 'ja, immer', 'unabhängig von Tätigkeit oder Einkommen'],
+          ['18–25, Erstausbildung / Studium', 'ja', 'bis zum 25. Geburtstag'],
+          ['18–25, Zweitausbildung', 'ja, eingeschränkt', 'nur bei ≤ 20 h/Woche Erwerbstätigkeit'],
+          ['18–25, Ausbildungsplatz-Suche', 'ja', 'wenn nachweislich ausbildungswillig'],
+          ['18–21, arbeitssuchend gemeldet', 'ja', 'Meldung bei der Agentur für Arbeit'],
+          ['Übergangszeit zwischen Abschnitten', 'ja', 'bis zu 4 Monate'],
+          ['Behinderung vor dem 25. LJ', 'unbefristet', 'wenn dadurch kein eigener Unterhalt möglich'],
+        ],
+        fussnote: 'Maßgeblich ist § 32 Abs. 4 EStG. Für Kinder über 18 muss der Ausbildungs- oder Studiennachweis der Familienkasse vorgelegt werden.',
+      },
+      {
+        typ: 'text',
+        titel: 'Sonderfälle: Trennung, Wechselmodell und weitere Leistungen',
+        html: `<p>Kindergeld wird stets nur an <strong>eine bezugsberechtigte Person</strong> gezahlt. Leben die Eltern zusammen, bestimmen sie, auf wessen Konto das Geld fließt. Bei <strong>getrennt lebenden Eltern</strong> erhält es derjenige, in dessen Haushalt das Kind überwiegend lebt.</p><p>Beim <strong>Wechselmodell</strong>, bei dem das Kind etwa hälftig bei beiden Eltern wohnt, müssen sich die Eltern auf einen Berechtigten einigen; gelingt das nicht, entscheidet das Familiengericht. Beim Kindesunterhalt wird das Kindergeld <strong>zur Hälfte</strong> auf den Barunterhalt angerechnet (§ 1612b BGB). Auch <strong>Stief-, Pflege- und Adoptivkinder</strong> begründen einen Anspruch, sobald sie im Haushalt leben.</p><p>Neben dem Kindergeld gibt es weitere Familienleistungen: den einkommensabhängigen <strong>Kinderzuschlag</strong> für Geringverdiener, den <strong>Entlastungsbetrag für Alleinerziehende</strong> (4.260 € plus 240 € je weiteres Kind) sowie das <a href="/finanzen/elterngeld-rechner">Elterngeld</a> in den ersten Lebensmonaten.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Kindergeld & Kinderfreibetrag auf einen Blick',
+        werte: [
+          { label: 'Kindergeld pro Kind / Monat', wert: '259 €', hinweis: 'einheitlich, einkommensunabhängig (§ 66 EStG)' },
+          { label: 'Kindergeld pro Kind / Jahr', wert: '3.108 €', hinweis: '12 × 259 €' },
+          { label: 'Kinderfreibetrag pro Kind', wert: '9.756 €', hinweis: 'Zusammenveranlagung; § 32 Abs. 6 EStG' },
+          { label: 'Freibetrag lohnt ab ca.', wert: '80.000–90.000 €', hinweis: 'zu versteuerndes Einkommen, verheiratet, 1 Kind' },
+          { label: 'Rückwirkende Auszahlung', wert: 'max. 6 Monate', hinweis: '§ 70 Abs. 1 EStG' },
+          { label: 'Anspruchsende', wert: '18 / 25 Jahre', hinweis: 'bei Ausbildung oder Studium bis 25' },
+        ],
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Kindergeld beantragen — Schritt für Schritt',
+        punkte: [
+          'Antrag bei der Familienkasse der Bundesagentur für Arbeit stellen (online oder schriftlich).',
+          'Steuer-Identifikationsnummer von Kind und antragstellendem Elternteil bereithalten.',
+          'Geburtsurkunde des Kindes beifügen.',
+          'IBAN des Auszahlungskontos angeben.',
+          'Bei Kindern über 18: Nachweis über Ausbildung, Studium oder Freiwilligendienst beilegen.',
+          'Vorab klären, wer das Kindergeld erhält — nur ein Elternteil ist bezugsberechtigt.',
+          'Antrag zeitnah stellen: rückwirkend wird höchstens 6 Monate gezahlt.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Häufige Fehler beim Kindergeld',
+        text: 'Drei Fehler kosten Familien regelmäßig Geld. Erstens die 6-Monats-Frist: Wer den Antrag verschleppt, bekommt rückwirkend höchstens ein halbes Jahr ausgezahlt (§ 70 Abs. 1 EStG) — der Rest verfällt ersatzlos. Zweitens der vergessene Nachweis bei volljährigen Kindern: Wird der Ausbildungs- oder Studiennachweis nicht rechtzeitig nachgereicht, stellt die Familienkasse die Zahlung ein. Drittens die Doppelbezug-Falle bei getrennten Eltern: Beziehen beide Elternteile gleichzeitig Kindergeld für dasselbe Kind, fordert die Familienkasse die Überzahlung später zurück. Klären Sie deshalb vorab eindeutig, wer das Kindergeld erhält, und melden Sie Änderungen (Ausbildungsende, Auszug, Trennung) zeitnah.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Antrag direkt nach der Geburt stellen',
+        text: 'Stellen Sie den Kindergeldantrag möglichst kurz nach der Geburt bei der Familienkasse — am einfachsten online. Seit der Einführung der „Geburtskinderdienste" in einigen Bundesländern lässt sich das Kindergeld teils gemeinsam mit der Geburtsanzeige beantragen. Wichtig: Rückwirkend zahlt die Familienkasse höchstens für die letzten 6 Monate (§ 70 Abs. 1 EStG), wer zu lange wartet, verliert bares Geld.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Keine Steuerberatung — das Finanzamt prüft automatisch',
+        text: 'Dieser Rechner liefert eine unverbindliche Orientierung und ersetzt keine Steuerberatung. Sie müssen sich nicht zwischen Kindergeld und Kinderfreibetrag entscheiden: Das Kindergeld wird ohnehin ausgezahlt, und das Finanzamt führt die Günstigerprüfung bei der Steuererklärung automatisch durch. Eine Kindergrundsicherung wird nicht eingeführt — es bleibt beim bewährten System aus Kindergeld und Kinderfreibetrag.',
+      },
+    ],
     faq: [
       {
         frage: 'Wie hoch ist das Kindergeld 2026?',
@@ -2385,6 +2569,11 @@ Neben Kindergeld und Kinderfreibetrag gibt es weitere Hilfen: den **Kinderzuschl
         frage: 'Wird Kindergeld bei der Steuer angerechnet?',
         antwort: 'Ja, wenn Sie vom Kinderfreibetrag profitieren. Das Finanzamt berechnet die Steuer mit Kinderfreibetrag und zieht dann das bereits gezahlte Kindergeld von der Steuerersparnis ab. Ist der Freibetrag günstiger, erhalten Sie die Differenz erstattet. Ist das Kindergeld günstiger, bleibt es bei der Auszahlung durch die Familienkasse und der Freibetrag wird nicht angewendet.',
       },
+    ],
+    quellen: [
+      { titel: '§ 66 EStG: Höhe des Kindergeldes', url: 'https://www.gesetze-im-internet.de/estg/__66.html', hinweis: '259 €/Monat pro Kind (2026)' },
+      { titel: '§ 32 EStG: Kinderfreibetrag und Berücksichtigung von Kindern', url: 'https://www.gesetze-im-internet.de/estg/__32.html', hinweis: '9.756 €/Kind gesamt (2026); Anspruch bis 18 bzw. 25' },
+      { titel: '§ 31 EStG: Familienleistungsausgleich (Günstigerprüfung)', url: 'https://www.gesetze-im-internet.de/estg/__31.html', hinweis: 'automatischer Vergleich Kindergeld vs. Kinderfreibetrag' },
     ],
     affiliate: [
       { programId: 'wiso', context: 'kindergeld' },
