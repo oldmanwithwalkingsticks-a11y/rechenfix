@@ -1487,7 +1487,7 @@ Regelmäßiges Sparen ist der Schlüssel zum Vermögensaufbau. Hier einige bewä
           { label: 'nach 40 J.', segmente: [{ name: 'Einzahlungen', wert: 48000 }, { name: 'Zinsertrag', wert: 44837 }] },
         ],
         einheit: '€',
-        fussnote: 'Sparplan 100 € monatlich bei 3 % p. a. Der untere Block sind die eigenen Einzahlungen, der obere die Zinserträge — mit der Zeit verschiebt sich das Verhältnis spürbar zugunsten der Zinsen.',
+        fussnote: 'Sparplan 100 € monatlich bei 3 % p. a. Der linke Balkenabschnitt sind die eigenen Einzahlungen, der rechte die Zinserträge — mit der Zeit verschiebt sich das Verhältnis spürbar zugunsten der Zinsen.',
       },
       {
         typ: 'beispielrechnung',
