@@ -280,7 +280,7 @@ Schon wenige Wochen nach dem Rauchstopp verbessern sich Kreislauf und Lungenfunk
   },
   {
     slug: 'schlaf-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-18',
     titel: 'Schlafrechner',
     beschreibung: 'Optimale Schlafenszeit berechnen: Wann ins Bett gehen, um ausgeruht aufzuwachen? Basierend auf 90-Minuten-Schlafzyklen.',
     kategorie: 'Gesundheit',
@@ -347,6 +347,172 @@ Die sogenannte Schlafhygiene hat großen Einfluss auf Ihre Schlafqualität:
 - **Temperatur:** Die ideale Schlafzimmertemperatur liegt bei 16–18°C. Ein kühler Raum fördert das Einschlafen.
 - **Koffein:** Vermeiden Sie Kaffee und koffeinhaltige Getränke nach 14 Uhr. Die Halbwertszeit von Koffein beträgt 5–6 Stunden.
 - **Alkohol:** Obwohl Alkohol müde macht, stört er die Schlafarchitektur und unterdrückt den REM-Schlaf.`,
+    // W19-Goldstandard: schlaf-rechner auf volle Tiefe (15 Bausteine, ~1.560 W), Leitformat
+    // „tabelle" (4× dominant). Wellbeing-Handling (Gesundheit, moderat): neutral-informativ,
+    // KEINE Schlafmittel-Empfehlung, kein Leistungsdruck, ärztliche Abklärung bei anhaltenden
+    // Problemen. Logik aus lib/berechnungen/schlaf.ts gespiegelt: ZYKLUS_MINUTEN=90, Einschlaf-
+    // puffer 15 min, altersgestaffelte Dauer (getEmpfohleneSchlafdauer), jahreImSchlaf 26,7.
+    // Zeiten lib-exakt (7:00 → 23:15/21:45; Bett 23:00 → 06:45). erklaerung bleibt Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Schlafzyklen verstehen — warum 90 Minuten zählen',
+        html: `<p>Schlaf ist kein gleichförmiger Zustand, sondern verläuft in <strong>Zyklen</strong> von durchschnittlich rund <strong>90 Minuten</strong>. In jedem Zyklus durchläuft der Körper mehrere Phasen — vom Leichtschlaf über den Tiefschlaf bis zum REM-Schlaf, in dem wir träumen. Danach beginnt der nächste Zyklus.</p><p>In einer typischen Nacht reihen sich vier bis sechs solcher Zyklen aneinander. Wichtig ist nicht nur, <strong>wie lange</strong> man schläft, sondern auch, in welcher Phase man <strong>aufwacht</strong>. Am Ende eines Zyklus, im Leichtschlaf, fällt das Aufwachen leicht und man fühlt sich erholt. Mitten im Tiefschlaf geweckt zu werden, hinterlässt dagegen oft ein zähes, gerädertes Gefühl.</p><p>Genau hier setzt dieser Rechner an: Er rechnet von Ihrer gewünschten Aufwach- oder Zubettgehzeit in 90-Minuten-Schritten und schlägt Zeiten vor, zu denen Sie möglichst am <strong>Ende eines Zyklus</strong> aufwachen. Die 90 Minuten sind dabei ein Durchschnitt — individuell schwankt die Zyklusdauer etwa zwischen 80 und 110 Minuten.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Die Schlafphasen im Überblick',
+        kopf: ['Phase', 'Anteil je Zyklus', 'Funktion'],
+        zeilen: [
+          ['Leichtschlaf (N1/N2)', '≈ 45–55 %', 'Übergang & Stabilisierung, leicht weckbar'],
+          ['Tiefschlaf (N3)', '≈ 15–25 %', 'körperliche Erholung, schwer weckbar'],
+          ['REM-Schlaf', '≈ 20–25 %', 'Träume, Gedächtnis, Emotionsverarbeitung'],
+        ],
+        fussnote: 'Die Anteile verschieben sich über die Nacht: Tiefschlaf dominiert die ersten Zyklen, REM nimmt gegen Morgen zu. Die Werte sind Durchschnitte und individuell verschieden.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Optimale Aufwachzeit bei Zubettgehen um 23:00',
+        schritte: [
+          { label: 'Zubettgehen', formel: '23:00', ergebnis: '23:00' },
+          { label: '+ Einschlafzeit (~15 min)', formel: '23:00 + 0:15', ergebnis: 'eingeschlafen 23:15' },
+          { label: '5 Zyklen × 90 min', formel: '5 × 90 = 450 min', ergebnis: '7,5 h' },
+          { label: 'Optimale Aufwachzeit', formel: '23:15 + 7:30', ergebnis: '06:45 Uhr' },
+        ],
+        fazit: 'Wer um 23:00 ins Bett geht, wacht nach fünf vollständigen Zyklen gegen 06:45 am natürlichsten auf — am Ende eines Zyklus, im Leichtschlaf. Der Wecker auf 06:45 statt 07:00 kann sich also frischer anfühlen, obwohl er etwas früher klingelt.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum Aufwachen im Tiefschlaf müde macht',
+        html: `<p>Der <strong>Tiefschlaf</strong> (Fachbegriff N3 oder Slow-Wave-Sleep) ist die Phase, in der der Körper am stärksten herunterfährt: Puls und Atmung sind langsam, die Muskeln entspannt, das Gehirn arbeitet in langsamen Wellen. Hier finden die wichtigsten Erholungsprozesse statt — Zellreparatur, Stärkung des Immunsystems, Hormonausschüttung.</p><p>Gerade weil der Körper so tief abgetaucht ist, fällt das Aufwachen aus dieser Phase besonders schwer. Wird man mitten im Tiefschlaf geweckt — etwa durch einen Wecker zur „falschen" Zeit —, braucht das Gehirn mehrere Minuten, um hochzufahren. Dieses benommene, schwerfällige Gefühl nennt man <strong>Schlafträgheit</strong> (Sleep Inertia); es kann bis zu einer halben Stunde anhalten.</p><p>Deshalb kann es sich frischer anfühlen, <strong>etwas früher</strong> am Ende eines Zyklus aufzustehen als später mitten im Tiefschlaf. Nicht allein die Stundenzahl entscheidet über das Morgengefühl, sondern auch die Phase, in der der Wecker klingelt.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Empfohlene Schlafdauer nach Alter',
+        kopf: ['Altersgruppe', 'Empfohlene Schlafdauer'],
+        zeilen: [
+          ['Kleinkinder (1–3 Jahre)', '10–13 Stunden'],
+          ['Vorschulkinder (3–5)', '10–13 Stunden'],
+          ['Schulkinder (6–13)', '9–11 Stunden'],
+          ['Teenager (14–17)', '8–10 Stunden'],
+          ['Junge Erwachsene (18–25)', '7–9 Stunden'],
+          ['Erwachsene (26–64)', '7–9 Stunden'],
+          ['Senioren (65+)', '7–8 Stunden'],
+        ],
+        fussnote: 'Orientierungswerte nach National Sleep Foundation; der individuelle Bedarf variiert. Neben der Dauer zählt vor allem die Regelmäßigkeit — keine Stundenzahl ist eine starre Pflicht.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Rückwärts gerechnet: für 07:00 Aufwachen wann ins Bett?',
+        schritte: [
+          { label: 'Gewünschte Aufwachzeit', formel: '07:00', ergebnis: '07:00' },
+          { label: '5 Zyklen + Einschlafzeit', formel: '5 × 90 + 15 = 465 min', ergebnis: '7 h 45 min' },
+          { label: 'Zubettgehen für 5 Zyklen (7,5 h)', formel: '07:00 − 7:45', ergebnis: '23:15 Uhr' },
+          { label: 'Für 6 Zyklen (9 h)', formel: '07:00 − 9:15', ergebnis: '21:45 Uhr' },
+        ],
+        fazit: 'Für 07:00 Aufwachen heißt das: um 23:15 ins Bett für fünf Zyklen (7,5 h), oder um 21:45 für sechs Zyklen (9 h). Der Rechner zeigt mehrere Zubettgeh-Zeiten — wählen Sie die, die zu Ihrem Schlafbedarf passt.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Aufwachzeiten bei festem Zubettgehen (23:00)',
+        kopf: ['Zyklen', 'Schlafdauer', 'Aufwachzeit'],
+        zeilen: [
+          ['4 Zyklen', '6,0 Stunden', '05:15 Uhr'],
+          ['5 Zyklen', '7,5 Stunden', '06:45 Uhr'],
+          ['6 Zyklen', '9,0 Stunden', '08:15 Uhr'],
+        ],
+        fussnote: 'Annahme: 23:00 Uhr ins Bett plus 15 Minuten Einschlafzeit. Das Aufwachen am Ende eines vollen Zyklus (im Leichtschlaf) fällt erfahrungsgemäß leichter als mitten im Tiefschlaf.',
+      },
+      {
+        typ: 'text',
+        titel: 'Die innere Uhr — der circadiane Rhythmus',
+        html: `<p>Unser Schlaf-Wach-Verhalten wird von einer <strong>inneren Uhr</strong> gesteuert, dem circadianen Rhythmus. Er läuft in einem etwa 24-Stunden-Takt und regelt, wann wir müde und wann wir wach sind — über Hormone wie <strong>Melatonin</strong> (macht müde) und <strong>Cortisol</strong> (macht wach).</p><p>Der wichtigste Taktgeber ist das <strong>Licht</strong>. Helles Tageslicht am Morgen stellt die innere Uhr und macht wach; Dunkelheit am Abend lässt den Melatoninspiegel steigen. Künstliches, vor allem bläuliches Bildschirmlicht am späten Abend kann diesen Anstieg verzögern und das Einschlafen erschweren.</p><p>Menschen ticken dabei unterschiedlich: <strong>Frühtypen</strong> („Lerchen") sind morgens fit, <strong>Spättypen</strong> („Eulen") laufen abends zur Hochform auf. Dieser Chronotyp ist teils veranlagt und lässt sich nur begrenzt verschieben. Wer dauerhaft gegen seine innere Uhr lebt — etwa bei Schichtarbeit —, schläft oft schlechter. Morgenlicht und feste Zeiten helfen, den Rhythmus zu stabilisieren.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Wie viel Schlaf brauche ich wirklich?',
+        html: `<p>Die oft zitierten „acht Stunden" sind ein <strong>Durchschnitt</strong>, keine feste Vorgabe. Der individuelle Schlafbedarf schwankt: Den meisten Erwachsenen tun sieben bis neun Stunden gut, manche kommen dauerhaft mit etwas weniger aus, andere brauchen mehr. Mit dem Alter verändert sich der Bedarf — Kinder und Jugendliche brauchen deutlich mehr, im höheren Alter wird der Schlaf oft kürzer und leichter.</p><p>Ein besserer Maßstab als die reine Stundenzahl ist, <strong>wie Sie sich tagsüber fühlen</strong>: Wer morgens erholt aufwacht und tagsüber wach und leistungsfähig ist, schläft vermutlich genug. Anhaltende Müdigkeit, Konzentrationsprobleme oder Einschlafen am Tag sind dagegen Hinweise auf zu wenig oder zu schlechten Schlaf.</p><p>Wichtig: Schlaf ist kein Wettbewerb. Sich unter Druck zu setzen, „X Stunden schaffen zu müssen", erzeugt eher Anspannung und erschwert das Einschlafen. Hilfreicher ist ein entspannter, regelmäßiger Rhythmus.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Ein Drittel des Lebens: Lebenszeit im Schlaf',
+        schritte: [
+          { label: 'Durchschnittlicher Schlaf', formel: '~8 h pro Tag', ergebnis: '1/3 des Tages' },
+          { label: 'Über ein 80-jähriges Leben', formel: '80 × 8 h ÷ 24', ergebnis: '≈ 26,7 Jahre' },
+        ],
+        fazit: 'Rund ein Drittel des Lebens verbringen wir schlafend — bei 80 Jahren sind das etwa 26,7 Jahre. Das klingt nach viel „verlorener" Zeit, ist aber das Gegenteil: In diesen Stunden regeneriert sich der Körper, das Gehirn verarbeitet Erlebtes und festigt Gelerntes.',
+      },
+      {
+        typ: 'text',
+        titel: 'Schlafhygiene — was den Schlaf wirklich verbessert',
+        html: `<p>Unter <strong>Schlafhygiene</strong> versteht man Gewohnheiten und Bedingungen, die gesunden Schlaf fördern. Der wirksamste einzelne Hebel ist ein <strong>regelmäßiger Rhythmus</strong>: Wer jeden Tag etwa zur gleichen Zeit aufsteht — auch am Wochenende —, stabilisiert die innere Uhr und schläft abends leichter ein.</p><p>Förderlich sind außerdem ein <strong>kühles, dunkles und ruhiges Schlafzimmer</strong>, der Verzicht auf <strong>Koffein am Nachmittag</strong> und auf helle Bildschirme kurz vor dem Schlafengehen. Bewegung am Tag hilft, intensiver Sport spät am Abend eher nicht.</p><p>Bewusst entspannen lohnt sich: feste Abendrituale, ein warmes (nicht heißes) Bad oder ruhiges Lesen signalisieren dem Körper, dass der Tag endet. Wer nachts wach liegt und nicht einschlafen kann, sollte nach etwa 20 Minuten lieber kurz aufstehen und etwas Ruhiges tun, statt sich im Bett zu wälzen. Schlafhygiene wirkt nicht über Nacht, aber über Wochen zuverlässig.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Was im Schlaf passiert — Erholung für Körper und Gehirn',
+        html: `<p>Schlaf ist keine vergeudete Zeit, sondern hochaktive <strong>Regeneration</strong>. Im Tiefschlaf läuft die körperliche Erholung: Gewebe wird repariert, Wachstumshormone werden ausgeschüttet, das Immunsystem arbeitet auf Hochtouren. Deshalb schlafen wir bei Krankheit oft mehr.</p><p>Im <strong>REM-Schlaf</strong> wiederum ist vor allem das Gehirn aktiv. Es sortiert und festigt Erinnerungen, verknüpft Gelerntes und verarbeitet Emotionen — weshalb guter Schlaf für Lernen und Gedächtnis so wichtig ist. Wer vor einer Prüfung ausreichend schläft, behält Gelerntes erfahrungsgemäß besser.</p><p>Über die Nacht hinweg baut das Gehirn außerdem Stoffwechselprodukte ab, die sich tagsüber ansammeln. Chronischer Schlafmangel hängt nach heutigem Forschungsstand mit einem höheren Risiko für Konzentrationsprobleme, Stimmungstiefs und verschiedene körperliche Beschwerden zusammen. Das ist kein Grund zur Sorge bei einer einzelnen kurzen Nacht — wohl aber ein guter Grund, Schlaf langfristig ernst zu nehmen, ohne ihn zu erzwingen.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Was guten Schlaf stört',
+        werte: [
+          { label: 'Bildschirmlicht (Blaulicht)', wert: 'verzögert Einschlafen', hinweis: 'hemmt Melatonin; rund 1 h vorher meiden' },
+          { label: 'Koffein', wert: 'Halbwertszeit ~5 h', hinweis: 'nachmittags wirkt es bis in die Nacht' },
+          { label: 'Alkohol', wert: 'stört Tiefschlaf & REM', hinweis: 'macht müde, mindert aber die Schlafqualität' },
+          { label: 'Raumtemperatur', wert: 'ideal ~16–18 °C', hinweis: 'zu warm stört den Tiefschlaf' },
+          { label: 'Unregelmäßige Zeiten', wert: 'belasten den Rhythmus', hinweis: 'feste Aufstehzeit hilft am meisten' },
+        ],
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Schlaffördernder vs. schlafstörender Abend',
+        spalteA: 'Schlaffördernd',
+        spalteB: 'Schlafstörend',
+        zeilen: [
+          { kriterium: 'Licht', a: 'gedämpft, Bildschirme aus', b: 'helle Screens bis kurz vorm Bett' },
+          { kriterium: 'Getränke', a: 'Wasser, Kräutertee', b: 'Koffein nachmittags, Alkohol abends' },
+          { kriterium: 'Aktivität', a: 'ruhiges Ritual, Lesen', b: 'aufregende Serie, Arbeit, Streit' },
+          { kriterium: 'Schlafzimmer', a: 'kühl, dunkel, leise', b: 'warm, hell, laut' },
+          { kriterium: 'Zeitpunkt', a: 'regelmäßig', b: 'stark wechselnd, sehr spät' },
+        ],
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Power-Nap: die richtige Länge',
+        kopf: ['Nickerchen-Länge', 'Was passiert', 'Effekt beim Aufwachen'],
+        zeilen: [
+          ['10–20 Minuten', 'nur Leichtschlaf', 'erfrischt, klarer Kopf'],
+          ['30–60 Minuten', 'Tiefschlaf beginnt', 'oft benommen (Schlafträgheit)'],
+          ['90 Minuten', 'ein voller Zyklus', 'erholt, inklusive REM-Phase'],
+        ],
+        fussnote: 'Der „Power-Nap" von 10–20 Minuten ist am verträglichsten, weil man den Tiefschlaf nicht erreicht. Späte oder lange Nickerchen können den Nachtschlaf stören — besser früh am Tag und kurz halten.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Besser schlafen — Schlafhygiene-Check',
+        punkte: [
+          'Jeden Tag zur gleichen Zeit aufstehen — auch am Wochenende.',
+          'Schlafzimmer kühl (~16–18 °C), dunkel und leise halten.',
+          'Eine Stunde vor dem Schlaf helle Bildschirme und aufregende Inhalte meiden.',
+          'Koffein nach dem frühen Nachmittag vermeiden, abends wenig Alkohol.',
+          'Tagsüber bewegen, intensiven Sport aber nicht direkt vor dem Schlaf.',
+          'Ein festes Abendritual zum Herunterkommen einführen.',
+          'Nach etwa 20 Minuten Wachliegen kurz aufstehen, statt sich zu wälzen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Gleiche Aufstehzeit — auch am Wochenende',
+        text: 'Die einfachste und wirksamste Schlafregel lautet: jeden Morgen zur gleichen Zeit aufstehen, auch am Wochenende. Das stabilisiert die innere Uhr stärker als jede andere Maßnahme und macht das abendliche Einschlafen leichter. Langes Ausschlafen am Wochenende fühlt sich gut an, verschiebt aber den Rhythmus und sorgt am Sonntagabend oft für Einschlafprobleme (der „soziale Jetlag"). Wenn Sie Schlaf nachholen möchten, ist ein kurzer Mittagsschlaf meist verträglicher als spätes Ausschlafen.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Anhaltende Schlafprobleme ärztlich abklären',
+        text: 'Gelegentlich schlecht zu schlafen ist normal. Halten Schlafprobleme aber über mehrere Wochen an — Sie kommen nicht zur Ruhe, wachen nachts häufig auf, sind tagsüber stark erschöpft oder schnarchen laut mit Atemaussetzern —, sollten Sie das ärztlich abklären lassen. Dahinter können behandelbare Ursachen wie Schlafapnoe, Schilddrüsen- oder depressive Erkrankungen stecken. Dieser Rechner ist ein neutrales Orientierungswerkzeug, kein medizinisches Hilfsmittel; er gibt keine Empfehlungen zu Schlafmitteln und ersetzt keine ärztliche Beratung. Erste Anlaufstelle ist die Hausarztpraxis.',
+      },
+    ],
     faq: [
       {
         frage: 'Warum sind Schlafzyklen wichtig?',
@@ -368,6 +534,10 @@ Die sogenannte Schlafhygiene hat großen Einfluss auf Ihre Schlafqualität:
         frage: 'Soll ich am Wochenende vorschlafen?',
         antwort: 'Nein — sogenanntes "Social Jetlag" (unter der Woche wenig, am Wochenende viel schlafen) stört den circadianen Rhythmus. Besser ist es, jeden Tag möglichst zur gleichen Zeit aufzustehen. Maximal 30–60 Minuten Abweichung am Wochenende sind in Ordnung.',
       },
+    ],
+    quellen: [
+      { titel: 'DGSM — Deutsche Gesellschaft für Schlafforschung und Schlafmedizin', url: 'https://www.dgsm.de', hinweis: 'Schlafphasen, Schlafhygiene, anhaltende Schlafstörungen' },
+      { titel: 'National Sleep Foundation — Sleep cycles & duration', hinweis: 'Zyklusdauer ~90 Min, altersabhängige Schlafdauer-Empfehlungen' },
     ],
   },
   {
