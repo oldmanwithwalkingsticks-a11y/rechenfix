@@ -44,6 +44,47 @@ oder Deployment-Artefakte zu verlieren.
 
 ---
 
+## 17.06.2026 — W19 Finanzen-Tranche t17–t20 Goldstandard (KOMPLETT, 36 Goldstandard)
+
+Gesammelter Doku-Sync für vier finanzen-Rechner (t17–t20); Doku auf Karstens
+Wunsch erst nach t20 nachgezogen. Alle vier: `contentBloecke` + `quellen`
+(Neueinträge), `npm run build` Vercel-grün, nur `finanzen.ts` committet
+(client-data.ts-Drift bewusst nicht), Self-Check Wortzahl + Struktur grün,
+kein `text`-Block > 170 W, kein Autorenblock, atomare Einzel-Commits.
+
+- **t17 minijob-rechner** (YMYL, Leitformat **statistik** 4×, 19 Blöcke, ~1.543 W,
+  Commit `40ad804`). SSOT aus `minijob.ts`/`midijob-parameter.ts` gespiegelt:
+  Grenze 603 € (Mindestlohn 13,90 € × 130/3, § 8 SGB IV), 2027 ≈ 633 €; Midijob
+  bis 2.000 € (§ 20a SGB IV); AG-Pauschalen gewerblich ~31,6 % / Privathaushalt
+  ~14,3 %; RV-Eigenanteil 3,6 %; 0,14 EP/Jahr (§ 69 SGB VI). SSOT-Korrektur ggü.
+  altem `beispiel`-Feld: max ~10 h/Woche (nicht 10,8), 0,14 EP (nicht 0,16).
+  Kurzfristige Beschäftigung (§ 8 Abs. 1 Nr. 2 SGB IV) als 2. Variante ergänzt.
+  Cosinus 0,97 (nicht identisch). Keine SV-Beratung, Minijob-Zentrale zuständig.
+- **t18 inflationsrechner** (Leitformat **beispielrechnung** 5× + Linien-Diagramm,
+  19 Blöcke, ~1.576 W, Commit `36796c1`). Formeln aus `inflation.ts` gespiegelt
+  (Kaufkraft = Betrag ÷ (1+i)^n, Preis = Betrag × (1+i)^n), Diagrammwerte im Code
+  berechnet. BEWUSST keine tagesaktuelle Inflationsquote — nur EZB-Ziel ~2 %,
+  VPI/HVPI-Methodik (Destatis), historische Spannen. Keine Anlageberatung.
+- **t19 sparrechner** (Leitformat **beispielrechnung** 6× + gestapeltes Diagramm,
+  19 Blöcke, ~1.590 W, Commit `b7f6a3c`). **Abgrenzung zu zinsrechner:** Fokus
+  Ratensparen (monatliche Rate) vs. Einmalanlage; eigener Vergleichs-Baustein +
+  Cross-Link. zinsrechner taucht nicht in der Ähnlichkeitsliste auf (kein Klon).
+  Alle Endkapital-Werte aus `sparplan.ts` berechnet (100 €/20 J/3 % = 32.912 €,
+  30 J = 58.419 €, 40 J = 92.837 €; Dynamik 3 % = 42.939 €; 50.000 €/15 J ≈ 220 €).
+  Beispielzinsen, keine Anlageberatung.
+- **t20 gehaltsvergleich** (Leitformat **vergleich** 4×, 20 Blöcke, ~1.589 W,
+  Commit `06b8c4d`). Perzentil-/Median-Logik aus `gehaltsvergleich.ts` gespiegelt
+  (adjMedian = Median × Bundesland- × Alters-Faktor; Perzentil via Normalvert.).
+  Beispiele aus der Lib berechnet: 3.800 €/kaufm/NRW = P57; 3.200 €/Gesundheit
+  Sachsen P89 vs Bayern P57; 3.500 €/NRW Gastronomie P91 vs IT P13. Median-Werte
+  als Destatis-Orientierung (Verdiensterhebung), KEINE tagesaktuelle Einzelzahl,
+  keine individuelle Gehaltsberatung.
+
+**Tranche-Stand:** finanzen-Goldstandard-Tranche t16–t20 **KOMPLETT**;
+contentBloecke-Goldstandard-Set damit auf **36 Rechner**.
+
+---
+
 ## 17.06.2026 — W19 kindergeld-rechner Goldstandard (tabelle-Leitformat, YMYL, t16)
 
 - **Was gebaut:** kindergeld-rechner (finanzen.ts) hat jetzt `contentBloecke` +
