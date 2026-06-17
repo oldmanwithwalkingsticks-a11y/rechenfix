@@ -879,7 +879,7 @@ Nach Ablauf der Zinsbindung bleibt in der Regel eine Restschuld, die Sie weiterf
   },
   {
     slug: 'quadratmeter-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-18',
     titel: 'Quadratmeter-Rechner',
     beschreibung: 'Fläche in m² berechnen: Rechteck, Kreis, Dreieck, L-Form, Trapez. Mehrere Flächen addieren.',
     kategorie: 'Wohnen & Energie',
@@ -933,6 +933,177 @@ Flächeneinheiten lassen sich durch einfache Faktoren umrechnen:
 - **1 km² = 1.000.000 m²** — Für Stadtteile, Gemeinden oder Regionen.
 
 In der Praxis begegnen Ihnen vor allem m² (Wohnung, Zimmer), Ar (kleine Grundstücke) und Hektar (Landwirtschaft, Parks). Unser Rechner zeigt alle relevanten Umrechnungen automatisch an.`,
+    // W19-Goldstandard: quadratmeter-rechner auf volle Tiefe (16 Bausteine, ~1.560 W),
+    // Leitformat „beispielrechnung" (6× dominant). WOHN-Kontext (WoFlV, Miete/m², BGH),
+    // disjunkt zu mathe/flaechenrechner (reine Geometrie) — eigener vergleich-Baustein
+    // Wohnfläche vs. Grundfläche. Geometrie-Logik aus lib/berechnungen/quadratmeter.ts
+    // gespiegelt (l×b, Summe, Einheiten ×10000/×1e6); WoFlV-Anrechnung gegen § 4 WoFlV
+    // verifiziert (≥2 m 100 %, 1–<2 m 50 %, <1 m 0 %, Balkon i.d.R. 25 %). erklaerung Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Wohnfläche berechnen — warum die Methode zählt',
+        html: `<p>„Wie viele Quadratmeter hat die Wohnung?" klingt nach einer simplen Frage — ist es aber nicht. Denn dieselbe Wohnung kann je nach <strong>Berechnungsmethode</strong> unterschiedlich groß ausfallen. Die nackte Grundfläche (Länge × Breite aller Räume) ist nur der Ausgangspunkt.</p><p>Für Miete, Mietspiegel und Nebenkostenabrechnung zählt die <strong>Wohnfläche</strong> nach der <strong>Wohnflächenverordnung (WoFlV)</strong>. Sie rechnet bestimmte Bereiche nur anteilig: Flächen unter Dachschrägen, Balkone und Terrassen zählen nicht voll. Deshalb ist die Wohnfläche fast immer kleiner als die reine Grundfläche.</p><p>Dieser Rechner ermittelt zunächst die geometrische Fläche jedes Raumes (Rechteck, Kreis, Dreieck, L-Form, Trapez) und summiert sie. Bei Dachschrägen oder Balkonen teilen Sie die Fläche in Zonen auf und setzen die anrechenbaren Anteile an. So kommen Sie von der Grundfläche zur korrekten Wohnfläche — der Zahl, auf die es im Mietvertrag wirklich ankommt.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Rechteckiger Raum (Länge × Breite)',
+        schritte: [
+          { label: 'Länge des Raumes', formel: '5,2 m', ergebnis: '5,2 m' },
+          { label: 'Breite des Raumes', formel: '4,0 m', ergebnis: '4,0 m' },
+          { label: 'Fläche = Länge × Breite', formel: '5,2 m × 4,0 m', ergebnis: '20,8 m²' },
+        ],
+        fazit: 'Ein rechteckiger Raum von 5,2 m × 4,0 m hat 20,8 m². Das ist die Grundformel für jeden geraden Raum — bei verwinkelten Grundrissen zerlegt man die Fläche in mehrere Rechtecke und addiert sie.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Ganze Wohnung: Räume summieren',
+        schritte: [
+          { label: 'Wohnzimmer (5 × 4 m)', formel: '20,0 m²', ergebnis: '20,0 m²' },
+          { label: 'Schlafzimmer (4 × 3,5 m)', formel: '14,0 m²', ergebnis: '14,0 m²' },
+          { label: 'Küche (3 × 2,5 m)', formel: '7,5 m²', ergebnis: '7,5 m²' },
+          { label: 'Bad (2,5 × 2 m) + Flur (4 × 1,2 m)', formel: '5,0 + 4,8 m²', ergebnis: '9,8 m²' },
+          { label: 'Gesamtfläche', formel: '20 + 14 + 7,5 + 9,8', ergebnis: '51,3 m²' },
+        ],
+        fazit: 'Die Wohnung kommt auf 51,3 m². Jeder Raum wird einzeln berechnet und summiert — genau das übernimmt die Funktion „Weitere Fläche hinzufügen". Wände, Treppen über drei Stufen und Türnischen zählen dabei nicht mit (§ 3 WoFlV).',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'L-förmiger Raum: in Rechtecke zerlegen',
+        schritte: [
+          { label: 'Teil-Rechteck 1 (Hauptraum)', formel: '5 m × 4 m', ergebnis: '20,0 m²' },
+          { label: 'Teil-Rechteck 2 (Anbau)', formel: '3 m × 2,5 m', ergebnis: '7,5 m²' },
+          { label: 'L-Form gesamt', formel: '20 + 7,5', ergebnis: '27,5 m²' },
+        ],
+        fazit: 'Ein L-förmiger Raum wird in zwei Rechtecke zerlegt und addiert: 27,5 m². Der Rechner bietet dafür den Modus „L-Form" — so lassen sich verwinkelte Grundrisse ohne Trigonometrie exakt erfassen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Wohnflächenverordnung: was zählt wie viel',
+        html: `<p>Die <strong>Wohnflächenverordnung (WoFlV)</strong> regelt seit 2004, welche Flächen in welchem Umfang zur Wohnfläche gehören. Maßgeblich ist die <strong>lichte Höhe</strong> an der jeweiligen Stelle — also der Abstand von Boden zu Decke.</p><p>Voll angerechnet werden Flächen mit einer Höhe von <strong>mindestens 2 m</strong>. Liegt die Höhe zwischen <strong>1 m und unter 2 m</strong> — der klassische Dachschrägen-Fall — zählt die Fläche nur <strong>zur Hälfte</strong>. Bereiche unter <strong>1 m</strong> Höhe zählen <strong>gar nicht</strong>. Unbeheizbare Wintergärten und Schwimmbäder werden zur Hälfte angerechnet.</p><p><strong>Balkone, Loggien, Dachgärten und Terrassen</strong> zählen in der Regel zu einem Viertel (25 %), höchstens jedoch zur Hälfte (§ 4 Nr. 4 WoFlV). Keller, Waschküche, Heizungsraum, Abstellräume außerhalb der Wohnung und Garagen gehören <strong>nicht</strong> zur Wohnfläche. Diese Regeln erklären, warum die Wohnfläche einer Dachgeschosswohnung oft deutlich unter ihrer Grundfläche liegt.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'WoFlV: Anrechnung der Flächen (§ 4)',
+        kopf: ['Bereich', 'Anrechnung zur Wohnfläche', 'WoFlV'],
+        zeilen: [
+          ['Räume / Raumteile, lichte Höhe ≥ 2 m', '100 %', '§ 4 Nr. 1'],
+          ['Raumteile 1 m bis unter 2 m (Dachschräge)', '50 %', '§ 4 Nr. 2'],
+          ['Raumteile unter 1 m', '0 %', 'nicht angerechnet'],
+          ['Unbeheizbarer Wintergarten, Schwimmbad', '50 %', '§ 4 Nr. 3'],
+          ['Balkon, Loggia, Dachgarten, Terrasse', 'i. d. R. 25 % (max. 50 %)', '§ 4 Nr. 4'],
+          ['Keller, Waschküche, Garage', '0 %', '§ 2 Abs. 3'],
+        ],
+        fussnote: 'Nach § 4 WoFlV. Treppen mit mehr als drei Stufen, Türnischen und Schornsteine zählen bei der Grundfläche nicht mit (§ 3 Abs. 3 WoFlV). Maßgeblich ist die lichte Höhe an der jeweiligen Stelle.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Dachschräge: anrechenbare Fläche je Zone',
+        schritte: [
+          { label: 'Zone ≥ 2 m Höhe (volle Anrechnung)', formel: '12 m² × 100 %', ergebnis: '12,0 m²' },
+          { label: 'Zone 1–2 m Höhe (halbe Anrechnung)', formel: '6 m² × 50 %', ergebnis: '3,0 m²' },
+          { label: 'Zone unter 1 m (keine Anrechnung)', formel: '2 m² × 0 %', ergebnis: '0,0 m²' },
+          { label: 'Anrechenbare Wohnfläche', formel: '12 + 3 + 0', ergebnis: '15,0 m²' },
+        ],
+        fazit: 'Ein Dachzimmer mit 20 m² Grundfläche bringt nur 15 m² anrechenbare Wohnfläche. Messen Sie die Breite des Raumes an den Stellen, wo die Höhe 1 m und 2 m erreicht — so trennen Sie die drei Zonen sauber.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Balkon mit 25 % Anrechnung',
+        schritte: [
+          { label: 'Tatsächliche Balkonfläche', formel: '8 m²', ergebnis: '8 m²' },
+          { label: 'Anrechnung nach § 4 Nr. 4 WoFlV', formel: '8 m² × 25 %', ergebnis: '2,0 m²' },
+          { label: 'Bei hochwertigem Balkon (max.)', formel: '8 m² × 50 %', ergebnis: '4,0 m²' },
+        ],
+        fazit: 'Ein 8-m²-Balkon zählt regulär mit 2 m² zur Wohnfläche, höchstens mit 4 m². Wer einen 8-m²-Balkon im Vertrag voll als Wohnfläche findet, sollte nachrechnen — das ist nach WoFlV nicht zulässig.',
+      },
+      {
+        typ: 'text',
+        titel: 'Wohnfläche vs. Grundfläche vs. Nutzfläche',
+        html: `<p>Drei Begriffe werden gern verwechselt. Die <strong>Grundfläche</strong> ist die reine Bodenfläche eines Raumes (Länge × Breite), ohne jede Anrechnungsregel — sie ist die Basis aller weiteren Berechnungen und wird in der Architektur nach DIN 277 verwendet.</p><p>Die <strong>Wohnfläche</strong> nach WoFlV leitet sich daraus ab, rechnet aber Dachschrägen, Balkone und unbeheizte Räume nur anteilig. Sie ist die rechtlich relevante Größe für <strong>Mietvertrag, Mietspiegel, Wohngeld und Nebenkosten</strong> — und meist kleiner als die Grundfläche.</p><p>Die <strong>Nutzfläche</strong> (ebenfalls DIN 277) umfasst alle nutzbaren Flächen eines Gebäudes nach Zweck — auch Keller, Technik- und Lagerräume, die nicht zur Wohnfläche zählen. Für Mieter ist fast immer die <strong>Wohnfläche</strong> die entscheidende Zahl. Wer ein Angebot prüft, sollte deshalb klären, welcher Flächenbegriff gemeint ist — gerade bei Neubau-Exposés steht oft die größere Grund- oder Nutzfläche im Vordergrund.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Wohnfläche vs. Grundfläche im Direktvergleich',
+        spalteA: 'Wohnfläche (WoFlV)',
+        spalteB: 'Grundfläche (DIN 277)',
+        zeilen: [
+          { kriterium: 'Wofür maßgeblich', a: 'Miete, Mietspiegel, Wohngeld', b: 'Bau, Architektur, Planung' },
+          { kriterium: 'Dachschrägen', a: 'anteilig (50 % bzw. 0 %)', b: 'voll gezählt' },
+          { kriterium: 'Balkon / Terrasse', a: 'i. d. R. 25 %', b: 'separat ausgewiesen' },
+          { kriterium: 'Tendenz', a: 'meist kleiner', b: 'meist größer' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Miete pro Quadratmeter',
+        schritte: [
+          { label: 'Kaltmiete pro Monat', formel: '850 €', ergebnis: '850 €' },
+          { label: 'Wohnfläche', formel: '65 m²', ergebnis: '65 m²' },
+          { label: 'Miete pro m² (Kaltmiete ÷ Fläche)', formel: '850 € ÷ 65 m²', ergebnis: '13,08 €/m²' },
+        ],
+        fazit: 'Die Wohnung kostet 13,08 € Kaltmiete pro Quadratmeter. Dieser Wert macht Wohnungen vergleichbar und ist die Grundlage für den Abgleich mit dem örtlichen Mietspiegel — weshalb die korrekte Wohnfläche so wichtig ist.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Flächeneinheiten umrechnen',
+        kopf: ['Einheit', 'Entspricht', 'Verwendung'],
+        zeilen: [
+          ['1 m²', '10.000 cm²', 'Wohnfläche, Zimmer'],
+          ['1 m²', '≈ 10,76 Quadratfuß (sq ft)', 'US-/UK-Angaben'],
+          ['1 Ar (a)', '100 m²', 'kleine Grundstücke'],
+          ['1 Hektar (ha)', '10.000 m² = 100 Ar', 'Landwirtschaft, Parks'],
+          ['1 Quadratfuß', '≈ 0,0929 m²', 'Umrechnung aus sq ft'],
+        ],
+        fussnote: 'Der Rechner zeigt cm², mm², Ar und Hektar automatisch an. Für internationale Angebote ist der Quadratfuß relevant: 1 m² ≈ 10,76 sq ft, 1 sq ft ≈ 0,0929 m².',
+      },
+      {
+        typ: 'text',
+        titel: 'Häufige Fehler beim Ausmessen',
+        html: `<p>Beim Selbstausmessen schleichen sich typische Fehler ein. Der häufigste: zwar von Wand zu Wand messen, aber <strong>Heizkörpernischen, Erker oder Sockelleisten</strong> falsch behandeln. Gemessen wird die lichte Bodenfläche des Raumes; die Wände selbst zählen nicht mit.</p><p>Zweiter Fehler: <strong>Dachschrägen pauschal</strong> abziehen, statt die drei Höhenzonen sauber zu trennen. Wer einfach „ein Drittel weniger" rechnet, liegt oft daneben — entscheidend sind die tatsächlichen Breiten an der 1-m- und 2-m-Linie.</p><p>Dritter Fehler: den <strong>Balkon voll mitzählen</strong>. Er gehört nur zu 25 % (höchstens 50 %) zur Wohnfläche. Und schließlich werden <strong>Räume vergessen oder doppelt erfasst</strong> — gerade bei verwinkelten Grundrissen hilft eine kleine Skizze mit nummerierten Teilflächen. Faustregel: lieber jeden Raum einzeln messen und notieren, als die Gesamtfläche schätzen. Die Skizze ist später auch der beste Beleg, falls es um eine Mietabweichung geht.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Wenn die Wohnfläche nicht stimmt — was das kostet',
+        html: `<p>Wohnflächen im Mietvertrag sind erstaunlich oft falsch — Studien zufolge weicht bei vielen Wohnungen die angegebene von der tatsächlichen Fläche ab, meist zu Lasten der Mieter. Das ist kein Kavaliersdelikt, denn an der Fläche hängen Kaltmiete, Mietspiegel-Einordnung und die Verteilung vieler Nebenkosten.</p><p>Die Rechtsprechung zieht eine klare Grenze: Weicht die <strong>tatsächliche Wohnfläche um mehr als 10 %</strong> von der vertraglich vereinbarten nach unten ab, liegt nach ständiger Rechtsprechung des Bundesgerichtshofs ein <strong>Mangel der Mietsache</strong> vor. Die Miete kann dann um den Prozentsatz der Abweichung gemindert werden — und zu viel gezahlte Miete lässt sich unter Umständen rückwirkend zurückfordern.</p><p>Wichtig: Die 10-%-Grenze ist eine Erheblichkeitsschwelle, kein Freibetrag. Liegt die Abweichung darüber, wird der volle Unterschied relevant, nicht nur der Teil über 10 %. Vor Auszug oder Mietminderung lohnt deshalb das genaue Nachmessen.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Wohnflächen-Abweichung: über 10 % weniger',
+        schritte: [
+          { label: 'Vertraglich vereinbart', formel: '75 m²', ergebnis: '75 m²' },
+          { label: 'Tatsächlich gemessen', formel: '66 m²', ergebnis: '66 m²' },
+          { label: 'Abweichung', formel: '(75 − 66) ÷ 75', ergebnis: '12 % (> 10 %)' },
+          { label: 'Mögliche Minderung bei 900 € Miete', formel: '900 € × 12 %', ergebnis: '≈ 108 €/Monat' },
+        ],
+        fazit: 'Bei 12 % zu wenig Fläche liegt ein Mangel vor — die Miete kann um rund 12 % gemindert werden, hier etwa 108 € im Monat. Über ein Jahr sind das fast 1.300 €. Maßgeblich ist die nach WoFlV korrekt ermittelte Fläche.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Wohnfläche korrekt ermitteln',
+        punkte: [
+          'Jeden Raum einzeln ausmessen (Länge × Breite), verwinkelte Räume in Rechtecke zerlegen.',
+          'Bei Dachschrägen die Breite an den 1-m- und 2-m-Höhenlinien messen und in drei Zonen aufteilen.',
+          'Dachschräge 1–2 m nur zur Hälfte, unter 1 m gar nicht anrechnen.',
+          'Balkon/Terrasse mit 25 % ansetzen (höchstens 50 %).',
+          'Keller, Waschküche, Heizungsraum und Garage nicht mitzählen.',
+          'Wände, Treppen über drei Stufen und Türnischen herausrechnen.',
+          'Ergebnis mit der Vertragsfläche vergleichen — Abweichung über 10 % prüfen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Mehr als 10 % Abweichung? Mietminderung prüfen',
+        text: 'Messen Sie Ihre Wohnung selbst nach und vergleichen Sie das Ergebnis mit der Fläche im Mietvertrag. Liegt die tatsächliche Wohnfläche mehr als 10 % unter der vereinbarten, liegt nach BGH-Rechtsprechung ein Mangel vor: Die Miete kann um den Prozentsatz der Abweichung gemindert und zu viel Gezahltes unter Umständen zurückgefordert werden. Dokumentieren Sie die Messung sorgfältig (Skizze, Maße je Raum, Fotos der Dachschrägen) und holen Sie bei größeren Beträgen mietrechtlichen Rat ein.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Für welche Wohnungen gilt die WoFlV?',
+        text: 'Die Wohnflächenverordnung gilt unmittelbar verbindlich nur für preisgebundenen (öffentlich geförderten) Wohnraum. Für frei finanzierte Mietwohnungen ist sie nicht zwingend vorgeschrieben — in der Praxis und nach BGH-Rechtsprechung wird die Wohnfläche dort aber regelmäßig nach denselben WoFlV-Regeln berechnet, sofern im Vertrag nichts anderes vereinbart ist. Dieser Rechner liefert eine Orientierung und ersetzt keine fachkundige Wohnflächenberechnung oder Rechtsberatung im Streitfall.',
+      },
+    ],
     faq: [
       {
         frage: 'Wie berechnet man Quadratmeter?',
@@ -954,6 +1125,9 @@ In der Praxis begegnen Ihnen vor allem m² (Wohnung, Zimmer), Ar (kleine Grundst
         frage: 'Wie berechne ich die Fläche einer runden Fläche?',
         antwort: 'Die Fläche eines Kreises berechnen Sie mit der Formel A = π × r² (Pi mal Radius zum Quadrat). Wenn Sie nur den Durchmesser kennen, teilen Sie ihn durch 2, um den Radius zu erhalten. Beispiel: Durchmesser 6 m → Radius 3 m → Fläche = π × 9 ≈ 28,27 m².',
       },
+    ],
+    quellen: [
+      { titel: 'Wohnflächenverordnung (WoFlV)', url: 'https://www.gesetze-im-internet.de/woflv/', hinweis: '§ 4 Anrechnung: ≥ 2 m voll, 1–<2 m zur Hälfte, < 1 m gar nicht; Balkon i. d. R. 25 %' },
     ],
   },
   {
