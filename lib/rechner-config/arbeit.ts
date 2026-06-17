@@ -534,7 +534,7 @@ In der Praxis bedeutet das: Bei einer 40-Stunden-Woche und 5 Arbeitstagen sind m
   },
   {
     slug: 'pendlerpauschale-rechner',
-    letzteAktualisierung: '2026-06-17',
+    letzteAktualisierung: '2026-06-18',
     titel: 'Pendlerpauschale-Rechner',
     beschreibung: 'Pendlerpauschale 2026 berechnen: Entfernungspauschale, Steuerersparnis und Vergleich mit der Homeoffice-Pauschale.',
     kategorie: 'Arbeit & Recht',
@@ -568,7 +568,7 @@ Wichtig: Berechnet wird nur die **einfache Entfernung**, nicht die Hin- und Rüc
 
 **Pendlerpauschale berechnen — Schritt für Schritt**
 
-1. **Entfernung ermitteln:** Messen Sie die einfache Entfernung zwischen Ihrer Wohnung und Ihrer ersten Tätigkeitsstätte. Nutzen Sie dafür einen Routenplaner und wählen Sie die kürzeste Straßenverbindung. Runden Sie auf volle Kilometer (ab 0,5 km aufrunden).
+1. **Entfernung ermitteln:** Messen Sie die einfache Entfernung zwischen Ihrer Wohnung und Ihrer ersten Tätigkeitsstätte. Nutzen Sie dafür einen Routenplaner und wählen Sie die kürzeste Straßenverbindung. Es zählen nur volle Kilometer — angefangene Kilometer werden abgerundet (24,7 km gelten als 24 km, § 9 EStG).
 
 2. **Arbeitstage zählen:** Ermitteln Sie die Anzahl der Tage, an denen Sie tatsächlich zur Arbeitsstätte gefahren sind. Abzuziehen sind: Urlaub, Feiertage, Krankheitstage und Homeoffice-Tage. In der Praxis setzen die Finanzämter bei einer 5-Tage-Woche üblicherweise 220 bis 230 Arbeitstage an.
 
