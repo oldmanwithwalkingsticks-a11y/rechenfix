@@ -44,6 +44,37 @@ oder Deployment-Artefakte zu verlieren.
 
 ---
 
+## 17.06.2026 — W19 kindergeld-rechner Goldstandard (tabelle-Leitformat, YMYL, t16)
+
+- **Was gebaut:** kindergeld-rechner (finanzen.ts) hat jetzt `contentBloecke` +
+  `quellen` (Neueintrag, YMYL mit url). **19 Blöcke** nach L-W19.Granularitaet
+  (≥11, kein WARN). Folge: `text-tabelle-tabelle-beispielrechnung-text-text-
+  tabelle-beispielrechnung-beispielrechnung-vergleich-tabelle-text-tabelle-text-
+  statistik-checkliste-infobox-infobox-infobox`. **Leitformat tabelle dominant
+  (5×:** Historie, Kindergeld nach Kinderzahl, Freibetrag-Bestandteile,
+  Anspruchsvoraussetzungen, Einkommensschwelle) + 3 beispielrechnung + 1 vergleich.
+  ~1.549 W, alle sechs `text`-Blöcke ≤137 W (max 170).
+- **YMYL gegen Primärquelle verifiziert (Stand 06/2026):** Kindergeld 259 €/Monat
+  pro Kind (§ 66 EStG); Kinderfreibetrag 9.756 €/Kind gesamt = 6.828 € sächlich +
+  2.928 € BEA (§ 32 Abs. 6 EStG); Günstigerprüfung automatisch (§ 31 EStG);
+  Rückwirkung max. 6 Monate (§ 70 Abs. 1 EStG). **Kindergrundsicherung NICHT
+  eingeführt** — explizit als verbreiteter Irrtum entkräftet, Kindersofortzuschlag
+  (25 €) bleibt. Keine veralteten Beträge (255/9.540) im Content.
+- **Lib-Treue (kindergeld.ts, nicht angefasst):** SSOT `KINDERGELD_PRO_KIND_MONAT=259`
+  + `BEA_ZUSAMMEN_2026=2928` gespiegelt; Günstigerprüfung-Mechanik (gewinner
+  kindergeld|freibetrag) im Content paraphrasiert, nicht nachgerechnet.
+- **Sensitivität (Finanzen/YMYL):** „Keine Steuerberatung"-infobox; Günstiger-
+  prüfung-Beispiele mit Grenzsteuersatz als illustrativ markiert.
+- **Bestand-Audit:** `erklaerung` (259/9.756 bereits korrekt) + 6 FAQ geprüft —
+  keine veralteten Beträge, kein Fix nötig, bleiben als Fallback.
+- **Verify:** Wortzahl 1.549 (OK ≥1500), 19 Blöcke kein WARN <11, tabelle 5×
+  dominant, 6/6 text ≤170 W, Cosinus ≤0,97 (kein Identik-Klon mehr, kein Gate),
+  Vercel-grün. contentBloecke-Goldstandard-Rechner damit auf 32.
+- **Tranche-Stand:** finanzen-Migration läuft (kindergeld Goldstandard); Gesamt-
+  Goldstandard-Set 32 Rechner.
+
+---
+
 ## 16.06.2026 — W19 backform-umrechner Goldstandard (vergleich-Leitformat erstmals, t15)
 
 - **Was gebaut:** backform-umrechner (kochen.ts) hat jetzt `contentBloecke` +
