@@ -970,7 +970,7 @@ Der Lebenszeit-Rechner gehört zu den meistgeteilten Online-Tools. Die überrasc
   },
   {
     slug: 'streaming-kosten-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-17',
     titel: 'Streaming-Kosten-Rechner',
     beschreibung: 'Berechnen Sie Ihre monatlichen Streaming-Kosten: Netflix, Disney+, Spotify und mehr auf einen Blick.',
     kategorie: 'Alltag',
@@ -1016,6 +1016,173 @@ Weitere Tipps: Family-Tarife mit Mitbewohnern oder Familienmitgliedern teilen, J
 **Bewusst streamen, bewusst sparen**
 
 Der Streaming-Kosten-Rechner hilft Ihnen, den Überblick zu behalten und bewusste Entscheidungen zu treffen. Teilen Sie das Ergebnis mit Freunden und Familie — der Aha-Effekt beim Blick auf die 10-Jahres-Kosten sorgt garantiert für Gesprächsstoff.`,
+    // W19-Goldstandard: streaming-kosten-rechner auf volle Tiefe (15 Bausteine, ~1.560 W),
+    // Leitformat „statistik" (4× dominant). Logik aus lib/berechnungen/streaming-kosten.ts
+    // gespiegelt: monatlich = Abo-Summe + sonstige; ×12 Jahr; ×5/×10; Arbeitsstunden =
+    // Jahr ÷ Mindestlohn (13,90 €). BEWUSST keine festen Anbieterpreise als dauerhaft —
+    // neutraler Beispiel-Haushalt (66 €/Monat) + typische Kategorie-Spannen, „Preise ändern
+    // sich"-Hinweis. Kein Autorenblock. erklaerung bleibt Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Warum Streaming-Abos heimlich teuer werden (Abo-Stacking)',
+        html: `<p>Einzeln betrachtet wirkt jedes Streaming-Abo harmlos: 8, 12 oder 15 € im Monat fühlen sich nach „kann ich mir leisten" an. Das Problem entsteht durch <strong>Abo-Stacking</strong> — das unbemerkte Aufstapeln vieler kleiner Abos: Video hier, Musik da, Sport dazu, ein Cloud-Speicher nebenher.</p><p>Weil jeder Dienst separat und meist per automatischer Abbuchung läuft, verschwindet die <strong>Gesamtsumme</strong> aus dem Blick. Genau das nennt man <strong>Abo-Blindheit</strong>: Man kennt die einzelnen Beträge, aber nicht ihre Summe. Erst wer alle Abos nebeneinanderlegt, sieht die monatliche Gesamtbelastung — und ist oft überrascht.</p><p>Dieser Rechner macht genau das sichtbar. Sie tragen Ihre aktiven Abos (oder einfach Ihre Monatsbeträge) ein und sehen sofort die Summe pro Monat, pro Jahr und hochgerechnet über fünf und zehn Jahre. Der eigentliche Aha-Effekt liegt nicht im Monatsbetrag, sondern in der Hochrechnung — sie übersetzt die kleinen Zahlen in das, was sie über die Zeit wirklich kosten.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Beispiel-Haushalt: vier Abos auf einen Blick',
+        werte: [
+          { label: 'Video-Streaming', wert: '~14 €/Monat', hinweis: 'Standard-Tarif (typische Spanne 5–20 €)' },
+          { label: 'Musik-Streaming', wert: '~12 €/Monat', hinweis: 'Premium-Einzeltarif' },
+          { label: 'Sport-Streaming', wert: '~30 €/Monat', hinweis: 'meist der teuerste Posten' },
+          { label: 'Cloud / Hörbuch', wert: '~10 €/Monat', hinweis: 'kleinere Zusatz-Abos' },
+          { label: 'Monatssumme', wert: '66 €', hinweis: 'vier Abos zusammengerechnet' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Vier Abos summiert: Monat → Jahr → 5 Jahre',
+        schritte: [
+          { label: 'Monatssumme (4 Abos)', formel: '14 + 12 + 30 + 10', ergebnis: '66 €' },
+          { label: 'Pro Jahr', formel: '66 € × 12', ergebnis: '792 €' },
+          { label: 'Über 5 Jahre', formel: '792 € × 5', ergebnis: '3.960 €' },
+          { label: 'Arbeitsstunden zum Mindestlohn', formel: '792 € ÷ 13,90 €', ergebnis: '≈ 57 h/Jahr' },
+        ],
+        fazit: 'Vier Abos für „nur" 66 € im Monat summieren sich auf 792 € im Jahr und fast 4.000 € in fünf Jahren. Zum Mindestlohn müssten Sie rund 57 Stunden im Jahr allein fürs Streaming arbeiten. Genau diese Hochrechnung macht der Rechner sichtbar.',
+      },
+      {
+        typ: 'text',
+        titel: 'Der wahre Preis: Hochrechnung über die Jahre',
+        html: `<p>Der psychologische Trick hinter Abos ist die <strong>kleine Monatszahl</strong>. 12 € oder 15 € fühlen sich harmlos an — die Summe über Jahre tut es nicht. Genau hier setzt die Hochrechnung an: Sie übersetzt den unscheinbaren Monatsbetrag in das, was er wirklich kostet.</p><p>Ein einzelnes 14-€-Abo ergibt über zehn Jahre bereits <strong>1.680 €</strong>. Der oben gerechnete Beispiel-Haushalt mit 66 € im Monat kommt in einem Jahrzehnt auf rund <strong>7.920 €</strong> — die Größenordnung eines ordentlichen Gebrauchtwagens oder mehrerer Urlaube.</p><p>Wichtig: Diese Zahlen rechnen noch ohne künftige <strong>Preiserhöhungen</strong>, die in der Branche regelmäßig vorkommen — real liegt die Summe also eher höher. Der Sinn der Hochrechnung ist nicht, Streaming schlechtzureden, sondern eine bewusste Entscheidung zu ermöglichen: Welche Abos sind mir diese Jahressumme wert, und welche laufen nur nebenher mit? Wer das einmal durchrechnet, kündigt erfahrungsgemäß mindestens ein Abo.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Was Abos über 10 Jahre kosten',
+        werte: [
+          { label: '1 Abo à 14 €/Monat', wert: '1.680 €', hinweis: 'über 10 Jahre' },
+          { label: '1 Sport-Abo à 30 €/Monat', wert: '3.600 €', hinweis: 'über 10 Jahre' },
+          { label: 'Beispiel-Haushalt 66 €/Monat', wert: '7.920 €', hinweis: 'über 10 Jahre, ohne Preiserhöhungen' },
+          { label: 'Preissteigerungen', wert: 'kommen obendrauf', hinweis: 'reale Summe meist höher' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Streaming im Haushaltsbudget — die digitalen Fixkosten',
+        html: `<p>Streaming-Abos gehören längst zu den <strong>festen monatlichen Kosten</strong> — ähnlich wie Strom, Handytarif oder Versicherungen. Anders als diese tauchen sie aber selten als bewusster Budgetposten auf, weil sie über App-Stores und Kreditkarte fast unsichtbar abgebucht werden.</p><p>Sinnvoll ist deshalb, Streaming als eigene Zeile im <strong>Haushaltsbudget</strong> zu führen. Als grobe Orientierung dient die 50-30-20-Regel: Fixkosten und Konsum sollten das Budget nicht sprengen. Wenn Streaming einen spürbaren Anteil der „Spaß"-Ausgaben auffrisst, lohnt der kritische Blick.</p><p>Zu den <strong>digitalen Fixkosten</strong> zählt außerdem mehr als nur Video und Musik: Cloud-Speicher, Software-Abos, Hörbuch-Dienste, Fitness-Apps und Gaming-Flatrates. In Summe ergeben diese „kleinen" Digitalabos oft noch einmal so viel wie die klassischen Streaming-Dienste. Wer ausmistet, sollte sie alle auf einmal durchgehen — nicht nur Video und Musik.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Abo-Kategorien & typische Preisspannen',
+        kopf: ['Kategorie', 'Beispiele', 'Typische Spanne €/Monat'],
+        zeilen: [
+          ['Video-Streaming', 'Serien & Filme', '5–20 €'],
+          ['Musik-Streaming', 'Einzel- und Family-Tarife', '6–18 €'],
+          ['Sport-Streaming', 'Live-Sport, Bundesliga', '12–45 €'],
+          ['Gaming-Abo', 'Spiele-Flatrates, Online-Dienste', '4–18 €'],
+          ['Cloud & Hörbuch', 'Speicher, Hörbuch-Abos', '3–12 €'],
+        ],
+        fussnote: 'Spannen je nach Tarif (mit/ohne Werbung, Einzel/Family) und Anbieter. Konkrete Preise ändern sich laufend — als Orientierung gedacht, nicht als feste Werte. Stand 06/2026.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Jahres-Ersparnis durch Kündigung ungenutzter Abos',
+        schritte: [
+          { label: 'Selten genutztes Abo', formel: '15 €/Monat', ergebnis: '15 €' },
+          { label: 'Zweites ungenutztes Abo', formel: '10 €/Monat', ergebnis: '10 €' },
+          { label: 'Monatliche Ersparnis nach Kündigung', formel: '15 € + 10 €', ergebnis: '25 €' },
+          { label: 'Ersparnis pro Jahr', formel: '25 € × 12', ergebnis: '300 €' },
+        ],
+        fazit: 'Zwei kaum genutzte Abos für zusammen 25 € im Monat zu kündigen, spart 300 € im Jahr — ohne Komfortverlust, weil die Inhalte ohnehin brachlagen. Über fünf Jahre sind das 1.500 €.',
+      },
+      {
+        typ: 'text',
+        titel: 'Abo-Fallen: automatische Verlängerung & Preiserhöhungen',
+        html: `<p>Abos sind so gebaut, dass man sie leicht vergisst — und genau das ist Teil des Geschäftsmodells. Die häufigste Falle ist die <strong>automatische Verlängerung</strong>: Wer nicht aktiv kündigt, zahlt weiter, oft jahrelang. Seit 2022 müssen online geschlossene Abos zwar einen <strong>Kündigungsbutton</strong> bieten und sind in der Regel monatlich kündbar — genutzt wird er aber selten.</p><p>Die zweite Falle sind <strong>schleichende Preiserhöhungen</strong>. Anbieter heben Preise regelmäßig an oder verschieben Funktionen in teurere Tarife (etwa 4K nur noch im Premium-Abo). Weil die Erhöhung pro Monat klein wirkt, fällt sie kaum auf — über das Jahr summiert sie sich.</p><p>Dritte Falle: <strong>Gratis-Testphasen</strong>, die sich ohne Erinnerung in ein bezahltes Abo verwandeln. Wer eine Testphase startet, sollte den Kündigungstermin sofort notieren. Faustregel gegen alle drei Fallen: einmal im Jahr die Kontoauszüge nach wiederkehrenden Abbuchungen durchgehen.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Genutzt vs. bezahlt — wo das Geld versickert',
+        werte: [
+          { label: 'Mehrfach-Abos', wert: 'die Regel', hinweis: 'drei und mehr Abos pro Haushalt sind verbreitet' },
+          { label: 'Karteileichen', wert: 'oft 1–2 pro Haushalt', hinweis: 'seit Wochen ungenutzte Abos, die nebenher laufen' },
+          { label: 'Vergessene Test-Abos', wert: 'verbreitet', hinweis: 'Gratisphase wird zum Dauer-Abo' },
+          { label: 'Sparpotenzial je Karteileiche', wert: '120–360 €/Jahr', hinweis: 'je nach Abo-Höhe (10–30 €/Monat)' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Vom Kabel-TV zum Streaming — warum es wieder teurer wurde',
+        html: `<p>Streaming trat einst mit dem Versprechen an, das teure <strong>Kabel- und Pay-TV abzulösen</strong>: ein Abo, riesige Mediathek, jederzeit kündbar — für deutlich weniger Geld. Eine Zeit lang ging die Rechnung auf.</p><p>Dann kam die <strong>Fragmentierung</strong>: Immer mehr Anbieter zogen ihre Inhalte auf eigene Plattformen zurück. Wer früher alles bei einem Dienst fand, braucht heute mehrere Abos, um dieselben Serien und Filme zu sehen. Aus „ein Abo statt Kabel" wurde „vier Abos plus Sport".</p><p>Unterm Strich zahlen viele Haushalte heute wieder so viel wie früher fürs Kabelfernsehen — nur verteilt auf mehrere Rechnungen. Hinzu kommen <strong>Werbung in den günstigen Tarifen</strong> und regelmäßige Preiserhöhungen. Das macht den bewussten Umgang wichtiger denn je: Nicht jedes Abo muss dauerhaft laufen, und kostenlose Mediatheken decken einen größeren Teil ab, als viele denken.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Einzel-Monatsabos vs. Bundle / Jahresabo',
+        spalteA: 'Einzel-Monatsabos',
+        spalteB: 'Bundle / Jahresabo',
+        zeilen: [
+          { kriterium: 'Preis', a: 'voller Monatspreis je Dienst', b: 'oft 15–20 % günstiger im Jahresabo' },
+          { kriterium: 'Flexibilität', a: 'jederzeit kündbar', b: 'Bindung für die Laufzeit' },
+          { kriterium: 'Mehrere Dienste', a: 'jeder Dienst einzeln', b: 'Bundle fasst mehrere zusammen' },
+          { kriterium: 'Risiko', a: 'läuft ungenutzt weiter', b: 'Vorauszahlung bindet Kapital' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Streaming clever nutzen: rotieren, teilen, kündigen',
+        html: `<p>Wer nicht auf Streaming verzichten will, kann die Kosten trotzdem deutlich senken. Der wirksamste Hebel ist die <strong>Abo-Rotation</strong>: Statt vier Dienste dauerhaft zu bezahlen, bucht man jeden Monat nur einen, schaut die gewünschten Inhalte gebündelt und kündigt wieder. Weil alle großen Anbieter monatlich kündbar sind, lassen sich so 50 bis 70 Prozent sparen.</p><p>Zweiter Hebel: <strong>Family-Tarife teilen</strong>. Ein Family-Abo kostet kaum mehr als ein Einzelabo, deckt aber mehrere Profile ab — geteilt mit Mitbewohnern oder Familie sinkt der Pro-Kopf-Preis stark (die Anbieter-Bedingungen zum Haushalt beachten).</p><p>Dritter Hebel: <strong>kostenlose Alternativen</strong>. Die öffentlich-rechtlichen Mediatheken (ARD, ZDF, Arte) und werbefinanzierte Gratis-Dienste decken einen großen Teil des Bedarfs ab. Kombiniert mit ein, zwei bezahlten Abos lässt sich der Streaming-Bedarf oft halbieren — ohne das Gefühl, auf etwas zu verzichten.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Abo-Rotation: ein Dienst pro Monat statt vier',
+        schritte: [
+          { label: '4 Dienste dauerhaft parallel (je ~14 €)', formel: '4 × 14 € × 12', ergebnis: '672 €/Jahr' },
+          { label: 'Rotation: nur 1 Dienst pro Monat', formel: '14 € × 12', ergebnis: '168 €/Jahr' },
+          { label: 'Jahres-Ersparnis', formel: '672 € − 168 €', ergebnis: '504 €' },
+        ],
+        fazit: 'Wer vier Dienste rotiert statt sie dauerhaft parallel zu zahlen, kommt mit einem aktiven Abo pro Monat aus und spart rund 504 € im Jahr (etwa 75 %). Voraussetzung sind monatlich kündbare Tarife — bei den großen Anbietern Standard.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Die Spar-Hebel im Überblick',
+        werte: [
+          { label: 'Abo-Rotation', wert: '50–70 % Ersparnis', hinweis: 'nur ein Dienst pro Monat' },
+          { label: 'Jahresabo statt Monat', wert: '15–20 % günstiger', hinweis: 'bei dauerhaft genutzten Diensten' },
+          { label: 'Family-Tarif teilen', wert: 'Pro-Kopf deutlich weniger', hinweis: 'Anbieter-Bedingungen beachten' },
+          { label: 'Werbe-Tarife', wert: 'spürbar billiger', hinweis: 'gegen Werbeeinblendungen' },
+          { label: 'Karteileichen kündigen', wert: '120–360 €/Jahr', hinweis: 'je ungenutztem Abo' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Konten teilen — was die Anbieter erlauben',
+        html: `<p>Family- und geteilte Tarife sind ein großer Spar-Hebel — doch die Anbieter haben die Regeln verschärft. Viele Dienste binden das <strong>Teilen an einen gemeinsamen Haushalt</strong> und gehen gegen die Weitergabe von Passwörtern über Haushaltsgrenzen hinweg vor.</p><p>Erlaubt bleibt in der Regel: ein Family-Tarif für <strong>Personen, die zusammen wohnen</strong>, mit mehreren Profilen und parallelen Streams. Häufig nicht mehr erlaubt ist das Teilen des Kontos mit Freunden in anderen Haushalten — manche Anbieter bieten dafür kostenpflichtige „Zusatzmitglieder" an.</p><p>Wer einen Family-Tarif nutzt, sollte deshalb die <strong>aktuellen Nutzungsbedingungen</strong> prüfen, statt sich auf alte Gewohnheiten zu verlassen. Innerhalb des eigenen Haushalts bleibt das Teilen der günstigste Weg, mehrere Nutzer abzudecken — der Pro-Kopf-Preis sinkt deutlich, ganz legal.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Abos ausmisten — der Kosten-Check',
+        punkte: [
+          'Kontoauszüge der letzten 12 Monate nach wiederkehrenden Abbuchungen durchsehen.',
+          'Jedes Abo ehrlich bewerten: Wann zuletzt genutzt?',
+          'Karteileichen (seit Wochen ungenutzt) sofort kündigen.',
+          'Bei dauerhaft genutzten Diensten auf das oft günstigere Jahresabo umstellen.',
+          'Family-Tarife prüfen und mit Haushalt oder Familie teilen.',
+          'Gratis-Mediatheken als Ersatz für ein bezahltes Abo testen.',
+          'Kündigungs- und Verlängerungstermine im Kalender notieren.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Kündigungstermine im Kalender notieren',
+        text: 'Tragen Sie bei jedem neuen Abo — und besonders bei jeder Gratis-Testphase — sofort den Kündigungstermin in den Kalender ein, mit Erinnerung ein paar Tage vorher. Das ist der einfachste Schutz gegen die automatische Verlängerung und gegen vergessene Test-Abos, die sich klammheimlich in Dauerkosten verwandeln. Wer mehrere Abos rotiert, plant am besten feste „Wechseltage" pro Monat ein. Online geschlossene Abos lassen sich seit 2022 über den gesetzlich vorgeschriebenen Kündigungsbutton mit wenigen Klicks beenden.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Preisspannen sind Orientierung — Anbieterpreise ändern sich',
+        text: 'Die in diesem Rechner und den Beispielen genannten Preisspannen sind eine Orientierung, keine festen Anbieterpreise. Streaming-Dienste ändern ihre Tarife regelmäßig, verschieben Funktionen zwischen Stufen und führen neue Werbe- oder Premium-Optionen ein — konkrete Preise können daher abweichen und veralten schnell. Maßgeblich sind immer die aktuellen Konditionen des jeweiligen Anbieters. Für die Hochrechnung gilt: Tragen Sie Ihre tatsächlich gezahlten Monatsbeträge ein, dann stimmt das Ergebnis für Ihren Haushalt.',
+      },
+    ],
     faq: [
       {
         frage: 'Wie viel gibt der durchschnittliche Deutsche für Streaming aus?',
@@ -1033,6 +1200,9 @@ Der Streaming-Kosten-Rechner hilft Ihnen, den Überblick zu behalten und bewusst
         frage: 'Kann ich eigene Streaming-Dienste hinzufügen?',
         antwort: 'Ja, über das Feld „Sonstige Abos" können Sie einen beliebigen monatlichen Betrag eingeben. So erfassen Sie auch kleinere Dienste, App-Abos oder andere regelmäßige Digitalkosten, die nicht in der Liste enthalten sind.',
       },
+    ],
+    quellen: [
+      { titel: 'Abo-Kostenrechnung — Methodik', hinweis: 'Summe der Monatsbeiträge × Laufzeit (Jahr = × 12, 5/10 Jahre entsprechend). Preisspannen sind Orientierung; konkrete Anbieterpreise ändern sich laufend.' },
     ],
   },
   {
