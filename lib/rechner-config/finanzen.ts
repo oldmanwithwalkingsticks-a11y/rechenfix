@@ -1862,7 +1862,7 @@ Da Inflation die Kaufkraft von Bargeld und niedrig verzinsten Spareinlagen auffr
   },
   {
     slug: 'gehaltsvergleich',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-17',
     titel: 'Gehaltsvergleich',
     beschreibung: 'Vergleichen Sie Ihr Gehalt mit dem Durchschnitt Ihrer Berufsgruppe, Ihres Bundeslandes und Ihrer Altersgruppe.',
     kategorie: 'Finanzen',
@@ -1918,6 +1918,188 @@ Der Gehaltsvergleich ist mehr als eine Neugier-Frage — er liefert konkrete Arg
 - **Berufserfahrung nicht einberechnen.** Ein 25-Jähriger und ein 50-Jähriger derselben Berufsgruppe haben in der Regel deutlich unterschiedliche Median-Werte. Wer den Vergleich ohne Altersfilter zieht, vergleicht sich falsch — entweder zu optimistisch (Berufseinsteiger) oder zu pessimistisch (Erfahrene).
 - **Tarifgehalt mit AT-Gehalt mischen.** Tarif-Gehälter sind oft niedriger als AT-Gehälter derselben Aufgabenebene, dafür mit besseren Sozialleistungen (Urlaubsgeld, Weihnachtsgeld, Tariferhöhungen). Der reine Brutto-Vergleich verzerrt zugunsten des AT-Bereichs. Bei Tarif-Vergleichen Sondervergütungen einrechnen.
 - **Sondervergütungen ignorieren.** Boni, Tantieme, Aktienoptionen, betriebliche Altersvorsorge und Dienstwagen-Privatnutzung sind in vielen Branchen (Bank, Pharma, Tech) ein erheblicher Teil der Gesamtvergütung. Wer nur das Grundgehalt vergleicht, übersieht 10–30 % Total-Comp und liegt im Vergleich zu niedrig.`,
+    // W19-Goldstandard: gehaltsvergleich auf volle Tiefe (16 Bausteine, ~1.560 W), Leitformat
+    // „vergleich" (4× dominant). Perzentil-/Median-Logik aus lib/berechnungen/gehaltsvergleich.ts
+    // gespiegelt (adjustierterMedian = Median × Bundesland-Faktor × Alters-Faktor; Perzentil via
+    // Normalverteilung). Beispielwerte aus der Lib berechnet (3.800 €/kaufm/NRW/35-44 = P57,
+    // Median 3.641 €; 3.200 €/Gesundheit/25-34: Sachsen P89 vs. Bayern P57). Median-Werte als
+    // Destatis-Orientierung (Verdiensterhebung), KEINE tagesaktuelle Einzelzahl. Keine
+    // individuelle Gehaltsberatung. erklaerung bleibt Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Wie man das eigene Gehalt einordnet: Median & Perzentil',
+        html: `<p>Die Frage „Verdiene ich genug?" lässt sich nur im <strong>Vergleich</strong> beantworten — und zwar mit der richtigen Bezugsgröße. Ein einzelnes Durchschnittsgehalt sagt wenig aus, weil Gehälter stark nach Beruf, Region und Erfahrung streuen.</p><p>Aussagekräftiger ist das <strong>Perzentil</strong>: Es zeigt, wie viel Prozent einer Vergleichsgruppe weniger verdienen als Sie. Ein Perzentil von 70 bedeutet, dass 70 % weniger und 30 % mehr verdienen. Der <strong>Median</strong> (das 50. Perzentil) markiert die Mitte: Genau die Hälfte verdient mehr, die Hälfte weniger.</p><p>Dieser Rechner ordnet Ihr Bruttogehalt in die Verteilung Ihrer Berufsgruppe ein und gewichtet sie zusätzlich nach Bundesland und Altersgruppe. Datengrundlage sind die Median-Entgelte der <strong>Verdiensterhebung des Statistischen Bundesamts</strong> — Annäherungswerte, keine tagesaktuellen Einzelzahlen. Das Ergebnis ist eine Orientierung, kein exakter Marktpreis für genau Ihre Stelle.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Median vs. Durchschnitt — warum der Median aussagekräftiger ist',
+        spalteA: 'Median (50. Perzentil)',
+        spalteB: 'Arithmetischer Durchschnitt',
+        zeilen: [
+          { kriterium: 'Definition', a: 'Mitte: Hälfte verdient mehr, Hälfte weniger', b: 'Summe aller Gehälter ÷ Anzahl' },
+          { kriterium: 'Ausreißer-Empfindlichkeit', a: 'robust — Spitzengehälter verzerren kaum', b: 'wird durch wenige Top-Gehälter nach oben gezogen' },
+          { kriterium: 'Typische Lage', a: 'meist niedriger', b: 'meist höher als der Median' },
+          { kriterium: 'Aussagekraft', a: 'realistisch für „die Mitte"', b: 'kann zu hoch wirken' },
+        ],
+      },
+      {
+        typ: 'statistik',
+        titel: 'Was die Perzentil-Stufen bedeuten',
+        werte: [
+          { label: '25. Perzentil', wert: 'unteres Viertel', hinweis: '75 % verdienen mehr — eher unterdurchschnittlich' },
+          { label: '50. Perzentil (Median)', wert: 'genau die Mitte', hinweis: 'Hälfte mehr, Hälfte weniger' },
+          { label: '75. Perzentil', wert: 'oberes Viertel', hinweis: 'nur 25 % verdienen mehr — überdurchschnittlich' },
+          { label: '90. Perzentil', wert: 'Spitzenbereich', hinweis: 'nur 10 % verdienen mehr' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Eigenes Gehalt im Perzentil verorten',
+        schritte: [
+          { label: 'Eingaben', formel: '3.800 € · kaufm. · NRW · 35–44 J.', ergebnis: '—' },
+          { label: 'Adjustierter Median (Region × Alter)', formel: '3.400 € × 1,02 × 1,05', ergebnis: '3.641 €' },
+          { label: 'Einordnung in die Verteilung', formel: '3.800 € vs. Median 3.641 €', ergebnis: 'Perzentil 57' },
+          { label: 'Differenz zum Median', formel: '3.800 € − 3.641 €', ergebnis: '+159 € (+4,4 %)' },
+        ],
+        fazit: 'Mit 3.800 € liegt dieses Beispiel im 57. Perzentil — über der Hälfte der Vergleichsgruppe (Median 3.641 €), aber im Mittelfeld. Zur Einordnung: das 75. Perzentil läge bei rund 4.508 €, das 90. bei 5.288 €.',
+      },
+      {
+        typ: 'text',
+        titel: 'Was Gehälter streut: Branche, Region, Erfahrung, Qualifikation',
+        html: `<p>Dass zwei Menschen mit gleichem Job sehr unterschiedlich verdienen, hat vor allem vier Gründe:</p><p>Die <strong>Branche</strong> ist der größte Hebel. Zwischen einer gut bezahlten und einer niedrig entlohnten Branche liegen schnell 2.000 € Median-Unterschied pro Monat. Die <strong>Region</strong> wirkt fast ebenso stark: In wirtschaftsstarken West-Bundesländern und Ballungsräumen liegen die Gehälter spürbar über denen strukturschwächerer Regionen — das bekannte Ost-West- und Stadt-Land-Gefälle.</p><p>Die <strong>Berufserfahrung</strong> schlägt sich im Alter nieder: Berufseinsteiger verdienen deutlich weniger, das Gehalt steigt bis etwa Mitte 50 und sinkt danach leicht. Schließlich zählt die <strong>Qualifikation</strong> — Abschluss, Zertifikate, Führungsverantwortung und Spezialisierung verschieben den persönlichen Marktwert nach oben.</p><p>Ein fairer Vergleich berücksichtigt deshalb immer alle vier Dimensionen gleichzeitig. Wer sich nur mit dem bundesweiten Durchschnitt vergleicht, zieht fast zwangsläufig den falschen Schluss.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Branchen im Median-Vergleich (Vollzeit, brutto/Monat)',
+        spalteA: 'Eher höhere Mediane',
+        spalteB: 'Eher niedrigere Mediane',
+        zeilen: [
+          { kriterium: 'Technik / IT', a: 'IT & Software ~4.800 €', b: 'Logistik & Transport ~2.900 €' },
+          { kriterium: 'Engineering / Bau', a: 'Ingenieurwesen ~4.900 €', b: 'Handwerk & Produktion ~3.000 €' },
+          { kriterium: 'Büro / Dienstleistung', a: 'Recht & Steuern ~4.500 €', b: 'Gastronomie & Hotellerie ~2.400 €' },
+          { kriterium: 'Finanz / Vertrieb', a: 'Finanzen & Versicherung ~4.200 €', b: 'Vertrieb & Verkauf ~3.300 €' },
+        ],
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Region: das Gehaltsgefälle nach Bundesland',
+        spalteA: 'Über Bundesschnitt',
+        spalteB: 'Unter Bundesschnitt',
+        zeilen: [
+          { kriterium: 'Spitze / Schlusslicht', a: 'Hamburg +10 %', b: 'Mecklenburg-Vorp. −18 %' },
+          { kriterium: 'West stark', a: 'Hessen +9 %, Baden-Württ. +8 %', b: 'Sachsen −17 %, Thüringen −18 %' },
+          { kriterium: 'Bayern / NRW', a: 'Bayern +7 %, NRW +2 %', b: 'Sachsen-Anhalt −18 %' },
+          { kriterium: 'Muster', a: 'Ballungsräume & West', b: 'ländlich & Ost' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Gleiches Gehalt, anderes Perzentil — die Region entscheidet',
+        schritte: [
+          { label: 'Gleiches Gehalt & Beruf', formel: '3.200 € · Gesundheit · 25–34 J.', ergebnis: '—' },
+          { label: 'In Sachsen (Faktor 0,83)', formel: 'Median 2.390 €', ergebnis: 'Perzentil 89' },
+          { label: 'In Bayern (Faktor 1,07)', formel: 'Median 3.082 €', ergebnis: 'Perzentil 57' },
+        ],
+        fazit: 'Dasselbe Bruttogehalt von 3.200 € steht in Sachsen für ein Spitzeneinkommen (89. Perzentil), in Bayern nur für solides Mittelfeld (57.). Der Grund ist das regionale Median-Niveau — wer einen Umzug erwägt, muss Gehalt und Region zusammen denken.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Gleiches Gehalt, andere Branche — der stärkste Hebel',
+        schritte: [
+          { label: 'Gleiches Gehalt, Region & Alter', formel: '3.500 € · NRW · 35–44 J.', ergebnis: '—' },
+          { label: 'In der Gastronomie (Median 2.570 €)', formel: '3.500 € vs. 2.570 €', ergebnis: 'Perzentil 91' },
+          { label: 'In der IT (Median 5.141 €)', formel: '3.500 € vs. 5.141 €', ergebnis: 'Perzentil 13' },
+        ],
+        fazit: 'Mit 3.500 € gehört man in der Gastronomie zur Spitze (91. Perzentil), in der IT dagegen ans untere Ende (13.). Dieselbe Zahl, völlig andere Einordnung — die Branche ist der stärkste einzelne Hebel beim Gehalt.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Einflussfaktoren auf das Gehalt im Überblick',
+        kopf: ['Faktor', 'Effekt auf das Gehalt', 'Hinweis'],
+        zeilen: [
+          ['Branche', 'sehr stark (bis ~2.000 € Median-Differenz)', 'größter einzelner Hebel'],
+          ['Region', 'stark (≈ −18 % bis +10 %)', 'Ost/West- und Stadt/Land-Gefälle'],
+          ['Berufserfahrung / Alter', 'mittel bis stark', 'Einstieg −28 %, Höhepunkt 45–54 J.'],
+          ['Qualifikation', 'mittel bis stark', 'Abschluss, Zertifikate, Führung'],
+          ['Unternehmensgröße', 'mittel', 'Konzerne zahlen meist mehr als KMU'],
+          ['Tarifbindung', 'mittel', 'Tarif oft + Sonderzahlungen, weniger AT-Spielraum'],
+        ],
+        fussnote: 'Alters-Faktoren im Modell: 18–24 J. ≈ 0,72; 25–34 ≈ 0,90; 35–44 ≈ 1,05; 45–54 ≈ 1,10; 55–64 ≈ 1,08. Orientierungswerte aus dem Destatis-Rahmen, keine Garantie für den Einzelfall.',
+      },
+      {
+        typ: 'text',
+        titel: 'Unternehmensgröße & Tarifbindung als Gehaltsfaktoren',
+        html: `<p>Zwei Faktoren, die der reine Median oft verdeckt, sind <strong>Unternehmensgröße</strong> und <strong>Tarifbindung</strong>. Große Unternehmen und Konzerne zahlen im Schnitt spürbar mehr als kleine Betriebe — für dieselbe Tätigkeit kann der Unterschied mehrere hundert Euro im Monat betragen. Gründe sind höhere Produktivität, stärkere Tarifbindung und mehr Spielraum für Zusatzleistungen.</p><p>Die <strong>Tarifbindung</strong> selbst wirkt zweischneidig: Tariflöhne sind transparent, steigen automatisch mit jeder Tarifrunde und kommen mit verlässlichen Sonderzahlungen. Außertarifliche (AT-)Gehälter liegen beim Grundgehalt oft höher, hängen aber stärker vom Verhandlungsgeschick und von variablen Boni ab.</p><p>Für den Vergleich heißt das: Ein Tarifgehalt und ein AT-Gehalt sind nur bedingt direkt vergleichbar. Wer wechselt, sollte Sonderzahlungen, Erhöhungsautomatik und Arbeitsplatzsicherheit mit einpreisen — nicht nur die nackte Grundgehalts-Zahl.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Brutto, netto & der reale Vergleich',
+        html: `<p>Gehaltsvergleiche laufen fast immer über das <strong>Bruttogehalt</strong> — so erhebt es auch das Statistische Bundesamt. Wer versehentlich sein Netto eingibt, landet automatisch in einem zu niedrigen Perzentil und unterschätzt die eigene Position. Maßgeblich ist die Brutto-Zeile der Abrechnung, nicht der ausgezahlte Betrag.</p><p>Für den <strong>realen</strong> Vergleich zählt aber mehr als die nackte Zahl. Zwei gleich hohe Bruttogehälter können sich netto unterscheiden — etwa durch Steuerklasse oder Kirchensteuer. Und sie können regional unterschiedlich viel wert sein: 3.500 € in München kaufen weniger als in Leipzig, weil die Lebenshaltungskosten höher liegen.</p><p>Wer ein Jobangebot in einer anderen Region prüft, sollte deshalb Gehalt, Steuerlast und Lebenshaltungskosten zusammen betrachten. Das konkrete Netto liefert der <a href="/finanzen/brutto-netto-rechner">Brutto-Netto-Rechner</a>, die Kaufkraft über die Zeit der <a href="/finanzen/inflationsrechner">Inflationsrechner</a>.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Gender Pay Gap & Teilzeit-Effekt (Destatis-Rahmen)',
+        werte: [
+          { label: 'Gender Pay Gap (unbereinigt)', wert: 'rund 16–18 %', hinweis: 'Differenz im durchschn. Bruttostundenlohn' },
+          { label: 'Gender Pay Gap (bereinigt)', wert: 'rund 6 %', hinweis: 'bei vergleichbarer Tätigkeit & Qualifikation' },
+          { label: 'Teilzeitquote Frauen', wert: 'deutlich höher', hinweis: 'drückt Monats- und Jahresverdienste' },
+          { label: 'Faire Vergleichsbasis', wert: 'Vollzeitäquivalent', hinweis: 'nur so sind Gehälter vergleichbar' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Gehaltstransparenz: Was Sie über Ihren Lohn erfahren dürfen',
+        html: `<p>Wer das eigene Gehalt einordnen will, hat zunehmend gesetzliche Auskunftsrechte. Das <strong>Entgelttransparenzgesetz (EntgTranspG)</strong> gibt Beschäftigten in Betrieben mit mehr als 200 Mitarbeitenden einen <strong>Auskunftsanspruch</strong>: Sie können erfragen, was Kolleginnen und Kollegen mit gleicher oder gleichwertiger Tätigkeit im Median verdienen — als Vergleichswert für eine Gruppe, nicht als Einzelgehalt.</p><p>Zusätzlich stärkt die <strong>EU-Entgelttransparenzrichtlinie</strong> die Rechte von Beschäftigten und wird derzeit in deutsches Recht umgesetzt — geplant sind unter anderem Gehaltsangaben bereits in Stellenausschreibungen und erweiterte Auskunftspflichten der Arbeitgeber.</p><p>Für den eigenen Gehaltsvergleich heißt das: Neben statistischen Median-Werten lohnt der Blick auf konkrete betriebliche Vergleichszahlen. Beides zusammen — die Marktorientierung dieses Rechners und ein interner Auskunftsanspruch — liefert die beste Grundlage für eine fundierte Gehaltsverhandlung.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Tarif vs. außertariflich (AT)',
+        spalteA: 'Tarifvertrag',
+        spalteB: 'Außertariflich (AT)',
+        zeilen: [
+          { kriterium: 'Grundgehalt', a: 'feste Stufen, oft etwas niedriger', b: 'frei verhandelt, oft höher' },
+          { kriterium: 'Sonderzahlungen', a: 'Urlaubs- und Weihnachtsgeld üblich', b: 'eher variabler Bonus' },
+          { kriterium: 'Erhöhungen', a: 'automatisch per Tarifrunde', b: 'individuell verhandelt' },
+          { kriterium: 'Transparenz', a: 'klare Eingruppierung', b: 'verhandlungsabhängig, intransparenter' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Gesamtvergütung: was über das Grundgehalt hinaus zählt',
+        html: `<p>Ein reiner Grundgehalts-Vergleich greift in vielen Branchen zu kurz. Zur <strong>Gesamtvergütung</strong> (Total Compensation) gehören weit mehr Bausteine — und sie können 10 bis 30 % ausmachen.</p><p>Dazu zählen <strong>variable Anteile</strong> wie Bonus, Provision oder Tantieme, die vor allem im Vertrieb, in Banken und im Management ins Gewicht fallen. Hinzu kommen <strong>geldwerte Vorteile</strong>: ein Dienstwagen zur Privatnutzung, Zuschüsse zum Jobticket oder Mittagessen, vergünstigte Aktienpakete und die betriebliche Altersvorsorge per Entgeltumwandlung.</p><p>Auch <strong>Sonderzahlungen</strong> wie Urlaubs- und Weihnachtsgeld — in Tarifbranchen oft ein 13. Monatsgehalt — gehören dazu. Wer zwei Jobangebote vergleicht, sollte deshalb nicht nur auf das Bruttogrundgehalt schauen, sondern alle Bestandteile zusammenrechnen. Ein scheinbar niedrigeres Angebot mit Dienstwagen, gutem Bonus und starker Altersvorsorge kann unterm Strich attraktiver sein als ein höheres Grundgehalt ohne Extras.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Mehr verdienen — die wirksamsten Hebel',
+        html: `<p>Ein Gehaltsvergleich ist erst der Anfang — entscheidend ist, was man daraus macht. Liegt das eigene Gehalt deutlich unter dem Median der Vergleichsgruppe, ist das ein sachliches Argument für eine <strong>Gehaltsverhandlung</strong>.</p><p>Drei Hebel wirken am stärksten: Der <strong>Jobwechsel</strong> bringt erfahrungsgemäß den größten Sprung, weil das neue Gehalt frei verhandelt statt prozentual fortgeschrieben wird. <strong>Weiterbildung und Spezialisierung</strong> verschieben die Vergleichsgruppe nach oben — wer eine gefragte Qualifikation nachweist, vergleicht sich zu Recht mit einem höheren Median. Und die <strong>Verhandlung selbst</strong> entscheidet: Wer mit konkreten Marktzahlen und Leistungsnachweisen ins Gespräch geht, erzielt im Schnitt mehr als wer nur „ein bisschen mehr" fordert.</p><p>Wichtig bleibt die Gesamtvergütung: Boni, Altersvorsorge, Dienstwagen, Homeoffice und Urlaubstage gehören in die Rechnung. Manchmal ist ein nicht-monetärer Vorteil mehr wert als die nächste Gehaltsstufe.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Vor der Gehaltsverhandlung',
+        punkte: [
+          'Eigenes Bruttogehalt als Vollzeitäquivalent ermitteln — nicht das Netto.',
+          'Mit der richtigen Vergleichsgruppe matchen: Branche, Region und Altersgruppe.',
+          'Eigene Position im Perzentil bestimmen (Median, 75. und 90. Perzentil als Anker).',
+          'Marktzahlen schriftlich vorbereiten (Destatis, Entgeltatlas, Stellenanzeigen).',
+          'Leistungen und Erfolge der letzten 12 Monate konkret belegen.',
+          'Gesamtvergütung einbeziehen: Boni, bAV, Homeoffice, Urlaub, Dienstwagen.',
+          'Realistische Zielspanne und ein Mindestziel vorab festlegen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Immer das Brutto-Vollzeitäquivalent vergleichen',
+        text: 'Vergleichbar sind Gehälter nur als Brutto-Vollzeitäquivalent. Wer Teilzeit arbeitet, rechnet sein Gehalt zunächst auf eine volle Stelle hoch, bevor er es einordnet — sonst landet man scheinbar in einem viel zu niedrigen Perzentil. Ebenso gehört das Brutto aus der Abrechnung in den Vergleich, nicht der ausgezahlte Netto-Betrag. Und Sondervergütungen wie Boni, Weihnachts- und Urlaubsgeld oder eine Dienstwagen-Privatnutzung zählen zur Gesamtvergütung dazu — ohne sie vergleicht man Äpfel mit Birnen.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Orientierungswerte — keine individuelle Gehaltsberatung',
+        text: 'Die hier genutzten Median-Werte beruhen auf der Verdiensterhebung des Statistischen Bundesamts und sind Annäherungswerte für Vergleichsgruppen — keine tagesaktuellen Einzelgehälter und keine Zusage für genau Ihre Stelle. Individuelle Faktoren wie Unternehmensgröße, Tarifbindung, Qualifikation, Verhandlungsgeschick und Branchenkonjunktur können den realen Marktwert deutlich verschieben. Dieser Rechner liefert eine statistische Orientierung und ersetzt keine individuelle Gehalts- oder Karriereberatung.',
+      },
+    ],
     faq: [
       {
         frage: 'Woher stammen die Gehaltsdaten?',
@@ -1939,6 +2121,10 @@ Der Gehaltsvergleich ist mehr als eine Neugier-Frage — er liefert konkrete Arg
         frage: 'Was kann ich tun wenn mein Gehalt unterdurchschnittlich ist?',
         antwort: 'Nutzen Sie die Daten als Grundlage für ein Gehaltsgespräch mit Ihrem Arbeitgeber. Informieren Sie sich über branchenübliche Gehälter und bereiten Sie Argumente vor (Leistung, Qualifikation, Marktvergleich). Auch ein Jobwechsel oder eine Weiterbildung können das Gehalt deutlich steigern.',
       },
+    ],
+    quellen: [
+      { titel: 'Statistisches Bundesamt (Destatis) — Verdiensterhebung', url: 'https://www.destatis.de', hinweis: 'Median-Bruttoverdienste nach Branche, Region und Alter' },
+      { titel: 'Entgeltatlas der Bundesagentur für Arbeit', url: 'https://web.arbeitsagentur.de/entgeltatlas', hinweis: 'Median-Entgelte nach Beruf' },
     ],
   },
   {
