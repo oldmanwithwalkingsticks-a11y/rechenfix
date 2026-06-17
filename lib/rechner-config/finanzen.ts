@@ -1435,7 +1435,7 @@ Regelmäßiges Sparen ist der Schlüssel zum Vermögensaufbau. Hier einige bewä
   },
   {
     slug: 'inflationsrechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-17',
     titel: 'Inflationsrechner',
     beschreibung: 'Kaufkraftverlust und Preisanstieg durch Inflation berechnen — mit Jahr-für-Jahr-Tabelle.',
     kategorie: 'Finanzen',
@@ -1479,6 +1479,183 @@ Da Inflation die Kaufkraft von Bargeld und niedrig verzinsten Spareinlagen auffr
 - **Inflationsindexierte Anleihen:** Diese Staatsanleihen passen ihre Auszahlung an die Inflationsrate an und bieten damit einen direkten Schutz.
 - **Tagesgeld und Festgeld:** In Phasen niedriger Inflation können Tagesgeldkonten die Kaufkraft erhalten, wenn der Zinssatz über der Inflationsrate liegt. In Hochinflationsphasen reichen die Zinsen jedoch oft nicht aus.
 - **Diversifikation:** Die beste Strategie ist eine breite Streuung über verschiedene Anlageklassen — so sind Sie gegen verschiedene Inflationsszenarien gewappnet.`,
+    // W19-Goldstandard: inflationsrechner auf volle Tiefe (16 Bausteine, ~1.560 W),
+    // Leitformat „beispielrechnung" (4× dominant) + 1 Linien-Diagramm. Formeln aus
+    // lib/berechnungen/inflation.ts gespiegelt: Kaufkraft = Betrag ÷ (1+i)^n,
+    // Preis = Betrag × (1+i)^n. Diagrammwerte im Code aus der Formel berechnet.
+    // BEWUSST keine tagesaktuelle Inflationsquote — nur EZB-Ziel ~2 %, VPI/HVPI-Methodik
+    // (Destatis) und historische Orientierung. Keine Anlageberatung. erklaerung Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was Inflation ist — und wie sie Kaufkraft frisst',
+        html: `<p>Inflation bezeichnet den allgemeinen, anhaltenden Anstieg des Preisniveaus für Güter und Dienstleistungen. Die Folge ist <strong>Geldentwertung</strong>: Für denselben Betrag kann man sich mit der Zeit immer weniger leisten — die <strong>Kaufkraft</strong> des Geldes sinkt.</p><p>Gemessen wird die Inflation als jährliche prozentuale Veränderung eines Preisindex. Das Tückische ist ihr <strong>schleichender, exponentieller Charakter</strong>: Auf dem Konto steht nominal weiter dieselbe Summe, doch ihr realer Wert bröckelt Jahr für Jahr. Weil sich der Effekt gewissermaßen verzinst, wirkt schon eine scheinbar kleine Rate über lange Zeiträume erheblich.</p><p>Mathematisch beschreibt eine einfache Formel den Zusammenhang: Der reale Wert eines Betrags nach mehreren Jahren ergibt sich aus Betrag ÷ (1 + Inflationsrate)^Jahre. Umgekehrt lässt sich der künftige Preis als Betrag × (1 + Inflationsrate)^Jahre berechnen. Sinkende Kaufkraft und steigende Preise sind dasselbe Phänomen aus zwei Blickwinkeln — dieser Rechner bildet beide ab.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Kaufkraftverlust von 10.000 € über 10 Jahre (bei 2 %)',
+        schritte: [
+          { label: 'Heutiger Betrag', formel: '10.000 €', ergebnis: '10.000,00 €' },
+          { label: 'Realer Wert nach 10 Jahren', formel: '10.000 € ÷ 1,02¹⁰', ergebnis: '8.203,48 €' },
+          { label: 'Kaufkraftverlust', formel: '10.000 € − 8.203,48 €', ergebnis: '1.796,52 €' },
+        ],
+        fazit: 'Bei 2 % Inflation hat unverzinstes Geld nach 10 Jahren rund 18 % seiner Kaufkraft verloren — aus 10.000 € werden real 8.203 €. Nominell steht weiter dieselbe Summe auf dem Konto, leisten kann man sich davon aber spürbar weniger.',
+      },
+      {
+        typ: 'diagramm',
+        variante: 'linie',
+        titel: 'Kaufkraft von 10.000 € im Zeitverlauf (bei 3 % Inflation)',
+        daten: [
+          { label: 'heute', wert: 10000, einheit: '€' },
+          { label: 'nach 5 J.', wert: Math.round(10000 / Math.pow(1.03, 5)), einheit: '€' },
+          { label: 'nach 10 J.', wert: Math.round(10000 / Math.pow(1.03, 10)), einheit: '€' },
+          { label: 'nach 15 J.', wert: Math.round(10000 / Math.pow(1.03, 15)), einheit: '€' },
+          { label: 'nach 20 J.', wert: Math.round(10000 / Math.pow(1.03, 20)), einheit: '€' },
+          { label: 'nach 30 J.', wert: Math.round(10000 / Math.pow(1.03, 30)), einheit: '€' },
+        ],
+        fussnote: 'Realer Wert = 10.000 € ÷ 1,03^Jahre. Bei 3 % Inflation halbiert sich die Kaufkraft in gut 23 Jahren — aus 10.000 € werden nach 30 Jahren real nur noch rund 4.120 €.',
+      },
+      {
+        typ: 'text',
+        titel: 'Nominal vs. real — der entscheidende Unterschied',
+        html: `<p>Wer Inflation verstehen will, muss zwei Begriffe trennen: <strong>nominal</strong> und <strong>real</strong>. Der Nominalwert ist die Zahl, die auf dem Konto, dem Preisschild oder der Gehaltsabrechnung steht. Der Realwert berücksichtigt zusätzlich die Kaufkraft — also, was man sich für diese Zahl tatsächlich leisten kann.</p><p>Ein Beispiel macht den Unterschied greifbar: Steigt das Gehalt um 2 %, während die Preise um 3 % zulegen, hat man <strong>nominal mehr, real aber weniger</strong>. Die gefühlte Gehaltserhöhung ist in Wahrheit eine Lohnkürzung. Genauso bei Sparzinsen: 2 % Zinsen bei 3 % Inflation bedeuten real einen Verlust von rund 1 % pro Jahr.</p><p>Für jede langfristige Finanzentscheidung — Altersvorsorge, Sparziel, Kreditrückzahlung — ist deshalb die <strong>reale</strong> Betrachtung entscheidend. Eine Faustformel hilft: Reale Rendite ≈ Nominalzins − Inflationsrate. Nur was über der Inflationsrate liegt, baut echte Kaufkraft auf.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Gehalt +2 % bei 3 % Inflation — der reale Verlust',
+        schritte: [
+          { label: 'Gehalt heute', formel: '50.000 €', ergebnis: '50.000 €' },
+          { label: 'Nominal nach Erhöhung (+2 %)', formel: '50.000 € × 1,02', ergebnis: '51.000 €' },
+          { label: 'Preisniveau im selben Jahr (+3 %)', formel: 'Inflation 3 %', ergebnis: '× 1,03' },
+          { label: 'Realer Wert des neuen Gehalts', formel: '51.000 € ÷ 1,03', ergebnis: '49.514,56 €' },
+        ],
+        fazit: 'Trotz 2 % mehr auf dem Papier sinkt die Kaufkraft um rund 1 % (−485 €), weil die Preise mit 3 % stärker steigen als das Gehalt. Eine nominale Erhöhung unterhalb der Inflationsrate ist real eine Lohnkürzung.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Wann halbiert sich die Kaufkraft? (72er-Regel)',
+        kopf: ['Inflationsrate', '72er-Regel (72 ÷ Rate)', 'Exakt'],
+        zeilen: [
+          ['1 %', '72 Jahre', '≈ 70 Jahre'],
+          ['2 %', '36 Jahre', '≈ 35 Jahre'],
+          ['3 %', '24 Jahre', '≈ 23,4 Jahre'],
+          ['5 %', '14,4 Jahre', '≈ 14,2 Jahre'],
+          ['7 %', '10,3 Jahre', '≈ 10,2 Jahre'],
+          ['10 %', '7,2 Jahre', '≈ 7,3 Jahre'],
+        ],
+        fussnote: 'Die 72er-Regel schätzt, nach wie vielen Jahren sich die Preise verdoppeln — gleichbedeutend mit einer Halbierung der Kaufkraft. Eine Faustregel, kein exakter Wert.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Was 100 € in 30 Jahren noch wert sind (bei 2 %)',
+        schritte: [
+          { label: 'Heutiger Wert', formel: '100 €', ergebnis: '100,00 €' },
+          { label: 'Kaufkraft nach 30 Jahren', formel: '100 € ÷ 1,02³⁰', ergebnis: '55,21 €' },
+          { label: 'Kaufkraftverlust', formel: '100 € − 55,21 €', ergebnis: '44,79 €' },
+        ],
+        fazit: 'Selbst bei „nur" 2 % Inflation — dem EZB-Ziel — schrumpft die Kaufkraft von 100 € über eine Generation auf rund 55 €. Für die Altersvorsorge heißt das: künftige Beträge immer auf ihre reale Kaufkraft umrechnen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Wie Inflation gemessen wird: Warenkorb, VPI & HVPI',
+        html: `<p>Die offizielle Inflationsrate in Deutschland ermittelt das <strong>Statistische Bundesamt (Destatis)</strong> über den <strong>Verbraucherpreisindex (VPI)</strong>. Dafür wird monatlich der Preis eines repräsentativen <strong>Warenkorbs</strong> aus rund 650 Güterarten erhoben — von Lebensmitteln über Mieten und Energie bis zu Dienstleistungen wie Friseur oder Versicherung.</p><p>Jede Güterart erhält ein <strong>Gewicht</strong> entsprechend ihrem Anteil an den typischen Haushaltsausgaben (Wägungsschema). Wohnen und Energie wiegen am schwersten, weshalb Preissprünge bei Miete oder Heizung die Gesamtrate stark beeinflussen. Als Basisjahr dient aktuell 2020 = 100.</p><p>Daneben gibt es den <strong>Harmonisierten Verbraucherpreisindex (HVPI)</strong>, der nach einheitlicher EU-Methodik berechnet wird und die Grundlage für die geldpolitischen Entscheidungen der EZB bildet. VPI und HVPI unterscheiden sich leicht in Methodik und Warenkorb, liefern aber ähnliche Größenordnungen. Die jeweils aktuelle Rate veröffentlicht Destatis monatlich.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Was im Warenkorb am schwersten wiegt',
+        werte: [
+          { label: 'Wohnen & Energie', wert: 'ca. 32 %', hinweis: 'größter Posten: Miete, Strom, Heizung' },
+          { label: 'Verkehr', wert: 'ca. 13 %', hinweis: 'Kraftstoff, Fahrzeuge, ÖPNV' },
+          { label: 'Nahrungsmittel', wert: 'ca. 12 %', hinweis: 'Lebensmittel & alkoholfreie Getränke' },
+          { label: 'Freizeit & Kultur', wert: 'ca. 11 %', hinweis: 'Reisen, Unterhaltung, Sport' },
+          { label: 'Warenkorb-Umfang', wert: '≈ 650 Güterarten', hinweis: 'Destatis, Basisjahr 2020 = 100' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Deflation & Hyperinflation — warum rund 2 % als ideal gelten',
+        html: `<p>Nicht jede Inflation ist schlecht — und ihr Gegenteil ist es ebenso wenig. Die Geldpolitik zielt bewusst auf eine <strong>moderate Inflation von rund 2 %</strong>, weil beide Extreme gefährlich sind.</p><p>Bei <strong>Deflation</strong> sinkt das allgemeine Preisniveau. Was zunächst gut klingt, kann eine Abwärtsspirale auslösen: Verbraucher schieben Käufe auf, weil morgen alles billiger ist, die Nachfrage bricht ein, Unternehmen senken Löhne oder entlassen — und die Preise fallen weiter. Japan kämpfte über Jahrzehnte mit dieser Stagnation.</p><p>Am anderen Ende steht die <strong>Hyperinflation</strong>, bei der Geld rasend schnell wertlos wird. Das historisch bekannteste Beispiel ist Deutschland 1923, als Preise sich teils täglich vervielfachten und Ersparnisse über Nacht verfielen. Eine niedrige, stabile und vor allem <strong>vorhersehbare</strong> Inflation um 2 % gilt deshalb als ideal: Sie lässt Löhne und Preise sich geordnet anpassen, ohne Sparer stark zu enteignen oder die Wirtschaft zu lähmen.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Andersherum: Was 100 € heute in 20 Jahren kosten (bei 2,5 %)',
+        schritte: [
+          { label: 'Heutiger Preis', formel: '100 €', ergebnis: '100,00 €' },
+          { label: 'Künftiger Preis nach 20 Jahren', formel: '100 € × 1,025²⁰', ergebnis: '163,86 €' },
+          { label: 'Preisanstieg', formel: '163,86 € − 100 €', ergebnis: '63,86 €' },
+        ],
+        fazit: 'Was heute 100 € kostet, kostet bei 2,5 % Inflation in 20 Jahren rund 164 € — ein Aufschlag von fast 64 %. Kaufkraftverlust (Geld wird weniger wert) und Preisanstieg (Dinge werden teurer) sind zwei Seiten derselben Medaille.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Inflation in Deutschland — historische Orientierung',
+        kopf: ['Phase', 'Ungefähre Größenordnung', 'Einordnung'],
+        zeilen: [
+          ['1970er (Ölkrisen)', '4–7 % pro Jahr', 'erhöhte Inflation durch Energiepreise'],
+          ['1990er–2010er', 'meist 1–2 % pro Jahr', 'Phase niedriger, stabiler Inflation'],
+          ['frühe 2020er (Energiekrise)', 'zeitweise über 5 %', 'Energie- und Lieferketten-Schock'],
+          ['langfristiger Schnitt', 'rund 2 % pro Jahr', 'entspricht dem EZB-Ziel'],
+        ],
+        fussnote: 'Grobe Orientierungswerte ohne tagesaktuellen Bezug — die jeweils aktuelle Rate veröffentlicht das Statistische Bundesamt (Destatis). Für Planungen sind 2–3 % pro Jahr ein üblicher Richtwert.',
+      },
+      {
+        typ: 'text',
+        titel: 'Inflation und Geldanlage — die reale Rendite zählt',
+        html: `<p>Inflation trifft vor allem <strong>unverzinstes oder niedrig verzinstes Geld</strong>: Bargeld, Girokonto und schlecht verzinste Spareinlagen verlieren real Jahr für Jahr an Wert. Wer Vermögen erhalten will, muss eine Rendite erzielen, die <strong>mindestens die Inflationsrate ausgleicht</strong>.</p><p>Grundsätzlich unterscheidet man <strong>Sachwerte</strong> und <strong>Geldwerte</strong>. Sachwerte wie Immobilien, Aktien oder Rohstoffe sind an reale Güter gekoppelt und steigen tendenziell mit dem Preisniveau. Geldwerte wie Sparbuch, Tagesgeld oder klassische Anleihen lauten auf einen festen Nennbetrag und sind dadurch inflationsanfälliger.</p><p>Wichtig: Höhere reale Renditechancen gehen in der Regel mit höheren Schwankungen einher. Welche Mischung passt, hängt von Anlagehorizont, Risikotragfähigkeit und persönlichen Zielen ab. Dieser Rechner zeigt ausschließlich den rechnerischen Kaufkrafteffekt — er ist <strong>keine Anlageberatung</strong>. Für die Verzinsungsseite hilft der <a href="/finanzen/zinsrechner">Zinsrechner</a>.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Wer von Inflation profitiert — und wer verliert',
+        html: `<p>Inflation verteilt Vermögen um — meist unbemerkt. Auf der <strong>Verliererseite</strong> stehen vor allem <strong>Sparer und Gläubiger</strong>: Wer Geld auf dem Konto oder in festverzinsten Anlagen hält, sieht dessen Kaufkraft schwinden. Auch Menschen mit festen Einkünften leiden, wenn deren Anpassung hinter der Teuerung zurückbleibt.</p><p>Auf der <strong>Gewinnerseite</strong> stehen <strong>Schuldner</strong>: Wer einen Kredit mit festem Zins abzahlt, profitiert, weil die reale Last der Schuld mit der Zeit sinkt — die zurückzuzahlende Summe bleibt nominal gleich, ist aber weniger wert. Das gilt für private Immobilienkredite ebenso wie für den Staat als größten Schuldner.</p><p>Auch <strong>Sachwertbesitzer</strong> sind tendenziell auf der Gewinnerseite, weil Immobilien, Aktien und Rohstoffe mit dem Preisniveau steigen. Diese Umverteilung erklärt, warum Inflation politisch so sensibel ist: Sie entlastet Schuldner auf Kosten von Sparern — und wirkt wie eine unsichtbare Steuer auf Bargeld.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Sparbuch real: 5.000 € bei 1 % Zins und 3 % Inflation',
+        schritte: [
+          { label: 'Sparguthaben heute', formel: '5.000 €', ergebnis: '5.000 €' },
+          { label: 'Nominal nach 1 Jahr (+1 % Zins)', formel: '5.000 € × 1,01', ergebnis: '5.050 €' },
+          { label: 'Reale Kaufkraft (Preise +3 %)', formel: '5.050 € ÷ 1,03', ergebnis: '4.902,91 €' },
+          { label: 'Realer Verlust', formel: '5.000 € − 4.902,91 €', ergebnis: '− 97,09 €' },
+        ],
+        fazit: 'Trotz „Gewinn" von 50 € Zinsen sinkt die Kaufkraft um rund 97 € — die reale Rendite ist negativ (≈ −2 %). Liegt der Zins unter der Inflationsrate, verliert auch verzinstes Guthaben real an Wert.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Inflationsschutz: Sachwerte vs. Geldwerte (neutrale Einordnung)',
+        spalteA: 'Sachwerte',
+        spalteB: 'Geldwerte',
+        zeilen: [
+          { kriterium: 'Beispiele', a: 'Immobilien, Aktien, Rohstoffe', b: 'Tagesgeld, Festgeld, Sparbuch, Anleihen' },
+          { kriterium: 'Verhalten bei Inflation', a: 'steigen tendenziell mit dem Preisniveau', b: 'fester Nennbetrag, kaufkraftanfällig' },
+          { kriterium: 'Schwankung', a: 'höher (Kursrisiko)', b: 'gering bis keine' },
+          { kriterium: 'Verfügbarkeit', a: 'teils eingeschränkt (Immobilien)', b: 'meist hoch (Tagesgeld täglich)' },
+        ],
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Kaufkraft im Blick behalten',
+        punkte: [
+          'Sparziele und Altersvorsorge in realen (inflationsbereinigten) Werten denken, nicht in nominalen Beträgen.',
+          'Für langfristige Planungen mit einer Orientierungsrate von 2–3 % pro Jahr rechnen.',
+          'Reale Rendite prüfen: Liegt der Zins über oder unter der Inflationsrate?',
+          'Größere Bargeldbestände jenseits des Notgroschens kritisch hinterfragen.',
+          'Breit streuen statt auf eine einzige Anlageklasse zu setzen.',
+          'Die aktuelle Inflationsrate bei Bedarf direkt bei Destatis nachsehen, nicht auf Vorjahreswerte verlassen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Reale Rendite = Nominalzins − Inflation',
+        text: 'Eine einfache Faustformel hilft bei jeder Anlageentscheidung: Die reale Rendite entspricht ungefähr dem Nominalzins minus der Inflationsrate. Beispiel: 3 % Zinsen bei 2 % Inflation ergeben rund 1 % realen Vermögenszuwachs. Liegt der Zins unter der Inflationsrate, verlieren Sie trotz „Gewinn" real an Kaufkraft. Erst was über der Inflationsrate liegt, baut echtes Vermögen auf — diese Schwelle sollte der Maßstab beim Vergleich von Sparangeboten sein.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'EZB-Ziel rund 2 % — keine Anlageberatung',
+        text: 'Die Europäische Zentralbank strebt mittelfristig eine Inflationsrate von rund 2 % an, weil moderate Inflation als Zeichen einer stabilen Wirtschaft gilt und sowohl Deflation als auch Hyperinflation vermeidet. Die tatsächliche Rate schwankt und wird monatlich vom Statistischen Bundesamt veröffentlicht — dieser Rechner unterstellt keine tagesaktuelle Quote, sondern rechnet mit der von Ihnen gewählten Rate. Die Inhalte sind allgemeine Information und ersetzen keine individuelle Anlage- oder Finanzberatung.',
+      },
+    ],
     faq: [
       {
         frage: 'Was bedeutet eine Inflationsrate von 2%?',
@@ -1500,6 +1677,10 @@ Da Inflation die Kaufkraft von Bargeld und niedrig verzinsten Spareinlagen auffr
         frage: 'Was ist die Regel von 72?',
         antwort: 'Die Regel von 72 ist eine Faustregel: Teilen Sie 72 durch die Inflationsrate, um die ungefähre Verdopplungszeit der Preise zu erhalten. Bei 2% Inflation: 72 ÷ 2 = 36 Jahre bis sich die Preise verdoppeln. Bei 3%: 24 Jahre. Bei 6%: 12 Jahre. Umgekehrt halbiert sich die Kaufkraft in derselben Zeitspanne.',
       },
+    ],
+    quellen: [
+      { titel: 'Statistisches Bundesamt (Destatis) — Verbraucherpreisindex (VPI)', url: 'https://www.destatis.de', hinweis: 'amtliche Inflationsmessung in Deutschland, Warenkorb & Wägungsschema' },
+      { titel: 'Deutsche Bundesbank / EZB — Preisstabilität', url: 'https://www.bundesbank.de', hinweis: 'mittelfristiges Inflationsziel von rund 2 %' },
     ],
   },
   {
