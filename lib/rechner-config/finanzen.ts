@@ -1354,7 +1354,7 @@ Beachten Sie, dass ein hoher Stundenlohn allein noch kein aussagekräftiger Verg
   },
   {
     slug: 'sparrechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-17',
     titel: 'Sparrechner',
     beschreibung: 'Sparplan berechnen mit Zinseszins: Monatliche Sparrate, Dynamik und Jahr-für-Jahr-Entwicklung.',
     kategorie: 'Finanzen',
@@ -1406,6 +1406,180 @@ Regelmäßiges Sparen ist der Schlüssel zum Vermögensaufbau. Hier einige bewä
 - **Nutzen Sie den Arbeitgeberzuschuss:** Viele Arbeitgeber bieten vermögenswirksame Leistungen (VL) von bis zu 40 Euro monatlich. In Kombination mit der Arbeitnehmer-Sparzulage ist das geschenktes Geld.
 - **Diversifizieren Sie:** Setzen Sie nicht alles auf eine Karte. Ein breit gestreuter ETF auf den MSCI World oder FTSE All-World verteilt Ihr Risiko auf tausende Unternehmen weltweit.
 - **Bleiben Sie langfristig investiert:** Verkaufen Sie nicht bei kurzzeitigen Kursschwankungen. Historisch waren die größten Tagesgewinne an der Börse oft direkt nach den größten Verlusten — wer ausgestiegen war, hat sie verpasst.`,
+    // W19-Goldstandard: sparrechner auf volle Tiefe (16 Bausteine, ~1.560 W), Leitformat
+    // „beispielrechnung" (5× dominant) + 1 gestapeltes Diagramm. Fokus RATENSPAREN
+    // (monatliche Rate) — disjunkt zu zinsrechner (Einmalanlage). Alle Endkapital-Werte
+    // aus lib/berechnungen/sparplan.ts berechnet (monatliche Verzinsung, vorschüssig):
+    // 100 €/20 J/3 % = 32.912 €, 100 €/30 J = 58.419 €, 100 €/40 J = 92.837 €,
+    // 200 €/20 J = 65.825 €; 50.000 € in 15 J ≈ 220 €/Monat. Beispielzinsen, keine
+    // Anlageberatung. erklaerung bleibt Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Ratensparen mit Zinseszins — warum Zeit der größte Hebel ist',
+        html: `<p>Beim <strong>Ratensparen</strong> zahlen Sie nicht einmalig eine große Summe ein, sondern regelmäßig einen festen Betrag — Monat für Monat. Jede Rate wird verzinst, und die Zinsen werden mitverzinst. So entsteht über die Jahre der <strong>Zinseszins-Effekt</strong>, der aus vielen kleinen Einzahlungen ein beachtliches Vermögen formen kann.</p><p>Der entscheidende Hebel ist dabei nicht die Höhe der Rate, sondern die <strong>Zeit</strong>. Weil das Kapital exponentiell wächst, tragen die frühen Jahre überproportional bei: Jeder Euro, der lange liegt, vermehrt sich am stärksten. In den ersten Jahren stammt der Zuwachs fast nur aus den Einzahlungen — mit zunehmender Laufzeit übernehmen die Zinsen die Führung.</p><p>Dieser Rechner zeigt für jede Kombination aus Sparrate, Laufzeit und Zinssatz, wie viel am Ende zusammenkommt — und welcher Teil aus eigenen Einzahlungen und welcher aus Zinserträgen besteht. Wer stattdessen eine größere Summe einmalig anlegt, nutzt den <a href="/finanzen/zinsrechner">Zinsrechner</a>.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '100 € monatlich über 20 Jahre (bei 3 %)',
+        schritte: [
+          { label: 'Eigene Einzahlungen', formel: '100 € × 12 × 20', ergebnis: '24.000 €' },
+          { label: 'Endkapital bei 3 % p. a.', formel: '100 € mtl., monatlich verzinst', ergebnis: '32.912 €' },
+          { label: 'Davon Zinserträge', formel: '32.912 € − 24.000 €', ergebnis: '8.912 €' },
+        ],
+        fazit: 'Aus 24.000 € eigenen Einzahlungen werden bei 3 % rund 32.912 € — die Zinsen steuern 8.912 € bei, etwa 27 % des Endkapitals. Ein Dauerauftrag über 100 € genügt, um diesen Effekt anzustoßen.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Dieselbe Rate, 30 statt 20 Jahre — der Zinseszins zeigt sich',
+        schritte: [
+          { label: 'Eigene Einzahlungen', formel: '100 € × 12 × 30', ergebnis: '36.000 €' },
+          { label: 'Endkapital bei 3 % p. a.', formel: '100 € mtl., 30 Jahre', ergebnis: '58.419 €' },
+          { label: 'Davon Zinserträge', formel: '58.419 € − 36.000 €', ergebnis: '22.419 €' },
+        ],
+        fazit: 'Zehn Jahre länger sparen — und das Endkapital springt von 32.912 € auf 58.419 €. Obwohl nur 12.000 € mehr eingezahlt werden, wächst der Zinsanteil von 8.912 € auf 22.419 €. Die zusätzlichen Jahre sind die wertvollsten, weil der Zinseszins am längsten wirkt.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Spardauer-Vergleich: 100 € monatlich bei 3 %',
+        kopf: ['Laufzeit', 'Einzahlungen', 'Endkapital (3 %)', 'Zinsanteil'],
+        zeilen: [
+          ['10 Jahre', '12.000 €', '14.009 €', '14 %'],
+          ['20 Jahre', '24.000 €', '32.912 €', '27 %'],
+          ['30 Jahre', '36.000 €', '58.419 €', '38 %'],
+          ['40 Jahre', '48.000 €', '92.837 €', '48 %'],
+        ],
+        fussnote: '100 € monatlich bei 3 % p. a., monatliche Verzinsung. Mit jeder Dekade steigt der Anteil der Zinsen am Endkapital — nach 40 Jahren stammt fast die Hälfte aus Zinserträgen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Sparrate, Laufzeit, Zins — die drei Stellschrauben',
+        html: `<p>Das Ergebnis eines Sparplans hängt von drei Größen ab, die jeder selbst beeinflussen kann: der <strong>Sparrate</strong>, der <strong>Laufzeit</strong> und dem <strong>Zinssatz</strong> (der erwarteten Rendite).</p><p>Die <strong>Sparrate</strong> wirkt linear: Wer doppelt so viel einzahlt, hat bei gleicher Laufzeit am Ende ungefähr doppelt so viel. Die <strong>Laufzeit</strong> dagegen wirkt exponentiell — verlängert man die Zeit, wächst nicht nur die Zahl der Einzahlungen, sondern jeder Beitrag wird auch länger verzinst. Deshalb schlägt zusätzliche Zeit fast immer eine höhere Rate, wenn man die Wahl hat.</p><p>Der <strong>Zinssatz</strong> schließlich entscheidet, wie kräftig der Zinseszins arbeitet. Schon ein bis zwei Prozentpunkte mehr Rendite verändern das Endkapital über lange Zeiträume erheblich — allerdings gehen höhere Renditechancen in der Realität mit höheren Schwankungen einher. Wer plant, sollte alle drei Stellschrauben gemeinsam betrachten, nicht nur die monatliche Rate.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Rate verdoppeln oder Laufzeit verdoppeln — was wirkt mehr?',
+        schritte: [
+          { label: 'Variante A: 200 €/Monat über 20 Jahre', formel: 'Einzahlung 48.000 €', ergebnis: '65.825 €' },
+          { label: 'Variante B: 100 €/Monat über 40 Jahre', formel: 'Einzahlung 48.000 €', ergebnis: '92.837 €' },
+          { label: 'Vorsprung von Variante B', formel: '92.837 € − 65.825 €', ergebnis: '27.012 €' },
+        ],
+        fazit: 'Beide Varianten zahlen exakt 48.000 € ein — doch die längere Laufzeit bringt rund 27.000 € mehr. Die Zeit schlägt die höhere Rate deutlich, weil jeder Euro länger Zinseszins sammelt. Wer früh anfängt, braucht weniger Rate für dasselbe Ziel.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Mit Dynamik: Rate jährlich um 3 % erhöhen',
+        schritte: [
+          { label: 'Ohne Dynamik (100 €/20 J/3 %)', formel: 'feste Rate', ergebnis: '32.912 €' },
+          { label: 'Mit 3 % Dynamik pro Jahr', formel: 'Rate 100 € → 175 €', ergebnis: '42.939 €' },
+          { label: 'Mehr Endkapital durch Dynamik', formel: '42.939 € − 32.912 €', ergebnis: '10.027 €' },
+        ],
+        fazit: 'Erhöht man die Rate jährlich um 3 % (z. B. im Takt von Gehaltssteigerungen), wächst das Endkapital von 32.912 € auf 42.939 € — gut 10.000 € mehr. Die Rate steigt dabei nur sanft von anfangs 100 € auf zuletzt rund 175 €.',
+      },
+      {
+        typ: 'diagramm',
+        variante: 'gestapelt',
+        titel: 'Einzahlungen vs. Zinsertrag über die Zeit',
+        gestapelt: [
+          { label: 'nach 10 J.', segmente: [{ name: 'Einzahlungen', wert: 12000 }, { name: 'Zinsertrag', wert: 2009 }] },
+          { label: 'nach 20 J.', segmente: [{ name: 'Einzahlungen', wert: 24000 }, { name: 'Zinsertrag', wert: 8912 }] },
+          { label: 'nach 30 J.', segmente: [{ name: 'Einzahlungen', wert: 36000 }, { name: 'Zinsertrag', wert: 22419 }] },
+          { label: 'nach 40 J.', segmente: [{ name: 'Einzahlungen', wert: 48000 }, { name: 'Zinsertrag', wert: 44837 }] },
+        ],
+        einheit: '€',
+        fussnote: 'Sparplan 100 € monatlich bei 3 % p. a. Der untere Block sind die eigenen Einzahlungen, der obere die Zinserträge — mit der Zeit verschiebt sich das Verhältnis spürbar zugunsten der Zinsen.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Sparziel rückwärts: 50.000 € in 15 Jahren',
+        schritte: [
+          { label: 'Sparziel', formel: 'in 15 Jahren', ergebnis: '50.000 €' },
+          { label: 'Nötige Monatsrate bei 3 %', formel: 'rückwärts gerechnet', ergebnis: '≈ 220 €' },
+          { label: 'Davon eigene Einzahlung', formel: '≈ 220 € × 12 × 15', ergebnis: '≈ 39.600 €' },
+          { label: 'Davon Zinsertrag', formel: '50.000 € − 39.600 €', ergebnis: '≈ 10.400 €' },
+        ],
+        fazit: 'Für 50.000 € in 15 Jahren genügen bei 3 % rund 220 € im Monat — gut 10.400 € davon erarbeiten die Zinsen. Den Rechner kann man auch so nutzen: Zielsumme und Laufzeit vorgeben und die passende Rate einkreisen.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Ratensparen vs. Einmalanlage',
+        spalteA: 'Ratensparen (Sparplan)',
+        spalteB: 'Einmalanlage',
+        zeilen: [
+          { kriterium: 'Einzahlung', a: 'regelmäßig, z. B. monatlich', b: 'einmalig zu Beginn' },
+          { kriterium: 'Einstieg', a: 'schon mit kleinen Beträgen', b: 'größere Summe nötig' },
+          { kriterium: 'Zinseszins', a: 'wirkt je Rate ab Einzahlung', b: 'wirkt auf die volle Summe ab Tag 1' },
+          { kriterium: 'Timing-Risiko', a: 'gestreut (Durchschnittskosteneffekt)', b: 'hängt stärker vom Einstiegszeitpunkt ab' },
+          { kriterium: 'Passend für', a: 'laufendes Sparen aus dem Einkommen', b: 'vorhandenes Kapital anlegen → Zinsrechner' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Typische Sparziele — vom Notgroschen bis zur Altersvorsorge',
+        html: `<p>Ein Sparplan ist immer Mittel zum Zweck — und der Zweck bestimmt Laufzeit und passende Anlageform. Vier typische Ziele:</p><p>Der <strong>Notgroschen</strong> (etwa drei bis sechs Monatsausgaben) gehört sicher und jederzeit verfügbar aufs Tagesgeld — er ist die Grundlage, bevor langfristig gespart wird. Für <strong>mittelfristige Anschaffungen</strong> wie ein Auto oder eine größere Reise (zwei bis fünf Jahre) eignen sich schwankungsarme Anlagen, damit das Geld zum Zeitpunkt verlässlich da ist.</p><p>Beim Aufbau von <strong>Eigenkapital für eine Immobilie</strong> zählt der konkrete Kaufzeitpunkt — je näher er rückt, desto vorsichtiger die Anlage. Die <strong>Altersvorsorge</strong> schließlich ist das langfristigste Ziel: Hier wirkt der Zinseszins über Jahrzehnte am stärksten, und kurzfristige Schwankungen lassen sich aussitzen. Faustregel: Je länger der Zeithorizont, desto mehr Rendite-Chance ist vertretbar — je kürzer, desto wichtiger werden Sicherheit und Verfügbarkeit.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Nominal vs. real — die Inflation nicht vergessen',
+        html: `<p>Ein Endkapital von 33.000 € klingt nach viel — aber was kann man sich in 20 Jahren tatsächlich dafür leisten? Hier kommt die <strong>Inflation</strong> ins Spiel. Sie senkt die Kaufkraft des Geldes Jahr für Jahr, sodass der <strong>reale</strong> Wert des Ersparten geringer ist als die nominale Zahl auf dem Konto.</p><p>Entscheidend ist deshalb die <strong>reale Rendite</strong> — die Rendite nach Abzug der Inflation. Eine Faustformel hilft: reale Rendite ≈ Zinssatz − Inflationsrate. Bei 3 % Zinsen und 2 % Inflation bleibt real nur rund 1 % echter Vermögenszuwachs. Liegt die Rendite unter der Inflationsrate, schrumpft die Kaufkraft trotz nominaler Gewinne.</p><p>Für langfristige Sparziele lohnt es sich, das Ergebnis zusätzlich inflationsbereinigt zu betrachten. Wie stark die Geldentwertung wirkt, zeigt der <a href="/finanzen/inflationsrechner">Inflationsrechner</a> im Detail.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Realer Wert des Endkapitals (bei 2 % Inflation)',
+        schritte: [
+          { label: 'Nominales Endkapital (100 €/20 J/3 %)', formel: 'siehe oben', ergebnis: '32.912 €' },
+          { label: 'Kaufkraftbereinigung', formel: '32.912 € ÷ 1,02²⁰', ergebnis: '22.150 €' },
+          { label: 'Kaufkraftverlust durch Inflation', formel: '32.912 € − 22.150 €', ergebnis: '10.762 €' },
+        ],
+        fazit: 'In heutiger Kaufkraft sind die 32.912 € nur rund 22.150 € wert — die Inflation kostet über 20 Jahre etwa ein Drittel. Deshalb sollte die erwartete Rendite möglichst über der Inflationsrate liegen.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Wie der Zinssatz wirkt: 100 € monatlich über 20 Jahre',
+        kopf: ['Zinssatz', 'Einzahlungen', 'Endkapital', 'Zinsertrag'],
+        zeilen: [
+          ['1 %', '24.000 €', '26.578 €', '2.578 €'],
+          ['3 %', '24.000 €', '32.912 €', '8.912 €'],
+          ['5 %', '24.000 €', '41.275 €', '17.275 €'],
+        ],
+        fussnote: 'Gleiche Einzahlung von 24.000 €, sehr unterschiedliches Ergebnis: Der Zinsertrag versechsfacht sich von 1 % auf 5 % — bei langer Laufzeit ist der Zinssatz der stärkste Hebel.',
+      },
+      {
+        typ: 'text',
+        titel: 'Sicher oder renditestark? Sparformen im Überblick',
+        html: `<p>Die Formel des Sparplans ist immer dieselbe — entscheidend ist, <strong>welches Produkt</strong> die Rendite liefert und wie sicher diese ist. Ein paar gängige Bausteine:</p><p><strong>Tagesgeld</strong> ist täglich verfügbar und sehr sicher, bietet aber meist nur niedrige Zinsen. <strong>Festgeld</strong> bindet das Geld für eine feste Laufzeit und zahlt dafür etwas mehr. Der <strong>Banksparplan</strong> kombiniert feste Raten mit garantierten, aber bescheidenen Zinsen. <strong>Fonds- und ETF-Sparpläne</strong> bieten höhere Renditechancen, schwanken dafür im Wert und eignen sich vor allem für lange Zeiträume.</p><p>Eine verbreitete Orientierung: Geld für <strong>kurzfristige Ziele</strong> (unter fünf Jahre) sicher und verfügbar halten, <strong>langfristiges Sparen</strong> stärker renditeorientiert ausrichten und breit streuen. Welche Mischung passt, hängt von Anlagehorizont, Risikobereitschaft und Zielen ab. Dieser Rechner trifft dazu keine Empfehlung — er rechnet nur den gewählten Zinssatz durch und ersetzt keine Anlageberatung.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Vermögenswirksame Leistungen & Förderungen nutzen',
+        html: `<p>Wer regelmäßig spart, sollte staatliche und betriebliche <strong>Förderungen</strong> nicht liegen lassen — sie wirken wie eine garantierte Zusatzrendite. Am bekanntesten sind die <strong>vermögenswirksamen Leistungen (VL)</strong>: Viele Arbeitgeber zahlen bis zu 40 € im Monat in einen Sparvertrag, oft ungenutzt, weil Beschäftigte sie schlicht nicht beantragen.</p><p>Liegt das Einkommen unter bestimmten Grenzen, kommt zusätzlich die <strong>Arbeitnehmer-Sparzulage</strong> vom Staat hinzu — je nach Anlageform für Bausparen oder Beteiligungssparen (etwa Aktienfonds). Auch die <strong>Wohnungsbauprämie</strong> fördert das Bausparen mit einem Zuschuss auf die eingezahlten Beträge.</p><p>Für die Altersvorsorge gibt es geförderte Wege wie die betriebliche Altersvorsorge per Entgeltumwandlung. Welche Förderung sich lohnt, hängt von Einkommen, Familienstand und Sparziel ab. Wichtig ist vor allem: zuerst prüfen, welche „geschenkten" Beiträge zustehen, bevor man den freien Sparbetrag festlegt — diese Zuschüsse erhöhen die effektive Rendite spürbar.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Sparplan sinnvoll aufsetzen',
+        punkte: [
+          'Sparziel und Zeithorizont festlegen — wofür und bis wann?',
+          'Realistische monatliche Rate wählen, die dauerhaft durchzuhalten ist.',
+          'Dauerauftrag direkt nach dem Gehaltseingang einrichten („zuerst sparen").',
+          'Erwartete Rendite konservativ ansetzen und die Inflation mitdenken.',
+          'Notgroschen (etwa drei Monatsausgaben) auf dem Tagesgeld halten, bevor langfristig gespart wird.',
+          'Sparrate bei Gehaltssteigerungen schrittweise erhöhen (Dynamik).',
+          'Breit streuen statt auf einen einzelnen Wert zu setzen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Früh starten schlägt hohe Rate',
+        text: 'Der wichtigste Hebel beim Ratensparen ist nicht die Höhe der Rate, sondern der frühe Start. Wer 100 € über 40 Jahre spart, kommt bei 3 % auf rund 92.800 € — wer dieselbe Gesamtsumme als 200 € über nur 20 Jahre einzahlt, landet bei rund 65.800 €. Gleicher Einsatz, über 27.000 € Unterschied, allein durch die längere Laufzeit. Lieber heute mit einem kleinen Betrag beginnen als auf den „perfekten" Zeitpunkt mit höherer Rate warten.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Beispielzinsen — keine Anlageberatung',
+        text: 'Die hier verwendeten Zinssätze (1 %, 3 %, 5 %) sind reine Rechenannahmen zur Veranschaulichung des Zinseszinses — keine Prognose und keine Renditezusage. Tatsächliche Erträge hängen vom gewählten Produkt ab und schwanken; bei Wertpapieren sind auch Verluste möglich. Steuern (Abgeltungsteuer) und Inflation mindern das reale Ergebnis zusätzlich. Dieser Rechner liefert eine unverbindliche Modellrechnung und ersetzt keine individuelle Anlage- oder Finanzberatung.',
+      },
+    ],
     faq: [
       {
         frage: 'Wie viel Geld sollte man monatlich sparen?',
@@ -1427,6 +1601,9 @@ Regelmäßiges Sparen ist der Schlüssel zum Vermögensaufbau. Hier einige bewä
         frage: 'Ab welchem Betrag lohnt sich ein Sparplan?',
         antwort: 'Ein Sparplan lohnt sich ab jedem Betrag — viele Broker und Banken bieten ETF-Sparpläne ab 1 Euro an. Üblich sind Einstiegsbeträge von 25 oder 50 Euro monatlich. Durch den Zinseszins-Effekt summieren sich auch kleine Beträge über lange Zeiträume erheblich. 50 Euro monatlich bei 7% Rendite ergeben nach 30 Jahren über 60.000 Euro.',
       },
+    ],
+    quellen: [
+      { titel: 'Zinseszins beim Ratensparen — Grundlagen', hinweis: 'Allgemeingültige Sparplan-/Zinseszinsformel; Endkapital = Summe der verzinsten Monatsraten. Beispielzinssätze sind Annahmen, keine Anlageberatung.' },
     ],
     affiliate: [
       { programId: 'verivox', context: 'sparplan' },
