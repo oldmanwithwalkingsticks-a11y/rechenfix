@@ -534,7 +534,7 @@ In der Praxis bedeutet das: Bei einer 40-Stunden-Woche und 5 Arbeitstagen sind m
   },
   {
     slug: 'pendlerpauschale-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-17',
     titel: 'Pendlerpauschale-Rechner',
     beschreibung: 'Pendlerpauschale 2026 berechnen: Entfernungspauschale, Steuerersparnis und Vergleich mit der Homeoffice-Pauschale.',
     kategorie: 'Arbeit & Recht',
@@ -602,6 +602,177 @@ Bei einem Arbeitsplatzwechsel im laufenden Jahr können die Pendlerpauschalen f�
 **Mobilitätsprämie für Geringverdiener**
 
 Wer unter dem Grundfreibetrag (12.348 € in 2026) verdient, zahlt keine Einkommensteuer und profitiert daher nicht von der Pendlerpauschale als Werbungskosten-Abzug. Für diese Steuerpflichtigen wurde mit dem Steueränderungsgesetz 2025 (BGBl. I 2025 Nr. 363) die Mobilitätsprämie nach § 101 EStG unbefristet eingeführt: 14 % der Pendlerpauschalen ab dem 21. Kilometer als Direktauszahlung mit dem Steuerbescheid.`,
+    // W19-Goldstandard (YMYL): pendlerpauschale-rechner auf volle Tiefe (15 Bausteine, ~1.560 W),
+    // Leitformat „beispielrechnung" (5× dominant). SSOT aus lib/berechnungen/pendlerpauschale.ts
+    // gespiegelt: PENDLERPAUSCHALE_SATZ_2026 = 0,38 €/km ab 1. km (§ 9 Abs. 1 Nr. 4 EStG i.d.F.
+    // StÄndG 2025); Höchstbetrag 4.500 €/Jahr außer Pkw (unbegrenzt); HO 6 €/Tag, max 210 Tage
+    // (§ 4 Abs. 5 Nr. 6c EStG). Beispielwerte aus der Lib berechnet (20 km/220 T = 1.672 €;
+    // 8 km = 668,80 €; 15 km = 1.254 €). Stufenmodell 0,30/0,38 NUR als 2025-Vergleich. 0,45 €
+    // nur als geplant (nicht beschlossen). Kein Autorenblock. Keine Steuerberatung. erklaerung Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Pendlerpauschale 2026 — die Reform ab dem ersten Kilometer',
+        html: `<p>Die <strong>Pendlerpauschale</strong> (offiziell Entfernungspauschale, § 9 Abs. 1 Nr. 4 EStG) ist ein Werbungskosten-Abzug für den Weg zwischen Wohnung und erster Tätigkeitsstätte. Sie mindert das zu versteuernde Einkommen — die tatsächliche Ersparnis hängt vom persönlichen Grenzsteuersatz ab.</p><p>Zum <strong>1. Januar 2026</strong> wurde die Pauschale reformiert: Seither gilt ein <strong>einheitlicher Satz von 0,38 € pro Entfernungskilometer ab dem ersten Kilometer</strong> (Steueränderungsgesetz 2025). Die bis 2025 geltende Staffelung — 0,30 € für die ersten 20 km, erst ab km 21 dann 0,38 € — ist damit entfallen.</p><p>Davon profitieren vor allem die <strong>Nahpendler</strong>: Wer 10 km einfach pendelt, bekommt jetzt auch auf diese Strecke 0,38 € statt zuvor 0,30 €. Der Satz gilt <strong>verkehrsmittelunabhängig</strong> — ob Auto, Bahn, Fahrrad oder zu Fuß spielt für die Höhe keine Rolle. Maßgeblich ist allein die einfache Entfernung.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Jahres-Pendlerpauschale bei 20 km',
+        schritte: [
+          { label: 'Einfache Entfernung', formel: '20 km', ergebnis: '20 km' },
+          { label: 'Satz pro km (ab 2026)', formel: '0,38 €', ergebnis: '0,38 €' },
+          { label: 'Tatsächliche Arbeitstage', formel: '220 Tage', ergebnis: '220' },
+          { label: 'Jahres-Pendlerpauschale', formel: '20 × 0,38 € × 220', ergebnis: '1.672 €' },
+        ],
+        fazit: 'Bei 20 km einfacher Strecke und 220 Arbeitstagen ergeben sich 1.672 € Pendlerpauschale im Jahr. Dieser Betrag mindert als Werbungskosten das zu versteuernde Einkommen — nicht direkt die Steuer.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Pendlerpauschale 2025 vs. 2026',
+        kopf: ['Entfernungsbereich', 'Satz 2025', 'Satz ab 2026'],
+        zeilen: [
+          ['1.–20. Kilometer', '0,30 €/km', '0,38 €/km'],
+          ['ab dem 21. Kilometer', '0,38 €/km', '0,38 €/km'],
+          ['einheitlich ab dem 1. km?', 'nein (gestaffelt)', 'ja'],
+        ],
+        fussnote: 'Die Staffelung 2025 (0,30 € / 0,38 €) wurde mit dem Steueränderungsgesetz 2025 zum 01.01.2026 durch einen einheitlichen Satz von 0,38 € ab dem ersten Kilometer ersetzt. Konkret heißt das für einen Nahpendler mit 12 km und 220 Tagen: 2025 noch 12 × 0,30 € × 220 = 792 €, ab 2026 dagegen 12 × 0,38 € × 220 = 1.003,20 € — gut 211 € mehr pro Jahr. Stand 06/2026.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Von der Pauschale zur echten Steuerersparnis',
+        schritte: [
+          { label: 'Pendlerpauschale (aus Beispiel oben)', formel: '1.672 €', ergebnis: '1.672 €' },
+          { label: 'Persönlicher Grenzsteuersatz', formel: '30 %', ergebnis: '30 %' },
+          { label: 'Tatsächliche Steuerersparnis', formel: '1.672 € × 30 %', ergebnis: '501,60 €' },
+          { label: 'Pro Monat', formel: '501,60 € ÷ 12', ergebnis: '41,80 €' },
+        ],
+        fazit: 'Die 1.672 € Pauschale bringen bei 30 % Grenzsteuersatz rund 502 € echte Ersparnis — etwa 42 € im Monat. Die Pauschale ist kein Erstattungsbetrag, sondern senkt das zu versteuernde Einkommen; die Ersparnis steigt mit dem Grenzsteuersatz.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum der Arbeitsweg absetzbar ist — das Nettoprinzip',
+        html: `<p>Hinter der Pendlerpauschale steht ein Grundgedanke des Steuerrechts: Besteuert wird nur das <strong>Netto-Einkommen</strong> nach Abzug der Kosten, die zur Erzielung des Einkommens nötig sind (objektives Nettoprinzip). Der Weg zur Arbeit ist eine solche <strong>Werbungskost</strong> — ohne ihn gäbe es kein Arbeitsentgelt.</p><p>Die Pauschale ist dabei eine bewusste <strong>Vereinfachung</strong>: Statt jeden Beleg für Sprit, Ticket oder Verschleiß zu sammeln, gewährt der Gesetzgeber einen festen Betrag je Entfernungskilometer. Das spart Bürokratie auf beiden Seiten und macht die Förderung verkehrsmittelneutral — der Radfahrer wird genauso behandelt wie der Autofahrer.</p><p>Genau diese Pauschalierung ist aber auch der Grund, warum die Höhe politisch umstritten ist: Sie wirkt über den Grenzsteuersatz und entlastet Besserverdiener absolut stärker. Die Mobilitätsprämie für Geringverdiener wurde unter anderem geschaffen, um diese Schieflage abzumildern.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Was zählt: einfache Strecke, volle Kilometer, Arbeitstage',
+        html: `<p>Drei Regeln bestimmen die Höhe. Erstens zählt nur die <strong>einfache Entfernung</strong> — die kürzeste Straßenverbindung zwischen Wohnung und Arbeit, nicht Hin- und Rückfahrt. Die Rückfahrt ist im Satz bereits enthalten. Eine längere Strecke ist nur ansetzbar, wenn sie verkehrsgünstiger ist und regelmäßig genutzt wird.</p><p>Zweitens zählen nur <strong>volle Kilometer</strong>: Angefangene Kilometer werden abgerundet, 24,3 km gelten also als 24 km (§ 9 EStG). Maßstab ist die kürzeste Straßenverbindung laut Routenplaner.</p><p>Drittens entscheiden die tatsächlichen <strong>Arbeitstage</strong>. Abzuziehen sind Urlaub, Feiertage, Krankheits- und Homeoffice-Tage. Bei einer Fünf-Tage-Woche akzeptieren die Finanzämter üblicherweise 220 bis 230 Tage ohne Einzelnachweis. Tage, an denen man nicht zur Arbeitsstätte gefahren ist, dürfen nicht mitgezählt werden — die Pauschale gilt pro tatsächlich gependeltem Tag.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Radfahrer: gleicher Satz, kein Auto nötig',
+        schritte: [
+          { label: 'Verkehrsmittel', formel: 'Fahrrad', ergebnis: '—' },
+          { label: 'Einfache Entfernung', formel: '8 km', ergebnis: '8 km' },
+          { label: 'Jahrespauschale', formel: '8 × 0,38 € × 220', ergebnis: '668,80 €' },
+        ],
+        fazit: 'Auch ohne Auto gilt der volle Satz: Wer 8 km mit dem Fahrrad zur Arbeit fährt, setzt 668,80 € an — exakt so viel wie ein Autofahrer auf gleicher Strecke. Die Pendlerpauschale ist verkehrsmittelunabhängig; selbst Fußgänger erhalten sie.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Höchstbetrag-Regel nach Verkehrsmittel',
+        kopf: ['Verkehrsmittel', 'Jahres-Höchstbetrag', 'Hinweis'],
+        zeilen: [
+          ['Eigener oder gestellter Pkw', 'unbegrenzt', 'kein Deckel'],
+          ['Bahn, Bus, ÖPNV, Fahrrad, zu Fuß', '4.500 €/Jahr', 'Deckel je Kalenderjahr'],
+          ['ÖPNV-Ticket teurer als Pauschale?', 'tatsächliche Kosten', 'höhere Ticketkosten ansetzbar'],
+        ],
+        fussnote: 'Der Höchstbetrag von 4.500 € gilt nur für Wege ohne eigenen Pkw. Wer mit dem eigenen oder einem vom Arbeitgeber überlassenen Auto fährt, kann die Entfernungspauschale ohne Obergrenze ansetzen (§ 9 Abs. 1 Nr. 4 EStG).',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Langpendler mit ÖPNV: der 4.500-€-Deckel greift',
+        schritte: [
+          { label: 'Rechnerische Pauschale (60 km, 220 T)', formel: '60 × 0,38 € × 220', ergebnis: '5.016 €' },
+          { label: 'Höchstbetrag ohne eigenen Pkw', formel: 'Deckel § 9 EStG', ergebnis: '4.500 €' },
+          { label: 'Mit eigenem Pkw dagegen', formel: 'kein Deckel', ergebnis: '5.016 €' },
+        ],
+        fazit: 'Mit Bahn oder ÖPNV ist die Pauschale auf 4.500 €/Jahr gedeckelt — die rechnerischen 5.016 € werden gekürzt. Wer dieselbe Strecke mit dem eigenen Pkw fährt, setzt die vollen 5.016 € an. Ausnahme: Sind die ÖPNV-Ticketkosten höher als 4.500 €, zählen die tatsächlichen Kosten.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Wann sich die Angabe überhaupt lohnt',
+        schritte: [
+          { label: 'Arbeitnehmer-Pauschbetrag 2026', formel: 'automatisch abgezogen', ergebnis: '1.230 €' },
+          { label: 'Pauschale bei 15 km / 220 Tage', formel: '15 × 0,38 € × 220', ergebnis: '1.254 €' },
+          { label: 'Übersteigt den Pauschbetrag um', formel: '1.254 € − 1.230 €', ergebnis: '24 €' },
+        ],
+        fazit: 'Erst ab rund 15 km einfacher Strecke (bei 220 Tagen) übersteigt die Pendlerpauschale allein den Arbeitnehmer-Pauschbetrag von 1.230 €, der ohnehin automatisch abgezogen wird. Darunter lohnt die Angabe nur zusammen mit weiteren Werbungskosten (Arbeitsmittel, Fortbildung, Beiträge).',
+      },
+      {
+        typ: 'text',
+        titel: 'Homeoffice vs. Pendeln — was ansetzbar ist',
+        html: `<p>Seit 2023 gibt es neben der Pendlerpauschale die <strong>Homeoffice-Pauschale</strong> (§ 4 Abs. 5 Nr. 6c EStG): <strong>6 € pro Homeoffice-Tag</strong>, höchstens 210 Tage im Jahr — also maximal 1.260 €. Sie gilt auch ohne separates Arbeitszimmer.</p><p>Die beiden Pauschalen schließen sich <strong>pro Tag</strong> aus: An einem Tag zählt entweder die Fahrt ins Büro (Pendlerpauschale) oder der Heimarbeitstag (Homeoffice-Pauschale) — nie beides. Übers Jahr lassen sie sich aber kombinieren: Bürotage als Pendlerpauschale, Heimtage als Homeoffice-Pauschale.</p><p>Welche Variante an einem mobilen Tag günstiger ist, hängt von der Entfernung ab. Faustregel: Bei <strong>kurzen Strecken</strong> kann die 6-€-Homeoffice-Pauschale den Pendler-Tagesbetrag übersteigen, bei <strong>längeren Strecken</strong> überwiegt die Pendlerpauschale. Die Schwelle liegt bei rund 16 km: 16 × 0,38 € = 6,08 €, knapp über den 6 € Homeoffice. Der Rechner zeigt den direkten Vergleich, sobald Homeoffice-Tage eingetragen werden.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Pendlerpauschale vs. Homeoffice-Pauschale',
+        spalteA: 'Pendlerpauschale',
+        spalteB: 'Homeoffice-Pauschale',
+        zeilen: [
+          { kriterium: 'Höhe', a: '0,38 €/km × Entfernung', b: '6 € pauschal pro Tag' },
+          { kriterium: 'Wofür', a: 'Tage mit Fahrt zur Arbeitsstätte', b: 'Tage im Homeoffice' },
+          { kriterium: 'Jahres-Deckel', a: '4.500 € (Pkw: unbegrenzt)', b: '1.260 € (210 Tage)' },
+          { kriterium: 'Günstiger', a: 'ab rund 16 km einfache Strecke', b: 'kurze Strecken / kein Arbeitsweg' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Mischwoche: 3 Tage Büro, 2 Tage Homeoffice (30 km)',
+        schritte: [
+          { label: '3 Bürotage/Woche → Pendlertage', formel: '≈ 132 Tage × 30 km × 0,38 €', ergebnis: '1.504,80 €' },
+          { label: '2 Homeoffice-Tage/Woche → HO-Tage', formel: '≈ 88 Tage × 6 €', ergebnis: '528,00 €' },
+          { label: 'Werbungskosten gesamt', formel: '1.504,80 € + 528,00 €', ergebnis: '2.032,80 €' },
+        ],
+        fazit: 'Eine 3-Büro-/2-Homeoffice-Woche bei 30 km kombiniert beide Pauschalen: 1.504,80 € Pendlerpauschale plus 528 € Homeoffice-Pauschale = 2.032,80 € Werbungskosten. Pro Tag zählt immer nur eine der beiden — übers Jahr addieren sie sich.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Homeoffice-Pauschale auf einen Blick',
+        werte: [
+          { label: 'Satz pro Homeoffice-Tag', wert: '6 €', hinweis: '§ 4 Abs. 5 Nr. 6c EStG' },
+          { label: 'Maximale Tage / Jahr', wert: '210 Tage', hinweis: 'gesetzlicher Deckel' },
+          { label: 'Höchstbetrag / Jahr', wert: '1.260 €', hinweis: '210 × 6 €' },
+          { label: 'Arbeitszimmer nötig?', wert: 'nein', hinweis: 'gilt auch ohne separaten Raum' },
+          { label: 'Pendlerpauschale am selben Tag?', wert: 'nein', hinweis: 'pro Tag nur eine Pauschale' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Sonderfälle & weitere Wegekosten',
+        html: `<p>Über den Standardfall hinaus gibt es mehrere <strong>Sonderregelungen</strong>. Bei <strong>doppelter Haushaltsführung</strong> sind zusätzlich wöchentliche Familienheimfahrten ansetzbar — eine pro Woche mit 0,38 € je Entfernungskilometer. <strong>Menschen mit Behinderung</strong> (Grad ab 70 bzw. ab 50 mit Merkzeichen G) dürfen statt der Pauschale die tatsächlichen Fahrtkosten ansetzen.</p><p>Auch <strong>Unfallkosten</strong> auf dem Arbeitsweg sind zusätzlich zur Pauschale abziehbar, da sie von ihr nicht abgegolten werden. Bei <strong>Bahn oder ÖPNV</strong> gilt: Sind die tatsächlichen Ticketkosten höher als die Entfernungspauschale, können die höheren Kosten angesetzt werden.</p><p>Für <strong>Geringverdiener</strong> unter dem Grundfreibetrag (2026: 12.348 €), die keine Einkommensteuer zahlen, greift die <strong>Mobilitätsprämie</strong> nach § 101 EStG — 14 % der berücksichtigten Entfernungspauschale, direkt mit dem Steuerbescheid ausgezahlt.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Pendlerpauschale clever nutzen — und Fehler vermeiden',
+        html: `<p>Wer nicht bis zur Steuererklärung warten will, kann sich die Pendlerpauschale schon unterm Jahr beim Finanzamt als <strong>Lohnsteuer-Freibetrag</strong> eintragen lassen (Antrag auf Lohnsteuer-Ermäßigung). Dann fließt die Entlastung Monat für Monat über ein höheres Netto, statt erst mit dem Steuerbescheid.</p><p>Drei <strong>typische Fehler</strong> kosten bares Geld. Erstens das Verwechseln von einfacher Strecke und Hin- und Rückfahrt — angesetzt wird nur die einfache Entfernung. Zweitens zu viele Arbeitstage: Homeoffice-, Urlaubs- und Krankheitstage gehören abgezogen, sonst droht bei einer Prüfung die Korrektur. Drittens das Übersehen des <strong>Arbeitnehmer-Pauschbetrags</strong> von 1.230 € — er wird automatisch gewährt, die Pauschale wirkt nur mit dem übersteigenden Teil.</p><p>Umgekehrt verschenken viele Pendler Geld, weil sie <strong>Zusatzkosten</strong> nicht ansetzen: Unfallkosten, höhere ÖPNV-Tickets oder Familienheimfahrten bei doppelter Haushaltsführung lassen sich zusätzlich geltend machen.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Pendlerpauschale in Anlage N richtig eintragen',
+        punkte: [
+          'Einfache Entfernung über einen Routenplaner ermitteln (kürzeste Straßenverbindung, volle Kilometer).',
+          'Tatsächliche Arbeitstage zählen — Urlaub, Feiertage, Krankheit und Homeoffice abziehen.',
+          'Pendlerpauschale in Anlage N, Zeile 31 ff. eintragen (Adresse, km, Tage, Verkehrsmittel).',
+          'Homeoffice-Tage separat als Homeoffice-Pauschale ansetzen (6 €/Tag).',
+          'Bei ÖPNV prüfen, ob die Ticketkosten höher als die Pauschale sind.',
+          'Belege bereithalten: Routenplaner-Ausdruck, Arbeitgeber-Bescheinigung über Homeoffice-Tage.',
+          'Weitere Werbungskosten sammeln — die Pauschale wirkt erst über dem Pauschbetrag von 1.230 €.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Kürzeste Straßenverbindung dokumentieren',
+        text: 'Dokumentieren Sie die kürzeste Straßenverbindung mit einem Routenplaner-Ausdruck und legen Sie ihn zu den Steuerunterlagen. Das Finanzamt setzt grundsätzlich die kürzeste Strecke an — eine längere, aber verkehrsgünstigere Route (z. B. Autobahn statt Ortsdurchfahrten) ist nur ansetzbar, wenn Sie sie regelmäßig nutzen und nachvollziehbar Zeit sparen. Halten Sie auch die genutzten Arbeitstage fest (Kalender, Arbeitgeber-Bescheinigung), damit Sie die angesetzte Tageszahl bei Rückfragen belegen können.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: '0,45 €/km geplant, nicht beschlossen — keine Steuerberatung',
+        text: 'Eine weitere Anhebung der Pauschale auf 0,45 €/km ist politisch im Gespräch, aber bislang NICHT beschlossen — maßgeblich bleibt der geltende Satz von 0,38 €/km ab dem ersten Kilometer (2026). Ein neuer Wert wird erst übernommen, wenn die Erhöhung im Bundesgesetzblatt steht. Dieser Rechner liefert eine unverbindliche Orientierung und ersetzt keine Steuerberatung — über die endgültige Anerkennung von Wegekosten entscheidet das Finanzamt im Einzelfall.',
+      },
+    ],
     faq: [
       {
         frage: 'Wie hoch ist die Pendlerpauschale 2026?',
@@ -631,6 +802,10 @@ Wer unter dem Grundfreibetrag (12.348 € in 2026) verdient, zahlt keine Einkomm
         frage: 'Was, wenn ich keine Steuern zahle?',
         antwort: 'Wer mit seinem zu versteuernden Einkommen unter dem Grundfreibetrag von 12.348 € (2026) liegt, zahlt keine Einkommensteuer und kann die Pendlerpauschale steuerlich nicht absetzen. In diesem Fall greift die Mobilitätsprämie nach § 101 EStG: Sie beträgt 14 % der Pendlerpauschalen ab dem 21. Kilometer und wird zusammen mit dem Steuerbescheid ausgezahlt. Die Mobilitätsprämie wurde durch das Steueränderungsgesetz 2025 (BGBl. I 2025 Nr. 363) unbefristet verlängert.',
       },
+    ],
+    quellen: [
+      { titel: '§ 9 Abs. 1 Nr. 4 EStG: Entfernungspauschale', url: 'https://www.gesetze-im-internet.de/estg/__9.html', hinweis: '0,38 €/km ab dem 1. km (ab 2026), Höchstbetrag 4.500 € außer Pkw' },
+      { titel: '§ 4 Abs. 5 Nr. 6c EStG: Homeoffice-Pauschale', url: 'https://www.gesetze-im-internet.de/estg/__4.html', hinweis: '6 €/Tag, max. 210 Tage (max. 1.260 €/Jahr)' },
     ],
     affiliate: { programId: 'wiso', context: 'pendlerpauschale' },
   },
