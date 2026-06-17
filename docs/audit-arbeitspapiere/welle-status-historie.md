@@ -44,6 +44,32 @@ oder Deployment-Artefakte zu verlieren.
 
 ---
 
+## 18.06.2026 — YMYL-Fix pendlerpauschale: gesetzliche km-Abrundung
+
+Folge-Fix zum in t21 gemeldeten Lib-Flag. Zwei atomare Commits:
+
+- **Logik** (`lib/berechnungen/pendlerpauschale.ts`, Commit `cc585ee`): `Math.round(km)`
+  → `Math.floor(km)`. § 9 Abs. 1 Nr. 4 EStG zählt nur volle Entfernungskilometer;
+  angefangene km werden abgeschnitten (24,7 km = 24 km), nicht kaufmännisch gerundet.
+  Vorher überschätzte `round` bei x,5–x,99 km den Pauschbetrag um einen ganzen km
+  (YMYL — Steuerbetrag). Nur die km-Rundung; `Math.round` für Homeoffice-Tage (Z.42)
+  und Präsenzquote (Z.80) bleiben unverändert (betreffen Arbeitstage, nicht die
+  gesetzliche km-Abrundung). Probe: 24,7 km × 0,38 € × 220 T → 2.006,40 € (statt
+  fälschlich 2.090,00 €).
+- **Content-Widerspruch** (`lib/rechner-config/arbeit.ts`, Commit `d61bee7`): Die
+  erklaerung-Stelle „Runden Sie auf volle Kilometer (ab 0,5 km aufrunden)" war
+  kaufmännisch und widersprach der gesetzlichen Abrundung sowie der bereits korrekten
+  contentBloecke-Aussage (24,3 km = 24 km). Auf Abrundung korrigiert (24,7 km = 24 km),
+  `letzteAktualisierung` auf 2026-06-18 gebumpt. contentBloecke unverändert (war korrekt),
+  Wortzahl ~1.568 weiter OK.
+
+**Lehre:** Beim Goldstandard-Spiegeln (t21) wurde der Lib-vs-Gesetz-Widerspruch
+entdeckt, im Content auf die gesetzlich korrekte Abrundung formuliert (Wert 24,3, wo
+round/floor gleich) und als Flag gemeldet — statt den Lib-Bug stillschweigend im
+Content zu kaschieren. Der eigentliche Lib-Fix folgte als separater YMYL-Commit.
+
+---
+
 ## 18.06.2026 — W19 Kategorie-Tranche t21–t25 Goldstandard (KOMPLETT, 41 Goldstandard)
 
 Gesammelter Doku-Sync für fünf Rechner aus fünf Kategorien (t21–t25); Doku auf
