@@ -27,7 +27,9 @@ export function berechnePendlerpauschale(eingabe: PendlerEingabe): PendlerErgebn
   const { entfernungKm, arbeitstageProJahr, grenzsteuersatz, homeofficeTageProWoche, arbeitstageProWoche } = eingabe;
   if (entfernungKm <= 0 || arbeitstageProJahr <= 0 || grenzsteuersatz <= 0) return null;
 
-  const km = Math.round(entfernungKm);
+  // § 9 Abs. 1 Nr. 4 EStG: nur volle Entfernungskilometer; angefangene km werden
+  // abgerundet (24,7 km = 24 km) — daher Math.floor, NICHT kaufmännisch runden.
+  const km = Math.floor(entfernungKm);
 
   // Einheitlicher Satz 0,38 €/km ab dem ersten Kilometer
   const pauschaleGesamt = km * PENDLERPAUSCHALE_SATZ_2026 * arbeitstageProJahr;
