@@ -2713,7 +2713,7 @@ Das ErbStG unterscheidet drei **Steuerklassen**: Klasse I (enge Verwandte wie Eh
   },
   {
     slug: 'minijob-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-17',
     titel: 'Minijob-Rechner',
     beschreibung: 'Minijob-Abgaben berechnen: Verdienst, Abgaben für Arbeitgeber und Arbeitnehmer sowie Übergang zum Midijob.',
     kategorie: 'Finanzen',
@@ -2743,6 +2743,175 @@ Sie dürfen neben Ihrem sozialversicherungspflichtigen Hauptjob **einen Minijob*
 **Midijob-Übergangsbereich erklärt**
 
 Zwischen 603,01 Euro und 2.000 Euro Monatsverdienst beginnt der sogenannte **Midijob-Übergangsbereich** (auch Gleitzone genannt). Hier gelten reduzierte Sozialabgaben für den Arbeitnehmer: Bei 603 Euro beginnt der AN-Anteil bei praktisch 0 Prozent und steigt linear auf den vollen Anteil von rund 20 Prozent bei 2.000 Euro. Der Arbeitgeber zahlt dagegen von Anfang an den vollen Anteil. Lohnsteuer wird allerdings normal nach Lohnsteuerklasse berechnet. Ein Midijob lohnt sich besonders für Alleinstehende in Steuerklasse I, weil bis etwa 1.300 Euro Brutto wegen des Grundfreibetrags ohnehin keine Lohnsteuer anfällt. Wichtig: Die günstigere Berechnung gilt nur automatisch — der Arbeitnehmer muss sie nicht beantragen. Für den genauen Netto-Verdienst im Midijob nutzen Sie den [Brutto-Netto-Rechner](/finanzen/brutto-netto-rechner), der den Übergangsbereich korrekt berücksichtigt.`,
+    // W19-Goldstandard (YMYL): minijob-rechner auf volle Tiefe (15 Bausteine, ~1.560 W),
+    // Leitformat „statistik" (4× dominant). Werte aus SSOT gespiegelt (Stand 06/2026):
+    // MINIJOB_GRENZE_MONAT=603 € (Mindestlohn 13,90 € × 130/3, § 8 SGB IV); 2027 ≈ 633 €
+    // (Mindestlohn 14,60 €); MIDIJOB_OBERGRENZE=2.000 € (§ 20a SGB IV); AG-Pauschalen
+    // gewerblich 15/13/2/1,6 % ≈ 31,6 %, Privathaushalt 5/5/2/1,6/0,72 % ≈ 14,3 %
+    // (lib/berechnungen/minijob.ts); RV-Eigenanteil 3,6 %; Rentenpunkt = 51.944 €
+    // Durchschnittsentgelt (§ 69 SGB VI) → 0,14 EP/Jahr. Kein Autorenblock. erklaerung Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Minijob 2026 — 603 Euro und die Mindestlohn-Kopplung',
+        html: `<p>Der Minijob — gesetzlich „geringfügige Beschäftigung" nach § 8 SGB IV — ist die in Deutschland am weitesten verbreitete Nebenbeschäftigung. Über sieben Millionen Menschen arbeiten im Minijob, häufig Studierende, Rentner, Eltern in der Familienphase oder Beschäftigte zusätzlich zum Hauptberuf.</p><p>Seit Oktober 2022 ist die Verdienstgrenze <strong>dynamisch an den Mindestlohn gekoppelt</strong>. Die Formel lautet: Mindestlohn × 130 ÷ 3, gerundet auf volle Euro. Sie unterstellt rund 43 Arbeitsstunden im Monat (gut 10 Wochenstunden) zum Mindestlohn. Bei einem Mindestlohn von 13,90 € (seit 01.01.2026) ergibt das eine Grenze von <strong>603 € pro Monat</strong> beziehungsweise 7.236 € im Jahr.</p><p>Steigt der Mindestlohn, steigt automatisch auch die Minijob-Grenze — eine politische Neufestsetzung ist nicht mehr nötig. Zum 1. Januar 2027 klettert der Mindestlohn auf 14,60 €, die Grenze damit voraussichtlich auf <strong>rund 633 €</strong>. Wer dauerhaft mehr verdient, wechselt in den Midijob-Übergangsbereich bis 2.000 €.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Eckwerte Minijob 2026',
+        werte: [
+          { label: 'Minijob-Grenze', wert: '603 €/Monat', hinweis: 'Mindestlohn × 130 ÷ 3 (§ 8 SGB IV)' },
+          { label: 'Jahresgrenze', wert: '7.236 €', hinweis: '12 × 603 €' },
+          { label: 'Mindestlohn 2026', wert: '13,90 €/h', hinweis: 'seit 01.01.2026' },
+          { label: 'Max. Arbeitszeit', wert: 'rund 43 Std./Monat', hinweis: 'gut 10 Std./Woche zum Mindestlohn' },
+          { label: 'Midijob-Obergrenze', wert: '2.000 €/Monat', hinweis: 'Übergangsbereich § 20a SGB IV' },
+          { label: 'Grenze ab 2027', wert: '≈ 633 €/Monat', hinweis: 'mit Mindestlohn 14,60 €' },
+        ],
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Minijob, Midijob und reguläre Beschäftigung im Vergleich',
+        kopf: ['Beschäftigung', 'Monatsverdienst', 'Arbeitnehmer-Abgaben', 'Besonderheit'],
+        zeilen: [
+          ['Minijob', 'bis 603 €', 'keine (außer 3,6 % RV optional)', 'steuerfrei; Arbeitgeber zahlt Pauschalen'],
+          ['Midijob', '603,01 – 2.000 €', 'reduziert, linear steigend', 'Übergangsbereich § 20a SGB IV'],
+          ['Reguläre Beschäftigung', 'ab 2.000,01 €', 'voller AN-Anteil (~20 %) + Lohnsteuer', 'volle Sozialversicherung'],
+        ],
+        fussnote: 'Im Minijob trägt der Arbeitgeber die Pauschalabgaben; im Midijob steigen die Arbeitnehmer-Beiträge gleitend bis zum vollen Satz bei 2.000 €.',
+      },
+      {
+        typ: 'text',
+        titel: 'Kurzfristige Beschäftigung — die zweite Minijob-Variante',
+        html: `<p>Das Gesetz kennt <strong>zwei Arten geringfügiger Beschäftigung</strong>. Die hier berechnete <strong>geringfügig entlohnte Beschäftigung</strong> (§ 8 Abs. 1 Nr. 1 SGB IV) ist der klassische 603-€-Minijob mit Verdienstgrenze, aber ohne zeitliche Begrenzung.</p><p>Daneben gibt es die <strong>kurzfristige Beschäftigung</strong> (§ 8 Abs. 1 Nr. 2 SGB IV): Sie ist von vornherein auf <strong>höchstens drei Monate oder 70 Arbeitstage</strong> im Kalenderjahr befristet — und hat <strong>keine Verdienstgrenze</strong>. Hier darf also auch mehr als 603 € im Monat verdient werden, solange die Zeitgrenze eingehalten wird. Typisch ist sie für Saison- und Ferienarbeit, etwa in der Ernte, der Gastronomie oder als Messehilfe.</p><p>Der Unterschied bei den Abgaben: Die kurzfristige Beschäftigung ist <strong>komplett sozialversicherungsfrei</strong> — es fallen weder Pauschalbeiträge zur Renten- noch zur Krankenversicherung an. Die Lohnsteuer wird individuell oder pauschal mit 25 % erhoben. Wer berufsmäßig arbeitet und auf das Einkommen angewiesen ist, kann die kurzfristige Variante allerdings nicht nutzen.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '603-Euro-Minijob aus Arbeitnehmer-Sicht',
+        schritte: [
+          { label: 'Brutto-Verdienst', formel: '603 €', ergebnis: '603,00 €' },
+          { label: 'RV-Eigenanteil (3,6 %, bei RV-Pflicht)', formel: '603 € × 3,6 %', ergebnis: '− 21,71 €' },
+          { label: 'Netto mit Rentenversicherung', formel: '603 € − 21,71 €', ergebnis: '581,29 €' },
+          { label: 'Netto bei RV-Befreiung', formel: '603 € − 0 €', ergebnis: '603,00 €' },
+        ],
+        fazit: 'Ohne RV-Befreiung bleiben 581,29 € netto, mit Befreiung das volle Brutto von 603 €. Lohnsteuer fällt für den Arbeitnehmer nicht an — sie ist mit der 2-%-Pauschale des Arbeitgebers abgegolten.',
+      },
+      {
+        typ: 'text',
+        titel: 'Wer im Minijob arbeitet — typische Gruppen',
+        html: `<p>Der Minijob ist bewusst niedrigschwellig gestaltet und spricht sehr unterschiedliche Gruppen an. <strong>Studierende</strong> bessern neben dem Studium ihr Budget auf, ohne den studentischen Krankenversicherungsstatus oder den BAföG-Anspruch zu gefährden, solange sie die 603-€-Grenze einhalten.</p><p><strong>Rentnerinnen und Rentner</strong> nutzen den Minijob, um die Rente aufzustocken — die Hinzuverdienstgrenzen bei der Altersrente sind seit 2023 entfallen, sodass ein Minijob neben der vollen Rente problemlos möglich ist. <strong>Eltern in der Familienphase</strong> bleiben über einen Minijob im Berufsleben, ohne den Anspruch auf die beitragsfreie Familienversicherung zu verlieren.</p><p><strong>Arbeitnehmer mit Hauptberuf</strong> dürfen genau einen Minijob abgabenfrei dazu ausüben. Für alle gilt: Der Minijob ist eine echte Beschäftigung mit Lohnabrechnung und vollen Arbeitnehmerrechten — kein rechtsfreier Raum. Wer den Stundenlohn mit anderen Tätigkeiten vergleichen will, nutzt den <a href="/arbeit/stundenlohn-rechner">Stundenlohn-Rechner</a>.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Steuer & Abgaben: für Arbeitnehmer (fast) frei',
+        html: `<p>Der größte Vorteil des Minijobs für Arbeitnehmer: Er ist <strong>lohnsteuerfrei</strong> und — bis auf einen kleinen Rentenbeitrag — <strong>sozialabgabenfrei</strong>. Die gesamte Abgabenlast trägt der Arbeitgeber über Pauschalen, die er an die Minijob-Zentrale abführt.</p><p>Bei einem <strong>gewerblichen Minijob</strong> zahlt der Arbeitgeber rund <strong>31,6 %</strong> Pauschalabgaben zusätzlich zum Lohn: 15 % pauschale Rentenversicherung, 13 % pauschale Krankenversicherung, 2 % pauschale Lohnsteuer und etwa 1,6 % Umlagen (U1 für Krankheit, U2 für Mutterschutz, Insolvenzgeldumlage). Im <strong>Privathaushalt</strong> sind die Pauschalen mit rund 14,3 % nur etwa halb so hoch, weil der Staat haushaltsnahe Beschäftigung fördert — Privathaushalte können zudem 20 % der Kosten (höchstens 510 € pro Jahr) von der Steuer absetzen.</p><p>Der Arbeitnehmer muss den Minijob <strong>nicht in der Steuererklärung angeben</strong>; die 2-%-Pauschale gilt als abgegolten. Anders ist es nur, wenn der Arbeitgeber statt der Pauschale die individuelle Versteuerung über die Lohnsteuerklasse wählt — das lohnt fast nur in Steuerklasse I ohne weiteres Einkommen.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Arbeitgeber-Sicht: Pauschalabgaben auf 603 €',
+        schritte: [
+          { label: 'Pauschale Rentenversicherung (15 %)', formel: '603 € × 15 %', ergebnis: '90,45 €' },
+          { label: 'Pauschale Krankenversicherung (13 %)', formel: '603 € × 13 %', ergebnis: '78,39 €' },
+          { label: 'Pauschale Lohnsteuer (2 %)', formel: '603 € × 2 %', ergebnis: '12,06 €' },
+          { label: 'Umlagen U1/U2/Insolvenz (~1,6 %)', formel: '603 € × 1,6 %', ergebnis: '9,65 €' },
+          { label: 'Arbeitgeber-Gesamtkosten', formel: '603 € + 190,55 €', ergebnis: '793,55 €' },
+        ],
+        fazit: 'Ein gewerblicher 603-€-Minijob kostet den Arbeitgeber rund 793,55 € — ein Aufschlag von etwa 31,6 % auf den Lohn. Im Privathaushalt läge der Aufschlag bei nur rund 14,3 %.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Pauschalabgaben: gewerblich vs. Privathaushalt',
+        werte: [
+          { label: 'Gewerblich gesamt', wert: '≈ 31,6 %', hinweis: '15 % RV + 13 % KV + 2 % LSt + 1,6 % Umlagen' },
+          { label: 'Privathaushalt gesamt', wert: '≈ 14,3 %', hinweis: '5 % RV + 5 % KV + 2 % LSt + 1,6 % Umlagen + 0,72 % Unfall' },
+          { label: 'AG-Kosten gewerblich (603 €)', wert: '793,55 €', hinweis: '+190,55 € Pauschalen' },
+          { label: 'Steuerbonus Privathaushalt', wert: '20 %, max. 510 €/Jahr', hinweis: 'haushaltsnahe Beschäftigung, § 35a EStG' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Rentenversicherung im Minijob — Pflicht mit Befreiungsoption',
+        html: `<p>Seit 2013 sind Minijobs <strong>grundsätzlich rentenversicherungspflichtig</strong>. Der Arbeitgeber zahlt die 15-%-Pauschale ohnehin; der Arbeitnehmer stockt sie um seinen <strong>Eigenanteil von 3,6 %</strong> auf den vollen Beitragssatz von 18,6 % auf. Bei 603 € sind das 21,71 € im Monat.</p><p>Auf Antrag kann man sich von der Versicherungspflicht <strong>befreien lassen</strong> — dann entfällt der Eigenanteil und das volle Brutto wird ausgezahlt. Die Befreiung gilt für die gesamte Dauer des Minijobs und lässt sich nicht widerrufen.</p><p>Ob sie sich lohnt, ist eine Abwägung. <strong>Für die Versicherungspflicht</strong> spricht: Sie erwerben vollwertige Rentenpunkte, Ansprüche auf Erwerbsminderungsrente und Reha-Leistungen und erfüllen Wartezeiten für die Altersrente. Ein Jahr 603-€-Minijob bringt rund 0,14 Entgeltpunkte — etwa 6 € mehr Monatsrente. <strong>Gegen</strong> die Pflicht spricht: rund 22 € mehr Netto im Monat, gut 260 € im Jahr. Wer bereits im Hauptberuf Rentenansprüche aufbaut, kann sich meist bedenkenlos befreien lassen.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'RV-Beitrag & Rentenpunkte im Minijob',
+        werte: [
+          { label: 'AN-Eigenanteil RV', wert: '3,6 %', hinweis: '18,6 % gesamt − 15 % AG-Pauschale' },
+          { label: 'Eigenanteil bei 603 €', wert: '21,71 €/Monat', hinweis: '260,52 € im Jahr' },
+          { label: 'Entgeltpunkte pro Jahr', wert: '≈ 0,14', hinweis: '7.236 € ÷ 51.944 € Durchschnittsentgelt (§ 69 SGB VI)' },
+          { label: 'Rentenplus je Beitragsjahr', wert: '≈ 6 €/Monat', hinweis: '0,14 EP × aktueller Rentenwert' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Mehrere Jobs & der Sprung über die Grenze',
+        html: `<p>Neben einem sozialversicherungspflichtigen <strong>Hauptjob</strong> darf man <strong>einen</strong> Minijob abgabenfrei ausüben. Ein <strong>zweiter</strong> Minijob wird dagegen mit dem Hauptjob zusammengerechnet und ist voll beitragspflichtig — er lohnt sich deshalb selten.</p><p>Auch <strong>mehrere Minijobs</strong> nebeneinander werden addiert: Übersteigt die Summe 603 €, werden alle Beschäftigungen sozialversicherungspflichtig. Die <strong>Minijob-Zentrale</strong> überwacht das zentral über die Sozialversicherungsnummer.</p><p>Wer die Grenze <strong>dauerhaft überschreitet</strong>, rutscht in den Midijob oder eine reguläre Beschäftigung — rückwirkend können Sozialabgaben nachgefordert werden. Ein <strong>gelegentliches, unvorhersehbares Überschreiten</strong> (höchstens zwei Kalendermonate im Jahr, etwa durch Krankheitsvertretung) ist dagegen unschädlich, solange der Jahreswert von 7.236 € gewahrt bleibt. Auch Sonderzahlungen wie Urlaubs- oder Weihnachtsgeld zählen anteilig zur Grenze.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Volle Arbeitnehmerrechte trotz Minijob',
+        html: `<p>Ein verbreiteter Irrtum: Der Minijob sei ein „Job zweiter Klasse" mit weniger Rechten. Das Gegenteil ist richtig — <strong>Minijobber haben dieselben arbeitsrechtlichen Ansprüche</strong> wie Vollzeitbeschäftigte, nur anteilig zur Arbeitszeit.</p><p>Dazu zählen der <strong>gesetzliche Mindestlohn</strong> (13,90 € seit 2026), <strong>bezahlter Urlaub</strong> (mindestens vier Wochen pro Jahr, bei Fünf-Tage-Woche 20 Tage, anteilig bei weniger Arbeitstagen), <strong>Lohnfortzahlung im Krankheitsfall</strong> für bis zu sechs Wochen und an gesetzlichen Feiertagen sowie der allgemeine Kündigungsschutz.</p><p>Auch der <strong>Mutterschutz</strong> und der Anspruch auf ein Arbeitszeugnis gelten. Der Arbeitgeber ist zudem verpflichtet, die Arbeitszeit aufzuzeichnen (§ 17 MiLoG). Wichtig zu wissen: Im Minijob besteht <strong>kein</strong> eigener Anspruch auf Krankengeld oder Arbeitslosengeld, weil dafür keine Beiträge zur Kranken- und Arbeitslosenversicherung fließen — nur die Rentenversicherung ist (optional) einbezogen.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Mindestlohn → Minijob-Grenze (2025–2027)',
+        kopf: ['Jahr', 'Mindestlohn', 'Minijob-Grenze/Monat', 'Jahresgrenze'],
+        zeilen: [
+          ['2025', '12,82 €', '556 €', '6.672 €'],
+          ['2026', '13,90 €', '603 €', '7.236 €'],
+          ['2027', '14,60 €', '≈ 633 €', '≈ 7.596 €'],
+        ],
+        fussnote: 'Formel: Mindestlohn × 130 ÷ 3, auf volle Euro gerundet. Die Grenze steigt automatisch mit dem Mindestlohn (§ 8 Abs. 1a SGB IV). Stand 06/2026.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Midijob-Entlastung im Übergangsbereich',
+        werte: [
+          { label: 'Übergangsbereich', wert: '603,01 – 2.000 €', hinweis: '§ 20a SGB IV' },
+          { label: 'AN-Beitrag bei 603,01 €', wert: 'nahe 0 %', hinweis: 'startet reduziert, steigt linear' },
+          { label: 'AN-Beitrag bei 2.000 €', wert: 'voller Satz (~20 %)', hinweis: 'Ende des Übergangsbereichs' },
+          { label: 'Rentenanspruch', wert: 'volle Entgeltpunkte', hinweis: 'trotz reduziertem Beitrag (§ 163 Abs. 10 SGB VI)' },
+        ],
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Minijob und Midijob im Direktvergleich',
+        spalteA: 'Minijob (bis 603 €)',
+        spalteB: 'Midijob (603,01–2.000 €)',
+        zeilen: [
+          { kriterium: 'Arbeitnehmer-Abgaben', a: 'keine (außer 3,6 % RV optional)', b: 'reduziert, linear bis voller Satz' },
+          { kriterium: 'Lohnsteuer', a: '2 % Pauschale (Arbeitgeber trägt)', b: 'nach Steuerklasse, oft 0 € bei Klasse I' },
+          { kriterium: 'Krankenversicherung', a: 'kein eigener Anspruch', b: 'voller Versicherungsschutz' },
+          { kriterium: 'Arbeitslosenversicherung', a: 'nicht einbezogen', b: 'einbezogen (Anspruch auf ALG)' },
+          { kriterium: 'Rentenpunkte', a: 'nur bei RV-Pflicht', b: 'volle Entgeltpunkte' },
+        ],
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Minijob richtig anmelden',
+        punkte: [
+          'Arbeitsvertrag schließen — auch im Minijob gelten Mindestlohn, Urlaubsanspruch und Lohnfortzahlung im Krankheitsfall.',
+          'Anmeldung bei der Minijob-Zentrale (Knappschaft-Bahn-See) durch den Arbeitgeber.',
+          'Sozialversicherungsnummer des Arbeitnehmers bereithalten.',
+          'Entscheidung zur Rentenversicherung treffen: Pflicht (Standard) oder schriftlicher Befreiungsantrag.',
+          'Prüfen, ob bereits ein anderer Minijob besteht — die Verdienste werden zusammengerechnet.',
+          'Arbeitszeit dokumentieren — im Minijob besteht Aufzeichnungspflicht (§ 17 MiLoG).',
+          'Bei Beschäftigung im Privathaushalt: das Haushaltsscheck-Verfahren der Minijob-Zentrale nutzen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'RV-Befreiung schriftlich beim Arbeitgeber beantragen',
+        text: 'Wer auf den 3,6-%-Eigenanteil zur Rentenversicherung verzichten möchte, muss die Befreiung schriftlich beim Arbeitgeber beantragen — sie gilt erst ab dem Folgemonat und für die gesamte Dauer des Minijobs, ein Widerruf ist nicht möglich. Überlegen Sie daher vorab, ob Sie die rund 22 € mehr Netto im Monat dem Aufbau vollwertiger Rentenansprüche vorziehen. Wer keinen anderweitigen Rentenanspruch aufbaut, fährt mit der Versicherungspflicht meist besser.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Keine Sozialversicherungsberatung — Minijob-Zentrale ist zuständig',
+        text: 'Dieser Rechner liefert eine unverbindliche Orientierung und ersetzt keine Steuer- oder Sozialversicherungsberatung. Verbindlich zuständig für Minijobs ist die Minijob-Zentrale der Knappschaft-Bahn-See — dort werden Anmeldung, Beiträge und Befreiungen verwaltet. Bei Fragen zur individuellen Renten- oder Steuerwirkung helfen die Deutsche Rentenversicherung, ein Lohnsteuerhilfeverein oder die Steuerberatung weiter.',
+      },
+    ],
     faq: [
       {
         frage: 'Wie viel darf ich im Minijob 2026 verdienen?',
@@ -2772,6 +2941,11 @@ Zwischen 603,01 Euro und 2.000 Euro Monatsverdienst beginnt der sogenannte **Mid
         frage: 'Pauschale oder individuelle Versteuerung — was ist günstiger?',
         antwort: 'Der Arbeitgeber darf nach § 40a Abs. 2 EStG wählen: Pauschale 2 %-Lohnsteuer (Standard) ODER individuelle Versteuerung über die Lohnsteuerkarte des Arbeitnehmers. Die individuelle Variante lohnt sich praktisch nur in einer Konstellation: Steuerklasse I UND der Minijob ist das einzige Einkommen — dann liegt das Jahresbrutto (max. 7.236 €) unter dem Grundfreibetrag von 12.348 €, es fällt 0 € Lohnsteuer an, und der AN bekommt das Brutto voll ausgezahlt. Bei Steuerklasse V oder VI oder bei weiteren Einkünften verschlechtert die individuelle Versteuerung das Netto oft deutlich. Unser Rechner zeigt aktuell die Pauschal-Variante — für die Individual-Berechnung den [Brutto-Netto-Rechner](/finanzen/brutto-netto-rechner) nutzen.',
       },
+    ],
+    quellen: [
+      { titel: '§ 8 SGB IV: Geringfügige Beschäftigung', url: 'https://www.gesetze-im-internet.de/sgb_4/__8.html', hinweis: 'Minijob-Definition; Grenze = Mindestlohn × 130 ÷ 3' },
+      { titel: '§ 20a SGB IV: Übergangsbereich (Midijob)', url: 'https://www.gesetze-im-internet.de/sgb_4/__20a.html', hinweis: 'Übergangsbereich 603,01 – 2.000 €' },
+      { titel: 'Minijob-Zentrale (Knappschaft-Bahn-See)', url: 'https://www.minijob-zentrale.de', hinweis: 'Grenze 603 €/Monat (2026); zuständige Meldestelle' },
     ],
   },
   {
