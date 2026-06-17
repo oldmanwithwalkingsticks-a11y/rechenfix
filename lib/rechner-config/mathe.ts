@@ -1060,7 +1060,7 @@ Der **ASCII-Code** (American Standard Code for Information Interchange) ordnet j
   },
   {
     slug: 'pythagoras-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-17',
     titel: 'Pythagoras-Rechner',
     beschreibung: 'Satz des Pythagoras berechnen: Fehlende Seite im rechtwinkligen Dreieck — mit Rechenweg und Grafik.',
     kategorie: 'Mathe & Schule',
@@ -1134,6 +1134,168 @@ Die Winkelsumme im Dreieck beträgt immer 180°, also ergibt α + β + 90° = 18
 - Den **Rechenweg Schritt für Schritt** zum Verstehen und Nachvollziehen
 - Eine **Grafik des Dreiecks** mit allen Maßen
 - Fläche, Umfang und beide spitzen Winkel`,
+    // W19-Goldstandard: pythagoras-rechner auf volle Tiefe (16 Bausteine, ~1.560 W),
+    // Leitformat „beispielrechnung" (6× dominant). Mathe-Profil: KEIN diagramm/statistik/
+    // vergleich. Disjunkt zu bruchrechner/primzahl/flaechenrechner (eigene Geometrie-Themen).
+    // Rechnung trivial-inline (c = √(a²+b²)) — Renderer/Logik unberührt, nur Content.
+    // Alle Beispielwerte exakt: 3-4-5, 5-12-13, Diagonale √41 ≈ 6,40 m, 27" → 59,8×33,6 cm,
+    // Leiter √22,75 ≈ 4,77 m. erklaerung bleibt Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Der Satz des Pythagoras — a² + b² = c²',
+        html: `<p>Der <strong>Satz des Pythagoras</strong> ist einer der wichtigsten Lehrsätze der Geometrie und das erste große Werkzeug, das Schülerinnen und Schüler in der Mittelstufe an die Hand bekommen. Er beschreibt eine feste Beziehung zwischen den drei Seiten eines <strong>rechtwinkligen Dreiecks</strong>: <strong>a² + b² = c²</strong>.</p><p>Dabei sind <strong>a</strong> und <strong>b</strong> die beiden <strong>Katheten</strong> — die Seiten, die den rechten Winkel einschließen. <strong>c</strong> ist die <strong>Hypotenuse</strong>, die dem rechten Winkel gegenüberliegt und immer die längste Seite ist. In Worten: Die Summe der Flächen der beiden Kathetenquadrate ist genauso groß wie die Fläche des Hypotenusenquadrats.</p><p>Aus dieser einen Gleichung lässt sich jede fehlende Seite bestimmen, sobald zwei Seiten bekannt sind. Sucht man die Hypotenuse, gilt c = √(a² + b²); sucht man eine Kathete, stellt man um zu a = √(c² − b²). Genau das übernimmt der Rechner — inklusive Rechenweg, Fläche und der beiden spitzen Winkel.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Hypotenuse aus zwei Katheten (3-4-5)',
+        schritte: [
+          { label: 'Gegeben: zwei Katheten', formel: 'a = 3, b = 4', ergebnis: '—' },
+          { label: 'Quadrate addieren', formel: '3² + 4² = 9 + 16', ergebnis: '25' },
+          { label: 'Wurzel ziehen', formel: 'c = √25', ergebnis: '5' },
+        ],
+        fazit: 'Die Hypotenuse ist 5 — das berühmte 3-4-5-Dreieck. Weil das Ergebnis glatt aufgeht, lässt es sich ohne Taschenrechner lösen; deshalb taucht es in Prüfungen so oft auf.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Kathete aus Hypotenuse + Kathete (c = 13, a = 5)',
+        schritte: [
+          { label: 'Gegeben: Hypotenuse + eine Kathete', formel: 'c = 13, a = 5', ergebnis: '—' },
+          { label: 'Umstellen und subtrahieren', formel: 'b² = 13² − 5² = 169 − 25', ergebnis: '144' },
+          { label: 'Wurzel ziehen', formel: 'b = √144', ergebnis: '12' },
+        ],
+        fazit: 'Die fehlende Kathete ist 12 (Tripel 5-12-13). Wichtig: Hier wird subtrahiert, nicht addiert — und die Hypotenuse (13) muss größer sein als die bekannte Kathete (5), sonst gäbe es keine Lösung.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Pythagoreische Zahlentripel',
+        kopf: ['Tripel (a-b-c)', 'a² + b²', '= c²'],
+        zeilen: [
+          ['3 - 4 - 5', '9 + 16 = 25', '5²'],
+          ['5 - 12 - 13', '25 + 144 = 169', '13²'],
+          ['8 - 15 - 17', '64 + 225 = 289', '17²'],
+          ['7 - 24 - 25', '49 + 576 = 625', '25²'],
+          ['20 - 21 - 29', '400 + 441 = 841', '29²'],
+        ],
+        fussnote: 'Zahlentripel mit drei ganzzahligen Seiten. Alle Vielfachen sind wieder Tripel (z. B. 6-8-10 oder 9-12-15). Es gibt unendlich viele — beliebt in Prüfungen, weil sich ohne Taschenrechner rechnen lässt.',
+      },
+      {
+        typ: 'text',
+        titel: 'Die drei Formen — und warum c die längste Seite ist',
+        html: `<p>Je nachdem, welche Seite gesucht ist, wird die Grundgleichung umgestellt. Für die <strong>Hypotenuse</strong> gilt c = √(a² + b²), für eine <strong>Kathete</strong> a = √(c² − b²) bzw. b = √(c² − a²). Beim Kathetensuchen wird also subtrahiert, beim Hypotenusensuchen addiert.</p><p>Wichtig ist die Reihenfolge: Bei der Kathetenformel muss die <strong>Hypotenuse größer sein</strong> als die bekannte Kathete — sonst stünde unter der Wurzel eine negative Zahl, und ein solches Dreieck kann nicht existieren. Das ist eine nützliche Plausibilitätskontrolle.</p><p>Dass c zwangsläufig die <strong>längste Seite</strong> ist, folgt direkt aus der Formel: c² ist die Summe zweier positiver Quadrate und damit größer als jedes einzelne von ihnen. Die Hypotenuse liegt außerdem immer <strong>gegenüber dem rechten Winkel</strong>; die beiden Katheten bilden den 90°-Winkel an ihrer gemeinsamen Ecke. Wer die Seiten vor dem Rechnen richtig zuordnet, hat den halben Fehler schon vermieden.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Welche Formel bei welcher gesuchten Größe?',
+        kopf: ['Gesucht', 'Bekannt', 'Formel'],
+        zeilen: [
+          ['Hypotenuse c', 'beide Katheten a, b', 'c = √(a² + b²)'],
+          ['Kathete a', 'c und b', 'a = √(c² − b²)'],
+          ['Kathete b', 'c und a', 'b = √(c² − a²)'],
+          ['Fläche A', 'beide Katheten a, b', 'A = (a × b) / 2'],
+          ['Spitzer Winkel α', 'a und b', 'α = arctan(a / b)'],
+        ],
+        fussnote: 'Die ersten drei Zeilen sind nur Umstellungen derselben Gleichung a² + b² = c². Fläche und Winkel folgen direkt aus den Seiten — der rechte Winkel γ ist immer 90°, der zweite spitze Winkel β = 90° − α.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Diagonale eines Rechtecks (4 m × 5 m)',
+        schritte: [
+          { label: 'Rechteck = zwei rechtwinklige Dreiecke', formel: 'a = 4 m, b = 5 m', ergebnis: '—' },
+          { label: 'Diagonale = Hypotenuse', formel: 'd = √(4² + 5²) = √(16 + 25)', ergebnis: '√41' },
+          { label: 'Numerisch', formel: '√41', ergebnis: '≈ 6,40 m' },
+        ],
+        fazit: 'Die Diagonale eines 4 × 5 m großen Zimmers misst rund 6,40 m. Jedes Rechteck zerfällt entlang der Diagonale in zwei rechtwinklige Dreiecke — Pythagoras greift direkt. Praktisch beim Möbeltransport oder Teppichverlegen.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Bildschirmdiagonale: 27 Zoll in Breite & Höhe (16:9)',
+        schritte: [
+          { label: 'Diagonale 27 Zoll in cm', formel: '27 × 2,54 cm', ergebnis: '68,58 cm' },
+          { label: 'Breite (16:9)', formel: '68,58 × 16 ÷ √(16² + 9²)', ergebnis: '≈ 59,8 cm' },
+          { label: 'Höhe (16:9)', formel: '68,58 × 9 ÷ √(16² + 9²)', ergebnis: '≈ 33,6 cm' },
+        ],
+        fazit: 'Ein 27-Zoll-Monitor (16:9) ist rund 59,8 cm breit und 33,6 cm hoch. Probe: √(59,8² + 33,6²) ≈ 68,6 cm — exakt die Diagonale. Die Zoll-Angabe beschreibt also immer die Diagonale, nie Breite oder Höhe.',
+      },
+      {
+        typ: 'text',
+        titel: 'Wann gilt der Satz — nur im rechten Winkel',
+        html: `<p>Der Satz des Pythagoras gilt <strong>ausschließlich im rechtwinkligen Dreieck</strong>. Fehlt der 90°-Winkel, stimmt a² + b² = c² nicht mehr — dann braucht man den Kosinussatz. Das ist die häufigste Fehlerquelle: Wer Pythagoras auf ein beliebiges Dreieck anwendet, rechnet falsch.</p><p>Umgekehrt liefert der Satz ein praktisches Prüfwerkzeug, die <strong>Umkehrung</strong>: Gilt in einem Dreieck a² + b² = c² (mit c als längster Seite), dann ist es <strong>rechtwinklig</strong>. Stimmt die Gleichung nicht, fehlt der rechte Winkel.</p><p>Genau das nutzt das Handwerk seit Jahrtausenden. Mit der <strong>Knotenschnur</strong> oder dem 3-4-5-Trick lässt sich ohne Winkelmesser ein exakter rechter Winkel anschlagen: Eine Schnur mit Markierungen bei 3, 4 und 5 Einheiten, zum Dreieck gespannt, bildet automatisch einen 90°-Winkel — weil 3² + 4² = 5² gilt. Schon die Ägypter spannten so rechtwinklige Ecken für ihre Bauwerke.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Umkehrung: Ist das Dreieck rechtwinklig?',
+        schritte: [
+          { label: 'Dreieck A: Seiten 6, 8, 10', formel: '6² + 8² = 36 + 64 = 100; 10² = 100', ergebnis: 'gleich → rechtwinklig' },
+          { label: 'Dreieck B: Seiten 5, 6, 8', formel: '5² + 6² = 25 + 36 = 61; 8² = 64', ergebnis: '61 ≠ 64 → nicht rechtwinklig' },
+        ],
+        fazit: 'Die Umkehrung als Test: Stimmt a² + b² = c² (mit c als längster Seite), ist das Dreieck rechtwinklig — wie bei 6-8-10. Bei 5-6-8 weichen 61 und 64 voneinander ab, also fehlt der rechte Winkel. So prüft man Winkel ganz ohne Geodreieck.',
+      },
+      {
+        typ: 'text',
+        titel: 'Anwendungen im Alltag: Bau, Leiter, Navigation',
+        html: `<p>Pythagoras ist keine reine Schulmathematik — er steckt überall dort, wo rechte Winkel und Entfernungen zusammentreffen.</p><p>Im <strong>Bau und Handwerk</strong> dient er zum Anschlagen rechter Winkel, zum Ausmessen von Raumdiagonalen und zur Berechnung von Treppen- und Dachhöhen. Bei der <strong>Leiter an der Wand</strong> verrät er, wie hoch eine Leiter reicht, wenn Länge und Fußabstand bekannt sind — oder umgekehrt, welchen Sicherheitsabstand der Fuß haben darf.</p><p>In der <strong>Navigation</strong> liefert er Luftlinien-Entfernungen aus zwei Koordinatendifferenzen, in der <strong>Technik</strong> die Diagonale von Bildschirmen und Bauteilen. In der <strong>Physik</strong> zerlegt er Kräfte und Geschwindigkeiten in ihre Komponenten — die resultierende Größe ist die Hypotenuse aus den beiden senkrecht zueinander stehenden Anteilen. Selbst beim <strong>Sport</strong> (Feld-Diagonale, Schussbahn) und in der <strong>Computergrafik</strong> (Abstände zwischen Punkten) ist die immer gleiche Formel a² + b² = c² am Werk.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Leiter an der Wand: erreichte Höhe',
+        schritte: [
+          { label: 'Gegeben: Leiterlänge + Fußabstand', formel: 'c = 5 m (Leiter), a = 1,5 m (Abstand)', ergebnis: '—' },
+          { label: 'Erreichte Höhe = Kathete', formel: 'h = √(5² − 1,5²) = √(25 − 2,25)', ergebnis: '√22,75' },
+          { label: 'Numerisch', formel: '√22,75', ergebnis: '≈ 4,77 m' },
+        ],
+        fazit: 'Eine 5 m lange Leiter mit 1,5 m Fußabstand zur Wand reicht rund 4,77 m hoch. Je näher der Fuß an der Wand steht, desto höher reicht die Leiter — aber desto steiler und kippanfälliger wird sie. Sicherheits-Faustregel: Fußabstand etwa ein Viertel der Leiterlänge.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Häufige Werte: Katheten a, b → Hypotenuse c',
+        kopf: ['Kathete a', 'Kathete b', 'Hypotenuse c = √(a² + b²)'],
+        zeilen: [
+          ['3', '4', '5 (exakt)'],
+          ['6', '8', '10 (exakt)'],
+          ['5', '12', '13 (exakt)'],
+          ['1', '1', '≈ 1,41 (√2)'],
+          ['3', '5', '≈ 5,83'],
+          ['10', '10', '≈ 14,14'],
+        ],
+        fussnote: 'Glatte Ergebnisse stammen aus pythagoräischen Tripeln; die übrigen sind gerundet. √2 ≈ 1,41 ist die Diagonale des Einheitsquadrats — eine der bekanntesten irrationalen Zahlen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Geschichte & die Idee hinter dem Beweis',
+        html: `<p><strong>Pythagoras von Samos</strong> (ca. 570–495 v. Chr.) war ein griechischer Mathematiker und Philosoph — doch der nach ihm benannte Satz war schon lange vor ihm bekannt. <strong>Babylonische</strong> Tontafeln belegen, dass man bereits um 1800 v. Chr. mit pythagoräischen Zahlentripeln rechnete, und auch die <strong>Ägypter</strong> nutzten die Beziehung beim Seilspannen. Pythagoras' Schule hat den Satz aber systematisiert und erstmals allgemein <strong>bewiesen</strong>.</p><p>Die Beweisidee lässt sich anschaulich zeigen: Setzt man über jede der drei Seiten ein <strong>Quadrat</strong>, so ist die Fläche des großen Quadrats über der Hypotenuse genau so groß wie die beiden Kathetenquadrate zusammen. Es existieren über 350 verschiedene Beweise — von Zerlegungsbeweisen mit verschobenen Teilflächen bis zu einem, den der spätere US-Präsident James Garfield 1876 fand.</p><p>Dieser Reichtum an Beweisen macht den Satz zu einem der am besten untersuchten Ergebnisse der Mathematik überhaupt — und zugleich zu einem der praktischsten.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Häufige Fehler beim Anwenden',
+        html: `<p>Ein paar Stolperfallen tauchen in Klassenarbeiten immer wieder auf. Der häufigste Fehler ist das <strong>Verwechseln von Hypotenuse und Kathete</strong>: Wer beim Suchen einer Kathete versehentlich addiert statt subtrahiert, bekommt ein zu großes Ergebnis. Merksatz: Ist die längste Seite gegeben, wird subtrahiert.</p><p>Zweitens das <strong>Quadrieren vergessen</strong> oder in falscher Reihenfolge rechnen — es gilt „erst quadrieren, dann addieren, dann Wurzel". Drittens werden gern <strong>Einheiten gemischt</strong>: Wer Zentimeter und Meter unbedacht zusammenwirft, rechnet falsch; vor dem Einsetzen alles in dieselbe Einheit bringen.</p><p>Eine weitere Falle ist die <strong>fehlende Rechtwinkligkeit</strong> — der Satz gilt nur bei 90°. Und schließlich lohnt immer die <strong>Schlussprobe</strong>: Die Hypotenuse muss größer sein als jede einzelne Kathete, aber kleiner als deren Summe. Liegt das Ergebnis außerhalb dieser Spanne, steckt irgendwo ein Rechenfehler.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Pythagoras richtig anwenden',
+        punkte: [
+          'Prüfen, ob das Dreieck wirklich einen rechten Winkel (90°) hat — sonst gilt der Satz nicht.',
+          'Die Hypotenuse (c) ist immer die längste Seite und liegt dem rechten Winkel gegenüber.',
+          'Hypotenuse gesucht → addieren: c = √(a² + b²).',
+          'Kathete gesucht → subtrahieren: a = √(c² − b²).',
+          'Beim Kathetensuchen muss die Hypotenuse größer sein als die bekannte Kathete.',
+          'Einheiten vor dem Rechnen angleichen (alles in m oder alles in cm).',
+          'Ergebnis prüfen: c muss größer als jede einzelne Kathete sein.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Die Hypotenuse sicher erkennen',
+        text: 'Die Hypotenuse finden Sie mit zwei Merkmalen: Sie liegt immer dem rechten Winkel gegenüber und ist immer die längste Seite. Markieren Sie zuerst den rechten Winkel im Dreieck — die Seite, die ihn nicht berührt, ist die Hypotenuse (c). Die beiden Seiten, die den 90°-Winkel einschließen, sind die Katheten (a und b). Diese Zuordnung vor dem Rechnen festzulegen verhindert den häufigsten Fehler: Addieren statt Subtrahieren beim Suchen einer Kathete.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Kein rechter Winkel? Dann der Kosinussatz',
+        text: 'Hat das Dreieck keinen rechten Winkel, ist der Satz des Pythagoras nicht anwendbar. Für beliebige (schiefwinklige) Dreiecke gilt stattdessen der Kosinussatz: c² = a² + b² − 2ab × cos(γ), wobei γ der Winkel gegenüber der Seite c ist. Bei γ = 90° wird cos(90°) = 0, der letzte Term fällt weg — und es bleibt genau a² + b² = c². Der Satz des Pythagoras ist also ein Spezialfall des Kosinussatzes für den rechten Winkel.',
+      },
+    ],
     faq: [
       {
         frage: 'Was besagt der Satz des Pythagoras?',
@@ -1159,6 +1321,9 @@ Die Winkelsumme im Dreieck beträgt immer 180°, also ergibt α + β + 90° = 18
         frage: 'Wie berechne ich die Bildschirmdiagonale?',
         antwort: 'Bei Monitoren ist die Diagonale die angegebene Zollgröße (1 Zoll = 2,54 cm). Wenn Sie Breite und Höhe haben, gilt Diagonale = √(Breite² + Höhe²). Für 16:9-Monitore ist die Breite 87 % und die Höhe 49 % der Diagonale. Ein 27-Zoll-Monitor (68,58 cm) hat also rund 59,7 cm Breite und 33,6 cm Höhe. Unser Pythagoras-Rechner hilft dabei, die Dimensionen schnell umzurechnen.',
       },
+    ],
+    quellen: [
+      { titel: 'Satz des Pythagoras — Geometrie-Grundlagen', hinweis: 'Allgemeingültiger Lehrsatz (Sekundarstufe I): a² + b² = c² gilt im rechtwinkligen Dreieck; die Umkehrung dient als Rechtwinkligkeits-Test.' },
     ],
   },
   {
