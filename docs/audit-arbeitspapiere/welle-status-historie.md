@@ -44,6 +44,54 @@ oder Deployment-Artefakte zu verlieren.
 
 ---
 
+## 18.06.2026 — W19 Kategorie-Tranche t21–t25 Goldstandard (KOMPLETT, 41 Goldstandard)
+
+Gesammelter Doku-Sync für fünf Rechner aus fünf Kategorien (t21–t25); Doku auf
+Karstens Wunsch erst nach t25 nachgezogen. Alle fünf: `contentBloecke` + `quellen`
+(Neueinträge), `npm run build` Vercel-grün, nur die jeweilige Kategorie-Datei
+committet (client-data.ts-Drift bewusst nicht), Self-Check Wortzahl + Struktur
+grün, kein `text`-Block > 170 W, kein Autorenblock, atomare Einzel-Commits.
+
+- **t21 pendlerpauschale-rechner** (arbeit.ts, YMYL, Leitformat **beispielrechnung**
+  6×, 19 Blöcke, ~1.568 W, Commit `4604f88`). SSOT aus `pendlerpauschale.ts`:
+  0,38 €/km ab dem 1. km (§ 9 Abs. 1 Nr. 4 EStG i.d.F. StÄndG 2025), Stufenmodell
+  0,30/0,38 nur als 2025-Vergleich; Höchstbetrag 4.500 € außer Pkw; HO 6 €/Tag,
+  max 210 (§ 4 Abs. 5 Nr. 6c EStG). Beispiele lib-exakt (20 km = 1.672 €, 8 km =
+  668,80 €, 60 km → Deckel). 0,45 € nur als geplant. **Offener Flag:** Lib nutzt
+  `Math.round(km)` (24,7 → 25), § 9 EStG verlangt Abrundung (Floor) — Content
+  formuliert die gesetzliche Abrundung (Wert 24,3 → 24, wo round/floor gleich),
+  Lib-Fix + erklaerung-Zeile „ab 0,5 aufrunden" als Folge-Fix an Karsten gemeldet.
+- **t22 pythagoras-rechner** (mathe.ts, Leitformat **beispielrechnung** 6×, 18 Blöcke,
+  ~1.647 W, Commit `51de908`). Mathe-Profil: kein diagramm/statistik/vergleich.
+  Beispiele exakt (3-4-5, 5-12-13, Diagonale √41 ≈ 6,40 m, 27" → 59,8×33,6 cm,
+  Leiter √22,75 ≈ 4,77 m, Umkehrung 6-8-10 vs 5-6-8). Hinweis: Struktur-Cosinus
+  1.00 zu anderen Mathe-Rechnern ist die bekannte **Mathe-Profil-Cluster-Eigenschaft**
+  (alle mathe-Rechner teilen die 5-Typen-Palette) — „nicht identisch" ist auf
+  Sequenz-Ebene erfüllt (eigene 18-Block-Folge).
+- **t23 streaming-kosten-rechner** (alltag.ts, Leitformat **statistik** 4×, 19 Blöcke,
+  ~1.584 W, Commit `49156dc`). Logik aus `streaming-kosten.ts` (Monat = Abo-Summe
+  ×12 Jahr, ×5/×10, Arbeitsstunden = Jahr ÷ Mindestlohn 13,90 €). **Keine festen
+  Anbieterpreise** — neutraler Beispiel-Haushalt (66 €/Monat) + Kategorie-Spannen,
+  „Preise ändern sich"-Hinweis.
+- **t24 quadratmeter-rechner** (wohnen.ts, Leitformat **beispielrechnung** 7×, 18 Blöcke,
+  ~1.561 W, Commit `edc39d4`). Wohn-Kontext (WoFlV, Miete/m², BGH-Mietabweichung) —
+  disjunkt zu mathe/flaechenrechner via eigenem Vergleichs-Baustein Wohnfläche vs.
+  Grundfläche (flaechenrechner nicht in Ähnlichkeitsliste). Geometrie aus
+  `quadratmeter.ts` gespiegelt; WoFlV gegen § 4 verifiziert (≥2 m 100 %, 1–<2 m 50 %,
+  <1 m 0 %, Balkon i.d.R. 25 %).
+- **t25 schlaf-rechner** (gesundheit.ts, Leitformat **tabelle** 4×, 18 Blöcke, ~1.580 W,
+  Commit `68a87f2`). **Wellbeing-Handling** (Gesundheit, moderat): neutral-informativ,
+  keine Schlafmittel-Empfehlung, kein Leistungsdruck, warnung-Infobox zur ärztlichen
+  Abklärung. Logik aus `schlaf.ts` (90-Min-Zyklus, 15-Min-Einschlafpuffer, alters-
+  gestaffelte Dauer, 26,7 J im Schlaf); Zeiten lib-exakt (7:00 → 23:15/21:45;
+  Bett 23:00 → 06:45). vergleich-Baustein brach den anfänglichen 1.00-Cosinus zu
+  trinkgeld auf 0,97.
+
+**Tranche-Stand:** Kategorie-Tranche t21–t25 **KOMPLETT** (Arbeit, Mathe, Alltag,
+Wohnen, Gesundheit — je ein Rechner); contentBloecke-Goldstandard-Set auf **41 Rechner**.
+
+---
+
 ## 17.06.2026 — W19 Finanzen-Tranche t17–t20 Goldstandard (KOMPLETT, 36 Goldstandard)
 
 Gesammelter Doku-Sync für vier finanzen-Rechner (t17–t20); Doku auf Karstens
