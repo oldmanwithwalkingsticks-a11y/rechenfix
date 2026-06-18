@@ -2155,7 +2155,7 @@ Kaufen Sie immer 1–2 Fliesen extra als Reserve. Fliesen aus unterschiedlichen 
   },
   {
     slug: 'laminat-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-18',
     titel: 'Laminat-Rechner',
     beschreibung: 'Laminat- und Parkettbedarf berechnen: Pakete, Verschnitt und Materialkosten.',
     kategorie: 'Wohnen & Energie',
@@ -2198,6 +2198,159 @@ Laminat gibt es in großer Preisspanne: Einfache Klasse-31-Böden kosten 5–10 
 **Tipps für den Einkauf**
 
 Kaufen Sie ein Paket extra als Reserve — für spätere Reparaturen. Laminat aus verschiedenen Produktionschargen kann Farbabweichungen haben. Lagern Sie die Pakete vor dem Verlegen mindestens 48 Stunden im Raum, damit sich das Material an Temperatur und Luftfeuchtigkeit anpasst (Akklimatisierung). Auf mineralischen Untergründen (Estrich) ist eine Dampfbremse unter der Trittschalldämmung Pflicht.`,
+    // W19-Goldstandard: laminat-rechner auf volle Tiefe (15 Bausteine, ~1.560 W), Leitformat
+    // „beispielrechnung" 5× dominant. MATERIAL-Bedarf inkl. Verschnitt — disjunkt zu
+    // quadratmeter (Wohnfläche/WoFlV). Logik aus lib/berechnungen/laminat.ts gespiegelt:
+    // Bedarf = Fläche × (1+Verschnitt%); Pakete = ceil(Bedarf/Paketinhalt); Trittschall ×1,05;
+    // Sockelleisten = Umfang ×1,10; Materialkosten = Pakete × Preis; Preis/m² = Kosten/Fläche.
+    // Verschnitt-Sätze aus Rechner-Realität (config): gerade/Schiffsboden 10 %, diagonal 15 %,
+    // Fischgrät 20 % (NICHT 5/10 aus Prompt — L-34: Rechner schlägt Annahme). Paket 2,49 m² /
+    // 30 € gespiegelt (beispiel-Feld). erklaerung bleibt Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Laminatbedarf richtig berechnen (Fläche + Verschnitt)',
+        html: `<p>Wie viel Laminat Sie kaufen müssen, ergibt sich aus zwei Größen: der <strong>Bodenfläche</strong> des Raumes und einem <strong>Verschnitt-Zuschlag</strong>. Die reine Fläche (Länge × Breite, bei verwinkelten Räumen in Rechtecke zerlegt und addiert) ist nur der Ausgangspunkt.</p><p>Beim Verlegen entsteht zwangsläufig <strong>Verschnitt</strong>: An Wänden, in Ecken und um Heizungsrohre werden Dielen zugeschnitten, und die Reststücke passen nicht überall wieder. Deshalb rechnet man auf die Fläche einen Zuschlag — bei gerader Verlegung (Schiffsboden) etwa <strong>10 %</strong>, bei diagonaler rund <strong>15 %</strong>, bei Fischgrät bis <strong>20 %</strong>.</p><p>Aus der so ermittelten benötigten Fläche werden schließlich <strong>ganze Pakete</strong>: Da Laminat nur paketweise verkauft wird, teilt man den Bedarf durch den Paketinhalt und rundet auf. Genau diese Schritte — Fläche, Verschnitt, Pakete — nimmt der Rechner ab und nennt zusätzlich Trittschalldämmung, Sockelleisten und den Materialüberschuss, der als Reserve übrig bleibt.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Rechteckiger Raum: 20 m² + Verschnitt',
+        schritte: [
+          { label: 'Raumfläche (5 m × 4 m)', formel: '5 × 4', ergebnis: '20 m²' },
+          { label: 'Verschnitt gerade Verlegung', formel: '+ 10 %', ergebnis: '× 1,10' },
+          { label: 'Benötigte Laminatfläche', formel: '20 × 1,10', ergebnis: '22,0 m²' },
+        ],
+        fazit: 'Für einen 20 m² großen Raum mit gerader Verlegung brauchen Sie rund 22 m² Laminat — die 10 % Verschnitt decken Zuschnitt und Anpassungen ab. Aus dieser Zahl werden im nächsten Schritt ganze Pakete.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Verschnitt-Zuschlag nach Verlegemuster',
+        kopf: ['Verlegemuster', 'Verschnitt-Zuschlag', 'Hinweis'],
+        zeilen: [
+          ['Gerade / Schiffsboden', '~10 %', 'sparsamstes Muster, anfängerfreundlich'],
+          ['Diagonal (45°)', '~15 %', 'viele schräge Schnitte an den Wänden'],
+          ['Fischgrät', '~20 %', 'viele Passschnitte, Spezial-Dielen'],
+          ['Verwinkelte Räume (Erker, Nischen)', '+3–5 %', 'zusätzlich zum Mustersatz'],
+        ],
+        fussnote: 'Erfahrungswerte; der Rechner nutzt diese Sätze je gewähltem Verlegemuster. Konkret: 20 m² Raum werden mit gerade 22,0 m², diagonal 23,0 m² und Fischgrät 24,0 m² Bedarf gerechnet — gut ein bis zwei Pakete Unterschied. Bei kleinen oder stark verwinkelten Räumen großzügiger kalkulieren.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Pakete berechnen (immer aufrunden!)',
+        schritte: [
+          { label: 'Benötigte Fläche (aus Beispiel oben)', formel: '22,0 m²', ergebnis: '22,0 m²' },
+          { label: 'Paketinhalt', formel: '2,49 m²/Paket', ergebnis: '2,49 m²' },
+          { label: 'Pakete', formel: '22,0 ÷ 2,49 = 8,84 →', ergebnis: '9 Pakete' },
+          { label: 'Tatsächliche Fläche', formel: '9 × 2,49', ergebnis: '22,41 m²' },
+        ],
+        fazit: '22 m² Bedarf ÷ 2,49 m²/Paket = 8,84 — aufgerundet auf 9 ganze Pakete (22,41 m²). Die rund 2,4 m² Überschuss sind kein Fehler, sondern die nötige Reserve. Niemals abrunden — sonst fehlt am Ende Material.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum Verschnitt einplanen — Zuschnitt, Reserve, Muster',
+        html: `<p>Der Verschnitt-Zuschlag ist kein Sicherheitspuffer aus übertriebener Vorsicht, sondern eine <strong>rechnerische Notwendigkeit</strong>. Jede Diele, die an einer Wand endet, wird abgeschnitten — und das Reststück lässt sich nur weiterverwenden, wenn es lang genug für die nächste Reihe ist. Bei kurzen Resten landet mehr im Abfall.</p><p>Mehrere Faktoren erhöhen den Verschnitt: <strong>diagonale Verlegung</strong> (rund 15 % statt 10 %), <strong>Fischgrät</strong> (bis 20 %), viele <strong>Ecken, Nischen und Rohre</strong> sowie <strong>Dekore mit großem Wiederholmuster</strong>, bei denen Dielen passend ausgerichtet werden müssen. Auch der Reihenversatz verbraucht an den Reihenenden Material.</p><p>Ein zweiter Grund, etwas mehr zu kaufen, ist die <strong>Reserve</strong>. Wird später eine Diele beschädigt, brauchen Sie Ersatz aus derselben Charge — und die ist nach ein, zwei Jahren oft nicht mehr lieferbar. Lieber ein Paket zu viel einplanen als am Ende ein einzelnes nachkaufen zu müssen, das farblich nicht mehr passt.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'L-förmiger Raum: Teilflächen summieren',
+        schritte: [
+          { label: 'Teilfläche 1 (5 × 4 m)', formel: '5 × 4', ergebnis: '20 m²' },
+          { label: 'Teilfläche 2 (3 × 2 m)', formel: '3 × 2', ergebnis: '6 m²' },
+          { label: 'Summe der Grundfläche', formel: '20 + 6', ergebnis: '26 m²' },
+          { label: '+ 10 % Verschnitt → Bedarf', formel: '26 × 1,10', ergebnis: '28,6 m²' },
+        ],
+        fazit: 'Der L-Raum wird in zwei Rechtecke zerlegt: 26 m² Grundfläche, mit 10 % Verschnitt 28,6 m² Bedarf — bei 2,49 m²/Paket also 12 Pakete. Wegen der zusätzlichen Innenecke sind 3–5 % mehr sinnvoll; diagonal verlegt wären es eher 15 %.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Was außer Laminat noch dazugehört',
+        kopf: ['Komponente', 'Wofür', 'Menge / Hinweis'],
+        zeilen: [
+          ['Trittschalldämmung', 'Schall + kleine Unebenheiten', 'Raumfläche + ~5 % (Rechner: × 1,05)'],
+          ['Dampfbremse (PE-Folie)', 'Feuchteschutz von unten', 'auf Estrich / im Erdgeschoss Pflicht'],
+          ['Sockelleisten', 'Randabschluss, Dehnfuge verdecken', 'Umfang + ~10 % (Rechner: × 1,10)'],
+          ['Übergangsprofile', 'Türschwellen, Dehnfugen', 'je Übergang eines'],
+          ['Dehnungsfuge', 'Bewegungsraum für das Holz', '8–15 mm Wandabstand ringsum'],
+        ],
+        fussnote: 'Trittschall und (bei Bedarf) Dampfbremse liegen unter dem Laminat, Sockelleisten und Profile schließen es ab. Der Rechner kalkuliert Trittschall und Sockelleisten automatisch mit.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Materialkosten & Preis pro m²',
+        schritte: [
+          { label: 'Benötigte Pakete (aus Beispiel oben)', formel: '9 Pakete', ergebnis: '9' },
+          { label: 'Preis je Paket', formel: '9 × 30 €', ergebnis: '270 €' },
+          { label: 'Preis pro m² (auf 20 m² Raum)', formel: '270 € ÷ 20 m²', ergebnis: '13,50 €/m²' },
+        ],
+        fazit: 'Neun Pakete à 30 € kosten 270 € — auf die 20 m² Raumfläche gerechnet 13,50 € pro m². Der m²-Preis liegt über dem reinen Paketpreis pro m² (≈ 12 €), weil Verschnitt und Aufrundung mitbezahlt werden. Trittschall und Sockelleisten kommen noch hinzu.',
+      },
+      {
+        typ: 'text',
+        titel: 'Verlegerichtung & Musterversatz',
+        html: `<p>Die <strong>Verlegerichtung</strong> beeinflusst Optik und Verschnitt. Als Faustregel verlegt man Laminat <strong>parallel zum Lichteinfall</strong> — also längs zur Fensterfront. So fallen die Längsfugen weniger auf und der Raum wirkt größer und ruhiger.</p><p>Wer <strong>diagonal</strong> verlegt, setzt einen gestalterischen Akzent und lässt kleine Räume optisch größer erscheinen — zahlt das aber mit <strong>mehr Verschnitt</strong> (rund 15 % statt 10 %), weil an den Wänden viele schräge Schnitte anfallen.</p><p>Wichtig ist außerdem der <strong>Reihenversatz</strong>: Die Stoßfugen benachbarter Reihen sollten versetzt liegen (meist um mindestens 30–40 cm), nie auf einer Linie. Das sieht natürlicher aus und macht den Bodenverbund stabiler. Den Verschnitt erhöht das leicht, weil jede Reihe mit einem zugeschnittenen Stück beginnt. Bei Dekoren mit ausgeprägtem Holzmuster lohnt es sich, vor dem Verkleben ein paar Reihen <strong>lose vorzulegen</strong>, um Muster und Versatz zu prüfen.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Sockelleisten-Bedarf',
+        schritte: [
+          { label: 'Raumumfang (5 m × 4 m)', formel: '2 × (5 + 4)', ergebnis: '18 m' },
+          { label: '+ 10 % Reserve (Gehrung, Verschnitt)', formel: '18 × 1,10', ergebnis: '19,8 m' },
+          { label: 'Stücke à 2,40 m', formel: '19,8 ÷ 2,40 = 8,25 →', ergebnis: '9 Stück' },
+        ],
+        fazit: 'Umfang 18 m plus 10 % Reserve ergibt 19,8 m Sockelleisten — bei 2,40-m-Stücken also 9 Leisten. Türöffnungen müssen Sie nicht abziehen: An den Türzargen werden Abschlüsse und Übergangsprofile gebraucht.',
+      },
+      {
+        typ: 'text',
+        titel: 'Untergrund & Nutzungsklasse',
+        html: `<p>Vor dem Verlegen entscheidet der <strong>Untergrund</strong> über das Ergebnis. Er muss <strong>eben, trocken und sauber</strong> sein — Unebenheiten über etwa 2–3 mm pro Meter sollten ausgeglichen werden, sonst federt der Boden später und die Klickverbindungen können brechen. Auf Estrich und im Erdgeschoss gehört eine <strong>Dampfbremse</strong> (PE-Folie) unter die Trittschalldämmung, um aufsteigende Feuchtigkeit fernzuhalten.</p><p>Beim Material selbst lohnt der Blick auf die <strong>Nutzungsklasse</strong>. Sie beschreibt die Abriebfestigkeit: <strong>Klasse 23 / AC4</strong> eignet sich für stark genutzte Wohnräume, <strong>Klasse 31–33 / AC4–AC5</strong> für gewerbliche oder sehr beanspruchte Flächen. Für ein Schlafzimmer reicht eine niedrigere Klasse als für einen vielbegangenen Flur.</p><p>Wichtig ist außerdem die <strong>Dehnungsfuge</strong>: Laminat arbeitet mit Temperatur und Feuchte, daher rundum 8–15 mm Abstand zur Wand lassen — die Sockelleiste verdeckt die Fuge später. Wer diese Punkte beachtet, hat lange Freude am Boden.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Gilt die Rechnung auch für Vinyl, Parkett & Kork?',
+        html: `<p>Die Bedarfsrechnung ist nicht auf Laminat beschränkt: Sie funktioniert für alle <strong>Klick-Bodenbeläge</strong> — also auch für <strong>Vinyl (Designboden), Klick-Parkett und Kork</strong>. Entscheidend sind immer dieselben drei Größen: Raumfläche, Paketinhalt und Verlegemuster.</p><p>Unterschiede gibt es im Detail. <strong>Vinyl</strong> ist oft schon mit integrierter Trittschalldämmung erhältlich — dann entfällt die separate Dämmung. <strong>Echtholz-Parkett</strong> verlangt sorgfältigere Akklimatisierung und mehr Verschnitt bei aufwendigen Mustern wie Fischgrät. <strong>Vollvinyl</strong> lässt sich auch in Feuchträumen verlegen, klassisches Laminat dagegen nicht.</p><p>Auch beim <strong>Preis</strong> liegen Welten dazwischen: einfaches Laminat ab etwa 5 €/m², robustes ab 10 €/m², Zweischicht-Parkett 20–50 €/m², Dreischicht bis 80 €/m². Für die reine Mengenberechnung spielt das keine Rolle — Sie geben einfach Paketinhalt und Paketpreis Ihres gewählten Produkts ein, und der Rechner liefert Pakete und Materialkosten.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Typische Paketgrößen, Preise & Reichweite',
+        werte: [
+          { label: 'Paketinhalt (typisch)', wert: '2,0–3,0 m²', hinweis: 'steht auf der Verpackung' },
+          { label: 'Preis je Paket', wert: '15–60 €', hinweis: 'je Klasse, Dekor und Format' },
+          { label: 'Laminat Klasse 31 / 33', wert: '5–10 / 10–20 €/m²', hinweis: 'Klasse = Beanspruchbarkeit' },
+          { label: 'Sockelleiste je Stück', wert: '2,40 m', hinweis: 'Stückzahl = Bedarf ÷ 2,40, aufrunden' },
+          { label: 'Trittschall / Sockelleiste', wert: '2–5 €/m² / 1–4 €/lfdm', hinweis: 'Zusatzkosten' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Häufige Fehler beim Laminatbedarf',
+        html: `<p>Ein paar Fehler tauchen bei der Bedarfsplanung immer wieder auf. Der teuerste ist das <strong>Abrunden</strong> der Paketzahl: Wer 8,4 Pakete braucht und nur 8 kauft, steht mitten beim Verlegen ohne Material da — und bekommt die fehlende Charge oft nicht farbgleich nach.</p><p>Zweiter Klassiker: den <strong>Verschnitt vergessen</strong> oder zu knapp ansetzen. Gerade bei diagonaler Verlegung oder vielen Ecken reichen pauschale 5 % nicht. Drittens wird häufig die <strong>Charge</strong> ignoriert — Pakete aus verschiedenen Produktionsläufen können sich im Farbton unterscheiden, also alles auf einmal aus einem Los kaufen.</p><p>Und schließlich die Baustelle vor dem Boden: Wer den <strong>Untergrund</strong> nicht ausgleicht, die <strong>Dehnungsfuge</strong> zur Wand vergisst oder das Material nicht <strong>akklimatisieren</strong> lässt, riskiert Fugen, Wölbungen oder knackende Klickverbindungen. Die Mengenrechnung ist nur der erste Schritt — die Vorbereitung entscheidet über das Ergebnis.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Vor dem Laminatkauf',
+        punkte: [
+          'Raumfläche genau ausmessen — verwinkelte Räume in Rechtecke zerlegen und addieren.',
+          'Verschnitt nach Muster wählen: ~10 % gerade, ~15 % diagonal, ~20 % Fischgrät (+3–5 % bei Nischen).',
+          'Paketinhalt (m²) auf der Verpackung prüfen und auf ganze Pakete aufrunden.',
+          'Alle Pakete aus derselben Charge / Produktionsnummer kaufen (Farbgleichheit).',
+          'Trittschalldämmung und auf Estrich eine Dampfbremse einplanen.',
+          'Sockelleisten nach Umfang + 10 % und Übergangsprofile je Tür berechnen.',
+          'Pakete vor dem Verlegen mindestens 48 Stunden im Raum akklimatisieren lassen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Eine Reservepackung behalten',
+        text: 'Heben Sie nach dem Verlegen mindestens eine ungeöffnete Restpackung auf — idealerweise samt Etikett mit Dekor- und Chargennummer. Wird später eine Diele durch Möbel, Wasser oder einen Kratzer beschädigt, können Sie sie einzeln austauschen, ohne den ganzen Boden anzugehen. Nach ein bis zwei Jahren ist genau Ihr Dekor in derselben Charge oft nicht mehr erhältlich, und neue Ware weicht in Farbton und Struktur leicht ab. Ein Reservepaket im Keller ist die günstigste Reparaturversicherung.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Verschnitt variiert — großzügig kalkulieren',
+        text: 'Die Verschnitt-Prozentsätze sind Erfahrungswerte, keine festen Größen. Wie viel Material tatsächlich übrig bleibt, hängt von Raumzuschnitt, Dielenlänge, Muster und der eigenen Verlege-Erfahrung ab — Einsteiger produzieren mehr Reste als Profis. Im Zweifel lieber etwas großzügiger kalkulieren: Ein zu knapp gekauftes Paket lässt sich oft nicht farbgleich nachordern, während ein Überschuss als Reserve dient oder sich (ungeöffnet) meist zurückgeben lässt. Dieser Rechner liefert eine verlässliche Orientierung, ersetzt aber nicht das Nachmessen vor Ort.',
+      },
+    ],
     faq: [
       {
         frage: 'Wie berechne ich die Anzahl Laminat-Pakete?',
@@ -2223,6 +2376,9 @@ Kaufen Sie ein Paket extra als Reserve — für spätere Reparaturen. Laminat au
         frage: 'Kann ich den Laminat-Rechner auch für Vinyl und Parkett nutzen?',
         antwort: 'Ja. Der Rechner funktioniert für alle Klick-Bodenbeläge: Laminat, Vinyl, Parkett und Kork. Entscheidend sind Raumfläche, Paketgröße und Verlegemuster. Die Verschnitt-Werte gelten für alle diese Materialien gleichermaßen.',
       },
+    ],
+    quellen: [
+      { titel: 'Laminat-Bedarfsberechnung — Methodik', hinweis: 'Bedarf = Raumfläche × Verschnittzuschlag (gerade/Schiffsboden ~10 %, diagonal ~15 %, Fischgrät ~20 %), aufgerundet auf volle Pakete. Sockelleisten = Umfang + 10 %, Trittschall = Fläche + 5 %. Werte sind Richtwerte.' },
     ],
   },
   {
