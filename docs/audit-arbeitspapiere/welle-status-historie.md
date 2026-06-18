@@ -44,6 +44,34 @@ oder Deployment-Artefakte zu verlieren.
 
 ---
 
+## 18.06.2026 — W19 reichweiten-rechner Goldstandard (vergleich-Leitformat, t30) — Tranche 6 komplett, 46 Goldstandard
+
+- **Was gebaut:** reichweiten-rechner (auto.ts) hat jetzt `contentBloecke` + `quellen`
+  (Neueintrag, mit url). **18 Blöcke**, Leitformat **vergleich** 4× dominant (Rechenweg
+  Verbrenner-vs-E-Auto, WLTP-vs-real, Stadt-vs-Autobahn, Wärmepumpe-vs-Widerstandsheizung)
+  + 3 beispielrechnung + 6 text + tabelle + statistik + checkliste + 2 infobox. ~1.551 W,
+  alle 6 `text`-Blöcke ≤170 W.
+- **Abgrenzung zu autokosten/spritkosten/kfz-steuer (Pflicht):** Fokus REICHWEITE/Energie
+  (WLTP vs. real, Winter/Autobahn-Abschläge, Akku vs. Effizienz) statt Kosten/Steuer.
+  Sequenzen aller drei klar verschieden.
+- **L-34-Befund (Rechner-Scope):** Der Rechner ist **E-Auto-spezialisiert** (Titel „(E-Auto)",
+  formel = WLTP-Korrektur nach Fahrprofil/Temperatur/Klima), KEIN Dual-Rechner. Der Prompt
+  wollte Verbrenner-vs-E-Auto. Gelöst: Verbrenner-Seite nur als **allgemeines Rechenprinzip/
+  Vergleich** (universelle Arithmetik Tank ÷ Verbrauch × 100, lib-unabhängig korrekt), die
+  realistische-Reichweite-Substanz (WLTP-Korrektur) auf den E-Auto zentriert — passend zum
+  Rechner. E-Auto-Beispiel lib-konsistent zum beispiel-Feld: 60 kWh, WLTP 15 kWh/100 km,
+  Faktoren 0,70 × 0,85 × 0,90 → Realverbrauch 28 → ~215 km.
+- **Sensitivität:** KEINE festen Modell-/Akkudaten als dauerhaft behauptet — nur neutrale
+  Segment-Spannen (Kleinwagen/Kompakt/SUV/Oberklasse); hinweis-Infobox „Werte sind
+  Orientierung, Fahrprofil entscheidet".
+- **Bestand-Audit:** erklaerung + 8 FAQ geprüft — aktuell und konsistent, kein Fix nötig,
+  bleiben als Fallback.
+- **Verify:** Wortzahl 1.551 (OK ≥1500), 18 Blöcke kein WARN, vergleich 4× dominant, 6/6
+  text ≤170 W, Vercel-grün. **Tranche 6 (t26–t30: kfz-steuer, alkohol-abbau, cups, laminat,
+  reichweiten) komplett** — contentBloecke-Goldstandard-Set auf **46 Rechner**.
+
+---
+
 ## 18.06.2026 — W19 laminat-rechner Goldstandard (beispielrechnung-Leitformat, t29)
 
 - **Was gebaut:** laminat-rechner (wohnen.ts) hat jetzt `contentBloecke` + `quellen`
