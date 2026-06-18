@@ -44,6 +44,38 @@ oder Deployment-Artefakte zu verlieren.
 
 ---
 
+## 18.06.2026 — YMYL-Fix alkohol-abbau: Content an Lib angeglichen (Resorptionsdefizit-Drift)
+
+Folge-Fix zum in t27 gemeldeten Flag. Karsten-Entscheidung: **Option A — Content
+an Lib angleichen** (Lib bewusst NICHT ändern, da der höhere Peak-Wert die
+vorsichtigere, sicherere Anzeige ist). Zwei atomare Commits:
+
+- **Content-Drift** (`lib/rechner-config/gesundheit.ts`, slug alkohol-abbau-rechner,
+  Commit `8f1eb86`): Die Lib `promille.ts` rechnet reine Widmark OHNE Resorptions-
+  defizit (`promille = alkohol_g ÷ koerperwasser`, r 0,68/0,55, kein × 0,9). Vier
+  Fallback-/FAQ-Stellen behaupteten fälschlich ein „× 0,9 / 10 % Resorptionsdefizit":
+  (1) `formel`-Feld → × 0,9 gestrichen; (2) `beispiel`-Feld lib-exakt korrigiert
+  60 g ÷ 54,4 ≈ **1,10 ‰** (statt 0,99) + Abbau **≈ 7,3 h** (statt 6,6); (3) erklaerung-
+  Satz „Resorptionsdefizit von etwa 10 %" entfernt, durch neutralen Peak-Hinweis
+  ersetzt (ohne zu behaupten, der Rechner ziehe 10 % ab); (4) FAQ „Was ist die
+  Widmark-Formel" — gleiche Falschaussage entfernt (FAQ rendert!). Mein Code-Kommentar
+  ebenfalls umformuliert (grep-sauber). **contentBloecke-Beispiele (0,74 / 1,21 ‰)
+  waren bereits lib-exakt — unverändert.** Schutzauflage (keine Fahrfreigabe, Mythen
+  nur entkräftet) unangetastet.
+
+**Verify:** grep „0,9 | Resorptionsdefizit | 0,99 | 6,6 Stunden" im Block → sauber;
+Probe 40/54,4 = 0,74 ✓, 60/54,4 = 1,10 ✓, 40/33 = 1,21 ✓, 1,10/0,15 = 7,3 h ✓;
+Wortzahl 1.554 (OK), 18 Blöcke kein WARN, Vercel-grün.
+
+**Lehre (Wiederholung von pendlerpauschale):** Beim Goldstandard-Spiegeln (t27) wurde
+die Lib-vs-Fallback-Drift entdeckt, im gerenderten Content (contentBloecke) sofort
+lib-exakt gebaut und der Fallback-Drift als Flag gemeldet — der eigentliche Angleich
+folgte als separater YMYL-Commit. Zweiter Beleg dafür, dass Fallback-Felder
+(`formel`/`beispiel`/erklaerung) UND FAQ beim Audit mitgeprüft werden müssen, auch
+wenn formel/beispiel bei gesetzten contentBloecke nicht rendern (die FAQ aber schon).
+
+---
+
 ## 18.06.2026 — W19 alkohol-abbau-rechner Goldstandard (SENSIBEL, tabelle-Leitformat, t27)
 
 - **Was gebaut:** alkohol-abbau-rechner (gesundheit.ts) hat jetzt `contentBloecke` +
