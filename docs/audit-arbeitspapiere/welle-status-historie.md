@@ -44,6 +44,45 @@ oder Deployment-Artefakte zu verlieren.
 
 ---
 
+## 18.06.2026 — W19 Kategorie-Tranche t31–t35 Goldstandard (KOMPLETT, 51 Goldstandard)
+
+Gesammelter Doku-Sync für fünf Rechner aus fünf Kategorien (t31–t35); Doku auf
+Karstens Wunsch erst nach t35 nachgezogen. Alle fünf: `contentBloecke` + `quellen`
+(Neueintrag), Datum auf 2026-06-18, jeweils Leitformat ≥3–4× dominant, alle
+`text`-Blöcke ≤170 W, Vercel-grün, kein `client-data.ts` mitcommittet.
+
+- **t31 kuendigungsfrist-rechner** (arbeit.ts, Leitformat **beispielrechnung** 5×, 16 Blöcke,
+  ~1.547 W, Commit `5239cc4`). SSOT aus `lib/berechnungen/kuendigungsfrist.ts` (§ 622 BGB).
+  **L-34:** Prompt-Staffel ließ die Stufe 2 J → 1 Monat (Abs. 2 Nr. 1) aus; Lib + Gesetz
+  haben die volle Staffel 2/5/8/10/12/15/20 → 1–7 Monate — vollständig übernommen. Beispiele
+  lib-exakt (10.03.→15.04.; AG 12 J 15.06.→30.11.; AN 12 J 15.06.→15.07.; Probezeit
+  10.02.→24.02.). vergleich „AN- vs. AG-Kündigung" ergänzt, um Cluster-Cosine zu brechen.
+- **t32 notenschluessel-rechner** (mathe.ts, Leitformat **tabelle** 4×, 18 Blöcke, ~1.578 W,
+  Commit `fb564f0`). Lib `notenschluessel.ts`: Schule/IHK linear identisch (92/81/67/50/30/0),
+  Uni Drittelnoten, halbe Noten. Oberstufen-15-Punkte als didaktische Referenz (nicht in Lib).
+  Beispiel 38/50 = 76 % → Note 3; Durchschnitt 2,2.
+- **t33 hundejahre-rechner** (alltag.ts, Leitformat **tabelle** 4×, 18 Blöcke, ~1.591 W,
+  Commit `c7d5e9f`). Keine Lib; AVMA-Staffel aus formel-Feld (Jahr 1 = 15, Jahr 2 = +9 → 24,
+  ab Jahr 3 +4/+5/+6/+7 nach Größe). Beispiele lib-exakt (3 J klein = 28, 8 J groß = 60).
+  ×7-Regel nur als überholte Faustregel; log-Formel 16×ln(Alter)+31 als 2. Ansatz.
+- **t34 zucker-umrechner** (kochen.ts, Leitformat **vergleich** 4×, 18 Blöcke, ~1.570 W,
+  Commit `18f8fd9`). Süßkraft-Faktoren aus dem Rechner gespiegelt (Honig 0,75, Stevia 0,005,
+  Erythrit 1,3, Xylit/Kokos 1,0); 200 g Zucker → 150 g Honig + ~30 ml weniger Flüssigkeit.
+  **WELLBEING:** rein Back-Eigenschaften (Süßkraft/Flüssigkeit/Bräunung/Volumen/Aroma), kein
+  Diät-/Abnehm-Frame; Erythrit/Stevia sachlich. erklaerung/FAQ bleiben Fallback (faktisch).
+- **t35 sonnenschutz-rechner** (gesundheit.ts, Leitformat **statistik** 4×, 17 Blöcke, ~1.549 W,
+  Commit `dc8774f`). Werte aus `lib/berechnungen/sonnenschutz.ts`: geschützte Zeit =
+  Eigenschutz × LSF × 0,6 (40 % Sicherheitsabzug), Eigenschutz skaliert mit UV (Basis ×
+  3/UV-Mitte). Kanonisches Beispiel Typ II / UV 6–7 / LSF 30 → 7/126/63 Min (deckungsgleich
+  mit beispiel-Feld). **WELLBEING präventiv:** Hautkrebs-Prävention im Vordergrund, kein
+  Bräunungs-Frame, kein LSF-Freibrief (LSF 30 vs. 50 realistisch ~97 % vs. ~98 %), Verweis
+  auf Dermatologie.
+
+**Tranche-Stand:** Kategorie-Tranche t31–t35 **KOMPLETT** (Arbeit, Mathe, Alltag, Kochen,
+Gesundheit — je ein Rechner); contentBloecke-Goldstandard-Set auf **51 Rechner**.
+
+---
+
 ## 18.06.2026 — W19 reichweiten-rechner Goldstandard (vergleich-Leitformat, t30) — Tranche 6 komplett, 46 Goldstandard
 
 - **Was gebaut:** reichweiten-rechner (auto.ts) hat jetzt `contentBloecke` + `quellen`
