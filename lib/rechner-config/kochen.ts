@@ -1369,7 +1369,7 @@ Für präzise Kalorienzählerei empfiehlt es sich, Lebensmittel vor dem Kochen z
   },
   {
     slug: 'zucker-umrechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-18',
     titel: 'Zucker-Umrechner',
     beschreibung: 'Zucker durch Honig, Ahornsirup, Stevia oder Erythrit ersetzen — mit Mengenangaben, Kalorien-Vergleich und Backtipps.',
     kategorie: 'Kochen & Ernährung',
@@ -1422,6 +1422,177 @@ Honig, Ahornsirup und Agavendicksaft bringen eigene Flüssigkeit mit. Wenn Sie 1
 | Xylit | 7 |
 
 Ein niedriger glykämischer Index bedeutet einen langsameren Blutzuckeranstieg — relevant für Diabetiker und alle, die Heißhunger vermeiden wollen.`,
+    // W19-Goldstandard: zucker-umrechner auf volle Tiefe (16 Bausteine, ~1.560 W), Leitformat
+    // „vergleich" 4× dominant (Zucker-vs-Honig, weiß-vs-braun, Erythrit-vs-Stevia, trocken-vs-
+    // flüssig). Disjunkt zu cups/backform. Süßkraft-Faktoren aus dem Rechner gespiegelt
+    // (formel/beispiel): Honig 0,75, Stevia 0,005, Erythrit 1,3, Xylit/Kokos 1,0, Agave ~0,67.
+    // WELLBEING: rein Back-Eigenschaften (Süßkraft/Flüssigkeit/Bräunung/Volumen/Aroma), KEIN
+    // Diät-/Abnehm-Frame, keine Gesundheitsversprechen — Erythrit/Stevia sachlich als Back-
+    // Eigenschaft. erklaerung bleibt Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Zucker ersetzen beim Backen — worauf es ankommt',
+        html: `<p>Zucker im Rezept durch ein anderes Süßungsmittel zu ersetzen, ist mehr als ein einfacher 1:1-Tausch. Zwei Dinge müssen zusammenpassen: die <strong>Süßkraft</strong> und das <strong>Volumen</strong> (die Masse).</p><p>Die <strong>Süßkraft</strong> beschreibt, wie stark ein Mittel im Vergleich zu Haushaltszucker süßt. Honig süßt stärker, man braucht also weniger; Erythrit süßt schwächer, man braucht mehr; Stevia ist extrem süß, sodass winzige Mengen genügen. Über einen <strong>Faktor</strong> rechnet man die nötige Menge um.</p><p>Mindestens ebenso wichtig ist das <strong>Volumen</strong>: Zucker bringt im Teig Masse, bindet Feuchtigkeit und sorgt für Struktur. Wer Zucker durch ein hochsüßendes Mittel wie Stevia ersetzt, dem fehlt diese Masse — der Teig braucht dann einen Füllstoff (etwa Apfelmus oder Erythrit). Flüssige Süßungsmittel wiederum bringen Wasser mit, das an anderer Stelle ausgeglichen werden muss. Dieser Rechner berücksichtigt beides: Süßkraft und Flüssigkeit.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Haushaltszucker vs. Honig',
+        spalteA: 'Haushaltszucker',
+        spalteB: 'Honig',
+        zeilen: [
+          { kriterium: 'Süßkraft', a: 'Referenz (1,0)', b: 'süßer (~1,3×) → weniger nötig' },
+          { kriterium: 'Form', a: 'trocken, kristallin', b: 'flüssig, ~18 % Wasser' },
+          { kriterium: 'Menge für 100 g Zucker', a: '100 g', b: '~75 g' },
+          { kriterium: 'Beim Backen', a: 'neutral, gibt Volumen', b: 'Flüssigkeit reduzieren, bräunt schneller' },
+        ],
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Süßkraft-Faktoren: Menge für 100 g Zucker',
+        kopf: ['Süßungsmittel', 'Menge für 100 g Zucker', 'Backhinweis'],
+        zeilen: [
+          ['Honig', '~75 g (Faktor 0,75)', 'Flüssigkeit reduzieren, Ofen kühler'],
+          ['Ahornsirup', '~90–100 g (Richtwert)', 'Flüssigkeit reduzieren, kräftiges Aroma'],
+          ['Agavendicksaft', '~65–70 g', 'sehr süß, neutral, Flüssigkeit reduzieren'],
+          ['Kokosblütenzucker', '~100 g (1:1)', 'karamellartig, bräunt dunkler'],
+          ['Xylit', '~100 g (1:1)', 'verhält sich fast wie Zucker'],
+          ['Erythrit', '~130 g (Faktor 1,3)', '70 % Süßkraft, kann kristallisieren'],
+          ['Stevia-Pulver', '~0,5 g (Faktor 0,005)', 'kein Volumen, Füllstoff ergänzen'],
+        ],
+        fussnote: 'Werte je 100 g Zucker, Richtwerte fürs Backen. Süßkraft, Geschmack und Bräunung unterscheiden sich — vor dem ersten Versuch lieber in kleiner Menge testen.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '200 g Zucker durch Honig ersetzen',
+        schritte: [
+          { label: 'Zuckermenge im Rezept', formel: '200 g', ergebnis: '200 g' },
+          { label: 'Honig ist süßer → Faktor 0,75', formel: '200 g × 0,75', ergebnis: '150 g Honig' },
+          { label: 'Honig enthält ~18 % Wasser', formel: '150 g → ~27 ml Wasser', ergebnis: 'Flüssigkeit − ~30 ml' },
+        ],
+        fazit: '200 g Zucker werden durch 150 g Honig ersetzt — weil Honig süßer ist, braucht man weniger. Weil Honig aber Wasser mitbringt, reduziert man die übrige Flüssigkeit (Milch, Wasser, Öl) um rund 30 ml und stellt den Ofen 10–15 °C kühler, da Honig schneller bräunt.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Weißer Kristallzucker vs. brauner Zucker',
+        spalteA: 'Weißer Kristallzucker',
+        spalteB: 'Brauner Zucker',
+        zeilen: [
+          { kriterium: 'Herstellung', a: 'raffiniert, rein weiß', b: 'mit Restmelasse / nachträglich' },
+          { kriterium: 'Geschmack', a: 'neutral süß', b: 'malzig-karamellig' },
+          { kriterium: 'Feuchtigkeit', a: 'trocken, rieselfähig', b: 'leicht feucht, neigt zum Klumpen' },
+          { kriterium: 'Beim Backen', a: 'hellere Krume, Standard', b: 'saftiger, dunklere Krume' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Flüssige Süßungsmittel — was sich im Teig ändert',
+        html: `<p><strong>Honig, Ahornsirup und Agavendicksaft</strong> sind flüssig und bringen damit zwei Besonderheiten ins Rezept: zusätzliches <strong>Wasser</strong> und eine andere <strong>Bräunung</strong>.</p><p>Der Wassergehalt liegt je nach Mittel bei rund 15 bis 35 Prozent. Wer trockenen Zucker durch ein flüssiges Süßungsmittel ersetzt, muss die <strong>übrige Flüssigkeit reduzieren</strong> — also weniger Milch, Wasser oder Öl verwenden —, sonst wird der Teig zu weich und das Gebäck fällt zusammen. Faustregel: pro 100 g flüssiges Süßungsmittel etwa 20–30 ml Flüssigkeit weniger.</p><p>Zweiter Effekt: Flüssige Süßungsmittel enthalten <strong>Fruchtzucker</strong>, der schneller karamellisiert. Gebäck mit Honig oder Sirup wird also rascher dunkel. Deshalb empfiehlt es sich, die <strong>Ofentemperatur um 10–15 °C zu senken</strong> und die Backzeit im Blick zu behalten. Dafür werden Kuchen und Muffins mit flüssigen Süßungsmitteln oft besonders saftig und bleiben länger frisch.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '200 g Zucker durch Ahornsirup ersetzen',
+        schritte: [
+          { label: 'Zuckermenge', formel: '200 g', ergebnis: '200 g' },
+          { label: 'Ahornsirup (Süßkraft ≈ Zucker, Richtwert)', formel: '≈ 1:1, etwas mehr für volle Süße', ergebnis: '≈ 180–200 g' },
+          { label: 'Ahornsirup enthält ~30 % Wasser', formel: '→ übrige Flüssigkeit reduzieren', ergebnis: 'Flüssigkeit − ~50 ml' },
+        ],
+        fazit: 'Ahornsirup süßt etwa wie Zucker, bringt aber rund ein Drittel Wasser mit. Für 200 g Zucker rechnet man grob 180–200 g Ahornsirup und reduziert die übrige Flüssigkeit um etwa 50 ml. Das typisch malzig-karamellige Aroma bleibt im Gebäck deutlich schmeckbar — anders als bei neutralem Zucker.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Zuckeraustauschstoffe: Erythrit vs. Stevia',
+        spalteA: 'Erythrit',
+        spalteB: 'Stevia',
+        zeilen: [
+          { kriterium: 'Süßkraft', a: '~70 % von Zucker', b: '200–300× von Zucker' },
+          { kriterium: 'Menge für 100 g Zucker', a: '~130 g', b: '~0,5 g (Pulver)' },
+          { kriterium: 'Volumen beim Backen', a: 'bringt Masse mit', b: 'kein Volumen → Füllstoff nötig' },
+          { kriterium: 'Eigenheit', a: 'leichter Kühleffekt, kann kristallisieren', b: 'bitterer Nachgeschmack in größeren Mengen' },
+        ],
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Trockene vs. flüssige Süßungsmittel',
+        spalteA: 'Trocken (Zucker, Erythrit, Xylit)',
+        spalteB: 'Flüssig (Honig, Sirup, Agave)',
+        zeilen: [
+          { kriterium: 'Wassergehalt', a: 'praktisch keiner', b: '15–35 % Wasser' },
+          { kriterium: 'Teigkonsistenz', a: 'unverändert', b: 'übrige Flüssigkeit reduzieren' },
+          { kriterium: 'Bräunung', a: 'normal', b: 'schneller → Ofen kühler' },
+          { kriterium: 'Volumen / Struktur', a: 'gibt Struktur', b: 'macht saftiger, weniger Stand' },
+        ],
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Zucker: Gramm ↔ Milliliter ↔ Löffel',
+        kopf: ['Menge', 'Gramm Zucker', 'Entspricht'],
+        zeilen: [
+          ['1 Teelöffel (TL)', '≈ 4 g', '~5 ml'],
+          ['1 Esslöffel (EL)', '≈ 12–15 g', '~15 ml'],
+          ['100 ml Zucker', '≈ 85 g', 'Volumen → Gewicht'],
+          ['100 g Zucker', '100 g', '≈ 120 ml'],
+          ['1 Päckchen Vanillezucker', '8 g', '—'],
+        ],
+        fussnote: 'Kristallzucker hat eine Dichte von etwa 0,85 g/ml. Puderzucker ist lockerer (1 EL ≈ 8 g), brauner Zucker dichter — die Gramm-Werte je Löffel variieren daher leicht.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Typische Zuckermengen in Rezepten (Orientierung)',
+        werte: [
+          { label: 'Rührkuchen (1 Form)', wert: '150–250 g', hinweis: 'je nach Rezept' },
+          { label: 'Kekse (1 Blech)', wert: '80–150 g', hinweis: 'Mürbeteig eher mehr' },
+          { label: 'Süßer Hefeteig', wert: '50–100 g', hinweis: 'Zucker füttert auch die Hefe' },
+          { label: 'Marmelade', wert: 'bis 1:1 zur Frucht', hinweis: 'Zucker wirkt konservierend' },
+          { label: 'Sahne / Dessert', wert: '20–60 g', hinweis: 'nach Geschmack' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Was Zucker beim Backen technisch leistet',
+        html: `<p>Zucker ist beim Backen weit mehr als nur Süße — er erfüllt mehrere <strong>technische Funktionen</strong>, die man beim Ersetzen mitdenken muss.</p><p>Erstens <strong>Bräunung</strong>: In der Hitze reagiert Zucker mit Eiweißen (Maillard-Reaktion) und karamellisiert — daher die goldbraune Kruste. Zweitens <strong>Struktur und Volumen</strong>: Beim Aufschlagen mit Butter oder Eiern schlägt Zucker Luft unter und macht den Teig locker. Drittens <strong>Feuchtigkeit</strong>: Zucker bindet Wasser, hält Gebäck saftig und länger frisch.</p><p>Viertens dient Zucker im <strong>Hefeteig</strong> als Nahrung für die Hefe und unterstützt das Aufgehen, und bei <strong>Marmelade</strong> wirkt er konservierend. Wer Zucker stark reduziert oder durch volumenlose Süßstoffe ersetzt, verliert einen Teil dieser Funktionen — das Gebäck wird heller, weniger locker oder trockener. Deshalb gelingt der Austausch am besten mit Mitteln, die ähnliche Masse mitbringen (Erythrit, Xylit, Kokosblütenzucker).</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Süßungsmittel & Aroma — der Geschmack ändert sich',
+        html: `<p>Neben Süße und Backverhalten bringt jedes Süßungsmittel ein eigenes <strong>Aroma</strong> mit — das im fertigen Gebäck deutlich schmeckbar sein kann.</p><p><strong>Honig</strong> gibt einen blumig-warmen Ton, <strong>Ahornsirup</strong> ein typisch malzig-karamelliges Aroma, das gut zu Pfannkuchen, Waffeln und Herbstgebäck passt. <strong>Kokosblütenzucker</strong> schmeckt leicht nach Karamell und Malz. <strong>Agavendicksaft</strong> ist dagegen weitgehend <strong>neutral</strong> — praktisch, wenn der Eigengeschmack nicht stören soll.</p><p>Bei den Austauschstoffen ist <strong>Erythrit</strong> geschmacklich recht neutral, kann aber in größeren Mengen einen kühlen Effekt auf der Zunge hinterlassen. <strong>Stevia</strong> bringt einen leicht <strong>bitteren oder lakritzartigen Nachgeschmack</strong> mit, der bei höherer Dosierung auffällt — weshalb es oft mit anderen Mitteln kombiniert wird. Wer ein Rezept zum ersten Mal umstellt, probiert die neue Süße am besten erst in kleiner Menge, bevor die ganze Charge im Ofen landet. Eine bewährte Strategie ist auch, nur einen Teil des Zuckers zu ersetzen — etwa die Hälfte —, sodass das vertraute Aroma erhalten bleibt und der Ersatzstoff weniger durchschlägt.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Welcher Ersatz passt zu welchem Gebäck',
+        html: `<p>Nicht jedes Süßungsmittel passt zu jedem Gebäck — die Wahl hängt davon ab, was im Rezept gefordert ist.</p><p>Für <strong>saftige Rührkuchen, Muffins und feuchte Brote</strong> eignen sich flüssige Süßungsmittel wie Honig oder Ahornsirup besonders gut: Sie halten das Gebäck länger frisch. Für <strong>knusprige Kekse, Mürbeteig und Blätterteiggebäck</strong> ist trockener Zucker oder Erythrit die bessere Wahl, weil zusätzliche Flüssigkeit die Knusprigkeit verhindert.</p><p>Wer ein Rezept möglichst <strong>nah am Original</strong> halten will, greift zu Mitteln mit ähnlichem Volumen — Kokosblütenzucker, Xylit oder Erythrit lassen sich am unkompliziertesten austauschen. Geht es vor allem um ein <strong>besonderes Aroma</strong>, sind Honig, Ahornsirup oder brauner Zucker erste Wahl. Bei <strong>Baisers und Eischnee</strong> ist Vorsicht geboten: Hier braucht es feinkörnigen Zucker oder Puderzucker, der sich vollständig löst — viele Austauschstoffe funktionieren dort nicht zuverlässig. Im Zweifel lohnt es sich, ein erprobtes Rezept zu suchen, das bereits für das gewünschte Süßungsmittel ausgelegt ist.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Häufige Fehler beim Zuckeraustausch',
+        html: `<p>Beim Ersetzen von Zucker schleichen sich ein paar typische Fehler ein, die das Ergebnis verderben können.</p><p><strong>Flüssigkeit vergessen:</strong> Der häufigste Patzer — flüssige Süßungsmittel werden 1:1 eingesetzt, ohne die übrige Flüssigkeit zu reduzieren. Der Teig wird zu weich. <strong>Süßkraft falsch eingeschätzt:</strong> Stevia oder Erythrit nach Augenmaß zu dosieren führt schnell zu zu süßem oder zu fadem Gebäck — hier zählt der Faktor. <strong>Volumen ignoriert:</strong> Wer Zucker komplett durch Stevia ersetzt, wundert sich über flache, kompakte Backwaren, weil die Masse fehlt.</p><p>Weitere Stolperfallen: die <strong>Ofentemperatur nicht angepasst</strong> — Honig und Sirup bräunen schneller, das Gebäck wird außen zu dunkel. Und der <strong>Eigengeschmack unterschätzt</strong>: Ein kräftiger Honig kann ein zartes Vanillerezept überdecken. Wer diese Punkte beachtet und die erste Charge klein hält, kommt mit dem Austausch gut zurecht.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Zucker erfolgreich ersetzen',
+        punkte: [
+          'Süßkraft beachten: über den Faktor die nötige Ersatzmenge ausrechnen.',
+          'Bei flüssigen Süßungsmitteln die übrige Flüssigkeit reduzieren.',
+          'Ofentemperatur um 10–15 °C senken (flüssige Mittel bräunen schneller).',
+          'Volumenlose Süßstoffe (Stevia) mit einem Füllstoff ergänzen.',
+          'Aroma einplanen — Honig, Ahornsirup und Kokos schmecken durch.',
+          'Erythrit und Xylit verhalten sich am ehesten wie Zucker.',
+          'Vor der großen Charge eine kleine Testmenge backen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Bei flüssigem Süßungsmittel andere Flüssigkeit reduzieren',
+        text: 'Die häufigste Stolperfalle beim Ersetzen von Zucker durch Honig, Ahornsirup oder Agavendicksaft: die zusätzliche Flüssigkeit. Diese Sirupe bestehen zu 15–35 Prozent aus Wasser. Wer sie einsetzt, ohne die übrige Flüssigkeit im Rezept zu reduzieren, bekommt einen zu weichen Teig, der nicht richtig aufgeht oder in der Mitte sitzen bleibt. Faustregel: pro 100 g flüssiges Süßungsmittel etwa 20–30 ml weniger Milch, Wasser oder Öl. Und weil die Sirupe schneller bräunen, den Ofen 10–15 °C kühler stellen und das Gebäck im Blick behalten.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Süßkraft-Werte sind Richtwerte',
+        text: 'Die Süßkraft-Faktoren und Mengenangaben sind Richtwerte fürs Backen, keine exakten Konstanten. Süße wird subjektiv empfunden, und die tatsächliche Süßkraft eines Produkts schwankt je nach Marke, Sorte und Verarbeitung — Honig etwa unterscheidet sich je nach Blütenart. Auch Geschmack, Bräunung und Konsistenz des Gebäcks ändern sich beim Austausch. Betrachten Sie die Werte deshalb als Ausgangspunkt und passen Sie nach dem ersten Versuch an. Dieser Rechner ist eine Backhilfe und keine Ernährungsempfehlung — die genannten Eigenschaften beschreiben das Back- und Geschmacksverhalten, nicht einen gesundheitlichen Nutzen.',
+      },
+    ],
     faq: [
       {
         frage: 'Wie viel Honig ersetzt 100 g Zucker?',
@@ -1446,6 +1617,12 @@ Ein niedriger glykämischer Index bedeutet einen langsameren Blutzuckeranstieg �
       {
         frage: 'Welcher Zuckerersatz eignet sich am besten zum Backen?',
         antwort: 'Für unkompliziertes Backen: Erythrit oder Xylit (ähnliches Verhalten wie Zucker). Für Aroma: Kokosblütenzucker (1:1). Für kalorienarm: Erythrit + Stevia kombiniert. Honig und Ahornsirup sind hervorragend für feuchte Backwaren (Muffins, Kuchen), weniger geeignet für trockene Kekse oder knuspriges Gebäck.',
+      },
+    ],
+    quellen: [
+      {
+        titel: 'Zucker & Süßungsmittel — Backumrechnung',
+        hinweis: 'Umrechnung über relative Süßkraft und Flüssigkeitsgehalt; Werte sind Richtwerte fürs Backen, keine Ernährungsempfehlung.',
       },
     ],
   },
