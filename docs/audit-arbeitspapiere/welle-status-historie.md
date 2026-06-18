@@ -44,6 +44,34 @@ oder Deployment-Artefakte zu verlieren.
 
 ---
 
+## 18.06.2026 — W19 kfz-steuer-rechner Goldstandard (YMYL, beispielrechnung-Leitformat, t26)
+
+- **Was gebaut:** kfz-steuer-rechner (auto.ts) hat jetzt `contentBloecke` + `quellen`
+  (Neueintrag, YMYL mit url). **18 Blöcke**, Leitformat **beispielrechnung** 6×
+  dominant (Benziner 1.400/120, Hubraum-Schwelle, Diesel 2.000/140, Kleinwagen vs.
+  SUV, Oldtimer/Wohnmobil, E-Auto-Befreiungsende) + 2 tabelle + 1 vergleich
+  (Benziner vs. Diesel). ~1.566 W, alle 6 `text`-Blöcke ≤170 W.
+- **YMYL aus SSOT gespiegelt (kfz-steuer-parameter.ts + kfz-steuer.ts):** Sockel
+  2,00 €/100 ccm Benzin / 9,50 € Diesel (§ 9 Abs. 1 Nr. 2a/2b, „angefangene 100 ccm"
+  = ceil); CO₂-Staffel ab 95 g/km progressiv 2,00/2,20/2,50/2,90/3,40/4,00 €/g
+  (§ 9 Abs. 1 Nr. 2c, Erstzulassung ab 01.01.2021); E-Auto-Befreiung 10 Jahre,
+  längstens bis 31.12.2035 (§ 3d, 8. KraftStÄndG v. 04.12.2025). Alle Beispiele
+  lib-exakt berechnet (Benziner 1.400/120 = 79 €; Diesel 2.000/140 = 286,50 €;
+  SUV 2.500/200 = 330 €; E-Auto Erstzul. 15.03.2024 → befreit bis 15.03.2034).
+  Progressive Staffel als ESt-Zonen-Analogie erklärt. Oldtimer-H-Pauschale 191,73 €,
+  Wohnmobil nach Gewicht, Schwerbehinderung 50/100 % als Sonderfälle.
+- **Sensitivität (YMYL/Finanzen):** „keine Steuerberatung"-Hinweis; Erstzulassung
+  vor 2021 (andere CO₂-Staffel) und vor 2009 (hubraum-/schadstoffbasiert) als
+  abweichende Bemessung benannt; Maßstab Steuerbescheid des Hauptzollamts.
+- **Bestand-Audit:** `erklaerung` (E-Auto bis 2035, Staffel korrekt) + 6 FAQ geprüft —
+  aktuell, kein Fix nötig, bleiben als Fallback. SSOT-Werte nicht abweichend
+  hartkodiert.
+- **Verify:** Wortzahl 1.566 (OK ≥1500), 18 Blöcke kein WARN, beispielrechnung 6×
+  dominant, 6/6 text ≤170 W, Cosinus ≤0,99 (nicht identisch), Vercel-grün.
+  contentBloecke-Goldstandard-Set damit auf **42 Rechner**.
+
+---
+
 ## 18.06.2026 — YMYL-Fix pendlerpauschale: gesetzliche km-Abrundung
 
 Folge-Fix zum in t21 gemeldeten Lib-Flag. Zwei atomare Commits:
