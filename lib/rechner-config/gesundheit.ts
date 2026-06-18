@@ -1502,15 +1502,15 @@ Wir weisen ausdrücklich darauf hin: Der Zyklusrechner darf nicht als alleinige 
     metaDescription: 'Alkohol-Abbau berechnen: Maximaler Promillewert, Abbauzeit, 0,5 ‰-Grenze ✓ Widmark-Formel ✓ Dynamische Getränke ✓ Mit KI-Erklärung.',
     keywords: ['alkohol abbau rechner', 'promille abbau', 'wann bin ich wieder nüchtern', 'widmark formel', 'alkohol fahrtauglich', 'promille berechnen', 'blutalkohol rechner'],
     icon: '🍺',
-    formel: 'Promille = (Alkohol in Gramm ÷ (Körpergewicht × r)) × 0,9 — mit r = 0,68 (Mann) oder 0,55 (Frau). Abbau ca. 0,15 ‰/Stunde.',
-    beispiel: 'Beispiel: Mann, 80 kg, 3 Bier (0,5 l, 5 %) = 60 g Alkohol → (60 / (80 × 0,68)) × 0,9 ≈ 0,99 ‰. Abbau auf 0,0 ‰ nach ca. 6,6 Stunden.',
+    formel: 'Promille = Alkohol in Gramm ÷ (Körpergewicht × r), mit r = 0,68 (Mann) / 0,55 (Frau). Abbau ca. 0,15 ‰/Stunde.',
+    beispiel: 'Beispiel: Mann, 80 kg, 3 Bier (0,5 l, 5 %) = 60 g Alkohol → 60 / (80 × 0,68) = 60 / 54,4 ≈ 1,10 ‰. Abbau auf 0,0 ‰ nach ca. 7,3 Stunden.',
     erklaerung: `**Wie funktioniert der Alkohol-Abbau-Rechner?**
 
 Unser Rechner schätzt anhand der weltweit bekannten **Widmark-Formel**, welchen maximalen Blutalkoholwert (BAK) Sie nach dem Konsum einer bestimmten Menge Alkohol erreichen und wann Sie voraussichtlich wieder nüchtern sein werden. Die Widmark-Formel stammt vom schwedischen Chemiker Erik M. P. Widmark (1889–1945) und ist bis heute Grundlage forensischer Alkoholberechnungen bei Gericht und Polizei.
 
 **Die Widmark-Formel im Detail**
 
-Die Formel lautet: Promille = (Alkoholmenge in Gramm) / (Körpergewicht in kg × Verteilungsfaktor r). Der Faktor r berücksichtigt, dass Alkohol sich nur im Körperwasser verteilt und nicht im Fettgewebe. Bei Männern beträgt r etwa 0,68, bei Frauen 0,55 — weil Frauen im Schnitt einen höheren Körperfettanteil und weniger Körperwasser haben. Zusätzlich berücksichtigt unser Rechner ein **Resorptionsdefizit von etwa 10 %**: Ein Teil des getrunkenen Alkohols wird bereits im Magen-Darm-Trakt abgebaut, bevor er in den Blutkreislauf gelangt.
+Die Formel lautet: Promille = (Alkoholmenge in Gramm) / (Körpergewicht in kg × Verteilungsfaktor r). Der Faktor r berücksichtigt, dass Alkohol sich nur im Körperwasser verteilt und nicht im Fettgewebe. Bei Männern beträgt r etwa 0,68, bei Frauen 0,55 — weil Frauen im Schnitt einen höheren Körperfettanteil und weniger Körperwasser haben. Die reine Widmark-Formel liefert dabei den maximalen Blutalkoholwert (Peak) unmittelbar nach dem Trinken; die tatsächlichen Werte können im Einzelfall etwas darunter liegen, weil ein Teil des Alkohols schon während der Aufnahme verstoffwechselt wird.
 
 **Alkoholmenge verschiedener Getränke**
 
@@ -1550,8 +1550,8 @@ Wenn Sie Alkohol getrunken haben, gilt eine einfache Regel: **Nicht ans Steuer.*
     // ~1.560 W), Leitformat „tabelle" 4× dominant. STRENGE Schutzauflage: KEINE Fahrfreigabe-
     // Formulierung, KEINE „schneller nüchtern"-Methode (Mythen nur entkräftet), Restalkohol
     // prominent, 0,0 ‰ für Fahranfänger benannt, Widmark als Näherung. Werte aus
-    // lib/berechnungen/promille.ts gespiegelt: g = mengeL×%×0,8×10; r 0,68/0,55; KEIN
-    // Resorptionsdefizit (lib rechnet pure Widmark); Abbau ~0,15 ‰/h, Zonen 0,3/0,5/1,1.
+    // lib/berechnungen/promille.ts gespiegelt: g = mengeL×%×0,8×10; r 0,68/0,55; reine
+    // Widmark ohne Magen-Darm-Abschlag; Abbau ~0,15 ‰/h, Zonen 0,3/0,5/1,1.
     // Beispiele lib-exakt (2 Bier Mann 80 kg = 0,74 ‰; gleiche Menge Frau 60 kg = 1,21 ‰).
     // Keine Rechtsberatung. erklaerung bleibt Fallback.
     contentBloecke: [
@@ -1723,7 +1723,7 @@ Wenn Sie Alkohol getrunken haben, gilt eine einfache Regel: **Nicht ans Steuer.*
       },
       {
         frage: 'Was ist die Widmark-Formel?',
-        antwort: 'Die Widmark-Formel berechnet den Blutalkoholwert: Promille = Alkohol (g) / (Körpergewicht × r). Der Verteilungsfaktor r beträgt 0,68 bei Männern und 0,55 bei Frauen. Zusätzlich wird ein Resorptionsdefizit von ca. 10 % berücksichtigt.',
+        antwort: 'Die Widmark-Formel berechnet den Blutalkoholwert: Promille = Alkohol (g) / (Körpergewicht × r). Der Verteilungsfaktor r beträgt 0,68 bei Männern und 0,55 bei Frauen. Das Ergebnis ist der maximale Promillewert (Peak); die tatsächlichen Werte können individuell etwas niedriger liegen.',
       },
       {
         frage: 'Ab wann ist man fahruntüchtig?',
