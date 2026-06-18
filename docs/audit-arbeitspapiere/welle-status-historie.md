@@ -44,6 +44,34 @@ oder Deployment-Artefakte zu verlieren.
 
 ---
 
+## 18.06.2026 — W19 laminat-rechner Goldstandard (beispielrechnung-Leitformat, t29)
+
+- **Was gebaut:** laminat-rechner (wohnen.ts) hat jetzt `contentBloecke` + `quellen`
+  (Neueintrag, didaktisch). **17 Blöcke**, Leitformat **beispielrechnung** 5× dominant
+  (Rechteck 20 m² + Verschnitt, Pakete-Aufrundung, L-Raum, Materialkosten/Preis-pro-m²,
+  Sockelleisten) + 2 tabelle + statistik + 6 text + checkliste + 2 infobox. ~1.548 W,
+  alle 6 `text`-Blöcke ≤170 W. Kein vergleich.
+- **Abgrenzung zu quadratmeter (Pflicht):** Material-Bedarf inkl. Verschnitt, Pakete,
+  Zubehör — nicht Wohnflächen-Ermittlung/WoFlV. quadratmeter taucht nicht in der
+  Ähnlichkeitsliste auf (Top: pendlerpauschale 0,98).
+- **Lib-Treue (laminat.ts):** Bedarf = Fläche × (1+Verschnitt%); Pakete = ceil(Bedarf/
+  Paketinhalt); Trittschall = Fläche × 1,05; Sockelleisten = Umfang × 1,10; Materialkosten
+  = Pakete × Preis; Preis/m² = Kosten/Fläche. Alle Beispiele lib-exakt (20 m² + 10 % =
+  22 m² → 9 Pakete à 2,49 m² = 22,41 m²; 9 × 30 € = 270 € → 13,50 €/m²; Sockelleisten
+  18 m × 1,10 = 19,8 m → 9 Stück à 2,40 m).
+- **L-34-Befund (Rechner schlägt Prompt-Annahme):** Der Prompt nannte Verschnitt
+  gerade 5 % / diagonal 10 %. Die Rechner-Realität (config erklaerung/beispiel/FAQ +
+  Verlegemuster-Auswahl) nutzt **gerade/Schiffsboden 10 % / diagonal 15 % / Fischgrät
+  20 %** (+3–5 % bei Nischen). Content auf die Rechner-Werte gespiegelt, um Widerspruch
+  zur Rechner-Ausgabe zu vermeiden. Paket 2,49 m² / 30 € aus dem beispiel-Feld
+  übernommen. Sockelleisten OHNE Türabzug (lib + config-FAQ: an den Zargen Abschlüsse).
+- **Bestand-Audit:** erklaerung + 6 FAQ geprüft — konsistent mit der Lib (10/15/20,
+  Türen nicht abziehen), kein Fix nötig, bleiben als Fallback.
+- **Verify:** Wortzahl 1.548 (OK ≥1500), 17 Blöcke kein WARN, beispielrechnung 5×
+  dominant, 6/6 text ≤170 W, Vercel-grün. contentBloecke-Goldstandard-Set auf **45 Rechner**.
+
+---
+
 ## 18.06.2026 — W19 cups-umrechner Goldstandard (tabelle-Leitformat, t28)
 
 - **Was gebaut:** cups-umrechner (kochen.ts) hat jetzt `contentBloecke` + `quellen`
