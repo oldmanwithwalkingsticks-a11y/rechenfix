@@ -1127,7 +1127,7 @@ Grundsätzlich nein — der Führerschein Klasse B gilt als Kosten der privaten 
   },
   {
     slug: 'reichweiten-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-18',
     titel: 'Reichweiten-Rechner (E-Auto)',
     beschreibung: 'Realistische E-Auto-Reichweite berechnen — abhängig von Temperatur, Fahrprofil und Verbrauch.',
     kategorie: 'Auto & Verkehr',
@@ -1194,6 +1194,174 @@ Weniger attraktiv wird die Rechnung bei häufigen Langstrecken mit Schnelllader-
 Der Reichweiten-Rechner kombiniert vier Praxis-Faktoren mit dem WLTP-Wert deines Fahrzeugs: **Fahrprofil** (Stadt, gemischt, Autobahn), **Außentemperatur**, **Klimaanlage oder Heizung** und **Fahrstil**. Die Größenordnungen der Korrekturen orientieren sich an den E-Auto-Reichweiten-Tests des ADAC und an Praxis-Daten weiterer Anbieter.
 
 Manchmal werden zusätzliche Eingaben wie Mitfahrer-Anzahl oder Straßenbelag gewünscht. Beides hat in der Praxis nur sehr geringen Effekt: Eine zusätzliche Person erhöht den Verbrauch auf der Autobahn um etwa ein bis zwei Prozent, der Straßenbelag variiert im Alltag (durchgängig Asphalt) kaum messbar. Auch der ADAC-Reichweiten-Rechner und vergleichbare Tools verzichten deshalb bewusst auf diese Inputs — sie würden die Bedienung verkomplizieren, ohne die Vorhersage spürbar genauer zu machen.`,
+    // W19-Goldstandard: reichweiten-rechner auf volle Tiefe (15 Bausteine, ~1.560 W), Leitformat
+    // „vergleich" 3× dominant. Fokus REICHWEITE/Energie — disjunkt zu autokosten/spritkosten/
+    // kfz-steuer. Rechner ist E-Auto-spezialisiert (WLTP-Korrektur nach Fahrprofil/Temperatur/
+    // Klima); Verbrenner-Seite nur als allgemeines Rechenprinzip/Vergleich (universelle Arithmetik
+    // Tank ÷ Verbrauch × 100), NICHT als Rechner-Output. E-Auto-Beispiel lib-konsistent: 60 kWh,
+    // WLTP 15 kWh/100km, Faktoren 0,70×0,85×0,90 → Realverbrauch 28 → ~215 km (= beispiel-Feld).
+    // KEINE festen Modell-/Akkudaten — nur Segment-Spannen. erklaerung bleibt Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Reichweite berechnen — Verbrenner vs. E-Auto',
+        html: `<p>Die Grundformel für die Reichweite ist bei beiden Antrieben gleich — nur die Einheiten unterscheiden sich. Sie teilen den <strong>Energievorrat</strong> durch den <strong>Verbrauch</strong> und multiplizieren mit 100.</p><p>Beim <strong>Verbrenner</strong> ist der Energievorrat das <strong>Tankvolumen</strong> in Litern, der Verbrauch wird in Litern pro 100 km angegeben: Reichweite = Tank ÷ Verbrauch × 100. Beim <strong>E-Auto</strong> tritt der <strong>Akku</strong> in Kilowattstunden (kWh) an die Stelle des Tanks, der Verbrauch wird in kWh/100 km gemessen — die Rechnung bleibt dieselbe.</p><p>Der große Unterschied liegt in der <strong>Verlässlichkeit der Angabe</strong>. Beim Verbrenner kommt man der Herstellerangabe meist recht nah. Beim E-Auto dagegen liegt die <strong>reale Reichweite oft deutlich unter dem WLTP-Wert</strong> — besonders bei Kälte und auf der Autobahn. Dieser Rechner ist deshalb auf die realistische E-Auto-Reichweite spezialisiert: Er korrigiert den WLTP-Wert nach Fahrprofil, Temperatur und Heizung.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Rechenweg: Verbrenner vs. E-Auto',
+        spalteA: 'Verbrenner',
+        spalteB: 'E-Auto',
+        zeilen: [
+          { kriterium: 'Energiespeicher', a: 'Tank in Litern', b: 'Akku in kWh' },
+          { kriterium: 'Verbrauch', a: 'Liter / 100 km', b: 'kWh / 100 km' },
+          { kriterium: 'Reichweite', a: 'Tank ÷ Verbrauch × 100', b: 'Akku ÷ Verbrauch × 100' },
+          { kriterium: 'Real vs. Angabe', a: 'meist nah am Normwert', b: 'oft deutlich unter WLTP' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Benziner: 50-Liter-Tank, 6,5 L/100 km',
+        schritte: [
+          { label: 'Tankvolumen', formel: '50 L', ergebnis: '50 L' },
+          { label: 'Verbrauch', formel: '6,5 L/100 km', ergebnis: '6,5 L' },
+          { label: 'Reichweite', formel: '50 ÷ 6,5 × 100', ergebnis: '≈ 769 km' },
+        ],
+        fazit: 'Ein voller 50-Liter-Tank reicht bei 6,5 L/100 km für rund 769 km. Beim Verbrenner liegt die reale Reichweite meist nah an diesem Wert — die Herstellerangabe ist gut erreichbar, weil die Abwärme des Motors das Heizen „gratis" übernimmt.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'E-Auto: 60-kWh-Akku, 18 kWh/100 km',
+        schritte: [
+          { label: 'Nutzbarer Akku', formel: '60 kWh', ergebnis: '60 kWh' },
+          { label: 'Verbrauch', formel: '18 kWh/100 km', ergebnis: '18 kWh' },
+          { label: 'Rechnerische Reichweite', formel: '60 ÷ 18 × 100', ergebnis: '≈ 333 km' },
+        ],
+        fazit: 'Mit 18 kWh/100 km kommt ein 60-kWh-Akku rechnerisch rund 333 km weit. Das ist aber ein Idealwert: Auf der Autobahn oder im Winter steigt der Verbrauch deutlich — wie stark, zeigt die realistische Rechnung weiter unten.',
+      },
+      {
+        typ: 'text',
+        titel: 'Akku-Größe vs. Effizienz — was wirklich zählt',
+        html: `<p>Beim Reichweiten-Vergleich schaut man zuerst auf die <strong>Akku-Größe</strong> in kWh — doch ein großer Akku ist nicht automatisch die beste Lösung. Genauso wichtig ist die <strong>Effizienz</strong>, also der Verbrauch in kWh/100 km.</p><p>Ein sparsames Auto mit 60 kWh und 15 kWh/100 km kommt rechnerisch 400 km weit — genauso wie ein durstigeres mit 80 kWh und 20 kWh/100 km, das aber mehr <strong>Gewicht, Ladezeit und Kosten</strong> mitbringt. Effizienz schlägt also reine Akkugröße: Sie spart bei jeder Fahrt Strom und verkürzt die Ladestopps.</p><p>Effizienz hängt von <strong>Aerodynamik, Gewicht, Antriebstechnik und Reifen</strong> ab. Kompakte, windschlüpfige Fahrzeuge mit Wärmepumpe sind im Winter klar im Vorteil. Ein sehr großer Akku lohnt vor allem für regelmäßige Langstrecke; für den Alltag ist ein effizientes Auto mit mittlerem Akku oft die rundere — und günstigere — Wahl. Der Verbrauch entscheidet, nicht nur die Kilowattstunden auf dem Datenblatt.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'WLTP vs. Realreichweite — warum die Differenz',
+        html: `<p>Die Herstellerangabe zur Reichweite beruht auf dem <strong>WLTP</strong>-Zyklus (Worldwide Harmonised Light Vehicles Test Procedure) — einem genormten Labortest mit moderaten Temperaturen, definierten Geschwindigkeiten und ohne Klimaanlage. Das macht Fahrzeuge vergleichbar, bildet den Alltag aber nur eingeschränkt ab.</p><p>Im echten Verkehr kommen Faktoren hinzu, die der Test nicht erfasst: hohe <strong>Autobahn-Geschwindigkeiten</strong>, <strong>Kälte</strong>, eine laufende <strong>Heizung</strong>, Steigungen, Zuladung. Jeder dieser Faktoren erhöht den Verbrauch und senkt damit die Reichweite. Die WLTP-Angabe ist deshalb ein <strong>Bestwert</strong>, kein Alltagswert.</p><p>Als grobe Orientierung gilt: Im <strong>Sommer</strong> erreichen E-Autos rund 80–100 % der WLTP-Reichweite, im <strong>Winter</strong> eher 60–80 %, und auf der <strong>Autobahn bei Kälte</strong> kann es auf gut die Hälfte fallen. Verbrenner schwanken weniger, weil ihre Abwärme das Heizen übernimmt und der Normwert ohnehin näher an der Realität liegt. Genau diese Abschläge bildet der Rechner ab.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'WLTP vs. real: günstige vs. ungünstige Bedingungen',
+        spalteA: 'Günstige Bedingungen',
+        spalteB: 'Ungünstige Bedingungen',
+        zeilen: [
+          { kriterium: 'Tempo', a: 'Stadt/Landstraße (50–80 km/h)', b: 'Autobahn (120–130 km/h)' },
+          { kriterium: 'Temperatur', a: 'mild (~20 °C)', b: 'Kälte (unter 0 °C)' },
+          { kriterium: 'Heizung/Klima', a: 'aus oder Wärmepumpe', b: 'Widerstandsheizung an' },
+          { kriterium: 'Reichweite', a: '~90–100 % WLTP', b: '~50–70 % WLTP' },
+        ],
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Was die Reichweite beeinflusst',
+        kopf: ['Faktor', 'Effekt auf die Reichweite', 'Betrifft'],
+        zeilen: [
+          ['Hohes Tempo (Autobahn)', '−20 bis −30 %', 'beide, E-Auto stärker'],
+          ['Kälte (unter 0 °C)', '−15 bis −30 %', 'v. a. E-Auto (Akku + Heizung)'],
+          ['Heizung (Widerstand)', '−10 bis −20 %', 'E-Auto'],
+          ['Wärmepumpe statt Heizstab', '+5 bis +10 %', 'E-Auto'],
+          ['Beladung / Dachbox / Anhänger', '−5 bis −50 %', 'beide'],
+          ['Eco-Modus / ruhige Fahrweise', '+10 bis +15 %', 'beide'],
+        ],
+        fussnote: 'Richtwerte; die Effekte überlagern sich multiplikativ. Beispiel: Autobahn (× 0,70) und Winter mit Heizung (× 0,85 × 0,90) ergeben zusammen nur noch rund 54 % der WLTP-Reichweite. Beim E-Auto schlagen Kälte und Autobahn besonders durch, weil keine Motorabwärme zum Heizen zur Verfügung steht.',
+      },
+      {
+        typ: 'text',
+        titel: 'Was die E-Auto-Reichweite besonders drückt',
+        html: `<p>Zwei Faktoren setzen E-Autos überproportional zu: <strong>Kälte</strong> und <strong>Autobahn</strong>.</p><p>Bei <strong>Kälte</strong> wirkt ein Doppeleffekt. Erstens arbeitet die Akkuchemie langsamer — ein kalter Akku gibt weniger Energie ab. Zweitens braucht die <strong>Heizung</strong> viel Strom, denn anders als ein Verbrenner hat ein E-Auto keine Motorabwärme, mit der sich der Innenraum „nebenbei" heizen ließe. Eine klassische Widerstandsheizung zieht mehrere Kilowatt; eine Wärmepumpe mildert das deutlich.</p><p>Auf der <strong>Autobahn</strong> schlägt die Physik zu: Der Luftwiderstand wächst im <strong>Quadrat zur Geschwindigkeit</strong>. Tempo 130 verbraucht weit mehr als Tempo 100 — und weil bei konstant hoher Geschwindigkeit kaum rekuperiert wird, fehlt der Stadt-Vorteil der Energierückgewinnung. Kommen Kälte und Autobahn zusammen, summieren sich die Effekte. Wer im Winter eine längere Autobahnfahrt plant, sollte die Reichweite konservativ ansetzen und Ladestopps fest einplanen.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Wärmepumpe vs. Widerstandsheizung',
+        spalteA: 'Wärmepumpe',
+        spalteB: 'Widerstandsheizung',
+        zeilen: [
+          { kriterium: 'Stromverbrauch Heizung', a: 'gering (~1 kWh/100 km)', b: 'hoch (3–5 kWh/100 km)' },
+          { kriterium: 'Winter-Reichweite', a: 'deutlich besser', b: 'spürbar schlechter' },
+          { kriterium: 'Prinzip', a: 'verschiebt Wärme aus der Umgebung', b: 'erzeugt Wärme aus Strom (Heizstab)' },
+          { kriterium: 'Lohnt sich für', a: 'kalte Regionen, Vielfahrer', b: 'milde Nutzung, Aufpreis-Verzicht' },
+        ],
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Stadt vs. Autobahn — beide Antriebe',
+        spalteA: 'Stadt / Landstraße',
+        spalteB: 'Autobahn (130)',
+        zeilen: [
+          { kriterium: 'E-Auto-Verbrauch', a: 'niedrig (Rekuperation)', b: 'hoch (Luftwiderstand)' },
+          { kriterium: 'Verbrenner-Verbrauch', a: 'eher höher (Anfahren, Leerlauf)', b: 'relativ moderat' },
+          { kriterium: 'Effizienter ist hier', a: 'E-Auto', b: 'Verbrenner vergleichsweise' },
+          { kriterium: 'Grund', a: 'Bremsenergie zurück in den Akku', b: 'Windwiderstand steigt im Quadrat zum Tempo' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Realistische E-Auto-Reichweite (Winter, Autobahn)',
+        schritte: [
+          { label: 'WLTP-Verbrauch (60 kWh, 400 km WLTP)', formel: '60 ÷ 400 × 100', ergebnis: '15 kWh/100 km' },
+          { label: 'Autobahn × Winter × Heizung', formel: '× 0,70 × 0,85 × 0,90', ergebnis: 'Faktor 0,54' },
+          { label: 'Realverbrauch', formel: '15 ÷ 0,54', ergebnis: '≈ 28 kWh/100 km' },
+          { label: 'Realreichweite', formel: '60 ÷ 28 × 100', ergebnis: '≈ 215 km' },
+        ],
+        fazit: 'Aus 400 km WLTP werden unter Winter-Autobahn-Bedingungen real nur rund 215 km — fast die Hälfte. Die Faktoren wirken auf den Verbrauch und multiplizieren sich. Genau so rechnet dieser Rechner aus Ihrem WLTP-Wert die Alltagsreichweite.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Typische Reichweiten-Spannen nach Segment',
+        werte: [
+          { label: 'Kleinwagen', wert: 'Akku ~40 kWh', hinweis: 'real ~200–280 km' },
+          { label: 'Kompaktklasse', wert: 'Akku ~60 kWh', hinweis: 'real ~300–380 km' },
+          { label: 'SUV / Mittelklasse', wert: 'Akku ~75–85 kWh', hinweis: 'real ~350–450 km' },
+          { label: 'Oberklasse / Langstrecke', wert: 'Akku ~90–100 kWh', hinweis: 'real ~450–550 km' },
+          { label: 'Verbrenner (~50-L-Tank)', wert: '~700–900 km', hinweis: 'je nach Verbrauch' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Reichweitenangst — wie real ist das Problem?',
+        html: `<p>Die Sorge, mit leerem Akku liegen zu bleiben, hat einen eigenen Namen: <strong>Reichweitenangst</strong>. In der Praxis ist sie meist größer als das tatsächliche Risiko. Der durchschnittliche Pkw in Deutschland fährt rund <strong>40 km pro Tag</strong> — ein Bruchteil selbst kleiner E-Auto-Reichweiten.</p><p>Entscheidend ist weniger die maximale Reichweite als die <strong>Lademöglichkeit</strong>. Wer zu Hause oder am Arbeitsplatz laden kann, beginnt jeden Tag „vollgetankt" und braucht öffentliche Lader fast nie. Eng wird es vor allem auf <strong>Langstrecke</strong> und ohne eigene Wallbox.</p><p>Das öffentliche <strong>Schnellladenetz</strong> ist in den letzten Jahren stark gewachsen; an Autobahnen steht inzwischen meist in kurzen Abständen ein Lader. Mit etwas Planung — Ladestopps grob entlang der Route, realistische statt WLTP-Reichweite — verliert die Langstrecke viel von ihrem Schrecken. Hilfreich ist, die ersten Fahrten bewusst zu beobachten: Nach wenigen Wochen hat man ein verlässliches Gefühl für die eigene Alltagsreichweite.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'E-Auto laden & Reichweite im Alltag',
+        html: `<p>Im Alltag relativiert sich die Reichweiten-Sorge oft: Die meisten Fahrten sind kurz, und wer zu Hause oder am Arbeitsplatz laden kann, startet täglich mit „vollem Tank". Für den entspannten Betrieb empfehlen Hersteller, den Akku im Bereich <strong>20 bis 80 %</strong> zu halten — das schont die Zellen und verzögert die Alterung.</p><p>Genau in diesem Fenster lädt das Auto auch am <strong>schnellsten</strong>: Zwischen rund 10 und 80 % nimmt der Akku am DC-Schnelllader die höchste Leistung auf, darüber drosselt er deutlich. Auf Langstrecke ist es deshalb effizienter, zweimal kurz von 10 auf 80 % zu laden, als einmal lange bis 100 %.</p><p>Für die <strong>Planung</strong> heißt das: nicht mit der vollen WLTP-Reichweite kalkulieren, sondern mit einem realistischen Wert samt Puffer — gerade im Winter. Wer Ladestopps grob einplant und die ersten Fahrten beobachtet, bekommt schnell ein verlässliches Gefühl für die eigene Alltagsreichweite.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Reichweite realistisch planen',
+        punkte: [
+          'Mit realistischer Reichweite planen, nicht mit dem WLTP-Bestwert.',
+          'Winter-Abschlag einkalkulieren: grob 70–80 % der Sommer-Reichweite.',
+          'Auf der Autobahn die Reichweite deutlich niedriger ansetzen als in der Stadt.',
+          'Reserve einplanen — nicht erst bei 0 % einen Lader suchen.',
+          'Ladestopps auf Langstrecke vorab grob festlegen (10–80-%-Fenster nutzen).',
+          'Wärmepumpe, Eco-Modus und Vorheizen am Stecker nutzen.',
+          'Beim Verbrenner: Tankvolumen und realen Verbrauch für die Reichweite verwenden.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Beim E-Auto 10–80 % laden ist am effizientesten',
+        text: 'Für Akku-Gesundheit und Tempo gilt im Alltag die 20-bis-80-Prozent-Regel: In diesem Fenster altert der Akku am langsamsten, und am Schnelllader lädt er zwischen rund 10 und 80 % am zügigsten — darüber drosselt die Ladeleistung stark. Auf Langstrecke sind zwei kurze Stopps von 10 auf 80 % oft schneller als ein langer bis 100 %. Den vollen Akku (100 %) heben Sie sich für Tage mit langer Strecke auf und nutzen ihn dann zeitnah, statt das Auto voll geladen lange stehen zu lassen.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Werte sind Orientierung — Fahrprofil entscheidet',
+        text: 'Die hier genannten Reichweiten, Verbräuche und Abschläge sind Richtwerte zur Orientierung. Die reale Reichweite hängt stark vom individuellen Fahrprofil ab — Geschwindigkeit, Temperatur, Topografie, Zuladung, Reifen und Fahrstil wirken zusammen und können das Ergebnis um ein Drittel oder mehr verschieben. Konkrete Modell- und Akkudaten ändern sich zudem laufend mit neuen Fahrzeuggenerationen. Tragen Sie für ein belastbares Ergebnis die Werte Ihres eigenen Fahrzeugs ein. Dieser Rechner liefert eine fundierte Schätzung, keine Garantie für die im Einzelfall erreichbare Reichweite.',
+      },
+    ],
     faq: [
       {
         frage: 'Warum erreiche ich die WLTP-Reichweite nie?',
@@ -1231,6 +1399,10 @@ Manchmal werden zusätzliche Eingaben wie Mitfahrer-Anzahl oder Straßenbelag ge
         frage: 'Welche Faktoren wirken am stärksten auf die reale Reichweite?',
         antwort: 'Den größten Einfluss haben Fahrprofil und Außentemperatur. Auf der Autobahn bei 130 km/h liegt der Verbrauch rund 25 Prozent über dem Stadtwert, bei minus zehn Grad kosten Heizung und langsamere Batteriechemie weitere etwa 25 Prozent. Klimaanlage und Fahrstil verändern die Reichweite jeweils um rund 10 bis 15 Prozent. Mitfahrer-Gewicht und Straßenbelag wirken dagegen nur im einstelligen Prozentbereich und sind deshalb keine eigenen Eingaben.',
       },
+    ],
+    quellen: [
+      { titel: 'WLTP — Messverfahren (Hintergrund)', hinweis: 'WLTP ist ein genormter Laborzyklus; die Realreichweite liegt je nach Tempo, Temperatur und Heizung darunter.' },
+      { titel: 'ADAC — Reichweite & Verbrauch (Realtests)', url: 'https://www.adac.de', hinweis: 'Realverbrauch- und Reichweiten-Tests als Orientierung' },
     ],
   },
   {
