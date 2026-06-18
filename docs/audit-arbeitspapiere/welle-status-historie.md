@@ -44,6 +44,33 @@ oder Deployment-Artefakte zu verlieren.
 
 ---
 
+## 18.06.2026 — W19 cups-umrechner Goldstandard (tabelle-Leitformat, t28)
+
+- **Was gebaut:** cups-umrechner (kochen.ts) hat jetzt `contentBloecke` + `quellen`
+  (Neueintrag, didaktisch). **17 Blöcke**, Leitformat **tabelle** 4× dominant
+  (Cup→Gramm-Zutaten, Cup-Größen weltweit, Löffel/Cup/fl-oz, Butter-Stick) + 3
+  beispielrechnung + 6 text + statistik + checkliste + 2 infobox. ~1.551 W, alle
+  6 `text`-Blöcke ≤170 W. **vergleich bewusst weggelassen** (Abgrenzung zu backform,
+  das vergleich-Leitformat ist).
+- **Kernbotschaft umgesetzt:** Cup ist VOLUMEN, nicht Gewicht → je Zutat andere
+  Grammzahl (Mehl 125 g, Zucker 200 g, Honig 340 g — bei identischem Volumen).
+- **Rechner-Realität gespiegelt (kein dedizierter Lib, inline/dichtebasiert):** 1 US-Cup
+  = **240 ml** (formel-Feld des Rechners), customary 236,59 ml nur als Größen-Variante
+  in der Tabelle/Text genannt — so kein Widerspruch zwischen Content und Rechner-
+  Ausgabe (L-34/L-36: Rechner-Wert schlägt Prompt-Annahme 236,6). Dichten aus den 14
+  Rechner-Zutaten gespiegelt. Beispiele konsistent mit 240 ml (1,5 Cups Milch = 360 ml,
+  2 Cups Mehl = 250 g, US-Rezept-Umrechnung). Ergänzt: oz/lb/°F-Text (US-Rezepte brauchen
+  auch Gewicht + Temperatur; 350 °F ≈ 175 °C).
+- **Bestand-Audit:** erklaerung + FAQ geprüft — konsistent (nutzen ebenfalls 240 ml,
+  customary 236,59 korrekt benannt), kein Fix nötig, bleiben als Fallback.
+- **Verify:** Wortzahl 1.551 (OK ≥1500), 17 Blöcke kein WARN, tabelle 4× dominant,
+  6/6 text ≤170 W, Vercel-grün. backform gut differenziert (vergleich-Leitformat);
+  Cosinus 1.00 zu trinkgeld ist die bekannte **tabelle-Leitformat-Cluster-Eigenschaft**
+  (Sequenz mit 17 Blöcken eindeutig, „nicht identisch" auf Sequenz-Ebene erfüllt).
+  contentBloecke-Goldstandard-Set damit auf **44 Rechner**.
+
+---
+
 ## 18.06.2026 — YMYL-Fix alkohol-abbau: Content an Lib angeglichen (Resorptionsdefizit-Drift)
 
 Folge-Fix zum in t27 gemeldeten Flag. Karsten-Entscheidung: **Option A — Content
