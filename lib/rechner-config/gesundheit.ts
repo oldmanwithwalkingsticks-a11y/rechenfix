@@ -2032,7 +2032,7 @@ Die Gehgeschwindigkeit beeinflusst die Dauer, aber kaum den Kalorienverbrauch pr
   },
   {
     slug: 'sonnenschutz-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-18',
     titel: 'Sonnenschutz-Rechner',
     beschreibung: 'Sonnenschutz berechnen: Eigenschutzzeit, empfohlener Lichtschutzfaktor und maximale Sonnenzeit.',
     kategorie: 'Gesundheit',
@@ -2081,6 +2081,160 @@ Nein! Nachcremen verlängert die maximale Schutzzeit nicht, sondern erhält den 
 **Richtig eincremen**
 
 Für den vollen LSF-Schutz müssen 2 mg Sonnencreme pro Quadratzentimeter Haut aufgetragen werden. Für einen Erwachsenen entspricht das etwa 30–40 ml (6 Teelöffel) für den gesamten Körper. Die meisten Menschen tragen nur die Hälfte auf — und erhalten damit nur die Hälfte des angegebenen LSF.`,
+    // W19-Goldstandard: sonnenschutz-rechner auf volle Tiefe (16 Bausteine, ~1.560 W),
+    // Leitformat „statistik" 4× dominant (Eigenschutz/Hauttyp, UV-Index-Stufen, LSF-Wirkung,
+    // verstärkende Faktoren). Werte aus lib/berechnungen/sonnenschutz.ts gespiegelt:
+    // geschuetzteZeit = Eigenschutz × LSF × 0,6 (40 % Sicherheitsabzug), Eigenschutz skaliert
+    // mit UV (Basis × 3/UV-Mitte). Kanonisches Beispiel Typ II/UV 6–7/LSF 30 → 7/126/63 Min.
+    // WELLBEING präventiv: Hautkrebs-Prävention im Vordergrund, kein Bräunungs-Frame, kein
+    // LSF-Freibrief, Verweis auf Dermatologie. erklaerung bleibt Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Wie Sonnenschutz funktioniert: Eigenschutzzeit × LSF',
+        html: `<p>Sonnenschutz beruht auf zwei Größen: der <strong>Eigenschutzzeit</strong> der Haut und dem <strong>Lichtschutzfaktor (LSF)</strong> des Sonnenschutzmittels.</p><p>Die <strong>Eigenschutzzeit</strong> ist die Spanne, die ungeschützte Haut der Sonne standhält, bevor sich eine Rötung bildet. Sie hängt vom Hauttyp ab: sehr helle Haut hat nur wenige Minuten, dunkle Haut deutlich länger. Der <strong>LSF</strong> verlängert diese Zeit rechnerisch um seinen Faktor — LSF 30 also theoretisch um das 30-Fache.</p><p>In der Praxis sollte man diese Zeit aber nicht voll ausreizen. Dieser Rechner zieht deshalb einen <strong>Sicherheitsabzug</strong> ein und kalkuliert nur mit rund 60 Prozent der theoretischen Schutzdauer — weil Creme zu dünn aufgetragen wird, abschwitzt oder abgewaschen wird. Das Ergebnis ist eine realistische, eher vorsichtige Schätzung, kein Freibrief für stundenlanges Sonnenbaden.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Eigenschutzzeit nach Hauttyp (bei UV ~3)',
+        werte: [
+          { label: 'Typ I — sehr hell, Sommersprossen', wert: '5–10 min', hinweis: 'bräunt nie' },
+          { label: 'Typ II — hell, blond', wert: '10–20 min', hinweis: 'häufig Sonnenbrand' },
+          { label: 'Typ III — mittelhell', wert: '20–30 min', hinweis: 'bräunt langsam' },
+          { label: 'Typ IV — bräunlich', wert: '30–45 min', hinweis: 'selten Sonnenbrand' },
+          { label: 'Typ V — dunkel', wert: '~60 min', hinweis: 'sehr selten Sonnenbrand' },
+          { label: 'Typ VI — sehr dunkel', wert: '~90 min', hinweis: 'Sonnenbrand extrem selten' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Schutzdauer Hauttyp II, LSF 30, mäßiger UV-Index (4)',
+        schritte: [
+          { label: 'Eigenschutzzeit Typ II bei UV 4', formel: '15 min × (3 ÷ 4)', ergebnis: '≈ 11 min' },
+          { label: 'mit LSF 30 (theoretisch)', formel: '11 min × 30', ergebnis: '330 min' },
+          { label: 'Sicherheitsabzug 40 % (Faktor 0,6)', formel: '330 min × 0,6', ergebnis: '≈ 198 min' },
+        ],
+        fazit: 'Bei mäßigem UV-Index hält Hauttyp II mit LSF 30 rund 198 Minuten (gut 3 Stunden) geschützt durch. Nachcremen empfiehlt sich nach etwa der halben Zeit, also nach rund 99 Minuten — das erhält den Schutz, verlängert ihn aber nicht. Wichtig: Dieser Wert setzt voraus, dass die Creme in voller Menge aufgetragen wurde; bei dünnerem Auftrag fällt die reale Schutzzeit deutlich kürzer aus.',
+      },
+      {
+        typ: 'text',
+        titel: 'Hauttypen nach Fitzpatrick verstehen',
+        html: `<p>Die <strong>Fitzpatrick-Skala</strong> teilt die menschliche Haut in sechs Typen ein — von Typ I (sehr hell, verbrennt fast immer, bräunt kaum) bis Typ VI (sehr dunkel, kaum Sonnenbrand). Sie ist in der Dermatologie der Standard, um das individuelle Sonnenbrand-Risiko einzuschätzen.</p><p>Entscheidend für den Schutz ist: Je heller der Hauttyp, desto <strong>kürzer die Eigenschutzzeit</strong> und desto höher der nötige Lichtschutzfaktor. Typ I und II verbrennen schon nach wenigen Minuten und sollten konsequent hohen LSF, Kleidung und Schatten nutzen. Typ III und IV haben etwas mehr Spielraum, brauchen bei intensiver Sonne aber ebenfalls Schutz.</p><p>Wichtig: Auch dunkle Hauttypen sind nicht unverwundbar. Sie verbrennen seltener, das Risiko für UV-bedingte Hautschäden bleibt aber bestehen. Den eigenen Hauttyp einzuschätzen ist der erste Schritt zu passendem Schutz — im Zweifel wählt man den helleren Typ.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Fitzpatrick-Hauttypen im Überblick',
+        kopf: ['Hauttyp', 'Merkmale', 'Eigenschutz (UV ~3)'],
+        zeilen: [
+          ['Typ I', 'Sehr hell, Sommersprossen, rötlich/blond, bräunt nie', '5–10 min'],
+          ['Typ II', 'Hell, blondes Haar, helle Augen, bräunt kaum', '10–20 min'],
+          ['Typ III', 'Mittelhell, dunkelblond/braun, bräunt langsam', '20–30 min'],
+          ['Typ IV', 'Bräunlich, dunkles Haar, bräunt gut', '30–45 min'],
+          ['Typ V', 'Dunkel, sehr selten Sonnenbrand', '~60 min'],
+          ['Typ VI', 'Sehr dunkel, Sonnenbrand extrem selten', '~90 min'],
+        ],
+        fussnote: 'Die Eigenschutzzeit ist die Spanne, in der ungeschützte Haut der Sonne standhält, bevor eine Rötung beginnt. Die Werte gelten für mittlere Sonne (UV-Index ~3); bei höherem UV-Index verkürzen sie sich proportional. Der eigene Hauttyp lässt sich grob über Haar- und Augenfarbe sowie die Sonnenbrand-Neigung einordnen — im Zweifel wählt man den helleren Typ, also kürzere Eigenschutzzeit und mehr Schutz.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'UV-Index-Stufen und empfohlener Schutz',
+        werte: [
+          { label: 'UV 1–2 (niedrig)', wert: 'kein Schutz nötig', hinweis: 'für die meisten Hauttypen' },
+          { label: 'UV 3–5 (mäßig)', wert: 'Schutz empfohlen', hinweis: 'Mittagssonne meiden' },
+          { label: 'UV 6–7 (hoch)', wert: 'Schutz notwendig', hinweis: 'Schatten bevorzugen' },
+          { label: 'UV 8–10 (sehr hoch)', wert: 'starker Schutz nötig', hinweis: 'Mittagssonne unbedingt meiden' },
+          { label: 'UV 11+ (extrem)', wert: 'maximaler Schutz', hinweis: 'Aufenthalt im Freien minimieren' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'UV-Index richtig deuten',
+        html: `<p>Der <strong>UV-Index</strong> ist eine international standardisierte Maßzahl für die sonnenbrandwirksame Strahlung. Er reicht von 0 (nachts) bis über 11 (Hochgebirge, Tropen) und wird vom Bundesamt für Strahlenschutz und von Wetterdiensten tagesaktuell für jede Region angegeben. In Deutschland erreicht er im Sommer typischerweise 6–8.</p><p>Je höher der Index, desto schneller schädigt die Strahlung ungeschützte Haut. Schon ab einem <strong>UV-Index von 3</strong> empfehlen Fachleute aktiven Schutz — Creme, Kleidung und Schatten zur Mittagszeit. Ab Werten von 8 oder mehr, wie sie im Hochsommer, in den Bergen oder am Wasser auftreten, ist besondere Vorsicht geboten.</p><p>Praktisch bestimmt der UV-Index, wie kurz die geschützte Zeit ausfällt: Bei doppeltem UV-Wert halbiert sich grob die Eigenschutzzeit. Ein Blick auf den Tageswert — etwa in der Wetter-App oder beim BfS — gehört deshalb zur Schutzplanung, besonders im Urlaub in südlicheren Regionen.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Dieselbe Haut bei hohem UV-Index (6–7) — warum kürzer',
+        schritte: [
+          { label: 'Eigenschutzzeit Typ II bei UV 6,5', formel: '15 min × (3 ÷ 6,5)', ergebnis: '≈ 7 min' },
+          { label: 'mit LSF 30, Faktor 0,6', formel: '7 min × 30 × 0,6', ergebnis: '≈ 126 min' },
+          { label: 'Nachcremen nach halber Zeit', formel: '126 min ÷ 2', ergebnis: '≈ 63 min' },
+        ],
+        fazit: 'Gleicher Hauttyp, gleiche Creme — aber bei hohem statt mäßigem UV-Index sinkt die Schutzdauer von ~198 auf ~126 Minuten. Der UV-Index ist also genauso entscheidend wie Hauttyp und LSF. Bei sehr hohem UV reicht selbst LSF 30 nur für gut zwei Stunden. Wer mittags am Strand oder in den Bergen unterwegs ist, sollte deshalb zu höherem LSF greifen und zusätzlich Schatten und Kleidung nutzen, statt die Zeit auszureizen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum der LSF nicht voll ausgereizt werden sollte',
+        html: `<p>Ein Lichtschutzfaktor von 30 bedeutet theoretisch: Die Haut hält 30-mal länger durch als ohne Schutz. In der Praxis ist dieser Wert aber ein <strong>Laborwert</strong> — und der Alltag sieht anders aus.</p><p>Der LSF wird unter Idealbedingungen mit 2 mg Creme pro Quadratzentimeter gemessen. Die meisten Menschen tragen jedoch nur <strong>ein Viertel bis die Hälfte</strong> dieser Menge auf — der reale Schutz fällt damit deutlich geringer aus. Hinzu kommen Schwitzen, Wasser und Abrieb durch Kleidung.</p><p>Deshalb gilt: den rechnerischen Schutz <strong>nie voll ausreizen</strong>. Dieser Rechner kalkuliert mit einem Sicherheitsabzug von 40 Prozent und empfiehlt, nach etwa der halben Schutzdauer nachzucremen. Wichtig dabei — <strong>Nachcremen erhält den Schutz, verlängert ihn aber nicht</strong>: Die Eigenschutzzeit der Haut ist nach Ablauf aufgebraucht und lässt sich durch erneutes Auftragen nicht zurücksetzen.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'LSF-Schutzwirkung: gefilterte UV-B-Strahlung',
+        werte: [
+          { label: 'LSF 15', wert: '~93 %', hinweis: 'lässt ~1/15 durch' },
+          { label: 'LSF 20', wert: '~95 %', hinweis: 'lässt ~1/20 durch' },
+          { label: 'LSF 30', wert: '~97 %', hinweis: 'lässt ~1/30 durch' },
+          { label: 'LSF 50', wert: '~98 %', hinweis: 'lässt ~1/50 durch' },
+        ],
+      },
+      {
+        typ: 'vergleich',
+        titel: 'LSF 30 vs. LSF 50 — der Unterschied realistisch',
+        spalteA: 'LSF 30',
+        spalteB: 'LSF 50',
+        zeilen: [
+          { kriterium: 'Gefilterte UV-B-Strahlung', a: '~97 %', b: '~98 %' },
+          { kriterium: 'Durchgelassene UV-B', a: '~3,3 % (1/30)', b: '~2 % (1/50)' },
+          { kriterium: 'Empfohlen für', a: 'Hauttyp III–IV, mäßiger UV', b: 'Hauttyp I–II, UV über 8' },
+          { kriterium: 'Praktischer Nutzen', a: 'hoher Schutz', b: 'etwas mehr — aber NICHT „doppelt so lang"' },
+        ],
+      },
+      {
+        typ: 'statistik',
+        titel: 'Verstärkende Faktoren für die UV-Belastung',
+        werte: [
+          { label: 'Schnee (Reflexion)', wert: 'bis +90 %', hinweis: 'Wintersport, Gletscher' },
+          { label: 'Wasser / Sand', wert: '+10 bis +25 %', hinweis: 'Strand, Baden' },
+          { label: 'Höhenlage', wert: '~+10 % je 1.000 m', hinweis: 'Bergsport' },
+          { label: 'Mittagszeit 11–15 Uhr', wert: 'UV-Maximum', hinweis: 'Hauptbelastung des Tages' },
+          { label: 'Südliche Regionen', wert: 'deutlich höher', hinweis: 'im Urlaub einplanen' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Sonnenschutz ist mehr als Creme',
+        html: `<p>Sonnencreme ist wichtig, aber nur ein Baustein. Den besten Schutz bietet die Kombination mehrerer Maßnahmen — der textile und bauliche Schutz wirkt oft zuverlässiger als Creme allein.</p><p><strong>Kleidung</strong> mit dichtem Gewebe, ein <strong>Hut</strong> mit breiter Krempe und eine <strong>Sonnenbrille</strong> mit UV-Filter decken ab, was keine Creme leisten kann. <strong>Schatten</strong> — besonders zwischen 11 und 15 Uhr, wenn die Sonne am höchsten steht — reduziert die Strahlung erheblich.</p><p>Zu bedenken ist außerdem die <strong>Reflexion</strong>: Wasser, Sand und vor allem Schnee werfen UV-Strahlung zurück und verstärken die Belastung; im Gebirge nimmt sie mit der Höhe zu. Wer all das mitdenkt, schützt sich deutlich besser als mit Creme allein — und muss die berechnete Schutzdauer seltener bis zur Grenze ausreizen. Kinderhaut braucht besonderen Schutz, Babys gehören gar nicht in die direkte Sonne.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Sonnenbrand und Hautalterung: warum Vorbeugen zählt',
+        html: `<p>UV-Strahlung wirkt nicht nur kurzfristig als Sonnenbrand, sondern hinterlässt auch <strong>langfristige Spuren</strong> in der Haut. Jeder Sonnenbrand ist eine akute Schädigung der Hautzellen — und die Haut „vergisst" diese Schäden nicht.</p><p>Über Jahre summiert sich die UV-Belastung. Sichtbare Folgen sind <strong>vorzeitige Hautalterung</strong>: Falten, Pigmentflecken und ein Verlust an Spannkraft, der maßgeblich auf Sonne zurückgeht. Schwerer wiegt das erhöhte Risiko für <strong>Hautkrebs</strong>, das mit der Zahl der Sonnenbrände steigt — besonders kritisch sind Sonnenbrände in der Kindheit.</p><p>Genau deshalb ist konsequenter Schutz keine Übervorsicht, sondern Vorsorge. Wer Eigenschutzzeit, UV-Index und LSF realistisch einschätzt und zusätzlich Schatten und Kleidung nutzt, senkt das Risiko spürbar. Vorbeugen ist dabei einfacher und wirksamer als jede spätere Behandlung — und kostet im Alltag nur wenig Aufwand.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Richtig vor der Sonne schützen',
+        punkte: [
+          'Ausreichend Menge: für den ganzen Körper etwa 30–40 ml (ca. 6 Teelöffel).',
+          'Creme schon 20–30 Minuten vor dem Sonnenbad auftragen.',
+          'Nach der halben Schutzdauer und nach Schwitzen, Baden oder Abtrocknen nachcremen.',
+          'Mittagssonne (11–15 Uhr) meiden, Schatten suchen.',
+          'Kleidung, Hut und Sonnenbrille ergänzen den Cremeschutz.',
+          'Kinderhaut besonders schützen — Babys nicht in die direkte Sonne.',
+          'Nachcremen erneuert die Eigenschutzzeit nicht — die Gesamtzeit im Blick behalten.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Hautveränderungen dermatologisch abklären',
+        text: 'Dieser Rechner ist ein Orientierungswerkzeug zur Sonnenschutz-Planung und ersetzt keine ärztliche Beratung. Achten Sie auf Ihre Haut: Neue oder sich verändernde Muttermale, Flecken, die wachsen, ihre Form oder Farbe ändern, jucken oder bluten, sollten dermatologisch abgeklärt werden. Die ABCDE-Regel (Asymmetrie, Begrenzung, Color/Farbe, Durchmesser, Entwicklung) hilft als grobe Orientierung — die Beurteilung gehört aber in fachärztliche Hände. Das gesetzliche Hautkrebs-Screening wird ab 35 Jahren angeboten. Wer Sonnenbrände hatte, besonders in der Kindheit, hat ein erhöhtes Risiko und sollte konsequent vorbeugen.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Schutzdauer ist eine Näherung',
+        text: 'Die berechnete Schutzdauer ist ein gerundeter Richtwert, keine Garantie. Eigenschutzzeit, UV-Index und tatsächlicher Cremeschutz schwanken je nach Tageszeit, Jahreszeit, Höhenlage, Reflexion (Wasser, Schnee, Sand) und Auftragsmenge. Reizen Sie die Zeit nie voll aus und planen Sie einen Puffer ein. Und noch einmal der wichtigste Punkt: Nachcremen erhält den vorhandenen Schutz, es verlängert die Eigenschutzzeit der Haut aber nicht — ist sie aufgebraucht, helfen nur Schatten, Kleidung oder das Ende des Sonnenbads. Im Zweifel gilt: weniger Sonne ist der beste Schutz.',
+      },
+    ],
     faq: [
       {
         frage: 'Wie finde ich meinen Hauttyp heraus?',
@@ -2102,6 +2256,10 @@ Für den vollen LSF-Schutz müssen 2 mg Sonnencreme pro Quadratzentimeter Haut a
         frage: 'Warum wird ein Sicherheitsabzug berechnet?',
         antwort: 'Die LSF-Zahl gilt nur bei optimalen Bedingungen: 2 mg/cm² Auftragsmenge, gleichmäßig verteilt, kein Schweiß oder Wasser. In der Praxis trägt man weniger auf und der Schutz lässt durch Abrieb nach. Der 40 %-Sicherheitsabzug (Faktor 0,6) berücksichtigt diese realen Bedingungen.',
       },
+    ],
+    quellen: [
+      { titel: 'BfS — UV-Schutz & UV-Index', url: 'https://www.bfs.de', hinweis: 'UV-Index, Schutzempfehlungen' },
+      { titel: 'Fitzpatrick-Hauttypen (Dermatologie)', hinweis: 'Hauttyp bestimmt Eigenschutzzeit; LSF verlängert, ersetzt sie aber nicht vollständig.' },
     ],
   },
 ];
