@@ -1970,7 +1970,7 @@ Hinweis: Diese Werte gelten ohne Berücksichtigung der Sommerzeit. In der Sommer
   },
   {
     slug: 'hundejahre-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-18',
     titel: 'Hundejahre-Rechner',
     beschreibung: 'Hundejahre in Menschenjahre umrechnen — differenziert nach Größe und Rasse. Vergessen Sie die alte 1:7-Formel!',
     kategorie: 'Alltag',
@@ -2034,6 +2034,178 @@ Ein älterer Hund hat andere Bedürfnisse als ein junger: **weichere Gelenke**, 
 - Ein erwachsener Hund hat 42 Zähne, ein Mensch nur 32.
 
 **Weitere Rechner:** Für Ihr eigenes Lebensalter und wie viele Tage Sie schon leben nutzen Sie den Lebenszeit-Rechner. Für Geburtstage den Geburtstag-Rechner. Für Tage zwischen zwei Daten den Tagerechner.`,
+    // W19-Goldstandard: hundejahre-rechner auf volle Tiefe (15 Bausteine, ~1.560 W), Leitformat
+    // „tabelle" 4× dominant (Größen-Staffel, AVMA-Faustregel, Rassen, Lebensphasen). Fachlich:
+    // „× 7"-Regel NUR als überholt; moderne Umrechnung nichtlinear + größenabhängig. Rechner-
+    // Staffel gespiegelt (formel-Feld): Jahr 1 = 15, Jahr 2 = +9 (→24), ab Jahr 3 +4/+5/+6/+7
+    // (klein/mittel/groß/Riese). Log-Formel 16×ln(Alter)+31 als 2. wiss. Ansatz zum Vergleich.
+    // Beispiele lib-exakt (3 J klein = 28; 5 J groß = 42). Näherung, keine Tierarzt-Beratung.
+    // erklaerung bleibt Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Warum die „mal 7"-Regel falsch ist',
+        html: `<p>„Ein Hundejahr sind sieben Menschenjahre" — diese Faustregel kennt fast jeder, und sie ist <strong>biologisch nicht haltbar</strong>. Sie unterstellt, dass Hunde gleichmäßig altern. Tatsächlich altern sie aber <strong>am Anfang viel schneller</strong> und später langsamer.</p><p>Schon mit einem Jahr ist ein Hund <strong>geschlechtsreif und fast ausgewachsen</strong> — eine Entwicklung, für die ein Mensch rund 15 Jahre braucht. Die „× 7"-Regel würde daraus nur 7 Jahre machen und damit ein Kleinkind beschreiben. Umgekehrt überschätzt sie das Alter mancher kleiner Hunde im hohen Alter.</p><p>Der zweite, oft übersehene Faktor ist die <strong>Größe</strong>: Kleine Hunde altern deutlich langsamer als große. Ein Chihuahua wird oft 15 Jahre alt, eine Dogge selten älter als 9. Eine seriöse Umrechnung muss deshalb <strong>nichtlinear</strong> sein und die Hundegröße berücksichtigen — genau das macht dieser Rechner.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Hundealter in Menschenjahren (nach Größe)',
+        kopf: ['Hundealter', 'klein (< 10 kg)', 'mittel (10–25 kg)', 'groß (25–45 kg)'],
+        zeilen: [
+          ['1 Jahr', '15', '15', '15'],
+          ['2 Jahre', '24', '24', '24'],
+          ['3 Jahre', '28', '29', '30'],
+          ['5 Jahre', '36', '39', '42'],
+          ['8 Jahre', '48', '54', '60'],
+          ['10 Jahre', '56', '64', '72'],
+          ['12 Jahre', '64', '74', '84'],
+        ],
+        fussnote: 'Nach der gängigen größenabhängigen Staffel: Jahr 1 = 15, Jahr 2 = +9 (→ 24), ab Jahr 3 je nach Größe + 4 (klein) / + 5 (mittel) / + 6 (groß) Menschenjahre. Riesenrassen + 7. Alle Werte sind Näherungen.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '3-jähriger kleiner Hund (z. B. Dackel)',
+        schritte: [
+          { label: '1. Lebensjahr', formel: '= 15 Menschenjahre', ergebnis: '15' },
+          { label: '2. Lebensjahr', formel: '+ 9', ergebnis: '24' },
+          { label: '3. Lebensjahr (klein, + 4)', formel: '24 + 4', ergebnis: '28' },
+        ],
+        fazit: 'Ein 3 Jahre alter kleiner Hund entspricht rund 28 Menschenjahren — also einem jungen Erwachsenen in den besten Jahren. Nach der alten „× 7"-Regel wären es nur 21, was die schnelle Jugendentwicklung völlig unterschätzt.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '8-jähriger großer Hund (z. B. Labrador)',
+        schritte: [
+          { label: '1. + 2. Jahr', formel: '15 + 9', ergebnis: '24' },
+          { label: 'Jahre 3 bis 8 (groß, je + 6)', formel: '6 × 6', ergebnis: '+ 36' },
+          { label: 'Menschenalter gesamt', formel: '24 + 36', ergebnis: '60' },
+        ],
+        fazit: 'Ein 8 Jahre alter großer Hund entspricht rund 60 Menschenjahren — er ist also bereits ein Senior, obwohl er „erst" acht ist. Ein gleichaltriger kleiner Hund käme nur auf 48 Jahre (24 + 6 × 4). Dieselbe Zahl, je nach Größe ein ganz anderes Lebensalter.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum große Hunde schneller altern',
+        html: `<p>Dass große Hunde früher altern als kleine, ist gut dokumentiert — und auf den ersten Blick paradox: In der Tierwelt leben größere Arten meist länger (man denke an Elefanten). Bei <strong>Hunden derselben Art</strong> ist es umgekehrt.</p><p>Der Hauptgrund ist das <strong>rasante Wachstum</strong>. Eine Dogge legt im ersten Jahr von wenigen Hundert Gramm auf über 70 kg zu, ein Chihuahua nur auf etwa 3 kg. Dieses extreme Tempo bedeutet, dass sich die Zellen großer Hunde sehr schnell teilen — was den <strong>Zellverschleiß</strong> beschleunigt und das Risiko für Tumore und altersbedingte Schäden erhöht.</p><p>Hinzu kommt die <strong>höhere Dauerbelastung</strong> von Herz, Gelenken und Organen, die eine große Körpermasse versorgen und tragen müssen. Forschende vermuten, dass große Hunde gewissermaßen „im Zeitraffer" leben. Für die Praxis heißt das: Ein großer Hund erreicht jede Lebensphase — bis hin zum Senior — deutlich früher als ein kleiner.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Die größenabhängige Faustregel im Überblick',
+        kopf: ['Lebensabschnitt', 'Anrechnung', 'Hinweis'],
+        zeilen: [
+          ['1. Lebensjahr', '≈ 15 Menschenjahre', 'Welpe → Jugendlicher, sehr schnell'],
+          ['2. Lebensjahr', '+ 9 (→ 24 gesamt)', 'Junghund → junger Erwachsener'],
+          ['ab 3. Jahr, klein (< 10 kg)', '+ 4 pro Jahr', 'altern am langsamsten'],
+          ['ab 3. Jahr, mittel (10–25 kg)', '+ 5 pro Jahr', '—'],
+          ['ab 3. Jahr, groß (25–45 kg)', '+ 6 pro Jahr', '—'],
+          ['ab 3. Jahr, Riese (> 45 kg)', '+ 7 pro Jahr', 'altern am schnellsten'],
+        ],
+        fussnote: 'Diese größenabhängige Staffel (an AVMA-Empfehlungen angelehnt) ersetzt die überholte „× 7"-Regel und liefert Näherungswerte.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Logarithmische Formel (Epigenetik, 2019)',
+        schritte: [
+          { label: 'Wissenschaftliche Formel', formel: 'Mensch ≈ 16 × ln(Hundealter) + 31', ergebnis: '—' },
+          { label: 'Mittelgroßer Hund, 5 Jahre', formel: '16 × ln(5) + 31 = 16 × 1,61 + 31', ergebnis: '≈ 57' },
+          { label: 'Zum Vergleich: Größen-Staffel', formel: 'mittel: 24 + 3 × 5', ergebnis: '39' },
+        ],
+        fazit: 'Die logarithmische Formel aus der Epigenetik-Forschung (2019, an Labradoren entwickelt) ergibt für einen 5-Jährigen rund 57 Menschenjahre — mehr als die Größen-Staffel (39). Beide sind Näherungen mit unterschiedlichem Ansatz; dieser Rechner nutzt die größenabhängige Staffel.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Alte „× 7"-Regel vs. moderne Staffel',
+        spalteA: 'Alte „× 7"-Regel',
+        spalteB: 'Moderne Staffel (größenabhängig)',
+        zeilen: [
+          { kriterium: '1-jähriger Hund', a: '7 Menschenjahre', b: '15 Menschenjahre' },
+          { kriterium: '5-jähriger kleiner Hund', a: '35 Jahre', b: '36 Jahre' },
+          { kriterium: '5-jähriger großer Hund', a: '35 Jahre', b: '42 Jahre' },
+          { kriterium: 'Berücksichtigt die Größe?', a: 'nein', b: 'ja' },
+          { kriterium: 'Wissenschaftlich', a: 'überholt', b: 'aktueller Stand' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Lebenserwartung nach Rasse & Größe',
+        html: `<p>Die <strong>Größe</strong> ist der wichtigste Einzelfaktor für die Lebenserwartung eines Hundes — wichtiger als die einzelne Rasse. Grob gilt: <strong>kleine Hunde 14–16 Jahre</strong>, mittlere 12–14, große 10–12 und Riesenrassen nur 7–10 Jahre.</p><p>Innerhalb dieser Spannen gibt es rassetypische Unterschiede und gesundheitliche Veranlagungen. Manche Rassen neigen zu Hüftproblemen, Herzerkrankungen oder bestimmten Tumoren, was die Lebenserwartung drückt; robuste Mischlinge sind im Schnitt oft langlebiger als stark überzüchtete Rassehunde.</p><p>Entscheidend ist am Ende aber weniger die Statistik als die <strong>Haltung</strong>: ausgewogenes Futter ohne Übergewicht, regelmäßige Bewegung, Zahn- und Vorsorgepflege sowie geistige Auslastung können das Leben spürbar verlängern. Übergewicht allein kostet einen Hund im Schnitt ein bis zwei Lebensjahre. Die Umrechnung in Menschenjahre bleibt dabei immer eine <strong>Näherung</strong> — der individuelle Hund kann deutlich abweichen.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Typische Lebenserwartung nach Größe',
+        werte: [
+          { label: 'Klein (< 10 kg)', wert: '14–16 Jahre', hinweis: 'Chihuahua, Yorkie, Dackel' },
+          { label: 'Mittel (10–25 kg)', wert: '12–14 Jahre', hinweis: 'Beagle, Mops, Cocker Spaniel' },
+          { label: 'Groß (25–45 kg)', wert: '10–12 Jahre', hinweis: 'Labrador, Schäferhund, Boxer' },
+          { label: 'Riese (> 45 kg)', wert: '7–10 Jahre', hinweis: 'Dogge, Bernhardiner' },
+          { label: 'Ältester dok. Hund', wert: '29 Jahre', hinweis: '„Bluey", Australian Cattle Dog' },
+        ],
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Größenklassen & Beispielrassen',
+        kopf: ['Größenklasse', 'Beispielrassen', 'Lebenserwartung'],
+        zeilen: [
+          ['klein (< 10 kg)', 'Chihuahua, Dackel, Yorkshire Terrier', '14–16 Jahre'],
+          ['mittel (10–25 kg)', 'Beagle, Cocker Spaniel, Border Collie', '12–14 Jahre'],
+          ['groß (25–45 kg)', 'Labrador, Schäferhund, Boxer', '10–12 Jahre'],
+          ['Riese (> 45 kg)', 'Dogge, Bernhardiner, Neufundländer', '7–10 Jahre'],
+        ],
+        fussnote: 'Die Größenklasse bestimmt sowohl die Alterungsgeschwindigkeit als auch die Lebenserwartung. Innerhalb einer Klasse gibt es rassetypische Abweichungen.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Die Lebensphasen des Hundes',
+        kopf: ['Phase', 'Hundealter', 'entspricht beim Menschen'],
+        zeilen: [
+          ['Welpe', '0–1 Jahr', 'Kindheit & Pubertät'],
+          ['Junghund', '1–2 Jahre', 'Jugendlicher / junger Erwachsener'],
+          ['Erwachsen', '2–6 Jahre', 'Blütezeit (~25–45)'],
+          ['Reif', '6–10 Jahre', 'mittleres Alter, erste graue Haare'],
+          ['Senior', 'ab ~7–10 Jahren', 'große Rassen früher'],
+        ],
+        fussnote: 'Die Übergänge verschieben sich mit der Größe — große Hunde erreichen jede Phase früher als kleine.',
+      },
+      {
+        typ: 'text',
+        titel: 'Welpenzeit: das erste Jahr im Zeitraffer',
+        html: `<p>Kein Lebensabschnitt eines Hundes ist so dicht gepackt wie das <strong>erste Jahr</strong>. In nur zwölf Monaten durchläuft ein Welpe das, wofür ein Mensch rund 15 Jahre braucht — von der Geburt über die Kindheit bis in die Pubertät.</p><p>Die ersten Wochen sind besonders rasant: Ein Welpe öffnet die Augen erst nach etwa zehn bis vierzehn Tagen, lernt dann in wenigen Wochen Laufen, Spielen und soziale Regeln. Mit rund einem halben Jahr setzt die <strong>Geschlechtsreife</strong> ein, mit etwa einem Jahr ist der Hund körperlich weitgehend ausgewachsen — kleine Rassen früher, große später.</p><p>Diese Geschwindigkeit erklärt, warum die <strong>Prägephase</strong> in den ersten Monaten so wichtig ist: Was ein Welpe an Erfahrungen, Sozialkontakten und Training mitbekommt, prägt ihn fürs ganze Leben. Wer das Hundealter realistisch umrechnet, sieht sofort, dass ein „einjähriger" Hund eben kein Baby mehr ist, sondern bereits ein Teenager.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Hundealter & Pflege — was sich mit den Jahren ändert',
+        html: `<p>Mit dem Alter ändern sich die Bedürfnisse eines Hundes spürbar — und zwar früher, als viele denken. Schon im <strong>reifen Alter</strong> (etwa ab der Lebensmitte) lässt die Aktivität nach, der Stoffwechsel verlangsamt sich, und das Gewicht muss stärker im Blick behalten werden, weil Übergewicht Gelenke und Organe zusätzlich belastet.</p><p>In der <strong>Senior-Phase</strong> kommen typische Alterserscheinungen dazu: steifere Gelenke (Arthrose), nachlassendes Gehör und Sehvermögen, empfindlichere Verdauung und häufiger Zahnprobleme. Angepasstes, leicht verdauliches <strong>Senior-Futter</strong>, weiche Liegeplätze, kürzere, dafür regelmäßige Spaziergänge und Zahnpflege helfen, die Lebensqualität zu erhalten.</p><p>Wichtig ist die <strong>Vorsorge</strong>: Ab der Senior-Phase gehört ein jährlicher Gesundheits-Check mit Blutbild zum Pflichtprogramm, um Nieren-, Leber- oder Herzprobleme früh zu erkennen. Wer das Alter seines Hundes realistisch einordnet — statt sich von der „× 7"-Regel täuschen zu lassen —, erkennt den Übergang in die Senior-Phase rechtzeitig und kann gegensteuern.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Mischlinge & Grenzfälle: welche Größenklasse zählt?',
+        html: `<p>Die Umrechnung steht und fällt mit der <strong>Größenklasse</strong> — doch nicht jeder Hund lässt sich eindeutig einsortieren. Bei <strong>Mischlingen</strong> oder Hunden zwischen zwei Klassen orientiert man sich am besten am <strong>Gewicht</strong>: Es ist der zuverlässigere Maßstab als die bloße Schulterhöhe.</p><p>Faustregel: bis etwa 10 kg klein, 10–25 kg mittel, 25–45 kg groß, darüber Riese. Liegt ein Hund genau auf einer Grenze, kann man beide Nachbarklassen durchrechnen und bekommt eine realistische <strong>Spanne</strong> statt eines scheingenauen Werts.</p><p>Wichtig ist außerdem das <strong>Idealgewicht</strong>, nicht das aktuelle: Ein übergewichtiger mittelgroßer Hund bleibt für die Umrechnung ein mittelgroßer Hund — das Übergewicht verkürzt zwar die Lebenserwartung, ändert aber nicht die Größenklasse. Wer unsicher ist, fragt in der Tierarztpraxis nach der Einordnung; dort lässt sich auch klären, welche Lebenserwartung für die konkrete Rasse oder Mischung realistisch ist.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Das Alter des Hundes richtig einschätzen',
+        punkte: [
+          'Größenklasse bestimmen (klein < 10 kg, mittel 10–25, groß 25–45, Riese > 45 kg).',
+          'Größenabhängige Staffel statt der überholten „× 7"-Regel verwenden.',
+          'Die ersten zwei Jahre extra zählen (15 + 9 = 24 Menschenjahre).',
+          'Ab Jahr 3 je nach Größe + 4 bis + 7 Menschenjahre pro Hundejahr.',
+          'Lebensphase einordnen (Welpe / Junghund / erwachsen / reif / senior).',
+          'Bei großen Rassen die Senior-Phase früher ansetzen.',
+          'Die Umrechnung als Orientierung verstehen — Rasse und Gesundheit variieren.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Senior-Vorsorge ab etwa 7 Jahren (große Rassen früher)',
+        text: 'Sobald ein Hund in die Senior-Phase kommt, lohnt sich ein jährlicher Gesundheits-Check beim Tierarzt — inklusive Blutbild, um Nieren-, Leber- oder Herzprobleme früh zu erkennen. Bei kleinen Hunden beginnt diese Phase etwa mit 10–12 Jahren, bei mittelgroßen ab 8–10, bei großen schon ab 7–8 und bei Riesenrassen bereits mit 5–6 Jahren. Achten Sie früh auf Anzeichen wie nachlassende Aktivität, steifere Gelenke, Gewichtsveränderungen oder trüber werdende Augen. Angepasstes Futter, weiche Liegeplätze und ruhigere, dafür regelmäßige Bewegung tun älteren Hunden gut.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Die Umrechnung ist eine Näherung',
+        text: 'Jede Umrechnung von Hunde- in Menschenjahre ist eine Näherung, kein exakter Wert. Selbst die modernen, größenabhängigen Formeln bilden nur den Durchschnitt ab — der einzelne Hund kann je nach Rasse, Veranlagung, Ernährung und Gesundheitszustand deutlich abweichen. Auch die wissenschaftlichen Modelle (Größen-Staffel und logarithmische Epigenetik-Formel) kommen zu unterschiedlichen Werten. Nutzen Sie das Ergebnis als unterhaltsame Orientierung und als Anlass, das Alter Ihres Hundes bewusst wahrzunehmen — für gesundheitliche Fragen bleibt die Tierärztin die richtige Ansprechpartnerin.',
+      },
+    ],
     faq: [
       {
         frage: 'Stimmt die alte Formel 1 Hundejahr = 7 Menschenjahre nicht mehr?',
@@ -2055,6 +2227,9 @@ Ein älterer Hund hat andere Bedürfnisse als ein junger: **weichere Gelenke**, 
         frage: 'Wie kann ich das Leben meines Hundes verlängern?',
         antwort: 'Die wichtigsten Faktoren sind: ausgewogene, hochwertige Ernährung (nicht überfüttern — Übergewicht verkürzt das Leben um 1–2 Jahre!), regelmäßige Bewegung angepasst an Größe und Alter, jährliche Vorsorge-Checks beim Tierarzt, Zahnpflege, Impfschutz und geistige Auslastung. Kastration verlängert nachweislich die Lebenserwartung bei vielen Rassen.',
       },
+    ],
+    quellen: [
+      { titel: 'Hundealter-Umrechnung — moderne Methodik', hinweis: 'Größenabhängige Staffel (Jahr 1 = 15, Jahr 2 = +9, ab Jahr 3 +4 bis +7 je Größe; an AVMA-Empfehlungen angelehnt) bzw. logarithmische Formel (16 × ln(Alter) + 31, 2019). Die „mal 7"-Regel gilt als überholt; alle Werte sind Näherungen.' },
     ],
   },
   {
