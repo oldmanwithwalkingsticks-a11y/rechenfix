@@ -472,7 +472,7 @@ Bei der Kfz-Steuer spielt die kW-Zahl übrigens keine direkte Rolle — hier sin
   },
   {
     slug: 'kfz-steuer-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-18',
     titel: 'Kfz-Steuer-Rechner',
     beschreibung: 'Kfz-Steuer 2026 berechnen: Für Benziner, Diesel, Elektro und Hybrid. Mit Aufschlüsselung nach Hubraum und CO₂.',
     kategorie: 'Auto & Verkehr',
@@ -543,6 +543,171 @@ Die folgende Übersicht zeigt typische jährliche Kfz-Steuern für gängige Fahr
 Je niedriger der CO₂-Ausstoß, desto günstiger die Steuer. Deshalb lohnt es sich, beim Neuwagenkauf auf sparsame Motorisierungen zu achten. Bereits wenige Gramm CO₂ weniger können durch die progressiven Steuerstufen einen spürbaren Unterschied bei der jährlichen Steuerbelastung ausmachen.
 
 Die Kfz-Steuer wird vom Hauptzollamt per SEPA-Lastschrift eingezogen. Halbjährliche Zahlung ist auf Antrag möglich, kostet jedoch einen Zuschlag von 3%. Vierteljährliche Zahlung ist bei Steuerbeträgen über 500 € möglich (Zuschlag 6%).`,
+    // W19-Goldstandard (YMYL): kfz-steuer-rechner auf volle Tiefe (15 Bausteine, ~1.560 W),
+    // Leitformat „beispielrechnung" (5× dominant). SSOT aus kfz-steuer-parameter.ts +
+    // kfz-steuer.ts gespiegelt: Sockel 2,00 €/100 ccm Benzin / 9,50 € Diesel (§ 9 Abs. 1
+    // Nr. 2a/2b), CO₂-Staffel ab 95 g/km progressiv 2,00→4,00 €/g (§ 9 Abs. 1 Nr. 2c, ab
+    // 01.01.2021), E-Befreiung 10 J / max 31.12.2035 (§ 3d, 8. KraftStÄndG 04.12.2025).
+    // Beispiele lib-exakt (Benziner 1.400/120 = 79 €; Diesel 2.000/140 = 286,50 €; SUV
+    // 2.500/200 = 330 €). Keine Steuerberatung. erklaerung bleibt Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Wie sich die Kfz-Steuer zusammensetzt (Hubraum + CO₂)',
+        html: `<p>Die <strong>Kraftfahrzeugsteuer</strong> zahlt jeder Fahrzeughalter jährlich an das Hauptzollamt. Für Pkw mit Erstzulassung ab dem 1. Juli 2009 setzt sie sich aus <strong>zwei Bausteinen</strong> zusammen — einem Hubraum-Anteil und einem CO₂-Anteil (§ 9 KraftStG).</p><p>Der <strong>Sockelbetrag</strong> richtet sich nach dem <strong>Hubraum</strong>: Für jede angefangenen 100 ccm fallen bei Benzinern 2,00 € an, bei Dieseln 9,50 €. Der höhere Diesel-Satz gleicht den niedrigeren Energiesteuersatz auf Dieselkraftstoff aus.</p><p>Hinzu kommt die <strong>CO₂-Komponente</strong>. Die ersten <strong>95 g/km</strong> sind frei; jedes Gramm darüber wird <strong>progressiv</strong> besteuert — je höher der Ausstoß, desto höher der Satz pro Gramm. Beide Bausteine zusammen ergeben die Jahressteuer. Maßgeblich sind die Werte aus dem Fahrzeugschein (Hubraum und WLTP-CO₂). Dieser Rechner schlüsselt beide Anteile getrennt auf, sodass nachvollziehbar bleibt, woher die Steuer kommt.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Benziner 1.400 ccm, 120 g/km',
+        schritte: [
+          { label: 'Sockel: Hubraum aufgerundet', formel: '1.400 ccm = 14 × 2,00 €', ergebnis: '28,00 €' },
+          { label: 'CO₂ 95 → 115 g (20 g × 2,00 €)', formel: '20 × 2,00 €', ergebnis: '40,00 €' },
+          { label: 'CO₂ 115 → 120 g (5 g × 2,20 €)', formel: '5 × 2,20 €', ergebnis: '11,00 €' },
+          { label: 'Jahressteuer', formel: '28 + 40 + 11', ergebnis: '79,00 €' },
+        ],
+        fazit: 'Ein Benziner mit 1,4 Litern Hubraum und 120 g/km CO₂ kostet 79 € Kfz-Steuer im Jahr — rund 6,58 € im Monat. Gut zwei Drittel entfallen auf den CO₂-Anteil, weil der Wert deutlich über dem Freibetrag von 95 g/km liegt.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Angefangene 100 ccm — die Aufrundungs-Schwelle',
+        schritte: [
+          { label: 'Hubraum 1.598 ccm', formel: 'aufgerundet auf 1.600 ccm', ergebnis: '16 × 100 ccm' },
+          { label: 'Hubraum 1.601 ccm', formel: 'aufgerundet auf 1.700 ccm', ergebnis: '17 × 100 ccm' },
+          { label: 'Sockel-Mehrkosten (Benzin)', formel: '17 × 2 € − 16 × 2 €', ergebnis: '+2,00 €/Jahr' },
+        ],
+        fazit: 'Schon ein einziger Kubikzentimeter über einer 100-ccm-Grenze zählt als angefangene 100 ccm und kostet eine volle Stufe mehr — beim Benziner 2,00 €, beim Diesel sogar 9,50 € im Jahr. Beim Hubraum-Vergleich kann diese Aufrundung den Ausschlag geben.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'CO₂-Staffel ab 01.01.2021 (§ 9 Abs. 1 Nr. 2c KraftStG)',
+        kopf: ['CO₂-Bereich (g/km)', '€ je g in dieser Stufe'],
+        zeilen: [
+          ['bis 95', '0,00 € (steuerfrei)'],
+          ['über 95 bis 115', '2,00 €'],
+          ['über 115 bis 135', '2,20 €'],
+          ['über 135 bis 155', '2,50 €'],
+          ['über 155 bis 175', '2,90 €'],
+          ['über 175 bis 195', '3,40 €'],
+          ['über 195', '4,00 €'],
+        ],
+        fussnote: 'Progressive Staffel: Jeder Satz gilt nur für das Gramm-Delta innerhalb seiner Stufe (wie die Zonen beim Einkommensteuertarif), nicht pauschal auf den gesamten CO₂-Wert. Beispiel 120 g/km: 20 g × 2,00 € + 5 g × 2,20 € = 51 € CO₂-Anteil — nicht etwa 120 × 2,00 €. Gilt für Erstzulassung ab 01.01.2021.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Diesel 2.000 ccm, 140 g/km',
+        schritte: [
+          { label: 'Sockel: 2.000 ccm = 20 × 9,50 €', formel: '20 × 9,50 €', ergebnis: '190,00 €' },
+          { label: 'CO₂ bis 135 g (Stufen 2,00 € + 2,20 €)', formel: '40 € + 44 €', ergebnis: '84,00 €' },
+          { label: 'CO₂ 135 → 140 g (5 g × 2,50 €)', formel: '5 × 2,50 €', ergebnis: '12,50 €' },
+          { label: 'Jahressteuer', formel: '190 + 84 + 12,50', ergebnis: '286,50 €' },
+        ],
+        fazit: 'Der Diesel kostet 286,50 € im Jahr — deutlich mehr als ein vergleichbarer Benziner. Der Grund ist der hohe Hubraum-Sockel von 190 €: 9,50 € je 100 ccm gegenüber 2,00 € beim Benziner.',
+      },
+      {
+        typ: 'text',
+        titel: 'Benzin vs. Diesel — warum Diesel mehr Steuer zahlt',
+        html: `<p>Auf den ersten Blick wirkt es unfair: Ein Diesel zahlt beim Hubraum-Sockel mit <strong>9,50 € je 100 ccm</strong> fast das Fünffache eines Benziners (2,00 €). Der Grund liegt aber nicht im Auto, sondern an der Zapfsäule.</p><p>Dieselkraftstoff wird über die <strong>Energiesteuer</strong> deutlich geringer belastet als Benzin — pro Liter rund 18 Cent weniger. Diesen Vorteil holt der Staat über die höhere Kfz-Steuer teilweise zurück. Unterm Strich sollen Diesel- und Benzinfahrer ähnlich belastet werden; ab welcher Fahrleistung sich ein Diesel lohnt, hängt vom Einzelfall ab.</p><p>Bei der <strong>CO₂-Komponente</strong> gibt es dagegen keinen Unterschied: Hier gilt für beide dieselbe Staffel. Moderne Diesel stoßen oft etwas weniger CO₂ aus als vergleichbare Benziner, was den höheren Sockel ein Stück weit ausgleicht. In der Summe bleibt der Diesel bei gleicher Hubraumgröße aber meist teurer in der Steuer.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Benziner vs. Diesel (gleiche Klasse)',
+        spalteA: 'Benziner',
+        spalteB: 'Diesel',
+        zeilen: [
+          { kriterium: 'Hubraum-Sockel', a: '2,00 € / 100 ccm', b: '9,50 € / 100 ccm' },
+          { kriterium: 'CO₂-Aufschlag', a: 'gleiche Staffel', b: 'gleiche Staffel' },
+          { kriterium: 'Beispiel 1.600 ccm, 130 g/km', a: '105 € / Jahr', b: '225 € / Jahr' },
+          { kriterium: 'Tendenz', a: 'niedriger Sockel', b: 'hoher Sockel, oft weniger CO₂' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Kleinwagen vs. SUV — der CO₂-Effekt',
+        schritte: [
+          { label: 'Kleinwagen-Benziner 1.000 ccm, 100 g/km', formel: '20 € Sockel + 10 € CO₂', ergebnis: '30,00 €' },
+          { label: 'SUV-Benziner 2.500 ccm, 200 g/km', formel: '50 € Sockel + 280 € CO₂', ergebnis: '330,00 €' },
+          { label: 'Unterschied pro Jahr', formel: '330 − 30', ergebnis: '300,00 €' },
+        ],
+        fazit: 'Gleicher Antrieb, elffacher Steuerbetrag: Der SUV zahlt 330 € statt 30 €. Den Großteil macht die progressive CO₂-Staffel aus — bei 200 g/km greifen bereits die teuersten Stufen (bis 4,00 € je Gramm).',
+      },
+      {
+        typ: 'text',
+        titel: 'E-Autos & Hybride — Befreiung bis 2035',
+        html: `<p>Reine <strong>Elektroautos</strong> sind von der Kfz-Steuer <strong>befreit</strong>. Wer ein E-Auto mit Erstzulassung im Zeitraum 18.05.2011 bis 31.12.2030 anmeldet, zahlt <strong>10 Jahre lang keine</strong> Kfz-Steuer — längstens jedoch bis zum <strong>31.12.2035</strong> (§ 3d KraftStG in der Fassung des 8. KraftStÄndG vom 04.12.2025).</p><p>Wichtig: Die Frist ist an die <strong>Erstzulassung</strong> gekoppelt, nicht an den Halter. Wer ein gebrauchtes E-Auto kauft, übernimmt die Restlaufzeit der Befreiung. Nach Ablauf wird das E-Auto gewichtsbasiert besteuert (§ 9 Abs. 1 Nr. 2e KraftStG), allerdings mit einem Abschlag.</p><p><strong>Plug-in-Hybride</strong> profitieren <strong>nicht</strong> von dieser Befreiung: Sie haben einen Verbrennungsmotor und werden wie Benziner nach Hubraum und CO₂ besteuert. Wegen ihres oft niedrigen offiziellen CO₂-Werts fällt die Steuer aber häufig moderat aus — der reale Verbrauch kann davon allerdings deutlich abweichen.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Steuerfreie & ermäßigte Fälle im Überblick',
+        kopf: ['Fahrzeug / Antrieb', 'Status', 'Bis wann / Hinweis'],
+        zeilen: [
+          ['Reines E-Auto (Erstzul. bis 31.12.2030)', 'steuerbefreit', '10 Jahre, längstens bis 31.12.2035'],
+          ['Plug-in-Hybrid', 'steuerpflichtig', 'wie Benziner (Hubraum + CO₂)'],
+          ['Oldtimer mit H-Kennzeichen (Pkw)', 'Pauschalsteuer', '191,73 € / Jahr (§ 9 Abs. 4)'],
+          ['Schwerbehinderung (Merkzeichen)', 'Befreiung / Ermäßigung', '100 % (aG, H, Bl) bzw. 50 % (G/Gl)'],
+          ['Wohnmobil', 'eigene Bemessung', 'nach Gewicht + Schadstoffklasse'],
+        ],
+        fussnote: 'Die Befreiung bei Schwerbehinderung setzt einen entsprechenden Ausweis mit Merkzeichen voraus und ist zu beantragen. Stand 06/2026.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Sonderfälle: Oldtimer & Wohnmobil',
+        schritte: [
+          { label: 'Oldtimer mit H-Kennzeichen (Pkw)', formel: 'Pauschalsteuer § 9 Abs. 4', ergebnis: '191,73 € / Jahr' },
+          { label: 'Wohnmobil', formel: 'nach zul. Gesamtgewicht + Schadstoffklasse', ergebnis: 'gestaffelt, gedeckelt' },
+        ],
+        fazit: 'Manche Fahrzeuge folgen einer eigenen Logik: Oldtimer mit H-Kennzeichen zahlen pauschal 191,73 € im Jahr (Pkw), unabhängig von Hubraum und CO₂. Wohnmobile werden nach zulässigem Gesamtgewicht und Schadstoffklasse besteuert, nicht nach dem Hubraum-CO₂-Modell.',
+      },
+      {
+        typ: 'text',
+        titel: 'Erstzulassung & weitere Faktoren',
+        html: `<p>Welches Steuermodell gilt, hängt vom <strong>Datum der Erstzulassung</strong> ab. Pkw ab dem 01.07.2009 fallen unter das heutige Hubraum-plus-CO₂-Modell. Für die <strong>CO₂-Staffel</strong> gibt es zudem einen Schnitt zum <strong>01.01.2021</strong>: Davor galten niedrigere Sätze, seither die hier gezeigte, stärker gespreizte Staffel.</p><p>Pkw mit Erstzulassung <strong>vor dem 01.07.2009</strong> werden rein nach Hubraum und <strong>Schadstoffklasse</strong> besteuert — ohne CO₂-Komponente, dafür mit deutlich höheren Hubraumsätzen, besonders ohne grüne Plakette.</p><p>Den maßgeblichen CO₂-Wert finden Sie im <strong>Fahrzeugschein</strong> (Zulassungsbescheinigung Teil I), den Hubraum ebenfalls. Seit 2018 gelten die nach dem realitätsnäheren <strong>WLTP</strong>-Verfahren gemessenen Werte, die meist etwas höher liegen als die alten NEFZ-Werte — und damit auch die Steuer leicht erhöhen. Ein Halterwechsel ändert die Steuer nicht; sie bleibt an das Fahrzeug und seine technischen Werte gebunden.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'E-Auto: wann endet die Steuerbefreiung?',
+        schritte: [
+          { label: 'Erstzulassung E-Auto', formel: '15.03.2024', ergebnis: '15.03.2024' },
+          { label: '+ 10 Jahre Befreiung (§ 3d)', formel: '15.03.2024 + 10 Jahre', ergebnis: '15.03.2034' },
+          { label: 'Maximal-Cap', formel: 'längstens 31.12.2035', ergebnis: 'greift hier nicht' },
+        ],
+        fazit: 'Ein 2024 zugelassenes E-Auto bleibt bis zum 15.03.2034 steuerfrei — die 10-Jahres-Frist endet vor dem gesetzlichen Maximal-Cap (31.12.2035). Wäre das Auto erst 2029 zugelassen worden, würde der Cap greifen: dann nur noch bis Ende 2035.',
+      },
+      {
+        typ: 'text',
+        titel: 'Wofür die Kfz-Steuer da ist — und wie sie eingezogen wird',
+        html: `<p>Die Kfz-Steuer ist eine <strong>Bundessteuer</strong> und fließt vollständig in den Bundeshaushalt; verwaltet und eingezogen wird sie seit 2014 von der <strong>Zollverwaltung</strong> (Hauptzollamt), nicht mehr von den Finanzämtern. Sie entsteht automatisch mit der Zulassung und endet mit der Abmeldung des Fahrzeugs.</p><p>Der Einzug läuft per <strong>SEPA-Lastschrift</strong> — ohne gültiges Mandat wird ein Fahrzeug gar nicht erst zugelassen. Standard ist die <strong>jährliche</strong> Zahlung im Voraus. Auf Antrag ist Halbjahres- (3 % Zuschlag) oder ab 500 € Jahressteuer Vierteljahreszahlung (6 % Zuschlag) möglich; eine monatliche Zahlung gibt es nicht.</p><p>Wird das Auto <strong>abgemeldet</strong>, erstattet der Zoll die zu viel gezahlte Steuer <strong>taggenau</strong> zurück. Wer sein Fahrzeug verkauft, sollte die Ab- bzw. Ummeldung zeitnah veranlassen, damit die Steuerpflicht sauber auf den neuen Halter übergeht.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Kfz-Steuer beim Autokauf mitdenken',
+        html: `<p>Die Kfz-Steuer ist nur ein kleiner Teil der <strong>Gesamtkosten</strong> eines Autos — neben Sprit, Versicherung, Wertverlust und Wartung —, lässt sich aber leicht im Voraus abschätzen und über die Haltedauer hochrechnen. Bei einem Verbrenner summieren sich 200 € Jahressteuer über zehn Jahre auf 2.000 €.</p><p>Weil die <strong>CO₂-Staffel progressiv</strong> ist, machen sich sparsame Motorisierungen besonders bemerkbar: Wer beim Neuwagen eine Variante mit spürbar weniger CO₂ wählt, spart nicht nur Sprit, sondern Jahr für Jahr auch Steuer. Schon zwanzig Gramm weniger können in den oberen Stufen 50 € und mehr pro Jahr ausmachen.</p><p>Auch beim <strong>Gebrauchtwagen</strong> lohnt der Blick in den Fahrzeugschein vor dem Kauf: Ein durstiger Großmotor oder ein alter Diesel ohne grüne Plakette kann überraschend teuer in der Steuer sein. Reine E-Autos sind dagegen über die Restlaufzeit der Befreiung steuerfrei — ein zusätzlicher Kostenvorteil, der sich beziffern lässt.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Kfz-Steuer richtig einschätzen',
+        punkte: [
+          'Hubraum (Feld P.1) und CO₂-Wert nach WLTP (Feld V.7) aus dem Fahrzeugschein ablesen.',
+          'Antriebsart bestimmen: Benziner, Diesel, Hybrid oder reines E-Auto.',
+          'Bei Diesel den höheren Sockel (9,50 € je 100 ccm) einkalkulieren.',
+          'CO₂-Wert über 95 g/km? Dann kommt die progressive Komponente dazu.',
+          'E-Auto: Erstzulassungsdatum prüfen — Befreiung 10 Jahre, längstens bis 31.12.2035.',
+          'Erstzulassung vor 01.07.2009? Dann gilt das ältere, hubraum-/schadstoffbasierte Modell.',
+          'Sonderfälle (Oldtimer-H, Wohnmobil, Schwerbehinderung) gesondert prüfen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'CO₂-Wert steht im Fahrzeugschein (Feld V.7)',
+        text: 'Den für die Steuer maßgeblichen CO₂-Wert finden Sie in der Zulassungsbescheinigung Teil I (dem „Fahrzeugschein") im Feld V.7 — angegeben in g/km nach dem WLTP-Verfahren. Den Hubraum entnehmen Sie dem Feld P.1 (in cm³). Mit diesen beiden Werten und der Antriebsart lässt sich die Jahressteuer vollständig berechnen. Bei älteren Scheinen oder Importfahrzeugen können die Felder abweichen — im Zweifel hilft die Zulassungsstelle oder das Hauptzollamt weiter.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Erstzulassung vor 2021 = andere Bemessung; keine Steuerberatung',
+        text: 'Dieser Rechner bildet das aktuelle Hubraum-CO₂-Modell ab. Für Pkw mit Erstzulassung vor dem 01.01.2021 galt eine andere (niedrigere) CO₂-Staffel, für Fahrzeuge vor dem 01.07.2009 ein rein hubraum- und schadstoffbasiertes Modell — die tatsächliche Steuer kann dort abweichen. Maßgeblich ist immer der Steuerbescheid des Hauptzollamts. Die Berechnung ist eine unverbindliche Orientierung und ersetzt keine Steuerberatung.',
+      },
+    ],
     faq: [
       {
         frage: 'Wie hoch ist die Kfz-Steuer für mein Auto?',
@@ -568,6 +733,10 @@ Die Kfz-Steuer wird vom Hauptzollamt per SEPA-Lastschrift eingezogen. Halbjährl
         frage: 'Kann ich die Kfz-Steuer monatlich zahlen?',
         antwort: 'Nein, die Kfz-Steuer wird standardmäßig jährlich per SEPA-Lastschrift eingezogen. Halbjährliche Zahlung ist möglich (3% Zuschlag), vierteljährlich ab 500 € Jahressteuer (6% Zuschlag). Monatliche Zahlung gibt es nicht.',
       },
+    ],
+    quellen: [
+      { titel: '§ 9 KraftStG: Steuersätze (Hubraum + CO₂)', url: 'https://www.gesetze-im-internet.de/kraftstg/__9.html', hinweis: 'Sockel 2,00/9,50 € je 100 ccm; CO₂-Staffel ab 95 g/km' },
+      { titel: '§ 3d KraftStG: Steuerbefreiung Elektrofahrzeuge', url: 'https://www.gesetze-im-internet.de/kraftstg/__3d.html', hinweis: '10 Jahre, längstens bis 31.12.2035 (8. KraftStÄndG v. 04.12.2025)' },
     ],
     affiliate: [
       { programId: 'check24', context: 'kfz-steuer' },
