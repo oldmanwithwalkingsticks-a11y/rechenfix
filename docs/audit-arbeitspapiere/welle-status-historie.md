@@ -44,6 +44,39 @@ oder Deployment-Artefakte zu verlieren.
 
 ---
 
+## 18.06.2026 — W19 alkohol-abbau-rechner Goldstandard (SENSIBEL, tabelle-Leitformat, t27)
+
+- **Was gebaut:** alkohol-abbau-rechner (gesundheit.ts) hat jetzt `contentBloecke` +
+  `quellen` (Neueintrag, mit url). **18 Blöcke**, Leitformat **tabelle** 4× dominant
+  (Promille-Zonen, Standardgetränke, gesetzliche Grenzen, Mythen-Check) + 3
+  beispielrechnung + 1 vergleich (relative vs. absolute Fahruntüchtigkeit). ~1.554 W,
+  alle 5 `text`-Blöcke ≤170 W.
+- **STRENGE Schutzauflage angewandt (verbindlich):** KEINE Fahrfreigabe-Formulierung —
+  Abbaudauer-Beispiel explizit als „grobe Orientierung, KEINE Freigabe", eine
+  berechnete Uhrzeit „bedeutet niemals ‚ab dann darf ich fahren'". Mythen (Kaffee,
+  Dusche, Sport, Essen danach, Wasser) NUR entkräftet, nie als Methode. Restalkohol
+  am Morgen prominent (eigener text + warnung-Reinforcement). 0,0 ‰ für Fahranfänger/
+  Probezeit/unter 21 klar benannt. Widmark als Näherung mit großer Streuung markiert.
+  warnung-Infobox „keine Fahrfreigabe" + hinweis-Infobox mit Hilfe-Verweis (DHS,
+  Hausarzt). „Keine Rechtsberatung." Selbstprüfung per Skript: keine Freigabe-/
+  Beschleunigungs-Formulierung außer in negierenden Kontexten.
+- **SSOT gespiegelt (promille.ts):** g = mengeL × % × 0,8 × 10; Verteilungsfaktor
+  0,68 (Mann) / 0,55 (Frau); Abbau ~0,15 ‰/h (Range 0,1–0,15 genannt); Zonen
+  0,3/0,5/1,1. **WICHTIG:** Lib rechnet pure Widmark OHNE Resorptionsdefizit — die
+  contentBloecke nutzen die lib-exakten Werte (2 Bier Mann 80 kg = 0,74 ‰; gleiche
+  Menge Frau 60 kg = 1,21 ‰; Abbau 0,8 ‰ → 5–8 h). **Offener Flag:** Die Fallback-
+  Felder `formel`/`beispiel`/erklaerung behaupten ein „× 0,9 / 10 % Resorptionsdefizit",
+  das die Lib NICHT anwendet (Drift: Beispiel 0,99 ‰ statt lib 1,10 ‰) — an Karsten
+  als Folge-Fix gemeldet (nicht in diesem Commit, da Fallback nicht gerendert).
+- **Bestand-Audit:** erklaerung + 5 FAQ geprüft — Mythen bereits korrekt entkräftet,
+  „nicht fahren"-Regel vorhanden, schutzkonform; bleiben als Fallback. Cosinus-Hinweis:
+  1.00 zu schlaf/trinkgeld ist die bekannte **tabelle-Leitformat-Cluster-Eigenschaft**
+  (Sequenz ist mit 18 Blöcken eindeutig, „nicht identisch" auf Sequenz-Ebene erfüllt).
+- **Verify:** Wortzahl 1.554 (OK ≥1500), 18 Blöcke kein WARN, tabelle 4× dominant,
+  5/5 text ≤170 W, Vercel-grün. contentBloecke-Goldstandard-Set damit auf **43 Rechner**.
+
+---
+
 ## 18.06.2026 — W19 kfz-steuer-rechner Goldstandard (YMYL, beispielrechnung-Leitformat, t26)
 
 - **Was gebaut:** kfz-steuer-rechner (auto.ts) hat jetzt `contentBloecke` + `quellen`
