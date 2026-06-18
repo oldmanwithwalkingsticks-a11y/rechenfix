@@ -79,7 +79,7 @@ Auch Flüssigkeiten skalieren bei großen Mengen nicht exakt linear. Bei der Ver
   },
   {
     slug: 'cups-umrechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-18',
     titel: 'Cups-Umrechner',
     beschreibung: 'Cups in Gramm und Milliliter umrechnen: Zutatspezifische Dichten für amerikanische Rezepte — Mehl, Zucker, Butter etc.',
     kategorie: 'Kochen & Ernährung',
@@ -153,6 +153,167 @@ Der US-Tablespoon misst 15 ml, der australische 20 ml. Der UK-Teaspoon ist ident
 - 1 Messlöffel = meist 1 TL
 
 Unterschiede im ml-Bereich fallen bei kleinen Gewürzmengen kaum ins Gewicht.`,
+    // W19-Goldstandard: cups-umrechner auf volle Tiefe (16 Bausteine, ~1.560 W), Leitformat
+    // „tabelle" 4× dominant (Cup→Gramm, Cup-Größen, Löffel/Cup, Butter-Stick). Kernbotschaft:
+    // Cup ist VOLUMEN, nicht Gewicht → je Zutat andere Grammzahl. Disjunkt zu trinkgeld/backform
+    // (eigener Zutaten-Dichte-Schwerpunkt, vergleich bewusst weggelassen). Rechner-Realität:
+    // 1 US-Cup = 240 ml (formel-Feld), customary 236,59 ml nur als Größen-Variante genannt.
+    // Dichten aus dem Rechner gespiegelt (Mehl 125, Zucker 200, Butter 227, Honig 340 g/Cup).
+    // erklaerung bleibt Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Warum „1 Cup" je nach Zutat anders wiegt',
+        html: `<p>Amerikanische und viele internationale Rezepte messen in <strong>Cups</strong>, Tablespoons (tbsp) und Teaspoons (tsp) — nicht in Gramm. Für die deutsche Küche heißt das umrechnen. Der entscheidende Punkt: Ein <strong>Cup ist ein Volumenmaß</strong> (wie ein Messbecher), kein Gewicht.</p><p>Deshalb gibt es keine einfache Regel „1 Cup = X Gramm". Wie viel ein Cup wiegt, hängt von der <strong>Dichte der Zutat</strong> ab. Ein Cup luftiges Mehl wiegt nur rund 125 g, derselbe Cup voll Zucker schon 200 g, ein Cup zähflüssiger Honig sogar etwa 340 g — bei identischem Volumen.</p><p>Für <strong>Flüssigkeiten</strong> wie Wasser oder Milch ist es einfach: Hier entspricht 1 Cup rund 240 ml (US-Standard), und weil ihre Dichte nahe 1 liegt, sind das ungefähr auch 240 g. Bei <strong>trockenen Zutaten</strong> dagegen müssen Sie immer die konkrete Zutat kennen. Genau das leistet dieser Umrechner: Er rechnet je nach gewählter Zutat mit der passenden Dichte.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Cup → Gramm: gängige Backzutaten',
+        kopf: ['Zutat', '1 Cup in Gramm', 'Hinweis'],
+        zeilen: [
+          ['Mehl (Type 405)', '125 g', 'locker einfüllen'],
+          ['Haferflocken', '90 g', 'sehr luftig'],
+          ['Kakaopulver', '85 g', 'fein, leicht'],
+          ['Puderzucker', '120 g', '—'],
+          ['Zucker (weiß)', '200 g', 'dicht'],
+          ['Brauner Zucker', '220 g', 'fest eingedrückt'],
+          ['Reis (ungekocht)', '185 g', '—'],
+          ['Butter', '227 g', '= 2 US-Sticks'],
+          ['Öl', '218 g', '—'],
+          ['Wasser / Milch', '240 g', 'Dichte ≈ 1'],
+          ['Honig', '340 g', 'sehr dicht'],
+        ],
+        fussnote: 'Werte je 240-ml-Cup (US-Standard). Marke, Mahlgrad und Feuchte verändern die Dichte — die Gramm-Angaben sind Richtwerte, keine exakten Konstanten.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '2 Cups Mehl in Gramm',
+        schritte: [
+          { label: '1 Cup Mehl (Type 405)', formel: 'Dichte ≈ 125 g/Cup', ergebnis: '125 g' },
+          { label: '2 Cups', formel: '2 × 125 g', ergebnis: '250 g' },
+        ],
+        fazit: '2 Cups Mehl entsprechen rund 250 g — vorausgesetzt, das Mehl wird locker eingefüllt. Wer es andrückt, landet schnell bei 300 g, und der Teig wird zu fest. Hier zeigt sich, warum die gewählte Zutat über das Gewicht entscheidet.',
+      },
+      {
+        typ: 'text',
+        titel: 'US-Cup, metrische Cup & Co. — die Größen',
+        html: `<p>„Cup" ist nicht gleich „Cup" — weltweit gibt es mehrere Definitionen, und die Unterschiede summieren sich. Für <strong>amerikanische Rezepte</strong> gilt der <strong>US-Cup</strong>: offiziell (legal) 240 ml, manchmal als „customary cup" mit 236,59 ml angegeben. In Rezepten wird fast immer auf 240 ml gerundet — auch dieser Rechner nutzt 240 ml.</p><p>Daneben gibt es den <strong>metrischen Cup</strong> mit glatten <strong>250 ml</strong> (Australien, Neuseeland, teils Europa) und den britischen <strong>Imperial Cup</strong> mit <strong>284 ml</strong> — fast 20 % größer als der US-Cup. In japanischen Reis-Rezepten ist ein Cup nur 200 ml.</p><p>Diese Differenzen klingen klein, machen sich aber bei mehreren Cups bemerkbar: Wer ein US-Rezept mit einem 250-ml-Messbecher abmisst, liegt bei vier Cups schon rund 40 ml daneben. Im Zweifel lohnt der Blick, aus welchem Land das Rezept stammt.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Cup-Größen weltweit',
+        kopf: ['Cup-Typ', 'Volumen', 'Verwendung'],
+        zeilen: [
+          ['US-Cup (legal)', '240 ml', 'US-Rezepte — dieser Rechner'],
+          ['US-Cup (customary)', '236,59 ml', 'oft auf 240 ml gerundet'],
+          ['Metrischer Cup', '250 ml', 'Australien, Neuseeland'],
+          ['UK Imperial Cup', '284 ml', 'alte britische Rezepte'],
+          ['Japanischer Cup', '200 ml', 'Reis-Rezepte'],
+        ],
+        fussnote: 'Bei mehreren Cups summieren sich die Unterschiede — ein 250-ml-Messbecher liegt bei 4 US-Cups schon rund 40 ml daneben.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Teelöffel, Esslöffel, Cup & Co. in ml',
+        kopf: ['Einheit', 'In ml', 'Verhältnis'],
+        zeilen: [
+          ['1 Teaspoon (tsp / TL)', '5 ml', '—'],
+          ['1 Tablespoon (tbsp / EL)', '15 ml', '= 3 tsp'],
+          ['1 Fluid Ounce (fl oz)', '30 ml', '= 2 tbsp'],
+          ['1 Cup', '240 ml', '= 16 tbsp = 48 tsp'],
+          ['1 Pint (US)', '473 ml', '= 2 Cups'],
+        ],
+        fussnote: 'US-Werte. Der australische Tablespoon misst abweichend 20 ml; der US-/UK-Teaspoon ist mit 5 ml identisch. Achtung: „fl oz" (Volumen, 30 ml) ist nicht „oz" (Gewicht, 28 g).',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Flüssigkeit: 1,5 Cups Milch in ml',
+        schritte: [
+          { label: '1 Cup (US-Standard)', formel: '= 240 ml', ergebnis: '240 ml' },
+          { label: '1,5 Cups Milch', formel: '1,5 × 240 ml', ergebnis: '360 ml' },
+        ],
+        fazit: 'Bei Flüssigkeiten ist die Umrechnung simpel: 1,5 Cups Milch sind 360 ml — ganz ohne Zutaten-Auswahl. Weil Milch eine Dichte nahe 1 hat, entsprechen 360 ml auch etwa 360 g.',
+      },
+      {
+        typ: 'text',
+        titel: 'Trockene vs. flüssige Cups — die Mess-Falle',
+        html: `<p>In US-Küchen gibt es zwei Sorten Messbecher, die leicht verwechselt werden: <strong>„dry measuring cups"</strong> für trockene Zutaten und <strong>„liquid measuring cups"</strong> für Flüssigkeiten. Vom Volumen her fassen sie dasselbe — der Unterschied liegt in der Handhabung.</p><p>Trockene Cups werden <strong>randvoll gefüllt und glattgestrichen</strong>: Man füllt die Zutat locker ein und zieht mit einem Messerrücken oben ab. Flüssige Cups haben eine Skala und etwas Rand, damit nichts überschwappt — abgelesen wird auf Augenhöhe.</p><p>Die eigentliche <strong>Mess-Falle</strong> ist das Verdichten: Wer Mehl mit dem Cup direkt aus der Tüte <strong>schöpft</strong> und andrückt, packt schnell 20 % mehr ein als vorgesehen — aus 125 g werden 150 g. Das Rezept geht dann nicht auf. Die zuverlässige Lösung: trockene Zutaten löffelweise in den Cup geben oder gleich mit der Küchenwaage in Gramm wiegen.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Ein US-Rezept umrechnen (Cups → g/ml)',
+        schritte: [
+          { label: '2 Cups Mehl', formel: '2 × 125 g', ergebnis: '250 g' },
+          { label: '1 Cup Zucker', formel: '1 × 200 g', ergebnis: '200 g' },
+          { label: '½ Cup Butter', formel: '0,5 × 227 g', ergebnis: '≈ 113 g' },
+          { label: '1 Cup Milch', formel: '1 × 240 ml', ergebnis: '240 ml' },
+        ],
+        fazit: 'So wird aus einem US-Rührkuchen ein deutsches Rezept: 250 g Mehl, 200 g Zucker, 113 g Butter, 240 ml Milch — plus die kleinen Mengen (1 EL = 15 ml, 1 TL = 5 ml). Trockene Zutaten je nach Dichte umrechnen, Flüssigkeiten einfach über 240 ml pro Cup.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Häufige Umrechnungsfehler',
+        werte: [
+          { label: 'Mehl geschöpft & angedrückt', wert: 'bis +20 %', hinweis: 'aus 125 g werden 150 g — Teig zu fest' },
+          { label: 'Falsche Cup-Größe', wert: '240 vs. 250 ml', hinweis: '~4 % je Cup, summiert sich' },
+          { label: 'Cup pauschal als Gewicht gesetzt', wert: 'je Zutat falsch', hinweis: 'nur Wasser/Milch ≈ 240 g pro Cup' },
+          { label: 'tbsp & tsp verwechselt', wert: 'Faktor 3', hinweis: '1 EL = 3 TL — bei Backpulver kritisch' },
+          { label: 'fl oz mit oz verwechselt', wert: 'Volumen ≠ Gewicht', hinweis: 'fl oz = 30 ml, oz = 28 g' },
+        ],
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Butter: US-Stick umrechnen',
+        kopf: ['US-Angabe', 'Cup', 'Gramm', 'EL'],
+        zeilen: [
+          ['1 Stick', '½ Cup', '113 g', '8 EL'],
+          ['½ Stick', '¼ Cup', '57 g', '4 EL'],
+          ['2 Sticks', '1 Cup', '227 g', '16 EL'],
+          ['1 EL Butter', '—', '≈ 14 g', '1 EL'],
+        ],
+        fussnote: 'Ein US-Butterstick ist 4 oz = 113 g = ½ Cup = 8 EL — die Verpackung trägt meist eine aufgedruckte EL-Skala zum Abschneiden.',
+      },
+      {
+        typ: 'text',
+        titel: 'Auch wichtig: Ounces, Pounds & Fahrenheit',
+        html: `<p>US-Rezepte bringen neben Cups noch weitere Maße mit, die umgerechnet werden müssen. Beim <strong>Gewicht</strong> gilt: 1 Ounce (oz) = 28 g, 1 Pound (lb) = 16 oz = 454 g. Wichtig ist, die Gewichts-Ounce (oz) nicht mit der Volumen-<strong>Fluid-Ounce</strong> (fl oz = 30 ml) zu verwechseln — gleiche Silbe, völlig anderes Maß.</p><p>Mindestens ebenso wichtig ist die <strong>Ofentemperatur</strong>: US-Rezepte geben sie in <strong>Grad Fahrenheit (°F)</strong> an. Die Umrechnung lautet °C = (°F − 32) × 5/9. Aus den häufigen 350 °F werden also rund 175 °C, aus 375 °F etwa 190 °C und aus 425 °F gut 220 °C (jeweils Ober-/Unterhitze).</p><p>Wer ein US-Rezept komplett übersetzt, denkt deshalb an drei Baustellen: Volumen (Cups, Löffel), Gewicht (oz, lb) und Temperatur (°F). Cups und Löffel deckt dieser Rechner ab; die Gewichts- und Temperaturwerte lassen sich mit den Faustformeln schnell ergänzen.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Backen ist Chemie — warum Genauigkeit zählt',
+        html: `<p>Beim <strong>Kochen</strong> ist eine Cup-Umrechnung unkritisch: Ob etwas mehr oder weniger Reis oder Brühe im Topf landet, schmeckt man kaum. Beim <strong>Backen</strong> ist das anders — hier laufen Reaktionen ab, die auf bestimmte Verhältnisse angewiesen sind.</p><p>Das Zusammenspiel von Mehl, Flüssigkeit, Fett, Zucker und Triebmittel (Backpulver, Hefe) bestimmt, ob ein Teig aufgeht, locker bleibt oder klitschig wird. Schon <strong>10 bis 20 % zu viel Mehl</strong> — der typische Fehler beim Schöpfen — macht Kuchen trocken und Plätzchen hart.</p><p>Deshalb gilt gerade beim Backen: Wer ein US-Rezept ernst nimmt, wiegt die Zutaten lieber in <strong>Gramm</strong>, statt sie im Cup abzuschätzen. Die Cup-Werte dieses Rechners sind ein guter Startpunkt — die <strong>Küchenwaage</strong> bleibt aber das genauere Werkzeug, besonders bei Mehl und anderen trockenen Hauptzutaten.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Cup-Maße ohne Messbecher behelfen',
+        html: `<p>Kein Cup-Messbecher zur Hand? Dann hilft Umrechnen über Löffel oder Waage. Ein <strong>Cup entspricht 16 Esslöffeln</strong> (US-tbsp) — bei kleinen Mengen also gut über den Esslöffel abzählbar. Noch verlässlicher ist die Grammangabe aus der Tabelle oben.</p><p>Eine normale <strong>Kaffeetasse</strong> taugt nur als grobe Behelfslösung: Sie fasst je nach Modell 150 bis 250 ml und ist damit kein Ersatz für einen geeichten Cup. Wer improvisiert, sollte das wissen und das Ergebnis kritisch prüfen.</p><p>Praktische Faustwerte für den Alltag: <strong>1 EL ≈ 15 ml</strong>, <strong>1 TL ≈ 5 ml</strong>, und ein deutscher Standard-Messbecher zeigt ml direkt an. Für Mehl, Zucker und Butter ist der schnellste sichere Weg ohnehin die Waage — sie kennt keine Verdichtungsfehler und liefert immer denselben Wert, egal wie man die Zutat einfüllt.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'US-Rezepte sicher umrechnen',
+        punkte: [
+          'Zuerst klären: US-Cup (240 ml), metrisch (250 ml) oder UK (284 ml)?',
+          'Trockene Zutaten je nach Dichte umrechnen — nicht pauschal „1 Cup = X g".',
+          'Mehl & Co. locker einfüllen oder, besser, in Gramm wiegen.',
+          'Flüssigkeiten einfach über 240 ml pro Cup rechnen.',
+          'tbsp (15 ml) und tsp (5 ml) nicht verwechseln — Faktor 3.',
+          'Butter: 1 US-Stick = ½ Cup = 113 g = 8 EL.',
+          'Beim Backen im Zweifel die Küchenwaage nutzen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Mehl löffeln statt schöpfen',
+        text: 'Der häufigste Cup-Fehler beim Backen: Mehl mit dem Messbecher direkt aus der Tüte schöpfen und andrücken. Dabei verdichtet sich das Mehl, und Sie packen bis zu 20 % mehr ein als im Rezept vorgesehen — der Teig wird zu fest, Gebäck trocken. Besser: das Mehl mit einem Löffel locker in den Cup geben und oben mit dem Messerrücken glattstreichen, ohne zu drücken. Am zuverlässigsten bleibt die Küchenwaage: 1 Cup Mehl (Type 405) sind rund 125 g.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Dichtewerte sind Richtwerte',
+        text: 'Die Gramm-Angaben pro Cup sind Richtwerte. Wie viel eine Zutat tatsächlich wiegt, hängt von Marke, Mahlgrad, Feuchtigkeit und davon ab, wie fest sie im Cup sitzt — Mehl etwa schwankt je nach Type und Lagerung. Auch der zugrunde gelegte Cup (hier 240 ml) variiert je nach Land. Für die Küche reichen die Werte als verlässliche Orientierung; wer sehr präzise backen will, wiegt die Hauptzutaten in Gramm. Dieser Umrechner ist eine Hilfe, kein Laborinstrument.',
+      },
+    ],
     faq: [
       {
         frage: 'Wie viel Gramm ist 1 Cup Mehl?',
@@ -174,6 +335,9 @@ Unterschiede im ml-Bereich fallen bei kleinen Gewürzmengen kaum ins Gewicht.`,
         frage: 'Kann ich Cups auch für trockene Zutaten verwenden?',
         antwort: 'Ja, in amerikanischen Rezepten ist das üblich. Wichtig ist: Beim Messen locker einfüllen und mit einem Messer oben abstreichen — nicht ins Glas pressen. Für präzises Backen ist eine Küchenwaage in Gramm jedoch deutlich genauer. Bei Zucker und Reis sind Cup-Messungen unkritisch.',
       },
+    ],
+    quellen: [
+      { titel: 'Cup-Umrechnung über die Zutaten-Dichte', hinweis: '1 US-Cup = 240 ml (customary 236,59 ml); Gewicht je Cup hängt von der Zutatendichte ab — die Grammwerte sind Richtwerte, keine exakten Konstanten.' },
     ],
   },
   {
