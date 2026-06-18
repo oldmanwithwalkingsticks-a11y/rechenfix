@@ -1049,7 +1049,7 @@ Kalkulieren Sie Ihren Stundensatz großzügig: Es ist einfacher, einen Rabatt zu
   },
   {
     slug: 'kuendigungsfrist-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-18',
     titel: 'Kündigungsfrist-Rechner',
     beschreibung: 'Gesetzliche Kündigungsfrist berechnen: Für Arbeitnehmer und Arbeitgeber, mit frühestmöglichem Austrittsdatum und relevanten Fristen.',
     kategorie: 'Arbeit & Recht',
@@ -1106,6 +1106,157 @@ Wenn Ihnen gekündigt wird, sollten Sie sofort handeln:
 Neben der ordentlichen Kündigung mit Frist gibt es die **außerordentliche (fristlose) Kündigung** (§ 626 BGB). Sie ist nur bei einem „wichtigen Grund" zulässig — wenn die Fortsetzung des Arbeitsverhältnisses bis zum Ablauf der ordentlichen Kündigungsfrist unzumutbar ist. Typische Gründe sind: Diebstahl, Betrug, Arbeitsverweigerung, Tätlichkeiten oder schwere Pflichtverletzungen. Eine fristlose Kündigung muss innerhalb von **2 Wochen** nach Bekanntwerden des Kündigungsgrundes ausgesprochen werden.
 
 Für die Planung Ihres verbleibenden Urlaubs nutzen Sie unseren [Urlaubstage-Rechner](/arbeit/urlaubstage-rechner). Um offene Überstunden zu berechnen, hilft der [Überstunden-Rechner](/arbeit/ueberstunden-rechner). Und mit dem [Arbeitszeitrechner](/arbeit/arbeitszeitrechner) behalten Sie Ihre Arbeitszeiten bis zum letzten Tag im Blick.`,
+    // W19-Goldstandard (YMYL): kuendigungsfrist-rechner auf volle Tiefe (15 Bausteine,
+    // ~1.560 W), Leitformat „beispielrechnung" 5× dominant. SSOT aus kuendigungsfrist.ts /
+    // § 622 BGB gespiegelt: Grundfrist 4 Wo zum 15./Monatsende (Abs. 1); AG-Staffel Abs. 2
+    // 2/5/8/10/12/15/20 J → 1/2/3/4/5/6/7 Monate zum Monatsende (NUR AG-Kündigung); AN immer
+    // Grundfrist; Probezeit 2 Wo (Abs. 3). BAG 10 AZR 64/17: BZ zum Fristende maßgeblich.
+    // Beispiele lib-exakt (10.03→15.04; AG 12 J 15.06→30.11; AN 12 J 15.06→15.07; Probezeit
+    // 10.02→24.02). Keine Rechtsberatung; AG-Staffel NICHT auf AN angewandt. erklaerung Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Kündigungsfristen — die Grundregel des § 622 BGB',
+        html: `<p>Wie lange ein Arbeitsverhältnis nach einer Kündigung noch läuft, regelt <strong>§ 622 BGB</strong>. Die gesetzliche <strong>Grundfrist</strong> beträgt <strong>vier Wochen</strong> — und zwar „zum 15. oder zum Ende eines Kalendermonats". Das Arbeitsverhältnis endet also nicht einfach vier Wochen nach der Kündigung, sondern am nächsten 15. oder Monatsletzten, der mindestens vier Wochen entfernt liegt.</p><p>Wichtig ist der Unterschied zwischen <strong>Frist</strong> und <strong>Termin</strong>: Die Frist ist die Mindestdauer (vier Wochen = 28 Tage), der Termin ist der zulässige Endtag (15. oder Monatsende). Beide müssen zusammen erfüllt sein — fällt das Datum dazwischen, verschiebt sich das Ende auf den nächsten dieser Termine.</p><p>Diese Grundfrist gilt für <strong>beide Seiten</strong>, solange keine Verlängerung greift. Maßgeblich ist außerdem der <strong>Zugang</strong> der Kündigung beim Empfänger, nicht das Datum auf dem Brief. Der Rechner ermittelt aus Kündigungsdatum, Betriebszugehörigkeit und Kündiger den korrekten letzten Arbeitstag samt Rechtsgrundlage.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Grundfrist: 4 Wochen zum 15.',
+        schritte: [
+          { label: 'Kündigung geht zu am', formel: '10. März', ergebnis: '10.03.' },
+          { label: '+ 4 Wochen (28 Tage)', formel: '10.03. + 28 Tage', ergebnis: '07.04.' },
+          { label: 'Zum nächsten 15. oder Monatsende', formel: 'nächster Termin ≥ 07.04.', ergebnis: '15.04.' },
+        ],
+        fazit: 'Eine am 10. März zugegangene Kündigung (Grundfrist) beendet das Arbeitsverhältnis zum 15. April. Die vier Wochen sind die Mindestdauer; der Endtag muss zusätzlich ein 15. oder ein Monatsletzter sein — hier der 15. April.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'AG-Kündigung: verlängerte Fristen nach Betriebszugehörigkeit (§ 622 Abs. 2)',
+        kopf: ['Betriebszugehörigkeit', 'Frist (Arbeitgeber kündigt)', 'Rechtsgrundlage'],
+        zeilen: [
+          ['unter 2 Jahre', '4 Wochen zum 15./Monatsende', '§ 622 Abs. 1'],
+          ['ab 2 Jahre', '1 Monat zum Monatsende', '§ 622 Abs. 2 Nr. 1'],
+          ['ab 5 Jahre', '2 Monate zum Monatsende', '§ 622 Abs. 2 Nr. 2'],
+          ['ab 8 Jahre', '3 Monate zum Monatsende', '§ 622 Abs. 2 Nr. 3'],
+          ['ab 10 Jahre', '4 Monate zum Monatsende', '§ 622 Abs. 2 Nr. 4'],
+          ['ab 12 Jahre', '5 Monate zum Monatsende', '§ 622 Abs. 2 Nr. 5'],
+          ['ab 15 Jahre', '6 Monate zum Monatsende', '§ 622 Abs. 2 Nr. 6'],
+          ['ab 20 Jahre', '7 Monate zum Monatsende', '§ 622 Abs. 2 Nr. 7'],
+        ],
+        fussnote: 'Diese verlängerten Fristen gelten NUR für die Kündigung durch den Arbeitgeber. Maßgeblich ist die Betriebszugehörigkeit zum Fristende (BAG 10 AZR 64/17). Ab 2 Jahren endet die Frist stets zum Monatsende, nicht mehr zum 15. Die längste gesetzliche Frist sind 7 Monate zum Monatsende ab 20 Jahren Betriebszugehörigkeit — eine im Februar zugegangene Kündigung endet dann erst zum 30. September.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Arbeitgeber kündigt nach 12 Jahren',
+        schritte: [
+          { label: 'Betriebszugehörigkeit', formel: '12 Jahre', ergebnis: '≥ 12 J' },
+          { label: 'AG-Frist (§ 622 Abs. 2 Nr. 5)', formel: '5 Monate zum Monatsende', ergebnis: '5 Monate' },
+          { label: 'Kündigung am 15.06.2026 + 5 Monate', formel: '→ 15.11., dann Monatsende', ergebnis: '30.11.2026' },
+        ],
+        fazit: 'Kündigt der Arbeitgeber nach 12 Jahren Betriebszugehörigkeit, gilt eine Frist von 5 Monaten zum Monatsende. Eine Kündigung am 15. Juni beendet das Arbeitsverhältnis damit erst zum 30. November — fünf volle Kalendermonate.',
+      },
+      {
+        typ: 'text',
+        titel: 'Wer kündigt? AG-Staffel vs. AN-Grundfrist',
+        html: `<p>Ein entscheidender Punkt wird oft übersehen: Die <strong>verlängerten Fristen</strong> des § 622 Abs. 2 BGB gelten <strong>nur für die Kündigung durch den Arbeitgeber</strong>. Je länger jemand im Betrieb ist, desto länger muss der Arbeitgeber ihn vorwarnen — von einem Monat (ab 2 Jahren) bis zu sieben Monaten (ab 20 Jahren).</p><p>Kündigt dagegen der <strong>Arbeitnehmer</strong> selbst, bleibt es grundsätzlich bei der <strong>Grundfrist von vier Wochen</strong> — unabhängig davon, wie lange er schon im Betrieb ist. Wer nach zwölf Jahren selbst kündigt, ist also in der Regel schon nach vier Wochen frei, während der Arbeitgeber bei derselben Person fünf Monate Frist einhalten müsste.</p><p>Diese Asymmetrie ist gewollt: Sie schützt langjährige Beschäftigte vor einem überraschend schnellen Jobverlust, hält ihnen aber die eigene Wechselmöglichkeit offen. Ausnahme: Im Arbeits- oder Tarifvertrag kann eine längere AN-Frist vereinbart sein — sie darf jedoch nie kürzer sein als die des Arbeitgebers (§ 622 Abs. 6 BGB).</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Arbeitnehmer kündigt vs. Arbeitgeber kündigt',
+        spalteA: 'Arbeitnehmer kündigt',
+        spalteB: 'Arbeitgeber kündigt',
+        zeilen: [
+          { kriterium: 'Frist', a: 'immer Grundfrist (4 Wochen)', b: 'Grundfrist, ab 2 J verlängert (1–7 Monate)' },
+          { kriterium: 'Hängt von der Dauer ab?', a: 'nein', b: 'ja — je länger, desto länger' },
+          { kriterium: 'Termin', a: 'zum 15. oder Monatsende', b: 'ab 2 J nur zum Monatsende' },
+          { kriterium: 'Kündigungsschutz (KSchG)', a: 'nicht relevant', b: 'ab 6 Mon. + > 10 AN' },
+          { kriterium: 'Grund erforderlich?', a: 'nein', b: 'ja, wenn KSchG greift' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Arbeitnehmer kündigt nach 12 Jahren (trotzdem 4 Wochen)',
+        schritte: [
+          { label: 'Arbeitnehmer kündigt selbst', formel: 'gleiche 12 Jahre', ergebnis: 'AN-Kündigung' },
+          { label: 'Frist: Grundfrist § 622 Abs. 1', formel: '4 Wochen zum 15./Monatsende', ergebnis: '4 Wochen' },
+          { label: 'Kündigung am 15.06.2026 + 28 Tage', formel: '→ 13.07., nächster 15.', ergebnis: '15.07.2026' },
+        ],
+        fazit: 'Dieselbe Person, aber AN kündigt: Trotz 12 Jahren bleibt es bei den 4 Wochen — letzter Arbeitstag 15. Juli. Die verlängerte 5-Monats-Frist gilt nur, wenn der Arbeitgeber kündigt. Wer selbst geht, ist deutlich schneller frei.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Kündigung in der Probezeit (2 Wochen)',
+        schritte: [
+          { label: 'Kündigung während der Probezeit', formel: '§ 622 Abs. 3 BGB', ergebnis: '2 Wochen' },
+          { label: 'Kündigung am 10.02.2026 + 14 Tage', formel: '10.02. + 14 Tage', ergebnis: '24.02.2026' },
+        ],
+        fazit: 'In der Probezeit (höchstens sechs Monate) gilt eine verkürzte Frist von zwei Wochen — ohne festen 15.- oder Monatsende-Termin, zu jedem beliebigen Tag. Eine Kündigung am 10. Februar beendet das Arbeitsverhältnis zum 24. Februar. Das gilt für beide Seiten.',
+      },
+      {
+        typ: 'text',
+        titel: 'Was Fristen verlängern oder verkürzen kann',
+        html: `<p>Die gesetzlichen Fristen sind nicht in Stein gemeißelt — <strong>Tarif- und Arbeitsverträge</strong> können sie verändern. Ein <strong>Tarifvertrag</strong> hat dabei Vorrang und kann sowohl längere als auch kürzere Fristen festlegen (§ 622 Abs. 4 BGB). Wer tarifgebunden ist, sollte daher immer zuerst in den Tarifvertrag schauen.</p><p>Im <strong>Arbeitsvertrag</strong> sind Verlängerungen zulässig, Verkürzungen dagegen nur in engen Grenzen — und eine für den Arbeitnehmer vereinbarte Frist darf nie kürzer sein als die für den Arbeitgeber (§ 622 Abs. 6 BGB).</p><p>In der <strong>Probezeit</strong> (höchstens sechs Monate) gilt die verkürzte Frist von zwei Wochen. <strong>Befristete Verträge</strong> enden grundsätzlich automatisch zum vereinbarten Datum und sind ordentlich nur kündbar, wenn das im Vertrag ausdrücklich vorgesehen ist. Und bei der <strong>fristlosen Kündigung</strong> aus wichtigem Grund (§ 626 BGB) entfällt die Frist ganz — sie ist aber nur in Ausnahmefällen zulässig.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Sonderfälle im Überblick',
+        kopf: ['Situation', 'Frist', 'Hinweis'],
+        zeilen: [
+          ['Probezeit (max. 6 Monate)', '2 Wochen', '§ 622 Abs. 3, ohne festen Termin'],
+          ['Arbeitnehmer kündigt', '4 Wochen zum 15./Monatsende', 'unabhängig von der Dauer'],
+          ['Tarifvertrag', 'tarifliche Frist', 'geht vor (§ 622 Abs. 4)'],
+          ['Befristeter Vertrag', 'endet automatisch', 'ordentlich nur, wenn vereinbart'],
+          ['Fristlose Kündigung', 'sofort', '§ 626 BGB, nur aus wichtigem Grund'],
+          ['Aufhebungsvertrag', 'frei vereinbar', 'einvernehmlich, ggf. Sperrzeit beim ALG'],
+        ],
+        fussnote: 'Im Zweifel haben Tarif- und Arbeitsvertrag Vorrang vor der gesetzlichen Grundregel — aber eine AN-Frist nie unter der des Arbeitgebers (§ 622 Abs. 6 BGB).',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Der Zugang zählt — nicht das Absendedatum',
+        schritte: [
+          { label: 'Kündigungsschreiben abgeschickt', formel: '28. Juni (Post)', ergebnis: '28.06.' },
+          { label: 'Zugang im Briefkasten', formel: '1. Juli', ergebnis: '01.07.' },
+          { label: 'Frist beginnt mit dem Zugang', formel: 'maßgeblich: 01.07.', ergebnis: 'nicht 28.06.' },
+        ],
+        fazit: 'Für den Fristbeginn zählt der Zugang beim Empfänger, nicht das Absende- oder Briefdatum. Wird die Kündigung erst am 1. Juli zugestellt, beginnt die Frist auch erst dann — selbst wenn der Brief „zum 30. Juni" gedacht war. Wenige Tage Verzögerung können den Endtermin um einen ganzen Monat verschieben.',
+      },
+      {
+        typ: 'text',
+        titel: 'BAG: Betriebszugehörigkeit zum Fristende zählt',
+        html: `<p>Eine Feinheit der AG-Staffel sorgt regelmäßig für Streit: Maßgeblich für die Stufe ist nicht die Betriebszugehörigkeit am <strong>Kündigungstag</strong>, sondern die am <strong>Ende der Kündigungsfrist</strong>. Das hat das Bundesarbeitsgericht klargestellt (BAG 10 AZR 64/17).</p><p>Praktisch heißt das: Wer eine Stufengrenze — etwa die 10-Jahres-Marke — erst <strong>während</strong> der laufenden Frist erreicht, profitiert bereits von der höheren Stufe. Kündigt der Arbeitgeber jemanden, der in zwei Monaten zehn Jahre voll hat, dann gilt nicht die 3-Monats-Frist (8 Jahre), sondern die 4-Monats-Frist (10 Jahre) — weil die zehn Jahre innerhalb der Frist erreicht werden.</p><p>Der Rechner berücksichtigt das automatisch: Er prüft für jede Stufe, ob die Schwelle bis zum jeweiligen Fristende erreicht wird, und wählt die höchste zutreffende. So wird niemand um eine längere Frist gebracht, nur weil die Kündigung kurz vor einem Dienstjubiläum ausgesprochen wurde.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Nach der Kündigung: Meldepflicht, Form & Kündigungsschutz',
+        html: `<p>Mit der Kündigung beginnen ein paar wichtige Uhren zu laufen. Die dringendste: Wer gekündigt wird, muss sich <strong>spätestens drei Tage nach Kenntnis</strong> der Kündigung bei der Agentur für Arbeit <strong>arbeitssuchend melden</strong> (§ 38 SGB III) — sonst droht eine Sperrzeit beim Arbeitslosengeld.</p><p>Zweiter Punkt: der <strong>Kündigungsschutz</strong>. In Betrieben mit mehr als zehn Arbeitnehmern und nach mehr als sechs Monaten Betriebszugehörigkeit greift das Kündigungsschutzgesetz (KSchG) — eine Arbeitgeber-Kündigung braucht dann einen anerkannten Grund (betriebs-, personen- oder verhaltensbedingt). Wer die Kündigung für unwirksam hält, muss innerhalb von <strong>drei Wochen</strong> Kündigungsschutzklage erheben.</p><p>Und drittens die <strong>Form</strong>: Jede Kündigung muss <strong>schriftlich</strong> und eigenhändig unterschrieben erfolgen (§ 623 BGB). Eine Kündigung per E-Mail, SMS, Messenger oder mündlich ist unwirksam — egal von welcher Seite.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Kündigungsfrist korrekt bestimmen',
+        punkte: [
+          'Wer kündigt? Die AG-Staffel gilt nur bei Kündigung durch den Arbeitgeber.',
+          'Betriebszugehörigkeit bestimmen — und zwar bis zum voraussichtlichen Fristende.',
+          'Zuerst Tarif- und Arbeitsvertrag prüfen (gehen der Grundregel vor).',
+          'Probezeit? Dann 2 Wochen, ohne festen 15.-/Monatsende-Termin.',
+          'Frist ab dem Zugang der Kündigung rechnen, nicht ab dem Briefdatum.',
+          'Endtermin auf den nächsten zulässigen 15. oder Monatsletzten legen.',
+          'Schriftform mit Originalunterschrift einhalten (§ 623 BGB).',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Verlängerte Fristen gelten AG-seitig — AN nicht schlechter stellen',
+        text: 'Achtung vor einem häufigen Irrtum: Die langen Fristen aus § 622 Abs. 2 BGB (bis zu 7 Monate) gelten nur, wenn der ARBEITGEBER kündigt. Kündigen Sie als Arbeitnehmer selbst, bleibt es grundsätzlich bei 4 Wochen — Sie müssen also nicht monatelang warten. Umgekehrt darf eine vertraglich vereinbarte Kündigungsfrist für Sie nie kürzer sein als die für den Arbeitgeber (§ 622 Abs. 6 BGB). Dieser Rechner liefert eine Orientierung anhand des Gesetzes und ersetzt keine Rechtsberatung — im Streitfall helfen eine Fachanwältin für Arbeitsrecht oder die Gewerkschaft.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Kündigung nachweisbar zustellen',
+        text: 'Weil für die Frist der Zugang zählt, sollten Sie die Kündigung nachweisbar zustellen. Am sichersten ist die persönliche Übergabe mit Empfangsbestätigung oder die Zustellung durch einen Boten, der den Einwurf bezeugen kann. Ein Einwurf-Einschreiben gilt als guter Nachweis; beim klassischen Übergabe-Einschreiben besteht das Risiko, dass der Empfänger es nicht abholt. Laut Rechtsprechung reicht der bloße Online-Sendungsstatus als Zugangsnachweis nicht aus — entscheidend ist der belegte Einwurf bzw. die Übergabe. Heben Sie eine Kopie samt Zustellnachweis auf.',
+      },
+    ],
     faq: [
       {
         frage: 'Wie lang ist die gesetzliche Kündigungsfrist?',
@@ -1151,6 +1302,10 @@ Für die Planung Ihres verbleibenden Urlaubs nutzen Sie unseren [Urlaubstage-Rec
         frage: 'Was passiert mit der Kündigungsfrist im Insolvenzverfahren?',
         antwort: 'Im eröffneten Insolvenzverfahren kann der Insolvenzverwalter Arbeitsverhältnisse mit einer Höchstfrist von drei Monaten zum Monatsende kündigen (§ 113 InsO) — auch dann, wenn arbeits- oder tarifvertraglich eine längere Frist vereinbart ist. § 113 InsO ist ein Frist-Cap nach oben, kein Cap nach unten: Greift nach § 622 BGB ohnehin eine kürzere Frist (z. B. zwei Monate bei fünf Jahren Betriebszugehörigkeit), bleibt diese bestehen.',
       },
+    ],
+    quellen: [
+      { titel: '§ 622 BGB: Kündigungsfristen bei Arbeitsverhältnissen', url: 'https://www.gesetze-im-internet.de/bgb/__622.html', hinweis: 'Grundfrist (Abs. 1), verlängerte AG-Fristen (Abs. 2), Probezeit (Abs. 3)' },
+      { titel: '§ 623 BGB: Schriftform der Kündigung', url: 'https://www.gesetze-im-internet.de/bgb/__623.html', hinweis: 'Kündigung nur schriftlich wirksam' },
     ],
   },
   {
