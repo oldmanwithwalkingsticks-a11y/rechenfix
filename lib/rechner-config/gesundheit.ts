@@ -1493,7 +1493,7 @@ Wir weisen ausdrücklich darauf hin: Der Zyklusrechner darf nicht als alleinige 
   },
   {
     slug: 'alkohol-abbau-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-18',
     titel: 'Alkohol-Abbau-Rechner',
     beschreibung: 'Maximale Promille, Abbauzeit und wann Sie wieder nüchtern sind — berechnet nach der Widmark-Formel.',
     kategorie: 'Gesundheit',
@@ -1546,6 +1546,176 @@ Der Rechner liefert eine grobe Schätzung. Individuelle Faktoren können den tat
 **Die einzig sichere Regel: Nicht fahren**
 
 Wenn Sie Alkohol getrunken haben, gilt eine einfache Regel: **Nicht ans Steuer.** Die einzig wirklich sichere Promillegrenze für den Straßenverkehr ist 0,0 ‰. Im Zweifel nehmen Sie ein Taxi, den Nachtbus, einen Designated Driver oder übernachten Sie vor Ort. Die Kosten eines Taxis sind immer niedriger als die Konsequenzen einer Alkoholfahrt: Bußgeld, Punkte, Fahrverbot, MPU, Entzug, Versicherungsprobleme — oder im schlimmsten Fall Personenschäden. Nutzen Sie zur Orientierung auch unseren Promillerechner und den Bußgeldrechner.`,
+    // W19-Goldstandard (SENSIBEL): alkohol-abbau-rechner auf volle Tiefe (16 Bausteine,
+    // ~1.560 W), Leitformat „tabelle" 4× dominant. STRENGE Schutzauflage: KEINE Fahrfreigabe-
+    // Formulierung, KEINE „schneller nüchtern"-Methode (Mythen nur entkräftet), Restalkohol
+    // prominent, 0,0 ‰ für Fahranfänger benannt, Widmark als Näherung. Werte aus
+    // lib/berechnungen/promille.ts gespiegelt: g = mengeL×%×0,8×10; r 0,68/0,55; KEIN
+    // Resorptionsdefizit (lib rechnet pure Widmark); Abbau ~0,15 ‰/h, Zonen 0,3/0,5/1,1.
+    // Beispiele lib-exakt (2 Bier Mann 80 kg = 0,74 ‰; gleiche Menge Frau 60 kg = 1,21 ‰).
+    // Keine Rechtsberatung. erklaerung bleibt Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Wie der Körper Alkohol abbaut',
+        html: `<p>Alkohol wird fast vollständig in der <strong>Leber</strong> abgebaut — spezielle Enzyme wandeln ihn schrittweise um. Dieser Abbau läuft mit weitgehend <strong>konstanter Geschwindigkeit</strong>, unabhängig davon, wie viel man getrunken hat. Üblich sind etwa <strong>0,1 bis 0,15 Promille pro Stunde</strong>; dieser Rechner rechnet mit rund 0,15 ‰/h als Mittelwert.</p><p>Entscheidend ist: Diese Geschwindigkeit lässt sich <strong>nicht beschleunigen</strong>. Die Leber arbeitet in ihrem eigenen Takt — egal, was man unternimmt. Während der Promillewert nach dem Trinken schnell ansteigt (innerhalb von Minuten), zieht sich der Abbau über viele Stunden hin.</p><p>Ein Beispiel verdeutlicht das: Wer abends auf 1,0 ‰ kommt, braucht grob <strong>sieben bis zehn Stunden</strong>, bis der Wert wieder bei null liegt. Genau deshalb ist Alkohol vom Vorabend am nächsten Morgen oft noch nachweisbar. Alle hier gezeigten Werte sind grobe Schätzungen nach der Widmark-Formel und fallen individuell sehr unterschiedlich aus.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Was die Promillezahl bedeutet',
+        html: `<p>Die <strong>Blutalkoholkonzentration (BAK)</strong> wird in <strong>Promille (‰)</strong> angegeben — sie beschreibt, wie viel Gramm reiner Alkohol auf ein Kilogramm Blut kommen. 0,5 ‰ heißt also 0,5 Gramm Alkohol je Kilogramm Blut.</p><p>Geschätzt wird die BAK über die <strong>Widmark-Formel</strong>: Die Menge reinen Alkohols wird durch das Verteilungsvolumen des Körpers geteilt — den Anteil des Körperwassers, in dem sich der Alkohol verteilt. Weil Männer im Schnitt einen höheren Wasseranteil haben (~68 %) als Frauen (~55 %), führt dieselbe Menge bei Frauen zu einem höheren Wert.</p><p>Wichtig ist die Unterscheidung zwischen <strong>relativer</strong> und <strong>absoluter</strong> Fahruntüchtigkeit: Ab 0,3 ‰ kann man bereits strafbar fahruntüchtig sein, wenn Ausfallerscheinungen oder ein Unfall hinzukommen (relativ). Ab 1,1 ‰ gilt man unwiderlegbar als fahruntüchtig (absolut) — ganz ohne weitere Anzeichen. Die Beeinträchtigung der Reaktionsfähigkeit beginnt allerdings schon weit darunter.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Promille-Zonen & ihre Bedeutung',
+        kopf: ['Zone', '‰-Bereich', 'Einordnung'],
+        zeilen: [
+          ['Grün', 'unter 0,3', 'geringer Einfluss — für Fahranfänger gilt trotzdem 0,0'],
+          ['Gelb', '0,3 bis unter 0,5', 'relative Fahruntüchtigkeit bei Auffälligkeiten (§ 316 StGB)'],
+          ['Orange', '0,5 bis unter 1,1', 'Ordnungswidrigkeit (§ 24a StVG): Bußgeld, Fahrverbot, Punkte'],
+          ['Rot', 'ab 1,1', 'Straftat: absolute Fahruntüchtigkeit (§ 316 StGB)'],
+        ],
+        fussnote: 'Die Zonen ordnen den geschätzten Wert grob ein — der grüne Bereich ist KEINE Fahrfreigabe. Schon geringe Mengen Alkohol beeinträchtigen die Fahrtüchtigkeit.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Promillewert nach zwei Bier (Beispielperson)',
+        schritte: [
+          { label: 'Reiner Alkohol: 2 × Bier (0,5 L, 5 %)', formel: '2 × (0,5 × 5 × 0,8 × 10)', ergebnis: '40 g' },
+          { label: 'Körperwasser (Mann, 80 kg)', formel: '80 × 0,68', ergebnis: '54,4' },
+          { label: 'Maximaler Promillewert (Peak)', formel: '40 g ÷ 54,4', ergebnis: '≈ 0,74 ‰' },
+        ],
+        fazit: 'Zwei Bier bringen einen 80 kg schweren Mann auf rund 0,74 ‰ im Peak — bereits über der 0,5-‰-Grenze. Der Wert gilt frisch nach dem Trinken; mit jeder Stunde sinkt er um etwa 0,15 ‰. Die Schätzung ist individuell sehr variabel.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Standardgetränke & reiner Alkohol',
+        kopf: ['Getränk', 'Menge', 'Reiner Alkohol (ca.)'],
+        zeilen: [
+          ['Bier', '0,5 L (5 %)', '≈ 20 g'],
+          ['Wein', '0,2 L (12 %)', '≈ 19 g'],
+          ['Sekt', '0,1 L (11 %)', '≈ 9 g'],
+          ['Schnaps', '0,02 L (40 %)', '≈ 6 g'],
+          ['Cocktail', '0,3 L (15 %)', '≈ 36 g'],
+          ['Longdrink', '0,4 L (8 %)', '≈ 26 g'],
+        ],
+        fussnote: 'Reiner Alkohol = Menge × Vol.-% × 0,8 (Dichte von Ethanol) — die Grundlage der Widmark-Schätzung. Ein „Standardglas" enthält rund 10–12 g; viele Gläser liegen deutlich darüber.',
+      },
+      {
+        typ: 'text',
+        titel: 'Restalkohol am Morgen — die unterschätzte Gefahr',
+        html: `<p>Wer abends viel trinkt, hat am nächsten Morgen oft noch <strong>Restalkohol</strong> im Blut — auch wenn er sich längst „nüchtern" fühlt. Der Grund ist der langsame, konstante Abbau: Pro Stunde verschwinden nur etwa 0,1 bis 0,15 ‰, und der Körper beginnt erst, wenn das Trinken beendet ist.</p><p>Ein Rechenbeispiel: Wer um Mitternacht bei 1,2 ‰ liegt, hat selbst nach sieben Stunden Schlaf am Morgen noch <strong>deutlich über 0 ‰</strong> — je nach Person genug, um die 0,5-‰-Grenze zu überschreiten. Das morgendliche Gefühl täuscht: Die Müdigkeit verschwindet, der Alkohol nicht.</p><p>Besonders tückisch ist, dass der reale Abbau oft <strong>langsamer</strong> verläuft als die optimistische Schätzung. Deshalb ist gerade die Fahrt zur Arbeit am Morgen nach einem feuchtfröhlichen Abend ein unterschätztes Risiko. Im Zweifel gilt auch hier: nicht ans Steuer, sondern Bahn, Bus oder Fahrgemeinschaft nutzen.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Wie lange dauert der Abbau? (grobe Orientierung)',
+        schritte: [
+          { label: 'Angenommener Startwert', formel: '0,8 ‰', ergebnis: '0,8 ‰' },
+          { label: 'Optimistisch (0,15 ‰/h)', formel: '0,8 ÷ 0,15', ergebnis: '≈ 5,3 Std.' },
+          { label: 'Vorsichtig (0,1 ‰/h)', formel: '0,8 ÷ 0,1', ergebnis: '≈ 8,0 Std.' },
+        ],
+        fazit: 'Ein Startwert von 0,8 ‰ braucht je nach Person grob 5 bis 8 Stunden, bis er auf etwa 0 ‰ gesunken ist — eine grobe Orientierung, KEINE Fahrfreigabe. Real dauert es oft länger; eine berechnete Uhrzeit bedeutet nie „ab dann darf ich fahren".',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Gesetzliche Promillegrenzen im Straßenverkehr',
+        kopf: ['Grenze', 'Gilt für', 'Folge'],
+        zeilen: [
+          ['0,0 ‰', 'Fahranfänger (Probezeit) & unter 21 (§ 24c StVG)', 'Bußgeld, Probezeit-Verlängerung, Aufbauseminar'],
+          ['0,3 ‰', 'alle — bei Ausfallerscheinungen oder Unfall', 'Straftat (§ 316 StGB), relative Fahruntüchtigkeit'],
+          ['0,5 ‰', 'alle (Kfz, ohne Auffälligkeiten)', 'Ordnungswidrigkeit: ab 500 €, 1 Monat Fahrverbot, 2 Punkte'],
+          ['1,1 ‰', 'alle (Kfz)', 'Straftat: absolute Fahruntüchtigkeit'],
+          ['1,6 ‰', 'Radfahrende', 'absolute Fahruntüchtigkeit (Straftat); MPU droht'],
+        ],
+        fussnote: '§§ 316 StGB, 24a / 24c StVG. Schon ab 0,3 ‰ kann eine Fahrt strafbar werden, wenn Fahrfehler hinzukommen. Dies ist eine allgemeine Einordnung und keine Rechtsberatung.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Relative vs. absolute Fahruntüchtigkeit',
+        spalteA: 'Relative Fahruntüchtigkeit',
+        spalteB: 'Absolute Fahruntüchtigkeit',
+        zeilen: [
+          { kriterium: 'Ab', a: '0,3 ‰', b: '1,1 ‰ (Kfz)' },
+          { kriterium: 'Voraussetzung', a: 'Ausfallerscheinungen, Fahrfehler oder Unfall', b: 'keine — der Wert allein genügt' },
+          { kriterium: 'Einstufung', a: 'Straftat im Einzelfall (§ 316 StGB)', b: 'immer Straftat (§ 316 StGB)' },
+          { kriterium: 'Nachweis', a: 'Fahrfehler müssen hinzukommen', b: 'unwiderlegbar ab dem Wert' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Mythen: Was den Abbau NICHT beschleunigt',
+        html: `<p>Rund ums „Schneller-nüchtern-Werden" halten sich hartnäckige Mythen — keiner davon funktioniert. <strong>Kaffee</strong> macht zwar wacher, ändert aber den Promillewert nicht; er ist sogar gefährlich, weil er die Müdigkeit überdeckt und ein falsches Sicherheitsgefühl erzeugt.</p><p>Auch eine <strong>kalte Dusche</strong>, <strong>frische Luft</strong> oder <strong>Sport</strong> beschleunigen den Abbau nicht — die Leber arbeitet unbeeindruckt in ihrem Takt weiter. Sport entzieht dem Körper eher Flüssigkeit und belastet den Kreislauf zusätzlich.</p><p><strong>Essen</strong> hilft nur <em>vor</em> oder <em>während</em> des Trinkens: Ein voller Magen verlangsamt die Aufnahme und senkt die Spitze etwas — nach dem Trinken bringt Essen für den Abbau nichts mehr. Dasselbe gilt für viel Wasser, Vitamine oder „Anti-Kater"-Präparate. Die einzige Größe, die den Promillewert senkt, ist <strong>Zeit</strong>. Wer das verinnerlicht, plant die Heimfahrt von vornherein anders.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Mythen-Check: was wirklich passiert',
+        kopf: ['Mythos', 'Realität'],
+        zeilen: [
+          ['Kaffee macht nüchtern', 'macht nur wacher — ‰ bleibt gleich, falsches Sicherheitsgefühl'],
+          ['Kalte Dusche hilft', 'kein Effekt auf den Abbau'],
+          ['Sport schwitzt Alkohol raus', 'nein — belastet den Kreislauf, Abbau unverändert'],
+          ['Essen danach senkt den Wert', 'nur vorher/während wirkt; danach nichts mehr'],
+          ['Viel Wasser verdünnt das Blut', 'kein nennenswerter Effekt auf die BAK'],
+        ],
+        fussnote: 'Die einzige Größe, die die Blutalkoholkonzentration senkt, ist Zeit. Nichts beschleunigt den Abbau in der Leber.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Was den Promillewert beeinflusst (große Streuung)',
+        werte: [
+          { label: 'Körpergewicht', wert: 'mehr kg = niedriger ‰', hinweis: 'mehr Körperwasser verteilt den Alkohol' },
+          { label: 'Geschlecht', wert: 'Frauen meist höher', hinweis: 'geringerer Körperwasser-Anteil (~55 % vs. ~68 %)' },
+          { label: 'Mageninhalt', wert: 'beeinflusst die Anflutung', hinweis: 'auf vollen Magen langsamer, Endwert ähnlich' },
+          { label: 'Trinktempo', wert: 'schnell = höhere Spitze', hinweis: 'Abbau bleibt konstant ~0,1–0,15 ‰/h' },
+          { label: 'Tagesform & Medikamente', wert: 'individuell', hinweis: 'Widmark ist nur eine Näherung' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Gleiche Menge, andere Person — warum Werte streuen',
+        schritte: [
+          { label: 'Beide trinken: 2 × Bier', formel: '40 g reiner Alkohol', ergebnis: '40 g' },
+          { label: 'Mann, 90 kg', formel: '40 ÷ (90 × 0,68)', ergebnis: '≈ 0,65 ‰' },
+          { label: 'Frau, 60 kg', formel: '40 ÷ (60 × 0,55)', ergebnis: '≈ 1,21 ‰' },
+        ],
+        fazit: 'Dieselben zwei Bier ergeben bei der einen Person rund 0,65 ‰, bei der anderen 1,21 ‰ — also vom Bußgeld- bis in den Straftat-Bereich. Geschlecht und Gewicht machen den Unterschied. Das zeigt, warum jede Promille-Schätzung nur eine grobe Näherung ist.',
+      },
+      {
+        typ: 'text',
+        titel: 'Die Folgen einer Alkoholfahrt',
+        html: `<p>Wer alkoholisiert fährt, riskiert weit mehr als ein Bußgeld. Schon die <strong>Ordnungswidrigkeit ab 0,5 ‰</strong> bringt 500 € Bußgeld, zwei Punkte und einen Monat Fahrverbot — bei Wiederholung steigen die Sätze deutlich.</p><p>Ab <strong>1,1 ‰</strong> oder bei Ausfallerscheinungen wird es eine <strong>Straftat</strong>: Es drohen Geld- oder Freiheitsstrafe, der Entzug der Fahrerlaubnis und häufig eine <strong>medizinisch-psychologische Untersuchung (MPU)</strong>, bevor der Führerschein zurückkommt. Hinzu kommen oft Probleme mit der Versicherung.</p><p>Am schwersten wiegt das <strong>Unfallrisiko</strong>: Alkohol verlängert die Reaktionszeit, trübt Wahrnehmung und Urteilsvermögen — und das schon bei Werten, die sich „harmlos" anfühlen. Im schlimmsten Fall stehen Personenschäden im Raum, die sich nicht rückgängig machen lassen. Gemessen daran ist jede Alternative — Taxi, Bahn, übernachten — die günstigere und sichere Wahl.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Diese Schätzung ist KEINE Fahrfreigabe',
+        text: 'Wichtig: Dieser Rechner liefert eine grobe Schätzung des Promillewerts und seines zeitlichen Verlaufs — er ist KEINE Fahrtauglichkeits-Freigabe. Die tatsächlichen Werte hängen von vielen individuellen Faktoren ab und können deutlich höher liegen oder langsamer sinken als berechnet. Eine angezeigte Uhrzeit bedeutet niemals „ab dann darf ich fahren". Das gilt besonders am Morgen danach: Restalkohol baut sich nur langsam ab und ist oft noch vorhanden, wenn man sich längst nüchtern fühlt. Im Zweifel gilt deshalb ausnahmslos: nicht ans Steuer und lieber länger warten oder eine Alternative nutzen. Sicher ist allein, gar nicht alkoholisiert zu fahren.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Verantwortungsvoll mit Alkohol & Straßenverkehr',
+        punkte: [
+          'Schon vor dem Abend die Heimfahrt planen — ÖPNV, Taxi oder eine nüchterne Fahrperson festlegen.',
+          'Im Zweifel das Auto stehen lassen — auch am Morgen danach (Restalkohol).',
+          '0,0 ‰ einhalten als Fahranfänger, in der Probezeit und unter 21 Jahren.',
+          'Beim Radfahren ebenfalls nüchtern bleiben — ab 1,6 ‰ drohen Straftat und MPU.',
+          'Auf Mythen verzichten: Nur Zeit senkt den Promillewert, nichts beschleunigt den Abbau.',
+          'Bei wiederholt riskantem Trinken eine fachliche Beratungsstelle ansprechen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Widmark ist eine Näherung — und wo es Hilfe gibt',
+        text: 'Die Berechnung beruht auf der Widmark-Formel, einer wissenschaftlichen Näherung, die individuelle Faktoren wie Tagesform, Mageninhalt, Medikamente oder Trinkgewohnheiten nicht vollständig erfasst. Die tatsächliche Blutalkoholkonzentration kann davon abweichen. Dieser Rechner ersetzt keine Messung und keine Rechtsberatung. Wer das Gefühl hat, den eigenen Alkoholkonsum nicht mehr im Griff zu haben, findet bei Beratungsstellen (etwa der Deutschen Hauptstelle für Suchtfragen) und in der Hausarztpraxis vertrauliche, kostenfreie Unterstützung.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Sicher heimkommen — vorher planen',
+        text: 'Die sicherste Strategie entsteht vor dem ersten Glas: Legen Sie schon beim Aufbruch fest, wie Sie nüchtern nach Hause kommen. Bus, Bahn und Nachtlinien fahren in vielen Städten auch spät; ein Taxi oder Fahrdienst ist immer günstiger als ein Fahrverbot. Wer in einer Gruppe unterwegs ist, kann abwechselnd eine nüchterne Fahrperson bestimmen. Und wenn doch nichts passt: lieber übernachten oder das Auto stehen lassen — das ist immer die bessere Wahl.',
+      },
+    ],
     faq: [
       {
         frage: 'Wie schnell baut der Körper Alkohol ab?',
@@ -1567,6 +1737,10 @@ Wenn Sie Alkohol getrunken haben, gilt eine einfache Regel: **Nicht ans Steuer.*
         frage: 'Kann ich mich auf diesen Rechner beim Autofahren verlassen?',
         antwort: 'Nein. Der Rechner liefert nur eine grobe Schätzung. Individuelle Faktoren (Essen, Medikamente, Tagesform) können den tatsächlichen Wert deutlich beeinflussen. Die einzig sichere Promillegrenze für den Straßenverkehr ist 0,0 ‰. Im Zweifel: NICHT fahren.',
       },
+    ],
+    quellen: [
+      { titel: '§ 316 StGB / § 24a StVG: Alkohol im Straßenverkehr', url: 'https://www.gesetze-im-internet.de/stgb/__316.html', hinweis: 'absolute Fahruntüchtigkeit ab 1,1 ‰; 0,5-‰-Ordnungswidrigkeit' },
+      { titel: 'Deutsche Hauptstelle für Suchtfragen (DHS)', url: 'https://www.dhs.de', hinweis: 'Abbaurate, Mythen, Beratungsangebote' },
     ],
   },
   {
