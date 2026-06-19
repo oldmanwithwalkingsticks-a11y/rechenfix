@@ -641,4 +641,195 @@ Die WHO empfiehlt Erwachsenen mindestens 150 Minuten moderate oder 75 Minuten in
       },
     ],
   },
+  {
+    slug: 'vo2max-rechner',
+    letzteAktualisierung: '2026-06-19',
+    titel: 'VO2max-Rechner',
+    beschreibung: 'VO2max schätzen — die maximale Sauerstoffaufnahme als Maß der Ausdauer, per Cooper-Test oder Puls-Methode.',
+    kategorie: 'Sport & Fitness',
+    kategorieSlug: 'sport',
+    metaTitle: 'VO2max-Rechner — Ausdauer schätzen (Cooper)',
+    metaDescription: 'VO2max schätzen: maximale Sauerstoffaufnahme per Cooper-Test oder Ruhe-/Maxpuls ✓ Normwerte ✓ Fitnesslevel einordnen ✓ Richtwerte mit KI-Erklärung.',
+    keywords: ['vo2max rechner', 'vo2max berechnen', 'cooper test', 'maximale sauerstoffaufnahme', 'ausdauer messen', 'vo2max normwerte', 'fitnesslevel', 'vo2max schätzen'],
+    icon: '🫁',
+    formel: 'Cooper: VO2max = (Distanz in m − 504,9) ÷ 44,73 | Puls: VO2max ≈ 15 × (HFmax ÷ HFruhe)',
+    beispiel: 'Cooper-Test 2.400 m in 12 min: (2.400 − 504,9) ÷ 44,73 ≈ 42 ml/kg/min.',
+    erklaerung: `**VO2max — die maximale Sauerstoffaufnahme**
+
+Der VO2max ist die maximale Sauerstoffmenge, die der Körper pro Minute aufnehmen und verwerten kann, angegeben in Milliliter pro Kilogramm Körpergewicht und Minute (ml/kg/min). Er gilt als wichtigster Einzelwert für die Ausdauerleistungsfähigkeit. Unser Rechner schätzt ihn über zwei einfache Methoden.
+
+**Cooper-Test**
+
+Beim Cooper-Test läuft man 12 Minuten so weit wie möglich. Aus der Distanz schätzt die Formel VO2max = (Distanz in m − 504,9) ÷ 44,73 den Wert. 2.400 m ergeben rund 42 ml/kg/min. Der Test braucht nur eine vermessene Strecke und eine Uhr.
+
+**Puls-Methode**
+
+Die Puls-Methode setzt den Maximalpuls ins Verhältnis zum Ruhepuls: VO2max ≈ 15 × (HFmax ÷ HFruhe). Ein niedriger Ruhepuls — typisch für ein trainiertes Herz — ergibt einen höheren Wert. Sie ist bequem, aber ungenauer, weil ein exakter Maximalpuls schwer zu bestimmen ist.
+
+**Schätzwerte, kein Leistungsdruck**
+
+Die Ergebnisse sind Näherungen; der Labortest (Spiroergometrie) ist genauer. Der VO2max ist ein neutraler Anhaltspunkt für die eigene Ausdauer, kein Werturteil. Maximalbelastungstests fordern das Herz-Kreislauf-System stark — bei Vorerkrankungen oder Unsicherheit vorher ärztlich abklären.`,
+    faq: [
+      {
+        frage: 'Was ist der VO2max?',
+        antwort: 'Der VO2max ist die maximale Sauerstoffmenge, die der Körper pro Minute aufnehmen und in den Muskeln verwerten kann, gemessen in ml/kg/min. Er gilt als wichtigster Einzelwert für die Ausdauerleistungsfähigkeit und hängt von Herz, Lunge, Blut und Muskeln ab.',
+      },
+      {
+        frage: 'Wie schätze ich meinen VO2max mit dem Cooper-Test?',
+        antwort: 'Laufen Sie 12 Minuten so weit wie möglich und setzen Sie die Distanz in die Formel ein: VO2max = (Distanz in Metern − 504,9) ÷ 44,73. Beispiel: 2.400 m ergeben (2.400 − 504,9) ÷ 44,73 ≈ 42 ml/kg/min.',
+      },
+      {
+        frage: 'Wie funktioniert die Puls-Methode?',
+        antwort: 'Sie nutzt das Verhältnis von Maximal- zu Ruhepuls: VO2max ≈ 15 × (HFmax ÷ HFruhe). Bei HFmax 190 und Ruhepuls 60 ergibt das 15 × 3,17 ≈ 48 ml/kg/min. Die Methode ist bequem, aber ungenauer als ein Lauftest.',
+      },
+      {
+        frage: 'Was ist ein guter VO2max-Wert?',
+        antwort: 'Das hängt von Alter und Geschlecht ab. Grob gilt: unter 30 niedrig, 30–40 durchschnittlich, 40–50 gut, über 50 exzellent. Die Werte sind eine neutrale Orientierung, kein Werturteil, und sinken mit dem Alter im Schnitt leicht.',
+      },
+      {
+        frage: 'Wie genau sind die geschätzten Werte?',
+        antwort: 'Feldtest-Schätzungen können vom im Labor gemessenen Wert abweichen — sie hängen von Tagesform, Pacing, Motivation und der Genauigkeit der Eingaben ab. Am genauesten ist die Spiroergometrie im Labor. Für den Alltag genügen die Schätzungen zur groben Einordnung.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was VO2max ist & warum er die Ausdauer misst',
+        html: `<p>Der <strong>VO2max</strong> ist die maximale Sauerstoffmenge, die der Körper pro Minute aufnehmen und in den Muskeln verwerten kann — angegeben in <strong>Milliliter Sauerstoff pro Kilogramm Körpergewicht und Minute (ml/kg/min)</strong>. Er gilt als der wichtigste Einzelwert für die <strong>Ausdauerleistungsfähigkeit</strong>.</p><p>Der Hintergrund: Bei intensiver Belastung brauchen die Muskeln Sauerstoff, um Energie zu gewinnen. Wie viel bereitsteht, hängt davon ab, wie gut Lunge, Herz, Blut und Muskeln zusammenarbeiten. Ein hoher VO2max bedeutet, dass dieses System viel Sauerstoff transportieren und nutzen kann — die Basis für lange, intensive Ausdauerleistungen. Der Wert lässt sich im Labor exakt messen oder über einfache <strong>Feldtests schätzen</strong>, etwa den Cooper-Test oder eine Puls-Methode. Dieser Rechner bietet beide Schätzwege. Wichtig: Die Ergebnisse sind Näherungen und ein neutraler Anhaltspunkt für die eigene Ausdauer — kein Leistungsurteil und kein Wert, dem man nachjagen muss. Besonders nützlich ist der VO2max als <strong>Verlaufsgröße</strong>: Wer ihn über Monate hinweg mit derselben Methode verfolgt, sieht, ob das eigene Training wirkt — unabhängig davon, wo der Wert im Vergleich zu anderen liegt.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'VO2max-Normwerte (Durchschnitt, ml/kg/min)',
+        werte: [
+          { label: 'Männer 20–29 Jahre', wert: '~38–48', hinweis: 'durchschnittlicher Bereich; Werte sinken mit dem Alter' },
+          { label: 'Frauen 20–29 Jahre', wert: '~33–42', hinweis: 'durchschnittlicher Bereich' },
+          { label: 'Männer 40–49 Jahre', wert: '~32–42', hinweis: 'altersbedingt niedriger' },
+          { label: 'Frauen 40–49 Jahre', wert: '~28–36', hinweis: 'altersbedingt niedriger' },
+          { label: 'Einordnung', wert: 'nur Durchschnitt', hinweis: 'Die Spannen sind grobe Mittelwerte; gut Trainierte liegen darüber, der individuelle Wert kann stark abweichen' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Cooper-Test: Distanz in 12 Minuten',
+        schritte: [
+          { label: 'In 12 Minuten gelaufene Distanz', formel: '2.400 m', ergebnis: 'gegeben' },
+          { label: 'Cooper-Formel', formel: '(2.400 − 504,9) ÷ 44,73', ergebnis: '1.895,1 ÷ 44,73' },
+          { label: 'VO2max', formel: '= 42,4', ergebnis: '≈ 42 ml/kg/min' },
+        ],
+        fazit: 'Beim Cooper-Test läuft man 12 Minuten so weit wie möglich und setzt die Distanz in die Formel ein. 2.400 m ergeben rund 42 ml/kg/min. Es ist ein einfacher Feldtest, der nur eine vermessene Strecke und eine Uhr braucht. Die Genauigkeit hängt stark von der Tageseinteilung ab: Wer zu schnell startet und einbricht, läuft weniger weit. Gut aufwärmen und ein gleichmäßiges Tempo wählen — dann ist das Ergebnis am aussagekräftigsten. Der Test eignet sich gut für Menschen mit Grundfitness; absolute Anfänger sollten lieber mit ruhigem Training beginnen, bevor sie sich 12 Minuten maximal belasten. Die 504,9 und 44,73 in der Formel sind empirisch ermittelte Konstanten aus der ursprünglichen Studie von Kenneth Cooper.',
+      },
+      {
+        typ: 'text',
+        titel: 'Methoden im Überblick (Cooper, Puls-Ratio, Labortest)',
+        html: `<p>Es gibt mehrere Wege, den VO2max zu bestimmen — vom einfachen Feldtest bis zur Labormessung. Der bekannteste ist der <strong>Cooper-Test</strong>: Man läuft 12 Minuten so weit wie möglich; aus der Distanz schätzt eine Formel den VO2max. Er braucht nur eine vermessene Strecke und eine Uhr.</p><p>Die <strong>Puls-Methode</strong> kommt ganz ohne Lauftest aus: Sie setzt den Maximalpuls ins Verhältnis zum Ruhepuls. Ein niedriger Ruhepuls — typisch für ein gut trainiertes Herz — führt zu einem höheren Schätzwert. Sie ist bequem, aber ungenauer, weil ein exakter Maximalpuls schwer zu bestimmen ist. Am genauesten ist die <strong>Spiroergometrie</strong> im Labor: Dabei wird unter ansteigender Belastung die Atemluft analysiert und der Sauerstoffverbrauch direkt gemessen. Das ist der Goldstandard, aber aufwendig und kostenpflichtig. Für den Alltag liefern die Feldtests eine brauchbare grobe Einordnung — exakt sind nur Labormessungen. Auch <strong>Fitnessuhren und Pulsgurte</strong> schätzen den VO2max heute automatisch aus Tempo und Herzfrequenz beim Laufen. Diese Werte sind bequem, aber gerätespezifisch und ebenfalls nur Näherungen — für einen sinnvollen Vergleich sollte man immer bei derselben Methode bleiben.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Puls-Methode (Maximal- und Ruhepuls)',
+        schritte: [
+          { label: 'Maximalpuls und Ruhepuls', formel: 'HFmax 190, HFruhe 60', ergebnis: 'gegeben' },
+          { label: 'Verhältnis bilden', formel: '190 ÷ 60', ergebnis: '3,17' },
+          { label: 'mal 15', formel: '15 × 3,17', ergebnis: '≈ 48 ml/kg/min' },
+        ],
+        fazit: 'Die Ruhe-/Maximalpuls-Methode nutzt, dass ein trainiertes Herz im Ruhezustand langsamer schlägt. Ein niedriger Ruhepuls im Verhältnis zum Maximalpuls ergibt einen höheren Schätzwert: 190 zu 60 führt zu rund 48 ml/kg/min. Die Methode braucht keinen Lauftest, ist aber ungenauer als der Cooper-Test — vor allem, weil der echte Maximalpuls schwer zu bestimmen ist. Die Faustformel 220 minus Alter streut stark; verlässlicher ist ein Wert aus einem überwachten Belastungstest. Der Vorteil der Methode: Sie kommt ohne maximale Belastung aus und ist damit auch für Menschen geeignet, die keinen erschöpfenden Lauftest machen möchten oder sollen. Den Ruhepuls misst man am besten morgens direkt nach dem Aufwachen, noch im Liegen — dann ist er am niedrigsten und am aussagekräftigsten.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Fitnesslevel grob einordnen (neutral)',
+        werte: [
+          { label: 'niedrig', wert: 'unter ~30', hinweis: 'untrainiert; regelmäßige Bewegung kann den Wert anheben' },
+          { label: 'durchschnittlich', wert: '~30–40', hinweis: 'typischer Bereich für moderat Aktive' },
+          { label: 'gut', wert: '~40–50', hinweis: 'regelmäßiges Ausdauertraining' },
+          { label: 'exzellent', wert: 'über ~50', hinweis: 'ambitionierte Ausdauersportler' },
+          { label: 'Hinweis zur Einordnung', wert: 'neutral', hinweis: 'Die Grenzen hängen von Alter und Geschlecht ab — die Stufen sind grobe Orientierung, kein Werturteil' },
+        ],
+      },
+      {
+        typ: 'statistik',
+        titel: 'Was den VO2max beeinflusst',
+        werte: [
+          { label: 'Alter', wert: 'sinkt mit den Jahren', hinweis: 'ab etwa 30 im Schnitt rund 1 % pro Jahr, durch Training bremsbar' },
+          { label: 'Geschlecht', wert: 'biologische Unterschiede', hinweis: 'u. a. durch Herzgröße und Hämoglobin; Normwerte daher getrennt' },
+          { label: 'Trainingszustand', wert: 'stark beeinflussbar', hinweis: 'Ausdauertraining hebt den Wert deutlich' },
+          { label: 'Genetik', wert: 'setzt den Rahmen', hinweis: 'das individuelle Potenzial ist teils veranlagt' },
+        ],
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Schätzmethoden im Vergleich',
+        kopf: ['Methode', 'Eingabe', 'Genauigkeit'],
+        zeilen: [
+          ['Cooper-Test', '12-Minuten-Laufdistanz', 'mittel (motivationsabhängig)'],
+          ['Puls-Methode', 'Ruhe- und Maximalpuls', 'gering bis mittel'],
+          ['1,5-Meilen-Lauf', 'Zeit für 2,4 km', 'mittel'],
+          ['Fitnessuhr / Wearable', 'Pulsdaten beim Laufen', 'mittel, gerätespezifisch'],
+          ['Spiroergometrie (Labor)', 'Atemgasanalyse unter Last', 'hoch (Goldstandard)'],
+        ],
+        fussnote: 'Feldtests sind einfach und kostenlos, aber von Tagesform, Pacing und Motivation abhängig. Der Labortest (Spiroergometrie) misst den Sauerstoffverbrauch direkt und ist am genauesten, dafür aufwendig und kostenpflichtig. Für den Alltag genügen die Schätzmethoden zur groben Einordnung und zur Verlaufskontrolle. Der 1,5-Meilen-Lauf (2,4 km auf Zeit) ist eine Variante des Cooper-Gedankens mit fester Distanz statt fester Zeit. Welche Methode man wählt, ist zweitrangig — wichtig ist, bei einer zu bleiben, damit die Werte über die Zeit vergleichbar sind.',
+      },
+      {
+        typ: 'text',
+        titel: 'Wie man VO2max trainiert (Grundlagen- & Intervallausdauer)',
+        html: `<p>Der VO2max lässt sich durch Ausdauertraining <strong>verbessern</strong> — vor allem bei untrainierten Menschen sind die Fortschritte am Anfang am größten. Zwei Trainingsformen ergänzen sich: <strong>Grundlagenausdauer</strong> und <strong>Intervalltraining</strong>.</p><p>Die <strong>Grundlagenausdauer</strong> baut man mit längeren, ruhigen Einheiten in moderatem Tempo auf, bei denen man sich noch unterhalten könnte. Sie verbessert die Sauerstoff-Versorgung und bildet das Fundament. Das <strong>Intervalltraining</strong> wechselt kurze, intensive Belastungen mit Erholungsphasen ab und reizt das Herz-Kreislauf-System gezielt nahe der Maximalleistung — das hebt den VO2max besonders effektiv. Wichtig ist ein <strong>ausgewogenes Verhältnis</strong>: viel ruhige Grundlage, dazu dosierte intensive Reize und ausreichend Erholung. Wer neu einsteigt oder Vorerkrankungen hat, sollte langsam beginnen und intensive Belastungen vorher ärztlich abklären lassen. Es geht um die langfristige Gesundheit und die Freude an der Bewegung, nicht um einen möglichst hohen Zahlenwert. Schon zwei bis drei Ausdauereinheiten pro Woche zeigen mit der Zeit Wirkung. Genauso wichtig wie die Belastung ist die <strong>Erholung</strong>: Der Körper wird in den Ruhephasen leistungsfähiger, nicht während des Trainings selbst. Wer dauerhaft ohne Pausen trainiert, riskiert eher Rückschritte als Fortschritte.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Verbesserung über die Zeit (Orientierung)',
+        schritte: [
+          { label: 'Ausgangswert (untrainiert)', formel: '~35 ml/kg/min', ergebnis: 'Startpunkt' },
+          { label: 'Nach ~3 Monaten regelmäßigem Training', formel: '+10 bis 15 %', ergebnis: '≈ 39–40 ml/kg/min' },
+        ],
+        fazit: 'Untrainierte verbessern ihren VO2max in den ersten Monaten regelmäßigen Ausdauertrainings oft um 10 bis 15 Prozent. Je besser man bereits trainiert ist, desto kleiner werden die Zuwächse — der Körper nähert sich seinem genetisch gesetzten Rahmen. Die Zahlen sind eine grobe Orientierung, kein Ziel, das man erreichen muss: Wie stark sich der Wert ändert, ist sehr individuell. Entscheidend ist, dass regelmäßige Bewegung der Ausdauer und der Gesundheit guttut, unabhängig vom genauen Zahlenwert. Auch ein hoher Ausgangswert ist kein Grund, sich unter Druck zu setzen: Schon das Halten des Niveaus ist mit dem Alter ein Erfolg, weil der VO2max ohne Training von selbst langsam sinkt. Wer aktiv bleibt, verlangsamt diesen natürlichen Rückgang spürbar.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Feldtest vs. Labortest',
+        spalteA: 'Feldtest (Cooper, Puls)',
+        spalteB: 'Labortest (Spiroergometrie)',
+        zeilen: [
+          { kriterium: 'Genauigkeit', a: 'Schätzung, von Tagesform abhängig', b: 'direkte Messung, Goldstandard' },
+          { kriterium: 'Aufwand', a: 'gering, selbst durchführbar', b: 'Termin in Sportmedizin oder Labor' },
+          { kriterium: 'Kosten', a: 'kostenlos', b: 'kostenpflichtig' },
+          { kriterium: 'Ausstattung', a: 'Strecke, Uhr, Pulsmesser', b: 'Atemmaske, Laufband oder Ergometer' },
+          { kriterium: 'Geeignet für', a: 'grobe Einordnung, Verlaufskontrolle', b: 'exakte Diagnostik, Leistungssport' },
+        ],
+      },
+      {
+        typ: 'checkliste',
+        titel: 'VO2max sinnvoll testen',
+        punkte: [
+          'Vor einem Belastungstest gründlich aufwärmen (10–15 Minuten locker).',
+          'Ausgeruht antreten und nicht direkt nach einer Mahlzeit testen.',
+          'Immer unter möglichst gleichen Bedingungen testen (Strecke, Wetter, Tageszeit).',
+          'Beim Cooper-Test das Tempo gleichmäßig einteilen, nicht zu schnell starten.',
+          'Für die Puls-Methode den Ruhepuls morgens im Liegen messen.',
+          'Den Maximalpuls möglichst aus einem Test kennen, nicht nur aus 220 minus Alter.',
+          'Den Wert als Verlauf betrachten — der Trend über Monate sagt mehr als ein Einzelwert.',
+          'Bei Vorerkrankungen, Beschwerden oder Unsicherheit vorher ärztlich abklären.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Gleiche Testbedingungen machen Werte vergleichbar',
+        text: 'Ein einzelner VO2max-Schätzwert ist weniger aussagekräftig als seine Entwicklung über die Zeit. Damit der Vergleich fair ist, sollten die Bedingungen möglichst gleich sein: dieselbe Strecke oder dasselbe Verfahren, ähnliches Wetter, vergleichbare Tageszeit, ausgeruhter Zustand und ein einheitliches Aufwärmen. Schon ein windiger Tag, eine schlechte Nacht oder eine andere Strecke können den Wert spürbar verschieben. Wer immer gleich testet, erkennt echte Fortschritte zuverlässiger und lässt sich nicht von zufälligen Schwankungen verunsichern. Der Trend über mehrere Monate ist dabei deutlich aussagekräftiger als der Wert eines einzelnen Tests. Notieren Sie deshalb neben dem Ergebnis auch die Rahmenbedingungen — Strecke, Wetter, Tagesform. So lässt sich später nachvollziehen, ob ein niedrigerer Wert ein echter Rückschritt war oder nur an einem schlechten Testtag lag.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Schätzwerte — bei Vorerkrankung vorher ärztlich abklären',
+        text: 'Die hier berechneten VO2max-Werte sind Schätzungen aus Feldtest-Formeln und können vom tatsächlichen, im Labor gemessenen Wert abweichen. Sie hängen von Tagesform, Motivation, Pacing und der Genauigkeit der Eingaben ab. Nutzen Sie sie als groben Anhaltspunkt für die eigene Ausdauer und ihre Entwicklung, nicht als exakte Diagnose. Wichtig: Maximalbelastungstests wie der Cooper-Test fordern das Herz-Kreislauf-System stark. Wer Vorerkrankungen hat, längere Zeit inaktiv war, Beschwerden bemerkt oder unsicher ist, sollte vor einem solchen Test ärztlichen Rat einholen. Gesundheit und ein sicheres, schrittweises Herangehen stehen über jedem Zahlenwert. Anzeichen wie Brustschmerz, Schwindel, ungewohnte Atemnot oder Herzstolpern sind ein klares Signal, den Test abzubrechen und ärztlichen Rat zu suchen. Im Zweifel gilt: lieber eine Einheit auslassen als ein Risiko eingehen.',
+      },
+    ],
+    quellen: [
+      {
+        titel: 'Cooper-Test & VO2max-Schätzung',
+        hinweis: 'VO2max = (Distanz_m − 504,9)/44,73 (Cooper); Puls-Methode ≈ 15 × HFmax/HFruhe. Schätzungen.',
+      },
+      {
+        titel: 'ACSM — Cardiorespiratory fitness (Hintergrund)',
+        hinweis: 'Normwerte und Einordnung des VO2max.',
+      },
+    ],
+  },
 ];
