@@ -660,6 +660,129 @@ In der Praxis bedeutet das: Die meisten Werte liegen im Bereich 5,4 ± 2,42, als
         antwort: 'Den Median verwendet man, wenn die Daten Ausreißer enthalten (z. B. Gehaltsverteilungen, Immobilienpreise). Der Median ist robust gegenüber extremen Werten, der Mittelwert nicht.',
       },
     ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Durchschnitt — das arithmetische Mittel als Standardfall',
+        html: `<p>Der <strong>Durchschnitt</strong> — meist <strong>arithmetisches Mittel</strong> genannt — fasst eine Reihe von Zahlen zu einem einzigen, repräsentativen Wert zusammen. Die Berechnung ist denkbar einfach: alle Werte <strong>addieren</strong> und durch ihre <strong>Anzahl teilen</strong>. Aus den fünf Werten 4, 7, 2, 9 und 5 wird so (4 + 7 + 2 + 9 + 5) ÷ 5 = 5,4.</p><p>Das arithmetische Mittel ist der Standardfall überall dort, wo alle Werte <strong>gleich wichtig</strong> sind und keine extremen Ausreißer vorkommen: Schulnoten, Temperaturen, Messreihen, Verbrauchswerte. Es hat aber eine Schwäche — ein einziger sehr großer oder sehr kleiner Wert zieht das Ergebnis spürbar in seine Richtung. Für solche Fälle gibt es robustere Lagemaße: den <strong>Median</strong> (den mittleren Wert der sortierten Reihe) und den <strong>Modus</strong> (den häufigsten Wert). Welches Maß das richtige ist, hängt von den Daten und der Fragestellung ab — dieser Rechner liefert alle drei samt Rechenweg.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Arithmetisches Mittel (Summe ÷ Anzahl)',
+        schritte: [
+          { label: 'Werte erfassen', formel: '4, 7, 2, 9, 5', ergebnis: '5 Werte' },
+          { label: 'Summe bilden', formel: '4 + 7 + 2 + 9 + 5', ergebnis: '27' },
+          { label: 'Summe durch Anzahl teilen', formel: '27 ÷ 5', ergebnis: '5,4' },
+        ],
+        fazit: 'Das arithmetische Mittel ist Summe geteilt durch Anzahl: 27 ÷ 5 = 5,4. Jeder Wert geht mit gleichem Gewicht ein. Genau so rechnet man Notendurchschnitte, Monatstemperaturen oder den mittleren Verbrauch. Der Mittelwert muss dabei keiner der vorkommenden Werte sein — 5,4 steht in der Liste gar nicht. Er beschreibt den rechnerischen Schwerpunkt der Daten. Solange keine extremen Ausreißer dabei sind, ist das arithmetische Mittel die treffende und gebräuchlichste Kennzahl. Eine kurze Plausibilitätsprüfung hilft: Der Mittelwert muss immer zwischen dem kleinsten und dem größten Wert liegen — hier zwischen 2 und 9. Liegt das Ergebnis außerhalb dieser Spanne, hat sich ein Rechen- oder Tippfehler eingeschlichen.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Gewichteter Durchschnitt (Noten mit Gewichtung)',
+        schritte: [
+          { label: 'Note × Gewicht je Komponente', formel: '2,0×5 + 3,0×3 + 1,0×2', ergebnis: '10 + 9 + 2' },
+          { label: 'Produkte summieren', formel: '10 + 9 + 2', ergebnis: '21' },
+          { label: 'Durch Summe der Gewichte (5+3+2)', formel: '21 ÷ 10', ergebnis: '2,1' },
+        ],
+        fazit: 'Beim gewichteten Mittel zählt nicht jede Note gleich. Hier wiegt die Klausur (Note 2,0) mit 5, die Mitarbeit (3,0) mit 3 und ein Test (1,0) mit 2. Man multipliziert jede Note mit ihrem Gewicht, summiert die Produkte (21) und teilt durch die Summe der Gewichte (10) — nicht durch die Anzahl der Noten. Ergebnis: 2,1. Das einfache, ungewichtete Mittel der drei Noten wäre 2,0; die stärker gewichtete Mitarbeitsnote 3,0 hebt den Schnitt leicht an. Genau dieses Prinzip steckt hinter Zeugnis- und Abiturnoten, bei denen Klausuren mehr zählen.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Die vier Lagemaße im Überblick',
+        kopf: ['Maß', 'Berechnung', 'Wann nutzen'],
+        zeilen: [
+          ['Arithmetisches Mittel', 'Summe ÷ Anzahl', 'Standardfall, alle Werte gleichwertig'],
+          ['Gewichtetes Mittel', 'Σ(Wert × Gewicht) ÷ Σ Gewicht', 'wenn Werte unterschiedlich wichtig sind (Noten)'],
+          ['Median', 'mittlerer Wert der sortierten Reihe', 'bei Ausreißern (Gehälter, Mieten, Preise)'],
+          ['Modus', 'häufigster Wert', 'typischster Wert, auch bei Kategorien'],
+        ],
+        fussnote: 'Das arithmetische Mittel ist der Standard, reagiert aber empfindlich auf Ausreißer. Median und Modus ergänzen es um eine robustere bzw. häufigkeitsbasierte Sicht. Die Standardabweichung sagt zusätzlich, wie stark die einzelnen Werte um den Mittelwert streuen.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Median bei ungerader und gerader Anzahl',
+        schritte: [
+          { label: 'Ungerade Anzahl (5 Werte) sortieren', formel: '2, 4, 5, 7, 9', ergebnis: 'mittlerer Wert = 5' },
+          { label: 'Gerade Anzahl (4 Werte) sortieren', formel: '2, 4, 7, 9', ergebnis: 'Mitte: 4 und 7' },
+          { label: 'Mittel der beiden mittleren Werte', formel: '(4 + 7) ÷ 2', ergebnis: '5,5' },
+        ],
+        fazit: 'Der Median ist der mittlere Wert der sortierten Reihe — deshalb zuerst immer der Größe nach ordnen. Bei einer ungeraden Anzahl gibt es genau einen mittleren Wert: Bei 2, 4, 5, 7, 9 ist es die 5 (der dritte von fünf). Bei einer geraden Anzahl gibt es zwei mittlere Werte; der Median ist ihr Durchschnitt: Bei 2, 4, 7, 9 also (4 + 7) ÷ 2 = 5,5. Der Median kann damit — wie hier — ein Wert sein, der im Datensatz gar nicht vorkommt. Bei großen Datenmengen bestimmt man die Position des mittleren Werts über die Formel (n + 1) ÷ 2: Bei 5 Werten ist das Position 3, bei 9 Werten Position 5. So muss man nicht jedes Mal von Hand abzählen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Wann der Median besser ist als das Mittel',
+        html: `<p>Der <strong>Median</strong> ist der mittlere Wert einer der Größe nach sortierten Reihe: Die eine Hälfte der Werte liegt darunter, die andere darüber. Anders als das arithmetische Mittel interessiert ihn nur die <strong>Position</strong> der Werte, nicht ihre Größe — und genau das macht ihn <strong>robust gegen Ausreißer</strong>.</p><p>Das klassische Beispiel sind <strong>Gehälter</strong>. Verdienen vier Personen zwischen 2.400 und 3.000 € und eine fünfte 12.000 €, liegt das arithmetische Mittel bei 4.560 € — höher als das Einkommen von vier der fünf Personen. Der eine hohe Wert verzerrt das Bild. Der Median dagegen liegt bei 2.800 € und beschreibt das <strong>typische</strong> Gehalt deutlich ehrlicher. Aus demselben Grund berichten Statistikämter Einkommen, Mieten und Immobilienpreise als Median: Bei schiefen Verteilungen mit wenigen sehr großen Werten gibt er die Lage der Mehrheit besser wieder als der leicht verzerrbare Mittelwert.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Ausreißer-Effekt — Gehälter: Mittel vs. Median',
+        schritte: [
+          { label: 'Fünf Monatsgehälter (€)', formel: '2.400, 2.600, 2.800, 3.000, 12.000', ergebnis: 'gegeben' },
+          { label: 'Mittelwert = Summe ÷ 5', formel: '22.800 ÷ 5', ergebnis: '4.560 €' },
+          { label: 'Median = mittlerer Wert (3. von 5)', formel: 'sortiert: …, 2.800, …', ergebnis: '2.800 €' },
+        ],
+        fazit: 'Hier zeigt sich der Ausreißer-Effekt besonders deutlich: Das arithmetische Mittel von 4.560 € liegt über dem Gehalt von vier der fünf Personen — das eine Spitzengehalt von 12.000 € zieht es nach oben. Der Median von 2.800 € beschreibt das „typische" Einkommen viel besser, weil er den Ausreißer unberücksichtigt lässt und nur die Position in der sortierten Reihe betrachtet. Deshalb gilt: Bei Einkommen, Mieten, Immobilienpreisen und anderen schiefen Verteilungen ist der Median die aussagekräftigere Kennzahl.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Modus — der häufigste Wert',
+        schritte: [
+          { label: 'Werte sortieren und Häufigkeit zählen', formel: '3, 4, 4, 4, 5, 6, 7', ergebnis: '4 erscheint 3×' },
+          { label: 'Häufigsten Wert bestimmen', formel: 'Modus = häufigster Wert', ergebnis: '4' },
+        ],
+        fazit: 'Der Modus (Modalwert) ist der Wert, der am häufigsten vorkommt — hier die 4, die dreimal auftritt. Er beantwortet die Frage „Welcher Wert ist der typischste?" und funktioniert auch bei nicht-numerischen Daten, etwa der häufigsten Schuhgröße oder Augenfarbe. Es kann mehrere Modi geben: Sind zwei Werte gleich oft am häufigsten, ist die Verteilung bimodal. Kommt dagegen jeder Wert gleich oft vor (z. B. jeder genau einmal), gibt es keinen Modus. In der Praxis wird er seltener genutzt als Mittelwert und Median — seine Stärke liegt bei kategorialen Daten, wo sich Mittelwert und Median gar nicht sinnvoll bilden lassen. Zur Probe lohnt der Vergleich aller drei Maße: Liegen Mittelwert, Median und Modus eng beieinander, ist die Verteilung weitgehend symmetrisch; klaffen sie auseinander, deutet das auf Ausreißer oder eine schiefe Verteilung hin.',
+      },
+      {
+        typ: 'text',
+        titel: 'Notendurchschnitt & Zeugnis richtig rechnen',
+        html: `<p>Beim <strong>Notendurchschnitt</strong> kommt es darauf an, ob alle Noten gleich zählen. Im einfachsten Fall — etwa der Schnitt aller Zeugnisnoten — ist es ein gewöhnliches arithmetisches Mittel: alle Noten addieren, durch ihre Anzahl teilen. Sechs Noten 2, 1, 3, 2, 4, 2 ergeben (2 + 1 + 3 + 2 + 4 + 2) ÷ 6 = 14 ÷ 6 ≈ 2,33.</p><p>Oft zählen einzelne Leistungen aber unterschiedlich stark: Klausuren mehr als mündliche Noten, schriftliche Prüfungen mehr als einzelne Halbjahre. Dann ist das <strong>gewichtete Mittel</strong> richtig — jede Note wird mit ihrem Gewicht multipliziert, die Produkte werden summiert und durch die <strong>Summe der Gewichte</strong> geteilt. Wichtig ist, am Ende nicht versehentlich durch die Anzahl der Noten zu teilen, sondern durch die Summe der Gewichte. Schulen runden den Endschnitt je nach Bundesland unterschiedlich; die reine Rechnung bleibt aber immer dieselbe. Für die exakte Abiturnote aus Block I und II gibt es einen eigenen Abi-Rechner.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Beispiel-Datensatz: alle Lagemaße nebeneinander',
+        kopf: ['Maß', 'Wert', 'Bemerkung'],
+        zeilen: [
+          ['Datensatz', '2, 3, 3, 6, 11', '5 Werte'],
+          ['Mittelwert', '5,0', '(2 + 3 + 3 + 6 + 11) ÷ 5 = 25 ÷ 5'],
+          ['Median', '3', 'mittlerer Wert (3. von 5)'],
+          ['Modus', '3', 'kommt zweimal vor'],
+          ['Spannweite', '9', '11 − 2 (Max − Min)'],
+        ],
+        fussnote: 'Derselbe Datensatz, drei Lagemaße: Mittelwert 5,0, Median und Modus jeweils 3. Der eine hohe Wert (11) zieht das arithmetische Mittel über die Mehrheit der Daten, während Median und Modus näher am Schwerpunkt der Verteilung liegen — ein gutes Beispiel dafür, warum man mehrere Maße betrachten sollte.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Den richtigen Durchschnitt wählen',
+        punkte: [
+          'Alle Werte gleich wichtig und ohne Ausreißer? → arithmetisches Mittel.',
+          'Werte unterschiedlich gewichtet (z. B. Klausur zählt mehr)? → gewichtetes Mittel.',
+          'Wenige extreme Ausreißer im Datensatz (Gehälter, Preise)? → Median statt Mittel.',
+          'Frage nach dem häufigsten bzw. typischen Wert? → Modus.',
+          'Vor der Median-Bestimmung immer zuerst die Werte der Größe nach sortieren.',
+          'Bei gerader Anzahl ist der Median der Durchschnitt der beiden mittleren Werte.',
+          'Interessiert die Streuung der Werte? → zusätzlich die Standardabweichung betrachten.',
+          'Beim gewichteten Mittel durch die Summe der Gewichte teilen, nicht durch die Anzahl.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Bei Ausreißern den Median statt das Mittel nehmen',
+        text: 'Enthält ein Datensatz einzelne extreme Werte — ein sehr hohes Gehalt, eine Ausnahme-Miete, einen Messfehler —, verzerrt das arithmetische Mittel das Bild: Es wird in Richtung des Ausreißers gezogen und liegt dann oft über oder unter der Mehrheit der Daten. Der Median bleibt davon unberührt, weil er nur die Position in der sortierten Reihe betrachtet, nicht die Größe der Extremwerte. Genau deshalb berichten Statistikämter Einkommen, Mieten und Immobilienpreise meist als Median und nicht als Mittelwert. Faustregel: Sind Ausreißer im Spiel oder ist die Verteilung schief, ist der Median die ehrlichere Kennzahl.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Gewichteter Durchschnitt bei unterschiedlicher Bedeutung',
+        text: 'Nicht alle Werte sind immer gleich wichtig. Beim Notendurchschnitt zählen Klausuren oft mehr als mündliche Noten, beim Portfolio größere Posten mehr als kleine. In solchen Fällen ist das gewichtete Mittel richtig: Jeder Wert wird mit seinem Gewicht multipliziert, die Produkte werden summiert und durch die Summe der Gewichte geteilt — nicht durch die bloße Anzahl. Ein häufiger Fehler ist, am Ende durch die Anzahl der Werte statt durch die Summe der Gewichte zu teilen; dann stimmt das Ergebnis nicht. Wenn alle Gewichte gleich sind, ergibt das gewichtete Mittel automatisch wieder das einfache arithmetische Mittel.',
+      },
+    ],
+    quellen: [
+      {
+        titel: 'Mittelwerte — arithmetisch, gewichtet, Median, Modus',
+        hinweis: 'Standard-Statistik (Sekundarstufe I/II); die Formeln für arithmetisches und gewichtetes Mittel, Median und Modus sind allgemeingültig und nicht an eine konkrete Quelle gebunden.',
+      },
+    ],
   },
   {
     slug: 'wissenschaftlicher-taschenrechner',
