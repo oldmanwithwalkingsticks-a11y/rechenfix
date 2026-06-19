@@ -89,7 +89,7 @@ export default function InternetgeschwindigkeitRechner() {
             einheit="Mbit/s"
           />
           <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-            Der Wert, den der Provider bewirbt (z. B. „50.000" = 50 Mbit/s).
+            Der Wert, den der Provider bewirbt (z. B. „50.000“ = 50 Mbit/s).
           </p>
         </div>
       </div>
