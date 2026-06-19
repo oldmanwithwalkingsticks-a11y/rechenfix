@@ -374,4 +374,186 @@ Eine Festplatte mit 500 GB hat 500.000.000.000 Byte (dezimal). Das Betriebssyste
       },
     ],
   },
+  {
+    slug: 'megapixel-rechner',
+    letzteAktualisierung: '2026-06-19',
+    titel: 'Megapixel-Rechner',
+    beschreibung: 'Megapixel aus Pixelmaßen berechnen, Druckgröße bei DPI und Seitenverhältnis bestimmen.',
+    kategorie: 'Technik',
+    kategorieSlug: 'technik',
+    metaTitle: 'Megapixel-Rechner — Auflösung, DPI & Druckgröße',
+    metaDescription: 'Megapixel aus Pixeln berechnen ✓ maximale Druckgröße bei 300 DPI ✓ Seitenverhältnis ✓ warum mehr MP nicht mehr Qualität sind ✓ mit KI-Erklärung.',
+    keywords: ['megapixel rechner', 'pixel in megapixel', 'druckgröße dpi', 'auflösung berechnen', 'megapixel druckgröße', 'dpi rechner', 'seitenverhältnis', 'bildauflösung'],
+    icon: '📷',
+    formel: 'Megapixel = (Breite × Höhe) ÷ 1.000.000 | Druckgröße = Pixel ÷ DPI (Zoll), × 2,54 = cm',
+    beispiel: '6.000 × 4.000 px = 24 MP (Seitenverhältnis 3:2). Bei 300 DPI: 6.000 ÷ 300 × 2,54 ≈ 50,8 cm breit.',
+    erklaerung: `**Megapixel berechnen — Auflösung, DPI und Druckgröße**
+
+Ein Megapixel (MP) ist eine Million Bildpunkte. Die Megapixel-Zahl eines Fotos ergibt sich aus Breite × Höhe in Pixeln, geteilt durch eine Million. Unser Rechner ermittelt aus den Pixelmaßen die Megapixel, das Seitenverhältnis und die maximale Druckgröße bei einer gewünschten Auflösung.
+
+**Megapixel aus der Auflösung**
+
+Ein Bild mit 6.000 × 4.000 Pixeln hat 24.000.000 Bildpunkte, also 24 MP. Die Megapixel sagen aus, wie viele Bildpunkte ein Foto enthält — und damit, wie groß man es drucken oder zuschneiden kann, ohne dass einzelne Pixel sichtbar werden.
+
+**Megapixel sind kein Qualitätsmaß**
+
+Eine höhere MP-Zahl bedeutet nicht automatisch ein besseres Bild. Schärfe, Farbtreue und Rauschverhalten hängen viel stärker von Sensorgröße, Objektiv und Licht ab. Ein 24-MP-Bild aus einer Kamera mit großem Sensor kann besser aussehen als ein 108-MP-Handyfoto.
+
+**Druckgröße und DPI**
+
+DPI (dots per inch) legt fest, wie eng die Pixel beim Druck sitzen. Druckgröße = Pixel ÷ DPI ergibt Zoll, mal 2,54 ergibt Zentimeter. Bei 300 DPI druckt ein 6.000-Pixel-Bild rund 50,8 cm breit. Für das Web ist DPI bedeutungslos — dort zählt nur die Pixelzahl.
+
+**Seitenverhältnis**
+
+Kameras nutzen meist 3:2 oder 4:3, Videos 16:9. Beim Zuschnitt auf ein anderes Format geht Bildfläche und damit Auflösung verloren.`,
+    faq: [
+      {
+        frage: 'Wie berechne ich Megapixel aus der Auflösung?',
+        antwort: 'Multiplizieren Sie Breite und Höhe in Pixeln und teilen Sie durch eine Million. Beispiel: 6.000 × 4.000 = 24.000.000 Pixel ÷ 1.000.000 = 24 Megapixel.',
+      },
+      {
+        frage: 'Wie groß kann ich ein Foto drucken?',
+        antwort: 'Druckgröße = Pixel ÷ DPI (in Zoll), mal 2,54 ergibt Zentimeter. Bei 300 DPI (Fotoqualität) druckt ein 6.000 × 4.000-Bild rund 50,8 × 33,9 cm — größer als A3. Für A4 reichen schon etwa 9 Megapixel.',
+      },
+      {
+        frage: 'Bedeuten mehr Megapixel ein besseres Bild?',
+        antwort: 'Nein. Megapixel sind nur die Pixelzahl. Bildqualität hängt von Sensorgröße, Objektiv, Licht und Bildverarbeitung ab. Mehr Megapixel auf einem kleinen Sensor führen oft zu mehr Rauschen bei wenig Licht.',
+      },
+      {
+        frage: 'Was bedeutet DPI?',
+        antwort: 'DPI (dots per inch) gibt an, wie viele Bildpunkte pro Zoll gedruckt werden. Je höher die DPI, desto kleiner und schärfer der Druck. 300 DPI gilt als Fotoqualität, für Poster aus Distanz reichen 150 DPI. Für die Bildschirmanzeige ist DPI irrelevant.',
+      },
+      {
+        frage: 'Wie viele Megapixel brauche ich fürs Web?',
+        antwort: 'Fürs Web zählt nur die Pixelzahl, nicht die DPI. Ein Full-HD-Bild (1.920 × 1.080) hat rund 2 MP und füllt einen großen Monitor. Für Social Media reichen meist 2 bis 4 MP; höhere Auflösungen werden ohnehin herunterskaliert.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was Megapixel sind und was sie aussagen',
+        html: `<p>Ein <strong>Megapixel</strong> (MP) ist eine Million Bildpunkte. Die Megapixel-Zahl einer Kamera oder eines Fotos ergibt sich einfach aus <strong>Breite × Höhe in Pixeln, geteilt durch eine Million</strong>. Ein Bild mit 6.000 × 4.000 Pixeln hat 24.000.000 Bildpunkte — also 24 MP.</p><p>Die Megapixel sagen damit aus, <strong>wie viele Bildpunkte</strong> ein Foto enthält — und damit, wie groß man es darstellen oder drucken kann, ohne dass einzelne Pixel sichtbar werden. Mehr Megapixel bedeuten mehr Spielraum für <strong>Ausschnitte (Crop)</strong> und große Drucke. Sie sagen aber <strong>nichts über die Bildqualität</strong> aus: Schärfe, Farbtreue und Rauschverhalten hängen viel stärker von Sensorgröße, Objektiv und Licht ab. Dieser Rechner ermittelt aus den Pixelmaßen die Megapixel, das Seitenverhältnis und die maximale Druckgröße bei einer gewünschten Auflösung (DPI). So lässt sich vor dem Kauf einer Kamera oder vor dem Druck schnell einschätzen, ob die Auflösung für den geplanten Zweck reicht — vom kleinen Web-Bild bis zum großformatigen Poster.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '6.000 × 4.000 px in Megapixel',
+        schritte: [
+          { label: 'Pixel gesamt', formel: '6.000 × 4.000', ergebnis: '24.000.000 px' },
+          { label: 'Durch eine Million teilen', formel: '24.000.000 ÷ 1.000.000', ergebnis: '24 MP' },
+        ],
+        fazit: 'Ein Bild mit 6.000 × 4.000 Pixeln besteht aus 24 Millionen Bildpunkten — das sind 24 Megapixel. Die Rechnung ist immer dieselbe: Breite mal Höhe ergibt die Gesamtzahl der Pixel, geteilt durch eine Million ergibt die Megapixel. Eine typische Spiegelreflex- oder Systemkamera liefert 24 MP, moderne Handys oft 12 oder 48 MP (durch Pixel-Binning meist effektiv 12). Diese 24 MP reichen für scharfe Drucke deutlich über A3 hinaus.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Megapixel zurück in eine Auflösung (12 MP bei 3:2)',
+        schritte: [
+          { label: '12 MP in Pixel', formel: '12 × 1.000.000', ergebnis: '12.000.000 px' },
+          { label: 'Bei 3:2: Höhe = √(Pixel ÷ 1,5)', formel: '√(12.000.000 ÷ 1,5)', ergebnis: '≈ 2.828 px' },
+          { label: 'Breite = Höhe × 1,5', formel: '2.828 × 1,5', ergebnis: '≈ 4.243 px' },
+        ],
+        fazit: 'Will man aus einer Megapixel-Zahl auf die Pixelmaße schließen, braucht man das Seitenverhältnis. Bei 12 MP im Format 3:2 ergeben sich rund 4.243 × 2.828 Pixel — keine glatte Zahl, was völlig normal ist. Kameras runden auf saubere Werte wie 4.240 × 2.832. Im Format 4:3 käme dieselbe Megapixel-Zahl auf die runden 4.000 × 3.000 Pixel. Die Megapixel allein legen die Auflösung also nicht eindeutig fest — erst zusammen mit dem Seitenverhältnis. Deshalb können zwei Kameras mit identischer „12 MP"-Angabe unterschiedliche Pixelmaße liefern, je nachdem, ob sie im 3:2- oder 4:3-Format aufnehmen.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Gängige Auflösungen und ihre Megapixel',
+        kopf: ['Bezeichnung', 'Pixel', 'Megapixel'],
+        zeilen: [
+          ['HD (720p)', '1.280 × 720', '0,9 MP'],
+          ['Full HD (1080p)', '1.920 × 1.080', '2,1 MP'],
+          ['4K UHD', '3.840 × 2.160', '8,3 MP'],
+          ['8K UHD', '7.680 × 4.320', '33,2 MP'],
+          ['12-MP-Kamera (4:3)', '4.000 × 3.000', '12,0 MP'],
+          ['24-MP-Kamera (3:2)', '6.000 × 4.000', '24,0 MP'],
+          ['48-MP-Kamera (4:3)', '8.000 × 6.000', '48,0 MP'],
+        ],
+        fussnote: 'MP = Breite × Höhe ÷ 1.000.000. Bildschirm-Auflösungen (HD/4K/8K) sind oft kleiner als Kamera-Auflösungen: Ein 4K-Monitor zeigt nur 8,3 MP, ein 24-MP-Foto wird zum Anzeigen also heruntergerechnet. Erst beim Druck oder beim Zuschnitt zahlen sich die zusätzlichen Pixel aus.',
+      },
+      {
+        typ: 'text',
+        titel: 'Megapixel ≠ Bildqualität (Sensor, Optik, Pixelgröße)',
+        html: `<p>Eine höhere Megapixel-Zahl wirkt nach „besser", ist aber kein Qualitätsmaß. Entscheidend ist, <strong>wie groß die einzelnen Pixel</strong> auf dem Sensor sind. Quetscht man sehr viele Pixel auf einen kleinen Handy-Sensor, wird jeder Pixel winzig und fängt weniger Licht ein — die Folge ist mehr <strong>Bildrauschen</strong> bei wenig Licht.</p><p>Ein größerer Sensor mit weniger, aber größeren Pixeln liefert deshalb oft das sauberere Bild als ein kleiner Sensor mit mehr Megapixeln. Hinzu kommt die <strong>Optik</strong>: Ein mittelmäßiges Objektiv kann die feinen Details, die der Sensor theoretisch auflösen könnte, gar nicht scharf abbilden. Auch <strong>Belichtung, Bildstabilisierung und Bildverarbeitung</strong> beeinflussen das Ergebnis stark. Megapixel bestimmen also nur, wie groß ein Bild maximal sinnvoll dargestellt werden kann — nicht, wie gut es aussieht. Für die allermeisten Zwecke reichen 12 bis 24 MP völlig aus. Der Megapixel-Wettlauf bei Smartphones ist deshalb vor allem Marketing: Ein 200-MP-Sensor fasst viele Pixel zu größeren „Superpixeln" zusammen (Pixel-Binning) und gibt am Ende oft ein 12,5-MP-Bild aus, das bei wenig Licht besser ist als die volle Auflösung.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Maximale Druckgröße bei 300 DPI',
+        schritte: [
+          { label: 'Breite in Zoll (Pixel ÷ DPI)', formel: '6.000 ÷ 300', ergebnis: '20 Zoll' },
+          { label: 'Zoll in Zentimeter (× 2,54)', formel: '20 × 2,54', ergebnis: '50,8 cm' },
+          { label: 'Höhe analog', formel: '4.000 ÷ 300 × 2,54', ergebnis: '≈ 33,9 cm' },
+        ],
+        fazit: 'Bei 300 DPI — der gängigen Fotoqualität fürs nahe Betrachten — druckt ein 24-MP-Foto (6.000 × 4.000 px) scharf bis rund 50,8 × 33,9 cm, also größer als A3. Die Rechnung: Pixel durch DPI ergibt die Größe in Zoll, mal 2,54 die Größe in Zentimetern. Umgekehrt heißt das auch: Für einen A4-Druck (21 × 29,7 cm) bei 300 DPI genügen schon rund 9 Megapixel. Wer nur A4 drucken will, braucht also keine 48-MP-Kamera. Als grobe Merkhilfe: A4 bei 300 DPI braucht rund 2.480 × 3.508 Pixel, A3 entsprechend das Doppelte an Fläche, also etwa 18 Megapixel. Jede Verdopplung des Druckformats verlangt doppelt so viele Pixel, um die Schärfe zu halten.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Gleiches Foto bei 72 vs. 300 DPI',
+        schritte: [
+          { label: 'Bei 300 DPI (Fotodruck)', formel: '6.000 ÷ 300 × 2,54', ergebnis: '50,8 cm breit' },
+          { label: 'Bei 72 DPI (grob)', formel: '6.000 ÷ 72 × 2,54', ergebnis: '≈ 211,7 cm breit' },
+        ],
+        fazit: 'Dasselbe Bild mit 6.000 Pixeln Breite ergibt bei 300 DPI einen scharfen 50,8-cm-Druck, bei 72 DPI einen über 2 Meter breiten, aber groben Druck. Die DPI verteilen dieselbe Pixelzahl nur auf mehr oder weniger Fläche — je niedriger die DPI, desto größer und unschärfer. Fürs Web ist das alles irrelevant: Ein Monitor zeigt schlicht so viele Pixel, wie das Bild hat. Ein „72-DPI"- und ein „300-DPI"-Bild mit gleicher Pixelzahl sehen am Bildschirm identisch aus.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'DPI-Empfehlungen je Nutzung',
+        kopf: ['Nutzung', 'DPI/PPI', 'Hinweis'],
+        zeilen: [
+          ['Web & Bildschirm', '72', 'nur die Pixelzahl zählt, DPI irrelevant fürs Display'],
+          ['Fotodruck (Standard)', '300', 'scharfe Drucke bis A4 und größer, nahes Betrachten'],
+          ['Großformat / Poster', '150', 'aus normalem Betrachtungsabstand ausreichend'],
+          ['Plakat / Banner (Ferne)', '72–100', 'wird ohnehin aus großer Distanz gesehen'],
+        ],
+        fussnote: 'DPI bzw. PPI bestimmt nur die Druckgröße, nicht die Bildschirmanzeige. Je höher die DPI, desto kleiner und schärfer der Druck. 300 DPI gilt als Fotoqualität fürs nahe Betrachten; bei Postern reichen weniger, weil der Betrachtungsabstand größer ist — das Auge kann die einzelnen Punkte dann nicht mehr unterscheiden. Eine Werbetafel an der Autobahn wird teils mit nur 10 bis 20 DPI gedruckt und sieht aus der Entfernung trotzdem scharf aus. Die nötige DPI hängt also weniger vom Format ab als vom Abstand, aus dem man das Bild betrachtet.',
+      },
+      {
+        typ: 'text',
+        titel: 'Seitenverhältnis & Zuschnitt (3:2, 4:3, 16:9)',
+        html: `<p>Das <strong>Seitenverhältnis</strong> beschreibt das Verhältnis von Breite zu Höhe — unabhängig von der absoluten Pixelzahl. Spiegelreflex- und Systemkameras nutzen meist <strong>3:2</strong> (z. B. 6.000 × 4.000), Kompakt- und Handykameras oft <strong>4:3</strong> (z. B. 4.000 × 3.000), Videos und Monitore <strong>16:9</strong>.</p><p>Wichtig wird das beim <strong>Zuschnitt</strong>: Wer ein 3:2-Foto auf ein quadratisches Format (1:1) oder auf 4:5 für Instagram beschneidet, verliert Bildfläche — und damit Megapixel. Aus einem 24-MP-Foto im 3:2-Format wird bei einem 1:1-Zuschnitt nur noch ein Teil genutzt. Auch <strong>Standard-Druckformate</strong> passen selten exakt: 10 × 15 cm entspricht 3:2 und passt zu Kamerafotos, 13 × 18 cm dagegen nicht ganz, sodass ein schmaler Rand abgeschnitten wird. Wer den späteren Beschnitt schon bei der Aufnahme bedenkt, lässt rundherum etwas Luft und behält die volle Auflösung im gewünschten Ausschnitt. Praktisch heißt das: Lieber etwas weiter aufnehmen und später gezielt zuschneiden, als zu knapp zu fotografieren. Genau hier zahlt sich eine höhere Megapixel-Zahl aus — sie gibt Spielraum, ohne dass der Ausschnitt am Ende zu klein für den geplanten Druck wird.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Mehr Megapixel vs. größerer Sensor',
+        spalteA: 'Mehr Megapixel',
+        spalteB: 'Größerer Sensor',
+        zeilen: [
+          { kriterium: 'Detailauflösung', a: 'mehr Details, größere Crops und Drucke', b: 'durch die Pixelzahl begrenzt' },
+          { kriterium: 'Verhalten bei wenig Licht', a: 'kleinere Pixel → mehr Rauschen', b: 'größere Pixel → weniger Rauschen' },
+          { kriterium: 'Dateigröße', a: 'größere Dateien, mehr Speicherbedarf', b: 'moderater bei gleicher MP-Zahl' },
+          { kriterium: 'Profitiert von', a: 'gutem Licht und scharfem Objektiv', b: 'nahezu allen Aufnahmesituationen' },
+          { kriterium: 'Typisch für', a: 'High-Res-Kameras, Smartphones', b: 'Vollformat- und APS-C-Kameras' },
+        ],
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Die Auflösung für den Zweck wählen',
+        punkte: [
+          'Nur fürs Web oder Social Media? Pixelzahl zählt, DPI ist egal — oft reichen 2–4 MP.',
+          'A4-Fotodruck bei 300 DPI? Rund 9 MP genügen (2.480 × 3.508 px).',
+          'Große Poster aus der Nähe? Hohe MP-Zahl hilft; aus Distanz reichen 150 DPI.',
+          'Planen Sie Ausschnitte (Crop)? Mehr Megapixel geben Reserve.',
+          'Bei wenig Licht zählt der Sensor mehr als die reine Megapixel-Zahl.',
+          'Seitenverhältnis zum Zielformat passen, sonst geht beim Zuschnitt Fläche verloren.',
+          'Für Druck die DPI auf 300 setzen; mehr bringt fürs Auge meist nichts.',
+          'Im Zweifel die native Pixelzahl behalten und erst fürs Ziel herunterskalieren.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Fürs Web reichen 72 DPI, für Druck 300 DPI anpeilen',
+        text: 'Für die Anzeige auf Bildschirmen ist die DPI-Angabe bedeutungslos — ein Monitor zeigt schlicht so viele Pixel, wie das Bild hat. Ein 72-DPI-Bild und ein 300-DPI-Bild mit derselben Pixelzahl sehen am Bildschirm identisch aus. Erst beim Druck wird DPI wichtig: Sie legt fest, wie eng die Pixel auf dem Papier sitzen. 300 DPI gilt als Fotoqualität fürs nahe Betrachten; für Poster, die man aus Abstand ansieht, reichen 150 DPI oder weniger. Faustregel: fürs Web nur auf die Pixelzahl achten, für den Druck 300 DPI als Ziel nehmen und prüfen, wie groß das Bild dann noch wird.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'MP-Werte sind die Pixelzahl, kein Qualitätsmaß',
+        text: 'Eine hohe Megapixel-Zahl bedeutet nur, dass ein Bild aus vielen Bildpunkten besteht — nicht, dass es scharf, farbtreu oder rauscharm ist. Ein 108-MP-Handyfoto kann schlechter aussehen als ein 24-MP-Bild aus einer Kamera mit größerem Sensor und besserem Objektiv. Megapixel bestimmen die maximale sinnvolle Darstellungs- und Druckgröße, mehr nicht. Wer ein Foto nur auf dem Smartphone oder im Web ansieht, sieht von 12, 24 oder 48 MP praktisch keinen Unterschied, weil das Bild ohnehin auf die Bildschirmauflösung heruntergerechnet wird. Mehr Megapixel lohnen sich vor allem für große Drucke und für nachträgliche Ausschnitte.',
+      },
+    ],
+    quellen: [
+      {
+        titel: 'Bildauflösung, Megapixel & DPI — Grundlagen',
+        hinweis: 'MP = Breite×Höhe/1.000.000; Druckgröße = Pixel/DPI; 1 Zoll = 2,54 cm.',
+      },
+    ],
+  },
 ];

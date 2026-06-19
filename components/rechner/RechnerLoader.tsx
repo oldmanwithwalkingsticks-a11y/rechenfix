@@ -220,6 +220,7 @@ const RECHNER_MAP: Record<string, ComponentType> = {
   'gefrierdauer-rechner': dyn(() => import('@/components/rechner/GefrierdauerRechner')),
   'internetgeschwindigkeit-rechner': dyn(() => import('@/components/rechner/InternetgeschwindigkeitRechner')),
   'datenmengen-umrechner': dyn(() => import('@/components/rechner/DatenmengenRechner')),
+  'megapixel-rechner': dyn(() => import('@/components/rechner/MegapixelRechner')),
 };
 
 export default function RechnerLoader({ slug }: { slug: string }) {
