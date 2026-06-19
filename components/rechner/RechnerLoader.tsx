@@ -225,6 +225,7 @@ const RECHNER_MAP: Record<string, ComponentType> = {
   'bildschirmgroesse-ppi-rechner': dyn(() => import('@/components/rechner/BildschirmgroessePpiRechner')),
   'kalorienverbrauch-rechner': dyn(() => import('@/components/rechner/KalorienverbrauchRechner')),
   'vo2max-rechner': dyn(() => import('@/components/rechner/Vo2maxRechner')),
+  '1rm-rechner': dyn(() => import('@/components/rechner/EinRmRechner')),
 };
 
 export default function RechnerLoader({ slug }: { slug: string }) {

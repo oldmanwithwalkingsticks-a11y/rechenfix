@@ -832,4 +832,189 @@ Die Ergebnisse sind Näherungen; der Labortest (Spiroergometrie) ist genauer. De
       },
     ],
   },
+  {
+    slug: '1rm-rechner',
+    letzteAktualisierung: '2026-06-19',
+    titel: '1RM-Rechner (Maximalkraft)',
+    beschreibung: 'Maximalkraft (1RM) aus einem Satz schätzen — mit Epley- und Brzycki-Formel und Prozenttabelle fürs Training.',
+    kategorie: 'Sport & Fitness',
+    kategorieSlug: 'sport',
+    metaTitle: '1RM-Rechner — Maximalkraft schätzen (Epley)',
+    metaDescription: 'Maximalkraft (1RM) aus einem Satz schätzen: Epley- und Brzycki-Formel ✓ Prozenttabelle ✓ Trainingsgewichte je Ziel ✓ sicher ohne Maximalversuch.',
+    keywords: ['1rm rechner', 'maximalkraft berechnen', 'one rep max', 'epley formel', 'brzycki formel', 'trainingsgewicht prozent', '1rm schätzen', 'krafttraining gewicht'],
+    icon: '🏋️',
+    formel: 'Epley: 1RM = Gewicht × (1 + Wiederholungen ÷ 30) | Brzycki: 1RM = Gewicht × 36 ÷ (37 − Wiederholungen)',
+    beispiel: '80 kg × 5 Wdh → Epley ≈ 93 kg, Brzycki 90 kg. Trainingsgewicht bei 80 % ≈ 74 kg.',
+    erklaerung: `**1RM schätzen — Maximalkraft ohne riskanten Maximalversuch**
+
+Das 1RM (One-Rep Maximum) ist das Gewicht, das man bei einer Übung genau einmal mit sauberer Technik bewegen kann. Es ist die gängige Bezugsgröße, um Trainingsgewichte zu planen. Unser Rechner schätzt es aus einem leichteren Satz — ganz ohne echten Maximalversuch.
+
+**Warum schätzen statt testen?**
+
+Ein echter 1RM-Test birgt ein erhöhtes Verletzungsrisiko, besonders ohne Erfahrung oder Sicherung. Deshalb rechnet man aus „Gewicht × Wiederholungen" auf das Maximum hoch. Das ist sicherer und für die Planung völlig ausreichend.
+
+**Epley und Brzycki**
+
+Epley: 1RM = Gewicht × (1 + Wdh ÷ 30). Brzycki: 1RM = Gewicht × 36 ÷ (37 − Wdh). Bei 80 kg und 5 Wiederholungen ergeben sich rund 93 kg (Epley) bzw. 90 kg (Brzycki). Beide sind am genauesten bei wenigen Wiederholungen.
+
+**Trainingsgewichte aus dem 1RM**
+
+Aus dem 1RM lassen sich Trainingsgewichte als Prozentsatz ableiten: schwer für Maximalkraft (rund 85–100 %), moderat für Muskelaufbau (rund 65–85 %), leichter für Kraftausdauer (rund 50–65 %). Saubere Technik geht dabei immer vor dem nächsten Kilo; Anfänger sollten sich anleiten lassen.`,
+    faq: [
+      {
+        frage: 'Was ist das 1RM?',
+        antwort: 'Das 1RM (One-Rep Maximum) ist das Gewicht, das man bei einer Übung genau einmal mit korrekter Technik bewegen kann. Es dient als Bezugsgröße, um Trainingsgewichte als Prozentsatz zu planen.',
+      },
+      {
+        frage: 'Wie schätze ich mein 1RM ohne Maximalversuch?',
+        antwort: 'Mit einer Formel aus einem leichteren Satz. Epley: 1RM = Gewicht × (1 + Wiederholungen ÷ 30). Brzycki: 1RM = Gewicht × 36 ÷ (37 − Wiederholungen). So vermeidet man das Verletzungsrisiko eines echten Maximalversuchs.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen Epley und Brzycki?',
+        antwort: 'Beide Formeln schätzen das 1RM, weichen aber leicht voneinander ab. Bei 80 kg × 5 Wdh ergibt Epley rund 93 kg, Brzycki 90 kg. Bei wenigen Wiederholungen stimmen sie nahezu überein; bei vielen Wiederholungen weichen sie stärker ab.',
+      },
+      {
+        frage: 'Wie genau ist die 1RM-Schätzung?',
+        antwort: 'Am genauesten bei niedrigen Wiederholungszahlen (etwa 2 bis 5). Je mehr Wiederholungen, desto weiter muss die Formel hochrechnen und desto ungenauer wird sie. Für die Trainingsplanung reicht die Schätzung gut aus.',
+      },
+      {
+        frage: 'Welches Gewicht soll ich trainieren?',
+        antwort: 'Das hängt vom Ziel ab: Maximalkraft rund 85–100 % des 1RM (1–5 Wdh), Muskelaufbau 65–85 % (6–12 Wdh), Kraftausdauer 50–65 % (15+ Wdh). Wichtig sind saubere Technik und ein langsamer Aufbau, gerade für Anfänger.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was 1RM ist & warum man es schätzt statt testet',
+        html: `<p>Das <strong>1RM</strong> (One-Rep Maximum, Einer-Wiederholungs-Maximum) ist das Gewicht, das man bei einer Übung <strong>genau einmal</strong> mit sauberer Technik bewegen kann. Es ist die gängige Bezugsgröße im Krafttraining, um Trainingsgewichte zu planen.</p><p>Ein <strong>echter 1RM-Test</strong> — der Versuch, das maximale Gewicht tatsächlich zu heben — birgt jedoch ein <strong>erhöhtes Verletzungsrisiko</strong>, besonders ohne Erfahrung, Sicherung oder bei ermüdeter Muskulatur. Deshalb schätzt man das 1RM meist aus einem <strong>leichteren Satz</strong> mit mehreren Wiederholungen. Formeln wie <strong>Epley</strong> und <strong>Brzycki</strong> rechnen aus Gewicht und Wiederholungszahl auf das geschätzte Maximum hoch. Das ist sicherer, schnell und für die Trainingsplanung völlig ausreichend. Dieser Rechner nutzt beide Formeln und zeigt zusätzlich, welche Trainingsgewichte sich daraus für verschiedene Ziele ergeben. Wichtig: Die Schätzung ersetzt den riskanten Maximalversuch — sie ist keine Aufforderung, ihn doch zu unternehmen. Das 1RM ist je nach Übung verschieden: Beim Kreuzheben hebt man mehr als beim Bankdrücken. Schätzen Sie es deshalb pro Übung separat, statt einen Wert auf alle Bewegungen zu übertragen.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Epley-Formel (80 kg × 5 Wiederholungen)',
+        schritte: [
+          { label: 'Epley-Formel', formel: '1RM = Gewicht × (1 + Wdh ÷ 30)', ergebnis: 'Schätzformel' },
+          { label: '80 kg, 5 Wiederholungen', formel: '80 × (1 + 5 ÷ 30)', ergebnis: '80 × 1,167' },
+          { label: 'geschätztes 1RM', formel: '= 93,3', ergebnis: '≈ 93 kg' },
+        ],
+        fazit: 'Die Epley-Formel schätzt aus einem submaximalen Satz das Einer-Maximum. 80 kg für 5 Wiederholungen ergeben rund 93 kg. Je mehr Wiederholungen man eingibt, desto weiter rechnet die Formel hoch und desto unschärfer wird das Ergebnis — am besten arbeitet sie mit 2 bis 5 Wiederholungen. Entscheidend: Sie müssen die 93 kg nicht tatsächlich heben; genau das ist der Sinn der Schätzung — sie erspart den riskanten Maximalversuch. Die Zahl 30 im Nenner ist eine empirische Konstante: Sie bildet ab, wie sich die mögliche Wiederholungszahl im Schnitt zum Maximalgewicht verhält. Deshalb funktioniert die Formel über einen weiten Bereich, wird aber bei sehr vielen Wiederholungen zunehmend ungenau.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Brzycki-Formel (gleiche Werte zum Vergleich)',
+        schritte: [
+          { label: 'Brzycki-Formel', formel: '1RM = Gewicht × 36 ÷ (37 − Wdh)', ergebnis: 'Schätzformel' },
+          { label: '80 kg, 5 Wiederholungen', formel: '80 × 36 ÷ (37 − 5)', ergebnis: '80 × 36 ÷ 32' },
+          { label: 'geschätztes 1RM', formel: '= 90', ergebnis: '90 kg' },
+        ],
+        fazit: 'Für denselben Satz liefert Brzycki 90 kg, Epley 93 kg — ein typischer kleiner Unterschied. Bei wenigen Wiederholungen stimmen beide Formeln nahezu überein; mit steigender Wiederholungszahl weichen sie stärker voneinander ab. Beide zusammen ergeben eine sinnvolle Spanne (hier rund 90–93 kg). Keine der Formeln erreicht die Genauigkeit eines echten Tests — aber beide vermeiden dessen Risiko, und für die Trainingsplanung genügt die Spanne völlig. Brzycki neigt dazu, etwas konservativer zu schätzen, also tendenziell niedriger als Epley. Wer auf Nummer sicher gehen will, orientiert sich beim Festlegen der Trainingsgewichte eher am unteren Wert der Spanne — das beugt einer Überlastung vor.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Prozent vom 1RM je Wiederholungszahl',
+        kopf: ['Wiederholungen', '% vom 1RM'],
+        zeilen: [
+          ['1', '100 %'],
+          ['2', '95 %'],
+          ['3', '93 %'],
+          ['4', '90 %'],
+          ['5', '87 %'],
+          ['6', '85 %'],
+          ['7', '83 %'],
+          ['8', '80 %'],
+          ['9', '77 %'],
+          ['10', '75 %'],
+          ['11', '72 %'],
+          ['12', '70 %'],
+        ],
+        fussnote: 'Richtwerte, wie viel Prozent des 1RM man typischerweise für eine bestimmte Wiederholungszahl bewegen kann. Es sind Durchschnitte — wie viele Wiederholungen jemand bei einem bestimmten Prozentsatz schafft, hängt von Übung, Technik und Trainingszustand ab und kann abweichen. Auch die Übung selbst spielt eine Rolle: Bei großen Mehrgelenk-Übungen wie der Kniebeuge schafft man bei gleichem Prozentsatz oft mehr Wiederholungen als bei kleinen Isolationsübungen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Wofür man das 1RM nutzt (Trainingssteuerung)',
+        html: `<p>Der Hauptnutzen des 1RM liegt in der <strong>Trainingssteuerung</strong>. Statt Gewichte nach Gefühl zu wählen, plant man sie als <strong>Prozentsatz des 1RM</strong> — das macht die Intensität messbar und vergleichbar. Ein Plan, der „80 % des 1RM" vorgibt, lässt sich so für jede Person und jede Übung konkret in Kilogramm umrechnen.</p><p>Je nach <strong>Ziel</strong> liegen die sinnvollen Prozentbereiche unterschiedlich: Für <strong>Maximalkraft</strong> trainiert man schwer mit wenigen Wiederholungen (rund 85–100 %), für <strong>Muskelaufbau</strong> moderat (rund 65–85 %), für <strong>Kraftausdauer</strong> leichter mit vielen Wiederholungen (rund 50–65 %). Steigt die Kraft, berechnet man das 1RM neu und passt die Gewichte an — so bleibt die Belastung über Wochen im gewünschten Bereich. Wichtig bleibt dabei: Die Prozentangaben sind Orientierung, und saubere Technik geht immer vor dem nächsten Kilogramm. Viele Trainingspläne arbeiten genau deshalb mit Prozentangaben statt mit festen Kilogramm — so passt derselbe Plan für Einsteiger wie für Fortgeschrittene, jeder rechnet ihn auf sein eigenes 1RM um. Dieser Rechner zeigt die passenden Trainingsgewichte für die drei Ziele direkt unter dem Ergebnis an, sodass man die Prozentrechnung nicht selbst machen muss.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Trainingsgewicht aus dem 1RM (5×5 bei 80 %)',
+        schritte: [
+          { label: 'Geschätztes 1RM', formel: '~92 kg', ergebnis: 'Ausgangswert' },
+          { label: 'Zielintensität für 5×5', formel: '80 % von 92 kg', ergebnis: '0,80 × 92' },
+          { label: 'Trainingsgewicht', formel: '= 73,6', ergebnis: '≈ 74 kg' },
+        ],
+        fazit: 'Kennt man das geschätzte 1RM (hier rund 92 kg), lassen sich Trainingsgewichte als Prozentsatz festlegen. Für ein klassisches 5×5 (fünf Sätze à fünf Wiederholungen) bei etwa 80 % sind das rund 74 kg. In Prozent zu rechnen hält die Intensität konstant: Wird man stärker und steigt das geschätzte 1RM, erhöht sich das Trainingsgewicht automatisch mit. Auch hier gilt: lieber etwas leichter starten und kontrolliert steigern als zu schwer beginnen. Praktisch rundet man das Trainingsgewicht auf die verfügbaren Hantelscheiben, hier also etwa auf 75 kg. Kleine Abweichungen vom rechnerischen Wert sind völlig unkritisch — die Prozentbereiche sind ohnehin Spannen, keine Punktgrößen.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Kraft vs. Muskelaufbau vs. Ausdauer (verschiedene %-Bereiche)',
+        schritte: [
+          { label: 'Maximalkraft (≈ 90 %, 1–5 Wdh)', formel: '0,90 × 100 kg', ergebnis: '90 kg' },
+          { label: 'Muskelaufbau (≈ 75 %, 6–12 Wdh)', formel: '0,75 × 100 kg', ergebnis: '75 kg' },
+          { label: 'Kraftausdauer (≈ 60 %, 15+ Wdh)', formel: '0,60 × 100 kg', ergebnis: '60 kg' },
+        ],
+        fazit: 'Dasselbe 1RM (hier 100 kg) führt je nach Ziel zu ganz unterschiedlichen Trainingsgewichten: schwer und wenige Wiederholungen für Maximalkraft (rund 90 %), moderat für Muskelaufbau (rund 75 %), leichter und viele Wiederholungen für Kraftausdauer (rund 60 %). Der Prozentsatz steuert den Trainingsreiz. Die Bereiche sind Orientierungswerte und überschneiden sich; die individuelle Reaktion ist verschieden, und eine saubere Ausführung zählt mehr als der exakte Prozentwert. In der Praxis kombinieren viele Trainierende die Bereiche über die Woche — etwa schwere Tage für Kraft und moderate für den Muskelaufbau. Welcher Schwerpunkt sinnvoll ist, hängt vom persönlichen Ziel und vom Trainingsstand ab.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Trainingszonen nach Ziel',
+        kopf: ['Trainingsziel', '% vom 1RM', 'Wiederholungen'],
+        zeilen: [
+          ['Maximalkraft', '85–100 %', '1–5'],
+          ['Muskelaufbau (Hypertrophie)', '65–85 %', '6–12'],
+          ['Kraftausdauer', '50–65 %', '15–25'],
+          ['Techniktraining / Aufwärmen', 'unter 50 %', 'locker, viele'],
+        ],
+        fussnote: 'Die Bereiche überschneiden sich und sind keine starren Grenzen. Für gesunde Erwachsene ist ein Mix sinnvoll; Anfänger starten am besten mit moderaten Gewichten und sauberer Technik, bevor sie die Intensität steigern. In den ersten Wochen verbessert sich die Kraft oft schnell, weil das Nervensystem die Bewegung lernt — das Trainingsgewicht sollte dann regelmäßig nachjustiert werden, ohne die Technik zu opfern.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum die Schätzung bei vielen Wiederholungen ungenauer wird',
+        html: `<p>Die 1RM-Formeln sind am <strong>genauesten bei wenigen Wiederholungen</strong> — etwa zwei bis fünf. Je mehr Wiederholungen ein Satz hat, desto weiter muss die Formel <strong>extrapolieren</strong>, und desto größer wird der Schätzfehler.</p><p>Der Grund: Bei hohen Wiederholungszahlen spielen <strong>Ausdauerfaktoren</strong> eine immer größere Rolle, nicht mehr nur die reine Maximalkraft. Zwei Menschen mit demselben 1RM können bei 15 Wiederholungen unterschiedlich weit kommen, je nach Muskelfasertyp und Ermüdungswiderstand. Die <strong>Brzycki-Formel</strong> hat zudem eine mathematische Grenze: Bei 37 Wiederholungen wird der Nenner null, der Wert unbrauchbar. Für eine belastbare Schätzung wählt man deshalb einen Satz mit <strong>höchstens etwa 10 Wiederholungen</strong>, idealerweise im Bereich von 3 bis 6. Wer ohnehin im hohen Wiederholungsbereich trainiert, braucht das 1RM meist gar nicht — dort steuert man eher über das empfundene Anstrengungsniveau. Eine verbreitete Methode dafür ist RIR (Reps in Reserve): Man beendet den Satz, wenn noch zwei bis drei saubere Wiederholungen möglich wären. Das schont die Gelenke und lässt sich ohne jede Formel anwenden.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Epley vs. Brzycki',
+        spalteA: 'Epley',
+        spalteB: 'Brzycki',
+        zeilen: [
+          { kriterium: 'Formel', a: 'Gewicht × (1 + Wdh/30)', b: 'Gewicht × 36 / (37 − Wdh)' },
+          { kriterium: 'Bei 1 Wiederholung', a: 'leicht über dem Gewicht', b: 'genau das Gewicht' },
+          { kriterium: 'Tendenz bei vielen Wdh', a: 'schätzt eher etwas höher', b: 'schätzt eher etwas niedriger' },
+          { kriterium: 'Grenze', a: 'keine harte Grenze', b: 'ab 37 Wdh unbrauchbar (Nenner 0)' },
+          { kriterium: 'Genauigkeit', a: 'gut bei niedrigen Wdh', b: 'gut bei niedrigen Wdh' },
+        ],
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Sicher & technisch sauber trainieren',
+        punkte: [
+          'Vor schweren Sätzen gründlich aufwärmen und mit leichten Gewichten einsteigen.',
+          'Die Technik beherrschen, bevor das Gewicht gesteigert wird — Form vor Last.',
+          'Bei freien Übungen (Bankdrücken, Kniebeuge) einen Spotter oder Sicherheitsablagen nutzen.',
+          'Das Gewicht in kleinen Schritten erhöhen, nicht sprunghaft.',
+          'Auf vollständige, kontrollierte Bewegungen achten, kein Schwungholen.',
+          'Ausreichend Pausen zwischen schweren Sätzen einplanen.',
+          'Auf Warnsignale hören: Schmerz ist ein Stoppsignal, kein Trainingsreiz.',
+          'Als Anfänger oder bei Vorerkrankungen fachliche Anleitung oder ärztlichen Rat einholen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Echte Maximalversuche nur mit Erfahrung und Sicherung',
+        text: 'Ein tatsächlicher 1RM-Test — das Heben des maximal möglichen Gewichts für eine Wiederholung — gehört in erfahrene Hände und sollte gesichert ablaufen: mit Spotter, Sicherheitsablagen und nach gründlichem Aufwärmen. Für die allermeisten Trainierenden ist er unnötig, denn die Formel-Schätzung liefert einen ausreichend guten Wert ohne das Verletzungsrisiko. Gerade bei Müdigkeit, schlechter Technik oder fehlender Sicherung können Maximalversuche gefährlich werden. Die Regel lautet immer: Technik vor Gewicht. Wer unsicher ist, bleibt bei submaximalen Sätzen und lässt die Formel rechnen — das ist sicherer und für die Trainingsplanung genauso brauchbar.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Schätzwerte — bei Anfängern ist Anleitung empfohlen',
+        text: 'Die berechneten 1RM-Werte sind Schätzungen aus Formeln und können vom tatsächlichen Maximum abweichen — am genauesten sind sie bei niedrigen Wiederholungszahlen. Sie hängen von Technik, Tagesform und Übung ab und unterscheiden sich je nach Formel leicht. Nutzen Sie die Werte zur Trainingsplanung, nicht als exakte Leistungsmessung. Wer neu mit Krafttraining beginnt, profitiert sehr von einer fachlichen Einweisung in die korrekte Ausführung — das senkt das Verletzungsrisiko und macht das Training wirksamer. Bei Vorerkrankungen, Gelenkproblemen oder Unsicherheit ist eine ärztliche oder physiotherapeutische Rücksprache sinnvoll, bevor man die Intensität steigert. Krafttraining ist für gesunde Erwachsene grundsätzlich sehr sicher und gesundheitsförderlich — die meisten Verletzungen entstehen durch zu schnelles Steigern oder mangelhafte Technik, nicht durch das Training an sich. Geduld und saubere Ausführung sind daher die beste Vorbeugung.',
+      },
+    ],
+    quellen: [
+      {
+        titel: 'Epley- & Brzycki-Formel (1RM-Schätzung)',
+        hinweis: 'Epley: Gewicht×(1+Wdh/30); Brzycki: Gewicht×36/(37−Wdh). Schätzungen, am genauesten bei wenigen Wiederholungen.',
+      },
+    ],
+  },
 ];
