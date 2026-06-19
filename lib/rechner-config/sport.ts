@@ -442,4 +442,203 @@ Der Ruhepuls ist der Puls im absoluten Ruhezustand. Am besten morgens direkt nac
       },
     ],
   },
+  {
+    slug: 'kalorienverbrauch-rechner',
+    letzteAktualisierung: '2026-06-19',
+    titel: 'Kalorienverbrauch-Rechner',
+    beschreibung: 'Energieverbrauch bei Sport und Bewegung schätzen — mit der MET-Methode nach Aktivität, Gewicht und Dauer.',
+    kategorie: 'Sport & Fitness',
+    kategorieSlug: 'sport',
+    metaTitle: 'Kalorienverbrauch-Rechner — Sport & Bewegung (MET)',
+    metaDescription: 'Kalorienverbrauch bei Sport schätzen: MET-Methode nach Aktivität, Gewicht und Dauer ✓ Joggen, Radfahren, Schwimmen ✓ Richtwerte mit KI-Erklärung.',
+    keywords: ['kalorienverbrauch rechner', 'kalorien sport', 'met methode', 'kalorienverbrauch joggen', 'kalorienverbrauch berechnen', 'energieverbrauch sport', 'kalorien radfahren', 'met werte'],
+    icon: '🏃',
+    formel: 'kcal = MET × Körpergewicht (kg) × Dauer (h)',
+    beispiel: 'Joggen (MET 7), 70 kg, 30 min: 7 × 70 × 0,5 = 245 kcal (grobe Schätzung).',
+    erklaerung: `**Kalorienverbrauch bei Bewegung schätzen — die MET-Methode**
+
+Jede Bewegung kostet Energie, gemessen in Kilokalorien (kcal). Wie viel ein Mensch bei einer Aktivität verbraucht, schätzt man üblicherweise mit der MET-Methode. MET steht für metabolisches Äquivalent und beschreibt, um welchen Faktor eine Tätigkeit den Energieumsatz gegenüber der Ruhe erhöht.
+
+**Die Formel**
+
+kcal = MET × Körpergewicht (kg) × Dauer (h). Ein MET-Wert von 1 entspricht dem Verbrauch in völliger Ruhe. Joggen hat rund 7 MET. Eine 70 kg schwere Person, die 30 Minuten joggt, verbraucht so etwa 7 × 70 × 0,5 = 245 kcal Aktivitäts-Energie.
+
+**Warum es nur eine Schätzung ist**
+
+Die MET-Werte stammen aus dem Compendium of Physical Activities und sind Durchschnittswerte. Der tatsächliche Verbrauch hängt von Fitness, Muskelanteil, Technik, Tempo, Gelände, Wetter und Tagesform ab und kann deutlich abweichen. Die Ergebnisse sind eine grobe Orientierung, kein exakter Messwert.
+
+**Bewegung und Gesundheit**
+
+Die WHO empfiehlt Erwachsenen mindestens 150 Minuten moderate oder 75 Minuten intensive Bewegung pro Woche. Für die Gesundheit zählt vor allem die Regelmäßigkeit. Bei Vorerkrankungen oder vor intensiverem Training ist eine ärztliche Rücksprache sinnvoll. Die Werte hier dienen der Einordnung von Aktivitäten, nicht der Verfolgung eines Gewichtsziels.`,
+    faq: [
+      {
+        frage: 'Wie wird der Kalorienverbrauch beim Sport berechnet?',
+        antwort: 'Über die MET-Methode: kcal = MET × Körpergewicht (kg) × Dauer (h). Jede Aktivität hat einen durchschnittlichen MET-Wert. Joggen (MET 7) bei 70 kg über 30 Minuten ergibt 7 × 70 × 0,5 = 245 kcal. Die Werte sind grobe Schätzungen.',
+      },
+      {
+        frage: 'Was bedeutet MET?',
+        antwort: 'MET steht für metabolisches Äquivalent. 1 MET ist der Energieumsatz in völliger Ruhe. Ein Wert von 7 bedeutet das Siebenfache davon. Die MET-Werte stammen aus dem Compendium of Physical Activities und sind Durchschnitte aus vielen Messungen.',
+      },
+      {
+        frage: 'Warum verbrauchen schwerere Menschen mehr?',
+        antwort: 'Weil mehr Körpermasse zu bewegen mehr Energie kostet. Bei gleicher Aktivität und Dauer skaliert die MET-Schätzung linear mit dem Gewicht: Eine 90 kg schwere Person verbraucht beim selben 30-minütigen Lauf rund die Hälfte mehr als eine 60 kg schwere.',
+      },
+      {
+        frage: 'Wie genau sind die Werte?',
+        antwort: 'Es sind grobe Schätzungen. Der reale Verbrauch hängt von Fitnessstand, Muskelanteil, Technik, Tempo, Gelände, Wetter und Tagesform ab und kann spürbar abweichen. Für eine genauere Einschätzung helfen Pulsmessung oder sportmedizinische Verfahren.',
+      },
+      {
+        frage: 'Wie viel Bewegung ist gesund?',
+        antwort: 'Die WHO empfiehlt Erwachsenen mindestens 150 Minuten moderate oder 75 Minuten intensive Bewegung pro Woche, verteilt auf mehrere Tage. Entscheidend ist die Regelmäßigkeit. Bei Vorerkrankungen sollte ein intensiveres Training ärztlich abgeklärt werden.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Wie der Körper bei Bewegung Energie verbraucht (MET)',
+        html: `<p>Jede Bewegung kostet den Körper Energie — gemessen in <strong>Kilokalorien (kcal)</strong>. Wie viel ein Mensch bei einer Aktivität verbraucht, schätzt man üblicherweise mit der <strong>MET-Methode</strong>. MET steht für <strong>metabolisches Äquivalent</strong> und beschreibt, um welchen Faktor eine Tätigkeit den Energieumsatz gegenüber dem völligen Ruhezustand erhöht.</p><p>Ein MET-Wert von 1 entspricht dem Verbrauch in Ruhe, etwa beim ruhigen Sitzen. Joggen hat rund 7 MET, verbraucht also etwa das <strong>Siebenfache</strong> der Ruhe-Energie. Die Formel ist einfach: <strong>kcal = MET × Körpergewicht in kg × Dauer in Stunden</strong>. Eine 70 kg schwere Person, die 30 Minuten joggt (MET 7), verbraucht so rund 245 kcal an Aktivitäts-Energie. Diese Rechnung liefert eine sachliche Schätzung, wie viel Energie eine Bewegung ungefähr kostet — als grober Richtwert, nicht als exakter Messwert. Sie eignet sich gut, um Aktivitäten einzuordnen und miteinander zu vergleichen: Ist eine Tätigkeit eher leicht oder fordernd, und wie summiert sie sich über die Zeit? Genau dafür ist die MET-Methode gedacht — als anschauliche Orientierung, nicht als Bilanz auf die einzelne Kalorie genau.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'MET-Werte gängiger Aktivitäten',
+        kopf: ['Aktivität', 'MET', 'Intensität'],
+        zeilen: [
+          ['Yoga, ruhig', '2,5', 'leicht'],
+          ['Gehen, gemütlich (4 km/h)', '3,0', 'leicht'],
+          ['Gehen, zügig (6 km/h)', '4,3', 'moderat'],
+          ['Krafttraining', '5,0', 'moderat'],
+          ['Radfahren, moderat', '6,0', 'moderat'],
+          ['Schwimmen, moderat', '6,0', 'moderat'],
+          ['Wandern', '6,0', 'moderat'],
+          ['Joggen (8 km/h)', '7,0', 'intensiv'],
+          ['Treppensteigen', '8,0', 'intensiv'],
+          ['Laufen (10 km/h)', '9,8', 'intensiv'],
+          ['Seilspringen', '11,0', 'sehr intensiv'],
+        ],
+        fussnote: 'MET = metabolisches Äquivalent. 1 MET ist der Energieumsatz in völliger Ruhe; ein Wert von 7 bedeutet das Siebenfache. Die Werte stammen aus dem Compendium of Physical Activities und sind Durchschnitte — der individuelle Verbrauch kann deutlich abweichen. Die Intensitäts-Spalte ordnet die Aktivität grob ein: leicht (unter 3 MET), moderat (3 bis 6 MET) und intensiv (über 6 MET). Dieselbe Sportart kann je nach Tempo in verschiedene Stufen fallen — gemütliches Radfahren ist moderat, sehr zügiges Radfahren intensiv.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Joggen 30 Minuten bei 70 kg',
+        schritte: [
+          { label: 'Formel', formel: 'kcal = MET × Gewicht × Stunden', ergebnis: 'MET-Methode' },
+          { label: 'Joggen (MET 7), 70 kg, 0,5 h', formel: '7 × 70 × 0,5', ergebnis: '245 kcal' },
+        ],
+        fazit: 'Ein 30-minütiger Lauf einer 70 kg schweren Person verbraucht nach der MET-Methode rund 245 kcal Aktivitäts-Energie. Der MET-Wert von 7 sagt, dass Joggen etwa das Siebenfache der Ruhe-Energie kostet. Verdoppelt man die Dauer auf 60 Minuten, verdoppelt sich grob auch der Wert. Wichtig: Das ist ein Durchschnittswert. Wie viel eine konkrete Person wirklich verbraucht, hängt von Tempo, Technik und Fitness ab und liegt mal darüber, mal darunter. Zur Einordnung: 245 kcal entsprechen ungefähr dem Energiegehalt einer kleinen Mahlzeit oder eines Müsliriegels. Solche Vergleiche helfen, die Größenordnung greifbar zu machen — sie sind aber bewusst keine Aufforderung, Bewegung gegen Essen aufzurechnen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Was MET bedeutet & warum es nur eine Schätzung ist',
+        html: `<p>Die <strong>MET-Werte</strong> stammen aus dem <strong>Compendium of Physical Activities</strong>, einer wissenschaftlichen Sammlung, die Hunderten von Tätigkeiten einen durchschnittlichen Energiewert zuordnet. Sie sind <strong>Mittelwerte</strong>, gewonnen aus Messungen an vielen Menschen — eine gute Orientierung, aber keine auf die einzelne Person zugeschnittene Größe.</p><p>In der Realität verbrauchen zwei Menschen bei derselben Aktivität oft <strong>unterschiedlich viel</strong>. Trainierte bewegen sich ökonomischer, Muskelmasse erhöht den Umsatz, Technik und Tempo verändern den Aufwand. Auch die Umgebung spielt mit: Wind, Steigung, Kälte oder Hitze kosten zusätzliche Energie. Die MET-Formel rechnet mit einem festen Durchschnitt und ignoriert all das. Deshalb sollte man die Ergebnisse als <strong>Größenordnung</strong> verstehen, nicht als präzise Bilanz. Für einen groben Vergleich, ob eine Aktivität eher leicht oder intensiv ist und wie sie sich über die Zeit summiert, sind die Werte aber gut geeignet. Auch tragbare Geräte wie Fitnessuhren oder Brustgurte rechnen am Ende mit ähnlichen Modellen und liefern trotz Pulsmessung ebenfalls nur Näherungen. Eine exakte Bestimmung wäre nur in einem Labor per Atemgasanalyse möglich — für den Alltag ist das weder nötig noch praktikabel.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Gleiche Aktivität, anderes Körpergewicht',
+        schritte: [
+          { label: 'Person mit 60 kg, Joggen 30 min', formel: '7 × 60 × 0,5', ergebnis: '210 kcal' },
+          { label: 'Person mit 90 kg, Joggen 30 min', formel: '7 × 90 × 0,5', ergebnis: '315 kcal' },
+        ],
+        fazit: 'Bei gleicher Aktivität und Dauer verbraucht ein schwererer Körper mehr Energie, weil mehr Masse zu bewegen ist. Für denselben 30-minütigen Lauf ergibt die Schätzung bei 60 kg rund 210 kcal, bei 90 kg rund 315 kcal. Der Verbrauch skaliert dabei linear mit dem Gewicht — 50 Prozent mehr Körpergewicht bedeuten grob 50 Prozent mehr Aktivitäts-Energie. Das erklärt, warum dieselbe Strecke für verschiedene Menschen unterschiedlich viel Energie kostet. Genau deshalb fragt der Rechner nach dem Körpergewicht: Ohne diese Angabe wäre die Schätzung deutlich ungenauer. Die Dauer geht ebenfalls linear ein — doppelt so lange bedeutet grob den doppelten Verbrauch, solange die Intensität gleich bleibt.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Verbrauch nach Dauer (bei 70 kg)',
+        kopf: ['Aktivität', '15 min', '30 min', '60 min'],
+        zeilen: [
+          ['Gehen, zügig', '~75', '~150', '~300'],
+          ['Krafttraining', '~88', '~175', '~350'],
+          ['Radfahren, moderat', '~105', '~210', '~420'],
+          ['Joggen', '~123', '~245', '~490'],
+          ['Laufen (10 km/h)', '~172', '~343', '~686'],
+        ],
+        fussnote: 'Werte in kcal für eine 70 kg schwere Person, berechnet als MET × 70 × Stunden. Für andere Körpergewichte skaliert der Verbrauch proportional (siehe folgende Tabelle). Alle Angaben sind grobe Schätzungen.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Verbrauch nach Körpergewicht (30 Minuten)',
+        kopf: ['Aktivität (30 min)', '60 kg', '70 kg', '80 kg', '90 kg'],
+        zeilen: [
+          ['Gehen, zügig', '~129', '~151', '~172', '~194'],
+          ['Krafttraining', '~150', '~175', '~200', '~225'],
+          ['Radfahren, moderat', '~180', '~210', '~240', '~270'],
+          ['Joggen', '~210', '~245', '~280', '~315'],
+        ],
+        fussnote: 'kcal für 30 Minuten Aktivität. Der Verbrauch steigt linear mit dem Körpergewicht, weil mehr Masse zu bewegen mehr Energie kostet. Die Werte sind Durchschnitte und ersetzen keine individuelle Messung.',
+      },
+      {
+        typ: 'text',
+        titel: 'Was den realen Verbrauch beeinflusst',
+        html: `<p>Die MET-Formel berücksichtigt nur Aktivität, Gewicht und Dauer — der echte Verbrauch hängt aber von <strong>weiteren Faktoren</strong> ab. Am stärksten wirkt die <strong>Intensität</strong>: Wer schneller läuft oder kräftiger tritt, verbraucht pro Minute deutlich mehr. Schon innerhalb einer Aktivität wie Radfahren reicht die Spanne von gemütlich (rund 4 MET) bis sehr zügig (über 10 MET).</p><p>Auch der <strong>Trainingszustand</strong> zählt: Geübte arbeiten effizienter und verbrauchen für dieselbe Strecke teils weniger als Untrainierte. <strong>Muskelmasse</strong> erhöht den Grundumsatz, das <strong>Gelände</strong> (Steigung, Untergrund) und das <strong>Wetter</strong> (Kälte, Wind, Hitze) verändern den Aufwand spürbar. Und nicht zuletzt schwankt der Verbrauch mit der <strong>Tagesform</strong>. All das macht jede Verbrauchsangabe zu einer Schätzung mit Spielraum. Wer es genauer wissen möchte, kann auf Pulsmessung oder eine sportmedizinische Analyse zurückgreifen — für den Alltag genügt die MET-Schätzung als grobe Einordnung. Hilfreich ist, immer dieselbe Methode zu verwenden: So sind die Werte zwar nicht absolut exakt, aber untereinander vergleichbar — etwa, ob eine längere Radtour mehr Energie kostet als ein kurzes Lauftraining.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Alltagsbewegung vs. Sport',
+        schritte: [
+          { label: 'Treppensteigen (MET 8), 10 min', formel: '8 × 70 × 10/60', ergebnis: '≈ 93 kcal' },
+          { label: 'Spazieren (MET 3), 30 min', formel: '3 × 70 × 30/60', ergebnis: '105 kcal' },
+        ],
+        fazit: 'Auch Alltagsbewegung summiert sich. Zehn Minuten Treppensteigen (rund 93 kcal) liegen in derselben Größenordnung wie ein 30-minütiger gemütlicher Spaziergang (rund 105 kcal). Kurze, intensive Einheiten und längere, ruhige Bewegung können also ähnliche Werte ergeben. Bewegung in den Alltag einzubauen — die Treppe statt des Aufzugs, Wege zu Fuß — trägt damit spürbar bei, ganz ohne eigenes Training. Es geht um die Bewegung selbst, nicht um das Erreichen einer bestimmten Zahl. Wer ohnehin viel zu Fuß unterwegs ist, Treppen nimmt und im Stehen arbeitet, sammelt über den Tag erstaunlich viel Aktivität an — oft mehr als mit einer einzelnen Trainingseinheit. Diese sogenannte Alltagsaktivität gilt als ein wichtiger, leicht unterschätzter Baustein eines bewegten Lebensstils.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Woraus sich der tägliche Energieumsatz zusammensetzt',
+        werte: [
+          { label: 'Grundumsatz (Ruhe)', wert: '~60–70 %', hinweis: 'Energie für Organe, Atmung und Wärme — läuft auch im Schlaf' },
+          { label: 'Alltag & Bewegung', wert: '~15–30 %', hinweis: 'Gehen, Stehen, Hausarbeit und Sport zusammengenommen' },
+          { label: 'Verdauung (Thermogenese)', wert: '~10 %', hinweis: 'Energie für die Verarbeitung der aufgenommenen Nahrung' },
+          { label: 'Hinweis zur Einordnung', wert: 'neutral', hinweis: 'Diese Aufteilung beschreibt nur, wofür der Körper Energie nutzt — sie ist keine Diät- oder Defizit-Empfehlung' },
+        ],
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Moderate vs. intensive Aktivität',
+        spalteA: 'Moderat (3–6 MET)',
+        spalteB: 'Intensiv (über 6 MET)',
+        zeilen: [
+          { kriterium: 'Beispiele', a: 'zügiges Gehen, Radfahren, leichtes Schwimmen', b: 'Joggen, Laufen, Seilspringen' },
+          { kriterium: 'Atmung', a: 'leicht erhöht, Sprechen noch möglich', b: 'deutlich erhöht, Sprechen fällt schwer' },
+          { kriterium: 'Energie pro Minute', a: 'geringer, dafür länger durchhaltbar', b: 'höher, aber meist kürzer' },
+          { kriterium: 'WHO-Empfehlung/Woche', a: 'mindestens 150 Minuten', b: 'oder mindestens 75 Minuten' },
+          { kriterium: 'Geeignet für', a: 'Einstieg und Alltag', b: 'vorhandene Grundfitness' },
+        ],
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Bewegung in den Alltag bringen',
+        punkte: [
+          'Kurze Wege zu Fuß oder mit dem Rad statt mit dem Auto erledigen.',
+          'Die Treppe statt Aufzug oder Rolltreppe nehmen.',
+          'Bewegung fest in den Tagesablauf einbauen, etwa einen Spaziergang in der Mittagspause.',
+          'Eine Aktivität wählen, die Freude macht — sie hält man eher durch.',
+          'Mit moderater Intensität beginnen und langsam steigern.',
+          'Regelmäßigkeit anstreben: lieber öfter kurz als selten lang.',
+          'Auf den eigenen Körper hören und Pausen einlegen.',
+          'Bei Vorerkrankungen oder neuem, intensivem Training vorher ärztlich abklären.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Regelmäßigkeit zählt mehr als einzelne intensive Einheiten',
+        text: 'Für die Gesundheit ist es wirksamer, sich regelmäßig moderat zu bewegen, als sich einmal pro Woche völlig zu verausgaben. Die WHO empfiehlt Erwachsenen mindestens 150 Minuten moderate oder 75 Minuten intensive Bewegung pro Woche, verteilt auf mehrere Tage. Schon zügiges Gehen, Radfahren oder Gartenarbeit zählen dazu. Wer klein anfängt und dranbleibt, profitiert mehr als jemand, der mit großen Zielen startet und nach kurzer Zeit aufgibt. Eine Aktivität, die Freude macht und in den Alltag passt, ist meist nachhaltiger als das anstrengendste Programm. Es geht um die Bewegung selbst, nicht um eine bestimmte Kalorienzahl.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Schätzwerte — individuell sehr unterschiedlich',
+        text: 'Die berechneten Werte sind grobe Durchschnittsschätzungen auf Basis der MET-Methode. Der tatsächliche Energieverbrauch hängt von vielen persönlichen Faktoren ab — Fitnessstand, Muskelanteil, Technik, Tempo, Gelände, Temperatur und Tagesform — und kann deutlich abweichen. Die MET-Werte sind Mittelwerte aus dem Compendium of Physical Activities und nicht auf einzelne Personen kalibriert. Nutzen Sie die Ergebnisse als Orientierung, um Aktivitäten grob einzuordnen, nicht als exakte Messung. Bei Vorerkrankungen, Beschwerden oder vor dem Beginn eines intensiveren Trainings ist eine ärztliche oder sportmedizinische Rücksprache sinnvoll.',
+      },
+    ],
+    quellen: [
+      {
+        titel: 'Compendium of Physical Activities (MET-Werte)',
+        hinweis: 'MET = metabolisches Äquivalent; kcal = MET × Gewicht(kg) × Dauer(h). Werte sind Durchschnitte.',
+      },
+      {
+        titel: 'WHO — Bewegungsempfehlungen',
+        url: 'https://www.who.int',
+        hinweis: 'Körperliche Aktivität',
+      },
+    ],
+  },
 ];
