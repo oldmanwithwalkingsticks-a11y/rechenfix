@@ -1206,6 +1206,129 @@ Breitrollen decken pro Bahn die doppelte Wandbreite ab. Dadurch benötigen Sie w
         antwort: 'Die Normalrolle ist 0,53 m breit und 10,05 m lang — sie ist der Standard für die meisten Tapeten. Die Breitrolle (Doppelrolle) ist 1,06 m breit und 25 m lang. Breitrollen sind wirtschaftlicher und erzeugen weniger Nähte, sind aber schwerer zu verarbeiten.',
       },
     ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Tapetenbedarf berechnen — Bahnen statt Fläche',
+        html: `<p>Anders als bei Bodenbelägen rechnet man Tapeten nicht über die reine Quadratmeterzahl, sondern über <strong>Bahnen</strong>. Eine Bahn ist ein senkrechter Streifen Tapete von der Decke bis zum Boden. Der Grund: Tapete kommt in Rollen fester Breite, und eine angebrochene Bahn lässt sich kaum sinnvoll weiterverwenden — es entsteht zwangsläufig Verschnitt, den eine reine Flächenrechnung übersieht.</p><p>Die Rechnung läuft deshalb in drei Schritten. Erstens: Wie viele Bahnen passen nebeneinander an die Wände? Das ergibt sich aus dem <strong>Wandumfang geteilt durch die Bahnbreite</strong> (Standard 0,53 m), aufgerundet. Zweitens: Wie viele ganze Bahnen ergibt eine Rolle? Das ist die <strong>Rollenlänge geteilt durch die Bahnenhöhe</strong> (Wandhöhe plus Rapport), abgerundet. Drittens: Bahnen gesamt geteilt durch Bahnen pro Rolle, aufgerundet — plus ein Verschnitt-Zuschlag. So vermeidet man die typische Falle, bei der eine Quadratmeter-Rechnung zu wenig Rollen ergibt, weil sie den Bahnen-Verschnitt nicht berücksichtigt.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Wandumfang → Anzahl Bahnen',
+        schritte: [
+          { label: 'Wandumfang (alle Breiten addieren)', formel: '2 × 5 m + 2 × 4 m', ergebnis: '18 m' },
+          { label: 'Bahnen = Umfang ÷ Bahnbreite', formel: '18 m ÷ 0,53 m', ergebnis: '33,96' },
+          { label: 'Auf ganze Bahnen aufrunden', formel: 'aufgerundet', ergebnis: '34 Bahnen' },
+        ],
+        fazit: 'Für ein Zimmer von 5 × 4 m ist der Wandumfang die Summe aller vier Wandbreiten: 18 m. Geteilt durch die Standard-Bahnbreite von 0,53 m ergeben sich 33,96 — aufgerundet 34 Bahnen. Aufgerundet wird, weil eine angebrochene Bahn am Wandende nicht halbiert werden kann; der Rest ist Verschnitt. Türen und Fenster ändern an der Bahnenzahl meist wenig: Über und unter einer Öffnung braucht man weiterhin kurze Stücke, und die Bahn an der Türseite läuft trotzdem über die volle Wandbreite mit. Deshalb rechnet man die Bahnen über den vollen Umfang und zieht Öffnungen nur grob ab.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Bahnen pro Rolle (Rollenlänge ÷ Bahnenhöhe)',
+        schritte: [
+          { label: 'Rollenlänge und Wandhöhe', formel: 'Rolle 10,05 m, Wand 2,50 m', ergebnis: 'gegeben' },
+          { label: 'Bahnen pro Rolle = Länge ÷ Höhe', formel: '10,05 m ÷ 2,50 m', ergebnis: '4,02' },
+          { label: 'Auf ganze Bahnen abrunden', formel: 'abgerundet', ergebnis: '4 Bahnen/Rolle' },
+        ],
+        fazit: 'Eine Standardrolle ist 10,05 m lang. Bei 2,50 m Wandhöhe passen rechnerisch 4,02 Bahnen auf eine Rolle — hier wird aber <strong>abgerundet</strong>, denn die 0,02 übrige Rollenlänge reichen nicht für eine fünfte volle Bahn. Es bleiben also 4 nutzbare Bahnen pro Rolle, der kurze Rest ist Verschnitt. Genau hier zeigt sich, warum die Wandhöhe so entscheidend ist: Bei 3,35 m Höhe (Altbau) passten nur noch 3 Bahnen pro Rolle, bei 2,00 m dagegen 5. Wenige Zentimeter mehr Raumhöhe können die Zahl der Bahnen pro Rolle kippen und damit den Rollenbedarf spürbar erhöhen. Bei sehr hohen Altbauwänden lohnt deshalb oft die XL-Rolle mit 25 m Länge, weil sie diesen Sprung abfedert und pro Rolle deutlich mehr volle Bahnen liefert.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Standard-Rollenmaße im Vergleich',
+        kopf: ['Rollentyp', 'Breite × Länge', 'Fläche'],
+        zeilen: [
+          ['Normalrolle (Standard)', '0,53 m × 10,05 m', '≈ 5,3 m²'],
+          ['Normalrolle XL', '0,53 m × 25 m', '≈ 13,3 m²'],
+          ['Breitrolle (Doppelrolle)', '1,06 m × 10,05 m', '≈ 10,7 m²'],
+          ['Breitrolle XL (Vlies)', '1,06 m × 25 m', '≈ 26,5 m²'],
+        ],
+        fussnote: 'Die Normalrolle 0,53 m × 10,05 m ist das verbreitete Euro-Maß und für gemusterte Tapeten üblich. Breitrollen (1,06 m) decken pro Bahn die doppelte Wandbreite ab, erzeugen weniger Nähte und sind wirtschaftlicher auf großen, geraden Flächen — dafür schwerer zu handhaben. Vliestapeten gibt es oft als XL-Rolle mit 25 m Länge.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Rollen gesamt (Bahnen ÷ Bahnen pro Rolle, aufrunden)',
+        schritte: [
+          { label: 'Bahnen ÷ Bahnen pro Rolle', formel: '34 ÷ 4', ergebnis: '8,5 → 9 Rollen' },
+          { label: 'Verschnitt-Zuschlag 10 %', formel: '9 × 1,10', ergebnis: '9,9' },
+          { label: 'Auf ganze Rollen aufrunden', formel: 'aufgerundet', ergebnis: '10 Rollen' },
+        ],
+        fazit: 'Aus 34 benötigten Bahnen und 4 Bahnen pro Rolle ergeben sich 8,5 — aufgerundet 9 Rollen. Mit 10 % Verschnitt-Zuschlag für Zuschnitt-Abfälle und kleine Messfehler landet man bei 9,9, also 10 Rollen. Für diesen unifarbenen Raum (kein Rapport) sind 10 Rollen die Empfehlung. Das mehrfache Aufrunden — bei den Bahnen, bei den Rollen und durch den Verschnitt — wirkt zunächst großzügig, ist aber Absicht: Lieber eine Rolle übrig als eine Rolle zu wenig. Eine fehlende Rolle stoppt die Arbeit, und die nachgekaufte stammt oft aus einer anderen Charge mit minimal abweichender Farbe.',
+      },
+      {
+        typ: 'text',
+        titel: 'Rapport: warum Mustertapeten mehr verbrauchen',
+        html: `<p>Der <strong>Rapport</strong> ist der Musterversatz einer Tapete — die Höhe, nach der sich das Muster senkrecht wiederholt. Bei einer Uni-Tapete ohne Muster ist er null: Jede Bahn kann direkt unter der vorigen abgeschnitten werden. Bei einer Mustertapete dagegen muss jede neue Bahn so angesetzt werden, dass das Muster zur Nachbarbahn passt.</p><p>Genau das kostet Material. Damit das Muster fluchtet, muss am oberen Ende jeder Bahn ein Stück <strong>weggeschnitten</strong> werden — im Schnitt etwa eine halbe Rapporthöhe pro Bahn. Je größer der Rapport, desto mehr Abfall. In der Bahnenrechnung schlägt sich das nieder, weil die nutzbare Bahnenhöhe steigt: Statt der reinen Wandhöhe rechnet man <strong>Wandhöhe plus Rapport</strong>. Dadurch passen weniger ganze Bahnen auf eine Rolle, und der Rollenbedarf steigt. Der Rapport steht auf dem Etikett jeder Rolle und liegt bei Mustertapeten meist zwischen 15 und 64 cm. Er gehört zwingend in die Rechnung — sonst wird der Bedarf systematisch unterschätzt.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Mit Rapport 32 cm — der Versatz erhöht die Bahnenhöhe',
+        schritte: [
+          { label: 'Bahnenhöhe = Wandhöhe + Rapport', formel: '2,50 m + 0,32 m', ergebnis: '2,82 m' },
+          { label: 'Bahnen pro Rolle = 10,05 ÷ 2,82', formel: '10,05 m ÷ 2,82 m', ergebnis: '3,56 → 3' },
+          { label: 'Rollen = ⌈34 ÷ 3⌉ × 1,10', formel: '12 × 1,10 = 13,2', ergebnis: '14 Rollen' },
+        ],
+        fazit: 'Mit einem Rapport von 32 cm steigt die Bahnenhöhe von 2,50 m auf 2,82 m. Dadurch passen nur noch 3 statt 4 Bahnen auf eine Rolle. Bei weiterhin 34 Bahnen werden daraus 12 Rollen, mit 10 % Verschnitt 14 Rollen. Derselbe Raum braucht also als Mustertapete 14 statt 10 Rollen — vier Rollen mehr, allein durch den Musterversatz. Das zeigt, wie stark der Rapport ins Gewicht fällt: Bei großen Mustern lohnt es sich, den Verschnitt-Zuschlag von vornherein höher anzusetzen und vor dem Kauf genau nachzurechnen. Wer das Muster sparsamer ansetzen will, kann benachbarte Bahnen versetzt zuschneiden (Mustersprung-Tapeten erlauben das), spart damit aber nur begrenzt — die nutzbare Bahnenhöhe und damit der grundsätzliche Mehrbedarf bleiben.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Verschnitt-Zuschlag nach Mustertyp',
+        kopf: ['Tapetentyp', 'Rapport', 'Empfohlener Zuschlag'],
+        zeilen: [
+          ['Uni / strukturiert', '0 cm', '~5 %'],
+          ['Kleiner Rapport', 'unter 25 cm', '~10 %'],
+          ['Großer Rapport', '25 cm und mehr', '~15 %'],
+          ['Versetzter Rapport (Stufen)', 'beliebig, versetzt', '15–20 %'],
+        ],
+        fussnote: 'Der Verschnitt-Zuschlag deckt Zuschnitt-Abfälle, Musterversatz und kleine Messfehler ab. Bei vielen Ecken, Erkern, Nischen oder schrägen Wänden eher den oberen Wert wählen. Beim versetzten Rapport (Stufen- oder Diagonalrapport) ist der Abfall am größten, weil das Muster zusätzlich seitlich springt.',
+      },
+      {
+        typ: 'text',
+        titel: 'Fenster, Türen und Muster richtig ansetzen',
+        html: `<p>Fenster und Türen verkleinern die zu tapezierende Fläche — aber nur begrenzt. Man zieht ihre Fläche zwar von der Wandfläche ab, doch um die Öffnungen herum bleibt fast immer <strong>Verschnitt</strong>: Über und unter einem Fenster braucht man kurze Bahnenstücke, deren Reste selten anderswo passen. Deshalb sollte man den Abzug für Öffnungen nicht zu großzügig ansetzen — kleine Fenster unter etwa 1 m² oft gar nicht.</p><p>Beim <strong>Ansetzen des Musters</strong> arbeitet man sich von einer Ecke oder Fensterkante aus systematisch weiter und richtet jede Bahn nach dem Muster der vorigen aus. Praktisch hilft es, die Rollen vorab zu nummerieren und in Schneidereihenfolge zuzuschneiden, damit das Muster über alle Wände durchläuft. An Außenecken und schrägen Wänden entsteht zusätzlicher Verschnitt, weil dort selten eine volle Bahn passt. Wer mit Reserve plant und eine Rolle mehr einkalkuliert, vermeidet den größten Ärger: dass mitten in der Arbeit eine Rolle fehlt und die nachgekaufte aus einer anderen Produktionscharge mit leicht abweichender Farbe stammt.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Typischer Mehrverbrauch durch das Muster',
+        werte: [
+          { label: 'Uni-Tapete', wert: '~5 % Verschnitt', hinweis: 'kein Musterversatz — jede Bahn lässt sich direkt unter der vorigen abschneiden' },
+          { label: 'Kleiner Rapport (< 25 cm)', wert: '~10 % mehr', hinweis: 'moderater Versatz, etwas Abfall am oberen Rand jeder Bahn' },
+          { label: 'Großer Rapport (≥ 25 cm)', wert: '~15–20 % mehr', hinweis: 'jede Bahn muss aufs Muster der Nachbarbahn ausgerichtet werden' },
+          { label: 'Beispielraum (18 m Umfang, 2,50 m)', wert: 'uni 10 → 32 cm Rapport 14 Rollen', hinweis: 'der Musterversatz kostet in diesem Raum vier zusätzliche Rollen — rund 40 % mehr Material' },
+        ],
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Vor dem Tapetenkauf — Schritt für Schritt',
+        punkte: [
+          'Wandumfang aller zu tapezierenden Wände messen und die Breiten addieren.',
+          'Raumhöhe an mehreren Stellen prüfen — alte Wände sind selten exakt gleich hoch.',
+          'Rapport (Musterversatz) vom Rollenetikett ablesen und in die Rechnung einbeziehen.',
+          'Verschnitt-Zuschlag wählen: uni ~5 %, kleiner Rapport ~10 %, großer ~15–20 %.',
+          'Fenster und Türen nur grob abziehen — kleine Öffnungen oft gar nicht.',
+          'Eine Rolle Reserve einplanen, besonders bei Mustertapeten und für spätere Ausbesserungen.',
+          'Charge- bzw. Anfertigungsnummer notieren und alle Rollen aus derselben Charge kaufen.',
+          'Vlies oder Papier klären: Vlies ist oft breiter (1,06 m) und wird Wand-an-Kleister verarbeitet.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Immer dieselbe Charge kaufen',
+        text: 'Tapetenrollen aus unterschiedlichen Produktionschargen — auf dem Etikett als Chargen-, Bade- oder Anfertigungsnummer angegeben — können minimal in der Farbe abweichen. An der Wand nebeneinander wird das als feiner Streifen sichtbar, der sich nicht mehr beheben lässt. Kaufen Sie deshalb alle Rollen mit derselben Nummer auf einmal und lieber eine Rolle mehr als zu wenig: Eine spätere Nachbestellung trifft fast immer eine andere Charge. Bewahren Sie eine angebrochene Restrolle für künftige Ausbesserungen auf — falls einmal eine Bahn beschädigt wird, ersetzen Sie sie aus demselben Bad und nicht aus einer neuen Lieferung.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Bei großem Rapport großzügig kalkulieren',
+        text: 'Die Rechnung liefert einen Richtwert, keine zentimetergenaue Garantie. Bei Mustertapeten mit großem Rapport steigt der Verschnitt überproportional, weil jede Bahn auf das Muster der Nachbarbahn ausgerichtet werden muss und am oberen Rand Abfall bleibt. Kalkulieren Sie hier großzügig und planen Sie mindestens eine Rolle Reserve. Auch krumme Wände, Erker, Nischen und schräge Decken erhöhen den Bedarf über den rechnerischen Wert hinaus. Im Zweifel lieber eine Rolle zu viel als zu wenig: Reststücke lassen sich für Ausbesserungen nutzen, eine fehlende Rolle dagegen unterbricht die Arbeit — womöglich für Tage, bis Nachschub aus der passenden Charge da ist.',
+      },
+    ],
+    quellen: [
+      {
+        titel: 'Tapetenbedarf — Bahnen- und Rapportberechnung',
+        hinweis: 'Bedarf über Bahnenanzahl und Rollenmaße; der Musterrapport erhöht den Verschnitt — die Werte sind Richtwerte, Öffnungen und schiefe Wände beeinflussen das Ergebnis.',
+      },
+    ],
   },
   {
     slug: 'stromvergleich-rechner',
