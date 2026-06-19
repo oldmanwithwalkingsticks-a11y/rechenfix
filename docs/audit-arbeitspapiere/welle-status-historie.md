@@ -8,6 +8,27 @@
 
 ---
 
+## 19.06.2026 — Fix: Quellen-Überschrift jetzt typabhängig (Rechtsgrundlagen vs. Methodik)
+
+`components/Quellen.tsx` rendert die H2 nicht mehr hartcodiert als „Quellen &
+Rechtsgrundlagen", sondern leitet sie aus den übergebenen `quellen` ab:
+
+- **„Quellen & Rechtsgrundlagen"** nur, wenn mindestens eine Quelle einen Rechtsbezug
+  hat — Gesetzes-Domain in `url` (`gesetze-im-internet.de`, `bundesgesetzblatt`,
+  `eur-lex`) ODER Paragrafenzeichen `§` / Gesetzeskürzel (EStG, BGB, ArbZG, SGB,
+  BUrlG, KraftStG, BetrKV, StGB, StVG, StVO, BKatV, WoFlV, BKKG) im `titel`.
+- **„Quellen & Methodik"** sonst.
+
+Behebt das sachlich falsche „Rechtsgrundlagen"-Etikett bei didaktischen Rechnern
+(leasing, volumen, backzeit, pythagoras, cups, hundejahre, pace, streaming,
+sparrechner …) und bei reinen Daten-/Behördenquellen ohne Gesetzesbezug (inflation
+mit Destatis/Bundesbank, sonnenschutz mit BfS, schlaf mit DGSM → „Methodik", gewollt).
+**Rückwirkend für alle** Rechner mit `quellen`, rein automatisch — kein Config-Eingriff.
+23 Stichproben gegen die echten Config-Quellen verifiziert (9 Rechts → Rechtsgrundlagen,
+14 didaktisch/Daten → Methodik), alle korrekt. Commit `28383d1`.
+
+---
+
 ## 19.06.2026 — W19 Kategorie-Tranche t36–t40 Goldstandard (Tranche 8 KOMPLETT, 56 Goldstandard)
 
 Gesammelter Doku-Sync für fünf Rechner aus fünf Kategorien (t36–t40); Doku auf
