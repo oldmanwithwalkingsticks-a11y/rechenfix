@@ -743,4 +743,183 @@ Der tatsächliche Strompreis steht auf Ihrer Abrechnung. Tragen Sie ihn ein, um 
       },
     ],
   },
+  {
+    slug: 'bildschirmgroesse-ppi-rechner',
+    letzteAktualisierung: '2026-06-19',
+    titel: 'Bildschirmgröße- & PPI-Rechner',
+    beschreibung: 'Bildschirmdiagonale in cm, Pixeldichte (PPI) und physische Maße aus Zoll und Auflösung berechnen.',
+    kategorie: 'Technik',
+    kategorieSlug: 'technik',
+    metaTitle: 'PPI-Rechner — Bildschirmgröße in cm & Pixeldichte',
+    metaDescription: 'Bildschirmdiagonale in cm, Pixeldichte (PPI) und Breite × Höhe aus Zoll und Auflösung berechnen ✓ Phone, Laptop, Monitor, TV ✓ mit KI-Erklärung.',
+    keywords: ['ppi rechner', 'bildschirmdiagonale cm', 'zoll in cm bildschirm', 'pixeldichte berechnen', 'monitor größe', 'bildschirmgröße rechner', 'dpi monitor', 'display ppi'],
+    icon: '🖥️',
+    formel: 'Diagonale cm = Zoll × 2,54 | PPI = √(Breite² + Höhe² in px) ÷ Diagonale in Zoll',
+    beispiel: '27 Zoll = 68,58 cm. 27" 4K (3.840 × 2.160): √(3.840² + 2.160²) ÷ 27 ≈ 163 PPI. Fläche ≈ 59,8 × 33,6 cm.',
+    erklaerung: `**Bildschirmgröße und Pixeldichte berechnen**
+
+Bildschirme werden in Zoll gemessen — und zwar immer die Diagonale. Ein Zoll sind exakt 2,54 cm, ein 27-Zoll-Monitor hat also 27 × 2,54 = 68,58 cm Diagonale. Unser Rechner ermittelt aus Diagonale und Auflösung die Pixeldichte (PPI), die physischen Maße und das Seitenverhältnis.
+
+**Zoll in Zentimeter**
+
+Diagonale in cm = Zoll × 2,54. Aus der Diagonale und dem Seitenverhältnis ergeben sich über den Satz des Pythagoras auch Breite und Höhe in Zentimetern — praktisch, um zu prüfen, ob ein Gerät auf den Schreibtisch oder an die Wand passt.
+
+**Was ist PPI?**
+
+PPI (pixels per inch) ist die Pixeldichte: wie viele Bildpunkte auf einem Zoll liegen. Berechnet wird sie als PPI = √(Breite² + Höhe² in Pixeln) ÷ Diagonale in Zoll. Der Wurzelterm ist die Bildschirmdiagonale in Pixeln (Pythagoras). Ein 27-Zoll-4K-Monitor kommt so auf rund 163 PPI.
+
+**Pixeldichte und Betrachtungsabstand**
+
+Ob man einzelne Pixel sieht, hängt von PPI und Abstand ab. Smartphones (nah, ~400+ PPI), Monitore (~110 PPI) und Fernseher (~80 PPI) wirken aus ihrem typischen Abstand alle scharf. Die PPI ist ein Schärfe-Baustein, kein Gesamtqualitätsmaß.`,
+    faq: [
+      {
+        frage: 'Wie viel cm sind 27 Zoll Bildschirm?',
+        antwort: '27 Zoll entsprechen 27 × 2,54 = 68,58 cm. Gemeint ist immer die Bildschirmdiagonale, nicht Breite oder Höhe. Bei 16:9 ist ein 27-Zoll-Display rund 59,8 cm breit und 33,6 cm hoch.',
+      },
+      {
+        frage: 'Wie berechne ich die PPI eines Bildschirms?',
+        antwort: 'PPI = √(Breite² + Höhe² in Pixeln) ÷ Diagonale in Zoll. Beispiel 27 Zoll, 3.840 × 2.160: √(3.840² + 2.160²) = 4.406 Pixel ÷ 27 = rund 163 PPI. Der Wurzelterm ist die Bildschirmdiagonale in Pixeln (Pythagoras).',
+      },
+      {
+        frage: 'Was bedeutet PPI?',
+        antwort: 'PPI (pixels per inch) ist die Pixeldichte — wie viele Bildpunkte auf einem Zoll liegen. Je höher die PPI, desto feiner das Bild. Ob man einzelne Pixel sieht, hängt zusätzlich vom Betrachtungsabstand ab.',
+      },
+      {
+        frage: 'Warum sieht ein großer Monitor mit Full HD körnig aus?',
+        antwort: 'Weil dieselbe Auflösung über eine größere Fläche verteilt wird, sinkt die Pixeldichte. Full HD ergibt auf 24 Zoll rund 92 PPI, auf 32 Zoll nur rund 69 PPI — die Pixel werden größer und sichtbarer. Für große Monitore empfiehlt sich 1440p oder 4K.',
+      },
+      {
+        frage: 'Wie viele PPI braucht ein Bildschirm?',
+        antwort: 'Das hängt vom Abstand ab. Smartphones (rund 30 cm) brauchen über 300 PPI, Monitore (50–70 cm) rund 110 PPI, Fernseher (mehrere Meter) genügen 40–80 PPI. Je näher das Display, desto höher muss die Pixeldichte sein.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Zoll, Zentimeter & Pixeldichte beim Display',
+        html: `<p>Bildschirme werden in <strong>Zoll</strong> (englisch inch) gemessen — und zwar immer die <strong>Diagonale</strong>, nicht Breite oder Höhe. Ein Zoll sind exakt <strong>2,54 cm</strong>, ein 27-Zoll-Monitor hat also eine Bildschirmdiagonale von 27 × 2,54 = 68,58 cm. Aus der Diagonale und dem Seitenverhältnis lassen sich Breite und Höhe in Zentimetern berechnen.</p><p>Die zweite wichtige Größe ist die <strong>Pixeldichte</strong>, gemessen in <strong>PPI</strong> (pixels per inch). Sie sagt, wie viele Bildpunkte auf einem Zoll Bildschirm liegen — und damit, wie fein das Bild ist. Berechnet wird sie aus der Auflösung und der Diagonale: <strong>PPI = √(Breite² + Höhe² in Pixeln) ÷ Diagonale in Zoll</strong>. Der Wurzelterm ist dabei nichts anderes als die <strong>Bildschirmdiagonale in Pixeln</strong> (Satz des Pythagoras). Dieser Rechner ermittelt aus Diagonale und Auflösung die Pixeldichte, die physischen Maße und das Seitenverhältnis. So lässt sich vor dem Kauf einschätzen, ob ein Monitor scharf genug ist und ob er überhaupt auf den vorgesehenen Platz passt — zwei Fragen, die die nackte Zoll-Angabe für sich genommen offenlässt.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '27 Zoll in Zentimeter (Diagonale)',
+        schritte: [
+          { label: 'Zoll in cm umrechnen', formel: '27 Zoll × 2,54', ergebnis: '68,58 cm' },
+          { label: 'Gegenrichtung (cm → Zoll)', formel: '68,58 ÷ 2,54', ergebnis: '27 Zoll' },
+        ],
+        fazit: 'Ein 27-Zoll-Bildschirm misst 68,58 cm — und zwar von Ecke zu Ecke, denn die Zoll-Angabe bezeichnet immer die Diagonale. Ein Zoll ist per Definition exakt 2,54 cm, die Umrechnung also eine simple Multiplikation. Wichtig beim Möbelkauf: Die Diagonale allein sagt nichts über Breite und Höhe — ein 27-Zoll-16:9-Monitor ist rund 60 cm breit, ein 27-Zoll-21:9-Gerät dagegen deutlich breiter. Erst Diagonale plus Seitenverhältnis ergeben die tatsächlichen Außenmaße. Hinzu kommt der Rahmen: Das Gehäuse ist je nach Modell ein bis mehrere Zentimeter größer als die reine Bildfläche, was beim Ausmessen einer Nische oder einer Monitorhalterung zu beachten ist. Im Zweifel lieber etwas Spielraum einplanen, als sich am Ende um wenige Millimeter zu vertun.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'PPI eines 27-Zoll-4K-Monitors',
+        schritte: [
+          { label: 'Diagonale in Pixeln (Pythagoras)', formel: '√(3.840² + 2.160²)', ergebnis: '≈ 4.406 px' },
+          { label: 'Durch Diagonale in Zoll teilen', formel: '4.406 ÷ 27', ergebnis: '≈ 163 PPI' },
+        ],
+        fazit: 'Ein 27-Zoll-Monitor mit 4K-Auflösung (3.840 × 2.160) hat rund 163 PPI. Der erste Schritt ist der Satz des Pythagoras: Aus Breite und Höhe in Pixeln ergibt sich die Bildschirmdiagonale in Pixeln (rund 4.406). Geteilt durch die Diagonale in Zoll erhält man die Pixeldichte. 163 PPI sind für einen Schreibtisch-Monitor auf Armlänge sehr scharf — viele stellen die Oberfläche dann auf 125 bis 150 % Skalierung, damit Text und Symbole nicht zu klein werden.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Gängige Displays und ihre Pixeldichte',
+        kopf: ['Gerät', 'Diagonale', 'Auflösung', 'PPI'],
+        zeilen: [
+          ['Smartphone', '6,1"', '2.532 × 1.170', '~460'],
+          ['Tablet', '11"', '2.388 × 1.668', '~265'],
+          ['Laptop (FHD)', '15,6"', '1.920 × 1.080', '~141'],
+          ['Laptop (4K)', '15,6"', '3.840 × 2.160', '~282'],
+          ['Monitor (FHD)', '24"', '1.920 × 1.080', '~92'],
+          ['Monitor (4K)', '27"', '3.840 × 2.160', '~163'],
+          ['Fernseher (4K)', '55"', '3.840 × 2.160', '~80'],
+        ],
+        fussnote: 'PPI = √(Breite² + Höhe² in Pixeln) ÷ Diagonale in Zoll. Smartphones haben die höchste Pixeldichte, weil man sie nah hält; Fernseher die niedrigste, weil man weit weg sitzt — bei normalem Betrachtungsabstand wirken trotzdem alle scharf.',
+      },
+      {
+        typ: 'text',
+        titel: 'Was PPI bedeutet — wann Pixel sichtbar werden',
+        html: `<p>Die <strong>Pixeldichte (PPI)</strong> entscheidet, ob man auf einem Display einzelne Pixel erkennt oder ein gleichmäßig scharfes Bild sieht. Je höher die PPI, desto kleiner und dichter die Bildpunkte. Ab welcher Dichte das Auge keine einzelnen Pixel mehr unterscheidet, hängt entscheidend vom <strong>Betrachtungsabstand</strong> ab.</p><p>Ein Smartphone hält man rund 30 cm vor die Augen, dort braucht es über 300 PPI, damit alles glatt wirkt — deshalb haben Handys oft 400 bis 500 PPI. Einen Monitor betrachtet man aus 50 bis 70 cm; hier reichen schon rund 110 PPI für ein sauberes Bild. Beim Fernseher, den man aus mehreren Metern ansieht, genügen 40 bis 80 PPI. Die Pixeldichte allein sagt also wenig — erst zusammen mit dem typischen Abstand ergibt sie ein sinnvolles Maß für die wahrgenommene Schärfe. Ein 4K-Fernseher mit 80 PPI wirkt aus dem Sofa-Abstand genauso scharf wie ein 460-PPI-Handy in der Hand. In kleinen Wohnzimmern ist der Sprung von 4K auf 8K für die meisten deshalb gar nicht sichtbar.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Gleiche Auflösung, andere Größe (24" vs. 32" FHD)',
+        schritte: [
+          { label: 'Full-HD-Diagonale in Pixeln', formel: '√(1.920² + 1.080²)', ergebnis: '≈ 2.203 px' },
+          { label: '24-Zoll-Monitor', formel: '2.203 ÷ 24', ergebnis: '≈ 92 PPI' },
+          { label: '32-Zoll-Monitor', formel: '2.203 ÷ 32', ergebnis: '≈ 69 PPI' },
+        ],
+        fazit: 'Dieselbe Full-HD-Auflösung (1.920 × 1.080) ergibt auf einem 24-Zoll-Monitor rund 92 PPI, auf einem 32-Zoll-Monitor aber nur 69 PPI. Der größere Bildschirm verteilt die gleiche Pixelzahl auf mehr Fläche, jeder Pixel wird größer und das Bild wirkt gröber. Genau deshalb sollte ein 32-Zoll-Schreibtischmonitor mindestens 1440p, besser 4K bieten. Die Auflösung allein sagt nichts über die Schärfe — erst zusammen mit der Größe, also als PPI, wird sie aussagekräftig. Dieselbe Logik erklärt, warum ein 6-Zoll-Handy mit Full HD gestochen scharf wirkt: Auf der winzigen Fläche ergeben 1.920 × 1.080 Pixel über 400 PPI, während dieselbe Auflösung auf 32 Zoll grob aussieht. Größe und Auflösung gehören immer zusammen betrachtet.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Breite & Höhe aus Diagonale + 16:9 (Pythagoras)',
+        schritte: [
+          { label: 'Diagonal-Faktor für 16:9', formel: '√(16² + 9²)', ergebnis: '√337 ≈ 18,36' },
+          { label: 'Breite = 27 × 16 ÷ 18,36', formel: '27 × 16 ÷ 18,36', ergebnis: '≈ 23,5 Zoll = 59,8 cm' },
+          { label: 'Höhe = 27 × 9 ÷ 18,36', formel: '27 × 9 ÷ 18,36', ergebnis: '≈ 13,2 Zoll = 33,6 cm' },
+        ],
+        fazit: 'Aus der 27-Zoll-Diagonale und dem Seitenverhältnis 16:9 liefert der Satz des Pythagoras die physischen Maße: rund 59,8 cm breit und 33,6 cm hoch. Der Diagonal-Faktor √(16² + 9²) = √337 ≈ 18,36 teilt die Diagonale in den Breiten-Anteil (× 16) und den Höhen-Anteil (× 9). Das ist genau die Rechnung, die man braucht, um zu prüfen, ob ein Monitor auf den Schreibtisch oder ein Fernseher in eine Wandnische passt — die bloße Zoll-Zahl verrät die Breite nämlich nicht.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'PPI-Richtwerte je Gerätetyp',
+        kopf: ['Gerätetyp', 'typische PPI', 'Betrachtungsabstand'],
+        zeilen: [
+          ['Smartphone', '400–500', '~25–35 cm'],
+          ['Tablet', '220–280', '~35–45 cm'],
+          ['Laptop', '130–230', '~50–60 cm'],
+          ['Monitor', '90–160', '~50–70 cm'],
+          ['Fernseher', '40–80', '~2–4 m'],
+        ],
+        fussnote: 'Je näher man ein Display hält, desto höher muss die Pixeldichte sein, damit einzelne Pixel unsichtbar bleiben. Deshalb haben Smartphones die höchsten PPI-Werte und Fernseher die niedrigsten — trotzdem wirken beide aus ihrem üblichen Abstand scharf. Als grobe Orientierung gilt: Was man auf Armlänge nutzt, sollte rund 100 PPI oder mehr haben; was man in der Hand hält, eher 300 oder mehr. Die Werte in der Tabelle sind typische Bereiche, keine festen Grenzen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Betrachtungsabstand & die „Retina"-Schwelle',
+        html: `<p>Apple prägte den Begriff <strong>„Retina"</strong> für Displays, bei denen man aus dem üblichen Abstand keine einzelnen Pixel mehr erkennt. Dahinter steckt die Auflösungsgrenze des menschlichen Auges: Es kann etwa eine <strong>Bogenminute</strong> auflösen — zwei Punkte, die enger beieinanderliegen, verschmelzen zu einem.</p><p>Daraus folgt eine einfache Regel: Die nötige Pixeldichte hängt vom <strong>Abstand</strong> ab. Verdoppelt man den Betrachtungsabstand, halbiert sich die nötige PPI für denselben Schärfeeindruck. Ein Handy auf 30 cm braucht rund 300 PPI, ein Monitor auf 60 cm nur die Hälfte, ein Fernseher auf 3 Meter noch deutlich weniger. Deshalb ist es wenig sinnvoll, einen 8K-Fernseher aus großer Entfernung mit einem hochauflösenden Handy zu vergleichen — beide sind für ihren Abstand optimiert. Wer dagegen sehr nah an einem großen, niedrig aufgelösten Display sitzt, sieht schnell die einzelnen Pixel, etwa als sogenannten „Fliegengitter"-Effekt. Eine praktische Konsequenz: Beim Fernseher entscheidet der Sitzabstand über die sinnvolle Größe — für rund 3 Meter gilt ein 55- bis 65-Zoll-4K-Gerät als guter Kompromiss.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Höhere Auflösung vs. größeres Display',
+        spalteA: 'Höhere Auflösung (gleiche Größe)',
+        spalteB: 'Größeres Display (gleiche Auflösung)',
+        zeilen: [
+          { kriterium: 'Pixeldichte (PPI)', a: 'steigt → feineres Bild', b: 'sinkt → gröberes Bild' },
+          { kriterium: 'Schärfe aus der Nähe', a: 'schärfer, keine sichtbaren Pixel', b: 'Pixel werden eher sichtbar' },
+          { kriterium: 'Sichtbare Fläche', a: 'unverändert', b: 'größer, mehr Übersicht' },
+          { kriterium: 'UI-Skalierung nötig?', a: 'ja, sonst wird alles winzig', b: 'meist nein' },
+          { kriterium: 'Sinnvoll für', a: 'nahes Arbeiten, feine Grafik', b: 'Abstand, Film, mehrere Fenster' },
+        ],
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Das passende Display wählen',
+        punkte: [
+          'Diagonale in Zoll mal 2,54 nehmen, um die Größe in Zentimetern einzuschätzen.',
+          'Physische Breite und Höhe prüfen, ob das Gerät auf den Schreibtisch oder an die Wand passt.',
+          'PPI aus Auflösung und Diagonale berechnen — nicht nur auf die Auflösung schauen.',
+          'Betrachtungsabstand bedenken: nah erfordert hohe PPI, fern kommt mit weniger aus.',
+          'Großer Monitor (27 Zoll und mehr)? Mindestens 1440p, besser 4K, sonst sinkt die Schärfe.',
+          'Beim Fernseher zählt der Sitzabstand mehr als die reine Zoll-Zahl.',
+          'Bei sehr hoher PPI an die UI-Skalierung denken (z. B. 150 %), damit Text lesbar bleibt.',
+          'Seitenverhältnis beachten: 16:9 für Film, 16:10 oder 21:9 für mehr Arbeitsfläche.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Bei gleichem Abstand zählt die PPI, nicht nur die Auflösung',
+        text: 'Zwei Monitore mit derselben Auflösung können völlig unterschiedlich scharf wirken — entscheidend ist die Pixeldichte (PPI), also die Auflösung im Verhältnis zur Größe. Ein 24-Zoll-Full-HD-Monitor (rund 92 PPI) zeigt ein deutlich feineres Bild als ein 32-Zoll-Full-HD-Monitor (rund 69 PPI), obwohl beide „Full HD" sind. Wer am Schreibtisch nah vor einem großen Bildschirm sitzt, sollte daher auf die PPI achten und im Zweifel zur höheren Auflösung greifen. Faustregel fürs Arbeiten am Monitor: rund 100 PPI oder mehr wirken sauber, darunter werden Schriftkanten zunehmend treppig.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'PPI ist die Pixeldichte, kein alleiniges Qualitätsmaß',
+        text: 'Eine hohe PPI bedeutet ein feines, pixelarmes Bild — aber sie sagt nichts über Farbtreue, Kontrast, Helligkeit, Reaktionszeit oder Blickwinkel aus. Ein OLED-Panel mit nur 100 PPI kann durch tiefes Schwarz und kräftige Farben besser aussehen als ein blasses LCD mit höherer Pixeldichte. Auch die Panel-Technik (IPS, VA, OLED), die Bildwiederholrate (Hz) und die Werkskalibrierung prägen den Bildeindruck stark. Die PPI ist also nur ein Baustein: Sie bestimmt die maximale Schärfe für einen gegebenen Abstand, nicht die Gesamtqualität eines Displays. Für die Kaufentscheidung lohnt der Blick auf das ganze Datenblatt. Ein praktischer Test: Lässt sich ein Display im Geschäft mit Text und Fotos in Ruhe ansehen, sagt der eigene Eindruck oft mehr als jede Datenblatt-Zahl. Die PPI hilft beim Vorsortieren, das letzte Urteil fällt das Auge aus dem geplanten Nutzungsabstand.',
+      },
+    ],
+    quellen: [
+      {
+        titel: 'Bildschirmdiagonale & PPI — Berechnung',
+        hinweis: 'Diagonale cm = Zoll × 2,54; PPI = √(Breite²+Höhe² in px) / Diagonale in Zoll (Pythagoras).',
+      },
+    ],
+  },
 ];
