@@ -219,6 +219,7 @@ const RECHNER_MAP: Record<string, ComponentType> = {
   'zucker-umrechner': dyn(() => import('@/components/rechner/ZuckerUmrechner')),
   'gefrierdauer-rechner': dyn(() => import('@/components/rechner/GefrierdauerRechner')),
   'internetgeschwindigkeit-rechner': dyn(() => import('@/components/rechner/InternetgeschwindigkeitRechner')),
+  'datenmengen-umrechner': dyn(() => import('@/components/rechner/DatenmengenRechner')),
 };
 
 export default function RechnerLoader({ slug }: { slug: string }) {

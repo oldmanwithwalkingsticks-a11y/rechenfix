@@ -190,4 +190,188 @@ Surfen und E-Mail kommen mit wenigen Mbit/s aus, HD-Streaming braucht etwa 5–8
       },
     ],
   },
+  {
+    slug: 'datenmengen-umrechner',
+    letzteAktualisierung: '2026-06-19',
+    titel: 'Datenmengen-Umrechner',
+    beschreibung: 'Datenmengen umrechnen: Byte, KB, MB, GB, TB sowie binäre KiB/MiB/GiB — und warum „500 GB“ als 465 GiB erscheinen.',
+    kategorie: 'Technik',
+    kategorieSlug: 'technik',
+    metaTitle: 'Datenmengen-Umrechner — GB, GiB, MB & TB',
+    metaDescription: 'Datenmengen umrechnen: Byte, KB, MB, GB, TB und binäre KiB/MiB/GiB ✓ dezimal vs. binär ✓ warum 500 GB als 465 GiB erscheinen ✓ KI-Erklärung.',
+    keywords: ['datenmengen umrechner', 'gb in gib', 'mb in mib', 'byte umrechnen', 'gibibyte', 'dezimal binär datenmenge', '500 gb festplatte', 'speichergröße umrechnen'],
+    icon: '💾',
+    formel: 'Umrechnung über Byte: dezimal × 1.000 (KB/MB/GB/TB), binär × 1.024 (KiB/MiB/GiB/TiB); 1 Byte = 8 Bit',
+    beispiel: '500 GB (dezimal) = 500.000.000.000 Byte ÷ 1.073.741.824 ≈ 465,66 GiB. 8 Mbit = 1 MB (1 Byte = 8 Bit).',
+    erklaerung: `**Datenmengen umrechnen — dezimal und binär**
+
+Datenmengen werden in zwei unterschiedlichen Systemen gezählt, und genau das sorgt für Verwirrung. Unser Rechner wandelt zwischen allen gängigen Einheiten um — von Bit und Byte über Kilo-, Mega-, Giga- und Terabyte bis zu den binären Einheiten Kibibyte (KiB), Mebibyte (MiB) und Gibibyte (GiB).
+
+**Bit und Byte**
+
+Die kleinste Einheit ist das Bit (eine 0 oder 1). Acht Bit ergeben ein Byte. Daraus folgt: 8 Megabit (Mbit) sind 1 Megabyte (MB). Internetanbieter werben in Megabit pro Sekunde, Dateigrößen rechnen in Megabyte — der Faktor 8 trennt beide.
+
+**Dezimal vs. binär**
+
+Dezimale Einheiten (SI) rechnen in Tausenderschritten: 1 KB = 1.000 Byte, 1 MB = 1.000.000 Byte, 1 GB = 1.000.000.000 Byte. So zählen Festplatten- und SSD-Hersteller sowie Internetanbieter.
+
+Binäre Einheiten (IEC 80000-13) rechnen in 1.024er-Schritten: 1 KiB = 1.024 Byte, 1 MiB = 1.048.576 Byte, 1 GiB = 1.073.741.824 Byte. So zählen Betriebssysteme den Arbeitsspeicher und oft auch Dateigrößen.
+
+**Warum „500 GB" als 465 GiB erscheinen**
+
+Eine Festplatte mit 500 GB hat 500.000.000.000 Byte (dezimal). Das Betriebssystem teilt diese Zahl durch 1.073.741.824 und zeigt rund 465 an — beschriftet es aber meist trotzdem als „GB", obwohl GiB gemeint ist. Es fehlt kein Byte; nur die Einheit ist eine andere. Je größer die Kapazität, desto größer die scheinbare Lücke.`,
+    faq: [
+      {
+        frage: 'Warum zeigt meine 500-GB-Festplatte weniger an?',
+        antwort: 'Hersteller rechnen dezimal: 500 GB = 500.000.000.000 Byte. Das Betriebssystem rechnet binär und teilt durch 1.073.741.824, was rund 465 ergibt — beschriftet als „GB", gemeint ist aber GiB. Es fehlt kein Byte, nur die Einheit unterscheidet sich.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen GB und GiB?',
+        antwort: 'GB (Gigabyte) ist dezimal: 1 GB = 1.000.000.000 Byte. GiB (Gibibyte) ist binär: 1 GiB = 1.073.741.824 Byte, also rund 7,4 Prozent mehr. Festplatten werden in GB beworben, Betriebssysteme zeigen meist GiB an.',
+      },
+      {
+        frage: 'Wie viele Byte hat ein Megabyte?',
+        antwort: 'Dezimal hat 1 MB genau 1.000.000 Byte. Binär (1 MiB) sind es 1.048.576 Byte. Der Unterschied beträgt auf Mega-Ebene rund 4,9 Prozent und wächst mit jeder weiteren Präfix-Stufe.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen Bit und Byte?',
+        antwort: 'Ein Byte besteht aus 8 Bit. Bit (kleines b) wird vor allem bei Übertragungsraten verwendet (Mbit/s), Byte (großes B) bei Dateigrößen (MB). 8 Megabit entsprechen 1 Megabyte, ein 100-Mbit-Anschluss überträgt also 12,5 MB/s.',
+      },
+      {
+        frage: 'Wird RAM dezimal oder binär gezählt?',
+        antwort: 'Arbeitsspeicher wird binär gezählt: 8 GB RAM sind tatsächlich 8 GiB (8 × 1.073.741.824 Byte), weil die Hardware binär adressiert wird. Festplatten und SSDs werden dagegen dezimal beworben.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Bit, Byte und die Einheiten-Präfixe',
+        html: `<p>Die kleinste Informationseinheit ist das <strong>Bit</strong> — eine 0 oder 1. Acht Bit ergeben ein <strong>Byte</strong>, die Grundeinheit für Datenmengen. Ein Buchstabe belegt etwa ein Byte, ein Foto einige Millionen, ein Film mehrere Milliarden. Damit man nicht mit endlosen Nullen hantiert, gibt es <strong>Präfixe</strong>: Kilo, Mega, Giga, Tera, Peta.</p><p>Hier beginnt die Tücke: Es gibt <strong>zwei</strong> Präfix-Systeme. Das <strong>dezimale</strong> (SI) rechnet in Tausenderschritten — 1 Kilobyte (KB) = 1.000 Byte, 1 Megabyte (MB) = 1.000.000 Byte. Das <strong>binäre</strong> (IEC) rechnet in 1.024er-Schritten, passend zur Zweierlogik der Computer — 1 Kibibyte (KiB) = 1.024 Byte, 1 Mebibyte (MiB) = 1.048.576 Byte. Beide sind korrekt, liefern aber unterschiedliche Zahlen für dieselbe Datenmenge. Genau daraus entsteht die bekannte Verwirrung, warum eine „500-GB"-Festplatte im Computer als nur 465 „GB" erscheint. Dieser Rechner wandelt zwischen allen Einheiten beider Systeme um und zeigt zusätzlich den Rechenweg über die Basiseinheit Byte — so wird jede Datenmenge vergleichbar, egal in welcher Schreibweise sie ursprünglich angegeben war.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Dezimale Einheiten (Faktor 1.000)',
+        kopf: ['Einheit', 'Symbol', 'in Byte'],
+        zeilen: [
+          ['Byte', 'B', '1'],
+          ['Kilobyte', 'KB', '1.000'],
+          ['Megabyte', 'MB', '1.000.000'],
+          ['Gigabyte', 'GB', '1.000.000.000'],
+          ['Terabyte', 'TB', '1.000.000.000.000'],
+          ['Petabyte', 'PB', '1.000.000.000.000.000'],
+        ],
+        fussnote: 'Dezimale Präfixe nach dem SI-System — jede Stufe ist das 1.000-Fache der vorigen. So zählen Festplatten- und SSD-Hersteller, USB-Sticks und Internetanbieter (Mbit/s). Grundlage bleibt: 1 Byte = 8 Bit.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Binäre Einheiten (Faktor 1.024)',
+        kopf: ['Einheit', 'Symbol', 'in Byte'],
+        zeilen: [
+          ['Kibibyte', 'KiB', '1.024'],
+          ['Mebibyte', 'MiB', '1.048.576'],
+          ['Gibibyte', 'GiB', '1.073.741.824'],
+          ['Tebibyte', 'TiB', '1.099.511.627.776'],
+          ['Pebibyte', 'PiB', '1.125.899.906.842.624'],
+        ],
+        fussnote: 'Binäre Präfixe nach IEC 80000-13 — jede Stufe ist das 1.024-Fache (2¹⁰) der vorigen. So zählen Betriebssysteme den Arbeitsspeicher und häufig auch Datei- und Speichergrößen. Das eingeschobene „bi" (KiBi, MeBi, GiBi) steht für „binär". Diese Einheiten wirken ungewohnt, sind aber die einzig eindeutigen: Wer „GiB" schreibt, meint zweifelsfrei 1.073.741.824 Byte, während „GB" je nach Quelle dezimal oder binär gemeint sein kann.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '500-GB-Festplatte in GiB',
+        schritte: [
+          { label: 'Hersteller-Angabe in Byte', formel: '500 GB × 1.000.000.000', ergebnis: '500.000.000.000 Byte' },
+          { label: 'In GiB umrechnen (÷ 1.073.741.824)', formel: '500.000.000.000 ÷ 1.073.741.824', ergebnis: '≈ 465,66 GiB' },
+        ],
+        fazit: 'Eine 500-GB-Platte hat tatsächlich 500 Milliarden Byte — so zählt der Hersteller (dezimal). Das Betriebssystem rechnet binär und teilt durch 1.073.741.824, kommt auf rund 465,66 und beschriftet das meist trotzdem als „GB", obwohl GiB gemeint ist. Es fehlt also kein einziges Byte; die Kapazität stimmt exakt, nur die Zähleinheit ist eine andere. Wer das weiß, hält die „fehlenden" 35 GB nicht mehr für einen Defekt. Gegenprobe: 465,66 wieder mit 1.073.741.824 multipliziert ergibt erneut die 500 Milliarden Byte — die Datenmenge ist in beiden Schreibweisen identisch, nur die Verpackung ist eine andere. Genau dieselbe Logik gilt für SSDs und USB-Sticks.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum Hersteller und Betriebssystem unterschiedlich zählen',
+        html: `<p>Festplatten-, SSD- und USB-Hersteller geben die Kapazität <strong>dezimal</strong> an: Eine „500-GB"-Platte hat genau 500.000.000.000 Byte (500 × 1 Milliarde). Das ist mathematisch sauber — und ergibt nebenbei die größere, werbewirksamere Zahl.</p><p>Das <strong>Betriebssystem</strong> — vor allem Windows — zählt dagegen <strong>binär</strong>: Es teilt die Byte-Zahl durch 1.073.741.824 (= 2³⁰) und kommt so auf rund 465. Verwirrend ist, dass Windows das Ergebnis trotzdem mit „GB" beschriftet, obwohl es eigentlich <strong>GiB</strong> meint. Es fehlt also kein einziges Byte — die Platte ist exakt so groß wie angegeben. Nur die Einheit, in der gezählt wird, ist eine andere. Und je größer die Kapazität, desto größer die scheinbare Lücke: Bei einer „1-TB"-Platte sind es schon rund 9 Prozent, die im System zu „fehlen" scheinen, obwohl alles korrekt ist. Historisch ist das gewachsen: Lange nutzten alle dieselben Buchstaben (KB, MB, GB) für beide Bedeutungen. Erst 1998 führte die IEC die eindeutigen Bezeichnungen KiB, MiB und GiB für die binären Größen ein — durchgesetzt haben sie sich bis heute nur teilweise, weshalb die Doppeldeutigkeit bestehen bleibt.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '1-TB-Backup: dezimal vs. binär',
+        schritte: [
+          { label: 'Dezimal (Hersteller)', formel: '1 TB = 1.000.000.000.000 Byte', ergebnis: '10¹² Byte' },
+          { label: 'In GiB (Systemanzeige)', formel: '10¹² ÷ 1.073.741.824', ergebnis: '≈ 931,32 GiB' },
+          { label: 'In TiB', formel: '10¹² ÷ 1.099.511.627.776', ergebnis: '≈ 0,909 TiB' },
+        ],
+        fazit: 'Ein 1-TB-Backup-Ziel (dezimal, 10¹² Byte) erscheint im binär zählenden System als rund 931 GiB oder 0,909 TiB. Das ist praxisrelevant: Eine Datei, die das System als „1 TB" anzeigt, ist binär gemeint (= 1 TiB ≈ 1,1 dezimale TB) und passt dann nicht mehr auf eine dezimal beworbene 1-TB-Platte. Wer dezimal und binär auseinanderhält, vermeidet die böse Überraschung, dass der Speicher angeblich „zu klein" ist. Praktischer Merksatz für Backups: Planen Sie immer etwas Reserve ein — eine dezimal beworbene 1-TB-Platte bietet nur rund 0,9 TiB nutzbaren Platz, und Dateisystem-Verwaltung kostet zusätzlich ein paar Prozent. Für ein echtes 1-TiB-Backup sollte das Ziel also eher 1,2 dezimale TB groß sein.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Abweichung dezimal ↔ binär',
+        kopf: ['Präfix', 'dezimal (Byte)', 'binär (Byte)', 'binär größer um'],
+        zeilen: [
+          ['Kilo', '1.000', '1.024', '+2,4 %'],
+          ['Mega', '1.000.000', '1.048.576', '+4,9 %'],
+          ['Giga', '1.000.000.000', '1.073.741.824', '+7,4 %'],
+          ['Tera', '10¹² (1 Bio.)', '1.099.511.627.776', '+10,0 %'],
+          ['Peta', '10¹⁵', '1.125.899.906.842.624', '+12,6 %'],
+        ],
+        fussnote: 'Die Abweichung wächst mit jeder Präfix-Stufe, weil sich der kleine Unterschied (1.024 statt 1.000) bei jeder Stufe erneut multipliziert. Deshalb erscheint eine dezimal beworbene „1-TB"-Platte im binär zählenden System als nur rund 931 GiB — gut 9 Prozent „weniger", obwohl kein Byte fehlt. Auf KB-Ebene ist der Unterschied mit 2,4 Prozent kaum spürbar, auf PB-Ebene sind es bereits 12,6 Prozent — die Lücke ist also kein fester Wert, sondern hängt davon ab, wie hoch das Präfix ist.',
+      },
+      {
+        typ: 'text',
+        titel: 'Wo binär gilt, wo dezimal (RAM vs. Speicher/Netz)',
+        html: `<p>Welches System gilt, hängt vom Bereich ab. <strong>Binär</strong> wird beim <strong>Arbeitsspeicher (RAM)</strong> gerechnet: Ein 8-GB-Riegel ist tatsächlich 8 GiB, also 8 × 1.073.741.824 Byte. Das liegt an der Hardware — Speicher wird über Adressleitungen in Zweierpotenzen angesprochen, weshalb RAM-Größen immer 2, 4, 8, 16, 32 GiB sind und nie krumme Werte.</p><p><strong>Dezimal</strong> rechnen dagegen <strong>Festplatten, SSDs, USB-Sticks</strong> und die <strong>Netzwerk-Bandbreite</strong>: Eine 1-TB-SSD hat 10¹² Byte, ein 100-Mbit-Anschluss überträgt 100 Millionen Bit pro Sekunde. Die Betriebssysteme zeigen Speichergrößen dann je nach Hersteller unterschiedlich an — Windows rechnet binär (und beschriftet es leider als „GB"), macOS und viele Linux-Dateimanager zeigen dezimale GB. Dieselbe Datei kann deshalb auf verschiedenen Systemen mit leicht unterschiedlichen Zahlen erscheinen, ohne dass sich ihre echte Größe ändert. Für den Alltag heißt das: Beim Kauf von Speicher die dezimale Hersteller-Angabe als das nehmen, was sie ist, und bei der Frage „passt das noch drauf?" mit den binären Werten des Systems rechnen. Wer beides kennt, wird von keiner der beiden Zahlen mehr überrascht.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Bit vs. Byte (8 Mbit = 1 MB)',
+        schritte: [
+          { label: '1 Byte besteht aus', formel: '8 Bit', ergebnis: 'Grundbeziehung' },
+          { label: '8 Megabit in Megabyte', formel: '8 Mbit ÷ 8', ergebnis: '1 MB' },
+          { label: 'Beispiel: 100 Mbit/s', formel: '100 ÷ 8', ergebnis: '12,5 MB/s' },
+        ],
+        fazit: 'Bit (kleines b) und Byte (großes B) werden ständig verwechselt. Weil 8 Bit = 1 Byte sind, entsprechen 8 Megabit genau 1 Megabyte. Internetanbieter werben in Megabit pro Sekunde (Mbit/s), Dateigrößen und Downloads rechnen in Megabyte (MB) — der Faktor 8 trennt beide Welten. Ein 100-Mbit-Anschluss überträgt deshalb höchstens 12,5 MB/s. Wer Bit und Byte gleichsetzt, verschätzt sich um den Faktor acht. Faustregel zum Mitnehmen: Großes B steht für Byte (Dateien, Speicher), kleines b für Bit (Übertragung). Eine 200-MB-Datei über eine 50-Mbit-Leitung zu laden, dauert also nicht 4, sondern 32 Sekunden — weil 50 Mbit nur 6,25 MB/s sind.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Dezimal vs. binär im Überblick',
+        spalteA: 'Dezimal (SI: KB, MB, GB)',
+        spalteB: 'Binär (IEC: KiB, MiB, GiB)',
+        zeilen: [
+          { kriterium: 'Faktor pro Stufe', a: '1.000 (10³)', b: '1.024 (2¹⁰)' },
+          { kriterium: 'Typische Verwendung', a: 'Festplatten, SSDs, USB, Netz-Bandbreite', b: 'Arbeitsspeicher (RAM), System-Anzeige' },
+          { kriterium: '1 Einheit auf Giga-Ebene', a: '1 GB = 1.000.000.000 Byte', b: '1 GiB = 1.073.741.824 Byte' },
+          { kriterium: 'Vorteil', a: 'einfach zu rechnen, größere Marketing-Zahl', b: 'passt zur binären Hardware-Adressierung' },
+          { kriterium: 'Norm', a: 'SI-Präfixe', b: 'IEC 80000-13' },
+        ],
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Datenmengen richtig einordnen',
+        punkte: [
+          'Steht die Größe in dezimalen Einheiten (KB/MB/GB) oder binären (KiB/MiB/GiB)?',
+          'Festplatten-, SSD- und USB-Angaben sind dezimal: 1 GB = 1 Milliarde Byte (Hersteller-Marketing).',
+          'Windows zeigt Speichergrößen binär an, beschriftet sie aber oft trotzdem als „GB".',
+          'Bit (b) und Byte (B) nicht verwechseln: 8 Bit = 1 Byte, also 8 Mbit = 1 MB.',
+          'Bei knappem Speicher binär rechnen — eine dezimale 1-TB-Platte fasst nur rund 0,9 TiB.',
+          'Internet-Bandbreite in Mbit/s ist dezimal; für MB/s durch 8 teilen.',
+          'Die Abweichung wächst mit der Größe: auf TB/TiB-Ebene sind es schon rund 10 Prozent.',
+          'Im Zweifel alles in Byte umrechnen — das ist die eindeutige Basiseinheit.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'RAM wird binär gezählt, Festplatten meist dezimal beworben',
+        text: 'Eine gute Eselsbrücke: Arbeitsspeicher (RAM) kommt immer in binären Größen — 8 GB RAM sind tatsächlich 8 GiB (8 × 1.073.741.824 Byte), weil die Hardware binär adressiert wird. Festplatten, SSDs und USB-Sticks werden dagegen dezimal beworben — eine 1-TB-SSD hat 1.000.000.000.000 Byte. Das Betriebssystem rechnet sie dann in binäre Einheiten um und zeigt rund 931 „GB" an, obwohl es GiB meint. Wer das weiß, hält die fehlenden Gigabyte nicht mehr für einen Defekt oder Betrug — es ist nur ein Einheiten-Unterschied. Internetanbieter zählen übrigens wie die Festplatten dezimal. Daher die kurze Merkregel: Was man kauft und überträgt, wird dezimal gezählt; was im Speicher steckt und das System anzeigt, eher binär. Mit dieser Unterscheidung lösen sich die meisten Datenmengen-Rätsel von selbst auf.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Werte sind exakt — nur die Anzeige unterscheidet sich je Gerät',
+        text: 'An den Datenmengen selbst ändert sich nichts: Ein Byte ist ein Byte. Unterschiedlich ist nur, in welche Einheit ein Gerät die Byte-Zahl umrechnet und wie es sie beschriftet. Windows zeigt binäre Größen, beschriftet sie aber meist mit „GB" statt korrekt mit „GiB" — das sorgt für zusätzliche Verwirrung. macOS und viele Linux-Dateimanager zeigen dagegen dezimale GB. Dieselbe Datei kann also je nach System mit leicht verschiedenen Zahlen erscheinen, ohne dass sich ihre tatsächliche Größe ändert. Die Umrechnungen dieses Rechners sind exakt; welche Schreibweise ein konkretes Gerät verwendet, hängt vom Betriebssystem ab. Im Zweifel hilft der Blick auf die Byte-Zahl: Sie ist über alle Systeme hinweg identisch und damit der einzig verlässliche Vergleichsmaßstab. Erst die Umrechnung in ein Präfix — dezimal oder binär — bringt die scheinbaren Unterschiede ins Spiel.',
+      },
+    ],
+    quellen: [
+      {
+        titel: 'IEC 80000-13 — binäre vs. dezimale Präfixe',
+        hinweis: 'KiB/MiB (×1024) vs. KB/MB (×1000); SI-Präfixe sind dezimal, IEC-Präfixe binär.',
+      },
+    ],
+  },
 ];
