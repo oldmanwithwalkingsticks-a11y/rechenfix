@@ -4,7 +4,42 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 13.06.2026
+**Stand:** 19.06.2026
+
+---
+
+## 19.06.2026 — W19 Kategorie-Tranche t36–t40 Goldstandard (Tranche 8 KOMPLETT, 56 Goldstandard)
+
+Gesammelter Doku-Sync für fünf Rechner aus fünf Kategorien (t36–t40); Doku auf
+Karstens Wunsch erst nach t40 nachgezogen. Alle fünf: `contentBloecke` + `quellen`
+(Neueintrag), jeweils Leitformat ≥3–4× dominant, alle `text`-Blöcke ≤170 W,
+Vercel-grün, kein `client-data.ts` mitcommittet. Bestand `erklaerung` + FAQ je
+geprüft und als Fallback belassen (faktisch korrekt, kein Fix nötig).
+
+- **t36 ueberstunden-rechner** (arbeit.ts, Leitformat **beispielrechnung** 5×, 17 Blöcke,
+  ~1.575 W, Commit `c0adbc7`). Netto-Mehrbetrag via `berechneBruttoNetto`-SSOT statt Pauschal-
+  Schätzung (knüpft an P3-B1 aus Welle 3 an).
+- **t37 volumenrechner** (mathe.ts, Leitformat **beispielrechnung** 5×, 13 Blöcke, ~1.657 W,
+  Commit `eb813e8`). 3D-Stereometrie: Quader/Würfel, Zylinder, Kugel/Halbkugel, Kegel, Anwendung
+  Regentonne; Liter-Umrechnung (1 l = 1 dm³ = 1.000 cm³). **Abgrenzung zu flaechenrechner:** 3D-
+  Körper + Volumen statt 2D-Fläche. Beispiele formel-exakt (Kugel r 5 → 523,60 cm³; Kegel = ⅓ Zylinder).
+- **t38 leasing-rechner** (auto.ts, Leitformat **statistik** 3×, 13 Blöcke, ~1.555 W, Commit
+  `83daaae`). **YMYL-nah:** Effektivkosten (Leasingfaktor = Rate/Listenpreis×100, Gesamtkosten =
+  Anzahlung + Raten) transparent, **keine Empfehlung**, zwei „keine Finanzberatung"-Hinweise.
+  3-Wege-Vergleich als 2-Spalten-`vergleich` (Leasing vs. Kauf) umgesetzt (Typ kennt nur 2 Spalten).
+  **Abgrenzung zu autokosten/kfz-steuer/reichweiten:** Fokus Leasing-Finanzierung.
+- **t39 backzeit-rechner** (kochen.ts, Leitformat **tabelle** 3×, 13 Blöcke, ~1.532 W, Commit
+  `ee8af85`). Umluft = Ober-/Unterhitze − 20 °C; Backzeiten je Gericht; Kerntemperaturen (Geflügel
+  ≥ 72 °C, Hygiene). **Abgrenzung zu cups/zucker/backform/trinkgeld:** Temperatur/Zeit je Gericht,
+  Ober-/Unterhitze vs. Umluft statt Mengen-/Maßumrechnung.
+- **t40 tapetenbedarf-rechner** (wohnen.ts, Leitformat **beispielrechnung** 4×, 13 Blöcke,
+  ~1.534 W, Commit `523fa9c`). Bahnen statt Fläche; Beispiele exakt aus
+  `lib/berechnungen/tapetenbedarf.ts` (18 m Umfang → 34 Bahnen → 4/Rolle → 10 Rollen uni;
+  32 cm Rapport → 3/Rolle → 14 Rollen). **Abgrenzung zu laminat/quadratmeter:** Wandflächen +
+  Bahnen + Rapport statt Boden/Fläche.
+
+**Tranche-Stand:** Kategorie-Tranche t36–t40 **KOMPLETT** (Arbeit, Mathe, Auto, Kochen,
+Wohnen — je ein Rechner); contentBloecke-Goldstandard-Set auf **56 Rechner**.
 
 ---
 
