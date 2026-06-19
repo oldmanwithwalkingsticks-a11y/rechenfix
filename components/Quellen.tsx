@@ -16,13 +16,26 @@ interface QuellenProps {
  *
  * Eingeführt mit W15A.3.
  */
+const RECHTS_DOMAINS = ['gesetze-im-internet.de', 'bundesgesetzblatt', 'eur-lex'];
+const RECHTS_KUERZEL = /\b(§|EStG|BGB|ArbZG|SGB|BUrlG|KraftStG|BetrKV|StGB|StVG|StVO|BKatV|WoFlV|BKKG)\b/;
+
 export default function Quellen({ quellen }: QuellenProps) {
   if (!quellen || quellen.length === 0) return null;
+
+  // Überschrift typabhängig: „Rechtsgrundlagen" nur, wenn mindestens eine Quelle
+  // einen Rechtsbezug hat (Gesetzes-Domain in url oder § / Gesetzeskürzel im titel).
+  // Sonst „Methodik" — korrekt für didaktische und reine Daten-/Behördenquellen.
+  const hatRechtsbezug = quellen.some(
+    (q) =>
+      (q.url && RECHTS_DOMAINS.some((d) => q.url!.includes(d))) ||
+      RECHTS_KUERZEL.test(q.titel)
+  );
+  const ueberschrift = hatRechtsbezug ? 'Quellen & Rechtsgrundlagen' : 'Quellen & Methodik';
 
   return (
     <section className="card p-6 md:p-8 mb-8 no-print">
       <h2 className="text-xl md:text-2xl font-bold text-primary-600 dark:text-primary-300 mb-4">
-        Quellen &amp; Rechtsgrundlagen
+        {ueberschrift}
       </h2>
       <ol className="list-decimal pl-6 space-y-3 text-gray-700 dark:text-gray-300 leading-relaxed">
         {quellen.map((q, i) => (
