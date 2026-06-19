@@ -34,7 +34,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const ROOT = resolve(dirname(__filename), '..').split('\\').join('/');
 const CONFIG_DIR = join(ROOT, 'lib/rechner-config');
-const KATEGORIEN = ['alltag','arbeit','auto','finanzen','gesundheit','kochen','mathe','sport','wohnen'];
+const KATEGORIEN = ['alltag','arbeit','auto','finanzen','gesundheit','kochen','mathe','sport','technik','wohnen'];
 
 /**
  * Meta-Routen (statische Top-Level-Routes außerhalb der Kategorie-Routen).
@@ -201,7 +201,7 @@ function walk(dir) {
 }
 
 const FILES = walk(ROOT);
-const PATTERN = /\/(alltag|arbeit|auto|finanzen|gesundheit|kochen|mathe|sport|wohnen)\/([a-z0-9-]+)/g;
+const PATTERN = /\/(alltag|arbeit|auto|finanzen|gesundheit|kochen|mathe|sport|technik|wohnen)\/([a-z0-9-]+)/g;
 
 /**
  * Meta-Routen-Patterns (M4): Single- oder Two-Segment-Cross-Links in

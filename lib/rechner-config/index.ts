@@ -8,6 +8,7 @@ import { matheRechner } from './mathe';
 import { arbeitRechner } from './arbeit';
 import { kochenRechner } from './kochen';
 import { sportRechner } from './sport';
+import { technikRechner } from './technik';
 
 export type { RechnerConfig, KategorieConfig } from './types';
 
@@ -129,6 +130,19 @@ Der [Herzfrequenz-Zonen-Rechner](/sport/herzfrequenz-zonen-rechner) berechnet Ih
 
 Weitere Sport- und Fitness-Rechner sind in Planung, etwa zu Kraft-Trainingsgewichten, Tapering-Strategien oder Regenerations-Zeiten. Wenn Sie einen bestimmten Rechner vermissen, freuen wir uns über Ihr [Feedback](/feedback) — Nutzer-Wünsche fließen direkt in die Priorisierung neuer Rechner ein.`,
   },
+  {
+    slug: 'technik',
+    name: 'Technik',
+    beschreibung: 'Rechner rund um Computer, Internet, Speicher und digitale Einheiten.',
+    icon: '💻',
+    metaTitle: 'Technik-Rechner',
+    metaDescription: 'Kostenlose Technik-Rechner: Internetgeschwindigkeit, Download-Zeit, Datenmengen und mehr. Sofort berechnen ohne Anmeldung.',
+    einleitung: `Rund um Computer und Internet stellen sich immer wieder Fragen, bei denen Einheiten und Größenordnungen leicht durcheinandergeraten: Wie schnell ist mein Anschluss wirklich? Wie lange dauert ein großer Download? Wie viel Datenvolumen frisst eine Stunde 4K-Streaming? Die Kategorie Technik bündelt {COUNT} Rechner für genau solche digitalen Alltagsfragen — sachlich, sofort und ohne Anmeldung.
+
+Die mit Abstand häufigste Verwirrung ist der Unterschied zwischen Mbit/s und MB/s. Internetanbieter werben mit Megabit pro Sekunde, Download-Fenster zeigen dagegen Megabyte pro Sekunde — und weil ein Byte aus acht Bit besteht, sind „100 Mbit" eben nur 12,5 MB/s. Der [Internetgeschwindigkeit-Rechner](/technik/internetgeschwindigkeit-rechner) rechnet zwischen beiden Einheiten um, schätzt die Download-Zeit für Dateien beliebiger Größe und ordnet den Bandbreitenbedarf typischer Nutzungen ein — vom Surfen über HD- und 4K-Streaming bis zum Online-Gaming.
+
+Die Kategorie folgt dem Prinzip „Tiefe vor Breite": Statt vieler oberflächlicher Tools startet sie mit einem ausführlich erklärten Rechner. Weitere Technik-Rechner — etwa zu Datenmengen, Speicherbedarf oder digitalen Einheiten — sind in Planung. Alle Werte dienen der Orientierung; die tatsächliche Geschwindigkeit Ihres Anschlusses hängt von vielen Faktoren ab und lässt sich am verlässlichsten mit der Breitbandmessung der Bundesnetzagentur prüfen.`,
+  },
 ];
 
 export const rechner: RechnerConfig[] = [
@@ -141,6 +155,7 @@ export const rechner: RechnerConfig[] = [
   ...arbeitRechner,
   ...kochenRechner,
   ...sportRechner,
+  ...technikRechner,
 ];
 
 export const beliebteRechnerSlugs = [

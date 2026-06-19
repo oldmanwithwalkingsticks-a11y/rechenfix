@@ -14,7 +14,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const CONFIG_DIR = join(__dirname, '..', 'lib', 'rechner-config');
 const KATEGORIE_DATEIEN = [
   'finanzen.ts', 'gesundheit.ts', 'alltag.ts', 'wohnen.ts',
-  'auto.ts', 'mathe.ts', 'arbeit.ts', 'kochen.ts', 'sport.ts',
+  'auto.ts', 'mathe.ts', 'arbeit.ts', 'kochen.ts', 'sport.ts', 'technik.ts',
 ];
 
 const args = process.argv.slice(2);

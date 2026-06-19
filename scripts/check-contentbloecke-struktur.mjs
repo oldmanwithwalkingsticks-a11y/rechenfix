@@ -12,7 +12,7 @@ import { dirname, join } from 'node:path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const CONFIG_DIR = join(__dirname, '..', 'lib', 'rechner-config');
-const DATEIEN = ['finanzen.ts','gesundheit.ts','alltag.ts','wohnen.ts','auto.ts','mathe.ts','arbeit.ts','kochen.ts','sport.ts'];
+const DATEIEN = ['finanzen.ts','gesundheit.ts','alltag.ts','wohnen.ts','auto.ts','mathe.ts','arbeit.ts','kochen.ts','sport.ts','technik.ts'];
 const GEWICHT = { text:0.2, infobox:0.4, checkliste:0.4, beispielrechnung:1.5, tabelle:1.5, vergleich:2, statistik:2, diagramm:2 };
 const TYPEN = Object.keys(GEWICHT);
 
