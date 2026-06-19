@@ -556,4 +556,191 @@ Kameras nutzen meist 3:2 oder 4:3, Videos 16:9. Beim Zuschnitt auf ein anderes F
       },
     ],
   },
+  {
+    slug: 'stromverbrauch-geraete-rechner',
+    letzteAktualisierung: '2026-06-19',
+    titel: 'Stromverbrauch-Rechner für Geräte',
+    beschreibung: 'Stromverbrauch und -kosten einzelner Geräte berechnen: Watt × Nutzungszeit, Standby und Gerätevergleich.',
+    kategorie: 'Technik',
+    kategorieSlug: 'technik',
+    metaTitle: 'Stromverbrauch-Rechner — Geräte & Standby',
+    metaDescription: 'Stromverbrauch einzelner Geräte berechnen: Watt × Stunden = kWh, Kosten pro Jahr ✓ Standby ✓ Gerätevergleich ✓ Strompreis frei wählbar.',
+    keywords: ['stromverbrauch rechner', 'geräte stromverbrauch', 'watt in kwh', 'stromkosten gerät', 'standby verbrauch', 'kwh berechnen', 'stromfresser', 'stromverbrauch berechnen'],
+    icon: '⚡',
+    formel: 'kWh = Watt × Stunden ÷ 1.000 | Kosten = kWh × Strompreis (€/kWh)',
+    beispiel: 'PC 200 W, 5 h/Tag: 200 × 5 ÷ 1.000 = 1 kWh/Tag → 365 kWh/Jahr × 0,35 € ≈ 128 €/Jahr.',
+    erklaerung: `**Stromverbrauch eines Geräts berechnen**
+
+Der Stromverbrauch eines Geräts ergibt sich aus seiner Leistung in Watt und der Nutzungsdauer. Multipliziert man beides und teilt durch 1.000, erhält man den Verbrauch in Kilowattstunden (kWh) — der Einheit, nach der Strom abgerechnet wird.
+
+**Die Formel**
+
+kWh = Watt × Stunden ÷ 1.000. Ein Gerät mit 200 Watt, das 5 Stunden täglich läuft, verbraucht 200 × 5 ÷ 1.000 = 1 kWh pro Tag, also rund 365 kWh im Jahr. Die Kosten ergeben sich aus kWh × Strompreis: bei 0,35 €/kWh sind das etwa 128 Euro pro Jahr.
+
+**Wo steht die Leistung?**
+
+Die Leistungsaufnahme in Watt steht auf dem Typenschild des Geräts oder im Datenblatt. Manche Geräte verbrauchen je nach Betriebszustand unterschiedlich viel — ein Kühlschrank zieht nur Strom, während der Verdichter läuft.
+
+**Standby nicht vergessen**
+
+Viele Geräte verbrauchen auch im Standby Strom. Über das ganze Jahr summieren sich ein paar Watt Dauerlast zu mehreren Hundert Kilowattstunden. Eine schaltbare Steckdosenleiste trennt die Geräte vollständig vom Netz.
+
+**Strompreis als Eingabe**
+
+Der tatsächliche Strompreis steht auf Ihrer Abrechnung. Tragen Sie ihn ein, um realistische Kosten zu erhalten. Alle Werte sind Orientierung; für genaue Messungen hilft eine Messsteckdose.`,
+    faq: [
+      {
+        frage: 'Wie berechne ich den Stromverbrauch eines Geräts?',
+        antwort: 'kWh = Watt × Stunden ÷ 1.000. Ein 200-Watt-Gerät über 5 Stunden verbraucht 1 kWh. Mal 365 ergibt den Jahresverbrauch, mal dem Strompreis die Kosten. Die Leistung in Watt steht auf dem Typenschild.',
+      },
+      {
+        frage: 'Wie viel kostet 1 kWh Strom?',
+        antwort: 'Der Strompreis liegt 2026 im Schnitt bei rund 35 Cent pro Kilowattstunde, variiert aber je nach Tarif und Region. Ihren genauen Preis finden Sie auf der letzten Stromabrechnung — tragen Sie ihn für realistische Kosten in den Rechner ein.',
+      },
+      {
+        frage: 'Wie viel kostet Standby im Jahr?',
+        antwort: 'Im Standby ziehen Geräte oft 3 bis 15 Watt dauerhaft. In einem Haushalt summieren sich 30 bis 50 Watt Dauerlast — über das Jahr mehrere Hundert kWh und schnell über 100 Euro, nur für scheinbar ausgeschaltete Geräte.',
+      },
+      {
+        frage: 'Welche Geräte verbrauchen am meisten Strom?',
+        antwort: 'Dauerläufer wie Kühl- und Gefriergeräte sowie Heizungspumpen, dazu Geräte mit hoher Heizleistung wie Wäschetrockner, Waschmaschine, Backofen und Wasserkocher. Bei Dauerläufern lohnt sich Effizienz besonders, weil sie das ganze Jahr laufen.',
+      },
+      {
+        frage: 'Lohnt sich der Austausch eines alten Geräts?',
+        antwort: 'Bei Dauerläufern oft ja. Ein alter Kühlschrank kann das Drei- bis Vierfache eines neuen, effizienten Geräts verbrauchen. Über 10 bis 15 Jahre Lebensdauer übersteigt die Stromersparnis dann häufig den Neupreis.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Stromverbrauch eines Geräts berechnen (Watt × Zeit)',
+        html: `<p>Der Stromverbrauch eines Geräts ergibt sich aus zwei Größen: seiner <strong>Leistung in Watt (W)</strong> und der <strong>Nutzungsdauer</strong>. Multipliziert man beides und teilt durch 1.000, erhält man den Verbrauch in <strong>Kilowattstunden (kWh)</strong> — der Einheit, nach der Strom abgerechnet wird. Die Formel lautet: <strong>kWh = Watt × Stunden ÷ 1.000</strong>.</p><p>Ein Gerät mit 200 Watt, das 5 Stunden am Tag läuft, verbraucht also 200 × 5 ÷ 1.000 = 1 kWh pro Tag, über das Jahr rund 365 kWh. Die <strong>Kosten</strong> ergeben sich, indem man die kWh mit dem <strong>Strompreis</strong> multipliziert — bei rund 35 Cent pro kWh sind das etwa 128 Euro im Jahr. Die Leistung steht auf dem <strong>Typenschild</strong> des Geräts oder im Datenblatt. Anders als ein Haushalts-Stromrechner betrachtet dieser Rechner gezielt <strong>einzelne Geräte</strong> — ideal, um Stromfresser aufzuspüren und gegeneinander zu vergleichen. Wer den Gesamtverbrauch des Haushalts wissen will, addiert die Einzelwerte oder nutzt den Stromkosten-Rechner; wer den Beitrag eines bestimmten Geräts kennen möchte, ist hier richtig.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Typische Leistung gängiger Geräte',
+        werte: [
+          { label: 'Kühl-Gefrier-Kombi', wert: '~100 W', hinweis: 'läuft im Takt; je nach Effizienz rund 150–300 kWh im Jahr' },
+          { label: 'Fernseher (LED, 55 Zoll)', wert: '~90 W', hinweis: 'im Betrieb; ältere Plasma-Geräte ziehen deutlich mehr' },
+          { label: 'Desktop-PC', wert: '100–300 W', hinweis: 'Gaming-PCs unter Volllast bis 500 W' },
+          { label: 'Waschmaschine', wert: '~2.000 W', hinweis: 'nur während des Heizens; pro Waschgang rund 0,7–1,5 kWh' },
+          { label: 'Wasserkocher', wert: '~2.000 W', hinweis: 'hohe Leistung, aber nur wenige Minuten in Betrieb' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'PC mit 200 W, 5 h/Tag, 0,35 €/kWh',
+        schritte: [
+          { label: 'Verbrauch pro Tag', formel: '200 W × 5 h ÷ 1.000', ergebnis: '1 kWh' },
+          { label: 'Verbrauch pro Jahr', formel: '1 kWh × 365', ergebnis: '365 kWh' },
+          { label: 'Kosten pro Jahr', formel: '365 kWh × 0,35 €', ergebnis: '127,75 €' },
+        ],
+        fazit: 'Ein PC mit 200 Watt, der täglich 5 Stunden läuft, verbraucht 365 kWh im Jahr und kostet bei 0,35 €/kWh rund 128 Euro — etwa 10,65 Euro im Monat. Wer den Rechner nur halb so lange nutzt, halbiert auch die Kosten. Die Rechnung ist immer dieselbe: Watt mal Stunden geteilt durch 1.000 ergibt die kWh, mal dem Strompreis die Kosten. So lässt sich für jedes Gerät der Jahresbeitrag zur Stromrechnung abschätzen. Eine Plausibilitätskontrolle: 1 kWh am Tag entspricht 365 kWh im Jahr — bei 0,35 €/kWh also rund 128 Euro. Wer diese Bezugsgröße im Kopf hat, ordnet jeden Verbraucher schnell ein: Ein Gerät, das täglich 1 kWh zieht, kostet ungefähr so viel wie ein Wochenend-Tankstopp im Monat.',
+      },
+      {
+        typ: 'text',
+        titel: 'Standby frisst unbemerkt Strom',
+        html: `<p>Viele Geräte verbrauchen Strom, obwohl sie scheinbar <strong>ausgeschaltet</strong> sind. Im <strong>Standby</strong> halten sie Empfangsbereitschaft, Uhrzeit oder die Fernbedienungs-Funktion aufrecht — und ziehen dafür dauerhaft ein paar Watt. Einzeln wirkt das harmlos, doch weil diese Last <strong>rund um die Uhr</strong> anliegt, summiert sie sich über das Jahr beträchtlich.</p><p>Ein Fernseher mit Receiver, eine Spielkonsole, der PC mit Monitor, die Stereoanlage, das Mikrowellen-Display: Zusammen kommen in einem Haushalt schnell <strong>30 bis 50 Watt</strong> Dauerlast zusammen. Über ein Jahr (8.760 Stunden) sind das mehrere Hundert Kilowattstunden — oft <strong>100 Euro und mehr</strong>, nur für den Ruhezustand. Die einfachste Abhilfe ist eine <strong>schaltbare Steckdosenleiste</strong>: Ein Klick trennt alle angeschlossenen Geräte vollständig vom Netz. Geräte, die ständig erreichbar sein müssen — etwa der WLAN-Router —, bleiben ausgenommen, alle anderen lassen sich bedenkenlos ganz abschalten. Seit der EU-Ökodesign-Richtlinie dürfen neue Geräte im Standby nur noch sehr wenig verbrauchen, oft unter 0,5 Watt. Bei älteren Geräten lohnt der Blick aber weiterhin, denn dort liegen die Standby-Werte teils zehnmal so hoch.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Standby-Verbrauch typischer Geräte',
+        werte: [
+          { label: 'TV + Receiver (Standby)', wert: '~3–10 W', hinweis: 'rund 9–30 € im Jahr, nur im Ruhemodus' },
+          { label: 'PC mit Peripherie (Standby)', wert: '~5–15 W', hinweis: 'das Netzteil zieht auch im ausgeschalteten Zustand Strom' },
+          { label: 'WLAN-Router (Dauerbetrieb)', wert: '~10 W', hinweis: '24/7 an: rund 88 kWh und etwa 31 € im Jahr' },
+          { label: 'Ladegeräte ohne Gerät', wert: '~0,1–1 W', hinweis: 'einzeln wenig, in Summe über viele Stecker spürbar' },
+          { label: 'Haushalt gesamt (Standby)', wert: '~300–400 kWh/Jahr', hinweis: 'oft über 100 € im Jahr nur für „aus"-Geräte' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Standby-Kosten im Haushalt (mehrere Geräte)',
+        schritte: [
+          { label: 'Dauer-Standby-Leistung addieren', formel: 'TV 8 + PC 10 + Router 10 + Sonstiges 12', ergebnis: '40 W' },
+          { label: 'Verbrauch pro Jahr (× 8.760 h)', formel: '40 W × 8.760 ÷ 1.000', ergebnis: '≈ 350 kWh' },
+          { label: 'Kosten pro Jahr', formel: '350 kWh × 0,35 €', ergebnis: '≈ 123 €' },
+        ],
+        fazit: 'Rechnet man die ständige Standby-Last eines Haushalts zusammen — Fernseher, PC, Router und diverse Kleingeräte — kommen leicht 40 Watt Dauerlast zustande. Weil diese rund um die Uhr anliegen, ergeben sich über das Jahr etwa 350 kWh und damit rund 123 Euro, nur für Geräte, die scheinbar aus sind. Eine schaltbare Steckdosenleiste eliminiert den größten Teil davon. Der Router muss meist anbleiben, aber Fernseher, Konsole, PC und Audio lassen sich nachts und tagsüber komplett trennen. Praktisch sind Steckdosenleisten mit Fußschalter oder Funksteckdosen, die mehrere Geräte auf einen Griff vom Netz nehmen. Schon das spart in vielen Haushalten den größten Teil der hier gerechneten 123 Euro — Geld, das ohne jeden Komfortverlust eingespart wird.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Gerätevergleich: Verbrauch und Jahreskosten',
+        kopf: ['Gerät', 'Watt', 'h/Tag', 'kWh/Jahr', '€/Jahr (0,35 €)'],
+        zeilen: [
+          ['Kühl-Gefrier-Kombi', '100', '6*', '219', '77 €'],
+          ['Fernseher (LED)', '90', '4', '131', '46 €'],
+          ['Desktop-PC', '150', '5', '274', '96 €'],
+          ['WLAN-Router', '10', '24', '88', '31 €'],
+          ['Waschmaschine', '2.000', '0,3*', '219', '77 €'],
+          ['Wäschetrockner', '2.500', '0,4*', '365', '128 €'],
+          ['LED-Lampe', '10', '5', '18', '6 €'],
+        ],
+        fussnote: 'Beispielwerte bei 0,35 €/kWh; die tatsächlichen Stunden variieren stark. *Bei Kühlschrank und Waschmaschine/Trockner ist die Stundenangabe die effektive Laufzeit (Verdichter-Takt bzw. Heizphase), nicht die Anschlusszeit. Die genaue Leistung steht auf dem Typenschild des Geräts. Auffällig ist, dass die Geräte mit der höchsten Watt-Zahl (Trockner, Waschmaschine) nicht zwingend die höchsten Jahreskosten haben — entscheidend ist immer das Produkt aus Leistung und Laufzeit. Der dauerlaufende Router mit nur 10 Watt kommt auf ähnliche Jahreswerte wie kurz, aber kräftig heizende Geräte.',
+      },
+      {
+        typ: 'text',
+        titel: 'Energieeffizienzklassen & Sparpotenzial',
+        html: `<p>Seit 2021 gilt in der EU ein neues <strong>Energielabel</strong> mit den Klassen <strong>A bis G</strong>. Die früheren Plus-Klassen (A+++, A++) sind entfallen, die Skala wurde verschärft — viele Geräte, die früher A+++ waren, liegen heute bei C oder D. Das Label zeigt neben der Klasse den <strong>Verbrauch in kWh pro Jahr</strong> unter genormten Bedingungen, was Geräte direkt vergleichbar macht.</p><p>Das größte Sparpotenzial steckt bei <strong>Dauerläufern</strong>: Kühlschrank, Gefriertruhe und Heizungspumpe laufen das ganze Jahr, weshalb sich dort schon kleine Effizienzunterschiede stark auswirken. Ein alter Kühlschrank kann das <strong>Drei- bis Vierfache</strong> eines neuen, effizienten Geräts verbrauchen. Über die lange Lebensdauer von 10 bis 15 Jahren übersteigt die Stromersparnis dann oft den Anschaffungspreis. Bei selten genutzten Geräten wie dem Wasserkocher lohnt ein Austausch allein wegen der Effizienz dagegen kaum — hier zählt eher die richtige Nutzung, etwa nur so viel Wasser zu kochen wie nötig. Faustregel fürs Sparen: zuerst die Dauerläufer optimieren, dann die heizenden Großgeräte (Trockner, Backofen) bewusster einsetzen und zuletzt die vielen kleinen Standby-Verbraucher abschalten.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Alter vs. neuer Kühlschrank — die Ersparnis',
+        schritte: [
+          { label: 'Alter Kühlschrank', formel: '~330 kWh/Jahr × 0,35 €', ergebnis: '≈ 116 €/Jahr' },
+          { label: 'Neues, effizientes Gerät', formel: '~100 kWh/Jahr × 0,35 €', ergebnis: '≈ 35 €/Jahr' },
+          { label: 'Ersparnis pro Jahr', formel: '116 € − 35 €', ergebnis: '≈ 81 €' },
+        ],
+        fazit: 'Ein alter Kühlschrank mit rund 330 kWh im Jahr gegen ein modernes, effizientes Gerät mit etwa 100 kWh getauscht, spart rund 230 kWh oder 81 Euro pro Jahr. Über die typische Lebensdauer von 15 Jahren sind das rund 1.200 Euro — oft mehr, als ein neues Gerät kostet. Weil Kühl- und Gefriergeräte rund um die Uhr laufen, lohnt sich Effizienz hier am stärksten. Bei einem alten, ständig brummenden Gerät kann sich der Neukauf allein über die Stromrechnung rechnen. Zur Einordnung lohnt eine einfache Amortisationsrechnung: Kostet ein neues Gerät 500 Euro und spart 80 Euro im Jahr, ist es nach gut sechs Jahren bezahlt — und alle weiteren Jahre bis zum Lebensende sind reiner Gewinn. Genau diese Rechnung kippt bei alten Kühl- und Gefriergeräten oft zugunsten des Austauschs.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Größte Stromverbraucher im Haushalt (Anteile)',
+        werte: [
+          { label: 'Kühlen & Gefrieren', wert: '~11–17 %', hinweis: 'läuft das ganze Jahr durch' },
+          { label: 'Waschen, Trocknen, Spülen', wert: '~12–20 %', hinweis: 'vor allem das Aufheizen von Wasser' },
+          { label: 'Unterhaltung & Büro (TV/PC)', wert: '~10–28 %', hinweis: 'inklusive des Standby-Anteils' },
+          { label: 'Kochen & Backen', wert: '~9–14 %', hinweis: 'Herd, Backofen, Wasserkocher' },
+          { label: 'Beleuchtung', wert: '~8–10 %', hinweis: 'mit LED-Lampen deutlich gesunken' },
+        ],
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Stromfresser identifizieren',
+        punkte: [
+          'Leistung (Watt) auf dem Typenschild oder im Datenblatt ablesen.',
+          'Tägliche Nutzungsdauer realistisch schätzen — im Zweifel etwas großzügig.',
+          'Dauerläufer zuerst prüfen: Kühlschrank, Gefriertruhe, Router, Aquarium-Pumpe.',
+          'Standby-Geräte aufspüren: Was leuchtet oder ist warm, obwohl es „aus" ist?',
+          'Eine Messsteckdose nutzen, um den echten Verbrauch über mehrere Tage zu messen.',
+          'Alte Dauerläufer auf Ersatz prüfen — die Ersparnis kann den Neukauf tragen.',
+          'Schaltbare Steckdosenleisten für die TV-, PC- und Audio-Ecke einsetzen.',
+          'Den eigenen Strompreis (€/kWh) aus der letzten Abrechnung in die Rechnung einsetzen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Eine Messsteckdose deckt heimliche Verbraucher auf',
+        text: 'Wer wissen will, was ein Gerät wirklich verbraucht, steckt ein Energiekosten-Messgerät (Messsteckdose) zwischen Steckdose und Gerät. Es zeigt die aktuelle Leistung in Watt und summiert den Verbrauch über Stunden oder Tage in kWh — gerade bei Geräten mit schwankender Last wie Kühlschrank, PC oder Waschmaschine viel genauer als jede Schätzung. So entlarvt man auch heimliche Standby-Verbraucher und vergessene Dauerläufer. Solche Messgeräte kosten nur wenige Euro und werden von vielen Verbraucherzentralen sogar kostenlos verliehen. Eine Woche Messung pro Gerät genügt meist, um die größten Stromfresser im Haushalt sicher zu finden.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Strompreis als Eingabe — die Werte sind Orientierung',
+        text: 'Die Kostenangaben dieses Rechners hängen direkt vom Strompreis ab, den Sie eingeben. Als Voreinstellung dienen rund 35 Cent pro Kilowattstunde — Ihr tatsächlicher Preis steht auf der letzten Stromabrechnung und kann je nach Tarif und Region spürbar abweichen. Setzen Sie diesen Wert ein, um realistische Zahlen zu erhalten. Auch die Geräteleistung und die Nutzungsdauer sind Schätzwerte: Viele Geräte verbrauchen je nach Betriebszustand sehr unterschiedlich, ein Kühlschrank etwa nur, während der Verdichter läuft. Für eine genaue Messung hilft eine Messsteckdose. Die genannten Verbrauchswerte sind typische Richtwerte und kein Ersatz für die Angaben auf dem Typenschild. Auch der Strompreis ändert sich über die Jahre — eine Rechnung von heute kann morgen schon anders ausfallen. Für langfristige Vergleiche lohnt es sich daher, eher den kWh-Verbrauch als die Euro-Kosten im Blick zu behalten.',
+      },
+    ],
+    quellen: [
+      {
+        titel: 'Stromverbrauch berechnen — Methodik',
+        hinweis: 'kWh = Watt × Stunden / 1000; Kosten = kWh × Strompreis. Die Geräteleistung steht auf dem Typenschild.',
+      },
+      {
+        titel: 'BMWK / co2online — Stromspar-Infos',
+        url: 'https://www.bmwk.de',
+        hinweis: 'Effizienz & Verbrauch',
+      },
+    ],
+  },
 ];
