@@ -438,7 +438,7 @@ Unser Rechner berücksichtigt den Schwerbehinderten-Zusatzurlaub automatisch und
   },
   {
     slug: 'ueberstunden-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-18',
     titel: 'Überstunden-Rechner',
     beschreibung: 'Überstunden berechnen: Pro Woche, Monat und Jahr mit Vergütung, Zuschlag und Stundenlohn-Ermittlung.',
     kategorie: 'Arbeit & Recht',
@@ -501,6 +501,160 @@ Das Arbeitszeitgesetz (ArbZG) setzt klare Grenzen:
 - Wer regelmäßig mehr als 10 Stunden pro Tag arbeitet, verstößt gegen das ArbZG — auch wenn der Arbeitgeber dies anordnet.
 
 In der Praxis bedeutet das: Bei einer 40-Stunden-Woche und 5 Arbeitstagen sind maximal 10 Überstunden pro Woche (2 pro Tag) dauerhaft möglich, sofern der 6-Monats-Durchschnitt eingehalten wird. Kurzfristig können es bis zu 20 Überstunden pro Woche sein (50 + 10 Stunden am Samstag), was aber nur als absolute Ausnahme gedacht ist.`,
+    // W19-Goldstandard: ueberstunden-rechner auf volle Tiefe (15 Bausteine, ~1.560 W),
+    // Leitformat „beispielrechnung" 4× dominant. Werte aus lib/berechnungen/ueberstunden.ts
+    // gespiegelt: Überstunden = tatsächlich − vertraglich; proMonat × 4,33; Stundenlohn =
+    // Brutto ÷ Monatsstunden; Überstundenlohn × (1+Zuschlag); Freizeitausgleich = Std ÷ Tagesstd.
+    // Kanonisches Beispiel 3.500 €/173,33 h → 20,19 €/Std (deckungsgleich beispiel-Feld).
+    // YMYL: KEIN gesetzlicher Pflichtzuschlag — nur Vertrag/Tarif; ArbZG-Grenzen bleiben;
+    // keine Rechtsberatung. erklaerung + FAQ bleiben Fallback (bereits YMYL-korrekt).
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Überstunden — was zählt und was vergütet wird',
+        html: `<p>Überstunden sind die Arbeitszeit, die <strong>über die vertraglich vereinbarte</strong> Wochen- oder Monatsarbeitszeit hinausgeht. Entscheidend ist die individuelle Arbeitszeit aus dem Arbeitsvertrag — nicht die gesetzliche Höchstgrenze.</p><p>Die Berechnung ist einfach: <strong>tatsächliche Arbeitszeit minus vertragliche Arbeitszeit</strong>. Wer bei 40 Vertragsstunden 45 Stunden arbeitet, hat 5 Überstunden pro Woche. Für den Monat wird der Wochenwert mit 4,33 multipliziert (52 Wochen ÷ 12 Monate).</p><p>Nicht jede Mehrarbeit wird aber automatisch bezahlt. Einen Vergütungsanspruch begründen in der Regel nur <strong>angeordnete oder vom Arbeitgeber gebilligte (geduldete)</strong> Überstunden. Wer freiwillig länger bleibt, hat meist keinen Anspruch. Und: Die Beweislast für geleistete Überstunden liegt beim Arbeitnehmer — Dokumentation ist deshalb der Schlüssel. Begrifflich werden „Überstunden" (über die individuelle Arbeitszeit) und „Mehrarbeit" (über die tarifliche oder gesetzliche Höchstarbeitszeit) im Alltag meist synonym verwendet. Dieser Rechner zeigt sowohl die Stundenzahl als auch eine mögliche Vergütung — wahlweise pro Woche, pro Monat oder für einen frei gewählten Zeitraum.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Überstunden-Vergütung ohne Zuschlag',
+        schritte: [
+          { label: 'Stundenlohn aus Bruttogehalt', formel: '3.500 € ÷ 173,33 Std.', ergebnis: '≈ 20,19 €/Std.' },
+          { label: '10 Überstunden im Monat, 0 % Zuschlag', formel: '10 × 20,19 €', ergebnis: '≈ 201,92 € brutto' },
+        ],
+        fazit: 'Ohne vereinbarten Zuschlag wird jede Überstunde mit dem normalen Stundenlohn vergütet. Der Stundenlohn ergibt sich aus Bruttomonatsgehalt geteilt durch die Monatsstunden (bei 40 Std./Woche: 173,33 Std.). Die Auszahlung ist normales Arbeitsentgelt und wird regulär versteuert und sozialversichert — netto bleiben je nach Steuerklasse spürbar weniger als die 201,92 € brutto übrig.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Mit 25 % vertraglichem Zuschlag',
+        schritte: [
+          { label: 'Überstundenlohn mit 25 % Zuschlag', formel: '20,19 € × 1,25', ergebnis: '≈ 25,24 €/Std.' },
+          { label: '10 Überstunden im Monat', formel: '10 × 25,24 €', ergebnis: '≈ 252,40 € brutto' },
+        ],
+        fazit: 'Ein Zuschlag von 25 % erhöht den Stundenlohn für die Mehrarbeit. Wichtig: Dieser Zuschlag ist nicht gesetzlich vorgeschrieben — er gilt nur, wenn er im Arbeits- oder Tarifvertrag vereinbart ist. Im Beispiel bringen 10 Überstunden statt 201,92 € nun 252,40 € brutto, also rund 50 € mehr.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Zuschlag-Szenarien im Vergleich (Stundenlohn 20,19 €, 10 Überstunden)',
+        kopf: ['Zuschlag', 'Überstundenlohn', 'Vergütung (10 Std.)'],
+        zeilen: [
+          ['0 % (Pauschalabgeltung/keine Vereinbarung)', '20,19 €/Std.', '201,92 €'],
+          ['25 % (häufig in Tarifverträgen)', '25,24 €/Std.', '252,40 €'],
+          ['50 % (Sonn-/Feiertag, Nacht)', '30,29 €/Std.', '302,88 €'],
+          ['100 % (selten, unzumutbare Zeiten)', '40,38 €/Std.', '403,84 €'],
+        ],
+        fussnote: 'Die Zuschlagssätze sind branchenübliche Praxiswerte, keine gesetzlichen Vorgaben. Ob und in welcher Höhe ein Zuschlag gilt, steht ausschließlich im Arbeits-, Tarifvertrag oder in einer Betriebsvereinbarung. Die Tabelle zeigt nur die Brutto-Vergütung — netto bleibt nach Steuer und Sozialabgaben weniger übrig; im Rechner selbst lässt sich der Netto-Betrag über Steuerklasse und Bundesland genauer ermitteln.',
+      },
+      {
+        typ: 'text',
+        titel: 'Vergütung oder Freizeitausgleich?',
+        html: `<p>Überstunden können auf zwei Wegen ausgeglichen werden: durch <strong>Auszahlung</strong> oder durch <strong>Freizeitausgleich</strong>. Welcher Weg gilt, richtet sich nach Arbeits- oder Tarifvertrag.</p><p>Beim <strong>Freizeitausgleich</strong> werden die Mehrstunden später als freie Zeit abgebummelt — häufig über ein Arbeitszeit- oder Gleitzeitkonto. Das ist in der Praxis die häufigste Variante. Bei der <strong>Auszahlung</strong> wird die Mehrarbeit finanziell vergütet; nach § 612 BGB ist eine Vergütung geschuldet, wenn sie den Umständen nach zu erwarten war.</p><p>Ohne abweichende Regelung im Vertrag kann der Arbeitgeber meist einseitig bestimmen, ob ausgezahlt oder ausgeglichen wird. Wichtig: Auch beim Freizeitausgleich zählen dieselben Stunden — 8 Überstunden bei einem 8-Stunden-Tag ergeben einen freien Tag. Ein Zuschlag (z. B. 25 %) erhöht je nach Vereinbarung entweder den ausgezahlten Betrag oder die gutgeschriebene Freizeit. Für viele Beschäftigte ist der Freizeitausgleich attraktiver, weil ausgezahlte Überstunden voll versteuert und sozialversichert werden, während freie Zeit „brutto wie netto" zur Verfügung steht — ein Aspekt, der bei der Wahl des Ausgleichswegs oft unterschätzt wird.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Auszahlung vs. Freizeitausgleich',
+        spalteA: 'Auszahlung',
+        spalteB: 'Freizeitausgleich',
+        zeilen: [
+          { kriterium: 'Form', a: 'Geld (Stundenlohn × ggf. Zuschlag)', b: 'Freie Zeit (Stunden gutgeschrieben)' },
+          { kriterium: 'Steuer & Sozialabgaben', a: 'voll abgaben­pflichtig', b: 'keine zusätzliche Abgabe auf Freizeit' },
+          { kriterium: 'Verbreitung', a: 'seltener, oft ohne Zeitkonto', b: 'Praxis-Standard (Gleitzeit-/Arbeitszeitkonto)' },
+          { kriterium: 'Wer entscheidet', a: 'meist Arbeitgeber, wenn Vertrag schweigt', b: 'meist Arbeitgeber, wenn Vertrag schweigt' },
+          { kriterium: 'Rechtsgrundlage', a: '§ 612 BGB (Vergütung zu erwarten)', b: 'Arbeits-/Tarifvertrag, Betriebsvereinbarung' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Freizeitausgleich statt Auszahlung',
+        schritte: [
+          { label: 'Tagesstunden bei 40-Std.-Woche', formel: '40 Std. ÷ 5 Tage', ergebnis: '8 Std./Tag' },
+          { label: '20 angesammelte Überstunden', formel: '20 Std. ÷ 8 Std.', ergebnis: '2,5 Ausgleichstage' },
+        ],
+        fazit: 'Wer 20 Überstunden auf dem Arbeitszeitkonto hat, kann sie bei einem 8-Stunden-Tag in 2,5 freie Tage umwandeln. Beim reinen Stundenausgleich (1:1) bleibt ein eventueller Zuschlag außen vor — ob Zuschlagsstunden auch dem Zeitkonto gutgeschrieben werden, hängt von der Vereinbarung ab.',
+      },
+      {
+        typ: 'text',
+        titel: 'Gibt es einen gesetzlichen Überstundenzuschlag?',
+        html: `<p>Die kurze Antwort: <strong>Nein.</strong> In Deutschland gibt es <strong>keinen gesetzlichen Anspruch</strong> auf einen Überstundenzuschlag. Ob und in welcher Höhe ein Zuschlag gezahlt wird, ergibt sich ausschließlich aus <strong>Arbeitsvertrag, Tarifvertrag oder Betriebsvereinbarung</strong>.</p><p>Übliche Sätze in der Praxis sind 25 % für reguläre Überstunden und 50 % für Sonn-, Feiertags- oder Nachtarbeit — das sind branchenübliche Werte, keine Vorschriften. Verbreitet ist auch die <strong>Pauschalabgeltung</strong>: „Mit dem Gehalt sind alle Überstunden abgegolten." Solche Klauseln sind aber nur wirksam, wenn klar geregelt ist, wie viele Überstunden umfasst sind; pauschale „alle Überstunden"-Klauseln sind nach der Rechtsprechung oft unwirksam, besonders bei niedrigeren Gehältern.</p><p>Steuerlich gilt: Überstundenvergütung ist normales Arbeitsentgelt. Nur echte Sonn-, Feiertags- und Nachtzuschläge können nach § 3b EStG begrenzt steuerfrei sein — die Mehrarbeit selbst nicht. Dieser Rechner bildet keinen automatischen Pflichtzuschlag ab; der Prozentsatz ist frei wählbar.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Pauschalabgeltung im Arbeitsvertrag — wann sie wirksam ist',
+        html: `<p>Viele Arbeitsverträge enthalten eine Klausel wie „Überstunden sind mit dem Gehalt abgegolten". Ob das wirklich gilt, hängt entscheidend von der <strong>Formulierung</strong> ab — und ist häufiger unwirksam, als Arbeitgeber annehmen.</p><p>Eine pauschale Klausel ohne Mengenangabe ist nach der Rechtsprechung des Bundesarbeitsgerichts oft <strong>intransparent und damit unwirksam</strong>: Der Arbeitnehmer kann bei Vertragsschluss nicht erkennen, welche Belastung auf ihn zukommt. Eher Bestand haben Klauseln mit einer <strong>konkreten Obergrenze</strong>, etwa „bis zu 10 Überstunden pro Monat sind mit dem Gehalt abgegolten".</p><p>Eine Sonderrolle spielen <strong>Höherverdiener</strong>: Wer deutlich über der Beitragsbemessungsgrenze verdient oder eine leitende Position innehat, bei dem kann die Erwartung einer gesonderten Vergütung nach § 612 BGB entfallen — Mehrarbeit gilt dann oft als Teil des Gesamtpakets. Bei tariflich oder gering bezahlten Beschäftigten ist eine Pauschalabgeltung dagegen kaum durchsetzbar. Im Zweifel lohnt der genaue Blick in den Vertrag; diese Seite ersetzt keine Rechtsberatung.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Monats- und Jahresbetrachtung hochgerechnet',
+        schritte: [
+          { label: 'Überstunden pro Woche', formel: '45 Std. − 40 Std.', ergebnis: '5 Std./Woche' },
+          { label: 'Hochrechnung auf den Monat', formel: '5 × 4,33', ergebnis: '≈ 21,67 Std./Monat' },
+          { label: 'Hochrechnung auf das Jahr', formel: '5 × 52', ergebnis: '260 Std./Jahr' },
+          { label: 'In Arbeitstagen (8-Std.-Tag)', formel: '260 ÷ 8', ergebnis: '32,5 Tage' },
+        ],
+        fazit: 'Aus scheinbar harmlosen 5 Überstunden pro Woche werden über das Jahr 260 Stunden — mehr als 32 zusätzliche Arbeitstage. Die Jahresbetrachtung macht sichtbar, wie sich regelmäßige Mehrarbeit summiert, und ist oft das stärkste Argument für eine klare Regelung zu Ausgleich oder Auszahlung.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Minusstunden — wenn weniger als vertraglich gearbeitet wird',
+        schritte: [
+          { label: 'Tatsächlich unter Vertrag', formel: '38 Std. − 40 Std.', ergebnis: '−2 Std./Woche' },
+          { label: 'Hochrechnung auf den Monat', formel: '−2 × 4,33', ergebnis: '≈ −8,67 Std.' },
+        ],
+        fazit: 'Liegt die tatsächliche unter der vertraglichen Arbeitszeit, entstehen Minusstunden. Ob sie nachgearbeitet werden müssen, hängt von der Ursache ab: Bei angeordneter Kurzarbeit oder fehlender Arbeitszuweisung durch den Arbeitgeber dürfen Minusstunden in der Regel nicht einseitig dem Arbeitnehmer angelastet werden — das ist Betriebsrisiko (§ 615 BGB). Bei selbst gewähltem früheren Gehen ist hingegen ein Ausgleich üblich.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Arbeitszeitgesetz: Grenzen, die auch für Überstunden gelten',
+        kopf: ['Grenze', 'Wert', 'Rechtsgrundlage'],
+        zeilen: [
+          ['Tägliche Höchstarbeitszeit', '8 Std. (auf 10 verlängerbar*)', '§ 3 ArbZG'],
+          ['Ausgleich für 10-Std.-Tage', 'Ø 8 Std. über 6 Monate / 24 Wochen', '§ 3 ArbZG'],
+          ['Mindestruhezeit zwischen Schichten', '11 Std.', '§ 5 ArbZG'],
+          ['Werktage (Arbeitszeitgesetz)', 'Mo–Sa (6 Tage)', '§ 3 ArbZG'],
+          ['Sonn- und Feiertagsarbeit', 'grundsätzlich verboten (Ausnahmen)', '§§ 9–10 ArbZG'],
+        ],
+        fussnote: '*Die Verlängerung auf 10 Std./Tag ist nur zulässig, wenn im Schnitt über 6 Monate (24 Wochen) 8 Std./Werktag nicht überschritten werden. Überstunden heben diese Grenzen nicht auf — auch angeordnete Mehrarbeit muss im Rahmen des ArbZG bleiben.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Überstunden in Deutschland (Größenordnung)',
+        werte: [
+          { label: 'Bezahlte Überstunden / Jahr', wert: '~1,3 Mrd Std.', hinweis: 'Größenordnung, IAB-Erhebungen' },
+          { label: 'Unbezahlte Überstunden / Jahr', wert: '~0,8 Mrd Std.', hinweis: 'etwa gleiche Größenordnung' },
+          { label: 'Anteil unbezahlter Mehrarbeit', wert: '~40 %', hinweis: 'der gesamten Überstunden' },
+          { label: 'Ø je Vollzeitkraft', wert: '~1 Std./Woche', hinweis: 'stark branchenabhängig' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Überstunden richtig dokumentieren und geltend machen',
+        html: `<p>Weil die <strong>Beweislast</strong> beim Arbeitnehmer liegt, entscheidet die Dokumentation oft darüber, ob Überstunden bezahlt werden. Wer keine Nachweise hat, steht im Streitfall schlecht da.</p><p>Sinnvoll ist eine <strong>laufende Aufzeichnung</strong>: Datum, Beginn und Ende der Arbeit, Pausen und die konkrete Aufgabe. Hilfreich ist außerdem, die <strong>Anordnung oder Duldung</strong> festzuhalten — etwa eine E-Mail des Vorgesetzten oder ein abgezeichneter Stundenzettel. Reine Anwesenheit ohne erkennbaren Auftrag reicht für einen Anspruch meist nicht.</p><p>Zu beachten sind <strong>Ausschlussfristen</strong>: Viele Arbeits- und Tarifverträge verlangen, dass Ansprüche innerhalb von drei oder sechs Monaten schriftlich geltend gemacht werden. Wird die Frist versäumt, verfällt der Anspruch — unabhängig davon, ob die Überstunden geleistet wurden. Ohne solche Klausel gilt die regelmäßige Verjährung von drei Jahren. Im Zweifel den Anspruch früh und schriftlich anmelden. Hilfreich ist seit dem BAG-Beschluss zur Arbeitszeiterfassung (1 ABR 22/21), dass Arbeitgeber verpflichtet sind, Arbeitszeiten objektiv und verlässlich zu erfassen — auf diese Aufzeichnungen lässt sich im Streitfall zurückgreifen.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Überstunden dokumentieren und geltend machen',
+        punkte: [
+          'Jede Überstunde mit Datum, Beginn, Ende und Pausen notieren.',
+          'Anordnung oder Duldung sichern (E-Mail, abgezeichneter Stundenzettel).',
+          'Vertrag/Tarif prüfen: Zuschlag, Pauschalabgeltung, Ausschlussfrist?',
+          'Wahl klären: Auszahlung oder Freizeitausgleich — wer entscheidet?',
+          'ArbZG im Blick: max. 10 Std./Tag, 11 Std. Ruhezeit.',
+          'Ansprüche fristgerecht (oft 3–6 Monate) schriftlich anmelden.',
+          'Bei Streit oder unklarer Klausel anwaltlichen Rat einholen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Kein gesetzlicher Zuschlag — nur Vertrag oder Tarif',
+        text: 'Es gibt in Deutschland keinen gesetzlich vorgeschriebenen Überstundenzuschlag. Ein Zuschlag (z. B. 25 oder 50 %) gilt nur, wenn er im Arbeitsvertrag, Tarifvertrag oder einer Betriebsvereinbarung vereinbart ist — der Prozentsatz in diesem Rechner ist frei wählbar und keine Rechtsvorgabe. Überstunden müssen außerdem entweder vergütet oder durch Freizeit ausgeglichen werden; welcher Weg gilt, regelt der Vertrag. Die Grenzen des Arbeitszeitgesetzes (max. 10 Std./Tag, 11 Std. Ruhezeit) gelten unabhängig davon weiter. Diese Seite ist eine Orientierungshilfe und ersetzt keine Rechtsberatung.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Überstunden schriftlich erfassen',
+        text: 'Halten Sie geleistete Überstunden zeitnah und schriftlich fest — idealerweise mit Datum, Uhrzeit, Tätigkeit und einem Nachweis, dass die Mehrarbeit angeordnet oder geduldet wurde. Im Streitfall trägt der Arbeitnehmer die Beweislast; lückenlose Aufzeichnungen und abgezeichnete Stundenzettel sind dann Gold wert. Seit dem BAG-Beschluss zur Arbeitszeiterfassung (1 ABR 22/21) sind Arbeitgeber ohnehin verpflichtet, Arbeitszeiten systematisch zu erfassen — ein gutes Argument, eine verlässliche Erfassung einzufordern.',
+      },
+    ],
     faq: [
       {
         frage: 'Wie berechne ich meine Überstunden?',
@@ -526,6 +680,10 @@ In der Praxis bedeutet das: Bei einer 40-Stunden-Woche und 5 Arbeitstagen sind m
         frage: 'Wie werden Überstunden versteuert?',
         antwort: 'Überstundenvergütung ist normales Arbeitsentgelt und wird regulär versteuert und sozialversichert. Es gibt keinen Steuerfreibetrag für Überstunden. Nur bestimmte Zuschläge (Sonn-, Feiertags- und Nachtarbeit) können nach § 3b EStG steuerfrei sein.',
       },
+    ],
+    quellen: [
+      { titel: '§ 3 ArbZG: Höchstarbeitszeit', url: 'https://www.gesetze-im-internet.de/arbzg/__3.html', hinweis: 'Arbeitszeitgrenzen' },
+      { titel: '§ 612 BGB: Vergütung', url: 'https://www.gesetze-im-internet.de/bgb/__612.html', hinweis: 'Vergütungsanspruch' },
     ],
     affiliate: [
       { programId: 'ks-auxilia', context: 'ueberstunden' },
