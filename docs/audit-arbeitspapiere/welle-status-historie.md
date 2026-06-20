@@ -8,6 +8,39 @@
 
 ---
 
+## 20.06.2026 — YMYL-Fix firmenwagen: E-Auto-0,25%-Schwelle 70.000 → 100.000 € (Wachstumsbooster 07/2025)
+
+**Befund (recherchiert 19.06.2026, mehrere Primär-/Fachquellen übereinstimmend):**
+`lib/berechnungen/firmenwagen.ts` nutzte `FIRMENWAGEN_E_AUTO_LISTENPREIS_SCHWELLE = 70000`
+— veraltet. Das **Wachstumsbooster-Gesetz** (in Kraft 18./19.07.2025) hob die Bruttolisten-
+preis-Grenze für die 0,25-%-Regelung bei reinen E-Autos von 70.000 € auf **100.000 €**
+(§ 6 Abs. 1 Nr. 4 EStG, gültig für Anschaffung/Erstzulassung ab 01.07.2025). **Folge des Bugs:**
+E-Autos mit BLP 70.001–100.000 € wurden mit 0,5 % statt 0,25 % gerechnet → geldwerter Vorteil
+doppelt so hoch wie korrekt.
+
+**Fix (3 atomare Commits):**
+- **Commit 1 (`488fec4`)** — Lib + Component + Verify-Script (atomar, da Typ-Rename build-koppelnd):
+  `FIRMENWAGEN_E_AUTO_LISTENPREIS_SCHWELLE` 70000 → 100000; Kommentare + Historie (60k bis 2023
+  → 70k 2024–06/2025 → 100k ab 07/2025); Typ-Union/`SATZ`/`FAKTOR`/Zuweisung
+  `eAutoUnter70`/`eAutoUeber70` → **`eAutoUnterSchwelle`/`eAutoUeberSchwelle`** (zukunftssicher,
+  unabhängig vom konkreten Wert); `FirmenwagenRechner.tsx` Select-Values + Labels (70.000 →
+  100.000 €); `scripts/verify-firmenwagen.ts` Schwelle + Namen + Edge-Tests (C-03/C-04 von
+  70k/70.001 auf 100k/100.001 verschoben, C-02 auf echten >100k-Fall 120k) — **51/51 grün**.
+  Probe: E-Auto BLP 85.000 €, GSt 35 % → 0,25 % = 212,50 €/Monat (vorher fälschlich 425).
+- **Commit 2 (`ecc40c6`)** — `lib/rechner-config/auto.ts` Bestand-Texte: firmenwagen-rechner
+  (erklaerung + 2 FAQ) und kfz-steuer-rechner (erklaerung) auf 100.000 € korrigiert, je mit
+  „seit 01.07.2025 angehoben von 70.000 €".
+- **Commit 3 (dieser)** — Doku.
+
+**Erkenntnis (Lehre 11-Verstärkung):** Rechtsstand-Parameter mit Stichtag in 2025/2026 (nach
+Knowledge-Cutoff) gegen Primärquelle prüfen — Memory kannte nur die 70.000-€-Fassung. Außerdem:
+Bei Typ-Member-Renames `grep` über `scripts/` **mitnehmen** (nicht nur lib/components/app) —
+`verify-firmenwagen.ts` war der einzige tsc-Fehler-Verursacher und wäre beim reinen Vercel-Build
+(typecheckt scripts/ nicht zwingend) durchgerutscht, aber `tsc --noEmit` fängt ihn. Sätze
+(0,25 %/0,5 %) und die Hybrid-Logik blieben unverändert.
+
+---
+
 ## 20.06.2026 — Gesammelter Doku-Sync: neue Kategorie Technik (5 Rechner), Sport +3, W19 t41–t45 (69 Goldstandard)
 
 Großer gebündelter Doku-Sync; Doku auf Karstens Wunsch erst nach t45 nachgezogen.
