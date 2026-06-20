@@ -7,8 +7,9 @@
  *   - § 6 Abs. 1 Nr. 4 S. 2 EStG (1-%-Regel als Standard-Methode für die
  *     Privatnutzung): https://www.gesetze-im-internet.de/estg/__6.html
  *   - § 6 Abs. 1 Nr. 4 S. 2 Nr. 4 EStG (E-Auto-Sondersätze: 0,25 % bei
- *     Listenpreis ≤ 70.000 €, 0,5 % darüber; Schwelle seit 01.01.2024 von
- *     60.000 € auf 70.000 € erhöht)
+ *     Listenpreis ≤ 100.000 €, 0,5 % darüber; Schwelle seit 01.07.2025 auf
+ *     100.000 € erhöht (Wachstumsbooster-Gesetz); Historie: 60.000 € bis 2023,
+ *     70.000 € 2024 bis 06/2025, 100.000 € ab 07/2025)
  *   - § 6 Abs. 1 Nr. 4 S. 2 Nr. 5 EStG (Plug-in-Hybrid 0,5 %-Vergünstigung;
  *     Bedingung: CO₂ ≤ 50 g/km ODER elektrische Reichweite ≥ 80 km — eine
  *     der beiden Bedingungen genügt, "hat oder ... beträgt", ab 01.01.2025)
@@ -31,9 +32,9 @@
  *     Tatsächliche-Kosten/Gesamt-km × Privat-km wäre alternativer Pfad,
  *     muss vom User per Steuererklärung selbst gewählt werden
  *   - **Sammelbeförderung, Übernachtungs-Sondertatbestände** NICHT modelliert
- *   - **Historische Werte vor 01.01.2024** (Listenpreis-Schwelle 60.000 €
- *     für E-Auto-0,25 %-Regel) NICHT modelliert; Lib nutzt aktuellen
- *     70.000-€-Wert
+ *   - **Historische Schwellenwerte** (60.000 € bis 2023, 70.000 € 2024 bis
+ *     06/2025) NICHT modelliert; Lib nutzt aktuellen 100.000-€-Wert (ab 07/2025,
+ *     Wachstumsbooster-Gesetz)
  *   - **Lohnsteuer-Anwendung** vereinfacht: nur Grenzsteuersatz multipliziert
  *     mit gwv (kein KiSt-/Soli-Aufschlag); Component-Disclaimer Z. 227–229
  *     verweist explizit darauf
@@ -54,23 +55,25 @@ export const HYBRID_REICHWEITE_MIN_KM = 80;
 
 /**
  * § 6 Abs. 1 Nr. 4 S. 2 Nr. 4 EStG — Listenpreis-Schwelle für E-Auto-
- * Sondersatz: ≤ 70.000 € → 0,25 %; > 70.000 € → 0,5 %. Seit 01.01.2024
- * von 60.000 € auf 70.000 € erhöht.
+ * Sondersatz: ≤ 100.000 € → 0,25 %; > 100.000 € → 0,5 %. Seit 01.07.2025
+ * von 70.000 € auf 100.000 € erhöht (Wachstumsbooster-Gesetz, gültig für
+ * Anschaffung/Erstzulassung ab 01.07.2025). Historie: 60k (bis 2023) →
+ * 70k (2024 bis 06/2025) → 100k (ab 07/2025).
  */
-export const FIRMENWAGEN_E_AUTO_LISTENPREIS_SCHWELLE = 70000;
+export const FIRMENWAGEN_E_AUTO_LISTENPREIS_SCHWELLE = 100000;
 
-export type FirmenwagenAntriebsart = 'verbrenner' | 'hybrid' | 'eAutoUnter70' | 'eAutoUeber70';
+export type FirmenwagenAntriebsart = 'verbrenner' | 'hybrid' | 'eAutoUnterSchwelle' | 'eAutoUeberSchwelle';
 export type FirmenwagenArbeitswegMethode = 'pauschal' | 'einzel';
 
 /**
  * Privatnutzungs-Sätze (1-%-Regel-Variante je Antriebsart).
- * Verbrenner 1 %, Hybrid 0,5 %, E-Auto ≤ 70k 0,25 %, E-Auto > 70k 0,5 %.
+ * Verbrenner 1 %, Hybrid 0,5 %, E-Auto ≤ 100k 0,25 %, E-Auto > 100k 0,5 %.
  */
 export const FIRMENWAGEN_SATZ: Record<FirmenwagenAntriebsart, number> = {
   verbrenner: 0.01,
   hybrid: 0.005,
-  eAutoUnter70: 0.0025,
-  eAutoUeber70: 0.005,
+  eAutoUnterSchwelle: 0.0025,
+  eAutoUeberSchwelle: 0.005,
 };
 
 /**
@@ -80,8 +83,8 @@ export const FIRMENWAGEN_SATZ: Record<FirmenwagenAntriebsart, number> = {
 export const FIRMENWAGEN_FAKTOR: Record<FirmenwagenAntriebsart, number> = {
   verbrenner: 1.0,
   hybrid: 0.5,
-  eAutoUnter70: 0.25,
-  eAutoUeber70: 0.5,
+  eAutoUnterSchwelle: 0.25,
+  eAutoUeberSchwelle: 0.5,
 };
 
 /** § 8 Abs. 2 S. 3 EStG — Pauschal-Faktor 0,03 % × Listenpreis × Entfernung. */
@@ -133,7 +136,7 @@ export interface FirmenwagenErgebnis {
   /** Vergleichs-Berechnung Hybrid (immer Idealfall 0,5 %, pädagogisch). */
   hybrid: FirmenwagenAntriebsErgebnis;
   /**
-   * Vergleichs-Berechnung E-Auto. Sub-Methode (≤ 70k vs. > 70k) wird
+   * Vergleichs-Berechnung E-Auto. Sub-Methode (≤ 100k vs. > 100k) wird
    * automatisch aus dem Listenpreis abgeleitet.
    */
   eAuto: FirmenwagenAntriebsErgebnis;
@@ -191,8 +194,8 @@ export function berechneFirmenwagen(eingabe: FirmenwagenEingabe): FirmenwagenErg
   const hybrid = berechneFuer('hybrid');
   const eAuto = berechneFuer(
     bruttoListenpreis <= FIRMENWAGEN_E_AUTO_LISTENPREIS_SCHWELLE
-      ? 'eAutoUnter70'
-      : 'eAutoUeber70',
+      ? 'eAutoUnterSchwelle'
+      : 'eAutoUeberSchwelle',
   );
 
   return {

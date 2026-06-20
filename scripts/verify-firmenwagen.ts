@@ -64,15 +64,15 @@ const defaultEingabe = {
 cases.push(
   { name: 'A-01 HYBRID_CO2_GRENZE_G_KM = 50 (§ 6 Abs. 1 Nr. 4 S. 2 Nr. 5 EStG)', actual: HYBRID_CO2_GRENZE_G_KM, expected: 50 },
   { name: 'A-02 HYBRID_REICHWEITE_MIN_KM = 80 (§ 6 Abs. 1 Nr. 4 S. 2 Nr. 5 EStG)', actual: HYBRID_REICHWEITE_MIN_KM, expected: 80 },
-  { name: 'A-03 E-Auto-Listenpreis-Schwelle = 70.000 € (seit 01.01.2024)',         actual: FIRMENWAGEN_E_AUTO_LISTENPREIS_SCHWELLE, expected: 70000 },
+  { name: 'A-03 E-Auto-Listenpreis-Schwelle = 100.000 € (seit 01.07.2025, Wachstumsbooster)', actual: FIRMENWAGEN_E_AUTO_LISTENPREIS_SCHWELLE, expected: 100000 },
   { name: 'A-04 SATZ.verbrenner = 0,01 (1 %-Regel)',                                actual: FIRMENWAGEN_SATZ.verbrenner, expected: 0.01, tolerance: 0.0001 },
   { name: 'A-05 SATZ.hybrid = 0,005 (0,5 %)',                                       actual: FIRMENWAGEN_SATZ.hybrid, expected: 0.005, tolerance: 0.0001 },
-  { name: 'A-06 SATZ.eAutoUnter70 = 0,0025 (0,25 %)',                               actual: FIRMENWAGEN_SATZ.eAutoUnter70, expected: 0.0025, tolerance: 0.0001 },
-  { name: 'A-07 SATZ.eAutoUeber70 = 0,005 (0,5 %)',                                 actual: FIRMENWAGEN_SATZ.eAutoUeber70, expected: 0.005, tolerance: 0.0001 },
+  { name: 'A-06 SATZ.eAutoUnterSchwelle = 0,0025 (0,25 %)',                         actual: FIRMENWAGEN_SATZ.eAutoUnterSchwelle, expected: 0.0025, tolerance: 0.0001 },
+  { name: 'A-07 SATZ.eAutoUeberSchwelle = 0,005 (0,5 %)',                           actual: FIRMENWAGEN_SATZ.eAutoUeberSchwelle, expected: 0.005, tolerance: 0.0001 },
   { name: 'A-08 FAKTOR.verbrenner = 1,0',                                            actual: FIRMENWAGEN_FAKTOR.verbrenner, expected: 1.0 },
   { name: 'A-09 FAKTOR.hybrid = 0,5',                                                actual: FIRMENWAGEN_FAKTOR.hybrid, expected: 0.5 },
-  { name: 'A-10 FAKTOR.eAutoUnter70 = 0,25',                                         actual: FIRMENWAGEN_FAKTOR.eAutoUnter70, expected: 0.25 },
-  { name: 'A-11 FAKTOR.eAutoUeber70 = 0,5',                                          actual: FIRMENWAGEN_FAKTOR.eAutoUeber70, expected: 0.5 },
+  { name: 'A-10 FAKTOR.eAutoUnterSchwelle = 0,25',                                   actual: FIRMENWAGEN_FAKTOR.eAutoUnterSchwelle, expected: 0.25 },
+  { name: 'A-11 FAKTOR.eAutoUeberSchwelle = 0,5',                                    actual: FIRMENWAGEN_FAKTOR.eAutoUeberSchwelle, expected: 0.5 },
   { name: 'A-12 PAUSCHAL_FAHRTEN_FAKTOR = 0,0003 (§ 8 Abs. 2 S. 3 EStG)',          actual: FIRMENWAGEN_PAUSCHAL_FAHRTEN_FAKTOR, expected: 0.0003, tolerance: 0.00001 },
   { name: 'A-13 EINZEL_FAHRTEN_FAKTOR = 0,00002 (§ 8 Abs. 2 S. 5 EStG)',           actual: FIRMENWAGEN_EINZEL_FAHRTEN_FAKTOR, expected: 0.00002, tolerance: 0.000001 },
 );
@@ -105,46 +105,46 @@ cases.push(
   { name: 'B-02: steuerMonat = 478,80 € (1140 × 42 %)',    actual: b2.aktuell.steuerMonat, expected: 478.80, tolerance: 0.01 },
 );
 
-// === Cluster C: 1-%-Regel E-Auto + Listenpreis-Schwelle ===
+// === Cluster C: 1-%-Regel E-Auto + Listenpreis-Schwelle (100.000 € ab 01.07.2025) ===
 //
-// E-Auto BLP 50k (≤ 70k → 0,25 %): privat = 125, arbeitsweg = 50k × 0,0003 × 20 × 0,25 = 75
-// E-Auto BLP 80k (> 70k → 0,5 %): privat = 400, arbeitsweg = 80k × 0,0003 × 20 × 0,5 = 240
-// E-Auto BLP 70k Edge (= 70k → 0,25 %): privat = 175, arbeitsweg = 70k × 0,0003 × 20 × 0,25 = 105
+// E-Auto BLP 50k (≤ 100k → 0,25 %): privat = 125, arbeitsweg = 50k × 0,0003 × 20 × 0,25 = 75
+// E-Auto BLP 120k (> 100k → 0,5 %): privat = 600, arbeitsweg = 120k × 0,0003 × 20 × 0,5 = 360
+// Schwellen-Edge: 100k → 0,25 %, 100.001 → 0,5 %
 
 const c1 = berechneFirmenwagen({
-  ...defaultEingabe, bruttoListenpreis: 50000, antrieb: 'eAutoUnter70',
+  ...defaultEingabe, bruttoListenpreis: 50000, antrieb: 'eAutoUnterSchwelle',
 });
 //   gwv = 125 + 75 = 200; steuerMonat = 70
 cases.push(
-  { name: 'C-01 E-Auto 50k (≤ 70k): privat = 125 € (50k × 0,25 %)',     actual: c1.aktuell.privat, expected: 125, tolerance: 0.01 },
+  { name: 'C-01 E-Auto 50k (≤ 100k): privat = 125 € (50k × 0,25 %)',    actual: c1.aktuell.privat, expected: 125, tolerance: 0.01 },
   { name: 'C-01: arbeitsweg = 75 € (× FAKTOR 0,25)',                     actual: c1.aktuell.arbeitsweg, expected: 75, tolerance: 0.01 },
   { name: 'C-01: gwv = 200 €',                                            actual: c1.aktuell.gwv, expected: 200, tolerance: 0.01 },
 );
 
 const c2 = berechneFirmenwagen({
-  ...defaultEingabe, bruttoListenpreis: 80000, antrieb: 'eAutoUeber70',
+  ...defaultEingabe, bruttoListenpreis: 120000, antrieb: 'eAutoUeberSchwelle',
 });
-//   privat = 400; arbeitsweg = 240; gwv = 640
+//   privat = 600; arbeitsweg = 360; gwv = 960
 cases.push(
-  { name: 'C-02 E-Auto 80k (> 70k): privat = 400 € (80k × 0,5 %)',      actual: c2.aktuell.privat, expected: 400, tolerance: 0.01 },
-  { name: 'C-02: arbeitsweg = 240 € (× FAKTOR 0,5)',                     actual: c2.aktuell.arbeitsweg, expected: 240, tolerance: 0.01 },
-  { name: 'C-02: gwv = 640 €',                                            actual: c2.aktuell.gwv, expected: 640, tolerance: 0.01 },
+  { name: 'C-02 E-Auto 120k (> 100k): privat = 600 € (120k × 0,5 %)',   actual: c2.aktuell.privat, expected: 600, tolerance: 0.01 },
+  { name: 'C-02: arbeitsweg = 360 € (× FAKTOR 0,5)',                     actual: c2.aktuell.arbeitsweg, expected: 360, tolerance: 0.01 },
+  { name: 'C-02: gwv = 960 €',                                            actual: c2.aktuell.gwv, expected: 960, tolerance: 0.01 },
 );
 
-// C-03: Schwellen-Edge: BLP 70k Vergleichs-Spalte eAuto → eAutoUnter70 (≤ 70k)
+// C-03: Schwellen-Edge: BLP 100k Vergleichs-Spalte eAuto → eAutoUnterSchwelle (≤ 100k)
 const c3 = berechneFirmenwagen({
-  ...defaultEingabe, bruttoListenpreis: 70000, antrieb: 'verbrenner',
+  ...defaultEingabe, bruttoListenpreis: 100000, antrieb: 'verbrenner',
 });
 cases.push(
-  { name: 'C-03 BLP 70k (Edge): eAuto-Vergleich nutzt eAutoUnter70 (0,25 %)', actual: c3.eAuto.privat, expected: 70000 * 0.0025, tolerance: 0.01 },
+  { name: 'C-03 BLP 100k (Edge): eAuto-Vergleich nutzt eAutoUnterSchwelle (0,25 %)', actual: c3.eAuto.privat, expected: 100000 * 0.0025, tolerance: 0.01 },
 );
 
-// C-04: BLP 70.001 → eAutoUeber70 (> 70k)
+// C-04: BLP 100.001 → eAutoUeberSchwelle (> 100k)
 const c4 = berechneFirmenwagen({
-  ...defaultEingabe, bruttoListenpreis: 70001, antrieb: 'verbrenner',
+  ...defaultEingabe, bruttoListenpreis: 100001, antrieb: 'verbrenner',
 });
 cases.push(
-  { name: 'C-04 BLP 70.001 (Edge): eAuto-Vergleich nutzt eAutoUeber70 (0,5 %)', actual: c4.eAuto.privat, expected: 70001 * 0.005, tolerance: 0.01 },
+  { name: 'C-04 BLP 100.001 (Edge): eAuto-Vergleich nutzt eAutoUeberSchwelle (0,5 %)', actual: c4.eAuto.privat, expected: 100001 * 0.005, tolerance: 0.01 },
 );
 
 // === Cluster D: Hybrid-Bedingungs-Check § 6 Abs. 1 Nr. 4 S. 2 Nr. 5 EStG ===

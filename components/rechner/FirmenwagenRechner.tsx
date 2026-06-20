@@ -74,8 +74,8 @@ export default function FirmenwagenRechner() {
           options={[
             { value: 'verbrenner', label: 'Verbrenner', description: '1 %' },
             { value: 'hybrid', label: 'Plug-in-Hybrid', description: '0,5 %' },
-            { value: 'eAutoUnter70', label: 'E-Auto ≤ 70.000 €', description: '0,25 %' },
-            { value: 'eAutoUeber70', label: 'E-Auto > 70.000 €', description: '0,5 %' },
+            { value: 'eAutoUnterSchwelle', label: 'E-Auto ≤ 100.000 €', description: '0,25 %' },
+            { value: 'eAutoUeberSchwelle', label: 'E-Auto > 100.000 €', description: '0,5 %' },
           ]}
           value={antrieb}
           onChange={(v) => setAntrieb(v as Antrieb)}
