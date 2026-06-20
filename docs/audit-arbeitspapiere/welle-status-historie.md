@@ -4,7 +4,88 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 19.06.2026
+**Stand:** 20.06.2026
+
+---
+
+## 20.06.2026 — Gesammelter Doku-Sync: neue Kategorie Technik (5 Rechner), Sport +3, W19 t41–t45 (69 Goldstandard)
+
+Großer gebündelter Doku-Sync; Doku auf Karstens Wunsch erst nach t45 nachgezogen.
+Umfasst **drei Stränge** (alle einzeln auf `main` deployt): die **neue 10. Kategorie
+Technik** mit 5 Rechnern, **drei neue Sport-Rechner**, und die **W19-t-Tranche t41–t45**.
+Contentbloecke-Goldstandard-Set jetzt auf **69 Rechner** (gemessen via
+`check-contentbloecke-struktur.mjs`). Hinweis: Die ursprünglichen Tranche-Prompts
+beziffern „61 Goldstandard" — das zählt nur die lineare t-Sequenz (56 nach t40 + 5);
+die Technik-/Sport-Neuanlagen kommen on top (56 + 5 + 5 Technik + 3 Sport = 69).
+
+### Neue Kategorie „Technik" (10. Kategorie, „Tiefe vor Breite")
+
+Infrastruktur-Anlage einer neuen Kategorie `technik` (kategorieSlug, icon 💻, Einleitung
+mit Interlink). Registriert in: `lib/rechner-config/index.ts` (Import + Spread +
+Kategorie-Objekt), `lib/social/kategorie-farben.json` (bg [225,245,254] / accent
+[1,87,155], `verify-kategorie-slugs.ts` grün), und in den 3 Tooling-Skripten
+(`check-contentbloecke-wortzahl.mjs`, `check-contentbloecke-struktur.mjs`,
+`slug-drift-scan.mjs` — KATEGORIEN + PATTERN). **Wichtige Erkenntnis:** Ein neuer
+Config-Slug braucht zwingend einen `RechnerLoader`-Eintrag + Component-File, sonst
+rendert die Seite eine leere Rechner-Box (slug-drift-scan prüft das NICHT — der
+RechnerLoader-Kommentar war insofern ungenau). Alle 5 Technik-Rechner mit eigener
+interaktiver Component + RechnerLoader-Eintrag:
+
+- **t01 internetgeschwindigkeit-rechner** (beispielrechnung-Leitformat 4×, ~1.554 W,
+  Commits `5563b11` + `78d445a` + Hotfix `eebd588`). Mbit/s ÷ 8 = MB/s, Download-Zeit =
+  Dateigröße ÷ Bandbreite. **L-W19.JSX (siehe unten) hier erstmals aufgetreten** —
+  gerades `"` im JSX-Text brach den Vercel-Build (react/no-unescaped-entities).
+- **t02 datenmengen-umrechner** (tabelle-Leitformat 3×, ~1.540 W, `6f85539`). Byte/KB/MB/
+  GB/TB/PB (dezimal ×1000) + KiB/MiB/GiB/TiB/PiB (binär ×1024) + Bit; „warum 500 GB als
+  465 GiB erscheinen".
+- **t03 megapixel-rechner** (beispielrechnung-Leitformat 4×, ~1.548 W, `f546212`).
+  MP = (B×H)/1.000.000, Druckgröße bei DPI (Pixel/DPI × 2,54), Seitenverhältnis.
+- **t04 stromverbrauch-geraete-rechner** (statistik-Leitformat 3×, ~1.552 W, `548b9aa`).
+  kWh = Watt × Stunden/Tag × 365 / 1000; Geräte-Presets, Standby-Fokus. Abgrenzung zu
+  wohnen/stromkosten (Geräte statt Haushalt).
+- **t05 bildschirmgroesse-ppi-rechner** (beispielrechnung-Leitformat 4×, ~1.543 W,
+  `3a79c85`). PPI = √(B²+H² px) ÷ Diagonale Zoll (Pythagoras), Zoll↔cm. Abgrenzung zu
+  megapixel (Display statt Foto).
+
+### Sport — 3 neue Rechner (Wellbeing-sensibel)
+
+- **t03 kalorienverbrauch-rechner** (tabelle-Leitformat 3×, 14 Blöcke, ~1.538 W, `0dcf3ff`).
+  MET-Methode: kcal = MET × Gewicht × Dauer. **WELLBEING:** kein Abnehm-/Defizit-Frame,
+  „Aktivitäts-Energie", kein Gewichtsziel-Bezug, ärztliche Rücksprache.
+- **t04 vo2max-rechner** (statistik-Leitformat 3×, 14 Blöcke, ~1.545 W, `bb12fb5`).
+  Cooper (Distanz−504,9)/44,73 + Puls 15×(HFmax/HFruhe). Neutraler Leistungswert,
+  Verlaufsgröße statt Vergleich, ärztliche Abklärung bei Belastungstest.
+- **t05 1rm-rechner** (beispielrechnung-Leitformat 4×, 13 Blöcke, ~1.553 W, `f1bb41f`).
+  Epley Gewicht×(1+Wdh/30) + Brzycki Gewicht×36/(37−Wdh). **WELLBEING:** Schätzung
+  ersetzt riskanten echten Maximalversuch, „Technik vor Gewicht". **Slug `1rm-rechner`**
+  (führende Ziffer) funktioniert problemlos, da Slugs nur als String-Keys/-Values genutzt
+  werden; Component heißt `EinRmRechner`, in allen 3 Stellen konsistent.
+
+### W19 t-Tranche t41–t45 (Tranche 9, je contentBloecke + quellen in Bestand-Kategorie-Datei)
+
+- **t41 bussgeldrechner** (auto.ts, tabelle-Leitformat 4×, ~1.537 W, `91ae932`). YMYL: alle
+  Werte 1:1 aus `lib/berechnungen/bussgeld.ts` (BKatV-Novelle 2021), „keine Rechtsberatung".
+- **t42 durchschnitt-rechner** (mathe.ts, beispielrechnung-Leitformat 5×, ~1.546 W, `d484f2a`).
+  Mittel/gewichtet/Median/Modus aus `durchschnitt.ts`.
+- **t43 einheiten-umrechner** (mathe.ts, tabelle-Leitformat 3×, ~1.544 W, `5191cc7`). Faktoren +
+  Temperatur-Offset 1:1 aus `einheiten.ts`. Keine `/alltag/`-Links (Rechner liegt /mathe/).
+- **t44 stromvergleich-rechner** (wohnen.ts, vergleich-Leitformat 3×, ~1.531 W, `128e719`).
+  Formel aus `stromvergleich.ts`; KEINE festen Tagespreise behauptet (Nutzereingabe + Spannen,
+  Beispielpreise als Illustration). Abgrenzung zu stromkosten (Tarifvergleich).
+- **t45 kochzeit-rechner** (kochen.ts, tabelle-Leitformat 3×, ~1.534 W, `5ebe1af`). Garzeiten
+  Eier/Nudeln/Reis/Kartoffeln/Gemüse/Hülsenfrüchte + Höhe/Siedepunkt. Abgrenzung zu backzeit
+  (Kochen/Garen im Wasser statt Ofen). **Tranche 9 komplett.**
+
+### Methodische Lehre — L-W19.JSX (gerade Quotes im JSX-Text)
+
+In `components/rechner/*.tsx` niemals gerade ASCII-Quotes `"`/`'` als **sichtbaren JSX-Text**
+verwenden — immer typografische („…", '). Die ESLint-Regel `react/no-unescaped-entities`
+bricht den Vercel-Build (`Failed to compile`), läuft aber NUR in der Lint-Phase von
+`next build`, NICHT bei `tsc --noEmit` oder den prebuild-Node-Guards → lokal grün, Vercel rot.
+JSX-Analog zur Backtick-Falle (Lehre 17, nur Config-Template-Literals). Vorfall: t01
+internetgeschwindigkeit (`eebd588`). Prüf-Grep vor Push: `grep -nE '>[^<{]*"[^<]*<'
+components/rechner/<Datei>.tsx` (Attribut-Strings und `{}`-Ausdrücke sind exempt). Memory-Eintrag
+`feedback_jsx_unescaped_quotes.md` angelegt.
 
 ---
 
