@@ -8,6 +8,38 @@
 
 ---
 
+## 20.06.2026 — W19 schritte-rechner Goldstandard (statistik-Leitformat, Wellbeing, t49)
+
+- **Was gebaut:** schritte-rechner (gesundheit.ts) hat jetzt `contentBloecke` +
+  `quellen` (Neueintrag). **13 Blöcke** (≥11, kein WARN). Folge:
+  `text-statistik-beispielrechnung-text-statistik-beispielrechnung-statistik-
+  text-beispielrechnung-vergleich-checkliste-infobox-infobox`.
+  **Leitformat statistik dominant (3×:** Schrittlänge nach Körpergröße,
+  Bewegung als grober Aktivitätsrahmen inkl. WHO-Bewegungsrahmen, Schritte
+  typischer Alltagswege). ~1.562 W, alle drei `text`-Blöcke ≤170 W (max 163).
+- **WELLBEING (moderat):** Bewegung positiv-neutral, **kein Abnehm-/Defizit-
+  Frame**, keine „so verbrennst du X kg"-Logik. „10.000 Schritte" durchgängig
+  als **populäre Faustregel, kein Muss** eingeordnet (Manpo-kei-Herkunft),
+  auch 6.000–8.000 Schritte als sinnvoll benannt. kcal explizit nur grobe
+  Orientierung, ausdrücklich kein Werkzeug, um Essen gegen Schritte
+  aufzurechnen.
+- **Lib-Treue:** Beispiele exakt aus `lib/berechnungen/schritte.ts` gespiegelt:
+  Schrittlänge = Größe × 0,415 (175 cm → 72,6 cm); Distanz = Schritte ×
+  Schrittlänge ÷ 100.000 (10.000 → 7,26 km); kcal = Distanz × Gewicht × 0,9
+  (7,26 × 75 × 0,9 ≈ 490 kcal); Gehzeit = Distanz ÷ km/h (7,26 ÷ 5 ≈ 87 Min,
+  ÷ 6,5 ≈ 67 Min). vergleich macht die Lib-Eigenheit transparent: Tempo ändert
+  nur die Dauer, nicht Distanz/kcal.
+- **Quellen (didaktisch/Daten → „Quellen & Methodik"):** WHO Körperliche
+  Aktivität (150–300 Min/Woche, keine feste Schrittzahl) + Methodik-Hinweis
+  zu Schrittlänge/Distanz/kcal-Schätzcharakter.
+- **Bestand-Audit:** `erklaerung` + 5 FAQ geprüft — fachlich korrekt
+  (Schrittlänge ×0,415, Paluch 2022, ×0,6 beim Laufen), kein Fix nötig,
+  bleiben als Fallback.
+- **Verify:** Wortzahl 1.562 (OK ≥1500), 13 Blöcke kein WARN <11, statistik
+  3× dominant, 3/3 text ≤170 W, Fingerabdruck nicht identisch, Vercel-grün.
+
+---
+
 ## 20.06.2026 — YMYL-Fix firmenwagen: E-Auto-0,25%-Schwelle 70.000 → 100.000 € (Wachstumsbooster 07/2025)
 
 **Befund (recherchiert 19.06.2026, mehrere Primär-/Fachquellen übereinstimmend):**
