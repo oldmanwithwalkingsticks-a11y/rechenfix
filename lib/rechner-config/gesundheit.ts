@@ -1963,7 +1963,7 @@ Die **European Society of Cardiology (ESC)** hat 2024 eine neuere Leitlinie mit 
   },
   {
     slug: 'schritte-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-20',
     titel: 'Schritte-Rechner',
     beschreibung: 'Schritte in Kilometer und Kalorien umrechnen: Tagesziel prüfen und Kalorienverbrauch durch Gehen berechnen.',
     kategorie: 'Gesundheit',
@@ -2027,6 +2027,137 @@ Die Gehgeschwindigkeit beeinflusst die Dauer, aber kaum den Kalorienverbrauch pr
       {
         frage: 'Zählt der Rechner auch Joggen oder Laufen?',
         antwort: 'Der Rechner ist für normales Gehen optimiert. Beim Joggen ist die Schrittlänge länger und der Kalorienverbrauch höher. Für Laufstrecken verwenden Sie besser den Kalorienrechner mit der Aktivität „Joggen". Die Schrittlänge beim Laufen beträgt etwa Körpergröße × 0,6 statt × 0,415.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Schritte in eine Distanz umrechnen',
+        html: `<p>Ein Schrittzähler zeigt zunächst nur eine nackte Zahl — erst die Umrechnung in Kilometer macht sie greifbar. Dafür braucht es zwei Größen: die <strong>Anzahl der Schritte</strong> und die <strong>Schrittlänge</strong>. Die Schrittlänge schätzt der Rechner aus Ihrer Körpergröße, weil beide eng zusammenhängen: Wer größer ist, hat in der Regel längere Beine und legt pro Schritt mehr Strecke zurück.</p><p>Die Rechnung selbst ist eine einfache Multiplikation: Schritte mal Schrittlänge ergibt die Gesamtstrecke in Zentimetern, geteilt durch 100.000 sind es Kilometer. Aus 10.000 Schritten bei 72,6 Zentimetern Schrittlänge werden so rund 7,3 Kilometer. Exakt wird dieser Wert nie, weil die Schrittlänge mit Tempo, Untergrund und Tagesform schwankt — als ehrliche Orientierung für den Alltag reicht die Näherung aber völlig aus. Sie verwandelt eine abstrakte Zählerzahl in eine Strecke, die man sich tatsächlich vorstellen kann. Wer mehrere Tage vergleicht, erkennt schnell, wie unterschiedlich ähnlich wirkende Tage tatsächlich sind — ein paar bewusst eingebaute Wege summieren sich rasch zu einem Kilometer mehr.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Schrittlänge nach Körpergröße',
+        werte: [
+          { label: '1,55 m Körpergröße', wert: '≈ 64 cm', hinweis: 'rund 1.555 Schritte pro Kilometer' },
+          { label: '1,65 m Körpergröße', wert: '≈ 68 cm', hinweis: 'rund 1.461 Schritte pro Kilometer' },
+          { label: '1,75 m Körpergröße', wert: '≈ 73 cm', hinweis: 'rund 1.377 Schritte pro Kilometer' },
+          { label: '1,85 m Körpergröße', wert: '≈ 77 cm', hinweis: 'rund 1.303 Schritte pro Kilometer' },
+          { label: '1,95 m Körpergröße', wert: '≈ 81 cm', hinweis: 'rund 1.236 Schritte pro Kilometer' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '10.000 Schritte bei 1,75 m in Kilometer',
+        schritte: [
+          { label: 'Schrittlänge aus Körpergröße', formel: '175 cm × 0,415', ergebnis: '72,6 cm' },
+          { label: 'Gesamtstrecke in Zentimetern', formel: '10.000 × 72,6 cm', ergebnis: '726.000 cm' },
+          { label: 'In Kilometer umrechnen', formel: '726.000 ÷ 100.000', ergebnis: '7,26 km' },
+        ],
+        fazit: 'Aus 10.000 Schritten werden bei 1,75 Metern Körpergröße rund 7,3 Kilometer — eine Strecke, die viele unterschätzen. Der einzige individuelle Hebel in dieser Rechnung ist die Schrittlänge: Sie hängt an der Körpergröße und sorgt dafür, dass größere Menschen für dieselbe Schrittzahl eine etwas längere Strecke zurücklegen. Eine 1,60 Meter große Person käme mit 10.000 Schritten auf etwa 6,6 Kilometer, eine 1,90 Meter große auf rund 7,9 Kilometer. Die Schrittlänge ist dabei selbst nur geschätzt; wer es genauer wissen will, geht 100 Schritte auf einer abgemessenen Strecke ab und teilt die Distanz durch 100. Für den Alltag genügt die Näherung aber — sie macht aus einer abstrakten Zählerzahl eine Strecke, die man sich vorstellen kann, etwa als Weg quer durch die Stadt und wieder zurück.',
+      },
+      {
+        typ: 'text',
+        titel: 'Woher die „10.000 Schritte" kommen',
+        html: `<p>Die Marke von 10.000 Schritten klingt nach einer medizinischen Vorgabe — tatsächlich ist sie eine populäre Faustregel ohne festen Schwellenwert. Ihren Ursprung hat sie in einer japanischen Werbekampagne der 1960er-Jahre: Ein Schrittzähler wurde unter dem Namen „Manpo-kei" vermarktet, was sinngemäß „10.000-Schritte-Messer" bedeutet. Die runde Zahl blieb hängen, weil sie leicht zu merken ist — nicht, weil sie wissenschaftlich hergeleitet wäre.</p><p>Aus heutiger Sicht ist sie ein brauchbares, aber nicht zwingendes Ziel. Wer deutlich weniger geht, profitiert bereits spürbar; wer mehr schafft, schadet sich nicht. Entscheidend ist nicht das Erreichen einer bestimmten Zahl, sondern überhaupt regelmäßig in Bewegung zu kommen. Sehen Sie die 10.000 daher als bequeme Orientierung — nicht als Pflichtpensum, das man Tag für Tag abhaken muss. Auch ein Ziel von 6.000 oder 8.000 Schritten ist völlig in Ordnung, wenn es dauerhaft zum eigenen Alltag passt. Viele Fitness-Apps setzen die Marke nur deshalb als Standard, weil sie eingängig ist; ein niedrigerer Wert ist genauso legitim, wenn er besser zu Ihrem Tag passt.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Bewegung einordnen — Schritte als grober Aktivitätsrahmen',
+        werte: [
+          { label: 'unter 5.000 Schritte/Tag', wert: 'eher wenig aktiv', hinweis: 'typisch für einen überwiegend sitzenden Alltag' },
+          { label: '5.000–7.500 Schritte', wert: 'mäßig aktiv', hinweis: 'Bereich, in dem viele den größten Zugewinn spüren' },
+          { label: '7.500–10.000 Schritte', wert: 'aktiv', hinweis: 'deckt einen Großteil des Alltags-Bewegungsnutzens ab' },
+          { label: 'über 10.000 Schritte', wert: 'sehr aktiv', hinweis: 'mehr ist möglich, aber ausdrücklich kein Muss' },
+          { label: 'WHO-Bewegungsrahmen', wert: '150–300 Min/Woche', hinweis: 'moderate Aktivität pro Woche — die WHO nennt keine feste Schrittzahl' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '10.000 Schritte in Gehzeit (5 km/h)',
+        schritte: [
+          { label: 'Zurückgelegte Distanz (175 cm)', formel: '10.000 × 72,6 cm ÷ 100.000', ergebnis: '7,26 km' },
+          { label: 'Gehgeschwindigkeit (normales Tempo)', formel: '5 km/h', ergebnis: '5 km/h' },
+          { label: 'Gehzeit berechnen', formel: '7,26 km ÷ 5 km/h', ergebnis: '≈ 1,45 h' },
+          { label: 'In Minuten', formel: '1,45 × 60', ergebnis: '≈ 87 Min' },
+        ],
+        fazit: 'Für 10.000 Schritte im normalen Gehtempo von 5 km/h braucht man gut anderthalb Stunden — knapp 87 Minuten. Das klingt nach viel, verteilt sich im Alltag aber meist unbemerkt: der Weg zur Arbeit, ein Gang in der Mittagspause, Besorgungen am Nachmittag und ein Spaziergang am Abend summieren sich schnell. Das Tempo verändert dabei nur die Dauer, nicht die Strecke — wer zügiger geht, ist früher fertig, legt bei gleicher Schrittzahl aber dieselben Kilometer zurück. Man muss die 87 Minuten auch nicht am Stück gehen: drei Etappen zu je rund einer halben Stunde führen zum selben Ergebnis. Gerade diese Aufteilung macht das Ziel realistisch, weil sich kurze Geh-Einheiten leichter in einen vollen Tag einbauen lassen als ein einzelner langer Marsch. Wer das Tempo erhöht, spart Zeit: Bei zügigem Gehen mit 6,5 km/h sinkt die Dauer auf rund 67 Minuten, ohne dass sich die zurückgelegte Strecke ändert. Welches Tempo das richtige ist, hängt allein davon ab, ob gerade die Zeit oder die Bewegung im Vordergrund steht — beides bringt dieselben Kilometer aufs Konto.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Schritte typischer Alltagswege',
+        werte: [
+          { label: 'Eine Etage Treppe steigen', wert: '≈ 20 Schritte' },
+          { label: '10 Minuten Spaziergang (5 km/h)', wert: '≈ 1.150 Schritte' },
+          { label: 'Kurzer Einkauf zu Fuß', wert: '≈ 800–1.500 Schritte' },
+          { label: '20 Minuten mit dem Hund', wert: '≈ 2.300 Schritte' },
+          { label: 'Sitzender Bürotag (ohne Wege)', wert: '≈ 1.500–3.000 Schritte', hinweis: 'zeigt, warum bewusst eingebaute Wege den Unterschied machen' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Schritte grob in Kalorien — nur eine Orientierung',
+        html: `<p>Wie viele Kalorien beim Gehen verbraucht werden, lässt sich nur grob schätzen. Der Rechner nutzt eine einfache Näherung: zurückgelegte Distanz mal Körpergewicht mal 0,9. Das Gewicht steht in der Formel, weil schwerere Menschen pro Kilometer mehr Energie aufwenden müssen, um ihre Masse zu bewegen.</p><p>Diese Schätzung ist bewusst simpel und blendet vieles aus: Steigung, feine Abstufungen des Gehtempos, Wind, Untergrund und die individuelle Stoffwechsellage spielen alle eine Rolle. Zwei Menschen mit gleichem Gewicht können bei identischer Strecke unterschiedlich viel verbrauchen. Verstehen Sie die Kalorienangabe deshalb als ungefähre Hausnummer, nicht als exakten Messwert — und schon gar nicht als Grundlage, um Essen gegen Schritte aufzurechnen. Bewegung tut gut, ganz unabhängig davon, wie viele Kalorien dabei genau zusammenkommen. Für gesundheitliche Ziele zählt ohnehin die regelmäßige Bewegung selbst, nicht die exakte Kalorienzahl, die ein Schrittzähler ausweist — diese ist bestenfalls ein grober Anhaltspunkt.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Kalorien-Schätzung für 10.000 Schritte (75 kg)',
+        schritte: [
+          { label: 'Zurückgelegte Distanz (175 cm)', formel: '10.000 × 72,6 cm ÷ 100.000', ergebnis: '7,26 km' },
+          { label: 'Kalorien-Näherung', formel: 'Distanz × Gewicht × 0,9', ergebnis: 'Formel' },
+          { label: 'Werte einsetzen', formel: '7,26 × 75 × 0,9', ergebnis: '≈ 490 kcal' },
+        ],
+        fazit: 'Rund 490 Kalorien schätzt der Rechner für 10.000 Schritte bei 75 Kilogramm — das entspricht etwa einer kleinen Mahlzeit. Die Betonung liegt auf „schätzt": Der Wert ergibt sich allein aus Strecke und Gewicht, weshalb er nur eine Größenordnung liefert. Eine leichtere Person verbraucht bei gleicher Strecke weniger, eine schwerere mehr, weil das Bewegen der eigenen Masse den Hauptteil des Aufwands ausmacht. Steigungen, Tempo und Untergrund kommen in der Realität hinzu, bleiben in dieser einfachen Formel aber unberücksichtigt. Deshalb taugt die Zahl gut, um ein Gefühl für die Größenordnung zu bekommen, nicht aber für eine genaue Kalorienbilanz. Und sie ist kein Argument, Bewegung gegen Essen aufzurechnen — der Nutzen des Gehens liegt vor allem in seiner Wirkung auf Herz, Kreislauf und Stimmung.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Normales Gehen vs. zügiges Gehen',
+        spalteA: 'Normales Gehen (5 km/h)',
+        spalteB: 'Zügiges Gehen (6,5 km/h)',
+        zeilen: [
+          { kriterium: 'Distanz für 10.000 Schritte', a: '≈ 7,26 km', b: '≈ 7,26 km' },
+          { kriterium: 'Gehzeit', a: '≈ 87 Min', b: '≈ 67 Min' },
+          { kriterium: 'Kalorien-Schätzung (75 kg)', a: '≈ 490 kcal', b: '≈ 490 kcal' },
+          { kriterium: 'Belastung', a: 'gemütlich, gut für Einsteiger', b: 'höhere Herzfrequenz, mehr Trainingsreiz' },
+          { kriterium: 'Wofür geeignet', a: 'Alltagswege, lockere Spaziergänge', b: 'bewusstes Walking-Training' },
+        ],
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Mehr Bewegung in den Alltag bringen',
+        punkte: [
+          'Eine Haltestelle früher aussteigen und den Rest zu Fuß gehen.',
+          'Treppe statt Aufzug oder Rolltreppe nehmen.',
+          'Telefonate im Gehen statt im Sitzen führen.',
+          'In der Mittagspause eine kurze Runde an die frische Luft drehen.',
+          'Kurze Besorgungen zu Fuß oder mit dem Rad erledigen statt mit dem Auto.',
+          'Beim Fernsehen oder Zähneputzen ein paar Schritte auf der Stelle gehen.',
+          'Sich feste Geh-Anlässe schaffen — etwa einen regelmäßigen Abendspaziergang.',
+          'Kleine Ziele setzen und langsam steigern, statt sofort 10.000 Schritte zu erzwingen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Auch 6.000–8.000 Schritte bringen messbaren Nutzen',
+        text: 'Sie müssen die 10.000-Schritte-Marke nicht jeden Tag knacken, um etwas für sich zu tun. Der größte gesundheitliche Sprung passiert beim Übergang von „kaum aktiv" zu „etwas aktiv" — also schon dann, wenn aus 2.000 bis 3.000 Schritten regelmäßige 6.000 bis 8.000 werden. Jeder zusätzliche Spaziergang zählt, und es ist völlig in Ordnung, an manchen Tagen weniger zu schaffen. Wichtiger als eine perfekte Tageszahl ist, dass Bewegung dauerhaft Teil des Alltags bleibt. Wer sich an einer realistischen, gut erreichbaren Marke orientiert, bleibt eher dabei als jemand, der ein hohes Ziel ständig verfehlt und irgendwann frustriert aufgibt. Untersuchungen zur Bewegung zeigen denselben Trend: Der relative Nutzen ist im unteren Schrittbereich am größten und flacht nach oben hin ab. Für die meisten Menschen ist ein stabiler Alltag mit 6.000 bis 8.000 Schritten daher wertvoller als ein gelegentlicher Ausreißer nach oben.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Kalorienwerte sind grobe Schätzungen',
+        text: 'Die Kalorienangabe dieses Rechners ist eine Näherung und kein Messwert. Sie beruht allein auf Distanz und Körpergewicht und lässt Faktoren wie Steigung, feine Abstufungen des Gehtempos, Untergrund, Wind und die persönliche Stoffwechsellage außen vor. Real kann der Verbrauch deutlich nach oben oder unten abweichen. Nutzen Sie den Wert deshalb nur als groben Anhaltspunkt — etwa, um Größenordnungen einzuschätzen, nicht, um eine Ernährungsbilanz auf die Kalorie genau zu führen. Auch von der Idee, einzelne Mahlzeiten gegen eine bestimmte Schrittzahl abzuarbeiten, raten Fachleute ab: Bewegung und Ernährung lassen sich nicht sauber gegeneinander verrechnen. Gehen ist in erster Linie wegen seiner Wirkung auf Herz, Kreislauf und Wohlbefinden wertvoll. Wenn Sie den Verbrauch genauer wissen möchten, liefern Pulsuhren oder Aktivitätstracker mit Herzfrequenzmessung realistischere Werte — aber auch sie bleiben Schätzungen. Für den Alltag genügt es völlig, die ungefähre Größenordnung zu kennen.',
+      },
+    ],
+    quellen: [
+      {
+        titel: 'WHO — Körperliche Aktivität',
+        url: 'https://www.who.int',
+        hinweis: 'Bewegungsempfehlung 150–300 Minuten moderate Aktivität pro Woche; keine feste Schrittzahl als Ziel.',
+      },
+      {
+        titel: 'Schrittlänge & Distanz — Methodik',
+        hinweis: 'Schrittlänge ≈ Körpergröße × 0,415; Distanz = Schritte × Schrittlänge. Kalorienwerte sind grobe Schätzungen und individuell sehr variabel.',
       },
     ],
   },
