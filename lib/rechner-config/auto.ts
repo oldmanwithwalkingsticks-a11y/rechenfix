@@ -1871,5 +1871,134 @@ Zahlt der Arbeitnehmer eine **monatliche Eigenbeteiligung** (z. B. 100 €), min
       { frage: 'Lohnt sich ein Fahrtenbuch?', antwort: 'Ein Fahrtenbuch lohnt sich bei geringer Privatnutzung (< 30 %) und teuren Fahrzeugen. Sie dokumentieren jede Fahrt lückenlos und versteuern am Jahresende nur den tatsächlichen Privatanteil der realen Kosten. Aber: Das Fahrtenbuch muss vollständig sein — Lücken führen dazu, dass das Finanzamt die 1 %-Regel anwendet.' },
       { frage: 'Kann ich die Einzelbewertung nutzen?', antwort: 'Ja — die Einzelbewertung (0,002 % × km × Fahrten) lohnt sich, wenn Sie weniger als 15 Tage pro Monat ins Büro fahren, z. B. bei Homeoffice oder Außendienst. Statt der pauschalen 0,03 % wird der Arbeitsweg dann nur mit den tatsächlichen Fahrten angesetzt. Dokumentation pflicht.' },
     ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Firmenwagen versteuern — der geldwerte Vorteil',
+        html: `<p>Wer einen <strong>Firmenwagen</strong> auch privat nutzen darf, hat dadurch einen <strong>geldwerten Vorteil</strong> — und der muss als Teil des Einkommens versteuert werden. Die gängigste Methode ist die <strong>1-%-Regel</strong>: Pro Monat wird 1 % des <strong>Bruttolistenpreises (BLP)</strong> als Vorteil angesetzt, unabhängig davon, wie viel man privat fährt.</p><p>Maßgeblich ist der <strong>inländische Listenpreis zum Zeitpunkt der Erstzulassung</strong> inklusive Sonderausstattung und Mehrwertsteuer — nicht der tatsächliche Kaufpreis. Rabatte oder ein Gebrauchtkauf ändern daran nichts. Für <strong>Elektro- und Hybridfahrzeuge</strong> gelten reduzierte Sätze, um die E-Mobilität zu fördern. Kommt der Arbeitsweg hinzu, wird ein <strong>Zuschlag</strong> fällig. Dieser Rechner ermittelt den geldwerten Vorteil je Antriebsart und schätzt die monatliche Steuerlast über Ihren Grenzsteuersatz — als Orientierung, nicht als Steuerberatung. Wichtig zu verstehen: Der geldwerte Vorteil ist kein Betrag, den man bar zahlt, sondern ein fiktives Zusatzeinkommen. Versteuert wird er wie normaler Lohn, sodass die echte Belastung nur die darauf entfallende Steuer ist — nicht der volle Vorteilsbetrag. Wer den Firmenwagen rein dienstlich nutzt und das per Fahrtenbuch nachweist, kann die Versteuerung sogar ganz vermeiden.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '1-%-Regel beim Verbrenner (40.000 € BLP)',
+        schritte: [
+          { label: '1-%-Regel auf den Bruttolistenpreis', formel: '40.000 € × 1 %', ergebnis: '400 €/Monat' },
+          { label: 'Geldwerter Vorteil pro Jahr', formel: '400 € × 12', ergebnis: '4.800 €' },
+        ],
+        fazit: 'Beim Verbrenner werden pro Monat 1 % des Bruttolistenpreises als geldwerter Vorteil angesetzt — bei 40.000 € BLP also 400 €, über das Jahr 4.800 €. Dieser Betrag wird dem zu versteuernden Einkommen zugerechnet; die tatsächliche Belastung ist die darauf anfallende Steuer (siehe Beispiel zum Grenzsteuersatz). Wichtig: Maßgeblich ist der Listenpreis zur Erstzulassung inklusive Sonderausstattung, nicht der reale Kaufpreis. Wer den Wagen auch für den Arbeitsweg nutzt, zahlt zusätzlich einen Wegezuschlag. Die 1-%-Regel ist bewusst einfach gehalten — sie verlangt keine Aufzeichnungen, setzt den Vorteil aber pauschal an, unabhängig davon, ob man täglich oder nur selten privat fährt.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'E-Auto mit 0,25 % bei 85.000 € BLP',
+        schritte: [
+          { label: 'E-Auto (BLP ≤ 100.000 €): 0,25 %', formel: '85.000 € × 0,25 %', ergebnis: '212,50 €/Monat' },
+          { label: 'Verbrenner zum Vergleich: 1 %', formel: '85.000 € × 1 %', ergebnis: '850 €/Monat' },
+          { label: 'Unterschied beim geldwerten Vorteil', formel: '850 € − 212,50 €', ergebnis: '637,50 €/Monat' },
+        ],
+        fazit: 'Für ein reines Elektroauto bis 100.000 € Bruttolistenpreis gilt nur 0,25 % — ein Viertel des Verbrenner-Satzes. Bei 85.000 € sind das 212,50 € geldwerter Vorteil pro Monat statt 850 € beim vergleichbaren Verbrenner. Die Differenz von 637,50 € pro Monat senkt das zu versteuernde Einkommen entsprechend und spart je nach Grenzsteuersatz spürbar Steuer. Genau dieser Vorteil macht E-Autos als Dienstwagen so attraktiv. Plug-in-Hybride liegen mit 0,5 % dazwischen, sofern sie die CO₂- oder Reichweiten-Bedingung erfüllen.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Versteuerungssätze nach Antriebsart',
+        kopf: ['Antrieb', 'Satz (Privat/Monat)', 'Bedingung'],
+        zeilen: [
+          ['Verbrenner', '1 % des BLP', 'Standard'],
+          ['Plug-in-Hybrid', '0,5 % des BLP', 'CO₂ ≤ 50 g/km ODER E-Reichweite ≥ 80 km'],
+          ['Reines E-Auto, BLP ≤ 100.000 €', '0,25 % des BLP', 'seit 01.07.2025'],
+          ['Reines E-Auto, BLP > 100.000 €', '0,5 % des BLP', '0,25-%-Vorteil entfällt'],
+        ],
+        fussnote: 'Der Satz wird monatlich auf den vollen Bruttolistenpreis (BLP) angewendet. Beim Arbeitsweg-Zuschlag wirkt derselbe Antriebs-Faktor (ein E-Auto ≤ 100.000 € zahlt auch hier nur ein Viertel). Erfüllt ein Hybrid die Bedingung nicht, fällt er auf die 1-%-Regel zurück. Maßgeblich ist immer der Listenpreis zur Erstzulassung. Die Sätze gelten bundeseinheitlich; regionale Unterschiede gibt es bei der Firmenwagenbesteuerung nicht, anders als etwa bei der Kfz-Steuer oder den Stromnetzentgelten.',
+      },
+      {
+        typ: 'text',
+        titel: 'Die 100.000-€-Schwelle bei E-Autos (seit 07/2025)',
+        html: `<p>Reine <strong>Elektroautos</strong> als Firmenwagen sind steuerlich besonders begünstigt: Statt 1 % wird nur <strong>0,25 %</strong> des Bruttolistenpreises pro Monat angesetzt — ein Viertel der regulären Last. Diese Vergünstigung ist aber an eine <strong>Preisgrenze</strong> geknüpft.</p><p>Seit dem <strong>1. Juli 2025</strong> liegt diese Grenze bei <strong>100.000 €</strong> Bruttolistenpreis (zuvor 70.000 €, angehoben durch das sogenannte Wachstumsbooster-Gesetz). Kostet das E-Auto bis einschließlich 100.000 €, gilt der 0,25-%-Satz; liegt der BLP darüber, fällt die Begünstigung weg und es werden <strong>0,5 %</strong> fällig — und zwar auf den <strong>vollen</strong> Listenpreis, nicht nur auf den übersteigenden Teil. Die Schwelle ist also eine harte Kante: Ein Fahrzeug knapp über 100.000 € wird doppelt so hoch versteuert wie eines knapp darunter. Für Plug-in-Hybride gilt diese Schwelle nicht — sie liegen ohnehin bei 0,5 %. Bei der Konfiguration eines E-Dienstwagens lohnt es sich daher, den Bruttolistenpreis im Blick zu behalten: Schon einzelne Ausstattungspakete können den Wagen über die Grenze heben und den Vorteil halbieren. Ein E-Auto über 100.000 € bleibt mit 0,5 % aber immer noch günstiger als ein gleich teurer Verbrenner mit 1 %.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'E-Auto knapp über 100.000 € — warum 0,5 % greift',
+        schritte: [
+          { label: 'BLP 100.000 € (Schwelle): 0,25 %', formel: '100.000 € × 0,25 %', ergebnis: '250 €/Monat' },
+          { label: 'BLP 101.000 € (über Schwelle): 0,5 %', formel: '101.000 € × 0,5 %', ergebnis: '505 €/Monat' },
+          { label: 'Sprung an der Schwelle', formel: '505 € − 250 €', ergebnis: '+255 €/Monat' },
+        ],
+        fazit: 'Die 100.000-€-Grenze ist eine harte Schwelle: Bis einschließlich 100.000 € gelten 0,25 %, darüber 0,5 % — und zwar auf den vollen Bruttolistenpreis, nicht nur auf den übersteigenden Teil. Schon 1.000 € mehr lassen den geldwerten Vorteil von 250 € auf 505 € pro Monat springen, also mehr als das Doppelte. Deshalb lohnt der Blick auf den konfigurierten BLP: Ein paar Ausstattungs-Extras, die das Fahrzeug über 100.000 € heben, können die Steuerbasis verdoppeln. Wer knapp darunter bleibt, sichert sich den 0,25-%-Satz.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Arbeitsweg-Zuschlag (0,03 % × 20 km)',
+        schritte: [
+          { label: 'Pauschal-Formel (Verbrenner)', formel: '0,03 % × BLP × Entfernung-km', ergebnis: 'pro Monat' },
+          { label: '40.000 € × 0,03 % × 20 km', formel: '40.000 × 0,0003 × 20', ergebnis: '240 €/Monat' },
+          { label: 'Beim E-Auto ≤ 100k (× 0,25)', formel: '240 € × 0,25', ergebnis: '60 €/Monat' },
+        ],
+        fazit: 'Wird der Wagen auch für den Weg zur Arbeit genutzt, kommt ein Zuschlag obendrauf: pauschal 0,03 % des BLP je Entfernungskilometer und Monat. Für 40.000 € und 20 km einfache Strecke sind das 240 € zusätzlich zum 1-%-Wert (Verbrenner). Der reduzierte E-Auto-Faktor wirkt auch hier — ein E-Auto bis 100.000 € zahlt nur ein Viertel, also 60 €. Alternativ rechnet die Einzelbewertung (0,002 % je tatsächlicher Fahrt) den Arbeitsweg nur für die wirklich gefahrenen Tage an — günstig bei Homeoffice oder Außendienst mit wenigen Bürotagen. Faustregel: Wer an weniger als 15 Tagen im Monat ins Büro fährt, ist mit der Einzelbewertung meist besser dran, muss die Fahrten dann aber dokumentieren. Die Pauschale unterstellt dagegen 15 Fahrten pro Monat fix.',
+      },
+      {
+        typ: 'text',
+        titel: '1-%-Regel vs. Fahrtenbuch — wann was lohnt',
+        html: `<p>Die <strong>1-%-Regel</strong> ist die einfachste Methode: Sie verlangt keine Aufzeichnungen, setzt aber pauschal einen Vorteil an — egal, ob man den Wagen täglich oder nur selten privat nutzt. Wer wenig privat fährt, zahlt damit oft mehr als nötig.</p><p>Die Alternative ist das <strong>Fahrtenbuch</strong>: Hier werden alle Fahrten lückenlos dokumentiert, und versteuert wird nur der <strong>tatsächliche Privatanteil</strong> an den realen Fahrzeugkosten. Das lohnt sich vor allem bei <strong>geringer Privatnutzung</strong> und hohem Geschäftsanteil — oder bei sehr teuren Fahrzeugen, bei denen 1 % des Listenpreises hoch ausfällt. Der Preis dafür ist der <strong>Aufwand</strong>: Das Fahrtenbuch muss zeitnah, vollständig und manipulationssicher geführt werden; Lücken führen dazu, dass das Finanzamt es verwirft und doch die 1-%-Regel ansetzt. Ein Wechsel der Methode ist meist nur zum Jahreswechsel oder beim Fahrzeugwechsel möglich. Welche Methode günstiger ist, hängt vom Einzelfall ab. Als grobe Daumenregel gilt: Wer den Wagen überwiegend dienstlich bewegt, spart eher mit dem Fahrtenbuch; bei hoher Privatnutzung ist die 1-%-Regel meist günstiger. Im Zweifel rechnet man beide Varianten für ein typisches Jahr durch und vergleicht.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: '1-%-Regel (Pauschale) vs. Fahrtenbuch',
+        spalteA: '1-%-Regel (Pauschale)',
+        spalteB: 'Fahrtenbuch',
+        zeilen: [
+          { kriterium: 'Aufwand', a: 'gering — keine Aufzeichnung nötig', b: 'hoch — jede Fahrt lückenlos dokumentieren' },
+          { kriterium: 'Berechnung', a: 'pauschal % vom Listenpreis', b: 'tatsächliche Kosten × Privatanteil' },
+          { kriterium: 'Lohnt bei', a: 'hoher Privatnutzung', b: 'geringer Privatnutzung, hohem Geschäftsanteil' },
+          { kriterium: 'Wechsel', a: 'jederzeit zur Pauschale möglich', b: 'meist nur zum Jahres- oder Fahrzeugwechsel' },
+          { kriterium: 'Risiko', a: 'bei wenig Privatfahrten teuer', b: 'Lücken → Finanzamt verwirft das Buch' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Netto-Belastung bei 35 % Grenzsteuersatz',
+        schritte: [
+          { label: 'Geldwerter Vorteil (privat + Arbeitsweg)', formel: '400 € + 240 €', ergebnis: '640 €/Monat' },
+          { label: 'Steuerlast bei 35 % Grenzsteuersatz', formel: '640 € × 35 %', ergebnis: '224 €/Monat' },
+          { label: 'Pro Jahr', formel: '224 € × 12', ergebnis: '2.688 €' },
+        ],
+        fazit: 'Der geldwerte Vorteil wird nicht bar bezahlt — er wird dem zu versteuernden Einkommen zugerechnet, sodass die echte Belastung die zusätzliche Steuer darauf ist. Bei einem Verbrenner mit 640 € monatlichem Vorteil (1-%-Wert plus Arbeitsweg) und einem Grenzsteuersatz von 35 % sind das rund 224 € pro Monat, also etwa 2.688 € im Jahr. Diese vereinfachte Schätzung nutzt nur den Grenzsteuersatz; Kirchensteuer und Solidaritätszuschlag kommen je nach Situation hinzu, und das tatsächliche Ergebnis hängt von der gesamten Veranlagung ab. Keine Steuerberatung.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Firmenwagen steuerlich richtig behandeln',
+        punkte: [
+          'Den Bruttolistenpreis zur Erstzulassung ermitteln (Neupreis inkl. Sonderausstattung + USt).',
+          'Antriebsart korrekt einordnen: Verbrenner, Plug-in-Hybrid oder reines E-Auto.',
+          'Bei E-Autos den BLP gegen die 100.000-€-Schwelle prüfen (0,25 % vs. 0,5 %).',
+          'Bei Hybriden die Bedingung prüfen: CO₂ ≤ 50 g/km oder E-Reichweite ≥ 80 km.',
+          'Den Arbeitsweg-Zuschlag wählen: Pauschale 0,03 % oder Einzelbewertung 0,002 %.',
+          'Eigene Zuzahlungen mindern den geldwerten Vorteil — Belege aufheben.',
+          'Bei geringer Privatnutzung das Fahrtenbuch als Alternative durchrechnen.',
+          'Bei Sonderfällen (Selbstständige, Umsatzsteuer) steuerlichen Rat einholen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Den BLP zur Erstzulassung dokumentieren — auch bei Gebrauchtwagen',
+        text: 'Für die 1-%-Regel zählt immer der inländische Bruttolistenpreis (BLP) zum Zeitpunkt der Erstzulassung — also der ursprüngliche Neupreis inklusive Sonderausstattung und Mehrwertsteuer, auf volle Hundert Euro abgerundet. Das gilt auch dann, wenn der Wagen gebraucht oder mit hohem Rabatt gekauft wurde: Der tatsächliche Kaufpreis spielt keine Rolle. Wer einen jungen Gebrauchten als Firmenwagen fährt, sollte den damaligen Listenpreis samt Ausstattung dokumentieren (etwa über die Fahrzeugpapiere oder eine Herstellerauskunft), weil das Finanzamt diesen Wert ansetzt. Werkseitig verbaute Sonderausstattung erhöht den BLP; nachträglich eingebautes Zubehör in der Regel nicht. Gerade bei einem E-Auto nahe der 100.000-€-Grenze ist die saubere Ermittlung des BLP entscheidend, weil schon wenige Euro über der Schwelle den Satz von 0,25 % auf 0,5 % verdoppeln. Im Zweifel hilft eine schriftliche Herstellerauskunft als Beleg gegenüber dem Finanzamt.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Keine Steuerberatung — Sonderfälle weichen ab',
+        text: 'Dieser Rechner schätzt den geldwerten Vorteil und die ungefähre Steuerlast nach der 1-%-Regel und ersetzt keine steuerliche Beratung. Die Steuerlast wird hier vereinfacht nur mit dem persönlichen Grenzsteuersatz berechnet — Kirchensteuer und Solidaritätszuschlag kommen je nach Situation hinzu, und das tatsächliche Ergebnis hängt von der gesamten Veranlagung ab. Für Selbstständige und Unternehmer gelten zusätzlich umsatzsteuerliche Regeln und die Unterscheidung zwischen Betriebs- und Privatvermögen. Auch die Fahrtenbuchmethode, Zuzahlungen, Garagenkosten oder die Behandlung von Lademöglichkeiten beim E-Auto können das Bild verändern. Bei konkreten Fragen hilft eine Steuerberaterin oder ein Steuerberater.',
+      },
+    ],
+    quellen: [
+      {
+        titel: '§ 6 Abs. 1 Nr. 4 EStG: Firmenwagenbesteuerung',
+        url: 'https://www.gesetze-im-internet.de/estg/__6.html',
+        hinweis: '1 % / 0,5 % / 0,25 %, E-Auto-Schwelle 100.000 € (seit 07/2025).',
+      },
+      {
+        titel: '§ 8 EStG: geldwerter Vorteil & Arbeitsweg',
+        url: 'https://www.gesetze-im-internet.de/estg/__8.html',
+        hinweis: '0,03-%- bzw. 0,002-%-Zuschlag für den Arbeitsweg.',
+      },
+    ],
   },
 ];
