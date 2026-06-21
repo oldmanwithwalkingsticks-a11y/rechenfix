@@ -8,6 +8,64 @@
 
 ---
 
+## 21.06.2026 — W19 Goldstandard-Tranche t63–t69 (gebündelter Doku-Sync, 93 Goldstandard gemessen)
+
+Sieben Rechner aus vier Kategorien auf Goldstandard gehoben. Doku auf Karstens Wunsch
+**erst nach t69 gebündelt** nachgezogen — pro Rechner nur Config-Commit, kein Einzel-Doku-Commit.
+Jeder mit `contentBloecke` + `quellen`, Leitformat dominant, alle `text`-Blöcke ≤170 W, Self-Check
+≥1500 grün, kein WARN. Contentbloecke-Set jetzt **93 Rechner** (gemessen via
+`check-contentbloecke-struktur.mjs`).
+
+- **t63 geburtstag-rechner** (alltag.ts, beispielrechnung-Leitformat, 12 Blöcke, ~1.531 W, `6a3ebdf`).
+  Lib-treu (Wochentag/gelebte Tage/nächster Geburtstag); ein unklarer Bestand-Satz korrigiert
+  (10.000-Tage-Punkt liegt einige Monate nach dem 27. Geburtstag).
+- **t64 ggt-kgv-rechner** (mathe.ts, beispielrechnung-/Algorithmus-Leitformat, 12 Blöcke, ~1.594 W,
+  `93a1b5e`). Lib-treu (euklidischer Algorithmus, ggT × kgV = a × b). **Statistik-Block bewusst
+  ergänzt**, um die Mathe-Schablonen-Kosinus-Nähe zu quersumme aufzubrechen (Inhalt vor Score).
+- **t65 energiekosten-rechner** (wohnen.ts, tabelle-Leitformat 3×, 12 Blöcke, ~1.532 W, `a436c72` +
+  Repositionierung `10e7168`). **Neupositioniert als Mehrgeräte-Haushalts-Stromrechner** (Component
+  summiert bis 10 Geräte): `beschreibung` + `metaTitle` geschärft (Slug/URL stabil). Strompreis SSOT
+  `strompreis.ts` (37 ct BDEW 04/2026); Mini-Haushalt-Beispiel 597 kWh/221 € node-verifiziert. Abgrenzung
+  zu stromkosten (Zähler-top-down) + stromverbrauch-geraete (Einzelgerät). **Backlog:** Social-Caption
+  betont noch ein Gerät — späterer Refresh. Frühere Prompt-Annahmen (Strom+Gas-Mehrträger) verworfen.
+- **t66 zeitwert-rechner** (alltag.ts, statistik-Leitformat 3× + 2 Tabellen, 14 Blöcke, ~1.523 W,
+  `91ad1bc`). Lib-treu zu `zeitwert.ts` (linear = Neupreis − Neupreis/Nutzungsdauer × Alter; bereinigt
+  × Zustandsfaktor; NUTZUNGSDAUER 3/5/8/10/15 + ZUSTAND 0,9/0,75/0,6/0,4/0,2 1:1 benannt; 750 → 562,50 €
+  / 46,9 % node-verifiziert). Privater Hausrat-Zeitwert, **kein Steuerbezug** — klare Abgrenzung zum
+  afa-rechner (§ 7 EStG).
+- **t67 skontorechner** (alltag.ts, beispielrechnung-Leitformat 4×, 12 Blöcke, ~1.541 W, `820b1dd`).
+  Lib-treu zu `SkontoRechner.tsx`: Effektivzins = Skontosatz/(100−Skontosatz) × 360/Tagediff × 100,
+  **Tagebasis 360**, Tagediff = max(1, Ziel−Frist); Kontokorrent-Vergleich 10 %/360. Node-verifiziert
+  (36,7 % p. a.; 100 € vs. 27,78 € → 72,22 € Vorteil; brutto 5.950 → 119/5.831). Abgrenzung Skonto vs.
+  Rabatt (t52); kein separates MwSt-Feld ehrlich benannt.
+- **t68 rezept-umrechner** (kochen.ts, beispielrechnung-Leitformat 4×, 12 Blöcke, ~1.560 W, `f50714e`).
+  Portions-Fokus (Faktor = Ziel/Ausgang). Alle Mengen gegen das echte `fmtMenge` node-verifiziert inkl.
+  Sonderfälle: **Einheit „Prise" wird nie skaliert**, Stück→ganze Zahl (1,5→2), EL→Halbe, g/ml→5er,
+  Faktor-Anzeige 0,375 → „× 0,38". Nicht-lineare Effekte (Backzeit/Gewürze/Hefe) als „rechnet der
+  Rechner nicht" markiert. Strikte Abgrenzung zu cups-/backform-/zucker-/hefe-umrechner.
+- **t69 noten-international** (mathe.ts, vergleich-Leitformat 3× + Gesamttabelle, 13 Blöcke, ~1.520 W,
+  `2b00260`). Mappings **1:1 aus `noten-international.ts`**: GPA = modifizierte Bayerische Formel (5−nd,
+  [0..4]); UK/ECTS über Notenbänder; Anker UK First 1,3 / 2:1 2,0 / 2:2 3,0 / Third 3,7 und ECTS A 1,3 /
+  B 1,8 / C 2,5 / D 3,3 / E 3,8 / F 5,0. Node-verifiziert (2,0 → GPA 3,0/2:1/B/gut; 2:1 → DE 2,0).
+  Grenzen (keine 1:1-Äquivalenz, ECTS relative Verteilung) benannt; Abgrenzung zu Schnitt-/Abi-Rechnern.
+  **Voller `npm run build` grün** (nach einem zwischenzeitlich beim Editieren eingeschleusten Fremd-Token,
+  sofort entfernt).
+
+**Zwischen-Fix (eigenständig, kein t-Item):** neues Hinweis-Skript `scripts/check-themen-kollision.mjs`
+(`52b00ab`) — funktionaler Vorab-Duplikat-Check (KEIN Gate, immer Exit 0). Ergänzt
+`check-contentbloecke-struktur.mjs` (nur Struktur) um Themen-Token-Überlappung (Slug-Stämme + bekannte
+Stämme, als Teilstring in Slug + `beschreibung`, deutsche Komposita). Modi: ohne Arg alle Cluster, mit
+`<slug>` nur Paare zu diesem Slug (Pre-Phase vor Migrations-Prompt). Macht die zwei realen Fälle sichtbar,
+die der Struktur-Check verfehlte: energiekosten↔stromverbrauch ([strom]) und rezept↔cups ([rezept]).
+
+**Operativ:** Pro Rechner nur die Kategorie-Config committet (client-data.ts-Drift bewusst nicht
+mit-committet); Push deployt automatisch (kein Deploy-Hook). Memory `project_historie_defer_t63_t69.md`
+nach diesem Sync löschbar. **Methoden-Muster der Tranche:** vor jedem Rechner Lib/Component gelesen und
+Beispiele selbst nachgerechnet (Lib gewinnt, L-35); bei t65 Component-Realität schlug die Prompt-Annahme
+(Repositionierung statt Cup-/Gas-Inhalte); Schablonen-Falle bei t64 aktiv gebrochen.
+
+---
+
 ## 21.06.2026 — W19 Goldstandard-Tranche t56–t62 (gebündelter Doku-Sync, 86 Goldstandard gemessen)
 
 Sieben Rechner aus fünf Kategorien auf Goldstandard gehoben. Doku auf Karstens Wunsch
