@@ -1982,9 +1982,9 @@ Moderne Sportwissenschaft zeigt klar: Kraftsportler und Bodybuilder profitieren 
 
 Ausdauersportler liegen mit 1,2 bis 1,4 g/kg etwas darunter, benötigen aber immer noch deutlich mehr als die DGE-Mindestempfehlung. Der Grund: Ausdauertraining verursacht kleinere muskuläre Mikroverletzungen, die repariert werden müssen, und bei sehr langen Einheiten wird zunehmend Protein zur Energiegewinnung herangezogen.
 
-## Protein in der Diät — das Anti-Jo-Jo-Geheimnis
+## Der Zuschlag beim Ziel „Abnehmen"
 
-Wer abnehmen will, profitiert überproportional von einer hohen Proteinzufuhr. Im Kaloriendefizit versucht der Körper, Muskelmasse abzubauen, weil Muskeln energetisch teuer sind. Eine hohe Proteinzufuhr (mindestens 1,8 bis 2,2 g/kg Körpergewicht) signalisiert dem Körper: „Die Muskeln werden gebraucht, baue stattdessen Fett ab." Zusätzlich sättigt Protein besser als Kohlenhydrate oder Fett und hat den höchsten thermischen Effekt (TEF) — etwa 20 bis 30 % der aufgenommenen Proteinkalorien werden direkt bei der Verdauung verbraucht.
+In einer Phase mit geringerer Energiezufuhr kann der Körper neben Fett auch Muskulatur abbauen. Eine ausreichende Proteinzufuhr wirkt dem entgegen — das ist der sachliche Grund, warum der Rechner für das Ziel „Abnehmen" einen kleinen Zuschlag von 0,3 g/kg auf den Aktivitätsfaktor ansetzt. Das ist ein reiner Rechenparameter und keine Empfehlung zum Abnehmen; für konkrete Ernährungsziele ist eine ärztliche oder ernährungsmedizinische Beratung die richtige Adresse.
 
 ## Ältere Menschen und der Proteinbedarf
 
@@ -2024,7 +2024,7 @@ Für Menschen mit **gesunden Nieren** ist eine hohe Proteinzufuhr unbedenklich. 
       },
       {
         frage: 'Wie viel Protein brauche ich beim Abnehmen?',
-        antwort: 'Beim Abnehmen sind 1,8 bis 2,2 g/kg Körpergewicht ideal. Der hohe Proteinanteil hat drei Vorteile: Er schützt die Muskulatur vor dem Abbau im Kaloriendefizit, sättigt stärker als Kohlenhydrate oder Fett und verbraucht durch den thermischen Effekt bis zu 30 % der Proteinkalorien direkt bei der Verdauung. Wer Muskeln erhält, hält auch den Grundumsatz stabil — und vermeidet den Jo-Jo-Effekt.',
+        antwort: 'Bei einer Gewichtsabnahme kann der Körper im Kaloriendefizit neben Fett auch Muskulatur abbauen; eine ausreichende Proteinzufuhr hilft, die Muskulatur zu erhalten. Aus diesem Grund setzt der Rechner für das Ziel „Abnehmen" einen Zuschlag von 0,3 g/kg an. Das ist ein rechnerischer Parameter und keine Diät-Empfehlung. Für konkrete Abnehm- oder Ernährungsziele wenden Sie sich an eine ärztliche oder ernährungsmedizinische Beratung.',
       },
     ],
     contentBloecke: [
