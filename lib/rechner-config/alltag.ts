@@ -2185,7 +2185,7 @@ Die Ergebnisse des Geburtstags-Rechners eignen sich perfekt zum Teilen — über
   },
   {
     slug: 'skontorechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-21',
     titel: 'Skontorechner',
     beschreibung: 'Skonto berechnen: Ersparnis durch Skonto und effektiven Jahreszins — lohnt sich die frühzeitige Zahlung?',
     kategorie: 'Alltag',
@@ -2242,6 +2242,114 @@ Für Umsatzsteuer-Berechnungen nutzen Sie unseren MwSt-Rechner. Allgemeine Proze
         frage: 'Was ist der Unterschied zwischen Skonto und Rabatt?',
         antwort: 'Rabatt ist ein Preisnachlass, der bereits auf der Rechnung berücksichtigt ist (z. B. Mengenrabatt). Skonto ist ein zusätzlicher Nachlass für schnelles Bezahlen. Beides kann kombiniert auftreten: Zuerst Rabatt auf den Listenpreis, dann Skonto auf den Rechnungsbetrag.',
       },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was ist Skonto? — Nachlass fürs schnelle Zahlen',
+        html: `<p><strong>Skonto</strong> ist ein Preisnachlass, den ein Verkäufer dafür gewährt, dass die Rechnung besonders schnell bezahlt wird — typischerweise innerhalb einer kurzen <strong>Skontofrist</strong>. Die klassische Kondition lautet: „2 % Skonto bei Zahlung innerhalb von 10 Tagen, sonst 30 Tage netto." Wer innerhalb der 10 Tage zahlt, darf 2 Prozent vom Rechnungsbetrag abziehen; wer länger braucht, zahlt den vollen Betrag bis zum Zahlungsziel.</p><p>Wichtig ist die Abgrenzung zum <strong>Rabatt</strong>: Ein Rabatt ist ein allgemeiner Preisnachlass (Mengen-, Treue- oder Aktionsrabatt), der unabhängig vom Zahlungszeitpunkt gilt und meist schon auf der Rechnung steht. Skonto dagegen ist an die <strong>schnelle Zahlung</strong> gebunden und wird erst beim Bezahlen gezogen. Beides kann zusammentreffen: Erst wird der Rabatt vom Listenpreis abgezogen, dann das Skonto auf den so entstandenen Rechnungsbetrag. Dieser Rechner ermittelt den Skontobetrag, den Zahlbetrag und — besonders aufschlussreich — den effektiven Jahreszins, der hinter dem Skonto steckt. So wird aus einer scheinbar kleinen Prozentzahl eine handfeste Finanzkennzahl, die man mit Kreditzinsen vergleichen kann.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Skontobetrag und Zahlbetrag',
+        schritte: [
+          { label: 'Rechnungsbetrag', formel: '', ergebnis: '5.000 €' },
+          { label: 'Skontosatz', formel: '', ergebnis: '2 %' },
+          { label: 'Skontobetrag', formel: '5.000 € × 2 ÷ 100', ergebnis: '100 €' },
+          { label: 'Zahlbetrag mit Skonto', formel: '5.000 € − 100 €', ergebnis: '4.900 €' },
+        ],
+        fazit: 'Bei einem Rechnungsbetrag von 5.000 Euro und 2 Prozent Skonto beträgt der Skontobetrag 100 Euro. Wer innerhalb der Skontofrist zahlt, überweist also nur 4.900 Euro statt 5.000 Euro und spart 100 Euro. Die Rechnung ist denkbar einfach: Rechnungsbetrag mal Skontosatz geteilt durch 100 ergibt den Skontobetrag, abgezogen vom Rechnungsbetrag ergibt sich der Zahlbetrag. Hundert Euro klingen nach wenig — gemessen daran, dass man dafür nur rund drei Wochen früher zahlt, ist es aber eine beachtliche Rendite. Wie groß sie wirklich ist, zeigt der effektive Jahreszins im nächsten Schritt.',
+      },
+      {
+        typ: 'text',
+        titel: 'Skontofrist und Zahlungsziel verstehen',
+        html: `<p>Zwei Fristen bestimmen das Skonto. Die <strong>Skontofrist</strong> ist der kurze Zeitraum, in dem man zahlen muss, um den Abzug zu bekommen — im Beispiel 10 Tage. Das <strong>Zahlungsziel</strong> ist die längere Frist, bis zu der die Rechnung spätestens ohne Abzug zu begleichen ist — typischerweise 30 Tage. Beide Fristen laufen ab Rechnungs- bzw. Lieferdatum, sofern nichts anderes vereinbart ist.</p><p>Für die Bewertung des Skontos zählt die <strong>Differenz</strong> beider Fristen: Sie gibt an, wie viele Tage früher man sein Geld einsetzt, um den Nachlass zu bekommen. Im Standardfall sind das 30 minus 10, also 20 Tage. Je kleiner diese Differenz, desto wertvoller ist das Skonto — denn man bekommt denselben Prozentsatz für eine noch kürzere Vorauszahlung. Der Rechner setzt für die Differenz mindestens einen Tag an, damit die Zinsrechnung auch bei ungewöhnlichen Eingaben stabil bleibt. Genau diese Tagedifferenz ist der Hebel hinter dem oft überraschend hohen effektiven Jahreszins.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Effektiver Jahreszins des Skontos',
+        schritte: [
+          { label: 'Skontosatz', formel: '', ergebnis: '2 %' },
+          { label: 'Tagedifferenz', formel: 'Zahlungsziel 30 − Skontofrist 10', ergebnis: '20 Tage' },
+          { label: 'Formel (Tagebasis 360)', formel: '2 ÷ (100 − 2) × 360 ÷ 20 × 100', ergebnis: '' },
+          { label: 'Effektiver Jahreszins', formel: '0,0204 × 18 × 100', ergebnis: '36,7 % p. a.' },
+        ],
+        fazit: 'Der effektive Jahreszins übersetzt das Skonto in einen Zinssatz pro Jahr — und macht es vergleichbar mit Kreditzinsen. Die kaufmännische Formel lautet: Skontosatz geteilt durch (100 minus Skontosatz), mal 360 geteilt durch die Tagedifferenz, mal 100. Mit 2 Prozent Skonto und 20 Tagen Differenz ergibt das rund 36,7 Prozent pro Jahr. Der Rechner nutzt die handelsübliche Tagebasis von 360 Tagen (kaufmännisches Jahr). Das Ergebnis ist verblüffend: Wer das Skonto nicht zieht, verzichtet auf eine Rendite, die kein normaler Anlage- oder Kreditzins erreicht. Genau deshalb gilt die Skonto-Ausnutzung als eine der lukrativsten kurzfristigen Finanzentscheidungen im Geschäftsalltag.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum sich Skonto fast immer lohnt',
+        html: `<p>Der hohe effektive Jahreszins ist kein Zufall, sondern die Kernbotschaft des Skontos: Ein <strong>Skonto nicht zu ziehen ist teuer</strong>. Wer die Rechnung erst zum Zahlungsziel begleicht, statt die Skontofrist zu nutzen, „leiht" sich faktisch den Skontobetrag für die paar zusätzlichen Tage — zu einem Zinssatz, der im Beispiel bei 36,7 Prozent pro Jahr liegt.</p><p>Zum Vergleich: Ein <strong>Kontokorrentkredit</strong> (Überziehung des Geschäftskontos) kostet meist um die 10 Prozent im Jahr, ein normaler Betriebsmittelkredit oft weniger. Solange der effektive Skontozins über dem Kreditzins liegt — und das ist fast immer der Fall — lohnt es sich, das Skonto auch mit geliehenem Geld zu ziehen. Der Rechner zeigt diesen Vergleich direkt an: Im Standardbeispiel ist die Skonto-Nutzung selbst gegenüber einem 10-Prozent-Kredit noch rund 72 Euro günstiger. Nur wenn Liquidität komplett fehlt oder die Skontofrist faktisch nicht einhaltbar ist, kann es anders aussehen. Als Faustregel gilt: Skonto ziehen, wann immer es geht.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Skonto ziehen mit geliehenem Geld — lohnt es sich?',
+        schritte: [
+          { label: 'Skontobetrag (Ersparnis)', formel: '5.000 € × 2 %', ergebnis: '100 €' },
+          { label: 'Kreditkosten für 20 Tage (10 % p. a.)', formel: '5.000 € × 10 % × 20 ÷ 360', ergebnis: '27,78 €' },
+          { label: 'Vorteil Skonto gegenüber Kredit', formel: '100 € − 27,78 €', ergebnis: '72,22 €' },
+        ],
+        fazit: 'Angenommen, das Geld für die schnelle Zahlung fehlt gerade und müsste über den Kontokorrentkredit (10 Prozent pro Jahr) finanziert werden. Selbst dann lohnt sich das Skonto: Den Skontobetrag von 100 Euro erhält man sofort, die Kreditkosten für die 20 Tage betragen nur 27,78 Euro (5.000 Euro × 10 Prozent × 20 ÷ 360). Unterm Strich bleibt ein Vorteil von 72,22 Euro gegenüber dem Verzicht aufs Skonto. Genau diese Rechnung zeigt der Rechner mit an. Sie macht anschaulich, warum die Skonto-Nutzung fast immer die bessere Wahl ist — der effektive Skontozins von 36,7 Prozent ist eben weit höher als die 10 Prozent Kreditzins. Erst wenn der Kreditzins über dem Skontozins läge, kippte das Ergebnis.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Effektivzins je Konstellation',
+        kopf: ['Konstellation (Skonto / Frist / Ziel)', 'Tagediff.', 'Effektivzins p. a.', 'Bewertung'],
+        zeilen: [
+          ['2 % / 10 / 30 Tage', '20', '36,7 %', 'sehr lohnend'],
+          ['3 % / 10 / 30 Tage', '20', '55,7 %', 'sehr lohnend'],
+          ['2 % / 14 / 30 Tage', '16', '45,9 %', 'sehr lohnend'],
+          ['3 % / 14 / 30 Tage', '16', '69,6 %', 'sehr lohnend'],
+          ['2 % / 10 / 14 Tage', '4', '183,7 %', 'extrem lohnend'],
+          ['3 % / 10 / 60 Tage', '50', '22,3 %', 'lohnend'],
+        ],
+        fussnote: 'Effektiver Jahreszins nach der kaufmännischen Formel Skontosatz ÷ (100 − Skontosatz) × 360 ÷ Tagedifferenz × 100, Tagebasis 360. Zwei Muster sind erkennbar: Ein höherer Skontosatz steigert den Effektivzins, und eine kürzere Tagedifferenz (Zahlungsziel nah an der Skontofrist) steigert ihn noch stärker. Selbst die niedrigste Konstellation der Tabelle liegt mit gut 22 Prozent deutlich über jedem üblichen Kreditzins — Skonto lohnt sich praktisch immer. Die extreme Spitze von rund 184 Prozent zeigt, wie wertvoll ein Skonto wird, wenn Skontofrist und Zahlungsziel nur wenige Tage auseinanderliegen.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Skonto auf den Bruttobetrag',
+        schritte: [
+          { label: 'Rechnungsbetrag brutto (5.000 € + 19 % MwSt)', formel: '', ergebnis: '5.950 €' },
+          { label: 'Skontosatz', formel: '', ergebnis: '2 %' },
+          { label: 'Skontobetrag', formel: '5.950 € × 2 ÷ 100', ergebnis: '119 €' },
+          { label: 'Zahlbetrag mit Skonto', formel: '5.950 € − 119 €', ergebnis: '5.831 €' },
+        ],
+        fazit: 'Auf welchen Betrag bezieht sich das Skonto — netto oder brutto? In der Praxis wird Skonto üblicherweise vom Bruttorechnungsbetrag (inklusive Mehrwertsteuer) gezogen. Dieser Rechner wendet den Skontosatz schlicht auf den eingegebenen Betrag an und hat kein separates Mehrwertsteuer-Feld — Sie tragen also den Betrag ein, von dem das Skonto berechnet werden soll, in der Regel den Bruttobetrag. Bei 5.950 Euro brutto und 2 Prozent ergibt das 119 Euro Skonto und 5.831 Euro Zahlbetrag. Buchhalterisch mindert der Skontoabzug nachträglich auch die abzuführende beziehungsweise abziehbare Umsatzsteuer; für die reine Frage „Was zahle ich?" genügt aber der Bruttobezug. Im Zweifel steht die maßgebliche Bezugsgröße in den Zahlungsbedingungen der Rechnung.',
+      },
+      {
+        typ: 'text',
+        titel: 'Skonto in der Praxis',
+        html: `<p>Skonto ist vor allem im <strong>Geschäftsverkehr zwischen Unternehmen</strong> (B2B) verbreitet — bei Lieferanten, im Großhandel und im Handwerk. Viele Lieferanten räumen Stammkunden standardmäßig 2 bis 3 Prozent Skonto ein; im Baugewerbe sind Skontoklauseln in Verträgen und Schlussrechnungen üblich. Für Betriebe ist die konsequente Skonto-Nutzung ein echter Kostenhebel, weil sie sich über viele Rechnungen summiert.</p><p>Im Verhältnis zu Privatkunden (B2C) ist Skonto seltener, kommt aber vor — etwa bei Handwerkerrechnungen oder größeren Anschaffungen. Wichtig: Skonto gilt nur, wenn es <strong>vereinbart</strong> ist; einen gesetzlichen Anspruch gibt es nicht. Ob und in welcher Höhe Skonto gewährt wird, steht in den Zahlungsbedingungen (auf der Rechnung, im Angebot oder im Rahmenvertrag). Wer Skonto zieht, ohne dass es vereinbart ist, zahlt zu wenig und riskiert eine Nachforderung. Umgekehrt sollte man vereinbartes Skonto auch wirklich nutzen — es ist bares Geld, das sonst verfällt. Ein kurzer Blick auf die Zahlungsbedingungen jeder Eingangsrechnung lohnt sich daher fast immer. Manche Betriebe automatisieren das sogar und lassen ihre Buchhaltung Skontofristen überwachen, damit kein Abzug verfällt.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Skonto richtig prüfen und ziehen',
+        punkte: [
+          'Die Zahlungsbedingungen prüfen: Ist Skonto vereinbart, mit welchem Satz und welcher Frist?',
+          'Die Skontofrist im Kalender notieren — sie ist kürzer als das Zahlungsziel.',
+          'Den Bezugsbetrag klären: Skonto wird in der Regel vom Bruttorechnungsbetrag gezogen.',
+          'Rechtzeitig überweisen — entscheidend ist oft der Zahlungseingang, nicht der Absende-Tag.',
+          'Den Skontobetrag korrekt vom Rechnungsbetrag abziehen und mit der Zahlung dokumentieren.',
+          'Bei knapper Liquidität prüfen, ob sich Skonto auch mit Kreditfinanzierung lohnt (meist ja).',
+          'In der Buchhaltung die Umsatzsteuer-Korrektur des Skontos beachten.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Skonto schlägt fast jeden Kredit',
+        text: 'Die wichtigste Faustregel: Solange der effektive Jahreszins des Skontos über Ihrem Kreditzins liegt, lohnt sich die Skonto-Nutzung — notfalls sogar mit kurzfristig geliehenem Geld. Schon ein gewöhnliches „2 Prozent in 10 Tagen, 30 Tage netto" entspricht rund 37 Prozent Jahreszins; das übertrifft jeden Kontokorrent- oder Ratenkredit deutlich. Wer mehrere Lieferantenrechnungen hat, sollte Skonto deshalb systematisch ziehen und die Skontofristen aktiv überwachen. Die einzige echte Ausnahme ist akute Zahlungsunfähigkeit. Über ein Jahr gerechnet bringt die konsequente Skonto-Nutzung in einem Betrieb mit vielen Eingangsrechnungen schnell eine vierstellige Ersparnis.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Konditionen variieren je Vertrag',
+        text: 'Die hier gezeigten Konditionen (2 Prozent, 10 Tage Skontofrist, 30 Tage Ziel) sind verbreitete Richtwerte, aber kein allgemeingültiger Standard. Skontosatz, Skontofrist und Zahlungsziel werden zwischen den Vertragsparteien frei vereinbart und stehen in den jeweiligen Zahlungsbedingungen — maßgeblich ist immer Ihre konkrete Rechnung. Der berechnete effektive Jahreszins ist eine kaufmännische Vergleichsgröße auf Tagebasis 360, keine bankübliche Effektivzins-Angabe nach Preisangabenverordnung. Dieser Rechner ersetzt keine Steuer- oder Rechtsberatung; bei Fragen zur umsatzsteuerlichen Behandlung des Skontos oder zu vertraglichen Skontoklauseln hilft eine Steuerberatung oder eine Fachperson weiter.',
+      },
+    ],
+    quellen: [
+      { titel: 'Skonto- und Effektivzins-Methodik (kaufmännisches Rechnen)', hinweis: 'Skontobetrag = Rechnungsbetrag × Skontosatz ÷ 100; Zahlbetrag = Rechnungsbetrag − Skontobetrag; effektiver Jahreszins = Skontosatz ÷ (100 − Skontosatz) × 360 ÷ (Zahlungsziel − Skontofrist) × 100 (Tagebasis 360, kaufmännisches Jahr).' },
+      { titel: 'IHK — Skonto und Zahlungsbedingungen im Geschäftsverkehr', url: 'https://www.ihk.de', hinweis: 'Grundlagen zu Skonto, Zahlungszielen und Effektivverzinsung.' },
     ],
   },
   {
