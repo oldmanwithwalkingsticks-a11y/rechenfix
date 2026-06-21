@@ -1816,7 +1816,7 @@ Für Menschen mit **gesunden Nieren** ist eine hohe Proteinzufuhr unbedenklich. 
   },
   {
     slug: 'whr-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-21',
     titel: 'WHR-Rechner',
     beschreibung: 'Taille-Hüfte-Verhältnis berechnen: WHR als Indikator für gesundheitliches Risiko — aussagekräftiger als der BMI.',
     kategorie: 'Gesundheit',
@@ -1887,6 +1887,123 @@ Der WHR ist ein Screening-Werkzeug, keine Diagnose. Er funktioniert am besten be
         frage: 'Ab welchem Taillenumfang wird es gefährlich?',
         antwort: 'Die WHO definiert erhöhtes Risiko ab 80 cm Taillenumfang bei Frauen und ab 94 cm bei Männern. Ab 88 cm (Frauen) bzw. 102 cm (Männer) gilt das Risiko als stark erhöht. Diese absoluten Werte ergänzen den WHR und werden von vielen Ärzten als erste Orientierung verwendet.',
       },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was das Taille-Hüfte-Verhältnis (WHR) misst',
+        html: `<p>Das <strong>Taille-Hüfte-Verhältnis</strong> (englisch Waist-to-Hip Ratio, kurz WHR) beschreibt, wie sich Körperfett zwischen Bauch und Hüfte <strong>verteilt</strong> — nicht, wie viel jemand wiegt. Berechnet wird es ganz einfach als Taillenumfang geteilt durch Hüftumfang. Ein Wert um 0,8 steht für eine eher hüftbetonte Verteilung, ein höherer Wert für eine stärker bauchbetonte. Zwei Menschen mit gleichem Gewicht können also sehr unterschiedliche WHR-Werte haben — je nachdem, wo der Körper Fett einlagert.</p><p>Der Hintergrund: Fettgewebe rund um die Bauchorgane wird in der Forschung statistisch anders eingeordnet als Fett an Hüfte und Oberschenkeln. Deshalb betrachtet die WHO die Fettverteilung als ergänzende Orientierungsgröße neben dem Gewicht. Wichtig von Anfang an: Das WHR ist ein <strong>grober Orientierungs-Indikator</strong>, kein Urteil über einen Körper und kein Wert, den man „erreichen" müsste. Es ergänzt andere Kennzahlen, ersetzt aber keine ärztliche Einschätzung — und schon gar keine Bewertung der eigenen Person.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'WHR aus Taille und Hüfte',
+        schritte: [
+          { label: 'Taillenumfang', formel: '', ergebnis: '80 cm' },
+          { label: 'Hüftumfang', formel: '', ergebnis: '100 cm' },
+          { label: 'WHR', formel: '80 ÷ 100', ergebnis: '0,80' },
+          { label: 'WHtR (mit Größe 170 cm)', formel: '80 ÷ 170', ergebnis: '0,47' },
+        ],
+        fazit: 'Das Rechnen selbst ist trivial: Taillenumfang geteilt durch Hüftumfang. Bei 80 Zentimetern Taille und 100 Zentimetern Hüfte ergibt das ein WHR von 0,80. Optional bezieht der Rechner die Körpergröße ein und bildet zusätzlich das Verhältnis von Taille zu Größe (WHtR) — hier 80 geteilt durch 170, also 0,47. Beide Zahlen sind reine Verhältniswerte ohne Einheit. Sie ordnen die Fettverteilung in grobe Spannen ein, die in der nächsten Tabelle stehen. Entscheidend ist, die Umfänge an den richtigen Stellen und entspannt zu messen — wie das geht, steht weiter unten. Ein einzelner Messwert ist immer eine Momentaufnahme, keine feste Eigenschaft eines Menschen.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'WHO-Orientierungsschwellen (Frauen / Männer)',
+        kopf: ['Einordnung', 'Frauen', 'Männer'],
+        zeilen: [
+          ['niedrigere Spanne', '< 0,80', '< 0,90'],
+          ['mittlere Spanne', '0,80 – 0,84', '0,90 – 0,99'],
+          ['höhere Spanne', '≥ 0,85', '≥ 1,00'],
+        ],
+        fussnote: 'Orientierungsschwellen nach WHO für das Taille-Hüfte-Verhältnis, exakt wie im Rechner hinterlegt. Es sind statistische Spannen für die Einordnung von Bevölkerungsgruppen, kein individueller Grenzwert und kein Zielwert. Ein Wert in einer höheren Spanne ist kein Befund, sondern allenfalls ein Anlass, das Thema bei Interesse ärztlich einordnen zu lassen. Die Schwellen unterscheiden sich zwischen Frauen und Männern, weil sich die typische Fettverteilung körperbaubedingt unterscheidet. Sie sind als Orientierung für gesunde Erwachsene gedacht und gelten ausdrücklich nicht als persönliche Vorgabe, die man unterschreiten müsste.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Dasselbe WHR bei ganz verschiedener Statur',
+        schritte: [
+          { label: 'Person A', formel: 'Taille 70 ÷ Hüfte 87', ergebnis: '0,80' },
+          { label: 'Person B', formel: 'Taille 90 ÷ Hüfte 112', ergebnis: '0,80' },
+          { label: 'Vergleich', formel: 'gleiches Verhältnis', ergebnis: 'beide 0,80' },
+        ],
+        fazit: 'Das WHR ist ein Verhältnis, kein absolutes Maß: Eine zierliche Person mit 70 Zentimetern Taille und 87 Zentimetern Hüfte und eine kräftigere mit 90 zu 112 Zentimetern kommen auf denselben Wert von 0,80. Die Zahl beschreibt also die Proportion zwischen Bauch und Hüfte, nicht die Körpergröße oder das Gewicht. Genau deshalb ergänzt das WHR den BMI, der nur Gewicht und Größe kennt. Und genau deshalb taugt es nicht zum Vergleich zwischen Menschen: Zwei sehr unterschiedliche Körper können dieselbe Kennzahl haben, und ein „besserer" oder „schlechterer" Wert lässt sich daraus nicht ableiten. Es bleibt eine grobe Einordnung der eigenen Proportionen, am sinnvollsten über die Zeit betrachtet.',
+      },
+      {
+        typ: 'text',
+        titel: 'WHtR — die Taille im Verhältnis zur Größe',
+        html: `<p>Neben dem WHR berechnet der Rechner auf Wunsch das <strong>Taille-zu-Größe-Verhältnis</strong> (Waist-to-Height Ratio, WHtR): Taillenumfang geteilt durch Körpergröße. Es kommt ohne den Hüftumfang aus und gilt vielen Fachleuten als ebenso einfache wie aussagekräftige Ergänzung. Die zugehörige Faustregel ist leicht zu merken: <strong>Die Taille sollte weniger als die halbe Körpergröße messen</strong> — also ein WHtR unter 0,5.</p><p>Bei 170 Zentimetern Größe entspräche das einer Taille unter 85 Zentimetern. Der Rechner ordnet einen WHtR unter 0,5 als „optimal" ein, darüber als „erhöht" — wieder als grobe Orientierung, nicht als Note. Der Vorteil dieser Kennzahl: Sie braucht nur ein Maßband und einen Wert, den die meisten kennen, und ist über verschiedene Körpergrößen hinweg vergleichbar. Wie beim WHR gilt aber: Die Zahl beschreibt eine statistische Tendenz, keinen persönlichen Sollwert. Sie ersetzt keine ärztliche Untersuchung und sagt nichts Abschließendes über die Gesundheit eines einzelnen Menschen aus. Ob WHR oder WHtR — beide Werte sind eine grobe Landkarte, kein Zielpunkt, den es anzusteuern gälte.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Grenzen der Aussagekraft',
+        html: `<p>So einfach das WHR ist, so vorsichtig sollte man es deuten. Schon die <strong>Messung</strong> schwankt: Wo genau das Maßband an der Taille liegt, wie fest es anliegt, ob man ein- oder ausgeatmet hat und sogar die Tagesform verschieben das Ergebnis um einige Millimeter — und damit die Nachkommastelle des WHR. Ein einzelner Wert ist deshalb nie exakt, sondern eine Annäherung.</p><p>Hinzu kommt, dass die Kennzahl <strong>nicht für alle gleich passt</strong>. Bei Schwangeren verändert sich der Bauchumfang naturgemäß, sodass das WHR keine sinnvolle Aussage liefert. Auch bei sehr muskulösen oder sportlichen Menschen kann die Fettverteilung anders ausfallen, als die Spannen unterstellen. Kinder und Jugendliche werden ohnehin nach eigenen, alters- und entwicklungsabhängigen Maßstäben beurteilt, nicht nach Erwachsenenschwellen. Das WHR ist also ein Werkzeug für eine grobe Selbsteinordnung gesunder Erwachsener — und selbst dann nur eine von mehreren Perspektiven. Wer unsicher ist, bespricht solche Werte am besten ärztlich.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'WHR vs. BMI — was jede Kennzahl zeigt',
+        spalteA: 'WHR (Taille/Hüfte)',
+        spalteB: 'BMI (Gewicht/Größe)',
+        zeilen: [
+          { kriterium: 'Was es misst', a: 'Fettverteilung (Bauch vs. Hüfte)', b: 'Verhältnis Gewicht zu Größe' },
+          { kriterium: 'Braucht man', a: 'Maßband (Taille, Hüfte)', b: 'Waage und Körpergröße' },
+          { kriterium: 'Stärke', a: 'erfasst Bauchbetonung, die der BMI übersieht', b: 'schneller Standard, gut für Gruppenstatistik' },
+          { kriterium: 'Schwäche', a: 'sagt nichts über Gesamtgewicht oder -fett', b: 'trennt Muskel nicht von Fett, ignoriert die Verteilung' },
+          { kriterium: 'Einordnung', a: 'Orientierung, kein Ziel', b: 'Orientierung, kein Ziel' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Der Taillenumfang allein als einfachste Ergänzung',
+        html: `<p>Noch einfacher als jedes Verhältnis ist der <strong>reine Taillenumfang</strong>. Die WHO nennt dafür grobe Orientierungswerte: Bei Frauen gilt ein Umfang ab etwa 80 Zentimetern als erhöht und ab 88 Zentimetern als deutlich erhöht; bei Männern liegen die entsprechenden Werte bei rund 94 und 102 Zentimetern. Diese absoluten Zahlen ergänzen das WHR und werden von vielen Ärztinnen und Ärzten als schnelle erste Orientierung genutzt.</p><p>Der Vorteil: Man braucht nur ein Maßband und keine zweite Messung. Der Nachteil ist derselbe wie bei allen diesen Kennzahlen — sie berücksichtigen weder Körperbau noch Muskelanteil und sagen nichts Abschließendes über einen einzelnen Menschen aus. Auch hier handelt es sich um <strong>Bevölkerungs-Orientierungswerte, keine persönlichen Grenzen</strong>, die man unbedingt unterschreiten müsste. Wer mehrere dieser Zahlen kombiniert, bekommt allenfalls ein etwas runderes Bild — aber keine Diagnose. Für eine echte Einschätzung bleibt das ärztliche Gespräch der verlässlichste Weg.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Richtig messen: Taille, Hüfte, Größe',
+        kopf: ['Maß', 'Wo messen', 'Hinweis'],
+        zeilen: [
+          ['Taille', 'schmalste Stelle zwischen unterster Rippe und Beckenkamm', 'locker stehen, normal ausatmen, nicht einziehen'],
+          ['Hüfte', 'breiteste Stelle über dem Gesäß', 'Füße zusammen, Maßband waagerecht'],
+          ['Körpergröße', 'ohne Schuhe, gerade an der Wand', 'nur für das optionale WHtR nötig'],
+        ],
+        fussnote: 'Für vergleichbare Werte das Maßband direkt auf der Haut, waagerecht und ohne Einschnüren anlegen. Am besten morgens und immer auf dieselbe Weise messen, damit ein Vergleich über die Zeit aussagekräftig ist. Kleine Abweichungen in der Bandlage verschieben das Ergebnis spürbar — deshalb zählt die Tendenz über mehrere Messungen mehr als ein einzelner Nachkommawert. Wer mag, notiert die Werte über die Zeit; eine ruhige, regelmäßige Messung sagt mehr als das genaue Ergebnis eines einzelnen Tages und nimmt der Zahl die Bedeutung eines Urteils.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Kennzahlen zur Einordnung (neutral)',
+        werte: [
+          { label: 'WHR-Formel', wert: 'Taille ÷ Hüfte', hinweis: 'einheitenloser Verhältniswert' },
+          { label: 'WHtR-Faustregel', wert: '< 0,5', hinweis: 'Taille kleiner als die halbe Größe' },
+          { label: 'WHO-Schwelle Frauen', wert: 'ab 0,85 höhere Spanne', hinweis: 'statistische Orientierung' },
+          { label: 'WHO-Schwelle Männer', wert: 'ab 1,00 höhere Spanne', hinweis: 'statistische Orientierung' },
+          { label: 'Aussagekraft', wert: 'Tendenz, kein Befund', hinweis: 'kein Ziel- oder Sollwert' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Was die Zahl nicht sagt',
+        html: `<p>So nützlich eine grobe Einordnung sein kann — das WHR ist <strong>kein Maßstab, um sich mit anderen zu vergleichen oder den eigenen Körper verändern zu müssen</strong>. Es ist eine statistische Kennzahl über Fettverteilung, kein Urteil über Gesundheit, Disziplin oder den Wert eines Menschen. Eine Zahl in einer höheren Spanne bedeutet nicht „zu viel" und ist keine Aufforderung zu Diät oder Training; eine niedrige Zahl ist kein Verdienst. Der Rechner nennt deshalb bewusst keine Abnehm-, Kalorien- oder Trainingsziele.</p><p>Hilfreich ist die Abgrenzung zu den Nachbar-Rechnern, die alle etwas anderes betrachten: Der <strong>BMI</strong> setzt Gewicht und Größe ins Verhältnis, der <strong>Körperfett-Rechner</strong> schätzt den Fettanteil, das <strong>WHR</strong> die Fettverteilung, und der <strong>Idealgewicht-Rechner</strong> zeigt historische Faustformeln. Keine dieser Zahlen ist ein Gesundheits-„Ziel". Wer sich Sorgen um Körper, Gewicht oder Essverhalten macht oder sich durch solche Werte belastet fühlt, findet bei Ärztinnen und Ärzten, Beratungsstellen oder in einer Psychotherapie verlässliche, einfühlsame Begleitung — das ist der bessere Weg als jede App-Zahl.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Sauber messen und sinnvoll deuten',
+        punkte: [
+          'Taille an der schmalsten Stelle, Hüfte an der breitesten messen — locker, ohne einzuziehen.',
+          'Normal ausatmen und das Maßband waagerecht und ohne Zug anlegen.',
+          'Immer zur gleichen Tageszeit und auf dieselbe Weise messen.',
+          'Die Tendenz über mehrere Wochen betrachten, nicht einen Einzelwert überbewerten.',
+          'Das Ergebnis als grobe Orientierung verstehen, nicht als Note für den Körper.',
+          'Bei Schwangerschaft, viel Muskelmasse oder bei Kindern die Spannen nicht anwenden.',
+          'Auffällige oder belastende Werte ärztlich einordnen lassen, statt allein zu deuten.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Orientierung, kein medizinischer Befund',
+        text: 'Das Taille-Hüfte-Verhältnis liefert eine grobe Einordnung der Fettverteilung — keine medizinische Diagnose und keine Behandlungsempfehlung. Es ersetzt keine ärztliche Abklärung. Die genutzten WHO-Schwellen sind statistische Orientierungsspannen für Erwachsene, kein individueller Ziel- oder Grenzwert. Ein einzelner Wert schwankt mit der Messung; aussagekräftiger ist die Entwicklung über die Zeit. Wer unsicher ist oder sich durch Zahlen zum eigenen Körper belastet fühlt, bespricht das am besten mit einer Ärztin oder einem Arzt, einer Beratungsstelle oder in einer Psychotherapie. Diese Seite ist eine neutrale Rechenhilfe, kein Werkzeug zur Selbstbewertung und kein Anlass, sich unter Druck zu setzen.',
+      },
+    ],
+    quellen: [
+      { titel: 'WHO — Waist Circumference and Waist–Hip Ratio (Report of a WHO Expert Consultation)', url: 'https://www.who.int', hinweis: 'Orientierungsschwellen für Taille-Hüfte-Verhältnis und Taillenumfang.' },
+      { titel: 'Methodik der Berechnung', hinweis: 'WHR = Taillenumfang ÷ Hüftumfang; WHtR = Taillenumfang ÷ Körpergröße (Faustregel < 0,5). Einordnung als statistische Orientierung, kein individueller Ziel- oder Grenzwert.' },
     ],
   },
   {
