@@ -1393,7 +1393,7 @@ Der Rechner liefert Information, keine Anleitung zur Selbstoptimierung. Ein einz
   },
   {
     slug: 'ssw-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-21',
     titel: 'SSW-Rechner',
     beschreibung: 'Schwangerschaftswoche berechnen: Aktuelle SSW, Trimester und Entwicklung Ihres Babys Woche für Woche.',
     kategorie: 'Gesundheit',
@@ -1452,6 +1452,101 @@ So hilfreich SSW-Rechner und Schwangerschafts-Apps auch sind — sie ersetzen ke
         frage: 'Wie genau ist der errechnete Geburtstermin?',
         antwort: 'Der ET (Naegele-Regel: letzte Periode + 280 Tage) ist ein statistischer Richtwert. Nur etwa 4 % der Babys kommen genau am errechneten Termin zur Welt. Als regulär gelten Geburten zwischen SSW 37+0 und SSW 41+6. Am genauesten wird der Termin durch einen frühen Ultraschall im 1. Trimester bestimmt — diese Messung korrigiert die Naegele-Regel bei unregelmäßigen Zyklen.',
       },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was SSW und Trimester bedeuten',
+        html: `<p>Die <strong>Schwangerschaftswoche</strong> (SSW) gibt an, wie weit eine Schwangerschaft fortgeschritten ist. Verwirrend für viele: Gezählt wird nicht ab der Zeugung, sondern ab dem <strong>ersten Tag der letzten Periode</strong>. Das ist die Konvention der Frauenheilkunde, weil dieser Tag meist sicher bekannt ist, der genaue Zeitpunkt des Eisprungs dagegen nicht. Rechnerisch ist man dadurch zum Zeitpunkt der Empfängnis bereits in der zweiten bis dritten SSW.</p><p>Angegeben wird die SSW als <strong>vollendete Wochen plus Tage</strong>, zum Beispiel „SSW 14+2" — also 14 abgeschlossene Wochen und 2 Tage; umgangssprachlich befindet man sich dann in der laufenden 15. Woche. Die rund 40 Wochen einer Schwangerschaft teilen sich in drei <strong>Trimester</strong>. Dieser Rechner ermittelt aus dem Periodendatum oder einem bekannten Geburtstermin die aktuelle SSW und das Trimester. Er liefert eine rechnerische Orientierung — die verlässliche Begleitung übernehmen Ärztin oder Arzt und Hebamme. Ergänzend zeigt er, welche Frucht- oder Gemüsegröße das Baby ungefähr erreicht hat und welche Vorsorgeuntersuchung als Nächstes ansteht.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'SSW und Termin aus der letzten Periode',
+        schritte: [
+          { label: '1. Tag der letzten Periode', formel: '', ergebnis: '1. März 2026' },
+          { label: 'Errechneter Termin (ET)', formel: '+ 280 Tage', ergebnis: '6. Dezember 2026' },
+          { label: 'Stand z. B. am 9. Juni 2026', formel: '100 Tage seit Periode ÷ 7', ergebnis: 'SSW 14+2' },
+          { label: 'Trimester', formel: 'SSW 13–27', ergebnis: '2. Trimester' },
+        ],
+        fazit: 'Die wichtigste Methode ist die Naegele-Regel: Man rechnet ab dem ersten Tag der letzten Periode 280 Tage (40 Wochen) bis zum errechneten Termin. Beginnt die letzte Periode am 1. März 2026, liegt der ET rechnerisch am 6. Dezember 2026. (Die bekannte Merkregel „minus drei Monate, plus sieben Tage, plus ein Jahr" führt zu fast demselben Datum.) Die aktuelle SSW ergibt sich aus den vergangenen Tagen seit der Periode geteilt durch sieben: Am 9. Juni 2026 sind das 100 Tage, also 14 volle Wochen und 2 Tage — SSW 14+2, mitten im zweiten Trimester. Der Rechner zeigt dazu passende Entwicklungs-Hinweise und die nächste Vorsorgeuntersuchung an. Der ET ist dabei stets derselbe Tag wie SSW 40+0 — die 280 Tage entsprechen genau vierzig Wochen ab der letzten Periode.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum die Zykluslänge den Termin verschiebt',
+        html: `<p>Die Naegele-Regel unterstellt einen <strong>28-Tage-Zyklus</strong> mit Eisprung um den 14. Tag. Bei vielen Frauen ist der Zyklus aber länger oder kürzer — und dann findet auch der Eisprung später oder früher statt. Der Rechner korrigiert deshalb den errechneten Termin: Pro Tag, den der Zyklus von 28 abweicht, verschiebt sich der ET um einen Tag. Ein 32-Tage-Zyklus verlegt den Termin also um vier Tage nach hinten.</p><p>Wichtig und manchmal überraschend: Diese Korrektur wirkt nur auf den <strong>errechneten Termin</strong>, nicht auf die angezeigte SSW. Die SSW bleibt strikt ab dem ersten Tag der letzten Periode gezählt — so macht es der medizinische Standard, etwa im Mutterpass. Beide Größen haben unterschiedliche Aufgaben: Die SSW dokumentiert den Stand seit der Periode, der korrigierte ET schätzt den wahrscheinlichen Geburtstag. Am genauesten ist ohnehin der per Ultraschall bestimmte Termin. Der Rechner erlaubt Zykluslängen von 21 bis 35 Tagen; wer seinen Zyklus nicht genau kennt, lässt den Standardwert von 28 Tagen stehen.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'SSW mit abweichender Zykluslänge',
+        schritte: [
+          { label: 'Letzte Periode', formel: '', ergebnis: '1. März 2026' },
+          { label: 'Zykluslänge', formel: 'statt 28', ergebnis: '32 Tage' },
+          { label: 'ET-Korrektur', formel: '32 − 28', ergebnis: '+ 4 Tage' },
+          { label: 'Neuer ET', formel: '6. Dez + 4 Tage', ergebnis: '10. Dezember 2026' },
+          { label: 'SSW-Anzeige', formel: 'bleibt ab Periode gezählt', ergebnis: 'unverändert SSW 14+2' },
+        ],
+        fazit: 'Dasselbe Periodendatum, aber ein längerer Zyklus: Bei 32 statt 28 Tagen verschiebt der Rechner den Termin um vier Tage vom 6. auf den 10. Dezember 2026. Die SSW-Anzeige bleibt dagegen bei SSW 14+2 — sie zählt weiter rein ab der Periode. Das ist kein Fehler, sondern Absicht: Der Mutterpass und die Vorsorge orientieren sich am Stand seit der letzten Periode, während der korrigierte ET die individuelle Zykluslänge berücksichtigt. Wer einen sehr unregelmäßigen Zyklus hat, sollte sich beim Termin ohnehin auf den frühen Ultraschall verlassen — er ist genauer als jede Rechnung. Die vier Tage Unterschied im Beispiel zeigen zugleich, dass die Zykluslänge nur eine feine Korrektur ist und den groben Zeitraum der Geburt nicht umwirft.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'SSW aus einem bekannten Termin',
+        schritte: [
+          { label: 'Bekannter Geburtstermin', formel: '', ergebnis: '6. Dezember 2026' },
+          { label: 'Rechnerischer Beginn', formel: '− 280 Tage', ergebnis: '1. März 2026' },
+          { label: 'Stand am 9. Juni 2026', formel: '100 Tage ÷ 7', ergebnis: 'SSW 14+2' },
+          { label: 'Trimester', formel: '', ergebnis: '2. Trimester' },
+        ],
+        fazit: 'Manchmal ist der Termin schon bekannt — etwa aus dem Ultraschall oder von der Frauenärztin — und man möchte nur den aktuellen Wochenstand wissen. Dann rechnet der Rechner rückwärts: Vom errechneten Termin zieht er 280 Tage ab und erhält so den rechnerischen Beginn (hier den 1. März 2026). Daraus ergibt sich am 9. Juni 2026 dieselbe SSW 14+2 im zweiten Trimester. Diese Variante ist praktisch, wenn der per Ultraschall bestätigte Termin von der reinen Perioden-Rechnung abweicht: Man gibt einfach den ärztlich genannten Termin ein und bekommt den dazu passenden Wochenstand. So bleiben SSW-Anzeige und Vorsorge-Hinweise konsistent mit dem Termin, den die betreuende Praxis im Mutterpass vermerkt hat.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Die drei Trimester im Überblick',
+        kopf: ['Trimester', 'Wochen (SSW)', 'grobe Meilensteine'],
+        zeilen: [
+          ['1. Trimester', 'SSW 1–12', 'Organe werden angelegt; zum Ende sinkt das Fehlgeburtsrisiko deutlich'],
+          ['2. Trimester', 'SSW 13–27', 'erste Kindsbewegungen; Feindiagnostik-Ultraschall (SSW 19–22)'],
+          ['3. Trimester', 'SSW 28–40', 'Lungenreifung; Mutterschutz beginnt 6 Wochen vor dem ET'],
+        ],
+        fussnote: 'Trimester-Grenzen wie im Rechner: 1. Trimester bis SSW 12, 2. Trimester SSW 13–27, 3. Trimester ab SSW 28. Die genannten Meilensteine sind grobe, gut belegte Orientierungspunkte — jede Schwangerschaft verläuft individuell, und Abweichungen sind normal. Welche Untersuchungen wann sinnvoll sind, bespricht man mit der betreuenden Praxis; der Rechner blendet zur Orientierung die jeweils nächste reguläre Vorsorgeuntersuchung ein. Die Übergänge zwischen den Trimestern sind keine harten Einschnitte, sondern eine grobe Einteilung der Schwangerschaft in drei etwa gleich lange Abschnitte.',
+      },
+      {
+        typ: 'text',
+        titel: 'Der Termin ist ein Richtwert, kein Stichtag',
+        html: `<p>So konkret ein Datum wirkt — der errechnete Termin ist ein <strong>statistischer Richtwert</strong>, kein festes Lieferdatum. Tatsächlich kommen nur etwa <strong>4 Prozent</strong> der Kinder genau am errechneten Termin zur Welt. Als völlig regulär gilt eine Geburt in einer breiten Spanne zwischen <strong>SSW 37+0 und 41+6</strong> — also rund drei Wochen vor bis knapp zwei Wochen nach dem ET.</p><p>Das ist gut zu wissen, weil der Termin sonst unnötig unter Druck setzt. Ein Kind, das über dem Termin liegt, ist meist völlig im normalen Rahmen; ärztlich wird ab dem Überschreiten lediglich engmaschiger kontrolliert. Umgekehrt ist auch eine Geburt einige Wochen vorher nicht ungewöhnlich. Der Rechner zeigt den ET deshalb bewusst als Orientierung, nicht als Countdown. Wann es tatsächlich so weit ist, entscheidet sich individuell — und die betreuende Hebamme oder Ärztin ordnet den Verlauf verlässlich ein. Bei Fragen oder Unsicherheiten ist sie immer die richtige Adresse. Den ET als groben Zeitraum statt als exaktes Datum zu sehen, nimmt vielen Schwangeren in den letzten Wochen spürbar Druck.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'SSW-Rechner und Geburtstermin-Rechner',
+        html: `<p>Auf Rechenfix gibt es zwei verwandte Werkzeuge, die man leicht verwechselt. Dieser <strong>SSW-Rechner</strong> beantwortet die Frage, wie weit man gerade ist — er zeigt den aktuellen Wochenstand und das Trimester. Der <strong>Geburtstermin-Rechner</strong> dagegen konzentriert sich auf das Termin-Datum und bietet weitere Methoden an, etwa die Berechnung aus dem Empfängnis- oder Ultraschalldatum.</p><p>Wer also vor allem wissen will, in welcher Woche er sich befindet, ist hier richtig; wer den voraussichtlichen Geburtstag möglichst genau bestimmen möchte, nutzt ergänzend den Geburtstermin-Rechner. Den verlässlichsten Wert liefert ohnehin keiner von beiden, sondern der <strong>frühe Ultraschall</strong>: In den ersten Wochen lässt sich das Schwangerschaftsalter über die Größe des Embryos sehr genau bestimmen, weshalb Ärztin oder Arzt den rechnerischen Termin oft leicht anpassen. Auch der verwandte Rechner zur Gewichtszunahme in der Schwangerschaft betrachtet ein ganz anderes Thema — keiner dieser Werte ist eine Bewertung, sondern jeweils nur eine sachliche Orientierung zu einem bestimmten Aspekt.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Eingabe richtig machen',
+        punkte: [
+          'Den ersten Tag der letzten Periode eingeben, nicht den letzten oder den Tag des Eisprungs.',
+          'Die eigene durchschnittliche Zykluslänge angeben (Standard 28 Tage).',
+          'Alternativ einen bereits bekannten Geburtstermin eintragen.',
+          'Auf das Datumsformat achten und ein plausibles, nicht in der Zukunft liegendes Periodendatum wählen.',
+          'Die SSW-Anzeige (vollendete Wochen + Tage) nicht mit der laufenden Woche verwechseln.',
+          'Den errechneten Termin als Richtwert verstehen, nicht als festen Stichtag.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Rechnerische Orientierung, keine Betreuung',
+        text: 'Dieser Rechner liefert eine rechnerische Orientierung zum Schwangerschaftsstand und zum voraussichtlichen Termin — er ersetzt keine ärztliche Untersuchung und keine Hebammen-Betreuung und stellt keine Diagnose. Die Berechnung beruht auf der Naegele-Regel und Ihren Eingaben; der tatsächliche Verlauf kann davon abweichen. Die zuverlässigste Einordnung von Wochenstand, Termin und Entwicklung gibt die betreuende Praxis, besonders über den Ultraschall. Bei Fragen, Unsicherheiten oder Beschwerden wenden Sie sich bitte an Ihre Frauenärztin, Ihren Frauenarzt oder Ihre Hebamme — sie begleiten Sie sicher durch die Schwangerschaft. Diese Seite ist als ergänzende Information gedacht, nicht als medizinischer Rat. Gerade in einer emotional bewegten Zeit soll sie Sicherheit beim Einordnen geben, nicht zusätzlich verunsichern — im Zweifel zählt immer das, was Ihre Hebamme oder Ärztin sagt.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Ultraschall präzisiert den Termin',
+        text: 'Am genauesten lässt sich das Schwangerschaftsalter durch einen frühen Ultraschall im ersten Trimester bestimmen. In den ersten Wochen wachsen alle Embryonen sehr ähnlich, sodass die gemessene Größe das Alter auf wenige Tage genau verrät. Liegt dieser per Ultraschall bestimmte Termin vor, ist er der reinen Perioden-Rechnung überlegen — vor allem bei unregelmäßigen Zyklen. Sie können ihn dann einfach als bekannten Geburtstermin in den Rechner eintragen und erhalten den dazu passenden Wochenstand. Die Rechnung ersetzt die Untersuchung aber nicht, sondern ergänzt sie. Spätere Ultraschalle dienen vor allem der Verlaufskontrolle und sind für die Termin-Bestimmung weniger geeignet als der frühe — das Wachstum streut mit fortschreitender Schwangerschaft stärker.',
+      },
+    ],
+    quellen: [
+      { titel: 'Naegele-Regel / Standard-Geburtshilfe (Methodik)', hinweis: 'ET = 1. Tag der letzten Periode + 280 Tage; Zykluslängen-Korrektur ET = + (Zyklus − 28) Tage; SSW ab erster Periode als vollendete Wochen + Tage; Trimester 1 bis SSW 12, 2 bis SSW 27, 3 ab SSW 28.' },
+      { titel: 'Frauenärzte im Netz (Berufsverband der Frauenärzte)', url: 'https://www.frauenaerzte-im-netz.de', hinweis: 'Patienteninformationen zu Schwangerschaft, SSW und Vorsorge.' },
     ],
   },
   {
