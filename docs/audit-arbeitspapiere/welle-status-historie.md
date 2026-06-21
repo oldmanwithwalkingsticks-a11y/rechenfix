@@ -4,7 +4,50 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 20.06.2026
+**Stand:** 21.06.2026
+
+---
+
+## 21.06.2026 — W19 Goldstandard-Tranche t50–t55 (gebündelter Doku-Sync, 79 Goldstandard gemessen)
+
+Sechs Rechner aus fünf Kategorien auf Goldstandard gehoben. Doku auf Karstens Wunsch
+**erst nach t55 gebündelt** nachgezogen — pro Rechner wurde nur der Config-Commit gesetzt
+(kein Einzel-Doku-Commit). Jeder mit `contentBloecke` + `quellen`, Leitformat ≥3–4×
+dominant, alle `text`-Blöcke ≤170 W, Self-Check Wortzahl ≥1500 grün, Struktur kein WARN.
+Contentbloecke-Set jetzt **79 Rechner** (gemessen via `check-contentbloecke-struktur.mjs`;
+die Tranche-Prompts bezifferten projektiv „80").
+
+- **t50 gehaltserhoehung-rechner** (finanzen.ts, vergleich-Leitformat 3×, 13 Blöcke, ~1.546 W,
+  `6ec5919`). Fokus Netto-Effekt einer Erhöhung: Grenz- vs. Durchschnittssteuersatz, BBG-Effekt,
+  steuerfreie Extras, Inflation. Grenzbelastungs-**Prinzip + Spannen** statt alternder
+  Steuer-Einzelwerte. Abgegrenzt von stundenlohn/gehaltsvergleich.
+- **t51 mietrechner** (wohnen.ts, beispielrechnung-Leitformat 4×, 13 Blöcke, ~1.559 W, `d6e4f52`).
+  **Top-10, `zeigtAuthorBio` bleibt true.** Mieter-Sicht: Warmmiete, Mietbelastungsquote,
+  30-%-Regel, Preis/m² vs. Mietspiegel. Lib-treu zu `berechneMietpreis` (650+200=850 € → 34 %).
+  quellen auf NK-Fokus umgestellt (§ 556 BGB, BetrKV, § 556d, § 558d). Abgegrenzt von
+  nebenkosten/heizkosten/quadratmeter.
+- **t52 rabattrechner** (alltag.ts, beispielrechnung-Leitformat 4×, 13 Blöcke, ~1.543 W, `b9040d4`).
+  Rabatt-spezifisch: Prozent-Abzug, Rabatt-% rückrechnen, **multiplikativer Doppelrabatt
+  (28 % statt 30 %)**, Skonto, UVP/Streichpreis-Kritik + 30-Tage-Tiefstpreis. Lib-treu zu
+  `rabatt.ts`. quellen didaktisch (Methodik). Abgegrenzt von prozentrechner/dreisatz.
+- **t53 binaer-rechner** (mathe.ts, tabelle-Leitformat 3×, 14 Blöcke, ~1.657 W, `2cdd712`).
+  Zahlensystem-Fokus Dezimal/Binär/Oktal/Hex (3 Tabellen: Systeme-Vergleich, Zweierpotenzen,
+  Hex-Nibbles). diagramm/statistik bewusst weggelassen (Mathe-Profil). Abgegrenzt von
+  datenmengen (Speichergrößen) trotz hohem Typ-Kosinus (0,99, kein Gate) — Inhalt disjunkt.
+- **t54 taxi-rechner** (auto.ts, statistik-Leitformat 3×, 14 Blöcke, ~1.519 W, `9bc158f`).
+  Lib-treu zu `taxi.ts` (Phasen, Stand 24.04.2026; Köln aktiv 01.06.2026 = 2,90 €/km). Tarife
+  **konsequent als Beispiel-/Orientierungswerte** (kommunal, § 51 PBefG) — keine
+  bundeseinheitliche Behauptung; Tag/Nacht-Realität (7 Großstädte Einheitstarif) korrekt.
+- **t55 wahrer-stundenlohn** (finanzen.ts, vergleich-Leitformat 3×, 14 Blöcke, ~1.537 W, `188aae8`).
+  Effektiver Stundenlohn nach SV/Steuer, unbezahlter Zeit (Pendeln/Mehrarbeit) und
+  berufsbedingten Kosten. Lib-treu zu `wahrer-stundenlohn.ts` (Default: offiziell ~12,70 €,
+  wahr ~9,25 €). **Prinzip + Spannen** statt alternder Steuer-Fixwerte, „keine Steuerberatung".
+  Abgegrenzt von stundenlohn/gehaltsvergleich/gehaltserhoehung (0,99-Kosinus zu gehaltserhoehung
+  ist nicht-gatend; Inhalt disjunkt).
+
+**Operativ:** Pro Rechner nur die Kategorie-Config committet (client-data.ts-Drift bewusst nicht
+mit-committet); Push deployt automatisch (kein Deploy-Hook, sonst Doppel-Deploy). Memory
+`project_historie_defer_t50_t55.md` kann nach diesem Sync gelöscht werden.
 
 ---
 
