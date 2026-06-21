@@ -917,7 +917,7 @@ Für Ihre allgemeine Gesundheit während der Schwangerschaft kann auch unser [BM
   },
   {
     slug: 'idealgewicht-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-22',
     titel: 'Idealgewicht-Rechner',
     beschreibung: 'Idealgewicht berechnen nach verschiedenen Formeln: Broca, Creff und BMI-basiert — mit persönlicher Idealgewicht-Spanne.',
     kategorie: 'Gesundheit',
@@ -964,7 +964,7 @@ Das rechnerische Idealgewicht und das persönliche Wohlfühlgewicht sind nicht i
 
 Alle drei Formeln haben eine gemeinsame Schwäche: Sie können **Muskelmasse und Körperfett nicht unterscheiden**. Ein durchtrainierter Sportler mit viel Muskelmasse kann laut BMI als „übergewichtig" gelten, obwohl sein Körperfettanteil niedrig ist. Umgekehrt kann eine Person mit normalem BMI einen hohen Körperfettanteil und wenig Muskelmasse haben — das sogenannte „skinny fat". Für eine genauere Einschätzung ist die Messung des Körperfettanteils oder des Taillenumfangs sinnvoll.
 
-Ergänzend können Sie mit unserem [Kalorienrechner](/gesundheit/kalorienrechner) Ihren täglichen Kalorienbedarf ermitteln — ein wichtiger Schritt, wenn Sie Ihr Gewicht verändern oder halten möchten. Auch unser [Schlafrechner](/gesundheit/schlaf-rechner) kann hilfreich sein, denn Schlafmangel beeinflusst das Hungergefühl und den Stoffwechsel erheblich.`,
+Diese Formeln sind eine grobe Orientierung, kein anzustrebendes Ziel. Für eine genauere Einschätzung der Körperzusammensetzung sind der Körperfettanteil oder der Taillenumfang aussagekräftiger als jede reine Gewichtsformel — dafür gibt es den [Körperfett-Rechner](/gesundheit/koerperfett-rechner) und den [WHR-Rechner](/gesundheit/whr-rechner). Eine Zahl auf der Waage sagt für sich genommen wenig; entscheidend ist das Gesamtbild, das am besten ärztlich eingeordnet wird.`,
     faq: [
       {
         frage: 'Wie berechne ich mein Idealgewicht?',
@@ -990,6 +990,108 @@ Ergänzend können Sie mit unserem [Kalorienrechner](/gesundheit/kalorienrechner
         frage: 'Ist das Idealgewicht für Sportler anders?',
         antwort: 'Ja, Sportler mit viel Muskelmasse können ein höheres Gewicht haben, das trotzdem gesund ist. Muskeln wiegen mehr als Fett, daher können trainierte Personen laut BMI als „übergewichtig" gelten, obwohl ihr Körperfettanteil niedrig ist. Für Sportler sind Körperfettmessung und Taillenumfang aussagekräftiger als reine Gewichtsformeln.',
       },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Es gibt nicht „das eine" Idealgewicht',
+        html: `<p>Vorweg das Wichtigste, weil der Name dieses Rechners in die Irre führen kann: <strong>Ein einzelnes „ideales" Gewicht gibt es nicht.</strong> Die hier gezeigten Formeln liefern grobe Richtwerte und eine Spanne — keinen Zielwert, den man erreichen müsste, und keine Vorgabe, an der man sich messen sollte. Menschen sind unterschiedlich gebaut, und dasselbe Gewicht kann bei zwei Personen völlig verschieden aussehen und sich anfühlen.</p><p>Der Rechner stellt drei verbreitete Methoden nebeneinander: die alten <strong>Broca</strong>- und <strong>Creff</strong>-Faustformeln und eine <strong>BMI-basierte Spanne</strong>. Schon dass diese drei deutlich unterschiedliche Werte ergeben, zeigt: Es handelt sich um grobe Orientierung, nicht um eine exakte Wahrheit. Am ehesten brauchbar ist die BMI-Spanne, weil sie einen Bereich statt einer Einzelzahl angibt. Verstehen Sie das Ergebnis als Einordnung, nicht als Urteil über Ihren Körper — und schon gar nicht als Aufforderung, ihn zu verändern. Eingegeben werden Geschlecht, Alter, Größe, Gewicht und Körperbau; daraus berechnet der Rechner die drei Werte und zeigt, wo das aktuelle Gewicht relativ zur BMI-Spanne liegt.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Faustformeln und BMI-Spanne im Vergleich',
+        spalteA: 'Broca / Creff (Faustformeln)',
+        spalteB: 'BMI-Spanne (modern)',
+        zeilen: [
+          { kriterium: 'Ergebnis', a: 'eine Einzelzahl', b: 'ein Gewichtsbereich' },
+          { kriterium: 'Grundlage', a: 'Faustregeln (Broca 1871, Creff)', b: 'WHO-BMI mit Altersanpassung' },
+          { kriterium: 'Berücksichtigt', a: 'Größe (Creff auch Alter/Körperbau grob)', b: 'Größe und Alter' },
+          { kriterium: 'Ignoriert', a: 'Muskelmasse, Statur, Vielfalt', b: 'Muskel-/Fettanteil, Körperbau' },
+          { kriterium: 'Einordnung', a: 'historisch, grob, überholt', b: 'seriösere Orientierung, aber kein Ziel' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Woher Broca und Creff stammen',
+        html: `<p>Die beiden Faustformeln sind <strong>über hundert Jahre alt</strong>. Die Broca-Formel geht auf den französischen Chirurgen Paul Broca zurück und stammt aus dem Jahr <strong>1871</strong>: Das Normalgewicht ist Körpergröße in Zentimetern minus 100, das „Idealgewicht" davon noch ein Stück abgezogen (10 Prozent bei Männern, 15 Prozent bei Frauen). Die Creff-Formel ist eine spätere Verfeinerung, die Alter und Körperbau grob einbezieht.</p><p>So eingängig diese Formeln sind — sie entstanden in einer Zeit ohne die heutige Datenlage und <strong>ignorieren das meiste, was zählt</strong>: Muskelmasse, Knochenbau, die natürliche Vielfalt menschlicher Statur, Unterschiede zwischen den Geschlechtern jenseits eines pauschalen Abzugs. Bei sehr großen oder kleinen Menschen werden sie zusätzlich ungenau. Man sollte sie deshalb als das nehmen, was sie sind: historische Daumenregeln, kein Gesundheitsmaßstab. Sie hier zu zeigen dient vor allem dem Vergleich — und der Erkenntnis, wie grob solche Einzelzahlen sind. Die Broca-Formel galt lange als praktische Merkhilfe ohne Taschenrechner; heute ist sie vor allem von historischem Interesse und für die schnelle Überschlagsrechnung gedacht, nicht für eine gesundheitliche Bewertung.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Drei „Ideale" für dieselbe Person',
+        schritte: [
+          { label: 'Annahme', formel: '', ergebnis: 'Mann, 180 cm, 35 Jahre' },
+          { label: 'Broca', formel: '(180 − 100) × 0,9', ergebnis: '72,0 kg' },
+          { label: 'Creff', formel: '((180−100) + 35/10) × 0,9', ergebnis: '75,2 kg' },
+          { label: 'BMI-Spanne (Alter 35)', formel: 'BMI 21 – 26,9', ergebnis: '68,0 – 87,2 kg' },
+        ],
+        fazit: 'Dieselbe Person, drei Methoden, drei verschiedene Antworten: Broca nennt 72 Kilogramm, Creff 75,2 — und die BMI-Spanne reicht von 68 bis über 87 Kilogramm. Allein diese Streuung von fast 20 Kilogramm zwischen den „Idealen" macht deutlich, dass es das eine richtige Gewicht nicht gibt. Die Einzelzahlen von Broca und Creff täuschen eine Präzision vor, die sie nicht haben; die breite BMI-Spanne ist ehrlicher, weil sie einen ganzen Bereich als unbedenklich ausweist. Welche Zahl jemand „erreicht", sagt für sich genommen nichts über seine Gesundheit. Die Werte sind eine grobe Orientierung — nicht mehr und nicht weniger. Eine Frau mit denselben Maßen käme bei Broca übrigens auf einen niedrigeren Wert (Faktor 0,85 statt 0,9), was die willkürliche, pauschale Natur dieser alten Abzüge zusätzlich unterstreicht. Auch ein anderer Körperbau verschiebt das Creff-Ergebnis spürbar — schon das zeigt, dass keine dieser Zahlen eine objektive Größe ist, sondern das Resultat einer gewählten Formel. Statt sich auf einen der drei Werte zu fixieren, liest man sie am besten zusammen als groben Rahmen — und auch der bleibt nur eine von vielen Perspektiven auf einen Körper.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Normalgewichts-Spanne nach WHO (BMI 18,5 – 24,9)',
+        kopf: ['Körpergröße', 'Gewichtsspanne (gerundet)'],
+        zeilen: [
+          ['160 cm', '47 – 64 kg'],
+          ['170 cm', '53 – 72 kg'],
+          ['180 cm', '60 – 81 kg'],
+          ['190 cm', '67 – 90 kg'],
+        ],
+        fussnote: 'Gewichtsspanne, die einem BMI von 18,5 bis 24,9 entspricht — der von der WHO als „Normalgewicht" bezeichnete Bereich für Erwachsene (Werte gerundet). Schon dieser Bereich ist breit (bei 180 cm rund 20 Kilogramm), was zeigt, dass „normal" kein Punkt, sondern eine Spanne ist. Der Rechner verschiebt die obere Grenze mit zunehmendem Alter leicht nach oben (NRC-Konvention), weil ein etwas höheres Gewicht im Alter schützend wirken kann. Für 35-Jährige nutzt er beispielsweise einen Bereich von BMI 21 bis 26,9 statt 18,5 bis 24,9. Es sind Orientierungswerte, keine Ziel- oder Grenzlinien — niemand muss eine bestimmte Stelle innerhalb der Spanne anstreben. Wer seine Größe in der Tabelle nicht findet, kann die Spanne leicht selbst überschlagen: untere Grenze etwa Größe in Metern zum Quadrat mal 18,5, obere Grenze mal 24,9.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum eine Spanne ehrlicher ist als eine Einzelzahl',
+        html: `<p>Eine einzelne Zahl wirkt präzise und beruhigend — aber sie führt in die Irre. <strong>Gesundheit lässt sich nicht auf ein Kilogramm genau festlegen.</strong> Deshalb arbeitet die moderne Sicht mit einer <strong>Spanne</strong>: Ein ganzer Gewichtsbereich gilt als unbedenklich, und wo genau man darin liegt, ist weitgehend gleichgültig. Eine Spanne lässt Raum für die natürliche Vielfalt von Körpern, eine Einzelzahl tut das nicht. Wer in die Mitte einer Spanne fällt, ist nicht „gesünder" als jemand am Rand — der gesamte Bereich gilt als unbedenklich.</p><p>Hinzu kommt: <strong>Gleicher BMI bedeutet nicht gleiche Gesundheit.</strong> Zwei Menschen mit identischem Gewicht können sehr unterschiedlich fit sein — je nach Muskelanteil, Bewegung, Ernährung und Veranlagung. Das Gewicht ist nur einer von vielen Faktoren und steht nicht über den anderen. Entscheidend für die Gesundheit sind eher regelmäßige Bewegung, ausgewogene Ernährung, Schlaf und der Umgang mit Stress — Dinge, die keine Gewichtsformel erfasst. Eine Zahl in oder außerhalb der Spanne ist deshalb kein Urteil, sondern bestenfalls ein grober Hinweis.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Was die Formeln nicht erfassen',
+        html: `<p>Alle drei Methoden teilen eine grundlegende Schwäche: Sie <strong>unterscheiden nicht zwischen Muskel- und Fettmasse</strong>. Ein durchtrainierter Mensch mit viel Muskulatur kann nach BMI oder Broca als „zu schwer" erscheinen, obwohl sein Körperfettanteil niedrig ist. Umgekehrt kann jemand mit „normalem" Gewicht wenig Muskeln und viel Fett haben. Das Gewicht allein verrät die Körperzusammensetzung nicht.</p><p>Ebenso wenig erfassen die Formeln den <strong>Körperbau</strong> (zierlich oder kräftig, breite oder schmale Knochen), die individuelle <strong>Lebenssituation</strong> oder gesundheitliche Besonderheiten. Für eine genauere Einschätzung sagen der <strong>Körperfettanteil</strong> oder der <strong>Taillenumfang</strong> mehr aus als jede reine Gewichtsformel. Deshalb betrachten Fachleute nie nur eine Zahl, sondern das Gesamtbild. Wer es genauer wissen möchte, ist mit dem Körperfett- oder dem WHR-Rechner besser bedient — und im Zweifel mit dem Gespräch in einer ärztlichen Praxis. Die verwandten Rechner messen jeweils anderes: der BMI-Rechner das Verhältnis Gewicht zu Größe, der Körperfett-Rechner den Fettanteil, der WHR-Rechner die Fettverteilung; der Schwangerschafts-Gewichtsrechner betrachtet einen ganz eigenen Sonderfall. Keiner davon ist ein Gesundheits-„Ziel".</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Was diese Zahlen nicht bedeuten',
+        html: `<p>Ganz gleich, welche der drei Zahlen herauskommt: Sie ist <strong>kein Maßstab, um sich mit anderen zu vergleichen, und kein Auftrag, den eigenen Körper zu verändern.</strong> Ein Gewicht innerhalb oder außerhalb der Spanne ist kein Urteil über die Gesundheit oder den Wert eines Menschen. Dieser Rechner nennt deshalb bewusst keine Abnehm-, Kalorien- oder Diätziele — er ordnet nur ein, mehr nicht. Gerade weil Gewicht in vielen Köpfen mit Selbstwert verknüpft ist, ist diese Trennung wichtig: Eine Kennzahl beschreibt einen Körper, sie bewertet keinen Menschen.</p><p>Der Begriff „Idealgewicht" ist letztlich ein irreführendes Wort: Es gibt kein Ideal, dem man entsprechen müsste. Wer sich durch Gedanken an Gewicht, Körper oder Essen <strong>belastet</strong> fühlt oder merkt, dass diese Gedanken zu kreisen beginnen, muss damit nicht allein bleiben. Verlässliche, einfühlsame Unterstützung gibt es bei Hausärztinnen und -ärzten, in einer Psychotherapie sowie anonym beim <strong>Beratungstelefon für Essstörungen des BIÖG (ehemals BZgA)</strong> unter 0221 892031. Sich Hilfe zu holen ist ein Zeichen von Stärke, kein Eingeständnis von Schwäche.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: '„Idealgewicht"-Denken vs. moderne Sicht',
+        spalteA: '„Idealgewicht"-Denken',
+        spalteB: 'Moderne Sicht',
+        zeilen: [
+          { kriterium: 'Annahme', a: 'eine richtige Zahl für alle', b: 'eine gesunde Spanne, individuell' },
+          { kriterium: 'Fokus', a: 'die Zahl auf der Waage', b: 'Gesamtbild: Bewegung, Ernährung, Wohlbefinden' },
+          { kriterium: 'Abweichung', a: 'gilt als Makel', b: 'oft völlig normal' },
+          { kriterium: 'Aussage über Gesundheit', a: 'wird überschätzt', b: 'nur ein Faktor von vielen' },
+          { kriterium: 'Umgang', a: 'einen Zielwert anstreben', b: 'einordnen, kein Selbstvergleich' },
+        ],
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Die Werte richtig einordnen',
+        punkte: [
+          'Die Ergebnisse als grobe Orientierung lesen, nicht als Vorgabe oder Ziel.',
+          'Den breiten BMI-Bereich ernster nehmen als die exakten Broca-/Creff-Einzelzahlen.',
+          'Eine Abweichung von der Spanne nicht als Makel werten — sie ist oft völlig normal.',
+          'Für die Körperzusammensetzung zusätzlich Körperfettanteil oder Taillenumfang betrachten.',
+          'Keine Diät- oder Abnehmziele aus diesen Zahlen ableiten.',
+          'Den Begriff „Idealgewicht" nicht wörtlich nehmen — es gibt kein anzustrebendes Ideal.',
+          'Für die Gesundheit zählen Bewegung, Ernährung, Schlaf und Wohlbefinden mehr als die Waage.',
+          'Bei Fragen oder Belastung Fachleute ansprechen, statt sich an einer Zahl zu messen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Orientierung, kein Ziel',
+        text: 'Dieser Rechner liefert eine grobe Orientierung nach historischen Faustformeln und einer BMI-Spanne — kein medizinisches oder ernährungsbezogenes Ziel und keine Aufforderung, den Körper zu verändern. „Idealgewicht" ist dabei nur ein eingebürgerter Begriff, kein anzustrebender Wert; es gibt kein einzelnes richtiges Gewicht. Die Zahlen ersetzen keine ärztliche Einschätzung, die das Gesamtbild aus Körperzusammensetzung, Fitness und Wohlbefinden betrachtet. Wer sich durch Gewichts- oder Körpergedanken belastet fühlt, findet ärztlich, psychotherapeutisch oder beim BIÖG-Beratungstelefon für Essstörungen (0221 892031) einfühlsame Unterstützung. Diese Seite ist eine neutrale Rechenhilfe, kein Werkzeug zur Selbstbewertung. Wenn eine Zahl auf dieser Seite belastet, ist nicht der Körper das Problem, sondern die Erwartung, einer Zahl entsprechen zu müssen — und genau diese Erwartung darf man getrost loslassen. Ein gesunder Körper kommt in vielen Gewichten und Formen vor; eine einzelne Formel aus dem 19. Jahrhundert kann dem nicht gerecht werden.',
+      },
+    ],
+    quellen: [
+      { titel: 'WHO — Body Mass Index (BMI-Klassifikation)', url: 'https://www.who.int', hinweis: 'Normalgewichts-Bereich BMI 18,5 – 24,9 für Erwachsene.' },
+      { titel: 'IQWiG — gesundheitsinformation.de (Gewicht und Gesundheit)', url: 'https://www.gesundheitsinformation.de', hinweis: 'Neutrale, evidenzbasierte Einordnung von Gewicht und BMI.' },
+      { titel: 'BIÖG (ehemals BZgA) — Beratungstelefon für Essstörungen', url: 'https://www.bzga-essstoerungen.de', hinweis: 'Anonyme Beratung unter 0221 892031 bei Belastung durch Gewicht, Körper oder Essverhalten.' },
+      { titel: 'Methodik der Formeln', hinweis: 'Broca: (Größe − 100) × 0,9 (Mann) / 0,85 (Frau); Creff: ((Größe − 100) + Alter/10) × 0,9 × Körperbau-Koeffizient (0,9 / 1,0 / 1,1); BMI-Spanne aus WHO-BMI (18,5–24,9) mit altersangepasster Staffelung (NRC 1989). Historische Faustformeln und statistische Spanne — eine grobe Orientierung, kein Gesundheitsziel und kein Maßstab zur Selbstbewertung.' },
     ],
   },
   {
