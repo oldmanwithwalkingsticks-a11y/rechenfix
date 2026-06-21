@@ -8,6 +8,53 @@
 
 ---
 
+## 21.06.2026 — W19 Goldstandard-Tranche t56–t62 (gebündelter Doku-Sync, 86 Goldstandard gemessen)
+
+Sieben Rechner aus fünf Kategorien auf Goldstandard gehoben. Doku auf Karstens Wunsch
+**erst nach t62 gebündelt** nachgezogen — pro Rechner nur Config-Commit, kein Einzel-Doku-Commit.
+Jeder mit `contentBloecke` + `quellen`, Leitformat dominant, alle `text`-Blöcke ≤170 W, Self-Check
+≥1500 grün, kein WARN. Contentbloecke-Set jetzt **86 Rechner** (gemessen via
+`check-contentbloecke-struktur.mjs`).
+
+- **t56 arbeitstage-rechner** (arbeit.ts, tabelle-Leitformat 3×, 12 Blöcke, ~1.538 W, `f52931c`).
+  Werte lib-treu aus `feiertage.ts` berechnet (NW 2026 = 253 AT, BL-Spanne 252–254). Abgrenzung
+  zu tagerechner (Kalendertage). **Bonus:** stale faq[0] korrigiert (260→261 Werktage, Bayern
+  246→252 AT) — Lib gewinnt.
+- **t57 kaffee-kosten-rechner** (alltag.ts, statistik-Leitformat 3×, 13 Blöcke, ~1.535 W, `9756007`).
+  Lib-treu zu `kaffee.ts` (Filter 0,15 / Kapsel 0,40 / Café 3,50 / Kette 5,00 €/Tasse). **Wellbeing:**
+  deskriptiv, kein Gesundheits-/Moral-Frame; Koffein bewusst aus den Bausteinen, Hochrechnung
+  entdramatisiert. Referenzpreise als Richtwerte (L-38).
+- **t58 malerkosten-rechner** (wohnen.ts, beispielrechnung-Leitformat 3×, 12 Blöcke, ~1.537 W,
+  `c863c12`). Lib-treu zur Inline-Component (61,5 m² → 135 € Material / ~682 € mit Maler; 0,15 l/m²,
+  42 €/h, 10 m²/h). Nur Streichen wird gerechnet, andere Gewerke als redaktionelle Richtwerte.
+  **Bonus:** stale beispiel 395 → 682 € korrigiert.
+- **t59 quersumme-rechner** (mathe.ts, beispielrechnung-Leitformat 4×, 11 Blöcke, ~1.532 W,
+  `8cdaf4c`). Lib-treu zu `quersumme.ts` (alt. QS von rechts: 8294→−11, 990 alt 0). Teilbarkeit
+  3/9 via QS, 11 via alt. QS. **Bewusst andere Block-Folge** (text-beispiel alternierend, single
+  infobox) gegen die Mathe-Schablonen-Falle (0,99-Kosinus, kein Gate). Kein Diagramm.
+- **t60 betriebskosten-rechner** (finanzen.ts, tabelle-Leitformat 4×, 13 Blöcke, ~1.533 W,
+  `1c14bd1`). Lib-treu zu `betriebskosten.ts` (Fix+Variabel+Unternehmerlohn → Jahr ÷ **1.400** fakt.
+  Std = Stundensatz; Default 4.410 €/Monat → 37,80 €). Gewerbliche Kostenkalkulation, abgegrenzt von
+  Wohn-Nebenkosten + freelancer-stundensatz. **L-35:** `geschaeftsform` ist Lib-Input ohne Rechen-
+  wirkung — Geschäftsform-Tabelle nur konzeptuell, transparent gemacht. Kein Diagramm.
+- **t61 fuehrerschein-rechner** (auto.ts, checkliste-Leitformat 2× + 2 Tabellen, 13 Blöcke, ~1.511 W,
+  `6822027`). Lib-treu zur Inline-Component (12 Sonderfahrten à 1,5×, Nebenkosten 157 €, Prüfung
+  22,49/116,93 €; Vorort 3.086 €, teurer Fall 4.358 €). Referenzwerte Stand 2026 (ADAC/Destatis);
+  **Kostenreform als frühestens 2027 / noch nicht geltend** in infobox(hinweis) markiert.
+- **t62 kleidergroessen-rechner** (alltag.ts, tabelle-Leitformat 5×, 12 Blöcke, ~1.509 W, `3f5bbe1`).
+  Größen-Mappings **1:1 aus der Component-SSOT** (Damen/Herren DE/EU/US/UK/IT + Oberweite/Taille/
+  Hüfte) — nichts aus dem Gedächtnis. **Wellbeing:** reine Maß-Zuordnung, keine Körper-Bewertung/
+  Diät-Frames. S/M/L nur als Text-Orientierung (Lib hat kein Mapping), Kinder via DIN EN 13402
+  (Größe = cm). Abgrenzung zu schuhgroessen-rechner. Kein Diagramm. quellen DIN EN 13402 + Methodik.
+
+**Operativ:** Pro Rechner nur die Kategorie-Config committet (client-data.ts-Drift bewusst nicht
+mit-committet); Push deployt automatisch (kein Deploy-Hook). Memory `project_historie_defer_t56_t62.md`
+nach diesem Sync löschbar. **Methoden-Muster der Tranche:** vor jedem Rechner Lib/Component gelesen
+und Beispiele selbst nachgerechnet; drei stale Bestand-Werte (t56 faq, t58 beispiel) als Bonus
+korrigiert (Lib gewinnt, L-35).
+
+---
+
 ## 21.06.2026 — W19 Goldstandard-Tranche t50–t55 (gebündelter Doku-Sync, 79 Goldstandard gemessen)
 
 Sechs Rechner aus fünf Kategorien auf Goldstandard gehoben. Doku auf Karstens Wunsch
