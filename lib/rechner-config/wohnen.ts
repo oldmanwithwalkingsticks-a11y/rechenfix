@@ -2012,7 +2012,7 @@ Die Dachneigung beeinflusst, wie schnell Regen- und Schmelzwasser abfließen. Je
   },
   {
     slug: 'malerkosten-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-21',
     titel: 'Malerkosten-Rechner',
     beschreibung: 'Streichkosten für Wand und Decke berechnen — Farbbedarf, Material und Malerkosten mit Einkaufsliste.',
     kategorie: 'Wohnen & Energie',
@@ -2022,7 +2022,7 @@ Die Dachneigung beeinflusst, wie schnell Regen- und Schmelzwasser abfließen. Je
     keywords: ['malerkosten rechner', 'streichen kosten', 'farbbedarf rechner', 'maler kosten', 'wand streichen kosten', 'decke streichen', 'wandfarbe menge', 'streichfläche berechnen'],
     icon: '🎨',
     formel: 'Streichfläche = 2 × (Länge + Breite) × Höhe + Decke − Fenster − Türen. Farbbedarf = Fläche × 0,15 l/m² × Anzahl Anstriche.',
-    beispiel: 'Beispiel: Raum 5×4×2,5 m, 1 Fenster, 1 Tür, 2 Anstriche, Decke mitstreichen → ca. 62 m² Streichfläche, 19 l Farbe (95 €), Material ~135 €. Mit Maler ca. 395 €.',
+    beispiel: 'Beispiel: Raum 5×4×2,5 m, 1 Fenster, 1 Tür, 2 Anstriche, Decke mitstreichen → ca. 62 m² Streichfläche, 19 l Farbe (95 €), Material ~135 €. Mit Maler ca. 682 € (12,3 h × 42 € + 30 € Anfahrt).',
     erklaerung: `**Wie funktioniert der Malerkosten-Rechner?**
 
 Der Malerkosten-Rechner ermittelt, wie viel Farbe Sie für einen Raum benötigen, was das Material kostet und wie viel ein professioneller Maler zusätzlich verlangen würde. Sie wählen zwischen zwei Eingabemodi: Entweder Sie geben Länge, Breite und Höhe des Raums an (der Rechner ermittelt die Wandfläche automatisch), oder Sie tragen die Streichfläche direkt in Quadratmetern ein.
@@ -2071,6 +2071,123 @@ Zusätzlich zum reinen Farbbedarf zeigt Ihnen der Rechner eine vollständige Ein
         frage: 'Wie lange brauche ich zum Streichen eines Zimmers?',
         antwort: 'Ein durchschnittlicher Hobby-Streicher schafft ca. 5 m² pro Stunde. Für einen 60 m²-Wandbereich mit zwei Anstrichen sollten Sie 12 bis 15 Stunden einplanen, verteilt auf zwei Tage (Trocknungszeit zwischen den Anstrichen).',
       },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Wie sich Malerkosten zusammensetzen',
+        html: `<p>Die Kosten für Maler- und Anstricharbeiten setzen sich aus mehreren Posten zusammen. Den größten Anteil hat meist der <strong>Lohn</strong>: Maler rechnen entweder nach Quadratmetern oder nach Arbeitsstunden ab, üblich sind grob 40 bis 50 Euro je Fachkraftstunde. Hinzu kommt das <strong>Material</strong> — Farbe, Grundierung, Abdeckfolie, Kreppband und Werkzeug — sowie eine <strong>Anfahrtspauschale</strong>.</p><p>Oft unterschätzt werden die <strong>Vorarbeiten</strong>: Möbel abdecken, Risse spachteln, Löcher füllen, alte Tapeten entfernen oder eine Grundierung auftragen. Diese Schritte kosten Zeit und damit Geld, sind aber entscheidend für ein sauberes Ergebnis. Dieser Rechner ermittelt zunächst die Streichfläche aus den Raummaßen — Wandumfang mal Höhe plus Decke, abzüglich Fenster und Türen — und rechnet daraus Farbbedarf, Materialkosten und, falls gewünscht, die Maler-Arbeitskosten. Anders als ein reiner Materialmengen-Rechner wie der Tapetenbedarf-Rechner geht es hier um die Kosten der Arbeit, nicht nur um die benötigte Menge.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Wohnzimmer streichen (5 × 4 × 2,5 m, Decke)',
+        schritte: [
+          { label: 'Wandfläche', formel: '2 × (5 + 4) × 2,5 m', ergebnis: '45 m²' },
+          { label: 'Decke', formel: '5 × 4 m', ergebnis: '20 m²' },
+          { label: 'Abzug Fenster + Tür', formel: '1,5 + 2,0', ergebnis: '− 3,5 m²' },
+          { label: 'Streichfläche', formel: '45 + 20 − 3,5', ergebnis: '61,5 m²' },
+          { label: 'Material (2 Anstriche, Standardfarbe)', formel: '19 l × 5 € + 40 €', ergebnis: '135 €' },
+          { label: 'Mit Maler', formel: '12,3 h × 42 € + 30 €', ergebnis: '≈ 682 €' },
+        ],
+        fazit: 'Aus den Raummaßen ergibt sich die Streichfläche: Wandumfang mal Höhe plus Decke, abzüglich Fenster und Türen — hier 61,5 Quadratmeter. Für zwei Anstriche mit Standard-Wandfarbe rechnet der Rechner 19 Liter Farbe und kommt inklusive Abdeckmaterial und Werkzeug auf rund 135 Euro Materialkosten beim Selbermachen. Beauftragt man einen Maler, kommen etwa 12,3 Arbeitsstunden zu 42 Euro plus 30 Euro Anfahrt hinzu — der Gesamtpreis liegt dann bei rund 682 Euro. Das entspricht für diesen Raum grob 11 Euro pro Quadratmeter inklusive Material. Die zugrunde gelegten Sätze (0,15 Liter Farbe je Quadratmeter und Anstrich, 10 Quadratmeter pro Stunde beim Profi) sind Richtwerte; im Rechner lassen sich Raum, Anstriche und Farbqualität anpassen. Wer nur einen Anstrich braucht — eine Auffrischung in gleicher Farbe — halbiert den Arbeitsaufwand und damit den Maler-Lohnanteil entsprechend.',
+      },
+      {
+        typ: 'text',
+        titel: 'Was ein Quadratmeter je nach Arbeit kostet',
+        html: `<p>Der Quadratmeterpreis hängt stark von der Art der Arbeit ab. <strong>Wände streichen</strong> mit Dispersionsfarbe ist am günstigsten; es umfasst zwei Anstriche auf vorbereitetem Untergrund. <strong>Tapezieren</strong> ist aufwendiger, weil Bahnen zugeschnitten, eingekleistert und blasenfrei angebracht werden müssen — Raufaser ist dabei günstiger als Vlies- oder Mustertapete.</p><p><strong>Lackieren</strong> von Türen, Zargen oder Heizkörpern wird oft pro Stück statt pro Quadratmeter berechnet, weil das saubere Abkleben und mehrere dünne Schichten viel Zeit kosten. <strong>Spachteln und Grundieren</strong> sind Vorarbeiten, die je nach Zustand des Untergrunds nötig werden und den Preis zusätzlich erhöhen. Wichtig: Dieser Rechner berechnet das <strong>Streichen mit Wandfarbe</strong>; für andere Gewerke dienen die folgenden Richtwerte als grobe Orientierung. Die tatsächlichen Preise hängen von Untergrund, Aufwand, Region und Betrieb ab und werden im konkreten Angebot festgelegt. Eine grobe Orientierung: Streichen ist günstiger als Tapezieren, und beide sind günstiger als hochwertiges Lackieren. Wer mehrere Gewerke kombiniert, lässt sie sinnvollerweise im selben Auftrag erledigen — das spart Anfahrten und Rüstzeiten.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Richtpreise je Gewerk (Orientierung)',
+        kopf: ['Arbeit', '€/m² (Richtwert)', 'Hinweis'],
+        zeilen: [
+          ['Wände streichen (2 Anstriche)', '≈ 8–15 €', 'inkl. Material; im Rechner berechnet'],
+          ['Decke streichen', '≈ 10–18 €', 'aufwendiger über Kopf'],
+          ['Raufaser tapezieren', '≈ 8–14 €', 'plus Material; Streichen separat'],
+          ['Vlies-/Mustertapete', '≈ 14–25 €', 'Materialpreis stark variabel'],
+          ['Altanstrich/Tapete entfernen', '≈ 5–12 €', 'Vorarbeit, je nach Zustand'],
+          ['Spachteln / Grundieren', '≈ 5–15 €', 'je nach Untergrund'],
+          ['Türen/Zargen lackieren', '≈ 60–120 €/Stück', 'pro Stück, nicht pro m²'],
+        ],
+        fussnote: 'Redaktionelle Richtwerte (Stand 2026) zur Orientierung, inklusive Lohn und — wo angegeben — Material. Die Preise schwanken erheblich nach Region, Auftragsgröße, Untergrund und Betrieb; in Ballungsräumen liegen sie meist höher. Nur das Streichen mit Wandfarbe rechnet dieser Rechner konkret; alle anderen Gewerke sind hier reine Vergleichswerte. Maßgeblich ist immer das schriftliche Angebot eines Fachbetriebs mit ausgewiesenem Leistungsumfang.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '3-Zimmer-Wohnung komplett streichen',
+        schritte: [
+          { label: 'Wohnzimmer (5×4×2,5, Decke)', formel: '', ergebnis: '61,5 m²' },
+          { label: 'Schlafzimmer (4×3×2,5, Decke)', formel: '', ergebnis: '43,5 m²' },
+          { label: 'Flur (4×1,5×2,5, Decke)', formel: '', ergebnis: '29,5 m²' },
+          { label: 'Streichfläche gesamt', formel: '61,5 + 43,5 + 29,5', ergebnis: '134,5 m²' },
+          { label: 'Mit Maler (2 Anstriche, inkl. Material)', formel: '≈ 41 l Farbe + ~27 h × 42 €', ergebnis: '≈ 1.400 €' },
+        ],
+        fazit: 'Für eine ganze Wohnung summiert man die Streichflächen der einzelnen Räume. Drei Räume mit zusammen 134,5 Quadratmetern Streichfläche erfordern bei zwei Anstrichen rund 41 Liter Standardfarbe. Beim Selbermachen liegen die Materialkosten bei etwa 245 Euro; mit Fachbetrieb kommen rund 27 Arbeitsstunden hinzu, sodass der Gesamtpreis bei etwa 1.400 Euro liegt — grob 10 bis 11 Euro pro Quadratmeter inklusive Material. Bei einer leeren Wohnung vor dem Einzug arbeiten Maler schneller und damit oft günstiger pro Quadratmeter als in möblierten, bewohnten Räumen mit viel Abdeck- und Rückbauaufwand. Für jeden Raum lässt sich die Fläche einzeln im Rechner bestimmen und addieren.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Decke und Wände inklusive Grundierung',
+        schritte: [
+          { label: 'Streichfläche (Decke + Wände)', formel: 'wie Wohnzimmer', ergebnis: '61,5 m²' },
+          { label: 'Grundierung + 2 Anstriche', formel: '3 Durchgänge', ergebnis: '3×' },
+          { label: 'Farbe / Grundierung', formel: '28 l × 5 €', ergebnis: '140 €' },
+          { label: 'Abdeckung + Werkzeug', formel: 'Folie, Kreppband, Rolle, Pinsel', ergebnis: '40 €' },
+          { label: 'Material gesamt', formel: '140 + 40', ergebnis: '180 €' },
+          { label: 'Mit Maler', formel: '~18,5 h × 42 € + 30 €', ergebnis: '≈ 985 €' },
+        ],
+        fazit: 'Wird auf einen neuen, saugenden oder fleckigen Untergrund gestrichen — etwa frischer Putz, ausgebesserte Stellen oder ein Wechsel von Dunkel auf Hell — empfiehlt sich eine Grundierung als zusätzlicher Durchgang. Im Rechner bildet man das über die Zahl der Anstriche ab: Aus zwei werden drei Durchgänge. Für den 61,5-Quadratmeter-Raum steigt der Farb- und Grundierungsbedarf damit auf rund 28 Liter, die Materialkosten auf etwa 180 Euro. Mit Maler kommen rund 18,5 Arbeitsstunden hinzu, der Gesamtpreis liegt bei etwa 985 Euro. Die Grundierung kostet zwar extra, spart aber oft einen weiteren Deckanstrich und sorgt für ein gleichmäßiges Ergebnis. Material und Lohn weist der Rechner getrennt aus, sodass sich beide Posten einzeln prüfen lassen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Selbst streichen oder Fachbetrieb beauftragen',
+        html: `<p>Beim einfachen Streichen von Wänden lässt sich durch Eigenleistung am meisten sparen, weil der Lohnanteil entfällt. Für den Beispielraum mit gut 60 Quadratmetern Streichfläche stehen rund 135 Euro Materialkosten beim Selbermachen etwa 680 Euro mit Fachbetrieb gegenüber. Dafür investiert man als Hobby-Streicher allerdings Zeit — der Rechner schätzt rund 25 Stunden für zwei Anstriche.</p><p>Ein Fachbetrieb ist schneller, liefert ein gleichmäßigeres Ergebnis und übernimmt Haftung und Vorarbeiten. Sinnvoll ist die Beauftragung vor allem bei hohen Decken und Treppenhäusern (Gerüst, Sicherheit), bei anspruchsvollen Techniken wie Lasuren oder Spachteltechnik und bei großen Flächen unter Zeitdruck, etwa vor einem Einzug. Wer handwerklich geübt ist, Zeit hat und nur normale Wandflächen streichen will, fährt mit Eigenleistung deutlich günstiger. Eine ehrliche Abwägung bezieht den eigenen Stundenwert mit ein: 25 Stunden Arbeit sind nicht umsonst, auch wenn sie auf keiner Rechnung stehen.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Kennzahlen rund um Malerkosten',
+        werte: [
+          { label: 'Stundensatz Maler (Geselle)', wert: '≈ 40–50 €/h', hinweis: 'der Rechner kalkuliert mit 42 €/h' },
+          { label: 'Streichleistung Profi', wert: '≈ 10 m²/h', hinweis: 'pro Anstrich; Hobby ≈ 5 m²/h' },
+          { label: 'Farbbedarf', wert: '≈ 0,15 l/m²', hinweis: 'je Anstrich, Standardfarbe' },
+          { label: 'Materialanteil (Streichen mit Maler)', wert: '≈ 15–25 %', hinweis: 'der Großteil entfällt auf den Lohn' },
+          { label: 'Anfahrtspauschale', wert: '≈ 30–60 €', hinweis: 'einmalig je Auftrag' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Vorarbeiten und versteckte Kostenposten',
+        html: `<p>Den Preis treiben vor allem die Vorarbeiten, die im ersten Angebot leicht übersehen werden. <strong>Spachteln und Schleifen</strong> von Rissen, Dübellöchern und unebenen Stellen, das <strong>Entfernen alter Tapeten</strong> samt Kleisterresten und das <strong>Grundieren</strong> saugender Untergründe sind Arbeitsschritte, die separat Zeit kosten.</p><p>Hinzu kommen <strong>Abdecken und Abkleben</strong> von Böden, Möbeln, Steckdosen und Fenstern sowie am Ende die <strong>Entsorgung</strong> von Tapetenresten und Farbeimern. Bei bewohnten, möblierten Räumen ist dieser Aufwand höher als in einer leeren Wohnung. Auch ein <strong>Farbwechsel von Dunkel auf Hell</strong> kann einen zusätzlichen Anstrich nötig machen. Diese Posten erklären, warum zwei Angebote für denselben Raum stark voneinander abweichen können: Das günstigere klammert die Vorarbeiten oft aus. Beim Vergleich lohnt es sich daher, genau auf den Leistungsumfang zu achten — nicht nur auf den Quadratmeterpreis. Ein seriöses Angebot listet diese Schritte einzeln auf, sodass nachvollziehbar bleibt, wofür gezahlt wird. Pauschalangebote ohne Aufschlüsselung sind schwerer zu vergleichen und bergen das Risiko späterer Nachträge.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Angebote richtig vergleichen',
+        punkte: [
+          'Angebote immer auf gleicher Quadratmeter-Basis vergleichen (Streichfläche, nicht Grundfläche).',
+          'Den Leistungsumfang prüfen: Sind Vorarbeiten wie Spachteln und Grundieren enthalten?',
+          'Zahl der Anstriche klären — ein oder zwei Durchgänge macht einen großen Unterschied.',
+          'Material- und Lohnanteil getrennt ausweisen lassen — der Lohnanteil ist als Handwerkerleistung anteilig steuerlich absetzbar.',
+          'Auf die Mehrwertsteuer achten — bei Privatkunden ist sie im Endpreis enthalten.',
+          'Anfahrts- und Entsorgungspauschalen erfragen.',
+          'Bei Eigenleistung den eigenen Zeitaufwand realistisch einplanen.',
+          'Einen Festpreis statt Abrechnung nach Aufwand vereinbaren, wenn die Fläche klar ist.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Mehrere Angebote einholen und Vorarbeiten klären',
+        text: 'Holen Sie für Malerarbeiten möglichst zwei bis drei Angebote ein und achten Sie darauf, dass sie denselben Leistungsumfang beschreiben. Der häufigste Grund für stark abweichende Preise sind nicht die reinen Streichkosten, sondern die Vorarbeiten: Spachteln, Grundieren, Tapeten entfernen, Abkleben und Entsorgung. Lassen Sie diese Posten im Angebot einzeln aufführen, statt sie pauschal abzunicken. Klären Sie außerdem die Zahl der Anstriche und die Farbqualität, denn beides verändert Material und Arbeitszeit deutlich. Ein etwas teureres Angebot mit klar definierten Vorarbeiten ist oft günstiger als ein Lockpreis, bei dem die Hälfte der nötigen Schritte später als Nachtrag berechnet wird. Wer die Fläche kennt, kann zudem einen Festpreis statt einer Abrechnung nach Stunden vereinbaren. Ein kurzer Vor-Ort-Termin vor der Angebotsabgabe sorgt dafür, dass der Betrieb den Untergrund realistisch einschätzt und Nachträge unwahrscheinlicher werden.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Preise sind Richtwerte, regional und saisonal variabel',
+        text: 'Alle Preise und Sätze auf dieser Seite sind redaktionelle Richtwerte mit Stand 2026 und dienen der Orientierung. Die tatsächlichen Malerkosten hängen von Region, Auftragsgröße, Zustand des Untergrunds, Farbqualität und Auslastung der Betriebe ab — in Ballungsräumen und zu Stoßzeiten wie dem Spätsommer liegen sie meist höher. Der Rechner kalkuliert das Streichen mit Wandfarbe nach festen Annahmen (Farbbedarf, Streichleistung, Stundensatz); diese lassen sich nicht für jeden Einzelfall exakt abbilden. Maßgeblich ist immer das schriftliche Angebot eines Fachbetriebs mit ausgewiesenem Leistungsumfang. Dieser Rechner liefert eine Kostenschätzung zur Orientierung, keinen verbindlichen Kostenvoranschlag.',
+      },
+    ],
+    quellen: [
+      { titel: 'Bundesverband Farbe Gestaltung Bautenschutz (Maler- und Lackiererhandwerk)', url: 'https://www.farbe.de', hinweis: 'Hintergrund zu Stundensätzen und Leistungen im Malerhandwerk.' },
+      { titel: 'Statistisches Bundesamt (Destatis) — Handwerk und Baupreise', url: 'https://www.destatis.de', hinweis: 'Preisentwicklung im Bau- und Ausbauhandwerk.' },
+      { titel: 'Methodik der Berechnung', hinweis: 'Streichfläche = Wandumfang × Höhe + Decke − Fenster/Türen; Material = Farbbedarf (0,15 l/m² je Anstrich) × Preis + Abdeckung/Werkzeug; Maler-Lohn = Fläche × Anstriche ÷ 10 m²/h × 42 €/h + Anfahrt. Richtpreise je Gewerk sind redaktionelle Orientierungswerte (Stand 2026).' },
     ],
   },
   {
