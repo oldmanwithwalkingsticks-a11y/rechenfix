@@ -1642,7 +1642,7 @@ Der Mehrbedarf an Kalorien ist geringer als oft gedacht: Im 2. Trimester nur etw
   },
   {
     slug: 'zyklusrechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-21',
     titel: 'Zyklusrechner',
     beschreibung: 'Eisprung, fruchtbares Fenster und nächste Periode berechnen — mit Kalenderansicht für 1, 3 oder 6 Zyklen.',
     kategorie: 'Gesundheit',
@@ -1703,6 +1703,98 @@ Wir weisen ausdrücklich darauf hin: Der Zyklusrechner darf nicht als alleinige 
         frage: 'Wie genau ist die Berechnung?',
         antwort: 'Bei regelmäßigem 28-Tage-Zyklus liegt die Prognose meist innerhalb von ±1–2 Tagen. Bei schwankender Zykluslänge, Stress, Krankheit oder Hormonumstellungen kann der tatsächliche Eisprung jedoch deutlich abweichen.',
       },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was der Rechner zeigt — und was nicht',
+        html: `<p>Dieser Rechner schätzt anhand des Zyklusbeginns und der durchschnittlichen Zykluslänge, wann ungefähr der Eisprung liegt und welche Tage als <strong>fruchtbares Fenster</strong> gelten. Dazu zeigt er die nächste zu erwartende Periode und teilt den Zyklus in seine Phasen ein. Grundlage ist die sogenannte <strong>Kalendermethode</strong>: Sie geht von einem regelmäßigen Zyklus aus und rechnet den Eisprung rückwärts vom Zyklusende.</p><p>So nützlich das zur groben Orientierung ist — die Berechnung ist eine <strong>Schätzung, keine Sicherheit</strong>. Kein Zyklus läuft wie ein Uhrwerk; der Eisprung kann sich von Monat zu Monat verschieben. Deshalb taugt diese Methode weder als verlässliche Verhütung noch als Garantie bei Kinderwunsch. Sie liefert Anhaltspunkte, mehr nicht. Was der Rechner ausgibt, sind gerechnete Wahrscheinlichkeitsfenster auf Basis Ihrer Eingaben — der Körper hält sich nicht immer daran. Den folgenden Hinweis dazu bitte unbedingt lesen. Eingegeben werden der erste Tag der letzten Periode und die durchschnittliche Zykluslänge; optional lässt sich der Verlauf über mehrere Zyklen als Kalender anzeigen.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Kein Verhütungsmittel',
+        text: 'Wichtig: Dieser Rechner ist kein Verhütungsmittel und bietet keinerlei Sicherheit zur Schwangerschaftsverhütung. Die zugrunde liegende Kalendermethode gilt als unzuverlässig, weil Zyklen schwanken und sich der Eisprung verschieben kann — auch vermeintlich „sichere" Tage sind nicht sicher. Verlassen Sie sich zur Verhütung nicht auf diese Berechnung. Wer verhüten möchte, lässt sich ärztlich oder in einer Beratungsstelle zu sicheren Methoden beraten. Und auch bei Kinderwunsch oder Zyklusproblemen ersetzt der Rechner keine gynäkologische Beratung. Er dient ausschließlich der groben zeitlichen Orientierung.',
+      },
+      {
+        typ: 'text',
+        titel: 'Die vier Phasen des Zyklus',
+        html: `<p>Ein Menstruationszyklus durchläuft vier Phasen. Er beginnt mit der <strong>Menstruation</strong> (Tag 1 ist der erste Tag der Blutung), in der die Gebärmutterschleimhaut abgestoßen wird. Es folgt die <strong>Follikelphase</strong>, in der im Eierstock eine Eizelle heranreift und sich die Schleimhaut neu aufbaut.</p><p>Um die Zyklusmitte kommt es zur <strong>Ovulation</strong> (Eisprung): Die reife Eizelle wird freigesetzt und ist etwa 12 bis 24 Stunden befruchtbar. Da Spermien einige Tage überleben können, gelten schon einige Tage davor als fruchtbar. Danach beginnt die <strong>Lutealphase</strong>, in der sich der Gelbkörper bildet; kommt es nicht zur Einnistung, sinkt der Hormonspiegel und die nächste Menstruation setzt ein. Die Lutealphase ist mit rund 14 Tagen am konstantesten — deshalb rechnet der Rechner den Eisprung als „Zykluslänge minus 14 Tage". Diese 14-Tage-Annahme ist ein Durchschnitt; bei manchen Menschen ist die Lutealphase etwas kürzer oder länger, was die Rechnung zusätzlich unsicher macht.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Eisprung und fruchtbares Fenster (28-Tage-Zyklus)',
+        schritte: [
+          { label: 'Erster Tag der letzten Periode', formel: '', ergebnis: '1. März 2026' },
+          { label: 'Zykluslänge', formel: '', ergebnis: '28 Tage' },
+          { label: 'Eisprung', formel: '1. März + (28 − 14)', ergebnis: '15. März 2026' },
+          { label: 'Fruchtbares Fenster', formel: 'Eisprung − 5 bis + 1 Tag', ergebnis: '10.–16. März' },
+          { label: 'Nächste Periode', formel: '1. März + 28', ergebnis: '29. März 2026' },
+        ],
+        fazit: 'Bei einem 28-Tage-Zyklus, der am 1. März beginnt, errechnet sich der Eisprung als Zyklusbeginn plus 14 Tage, also der 15. März. Das fruchtbare Fenster reicht rechnerisch von fünf Tagen davor bis einen Tag danach — vom 10. bis 16. März — weil Spermien mehrere Tage überleben und die Eizelle nach dem Eisprung noch kurz befruchtbar ist. Die nächste Periode wird zum 29. März erwartet. Diese Tage sind gerechnete Schätzwerte: Sie markieren den wahrscheinlichsten Zeitraum, sind aber kein Garant — weder dafür, dass an anderen Tagen nichts passieren kann, noch dafür, dass eine Befruchtung im Fenster sicher gelingt. Der Eisprung-Tag selbst (hier der 15. März) ist der wahrscheinlichste, aber die Tage davor zählen mit, weil Spermien dort schon auf die Eizelle warten können.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum das nur eine Schätzung ist',
+        html: `<p>Die Kalendermethode unterstellt einen <strong>gleichmäßigen Zyklus mit fester Lutealphase</strong>. Die Realität ist anders: Bei vielen Menschen schwankt die Zykluslänge von Monat zu Monat um mehrere Tage, und damit verschiebt sich auch der Eisprung. Schon ein um drei Tage früherer oder späterer Eisprung verlegt das fruchtbare Fenster spürbar.</p><p>Hinzu kommen äußere Einflüsse: <strong>Stress, Krankheit, Reisen, Schlafmangel, Gewichtsänderungen oder hormonelle Umstellungen</strong> können den Eisprung vorziehen, verzögern oder ausfallen lassen. Direkt nach dem Absetzen der Pille, in der Stillzeit oder in den Wechseljahren ist der Zyklus besonders unregelmäßig. Deshalb kann der Rechner nur abbilden, was der Durchschnitt erwarten lässt — nicht, was der Körper im Einzelfall tut. Je unregelmäßiger der Zyklus, desto ungenauer die Vorhersage. Wer es genauer wissen will, kombiniert mehrere Anzeichen oder lässt sich ärztlich beraten. Genau aus diesem Grund ist die Kalendermethode zur Verhütung nicht geeignet: Ein einziger verschobener Eisprung kann ein vermeintlich sicheres Fenster zunichtemachen.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Längerer Zyklus verschiebt alles (32 Tage)',
+        schritte: [
+          { label: 'Erster Tag der Periode', formel: '', ergebnis: '1. März 2026' },
+          { label: 'Zykluslänge', formel: 'statt 28', ergebnis: '32 Tage' },
+          { label: 'Eisprung', formel: '1. März + (32 − 14)', ergebnis: '19. März 2026' },
+          { label: 'Fruchtbares Fenster', formel: 'Eisprung − 5 bis + 1', ergebnis: '14.–20. März' },
+          { label: 'Nächste Periode', formel: '1. März + 32', ergebnis: '2. April 2026' },
+        ],
+        fazit: 'Bei gleichem Startdatum, aber einem 32-Tage-Zyklus verschiebt sich alles nach hinten: Der Eisprung fällt rechnerisch auf den 19. März, das fruchtbare Fenster auf den 14. bis 20. März, die nächste Periode auf den 2. April. Der Grund liegt in der Annahme einer festen 14-tägigen Lutealphase — die zusätzlichen Tage eines längeren Zyklus stecken in der ersten Zyklushälfte, weshalb der Eisprung später kommt. Das zeigt zugleich die Schwäche der Methode: Wer seine Zykluslänge falsch einschätzt oder einen schwankenden Zyklus hat, bekommt ein verschobenes Fenster. Vier Tage Unterschied in der Zykluslänge bedeuten hier vier Tage Unterschied beim Eisprung. Wer Zyklen zwischen 26 und 32 Tagen hat, bekommt also je nach Monat ein deutlich wanderndes Fenster — ein weiterer Grund, sich nicht blind auf die Kalenderzahlen zu verlassen.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Typische Phasen-Längen (grobe Orientierung)',
+        kopf: ['Phase', 'ungefährer Zeitraum', 'Dauer (Richtwert)'],
+        zeilen: [
+          ['Menstruation', 'ab Tag 1', '3–7 Tage'],
+          ['Follikelphase', 'Tag 1 bis Eisprung', 'variabel, ~12–16 Tage'],
+          ['Ovulation (Eisprung)', 'um die Zyklusmitte', '~1 Tag (Eizelle 12–24 h)'],
+          ['Lutealphase', 'Eisprung bis Periode', 'relativ konstant ~14 Tage'],
+        ],
+        fussnote: 'Grobe Richtwerte für einen durchschnittlichen Zyklus — die individuelle Streuung ist groß. Vor allem die Follikelphase (vor dem Eisprung) variiert stark und bestimmt, ob ein Zyklus kürzer oder länger ausfällt; die Lutealphase danach ist meist stabiler. Ein als normal geltender Zyklus liegt zwischen etwa 21 und 35 Tagen, und auch regelmäßige Schwankungen sind üblich. Diese Zahlen sind keine Vorgabe und kein Maßstab, sondern nur eine Einordnung. Längere oder kürzere Zyklen sind nicht automatisch ein Problem — entscheidend ist eher, ob der eigene Rhythmus über die Zeit halbwegs gleichmäßig bleibt oder sich plötzlich stark ändert.',
+      },
+      {
+        typ: 'text',
+        titel: 'Bei Kinderwunsch: was zusätzlich hilft',
+        html: `<p>Wer schwanger werden möchte, kann das fruchtbare Fenster mit weiteren Anzeichen genauer eingrenzen, als es der Kalender allein vermag. <strong>Ovulationstests</strong> aus der Apotheke messen den Anstieg des LH-Hormons kurz vor dem Eisprung. Die <strong>Temperaturmethode</strong> (Messung der Basaltemperatur) zeigt am leichten Temperaturanstieg, dass der Eisprung stattgefunden hat. Auch die Beschaffenheit des Zervixschleims gibt Hinweise: Um den Eisprung wird er klarer und dehnbarer.</p><p>Diese Anzeichen zusammen (symptothermale Methode) sind deutlich aussagekräftiger als die reine Kalenderrechnung. Wichtig zu wissen: Bei gesunden Paaren dauert es oft mehrere Monate bis zur Schwangerschaft, das ist völlig normal. Klappt es nach etwa einem Jahr regelmäßiger Versuche nicht (oder ab etwa 35 Jahren nach einem halben Jahr), ist eine <strong>ärztliche Abklärung</strong> sinnvoll — ganz ohne Druck und ohne dass das ein Versagen wäre. Eine Frauenärztin oder ein Kinderwunschzentrum kann dann gezielt unterstützen. Der Kalenderrechner kann dabei ein erster Anhaltspunkt sein, um den ungefähren Zeitraum einzugrenzen — die genaue Bestimmung übernehmen aber besser Tests, Temperaturkurve oder die ärztliche Begleitung.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Bei Zyklusstörungen ärztlich abklären',
+        html: `<p>Der Rechner ist ein <strong>Orientierungswerkzeug, kein Diagnose-Instrument</strong>. Er kann nicht erkennen, ob mit dem Zyklus etwas nicht stimmt — er rechnet nur mit den Zahlen, die man eingibt. Eine <strong>ausbleibende, sehr unregelmäßige, ungewöhnlich starke oder schmerzhafte Periode</strong> sollte deshalb nicht über einen Rechner, sondern ärztlich eingeordnet werden.</p><p>Hinter Zyklusstörungen können harmlose Ursachen wie Stress stecken, aber auch Themen, die eine Behandlung brauchen. Auch eine plötzliche deutliche Veränderung des gewohnten Zyklus ist ein Grund, einmal nachfragen zu lassen. Das ist keine Dramatisierung — die allermeisten Fälle sind unkompliziert —, sondern einfach der richtige Weg: Eine gynäkologische Praxis kann untersuchen, beraten und beruhigen, was ein Kalenderrechner nie leisten kann. Bei Unsicherheit gilt immer: lieber einmal zu viel nachfragen, als sich auf eine bloße Rechnung zu verlassen. Auch starke Schmerzen, Zwischenblutungen oder andere ungewohnte Beschwerden gehören in fachliche Hände und nicht in einen Rechner, der dafür gar nicht gemacht ist.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Eingabe richtig machen',
+        punkte: [
+          'Als Zyklusbeginn den ersten Tag der letzten Periode eintragen (Tag 1 = erster Blutungstag).',
+          'Die durchschnittliche Zykluslänge angeben — bei Schwankungen einen mittleren Wert.',
+          'Die Zykluslänge zählt vom ersten Periodentag bis zum Tag vor der nächsten Periode.',
+          'Ein paar Zyklen lang notieren, um die eigene durchschnittliche Länge zu kennen.',
+          'Das fruchtbare Fenster als Schätzbereich verstehen, nicht als exakte Tage.',
+          'Bei stark schwankenden Zyklen die Aussagekraft besonders kritisch sehen.',
+          'Zur Verhütung niemals allein auf diese Berechnung verlassen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Orientierung, kein Ersatz',
+        text: 'Dieser Rechner bietet eine grobe zeitliche Orientierung zu Eisprung, fruchtbarem Fenster und nächster Periode — er ist weder ein Verhütungsmittel noch ein Diagnose-Werkzeug. Die Berechnung beruht auf der Kalendermethode und Ihren Eingaben und kann erheblich vom tatsächlichen Verlauf abweichen. Zur sicheren Verhütung, bei Kinderwunsch oder bei Beschwerden und Zyklusstörungen ist die ärztliche oder gynäkologische Beratung der richtige Weg; auch Beratungsstellen für sexuelle Gesundheit helfen weiter. Verstehen Sie das Ergebnis als unverbindliche Information, nicht als verlässliche Vorhersage. Im Zweifel zählt immer die fachliche Einschätzung, nicht die Rechnung. Für eine sichere Verhütung gibt es zuverlässige Methoden, über die eine ärztliche Praxis oder eine Beratungsstelle ausführlich informiert — die Kalenderrechnung gehört ausdrücklich nicht dazu. Dieser Rechner versteht sich als anschauliche Information, nicht als Werkzeug für Entscheidungen mit gesundheitlicher Tragweite.',
+      },
+    ],
+    quellen: [
+      { titel: 'Frauenärzte im Netz (Berufsverband der Frauenärzte)', url: 'https://www.frauenaerzte-im-netz.de', hinweis: 'Informationen zu Menstruationszyklus, Eisprung und Familienplanung.' },
+      { titel: 'Methodik & Sicherheitshinweis', hinweis: 'Eisprung = Zyklusbeginn + (Zykluslänge − 14); fruchtbares Fenster Eisprung − 5 bis + 1 Tag; nächste Periode = Zyklusbeginn + Zykluslänge. Die Kalendermethode ist als Verhütung unsicher und ersetzt keine ärztliche Beratung.' },
     ],
   },
   {
