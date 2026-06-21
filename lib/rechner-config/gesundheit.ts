@@ -1551,7 +1551,7 @@ So hilfreich SSW-Rechner und Schwangerschafts-Apps auch sind — sie ersetzen ke
   },
   {
     slug: 'schwangerschaft-gewicht-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-22',
     titel: 'Gewichtszunahme-Rechner (Schwangerschaft)',
     beschreibung: 'Gewichtszunahme in der Schwangerschaft berechnen: Empfohlene Zunahme nach BMI, aktueller Stand und Verlaufskurve.',
     kategorie: 'Gesundheit',
@@ -1638,6 +1638,104 @@ Der Mehrbedarf an Kalorien ist geringer als oft gedacht: Im 2. Trimester nur etw
         frage: 'Was tun bei zu viel Gewichtszunahme?',
         antwort: 'Keine Diät! In der Schwangerschaft sollten Sie nicht abnehmen oder fasten. Stattdessen: moderate Bewegung (Schwimmen, Spaziergänge, Yoga), nährstoffreiche statt zuckerreicher Lebensmittel, keine zusätzlichen Süßgetränke. Besprechen Sie größere Abweichungen mit Ihrer Hebamme oder Ihrem Arzt.',
       },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was der Rechner zeigt',
+        html: `<p>Dieser Rechner zeigt, in welchem <strong>Bereich</strong> die Gewichtszunahme während einer Schwangerschaft üblicherweise liegt — abhängig vom <strong>Körpergewicht vor der Schwangerschaft</strong> (genauer: vom BMI davor). Aus dem Ausgangsgewicht, der Größe und der aktuellen Schwangerschaftswoche schätzt er den erwarteten Korridor und vergleicht ihn mit der bisherigen Zunahme. Grundlage sind die international anerkannten Empfehlungen des US-amerikanischen Institute of Medicine (IOM).</p><p>Wichtig von Anfang an: Diese Bereiche sind eine <strong>Orientierung, kein Urteil</strong>. Jede Schwangerschaft verläuft anders, und Abweichungen vom Korridor sind kein Versagen und meist kein Grund zur Sorge. Das Gewicht der Schwangeren allein sagt nichts darüber aus, wie es dem Kind geht. Der Rechner bewertet niemanden — er ordnet eine Zahl in eine statistische Spanne ein. Wie sie im Einzelfall zu deuten ist, gehört in die Hände der betreuenden Ärztin, des Frauenarztes oder der Hebamme. Er betrachtet ausschließlich die Zunahme in der Schwangerschaft — anders als der allgemeine BMI-Rechner, der WHR-Rechner (Fettverteilung), der Idealgewicht-Rechner (historische Faustformeln) oder der SSW-Rechner (Wochenstand). Keiner dieser Werte ist ein Gesundheits-„Ziel".</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'IOM-Empfehlung Gesamtzunahme — Einling',
+        kopf: ['Ausgangs-BMI', 'BMI-Bereich', 'empfohlene Gesamtzunahme'],
+        zeilen: [
+          ['Untergewicht', '< 18,5', '12,5 – 18,0 kg'],
+          ['Normalgewicht', '18,5 – 24,9', '11,5 – 16,0 kg'],
+          ['Übergewicht', '25 – 29,9', '7,0 – 11,5 kg'],
+          ['Adipositas', '≥ 30', '5,0 – 9,0 kg'],
+        ],
+        fussnote: 'Empfohlene Gesamtzunahme bei Einlingsschwangerschaft nach den IOM-Leitlinien von 2009 (vom ACOG 2023 bestätigt, weiterhin gültig), exakt wie im Rechner hinterlegt. Maßgeblich ist der BMI vor der Schwangerschaft. Es sind Spannen zur Orientierung, keine festen Ziele und kein Maßstab zur Selbstbewertung — der individuelle Verlauf wird ärztlich begleitet. Die vier IOM-Kategorien fassen die feineren BMI-Stufen zusammen; alle Adipositas-Grade erhalten dieselbe Empfehlung von 5 bis 9 Kilogramm. Wer seinen Ausgangs-BMI nicht kennt, kann ihn aus dem Gewicht und der Größe vor der Schwangerschaft leicht selbst ermitteln.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'IOM-Empfehlung Gesamtzunahme — Zwillinge',
+        kopf: ['Ausgangs-BMI', 'empfohlene Gesamtzunahme'],
+        zeilen: [
+          ['Untergewicht', '22 – 28 kg'],
+          ['Normalgewicht', '17 – 25 kg'],
+          ['Übergewicht', '14 – 23 kg'],
+          ['Adipositas', '11 – 19 kg'],
+        ],
+        fussnote: 'Bei Zwillingsschwangerschaften liegen die Empfehlungen deutlich höher, weil zwei Babys samt zusätzlicher Plazenta und mehr Fruchtwasser versorgt werden. Für Untergewicht gilt der Bereich als vorläufig, da hierzu weniger Daten vorliegen. Auch diese Werte sind Orientierung, nicht Vorgabe; Mehrlingsschwangerschaften werden ohnehin engmaschiger betreut. Der Rechner schaltet auf diese Bereiche um, sobald „Zwillinge" gewählt ist. Dass hier mehr Zunahme vorgesehen ist, hat rein versorgungstechnische Gründe und ist kein Maßstab, an dem man sich messen müsste.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum der Ausgangs-BMI die Empfehlung bestimmt',
+        html: `<p>Dass die Empfehlung vom <strong>BMI vor der Schwangerschaft</strong> abhängt, hat einen sachlichen Grund: Der Körper bringt je nach Ausgangslage unterschiedliche Energiereserven mit. Wer vor der Schwangerschaft untergewichtig war, hat weniger Reserven und soll daher etwas mehr zunehmen; wer mit höherem Gewicht startet, bringt bereits Reserven mit, sodass eine etwas geringere Zunahme empfohlen wird. Es geht dabei um die Versorgung von Mutter und Kind, nicht um eine Figur.</p><p>Das ist <strong>keine Wertung</strong> der Ausgangslage, sondern eine Anpassung an die Biologie. Bei höherem Ausgangs-BMI raten die Leitlinien zu einer Zunahme im unteren Bereich, weil eine sehr hohe Zunahme das Risiko für Schwangerschaftsdiabetes oder Bluthochdruck erhöhen kann — eine medizinische Beobachtung, kein Vorwurf. Umgekehrt ist eine niedrigere Zunahme bei Untergewicht nicht „besser", sondern für diese Gruppe oft schlicht zu wenig. Jede Spanne passt zu ihrer Ausgangslage; keine ist erstrebenswerter als eine andere. Auch innerhalb einer Spanne gibt es keinen „idealen" Punktwert — der gesamte Bereich gilt als unbedenklich, und wo genau man darin landet, ist nicht entscheidend.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Erwartete Zunahme bis zur aktuellen Woche',
+        schritte: [
+          { label: 'Gewicht vor SS / Größe', formel: '65 kg / 168 cm', ergebnis: 'BMI 23,0' },
+          { label: 'Kategorie', formel: '', ergebnis: 'Normalgewicht' },
+          { label: 'Empfohlene Gesamtzunahme', formel: '', ergebnis: '11,5 – 16,0 kg' },
+          { label: 'Erwartet bis SSW 20', formel: '0,5–2,0 kg + 8 × 0,35–0,50', ergebnis: '≈ 3,3 – 6,0 kg' },
+        ],
+        fazit: 'Ein Beispiel: Bei 65 Kilogramm vor der Schwangerschaft und 168 Zentimetern Größe ergibt sich ein BMI von 23,0 — Normalgewicht. Die empfohlene Gesamtzunahme liegt damit bei 11,5 bis 16 Kilogramm. Für die aktuelle Woche rechnet der Rechner den erwarteten Stand: Im ersten Trimester sind 0,5 bis 2 Kilogramm üblich, danach kommt die wöchentliche Zunahme hinzu. Bis zur 20. Woche ergibt das einen erwarteten Bereich von rund 3,3 bis 6 Kilogramm. Liegt die tatsächliche Zunahme darüber oder darunter, ist das zunächst völlig unkritisch — der Korridor ist breit, und Schwankungen sind normal. Eine einzelne Zahl entscheidet nichts. Der Rechner zeigt zusätzlich an, ob die bisherige Zunahme im, über oder unter dem erwarteten Bereich liegt — als sachliche Einordnung, nicht als Bewertung; jede dieser Lagen kann völlig in Ordnung sein.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Wöchentliche Zunahme im 2. und 3. Trimester',
+        kopf: ['Ausgangs-BMI', 'kg pro Woche (Richtwert)'],
+        zeilen: [
+          ['Untergewicht', '0,44 – 0,58 kg'],
+          ['Normalgewicht', '0,35 – 0,50 kg'],
+          ['Übergewicht', '0,23 – 0,33 kg'],
+          ['Adipositas', '0,17 – 0,27 kg'],
+        ],
+        fussnote: 'Richtwerte für die wöchentliche Zunahme ab dem 2. Trimester (IOM), wie im Rechner hinterlegt. Im 1. Trimester ist die Zunahme gering (insgesamt etwa 0,5 bis 2 kg); bei Übelkeit kann das Gewicht anfangs sogar leicht sinken, was ebenfalls normal ist. Wochenwerte schwanken — entscheidend ist der grobe Verlauf über mehrere Wochen, nicht der einzelne Wiegetag. Tägliches Wiegen ist in der Schwangerschaft ohnehin nicht nötig und kann unnötig verunsichern; viele Praxen erfassen das Gewicht einfach bei den Vorsorgeterminen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Woraus die Zunahme besteht',
+        html: `<p>Eine verbreitete Sorge lautet, die Kilos seien „alles Fett". Das stimmt nicht: Der größte Teil der Zunahme entfällt auf das <strong>Kind und das, was es versorgt</strong>. Bei einer typischen Zunahme von rund 12 bis 13 Kilogramm bei Normalgewicht entfallen etwa 3,3 Kilogramm auf das Baby, dazu kommen Plazenta (~0,7 kg), Fruchtwasser (~0,9 kg), die größere Gebärmutter (~1 kg) und Brustgewebe (~0,5 kg).</p><p>Hinzu kommen rund 1,5 Kilogramm zusätzliches <strong>Blutvolumen</strong> und etwa 1,5 Kilogramm Wassereinlagerungen — beides normale Anpassungen des Körpers. Nur etwa 3 Kilogramm sind <strong>Fettreserven</strong>, die der Körper sinnvoll als Energiespeicher für die Stillzeit anlegt. Der Großteil dieser Zunahme verschwindet mit der Geburt und in den Wochen danach von selbst. Diese Aufschlüsselung soll entlasten: Die Zahl auf der Waage ist zum allergrößten Teil das, was eine Schwangerschaft mit sich bringt — und kein Grund, sich Vorwürfe zu machen. Auch der oft beunruhigende Sprung zwischen zwei Wiegeterminen erklärt sich häufig durch Wassereinlagerungen, die je nach Tageszeit und Wärme schwanken.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Abnehmen ist in der Schwangerschaft nicht empfohlen',
+        html: `<p>Ein klarer und wichtiger Punkt: <strong>Abnehmen oder Fasten wird in der Schwangerschaft grundsätzlich nicht empfohlen</strong> — auch nicht bei höherem Ausgangsgewicht. Eine Schwangerschaft ist keine Zeit für Diäten. Der Körper und das Kind brauchen eine kontinuierliche Versorgung mit Nährstoffen; eine Kalorienrestriktion kann beiden schaden. Dieser Rechner ist deshalb ausdrücklich <strong>kein Diät-Werkzeug</strong> und liefert auch keine Kalorien- oder Abnehmziele.</p><p>Bei Übergewicht oder Adipositas empfehlen die Leitlinien lediglich eine Zunahme im <strong>unteren Bereich</strong> der jeweiligen Spanne — nicht eine Abnahme. Und auch das geschieht am besten <strong>ärztlich begleitet</strong>, nicht in Eigenregie über Kalorienzählen. Wenn überhaupt, geht es um die Qualität der Ernährung (nährstoffreich statt zuckerreich) und um moderate Bewegung, soweit ärztlich nichts dagegenspricht — nie um Gewichtsabnahme als Ziel. Bei Fragen dazu hilft die betreuende Praxis oder eine auf Schwangerschaft spezialisierte Ernährungsberatung. Eine sehr starke Zunahme in kurzer Zeit — mehr als etwa 2 Kilogramm in einer Woche — sollte ärztlich abgeklärt werden, weil dahinter Wassereinlagerungen stecken können; auch das ist eine medizinische Frage, kein Anlass zur Selbstkritik.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Das Gewicht allein sagt wenig — und wo es Hilfe gibt',
+        html: `<p>Zum Schluss das Wichtigste: Das <strong>Gewicht der Schwangeren allein sagt nichts darüber aus, wie es dem Kind geht</strong>. Ob eine Schwangerschaft gut verläuft, beurteilt die Vorsorge anhand vieler Faktoren — Ultraschall, Blutwerte, Blutdruck, Wohlbefinden — nicht anhand einer einzelnen Zahl auf der Waage. Abweichungen vom Korridor sind deshalb mit der betreuenden Ärztin, dem Frauenarzt oder der Hebamme zu besprechen und nicht selbst zu bewerten.</p><p>Eine Schwangerschaft kann das Verhältnis zum eigenen Körper durcheinanderbringen, und das ist verständlich. Wer das Thema Gewicht oder Essen als <strong>belastend</strong> erlebt oder merkt, dass es zu kreisen beginnt, muss damit nicht allein bleiben: Neben der ärztlichen und Hebammen-Betreuung berät das <strong>Beratungstelefon für Essstörungen des BIÖG (ehemals BZgA)</strong> anonym und einfühlsam unter 0221 892031. Sich Unterstützung zu holen ist ein Zeichen von Fürsorge — für sich und das Kind. Niemand muss seinen Körper in dieser Zeit „im Griff" haben; eine Schwangerschaft verändert ihn, und das ist gut so.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Für eine sinnvolle Einschätzung',
+        punkte: [
+          'Das Gewicht vor der Schwangerschaft möglichst genau angeben — es bestimmt die Empfehlung.',
+          'Größe und aktuelle Schwangerschaftswoche eintragen.',
+          'Bei Zwillingen die entsprechende Auswahl treffen — die Bereiche sind dann höher.',
+          'Den angezeigten Bereich als breite Orientierung verstehen, nicht als exakte Vorgabe.',
+          'Schwankungen von Woche zu Woche nicht überbewerten.',
+          'Das Ergebnis nicht als Bewertung der eigenen Person lesen — es ist eine reine Einordnung.',
+          'Abweichungen und Sorgen mit der betreuenden Ärztin, dem Arzt oder der Hebamme besprechen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Orientierung, keine Bewertung',
+        text: 'Dieser Rechner ordnet die Gewichtszunahme nach den IOM-Richtlinien in eine Spanne ein — er gibt eine Orientierung, keine medizinische Bewertung und kein Urteil über die Schwangere. Die Werte beruhen auf statistischen Empfehlungen; der individuelle Verlauf kann davon abweichen, ohne dass etwas nicht stimmt. Maßgeblich ist immer die betreuende ärztliche oder Hebammen-Begleitung, die das Gesamtbild beurteilt — nicht eine Zahl auf der Waage. Abnehmen ist in der Schwangerschaft nicht empfohlen, und dieser Rechner ist kein Diät-Werkzeug. Wer Gewicht oder Essen als belastend erlebt, findet ärztlich, bei der Hebamme oder beim BIÖG-Beratungstelefon für Essstörungen (0221 892031) einfühlsame Unterstützung. Die Beratung dort ist anonym und vertraulich; es fallen nur die Gesprächskosten ins Kölner Ortsnetz an. Diese Seite ist eine sachliche Orientierungshilfe und kein Werkzeug, um sich selbst zu beurteilen — in der Schwangerschaft schon gar nicht.',
+      },
+    ],
+    quellen: [
+      { titel: 'IOM / National Academies (2009) — Weight Gain During Pregnancy', url: 'https://nap.nationalacademies.org', hinweis: 'Empfohlene Gewichtszunahme nach Ausgangs-BMI (Einling und Mehrlinge).' },
+      { titel: 'ACOG Committee Opinion 548 (bestätigt 2023)', url: 'https://www.acog.org', hinweis: 'Bestätigung der IOM-Bereiche, weiterhin gültig.' },
+      { titel: 'BIÖG (ehemals BZgA) — Beratungstelefon für Essstörungen', url: 'https://www.bzga-essstoerungen.de', hinweis: 'Anonyme Beratung unter 0221 892031 bei Belastung durch Gewicht oder Essverhalten.' },
     ],
   },
   {
