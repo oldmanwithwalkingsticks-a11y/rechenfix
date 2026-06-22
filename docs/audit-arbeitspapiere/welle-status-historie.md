@@ -4,7 +4,51 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 21.06.2026
+**Stand:** 22.06.2026
+
+---
+
+## 22.06.2026 — W19 Goldstandard Gesundheits-Bündel t70–t77 (gebündelter Doku-Sync, 101 Goldstandard gemessen)
+
+Acht gesundheits-/wellbeing-sensible Rechner auf Goldstandard. Doku **erst nach t77 gebündelt**
+nachgezogen (pro Rechner nur Config-Commit). Gemeinsame Wellbeing-Schutzauflage aus
+`welle19-gesundheit-buendel-scoping.md`: keine Ideal-/Zielwert-Rahmung, kein Selbstvergleich/
+Selbstoptimierung, Verweis auf professionelle Hilfe, medizinischer Disclaimer, keine Diät-/
+Trainings-Zielzahlen. Contentbloecke-Set nach Block **101 Rechner** (gemessen via
+`check-contentbloecke-struktur.mjs`). Jeder mit `contentBloecke` + `quellen`, Leitformat dominant,
+text-Blöcke ≤170 W, Self-Check ≥1500 grün, kein WARN.
+
+- **t70 whr-rechner** (gesundheit.ts, risiko-kontext-Leitformat, 13 Blöcke, ~1.520 W, `3e6196d`).
+  Körperbild-sensibel; Modell-Ton koerperfett. Deskriptiv statt bewertend.
+- **t71 blutdruck-rechner** (gesundheit.ts, tabelle-Leitformat, 12 Blöcke, ~1.514 W, `6ba9313`). YMYL.
+  **L-35-Fund:** Lib prüft isolierte systolische Hypertonie ZUERST (sys≥140 & dia<90) — Prompt-Beispiel
+  „142/88 → Grad 1" war falsch, vor Bau korrigiert. Lehre: if-Branch-REIHENFOLGE der Klassifikation lesen.
+- **t72 raucher-rechner** (gesundheit.ts, statistik-Leitformat, 13 Blöcke, ~1.506 W, `db28e4c`).
+  Sucht-Takt: anti-stigmatisierend, kein Moralisieren. BIÖG Rauchfrei-Telefon 0800 8 31 31 31, rauchfrei-info.de.
+- **t73 protein-rechner** (gesundheit.ts, tabelle-Leitformat, 11 Blöcke, ~1.508 W, `16b1008`).
+  **+ Wellbeing-Fix `6142882`:** Erstbau enthielt wissenschaftlich verpackte Diät-Optimierung
+  (Jo-Jo, TEF, „ideal 1,8–2,2 g/kg") im bestehenden erklaerung/faq, die Codes Term-Grep passierte.
+  Fix neutralisierte das „abnehmen"-Ziel zum reinen Rechenparameter. **L-Körperbild:** wissenschaftlich
+  verpackte Diät-Optimierung ist trotzdem ein Diät-Frame; bestehende erklaerung/faq gegenlesen, nicht nur neue Blöcke.
+- **t74 ssw-rechner** (gesundheit.ts, beispielrechnung-Leitformat 3×, 11 Blöcke, ~1.504 W, `7fe871b`).
+  Schwangerschaft-Takt warm/sachlich. Lib-treu (Naegele/Zykluslänge/ET), Datums-Beispiele node-verifiziert.
+  ET als Richtwert entdramatisiert (~4 % am ET). Zyklus-Korrektur wirkt nur auf ET, nicht auf SSW-Anzeige.
+- **t75 zyklusrechner** (gesundheit.ts, anwendungsfall-/phasen-Leitformat, 11 Blöcke, ~1.509 W, `2b1c51f`).
+  Fruchtbarkeit. **Sicherheitskritisch:** prominenter Warnblock (Position 2) „Kein Verhütungsmittel" —
+  Kalendermethode unsicher, Pearl-Index 9–15. Component-treu (Eisprung = Länge − 14; Fenster −5/+1).
+- **t76 schwangerschaft-gewicht-rechner** (gesundheit.ts, tabelle-Leitformat 3×, 11 Blöcke, ~1.502 W, `874b242`).
+  Doppelt sensibel (Schwangerschaft + Körperbild). IOM-2009-Werte (ACOG 2023 bestätigt, web_search-verifiziert),
+  Einling/Zwilling exakt. „Abnehmen nicht empfohlen", Entlastung „sagt nichts über Kindeswohl", keine Beschämung.
+  BIÖG/BZgA-Essstörungs-Beratung 0221 892031 verifiziert.
+- **t77 idealgewicht-rechner** (gesundheit.ts, methoden-vergleich-Leitformat, 11 Blöcke, ~1.515 W, `67666b9`).
+  **Heikelster Slug der Welle** (Name suggeriert Zielwert). Frame-Entschärfung: Broca (1871)/Creff als
+  veraltete Faustformeln, BMI-Spanne als seriöseste; ~20-kg-Streuung als Beleg „kein einzelnes Idealgewicht".
+  koerperfett-Wellbeing-Kernblock, Essstörungs-Anlaufstelle. Bestehende erklaerung soft-Diät-Frame neutralisiert.
+
+**Block KOMPLETT:** whr, blutdruck, raucher, protein (+Fix), ssw, zyklus, schwangerschaft-gewicht,
+idealgewicht — alle Goldstandard, Wellbeing-Schutzauflage durchgehend, alle Builds Vercel-grün.
+Drei Befunde aus dem Block: eigener Prompt-Fehler gefangen (blutdruck), durchgerutschte Diät-Optimierung
+korrigiert (protein), sicherheitskritischer Verhütungs-Disclaimer platziert (zyklus).
 
 ---
 
