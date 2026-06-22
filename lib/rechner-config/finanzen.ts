@@ -5551,7 +5551,7 @@ Die Kirchensteuer beträgt 9 % der ESt in 14 Bundesländern und 8 % in Baden-Wü
   },
   {
     slug: 'steuerklassen-vergleich-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-22',
     titel: 'Steuerklassen-Vergleich-Rechner',
     beschreibung: 'Steuerklassen-Kombinationen vergleichen: III/V, V/III und IV/IV mit Faktor — welche Wahl bringt das höchste monatliche Netto?',
     kategorie: 'Finanzen',
@@ -5561,7 +5561,7 @@ Die Kirchensteuer beträgt 9 % der ESt in 14 Bundesländern und 8 % in Baden-Wü
     keywords: ['steuerklassen vergleich', 'steuerklasse 3 5', 'steuerklasse 4 4 faktor', 'steuerklasse ehepaar', 'faktorverfahren', 'steuerklasse wechseln', 'steuerklasse optimieren', 'beste steuerklasse ehepaar', 'iii v oder iv iv'],
     icon: '⚖️',
     formel: 'Kombinationen: III/V | V/III | IV/IV mit Faktor (F = Splitting-ESt / Summe LSt bei IV/IV) — maßgeblich ist das höchste monatliche Haushaltsnetto',
-    beispiel: 'Paar mit 55.000 € + 35.000 € brutto/Jahr: III/V bringt dem Hauptverdiener ca. 350 €/Monat mehr Netto als IV/IV, dafür Nachzahlungsrisiko. IV/IV mit Faktor liefert identisches Jahres-Netto bei minimaler Abweichung.',
+    beispiel: 'Paar mit 50.000 € + 25.000 € Brutto/Jahr (2026, ohne Kirchensteuer): III/V ergibt ca. 4.184 € Haushaltsnetto/Monat, aber rund 496 € Nachzahlung bei der Veranlagung. IV/IV mit Faktor: ca. 4.143 €/Monat, dafür kein Ausgleich nötig. Die Jahressteuer (9.422 €) ist in beiden Fällen identisch.',
     erklaerung: `**Welche Steuerklassen-Kombination ist für Ehepaare die beste?**
 
 Ehepaare und eingetragene Lebenspartner haben die Wahl zwischen drei Steuerklassen-Kombinationen, die beeinflussen, wie viel Lohnsteuer monatlich vom Gehalt einbehalten wird. Die Wahl ändert NICHT die Jahressteuer (die wird über die Steuererklärung ausgeglichen), sondern nur die monatliche Verteilung und mögliche Nachzahlungen oder Erstattungen.
@@ -5628,6 +5628,125 @@ Wichtig: Die Jahressteuer bleibt unabhängig von der Steuerklasse identisch. Die
       },
     ],
     affiliate: { programId: 'wiso', context: 'steuerklassen' },
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was Steuerklassen sind und wofür sie dienen',
+        html: `<p>Die <strong>Steuerklasse</strong> (Lohnsteuerklasse, § 38b EStG) steuert nur eines: <strong>wie viel Lohnsteuer der Arbeitgeber Monat für Monat vom Bruttolohn einbehält</strong>. Sie ist eine Vorauszahlung auf die Einkommensteuer — nicht die Steuer selbst. Es gibt sechs Klassen (I bis VI), die sich nach Familienstand und Zahl der Beschäftigungen richten.</p><p>Für Arbeitnehmer ohne Besonderheiten gilt Klasse I, für Alleinerziehende II, für Verheiratete die Kombinationen III/V oder IV/IV, und Klasse VI greift für den zweiten Job. Für Ehepaare und eingetragene Lebenspartner ist die Wahl zwischen den Kombinationen <strong>III/V</strong>, <strong>V/III</strong> und <strong>IV/IV mit Faktor</strong> relevant — genau diese vergleicht der Rechner. Eingegeben werden die beiden Bruttojahresgehälter; daraus schätzt der Rechner für jede Kombination das monatliche Haushaltsnetto und zeigt, welche Variante während des Jahres am meisten übrig lässt.</p><p>Entscheidend ist dabei: Die Klasse verschiebt nur den Zeitpunkt der Zahlung über das Jahr, nicht die Höhe der am Ende geschuldeten Steuer. Wer das verinnerlicht, vermeidet den verbreitetsten Steuer-Irrtum überhaupt — dass sich mit der richtigen Klasse „Steuern sparen" ließe.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Wichtig: Klassenwahl ist Liquidität, keine Steuerersparnis',
+        text: 'Vorweg das Wichtigste: Die Steuerklasse ändert nicht, wie viel Steuer Sie insgesamt zahlen — sie verteilt nur den Lohnsteuerabzug über das Jahr. Die endgültige Jahressteuer steht erst bei der Veranlagung fest und ist für ein Ehepaar immer der Splittingbetrag, unabhängig von der gewählten Klassenkombination. Wer durch III/V monatlich mehr Netto hat, zahlt die Differenz meist als Nachzahlung zurück; wer zu viel einbehalten lässt, bekommt sie erstattet. Eine Steuerersparnis durch die richtige Klassenwahl gibt es also nicht — wohl aber einen Unterschied bei der monatlichen Liquidität und bei Lohnersatzleistungen wie dem Elterngeld. Diesen Unterschied sollte man kennen, bevor man sich vom „höchsten Netto" einer Kombination blenden lässt.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'III/V vs. IV/IV mit Faktor (Paar 50.000 € + 25.000 € brutto)',
+        spalteA: 'III/V',
+        spalteB: 'IV/IV mit Faktor',
+        zeilen: [
+          { kriterium: 'Netto Hauptverdiener (50.000 €)', a: '≈ 2.967 €/Mon', b: '≈ 2.640 €/Mon' },
+          { kriterium: 'Netto Zweitverdiener (25.000 €)', a: '≈ 1.218 €/Mon', b: '≈ 1.503 €/Mon' },
+          { kriterium: 'Haushaltsnetto gesamt', a: '≈ 4.184 €/Mon', b: '≈ 4.143 €/Mon' },
+          { kriterium: 'Bei der Veranlagung', a: 'rund 496 € Nachzahlung', b: 'kein Ausgleich nötig' },
+          { kriterium: 'Steuererklärung', a: 'Pflicht (§ 46 EStG)', b: 'meist freiwillig' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Wann III/V sinnvoll ist — und das Nachzahlungsrisiko',
+        html: `<p>Die Kombination <strong>III/V</strong> lohnt sich, wenn die Einkommen <strong>stark unterschiedlich</strong> sind — als Faustregel ab einem Verhältnis von etwa 60:40. Der Hauptverdiener wählt Klasse III (doppelter Grundfreibetrag, niedriger Abzug), der andere Klasse V (ohne Grundfreibetrag, hoher Abzug). Das Ergebnis ist spürbar mehr monatliches Haushaltsnetto. Verdient der zweite Partner mehr, gilt spiegelbildlich die Variante V/III.</p><p>Der Haken: Bei III/V wird über das Jahr oft <strong>zu wenig Lohnsteuer</strong> einbehalten, sodass bei der Steuererklärung eine <strong>Nachzahlung</strong> droht. Deshalb ist die Steuererklärung bei III/V verpflichtend (§ 46 Abs. 2 Nr. 3a EStG). Wer die Nachzahlung vermeiden und trotzdem fair verteilen möchte, ist mit dem Faktorverfahren besser bedient. Der Partner in Klasse V empfindet seinen hohen Abzug zudem oft als demotivierend, obwohl er rechnerisch nur die Vorauszahlung des Paares trägt. Wichtig außerdem: Lohnersatzleistungen wie Elterngeld, Arbeitslosen- oder Krankengeld bemessen sich am Netto der Steuerklasse — vor solchen Phasen kann ein gezielter Wechsel das Bemessungsentgelt erhöhen.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'IV/IV ohne Faktor vs. IV/IV mit Faktor',
+        spalteA: 'IV/IV (ohne Faktor)',
+        spalteB: 'IV/IV mit Faktor',
+        zeilen: [
+          { kriterium: 'Lohnsteuer je Partner', a: 'wie eine alleinstehende Person (Grundtarif)', b: 'mit einem Faktor unter 1 anteilig gesenkt' },
+          { kriterium: 'Splittingvorteil wirkt', a: 'erst bei der Veranlagung', b: 'bereits monatlich' },
+          { kriterium: 'Ergebnis am Jahresende', a: 'meist eine Erstattung', b: 'punktgenau, kaum Ausgleich' },
+          { kriterium: 'Beantragung', a: 'Standard, nichts zu tun', b: 'beim Finanzamt, gilt zwei Jahre' },
+        ],
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Die sechs Steuerklassen im Überblick (§ 38b EStG)',
+        kopf: ['Klasse', 'Für wen', 'Grundfreibetrag'],
+        zeilen: [
+          ['I', 'Ledige, Geschiedene, Verwitwete ohne Kind', 'einfach'],
+          ['II', 'Alleinerziehende (mit Entlastungsbetrag)', 'einfach + Entlastung'],
+          ['III', 'Verheiratete: Haupt-/Alleinverdiener (Partner in V)', 'doppelt'],
+          ['IV', 'Verheiratete mit ähnlichem Einkommen', 'je einfach'],
+          ['V', 'Partner eines III-Verdieners', 'keiner'],
+          ['VI', 'Zweit- und Nebenjob', 'keiner'],
+        ],
+        fussnote: 'Lohnsteuerklassen nach § 38b EStG. Die Steuerklasse bestimmt nur den monatlichen Lohnsteuerabzug, nicht die endgültige Jahressteuer. Der Rechner vergleicht für Ehepaare die Kombinationen III/V, V/III und IV/IV mit Faktor; die Klassen I, II und VI sind hier nur zur Einordnung aufgeführt. Alleinerziehende erhalten in Klasse II zusätzlich den Entlastungsbetrag. Klasse VI fällt für jede zweite und weitere Beschäftigung an und hat den höchsten Abzug, weil dort kein Grundfreibetrag berücksichtigt wird. Verheiratete starten nach der Eheschließung automatisch in der Kombination IV/IV und können anschließend zu III/V oder zum Faktorverfahren wechseln.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Paar 50.000 € + 25.000 € brutto: III/V vs. IV/IV mit Faktor',
+        schritte: [
+          { label: 'Haushaltsnetto III/V', formel: 'Schätzung des Rechners', ergebnis: '≈ 4.184 €/Mon' },
+          { label: 'Haushaltsnetto IV/IV mit Faktor', formel: 'Faktor 0,957', ergebnis: '≈ 4.143 €/Mon' },
+          { label: 'monatlicher Unterschied', formel: '4.184 − 4.143', ergebnis: '≈ 41 €/Mon' },
+          { label: 'III/V: übers Jahr zu wenig einbehalten', formel: 'Nachzahlung bei Veranlagung', ergebnis: 'rund 496 €' },
+          { label: 'Jahressteuer (Splitting) — in beiden Fällen', formel: 'fix', ergebnis: '9.422 €' },
+        ],
+        fazit: 'III/V bringt diesem Paar rund 41 € mehr Haushaltsnetto pro Monat — über das Jahr also etwa 492 €. Genau diese Summe holt sich das Finanzamt aber als Nachzahlung von rund 496 € zurück, weil bei III/V zu wenig Lohnsteuer einbehalten wurde. Unterm Strich bleibt das Gleiche: Die Jahressteuer beträgt in jeder Variante 9.422 €. IV/IV mit Faktor verteilt die Last über den Faktor 0,957 gleichmäßig und trifft die Jahressteuer punktgenau — kein Nachzahlungs-Schreck. Die Klassenwahl ist hier also eine Frage des Zahlungs-Zeitpunkts und der Lohnersatz-Bemessung, nicht der Steuerhöhe. Die Werte sind eine Schätzung des Rechners; die exakte Lohnsteuer folgt dem amtlichen Programmablaufplan. Wer Wert auf möglichst gleichmäßige Monatsbeträge ohne Nachzahlung legt, wählt das Faktorverfahren; wer kurzfristig mehr Liquidität braucht, kann III/V nutzen und die Nachzahlung zurücklegen.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Steuerklassenwahl in Zahlen (Beispiel 50.000 € + 25.000 €)',
+        werte: [
+          { label: 'Empfehlung des Rechners', wert: 'III/V', hinweis: 'höchstes monatliches Haushaltsnetto' },
+          { label: 'Faktor bei IV/IV mit Faktor', wert: '0,957', hinweis: 'senkt die Lohnsteuer anteilig' },
+          { label: 'III/V: Ausgleich bei Veranlagung', wert: '≈ 496 € Nachzahlung', hinweis: 'der monatliche Vorteil wird ausgeglichen' },
+          { label: 'Jahressteuer (alle Varianten)', wert: '9.422 €', hinweis: 'identisch — die Klassenwahl ändert sie nicht' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Steuerklasse wechseln und das Faktorverfahren',
+        html: `<p>Seit 2020 können Ehepaare die <strong>Steuerklasse beliebig oft im Jahr wechseln</strong> (früher nur einmal jährlich). Der Antrag ist formlos beim Finanzamt oder online über Elster möglich und wirkt ab dem Folgemonat. Ein Wechsel ändert nie die Jahressteuer, sondern nur die monatliche Verteilung — und die Höhe einkommensabhängiger Lohnersatzleistungen.</p><p>Das <strong>Faktorverfahren</strong> (IV/IV mit Faktor, § 39f EStG) ist die gerechteste Variante: Beide Partner bleiben in Klasse IV, ihre Lohnsteuer wird aber mit einem Faktor unter 1 multipliziert, der den Splittingvorteil bereits monatlich berücksichtigt. Dadurch entspricht die einbehaltene Lohnsteuer fast genau der späteren Jahressteuer — Nachzahlungen oder hohe Erstattungen entfallen. Der Faktor wird beim Finanzamt beantragt und gilt seit 2024 für zwei Jahre. Er verteilt die Last fairer auf beide Einkommen als das oft als unausgewogen empfundene III/V-Modell. Ein Wechsel lohnt sich besonders, wenn sich die Einkommen deutlich verschieben — etwa nach einer Gehaltserhöhung, dem Wiedereinstieg nach der Elternzeit oder dem Übergang in Teilzeit. Steht eine solche Veränderung an, sollte man die Kombination neu durchrechnen, statt die einmal gewählte Klasse einfach beizubehalten.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Steuerklasse und Lohnersatzleistungen',
+        html: `<p>Ein oft übersehener Effekt: Viele <strong>Lohnersatzleistungen</strong> bemessen sich am <strong>Nettoeinkommen aus der Steuerklasse</strong> — und hier macht die Wahl tatsächlich einen Unterschied, der sich später nicht wieder ausgleicht. Dazu zählen vor allem das <strong>Elterngeld</strong>, aber auch Arbeitslosengeld I, Kranken-, Mutterschafts- und Kurzarbeitergeld.</p><p>Wer etwa vor einer Elternzeit von Klasse V in Klasse III wechselt, erhöht sein maßgebliches Netto und damit das spätere Elterngeld spürbar — oft um mehrere Hundert Euro pro Monat. Entscheidend ist das Timing: Beim Elterngeld zählt das Netto der zwölf Monate vor dem Mutterschutz, der Wechsel sollte also rechtzeitig erfolgen (in der Regel mindestens sieben Monate vorher). In diesem einen Punkt ist die Steuerklassenwahl mehr als reine Liquidität — sie beeinflusst die Höhe der Leistung dauerhaft, weil hier kein späterer Veranlagungs-Ausgleich greift. Genau deshalb lohnt sich vor solchen Lebensphasen ein Blick auf die Klassenkombination.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Welche Kombination passt zur eigenen Situation?',
+        punkte: [
+          'Ähnliche Einkommen (bis etwa 60:40): IV/IV ist einfach und fair, kaum Ausgleich nötig.',
+          'Größerer Unterschied (60:40 bis 80:20): IV/IV mit Faktor — faire Verteilung ohne Nachzahlung.',
+          'Sehr großer Unterschied (ab etwa 80:20) oder Alleinverdiener: III/V bringt das höchste monatliche Netto.',
+          'III/V bedeutet Pflicht zur Steuererklärung und oft eine Nachzahlung — eine Rücklage einplanen.',
+          'Vor Elterngeld, ALG I oder Kurzarbeit: rechtzeitig in die günstigere Klasse wechseln (Bemessung am Netto).',
+          'Die Klassenwahl ändert nie die Jahressteuer — nur die monatliche Liquidität und den Ausgleich am Jahresende.',
+          'Das Ergebnis ist eine Schätzung; die genaue Lohnsteuer ergibt sich aus dem amtlichen Programmablaufplan.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'III/V bringt Liquidität, das Faktorverfahren bringt Ruhe',
+        text: 'Wer das monatlich höchste Netto sucht, landet meist bei III/V — der Rechner empfiehlt diese Kombination, weil sie die größte unterjährige Liquidität bringt. Aber Vorsicht: III/V verpflichtet zur Steuererklärung und führt häufig zu einer Nachzahlung, die den monatlichen Vorteil wieder aufzehrt. Wer Überraschungen am Jahresende vermeiden will, fährt mit dem Faktorverfahren (IV/IV mit Faktor) besser: Es verteilt die Last gerecht auf beide Einkommen und trifft die Jahressteuer fast punktgenau. Der einzige echte Mehrwert von III/V liegt in Phasen vor Lohnersatzleistungen, weil diese am Netto der Steuerklasse bemessen werden. Wer dagegen einfach nur sein Geld gleichmäßig über das Jahr verteilt haben möchte, ohne sich um Nachzahlungen zu sorgen, wählt das Faktorverfahren und ist damit auf der sicheren Seite.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Stand 2026 — Schätzung, keine Steuerberatung',
+        text: 'Dieser Rechner schätzt den monatlichen Lohnsteuerabzug und das Haushaltsnetto nach einem vereinfachten Modell mit den ab 2026 geltenden Werten (Grundfreibetrag 12.348 €, Sozialversicherungs-Sätze 2026). Die genaue Lohnsteuer folgt dem amtlichen Programmablaufplan und kann je nach Vorsorgeaufwendungen, Zusatzbeitrag der Krankenkasse, Kirchensteuer und weiteren Faktoren leicht abweichen; die hier gezeigten Beispielwerte dienen daher der Einordnung der Größenordnung, nicht der centgenauen Planung. Die Ergebnisse sind eine Orientierung, keine verbindliche Steuerfestsetzung und keine Steuerberatung. Die amtliche, kostenlose Berechnung bietet der BMF-Steuerrechner unter bmf-steuerrechner.de. Maßgeblich für die endgültige Steuer ist immer der Bescheid des Finanzamts; bei Fragen helfen Steuerberatung oder Lohnsteuerhilfeverein.',
+      },
+    ],
+    quellen: [
+      { titel: '§ 38b EStG — Lohnsteuerklassen', url: 'https://www.gesetze-im-internet.de/estg/__38b.html', hinweis: 'Definition der sechs Steuerklassen I–VI und ihre Zuordnung. Stand 2026.' },
+      { titel: '§ 39f EStG — Faktorverfahren', url: 'https://www.gesetze-im-internet.de/estg/__39f.html', hinweis: 'IV/IV mit Faktor: Berücksichtigung des Splittingvorteils beim monatlichen Lohnsteuerabzug.' },
+      { titel: 'BMF — amtlicher Steuerrechner', url: 'https://www.bmf-steuerrechner.de', hinweis: 'Offizielle, kostenlose Berechnung von Lohn- und Einkommensteuer.' },
+    ],
   },
   {
     slug: 'pfaendungsrechner',
