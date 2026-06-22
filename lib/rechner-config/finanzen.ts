@@ -2745,7 +2745,7 @@ Ja, Renten unterliegen der nachgelagerten Besteuerung. Der steuerpflichtige Ante
   },
   {
     slug: 'splitting-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-22',
     titel: 'Splitting-Rechner',
     beschreibung: 'Ehegattensplitting berechnen: Steuervorteil durch Zusammenveranlagung im Vergleich zur Einzelveranlagung.',
     kategorie: 'Finanzen',
@@ -2755,14 +2755,14 @@ Ja, Renten unterliegen der nachgelagerten Besteuerung. Der steuerpflichtige Ante
     keywords: ['splitting rechner', 'ehegattensplitting rechner', 'ehegattensplitting berechnen', 'steuervorteil ehe', 'zusammenveranlagung rechner', 'steuerklassen ehepaar', 'splittingtarif', 'steuerklasse 3 5 rechner', 'splitting vorteil', 'steuererklärung ehepaar'],
     icon: '💍',
     formel: 'Splitting-Tarif: ESt = 2 × ESt(zvE_Gesamt / 2) | Vorteil = ESt_Einzel − ESt_Splitting',
-    beispiel: 'Partner 1: 55.000 €, Partner 2: 25.000 €, keine Kirchensteuer → Einzelveranlagung: ca. 12.640 € | Zusammenveranlagung: ca. 10.180 € → Splitting-Vorteil: ca. 2.460 €.',
+    beispiel: 'Paar mit zu versteuerndem Einkommen 60.000 € + 20.000 € (2026): Einzelveranlagung 15.803 €, Zusammenveranlagung (Splitting) 14.418 € → Splitting-Vorteil ca. 1.385 €. Bei gleich hohen Einkommen (je 40.000 €) ist der Vorteil 0 €.',
     erklaerung: `**Was ist das Ehegattensplitting und wie funktioniert es?**
 
 Das Ehegattensplitting ist ein Verfahren der deutschen Einkommensteuer, das verheirateten Paaren und eingetragenen Lebenspartnern einen Steuervorteil verschaffen kann. Das Prinzip ist einfach: Bei der Zusammenveranlagung werden die Einkommen beider Partner addiert, die Summe wird halbiert, darauf wird die Einkommensteuer berechnet, und das Ergebnis wird verdoppelt. Durch die **progressive Besteuerung** in Deutschland (höheres Einkommen → höherer Steuersatz) zahlt man auf zwei mittlere Einkommen oft weniger Steuer als auf ein hohes und ein niedriges Einkommen. Das Splitting gleicht den Steuersatz zwischen den Partnern aus — es ist ein Ausgleichsmechanismus, kein Steuergeschenk. Nutzen Sie unseren [Brutto-Netto-Rechner](/finanzen/brutto-netto-rechner), um die monatliche Auswirkung verschiedener Steuerklassen zu sehen.
 
 **Wann lohnt sich das Ehegattensplitting?**
 
-Der Splitting-Vorteil ist am größten, wenn die Einkommen der Partner **möglichst unterschiedlich** sind. Das Maximum wird erreicht, wenn ein Partner gar nichts verdient — dann profitiert das Paar maximal von der Progression. Bei **gleich hohen Einkommen** gibt es gar keinen Splitting-Vorteil, denn die Hälfte der Summe ist identisch mit den Einzeleinkommen. Konkret: Bei 55.000 € und 25.000 € Jahresbrutto beträgt der Vorteil ca. 2.460 €. Bei 40.000 € und 40.000 € beträgt er 0 €. Bei 80.000 € und 0 € kann der Vorteil auf über 8.000 € steigen. Als Faustregel: Je größer der Gehaltsunterschied, desto größer der Splitting-Effekt. Der maximale Vorteil über alle Einkommen liegt bei ca. 20.000 Euro pro Jahr.
+Der Splitting-Vorteil ist am größten, wenn die Einkommen der Partner **möglichst unterschiedlich** sind. Das Maximum wird erreicht, wenn ein Partner gar nichts verdient — dann profitiert das Paar maximal von der Progression. Bei **gleich hohen Einkommen** gibt es gar keinen Splitting-Vorteil, denn die Hälfte der Summe ist identisch mit den Einzeleinkommen. Konkret: Bei einem zu versteuernden Einkommen von 60.000 € und 20.000 € beträgt der Vorteil ca. 1.385 €. Bei 40.000 € und 40.000 € beträgt er 0 €. Bei 80.000 € und 0 € kann der Vorteil auf über 8.000 € steigen. Als Faustregel: Je größer der Gehaltsunterschied, desto größer der Splitting-Effekt. Der maximale Vorteil wird bei sehr großem Einkommensunterschied erreicht und kann mehrere Tausend Euro pro Jahr betragen.
 
 **Steuerklassen III/V vs. IV/IV vs. IV/IV mit Faktor**
 
@@ -2812,6 +2812,133 @@ Seit dem Beschluss des Bundesverfassungsgerichts 2013 und der „Ehe für alle" 
     affiliate: [
       { programId: 'wiso', context: 'splitting' },
       { programId: 'smartsteuer', context: 'splitting' },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was das Ehegattensplitting ist',
+        html: `<p>Das <strong>Ehegattensplitting</strong> (§ 32a Abs. 5 EStG) ist das Verfahren, mit dem die Einkommensteuer für zusammenveranlagte Ehegatten und eingetragene Lebenspartner berechnet wird. Der Ablauf: Das <strong>gemeinsame zu versteuernde Einkommen (zvE)</strong> wird halbiert, auf diese Hälfte der normale Grundtarif angewendet und die so ermittelte Steuer anschließend wieder verdoppelt.</p><p>Der Effekt zeigt sich bei unterschiedlich hohen Einkommen: Statt dass der Mehrverdienende voll in die hohen Tarifzonen rutscht und der andere seinen Grundfreibetrag kaum nutzt, werden beide so behandelt, als hätten sie je die Hälfte verdient. Der progressive Tarif wird dadurch „geglättet". Dieser Rechner stellt die Zusammenveranlagung der getrennten Einzelveranlagung gegenüber und zeigt den <strong>Splitting-Vorteil</strong> in Euro. Eingegeben wird das Bruttojahreseinkommen je Partner; daraus zieht der Rechner zunächst den Arbeitnehmer-Pauschbetrag (1.230 €) und die Sonderausgabenpauschale ab. Die folgenden Beispiele rechnen zur besseren Anschauung direkt mit dem zvE — so lässt sich der reine Tarif-Effekt zeigen, ohne dass Pauschalen das Bild verschieben. Der ausgewiesene Splitting-Vorteil ist in beiden Betrachtungsweisen identisch, weil die Pauschalen Einzel- und Zusammenveranlagung gleichermaßen mindern.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Einzel- vs. Zusammenveranlagung (Paar mit zvE 60.000 € + 20.000 €)',
+        spalteA: 'Einzelveranlagung',
+        spalteB: 'Zusammenveranlagung (Splitting)',
+        zeilen: [
+          { kriterium: 'Steuerbemessung', a: 'jeder Partner getrennt nach Grundtarif', b: 'gemeinsames zvE halbiert, Grundtarif, verdoppelt' },
+          { kriterium: 'ESt Partner A (zvE 60.000 €)', a: '14.233 €', b: 'wird zusammengefasst' },
+          { kriterium: 'ESt Partner B (zvE 20.000 €)', a: '1.570 €', b: 'wird zusammengefasst' },
+          { kriterium: 'Einkommensteuer gesamt', a: '15.803 €', b: '14.418 €' },
+          { kriterium: 'Ergebnis', a: 'Summe beider Einzelsteuern', b: '1.385 € weniger Steuer' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Splitting-Vorteil: Paar mit zvE 60.000 € + 20.000 €',
+        schritte: [
+          { label: 'gemeinsames zvE', formel: '60.000 + 20.000', ergebnis: '80.000 €' },
+          { label: 'halbiert', formel: '80.000 ÷ 2', ergebnis: '40.000 €' },
+          { label: 'ESt auf 40.000 € (Grundtarif)', formel: '§ 32a EStG', ergebnis: '7.209 €' },
+          { label: 'verdoppelt (Splitting-ESt)', formel: '7.209 × 2', ergebnis: '14.418 €' },
+          { label: 'Einzelveranlagung zum Vergleich', formel: '14.233 + 1.570', ergebnis: '15.803 €' },
+          { label: 'Splitting-Vorteil', formel: '15.803 − 14.418', ergebnis: '1.385 €' },
+        ],
+        fazit: 'Beim Splitting wird das gemeinsame zvE von 80.000 € halbiert, der Grundtarif auf 40.000 € angewendet (7.209 €) und das Ergebnis verdoppelt — macht 14.418 € Einkommensteuer. Würde jeder Partner einzeln veranlagt, zahlte Partner A auf 60.000 € bereits 14.233 € und Partner B auf 20.000 € weitere 1.570 €, zusammen 15.803 €. Der Splitting-Vorteil beträgt also 1.385 €. Er entsteht, weil der Grundfreibetrag und die niedrigen Tarifzonen des geringer verdienenden Partners durch die Zusammenveranlagung voll genutzt werden, statt teilweise ungenutzt zu bleiben. Solidaritätszuschlag und Kirchensteuer sind hier nicht berücksichtigt; sie würden den Vorteil meist sogar noch etwas erhöhen, weil auch ihre Freigrenzen beim Splitting günstiger greifen. Würde Partner B ebenfalls mehr verdienen, schrumpfte der Vorteil — bei zwei gleich hohen Einkommen verschwindet er ganz. Dieses eine Beispiel zeigt damit bereits die zentrale Regel: Der Splitting-Vorteil ist ein Maß für die Ungleichheit der Einkommen, nicht für deren Höhe.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Ehegattensplitting in Zahlen (2026)',
+        werte: [
+          { label: 'Grundfreibetrag bei Splitting', wert: '24.696 €', hinweis: 'doppelter Einzel-Grundfreibetrag bei Zusammenveranlagung' },
+          { label: 'Vorteil bei gleichem Einkommen', wert: '0 €', hinweis: 'keine Glättung der Progression möglich' },
+          { label: 'Beispiel 60.000 € + 20.000 € zvE', wert: '1.385 €', hinweis: 'Vorteil pro Jahr, ohne Soli/Kirchensteuer' },
+          { label: 'Beispiel 80.000 € + 0 € zvE', wert: '8.046 €', hinweis: 'Maximum bei Alleinverdiener-Paar' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Warum der Vorteil bei ungleichen Einkommen entsteht',
+        html: `<p>Der Splitting-Vorteil ist <strong>kein fester Bonus</strong>, sondern hängt allein davon ab, wie <strong>ungleich</strong> die Einkommen der Partner sind. Der Grund liegt in der Progression: Ein Alleinverdiener mit hohem zvE zahlt auf seine obersten Einkommensteile hohe Grenzsteuersätze, während der Grundfreibetrag und die niedrigen Zonen des nicht verdienenden Partners ungenutzt bleiben.</p><p>Das Splitting verteilt das gemeinsame Einkommen rechnerisch auf zwei Schultern. Dadurch sinkt der Anteil, der in den teuren oberen Zonen besteuert wird, und beide Grundfreibeträge kommen voll zur Geltung. Je größer der Einkommensunterschied, desto stärker wirkt diese Glättung — am größten ist der Vorteil, wenn nur ein Partner verdient. Verdienen beide exakt gleich viel, gibt es dagegen nichts zu glätten: Die Halbierung des gemeinsamen zvE ergibt dann genau die beiden Einzeleinkommen, die Zonenzuordnung bleibt identisch, und der Vorteil ist null. Aus dieser Logik folgt auch, dass der Vorteil nicht linear mit dem Einkommensunterschied wächst, sondern dort am stärksten zunimmt, wo der besser verdienende Partner in die steileren Tarifzonen hineinragt und der andere noch unter dem Grundfreibetrag liegt.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Gleiche Einkommen: kein Vorteil (zvE 40.000 € + 40.000 €)',
+        spalteA: 'Einzelveranlagung',
+        spalteB: 'Zusammenveranlagung (Splitting)',
+        zeilen: [
+          { kriterium: 'ESt je Partner (zvE 40.000 €)', a: '2 × 7.209 €', b: 'gemeinsames zvE 80.000 €' },
+          { kriterium: 'Rechenweg', a: 'jeder einzeln im Grundtarif', b: '80.000 € ÷ 2 = 40.000 € → 7.209 € × 2' },
+          { kriterium: 'Einkommensteuer gesamt', a: '14.418 €', b: '14.418 €' },
+          { kriterium: 'Splitting-Vorteil', a: 'kein Unterschied', b: '0 €' },
+        ],
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Splitting-Vorteil nach Einkommensverteilung (gemeinsames zvE 80.000 €)',
+        kopf: ['Verteilung (Partner A + B)', 'Einzelveranlagung gesamt', 'Splitting gesamt', 'Splitting-Vorteil'],
+        zeilen: [
+          ['40.000 € + 40.000 €', '14.418 €', '14.418 €', '0 €'],
+          ['50.000 € + 30.000 €', '14.765 €', '14.418 €', '347 €'],
+          ['60.000 € + 20.000 €', '15.803 €', '14.418 €', '1.385 €'],
+          ['70.000 € + 10.000 €', '18.264 €', '14.418 €', '3.846 €'],
+          ['80.000 € + 0 €', '22.464 €', '14.418 €', '8.046 €'],
+        ],
+        fussnote: 'Grundtarif (Einzelveranlagung) nach § 32a EStG 2026, Werte vom Rechner berechnet (zvE-Framing, ohne Soli/Kirchensteuer). Auffällig: Die Splitting-Steuer ist in allen Zeilen gleich (14.418 €), weil sie nur von der Summe der Einkommen abhängt — nicht von ihrer Verteilung. Die Einzelveranlagung dagegen steigt, je ungleicher die Einkommen werden. Genau diese wachsende Differenz ist der Splitting-Vorteil: null bei gleichem Einkommen, maximal beim Alleinverdiener-Paar. Liegt das gemeinsame zvE höher, fällt auch der Vorteil entsprechend größer aus, solange der Unterschied bestehen bleibt; bei einem gemeinsamen zvE von 100.000 € (alles bei einem Partner) erreicht er bereits rund 9.768 €. Solidaritätszuschlag und Kirchensteuer würden die Beträge zusätzlich leicht verschieben.',
+      },
+      {
+        typ: 'text',
+        titel: 'Wer profitiert und welche Voraussetzungen gelten',
+        html: `<p>Die Zusammenveranlagung mit Splittingtarif steht <strong>Ehegatten und eingetragenen Lebenspartnern</strong> offen, die nicht dauernd getrennt leben und beide unbeschränkt steuerpflichtig sind (§§ 26, 26b EStG). Es genügt, dass diese Voraussetzungen an mindestens einem Tag des Jahres vorlagen — auch im Jahr der Eheschließung gilt das Splitting bereits für das gesamte Jahr.</p><p>Den größten Vorteil haben Paare mit <strong>stark unterschiedlichen Einkommen</strong> — etwa wenn ein Partner in Elternzeit, Teilzeit oder Rente ist. Bei annähernd gleichen Einkommen bringt das Splitting kaum oder nichts. Wählbar ist außerdem die getrennte Einzelveranlagung; sie lohnt sich nur in Sonderfällen, etwa bei bestimmten Lohnersatzleistungen mit Progressionsvorbehalt oder hohen außergewöhnlichen Belastungen eines Partners. Im Regelfall ist die Zusammenveranlagung für Verheiratete die günstigere Wahl — der Rechner zeigt die Differenz für die eigenen Zahlen konkret an. Das Finanzamt wählt nicht automatisch die beste Variante: In der Steuererklärung wird die Veranlagungsart angekreuzt, und nur die Zusammenveranlagung wendet den Splittingtarif an. Wer nichts angibt, wird im Zweifel zusammen veranlagt, sofern beide Partner zustimmen.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Sonderfälle: Heirat, Trennung und Todesjahr',
+        html: `<p>Rund um Lebensereignisse gelten besondere Regeln. Im <strong>Jahr der Heirat</strong> kann das Splitting für das gesamte Jahr genutzt werden, selbst wenn die Ehe erst im Dezember geschlossen wurde. Bei einer <strong>Trennung</strong> gilt umgekehrt: Für das Trennungsjahr ist die Zusammenveranlagung noch zulässig, ab dem folgenden Kalenderjahr nicht mehr — maßgeblich ist, ob die Eheleute zu Jahresbeginn noch zusammengelebt haben.</p><p>Ein eigener Fall ist das <strong>Todesjahr</strong>: Stirbt ein Ehepartner, kann für das Sterbejahr noch zusammen veranlagt werden, und im Folgejahr greift unter Voraussetzungen das sogenannte <strong>Gnadensplitting</strong> (Witwensplitting) — der hinterbliebene Partner wird einmalig weiter nach dem Splittingtarif besteuert. Auch ein <strong>Progressionsvorbehalt</strong> kann hineinspielen: Lohnersatzleistungen wie Eltern-, Kranken- oder Arbeitslosengeld sind zwar steuerfrei, erhöhen aber den Steuersatz auf das übrige Einkommen. In solchen Konstellationen kann ausnahmsweise die Einzelveranlagung günstiger sein — diese Sonderfälle bildet der Rechner nicht ab. Bei im Ausland lebenden oder beschränkt steuerpflichtigen Partnern ist die Zusammenveranlagung an zusätzliche Bedingungen geknüpft. Im Zweifel klärt das Finanzamt oder eine Steuerberatung, welche Veranlagung im Einzelfall zulässig und günstig ist.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Jahres-Splitting vs. Steuerklasse III/V',
+        spalteA: 'Ehegattensplitting',
+        spalteB: 'Steuerklasse III/V',
+        zeilen: [
+          { kriterium: 'Zeitpunkt', a: 'Jahresveranlagung (Steuererklärung)', b: 'monatlicher Lohnsteuerabzug' },
+          { kriterium: 'Wirkung', a: 'bestimmt die endgültige Jahressteuer', b: 'verteilt nur die Vorauszahlung übers Jahr' },
+          { kriterium: 'Einfluss auf die Gesamtsteuer', a: 'senkt die tatsächliche Steuer', b: 'keiner — gleicht sich bei der Veranlagung aus' },
+          { kriterium: 'Folge bei der Steuererklärung', a: 'führt zur endgültigen, niedrigeren Jahressteuer', b: 'Nachzahlung (III/V) oder Erstattung (IV/IV) möglich' },
+          { kriterium: 'Mehr Detail im', a: 'Splitting-Rechner (diese Seite)', b: 'Steuerklassen-Vergleich-Rechner' },
+        ],
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Wann sich das Splitting lohnt — und was zu beachten ist',
+        punkte: [
+          'Splitting gilt nur für Verheiratete und eingetragene Lebenspartner mit Zusammenveranlagung (§§ 26, 26b EStG).',
+          'Der Vorteil ist umso größer, je ungleicher die Einkommen sind — bei gleichem Einkommen ist er null.',
+          'Maßgeblich ist das gemeinsame zu versteuernde Einkommen (zvE), nicht das Bruttogehalt.',
+          'Der Splitting-Vorteil entsteht bei der Jahresveranlagung — unabhängig von der gewählten Steuerklasse.',
+          'Auch im Jahr der Heirat gilt das Splitting bereits für das gesamte Jahr.',
+          'Getrennte Einzelveranlagung nur in Sonderfällen prüfen (z. B. Lohnersatz mit Progressionsvorbehalt).',
+          'Die Veranlagungsart wird in der Steuererklärung aktiv gewählt — der Splittingtarif gilt nur bei Zusammenveranlagung.',
+          'Das Ergebnis ist eine Schätzung — maßgeblich ist der Steuerbescheid des Finanzamts.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Stand 2026 — Orientierung, keine Steuerberatung',
+        text: 'Dieser Rechner bildet den Splittingtarif nach § 32a Abs. 5 EStG mit den ab 2026 geltenden Tarifwerten nach (Grundfreibetrag 12.348 €, bei Zusammenveranlagung 24.696 €). Er liefert eine Orientierung über den Splitting-Vorteil, keine verbindliche Steuerfestsetzung und keine Steuerberatung. Die tatsächliche Steuer hängt von vielen individuellen Faktoren ab; Solidaritätszuschlag und Kirchensteuer kommen je nach Fall hinzu, ebenso wirken sich Kinderfreibeträge, Werbungskosten und Sonderausgaben über das zvE aus. Die hier gezeigten Beispielwerte sind auf volle Euro gerundet und ohne Zuschläge gerechnet, damit der reine Splitting-Effekt sichtbar bleibt. Die amtliche, kostenlose Berechnung bietet der BMF-Steuerrechner unter bmf-steuerrechner.de. Für die persönliche Steuererklärung ist eine Steuerberaterin, ein Steuerberater oder ein Lohnsteuerhilfeverein die richtige Adresse — maßgeblich ist immer der Bescheid des Finanzamts.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Der Vorteil entscheidet sich bei der Veranlagung, nicht über die Steuerklasse',
+        text: 'Ein häufiges Missverständnis: Die Steuerklasse III/V „bringt" den Splitting-Vorteil nicht. Der Vorteil entsteht ausschließlich bei der Jahresveranlagung durch den Splittingtarif — die Steuerklasse bestimmt nur, wie viel Lohnsteuer monatlich vorab einbehalten wird. Wer III/V wählt, hat unterm Jahr mehr Netto, muss aber oft nachzahlen; wer IV/IV wählt, bekommt eher etwas zurück. Die endgültige Jahressteuer ist in beiden Fällen identisch und entspricht dem Splitting-Ergebnis. Die Steuerklasse beeinflusst lediglich die Liquidität über das Jahr — und sie wirkt sich auf Lohnersatzleistungen wie Elterngeld aus, die am Netto bemessen werden. Welche Steuerklasse fürs monatliche Netto am besten passt, zeigt der Steuerklassen-Vergleich-Rechner.',
+      },
+    ],
+    quellen: [
+      { titel: '§ 32a EStG — Einkommensteuertarif (Abs. 5 Splittingverfahren)', url: 'https://www.gesetze-im-internet.de/estg/__32a.html', hinweis: 'Splittingtarif: gemeinsames zvE halbieren, Grundtarif, verdoppeln. Stand 2026.' },
+      { titel: '§§ 26, 26b EStG — Veranlagung von Ehegatten', url: 'https://www.gesetze-im-internet.de/estg/__26.html', hinweis: 'Voraussetzungen der Zusammenveranlagung; Wahl zwischen Einzel- und Zusammenveranlagung.' },
+      { titel: 'BMF — amtlicher Steuerrechner', url: 'https://www.bmf-steuerrechner.de', hinweis: 'Offizielle, kostenlose Berechnung von Lohn- und Einkommensteuer.' },
     ],
   },
   {
