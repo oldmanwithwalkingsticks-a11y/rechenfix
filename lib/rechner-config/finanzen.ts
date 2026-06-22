@@ -3512,7 +3512,7 @@ Neben Kindergeld und Kinderfreibetrag gibt es weitere Hilfen: den **Kinderzuschl
   },
   {
     slug: 'pflegegeld-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-22',
     titel: 'Pflegegeld-Rechner',
     beschreibung: 'Pflegegeld berechnen: Leistungen der Pflegeversicherung nach Pflegegrad — Pflegegeld, Pflegesachleistung und Kombinationsleistung.',
     kategorie: 'Finanzen',
@@ -3521,39 +3521,39 @@ Neben Kindergeld und Kinderfreibetrag gibt es weitere Hilfen: den **Kinderzuschl
     metaDescription: 'Pflegegeld 2026 berechnen: Pflegegeld, Sachleistung und Kombinationsleistung nach Pflegegrad 1-5 ✓ Alle Zusatzleistungen ✓ KI-Erklärung.',
     keywords: ['pflegegeld rechner', 'pflegegeld 2026', 'pflegegrad', 'pflegesachleistung', 'kombinationsleistung', 'pflegeversicherung', 'pflegeheim eigenanteil', 'entlastungsbetrag', 'verhinderungspflege', 'kurzzeitpflege'],
     icon: '🏥',
-    formel: 'Pflegegeld 2026 (häusliche Pflege): Grad 2: 332 € | Grad 3: 573 € | Grad 4: 765 € | Grad 5: 947 € | Pflegesachleistung: 761 / 1.432 / 1.778 / 2.200 € | Kombinationsleistung: Dienst-Anteil anteilig + Pflegegeld anteilig | + 125 € Entlastungsbetrag (ab Grad 1).',
-    beispiel: 'Pflegegrad 3, häusliche Pflege durch Angehörige → 573 € Pflegegeld/Monat + 125 € Entlastungsbetrag = 698 € monatlich | Zusätzlich: bis 1.612 € Verhinderungspflege und bis 1.774 € Kurzzeitpflege pro Jahr.',
+    formel: 'Pflegegeld 2026 (häusliche Pflege): Grad 2: 347 € | Grad 3: 599 € | Grad 4: 800 € | Grad 5: 990 € | Pflegesachleistung: 796 / 1.497 / 1.859 / 2.299 € | Kombinationsleistung: Dienst-Anteil anteilig + Pflegegeld anteilig | + 131 € Entlastungsbetrag (ab Grad 1).',
+    beispiel: 'Pflegegrad 3, häusliche Pflege durch Angehörige → 599 € Pflegegeld/Monat + 131 € Entlastungsbetrag = 730 € monatlich | Zusätzlich: gemeinsamer Jahresbetrag bis 3.539 € für Verhinderungs- und Kurzzeitpflege (§ 42a SGB XI).',
     erklaerung: `**Pflegegrade 1 bis 5: Was bedeuten sie?**
 
 Seit 2017 gelten in Deutschland fünf Pflegegrade, die die drei früheren Pflegestufen ersetzt haben. Maßstab ist der Grad der Selbstständigkeit in sechs Lebensbereichen (Mobilität, geistige Fähigkeiten, Verhalten, Selbstversorgung, Umgang mit Krankheit, Alltag). Der Medizinische Dienst (MD) vergibt Punkte und ermittelt daraus den Pflegegrad: **Pflegegrad 1** (geringe Beeinträchtigung) erhalten Versicherte mit 12,5–27 Punkten, **Grad 2** (erhebliche) bei 27–47,5, **Grad 3** (schwere) bei 47,5–70, **Grad 4** (schwerste) bei 70–90 und **Grad 5** (schwerste mit besonderen Anforderungen) ab 90 Punkten. Je höher der Pflegegrad, desto umfangreicher die Leistungen der Pflegeversicherung.
 
 **Pflegegeld vs. Pflegesachleistung: Der Unterschied**
 
-Die Pflegeversicherung unterscheidet zwei Hauptleistungen in der häuslichen Pflege. Das **Pflegegeld** wird direkt an die pflegebedürftige Person ausgezahlt, wenn sie zu Hause von Angehörigen, Freunden oder Nachbarn gepflegt wird. Es ist ein Geldbetrag zur freien Verfügung und beträgt 2026 zwischen 332 € (Grad 2) und 947 € (Grad 5). Die **Pflegesachleistung** hingegen wird direkt an einen ambulanten Pflegedienst gezahlt und ist deutlich höher — von 761 € (Grad 2) bis 2.200 € (Grad 5). Sie deckt die Kosten professioneller Pflege ab, darf aber nur für zugelassene Dienste verwendet werden. Pflegegrad 1 hat keinen Anspruch auf Pflegegeld oder Pflegesachleistung, sondern nur auf den Entlastungsbetrag von 125 €.
+Die Pflegeversicherung unterscheidet zwei Hauptleistungen in der häuslichen Pflege. Das **Pflegegeld** wird direkt an die pflegebedürftige Person ausgezahlt, wenn sie zu Hause von Angehörigen, Freunden oder Nachbarn gepflegt wird. Es ist ein Geldbetrag zur freien Verfügung und beträgt 2026 zwischen 347 € (Grad 2) und 990 € (Grad 5). Die **Pflegesachleistung** hingegen wird direkt an einen ambulanten Pflegedienst gezahlt und ist deutlich höher — von 796 € (Grad 2) bis 2.299 € (Grad 5). Sie deckt die Kosten professioneller Pflege ab, darf aber nur für zugelassene Dienste verwendet werden. Pflegegrad 1 hat keinen Anspruch auf Pflegegeld oder Pflegesachleistung, sondern nur auf den Entlastungsbetrag von 131 €.
 
 **Kombinationsleistung: So funktioniert sie**
 
-Viele Familien kombinieren beide Leistungen: Der Pflegedienst übernimmt beispielsweise Körperpflege und Medikamentenmanagement, während Angehörige die übrige Betreuung leisten. Bei der **Kombinationsleistung** wird der tatsächlich genutzte Anteil der Sachleistung prozentual auf die volle Sachleistung bezogen. Das verbleibende Pflegegeld wird dann im Verhältnis des ungenutzten Anteils ausgezahlt. Beispiel Pflegegrad 3: Der Dienst nutzt 50 % der Sachleistung (716 € von 1.432 €), dann gibt es 50 % des Pflegegelds (286,50 €) zusätzlich. So bleiben Familien flexibel und schöpfen die Leistungen optimal aus. Der Anteil kann bei der Pflegekasse einmal pro Halbjahr geändert werden.
+Viele Familien kombinieren beide Leistungen: Der Pflegedienst übernimmt beispielsweise Körperpflege und Medikamentenmanagement, während Angehörige die übrige Betreuung leisten. Bei der **Kombinationsleistung** wird der tatsächlich genutzte Anteil der Sachleistung prozentual auf die volle Sachleistung bezogen. Das verbleibende Pflegegeld wird dann im Verhältnis des ungenutzten Anteils ausgezahlt. Beispiel Pflegegrad 3: Der Dienst nutzt 50 % der Sachleistung (748,50 € von 1.497 €), dann gibt es 50 % des Pflegegelds (299,50 €) zusätzlich. So bleiben Familien flexibel und schöpfen die Leistungen optimal aus. Der Anteil kann bei der Pflegekasse einmal pro Halbjahr geändert werden.
 
 **Pflegegeld-Erhöhung 2025/2026: Was hat sich geändert?**
 
-Zum 1. Januar 2025 wurden alle Leistungsbeträge der Pflegeversicherung um **4,5 Prozent erhöht** — nach Jahren der Stagnation eine spürbare Entlastung. Pflegegrad 3 steigt beispielsweise beim Pflegegeld von 545 € auf 573 €, die Pflegesachleistung von 1.363 € auf 1.432 €. Auch der Entlastungsbetrag bleibt stabil bei 125 €. Ebenfalls angehoben wurden Verhinderungs- und Kurzzeitpflege. Für 2026 ist nach aktuellem Stand keine weitere Dynamisierung vorgesehen — die nächste reguläre Anpassung kommt 2028. Vergleichen Sie mit Ihrem Nettoeinkommen im [Brutto-Netto-Rechner](/finanzen/brutto-netto-rechner), um Ihren finanziellen Spielraum zu überblicken.
+Zum 1. Januar 2025 wurden alle Leistungsbeträge der Pflegeversicherung um **4,5 Prozent erhöht** — nach Jahren der Stagnation eine spürbare Entlastung. Pflegegrad 3 steigt beispielsweise beim Pflegegeld von 573 € auf 599 €, die Pflegesachleistung von 1.432 € auf 1.497 €. Auch der Entlastungsbetrag stieg von 125 € auf 131 €. Ebenfalls angehoben wurden Verhinderungs- und Kurzzeitpflege. Für 2026 ist nach aktuellem Stand keine weitere Dynamisierung vorgesehen — die nächste reguläre Anpassung kommt 2028. Vergleichen Sie mit Ihrem Nettoeinkommen im [Brutto-Netto-Rechner](/finanzen/brutto-netto-rechner), um Ihren finanziellen Spielraum zu überblicken.
 
 **Eigenanteil im Pflegeheim: Wie hoch ist er wirklich?**
 
-Der wohl größte Finanz-Schock für viele Familien: Die Pflegeversicherung deckt die Pflegeheim-Kosten nur zu einem Bruchteil ab. Die gesetzlichen Leistungen für stationäre Pflege liegen zwischen 770 € (Grad 2) und 2.005 € (Grad 5) monatlich — ein deutscher Heimplatz kostet aber durchschnittlich **2.500 bis 3.500 € pro Monat Eigenanteil** (Stand 2026). Dieser sogenannte **einrichtungseinheitliche Eigenanteil (EEE)** umfasst Unterkunft, Verpflegung, Investitionskosten und nicht-pflegerische Ausgaben. Seit 2022 gibt es einen **Leistungszuschlag**, der den Eigenanteil im ersten Jahr um 15 %, im zweiten um 30 %, im dritten um 50 % und ab dem vierten Jahr um 75 % reduziert. Reicht die Rente nicht aus, springt die Sozialhilfe ein — prüfen Sie auch Ihren Anspruch auf [Bürgergeld](/finanzen/buergergeld-rechner) oder [Wohngeld](/finanzen/wohngeld-rechner).
+Der wohl größte Finanz-Schock für viele Familien: Die Pflegeversicherung deckt die Pflegeheim-Kosten nur zu einem Bruchteil ab. Die gesetzlichen Leistungen für stationäre Pflege liegen zwischen 805 € (Grad 2) und 2.096 € (Grad 5) monatlich — ein deutscher Heimplatz kostet aber durchschnittlich **2.500 bis 3.500 € pro Monat Eigenanteil** (Stand 2026). Dieser sogenannte **einrichtungseinheitliche Eigenanteil (EEE)** umfasst Unterkunft, Verpflegung, Investitionskosten und nicht-pflegerische Ausgaben. Seit 2022 gibt es einen **Leistungszuschlag**, der den Eigenanteil im ersten Jahr um 15 %, im zweiten um 30 %, im dritten um 50 % und ab dem vierten Jahr um 75 % reduziert. Reicht die Rente nicht aus, springt die Sozialhilfe ein — prüfen Sie auch Ihren Anspruch auf [Bürgergeld](/finanzen/buergergeld-rechner) oder [Wohngeld](/finanzen/wohngeld-rechner).
 
 **Zusatzleistungen: Was Sie oft nicht wissen**
 
-Neben dem Pflegegeld haben alle Pflegegrade (auch Grad 1) Anspruch auf den **Entlastungsbetrag von 125 € monatlich**. Dieser ist zweckgebunden für Alltagshilfen, Haushaltshilfe, Betreuungsangebote oder Tagespflege — nicht verwendete Beträge können innerhalb von 6 Monaten angespart werden. Ab Pflegegrad 2 kommen **Verhinderungspflege** (bis 1.612 € pro Jahr bei Urlaub/Krankheit der Angehörigen) und **Kurzzeitpflege** (bis 1.774 €) hinzu. Für Verbrauchsmittel wie Einmalhandschuhe und Desinfektion gibt es **40 € monatlich Pflegehilfsmittel-Pauschale**. Einmalig können bis zu **4.000 € für Wohnraumanpassungen** (Treppenlifte, barrierefreies Bad) beantragt werden — pro Maßnahme, also mehrfach möglich. Nutzen Sie den [Rentenrechner](/finanzen/rentenrechner), um Ihre Altersvorsorge mit den Pflegekosten abzugleichen.`,
+Neben dem Pflegegeld haben alle Pflegegrade (auch Grad 1) Anspruch auf den **Entlastungsbetrag von 131 € monatlich**. Dieser ist zweckgebunden für Alltagshilfen, Haushaltshilfe, Betreuungsangebote oder Tagespflege — nicht verwendete Beträge können bis zum 30. Juni des Folgejahres angespart werden. Ab Pflegegrad 2 kommt seit dem 01.07.2025 ein **gemeinsamer Jahresbetrag von bis zu 3.539 €** für **Verhinderungs- und Kurzzeitpflege** zusammen hinzu (§ 42a SGB XI; bei Urlaub oder Krankheit der Pflegeperson). Für Verbrauchsmittel wie Einmalhandschuhe und Desinfektion gibt es **42 € monatlich Pflegehilfsmittel-Pauschale**. Einmalig können bis zu **4.180 € für Wohnraumanpassungen** (Treppenlifte, barrierefreies Bad) beantragt werden — pro Maßnahme, also mehrfach möglich. Nutzen Sie den [Rentenrechner](/finanzen/rentenrechner), um Ihre Altersvorsorge mit den Pflegekosten abzugleichen.`,
     faq: [
       {
         frage: 'Wie hoch ist das Pflegegeld 2026?',
-        antwort: 'Das Pflegegeld beträgt 2026 monatlich: Pflegegrad 1: 0 € (nur Entlastungsbetrag), Grad 2: 332 €, Grad 3: 573 €, Grad 4: 765 €, Grad 5: 947 €. Es wird steuerfrei direkt an die pflegebedürftige Person gezahlt, wenn diese zu Hause von Angehörigen gepflegt wird. Zusätzlich erhält jeder Pflegegrad 125 € Entlastungsbetrag.',
+        antwort: 'Das Pflegegeld beträgt 2026 monatlich: Pflegegrad 1: 0 € (nur Entlastungsbetrag), Grad 2: 347 €, Grad 3: 599 €, Grad 4: 800 €, Grad 5: 990 €. Es wird steuerfrei direkt an die pflegebedürftige Person gezahlt, wenn diese zu Hause von Angehörigen gepflegt wird. Zusätzlich erhält jeder Pflegegrad 131 € Entlastungsbetrag.',
       },
       {
         frage: 'Was ist der Unterschied zwischen Pflegegeld und Pflegesachleistung?',
-        antwort: 'Pflegegeld wird an die pflegebedürftige Person gezahlt und ist für die Pflege durch Angehörige, Freunde oder Nachbarn gedacht. Pflegesachleistung wird direkt an einen zugelassenen Pflegedienst überwiesen und ist deutlich höher (z. B. Grad 3: 1.432 € statt 573 €). Sie darf nur für professionelle Dienstleistungen verwendet werden, nicht für private Helfer.',
+        antwort: 'Pflegegeld wird an die pflegebedürftige Person gezahlt und ist für die Pflege durch Angehörige, Freunde oder Nachbarn gedacht. Pflegesachleistung wird direkt an einen zugelassenen Pflegedienst überwiesen und ist deutlich höher (z. B. Grad 3: 1.497 € statt 599 €). Sie darf nur für professionelle Dienstleistungen verwendet werden, nicht für private Helfer.',
       },
       {
         frage: 'Was ist die Kombinationsleistung?',
@@ -3575,6 +3575,121 @@ Neben dem Pflegegeld haben alle Pflegegrade (auch Grad 1) Anspruch auf den **Ent
     affiliate: [
       { programId: 'burdaZahn', context: 'pflegegeld' },
       { programId: 'cosmosdirekt', context: 'tagesgeld' },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was Pflegegeld ist',
+        html: `<p>Das <strong>Pflegegeld</strong> (§ 37 SGB XI) ist eine Geldleistung der gesetzlichen Pflegeversicherung für Menschen, die <strong>zu Hause</strong> gepflegt werden — nicht von einem Pflegedienst, sondern von <strong>Angehörigen, Freunden oder Nachbarn</strong>. Es wird direkt an die pflegebedürftige Person ausgezahlt und steht zur freien Verfügung, etwa um die pflegenden Angehörigen finanziell anzuerkennen.</p><p>Wie hoch das Pflegegeld ist, hängt allein vom <strong>Pflegegrad</strong> ab (2 bis 5). Pflegegrad 1 erhält <strong>kein Pflegegeld</strong> — dafür aber den Entlastungsbetrag und weitere Leistungen. Die Höhe ist gesetzlich festgelegt und seit der Erhöhung zum 01.01.2025 (Pflegeunterstützungs- und -entlastungsgesetz, +4,5 %) auch 2026 unverändert. Dieser Rechner zeigt, welche Leistung bei welchem Pflegegrad zusteht — Pflegegeld, Pflegesachleistung oder eine Kombination beider. Eingegeben werden der Pflegegrad und die Pflegeform; bei der Kombination zusätzlich der Anteil, den ein Pflegedienst übernimmt. Daraus ergeben sich die monatliche Hauptleistung und die Zusatzleistungen, die jedem Pflegegrad zustehen. Wichtig zur Einordnung: Es geht hier um die Leistungen der Pflegeversicherung nach SGB XI — nicht um Krankengeld oder den Eigenanteil im Pflegeheim, die anderen Regeln folgen.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Pflegegeld je Pflegegrad (§ 37 SGB XI, 2026)',
+        kopf: ['Pflegegrad', 'Pflegegeld/Monat'],
+        zeilen: [
+          ['Pflegegrad 1', '0 € (nur Entlastungsbetrag)'],
+          ['Pflegegrad 2', '347 €'],
+          ['Pflegegrad 3', '599 €'],
+          ['Pflegegrad 4', '800 €'],
+          ['Pflegegrad 5', '990 €'],
+        ],
+        fussnote: '§ 37 SGB XI, Stand 2026 (Werte seit 01.01.2025 nach PUEG, +4,5 %; 2026 unverändert). Das Pflegegeld setzt häusliche Pflege durch Privatpersonen voraus und wird steuerfrei an die pflegebedürftige Person gezahlt. Pflegegrad 1 hat keinen Anspruch auf Pflegegeld, wohl aber auf den Entlastungsbetrag von 131 €. Die nächste reguläre Anpassung ist zum 01.01.2028 vorgesehen. Gut erkennbar: Der Abstand zwischen den Pflegegraden wächst nach oben — von Grad 2 auf Grad 5 verdreifacht sich das Pflegegeld nahezu, weil der Pflegeaufwand entsprechend stärker zunimmt.',
+      },
+      {
+        typ: 'text',
+        titel: 'Pflegegeld, Sachleistung oder Kombination?',
+        html: `<p>In der häuslichen Pflege gibt es drei Wege. Das <strong>Pflegegeld</strong> fließt an die pflegebedürftige Person, wenn Angehörige pflegen. Die <strong>Pflegesachleistung</strong> (§ 36 SGB XI) wird dagegen direkt mit einem zugelassenen <strong>ambulanten Pflegedienst</strong> abgerechnet und ist deutlich höher — sie deckt professionelle Pflege ab.</p><p>Wer beides verbindet, nutzt die <strong>Kombinationsleistung</strong> (§ 38 SGB XI): Der Pflegedienst übernimmt einen Teil, etwa die Körperpflege, und schöpft dafür einen Prozentsatz der Sachleistung aus. Vom Pflegegeld bleibt dann der <strong>entsprechende Restanteil</strong>. Nutzt der Dienst zum Beispiel 50 % der Sachleistung, gibt es noch 50 % des Pflegegelds dazu. So lassen sich professionelle Hilfe und familiäre Pflege flexibel mischen — der gewählte Anteil kann alle sechs Monate angepasst werden. Welche Variante am meisten bringt, hängt davon ab, wie viel professionelle Pflege nötig ist. Wer ausschließlich von Angehörigen gepflegt wird, wählt das reine Pflegegeld; wer vollständig auf einen Dienst setzt, die volle Sachleistung. Die Kombination ist der Mittelweg und in der Praxis der häufigste Fall.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Pflegesachleistung je Pflegegrad (§ 36 SGB XI, 2026)',
+        kopf: ['Pflegegrad', 'Pflegesachleistung/Monat'],
+        zeilen: [
+          ['Pflegegrad 1', '0 €'],
+          ['Pflegegrad 2', '796 €'],
+          ['Pflegegrad 3', '1.497 €'],
+          ['Pflegegrad 4', '1.859 €'],
+          ['Pflegegrad 5', '2.299 €'],
+        ],
+        fussnote: '§ 36 SGB XI, Stand 2026. Die Pflegesachleistung wird direkt mit einem zugelassenen ambulanten Pflegedienst abgerechnet und ist deutlich höher als das Pflegegeld (z. B. Pflegegrad 3: 1.497 € statt 599 €). Nicht ausgeschöpfte Sachleistung kann anteilig als Pflegegeld ausgezahlt werden (Kombinationsleistung). Für reine Privatpflege ohne Dienst gilt nur das niedrigere Pflegegeld. Der deutlich höhere Betrag erklärt sich dadurch, dass damit professionelle Fachkräfte und nicht nur eine Aufwandsentschädigung für Angehörige finanziert werden. Reicht die Sachleistung nicht aus, tragen Pflegebedürftige die Mehrkosten selbst.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Kombinationsleistung: Pflegegrad 2, 50 % über den Dienst',
+        schritte: [
+          { label: 'Pflegegrad 2 — volle Sachleistung', formel: '§ 36 SGB XI', ergebnis: '796 €' },
+          { label: 'davon vom Pflegedienst genutzt', formel: '50 %', ergebnis: '398 €' },
+          { label: 'volles Pflegegrad-2-Pflegegeld', formel: '§ 37 SGB XI', ergebnis: '347 €' },
+          { label: 'verbleibendes Pflegegeld', formel: '50 % von 347 €', ergebnis: '173,50 €' },
+          { label: 'Kombinationsleistung gesamt', formel: '398 + 173,50', ergebnis: '571,50 €' },
+        ],
+        fazit: 'Bei Pflegegrad 2 stehen entweder 347 € Pflegegeld oder 796 € Sachleistung zur Verfügung. Bei der Kombination nutzt der Pflegedienst hier 50 % der Sachleistung (398 €); im Gegenzug bleibt das Pflegegeld zu 50 % erhalten (173,50 €). Zusammen ergibt das 571,50 € — plus den Entlastungsbetrag von 131 €. So wird professionelle Pflege genutzt, ohne ganz auf die Geldleistung für die Angehörigen zu verzichten. Der genutzte Sachleistungsanteil lässt sich halbjährlich neu festlegen, falls sich der Pflegebedarf ändert. Wichtig: Wird die Sachleistung zu 100 % ausgeschöpft, entfällt das Pflegegeld ganz; bei 0 % gibt es das volle Pflegegeld. Dazwischen wird linear anteilig gerechnet — der Rechner zeigt für jeden gewünschten Anteil das passende Ergebnis. In höheren Pflegegraden fällt die Kombination noch deutlicher aus, weil dort die Sachleistung viel höher liegt als das Pflegegeld und sich professionelle Hilfe entsprechend stärker lohnt.',
+      },
+      {
+        typ: 'text',
+        titel: 'Zusatzleistungen neben dem Pflegegeld',
+        html: `<p>Über das Pflegegeld hinaus gibt es mehrere Leistungen, die viele nicht voll ausschöpfen. Der <strong>Entlastungsbetrag</strong> von <strong>131 € im Monat</strong> (§ 45b SGB XI) steht <strong>allen Pflegegraden — auch Grad 1</strong> — zu und ist zweckgebunden für Alltagshilfen, Betreuung oder Tagespflege.</p><p>Für Verbrauchsmittel wie Einmalhandschuhe und Desinfektion gibt es eine <strong>Pflegehilfsmittel-Pauschale von 42 € monatlich</strong> (§ 40 SGB XI). Für barrierefreie Umbauten — Treppenlift, bodengleiche Dusche — sind einmalig bis zu <strong>4.180 € je Maßnahme</strong> möglich; verschlechtert sich die Pflegesituation, kann erneut beantragt werden. Hinzu kommen ab Pflegegrad 2 die Verhinderungs- und Kurzzeitpflege, die seit Mitte 2025 zu einem gemeinsamen Jahresbetrag zusammengefasst sind (siehe nächste Tabelle). Diese Zusatzleistungen müssen aktiv beantragt werden und verfallen sonst. Gerade der Entlastungsbetrag und die Pflegehilfsmittel werden häufig übersehen — dabei stehen sie jedem Pflegegrad ohne aufwändige Prüfung zu und summieren sich übers Jahr auf vierstellige Beträge. Allein Entlastungsbetrag und Pflegehilfsmittel ergeben zusammen über 2.000 € im Jahr, die vielen Berechtigten entgehen, weil sie nicht abgerufen werden.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Weitere Leistungen: Stationär und Ersatzpflege (2026)',
+        kopf: ['Leistung', 'Betrag', 'Rechtsgrundlage'],
+        zeilen: [
+          ['Vollstationäre Pflege Grad 2', '805 €/Monat', '§ 43 SGB XI'],
+          ['Vollstationäre Pflege Grad 3', '1.319 €/Monat', '§ 43 SGB XI'],
+          ['Vollstationäre Pflege Grad 4', '1.855 €/Monat', '§ 43 SGB XI'],
+          ['Vollstationäre Pflege Grad 5', '2.096 €/Monat', '§ 43 SGB XI'],
+          ['Verhinderungs- + Kurzzeitpflege', '3.539 €/Jahr (gemeinsam)', '§ 42a SGB XI'],
+        ],
+        fussnote: 'Stand 2026. Seit dem 01.07.2025 sind Verhinderungspflege (Ersatz bei Urlaub oder Krankheit der Pflegeperson) und Kurzzeitpflege (vorübergehende vollstationäre Pflege) zu EINEM gemeinsamen Jahresbetrag von 3.539 € zusammengefasst (§ 42a SGB XI) — nicht mehr zwei getrennte Töpfe. Die vollstationären Beträge nach § 43 decken nur einen Teil der Heimkosten; den Rest trägt der einrichtungseinheitliche Eigenanteil, der je nach Einrichtung mehrere Tausend Euro im Monat betragen kann. Ein nach Bezugsdauer gestaffelter Leistungszuschlag mindert diesen Eigenanteil. Pflegegrad 1 erhält für vollstationäre Pflege nur einen Zuschuss von 131 €.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Pflegeleistungen 2026 auf einen Blick',
+        werte: [
+          { label: 'Pflegegeld Grad 3', wert: '599 €/Mon', hinweis: 'häusliche Pflege durch Angehörige' },
+          { label: 'Pflegesachleistung Grad 3', wert: '1.497 €/Mon', hinweis: 'über ambulanten Pflegedienst' },
+          { label: 'Entlastungsbetrag', wert: '131 €/Mon', hinweis: 'alle Pflegegrade, auch Grad 1' },
+          { label: 'Verhinderungs-/Kurzzeitpflege', wert: '3.539 €/Jahr', hinweis: 'gemeinsamer Topf (§ 42a)' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Auszahlung, Steuerfreiheit und Pflegegrad 1',
+        html: `<p>Das Pflegegeld wird <strong>steuerfrei</strong> ausgezahlt (§ 3 Nr. 1a EStG) und <strong>nicht auf Bürgergeld, Grundsicherung oder Wohngeld angerechnet</strong> — es bleibt der pflegebedürftigen Person bzw. den pflegenden Angehörigen voll erhalten. Empfänger ist immer die pflegebedürftige Person selbst; sie entscheidet, wie sie es einsetzt.</p><p>Wer Pflegegeld bezieht, muss in festen Abständen einen <strong>Beratungsbesuch</strong> abrufen (§ 37 Abs. 3 SGB XI): bei Pflegegrad 2 und 3 halbjährlich, bei Grad 4 und 5 vierteljährlich. Er sichert die Qualität der häuslichen Pflege; bleibt er aus, kann das Pflegegeld gekürzt werden. Ein Sonderfall ist <strong>Pflegegrad 1</strong>: Hier gibt es kein Pflegegeld und keine Sachleistung, aber den Entlastungsbetrag von 131 €, die Pflegehilfsmittel-Pauschale und Zuschüsse zur Wohnraumanpassung — ein oft unterschätztes Leistungspaket. Pflegegeld und Sachleistung schließen sich gegenseitig nicht aus, sondern werden über die Kombinationsleistung verzahnt; der Entlastungsbetrag und die übrigen Zusatzleistungen kommen in jedem Fall obendrauf, unabhängig von der gewählten Pflegeform. Pflegebedürftige müssen sich also nicht zwischen Geld- und Sachleistung „entscheiden" und damit auf etwas verzichten — die Kombination erlaubt einen fließenden Übergang, der dem tatsächlichen Bedarf folgt.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Was die Höhe des Pflegegeldes bestimmt',
+        punkte: [
+          'Der Pflegegrad (2–5) — Pflegegrad 1 erhält kein Pflegegeld.',
+          'Die Pflegeform: Pflegegeld (Angehörige), Sachleistung (Dienst) oder Kombination.',
+          'Bei der Kombination: der prozentual vom Pflegedienst genutzte Sachleistungsanteil.',
+          'Der Entlastungsbetrag (131 €/Monat) steht zusätzlich allen Pflegegraden zu.',
+          'Ab Pflegegrad 2: gemeinsamer Jahresbetrag 3.539 € für Verhinderungs-/Kurzzeitpflege.',
+          'Der Beratungsbesuch (§ 37 Abs. 3) muss abgerufen werden, sonst droht eine Kürzung.',
+          'Pflegegeld ist steuerfrei und wird nicht auf Bürgergeld, Grundsicherung oder Wohngeld angerechnet.',
+          'Das Ergebnis ist eine Orientierung — verbindlich entscheidet die Pflegekasse.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Stand 2026 — Schätzung, keine Sozialberatung',
+        text: 'Dieser Rechner bildet die Leistungen der Pflegeversicherung nach SGB XI mit den ab 01.01.2025 geltenden und 2026 unveränderten Beträgen ab (§§ 36, 37, 40, 42a, 43, 45b SGB XI; Erhöhung durch das PUEG, +4,5 %). Er liefert eine Orientierung und ersetzt keine Sozial- oder Pflegeberatung. Die nächste reguläre Anpassung der Beträge ist zum 01.01.2028 vorgesehen. Maßgeblich für den Anspruch sind der von der Pflegekasse festgestellte Pflegegrad und ihr schriftlicher Bescheid; einzelne Leistungen müssen gesondert beantragt werden. Kostenlose, neutrale Beratung bieten die Pflegestützpunkte und die Pflegeberatung nach § 7a SGB XI — sie helfen auch beim Antrag und beim Ausschöpfen aller Leistungen. Bei Privatversicherten gelten die SGB-XI-Beträge sinngemäß; die Abwicklung läuft jedoch über die private Pflegepflichtversicherung und die Beihilfe.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Entlastungsbetrag nicht verfallen lassen',
+        text: 'Der Entlastungsbetrag von 131 € im Monat wird von vielen Pflegebedürftigen gar nicht abgerufen — dabei summiert er sich auf bis zu 1.572 € im Jahr und ist damit eine der am leichtesten zugänglichen Leistungen. Er ist zweckgebunden (Alltagsbegleitung, Haushaltshilfe, Tagespflege, anerkannte Angebote zur Unterstützung im Alltag) und wird gegen Rechnung erstattet. Nicht genutzte Beträge verfallen nicht sofort: Sie lassen sich bis zum 30. Juni des Folgejahres nachträglich verwenden. Wer unsicher ist, welche Anbieter anerkannt sind, fragt bei der Pflegekasse oder einem Pflegestützpunkt nach — so geht kein Geld verloren. Auch die Pflegehilfsmittel-Pauschale (42 € im Monat) lässt sich unkompliziert nutzen: Es genügt, einmal eine Bezugsquelle einzurichten, dann kommen die Verbrauchsmittel regelmäßig ins Haus.',
+      },
+    ],
+    quellen: [
+      { titel: '§ 37 SGB XI — Pflegegeld', url: 'https://www.gesetze-im-internet.de/sgb_11/__37.html', hinweis: 'Pflegegeld bei häuslicher Pflege durch Privatpersonen; Beratungsbesuch (Abs. 3). Stand 2026.' },
+      { titel: '§ 36 SGB XI — Pflegesachleistung', url: 'https://www.gesetze-im-internet.de/sgb_11/__36.html', hinweis: 'Ambulante Pflegesachleistungen je Pflegegrad; Grundlage der Kombinationsleistung.' },
+      { titel: '§ 42a SGB XI — Gemeinsamer Jahresbetrag', url: 'https://www.gesetze-im-internet.de/sgb_11/__42a.html', hinweis: 'Verhinderungs- und Kurzzeitpflege seit 01.07.2025 als gemeinsamer Jahresbetrag von 3.539 €.' },
+      { titel: '§ 45b SGB XI — Entlastungsbetrag', url: 'https://www.gesetze-im-internet.de/sgb_11/__45b.html', hinweis: 'Entlastungsbetrag 131 €/Monat für alle Pflegegrade, zweckgebunden.' },
     ],
   },
   {
