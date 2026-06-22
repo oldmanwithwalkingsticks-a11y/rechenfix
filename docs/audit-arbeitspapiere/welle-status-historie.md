@@ -8,6 +8,51 @@
 
 ---
 
+## 22.06.2026 — W19 Goldstandard Finanz-/Steuer-Bündel t78–t83 (gebündelter Doku-Sync, 107 Goldstandard gemessen)
+
+Sechs Kern-Steuer-Rechner auf Goldstandard, alle auf gemeinsamer Tarif-SSOT (`einkommensteuer.ts`
+TARIF_2026 / `_lohnsteuer-pap-2026.ts`). Gemeinsame YMYL-Datenauflage aus
+`welle19-finanz-steuer-buendel-scoping.md`: Lib gewinnt über Memory, kein Vorjahres-Wert im
+2026-Content, Primärquelle mit § + gesetze-im-internet.de, Stichtag, keine Steuerberatung.
+Contentbloecke-Set nach Block **107 Rechner** (gemessen via `check-contentbloecke-struktur.mjs`).
+Jeder mit `contentBloecke` + `quellen`, eigenem Leitformat (Schablonen-Falle vermieden), text-Blöcke
+≤170 W, Self-Check ≥1500 grün, kein WARN, Jahreswerte-Lint grün. Verifizierte Tarifwerte 2026:
+Grundfreibetrag 12.348 € (24.696 € Splitting), Zonen 17.799/69.878/277.825, Sätze 14/42/45 %,
+WK-Pauschale 1.230 €, Pendlerpauschale 0,38 €/km ab km 1 (Reform 2026).
+
+- **t78 einkommensteuer-rechner** (finanzen.ts, beispielrechnung-Leitformat, 12 Blöcke, ~1.509 W, `e188312`
+  **+ 50k-Fix `9a04ce2`**). Tarif-Kern zvE→Jahres-ESt (§ 32a). Probe-verifiziert 40k→7.209/90k→26.664/
+  Splitting 80k 14.418 vs. 22.464. **Fix:** beispiel-Feld + Content trugen stale 50k-Werte (9.758/30,5/
+  19,5/5.030) → korrigiert auf 10.548/35,1/21,1/5.700.
+- **t79 steuerprogression-rechner** (finanzen.ts, diagramm-Leitformat linie, 12 Blöcke, ~1.543 W, `f9268fd`).
+  Grenz- vs. Durchschnittssatz visualisiert (häufigster Steuer-Irrtum). Probe 50.000→Grenz 35,1 %/Ø 21,1 %.
+- **t80 splitting-rechner** (finanzen.ts, vergleich-Leitformat 3×, 13 Blöcke, ~1.507 W, `142b640`).
+  Ehegattensplitting § 32a Abs. 5. Probe 60k+20k→Vorteil 1.385 €, gleiche Einkommen→0. **stale beispiel
+  gefangen** (Vorteil 2.460 → lib-true) — beispiel-Feld-Fehler wie t78.
+- **t81 steuerklassen-vergleich-rechner** (finanzen.ts, vergleich+tabelle-Leitformat, 13 Blöcke, ~1.510 W,
+  `9297db6`). III/V vs. IV/IV(+Faktor). **Kern-Einordnung früh (Block 2):** Klassenwahl = monatliche
+  Liquidität, KEINE Steuerersparnis — Jahressteuer über alle Varianten identisch (Probe: III/V-Monatsvorteil
+  durch Nachzahlung exakt aufgezehrt). **stale beispiel gefangen** (III/V ~350 → ~41 €/Mon lib-true).
+- **t82 lohnsteuer-rechner** (finanzen.ts, tabelle-Leitformat 3×, 12 Blöcke, ~1.504 W, `5f28624`).
+  Amtlicher PAP 2026 (ITZBund-Port), Abzug nach Klasse I–VI. Plausibilisiert (Größenordnung + Monotonie
+  I<VI), kein PAP-Nachbau. **stale beispiel gefangen** (SK I ~390/VI ~590 → PAP-true 412/831 €).
+- **t83 steuererstattung-rechner** (finanzen.ts, beispielrechnung-Leitformat 3×, 12 Blöcke, ~1.504 W,
+  `b4c2c89`). Erstattung = gezahlt − geschuldet; Hebel Grenzsteuersatz. Pendlerpauschale 0,38 €/km (Lib).
+  Probe WK 2.000×34 %=680 €; beispiel-Kette 2.390/1.160/371 € exakt konsistent. **stale beispiel gefangen.**
+
+**Block KOMPLETT:** einkommensteuer (+Fix), steuerprogression, splitting, steuerklassen-vergleich,
+lohnsteuer, steuererstattung — alle Goldstandard, alle Builds Vercel-grün. **Prägende Lehre:**
+VIER stale-Werte im `beispiel`-Feld (außerhalb contentBloecke) gefangen und korrigiert — das Feld ist
+eine wiederkehrende YMYL-Fehlerquelle; Pflicht-Self-Check „beispiel gegen Lib" jetzt etabliert. Alle
+Tarifwerte 1:1 aus den Libs gespiegelt (Lib gewinnt über Web/Memory — beim Scoping selbst bestätigt, als
+Web-gerundete Polynom-Koeffizienten von den Lib-SSOT-Werten abwichen).
+
+**Offene Finanz-Slugs (eigene Domänen, separates Mini-Scoping):** erbschaft/schenkung (eigene
+Freibeträge), gewerbesteuer, kapitalertragsteuer, afa, mwst-rueckerstattung, etf-sparplan, rente/riester
+u. a. Andere Primärquellen + Freibetragslogiken → nicht in diesen Tarif-Block gehörig.
+
+---
+
 ## 22.06.2026 — W19 Goldstandard Gesundheits-Bündel t70–t77 (gebündelter Doku-Sync, 101 Goldstandard gemessen)
 
 Acht gesundheits-/wellbeing-sensible Rechner auf Goldstandard. Doku **erst nach t77 gebündelt**
