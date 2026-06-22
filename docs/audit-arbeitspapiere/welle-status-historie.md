@@ -8,6 +8,38 @@
 
 ---
 
+## 22.06.2026 — W19 Goldstandard Erbschaft-/Schenkung-Domäne e1–e2 (Doku-Sync, 109 Goldstandard gemessen)
+
+Erste eigenständige Finanz-Domäne nach dem Kern-Steuer-Block. Erbschaft- und Schenkungsteuer (gemeinsames
+Gesetz ErbStG; `schenkungssteuer.ts` importiert Tarif/Härtefall aus `erbschaftsteuer.ts`) — eigene
+Freibetrags-/Klassenlogik, NICHT der Einkommensteuer-Tarif. Mini-Scoping:
+`welle19-erbschaft-schenkung-mini-scoping.md`. YMYL-Auflage wie Steuer-Block (Lib gewinnt, § + gesetze-im-internet,
+Stichtag, keine Beratung, beispiel-Feld gegen Lib). Werte gegen §§ 15/16/17/19 ErbStG verifiziert (web 06/2026,
+2026 unverändert): Freibeträge Ehepartner 500k / Kind 400k / Enkel 200k / übrige 20k; Tarif 7–50 % je Klasse;
+Härtefallregel § 19 Abs. 3. Contentbloecke-Set **109 Rechner** (gemessen). Beide Builds Vercel-grün, Lint grün.
+
+- **e1 erbschaftsteuer-rechner** (finanzen.ts, tabelle-Leitformat 3×, 12 Blöcke, ~1.504 W, `df193b3`).
+  Erwerb von Todes wegen. Probe über `berechneErbStMitHaertefall` (NICHT naiv Stufe×Satz): Kind 500k→11.000 €,
+  Geschwister 100k→13.750 € (Härtefall greift), 301k Kl I→33.500 € (statt naiv 45.150). **Lib-Befund:** bei
+  Kind/Enkel-Eltern-tot wendet die Lib immer den Versorgungsfreibetrag § 17 an (altersabhängig, Default 52k,
+  0 ab 27 J.) — Beispiel lib-true als erwachsenes Kind erklärt. **erklaerung-Rechenfehler gefangen** (Lebenspartner
+  500k Kl III: 150.000 → korrekt 144.000 € = 30 % × 480k).
+- **e2 schenkungssteuer-rechner** (finanzen.ts, vergleich+beispielrechnung-Leitformat, 14 Blöcke, ~1.504 W, `ab79467`).
+  Erwerb zu Lebzeiten. Drei Kern-Unterschiede zu e1 prominent: Eltern/Großeltern nur 20k (Kl II) statt 100k; KEIN
+  Versorgungsfreibetrag; 10-Jahres-Wiederholung der Freibeträge (§ 14). Probe: Kind 800k einmal→60.000 € vs.
+  gestaffelt 2×400k→0 €; Neffe 250k→46.000 €. Struktur bewusst NICHT tabelle-dominant (vs. e1) — Schablonen-Falle
+  vermieden. beispiel-Feld bereits lib-true (kein Fix).
+
+**Domäne KOMPLETT:** erbschaftsteuer, schenkungssteuer — beide Goldstandard, YMYL gegen Härtefall-Funktion
+verifiziert (nicht naiv). Eigenes Gesetz/Tarif, sauber von den EStG-Tarif-Rechnern abgegrenzt.
+
+**Weitere offene eigenständige Finanz-Domänen (je eigenes Mini-Scoping):** Kapitalertrag-/Abgeltungsteuer
+(Sparerpauschbetrag 1.000 €, 25 % + Soli/KiSt), Gewerbesteuer (Freibetrag 24.500 €, Messzahl, Hebesatz), AfA
+(Abschreibungssätze), mwst-rueckerstattung, etf-sparplan/rente/riester, sowie Sozial-Slugs (krankengeld,
+kurzarbeitergeld, wohngeld, pflegegeld, bafoeg, midijob, nebenjob, pfaendung, witwenrente u. a.).
+
+---
+
 ## 22.06.2026 — W19 Goldstandard Finanz-/Steuer-Bündel t78–t83 (gebündelter Doku-Sync, 107 Goldstandard gemessen)
 
 Sechs Kern-Steuer-Rechner auf Goldstandard, alle auf gemeinsamer Tarif-SSOT (`einkommensteuer.ts`
