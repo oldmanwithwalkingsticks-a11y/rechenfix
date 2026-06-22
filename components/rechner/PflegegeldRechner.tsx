@@ -131,7 +131,7 @@ export default function PflegegeldRechner() {
             </div>
             <div>
               <span className="inline-block px-3 py-1 rounded-lg text-xs font-medium" style={{ backgroundColor: 'rgba(255,255,255,0.15)' }}>
-                + 125 € Entlastungsbetrag
+                + 131 € Entlastungsbetrag
               </span>
             </div>
           </div>
@@ -278,7 +278,7 @@ export default function PflegegeldRechner() {
       <CrossLink href="/finanzen/wohngeld-rechner" emoji="🏠" text="Wohngeld berechnen" />
 
       <ErgebnisAktionen
-        ergebnisText={`Pflegegeld Grad ${pflegegrad} (${pflegeformLabel}): ${fmtEuro(ergebnis.hauptLeistungMonat)} €/Monat (${fmtEuro(ergebnis.hauptLeistungJahr)} €/Jahr) + 125 € Entlastungsbetrag`}
+        ergebnisText={`Pflegegeld Grad ${pflegegrad} (${pflegeformLabel}): ${fmtEuro(ergebnis.hauptLeistungMonat)} €/Monat (${fmtEuro(ergebnis.hauptLeistungJahr)} €/Jahr) + 131 € Entlastungsbetrag`}
         seitenTitel="Pflegegeld-Rechner"
       />
 

@@ -27,51 +27,53 @@ export interface PflegegeldErgebnis {
   hauptLeistungJahr: number;
 
   // Zusatzleistungen
-  entlastungsbetrag: number;          // 125 €/Mon
-  verhinderungspflegeJahr: number;    // bis 1.612 €
-  kurzzeitpflegeJahr: number;         // bis 1.774 €
-  pflegehilfsmittelMonat: number;     // bis 40 €
-  wohnraumanpassung: number;          // bis 4.000 € einmalig
+  entlastungsbetrag: number;          // 131 €/Mon (§ 45b SGB XI)
+  verhinderungspflegeJahr: number;    // § 42a SGB XI: VHP+KZP gemeinsam bis 3.539 €/Jahr
+  kurzzeitpflegeJahr: number;         // § 42a SGB XI: VHP+KZP gemeinsam bis 3.539 €/Jahr
+  pflegehilfsmittelMonat: number;     // bis 42 € (§ 40 SGB XI)
+  wohnraumanpassung: number;          // bis 4.180 € einmalig (§ 40 SGB XI)
 
   // Gesamt (inkl. Entlastungsbetrag)
   gesamtMonat: number;
 }
 
 // === LEISTUNGSBETRÄGE 2026 ===
+// Stand: ab 01.01.2025 (PUEG +4,5 %), 2026 unverändert; §§ 36/37/40/42a/43/45b SGB XI; nächste Dynamisierung 01.01.2028
 
 const PFLEGEGELD: Record<Pflegegrad, number> = {
   1: 0,
-  2: 332,
-  3: 573,
-  4: 765,
-  5: 947,
+  2: 347,
+  3: 599,
+  4: 800,
+  5: 990,
 };
 
 const PFLEGESACHLEISTUNG: Record<Pflegegrad, number> = {
   1: 0,
-  2: 761,
-  3: 1432,
-  4: 1778,
-  5: 2200,
+  2: 796,
+  3: 1497,
+  4: 1859,
+  5: 2299,
 };
 
 const STATIONAER: Record<Pflegegrad, number> = {
-  1: 125,
-  2: 770,
-  3: 1262,
-  4: 1775,
-  5: 2005,
+  1: 131,
+  2: 805,
+  3: 1319,
+  4: 1855,
+  5: 2096,
 };
 
 export const PFLEGEGELD_TABELLE = PFLEGEGELD;
 export const PFLEGESACHLEISTUNG_TABELLE = PFLEGESACHLEISTUNG;
 export const STATIONAER_TABELLE = STATIONAER;
 
-export const ENTLASTUNGSBETRAG = 125;
-export const VERHINDERUNGSPFLEGE_MAX = 1612;
-export const KURZZEITPFLEGE_MAX = 1774;
-export const PFLEGEHILFSMITTEL_MAX = 40;
-export const WOHNRAUMANPASSUNG_MAX = 4000;
+export const ENTLASTUNGSBETRAG = 131;
+// § 42a SGB XI: Gemeinsamer Jahresbetrag VHP+KZP zusammen 3.539 €/Jahr (nicht je Topf einzeln)
+export const VERHINDERUNGSPFLEGE_MAX = 3539;
+export const KURZZEITPFLEGE_MAX = 3539;
+export const PFLEGEHILFSMITTEL_MAX = 42;
+export const WOHNRAUMANPASSUNG_MAX = 4180;
 
 function rund2(n: number): number {
   return Math.round(n * 100) / 100;
