@@ -5849,7 +5849,7 @@ Die Bescheinigung ist bei der Bank einzureichen. Die Bank muss den erhöhten Fre
   },
   {
     slug: 'lohnsteuer-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-22',
     titel: 'Lohnsteuer-Rechner',
     beschreibung: 'Lohnsteuer berechnen: Steuerklasse I–VI, Bundesland, Kirchensteuer, Kinderfreibeträge — monatlich oder jährlich.',
     kategorie: 'Finanzen',
@@ -5859,7 +5859,7 @@ Die Bescheinigung ist bei der Bank einzureichen. Die Bank muss den erhöhten Fre
     keywords: ['lohnsteuer rechner', 'lohnsteuer berechnen', 'lohnsteuer 2026', 'lohnsteuer steuerklasse', 'lohnsteuer tabelle 2026', 'pap 2026', 'lohnsteuer monatlich', 'lohnsteuer jahrestabelle', 'lohnsteuer rechner brutto', 'lohnsteuer klasse 1'],
     icon: '💷',
     formel: 'Jahresbrutto = Monatsbrutto × 12 | zvE = Jahresbrutto − Arbeitnehmerpauschbetrag − Sonderausgaben − Vorsorgepauschale − Freibetrag | Lohnsteuer = ESt(zvE) nach § 32a EStG mit Steuerklassen-Tarif',
-    beispiel: '3.500 € Brutto/Monat, Klasse I, BW, ohne KiSt: Lohnsteuer ca. 390 €/Monat, Soli 0 € (unter Freigrenze), Gesamt-Steuer ca. 390 €/Monat. Gleicher Lohn in Klasse VI: ca. 590 €/Monat (deutlich mehr, kein Grundfreibetrag).',
+    beispiel: '3.500 € Brutto/Monat, Klasse I, ohne Kirchensteuer (2026): Lohnsteuer ca. 412 €/Monat, Soli 0 € (unter Freigrenze). Gleicher Lohn in Klasse VI: ca. 831 €/Monat — deutlich mehr, weil dort kein Grundfreibetrag gilt.',
     erklaerung: `**Lohnsteuer berechnen — was der Arbeitgeber einbehält**
 
 Die Lohnsteuer ist eine besondere Erhebungsform der Einkommensteuer: Sie wird vom Arbeitgeber bereits am Gehaltszahltag einbehalten und direkt ans Finanzamt abgeführt — quasi als monatliche Vorauszahlung auf die Jahres-Einkommensteuer. Am Jahresende wird über die Steuererklärung abgeglichen, ob zu viel oder zu wenig einbehalten wurde.
@@ -5934,5 +5934,122 @@ Das geht mit dem Formular „Antrag auf Lohnsteuer-Ermäßigung" (online über E
       },
     ],
     affiliate: { programId: 'wiso', context: 'lohnsteuer' },
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was die Lohnsteuer ist',
+        html: `<p>Die <strong>Lohnsteuer</strong> ist keine eigene Steuer, sondern die <strong>monatliche Vorauszahlung auf die Einkommensteuer</strong> bei Arbeitnehmern. Der Arbeitgeber behält sie direkt vom Bruttolohn ein und führt sie ans Finanzamt ab (§ 38 EStG). Wie hoch der Abzug ausfällt, hängt vor allem von der <strong>Steuerklasse</strong>, der Lohnhöhe und eingetragenen Freibeträgen ab.</p><p>Berechnet wird sie nach dem amtlichen <strong>Programmablaufplan (PAP)</strong> des Bundesfinanzministeriums, der jährlich aktualisiert wird und auf dem Einkommensteuertarif § 32a EStG aufsetzt. Dieser Rechner bildet den PAP 2026 nach und zeigt Lohnsteuer, Solidaritätszuschlag und Kirchensteuer pro Monat. Wichtig zur Einordnung: Die Lohnsteuer ist nur der Steueranteil — das tatsächliche Netto ergibt sich erst nach Abzug der Sozialversicherungsbeiträge, wofür der Brutto-Netto-Rechner zuständig ist. Mit dem reinen Stundenlohn (Stundenlohn-Rechner) hat sie nichts zu tun. Wer also wissen will, was am Monatsende auf dem Konto landet, braucht beide Größen; dieser Rechner beantwortet gezielt die Teilfrage „Wie viel Steuer zieht der Arbeitgeber vom Lohn ab?" — und zwar getrennt nach Steuerklasse.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Lohnsteuer nach Bruttomonatslohn (Steuerklasse I, 2026)',
+        kopf: ['Bruttolohn / Monat', 'Lohnsteuer / Monat', 'Solidaritätszuschlag'],
+        zeilen: [
+          ['2.000 €', '91 €', '0 €'],
+          ['2.500 €', '191 €', '0 €'],
+          ['3.000 €', '298 €', '0 €'],
+          ['3.500 €', '412 €', '0 €'],
+          ['4.000 €', '532 €', '0 €'],
+          ['5.000 €', '793 €', '0 €'],
+          ['6.000 €', '1.087 €', '0 €'],
+        ],
+        fussnote: 'Steuerklasse I (ledig), ohne Kirchensteuer und ohne eingetragenen Freibetrag, nach dem amtlichen Programmablaufplan 2026. Der Solidaritätszuschlag bleibt in allen Zeilen bei 0 €, weil die Jahres-Lohnsteuer unter der Soli-Freigrenze von 20.350 € liegt; erst bei deutlich höheren Gehältern fällt Solidaritätszuschlag an. Die Werte sind der reine Steuerabzug — Sozialversicherungsbeiträge sind hier nicht enthalten. Gut erkennbar ist die Progression: Von 2.000 auf 3.000 € verdoppelt sich der Lohn nicht, die Lohnsteuer steigt aber von 91 auf 298 € überproportional, weil höhere Einkommensteile mit höheren Sätzen belastet werden.',
+      },
+      {
+        typ: 'text',
+        titel: 'Wie die Steuerklasse den Abzug beeinflusst',
+        html: `<p>Die <strong>Steuerklasse (I–VI)</strong> entscheidet, welche Freibeträge bereits beim monatlichen Abzug berücksichtigt werden — und damit, wie viel Lohnsteuer einbehalten wird. Sie ändert aber <strong>nicht die Jahressteuer</strong>; die steht erst bei der Veranlagung fest.</p><p><strong>Klasse I</strong> gilt für Ledige, <strong>II</strong> für Alleinerziehende (mit Entlastungsbetrag), <strong>III</strong> für den höher verdienenden Ehepartner (doppelter Grundfreibetrag, niedrigster Abzug), <strong>IV</strong> für Verheiratete mit ähnlichem Einkommen, <strong>V</strong> für den geringer verdienenden Partner (kein Grundfreibetrag, höchster Abzug unter den Paar-Klassen) und <strong>VI</strong> für jeden zweiten Job. Wie stark sich das auswirkt, zeigt die folgende Tabelle: Bei gleichem Bruttolohn schwankt die Lohnsteuer je nach Klasse erheblich. Für die Wahl der besten Kombination bei Ehepaaren gibt es den Steuerklassen-Vergleich-Rechner. Wichtig bleibt: Der höhere oder niedrigere Abzug in einer Klasse ist nur eine Frage der unterjährigen Verteilung — am Jahresende rechnet das Finanzamt die tatsächlich geschuldete Steuer aus und gleicht zu viel oder zu wenig Gezahltes über Erstattung oder Nachzahlung wieder aus.</p>`,
+
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Gleicher Lohn (4.000 €/Monat), verschiedene Steuerklassen',
+        kopf: ['Steuerklasse', 'Lohnsteuer / Monat'],
+        zeilen: [
+          ['I — ledig', '532 €'],
+          ['II — alleinerziehend', '425 €'],
+          ['III — Ehe, Hauptverdiener', '208 €'],
+          ['IV — Ehe, ähnliches Einkommen', '532 €'],
+          ['V — Ehe, Zweitverdiener', '955 €'],
+          ['VI — Zweit-/Nebenjob', '999 €'],
+        ],
+        fussnote: 'Bruttomonatslohn 4.000 €, ohne Kirchensteuer und Freibetrag, PAP 2026. Gut sichtbar: Klasse III hat den niedrigsten Abzug (doppelter Grundfreibetrag), Klasse V und VI den höchsten (kein Grundfreibetrag). Klasse I und IV sind identisch, weil IV pro Partner wie I behandelt wird. Die Summe der Lohnsteuer eines Ehepaars in III/V entspricht dabei nicht der Jahressteuer — diese wird erst bei der Veranlagung über den Splittingtarif ermittelt. Der scheinbar günstige Abzug in Klasse III darf deshalb nicht mit einer echten Steuerersparnis verwechselt werden; er bedeutet nur, dass der Partner in Klasse V umso mehr trägt.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Lohnsteuer nach Klasse und Lohnhöhe (I / III / V)',
+        kopf: ['Bruttolohn / Monat', 'Klasse I', 'Klasse III', 'Klasse V'],
+        zeilen: [
+          ['2.500 €', '191 €', '0 €', '472 €'],
+          ['3.500 €', '412 €', '115 €', '788 €'],
+          ['4.500 €', '659 €', '307 €', '1.124 €'],
+          ['5.500 €', '933 €', '516 €', '1.462 €'],
+        ],
+        fussnote: 'Monatliche Lohnsteuer nach PAP 2026, ohne Kirchensteuer und Freibetrag. Klasse III (höher verdienender Ehepartner) zahlt durchgehend am wenigsten, Klasse V (geringer verdienender Partner) am meisten — gemeinsam tragen beide die Steuer des Paares, nur anders verteilt. Bei 2.500 € fällt in Klasse III noch gar keine Lohnsteuer an, weil der doppelte Grundfreibetrag greift. Diese Tabelle dient als schnelles Nachschlagewerk: Den eigenen Bruttolohn in der Zeile suchen und in der Spalte der eigenen Steuerklasse den ungefähren monatlichen Steuerabzug ablesen. Zwischenwerte lassen sich grob interpolieren.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '4.000 €/Monat in Steuerklasse I',
+        schritte: [
+          { label: 'Bruttomonatslohn', formel: '', ergebnis: '4.000 €' },
+          { label: 'Bruttojahreslohn', formel: '4.000 × 12', ergebnis: '48.000 €' },
+          { label: 'Lohnsteuer / Jahr (PAP 2026)', formel: 'Klasse I', ergebnis: '6.382 €' },
+          { label: 'Lohnsteuer / Monat', formel: '6.382 ÷ 12', ergebnis: '≈ 532 €' },
+          { label: 'Solidaritätszuschlag', formel: 'unter Freigrenze 20.350 €', ergebnis: '0 €' },
+        ],
+        fazit: 'Für 4.000 € brutto im Monat (48.000 € im Jahr) behält der Arbeitgeber in Klasse I rund 532 € Lohnsteuer monatlich ein. Der Programmablaufplan zieht dabei intern bereits den Arbeitnehmer-Pauschbetrag (1.230 €), die Sonderausgabenpauschale und eine Vorsorgepauschale für Kranken-, Pflege- und Rentenversicherung ab, bevor der Tarif greift. Solidaritätszuschlag fällt nicht an, weil die Jahres-Lohnsteuer (6.382 €) deutlich unter der Freigrenze von 20.350 € liegt. Wichtig: Das ist nur der Steueranteil — vom Brutto gehen zusätzlich die Sozialversicherungsbeiträge ab. Das vollständige Netto zeigt der Brutto-Netto-Rechner. Alle Werte folgen dem amtlichen PAP 2026. Wäre derselbe Lohn in Klasse VI zu versteuern (etwa als Zweitjob), läge die Lohnsteuer mit rund 999 € fast doppelt so hoch — weil dort kein Grundfreibetrag und keine weiteren Pauschalen berücksichtigt werden. Das zeigt, wie stark allein die Steuerklasse den monatlichen Abzug verschiebt, obwohl die Jahressteuer am Ende dieselbe bleibt.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Lohnsteuer-Eckwerte 2026',
+        werte: [
+          { label: 'Grundfreibetrag (Klasse I/II/IV)', wert: '12.348 €', hinweis: 'bis hierhin fällt keine Lohnsteuer an' },
+          { label: 'Arbeitnehmer-Pauschbetrag', wert: '1.230 €', hinweis: 'im PAP automatisch berücksichtigt' },
+          { label: 'Soli-Freigrenze (Jahres-LSt)', wert: '20.350 €', hinweis: '40.700 € in Klasse III (Splitting)' },
+          { label: 'Kirchensteuersatz', wert: '8 % / 9 %', hinweis: 'Bayern und Baden-Württemberg 8 %, sonst 9 %' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Lohnsteuer im Gesamtbild',
+        html: `<p><strong>Lohnsteuer und Einkommensteuer</strong> sind nicht zwei Steuern, sondern zwei Erhebungsformen derselben Steuer. Die Lohnsteuer ist die unterjährige Vorauszahlung, die der Arbeitgeber monatlich abführt; die Einkommensteuer ist die endgültige Abrechnung über die Steuererklärung. Am Jahresende wird die gezahlte Lohnsteuer auf die Jahressteuer angerechnet — daraus ergibt sich eine Erstattung oder Nachzahlung. Die Jahres-Einkommensteuer auf das zu versteuernde Einkommen berechnet der Einkommensteuer-Rechner.</p><p>Außerdem ist die Lohnsteuer nur <strong>ein Teil der monatlichen Abzüge</strong>. Vom Bruttolohn gehen zusätzlich die <strong>Sozialversicherungsbeiträge</strong> ab — Kranken-, Pflege-, Renten- und Arbeitslosenversicherung. Erst nach Steuer und Sozialabgaben bleibt das Netto übrig. Dieser Rechner zeigt bewusst nur den Steueranteil; die vollständige Rechnung vom Brutto zum Netto übernimmt der Brutto-Netto-Rechner. Diese Trennung ist gewollt: Wer nur die steuerliche Wirkung einer Steuerklasse oder eines Freibetrags verstehen will, sieht sie hier isoliert, ohne dass die Sozialabgaben das Bild überlagern. So lässt sich etwa nachvollziehen, warum ein Wechsel von Klasse V in III den Steuerabzug stark senkt, während die Sozialabgaben davon völlig unberührt bleiben — sie richten sich allein nach dem Bruttolohn, nicht nach der Steuerklasse.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Freibetrag eintragen lassen — sofort mehr Netto',
+        html: `<p>Wer hohe abziehbare Aufwendungen hat, muss nicht bis zur Steuererklärung warten: Mit einem <strong>Lohnsteuerfreibetrag</strong> wird der Betrag schon beim monatlichen Abzug berücksichtigt, sodass sofort mehr Netto übrig bleibt. Beantragt wird er mit dem „Antrag auf Lohnsteuer-Ermäßigung" beim Finanzamt (online über Elster); er gilt bis zu zwei Jahre.</p><p>Typische Gründe sind eine <strong>Pendlerpauschale über 1.230 € im Jahr</strong> (ab etwa 15 km einfacher Strecke), ein Behinderten-Pauschbetrag, Unterhaltsleistungen oder Kinderbetreuungskosten. Der eingetragene Freibetrag senkt die Bemessungsgrundlage für die Lohnsteuer und damit den monatlichen Abzug — die Gesamtsteuer ändert sich dadurch nicht, nur ihre Verteilung über das Jahr. Wer keinen Freibetrag einträgt, bekommt zu viel gezahlte Lohnsteuer später über die Steuererklärung zurück. Der Vorteil eines eingetragenen Freibetrags ist also vor allem die frühere Liquidität: Das Geld steht Monat für Monat zur Verfügung, statt erst als Erstattung im Folgejahr. Umgekehrt ist ein Freibetrag kein Geschenk — er nimmt die spätere Erstattung nur vorweg. Wer dagegen einen Freibetrag zu hoch ansetzt, riskiert eine Nachzahlung; das Finanzamt prüft die Angaben daher und verlangt belastbare Nachweise.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Was den Lohnsteuerabzug bestimmt',
+        punkte: [
+          'Die Steuerklasse (I–VI) — sie entscheidet über die berücksichtigten Freibeträge.',
+          'Die Höhe des Bruttolohns — je höher, desto progressiv höher der Abzug.',
+          'Eingetragene Freibeträge (Pendlerpauschale, Behinderung u. a.) senken den Abzug sofort.',
+          'Die Kirchensteuerpflicht — 8 % (Bayern, Baden-Württemberg) oder 9 % der Lohnsteuer.',
+          'Die Vorsorgepauschale für Kranken-, Pflege- und Rentenversicherung (im PAP enthalten).',
+          'Der Solidaritätszuschlag — nur oberhalb der Freigrenze von 20.350 € Jahres-Lohnsteuer.',
+          'Der Krankenkassen-Zusatzbeitrag und die Kinderzahl beeinflussen die Vorsorgepauschale und damit den Abzug leicht.',
+          'Nicht für die Jahressteuer relevant: Die Klassenwahl verschiebt nur den Zahlungszeitpunkt.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Werte nach amtlichem PAP 2026 — Schätzung, keine Steuerberatung',
+        text: 'Dieser Rechner berechnet die Lohnsteuer nach dem amtlichen Programmablaufplan (PAP) 2026 des Bundesfinanzministeriums — demselben Algorithmus, den auch Lohnabrechnungsprogramme verwenden (Grundfreibetrag 12.348 €). Die Ergebnisse sind eine sehr genaue Orientierung; im Einzelfall können Abweichungen durch den individuellen Krankenkassen-Zusatzbeitrag, eine private Krankenversicherung oder weitere Faktoren entstehen. Es handelt sich um keine verbindliche Steuerfestsetzung und keine Steuerberatung. Die amtliche, kostenlose Berechnung bietet der BMF-Steuerrechner unter bmf-steuerrechner.de. Maßgeblich für die endgültige Steuer ist die Veranlagung durch das Finanzamt. Die hier gezeigten Beispielwerte sind auf volle Euro gerundet und gehen vom häufigsten Fall aus (gesetzlich versichert, Zusatzbeitrag rund 2,9 %, keine Kinder beim Pflegeversicherungs-Satz); abweichende Konstellationen verschieben den Abzug leicht.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Zu viel gezahlte Lohnsteuer gibt es zurück',
+        text: 'Zu viel einbehaltene Lohnsteuer ist nicht verloren: Wer Werbungskosten über dem Pauschbetrag, Sonderausgaben oder außergewöhnliche Belastungen hatte, bekommt den zu viel gezahlten Anteil über die Steuererklärung zurück — im Schnitt mehrere Hundert Euro. Besonders bei Steuerklasse V oder einem unterjährigen Jobwechsel lohnt sich die Erklärung fast immer. Wie hoch die Erstattung ausfallen könnte, schätzt der Steuererstattungs-Rechner. Die Abgabe lohnt sich auch freiwillig: Bis zu vier Jahre rückwirkend kann eine Steuererklärung noch eingereicht werden. Wer dagegen einen eingetragenen Freibetrag nutzt, hat das Geld bereits unterjährig erhalten und bekommt entsprechend weniger zurück — beides führt zum gleichen Jahresergebnis, nur zu unterschiedlichen Zeitpunkten.',
+      },
+    ],
+    quellen: [
+      { titel: '§ 39b EStG — Durchführung des Lohnsteuerabzugs', url: 'https://www.gesetze-im-internet.de/estg/__39b.html', hinweis: 'Berechnung der Lohnsteuer nach dem Programmablaufplan; Steuerklassen-Tarif. Stand 2026.' },
+      { titel: '§ 38 EStG — Erhebung der Lohnsteuer', url: 'https://www.gesetze-im-internet.de/estg/__38.html', hinweis: 'Lohnsteuer als Vorauszahlung; Einbehalt und Abführung durch den Arbeitgeber.' },
+      { titel: 'BMF — amtlicher Steuerrechner', url: 'https://www.bmf-steuerrechner.de', hinweis: 'Offizielle, kostenlose Berechnung von Lohn- und Einkommensteuer nach dem PAP.' },
+    ],
   },
 ];
