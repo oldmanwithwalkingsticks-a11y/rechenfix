@@ -8,6 +8,39 @@
 
 ---
 
+## 22.06.2026 — W19 Goldstandard Kapitalertrag- + Gewerbesteuer-Domäne k1+g1 (Doku-Sync, 111 Goldstandard gemessen)
+
+Zwei eigenständige Finanz-Einzel-Domänen nach Erbschaft/Schenkung, gebündelt dokumentiert. Je eigenes
+Mini-Scoping (`welle19-kapitalertrag-mini-scoping.md`, `welle19-gewerbesteuer-mini-scoping.md`). YMYL-Auflage
+wie Steuer-Block (Lib/Component gewinnt, § + gesetze-im-internet, Stichtag, keine Beratung, beispiel-Feld gegen
+Quelle). Contentbloecke-Set **111 Rechner** (gemessen). Beide Builds Vercel-grün, Lint grün.
+
+- **k1 kapitalertragsteuer-rechner** (finanzen.ts, beispielrechnung-Leitformat 3×, 12 Blöcke, ~1.504 W, `72a50c9`).
+  Abgeltungsteuer § 32d EStG + Teilfreistellung § 20 InvStG. **KEINE Lib — Component ist SSOT**
+  (`KapitalertragsteuerRechner.tsx`). Werte: 25 % + Soli 5,5 % (eff. 26,375 %), Sparerpauschbetrag 1.000/2.000 €,
+  Teilfreistellung Aktienfonds 30 % / Misch 15 %. **KiSt-Sonderformel** AbgSt = stpfl/(4+k) (NICHT naiv ×25 %) —
+  Probe-verifiziert: Zinsen 2.000→263,75 €, Aktien-ETF 2.000→105,50 € (eff. 5,27 %), KiSt stpfl 1.000 k=9 %→279,95 €
+  (abgSt 244,50 statt 250). beispiel-Feld lib-true (Dividenden 3.000→527,50 €).
+- **g1 gewerbesteuer-rechner** (finanzen.ts, beispielrechnung-Leitformat 3×, 12 Blöcke, ~1.501 W, `8580020`).
+  §§ 11 GewStG / 35 EStG. Lib `gewerbesteuer.ts` SSOT. Freibetrag 24.500 € (nur Personenges./Einzelunt.;
+  GmbH 0), Messzahl 3,5 %, Hebesatz gemeindeabhängig. **§ 35-Anrechnung** (nur Personenges.): Messbetrag ×
+  min(Hebesatz/100, 4,0), gedeckelt. Probe: PersGes 80.000 @400→GewSt 7.770, Anrechnung 7.770, **effektiv 0**;
+  GmbH 80.000 @400→11.200 € (kein Freibetrag/Anrechnung); PersGes @490→effektiv 1.748,25 € (Deckelung).
+  **erklaerung-Fachfehler gefangen:** „GmbH trägt GewSt als Betriebsausgabe" — falsch seit 2008 (§ 4 Abs. 5b
+  EStG, nicht abziehbar) → korrigiert. beispiel-Feld lib-true.
+
+**Beide Domänen KOMPLETT.** YMYL-Stolpersteine (KiSt-Sonderformel k1, § 35-Anrechnung g1) je über die
+Quelle gerechnet, nicht naiv — durch eigene Probe abgesichert. Wieder ein Fachfehler durch Domänenwissen
+gefangen (g1), nicht durch Zahlenprüfung.
+
+**Weitere offene eigenständige Finanz-Domänen:** AfA (Abschreibungssätze), ETF-Sparplan/Rente/Riester (Spar-/
+Vorsorge-Rechner), mwst-rueckerstattung, gmbh-geschaeftsfuehrer, hochrechner, nettolohn-optimierer. Sozial-Slugs
+(krankengeld, kurzarbeitergeld, wohngeld, pflegegeld, bafoeg, midijob, nebenjob, pfaendung, witwenrente) sind
+heterogen (teils Component-only, gemeinsame `sv-parameter.ts` für SV-Größen 2026; **wohngeld** hat bekannten
+Architektur-Bug und zeigt aktuell Erklärseite statt Rechner) — kleinteilige Untergruppen statt ein Block.
+
+---
+
 ## 22.06.2026 — W19 Goldstandard Erbschaft-/Schenkung-Domäne e1–e2 (Doku-Sync, 109 Goldstandard gemessen)
 
 Erste eigenständige Finanz-Domäne nach dem Kern-Steuer-Block. Erbschaft- und Schenkungsteuer (gemeinsames
