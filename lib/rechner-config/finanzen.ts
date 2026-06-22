@@ -4395,7 +4395,7 @@ Auch Freelancer können den Hochrechner nutzen, um Ihren Tages- oder Stundensatz
   },
   {
     slug: 'midijob-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-22',
     titel: 'Midijob-Rechner',
     beschreibung: 'Midijob-Abgaben berechnen: Reduzierte Sozialversicherungsbeiträge im Übergangsbereich von 603,01 bis 2.000 Euro.',
     kategorie: 'Finanzen',
@@ -4404,8 +4404,8 @@ Auch Freelancer können den Hochrechner nutzen, um Ihren Tages- oder Stundensatz
     metaDescription: 'Midijob berechnen: Reduzierte SV-Beiträge im Übergangsbereich 603–2.000 € ✓ Netto ✓ Ersparnis ✓ KI-Erklärung.',
     keywords: ['midijob rechner', 'übergangsbereich', 'midijob 2026', 'midijob netto', 'gleitzone', 'beitragspflichtige einnahme', 'faktor f'],
     icon: '💶',
-    formel: 'BE_gesamt = F × G + ((OG − F × G) / (OG − G)) × (Brutto − G) (§ 20a Abs. 2 SGB IV, für Gesamtbeitrag und RV-Entgeltpunkte) | BE_AN = (OG / (OG − G)) × (Brutto − G) (§ 20a Abs. 2a SGB IV, für AN-Anteil) | G = 603 € Geringfügigkeitsgrenze, OG = 2.000 € Obergrenze, F = 0,6619 (2026) | AN-SV = BE_AN × 21 % | AG-SV = BE_gesamt × 42 % − AN-SV',
-    beispiel: '1.500 € Brutto, Steuerklasse I, kinderlos: BE_gesamt ≈ 1.427 € (für Rentenansprüche), BE_AN ≈ 1.284 € → AN-SV ca. 257 € → Netto ca. 1.145 € (ca. 30 € Ersparnis gegenüber regulärer Beschäftigung, Arbeitgeber trägt den Differenzbetrag).',
+    formel: 'BE_gesamt = F × G + ((OG − F × G) / (OG − G)) × (Brutto − G) (§ 20a Abs. 2 SGB IV, für Gesamtbeitrag und RV-Entgeltpunkte) | BE_AN = (OG / (OG − G)) × (Brutto − G) (§ 20a Abs. 2a SGB IV, für AN-Anteil) | G = 603 € Geringfügigkeitsgrenze, OG = 2.000 € Obergrenze, F = 0,6619 (2026) | AN-SV = BE_AN × 21,75 % (kinderlos) | AG-SV = BE_gesamt × 42,9 % − AN-SV',
+    beispiel: '1.500 € Brutto, Steuerklasse I, kinderlos: BE_gesamt ≈ 1.427 € (für Rentenansprüche), BE_AN ≈ 1.284 € → AN-SV ca. 279 € → Netto ca. 1.211 € (ca. 47 € Ersparnis gegenüber regulärer Beschäftigung; den Differenzbetrag trägt der Arbeitgeber).',
     erklaerung: `**Midijob 2026 — Der Übergangsbereich einfach erklärt**
 
 Der **Midijob** (offiziell: Beschäftigung im Übergangsbereich) ist eine sozialversicherungspflichtige Beschäftigung mit einem monatlichen Verdienst zwischen **603,01 Euro und 2.000 Euro**. Er liegt damit genau zwischen dem [Minijob](/finanzen/minijob-rechner) (bis 603 €) und der regulären Beschäftigung (ab 2.000 €). Ziel des Übergangsbereichs ist es, den sprunghaften Anstieg der Sozialabgaben an der Minijob-Grenze abzufedern.
@@ -4424,13 +4424,122 @@ Anders als bei den Sozialversicherungsbeiträgen gibt es bei der **Lohnsteuer ke
 
 **Wann lohnt sich der Midijob?**
 
-Der Midijob lohnt sich vor allem für Personen, die **mehr als einen Minijob** leisten wollen (oder müssen), aber noch nicht in die volle Sozialabgabenlast eines regulären Jobs rutschen sollen — z. B. Wiedereinsteiger nach Elternzeit, Studierende mit höherem Verdienst, Rentner mit Teilzeitjob oder Zweitverdienerinnen. Die Ersparnis gegenüber regulärer Beschäftigung beträgt an der Untergrenze des Bereichs ca. 60 €/Monat und nimmt zur Obergrenze hin auf 0 € ab. Wer unter 603 € verdient, sollte den [Minijob](/finanzen/minijob-rechner) prüfen; ab 2.000 € greift der reguläre [Brutto-Netto-Rechner](/finanzen/brutto-netto-rechner).`,
+Der Midijob lohnt sich vor allem für Personen, die **mehr als einen Minijob** leisten wollen (oder müssen), aber noch nicht in die volle Sozialabgabenlast eines regulären Jobs rutschen sollen — z. B. Wiedereinsteiger nach Elternzeit, Studierende mit höherem Verdienst, Rentner mit Teilzeitjob oder Zweitverdienerinnen. Die Ersparnis gegenüber regulärer Beschäftigung ist nahe der Untergrenze am größten (über 100 €/Monat) und nimmt zur Obergrenze hin auf 0 € ab. Wer unter 603 € verdient, sollte den [Minijob](/finanzen/minijob-rechner) prüfen; ab 2.000 € greift der reguläre [Brutto-Netto-Rechner](/finanzen/brutto-netto-rechner).`,
     faq: [
       { frage: 'Was ist ein Midijob?', antwort: 'Ein Midijob (offiziell: Beschäftigung im Übergangsbereich) ist eine sozialversicherungspflichtige Beschäftigung mit einem monatlichen Verdienst zwischen 603,01 und 2.000 Euro. Im Übergangsbereich zahlen Arbeitnehmer reduzierte Sozialversicherungsbeiträge, während Arbeitgeber den vollen Satz zahlen.' },
       { frage: 'Wie hoch sind die Abgaben im Midijob?', antwort: 'Die Arbeitnehmer-Sozialabgaben werden nicht auf das tatsächliche Brutto, sondern auf eine reduzierte beitragspflichtige Einnahme (BE) berechnet. An der Untergrenze (603,01 €) beginnt der Beitrag mit etwa dem halben Regelsatz und steigt bis 2.000 € linear auf den vollen Satz an. Die Lohnsteuer wird normal nach Steuerklasse berechnet.' },
       { frage: 'Was ist der Übergangsbereich?', antwort: 'Der Übergangsbereich — früher Gleitzone genannt — ist ein gesetzlicher Bereich zwischen 603,01 € und 2.000 € monatlichem Verdienst, in dem die Sozialabgaben für Arbeitnehmer schrittweise ansteigen. Er soll verhindern, dass Arbeitnehmer an der Minijob-Grenze einen sprunghaften Netto-Verlust erleiden.' },
       { frage: 'Wie unterscheidet sich der Midijob vom Minijob?', antwort: 'Der Minijob ist ein pauschalversteuerter Job mit maximal 603 € Verdienst — ohne Sozialabgaben für den Arbeitnehmer (außer optional RV). Der Midijob beginnt bei 603,01 € und ist voll sozialversicherungspflichtig, mit reduzierten Beiträgen im Übergangsbereich. Midijobber sind durch den Job krankenversichert, Minijobber nicht.' },
       { frage: 'Bekomme ich volle Rentenansprüche im Midijob?', antwort: 'Ja. Seit 2022 werden die Rentenansprüche aus dem vollen Brutto berechnet, nicht aus der reduzierten beitragspflichtigen Einnahme. Midijobber erwerben also volle Rentenpunkte, obwohl sie reduzierte Beiträge zahlen. Auch Krankengeld und Arbeitslosengeld richten sich nach dem vollen Brutto.' },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was ein Midijob ist',
+        html: `<p>Ein <strong>Midijob</strong> — offiziell „Beschäftigung im Übergangsbereich" — ist eine voll sozialversicherungspflichtige Stelle mit einem regelmäßigen Monatsverdienst zwischen <strong>603,01 € und 2.000 €</strong> (Stand 2026). Das Besondere: Im Übergangsbereich zahlt der Arbeitnehmer <strong>reduzierte Sozialversicherungsbeiträge</strong>, genießt aber den <strong>vollen Schutz</strong> der Kranken-, Pflege-, Renten- und Arbeitslosenversicherung.</p><p>Der Sinn dahinter ist, den harten Sprung an der Minijob-Grenze abzufedern: Wer knapp über 603 € verdient, soll nicht plötzlich von voller Abgabenlast getroffen werden. Stattdessen steigen die Arbeitnehmer-Beiträge <strong>gleitend</strong> an — von praktisch null an der Untergrenze bis zum vollen Satz bei 2.000 €. Den fehlenden Teil trägt der Arbeitgeber. Dieser Rechner zeigt, wie hoch die reduzierten Beiträge und das Netto bei einem bestimmten Verdienst ausfallen. Die vollständige Lohnabrechnung über alle Verdienste hinweg übernimmt der Brutto-Netto-Rechner. Eingegeben werden der Bruttoverdienst, die Steuerklasse, die Kinderzahl (für den Pflegeversicherungs-Satz) und die Kirchensteuerpflicht; daraus ergeben sich die reduzierten Beiträge, das Netto und die Ersparnis gegenüber einer regulären Stelle.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Minijob, Midijob, reguläre Beschäftigung',
+        html: `<p>Drei Stufen liegen nebeneinander. Der <strong>Minijob</strong> (bis 603 €) ist für den Arbeitnehmer nahezu abgabenfrei — der Arbeitgeber zahlt Pauschalabgaben, ein eigener Krankenversicherungsschutz entsteht dadurch aber nicht. Der <strong>Midijob</strong> (603,01–2.000 €) ist voll sozialversichert, mit den beschriebenen reduzierten Arbeitnehmer-Beiträgen. Ab <strong>2.000,01 €</strong> beginnt die <strong>reguläre Beschäftigung</strong> mit dem vollen hälftigen Beitragssatz auf den gesamten Lohn.</p><p>Der entscheidende Unterschied zwischen Mini- und Midijob ist der Versicherungsschutz: Während Minijobber sich anderweitig (etwa über die Familienversicherung) krankenversichern müssen, sind Midijobber durch ihren Job eigenständig kranken-, pflege-, renten- und arbeitslosenversichert. Genau diese Schwelle bei 603 € macht den Sprung in den Midijob für viele attraktiv — der Schutz ist da, die Beiträge bleiben zunächst niedrig. Wichtig ist dabei der <strong>regelmäßige</strong> Monatsverdienst: Maßgeblich ist das im Jahresdurchschnitt zu erwartende Entgelt, nicht ein einmaliger Ausreißer. Schwankt der Verdienst, kann eine vorübergehende Überschreitung der 2.000-€-Grenze unschädlich sein, solange das regelmäßige Entgelt im Übergangsbereich bleibt.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Brutto 1.300 € (kinderlos, Steuerklasse I)',
+        schritte: [
+          { label: 'Bruttoverdienst', formel: '', ergebnis: '1.300 €' },
+          { label: 'beitragspflichtige Einnahme AN (§ 20 SGB IV)', formel: '', ergebnis: '997,85 €' },
+          { label: 'AN-Sozialversicherung', formel: '997,85 × 21,75 %', ergebnis: '217,03 €' },
+          { label: 'Lohnsteuer (Klasse I)', formel: 'unter Grundfreibetrag', ergebnis: '0 €' },
+          { label: 'Netto', formel: '1.300 − 217,03', ergebnis: '1.082,97 €' },
+        ],
+        fazit: 'Statt auf die vollen 1.300 € werden die Arbeitnehmer-Beiträge nur auf die reduzierte beitragspflichtige Einnahme von 997,85 € berechnet. Bei einem AN-Satz von 21,75 % (kinderlos) sind das 217,03 € statt 282,75 € in regulärer Beschäftigung — eine Ersparnis von rund 66 € im Monat. In Steuerklasse I fällt bei diesem Verdienst dank des Grundfreibetrags noch keine Lohnsteuer an, sodass netto 1.082,97 € bleiben. Den Differenzbetrag bei den Sozialbeiträgen trägt der Arbeitgeber. Trotz der niedrigeren Beiträge erwirbt der Arbeitnehmer übrigens volle Rentenpunkte auf Basis des Verdienstes von 1.300 € — der Rabatt mindert die Ansprüche nicht.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'AN-Beitrag und Netto im Übergangsbereich (Klasse I, kinderlos)',
+        kopf: ['Brutto/Monat', 'beitragspfl. Einnahme AN', 'AN-Sozialversicherung', 'Netto'],
+        zeilen: [
+          ['700 €', '138,87 €', '30,20 €', '669,80 €'],
+          ['1.000 €', '568,36 €', '123,62 €', '876,38 €'],
+          ['1.300 €', '997,85 €', '217,03 €', '1.082,97 €'],
+          ['1.700 €', '1.570,51 €', '341,59 €', '1.319,83 €'],
+          ['2.000 €', '2.000,00 €', '435,00 €', '1.473,92 €'],
+        ],
+        fussnote: 'Steuerklasse I, kinderlos (AN-SV-Satz 21,75 %), ohne Kirchensteuer, Stand 2026. Gut sichtbar der gleitende Anstieg: Die beitragspflichtige Einnahme des Arbeitnehmers startet nahe der Untergrenze bei fast null und erreicht erst bei 2.000 € den vollen Bruttobetrag — dort endet der Übergangsbereich und damit der Midijob-Vorteil. Lohnsteuer fällt in Klasse I erst oberhalb von rund 1.300 € an (bei 1.700 € etwa 39 €/Monat). Die Ersparnis gegenüber einer regulären Stelle ist nahe der Untergrenze am größten und schrumpft zur Obergrenze hin auf null — bei 1.300 € sind es noch rund 66 €, bei 1.700 € nur noch etwa 28 € im Monat und bei 2.000 € schließlich null. Die Werte gelten für Kinderlose; mit Kindern sinkt der Pflegeversicherungs-Satz und damit auch der absolute Beitrag leicht.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Midijob-Eckwerte 2026',
+        werte: [
+          { label: 'Untergrenze (Minijob-Grenze + 0,01)', wert: '603,01 €', hinweis: 'an Mindestlohn 13,90 € gekoppelt' },
+          { label: 'Obergrenze', wert: '2.000 €', hinweis: 'unverändert seit 2023' },
+          { label: 'Faktor F 2026', wert: '0,6619', hinweis: 'jährlich vom BMAS festgesetzt' },
+          { label: 'AN-SV-Satz (kinderlos)', wert: '21,75 %', hinweis: 'auf die reduzierte Bemessungsgrundlage' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Knapp über der Grenze: 603,01 € (Nulltarif-Effekt)',
+        schritte: [
+          { label: 'Bruttoverdienst', formel: 'knapp über Minijob-Grenze', ergebnis: '603,01 €' },
+          { label: 'beitragspflichtige Einnahme AN', formel: '(2.000 ÷ 1.397) × (603,01 − 603)', ergebnis: '≈ 0,01 €' },
+          { label: 'AN-Sozialversicherung', formel: '≈ 0,01 × 21,75 %', ergebnis: '≈ 0 €' },
+          { label: 'Netto', formel: '', ergebnis: '≈ 603,01 €' },
+        ],
+        fazit: 'Direkt an der Untergrenze des Übergangsbereichs beginnt die beitragspflichtige Einnahme des Arbeitnehmers bei null — er zahlt also praktisch keine Sozialversicherungsbeiträge, ist aber trotzdem voll versichert. Das ist der Kern des Übergangsbereichs: Der Wechsel vom Minijob (603 €) in den Midijob (603,01 €) bringt vollen Sozialschutz, ohne dass die Abgaben sprunghaft steigen. Erst mit zunehmendem Verdienst wachsen die Beiträge gleitend an. Den vollen Beitrag zur Sozialversicherung trägt in diesem Bereich fast vollständig der Arbeitgeber. Wer also überlegt, einen Minijob knapp auszuweiten, gewinnt mit dem ersten Cent über 603 € den vollen Versicherungsschutz praktisch zum Nulltarif — ein deutlich besseres Verhältnis als beim Minijob selbst.',
+      },
+      {
+        typ: 'text',
+        titel: 'Voller Schutz trotz reduzierter Beiträge',
+        html: `<p>Der wohl wichtigste Vorteil des Midijobs: Die niedrigeren Beiträge schmälern die <strong>Ansprüche nicht</strong>. Für die <strong>Rentenpunkte</strong> zählt seit 2022 nicht die reduzierte Arbeitnehmer-Bemessungsgrundlage, sondern der volle Verdienst (§ 163 Abs. 10 SGB VI). Midijobber sammeln also <strong>volle Rentenanwartschaften</strong>, obwohl sie weniger einzahlen — der Arbeitgeber gleicht die Differenz aus.</p><p>Dasselbe gilt für die übrigen Leistungen: <strong>Krankengeld, Arbeitslosengeld und Mutterschaftsgeld</strong> bemessen sich am tatsächlichen Bruttolohn, nicht an der reduzierten Beitragsbasis. Wer im Midijob arbeitet, hat damit denselben Versicherungsschutz wie in einer regulären Beschäftigung — nur zu geringeren eigenen Kosten. Diese Konstruktion macht den Übergangsbereich zu einem echten Solidaritätsbonus für niedrige und mittlere Einkommen. Vor 2022 war das anders: Damals führten die reduzierten Beiträge auch zu geringeren Rentenansprüchen. Diese Lücke hat der Gesetzgeber bewusst geschlossen, um Geringverdiener nicht doppelt zu benachteiligen. Auch für die Arbeitslosenversicherung gilt das volle Brutto als Bemessungsgrundlage — wer aus einem Midijob heraus arbeitslos wird, erhält Arbeitslosengeld auf Basis seines tatsächlichen Verdienstes, nicht der reduzierten Beitragsbasis.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Wer zahlt was? Der Arbeitgeber trägt mehr (Brutto 1.000 €)',
+        schritte: [
+          { label: 'Gesamtbeitrag SV (AN + AG)', formel: 'BE_gesamt 854,06 × 42,9 %', ergebnis: '366,39 €' },
+          { label: 'davon Arbeitnehmer-Anteil', formel: 'BE_AN 568,36 × 21,75 %', ergebnis: '123,62 €' },
+          { label: 'davon Arbeitgeber-Anteil', formel: '366,39 − 123,62', ergebnis: '242,77 €' },
+        ],
+        fazit: 'In einer regulären Beschäftigung teilen sich Arbeitnehmer und Arbeitgeber die Sozialbeiträge etwa hälftig. Im Übergangsbereich ist das anders: Bei 1.000 € Brutto trägt der Arbeitnehmer nur 123,62 €, der Arbeitgeber dagegen 242,77 € — fast das Doppelte. Der Grund ist die reduzierte Arbeitnehmer-Bemessungsgrundlage; den vollen Gesamtbeitrag (auf Basis der höheren Gesamt-Bemessungsgrundlage) muss trotzdem jemand aufbringen, und das ist der Arbeitgeber. So bleibt der volle Versicherungsschutz finanziert, ohne den Arbeitnehmer zu belasten. Mit steigendem Verdienst gleicht sich das Verhältnis an: Bei 2.000 € tragen beide Seiten wieder den gleichen halben Beitrag — der besondere Arbeitgeber-Anteil ist dann aufgebraucht. Für den Arbeitgeber ist ein Midijob im unteren Bereich also etwas teurer als ein gleich bezahlter regulärer Job, weil er den AN-Rabatt mitfinanziert; gewollt ist das als Anreiz, solche Stellen überhaupt anzubieten.',
+      },
+      {
+        typ: 'text',
+        titel: 'Lohnsteuer — hier gibt es keinen Rabatt',
+        html: `<p>Die Reduzierung betrifft nur die <strong>Sozialversicherung</strong>, nicht die <strong>Lohnsteuer</strong>. Diese wird im Midijob ganz normal nach der Steuerklasse berechnet — anders als beim Minijob, der pauschal versteuert werden kann. In <strong>Steuerklasse I</strong> bleibt der Verdienst dank des Grundfreibetrags bis etwa 1.300 € monatlich lohnsteuerfrei; darüber fällt moderate Lohnsteuer an.</p><p>Anders sieht es in <strong>Steuerklasse V</strong> aus (etwa beim geringer verdienenden Ehepartner): Dort wird kein Grundfreibetrag berücksichtigt, sodass schon bei niedrigem Verdienst spürbar Lohnsteuer abgezogen wird. Wer den Midijob als Zweitverdienst ausübt, sollte das einplanen. Die genaue Lohnsteuer samt aller Sozialabgaben über das volle Brutto zeigt der Brutto-Netto-Rechner; dieser Rechner konzentriert sich auf den Übergangsbereich-Effekt bei den Sozialbeiträgen. Zu viel einbehaltene Lohnsteuer kann man sich übrigens — wie bei jeder Beschäftigung — über die Steuererklärung zurückholen; der Sozialversicherungs-Rabatt des Midijobs bleibt davon unberührt. Wer mehrere Jobs hat, sollte beachten, dass der zweite Arbeitsplatz in Steuerklasse VI läuft und dort besonders hohe Lohnsteuer anfällt — die sich am Jahresende über die Veranlagung aber wieder ausgleicht.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Was beim Midijob zu beachten ist',
+        punkte: [
+          'Der Übergangsbereich gilt für regelmäßigen Verdienst von 603,01 € bis 2.000 € (Stand 2026).',
+          'Die Arbeitnehmer-Beiträge steigen gleitend — an der Untergrenze fast null, bei 2.000 € voll.',
+          'Voller SV-Schutz: Kranken-, Pflege-, Renten- und Arbeitslosenversicherung sind aktiv.',
+          'Rentenpunkte und Lohnersatzleistungen richten sich nach dem vollen Brutto, nicht nach der reduzierten Basis.',
+          'Den Differenzbetrag bei den Beiträgen trägt der Arbeitgeber.',
+          'Die Lohnsteuer wird normal nach Steuerklasse berechnet — kein Rabatt wie bei der Sozialversicherung.',
+          'Maßgeblich ist der regelmäßige Verdienst im Jahresdurchschnitt, nicht ein einzelner Monat.',
+          'Unter 603 € gilt der Minijob, über 2.000 € die reguläre Beschäftigung.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Stand 2026 — Schätzung, keine Sozialberatung',
+        text: 'Dieser Rechner bildet den Übergangsbereich nach § 20 SGB IV mit den 2026 geltenden Werten ab (Untergrenze 603,01 €, Obergrenze 2.000 €, Faktor F 0,6619). Die Beiträge sind über die amtlichen Formeln der beitragspflichtigen Einnahme berechnet; der angesetzte AN-Satz von 21,75 % gilt für Kinderlose und ändert sich mit der Kinderzahl (Pflegeversicherung). Das Ergebnis ist eine gerundete Schätzung und ersetzt keine Sozial- oder Steuerberatung. Maßgeblich sind die Abrechnung des Arbeitgebers und die Bescheide der Sozialversicherungsträger. Die Untergrenze ist an den Mindestlohn gekoppelt und steigt zum 01.01.2027 voraussichtlich auf 633,01 € (Minijob-Grenze 633 €), sobald der Mindestlohn auf 14,60 € angehoben wird — die Obergrenze von 2.000 € bleibt davon unberührt.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Der Sprung in den Midijob lohnt sich oft',
+        text: 'Der Wechsel vom Minijob in den Midijob lohnt sich oft mehr, als es auf den ersten Blick scheint: Schon ab 603,01 € erhält man vollen Kranken-, Pflege-, Renten- und Arbeitslosenversicherungsschutz, während die eigenen Beiträge nahe der Untergrenze fast bei null liegen. Wer bisher nur einen Minijob hat und aufstocken kann, gewinnt damit eigenständige Sozialansprüche statt einer bloßen Mitversicherung — gerade beim Krankengeld und bei der eigenen Rente ein echter Mehrwert. Erst zur Obergrenze von 2.000 € hin verschwindet der Beitragsvorteil; darüber gilt die volle Abgabenlast. Wer hingegen knapp unter der 2.000-€-Grenze verdient, profitiert kaum noch vom Midijob-Effekt — der größte Vorteil liegt im unteren Drittel des Übergangsbereichs.',
+      },
+    ],
+    quellen: [
+      { titel: '§ 20 SGB IV — Übergangsbereich (Midijob)', url: 'https://www.gesetze-im-internet.de/sgb_4/__20.html', hinweis: 'Definition des Übergangsbereichs 603,01–2.000 € und reduzierte beitragspflichtige Einnahme. Stand 2026.' },
+      { titel: '§ 8 SGB IV — Geringfügige Beschäftigung', url: 'https://www.gesetze-im-internet.de/sgb_4/__8.html', hinweis: 'Geringfügigkeitsgrenze (Minijob), an den Mindestlohn gekoppelt — Untergrenze des Übergangsbereichs.' },
+      { titel: '§ 163 SGB VI — Beitragspflichtige Einnahmen (Übergangsbereich)', url: 'https://www.gesetze-im-internet.de/sgb_6/__163.html', hinweis: 'Volle Rentenanwartschaften trotz reduzierter Beiträge (Abs. 10).' },
     ],
   },
   {
