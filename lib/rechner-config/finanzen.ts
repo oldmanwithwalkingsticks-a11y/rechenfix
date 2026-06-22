@@ -3579,7 +3579,7 @@ Neben dem Pflegegeld haben alle Pflegegrade (auch Grad 1) Anspruch auf den **Ent
   },
   {
     slug: 'erbschaftsteuer-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-22',
     titel: 'Erbschaftsteuer-Rechner',
     beschreibung: 'Erbschaftsteuer und Schenkungsteuer berechnen: Freibetrag, Steuersatz und Steuerlast nach Verwandtschaftsgrad.',
     kategorie: 'Finanzen',
@@ -3608,7 +3608,7 @@ Eine der wichtigsten Ausnahmen im Erbschaftsteuerrecht ist das **Familienheim-Pr
 
 **Steuerklassen und Steuersätze im Detail**
 
-Das ErbStG unterscheidet drei **Steuerklassen**: Klasse I (enge Verwandte wie Ehepartner, Kinder, Enkel, Eltern bei Erbschaft), Klasse II (Geschwister, Nichten, Neffen, Stiefeltern, Schwiegereltern, geschiedene Ehepartner) und Klasse III (alle anderen, auch nicht verwandte Lebensgefährten). Die Steuersätze sind gestaffelt: Klasse I beginnt bei 7 % und steigt bis 30 % (für Erwerbe über 26 Mio. €). Klasse II beginnt bei 15 % und erreicht 43 %. Klasse III startet bei 30 % und kann bis zu 50 % betragen. Das bedeutet: Ein unverheirateter Lebenspartner zahlt bei einer Erbschaft von 500.000 Euro **150.000 Euro Steuer** (30 % auf 480.000 Euro steuerpflichtigen Erwerb), ein verheirateter Ehepartner **0 Euro**. Eine Heiratsurkunde kann also wortwörtlich sechsstellige Summen sparen. Beachten Sie auch die Steuer auf das laufende Einkommen im [Brutto-Netto-Rechner](/finanzen/brutto-netto-rechner) und die mögliche [Steuererstattung](/finanzen/steuererstattung-rechner).`,
+Das ErbStG unterscheidet drei **Steuerklassen**: Klasse I (enge Verwandte wie Ehepartner, Kinder, Enkel, Eltern bei Erbschaft), Klasse II (Geschwister, Nichten, Neffen, Stiefeltern, Schwiegereltern, geschiedene Ehepartner) und Klasse III (alle anderen, auch nicht verwandte Lebensgefährten). Die Steuersätze sind gestaffelt: Klasse I beginnt bei 7 % und steigt bis 30 % (für Erwerbe über 26 Mio. €). Klasse II beginnt bei 15 % und erreicht 43 %. Klasse III startet bei 30 % und kann bis zu 50 % betragen. Das bedeutet: Ein unverheirateter Lebenspartner zahlt bei einer Erbschaft von 500.000 Euro **144.000 Euro Steuer** (30 % auf 480.000 Euro steuerpflichtigen Erwerb), ein verheirateter Ehepartner **0 Euro**. Eine Heiratsurkunde kann also wortwörtlich sechsstellige Summen sparen. Beachten Sie auch die Steuer auf das laufende Einkommen im [Brutto-Netto-Rechner](/finanzen/brutto-netto-rechner) und die mögliche [Steuererstattung](/finanzen/steuererstattung-rechner).`,
     faq: [
       {
         frage: 'Wie hoch ist der Freibetrag bei einer Erbschaft?',
@@ -3639,6 +3639,127 @@ Das ErbStG unterscheidet drei **Steuerklassen**: Klasse I (enge Verwandte wie Eh
       { programId: 'wiso', context: 'erbschaft' },
       { programId: 'smartsteuer', context: 'erbschaft' },
       { programId: 'cosmosdirekt', context: 'sterbegeld' },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was die Erbschaftsteuer ist',
+        html: `<p>Die <strong>Erbschaftsteuer</strong> fällt an, wenn jemand durch einen Todesfall Vermögen erbt. Wie viel zu zahlen ist, hängt von zwei Größen ab: dem <strong>Verwandtschaftsgrad</strong> zum Verstorbenen und der <strong>Höhe des Erbes</strong>. Der Verwandtschaftsgrad bestimmt dabei zweierlei — den persönlichen <strong>Freibetrag</strong> (§ 16 ErbStG), bis zu dem nichts gezahlt wird, und die <strong>Steuerklasse</strong> I, II oder III (§ 15 ErbStG), die über den Steuersatz entscheidet.</p><p>Je näher verwandt, desto höher der Freibetrag und desto niedriger der Satz: Ein Ehepartner hat 500.000 € frei und zahlt höchstens 30 %, eine nicht verwandte Person nur 20.000 € frei und mindestens 30 %. Versteuert wird immer nur der Teil <strong>über</strong> dem Freibetrag. Dieser Rechner bildet das Erbschaftsteuergesetz (ErbStG) ab; die eng verwandte Schenkungsteuer für Übertragungen zu Lebzeiten berechnet der Schenkungsteuer-Rechner. Mit der Einkommensteuer hat das nichts zu tun — es ist ein eigenes Gesetz mit eigenem Tarif. Eingegeben werden im Rechner die Erwerbsart, der Wert, der Verwandtschaftsgrad sowie optional Vorschenkungen, ein Hausrat-Freibetrag und eine selbstgenutzte Immobilie; daraus ergibt sich die geschätzte Steuer samt Aufschlüsselung der Freibeträge.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Persönliche Freibeträge nach Verwandtschaft (§ 16 ErbStG)',
+        kopf: ['Verwandtschaft', 'Freibetrag (Erbschaft)', 'Steuerklasse'],
+        zeilen: [
+          ['Ehepartner / eingetr. Lebenspartner', '500.000 €', 'I'],
+          ['Kind, Stief-/Adoptivkind', '400.000 €', 'I'],
+          ['Enkel (Eltern verstorben)', '400.000 €', 'I'],
+          ['Enkel (Eltern leben)', '200.000 €', 'I'],
+          ['Eltern / Großeltern (bei Erbschaft)', '100.000 €', 'I'],
+          ['Geschwister, Nichte/Neffe, Stiefeltern', '20.000 €', 'II'],
+          ['Nicht verwandt / Freund', '20.000 €', 'III'],
+        ],
+        fussnote: '§ 16 ErbStG, Stand 2026 (unverändert gegenüber 2025). Die Freibeträge gelten je Erbe und je Erbfall. Wichtig: Bei einer Schenkung zu Lebzeiten erhalten Eltern und Großeltern nur 20.000 € statt 100.000 €; die übrigen Freibeträge sind identisch. Schenkungsfreibeträge lassen sich zudem alle zehn Jahre neu nutzen — bei der Erbschaft gilt der Freibetrag dagegen einmalig.',
+      },
+      {
+        typ: 'text',
+        titel: 'Die drei Steuerklassen (§ 15 ErbStG)',
+        html: `<p>Anders als bei der Lohnsteuer haben die Steuerklassen der Erbschaftsteuer nichts mit dem Familienstand des Erben zu tun, sondern allein mit dem <strong>Verwandtschaftsverhältnis zum Verstorbenen</strong>. Sie entscheiden über den Steuersatz.</p><p><strong>Klasse I</strong> umfasst die engsten Angehörigen: Ehepartner, Kinder, Enkel und — bei einer Erbschaft — auch Eltern und Großeltern. Hier gelten die niedrigsten Sätze (7–30 %). <strong>Klasse II</strong> gilt für Geschwister, Nichten und Neffen, Stief- und Schwiegereltern, den geschiedenen Ehepartner sowie Eltern bei einer Schenkung (15–43 %). <strong>Klasse III</strong> trifft alle übrigen, also nicht verwandte Personen und Freunde, mit den höchsten Sätzen (30–50 %). Derselbe Erbbetrag kann je nach Klasse völlig unterschiedlich besteuert werden — das zeigen die folgenden Beispiele deutlich. Besonders folgenreich ist die Lücke zwischen Klasse I und II: Geschwister oder Nichten und Neffen gelten rechtlich als entfernte Verwandte und zahlen deutlich mehr als die direkte Abstammungslinie. Auch nichteheliche Lebenspartner fallen in Klasse III, solange keine Ehe oder eingetragene Partnerschaft besteht — ein Grund, warum die Eheschließung erbschaftsteuerlich enorme Auswirkungen hat.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Steuersätze nach Wertstufe und Klasse (§ 19 ErbStG)',
+        kopf: ['Steuerpflichtiger Erwerb bis', 'Klasse I', 'Klasse II', 'Klasse III'],
+        zeilen: [
+          ['75.000 €', '7 %', '15 %', '30 %'],
+          ['300.000 €', '11 %', '20 %', '30 %'],
+          ['600.000 €', '15 %', '25 %', '30 %'],
+          ['6.000.000 €', '19 %', '30 %', '30 %'],
+          ['13.000.000 €', '23 %', '35 %', '50 %'],
+          ['26.000.000 €', '27 %', '40 %', '50 %'],
+          ['über 26.000.000 €', '30 %', '43 %', '50 %'],
+        ],
+        fussnote: '§ 19 ErbStG, Stand 2026. Der Satz gilt auf den gesamten steuerpflichtigen Erwerb (nach Abzug der Freibeträge), nicht stufenweise wie bei der Einkommensteuer. Damit ein kleiner Sprung über eine Stufengrenze nicht zu einem großen Steuersprung führt, begrenzt die Härtefallregel (§ 19 Abs. 3 ErbStG) die Mehrsteuer — siehe Beispiel weiter unten. Klasse II wurde 2010 gespreizt; seither liegen ihre Sätze deutlich über Klasse I.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Erwachsenes Kind erbt 500.000 €',
+        schritte: [
+          { label: 'Wert der Erbschaft', formel: '', ergebnis: '500.000 €' },
+          { label: 'persönlicher Freibetrag (Kind)', formel: '§ 16 ErbStG', ergebnis: '− 400.000 €' },
+          { label: 'Versorgungsfreibetrag', formel: 'ab 27 J. entfällt er', ergebnis: '0 €' },
+          { label: 'steuerpflichtiger Erwerb', formel: '500.000 − 400.000', ergebnis: '100.000 €' },
+          { label: 'Steuerklasse / Satz', formel: 'Klasse I, bis 300.000 €', ergebnis: '11 %' },
+          { label: 'Erbschaftsteuer', formel: 'über Härtefall-Funktion', ergebnis: '11.000 €' },
+        ],
+        fazit: 'Ein erwachsenes Kind (über 27 Jahre) erbt 500.000 €. Nach Abzug des persönlichen Freibetrags von 400.000 € bleiben 100.000 € steuerpflichtig. In Klasse I gilt dafür der Satz von 11 %, macht 11.000 € Erbschaftsteuer — gut 2 % des Gesamterbes. Netto bleiben 489.000 €. Wäre das Kind jünger als 27, käme zusätzlich der Versorgungsfreibetrag nach § 17 ErbStG hinzu und die Steuer fiele niedriger aus (siehe unten). Die Steuer ist hier über die Härtefall-Funktion gerechnet; bei 100.000 € liegt sie noch klar unter der Deckelungsgrenze, sodass der reguläre Satz greift.',
+      },
+      {
+        typ: 'text',
+        titel: 'Der Versorgungsfreibetrag (§ 17 ErbStG)',
+        html: `<p>Neben dem persönlichen Freibetrag gibt es bei einer <strong>Erbschaft</strong> (nicht bei einer Schenkung) einen zusätzlichen <strong>Versorgungsfreibetrag</strong> für die engsten Hinterbliebenen. Der überlebende <strong>Ehepartner</strong> erhält 256.000 € extra, <strong>Kinder</strong> einen altersabhängigen Betrag, der mit zunehmendem Alter sinkt.</p><p>Die Staffel reicht von 52.000 € (Kind bis 5 Jahre) über 41.000 € (6–10 J.), 30.700 € (11–15 J.), 20.500 € (16–20 J.) bis 10.300 € (21–27 J.); ab 27 Jahren entfällt der Versorgungsfreibetrag für Kinder ganz. Hintergrund ist der Versorgungsgedanke: Wer früh einen Elternteil verliert, soll stärker entlastet werden. Beim Ehepartner wird der Freibetrag um den Kapitalwert steuerfreier Versorgungsbezüge (etwa einer Witwenrente) gekürzt — diese Kürzung bildet der Rechner vereinfacht nicht ab und setzt den vollen Betrag an. In der Praxis bedeutet das: Ein Ehepartner kann zusätzlich zum persönlichen Freibetrag von 500.000 € noch einmal bis zu 256.000 € steuerfrei erhalten, sodass selbst größere Erbschaften oft ganz oder weitgehend steuerfrei bleiben. Wer das genaue Ergebnis braucht, gibt im Rechner bei einem Kind das Alter an — dann greift die exakte Staffel statt des Höchstbetrags.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Geschwister erbt 100.000 € — der Klassenunterschied',
+        schritte: [
+          { label: 'Wert der Erbschaft', formel: '', ergebnis: '100.000 €' },
+          { label: 'persönlicher Freibetrag (Geschwister)', formel: '§ 16 ErbStG', ergebnis: '− 20.000 €' },
+          { label: 'steuerpflichtiger Erwerb', formel: '100.000 − 20.000', ergebnis: '80.000 €' },
+          { label: 'Steuerklasse / Satz', formel: 'Klasse II, bis 300.000 €', ergebnis: '20 %' },
+          { label: 'regulär', formel: '80.000 × 20 %', ergebnis: '16.000 €' },
+          { label: 'Erbschaftsteuer (Härtefall gedeckelt)', formel: '§ 19 Abs. 3', ergebnis: '13.750 €' },
+        ],
+        fazit: 'Erbt ein Geschwister 100.000 €, bleiben nach dem kleinen Freibetrag von 20.000 € ganze 80.000 € steuerpflichtig — in Klasse II zu 20 %. Der reguläre Satz ergäbe 16.000 €, doch weil der Betrag nur knapp über der 75.000-€-Stufe liegt, greift die Härtefallregel und deckelt die Steuer auf 13.750 €. Zum Vergleich: Ein Kind hätte bei 100.000 € dank des 400.000-€-Freibetrags gar keine Steuer gezahlt. Derselbe Betrag, ein anderer Verwandtschaftsgrad — und aus 0 € werden 13.750 €. Das ist der Kern des Klassensystems. Wer kinderlos ist und Geschwister oder Nichten bedenken möchte, sollte diese Belastung früh einplanen — etwa durch gestaffelte Schenkungen oder eine testamentarische Gestaltung.',
+      },
+      {
+        typ: 'text',
+        titel: 'Die Härtefallregel (§ 19 Abs. 3 ErbStG)',
+        html: `<p>Die Erbschaftsteuer wendet den Satz einer Stufe auf den <strong>gesamten</strong> steuerpflichtigen Erwerb an — nicht stufenweise. Ohne Korrektur würde ein einziger Euro über einer Stufengrenze die Steuer sprunghaft erhöhen. Genau das verhindert die <strong>Härtefallregel</strong>: Sie begrenzt die Mehrsteuer beim knappen Überschreiten einer Grenze.</p><p>Ein Beispiel in Klasse I: Bei 300.000 € steuerpflichtigem Erwerb beträgt die Steuer 33.000 € (11 %). Steigt der Erwerb auf 301.000 €, würde der nächste Satz von 15 % regulär 45.150 € ergeben — ein Sprung von über 12.000 € für 1.000 € mehr. Die Härtefallregel deckelt das: Die Mehrsteuer darf höchstens die Hälfte des überschreitenden Betrags ausmachen, sodass nur rund 33.500 € fällig werden. Der Rechner berücksichtigt diese Deckelung automatisch — eine naive Rechnung „Betrag × Satz" wäre an den Stufengrenzen falsch. Die Regel wirkt nur in einem schmalen Korridor oberhalb jeder Grenze; liegt der Erwerb deutlich in der höheren Stufe, gilt wieder der volle Satz. Praktisch heißt das auch: Es bringt selten etwas, einen Erwerb künstlich knapp unter eine Grenze drücken zu wollen — der Härtefall fängt den Sprung ohnehin ab.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Beispiele: Steuer und Netto je nach Verwandtschaft',
+        kopf: ['Fall (Erbschaft 2026)', 'Freibetrag', 'Erbschaftsteuer', 'Netto'],
+        zeilen: [
+          ['Ehepartner erbt 800.000 €', '756.000 €*', '3.080 €', '796.920 €'],
+          ['Kind (über 27) erbt 500.000 €', '400.000 €', '11.000 €', '489.000 €'],
+          ['Geschwister erbt 100.000 €', '20.000 €', '13.750 €', '86.250 €'],
+          ['Nicht verwandt erbt 100.000 €', '20.000 €', '24.000 €', '76.000 €'],
+        ],
+        fussnote: 'Werte vom Rechner berechnet, Erbschaft 2026, ohne Hausrat-/Immobilien-Sonderfälle. *Beim Ehepartner enthält der Freibetrag den Versorgungsfreibetrag von 256.000 € (§ 17). Gut sichtbar: Dieselbe Summe wird je nach Verwandtschaft völlig unterschiedlich besteuert — der nicht verwandte Erbe zahlt bei 100.000 € fast das Doppelte des Geschwisters, während ein Kind bei diesem Betrag steuerfrei bliebe. Je größer die Nähe, desto kleiner die Steuer.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Was die Erbschaftsteuer bestimmt',
+        punkte: [
+          'Der Verwandtschaftsgrad — er legt Freibetrag (§ 16) und Steuerklasse (§ 15) fest.',
+          'Der Wert des Erwerbs — versteuert wird nur der Teil über dem Freibetrag.',
+          'Bei Erbschaft zusätzlich der Versorgungsfreibetrag (§ 17): Ehepartner 256.000 €, Kinder altersabhängig.',
+          'Vorschenkungen der letzten 10 Jahre werden hinzugerechnet (§ 14 ErbStG).',
+          'Der Hausrat-Freibetrag (§ 13): 41.000 € in Klasse I, 12.000 € in Klasse II/III.',
+          'Ein selbstgenutztes Familienheim kann für Ehepartner und Kinder steuerfrei bleiben.',
+          'An den Stufengrenzen greift die Härtefallregel (§ 19 Abs. 3) — keine naive Satz-Rechnung.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Familienheim und Pflegefreibetrag',
+        text: 'Über die persönlichen Freibeträge hinaus gibt es Sonderbefreiungen. Das selbstgenutzte Familienheim kann der Ehepartner komplett steuerfrei erben, wenn er mindestens zehn Jahre darin wohnen bleibt; für Kinder gilt das bis zu einer Wohnfläche von 200 m². Wer den Erblasser unentgeltlich gepflegt hat, kann zudem einen Pflegefreibetrag von bis zu 20.000 € geltend machen (§ 13 ErbStG). Diese Befreiungen sind an Bedingungen geknüpft und werden vom Rechner nur teilweise abgebildet — im Ernstfall lohnt der Blick ins Gesetz oder eine Beratung, weil hier oft fünfstellige Beträge auf dem Spiel stehen. Auch der Hausrat ist begünstigt: In Klasse I bleiben bis zu 41.000 €, in Klasse II und III bis zu 12.000 € steuerfrei (§ 13 ErbStG), zusätzlich zum persönlichen Freibetrag.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Stand 2026 — Schätzung, keine Rechtsberatung',
+        text: 'Dieser Rechner bildet die Erbschaftsteuer nach §§ 15, 16, 17 und 19 ErbStG mit den 2026 geltenden Werten ab (Freibeträge unverändert gegenüber 2025). Er liefert eine Orientierung und ersetzt keine steuerliche oder rechtliche Beratung. Komplexe Fälle wie Betriebsvermögen, Nießbrauch, die genaue Immobilienbewertung oder die Kürzung des Versorgungsfreibetrags sind nicht abgebildet. Eine Erbschaft muss dem Finanzamt innerhalb von drei Monaten angezeigt werden (§ 30 ErbStG). Eine Reform der Erbschaftsteuer wird politisch immer wieder diskutiert; maßgeblich ist der jeweils aktuelle Gesetzesstand und der Bescheid des Finanzamts. Bei größeren Vermögen helfen Steuerberatung oder Notar.',
+      },
+    ],
+    quellen: [
+      { titel: '§ 16 ErbStG — Persönliche Freibeträge', url: 'https://www.gesetze-im-internet.de/erbstg_1974/__16.html', hinweis: 'Freibeträge je Verwandtschaftsgrad (Ehepartner 500.000 € bis nicht verwandt 20.000 €). Stand 2026.' },
+      { titel: '§ 15 ErbStG — Steuerklassen', url: 'https://www.gesetze-im-internet.de/erbstg_1974/__15.html', hinweis: 'Einteilung der Erwerber in die Steuerklassen I, II und III.' },
+      { titel: '§ 19 ErbStG — Steuersätze', url: 'https://www.gesetze-im-internet.de/erbstg_1974/__19.html', hinweis: 'Tarif 7–50 % nach Wertstufe und Klasse, inkl. Härtefallregel Abs. 3.' },
+      { titel: '§ 17 ErbStG — Versorgungsfreibetrag', url: 'https://www.gesetze-im-internet.de/erbstg_1974/__17.html', hinweis: 'Ehegatte 256.000 €, Kinder altersabhängig 10.300–52.000 €; nur bei Erwerb von Todes wegen.' },
     ],
   },
   {
