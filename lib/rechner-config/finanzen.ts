@@ -2331,7 +2331,7 @@ Der Rechner zeigt nicht nur das Problem, sondern auch die Hebel: Homeoffice-Tage
   },
   {
     slug: 'steuererstattung-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-22',
     titel: 'Steuererstattungs-Rechner',
     beschreibung: 'Steuererstattung schätzen: Mögliche Rückzahlung vom Finanzamt anhand Ihrer Ausgaben berechnen.',
     kategorie: 'Finanzen',
@@ -2341,7 +2341,7 @@ Der Rechner zeigt nicht nur das Problem, sondern auch die Hebel: Homeoffice-Tage
     keywords: ['steuererstattung rechner', 'steuererstattung berechnen', 'steuererklärung erstattung', 'steuer zurück bekommen', 'werbungskosten absetzen', 'pendlerpauschale steuer', 'homeoffice pauschale', 'steuerersparnis berechnen', 'steuerrückzahlung', 'lohnsteuer erstattung'],
     icon: '💸',
     formel: 'Erstattung ≈ (Werbungskosten − 1.230 € Pauschbetrag) × Grenzsteuersatz + 20% der haushaltsnahen DL',
-    beispiel: 'Beispiel: 40.000 € Brutto, 25 km Pendel, 220 Tage, 50 Homeoffice-Tage: Werbungskosten 2.250 €, über Pauschbetrag 1.020 €. Bei 30% Grenzsteuersatz ≈ 306 € Erstattung.',
+    beispiel: 'Beispiel: 40.000 € Brutto, 25 km Pendelweg, 220 Arbeitstage, 50 Homeoffice-Tage: Werbungskosten 2.390 €, über dem Pauschbetrag 1.160 €. Bei rund 32 % Grenzsteuersatz ≈ 371 € Erstattung.',
     erklaerung: `Die Steuererklärung lohnt sich für die meisten Arbeitnehmer: Im Durchschnitt erhalten sie 1.063 Euro vom Finanzamt zurück. Trotzdem verzichten viele auf die Abgabe — oft aus Unwissen über die absetzbaren Kosten. Unser Steuererstattungs-Rechner gibt Ihnen eine erste Einschätzung, wie viel Sie zurückbekommen könnten.
 
 **Durchschnittliche Steuererstattung in Deutschland**
@@ -2382,7 +2382,7 @@ Der Arbeitnehmer-Pauschbetrag von 1.230 Euro wird automatisch von Ihrem zu verst
       },
       {
         frage: 'Lohnt sich eine Steuererklärung bei Steuerklasse 1?',
-        antwort: 'Ja, in den meisten Fällen. Sobald Ihre Werbungskosten über dem Pauschbetrag von 1.230 € liegen, erhalten Sie Geld zurück. Schon ab ca. 17 km Pendelweg (einfach) überschreiten Sie diese Grenze. Auch Homeoffice-Tage, Fortbildungen oder haushaltsnahe Dienstleistungen können die Erstattung erhöhen.',
+        antwort: 'Ja, in den meisten Fällen. Sobald Ihre Werbungskosten über dem Pauschbetrag von 1.230 € liegen, erhalten Sie Geld zurück. Schon ab ca. 15 km Pendelweg (einfach, bei 220 Arbeitstagen) überschreiten Sie diese Grenze. Auch Homeoffice-Tage, Fortbildungen oder haushaltsnahe Dienstleistungen können die Erstattung erhöhen.',
       },
       {
         frage: 'Was ist die Homeoffice-Pauschale und wie hoch ist sie?',
@@ -2397,6 +2397,122 @@ Der Arbeitnehmer-Pauschbetrag von 1.230 Euro wird automatisch von Ihrem zu verst
       { programId: 'wiso', context: 'steuererstattung', variant: 'full' },
       { programId: 'smartsteuer', context: 'steuererstattung', variant: 'full' },
       { programId: 'cosmosdirekt', context: 'tagesgeld' },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Warum es eine Steuererstattung gibt',
+        html: `<p>Eine <strong>Steuererstattung</strong> entsteht, weil die monatlich vom Arbeitgeber einbehaltene <strong>Lohnsteuer nur eine Vorauszahlung</strong> auf die Einkommensteuer ist. Sie wird pauschal nach Steuerklasse berechnet und kennt die individuellen Ausgaben des Arbeitnehmers nicht. Erst die <strong>Steuererklärung</strong> bringt diese Posten ins Spiel — und weil dadurch das zu versteuernde Einkommen sinkt, war die gezahlte Lohnsteuer oft zu hoch. Die Differenz kommt als Erstattung zurück.</p><p>Die Erstattung ist damit die Brücke zwischen dem, was unterjährig <strong>gezahlt</strong> wurde (Lohnsteuer-Rechner), und dem, was am Ende tatsächlich <strong>geschuldet</strong> ist (Einkommensteuer-Rechner). Dieser Rechner schätzt, wie viel von den eingetragenen Ausgaben — Werbungskosten, Pendlerpauschale, Sonderausgaben, haushaltsnahe Dienstleistungen — als Erstattung zurückfließt. Er ersetzt keine vollständige Steuerberechnung, sondern zeigt den Erstattungs-Effekt der wichtigsten absetzbaren Posten. Wer das vollständige Netto vom Brutto wissen will, nutzt den Brutto-Netto-Rechner; hier geht es ausschließlich um den Teil, der nach Ablauf des Jahres zurückfließen kann. Genau deshalb ist die Erstattung kein „Geschenk" des Staates, sondern die Rückzahlung einer zu hohen Vorauszahlung.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Was bei einem typischen Arbeitnehmer zusammenkommt (50.000 € brutto)',
+        schritte: [
+          { label: 'Pendlerpauschale', formel: '25 km × 220 Tage × 0,38 €', ergebnis: '2.090 €' },
+          { label: 'Homeoffice-Pauschale', formel: '40 Tage × 6 €', ergebnis: '240 €' },
+          { label: 'berufliche Ausgaben', formel: 'Arbeitsmittel, Fortbildung', ergebnis: '500 €' },
+          { label: 'Werbungskosten gesamt', formel: '2.090 + 240 + 500', ergebnis: '2.830 €' },
+          { label: 'über dem Pauschbetrag (1.230 €)', formel: '2.830 − 1.230', ergebnis: '1.600 €' },
+          { label: 'Erstattung aus Werbungskosten', formel: '1.600 × 35 % Grenzsteuersatz', ergebnis: '560 €' },
+          { label: 'haushaltsnahe Dienstleistungen', formel: '1.000 € × 20 %', ergebnis: '200 €' },
+          { label: 'Spenden', formel: '300 € × 35 %', ergebnis: '105 €' },
+          { label: 'geschätzte Erstattung', formel: '560 + 200 + 105', ergebnis: '865 €' },
+        ],
+        fazit: 'Für 50.000 € Brutto kommen aus Arbeitsweg, Homeoffice und beruflichen Ausgaben 2.830 € Werbungskosten zusammen. Davon wirkt nur der Teil über dem Pauschbetrag von 1.230 € zusätzlich — also 1.600 €. Bei einem Grenzsteuersatz von rund 35 % ergibt das 560 € Erstattung. Hinzu kommen 200 € für haushaltsnahe Dienstleistungen (20 % direkt von der Steuerschuld) und 105 € aus einer Spende. Insgesamt schätzt der Rechner rund 865 € Erstattung. Wichtig: Das ist eine Schätzung aus den größten Posten — die genaue Höhe hängt vom Einzelfall ab und ergibt sich erst aus dem Steuerbescheid. Schon dieses Beispiel zeigt das Grundmuster: Der größte Hebel sind die Werbungskosten, sobald sie den Pauschbetrag übersteigen; haushaltsnahe Leistungen wirken zusätzlich und unabhängig vom Steuersatz. Wer keinen einzigen dieser Posten hat, bekommt dagegen nichts über den ohnehin automatischen Pauschbetrag hinaus zurück.',
+      },
+      {
+        typ: 'text',
+        titel: 'Der Hebel: Grenzsteuersatz, nicht 100 Prozent',
+        html: `<p>Der häufigste Irrtum bei Absetzungen: „Was ich absetze, bekomme ich komplett zurück." Das stimmt nicht. Absetzbare Ausgaben senken das <strong>zu versteuernde Einkommen</strong> — die Erstattung beträgt deshalb nur den <strong>Grenzsteuersatz</strong> des abgesetzten Betrags, nicht 100 Prozent.</p><p>Ein Beispiel: Wer 1.000 € Werbungskosten über dem Pauschbetrag absetzt und einen Grenzsteuersatz von 34 % hat, bekommt rund 340 € zurück — nicht 1.000 €. Der Grenzsteuersatz steigt mit dem Einkommen (von 14 % knapp über dem Grundfreibetrag bis 42 %), weshalb dieselbe Ausgabe bei höherem Einkommen mehr Erstattung bringt. Eine Ausnahme bilden <strong>haushaltsnahe Dienstleistungen und Handwerkerleistungen</strong>: Sie werden mit 20 % direkt von der Steuerschuld abgezogen, unabhängig vom Grenzsteuersatz. Wie sich der Tarifverlauf insgesamt entwickelt, zeigt der Steuerprogressions-Rechner. Aus dem gleichen Grund lohnt es sich, absetzbare Ausgaben möglichst in einem Jahr zu bündeln: Wer ohnehin nahe am Pauschbetrag liegt, hebt mit zusätzlichen Posten einen größeren Anteil über die 1.230-Euro-Schwelle — und nur dieser überschießende Teil bringt überhaupt eine Erstattung.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Werbungskosten 2.000 € über dem Pauschbetrag (zvE 45.000 €)',
+        schritte: [
+          { label: 'zu versteuerndes Einkommen', formel: '', ergebnis: '45.000 €' },
+          { label: 'Werbungskosten über dem Pauschbetrag', formel: '', ergebnis: '2.000 €' },
+          { label: 'Grenzsteuersatz', formel: 'bei 45.000 €', ergebnis: '≈ 34 %' },
+          { label: 'Erstattungseffekt', formel: '2.000 × 34 %', ergebnis: '≈ 680 €' },
+        ],
+        fazit: 'Die 2.000 € abgesetzte Werbungskosten sind nicht die Erstattung — sie senken das zu versteuernde Einkommen. Zurück kommt davon der Grenzsteuersatz, hier rund 34 %, also etwa 680 €. Bei einem geringeren Einkommen mit nur 20 % Grenzsteuersatz wären es für denselben Betrag nur rund 400 €, bei 42 % entsprechend 840 €. Das erklärt, warum sich identische Ausgaben für Gut- und Geringverdiener unterschiedlich stark auswirken. Der abgesetzte Betrag selbst muss zunächst aus eigener Tasche bezahlt worden sein; die Erstattung ist nur die anteilige Steuerentlastung darauf.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Häufige erstattungswirksame Posten (Stand 2026)',
+        kopf: ['Posten', 'Höhe / Regel', 'Wirkung'],
+        zeilen: [
+          ['Arbeitnehmer-Pauschbetrag', '1.230 €/Jahr', 'automatisch, ohne Nachweis'],
+          ['Pendlerpauschale', '0,38 €/km ab km 1', 'Werbungskosten × Grenzsteuersatz'],
+          ['Homeoffice-Pauschale', '6 €/Tag, max. 1.260 €', 'Werbungskosten × Grenzsteuersatz'],
+          ['Arbeitsmittel, Fortbildung', 'in tatsächlicher Höhe', 'Werbungskosten × Grenzsteuersatz'],
+          ['Sonderausgaben (Spenden u. a.)', 'in tatsächlicher Höhe', '× Grenzsteuersatz'],
+          ['Haushaltsnahe DL / Handwerker', '20 % der Kosten, max. 4.000 €', 'direkt von der Steuerschuld'],
+        ],
+        fussnote: 'Stand 2026. Werbungskosten und Sonderausgaben senken das zu versteuernde Einkommen — die Erstattung entspricht dem Grenzsteuersatz des Betrags. Zusätzlich wirkt nur, was über dem Arbeitnehmer-Pauschbetrag von 1.230 € liegt. Haushaltsnahe Dienstleistungen und Handwerkerleistungen sind die Ausnahme: Sie werden mit 20 % direkt von der Steuerschuld abgezogen. An Homeoffice-Tagen entfällt die Pendlerpauschale für denselben Tag — beide lassen sich nicht doppelt für einen Kalendertag ansetzen.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Steuererstattung in Zahlen (2026)',
+        werte: [
+          { label: 'Arbeitnehmer-Pauschbetrag', wert: '1.230 €', hinweis: 'wird automatisch abgezogen' },
+          { label: 'Pendlerpauschale', wert: '0,38 €/km', hinweis: 'ab dem ersten Kilometer' },
+          { label: 'Homeoffice-Pauschale', wert: '6 €/Tag', hinweis: 'maximal 1.260 € im Jahr' },
+          { label: 'Ø Erstattung (Destatis)', wert: 'rund 1.000 €', hinweis: 'stark vom Einzelfall abhängig' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Pendlerpauschale: 30 km Arbeitsweg',
+        schritte: [
+          { label: 'Entfernung (einfach)', formel: '', ergebnis: '30 km' },
+          { label: 'Arbeitstage', formel: '', ergebnis: '220' },
+          { label: 'Pendlerpauschale', formel: '30 × 220 × 0,38 €', ergebnis: '2.508 €' },
+          { label: 'über dem Pauschbetrag (1.230 €)', formel: '2.508 − 1.230', ergebnis: '1.278 €' },
+          { label: 'Erstattung', formel: '1.278 × 34 % (bei 45.000 €)', ergebnis: '≈ 435 €' },
+        ],
+        fazit: 'Allein der Arbeitsweg von 30 km bringt bei 220 Arbeitstagen 2.508 € Werbungskosten — deutlich mehr als der Pauschbetrag von 1.230 €. Nur der überschießende Teil von 1.278 € wirkt zusätzlich; bei rund 34 % Grenzsteuersatz fließen davon etwa 435 € zurück. Faustregel: Ab etwa 15 km einfacher Strecke übersteigt die Pendlerpauschale bei 220 Tagen bereits den Pauschbetrag, sodass sich die Steuererklärung allein deswegen lohnt. Maßgeblich ist die kürzeste Straßenverbindung; eine längere Strecke zählt nur, wenn sie offensichtlich verkehrsgünstiger und regelmäßig genutzt wird. Für reine Homeoffice-Tage gibt es dagegen keine Pendlerpauschale, sondern die separate Homeoffice-Pauschale.',
+      },
+      {
+        typ: 'text',
+        titel: 'Was die Erstattung mindert oder aufhebt',
+        html: `<p>Nicht jede Steuererklärung endet mit einer Erstattung — manchmal droht eine <strong>Nachzahlung</strong>. Häufigster Grund ist die Steuerklassen-Kombination <strong>III/V</strong>: Hier wird unterjährig oft zu wenig Lohnsteuer einbehalten, sodass das Finanzamt nachfordert. Auch <strong>Nebeneinkünfte</strong> über 410 € im Jahr (etwa aus Vermietung), mehrere gleichzeitige Arbeitsverhältnisse oder Lohnersatzleistungen können die Erstattung verringern oder in eine Nachzahlung drehen.</p><p>Lohnersatzleistungen wie Eltern- oder Arbeitslosengeld sind zwar steuerfrei, erhöhen aber über den <strong>Progressionsvorbehalt</strong> den Steuersatz auf das übrige Einkommen — das schmälert die Erstattung. Wer in der Kombination III/V veranlagt wird, sollte eine mögliche Nachzahlung von vornherein einplanen; welche Kombination am besten passt, zeigt der Steuerklassen-Vergleich-Rechner. Eine Nachzahlung bedeutet aber nie, dass die Steuererklärung „ein Fehler" war — sie korrigiert nur einen zu niedrigen unterjährigen Abzug. Bei freiwilliger Abgabe gibt es zudem eine Absicherung: Droht wider Erwarten eine Nachzahlung, lässt sich der Antrag in vielen Fällen noch zurücknehmen. Pflichtveranlagte haben diese Möglichkeit nicht — für sie ist die Abgabe verbindlich, unabhängig vom Ergebnis.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Pflicht oder freiwillig — und welche Fristen gelten',
+        html: `<p>Ob eine Steuererklärung <strong>Pflicht</strong> ist, hängt vom Einzelfall ab: Pflichtveranlagt sind unter anderem Paare mit Steuerklasse III/V, Arbeitnehmer mit Nebeneinkünften über 410 € oder mehreren Arbeitgebern und Bezieher höherer Lohnersatzleistungen. Für sie gilt für das Steuerjahr 2025 die Abgabefrist <strong>31. Juli 2026</strong>; mit Steuerberatung oder Lohnsteuerhilfeverein verlängert sie sich bis Ende Februar 2027.</p><p>Wer nicht verpflichtet ist, gibt <strong>freiwillig</strong> ab — und hat dafür vier Jahre Zeit. Die Erklärung für 2022 kann also noch bis Ende 2026 eingereicht werden. Gerade bei freiwilliger Abgabe lohnt sich der Blick zurück: Wer in den Vorjahren absetzbare Kosten hatte, kann sich die zu viel gezahlte Lohnsteuer rückwirkend zurückholen. Eingereicht wird heute fast vollständig online über ELSTER, das amtliche Portal der Finanzverwaltung. Die Vier-Jahres-Frist läuft jeweils zum Jahresende ab — für 2022 also am 31. Dezember 2026. Wer mehrere Jahre nachholen möchte, sollte die ältesten zuerst angehen, bevor sie verfallen; jedes Jahr wird dabei getrennt veranlagt.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Was die Erstattung erhöht — diese Belege sammeln',
+        punkte: [
+          'Werbungskosten über dem Pauschbetrag von 1.230 € — nur der überschießende Teil wirkt zusätzlich.',
+          'Pendlerpauschale: Entfernung × Arbeitstage × 0,38 € (ab dem ersten Kilometer, Stand 2026).',
+          'Homeoffice-Pauschale: 6 € je Tag, bis zu 1.260 € im Jahr.',
+          'Arbeitsmittel, Fortbildung, Fachliteratur und Bewerbungskosten in tatsächlicher Höhe.',
+          'Sonderausgaben wie Spenden — wirken mit dem persönlichen Grenzsteuersatz.',
+          'Haushaltsnahe Dienstleistungen und Handwerker: 20 % direkt von der Steuerschuld.',
+          'Außergewöhnliche Belastungen (z. B. Krankheitskosten) oberhalb der zumutbaren Eigenbelastung.',
+          'Belege das ganze Jahr über sammeln — auch kleine Beträge summieren sich.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Auch ohne Pflicht lohnt sich die Erklärung oft',
+        text: 'Viele Arbeitnehmer verschenken Geld, weil sie keine Steuererklärung abgeben. Dabei erhalten Abgebende im Durchschnitt rund 1.000 € zurück (Statistisches Bundesamt) — eine Garantie ist das aber nicht, die Höhe hängt komplett vom Einzelfall ab. Besonders lohnend ist die Abgabe bei langem Arbeitsweg, vielen Homeoffice-Tagen, Fortbildungskosten oder haushaltsnahen Dienstleistungen. Da freiwillig Abgebende vier Jahre rückwirkend einreichen können, lässt sich die Erstattung auch für zurückliegende Jahre noch holen. Wer unsicher ist, ob sich der Aufwand lohnt, gibt einfach die größten Posten in diesen Rechner ein. Moderne Steuersoftware oder ELSTER führen Schritt für Schritt durch die Erklärung und erkennen viele Posten automatisch — der Zeitaufwand für einen einfachen Arbeitnehmerfall liegt oft bei unter einer Stunde.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Schätzung — keine Steuerberatung',
+        text: 'Dieser Rechner liefert eine grobe Schätzung der möglichen Erstattung auf Basis der wichtigsten absetzbaren Posten und des Einkommensteuertarifs 2026 (Pendlerpauschale 0,38 €/km, Arbeitnehmer-Pauschbetrag 1.230 €). Der tatsächliche Betrag hängt von vielen individuellen Faktoren ab, die hier nicht abgebildet sind — etwa weiteren Einkünften, der genauen Steuerklasse oder dem Familienstand. Es handelt sich um keine verbindliche Berechnung und keine Steuerberatung. Die exakte Erstattung ergibt sich erst aus dem Steuerbescheid. Insbesondere der Grenzsteuersatz ist hier vereinfacht aus dem Bruttoeinkommen abgeleitet; das tatsächlich zu versteuernde Einkommen und damit der reale Satz können abweichen. Die amtliche Berechnung und Abgabe erfolgt über den BMF-Steuerrechner (bmf-steuerrechner.de) und ELSTER; bei komplexen Fällen helfen Steuerberatung oder Lohnsteuerhilfeverein.',
+      },
+    ],
+    quellen: [
+      { titel: '§ 9 EStG — Werbungskosten / Entfernungspauschale', url: 'https://www.gesetze-im-internet.de/estg/__9.html', hinweis: 'Werbungskosten, Arbeitnehmer-Pauschbetrag und Entfernungspauschale (0,38 €/km, Stand 2026).' },
+      { titel: '§ 46 EStG — Veranlagung bei Lohneinkünften', url: 'https://www.gesetze-im-internet.de/estg/__46.html', hinweis: 'Pflicht- und Antragsveranlagung von Arbeitnehmern; Fristen und 410-€-Grenze.' },
+      { titel: 'BMF — amtlicher Steuerrechner / ELSTER', url: 'https://www.bmf-steuerrechner.de', hinweis: 'Offizielle Berechnung; Abgabe der Steuererklärung über ELSTER (elster.de).' },
     ],
   },
   {
