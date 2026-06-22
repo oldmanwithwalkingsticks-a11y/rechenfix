@@ -6580,7 +6580,7 @@ Wichtig: Die Jahressteuer bleibt unabhängig von der Steuerklasse identisch. Die
   },
   {
     slug: 'pfaendungsrechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-22',
     titel: 'Pfändungsrechner',
     beschreibung: 'Pfändungsfreies Einkommen berechnen: Freibetrag nach § 850c ZPO, Erhöhung bei Unterhaltspflichten, P-Konto.',
     kategorie: 'Finanzen',
@@ -6590,7 +6590,7 @@ Wichtig: Die Jahressteuer bleibt unabhängig von der Steuerklasse identisch. Die
     keywords: ['pfändungsrechner', 'pfändungsfreibetrag', 'pfändungstabelle 2026', '850c zpo', 'pfändungsfreigrenze', 'p-konto freibetrag', 'lohnpfändung', 'unterhaltspflicht pfändung', 'gehaltspfändung rechner'],
     icon: '⚖️',
     formel: 'Pfändbar = (Netto − Freibetrag) × Pfändungsquote | Freibetrag bis 30.06.2026: 1.555,00 € + 585,23 € (1. Unterhalt) + 326,04 € je weitere | Freibetrag ab 01.07.2026: 1.587,40 € + 597,42 € + 332,83 € | Quote: 70 % (0 Unterhalt), 50 / 40 / 30 / 20 / 10 %',
-    beispiel: 'Netto 2.500 €/Monat, keine Unterhaltspflicht (bis 30.06.2026): Freibetrag 1.555,00 €, Mehrbetrag 945,00 €, Pfändungsquote 70 % → 661,50 € pfändbar, 1.838,50 € pfändungsfrei.',
+    beispiel: 'Netto 2.500 €/Monat, keine Unterhaltspflicht, ab 01.07.2026 (Freibetrag 1.587,40 €): Pfändungsquote 70 % → ca. 638,82 € pfändbar, 1.861,18 € pfändungsfrei. Bis 30.06.2026 (Freibetrag 1.555,00 €): 661,50 € pfändbar.',
     erklaerung: `**Pfändungsfreibetrag — was bleibt bei einer Lohnpfändung?**
 
 Wer verschuldet ist und eine Lohnpfändung erhält, darf nicht unbegrenzt gepfändet werden. Der Gesetzgeber schützt das Existenzminimum durch die sogenannte Pfändungsfreigrenze (§ 850c Zivilprozessordnung — ZPO). Bis zu diesem Betrag ist das Nettoeinkommen vollständig pfändungsfrei — darüber hinaus greift eine gestaffelte Pfändung.
@@ -6675,6 +6675,131 @@ Die Bescheinigung ist bei der Bank einzureichen. Die Bank muss den erhöhten Fre
         frage: 'Was passiert bei hohem Einkommen über der Vollpfändungsgrenze?',
         antwort: 'Die Vollpfändungsgrenze liegt bis 30.06.2026 bei ca. 4.771 € monatlich (0 Unterhaltspflichten), ab 01.07.2026 bei ca. 4.866 €. Oberhalb dieser Grenze greift die Staffelung nicht mehr — der Betrag darüber ist zu 100 % pfändbar. Die Grenze erhöht sich um die Unterhaltspauschalen. Das verhindert, dass Spitzenverdiener die Pfändungsquote nutzen, um große Beträge zu schützen.',
       },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was bei einer Lohnpfändung geschützt ist',
+        html: `<p>Wer Schulden nicht begleicht, muss mit einer <strong>Lohnpfändung</strong> rechnen: Ein Gläubiger lässt sich einen Teil des Gehalts direkt vom Arbeitgeber überweisen. Doch der Gesetzgeber schützt das <strong>Existenzminimum</strong> — ein Grundbetrag des Nettoeinkommens bleibt immer unpfändbar (§ 850c ZPO). Erst was darüber liegt, ist überhaupt pfändbar, und auch das nur gestaffelt.</p><p>Wie hoch der geschützte Betrag ist, hängt von zwei Dingen ab: dem <strong>Nettoeinkommen</strong> und der Zahl der <strong>Unterhaltspflichten</strong> (Ehepartner, Kinder). Je mehr Personen der Schuldner versorgt, desto höher der Freibetrag und desto weniger ist pfändbar. Dieser Rechner zeigt, wie viel vom Netto geschützt bleibt und wie viel der Gläubiger erhält. Wichtig: Es geht hier ausschließlich um den Pfändungsschutz nach der Zivilprozessordnung — nicht um Steuern oder Sozialabgaben, die der Brutto-Netto-Rechner abdeckt. Eingegeben werden das monatliche Netto und die Zahl der Unterhaltspflichten; der Rechner ermittelt daraus den pfändungsfreien und den pfändbaren Anteil und schaltet automatisch zum Stichtag 01.07.2026 auf die neue Tabelle um.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Neue Pfändungstabelle ab 1. Juli 2026',
+        text: 'Zum 1. Juli 2026 ändern sich die Pfändungsfreigrenzen (Anpassung alle zwei Jahre nach § 850c Abs. 4 ZPO). Der Grundfreibetrag für einen Alleinstehenden ohne Unterhaltspflichten steigt von 1.555,00 € auf 1.587,40 € monatlich (Pfändungsfreigrenzenbekanntmachung 2026, BGBl. 2026 I Nr. 80). Bis einschließlich 30.06.2026 gilt der niedrigere Wert, ab 01.07.2026 der höhere — entsprechend sinkt der pfändbare Betrag ab Juli leicht. Dieser Rechner schaltet automatisch zum Stichtag um; die folgenden Beispiele beziehen sich, soweit nicht anders angegeben, auf den ab 01.07.2026 geltenden Stand. Wer also vor und nach dem Stichtag rechnet, erhält bewusst leicht unterschiedliche Werte — das ist kein Fehler, sondern der gesetzliche Wechsel.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Pfändungsfreibeträge — Stichtagsvergleich',
+        kopf: ['Posten (monatlich)', 'bis 30.06.2026', 'ab 01.07.2026'],
+        zeilen: [
+          ['Grundfreibetrag (ohne Unterhalt)', '1.555,00 €', '1.587,40 €'],
+          ['Zuschlag 1. Unterhaltspflicht', '585,23 €', '597,42 €'],
+          ['Je weitere Person (2.–5.)', '326,04 €', '332,83 €'],
+          ['Vollpfändungsgrenze (Alleinstehend)', '≈ 4.771,49 €', '≈ 4.866,30 €'],
+        ],
+        fussnote: '§ 850c ZPO, Pfändungsfreigrenzenbekanntmachung 2026 (BGBl. 2026 I Nr. 80 v. 26.03.2026). Die Anpassung um rund 2,1 % gleicht die Inflation der letzten zwei Jahre aus und ist an den Grundfreibetrag der Einkommensteuer gekoppelt. Die ab 01.07.2026 geltenden Werte gelten bis 30.06.2028. Oberhalb der Vollpfändungsgrenze ist das gesamte darüberliegende Einkommen voll pfändbar. Maßgeblich für die Tabelle ist der Zeitpunkt der jeweiligen Lohnzahlung: Gehälter für Juli 2026 und später werden bereits nach den höheren Freibeträgen berechnet, frühere nach den niedrigeren.',
+      },
+      {
+        typ: 'text',
+        titel: 'Wie der pfändbare Betrag ansteigt',
+        html: `<p>Oberhalb des Freibetrags wird <strong>nicht alles</strong> gepfändet, sondern nur ein gestaffelter Anteil — die <strong>Pfändungsquote</strong> nach § 850c Abs. 3 ZPO. Sie hängt von den Unterhaltspflichten ab: Ohne Unterhaltspflicht sind 70 % des über dem Freibetrag liegenden Betrags pfändbar, mit 1 Unterhaltspflicht 50 %, mit 2 noch 40 %, dann 30 / 20 / 10 % bis zu 5 Pflichten.</p><p>Die amtliche Tabelle rundet das Netto dabei auf die nächstniedrigere <strong>10-Euro-Stufe</strong> ab. Je mehr Personen jemand unterhält, desto höher ist also nicht nur der Freibetrag, sondern desto geringer auch die Quote auf den Rest — Unterhaltspflichten wirken doppelt zugunsten des Schuldners. Erst oberhalb der Vollpfändungsgrenze (gut 4.800 € ab 01.07.2026) entfällt die Staffelung, und alles Weitere ist voll pfändbar. Diese Kombination aus festem Freibetrag und gestaffelter Quote sorgt dafür, dass von einer Gehaltserhöhung dem Schuldner immer ein Teil bleibt — die Pfändung schöpft nie das gesamte Mehr ab. Das soll den Anreiz erhalten, trotz Pfändung erwerbstätig zu bleiben.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Pfändungsfreibetrag je Unterhaltspflicht (ab 01.07.2026)',
+        kopf: ['Unterhaltspflichten', 'Freibetrag/Monat', 'Pfändungsquote auf den Rest'],
+        zeilen: [
+          ['keine', '1.587,40 €', '70 %'],
+          ['1 Person', '2.184,82 €', '50 %'],
+          ['2 Personen', '2.517,65 €', '40 %'],
+          ['3 Personen', '2.850,48 €', '30 %'],
+          ['4 Personen', '3.183,31 €', '20 %'],
+          ['5 und mehr', '3.516,14 €', '10 %'],
+        ],
+        fussnote: 'Werte ab 01.07.2026 (§ 850c ZPO). Der Freibetrag setzt sich zusammen aus dem Grundbetrag 1.587,40 € plus 597,42 € für die erste und je 332,83 € für die zweite bis fünfte unterhaltsberechtigte Person. Gleichzeitig sinkt die Pfändungsquote auf den über dem Freibetrag liegenden Teil. Maßgeblich ist, wem der Schuldner gesetzlich zum Unterhalt verpflichtet ist — das stellt im Streitfall das Vollstreckungsgericht fest.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Pfändungsschutz 2026 auf einen Blick',
+        werte: [
+          { label: 'Grundfreibetrag ab 01.07.2026', wert: '1.587,40 €', hinweis: 'bis 30.06.2026: 1.555,00 €' },
+          { label: 'Zuschlag 1. Unterhaltspflicht', wert: '597,42 €', hinweis: 'je weitere Person 332,83 €' },
+          { label: 'Pfändungsquote (ohne Unterhalt)', wert: '70 %', hinweis: 'auf den Betrag über dem Freibetrag' },
+          { label: 'Vollpfändungsgrenze', wert: '≈ 4.866 €', hinweis: 'darüber ist alles pfändbar' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Netto 2.000 €, keine Unterhaltspflicht (ab 01.07.2026)',
+        schritte: [
+          { label: 'Nettoeinkommen', formel: '', ergebnis: '2.000 €' },
+          { label: 'Grundfreibetrag', formel: 'ab 01.07.2026', ergebnis: '− 1.587,40 €' },
+          { label: 'Betrag über dem Freibetrag', formel: '2.000 − 1.587,40', ergebnis: '412,60 €' },
+          { label: 'pfändbar (Quote 70 %)', formel: '412,60 × 70 %', ergebnis: '288,82 €' },
+          { label: 'pfändungsfrei', formel: '2.000 − 288,82', ergebnis: '1.711,18 €' },
+        ],
+        fazit: 'Bei 2.000 € Netto ohne Unterhaltspflichten bleibt der Grundfreibetrag von 1.587,40 € (ab 01.07.2026) in jedem Fall geschützt. Vom Rest — 412,60 € — sind 70 % pfändbar, also 288,82 €. Dem Schuldner verbleiben 1.711,18 €. Bis zum 30.06.2026 wäre der Freibetrag mit 1.555 € niedriger und der pfändbare Betrag entsprechend höher (311,50 €); die Erhöhung ab Juli entlastet also leicht. Die Pfändung läuft automatisch über den Arbeitgeber, der den pfändbaren Teil direkt an den Gläubiger abführt. Der Schuldner muss dafür nichts veranlassen — er erhält schlicht ein um den pfändbaren Betrag gekürztes Gehalt, bis die Schuld getilgt ist.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Netto 2.000 €, 1 Unterhaltspflicht (ab 01.07.2026)',
+        schritte: [
+          { label: 'Nettoeinkommen', formel: '', ergebnis: '2.000 €' },
+          { label: 'Grundfreibetrag', formel: '', ergebnis: '1.587,40 €' },
+          { label: '+ Zuschlag 1. Unterhaltspflicht', formel: '', ergebnis: '+ 597,42 €' },
+          { label: 'Freibetrag gesamt', formel: '1.587,40 + 597,42', ergebnis: '2.184,82 €' },
+          { label: 'pfändbar', formel: 'Netto unter Freibetrag', ergebnis: '0 €' },
+        ],
+        fazit: 'Schon eine einzige Unterhaltspflicht hebt den Freibetrag auf 2.184,82 € — das liegt über dem Nettoeinkommen von 2.000 €. Damit ist der gesamte Lohn pfändungsfrei, der Gläubiger erhält nichts. Das zeigt, wie stark Unterhaltspflichten wirken: Wer für Partner oder Kinder sorgt, ist deutlich besser geschützt. Erst ab einem Netto über 2.184,82 € würde bei einer Unterhaltspflicht überhaupt etwas pfändbar — und dann nur zu 50 % statt 70 %. Unterhaltspflichten müssen dem Arbeitgeber bzw. Gericht nachgewiesen werden. Zählt man weitere Kinder hinzu, steigt der Freibetrag um je 332,83 € weiter, sodass Familien mit mehreren Unterhaltsberechtigten erst bei deutlich höheren Einkommen überhaupt von einer Pfändung betroffen sind.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Pfändbarer Betrag nach Nettoeinkommen (ab 01.07.2026)',
+        kopf: ['Netto/Monat', 'pfändbar (0 Unterhalt)', 'pfändbar (1 Unterhalt)'],
+        zeilen: [
+          ['1.600 €', '8,82 €', '0 €'],
+          ['2.000 €', '288,82 €', '0 €'],
+          ['2.500 €', '638,82 €', '157,59 €'],
+          ['3.000 €', '988,82 €', '407,59 €'],
+        ],
+        fussnote: 'Monatlich pfändbarer Betrag nach § 850c ZPO, Stand ab 01.07.2026 (Grundfreibetrag 1.587,40 €). Ohne Unterhaltspflicht greift die Pfändung knapp oberhalb von 1.587 €; mit einer Unterhaltspflicht (Freibetrag 2.184,82 €) erst ab gut 2.185 € — bei 2.000 € bleibt dann alles frei. Die Werte sind über die amtliche 10-Euro-Stufen-Logik berechnet. Bis 30.06.2026 fallen die pfändbaren Beträge wegen des niedrigeren Freibetrags etwas höher aus. Ablesbar ist hier auch der Effekt der Quote: Ohne Unterhalt steigt der pfändbare Betrag mit 70 % je zusätzlichem Euro über dem Freibetrag, mit einer Unterhaltspflicht nur mit 50 % — bei gleichem Netto bleibt dem Schuldner mit Familie also deutlich mehr.',
+      },
+      {
+        typ: 'text',
+        titel: 'Was als Netto zählt — und was unpfändbar ist',
+        html: `<p>Grundlage der Pfändung ist das <strong>Nettoeinkommen</strong>, allerdings bereinigt um bestimmte unpfändbare Bestandteile. Mehrere Lohnbestandteile sind ganz oder teilweise geschützt (§ 850a ZPO): <strong>Urlaubsgeld</strong> ist komplett pfändungsfrei, <strong>Weihnachtsgeld</strong> bis zu einem halben Monatslohn (höchstens bis zu einem gesetzlich festgelegten Betrag), <strong>Überstundenvergütung</strong> zur Hälfte.</p><p>Auch zweckgebundene Leistungen wie <strong>Erschwernis-, Gefahren- und Schmutzzulagen</strong> bleiben in üblichem Umfang unberücksichtigt. Sozialleistungen wie Kindergeld oder Elterngeld sind ebenfalls geschützt, müssen beim Pfändungsschutzkonto aber gesondert angemeldet werden. Diese Bestandteile werden vom Einkommen abgezogen, bevor Freibetrag und Quote greifen — der Rechner geht vereinfacht vom bereits bereinigten Netto aus. Im Einzelfall lohnt eine genaue Prüfung, weil sich der pfändbare Betrag dadurch spürbar verringern kann. Wer also unsicher ist, welcher Betrag tatsächlich zugrunde gelegt wird, sollte die Lohnabrechnung mit einer Schuldnerberatung durchgehen — gerade Zulagen und Sonderzahlungen werden in der Praxis oft falsch einbezogen.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Das Pfändungsschutzkonto (P-Konto)',
+        html: `<p>Wird nicht der Lohn, sondern das <strong>Konto</strong> gepfändet, droht der Verlust des gesamten Guthabens. Schutz bietet das <strong>Pfändungsschutzkonto (P-Konto)</strong> nach § 850k ZPO: Jeder hat das Recht, sein Girokonto kostenlos und ohne Begründung in ein P-Konto umzuwandeln.</p><p>Auf dem P-Konto bleibt automatisch der monatliche Grundfreibetrag geschützt — ab 01.07.2026 also 1.587,40 € (zuvor 1.555 €) für Alleinstehende ohne Unterhaltspflichten. <strong>Höhere Freibeträge</strong> — etwa durch Unterhaltspflichten, Kindergeld oder Sozialleistungen — müssen mit einer <strong>P-Konto-Bescheinigung</strong> nachgewiesen werden, die Schuldnerberatungsstellen, Arbeitgeber oder das Jobcenter ausstellen. Wer mit einer Pfändung rechnet, sollte das Konto frühzeitig umstellen, denn der Schutz wirkt erst ab der Umwandlung. Bei Überschuldung ist eine anerkannte Schuldnerberatung die wichtigste Anlaufstelle — sie ist meist kostenlos. Ein P-Konto darf jeder nur einmal führen; die Bank meldet es an die Auskunfteien, damit kein doppelter Schutz entsteht. Nicht verbrauchtes Guthaben kann zudem begrenzt in den Folgemonat übertragen werden, sodass Rücklagen für größere Ausgaben nicht sofort verloren gehen.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Was den pfändungsfreien Betrag bestimmt',
+        punkte: [
+          'Das Nettoeinkommen — bereinigt um unpfändbare Bestandteile (Urlaubsgeld, halbes Weihnachtsgeld u. a.).',
+          'Die Zahl der Unterhaltspflichten — jede erhöht den Freibetrag und senkt die Pfändungsquote.',
+          'Der Stichtag: bis 30.06.2026 Grundfreibetrag 1.555 €, ab 01.07.2026 1.587,40 €.',
+          'Die Pfändungsquote auf den Betrag über dem Freibetrag: 70 % (ohne Unterhalt) bis 10 % (5 Pflichten).',
+          'Die Vollpfändungsgrenze (gut 4.866 € ab 01.07.2026) — darüber ist alles pfändbar.',
+          'Bei Kontopfändung schützt das P-Konto (§ 850k ZPO) — frühzeitig umwandeln.',
+          'Unpfändbare Bestandteile (Urlaubsgeld, halbes Weihnachtsgeld) werden vorab abgezogen.',
+          'Das Ergebnis ist eine Schätzung — bei Überschuldung hilft eine Schuldnerberatung.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Stand 2026 — Schätzung, keine Rechtsberatung',
+        text: 'Dieser Rechner bildet den Pfändungsschutz nach § 850c ZPO mit den aktuellen Pfändungsfreigrenzen ab und schaltet zum 01.07.2026 automatisch auf die neuen Werte um (Grundfreibetrag 1.587,40 €, BGBl. 2026 I Nr. 80). Er liefert eine Orientierung und ersetzt keine Rechtsberatung. Die genaue Pfändung hängt von der amtlichen Tabelle, unpfändbaren Lohnbestandteilen und dem Einzelfall ab; maßgeblich ist die Berechnung des Arbeitgebers bzw. des Vollstreckungsgerichts. Wer von Pfändung oder Überschuldung betroffen ist, sollte sich an eine anerkannte Schuldnerberatung wenden — diese Hilfe ist in der Regel kostenlos und unterstützt auch bei P-Konto und Freibeträgen. Die hier gezeigten Beispielwerte sind über die Berechnungslogik des Rechners ermittelt und gerundet; bei Sonderfällen wie mehreren Pfändungen oder unpfändbaren Lohnbestandteilen kann der tatsächlich pfändbare Betrag abweichen.',
+      },
+    ],
+    quellen: [
+      { titel: '§ 850c ZPO — Pfändungsgrenzen für Arbeitseinkommen', url: 'https://www.gesetze-im-internet.de/zpo/__850c.html', hinweis: 'Pfändungsfreigrenzen, Erhöhung je Unterhaltspflicht und Pauschalquoten; Anpassung alle zwei Jahre. Stand 2026.' },
+      { titel: '§ 850a ZPO — Unpfändbare Bezüge', url: 'https://www.gesetze-im-internet.de/zpo/__850a.html', hinweis: 'Ganz oder teilweise unpfändbare Lohnbestandteile (Urlaubsgeld, Weihnachtsgeld, Überstunden u. a.).' },
+      { titel: '§ 850k ZPO — Pfändungsschutzkonto (P-Konto)', url: 'https://www.gesetze-im-internet.de/zpo/__850k.html', hinweis: 'Schutz des Kontoguthabens bis zum Freibetrag; Recht auf Umwandlung des Girokontos.' },
     ],
   },
   {
