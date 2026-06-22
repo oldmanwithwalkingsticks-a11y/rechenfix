@@ -5754,7 +5754,7 @@ Sowohl Schenker als auch Beschenkter müssen die Schenkung innerhalb von drei Mo
   },
   {
     slug: 'gewerbesteuer-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-22',
     titel: 'Gewerbesteuer-Rechner',
     beschreibung: 'Gewerbesteuer berechnen: Hebesatz, Steuermessbetrag, Freibetrag und ESt-Anrechnung für Gewerbetreibende.',
     kategorie: 'Finanzen',
@@ -5791,7 +5791,7 @@ Für Einzelunternehmer und Personengesellschafter gibt es eine wichtige Entlastu
 
 Das bedeutet: Bei Hebesätzen bis 400 % wird die Gewerbesteuer durch die ESt-Anrechnung praktisch vollständig neutralisiert. Erst bei Hebesätzen über 400 % entsteht eine echte Zusatzbelastung. Diese Regelung macht die Gewerbesteuer für viele Einzelunternehmer zu einer „durchlaufenden" Steuer.
 
-Für Kapitalgesellschaften (GmbH, AG) gibt es keine ESt-Anrechnung — sie tragen die volle Gewerbesteuer als Betriebsausgabe.
+Für Kapitalgesellschaften (GmbH, AG) gibt es keine ESt-Anrechnung — sie tragen die volle Gewerbesteuer (die seit 2008 zudem nicht mehr als Betriebsausgabe abziehbar ist, § 4 Abs. 5b EStG).
 
 **Hinzurechnungen und Kürzungen**
 
@@ -5831,6 +5831,115 @@ Die Gewerbesteuererklärung muss bis zum 31. Juli des Folgejahres beim Finanzamt
     affiliate: [
       { programId: 'lexware', context: 'gewerbesteuer' },
       { programId: 'wiso', context: 'gewerbesteuer' },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was die Gewerbesteuer ist',
+        html: `<p>Die <strong>Gewerbesteuer</strong> ist eine kommunale Steuer auf den Ertrag von Gewerbebetrieben und die wichtigste eigene Einnahmequelle der Gemeinden. Erhoben wird sie von der Gemeinde, in der das Unternehmen seinen Sitz hat — und genau deshalb fällt sie je nach Standort sehr unterschiedlich aus: Über den <strong>Hebesatz</strong> bestimmt jede Gemeinde selbst, wie hoch die Belastung ist.</p><p>Steuerpflichtig sind alle <strong>Gewerbebetriebe</strong> — Einzelunternehmer, Personengesellschaften (OHG, KG, gewerbliche GbR) und Kapitalgesellschaften (GmbH, AG, UG). <strong>Freiberufler</strong> wie Ärzte, Anwälte, Ingenieure oder Journalisten sind dagegen befreit, ebenso die Land- und Forstwirtschaft. Wie hoch die Gewerbesteuer ausfällt, hängt von drei Größen ab: dem Gewinn, der Rechtsform (wegen Freibetrag und Anrechnung) und dem Hebesatz der Gemeinde. Dieser Rechner bildet das Gewerbesteuergesetz (GewStG) ab — mit der Einkommensteuer hat die Gewerbesteuer vor allem über die Anrechnung zu tun. Eingegeben werden Gewinn, Rechtsform, Hebesatz sowie optionale Hinzurechnungen und Kürzungen; daraus ergibt sich die Gewerbesteuer und — bei Personengesellschaften — die effektive Belastung nach Anrechnung. Die Abgrenzung zwischen Gewerbe und freiem Beruf trifft im Zweifel das Finanzamt.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Die Berechnungskette Schritt für Schritt',
+        html: `<p>Die Gewerbesteuer entsteht in einer festen Kette. Ausgangspunkt ist der <strong>Gewinn</strong> des Betriebs. Dazu kommen bestimmte <strong>Hinzurechnungen</strong> (§ 8 GewStG), abgezogen werden <strong>Kürzungen</strong> (§ 9 GewStG) und — nur bei Personengesellschaften — der <strong>Freibetrag von 24.500 €</strong>. Das Ergebnis ist der Gewerbeertrag.</p><p>Dieser Gewerbeertrag wird auf volle 100 € abgerundet und mit der bundeseinheitlichen <strong>Steuermesszahl von 3,5 %</strong> multipliziert — das ergibt den <strong>Steuermessbetrag</strong>. Erst im letzten Schritt multipliziert die Gemeinde diesen Messbetrag mit ihrem <strong>Hebesatz</strong>: Bei einem Hebesatz von 400 % wird der Messbetrag also vervierfacht. Das Finanzamt setzt dabei den Messbetrag fest, die Gemeinde erlässt den eigentlichen Gewerbesteuerbescheid. Die folgenden Beispiele rechnen diese Kette für verschiedene Rechtsformen und Hebesätze durch. Wichtig ist die Reihenfolge: Der Freibetrag wird vom Gewerbeertrag abgezogen, bevor die Messzahl greift — und der Hebesatz kommt ganz zum Schluss. Diese feste Abfolge ist gesetzlich vorgegeben und in jeder Gemeinde gleich; nur der Hebesatz unterscheidet sich. Die Abrundung auf volle 100 € und die Messzahl von 3,5 % gelten bundesweit einheitlich — Spielraum hat allein die Kommune über ihren Hebesatz.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Personengesellschaft: 80.000 € Gewinn, Hebesatz 400 %',
+        schritte: [
+          { label: 'Gewinn', formel: '', ergebnis: '80.000 €' },
+          { label: 'Freibetrag (Personengesellschaft)', formel: '§ 11 GewStG', ergebnis: '− 24.500 €' },
+          { label: 'Gewerbeertrag (auf 100 € abgerundet)', formel: '', ergebnis: '55.500 €' },
+          { label: 'Steuermessbetrag', formel: '55.500 × 3,5 %', ergebnis: '1.942,50 €' },
+          { label: 'Gewerbesteuer', formel: '1.942,50 × 400 %', ergebnis: '7.770 €' },
+        ],
+        fazit: 'Vom Gewinn (80.000 €) zieht eine Personengesellschaft zunächst den Freibetrag von 24.500 € ab — bleiben 55.500 € Gewerbeertrag. Mal der Steuermesszahl von 3,5 % ergibt das den Steuermessbetrag von 1.942,50 €. Diesen multipliziert die Gemeinde mit ihrem Hebesatz von 400 %, macht 7.770 € Gewerbesteuer. Das wirkt zunächst nach einer spürbaren Belastung — doch für Personengesellschaften ist die Rechnung damit noch nicht zu Ende: Es folgt die Anrechnung auf die Einkommensteuer. Genau diese 7.770 € sind die Gewerbesteuer, die ans örtliche Gewerbeamt fließt; was davon den Unternehmer wirtschaftlich trifft, zeigt erst der nächste Schritt mit der Anrechnung auf die Einkommensteuer.',
+      },
+      {
+        typ: 'text',
+        titel: 'Die Anrechnung auf die Einkommensteuer (§ 35 EStG)',
+        html: `<p>Hier liegt die entscheidende Entlastung für <strong>Einzelunternehmer und Personengesellschafter</strong>: Die gezahlte Gewerbesteuer wird pauschal auf ihre <strong>Einkommensteuer angerechnet</strong>. Der Anrechnungsbetrag beträgt das <strong>4,0-Fache des Steuermessbetrags</strong> (§ 35 EStG) — gedeckelt auf die tatsächlich gezahlte Gewerbesteuer.</p><p>Das 4,0-Fache entspricht genau einem Hebesatz von 400 %. Die Folge: Bis zu einem Hebesatz von <strong>400 % wird die Gewerbesteuer praktisch vollständig neutralisiert</strong> — sie wird eins zu eins von der Einkommensteuer abgezogen. Erst bei höheren Hebesätzen bleibt eine echte Zusatzbelastung übrig, nämlich der Teil oberhalb der 400-%-Schwelle. Für viele Personengesellschaften ist die Gewerbesteuer damit eine weitgehend „durchlaufende" Steuer. Für <strong>Kapitalgesellschaften</strong> (GmbH, AG) gilt diese Anrechnung allerdings nicht — sie tragen die Gewerbesteuer in voller Höhe. Voraussetzung für die volle Wirkung der Anrechnung ist außerdem, dass die persönliche Einkommensteuer hoch genug ist; bei sehr geringer ESt kann ein Teil der Anrechnung ins Leere laufen. In der Praxis ist das aber selten, weil ein gewerblicher Gewinn in dieser Größenordnung ohnehin eine entsprechende Einkommensteuer auslöst.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Dieselbe Personengesellschaft inklusive Anrechnung',
+        schritte: [
+          { label: 'Gewerbesteuer (siehe oben)', formel: '', ergebnis: '7.770 €' },
+          { label: 'ESt-Anrechnung', formel: '1.942,50 × 4,0', ergebnis: '7.770 €' },
+          { label: 'effektive Belastung', formel: '7.770 − 7.770', ergebnis: '0 €' },
+        ],
+        fazit: 'Die Anrechnung beträgt das 4,0-Fache des Steuermessbetrags: 1.942,50 € × 4,0 = 7.770 € — exakt so viel wie die gezahlte Gewerbesteuer. Sie wird vollständig von der Einkommensteuer des Unternehmers abgezogen, sodass die effektive Belastung durch die Gewerbesteuer bei einem Hebesatz von 400 % bei null liegt. Voraussetzung ist, dass die Einkommensteuer hoch genug ist, um die Anrechnung aufzunehmen. Läge der Hebesatz höher, etwa bei 490 %, bliebe der über 400 % hinausgehende Teil als echte Belastung bestehen (hier rund 1.748 €). Für die Personengesellschaft ist die Gewerbesteuer bis 400 % also eine reine Liquiditätsfrage: Sie wird zunächst gezahlt und über die Einkommensteuererklärung wieder zurückgeholt — wirtschaftlich bleibt nichts hängen. Diese Konstruktion soll die Doppelbelastung mit Gewerbe- und Einkommensteuer vermeiden, die Einzelunternehmer und Personengesellschafter sonst träfe.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Kapitalgesellschaft (GmbH): 80.000 € Gewinn, Hebesatz 400 %',
+        schritte: [
+          { label: 'Gewinn', formel: '', ergebnis: '80.000 €' },
+          { label: 'Freibetrag', formel: 'GmbH: keiner', ergebnis: '0 €' },
+          { label: 'Gewerbeertrag', formel: '', ergebnis: '80.000 €' },
+          { label: 'Steuermessbetrag', formel: '80.000 × 3,5 %', ergebnis: '2.800 €' },
+          { label: 'Gewerbesteuer', formel: '2.800 × 400 %', ergebnis: '11.200 €' },
+          { label: 'ESt-Anrechnung', formel: 'entfällt', ergebnis: '0 €' },
+        ],
+        fazit: 'Eine GmbH zahlt bei gleichem Gewinn deutlich mehr: Sie hat keinen Freibetrag (voller Gewerbeertrag 80.000 €) und keine Anrechnung. Der Steuermessbetrag von 2.800 € ergibt bei 400 % Hebesatz 11.200 € Gewerbesteuer — und die bleiben in voller Höhe. Während die Personengesellschaft effektiv 0 € trägt, sind es bei der GmbH 11.200 € (14 % des Gewinns). Die Gewerbesteuer ist dabei seit 2008 nicht mehr als Betriebsausgabe abziehbar (§ 4 Abs. 5b EStG), mindert die Bemessungsgrundlage also nicht. Die Rechtsform entscheidet hier über eine erhebliche Differenz. Für die Gesamtbetrachtung einer GmbH kommt allerdings hinzu, dass deren Gewinn nur mit Körperschaftsteuer (15 %) statt mit dem persönlichen Einkommensteuertarif belastet wird — der direkte Vergleich der Rechtsformen ist deshalb komplexer als die reine Gewerbesteuer.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Gewerbesteuer nach Hebesatz (Gewinn 80.000 €)',
+        kopf: ['Hebesatz', 'Personengesellschaft (effektiv)', 'Kapitalgesellschaft (GmbH)'],
+        zeilen: [
+          ['300 %', '0 €', '8.400 €'],
+          ['400 %', '0 €', '11.200 €'],
+          ['490 %', '1.748 €', '13.720 €'],
+        ],
+        fussnote: 'Beispielgewinn 80.000 €, ohne Hinzurechnungen/Kürzungen, Stand 2026. Personengesellschaft: effektive Belastung NACH § 35-Anrechnung — bis Hebesatz 400 % null, darüber nur der überschießende Teil. Kapitalgesellschaft: volle Gewerbesteuer ohne Freibetrag und ohne Anrechnung. Der Hebesatz ist gemeindeabhängig (gesetzliches Minimum 200 %, Durchschnitt rund 400 %, Großstädte oft 450–490 %) und sollte für den eigenen Standort geprüft werden. Auffällig: Für die Personengesellschaft bleibt die effektive Belastung bis 400 % konstant bei null und steigt erst darüber, während die GmbH bei jedem Prozentpunkt Hebesatz mehr zahlt. Genau diese Lücke macht den Standort für Kapitalgesellschaften besonders relevant.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Gewerbesteuer in Zahlen (2026)',
+        werte: [
+          { label: 'Steuermesszahl', wert: '3,5 %', hinweis: 'bundeseinheitlich (§ 11 GewStG)' },
+          { label: 'Freibetrag', wert: '24.500 €', hinweis: 'nur Personengesellschaft/Einzelunternehmen' },
+          { label: 'Hebesatz (Minimum / Ø)', wert: '200 % / ~400 %', hinweis: 'gemeindeabhängig' },
+          { label: '§ 35-Anrechnungsfaktor', wert: '4,0 ×', hinweis: 'Messbetrag; neutral bis Hebesatz 400 %' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Freibetrag, Hinzurechnungen und Kürzungen',
+        html: `<p>Drei Größen formen den Gewerbeertrag. Der <strong>Freibetrag von 24.500 €</strong> steht nur Einzelunternehmen und Personengesellschaften zu — Kapitalgesellschaften zahlen ab dem ersten Euro. Grund ist die unterschiedliche Systematik: Bei Personengesellschaften unterliegt der Gewinn zusätzlich der Einkommensteuer des Inhabers, Freibetrag und Anrechnung gleichen das aus.</p><p><strong>Hinzurechnungen</strong> (§ 8 GewStG) erhöhen den Gewerbeertrag wieder um bestimmte Aufwendungen, die den Gewinn gemindert haben — etwa 25 % der Finanzierungszinsen sowie Anteile von Mieten und Pachten, jeweils nach einem Freibetrag von 200.000 €. Umgekehrt senken <strong>Kürzungen</strong> (§ 9 GewStG) den Ertrag, zum Beispiel um 1,2 % des Einheitswerts eigener Grundstücke. Diese Posten kann der Rechner als Summe berücksichtigen; die genaue Ermittlung im Einzelfall übernimmt die Steuerberatung. Die Gewerbesteuer selbst ist seit 2008 nicht mehr als Betriebsausgabe abziehbar (§ 4 Abs. 5b EStG). Gerade die Hinzurechnungen sorgen dafür, dass auch Betriebe mit hohem Fremdkapital oder teuren Mieten Gewerbesteuer zahlen, selbst wenn ihr Gewinn niedrig ist — ein häufig unterschätzter Effekt bei filial- oder anlagenintensiven Unternehmen.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Was die Gewerbesteuer bestimmt',
+        punkte: [
+          'Die Rechtsform — Freibetrag (24.500 €) und § 35-Anrechnung gibt es nur für Personengesellschaften/Einzelunternehmen.',
+          'Der Gewinn als Ausgangsgröße, korrigiert um Hinzurechnungen (§ 8) und Kürzungen (§ 9).',
+          'Die bundeseinheitliche Steuermesszahl von 3,5 % auf den (abgerundeten) Gewerbeertrag.',
+          'Der gemeindeabhängige Hebesatz — Minimum 200 %, Durchschnitt rund 400 %.',
+          'Bei Personengesellschaften: Die § 35-Anrechnung neutralisiert die Steuer bis Hebesatz 400 %.',
+          'Freiberufler sowie Land- und Forstwirtschaft sind von der Gewerbesteuer befreit.',
+          'Hinzurechnungen (Zinsen, Mieten) können auch bei niedrigem Gewinn Gewerbesteuer auslösen.',
+          'Das Ergebnis ist eine Schätzung — den genauen Hebesatz bei der Gemeinde oder beim Gewerbeamt prüfen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Stand 2026 — Schätzung, keine Steuerberatung',
+        text: 'Dieser Rechner bildet die Gewerbesteuer nach § 11 GewStG und § 35 EStG mit den 2026 geltenden Werten ab (Freibetrag 24.500 €, Steuermesszahl 3,5 %). Er liefert eine Orientierung und ersetzt keine Steuerberatung. Der Hebesatz variiert von Gemeinde zu Gemeinde erheblich (gesetzliches Minimum 200 %) und muss für den eigenen Standort selbst geprüft werden. Hinzurechnungen und Kürzungen sind hier nur als Summe abbildbar — ihre genaue Ermittlung ist komplex und folgt einem eigenen Katalog (§§ 8, 9 GewStG). Maßgeblich sind der Messbescheid des Finanzamts und der Gewerbesteuerbescheid der Gemeinde. Bei der konkreten Gestaltung — etwa Rechtsformwahl oder Standortfrage — hilft eine Steuerberatung. Die hier gezeigten Beispielwerte sind über die Berechnungslogik des Rechners ermittelt (Gewinn → Freibetrag → Messzahl → Hebesatz → § 35-Anrechnung) und auf ganze Euro gerundet; reale Bescheide können durch Hinzurechnungen und Kürzungen abweichen.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Hebesatz und Rechtsform als Stellschrauben',
+        text: 'Für Einzelunternehmer und Personengesellschaften ist die Gewerbesteuer dank der § 35-Anrechnung bei Hebesätzen bis 400 % oft kaum spürbar — sie wird nahezu vollständig auf die Einkommensteuer angerechnet. Wirklich ins Gewicht fällt sie erst bei hohen Hebesätzen über 400 %, wie sie viele Großstädte verlangen — und auch dann nur mit dem Teil oberhalb der 400-%-Schwelle. Wer ortsungebunden gründet, kann den Hebesatz daher in die Standortwahl einbeziehen: Zwischen einer Gemeinde mit 250 % und einer mit 490 % liegen bei gleichem Gewinn schnell vierstellige Beträge pro Jahr. Für Kapitalgesellschaften ohne Anrechnung wiegt der Standort sogar noch schwerer. Wichtig bleibt aber: Der Sitz muss der tatsächlichen Geschäftstätigkeit entsprechen — eine reine Briefkastenadresse in einer Niedrig-Hebesatz-Gemeinde erkennt das Finanzamt nicht an.',
+      },
+    ],
+    quellen: [
+      { titel: '§ 11 GewStG — Steuermesszahl und Steuermessbetrag', url: 'https://www.gesetze-im-internet.de/gewstg/__11.html', hinweis: 'Steuermesszahl 3,5 %; Freibetrag 24.500 € für Personengesellschaften/Einzelunternehmen. Stand 2026.' },
+      { titel: '§ 35 EStG — Steuerermäßigung bei Einkünften aus Gewerbebetrieb', url: 'https://www.gesetze-im-internet.de/estg/__35.html', hinweis: 'Anrechnung der Gewerbesteuer auf die Einkommensteuer (4,0-Faches des Messbetrags).' },
+      { titel: '§ 16 GewStG — Hebesatz', url: 'https://www.gesetze-im-internet.de/gewstg/__16.html', hinweis: 'Festsetzung des Hebesatzes durch die Gemeinde; gesetzliches Minimum 200 %.' },
     ],
   },
   {
