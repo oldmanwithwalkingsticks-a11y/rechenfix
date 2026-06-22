@@ -4728,7 +4728,7 @@ Bündeln Sie Ihre Einkäufe bei wenigen Händlern, um den Mindestbetrag sicher z
   },
   {
     slug: 'steuerprogression-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-22',
     titel: 'Steuerprogression-Rechner',
     beschreibung: 'Steuerprogression visualisieren: Durchschnitts- und Grenzsteuersatz für jedes Einkommen berechnen.',
     kategorie: 'Finanzen',
@@ -4738,7 +4738,7 @@ Bündeln Sie Ihre Einkäufe bei wenigen Händlern, um den Mindestbetrag sicher z
     keywords: ['steuerprogression', 'grenzsteuersatz rechner', 'durchschnittssteuersatz', 'einkommensteuer tarif', 'steuerprogression rechner', 'steuersatz berechnen', 'progressiver steuertarif', 'einkommensteuer kurve', 'steuertarif 2026'],
     icon: '📊',
     formel: 'Durchschnittssteuersatz = ESt / zvE × 100 | Grenzsteuersatz = ESt(zvE + 1) − ESt(zvE)',
-    beispiel: 'Zu versteuerndes Einkommen 50.000 €, Einzelveranlagung: ESt ca. 10.886 €, Durchschnittssteuersatz ca. 21,8 %, Grenzsteuersatz ca. 33,3 %.',
+    beispiel: 'Zu versteuerndes Einkommen 50.000 €, Einzelveranlagung 2026: ESt 10.548 €, Durchschnittssteuersatz ca. 21,1 %, Grenzsteuersatz ca. 35,1 %.',
     erklaerung: `**Was ist die Steuerprogression?**
 
 Die Steuerprogression ist das zentrale Prinzip der deutschen Einkommensteuer: Wer mehr verdient, zahlt nicht nur mehr Steuer, sondern auch einen höheren Prozentsatz. Dieses Prinzip der Leistungsfähigkeit soll sicherstellen, dass Geringverdiener entlastet und hohe Einkommen stärker belastet werden. In Deutschland steigt der Steuersatz von 14 % (Eingangssteuersatz) bis auf 45 % (Reichensteuer).
@@ -4746,8 +4746,8 @@ Die Steuerprogression ist das zentrale Prinzip der deutschen Einkommensteuer: We
 **Durchschnittssteuersatz vs. Grenzsteuersatz**
 
 Zwei Begriffe werden oft verwechselt:
-- **Durchschnittssteuersatz**: Die gesamte Einkommensteuer geteilt durch das zu versteuernde Einkommen. Bei 50.000 € zvE zahlen Sie ca. 10.886 € ESt — der Durchschnittssteuersatz beträgt also rund 21,8 %.
-- **Grenzsteuersatz**: Der Steuersatz auf den nächsten verdienten Euro. Er zeigt, wie viel Steuer eine Gehaltserhöhung „kostet". Bei 50.000 € liegt der Grenzsteuersatz bei ca. 33,3 % — von jedem weiteren Euro gehen also 33 Cent an das Finanzamt.
+- **Durchschnittssteuersatz**: Die gesamte Einkommensteuer geteilt durch das zu versteuernde Einkommen. Bei 50.000 € zvE zahlen Sie ca. 10.548 € ESt — der Durchschnittssteuersatz beträgt also rund 21,1 %.
+- **Grenzsteuersatz**: Der Steuersatz auf den nächsten verdienten Euro. Er zeigt, wie viel Steuer eine Gehaltserhöhung „kostet". Bei 50.000 € liegt der Grenzsteuersatz bei ca. 35,1 % — von jedem weiteren Euro gehen also rund 35 Cent an das Finanzamt.
 
 Der Grenzsteuersatz ist immer höher als der Durchschnittssteuersatz. Das bedeutet: Auch bei hohen Grenzsteuersätzen zahlen Sie auf Ihr gesamtes Einkommen durchschnittlich deutlich weniger.
 
@@ -4782,7 +4782,7 @@ Der Grenzsteuersatz zeigt, wie stark eine Gehaltserhöhung besteuert wird. Liegt
       },
       {
         frage: 'Ab welchem Einkommen zahlt man den Spitzensteuersatz?',
-        antwort: 'Der Spitzensteuersatz von 42 % greift 2026 ab einem zu versteuernden Einkommen von 66.154 €. Das entspricht einem Bruttojahresgehalt von ca. 78.000–85.000 € (je nach Abzügen). Bei Zusammenveranlagung verdoppelt sich die Grenze auf ca. 132.308 €.',
+        antwort: 'Der Spitzensteuersatz von 42 % greift 2026 ab einem zu versteuernden Einkommen von 69.878 € (Einzelveranlagung). Das entspricht einem Bruttojahresgehalt von ca. 80.000–88.000 € (je nach Abzügen). Bei Zusammenveranlagung verdoppelt sich die Grenze auf ca. 139.756 €.',
       },
       {
         frage: 'Stimmt es, dass man durch eine Gehaltserhöhung weniger Geld hat?',
@@ -4796,6 +4796,127 @@ Der Grenzsteuersatz zeigt, wie stark eine Gehaltserhöhung besteuert wird. Liegt
         frage: 'Wie wirkt sich das Ehegattensplitting auf die Progression aus?',
         antwort: 'Beim Splitting wird das gemeinsame Einkommen halbiert und besteuert, dann verdoppelt. Dadurch fallen beide Partner in niedrigere Progressionszonen. Der Vorteil ist am größten, wenn die Einkommen sehr unterschiedlich sind — bei gleich hohen Gehältern gibt es keinen Splitting-Vorteil.',
       },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was Steuerprogression bedeutet',
+        html: `<p>Die deutsche Einkommensteuer ist <strong>progressiv</strong>: Wer mehr verdient, zahlt nicht nur absolut mehr Steuer, sondern auch einen höheren Prozentsatz. Wie stark dieser Anstieg ausfällt, beschreiben zwei Kennzahlen, die ständig verwechselt werden. Der <strong>Durchschnittssteuersatz</strong> ist die gesamte Einkommensteuer geteilt durch das zu versteuernde Einkommen (zvE) — er zeigt die tatsächliche Gesamtbelastung. Der <strong>Grenzsteuersatz</strong> ist dagegen der Satz auf den <strong>nächsten verdienten Euro</strong> — er zeigt, wie stark eine Gehaltserhöhung besteuert wird.</p><p>Dieser Rechner macht beide Sätze über den gesamten Einkommensverlauf sichtbar. Er zeigt bewusst nicht die Gesamtsteuer in Euro — dafür ist der <strong>Einkommensteuer-Rechner</strong> da — und auch nicht den Weg vom Brutto zum Netto inklusive Sozialabgaben, den der <strong>Brutto-Netto-Rechner</strong> abbildet. Hier geht es allein um den <strong>Verlauf der Steuersätze</strong>: Wie schnell steigt die Belastung, und warum liegt der gefühlte „hohe Steuersatz" fast immer deutlich über dem, was man tatsächlich im Schnitt zahlt? Mit dem Schnitt-Begriff aus der Mathematik (Durchschnitt-Rechner) hat das nichts zu tun — gemeint ist hier ausschließlich der steuerliche Durchschnittssatz.</p>`,
+      },
+      {
+        typ: 'diagramm',
+        variante: 'linie',
+        titel: 'Grenzsteuersatz über das Einkommen (Tarif 2026)',
+        daten: [
+          { label: '12.348 €', wert: 0, einheit: '%' },
+          { label: '15.000 €', wert: 18.9, einheit: '%' },
+          { label: '20.000 €', wert: 24.7, einheit: '%' },
+          { label: '30.000 €', wert: 28.2, einheit: '%' },
+          { label: '40.000 €', wert: 31.7, einheit: '%' },
+          { label: '50.000 €', wert: 35.1, einheit: '%' },
+          { label: '60.000 €', wert: 38.6, einheit: '%' },
+          { label: '70.000 €', wert: 42, einheit: '%' },
+          { label: '150.000 €', wert: 42, einheit: '%' },
+          { label: '280.000 €', wert: 45, einheit: '%' },
+        ],
+        fussnote: 'Grenzsteuersatz (Satz auf den jeweils nächsten Euro) für die Einzelveranlagung nach § 32a EStG, Stand 2026, Werte aus dem Tarif berechnet. Oberhalb des Grundfreibetrags von 12.348 € startet er bei 14 %, steigt gleitend an und erreicht ab rund 69.878 € zvE konstant 42 %; die 45 % („Reichensteuer") greifen erst ab 277.826 €. Der Durchschnittssteuersatz verläuft stets darunter — die folgende Tabelle stellt beide direkt gegenüber. Die senkrechte Achse zeigt den Steuersatz in Prozent, die waagerechte das zu versteuernde Einkommen.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Eckwerte des Einkommensteuertarifs 2026',
+        werte: [
+          { label: 'Grundfreibetrag', wert: '12.348 €', hinweis: 'bis hierhin bleibt das Einkommen steuerfrei' },
+          { label: 'Eingangssteuersatz', wert: '14 %', hinweis: 'Grenzsteuersatz direkt über dem Grundfreibetrag' },
+          { label: 'Spitzensteuersatz', wert: '42 %', hinweis: 'ab rund 69.878 € zvE (Einzelveranlagung)' },
+          { label: '„Reichensteuer"', wert: '45 %', hinweis: 'ab 277.826 € zvE (Einzelveranlagung)' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Der große Irrtum: „Mehr verdienen lohnt sich nicht"',
+        html: `<p>Der häufigste Steuer-Irrtum lautet: „Wenn ich mehr verdiene und in eine höhere Stufe rutsche, bleibt mir am Ende weniger netto." Das ist falsch. Ein höherer Grenzsteuersatz besteuert <strong>nur den zusätzlichen Euro</strong>, niemals das gesamte Einkommen rückwirkend. Die unteren Einkommensteile bleiben weiterhin niedrig oder gar nicht besteuert — bis zum Grundfreibetrag von 12.348 € (Stand 2026) fällt überhaupt keine Steuer an.</p><p>Anders gesagt: Eine Gehaltserhöhung kann nie dazu führen, dass unterm Strich weniger Netto übrig bleibt. Selbst im Spitzensteuersatz von 42 % bleiben von 100 € zusätzlichem Brutto noch 58 € (vor Sozialabgaben). Die deutsche Einkommensteuer kennt keine harten Sprünge an den Zonengrenzen — der Grenzsteuersatz steigt gleitend, weil die Tarifzonen 2 und 3 als Polynome geformt sind. „In eine höhere Steuerklasse rutschen" gibt es in diesem Sinne gar nicht; gemeint ist meist die Lohnsteuerklasse, die mit der Progression des Jahrestarifs nichts zu tun hat.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '40.000 € vs. 41.000 € — was die 1.000 € mehr kosten',
+        schritte: [
+          { label: 'ESt bei 40.000 € zvE', formel: '§ 32a EStG, Zone 3', ergebnis: '7.209 €' },
+          { label: 'ESt bei 41.000 € zvE', formel: '§ 32a EStG, Zone 3', ergebnis: '7.527 €' },
+          { label: 'Mehrsteuer auf die 1.000 €', formel: '7.527 − 7.209', ergebnis: '318 €' },
+          { label: 'Grenzsteuersatz in diesem Bereich', formel: '318 ÷ 1.000', ergebnis: '≈ 31,8 %' },
+          { label: 'Netto vom Zuwachs', formel: '1.000 − 318', ergebnis: '682 €' },
+        ],
+        fazit: 'Wer von 40.000 € auf 41.000 € zvE kommt, zahlt auf die zusätzlichen 1.000 € nur 318 € Steuer — das sind rund 31,8 %, der Grenzsteuersatz in diesem Einkommensbereich. Die übrigen 682 € bleiben (vor Sozialabgaben). Der Durchschnittssteuersatz steigt dabei kaum: von 18,0 % auf 18,4 %. Genau das ist die Mechanik der Progression — nur der neue Einkommensteil wird höher besteuert, das bereits versteuerte Einkommen bleibt unberührt. Eine Gehaltserhöhung bringt also immer netto dazu, auch wenn nicht der volle Betrag ankommt. Würde dagegen das gesamte Einkommen plötzlich mit dem höheren Satz besteuert, ergäbe sich an jeder Zonengrenze ein Sprung von mehreren Hundert Euro — genau das verhindert der gleitende Tarif. Die alte Sorge vor dem „Stufensprung" stammt aus Steuersystemen mit echten Stufen; in Deutschland gibt es sie nicht.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum der Durchschnitt immer unter dem Grenzsatz liegt',
+        html: `<p>Der Durchschnittssteuersatz liegt <strong>immer</strong> unter dem Grenzsteuersatz — und das ist kein Zufall, sondern eine direkte Folge des progressiven Tarifs. Jeder Euro Einkommen wird so besteuert, als „durchliefe" er nacheinander alle Zonen: Die ersten 12.348 € bleiben steuerfrei, der nächste Bereich wird mit 14 % belastet, der darüber mit höheren Sätzen, und so weiter. Der Grenzsteuersatz gilt nur für die obersten, zuletzt verdienten Euro.</p><p>Der Durchschnitt mittelt dagegen über <em>alle</em> Einkommensteile — auch über den steuerfreien Grundfreibetrag und die niedrig besteuerten unteren Zonen. Deshalb bleibt er zwangsläufig zurück. Bei 50.000 € zvE etwa beträgt der Grenzsteuersatz rund 35 %, der Durchschnitt aber nur etwa 21 %. Erst bei sehr hohen Einkommen nähern sich beide an, weil der konstante Spitzensatz dann den größten Teil des Einkommens dominiert — gleich werden sie jedoch nie, solange ein Grundfreibetrag existiert. Diese Lücke erklärt auch, warum die gefühlte Steuerlast meist überschätzt wird: Im Kopf bleibt der hohe Grenzsteuersatz hängen, gezahlt wird aber der deutlich niedrigere Durchschnitt. Wer wissen will, was er real abführt, sollte deshalb stets auf den Durchschnittssteuersatz schauen.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Grenz- und Durchschnittssteuersatz im Vergleich (2026)',
+        kopf: ['zu versteuerndes Einkommen', 'Grenzsteuersatz', 'Durchschnittssteuersatz', 'Differenz'],
+        zeilen: [
+          ['15.000 €', '18,9 %', '2,9 %', '16,0 Pp'],
+          ['20.000 €', '24,7 %', '7,9 %', '16,9 Pp'],
+          ['30.000 €', '28,2 %', '14,1 %', '14,1 Pp'],
+          ['40.000 €', '31,7 %', '18,0 %', '13,6 Pp'],
+          ['50.000 €', '35,1 %', '21,1 %', '14,0 Pp'],
+          ['70.000 €', '42,0 %', '26,1 %', '15,9 Pp'],
+          ['100.000 €', '42,0 %', '30,9 %', '11,1 Pp'],
+          ['150.000 €', '42,0 %', '34,6 %', '7,4 Pp'],
+        ],
+        fussnote: 'Grundtarif (Einzelveranlagung) nach § 32a EStG 2026, Werte vom Rechner berechnet. „Pp" = Prozentpunkte Abstand zwischen Grenz- und Durchschnittssteuersatz. Gut erkennbar: Der Grenzsteuersatz erreicht ab rund 69.878 € seinen konstanten Wert von 42 %, während der Durchschnitt weiter langsam steigt — die Schere zwischen beiden schließt sich erst bei sehr hohen Einkommen. Auffällig ist auch, dass die Differenz im unteren Bereich am größten ist: Bei 20.000 € liegen Grenz- und Durchschnittssatz fast 17 Prozentpunkte auseinander, weil der steuerfreie Grundfreibetrag den Durchschnitt stark drückt, der Grenzsatz aber schon spürbar gestiegen ist. Solidaritätszuschlag und Kirchensteuer sind hier nicht enthalten; bei Zusammenveranlagung fallen beide Sätze auf dasselbe gemeinsame zvE niedriger aus.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Gehaltserhöhung: was von 3.000 € brutto bleibt',
+        schritte: [
+          { label: 'ESt bei 50.000 € zvE', formel: '', ergebnis: '10.548 €' },
+          { label: 'ESt bei 53.000 € zvE', formel: '', ergebnis: '11.617 €' },
+          { label: 'Mehrsteuer auf 3.000 €', formel: '11.617 − 10.548', ergebnis: '1.069 €' },
+          { label: 'effektiv belasteter Anteil', formel: '1.069 ÷ 3.000', ergebnis: '≈ 35,6 %' },
+          { label: 'Netto vom Brutto-Plus', formel: '3.000 − 1.069', ergebnis: '1.931 €' },
+        ],
+        fazit: 'Eine Gehaltserhöhung von 3.000 € (zvE von 50.000 auf 53.000 €) kostet rund 1.069 € zusätzliche Einkommensteuer — etwa 35,6 %, weil dieser Einkommensbereich nahe dem Grenzsteuersatz besteuert wird. Es bleiben 1.931 € (vor Sozialabgaben, Soli und Kirchensteuer). Der Durchschnittssteuersatz steigt dabei nur von 21,1 % auf 21,9 %. Wer abschätzen will, was von einer Erhöhung oder einer Sonderzahlung netto übrig bleibt, sollte deshalb auf den Grenzsteuersatz schauen — nicht auf den Durchschnitt. Sozialversicherungsbeiträge mindern den Zuwachs zusätzlich, solange die Beitragsbemessungsgrenzen nicht überschritten sind; oberhalb dieser Grenzen bleibt vom Brutto-Plus dagegen mehr übrig, weil dann keine weiteren Beiträge anfallen. Derselbe Grenzsteuersatz gilt übrigens auch in die andere Richtung: Wer eine abziehbare Ausgabe wie eine Spende geltend macht, spart genau diesen Prozentsatz an Steuer.',
+      },
+      {
+        typ: 'text',
+        titel: 'Solidaritätszuschlag und Kirchensteuer',
+        html: `<p>Zur Einkommensteuer können zwei Zuschläge hinzukommen, die der Rechner auf Wunsch berücksichtigt. Der <strong>Solidaritätszuschlag</strong> beträgt 5,5 % der Einkommensteuer, fällt aber erst oberhalb einer Freigrenze an: 2026 bei 20.350 € Jahres-ESt (Einzelveranlagung) bzw. 40.700 € bei Zusammenveranlagung. Das entspricht etwa 73.000 € zvE — für rund 90 % der Steuerzahler ist der Soli seit 2021 entfallen. In der anschließenden <strong>Milderungszone</strong> wächst er gleitend in den vollen Satz hinein, statt sprunghaft einzusetzen.</p><p>Die <strong>Kirchensteuer</strong> beträgt 8 % der Einkommensteuer in Bayern und Baden-Württemberg, in den übrigen Bundesländern 9 %. Sie ist im Folgejahr als Sonderausgabe abziehbar. Beide Zuschläge bemessen sich an der Einkommensteuer, nicht direkt am Einkommen — sie verstärken also den progressiven Effekt zusätzlich, ändern aber nichts an der grundsätzlichen Logik von Grenz- und Durchschnittssteuersatz. Wer die reine Einkommensteuer ohne Zuschläge betrachten will, lässt beide Optionen im Rechner einfach deaktiviert.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Grenz- und Durchschnittssteuersatz richtig deuten',
+        punkte: [
+          'Grenzsteuersatz = Satz auf den nächsten Euro — relevant für Gehaltserhöhung, Sonderzahlung, Überstunden oder das Ausnutzen von Freibeträgen.',
+          'Durchschnittssteuersatz = Gesamtsteuer geteilt durch zvE — zeigt die tatsächliche Belastung über das ganze Einkommen.',
+          'Der Durchschnitt liegt immer unter dem Grenzsatz — niemals umgekehrt.',
+          'Eine Gehaltserhöhung bringt netto immer mehr; es kommt nur nicht der volle Betrag an.',
+          'Maßgeblich ist das zu versteuernde Einkommen (zvE), nicht das Bruttogehalt.',
+          'Für die Steuerersparnis einer Spende oder Vorsorgeaufwendung den Grenzsteuersatz ansetzen, nicht den Durchschnitt.',
+          'Bei Ehepaaren senkt das Splitting den anzuwendenden Tarif, weil es auf das halbierte gemeinsame zvE rechnet.',
+          'Den aktuellen Jahresstand beachten — Grundfreibetrag und Zonengrenzen ändern sich nahezu jährlich.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Kalte Progression und die Tarifanpassung 2026',
+        text: 'Steigt das Gehalt nur im Takt der Inflation, ohne dass die Tarifzonen mitwachsen, rutscht man real in höhere Grenzsteuersätze, obwohl die Kaufkraft gar nicht gestiegen ist — das nennt man „kalte Progression". Um sie auszugleichen, verschiebt der Gesetzgeber die Eckwerte des Tarifs regelmäßig nach oben. Zum Veranlagungsjahr 2026 stieg der Grundfreibetrag von 12.096 € (2025) auf 12.348 €, und auch die übrigen Zonengrenzen wurden angehoben. Dadurch fällt die Steuer auf ein gleich bleibendes reales Einkommen etwas niedriger aus. Wer die Wirkung sehen will, vergleicht denselben zvE-Wert über zwei Jahre: Bei gleichem Einkommen sinkt die Steuer leicht, weil die Zonen weiter oben beginnen. Die Anpassung ist allerdings kein Geschenk, sondern gleicht nur die Geldentwertung aus — wer real mehr verdient, zahlt weiterhin progressiv mehr.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Stand 2026 — Orientierung, keine Steuerberatung',
+        text: 'Dieser Rechner bildet den Einkommensteuertarif nach § 32a EStG mit den ab 2026 geltenden Werten nach (Grundfreibetrag 12.348 €). Er liefert eine Orientierung über den Verlauf von Grenz- und Durchschnittssteuersatz, keine verbindliche Steuerfestsetzung und keine Steuerberatung. Die tatsächliche Steuer hängt von vielen individuellen Faktoren ab, die hier nicht abgebildet werden; Solidaritätszuschlag und Kirchensteuer kommen je nach Fall hinzu, ebenso wirken sich Werbungskosten, Sonderausgaben und Freibeträge erst über das zvE aus. Die amtliche, kostenlose Berechnung bietet der BMF-Steuerrechner unter bmf-steuerrechner.de. Für die persönliche Steuererklärung ist eine Steuerberaterin, ein Steuerberater oder ein Lohnsteuerhilfeverein die richtige Adresse — maßgeblich ist immer der Bescheid des Finanzamts.',
+      },
+    ],
+    quellen: [
+      { titel: '§ 32a EStG — Einkommensteuertarif', url: 'https://www.gesetze-im-internet.de/estg/__32a.html', hinweis: 'Progressiver Fünf-Zonen-Tarif mit Grenzsteuersätzen 14 → 42 → 45 %; Grundfreibetrag und Zonengrenzen, Stand 2026.' },
+      { titel: '§ 4 SolzG 1995 — Freigrenze Solidaritätszuschlag', url: 'https://www.gesetze-im-internet.de/solzg_1995/__4.html', hinweis: 'Soli 5,5 % der ESt; Freigrenze 20.350 € / 40.700 € (2026) mit Milderungszone.' },
+      { titel: 'BMF — amtlicher Steuerrechner', url: 'https://www.bmf-steuerrechner.de', hinweis: 'Offizielle, kostenlose Berechnung von Lohn- und Einkommensteuer.' },
     ],
   },
   {
