@@ -5226,7 +5226,7 @@ Die Gewerbesteuererklärung muss bis zum 31. Juli des Folgejahres beim Finanzamt
     keywords: ['einkommensteuer rechner', 'einkommensteuer berechnen', 'est rechner', '32a estg', 'einkommensteuer 2026', 'einkommensteuer tabelle', 'grenzsteuersatz rechner', 'durchschnittssteuersatz', 'einkommensteuer splitting', 'grundtabelle'],
     icon: '📋',
     formel: 'Zone 2 (12.349–17.799 €): (914,51·y+1.400)·y | Zone 3 (17.800–69.878 €): (173,10·z+2.397)·z+1.034,87 | Zone 4 (69.879–277.825 €): 0,42·zvE−11.135,63 | Zone 5 (ab 277.826 €): 0,45·zvE−19.470,38',
-    beispiel: '50.000 € zvE, Einzelveranlagung 2026: Einkommensteuer 9.758 €, Grenzsteuersatz ca. 30,5 %, Durchschnittssteuersatz 19,5 %. Mit Splitting (Paar mit zvE 50k): nur 5.030 € — Splitting-Vorteil ca. 4.700 €.',
+    beispiel: '50.000 € zvE, Einzelveranlagung 2026: Einkommensteuer 10.548 €, Grenzsteuersatz ca. 35,1 %, Durchschnittssteuersatz 21,1 %. Mit Splitting (Paar mit zvE 50k): nur 5.700 € — Splitting-Vorteil ca. 4.848 €.',
     erklaerung: `**Einkommensteuer berechnen nach § 32a EStG**
 
 Die Einkommensteuer ist die wichtigste direkte Steuer in Deutschland. Sie wird auf das zu versteuernde Einkommen (zvE) natürlicher Personen erhoben. Die Berechnung folgt einer Formel, die im § 32a Einkommensteuergesetz (EStG) festgelegt ist — dem sogenannten Einkommensteuertarif.
@@ -5259,8 +5259,8 @@ Bis zu einem zvE von 12.348 € (2026) fällt keine Einkommensteuer an (Grundfre
 
 Zwei zentrale Begriffe, die oft verwechselt werden:
 
-- Der **Grenzsteuersatz** ist der Steuersatz auf den nächsten verdienten Euro. Wer 50.000 € zvE hat, zahlt auf jeden zusätzlichen Euro etwa 30,5 % Steuern.
-- Der **Durchschnittssteuersatz** ist die Gesamtsteuer geteilt durch das zvE. Bei 50.000 € zvE liegt er bei ca. 19,5 %.
+- Der **Grenzsteuersatz** ist der Steuersatz auf den nächsten verdienten Euro. Wer 50.000 € zvE hat, zahlt auf jeden zusätzlichen Euro etwa 35,1 % Steuern.
+- Der **Durchschnittssteuersatz** ist die Gesamtsteuer geteilt durch das zvE. Bei 50.000 € zvE liegt er bei ca. 21,1 %.
 
 Der Grenzsteuersatz ist relevant für Entscheidungen wie Gehaltserhöhungen, Sonderzahlungen oder das Ausnutzen von Freibeträgen. Der Durchschnittssteuersatz zeigt die tatsächliche Gesamtbelastung.
 
@@ -5282,7 +5282,7 @@ Die Kirchensteuer beträgt 9 % der ESt in 14 Bundesländern und 8 % in Baden-Wü
       },
       {
         frage: 'Was ist der Unterschied zwischen Grenz- und Durchschnittssteuersatz?',
-        antwort: 'Der Grenzsteuersatz gibt an, wie stark der nächste verdiente Euro besteuert wird — relevant für Gehaltserhöhungen oder Sonderzahlungen. Der Durchschnittssteuersatz ist die Gesamtsteuer geteilt durch das zvE und zeigt die tatsächliche Belastung. Bei 50.000 € zvE beträgt der Grenzsteuersatz ca. 30,5 %, der Durchschnittssteuersatz ca. 19,5 %.',
+        antwort: 'Der Grenzsteuersatz gibt an, wie stark der nächste verdiente Euro besteuert wird — relevant für Gehaltserhöhungen oder Sonderzahlungen. Der Durchschnittssteuersatz ist die Gesamtsteuer geteilt durch das zvE und zeigt die tatsächliche Belastung. Bei 50.000 € zvE beträgt der Grenzsteuersatz ca. 35,1 %, der Durchschnittssteuersatz ca. 21,1 %.',
       },
       {
         frage: 'Wie funktioniert das Splittingverfahren?',
