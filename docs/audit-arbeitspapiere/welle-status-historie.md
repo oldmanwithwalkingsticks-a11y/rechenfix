@@ -8,6 +8,44 @@
 
 ---
 
+## 22.06.2026 — W19 Goldstandard SV-/Einkommens-Untergruppe s1–s3 (Doku-Sync, 114 Goldstandard gemessen)
+
+Drei einkommens-/beschäftigungsbezogene Rechner. midijob + nebenjob teilen die Minijob-/Midijob-Grenzen
+(`midijob-parameter.ts` + `sv-parameter.ts`); pfaendung eigene zeitkritische ZPO-Tabelle. Mini-Scoping
+`welle19-sv-einkommen-mini-scoping.md`. YMYL-Auflage wie Steuer-Block (Lib gewinnt, § + gesetze-im-internet,
+Stichtag, keine Beratung, beispiel-Feld gegen Lib). Werte gegen SGB IV / ZPO verifiziert (web 06/2026):
+Minijob-Grenze 603 €, Midijob 603,01–2.000 €, Faktor F 0,6619; Pfändungs-Grundfreibetrag wechselt 01.07.2026
+(1.555 → 1.587,40 €). Contentbloecke-Set **114 Rechner** (gemessen). Alle Builds Vercel-grün, Lint grün.
+
+- **s1 midijob-rechner** (finanzen.ts, beispielrechnung-Leitformat 3×, 12 Blöcke, ~1.504 W, `965229f`).
+  Übergangsbereich § 20 SGB IV, reduzierter AN-Beitrag. Beitragsformel über Lib (faktorGesamt 1,145937,
+  konstanteGesamt 291,874), nicht selbst hergeleitet. Probe: B1.300 → BE_AN 997,85; gleitender Anstieg
+  (700/1.000/1.300/1.700/2.000); 603,01 → Nulltarif. **Zwei Fehler gefangen:** stale beispiel (1.500 →
+  AN-Satz 21,75 % korrigiert) UND falsche Richtungsaussage in erklaerung („Ersparnis an Untergrenze ca. 60 €"
+  → tatsächlich dort am größten, >100 €).
+- **s2 nebenjob-rechner** (finanzen.ts, vergleich+tabelle-Leitformat, 13 Blöcke, ~1.503 W, `100b4ca`).
+  Drei Nebenjob-Arten (Minijob/Steuerkarte=SK VI/selbstständig). Werte AUS DEM CODE (nicht Kommentaren).
+  Probe: HJ 3.500 + 450 € → Minijob 450 € (0 % Belastung) vs. SK VI 245,70 € (45,4 %) vs. selbstständig
+  302,17 €. SK-VI-Pauschale (25 % LSt) als Schätzung transparent gemacht. beispiel-Feld lib-true. Struktur
+  bewusst ≠ s1 (Schablonen-Falle vermieden).
+- **s3 pfaendungsrechner** (finanzen.ts, tabelle-Leitformat 3×, 13 Blöcke, ~1.505 W, `cd9950f`). **ZEITKRITISCH:**
+  ZPO-§-850c-Pfändungstabelle wechselt 01.07.2026. Pflicht erfüllt: BEIDE Stände prominent — bis 30.06.2026
+  GF 1.555,00 €, ab 01.07.2026 GF 1.587,40 € — mit Hinweis-Callout (Block 2) + Stichtagsvergleich-Tabelle, kein
+  veralteter Hardcode. Probe beide Stichtage: Netto 2.000 U0 → ab 01.07. pfändbar 288,82 € / bis 30.06. 311,50 €
+  (70 %-Staffelung), U1 → höherer Freibetrag. **beispiel-Feld future-proof** (ab-01.07.-Stand, bis-30.06.
+  mitgenannt → bleibt nach Stichtag korrekt).
+
+**Untergruppe KOMPLETT:** midijob, nebenjob, pfaendung. Jeder eigenes Leitformat, alle YMYL gegen Lib
+probe-verifiziert. Zeitkritischer Stichtagswechsel (s3) sauber abgesichert inkl. future-proof beispiel-Feld.
+Wieder Fehler durch Domänenwissen gefangen (s1 Ersparnis-Richtung), nicht durch Zahlenprüfung.
+
+**Weitere offene Slugs (kohärente Untergruppen):** Sozialleistungen mit eigener Lib (pflegegeld, bafoeg,
+aufstiegs-bafoeg); Component-only Sozial (krankengeld, kurzarbeitergeld, witwenrente); **wohngeld** Sonderfall
+(Architektur-Bug, zeigt Erklärseite statt Rechner — Status erst klären); Vorsorge/Sparen (etf-sparplan, rente,
+riester); Rest-Steuer (afa, mwst-rueckerstattung, gmbh-geschaeftsfuehrer, hochrechner, nettolohn-optimierer).
+
+---
+
 ## 22.06.2026 — W19 Goldstandard Kapitalertrag- + Gewerbesteuer-Domäne k1+g1 (Doku-Sync, 111 Goldstandard gemessen)
 
 Zwei eigenständige Finanz-Einzel-Domänen nach Erbschaft/Schenkung, gebündelt dokumentiert. Je eigenes
