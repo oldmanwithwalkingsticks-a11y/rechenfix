@@ -3122,7 +3122,7 @@ Die Wohngeldformel nach § 19 WoGG lautet: Wohngeld = 1,15 × (M − (a + b×M +
   },
   {
     slug: 'bafoeg-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-22',
     titel: 'BAföG-Rechner',
     beschreibung: 'BAföG berechnen: Anspruch und voraussichtliche Höhe der Ausbildungsförderung für Studierende und Schüler.',
     kategorie: 'Finanzen',
@@ -3131,8 +3131,8 @@ Die Wohngeldformel nach § 19 WoGG lautet: Wohngeld = 1,15 × (M − (a + b×M +
     metaDescription: 'BAföG berechnen: Anspruch und Höhe für Studium und Schule ✓ Elterneinkommen ✓ Vermögen ✓ Wohnsituation ✓ KI-Erklärung.',
     keywords: ['bafög rechner', 'bafög berechnen', 'bafög 2026', 'bafög anspruch', 'bafög höhe', 'bafög höchstsatz', 'bafög elterneinkommen', 'bafög rückzahlung', 'studenten bafög', 'schüler bafög'],
     icon: '🎓',
-    formel: 'BAföG = Gesamtbedarf − Anrechnung Einkommen − Anrechnung Vermögen − Anrechnung Elterneinkommen | Studium (eigene Wohnung): 934 € Bedarf | Studien-BAföG: 50% Zuschuss + 50% zinsloses Darlehen (max. 10.010 € Rückzahlung)',
-    beispiel: 'Student, eigene Wohnung, familienversichert, Eltern verdienen 50.000 € brutto zusammen → Bedarf: 855 € | Elternanrechnung: ca. 302 € | BAföG: ca. 553 €/Monat (276,50 € Zuschuss + 276,50 € Darlehen).',
+    formel: 'BAföG = Gesamtbedarf − Anrechnung Einkommen − Anrechnung Vermögen − Anrechnung Elterneinkommen | Studium eigene Wohnung: Grundbedarf 855 € (475 + 380 Wohnpauschale), Höchstsatz 992 € mit KV/PV-Zuschlag | Studien-BAföG: 50 % Zuschuss + 50 % zinsloses Darlehen (max. 10.010 € Rückzahlung)',
+    beispiel: 'Student, eigene Wohnung, selbst versichert, Eltern unter Freibetrag → Höchstsatz 992 €/Monat (496 € Zuschuss + 496 € zinsloses Darlehen). Verdienen verheiratete Eltern z. B. 60.000 € brutto (ein Verdiener), sinkt der Betrag durch Anrechnung auf ca. 636 €.',
     erklaerung: `**Wer hat Anspruch auf BAföG?**
 
 BAföG (Bundesausbildungsförderungsgesetz) unterstützt Studierende und Schüler, deren Eltern die Ausbildung nicht allein finanzieren können. Grundsätzlich haben alle deutschen Staatsangehörigen und viele ausländische Studierende Anspruch, wenn das Einkommen der Eltern unter bestimmten Grenzen liegt. Auch EU-Bürger mit Daueraufenthaltsrecht und anerkannte Flüchtlinge können BAföG beantragen. Die Altersgrenze liegt bei 45 Jahren zu Beginn des Studiums. Das BAföG wird als Kombination aus Zuschuss und zinslosem Darlehen gezahlt — bei Studierenden je 50 Prozent, bei Schülern als reiner Zuschuss ohne Rückzahlung.
@@ -3181,6 +3181,121 @@ Den BAföG-Antrag stellen Sie beim zuständigen Studenten- oder Schülerwerk (be
         frage: 'Gibt es elternunabhängiges BAföG?',
         antwort: 'Ja, in bestimmten Fällen: nach 5 Jahren Erwerbstätigkeit nach dem 18. Lebensjahr, bei Studienbeginn nach dem 30. Geburtstag, nach abgeschlossener Berufsausbildung plus 3 Jahren Berufserfahrung, oder wenn die Eltern nicht erreichbar sind. Dann wird kein Elterneinkommen angerechnet.',
       },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was BAföG ist',
+        html: `<p>Das <strong>BAföG</strong> (Bundesausbildungsförderungsgesetz) ist eine <strong>einkommensabhängige Ausbildungsförderung</strong> für Studierende und Schüler, deren Familie die Ausbildung nicht allein finanzieren kann. Studierende erhalten es zur <strong>Hälfte als Zuschuss und zur Hälfte als zinsloses Staatsdarlehen</strong>; Schüler-BAföG ist ein reiner Zuschuss ohne Rückzahlung.</p><p>Wie viel man bekommt, ergibt sich aus dem <strong>Bedarf</strong> (je nach Ausbildung und Wohnsituation) abzüglich der <strong>Anrechnung</strong> von eigenem Einkommen, eigenem Vermögen und dem Einkommen der Eltern. Dieser Rechner schätzt den voraussichtlichen Förderbetrag für die eigene Situation. Wichtig zur Abgrenzung: Es geht hier um das Studierenden- und Schüler-BAföG für die <strong>Erstausbildung</strong> — die Förderung von Meister, Techniker oder Fachwirt regelt das separate Aufstiegs-BAföG (AFBG) mit eigenen Sätzen. Auch der Förderzeitraum unterscheidet sich: Studierenden-BAföG läuft über die Regelstudienzeit, das Aufstiegs-BAföG ist an eine konkrete Fortbildungsmaßnahme gebunden. Wer also bereits einen Berufsabschluss hat und sich weiterbildet, ist beim Aufstiegs-BAföG richtig — dieser Rechner bleibt beim klassischen Studium und der schulischen Ausbildung.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Wie sich der Förderbetrag ergibt',
+        html: `<p>Die Rechnung folgt immer demselben Schema: <strong>Gesamtbedarf minus Anrechnung</strong>. Der Bedarf besteht aus dem Grundbedarf, der Wohnpauschale (bei eigener Wohnung) und Zuschlägen für die eigene Kranken- und Pflegeversicherung sowie für Kinder.</p><p>Von diesem Bedarf wird abgezogen, was als zumutbarer Eigenbeitrag gilt: <strong>eigenes Einkommen</strong> über dem Freibetrag, <strong>eigenes Vermögen</strong> über dem Freibetrag (auf zwölf Monate verteilt) und das <strong>anrechenbare Elterneinkommen</strong>. Beim Elterneinkommen werden zunächst eine Sozialpauschale von 21,6 % und die Steuern abgezogen, dann der Elternfreibetrag; von dem, was darüber bleibt, fließen 50 % in die Anrechnung. Bleibt nach allen Abzügen ein Betrag von mindestens 10 € übrig, besteht ein BAföG-Anspruch — andernfalls lohnt der Antrag trotzdem, weil das Amt weitere Faktoren berücksichtigt. Die einzelnen Anrechnungen werden also nacheinander vom Bedarf abgezogen: Erst das eigene Einkommen und Vermögen, dann das Elterneinkommen. Genau diese Reihenfolge bildet der Rechner ab und zeigt für jeden Posten, wie stark er den Anspruch mindert.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Bedarfssätze und Höchstsatz (2026)',
+        kopf: ['Situation', 'Betrag/Monat'],
+        zeilen: [
+          ['Studium, bei den Eltern wohnend', '534 €'],
+          ['Studium, eigene Wohnung (Grundbedarf)', '855 €'],
+          ['+ KV-/PV-Zuschlag (selbst versichert)', '+ 137 €'],
+          ['= Höchstsatz Studium auswärts', '992 €'],
+          ['+ Kinderbetreuungszuschlag je Kind', '+ 160 €'],
+          ['Schüler, eigene Wohnung (je Schulform)', '666 € / 775 €'],
+        ],
+        fussnote: 'BAföG-Sätze Stand 2026 (§§ 12, 13, 13a, 14b BAföG; Werte seit 01.08.2024 nach dem 29. BAföG-ÄndG, gelten 2026 unverändert). Der Studien-Grundbedarf von 855 € enthält bereits die Wohnpauschale von 380 € (475 + 380). Der KV-/PV-Zuschlag (102 € + 35 €) kommt hinzu, wenn man sich selbst versichern muss — wer familienversichert ist, bleibt beim Grundbedarf. Mit einem Kind steigt der Höchstsatz auf 1.152 €. Bei schulischer Ausbildung gelten je nach Schulform niedrigere Sätze (276 € bzw. 498 € bei den Eltern, 666 € bzw. 775 € auswärts); Schüler-BAföG ist zudem ein reiner Zuschuss ohne Darlehensanteil.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'BAföG-Eckwerte 2026',
+        werte: [
+          { label: 'Höchstsatz Studium auswärts', wert: '992 €/Mon', hinweis: 'mit KV-/PV-Zuschlag' },
+          { label: 'Elternfreibetrag (verheiratet)', wert: '2.415 €/Mon', hinweis: 'alleinstehend 1.605 €' },
+          { label: 'Vermögensfreibetrag (unter 30 J.)', wert: '15.000 €', hinweis: 'ab 30 J. 45.000 €' },
+          { label: 'Max. Darlehens-Rückzahlung', wert: '10.010 €', hinweis: 'gedeckelt, zinslos' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Höchstsatz: 992 € im Monat',
+        schritte: [
+          { label: 'Grundbedarf Studium, eigene Wohnung', formel: '475 + 380 Wohnpauschale', ergebnis: '855 €' },
+          { label: '+ KV-Zuschlag', formel: 'selbst versichert', ergebnis: '102 €' },
+          { label: '+ PV-Zuschlag', formel: '', ergebnis: '35 €' },
+          { label: 'Gesamtbedarf', formel: '855 + 102 + 35', ergebnis: '992 €' },
+          { label: 'Anrechnung (Eltern unter Freibetrag)', formel: '', ergebnis: '0 €' },
+          { label: 'BAföG', formel: '50 % Zuschuss / 50 % Darlehen', ergebnis: '992 €' },
+        ],
+        fazit: 'Den Höchstsatz von 992 € erhält, wer in einer eigenen Wohnung studiert, sich selbst kranken- und pflegeversichern muss und dessen Eltern mit ihrem Einkommen unter dem Freibetrag liegen. Davon sind 496 € ein Zuschuss, den man nie zurückzahlt, und 496 € ein zinsloses Darlehen. Wer familienversichert ist (in der Regel bis 25 Jahre über die Eltern), erhält statt 992 € den Grundbedarf von 855 €, weil die KV-/PV-Zuschläge entfallen. Der Höchstsatz ist also der Ausgangspunkt, von dem die Anrechnung abgezogen wird. Solange die Eltern mit ihrem Einkommen unter dem Freibetrag bleiben und keine nennenswerten eigenen Einkünfte oder Vermögen vorhanden sind, wird der volle Betrag ausgezahlt — das ist der praktische Regelfall für viele Studienanfänger direkt nach dem Abitur.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Mit Elternanrechnung: verheiratete Eltern, 60.000 € brutto',
+        schritte: [
+          { label: 'Gesamtbedarf (selbst versichert)', formel: '', ergebnis: '992 €' },
+          { label: 'Eltern-Nettoeinkommen', formel: 'nach SV-Pauschale 21,6 % + Steuer, ÷ 12', ergebnis: '≈ 3.126 €' },
+          { label: '− Elternfreibetrag (verheiratet)', formel: '', ergebnis: '− 2.415 €' },
+          { label: 'anrechenbar darüber', formel: '× 50 %', ergebnis: '≈ 356 €' },
+          { label: 'BAföG', formel: '992 − 356', ergebnis: '≈ 636 €' },
+        ],
+        fazit: 'Verdienen verheiratete Eltern zusammen 60.000 € brutto im Jahr (hier ein Hauptverdiener), bleibt nach Abzug der Sozialpauschale und der Steuern ein anrechenbares Nettoeinkommen von rund 3.126 € im Monat. Davon zieht das BAföG-Amt den Elternfreibetrag von 2.415 € ab; von den verbleibenden gut 711 € werden 50 % angerechnet, also rund 356 €. Der BAföG-Anspruch sinkt damit von 992 € auf rund 636 €. Je höher das Elterneinkommen, desto stärker die Anrechnung — bei sehr hohen Einkommen entfällt der Anspruch ganz. Genau hier zeigt sich, warum eine pauschale Einkommensgrenze irreführend ist: Ob noch BAföG fließt, hängt nicht nur vom Bruttoeinkommen ab, sondern auch vom Familienstand, der Zahl der Geschwister in Ausbildung und davon, ob man auswärts wohnt. Deshalb lohnt sich die individuelle Berechnung fast immer.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Mit Vermögensanrechnung: 20.000 € Erspartes',
+        schritte: [
+          { label: 'Gesamtbedarf', formel: 'Höchstsatz', ergebnis: '992 €' },
+          { label: 'eigenes Vermögen', formel: '', ergebnis: '20.000 €' },
+          { label: '− Vermögensfreibetrag (unter 30 J.)', formel: '§ 29 BAföG', ergebnis: '− 15.000 €' },
+          { label: 'anrechenbar, auf 12 Monate', formel: '5.000 ÷ 12', ergebnis: '416,67 €' },
+          { label: 'BAföG', formel: '992 − 416,67', ergebnis: '575,33 €' },
+        ],
+        fazit: 'Auch eigenes Vermögen wird angerechnet — allerdings erst über dem Freibetrag von 15.000 € (unter 30 Jahre; ab 30 sind es 45.000 €). Bei 20.000 € Erspartem sind 5.000 € anrechenbar; verteilt auf den zwölfmonatigen Bewilligungszeitraum sind das 416,67 € pro Monat, die den BAföG-Satz auf 575,33 € drücken. Zum Vermögen zählen Sparguthaben, Wertpapiere und Sachwerte — nicht aber Hausrat und ein angemessenes Auto. Wer kurz vor dem Antrag größere Anschaffungen plant, sollte den Stichtag der Vermögensermittlung kennen. Wichtig: Maßgeblich ist das Vermögen am Tag der Antragstellung. Bewusstes „Armrechnen" durch das Verschenken von Geld an Verwandte kurz vor dem Antrag erkennt das Amt jedoch und rechnet es als sogenanntes verschwendetes Vermögen weiterhin an.',
+      },
+      {
+        typ: 'text',
+        titel: 'Elternfreibeträge und Geschwister',
+        html: `<p>Das Elterneinkommen wird nicht voll angerechnet, sondern erst oberhalb großzügiger <strong>Freibeträge</strong>. Bei <strong>verheirateten Eltern</strong> bleiben 2.415 € monatliches Nettoeinkommen anrechnungsfrei, bei einem <strong>alleinstehenden Elternteil</strong> 1.605 €. Für jedes weitere <strong>Geschwister in Ausbildung</strong> (ohne eigenen BAföG-Bezug) erhöht sich der Freibetrag um 730 €.</p><p>Geschwister wirken sogar doppelt zugunsten des Antragstellers: Sie heben nicht nur den Freibetrag, sondern senken auch die Anrechnungsquote um 5 Prozentpunkte je Kind (ausgehend von 50 %). Studieren mehrere Kinder gleichzeitig mit eigenem BAföG, wird der auf die Eltern entfallende Anrechnungsbetrag zusätzlich gleichmäßig aufgeteilt (§ 11 Abs. 4 BAföG). Deshalb haben Familien mit mehreren Kindern in Ausbildung oft auch bei höherem Elterneinkommen noch einen BAföG-Anspruch — es lohnt sich, das durchzurechnen. Maßgeblich ist übrigens das Elterneinkommen des vorletzten Kalenderjahres vor dem Bewilligungszeitraum; ist das Einkommen inzwischen deutlich gesunken (etwa durch Arbeitslosigkeit oder Rente), kann ein Aktualisierungsantrag gestellt werden, damit das aktuelle Einkommen zählt.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Eigenes Einkommen, Nebenjob und Rückzahlung',
+        html: `<p>Neben dem BAföG darf man <strong>330 € im Monat</strong> anrechnungsfrei verdienen (§ 23 BAföG) — ein <strong>Minijob bis 603 €</strong> bleibt damit weitgehend folgenlos, weil von dem darüberliegenden Teil noch eine Sozialpauschale abgeht. Wer ein Kind hat, erhält zusätzlich einen <strong>Kinderbetreuungszuschlag von 160 € je Kind</strong>, der nicht zurückgezahlt werden muss.</p><p>Bei der <strong>Rückzahlung</strong> ist das Studierenden-BAföG besonders fair: Zurückgezahlt wird nur der Darlehensanteil (die Hälfte), und das erst fünf Jahre nach dem Ende der Förderungshöchstdauer, in Raten ab 130 € im Monat. Die <strong>Gesamtrückzahlung ist auf 10.010 € gedeckelt</strong> — egal, wie viel BAföG insgesamt geflossen ist. Wer wenig verdient, kann sich von der Rückzahlung freistellen lassen; bei Zahlung auf einen Schlag gibt es einen Nachlass. Schüler-BAföG muss gar nicht zurückgezahlt werden. Diese Deckelung auf 10.010 € ist der entscheidende Vorteil gegenüber einem normalen Kredit: Selbst wer über mehrere Jahre den Höchstsatz bezieht, zahlt am Ende nie mehr als diese Summe zurück — und das zinsfrei. Damit bleibt BAföG auch für den Darlehensteil deutlich günstiger als jede private Studienfinanzierung.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Was den BAföG-Betrag bestimmt',
+        punkte: [
+          'Die Ausbildungsart: Studium oder Schule (jeweils unterschiedliche Bedarfssätze nach §§ 12/13 BAföG).',
+          'Die Wohnsituation: bei den Eltern (534 €) oder eigene Wohnung (855 €, Höchstsatz 992 €).',
+          'Eigene Kranken-/Pflegeversicherung: +137 € Zuschlag, wenn nicht familienversichert.',
+          'Das Elterneinkommen abzüglich Sozialpauschale, Steuer und Freibetrag (2.415 / 1.605 €).',
+          'Geschwister in Ausbildung: höherer Freibetrag (+730 €) und niedrigere Anrechnungsquote.',
+          'Eigenes Einkommen über 330 €/Monat (Minijob bis 603 €) und Vermögen über 15.000 € (unter 30 J.) werden angerechnet.',
+          'Elternunabhängiges BAföG: in Sonderfällen zählt nur das eigene Einkommen, nicht das der Eltern.',
+          'Das Ergebnis ist eine Schätzung — verbindlich entscheidet das Amt für Ausbildungsförderung.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Stand 2026 — Schätzung, keine BAföG-Beratung',
+        text: 'Dieser Rechner schätzt den BAföG-Anspruch mit den seit 01.08.2024 geltenden und 2026 unveränderten Werten (Höchstsatz Studium auswärts 992 €; §§ 11–14a, 21–30 BAföG). Er liefert eine Orientierung und ersetzt keine Sozial- oder BAföG-Beratung. Die tatsächliche Förderung hängt von vielen Einzelheiten ab (genaue Einkommensermittlung, Sonderfälle, elternunabhängige Förderung), die hier vereinfacht abgebildet sind. Maßgeblich ist der Bescheid des Amtes für Ausbildungsförderung bzw. des Studierendenwerks. Auch bei einem rechnerisch niedrigen Anspruch lohnt der Antrag — und er sollte rechtzeitig gestellt werden, weil BAföG erst ab dem Antragsmonat gezahlt wird, nicht rückwirkend. Den Antrag stellt man beim Studierendenwerk (Studium) bzw. beim Amt für Ausbildungsförderung (Schule), zunehmend digital über BAföG Digital. Bei Fragen helfen die BAföG-Beratungen der Studierendenwerke kostenlos weiter.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Ausblick: geplante Erhöhung zum WS 2026/27 (noch nicht beschlossen)',
+        text: 'Ausblick (geplant, noch nicht beschlossen): Für das Wintersemester 2026/27 ist eine Erhöhung der Wohnpauschale von 380 € auf 440 € im Gespräch, womit der Höchstsatz auf rund 1.052 € steigen würde. Stand Mitte 2026 liegt dazu jedoch kein verabschiedetes Gesetz vor; eine Verschiebung auf einen späteren Zeitpunkt gilt als wahrscheinlich. Verbindlich gilt weiterhin der Höchstsatz von 992 € — dieser Rechner verwendet die aktuell geltenden Werte. Wer plant, sollte die offizielle Ankündigung des Bundesbildungsministeriums abwarten, bevor er mit höheren Sätzen kalkuliert. Sobald eine Erhöhung im Bundesgesetzblatt verkündet ist, werden die Werte in diesem Rechner zeitnah aktualisiert — bis dahin gelten bewusst die niedrigeren, rechtssicheren Beträge.',
+      },
+    ],
+    quellen: [
+      { titel: '§ 13 BAföG — Bedarf für Studierende', url: 'https://www.gesetze-im-internet.de/baf_g/__13.html', hinweis: 'Grundbedarf und Wohnpauschale; Höchstsatz Studium auswärts 855 € + Zuschläge. Stand 2026.' },
+      { titel: '§ 13a BAföG — Kranken- und Pflegeversicherungszuschlag', url: 'https://www.gesetze-im-internet.de/baf_g/__13a.html', hinweis: 'KV-Zuschlag 102 € + PV-Zuschlag 35 € für selbst Versicherte → Höchstsatz 992 €.' },
+      { titel: '§ 25 BAföG — Freibeträge vom Einkommen der Eltern', url: 'https://www.gesetze-im-internet.de/baf_g/__25.html', hinweis: 'Elternfreibeträge 2.415 € (verheiratet) / 1.605 € (alleinstehend); Anrechnungsquote.' },
+      { titel: '§ 29 BAföG — Freibeträge vom Vermögen', url: 'https://www.gesetze-im-internet.de/baf_g/__29.html', hinweis: 'Vermögensfreibetrag 15.000 € (unter 30 J.) bzw. 45.000 € (ab 30 J.).' },
     ],
   },
   {
