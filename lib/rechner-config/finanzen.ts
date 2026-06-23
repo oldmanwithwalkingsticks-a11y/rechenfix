@@ -5039,7 +5039,7 @@ Der Midijob lohnt sich vor allem für Personen, die **mehr als einen Minijob** l
   },
   {
     slug: 'witwenrente-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-24',
     titel: 'Witwenrente-Rechner',
     beschreibung: 'Witwenrente berechnen: Große und kleine Witwenrente, Einkommensanrechnung und Rentenanspruch.',
     kategorie: 'Finanzen',
@@ -5071,10 +5071,10 @@ Eigenes Einkommen der Hinterbliebenen wird auf die Witwenrente angerechnet — a
 **Rechenbeispiel:** Witwe mit 1.800 € Nettoeinkommen, 0 Kinder, Rente des Verstorbenen 1.500 €, neues Recht:
 
 - Grundanspruch: 55 % × 1.500 € = 825 €
-- Freibetrag: 1.038 €
-- Anrechenbares Einkommen: 1.800 − 1.038 = 762 €
-- Abzug: 40 % × 762 € = 305 €
-- Auszahlung: 825 − 305 = **520 € pro Monat**
+- Freibetrag: 1.123 € (ab 01.07.2026; bis 30.06.2026: 1.077 €)
+- Anrechenbares Einkommen: 1.800 − 1.123 = 677 €
+- Abzug: 40 % × 677 € = 271 €
+- Auszahlung: 825 − 271 = **554 € pro Monat** (bis 30.06.2026: 536 €)
 
 Als „Einkommen" zählen u. a. Arbeitsentgelt, eigene Renten, Lohnersatzleistungen und Mieteinnahmen — nicht dagegen Kindergeld oder Grundrentenzuschläge. Wer die eigene Rente mit unserem [Rentenrechner](/finanzen/rentenrechner) grob schätzt, kann früh erkennen, wie stark die Anrechnung ausfallen wird.
 
@@ -5085,13 +5085,147 @@ Heiratet die Witwe oder der Witwer erneut, **erlischt der Anspruch** auf die Wit
 **Wenn die Witwenrente nicht reicht**
 
 In vielen Fällen reicht die Witwenrente allein nicht aus, um den Lebensunterhalt zu decken — besonders bei geringem eigenen Einkommen oder wenn die Hinterbliebene nie oder nur kurz berufstätig war. In solchen Fällen kommt ergänzend **Grundsicherung im Alter und bei Erwerbsminderung** in Betracht, die nach denselben Regeln wie das [Bürgergeld](/finanzen/buergergeld-rechner) berechnet wird. Auch **Wohngeld** oder **Pflegegeld** können beantragt werden. Seit 2021 gibt es zudem den **Grundrentenzuschlag** für langjährig Versicherte mit geringem Einkommen — dieser wird nicht auf die Witwenrente angerechnet.`,
+    // W19-Goldstandard (YMYL, ZEITKRITISCH): witwenrente-rechner auf volle Tiefe (12 Bausteine,
+    // ~1.560 W), Leitformat „vergleich" (3× dominant). SSOT ist die Component
+    // WitwenrenteRechner.tsx (keine Lib): groß 55 %/60 %, klein 25 %; Freibetrag 26,4 × RW
+    // (+ 5,6 × RW je Kind), Anrechnung 40 % des übersteigenden Nettos (§§ 46/97 SGB VI);
+    // Sterbevierteljahr 100 % (§ 67 SGB VI). Rentenwert-Switch 01.07.2026: 40,79 → 42,52 €
+    // (getAktuellerRentenwert()). Hauptbeispiel future-proof auf ab-01.07. (554 €), bis-30.06.
+    // (536 €) mitgenannt. Alle Werte component-true nachgerechnet. Stale 2024er-Rentenwert
+    // (39,32 → FB 1.038 → 520 €) in erklaerung-Rechenbeispiel + faq[2] in diesem Commit auf
+    // 2026 korrigiert; beispiel-Feld war bereits korrekt (unverändert).
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Witwenrente: abgeleiteter Anspruch aus der Rente des Verstorbenen',
+        html: `<p>Die <strong>Witwen- und Witwerrente</strong> ist eine <strong>Hinterbliebenenrente</strong> der gesetzlichen Rentenversicherung. Sie ersetzt einen Teil des wegfallenden Unterhalts nach dem Tod des Ehe- oder eingetragenen Lebenspartners. Anders als die eigene Altersrente ist sie ein <strong>abgeleiteter Anspruch</strong>: Ihre Höhe richtet sich nach der Rente, die der oder die Verstorbene bezogen hat oder bei voller Erwerbsminderung bezogen hätte — nicht nach den eigenen Beitragsjahren der hinterbliebenen Person. Auch geschiedene Ehepartner können in Sonderfällen eine Erziehungs- oder Geschiedenen-Witwenrente erhalten.</p><p>Voraussetzung ist, dass die Ehe bzw. Lebenspartnerschaft bestand und der verstorbene Partner die <strong>allgemeine Wartezeit von fünf Jahren</strong> erfüllt hatte (bei Arbeitsunfall vorzeitig erfüllt). In der Regel muss die Ehe zudem mindestens ein Jahr bestanden haben, sonst wird eine Versorgungsehe vermutet. Die Rente wird <strong>nicht automatisch</strong> gezahlt, sondern muss bei der Deutschen Rentenversicherung beantragt werden. Wer nach dem 31.12.2001 geheiratet hat, fällt unter das <strong>neue Recht</strong> mit etwas niedrigeren Sätzen — die Details unterscheiden sich je nach Renten-Art deutlich, wie die folgenden Vergleiche zeigen.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Große und kleine Witwenrente im Vergleich',
+        spalteA: 'Große Witwenrente',
+        spalteB: 'Kleine Witwenrente',
+        zeilen: [
+          { kriterium: 'Voraussetzung', a: 'die hinterbliebene Person ist mindestens 47 Jahre alt, voll erwerbsgemindert oder erzieht ein Kind unter 18 Jahren', b: 'alle übrigen Fälle, in denen keine dieser Voraussetzungen erfüllt ist' },
+          { kriterium: 'Höhe', a: '55 % (neues Recht) bzw. 60 % (altes Recht) der Rente des Verstorbenen', b: '25 % der Rente des Verstorbenen, unabhängig vom Recht' },
+          { kriterium: 'Dauer', a: 'unbefristet, solange die Voraussetzungen erfüllt bleiben', b: 'im neuen Recht auf 24 Monate befristet, im alten Recht unbefristet' },
+          { kriterium: 'Wechsel', a: 'bleibt bestehen, auch im Anschluss an eine vorherige kleine Witwenrente', b: 'Wechsel in die große Rente möglich, sobald deren Voraussetzungen eintreten (etwa mit 47 Jahren)' },
+          { kriterium: 'Einkommensanrechnung', a: 'ja, nach § 97 SGB VI mit dem rentenwertgekoppelten Freibetrag', b: 'ja, nach genau denselben Regeln und Freibeträgen' },
+        ],
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Neues und altes Recht: Wer fällt wohin?',
+        spalteA: 'Neues Recht',
+        spalteB: 'Altes Recht',
+        zeilen: [
+          { kriterium: 'Stichtag', a: 'Heirat ab dem 01.01.2002 oder beide Partner jünger als Baujahr 1962 — maßgeblich ist der spätere Zeitpunkt', b: 'Heirat vor 2002 und mindestens ein Partner vor 1962 geboren' },
+          { kriterium: 'Große Witwenrente', a: '55 % der Rente des Verstorbenen', b: '60 % der Rente des Verstorbenen' },
+          { kriterium: 'Kleine Witwenrente', a: 'auf 24 Monate befristet', b: 'unbefristet gezahlt' },
+          { kriterium: 'Einkommensanrechnung', a: 'gilt unverändert über den rentenwertgekoppelten Freibetrag', b: 'gilt nach denselben Regeln' },
+          { kriterium: 'Sterbevierteljahr', a: 'erste 3 Monate volle Rente des Verstorbenen, anrechnungsfrei', b: 'identisch — erste 3 Monate volle Rente, anrechnungsfrei' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: große Witwenrente, eigenes Netto 1.800 €, kein Kind',
+        schritte: [
+          { label: 'Grundanspruch (55 % von 1.500 € Rente des Verstorbenen)', formel: '1.500 € × 55 %', ergebnis: '825 €' },
+          { label: 'Grundfreibetrag (26,4 × Rentenwert 42,52 €)', formel: '26,4 × 42,52 €', ergebnis: '1.122,53 €' },
+          { label: 'Anrechenbares Einkommen', formel: '1.800 € − 1.122,53 €', ergebnis: '677,47 €' },
+          { label: 'Abzug (40 % des anrechenbaren Einkommens)', formel: '677,47 € × 40 %', ergebnis: '270,99 €' },
+          { label: 'Auszahlung pro Monat (ab 01.07.2026)', formel: '825 € − 270,99 €', ergebnis: '≈ 554 €' },
+        ],
+        fazit: 'Ab dem 1. Juli 2026 werden hier rund 554 € pro Monat ausgezahlt. Bis zum 30. Juni 2026 gilt der niedrigere Rentenwert 40,79 € (Freibetrag 1.076,86 €), wodurch sich ein etwas kleinerer Freibetrag und damit eine Auszahlung von rund 536 € ergibt. Der höhere Rentenwert ab Juli erhöht den Freibetrag und damit – etwas paradox – netto die Witwenrente, obwohl der Grundanspruch von 825 € unverändert bleibt. Der Rechner verwendet stets den am jeweiligen Tag geltenden Rentenwert und stellt deshalb ab dem 1. Juli 2026 automatisch auf den höheren Betrag um, ohne dass etwas zu tun ist.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Rentenwert steigt zum 1. Juli 2026',
+        text: 'Zum 1. Juli 2026 steigt der aktuelle Rentenwert von 40,79 € auf 42,52 € (+4,24 %, Rentenwertbestimmungsverordnung 2026). Das wirkt sich direkt auf die Witwenrente aus, weil der Freibetrag der Einkommensanrechnung an den Rentenwert gekoppelt ist: Er steigt von 26,4 × 40,79 € = 1.076,86 € auf 26,4 × 42,52 € = 1.122,53 € pro Monat. Je Kind erhöht sich der Freibetrag zusätzlich von 5,6 × 40,79 € = 228,42 € auf 5,6 × 42,52 € = 238,11 €. Ein höherer Freibetrag bedeutet weniger anrechenbares Einkommen — und damit eine etwas höhere Auszahlung. Im Beispiel oben steigt die Rente dadurch von rund 536 € (bis 30.06.2026) auf rund 554 € (ab 01.07.2026). Der Grundanspruch von 825 € selbst bleibt unverändert; nur die geringere Anrechnung führt zur höheren Auszahlung. Der Rechner schaltet automatisch auf den jeweils geltenden Stand um.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Einkommensanrechnung nach eigenem Netto (große Rente, kein Kind, ab 01.07.2026)',
+        kopf: ['Eigenes Netto', 'Über Freibetrag (1.122,53 €)', 'Abzug (40 %)', 'Witwenrente / Monat'],
+        zeilen: [
+          ['0 €', '0 €', '0 €', '825 €'],
+          ['1.000 €', '0 € (unter Freibetrag)', '0 €', '825 €'],
+          ['1.500 €', '377,47 €', '150,99 €', '≈ 674 €'],
+          ['1.800 €', '677,47 €', '270,99 €', '≈ 554 €'],
+          ['2.500 €', '1.377,47 €', '550,99 €', '≈ 274 €'],
+          ['3.000 €', '1.877,47 €', '750,99 €', '≈ 74 €'],
+        ],
+        fussnote: 'Solange das eigene Netto unter dem Freibetrag von 1.122,53 € liegt, wird die Witwenrente nicht gekürzt — die ersten beiden Tabellenzeilen zeigen das. Erst darüber werden 40 % des übersteigenden Betrags angerechnet. Bei diesem Beispiel (Grundanspruch 825 €) sinkt die große Witwenrente ab einem eigenen Nettoeinkommen von rund 3.185 € auf null. Mit Kindern verschiebt sich diese Grenze durch den höheren Freibetrag nach oben. Alle Werte mit dem Rentenwert 42,52 € (ab 01.07.2026) berechnet; bis 30.06.2026 fallen die Auszahlungen wegen des kleineren Freibetrags geringfügig niedriger aus.',
+      },
+      {
+        typ: 'text',
+        titel: 'Einkommensanrechnung nach § 97 SGB VI',
+        html: `<p>Eigenes Einkommen der hinterbliebenen Person wird auf die Witwenrente angerechnet — aber nur, soweit es einen <strong>Freibetrag</strong> übersteigt. Der Grundfreibetrag beträgt das <strong>26,4-Fache des aktuellen Rentenwerts</strong>, je <strong>waisenrentenberechtigtem Kind</strong> unter 18 Jahren kommt das 5,6-Fache hinzu. Vom Einkommen oberhalb des Freibetrags werden <strong>40 Prozent</strong> abgezogen und von der Witwenrente abgesetzt — höchstens jedoch bis auf null. Während des Sterbevierteljahres findet diese Anrechnung noch nicht statt.</p><p>Als anrechenbares Einkommen zählen insbesondere <strong>eigene Renten, Erwerbseinkommen, Lohnersatzleistungen und Vermögenserträge</strong> wie Mieteinnahmen — und zwar als pauschaliertes Netto, das aus dem Brutto über gesetzliche Pauschalen ermittelt wird. <strong>Nicht</strong> angerechnet werden dagegen Kindergeld und der Grundrentenzuschlag. Weil der Freibetrag an den Rentenwert gekoppelt ist, profitieren Hinterbliebene automatisch von jeder Rentenanpassung — steigt der Rentenwert, steigt der Freibetrag und damit die ausgezahlte Rente. Ändert sich das eigene Einkommen dauerhaft, muss das der Rentenversicherung gemeldet werden; sie prüft das anrechenbare Einkommen einmal jährlich neu. Wer die eigene Rente als Teil dieses Einkommens grob schätzen will, kann das mit dem <a href="/finanzen/rentenrechner">Rentenrechner</a> tun.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Sterbevierteljahr: erste 3 Monate volle Rente',
+        text: 'In den ersten drei Kalendermonaten nach dem Todesfall — dem sogenannten Sterbevierteljahr nach § 67 SGB VI — wird die volle Rente des Verstorbenen weitergezahlt, also 100 % und ganz ohne Einkommensanrechnung. Bei einer Rente des Verstorbenen von 1.500 € sind das 3 × 1.500 € = 4.500 € für das erste Vierteljahr. Erst ab dem vierten Monat greift die reguläre Berechnung mit 55 % bzw. 25 % und der Einkommensanrechnung — die Auszahlung fällt dann deutlich, was viele Hinterbliebene überrascht. Die Deutsche Rentenversicherung zahlt das Sterbevierteljahr auf Antrag oft als Vorschuss in einer Summe aus, damit die finanzielle Umstellung leichter fällt. Den Vorschuss kann man unmittelbar nach dem Todesfall direkt bei der Rentenstelle oder über eine Niederlassung der Deutschen Post beantragen, noch bevor der eigentliche Rentenantrag vollständig bearbeitet ist.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Wie Kinder die Auszahlung erhöhen (gleicher Fall, ab 01.07.2026)',
+        spalteA: 'Ohne Kind',
+        spalteB: 'Mit 2 Kindern unter 18',
+        zeilen: [
+          { kriterium: 'Grundfreibetrag', a: '1.122,53 € (26,4 × Rentenwert 42,52 €)', b: '1.122,53 € (derselbe Grundfreibetrag)' },
+          { kriterium: 'Kinder-Zuschlag', a: 'kein Zuschlag, da kein Kind unter 18', b: '+ 476,22 € (2 × 5,6 × 42,52 € für zwei Kinder)' },
+          { kriterium: 'Freibetrag gesamt', a: '1.122,53 €', b: '1.598,75 € — deutlich höher' },
+          { kriterium: 'Anrechenbares Einkommen (bei 1.800 € Netto)', a: '677,47 € über dem Freibetrag', b: 'nur 201,25 € über dem Freibetrag' },
+          { kriterium: 'Auszahlung / Monat', a: '≈ 554 € nach Anrechnung', b: '≈ 745 € — rund 191 € mehr durch den Kinder-Zuschlag' },
+        ],
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Witwenrente beantragen — Schritt für Schritt',
+        punkte: [
+          'Den Antrag bei der Deutschen Rentenversicherung stellen — die Rente wird nicht automatisch gezahlt.',
+          'Den Sterbevierteljahr-Vorschuss frühzeitig beantragen (bei der Rentenstelle oder über die Post), um die ersten Monate finanziell zu überbrücken.',
+          'Innerhalb von 12 Monaten nach dem Todesfall beantragen — dann wird rückwirkend ab dem Todestag gezahlt; bei späteren Anträgen höchstens 12 Monate rückwirkend.',
+          'Unterlagen bereithalten: Sterbeurkunde, Heiratsurkunde bzw. Lebenspartnerschaftsurkunde, Versicherungsverlauf und Rentenbescheid des Verstorbenen, eigene Einkommensnachweise.',
+          'Eigenes Einkommen korrekt angeben — es bestimmt die Anrechnung; dauerhafte Änderungen (z. B. neue Erwerbstätigkeit oder Renteneintritt) der Rentenversicherung melden, da sie das anrechenbare Einkommen jährlich überprüft.',
+          'Die Steuerpflicht beachten: Die Witwenrente unterliegt wie die eigene Rente der nachgelagerten Besteuerung mit über die Jahre steigendem Besteuerungsanteil — bei höherem Gesamteinkommen kann eine Steuererklärung erforderlich werden.',
+          'Bei Wiederheirat erlischt der Anspruch; stattdessen wird eine Abfindung in Höhe von 24 Monatsrenten gezahlt — diesen Sonderfall vorab einplanen.',
+        ],
+      },
+      {
+        typ: 'statistik',
+        titel: 'Witwenrente 2026 auf einen Blick',
+        werte: [
+          { label: 'Große Witwenrente', wert: '55 % / 60 %', hinweis: 'neues / altes Recht der Rente des Verstorbenen (§ 46 SGB VI)' },
+          { label: 'Kleine Witwenrente', wert: '25 %', hinweis: 'im neuen Recht auf max. 24 Monate befristet' },
+          { label: 'Einkommensanrechnung', wert: '40 %', hinweis: 'des pauschalierten Nettos über dem Freibetrag (§ 97 SGB VI)' },
+          { label: 'Grundfreibetrag', wert: '26,4 × Rentenwert', hinweis: '1.076,86 € bis 30.06. / 1.122,53 € ab 01.07.2026' },
+          { label: 'Rentenwert 2026', wert: '40,79 € → 42,52 €', hinweis: 'Anpassung zum 01.07.2026 (+4,24 %, § 68 SGB VI)' },
+          { label: 'Sterbevierteljahr', wert: '3 Monate', hinweis: 'volle Rente des Verstorbenen, ganz ohne Einkommensanrechnung' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Die Witwenrente deckt nur einen Teil — eigene Vorsorge bleibt wichtig',
+        html: `<p>Die Witwenrente ersetzt mit 55 % (oder 25 %) der Verstorbenen-Rente nur einen <strong>Teil</strong> des weggefallenen Einkommens, und die Einkommensanrechnung kann sie bei eigenem Verdienst weiter schmälern — bis hin zu null. Gerade bei jüngeren Hinterbliebenen mit eigenem Einkommen bleibt deshalb oft eine spürbare Lücke, zumal die kleine Witwenrente im neuen Recht nach zwei Jahren ohnehin endet. Eine eigene <strong>Altersvorsorge</strong> und eine ausreichende Absicherung gegen den Todesfall (etwa eine Risikolebensversicherung) sind daher wichtig, um nicht allein auf die Hinterbliebenenrente angewiesen zu sein.</p><p>Reicht die Witwenrente nicht aus, kann ergänzend <a href="/finanzen/buergergeld-rechner">Grundsicherung</a> im Alter und bei Erwerbsminderung in Betracht kommen, die nach denselben Regeln berechnet wird. Um Ihr verfügbares Netto als Ausgangsbasis der Anrechnung einzuschätzen, hilft der <a href="/finanzen/brutto-netto-rechner">Brutto-Netto-Rechner</a>. Beachten Sie außerdem, dass die Witwenrente wie die eigene Rente der Steuerpflicht unterliegt — je nach übrigem Einkommen kann eine Steuererklärung nötig werden. Dieser Rechner liefert eine unverbindliche Orientierung und ersetzt keine Rechts- oder Rentenberatung; verbindlich ist allein der Bescheid der Deutschen Rentenversicherung.</p>`,
+      },
+    ],
     faq: [
       { frage: 'Wie hoch ist die Witwenrente?', antwort: 'Die große Witwenrente beträgt 55 % (neues Recht, Heirat ab 2002) bzw. 60 % (altes Recht) der Rente des Verstorbenen. Die kleine Witwenrente beträgt 25 % und ist im neuen Recht auf 24 Monate befristet. In den ersten 3 Monaten nach dem Todesfall wird im Sterbevierteljahr die volle Rente des Verstorbenen gezahlt.' },
       { frage: 'Was ist der Unterschied zwischen großer und kleiner Witwenrente?', antwort: 'Die große Witwenrente wird gezahlt, wenn die hinterbliebene Person mindestens 47 Jahre alt ist, ein Kind unter 18 erzieht oder voll erwerbsgemindert ist. Sie wird unbefristet gezahlt. Die kleine Witwenrente gilt für alle anderen Fälle, beträgt nur 25 % und ist im neuen Recht auf 2 Jahre befristet.' },
-      { frage: 'Wie funktioniert die Einkommensanrechnung?', antwort: 'Eigenes Einkommen über dem Freibetrag (ca. 1.038 € plus 220 € pro Kind) wird zu 40 % auf die Witwenrente angerechnet. Beispiel: Bei 1.800 € Netto und 0 Kindern sind 762 € anrechenbar, davon 40 % = 305 € Abzug. Die Witwenrente wird um diesen Betrag gekürzt, mindestens aber auf 0 €.' },
+      { frage: 'Wie funktioniert die Einkommensanrechnung?', antwort: 'Eigenes Einkommen über dem Freibetrag (ca. 1.123 € plus 238 € pro Kind, Stand ab 01.07.2026) wird zu 40 % auf die Witwenrente angerechnet. Beispiel: Bei 1.800 € Netto und 0 Kindern sind 677 € anrechenbar, davon 40 % = 271 € Abzug. Die Witwenrente wird um diesen Betrag gekürzt, mindestens aber auf 0 €.' },
       { frage: 'Was ist das Sterbevierteljahr?', antwort: 'In den ersten 3 Monaten nach dem Todesfall erhält die Hinterbliebene die volle Rente des Verstorbenen (100 %), ohne Einkommensanrechnung. Das Sterbevierteljahr soll helfen, die finanzielle Umstellung zu bewältigen. Ab dem 4. Monat gelten dann die regulären 55 % bzw. 25 % mit Einkommensanrechnung.' },
       { frage: 'Was passiert bei Wiederheirat?', antwort: 'Bei Wiederheirat erlischt der Anspruch auf die Witwenrente. Als Einmalzahlung werden 24 Monatsrenten als Witwenrentenabfindung gezahlt. Wird die neue Ehe geschieden oder der neue Partner stirbt, kann die frühere Witwenrente als wiederauflebende Rente neu beantragt werden.' },
       { frage: 'Muss ich die Witwenrente beantragen?', antwort: 'Ja, die Witwenrente wird nicht automatisch ausgezahlt. Sie muss bei der Deutschen Rentenversicherung beantragt werden — am besten innerhalb von 12 Monaten nach dem Todesfall, dann wird rückwirkend ab dem Todestag gezahlt. Bei späteren Anträgen gibt es maximal 12 Monate Rückzahlung.' },
+    ],
+    quellen: [
+      { titel: '§ 46 SGB VI — Witwenrente und Witwerrente', url: 'https://www.gesetze-im-internet.de/sgb_6/__46.html', hinweis: 'große Witwenrente 55 % / 60 %, kleine 25 % (24 Monate im neuen Recht); Voraussetzungen.' },
+      { titel: '§ 97 SGB VI — Einkommensanrechnung auf Renten wegen Todes', url: 'https://www.gesetze-im-internet.de/sgb_6/__97.html', hinweis: 'Freibetrag 26,4 × Rentenwert (+ 5,6 × je Kind); 40 % des übersteigenden Nettoeinkommens.' },
+      { titel: '§ 67 SGB VI — Rentenartfaktoren (Sterbevierteljahr-Kontext)', url: 'https://www.gesetze-im-internet.de/sgb_6/__67.html', hinweis: 'erste 3 Monate volle Rente des Verstorbenen, anrechnungsfrei.' },
+      { titel: 'Bundesregierung — Rentenanpassung 2026', url: 'https://www.bundesregierung.de/breg-de/aktuelles/rentenanpassung-2026-2337000', hinweis: 'aktueller Rentenwert steigt zum 01.07.2026 von 40,79 € auf 42,52 € (+4,24 %).' },
     ],
   },
   {
