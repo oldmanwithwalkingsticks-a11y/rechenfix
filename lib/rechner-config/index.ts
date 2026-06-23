@@ -168,6 +168,9 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  'kalorienverbrauch-rechner',
+  'internetgeschwindigkeit-rechner',
+  '1rm-rechner',
   'zucker-umrechner',
   'gefrierdauer-rechner',
   'alkoholgehalt-rechner',
