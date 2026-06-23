@@ -157,10 +157,10 @@ export default async function SocialBioHubPage() {
         >
           Alle {rechner.length} Rechner →
         </Link>
-        <div className="flex items-center justify-center gap-4 text-xs text-gray-500 dark:text-gray-400">
-          <Link href="/impressum" className="hover:underline">Impressum</Link>
+        <div className="flex items-center justify-center gap-4 text-sm text-gray-600 dark:text-gray-300">
+          <Link href="/impressum" className="underline underline-offset-2 hover:text-gray-800 dark:hover:text-white">Impressum</Link>
           <span aria-hidden="true">·</span>
-          <Link href="/datenschutz" className="hover:underline">Datenschutz</Link>
+          <Link href="/datenschutz" className="underline underline-offset-2 hover:text-gray-800 dark:hover:text-white">Datenschutz</Link>
         </div>
       </footer>
     </div>
