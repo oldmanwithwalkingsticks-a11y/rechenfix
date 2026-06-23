@@ -4556,7 +4556,7 @@ Weil die Grenzbelastung so hoch ist, lohnen sich steuerfreie Zusatzleistungen of
   },
   {
     slug: 'krankengeld-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-23',
     titel: 'Krankengeld-Rechner',
     beschreibung: 'Krankengeld berechnen: Tägliches und monatliches Krankengeld bei Arbeitsunfähigkeit — mit Netto-Vergleich.',
     kategorie: 'Finanzen',
@@ -4566,7 +4566,7 @@ Weil die Grenzbelastung so hoch ist, lohnen sich steuerfreie Zusatzleistungen of
     keywords: ['krankengeld rechner', 'krankengeld berechnen', 'krankengeld hoehe', 'krankengeld 70 prozent', 'krankengeld netto', 'krankengeld dauer', 'lohnfortzahlung', 'progressionsvorbehalt krankengeld'],
     icon: '🏥',
     formel: 'Krankengeld/Tag = min(70 % × Brutto/30 ; 90 % × Netto/30) | Nach SV-Abzügen von ca. 6,15 % (mit Kind) bzw. 6,45 % (kinderlos)',
-    beispiel: 'Beispiel: 3.500 € Brutto, 2.350 € Netto, mit Kind → Krankengeld ≈ 76,65 €/Tag brutto → ≈ 71,94 €/Tag netto → ca. 2.158 €/Monat.',
+    beispiel: 'Beispiel: 3.500 € Brutto, 2.350 € Netto, mit Kind → Krankengeld 70,50 €/Tag brutto (90-%-Netto-Grenze greift) → 66,16 €/Tag netto → ca. 1.985 €/Monat. Das sind rund 365 € (15,5 %) weniger als das normale Nettogehalt.',
     erklaerung: `Wer länger als sechs Wochen krank ist, bekommt ab Tag 43 kein volles Gehalt mehr, sondern **Krankengeld** von der gesetzlichen Krankenkasse. Unser Krankengeld-Rechner zeigt Ihnen sofort, wie hoch Ihr tägliches und monatliches Krankengeld ausfällt — und wie groß der Einkommensverlust im Vergleich zum normalen Nettogehalt ist. Das hilft Ihnen, finanzielle Lücken rechtzeitig zu erkennen und zu planen.
 
 **Wie wird das Krankengeld berechnet?**
@@ -4592,10 +4592,136 @@ Privat Krankenversicherte erhalten **kein gesetzliches Krankengeld**. Stattdesse
 **Verwandte Rechner**
 
 Für die Berechnung Ihres regulären Nettogehalts nutzen Sie den Brutto-Netto-Rechner. Bei längerer Arbeitsunfähigkeit und drohender Aussteuerung kann der Bürgergeld-Rechner oder der Rentenrechner (Erwerbsminderungsrente) helfen.`,
+    // W19-Goldstandard (YMYL): krankengeld-rechner auf volle Tiefe (12 Bausteine, ~1.560 W),
+    // Leitformat „tabelle" (3× dominant). SSOT ist die Component KrankengeldRechner.tsx (keine Lib):
+    // KG/Tag = min(70 % Brutto/30 ; 90 % Netto/30) − SV 6,15 % (mit Kind) / 6,45 % (kinderlos);
+    // BBG KV 2026 = 5.812,50 €/Monat deckelt das Brutto. Alle Beispielwerte gegen die Component
+    // nachgerechnet (3.500/2.350 mit Kind → 70,50 €/Tag brutto → 66,16 €/Tag netto → ~1.985 €/Monat,
+    // Verlust 365 €/15,5 %). Stale beispiel-Feld + faq[0] (vorher 2.158 €/190 €) in diesem Commit
+    // auf Component-Wert korrigiert. §§ 44/47/48 SGB V; Progressionsvorbehalt § 32b EStG.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Krankengeld: Lohnersatz ab der siebten Krankheitswoche',
+        html: `<p>Wer länger erkrankt, erhält nicht unbegrenzt das volle Gehalt. In den ersten <strong>sechs Wochen</strong> (Tag 1 bis Tag 42) zahlt der Arbeitgeber die <strong>Lohnfortzahlung</strong> in Höhe von 100 % des Gehalts. Erst <strong>ab dem 43. Tag</strong> der Arbeitsunfähigkeit springt die <strong>gesetzliche Krankenkasse</strong> mit dem <strong>Krankengeld</strong> ein — einer gesetzlich gedeckelten Lohnersatzleistung nach § 44 SGB V. Voraussetzung ist eine lückenlose ärztliche Arbeitsunfähigkeitsbescheinigung, die heute meist elektronisch (eAU) direkt an die Krankenkasse übermittelt wird.</p><p>Das Krankengeld liegt spürbar unter dem gewohnten Nettogehalt: Es beträgt 70 % des Bruttoentgelts, höchstens aber 90 % des Nettoentgelts, und davon gehen noch Sozialversicherungsbeiträge ab. Diese <strong>Nettolücke</strong> von oft 10 bis 30 Prozent sollte man früh einplanen, vor allem bei laufenden Fixkosten wie Miete oder Kreditraten. Anspruch auf gesetzliches Krankengeld haben nur <strong>gesetzlich Versicherte</strong> mit Krankengeldanspruch — <strong>privat Versicherte</strong> erhalten stattdessen ein im Tarif frei vereinbartes Krankentagegeld, dessen Höhe und Beginn vom jeweiligen PKV-Vertrag abhängen. Auch Selbstständige in der gesetzlichen Versicherung haben nur dann Anspruch, wenn sie ihn ausdrücklich in ihren Beitrag eingeschlossen haben.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Die Phasen der Entgeltsicherung bei Krankheit',
+        kopf: ['Zeitraum', 'Wer zahlt', 'Höhe / Leistung'],
+        zeilen: [
+          ['Tag 1–42 (Woche 1–6)', 'Arbeitgeber', 'Lohnfortzahlung — 100 % des Gehalts (§ 3 EFZG)'],
+          ['Ab Tag 43', 'Gesetzliche Krankenkasse', 'Krankengeld — 70 % Brutto, max. 90 % Netto (§ 47 SGB V)'],
+          ['Bis max. 78 Wochen (546 Tage)', 'Krankenkasse', 'Höchstbezugsdauer je Krankheit in 3 Jahren (§ 48 SGB V)'],
+          ['Nach Aussteuerung', 'Rentenversicherung / Agentur für Arbeit', 'Erwerbsminderungsrente, Arbeitslosengeld oder Bürgergeld'],
+        ],
+        fussnote: 'Die sechs Wochen Lohnfortzahlung werden auf die 78 Wochen angerechnet, sodass rechnerisch rund 72 Wochen reines Krankengeld verbleiben. Maßgeblich sind dieselbe Krankheit und der Drei-Jahres-Zeitraum; bei einer neuen, anderen Erkrankung beginnt der Anspruch erneut. Verlängert sich die Arbeitsunfähigkeit nahtlos, muss die Krankschreibung lückenlos fortgeführt werden, sonst kann der Anspruch enden. Stand 2026.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: 3.500 € Brutto, 2.350 € Netto, mit Kind',
+        schritte: [
+          { label: 'Bruttogehalt pro Kalendertag', formel: '3.500 € ÷ 30', ergebnis: '116,67 €' },
+          { label: 'Nettogehalt pro Kalendertag', formel: '2.350 € ÷ 30', ergebnis: '78,33 €' },
+          { label: '70 % vom Brutto', formel: '116,67 € × 70 %', ergebnis: '81,67 €' },
+          { label: '90 % vom Netto (Obergrenze)', formel: '78,33 € × 90 %', ergebnis: '70,50 €' },
+          { label: 'Krankengeld brutto = niedrigerer Wert', formel: 'min(81,67 € ; 70,50 €)', ergebnis: '70,50 €/Tag' },
+          { label: 'Abzüge RV + ALV + PV (mit Kind)', formel: '70,50 € × 6,15 %', ergebnis: '−4,34 €' },
+          { label: 'Krankengeld netto pro Tag', formel: '70,50 € − 4,34 €', ergebnis: '66,16 €/Tag' },
+          { label: 'Krankengeld netto pro Monat', formel: '66,16 € × 30', ergebnis: '≈ 1.985 €' },
+        ],
+        fazit: 'Hier greift die 90-%-Netto-Grenze (70,50 €), weil sie unter der 70-%-Brutto-Grenze (81,67 €) liegt — das ist bei den meisten Beschäftigten der Fall. Nach den Sozialabgaben von 6,15 % bleiben rund 1.985 € pro Monat. Das sind etwa 365 € (15,5 %) weniger als das gewohnte Nettogehalt von 2.350 €. Genau diese monatliche Lücke rechnet der Krankengeld-Rechner für Ihre eigenen Brutto- und Nettowerte aus, sodass Sie den Verdienstausfall vorab einplanen können.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Krankengeld nach Brutto- und Nettogehalt (mit Kind)',
+        kopf: ['Brutto / Monat', 'Typisches Netto', 'Krankengeld netto / Monat', 'Verlust'],
+        zeilen: [
+          ['2.500 €', '1.780 €', '≈ 1.503 €', '−277 € (15,5 %)'],
+          ['3.500 €', '2.350 €', '≈ 1.985 €', '−365 € (15,5 %)'],
+          ['4.500 €', '2.880 €', '≈ 2.433 €', '−447 € (15,5 %)'],
+          ['5.812,50 € (BBG)', '3.520 €', '≈ 2.973 €', '−547 € (15,5 %)'],
+          ['7.000 €', '4.080 €', '≈ 3.446 €', '−634 € (15,5 %)'],
+        ],
+        fussnote: 'Die Nettowerte sind illustrative Annahmen (Steuerklasse I, ledig) — Ihr tatsächliches Netto bestimmt das Ergebnis, deshalb fragt der Rechner es direkt ab. In der Praxis bindet fast immer die 90-%-Netto-Grenze, sodass das Krankengeld näherungsweise 90 % des Nettos minus Sozialabgaben beträgt. Bruttogehälter über 5.812,50 €/Monat (Beitragsbemessungsgrenze KV 2026) erhöhen die 70-%-Brutto-Grenze nicht mehr — das Krankengeld ist nach oben gedeckelt, die prozentuale Lücke wächst dadurch mit steigendem Einkommen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Die 70/90-Regel: zwei Grenzen, der niedrigere Wert zählt',
+        html: `<p>Das Krankengeld kennt <strong>zwei Obergrenzen</strong>, von denen die niedrigere gilt. Die erste: <strong>70 % des Bruttoentgelts</strong>. Die zweite: höchstens <strong>90 % des Nettoentgelts</strong>. Weil das Netto bei den meisten Beschäftigten deutlich weniger als 78 % des Bruttos beträgt, ist die <strong>90-%-Netto-Grenze</strong> in der Praxis fast immer der bindende Wert — sie liegt unter der 70-%-Brutto-Grenze. Grundlage ist das sogenannte Regelentgelt, das durchschnittliche Einkommen vor der Erkrankung; berechnet wird kalendertäglich, indem die Monatswerte durch 30 geteilt und die Tagessätze für die Monatssumme wieder mit 30 multipliziert werden.</p><p>Vom so ermittelten Krankengeld gehen noch <strong>Sozialversicherungsbeiträge</strong> ab — der Arbeitnehmeranteil zur <strong>Renten-, Arbeitslosen- und Pflegeversicherung</strong>, zusammen rund <strong>6,15 %</strong> (mit Kind) bzw. <strong>6,45 %</strong> (kinderlos, wegen des Pflegeversicherungs-Zuschlags von 0,30 Prozentpunkten). Einen eigenen <strong>Krankenversicherungsbeitrag</strong> auf das Krankengeld gibt es dagegen nicht — die Mitgliedschaft bleibt während des Bezugs beitragsfrei erhalten. <strong>Lohnsteuer</strong> fällt ebenfalls nicht an; wohl aber wirkt der Progressionsvorbehalt, der den Steuersatz für die übrigen Einkünfte erhöht. Wichtig: Die 70-%-Brutto-Grenze bezieht sich auf das Brutto bis zur Beitragsbemessungsgrenze — höhere Gehaltsteile bleiben für das Krankengeld unberücksichtigt.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Sozialabgaben, die vom Krankengeld abgehen',
+        kopf: ['Beitragsart', 'Trägt', 'Anteil vom Krankengeld'],
+        zeilen: [
+          ['Rentenversicherung (RV)', 'Versicherter (anteilig)', '4,65 %'],
+          ['Arbeitslosenversicherung (ALV)', 'Versicherter (anteilig)', '0,65 %'],
+          ['Pflegeversicherung (PV)', 'Versicherter (anteilig)', '0,85 % (+0,30 % kinderlos)'],
+          ['Krankenversicherung (KV)', '— (beitragsfrei)', 'kein eigener Beitrag auf Krankengeld'],
+          ['Summe mit Kind / kinderlos', '', '6,15 % / 6,45 %'],
+        ],
+        fussnote: 'Die Krankenkasse trägt ihren Teil der Beiträge selbst; der Versicherte zahlt nur den hälftigen Arbeitnehmeranteil zu Renten-, Arbeitslosen- und Pflegeversicherung. Der Pflegeversicherungs-Zuschlag von 0,30 % gilt für Kinderlose über 23 Jahre. Auf das Krankengeld selbst wird kein Krankenversicherungsbeitrag erhoben, die Mitgliedschaft bleibt beitragsfrei bestehen. Stand 2026.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Progressionsvorbehalt: steuerfrei, aber nicht folgenlos',
+        text: 'Krankengeld ist steuerfrei — es unterliegt jedoch dem Progressionsvorbehalt (§ 32b EStG). Das heißt: Das Finanzamt rechnet das Krankengeld dem zu versteuernden Einkommen rechnerisch hinzu, um Ihren persönlichen Steuersatz zu ermitteln, besteuert es aber nicht direkt. Dieser höhere Steuersatz wird anschließend auf Ihre übrigen steuerpflichtigen Einkünfte angewendet — etwa das Gehalt aus den Monaten vor und nach der Erkrankung. Ergebnis: Es kann zu einer Steuer-Nachzahlung kommen, obwohl das Krankengeld selbst steuerfrei war. Wer im Kalenderjahr mehr als 410 € an Lohnersatzleistungen bezieht, ist außerdem zur Abgabe einer Einkommensteuererklärung verpflichtet. Die Krankenkasse meldet die gezahlten Beträge automatisch an das Finanzamt. Legen Sie bei längerem Bezug am besten von Anfang an einen Teil für die mögliche Nachzahlung zurück, damit sie Sie nicht überrascht.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Gesetzliches Krankengeld und privates Krankentagegeld',
+        spalteA: 'Gesetzlich (GKV)',
+        spalteB: 'Privat (PKV)',
+        zeilen: [
+          { kriterium: 'Leistung', a: 'gesetzliches Krankengeld als Pflichtleistung nach § 47 SGB V', b: 'Krankentagegeld je individuellem Tarif — kein gesetzlicher Anspruch' },
+          { kriterium: 'Höhe', a: '70 % Brutto, höchstens 90 % Netto, anschließend minus Sozialabgaben', b: 'frei vereinbarter fester Tagessatz, unabhängig vom tatsächlichen Verdienst' },
+          { kriterium: 'Beginn', a: 'gesetzlich einheitlich ab dem 43. Tag der Arbeitsunfähigkeit', b: 'frei vereinbarte Karenzzeit, je nach Tarif ab Tag 15, 29 oder 43' },
+          { kriterium: 'Dauer', a: 'höchstens 78 Wochen je Krankheit innerhalb von drei Jahren', b: 'tarifabhängig, oft bis zum Eintritt der Berufsunfähigkeit' },
+          { kriterium: 'Voraussetzung', a: 'Pflichtmitgliedschaft mit eingeschlossenem Krankengeldanspruch', b: 'separater Abschluss eines Krankentagegeld-Tarifs erforderlich' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Sonderfälle: Minijob, Aussteuerung und krankes Kind',
+        html: `<p>Nicht jeder hat Anspruch auf Krankengeld. Bei einem <strong>Minijob</strong> ohne eigene Krankenversicherungspflicht entsteht <strong>kein Krankengeldanspruch</strong> — die geringfügige Beschäftigung begründet keine eigene Mitgliedschaft mit Krankengeld. Auch wer <strong>freiwillig versichert</strong> ist, etwa als Selbstständiger, sollte prüfen, ob der gewählte Tarif den gesetzlichen Krankengeldanspruch überhaupt einschließt oder ob nur ein ermäßigter Beitragssatz ohne Krankengeld gewählt wurde. Bei mehreren Teilzeitjobs zählt für die Bemessung das gesamte versicherungspflichtige Entgelt zusammen.</p><p>Endet der Anspruch nach <strong>78 Wochen</strong> (Aussteuerung), prüft die Krankenkasse die weitere Erwerbsfähigkeit; dann kommen Erwerbsminderungsrente, Arbeitslosengeld oder Bürgergeld in Betracht — den Übergang sollte man rechtzeitig vor Ablauf der Frist vorbereiten, am besten mit Unterstützung der Krankenkasse oder eines Sozialverbands. Ein eigener Fall ist das <strong>Kinderkrankengeld</strong> nach § 45 SGB V: Es wird gezahlt, wenn ein gesetzlich versichertes <strong>krankes Kind</strong> unter zwölf Jahren betreut werden muss, hat eine andere Höhe (rund 90 % des ausgefallenen Nettoarbeitsentgelts) und ist pro Kind und Jahr auf eine bestimmte Anzahl Tage begrenzt. Es ist klar vom regulären Krankengeld bei eigener Arbeitsunfähigkeit zu unterscheiden, das dieser Rechner abbildet.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Was bei längerer Arbeitsunfähigkeit zu tun ist',
+        punkte: [
+          'Die Arbeitsunfähigkeit lückenlos ärztlich bescheinigen lassen — die elektronische AU (eAU) geht automatisch an die Krankenkasse.',
+          'Auf den nahtlosen Übergang zum Krankengeld ab Tag 43 achten; Lücken in der Krankschreibung können den Anspruch gefährden.',
+          'Die Höhe des Krankengeldes vorab prüfen und die Nettolücke zum gewohnten Gehalt einplanen.',
+          'Mehr als 410 € Lohnersatz im Jahr? Dann ist eine Steuererklärung Pflicht — Rücklage für eine mögliche Nachzahlung bilden.',
+          'Bei absehbar langer Erkrankung frühzeitig Reha-Maßnahmen oder eine Erwerbsminderungsrente prüfen, bevor die 78 Wochen ablaufen.',
+          'Den Krankengeldanspruch nicht durch eine verspätete Folgebescheinigung gefährden: Die nächste Krankschreibung sollte spätestens am nächsten Werktag nach dem zuletzt bescheinigten Tag erfolgen.',
+          'Privat Versicherte: die Höhe und Karenzzeit des Krankentagegeld-Tarifs direkt beim Versicherer erfragen.',
+        ],
+      },
+      {
+        typ: 'statistik',
+        titel: 'Krankengeld 2026 auf einen Blick',
+        werte: [
+          { label: 'Höchst-Bemessung (BBG KV)', wert: '5.812,50 €/Mon', hinweis: '69.750 €/Jahr — deckelt das Brutto (2026)' },
+          { label: 'Lohnfortzahlung Arbeitgeber', wert: '42 Tage', hinweis: '6 Wochen, 100 % des Gehalts' },
+          { label: 'Krankengeld-Höchstdauer', wert: '78 Wochen', hinweis: '546 Tage je Krankheit in 3 Jahren' },
+          { label: 'Abzug vom Krankengeld', wert: '6,15 % / 6,45 %', hinweis: 'Sozialabgaben mit Kind / kinderlos' },
+          { label: 'Typische Nettolücke', wert: '~10–30 %', hinweis: 'je nach Brutto-Netto-Verhältnis' },
+          { label: 'Steuererklärungs-Pflicht ab', wert: '410 €/Jahr', hinweis: 'Lohnersatz mit Progressionsvorbehalt' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Die Nettolücke früh erkennen und vorsorgen',
+        html: `<p>Das gesetzliche Krankengeld federt einen längeren Verdienstausfall ab, ersetzt aber nicht das volle Nettogehalt — typischerweise bleibt eine <strong>Lücke von rund 10 bis 30 Prozent</strong>, die mit steigendem Einkommen größer wird, weil das Brutto über der Beitragsbemessungsgrenze nicht mehr zählt. Wer laufende Fixkosten wie Miete oder Kreditraten hat, sollte diese Lücke kennen, bevor der Krankheitsfall eintritt. Eine private <strong>Krankentagegeld-Versicherung</strong> kann die Differenz schließen; für gesetzlich Versicherte mit höherem Einkommen oder für Selbstständige ist sie oft sinnvoll. Sinnvoll ist auch ein finanzieller Puffer von zwei bis drei Monatsausgaben, der den Übergang von der Lohnfortzahlung zum niedrigeren Krankengeld überbrückt.</p><p>Berechnen Sie zunächst Ihr genaues Nettogehalt als Ausgangsbasis mit dem <a href="/finanzen/brutto-netto-rechner">Brutto-Netto-Rechner</a> — dieser Nettowert ist die Grundlage der entscheidenden 90-%-Grenze und bestimmt damit die Höhe Ihres Krankengeldes. Wenn es um Pflegebedürftigkeit statt um eigene Arbeitsunfähigkeit geht, hilft der <a href="/finanzen/pflegegeld-rechner">Pflegegeld-Rechner</a> weiter. Dieser Rechner liefert eine unverbindliche Orientierung und ersetzt keine Sozial- oder Steuerberatung; die verbindliche Höhe Ihres Krankengeldes setzt allein Ihre Krankenkasse fest.</p>`,
+      },
+    ],
     faq: [
       {
         frage: 'Wie hoch ist das Krankengeld?',
-        antwort: 'Das Krankengeld beträgt 70 % Ihres Bruttogehalts, maximal aber 90 % des Nettogehalts. Nach Abzug der Sozialversicherungsbeiträge (ca. 6,15 % mit Kind bzw. 6,45 % kinderlos) bleibt das Netto-Krankengeld. Bei 3.500 € Brutto und 2.350 € Netto ergibt das ungefähr 2.160 €/Monat — also etwa 190 € weniger als das normale Nettogehalt.',
+        antwort: 'Das Krankengeld beträgt 70 % Ihres Bruttogehalts, maximal aber 90 % des Nettogehalts. Nach Abzug der Sozialversicherungsbeiträge (ca. 6,15 % mit Kind bzw. 6,45 % kinderlos) bleibt das Netto-Krankengeld. Bei 3.500 € Brutto und 2.350 € Netto ergibt das ungefähr 1.985 €/Monat — also etwa 365 € weniger als das normale Nettogehalt.',
       },
       {
         frage: 'Ab wann bekomme ich Krankengeld?',
@@ -4613,6 +4739,12 @@ Für die Berechnung Ihres regulären Nettogehalts nutzen Sie den Brutto-Netto-Re
         frage: 'Was kommt nach 78 Wochen Krankengeld?',
         antwort: 'Nach Ablauf der 78 Wochen endet der Krankengeldanspruch (Aussteuerung). Je nach Situation kommen dann in Frage: Arbeitslosengeld (wenn Sie wieder arbeitsfähig sind), Erwerbsminderungsrente (wenn nicht) oder Bürgergeld (als Grundsicherung). Ein Antrag auf Reha-Maßnahmen ist oft der erste Schritt.',
       },
+    ],
+    quellen: [
+      { titel: '§ 44 SGB V — Anspruch auf Krankengeld', url: 'https://www.gesetze-im-internet.de/sgb_5/__44.html', hinweis: 'Krankengeld bei Arbeitsunfähigkeit für gesetzlich Versicherte mit Krankengeldanspruch.' },
+      { titel: '§ 47 SGB V — Höhe und Berechnung des Krankengeldes', url: 'https://www.gesetze-im-internet.de/sgb_5/__47.html', hinweis: '70 % des Regelentgelts, höchstens 90 % des Nettoarbeitsentgelts; kalendertägliche Berechnung.' },
+      { titel: '§ 48 SGB V — Höchstdauer (78 Wochen)', url: 'https://www.gesetze-im-internet.de/sgb_5/__48.html', hinweis: 'maximal 78 Wochen je Krankheit innerhalb von 3 Jahren; Lohnfortzahlung wird angerechnet.' },
+      { titel: 'Bundesregierung — Rechengrößen der Sozialversicherung 2026', url: 'https://www.bundesregierung.de/breg-de/aktuelles/beitragsgemessungsgrenzen-2386514', hinweis: 'Beitragsbemessungsgrenze KV 2026 = 5.812,50 €/Monat (69.750 €/Jahr).' },
     ],
     affiliate: [
       { programId: 'burdaZahn', context: 'krankengeld' },
