@@ -181,6 +181,11 @@ export default function KiRechnerClient() {
         </div>
       </div>
 
+      {/* KI-Transparenzhinweis (Art. 50 Abs. 1 KI-VO) */}
+      <p className="text-xs text-center text-gray-500 dark:text-gray-400">
+        Hinweis: Sie interagieren hier mit einem KI-System. Die Antworten werden automatisch generiert.
+      </p>
+
       {/* Beispiel-Fragen */}
       {verlauf.length === 0 && (
         <div>
@@ -272,7 +277,7 @@ export default function KiRechnerClient() {
 
       {/* Hinweis */}
       <p className="text-xs text-center text-gray-600 dark:text-gray-500">
-        KI-basierte Sch&auml;tzung &mdash; f&uuml;r pr&auml;zise Ergebnisse nutzen Sie den verlinkten Detailrechner. Max 3 Fragen pro Minute.
+        Die Antworten werden von einer KI erstellt und sind eine Sch&auml;tzung &mdash; f&uuml;r pr&auml;zise Ergebnisse nutzen Sie den verlinkten Detailrechner. Max 3 Fragen pro Minute.
       </p>
     </div>
   );
