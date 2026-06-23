@@ -3,12 +3,12 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Impressum',
-  description: 'Impressum von Rechenfix.de — Angaben gemäß § 5 TMG.',
+  description: 'Impressum von Rechenfix.de — Angaben gemäß § 5 DDG.',
   robots: { index: true, follow: true },
   alternates: { canonical: 'https://www.rechenfix.de/impressum' },
   openGraph: {
     title: 'Impressum',
-    description: 'Impressum von Rechenfix.de — Angaben gemäß § 5 TMG.',
+    description: 'Impressum von Rechenfix.de — Angaben gemäß § 5 DDG.',
     url: 'https://www.rechenfix.de/impressum',
     siteName: 'Rechenfix.de',
     type: 'website',
@@ -31,7 +31,7 @@ export default function ImpressumSeite() {
           {/* Anbieter */}
           <section>
             <h2 className="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">
-              Angaben gemäß § 5 TMG
+              Angaben gemäß § 5 DDG
             </h2>
             <p>Karsten Kautz</p>
             <p>rechenfix.de — Fix gerechnet!</p>
