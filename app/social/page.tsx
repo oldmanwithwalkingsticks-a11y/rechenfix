@@ -150,13 +150,18 @@ export default async function SocialBioHubPage() {
       </section>
 
       {/* Footer */}
-      <footer className="text-center pt-2 pb-4">
+      <footer className="text-center pt-2 pb-4 space-y-3">
         <Link
           href="/"
           className="inline-block text-base font-semibold text-primary-700 dark:text-primary-300 underline underline-offset-4"
         >
           Alle {rechner.length} Rechner →
         </Link>
+        <div className="flex items-center justify-center gap-4 text-xs text-gray-500 dark:text-gray-400">
+          <Link href="/impressum" className="hover:underline">Impressum</Link>
+          <span aria-hidden="true">·</span>
+          <Link href="/datenschutz" className="hover:underline">Datenschutz</Link>
+        </div>
       </footer>
     </div>
   );
