@@ -111,6 +111,34 @@ export default function ImpressumSeite() {
               .
             </p>
           </section>
+
+          {/* Social-Media-Kanäle */}
+          <section>
+            <h2 className="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">
+              Social-Media-Kanäle
+            </h2>
+            <p>
+              Dieses Impressum gilt auch für unsere Social-Media-Auftritte, insbesondere{' '}
+              <a
+                href="https://www.instagram.com/rechenfix/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary-600 dark:text-primary-400 underline"
+              >
+                Instagram (@rechenfix)
+              </a>{' '}
+              und{' '}
+              <a
+                href="https://www.facebook.com/profile.php?id=1127293363806857"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary-600 dark:text-primary-400 underline"
+              >
+                Facebook
+              </a>
+              .
+            </p>
+          </section>
         </div>
       </div>
     </div>
