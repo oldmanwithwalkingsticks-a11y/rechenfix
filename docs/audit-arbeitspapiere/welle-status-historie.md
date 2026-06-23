@@ -4,7 +4,52 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 23.06.2026
+**Stand:** 24.06.2026
+
+---
+
+## 24.06.2026 — W19 Goldstandard Component-only-Sozial-Untergruppe c1–c3 (Doku-Sync, 120 Goldstandard gemessen)
+
+Drei Sozialleistungs-Rechner OHNE eigene Lib — die **Component ist SSOT** (Logik + Konstanten im Component, wie
+k1 kapitalertragsteuer). Mini-Scoping `welle19-component-sozial-mini-scoping.md`. YMYL (SGB V / SGB III / SGB VI),
+Rolle des Portals = Betreiber. Contentbloecke-Set **120 Rechner** (gemessen). Alle Builds Vercel-grün.
+**Zentrale Lehre dieser Untergruppe:** Bei Component-only-Rechnern waren in ALLEN DREI Fällen statische
+Bestandsfelder (beispiel/erklaerung/faq) teilweise stale — die Pflicht-Vorprüfung „alle vier statischen Felder
+gegen die Component nachrechnen" (nicht nur beispiel) hat jedes Mal gegriffen und die stale Werte mitkorrigiert.
+
+- **c1 krankengeld-rechner** (finanzen.ts, tabelle-Leitformat 3×, 12 Blöcke, ~1.504 W, `34cf501`).
+  Krankengeld bei AU (§§ 44/47/48 SGB V). 70 % Brutto, gedeckelt auf 90 % Netto; BBG KV 2026 5.812,50 €;
+  Lohnfortzahlung 42 Tage, max. 78 Wochen/546 Tage; Progressionsvorbehalt; PKV → Krankentagegeld.
+  **Stale-Fix:** beispiel-Feld + faq[0] trugen 2.158 €/190 € statt component-true ~1.985 €/Monat, Verlust 365 €
+  (15,5 %) — der Fehler: die 90-%-Netto-Deckelung war im beispiel nicht angewandt (76,65 €/Tag = 0,7 × Brutto ohne
+  Deckel). Auf Component-Wert (min 70 % Brutto / 90 % Netto → 70,50 €/Tag → 66,16 € netto) korrigiert. formel +
+  erklaerung waren korrekt.
+- **c2 kurzarbeitergeld-rechner** (finanzen.ts, beispielrechnung-Leitformat 3×, 12 Blöcke, ~1.501 W, `8d8aab4`).
+  KuG (§§ 95/104/105 SGB III). 60 % / 67 % (mit Kind) der **Netto-Entgeltdifferenz** (Soll-Netto − Ist-Netto),
+  nicht % vom Brutto; steuerfrei mit Progressionsvorbehalt; keine Corona-Sondersätze (befristet, ausgelaufen).
+  **Stale-Fix:** beispiel-Feld + erklaerung trugen falsche Netto-Anker (Soll-Netto 2.260 €/Ist-Netto 1.240 €)
+  — mit der echten `berechneLohnsteuerJahr`-Lib (StKl I, 2026) nachgerechnet: korrekt 2.353 €/1.336 €
+  (+4,1 %/+7,8 % Abweichung). Pikant: Differenz/KuG/Verlust stimmten nur **zufällig**, weil sich die zwei
+  Netto-Fehler in der Subtraktion teilweise aufhoben. Auf Component-Werte (KuG 610 €, Gesamt 1.946 €) korrigiert.
+- **c3 witwenrente-rechner** (finanzen.ts, vergleich-Leitformat 3×, 12 Blöcke, ~1.503 W, `b023698`). ZEITKRITISCH.
+  Hinterbliebenenrente GRV (§§ 46/97/67 SGB VI). Groß 55 % (neu) / 60 % (alt), klein 25 % / 24 Mon. befristet;
+  Einkommensanrechnung 40 % über Freibetrag (26,4 × Rentenwert + 5,6 × RW je Kind); Sterbevierteljahr 3 × volle
+  Rente. **Rentenwert-Stichtag 01.07.2026:** 40,79 € → 42,52 € (+4,24 %, Rentenwertbestimmungsverordnung 2026,
+  Bundesrat 12.06.2026, § 68 SGB VI). Content nennt beide Stände; Hauptbeispiel future-proof (ab 01.07. = 554 €,
+  bis 30.06. = 536 € mitgenannt), Freibeträge 1.077 €/1.123 €. **Stale-Fix:** das beispiel-Feld war korrekt und
+  nannte bereits beide Stände — ABER ein separates Rechenbeispiel in der erklaerung + faq[2] trugen den stale
+  2024er-Rentenwert (39,32 € → Freibetrag 1.038 €, Auszahlung 520 €) und widersprachen sogar dem korrekten
+  Anrechnungs-Absatz der erklaerung selbst. Auf ab-01.07.2026-Stand korrigiert.
+
+**Untergruppe KOMPLETT:** krankengeld, kurzarbeitergeld, witwenrente. Jeder eigenes Leitformat
+(tabelle / beispielrechnung / vergleich). Bestätigte Lehren: (1) Component-only → Component ist SSOT, vor Bau lesen;
+(2) ALLE vier statischen Felder (beispiel/formel/erklaerung/faq) gegen die Component nachrechnen, nicht nur beispiel —
+stale Werte saßen mal in beispiel/faq (c1), mal in Netto-Ankern (c2), mal in einem separaten erklaerung-Rechenbeispiel
+(c3); (3) zeitkritische Stichtagswerte → beide Stände + future-proof Hauptbeispiel (witwenrente Rentenwert 01.07.2026).
+
+**Verbleibende Sozial-Slugs:** **wohngeld** Sonderfall (dokumentierter Architektur-Bug, zeigt Erklärseite statt
+Rechner — vor Bau mit Karsten klären). Danach Vorsorge/Sparen (etf-sparplan, rente, riester) und Rest-Steuer
+(afa, mwst-rueckerstattung, gmbh-geschaeftsfuehrer, hochrechner, nettolohn-optimierer).
 
 ---
 
