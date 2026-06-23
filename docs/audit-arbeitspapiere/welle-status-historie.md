@@ -4,7 +4,53 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 22.06.2026
+**Stand:** 23.06.2026
+
+---
+
+## 23.06.2026 — W19 Goldstandard Sozialleistungen-Untergruppe p1–p3 (Doku-Sync, 117 Goldstandard gemessen)
+
+Drei Sozialleistungs-Rechner mit eigener Lib. Mini-Scoping `welle19-sozialleistungen-mini-scoping.md`.
+YMYL-Auflage wie bisher (Lib gewinnt, § + gesetze-im-internet, Stichtag, keine Beratung, ALLE vier statischen
+config-Felder — beispiel/formel/erklaerung/faq — gegen Lib). Contentbloecke-Set **117 Rechner** (gemessen).
+Alle Builds Vercel-grün, Lint grün. **Neue Lehre dieser Untergruppe:** erstmals echte Lib-Datenfehler (p1)
+und falsch zitierte Rechtsgrundlage in Bestandsfeldern (p3) gefangen — Lib-Aktualität bei YMYL-Werten ist VOR
+dem Goldstandard-Bau gegen die Primärquelle zu prüfen, nicht erst beim Content.
+
+- **p1 pflegegeld-rechner** (finanzen.ts, tabelle-Leitformat 3×, 12 Blöcke, ~1.505 W, `632e774`).
+  Pflegegrade SGB XI. **Lib-Datenfix vorab `42baa69`** — erster echter Lib-Datenfehler der Welle:
+  `pflegegeld.ts` trug durchgängig 2024er-Werte trotz Kommentar „2026". Korrigiert: Pflegegeld PG2–5
+  332/573/765/947 → **347/599/800/990**; Sachleistung 761/1.432/1.778/2.200 → **796/1.497/1.859/2.299**;
+  Stationär 125/770/1.262/1.775/2.005 → **131/805/1.319/1.855/2.096**; Entlastung 125 → **131**, Hilfsmittel
+  40 → **42**, Wohnraum 4.000 → **4.180**; VHP/KZP getrennt 1.612/1.774 → **gemeinsam 3.539** (§ 42a SGB XI seit
+  01.07.2025). Component-Hardcode „125 €" (2×) mit entfernt. **Lehre:** die alten Werte standen nicht nur im
+  beispiel-Feld, sondern auch in formel/erklaerung/faq — alle vier statischen Felder gegen Lib prüfen.
+- **p2 bafoeg-rechner** (finanzen.ts, beispielrechnung-Leitformat 3×, 12 Blöcke, ~1.500 W, `da2b1ad`).
+  Studierenden-BAföG (§§ 11–13 BAföG). **Kein Lib-Fix** — Lib-Stand 01.08.2024 ist korrekt: Höchstsatz 992 €,
+  Wohnpauschale 380 €. Die WS-2026/27-Erhöhung (Wohnpauschale 380 → 440 €, Höchstsatz ~1.052 €) ist
+  **politisch zugesagt, NICHT gesetzlich beschlossen** (Stand 06/2026, kein Gesetzentwurf) → Content nennt sie
+  nur als „geplant, nicht beschlossen". beispiel-Feld lib-true. Token-Abgrenzung zu Aufstiegs-BAföG bewusst
+  geschärft (Studium vs. Aufstiegsfortbildung).
+- **p3 aufstiegs-bafoeg-rechner** (finanzen.ts, vergleich-Leitformat 4×, 12 Blöcke, ~1.515 W, `3a70345`).
+  AFBG „Meister-BAföG". **Kein Lib-Werte-Fix** — Lib konsistent mit geltendem Recht (AFBG i.d.F. Art. 15 G v.
+  17.07.2023, gegen gesetze-im-internet geprüft). **Aber Rechtsgrundlagen-Korrektur in Bestandsfeldern:** die
+  falsche AFBG-Basis „29. BAföG-Änderungsgesetz" (das änderte BAföG, nicht AFBG) ist raus (0 Vorkommen im
+  SSR-HTML), korrekt zitiert §§ 10/12/13b AFBG + Bedarfskopplung § 13/§ 13a BAföG. Die Kabinetts-Reform 07/2024
+  (Lehrgangskosten 15.000 → 18.000 €, Zuschuss 50 → 60 %, KBZ 150 → 160 €) hat **keine parlamentarische
+  Mehrheit gefunden und ist nicht in Kraft** → als „geplant, nicht beschlossen" gekennzeichnet, SEO-Drittquellen
+  (Verabschiedung 2026) explizit als nicht gesetzlich gedeckt entkräftet. Probe-verifiziert: VZ 12.000 € →
+  6.000 € Zuschuss + 6.000 € Darlehen, Unterhalt 1.019 €, nach Bestehens-Erlass 3.000 €, bei Gründung 0 €;
+  1 Kind <14 → Bedarf 1.404 €; Deckelung 18.000 → 15.000 €.
+
+**Untergruppe KOMPLETT:** pflegegeld, bafoeg, aufstiegs-bafoeg. Jeder eigenes Leitformat (tabelle /
+beispielrechnung / vergleich). Zwei strukturelle Lehren bestätigt: (1) Lib-Aktualität bei YMYL VOR dem Bau
+gegen Primärquelle prüfen → ggf. Lib-Fix-Prompt zuerst (p1); (2) auch zitierte Rechtsgrundlagen in
+Bestands-Erklärtexten gegenprüfen, nicht nur Zahlen (p3).
+
+**Verbleibende Sozial-Slugs:** Component-only (krankengeld, kurzarbeitergeld, witwenrente — Component ist SSOT);
+**wohngeld** Sonderfall (dokumentierter Architektur-Bug, zeigt Erklärseite statt Rechner — vor Bau mit Karsten
+klären, ob Rechner werden soll oder Erklärseite bleibt). Danach Vorsorge/Sparen (etf-sparplan, rente, riester)
+und Rest-Steuer (afa, mwst-rueckerstattung, gmbh-geschaeftsfuehrer, hochrechner, nettolohn-optimierer).
 
 ---
 
