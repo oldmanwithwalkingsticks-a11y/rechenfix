@@ -71,9 +71,9 @@ const faq = [
       'Wohngeld wird grundsätzlich ab dem Ersten des Monats gezahlt, in dem der Antrag bei der Wohngeldbehörde eingegangen ist (§ 25 Abs. 2 WoGG). Eine Rückwirkung für frühere Monate gibt es nur in engen Ausnahmefällen — zum Beispiel wenn ein zuvor gestellter Antrag auf Bürgergeld abgelehnt wurde und der Wohngeldantrag noch im Folgemonat nachgereicht wird (§ 25 Abs. 3 WoGG), oder bei einer rückwirkenden Mieterhöhung von mehr als zehn Prozent (§ 27 WoGG). Für zurückliegende Monate ohne solche Ausnahmesituation entsteht kein Anspruch — ein zügiger Antrag ist daher wichtig.',
   },
   {
-    frage: 'Warum zeigt rechenfix.de aktuell keinen interaktiven Wohngeld-Rechner?',
+    frage: 'Warum verweist rechenfix.de für die Berechnung auf den BMWSB-Rechner?',
     antwort:
-      'Wir haben in unserer Berechnungslogik einen architektonischen Fehler bei Mehrpersonen-Haushalten identifiziert: Die Einkommensermittlung nach den §§ 14 bis 16 WoGG verlangt eine Berechnung pro Haushaltsmitglied mit individueller Werbungskostenpauschale, die unsere aktuelle Lib nicht abbildet. Anstatt möglicherweise falsche Werte anzuzeigen, bieten wir bis zum Relaunch im Juli 2026 diese Übersichtsseite an und verweisen für die verbindliche Berechnung auf den offiziellen Rechner des BMWSB.',
+      'Die Wohngeldberechnung verlangt eine Einkommensermittlung pro Haushaltsmitglied mit individueller Werbungskostenpauschale, eigenen Pauschalabzügen und Freibeträgen nach den §§ 14 bis 17 WoGG. Diese Pro-Person-Logik bildet der offizielle Wohngeldrechner des BMWSB exakt und verbindlich ab. Statt eine vereinfachte Eigenberechnung anzubieten, die im Mehrpersonen-Haushalt von der amtlichen Berechnung abweichen könnte, erklären wir hier dauerhaft die Grundlagen — Anspruch, Mietstufen, Höchstbeträge und Rechenweg — und verweisen für Ihr verbindliches Ergebnis auf den Rechner des Bundes.',
   },
 ];
 
@@ -116,10 +116,10 @@ export default function WohngeldErklaerseite() {
             className="card p-5 md:p-6 mb-6 border-2 border-amber-400 dark:border-amber-500/60 bg-amber-50 dark:bg-amber-500/10"
           >
             <p className="text-sm md:text-base text-amber-900 dark:text-amber-100 leading-relaxed">
-              <strong>Hinweis:</strong> Unser interaktiver Wohngeld-Rechner wird zum 01.07.2026
-              gemeinsam mit der Reform zur Neuen Grundsicherung grundlegend neu gelauncht. Bis dahin
-              finden Sie hier alle Informationen zum Wohngeld. Für Ihre verbindliche Berechnung
-              nutzen Sie bitte den{' '}
+              <strong>Hinweis:</strong> Diese Seite erklärt Ihnen Anspruch, Mietstufen,
+              Höchstbeträge und die Berechnung des Wohngelds, damit Sie Ihr Ergebnis einordnen
+              können. Für die <strong>verbindliche Berechnung Ihres individuellen
+              Wohngeldanspruchs</strong> nutzen Sie bitte den{' '}
               <a
                 href={BMWSB_WOHNGELDRECHNER_URL}
                 target="_blank"
@@ -127,8 +127,8 @@ export default function WohngeldErklaerseite() {
                 className="underline font-semibold text-amber-900 dark:text-amber-100 hover:text-amber-700 dark:hover:text-amber-200"
               >
                 offiziellen Wohngeldrechner des BMWSB
-              </a>
-              .
+              </a>{' '}
+              — er bildet die Einkommensermittlung pro Person und alle Freibeträge exakt ab.
             </p>
           </div>
 
@@ -270,6 +270,17 @@ export default function WohngeldErklaerseite() {
                 BGBl. 2024 I Nr. 314 (Dynamisierungsverordnung vom 21.10.2024, gültig seit
                 01.01.2025, unverändert 2026).
               </p>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed mt-4">
+                Zusätzlich zum Höchstbetrag erhöhen zwei Komponenten die berücksichtigungsfähige
+                Miete. Die <strong>Heizkostenkomponente</strong> nach § 12 Abs. 6 WoGG entlastet bei
+                den gestiegenen Energiekosten: Sie reicht von <strong>23,80 €</strong> monatlich für
+                einen Ein-Personen-Haushalt bis <strong>51,00 €</strong> bei fünf Personen
+                (je weitere Person zusätzlich 6,80 €). Die <strong>Klimakomponente</strong> nach
+                § 12 Abs. 7 WoGG berücksichtigt höhere Mieten in energetisch sanierten Gebäuden und
+                liegt zwischen <strong>19,20 €</strong> (eine Person) und <strong>41,20 €</strong>
+                {' '}(fünf Personen). Beide Beträge werden auf die anzusetzende Höchstmiete
+                aufgeschlagen, bevor die Wohngeldformel greift.
+              </p>
 
               <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mt-8 mb-3">
                 Wie wird Wohngeld berechnet?
@@ -317,13 +328,107 @@ export default function WohngeldErklaerseite() {
               </p>
 
               <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mt-8 mb-3">
+                Einkommensermittlung: vom Brutto zum wohngeldrechtlichen Einkommen
+              </h2>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
+                Maßgeblich ist nicht das Bruttoeinkommen, sondern das nach den §§ 13 bis 16 WoGG
+                <strong> bereinigte Jahreseinkommen</strong> aller Haushaltsmitglieder. Vom
+                Bruttoeinkommen jedes Mitglieds werden zunächst die <strong>Werbungskosten</strong>
+                abgezogen — bei Arbeitnehmern mindestens die Werbungskostenpauschale von
+                <strong> 102,50 € pro Monat</strong> (1.230 € im Jahr), sofern keine höheren Kosten
+                nachgewiesen werden.
+              </p>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                Anschließend mindern <strong>pauschale Abzüge</strong> das Einkommen: jeweils
+                <strong> 10 Prozent</strong> für die Entrichtung von Steuern, von Pflichtbeiträgen
+                zur Kranken- und Pflegeversicherung sowie von Pflichtbeiträgen zur
+                Rentenversicherung. Wer alle drei Pauschalen erfüllt — der typische
+                sozialversicherungspflichtige Arbeitnehmer —, kommt auf <strong>30 Prozent</strong>
+                Abzug; Rentner mit Kranken- und Pflegeversicherung, aber ohne Rentenbeitrag, auf
+                20 Prozent. Erst auf das so bereinigte Einkommen werden die Freibeträge nach
+                § 17 WoGG angerechnet.
+              </p>
+
+              <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mt-8 mb-3">
+                Freibeträge nach § 17 WoGG
+              </h2>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
+                Bestimmte Lebenslagen werden über zusätzliche Freibeträge berücksichtigt, die das
+                anzurechnende Einkommen weiter senken:
+              </p>
+              <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
+                <li>
+                  <strong>Menschen mit Schwerbehinderung</strong> (Grad der Behinderung von 100
+                  oder darunter bei häuslicher Pflegebedürftigkeit): <strong>1.800 € im Jahr</strong>
+                  {' '}(150 € im Monat) je betroffenem Haushaltsmitglied.
+                </li>
+                <li>
+                  <strong>Alleinerziehende</strong>: ein <strong>pauschaler Freibetrag von 1.320 €
+                  im Jahr</strong> (110 € im Monat) — anders als im Steuerrecht nicht pro Kind,
+                  sondern einmal je Haushalt.
+                </li>
+                <li>
+                  <strong>Kinder mit eigenem Erwerbseinkommen</strong> bis zur Vollendung des
+                  25. Lebensjahres: ein Freibetrag von bis zu 1.200 € im Jahr.
+                </li>
+              </ul>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed mt-3">
+                Einen allgemeinen Erwerbstätigen-Freibetrag wie beim Bürgergeld kennt das
+                Wohngeldrecht dagegen <strong>nicht</strong> — die Entlastung Erwerbstätiger erfolgt
+                allein über die genannten Pauschalabzüge von bis zu 30 Prozent.
+              </p>
+
+              <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mt-8 mb-3">
+                Vermögen: wann der Anspruch ausgeschlossen ist
+              </h2>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                Wohngeld setzt voraus, dass kein <strong>erhebliches Vermögen</strong> vorhanden ist
+                (§ 21 Nr. 3 WoGG). Als Richtwert der Wohngeld-Verwaltungsvorschrift gilt Vermögen
+                in der Regel ab rund <strong>60.000 € für das erste Haushaltsmitglied</strong> und
+                zusätzlich <strong>30.000 € für jedes weitere</strong> als erheblich. Selbst genutztes
+                Wohneigentum in angemessener Größe sowie übliches Hausrats- und
+                Altersvorsorgevermögen bleiben dabei unberücksichtigt. Die Vermögensgrenzen sind
+                damit deutlich großzügiger als beim Bürgergeld.
+              </p>
+
+              <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mt-8 mb-3">
+                Mietzuschuss und Lastenzuschuss für Eigentümer
+              </h2>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                Mieter erhalten Wohngeld als <strong>Mietzuschuss</strong>. Selbstnutzende
+                <strong> Eigentümer</strong> einer Wohnung oder eines Hauses können stattdessen einen
+                <strong> Lastenzuschuss</strong> beantragen — hier treten an die Stelle der Miete die
+                laufenden Belastungen aus Schuldzinsen, Tilgung und Bewirtschaftung, ebenfalls
+                begrenzt durch die Höchstbeträge nach § 12 WoGG. Die Berechnung folgt im Übrigen
+                denselben Regeln wie beim Mietzuschuss.
+              </p>
+
+              <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mt-8 mb-3">
+                Antrag, Zuständigkeit und Bewilligungszeitraum
+              </h2>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                Den Antrag stellen Sie bei der <strong>Wohngeldstelle</strong> Ihrer Stadt, Gemeinde
+                oder Ihres Landkreises; viele Kommunen bieten inzwischen Online-Anträge an. Wohngeld
+                wird ab dem <strong>Ersten des Antragsmonats</strong> gezahlt (§ 25 WoGG) — ein
+                verspäteter Antrag lässt sich nicht für zurückliegende Monate nachholen. Bewilligt
+                wird in der Regel ein <strong>Bewilligungszeitraum von zwölf Monaten</strong>; danach
+                ist ein Weiterleistungsantrag nötig. Ändern sich Einkommen, Miete oder
+                Haushaltsgröße wesentlich, ist das der Wohngeldstelle mitzuteilen, damit das
+                Wohngeld korrekt angepasst werden kann.
+              </p>
+
+              <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mt-8 mb-3">
                 Beispielrechnung
               </h2>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 Ein Single-Haushalt in Mietstufe IV mit 1.400 € Bruttoeinkommen aus
                 nichtselbständiger Arbeit und einer Kaltmiete von 500 € hat 2026 einen
                 Wohngeldanspruch von rund <strong>215 €</strong> monatlich (Wert nach offiziellem
-                BMWSB-Wohngeldrechner, Stand 22.04.2026).
+                BMWSB-Wohngeldrechner, Stand 22.04.2026). Vom Bruttoeinkommen werden dabei die
+                Werbungskostenpauschale und die Pauschalabzüge abgezogen, sodass das
+                wohngeldrechtliche Einkommen deutlich niedriger liegt als die 1.400 €. Dieser Wert
+                dient nur der <strong>Orientierung</strong>; verbindlich ist allein das Ergebnis des
+                offiziellen BMWSB-Wohngeldrechners für Ihre konkrete Konstellation.
               </p>
 
               <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mt-8 mb-4">
@@ -394,6 +499,64 @@ export default function WohngeldErklaerseite() {
                   .
                 </li>
               </ul>
+
+              <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mt-8 mb-3">
+                Quellen &amp; Rechtsgrundlagen
+              </h2>
+              <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
+                <li>
+                  <a
+                    href="https://www.gesetze-im-internet.de/wogg/__12.html"
+                    target="_blank"
+                    rel="noopener"
+                    className="text-primary-600 dark:text-primary-400 underline"
+                  >
+                    § 12 WoGG
+                  </a>{' '}
+                  — Höchstbeträge für Miete und Belastung (Anlage 1, Mietstufen I–VII).
+                </li>
+                <li>
+                  <a
+                    href="https://www.gesetze-im-internet.de/wogg/__19.html"
+                    target="_blank"
+                    rel="noopener"
+                    className="text-primary-600 dark:text-primary-400 underline"
+                  >
+                    § 19 WoGG
+                  </a>{' '}
+                  — Höhe des Wohngeldes; Berechnungsformel nach Anlage 2.
+                </li>
+                <li>
+                  <a
+                    href="https://www.gesetze-im-internet.de/wogg/__14.html"
+                    target="_blank"
+                    rel="noopener"
+                    className="text-primary-600 dark:text-primary-400 underline"
+                  >
+                    §§ 14–17 WoGG
+                  </a>{' '}
+                  — Einkommensermittlung, Werbungskosten, Pauschalabzüge und Freibeträge.
+                </li>
+                <li>
+                  <a
+                    href={BMWSB_WOHNGELDRECHNER_URL}
+                    target="_blank"
+                    rel="noopener"
+                    className="text-primary-600 dark:text-primary-400 underline"
+                  >
+                    BMWSB-Wohngeldrechner
+                  </a>{' '}
+                  — verbindliche Berechnung des Bundesministeriums für Wohnen, Stadtentwicklung und
+                  Bauwesen.
+                </li>
+              </ul>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-4">
+                Diese Seite bietet eine allgemeine Erläuterung zum Wohngeld und ersetzt keine
+                Rechts- oder Sozialberatung. Maßgeblich für Ihren Anspruch ist der Bescheid Ihrer
+                Wohngeldstelle; die verbindliche Berechnung leistet der offizielle
+                BMWSB-Wohngeldrechner. Stand der Werte: 2026 (Höchstbeträge unverändert seit
+                01.01.2025).
+              </p>
             </section>
           </div>
 

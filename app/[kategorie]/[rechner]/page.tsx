@@ -23,6 +23,9 @@ interface Props {
 // haben und deshalb NICHT unter der dynamischen Route gerendert werden sollen.
 // Statische Routen gewinnen zwar in Next.js gegen die dynamische Route, aber
 // der Ausschluss hier vermeidet doppelten Prerender und hält den Build schlank.
+// wohngeld-rechner ist ein INLINE-Goldstandard-Sonderfall (wie brutto-netto):
+// dauerhafte Erklärseite mit eigenem JSX, kein eigener Rechner (Verweis auf den
+// BMWSB-Rechner), nicht vom contentBloecke-Check-Skript gezählt.
 const STATISCHE_OVERRIDES = new Set<string>(['wohngeld-rechner']);
 
 // Rechner, die ihren Erklär-Text + FAQ inline in der Component rendern (W13.1.1+)
