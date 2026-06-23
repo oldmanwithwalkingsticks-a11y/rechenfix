@@ -58,12 +58,18 @@ export default function UeberUnsSeite() {
             so zugänglich machen, dass Sie in Sekunden eine belastbare Orientierung
             bekommen.
           </p>
-          <p>
+          <p className="mb-4">
             Eine Besonderheit von Rechenfix ist die KI-gestützte Erklärung
             („Fix erklärt&rdquo;): Auf Wunsch erläutert eine KI die Berechnung individuell für
-            Ihre konkreten Eingaben — die zugrundeliegenden Formeln und Werte sind
-            jedoch <strong>nicht KI-generiert</strong>, sondern manuell aus
-            Primärquellen gepflegt (siehe <Link href="/qualitaet" className="text-primary-600 dark:text-primary-400 hover:underline">Qualität &amp; Methodik</Link>).
+            Ihre konkreten Eingaben. Auch der <Link href="/ki-rechner" className="text-primary-600 dark:text-primary-400 hover:underline">KI-Rechner</Link> beantwortet Fragen live mit KI. Solche live erzeugten Antworten sind als KI-generiert gekennzeichnet.
+          </p>
+          <p>
+            <strong>Transparenz zum KI-Einsatz:</strong> Die zugrundeliegenden Formeln,
+            Berechnungslogiken und Rechtswerte sind <strong>nicht KI-generiert</strong>, sondern
+            manuell aus Primärquellen gepflegt und geprüft (siehe <Link href="/qualitaet" className="text-primary-600 dark:text-primary-400 hover:underline">Qualität &amp; Methodik</Link>).
+            Die erläuternden Texte und Themenabschnitte auf den Rechnerseiten entstehen
+            KI-gestützt, werden aber vor der Veröffentlichung redaktionell geprüft und
+            verantwortet — die inhaltliche Verantwortung liegt bei Karsten Kautz als Betreiber.
           </p>
         </div>
 
