@@ -2710,7 +2710,7 @@ Ergänzend können Sie mit dem **Zinsrechner** die Kraft des Zinseszins für Ihr
   },
   {
     slug: 'etf-sparplanrechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-25',
     titel: 'ETF-Sparplanrechner',
     beschreibung: 'ETF-Sparplan berechnen: Endkapital, Rendite und Vermögensentwicklung für Ihren monatlichen Sparplan simulieren.',
     kategorie: 'Finanzen',
@@ -2719,8 +2719,8 @@ Ergänzend können Sie mit dem **Zinsrechner** die Kraft des Zinseszins für Ihr
     metaDescription: 'ETF-Sparplan berechnen: Endkapital, Rendite und Vermögensentwicklung ✓ Dynamische Sparrate ✓ Nach Steuern ✓ Mit Diagramm ✓ KI-Erklärung.',
     keywords: ['etf sparplanrechner', 'etf sparplan berechnen', 'sparplan rendite rechner', 'etf rechner', 'sparplan rechner', 'etf rendite berechnen', 'vermögensaufbau rechner', 'msci world rechner'],
     icon: '📈',
-    formel: 'Endkapital = Einmalanlage × (1+r)^n + Sparrate × ((1+r)^n − 1) / r, wobei r = Monatsrendite, n = Monate',
-    beispiel: '200 €/Monat, 20 Jahre, 7 % Rendite → Einzahlungen: 48.000 € → Endkapital: ca. 104.000 € → Rendite: ca. 56.000 €',
+    formel: 'Monatsrendite r = (1 + p/100)^(1/12) − 1 (effektives Monatsäquivalent der Jahresrendite p). Endkapital monatlich nachschüssig: Kapitalₘ = Kapitalₘ₋₁ × (1 + r) + Sparrate, Start = Einmalanlage, n = Anlagejahre × 12 Monate.',
+    beispiel: '200 €/Monat, 20 Jahre, 7 % Rendite → Einzahlungen: 48.000 € → Endkapital: 101.507 € → Gewinn: 53.507 €',
     erklaerung: `**Was ist ein ETF-Sparplan und wie funktioniert er?**
 
 Ein ETF-Sparplan ist eine automatisierte Geldanlage, bei der Sie regelmäßig — meist monatlich — einen festen Betrag in einen börsengehandelten Indexfonds (Exchange Traded Fund) investieren. Der ETF bildet einen Aktienindex wie den **MSCI World**, den **S&P 500** oder den **DAX** nach und ermöglicht so eine breite Streuung über viele Unternehmen und Branchen. Durch die regelmäßigen Einzahlungen profitieren Anleger vom sogenannten **Cost-Average-Effekt** (Durchschnittskosteneffekt): Bei niedrigen Kursen werden automatisch mehr Anteile gekauft, bei hohen Kursen weniger. Über lange Zeiträume gleichen sich Kursschwankungen so tendenziell aus.
@@ -2741,7 +2741,7 @@ Diese Werte sind Durchschnittswerte. In einzelnen Jahren kann die Rendite deutli
 
 Der Zinseszinseffekt ist das mächtigste Werkzeug beim langfristigen Vermögensaufbau. Er bewirkt, dass nicht nur Ihre Einzahlungen Rendite erwirtschaften, sondern auch die **bereits erzielten Gewinne** weitere Rendite generieren. Je länger der Anlagezeitraum, desto stärker wirkt dieser Effekt — er wächst exponentiell.
 
-Ein Beispiel verdeutlicht das: Bei 200 €/Monat und 7 % Rendite haben Sie nach 20 Jahren ca. 104.000 € (bei 48.000 € Einzahlungen). Verdoppeln Sie die Laufzeit auf 40 Jahre, beträgt das Endkapital ca. 525.000 € — obwohl Sie nur doppelt so viel eingezahlt haben (96.000 €). Der Renditevorteil versechsfacht sich nahezu. Deshalb gilt: Je früher Sie mit dem Sparplan beginnen, desto besser.
+Ein Beispiel verdeutlicht das: Bei 200 €/Monat und 7 % Rendite haben Sie nach 20 Jahren ca. 101.507 € (bei 48.000 € Einzahlungen). Verdoppeln Sie die Laufzeit auf 40 Jahre, beträgt das Endkapital ca. 494.308 € — obwohl Sie nur doppelt so viel eingezahlt haben (96.000 €). Der Renditevorteil versiebenfacht sich nahezu. Deshalb gilt: Je früher Sie mit dem Sparplan beginnen, desto besser.
 
 **Kosten: TER, Depotgebühren und ihr Einfluss auf die Rendite**
 
@@ -2756,10 +2756,160 @@ Gewinne aus ETFs unterliegen in Deutschland der **Abgeltungssteuer** von 25 % pl
 Wichtig: Die Steuern fallen erst beim Verkauf an. Solange Sie Ihre ETF-Anteile halten, wächst Ihr Kapital steuerfrei weiter — ein zusätzlicher Renditevorteil langfristiger Anlagestrategien. Unser Rechner berücksichtigt die Steuerberechnung vereinfacht zum Endpunkt; in der Praxis greifen jährlich die Vorabpauschale und beim Verkauf die restliche Steuer.
 
 Ergänzend können Sie mit unserem [Zinsrechner](/finanzen/zinsrechner) verschiedene Zinseszins-Szenarien durchspielen, mit dem [Sparrechner](/finanzen/sparrechner) alternative Sparstrategien vergleichen und mit dem [Inflationsrechner](/finanzen/inflationsrechner) den realen Wert Ihres Vermögens über die Zeit berechnen.`,
+    // W19-Goldstandard: etf-sparplanrechner auf volle Tiefe (~1.560 W, 15 Bausteine).
+    // Leitformat „Vermögensentwicklung visuell" — 3 Diagramme dominant (balken/gestapelt/kreis),
+    // andere Sequenz als zinsrechner (linie+kreis) und als die beispielrechnung-dominanten
+    // Nachbarn sparrechner/inflationsrechner. ALLE Endkapital-/Gewinn-Zahlen aus
+    // lib/berechnungen/etf-sparplan.ts reproduziert (effektive Monatsrendite
+    // (1+p/100)^(1/12)−1, 200 €/Mt, 7 %, ohne Einmalanlage): 20 J = 101.507 €,
+    // 30 J = 233.891 €, 40 J = 494.308 € (Lib-Resolver-Check 25.06.2026). Steuerwerte gegen
+    // Primärquelle (Stand 06/2026): Abgeltungsteuer 25 % + 5,5 % Soli = 26,375 % (§ 32d EStG);
+    // Teilfreistellung Aktienfonds 30 % (§ 20 InvStG); Sparerpauschbetrag 1.000/2.000 €
+    // (§ 20 Abs. 9 EStG); Vorabpauschale § 18 InvStG. erklaerung bleibt Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was ist ein ETF-Sparplan?',
+        html: `<p>Ein ETF-Sparplan ist eine automatisierte Geldanlage: Sie investieren regelmäßig — meist monatlich — einen festen Betrag in einen börsengehandelten Indexfonds (Exchange Traded Fund). Ein ETF bildet einen kompletten Aktienindex wie den <strong>MSCI World</strong>, den <strong>S&amp;P 500</strong> oder den <strong>DAX</strong> nach und streut Ihr Geld damit automatisch über hunderte bis tausende Unternehmen und Branchen.</p><p>Das Grundprinzip ist Einfachheit mit System: Statt einzelne Aktien auszuwählen und den richtigen Kaufzeitpunkt zu erraten, kaufen Sie per Dauerauftrag immer denselben Euro-Betrag — unabhängig vom Kursstand. Sparpläne sind bei den meisten Online-Brokern bereits ab 1 € pro Monat und ohne Ausführungsgebühr möglich. Das macht den ETF-Sparplan zum Standard-Werkzeug für den langfristigen Vermögensaufbau, gerade für Einsteiger mit kleinem Budget.</p><p>Dieser Rechner zeigt Ihnen, wie aus regelmäßigen Einzahlungen über die Jahre ein Vermögen wird — wahlweise mit Einmalanlage, dynamisch steigender Sparrate und optionaler Steuerberechnung. So sehen Sie, welcher Anteil Ihres späteren Vermögens aus eigener Einzahlung und welcher aus der Rendite stammt.</p>`,
+      },
+      {
+        typ: 'diagramm',
+        variante: 'balken',
+        titel: 'Zinseszins-Hebel: 20 vs. 30 vs. 40 Jahre',
+        daten: [
+          { label: '20 Jahre', wert: 101507, einheit: '€' },
+          { label: '30 Jahre', wert: 233891, einheit: '€' },
+          { label: '40 Jahre', wert: 494308, einheit: '€' },
+        ],
+        einheit: '€',
+        fussnote: 'Annahme: 200 €/Monat bei 7 % p. a. (effektive Monatsverzinsung), ohne Einmalanlage, vor Steuern und Kosten. Die Einzahlungen wachsen von 48.000 € (20 J.) auf 96.000 € (40 J.) — also aufs Doppelte. Das Endkapital verfünffacht sich dabei nahezu, weil der Zinseszins die späten Jahre überproportional belohnt.',
+      },
+      {
+        typ: 'text',
+        titel: 'Der Cost-Average-Effekt',
+        html: `<p>Weil Sie beim Sparplan immer denselben Betrag investieren, kaufen Sie bei niedrigen Kursen automatisch mehr Anteile und bei hohen Kursen weniger. Dieser <strong>Cost-Average-Effekt</strong> (Durchschnittskosteneffekt) sorgt dafür, dass Sie über die Zeit einen ausgewogenen Durchschnittspreis zahlen — ohne den perfekten Einstiegszeitpunkt treffen zu müssen.</p><p>Der praktische Nutzen liegt weniger in einer höheren Rendite als in der <strong>Disziplin</strong>: Der Dauerauftrag investiert auch dann weiter, wenn die Kurse fallen und die Nachrichten schlecht sind — also genau in den Phasen, in denen viele Anleger emotional aussteigen. Gerade diese günstig gekauften Anteile tragen später überproportional zum Vermögen bei.</p><p>Zur ehrlichen Einordnung: Bei einer großen Einmalsumme und sehr langem Horizont ist die sofortige Anlage statistisch oft leicht überlegen, weil das Geld früher arbeitet. Für den typischen Sparer, der monatlich aus dem laufenden Einkommen anlegt, ist der Sparplan mit Cost-Average aber der natürliche und nervenschonende Weg. Ein weiterer Vorteil: Der Sparplan verlangt keine Markteinschätzung — Sie müssen weder Höchst- noch Tiefststände erkennen, was selbst Profis langfristig kaum verlässlich gelingt.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Historische Renditen: MSCI World, S&P 500, DAX',
+        html: `<p>Die erwartete Rendite ist der größte Hebel für das Endergebnis — und zugleich die einzige Größe, die niemand garantieren kann. Als Orientierung dienen langfristige Durchschnittswerte breiter Aktienindizes über die vergangenen 30 bis 50 Jahre (vor Inflation, vor Steuern):</p><p><strong>MSCI World</strong> — rund 7–8 % p. a., investiert in über 1.500 Unternehmen aus 23 Industrieländern und gilt als Standard für weltweite Streuung. <strong>S&amp;P 500</strong> — rund 9–10 % p. a., die 500 größten US-Konzerne, in der Vergangenheit renditestark, aber stark auf den US-Markt konzentriert. <strong>DAX</strong> — rund 7–8 % p. a., die 40 größten deutschen Unternehmen, durch die geringere Streuung schwankungsanfälliger.</p><p>Diese Zahlen sind <strong>Durchschnitte</strong>. In einzelnen Jahren kann die Rendite weit darüber oder deutlich im Minus liegen. Wer konservativ plant, rechnet eher mit 6–7 % und freut sich, wenn es mehr wird — statt sich auf optimistische Werte zu verlassen.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'ETF-Sparplan vs. klassisches Sparen',
+        spalteA: 'ETF-Sparplan',
+        spalteB: 'Tagesgeld / Sparbuch',
+        zeilen: [
+          { kriterium: 'Renditechance (langfristig)', a: 'ca. 6–8 % p. a. über den Aktienmarkt', b: 'ca. 1–3 % p. a. über den Zins' },
+          { kriterium: 'Schwankung & Risiko', a: 'hoch — zwischenzeitliche Kursverluste möglich', b: 'sehr gering — nominal stabil' },
+          { kriterium: 'Kapitalschutz', a: 'kein Schutz vor Kursverlusten', b: 'Einlagensicherung bis 100.000 €' },
+          { kriterium: 'Inflationsschutz', a: 'langfristig meist oberhalb der Inflation', b: 'oft unter der Inflation — realer Wertverlust' },
+          { kriterium: 'Verfügbarkeit', a: 'börsentäglich verkaufbar', b: 'Tagesgeld täglich, Festgeld gebunden' },
+          { kriterium: 'Sinnvoller Horizont', a: 'ab etwa 10–15 Jahren', b: 'kurz- bis mittelfristig, Notgroschen' },
+        ],
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Szenarien: Sparrate × Laufzeit (7 % p. a.)',
+        kopf: ['Monatliche Sparrate', 'nach 10 Jahren', 'nach 20 Jahren', 'nach 30 Jahren'],
+        zeilen: [
+          ['100 €', '17.105 €', '50.754 €', '116.945 €'],
+          ['200 €', '34.210 €', '101.507 €', '233.891 €'],
+          ['300 €', '51.316 €', '152.261 €', '350.836 €'],
+          ['500 €', '85.526 €', '253.768 €', '584.726 €'],
+        ],
+        fussnote: 'Alle Werte bei 7 % p. a. (effektive Monatsverzinsung), ohne Einmalanlage, vor Steuern und Kosten. Gut erkennbar: Eine höhere Sparrate wirkt linear, eine längere Laufzeit dagegen exponentiell — die Spalte „30 Jahre" zieht überproportional davon.',
+      },
+      {
+        typ: 'text',
+        titel: 'Zinseszins: warum früh anfangen alles entscheidet',
+        html: `<p>Der Zinseszinseffekt ist das mächtigste Werkzeug beim langfristigen Vermögensaufbau: Nicht nur Ihre Einzahlungen erwirtschaften Rendite, sondern auch die bereits erzielten Gewinne werfen wiederum Rendite ab. Dadurch wächst das Kapital nicht gleichmäßig, sondern <strong>exponentiell</strong> — die letzten Jahre vor dem Ziel bringen den mit Abstand größten Zuwachs.</p><p>Wie stark der Hebel ist, zeigt der Laufzeit-Vergleich bei 200 €/Monat und 7 %: Nach 20 Jahren stehen 101.507 € im Depot, nach 30 Jahren bereits 233.891 € und nach 40 Jahren 494.308 €. Die Einzahlungen verdoppeln sich von 20 auf 40 Jahre nur von 48.000 € auf 96.000 € — das Endkapital aber verfünffacht sich nahezu, und fast 400.000 € davon sind reiner Gewinn.</p><p>Die Schlussfolgerung ist eindeutig: Die wichtigste Stellschraube ist nicht die Höhe der Sparrate, sondern der <strong>Zeitpunkt des Beginns</strong>. Jedes Jahr früher wirkt am längsten — verlorene Jahre lassen sich später kaum durch höhere Raten aufholen.</p>`,
+      },
+      {
+        typ: 'diagramm',
+        variante: 'gestapelt',
+        titel: 'Einzahlungen vs. Rendite über die Laufzeit',
+        gestapelt: [
+          { label: '10 Jahre', segmente: [{ name: 'Einzahlungen', wert: 24000 }, { name: 'Rendite', wert: 10210 }] },
+          { label: '20 Jahre', segmente: [{ name: 'Einzahlungen', wert: 48000 }, { name: 'Rendite', wert: 53507 }] },
+          { label: '30 Jahre', segmente: [{ name: 'Einzahlungen', wert: 72000 }, { name: 'Rendite', wert: 161891 }] },
+          { label: '40 Jahre', segmente: [{ name: 'Einzahlungen', wert: 96000 }, { name: 'Rendite', wert: 398308 }] },
+        ],
+        einheit: '€',
+        fussnote: 'Annahme: 200 €/Monat bei 7 % p. a., ohne Einmalanlage. In den ersten Jahren überwiegen die eigenen Einzahlungen; mit zunehmender Laufzeit kippt das Verhältnis. Ab etwa der Mitte der Laufzeit übersteigt die Rendite die eingezahlte Summe deutlich.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '200 €/Monat über 30 Jahre — Schritt für Schritt',
+        schritte: [
+          { label: 'Eingezahlt gesamt', formel: '200 € × 12 Monate × 30 Jahre', ergebnis: '72.000 €' },
+          { label: 'Stand nach 10 Jahren', formel: 'Einzahlungen 24.000 € + Rendite', ergebnis: '34.210 €' },
+          { label: 'Stand nach 20 Jahren', formel: 'Einzahlungen 48.000 € + Rendite', ergebnis: '101.507 €' },
+          { label: 'Stand nach 30 Jahren', formel: 'Einzahlungen 72.000 € + Rendite', ergebnis: '233.891 €' },
+        ],
+        fazit: 'Aus 72.000 € Einzahlungen werden 233.891 € — ein Gewinn von 161.891 €. Über zwei Drittel des Endkapitals stammen also aus Rendite und Zinseszins, nicht aus eigenem Geld. Wird die Abgeltungsteuer berücksichtigt (Single-Freibetrag 1.000 €), bleiben rund 204.265 € netto.',
+      },
+      {
+        typ: 'text',
+        titel: 'Kosten: TER und Depotgebühren',
+        html: `<p>Kosten schmälern die Rendite jedes Jahr — und über Jahrzehnte summieren sich selbst kleine Unterschiede zu vierstelligen Beträgen. Die wichtigste Kennzahl ist die <strong>TER</strong> (Total Expense Ratio), die jährlichen Fondskosten. Bei breiten MSCI-World-ETFs liegt sie typischerweise zwischen 0,12 % und 0,20 % pro Jahr — ein Bruchteil dessen, was aktiv gemanagte Fonds mit oft 1,5 bis 2,0 % verlangen. Die TER wird automatisch aus dem Fondsvermögen entnommen und ist im Kursverlauf bereits berücksichtigt.</p><p>Hinzu kommen die <strong>Depotkosten</strong> des Brokers. Achten Sie auf ein Depot ohne Grundgebühr, kostenlose Sparplanausführung und eine breite ETF-Auswahl. Manche Anbieter verlangen pro Ausführung einen Prozentsatz oder Festbetrag — bei kleinen Raten frisst das einen spürbaren Teil der Einzahlung.</p><p>Eine Faustregel: Wer 1 Prozentpunkt jährliche Kosten spart, hat über 30 Jahre am Ende leicht 15–20 % mehr Kapital. Niedrige Kosten sind damit die einzige „garantierte Rendite", die Sie selbst in der Hand haben. Prüfen Sie die TER im Factsheet des ETFs und vergleichen Sie ausschüttende mit thesaurierenden Varianten desselben Index — die Unterschiede sind oft klein, der Kosteneffekt über 30 Jahre aber nicht.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Eckwerte zum ETF-Sparplan',
+        werte: [
+          { label: 'Endkapital 200 €/Monat, 30 J., 7 %', wert: '233.891 €', hinweis: '72.000 € eingezahlt, 161.891 € Gewinn' },
+          { label: 'Abgeltungsteuer effektiv', wert: '26,375 %', hinweis: '25 % + 5,5 % Soli, § 32d EStG' },
+          { label: 'Teilfreistellung Aktienfonds', wert: '30 %', hinweis: 'nur 70 % des Gewinns steuerpflichtig, § 20 InvStG' },
+          { label: 'Sparerpauschbetrag', wert: '1.000 €', hinweis: '2.000 € bei Ehegatten, § 20 Abs. 9 EStG' },
+          { label: 'TER MSCI-World-ETF', wert: '0,12–0,20 %', hinweis: 'aktiv gemanagte Fonds oft 1,5–2,0 %' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Steuern auf ETF-Gewinne: Abgeltungsteuer & Teilfreistellung',
+        html: `<p>Gewinne aus ETFs unterliegen in Deutschland der <strong>Abgeltungsteuer</strong> von 25 % zuzüglich 5,5 % Solidaritätszuschlag — effektiv <strong>26,375 %</strong>, bei Kirchenmitgliedschaft etwas mehr. Besteuert werden Kursgewinne und Ausschüttungen, allerdings erst, wenn sie realisiert werden.</p><p>Für Aktienfonds — dazu zählen die meisten breiten Aktien-ETFs mit über 51 % Aktienanteil — gilt die <strong>Teilfreistellung</strong> von 30 %: Nur 70 % des Gewinns sind überhaupt steuerpflichtig (§ 20 InvStG). Zusätzlich bleibt der <strong>Sparerpauschbetrag</strong> von 1.000 € pro Person (2.000 € bei Ehegatten) steuerfrei; per Freistellungsauftrag bei der Depotbank lässt er sich direkt nutzen.</p><p>Ein Rechenbeispiel mit den Zahlen dieses Rechners: Aus 200 €/Monat über 30 Jahre werden 233.891 €, davon 161.891 € Gewinn. Steuerpflichtig sind nach Teilfreistellung 70 %, also 113.324 €, abzüglich 1.000 € Pauschbetrag. Die Steuer beträgt rund 29.625 €, es bleiben etwa <strong>204.265 € netto</strong>. Diese Nach-Steuer-Sicht können Sie oben mit dem Schalter „Nach Steuern" direkt einschalten.</p>`,
+      },
+      {
+        typ: 'diagramm',
+        variante: 'kreis',
+        titel: 'Eingezahlt vs. Gewinn nach 30 Jahren',
+        daten: [
+          { label: 'Eingezahlt', wert: 72000, einheit: '€' },
+          { label: 'Gewinn', wert: 161891, einheit: '€' },
+        ],
+        einheit: '€',
+        fussnote: 'Annahme: 200 €/Monat über 30 Jahre bei 7 % p. a. — Endkapital 233.891 €. Bei dieser Laufzeit übersteigt der reine Renditegewinn die eigenen Einzahlungen schon um mehr als das Doppelte.',
+      },
+      {
+        typ: 'text',
+        titel: 'Steuer in der Praxis: Vorabpauschale & Vereinfachung',
+        html: `<p>Dieser Rechner ermittelt die Steuer <strong>vereinfacht zum Endzeitpunkt</strong>: Er rechnet so, als fiele die Abgeltungsteuer einmalig beim Verkauf am Ende der Laufzeit an. In der Praxis ist die Besteuerung etwas stärker verteilt.</p><p>Bei <strong>thesaurierenden</strong> ETFs, die Erträge automatisch wieder anlegen, greift jährlich die <strong>Vorabpauschale</strong> (§ 18 InvStG): eine kleine, vorab erhobene Steuer auf einen fiktiven Mindestertrag, der aus dem Basiszins der Bundesbank abgeleitet wird. Sie ist keine Zusatzsteuer — beim späteren Verkauf wird sie voll gegengerechnet und mindert nur den Steuerstundungseffekt. In Verlustjahren fällt sie auf null.</p><p>Für die langfristige Planung ist die Vereinfachung unkritisch: Die Größenordnung des Endkapitals bleibt nahezu gleich, weil über Jahrzehnte ohnehin der Zinseszins dominiert. Wer es genau wissen will, prüft die individuelle Steuerlast anhand der jährlichen Erträgnisaufstellung der Depotbank oder mit dem Steuerberater — gerade bei größeren Beträgen und ausschüttenden Fonds. Ein späterer Broker-Wechsel per Depotübertrag ändert nichts an der Steuerlast, solange die ursprünglichen Anschaffungsdaten korrekt mitübertragen werden.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Worauf Sie beim ETF-Sparplan achten sollten',
+        punkte: [
+          'Breit streuen: ein weltweiter Index wie MSCI World oder FTSE All-World deckt tausende Unternehmen ab',
+          'Auf niedrige Kosten achten: TER unter 0,25 % und kostenlose Sparplanausführung',
+          'Depot ohne Grundgebühr wählen — über Jahrzehnte machen kleine Gebühren Tausende Euro Unterschied',
+          'Langen Atem behalten: Aktien-ETFs eignen sich für Anlagehorizonte ab etwa 10 bis 15 Jahren',
+          'Notgroschen zuerst: rund 3 Monatsausgaben aufs Tagesgeld, bevor der Sparplan startet',
+          'Freistellungsauftrag erteilen, damit Erträge bis zum Sparerpauschbetrag steuerfrei bleiben',
+          'Sparrate automatisieren und bei Gehaltssteigerungen per Dynamik schrittweise anheben',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Kursrisiko & keine Anlageberatung',
+        text: 'Diese Berechnung unterstellt eine gleichmäßige jährliche Rendite. In der Realität schwanken ETF-Kurse stark — einzelne Jahre können deutlich negativ ausfallen, zwischenzeitliche Rückgänge von 30 bis 50 % sind historisch vorgekommen. Die genannten Durchschnittsrenditen (MSCI World ca. 7–8 % p. a.) sind Vergangenheitswerte und keine Garantie für die Zukunft. Der Rechner ist ein Orientierungswerkzeug und stellt ausdrücklich keine Anlageberatung dar. Investieren Sie nur Geld, das Sie über den gesamten Anlagezeitraum voraussichtlich nicht benötigen.',
+      },
+    ],
     faq: [
       {
         frage: 'Wie viel Geld kann ich mit einem ETF-Sparplan verdienen?',
-        antwort: 'Das hängt von Sparrate, Anlagedauer und Rendite ab. Beispiel: Bei 200 € monatlich, 20 Jahren und 7 % Rendite ergibt sich ein Endkapital von ca. 104.000 € — bei nur 48.000 € Eigeneinzahlung. Je länger Sie sparen, desto stärker wirkt der Zinseszinseffekt: Nach 30 Jahren wären es bereits ca. 243.000 €.',
+        antwort: 'Das hängt von Sparrate, Anlagedauer und Rendite ab. Beispiel: Bei 200 € monatlich, 20 Jahren und 7 % Rendite ergibt sich ein Endkapital von ca. 101.507 € — bei nur 48.000 € Eigeneinzahlung. Je länger Sie sparen, desto stärker wirkt der Zinseszinseffekt: Nach 30 Jahren wären es bereits ca. 233.891 €.',
       },
       {
         frage: 'Welche Rendite ist bei ETFs realistisch?',
@@ -2779,8 +2929,14 @@ Ergänzend können Sie mit unserem [Zinsrechner](/finanzen/zinsrechner) verschie
       },
       {
         frage: 'Lohnt sich ein ETF-Sparplan auch mit kleinen Beträgen?',
-        antwort: 'Ja, absolut. Viele Broker bieten Sparpläne bereits ab 1 € oder 25 € pro Monat an. Selbst kleine Beträge lohnen sich langfristig: 50 € monatlich über 30 Jahre bei 7 % Rendite ergeben ca. 61.000 € — bei nur 18.000 € Eigeneinzahlung. Entscheidend ist, frühzeitig anzufangen und regelmäßig dabei zu bleiben. Die Sparrate kann jederzeit erhöht werden.',
+        antwort: 'Ja, absolut. Viele Broker bieten Sparpläne bereits ab 1 € oder 25 € pro Monat an. Selbst kleine Beträge lohnen sich langfristig: 50 € monatlich über 30 Jahre bei 7 % Rendite ergeben ca. 58.473 € — bei nur 18.000 € Eigeneinzahlung. Entscheidend ist, frühzeitig anzufangen und regelmäßig dabei zu bleiben. Die Sparrate kann jederzeit erhöht werden.',
       },
+    ],
+    quellen: [
+      { titel: '§ 20 EStG: Kapitalerträge & Sparerpauschbetrag (1.000 / 2.000 €)', url: 'https://www.gesetze-im-internet.de/estg/__20.html' },
+      { titel: '§ 32d EStG: Abgeltungsteuer (25 % + 5,5 % Soli = 26,375 %)', url: 'https://www.gesetze-im-internet.de/estg/__32d.html' },
+      { titel: 'InvStG 2018: Teilfreistellung Aktienfonds & Vorabpauschale (§§ 18, 20)', url: 'https://www.gesetze-im-internet.de/invstg_2018/' },
+      { titel: 'Deutsche Bundesbank: Basiszins für die Vorabpauschale', url: 'https://www.bundesbank.de/de/bundesbank/organisation/agb-und-regelungen/basiszinssatz-607820', hinweis: 'Grundlage des fiktiven Mindestertrags nach § 18 InvStG. Historische Index-Renditen: MSCI/S&P/Deutsche Börse, Stand 06/2026.' },
     ],
     affiliate: [
       { programId: 'verivox', context: 'etf' },
