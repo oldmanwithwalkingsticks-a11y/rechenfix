@@ -2955,7 +2955,7 @@ Ergänzend können Sie mit unserem [Zinsrechner](/finanzen/zinsrechner) verschie
     keywords: ['rentenrechner', 'rente berechnen', 'rentenpunkte berechnen', 'rentenlücke rechner', 'gesetzliche rente rechner', 'rente mit 63', 'monatsrente berechnen', 'rentenanspruch berechnen', 'netto rente rechner', 'altersvorsorge rechner'],
     icon: '👴',
     formel: 'Monatsrente = Rentenpunkte × aktueller Rentenwert (40,79 € bis 30.06.2026, ab 01.07.2026: 42,52 €)\nRentenpunkte/Jahr = Jahresbrutto / Durchschnittsentgelt 2026 (51.944 €)',
-    beispiel: '35 Jahre alt, 3.500 € Brutto, 15 Beitragsjahre, Rente mit 67: → ca. 35 Rentenpunkte gesamt → Brutto-Rente: ca. 1.376 € → Netto: ca. 1.170 €.',
+    beispiel: '45 Beitragsjahre als Durchschnittsverdiener = 45 Entgeltpunkte → Brutto-Rente 1.835,55 € (bis 30.06.2026) bzw. 1.913,40 € (ab 01.07.2026, Rentenwert 42,52 €) → Netto ca. 1.594 € (Näherung, Rentenbeginn 2026).',
     erklaerung: `**Wie funktioniert die gesetzliche Rentenversicherung?**
 
 Die gesetzliche Rentenversicherung (GRV) ist das wichtigste Standbein der Altersvorsorge in Deutschland. Arbeitnehmer und Arbeitgeber zahlen je 9,3% des Bruttolohns ein — insgesamt 18,6%. Dafür sammeln Versicherte sogenannte Entgeltpunkte (Rentenpunkte), die bei Renteneintritt in eine monatliche Rente umgerechnet werden. Die Rentenformel lautet: **Monatsrente = Entgeltpunkte × Zugangsfaktor × aktueller Rentenwert × Rentenartfaktor**. Für die normale Altersrente vereinfacht sich das zu: Monatsrente = Entgeltpunkte × Rentenwert.
@@ -2983,6 +2983,151 @@ Zur privaten Altersvorsorge gibt es verschiedene Wege: **Riester-Rente** (staatl
 **Wird meine Rente besteuert?**
 
 Ja, Renten unterliegen der nachgelagerten Besteuerung. Der steuerpflichtige Anteil hängt vom Jahr des Renteneintritts ab: Wer 2026 in Rente geht, muss 83% der Rente versteuern. Dieser Anteil steigt jährlich um 0,5 Prozentpunkte und erreicht 2058 die vollen 100%. Zusätzlich fallen Krankenversicherungsbeiträge (ca. 8,15%) und Pflegeversicherung (ca. 1,7-2,3%) an. Der [Brutto-Netto-Rechner](/finanzen/brutto-netto-rechner) hilft Ihnen, Ihre aktuelle Steuerbelastung zu verstehen.`,
+    // W19-Goldstandard: rentenrechner auf volle Tiefe (~1.560 W, 15 Bausteine).
+    // Leitformat „Tabellen-Nachschlagewerk" — 3 Tabellen dominant (EP→Rente, Rentenwert-
+    // Historie, Abschlags-Staffel), grenzt sich vom vergleich-dominanten witwenrente-Rechner ab.
+    // ALLE Werte aus lib/berechnungen/rente.ts reproduziert (Lib-Resolver-Check 25.06.2026):
+    // EP = min(Brutto, 101.400)/51.944; Rentenwert 40,79 € (bis 30.06.) / 42,52 € (ab 01.07.2026,
+    // BMAS 05.03.2026, +4,24 %); Abschlag 0,3 %/Monat, gedeckelt 14,4 %; steuerpfl. Anteil 83 %
+    // (Beginn 2026); SV-Pauschale Rentner 10,85 %; Netto via ESt-Grundtabelle § 32a 2026.
+    // STICHTAG-DISZIPLIN: Hauptbeispiel in EP, beide Rentenwert-Stände explizit (Build-Konstante).
+    // 45 EP: brutto 1.835,55 € / 1.913,40 €; netto ~1.540 € / ~1.594 € (83 %, Näherung).
+    // erklaerung bleibt Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Wie die gesetzliche Rente funktioniert',
+        html: `<p>Die gesetzliche Rentenversicherung (GRV) ist für die meisten Menschen das Fundament der Altersvorsorge. Arbeitnehmer und Arbeitgeber zahlen gemeinsam <strong>18,6 %</strong> des Bruttolohns ein — je zur Hälfte. Aus diesen Beiträgen entstehen keine angesparten Guthaben, sondern <strong>Entgeltpunkte</strong>, die bei Rentenbeginn in eine monatliche Zahlung umgerechnet werden (Umlageverfahren).</p><p>Die vollständige Rentenformel lautet: <strong>Monatsrente = Entgeltpunkte × Zugangsfaktor × Rentenwert × Rentenartfaktor</strong>. Für die normale Altersrente ist der Rentenartfaktor 1,0 und — bei Eintritt zur Regelaltersgrenze — auch der Zugangsfaktor 1,0. Dann vereinfacht sich alles zu: Monatsrente = Entgeltpunkte × Rentenwert.</p><p>Damit hängt Ihre spätere Rente an genau zwei Größen, die Sie kennen sollten: an der Zahl der über das Erwerbsleben gesammelten Entgeltpunkte und am aktuellen Rentenwert je Punkt. Beide werden in den folgenden Abschnitten Schritt für Schritt erklärt — inklusive der Abschläge bei vorzeitigem Renteneintritt und einer Netto-Näherung.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Entgeltpunkte: die Währung der Rente',
+        html: `<p>Entgeltpunkte (umgangssprachlich „Rentenpunkte") sind die Recheneinheit der gesetzlichen Rente. Die Regel ist einfach: Wer in einem Jahr genau den <strong>Durchschnittsverdienst</strong> aller Versicherten erzielt, erhält dafür <strong>1,0 Entgeltpunkt</strong>. 2026 liegt dieser Durchschnitt bei vorläufig 51.944 € Bruttojahresgehalt (§ 69 SGB VI).</p><p>Die Formel lautet entsprechend: <strong>Entgeltpunkte pro Jahr = Bruttojahresgehalt ÷ Durchschnittsentgelt</strong>. Wer 2026 rund 48.000 € verdient (4.000 € im Monat), sammelt 48.000 ÷ 51.944 = 0,92 EP. Das Doppelte des Durchschnitts bringt 2,0 EP — allerdings nur bis zur Beitragsbemessungsgrenze von 101.400 €/Jahr; darüber zählt kein weiterer Verdienst. Mehr als rund <strong>1,95 EP pro Jahr</strong> sind damit nicht möglich.</p><p>Auch ohne Erwerbsarbeit entstehen Punkte: Kindererziehungszeiten bringen bis zu drei Jahre à etwa 1 EP pro Kind, hinzu kommen Zeiten für die Pflege von Angehörigen und bestimmte Ausbildungsabschnitte. Diese Zeiten sollten Sie in Ihrem Versicherungsverlauf prüfen lassen.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Entgeltpunkte → monatliche Brutto-Rente',
+        kopf: ['Entgeltpunkte', 'Beispiel-Erwerbsbiografie', 'bis 30.06.2026 (40,79 €)', 'ab 01.07.2026 (42,52 €)'],
+        zeilen: [
+          ['20 EP', '20 Jahre Durchschnittsverdienst', '815,80 €', '850,40 €'],
+          ['30 EP', '30 Jahre Durchschnittsverdienst', '1.223,70 €', '1.275,60 €'],
+          ['40 EP', '40 Jahre Durchschnittsverdienst', '1.631,60 €', '1.700,80 €'],
+          ['45 EP', '45 Jahre Durchschnittsverdienst', '1.835,55 €', '1.913,40 €'],
+          ['50 EP', 'lange Erwerbszeit / über Durchschnitt', '2.039,50 €', '2.126,00 €'],
+        ],
+        fussnote: '1 Entgeltpunkt entspricht einem Jahr mit Durchschnittsverdienst (2026: 51.944 €/Jahr). Brutto-Rente = Entgeltpunkte × Rentenwert. Zum 01.07.2026 steigt der Rentenwert von 40,79 € auf 42,52 € je Punkt (+4,24 %).',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Stichtag 01.07.2026: Rentenwert steigt',
+        text: 'Zum 01.07.2026 steigt der Rentenwert von 40,79 € auf 42,52 € je Entgeltpunkt — eine Erhöhung um 4,24 % (BMAS-Bekanntgabe vom 05.03.2026). Die Anpassung gilt automatisch für alle Bestands- und Neurenten. Dieser Rechner nutzt den zum Abrechnungszeitpunkt gültigen Wert; in Tabellen und Beispielen sind daher bewusst beide Stände angegeben. Der Rentenwert wird jedes Jahr zum 1. Juli neu festgesetzt und folgt im Wesentlichen der Lohnentwicklung des Vorjahres.',
+      },
+      {
+        typ: 'text',
+        titel: 'Der Rentenwert und seine jährliche Anpassung',
+        html: `<p>Der zweite Faktor ist der <strong>Rentenwert</strong>: der Euro-Betrag, den ein einzelner Entgeltpunkt als Monatsrente wert ist. Er ist für alle Renten gleich und wird jedes Jahr zum <strong>1. Juli</strong> neu festgesetzt. Maßgeblich ist im Kern die Lohnentwicklung des Vorjahres — steigen die Löhne, steigt auch der Rentenwert.</p><p>Bis zum 30.06.2026 beträgt der Rentenwert <strong>40,79 €</strong>, ab dem <strong>01.07.2026</strong> steigt er auf <strong>42,52 €</strong> — ein Plus von 4,24 %. Für einen Versicherten mit 45 Entgeltpunkten bedeutet das einen Sprung der Brutto-Rente von 1.835,55 € auf 1.913,40 € pro Monat, ganz ohne eigenes Zutun.</p><p>Weil der Rechner mit dem jeweils gültigen Stichtagswert arbeitet, sind in den Tabellen und Beispielen bewusst beide Stände angegeben. So bleibt die Schätzung über den Stichtag hinweg nachvollziehbar — und Sie sehen unmittelbar, wie sich die jährliche Anpassung auf Ihre künftige Rente auswirkt.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Rentenwert-Entwicklung seit 2024',
+        kopf: ['Gültig ab', 'Rentenwert je EP', 'Anpassung ggü. Vorjahr'],
+        zeilen: [
+          ['01.07.2024', '39,32 €', '+4,57 %'],
+          ['01.07.2025', '40,79 €', '+3,74 %'],
+          ['01.07.2026', '42,52 €', '+4,24 %'],
+        ],
+        fussnote: 'Der Rentenwert wird jährlich zum 1. Juli an die Lohnentwicklung angepasst (§ 68 SGB VI). Quelle: Deutsche Rentenversicherung / BMAS. Der Wert ab 01.07.2026 wurde am 05.03.2026 bekanntgegeben.',
+      },
+      {
+        typ: 'text',
+        titel: 'Abschläge bei vorzeitigem Renteneintritt',
+        html: `<p>Die <strong>Regelaltersgrenze</strong> liegt für die ab 1964 Geborenen bei <strong>67 Jahren</strong>. Wer früher in Rente geht, zahlt dafür mit einem dauerhaften Abschlag von <strong>0,3 % je Monat</strong> des vorgezogenen Eintritts. Bei vier Jahren früher — der bekannten „Rente mit 63" — sind das 48 Monate × 0,3 % = <strong>14,4 %</strong> weniger Rente, lebenslang und nicht nur bis zum 67. Geburtstag.</p><p>Aus 1.913,40 € Brutto-Rente (45 EP, ab 01.07.2026) werden so 1.637,87 €. Der Abschlag wirkt prozentual und trifft höhere Renten entsprechend stärker. Mehr als 14,4 % werden nie abgezogen, weil ein noch früherer Eintritt rechtlich ausgeschlossen ist.</p><p>Eine wichtige Ausnahme gilt für <strong>besonders langjährig Versicherte</strong> mit 45 anrechenbaren Jahren: Sie können vor 67 abschlagsfrei in Rente gehen. Die maßgebliche Altersgrenze wurde allerdings schrittweise angehoben — für ab 1964 Geborene liegt sie bei 65, nicht mehr bei 63.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Abschläge nach Renteneintrittsalter',
+        kopf: ['Renteneintritt', 'Monate vor 67', 'Abschlag', 'Brutto-Rente (45 EP, 42,52 €)'],
+        zeilen: [
+          ['mit 67 (Regelgrenze)', '0', '0,0 %', '1.913,40 €'],
+          ['mit 66', '12', '3,6 %', '1.844,52 €'],
+          ['mit 65', '24', '7,2 %', '1.775,64 €'],
+          ['mit 64', '36', '10,8 %', '1.706,75 €'],
+          ['mit 63', '48', '14,4 %', '1.637,87 €'],
+        ],
+        fussnote: 'Abschlag 0,3 % je Monat vorzeitigem Eintritt, dauerhaft, gedeckelt bei 14,4 % (§ 77 SGB VI). Werte für 45 Entgeltpunkte beim Rentenwert ab 01.07.2026. Besonders langjährig Versicherte mit 45 Jahren können abschlagsfrei vor 67 gehen (Altersgrenze je nach Jahrgang 63–65).',
+      },
+      {
+        typ: 'text',
+        titel: 'Die Rente erhöhen: später gehen, Punkte aufstocken',
+        html: `<p>So wie ein früher Eintritt die Rente mindert, kann ein <strong>späterer</strong> sie erhöhen. Wer über die Regelaltersgrenze hinaus arbeitet und weiter Beiträge zahlt, erhält für jeden Monat des Aufschubs einen <strong>Zuschlag von 0,5 %</strong> (also 6 % pro Jahr) — zusätzlich zu den weiter gesammelten Entgeltpunkten. Ein um zwei Jahre verschobener Rentenbeginn bringt so spürbar mehr.</p><p>Auch gezielt aufstocken ist möglich: Ab 50 können Versicherte mit freiwilligen Zahlungen einen absehbaren <strong>Abschlag ausgleichen</strong> (§ 187a SGB VI), und unter bestimmten Voraussetzungen lassen sich weitere Beiträge leisten. Ob sich das lohnt, hängt von der persönlichen Lebenserwartung, der Steuerwirkung und den Renditen alternativer Anlagen ab.</p><p>Seit der Reform des Hinzuverdienstrechts dürfen Altersrentner zudem <strong>unbegrenzt hinzuverdienen</strong>, ohne dass die Rente gekürzt wird. Wer die Regelaltersrente bezieht und nebenbei arbeitet, behält damit beides — ein zusätzliches Argument, den Renteneintritt flexibel zu planen.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Rentenschätzung Schritt für Schritt (45 EP)',
+        schritte: [
+          { label: 'Entgeltpunkte sammeln', formel: '45 Jahre × 1,0 EP (Durchschnittsverdienst)', ergebnis: '45 Entgeltpunkte' },
+          { label: 'Brutto-Rente = EP × Rentenwert', formel: '45 × 40,79 € bzw. 45 × 42,52 €', ergebnis: '1.835,55 € / 1.913,40 €' },
+          { label: 'Steuerpflichtiger Anteil 2026', formel: '83 % von 1.913,40 € × 12 Monate', ergebnis: '19.057 €/Jahr steuerpflichtig' },
+          { label: 'Abzüge (Näherung)', formel: 'Einkommensteuer ~112 € + KV/PV 10,85 % ~208 €', ergebnis: '−320 €/Monat' },
+        ],
+        fazit: 'Aus 45 Entgeltpunkten ergibt sich ab 01.07.2026 eine Brutto-Rente von 1.913,40 €, netto nach Steuer und Sozialabgaben rund 1.594 € (Näherung, Rentenbeginn 2026). Vor dem Stichtag (Rentenwert 40,79 €) wären es 1.835,55 € brutto bzw. rund 1.540 € netto. Bei früherem Renteneintritt sind zusätzlich die Abschläge abzuziehen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Netto-Rente: Steuern und Sozialabgaben',
+        html: `<p>Von der Brutto-Rente bleibt nicht alles übrig. Renten werden <strong>nachgelagert besteuert</strong>: Wer 2026 in Rente geht, muss <strong>83 %</strong> der Rente versteuern; dieser Anteil steigt für jeden späteren Jahrgang um 0,5 Prozentpunkte, bis 2058 die vollen 100 % erreicht sind. Auf den steuerpflichtigen Teil wird die normale Einkommensteuer nach der Grundtabelle angewandt — bei kleinen Renten bleibt durch den Grundfreibetrag oft wenig oder gar keine Steuer.</p><p>Hinzu kommen Beiträge zur <strong>Kranken- und Pflegeversicherung</strong> der Rentner von zusammen rund 10,85 % (je nach Zusatzbeitrag der Krankenkasse und Kinderlosenzuschlag etwas mehr oder weniger). Sie werden direkt von der Rente einbehalten.</p><p>Für das Beispiel mit 1.913,40 € Brutto (45 EP, Rentenbeginn 2026) ergibt sich nach rund 112 € Steuer und 208 € Sozialabgaben eine Netto-Rente von etwa <strong>1.594 €</strong>. Das ist eine Näherung — der genaue Wert hängt von Ihrer Krankenkasse, weiteren Einkünften und Ihrem persönlichen Steuerstatus ab. Ihre aktuelle Abgabenlast zeigt der <a href="/finanzen/brutto-netto-rechner">Brutto-Netto-Rechner</a>.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Die Rentenlücke und wie Sie sie schließen',
+        html: `<p>Die gesetzliche Rente ersetzt nur einen Teil des letzten Einkommens. Das sogenannte Rentenniveau liegt bei rund <strong>48 %</strong> des durchschnittlichen Nettoverdienstes — die Differenz zwischen Wunsch-Netto und tatsächlicher Rente ist die <strong>Rentenlücke</strong>. Für viele Haushalte liegt sie bei 500 bis 1.000 € im Monat.</p><p>Diese Lücke lässt sich nur durch zusätzliche Vorsorge schließen, und hier zählt vor allem die Zeit. Ein Beispiel: Um im Ruhestand 500 € monatlich über 20 Jahre zusätzlich zur Verfügung zu haben, braucht es bei 5 % Rendite und 30 Jahren Ansparzeit nur rund 145 € im Monat — bei nur 15 Jahren Ansparzeit dagegen ein Mehrfaches davon.</p><p>Bausteine sind die betriebliche Altersvorsorge (oft mit Arbeitgeberzuschuss), die <a href="/finanzen/riester-rechner">Riester-Rente</a> mit staatlichen Zulagen und der flexible <a href="/finanzen/etf-sparplanrechner">ETF-Sparplan</a>. Wie hoch eine Hinterbliebenenrente ausfällt, zeigt der <a href="/finanzen/witwenrente-rechner">Witwenrenten-Rechner</a>.</p>`,
+      },
+      {
+        typ: 'diagramm',
+        variante: 'linie',
+        titel: 'So wächst die Brutto-Rente mit den Beitragsjahren',
+        daten: [
+          { label: '10 Beitragsjahre', wert: 425, einheit: '€' },
+          { label: '20 Beitragsjahre', wert: 850, einheit: '€' },
+          { label: '30 Beitragsjahre', wert: 1276, einheit: '€' },
+          { label: '40 Beitragsjahre', wert: 1701, einheit: '€' },
+          { label: '45 Beitragsjahre', wert: 1913, einheit: '€' },
+        ],
+        einheit: '€',
+        fussnote: 'Annahme: durchgehend Durchschnittsverdienst (1 EP pro Jahr) beim Rentenwert ab 01.07.2026 (42,52 €). Der Verlauf ist linear — anders als beim ETF-Sparplan gibt es in der gesetzlichen Rente keinen Zinseszins; jedes Beitragsjahr zählt gleich viel.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Eckwerte zur gesetzlichen Rente',
+        werte: [
+          { label: 'Rentenwert ab 01.07.2026', wert: '42,52 €', hinweis: 'je Entgeltpunkt; bis 30.06.2026: 40,79 €' },
+          { label: 'Durchschnittsentgelt 2026', wert: '51.944 €', hinweis: 'Jahresbrutto für 1,0 EP (§ 69 SGB VI)' },
+          { label: 'Beitragssatz Rentenversicherung', wert: '18,6 %', hinweis: 'je 9,3 % Arbeitnehmer und Arbeitgeber' },
+          { label: 'Maximaler Abschlag Frührente', wert: '14,4 %', hinweis: '48 Monate × 0,3 %, dauerhaft' },
+          { label: 'Steuerpflichtiger Anteil 2026', wert: '83 %', hinweis: '+0,5 %-Punkte je späterem Jahrgang' },
+        ],
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Vor dem Renteneintritt prüfen',
+        punkte: [
+          'Renteninformation der DRV lesen — sie kommt jährlich ab 27 und listet Ihre bisherigen Entgeltpunkte',
+          'Versicherungsverlauf auf Lücken kontrollieren und fehlende Zeiten (Schule, Studium, Kindererziehung) klären lassen',
+          'Kindererziehungszeiten beantragen — pro Kind bis zu 3 Entgeltpunkte (rund 3 Beitragsjahre)',
+          'Vorzeitigen Renteneintritt durchrechnen: 0,3 % Abschlag je Monat wirken lebenslang',
+          '45 Beitragsjahre erreicht? Dann ist eine abschlagsfreie Rente vor 67 möglich (Altersgrenze je nach Jahrgang 63–65)',
+          'Rentenlücke früh schließen — je früher die private Vorsorge startet, desto kleiner die nötige Sparrate',
+          'Verbindliche Auskunft nur bei der Deutschen Rentenversicherung einholen, nicht aus Schätzrechnern',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Vereinfachte Schätzung — keine Rentenberatung',
+        text: 'Diese Berechnung ist eine vereinfachte Schätzung. Sie unterstellt ein über die Jahre konstantes Gehalt und bildet beitragsfreie oder beitragsgeminderte Zeiten (Arbeitslosigkeit, Teilzeit, Ausbildung) nicht vollständig ab. Auch die Netto-Rente ist eine Näherung: Sie hängt vom Zusatzbeitrag Ihrer Krankenkasse, von weiteren Einkünften und Ihrem Steuerstatus ab. Verbindlich ist allein die Renteninformation bzw. Rentenauskunft der Deutschen Rentenversicherung. Dieser Rechner ersetzt keine Rentenberatung.',
+      },
+    ],
     faq: [
       {
         frage: 'Wie hoch wird meine Rente voraussichtlich sein?',
@@ -3008,6 +3153,12 @@ Ja, Renten unterliegen der nachgelagerten Besteuerung. Der steuerpflichtige Ante
         frage: 'Wird meine Rente besteuert?',
         antwort: 'Ja, Renten werden nachgelagert besteuert. Der steuerpflichtige Anteil hängt vom Renteneintrittsjahr ab: 2026 sind 83% steuerpflichtig, dieser Anteil steigt jährlich um 0,5%. Zusätzlich fallen ca. 10% für Kranken- und Pflegeversicherung an. Bei einer Brutto-Rente von 1.500 € bleiben netto ca. 1.250-1.350 € übrig.',
       },
+    ],
+    quellen: [
+      { titel: '§ 70 SGB VI: Entgeltpunkte für Beitragszeiten', url: 'https://www.gesetze-im-internet.de/sgb_6/__70.html' },
+      { titel: '§ 77 SGB VI: Zugangsfaktor & Abschläge bei vorzeitigem Rentenbeginn', url: 'https://www.gesetze-im-internet.de/sgb_6/__77.html' },
+      { titel: 'SVBezGrV 2026: Rechengrößen (Durchschnittsentgelt 51.944 €, BBG 101.400 €)', url: 'https://www.gesetze-im-internet.de/svbezgrv_2026/' },
+      { titel: 'Deutsche Rentenversicherung: Rentenwert & Renteninformation', url: 'https://www.deutsche-rentenversicherung.de/', hinweis: 'Rentenwert ab 01.07.2026: 42,52 € (BMAS-Bekanntgabe 05.03.2026, +4,24 %). Verbindlich ist die individuelle Renteninformation der DRV.' },
     ],
     affiliate: [
       { programId: 'wiso', context: 'rente' },
