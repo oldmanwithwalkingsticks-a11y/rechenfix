@@ -19,13 +19,19 @@ const PUNKTE_NOTEN: { p: number; note: string }[] = [
 ];
 
 function punkteZuAbiNote(gesamtpunkte: number): number {
+  // Offizielle KMK-Methode: Durchschnittsnote N = 17/3 − E/180, Ergebnis auf eine
+  // Nachkommastelle ABGESCHNITTEN (floor), nicht gerundet. Note 1,0 ab 823 Punkten
+  // (Deckelung — rechnerisch bessere Werte bleiben 1,0).
+  if (gesamtpunkte >= 823) return 1.0;
   const note = 17 / 3 - gesamtpunkte / 180;
-  const gerundet = Math.round(note * 100) / 100;
-  return Math.max(1.0, Math.min(4.0, gerundet));
+  // +1e-9 fängt Gleitkomma-Defizite an exakten 0,1-Grenzen ab (z. B. 660 → 2,0).
+  const abgeschnitten = Math.floor(note * 10 + 1e-9) / 10;
+  return Math.min(4.0, abgeschnitten);
 }
 
 function formatNote(n: number): string {
-  return n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  // Offizielle Abi-Note hat genau eine Nachkommastelle (z. B. 1,0 statt 1,00).
+  return n.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 }
 
 export default function AbiRechner() {
@@ -80,7 +86,7 @@ export default function AbiRechner() {
     if (gesamt < 300) hinweise.push('Gesamtpunkte müssen mindestens 300 betragen.');
 
     const note = bestanden ? punkteZuAbiNote(gesamt) : 5.0;
-    const fuerEinsNull = 823; // 17/3 - x/180 = 1,0 → x = (17/3 − 1,0) × 180 ≈ 822,99
+    const fuerEinsNull = 823; // offizielle KMK-Schwelle für die Note 1,0 (ab 823 Punkten)
     const bisEinsNull = Math.max(0, fuerEinsNull - gesamt);
 
     return { blockI, blockII, gesamt, bestanden, note, hinweise, bisEinsNull };
