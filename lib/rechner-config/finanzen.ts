@@ -5714,7 +5714,7 @@ Ja, aber mit Einschränkungen. Ein **neuer Nebenjob**, der während der Kurzarbe
   },
   {
     slug: 'riester-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-25',
     titel: 'Riester-Rechner',
     beschreibung: 'Riester-Rente berechnen: Zulage, Eigenbeitrag, Steuerersparnis und ob sich Riestern für Sie lohnt.',
     kategorie: 'Finanzen',
@@ -5748,6 +5748,167 @@ Die Riester-Rente ist besonders attraktiv für **Familien mit Kindern** (wegen d
 **Alternativen zur Riester-Rente**
 
 Wer für sich zu dem Schluss kommt, dass Riester sich nicht lohnt, hat mehrere Alternativen: Ein **[ETF-Sparplan](/finanzen/etf-sparplanrechner)** bietet deutlich mehr Flexibilität, meist niedrigere Kosten und bessere Renditechancen — allerdings ohne staatliche Zulage und ohne Steuerförderung in der Ansparphase. Eine **Rürup-Rente (Basisrente)** eignet sich besonders für Selbstständige und Gutverdiener, weil die Beiträge zu 100 % als Sonderausgaben absetzbar sind (bis zum Höchstbetrag). Die **betriebliche Altersvorsorge (bAV)** ist oft eine sehr gute Ergänzung, weil der Arbeitgeber häufig Zuschüsse zahlt. Und der klassische Weg bleibt natürlich: in die gesetzliche Rente freiwillig einzahlen und die **Rentenlücke** mit unserem [Rentenrechner](/finanzen/rentenrechner) im Blick behalten.`,
+    // W19-Goldstandard: riester-rechner auf volle Tiefe (~1.560 W, 15 Bausteine).
+    // Leitformat „Vergleich & Einordnung" — 3 vergleich-Bausteine dominant (Zulagen vs.
+    // Sonderausgabenabzug · Riester 2026 vs. Reform ab 2027 · Riester vs. ETF), grenzt sich
+    // von rente (tabelle) und etf (diagramm) ab. ALLE Werte aus lib/berechnungen/riester.ts
+    // reproduziert (Lib-Resolver-Check 25.06.2026): A1 40k/0K/35 % → Eigenbeitrag 1.425 €,
+    // Förderung 560 €, Quote 39 %; A2 28k/2K/25 % → 345 €, 775 €, 225 %; A3 60k/beide/42 %
+    // → 1.750 €, 860 €, 49 %. Werte 2026: Grundzulage 175 € (§ 84), Kinderzulage 300/185 €
+    // (§ 85), Höchstbetrag 2.100 € (§ 10a), Sockel 60 € / 4 % (§ 86 EStG).
+    // REFORM-DISZIPLIN: 2026-Werte = geltend (Bestandsschutz), 2027-Werte = geplante
+    // Neuregelung (Bundestag 27.03.2026, Umsetzung 01.01.2027) — überall klar getrennt.
+    // erklaerung bleibt Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was ist die Riester-Rente?',
+        html: `<p>Die <strong>Riester-Rente</strong> ist eine staatlich geförderte private Altersvorsorge, eingeführt 2002, um das abgesenkte Niveau der gesetzlichen Rente teilweise auszugleichen. Das Besondere ist die <strong>doppelte Förderung</strong> über zwei Kanäle: direkte <strong>Zulagen</strong> vom Staat (Grund- und Kinderzulage) und eine <strong>Steuerersparnis</strong> über den Sonderausgabenabzug.</p><p>Welcher der beiden Wege für Sie günstiger ist, müssen Sie nicht selbst ausrechnen: Das Finanzamt führt automatisch die sogenannte <strong>Günstigerprüfung</strong> durch und gewährt immer die höhere Förderung. Mindestens erhalten Sie die Zulagen; ist Ihr Steuervorteil größer, bekommen Sie die Differenz zusätzlich erstattet.</p><p>Anspruch haben unter anderem sozialversicherungspflichtig Beschäftigte, Beamte, bestimmte Selbstständige und — mittelbar — deren nicht erwerbstätige Ehepartner. Dieser Rechner zeigt für Ihre Situation den optimalen Eigenbeitrag, die Zulagen, die Steuerersparnis und die daraus folgende Förderquote. Die Bescheinigung des Anbieters tragen Sie in die <a href="/finanzen/steuererstattung-rechner">Steuererklärung</a> ein.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Grundzulage und Kinderzulage',
+        html: `<p>Die <strong>Grundzulage</strong> beträgt <strong>175 € pro Jahr</strong> für jeden Riester-Sparer. Ehepaare, bei denen beide einen eigenen Vertrag haben, erhalten sie zweimal — zusammen 350 €. Hinzu kommt die <strong>Kinderzulage</strong>: <strong>300 €</strong> pro Jahr für jedes ab 2008 geborene Kind und <strong>185 €</strong> für früher geborene. Die Zulage fließt, solange Sie für das Kind Kindergeld beziehen.</p><p>Für junge Sparer gibt es einen Anreiz zum frühen Start: Wer den Vertrag vor dem 25. Geburtstag abschließt, erhält einmalig <strong>200 € Berufseinsteigerbonus</strong>. Alle Zulagen zahlt der Staat direkt auf den Vertrag ein.</p><p>Damit das automatisch läuft, sollten Sie den <strong>Dauerzulagenantrag</strong> stellen — dann beantragt der Anbieter die Zulagen jedes Jahr für Sie, ohne dass Sie aktiv werden müssen. Voraussetzung für die volle Zulage ist allerdings, dass Sie den Mindesteigenbeitrag einzahlen — dazu gleich mehr.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Riester-Zulagen 2026 im Überblick',
+        kopf: ['Förderbaustein', 'Betrag 2026', 'Rechtsgrundlage'],
+        zeilen: [
+          ['Grundzulage (pro Person)', '175 €/Jahr', '§ 84 EStG'],
+          ['Kinderzulage (Geburt ab 2008)', '300 €/Jahr', '§ 85 EStG'],
+          ['Kinderzulage (Geburt vor 2008)', '185 €/Jahr', '§ 85 EStG'],
+          ['Berufseinsteigerbonus (unter 25 J.)', '200 € einmalig', '§ 84 EStG'],
+          ['Höchstbetrag (inkl. Zulagen)', '2.100 €/Jahr', '§ 10a EStG'],
+          ['Sockelbeitrag (Mindesteigenbeitrag)', '60 €/Jahr', '§ 86 EStG'],
+        ],
+        fussnote: 'Diese Werte gelten 2026 unverändert; für vor dem 01.01.2027 abgeschlossene Verträge auch darüber hinaus (Bestandsschutz). Für die volle Zulage ist ein Mindesteigenbeitrag von 4 % des Vorjahresbruttos abzüglich Zulagen nötig.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Zwei Förderwege: Zulagen vs. Steuervorteil',
+        spalteA: 'Zulagen',
+        spalteB: 'Sonderausgabenabzug',
+        zeilen: [
+          { kriterium: 'Was', a: 'Grundzulage 175 € + Kinderzulage 300/185 €', b: 'Eigenbeitrag + Zulagen bis 2.100 € absetzbar' },
+          { kriterium: 'Wirkung', a: 'feste Euro-Beträge, direkt auf den Vertrag', b: 'Steuerersparnis = Betrag × Grenzsteuersatz' },
+          { kriterium: 'Stark bei', a: 'Familien & Geringverdienern', b: 'Gutverdienern mit hohem Steuersatz' },
+          { kriterium: 'Antrag', a: 'Zulagenantrag (einmalig als Dauerantrag)', b: 'Anlage AV in der Steuererklärung' },
+          { kriterium: 'Günstigerprüfung', a: 'immer mindestens die Zulagen', b: 'Differenz nur, wenn Steuervorteil größer' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Mindesteigenbeitrag: 4 % vom Vorjahresbrutto',
+        html: `<p>Die Zulagen gibt es nicht geschenkt: Für die <strong>volle Förderung</strong> müssen Sie einen <strong>Mindesteigenbeitrag</strong> einzahlen. Er beträgt <strong>4 % Ihres Vorjahresbruttoeinkommens</strong>, abzüglich der bereits gewährten Zulagen. Nach unten gilt ein <strong>Sockelbetrag von 60 € pro Jahr</strong> (5 € im Monat), nach oben ist der geförderte Beitrag bei einem <strong>Höchstbetrag von 2.100 €</strong> inklusive Zulagen gedeckelt.</p><p>Wer weniger als den Mindesteigenbeitrag einzahlt, bekommt die Zulagen <strong>anteilig gekürzt</strong>: Bei nur der Hälfte des nötigen Beitrags gibt es auch nur die halbe Zulage. Deshalb lohnt es sich, den Beitrag nach jeder Gehaltsänderung zu überprüfen.</p><p>Der <strong>optimale Eigenbeitrag</strong> ist genau der Betrag, der die volle Zulage sichert, ohne unnötig über den geförderten Höchstbetrag hinauszugehen. Dieser Rechner ermittelt ihn automatisch — Sie sehen sofort, wie viel Sie mindestens einzahlen sollten, um keine Förderung zu verschenken.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: Single, 40.000 €, keine Kinder (35 %)',
+        schritte: [
+          { label: 'Zulagen', formel: 'Grundzulage 175 € (keine Kinder)', ergebnis: '175 €' },
+          { label: 'Optimaler Eigenbeitrag', formel: '4 % × 40.000 € − 175 € Zulage', ergebnis: '1.425 €' },
+          { label: 'Sonderausgabenabzug', formel: 'Eigenbeitrag 1.425 € + Zulage 175 €', ergebnis: '1.600 €' },
+          { label: 'Steuerersparnis', formel: '1.600 € × 35 % Grenzsteuersatz', ergebnis: '560 €' },
+          { label: 'Günstigerprüfung', formel: '560 € Steuervorteil > 175 € Zulage', ergebnis: 'Steuerweg gewinnt' },
+        ],
+        fazit: 'Gesamtförderung 560 € bei 1.425 € Eigenbeitrag — eine Förderquote von 39 %. Für jeden selbst eingezahlten Euro gibt der Staat rund 39 Cent dazu. Bei diesem Single-Haushalt dominiert der Steuervorteil über den Sonderausgabenabzug, nicht die Zulage. Bei einer Familie mit zwei Kindern und niedrigerem Einkommen kehrt sich das Bild um: Dort tragen die Zulagen (775 €) den Großteil, der Eigenbeitrag sinkt auf 345 €, und die Förderquote springt auf über 200 %. Genau diese Spreizung zeigt, warum sich Riester für die einen stark und für die anderen kaum lohnt — entscheidend sind Kinderzahl und Einkommen.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Für wen lohnt sich Riester? Drei Profile',
+        kopf: ['Profil', 'Eigenbeitrag/Jahr', 'Förderung/Jahr', 'Förderquote'],
+        zeilen: [
+          ['Familie, 28.000 €, 2 Kinder, 25 %', '345 €', '775 €', '225 %'],
+          ['Single, 40.000 €, 0 Kinder, 35 %', '1.425 €', '560 €', '39 %'],
+          ['Paar (beide), 60.000 €, 0 Kinder, 42 %', '1.750 €', '860 €', '49 %'],
+        ],
+        fussnote: 'Optimaler Eigenbeitrag und Gesamtförderung aus diesem Rechner (Werte 2026). Förderquote = Gesamtförderung ÷ Eigenbeitrag. Je mehr Kinder und je geringer das Einkommen, desto höher fällt die Quote aus.',
+      },
+      {
+        typ: 'text',
+        titel: 'Für wen sich Riester besonders lohnt',
+        html: `<p>Ob sich Riester lohnt, hängt stark von der Lebenssituation ab — die Förderquote macht es sichtbar. <strong>Familien mit Kindern</strong> und <strong>Geringverdiener</strong> profitieren am meisten: Weil die Zulagen feste Beträge sind, sinkt der nötige Eigenbeitrag stark, und die Förderquote kann <strong>über 200 %</strong> erreichen. Eine Familie mit zwei Kindern und 28.000 € Einkommen zahlt nur 345 € selbst und erhält 775 € Förderung.</p><p><strong>Gutverdiener</strong> mit hohem Grenzsteuersatz profitieren weniger über die Zulage, dafür stark über den Steuervorteil: Bei 42 % ist der Sonderausgabenabzug der entscheidende Hebel.</p><p><strong>Weniger attraktiv</strong> ist Riester häufig für Singles mit mittlerem Einkommen ohne Kinder — wegen teils hoher Verwaltungskosten, der vollen Besteuerung der späteren Rente und der eingeschränkten Vererbbarkeit. Hier ist oft ein <a href="/finanzen/etf-sparplanrechner">ETF-Sparplan</a> die flexiblere Wahl.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Wohnriester: Förderung fürs Eigenheim',
+        html: `<p>Ein Sonderweg ist <strong>Wohnriester</strong> (Eigenheimrente, § 92a EStG): Statt fürs Rentenalter zu sparen, können Sie das geförderte Kapital für <strong>selbstgenutztes Wohneigentum</strong> einsetzen — für Kauf, Bau oder die Tilgung eines Immobiliendarlehens. Zulagen und Steuervorteil fließen dann in die eigene Immobilie statt in einen Sparvertrag.</p><p>Auch hier gilt das Prinzip der nachgelagerten Besteuerung: Die geförderten Beträge werden auf einem <strong>Wohnförderkonto</strong> erfasst und im Rentenalter versteuert — wahlweise jährlich über die Laufzeit verteilt oder einmalig mit einem Abschlag von 30 %. Der Vorteil liegt auf der Hand: Die Förderung senkt unmittelbar die Wohnkosten und beschleunigt die Entschuldung.</p><p>Wohnriester lohnt sich vor allem für Familien mit hohen Kinderzulagen, die ohnehin Wohneigentum anstreben. Wie bei jedem Riester-Produkt sollten Sie aber Kosten und die langfristige Bindung des Kapitals im Blick behalten — eine selbst genutzte Immobilie lässt sich nicht kurzfristig zu Geld machen.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Reform der Altersvorsorge: Umsetzung erst 2027',
+        text: 'Die private Altersvorsorge wurde reformiert (Bundestag 27.03.2026, Bundesrat 08.05.2026), die Umsetzung erfolgt aber erst zum 01.01.2027. Für 2026 gelten unverändert die bisherigen Werte: 175 € Grundzulage, 300/185 € Kinderzulage, 2.100 € Höchstbetrag, 4 % Mindestbeitrag. Wichtig: Vor dem 01.01.2027 abgeschlossene Verträge genießen Bestandsschutz und laufen mit der bisherigen Förderung weiter. Dieser Rechner bildet die geltende 2026- und Bestandslogik ab.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Riester 2026 vs. geplante Reform ab 2027',
+        spalteA: 'Riester 2026 (geltend)',
+        spalteB: 'Reform ab 2027 (geplant)',
+        zeilen: [
+          { kriterium: 'Grundzulage', a: '175 € pauschal pro Jahr', b: 'beitragsproportional: 0,50 €/€ bis 360 €, dann 0,25 €/€ bis 1.800 € (max. 540 €)' },
+          { kriterium: 'Kinderzulage', a: '300 € (ab 2008) / 185 € (davor)', b: 'volle 300 €/Kind ab 25 €/Monat Sparbeitrag' },
+          { kriterium: 'Mindestbeitrag', a: '4 % Vorjahresbrutto, Sockel 60 €', b: 'pauschal 120 €/Jahr' },
+          { kriterium: 'Berufseinsteiger', a: '200 € einmalig', b: '200 € Bonus (fortgeführt)' },
+          { kriterium: 'Produkt', a: 'Garantiepflicht (100 % Beitragserhalt)', b: 'Altersvorsorgedepot ohne Garantiepflicht möglich' },
+        ],
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Riester-Rente vs. ETF-Sparplan',
+        spalteA: 'Riester-Rente',
+        spalteB: 'ETF-Sparplan',
+        zeilen: [
+          { kriterium: 'Staatliche Förderung', a: 'Zulagen + Steuervorteil', b: 'keine' },
+          { kriterium: 'Renditechance', a: 'oft konservativ (Garantie)', b: 'höher, marktabhängig' },
+          { kriterium: 'Kosten', a: 'teils hohe Verwaltungskosten', b: 'TER ab 0,1–0,2 %' },
+          { kriterium: 'Flexibilität', a: 'gebunden bis zur Rente', b: 'jederzeit verfügbar' },
+          { kriterium: 'Besteuerung der Rente', a: 'voll nachgelagert', b: 'nur Gewinn, 30 % Teilfreistellung' },
+          { kriterium: 'Vererbbarkeit', a: 'eingeschränkt', b: 'uneingeschränkt' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Besteuerung in der Rentenphase und Kritikpunkte',
+        html: `<p>Die Förderung in der Ansparphase hat eine Kehrseite: In der Auszahlungsphase wird die Riester-Rente <strong>voll nachgelagert besteuert</strong>. Die in der Ansparzeit steuerlich begünstigten Beiträge und die Zulagen werden also im Alter mit dem dann gültigen persönlichen Steuersatz belastet — der allerdings im Ruhestand meist niedriger liegt als im Erwerbsleben.</p><p>Kritisch gesehen werden vor allem die <strong>Kosten</strong> vieler Verträge: Abschluss- und Verwaltungsgebühren können einen erheblichen Teil der Förderung aufzehren. Auch die <strong>Vererbbarkeit</strong> ist eingeschränkt — stirbt der Sparer in der Ansparphase, geht das Guthaben nur an den Ehepartner förderunschädlich über; andere Erben müssen die erhaltene Förderung zurückzahlen.</p><p>Neben Riester gibt es weitere geförderte Wege: die <strong>Rürup-Rente</strong> (Basisrente, Beiträge voll absetzbar — ideal für Selbstständige) und die <strong>betriebliche Altersvorsorge</strong> mit Arbeitgeberzuschuss. Wie groß Ihre gesamte Versorgungslücke ist, zeigt der <a href="/finanzen/rentenrechner">Rentenrechner</a>.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Ruhen lassen, wechseln oder kündigen?',
+        html: `<p>Was, wenn sich die Lebenssituation ändert? Ein Riester-Vertrag lässt sich <strong>beitragsfrei stellen</strong> — Sie pausieren die Einzahlungen, das angesparte Guthaben bleibt erhalten und wird weiter verzinst. Das ist etwa in der Elternzeit oder bei vorübergehend knappem Budget sinnvoll; die bereits erhaltene Förderung bleibt unangetastet.</p><p>Auch ein <strong>Anbieterwechsel</strong> ist möglich: Das Guthaben kann förderunschädlich auf einen anderen zertifizierten Riester-Vertrag übertragen werden. Das lohnt sich, wenn ein neuer Anbieter deutlich günstigere Kosten bietet — allerdings können Wechselgebühren anfallen, die man gegenrechnen sollte.</p><p>Anders die <strong>Kündigung mit Auszahlung</strong> vor dem Rentenalter: Sie gilt als <strong>förderschädliche Verwendung</strong> (§ 93 EStG). Sämtliche Zulagen und Steuervorteile müssen zurückgezahlt werden, nur die reinen Einzahlungen samt Erträgen bleiben. Wer aussteigen möchte, fährt deshalb meist besser, den Vertrag ruhen zu lassen, statt ihn zu kündigen.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Eckwerte zur Riester-Förderung 2026',
+        werte: [
+          { label: 'Grundzulage', wert: '175 €', hinweis: 'pro Person und Jahr (§ 84 EStG)' },
+          { label: 'Kinderzulage (ab 2008)', wert: '300 €', hinweis: 'pro Kind/Jahr, solange Kindergeld' },
+          { label: 'Höchstbetrag', wert: '2.100 €', hinweis: 'absetzbar inkl. Zulagen (§ 10a EStG)' },
+          { label: 'Mindesteigenbeitrag', wert: '4 %', hinweis: 'des Vorjahresbruttos − Zulagen, Sockel 60 €' },
+          { label: 'Reform-Umsetzung', wert: '01.01.2027', hinweis: 'Bestandsverträge behalten alte Förderung' },
+        ],
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Riester optimal nutzen',
+        punkte: [
+          'Dauerzulagenantrag stellen — dann werden die Zulagen automatisch jedes Jahr beantragt',
+          'Mindesteigenbeitrag (4 % des Vorjahresbruttos − Zulagen) einzahlen, sonst werden Zulagen anteilig gekürzt',
+          'Anlage AV in der Steuererklärung ausfüllen — nur so greift der Sonderausgabenabzug',
+          'Nach jeder Gehaltsänderung den Eigenbeitrag anpassen, damit die volle Zulage erhalten bleibt',
+          'Kinderzulage dem Elternteil zuordnen, das Kindergeld bezieht (Standard Mutter, übertragbar)',
+          'Anbieter-Kosten vergleichen — hohe Verwaltungsgebühren schmälern die Förderung spürbar',
+          'Vor Abschluss prüfen, ob ETF-Sparplan oder bAV besser passt (Förderquote im Rechner checken)',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Vereinfachte Schätzung — keine Anlageberatung',
+        text: 'Diese Berechnung ist eine vereinfachte Schätzung und keine Anlage- oder Steuerberatung. Die verbindliche Günstigerprüfung führt das Finanzamt anhand Ihrer tatsächlichen Verhältnisse durch; der hier genutzte Grenzsteuersatz ist eine Annahme. Verwaltungskosten des Anbieters, die spätere Besteuerung der Rente sowie die Reform ab 2027 sind im Einzelfall zu berücksichtigen. Ob sich ein konkreter Vertrag lohnt, hängt von Ihrer persönlichen Situation ab.',
+      },
+    ],
     faq: [
       { frage: 'Wie hoch ist die Riester-Zulage?', antwort: 'Die Grundzulage beträgt 175 € pro Jahr. Dazu kommen Kinderzulagen: 300 € pro Kind ab Geburtsjahr 2008, 185 € pro Kind für vor 2008 Geborene. Ehepaare können beide Zulagen getrennt bekommen (2× 175 €). Berufseinsteiger unter 25 erhalten einmalig 200 € Bonus.' },
       { frage: 'Wie viel muss ich bei Riester selbst einzahlen?', antwort: 'Den Mindesteigenbeitrag: 4 Prozent Ihres Vorjahres-Bruttoeinkommens abzüglich der Zulagen. Mindestens aber 60 € pro Jahr (Sockelbetrag), maximal 2.100 € förderfähig. Wer weniger einzahlt, bekommt die Zulagen anteilig gekürzt. Der optimale Eigenbeitrag wird im Rechner automatisch ermittelt.' },
@@ -5755,6 +5916,12 @@ Wer für sich zu dem Schluss kommt, dass Riester sich nicht lohnt, hat mehrere A
       { frage: 'Lohnt sich Riester überhaupt noch?', antwort: 'Für Familien mit Kindern und Geringverdiener meist ja, weil Kinderzulage und geringer Eigenbeitrag eine sehr hohe Förderquote ergeben. Gutverdiener mit 42 % Grenzsteuersatz profitieren stark über den Steuervorteil. Weniger lohnend ist Riester für Singles mit mittlerem Einkommen ohne Kinder — hier ist oft ein ETF-Sparplan die bessere Wahl.' },
       { frage: 'Wie gebe ich Riester in der Steuererklärung an?', antwort: 'In der Anlage AV (Altersvorsorge). Dort tragen Sie die von Ihrem Riester-Anbieter ausgestellte Bescheinigung nach § 10a EStG ein. Das Finanzamt führt dann die Günstigerprüfung automatisch durch. Wichtig: Ohne Anlage AV gibt es nur die Zulagen, aber keinen zusätzlichen Steuervorteil.' },
       { frage: 'Was passiert mit dem Riester-Guthaben bei Tod?', antwort: 'Bei Tod in der Ansparphase geht das Guthaben nur eingeschränkt auf die Erben über: Ehepartner können das Guthaben steuer- und förderunschädlich auf einen eigenen Riester-Vertrag übertragen. Andere Erben erhalten das Guthaben nur abzüglich aller erhaltenen Förderung. Das ist ein häufig kritisierter Punkt an der Riester-Rente.' },
+    ],
+    quellen: [
+      { titel: '§ 10a EStG: Zusätzliche Altersvorsorge (Höchstbetrag 2.100 €, Günstigerprüfung)', url: 'https://www.gesetze-im-internet.de/estg/__10a.html' },
+      { titel: '§ 84 EStG: Grundzulage (175 €/Jahr)', url: 'https://www.gesetze-im-internet.de/estg/__84.html' },
+      { titel: '§ 85 EStG: Kinderzulage (300 € ab 2008 / 185 € davor)', url: 'https://www.gesetze-im-internet.de/estg/__85.html' },
+      { titel: 'BMF: Reform der privaten Altersvorsorge (Bestandsschutz, Umsetzung 01.01.2027)', url: 'https://www.bundesfinanzministerium.de/Content/DE/FAQ/reform-der-privaten-altersvorsorge.html', hinweis: 'Bundestag 27.03.2026, Bundesrat 08.05.2026; 2027er-Werte sind geplante Neuregelung, 2026 gelten unverändert die bisherigen Werte.' },
     ],
     affiliate: [
       { programId: 'verivox', context: 'riester' },
