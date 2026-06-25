@@ -4700,7 +4700,7 @@ Die **kalte Progression** ist einer der unterschätztesten Effekte im deutschen 
 
 **Alternativen zur Gehaltserhöhung: Steuerfreie Benefits**
 
-Weil die Grenzbelastung so hoch ist, lohnen sich steuerfreie Zusatzleistungen oft mehr als eine Bruttoerhöhung. Zu den wichtigsten **steuerfreien Benefits** zählen: Das **Deutschlandticket als Jobticket** (63 Euro/Monat seit 2026 komplett steuerfrei), **Essenszuschüsse** (bis 7,50 Euro pro Arbeitstag), **Kindergarten-Zuschüsse** (unbegrenzt steuerfrei für nicht-schulpflichtige Kinder), **betriebliche Altersvorsorge** (Entgeltumwandlung bis 302 Euro/Monat steuerfrei), **Gesundheitsförderung** (bis 600 Euro/Jahr für zertifizierte Kurse), **Handy- und Laptop-Zuschüsse** sowie **Erholungsbeihilfen**. Ein Essenszuschuss von 150 Euro/Monat (7,50 € × 20 Tage) entspricht einer Brutto-Erhöhung von 250–300 Euro — Sie sparen Abgaben von rund 50 Prozent. Verhandeln Sie deshalb nicht nur über das Grundgehalt, sondern auch über die Zusatzleistungen. Für einen kompletten Gehaltsvergleich nach Branche und Region nutzen Sie unseren [Gehaltsvergleich](/finanzen/gehaltsvergleich).`,
+Weil die Grenzbelastung so hoch ist, lohnen sich steuerfreie Zusatzleistungen oft mehr als eine Bruttoerhöhung. Zu den wichtigsten **steuerfreien Benefits** zählen: Das **Deutschlandticket als Jobticket** (63 Euro/Monat seit 2026 komplett steuerfrei), **Essenszuschüsse** (bis 7,67 Euro pro Arbeitstag), **Kindergarten-Zuschüsse** (unbegrenzt steuerfrei für nicht-schulpflichtige Kinder), **betriebliche Altersvorsorge** (Entgeltumwandlung bis 302 Euro/Monat steuerfrei), **Gesundheitsförderung** (bis 600 Euro/Jahr für zertifizierte Kurse), **Handy- und Laptop-Zuschüsse** sowie **Erholungsbeihilfen**. Ein Essenszuschuss von 115 Euro/Monat (7,67 € × 15 Tage) entspricht einer Brutto-Erhöhung von rund 200 Euro — Sie sparen Abgaben von rund 50 Prozent. Verhandeln Sie deshalb nicht nur über das Grundgehalt, sondern auch über die Zusatzleistungen. Für einen kompletten Gehaltsvergleich nach Branche und Region nutzen Sie unseren [Gehaltsvergleich](/finanzen/gehaltsvergleich).`,
     faq: [
       {
         frage: 'Wie viel Netto bekomme ich bei einer Gehaltserhöhung von 300 Euro?',
@@ -4720,7 +4720,7 @@ Weil die Grenzbelastung so hoch ist, lohnen sich steuerfreie Zusatzleistungen of
       },
       {
         frage: 'Welche steuerfreien Alternativen gibt es zur Gehaltserhöhung?',
-        antwort: 'Viele. Die wichtigsten steuerfreien Benefits: Jobticket/Deutschlandticket (63 €/Monat seit 2026), Essenszuschuss (bis 7,50 €/Arbeitstag), Kindergarten-Zuschuss (unbegrenzt für nicht-schulpflichtige Kinder), betriebliche Altersvorsorge (bis 302 €/Monat), Gesundheitsförderung (600 €/Jahr), Handy-/Laptop-Zuschuss, Sachbezüge bis 50 €/Monat. Weil keine Abgaben anfallen, entspricht z.B. ein Jobticket von 63 € einer Brutto-Erhöhung von rund 100–120 €.',
+        antwort: 'Viele. Die wichtigsten steuerfreien Benefits: Jobticket/Deutschlandticket (63 €/Monat seit 2026), Essenszuschuss (bis 7,67 €/Arbeitstag), Kindergarten-Zuschuss (unbegrenzt für nicht-schulpflichtige Kinder), betriebliche Altersvorsorge (bis 302 €/Monat), Gesundheitsförderung (600 €/Jahr), Handy-/Laptop-Zuschuss, Sachbezüge bis 50 €/Monat. Weil keine Abgaben anfallen, entspricht z.B. ein Jobticket von 63 € einer Brutto-Erhöhung von rund 100–120 €.',
       },
       {
         frage: 'Was ist die kalte Progression?',
