@@ -2707,7 +2707,7 @@ Die Neunerprobe nutzt die Quersumme zur schnellen Überprüfung von Rechnungen: 
   },
   {
     slug: 'potenz-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-25',
     titel: 'Potenz-Rechner',
     beschreibung: 'Potenzen, Wurzeln und Logarithmen berechnen mit Rechenweg und Potenzgesetzen.',
     kategorie: 'Mathe & Schule',
@@ -2756,6 +2756,160 @@ Potenzen, Wurzeln und Logarithmen erscheinen in vielen Lebensbereichen — meist
 - **Logarithmische Skalen in der Naturwissenschaft.** Erdbebenstärke (Richter-Skala), Lautstärke (Dezibel) und Säurestärke (pH-Wert) sind logarithmisch skaliert: jede ganze Stufe entspricht einem 10-fachen Anstieg der zugrundeliegenden Größe. Magnitude 7 ist 10× stärker als Magnitude 6, ein Anstieg um 10 dB ist eine 10-fache Schallintensität.
 - **Halbwertszeit (Physik & Pharmakologie).** Beim radioaktiven Zerfall halbiert sich die Substanz alle T Sekunden: N(t) = N₀ × (1/2)^(t/T). Dieselbe Logik gilt für die Konzentration eines Medikaments im Blut. Wer wissen will, wann nur noch 10 % verbleiben, löst nach t = T × log(0,1) ÷ log(0,5).
 - **Bevölkerungswachstum und Epidemiologie.** Eine konstante Wachstumsrate führt zu exponentiellem Wachstum: Bevölkerung wächst gemäß N(t) = N₀ × (1 + r)^t. Das R-Wert-Konzept aus der Pandemie-Berichterstattung ist mathematisch gesehen die Basis einer Exponentialfunktion — R > 1 bedeutet Ausbreitung, R < 1 Eindämmung.`,
+    // W19-Goldstandard: potenz-rechner auf volle Tiefe (~1.560 W, 15 Bausteine).
+    // Leitformat „Rechenbeispiele" — 3 beispielrechnung dominant (Potenz · Wurzel · Logarithmus,
+    // je Schritt-für-Schritt), grenzt sich von prozentuale-veraenderung (tabelle) ab. Anker gegen
+    // lib/berechnungen/potenz.ts reproduziert (Resolver-Check 25.06.2026): 2¹⁰=1.024, 2⁻³=0,125,
+    // √144=12, ³√27=3, log₁₀(1000)=3, log₂(8)=3, Verdopplung 5 % ≈ 14,2 J. Nicht-YMYL.
+    // Links /mathe/ verifiziert (gleichungs-, pythagoras-, wiss. Taschenrechner alle mathe).
+    // erklaerung bleibt Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Drei Fragen, eine Gleichung',
+        html: `<p>Der <strong>Potenz-Rechner</strong> löst drei eng verwandte Aufgaben: <strong>Potenzen</strong> (xⁿ), <strong>Wurzeln</strong> (ⁿ√x) und <strong>Logarithmen</strong> (logₐx). Alle drei beschreiben dieselbe Beziehung zwischen Basis, Exponent und Ergebnis — nur aus drei verschiedenen Blickwinkeln. Wer eine versteht, versteht die anderen.</p><p>Eine <strong>Potenz</strong> fragt nach dem Ergebnis, wenn Basis und Exponent bekannt sind: 2³ = 8. Die <strong>Wurzel</strong> fragt nach der Basis, wenn Ergebnis und Exponent bekannt sind: ³√8 = 2. Der <strong>Logarithmus</strong> fragt nach dem Exponenten, wenn Basis und Ergebnis bekannt sind: log₂(8) = 3. Drei Fragen, eine Gleichung.</p><p>Der Rechner zeigt zu jeder Aufgabe den Rechenweg und die wichtigsten Potenzgesetze. Für komplexere Term-Umformungen mit mehreren Operationen hilft der <a href="/mathe/wissenschaftlicher-taschenrechner">wissenschaftliche Taschenrechner</a>.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Potenz: 2¹⁰ Schritt für Schritt',
+        schritte: [
+          { label: 'Was bedeutet 2¹⁰?', formel: '2 zehnmal mit sich selbst multipliziert', ergebnis: '2 × 2 × … × 2' },
+          { label: 'In Etappen rechnen', formel: '2⁵ = 32, dann 32 × 32', ergebnis: '1.024' },
+          { label: 'Ergebnis', formel: '2¹⁰', ergebnis: '1.024' },
+        ],
+        fazit: '2¹⁰ ergibt 1.024 — die wohl wichtigste Zweierpotenz, denn sie definiert das Kilobyte (1 KB = 1.024 Byte). Der Exponent zählt die Multiplikationen: zehn Faktoren 2 ergeben 1.024. Wer die Zweierpotenzen kennt, rechnet in der Informatik deutlich schneller.',
+      },
+      {
+        typ: 'text',
+        titel: 'Potenzen und die Potenzgesetze',
+        html: `<p>Eine <strong>Potenz</strong> ist die wiederholte Multiplikation einer Basis mit sich selbst: 2⁴ = 2 × 2 × 2 × 2 = 16. Die <strong>Basis</strong> (2) ist die Zahl, die multipliziert wird, der <strong>Exponent</strong> (4) gibt an, wie oft. Schon kleine Exponenten erzeugen große Zahlen — das ist die Kernidee des exponentiellen Wachstums.</p><p>Die <strong>Potenzgesetze</strong> machen das Rechnen mit Potenzen handhabbar. Bei gleicher Basis werden die Exponenten addiert (Multiplikation) oder subtrahiert (Division), und eine Potenz einer Potenz multipliziert die Exponenten. Diese Regeln sind die Grundlage fast jeder Term-Umformung.</p><p>Wer Gleichungen mit Potenzen oder einer Unbekannten im Exponenten lösen will, kombiniert die Potenzgesetze oft mit dem Logarithmus — Schritt für Schritt geht das mit dem <a href="/mathe/gleichungsrechner">Gleichungsrechner</a>.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Exponentielles Wachstum: die Macht der Potenz',
+        html: `<p>Potenzen erklären, warum exponentielles Wachstum unsere Intuition so oft überrumpelt. Die berühmte <strong>Schachbrett-Legende</strong> bringt es auf den Punkt: Legt man auf das erste Feld ein Reiskorn und verdoppelt es Feld für Feld, liegen auf dem 64. Feld 2⁶³ Körner — mehr Reis, als die Menschheit je geerntet hat.</p><p>Der Unterschied zum linearen Wachstum ist gewaltig. Während eine lineare Reihe gleichmäßig steigt (1, 2, 3, 4 …), explodiert die exponentielle (1, 2, 4, 8, 16 …). Schon nach wenigen Schritten zieht die Potenz uneinholbar davon — genau das macht Zinseszins, Pandemien und Datenmengen so schwer abzuschätzen.</p><p>Praktisch heißt das: Bei exponentiellen Prozessen zählt der <strong>Exponent</strong> weit mehr als die Basis. Eine kleine Änderung der Wachstumsrate verändert das Endergebnis über viele Perioden dramatisch — ein Grund, warum schon ein Prozentpunkt mehr Rendite langfristig riesige Unterschiede macht.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Die sechs Potenzgesetze im Überblick',
+        kopf: ['Regel', 'Formel', 'Beispiel'],
+        zeilen: [
+          ['Multiplikation gleicher Basen', 'aⁿ × aᵐ = aⁿ⁺ᵐ', '2³ × 2⁴ = 2⁷ = 128'],
+          ['Division gleicher Basen', 'aⁿ ÷ aᵐ = aⁿ⁻ᵐ', '5⁶ ÷ 5² = 5⁴ = 625'],
+          ['Potenz einer Potenz', '(aⁿ)ᵐ = aⁿ·ᵐ', '(3²)⁴ = 3⁸ = 6.561'],
+          ['Negativer Exponent', 'a⁻ⁿ = 1 ÷ aⁿ', '2⁻³ = 1 ÷ 8 = 0,125'],
+          ['Null-Exponent', 'a⁰ = 1 (a ≠ 0)', '7⁰ = 1'],
+          ['Wurzel als Potenz', 'ⁿ√a = a^(1/n)', '√16 = 16^(1/2) = 4'],
+        ],
+        fussnote: 'Die Potenzgesetze gelten für Potenzen mit gleicher Basis. Sie sind das zentrale Werkzeug, um Terme zu vereinfachen, und funktionieren gleichermaßen für ganzzahlige, negative und gebrochene Exponenten.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Wurzel: √144 und ³√27',
+        schritte: [
+          { label: 'Quadratwurzel √144', formel: 'Welche Zahl mal sich selbst ergibt 144?', ergebnis: '12 (denn 12² = 144)' },
+          { label: 'Kubikwurzel ³√27', formel: 'Welche Zahl hoch 3 ergibt 27?', ergebnis: '3 (denn 3³ = 27)' },
+          { label: 'als Potenz geschrieben', formel: '√144 = 144^(1/2)', ergebnis: '12' },
+        ],
+        fazit: 'Die Wurzel ist die Umkehrung der Potenz: √144 = 12, weil 12² = 144; ³√27 = 3, weil 3³ = 27. Nicht jede Wurzel ergibt eine glatte Zahl — √2 ≈ 1,414 ist irrational und hat unendlich viele Nachkommastellen. Der Rechner zeigt an, ob das Ergebnis aufgeht.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Drei Sonderfälle, die man kennen muss',
+        text: 'Drei Sonderfälle sollte man sicher beherrschen. Erstens: Jede Zahl hoch 0 ergibt 1 (a⁰ = 1 für a ≠ 0) — das folgt zwingend aus dem Potenzgesetz aⁿ ÷ aⁿ = a⁰. Zweitens: Ein negativer Exponent bedeutet den Kehrwert: 2⁻³ = 1 ÷ 2³ = 1 ÷ 8 = 0,125. Drittens: Ein gebrochener Exponent ist eine Wurzel: a^(1/2) = √a, a^(1/3) = ³√a. Damit lassen sich Potenz- und Wurzelrechnung einheitlich behandeln.',
+      },
+      {
+        typ: 'text',
+        titel: 'Wurzeln: die Umkehrung der Potenz',
+        html: `<p>Die <strong>Wurzel</strong> ist die Umkehrung der Potenz. Die n-te Wurzel fragt: Welche Zahl ergibt, n-mal mit sich selbst multipliziert, den Radikanden? √144 = 12, denn 12² = 144. Mathematisch ist <strong>ⁿ√a = a^(1/n)</strong> — eine Wurzel ist also nichts anderes als eine Potenz mit gebrochenem Exponenten.</p><p>Der häufigste Fall ist die <strong>Quadratwurzel</strong> (n = 2), gefolgt von der <strong>Kubikwurzel</strong> (n = 3). Letztere taucht etwa auf, wenn man aus einem Würfelvolumen die Kantenlänge zurückrechnet: Bei 27 cm³ Volumen ist die Kante ³√27 = 3 cm.</p><p>Ein wichtiger Spezialfall ist der Satz des Pythagoras, bei dem die Quadratwurzel die Länge der Hypotenuse liefert. Wie das konkret funktioniert, zeigt der <a href="/mathe/pythagoras-rechner">Pythagoras-Rechner</a>.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Wurzeln, die nicht aufgehen: irrationale Zahlen',
+        html: `<p>Viele Wurzeln ergeben keine glatte Zahl. √2, √3 oder √5 sind <strong>irrational</strong>: Ihre Dezimaldarstellung bricht nie ab und wiederholt sich nicht. √2 ≈ 1,41421356… wurde schon in der Antike entdeckt und brachte das pythagoreische Weltbild ins Wanken, weil es zeigte, dass sich nicht alle Längen als Brüche darstellen lassen.</p><p>Eine Wurzel ergibt nur dann eine ganze Zahl, wenn der Radikand eine <strong>perfekte Potenz</strong> ist — √144 = 12, weil 144 = 12². Bei allen anderen Werten liefert der Rechner eine gerundete Näherung. Für viele Aufgaben lässt man die Wurzel daher als Symbol stehen (etwa 2√3), statt sie auszurechnen.</p><p>Negative Radikanden haben in den reellen Zahlen übrigens keine Quadratwurzel — denn kein reelles Quadrat ist negativ. Erst die komplexen Zahlen erweitern den Wurzelbegriff dorthin.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Zehnerpotenzen, Quadrat- und Kubikzahlen',
+        kopf: ['n', '10ⁿ', 'n²', 'n³'],
+        zeilen: [
+          ['1', '10', '1', '1'],
+          ['2', '100', '4', '8'],
+          ['3', '1.000', '9', '27'],
+          ['4', '10.000', '16', '64'],
+          ['5', '100.000', '25', '125'],
+          ['10', '10 Mrd.', '100', '1.000'],
+        ],
+        fussnote: 'Zehnerpotenzen bilden die Basis der wissenschaftlichen Notation und unseres Dezimalsystems. Quadratzahlen (n²) bis 12² = 144 und Kubikzahlen (n³) bis 10³ = 1.000 sollte man auswendig kennen — sie tauchen in Geometrie und Wurzelrechnung ständig auf.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Logarithmus: log₁₀(1000) und log₂(8)',
+        schritte: [
+          { label: 'log₁₀(1000)', formel: '10 hoch wie viel ergibt 1.000?', ergebnis: '3 (denn 10³ = 1.000)' },
+          { label: 'log₂(8)', formel: '2 hoch wie viel ergibt 8?', ergebnis: '3 (denn 2³ = 8)' },
+          { label: 'Zinseszins-Anwendung', formel: 'log(2) ÷ log(1,05)', ergebnis: '≈ 14,2 Jahre' },
+        ],
+        fazit: 'Der Logarithmus fragt nach dem Exponenten: log₁₀(1000) = 3, weil 10³ = 1.000. Praktischer Nutzen: Bei 5 % Zinsen verdoppelt sich Kapital nach log(2) ÷ log(1,05) ≈ 14,2 Jahren — die bekannte „72er-Regel" (72 ÷ 5 = 14,4) ist eine Näherung dafür.',
+      },
+      {
+        typ: 'text',
+        titel: 'Logarithmen: die zweite Umkehrung',
+        html: `<p>Der <strong>Logarithmus</strong> ist die zweite Umkehrung der Potenz — er fragt nicht nach der Basis, sondern nach dem <strong>Exponenten</strong>: Mit welcher Hochzahl muss die Basis potenziert werden, um die Zahl zu erhalten? log₁₀(1000) = 3, denn 10³ = 1.000.</p><p>Drei Logarithmen sind besonders gebräuchlich: der <strong>dekadische</strong> zur Basis 10 (log), der <strong>natürliche</strong> zur Basis e ≈ 2,718 (ln) und der <strong>binäre</strong> zur Basis 2 (in der Informatik). Ihre große Stärke: Logarithmen verwandeln Multiplikation in Addition und machen extrem große Zahlenbereiche handhabbar.</p><p>Genau deshalb sind <strong>logarithmische Skalen</strong> in der Naturwissenschaft so verbreitet — von der Richter-Skala über den pH-Wert bis zum Dezibel. Jede ganze Stufe entspricht dort einem Faktor 10.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Die Zahl e und der natürliche Logarithmus',
+        html: `<p>Eine besondere Rolle spielt die <strong>eulersche Zahl e ≈ 2,718</strong>. Sie ist die natürliche Basis für stetiges Wachstum: Wo etwas kontinuierlich — nicht in festen Schritten — wächst oder zerfällt, taucht e zwangsläufig auf. Radioaktiver Zerfall, kontinuierliche Verzinsung und viele Naturprozesse folgen der Funktion e^x.</p><p>Der zugehörige Logarithmus ist der <strong>natürliche Logarithmus „ln"</strong> (zur Basis e). Er ist in Analysis und Naturwissenschaft der Standard, weil er sich besonders einfach ableiten lässt. Zwischen den Logarithmen kann man jederzeit umrechnen: ln(x) = log₁₀(x) ÷ log₁₀(e).</p><p>Für die meisten Schulaufgaben genügt der Logarithmus zur Basis 10 oder 2. Sobald es aber um stetige Veränderung geht — etwa in der Physik oder der höheren Finanzmathematik — führt an e und ln kein Weg vorbei.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Potenz, Wurzel, Logarithmus — drei Sichtweisen',
+        spalteA: 'Frage',
+        spalteB: 'Werkzeug & Ergebnis',
+        zeilen: [
+          { kriterium: 'Was ist 2³?', a: 'Basis und Exponent bekannt', b: 'Potenz → 8' },
+          { kriterium: 'Welche Zahl hoch 3 ergibt 8?', a: 'Exponent und Ergebnis bekannt', b: 'Wurzel → ³√8 = 2' },
+          { kriterium: '2 hoch wie viel ergibt 8?', a: 'Basis und Ergebnis bekannt', b: 'Logarithmus → log₂(8) = 3' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Anwendungen: von Zinseszins bis Bytes',
+        html: `<p>Potenzen, Wurzeln und Logarithmen stecken in vielen Alltags- und Fachbereichen. Beim <strong>Zinseszins</strong> wächst Kapital exponentiell: K = K₀ × (1 + p/100)ⁿ — und der Logarithmus verrät, wann sich der Betrag verdoppelt. Bei 5 % Zinsen sind das rund 14,2 Jahre.</p><p>In der <strong>Informatik</strong> sind Speichergrößen Zweierpotenzen: 1 KB = 2¹⁰ = 1.024 Byte, 1 MB = 2²⁰, 1 GB = 2³⁰. Auch Bildschirmauflösungen folgen diesem Muster, weil Computer binär arbeiten. In Physik und Chemie macht die <strong>wissenschaftliche Notation</strong> (a × 10ⁿ) riesige und winzige Zahlen handhabbar — etwa die Lichtgeschwindigkeit 3 × 10⁸ m/s.</p><p>In der <strong>Geometrie</strong> schließlich sind Flächen Quadrat- und Volumina Kubikfunktionen: Verdoppelt man die Kante eines Würfels, verachtfacht sich sein Volumen.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Merkwerte für Schule und Studium',
+        werte: [
+          { label: '2¹⁰', wert: '1.024', hinweis: '= 1 Kilobyte (Informatik)' },
+          { label: '12²', wert: '144', hinweis: 'größte Quadratzahl im kleinen Einmaleins' },
+          { label: 'a⁰', wert: '1', hinweis: 'für jedes a ≠ 0' },
+          { label: 'natürliche Basis e', wert: '≈ 2,718', hinweis: 'Basis des natürlichen Logarithmus ln' },
+          { label: '√2', wert: '≈ 1,414', hinweis: 'irrational, unendlich viele Nachkommastellen' },
+        ],
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Häufige Fehler vermeiden',
+        punkte: [
+          'Potenzgesetze nur bei gleicher Basis anwenden — 2³ × 3² lässt sich nicht zusammenfassen',
+          'a⁰ = 1 nicht mit a × 0 = 0 verwechseln (Null-Exponent vs. Multiplikation mit 0)',
+          'Negativer Exponent bedeutet Kehrwert (a⁻ⁿ = 1/aⁿ), nicht ein negatives Ergebnis',
+          'Bei der Wurzel den Grad beachten: √ ist die Quadratwurzel (n = 2), ³√ die Kubikwurzel',
+          'Logarithmus-Basis nicht vergessen — „log" meint meist Basis 10, „ln" die Basis e',
+          'Irrationale Ergebnisse (√2, viele Log-Werte) sind gerundet — sie haben unendlich viele Stellen',
+          'Reihenfolge beachten: Potenzen werden vor Punkt- und Strichrechnung ausgewertet',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Exakt, wo möglich — gerundet, wo nötig',
+        text: 'Der Rechner liefert exakte Werte, wo das möglich ist, und gerundete, wo das Ergebnis irrational ist (etwa bei den meisten Wurzeln und Logarithmen). √2, die Kreiszahl π oder log₁₀(2) haben unendlich viele, nicht periodische Nachkommastellen — die Anzeige ist hier eine Näherung. Für Schule und Studium sind die gerundeten Werte in der Regel ausreichend; in der numerischen Mathematik achtet man zusätzlich auf die Rundungsfehler.',
+      },
+    ],
     faq: [
       {
         frage: 'Was ist eine Potenz?',
@@ -2777,6 +2931,10 @@ Potenzen, Wurzeln und Logarithmen erscheinen in vielen Lebensbereichen — meist
         frage: 'Warum ist jede Zahl hoch 0 gleich 1?',
         antwort: 'Aus dem Potenzgesetz aⁿ ÷ aⁿ = aⁿ⁻ⁿ = a⁰. Da jede Zahl durch sich selbst 1 ergibt, muss a⁰ = 1 sein. Diese Konvention gilt für alle a ≠ 0. Der Ausdruck 0⁰ ist in der Mathematik nicht einheitlich definiert, wird aber in der Kombinatorik oft als 1 festgelegt.',
       },
+    ],
+    quellen: [
+      { titel: 'Bronstein/Semendjajew: Taschenbuch der Mathematik', hinweis: 'Standard-Referenz für Potenz-, Wurzel- und Logarithmengesetze.' },
+      { titel: 'Statistisches Bundesamt (Destatis): wissenschaftliche Notation & Zehnerpotenzen', url: 'https://www.destatis.de', hinweis: 'Darstellung sehr großer und sehr kleiner Zahlen in der Form a × 10ⁿ.' },
     ],
   },
   {
