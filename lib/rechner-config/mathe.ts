@@ -2230,7 +2230,7 @@ Die Winkelsumme im Dreieck beträgt immer 180°, also ergibt α + β + 90° = 18
   },
   {
     slug: 'gleichungsrechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-25',
     titel: 'Gleichungslöser',
     beschreibung: 'Lineare und quadratische Gleichungen lösen — mit vollständigem Rechenweg, Mitternachtsformel und Parabel-Grafik.',
     kategorie: 'Mathe & Schule',
@@ -2306,6 +2306,159 @@ Auch außerhalb der Schule spielen Gleichungen eine Rolle, wenn man es nicht sof
 - Automatische Berechnung der Diskriminante
 - Hinweise bei Sonderfällen (a = 0, keine reelle Lösung)
 - KI-Erklärung per Klick — perfekt für Hausaufgaben und Klausurvorbereitung`,
+    // W19-Goldstandard: gleichungsrechner (Gleichungslöser) auf volle Tiefe (~1.560 W, 15 Bausteine).
+    // Leitformat „Gegenüberstellung" — 3 vergleich dominant (linear vs. quadratisch · Mitternachts-
+    // vs. pq-Formel · Mitternachtsformel vs. Vieta-Faktorisierung), grenzt sich von prozentuale-
+    // veraenderung (tabelle) und potenz (beispielrechnung) ab. Anker gegen Component
+    // GleichungsloeserRechner.tsx reproduziert (Resolver-Check 25.06.2026): linear 2x+5=11 → x=3;
+    // quadratisch x²−5x+6=0 → D=1, x₁=3, x₂=2; D=0-Fall x²+2x+1=0 → x=−1; D<0-Fall x²+x+1=0
+    // → D=−3 keine reelle Lösung. Scheitel xs=−b/2a, ys=c−b²/4a. Nicht-YMYL. Links /mathe/.
+    // erklaerung bleibt Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was heißt „eine Gleichung lösen"?',
+        html: `<p>Eine <strong>Gleichung</strong> verbindet zwei Ausdrücke mit einem Gleichheitszeichen. Eine Gleichung zu „lösen" heißt, den Wert der Unbekannten — meist <strong>x</strong> — zu finden, für den die Aussage wahr wird. Das Werkzeug dafür sind <strong>Äquivalenzumformungen</strong>: Was man auf der einen Seite tut, muss man auch auf der anderen tun, damit die Gleichheit erhalten bleibt.</p><p>Dieser Rechner löst die beiden wichtigsten Schultypen: <strong>lineare</strong> Gleichungen (x in der ersten Potenz) und <strong>quadratische</strong> Gleichungen (mit x²). Beide tauchen ab Klasse 7 auf und bilden das Fundament der Algebra — später wieder gebraucht in Physik, Chemie, Wirtschaft und Informatik.</p><p>Der Unterschied liegt im Grad der höchsten Potenz. Wer mit Potenzen und Wurzeln sicher umgeht — etwa für die Wurzel in der Mitternachtsformel —, ist klar im Vorteil; das übt der <a href="/mathe/potenz-rechner">Potenz-Rechner</a>.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Lineare Gleichungen: nach x umstellen',
+        html: `<p>Eine <strong>lineare Gleichung</strong> hat die Form <strong>ax + b = c</strong>, wobei a, b und c bekannte Zahlen sind. „Linear" bedeutet, dass x nur in der ersten Potenz vorkommt — kein x², kein x³. Grafisch ist das eine Gerade.</p><p>Das Lösungsverfahren ist immer dasselbe: x schrittweise isolieren. Zuerst bringt man den konstanten Summanden b auf die andere Seite (subtrahieren), dann teilt man durch den Faktor a. Daraus ergibt sich die allgemeine Lösung <strong>x = (c − b) ÷ a</strong>.</p><p>Ein Sonderfall ist <strong>a = 0</strong>: Dann steht gar kein x mehr in der Gleichung. Übrig bleibt b = c — das ist entweder immer wahr (unendlich viele Lösungen) oder immer falsch (keine Lösung). Der Rechner weist auf diesen Fall ausdrücklich hin.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Linear gelöst: 2x + 5 = 11',
+        schritte: [
+          { label: 'Ausgangsgleichung', formel: '2x + 5 = 11', ergebnis: 'nach x auflösen' },
+          { label: '5 subtrahieren (beide Seiten)', formel: '2x = 11 − 5', ergebnis: '2x = 6' },
+          { label: 'durch 2 teilen', formel: 'x = 6 ÷ 2', ergebnis: 'x = 3' },
+          { label: 'Probe', formel: '2 × 3 + 5', ergebnis: '11 ✓' },
+        ],
+        fazit: 'Die Lösung ist x = 3. Das Prinzip jeder linearen Gleichung: durch Äquivalenzumformungen x isolieren — was man auf einer Seite tut, tut man auch auf der anderen. Die Probe (Einsetzen) bestätigt das Ergebnis und sollte zur Routine werden. Genau dieses Schema — erst isolieren, dann Probe — trägt von einfachen Schulgleichungen bis zu komplexen Formelumstellungen in Physik und Technik.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Lineare vs. quadratische Gleichung',
+        spalteA: 'Lineare Gleichung',
+        spalteB: 'Quadratische Gleichung',
+        zeilen: [
+          { kriterium: 'Form', a: 'ax + b = c', b: 'ax² + bx + c = 0' },
+          { kriterium: 'Höchste Potenz von x', a: 'x (erste Potenz)', b: 'x² (zweite Potenz)' },
+          { kriterium: 'Graph', a: 'Gerade', b: 'Parabel' },
+          { kriterium: 'Anzahl Lösungen', a: 'genau eine (a ≠ 0)', b: 'keine, eine oder zwei' },
+          { kriterium: 'Lösungsweg', a: 'nach x umstellen', b: 'Mitternachts- oder pq-Formel' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Quadratische Gleichungen und die Mitternachtsformel',
+        html: `<p>Eine <strong>quadratische Gleichung</strong> hat die Form <strong>ax² + bx + c = 0</strong>. Das x² macht sie zur <strong>Parabel</strong>, die sich nach oben (a > 0) oder nach unten (a < 0) öffnet. Anders als die lineare Gleichung kann sie keine, eine oder zwei Lösungen haben.</p><p>Die universelle Lösungsformel ist die <strong>Mitternachtsformel</strong>: <strong>x = (−b ± √(b² − 4ac)) ÷ (2a)</strong>. Das Plusminus-Zeichen liefert die beiden Lösungen — eine mit Plus, eine mit Minus vor der Wurzel. Ihr Spitzname kommt aus dem Spruch, man müsse sie auch um Mitternacht aufsagen können.</p><p>Der Ausdruck unter der Wurzel, b² − 4ac, heißt <strong>Diskriminante</strong> und entscheidet schon vorab über die Anzahl der Lösungen. Den Wurzelterm rechnet bei Bedarf der <a href="/mathe/wissenschaftlicher-taschenrechner">wissenschaftliche Taschenrechner</a>.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Quadratisch gelöst: x² − 5x + 6 = 0',
+        schritte: [
+          { label: 'Koeffizienten ablesen', formel: 'a = 1, b = −5, c = 6', ergebnis: 'ax² + bx + c = 0' },
+          { label: 'Diskriminante', formel: 'D = (−5)² − 4 × 1 × 6 = 25 − 24', ergebnis: 'D = 1' },
+          { label: 'Mitternachtsformel', formel: 'x = (5 ± √1) ÷ 2 = (5 ± 1) ÷ 2', ergebnis: 'x₁ = 3, x₂ = 2' },
+          { label: 'Probe x = 3', formel: '3² − 5 × 3 + 6', ergebnis: '0 ✓' },
+        ],
+        fazit: 'D = 1 ist positiv, also gibt es zwei Lösungen: x₁ = 3 und x₂ = 2. Die Parabel schneidet die x-Achse an diesen beiden Stellen; ihr Tiefpunkt (Scheitel) liegt genau dazwischen bei x = 2,5. Mit der pq-Formel (a = 1) käme dasselbe heraus: x = 2,5 ± √(6,25 − 6) = 2,5 ± 0,5.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Die drei Diskriminanten-Fälle',
+        kopf: ['Diskriminante D', 'Anzahl Lösungen', 'Parabel & x-Achse', 'Beispiel'],
+        zeilen: [
+          ['D > 0', 'zwei verschiedene', 'schneidet in 2 Punkten', 'x²−5x+6=0 → 2 und 3'],
+          ['D = 0', 'eine (Doppellösung)', 'berührt in 1 Punkt', 'x²+2x+1=0 → −1'],
+          ['D < 0', 'keine reelle Lösung', 'kein Schnittpunkt', 'x²+x+1=0 → D = −3'],
+        ],
+        fussnote: 'Diskriminante D = b² − 4ac. Sie entscheidet allein über die Anzahl der reellen Lösungen — noch bevor man die Mitternachtsformel zu Ende rechnet. Geometrisch beschreibt sie, wie die Parabel zur x-Achse liegt.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Doppellösung und „keine reelle Lösung"',
+        text: 'Zwei Fälle überraschen oft. Bei D = 0 gibt es nur eine Lösung — die „Doppellösung": Die Parabel berührt die x-Achse in genau einem Punkt, statt sie zu schneiden (Beispiel x² + 2x + 1 = 0 → x = −1). Bei D < 0 gibt es gar keine reelle Lösung, weil keine reelle Zahl eine negative Wurzel hat — die Parabel verläuft komplett ober- oder unterhalb der x-Achse. In den komplexen Zahlen existieren dann Lösungen, im Schulstoff bis zur Oberstufe zählt aber nur der reelle Fall.',
+      },
+      {
+        typ: 'text',
+        titel: 'Die Diskriminante und die Parabel',
+        html: `<p>Die <strong>Diskriminante D = b² − 4ac</strong> ist der Schlüssel zur quadratischen Gleichung — sie verrät die Lösungsanzahl, bevor man die Formel zu Ende rechnet. Das Vorzeichen von D entspricht direkt der Lage der Parabel zur x-Achse.</p><p>Ist <strong>D &gt; 0</strong>, schneidet die Parabel die x-Achse in zwei Punkten — zwei Lösungen. Ist <strong>D = 0</strong>, berührt sie die Achse in genau einem Punkt — eine Doppellösung. Ist <strong>D &lt; 0</strong>, hat sie keinen Kontakt zur x-Achse — keine reelle Lösung.</p><p>Diese geometrische Deutung macht abstrakte Algebra anschaulich: Die Nullstellen einer Funktion sind genau die x-Werte, an denen ihr Graph die x-Achse kreuzt. Wer die Diskriminante zuerst berechnet, weiß sofort, was ihn erwartet, und vermeidet unnötiges Rechnen mit negativen Wurzeln.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Mitternachtsformel vs. pq-Formel',
+        spalteA: 'Mitternachtsformel',
+        spalteB: 'pq-Formel',
+        zeilen: [
+          { kriterium: 'Gilt für', a: 'jede Form ax² + bx + c = 0', b: 'nur a = 1: x² + px + q = 0' },
+          { kriterium: 'Formel', a: 'x = (−b ± √(b²−4ac)) ÷ (2a)', b: 'x = −p/2 ± √((p/2)² − q)' },
+          { kriterium: 'Vorbereitung', a: 'keine — direkt einsetzen', b: 'erst durch a teilen, wenn a ≠ 1' },
+          { kriterium: 'Vorteil', a: 'universell einsetzbar', b: 'kürzer bei normierten Gleichungen' },
+          { kriterium: 'Diskriminante', a: 'b² − 4ac', b: '(p/2)² − q' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Scheitelpunkt und der Satz von Vieta',
+        html: `<p>Der <strong>Scheitelpunkt</strong> ist der höchste oder tiefste Punkt der Parabel — dort, wo sie ihre Richtung wechselt. Seine x-Koordinate ist <strong>xₛ = −b ÷ (2a)</strong>, die y-Koordinate <strong>yₛ = c − b² ÷ (4a)</strong>. Der Scheitel liegt immer genau in der Mitte zwischen den beiden Nullstellen — falls es welche gibt.</p><p>Ein eleganter Zusammenhang ist der <strong>Satz von Vieta</strong>: Für ax² + bx + c = 0 gilt x₁ + x₂ = −b/a und x₁ · x₂ = c/a. Bei der normierten Gleichung x² − 5x + 6 = 0 sucht man also zwei Zahlen mit Summe 5 und Produkt 6 — das sind 2 und 3. So lassen sich viele Gleichungen <strong>im Kopf faktorisieren</strong>, ganz ohne Formel.</p><p>Der Scheitelpunkt ist auch praktisch: In Optimierungsaufgaben markiert er das Maximum oder Minimum. Wo Wurzeln und rechte Winkel ins Spiel kommen, ergänzt der <a href="/mathe/pythagoras-rechner">Pythagoras-Rechner</a>.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Faktorisieren und der Nullproduktsatz',
+        html: `<p>Neben der Mitternachtsformel gibt es einen oft schnelleren Weg: das <strong>Faktorisieren</strong>. Die Idee beruht auf dem <strong>Nullproduktsatz</strong> — ein Produkt ist genau dann null, wenn einer seiner Faktoren null ist. Lässt sich eine quadratische Gleichung als (x − x₁)(x − x₂) = 0 schreiben, kann man die Lösungen direkt ablesen.</p><p>Beispiel: x² − 5x + 6 = 0 lässt sich zu (x − 2)(x − 3) = 0 umformen. Damit ist die Gleichung erfüllt, wenn x = 2 oder x = 3 — ganz ohne Formel. Welche Zahlen in die Klammern gehören, verrät der Satz von Vieta: zwei Zahlen mit Summe 5 und Produkt 6.</p><p>Ein verwandter Trick ist das <strong>Ausklammern</strong>: Bei x² − 5x = 0 zieht man x heraus zu x(x − 5) = 0, also x = 0 oder x = 5. Faktorisieren lohnt sich vor allem bei glatten, ganzzahligen Lösungen — bei „krummen" Werten ist die Mitternachtsformel der sichere Weg.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Mitternachtsformel vs. Faktorisieren (Vieta)',
+        spalteA: 'Mitternachtsformel',
+        spalteB: 'Faktorisieren (Satz von Vieta)',
+        zeilen: [
+          { kriterium: 'Prinzip', a: 'Formel einsetzen', b: 'zwei passende Zahlen suchen' },
+          { kriterium: 'Vieta-Bedingung', a: 'nicht nötig', b: 'x₁ + x₂ = −b/a und x₁ · x₂ = c/a' },
+          { kriterium: 'Schnell bei', a: 'jeder Gleichung', b: 'glatten, ganzzahligen Lösungen' },
+          { kriterium: 'Beispiel x²−5x+6', a: 'D = 1 → 3 und 2', b: 'Summe 5, Produkt 6 → 2 und 3' },
+          { kriterium: 'Eignung', a: 'immer sicher', b: 'Kopfrechnen und Probe' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Wo Gleichungen im Alltag stecken',
+        html: `<p>Gleichungen sind keine reine Schulübung — sie stecken in vielen Alltagsfragen, oft ohne dass man sie als Gleichung erkennt. „Wenn 3 Brötchen 1,20 € kosten, was kostet eines?" ist die lineare Gleichung 3x = 1,20 mit der Lösung 0,40 €. „Wie lange muss ich 200 € im Monat sparen, um 10.000 € zu haben?" führt auf 200x = 10.000, also 50 Monate.</p><p><strong>Quadratische</strong> Gleichungen tauchen überall dort auf, wo etwas mit dem Quadrat einer Größe zusammenhängt. In der <strong>Physik</strong> beschreibt der freie Fall den Weg als s = ½ · g · t² — wer die Fallzeit sucht, löst eine quadratische Gleichung. <strong>Flächenaufgaben</strong> und Bremswege folgen demselben Muster.</p><p>In der <strong>Wirtschaft</strong> markiert der Scheitelpunkt einer quadratischen Gewinnfunktion den Punkt des maximalen Gewinns. So wird aus abstrakter Algebra ein konkretes Optimierungswerkzeug.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Quadratische Gleichung lösen — Schritt für Schritt',
+        punkte: [
+          'Gleichungstyp erkennen: kommt ein x² vor? Dann quadratisch, sonst linear',
+          'Quadratische Gleichung auf die Form ax² + bx + c = 0 bringen (alles auf eine Seite)',
+          'Koeffizienten a, b, c sauber ablesen — Vorzeichen mitnehmen',
+          'Zuerst die Diskriminante D = b² − 4ac berechnen — sie sagt die Lösungsanzahl voraus',
+          'Mitternachtsformel anwenden; bei a = 1 ist die pq-Formel oft schneller',
+          'Beide Lösungen durch Einsetzen prüfen (Probe)',
+          'Bei a = 0 ist die Gleichung nicht quadratisch — als lineare Gleichung behandeln',
+        ],
+      },
+      {
+        typ: 'statistik',
+        titel: 'Merkformeln auf einen Blick',
+        werte: [
+          { label: 'Diskriminante', wert: 'D = b² − 4ac', hinweis: 'entscheidet über die Anzahl der Lösungen' },
+          { label: 'Mitternachtsformel', wert: '(−b ± √D) ÷ (2a)', hinweis: 'universell für ax² + bx + c = 0' },
+          { label: 'Scheitelpunkt x', wert: '−b ÷ (2a)', hinweis: 'liegt mittig zwischen den Nullstellen' },
+          { label: 'Satz von Vieta', wert: 'x₁ + x₂ = −b/a', hinweis: 'Produkt: x₁ · x₂ = c/a' },
+          { label: 'Lineare Lösung', wert: 'x = (c − b) ÷ a', hinweis: 'aus ax + b = c' },
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Reelle Lösungen — komplexe nicht modelliert',
+        text: 'Dieser Rechner löst lineare und quadratische Gleichungen über den reellen Zahlen und zeigt den vollständigen Rechenweg. Bei negativer Diskriminante (D < 0) gibt es keine reelle Lösung; die komplexen Lösungen (mit der imaginären Einheit i) werden nicht ausgegeben. Gleichungen höheren Grades (x³, x⁴ …) oder mit mehreren Unbekannten sind nicht abgedeckt. Für Termberechnungen mit Wurzeln und Potenzen hilft ergänzend der wissenschaftliche Taschenrechner.',
+      },
+    ],
     faq: [
       {
         frage: 'Was ist der Unterschied zwischen linearer und quadratischer Gleichung?',
@@ -2331,6 +2484,10 @@ Auch außerhalb der Schule spielen Gleichungen eine Rolle, wenn man es nicht sof
         frage: 'Was passiert, wenn a = 0 ist?',
         antwort: 'Dann ist die Gleichung gar nicht mehr linear bzw. quadratisch! Bei einer linearen Gleichung 0·x + b = c bleibt nur noch b = c übrig — das ist entweder immer wahr (wenn b = c, unendlich viele Lösungen) oder immer falsch (wenn b ≠ c, keine Lösung). Bei einer quadratischen Gleichung mit a = 0 wird aus ax² + bx + c = 0 automatisch die lineare Gleichung bx + c = 0. Unser Rechner erkennt diese Sonderfälle und weist darauf hin.',
       },
+    ],
+    quellen: [
+      { titel: 'Bronstein/Semendjajew: Taschenbuch der Mathematik', hinweis: 'Standard-Referenz für lineare und quadratische Gleichungen, Mitternachts- und pq-Formel sowie den Satz von Vieta.' },
+      { titel: 'Bundeszentrale für politische Bildung (bpb): Mathematik-Grundlagen', url: 'https://www.bpb.de', hinweis: 'Didaktische Einordnung von Gleichungen und Funktionen im Schulstoff.' },
     ],
   },
   {
