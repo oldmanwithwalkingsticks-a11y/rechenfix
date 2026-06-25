@@ -19,7 +19,7 @@ export default function AfaRechner() {
   const [kosten, setKosten] = useState<string>('10000');
   const [nutzungsdauer, setNutzungsdauer] = useState<string>('5');
   const [methode, setMethode] = useState<Methode>('linear');
-  const [degSatz, setDegSatz] = useState<string>('20');
+  const [degSatz, setDegSatz] = useState<string>('30');
   const [datum, setDatum] = useState<string>('2026-01-01');
 
   const result = useMemo(() => {
@@ -143,9 +143,9 @@ export default function AfaRechner() {
       {methode === 'degressiv' && (
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            Degressiver Satz (max. 20 %, höchstens 2× linearer Satz)
+            Degressiver Satz (max. 30 %, höchstens 3× linearer Satz)
           </label>
-          <NummerEingabe value={degSatz} onChange={setDegSatz} placeholder="20" einheit="%" />
+          <NummerEingabe value={degSatz} onChange={setDegSatz} placeholder="30" einheit="%" />
         </div>
       )}
 
@@ -163,17 +163,17 @@ export default function AfaRechner() {
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Für die anteilige AfA im ersten Jahr (pro rata temporis)</p>
       </div>
 
-      {/* Warn-Banner: Degressive AfA ab 2026 nicht zulässig */}
+      {/* Warn-Banner: Degressive AfA ab Anschaffungsjahr 2028 nicht zulässig */}
       {result.degressivGesperrt && (
         <div className="mb-4 p-3 rounded-xl border border-amber-300 bg-amber-50 dark:border-amber-700 dark:bg-amber-900/20">
           <p className="text-sm font-bold text-amber-800 dark:text-amber-200 mb-1">
             ⚠️ Degressive AfA nicht mehr zulässig
           </p>
           <p className="text-xs text-amber-700 dark:text-amber-300">
-            Nach § 7 Abs. 2 EStG n.F. (Wachstumschancengesetz) ist die degressive AfA für bewegliche
-            Wirtschaftsgüter nur noch für Anschaffungen bis 31.12.2025 zulässig. Für Ihr
-            Anschaffungsdatum wird automatisch linear gerechnet. Um degressiv zu reaktivieren, setzen
-            Sie das Anschaffungsdatum auf einen Tag bis 31.12.2025.
+            Nach § 7 Abs. 2 EStG n.F. (Investitionssofortprogramm) ist die degressive AfA für
+            bewegliche Wirtschaftsgüter nur für Anschaffungen vom 01.07.2025 bis 31.12.2027 zulässig.
+            Für Ihr Anschaffungsdatum wird automatisch linear gerechnet. Um degressiv zu reaktivieren,
+            setzen Sie das Anschaffungsdatum in dieses Fenster (bis 31.12.2027).
           </p>
         </div>
       )}

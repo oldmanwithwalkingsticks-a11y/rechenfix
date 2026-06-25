@@ -6,9 +6,11 @@
  * Quellen:
  *   - § 7 Abs. 1 EStG (Linear-AfA pro rata temporis):
  *     https://www.gesetze-im-internet.de/estg/__7.html
- *   - § 7 Abs. 2 EStG n.F. (Degressiv-AfA für bewegliche WG; Wachstums-
- *     chancengesetz: zugelassen für Anschaffungen 01.04.2024–31.12.2025,
- *     ab 01.01.2026 NICHT mehr zulässig — Fallback auf Linear-Methode)
+ *   - § 7 Abs. 2 EStG n.F. (Degressiv-AfA für bewegliche WG; Investitions-
+ *     sofortprogramm/„Wachstumsbooster", BGBl. I Nr. 161 v. 18.07.2025:
+ *     zugelassen für Anschaffungen 01.07.2025–31.12.2027, Satz höchstens
+ *     3× linear bzw. 30 % p. a.; ab Anschaffungsjahr 2028 NICHT mehr
+ *     zulässig — Fallback auf Linear-Methode)
  *   - § 7 Abs. 5a EStG (Sonder-AfA neue Mietwohngebäude: 5 % linear p. a.,
  *     Bauantrag 01.10.2023–30.09.2029, Effizienzhaus-Standards Voraussetzung)
  *   - § 6 Abs. 2 EStG (GWG-Sofortabschreibung: ≤ 800 € netto im Anschaffungs-
@@ -16,7 +18,7 @@
  *   - § 6 Abs. 2a EStG (Sammelposten-Pool: WG mit 250,01 € bis 1.000 € netto
  *     in einem Pool, 20 % p. a. linear über 5 Jahre, keine pro-rata-Regel)
  *
- * Stand: 2026.
+ * Stand: 2026 (inkl. Investitionssofortprogramm, BGBl. I Nr. 161 v. 18.07.2025).
  *
  * Welle 5 Track-A Tail D2 (04.05.2026) — Lib-Extraktion aus AfaRechner.tsx
  * (Welle-2-Pattern, zweiter Tail-Sprint). Component zuvor KEINE-LIB mit
@@ -56,15 +58,18 @@ export const SAMMELPOSTEN_JAHRE = 5;
 /** § 6 Abs. 2 EStG — GWG-Schwelle (≤ 800 € netto Sofortabschreibung). */
 export const AFA_GWG_SCHWELLE_NETTO = 800;
 
-/** § 7 Abs. 2 EStG — Maximaler Degressiv-Satz (% p. a.). */
-export const AFA_DEGRESSIV_MAX_PROZENT = 20;
+/**
+ * § 7 Abs. 2 EStG n.F. (Investitionssofortprogramm) — maximaler Degressiv-Satz
+ * (% p. a.): höchstens 3× linearer Satz, gedeckelt auf 30 %.
+ */
+export const AFA_DEGRESSIV_MAX_PROZENT = 30;
 
 /**
- * § 7 Abs. 2 EStG n.F. (Wachstumschancengesetz) — ab diesem Anschaffungsjahr
- * ist Degressiv-AfA für bewegliche WG nicht mehr zulässig (Fallback auf
- * Linear).
+ * § 7 Abs. 2 EStG n.F. (Investitionssofortprogramm) — Degressiv-AfA für
+ * bewegliche WG zulässig bei Anschaffung 01.07.2025–31.12.2027; ab diesem
+ * Anschaffungsjahr (2028) nicht mehr (Fallback auf Linear).
  */
-export const AFA_DEGRESSIV_STICHTAG_JAHR_GESPERRT = 2026;
+export const AFA_DEGRESSIV_STICHTAG_JAHR_GESPERRT = 2028;
 
 /** Trivial-kalendarisch für pro-rata-Erstjahres-Regel. */
 const MONATE_PRO_JAHR = 12;
@@ -91,7 +96,7 @@ export interface AfaEingabe {
   nutzungsdauerJahre: number;
   /** Gewählte Methode (kann durch Stichtag-Cut effektiv überschrieben werden). */
   methode: AfaMethode;
-  /** Degressiv-Satz in % (User-Eingabe, Lib clampt auf max. 20 %). */
+  /** Degressiv-Satz in % (User-Eingabe, Lib clampt auf 3× linear bzw. max. 30 %). */
   degressivSatzProzent: number;
   /** Anschaffungs-Jahr (für Stichtag-Cut Degressiv + Plan-Start). */
   startJahr: number;
@@ -122,7 +127,7 @@ export interface AfaErgebnis {
   jaehrlich: number;
   /** Linearer Satz in % (100 / Nutzungsdauer); 0 für GWG/Degressiv. */
   linSatzProzent: number;
-  /** Effektiv verwendeter Degressiv-Satz (geclampt auf max. 20). */
+  /** Effektiv verwendeter Degressiv-Satz (geclampt auf 3× linear bzw. max. 30). */
   degressivSatzEffektivProzent: number;
   /**
    * Anteil des Erstjahres (`restMonate / 12`). Bei Sammelposten/GWG nicht
@@ -140,14 +145,15 @@ export interface AfaErgebnis {
   gwgOk: boolean;
   /**
    * Degressiv durch Stichtag-Cut auf Linear gefallback?
-   * (true wenn `methode === 'degressiv' && startJahr >= 2026`).
+   * (true wenn `methode === 'degressiv' && startJahr >= 2028`).
    */
   degressivGesperrt: boolean;
 }
 
 /**
  * Berechnet einen AfA-Plan nach gewählter Methode mit pro-rata-Erstjahres-
- * Regel und Stichtag-Cut für Degressiv ab 01.01.2026.
+ * Regel und Stichtag-Cut für Degressiv ab Anschaffungsjahr 2028
+ * (Investitionssofortprogramm-Fenster: 01.07.2025–31.12.2027).
  *
  * Reine Wert-Funktion: keine Validierung negativer Werte (Component clampt
  * Eingabe-Felder via `parseDeutscheZahl || 0`).
@@ -283,7 +289,8 @@ export function berechneAfa(eingabe: AfaEingabe): AfaErgebnis {
 
   // Degressiv-AfA § 7 Abs. 2 EStG (mit Wechsel zu Linear, wenn günstiger)
   const linSatz = 100 / nd;
-  const degNum = Math.min(eingabe.degressivSatzProzent, AFA_DEGRESSIV_MAX_PROZENT);
+  // § 7 Abs. 2 EStG n.F.: höchstens 3× linearer Satz, gedeckelt auf 30 %.
+  const degNum = Math.min(eingabe.degressivSatzProzent, 3 * linSatz, AFA_DEGRESSIV_MAX_PROZENT);
   let rest = k;
   let kum = 0;
   const ersteAfa = Math.min(rest * (degNum / 100) * anteilErstjahr, rest);
