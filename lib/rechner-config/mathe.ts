@@ -1620,7 +1620,7 @@ Für reine Flächenberechnungen (Dreieck, Kreis, Rechteck) nutzen Sie den Fläch
   },
   {
     slug: 'abi-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-26',
     titel: 'Abi-Notenrechner',
     beschreibung: 'Abitur-Durchschnittsnote berechnen: Von Punkten zur Abi-Note — mit Block I (Kurse) und Block II (Prüfungen).',
     kategorie: 'Mathe & Schule',
@@ -1648,7 +1648,7 @@ Die offizielle Formel der KMK lautet: **Note = (17/3) − (Gesamtpunkte / 180)**
 Einige Eckwerte:
 - **300 Punkte** → Note 4,0 (bestanden)
 - **420 Punkte** → Note 3,3
-- **540 Punkte** → Note 2,7
+- **540 Punkte** → Note 2,6
 - **660 Punkte** → Note 2,0
 - **780 Punkte** → Note 1,3
 - **823 Punkte** → Note 1,0
@@ -1678,6 +1678,155 @@ Wer die Durchschnittsnote verbessern möchte, sollte früh in der Qualifikations
 Wer das Abitur nicht besteht, kann die Qualifikationsphase unter bestimmten Voraussetzungen wiederholen oder die Prüfungen zu einem späteren Zeitpunkt als externe Prüfung ablegen. Alternativ bietet die **Fachhochschulreife** (Fachabitur) einen Zugang zu Fachhochschulen — sie ist nach erfolgreichem Abschluss der Q1 und Q2 sowie eines Praktikums erreichbar.
 
 **Weitere Rechner:** Für Klassenarbeiten und einzelne Prüfungen nutzen Sie unseren Notenschlüssel-Rechner. Für Durchschnittsberechnungen (Zeugnisnote, Semesterdurchschnitt) den Durchschnittsrechner. Prozentuale Veränderungen (z. B. wie viel Prozent Ihnen noch zur 1,0 fehlen) berechnet der Prozentrechner.`,
+    // W19-Goldstandard: abi-rechner (Abi-Notenrechner) auf volle Tiefe (~1.560 W, 15 Bausteine).
+    // Leitformat „Umrechnungstabellen" — 3 tabelle dominant (Punkte→Note · 15-Punkte-System ·
+    // Bestehens-Schwellen). Leicht-YMYL (KMK). Anker gegen GEFIXTE Component reproduziert
+    // (Resolver-Check 25.06.2026, punkteZuAbiNote floor + 823-Cap, Fix 0a99c8c): N = 17/3 − E/180,
+    // auf 1 NK ABGESCHNITTEN; 1,0 ab 823; 18 Punkte = 0,1 Note. Bänder: 823–900→1,0, 751–768→1,4,
+    // 643–660→2,0, 463–480→3,0, 300→4,0; 580→2,4. erklaerung bleibt Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Wie die Abiturnote entsteht',
+        html: `<p>Die <strong>Abiturnote</strong> wird in Deutschland nach einer <strong>bundeseinheitlichen Formel</strong> der Kultusministerkonferenz (KMK) berechnet. Grundlage sind die Punkte aus der Qualifikationsphase und den Abiturprüfungen. Die Gesamtpunktzahl liegt zwischen <strong>300 und 900</strong> — daraus ergibt sich eine Note zwischen 1,0 und 4,0.</p><p>Die Formel lautet: <strong>Note = 17/3 − Gesamtpunkte ÷ 180</strong>. Je mehr Punkte, desto besser (niedriger) die Note. Wichtig: Das Ergebnis wird auf eine Nachkommastelle <strong>abgeschnitten</strong>, nicht gerundet — 2,44 wird also zu 2,4, nicht zu 2,5.</p><p>Dieser Rechner zeigt sofort, welche Note Ihren Punkten entspricht und ob die Bestehensbedingungen erfüllt sind. Für Zeugnis- oder Semesterdurchschnitte abseits des Abiturs hilft der <a href="/mathe/durchschnitt-rechner">Durchschnittsrechner</a>.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Block I und Block II',
+        html: `<p>Die Abiturnote setzt sich aus zwei Blöcken zusammen. <strong>Block I</strong> umfasst die Leistungen der Qualifikationsphase — die Halbjahresergebnisse der letzten vier Schulhalbjahre. Eingebracht werden je nach Bundesland rund <strong>36 bis 40 Kurse</strong> mit je bis zu 15 Punkten. Block I bringt mindestens 200 und maximal <strong>600 Punkte</strong> — also rund zwei Drittel des Gesamtergebnisses.</p><p><strong>Block II</strong> besteht aus den <strong>fünf Abiturprüfungen</strong> (drei schriftliche, eine mündliche und eine fünfte Komponente). Jede Prüfung zählt bis zu 15 Punkte, multipliziert mit dem Faktor 4 — macht maximal <strong>300 Punkte</strong> (5 × 15 × 4).</p><p>Weil Block I doppelt so stark gewichtet ist wie Block II, lohnt sich kontinuierliche Leistung in der Oberstufe besonders. Ein einzelner verpatzter Kurs wiegt weniger als eine durchgehend solide Halbjahresbilanz.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: 400 + 180 Punkte → Note 2,4',
+        schritte: [
+          { label: 'Block I (Kurse)', formel: 'Halbjahresergebnisse, max. 600', ergebnis: '400 Punkte' },
+          { label: 'Block II (Prüfungen)', formel: '5 Prüfungen × Faktor 4, max. 300', ergebnis: '180 Punkte' },
+          { label: 'Gesamtpunkte', formel: '400 + 180', ergebnis: '580 Punkte' },
+          { label: 'KMK-Formel', formel: '17/3 − 580 ÷ 180 = 2,444…', ergebnis: '2,4 (abgeschnitten)' },
+        ],
+        fazit: 'Mit 580 Punkten ergibt sich die Abi-Note 2,4. Die Formel liefert 2,444…, das wird auf eine Nachkommastelle abgeschnitten (nicht gerundet) — also 2,4, nicht 2,5. Alle drei Mindestgrenzen sind erfüllt (Gesamt ≥ 300, Block I ≥ 200, Block II ≥ 100), das Abitur ist bestanden. Bräuchte derselbe Schüler eine 2,0, müsste er auf 643–660 Punkte kommen — also gut 60 Punkte mehr, etwa durch einen Punkt mehr in mehreren Prüfungen oder stärkere Halbjahresergebnisse.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Punkte → Abi-Note (Notenstufen)',
+        kopf: ['Gesamtpunkte', 'Abi-Note', 'Einordnung'],
+        zeilen: [
+          ['823–900', '1,0', 'Bestnote (Deckelung)'],
+          ['751–768', '1,4', 'sehr gut'],
+          ['643–660', '2,0', 'gut'],
+          ['553–570', '2,5', 'befriedigend'],
+          ['463–480', '3,0', 'befriedigend'],
+          ['373–390', '3,5', 'ausreichend'],
+          ['300', '4,0', 'bestanden (Minimum)'],
+        ],
+        fussnote: 'Note N = 17/3 − Gesamtpunkte ÷ 180, auf eine Nachkommastelle abgeschnitten (nicht gerundet). Jede 0,1-Notenstufe umfasst 18 Punkte. Die 1,0 gilt bereits ab 823 Punkten — rechnerisch bessere Werte bleiben 1,0 (keine 0,7 aufs Zeugnis).',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Die Bestnote 1,0 gibt es ab 823 Punkten',
+        text: 'Die Bestnote 1,0 gibt es bereits ab 823 von 900 möglichen Punkten — wer mehr erreicht, behält die 1,0 (eine rechnerische 0,7 oder 0,8 kommt nicht aufs Zeugnis, die Note wird bei 1,0 gedeckelt). 823 Punkte entsprechen einem Schnitt von rund 13,7 Punkten pro Kurs und Prüfung, also etwa der Note 1− (sehr gut). Die offizielle Note wird übrigens auf eine Nachkommastelle abgeschnitten, nicht kaufmännisch gerundet.',
+      },
+      {
+        typ: 'text',
+        titel: 'Die KMK-Formel und das Abschneiden',
+        html: `<p>Der Kern der Notenberechnung ist die <strong>KMK-Formel N = 17/3 − E ÷ 180</strong>, wobei E die erreichte Gesamtpunktzahl ist. Sie übersetzt den Punktebereich 300–900 linear in den Notenbereich 4,0–1,0. Jede Verbesserung um <strong>18 Punkte</strong> entspricht genau einer Zehntelnote (0,1).</p><p>Ein wichtiges Detail entscheidet über die letzte Stelle: Die Note wird <strong>abgeschnitten</strong>, nicht kaufmännisch gerundet. Aus 2,49 wird also 2,4, nicht 2,5 — das ist für die Betroffenen von Vorteil. Außerdem ist die Note nach oben bei <strong>1,0 gedeckelt</strong>: Rechnerisch bessere Werte zählen nicht.</p><p>Wer wissen will, wie viel ihm noch zur nächsten Notenstufe fehlt, kann die Punktedifferenz mit dem <a href="/alltag/prozentrechner">Prozentrechner</a> einordnen — der Abstand ist klein, der Effekt auf die Note aber spürbar.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Das 15-Punkte-System der Oberstufe',
+        kopf: ['Punkte', 'Schulnote', 'Bedeutung'],
+        zeilen: [
+          ['15 / 14 / 13', '1+ / 1 / 1−', 'sehr gut'],
+          ['12 / 11 / 10', '2+ / 2 / 2−', 'gut'],
+          ['9 / 8 / 7', '3+ / 3 / 3−', 'befriedigend'],
+          ['6 / 5 / 4', '4+ / 4 / 4−', 'ausreichend'],
+          ['3 / 2 / 1', '5+ / 5 / 5−', 'mangelhaft'],
+          ['0', '6', 'ungenügend'],
+        ],
+        fussnote: 'In der Oberstufe ersetzt das 15-Punkte-System die Schulnoten 1–6. 5 Punkte (= Note 4) sind die Schwelle zum Bestehen eines Kurses; ab 5 Punkten gilt ein Kurs als belegt ohne Defizit. 0 Punkte bedeuten, dass der Kurs als nicht belegt zählt.',
+      },
+      {
+        typ: 'text',
+        titel: 'Wann ist das Abitur bestanden?',
+        html: `<p>Das Abitur ist <strong>bestanden</strong>, wenn mehrere Bedingungen <strong>gleichzeitig</strong> erfüllt sind: Die Gesamtpunktzahl beträgt mindestens 300, Block I mindestens 200 und Block II mindestens 100 Punkte. Schon das Reißen einer einzigen dieser Grenzen bedeutet: nicht bestanden — unabhängig von der rechnerischen Note.</p><p>Hinzu kommen die <strong>Prüfungsbedingungen</strong>: Mindestens drei der fünf Abiturprüfungen müssen mit je 5 oder mehr Punkten abgeschlossen sein, darunter mindestens eine schriftliche. Ein Kurs mit 0 Punkten gilt als nicht belegt.</p><p>Wie viele <strong>Defizite</strong> (Kurse unter 5 Punkten) erlaubt sind, regelt jedes Bundesland selbst. Für die Bewertung einzelner Klassenarbeiten und Prüfungen nach Punkten hilft der <a href="/mathe/notenschluessel-rechner">Notenschlüssel-Rechner</a>.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Bestehens-Schwellen und Maxima',
+        kopf: ['Bereich', 'Mindestens', 'Maximal'],
+        zeilen: [
+          ['Block I (Kurse)', '200 Punkte', '600 Punkte'],
+          ['Block II (Prüfungen)', '100 Punkte', '300 Punkte'],
+          ['Gesamt', '300 Punkte', '900 Punkte'],
+          ['Note', '4,0', '1,0 (ab 823)'],
+        ],
+        fussnote: 'Alle drei Mindestgrenzen müssen gleichzeitig erfüllt sein. Block I sind ~36–40 Halbjahresergebnisse (je bis 15 Punkte), Block II die fünf Abiturprüfungen (je bis 15 Punkte × Faktor 4). Zusätzlich müssen mindestens drei der fünf Prüfungen mit 5 oder mehr Punkten bestanden sein.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Bestehens-Bedingungen im Überblick',
+        punkte: [
+          'Gesamtpunktzahl mindestens 300 (von 900 möglichen)',
+          'Block I (Kurse) mindestens 200, Block II (Prüfungen) mindestens 100 Punkte',
+          'Mindestens 3 der 5 Abiturprüfungen mit je 5 oder mehr Punkten bestanden',
+          'Davon mindestens eine schriftliche Prüfung mit 5+ Punkten',
+          'Kein eingebrachter Kurs mit 0 Punkten (gilt sonst als nicht belegt)',
+          'Höchstzahl zulässiger Defizite (Kurse unter 5 Punkten) je nach Bundesland beachten',
+          'Alle Bedingungen gleichzeitig — das Reißen einer einzigen bedeutet: nicht bestanden',
+        ],
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Punktebereiche und was sie bedeuten',
+        spalteA: 'Abi-Note',
+        spalteB: 'Bedeutung',
+        zeilen: [
+          { kriterium: '823–900 Punkte', a: '1,0', b: 'Bestnote — reicht für jeden NC' },
+          { kriterium: '660–822 Punkte', a: '1,1–2,0', b: 'sehr gut bis gut, breite Studienwahl' },
+          { kriterium: '481–660 Punkte', a: '2,0–2,9', b: 'solides Abitur, viele Fächer ohne NC' },
+          { kriterium: '301–480 Punkte', a: '3,0–3,9', b: 'bestanden, NC-Fächer schwieriger' },
+          { kriterium: '300 Punkte', a: '4,0', b: 'gerade bestanden (Minimum)' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Bundesland-Variation: gleiche Formel, andere Punkte',
+        html: `<p>Ein häufiges Missverständnis: Die <strong>Notenformel ist bundesweit identisch</strong> (17/3 − E ÷ 180), aber die <strong>Ermittlung der Gesamtpunkte unterscheidet sich</strong> von Land zu Land. Genau hier liegt die Komplexität des Abiturs.</p><p>Unterschiede gibt es vor allem bei der <strong>Zahl der einzubringenden Kurse</strong> (32 bis 40), bei der <strong>Gewichtung der Leistungskurse</strong> (oft doppelt), bei den zulässigen Defiziten und bei der Frage, ob eine <strong>besondere Lernleistung</strong> (BLL) als fünftes Prüfungselement zählt. Auch die genaue Zusammensetzung von Block II variiert.</p><p>Dieser Rechner nutzt die bundeseinheitliche Formel und die Standard-Maxima (Block I 600, Block II 300). Für Ihre konkrete Punkte-Ermittlung ist die <strong>Abiturprüfungsordnung Ihres Bundeslandes</strong> maßgeblich — im Zweifel bei Schule oder Kultusministerium nachfragen.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'NC: Wofür reicht welche Note?',
+        html: `<p>Für viele Studiengänge entscheidet die Abiturnote über den Studienplatz — Stichwort <strong>Numerus clausus (NC)</strong>. Besonders begehrte Fächer wie <strong>Medizin, Zahnmedizin oder Psychologie</strong> verlangen je nach Hochschule und Semester häufig eine Note zwischen <strong>1,0 und 1,3</strong>.</p><p>Allerdings ist die Abiturnote längst nicht alles: Wartesemester, hochschuleigene Auswahlverfahren, Tests (etwa der TMS für Medizin) und Boni für Berufsausbildung oder Auslandserfahrung verschieben die Grenzen. Der NC ist außerdem kein fester Wert, sondern ergibt sich erst nach jeder Bewerbungsrunde aus Angebot und Nachfrage.</p><p>Für die meisten Studiengänge reicht ein solides Abitur ohne Spitzennote. Wer früh ein klares Studienziel hat, sollte den geforderten NC kennen — und Block I als den größeren Hebel gezielt angehen.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Wie kann ich meine Abi-Note verbessern?',
+        html: `<p>Wer die Durchschnittsnote verbessern will, sollte <strong>früh in der Qualifikationsphase</strong> ansetzen — nicht erst kurz vor den Prüfungen. <strong>Block I macht zwei Drittel</strong> der Gesamtpunktzahl aus: Ein Punkt mehr pro Halbjahr bringt bei 40 eingebrachten Kursen 40 zusätzliche Punkte — und 18 Punkte sind bereits eine Zehntelnote.</p><p>In den <strong>Abiturprüfungen</strong> wiegt jeder Punkt durch den Faktor 4 besonders schwer: Ein Punkt mehr in einer Prüfung bringt 4 Punkte aufs Gesamtkonto. Die <strong>Wahl der Prüfungsfächer</strong> sollte strategisch erfolgen — Fächer, in denen man kontinuierlich gute Leistungen zeigt, sind meist besser als vermeintlich „einfache" Fächer.</p><p>Der größte Hebel bleibt die Kontinuität: Wer über vier Halbjahre konstant solide abliefert, steht am Ende fast immer besser da als jemand, der allein auf eine starke Prüfungsphase hofft. Die Note entsteht über zwei Jahre, nicht an einem Prüfungstag.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Nicht bestanden — welche Wege es gibt',
+        html: `<p>Wer das Abitur nicht besteht, hat mehrere Optionen. Unter bestimmten Voraussetzungen lässt sich die <strong>Qualifikationsphase wiederholen</strong> — in der Regel das letzte Jahr, je nach Bundesland und bisherigem Verlauf. Die Prüfungen können außerdem zu einem späteren Zeitpunkt als <strong>externe Prüfung</strong> (Nichtschülerabitur) abgelegt werden.</p><p>Eine Alternative ist die <strong>Fachhochschulreife</strong> (umgangssprachlich Fachabitur): Sie öffnet den Weg zu Fachhochschulen und ist häufig schon nach erfolgreichem Abschluss der Q1 und Q2 sowie einem Praktikum oder einer Berufsausbildung erreichbar — auch ohne bestandene Abiturprüfungen.</p><p>Wichtig ist, sich früh beraten zu lassen: Die genauen Bedingungen für Wiederholung und Fachhochschulreife unterscheiden sich je Bundesland. Schule und Schulamt sind dafür die richtigen Ansprechpartner.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Eckwerte zum Abitur',
+        werte: [
+          { label: 'Note 1,0', wert: 'ab 823 Punkten', hinweis: 'von max. 900 (Deckelung)' },
+          { label: 'Eine Notenstufe (0,1)', wert: '18 Punkte', hinweis: 'offizielle KMK-Anlage-Tabelle' },
+          { label: 'Bestehensgrenze', wert: '300 Punkte', hinweis: '= Note 4,0' },
+          { label: 'Block I : Block II', wert: '600 : 300', hinweis: '~2/3 Kurse, ~1/3 Prüfungen' },
+          { label: 'NC Medizin/Jura', wert: '1,0–1,3', hinweis: 'je nach Hochschule und Semester' },
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Schätzung nach KMK-Formel — verbindlich nur die Schule',
+        text: 'Dieser Rechner schätzt die Abiturnote nach der bundeseinheitlichen KMK-Formel. Verbindlich ist allein die Berechnung Ihrer Schule bzw. des zuständigen Kultusministeriums — denn welche Kurse in welcher Gewichtung in Block I einfließen, welche Defizite zulässig sind und ob eine besondere Lernleistung (BLL) angerechnet wird, regelt jedes Bundesland in seiner eigenen Abiturprüfungsordnung. Dies ist eine Orientierungshilfe, keine Rechtsberatung.',
+      },
+    ],
     faq: [
       {
         frage: 'Wie berechne ich meine Abi-Note?',
@@ -1699,6 +1848,10 @@ Wer das Abitur nicht besteht, kann die Qualifikationsphase unter bestimmten Vora
         frage: 'Wann hat man das Abitur nicht bestanden?',
         antwort: 'Nicht bestanden ist das Abitur, wenn die Gesamtpunktzahl unter 300 liegt, Block I unter 200 oder Block II unter 100 Punkten. Außerdem müssen mindestens 3 der 5 Prüfungen mit je 5 oder mehr Punkten abgelegt werden. Ist eine dieser Bedingungen nicht erfüllt, gilt das Abitur auch rechnerisch als nicht bestanden.',
       },
+    ],
+    quellen: [
+      { titel: 'Kultusministerkonferenz (KMK): Gestaltung der gymnasialen Oberstufe und der Abiturprüfung', url: 'https://www.kmk.org', hinweis: 'Bundeseinheitliche Vereinbarung — Notenformel N = 17/3 − E/180, 1,0-Schwelle ab 823 Punkten, Block-I/II-Maxima.' },
+      { titel: 'Abiturprüfungsordnung des jeweiligen Bundeslandes (Kultusministerium)', hinweis: 'Maßgeblich für die Ermittlung der Gesamtpunkte: einzubringende Kurse, LK-Gewichtung, Defizitregeln, besondere Lernleistung.' },
     ],
   },
   {
