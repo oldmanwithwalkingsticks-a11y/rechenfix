@@ -8,6 +8,49 @@
 
 ---
 
+## 25.06.2026 — W19 Goldstandard Block B Rest-Steuer (Doku-Sync, 128 Goldstandard gemessen)
+
+Fünf Finanzen-Rechner (Steuer/Lohn-Optimierung). Architektur gemischt: eigene Lib (mwst-rueck), Component+Lib
+(hochrechner, nettolohn, gmbh), eigene Lib mit Logik-Fix (afa). Alle Anker gegen die echten Libs/Components
+reproduziert, alle Builds Vercel-grün.
+
+**Drei vorgelagerte Fixes (Lib-Bug-zuerst-Prinzip, Lehre aus pflegegeld):**
+1. **nettolohn Essenszuschuss** (`f013478`): Lib rechnete 7,23 €/Tag × 20 Tage = 144,60 €. Korrekt 2026
+   (16. SvEV, BGBl. 29.12.2025): Sachbezugswert 4,57 € + AG-Zuschuss 3,10 € = 7,67 €/Tag × 15 Tage = 115,05 €.
+   Component + alle 4 Config-Felder gefixt.
+2. **gehaltserhoehung Essenszuschuss** (`8d50e78`): dieselben Alt-Werte (7,50 €/150 €) im toten erklaerung+faq
+   → 7,67 €/115 € (live contentBloecke waren bereits korrekt).
+3. **afa degressive AfA** (`8800688`): GRAVIEREND. Lib kannte das Investitionssofortprogramm (Wachstumsbooster-
+   Gesetz, BGBl. I Nr. 161, 18.07.2025) nicht — sperrte degressive AfA ab 2026, deckelte auf 20 %. Korrekt
+   (§ 7 Abs. 2 EStG n.F.): zulässig 01.07.2025–31.12.2027, max. 3× linear bzw. 30 %. Konstanten + 3×-linear-
+   Deckel + Component-Default gefixt. Ohne diesen Fix wäre „degressiv ab 2026 nicht möglich" in den Content
+   gewandert — fachlich falsch.
+
+**Builds:**
+- **mwst-rueckerstattung-rechner** (checkliste, 18 Blöcke, ~1.573 W, `365fa9c`). Tax-Free-Shopping (Nicht-EU-
+  Touristen). SSOT `lib/berechnungen/mwst-rueckerstattung.ts`. Anker 500 €/19 %/Global Blue → 75,13 € (15 %),
+  Planet 74,24 €, direkt 79,83 €. YMYL: Mindestbetrag 50,01 €/Beleg (§ 6 Abs. 3a UStG), Zollstempel-Pflicht,
+  3-Monats-Frist. Keine Stale-Fixes.
+- **hochrechner** (beispielrechnung, 17 Blöcke, ~1.550 W, `c813452`). Lohn-Periodenumrechnung + Mindestlohn.
+  Component+`mindestlohn.ts`. Anker 20 €/40h → 41.600 €/J. Mindestlohn 13,90 € (2026, 5. MiLoV), 14,60 € (2027).
+- **nettolohn-optimierer** (tabelle, 17 Blöcke, ~1.570 W, `b32f102`). Brutto-Erhöhung vs. steuerfreie Bausteine.
+  Anker 200 € Budget → Brutto-Erhöhung ~109 € netto vs. Essenszuschuss 115,05 €. Sachbezug 50 € (§ 8 EStG).
+- **afa-rechner** (vergleich, 17 Blöcke, ~1.562 W, `7300078`). Fünf AfA-Methoden. Investitions-Booster (30 %,
+  2025–2027) als Kern-Feature. Anker 100.000 €/10 J degressiv → 30.000/21.000/14.700 €. GWG 800 €, Sammelposten
+  250,01–1.000 €/5 J (alle 2026 unverändert).
+- **gmbh-geschaeftsfuehrer-rechner** (checkliste, 18 Blöcke, ~1.563 W, `2707a36`). GGF-Netto, SV-Freiheit
+  beherrschend, GKV/PKV, Firmenwagen. ESt § 32a EStG 2026 (GFB 12.348 €, Spitzensatz ab 69.878 €). **Stale-Fix:**
+  Firmenwagen-gwV 540 € → 720 € (1 % × 45.000 + 0,03 % × 20 × 45.000), Netto 4.200 → 4.040 €.
+
+**Zentrale Lehre Block B:** YMYL-Lib-Bugs sind real und häufig — von drei Fixes war einer (afa) ein gravierender
+Rechtsstand-Fehler (ganzes Gesetz fehlte). Pflicht bleibt: bei jedem YMYL-Rechner die Lib-Werte gegen 2026-
+Primärquelle prüfen VOR dem Build, Lib-Bug zuerst mit eigenem Fix-Prompt beheben.
+
+**Stand nach Block B: 128/178 Goldstandard. Offen bis AdSense-Resubmit: 50.**
+Block A + B (alle 8 Finanzen-Slugs) abgeschlossen. Nächste offene Kategorien außerhalb finanzen folgen.
+
+---
+
 ## 25.06.2026 — W19 Goldstandard Block A Vorsorge/Sparen (Doku-Sync, 123 Goldstandard gemessen)
 
 Drei Finanzen-Rechner mit eigener Lib (SSOT = `lib/berechnungen/*.ts`, NICHT Component). Alle Anker von

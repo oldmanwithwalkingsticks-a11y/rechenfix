@@ -5083,7 +5083,7 @@ Die Kehrseite: Der GGF muss sich eigenständig um Kranken-, Pflege- und vor alle
 
 **Nicht-beherrschender GGF: normale Sozialabgaben**
 
-Hält der GGF weniger als 50 % der Anteile und ist weisungsgebunden, gelten die normalen Regeln für Arbeitnehmer. Sozialversicherungsbeiträge werden wie beim Angestellten abgezogen: RV 9,3 %, AV 1,3 %, KV ca. 7,5 % + Zusatzbeitrag, PV 1,8 % (+ 0,6 % für Kinderlose). Diese Beiträge werden bis zur Beitragsbemessungsgrenze berechnet (2026: KV/PV 5.850 €/Monat, RV/AV 8.550 €/Monat West).
+Hält der GGF weniger als 50 % der Anteile und ist weisungsgebunden, gelten die normalen Regeln für Arbeitnehmer. Sozialversicherungsbeiträge werden wie beim Angestellten abgezogen: RV 9,3 %, AV 1,3 %, KV ca. 7,3 % + Zusatzbeitrag, PV 1,8 % (+ 0,6 % für Kinderlose). Diese Beiträge werden bis zur Beitragsbemessungsgrenze berechnet (2026: KV/PV 5.812,50 €/Monat, RV/AV 8.450 €/Monat).
 
 **Die 1-%-Regelung für den Firmenwagen**
 
