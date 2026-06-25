@@ -47,6 +47,14 @@ Rechtsstand-Fehler (ganzes Gesetz fehlte). Pflicht bleibt: bei jedem YMYL-Rechne
 Primärquelle prüfen VOR dem Build, Lib-Bug zuerst mit eigenem Fix-Prompt beheben.
 
 **Stand nach Block B: 128/178 Goldstandard. Offen bis AdSense-Resubmit: 50.**
+
+**WICHTIG — Spezialfälle (NICHT als reguläre Goldstandard-Migration scopen):** Von den 50 nicht per
+contentBloecke-Skript gezählten Slugs sind ZWEI bewusste Sonderarchitekturen und gelten als FERTIG:
+- `brutto-netto-rechner` (finanzen): eigenes Landing-Page-Ökosystem (`app/finanzen/{2000,2500,3000,3500,4000,5000}-euro-brutto-netto/`, `brutto-netto-tabelle/`) statt Standard-contentBloecke.
+- `wohngeld-rechner` (finanzen): eigene Inline-Goldstandard-Erklärseite (`app/finanzen/wohngeld-rechner/page.tsx`, BMWSB-Verweis wegen dokumentiertem Component-Bug).
+Beide tauchen in einem naiven „kein contentBloecke"-Scan als offen auf, sind es aber NICHT.
+**Real offen für reguläre Migration: 48** (finanzen damit praktisch durch — nur `spenden-rechner` bleibt).
+
 Block A + B (alle 8 Finanzen-Slugs) abgeschlossen. Nächste offene Kategorien außerhalb finanzen folgen.
 
 ---
