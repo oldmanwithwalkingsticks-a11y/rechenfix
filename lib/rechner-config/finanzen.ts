@@ -6470,7 +6470,7 @@ IT-Freelancer kommen mit 800–1.200 € Fixkosten aus (Home-Office, Cloud-Tools
   },
   {
     slug: 'mwst-rueckerstattung-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-25',
     titel: 'MwSt-Rückerstattungs-Rechner',
     beschreibung: 'Tax-Free-Shopping berechnen: MwSt-Erstattung für Nicht-EU-Touristen beim Einkauf in Deutschland.',
     kategorie: 'Finanzen',
@@ -6517,6 +6517,165 @@ Der Regelsteuersatz von 19 % gilt für die meisten Waren: Elektronik, Kleidung, 
 **Tipps für maximale Erstattung**
 
 Bündeln Sie Ihre Einkäufe bei wenigen Händlern, um den Mindestbetrag sicher zu überschreiten. Kaufen Sie hochpreisige Waren (Elektronik, Designermode), bei denen die prozentuale Erstattung absolut am meisten bringt. Nutzen Sie wenn möglich die direkte Händlererstattung, um die Dienstleistergebühren zu sparen. Planen Sie am Flughafen mindestens 30–60 Minuten zusätzlich für den Zoll- und Erstattungsprozess ein — besonders in der Urlaubssaison können die Schlangen lang sein.`,
+    // W19-Goldstandard: mwst-rueckerstattung-rechner auf volle Tiefe (~1.560 W, 15 Bausteine).
+    // Thema = Tax-Free-Shopping (MwSt-Erstattung für Nicht-EU-Touristen), NICHT Unternehmens-USt.
+    // Leitformat „Prozess-Checkliste" — 3 checkliste-Bausteine dominant (Berechtigung · Ablauf am
+    // Flughafen · Ausschlüsse), grenzt sich von mwst-rechner (tabelle) und steuererstattung
+    // (beispielrechnung) ab. ALLE Erstattungswerte aus lib/berechnungen/mwst-rueckerstattung.ts
+    // reproduziert (Lib-Resolver-Check 25.06.2026): 500 €/19 %/GB → 75,13 € (15,0 %); /Planet
+    // 74,24 €; /ohne 79,83 € (15,97 %); 1.000 € → 153,77 €; 200 € → 27,95 €; 2.000 € → 311,04 €.
+    // YMYL (§ 6 Abs. 3a UStG / Zoll, Stand 2026): Mindestbetrag 50,01 € (seit 2020), Nicht-EU-
+    // Wohnsitz, Zollstempel Pflicht, Ausfuhr binnen 3 Monaten. erklaerung bleibt Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was ist Tax-Free-Shopping?',
+        html: `<p><strong>Tax-Free-Shopping</strong> bedeutet: Wer seinen ständigen Wohnsitz außerhalb der EU hat, kann sich beim Einkauf in Deutschland die enthaltene <strong>Mehrwertsteuer</strong> erstatten lassen. Rechtlich handelt es sich um eine steuerfreie <strong>Ausfuhrlieferung</strong> (§ 6 Abs. 3a UStG): Die Ware wird ins Nicht-EU-Ausland gebracht und dort verbraucht, also fällt die deutsche Umsatzsteuer letztlich nicht an.</p><p>Bei 19 % Regelsteuersatz steckt im Bruttopreis ein MwSt-Anteil von rund <strong>15,97 %</strong> — so viel ist maximal erstattungsfähig. Den Einkauf bezahlen Sie zunächst voll inklusive Steuer; die Erstattung erhalten Sie erst nach der Ausreise, sobald der Zoll die Ausfuhr bestätigt hat.</p><p>Wickeln Sie die Erstattung über einen Dienstleister wie Global Blue oder Planet ab, ziehen diese ein Bearbeitungsentgelt ab — deshalb liegt die effektive Erstattung meist bei 14–15 % statt der vollen 15,97 %. Dieser Rechner zeigt für Ihren Kaufbetrag, Steuersatz und Anbieter den konkreten Erstattungsbetrag.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Wer ist berechtigt? Voraussetzungen',
+        punkte: [
+          'Ständiger Wohnsitz außerhalb der EU — die Staatsangehörigkeit ist egal, entscheidend ist der Wohnsitz',
+          'Kein Aufenthaltstitel für die EU von mehr als 3 Monaten',
+          'EU-Bürger sind ausgeschlossen — auch mit zusätzlichem Nicht-EU-Pass (Doppelpass)',
+          'Nordirland zählt umsatzsteuerlich zur EU und ist damit ausgeschlossen',
+          'Die Ware verlässt die EU im persönlichen Reisegepäck, unbenutzt und im Originalzustand',
+          'Mindestens 50,01 € brutto pro Händler und Tag — kleinere Einkäufe beim selben Händler addierbar',
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Rechenweg: vom Brutto zum MwSt-Anteil',
+        html: `<p>Der MwSt-Anteil lässt sich aus jedem Bruttopreis <strong>herausrechnen</strong>. Bei 19 % teilen Sie den Bruttobetrag durch 1,19 und erhalten den Nettopreis; die Differenz ist die enthaltene Mehrwertsteuer. Beispiel: 500 € ÷ 1,19 = 420,17 € netto, also <strong>79,83 € MwSt</strong>. Bei 7 % teilen Sie entsprechend durch 1,07.</p><p>Wichtig ist die Denkrichtung: Die Mehrwertsteuer sind <strong>nicht</strong> 19 % vom Brutto, sondern 19 % vom Netto — bezogen auf den Bruttopreis ergeben sich nur rund 15,97 %. Wie sich Brutto, Netto und Steueranteil allgemein aufschlüsseln, zeigt der <a href="/finanzen/mwst-rechner">Mehrwertsteuer-Rechner</a>; die Brutto-Netto-Logik beim Gehalt rechnet der <a href="/finanzen/brutto-netto-rechner">Brutto-Netto-Rechner</a>.</p><p>Vom MwSt-Anteil geht bei Nutzung eines Dienstleisters noch das Bearbeitungsentgelt ab — eine Fixgebühr plus ein Prozentsatz des MwSt-Anteils. Genau deshalb ist die ausgezahlte Erstattung kleiner als der reine Steueranteil.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: 500 € Einkauf, 19 %, Global Blue',
+        schritte: [
+          { label: 'MwSt-Anteil herausrechnen', formel: '500 € − (500 € ÷ 1,19)', ergebnis: '79,83 €' },
+          { label: 'Fixgebühr Global Blue', formel: 'pauschal', ergebnis: '3,50 €' },
+          { label: 'Prozentgebühr', formel: '79,83 € × 1,5 %', ergebnis: '1,20 €' },
+          { label: 'Gebühren gesamt', formel: '3,50 € + 1,20 €', ergebnis: '4,70 €' },
+          { label: 'Netto-Erstattung', formel: '79,83 € − 4,70 €', ergebnis: '75,13 €' },
+        ],
+        fazit: 'Von 500 € Einkauf bei 19 % MwSt erhalten Sie über Global Blue 75,13 € zurück — eine effektive Ersparnis von 15,0 %. Ohne Dienstleister (direkt beim Händler) wären es die vollen 79,83 € (16,0 %), über Planet 74,24 € (14,8 %).',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Erstattung nach Erstattungsweg (500 €, 19 %)',
+        kopf: ['Erstattungsweg', 'Gebühr', 'Erstattung', 'Effektiv'],
+        zeilen: [
+          ['Direkt beim Händler', '0,00 €', '79,83 €', '16,0 %'],
+          ['Global Blue', '4,70 €', '75,13 €', '15,0 %'],
+          ['Planet', '5,60 €', '74,24 €', '14,8 %'],
+        ],
+        fussnote: 'Beispiel: 500 € Einkauf, 19 % MwSt. Gebühren je Anbieter (Global Blue ~3,50 € + 1,5 %, Planet ~4,00 € + 2,0 %); die tatsächlichen Konditionen hängen vom Vertrag des Händlers ab.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Global Blue vs. Planet',
+        spalteA: 'Global Blue',
+        spalteB: 'Planet',
+        zeilen: [
+          { kriterium: 'Fixgebühr', a: '~3,50 €', b: '~4,00 €' },
+          { kriterium: 'Prozentgebühr', a: '~1,5 % des MwSt-Anteils', b: '~2,0 % des MwSt-Anteils' },
+          { kriterium: 'Erstattung bei 500 €', a: '75,13 €', b: '74,24 €' },
+          { kriterium: 'Verbreitung', a: 'Marktführer, Schalter an allen großen Flughäfen', b: 'zweitgrößter Anbieter, viele Flughäfen' },
+          { kriterium: 'Auszahlung', a: 'bar, Kreditkarte, Alipay/WeChat', b: 'bar, Kreditkarte' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Auszahlung: bar, Kreditkarte oder App',
+        html: `<p>Wie Sie die Erstattung erhalten, beeinflusst, wie viel am Ende ankommt. Bei der <strong>Barauszahlung</strong> am Flughafen bekommen Sie das Geld sofort — oft aber zu einem ungünstigen Wechselkurs, wenn in Fremdwährung ausgezahlt wird, und teils mit einer zusätzlichen Bargebühr. Die <strong>Gutschrift auf die Kreditkarte</strong> ist meist günstiger, dauert aber einige Wochen, weil das abgestempelte Formular erst beim Anbieter eingehen muss.</p><p>Daneben bieten Global Blue und Planet zunehmend <strong>digitale Auszahlungen</strong> an — etwa über Alipay oder WeChat Pay für Reisende aus Asien. Diese sind schnell und transparent, aber nicht an jedem Schalter verfügbar.</p><p>Eine Faustregel: Wer auf das Bargeld nicht angewiesen ist, fährt mit der Kreditkartengutschrift oder der App-Auszahlung in der Regel besser, weil der Wechselkurs-Aufschlag der Bar-Schalter entfällt. Prüfen Sie vor der Wahl, welche Optionen Ihr Anbieter am jeweiligen Flughafen anbietet.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Ohne Zollstempel keine Erstattung',
+        text: 'Der wichtigste Schritt ist der Zollstempel bei der Ausreise. Suchen Sie am letzten EU-Ausreisepunkt (in der Regel Ihr Abflughafen) VOR dem Check-in die Zollstelle auf und lassen Sie das Tax-Free-Formular abstempeln — die Ware muss dabei unbenutzt und im Originalzustand vorzeigbar sein. Ohne diesen Stempel zahlt kein Dienstleister und kein Händler die Mehrwertsteuer zurück. Reisen Sie über ein anderes EU-Land aus, erfolgt die Abstempelung dort, nicht in Deutschland.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Ablauf am Flughafen — Schritt für Schritt',
+        punkte: [
+          'Beim Kauf nach dem Tax-Free-Formular fragen (Global Blue, Planet oder händlereigen) und mit Passdaten ausfüllen',
+          'Tax-Free-Einkäufe ins Handgepäck packen — der Zoll kann die Ware sehen wollen',
+          'Am Flughafen VOR dem Check-in zum Zoll: Ware, Kassenbon, Formular und Pass vorzeigen',
+          'Zoll stempelt das Formular ab (Ausfuhrbestätigung) — ohne Stempel keine Erstattung',
+          'Mit dem gestempelten Formular zum Refund-Schalter: Barauszahlung oder Gutschrift auf die Kreditkarte',
+          'Genug Zeit einplanen — in der Hauptsaison sind die Schlangen am Zoll lang (30–60 Minuten Puffer)',
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Mindestbetrag 50,01 € und Drei-Monats-Frist',
+        html: `<p>Zwei formale Hürden entscheiden über den Anspruch. Erstens der <strong>Mindestbetrag</strong>: Seit 2020 müssen Sie pro Händler und Tag mindestens <strong>50,01 € brutto</strong> ausgeben. Mehrere Einkäufe beim selben Händler am selben Tag dürfen Sie addieren; Einkäufe bei verschiedenen Händlern dagegen nicht. Diese Wertgrenze gilt 2026 unverändert und entfällt erst, wenn das digitale Ausfuhrverfahren in den Echtbetrieb geht — das ist noch nicht der Fall.</p><p>Zweitens die <strong>Frist</strong>: Die Ware muss bis zum Ablauf des dritten auf den Kauf folgenden Monats ausgeführt werden — grob also innerhalb von drei Monaten. Maßgeblich ist das Datum des Zollstempels bei der Ausreise.</p><p>Beide Bedingungen müssen erfüllt sein. Fehlt der Stempel oder wird die Frist überschritten, entfällt die Erstattung vollständig — unabhängig von der Höhe des Einkaufs.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Ausreise über mehrere EU-Länder',
+        html: `<p>Tax-Free-Shopping ist ein <strong>EU-weites</strong> Verfahren mit nationalen Stempeln. Entscheidend ist: Der Zollstempel wird immer am <strong>letzten EU-Ausreisepunkt</strong> gesetzt, nicht im Kaufland. Wer in Deutschland einkauft, aber über Amsterdam, Paris oder Wien aus der EU ausreist, lässt das Formular dort abstempeln — der niederländische, französische oder österreichische Zoll bestätigt die Ausfuhr auch für die deutsche Ware.</p><p>Das gilt ebenso bei Zugreisen oder Fahrten mit dem Auto über eine EU-Außengrenze: Maßgeblich ist die Grenzzollstelle beim Verlassen der EU. Innerhalb der EU — etwa von Deutschland nach Frankreich — gibt es keinen Stempel, weil keine Ausfuhr aus dem EU-Gebiet stattfindet.</p><p>Für die Erstattung selbst können Sie anschließend einen beliebigen Schalter Ihres Anbieters nutzen oder das gestempelte Formular per Post einsenden — die Auszahlung ist nicht an das Land des Stempels gebunden.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Nicht erstattungsfähig',
+        punkte: [
+          'Dienstleistungen: Hotelübernachtung, Restaurant, Bahn-, Bus- und Flugtickets',
+          'Lebensmittel und Getränke (in Deutschland verbraucht)',
+          'Kraftstoff, Fahrzeug-Ersatzteile und sonstige Fahrzeug-Ausrüstung',
+          'Bereits gebrauchte oder in der EU verbrauchte Waren',
+          'Online-Bestellungen, die ins Nicht-EU-Ausland versendet werden (laufen als steuerfreie Ausfuhrlieferung)',
+          'Waren ohne Zollstempel bei der Ausreise — die Ausfuhrbestätigung ist zwingend',
+        ],
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Erstattung nach Kaufbetrag (19 %, Global Blue)',
+        kopf: ['Kaufbetrag (brutto)', 'MwSt-Anteil', 'Erstattung', 'Effektiv'],
+        zeilen: [
+          ['100 €', '15,97 €', '12,23 €', '12,2 %'],
+          ['200 €', '31,93 €', '27,95 €', '14,0 %'],
+          ['500 €', '79,83 €', '75,13 €', '15,0 %'],
+          ['1.000 €', '159,66 €', '153,77 €', '15,4 %'],
+          ['2.000 €', '319,33 €', '311,04 €', '15,6 %'],
+        ],
+        fussnote: '19 % MwSt, Erstattung über Global Blue (~3,50 € + 1,5 %). Je höher der Kaufbetrag, desto näher liegt die effektive Erstattung an den maximal möglichen 15,97 %, weil die Fixgebühr anteilig kaum noch ins Gewicht fällt.',
+      },
+      {
+        typ: 'text',
+        titel: '19 % vs. 7 % Mehrwertsteuersatz',
+        html: `<p>In Deutschland gelten zwei Mehrwertsteuersätze, und der Unterschied wirkt sich direkt auf die Erstattung aus. Der <strong>Regelsatz von 19 %</strong> betrifft die typischen Tax-Free-Waren: Elektronik, Kleidung, Schmuck, Uhren, Kosmetik und Designermode. Hier ist die absolute Erstattung am höchsten.</p><p>Der <strong>ermäßigte Satz von 7 %</strong> gilt unter anderem für Bücher und bestimmte Lebensmittel — letztere sind von der Erstattung aber ohnehin ausgeschlossen. Bei 7 % steckt nur ein MwSt-Anteil von rund 6,54 % im Bruttopreis: Aus 500 € werden so vor Gebühren nur 32,71 € statt 79,83 €.</p><p>Für die Erstattung lohnen sich also vor allem hochpreisige Waren zum Regelsatz. Welcher Satz für ein Produkt gilt und wie viel Steuer im Preis steckt, prüfen Sie schnell mit dem <a href="/finanzen/mwst-rechner">Mehrwertsteuer-Rechner</a>.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Eckwerte Tax-Free-Shopping 2026',
+        werte: [
+          { label: 'Max. Erstattung bei 19 %', wert: '15,97 %', hinweis: 'im Bruttopreis enthaltener MwSt-Anteil' },
+          { label: 'Mindestbetrag', wert: '50,01 €', hinweis: 'pro Händler und Tag (brutto), seit 2020' },
+          { label: 'Ausfuhrfrist', wert: '3 Monate', hinweis: 'bis Ablauf des 3. Folgemonats' },
+          { label: 'Regelsteuersatz', wert: '19 %', hinweis: 'ermäßigt 7 % (z. B. Bücher)' },
+          { label: 'Zollstempel', wert: 'Pflicht', hinweis: 'ohne Ausfuhrbestätigung keine Erstattung' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Tipps für die maximale Erstattung',
+        html: `<p>Mit ein paar Kniffen holen Sie das Maximum heraus. <strong>Bündeln Sie Einkäufe</strong> bei wenigen Händlern, um den Mindestbetrag von 50,01 € sicher zu überschreiten — viele kleine Belege unter der Grenze bringen nichts. <strong>Setzen Sie auf hochpreisige Waren</strong> zum Regelsatz: Bei Elektronik oder Designermode bringt die prozentuale Erstattung absolut am meisten.</p><p>Wo möglich, lohnt die <strong>direkte Händlererstattung</strong>: Erstattet das Geschäft selbst, sparen Sie die Dienstleistergebühr und erhalten die vollen 15,97 %. Große Beträge zahlen sich besonders aus, weil die Fixgebühr dann kaum ins Gewicht fällt — bei 2.000 € Einkauf bleiben über Global Blue rund 311 € (15,6 %), bei 100 € nur 12,23 € (12,2 %).</p><p>Und planen Sie Zeit ein: Der Zoll- und Erstattungsprozess am Flughafen kostet in der Hauptsaison schnell eine halbe bis ganze Stunde extra.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Häufige Fehler — und wie Sie sie vermeiden',
+        html: `<p>Die meisten verlorenen Erstattungen haben simple Ursachen. Der häufigste Fehler: die <strong>Ware ins aufgegebene Gepäck</strong> packen. Will der Zoll sie sehen, ist sie dann unerreichbar — gehen Sie deshalb mit den Einkäufen im Handgepäck zum Zoll, bevor Sie einchecken.</p><p>Ebenso teuer: das <strong>Tax-Free-Formular vergessen</strong> oder unvollständig ausfüllen. Ohne korrekt ausgefülltes Formular mit Passdaten und ohne den Original-Kassenbon gibt es keinen Stempel. Auch wer <strong>zu spät am Flughafen</strong> ist und die Zollschlange nicht mehr schafft, verliert den Anspruch — planen Sie den Zollgang bewusst vor dem Check-in ein.</p><p>Und schließlich der Klassiker: der <strong>Wohnsitz</strong>. Entscheidend ist nicht die Staatsangehörigkeit, sondern der ständige Wohnsitz außerhalb der EU. Wer in der EU wohnt, ist auch mit einem ausländischen Pass nicht berechtigt.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Vereinfachte Schätzung — keine Steuerberatung',
+        text: 'Diese Berechnung ist eine vereinfachte Schätzung. Die tatsächlichen Gebühren hängen vom Dienstleister, vom Vertrag des Händlers und von der gewählten Auszahlungsart ab (Bargeld, Kreditkarte oder App); Barauszahlungen am Flughafen sind oft teurer. Verbindlich sind allein die Angaben des Zolls und Ihres Erstattungsanbieters. Dies ist keine Steuerberatung.',
+      },
+    ],
     faq: [
       {
         frage: 'Wie viel MwSt bekomme ich beim Tax-Free-Shopping zurück?',
@@ -6542,6 +6701,10 @@ Bündeln Sie Ihre Einkäufe bei wenigen Händlern, um den Mindestbetrag sicher z
         frage: 'Kann ich die MwSt auch bei Online-Einkäufen zurückbekommen?',
         antwort: 'Nein. Tax-Free-Shopping gilt nur für Einkäufe im stationären Handel in Deutschland. Online-Bestellungen, die ins Nicht-EU-Ausland geliefert werden, werden in der Regel direkt ohne MwSt berechnet (Ausfuhrlieferung). Falls doch MwSt berechnet wurde, müssen Sie sich direkt an den Händler wenden.',
       },
+    ],
+    quellen: [
+      { titel: '§ 6 UStG: Ausfuhrlieferungen (Abs. 3a Wertgrenze 50 €)', url: 'https://www.gesetze-im-internet.de/ustg_1980/__6.html' },
+      { titel: 'Zoll: Tax-free einkaufen — Verfahren & Voraussetzungen', url: 'https://www.zoll.de/DE/Privatpersonen/Reisen/Reisen-nach-Deutschland-aus-einem-nicht-eu-Staat/Zoll-und-Steuern/Tax-free-einkaufen/tax-free-einkaufen_node.html', hinweis: 'Mindestbetrag 50,01 €, Nicht-EU-Wohnsitz, Zollstempel, Ausfuhr binnen 3 Monaten (Stand 2026).' },
     ],
   },
   {
