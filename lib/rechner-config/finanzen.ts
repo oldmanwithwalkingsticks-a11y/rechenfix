@@ -5127,7 +5127,7 @@ Ein GGF kann sein Einkommen aus der GmbH auf zwei Wegen ziehen: als **Gehalt** (
   },
   {
     slug: 'hochrechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-25',
     titel: 'Hochrechner (Gehalt)',
     beschreibung: 'Rechnen Sie Stunden-, Tages-, Wochen-, Monats- oder Jahreslohn ineinander um — inkl. Mindestlohn-Vergleich 2026.',
     kategorie: 'Finanzen',
@@ -5172,6 +5172,152 @@ Der Hochrechner berücksichtigt variable Arbeitszeiten. Ob Sie 20, 30 oder 40 St
 **Freelancer und Honorarkräfte**
 
 Auch Freelancer können den Hochrechner nutzen, um Ihren Tages- oder Stundensatz in einen vergleichbaren Jahres-Äquivalenzwert umzurechnen. Beachten Sie aber: Als Selbstständiger tragen Sie alle Sozialabgaben und Steuern selbst und sollten pauschal 30 bis 50 % Ihres Brutto-Umsatzes als Rücklage einplanen. Für eine präzise Stundensatz-Kalkulation nutzen Sie unseren Freelancer-Stundensatz-Rechner. Ergänzend interessant: der Stundenlohn-Rechner, der Gehaltsvergleich und der Gehaltserhöhungs-Rechner.`,
+    // W19-Goldstandard: hochrechner (Gehalt) auf volle Tiefe (~1.560 W, 14 Bausteine).
+    // Leitformat „Rechenbeispiele" — 3 beispielrechnung dominant (eine Eingabe → 5 Perioden ·
+    // Jahr→Stunde · Minijob-Grenze), grenzt sich vom vergleich-dominanten stundenlohn-rechner ab.
+    // Anker gegen Component HochRechner.tsx reproduziert (Resolver-Check 25.06.2026, 20 €/h,
+    // 40 h/Woche, 5 Tage): Jahr 41.600 €, Monat 3.466,67 €, Woche 800 €, Tag 160 €, +43,9 % zum
+    // Mindestlohn. STICHTAG-DISZIPLIN: Mindestlohn 13,90 € (2026) = geltend, 14,60 € ab 01.01.2027
+    // (5. MiLoV) = Ausblick; getAktuellerMindestlohn() schaltet jahresbasiert. Minijob-Grenze
+    // gekoppelt: 603 € (2026) / 633 € (2027). Reine Brutto-Umrechnung. erklaerung bleibt Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was macht der Hochrechner?',
+        html: `<p>Der <strong>Hochrechner</strong> rechnet einen beliebigen Gehaltswert in alle anderen Zeiträume um. Sie geben ein, was Sie schon kennen — etwa einen Stundenlohn von 20 €, ein Monatsgehalt von 3.500 € oder einen Tagessatz als Freelancer — und sehen sofort, wie viel das pro Stunde, Tag, Woche, Monat und Jahr ergibt.</p><p>Das ist im Alltag überraschend oft nötig, weil Gehälter je nach Kontext unterschiedlich angegeben werden: Stellenanzeigen nennen meist das <strong>Jahresbrutto</strong>, die Zeitarbeit rechnet mit <strong>Stundenlöhnen</strong>, Minijobs mit <strong>Monatsverdienst</strong> und Freelancer mit <strong>Tagessätzen</strong>. Erst in einer gemeinsamen Einheit lassen sich Angebote ehrlich vergleichen.</p><p>Zusätzlich prüft der Rechner, ob Ihr Stundenlohn über oder unter dem gesetzlichen <strong>Mindestlohn</strong> liegt, und zeigt den prozentualen Abstand. Alle Ergebnisse sind Bruttowerte — die Grundlage, um Jobangebote sauber gegeneinanderzustellen.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'So wird gerechnet: das 52-Wochen-Jahr',
+        html: `<p>Grundlage jeder Umrechnung ist die <strong>wöchentliche Arbeitszeit</strong> und das <strong>52-Wochen-Jahr</strong>. Aus den Wochenstunden ergeben sich die Jahresstunden (Stunden/Woche × 52), und mit dem Stundenlohn multipliziert das Jahresbrutto. Der Rechner normalisiert intern immer zuerst auf dieses Jahresbrutto und leitet daraus alle übrigen Zeiträume ab — egal, welchen Wert Sie eingeben.</p><p>Ein häufiges Missverständnis betrifft den Monat: Naheliegend wäre, den Wochenlohn einfach mit 4 zu multiplizieren. Das ist aber zu wenig, denn ein Monat hat im Schnitt <strong>4,33 Wochen</strong> (52 ÷ 12), nicht 4. Korrekt rechnet man deshalb über den Umweg Jahreslohn ÷ 12.</p><p>Der Tageslohn hängt zusätzlich von den <strong>Arbeitstagen pro Woche</strong> ab: Bei einer 5-Tage-Woche sind es 260 Arbeitstage im Jahr, bei einer 6-Tage-Woche 312. Wer dieselbe Jahressumme auf mehr Tage verteilt, kommt rechnerisch auf einen niedrigeren Tagessatz.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Wie viele Stunden hat ein Arbeitsjahr wirklich?',
+        html: `<p>Rechnerisch hat ein Arbeitsjahr bei 40 Wochenstunden <strong>2.080 Stunden</strong> (40 × 52). Diese Zahl ist die Grundlage der Umrechnung — sie unterstellt aber, dass Sie jede Woche des Jahres durcharbeiten.</p><p>In der Realität arbeiten Sie weniger: Der gesetzliche Mindesturlaub (mindestens 20 Tage bei 5-Tage-Woche, tariflich oft 28–30) und die Feiertage reduzieren die tatsächlich geleisteten Stunden. Je nach Bundesland und Urlaubsanspruch bleiben rund <strong>1.800 bis 1.900</strong> echte Arbeitsstunden übrig.</p><p>Für die Gehaltsumrechnung spielt das keine Rolle, weil Ihr Monatsgehalt unabhängig von Urlaub und Feiertagen gleich bleibt — bezahlt werden die vollen 12 Monate. Wichtig wird die Unterscheidung aber, wenn Sie einen <strong>echten Stundenertrag</strong> ermitteln oder einen Freelancer-Tagessatz kalkulieren wollen: Dann zählen nur die tatsächlich gearbeiteten Stunden.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '20 €/Stunde in alle Zeiträume umrechnen',
+        schritte: [
+          { label: 'Jahresstunden', formel: '40 Std/Woche × 52 Wochen', ergebnis: '2.080 Std/Jahr' },
+          { label: 'Jahreslohn', formel: '20 € × 2.080 Std', ergebnis: '41.600 €' },
+          { label: 'Monatslohn', formel: '41.600 € ÷ 12', ergebnis: '3.466,67 €' },
+          { label: 'Wochenlohn', formel: '41.600 € ÷ 52', ergebnis: '800,00 €' },
+          { label: 'Tageslohn', formel: '41.600 € ÷ (5 × 52)', ergebnis: '160,00 €' },
+        ],
+        fazit: 'Ein Stundenlohn von 20 € entspricht bei einer 40-Stunden-Woche 41.600 € Jahresbrutto. Das liegt 43,9 % über dem Mindestlohn 2026 (13,90 €). Alle Werte sind brutto — vom Monatslohn gehen noch Steuern und Sozialabgaben ab. Entscheidend ist dabei die Wochenarbeitszeit: Verteilt man dieselben 41.600 € auf eine 35-Stunden-Woche, ergibt sich rechnerisch ein höherer Stundenlohn von rund 22,86 €. Bei mehr Wochenstunden sinkt der Stundenwert entsprechend — deshalb sind Jahresangebote ohne Angabe der Stundenzahl nur halb aussagekräftig.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Stundenlohn → Monat und Jahr (40 Std/Woche)',
+        kopf: ['Stundenlohn', 'pro Monat', 'pro Jahr'],
+        zeilen: [
+          ['13,90 € (Mindestlohn)', '2.409,33 €', '28.912 €'],
+          ['15,00 €', '2.600,00 €', '31.200 €'],
+          ['20,00 €', '3.466,67 €', '41.600 €'],
+          ['25,00 €', '4.333,33 €', '52.000 €'],
+          ['30,00 €', '5.200,00 €', '62.400 €'],
+          ['40,00 €', '6.933,33 €', '83.200 €'],
+        ],
+        fussnote: 'Annahme: 40 Stunden/Woche (2.080 Stunden/Jahr), Monat = Jahr ÷ 12. Alle Werte brutto. Bei abweichender Wochenarbeitszeit verschieben sich die Beträge proportional.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Jahresgehalt in Stundenlohn umrechnen',
+        schritte: [
+          { label: 'Jahresstunden', formel: '40 Std/Woche × 52', ergebnis: '2.080 Std' },
+          { label: 'Stundenlohn', formel: '42.000 € ÷ 2.080 Std', ergebnis: '20,19 €/h' },
+          { label: 'Monatslohn', formel: '42.000 € ÷ 12', ergebnis: '3.500,00 €' },
+          { label: 'Mindestlohn-Abstand', formel: '(20,19 − 13,90) ÷ 13,90', ergebnis: '+45 %' },
+        ],
+        fazit: 'Ein Jahresbrutto von 42.000 € bei 40 Stunden/Woche entspricht 20,19 € pro Stunde und 3.500 € im Monat — rund 45 % über dem Mindestlohn. So lassen sich Stellenangebote vergleichen, die mal als Jahres-, mal als Stundenwert ausgeschrieben sind. Praktisch heißt das: Steht in einer Anzeige „42.000 € pro Jahr" und in einer anderen „20 €/h", sind beide Angebote bei gleicher Wochenstundenzahl nahezu gleichwertig — erst die Umrechnung macht das auf einen Blick sichtbar.',
+      },
+      {
+        typ: 'text',
+        titel: 'Brutto, nicht netto',
+        html: `<p>Ein wichtiger Punkt vorweg: Der Hochrechner liefert ausschließlich <strong>Bruttowerte</strong>. Vom Bruttogehalt gehen noch Lohnsteuer, Solidaritätszuschlag (nur bei hohen Einkommen), gegebenenfalls Kirchensteuer sowie die Sozialabgaben für Renten-, Kranken-, Pflege- und Arbeitslosenversicherung ab.</p><p>Wie viel netto übrig bleibt, hängt stark von der <strong>Steuerklasse</strong>, vom Familienstand, von Kinderfreibeträgen und der Krankenkasse ab. Als grobe Orientierung liegt das Netto je nach Konstellation bei etwa 60 bis 75 % des Brutto — bei niedrigen Einkommen eher höher, bei hohen eher niedriger.</p><p>Für die exakte Netto-Berechnung mit Steuerklasse und Sozialabgaben nutzen Sie den <a href="/finanzen/brutto-netto-rechner">Brutto-Netto-Rechner</a>. Der Hochrechner bleibt bewusst auf der Brutto-Ebene, damit Gehaltsangebote unabhängig von der persönlichen Steuersituation vergleichbar bleiben.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Was den echten Verdienst erhöht: Sonderzahlungen',
+        html: `<p>Der nominale Stundenlohn erzählt nicht die ganze Geschichte. Viele Arbeitsverträge enthalten <strong>Sonderzahlungen</strong>, die das tatsächliche Jahresbrutto spürbar anheben: ein 13. Monatsgehalt, Urlaubsgeld, eine Jahresprämie oder vermögenswirksame Leistungen.</p><p>Ein Beispiel: Wer 3.466 € im Monat verdient und zusätzlich ein volles 13. Gehalt erhält, kommt nicht auf 41.600 €, sondern auf rund 45.066 € im Jahr — das entspricht einem effektiven Stundenlohn von etwa 21,67 € statt 20 €. Solche Zahlungen sollten Sie beim Vergleich zweier Angebote unbedingt mit einrechnen.</p><p>Auch <strong>Zuschläge</strong> für Nacht-, Sonn- und Feiertagsarbeit erhöhen den Verdienst und sind teilweise sogar steuer- und abgabenfrei. Der Hochrechner arbeitet bewusst mit dem reinen Grundlohn; Sonderzahlungen rechnen Sie am besten separat aufs Jahr um und addieren sie hinzu.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Mindestlohn-Stichtag: 13,90 € → 14,60 €',
+        text: 'Der Mindestlohn-Vergleich dieses Rechners nutzt den jeweils geltenden Wert: 13,90 € pro Stunde im Jahr 2026. Zum 1. Januar 2027 steigt der Mindestlohn automatisch auf 14,60 € (Fünfte Mindestlohnanpassungsverordnung) — der Rechner schaltet dann ohne Zutun auf den neuen Wert um. Wer Angebote für 2027 plant, sollte den Stundenlohn bereits am höheren Mindestlohn messen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Mindestlohn 2026: 13,90 Euro',
+        html: `<p>Seit dem <strong>1. Januar 2026</strong> liegt der gesetzliche Mindestlohn bei <strong>13,90 € pro Stunde</strong> (2025: 12,82 €). Zum <strong>1. Januar 2027</strong> steigt er laut Fünfter Mindestlohnanpassungsverordnung (5. MiLoV) weiter auf <strong>14,60 €</strong>. Der Mindestlohn ist ein Brutto-Stundenlohn und gilt seit 2018 ausnahmslos in allen Branchen.</p><p>Wenige Ausnahmen gibt es dennoch: Langzeitarbeitslose in den ersten sechs Monaten, Auszubildende sowie bestimmte Pflichtpraktika. Branchen-Mindestlöhne — etwa in der Pflege oder im Bau — liegen über dem allgemeinen Mindestlohn, nie darunter.</p><p>An den Mindestlohn gekoppelt ist auch die <strong>Minijob-Grenze</strong>: Sie beträgt 2026 genau 603 € und steigt 2027 auf 633 €. Wie viele Stunden in einem Minijob möglich sind, zeigt der <a href="/finanzen/minijob-rechner">Minijob-Rechner</a>.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Minijob: Wie viele Stunden zum Mindestlohn?',
+        schritte: [
+          { label: 'Minijob-Grenze 2026', formel: 'Mindestlohn × 130 ÷ 3, aufgerundet', ergebnis: '603 €/Monat' },
+          { label: 'Maximale Stunden/Monat', formel: '603 € ÷ 13,90 €/h', ergebnis: '43,4 Std' },
+          { label: 'Maximale Stunden/Woche', formel: '43,4 Std ÷ 4,33 Wochen', ergebnis: '≈ 10 Std' },
+        ],
+        fazit: 'Die Minijob-Grenze ist an den Mindestlohn gekoppelt: 2026 sind es 603 €/Monat, ab 2027 dann 633 €. Wer zum Mindestlohn arbeitet, darf im Minijob also höchstens rund 43 Stunden pro Monat (gut 10 pro Woche) leisten, ohne die Grenze zu überschreiten. Liegt der Stundenlohn höher, sinkt die mögliche Stundenzahl entsprechend — bei 20 €/h sind im Minijob nur noch gut 30 Stunden im Monat möglich, bevor die 603 € erreicht sind.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Teilzeit vs. Vollzeit bei 20 €/Stunde',
+        spalteA: 'Vollzeit (40 h)',
+        spalteB: 'Teilzeit (20 h)',
+        zeilen: [
+          { kriterium: 'Stunden pro Jahr', a: '2.080 Std', b: '1.040 Std' },
+          { kriterium: 'Jahreslohn', a: '41.600 €', b: '20.800 €' },
+          { kriterium: 'Monatslohn', a: '3.466,67 €', b: '1.733,33 €' },
+          { kriterium: 'Stundenlohn', a: '20,00 €', b: '20,00 €' },
+          { kriterium: 'Abstand zum Mindestlohn', a: '+43,9 %', b: '+43,9 %' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Teilzeit, Vollzeit und andere Modelle',
+        html: `<p>Der Hochrechner bildet beliebige Arbeitszeitmodelle ab. Ob 20, 30 oder 40 Stunden pro Woche, ob 4-, 5- oder 6-Tage-Woche — jede Eingabe fließt in die Umrechnung ein. So sehen Sie unmittelbar, wie sich ein Teilzeitmodell auf Monats- und Jahreslohn auswirkt.</p><p>Wichtig beim Vergleich: Der <strong>Stundenlohn</strong> bleibt bei Teilzeit und Vollzeit gleich, nur die Gesamtsumme ändert sich. Wer bei 20 €/h von 40 auf 20 Wochenstunden reduziert, halbiert sein Jahresbrutto von 41.600 € auf 20.800 € — der Stundenwert von 20 € bleibt identisch. Deshalb sollte man Teilzeitangebote immer über den Stundenlohn vergleichen, nicht über das Monatsgehalt.</p><p>Eine tiefere Einordnung Ihres Stundenlohns — etwa im Verhältnis zu Branche und Region — liefert der <a href="/finanzen/stundenlohn-rechner">Stundenlohn-Rechner</a>.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Freelancer: Tagessatz ins Jahres-Äquivalent',
+        html: `<p>Auch Freelancer und Honorarkräfte profitieren vom Hochrechner: Sie geben Ihren <strong>Tagessatz</strong> ein und erhalten den vergleichbaren Jahres-, Monats- und Stundenwert. Das hilft, ein Honorarangebot gegen eine Festanstellung abzuwägen — etwa wenn ein Tagessatz von 400 € im Raum steht.</p><p>Wichtig ist dabei ein Denkfehler, der oft passiert: Ein hoher Tagessatz ist <strong>nicht</strong> mit einem gleich hohen Angestelltengehalt vergleichbar. Als Selbstständiger tragen Sie Kranken- und Rentenversicherung, Steuern, Ausfallzeiten, Urlaub und Krankheit komplett selbst — und haben in der Regel deutlich weniger als 220 fakturierbare Tage im Jahr.</p><p>Als Faustregel sollten Freelancer <strong>30 bis 50 %</strong> ihres Brutto-Umsatzes als Rücklage für Steuern und Sozialabgaben einplanen. Der hochgerechnete Jahreswert ist also ein Umsatz, kein Nettoeinkommen — ein Tagessatz von 400 € über 220 Tage ergibt 88.000 € Umsatz, aber spürbar weniger in der Tasche.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Eckwerte rund um Lohn und Arbeitszeit',
+        werte: [
+          { label: 'Mindestlohn 2026', wert: '13,90 €/h', hinweis: 'ab 01.01.2027: 14,60 €/h (5. MiLoV)' },
+          { label: 'Vollzeit-Woche (üblich)', wert: '40 Std', hinweis: 'tariflich oft 35–39 Std' },
+          { label: 'Arbeitsstunden/Jahr', wert: '2.080', hinweis: 'bei 40 Std/Woche, vor Urlaub/Feiertagen' },
+          { label: 'Minijob-Grenze 2026', wert: '603 €', hinweis: 'an Mindestlohn gekoppelt, 2027: 633 €' },
+          { label: 'Wochen pro Monat', wert: '4,33', hinweis: '52 ÷ 12 — daher Monat = Jahr ÷ 12' },
+        ],
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Gehaltsangebote richtig vergleichen',
+        punkte: [
+          'Alle Angebote auf dieselbe Einheit bringen — am besten aufs Jahresbrutto',
+          'Wochenarbeitszeit beachten: 35, 38 oder 40 Stunden ändern den Stundenlohn deutlich',
+          'Brutto von Netto trennen — Stellenanzeigen nennen fast immer das Brutto',
+          'Stundenlohn gegen den Mindestlohn prüfen (2026: 13,90 €, ab 2027: 14,60 €)',
+          'Bei Teilzeit den Stundenlohn vergleichen, nicht das Monatsgehalt',
+          'Zusatzleistungen einrechnen: 13. Gehalt, Urlaubsgeld und Zuschläge erhöhen das echte Jahresbrutto',
+          'Als Freelancer Steuern und Sozialabgaben selbst einplanen (Rücklage 30–50 %)',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Reine Brutto-Umrechnung — kein Netto',
+        text: 'Dieser Rechner führt eine reine Brutto-Umrechnung zwischen Zeiträumen durch. Er berücksichtigt keine Steuern, Sozialabgaben, Zuschläge, Urlaubs- oder Weihnachtsgeld. Das tatsächliche Nettoeinkommen hängt von Steuerklasse, Kirchensteuer, Krankenkasse und weiteren Faktoren ab. Die Werte dienen dem Vergleich und der Orientierung und ersetzen keine verbindliche Gehaltsabrechnung.',
+      },
+    ],
     faq: [
       {
         frage: 'Wie wird ein Jahresgehalt in einen Stundenlohn umgerechnet?',
@@ -5193,6 +5339,10 @@ Auch Freelancer können den Hochrechner nutzen, um Ihren Tages- oder Stundensatz
         frage: 'Wie viele Arbeitsstunden hat ein Jahr bei 40 Stunden/Woche?',
         antwort: 'Rein rechnerisch 2.080 Stunden (40 × 52). Tatsächlich arbeiten Sie weniger, weil Urlaub und Feiertage nicht mitgerechnet sind. In der Praxis sind es je nach Bundesland und Urlaubstagen ca. 1.800–1.900 Netto-Arbeitsstunden.',
       },
+    ],
+    quellen: [
+      { titel: 'MiLoG: Mindestlohngesetz', url: 'https://www.gesetze-im-internet.de/milog/' },
+      { titel: 'BMAS: Fünfte Mindestlohnanpassungsverordnung (5. MiLoV)', url: 'https://www.bmas.de/DE/Service/Gesetze-und-Gesetzesvorhaben/fuenfte-mindestlohnanpassungsverordnung-milov5.html', hinweis: 'Gesetzlicher Mindestlohn 13,90 €/h ab 01.01.2026, 14,60 €/h ab 01.01.2027.' },
     ],
   },
   {
