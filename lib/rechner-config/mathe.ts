@@ -933,7 +933,7 @@ In der Praxis bedeutet das: Die meisten Werte liegen im Bereich 5,4 ± 2,42, als
   },
   {
     slug: 'wissenschaftlicher-taschenrechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-26',
     titel: 'Wissenschaftlicher Taschenrechner',
     beschreibung: 'Wissenschaftlicher Taschenrechner online: Trigonometrie, Logarithmen, Potenzen, Klammern und mehr.',
     kategorie: 'Mathe & Schule',
@@ -997,6 +997,161 @@ Potenzen werden mit der xʸ-Taste eingegeben: 2 xʸ 10 = 1024. Die Kurzformen x�
 - **EXP:** Für sehr große oder kleine Zahlen. 5 EXP 3 bedeutet 5 × 10³ = 5.000.
 - **Verlauf:** Klicken Sie auf einen Verlaufseintrag, um das Ergebnis zu übernehmen.
 - **Klammern:** Setzen Sie Klammern großzügig ein — sie machen die Berechnung eindeutig und vermeiden Fehler bei der Operatorrangfolge.`,
+    // W19-Goldstandard: wissenschaftlicher-taschenrechner auf volle Tiefe (~1.560 W, 15 Bausteine).
+    // Leitformat „Bedien-Checklisten" — 3 checkliste dominant (Funktionsumfang · Bedienung ·
+    // häufige Fehler), Tool-Charakter; grenzt sich von den anderen Mathe-Slugs (tabelle/beispiel/
+    // vergleich) ab. Anker gegen lib/berechnungen/taschenrechner.ts reproduziert (Resolver-Check
+    // 25.06.2026): sin(30)[DEG]=0,5 / [RAD]=−0,988; log(1000)=3; ln(e)=1; 2^10=1024; 5!=120;
+    // sqrt(144)=12; (2+3)×(4−1)=15; 2+3×4=14 (Punkt-vor-Strich); asin(0,5)[DEG]=30. Nicht-YMYL.
+    // erklaerung bleibt Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was ein wissenschaftlicher Rechner kann',
+        html: `<p>Ein <strong>wissenschaftlicher Taschenrechner</strong> geht weit über die vier Grundrechenarten hinaus. Er beherrscht Trigonometrie, Logarithmen, Potenzen, Wurzeln, Fakultäten und Konstanten wie π und e — alles, was in Schule, Studium und Technik gebraucht wird. Dieser Rechner läuft direkt im Browser, ohne App oder Installation.</p><p>Das Besondere gegenüber einem einfachen Rechner ist die <strong>korrekte Auswertung komplexer Terme</strong>: Punkt-vor-Strich, beliebig verschachtelte Klammern und die richtige Rangfolge der Funktionen. So liefert auch ein langer Ausdruck mit Klammern, Potenzen und Wurzeln zuverlässig das richtige Ergebnis.</p><p>Wer einzelne Operationen gezielt üben möchte, findet dafür Spezialrechner — etwa den <a href="/mathe/potenz-rechner">Potenz-Rechner</a> für Potenzen, Wurzeln und Logarithmen Schritt für Schritt. Dieses Tool ist die universelle Variante für alles auf einmal.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Funktionsumfang auf einen Blick',
+        punkte: [
+          'Grundrechenarten mit korrekter Punkt-vor-Strich-Regel und beliebig verschachtelten Klammern',
+          'Trigonometrie: sin, cos, tan und die Umkehrfunktionen sin⁻¹, cos⁻¹, tan⁻¹',
+          'Logarithmen: log (Basis 10) und ln (natürlicher Logarithmus zur Basis e)',
+          'Potenzen und Wurzeln: x², x³, xʸ sowie √ und ³√',
+          'Exponentialfunktionen 10ˣ und eˣ sowie die Fakultät n!',
+          'Konstanten π und e, Kehrwert 1/x, Prozent, Ans (letztes Ergebnis), EXP (wiss. Notation)',
+          'Umschaltbarer Winkelmodus DEG/RAD und ein Verlauf der letzten 10 Berechnungen',
+        ],
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Tasten-Referenz: Funktion und Beispiel',
+        kopf: ['Taste', 'Funktion', 'Beispiel'],
+        zeilen: [
+          ['sin / cos / tan', 'Winkelfunktionen', 'sin(30°) = 0,5'],
+          ['sin⁻¹ / cos⁻¹ / tan⁻¹', 'Umkehrfunktionen (Winkel)', 'sin⁻¹(0,5) = 30°'],
+          ['log / ln', 'Logarithmus Basis 10 / Basis e', 'log(1000) = 3'],
+          ['xʸ / x²', 'Potenz', '2^10 = 1.024'],
+          ['√ / ³√', 'Quadrat- / Kubikwurzel', '√144 = 12'],
+          ['n!', 'Fakultät', '5! = 120'],
+          ['π / e', 'Konstanten', 'π ≈ 3,14159'],
+        ],
+        fussnote: 'Funktionen und Potenzen werden vor den Grundrechenarten ausgewertet; Klammern haben höchste Priorität. Die Werte der trigonometrischen Funktionen hängen vom Winkelmodus (DEG/RAD) ab.',
+      },
+      {
+        typ: 'text',
+        titel: 'Potenzen und Wurzeln eingeben',
+        html: `<p>Für <strong>Potenzen</strong> bietet der Rechner mehrere Tasten. x² und x³ sind Kurzwege für Quadrat und Kubik, die xʸ-Taste erlaubt jeden Exponenten: 2 xʸ 10 ergibt 1.024. Auch negative und gebrochene Exponenten sind möglich — ein gebrochener Exponent ist dabei nichts anderes als eine Wurzel.</p><p>Die <strong>Wurzel</strong> ist die Umkehrung der Potenz. Die Quadratwurzel-Taste √ liefert √144 = 12, die Kubikwurzel ³√ entsprechend die dritte Wurzel. Mathematisch gilt ⁿ√a = a^(1/n), weshalb sich Wurzeln auch über die xʸ-Taste mit einem Bruch im Exponenten eingeben lassen.</p><p>Nicht jede Wurzel ergibt eine glatte Zahl: √2 ≈ 1,414 ist irrational. Der Rechner zeigt dann eine gerundete Näherung. Für reine Potenz- und Wurzelaufgaben mit ausführlichem Rechenweg eignet sich der separate Potenz-Rechner.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'DEG vs. RAD: der häufigste Fehler',
+        html: `<p>Die wichtigste Einstellung am wissenschaftlichen Rechner ist der <strong>Winkelmodus</strong>. Er entscheidet, wie die trigonometrischen Funktionen einen Winkel interpretieren — und ein falscher Modus ist die mit Abstand häufigste Fehlerquelle.</p><p>Im <strong>DEG-Modus</strong> (Degree, Grad) hat ein Vollkreis 360°; sin(30) bedeutet hier 30 Grad und ergibt 0,5. Im <strong>RAD-Modus</strong> (Radiant, Bogenmaß) hat ein Vollkreis 2π ≈ 6,283; dort wird „30" als 30 Radiant gelesen, und sin(30) ergibt rund −0,988. Dieselbe Eingabe, völlig anderes Ergebnis.</p><p>Eine grobe Orientierung: In der <strong>Schule</strong> rechnet man fast immer in Grad (DEG), in der <strong>Hochschulmathematik und Physik</strong> dagegen in Bogenmaß (RAD). Die Taste DEG/RAD schaltet zwischen beiden um — ein Blick darauf vor jeder Aufgabe spart viel Ärger.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Vor jeder Trigonometrie: Winkelmodus prüfen',
+        text: 'Der häufigste Fehler am wissenschaftlichen Taschenrechner ist der falsche Winkelmodus. Im DEG-Modus (Grad) ergibt sin(30) den erwarteten Wert 0,5 — im RAD-Modus (Bogenmaß) dagegen rund −0,988, weil „30" dort als 30 Radiant gelesen wird. Prüfen Sie deshalb vor jeder Trigonometrie-Aufgabe die Anzeige DEG/RAD. Faustregel: In der Schule rechnet man meist in Grad (DEG), in der Hochschulmathematik und Physik in Bogenmaß (RAD).',
+      },
+      {
+        typ: 'text',
+        titel: 'Trigonometrie: sin, cos und tan im Dreieck',
+        html: `<p>Die <strong>trigonometrischen Funktionen</strong> beschreiben Verhältnisse im rechtwinkligen Dreieck und gehören zu den meistgenutzten Tasten. <strong>Sinus</strong> ist Gegenkathete geteilt durch Hypotenuse, <strong>Kosinus</strong> Ankathete durch Hypotenuse, <strong>Tangens</strong> Gegenkathete durch Ankathete. Daraus folgen die Merkwerte sin(30°) = 0,5, cos(60°) = 0,5 und tan(45°) = 1.</p><p>Die <strong>Umkehrfunktionen</strong> sin⁻¹, cos⁻¹ und tan⁻¹ (auch arcsin, arccos, arctan) gehen den umgekehrten Weg: Sie berechnen aus einem Verhältnis den zugehörigen Winkel. So liefert sin⁻¹(0,5) im DEG-Modus genau 30°.</p><p>Trigonometrie ist weit mehr als Schulstoff: Sie steckt in der Vermessung, in der Wechselstromtechnik, in der Computergrafik und in jeder Schwingung oder Welle. Wer mit rechtwinkligen Dreiecken und ihren Seitenlängen arbeitet, kombiniert sie häufig mit dem Satz des Pythagoras.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Komplexer Term: (2 + 3) × 4² − √16',
+        schritte: [
+          { label: 'Term', formel: '(2 + 3) × 4² − √16', ergebnis: 'auswerten' },
+          { label: 'Klammer zuerst', formel: '(2 + 3) = 5', ergebnis: '5 × 4² − √16' },
+          { label: 'Potenz und Wurzel', formel: '4² = 16, √16 = 4', ergebnis: '5 × 16 − 4' },
+          { label: 'Punkt vor Strich', formel: '5 × 16 = 80, dann − 4', ergebnis: '76' },
+        ],
+        fazit: 'Der Term (2 + 3) × 4² − √16 ergibt 76. Die Reihenfolge ist entscheidend: zuerst Klammern, dann Funktionen (Potenz, Wurzel), dann Punkt-, zuletzt Strichrechnung. Der Rechner beachtet diese Rangfolge automatisch — wer im Kopf rechnet, sollte sie aber kennen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Rechenreihenfolge: was zuerst gilt',
+        html: `<p>Damit lange Ausdrücke eindeutig sind, gilt eine feste <strong>Rangfolge</strong>. Zuerst werden <strong>Klammern</strong> ausgewertet — sie haben höchste Priorität und lassen sich beliebig verschachteln. Danach kommen <strong>Funktionen und Potenzen</strong> (sin, √, x²), dann die <strong>Punktrechnung</strong> (× und ÷) und zuletzt die <strong>Strichrechnung</strong> (+ und −).</p><p>Ein einfaches Beispiel zeigt, warum das wichtig ist: 2 + 3 × 4 ergibt <strong>14</strong>, nicht 20 — die Multiplikation kommt vor der Addition. Wer 20 erwartet, hat „von links nach rechts" gerechnet und die Rangfolge ignoriert.</p><p>Der Rechner beachtet diese Regeln automatisch. Trotzdem lohnt es sich, Klammern großzügig zu setzen: Sie machen die eigene Absicht eindeutig und verhindern Fehler. Wer ganze Gleichungen lösen will, nutzt ergänzend den <a href="/mathe/gleichungsrechner">Gleichungsrechner</a>.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Eingabe und Bedienung Schritt für Schritt',
+        punkte: [
+          'Vor trigonometrischen Funktionen den Winkelmodus (DEG oder RAD) prüfen',
+          'Funktionstaste zuerst, dann das Argument: sin → 30 → ) → =',
+          'Klammern großzügig setzen — sie machen den Term eindeutig',
+          'Über die Tastatur tippen: Zahlen, + − * / und Klammern direkt, Enter berechnet',
+          'Ans übernimmt das letzte Ergebnis in die nächste Rechnung (Kettenrechnung)',
+          'Backspace löscht das letzte Zeichen, Escape setzt alles zurück',
+          'Einen Verlaufseintrag anklicken, um ein früheres Ergebnis weiterzuverwenden',
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'log und ln: zwei Logarithmen',
+        html: `<p>Der Rechner kennt zwei Logarithmen, die oft verwechselt werden. <strong>log</strong> ist der dekadische Logarithmus zur <strong>Basis 10</strong>: log(1000) = 3, weil 10³ = 1.000. <strong>ln</strong> ist der natürliche Logarithmus zur <strong>Basis e</strong> (≈ 2,718): ln(e) = 1, weil e¹ = e.</p><p>Beide beantworten dieselbe Art Frage — „mit welchem Exponenten muss ich die Basis potenzieren?" —, nur mit unterschiedlicher Basis. Welcher der richtige ist, hängt vom Kontext ab: <strong>log</strong> taucht bei Dezibel, pH-Wert und Größenordnungen auf, <strong>ln</strong> in der Analysis, bei Wachstums- und Zerfallsprozessen und in der Wahrscheinlichkeitsrechnung.</p><p>Ihre Umkehrungen sind die Exponentialfunktionen: 10ˣ kehrt log um, eˣ kehrt ln um. Wer das verinnerlicht, vermeidet den klassischen „log-statt-ln"-Fehler in Klausuren.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'log (Basis 10) vs. ln (Basis e)',
+        spalteA: 'log (dekadisch)',
+        spalteB: 'ln (natürlich)',
+        zeilen: [
+          { kriterium: 'Basis', a: '10', b: 'e ≈ 2,718' },
+          { kriterium: 'Frage', a: '10 hoch wie viel?', b: 'e hoch wie viel?' },
+          { kriterium: 'Beispiel', a: 'log(1000) = 3', b: 'ln(e) = 1' },
+          { kriterium: 'Typisch in', a: 'Dezibel, pH-Wert, Größenordnungen', b: 'Analysis, Wachstum, Naturwissenschaft' },
+          { kriterium: 'Umkehrung', a: '10ˣ', b: 'eˣ' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Fakultät und Kombinatorik',
+        html: `<p>Die <strong>Fakultät</strong> n! ist das Produkt aller ganzen Zahlen von 1 bis n: 5! = 5 × 4 × 3 × 2 × 1 = 120. Sie ist nur für nichtnegative ganze Zahlen definiert und wächst extrem schnell — 10! ist bereits über 3,6 Millionen.</p><p>Ihr Hauptanwendungsgebiet ist die <strong>Kombinatorik</strong>, also das Zählen von Möglichkeiten. Auf wie viele Arten lassen sich fünf Bücher anordnen? Genau 5! = 120. Die Fakultät steckt damit hinter Wahrscheinlichkeiten, Lotto-Berechnungen und dem Binomialkoeffizienten „n über k".</p><p>Per Konvention ist 0! = 1 — das wirkt überraschend, ist aber für die Kombinatorik notwendig (es gibt genau eine Art, nichts anzuordnen). Geometrische Aufgaben mit rechten Winkeln rechnet ergänzend der <a href="/mathe/pythagoras-rechner">Pythagoras-Rechner</a>.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Die Konstanten π und e',
+        html: `<p>Zwei Konstanten sind auf jedem wissenschaftlichen Rechner fest eingebaut. Die <strong>Kreiszahl π</strong> (≈ 3,14159) ist das Verhältnis von Umfang zu Durchmesser eines Kreises. Sie steckt in jeder Kreis-, Kugel- und Winkelberechnung und ist irrational — ihre Nachkommastellen brechen nie ab.</p><p>Die <strong>eulersche Zahl e</strong> (≈ 2,718) ist die natürliche Basis des Wachstums. Überall, wo etwas kontinuierlich wächst oder zerfällt — Zinseszins, radioaktiver Zerfall, viele Naturprozesse —, taucht e auf. Sie ist die Basis des natürlichen Logarithmus ln und der Exponentialfunktion eˣ.</p><p>Beide Konstanten gibt man per Tastendruck ein, statt die Näherungswerte abzutippen — das ist genauer und schneller. Der Rechner verwendet intern die volle Präzision und rundet erst die Anzeige.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Anwendungen und die wissenschaftliche Notation',
+        html: `<p>Der wissenschaftliche Rechner ist das Standardwerkzeug überall dort, wo es über einfaches Addieren hinausgeht. In <strong>Schule und Studium</strong> sind es Trigonometrie, Logarithmen und Potenzen; in <strong>Technik und Physik</strong> Umrechnungen, Winkel und Exponentialfunktionen; in der <strong>Statistik</strong> Fakultäten und Wahrscheinlichkeiten.</p><p>Besonders praktisch ist die <strong>wissenschaftliche Notation</strong> über die EXP-Taste. Sehr große und sehr kleine Zahlen schreibt man als a × 10ⁿ: Die Lichtgeschwindigkeit ist 3 × 10⁸ m/s (Eingabe 3 EXP 8), die Elementarladung 1,6 × 10⁻¹⁹ Coulomb. Ohne diese Schreibweise wäre der Umgang mit solchen Größenordnungen kaum praktikabel.</p><p>Wichtig: EXP ist nicht die Potenz-Taste. „5 EXP 3" bedeutet 5 × 10³ = 5.000, nicht 5³ = 125. Wer beides verwechselt, erhält um Größenordnungen falsche Ergebnisse.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Merkwerte und Eckdaten',
+        werte: [
+          { label: 'sin(30°)', wert: '0,5', hinweis: 'nur im DEG-Modus' },
+          { label: 'π', wert: '3,14159…', hinweis: 'Kreiszahl, irrational' },
+          { label: 'e', wert: '2,71828…', hinweis: 'eulersche Zahl, Basis von ln' },
+          { label: '5!', wert: '120', hinweis: '5 × 4 × 3 × 2 × 1' },
+          { label: 'Vollkreis', wert: '360° = 2π', hinweis: 'DEG vs. RAD' },
+        ],
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Häufige Bedienfehler vermeiden',
+        punkte: [
+          'Falscher Winkelmodus: sin(30) ergibt 0,5 in DEG, aber −0,988 in RAD',
+          'Klammern vergessen: sin 30 + 5 ist nicht dasselbe wie sin(30 + 5)',
+          'log und ln verwechseln — log ist Basis 10, ln ist Basis e',
+          'Fakultät von negativen oder gebrochenen Zahlen erwarten (n! gibt es nur für 0, 1, 2, …)',
+          'Punkt-vor-Strich übersehen: 2 + 3 × 4 = 14, nicht 20',
+          'Irrationale Ergebnisse (π, √2, log-Werte) sind gerundete Näherungen',
+          'EXP mit der Potenz-Taste verwechseln: 5 EXP 3 = 5 × 10³, nicht 5³',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Exakt, wo möglich — gerundet, wo nötig',
+        text: 'Der Rechner zeigt exakte Werte, wo das möglich ist, und gerundete Näherungen, wo das Ergebnis irrational ist — etwa bei π, e, den meisten Wurzeln und Logarithmen oder vielen Winkelfunktionen. Diese Zahlen haben unendlich viele Nachkommastellen; die Anzeige ist auf eine sinnvolle Stellenzahl gekürzt. Prüfen Sie außerdem vor jeder Eingabe den Winkelmodus (DEG/RAD) — er ist die häufigste Fehlerquelle.',
+      },
+    ],
     faq: [
       {
         frage: 'Wie berechne ich sin, cos und tan online?',
@@ -1018,6 +1173,10 @@ Potenzen werden mit der xʸ-Taste eingegeben: 2 xʸ 10 = 1024. Die Kurzformen x�
         frage: 'Wie nutze ich die wissenschaftliche Notation?',
         antwort: 'Drücken Sie EXP nach einer Zahl, um einen Exponenten zur Basis 10 einzugeben. Beispiel: 5 EXP 3 = 5 × 10³ = 5.000. Das ist nützlich für sehr große Zahlen (Lichtgeschwindigkeit: 3E8 = 300.000.000) oder sehr kleine (Elektronenmasse: 9,1E-31).',
       },
+    ],
+    quellen: [
+      { titel: 'Bronstein/Semendjajew: Taschenbuch der Mathematik', hinweis: 'Standard-Referenz für trigonometrische Funktionen, Logarithmen, Potenzen und die Operatorrangfolge.' },
+      { titel: 'DIN 1302: Allgemeine mathematische Zeichen und Begriffe', hinweis: 'Normt u. a. die Schreibweise von log, ln, Winkelfunktionen sowie das Bogenmaß (Radiant) und Gradmaß.' },
     ],
   },
   {
