@@ -1211,7 +1211,7 @@ Bei der Flächenberechnung ist die korrekte Einheitenumrechnung entscheidend. Wi
   },
   {
     slug: 'prozentuale-veraenderung-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-25',
     titel: 'Prozentuale-Veränderung-Rechner',
     beschreibung: 'Prozentuale Veränderung berechnen: Zu- oder Abnahme zwischen zwei Werten in Prozent, mit Rechenweg.',
     kategorie: 'Mathe & Schule',
@@ -1247,6 +1247,157 @@ Wenn der Ausgangswert 0 ist, kann keine prozentuale Veränderung berechnet werde
 **Zusammenhang mit dem Faktor**
 
 Der Faktor (auch Multiplikator) gibt an, das Wievielfache der neue Wert vom alten Wert beträgt: Faktor = Neuer Wert / Alter Wert. Ein Faktor von 1,25 bedeutet +25%, ein Faktor von 0,8 bedeutet −20%. Der Faktor 2 entspricht einer Verdopplung (+100%), der Faktor 0,5 einer Halbierung (−50%). Der Zusammenhang ist einfach: Prozentuale Veränderung = (Faktor − 1) × 100.`,
+    // W19-Goldstandard: prozentuale-veraenderung-rechner auf volle Tiefe (~1.560 W, 14 Bausteine).
+    // Leitformat „Veränderungs-Tabellen" — 3 tabelle dominant (Szenarien · Faktor↔Prozent ·
+    // Asymmetrie), grenzt sich von prozentrechner (beispielrechnung) und dreisatz (vergleich) ab.
+    // Anker gegen lib/berechnungen/prozentuale-veraenderung.ts reproduziert (Resolver-Check
+    // 25.06.2026): 80→100 +25 % (Faktor 1,25), 100→80 −20 %, 50→75 +50 %, 200→150 −25 %,
+    // Asymmetrie 100→150→100 = +50 %/−33,33 %. Nicht-YMYL (Mathe). HINWEIS: prozentrechner +
+    // dreisatz-rechner liegen in kategorieSlug 'alltag' (NICHT mathe) → Links /alltag/...
+    // erklaerung bleibt Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was ist die prozentuale Veränderung?',
+        html: `<p>Die <strong>prozentuale Veränderung</strong> beschreibt, um wie viel Prozent sich ein Wert gegenüber einem Ausgangswert verändert hat. Die Formel ist denkbar einfach: <strong>(Neuer Wert − Alter Wert) ÷ Alter Wert × 100</strong>. Ein positives Ergebnis bedeutet eine Zunahme, ein negatives eine Abnahme.</p><p>Entscheidend ist die <strong>Bezugsgröße</strong>: Der alte Wert steht im Nenner und ist immer der Maßstab. Steigt ein Preis von 80 € auf 100 €, sind das (100 − 80) ÷ 80 × 100 = +25 %. Sinkt er von 100 € auf 80 €, sind es nur −20 % — weil sich die Veränderung diesmal auf den größeren Wert 100 bezieht.</p><p>Diese relative Betrachtung macht Werte vergleichbar, die absolut sehr unterschiedlich sind. Für die einfache Prozentrechnung „X Prozent von Y" nutzen Sie den <a href="/alltag/prozentrechner">Prozentrechner</a>; dieser Rechner zeigt speziell die Veränderung zwischen zwei Werten.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Wo prozentuale Veränderung überall auftaucht',
+        html: `<p>Die prozentuale Veränderung begegnet einem im Alltag ständig. Bei <strong>Preisen</strong> zeigt sie Inflation oder Rabatt, bei der <strong>Gehaltsverhandlung</strong> die Erhöhung, bei <strong>Aktienkursen</strong> die Tagesperformance. Auch <strong>Umsätze</strong>, Mietspiegel, Energiekosten und gesundheitliche Werte wie das Gewicht werden über die prozentuale Veränderung verglichen.</p><p>In Wissenschaft und Wirtschaft heißt dieselbe Größe <strong>Wachstumsrate</strong> oder <strong>Änderungsrate</strong>. Der Vorteil der relativen Betrachtung: Sie macht Entwicklungen vergleichbar, die in absoluten Zahlen völlig unterschiedlich groß sind — eine Steigerung von 1.000 € auf 1.200 € (+20 %) und von 1 Mio. auf 1,2 Mio. € (ebenfalls +20 %) sind relativ gleich stark.</p><p>Gerade bei <strong>Wahlergebnissen</strong> und Quoten lauert dabei die Prozentpunkte-Falle: Ein Sprung von 10 % auf 12 % ist je nach Lesart +2 Prozentpunkte oder +20 Prozent.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Schritt für Schritt: von 80 auf 100',
+        schritte: [
+          { label: 'Differenz bilden', formel: '100 − 80', ergebnis: '20' },
+          { label: 'durch den Ausgangswert teilen', formel: '20 ÷ 80', ergebnis: '0,25' },
+          { label: 'mal 100', formel: '0,25 × 100', ergebnis: '+25 %' },
+          { label: 'Faktor zur Gegenprobe', formel: '100 ÷ 80', ergebnis: '× 1,25' },
+        ],
+        fazit: 'Der Wert ist von 80 auf 100 gestiegen — eine Zunahme um 25 %. Wichtig: Der umgekehrte Weg (100 zurück auf 80) ergibt nur −20 %, weil sich diese −20 % auf den größeren Wert 100 beziehen. Bezugsgröße ist immer der jeweilige Ausgangswert. Diese Asymmetrie zwischen Hin- und Rückweg ist kein Rechenfehler, sondern eine direkte Folge der Formel — sie tritt bei jeder prozentualen Veränderung auf.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Veränderungs-Szenarien im Überblick',
+        kopf: ['Alter Wert', 'Neuer Wert', 'Veränderung', 'Faktor'],
+        zeilen: [
+          ['80', '100', '+25 %', '× 1,25'],
+          ['100', '80', '−20 %', '× 0,80'],
+          ['50', '75', '+50 %', '× 1,50'],
+          ['200', '150', '−25 %', '× 0,75'],
+          ['1.000', '2.000', '+100 %', '× 2,00'],
+          ['1.000', '500', '−50 %', '× 0,50'],
+        ],
+        fussnote: 'Veränderung = (Neuer Wert − Alter Wert) ÷ Alter Wert × 100. Der alte Wert ist immer die Bezugsgröße (steht im Nenner). Ein Faktor über 1 bedeutet Zunahme, unter 1 Abnahme.',
+      },
+      {
+        typ: 'text',
+        titel: 'Anstieg, Rückgang und der Faktor',
+        html: `<p>Das Vorzeichen verrät die Richtung: Ein <strong>positives</strong> Ergebnis ist eine Zunahme, ein <strong>negatives</strong> eine Abnahme. Bei 0 % hat sich nichts geändert.</p><p>Eng verwandt ist der <strong>Faktor</strong> (Multiplikator): Er gibt an, das Wievielfache der neue Wert vom alten beträgt — Faktor = Neuer Wert ÷ Alter Wert. Ein Faktor von 1,25 entspricht +25 %, ein Faktor von 0,8 entspricht −20 %. Die Umrechnung ist immer dieselbe: <strong>Prozentuale Veränderung = (Faktor − 1) × 100</strong>.</p><p>Der Faktor ist besonders praktisch, wenn mehrere Veränderungen hintereinander wirken: Statt Prozente zu addieren, multipliziert man die Faktoren. Zwei Erhöhungen um je 10 % ergeben so nicht +20 %, sondern 1,1 × 1,1 = 1,21, also +21 %.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Mehrere Perioden: die durchschnittliche Wachstumsrate',
+        html: `<p>Wirken mehrere Veränderungen über mehrere Perioden, darf man die Prozente <strong>nicht einfach addieren</strong>. Steigt ein Umsatz in drei Jahren von 1 Mio. auf 1,5 Mio. €, beträgt die Gesamtsteigerung zwar 50 % — die <strong>durchschnittliche jährliche Wachstumsrate</strong> (englisch CAGR) liegt aber nur bei rund 14,5 %, nicht bei 16,7 % (also 50 % ÷ 3).</p><p>Der Grund ist der Zinseszins-Effekt: Jedes Jahr wächst der bereits gewachsene Wert weiter. Mathematisch zieht man die n-te Wurzel aus dem Gesamtfaktor — hier die dritte Wurzel aus 1,5, also rund 1,145, was +14,5 % entspricht.</p><p>Diese durchschnittliche Rate ist die faire Kennzahl, um Wachstum über unterschiedlich lange Zeiträume zu vergleichen. Wer die einzelnen Jahresraten kennt, multipliziert ihre Faktoren — nur so kommt die korrekte Gesamtveränderung heraus.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Faktor und Prozent ineinander umrechnen',
+        kopf: ['Faktor', 'Prozentuale Veränderung', 'Bedeutung'],
+        zeilen: [
+          ['× 0,50', '−50 %', 'Halbierung'],
+          ['× 0,80', '−20 %', 'Rückgang um ein Fünftel'],
+          ['× 1,00', '0 %', 'unverändert'],
+          ['× 1,10', '+10 %', 'leichte Zunahme'],
+          ['× 1,25', '+25 %', 'Zunahme um ein Viertel'],
+          ['× 2,00', '+100 %', 'Verdopplung'],
+          ['× 3,00', '+200 %', 'Verdreifachung'],
+        ],
+        fussnote: 'Zusammenhang: Prozentuale Veränderung = (Faktor − 1) × 100; umgekehrt Faktor = 1 + Prozent ÷ 100. Achtung: Eine Verdopplung ist +100 % (nicht +200 %), eine Verdreifachung +200 %.',
+      },
+      {
+        typ: 'text',
+        titel: 'Prozent vs. Prozentpunkte — der klassische Fehler',
+        html: `<p>Eine Unterscheidung wird ständig verwechselt — besonders in Nachrichten und Politik: <strong>Prozent</strong> gegen <strong>Prozentpunkte</strong>. Die prozentuale Veränderung misst die <strong>relative</strong> Änderung eines Wertes. Prozentpunkte messen die <strong>absolute</strong> Differenz zwischen zwei Prozentwerten.</p><p>Das klassische Beispiel: Steigt die Arbeitslosenquote von 5 % auf 6 %, ist das ein Anstieg um <strong>1 Prozentpunkt</strong> — aber um <strong>20 Prozent</strong>, denn (6 − 5) ÷ 5 × 100 = 20. Beide Aussagen sind richtig, meinen aber völlig Verschiedenes.</p><p>Wer Zahlen sauber kommuniziert, schreibt „um 2 Prozentpunkte gestiegen" für die absolute und „um 2 Prozent gestiegen" für die relative Änderung. Gerade bei Preisen und realer Kaufkraft hilft zusätzlich der <a href="/finanzen/inflationsrechner">Inflationsrechner</a>, die Veränderung richtig einzuordnen.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Prozentuale Veränderung vs. Prozentpunkte',
+        spalteA: 'Prozentuale Veränderung',
+        spalteB: 'Prozentpunkte',
+        zeilen: [
+          { kriterium: 'Misst', a: 'relative Veränderung', b: 'absolute Differenz' },
+          { kriterium: 'Bezug', a: 'auf den Ausgangswert', b: 'Abstand zweier Prozentwerte' },
+          { kriterium: 'Beispiel 5 % → 6 %', a: '+20 % (relativ)', b: '+1 Prozentpunkt' },
+          { kriterium: 'Formel', a: '(neu − alt) ÷ alt × 100', b: 'neu − alt (beides in %)' },
+          { kriterium: 'Typisch bei', a: 'Preisen, Umsätzen, Kursen', b: 'Quoten, Zinssätzen, Wahlergebnissen' },
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Die Prozentpunkte-Falle in den Medien',
+        text: 'Der häufigste Fehler in Medien und Statistik: Prozent und Prozentpunkte werden verwechselt. Steigt die Arbeitslosenquote von 5 % auf 6 %, ist das ein Anstieg um 1 Prozentpunkt — aber um 20 Prozent (relative Veränderung). Eine Schlagzeile wie „Inflation um 2 Prozent gestiegen" ist mehrdeutig: Meint sie von 3 % auf 5 % (2 Prozentpunkte) oder von 3 % auf 3,06 % (2 % von 3 %)? Korrekt formuliert man „um 2 Prozentpunkte" für die absolute und „um 2 Prozent" für die relative Änderung.',
+      },
+      {
+        typ: 'text',
+        titel: 'Asymmetrie: +x % und −x % heben sich nie auf',
+        html: `<p>Ein hartnäckiger Denkfehler: Viele glauben, eine Steigerung um x % und eine anschließende Senkung um x % würden sich aufheben. Das ist <strong>falsch</strong> — das Ergebnis liegt immer unter dem Startwert.</p><p>Ein Aktienkurs steigt von 100 € um 50 % auf 150 €. Fällt er dann um 50 %, sind das 50 % von 150 € = 75 €, nicht 100 €. Der Grund ist wieder die Bezugsgröße: Beim Anstieg ist 100 die Basis, beim Rückgang die größere 150. Um von 150 € zurück auf 100 € zu kommen, bräuchte es nur <strong>−33,3 %</strong>.</p><p>Je größer die Prozentsätze, desto stärker der Effekt. Bei +10 % und −10 % landet man bei 99 (also −1 %), bei +50 % und −50 % schon bei 75 (−25 %), und +100 % gefolgt von −100 % ergibt sogar 0. Dieser Rechner zeigt die „Umkehr-Prozent" automatisch an.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Asymmetrie: erst +x %, dann −x % (Start 100)',
+        kopf: ['Schritt 1: +x %', 'Schritt 2: −x %', 'Endwert', 'gesamt'],
+        zeilen: [
+          ['+10 % → 110', '−10 % → 99', '99', '−1 %'],
+          ['+25 % → 125', '−25 % → 93,75', '93,75', '−6,25 %'],
+          ['+50 % → 150', '−50 % → 75', '75', '−25 %'],
+          ['+100 % → 200', '−100 % → 0', '0', '−100 %'],
+        ],
+        fussnote: 'Eine Zunahme und eine gleich große Abnahme heben sich nie auf — das Ergebnis liegt immer unter dem Startwert. Grund: Die Abnahme bezieht sich auf den bereits erhöhten Wert (größere Basis). Je größer der Prozentsatz, desto stärker der Effekt.',
+      },
+      {
+        typ: 'text',
+        titel: 'Umkehrung: andere Basis, anderer Prozentwert',
+        html: `<p>Die <strong>Umkehrung</strong> einer Veränderung ist nicht einfach das Vorzeichen-Spiegelbild. Von 80 auf 100 sind es +25 %, aber von 100 zurück auf 80 nur −20 %. Der Grund ist erneut die wechselnde Basis: Beim Hinweg ist 80 der Bezug, beim Rückweg die größere 100.</p><p>Praktisch heißt das: Wer eine Veränderung „rückgängig" machen will, darf nicht denselben Prozentsatz mit umgekehrtem Vorzeichen verwenden, sondern muss neu rechnen — bezogen auf den neuen Ausgangswert. Der Rechner gibt diesen Umkehr-Prozentsatz direkt mit aus.</p><p>Für proportionale Zusammenhänge und einfache „Wenn X, dann Y"-Umrechnungen ist der <a href="/alltag/dreisatz-rechner">Dreisatzrechner</a> das passende Werkzeug — die prozentuale Veränderung dagegen vergleicht gezielt zwei Zustände miteinander.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Sonderfälle: Ausgangswert 0 oder negativ',
+        html: `<p>Zwei Sonderfälle verdienen Aufmerksamkeit. Ist der <strong>Ausgangswert 0</strong>, lässt sich keine prozentuale Veränderung berechnen — die Division durch Null ist nicht definiert. Von 0 auf 50 zu gehen ist „unendlich viel mehr"; hier ist nur die absolute Veränderung (+50) aussagekräftig. Der Rechner weist diesen Fall ausdrücklich aus.</p><p>Bei <strong>negativen Ausgangswerten</strong> — etwa Verlusten oder Temperaturen unter null — wird der Betrag des Ausgangswerts als Bezugsgröße genutzt. Beispiel: Von −20 auf −10 ergibt ((−10) − (−20)) ÷ |−20| × 100 = +50 %. Mathematisch korrekt: Der Verlust hat sich halbiert, also um 50 % verringert.</p><p>Solche Fälle treten in Buchhaltung und Statistik häufig auf — wichtig ist, sich bewusst zu machen, worauf sich die Prozentzahl jeweils bezieht.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Eckwerte und Faustregeln',
+        werte: [
+          { label: 'Grundformel', wert: 'Δ ÷ alt × 100', hinweis: '(Neu − Alt) ÷ Alter Wert × 100' },
+          { label: 'Faktor → Prozent', wert: '(Faktor − 1) × 100', hinweis: '× 1,25 entspricht +25 %' },
+          { label: 'Verdopplung', wert: '+100 %', hinweis: 'Faktor 2 — nicht +200 %' },
+          { label: '+25 % dann −25 %', wert: '→ 93,75', hinweis: 'nie zurück zum Startwert' },
+          { label: 'Ausgangswert 0', wert: 'undefiniert', hinweis: 'Division durch Null nicht möglich' },
+        ],
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Häufige Fehler vermeiden',
+        punkte: [
+          'Den alten Wert als Bezugsgröße nehmen — er steht im Nenner, nicht der neue Wert',
+          'Prozent und Prozentpunkte nicht verwechseln (5 % → 6 % = +1 Prozentpunkt = +20 %)',
+          'Bei einem Rückgang das Vorzeichen beachten — das Ergebnis ist negativ',
+          'Nicht annehmen, dass +x % und −x % sich aufheben (das tun sie nie)',
+          'Bei der Umkehrung neu rechnen — die Basis ändert sich, der Prozentwert auch',
+          'Verdopplung ist +100 %, Verdreifachung +200 % — nicht +200 % bzw. +300 %',
+          'Ausgangswert 0? Dann ist keine prozentuale Veränderung definiert, nur die absolute',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Mathematik ja — Bedeutung im Kontext prüfen',
+        text: 'Die prozentuale Veränderung ist eine rein mathematische Berechnung und sagt nichts über die Bedeutung des Ergebnisses aus. Bei Geldwerten lohnt der Blick auf die Inflation: Eine Gehaltserhöhung um 3 % bei 2 % Inflation bedeutet real nur rund 1 % mehr Kaufkraft. Bei mehreren aufeinanderfolgenden Veränderungen rechnet man die Prozente nicht einfach zusammen, sondern multipliziert die Faktoren — sonst entsteht ein Fehler.',
+      },
+    ],
     faq: [
       {
         frage: 'Wie berechne ich die prozentuale Veränderung?',
@@ -1268,6 +1419,10 @@ Der Faktor (auch Multiplikator) gibt an, das Wievielfache der neue Wert vom alte
         frage: 'Was ist der Unterschied zur prozentualen Abweichung?',
         antwort: 'Die prozentuale Veränderung misst die Änderung eines Wertes über die Zeit (alter vs. neuer Wert). Die prozentuale Abweichung vergleicht einen Messwert mit einem Referenzwert (z. B. Soll-Wert). Die Formel ist ähnlich, aber der Kontext unterscheidet sich: Veränderung = zeitlich, Abweichung = Vergleich mit Norm.',
       },
+    ],
+    quellen: [
+      { titel: 'Statistisches Bundesamt (Destatis): Veränderungsraten & Prozentpunkte', url: 'https://www.destatis.de', hinweis: 'Methodische Abgrenzung der relativen Veränderung (Prozent) von der absoluten Differenz (Prozentpunkte).' },
+      { titel: 'Bundeszentrale für politische Bildung (bpb): Zahlen richtig lesen', url: 'https://www.bpb.de', hinweis: 'Anschauliche Erklärung des häufigen Verwechslungsfehlers Prozent vs. Prozentpunkte in Medienberichten.' },
     ],
   },
   {
