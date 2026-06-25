@@ -87,9 +87,9 @@ export default function NettolohnOptimiererRechner() {
       {
         id: 'essen',
         label: 'Essenszuschuss (Restaurantschecks)',
-        beschreibung: 'Bis 7,23 €/Arbeitstag steuerfrei — bei 20 Tagen = 144,60 €/Monat.',
-        nettoZugewinn: cap(144.6),
-        agKosten: cap(144.6),
+        beschreibung: 'Bis 7,67 €/Arbeitstag steuerfrei (Sachbezugswert 4,57 € + AG-Zuschuss 3,10 €) — bei 15 Tagen = 115,05 €/Monat.',
+        nettoZugewinn: cap(115.05),
+        agKosten: cap(115.05),
       },
       {
         id: 'internet',

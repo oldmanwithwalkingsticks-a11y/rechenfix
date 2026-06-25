@@ -6090,7 +6090,7 @@ Wer für sich zu dem Schluss kommt, dass Riester sich nicht lohnt, hat mehrere A
     keywords: ['nettolohn optimieren', 'sachbezüge', 'steuerfreie gehaltsextras', 'gehaltserhöhung vs sachbezug', 'jobticket steuerfrei', 'essenszuschuss', 'betriebliche altersvorsorge', '50 euro sachbezug', 'nettolohn maximieren'],
     icon: '💡',
     formel: 'Netto-Zugewinn je Option vergleichen — steuerfreie Sachbezüge bringen oft mehr als eine Brutto-Erhöhung, weil Steuern und Sozialabgaben entfallen.',
-    beispiel: 'Beispiel: 200 € AG-Budget → Brutto-Erhöhung ≈ 105 € netto (StKl I). Als Essenszuschuss (144,60 € steuerfrei) ≈ 144,60 € netto — rund 40 € mehr pro Monat.',
+    beispiel: 'Beispiel: 200 € AG-Budget → Brutto-Erhöhung ≈ 109 € netto (StKl I). Als Essenszuschuss (115,05 € steuerfrei) ≈ 115,05 € netto — rund 6 € mehr pro Monat.',
     erklaerung: `**Warum steuerfreie Sachbezüge oft schlagen die Gehaltserhöhung**
 
 Eine Brutto-Gehaltserhöhung fühlt sich nach einem guten Deal an — bis die Lohnabrechnung kommt. Wer in Steuerklasse I mit einem Bruttogehalt um 3.500 € liegt, hat einen **Grenzsteuersatz von rund 40 Prozent** (Lohnsteuer + Soli + Sozialabgaben). Das heißt: Von 200 € Brutto-Erhöhung bleiben oft nur **105 bis 120 € netto** übrig. Der Rest verschwindet in Steuern und Sozialabgaben. Und der Arbeitgeber zahlt zusätzlich ca. 20 % AG-Anteil zur Sozialversicherung — das Budget wird also doppelt belastet.
@@ -6103,7 +6103,7 @@ Steuerfreie Sachbezüge umgehen genau diesen Effekt. Wenn der Arbeitgeber Ihnen 
 
 **Jobticket / Deutschlandticket — 63 €/Monat (Stand 2026):** Seit 2024 können Arbeitgeber das Deutschlandticket vollständig steuerfrei übernehmen. Der Preis des Tickets wurde mehrfach angepasst: Mai 2023–Dezember 2024 galten 49 €, im Jahr 2025 waren es 58 €, seit dem 1. Januar 2026 sind es 63 € pro Monat (bundesgesetzlich abgesichert bis 2029). Der Zuschuss muss **zusätzlich zum ohnehin geschuldeten Arbeitslohn** gezahlt werden (keine Gehaltsumwandlung). Der Vorteil: Der Netto-Zugewinn liegt bei exakt dem Ticketpreis — oft deutlich mehr als eine äquivalente Brutto-Erhöhung.
 
-**Essenszuschuss / Restaurantschecks — bis 7,23 €/Arbeitstag (2026):** Der Arbeitgeber kann für jeden Arbeitstag einen Zuschuss zum Mittagessen gewähren — die Obergrenze für 2026 liegt bei rund 7,23 € pro Tag. Bei 20 Arbeitstagen pro Monat sind das **144,60 € steuerfrei**. Die Kosten werden meist über digitale Meal-Vouchers (z. B. Bonago, Sodexo, Pluxee) abgewickelt, die in Restaurants oder Supermärkten eingelöst werden können.
+**Essenszuschuss / Restaurantschecks — bis 7,67 €/Arbeitstag (2026):** Der Arbeitgeber kann für jeden Arbeitstag einen Zuschuss zum Mittagessen gewähren — die Obergrenze für 2026 liegt bei **7,67 € pro Tag** (amtlicher Sachbezugswert 4,57 € + steuerfreier Arbeitgeberzuschuss 3,10 €). Bei 15 Arbeitstagen pro Monat sind das **115,05 € steuerfrei**. Die Kosten werden meist über digitale Meal-Vouchers (z. B. Bonago, Sodexo, Pluxee) abgewickelt, die in Restaurants oder Supermärkten eingelöst werden können.
 
 **Betriebliche Altersvorsorge (BAV) — bis 302 €/Monat:** Beiträge des Arbeitgebers in eine betriebliche Altersvorsorge sind bis zu 4 Prozent der Beitragsbemessungsgrenze der Rentenversicherung steuerfrei — 2026 sind das rund 302 €/Monat. Hinzu kommt SV-Freiheit bis zur Hälfte dieses Betrags. **Der Haken:** Heute fließt nichts in Ihr Konto — das Geld liegt bis zur Rente fest und wird später besteuert. Trotzdem eine hervorragende Option, weil der Arbeitgeber oft 15 % Zuschuss dazulegen muss (§ 1a Abs. 1a BetrAVG).
 
@@ -6131,7 +6131,7 @@ Gehen Sie mit einer konkreten Liste in die Verhandlung. Viele Arbeitgeber sind b
       },
       {
         frage: 'Was ist der maximale steuerfreie Essenszuschuss?',
-        antwort: 'Der Arbeitgeber kann 2026 einen Essenszuschuss bis rund 7,23 € pro Arbeitstag steuerfrei gewähren. Bei 20 Arbeitstagen pro Monat sind das etwa 144,60 €. Abgewickelt wird das meist über digitale Meal-Voucher-Anbieter — eingelöst werden können die Gutscheine in Restaurants, Supermärkten oder Bäckereien.',
+        antwort: 'Der Arbeitgeber kann 2026 einen Essenszuschuss bis 7,67 € pro Arbeitstag steuerfrei gewähren (amtlicher Sachbezugswert 4,57 € plus 3,10 € Zuschuss). Bei 15 Arbeitstagen pro Monat sind das 115,05 €. Abgewickelt wird das meist über digitale Meal-Voucher-Anbieter — eingelöst werden können die Gutscheine in Restaurants, Supermärkten oder Bäckereien.',
       },
       {
         frage: 'Ist das Deutschlandticket vom Arbeitgeber steuerfrei?',
