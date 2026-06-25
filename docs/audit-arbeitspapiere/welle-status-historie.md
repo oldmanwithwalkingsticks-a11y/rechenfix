@@ -4,7 +4,49 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 24.06.2026
+**Stand:** 25.06.2026
+
+---
+
+## 25.06.2026 — W19 Goldstandard Block A Vorsorge/Sparen (Doku-Sync, 123 Goldstandard gemessen)
+
+Drei Finanzen-Rechner mit eigener Lib (SSOT = `lib/berechnungen/*.ts`, NICHT Component). Alle Anker von
+Chat-Claude gegen die echte Lib reproduziert (nicht aus dem Gedächtnis), alle Builds Vercel-grün.
+**Zwei zentrale Lehren dieses Blocks:**
+1. **Lib-Formel vor Anker-Setzung lesen:** Beim etf-Prompt nahm Chat-Claude die naive Monatsrendite (p.a./12)
+   an; die echte Lib nutzt das effektive Monatsäquivalent `(1+p.a.)^(1/12)−1`. Code stoppte korrekt (>2 %
+   Abweichung in allen drei Ankern). Lehre: bei jedem Lib-Rechner die tatsächliche Formel-Datei lesen, bevor
+   Anker in den Prompt geschrieben werden.
+2. **Interne Links wandern NICHT automatisch in die contentBloecke:** Bei Migration eines Alt-Schema-Rechners
+   bleiben Links im `erklaerung`-Markdown stehen — das aber wird bei gesetzten contentBloecke nicht gerendert
+   (page.tsx Z.161 = nur ContentBlockRenderer). etf hatte dadurch live 0 interne Links; Nachtrag-Fix nötig.
+   Ab jetzt Pflicht in jedem Migrations-Prompt: Links als `<a href>` direkt in die html-Felder der Blöcke.
+
+- **etf-sparplanrechner** (finanzen.ts, diagramm-Leitformat 3×, 16 Blöcke, ~1.665 W, `55fc70b` + Link-Nachtrag
+  `89b5987`). SSOT `lib/berechnungen/etf-sparplan.ts`, effektive Monatsrendite. **Stale-Fix:** beispiel/formel/
+  erklaerung/faq trugen naive Alt-Werte (104.000/243.000/525.000 €) → auf Lib-Werte korrigiert (200 €/Mt, 7 %:
+  20 J 101.507 €, 30 J 233.891 €, 40 J 494.308 €). Steuer 2026: Sparerpauschbetrag 1.000/2.000 €, Abgeltung
+  26,375 %, Teilfreistellung 30 %. **Link-Nachtrag:** 4 interne Links (zins/spar/inflation/renten) wanderten aus
+  totem erklaerung-Feld in die contentBloecke-Textblöcke.
+- **rentenrechner** (finanzen.ts, tabelle-Leitformat 3×, 16 Blöcke, ~1.555 W, `fdc4586`). SSOT
+  `lib/berechnungen/rente.ts`. **ZEITKRITISCH Rentenwert-Stichtag 01.07.2026:** `RENTENWERT` ist Build-Zeit-
+  Konstante (40,79 € vor / 42,52 € ab 01.07.). Hauptbeispiel future-proof in Entgeltpunkten, beide Stände
+  durchgängig. Anker: 40/45/50 EP × beide Rentenwerte (40 EP = 1.631,60 / 1.700,80 €); Durchschnittsentgelt
+  51.944 €, BBG 101.400 € (SVBezGrV 2026), Abschlag 0,3 %/Mon. max. 14,4 %, Steueranteil 83 % (2026). **Stale-Fix:**
+  beispiel-Feld (1.376/1.170 €, nicht future-proof) → 45-EP-Beispiel ersetzt. Interne Links in contentBloecke
+  (riester/etf/witwenrente/brutto-netto).
+- **riester-rechner** (finanzen.ts, vergleich-Leitformat 3×, 17 Blöcke, ~1.574 W, `2a05581`). SSOT
+  `lib/berechnungen/riester.ts`. Alle Konstanten 2026 aktuell (175/185/300 € Zulagen, 2.100 € Höchstbetrag, 4 %
+  Mindestbeitrag, 60 € Sockel) — **keine Stale-Fixes**, bestehende Felder wertaktuell. **Reform-2027-Disclaimer
+  durchgängig** (Kabinett 17.12.2025, in Kraft Ende Mai 2026, Umsetzung 01.01.2027): 2026-Werte = geltend +
+  Bestandsschutz für Altverträge; 2027-Werte (proportionale Zulage max. 540 €, Berufseinsteigerbonus,
+  Altersvorsorgedepot) = geplante Neuregelung, klar getrennt. Anker gegen Lib reproduziert: 40k/allein/0 Kinder/35 %
+  → EB 1.425 €, Förderquote 39 %; 28k/2 Kinder ab08/25 % → Förderquote 225 %; 60k/beide/42 % → 860 €. Interne
+  Links in contentBloecke (etf/renten/steuererstattung).
+
+**Stand nach Block A: 123/178 Goldstandard. Offen bis AdSense-Resubmit: 55.**
+Verbleibend Block B (Rest-Steuer, finanzen): afa-rechner, mwst-rueckerstattung-rechner,
+gmbh-geschaeftsfuehrer-rechner, hochrechner, nettolohn-optimierer.
 
 ---
 
