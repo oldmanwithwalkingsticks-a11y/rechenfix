@@ -6503,7 +6503,7 @@ Verluste aus Kapitalvermögen werden bei Ihrer Bank in einem separaten Verlustve
   },
   {
     slug: 'afa-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-25',
     titel: 'AfA-Rechner',
     beschreibung: 'Abschreibung berechnen: Lineare und degressive AfA für Anlagegüter, Immobilien und GWG mit AfA-Plan und Rechenweg.',
     kategorie: 'Finanzen',
@@ -6527,7 +6527,7 @@ Steuerlich geregelt ist die AfA in **§ 7 EStG**. Die typischen Nutzungsdauern f
 **Die drei Methoden im Überblick**
 
 - **Lineare AfA (§ 7 Abs. 1 EStG):** Die Anschaffungskosten werden **gleichmäßig** über die Nutzungsdauer verteilt. Bei 10.000 € und 5 Jahren sind das 2.000 € pro Jahr, monatlich 166,67 €. Das ist die Standardmethode — sie ist immer zulässig und passt zu den meisten Wirtschaftsgütern.
-- **Degressive AfA (§ 7 Abs. 2 EStG):** Die AfA wird auf den **Restbuchwert** berechnet und ist in den ersten Jahren deutlich höher. Der Prozentsatz beträgt maximal das **Doppelte des linearen Satzes**, höchstens aber **25 %**. Die degressive AfA ist nicht dauerhaft zulässig — sie wurde zuletzt als Corona-Hilfe und im Rahmen des Wachstumschancengesetzes temporär eingeführt. Wichtig: Sobald die lineare Restwert-AfA günstiger ist, dürfen (und sollten) Sie **in die lineare Methode wechseln**. Unser Rechner macht diesen Wechsel automatisch.
+- **Degressive AfA (§ 7 Abs. 2 EStG):** Die AfA wird auf den **Restbuchwert** berechnet und ist in den ersten Jahren deutlich höher. Der Prozentsatz beträgt maximal das **Dreifache des linearen Satzes**, höchstens aber **30 %**. Die degressive AfA ist zeitlich befristet — im Rahmen des Investitionssofortprogramms ist sie für Anschaffungen vom 01.07.2025 bis 31.12.2027 zulässig. Wichtig: Sobald die lineare Restwert-AfA günstiger ist, dürfen (und sollten) Sie **in die lineare Methode wechseln**. Unser Rechner macht diesen Wechsel automatisch.
 - **GWG — geringwertige Wirtschaftsgüter (§ 6 Abs. 2 EStG):** Wirtschaftsgüter bis **800 € netto** (952 € brutto) dürfen **im Anschaffungsjahr sofort** vollständig abgesetzt werden. Alternativ gibt es den **Sammelposten** für Güter zwischen 250 € und 1.000 €, der über 5 Jahre abgeschrieben wird — diese Variante müssen Sie für alle GWG des Jahres einheitlich wählen.
 
 **Pro rata temporis — das erste Jahr ist anteilig**
@@ -6548,6 +6548,166 @@ Für Immobilien gelten eigene AfA-Sätze: **2 % pro Jahr** für Bestandsgebäude
 - Monatliche AfA für die Liquiditätsplanung
 
 Als Selbstständige oder Unternehmerin sollten Sie Ihre Anlagegüter sauber in einem Anlageverzeichnis führen. Eine Buchhaltungssoftware wie **Lexware Office** übernimmt die AfA-Berechnung automatisch und erstellt das Anlagenverzeichnis für die Steuererklärung mit. Für die Umsatzsteuer-Behandlung Ihrer Anschaffung nutzen Sie unseren [MwSt-Rechner](/finanzen/mwst-rechner) — beim AfA-Betrag werden immer die **Nettokosten** angesetzt (außer bei Kleinunternehmern, die keine Vorsteuer ziehen). Selbstständige und Freelancer finden im [Freelancer-Stundensatz-Rechner](/finanzen/freelancer-stundensatz-rechner) zusätzlich, wie AfA in die Stundensatzkalkulation einfließt.`,
+    // W19-Goldstandard: afa-rechner auf volle Tiefe (~1.560 W, 15 Bausteine).
+    // Leitformat „Methoden-Vergleich" — 3 vergleich dominant (linear vs. degressiv · GWG vs.
+    // Sammelposten · Booster-Fenster vs. ab 2028), grenzt sich von gewerbesteuer/kapitalertrag
+    // (beide beispielrechnung-dominant) ab. Alle AfA-Werte aus lib/berechnungen/afa.ts
+    // reproduziert (Resolver-Check 25.06.2026): Maschine 100.000 €/10 J degressiv 30 % →
+    // 30.000/21.000/14.700/10.290/7.203 € (J1–5); GWG 800 € Sofort; Sammelposten 1.000 € →
+    // 200 €/J × 5. Degressiv § 7 Abs. 2 EStG n.F. (Investitionssofortprogramm, BGBl. I Nr. 161
+    // v. 18.07.2025): max. 3× linear/30 %, Fenster 01.07.2025–31.12.2027, ab 2028 nur linear
+    // (Lib-Fix 8800688). erklaerung bleibt Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was ist AfA — und warum abschreiben?',
+        html: `<p><strong>AfA</strong> steht für „Absetzung für Abnutzung" — die steuerliche Abschreibung. Wer ein Wirtschaftsgut kauft, das länger als ein Jahr genutzt wird, darf die Anschaffungskosten nicht sofort komplett als Ausgabe absetzen, sondern verteilt sie über die <strong>Nutzungsdauer</strong>. Jedes Jahr wird ein Teil als Betriebsausgabe oder Werbungskosten abgezogen.</p><p>Der Grund ist die periodengerechte Zuordnung: Eine Maschine, ein Firmenwagen oder ein vermietetes Gebäude verlieren über die Jahre an Wert. Würde man die vollen Kosten im Kaufjahr absetzen, wäre der Gewinn dort künstlich niedrig und in den Folgejahren zu hoch. Die AfA glättet das und bildet den tatsächlichen Werteverzehr ab.</p><p>Geregelt ist alles in <strong>§ 7 EStG</strong>. Die typischen Nutzungsdauern stehen in den AfA-Tabellen des Bundesfinanzministeriums — etwa PC 3 Jahre, Büromöbel 13 Jahre, Pkw 6 Jahre. Dieser Rechner zeigt für jede Methode den vollständigen AfA-Plan mit Restbuchwert — ob für Einzelunternehmer, Freiberufler, Vermieter oder eine GmbH, deren Gewinn auch die <a href="/finanzen/gmbh-geschaeftsfuehrer-rechner">Geschäftsführer-Vergütung</a> beeinflusst.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'AfA-Tabellen: welche Nutzungsdauer gilt?',
+        html: `<p>Die Höhe der jährlichen AfA hängt direkt von der <strong>Nutzungsdauer</strong> ab — und die ist nicht frei wählbar. Maßgeblich sind die <strong>AfA-Tabellen des Bundesfinanzministeriums</strong>, die für nahezu jede Anlageklasse eine betriebsgewöhnliche Nutzungsdauer festlegen. Typische Werte: PC und Notebook 3 Jahre, Smartphone 5 Jahre, Büromöbel 13 Jahre, Pkw 6 Jahre, Maschinen je nach Art 5 bis 20 Jahre.</p><p>Wer die Nutzungsdauer zu kurz ansetzt, schreibt schneller ab, riskiert aber Rückfragen vom Finanzamt; wer zu lang ansetzt, verschenkt jährliches Abschreibungsvolumen. Bei <strong>gebrauchten</strong> Wirtschaftsgütern zählt die <strong>Restnutzungsdauer</strong> ab Kauf, nicht die volle Tabellendauer.</p><p>Eine Besonderheit gilt für Computer-Hardware und Software: Seit 2021 lässt die Finanzverwaltung hier eine Nutzungsdauer von nur <strong>einem Jahr</strong> zu — faktisch eine Sofortabschreibung, unabhängig vom Kaufpreis. Geben Sie im Rechner einfach die passende Nutzungsdauer ein, um den vollständigen AfA-Plan zu erhalten.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Die fünf AfA-Methoden im Überblick',
+        kopf: ['Methode', 'Wofür / Grenze', 'Satz', 'Rechtsgrundlage'],
+        zeilen: [
+          ['Linear', 'Standard, alle abnutzbaren WG', '100 % ÷ Nutzungsdauer', '§ 7 Abs. 1 EStG'],
+          ['Degressiv (Booster)', 'bewegliche WG, Anschaffung 2025–2027', 'max. 3× linear, 30 %', '§ 7 Abs. 2 EStG n.F.'],
+          ['GWG-Sofortabschreibung', '≤ 800 € netto, sofort', '100 % im Anschaffungsjahr', '§ 6 Abs. 2 EStG'],
+          ['Sammelposten-Pool', '250,01–1.000 € netto', '20 %/Jahr über 5 Jahre', '§ 6 Abs. 2a EStG'],
+          ['Sonder-AfA Wohngebäude', 'neue Mietwohngebäude', '5 % linear p. a.', '§ 7 Abs. 5a EStG'],
+        ],
+        fussnote: 'Alle Wertgrenzen netto (vorsteuerabzugsberechtigt); Kleinunternehmer nach § 19 UStG rechnen brutto (800 € netto = 952 € bei 19 %). Die betriebsgewöhnliche Nutzungsdauer entnehmen Sie den AfA-Tabellen des BMF.',
+      },
+      {
+        typ: 'text',
+        titel: 'Linear vs. degressiv: der Liquiditätsvorteil',
+        html: `<p>Die beiden wichtigsten Methoden für bewegliche Wirtschaftsgüter sind linear und degressiv. Bei der <strong>linearen AfA</strong> (§ 7 Abs. 1 EStG) werden die Kosten gleichmäßig verteilt: 100.000 € über 10 Jahre ergeben jedes Jahr 10.000 €. Einfach und planbar.</p><p>Die <strong>degressive AfA</strong> (§ 7 Abs. 2 EStG) rechnet dagegen mit einem festen Prozentsatz auf den <strong>Restbuchwert</strong>. Dadurch ist die Abschreibung in den ersten Jahren deutlich höher und sinkt mit der Zeit. Das bringt einen <strong>Liquiditätsvorteil</strong>: Mehr Abschreibung früh senkt den steuerpflichtigen Gewinn genau dann, wenn das Wirtschaftsgut neu und teuer war.</p><p>Über die gesamte Nutzungsdauer schreiben beide Methoden denselben Betrag ab — es geht nur um die zeitliche Verteilung. Weil die degressive AfA später unter die lineare fällt, ist ein <strong>Wechsel zur linearen Methode</strong> erlaubt und ab einem bestimmten Jahr vorteilhaft; der Rechner vollzieht ihn automatisch.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Lineare vs. degressive AfA',
+        spalteA: 'Lineare AfA',
+        spalteB: 'Degressive AfA (Booster)',
+        zeilen: [
+          { kriterium: 'Berechnungsbasis', a: 'Anschaffungskosten (konstant)', b: 'Restbuchwert (sinkend)' },
+          { kriterium: 'Jahresbetrag', a: 'jedes Jahr gleich', b: 'früh hoch, später fallend' },
+          { kriterium: 'Satz', a: '100 % ÷ Nutzungsdauer', b: 'max. 3× linear, 30 %' },
+          { kriterium: 'Zulässig', a: 'immer', b: 'nur Anschaffung 2025–2027' },
+          { kriterium: 'Vorteil', a: 'einfach und planbar', b: 'früher Liquiditäts- und Steuervorteil' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Maschine 100.000 €: degressiv vs. linear',
+        schritte: [
+          { label: 'Linearer Satz', formel: '100 % ÷ 10 Jahre', ergebnis: '10 % = 10.000 €/Jahr' },
+          { label: 'Degressiver Satz', formel: 'min(3 × 10 %, 30 %)', ergebnis: '30 %' },
+          { label: 'Degressiv Jahr 1', formel: '30 % von 100.000 €', ergebnis: '30.000 €' },
+          { label: 'Degressiv Jahr 2', formel: '30 % von 70.000 €', ergebnis: '21.000 €' },
+          { label: 'Linear Jahr 1 + 2', formel: '2 × 10.000 €', ergebnis: '20.000 €' },
+        ],
+        fazit: 'Schon in den ersten beiden Jahren bringt die degressive AfA 51.000 € statt 20.000 € — ein Liquiditätsvorteil von 31.000 €, der die Steuerlast früh senkt. Insgesamt schreiben beide Methoden dieselben 100.000 € ab, nur die zeitliche Verteilung unterscheidet sich. Sobald linear günstiger wird, wechselt der Rechner automatisch — bei zehn Jahren Nutzungsdauer lohnt der Wechsel etwa ab dem siebten Jahr, wenn die lineare Restwert-AfA die fallende degressive übersteigt.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Degressiver AfA-Plan (100.000 €, 30 %)',
+        kopf: ['Jahr', 'AfA (30 %)', 'kumuliert', 'Restbuchwert'],
+        zeilen: [
+          ['1', '30.000 €', '30.000 €', '70.000 €'],
+          ['2', '21.000 €', '51.000 €', '49.000 €'],
+          ['3', '14.700 €', '65.700 €', '34.300 €'],
+          ['4', '10.290 €', '75.990 €', '24.010 €'],
+          ['5', '7.203 €', '83.193 €', '16.807 €'],
+          ['6', '5.042 €', '88.235 €', '11.765 €'],
+        ],
+        fussnote: 'Maschine 100.000 € netto, Nutzungsdauer 10 Jahre, ganzjährige Anschaffung 2026, degressiv 30 %. Jede Jahres-AfA = 30 % vom Restbuchwert. Sobald die lineare Restwert-AfA höher ist, wechselt der Rechner automatisch und verteilt den Rest gleichmäßig.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Investitions-Booster: 30 % befristet bis Ende 2027',
+        text: 'Das Investitionssofortprogramm („Wachstumsbooster", BGBl. I Nr. 161 vom 18.07.2025) lässt die degressive AfA für bewegliche Wirtschaftsgüter mit bis zu 30 % wieder zu — befristet auf Anschaffungen vom 01.07.2025 bis 31.12.2027. Wer eine größere Investition plant und früh Abschreibungsvolumen heben will, kann sie unter Umständen in dieses Fenster vorziehen. Ab 2028 ist — Stand heute — wieder nur die lineare AfA möglich, sofern der Gesetzgeber nicht verlängert.',
+      },
+      {
+        typ: 'text',
+        titel: 'Der Investitions-Booster als aktuelles Kern-Feature',
+        html: `<p>Die degressive AfA ist kein Dauerrecht — sie wird vom Gesetzgeber gezielt als Konjunkturinstrument ein- und ausgeschaltet. Aktuell gilt das <strong>Investitionssofortprogramm</strong> (Wachstumsbooster, BGBl. I Nr. 161 vom 18.07.2025): Für bewegliche Wirtschaftsgüter des Anlagevermögens, die zwischen dem <strong>1. Juli 2025 und dem 31. Dezember 2027</strong> angeschafft werden, ist die degressive AfA mit bis zu <strong>30 %</strong> (höchstens dem Dreifachen des linearen Satzes) zulässig.</p><p>Für Unternehmen ist das ein spürbarer Hebel: Eine Investition, die ohnehin ansteht, kann in dieses Fenster vorgezogen werden, um früh Abschreibungsvolumen und damit eine Steuerstundung zu heben. Das verbessert die Liquidität in der Investitionsphase.</p><p>Nach dem 31.12.2027 ist — Stand heute — wieder nur die lineare AfA möglich. Die niedrigere Steuerlast wirkt sich auch auf die <a href="/finanzen/gewerbesteuer-rechner">Gewerbesteuer</a> aus, weil der Gewerbeertrag durch die höhere Abschreibung sinkt.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'GWG-Sofortabschreibung vs. Sammelposten-Pool',
+        spalteA: 'GWG-Sofortabschreibung',
+        spalteB: 'Sammelposten-Pool',
+        zeilen: [
+          { kriterium: 'Wertgrenze (netto)', a: 'bis 800 €', b: '250,01 € bis 1.000 €' },
+          { kriterium: 'Abschreibung', a: '100 % sofort im Kaufjahr', b: '20 %/Jahr über 5 Jahre' },
+          { kriterium: 'Pro-rata-Regel', a: 'nein — voller Betrag', b: 'nein — voller Jahresbetrag' },
+          { kriterium: 'Buchführung', a: 'einzeln, aber sofort abgesetzt', b: 'Sammelposten, kein Einzelnachweis' },
+          { kriterium: 'Wahlrecht', a: 'pro Wirtschaftsjahr einheitlich', b: 'pro Wirtschaftsjahr einheitlich' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'GWG, Sammelposten und die 800-€-Grenze',
+        html: `<p>Für günstige Anlagegüter gibt es Vereinfachungen. <strong>Geringwertige Wirtschaftsgüter</strong> (GWG, § 6 Abs. 2 EStG) bis <strong>800 € netto</strong> dürfen im Anschaffungsjahr sofort vollständig abgeschrieben werden — ohne pro-rata, ohne mehrjährigen Plan. 800 € netto entsprechen bei 19 % Umsatzsteuer 952 € brutto.</p><p>Alternativ steht der <strong>Sammelposten-Pool</strong> (§ 6 Abs. 2a EStG) zur Wahl: Güter zwischen 250,01 € und 1.000 € netto wandern in einen Pool, der pauschal mit 20 % pro Jahr über fünf Jahre abgeschrieben wird — unabhängig von der individuellen Nutzungsdauer und ohne Einzel-Anlagenbuchhaltung.</p><p>Wichtig: Beide Wege sind ein <strong>Wahlrecht</strong>, das pro Wirtschaftsjahr einheitlich ausgeübt werden muss. Wer den Sammelposten wählt, muss alle betroffenen Güter des Jahres hineinlegen. Die Wertgrenzen gelten netto; die Umsatzsteuer rechnet der <a href="/finanzen/mwst-rechner">MwSt-Rechner</a> heraus.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Pro rata temporis: das erste Jahr ist anteilig',
+        html: `<p>Eine Feinheit entscheidet über die Höhe der AfA im ersten Jahr: die <strong>Monatsregel</strong> (pro rata temporis). Im Anschaffungsjahr wird nur zeitanteilig abgeschrieben — für jeden vollen Monat, in dem das Wirtschaftsgut schon zum Betrieb gehörte, ein Zwölftel der Jahres-AfA.</p><p>Ein Beispiel: Wer eine Maschine am <strong>1. Juli</strong> kauft, darf im ersten Jahr nur 6/12 der vollen Jahres-AfA absetzen. Aus 800 € Jahres-AfA werden so 400 €. Die fehlenden sechs Monate werden im Jahr nach Ablauf der Nutzungsdauer nachgeholt — die Abschreibung verschiebt sich also nach hinten, geht aber nicht verloren.</p><p>Ausgenommen von der Monatsregel sind die GWG-Sofortabschreibung und der Sammelposten — dort wird im Anschaffungsjahr immer der volle Betrag angesetzt. Der Rechner berücksichtigt die Monatsregel automatisch über das eingegebene Anschaffungsdatum.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Immobilien: die Gebäude-AfA',
+        html: `<p>Für Immobilien gelten eigene AfA-Sätze, die nicht über eine Nutzungsdauer-Eingabe, sondern direkt vom Gesetz vorgegeben sind. Für <strong>Bestandsgebäude</strong> sind es <strong>2 %</strong> pro Jahr (Fertigstellung ab 1925) bzw. <strong>2,5 %</strong> für ältere, und <strong>3 %</strong> für neu errichtete Wohngebäude ab Baujahr 2023 (§ 7 Abs. 4 EStG).</p><p>Zusätzlich gibt es seit 2023 die <strong>degressive Gebäude-AfA</strong> für neue Mietwohngebäude (§ 7 Abs. 5a EStG): 5 % auf den jeweiligen Restwert in den ersten Jahren, danach Wechsel zur linearen AfA. Voraussetzung sind bestimmte Effizienzhaus-Standards.</p><p>Wichtig bei jeder Immobilien-AfA: Nur das <strong>Gebäude</strong> wird abgeschrieben, nicht Grund und Boden — der Grundstücksanteil muss aus dem Kaufpreis herausgerechnet werden. Vermieter machen die AfA in der Anlage V geltend; sie ist oft der größte Posten der Vermietungsrendite, die der <a href="/finanzen/mietrendite-rechner">Mietrendite-Rechner</a> ausweist.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Degressiv im Booster-Fenster vs. ab 2028',
+        spalteA: 'Anschaffung 2025–2027',
+        spalteB: 'Anschaffung ab 2028',
+        zeilen: [
+          { kriterium: 'Degressive AfA', a: 'zulässig (bis 30 %)', b: 'nicht mehr zulässig' },
+          { kriterium: 'Methodenwahl', a: 'degressiv oder linear', b: 'nur noch linear' },
+          { kriterium: 'Jahr-1-AfA (100.000 €/10 J)', a: '30.000 € degressiv', b: '10.000 € linear' },
+          { kriterium: 'Rechtsgrundlage', a: '§ 7 Abs. 2 EStG n.F.', b: '§ 7 Abs. 1 EStG' },
+          { kriterium: 'Planungstipp', a: 'Investition ggf. vorziehen', b: 'auf IAB § 7g EStG prüfen' },
+        ],
+      },
+      {
+        typ: 'statistik',
+        titel: 'Eckwerte AfA 2026',
+        werte: [
+          { label: 'Degressiver Höchstsatz', wert: '30 %', hinweis: 'max. 3× linear, § 7 Abs. 2 EStG n.F.' },
+          { label: 'Booster-Fenster', wert: '07/2025–12/2027', hinweis: 'danach nur noch lineare AfA' },
+          { label: 'GWG-Grenze', wert: '800 €', hinweis: 'netto, Sofortabschreibung (§ 6 Abs. 2)' },
+          { label: 'Sammelposten', wert: '250,01–1.000 €', hinweis: '20 %/Jahr über 5 Jahre (§ 6 Abs. 2a)' },
+          { label: 'Wohngebäude neu', wert: '3 % linear', hinweis: 'optional 5 % degressiv (§ 7 Abs. 5a)' },
+        ],
+      },
+      {
+        typ: 'checkliste',
+        titel: 'AfA richtig nutzen',
+        punkte: [
+          'Nutzungsdauer aus der BMF-AfA-Tabelle entnehmen — nicht schätzen',
+          'Anschaffungskosten netto ansetzen (Kleinunternehmer nach § 19 UStG: brutto)',
+          'Anschaffungsdatum genau erfassen — das erste Jahr wird pro rata temporis (monatsweise) gerechnet',
+          'Bei beweglichen WG 2025–2027 die degressive AfA prüfen — früher Liquiditätsvorteil',
+          'Wechsel degressiv → linear nutzen, sobald linear günstiger wird (Rechner macht es automatisch)',
+          'Güter bis 800 € netto sofort abschreiben (GWG) oder einheitlich in den Sammelposten legen',
+          'Bei Immobilien den Grundstücksanteil herausrechnen — Grund und Boden wird nicht abgeschrieben',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Vereinfachte Schätzung — keine Steuerberatung',
+        text: 'Diese Berechnung ist eine vereinfachte Schätzung. Maßgeblich sind die betriebsgewöhnliche Nutzungsdauer nach den AfA-Tabellen des BMF und Ihre individuellen Verhältnisse. Sonderfälle wie der Investitionsabzugsbetrag (§ 7g EStG), die Sonder-AfA für kleine Betriebe oder besondere Formen der Gebäude-AfA sind nicht vollständig abgebildet. Verbindlich ist allein die steuerliche Beratung bzw. Ihr Finanzamt. Dies ist keine Steuerberatung.',
+      },
+    ],
     faq: [
       {
         frage: 'Was bedeutet AfA?',
@@ -6573,6 +6733,11 @@ Als Selbstständige oder Unternehmerin sollten Sie Ihre Anlagegüter sauber in e
         frage: 'Gilt die AfA auch für Vermieter?',
         antwort: 'Ja. Vermieter einer Immobilie können die Gebäude-AfA als Werbungskosten in der Anlage V geltend machen. Für Bestandsgebäude gelten 2 % (Baujahr ab 1925) oder 2,5 % (älter). Für neue Wohngebäude ab Baujahr 2023 sind es 3 % linear, optional 5 % degressiv in den ersten Jahren. Der Grundstücksanteil wird nicht abgeschrieben — er muss aus dem Kaufpreis herausgerechnet werden. Die AfA ist bei vermieteten Immobilien einer der größten steuerlichen Hebel.',
       },
+    ],
+    quellen: [
+      { titel: '§ 7 EStG: AfA (Abs. 1 linear, Abs. 2 degressiv, Abs. 5a Wohngebäude)', url: 'https://www.gesetze-im-internet.de/estg/__7.html' },
+      { titel: '§ 6 EStG: GWG & Sammelposten (Abs. 2 / Abs. 2a)', url: 'https://www.gesetze-im-internet.de/estg/__6.html' },
+      { titel: 'Bundesfinanzministerium: AfA-Tabellen & Investitionssofortprogramm', url: 'https://www.bundesfinanzministerium.de', hinweis: 'Degressive AfA bis 30 % für bewegliche WG, Anschaffung 01.07.2025–31.12.2027 (BGBl. I Nr. 161 v. 18.07.2025).' },
     ],
     affiliate: [
       { programId: 'lexware', context: 'afa' },
