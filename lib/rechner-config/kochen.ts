@@ -1965,7 +1965,7 @@ Alkohol wird im Körper bevorzugt verbrannt — bevor Fett oder Kohlenhydrate al
   },
   {
     slug: 'naehrwert-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-26',
     titel: 'Nährwert-Rechner',
     beschreibung: 'Nährwerte pro Portion berechnen: Kalorien, Protein, KH und Fett für selbst gekochte Rezepte — mit 47 Lebensmitteln.',
     kategorie: 'Kochen & Ernährung',
@@ -1975,7 +1975,7 @@ Alkohol wird im Körper bevorzugt verbrannt — bevor Fett oder Kohlenhydrate al
     keywords: ['nährwert rechner', 'kalorien pro portion berechnen', 'makronährstoffe berechnen', 'rezept kalorien', 'nährwerte selbst kochen', 'kaloriengehalt rezept', 'protein fett kohlenhydrate', 'nährwerttabelle lebensmittel'],
     icon: '🥗',
     formel: 'Pro Zutat: Nährwert = Menge (g) × Nährwert_pro_100g ÷ 100 | Gesamt = Σ alle Zutaten | Pro Portion = Gesamt ÷ Portionen | kcal aus Makros: Protein × 4, KH × 4, Fett × 9',
-    beispiel: 'Pfannkuchen (4 Portionen): 250 g Mehl (870 kcal), 2 Eier = 120 g (186 kcal), 300 ml Milch (192 kcal) = 1.248 kcal gesamt ÷ 4 = 312 kcal pro Portion, davon 11 g Protein, 50 g KH, 7 g Fett.',
+    beispiel: 'Pfannkuchen (4 Portionen): 250 g Mehl (870 kcal), 2 Eier = 120 g (186 kcal), 300 ml Milch (192 kcal) = 1.248 kcal gesamt ÷ 4 = 312 kcal pro Portion, davon 12,6 g Protein, 48,9 g KH, 6,5 g Fett.',
     erklaerung: `**Nährwerte selbst berechnen — Rezepte transparent machen**
 
 Wer bewusst kochen möchte, fragt sich: Wie viel Kalorien hat mein Rezept pro Portion? Unser Nährwert-Rechner ermöglicht es, selbst gekochte Gerichte zu analysieren — mit Echtdaten aus dem Bundeslebensmittelschlüssel (BLS) für 47 gängige Lebensmittel.
@@ -2054,6 +2054,148 @@ Für präzise Kalorienzählerei empfiehlt es sich, Lebensmittel vor dem Kochen z
         frage: 'Sind selbst gekochte Mahlzeiten kalorienärmer?',
         antwort: 'In der Regel ja. Restaurants und Fertiggerichte enthalten oft deutlich mehr Butter, Öl, Sahne und Zucker als nötig. Studien zeigen, dass Menschen, die regelmäßig selbst kochen, im Durchschnitt 150–200 kcal weniger pro Mahlzeit aufnehmen. Der größte Unterschied: Sie steuern, wie viel Fett beim Anbraten verwendet wird — und das sind schnell 100–200 extra kcal.',
       },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Nährwerte selbst berechnen — Rezepte transparent machen',
+        html: `<p>Wer bewusst kocht, fragt sich oft: Wie viele Kalorien hat mein selbst gemachtes Gericht eigentlich pro Portion? Genau das beantwortet dieser <strong>Nährwert-Rechner</strong> — auf Basis echter Durchschnittswerte aus dem Bundeslebensmittelschlüssel (BLS) für 47 gängige Lebensmittel.</p><p>Das Prinzip ist denkbar einfach: Jede Nährwertangabe bezieht sich auf <strong>100 Gramm</strong>. Für die tatsächlich verwendete Menge skaliert man den Wert, summiert über alle Zutaten und teilt durch die Portionszahl. So wird ein Rezept Schritt für Schritt durchsichtig — von den Kalorien bis zu Protein, Kohlenhydraten und Fett.</p><p>Besonders praktisch ist das beim Vergleich von Varianten: ein Pfannkuchen mit Vollmilch statt Wasser, ein Brot mit mehr oder weniger Butter — die Unterschiede werden sofort sichtbar. Wie man Mehl, Wasser und Triebmittel für ein Brot dosiert, zeigt ergänzend der <a href="/kochen/brotback-rechner">Brotback-Rechner</a>.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Nährwerte gängiger Zutaten (je 100 g)',
+        kopf: ['Zutat', 'kcal', 'Protein', 'KH', 'Fett'],
+        zeilen: [
+          ['Weizenmehl 405', '348', '10 g', '72 g', '1,0 g'],
+          ['Zucker (weiß)', '400', '0 g', '100 g', '0 g'],
+          ['Butter', '741', '0,7 g', '0,6 g', '83 g'],
+          ['Vollmilch 3,5 %', '64', '3,3 g', '4,8 g', '3,5 g'],
+          ['Ei (Größe M)', '155', '13 g', '1 g', '11 g'],
+          ['Joghurt 3,5 %', '67', '4 g', '4 g', '3,5 g'],
+        ],
+        fussnote: 'Werte je 100 g nach Bundeslebensmittelschlüssel. Auffällig: Butter und Zucker sind nahezu reine Energieträger (fast nur Fett bzw. Kohlenhydrate), während Milch und Joghurt trotz cremiger Konsistenz wenig Kalorien haben — ihr hoher Wasseranteil verdünnt die Energiedichte.',
+      },
+      {
+        typ: 'text',
+        titel: 'Das Prinzip: Pro-100-g-Werte skalieren',
+        html: `<p>Die Grundformel des Rechners ist eine simple Verhältnisrechnung: <strong>Nährwert = Menge (g) × Wert pro 100 g ÷ 100</strong>. Verwendet man 250 g eines Mehls mit 348 kcal je 100 g, sind das 250 × 348 ÷ 100 = 870 kcal. Dasselbe gilt für Protein, Kohlenhydrate und Fett.</p><p>Die <strong>Gesamtnährwerte</strong> eines Rezepts ergeben sich als Summe aller Zutaten. Geteilt durch die Portionszahl erhält man die Werte pro Portion — die Zahl, die im Alltag zählt. Wer das Rezept verdoppelt, verdoppelt schlicht alle Mengen; die Werte pro Portion bleiben gleich.</p><p>Wichtig ist konsequentes Wiegen: Am genauesten ist das <strong>Rohgewicht</strong>, weil sich beim Garen nur das Gewicht ändert, nicht die Kalorienzahl. Flüssigkeiten wie Milch oder Wasser werden dabei vereinfachend in Gramm gerechnet (1 ml ≈ 1 g), was für Küchenzwecke genau genug ist.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Makronährstoffe und ihre Atwater-Faktoren',
+        kopf: ['Makronährstoff', 'kcal je Gramm', 'Hauptfunktion'],
+        zeilen: [
+          ['Protein (Eiweiß)', '4 kcal', 'Muskeln, Zellreparatur, Immunsystem'],
+          ['Kohlenhydrate', '4 kcal', 'Energie für Gehirn und Muskeln'],
+          ['Fett', '9 kcal', 'Vitamine A/D/E/K, Hormone, Zellmembranen'],
+          ['Alkohol', '7 kcal', 'nicht essenziell (in Spirituosen)'],
+        ],
+        fussnote: 'Diese physiologischen Brennwerte heißen Atwater-Faktoren nach dem Chemiker Wilbur O. Atwater. Fett liefert mehr als doppelt so viel Energie pro Gramm wie Protein oder Kohlenhydrate — deshalb schlagen Öl und Butter in der Kalorienbilanz so stark zu Buche.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Pfannkuchen für 4 Portionen — Schritt für Schritt',
+        schritte: [
+          { label: 'Mehl 405 (250 g)', formel: '250 × 348 ÷ 100', ergebnis: '870 kcal' },
+          { label: '2 Eier (120 g)', formel: '120 × 155 ÷ 100', ergebnis: '186 kcal' },
+          { label: 'Vollmilch (300 ml)', formel: '300 × 64 ÷ 100', ergebnis: '192 kcal' },
+          { label: 'Gesamt', formel: '870 + 186 + 192', ergebnis: '1.248 kcal' },
+          { label: 'Pro Portion (÷ 4)', formel: '1.248 ÷ 4', ergebnis: '312 kcal' },
+        ],
+        fazit: 'Pro Portion stecken im Pfannkuchen rund 312 kcal mit 12,6 g Protein, 48,9 g Kohlenhydraten und 6,5 g Fett. Jede Zutat wird einzeln auf ihre Menge skaliert, summiert und durch die Portionszahl geteilt — genau diese drei Schritte nimmt der Rechner automatisch ab.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'kcal-Wert und Makro-Summe dürfen leicht abweichen',
+        text: 'Kleine Eigenheit der Nährwert-Datenbanken: Rechnet man die gerundeten Makros mit den Atwater-Faktoren nach (12,6 × 4 + 48,9 × 4 + 6,5 × 9 ≈ 305 kcal), kommt man nicht exakt auf die ausgewiesenen 312 kcal. Das ist kein Fehler — der kcal-Brennwert und die einzelnen Makro-Gehalte werden unabhängig voneinander gemessen und gerundet. Kleine Abweichungen zwischen kcal direkt und kcal aus Makros sind deshalb normal, auch auf jeder Lebensmittelverpackung.',
+      },
+      {
+        typ: 'text',
+        titel: 'Die Atwater-Faktoren: woher die Kalorien kommen',
+        html: `<p>Hinter den Kalorienwerten steckt ein über hundert Jahre altes System: die <strong>Atwater-Faktoren</strong>. Der US-Chemiker Wilbur O. Atwater ermittelte Ende des 19. Jahrhunderts, wie viel verwertbare Energie die drei Makronährstoffe liefern: <strong>Protein 4 kcal/g, Kohlenhydrate 4 kcal/g, Fett 9 kcal/g</strong>.</p><p>Diese physiologischen Brennwerte berücksichtigen, dass der Körper nicht die gesamte chemische Energie eines Lebensmittels nutzen kann — ein Teil geht über Verdauungsverluste verloren. Fett sticht heraus: Mit 9 kcal pro Gramm liefert es mehr als doppelt so viel Energie wie Protein oder Kohlenhydrate. Deshalb machen schon kleine Mengen Öl oder Butter einen großen Unterschied in der Kalorienbilanz.</p><p>Alkohol liefert übrigens 7 kcal/g, zählt aber nicht zu den essenziellen Nährstoffen. Wie lange ein Gericht im Ofen braucht, schätzt ergänzend der <a href="/kochen/backzeit-rechner">Backzeit-Rechner</a> für die Zeitplanung.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Kilokalorie, Kilojoule und Energiedichte',
+        kopf: ['Größe', 'Wert', 'Erläuterung'],
+        zeilen: [
+          ['1 kcal', '4,184 kJ', 'Umrechnungsfaktor (EU-Pflicht: beide angeben)'],
+          ['1 kJ', '0,239 kcal', 'Kehrwert'],
+          ['EU-Referenzwert', '2.000 kcal / 8.400 kJ', 'Tagesreferenz auf Verpackungen'],
+          ['Fett-Energiedichte', '9 kcal/g', 'mehr als doppelt so hoch wie Protein/KH'],
+        ],
+        fussnote: 'Seit der Lebensmittel-Informationsverordnung (LMIV, EU-Verordnung 1169/2011) müssen verpackte Lebensmittel den Brennwert in beiden Einheiten angeben — Kilokalorie (kcal) und Kilojoule (kJ). Der Rechner zeigt kcal, weil das im Alltag verbreiteter ist; 1 kcal entspricht exakt 4,184 kJ.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Warum Fett die Kalorienbilanz dominiert',
+        spalteA: 'Protein & KH',
+        spalteB: 'Fett',
+        zeilen: [
+          { kriterium: 'Energie je Gramm', a: '4 kcal', b: '9 kcal' },
+          { kriterium: 'Typische Quellen', a: 'Mehl, Reis, Eiweiß, Zucker', b: 'Öl, Butter, Nüsse, Käse' },
+          { kriterium: 'Sättigung pro kcal', a: 'meist höher (mehr Volumen)', b: 'geringer (energiedicht)' },
+          { kriterium: 'Wirkung auf Rezept-kcal', a: 'moderat', b: 'stark — kleine Mengen zählen' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Makro-Verteilung: Was ist ausgewogen?',
+        html: `<p>Über die reinen Kalorien hinaus lohnt der Blick auf die <strong>Makro-Verteilung</strong> — also wie sich die Energie auf Protein, Kohlenhydrate und Fett verteilt. Die Deutsche Gesellschaft für Ernährung (DGE) nennt als Orientierung für Erwachsene: rund <strong>15–20 % Protein, 50–55 % Kohlenhydrate, 25–35 % Fett</strong> der Gesamtkalorien.</p><p>Diese Werte sind keine starren Regeln, sondern ein Rahmen. Wer Muskeln aufbauen will, verschiebt den Proteinanteil nach oben (20–30 %); Low-Carb-Ansätze setzen auf mehr Fett und Eiweiß bei weniger Kohlenhydraten. Der Rechner zeigt die prozentuale Verteilung, damit man auf einen Blick erkennt, wie ausgewogen ein Gericht zusammengesetzt ist.</p><p>Wichtig: Ausgewogen heißt nicht automatisch kalorienarm. Ein Gericht kann perfekt verteilt und trotzdem energiereich sein. Kalorien und Makro-Verhältnis sind zwei getrennte Informationen — erst beide zusammen ergeben das vollständige Bild einer Mahlzeit.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Rezepte skalieren und Mahlzeiten planen',
+        html: `<p>Ein großer Vorteil der Pro-Portion-Rechnung ist die <strong>Planbarkeit</strong>. Wer ein Rezept für vier kocht, aber sechs Gäste hat, multipliziert alle Mengen mit 1,5 — die Werte pro Portion bleiben exakt gleich. Umgekehrt lässt sich ein Familienrezept problemlos auf eine einzelne Portion herunterrechnen.</p><p>Auch für <strong>Meal-Prep</strong> ist die Berechnung praktisch: Kocht man eine große Menge vor und teilt sie in Vorratsdosen, kennt man den Nährwert jeder Box im Voraus. So lässt sich eine ganze Woche überblicken, ohne jeden Tag neu zu rechnen.</p><p>Wichtig bleibt nur eine ehrliche <strong>Portionsdefinition</strong>: Eine Portion sollte realistisch dem entsprechen, was tatsächlich auf dem Teller landet. Wer vier Portionen plant, am Ende aber nur drei Teller füllt, hat pro Portion ein Drittel mehr Kalorien als gedacht — der häufigste Grund für Abweichungen zwischen Rechnung und Realität.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Genauigkeits-Grenzen: Durchschnittswerte und Garverluste',
+        html: `<p>So nützlich die Berechnung ist — sie liefert <strong>Richtwerte</strong>, keine labormäßige Präzision. Der Grund liegt in der Natur der Datenbank: Hinterlegt sind Durchschnittswerte, doch der echte Nährwert schwankt je nach Sorte, Reifegrad, Marke und Anbaubedingungen. Ein Apfel kann 45 oder 60 kcal je 100 g haben.</p><p>Auch das <strong>Garen</strong> verschiebt die Bilanz pro Gramm: Fleisch verliert beim Braten 20–30 % Wasser, wodurch sich die gleichbleibenden Kalorien auf weniger Gramm konzentrieren. Pasta dagegen nimmt Wasser auf und wird schwerer, ohne dass neue Kalorien hinzukommen. Deshalb wiegt man Zutaten am besten im Rohzustand.</p><p>Für die Alltagsplanung reicht diese Genauigkeit völlig. Wer es exakter braucht — etwa bei medizinischen Diäten — sollte verpackungsspezifische Angaben nutzen. Die Garzeit für die Zubereitung selbst liefert der <a href="/kochen/kochzeit-rechner">Kochzeit-Rechner</a>.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Nährwert-Eckwerte auf einen Blick',
+        werte: [
+          { label: 'EU-Referenzwert', wert: '2.000 kcal/Tag', hinweis: 'Basis der Prozentangaben auf Verpackungen' },
+          { label: 'Protein', wert: '4 kcal/g', hinweis: '15–20 % der Tageskalorien (DGE)' },
+          { label: 'Kohlenhydrate', wert: '4 kcal/g', hinweis: '50–55 % (DGE)' },
+          { label: 'Fett', wert: '9 kcal/g', hinweis: '25–35 % (DGE)' },
+          { label: 'kcal → kJ', wert: '× 4,184', hinweis: 'EU-Pflicht: beide Einheiten' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Häufige Fehler bei der Nährwert-Berechnung',
+        html: `<p>Bei der Nährwert-Berechnung schleichen sich immer wieder dieselben Fehler ein. <strong>Fett beim Anbraten vergessen:</strong> Ein Esslöffel Öl sind schnell 90–130 kcal, die in keiner Zutatenliste auftauchen, aber im Topf landen. <strong>Gegart statt roh gewogen:</strong> Wer gebratenes Fleisch wiegt, unterschätzt die Kalorien, weil sich dieselbe Energie auf weniger Gramm verteilt.</p><p><strong>Portionszahl zu optimistisch:</strong> Vier geplante Portionen werden in der Praxis oft zu dreien — schon steigt der reale kcal-Wert pro Teller um ein Drittel. <strong>Saucen und Dressings ignoriert:</strong> Gerade fettreiche Dressings können einen Salat in der Kalorienbilanz verdoppeln.</p><p>Und schließlich der Denkfehler bei der <strong>Datenbasis</strong>: Durchschnittswerte sind keine exakten Messungen. Für die Alltagsplanung ist das unerheblich, für medizinische Diäten sollte man verpackungsspezifische Angaben nehmen. Ein letzter Klassiker ist die falsche Einheit: Wer Milliliter und Gramm bei dickflüssigen Zutaten wie Honig oder Öl gleichsetzt, verschätzt sich leicht, weil deren Dichte spürbar von Wasser abweicht.</p>`,
+
+      },
+      {
+        typ: 'checkliste',
+        titel: 'So rechnen Sie genau',
+        punkte: [
+          'Alle Zutaten einzeln erfassen — auch Öl und Butter beim Anbraten',
+          'Im Rohzustand wiegen, da Garverluste das Gewicht verfälschen',
+          'Pasta und Reis nach Packungsangabe roh wiegen',
+          'Mengen in Gramm; Flüssigkeiten vereinfachend mit 1 ml ≈ 1 g',
+          'Alle Nährwerte summieren und durch die Portionszahl teilen',
+          'kcal-Wert und Makro-Summe dürfen leicht abweichen (DB-Rundung)',
+          'Ergebnis als Richtwert verstehen, nicht als Laborwert',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Richtwerte — keine Ernährungsberatung',
+        text: 'Die berechneten Werte sind Richtwerte auf Basis durchschnittlicher Nährwertdaten und ersetzen keine Ernährungsberatung. Sie sind keine medizinische oder diätetische Empfehlung. Wer aus gesundheitlichen Gründen genaue Vorgaben einhalten muss — etwa bei Diabetes, Niereninsuffizienz oder einer ärztlich verordneten Diät — sollte sich an Fachpersonal und verpackungsspezifische Angaben halten. Der Rechner hilft, ein Gefühl für die Größenordnung selbst gekochter Mahlzeiten zu bekommen — nicht mehr und nicht weniger. Auch Lebensmittelunverträglichkeiten und Allergien lassen sich damit nicht abbilden; dafür sind die konkreten Zutatenlisten der verwendeten Produkte und ärztlicher Rat maßgeblich.',
+      },
+    ],
+    quellen: [
+      { titel: 'Max Rubner-Institut — Bundeslebensmittelschlüssel (BLS)', hinweis: 'Nationale Nährwert-Referenzdatenbank für kcal, Protein, KH und Fett je 100 g' },
+      { titel: 'USDA FoodData Central', hinweis: 'Internationale Nährwert-Referenz zur Quervalidierung' },
+      { titel: 'Atwater-System physiologischer Brennwerte', hinweis: 'Protein 4, Kohlenhydrate 4, Fett 9, Alkohol 7 kcal/g' },
+      { titel: 'EU-Verordnung 1169/2011 (LMIV)', hinweis: 'Pflichtangabe Brennwert in kcal und kJ, Tagesreferenzwert 2.000 kcal' },
     ],
   },
   {
