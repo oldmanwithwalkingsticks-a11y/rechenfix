@@ -3585,7 +3585,7 @@ Alternativ lassen sich ggT und kgV über die Primfaktorzerlegung bestimmen: Der 
   },
   {
     slug: 'zufallszahl-generator',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-26',
     titel: 'Zufallszahl-Generator',
     beschreibung: 'Zufallszahlen generieren: Zahlen, Würfel, Münzwurf, Losziehung und Passwort-Generator.',
     kategorie: 'Mathe & Schule',
@@ -3625,6 +3625,161 @@ Die Stärke eines Passworts wird durch die Entropie gemessen: E = L × log₂(Z)
 **Pseudozufall vs. echter Zufall**
 
 Computer nutzen deterministische Algorithmen (PRNG — Pseudo Random Number Generator), die aus einem Startwert (Seed) eine Zahlenfolge ableiten. Für Spiele und Simulationen reicht das völlig aus. Für Kryptografie werden kryptografisch sichere Generatoren (CSPRNG) benötigt, die physikalische Entropiequellen nutzen. JavaScript's Math.random() ist ein PRNG und nicht kryptografisch sicher — für Passwörter in sicherheitskritischen Anwendungen sollte window.crypto.getRandomValues() verwendet werden.`,
+    // W19-Goldstandard: zufallszahl-generator auf volle Tiefe (~1.560 W, 15 Bausteine). Letzter
+    // Mathe-Slug. Leitformat „Wahrscheinlichkeits-Statistik" — 3 statistik dominant (Wahrschein-
+    // lichkeiten · 2W6-Summen · Zufall/Passwort-Eckwerte). Verfahren gegen lib/berechnungen/
+    // zufallszahl.ts geprüft (Resolver-Check 25.06.2026): Gleichverteilung floor(random×(hi−lo+1))+lo
+    // über [min,max] inkl. Grenzen; P=1/n; Lotto 6 aus 49 = C(49,6) = 13.983.816; E(W6)=3,5.
+    // Nicht-YMYL. Pseudozufall (Math.random PRNG) — kein CSPRNG. erklaerung bleibt Fallback.
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was der Zufallszahl-Generator macht',
+        html: `<p>Der <strong>Zufallszahl-Generator</strong> erzeugt Zufallswerte für fünf Anwendungsfälle: beliebige <strong>Zahlen</strong> in einem wählbaren Bereich, <strong>Würfelwürfe</strong> (W4 bis W20), <strong>Münzwürfe</strong>, <strong>Losziehungen</strong> wie beim Lotto und sichere <strong>Passwörter</strong>. Jeder Modus liefert das Ergebnis sofort, samt kleiner Statistik.</p><p>Allen Modi liegt dieselbe mathematische Idee zugrunde: die <strong>Gleichverteilung</strong>. Jeder mögliche Ausgang ist gleich wahrscheinlich — keine Zahl, keine Seite, keine Kombination ist bevorzugt. Genau das macht das Ergebnis fair und unvorhersehbar.</p><p>Hinter den Kulissen steckt Wahrscheinlichkeitsrechnung: von der einfachen 1/6-Chance beim Würfel bis zu den fast 14 Millionen Lotto-Kombinationen. Den langfristigen Durchschnitt vieler Ergebnisse berechnet übrigens der <a href="/mathe/durchschnitt-rechner">Durchschnittsrechner</a>.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Gleichverteilung: jede Zahl gleich wahrscheinlich',
+        html: `<p>Eine <strong>Zufallszahl</strong> ist ein Wert, der ohne erkennbares Muster aus einem festgelegten Bereich gewählt wird. Mathematisch heißt das: Jede Zahl im Bereich hat <strong>dieselbe Wahrscheinlichkeit</strong>, gezogen zu werden. Diese Gleichverteilung ist die Grundlage jedes fairen Zufallsexperiments.</p><p>Bei einer Zufallszahl von 1 bis 100 hat jede einzelne Zahl die Wahrscheinlichkeit <strong>1/100 = 1 %</strong>. Allgemein gilt: Bei n gleich wahrscheinlichen Ausgängen ist jeder einzelne mit <strong>1/n</strong> zu erwarten. Beim Würfel sind das 1/6, beim Münzwurf 1/2.</p><p>Wichtig ist die Unabhängigkeit: Jede Ziehung beginnt „bei null". Dass gerade fünfmal die 7 kam, macht die nächste 7 kein bisschen unwahrscheinlicher — der verbreitete Glaube an eine „fällige" Zahl ist ein klassischer Denkfehler (Spielerfehlschluss).</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Wahrscheinlichkeiten auf einen Blick',
+        werte: [
+          { label: 'Zufallszahl 1–100', wert: '1/100 = 1 %', hinweis: 'je Zahl, Gleichverteilung' },
+          { label: 'Würfel W6', wert: '1/6 ≈ 16,7 %', hinweis: 'je Augenzahl' },
+          { label: 'Münzwurf', wert: '50 / 50 %', hinweis: 'Kopf oder Zahl' },
+          { label: 'Lotto 6 aus 49', wert: '1 : 13,98 Mio.', hinweis: '13.983.816 Kombinationen' },
+          { label: 'Erwartungswert W6', wert: '3,5', hinweis: '(1+2+…+6) ÷ 6' },
+        ],
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Die fünf Modi im Überblick',
+        kopf: ['Modus', 'Was er erzeugt', 'Wahrscheinlichkeit'],
+        zeilen: [
+          ['Zufallszahl', 'Zahl aus [min, max]', '1 / Bereichsgröße'],
+          ['Würfel', '1 bis n Augen (W4–W20)', '1/n je Augenzahl'],
+          ['Münzwurf', 'Kopf oder Zahl', '50 / 50'],
+          ['Losziehung', 'k aus n ohne Zurücklegen', '1 / C(n, k)'],
+          ['Passwort', 'zufällige Zeichenfolge', 'je nach Länge & Zeichenpool'],
+        ],
+        fussnote: 'Alle Modi beruhen auf der Gleichverteilung: Jeder mögliche Ausgang ist gleich wahrscheinlich. Bei der Losziehung wird ohne Zurücklegen gezogen — eine einmal gezogene Zahl kommt kein zweites Mal.',
+      },
+      {
+        typ: 'text',
+        titel: 'Würfel und Wahrscheinlichkeit',
+        html: `<p>Ein fairer <strong>Würfel</strong> mit n Seiten liefert jede Zahl mit der Wahrscheinlichkeit 1/n. Beim Standard-W6 ist P(6) = 1/6 ≈ 16,7 %, und der <strong>Erwartungswert</strong> — der langfristige Durchschnitt — beträgt (1+2+3+4+5+6) ÷ 6 = <strong>3,5</strong>.</p><p>Spannender wird es bei <strong>zwei Würfeln</strong>: Die Summe ist nicht mehr gleichverteilt. Es gibt 36 Augenpaare, aber die Summe <strong>7</strong> entsteht auf sechs Wegen (1+6, 2+5, 3+4 …) und ist mit 16,7 % am häufigsten. Die Extreme 2 und 12 gibt es dagegen nur je einmal — jeweils 2,8 %.</p><p>Pen-&-Paper-Rollenspiele nutzen viele Würfeltypen: W4, W6, W8, W10, W12 und W20. Der Generator unterstützt alle gängigen Formen — praktisch, wenn kein echter Würfel zur Hand ist.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Summen bei zwei Würfeln (2W6)',
+        werte: [
+          { label: 'Summe 7', wert: '6/36 ≈ 16,7 %', hinweis: 'häufigste Summe' },
+          { label: 'Summe 6 oder 8', wert: 'je 5/36 ≈ 13,9 %', hinweis: 'zweithäufigste' },
+          { label: 'Summe 2 oder 12', wert: 'je 1/36 ≈ 2,8 %', hinweis: 'seltenste Summen' },
+          { label: 'Kombinationen gesamt', wert: '36', hinweis: '6 × 6 Augenpaare' },
+          { label: 'Erwartete Summe', wert: '7', hinweis: '2 × 3,5' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Der Erwartungswert: der langfristige Durchschnitt',
+        html: `<p>Der <strong>Erwartungswert</strong> beantwortet die Frage: Welcher Durchschnitt ergibt sich, wenn man ein Zufallsexperiment sehr oft wiederholt? Er ist die Summe aller möglichen Werte, gewichtet mit ihrer Wahrscheinlichkeit. Beim W6 ist das (1+2+3+4+5+6) ÷ 6 = 3,5 — ein Wert, der selbst nie gewürfelt wird.</p><p>Wichtig ist die richtige Deutung: Der Erwartungswert sagt <strong>nichts über das nächste Ergebnis</strong> voraus, sondern nur über den langfristigen Trend. Bei zehn Würfen kann der Schnitt weit von 3,5 entfernt liegen; bei zehntausend liegt er fast genau darauf.</p><p>Beim Glücksspiel ist der Erwartungswert für den Spieler stets <strong>negativ</strong> — sonst würde der Anbieter kein Geld verdienen. Beim Lotto fließt nur etwa die Hälfte der Einsätze als Gewinn zurück; statistisch verliert man auf lange Sicht garantiert. Das macht Lotto zum Spiel, nicht zur Geldanlage.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Lotto 6 aus 49: wie viele Kombinationen?',
+        schritte: [
+          { label: 'Formel (Binomialkoeffizient)', formel: 'C(49, 6) = 49! ÷ (6! × 43!)', ergebnis: 'Anzahl Kombinationen' },
+          { label: 'Zähler kürzen', formel: '49 × 48 × 47 × 46 × 45 × 44', ergebnis: '10.068.347.520' },
+          { label: 'durch 6!', formel: '÷ (6 × 5 × 4 × 3 × 2 × 1) = ÷ 720', ergebnis: '13.983.816' },
+          { label: 'Wahrscheinlichkeit', formel: '1 ÷ 13.983.816', ergebnis: '≈ 0,0000072 %' },
+        ],
+        fazit: 'Es gibt 13.983.816 verschiedene Tippreihen bei 6 aus 49 — die Chance auf sechs Richtige liegt damit bei 1 zu rund 14 Millionen. Jede Reihe ist gleich wahrscheinlich; „1, 2, 3, 4, 5, 6" ist genauso wahrscheinlich wie jede andere Kombination. Anschaulich: Man müsste statistisch über Hunderttausende Jahre wöchentlich tippen, um einmal zu gewinnen. Genau deshalb ist Lotto Unterhaltung und kein Sparmodell — der Erwartungswert jedes Tipps ist negativ, weil nur etwa die Hälfte der Einsätze wieder ausgeschüttet wird.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Gewinnchancen verschiedener Spiele',
+        kopf: ['Spiel', 'Ziehung', 'Kombinationen', 'Chance'],
+        zeilen: [
+          ['Lotto 6 aus 49', '6 aus 49', '13.983.816', '1 : 13,98 Mio.'],
+          ['6 aus 45 (Österreich)', '6 aus 45', '8.145.060', '1 : 8,15 Mio.'],
+          ['Eurojackpot', '5 aus 50 + 2 aus 12', '139.838.160', '1 : 139,84 Mio.'],
+          ['20× hintereinander Kopf', '20 Münzwürfe', '1.048.576', '1 : 1,05 Mio.'],
+        ],
+        fussnote: 'Kombinationen = Binomialkoeffizient C(n, k) = n! ÷ (k! × (n−k)!). Beim Eurojackpot kommen zu den 5 aus 50 (2.118.760) noch 2 aus 12 Eurozahlen (66) hinzu — zusammen rund 140 Millionen. Zwanzigmal in Folge Kopf entspricht 2²⁰.',
+      },
+      {
+        typ: 'text',
+        titel: 'Münzwurf und das Gesetz der großen Zahlen',
+        html: `<p>Der <strong>Münzwurf</strong> ist das einfachste Zufallsexperiment: zwei gleich wahrscheinliche Ausgänge, Kopf oder Zahl, jeweils 50 %. Ein einzelner Wurf heißt <strong>Bernoulli-Experiment</strong>; die Anzahl von „Kopf" bei vielen Würfen folgt der Binomialverteilung.</p><p>Hier zeigt sich das <strong>Gesetz der großen Zahlen</strong>: Bei 10 Würfen kann das Verhältnis stark schwanken (etwa 7:3), aber je öfter man wirft, desto näher rückt die relative Häufigkeit an die theoretischen 50 %. Bei 100 Würfen erwartet man rund 50× Kopf, Abweichungen von ±5 sind völlig normal.</p><p>Genau deshalb gleichen sich Zufallsschwankungen erst über viele Versuche aus — nicht innerhalb weniger. Wie schnell kombinatorische Möglichkeiten wachsen (etwa 2²⁰ Münzfolgen), zeigt der <a href="/mathe/potenz-rechner">Potenz-Rechner</a>.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Anwendungen: mehr als nur Spiele',
+        html: `<p>Zufallszahlen sind weit mehr als ein Spielzeug. In der <strong>Statistik</strong> bilden sie die Grundlage von <strong>Stichproben</strong>: Wer aus einer großen Menge zufällig auswählt, erhält ein repräsentatives Abbild, ohne alles prüfen zu müssen. <strong>Losentscheide</strong> verteilen knappe Plätze fair, etwa bei überbuchten Studiengängen.</p><p>In Wissenschaft und Technik kommen <strong>Monte-Carlo-Simulationen</strong> zum Einsatz: Komplexe Probleme — von der Physik über die Finanzmathematik bis zur Wettervorhersage — werden durch tausende zufällige Durchläufe näherungsweise gelöst. Auch <strong>A/B-Tests</strong> im Marketing teilen Nutzer zufällig in Gruppen auf.</p><p>Im Alltag schließlich helfen Zufallswerte bei Entscheidungen ohne Vorlieben — wer anfängt, wer dran ist, welche Reihenfolge gilt. Der gemeinsame Nenner ist immer Fairness: Niemand kann das Ergebnis beeinflussen.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Würfel vs. Münzwurf',
+        spalteA: 'Würfel (W6)',
+        spalteB: 'Münzwurf',
+        zeilen: [
+          { kriterium: 'Mögliche Ausgänge', a: '6 (Augen 1–6)', b: '2 (Kopf / Zahl)' },
+          { kriterium: 'Wahrscheinlichkeit je Ausgang', a: '1/6 ≈ 16,7 %', b: '1/2 = 50 %' },
+          { kriterium: 'Erwartungswert', a: '3,5', b: '— (kein Zahlenwert)' },
+          { kriterium: 'Modell', a: 'Gleichverteilung über 6 Werte', b: 'Bernoulli-Experiment' },
+          { kriterium: 'Bei vielen Versuchen', a: 'jede Zahl ~1/6', b: 'Binomialverteilung der Kopf-Anzahl' },
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Pseudozufall ist kein echter Zufall',
+        text: 'Computer erzeugen keinen echten Zufall. Ein Pseudozufallsgenerator (PRNG) wie Math.random() leitet aus einem Startwert (Seed) deterministisch eine Zahlenfolge ab, die zufällig aussieht. Für Spiele, Simulationen und Alltagsentscheidungen reicht das völlig. Für Kryptografie, sicherheitskritische Passwörter oder rechtsverbindliche Ziehungen (Lotto, Glücksspiel) ist es ungeeignet — dort kommen kryptografisch sichere Generatoren (CSPRNG) oder physikalische Zufallsquellen zum Einsatz.',
+      },
+      {
+        typ: 'text',
+        titel: 'Pseudozufall: wie der Computer „würfelt"',
+        html: `<p>Computer erzeugen streng genommen keinen echten Zufall, sondern <strong>Pseudozufall</strong>. Ein Pseudozufallsgenerator (PRNG) leitet aus einem Startwert, dem <strong>Seed</strong>, deterministisch eine lange Zahlenfolge ab. Sie sieht zufällig aus und besteht statistische Tests, ist aber im Prinzip reproduzierbar — gleicher Seed, gleiche Folge.</p><p>Für Spiele, Simulationen und Alltagsentscheidungen ist das <strong>völlig ausreichend</strong>. JavaScripts Math.random(), das dieser Generator nutzt, gehört in diese Kategorie. Kritisch wird es nur bei <strong>Sicherheit</strong>: Verschlüsselungsschlüssel und sicherheitskritische Passwörter brauchen einen kryptografisch sicheren Generator (CSPRNG, etwa window.crypto.getRandomValues).</p><p>Echter Zufall stammt aus physikalischen Quellen — radioaktivem Zerfall, thermischem Rauschen oder atmosphärischen Störungen. Mathematisch verwandte Strukturen wie Teiler und Vielfache berechnet der <a href="/mathe/ggt-kgv-rechner">ggT-/kgV-Rechner</a>.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Eckwerte zu Zufall und Passwort',
+        werte: [
+          { label: 'Math.random()', wert: 'PRNG', hinweis: 'pseudozufällig, deterministisch aus Seed' },
+          { label: 'Passwort-Entropie', wert: 'E = L × log₂(Z)', hinweis: 'L = Länge, Z = Zeichenpool' },
+          { label: '16 Zeichen, Z ≈ 78', wert: '≈ 100 Bit', hinweis: 'gilt als sehr sicher' },
+          { label: '8 Zeichen, nur a–z', wert: '≈ 37,6 Bit', hinweis: 'unsicher' },
+          { label: 'Anzahl pro Ziehung', wert: '1–1.000', hinweis: 'Limit des Generators' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Passwörter: Sicherheit durch Entropie',
+        html: `<p>Der <strong>Passwort-Modus</strong> erzeugt zufällige Zeichenfolgen aus einem wählbaren Pool — Groß- und Kleinbuchstaben, Ziffern und Sonderzeichen. Wie sicher ein Passwort ist, misst die <strong>Entropie</strong>: E = L × log₂(Z), wobei L die Länge und Z die Größe des Zeichenpools ist. Je höher die Entropie in Bit, desto mehr Kombinationen muss ein Angreifer durchprobieren.</p><p>Ein konkreter Vergleich: Ein 16-stelliges Passwort aus rund 78 möglichen Zeichen kommt auf etwa <strong>100 Bit</strong> — das gilt heute als sehr sicher. Ein 8-stelliges Passwort nur aus Kleinbuchstaben (26 Zeichen) hat dagegen nur <strong>37,6 Bit</strong> und ist in Minuten zu knacken.</p><p>Die wichtigste Stellschraube ist die <strong>Länge</strong>: Jedes zusätzliche Zeichen vervielfacht die Möglichkeiten. Ein langes Passwort aus einfachen Zeichen schlägt ein kurzes mit vielen Sonderzeichen — und für jeden Dienst gehört ein eigenes Passwort.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Zufall richtig nutzen',
+        punkte: [
+          'Für Spiele, Stichproben und Losentscheide ist Math.random() völlig ausreichend',
+          'Für Verschlüsselung und sicherheitskritische Passwörter einen CSPRNG nutzen (window.crypto.getRandomValues)',
+          'Bei Losziehungen ohne Zurücklegen kommt jede Zahl höchstens einmal vor',
+          'Erwartungswert kennen: er sagt den langfristigen Durchschnitt, nicht das nächste Ergebnis voraus',
+          'Gesetz der großen Zahlen: erst über viele Versuche nähert sich die Häufigkeit der Wahrscheinlichkeit',
+          'Beim Lotto Geburtstagszahlen (1–31) meiden — sie werden häufiger getippt, der Gewinn würde geteilt',
+          'Bei Passwörtern zählt die Länge mehr als Sonderzeichen — lieber länger als komplizierter',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Nur für Spiele und Übungen, nicht für offizielle Ziehungen',
+        text: 'Dieser Generator nutzt den Pseudozufall von Math.random() und ist für Spiele, Übungen und Alltagsentscheidungen gedacht — nicht für offizielle Ziehungen, Gewinnspiele mit rechtlicher Bindung oder die Erzeugung kryptografischer Schlüssel. Wahrscheinlichkeiten beschreiben außerdem nur das langfristige Verhalten: Auch eine sehr unwahrscheinliche Folge (etwa fünfmal hintereinander dieselbe Zahl) kann auftreten und ist kein Fehler.',
+      },
+    ],
     faq: [
       {
         frage: 'Sind die Zufallszahlen wirklich zufällig?',
@@ -3646,6 +3801,10 @@ Computer nutzen deterministische Algorithmen (PRNG — Pseudo Random Number Gene
         frage: 'Kann ich den Generator für Lotto-Tipps verwenden?',
         antwort: 'Ja, der Losziehungs-Modus eignet sich für Lotto-Tipps. Stellen Sie 6 aus 49 ein (oder 5 aus 50 für Eurojackpot). Beachten Sie aber: Jede Kombination ist gleich wahrscheinlich. „Beliebte" Zahlen wie Geburtstage (1–31) werden häufiger getippt — bei einem Gewinn müssten Sie den Jackpot mit mehr Mitspielern teilen.',
       },
+    ],
+    quellen: [
+      { titel: 'Bronstein/Semendjajew: Taschenbuch der Mathematik', hinweis: 'Standard-Referenz für Wahrscheinlichkeitsrechnung, Gleichverteilung, Binomialkoeffizient und Erwartungswert.' },
+      { titel: 'MDN Web Docs: Math.random() & Crypto.getRandomValues()', url: 'https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Math/random', hinweis: 'Math.random() ist ein Pseudozufallsgenerator (kein CSPRNG); für sicherheitskritische Zwecke crypto.getRandomValues() nutzen.' },
     ],
   },
   {
