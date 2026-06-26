@@ -1628,7 +1628,7 @@ Ohne Pizzastein: Backblech umgekehrt im Ofen vorheizen, Pizza direkt darauf back
   },
   {
     slug: 'brotback-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-26',
     titel: 'Brotback-Rechner',
     beschreibung: 'Zutaten für 5 Brottypen berechnen: Weißbrot, Mischbrot, Roggenbrot, Sauerteigbrot, Toastbrot — mit Hefe oder Sauerteig.',
     kategorie: 'Kochen & Ernährung',
@@ -1638,7 +1638,7 @@ Ohne Pizzastein: Backblech umgekehrt im Ofen vorheizen, Pizza direkt darauf back
     keywords: ['brotback rechner', 'brot backen rechner', 'bäckerprozente brot', 'sauerteig rechner', 'brotrezept berechnen', 'roggenbrot rezept', 'mischbrot zutaten', 'sauerteig anstellgut berechnen', 'brot hefe menge'],
     icon: '🍞',
     formel: 'Mehl = Teiggewicht ÷ (1 + Hydration/100 + Salz/100 + Hefe/100) | Sauerteig-ASG = 20 % Mehl | Fertiggewicht ≈ Teiggewicht × 0,88',
-    beispiel: '1 Mischbrot, 900 g Teig, Hefe: Gesamtmehl 527 g, Wasser 358 g, Salz 10,5 g, Frischhefe 7,9 g. Fertig gebacken ca. 792 g. Mit Sauerteig: 527 g Mehl, 253 g Wasser, 10,5 g Salz, 105 g Anstellgut (ASG).',
+    beispiel: '1 Mischbrot, 900 g Teig, Hefe: 525 g Mehl, 357 g Wasser, 10,5 g Salz, 7,9 g Frischhefe → fertig ~792 g. Mit Sauerteig: 476 g Hauptteig-Mehl + 106 g Anstellgut (ASG, enthält je ~53 g Mehl/Wasser), 307 g Wasser, 10,6 g Salz.',
     erklaerung: `**Brot backen mit Bäckerprozenten — das Grundprinzip**
 
 Brot selbst zu backen ist nicht schwer — wenn man die Grundformel versteht. Professionelle Bäcker rechnen alle Zutaten in Bäckerprozenten, also relativ zum Mehlgewicht. Das Mehl gilt als 100 %. Alle anderen Zutaten werden als Prozentwert angegeben. So lässt sich jedes Rezept problemlos skalieren, ohne Verhältnisse neu ausrechnen zu müssen.
@@ -1714,6 +1714,153 @@ Beim Backen verliert Brot durch Wasserverdunstung ca. 10–15 % seines Gewichts.
         frage: 'Wie erkenne ich, ob mein Brot fertig gebacken ist?',
         antwort: 'Klopftest: Das fertige Brot aus der Form nehmen und auf den Boden klopfen — klingt es hohl, ist es durch. Alternativ: Kerntemperatur 95–98 °C (Bratenthermometer). Weißbrot und Toastbrot: goldbraune Kruste, 30 Min Backzeit. Roggenbrot und Mischbrot: nach dem Backen mind. 24 h warten — frisch angeschnittenes Roggenbrot klebt und schmeckt roh. Das Brot zieht nach und wird besser.',
       },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Brot backen mit Bäckerprozenten',
+        html: `<p>Brot selbst zu backen ist keine Zauberei — man muss nur eine Grundidee verstehen: die <strong>Bäckerprozente</strong> (Baker's Percentage). Profis geben jede Zutat relativ zum Mehl an. Das <strong>Mehl ist immer 100 %</strong>, alles andere ist ein Prozentwert davon: Wasser etwa 60–76 %, Salz rund 2 %, Frischhefe ungefähr 1,5 %.</p><p>Der große Vorteil dieser Methode ist die <strong>Skalierbarkeit</strong>. Egal ob ein einzelnes Brot oder zehn auf einmal — die Verhältnisse bleiben gleich. Man rechnet nur das Mehl hoch, alle anderen Mengen folgen automatisch. Genau so arbeitet auch dieser Rechner.</p><p>Aus dem gewünschten <strong>Teiggewicht</strong> ermittelt er zuerst das nötige Mehl und daraus Wasser, Salz und Triebmittel. Wie nahrhaft das fertige Brot anschließend ist, lässt sich mit dem <a href="/kochen/naehrwert-rechner">Nährwert-Rechner</a> abschätzen.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Mischbrot mit Hefe — Schritt für Schritt',
+        schritte: [
+          { label: 'Teiggewicht festlegen', formel: '1 Brot', ergebnis: '900 g Teig' },
+          { label: 'Mehl (= 100 %)', formel: '900 ÷ (1 + 0,68 + 0,02 + 0,015)', ergebnis: '525 g Mehl' },
+          { label: 'Wasser (68 % Hydration)', formel: '525 × 0,68', ergebnis: '357 g Wasser' },
+          { label: 'Salz (2 %)', formel: '525 × 0,02', ergebnis: '10,5 g Salz' },
+          { label: 'Frischhefe (1,5 %)', formel: '525 × 0,015', ergebnis: '7,9 g Hefe' },
+          { label: 'Fertiggewicht (−12 % Backverlust)', formel: '900 × 0,88', ergebnis: '~792 g Brot' },
+        ],
+        fazit: 'Aus 900 g Teig wird ein Mischbrot mit 525 g Mehl, 357 g Wasser, 10,5 g Salz und 7,9 g Frischhefe — fertig gebacken rund 792 g. Das Mehl bildet die 100-%-Basis, alle übrigen Mengen folgen als Prozentwert. Genau das macht das Rezept beliebig skalierbar.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Hydration und Bäckerprozent je Brottyp',
+        kopf: ['Brottyp', 'Hydration', 'Mehl', 'Salz'],
+        zeilen: [
+          ['Toastbrot', '60 %', '100 %', '1,5 %'],
+          ['Weißbrot', '65 %', '100 %', '2,0 %'],
+          ['Mischbrot', '68 %', '100 %', '2,0 %'],
+          ['Sauerteigbrot', '72 %', '100 %', '2,0 %'],
+          ['Roggenbrot', '76 %', '100 %', '2,0 %'],
+        ],
+        fussnote: 'Hydration ist der Wasseranteil bezogen auf das Mehl. Je höher, desto offener und saftiger die Krume — aber auch klebriger der Teig. Roggen bindet wegen seiner Pentosane besonders viel Wasser. Frischhefe liegt bei rund 1,5 %, das Sauerteig-Anstellgut bei 20 % des Mehls.',
+      },
+      {
+        typ: 'text',
+        titel: 'Hydration: der Wasseranteil entscheidet',
+        html: `<p>Die wichtigste Stellgröße beim Brot ist die <strong>Hydration</strong> — der Wasseranteil bezogen auf das Mehl. Sie entscheidet über Krume und Kruste: Wenig Wasser (60 %) ergibt einen festen, feinporigen Teig wie beim Toastbrot; viel Wasser (76 %) eine offene, saftige, grobporige Krume wie beim Roggenbrot.</p><p>Höhere Hydration bedeutet aber auch <strong>klebrigeren Teig</strong>, der schwerer zu formen ist. Einsteiger starten am besten bei 65–68 % (Weißbrot, Mischbrot) und tasten sich nach oben. Roggenmehl ist hier die Ausnahme: Seine <strong>Pentosane</strong> binden so viel Wasser, dass Roggenbrote zwangsläufig hohe Hydrationswerte brauchen.</p><p>Als Faustregel gilt: Je dunkler und vollkorniger das Mehl, desto mehr Wasser nimmt es auf. Wer ein Rezept auf ein anderes Mehl überträgt, sollte die Hydration deshalb anpassen — und den Teig im Zweifel beobachten, statt blind der Zahl zu folgen.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Sauerteig-Variante — das Anstellgut richtig abziehen',
+        schritte: [
+          { label: 'Gesamtmehl', formel: '900 ÷ (1 + 0,68 + 0,02)', ergebnis: '529 g Mehl' },
+          { label: 'Anstellgut (20 % vom Mehl)', formel: '529 × 0,20', ergebnis: '106 g ASG' },
+          { label: 'ASG enthält je 50 %', formel: '106 ÷ 2', ergebnis: '53 g Mehl + 53 g Wasser' },
+          { label: 'Hauptteig-Mehl (abzgl. ASG-Mehl)', formel: '529 − 53', ergebnis: '476 g Mehl' },
+          { label: 'Hauptteig-Wasser (abzgl. ASG-Wasser)', formel: '360 − 53', ergebnis: '307 g Wasser' },
+        ],
+        fazit: 'Im Anstellgut steckt bereits Mehl UND Wasser. Vom Hauptteig zieht man deshalb beide Hälften ab — sonst wiegt man zu viel ein. Aus 529 g Gesamtmehl werden so 476 g Mehl plus 106 g ASG direkt eingewogen, dazu 307 g Wasser und 10,6 g Salz. Genau hier passiert in Rezepten der häufigste Rechenfehler.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Die ASG-Falle: nicht doppelt einwiegen',
+        text: 'Der häufigste Rechenfehler beim Sauerteigbrot: Das Anstellgut (ASG) wird beim Mehl und Wasser vergessen. Bei einer Teigausbeute von TA 200 besteht es zur Hälfte aus Mehl und zur Hälfte aus Wasser. Wer 106 g ASG einsetzt, hat damit schon 53 g Mehl und 53 g Wasser im Teig — diese müssen vom Hauptteig abgezogen werden, sonst wird der Teig zu nass und das Mehlgewicht stimmt nicht. Genau das nimmt der Rechner automatisch vorweg: Er zeigt Mehl und Wasser für den Hauptteig bereits abzüglich der ASG-Anteile.',
+      },
+      {
+        typ: 'text',
+        titel: 'Das Sauerteig-Anstellgut (ASG) verstehen',
+        html: `<p>Das <strong>Anstellgut (ASG)</strong> ist das Herzstück jedes Sauerteigbrots: ein aktiv fermentierter Starter aus Mehl und Wasser, der wilde Hefen und Milchsäurebakterien enthält. Sie lockern den Teig und geben ihm sein typisches Aroma. Üblich sind <strong>20 % ASG</strong> bezogen auf das Mehl.</p><p>Entscheidend ist die <strong>Teigausbeute</strong> (TA): Bei TA 200 — dem gängigsten Wert — besteht das ASG zu gleichen Teilen aus Mehl und Wasser. 106 g ASG enthalten also 53 g Mehl und 53 g Wasser, die <strong>bereits zum Teig zählen</strong> und vom Hauptteig abgezogen werden.</p><p>Vor dem Backen muss der Starter aufgefrischt werden: ein Teil ASG, ein Teil Mehl, ein Teil Wasser, bei 22–26 °C. Nach 8–12 Stunden sollte er sich verdoppelt haben und Bläschen werfen — dann ist er backfertig. Wann das Brot danach in den Ofen kann, hilft der <a href="/kochen/backzeit-rechner">Backzeit-Rechner</a> einzuschätzen.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Hefe oder Sauerteig?',
+        spalteA: 'Hefe',
+        spalteB: 'Sauerteig',
+        zeilen: [
+          { kriterium: 'Anteil vom Mehl', a: '1,5 % Frischhefe', b: '20 % Anstellgut (ASG)' },
+          { kriterium: 'Gehzeit', a: '1–4 Stunden', b: '4–12 Stunden' },
+          { kriterium: 'Aroma', a: 'mild, neutral', b: 'komplex, säuerlich' },
+          { kriterium: 'Roggenbrot', a: 'ungeeignet (bindet nicht)', b: 'zwingend nötig' },
+          { kriterium: 'Aufwand', a: 'gering, sofort einsatzbereit', b: 'Starter pflegen und auffrischen' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Hochskalieren: aus einem Brot werden drei',
+        schritte: [
+          { label: 'Ein Brot', formel: 'Teiggewicht', ergebnis: '900 g' },
+          { label: 'Drei Brote', formel: '3 × 900 g', ergebnis: '2.700 g Teig' },
+          { label: 'Mehl gesamt (Hefe-Variante)', formel: '2.700 ÷ 1,715', ergebnis: '~1.574 g Mehl' },
+          { label: 'Wasser / Salz / Hefe verdreifachen', formel: 'alle × 3', ergebnis: '1.070 / 31,5 / 23,7 g' },
+        ],
+        fazit: 'Weil alle Zutaten an das Mehl gekoppelt sind, skaliert ein Rezept linear: Für drei Brote verdreifacht man schlicht alle Mengen. So plant man auch gezielt auf ein Wunsch-Fertiggewicht — Zielgewicht ÷ 0,88 ergibt das nötige Teiggewicht (etwa 1.000 g Brot → rund 1.136 g Teig).',
+      },
+      {
+        typ: 'text',
+        titel: 'Backverlust: Teig wird leichter als Brot',
+        html: `<p>Ein 900-g-Teig ergibt kein 900-g-Brot. Beim Backen verdunstet Wasser, das Brot verliert rund <strong>10–15 % seines Gewichts</strong> — den sogenannten Backverlust. Dieser Rechner kalkuliert mit 12 %, also einem Fertiggewicht von Teig × 0,88. Aus 900 g Teig werden so etwa 792 g Brot.</p><p>Wie hoch der Verlust genau ausfällt, hängt von mehreren Faktoren ab: Hohe Temperatur und lange Backzeit treiben mehr Wasser aus, eine dünne Kruste und das Backen in der Kastenform halten mehr zurück. Frei geschobene Brote mit dicker Kruste verlieren am meisten.</p><p>Praktisch ist die Rückrechnung: Wer ein bestimmtes <strong>Fertiggewicht</strong> anstrebt, teilt es durch 0,88. Für ein 1.000-g-Brot braucht man also rund 1.136 g Teig. So plant man die Mengen gezielt statt auf gut Glück.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Mehltypen im Überblick',
+        kopf: ['Type', 'Mehl', 'Eigenschaft', 'Verwendung'],
+        zeilen: [
+          ['405 / 550', 'Weizen, hell', 'wenig Mineralstoffe, heller', 'Toast, Weißbrot, Brötchen'],
+          ['812', 'Weizen, mittel', 'kräftiger im Geschmack', 'Mischbrot, dunkle Brötchen'],
+          ['1150', 'Roggen, mittel', 'aromatisch, dunkler', 'Mischbrot, Roggenbrot'],
+          ['1370 / 1740', 'Roggen, dunkel', 'sehr kräftig, hohe Wasseraufnahme', 'dunkles Roggenbrot'],
+        ],
+        fussnote: 'Die Type-Zahl gibt den Mineralstoffgehalt (Asche in mg je 100 g Mehl) an — je höher die Zahl, desto dunkler und vollkorniger das Mehl. Höhere Typen nehmen mehr Wasser auf, weshalb dunkle Brote eine höhere Hydration brauchen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Salz und Hefe: die kleinen Mengen mit großer Wirkung',
+        html: `<p>Neben Mehl und Wasser entscheiden zwei kleine Zutaten über Geschmack und Trieb. <strong>Salz</strong> liegt bei 2 % vom Mehl (Toastbrot 1,5 %) — es würzt nicht nur, sondern stabilisiert das Glutennetz und bremst die Hefe etwas. Zu wenig Salz macht das Brot fad und den Teig schlaff.</p><p>Bei der <strong>Hefe</strong> sind 1,5 % Frischhefe der Richtwert für eine direkte Führung mit 2–4 Stunden Gehzeit. Trockenhefe nimmt man zu einem Drittel davon. Wer mehr Aroma will, reduziert die Hefe und verlängert die Gehzeit — Zeit ist der beste Geschmacksverstärker beim Brot.</p><p>Beim <strong>Roggenbrot</strong> versagt reine Hefe: Ohne die Säure des Sauerteigs bindet der Teig nicht und wird klitschig. Wie lange Brote verschiedener Größe im Ofen brauchen, schätzt der <a href="/kochen/kochzeit-rechner">Kochzeit-Rechner</a> für die Zeitplanung mit ab.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Häufige Fehler beim Brotbacken',
+        html: `<p>Die meisten misslungenen Brote scheitern an wenigen, immer gleichen Punkten. <strong>Anstellgut doppelt eingewogen:</strong> Wer das Mehl und Wasser im ASG nicht vom Hauptteig abzieht, bekommt einen zu nassen Teig — der häufigste Fehler beim Sauerteig.</p><p><strong>Hydration vom Mehltyp entkoppelt:</strong> Ein Weißbrot-Rezept mit 65 % Wasser wird mit Vollkorn- oder Roggenmehl zu fest, weil dunkle Mehle deutlich mehr Wasser aufnehmen. <strong>Zu wenig Gare:</strong> Wird der Teig zu früh gebacken, bleibt die Krume dicht und kompakt; zu lange Gare lässt ihn dagegen zusammenfallen.</p><p><strong>Roggen mit reiner Hefe:</strong> ohne Sauerteig bindet Roggenteig nicht und wird klitschig. Und schließlich der <strong>Klassiker bei dunklen Broten:</strong> zu früh angeschnitten — Roggen- und Mischbrote müssen mindestens 24 Stunden ruhen, sonst schmeckt die Krume roh und klebt am Messer.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Bäcker-Eckwerte auf einen Blick',
+        werte: [
+          { label: 'Salz', wert: '2,0 % vom Mehl', hinweis: 'Toastbrot 1,5 %' },
+          { label: 'Frischhefe', wert: '1,5 % vom Mehl', hinweis: 'Trockenhefe = ein Drittel davon' },
+          { label: 'Sauerteig-ASG', wert: '20 % vom Mehl', hinweis: 'TA 200 = je 50 % Mehl/Wasser' },
+          { label: 'Backverlust', wert: '~12 %', hinweis: 'Fertiggewicht = Teig × 0,88' },
+          { label: 'Kerntemperatur fertig', wert: '95–98 °C', hinweis: 'oder Klopftest (klingt hohl)' },
+        ],
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Backablauf Schritt für Schritt',
+        punkte: [
+          'Teiggewicht festlegen — pro Brot je nach Form 700–1.000 g',
+          'Sauerteig-Starter am Vortag auffrischen (1:1:1 Mehl/Wasser/ASG, 8–12 h)',
+          'Alle Zutaten genau abwiegen — der Bäckerprozent bezieht alles aufs Mehl',
+          'Beim Sauerteig das ASG-Mehl und -Wasser vom Hauptteig abziehen, nicht doppelt einwiegen',
+          'Teig kneten oder dehnen und falten, dann gehen lassen (Gare beachten, nicht übergehen)',
+          'Mit Dampf anbacken für die Kruste; Kerntemperatur 95–98 °C prüfen',
+          'Roggen- und Mischbrot vor dem Anschneiden mindestens 24 h ruhen lassen',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Richtwerte — den Teig beobachten',
+        text: 'Alle Mengen sind Richtwerte nach der Bäckerprozent-Methode. Die tatsächliche Wasseraufnahme schwankt je nach Mehlsorte, Mahlgrad und sogar Marke — Vollkorn- und Roggenmehle brauchen oft mehr Wasser als helle Weizenmehle. Beobachten Sie den Teig: Ist er zu fest oder zu klebrig, justieren Sie mit ein paar Gramm Wasser oder Mehl nach. Mit etwas Übung und Erfahrung entwickelt man schnell ein sicheres Gefühl für die richtige Teigkonsistenz.',
+      },
+    ],
+    quellen: [
+      { titel: 'Lutz Geißler — Brotbackbuch Nr. 1: Grundlagen und Rezepte für ursprüngliches Brot', hinweis: 'Bäckerprozent, Teigausbeute (TA), Hydration' },
+      { titel: 'Jeffrey Hamelman — Bread: A Baker\'s Book of Techniques and Recipes', hinweis: 'Baker\'s Percentage, Backverlust' },
+      { titel: 'Verband Deutscher Mühlen — Mehltypen nach DIN 10355', hinweis: 'Type-Zahlen und Mineralstoffgehalt' },
     ],
   },
   {
