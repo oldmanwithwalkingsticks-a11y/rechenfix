@@ -836,7 +836,7 @@ Für weiterführende Berechnungen nutzen Sie unseren **Prozentrechner** (für al
   },
   {
     slug: 'countdown',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-26',
     titel: 'Countdown-Rechner',
     beschreibung: 'Wie viele Tage bis Weihnachten, Ostern, Silvester oder Ihrem Geburtstag? Live-Countdown mit Sekunden-Anzeige.',
     kategorie: 'Alltag',
@@ -846,7 +846,7 @@ Für weiterführende Berechnungen nutzen Sie unseren **Prozentrechner** (für al
     keywords: ['countdown rechner', 'wie viele tage bis weihnachten', 'tage bis ostern', 'countdown silvester', 'tage bis sommerferien', 'tage zähler', 'countdown timer', 'tage bis geburtstag', 'wie lange noch bis weihnachten', 'countdown online'],
     icon: '⏳',
     formel: 'Verbleibende Zeit = Zieldatum − aktuelle Uhrzeit (in Tagen, Stunden, Minuten, Sekunden)',
-    beispiel: 'Beispiel: Heute ist der 5. April 2026 — bis Weihnachten (24. Dezember) sind es noch 263 Tage, ca. 37 Wochen.',
+    beispiel: 'Beispiel-Stichtag 5. April 2026: bis Weihnachten (24. Dezember) sind es noch 263 Tage, ca. 37 Wochen. Im Live-Rechner aktualisiert sich der Wert sekundengenau.',
     erklaerung: `**Was ist ein Countdown-Rechner?**
 
 Ein Countdown-Rechner zeigt Ihnen in Echtzeit, wie viel Zeit bis zu einem bestimmten Datum oder Ereignis verbleibt. Die Anzeige aktualisiert sich jede Sekunde und zeigt die verbleibenden Tage, Stunden, Minuten und Sekunden. So wissen Sie immer genau, wie lange es noch bis zum nächsten Feiertag, Urlaub oder persönlichen Termin dauert.
@@ -895,6 +895,160 @@ Countdown-Rechner sind besonders beliebt in der Vorweihnachtszeit, vor Schulferi
         frage: 'Funktioniert der Countdown auch auf dem Handy?',
         antwort: 'Ja, der Countdown-Rechner ist vollständig responsiv und funktioniert auf allen Geräten — Smartphone, Tablet und Desktop. Die Live-Anzeige tickt auch mobil sekundengenau.',
       },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was ist ein Countdown-Rechner?',
+        html: `<p>Ein <strong>Countdown-Rechner</strong> zeigt in Echtzeit, wie viel Zeit bis zu einem bestimmten Datum verbleibt — heruntergezählt auf Tage, Stunden, Minuten und Sekunden. Die Anzeige aktualisiert sich jede Sekunde, sodass man die Vorfreude auf Weihnachten, den Urlaub oder einen persönlichen Termin förmlich ticken sieht.</p><p>Die Rechnung dahinter ist denkbar einfach: <strong>verbleibende Zeit = Zieldatum − aktuelle Uhrzeit</strong>. Weil der Rechner die Systemzeit Ihres Geräts nutzt, ist das Ergebnis sekundengenau und immer aktuell. Voreingestellt sind beliebte Anlässe wie Weihnachten, Silvester, Ostern oder Halloween; daneben lässt sich jedes eigene Datum eintragen.</p><p>Für die Differenz zwischen zwei <strong>festen</strong> Daten — etwa zur Fristberechnung — ist dagegen der <a href="/alltag/tagerechner">Tagerechner</a> das passende Werkzeug. Der Countdown blickt immer von jetzt nach vorn.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: Tage bis Weihnachten',
+        schritte: [
+          { label: 'Beispiel-Stichtag (heute)', formel: '5. April 2026', ergebnis: 'Start' },
+          { label: 'Zieldatum', formel: '24. Dezember 2026', ergebnis: 'Weihnachten' },
+          { label: 'Differenz in Tagen', formel: '24.12. − 5.4.', ergebnis: '263 Tage' },
+          { label: 'In Wochen', formel: '263 ÷ 7', ergebnis: '~37,6 Wochen' },
+        ],
+        fazit: 'Vom Beispiel-Stichtag 5. April 2026 sind es noch 263 Tage bis Weihnachten — rund 37,6 Wochen. Im echten Rechner aktualisiert sich dieser Wert sekundengenau, weil er die aktuelle Uhrzeit Ihres Geräts vom Zieldatum abzieht. Einen Tag später wären es 262 Tage.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Tage bis gängige Anlässe (Beispiel-Stichtag 5.4.2026)',
+        kopf: ['Anlass', 'Datum', 'Tage ab 5.4.2026'],
+        zeilen: [
+          ['Sommerferien (ca.)', '1. Juli 2026', '87 Tage'],
+          ['Halloween', '31. Oktober 2026', '209 Tage'],
+          ['Nikolaus', '6. Dezember 2026', '245 Tage'],
+          ['Weihnachten', '24. Dezember 2026', '263 Tage'],
+          ['Silvester', '31. Dezember 2026', '270 Tage'],
+        ],
+        fussnote: 'Tage gerechnet ab dem Beispiel-Stichtag 5. April 2026. Im Live-Rechner verschiebt sich jeder Wert täglich um einen Tag nach unten; nach dem jeweiligen Datum springt der Countdown automatisch auf das nächste Vorkommen im Folgejahr.',
+      },
+      {
+        typ: 'text',
+        titel: 'Zeiteinheiten umrechnen: Tage, Stunden, Sekunden',
+        html: `<p>Eine verbleibende Zeitspanne lässt sich in ganz unterschiedlichen Einheiten ausdrücken — und genau das macht ein Countdown anschaulich. Dieselbe Wartezeit wirkt in <strong>Tagen</strong> überschaubar, in <strong>Sekunden</strong> riesig: 263 Tage sind über 22 Millionen Sekunden.</p><p>Die Umrechnung folgt festen Faktoren: Ein Tag hat 24 Stunden, eine Stunde 60 Minuten, eine Minute 60 Sekunden. Ein Tag entspricht damit <strong>86.400 Sekunden</strong>, eine Woche 604.800. Wer von Tagen auf Wochen umrechnet, teilt durch 7; für Stunden multipliziert man mit 24.</p><p>Der Live-Ticker nutzt genau diese Kette: Er bestimmt die Sekundendifferenz zum Zieldatum und rechnet sie für die Anzeige in Tage, Stunden, Minuten und Sekunden zurück. Deshalb läuft die Sekundenstelle sichtbar herunter, während sich die Tage nur einmal um Mitternacht ändern.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: 263 Tage in kleinere Einheiten',
+        schritte: [
+          { label: 'Ausgangswert', formel: '263 Tage', ergebnis: '263 Tage' },
+          { label: 'In Stunden', formel: '263 × 24', ergebnis: '6.312 Stunden' },
+          { label: 'In Minuten', formel: '6.312 × 60', ergebnis: '378.720 Minuten' },
+          { label: 'In Sekunden', formel: '378.720 × 60', ergebnis: '22.723.200 Sekunden' },
+        ],
+        fazit: 'Dieselbe Wartezeit lässt sich in beliebige Einheiten ausdrücken: 263 Tage sind gut 6.300 Stunden oder über 22 Millionen Sekunden. Der Live-Countdown zeigt genau diese Sekunden herunterlaufen — das macht das Warten greifbar.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Schaltjahre zählen automatisch mit',
+        text: 'Ein Schaltjahr hat 366 statt 365 Tage — der zusätzliche 29. Februar gleicht aus, dass ein Erdumlauf rund 365,2422 Tage dauert. Schaltjahr ist ein Jahr, das durch 4 teilbar ist, außer es ist durch 100, aber nicht durch 400 teilbar (2000 war ein Schaltjahr, 1900 nicht). Liegt der 29. Februar im Countdown-Zeitraum, zählt der Rechner ihn automatisch mit, weil er mit echten Kalenderdaten statt mit pauschalen 365 Tagen rechnet.',
+      },
+      {
+        typ: 'text',
+        titel: 'Schaltjahre, Zeitzonen und Sommerzeit',
+        html: `<p>Zwei Feinheiten beeinflussen jede Datumsrechnung. Erstens die <strong>Schaltjahre</strong>: Alle vier Jahre schiebt der 29. Februar einen zusätzlichen Tag ein, damit der Kalender im Takt mit dem Sonnenjahr bleibt. Liegt dieser Tag im Countdown-Zeitraum, zählt der Rechner ihn automatisch mit, weil er mit echten Kalenderdaten statt mit pauschalen 365 Tagen arbeitet.</p><p>Zweitens die <strong>Zeitzone und Sommerzeit</strong>: Der Countdown nutzt die lokale Zeit Ihres Geräts. Bei der Umstellung auf Sommer- oder Winterzeit verschiebt sich ein Tag einmalig um eine Stunde — für die Tagesanzeige unerheblich, für sekundengenaue Planung über Zeitzonen hinweg aber gut zu wissen.</p><p>Wer die exakte Uhrzeit eines Ereignisses berechnen oder Zeitspannen addieren möchte, findet im <a href="/alltag/uhrzeitrechner">Uhrzeitrechner</a> das spezialisierte Werkzeug dafür.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Ostern und die beweglichen Feiertage',
+        html: `<p>Die meisten Countdown-Ziele haben ein festes Datum — Weihnachten am 24. Dezember, Silvester am 31. Dezember. <strong>Ostern</strong> dagegen ist ein <strong>beweglicher Feiertag</strong>: Es fällt auf den ersten Sonntag nach dem ersten Frühlingsvollmond und kann zwischen dem 22. März und dem 25. April liegen.</p><p>Der Rechner bestimmt das Datum mit dem <strong>Gauß-Algorithmus</strong> für den gregorianischen Kalender — derselben Methode, die Carl Friedrich Gauß im 19. Jahrhundert formulierte. Von Ostern hängen weitere Termine ab: Christi Himmelfahrt (39 Tage danach), Pfingsten (49 Tage) und Fronleichnam (60 Tage) verschieben sich entsprechend mit.</p><p>Für einen Countdown bedeutet das: Das Zieldatum wird nicht fest hinterlegt, sondern jedes Jahr neu berechnet. So zeigt der Rechner immer das nächste tatsächliche Osterdatum an, ohne dass es jemand manuell pflegen müsste.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Häufige Stolperfallen bei der Datumsrechnung',
+        html: `<p>Beim Zählen von Tagen schleichen sich typische Fehler ein. Der häufigste ist der <strong>Off-by-one-Fehler</strong>: Zählt man den Start- oder den Zieltag mit? Ein Countdown rechnet die <strong>volle Differenz</strong> bis zum Zieldatum — der heutige Tag zählt nur anteilig, je nach Uhrzeit. Deshalb kann „noch 5 Tage" am Morgen und am Abend dieselbe Tageszahl, aber unterschiedlich viele Stunden bedeuten.</p><p>Eine zweite Falle sind <strong>Monatslängen</strong>: Nicht jeder Monat hat 30 Tage, der Februar mal 28, mal 29. Wer im Kopf grob rechnet, verschätzt sich schnell um ein, zwei Tage. Der Rechner umgeht das, weil er mit echten Kalenderdaten arbeitet.</p><p>Drittens die <strong>Zeitumstellung</strong>: In den Nächten der Sommer- und Winterzeitumstellung hat ein Tag 23 beziehungsweise 25 Stunden. Für die Tagesanzeige spielt das keine Rolle, für eine sekundengenaue Stundenzählung über die Umstellung hinweg aber schon.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Countdown-Rechner oder Tagerechner?',
+        spalteA: 'Countdown-Rechner',
+        spalteB: 'Tagerechner',
+        zeilen: [
+          { kriterium: 'Frage', a: 'Wie lange noch bis …?', b: 'Wie viele Tage zwischen zwei Daten?' },
+          { kriterium: 'Bezugspunkt', a: 'jetzt (live, sekundengenau)', b: 'zwei feste Daten' },
+          { kriterium: 'Anzeige', a: 'läuft herunter, tickt', b: 'fester Differenzwert' },
+          { kriterium: 'Werktage', a: 'nein (Brutto-Tage)', b: 'ja, mit Werktags-Option' },
+          { kriterium: 'Typischer Einsatz', a: 'Vorfreude, Deadline-Ticker', b: 'Fristen, Alter, Zeiträume' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: eigenes Datum (Urlaubsbeginn)',
+        schritte: [
+          { label: 'Beispiel-Stichtag', formel: '5. April 2026', ergebnis: 'heute' },
+          { label: 'Urlaubsbeginn', formel: '1. August 2026', ergebnis: 'Zieldatum' },
+          { label: 'Verbleibende Tage', formel: '1.8. − 5.4.', ergebnis: '118 Tage' },
+          { label: 'In Wochen', formel: '118 ÷ 7', ergebnis: '~16,9 Wochen' },
+        ],
+        fazit: 'Auch eigene Termine wie Urlaub, Hochzeit oder eine Projekt-Deadline lassen sich eintragen. Vom 5. April bis zum 1. August 2026 sind es 118 Tage, also knapp 17 Wochen. Eine optionale Bezeichnung hilft, mehrere Countdowns auseinanderzuhalten.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Zeiteinheiten im Überblick',
+        kopf: ['Einheit', 'entspricht', 'in Sekunden'],
+        zeilen: [
+          ['1 Minute', '60 Sekunden', '60'],
+          ['1 Stunde', '60 Minuten', '3.600'],
+          ['1 Tag', '24 Stunden', '86.400'],
+          ['1 Woche', '7 Tage', '604.800'],
+          ['1 Jahr (365 Tage)', '52,14 Wochen', '31.536.000'],
+        ],
+        fussnote: 'Ein gewöhnliches Jahr hat 365 Tage, ein Schaltjahr 366. Die Sekundenzahl eines Tages (86.400) ist die Basis jedes Live-Countdowns — der Rechner zählt sie sekundenweise herunter.',
+      },
+      {
+        typ: 'text',
+        titel: 'Anlässe und Anwendungen',
+        html: `<p>Countdowns begleiten die beliebtesten Momente des Jahres. In der <strong>Vorweihnachtszeit</strong> zählen Familien die Tage bis Heiligabend, vor den <strong>Sommerferien</strong> fiebern Schüler dem ersten freien Tag entgegen, und vor <strong>Silvester</strong> tickt die Uhr bis Mitternacht. Auch Ostern, Nikolaus, Valentinstag und Halloween sind voreingestellt.</p><p>Mindestens ebenso nützlich sind persönliche Anlässe: der nächste <strong>Geburtstag</strong>, ein <strong>Hochzeitstag</strong>, der Beginn einer lang geplanten <strong>Reise</strong> oder das Ende eines Projekts. Ein benannter Countdown macht solche Ziele sichtbar und motiviert, weil der Fortschritt jeden Tag spürbar wird.</p><p>Im beruflichen Alltag helfen Countdowns bei <strong>Deadlines</strong>: Wie viele Wochen bleiben bis zur Abgabe, bis zum Launch, bis zum Messetermin? Wer dabei sein Alter in Tagen oder verbleibende Lebenswochen neugierig betrachtet, findet im <a href="/alltag/lebenszeit-rechner">Lebenszeit-Rechner</a> eine verwandte Perspektive.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Countdowns, die wirklich motivieren',
+        html: `<p>Ein Countdown ist mehr als eine Spielerei — richtig genutzt, wird er zum <strong>Motivations-Werkzeug</strong>. Der Trick liegt im sichtbaren Fortschritt: Wenn die verbleibenden Wochen Stück für Stück schrumpfen, fühlt sich ein fernes Ziel plötzlich erreichbar an. Das funktioniert für Vorfreude genauso wie für Disziplin.</p><p>Besonders wirksam sind <strong>benannte</strong> Countdowns. „Noch 84 Tage" ist abstrakt; „Noch 84 Tage bis zum Halbmarathon" verknüpft die Zahl mit einem konkreten Vorhaben. Wer mehrere Ziele parallel verfolgt, legt für jedes einen eigenen Countdown mit eindeutiger Bezeichnung an.</p><p>Auch beim <strong>Lernen und Sparen</strong> hilft die Methode: Tage bis zur Prüfung, Wochen bis zum Reisebudget. Die Zahl erinnert täglich daran, dranzubleiben — und der Moment, in dem der Countdown null erreicht, ist die Belohnung.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Vom Raketenstart in den Alltag',
+        html: `<p>Das Wort <strong>Countdown</strong> stammt aus der Raumfahrt: Vor einem Raketenstart wird rückwärts gezählt — „zehn, neun, acht …" —, weil sich so jeder Arbeitsschritt einem festen Zeitpunkt vor dem Start zuordnen lässt. Diese Idee, die Zeit bis zu einem Ereignis sichtbar herunterzuzählen, hat sich längst in den Alltag verbreitet.</p><p>Heute begegnen uns Countdowns überall: in <strong>Webshops</strong> bis zum Angebotsende, in <strong>Apps</strong> bis zum nächsten Event, auf <strong>Einladungen</strong> bis zur Hochzeit. Der psychologische Effekt ist immer derselbe: Eine konkrete Zahl erzeugt mehr Dringlichkeit und Vorfreude als ein vages „bald".</p><p>Ein Online-Countdown überträgt dieses Prinzip auf beliebige Termine. Statt im Kopf zu rechnen, sieht man die verbleibende Zeit auf einen Blick — und kann sie jederzeit für ein neues Ziel anpassen.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Ein Ereignis rückwärts planen',
+        punkte: [
+          'Zieldatum festlegen (Hochzeit, Umzug, Prüfung, Produktstart)',
+          'Countdown setzen — verbleibende Wochen auf einen Blick',
+          'Aufgaben rückwärts terminieren: Was muss X Wochen vorher fertig sein?',
+          'Pufferzeiten einplanen, nicht bis zum letzten Tag durchtakten',
+          'Für die Zählung echter Arbeitstage den Tagerechner mit Werktags-Option nutzen',
+          'Wichtige Etappen als eigene Countdowns mit Bezeichnung anlegen',
+        ],
+      },
+      {
+        typ: 'statistik',
+        titel: 'Zeit-Eckwerte auf einen Blick',
+        werte: [
+          { label: '1 Tag', wert: '86.400 Sekunden', hinweis: 'Basis des Live-Tickers' },
+          { label: '1 Woche', wert: '604.800 Sekunden', hinweis: '7 × 86.400' },
+          { label: 'Schaltjahr', wert: '366 Tage', hinweis: 'alle 4 Jahre (29.02.)' },
+          { label: 'Ostern-Spanne', wert: '22.3. – 25.4.', hinweis: 'Gauß-Algorithmus' },
+          { label: 'Genauigkeit', wert: 'sekundengenau', hinweis: 'basiert auf Gerätezeit' },
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Brutto-Tage, kein Werktags-Rechner',
+        text: 'Der Countdown rechnet mit der lokalen Zeit und Zeitzone Ihres Geräts — eine falsch gestellte Systemuhr verschiebt entsprechend das Ergebnis. Er zählt Brutto-Kalendertage, keine Arbeitstage: Wochenenden und Feiertage sind enthalten. Für die Zählung echter Werktage zwischen zwei festen Daten nutzen Sie den Tagerechner mit Werktags-Option. Die Anzeige dient der Orientierung und Vorfreude, nicht der rechtsverbindlichen Fristberechnung.',
+      },
+    ],
+    quellen: [
+      { titel: 'Physikalisch-Technische Bundesanstalt (PTB) — gesetzliche Zeit und Zeitumstellung in Deutschland', hinweis: 'Zeitzonen, Sommer-/Winterzeit' },
+      { titel: 'Gregorianischer Kalender — Schaltjahresregel (durch 4, außer durch 100 und nicht durch 400)', hinweis: 'Kalender-Methodik' },
+      { titel: 'Gaußsche Osterformel', hinweis: 'Berechnung des Ostersonntags (22. März bis 25. April)' },
     ],
   },
   {
