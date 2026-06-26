@@ -1951,7 +1951,7 @@ Alkohol wird im Körper bevorzugt verbrannt — bevor Fett oder Kohlenhydrate al
       },
       {
         frage: 'Wie viel Kalorien hat Alkohol?',
-        antwort: 'Alkohol liefert 7,1 kcal pro Gramm. Da 1 ml Alkohol 0,789 g wiegt, sind das 5,6 kcal/ml. Ein Glas Wein (0,2 l, 12 %) hat ca. 134 kcal aus Alkohol — dazu kommen noch Kalorien aus Zucker (beim Süßwein mehr). Ein kleines Bier (0,33 l, 5 %) liefert ca. 82 kcal aus Alkohol. Hinzu kommen Kalorien aus Malzzucker.',
+        antwort: 'Alkohol liefert 7,1 kcal pro Gramm. Da 1 ml Alkohol 0,789 g wiegt, sind das 5,6 kcal/ml. Ein Glas Wein (0,2 l, 12 %) hat ca. 134 kcal aus Alkohol — dazu kommen noch Kalorien aus Zucker (beim Süßwein mehr). Ein kleines Bier (0,33 l, 5 %) liefert ca. 92 kcal aus Alkohol. Hinzu kommen Kalorien aus Malzzucker.',
       },
       {
         frage: 'Was ist ein Standardglas Alkohol?',
@@ -2628,7 +2628,7 @@ Ein niedriger glykämischer Index bedeutet einen langsameren Blutzuckeranstieg �
     beispiel: 'Hähnchen eingefroren am 01.01.2026 in Gefrierbeutel: Haltbar bis ca. 01.10.2026–01.01.2027 (9–12 Monate). Vakuumiert: bis 01.07.2027 (18 Monate).',
     erklaerung: `**Tiefkühlkost: Wie lange ist sie wirklich haltbar?**
 
-Viele Menschen fragen sich, wie lange eingefrorene Lebensmittel noch genießbar sind. Die gute Nachricht: Bei −18 °C stoppt das Wachstum aller Mikroorganismen vollständig — eingefrorene Lebensmittel können theoretisch unbegrenzt lang sicher gegessen werden. Aber: Qualität, Geschmack und Textur nehmen trotzdem ab.
+Viele Menschen fragen sich, wie lange eingefrorene Lebensmittel noch genießbar sind. Bei −18 °C wird das Wachstum von Mikroorganismen gestoppt — sie werden aber nur inaktiviert, nicht abgetötet, und beim Auftauen wieder aktiv. Eingefrorene Lebensmittel sind daher sehr lange lagerfähig, büßen aber mit der Zeit Qualität, Geschmack und Textur ein; nach dem Auftauen zügig verbrauchen.
 
 **Warum sinkt die Qualität trotz Einfrieren?**
 

@@ -8,6 +8,44 @@
 
 ---
 
+## 26.06.2026 — W19 Goldstandard kochen-Block (138 Goldstandard gemessen)
+
+Vier Koch-Rechner. Gemischtes YMYL-Profil (Lebensmittelsicherheit bei gefrierdauer, Alkohol/Gesundheit bei
+alkoholgehalt; brotback/naehrwert unkritisch). Alle Werte gegen die echten Components UND externe Primär-
+quellen (BZfE, USDA) geprüft. Vier distinkte Leitformate. Alle Builds Vercel-grün.
+
+**Zwei Beispiel-Stale-Fixes (im jeweiligen Build-Commit, Lehre: Config-beispiel-Felder sind systematisches
+Stale-Nest — bei Multi-Varianten-Rechnern JEDE Variante + ALLE Zahlenwerte durchrechnen, nicht nur das
+Headline-Ergebnis):**
+- **brotback Sauerteig** (`1192ba9`): Config-beispiel „527 g Mehl, 253 g Wasser" basierte auf alter Formel
+  (volles ASG nur vom Wasser abgezogen). Component-korrekt (ASG = 50 % Mehl + 50 % Wasser, TA 200):
+  Hauptteig-Mehl 476 g + ASG 106 g, Wasser 307 g.
+- **naehrwert Makros** (`5f7b093`): Config-beispiel „11 g Protein" pro Portion → Component-exakt 12,6 g
+  (−13 % Fehler); KH/Fett nur Rundung. kcal-Headline (312) war korrekt — nur die Makros stale.
+
+**Builds:**
+- **brotback-rechner** (beispielrechnung, 16 Blöcke, ~1.501 W, `1192ba9`). Bäcker-Prozent (Baker's
+  Percentage). Anker Mischbrot 900 g → Mehl 525/Sauerteig 476. Hydration 65/68/76 %, Backverlust ×0,88.
+- **naehrwert-rechner** (tabelle, 16 Blöcke, ~1.549 W, `5f7b093`). Atwater (P4/KH4/F9). Anker Pfannkuchen
+  1.248 kcal / 4 = 312 kcal, 12,6 g P. Standard-Nährwert-DB. kcal vs. Atwater-Makro-Summe weicht DB-bedingt
+  leicht ab (kein Bug).
+- **gefrierdauer-rechner** (checkliste, 17 Blöcke, ~1.549 W, `bc6f269`). Haltbarkeits-DB gegen BZfE/
+  Verbraucherzentrale geprüft — alle Werte sicher, teils konservativ. Vakuum ×1,5. Anker Hähnchen
+  01.01.2026 → 01.10.2026/01.01.2027, vakuumiert 01.07.2027. Sicherheits-Botschaft: −18 °C inaktiviert
+  Mikroorganismen, tötet sie NICHT ab.
+- **alkoholgehalt-rechner** (vergleich, 17 Blöcke, ~1.559 W, `d6ebd5f`). Misch- + Koch-Modus. Restalkohol-
+  Tabelle = offizielle USDA Table of Nutrient Retention Factors (15 Min 40 %, 30 Min 35 %). Dichte 0,789 g/ml,
+  7,1 kcal/g. Anker Bier+Saft → 4,2 % vol, 19,7 g, 140 kcal. Sicherheits-Botschaft: Alkohol verdampft beim
+  Kochen NIE vollständig (~5 % nach 2,5 h) — relevant für Schwangere/Stillende/Abstinente. Kein Promille-Bezug.
+
+**Zwei Dead-Field-Cleanups (tote nicht-gerenderte Felder, live unschädlich):** gefrierdauer-erklaerung
+(„unbegrenzt sicher" → Inaktivierungs-Aussage), alkoholgehalt-FAQ (Bier 82 → 92 kcal).
+
+**Stand nach kochen-Block: 138/178 Goldstandard. Offen bis AdSense-Resubmit: 40 (real 38 ohne die zwei
+Spezialfälle).** Finanzen (A+B) + Mathe + kochen abgeschlossen.
+
+---
+
 ## 26.06.2026 — W19 Goldstandard Mathe-Block (134 Goldstandard gemessen)
 
 Sechs Mathe-Rechner. Nicht-YMYL (außer abi = Bildungsrecht/KMK), Prüfpunkt durchgängig Formel-/Verfahrens-
