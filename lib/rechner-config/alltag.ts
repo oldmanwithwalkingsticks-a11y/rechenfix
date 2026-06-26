@@ -3027,9 +3027,9 @@ Ein älterer Hund hat andere Bedürfnisse als ein junger: **weichere Gelenke**, 
   },
   {
     slug: 'waehrungsrechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-27',
     titel: 'Währungsrechner',
-    beschreibung: 'Beträge zwischen 29 Währungen umrechnen — mit statischen Referenzkursen vom 14.04.2026.',
+    beschreibung: 'Beträge zwischen 29 Währungen umrechnen — mit statischen Referenzkursen vom 27.06.2026.',
     kategorie: 'Alltag',
     kategorieSlug: 'alltag',
     metaTitle: 'Währungsrechner — 29 Währungen weltweit',
@@ -3037,14 +3037,14 @@ Ein älterer Hund hat andere Bedürfnisse als ein junger: **weichere Gelenke**, 
     keywords: ['währungsrechner', 'wechselkurs rechner', 'euro dollar umrechnen', 'euro franken umrechnen', 'währung umrechnen', 'devisenrechner', 'wechselkurse'],
     icon: '💱',
     formel: 'Umrechnung = (Betrag / Kurs_von) × Kurs_nach. Alle Kurse basieren auf EUR = 1.',
-    beispiel: 'Beispiel: 100 € in USD bei Kurs 1,08 → (100 / 1,0) × 1,08 = 108,00 $. Umgekehrt: 100 $ in € → (100 / 1,08) × 1,0 = 92,59 €.',
+    beispiel: 'Beispiel: 100 € in USD bei Kurs 1,135 → (100 / 1,0) × 1,135 = 113,50 $. Umgekehrt: 100 $ in € → (100 / 1,135) × 1,0 = 88,11 €.',
     erklaerung: `**Wie funktioniert der Währungsrechner?**
 
 Der Währungsrechner rechnet Beträge zwischen insgesamt 29 Währungen um — darunter Euro, US-Dollar, britisches Pfund, Schweizer Franken, japanischer Yen sowie zahlreiche europäische, amerikanische und asiatische Währungen. Alle Kurse sind auf den Euro (EUR = 1) normiert, sodass jede Umrechnung über den Umweg „ausgangswährung → EUR → zielwährung" möglich ist. Der Rechner zeigt Ihnen live das Ergebnis, den aktuellen Wechselkurs in beide Richtungen und eine Schnellreferenz für die wichtigsten Reisewährungen.
 
 **Statische Referenzkurse — keine Echtzeitkurse**
 
-Wichtiger Hinweis: Unser Währungsrechner arbeitet mit **statischen Referenzkursen**, die auf den Stand vom 14. April 2026 festgelegt sind. Das bedeutet, die tatsächlichen Wechselkurse an den Devisenmärkten können zum Zeitpunkt Ihres Besuchs abweichen — manchmal um wenige Prozent, in turbulenten Marktphasen auch mehr. Für grobe Orientierung beim Reiseplanung, beim Vergleich von Preisen oder beim Kopfrechnen im Urlaub ist das völlig ausreichend. Für echte Transaktionen (Geldwechsel, Überweisung, Online-Shopping) sollten Sie aber immer die aktuellen Kurse Ihrer Bank oder eines Live-Dienstes (z. B. EZB-Referenzkurs, xe.com, oanda.com) zurate ziehen.
+Wichtiger Hinweis: Unser Währungsrechner arbeitet mit **statischen Referenzkursen**, die auf den Stand vom 27. Juni 2026 festgelegt sind. Das bedeutet, die tatsächlichen Wechselkurse an den Devisenmärkten können zum Zeitpunkt Ihres Besuchs abweichen — manchmal um wenige Prozent, in turbulenten Marktphasen auch mehr. Für grobe Orientierung beim Reiseplanung, beim Vergleich von Preisen oder beim Kopfrechnen im Urlaub ist das völlig ausreichend. Für echte Transaktionen (Geldwechsel, Überweisung, Online-Shopping) sollten Sie aber immer die aktuellen Kurse Ihrer Bank oder eines Live-Dienstes (z. B. EZB-Referenzkurs, xe.com, oanda.com) zurate ziehen.
 
 **Warum keine Echtzeit-Kurse?**
 
@@ -3068,7 +3068,7 @@ Ergänzend zum Währungsrechner sind unser Einheiten-Umrechner (für Längen, Ge
     faq: [
       {
         frage: 'Sind die Wechselkurse aktuell?',
-        antwort: 'Nein, der Rechner nutzt statische Referenzkurse mit Stand vom 14.04.2026. Für grobe Orientierung ist das ausreichend. Für echte Transaktionen nutzen Sie bitte die aktuellen Kurse Ihrer Bank oder einen Echtzeit-Dienst (EZB-Referenzkurs, xe.com).',
+        antwort: 'Nein, der Rechner nutzt statische Referenzkurse mit Stand vom 27.06.2026. Für grobe Orientierung ist das ausreichend. Für echte Transaktionen nutzen Sie bitte die aktuellen Kurse Ihrer Bank oder einen Echtzeit-Dienst (EZB-Referenzkurs, xe.com).',
       },
       {
         frage: 'Welche Währungen unterstützt der Rechner?',
@@ -3086,6 +3086,176 @@ Ergänzend zum Währungsrechner sind unser Einheiten-Umrechner (für Längen, Ge
         frage: 'Wie kann ich günstig Geld wechseln?',
         antwort: 'Kostenfrei wechseln Sie meist mit speziellen Reisekreditkarten oder Neobanken (z. B. Wise, Revolut, DKB). Vermeiden Sie Wechselstuben an Flughäfen und Touristenzentren. Bargeld vor der Reise in Deutschland zu tauschen ist oft teurer als am Reiseziel Geld abzuheben.',
       },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Währungen umrechnen über den Euro als Basis',
+        html: `<p>Der <strong>Währungsrechner</strong> rechnet Beträge zwischen 29 Währungen um — von Euro, Dollar und Pfund bis zu Yen, Lira und Won. Alle Kurse sind auf den <strong>Euro normiert (EUR = 1)</strong>, sodass jede Umrechnung über den Euro als gemeinsame Basis läuft: erst in Euro, dann in die Zielwährung.</p><p>Die Grundformel ist einfach: <strong>(Betrag ÷ Kurs der Ausgangswährung) × Kurs der Zielwährung</strong>. Für zwei Fremdwährungen ohne direkten Kurs entsteht so automatisch ein <strong>Kreuzkurs</strong> über den Euro. Das Ergebnis erscheint live in beide Richtungen.</p><p>Ein wichtiger Hinweis vorweg, der weiter unten ausführlich erklärt wird: Die hinterlegten Kurse sind <strong>Referenzwerte mit Stichtag</strong>, keine Live-Kurse. Wer Reisetermine plant, kombiniert den Rechner gern mit dem <a href="/alltag/uhrzeitrechner">Uhrzeitrechner</a> für die Zeitverschiebung am Zielort.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: 100 Euro in US-Dollar',
+        schritte: [
+          { label: 'Ausgangsbetrag', formel: '100 €', ergebnis: '100 €' },
+          { label: 'EUR-Kurs (Basis)', formel: 'Kurs_EUR = 1,0', ergebnis: 'Referenz' },
+          { label: 'USD-Kurs', formel: 'Kurs_USD = 1,135', ergebnis: '1 € = 1,135 $' },
+          { label: 'Umrechnung', formel: '(100 / 1,0) × 1,135', ergebnis: '113,50 $' },
+        ],
+        fazit: 'Bei einem Referenzkurs von 1,135 werden aus 100 € rund 113,50 US-Dollar. Die Formel lautet immer (Betrag ÷ Kurs der Ausgangswährung) × Kurs der Zielwährung — weil alle Kurse auf den Euro als Basis (EUR = 1) normiert sind. Stand der Kurse: 27.06.2026.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Referenzkurse (Auszug, Stand 27.06.2026)',
+        kopf: ['Währung', 'Code', '1 € ='],
+        zeilen: [
+          ['US-Dollar', 'USD', '1,135 $'],
+          ['Britisches Pfund', 'GBP', '0,862 £'],
+          ['Schweizer Franken', 'CHF', '0,915 Fr.'],
+          ['Japanischer Yen', 'JPY', '183,5 ¥'],
+          ['Polnischer Zloty', 'PLN', '4,24 zł'],
+          ['Türkische Lira', 'TRY', '53,3 ₺'],
+          ['Tschechische Krone', 'CZK', '24,25 Kč'],
+          ['Ungarischer Forint', 'HUF', '356 Ft'],
+          ['Thailändischer Baht', 'THB', '37,9 ฿'],
+        ],
+        fussnote: 'Auszug der Referenzkurse mit Stand 27.06.2026, Basis EUR = 1. Der Rechner kennt 29 Währungen. Es sind Referenz-Momentaufnahmen, keine Live-Kurse — die tatsächlichen Marktkurse ändern sich täglich.',
+      },
+      {
+        typ: 'text',
+        titel: 'Umrechnungslogik und Kreuzkurse',
+        html: `<p>Hinter dem Rechner steckt ein einfaches Prinzip: Jede Währung hat einen festen Kurs zum <strong>Euro</strong>. 1 € sind zum Beispiel 1,135 $ oder 183,5 ¥. Will man von einer Fremdwährung in eine andere umrechnen, geht der Weg immer über den Euro als <strong>Drehscheibe</strong>.</p><p>Beispiel Dollar nach Pfund: Man rechnet die Dollar zuerst in Euro um (Betrag ÷ 1,135) und das Ergebnis dann in Pfund (× 0,862). Diesen abgeleiteten Kurs nennt man <strong>Kreuzkurs</strong> — er ergibt sich, indem man die beiden Euro-Kurse durcheinander teilt.</p><p>Genau so arbeiten auch professionelle Systeme: Der Euro (oder im Welthandel der US-Dollar) dient als Leitwährung, gegen die alle anderen gemessen werden. Der Vorteil: Man braucht nicht für jedes Währungspaar einen eigenen Kurs, sondern nur einen Kurs je Währung zur Basis.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: Kreuzkurs Dollar in Pfund',
+        schritte: [
+          { label: 'Ausgangsbetrag', formel: '200 US-Dollar', ergebnis: '200 $' },
+          { label: 'Schritt 1: $ → €', formel: '200 / 1,135', ergebnis: '176,21 €' },
+          { label: 'Schritt 2: € → £', formel: '176,21 × 0,862', ergebnis: '151,89 £' },
+          { label: 'Kreuzkurs USD/GBP', formel: '0,862 / 1,135', ergebnis: '≈ 0,759' },
+        ],
+        fazit: 'Für zwei Währungen ohne direkten Kurs — etwa Dollar zu Pfund — läuft die Rechnung über den Euro als Drehscheibe: erst in Euro, dann in die Zielwährung. 200 $ ergeben so rund 152 £. Den Kreuzkurs erhält man, indem man die beiden EUR-Kurse durcheinander teilt.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Referenzkurs ist nicht gleich Live-Kurs',
+        text: 'Wichtig: Dieser Rechner arbeitet mit statischen Referenzkursen mit Stichtag 27.06.2026 — das sind KEINE Live-Kurse. Die tatsächlichen Wechselkurse an den Devisenmärkten ändern sich täglich, in turbulenten Phasen auch innerhalb von Stunden. Für eine tagesaktuelle oder transaktionsrelevante Umrechnung nutzen Sie die EZB-Referenzkurse (ecb.europa.eu) oder die Konditionen Ihrer Bank. Banken, Wechselstuben und Kreditkarten erheben zudem Aufschläge (meist 1–3 % plus Gebühren) — der reale Kurs beim Geldwechsel weicht also zusätzlich vom Referenzkurs ab.',
+      },
+      {
+        typ: 'text',
+        titel: 'Referenzkurs gegen Realkurs: die Aufschläge',
+        html: `<p>Der wichtigste praktische Punkt: Der <strong>Referenzkurs</strong> ist nicht der Kurs, den man beim Geldwechseln bekommt. Banken und Wechselstuben schlagen eine <strong>Marge</strong> auf — meist 1 bis 3 %, an Flughäfen auch 10 % und mehr. Kreditkarten rechnen näher am Marktkurs, viele Banken erheben aber zusätzlich 1 bis 2 % Auslandseinsatzgebühr.</p><p>Eine versteckte Falle ist die <strong>dynamische Währungsumrechnung (DCC)</strong>: Beim Kartenzahlen im Ausland fragt das Terminal manchmal, ob in Euro statt in Landeswährung abgerechnet werden soll. Das klingt bequem, kostet aber fast immer einen schlechteren Kurs plus Aufschlag — daher <strong>immer in Landeswährung zahlen</strong>.</p><p>Wer im Ausland einkauft und sich die Mehrwertsteuer erstatten lässt, findet die Logik dazu im <a href="/finanzen/mwst-rueckerstattung-rechner">MwSt-Rückerstattungs-Rechner</a> — gerade bei Tax-Free-Shopping außerhalb der EU lohnt sich der Blick.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Warum statische Kurse statt Live-Daten?',
+        html: `<p>Warum nutzt der Rechner keine <strong>Live-Kurse</strong>? Echtzeit-Wechselkurse erfordern eine kostenpflichtige Datenanbindung an einen Marktanbieter und ständige Aktualisierung. Für einen kostenlosen Rechner wäre das unwirtschaftlich — und für die meisten Alltagsfragen sind Referenzkurse mit Stichtag völlig ausreichend.</p><p>Wechselkurse großer Währungen schwanken an normalen Tagen nur um <strong>Zehntelprozent</strong>. Für den Kaffee in Istanbul, den Preis im New Yorker Online-Shop oder die Trinkgeld-Kalkulation in Prag spielt das keine Rolle. Erst bei größeren Beträgen oder echten Transaktionen lohnt der Blick auf den tagesaktuellen Kurs.</p><p>Geplant ist als Erweiterung eine <strong>automatische wöchentliche Aktualisierung</strong> der Referenzkurse aus den EZB-Daten, mit der statischen Liste als Fallback. Bis dahin gilt der angegebene Stichtag — der hier auf den 27. Juni 2026 aktualisiert wurde.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Referenzkurs gegen Realkurs',
+        spalteA: 'Referenzkurs',
+        spalteB: 'Realkurs beim Wechseln',
+        zeilen: [
+          { kriterium: 'Quelle', a: 'EZB / Marktmittel', b: 'Bank, Wechselstube, Karte' },
+          { kriterium: 'Aufschlag', a: 'keiner', b: '1–10 % je nach Anbieter' },
+          { kriterium: 'Zweck', a: 'Orientierung, Vergleich', b: 'tatsächliche Transaktion' },
+          { kriterium: 'Beispiel 500 €', a: '567,50 $ (Kurs 1,135)', b: '~550 $ (3 % Aufschlag)' },
+          { kriterium: 'DCC beim Bezahlen', a: 'nicht relevant', b: 'immer in Landeswährung zahlen' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: was der Aufschlag kostet',
+        schritte: [
+          { label: 'Referenzwert', formel: '500 € × 1,135', ergebnis: '567,50 $' },
+          { label: 'Wechselstuben-Aufschlag', formel: '+ 3 %', ergebnis: 'schlechterer Kurs' },
+          { label: 'Effektiv erhalten', formel: '567,50 × 0,97', ergebnis: '~550,48 $' },
+          { label: 'Differenz', formel: '567,50 − 550,48', ergebnis: '~17 $ weniger' },
+        ],
+        fazit: 'Der Referenzkurs ist nicht der Kurs, den man beim Wechseln bekommt. Bei 3 % Aufschlag erhält man für 500 € statt 567,50 $ nur rund 550 $ — etwa 17 $ weniger. An Flughäfen sind 10 % und mehr üblich; dann schrumpft der Betrag noch deutlicher.',
+      },
+      {
+        typ: 'text',
+        titel: 'Was Wechselkurse beeinflusst',
+        html: `<p>Warum schwanken Wechselkurse überhaupt? Sie entstehen aus <strong>Angebot und Nachfrage</strong> an den internationalen Devisenmärkten — und die werden von mehreren Faktoren getrieben. Die wichtigsten sind die <strong>Leitzinsen</strong>: Höhere Zinsen locken internationales Kapital an und stärken eine Währung, weil Anleger dort mehr Rendite erwarten.</p><p>Ein zweiter Faktor ist die <strong>Inflation</strong>: Steigen die Preise in einem Land schnell, verliert seine Währung an Kaufkraft und tendenziell an Wert. Das erklärt, warum Währungen wie die türkische Lira über die Jahre stark abgewertet haben.</p><p>Dazu kommen <strong>wirtschaftliche und politische Stabilität</strong>, die Handelsbilanz und Rohstoffpreise. Die EZB veröffentlicht werktäglich um 16:00 Uhr ihre offiziellen Euro-Referenzkurse — die wichtigste neutrale Orientierungsgröße im Euroraum.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Die wichtigsten Reisewährungen',
+        html: `<p>Innerhalb der <strong>Eurozone</strong> entfällt das Umrechnen ganz — 20 EU-Länder zahlen mit dem Euro. Doch schon beliebte Nachbarziele tanzen aus der Reihe: Die <strong>Schweiz</strong> nutzt den Franken, <strong>Tschechien</strong> die Krone, <strong>Polen</strong> den Zloty, <strong>Ungarn</strong> den Forint.</p><p>Für Fernreisen sind der <strong>US-Dollar</strong> (USA, viele Pauschalpreise weltweit), das <strong>britische Pfund</strong> und der <strong>Yen</strong> die häufigsten Größen. Stark schwankende Währungen wie die <strong>türkische Lira</strong> machen das Umrechnen besonders wichtig, weil sich Preise gefühlt schnell ändern.</p><p>Der Rechner deckt mit 29 Währungen praktisch alle gängigen Reiseziele und Handelspartner ab. Für seltenere Währungen wie den vietnamesischen Dong oder das ägyptische Pfund empfiehlt sich ein spezialisierter Live-Dienst.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Typische Aufschläge beim Geldwechsel',
+        kopf: ['Wechsel-Weg', 'typischer Aufschlag', 'Hinweis'],
+        zeilen: [
+          ['Hausbank (Bargeld)', '1–3 %', 'oft plus feste Gebühr'],
+          ['Wechselstube Innenstadt', '2–5 %', 'Kurse vergleichen'],
+          ['Flughafen-Wechselstube', '10 % und mehr', 'möglichst meiden'],
+          ['Kreditkarte (Visa/Mastercard)', 'nahe Marktkurs', 'plus 1–2 % Auslandsgebühr'],
+          ['Reisekarte / Neobank', '0–1 %', 'oft gebührenfrei (Wise, Revolut)'],
+        ],
+        fussnote: 'Richtwerte; die konkreten Konditionen unterscheiden sich je Anbieter und Karte. Am teuersten ist meist der Bargeldtausch am Flughafen, am günstigsten das Abheben mit einer gebührenfreien Reisekreditkarte am Zielort. Wer mehrere kleine Beträge abhebt, zahlt oft mehrfach feste Automatengebühren — größere Beträge auf einmal abzuheben ist dann günstiger.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Bargeld oder Karte auf Reisen?',
+        spalteA: 'Bargeld',
+        spalteB: 'Karte / Smartphone',
+        zeilen: [
+          { kriterium: 'Kurs', a: 'Wechselstuben-Marge', b: 'nahe Marktkurs (Visa/MC)' },
+          { kriterium: 'Gebühren', a: 'Tauschgebühr', b: 'evtl. Auslandseinsatzgebühr' },
+          { kriterium: 'Sicherheit', a: 'Verlust-/Diebstahlrisiko', b: 'sperrbar' },
+          { kriterium: 'Akzeptanz', a: 'überall, auch bei Ausfall', b: 'nicht überall, Netz nötig' },
+          { kriterium: 'Empfehlung', a: 'kleiner Notgroschen', b: 'Hauptzahlung, gebührenfreie Karte' },
+        ],
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Geld wechseln auf Reisen',
+        punkte: [
+          'Vor der Reise den aktuellen EZB-Referenzkurs als Vergleichsmaßstab notieren',
+          'Eine Karte ohne Fremdwährungs- und Abhebegebühr mitnehmen',
+          'Bargeld bevorzugt am Zielort am Automaten abheben, nicht am Flughafen tauschen',
+          'Beim Kartenzahlen immer in Landeswährung abrechnen (DCC ablehnen)',
+          'Kleinen Bargeld-Notgroschen für Trinkgeld und Kartenausfall dabeihaben',
+          'Wechselstuben-Kurse vergleichen — der erste Schalter ist selten der beste',
+        ],
+      },
+      {
+        typ: 'statistik',
+        titel: 'Währungs-Eckwerte',
+        werte: [
+          { label: 'Basis', wert: 'EUR = 1', hinweis: 'alle Kurse darauf normiert' },
+          { label: '1 € (Stand 27.06.2026)', wert: '1,135 $', hinweis: 'Referenzkurs' },
+          { label: 'Bankaufschlag', wert: '1–3 %', hinweis: 'Flughafen 10 %+' },
+          { label: 'EZB-Kurs', wert: 'werktäglich 16:00', hinweis: 'offizielle Referenz' },
+          { label: 'Währungen im Rechner', wert: '29', hinweis: 'inkl. Reisewährungen' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Reise-Tipps: günstig an Fremdwährung kommen',
+        html: `<p>Für die Urlaubskasse lohnen sich ein paar Faustregeln. <strong>Bargeld am Zielort abheben</strong> ist meist günstiger, als in Deutschland zu tauschen — vorausgesetzt, man nutzt eine Karte ohne Fremdwährungsgebühr. Den Tausch an <strong>Flughafen-Wechselstuben</strong> sollte man dagegen meiden, weil dort die schlechtesten Kurse warten.</p><p>Sinnvoll ist ein <strong>Mix</strong>: eine gebührenfreie Reisekreditkarte für die meisten Zahlungen plus ein kleiner Bargeldbetrag für Trinkgeld, Märkte und den Fall, dass das Kartennetz ausfällt. So bleibt man flexibel, ohne unnötig Marge zu zahlen.</p><p>Wer die Reise plant, behält auch das Datum im Blick: Der <a href="/alltag/countdown">Countdown-Rechner</a> zählt die Tage bis zum Abflug — und der Wechselkurs lässt sich kurz vor Abreise noch einmal gegen den aktuellen EZB-Kurs prüfen.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Häufige Fehler beim Umrechnen',
+        html: `<p>Beim Umrechnen schleichen sich typische Fehler ein. Der erste: den <strong>Referenzkurs für den Realkurs halten</strong>. Wer am Flughafen wechselt, bekommt deutlich weniger als die Tabelle verspricht — die Marge frisst schnell 10 %.</p><p>Zweitens das <strong>DCC-Angebot annehmen</strong>: Lässt man die Kartenzahlung im Ausland in Euro statt Landeswährung abrechnen, zahlt man fast immer einen Aufschlag. Die Regel lautet ausnahmslos: in Landeswährung zahlen.</p><p>Drittens die <strong>Kommastelle</strong> bei Währungen mit hohem Kurs: Bei Yen oder Won steht hinter einem Euro schnell eine drei- oder vierstellige Zahl. Wer hier eine Null übersieht, verschätzt sich um den Faktor zehn — beim Umrechnen großer Beträge ein teurer Irrtum.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Referenzkurse mit Stichtag — keine Anlageberatung',
+        text: 'Alle Kurse sind statische Referenzwerte mit Stichtag 27.06.2026 und keine Live-Kurse. Sie dienen der groben Orientierung, nicht als Grundlage für Transaktionen oder Anlageentscheidungen. Für tagesaktuelle Kurse nutzen Sie die EZB-Referenzkurse oder Ihre Bank. Der reale Kurs beim Wechseln weicht durch Aufschläge ab. Eine automatische wöchentliche Kursaktualisierung ist als Erweiterung geplant; bis dahin gilt der angegebene Stichtag.',
+      },
+    ],
+    quellen: [
+      { titel: 'EZB — Euro-Referenzkurse', url: 'https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates', hinweis: 'Tägliche offizielle Referenzkurse (werktags 16:00); Basis der hinterlegten Kurse, Stand 27.06.2026' },
+      { titel: 'Referenzkurs-Prinzip (Basis EUR = 1, Kreuzkurs über den Euro)', hinweis: 'Umrechnungsmethodik des Rechners' },
     ],
   },
   {

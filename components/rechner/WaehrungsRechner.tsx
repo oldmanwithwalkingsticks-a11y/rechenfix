@@ -7,39 +7,39 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 
-// Statische Referenzkurse (Basis EUR = 1). Stand: 14.04.2026
-const KURS_DATUM = '14.04.2026';
+// Statische Referenzkurse (Basis EUR = 1). Stand: 27.06.2026
+const KURS_DATUM = '27.06.2026';
 
 const WAEHRUNGEN: { code: string; name: string; symbol: string; kurs: number }[] = [
   { code: 'EUR', name: 'Euro', symbol: '€', kurs: 1.0 },
-  { code: 'USD', name: 'US-Dollar', symbol: '$', kurs: 1.08 },
-  { code: 'GBP', name: 'Britisches Pfund', symbol: '£', kurs: 0.86 },
-  { code: 'CHF', name: 'Schweizer Franken', symbol: 'Fr.', kurs: 0.95 },
-  { code: 'JPY', name: 'Japanischer Yen', symbol: '¥', kurs: 163.0 },
-  { code: 'PLN', name: 'Polnischer Zloty', symbol: 'zł', kurs: 4.28 },
-  { code: 'CZK', name: 'Tschechische Krone', symbol: 'Kč', kurs: 25.10 },
-  { code: 'TRY', name: 'Türkische Lira', symbol: '₺', kurs: 38.50 },
-  { code: 'SEK', name: 'Schwedische Krone', symbol: 'kr', kurs: 11.25 },
-  { code: 'NOK', name: 'Norwegische Krone', symbol: 'kr', kurs: 11.45 },
+  { code: 'USD', name: 'US-Dollar', symbol: '$', kurs: 1.135 },
+  { code: 'GBP', name: 'Britisches Pfund', symbol: '£', kurs: 0.862 },
+  { code: 'CHF', name: 'Schweizer Franken', symbol: 'Fr.', kurs: 0.915 },
+  { code: 'JPY', name: 'Japanischer Yen', symbol: '¥', kurs: 183.5 },
+  { code: 'PLN', name: 'Polnischer Zloty', symbol: 'zł', kurs: 4.24 },
+  { code: 'CZK', name: 'Tschechische Krone', symbol: 'Kč', kurs: 24.25 },
+  { code: 'TRY', name: 'Türkische Lira', symbol: '₺', kurs: 53.3 },
+  { code: 'SEK', name: 'Schwedische Krone', symbol: 'kr', kurs: 10.85 },
+  { code: 'NOK', name: 'Norwegische Krone', symbol: 'kr', kurs: 10.85 },
   { code: 'DKK', name: 'Dänische Krone', symbol: 'kr', kurs: 7.46 },
-  { code: 'HUF', name: 'Ungarischer Forint', symbol: 'Ft', kurs: 395.0 },
-  { code: 'RON', name: 'Rumänischer Leu', symbol: 'lei', kurs: 4.98 },
+  { code: 'HUF', name: 'Ungarischer Forint', symbol: 'Ft', kurs: 356.0 },
+  { code: 'RON', name: 'Rumänischer Leu', symbol: 'lei', kurs: 5.22 },
   { code: 'BGN', name: 'Bulgarischer Lew', symbol: 'лв', kurs: 1.96 },
-  { code: 'AUD', name: 'Australischer Dollar', symbol: 'A$', kurs: 1.67 },
-  { code: 'CAD', name: 'Kanadischer Dollar', symbol: 'C$', kurs: 1.48 },
-  { code: 'NZD', name: 'Neuseeland-Dollar', symbol: 'NZ$', kurs: 1.82 },
-  { code: 'CNY', name: 'Chinesischer Yuan', symbol: '¥', kurs: 7.85 },
-  { code: 'INR', name: 'Indische Rupie', symbol: '₹', kurs: 90.50 },
-  { code: 'BRL', name: 'Brasilianischer Real', symbol: 'R$', kurs: 5.95 },
-  { code: 'THB', name: 'Thailändischer Baht', symbol: '฿', kurs: 39.20 },
-  { code: 'KRW', name: 'Südkoreanischer Won', symbol: '₩', kurs: 1475.0 },
-  { code: 'ZAR', name: 'Südafrikanischer Rand', symbol: 'R', kurs: 20.35 },
-  { code: 'MXN', name: 'Mexikanischer Peso', symbol: '$', kurs: 19.85 },
-  { code: 'SGD', name: 'Singapur-Dollar', symbol: 'S$', kurs: 1.46 },
-  { code: 'HKD', name: 'Hongkong-Dollar', symbol: 'HK$', kurs: 8.45 },
-  { code: 'ILS', name: 'Israelischer Schekel', symbol: '₪', kurs: 4.05 },
-  { code: 'AED', name: 'UAE Dirham', symbol: 'د.إ', kurs: 3.97 },
-  { code: 'RUB', name: 'Russischer Rubel', symbol: '₽', kurs: 100.0 },
+  { code: 'AUD', name: 'Australischer Dollar', symbol: 'A$', kurs: 1.63 },
+  { code: 'CAD', name: 'Kanadischer Dollar', symbol: 'C$', kurs: 1.61 },
+  { code: 'NZD', name: 'Neuseeland-Dollar', symbol: 'NZ$', kurs: 1.97 },
+  { code: 'CNY', name: 'Chinesischer Yuan', symbol: '¥', kurs: 8.00 },
+  { code: 'INR', name: 'Indische Rupie', symbol: '₹', kurs: 111.1 },
+  { code: 'BRL', name: 'Brasilianischer Real', symbol: 'R$', kurs: 5.78 },
+  { code: 'THB', name: 'Thailändischer Baht', symbol: '฿', kurs: 37.9 },
+  { code: 'KRW', name: 'Südkoreanischer Won', symbol: '₩', kurs: 1725.0 },
+  { code: 'ZAR', name: 'Südafrikanischer Rand', symbol: 'R', kurs: 20.2 },
+  { code: 'MXN', name: 'Mexikanischer Peso', symbol: '$', kurs: 21.3 },
+  { code: 'SGD', name: 'Singapur-Dollar', symbol: 'S$', kurs: 1.44 },
+  { code: 'HKD', name: 'Hongkong-Dollar', symbol: 'HK$', kurs: 8.85 },
+  { code: 'ILS', name: 'Israelischer Schekel', symbol: '₪', kurs: 3.90 },
+  { code: 'AED', name: 'UAE Dirham', symbol: 'د.إ', kurs: 4.17 },
+  { code: 'RUB', name: 'Russischer Rubel', symbol: '₽', kurs: 98.0 },
 ];
 
 function umrechnen(betrag: number, von: string, nach: string): number {
