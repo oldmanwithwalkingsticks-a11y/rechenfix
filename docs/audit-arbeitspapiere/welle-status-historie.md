@@ -4,7 +4,57 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 25.06.2026
+**Stand:** 26.06.2026
+
+---
+
+## 26.06.2026 — W19 Goldstandard Mathe-Block (134 Goldstandard gemessen)
+
+Sechs Mathe-Rechner. Nicht-YMYL (außer abi = Bildungsrecht/KMK), Prüfpunkt durchgängig Formel-/Verfahrens-
+Korrektheit gegen die echten Libs/Components. Sechs distinkte Leitformate → saubere Fingerprint-Streuung.
+Alle Builds Vercel-grün.
+
+**Vorgelagerter Fix (Lib-Bug-zuerst-Prinzip):**
+- **abi-rechner KMK-Note** (`0a99c8c`): Component bildete die offizielle KMK-Durchschnittsnote falsch ab —
+  (1) `Math.round` statt offiziellem **Abschneiden (floor)** auf 1 Nachkommastelle, (2) 1,0-Cap erst bei
+  840 statt offiziell **823** Punkten. Folge: 823 Punkte → 1,09 statt 1,0 (YMYL, NC-relevant). Gefixt:
+  `Math.floor(note*10 + 1e-9)/10` (das +1e-9 fängt Gleitkomma-Defizite an exakten 0,1-Grenzen ab, z. B.
+  660 → 2,0), 823-Cap, formatNote auf 1 Nachkommastelle. Chat-Claude hatte den Bug zunächst übersehen
+  (Annahme: Math.max bilde 823 ab); Code-Hard-Stop fing es. Beispiel für den Wert des Zwei-Claude-
+  Resolver-Checks.
+
+**Builds:**
+- **prozentuale-veraenderung-rechner** (tabelle, 17 Blöcke, ~1.546 W, `62eda19`). SSOT
+  `lib/berechnungen/prozentuale-veraenderung.ts`. Anker 80→100 = +25 %. Kern: Prozent vs. Prozentpunkte,
+  Asymmetrie (+25 % dann −25 % ≠ Ausgang). Slug-Drift im Prompt von Code korrigiert: prozentrechner +
+  dreisatz sind kategorieSlug 'alltag', nicht 'mathe' → Links /alltag/... statt /mathe/... (Lehre L:
+  kategorieSlug der Link-Ziele immer verifizieren, nie aus Dateizugehörigkeit ableiten).
+- **potenz-rechner** (beispielrechnung, 18 Blöcke, ~1.604 W, `ed38f72`). SSOT `lib/berechnungen/potenz.ts`.
+  Anker 2¹⁰=1.024, √144=12, log₁₀1000=3. Potenz/Wurzel/Log als Umkehrungen, Potenzgesetze, Sonderfälle.
+- **gleichungsrechner** (vergleich, 17 Blöcke, ~1.552 W, `782f299`). Component-only. Mitternachtsformel,
+  Diskriminante D=b²−4ac, drei Fälle (D>0/=0/<0), Satz von Vieta. Anker linear x=3, quadratisch x₁=3/x₂=2.
+- **abi-rechner** (tabelle, 17 Blöcke, ~1.525 W, `3d05da6`). Component-only (KMK-Fix vorgelagert). Formel
+  17/3−Punkte/180 (floor, 1,0 ab 823). Block I (max 600) + Block II (max 300). Anker 580→2,4, 823→1,0,
+  643→2,0, 463→3,0. Bestehen ≥300/Block I≥200/Block II≥100. Bundesland-Variation (Formel gleich, Punkte-
+  Ermittlung verschieden). Dead-erklaerung-Stale-Fix mit gemacht (Eckwert 2,7→2,6 floor-korrekt).
+- **wissenschaftlicher-taschenrechner** (checkliste, 18 Blöcke, ~1.577 W, `5c6d0cc`). Component+Lib
+  `taschenrechner.ts`. Interaktives Tool (sin/cos/tan/log/ln/exp/√/xʸ/n!/π/e, DEG/RAD, Klammern). Anker
+  sin30°=0,5 (DEG), log1000=3, 2^10=1024, 5!=120. Kern: DEG vs. RAD (häufigster Bedienfehler).
+- **zufallszahl-generator** (statistik, 18 Blöcke, ~1.545 W, `f3906c8`). SSOT `lib/berechnungen/zufallszahl.ts`.
+  Gleichverteilung floor(random×(hi−lo+1))+lo. Fünf Modi (Zahl/Würfel/Münze/Lotto/Passwort). Lotto 6 aus 49
+  = C(49,6) = 13.983.816. Kern: Pseudozufall vs. echter Zufall (Math.random = PRNG, kein CSPRNG → für
+  Kryptografie crypto.getRandomValues), Gesetz der großen Zahlen.
+
+**Zentrale Lehre Mathe-Block:** Auch nicht-YMYL-Rechner haben verifizierbare Korrektheits-Fallen — abi war
+ein echter Rechtsstand-Bug (KMK-Anlage-Tabelle vs. naive Formel). Und: Chat-Claude darf kategorieSlug von
+Link-Zielen NIE aus der Lib-Dateizugehörigkeit ableiten (prozentrechner/dreisatz stehen in mathe.ts, sind
+aber 'alltag'). Verifizierte Pfad-Referenz: /alltag/{prozentrechner,dreisatz-rechner};
+/mathe/{bruchrechner,potenz-rechner,gleichungsrechner,pythagoras-rechner,einheiten-umrechner,
+durchschnitt-rechner,primzahl-rechner,quersumme-rechner,ggt-kgv-rechner,notenschluessel-rechner,
+volumenrechner,flaechenrechner}.
+
+**Stand nach Mathe-Block: 134/178 Goldstandard. Offen bis AdSense-Resubmit: 44 (real 42 ohne die zwei
+Spezialfälle brutto-netto + wohngeld).** Block A + B (finanzen) + Mathe abgeschlossen.
 
 ---
 
