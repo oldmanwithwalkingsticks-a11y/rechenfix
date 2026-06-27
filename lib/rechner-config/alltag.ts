@@ -2285,7 +2285,7 @@ Der Preis pro Gigabyte ist eine gute Kennzahl, um Tarife zu vergleichen. In Deut
   },
   {
     slug: 'umzugskosten-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-27',
     titel: 'Umzugskosten-Rechner',
     beschreibung: 'Umzugskosten berechnen: Geschätzte Kosten für Umzugsfirma, Transporter, Verpackung und Nebenkosten.',
     kategorie: 'Alltag',
@@ -2295,7 +2295,7 @@ Der Preis pro Gigabyte ist eine gute Kennzahl, um Tarife zu vergleichen. In Deut
     keywords: ['umzugskosten rechner', 'umzugskosten berechnen', 'was kostet ein umzug', 'umzugsfirma kosten', 'umzug kosten schätzen', 'umzugskosten deutschland', 'umzug selbst organisiert kosten', 'transporter umzug kosten', 'umzugskosten steuer absetzen', 'umzug checkliste'],
     icon: '📦',
     formel: 'Kosten (Umzugsfirma) = Wohnungsgröße × Kosten/m² + Etagenzuschlag + Zusatzleistungen',
-    beispiel: '60 m², 50 km, 2. OG → 2. OG, Umzugsfirma: 1.500 € Basis + 150 € Etage = ca. 1.650 € | Selbst: ca. 355 €.',
+    beispiel: '60 m², 50 km, 2. OG → 2. OG, Umzugsfirma: 1.500 € Basis + 300 € Etage = 1.800 € | Selbst: ca. 325 € (Differenz 1.475 €).',
     erklaerung: `**Was kostet ein Umzug in Deutschland?**
 
 Die Kosten für einen Umzug hängen von vielen Faktoren ab: Wohnungsgröße, Entfernung, Etage, Saison und ob Sie eine Umzugsfirma beauftragen oder selbst organisieren. Im Durchschnitt kostet ein Umzug mit Umzugsfirma für eine 2-Zimmer-Wohnung (60 m²) innerhalb der gleichen Stadt zwischen **600 und 1.200 Euro**. Bei einem Fernumzug über 500 km können die Kosten auf **2.000 bis 4.000 Euro** steigen. Unser Rechner gibt Ihnen eine erste Kostenschätzung basierend auf Ihren individuellen Daten.
@@ -2310,7 +2310,7 @@ Tipp: Viele Umzugsfirmen bieten Teilleistungen an, z. B. nur den Transport ohne 
 
 **Umzugskosten steuerlich absetzen**
 
-Bei einem berufsbedingten Umzug können Sie die Kosten als Werbungskosten von der Steuer absetzen. Der Umzug gilt als berufsbedingt, wenn sich Ihr Arbeitsweg dadurch um mindestens 30 Minuten verkürzt, Sie einen neuen Job antreten oder versetzt werden. Absetzbar sind: Transportkosten, doppelte Miete (max. 6 Monate), Maklerkosten für die neue Wohnung und eine Umzugskostenpauschale für sonstige Ausgaben (2026: **886 Euro** für den Umziehenden, plus **590 Euro** pro weitere Person im Haushalt). Bei privatem Umzug können Handwerker- und Transportkosten als haushaltsnahe Dienstleistungen geltend gemacht werden (20% der Arbeitskosten, max. 4.000 Euro/Jahr).
+Bei einem berufsbedingten Umzug können Sie die Kosten als Werbungskosten von der Steuer absetzen. Der Umzug gilt als berufsbedingt, wenn sich Ihr Arbeitsweg dadurch um mindestens 30 Minuten verkürzt, Sie einen neuen Job antreten oder versetzt werden. Absetzbar sind: Transportkosten, doppelte Miete (max. 6 Monate), Maklerkosten für die neue Wohnung und eine Umzugskostenpauschale für sonstige Ausgaben (ab 01.03.2024, unverändert für 2025 und 2026: **964 Euro** für den Umziehenden, plus **643 Euro** pro weitere Person im Haushalt). Bei privatem Umzug können Handwerker- und Transportkosten als haushaltsnahe Dienstleistungen geltend gemacht werden (20% der Arbeitskosten, max. 4.000 Euro/Jahr).
 
 **Checkliste: So planen Sie Ihren Umzug**
 
@@ -2324,7 +2324,7 @@ Tipp: Umzüge am Monatsanfang oder unter der Woche sind oft günstiger als am Mo
       },
       {
         frage: 'Kann ich Umzugskosten von der Steuer absetzen?',
-        antwort: 'Bei berufsbedingtem Umzug ja — als Werbungskosten. Der Umzug gilt als berufsbedingt, wenn sich Ihr Arbeitsweg um mindestens 30 Minuten verkürzt. Absetzbar sind Transportkosten, doppelte Miete (max. 6 Monate), Makler und eine Pauschale (886 € plus 590 € pro weitere Person). Bei privatem Umzug können Handwerkerkosten als haushaltsnahe Dienstleistungen geltend gemacht werden.',
+        antwort: 'Bei berufsbedingtem Umzug ja — als Werbungskosten. Der Umzug gilt als berufsbedingt, wenn sich Ihr Arbeitsweg um mindestens 30 Minuten verkürzt. Absetzbar sind Transportkosten, doppelte Miete (max. 6 Monate), Makler und eine Pauschale (964 € plus 643 € pro weitere Person). Bei privatem Umzug können Handwerkerkosten als haushaltsnahe Dienstleistungen geltend gemacht werden.',
       },
       {
         frage: 'Wie groß muss der Transporter sein?',
@@ -2340,6 +2340,142 @@ Tipp: Umzüge am Monatsanfang oder unter der Woche sind oft günstiger als am Mo
       },
     ],
     affiliate: { programId: 'cosmosdirekt', context: 'hausrat' },
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Wovon die Umzugskosten abhängen',
+        html: `<p>Was ein Umzug kostet, lässt sich nicht pauschal sagen — der Preis ergibt sich aus mehreren Faktoren: der <strong>Wohnungsgröße</strong> (mehr Quadratmeter bedeuten mehr Volumen und Arbeitszeit), der <strong>Entfernung</strong> zwischen alter und neuer Adresse, der <strong>Etage</strong> samt Aufzug oder Treppe, der <strong>Jahreszeit</strong> und vor allem der Frage, ob eine Umzugsfirma beauftragt oder selbst organisiert wird.</p><p>Dieser Rechner schätzt beide Wege: Für die <strong>Umzugsfirma</strong> rechnet er Wohnfläche mal einen entfernungsabhängigen Quadratmeterpreis plus Etagenzuschlag und gewählte Zusatzleistungen. Für den <strong>Selbstumzug</strong> summiert er Transportermiete, Kilometerkosten, Verpackungsmaterial und Verpflegung der Helfer. So wird die Spanne zwischen bequem und günstig sichtbar. Die Ergebnisse sind Richtwerte zur Orientierung, kein verbindliches Angebot — für eine belastbare Zahl holt man am Ende immer mehrere Angebote ein. Wer die neue Mietbelastung gleich mitdenken will, ordnet die Umzugskosten am besten ins gesamte Haushaltsbudget ein, etwa mit dem <a href="/alltag/budget-rechner">Budget-Rechner</a>; was vor dem Umzug zurückgelegt wird, lässt sich mit dem <a href="/finanzen/sparrechner">Sparrechner</a> planen. So bleibt der Umzug auch in den Monaten danach bezahlbar, wenn Kaution und neue Einrichtung zusammenkommen.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Umzugs-Zeitplan — was wann zu tun ist',
+        punkte: [
+          '3 Monate vorher: Umzugsfirma beauftragen (in der Hauptsaison früh buchen), alte Wohnung fristgerecht kündigen, Sonderurlaub beantragen.',
+          '4–6 Wochen vorher: Kartons und Verpackungsmaterial besorgen, Halteverbotszone beantragen, Helfer organisieren, Sperrmülltermin vereinbaren.',
+          '4–6 Wochen vorher: Nicht benötigte Gegenstände aussortieren, verkaufen oder spenden — das senkt Volumen und damit die Kosten.',
+          '2 Wochen vorher: Nachsendeauftrag bei der Post einrichten, Strom, Gas und Internet für die neue Wohnung ummelden.',
+          '2 Wochen vorher: Schul- oder Kindergartenplatz klären und wichtige Adressänderungen vorbereiten.',
+          'Umzugstag: Zählerstände in beiden Wohnungen ablesen und ein Übergabeprotokoll erstellen.',
+          'Umzugstag: Wertsachen, Dokumente und Medikamente selbst transportieren statt mit ins Umzugsgut zu geben.',
+          'Nach dem Umzug: Binnen zwei Wochen beim Einwohnermeldeamt ummelden, danach Bank, Versicherung und Arbeitgeber informieren.',
+          'Nach dem Umzug: Kartons zeitnah auspacken und etwaige Transportschäden umgehend bei der Firma melden.',
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Firma gegen Selbstumzug — 60 m², 50 km',
+        schritte: [
+          { label: 'Basiskosten Firma', formel: '60 m² × 25 €/m²', ergebnis: '1.500 €' },
+          { label: 'Etagenzuschlag', formel: '1.500 × 4 Etagen × 5 %', ergebnis: '300 €' },
+          { label: 'Umzugsfirma gesamt', formel: '1.500 + 300', ergebnis: '1.800 €' },
+          { label: 'Selbst: Transporter + km', formel: '120 + 35', ergebnis: '155 €' },
+          { label: 'Selbst: Verpackung + Verpflegung', formel: '120 + 50', ergebnis: '170 €' },
+          { label: 'Selbstumzug gesamt', formel: '155 + 170', ergebnis: '325 €' },
+          { label: 'Differenz', formel: '1.800 − 325', ergebnis: '1.475 €' },
+        ],
+        fazit: 'Für eine 60-m²-Wohnung über 50 km mit jeweils zweitem Obergeschoss veranschlagt der Rechner rund 1.800 € für die Umzugsfirma — 1.500 € Basis (60 m² × 25 €/m²) plus 300 € Etagenzuschlag. Der Selbstumzug kommt dagegen auf etwa 325 €: ein 3,5-Tonner für 120 €, 35 € Kilometerkosten, 120 € Verpackung und 50 € Verpflegung. Die Differenz von 1.475 € ist der Preis für Bequemlichkeit, Haftung und gesparte Zeit. Hinzu kommen unabhängig vom Weg rund 300 € Renovierung und 30 € für den Nachsendeauftrag. Welche Variante passt, hängt von Budget, Möbeln und verfügbaren Helfern ab.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Richtpreise nach Wohnungsgröße und Entfernung',
+        kopf: ['Umzug', 'Mit Firma', 'In Eigenregie'],
+        zeilen: [
+          ['1-Zimmer, lokal', '400–800 €', '150–300 €'],
+          ['2-Zimmer (60 m²), lokal', '800–1.500 €', '250–400 €'],
+          ['3-Zimmer, lokal', '1.200–2.000 €', '300–500 €'],
+          ['Fernumzug ab 500 km', '2.000–4.000 €', '500–900 €'],
+        ],
+        fussnote: 'Die Werte sind Richtgrößen aus dem deutschen Markt und schwanken regional sowie nach Saison erheblich. In der Hauptsaison von Mai bis September liegen die Firmenpreise oft 20–30 % höher als im Winterhalbjahr. Zusatzleistungen wie Einpackservice, Möbelmontage oder ein Klaviertransport kommen extra hinzu. Der Selbstumzug ist fast immer günstiger, kostet aber Zeit und Kraft — und bei Schäden haftet man selbst. Bei Fernumzügen relativiert sich der Preisvorteil zudem, weil Sprit, längere Mietzeiten des Transporters und oft eine Übernachtung dazukommen. Für eine belastbare Zahl gilt unverändert: mindestens drei Angebote einholen und genau prüfen, welche Leistungen enthalten sind — Festpreis oder Stundenbasis, Versicherung und mögliche Aufschläge für An- und Abfahrt.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Umzugsfirma gegen Selbstumzug',
+        spalteA: 'Umzugsfirma',
+        spalteB: 'Selbst organisiert',
+        zeilen: [
+          { kriterium: 'Kosten', a: 'höher, dafür planbar', b: 'deutlich günstiger' },
+          { kriterium: 'Zeit & Kraft', a: 'gering, Profis packen und tragen', b: 'hoch, eigene Arbeit und Helfer nötig' },
+          { kriterium: 'Haftung bei Schäden', a: 'über die Firma versichert', b: 'man haftet selbst' },
+          { kriterium: 'Schwere Möbel / Klavier', a: 'fachgerecht erledigt', b: 'Risiko und Aufwand beim Tragen' },
+          { kriterium: 'Planbarkeit', a: 'fester Termin und Festpreis möglich', b: 'abhängig von Helfern und Transporter-Verfügbarkeit' },
+          { kriterium: 'Geeignet bei', a: 'großer Wohnung, Fernumzug, wertvollen Möbeln', b: 'kleiner Wohnung, kurzer Strecke, knappem Budget' },
+          { kriterium: 'Kompromiss', a: 'Teilleistung: nur Transport buchen', b: 'selbst packen, Profis fahren' },
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Beruflicher Umzug: Werbungskosten und Pauschale',
+        text: 'Ist ein Umzug beruflich veranlasst, lassen sich die Kosten als Werbungskosten absetzen (§ 9 EStG, R 9.9 LStR). Als beruflich veranlasst gilt er unter anderem, wenn sich der Arbeitsweg um mindestens eine Stunde pro Tag (rund 30 Minuten je Richtung) verkürzt, bei einem Jobwechsel oder bei einer Versetzung. Für sonstige Umzugsauslagen gibt es eine Pauschale ohne Einzelnachweis: ab dem 01.03.2024 — und unverändert für 2025 und 2026 — 964 € für die umziehende Person plus 643 € je weitere Person im Haushalt; wer vorher und nachher keine eigene Wohnung hatte, erhält 193 €. Eine Familie mit zwei weiteren Personen kommt so auf 964 + 2 × 643 = 2.250 € allein an Pauschale, zusätzlich zu Transport, doppelter Miete (max. 6 Monate) und Maklerkosten für die neue Wohnung. Die Pauschale deckt Kleinkram wie Trinkgelder, Schönheitsreparaturen oder das Ummelden ab — wer höhere sonstige Auslagen einzeln nachweist, kann statt der Pauschale auch die tatsächlichen Kosten ansetzen.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Privater Umzug: § 35a EStG nutzen',
+        text: 'Auch ein privater Umzug bringt einen Steuervorteil — allerdings über einen anderen Weg. Nach § 35a EStG lassen sich 20 % der Arbeitskosten haushaltsnaher Dienstleistungen und Handwerkerleistungen direkt von der Steuerschuld abziehen, höchstens 4.000 € pro Jahr. Begünstigt sind die reinen Lohn- und Fahrtkosten der Umzugsfirma, nicht jedoch Materialkosten wie Kartons oder Verpackung. Zwei Bedingungen sind zwingend: Es muss eine ordnungsgemäße Rechnung vorliegen, und die Zahlung muss unbar per Überweisung erfolgen — Barzahlung erkennt das Finanzamt nicht an. Wer also ohnehin privat umzieht, sollte die Rechnung der Umzugsfirma aufheben und keinesfalls bar zahlen, um diesen Abzug nicht zu verlieren. Der Höchstbetrag von 4.000 € gilt pro Haushalt und Jahr und umfasst alle haushaltsnahen Dienstleistungen zusammen — wer im selben Jahr noch andere Handwerker beauftragt, sollte die Grenze im Blick behalten.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Spar-Checkliste für den Umzug',
+        punkte: [
+          'In der Nebensaison von Oktober bis März und mitten in der Woche umziehen — das ist spürbar günstiger als Monatsende und Wochenende.',
+          'Mindestens drei Angebote einholen und genau auf enthaltene Leistungen, Versicherung und Anfahrt vergleichen.',
+          'Kartons gebraucht beschaffen oder kostenlos im Supermarkt erfragen statt neu zu kaufen.',
+          'Vor dem Umzug konsequent ausmisten und Verkäufliches zu Geld machen — weniger Volumen senkt die Kosten direkt.',
+          'Eine Teilleistung buchen: selbst packen und nur den Transport schwerer Möbel den Profis überlassen.',
+          'Freunde und Familie als Helfer einplanen und mit Verpflegung statt Bezahlung danken.',
+          'Den Transporter über mehrere Anbieter vergleichen und nach Möglichkeit einen Wochentag wählen.',
+          'Bei berufsbedingtem Umzug alle Belege sammeln — die Steuerersparnis senkt die Netto-Kosten zusätzlich.',
+          'Möbel vor dem Umzug ausmessen und prüfen, ob sie in die neue Wohnung passen, um Fehlkäufe zu vermeiden.',
+        ],
+      },
+      {
+        typ: 'statistik',
+        titel: 'Faustregeln rund um den Umzug',
+        werte: [
+          { label: 'Saisonzuschlag Hauptsaison', wert: '+10–20 %', hinweis: 'April bis September, teils bis +30 %' },
+          { label: 'Volumen-Faustregel', wert: '3–4 m³', hinweis: 'Transportvolumen je 10 m² Wohnfläche' },
+          { label: 'Renovierung alte Wohnung', wert: '~5 €/m²', hinweis: 'grober Richtwert für Schönheitsreparaturen' },
+          { label: 'Transporter bis 30 m²', wert: 'Sprinter', hinweis: 'rund 12 m³ Laderaum' },
+          { label: 'Transporter 30–60 m²', wert: '3,5-t-LKW', hinweis: 'rund 20 m³; ab 3,5 t Führerschein C1' },
+          { label: 'Transporter 60–90 m²', wert: '7,5-t-LKW', hinweis: 'rund 35 m³ Laderaum' },
+          { label: 'Kostenpuffer einplanen', wert: '15–20 %', hinweis: 'auf die geschätzte Gesamtsumme' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Nebenkosten, die leicht vergessen werden',
+        html: `<p>Die reinen Transportkosten sind nur ein Teil der Rechnung. Hinzu kommt häufig die <strong>Kaution</strong> für die neue Wohnung in Höhe von bis zu drei Nettokaltmieten, die zunächst gebunden ist. Dazu kommen die <strong>Renovierung</strong> der alten Wohnung (grob 5 €/m² für Schönheitsreparaturen), eine mögliche <strong>Doppelmiete</strong> im Übergangsmonat, der Nachsendeauftrag der Post sowie die Ummeldung des Autos mit rund 30 €.</p><p>Wer all diese Posten von Anfang an einplant, erlebt keine böse Überraschung — und legt sinnvollerweise einen Puffer von 15–20 % auf die geschätzte Summe. Ob die neue Wohnung dauerhaft ins Budget passt, lässt sich vorab mit dem <a href="/wohnen/mietrechner">Mietrechner</a> prüfen, und die laufenden Betriebskosten schätzt der <a href="/wohnen/nebenkosten-rechner">Nebenkosten-Rechner</a> ein. So wird aus dem einmaligen Umzug eine durchdachte Entscheidung, bei der auch die Folgekosten von Anfang an im Blick sind. Besonders die Kaution bindet schnell mehrere Tausend Euro, die erst nach dem Auszug aus der alten Wohnung zurückfließen — wer beide Mieten und die Kaution kurzzeitig parallel stemmen muss, plant das am besten als kurzfristige Rücklage ein.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Steuer-Checkliste: Belege richtig sammeln',
+        punkte: [
+          'Den beruflichen Anlass dokumentieren: Arbeitsvertrag, Versetzungsschreiben oder Nachweis der Arbeitsweg-Verkürzung aufbewahren.',
+          'Alle Rechnungen der Umzugsfirma sammeln und ausschließlich unbar per Überweisung bezahlen.',
+          'Beim beruflichen Umzug die Kosten in der Anlage N der Steuererklärung als Werbungskosten eintragen.',
+          'Beim privaten Umzug den § 35a EStG nutzen und die Arbeitskosten gesondert ausweisen lassen.',
+          'Die Umzugskostenpauschale (964 € plus 643 € je weitere Person) ohne Einzelnachweis ansetzen.',
+          'Höhere sonstige Auslagen prüfen: Statt der Pauschale lassen sich auch die tatsächlichen Kosten mit Belegen ansetzen.',
+          'Doppelte Miete und Maklerkosten der neuen Wohnung beim beruflichen Umzug gesondert auflisten.',
+          'Bei Kindern auch nachweisbare Nachhilfekosten wegen Schulwechsels prüfen — sie sind im Rahmen des BUKG begünstigt.',
+          'Belege mindestens so lange aufbewahren, bis der Steuerbescheid bestandskräftig ist.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Richtwerte und Stand der Angaben',
+        text: 'Die genannten Preise sind Marktdurchschnitte und Richtwerte; die tatsächlichen Kosten hängen von Region, Anbieter, Saison und individuellem Aufwand ab und können deutlich abweichen. Der Rechner liefert eine erste Schätzung, kein verbindliches Angebot — verlassen Sie sich für die endgültige Planung auf eingeholte Firmenangebote. Die steuerlichen Angaben (Umzugskostenpauschale 964 €/643 €/193 €, § 9 EStG, § 35a EStG) entsprechen dem Stand 2026 nach dem BMF-Schreiben vom 28.12.2023 und können sich durch neue Verwaltungsanweisungen ändern. Sie ersetzen keine individuelle Steuerberatung: Ob ein Umzug im Einzelfall als beruflich veranlasst gilt und welche Posten absetzbar sind, klärt im Zweifel das Finanzamt oder eine Steuerberatung. Auch die berechnete Umzugskostenschätzung dient nur der Orientierung — sie ist weder ein Kostenvoranschlag noch eine Zusage und kann die individuelle Besichtigung durch eine Umzugsfirma nicht ersetzen. Maßgeblich sind am Ende immer das schriftliche Angebot der gewählten Firma und die geltenden Steuervorschriften zum Zeitpunkt Ihres Umzugs.',
+      },
+    ],
+    quellen: [
+      { titel: 'BMF-Schreiben vom 28.12.2023 (IV C 5 – S 2353/20/10004 :003)', hinweis: 'Pauschbeträge für sonstige Umzugsauslagen ab 01.03.2024: 964 € berechtigte Person, 643 € je weitere Person, 193 € ohne eigene Wohnung. Unverändert für 2025/2026.' },
+      { titel: '§ 10 Bundesumzugskostengesetz (BUKG)', hinweis: 'Rechtsgrundlage der Umzugskostenpauschale für sonstige Umzugsauslagen bei beruflich veranlasstem Umzug.' },
+      { titel: '§ 9 EStG / R 9.9 LStR', hinweis: 'Beruflich veranlasster Umzug als Werbungskosten; berufliche Veranlassung u. a. bei Arbeitsweg-Verkürzung von mind. 1 Std./Tag.' },
+      { titel: '§ 35a EStG', hinweis: 'Privater Umzug: 20 % der Arbeitskosten haushaltsnaher Dienstleistungen, max. 4.000 € pro Jahr; unbare Zahlung erforderlich.' },
+      { titel: 'Umzugskosten-Methodik', hinweis: 'Firma: Wohnfläche × €/m² (entfernungsabhängig) + Etagenzuschlag. Selbst: Transporter + km + Verpackung + Verpflegung. Richtwerte, kein verbindliches Angebot.' },
+    ],
   },
   {
     slug: 'trinkgeld-rechner',
