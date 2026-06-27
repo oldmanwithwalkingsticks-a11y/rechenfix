@@ -4,7 +4,60 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 26.06.2026
+**Stand:** 27.06.2026
+
+---
+
+## 27.06.2026 — W19 Goldstandard alltag-Block KOMPLETT (148 Goldstandard gemessen)
+
+Zehn Alltagsrechner — der gesamte alltag-Block ist jetzt Goldstandard. Überwiegend gering-YMYL (Konsum-/
+Planungsrechner), ein YMYL-Stale-Fix bei umzugskosten. Alle Beispiel-Anker gegen die echten Components/
+Rechen-Libs nachgerechnet, alle Marktdaten gegen aktuelle Primärquellen (2025/2026) geprüft. Zehn Slugs mit
+sauber separierten Leitformaten. Alle Builds Vercel-grün, jeder interne Link kategorieSlug-per-grep verifiziert.
+
+**Ein YMYL-Stale-Fix (kritisch) + zwei Beispiel-Inkonsistenzen (im jeweiligen Build-Commit):**
+- **umzugskosten Umzugskostenpauschale** (`a95b90a`): Config nannte 886 €/590 € als „2026"-Werte — das sind die
+  alten Pauschalen bis 29.02.2024. Korrekt ab 01.03.2024 (BMF-Schreiben 28.12.2023, § 10 BUKG), unverändert
+  2025/2026: 964 € berechtigte Person, 643 € je weitere Person, 193 € ohne eigene Wohnung. An drei Stellen
+  korrigiert (1× erklaerung, 2× faq — faq wird gerendert). grep 886|590 = 0 verifiziert.
+- **umzugskosten beispiel** (`a95b90a`): „1.650 € Firma / 355 € Selbst" war Lib-inkonsistent. Echte
+  `lib/berechnungen/umzugskosten.ts` für 60 m²/50 km/2.OG→2.OG: Firma 1.800 € (Basis 1.500 + Etage 300),
+  Selbst 325 € (Transporter 120 + km 35 + Verpackung 120 + Verpflegung 50), Differenz 1.475 €.
+
+**Builds (alle 12 Blöcke, Wortzahl ≥1.500, max Block <170 W):**
+- **countdown** (beispielrechnung, `37a5e80`).
+- **uhrzeitrechner** (tabelle, `d2c5291`).
+- **schuhgroessen-rechner** (vergleich, `6820358`).
+- **waehrungsrechner** (beispielrechnung, `5a9201c`) — inkl. Kurs-Update aller 22 EZB-punktverifizierten
+  Währungen auf Stand 27.06.2026. 7 Extra-Währungen (ZAR/MXN/SGD/HKD/ILS/AED/RUB) als Fallback offen →
+  EZB-Cron-Feature (siehe „Auf dem Horizont").
+- **budget-rechner** (checkliste, ~1.547 W, `bc5ae5f`). 50/30/20-Regel. Anker 2.500 € → 1.250/750/500,
+  Ausgaben 1.845 → Überschuss 655 €, Sparquote 26,2 %.
+- **abo-rechner** (statistik, ~1.520 W, `ea3a838`). Anker 81 €/Mt = 972 €/Jahr. Unbelegte Alt-Behauptungen
+  („8–10 Abos / 40 % ungenutzt") durch Studiendaten ersetzt: BearingPoint Submix 62 €/Mt, Simon-Kucher 30 €/
+  2,8 Abos, EY 76 %, Deloitte 2,5 Abos.
+- **handykosten-rechner** (vergleich, ~1.517 W, `8c7e7cd`). Anker 45 €/Mt = 540 €/Jahr. Alt-erklaerung-
+  Rechenfehler (doppelte Geräterate bei Separatkauf) korrigiert: Bündel 1.080 € vs. getrennt 828 € = 252 €/
+  ~23 % (deckt Verivox Ø 25 %). Veralteter GB-Preis → tefficient 1,80 €/GB. Quellen: Verivox, EU-Kommission,
+  Bundesnetzagentur.
+- **lieferservice-rechner** (beispielrechnung, ~1.501 W, `b6fb408`). Anker 3×/Woche à 30 € = 4.680 €/Jahr.
+  Frequenz-Staffel 1.560/3.120/4.680 €. Unbelegtes „25 Mio." → Lieferando-Datenbasis (16 Mio. Bestellprofile,
+  38.000 Partner); 13–30 % Provision (Statista). 1,00-Fingerprint zu kurzarbeitergeld = Blocktyp-Mengen-
+  Sättigung (Sequenzen + Inhalt verschieden, Non-Gate).
+- **umzugskosten-rechner** (checkliste, ~1.550 W, `a95b90a`). Siehe YMYL-Fix oben. Steuer: § 9 EStG (berufl.,
+  Pauschale 964/643), § 35a EStG (privat, 20 %, max. 4.000 €/Jahr). Quellen mit Rechtsgrundlagen.
+- **reisekosten-rechner** (tabelle, ~1.551 W, `17a8a16`). KEIN YMYL (privater Urlaubsbudget-Planer, keine
+  Steuerpauschale — grep-verifiziert). Anker 7 Nächte/2 Pers./Auto 500 km: Anreise 152,50 € + Unterkunft
+  560 € + Verpflegung 800 € + Aktivitäten 320 € = 1.832,50 € (916,25 €/Pers.); Tage = Nächte+1. Daten: 42.
+  Deutsche Tourismusanalyse 2026 (Ø 1.636 €/Pers., Inland 1.170 €, Fernreise 2.673 €, Tageskosten 130 €).
+
+**Lehre erhärtet:** Config-`beispiel`/`faq`-Felder bleiben systematisches Stale-Nest — auch bei vermeintlich
+gering-YMYL-Slugs (handykosten-Rechenfehler, umzugskosten-Steuerwert). Component-Resolver-Check über ALLE
+Zahlenwerte des Beispiels, nicht nur Headline. Fingerprint 1,00 bei nur 8 Blocktypen ist Mengen-Sättigung —
+Sequenz + Inhalt entscheiden („Inhalt vor Score").
+
+**alltag-Block damit vollständig (10/10):** countdown, uhrzeitrechner, schuhgroessen-rechner, waehrungsrechner,
+budget-rechner, abo-rechner, handykosten-rechner, lieferservice-rechner, umzugskosten-rechner, reisekosten-rechner.
 
 ---
 
