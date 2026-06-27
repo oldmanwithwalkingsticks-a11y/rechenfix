@@ -7539,7 +7539,7 @@ Der Grenzsteuersatz zeigt, wie stark eine Gehaltserhöhung besteuert wird. Liegt
   },
   {
     slug: 'spenden-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-27',
     titel: 'Spenden-Rechner',
     beschreibung: 'Steuerersparnis durch Spenden berechnen: Wie viel bekommen Sie von Ihrer Spende über die Steuererklärung zurück?',
     kategorie: 'Finanzen',
@@ -7549,7 +7549,7 @@ Der Grenzsteuersatz zeigt, wie stark eine Gehaltserhöhung besteuert wird. Liegt
     keywords: ['spenden rechner', 'spenden steuerersparnis', 'spenden absetzen', 'spendenquittung', 'sonderausgabenabzug', 'spenden steuer', 'spenden von der steuer absetzen', 'steuerersparnis spende', 'spenden steuerlich absetzbar'],
     icon: '🎁',
     formel: 'Steuerersparnis = ESt(zvE) − ESt(zvE − Spende) + Soli + KiSt | Effektive Kosten = Spende − Ersparnis | Förderquote = Ersparnis / Spende × 100',
-    beispiel: '500 € Spende bei 50.000 € zvE: Grenzsteuersatz ca. 33 %, ESt-Ersparnis ca. 165 €, effektive Kosten ca. 335 €, Förderquote ca. 33 %.',
+    beispiel: '500 € Spende bei 50.000 € zvE: Grenzsteuersatz ca. 35 %, ESt-Ersparnis ca. 175 €, effektive Kosten ca. 325 €, Förderquote ca. 35 %.',
     erklaerung: `**Spenden von der Steuer absetzen — so funktioniert es**
 
 Spenden an gemeinnützige Organisationen können in Deutschland als Sonderausgaben von der Steuer abgesetzt werden. Das bedeutet: Sie verringern Ihr zu versteuerndes Einkommen und zahlen weniger Einkommensteuer. Wie viel Sie tatsächlich sparen, hängt von Ihrem persönlichen Grenzsteuersatz ab — je höher das Einkommen, desto größer die Steuerersparnis.
@@ -7572,7 +7572,7 @@ Für den steuerlichen Abzug benötigen Sie eine Zuwendungsbestätigung (Spendenq
 
 **Parteispenden: Zusätzlicher Steuerabzug**
 
-Spenden an politische Parteien werden besonders gefördert: Die ersten 1.650 € (3.300 € bei Zusammenveranlagung) werden direkt von der Steuerschuld abgezogen (§ 34g EStG). Darüber hinausgehende Beträge können als Sonderausgaben abgesetzt werden. Dieser Rechner berechnet den allgemeinen Sonderausgabenabzug — für Parteispenden gelten die erweiterten Regelungen.
+Spenden an politische Parteien werden besonders gefördert und folgen einem zweistufigen Sonderverfahren (Stand VZ 2026): Zunächst werden nach § 34g EStG 50 % der Spende direkt von der Steuerschuld abgezogen, höchstens 1.650 € (Einzelveranlagung) bzw. 3.300 € (Zusammenveranlagung) Ermäßigung — das entspricht einer begünstigten Spendensumme bis 3.300 € bzw. 6.600 €. Darüber hinausgehende Beträge sind nach § 10b Abs. 2 EStG zusätzlich bis 3.300 € bzw. 6.600 € als Sonderausgaben abziehbar. Insgesamt sind so bis zu 6.600 € (Einzel) bzw. 13.200 € (Zusammen) begünstigt; einen Spendenvortrag gibt es bei Parteispenden nicht. Dieser Rechner berechnet den allgemeinen Sonderausgabenabzug nach § 10b Abs. 1 — für Parteispenden gelten die genannten Sonderregeln.
 
 **Tipps zur Spendenoptimierung**
 
@@ -7580,7 +7580,7 @@ Bündeln Sie mehrere kleinere Spenden in einem Jahr statt sie zu verteilen. Durc
     faq: [
       {
         frage: 'Wie viel Steuer spare ich durch eine Spende?',
-        antwort: 'Die Ersparnis hängt von Ihrem Grenzsteuersatz ab. Bei einem Grenzsteuersatz von 33 % (ca. 50.000 € Einkommen) sparen Sie bei 500 € Spende rund 165 € ESt plus Soli und ggf. Kirchensteuer. Die effektiven Kosten der Spende betragen dann nur ca. 335 €.',
+        antwort: 'Die Ersparnis hängt von Ihrem Grenzsteuersatz ab. Bei einem Grenzsteuersatz von ca. 35 % (rund 50.000 € Einkommen) sparen Sie bei 500 € Spende rund 175 € ESt plus Soli und ggf. Kirchensteuer. Die effektiven Kosten betragen dann nur ca. 325 €.',
       },
       {
         frage: 'Wie viel kann ich maximal als Spende absetzen?',
@@ -7598,6 +7598,124 @@ Bündeln Sie mehrere kleinere Spenden in einem Jahr statt sie zu verteilen. Durc
         frage: 'Werden Spenden bei der Steuererklärung automatisch berücksichtigt?',
         antwort: 'Nein, Sie müssen Ihre Spenden in der Steuererklärung unter Sonderausgaben angeben. Viele Organisationen übermitteln die Daten elektronisch an das Finanzamt — prüfen Sie trotzdem, ob die Beträge korrekt übernommen wurden.',
       },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Wie Spenden die Steuer senken',
+        html: `<p>Spenden an gemeinnützige, mildtätige oder kirchliche Organisationen lassen sich in Deutschland als <strong>Sonderausgaben</strong> von der Steuer absetzen (§ 10b EStG). Sie mindern das zu versteuernde Einkommen — und damit die Einkommensteuer. Wie viel man tatsächlich spart, hängt vom persönlichen <strong>Grenzsteuersatz</strong> ab: Je höher das Einkommen, desto größer der Anteil, den der Staat über die Steuerersparnis mitträgt.</p><p>Dieser Rechner ermittelt die individuelle <strong>Steuerersparnis</strong>, die effektiven Kosten der Spende und die <strong>Förderquote</strong> — also den Anteil der Spende, den am Ende das Finanzamt übernimmt. Grundlage ist der Einkommensteuertarif 2026 inklusive Solidaritätszuschlag und, falls gewünscht, Kirchensteuer. Der eigene Grenzsteuersatz ergibt sich aus dem zu versteuernden Einkommen; eine genaue Einordnung liefert der <a href="/finanzen/einkommensteuer-rechner">Einkommensteuer-Rechner</a>. So wird sichtbar, dass eine Spende den Spendenden weniger kostet, als ihr Nennbetrag vermuten lässt — die Differenz übernimmt die Allgemeinheit, weil der Gesetzgeber gemeinnütziges Engagement bewusst belohnt.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Steuerersparnis bei 500 € Spende nach Einkommen',
+        kopf: ['zu versteuerndes Einkommen', 'Grenzsteuersatz', 'ESt-Ersparnis', 'effektive Kosten', 'Förderquote'],
+        zeilen: [
+          ['25.000 €', '~26 %', '~132 €', '~368 €', '~26 %'],
+          ['50.000 €', '~35 %', '~175 €', '~325 €', '~35 %'],
+          ['70.000 €', '42 %', '~210 €', '~290 €', '42 %'],
+          ['300.000 €', '45 %', '~225 €', '~275 €', '45 %'],
+        ],
+        fussnote: 'Die Werte beziehen sich auf eine Geldspende von 500 € und sind mit dem Einkommensteuertarif 2026 (§ 32a EStG, Grundfreibetrag 12.348 €) gerechnet — ohne Solidaritätszuschlag und Kirchensteuer, die die Ersparnis zusätzlich leicht erhöhen. Der Grenzsteuersatz steigt mit dem Einkommen progressiv an: Wer mehr verdient, bekommt einen größeren Teil der Spende über die Steuer zurück. Weil der Steuersatz innerhalb der 500 € minimal schwankt, sind die Angaben gerundete Näherungswerte. Ab rund 69.878 € zvE greift der konstante Spitzensteuersatz von 42 %, ab 277.826 € der Reichensteuersatz von 45 %. Gut zu sehen ist auch: Derselbe Spendenbetrag entlastet einen Spitzenverdiener stärker als einen Geringverdiener — die Spende kostet jeden aber dieselbe Summe, nur die Rückerstattung über die Steuer fällt unterschiedlich aus.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: 500 € Spende bei 50.000 € Einkommen',
+        schritte: [
+          { label: 'Zu versteuerndes Einkommen', formel: '', ergebnis: '50.000 €' },
+          { label: 'Einkommensteuer ohne Spende', formel: 'ESt(50.000)', ergebnis: '≈ 10.548 €' },
+          { label: 'zvE nach Spendenabzug', formel: '50.000 − 500', ergebnis: '49.500 €' },
+          { label: 'Einkommensteuer mit Spende', formel: 'ESt(49.500)', ergebnis: '≈ 10.373 €' },
+          { label: 'ESt-Ersparnis', formel: '10.548 − 10.373', ergebnis: '≈ 175 €' },
+          { label: 'Effektive Kosten der Spende', formel: '500 − 175', ergebnis: '≈ 325 €' },
+          { label: 'Förderquote', formel: '175 ÷ 500', ergebnis: '≈ 35 %' },
+        ],
+        fazit: 'Bei 50.000 € zu versteuerndem Einkommen senkt eine Spende von 500 € die Einkommensteuer um rund 175 €. Die Spende kostet den Spendenden damit effektiv nur etwa 325 €, während der Staat über die Steuerersparnis rund 35 % trägt — das ist die Förderquote. Dieser Wert entspricht ziemlich genau dem Grenzsteuersatz bei diesem Einkommen. Hinzu kommen noch der ersparte Solidaritätszuschlag und, bei Kirchenmitgliedschaft, die Kirchensteuer, die die Ersparnis leicht erhöhen und die effektiven Kosten weiter senken. Der Rechner bildet das automatisch ab. Wichtig: Die Förderung ist kein Geschenk, sondern die steuerliche Anerkennung des gemeinnützigen Zwecks — gespart wird nur ein Teil, die Spende selbst bleibt eine echte Ausgabe.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Die 20-Prozent-Höchstgrenze und der Spendenvortrag',
+        text: 'Spenden sind bis zu 20 % des Gesamtbetrags der Einkünfte als Sonderausgaben abziehbar (§ 10b Abs. 1 EStG). Bei 50.000 € Einkommen sind das bis zu 10.000 € pro Jahr — eine Grenze, die im Alltag selten erreicht wird. Wer doch mehr spendet, verliert den übersteigenden Betrag nicht: Er wird als zeitlich unbegrenzter Spendenvortrag in die Folgejahre übernommen und dort abgezogen, sobald wieder Spielraum besteht. Das Finanzamt stellt den verbleibenden Vortrag im Steuerbescheid gesondert fest. So bleibt auch eine außergewöhnlich hohe Einzelspende — etwa nach einer Katastrophe oder zugunsten einer Stiftung — über die Jahre vollständig steuerwirksam, nur eben gestreckt über mehrere Veranlagungszeiträume. Für Zuwendungen in den Vermögensstock einer Stiftung gilt darüber hinaus ein gesonderter Höchstbetrag von bis zu einer Million Euro, verteilbar über zehn Jahre — ein Sonderfall, den dieser Rechner nicht abbildet.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Welcher Nachweis ist nötig?',
+        kopf: ['Spendenbetrag', 'Erforderlicher Nachweis', 'Rechtsgrundlage'],
+        zeilen: [
+          ['bis 300 € je Einzelspende', 'vereinfachter Nachweis: Kontoauszug oder Buchungsbeleg', '§ 50 Abs. 4 EStDV'],
+          ['ab 300 €', 'Zuwendungsbestätigung nach amtlichem Muster', '§ 50 Abs. 1 EStDV'],
+          ['Katastrophenhilfe (Sonderkonto)', 'vereinfachter Nachweis unabhängig vom Betrag', '§ 50 Abs. 4 EStDV'],
+          ['Belege aufbewahren', 'auf Anforderung vorlegen, mind. 1 Jahr nach Bescheid', '§ 50 Abs. 8 EStDV'],
+        ],
+        fussnote: 'Seit der Belegvorhaltepflicht müssen Spendennachweise der Steuererklärung nicht mehr beigelegt, aber auf Nachfrage des Finanzamts vorgelegt werden. Die 300-€-Grenze gilt je Einzelspende, nicht je Jahr — wer mehrfach unter 300 € an dieselbe Organisation spendet, kommt jeweils mit dem vereinfachten Nachweis aus. Bei Spenden auf eingerichtete Katastrophen-Sonderkonten genügt der vereinfachte Nachweis sogar unabhängig von der Höhe. Viele Organisationen übermitteln die Zuwendungsdaten heute elektronisch direkt ans Finanzamt; ein eigener Beleg sollte trotzdem aufbewahrt werden.',
+      },
+      {
+        typ: 'text',
+        titel: 'Was ist absetzbar — und was nicht',
+        html: `<p>Abziehbar sind Geld- und Sachspenden an steuerbegünstigte Empfänger: gemeinnützige, mildtätige oder kirchliche Organisationen, Stiftungen sowie bestimmte öffentliche Einrichtungen. Voraussetzung ist die anerkannte Gemeinnützigkeit der Organisation und ein Sitz innerhalb der EU oder des EWR. Die Spende muss freiwillig und ohne Gegenleistung erfolgen.</p><p>Nicht abziehbar sind dagegen direkte <strong>Spenden an Privatpersonen</strong> — auch nicht über Spendenplattformen, wenn das Geld unmittelbar an Einzelne fließt. Ebenso wenig zählen Zuwendungen an Empfänger außerhalb der EU/EWR oder an nicht gemeinnützige Vereine. Auch eine Gegenleistung schließt den Abzug aus: Wer für die „Spende" etwas erhält, etwa eine Eintrittskarte, spendet steuerlich nicht. Wer unsicher ist, prüft vor der Steuererklärung den Status der Organisation und macht die anerkannten Beträge anschließend mit dem <a href="/finanzen/steuererstattung-rechner">Steuererstattungs-Rechner</a> als Teil der Gesamterstattung sichtbar. Auch sogenanntes Crowdfunding ist nur dann abziehbar, wenn das Geld über einen anerkannten gemeinnützigen Träger läuft und eine Zuwendungsbestätigung ausgestellt wird.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Parteispenden folgen Sonderregeln (Stand VZ 2026)',
+        text: 'Spenden an politische Parteien werden anders behandelt als normale Spenden — in zwei Stufen. Zuerst greift § 34g EStG: 50 % der Spende werden direkt von der Steuerschuld abgezogen, höchstens 1.650 € (Einzelveranlagung) oder 3.300 € (Zusammenveranlagung) Ermäßigung. Das deckt eine Spende bis 3.300 € bzw. 6.600 € ab. Was darüber liegt, ist nach § 10b Abs. 2 EStG zusätzlich bis 3.300 € bzw. 6.600 € als Sonderausgabe abziehbar. Insgesamt sind damit bis zu 6.600 € (Einzel) oder 13.200 € (Zusammen) begünstigt — gegenüber dem Stand bis 2025 verdoppelte Beträge. Einen Spendenvortrag gibt es bei Parteispenden nicht. Gleichwertig begünstigt sind übrigens Spenden an unabhängige Wählervereinigungen, die nach § 34g Nr. 2 EStG ebenfalls die 50-Prozent-Ermäßigung erhalten, allerdings ohne den zusätzlichen Sonderausgabenabzug der zweiten Stufe. Wichtig: Dieser Rechner bildet den allgemeinen Sonderausgabenabzug nach § 10b Abs. 1 ab, nicht das Parteispenden-Sonderverfahren.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Sachspenden richtig bewerten',
+        kopf: ['Art der Sachspende', 'Anzusetzender Wert', 'Beispiel'],
+        zeilen: [
+          ['Neuware', 'Einkaufspreis laut Beleg', 'neue Winterjacke, 80 € laut Rechnung'],
+          ['Gebrauchter Gegenstand', 'Marktwert / Gebrauchtpreis zum Spendenzeitpunkt', 'gut erhaltenes Sofa, ~150 €'],
+          ['Aus dem Betriebsvermögen', 'Buch- oder Teilwert (Entnahmewert)', 'Restposten aus dem Lager'],
+        ],
+        fussnote: 'Sachspenden sind nach § 10b Abs. 3 EStG mit dem gemeinen Wert (Marktwert) zum Zeitpunkt der Zuwendung anzusetzen. Bei Neuware ist das der Einkaufspreis laut Beleg, bei Gebrauchtem der realistische Gebrauchtpreis, wie er etwa auf gängigen Verkaufsplattformen erzielt würde — nicht der ursprüngliche Neupreis. Die empfangende Organisation stellt eine Zuwendungsbestätigung mit dem geschätzten Wert aus; den Nachweis der Wertermittlung sollte man aufbewahren. Stammt die Sache aus einem Betrieb, gelten besondere Entnahmeregeln. Bei sehr werthaltigen Sachspenden wie Kunst oder Schmuck kann das Finanzamt einen Wertnachweis verlangen; ein Gutachten oder Vergleichsangebote sind dann hilfreich. Im Zweifel hilft eine kurze Rücksprache mit der Organisation oder der Steuerberatung.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Geldspende, Sachspende oder Mitgliedsbeitrag?',
+        spalteA: 'Geld- / Sachspende',
+        spalteB: 'Mitgliedsbeitrag',
+        zeilen: [
+          { kriterium: 'Grundsatz', a: 'an gemeinnützige Zwecke abziehbar', b: 'nur bei bestimmten Zwecken abziehbar' },
+          { kriterium: 'Nicht abziehbar', a: '— (sofern Empfänger gemeinnützig)', b: 'Sport, Freizeit, Kultur zur Eigenförderung' },
+          { kriterium: 'Bewertung', a: 'Geld nominal, Sache zum Marktwert', b: 'tatsächlich gezahlter Beitrag' },
+          { kriterium: 'Nachweis', a: 'Beleg bzw. Zuwendungsbestätigung', b: 'Beitragsbescheinigung des Vereins' },
+          { kriterium: 'Gegenleistung', a: 'darf keine vorliegen', b: 'Mitgliedsvorteile können schaden' },
+          { kriterium: 'Typisch abziehbar', a: 'Hilfsorganisation, Tierschutz, Kirche', b: 'Förderverein, kulturelle Zwecke ohne Eigennutz' },
+        ],
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Spenden steuerlich optimal nutzen',
+        punkte: [
+          'Vorab prüfen, ob die Organisation als gemeinnützig anerkannt ist — etwa am DZI-Spendensiegel.',
+          'Bei jeder Spende den Beleg oder die Zuwendungsbestätigung sichern und geordnet ablegen.',
+          'Spenden in der Steuererklärung in der Anlage Sonderausgaben eintragen, sie werden nicht automatisch berücksichtigt.',
+          'Bei hohen Beträgen die 20-%-Grenze beachten und den Spendenvortrag fürs Folgejahr einplanen.',
+          'Bei Zusammenveranlagung zählen die Spenden beider Partner gemeinsam — das vergrößert den Spielraum.',
+          'Mehrere kleinere Spenden eines Jahres bündeln, um den progressiven Tarif besser auszunutzen.',
+          'Sachspenden vor der Übergabe fotografieren und den Wert nachvollziehbar dokumentieren.',
+          'Bei Parteispenden das Sonderverfahren (§ 34g) beachten — die Förderung läuft dort anders als bei diesem Rechner.',
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Der Grenzsteuersatz entscheidet über die Ersparnis',
+        html: `<p>Die Förderquote einer Spende entspricht praktisch dem <strong>Grenzsteuersatz</strong> — also dem Steuersatz auf den zuletzt verdienten Euro. Dieser ergibt sich aus dem zu versteuernden Einkommen: Im progressiven Tarif 2026 steigt er von 14 % an der Eingangsschwelle bis 42 % ab rund 69.878 € und 45 % ab 277.826 €. Wer mehr verdient, bekommt also einen größeren Anteil der Spende über die Steuer zurück — der Spendenbetrag selbst bleibt davon unberührt.</p><p>Weil der Grenzsteuersatz vom Einkommen abhängt, lohnt sich ein Blick auf die eigene Lohnabrechnung: Was vom Brutto netto übrig bleibt und in welcher Tarifzone man liegt, lässt sich mit dem <a href="/finanzen/brutto-netto-rechner">Brutto-Netto-Rechner</a> nachvollziehen. Eine Spende ist und bleibt freiwillig und sollte aus Überzeugung erfolgen — der Steuervorteil ist ein willkommener Nebeneffekt, nicht der eigentliche Zweck. Genau deshalb zeigt der Rechner ehrlich, welcher Teil beim Spendenden verbleibt. Wer regelmäßig spendet, kann mit dieser Transparenz besser planen, wie viel Engagement das eigene Budget verträgt — ohne sich finanziell zu übernehmen.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Orientierungswerte — keine Steuerberatung',
+        text: 'Dieser Rechner liefert eine vereinfachte Schätzung der Steuerersparnis auf Basis des Einkommensteuertarifs 2026 (Grundtarif, § 32a EStG). Er berücksichtigt weder weitere Sonderausgaben oder außergewöhnliche Belastungen noch individuelle Progressionseffekte durch andere Einkünfte, und er bildet das Parteispenden-Sonderverfahren nicht ab. Die tatsächliche Ersparnis hängt von Ihrer gesamten steuerlichen Situation ab und kann abweichen. Die genannten Werte und Rechtsstände entsprechen dem Veranlagungszeitraum 2026 und können sich durch Gesetzesänderungen wandeln. Diese Informationen ersetzen keine individuelle Steuerberatung — verbindlich ist allein Ihr Steuerbescheid. Bei größeren Spenden, Sachspenden oder Unsicherheiten lohnt sich die Rücksprache mit einer Steuerberatung oder einem Lohnsteuerhilfeverein. Auch bei Auslandsspenden, Stiftungszuwendungen oder Parteispenden gelten besondere Regeln, die über die hier dargestellte vereinfachte Berechnung hinausgehen.',
+      },
+    ],
+    quellen: [
+      { titel: '§ 10b EStG (Steuerbegünstigte Zwecke)', hinweis: 'Spenden bis 20 % des Gesamtbetrags der Einkünfte als Sonderausgaben abziehbar; Überhang unbegrenzt vortragsfähig; Sachspenden zum Marktwert (Abs. 3).' },
+      { titel: '§ 50 EStDV (Zuwendungsnachweis)', hinweis: 'Vereinfachter Nachweis bis 300 € je Einzelspende (Kontoauszug/Buchungsbestätigung); ab 300 € Zuwendungsbestätigung nach amtlichem Muster; Belegvorhaltepflicht.' },
+      { titel: '§ 34g EStG / Steueränderungsgesetz 2025', hinweis: 'Parteispenden VZ 2026: 50 % Steuerermäßigung bis max. 1.650 €/3.300 €, zusätzlich § 10b Abs. 2 bis 3.300 €/6.600 €; Gesamt 6.600 €/13.200 €; kein Vortrag.' },
+      { titel: 'Spenden-Methodik', hinweis: 'Steuerersparnis = ESt(zvE) − ESt(zvE − Spende) + Soli + ggf. KiSt; Tarif § 32a 2026 (Grundfreibetrag 12.348 €). Vereinfachte Schätzung, keine Steuerberatung.' },
     ],
   },
   {
