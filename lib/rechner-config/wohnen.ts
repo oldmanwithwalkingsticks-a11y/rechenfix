@@ -2307,7 +2307,7 @@ Wer unsicher ist, ob die Mietpreisbremse greift und wie die Rüge formuliert wer
   },
   {
     slug: 'poolkosten-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-27',
     titel: 'Poolkosten-Rechner',
     beschreibung: 'Jährliche Betriebskosten für Pool: Wasser, Strom, Chemie und Wartung — mit Heizung und Abdeckung.',
     kategorie: 'Wohnen & Energie',
@@ -2317,7 +2317,7 @@ Wer unsicher ist, ob die Mietpreisbremse greift und wie die Rüge formuliert wer
     keywords: ['poolkosten rechner', 'pool betriebskosten', 'pool strom kosten', 'pool chemie kosten', 'pool wärmepumpe kosten', 'pool wasser kosten', 'pool unterhalt', 'swimmingpool kosten jahr'],
     icon: '🏊',
     formel: 'Wasser = Volumen × 1,2 × Wasserpreis | Filter = 8 h × Pumpe kW × Saison-Tage × Strompreis | Heizung (Wärmepumpe) ≈ 3–6 kWh/Tag × Saison-Tage',
-    beispiel: 'Beispiel: 40 m³ Pool, ohne Heizung, mit Abdeckung, Mai–September → Wasser ≈ 190 €, Filterstrom ≈ 270 €, Chemie ≈ 325 €, Wartung ≈ 410 €. Gesamt ≈ 1.195 €/Jahr.',
+    beispiel: 'Beispiel: 40 m³ Pool, ohne Heizung, mit Abdeckung, Mai–September → Wasser ≈ 192 €, Filterstrom ≈ 272 €, Chemie ≈ 240 €, Wartung ≈ 410 €. Gesamt ≈ 1.114 €/Jahr.',
     erklaerung: `**Was kostet ein Pool wirklich im Jahr?**
 
 Ein eigener Pool im Garten klingt nach Urlaub vor der Haustür — doch die laufenden Kosten werden oft unterschätzt. Neben der Anschaffung (1.500 € für einen Aufstellpool bis weit über 50.000 € für einen betonierten Einbaupool) fallen jedes Jahr **Betriebskosten** für Wasser, Strom, Chemie und Wartung an. Unser Poolkosten-Rechner zeigt Ihnen, mit welchen Ausgaben Sie pro Saison rechnen müssen — abhängig von Größe, Heizung, Abdeckung und Saisonlänge.
@@ -2392,6 +2392,127 @@ Wer eine **PV-Anlage** besitzt, kann Filterpumpe und Wärmepumpe überwiegend mi
         frage: 'Lohnt sich die Investition in eine Abdeckung?',
         antwort: 'Fast immer. Eine einfache Solarfolie (80–150 €) reduziert Verdunstung, hält die Wärme, verkürzt die nötige Pumpenlaufzeit und senkt den Chemieverbrauch. Rollabdeckungen und Rollläden kosten 1.000–4.000 €, amortisieren sich aber bei einem mittleren Pool innerhalb von 3–5 Jahren. Zusätzlich: Abdeckungen sind eine wichtige Sicherheitsmaßnahme für Kinder und Haustiere.',
       },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Die laufenden Kosten werden oft unterschätzt',
+        html: `<p>Ein eigener Pool im Garten ist verlockend — doch nach der Anschaffung folgen Jahr für Jahr <strong>Betriebskosten</strong>, die viele unterschätzen. Sie verteilen sich auf fünf Posten: Wasser (Befüllung plus Verdunstung), Filterstrom, eine optionale Heizung, Chemie zur Wasserpflege und Wartung. Dieser Rechner schlüsselt diese Posten für Ihre Poolgröße, Saisonlänge, Heizung und Abdeckung in eine Jahressumme auf — pro Jahr, pro Monat und pro Badetag.</p><p>Der größte Stromfresser im laufenden Betrieb ist die Filterpumpe, die täglich rund acht Stunden läuft. Wer wissen möchte, was die einzelnen Stromverbraucher im Haushalt insgesamt kosten, kann das mit dem <a href="/wohnen/stromkosten-rechner">Stromkosten-Rechner</a> einordnen. Die hier ausgewiesenen Beträge sind Richtwerte auf Basis durchschnittlicher Preise — der tatsächliche Bedarf hängt stark von Nutzung, Wetter und örtlichen Tarifen ab. Die einmalige Anschaffung des Pools selbst ist bewusst nicht enthalten; im Fokus stehen die jährlichen Folgekosten. Schon vor dem Kauf lohnt der Blick auf diese Zahlen — gerade bei steigenden Strompreisen ist die jährliche Belastung kein Nebenaspekt.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Kostenanteile im 40-m³-Beispiel',
+        werte: [
+          { label: 'Wartung', wert: '410 € (37 %)', hinweis: 'Reinigung, Zubehör, Verschleiß' },
+          { label: 'Filterstrom', wert: '272 € (24 %)', hinweis: 'Pumpe 8 h/Tag über die Saison' },
+          { label: 'Chemie', wert: '240 € (22 %)', hinweis: 'pH, Chlor, Algizid — mit Abdeckung' },
+          { label: 'Wasser', wert: '192 € (17 %)', hinweis: 'Befüllung plus Verdunstung' },
+          { label: 'Gesamt pro Jahr', wert: '1.114 €', hinweis: '40 m³, ohne Heizung, mit Abdeckung, Mai–September' },
+          { label: 'Pro Badetag', wert: '≈ 7 €', hinweis: '1.114 € verteilt auf die rund 153 Saisontage von Mai bis September' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Jahreskosten für einen 40-m³-Pool',
+        schritte: [
+          { label: 'Wasser', formel: '40 × 1,2 × 4 €', ergebnis: '192 €' },
+          { label: 'Filterstrom (0,6-kW-Pumpe)', formel: '8 h × 0,6 × 153 Tage × 37 ct', ergebnis: '≈ 272 €' },
+          { label: 'Heizung', formel: 'ohne Heizung', ergebnis: '0 €' },
+          { label: 'Chemie (mit Abdeckung)', formel: '40 × 7,50 × 0,80', ergebnis: '240 €' },
+          { label: 'Wartung', formel: '250 € + 40 × 4 €', ergebnis: '410 €' },
+          { label: 'Gesamt pro Jahr', formel: '192 + 272 + 240 + 410', ergebnis: '1.114 €' },
+        ],
+        fazit: 'Ein 40-m³-Pool ohne Heizung, aber mit Abdeckung, kostet über die Saison Mai bis September rund 1.114 € im Jahr. Den größten Anteil hat überraschend die Wartung mit 410 €, gefolgt vom Filterstrom mit 272 € und der Chemie mit 240 €. Das Wasser schlägt mit 192 € zu Buche — der Pool wird einmal befüllt, und über die Saison werden etwa 20 % des Volumens nachgefüllt. Würde man heizen, käme der mit Abstand teuerste Posten hinzu. Die Abdeckung senkt hier die Chemie um 20 % (von 300 auf 240 €). Gerechnet wird mit 37 ct/kWh Strom und 4 € pro Kubikmeter Wasser.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Die fünf Kostenposten und ihre Einflüsse',
+        kopf: ['Posten', 'Berechnung', 'Haupteinflüsse'],
+        zeilen: [
+          ['Wasser', 'Volumen × 1,2 × Wasserpreis', 'Größe, Wasserpreis'],
+          ['Filterstrom', '8 h × Pumpe (kW) × Saisontage × Strompreis', 'Größe, Saison, Strompreis'],
+          ['Heizung', '~3–6 kWh/Tag × Saisontage (Wärmepumpe)', 'Heizart, Saison, Abdeckung'],
+          ['Chemie', '7,50 €/m³ (× 0,80 mit Abdeckung)', 'Größe, Abdeckung'],
+          ['Wartung', '250 € + 4 €/m³', 'Größe'],
+        ],
+        fussnote: 'Die Pumpenleistung richtet sich nach der Poolgröße: unter 25 m³ rund 0,4 kW, bis 50 m³ etwa 0,6 kW, darüber 0,9 kW. Filterstrom und Heizung hängen direkt von der Saisonlänge ab, weil sie täglich anfallen; Wasser, Chemie und Wartung sind in der Modellrechnung dagegen weitgehend saisonunabhängig. Die Heizung ist optional, aber der mit Abstand größte Hebel nach oben — ohne Heizung bleibt der Pool günstiger, dafür ist das Wasser erst im Hochsommer richtig warm. Der Wasserbedarf von 120 % des Volumens deckt die einmalige Befüllung plus etwa 20 % Nachfüllen für Verdunstung über die Saison ab. Alle Werte sind Richtgrößen für einen typischen Privatpool.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Was die Abdeckung spart',
+        werte: [
+          { label: 'Chemie', wert: '−20 %', hinweis: '300 € → 240 € im Beispiel' },
+          { label: 'Heizkosten', wert: '−30 %', hinweis: 'z. B. 220 € → 154 € mit Wärmepumpe; weniger Wärmeverlust nachts' },
+          { label: 'Verdunstung', wert: 'bis −90 %', hinweis: 'deutlich weniger Wasser nachfüllen' },
+          { label: 'Filterlaufzeit', wert: 'kürzer', hinweis: 'weniger Laub und Schmutz im Wasser' },
+          { label: 'Sicherheit', wert: 'zusätzlich', hinweis: 'feste Abdeckungen schützen Kinder und Tiere' },
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Die Filterpumpe ist der heimliche Stromfresser',
+        text: 'Die Filterpumpe muss laufen, damit das Wasser sauber und keimfrei bleibt — typischerweise rund acht Stunden am Tag über die gesamte Saison. Als Dauerläufer summiert sie sich schnell: Im 40-m³-Beispiel sind es über fünf Monate rund 734 Kilowattstunden und damit etwa 272 € allein für den Filterbetrieb. Zwei Hebel senken diese Kosten spürbar. Erstens eine energieeffiziente Umwälzpumpe mit Frequenzregelung, die mit variabler Drehzahl läuft und bis zu 60 % weniger Strom braucht als eine einfache Pumpe. Zweitens eine bedarfsgerechte Laufzeit: Die Faustregel lautet, das gesamte Poolvolumen etwa zweimal täglich umzuwälzen — an kühlen Tagen oder bei wenig Nutzung genügt oft weniger. Eine Zeitschaltuhr oder ein smarter Controller automatisiert das, ohne dass die Wasserqualität leidet. Wichtig ist nur, die Umwälzung nicht zu stark zu kürzen: Steht das Wasser zu lange, vermehren sich Algen, und die eingesparten Stromkosten zahlt man über mehr Chemie und Reinigung wieder drauf. Die richtige Balance aus Laufzeit und Wasserqualität ist daher der eigentliche Spar-Schlüssel.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Heizoptionen im Überblick',
+        kopf: ['Heizart', 'Effizienz / Kosten', 'Hinweis'],
+        zeilen: [
+          ['Keine Heizung', '0 € Betrieb', 'kürzere Badesaison, ab ca. Juni warm'],
+          ['Wärmepumpe', 'effizient (COP ~5), ~220 €/Saison im Beispiel', 'die beliebteste Lösung'],
+          ['Elektro-Direktheizung', 'teuer (COP 1, 1 kWh Strom = 1 kWh Wärme)', 'nur für kurzes Aufheizen'],
+          ['Solarabsorber', 'Betrieb nahezu 0 €', 'wetterabhängig, braucht Fläche'],
+        ],
+        fussnote: 'Die Heizung ist optional, aber der teuerste Einzelposten, sobald sie genutzt wird. Am wirtschaftlichsten arbeitet eine Wärmepumpe: Mit einem COP von etwa 5 macht sie aus einer Kilowattstunde Strom rund fünf Kilowattstunden Wärme — ein Elektro-Heizstab braucht für dieselbe Wärme die fünffache Strommenge. Ein Solarabsorber nutzt kostenlose Sonnenwärme und verursacht im Betrieb kaum Kosten, liefert aber nur bei Sonnenschein. In jedem Fall senkt eine Abdeckung die Heizkosten um rund 30 %, weil nachts weniger Wärme verloren geht. Ein Elektro-Heizstab ist nur für kurzes Nachheizen sinnvoll; wer den Pool dauerhaft warm halten will, fährt mit der Wärmepumpe oder dem Solarabsorber deutlich günstiger. Auch die Zieltemperatur zählt: Jedes Grad mehr kostet spürbar zusätzliche Energie.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Saisonlänge treibt die laufenden Stromkosten',
+        werte: [
+          { label: 'Mai–September (153 Tage)', wert: '≈ 272 €', hinweis: 'Filterstrom im 40-m³-Beispiel' },
+          { label: 'April–Oktober (214 Tage)', wert: '≈ 380 €', hinweis: 'längere Saison, mehr Pumpenbetrieb' },
+          { label: 'Ganzjährig (365 Tage)', wert: '≈ 648 €', hinweis: 'nur Filterstrom gerechnet, ganz ohne Heizung' },
+          { label: 'Saisonunabhängig', wert: 'Wasser, Chemie, Wartung', hinweis: 'bleiben weitgehend gleich' },
+          { label: 'Mit Heizung', wert: 'zusätzlich', hinweis: 'auch die Heizkosten steigen mit jedem Saisontag' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Erstinvestition gegen laufende Folgekosten',
+        html: `<p>Die Anschaffung und der Betrieb eines Pools sind zwei getrennte Themen. Bei der <strong>Erstinvestition</strong> reicht die Spanne von wenigen Hundert Euro für einen einfachen Aufstellpool über einige Tausend für einen Stahlwandpool bis weit über 50.000 € für ein gemauertes oder betoniertes Einbaubecken. Dieser Rechner betrachtet bewusst nur die <strong>laufenden Jahreskosten</strong> — die Anschaffung bleibt außen vor, weil sie einmalig und höchst individuell ist.</p><p>Wichtig ist, beides zusammen zu denken: Ein günstiges Becken kann durch Heizung, Filterstrom und Chemie über die Jahre teurer werden als gedacht. Gerade die Heizung ist der größte laufende Hebel — eine effiziente Wärmepumpe rechnet sich gegenüber einem Elektro-Heizstab oft schnell. Wer eine solche Anschaffung plant, kann ihre Wirtschaftlichkeit mit dem <a href="/wohnen/waermepumpen-rechner">Wärmepumpen-Rechner</a> abschätzen. So fließt nicht nur der Kaufpreis, sondern auch der Betrieb in die Entscheidung ein. Als grobe Orientierung gilt: Ein kleiner Aufstellpool ohne Heizung bleibt pro Saison niedrig dreistellig, während ein großer, beheizter Pool schnell 2.000 bis 3.000 € im Jahr verschlingt — über die Lebensdauer oft mehr als der Anschaffungspreis eines günstigen Beckens.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'So senken Sie die Poolkosten',
+        punkte: [
+          'Eine Abdeckung nutzen — sie spart gleichzeitig Wasser, Chemie und Heizenergie und ist der größte Einzelhebel.',
+          'Eine energieeffiziente Umwälzpumpe mit variabler Drehzahl statt einer einfachen Dauerlaufpumpe einsetzen.',
+          'Die Pumpenlaufzeit bedarfsgerecht einstellen, statt sie pauschal rund um die Uhr laufen zu lassen.',
+          'Die Saison bewusst wählen — jede zusätzliche Woche verlängert Filter- und Heizkosten.',
+          'Beim Heizen auf Wärmepumpe oder Solarabsorber setzen statt auf eine teure Elektro-Direktheizung.',
+          'Wasser sparsam einsetzen und mit Abdeckung die Verdunstung gering halten.',
+          'Wartung und Wasserpflege selbst übernehmen, um Servicekosten zu sparen.',
+          'Die Zieltemperatur niedrig halten — jedes Grad mehr kostet spürbar zusätzliche Heizenergie.',
+          'Vorhandenen Solarstrom nutzen und Pumpe sowie Wärmepumpe bevorzugt am Tag laufen lassen.',
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Den Pool mit eigenem Solarstrom betreiben',
+        html: `<p>Filter- und Wärmepumpe laufen vor allem tagsüber — genau dann, wenn eine <strong>Photovoltaik-Anlage</strong> Strom liefert. Wer eigenen Solarstrom nutzt, kann die laufenden Stromkosten des Pools daher drastisch senken. Ein smarter Pool-Controller lässt die Filterpumpe bevorzugt dann laufen, wenn genug Solarstrom vorhanden ist, sodass oft nur ein kleiner Rest aus dem Netz kommt.</p><p>In Kombination mit einer Wärmepumpe und einer Abdeckung wird ein sonnenreicher Haushaltspool fast zum Nullkostenpool im Stromverbrauch. Ob sich eine PV-Anlage für den eigenen Haushalt — Pool inklusive — rechnet, lässt sich mit dem <a href="/wohnen/photovoltaik-rechner">Photovoltaik-Rechner</a> durchspielen. Der Pool ist dabei ein idealer Tagverbraucher, weil er den Solarstrom nutzt, wenn er ohnehin anfällt, statt ihn günstig ins Netz einzuspeisen. So sinkt nicht nur die Pool-Stromrechnung, sondern auch die Amortisationszeit der Anlage. Ein Batteriespeicher ist dafür nicht zwingend nötig, da Pumpe und Heizung ohnehin meist tagsüber laufen, wenn die Sonne scheint — die zeitliche Überschneidung von Erzeugung und Verbrauch ist hier der entscheidende Vorteil.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Richtwerte, keine Garantie',
+        text: 'Die berechneten Kosten sind Richtwerte auf Basis durchschnittlicher Preise — insbesondere des mittleren Haushaltsstrompreises von 37 ct/kWh nach der BDEW-Strompreisanalyse 04/2026. Ihr tatsächlicher Tarif kann erheblich abweichen, ebenso der örtliche Wasserpreis. Auch der Wasser- und Chemiebedarf hängt stark von Nutzung, Wetter, Besucherzahl und Pflegegewohnheiten ab und schwankt von Saison zu Saison. Nicht enthalten sind die Erstinvestition in den Pool und seine Technik sowie größere Reparaturen, Reinvestitionen oder Versicherungen. Das Ergebnis dient der Orientierung über die Größenordnung der jährlichen Folgekosten und ist eine unverbindliche Schätzung, kein verbindlicher Kostenplan. Bei Salzwasser-Elektrolyse oder anderen Pflegesystemen verschieben sich die Chemiekosten gegenüber dem hier angesetzten Standard zusätzlich, und auch die Pumpentechnik oder eine ungewöhnliche Beckenform können vom Modell abweichen. Für eine genaue Kalkulation lohnt der Blick auf die eigenen Strom- und Wasserrechnungen. Auch die jeweils gewählte Heizart, die Zieltemperatur und das individuelle Badeverhalten verändern das Ergebnis deutlich — sehen Sie die Jahressumme daher als Größenordnung, nicht als exakte Rechnung.',
+      },
+    ],
+    quellen: [
+      { titel: 'BDEW-Strompreisanalyse 04/2026', hinweis: 'Durchschnittlicher Haushaltsstrompreis 37,0 ct/kWh; Grundlage der Filter- und Heizstromkosten.' },
+      { titel: 'Pool-Betriebskosten (Praxis-Richtwerte)', hinweis: 'Abdeckung spart ~30 % Heizenergie und ~20 % Chemie; Filterpumpe ~8 h/Tag; Wasser-Nachfüllbedarf ~20 % des Volumens.' },
+      { titel: 'Poolkosten-Methodik', hinweis: 'Jahreskosten = Wasser (Vol × 1,2 × Preis) + Filterstrom (8 h × Pumpe kW × Tage × Strompreis) + Heizung + Chemie (7,50 €/m³) + Wartung (250 € + 4 €/m³). Richtwerte ohne Erstinvestition.' },
     ],
   },
   {
