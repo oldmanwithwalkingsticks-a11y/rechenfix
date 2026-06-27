@@ -8,6 +8,49 @@
 
 ---
 
+## 27.06.2026 — W19 Goldstandard Einzelstücke (151 Goldstandard gemessen)
+
+Drei kategorieübergreifende Einzelrechner (gesundheit, auto, finanzen). Gemischtes YMYL-Profil. Alle Beispiel-
+Anker gegen die echten Components/Rechen-Libs nachgerechnet, alle YMYL-Werte gegen Primärquellen geprüft. Drei
+distinkte Leitformate. Alle Builds Vercel-grün. Meilenstein 150 mit fahrrad erreicht.
+
+**Bemerkenswert: Code fing einen Fehler in Chat-Claudes Prompt (gegenseitige Resolver-Kontrolle):**
+- **geburtstermin IVF-Formel** (`9ad134c`): Chat-Claude schlug „Transfer − 5 − 14 = Zeugung, dann + 266" vor —
+  das hätte 14 Tage doppelt abgezogen. Die Lib `schwangerschaft.ts` macht `Beginn = Empfängnis − 14` bereits
+  intern (ET = Empfängnis + 266). Code löste es gegen die Lib korrekt auf, Chat-Claude gegenverifiziert. Lehre:
+  Bei Lib-gestützten Methoden-Varianten die interne Vorverarbeitung lesen, nicht die Formel aus externer
+  Quelle/Gedächtnis übernehmen.
+
+**Zwei YMYL-Stale-Fixes + ein Label-Fix (im jeweiligen Build-Commit):**
+- **spenden Beispiel-/FAQ-Werte** (`d1109c2`): „Grenzsteuersatz 33 % / Ersparnis 165 € / eff. Kosten 335 €" war
+  veraltet. Echter § 32a-Tarif 2026 (Lib `berechneEStGrund(zvE,2026)`, GFB 12.348 €): bei 50.000 € zvE real
+  ~35 % / 175 € / 325 €. Lib rechnete korrekt — nur die statischen Texte (beispiel + faq, beide gerendert) stale.
+- **spenden Parteispenden § 34g** (`d1109c2`): VZ-2025-Stand (1.650/3.300 €) → Steueränderungsgesetz 2025
+  (Dez 2025): ab VZ 2026 verdoppelt. § 34g 50 % Ermäßigung max. 1.650 €/3.300 € (Spende bis 3.300/6.600 €),
+  zusätzlich § 10b Abs. 2 bis 3.300/6.600 €, Gesamt 6.600 €/13.200 €; kein Vortrag.
+- **fahrrad Größenlabel** (`1d63561`): beispiel „City 55,4 cm → Größe M" falsch. Lib `fahrrad-rahmen.ts`
+  (Nicht-MTB-Tabelle: <55 M, <59 L): 55,4 cm = L. Auf „Größe L" korrigiert (MTB 48,2 = L war korrekt).
+
+**Builds (alle 12 Blöcke, Wortzahl ≥1.500, max Block <170 W):**
+- **geburtstermin-rechner** (beispielrechnung, ~1.557 W, `9ad134c`, kategorie gesundheit). Naegele LMP+280,
+  erweiterte Regel ± (Zyklus−28), gegen DocCheck/BARMER/Frauenärzteverband verifiziert — Lib korrekt, kein
+  Wert-Fix. Anker LMP 01.01.2026 → ET 08.10.2026 (SSW 40+0); Zyklus 32 → 12.10., Zyklus 26 → 06.10. Sensibler
+  medizinischer Kontext: Pflicht-Disclaimer (nur ~4 % am Termin, Ultraschall genauer, kein Ersatz für ärztl. Rat).
+- **fahrrad-rahmengroesse-rechner** (tabelle, ~1.544 W, `1d63561`, kategorie auto). Faktoren City/E-Bike 0,66,
+  Rennrad 0,665, MTB 0,574; Schrittlänge ≈ Körpergröße × 0,47; Toleranz ±2 cm. Größenlabel-Fix siehe oben.
+  Body-Tabelle: 165→51,5/M, 178→55,4/L, 190→58,7/L — alle aus Lib gerechnet. Kein YMYL.
+- **spenden-rechner** (tabelle, ~1.532 W, `d1109c2`, kategorie finanzen). Lib `spenden.ts` nutzt § 32a-Tarif
+  2026 + Soli (Milderungszone § 4 SolzG) + KiSt bundeslandabhängig. Zwei YMYL-Fixes siehe oben. Ersparnis-
+  Tabelle aus Tarif gerechnet: 25k→132€/26%, 50k→175€/35%, 70k→210€/42%, 300k→225€/45%. Korrekt (bleibt):
+  20 %-Grenze GdE, 300-€-Vereinfachungsgrenze je Einzelspende, unbegrenzter Spendenvortrag, Sachspenden Marktwert.
+
+**Lehre erhärtet:** (1) Config-`beispiel`/`faq` bleiben systematisches Stale-Nest — auch bei korrekt rechnender
+Lib (spenden: Lib 2026-Tarif richtig, Texte aus altem Jahr). YMYL-Beispiele IMMER mit echtem Tarif nachrechnen.
+(2) Bei Lib-gestützten Varianten die interne Vorverarbeitung der Lib lesen (geburtstermin-IVF), nicht aus externer
+Quelle übernehmen — die wechselseitige Resolver-Kontrolle Chat↔Code fing hier einen YMYL-Fehler vor Live-Gang.
+
+---
+
 ## 27.06.2026 — W19 Goldstandard alltag-Block KOMPLETT (148 Goldstandard gemessen)
 
 Zehn Alltagsrechner — der gesamte alltag-Block ist jetzt Goldstandard. Überwiegend gering-YMYL (Konsum-/
