@@ -1982,7 +1982,7 @@ Unser Rechner berücksichtigt bewusst keine steuerlichen Effekte, da diese sehr 
   },
   {
     slug: 'indexmiete-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-28',
     titel: 'Indexmiete-Rechner',
     beschreibung: 'Indexmiete berechnen: Mieterhöhung bei Indexmietvertrag basierend auf dem Verbraucherpreisindex (VPI).',
     kategorie: 'Wohnen & Energie',
@@ -1992,7 +1992,7 @@ Unser Rechner berücksichtigt bewusst keine steuerlichen Effekte, da diese sehr 
     keywords: ['indexmiete rechner', 'indexmiete berechnen', 'indexmietvertrag', 'vpi mieterhöhung', 'verbraucherpreisindex miete', 'mieterhöhung indexmiete', 'indexmiete erhöhung', 'staffelmiete vs indexmiete', 'destatis vpi', 'mietanpassung'],
     icon: '📈',
     formel: 'Neue Kaltmiete = Aktuelle Kaltmiete × (Aktueller VPI / Alter VPI) | VPI-Veränderung in % = (Aktueller VPI − Alter VPI) / Alter VPI × 100 | Basisjahr des VPI: 2020 = 100 Punkte.',
-    beispiel: 'Kaltmiete 800 € · VPI bei Vertragsabschluss 117,4 · aktueller VPI 125,8 (Stand März 2026) → Veränderung +7,16 % → neue Kaltmiete 857,21 € (+57,21 €/Monat, +686,52 €/Jahr).',
+    beispiel: 'Kaltmiete 800 € · VPI bei Vertragsabschluss 117,4 · aktueller VPI 125,8 (Beispielwert, Stand März 2026) → Veränderung +7,16 % → neue Kaltmiete 857,24 € (+57,24 €/Monat, +686,88 €/Jahr).',
     erklaerung: `**Was ist ein Indexmietvertrag?**
 
 Ein **Indexmietvertrag** ist eine besondere Form des Mietvertrags, bei der die Miete an die Entwicklung des **Verbraucherpreisindex (VPI)** gekoppelt ist. Geregelt ist die Indexmiete in § 557b BGB. Steigt der VPI, darf der Vermieter die Kaltmiete im gleichen Verhältnis anheben — fällt der Index, kann die Miete theoretisch auch sinken (in der Praxis selten). Der große Vorteil aus Vermietersicht: Die Miete passt sich automatisch der Inflation an, ohne dass ortsübliche Vergleichsmieten oder Modernisierungen als Begründung herhalten müssen. Für Mieter bringt die Indexmiete auf der einen Seite Planungssicherheit (keine überraschenden Mieterhöhungen auf Vergleichsmietenniveau), auf der anderen Seite aber in inflationären Zeiten spürbare Mehrkosten. Während einer normalen Mietzeit gilt: Solange der Indexmietvertrag wirksam vereinbart ist, sind Erhöhungen nach § 558 BGB (Vergleichsmiete) und nach § 559 BGB (Modernisierungsumlage, außer bei gesetzlich vorgeschriebenen Maßnahmen) ausgeschlossen.
@@ -2019,7 +2019,7 @@ Neben der Indexmiete gibt es zwei weitere wichtige Mietformen: Die **Staffelmiet
       },
       {
         frage: 'Wie berechne ich die Indexmiete?',
-        antwort: 'Formel: Neue Kaltmiete = Aktuelle Kaltmiete × (Aktueller VPI / VPI bei Vertragsabschluss). Beispiel: Kaltmiete 800 €, VPI alt 117,4, VPI neu 125,8 (Stand März 2026) → 800 × 125,8 / 117,4 = 857,21 €. Die prozentuale Steigerung des VPI (+7,16 %) wird 1:1 auf die Miete übertragen. Nebenkosten sind von der Berechnung ausgenommen, sie werden separat abgerechnet.',
+        antwort: 'Formel: Neue Kaltmiete = Aktuelle Kaltmiete × (Aktueller VPI / VPI bei Vertragsabschluss). Beispiel: Kaltmiete 800 €, VPI alt 117,4, VPI neu 125,8 (Stand März 2026) → 800 × 125,8 / 117,4 = 857,24 € (der Rechner rundet erst das Endergebnis). Die prozentuale Steigerung des VPI (+7,16 %) wird 1:1 auf die Miete übertragen. Nebenkosten sind von der Berechnung ausgenommen, sie werden separat abgerechnet.',
       },
       {
         frage: 'Wo finde ich den aktuellen Verbraucherpreisindex?',
@@ -2033,6 +2033,144 @@ Neben der Indexmiete gibt es zwei weitere wichtige Mietformen: Die **Staffelmiet
         frage: 'Kann die Indexmiete auch sinken?',
         antwort: 'Ja, theoretisch. Wenn der VPI zwischen zwei Anpassungen sinkt, muss die Miete ebenfalls entsprechend reduziert werden — das sieht § 557b BGB ausdrücklich vor. In der Praxis kommt das allerdings nur sehr selten vor, da der VPI in den letzten Jahrzehnten fast ausschließlich gestiegen ist. Als Mieter können Sie in einem solchen Fall eine Mietminderung vom Vermieter verlangen und sollten sich bei Weigerung an den Mieterbund oder einen Anwalt wenden.',
       },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was ist eine Indexmiete?',
+        html: `<p>Bei einer <strong>Indexmiete</strong> nach § 557b BGB ist die Kaltmiete an den <strong>Verbraucherpreisindex (VPI)</strong> des Statistischen Bundesamtes gekoppelt. Steigt das allgemeine Preisniveau, darf der Vermieter die Miete im selben Verhältnis anheben — die Erhöhung folgt also direkt der Inflation. Damit das gilt, muss die Indexmiete im Mietvertrag ausdrücklich vereinbart sein; ohne diese Klausel ist sie unwirksam. Der VPI nutzt das Basisjahr 2020 = 100 Punkte.</p><p>Dieser Rechner ermittelt aus altem und aktuellem VPI-Wert die prozentuale Veränderung und daraus die neue Kaltmiete samt monatlicher und jährlicher Mehrbelastung. Betroffen ist nur die Kaltmiete — die Nebenkosten werden weiter nach Verbrauch abgerechnet. Ihre Gesamtbelastung überblicken Sie mit dem <a href="/wohnen/mietrechner">Mietrechner</a>; wie stark die Inflation die Kaufkraft verändert, zeigt der <a href="/finanzen/inflationsrechner">Inflationsrechner</a>. Wichtig vorab: Die Indexmiete ist kein Freibrief für beliebige Erhöhungen — sie ist an strenge Form- und Fristregeln gebunden, die dieser Beitrag Schritt für Schritt erklärt.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Indexmieterhöhung Schritt für Schritt',
+        schritte: [
+          { label: 'VPI bei Vertragsabschluss', formel: 'Beispielwert', ergebnis: '117,4' },
+          { label: 'Aktueller VPI (Beispiel, März 2026)', formel: 'Beispielwert', ergebnis: '125,8' },
+          { label: 'VPI-Veränderung', formel: '(125,8 − 117,4) ÷ 117,4 × 100', ergebnis: '+7,16 %' },
+          { label: 'Neue Kaltmiete', formel: '800 € × 125,8 ÷ 117,4', ergebnis: '857,24 €' },
+          { label: 'Mehrbetrag pro Monat', formel: '857,24 € − 800 €', ergebnis: '+57,24 €' },
+          { label: 'Mehrbetrag pro Jahr', formel: '57,24 € × 12', ergebnis: '+686,88 €' },
+        ],
+        fazit: 'Die prozentuale Veränderung des Verbraucherpreisindex wird eins zu eins auf die Kaltmiete übertragen. Im Beispiel steigt der VPI von 117,4 auf 125,8 Punkte — das sind 7,16 %. Aus 800 € Kaltmiete werden damit 857,24 €, also 57,24 € mehr im Monat und 686,88 € im Jahr. Wichtig: Der Rechner rundet erst das Endergebnis auf zwei Nachkommastellen, nicht schon den Zwischenwert — sonst entstehen kleine Abweichungen. Die hier verwendeten VPI-Zahlen sind Beispielwerte (Stand VPI März 2026 = 125,8); den tagesaktuellen Indexstand prüfen Sie für Ihre eigene Berechnung selbst auf destatis.de.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Wo Sie den Verbraucherpreisindex finden',
+        text: 'Den Verbraucherpreisindex veröffentlicht das Statistische Bundesamt monatlich auf destatis.de unter „Preise → Verbraucherpreisindex", in der Regel um die Monatsmitte für den Vormonat. Maßgeblich ist seit 2023 das Basisjahr 2020 = 100 Punkte und ausschließlich der Gesamtindex, nicht einzelne Unterindizes wie Energie oder Nahrungsmittel. Für die Berechnung Ihrer Indexmiete brauchen Sie zwei Werte: den im Mietvertrag genannten Ausgangs-VPI (Stand bei Vertragsabschluss oder letzter Anpassung) und den aktuellen Monatswert. Achten Sie darauf, dass beide Werte zur selben Indexreihe und zum selben Basisjahr gehören — das Statistische Bundesamt rechnet ältere Reihen regelmäßig auf das neue Basisjahr um. Da sich der Index monatlich ändert, sollten Sie den tagesaktuellen Wert immer direkt bei Destatis nachschlagen und nicht auf gespeicherte Beispielwerte vertrauen. Für den im Vertrag genannten Ausgangswert gilt: Steht dort eine ältere Indexreihe (etwa Basisjahr 2015 oder 2010), rechnet Destatis sie auf das aktuelle Basisjahr um — entscheidend ist, dass beide Werte denselben Bezug haben.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Indexmiete gegen Staffelmiete',
+        spalteA: 'Indexmiete (§ 557b BGB)',
+        spalteB: 'Staffelmiete (§ 557a BGB)',
+        zeilen: [
+          { kriterium: 'Grundlage', a: 'an den VPI gekoppelt', b: 'feste Beträge im Voraus vereinbart' },
+          { kriterium: 'Planbarkeit', a: 'abhängig von der Inflation', b: 'voll planbar' },
+          { kriterium: 'Anpassung', a: 'frühestens alle 12 Monate', b: 'zu festgelegten Terminen' },
+          { kriterium: 'Bei hoher Inflation', a: 'steigt schnell', b: 'bleibt wie vereinbart' },
+          { kriterium: 'Bei niedriger Inflation', a: 'steigt kaum', b: 'steigt trotzdem' },
+          { kriterium: 'Kombination', a: 'nicht mit Staffel kombinierbar', b: 'nicht mit Index kombinierbar' },
+        ],
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Indexmiete gegen Vergleichsmieten-Erhöhung',
+        spalteA: 'Indexmiete (§ 557b)',
+        spalteB: 'Vergleichsmiete (§ 558)',
+        zeilen: [
+          { kriterium: 'Maßstab', a: 'Verbraucherpreisindex', b: 'ortsübliche Vergleichsmiete (Mietspiegel)' },
+          { kriterium: 'Kappungsgrenze', a: 'keine (nur der VPI begrenzt)', b: '20 % in 3 Jahren, angespannte Märkte 15 %' },
+          { kriterium: 'Begründung', a: 'alter und neuer VPI-Wert', b: 'Mietspiegel oder Vergleichswohnungen' },
+          { kriterium: 'Häufigkeit', a: 'frühestens alle 12 Monate', b: 'nach Wartefrist, dann begrenzt' },
+          { kriterium: 'Bei Indexvertrag', a: 'gilt dieser Mechanismus', b: '§ 558 ist ausgeschlossen' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Welches Mietmodell passt zu wem?',
+        html: `<p>Index-, Staffel- und Vergleichsmiete schließen sich gegenseitig aus — im Vertrag gilt immer nur eines. Welches sinnvoll ist, hängt vor allem von der erwarteten Preisentwicklung ab. Die <strong>Staffelmiete</strong> punktet mit absoluter Planbarkeit, weil die Beträge von vornherein feststehen; sie kann sich aber in inflationsschwachen Phasen für Mieter ungünstig anfühlen, wenn die Miete stärker steigt als die allgemeinen Preise. Die <strong>Indexmiete</strong> bleibt in ruhigen Zeiten moderat, wird in Hochinflationsphasen aber schnell teuer.</p><p>Die klassische <strong>Vergleichsmiete</strong> nach § 558 BGB ist an den örtlichen Mietspiegel gebunden und durch die Kappungsgrenze gedeckelt — dafür kann der Vermieter sie nur in größeren Abständen und mit Begründung anheben. Für Mieter mit Wunsch nach Kalkulierbarkeit ist in inflationären Zeiten die Staffelmiete oft die ruhigere Wahl, während die Indexmiete bei stabilen Preisen attraktiv bleibt. Entscheidend ist, die Klausel vor Unterschrift genau zu lesen und die eigene Erwartung an die Inflation ehrlich einzuschätzen.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Die Anpassungsregeln nach § 557b Abs. 2 BGB',
+        html: `<p>Eine Indexmiete darf <strong>frühestens alle zwölf Monate</strong> angepasst werden — zwischen zwei Erhöhungen muss mindestens ein Jahr liegen. Die Anpassung wirkt nicht automatisch: Der Vermieter muss sie schriftlich erklären und dabei den alten und den neuen VPI-Wert sowie die daraus folgende Mieterhöhung angeben. Eine fehlerhafte oder unvollständige Erklärung ist unwirksam. Die neue Miete gilt dann ab dem übernächsten Monat nach Zugang der Erklärung.</p><p>Während der Indexbindung sind andere Erhöhungswege gesperrt: Weder eine Anhebung auf die ortsübliche Vergleichsmiete (§ 558 BGB) noch eine Modernisierungsumlage (§ 559 BGB) ist zulässig — Ausnahme sind gesetzlich erzwungene Maßnahmen wie energetische Pflichtsanierungen. Anders als bei der Mietpreisbremse, deren Grenzen der <a href="/wohnen/mietpreisbremse-rechner">Mietpreisbremse-Rechner</a> abbildet, begrenzt bei der Indexmiete allein die Entwicklung des Preisindex die Miethöhe.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Keine Kappungsgrenze bei der Indexmiete',
+        text: 'Ein zentraler Unterschied zur normalen Mieterhöhung: Die gesetzliche Kappungsgrenze von 20 % in drei Jahren (in angespannten Wohnungsmärkten 15 %) nach § 558 Abs. 3 BGB gilt für Indexmieten ausdrücklich nicht. Die Höhe der Erhöhung wird allein durch die Entwicklung des Verbraucherpreisindex begrenzt. In Phasen niedriger Inflation ist das für Mieter günstig — die Miete steigt dann nur geringfügig. In Hochinflationsphasen kann es dagegen deutlich teurer werden als eine vergleichsmietenbasierte Erhöhung: 2022 und 2023 lag die jährliche Inflation zeitweise über 7 %, was bei 800 € Kaltmiete schon in einem einzigen Jahr über 55 € mehr im Monat bedeuten konnte. Wer einen Indexmietvertrag unterschreibt, sollte sich dieser fehlenden Deckelung bewusst sein und die mögliche Belastung in inflationären Zeiten einkalkulieren. Umgekehrt ist die Indexmiete in Phasen sehr niedriger Inflation für Mieter sogar günstiger als eine Vergleichsmietenerhöhung, weil die Miete dann kaum steigt — der Mechanismus wirkt also in beide Richtungen.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Mehrjahres-Szenario bei rund 2,5 % VPI pro Jahr',
+        schritte: [
+          { label: 'Start-Kaltmiete', formel: 'Ausgangswert', ergebnis: '800,00 €' },
+          { label: 'Nach Jahr 1 (+2,5 %)', formel: '800 × 1,025', ergebnis: '820,00 €' },
+          { label: 'Nach Jahr 2 (+2,5 %)', formel: '820 × 1,025', ergebnis: '840,50 €' },
+          { label: 'Nach Jahr 3 (+2,5 %)', formel: '840,50 × 1,025', ergebnis: '861,51 €' },
+          { label: 'Mehrbetrag nach 3 Jahren', formel: '861,51 € − 800 €', ergebnis: '+61,51 €/Monat' },
+        ],
+        fazit: 'Indexmieterhöhungen wirken kumulativ: Jede Anpassung baut auf der bereits erhöhten Miete auf, nicht auf der ursprünglichen. Im illustrativen Szenario mit jeweils 2,5 % VPI-Anstieg pro Jahr wächst die Kaltmiete in drei Jahren von 800 € auf rund 861,51 € — gut 61,50 € mehr im Monat, ohne dass eine Kappungsgrenze greift. Über zehn Jahre summiert sich selbst eine moderate Inflation spürbar. Die Werte sind gerundet und dienen nur der Veranschaulichung; die tatsächliche Entwicklung hängt vom realen VPI-Verlauf ab, der mal stärker, mal schwächer ausfällt und in einzelnen Jahren sogar leicht negativ sein kann.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Steigender gegen fallenden VPI',
+        spalteA: 'VPI steigt (Normalfall)',
+        spalteB: 'VPI sinkt (selten)',
+        zeilen: [
+          { kriterium: 'Folge für die Miete', a: 'Vermieter darf erhöhen', b: 'Miete muss gesenkt werden' },
+          { kriterium: 'Rechtsgrundlage', a: '§ 557b Abs. 1 BGB', b: '§ 557b Abs. 1 BGB (gilt beidseitig)' },
+          { kriterium: 'Wer wird aktiv', a: 'Vermieter erklärt die Erhöhung', b: 'Mieter verlangt die Senkung' },
+          { kriterium: 'Praxis', a: 'VPI fast immer gestiegen', b: 'sehr selten, kurze Phasen' },
+          { kriterium: 'Bei Weigerung', a: 'Erhöhung prüfen, ggf. Mieterbund', b: 'Senkung einfordern, ggf. Mieterbund' },
+        ],
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Index-Erhöhung als Mieter prüfen',
+        punkte: [
+          'Ist die Indexmiete im Mietvertrag ausdrücklich vereinbart? Ohne Klausel ist sie unwirksam.',
+          'Liegen seit der letzten Anpassung mindestens zwölf Monate?',
+          'Ist die Erhöhung schriftlich erklärt und nennt sie den alten und den neuen VPI-Wert?',
+          'Stammen beide VPI-Werte aus derselben Indexreihe und demselben Basisjahr (2020 = 100)?',
+          'Stimmt die Prozentrechnung — wurde nur der Gesamtindex verwendet, nicht ein Unterindex?',
+          'Bezieht sich die Erhöhung nur auf die Kaltmiete, nicht auf die Nebenkosten?',
+          'Gilt die neue Miete frühestens ab dem übernächsten Monat nach Zugang der Erklärung?',
+          'Bei Zweifeln den Deutschen Mieterbund oder eine Mietrechtsberatung einschalten.',
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Indexmiete aus Vermietersicht',
+        html: `<p>Für Vermieter ist die Indexmiete vor allem ein <strong>automatischer Inflationsausgleich</strong>: Die Miete folgt dem Preisindex, ohne dass ein Mietspiegel herangezogen oder eine Modernisierung begründet werden muss. Das spart Aufwand und vermeidet Streit über die ortsübliche Vergleichsmiete. Im Gegenzug bindet sich der Vermieter aber: Während der Indexbindung sind Erhöhungen nach § 558 und § 559 BGB ausgeschlossen, und bei einem sinkenden Index muss die Miete sogar gesenkt werden.</p><p>Pflicht ist die formgerechte Erklärung — schriftlich, mit altem und neuem VPI-Wert und unter Wahrung der zwölfmonatigen Mindestfrist. Fehlerhafte Erklärungen sind unwirksam und kosten bares Geld. Wer eine Wohnung als Kapitalanlage betrachtet, sollte die Indexmiete in die Renditebetrachtung einbeziehen; eine erste Einschätzung liefert der <a href="/wohnen/mietrendite-rechner">Mietrendite-Rechner</a>.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Vor Unterschrift eines Indexmietvertrags',
+        punkte: [
+          'Den genauen Wortlaut der Indexklausel lesen — sie muss klar auf den VPI des Statistischen Bundesamtes verweisen.',
+          'Den im Vertrag genannten Ausgangs-VPI mit dem aktuellen Destatis-Wert abgleichen.',
+          'Die eigene Erwartung an die Inflation realistisch einschätzen und die mögliche Mehrbelastung durchrechnen.',
+          'Bedenken, dass keine Kappungsgrenze greift — anders als bei der Vergleichsmiete nach § 558 BGB.',
+          'Prüfen, ob Modernisierungsumlagen während der Indexbindung wirklich ausgeschlossen sind.',
+          'Bei längerer Mietdauer die kumulative Wirkung über mehrere Jahre überschlagen.',
+          'Im Zweifel die Klausel vom Mieterbund oder einer Mietrechtsberatung prüfen lassen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Kurzfazit',
+        text: 'Die Indexmiete folgt der Inflation: In ruhigen Preisphasen steigt sie nur moderat, in Hochinflationsphasen dagegen schnell und ohne Kappungsgrenze. Für Mieter bedeutet das Planbarkeit bei stabilen Preisen, aber ein spürbares Risiko bei hoher Inflation; für Vermieter einen bequemen, aber bindenden Inflationsausgleich. Entscheidend ist in jedem Fall der korrekte VPI: Verwenden Sie den im Vertrag genannten Ausgangswert und den tagesaktuellen Monatswert von destatis.de, beide aus derselben Indexreihe. Die hier gezeigten VPI-Zahlen sind Beispielwerte (Stand März 2026) und kein tagesaktueller Live-Wert. Dieser Rechner liefert eine erste Orientierung und ersetzt keine Rechtsberatung — bei einer strittigen Mieterhöhung helfen der Deutsche Mieterbund oder eine Fachanwältin für Mietrecht.',
+      },
+    ],
+    quellen: [
+      { titel: 'BGB § 557b – Indexmiete (gesetze-im-internet.de)', url: 'https://www.gesetze-im-internet.de/bgb/__557b.html' },
+      { titel: 'Statistisches Bundesamt (Destatis) – Verbraucherpreisindex (VPI)', url: 'https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html' },
+      { titel: 'Destatis – Rechenhilfe zur Anpassung von Verträgen (Wertsicherung)', url: 'https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/Methoden/Erlaeuterungen/preisindizes-vertraege.html' },
+      { titel: 'Deutscher Mieterbund – Indexmiete', url: 'https://www.mieterbund.de/' },
     ],
   },
   {
