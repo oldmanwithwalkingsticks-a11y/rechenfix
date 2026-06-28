@@ -4,7 +4,72 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 27.06.2026
+**Stand:** 28.06.2026
+
+---
+
+## 28.06.2026 — W19 Goldstandard wohnen-Block: Bau + Energie (159 Goldstandard gemessen)
+
+Acht wohnen-Rechner über zwei Teil-Sessions: zuerst der Bau-/Material-Teil (fliesenbedarf, estrich, beton,
+poolkosten, dachflaechen), dann der Energie-Teilblock KOMPLETT (photovoltaik, balkon-solar, waermepumpen).
+Alle kategorieSlug `'wohnen'` (verifiziert). Sechs distinkte Leitformate (tabelle, beispielrechnung, vergleich,
+statistik, checkliste). Alle Beispiel-Anker per eigener Node-Probe mit echten Lib-Konstanten nachgerechnet,
+alle YMYL-/Marktwerte gegen Primärquellen (BNetzA, KfW, BAFA, BMWK, Verbraucherzentrale, DIN) geprüft. Alle
+Builds Vercel-grün, jeder interne Link kategorieSlug-per-grep verifiziert. Meilenstein: Energie-Teilblock
+abgeschlossen.
+
+**Drei YMYL-/Beispiel-Stale-Fixes (im jeweiligen Build-Commit):**
+- **poolkosten Beispiel-/Chemie-Werte** (`0dd7315`): Component-only-Rechner. Chemiekosten 325 € → 240 €,
+  Gesamt 1.195 € → 1.114 €, Component-konform. Strompreis 37 ct (BDEW 04/2026) verifiziert. Code-Korrektur:
+  nur Filterstrom + Heizung skalieren mit Saisonlänge — NICHT Wasser/Chemie/Wartung (pauschal "skaliert
+  proportional" wäre falsch gewesen).
+- **waermepumpen Beispiel** (`5b9f6ee`): `beispiel`-Feld rechnete mit 32 ct Strom (echter Component-Default
+  ist `waermepumpen_tarif` = 28 ct) und HWB ~19.500 (passt nicht zu Gas 2.000 € ÷ 12 ct = 16.667 kWh) und
+  versprach "5–8 Jahre" Amortisation — von der Lib nicht reproduzierbar. Neu, Lib-konsistent (Node-Probe):
+  16.667 kWh → 5.556 kWh Strom × 28 ct = 1.756 €/J vs. 2.300 € Gas → nur 544 € Ersparnis/J → ~39 J bei 30 %,
+  ~17 J bei 70 % Förderung; CO₂ ~1.240 kg/J. Ehrliche Kernbotschaft: Förderung ist der Haupthebel, nicht die
+  laufende Ersparnis. Zusätzlich Einkommensbonus-Begriff von "Brutto" auf "zu versteuerndes Haushaltseinkommen"
+  korrigiert, Klimabonus präzisiert ("voll bis Ende 2028, ab 2029 17 %").
+
+**Zwei Code-Korrekturen an Chat-Claudes Prompt-Annahmen (gegenseitige Resolver-Kontrolle Chat↔Code):**
+- **fliesenbedarf Fugen-Annahme** (`58c7032`): Lib rechnet Fliesenzahl auf Basis Werkmaß OHNE Fuge → reale
+  Stückzahl liegt leicht niedriger; Content trägt nun korrekt +1–2 % Puffer-Hinweis statt naiver Flächenteilung.
+- **beton Sack-Logik** (`890d908`): Säcke sind VOLUMEN-basiert ⌈Volumen ÷ 0,012 m³⌉, NICHT gewichtsbasiert.
+  Anker 83 Säcke gegen Lib bestätigt; DIN EN 206 Festigkeitsklassen.
+
+**Builds (alle ≥11 Blöcke, Wortzahl ≥1.500, max Block <170 W):**
+- **fliesenbedarf-rechner** (tabelle, `58c7032`). Anker 44 Fliesen; Verschnitt-/Kleber-Richtwerte; Fugen-Hinweis
+  siehe oben. Kein YMYL-Wert-Fix.
+- **estrich-rechner** (beispielrechnung, `f292fd1`). Anker 53/69/21 Säcke (Zement-/Fließ-/Trockenestrich);
+  DIN 18560 Mindestdicken. Kein Stale.
+- **beton-rechner** (vergleich, `890d908`). Anker 83 Säcke (Volumen-basiert, s. o.); DIN EN 206. Kein Stale.
+- **poolkosten-rechner** (statistik, `0dd7315`). Beispiel-Fix s. o. Component-only, Saison-Skalierungs-Korrektur.
+- **dachflaechen-rechner** (checkliste, `ebd794d`). Anker 97,7 m²; reine Trigonometrie (Neigung/Grundfläche),
+  kein Stale.
+- **photovoltaik-rechner** (tabelle, `8b1c94a`). Energie-Teilblock Start. Drei SSOTs verifiziert aktuell:
+  EEG-Einspeisevergütung 7,78 ct (bis 10 kWp), Strompreis 33 ct (Festpreis-Neuvertrag), PV-Ertragsmodell
+  850 kWh/kWp. Anker ~1.043 €/Jahr. EEG-Reform 2027 korrekt als "geplant, nicht beschlossen" gekennzeichnet.
+  Kein Wert-Fix.
+- **balkon-solar-rechner** (vergleich, `8a90264`). Dedizierte Lib `balkon-solar.ts` (eigenes BKW-Modell 04/2026):
+  spez. Ertrag 950 kWh/kWp, Eigenverbrauch 30 %, Strompreis 33 ct. Anker mit echter Lib-Rundung (separates
+  Math.round je Stufe): 800 W/Süd/Aufständerung → 684 kWh → 205 kWh Eigenverbrauch × 33 ct = 67,65 €/Jahr.
+  Rechtslage 2026 (BNetzA + Verbraucherzentrale): Solarpaket I, 800 VA Wechselrichter + 2.000 Wp Module
+  (§ 3 Nr. 43 EEG), nur MaStR-Anmeldung, Schuko bis 960 Wp (DIN VDE V 0126-95 seit 12/2025), § 554 BGB /
+  § 20 WEG Mieterrecht, 0 % USt. Alte 600-W-Grenze nur als historischer Verweis behalten.
+- **waermepumpen-rechner** (vergleich, `5b9f6ee`). Energie-Teilblock Abschluss. Förderung gegen KfW-Merkblatt
+  458 primär verifiziert: Grund 30 % + Klima 20 % + Einkommen 30 % + Effizienz 5 %, Cap 70 %, max. 30.000 €
+  förderfähig → max. 21.000 € Zuschuss; Vermieter max. 35 %. JAZ dämmstandard-gekoppelt (Lib-Tabelle
+  2,5/3,0/3,5/4,0). WP-Stromtarif 22–28 ct (VZ NRW Marktcheck 02/2026, Schnitt ~24 ct). Beispiel-Fix s. o.
+
+**Lehren erhärtet:** (1) Config-`beispiel` bleibt systematisches Stale-Nest — auch bei korrekt rechnender Lib
+und gut gepflegten SSOTs (waermepumpen: `beg-foerderung.ts`/`strompreis.ts` korrekt, nur das statische Beispiel
+mit falschem Strompreis 32 statt 28). YMYL-Beispiele IMMER mit den ECHTEN Component-Defaults nachrechnen, nicht
+mit plausibel klingenden Rundwerten. (2) Component-only-Rechner: die Abhängigkeitsstruktur lesen (welche
+Variable skaliert welchen Posten) — poolkosten skaliert nur Filterstrom+Heizung mit Saison, nicht alles.
+(3) Lib-Methoden-Varianten intern lesen: beton-Säcke volumen- statt gewichtsbasiert, fliesenbedarf Werkmaß ohne
+Fuge. (4) "Geplant vs. beschlossen" konsequent kennzeichnen (PV: EEG-Reform 2027). (5) Gut gepflegte zentrale
+SSOTs (strompreis.ts, eeg-einspeiseverguetung.ts, pv-ertragsmodell.ts, beg-foerderung.ts) waren durchgängig
+aktuell (04–06/2026) — Stale entstand ausschließlich in statischen Config-Texten, nie in den Libs.
 
 ---
 
