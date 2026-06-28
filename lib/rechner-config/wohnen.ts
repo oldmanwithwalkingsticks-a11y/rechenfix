@@ -1783,7 +1783,7 @@ Die Strompreisbremse des Bundes wurde 2023 eingeführt und inzwischen wieder aus
   },
   {
     slug: 'mietrendite-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-28',
     titel: 'Mietrendite-Rechner',
     beschreibung: 'Mietrendite berechnen: Brutto- und Nettomietrendite für Immobilien als Kapitalanlage, mit Cashflow-Analyse.',
     kategorie: 'Wohnen & Energie',
@@ -1793,7 +1793,7 @@ Die Strompreisbremse des Bundes wurde 2023 eingeführt und inzwischen wieder aus
     keywords: ['mietrendite rechner', 'mietrendite berechnen', 'bruttomietrendite', 'nettomietrendite', 'eigenkapitalrendite immobilie', 'immobilie als kapitalanlage', 'mietmultiplikator', 'cashflow immobilie', 'rendite immobilie berechnen', 'immobilienrendite'],
     icon: '📊',
     formel: 'Bruttomietrendite = (Jahresmiete / Kaufpreis) × 100 | Nettomietrendite = (Jahresreinertrag / Gesamtinvestition) × 100 | EK-Rendite = (Reinertrag − Zinsen) / Eigenkapital × 100',
-    beispiel: 'Kaufpreis 250.000 €, 800 € Kaltmiete/Monat → Bruttomietrendite 3,8%, Nettomietrendite ca. 2,0%. Mit 50.000 € EK und 3,5% Zins: EK-Rendite ca. 5,5%.',
+    beispiel: 'Kaufpreis 250.000 €, 800 € Kaltmiete/Monat (9.600 €/Jahr) → Bruttomietrendite 3,8 %, Nettomietrendite 2,1 %, Mietmultiplikator 26. Mit 225.000 € Kredit (3,5 % Zins, 2 % Tilgung) beträgt die Kreditrate 1.031 €/Monat — bei nur 485 €/Monat Reinertrag ergibt das einen negativen Cashflow von −546 €/Monat und eine Eigenkapitalrendite von −4,1 %. Bei aktuellen Zinsen reicht eine Bruttorendite von 3,8 % für einen positiven Cashflow nicht aus.',
     erklaerung: `**Bruttomietrendite vs. Nettomietrendite: Der Unterschied**
 
 Die Bruttomietrendite ist die einfachste Kennzahl für die Bewertung einer Immobilie als Kapitalanlage. Sie berechnet sich aus der Jahreskaltmiete geteilt durch den Kaufpreis, multipliziert mit 100. Bei einer Wohnung für 250.000 Euro mit 800 Euro Kaltmiete pro Monat ergibt das: 9.600 / 250.000 × 100 = **3,84%**. Diese Zahl ist schnell berechnet und eignet sich gut für einen ersten Vergleich verschiedener Objekte. Allerdings berücksichtigt sie weder die Kaufnebenkosten noch die laufenden Kosten, die der Vermieter nicht auf den Mieter umlegen kann.
@@ -1836,6 +1836,144 @@ Unser Rechner berücksichtigt bewusst keine steuerlichen Effekte, da diese sehr 
         frage: 'Wie beeinflusst die Finanzierung meine Rendite?',
         antwort: 'Durch den Leverage-Effekt (Hebelwirkung) kann eine Kreditfinanzierung die Eigenkapitalrendite steigern — solange die Gesamtrendite über dem Kreditzins liegt. Gleichzeitig sinkt aber der monatliche Cashflow durch die Kreditrate, und der Hebel wirkt auch bei Verlusten verstärkt. Je mehr Eigenkapital, desto sicherer, aber desto geringer die EK-Rendite.',
       },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was die Mietrendite über eine Kapitalanlage verrät',
+        html: `<p>Die Mietrendite zeigt, wie rentabel eine vermietete Immobilie ist. Drei Kennzahlen gehören zusammen: Die <strong>Bruttomietrendite</strong> (Jahreskaltmiete geteilt durch Kaufpreis) ist schnell berechnet, rechnet das Objekt aber schön, weil sie Nebenkosten und laufende Kosten ignoriert. Die <strong>Nettomietrendite</strong> bezieht Kaufnebenkosten und nicht-umlagefähige Kosten ein und ist deshalb deutlich aussagekräftiger. Die <strong>Eigenkapitalrendite</strong> schließlich misst, was Ihr eingesetztes Eigenkapital nach Zinsen tatsächlich erwirtschaftet.</p><p>Dazu kommt der <strong>Mietmultiplikator</strong> — der Kaufpreis ausgedrückt in Jahreskaltmieten — als schnelle Bewertung. Dieser Rechner ermittelt alle vier Größen plus den monatlichen Cashflow. Die Kaufnebenkosten für Ihr Bundesland liefert der <a href="/wohnen/grunderwerbsteuer-rechner">Grunderwerbsteuer-Rechner</a>, die passende Finanzierung der <a href="/wohnen/baufinanzierung-rechner">Baufinanzierungs-Rechner</a>. Wichtig: Brutto eignet sich nur zum Vorsortieren — die Entscheidung fällt über Nettorendite und Cashflow. Schon kleine Unterschiede bei Miete, Zins oder Nebenkosten verschieben das Ergebnis erheblich; deshalb lohnt es sich, mehrere Szenarien durchzurechnen, statt sich auf eine einzige Brutto-Zahl zu verlassen.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Bruttomietrendite-Spannen nach Lage 2026',
+        werte: [
+          { label: 'A-Lagen (München, Hamburg, Frankfurt)', wert: '2,5–3,5 %', hinweis: 'Fokus auf Wertsteigerung statt Cashflow' },
+          { label: 'B-Lagen (Leipzig, Dresden, Hannover)', wert: '4,0–5,5 %', hinweis: 'ausgewogenes Verhältnis' },
+          { label: 'C/D-Lagen (Chemnitz, Gelsenkirchen)', wert: '6,0–9,0 %', hinweis: 'höhere Rendite, höheres Leerstandsrisiko' },
+          { label: 'Bundesdurchschnitt', wert: '~3,8 %', hinweis: 'Stand 2026' },
+          { label: 'Finanztip-Schwelle „gut"', wert: 'ab 4,0 %', hinweis: 'unter 3 % meist kein positiver Cashflow' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Bruttomietrendite Schritt für Schritt',
+        schritte: [
+          { label: 'Jahreskaltmiete', formel: '800 € × 12', ergebnis: '9.600 €' },
+          { label: 'Bruttomietrendite', formel: '9.600 € ÷ 250.000 € × 100', ergebnis: '3,8 %' },
+          { label: 'Mietmultiplikator', formel: '250.000 € ÷ 9.600 €', ergebnis: '26' },
+        ],
+        fazit: 'Die Bruttomietrendite ist die einfachste Kennzahl: 800 € Kaltmiete ergeben 9.600 € im Jahr, geteilt durch den Kaufpreis von 250.000 € sind das 3,8 %. Der Mietmultiplikator von 26 sagt dasselbe anders herum — der Kaufpreis entspricht 26 Jahreskaltmieten. Ab einem Multiplikator über 25 gilt eine Immobilie als eher teuer. Mit 3,8 % liegt das Objekt knapp unter der Finanztip-Schwelle von 4 %, ab der eine Kapitalanlage als wirtschaftlich attraktiv gilt. Diese Brutto-Zahl blendet aber alle Kosten aus — wie viel davon real übrig bleibt, zeigt erst die Nettorechnung. Zur Einordnung: Erst ein Multiplikator unter 25, also eine Bruttorendite über 4 %, gilt als wirtschaftlich attraktiv, während Werte über 30 fast immer auf reine Wertsteigerungs-Spekulation hindeuten.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Von der Brutto- zur Nettomietrendite',
+        kopf: ['Position', 'Betrag'],
+        zeilen: [
+          ['Kaufpreis', '250.000 €'],
+          ['+ Kaufnebenkosten (10 %)', '25.000 €'],
+          ['= Gesamtinvestition', '275.000 €'],
+          ['Jahreskaltmiete', '9.600 €'],
+          ['− Mietausfall (5 %)', '−480 €'],
+          ['− nicht-umlagefähige Kosten', '−1.800 €'],
+          ['− Instandhaltung', '−1.500 €'],
+          ['= Reinertrag', '5.820 €'],
+          ['Nettomietrendite', '2,1 %'],
+        ],
+        fussnote: 'Die Nettomietrendite setzt den Reinertrag ins Verhältnis zur gesamten Investition inklusive Kaufnebenkosten. Aus 9.600 € Jahresmiete werden nach 5 % Mietausfallwagnis, den nicht auf den Mieter umlegbaren Kosten und der Instandhaltungsrücklage nur noch 5.820 € echter Ertrag. Geteilt durch die Gesamtinvestition von 275.000 € ergibt das 2,1 % — fast die Hälfte weniger als die Bruttorendite. Genau diese Lücke zwischen 3,8 und 2,1 % unterschätzen viele Einsteiger. Die Nettomietrendite liegt typischerweise ein bis drei Prozentpunkte unter der Bruttomietrendite; je höher Kaufnebenkosten und Bewirtschaftungskosten, desto größer der Abstand. In diesem Beispiel verschlingen allein die nicht-umlagefähigen Kosten, die Instandhaltung und das Mietausfallwagnis rund 3.780 € im Jahr — Geld, das in der schnellen Bruttorechnung komplett fehlt. Wer die Nettorendite kennt, vermeidet die häufigste Fehleinschätzung beim Immobilienkauf.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Der Mietmultiplikator als Schnellcheck',
+        text: 'Der Mietmultiplikator (auch Vervielfältiger oder Kaufpreisfaktor) gibt an, wie viele Jahreskaltmieten der Kaufpreis entspricht: Kaufpreis geteilt durch Jahreskaltmiete. Er ist der Kehrwert der Bruttomietrendite und eignet sich gut, um Objekte schnell zu vergleichen. Als grobe Einordnung gilt: Ein Multiplikator unter 20 ist günstig, 20 bis 25 durchschnittlich und über 25 teuer. Ein Faktor von 25 entspricht 4 % Bruttorendite, ein Faktor von 30 nur noch rund 3,3 %. In begehrten Großstadtlagen liegen die Multiplikatoren oft bei 30 bis 40, weil Käufer dort auf Wertsteigerung statt auf laufende Rendite setzen. Wichtig: Der Multiplikator sagt nichts über Bausubstanz, Lageentwicklung oder Mietpotenzial — er ist nur ein erster Filter, kein Ersatz für die genaue Netto- und Cashflow-Rechnung. Praktisch ist der Faktor vor allem für den Erstvergleich mehrerer Inserate: Zwei Wohnungen mit gleichem Kaufpreis, aber unterschiedlichem Multiplikator zeigen sofort, welche die höhere Mietrendite verspricht.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Der Cashflow-Realitätscheck (Beispiel mit Kredit)',
+        werte: [
+          { label: 'Darlehen', wert: '225.000 €', hinweis: 'bei 50.000 € Eigenkapital' },
+          { label: 'Kreditrate (3,5 % Zins + 2 % Tilgung)', wert: '1.031 €/Monat', hinweis: 'Zins und Tilgung' },
+          { label: 'Reinertrag', wert: '485 €/Monat', hinweis: '5.820 € im Jahr' },
+          { label: 'Monatlicher Cashflow', wert: '−546 €', hinweis: 'muss zugeschossen werden' },
+          { label: 'Eigenkapitalrendite', wert: '−4,1 %', hinweis: 'negativer Leverage 2026' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Der Leverage-Effekt — ein Hebel in beide Richtungen',
+        html: `<p>Eine Kreditfinanzierung kann die <strong>Eigenkapitalrendite</strong> steigern — aber nur, wenn die Objektrendite über dem Kreditzins liegt. Dieser Hebel heißt Leverage-Effekt: Solange das Objekt mehr abwirft, als der Kredit kostet, vergrößert jeder geliehene Euro die Rendite auf das eigene Kapital. Liegt der Kreditzins dagegen über der Bruttorendite — der Normalfall 2026 —, kehrt sich der Hebel um. Dann übersteigen die Zinsen den Ertrag, der Cashflow wird negativ und die Eigenkapitalrendite sinkt unter null.</p><p>Genau das zeigt das Beispiel: 3,5 % Kreditzins gegen 3,8 % Bruttorendite klingt knapp positiv, doch nach Abzug aller Bewirtschaftungskosten bleibt eine Netto-Objektrendite von nur 2,1 % — deutlich unter dem Zins. Der Hebel wirkt dann gegen den Anleger. Ob Ihre Mieterwartung überhaupt realistisch ist, prüfen Sie mit dem <a href="/wohnen/mietrechner">Mietrechner</a>. Daraus folgt eine einfache Regel: Vor dem Kauf immer den erwarteten Kreditzins der realistischen Netto-Objektrendite gegenüberstellen — liegt der Zins darüber, müssen Sie monatlich zuschießen und sollten genug Reserven einplanen.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Eigenkapitalrendite ehrlich gerechnet',
+        schritte: [
+          { label: 'Reinertrag', formel: 'Jahresertrag nach Kosten', ergebnis: '5.820 €' },
+          { label: 'Zinsen (3,5 % auf 225.000 €)', formel: '225.000 € × 3,5 %', ergebnis: '7.875 €' },
+          { label: 'Ertrag nach Zinsen', formel: '5.820 € − 7.875 €', ergebnis: '−2.055 €' },
+          { label: 'Eigenkapitalrendite', formel: '−2.055 € ÷ 50.000 € × 100', ergebnis: '−4,1 %' },
+        ],
+        fazit: 'Für die Eigenkapitalrendite zählt nur der Zinsanteil als Kosten — die Tilgung gilt als Vermögensaufbau und wird nicht abgezogen. Trotzdem ist das Ergebnis hier negativ: Die Zinsen von 7.875 € übersteigen den Reinertrag von 5.820 € um gut 2.000 €, was auf 50.000 € Eigenkapital eine Rendite von −4,1 % bedeutet. Anders gesagt: Das Investment kostet laufend Geld, statt Rendite zu schaffen. Positiv würde die Rechnung erst bei einer höheren Bruttorendite (etwa ab 4,5 %), mehr Eigenkapital, einem niedrigeren Zins oder einer höheren Miete. Wertsteigerung und Steuervorteile sind hier noch nicht berücksichtigt — sie können das Bild verbessern, ändern aber nichts am negativen laufenden Cashflow. Genau dieser Effekt überrascht viele Käufer, die nur die Bruttorendite mit dem Zins vergleichen und die Bewirtschaftungskosten unterschätzen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Nicht-umlagefähige Kosten drücken die Rendite',
+        html: `<p>Anders als die meisten Betriebskosten lassen sich einige Ausgaben <strong>nicht auf den Mieter umlegen</strong> — sie trägt der Eigentümer allein und sie schmälern direkt die Nettorendite. Dazu zählen die Kosten der Hausverwaltung (rund 20 bis 30 € je Einheit und Monat), die Kontoführung, anteilige Reparaturen sowie die Instandhaltungsrücklage. Letztere sollte mindestens etwa 1 % des Kaufpreises pro Jahr betragen, bei Altbauten eher mehr.</p><p>Hinzu kommt das <strong>Mietausfallwagnis</strong>: Selbst in guter Lage steht eine Wohnung bei Mieterwechsel ein bis drei Monate leer, über die Jahre sind das 2 bis 5 % Mietausfall. Auch Sonderumlagen der Eigentümergemeinschaft für Dach, Heizung oder Fassade können anfallen. Welche Betriebskosten umlagefähig sind und welche nicht, ordnet der <a href="/wohnen/nebenkosten-rechner">Nebenkosten-Rechner</a> ein. Wer diese Posten von Anfang an konservativ ansetzt, erspart sich böse Überraschungen. Als grobe Orientierung sollten Sie für Bewirtschaftung und Rücklage zusammen rund ein Viertel bis ein Drittel der Kaltmiete einkalkulieren — bei älteren Objekten eher mehr.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Kaufnebenkosten als Rendite-Bremse',
+        werte: [
+          { label: 'Bayern (GrESt 3,5 %)', wert: '~9 % Nebenkosten', hinweis: 'Gesamtinvestition ~272.500 €' },
+          { label: 'NRW (GrESt 6,5 %)', wert: '~12 % Nebenkosten', hinweis: 'Gesamtinvestition ~280.000 €' },
+          { label: 'Wirkung auf die Nettorendite', wert: '−0,1 bis −0,2 Pp', hinweis: 'je höher die Nebenkosten' },
+          { label: 'Bestandteile', wert: 'GrESt + Notar + Makler', hinweis: '3,5–6,5 % + ~2 % + ~3,57 %' },
+        ],
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Vor dem Kauf einer Kapitalanlage',
+        punkte: [
+          'Die realistische Bestandsmiete prüfen — nicht die Wunschmiete des Verkäufers ansetzen.',
+          'Alle nicht-umlagefähigen Kosten und eine Instandhaltungsrücklage einkalkulieren.',
+          'Ein Mietausfallwagnis von 2 bis 5 % fest einplanen.',
+          'Den monatlichen Cashflow rechnen, nicht nur die Bruttorendite.',
+          'Die Kaufnebenkosten des Bundeslands in die Gesamtinvestition einbeziehen.',
+          'Mit mindestens 20 % Eigenkapital finanzieren, um den Cashflow zu stabilisieren.',
+          'Lage und Wertsteigerungspotenzial gegen die laufende Rendite abwägen.',
+          'Den Kreditzins der Objektrendite gegenüberstellen — bei negativem Leverage zugespitzt rechnen.',
+          'Die mögliche Wertsteigerung der Lage einschätzen, aber nicht als sicheren Ertrag einplanen.',
+          'Steuerliche Effekte wie die Gebäude-AfA mit einer Steuerberatung durchrechnen.',
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Wertsteigerung und Steuer: das vollständige Bild',
+        html: `<p>Der laufende Cashflow ist nur eine Seite der Rechnung. Bei Immobilien kommen zwei Effekte hinzu, die dieser Rechner bewusst ausklammert, weil sie stark vom Einzelfall abhängen. Erstens die <strong>Wertsteigerung</strong>: In gefragten Lagen kann der Immobilienwert über die Jahre wachsen, sodass ein negativer laufender Cashflow durch den Vermögenszuwachs mehr als ausgeglichen wird — garantiert ist das aber nicht, Werte können auch fallen.</p><p>Zweitens die <strong>Steuer</strong>: Als Vermieter setzen Sie die Gebäude-AfA (für Gebäude ab 2023 drei Prozent pro Jahr, bei Altbauten zwei bis 2,5 Prozent) sowie Zinsen, Verwaltung und Instandhaltung als Werbungskosten ab. In den ersten Jahren übersteigen die Abschreibungen oft den Mietüberschuss — der entstehende steuerliche Verlust senkt die Steuerlast auf andere Einkünfte und verbessert den realen Cashflow spürbar. Wie stark, hängt vom persönlichen Steuersatz ab und gehört in die Hände einer Steuerberatung.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Wann sich der Cashflow positiv stellen lässt',
+        punkte: [
+          'Eine Bruttomietrendite ab etwa 4,5 % wählen — darunter trägt sich die Finanzierung 2026 selten selbst.',
+          'Mehr Eigenkapital einsetzen, um Darlehensbetrag und Zinslast zu senken.',
+          'Einen möglichst niedrigen Sollzins sichern und Angebote über den Effektivzins vergleichen.',
+          'Eine niedrigere Anfangstilgung senkt zwar die Rate, verlängert aber die Laufzeit — bewusst abwägen.',
+          'Objekte mit Mietsteigerungspotenzial bevorzugen, etwa unter Marktmiete vermietete Wohnungen.',
+          'Nicht-umlagefähige Kosten durch effiziente Verwaltung und gute Bausubstanz gering halten.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Kurzfazit',
+        text: 'Die Bruttomietrendite eignet sich zum schnellen Vorsortieren, die Entscheidung fällt aber über Nettomietrendite und Cashflow. 2026 gilt: Liegt der Kreditzins über der Bruttorendite, ist der laufende Cashflow oft negativ — der Hebel wirkt dann gegen den Anleger. Ein positiver Cashflow braucht eine höhere Bruttorendite (Faustregel ab etwa 4,5 %), mehr Eigenkapital, einen niedrigeren Zins oder eine höhere Miete. Zwei Faktoren sind in diesem Rechner bewusst ausgeklammert, gehören aber in jede Gesamtbetrachtung: die mögliche Wertsteigerung der Immobilie und die steuerlichen Effekte, vor allem die Gebäude-AfA. Dieser Rechner liefert eine erste Einschätzung und ersetzt keine Anlage- oder Steuerberatung. Rechnen Sie konservativ und holen Sie für eine konkrete Anlageentscheidung fachlichen Rat ein.',
+      },
+    ],
+    quellen: [
+      { titel: 'Finanztip – Mietrendite berechnen: Formel, Beispiele & Tipps', url: 'https://www.finanztip.de/baufinanzierung/mietrendite-berechnen/' },
+      { titel: 'Destatis – Statistisches Bundesamt: Bau- & Immobilienpreisindex', url: 'https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Baupreise-Immobilienpreisindex/' },
+      { titel: 'Deutsche Bundesbank – Indikatorensystem Wohnimmobilienmarkt', url: 'https://www.bundesbank.de/de/statistiken/indikatorensaetze/wohnimmobilienpreise' },
+      { titel: 'Verbraucherzentrale – Immobilie als Kapitalanlage', url: 'https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen' },
     ],
     affiliate: [
       { programId: 'check24', context: 'mietrendite' },
