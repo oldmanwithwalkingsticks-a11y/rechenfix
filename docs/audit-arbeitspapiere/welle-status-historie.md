@@ -4,7 +4,78 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 28.06.2026
+**Stand:** 29.06.2026
+
+---
+
+## 29.06.2026 — W19 Goldstandard wohnen-Finanz/Miete-Block (164 Goldstandard) + VPI-SSOT Mai 2026
+
+Fünf wohnen-Rechner der Finanz-/Miete-Untergruppe auf Goldstandard, plus eine separate, chirurgische
+Aktualisierung des zentralen VPI-SSOT. Alle kategorieSlug `'wohnen'` (verifiziert). Vier distinkte
+Leitformate (beispielrechnung, statistik, vergleich). Alle Beispiel-Anker per eigener Node-Probe mit echten
+Lib-Konstanten nachgerechnet; alle YMYL-Werte gegen Primärquellen (gesetze-im-internet.de, Destatis,
+Bundestag/Bundesregierung, BGH, KfW-/Finanztip-Marktdaten) geprüft. Alle Builds Vercel-grün, jeder interne
+Link kategorieSlug-per-grep verifiziert.
+
+**Drei YMYL-/Beispiel-Fixes (im jeweiligen Build-Commit):**
+- **mietrendite EK-Rendite** (`3a270b4`): `beispiel` behauptete „EK-Rendite ca. +5,5 %". Echte Lib mit
+  Component-Defaults (Node-Probe) liefert bei 250.000 € / 50.000 € EK / 3,5 % Zins + 2 % Tilgung eine
+  **EK-Rendite von −4,1 %** und einen **Cashflow von −546 €/Monat** (Kreditrate 1.031 € > Reinertrag 485 €).
+  Neu, Lib-konsistent + ehrliche Kernbotschaft: negativer Leverage 2026 — bei 3,8 % Brutto und aktuellen
+  Zinsen ist der laufende Cashflow negativ; positiver CF erst ab ~4,5 % Brutto, mehr EK oder niedrigerem Zins.
+  Lib-Logik dokumentiert: EK-Rendite zieht nur Zinsen ab (Tilgung = Vermögensaufbau), Cashflow die volle Rate.
+- **indexmiete Rundung** (`16ea4b3`): `beispiel` rechnete mit gerundeter Zwischenstufe (857,21 €). Echte Lib
+  rundet erst am Ende → **857,24 € (+57,24 €/Monat, +686,88 €/Jahr)**. Korrigiert; VPI-Werte als illustrative
+  Beispielwerte „Stand März 2026 = 125,8" gekennzeichnet (tagesaktuell selbst prüfen). Code korrigierte
+  zusätzlich `faq[1]` (gleiche 857,21→857,24) zur Vermeidung einer sichtbaren Same-Page-Widersprüchlichkeit.
+- **vorfaelligkeitsentschaedigung §502-Cap-Differenzierung** (`02f8995`): Zentraler YMYL-Punkt. Chat-Claude
+  hatte zunächst vermutet, die Lib-Näherung (~9.862 €) verstoße 6,5-fach gegen einen §502-Cap — **primär
+  korrigiert**: Der 1%/0,5%-Cap (§ 502 Abs. 3 BGB) gilt NUR für Allgemein-Verbraucherdarlehen (Ratenkredite),
+  **NICHT für Immobiliardarlehen** (dort kein €-Cap, „angemessen" per Aktiv-Passiv-Methode, BGH XI ZR 388/14).
+  Content trennt beide Fälle sauber. `beispiel` rechnerisch korrekt, unverändert.
+
+**Builds (alle ≥11 Blöcke, Wortzahl ≥1.500, max Block <170 W):**
+- **baufinanzierung-rechner** (beispielrechnung, `d044836`). Block-Start. Beispiel-Anker per Node-Probe exakt
+  bestätigt (NK 42.245 € · Darlehen 322.245 € · Rate 1.476 € · Restschuld 15 J ~195.000 €) — kein Stale,
+  unverändert. GrESt-2026-Tabelle (SSOT `grunderwerbsteuer.ts`) vollständig gegen Primärübersichten + DIA
+  verifiziert: alle 16 Bundeslandsätze aktuell (Bayern 3,5 / Hamburg+Bremen+Sachsen 5,5 / Thüringen 5,0
+  seit 2024 / NRW+BB+SL+SH 6,5). Alter erklaerung-Text vergaß Hamburg 5,5 — im neuen Content ergänzt.
+  Erstkäufer-Freibetrag als „diskutiert, 2026 nicht beschlossen" gekennzeichnet. Code-Entscheidung:
+  nebenkosten-rechner-Link weggelassen (Themenkollision Mietnebenkosten ≠ Kaufnebenkosten — Lehre 10).
+- **mietrendite-rechner** (statistik, `3a270b4`). EK-Rendite-Fix s. o. Marktdaten verifiziert (Lagen-Spannen
+  A 2,5–3,5 / B 4–5,5 / C-D 6–9 %, Finanztip-Schwelle „gut ab 4 %").
+- **indexmiete-rechner** (vergleich, `16ea4b3`). Rundungs-Fix s. o. § 557b BGB-FAQ juristisch korrekt
+  (12-Monats-Frist, keine 20%-Kappung, Index kann sinken).
+- **mietpreisbremse-rechner** (beispielrechnung, `09788b4`). Beispiel exakt Lib-konform (max 11 €/m² = 715 €,
+  Überhöhung 65 €/Monat = 780 €/Jahr), unverändert. Verlängerung bis 31.12.2029 primär verifiziert
+  (Bundestag 26.06.2025 BT-Drs. 21/322 i.d.F. 21/631, Bundesrat 11.07.2025, in Kraft 23.07.2025) — Lib-Header
+  war korrekt. Durchgängig betont: greift nur mit gültiger Landesverordnung. Mietrecht-II (Möblierungs-
+  Schlupfloch) + Bußgeld-Konzept als „geplant, nicht in Kraft". L-35 respektiert (Ausnahmen nur Toggle-Logik).
+- **vorfaelligkeitsentschaedigung-rechner** (vergleich, `02f8995`). §502-Cap-Differenzierung s. o. Wegfall-
+  Gründe primär verifiziert: § 489 10-Jahres-Recht (zugleich Obergrenze der Zinserwartung, BGH XI ZR 75/23
+  v. 03.12.2024), § 502 Abs. 2 Nr. 2 (unzureichende Pflichtangaben → Anspruch entfällt), Restschuld-
+  versicherung, Bankkündigung. L-35-Näherungs-Disclaimer im Content (ein Marktzins, 15%-Abschlag, 300 €
+  Pauschale, keine Barwert-Abzinsung — Orientierung, keine verbindliche Berechnung).
+
+**VPI-SSOT-Aktualisierung (separater Lib-Commit `0b93dea`):**
+- `lib/berechnungen/vpi.ts` `VPI_AKTUELL` von März 2026 (125,8 / +2,7 %) auf **Mai 2026 (125,0 / +2,6 %)**.
+  Absolutwert mit ZWEI Destatis-Primärquellen belegt (PM PD26_199_611 v. 12.06.2026 + Tabelle „Gesamtindex
+  und 12 Abteilungen", abgerufen 28.06.2026). `VPI_JAHRESDURCHSCHNITTE` (bis 2025 = 124,6), `getVpi`,
+  `indexiereVermoegen`, `VPI_BASISJAHR` unverändert. Bewusst aus der indexmiete-Migration ausgeklammert und
+  als eigener atomarer Commit geführt, weil der SSOT auch den § 1376-BGB-Zugewinnausgleich speist — kein
+  Sekundärquellen-Beleg für einen rechtsrelevanten Wert. Wirkt jetzt als Default in indexmiete +
+  zugewinnausgleich (nur diese zwei Konsumenten, per grep verifiziert). indexmiete-Beispieltexte bleiben
+  bewusst auf „Stand März 2026" als illustrativem Beispielwert.
+
+**Lehren erhärtet:** (1) Config-`beispiel` bleibt systematisches Stale-Nest — selbst bei gepflegten Libs/SSOTs:
+mietrendite (+5,5 % statt −4,1 %) und indexmiete (Zwischenrundung) trotz korrekter Lib. YMYL-Beispiele IMMER
+mit ECHTEN Component-Defaults nachrechnen. (2) Eigene Hypothesen vor dem Prompt primär gegenprüfen: der
+vermeintliche §502-Cap-Verstoß war falsch (Cap gilt nicht für Immobiliardarlehen) — Primärquelle vor
+Content-Behauptung. (L-37 bestätigt.) (3) SSOT-Eingriffe mit Mehr-Rechner-Wirkung strikt von Config-Migration
+trennen und atomar committen; rechtsrelevante Absolutwerte nur mit Primärbeleg (Genesis/PM), sonst ZERO
+Commits. (4) Link-kategorieSlug konsequent per grep: zinsrechner + inflationsrechner liegen 'finanzen', NICHT
+'wohnen' — mehrfach als Pfad-Falle abgefangen. (5) Mutual-Resolver-Kontrolle: Code fing die indexmiete-faq-
+Inkonsistenz selbstständig.
 
 ---
 
