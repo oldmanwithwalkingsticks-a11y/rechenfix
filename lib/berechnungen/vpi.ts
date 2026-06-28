@@ -4,7 +4,7 @@
  * Quelle: Statistisches Bundesamt (Destatis), Pressemitteilung VPI (monatlich,
  *   ~10. des Folgemonats) und Lange Reihen (Genesis-Tabelle 61111-0001,
  *   retrospektiv auf Basisjahr 2020 = 100 normiert).
- * Stand: 04/2026 — Update monatlich nach Destatis-Veröffentlichung.
+ * Stand: 05/2026 (Mai, endgültig — Destatis PM PD26_199_611 v. 12.06.2026 + Tabelle „Gesamtindex und 12 Abteilungen", abgerufen 28.06.2026). Update monatlich nach Destatis-Veröffentlichung.
  *
  * Verwendung:
  * - `VPI_AKTUELL` als Default für Indexmiete-Beispielrechnung (`indexmiete-rechner`)
@@ -19,11 +19,11 @@ export const VPI_BASISJAHR = 2020;
 
 export const VPI_AKTUELL = {
   /** Letzter veröffentlichter Monatswert, ISO YYYY-MM */
-  monat: '2026-03',
-  /** Indexstand März 2026 (Basisjahr 2020 = 100) */
-  wert: 125.8,
+  monat: '2026-05',
+  /** Indexstand Mai 2026 (Basisjahr 2020 = 100) */
+  wert: 125.0,
   /** Veränderung gegenüber Vorjahresmonat in Prozent */
-  veraenderungVorjahresmonat: 2.7,
+  veraenderungVorjahresmonat: 2.6,
 } as const;
 
 /**
