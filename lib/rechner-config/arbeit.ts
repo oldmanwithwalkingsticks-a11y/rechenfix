@@ -2779,7 +2779,7 @@ Die Mindestunterhaltsbeträge der Düsseldorfer Tabelle 2026 basieren auf der 7.
   },
   {
     slug: 'elternzeit-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-29',
     titel: 'Elternzeit-Rechner',
     beschreibung: 'Elternzeit berechnen: Anspruch, Aufteilung zwischen Partnern, Fristen und Meldetermine.',
     kategorie: 'Arbeit & Recht',
@@ -2789,7 +2789,7 @@ Die Mindestunterhaltsbeträge der Düsseldorfer Tabelle 2026 basieren auf der 7.
     keywords: ['elternzeit rechner', 'elternzeit berechnen', 'elternzeit anmelden', 'elternzeit fristen', 'elternzeit dauer', 'elternzeit partnermonate', 'kündigungsschutz elternzeit', 'elternzeit aufteilen'],
     icon: '👶',
     formel: 'Anspruch = 36 Monate pro Elternteil bis zum 8. Geburtstag | Anmeldefrist = 7 Wochen vor Beginn (in ersten 3 Jahren) bzw. 13 Wochen (3.–8. Geburtstag) | Kündigungsschutz = ab Anmeldung (max. 8 Wochen vor Beginn) bis Ende Elternzeit | Partnermonate für volle 14 Monate Elterngeld: mind. 2 Monate pro Partner',
-    beispiel: 'Kind geboren 15.01.2026 → Mutter nimmt 12 Monate Elternzeit (ab 13.03.2026 nach Mutterschutz) → Anmeldung bis spätestens 22.01.2026 → Ende 13.03.2027 → Vater 2 Monate parallel → volle 14 Monate Elterngeld.',
+    beispiel: 'Kind geboren 15.01.2026 → Mutter nimmt 12 Monate Elternzeit (ab 12.03.2026 nach Mutterschutz) → Anmeldung bis spätestens 22.01.2026 → Ende 12.03.2027 → Vater 2 Monate parallel → volle 14 Monate Elterngeld.',
     erklaerung: `**Was ist Elternzeit und wer hat Anspruch?**
 
 Die **Elternzeit** ist ein gesetzlich garantierter, unbezahlter Freistellungsanspruch gegenüber dem Arbeitgeber — geregelt im **Bundeselterngeld- und Elternzeitgesetz (BEEG)**. Jeder Elternteil hat unabhängig vom anderen einen eigenen Anspruch auf **bis zu 36 Monate Elternzeit pro Kind**, und zwar bis zum **8. Geburtstag** des Kindes. Davon können bis zu 24 Monate auf den Zeitraum zwischen dem 3. und 8. Geburtstag übertragen werden — ohne Zustimmung des Arbeitgebers, sofern die Anmeldung fristgerecht erfolgt. Anspruch haben alle Arbeitnehmer, Auszubildenden, Teilzeitbeschäftigten und Minijobber. Auch Adoptiv- und Pflegeeltern können Elternzeit nehmen. Selbstständige haben keinen Anspruch, weil keine Freistellung von einem Arbeitgeber nötig ist — sie können jedoch ihren [Elterngeld](/finanzen/elterngeld-rechner)-Anspruch trotzdem geltend machen.
@@ -2838,6 +2838,109 @@ Denken Sie daran: Die Elternzeit läuft **kalendarisch** — auch Wochenenden un
         frage: 'Kann ich die Elternzeit in mehrere Abschnitte aufteilen?',
         antwort: 'Ja. § 16 Abs. 1 BEEG erlaubt die Aufteilung der Elternzeit in bis zu drei Zeitabschnitte je Elternteil. Der dritte Abschnitt kann auch zwischen dem dritten und achten Geburtstag des Kindes liegen — er ist nicht an die ersten drei Lebensjahre gebunden. Für eine Aufteilung in mehr als drei Abschnitte ist die Zustimmung des Arbeitgebers erforderlich.',
       },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was ist Elternzeit?',
+        html: `<p>Die <strong>Elternzeit</strong> ist ein gesetzlich garantierter, unbezahlter Anspruch auf Freistellung von der Arbeit nach dem Bundeselterngeld- und Elternzeitgesetz (BEEG). Jeder Elternteil hat unabhängig vom anderen Anspruch auf <strong>bis zu 36 Monate</strong> pro Kind — bis zum 8. Geburtstag, wobei bis zu 24 Monate auf die Zeit zwischen dem 3. und 8. Geburtstag übertragbar sind. Wichtig ist die Abgrenzung: Elternzeit ist die <strong>Freistellung</strong>, das <strong>Elterngeld</strong> ist die Geldleistung — beides wird getrennt beantragt.</p><p>Dieser Rechner ermittelt Fristen und Zeiträume rund um die Elternzeit: Anmeldetermin, Beginn nach dem Mutterschutz, Ende und Kündigungsschutz. Wie viel Geld Ihnen zusteht, zeigt dagegen der <a href="/finanzen/elterngeld-rechner">Elterngeld-Rechner</a>. Anspruch auf Elternzeit haben Arbeitnehmer, Auszubildende, Teilzeit- und Minijobber sowie Adoptiv- und Pflegeeltern — Selbständige nicht, weil es keinen Arbeitgeber gibt, von dem freizustellen wäre. Voraussetzung ist außerdem, dass das Kind im selben Haushalt lebt und überwiegend selbst betreut wird; eine Mindestbeschäftigungsdauer beim Arbeitgeber gibt es für die Elternzeit dagegen nicht.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Wer hat Anspruch auf Elternzeit?',
+        punkte: [
+          'Arbeitnehmer, Auszubildende, Teilzeitbeschäftigte und Minijobber — unabhängig von der Betriebsgröße.',
+          'Adoptiv- und Pflegeeltern sowie Eltern, die ein Kind in Vollzeitpflege aufnehmen.',
+          'Jeder Elternteil hat einen eigenen Anspruch, unabhängig vom anderen.',
+          'Bis zu 36 Monate pro Elternteil und Kind, längstens bis zum 8. Geburtstag.',
+          'Bis zu 24 Monate sind auf die Zeit zwischen 3. und 8. Geburtstag übertragbar.',
+          'Selbständige haben keinen Elternzeit-Anspruch, können aber Elterngeld beziehen.',
+          'Auch Großeltern können in engen Ausnahmefällen (§ 15 Abs. 1a BEEG) Elternzeit nehmen.',
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Dauer und Aufteilung der Elternzeit',
+        html: `<p>Die bis zu 36 Monate lassen sich flexibel verteilen. Jeder Elternteil darf seine Elternzeit in <strong>bis zu drei Abschnitten</strong> nehmen (§ 16 Abs. 1 BEEG); einen dritten Abschnitt kann der Arbeitgeber nur aus dringenden betrieblichen Gründen ablehnen, wenn er zwischen dem 3. und 8. Geburtstag liegt. Beide Elternteile können die Elternzeit <strong>gleichzeitig, nacheinander oder abwechselnd</strong> nehmen — das eröffnet viele Modelle.</p><p>Ein verbreitetes Muster: Die Mutter nimmt das erste Jahr, der Vater zwei Monate parallel oder im Anschluss. Wann genau die Elternzeit starten kann, hängt am Geburtstermin und am Mutterschutz; den voraussichtlichen Termin schätzt der <a href="/gesundheit/geburtstermin-rechner">Geburtstermin-Rechner</a>. Wer früh plant, kann Abschnitte und Partnermonate so legen, dass Freistellung und Elterngeld optimal zusammenpassen. Auch ein Wechsel zwischen den Eltern mitten im Jahr ist möglich — wichtig ist nur, dass die Übergänge lückenlos angemeldet sind, damit weder Freistellung noch Kündigungsschutz unterbrochen werden.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Beispiel-Fristenkette: Geburt am 15.01.2026',
+        text: 'An einem konkreten Fall wird die Mechanik deutlich. Das Kind kommt am 15. Januar 2026 zur Welt. Der Mutterschutz dauert acht Wochen nach der Geburt, also bis zum 12. März 2026 — erst danach kann die Elternzeit der Mutter beginnen. Nimmt sie zwölf Monate, endet ihre Elternzeit am 12. März 2027. Die Anmeldung beim Arbeitgeber muss sieben Wochen vor Beginn vorliegen, hier also spätestens am 22. Januar 2026. Der Vater kann seine Elternzeit dagegen bereits ab der Geburt nehmen; nimmt er zwei Monate parallel, sichert das die vollen 14 Monate Elterngeld. Bei einer Früh- oder Mehrlingsgeburt verlängert sich der Mutterschutz auf zwölf Wochen, der Elternzeitbeginn der Mutter verschiebt sich entsprechend nach hinten. Wichtig: Maßgeblich ist immer der tatsächliche Geburtstag, nicht der errechnete Termin — verschiebt sich die Geburt, verschieben sich auch Mutterschutz-Ende und Elternzeit-Beginn mit.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Elternzeit richtig anmelden',
+        punkte: [
+          'Schriftlich beim Arbeitgeber anmelden — eine E-Mail genügt der Form nicht, es braucht eine eigenhändige Unterschrift.',
+          'Die Frist von sieben Wochen vor Beginn in den ersten drei Lebensjahren einhalten.',
+          'Die Frist von 13 Wochen vor Beginn für Elternzeit zwischen dem 3. und 8. Geburtstag beachten.',
+          'Verbindlich festlegen, für welche Zeiträume der ersten zwei Jahre Elternzeit genommen wird.',
+          'Bedenken: Diese Festlegung bindet — eine spätere Änderung geht nur mit Zustimmung des Arbeitgebers.',
+          'Eine Empfangsbestätigung oder den Zugangsnachweis der Anmeldung aufbewahren.',
+          'Das Elterngeld separat und rechtzeitig beantragen (Rückwirkung nur drei Monate).',
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Mutterschutz und Elternzeit der Mutter',
+        html: `<p>Bei der Mutter greifen zwei Schutzzeiten ineinander. Direkt nach der Geburt gilt der <strong>Mutterschutz</strong> von acht Wochen, bei Früh- oder Mehrlingsgeburten zwölf Wochen (§ 3 Abs. 2 MuSchG). Diese Zeit wird auf die Elternzeit angerechnet: Die Elternzeit der Mutter kann <strong>frühestens nach Ende des Mutterschutzes</strong> beginnen. In der Mutterschutzfrist erhält sie Mutterschaftsgeld plus Arbeitgeberzuschuss, nicht Elterngeld.</p><p>Für den <strong>Vater</strong> gibt es keine solche Frist — er kann seine Elternzeit bereits ab dem Tag der Geburt nehmen. Wann der Mutterschutz endet und wie sich die Fristen verschieben, rechnet der <a href="/arbeit/mutterschutz-rechner">Mutterschutz-Rechner</a> aus. Wer beides zusammen plant, vermeidet Lücken und nutzt die Partnermonate optimal. Der Tag der Geburt selbst zählt dabei nicht zur Frist mit — die acht Wochen Mutterschutz beginnen am Tag nach der Entbindung.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Partnermonate für die vollen 14 Monate Elterngeld',
+        text: 'Elternzeit und Elterngeld sind getrennt, hängen aber zusammen. Für die vollen 14 Monate Basiselterngeld muss jeder Elternteil mindestens zwei Monate beanspruchen — das sind die sogenannten Partnermonate (§ 4 Abs. 4 BEEG). Nimmt nur ein Elternteil Elternzeit, gibt es höchstens zwölf Monate Elterngeld. Die Elternzeit selbst darf länger laufen als der Elterngeld-Bezug; ab dem 15. Monat ist sie dann unbezahlt, der Freistellungs- und Kündigungsschutz bleibt aber bestehen. Alleinerziehende können die vollen 14 Monate auch allein ausschöpfen. Wie hoch das Elterngeld im Einzelfall ausfällt und welche Variante (Basis, Plus, Partnerschaftsbonus) sich lohnt, gehört in die separate Elterngeld-Planung. Eltern sollten die Partnermonate früh festlegen, weil sie sich am Ende des Bezugszeitraums oft nicht mehr nachholen lassen.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Kündigungsschutz nach § 18 BEEG',
+        text: 'Während der Elternzeit gilt ein besonderer Kündigungsschutz. Er beginnt mit der Anmeldung, frühestens jedoch acht Wochen vor dem Beginn der Elternzeit, und endet mit deren Ablauf (§ 18 BEEG). In dieser Zeit darf der Arbeitgeber nur in absoluten Ausnahmefällen kündigen — etwa bei einer Betriebsstilllegung — und auch dann nur mit Zustimmung der zuständigen obersten Landesbehörde. Der Schutz gilt unabhängig von der Betriebsgröße und sogar während der Probezeit. Nach dem Ende der Elternzeit besteht ein Anspruch auf Rückkehr an den gleichen oder einen gleichwertigen Arbeitsplatz: nicht zwingend derselbe Schreibtisch, aber vergleichbare Aufgaben, Bezahlung und Standort. Wer das Arbeitsverhältnis selbst beenden will, kann zum Ende der Elternzeit mit einer verkürzten Frist von drei Monaten kündigen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Teilzeit während der Elternzeit',
+        html: `<p>Elternzeit bedeutet nicht zwingend null Arbeit: Erlaubt sind <strong>bis zu 32 Wochenstunden</strong>, beim eigenen oder einem anderen Arbeitgeber, ohne den Elternzeit-Status zu verlieren. Die Grenze von 32 Stunden gilt seit der BEEG-Reform vom 1. September 2021 (vorher 30 Stunden). Diese Teilzeit verlängert die Elternzeit nicht, erhält aber Einkommen und Kündigungsschutz.</p><p>Davon zu unterscheiden ist der <strong>klagbare Anspruch</strong> auf Teilzeit (§ 15 Abs. 6 BEEG): Er besteht im Korridor von 15 bis 32 Stunden, wenn der Betrieb mehr als 15 Arbeitnehmer hat und das Arbeitsverhältnis seit mindestens sechs Monaten besteht. Hier kann der Arbeitgeber nur aus dringenden betrieblichen Gründen ablehnen. Wie sich das reduzierte Gehalt darstellt, rechnet der <a href="/arbeit/teilzeit-rechner">Teilzeit-Rechner</a> aus.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Häufige Stolperfallen bei der Planung',
+        html: `<p>Ein paar Fehler tauchen immer wieder auf. Der häufigste ist die <strong>versäumte Anmeldefrist</strong>: Wer die sieben Wochen verpasst, verschiebt den Beginn der Elternzeit entsprechend nach hinten, weil die Frist nicht verkürzbar ist. Ebenso heikel ist eine <strong>zu starre Festlegung</strong> der ersten zwei Jahre — sie bindet, und spätere Wünsche brauchen die Zustimmung des Arbeitgebers.</p><p>Unterschätzt wird oft, dass <strong>Elternzeit und Elterngeld unterschiedliche Fristen und Logiken</strong> haben: Die Elternzeit meldet man beim Arbeitgeber an, das Elterngeld beantragt man bei der Elterngeldstelle, und beim Geld zählen Lebensmonate des Kindes, nicht Kalendermonate. Auch der <strong>zweite Elternteil</strong> sollte früh einsteigen, weil sich Partnermonate sonst kaum noch unterbringen lassen. Wer hier sauber plant, verschenkt weder Freistellung noch Geld.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Urlaubsanspruch in der Elternzeit',
+        text: 'Der Erholungsurlaub läuft in der Elternzeit nicht einfach weiter. Der Arbeitgeber darf den Jahresurlaub für jeden vollen Monat der Elternzeit um ein Zwölftel kürzen (§ 17 Abs. 1 BEEG). Wichtig: Das ist ein Wahlrecht, das der Arbeitgeber ausdrücklich erklären muss — tut er das nicht, bleibt der volle Urlaubsanspruch bestehen. Wer also vor der Elternzeit noch nicht genommenen Urlaub hat, verliert ihn nicht: Resturlaub aus der Zeit vor der Elternzeit wird nach § 17 Abs. 2 BEEG auf das laufende oder das nächste Urlaubsjahr nach der Elternzeit übertragen. Arbeitet man in der Elternzeit in Teilzeit weiter, entsteht für diese Tätigkeit anteilig neuer Urlaubsanspruch. Klären Sie die Urlaubsfrage am besten schon bei der Anmeldung der Elternzeit mit.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Elternzeit planen — Schritt für Schritt',
+        punkte: [
+          'Den voraussichtlichen Geburtstermin und das Ende des Mutterschutzes ermitteln.',
+          'Die Aufteilung mit dem Partner abstimmen — gleichzeitig, nacheinander oder abwechselnd.',
+          'Mindestens zwei Partnermonate einplanen, um die vollen 14 Monate Elterngeld zu sichern.',
+          'Die Elternzeit schriftlich und fristgerecht beim Arbeitgeber anmelden.',
+          'Den verbindlichen Festlegungszeitraum für die ersten zwei Jahre bestimmen.',
+          'Das Elterngeld separat beantragen (Rückwirkung nur drei Monate).',
+          'Mit dem Arbeitgeber klären, ob der Jahresurlaub gekürzt wird (§ 17 BEEG).',
+          'Eine mögliche Teilzeit und die Rückkehr nach der Elternzeit frühzeitig klären.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Kurzfazit',
+        text: 'Die Elternzeit gibt jedem Elternteil bis zu 36 Monate unbezahlte Freistellung pro Kind, längstens bis zum 8. Geburtstag, mit besonderem Kündigungsschutz und einem Recht auf Rückkehr. Entscheidend sind die Fristen — sieben beziehungsweise 13 Wochen Anmeldung — und die Partnermonate, die über die vollen 14 Monate Elterngeld bestimmen. Bei der Mutter beginnt die Elternzeit erst nach dem Mutterschutz, beim Vater schon ab der Geburt. Dieser Rechner bildet die zeitliche Seite ab; die Geldhöhe ermittelt der Elterngeld-Rechner. Er liefert eine Orientierung und ersetzt keine Rechtsberatung — bei Streit über Anmeldung, Teilzeit oder Kündigungsschutz hilft eine Fachanwältin oder ein Fachanwalt für Arbeitsrecht weiter. Wer rechtzeitig anmeldet, die Partnermonate einplant und Elternzeit wie Elterngeld zusammen denkt, holt das Maximum an Zeit mit dem Kind und finanzieller Absicherung heraus.',
+      },
+    ],
+    quellen: [
+      { titel: 'BEEG § 15 – Anspruch auf Elternzeit', url: 'https://www.gesetze-im-internet.de/beeg/__15.html' },
+      { titel: 'BEEG § 16 – Inanspruchnahme & Anmeldefristen der Elternzeit', url: 'https://www.gesetze-im-internet.de/beeg/__16.html' },
+      { titel: 'BEEG § 18 – Kündigungsschutz während der Elternzeit', url: 'https://www.gesetze-im-internet.de/beeg/__18.html' },
+      { titel: 'BMFSFJ – Elternzeit (Familienportal des Bundes)', url: 'https://familienportal.de/familienportal/familienleistungen/elternzeit' },
     ],
   },
   {
