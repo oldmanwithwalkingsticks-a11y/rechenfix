@@ -2471,7 +2471,7 @@ Ein gesetzlicher Feiertag, der auf einen Samstag oder Sonntag fällt, wird in De
   },
   {
     slug: 'unterhaltsrechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-29',
     titel: 'Unterhaltsrechner',
     beschreibung: 'Kindesunterhalt nach Düsseldorfer Tabelle 2026 berechnen — mit Kindergeld-Verrechnung, Höherstufung und Elternunterhalt-Abschnitt.',
     kategorie: 'Arbeit & Recht',
@@ -2480,7 +2480,7 @@ Ein gesetzlicher Feiertag, der auf einen Samstag oder Sonntag fällt, wird in De
     metaDescription: 'Kindesunterhalt nach Düsseldorfer Tabelle 2026 berechnen — mit Kindergeld-Verrechnung, Höherstufung und Elternunterhalt-Abschnitt 2026.',
     keywords: ['unterhaltsrechner', 'kindesunterhalt berechnen', 'düsseldorfer tabelle 2026', 'unterhalt 2026', 'elternunterhalt 2026', 'selbstbehalt unterhalt', 'kindergeld verrechnung', 'höherstufung unterhalt'],
     icon: '⚖️',
-    formel: 'Tabellenwert = Math.ceil(Mindestbedarf × Gruppenprozent) · Zahlbetrag = Math.ceil(Tabellenwert − Kindergeld-Abzug − anrechenbares Eigeneinkommen) · Elternunterhalt: nur bei Bruttojahreseinkommen > 100.000 € (§ 94 Abs. 1a SGB XII), dann ≈ (bereinigtes Netto − Selbstbehalt 2.000 €) × 50 %',
+    formel: 'Tabellenwert = Math.ceil(Mindestbedarf × Gruppenprozent) · Zahlbetrag = Math.ceil(Tabellenwert − Kindergeld-Abzug − anrechenbares Eigeneinkommen) · Elternunterhalt: nur bei Bruttojahreseinkommen > 100.000 € (§ 94 Abs. 1a SGB XII), dann ≈ (bereinigtes Netto − Selbstbehalt 2.650 €) × 30 % (70 % anrechnungsfrei, BGH XII ZB 6/24)',
     beispiel: 'Bereinigtes Netto 3.000 €, 1 Kind (8 Jahre), Kindergeld hälftig: Einkommensgruppe 4 → Tabellenbetrag 642 € − 129,50 € Kindergeld = 513 € Zahlbetrag/Monat.',
     erklaerung: `**Kindesunterhalt 2026 — Düsseldorfer Tabelle erklärt**
 
@@ -2518,7 +2518,7 @@ Neben dem Tabellenunterhalt gibt es **Sonderbedarf** (einmalige, außergewöhnli
 
 Mit dem **Angehörigen-Entlastungsgesetz vom 10.12.2019** (in Kraft seit 01.01.2020, § 94 Abs. 1a SGB XII) hat sich der Elternunterhalt grundlegend geändert. Erwachsene Kinder können erst dann zum Elternunterhalt herangezogen werden, wenn ihr **Bruttojahreseinkommen 100.000 €** übersteigt — und zwar **pro Kind einzeln** geprüft, nicht als Familieneinkommen. Liegt das Einkommen darunter, übernimmt der Sozialhilfeträger die ungedeckten Heim- oder Pflegekosten der Eltern, ohne Rückforderung beim Kind.
 
-Wird die 100.000-€-Schwelle überschritten, wird der Elternunterhalt nach der **„Hälfte über Selbstbehalt"-Methode** berechnet: Vom bereinigten Nettoeinkommen wird der **Selbstbehalt von 2.000 €** (Düsseldorfer Tabelle 2026) abgezogen, **die Hälfte des Überschusses** ist als Elternunterhalt zu zahlen — nicht mehr 30 % wie vor 2020 und nicht mehr ab dem alten Selbstbehalt von 2.650 €. Beispiel: Bruttojahreseinkommen 110.000 €, bereinigtes Netto 5.000 €/Monat → (5.000 − 2.000) × 50 % = 1.500 €/Monat. Wer den eigenen Bedarf prüfen möchte, kann den [Pfändungsrechner](/finanzen/pfaendungsrechner) zur groben Orientierung über das pfändungsfreie Existenzminimum nutzen.
+Wird die 100.000-€-Schwelle überschritten, gilt der vom Bundesgerichtshof bestätigte Maßstab: Vom bereinigten Nettoeinkommen wird ein **Mindestselbstbehalt von 2.650 €** abgezogen (Düsseldorfer Tabelle 2026, **BGH XII ZB 6/24 v. 23.10.2024**); vom übersteigenden Betrag bleiben dem Kind **70 % anrechnungsfrei**, sodass nur **30 %** als Elternunterhalt zu zahlen sind. Hintergrund: Bis zu den BGH-Beschlüssen 2024/2025 galten ein niedrigerer Selbstbehalt und eine höhere Anrechnungsquote; maßgeblich sind nun ein Selbstbehalt von 2.650 € und eine Anrechnung von 30 %. Beispiel: Bruttojahreseinkommen 110.000 €, bereinigtes Netto 5.000 €/Monat → (5.000 − 2.650) × 30 % = 705 €/Monat. Wer den eigenen Bedarf prüfen möchte, kann den [Pfändungsrechner](/finanzen/pfaendungsrechner) zur groben Orientierung über das pfändungsfreie Existenzminimum nutzen.
 
 **Rechtsgrundlage der Mindestunterhalts-Werte**
 
@@ -2534,7 +2534,7 @@ Die Mindestunterhaltsbeträge der Düsseldorfer Tabelle 2026 basieren auf der 7.
       { frage: 'Wird die Ausbildungsvergütung meines Kindes auf den Unterhalt angerechnet?', antwort: 'Ja. Eigenes Einkommen des volljährigen Kindes (Ausbildungsvergütung, Nebenjob, BAföG) mindert den Unterhaltsanspruch. Vom Einkommen wird eine Pauschale von rund 100 € für ausbildungsbedingten Mehrbedarf abgezogen (Fahrtkosten, Arbeitsmittel); der Rest wird auf den Tabellenbetrag angerechnet. Beispiel: 500 € Ausbildungsvergütung → 400 € anrechenbar → Unterhaltsanspruch sinkt um 400 €.' },
       {
         frage: 'Muss ich für meine Eltern Unterhalt zahlen?',
-        antwort: 'Seit dem Angehörigen-Entlastungsgesetz vom 10.12.2019 (§ 94 Abs. 1a SGB XII) gilt: Elternunterhalt wird erst ab einem Bruttojahreseinkommen von über 100.000 € pro Kind fällig. Liegt Ihr Einkommen darunter, übernimmt die Sozialhilfe die ungedeckten Pflege- oder Heimkosten Ihrer Eltern komplett. Über 100.000 € werden nach der „Hälfte über Selbstbehalt"-Methode 50 % des Überschusses des bereinigten Nettos über den Selbstbehalt von 2.000 € (DT 2026) als Unterhalt fällig — die alte 30 %-Formel und der alte 2.650-€-Selbstbehalt sind seit 2020 nicht mehr aktuell.',
+        antwort: 'Seit dem Angehörigen-Entlastungsgesetz vom 10.12.2019 (§ 94 Abs. 1a SGB XII) gilt: Elternunterhalt wird erst ab einem Bruttojahreseinkommen von über 100.000 € pro Kind fällig. Liegt Ihr Einkommen darunter, übernimmt die Sozialhilfe die ungedeckten Pflege- oder Heimkosten Ihrer Eltern komplett. Über 100.000 € gilt nach dem BGH (XII ZB 6/24 v. 23.10.2024): Vom bereinigten Netto wird ein Selbstbehalt von 2.650 € abgezogen, vom Überschuss bleiben 70 % anrechnungsfrei, nur 30 % sind als Elternunterhalt zu zahlen. Beispiel: bereinigtes Netto 5.000 € → (5.000 − 2.650) × 30 % = 705 €/Monat. Die früher verbreitete Faustregel mit niedrigerem Selbstbehalt und höherer Anrechnungsquote ist damit überholt.',
       },
       {
         frage: 'Was gilt bei sehr hohem Einkommen?',
@@ -2548,6 +2548,126 @@ Die Mindestunterhaltsbeträge der Düsseldorfer Tabelle 2026 basieren auf der 7.
         frage: 'Welche Wohnkosten stecken im Selbstbehalt?',
         antwort: 'Der notwendige Selbstbehalt nach DT 2026 (1.450 € erwerbstätig / 1.200 € nicht erwerbstätig gegenüber minderjährigen Kindern) enthält pauschal 390 € Kaltmiete plus 130 € Nebenkosten und Heizung — zusammen 520 € Wohnkosten. Wer höhere tatsächliche Wohnkosten nachweist, kann eine Erhöhung des Selbstbehalts geltend machen, soweit die Mehrkosten nicht durch günstigeren Wohnraum vermeidbar wären.',
       },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Kindesunterhalt nach der Düsseldorfer Tabelle 2026',
+        html: `<p>Die <strong>Düsseldorfer Tabelle</strong> ist die bundesweite Leitlinie zur Bemessung des Kindesunterhalts. Das Oberlandesgericht Düsseldorf gibt sie in Abstimmung mit den anderen Oberlandesgerichten heraus und passt sie jährlich an. Aus dem <strong>bereinigten Nettoeinkommen</strong> des barunterhaltspflichtigen Elternteils und dem <strong>Alter des Kindes</strong> ergibt sich ein Tabellenbetrag, von dem das Kindergeld abgezogen wird — übrig bleibt der monatliche Zahlbetrag.</p><p>Dieser Rechner ermittelt den Zahlbetrag nach der Tabelle 2026, berücksichtigt die Kindergeld-Verrechnung, die Höher- und Herabstufung sowie den Mangelfall. Bei einer Trennung hängen viele Fragen zusammen — die Verfahrenskosten schätzt der <a href="/arbeit/scheidungskosten-rechner">Scheidungskosten-Rechner</a>. Der Kindesunterhalt selbst ist gesetzlich vorrangig: Er geht anderen Unterhaltsansprüchen im Rang vor. Maßgeblich ist immer die Tabelle des Jahres, in dem der Unterhalt geschuldet wird — für Zeiträume ab dem 1. Januar 2026 gilt die Fassung 2026 mit den angehobenen Mindestbedarfssätzen.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Hauptbeispiel: 3.000 € Netto, ein Kind (8 Jahre)',
+        schritte: [
+          { label: 'Bereinigtes Nettoeinkommen', formel: 'pro Monat', ergebnis: '3.000 €' },
+          { label: 'Einkommensgruppe', formel: 'bis 3.300 € = Gruppe 4', ergebnis: '115 %' },
+          { label: 'Altersstufe (6–11 Jahre)', formel: 'Mindestbedarf', ergebnis: '558 €' },
+          { label: 'Tabellenbetrag', formel: '⌈558 € × 1,15⌉', ergebnis: '642 €' },
+          { label: 'Hälftiges Kindergeld', formel: '259 € ÷ 2', ergebnis: '129,50 €' },
+          { label: 'Zahlbetrag', formel: '642 € − 129,50 €', ergebnis: '513 €' },
+        ],
+        fazit: 'Bei einem bereinigten Netto von 3.000 € fällt ein Unterhaltspflichtiger mit Standard-Annahme (zwei Berechtigte) in Einkommensgruppe 4 mit 115 % des Mindestbedarfs. Für ein achtjähriges Kind (Altersstufe 6–11, Mindestbedarf 558 €) ergibt das einen aufgerundeten Tabellenbetrag von 642 €. Davon wird das hälftige Kindergeld von 129,50 € abgezogen, weil der andere Elternteil das Kind betreut und ebenfalls die halbe Leistung erhält. Es bleibt ein Zahlbetrag von 513 € im Monat. Verdient der Pflichtige mehr, steigt die Gruppe und damit der Betrag; mit nur einem Kind kommt eine Höherstufung hinzu.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Mindestbedarf nach Altersstufen 2026 (Gruppe 1 = 100 %)',
+        kopf: ['Altersstufe', 'Alter', 'Mindestbedarf'],
+        zeilen: [
+          ['1. Stufe', '0–5 Jahre', '486 €'],
+          ['2. Stufe', '6–11 Jahre', '558 €'],
+          ['3. Stufe', '12–17 Jahre', '653 €'],
+          ['4. Stufe', 'ab 18 Jahre', '698 €'],
+        ],
+        fussnote: 'Diese Beträge sind der Mindestunterhalt der Einkommensgruppe 1 (bis 2.100 € Netto, 100 %). Sie beruhen auf der 7. Mindestunterhaltsverordnung vom 15.11.2024 (BGBl. 2024 I Nr. 359). Mit jeder höheren Einkommensgruppe steigt der Betrag prozentual. Beim Übergang in die nächste Altersstufe gilt der höhere Betrag nach § 1612a Abs. 3 BGB bereits für den ganzen Monat des Geburtstags, nicht erst ab dem Folgemonat. Der Betrag der vierten Stufe (ab 18) gilt für volljährige Kinder unabhängig vom genauen Alter.',
+      },
+      {
+        typ: 'text',
+        titel: 'Das bereinigte Nettoeinkommen — Grundlage der Berechnung',
+        html: `<p>Ausgangspunkt ist nicht das reine Netto, sondern das <strong>bereinigte Nettoeinkommen</strong>. Davon werden zunächst <strong>berufsbedingte Aufwendungen</strong> abgezogen — pauschal 5 %, mindestens 50 € und höchstens 150 € im Monat. Hinzu kommen berücksichtigungsfähige <strong>Schulden</strong>, etwa Kredite aus der Ehezeit, und Beiträge zu einer zusätzlichen Altersvorsorge bis zu einer bestimmten Grenze. Bei Selbständigen wird der Durchschnitt der letzten drei Jahre angesetzt.</p><p>Je niedriger das bereinigte Netto, desto niedriger die Einkommensgruppe und damit der Unterhalt. Wichtig: Nicht jeder Posten ist abzugsfähig — neue Kredite nach der Trennung oder überhöhte Ausgaben erkennen Gerichte nicht ohne Weiteres an. Wer unsicher ist, welche Positionen zählen, sollte das bereinigte Netto sorgfältig ermitteln, denn schon kleine Abweichungen verschieben die Einkommensgruppe und damit den Zahlbetrag.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Einkommensgruppen 2026 (Zahlbetrag-Beispiel, Alter 6–11)',
+        kopf: ['Gruppe', 'Netto bis', 'Prozent', 'Tabellenbetrag'],
+        zeilen: [
+          ['1', '2.100 €', '100 %', '558 €'],
+          ['4', '3.300 €', '115 %', '642 €'],
+          ['6', '3.900 €', '125 %', '698 €'],
+          ['10', '6.400 €', '145 %', '810 €'],
+          ['15', '11.200 €', '170 %', '949 €'],
+        ],
+        fussnote: 'Die Düsseldorfer Tabelle kennt 15 Einkommensgruppen von 100 % (bis 2.100 € Netto) bis 170 % (bis 11.200 €), jeweils in Fünf-Prozent-Schritten. Hier ist beispielhaft die Altersstufe 6–11 Jahre (Mindestbedarf 558 €) abgebildet; der Tabellenbetrag ist auf volle Euro aufgerundet. Vom Tabellenbetrag wird das Kindergeld noch abgezogen. Liegt das bereinigte Netto über 11.200 €, gibt es keine schematische Fortschreibung — dann wird der konkrete Bedarf des Kindes nach § 1610 BGB individuell ermittelt. Die Gruppen gehen von zwei Unterhaltsberechtigten aus.',
+      },
+      {
+        typ: 'text',
+        titel: 'Kindergeld-Verrechnung: hälftig oder voll?',
+        html: `<p>Das Kindergeld ist im Tabellenbetrag <strong>nicht enthalten</strong> — es wird separat abgezogen. Bei <strong>minderjährigen Kindern</strong> wird nur die Hälfte des Kindergeldes (2026: 129,50 €) auf den Tabellenbetrag angerechnet. Der Grund: Beide Elternteile sind zum Unterhalt verpflichtet, der betreuende Elternteil leistet seinen Anteil durch die Erziehung und erhält dafür die andere Hälfte des Kindergeldes.</p><p>Bei <strong>volljährigen Kindern</strong> wird dagegen das volle Kindergeld (2026: 259 €) angerechnet, weil es ihnen dann unmittelbar zusteht und als Einkommen gilt. Das Kindergeld selbst wird nach § 32 EStG bis zum 25. Geburtstag gezahlt, solange das Kind in Erstausbildung oder Erststudium ist. Wie hoch der Kindergeldanspruch im Einzelfall ist, zeigt der <a href="/finanzen/kindergeld-rechner">Kindergeld-Rechner</a>.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Barunterhalt und Betreuungsunterhalt',
+        html: `<p>Das Unterhaltsrecht unterscheidet zwei Formen. Der Elternteil, bei dem das minderjährige Kind lebt, erfüllt seine Pflicht durch <strong>Betreuung</strong> — Pflege, Erziehung und Versorgung im Alltag. Der andere Elternteil schuldet den <strong>Barunterhalt</strong>, also die Geldzahlung nach der Düsseldorfer Tabelle. Beide Leistungen gelten als gleichwertig; deshalb wird auch nur das halbe Kindergeld auf den Barunterhalt angerechnet.</p><p>Lebt das Kind zu etwa gleichen Teilen bei beiden Eltern (<strong>Wechselmodell</strong>), verschiebt sich die Rechnung: Dann sind beide bar- und betreuungspflichtig, und der Unterhalt wird nach beiden Einkommen quotiert — ein Sonderfall, den dieser Rechner nicht abbildet. Im klassischen Residenzmodell, bei dem das Kind überwiegend bei einem Elternteil wohnt, gilt dagegen die einfache Tabellenrechnung.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Höher- und Herabstufung',
+        text: 'Die Düsseldorfer Tabelle unterstellt, dass der Pflichtige zwei Personen Unterhalt schuldet. Weicht die Zahl der Unterhaltsberechtigten davon ab, wird die Einkommensgruppe angepasst. Bei nur einem Unterhaltsberechtigten erfolgt in der Regel eine Höherstufung um eine Gruppe, weil das Einkommen für weniger Personen reicht. Bei drei oder mehr Berechtigten wird um eine Gruppe herabgestuft. Diese Stufung wirkt direkt auf den Tabellenbetrag und damit auf den Zahlbetrag jedes Kindes. Der Rechner geht standardmäßig von zwei Berechtigten aus und bietet die Anpassung als Option an. Sie ist allerdings nur eine Regel des Einzelfalls — bei sehr hohem oder sehr niedrigem Einkommen kann das Gericht davon abweichen. Zu den Unterhaltsberechtigten zählen dabei nicht nur Kinder, sondern auch ein unterhaltsberechtigter Ehegatte, was die Stufung zusätzlich beeinflussen kann.',
+      },
+      {
+        typ: 'text',
+        titel: 'Selbstbehalt und Mangelfall',
+        html: `<p>Dem Unterhaltspflichtigen muss ein <strong>Selbstbehalt</strong> als Existenzminimum bleiben. Gegenüber minderjährigen und privilegiert volljährigen Kindern beträgt er 2026 <strong>1.450 €</strong> für Erwerbstätige und 1.200 € für Nicht-Erwerbstätige; gegenüber nicht-privilegiert volljährigen Kindern gilt ein höherer Selbstbehalt von 1.750 €. Im Selbstbehalt sind rund 520 € Wohnkosten enthalten.</p><p>Reicht das Einkommen nach Abzug des Selbstbehalts nicht für den vollen Unterhalt aller Kinder, liegt ein <strong>Mangelfall</strong> vor: Die Zahlbeträge werden anteilig gekürzt. Dabei gilt die Rangfolge des § 1609 BGB — minderjährige und privilegiert volljährige Kinder gehen vor, nicht-privilegiert Volljährige kommen erst danach. Das pfändungsfreie Existenzminimum lässt sich grob mit dem <a href="/finanzen/pfaendungsrechner">Pfändungsrechner</a> einordnen; vermögensrechtliche Folgen der Trennung rechnet der <a href="/arbeit/zugewinnausgleich-rechner">Zugewinnausgleich-Rechner</a> durch.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Selbstbehalts-Stufen 2026',
+        kopf: ['Gegenüber', 'Selbstbehalt', 'enthaltene Wohnkosten'],
+        zeilen: [
+          ['Minderjährige (erwerbstätig)', '1.450 €', '520 €'],
+          ['Minderjährige (nicht erwerbstätig)', '1.200 €', '520 €'],
+          ['Nicht-privilegiert Volljährige', '1.750 €', '650 €'],
+          ['Elternunterhalt (pflichtiges Kind)', '2.650 €', '—'],
+        ],
+        fussnote: 'Der Selbstbehalt sichert das Existenzminimum des Pflichtigen. Gegenüber minderjährigen und privilegiert volljährigen Kindern ist er am niedrigsten, weil deren Unterhalt im Rang vorgeht; gegenüber nicht-privilegiert volljährigen Kindern liegt er höher. Für den Elternunterhalt — also Unterhalt erwachsener Kinder für ihre Eltern — gilt seit dem BGH-Beschluss XII ZB 6/24 ein Mindestselbstbehalt von 2.650 €. Wer höhere tatsächliche Wohnkosten nachweist, kann eine Anhebung des Selbstbehalts geltend machen, soweit günstigerer Wohnraum nicht zumutbar ist.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Unterhalt für volljährige Kinder',
+        text: 'Mit der Volljährigkeit endet der Unterhaltsanspruch nicht. Solange das Kind eine Erstausbildung oder ein Erststudium zielstrebig betreibt, besteht er regelmäßig bis zum Abschluss, typischerweise bis etwa zum 25. Lebensjahr. Ab 18 sind beide Elternteile barunterhaltspflichtig, und das volle Kindergeld wird angerechnet. Lebt das Kind nicht mehr im Elternhaushalt, gilt häufig ein eigener Regelbedarf von rund 990 € im Monat. Eigene Einkünfte des Kindes — Ausbildungsvergütung, Nebenjob oder BAföG — mindern den Anspruch: Nach Abzug einer Pauschale von rund 100 € für ausbildungsbedingten Mehrbedarf wird der Rest auf den Bedarf angerechnet. Privilegiert volljährig (unter 21, im Elternhaushalt, allgemeine Schulausbildung) werden Kinder wie Minderjährige behandelt, alle übrigen rangieren nachrangig.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Elternunterhalt 2026: 2.650 € Selbstbehalt, 30 % Anrechnung',
+        text: 'Müssen erwachsene Kinder für die Pflege- oder Heimkosten ihrer Eltern aufkommen? Seit dem Angehörigen-Entlastungsgesetz (§ 94 Abs. 1a SGB XII) erst dann, wenn ihr Bruttojahreseinkommen 100.000 € übersteigt — und zwar je Kind einzeln geprüft. Liegt es darunter, trägt der Sozialhilfeträger die ungedeckten Kosten ohne Rückgriff. Wird die Schwelle überschritten, gilt der vom Bundesgerichtshof bestätigte Maßstab (XII ZB 6/24 vom 23.10.2024): Vom bereinigten Nettoeinkommen wird ein Selbstbehalt von 2.650 € abgezogen, und vom übersteigenden Betrag bleiben dem Kind 70 % anrechnungsfrei — nur 30 % sind als Elternunterhalt zu zahlen. Beispiel: bereinigtes Netto 5.000 € → (5.000 − 2.650) × 30 % = 705 € im Monat. Die früher verbreitete Faustregel mit 2.000 € Selbstbehalt und 50 % Anrechnung ist damit überholt.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Unterhalt richtig berechnen — Schritt für Schritt',
+        punkte: [
+          'Das bereinigte Nettoeinkommen sauber ermitteln (berufsbedingte Kosten, abzugsfähige Schulden, Altersvorsorge).',
+          'Die Altersstufe des Kindes und die passende Einkommensgruppe bestimmen.',
+          'Das Kindergeld richtig verrechnen — hälftig bei Minderjährigen, voll bei Volljährigen.',
+          'Eine Höher- oder Herabstufung je nach Zahl der Unterhaltsberechtigten prüfen.',
+          'Im Mangelfall die Quotelung und die Rangfolge nach § 1609 BGB beachten.',
+          'Sonder- und Mehrbedarf (Kita, Nachhilfe, Klassenfahrt) separat geltend machen.',
+          'Bei Streit die Beistandschaft des Jugendamts oder eine Fachanwältin für Familienrecht einschalten.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Kurzfazit',
+        text: 'Der Kindesunterhalt ergibt sich aus dem bereinigten Nettoeinkommen und dem Alter des Kindes nach der Düsseldorfer Tabelle 2026, abzüglich des Kindergeldes. Höher- und Herabstufung, Selbstbehalt und Mangelfall verschieben den Betrag im Einzelfall. Für den Elternunterhalt gilt seit dem BGH-Beschluss XII ZB 6/24 die 100.000-€-Schwelle, ein Selbstbehalt von 2.650 € und eine Anrechnung von nur 30 %. Dieser Rechner bildet Kindes- und Elternunterhalt nach der aktuellen Tabelle ab; Sonder- und Mehrbedarf sowie Einzelfälle bei sehr hohem Einkommen bleiben außen vor. Verbindlich sind ein Unterhaltstitel oder die gerichtliche Festsetzung — dieser Rechner liefert eine Orientierung und ersetzt keine Rechtsberatung. Wer den Unterhalt rechtssicher festhalten möchte, kann ihn beim Jugendamt kostenlos titulieren lassen; das spart im Streitfall ein gerichtliches Verfahren.',
+      },
+    ],
+    quellen: [
+      { titel: 'Düsseldorfer Tabelle 2026 – OLG Düsseldorf (gültig ab 01.01.2026)', url: 'https://www.olg-duesseldorf.nrw.de/infos/Duesseldorfer_Tabelle/' },
+      { titel: 'BGB § 1612a – Mindestunterhalt minderjähriger Kinder', url: 'https://www.gesetze-im-internet.de/bgb/__1612a.html' },
+      { titel: 'BGH XII ZB 6/24 v. 23.10.2024 – Selbstbehalt beim Elternunterhalt', url: 'https://www.bundesgerichtshof.de/SharedDocs/Pressemitteilungen/DE/2024/2024229.html' },
+      { titel: 'SGB XII § 94 Abs. 1a – Angehörigen-Entlastungsgesetz (100.000-€-Grenze)', url: 'https://www.gesetze-im-internet.de/sgb_12/__94.html' },
     ],
   },
   {
