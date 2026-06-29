@@ -1700,7 +1700,7 @@ Für die genaue Berechnung Ihrer Urlaubstage nutzen Sie unseren [Urlaubstage-Rec
   },
   {
     slug: 'abfindungsrechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-29',
     titel: 'Abfindungsrechner',
     beschreibung: 'Abfindung berechnen: Regelabfindung, Netto-Abfindung nach Fünftelregelung und steuerliche Auswirkungen auf einen Blick.',
     kategorie: 'Arbeit & Recht',
@@ -1710,7 +1710,7 @@ Für die genaue Berechnung Ihrer Urlaubstage nutzen Sie unseren [Urlaubstage-Rec
     keywords: ['abfindungsrechner', 'abfindung berechnen', 'netto abfindung', 'fünftelregelung', 'abfindung versteuern', 'regelabfindung berechnen', 'abfindung steuer', 'abfindungsrechner 2026'],
     icon: '💰',
     formel: 'Regelabfindung = Monatsbrutto × Betriebsjahre × Faktor | Fünftelregelung: Steuer = 5 × [ESt(Einkommen + Abfindung/5) − ESt(Einkommen)]',
-    beispiel: '3.500 € Brutto, 8 Jahre, Faktor 0,5 → Abfindung: 14.000 € brutto → ca. 10.300 € netto (mit Fünftelregelung, Stkl. I)',
+    beispiel: '3.500 € Brutto, 8 Jahre, Faktor 0,5 → Abfindung: 14.000 € brutto → ca. 9.400 € netto mit Fünftelregelung (ledig, Grundtarif, zvE 42.000 €, ohne Kirchensteuer); Steuerersparnis gegenüber voller Besteuerung rund 270 €.',
     erklaerung: `**Wie wird die Regelabfindung berechnet?**
 
 Die Regelabfindung ist die in der Praxis am häufigsten verwendete Berechnungsgrundlage für Abfindungen bei betriebsbedingten Kündigungen. Die Formel lautet: **Abfindung = Monatsbruttoeinkommen × Betriebszugehörigkeit in Jahren × Faktor**. Der Standardfaktor beträgt **0,5** — also ein halbes Monatsgehalt pro Beschäftigungsjahr. Bei einem Bruttogehalt von 3.500 € und 8 Jahren Betriebszugehörigkeit ergibt sich eine Regelabfindung von 14.000 €.
@@ -1792,6 +1792,113 @@ Für die Berechnung Ihrer Kündigungsfrist nutzen Sie unseren [Kündigungsfrist-
         frage: 'Was bedeutet der Auflösungsantrag nach §§ 9, 10 KSchG?',
         antwort: 'Wenn ein Arbeitnehmer mit einer Kündigungsschutzklage erfolgreich ist (die Kündigung also unwirksam war), das Arbeitsverhältnis aber durch den Prozess so belastet ist, dass eine Fortsetzung unzumutbar erscheint, kann das Arbeitsgericht auf seinen Antrag (§ 9 KSchG) die Auflösung gegen Zahlung einer Abfindung anordnen. Die Höchstgrenzen nach § 10 KSchG: bis zu 12 Monatsverdienste; bis zu 15 Monatsverdienste, wenn der Arbeitnehmer mindestens 50 Jahre alt ist und mindestens 15 Jahre Betriebszugehörigkeit hat; bis zu 18 Monatsverdienste, wenn er mindestens 55 Jahre alt ist und mindestens 20 Jahre Betriebszugehörigkeit hat. Es handelt sich um Höchstgrenzen, die das Gericht im Einzelfall ausschöpft oder unterschreitet — nicht um einen gesetzlichen Mindestanspruch.',
       },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was ist eine Abfindung?',
+        html: `<p>Eine <strong>Abfindung</strong> ist eine einmalige Zahlung des Arbeitgebers für den Verlust des Arbeitsplatzes. Wichtig: Es gibt in Deutschland <strong>keinen generellen gesetzlichen Anspruch</strong> darauf. Abfindungen entstehen meist im Aufhebungsvertrag, im Vergleich vor dem Arbeitsgericht, über das Klageverzichts-Angebot nach § 1a KSchG oder durch einen Sozialplan. Höhe und Faktor sind weitgehend Verhandlungssache.</p><p>Dieser Rechner ermittelt die Brutto-Regelabfindung aus Monatsgehalt, Betriebsjahren und Faktor sowie das Netto nach der Fünftelregelung. Die Abfindung ist <strong>sozialversicherungsfrei</strong>, aber einkommensteuerpflichtig. Wie sich Ihr laufendes Gehalt netto darstellt, zeigt der <a href="/finanzen/brutto-netto-rechner">Brutto-Netto-Rechner</a>; die Abfindung wird steuerlich gesondert behandelt. Wichtig vorab: Eine Abfindung ist kein Schmerzensgeld und kein Lohn für geleistete Arbeit, sondern ein Ausgleich für den Verlust des Arbeitsplatzes — entsprechend hängt ihre Höhe weniger an der bisherigen Leistung als an der Verhandlungslage.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Regelabfindung: Monatsgehalt × Jahre × Faktor',
+        schritte: [
+          { label: 'Monatsbruttogehalt', formel: '—', ergebnis: '3.500 €' },
+          { label: 'Betriebszugehörigkeit', formel: 'volle Jahre', ergebnis: '8 Jahre' },
+          { label: 'Faktor (Standard)', formel: '0,5 Monatsgehälter/Jahr', ergebnis: '0,5' },
+          { label: 'Brutto-Regelabfindung', formel: '3.500 € × 8 × 0,5', ergebnis: '14.000 €' },
+        ],
+        fazit: 'Die Regelabfindung ist die in der Praxis gängigste Faustformel: ein halbes Monatsgehalt pro Beschäftigungsjahr. Bei 3.500 € Brutto und acht Jahren ergibt das 14.000 € brutto. Der Faktor 0,5 ist aber nur ein Richtwert — je nach Verhandlungsposition, Branche, Alter und Erfolgsaussicht einer Kündigungsschutzklage reicht er in der Praxis von etwa 0,25 bis 1,5 und mehr. Ältere Beschäftigte mit langer Betriebszugehörigkeit erzielen oft höhere Faktoren, weil ihre Aussichten auf dem Arbeitsmarkt schlechter sind. Entscheidend ist meist, wie angreifbar die Kündigung ist: Je größer das Prozessrisiko für den Arbeitgeber, desto höher die Abfindung.',
+      },
+      {
+        typ: 'text',
+        titel: 'Wann gibt es überhaupt eine Abfindung?',
+        html: `<p>Da kein allgemeiner Anspruch besteht, hängt die Abfindung am Einzelfall. Beim <strong>Aufhebungsvertrag</strong> einigen sich beide Seiten einvernehmlich, oft gegen Abfindung. In der <strong>Kündigungsschutzklage</strong> endet das Verfahren häufig mit einem Vergleich samt Abfindung. Nach <strong>§ 1a KSchG</strong> kann der Arbeitgeber bei betriebsbedingter Kündigung 0,5 Monatsgehälter pro Jahr anbieten, wenn der Arbeitnehmer auf die Klage verzichtet.</p><p>Gewinnt der Arbeitnehmer die Klage, ist ihm die Rückkehr aber unzumutbar, kann das Gericht das Arbeitsverhältnis nach <strong>§§ 9, 10 KSchG</strong> gegen Abfindung auflösen — mit Höchstgrenzen von 12, 15 oder 18 Monatsverdiensten je nach Alter und Betriebszugehörigkeit. Voraussetzung jeder guten Verhandlung ist eine wirksame Kündigung mit klaren Fristen; diese prüfen Sie mit dem <a href="/arbeit/kuendigungsfrist-rechner">Kündigungsfrist-Rechner</a>.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Die 3-Wochen-Frist nach § 4 KSchG',
+        text: 'Die wichtigste Frist im Kündigungsschutz: Eine Kündigungsschutzklage muss innerhalb von drei Wochen nach Zugang der schriftlichen Kündigung beim Arbeitsgericht eingehen (§ 4 KSchG). Wer diese Frist versäumt, verliert nicht nur den Kündigungsschutz, sondern auch jede Verhandlungsposition für eine Abfindung — die Kündigung gilt dann als von Anfang an wirksam. Deshalb gilt: Auch wenn über einen Aufhebungsvertrag verhandelt wird, sollte man die Frist im Blick behalten und im Zweifel vorsorglich Klage erheben, um sich die Optionen offenzuhalten. Die drei Wochen laufen ab dem Tag, an dem die Kündigung tatsächlich zugeht, nicht ab dem Datum auf dem Schreiben. Im Zweifel zählt jeder Tag — eine frühe anwaltliche Beratung ist hier bares Geld wert.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Netto nach Fünftelregelung (Tarif 2026)',
+        schritte: [
+          { label: 'Brutto-Abfindung', formel: 'wie oben', ergebnis: '14.000 €' },
+          { label: 'Zu versteuerndes Jahreseinkommen', formel: 'ledig, ohne Abfindung', ergebnis: '42.000 €' },
+          { label: 'Steuer auf zvE', formel: 'ESt(42.000)', ergebnis: '≈ 7.850 €' },
+          { label: 'Steuer auf zvE + 1/5', formel: 'ESt(44.800)', ergebnis: '≈ 8.769 €' },
+          { label: 'Steuer auf die Abfindung', formel: '5 × (8.769 − 7.850)', ergebnis: '≈ 4.600 €' },
+          { label: 'Netto-Abfindung', formel: '14.000 € − 4.600 €', ergebnis: '≈ 9.400 €' },
+        ],
+        fazit: 'Die Fünftelregelung versteuert so, als wäre die Abfindung über fünf Jahre verteilt geflossen: Man addiert ein Fünftel zum Jahreseinkommen, berechnet die Steuerdifferenz und multipliziert sie mit fünf. Bei einem zu versteuernden Einkommen von 42.000 € (ledig, Grundtarif) ergibt das rund 4.600 € Steuer auf die 14.000 € Abfindung — es bleiben etwa 9.400 € netto. Soli und Kirchensteuer fallen hier nicht an. Ohne die Fünftelregelung läge die Steuer bei rund 4.868 €, das Netto bei 9.132 € — die Ersparnis beträgt also nur etwa 270 €. Bei diesem schon hohen Voreinkommen wirkt die Progressionsglättung kaum.',
+      },
+      {
+        typ: 'text',
+        titel: 'Die Fünftelregelung nach § 34 EStG',
+        html: `<p>Die <strong>Fünftelregelung</strong> ist eine Steuervergünstigung für außerordentliche Einkünfte wie Abfindungen (§ 34 EStG). Eine Einmalzahlung würde die Progression sonst voll treffen; die Regelung mildert das, indem das Finanzamt rechnet, als wäre die Abfindung über fünf Jahre verteilt. Wichtig: Die <strong>Steuerklasse spielt keine Rolle</strong> — § 34 EStG wirkt bei der Veranlagung über das zu versteuernde Jahreseinkommen, nicht beim Lohnsteuerabzug. Abfindungen sind zudem sozialversicherungsfrei.</p><p>Der Effekt hängt stark vom Voreinkommen ab: Wer wenig verdient und eine hohe Abfindung erhält, spart deutlich; wer ohnehin im hohen Progressionsbereich liegt, kaum. Da der Arbeitgeber seit 2025 die Vergünstigung nicht mehr automatisch anwendet, kommt sie erst über die Steuererklärung zurück — der <a href="/finanzen/steuererstattung-rechner">Steuererstattungs-Rechner</a> hilft, die Erstattung einzuordnen.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Seit 2025: Fünftelregelung nur noch über die Steuererklärung',
+        text: 'Eine wichtige Änderung durch das Wachstumschancengesetz: Seit dem 1. Januar 2025 wendet der Arbeitgeber die Fünftelregelung nicht mehr automatisch beim Lohnsteuerabzug an. Die Abfindung wird zunächst voll versteuert, der Arbeitgeber behält also mehr Lohnsteuer ein, als am Ende fällig ist. Die Ersparnis durch die Fünftelregelung erhalten Sie erst nach Abgabe der Einkommensteuererklärung als Erstattung vom Finanzamt zurück. Praktische Folge: Planen Sie einen Liquiditätspuffer ein, weil zwischen Auszahlung und Erstattung Monate liegen können. Wer keine Steuererklärung abgibt, verschenkt die Vergünstigung komplett — die Abgabe lohnt sich bei einer Abfindung also fast immer, auch wenn man sonst nicht erklärungspflichtig wäre.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Wann sich die Fünftelregelung wirklich lohnt',
+        schritte: [
+          { label: 'Szenario A: hohes Voreinkommen', formel: 'zvE 42.000 €, Abfindung 14.000 €', ergebnis: 'Ersparnis ~270 €' },
+          { label: 'Szenario B: niedriges Voreinkommen', formel: 'zvE 15.000 €, Abfindung 40.000 €', ergebnis: 'Ersparnis mehrere tausend €' },
+          { label: 'Faustregel', formel: 'große Abfindung + niedriges Voreinkommen', ergebnis: 'maximaler Effekt' },
+        ],
+        fazit: 'Die Fünftelregelung wirkt umso stärker, je größer der Sprung in der Progression ist, den sie abfedert. In Szenario A liegt das Voreinkommen mit 42.000 € schon hoch im progressiven Bereich — die zusätzliche Abfindung von 14.000 € bringt deshalb nur rund 270 € Ersparnis. In Szenario B mit nur 15.000 € Voreinkommen und einer hohen Abfindung von 40.000 € füllt die verteilte Abfindung zunächst niedrige Tarifzonen, sodass die Ersparnis mehrere tausend Euro betragen kann. Wer den Auszahlungszeitpunkt beeinflussen kann, prüft daher, in welchem Jahr das übrige Einkommen niedrig ausfällt — etwa bei längerer Arbeitslosigkeit oder einem Sabbatical. Eine Steuerberatung kann den optimalen Zeitpunkt durchrechnen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Den Faktor und den Auszahlungszeitpunkt clever wählen',
+        html: `<p>Zwei Stellschrauben entscheiden über die Höhe der Netto-Abfindung: der <strong>Faktor</strong> und der <strong>Auszahlungszeitpunkt</strong>. Beim Faktor zählt die Verhandlungsposition — eine angreifbare Kündigung mit Fehlern bei Sozialauswahl, Betriebsratsanhörung oder Form erhöht das Prozessrisiko des Arbeitgebers und damit seine Bereitschaft, mehr zu zahlen. Üblich sind 0,5 Monatsgehälter pro Jahr, in guten Konstellationen deutlich mehr.</p><p>Beim Zeitpunkt lohnt der Blick aufs Jahreseinkommen: Fällt die Abfindung in ein Jahr mit niedrigem übrigen Einkommen — etwa nach längerer Arbeitslosigkeit, in einem Sabbatjahr oder bei einem Wechsel in Teilzeit —, wirkt die Fünftelregelung am stärksten, weil die verteilten Fünftel niedrige Tarifzonen füllen. Eine Verschiebung der Auszahlung über den Jahreswechsel kann daher mehrere tausend Euro Steuern sparen; durchrechnen lässt sich das am besten mit einer Steuerberatung.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Abfindung und Arbeitslosengeld',
+        text: 'Eine Abfindung wird nicht auf die Höhe oder Dauer des Arbeitslosengeldes angerechnet — sie ist Geld für den Verlust des Arbeitsplatzes, kein Lohnersatz. Vorsicht gilt aber bei der Sperrzeit: Wer an der Beendigung mitwirkt, etwa durch einen Aufhebungsvertrag, riskiert eine Sperrzeit von bis zu zwölf Wochen (§ 159 SGB III), in der kein Arbeitslosengeld fließt und die Anspruchsdauer sich verkürzt. Vermeiden lässt sich das in der Regel, wenn die Kündigung ohnehin betriebsbedingt drohte und die Abfindung die Regelhöhe von 0,5 Monatsgehältern pro Jahr nicht übersteigt. Wird hingegen die ordentliche Kündigungsfrist durch den Aufhebungsvertrag verkürzt, kann die Agentur für Arbeit das Arbeitslosengeld zusätzlich ruhen lassen. Eine Beratung bei der Agentur vor der Unterschrift schützt vor bösen Überraschungen.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Aufrundung angefangener Beschäftigungsjahre',
+        text: 'Bei der gesetzlichen Regelabfindung nach § 1a KSchG zählt ein angefangenes Beschäftigungsjahr voll mit, wenn die Restzeit mehr als sechs Monate beträgt (§ 1a Abs. 2 Satz 3 KSchG). Wer sieben Jahre und sieben Monate beschäftigt war, wird also mit acht Jahren gerechnet; sind es nur sieben Jahre und fünf Monate, bleibt es bei sieben Jahren. Das kann bei der Berechnung schnell ein halbes Monatsgehalt ausmachen. Diese Aufrundungsregel gilt allerdings nur für die Abfindung nach § 1a KSchG. Beim Aufhebungsvertrag oder im gerichtlichen Vergleich sind Faktor und Bezugsgröße frei verhandelbar — dort kann man auch ungerundete Zeiten oder höhere Faktoren vereinbaren. Es lohnt sich, die genaue Betriebszugehörigkeit vor der Verhandlung festzuhalten.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Abfindung verhandeln — worauf es ankommt',
+        punkte: [
+          'Die Kündigung auf Formfehler prüfen: Betriebsratsanhörung, Sozialauswahl, Schriftform.',
+          'Sonderkündigungsschutz klären (Schwangerschaft, Schwerbehinderung, Betriebsrat, Elternzeit).',
+          'Die 3-Wochen-Klagefrist nach § 4 KSchG unbedingt wahren.',
+          'Den Faktor an der Erfolgsaussicht der Klage ausrichten — je angreifbarer die Kündigung, desto höher.',
+          'Den Auszahlungszeitpunkt steuerlich planen (niedriges Voreinkommen senkt die Steuer).',
+          'Einen Liquiditätspuffer einplanen, weil die Fünftel-Ersparnis erst über die Steuererklärung zurückkommt.',
+          'Vor Unterschrift eines Aufhebungsvertrags die Sperrzeit-Folgen für das Arbeitslosengeld prüfen.',
+          'Bei der gesetzlichen Regelabfindung die Aufrundung angefangener Jahre über sechs Monate beachten.',
+          'Im Zweifel eine Fachanwältin oder einen Fachanwalt für Arbeitsrecht hinzuziehen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Kurzfazit',
+        text: 'Die Brutto-Abfindung ergibt sich aus Monatsgehalt mal Betriebsjahren mal Faktor — der Faktor ist Verhandlungssache und reicht praktisch von 0,25 bis 1,5. Netto bleibt nach der Fünftelregelung mehr übrig, weil die Progression geglättet wird; der Effekt ist bei niedrigem Voreinkommen groß und bei hohem klein. Seit 2025 kommt die Ersparnis erst über die Steuererklärung zurück, nicht mehr automatisch über den Arbeitgeber. Dieser Rechner schätzt Brutto und Netto nach dem Tarif 2026 und liefert eine Orientierung; er ersetzt keine Steuer- oder Rechtsberatung. Gerade bei größeren Abfindungen oder strittigen Kündigungen lohnen sich eine Fachanwältin für Arbeitsrecht und eine Steuerberatung. Die Kosten dafür sind im Verhältnis zur möglichen Differenz bei Abfindung und Steuer meist gering und amortisieren sich häufig schon durch einen besseren Faktor oder einen klug gewählten Auszahlungszeitpunkt.',
+      },
+    ],
+    quellen: [
+      { titel: 'EStG § 34 – Außerordentliche Einkünfte (Fünftelregelung)', url: 'https://www.gesetze-im-internet.de/estg/__34.html' },
+      { titel: 'KSchG § 1a – Abfindungsanspruch bei betriebsbedingter Kündigung', url: 'https://www.gesetze-im-internet.de/kschg/__1a.html' },
+      { titel: 'KSchG §§ 9, 10 – Auflösung des Arbeitsverhältnisses & Abfindungshöhe', url: 'https://www.gesetze-im-internet.de/kschg/__10.html' },
+      { titel: 'KSchG § 4 – Anrufung des Arbeitsgerichts (3-Wochen-Frist)', url: 'https://www.gesetze-im-internet.de/kschg/__4.html' },
     ],
     affiliate: [
       { programId: 'ks-auxilia', context: 'abfindung' },
