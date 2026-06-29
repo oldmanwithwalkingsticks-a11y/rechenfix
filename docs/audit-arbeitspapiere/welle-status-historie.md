@@ -8,6 +8,55 @@
 
 ---
 
+## 29.06.2026 (II) — W19 Goldstandard wohnen-Steuer-Block (166) — wohnen-Kategorie KOMPLETT
+
+Die zwei verbleibenden wohnen-Steuer-Rechner auf Goldstandard. **Damit ist die gesamte wohnen-Kategorie
+Goldstandard.** Beide kategorieSlug `'wohnen'`. Distinkte Leitformate (tabelle, vergleich — bewusst getrennt
+gehalten, da direkte Datei-Nachbarn). Beide Beispiel-Anker per Node-Probe gegen echte Lib bestätigt; alle
+YMYL-Werte gegen Primärquellen (gesetze-im-internet.de, BFH, BewG/GrStG, Hessisches Finanzministerium/WIBank)
+geprüft. Beide Builds Vercel-grün + live SSR-verifiziert.
+
+**Builds (beide ≥11 Blöcke, Wortzahl ≥1.500, max Block <170 W):**
+- **grunderwerbsteuer-rechner** (tabelle 3×, `d524401`). Beispiel exakt Lib-konform (300.000 € NRW → GrESt
+  19.500 + Makler 10.710 + Notar 4.500 + Grundbuch 1.500 = 36.210 €), unverändert. GrESt-16-Sätze 2026 (SSOT,
+  bereits bei baufinanzierung verifiziert) vollständig korrekt. **Hessengeld primär verifiziert** (Hessisches
+  FinMin + WIBank + Landesregierung): 10.000 € je Erwerber (max. 20.000 €) + 5.000 € je Kind, nicht
+  einkommensabhängig, **Auszahlung über 10 Jahre in 10 Raten** (keine Sofort-Kompensation — Präzisierung ggü.
+  Alt-Text), Kaufvertrag ab 01.03.2024, Antrag über WIBank. Erstkäufer-Freibetrag bundesweit „diskutiert,
+  nicht beschlossen". Code-Entscheidung: nebenkosten-rechner-Link weggelassen (Mietnebenkosten ≠
+  Kaufnebenkosten, gleiche Themenkollision wie baufinanzierung, Lehre 10). Code ergänzte einen 13. Block
+  (Erbbaurecht/Bauträger) als fachlich saubere GrESt-Nuance.
+- **grundsteuer-rechner** (vergleich 3×, `0f8ebf8`). Recherche-intensivster wohnen-Slug. Beispiel exakt
+  Lib-konform (Bundesmodell: Bodenwert 80.000 + Gebäudewert 162.000 = Grundsteuerwert 242.000 € → Messbetrag
+  75,02 € → 375,10 €/Jahr), unverändert. **Modell-Zuordnung korrigiert** (Alt-Text war inkonsistent, Sachsen/
+  Hessen/Niedersachsen doppelt): gegen BFH/PwC/Deloitte primär verifiziert — Bundesmodell = 11 Länder (BE, BB,
+  HB, MV, NRW, RP, **SN**, ST, SL, SH, TH); Eigenmodelle nur BY/BW/HH/HE/NDS. **Rechtsstand 2026 prominent:**
+  BFH 10.12.2025 (II R 25/24, II R 31/24, II R 3/25) — Bundesmodell verfassungskonform, 3 Revisionen (NRW,
+  Sachsen, Berlin) abgewiesen, Urteilsbegründungen 22.01.2026; Verfassungsbeschwerde seit 09.03.2026 beim
+  BVerfG anhängig (1 BvR 472/26, Bund der Steuerzahler/Haus & Grund); Ländermodelle noch offen (BW-Verhandlung
+  ~April 2026). Grundsteuer A/B/C (C neu ab 2025 für baureife unbebaute Grundstücke), Umlagefähigkeit (BetrKV),
+  Einspruch § 355 AO abgedeckt. **L-35-Transparenz:** Lib modelliert nur bund/bayern/bw; HH/HE/NDS-Eigenheiten,
+  § 254 BewG Mietniveau-Stufen + § 256 Restnutzungsdauer nicht abgebildet — im Content klargestellt.
+
+**Verifizierte Fingerprint-/Link-Fallen abgefangen:**
+- grundsteuer Leitformat bewusst `vergleich` statt `tabelle` gewählt — der direkte Datei-Nachbar
+  grunderwerbsteuer nutzt `tabelle` 3× → Kollision vermieden.
+- baufinanzierung-Link: kategorieSlug ist `'wohnen'`, NICHT 'finanzen'. Der alte (nicht gerenderte)
+  grundsteuer-`erklaerung`-Fallback enthält noch fälschlich `/finanzen/baufinanzierung-rechner`; der neue
+  gerenderte contentBloecke-Content nutzt korrekt `/wohnen/baufinanzierung-rechner`.
+
+**Offener Doku-Punkt (für späteres globales erklaerung-Cleanup vorgemerkt):** Mehrere migrierte Slugs tragen
+inzwischen veraltete, nicht-gerenderte `erklaerung`-Fallback-Felder (z. B. grundsteuer: falscher
+/finanzen/-Link; indexmiete/mietrendite: alte Beispielwerte; vorfaelligkeit: §490-statt-§502-Fokus). Nicht
+sichtbar/gerendert, daher unkritisch — aber ein gebündelter erklaerung-Cleanup wäre nach AdSense sinnvoll.
+
+**Status nach diesem Block:** 166/178. wohnen-Kategorie vollständig Goldstandard. Verbleibend: 10× arbeit
+(abfindung, ehegattenunterhalt, elternzeit, freelancer-stundensatz, mutterschutz, promille, rechtsschutz,
+scheidungskosten, unterhalt, zugewinnausgleich) + wohngeld (finanzen, Sonderfall Erklärseite). brutto-netto
+zählt bereits via INLINE_ERKLAERUNG_SLUGS als migriert (kein contentBloecke-Bedarf).
+
+---
+
 ## 29.06.2026 — W19 Goldstandard wohnen-Finanz/Miete-Block (164 Goldstandard) + VPI-SSOT Mai 2026
 
 Fünf wohnen-Rechner der Finanz-/Miete-Untergruppe auf Goldstandard, plus eine separate, chirurgische
