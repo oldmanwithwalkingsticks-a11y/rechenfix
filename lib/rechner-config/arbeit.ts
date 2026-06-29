@@ -1970,7 +1970,7 @@ Eine Scheidung setzt in Deutschland grundsätzlich ein **Trennungsjahr** voraus.
   },
   {
     slug: 'zugewinnausgleich-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-06-29',
     titel: 'Zugewinnausgleich-Rechner',
     beschreibung: 'Zugewinnausgleich berechnen: Zugewinn beider Ehepartner und Ausgleichsanspruch bei Scheidung oder Erbfall.',
     kategorie: 'Arbeit & Recht',
@@ -1980,7 +1980,7 @@ Eine Scheidung setzt in Deutschland grundsätzlich ein **Trennungsjahr** voraus.
     keywords: ['zugewinnausgleich rechner', 'zugewinn berechnen', 'ausgleichsanspruch scheidung', 'zugewinngemeinschaft', 'anfangsvermögen endvermögen', '§ 1373 bgb', 'privilegierter erwerb', 'zugewinnausgleich formel', 'ehevertrag zugewinn', 'vermögensauseinandersetzung'],
     icon: '⚖️',
     formel: 'Anfangsvermögen indexiert = Anfangsvermögen × VPI(Endstichtag) / VPI(Heirat) (§ 1376 BGB) | Zugewinn = max(0; Endvermögen − (indexAnfangsvermögen + indexierter privilegierter Erwerb)) | Ausgleichsanspruch = (Zugewinn_höher − Zugewinn_niedriger) / 2 | Deckelung: max. Endvermögen − bereinigtes Anfangsvermögen des Ausgleichspflichtigen | §§ 1373, 1376, 1378 BGB.',
-    beispiel: 'Heirat 2010, Scheidung 2026 (Index-Faktor ≈ 1,405 nach Destatis-VPI). Partner 1: Anfangsvermögen 15.000 € → indexiert 21.084 €, Endvermögen 80.000 € → Zugewinn 58.916 €. Partner 2: Anfangsvermögen 5.000 € → indexiert 7.028 €, Endvermögen 120.000 € → Zugewinn 112.972 €. Differenz 54.056 € → Ausgleichsanspruch ca. 27.028 € (Partner 2 zahlt an Partner 1). Ohne Indexierung wären die Zugewinne 6.084 € bzw. 2.028 € höher und der Ausgleich entsprechend verzerrt.',
+    beispiel: 'Heirat 2010, Scheidung 2026 (Index-Faktor ≈ 1,397 nach Destatis-VPI, Stand Mai 2026). Partner 1: Anfangsvermögen 15.000 € → indexiert 20.950 €, Endvermögen 80.000 € → Zugewinn 59.050 €. Partner 2: Anfangsvermögen 5.000 € → indexiert 6.983 €, Endvermögen 120.000 € → Zugewinn 113.017 €. Differenz 53.966 € → Ausgleichsanspruch ca. 26.983 € (Partner 2 zahlt an Partner 1). Ohne Indexierung wären die Zugewinne 5.950 € bzw. 1.983 € höher und der Ausgleich entsprechend verzerrt.',
     erklaerung: `**Was ist der Zugewinnausgleich?**
 
 Der **Zugewinnausgleich** ist die gesetzliche Regelung für die Vermögensaufteilung bei einer Scheidung — und das, obwohl er im Alltag oft mit "Gütertrennung" verwechselt wird. In Deutschland leben Ehepaare automatisch im Güterstand der **Zugewinngemeinschaft** (§§ 1363 ff. BGB), wenn sie keinen Ehevertrag geschlossen haben. Das bedeutet: Während der Ehe bleiben die Vermögen formal getrennt — jeder Partner bleibt Eigentümer dessen, was er einbringt oder erwirbt. Erst **am Ende der Ehe**, also bei Scheidung oder Tod, wird der **Zuwachs des Vermögens** (der Zugewinn) zwischen beiden Partnern ausgeglichen. Der Partner, dessen Vermögen während der Ehe stärker gewachsen ist, muss die Hälfte der Differenz an den anderen Partner zahlen. So werden wirtschaftliche Ungleichgewichte — etwa weil ein Partner Kinder betreut und der andere Karriere macht — fair ausgeglichen, ohne dass während der Ehe jedes Konto gemeinsam geführt werden muss. Der Zugewinnausgleich ist dabei strikt vom **Versorgungsausgleich** (Aufteilung der Rentenanwartschaften) zu trennen — beides sind eigenständige Verfahren. Auch die [Scheidungskosten](/arbeit/scheidungskosten-rechner) sind unabhängig vom Ausgleichsbetrag.
@@ -1989,7 +1989,7 @@ Der **Zugewinnausgleich** ist die gesetzliche Regelung für die Vermögensauftei
 
 Die Formel lautet: **Zugewinn = Endvermögen − indexiertes Anfangsvermögen**. Das **Anfangsvermögen** ist das Vermögen am Tag der Heirat, das **Endvermögen** das Vermögen am Tag der Zustellung des Scheidungsantrags (bzw. beim Erbfall der Todestag).
 
-**Wichtig — Indexierung mit dem VPI:** Nach **§ 1376 BGB** und ständiger Rechtsprechung (BFH BFHE 217, 248; BGH FamRZ 2002, 606) wird das Anfangsvermögen mit dem Verbraucherpreisindex auf den Endstichtag indexiert: indexiertes Anfangsvermögen = Anfangsvermögen × VPI(Endstichtag) / VPI(Heirat). Dadurch wird der inflationsbedingte Wertverlust herausgerechnet — sonst würde ein 1990 in die Ehe eingebrachter Betrag durch reine Geldentwertung als „Zugewinn" gewertet. Bei einer Ehe Heirat 2000 / Scheidung 2026 liegt der Indexierungsfaktor bei rund 1,64 (= VPI 2026 ≈ 125,8 / VPI 2000 ≈ 76,7); bei einer Ehe Heirat 2010 / Scheidung 2026 bei rund 1,40. Privilegierter Erwerb (Erbschaften, Schenkungen) wird mit dem VPI zum **Erwerbsdatum** indexiert, nicht zum Heiratsdatum.
+**Wichtig — Indexierung mit dem VPI:** Nach **§ 1376 BGB** und ständiger Rechtsprechung (BFH BFHE 217, 248; BGH FamRZ 2002, 606) wird das Anfangsvermögen mit dem Verbraucherpreisindex auf den Endstichtag indexiert: indexiertes Anfangsvermögen = Anfangsvermögen × VPI(Endstichtag) / VPI(Heirat). Dadurch wird der inflationsbedingte Wertverlust herausgerechnet — sonst würde ein 1990 in die Ehe eingebrachter Betrag durch reine Geldentwertung als „Zugewinn" gewertet. Bei einer Ehe Heirat 2000 / Scheidung 2026 liegt der Indexierungsfaktor bei rund 1,63 (= VPI 2026 ≈ 125,0 / VPI 2000 ≈ 76,7, Stand Mai 2026); bei einer Ehe Heirat 2010 / Scheidung 2026 bei rund 1,40. Privilegierter Erwerb (Erbschaften, Schenkungen) wird mit dem VPI zum **Erwerbsdatum** indexiert, nicht zum Heiratsdatum.
 
 Für jeden Ehepartner wird der Zugewinn einzeln berechnet. Der Zugewinn kann nie negativ werden — wer mehr Schulden als vorher hat, hat einen Zugewinn von Null. Allerdings gilt seit 2009 eine wichtige Änderung: **Anfangsvermögen darf negativ sein**. Wer also mit 20.000 Euro Schulden in die Ehe startet und am Ende 50.000 Euro besitzt, hat einen Zugewinn nach Indexierung — die während der Ehe getilgten Schulden zählen mit. Vor 2009 wurde negatives Anfangsvermögen auf Null gesetzt, was den Partner mit Startschulden benachteiligte. Aus den beiden Zugewinnen ergibt sich die Differenz. Der Partner mit dem höheren Zugewinn muss dem anderen die **Hälfte der Differenz** zahlen — das ist der **Ausgleichsanspruch nach § 1378 BGB**. Die Zahlung ist grundsätzlich in Geld zu leisten, nicht in Sachwerten.
 
@@ -2011,7 +2011,7 @@ Wer den Zugewinnausgleich ausschließen oder modifizieren will, kann das durch e
       },
       {
         frage: 'Wie wird der Zugewinn berechnet?',
-        antwort: 'Zugewinn = Endvermögen (am Tag des Scheidungsantrags) − indexiertes Anfangsvermögen (am Tag der Heirat, plus privilegierter Erwerb). Wichtig: Nach § 1376 BGB und ständiger Rechtsprechung (BFH BFHE 217, 248) wird das Anfangsvermögen mit dem Verbraucherpreisindex auf den Endstichtag hochgerechnet (Faktor = VPI(End) / VPI(Heirat)). Der Zugewinn kann nie negativ werden. Aus den beiden indexierten Zugewinnen wird die Differenz gebildet, halbiert und dem Partner mit dem niedrigeren Zugewinn als Ausgleichsanspruch zugesprochen. Beispiel (Heirat 2010, Scheidung 2026, Index ≈ 1,405): P1 AV 15.000 → indexiert 21.084 € → Zugewinn 58.916 €. P2 AV 5.000 → indexiert 7.028 € → Zugewinn 112.972 €. Differenz 54.056 € → Ausgleich rund 27.028 € von P2 an P1.',
+        antwort: 'Zugewinn = Endvermögen (am Tag des Scheidungsantrags) − indexiertes Anfangsvermögen (am Tag der Heirat, plus privilegierter Erwerb). Wichtig: Nach § 1376 BGB und ständiger Rechtsprechung (BFH BFHE 217, 248) wird das Anfangsvermögen mit dem Verbraucherpreisindex auf den Endstichtag hochgerechnet (Faktor = VPI(End) / VPI(Heirat)). Der Zugewinn kann nie negativ werden. Aus den beiden indexierten Zugewinnen wird die Differenz gebildet, halbiert und dem Partner mit dem niedrigeren Zugewinn als Ausgleichsanspruch zugesprochen. Beispiel (Heirat 2010, Scheidung 2026, Index ≈ 1,397, Stand Mai 2026): P1 AV 15.000 → indexiert 20.950 € → Zugewinn 59.050 €. P2 AV 5.000 → indexiert 6.983 € → Zugewinn 113.017 €. Differenz 53.966 € → Ausgleich rund 26.983 € von P2 an P1.',
       },
       {
         frage: 'Was zählt als privilegierter Erwerb?',
@@ -2029,6 +2029,112 @@ Wer den Zugewinnausgleich ausschließen oder modifizieren will, kann das durch e
         frage: 'Kann ich den Zugewinnausgleich schon vor der Scheidung einfordern?',
         antwort: 'In Sonderfällen ja — über den **vorzeitigen Ausgleich nach § 1385 BGB**. Hauptanwendungsfall ist eine Trennung von mindestens drei Jahren. Daneben kommt der vorzeitige Ausgleich in Betracht, wenn der künftige Ausgleichsanspruch durch das Verhalten des anderen Ehegatten ernsthaft gefährdet ist — zum Beispiel durch nachhaltige Verweigerung der Auskunft, durch Handlungen, die das Endvermögen erheblich mindern, oder durch andere schwere Pflichtverletzungen aus dem Eheverhältnis. Wird der vorzeitige Ausgleich gerichtlich zugesprochen, endet die Zugewinngemeinschaft auch dann, wenn die Ehe formell weiterbesteht; ab diesem Zeitpunkt leben die Ehegatten in Gütertrennung.',
       },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was ist der Zugewinnausgleich?',
+        html: `<p>Wer in Deutschland ohne Ehevertrag heiratet, lebt automatisch in der <strong>Zugewinngemeinschaft</strong> (§§ 1363 ff. BGB). Während der Ehe bleiben die Vermögen beider Partner getrennt — jeder bleibt Eigentümer dessen, was er einbringt oder erwirbt. Erst am Ende der Ehe, bei Scheidung oder Tod, wird der <strong>Zugewinn</strong> ausgeglichen: Der Partner, dessen Vermögen während der Ehe stärker gewachsen ist, zahlt dem anderen die Hälfte der Differenz. So werden wirtschaftliche Ungleichgewichte fair ausgeglichen, ohne dass während der Ehe gemeinsame Konten nötig sind.</p><p>Dieser Rechner schätzt den Zugewinn beider Partner und den Ausgleichsanspruch. Strikt zu trennen ist der Zugewinnausgleich vom <strong>Versorgungsausgleich</strong>, der die Rentenanwartschaften aufteilt — beides sind eigenständige Verfahren. Die Verfahrenskosten ermittelt der <a href="/arbeit/scheidungskosten-rechner">Scheidungskosten-Rechner</a>, laufende Zahlungen nach der Trennung der <a href="/arbeit/unterhaltsrechner">Unterhalts-Rechner</a>. Wichtig vorab: Der Zugewinnausgleich betrifft nur das Vermögen — wer während der Ehe was gekauft oder gespart hat, spielt für den Ausgleich keine Rolle, allein der Zuwachs in Zahlen zählt.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Das Hauptbeispiel: Heirat 2010, Scheidung 2026',
+        schritte: [
+          { label: 'Index-Faktor (VPI 125,0 ÷ 89,5)', formel: 'VPI 2026 ÷ VPI 2010', ergebnis: '≈ 1,397' },
+          { label: 'Partner 1: AV indexiert', formel: '15.000 € × 1,397', ergebnis: '≈ 20.950 €' },
+          { label: 'Partner 1: Zugewinn', formel: '80.000 € − 20.950 €', ergebnis: '≈ 59.050 €' },
+          { label: 'Partner 2: AV indexiert', formel: '5.000 € × 1,397', ergebnis: '≈ 6.983 €' },
+          { label: 'Partner 2: Zugewinn', formel: '120.000 € − 6.983 €', ergebnis: '≈ 113.017 €' },
+          { label: 'Differenz der Zugewinne', formel: '113.017 € − 59.050 €', ergebnis: '≈ 53.966 €' },
+          { label: 'Ausgleichsanspruch', formel: '53.966 € ÷ 2', ergebnis: '≈ 26.983 €' },
+        ],
+        fazit: 'Beide Zugewinne werden getrennt ermittelt: Endvermögen minus indexiertes Anfangsvermögen. Partner 2 hat mit rund 113.017 € deutlich mehr Zugewinn erzielt als Partner 1 mit rund 59.050 €. Die Hälfte der Differenz von rund 53.966 € — also etwa 26.983 € — zahlt Partner 2 an Partner 1. Die VPI-Werte haben den Stand Mai 2026 (VPI 125,0); da sich der Index laufend ändert, verschieben sich die Beträge bei einem späteren Stichtag leicht. Der tatsächliche Ausgleich hängt zudem von der genauen Vermögensaufstellung und möglichen Sonderfällen ab.',
+      },
+      {
+        typ: 'text',
+        titel: 'Anfangs- und Endvermögen richtig bestimmen',
+        html: `<p>Der Zugewinn jedes Partners ist sein <strong>Endvermögen minus indexiertes Anfangsvermögen</strong>. Das <strong>Anfangsvermögen</strong> ist das Vermögen am Tag der Heirat — alle Aktiva wie Geld, Konten, Immobilien und Wertgegenstände abzüglich der Schulden. Das <strong>Endvermögen</strong> wird auf den Tag der Zustellung des Scheidungsantrags festgestellt. Für Immobilien zählt der Verkehrswert, nicht der Kaufpreis oder Einheitswert; Unternehmen brauchen eine professionelle Bewertung, oft der teuerste Teil des Verfahrens.</p><p>In der Praxis ist das Anfangsvermögen nach vielen Jahren schwer nachzuweisen. Wer ein höheres Anfangsvermögen behauptet, muss es belegen — sonst wird es auf null gesetzt. Ein schon bei der Heirat unterschriebenes Vermögensverzeichnis erspart später Streit. Beide Partner schulden sich gegenseitig Auskunft (§ 1379 BGB) zu den Stichtagen Heirat, Trennung und Zustellung. Rentenanwartschaften gehören nicht ins Endvermögen — sie laufen über den Versorgungsausgleich.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Warum das Anfangsvermögen indexiert wird (§ 1376 BGB)',
+        schritte: [
+          { label: 'Anfangsvermögen nominal (2010)', formel: 'eingebracht', ergebnis: '15.000 €' },
+          { label: 'VPI bei Heirat 2010', formel: 'Destatis', ergebnis: '89,5' },
+          { label: 'VPI Endstichtag 2026', formel: 'Stand Mai 2026', ergebnis: '125,0' },
+          { label: 'Index-Faktor', formel: '125,0 ÷ 89,5', ergebnis: '≈ 1,397' },
+          { label: 'AV indexiert', formel: '15.000 € × 1,397', ergebnis: '≈ 20.950 €' },
+          { label: 'Inflationsanteil (kein Zugewinn)', formel: '20.950 € − 15.000 €', ergebnis: '≈ 5.950 €' },
+        ],
+        fazit: '15.000 € von 2010 sind 2026 nicht mehr 15.000 € wert. Ohne Indexierung würde die reine Geldentwertung von rund 5.950 € fälschlich als Zugewinn gewertet und zur Hälfte ausgeglichen. § 1376 BGB rechnet das heraus, indem das Anfangsvermögen mit dem Verbraucherpreisindex auf den Endstichtag hochgerechnet wird: indexiertes AV = AV × VPI(Ende) ÷ VPI(Heirat). Nur der reale Vermögenszuwachs darüber hinaus zählt als Zugewinn. Maßgeblich sind die VPI-Werte des Statistischen Bundesamtes; die hier verwendeten gelten Stand Mai 2026.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'VPI-Faktoren je Heiratsjahr verstehen',
+        text: 'Der Indexierungsfaktor hängt davon ab, wie lange die Ehe gedauert hat: Je weiter die Heirat zurückliegt, desto stärker die Inflationskorrektur. Bei einer Heirat 2000 und Scheidung 2026 liegt er bei rund 1,63 (VPI 125,0 ÷ 76,7), bei Heirat 2010 bei rund 1,40 (125,0 ÷ 89,5), bei einer jüngeren Ehe ab 2020 nahe 1,0. Das Anfangsvermögen wird also umso stärker hochgerechnet, je älter die Ehe ist. Privilegierter Erwerb — etwa eine Erbschaft — wird nicht zum Heiratsjahr, sondern mit dem VPI ab seinem Erwerbsjahr indexiert. Die hier genannten Werte haben den Stand Mai 2026 (VPI 125,0); den tagesaktuellen Index veröffentlicht das Statistische Bundesamt auf destatis.de. Bei einem späteren Stichtag ändern sich die Faktoren entsprechend. Maßgeblich ist immer der Index des Monats, in dem der Scheidungsantrag zugestellt wurde, beziehungsweise der Heiratsmonat — der Rechner arbeitet vereinfacht mit Jahreswerten.',
+      },
+      {
+        typ: 'text',
+        titel: 'Privilegierter Erwerb: Erbschaften und Schenkungen',
+        html: `<p>Ein wichtiger Sonderfall ist der <strong>privilegierte Erwerb</strong> nach § 1374 Abs. 2 BGB: Erbschaften, Schenkungen Dritter und Ausstattungen, die ein Partner während der Ehe erhält, zählen nicht zum Zugewinn. Sie werden dem Anfangsvermögen hinzugerechnet und bleiben so beim begünstigten Partner. Wer während der Ehe 50.000 € erbt, muss diese also nicht zur Hälfte abgeben.</p><p>Zwei Einschränkungen sind wichtig. Erstens zählt die <strong>Wertsteigerung</strong> des Erbes — etwa Kursgewinne geerbter Aktien oder der Wertzuwachs einer geerbten Immobilie — sehr wohl zum normalen, ausgleichspflichtigen Zugewinn; privilegiert ist nur der Wert zum Zeitpunkt des Erwerbs. Zweitens sind <strong>Schenkungen zwischen den Ehepartnern</strong> kein privilegierter Erwerb. Wie ein Erbe steuerlich behandelt wird, ist eine getrennte Frage — eine erste Orientierung gibt der <a href="/finanzen/erbschaftsteuer-rechner">Erbschaftsteuer-Rechner</a>. In der Praxis ist der privilegierte Erwerb häufig ein Streitpunkt, weil Datum und Wert der Erbschaft genau belegt werden müssen; Kontoauszüge, Erbschein und Wertgutachten sind hier die wichtigsten Nachweise.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Variante: Partner 1 erbt 2018 während der Ehe',
+        schritte: [
+          { label: 'Erbschaft 2018 (privilegiert)', formel: '§ 1374 Abs. 2 BGB', ergebnis: '50.000 €' },
+          { label: 'Erbe indexiert (VPI 125,0 ÷ 99,7)', formel: '50.000 € × 1,254', ergebnis: '≈ 62.688 €' },
+          { label: 'Bereinigtes AV von Partner 1', formel: '20.950 € + 62.688 €', ergebnis: '≈ 83.638 €' },
+          { label: 'Partner 1: Zugewinn', formel: 'max(0; 80.000 € − 83.638 €)', ergebnis: '0 €' },
+          { label: 'Partner 2: Zugewinn (unverändert)', formel: 'wie Hauptbeispiel', ergebnis: '≈ 113.017 €' },
+          { label: 'Ausgleichsanspruch', formel: '(113.017 € − 0 €) ÷ 2', ergebnis: '≈ 56.508 €' },
+        ],
+        fazit: 'Erbt ein Partner während der Ehe, zählt die Erbschaft als privilegierter Erwerb (§ 1374 Abs. 2 BGB) zum Anfangsvermögen und ist damit ausgleichsfrei. Sie wird mit dem VPI ab dem Erwerbsjahr indexiert — hier von 2018 (VPI 99,7) auf 2026. Das indexierte Erbe von rund 62.688 € hebt das bereinigte Anfangsvermögen von Partner 1 über dessen Endvermögen, sodass sein Zugewinn auf null sinkt. Folge: Partner 2 zahlt die Hälfte seines eigenen Zugewinns, hier rund 56.508 €. Die Wertsteigerung des Erbes selbst — etwa Kursgewinne auf geerbte Aktien — bliebe dagegen normaler, ausgleichspflichtiger Zugewinn.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Schulden und negatives Anfangsvermögen',
+        text: 'Seit 2009 darf das Anfangsvermögen negativ sein — eine wichtige Änderung zugunsten von Partnern, die mit Schulden in die Ehe starten. Wer etwa mit 20.000 € Schulden beginnt und am Ende 50.000 € besitzt, hat einen Zugewinn von 70.000 €, weil der Schuldenabbau als Vermögenszuwachs zählt. Vor 2009 wurde negatives Anfangsvermögen auf null gesetzt, was verschuldet eingetretene Partner benachteiligte. Zwei Untergrenzen bleiben aber: Der Zugewinn kann nie negativ werden — wer am Ende ärmer ist als zu Beginn, hat einen Zugewinn von null. Und auch das Endvermögen wird nicht negativ angesetzt. Diese Grenzen verhindern, dass ein Partner für die Verluste des anderen aufkommen muss. Auch das indexierte Anfangsvermögen wird nicht eigens nach unten gekappt — entscheidend ist, dass der Zugewinn am Ende nicht unter null fällt.',
+      },
+      {
+        typ: 'text',
+        titel: 'Illoyale Vermögensminderung und Auskunftsanspruch',
+        html: `<p>Damit der Ausgleich nicht durch Vermögensverschiebungen unterlaufen wird, kennt das Gesetz Schutzmechanismen. Nach <strong>§ 1375 Abs. 2 BGB</strong> werden <strong>illoyale Vermögensminderungen</strong> dem Endvermögen wieder hinzugerechnet — etwa unentgeltliche Zuwendungen an Dritte ohne sittliche Pflicht, Verschwendung oder Handlungen in Schädigungsabsicht, vor allem nach der Trennung. Wer also nach dem Scheitern der Ehe Geld beiseiteschafft, verbessert seine Position nicht.</p><p>Zentral ist der <strong>Auskunftsanspruch nach § 1379 BGB</strong>: Beide Partner müssen über ihr Vermögen zu den Stichtagen Heirat, Trennung und Zustellung des Scheidungsantrags Auskunft geben und auf Verlangen belegen. Gerade der Stichtag Trennung deckt nachträgliche Minderungen auf. Wer die Auskunft ernsthaft verweigert, riskiert zudem den vorzeitigen Ausgleich nach § 1385 BGB. Die steuerlichen Folgen der Scheidung — etwa den Wegfall des Splittingtarifs — überblicken Sie mit dem <a href="/finanzen/splitting-rechner">Splitting-Rechner</a>. Wer den Verdacht hat, dass der andere Vermögen verschweigt, kann die Auskunft notfalls gerichtlich erzwingen und Belege verlangen.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Ausgleich modifizieren oder ausschließen',
+        text: 'Wer den Zugewinnausgleich anders regeln will, kann das mit einem notariellen Ehevertrag tun — jederzeit, auch noch während der Ehe. Die weitestgehende Variante ist die Gütertrennung (§ 1414 BGB): Dann findet überhaupt kein Ausgleich statt, jeder behält sein Vermögen. Das passt, wenn beide wirtschaftlich unabhängig sind, schwächt aber den Partner, der für die Familie zurücksteckt. Die mildere modifizierte Zugewinngemeinschaft schließt nur einzelne Werte aus, etwa ein Unternehmen, und erhält den Ausgleich im Übrigen. Die Notar- und Beratungskosten richten sich nach dem Vermögen und liegen bei durchschnittlichen Verhältnissen etwa zwischen 500 und 2.000 €. Wichtig: Eheverträge, die einen Partner sittenwidrig einseitig benachteiligen, sind unwirksam — eine ausgewogene Gestaltung ist also auch im eigenen Interesse.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Schritte bei Trennung und Scheidung',
+        punkte: [
+          'Vermögensverzeichnisse für die drei Stichtage zusammenstellen: Heirat, Trennung, Zustellung des Scheidungsantrags.',
+          'Verkehrswerte von Immobilien und Unternehmen fachlich ermitteln lassen.',
+          'Privilegierten Erwerb (Erbschaften, Schenkungen Dritter) mit Belegen und Datum dokumentieren.',
+          'Das Anfangsvermögen belegen — sonst wird es auf null gesetzt.',
+          'Mögliche illoyale Vermögensminderungen nach der Trennung prüfen.',
+          'Bei dreijähriger Trennung den vorzeitigen Ausgleich nach § 1385 BGB erwägen.',
+          'Die VPI-Werte für Heirats- und Endstichtag bei Destatis nachschlagen, um das Anfangsvermögen korrekt zu indexieren.',
+          'Eine Fachanwältin oder einen Fachanwalt für Familienrecht hinzuziehen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Kurzfazit',
+        text: 'Der Zugewinnausgleich teilt den während der Ehe erzielten Vermögenszuwachs: Wer mehr Zugewinn hatte, zahlt dem anderen die Hälfte der Differenz. Das Anfangsvermögen wird nach § 1376 BGB um die Inflation bereinigt, privilegierter Erwerb wie Erbschaften bleibt ausgeglichen. Wie hoch der Anspruch wirklich ausfällt, hängt entscheidend von der Vermögensaufstellung, der Bewertung von Immobilien und Unternehmen sowie von Sonderfällen ab. Dieser Rechner liefert eine erste Orientierung mit Beispiel-VPI-Werten (Stand Mai 2026) und ersetzt keine Rechtsberatung. Für die konkrete Auseinandersetzung — besonders bei Immobilien, Unternehmen oder strittigem Anfangsvermögen — gehört der Fall in die Hände einer Fachanwältin oder eines Fachanwalts für Familienrecht. Weil oft hohe Beträge im Spiel sind und die Bewertung Spielräume lässt, zahlt sich eine sorgfältige, frühzeitige Vorbereitung der Vermögensaufstellung fast immer aus.',
+      },
+    ],
+    quellen: [
+      { titel: 'BGB §§ 1373–1378 – Zugewinn, Anfangs-/Endvermögen, Ausgleichsforderung', url: 'https://www.gesetze-im-internet.de/bgb/__1373.html' },
+      { titel: 'BGB § 1376 – Wertermittlung / Indexierung des Anfangsvermögens', url: 'https://www.gesetze-im-internet.de/bgb/__1376.html' },
+      { titel: 'BGB § 1374 – Anfangsvermögen & privilegierter Erwerb', url: 'https://www.gesetze-im-internet.de/bgb/__1374.html' },
+      { titel: 'Statistisches Bundesamt (Destatis) – Verbraucherpreisindex (§ 1376 Indexierung)', url: 'https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html' },
     ],
   },
   {
