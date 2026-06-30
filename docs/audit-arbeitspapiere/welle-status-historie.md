@@ -4,7 +4,77 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 29.06.2026
+**Stand:** 30.06.2026
+
+---
+
+## 30.06.2026 — W19 Goldstandard arbeit-Block (10 Slugs) — 🎯 178/178 GOLDSTANDARD ERREICHT
+
+Die letzten 10 Rechner der arbeit-Kategorie (Familien-/Arbeitsrecht) auf Goldstandard. **Damit ist Welle 19
+abgeschlossen: 176 contentBloecke-migrierte Rechner + brutto-netto-rechner (INLINE_ERKLAERUNG_SLUGS) +
+wohngeld-rechner (STATISCHE_OVERRIDES) = 178/178 Goldstandard.** Voraussetzung für den AdSense-Resubmit erfüllt.
+Alle kategorieSlug `'arbeit'`. Alle Beispiel-Anker per eigener Node-Probe gegen echte Lib/SSOT nachgerechnet;
+alle YMYL-Werte gegen Primärquellen (gesetze-im-internet.de, BGH, BMF, OLG Düsseldorf, Bußgeldkatalog, Destatis)
+geprüft. Alle Builds Vercel-grün + live SSR-verifiziert.
+
+**Fünf substanzielle YMYL-Fixes (gerenderte Zahlen, nicht nur Formatierung):**
+- **unterhaltsrechner Elternunterhalt** (`75fe186`): GRAVIERENDSTER Fix der Welle. Config-Text (formel/
+  erklaerung/faq) rechnete „Selbstbehalt 2.000 € / 50 % Anrechnung → 1.500 €" (veraltete DT-2020-Regel), echte
+  SSOT-Lib + aktuelle Rechtslage „2.650 € / 30 % → 705 €". Faktor 2,1× Abweichung. Primär verifiziert (BGH XII
+  ZB 6/24 v. 23.10.2024; BGH-PM 2024/229; Berliner Anwaltsblatt/Schürmann; beck-aktuell): Lib korrekt,
+  Text falsch. An allen vier Stellen korrigiert; Kindesunterhalt-Beispiel (Gruppe 4 → 642 − 129,50 = 513 €)
+  war korrekt. SSOT `duesseldorfer-tabelle.ts` unberührt.
+- **abfindungsrechner Netto** (`f38a213`): Beispiel behauptete „14.000 € brutto → 10.300 € netto", echte Lib mit
+  exakten TARIF_2026-Konstanten (GFB 12.348 €, Soli-Freigrenze 20.350 € → Soli 0) liefert **9.400 €**. „Stkl. I"
+  → „ledig/Grundtarif" (§ 34 EStG ist steuerklassen-unabhängig). Ehrlicher Kernpunkt herausgearbeitet:
+  Fünftelregelung bringt bei hohem Voreinkommen nur ~270 €. Fünftelregelung seit 2025 nur über Steuererklärung.
+- **zugewinnausgleich VPI-Folge** (`c30c176`): Folge des VPI-SSOT-Updates (125,8 → 125,0) vom 29.06. — Beispiel
+  von Faktor 1,405 auf **1,397** korrigiert, Ausgleich 27.028 → **26.983 €**. `beispiel`/`faq`/`erklaerung`-
+  VPI-Werte angeglichen. Code ergänzte ein Erbschaft-2018-Beispiel (VPI 99,7), unabhängig verifiziert korrekt.
+- **scheidungskosten** (`4582283`): Beispiel exakt (Verfahrenswert 16.500 → Gericht 749 € + Anwalt 3.427 € =
+  4.176 €), KostBRÄG-2025-Tabellen (BGBl. 2025 I Nr. 109) vollständig in Lib. KORREKTUR meiner Prompt-Annahme:
+  `buergergeld-rechner` EXISTIERT (finanzen.ts) — mein awk-Existenzcheck hatte Fehlalarm gegeben.
+- **elternzeit Datum** (`9d2f0aa`): Beispiel 13.03. → **12.03.** (Geburt 15.01.2026 + 56 Tage, Off-by-one in der
+  8-Wochen-Rechnung). Reine Datums-/Fristen-Lib (BEEG §§ 15/16/18/4), keine Geldbeträge.
+
+**Übrige Builds (Bestandstext rechnerisch/rechtlich korrekt, keine Wert-Korrekturen):**
+- **ehegattenunterhalt** (`b5f75f2`, beispielrechnung): 3/7-Methode 986 €, mit KU 766 €, süddeutsch 45 % 1.035 €
+  — alle Lib-konform. SB 1.600/1.475 aus DT-2026-SSOT. Beide Methoden (3/7 + 45 %) implementiert.
+- **mutterschutz** (`95f7d37`, tabelle): Beispiel ET 15.08.2026 → 4. Juli–10. Oktober 2026 (14 Wochen). Rechtsstand
+  top-aktuell: Mutterschutzanpassungsgesetz (BGBl. 2025 I Nr. 59), Fehlgeburt-Staffelung 2/6/8 ab 13./17./20. SSW
+  (seit 01.06.2025), Muster 9 (seit 01.01.2026), 99-Tage-Mindestschutz.
+- **promillerechner** (`f269c46`, tabelle): Widmark-Berechnung + komplette Promille-Tabelle per Node-Probe
+  exakt. Grenzwerte 0,0/0,3/0,5/1,1/1,6 + Bußgelder 500/1.000/1.500 € gegen Bußgeldkatalog 2026 primär
+  verifiziert. Verantwortungs-Disclaimer durchgängig (Schätzung, kein Freifahrtschein, im Zweifel nicht fahren).
+- **rechtsschutz** (`aa22607`, vergleich): Schätzrechner. Beispiel (28 € → 25,20 €/Monat) Lib-konform. „Schätzung,
+  kein Angebot"-Disclaimer + ehrlicher Ausschlüsse-Block. § 127 VVG freie Anwaltswahl. Code nutzte tabelle für
+  die 4 Bausteine (vergleich blieb 3× Leitformat).
+- **freelancer-stundensatz** (`a58f436`, tabelle): Kalkulationsrechner. Beispiel (3.950 ÷ 0,7 → 56,43 €/Std)
+  Lib-konform. KU-Grenzen § 19 UStG (25.000/100.000 € seit 01.01.2025, fest) gegen BMF-Schreiben 18.03.2025
+  primär verifiziert. „Orientierung, keine Steuerberatung"-Disclaimer.
+
+**Commit-Hashes:** zugewinnausgleich `c30c176` · scheidungskosten `4582283` · unterhalt `75fe186` ·
+ehegattenunterhalt `b5f75f2` · abfindung `f38a213` · elternzeit `9d2f0aa` · mutterschutz `95f7d37` ·
+promille `f269c46` · rechtsschutz `aa22607` · freelancer `a58f436`.
+
+**Methodische Lehren dieser Welle (erhärtet):**
+- **awk-Existenzcheck unzuverlässig:** Die genutzte awk-Schleife meldete `buergergeld-rechner` und
+  `elterngeld-rechner` fälschlich als „NICHT GEFUNDEN" — beide existieren. Konsequenz: Existenz-Negativaussagen
+  ausschließlich mit `grep -rn "slug: '<x>'"` absichern, nie mit der awk-Schleife.
+- **Git-Credentials laufen in langen Sessions ab:** Beim abfindung-Push 401/„Password authentication not
+  supported"; PAT muss ins Password-Feld (nicht Username), Inline-URL `https://user:TOKEN@github.com/...`
+  als robuster Fallback. Empfehlung: `git config --global credential.helper manager` als Standard.
+- **Config-`beispiel`/`formel`/`erklaerung`/`faq` bleibt systematisches Stale-Nest** — selbst bei korrekt
+  rechnender Lib/SSOT: unterhalt (Faktor 2,1×), abfindung (~900 €), zugewinnausgleich (VPI-Folge), elternzeit
+  (1 Tag). YMYL-Beispiele IMMER mit ECHTEN Lib-Konstanten per Node-Probe nachrechnen.
+- **SSOT-Folgewirkung antizipieren:** Das VPI-Update (29.06.) verschob das zugewinnausgleich-Beispiel — sauber
+  nachgezogen, weil das Update atomar/dokumentiert war.
+- **Override-Zählweise bestätigt:** brutto-netto (INLINE_ERKLAERUNG_SLUGS) + wohngeld (STATISCHE_OVERRIDES)
+  zählen ohne contentBloecke als migriert. wohngeld bleibt Erklärseite (architektonischer §§14–16-WoGG-Bug),
+  volles Refactoring separat (Prompt 120c, mit Bürgergeld→Neue-Grundsicherung-Umbau).
+
+**Status:** 🎯 **178/178 Goldstandard.** Welle 19 abgeschlossen. Nächster Schritt: **AdSense-Resubmit**.
+Danach W14-Backlog (Status-204-Bug, W15-LongTail, Mobile-Performance, erklaerung-Cleanup u. a.).
 
 ---
 
