@@ -191,6 +191,171 @@ Surfen und E-Mail kommen mit wenigen Mbit/s aus, HD-Streaming braucht etwa 5–8
     ],
   },
   {
+    slug: 'download-rechner',
+    letzteAktualisierung: '2026-06-30',
+    titel: 'Download-Rechner',
+    beschreibung: 'Downloadzeit berechnen: Wie lange dauert ein Download bei Ihrer Internetgeschwindigkeit? Inklusive MB-Mbit-Umrechnung und realistischem Overhead.',
+    kategorie: 'Technik',
+    kategorieSlug: 'technik',
+    metaTitle: 'Download-Rechner — Downloadzeit berechnen',
+    metaDescription: 'Downloadzeit berechnen: Wie lange dauert ein Download bei Ihrer Internetgeschwindigkeit? Mit MB-Mbit-Umrechnung, Overhead und Rechenweg.',
+    keywords: ['download rechner', 'downloadzeit berechnen', 'download dauer', 'mbit in mb', 'mbit/s in mb/s', 'wie lange dauert download', 'downloadzeit internetgeschwindigkeit', 'datei download zeit'],
+    icon: '⬇️',
+    formel: 'Downloadzeit = Dateigröße(MB) × 8 ÷ Bandbreite(Mbit/s) ÷ Wirkungsgrad | 1 GB = 1.000 MB',
+    beispiel: '1.500 MB bei 50 Mbit/s: 1.500 × 8 = 12.000 Mbit ÷ 50 = 240 s (ideal) ÷ 0,85 ≈ 282 s = 4 min 42 s (real).',
+    erklaerung: `**Downloadzeit berechnen — Dateigröße, Bandbreite und Overhead**
+
+Wie lange ein Download dauert, hängt von der Dateigröße und der Internetgeschwindigkeit ab. Die Tücke steckt in den Einheiten: Dateigrößen werden in Megabyte (MB) angegeben, Internetgeschwindigkeiten dagegen in Megabit pro Sekunde (Mbit/s). Da ein Byte aus acht Bit besteht, muss die Dateigröße zuerst mit 8 multipliziert werden. Dieser Rechner nimmt Ihnen die Umrechnung ab und zeigt die ideale wie die realistische Downloadzeit.
+
+**Die Megabit-vs.-Megabyte-Falle**
+
+Der häufigste Fehler: Ein 50-Mbit/s-Anschluss überträgt nicht 50 Megabyte pro Sekunde, sondern nur 50 ÷ 8 = 6,25 MB/s. Wer das übersieht, schätzt Downloadzeiten achtmal zu kurz. Die Faustregel lautet daher: Mbit/s geteilt durch 8 ergibt MB/s.
+
+**Warum die reale Zeit länger ist**
+
+Die ideale Zeit unterstellt, dass jede Sekunde die volle Bandbreite ankommt. In der Praxis kosten Protokoll-Overhead (TCP/IP), WLAN-Verluste, Server-Drosselung und Auslastung zur Hauptverkehrszeit Tempo. Der Rechner bildet das über einen Wirkungsgrad ab: 85 Prozent als realistischer Standard, 70 Prozent bei schwachem WLAN, 100 Prozent nur als theoretischer Bestwert.
+
+**Typische Dateigrößen**
+
+Ein Foto wiegt 5 bis 25 MB, ein Song 3 bis 5 MB, ein HD-Film 1 bis 4 GB, ein 4K-Film 15 bis 40 GB und ein aktuelles Spiel 50 bis 150 GB. Daran zeigt sich, warum sich ein schneller Anschluss vor allem bei großen Dateien auszahlt.`,
+    faq: [
+      {
+        frage: 'Wie berechne ich die Downloadzeit?',
+        antwort: 'Multiplizieren Sie die Dateigröße in MB mit 8, um Megabit zu erhalten, und teilen Sie durch die Bandbreite in Mbit/s. Das ergibt die ideale Zeit in Sekunden. Für die realistische Zeit teilen Sie zusätzlich durch den Wirkungsgrad (Standard 0,85). Beispiel: 1.500 MB × 8 = 12.000 Mbit ÷ 50 Mbit/s = 240 s ÷ 0,85 ≈ 282 s, also rund 4 Minuten 42 Sekunden.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen Mbit/s und MB/s?',
+        antwort: 'Mbit/s (Megabit pro Sekunde) ist die Einheit der Internetgeschwindigkeit, MB/s (Megabyte pro Sekunde) die Einheit der übertragenen Datenmenge. Da ein Byte aus acht Bit besteht, gilt: Mbit/s ÷ 8 = MB/s. Ein 50-Mbit/s-Anschluss schafft also höchstens 6,25 MB/s. Anbieter werben bewusst mit der größeren Bit-Zahl.',
+      },
+      {
+        frage: 'Warum dauert mein Download länger als berechnet?',
+        antwort: 'Die ideale Zeit ist ein theoretischer Bestwert. In der Praxis kosten Protokoll-Overhead (rund 10 bis 15 Prozent), schwaches WLAN, ein drosselnder Server und die Auslastung zur Hauptverkehrszeit Geschwindigkeit. Deshalb rechnet der Rechner mit einem Wirkungsgrad von standardmäßig 85 Prozent. Bei schlechtem WLAN können Sie auf 70 Prozent stellen.',
+      },
+      {
+        frage: 'Wie lange dauert der Download eines 50-GB-Spiels?',
+        antwort: 'Bei 100 Mbit/s und 85 Prozent Wirkungsgrad rund 1 Stunde 18 Minuten, bei einem Gigabit-Anschluss (1.000 Mbit/s) nur knapp 8 Minuten. Große Spiele sind mit 50 bis 150 GB die größten Downloads im Alltag — hier macht sich ein schneller Anschluss am stärksten bemerkbar.',
+      },
+      {
+        frage: 'Rechnet der Rechner mit 1 GB = 1.000 MB oder 1.024 MB?',
+        antwort: 'Dieser Rechner verwendet 1 GB = 1.000 MB (dezimale Zählung), wie sie bei Festplatten- und Internettarif-Angaben üblich ist. Die binäre Zählung (1 GiB = 1.024 MiB) wird vor allem von Betriebssystemen genutzt und erklärt, warum eine „500-GB"-Festplatte dort als rund 465 GiB erscheint.',
+      },
+      {
+        frage: 'Warum ist der Upload oft langsamer als der Download?',
+        antwort: 'Die meisten Anschlüsse sind asymmetrisch: Die Download-Rate ist höher als die Upload-Rate, weil Privatnutzer mehr empfangen als senden. Ein 100-Mbit/s-Anschluss bietet im Upload oft nur 10 bis 40 Mbit/s. Beim Versenden großer Dateien (Cloud-Backup, Video-Upload) dauert es daher länger. Echte Glasfaseranschlüsse sind häufig symmetrisch.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Wie die Downloadzeit berechnet wird',
+        html: `<p>Die Downloadzeit hängt von zwei Größen ab: der <strong>Dateigröße</strong> und der <strong>Internetgeschwindigkeit</strong>. Der Haken dabei: Dateigrößen werden in <strong>Megabyte (MB)</strong> angegeben, Internetgeschwindigkeiten aber in <strong>Megabit pro Sekunde (Mbit/s)</strong>. Da ein Byte aus acht Bit besteht, muss die Dateigröße zuerst mit 8 multipliziert werden, um sie mit der Bandbreite vergleichbar zu machen.</p><p>Die Grundrechnung lautet also: Dateigröße in MB × 8 ergibt die Datenmenge in Megabit; geteilt durch die Bandbreite in Mbit/s ergibt das die theoretische Downloadzeit in Sekunden. In der Praxis kommt nie die volle beworbene Geschwindigkeit an — Protokoll-Overhead, WLAN und Servergrenzen kosten Tempo. Deshalb rechnet dieser Rechner zusätzlich mit einem <strong>Wirkungsgrad</strong> (Standard 85 %), der diesen realistischen Verlust abbildet. Das Ergebnis ist eine fundierte Schätzung, kein garantierter Wert — die tatsächliche Zeit schwankt je nach Tageszeit, Auslastung und Gegenstelle.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Megabit vs. Megabyte — die häufigste Verwechslung',
+        text: 'Der mit Abstand häufigste Fehler beim Schätzen von Downloadzeiten: Megabit und Megabyte werden verwechselt. Ein Byte besteht aus acht Bit, daher gilt die Faustregel „durch 8". Ein 50-Mbit/s-Anschluss überträgt also höchstens 50 ÷ 8 = 6,25 Megabyte pro Sekunde — nicht 50 MB/s. Eine 1.500-MB-Datei braucht damit theoretisch mindestens 240 Sekunden, nicht 30. Internetanbieter werben bewusst mit der größeren Bit-Zahl, weil 50 Mbit/s eindrucksvoller klingt als 6,25 MB/s. Wer das im Kopf behält, schätzt Downloadzeiten nie wieder achtmal zu kurz. Merksatz: Mbit/s geteilt durch 8 ergibt MB/s. Dieselbe Verwechslung steckt hinter vielen enttäuschten Erwartungen: Wer einen 100-Mbit/s-Tarif bucht und glaubt, ein 1-GB-Update lade in 10 Sekunden, rechnet in Wahrheit mit 1.000 ÷ 12,5 = 80 Sekunden — und das nur im Idealfall. Die Bit-Angabe ist also kein Etikettenschwindel, sondern schlicht eine andere Einheit, die man konsequent durch 8 teilen muss.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '1.500 MB bei 50 Mbit/s',
+        schritte: [
+          { label: 'Dateigröße in Megabit', formel: '1.500 MB × 8', ergebnis: '12.000 Mbit' },
+          { label: 'Theoretische Zeit (ideal)', formel: '12.000 Mbit ÷ 50 Mbit/s', ergebnis: '240 s = 4 min 0 s' },
+          { label: 'Realistische Zeit (Wirkungsgrad 85 %)', formel: '240 s ÷ 0,85', ergebnis: '≈ 282 s = 4 min 42 s' },
+        ],
+        fazit: 'Eine 1.500-MB-Datei (etwa ein Spielfilm in guter Qualität) lädt an einem 50-Mbit/s-Anschluss theoretisch in 4 Minuten — realistisch in rund 4 Minuten 42 Sekunden. Die gut 40 Sekunden Unterschied sind der Overhead: Daten werden nicht roh übertragen, sondern in Pakete verpackt, quittiert und bei Bedarf erneut gesendet. Dieser Anteil von rund 15 Prozent ist normal und steckt im Wirkungsgrad von 85 Prozent. Bei schwachem WLAN oder einem stark ausgelasteten Server kann er deutlich höher liegen, sodass derselbe Download merklich länger dauert.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum die echte Zeit länger ist als die ideale',
+        html: `<p>Die ideale Downloadzeit ist eine reine Rechengröße — sie unterstellt, dass jede Sekunde die volle Bandbreite ankommt und kein einziges Bit verloren geht. In der Realität ist das nie der Fall. Mehrere Faktoren bremsen jeden Download.</p><p>Der <strong>Protokoll-Overhead</strong> ist unvermeidbar: TCP/IP zerlegt die Datei in Pakete, versieht jedes mit Adress- und Prüfinformationen und lässt sich den Empfang bestätigen — das kostet rund 10 bis 15 Prozent. <strong>WLAN</strong> verliert zusätzlich durch Funkstörungen, Entfernung zum Router und geteilte Bandbreite mit anderen Geräten. Der <strong>Server</strong> auf der Gegenseite kann die Geschwindigkeit drosseln oder unter Last langsamer ausliefern. Schließlich liefern viele Anschlüsse „bis zu"-Geschwindigkeiten, die zur Hauptverkehrszeit am Abend spürbar sinken. Der Wirkungsgrad im Rechner bündelt all diese Effekte: 85 % für einen normalen Anschluss, 70 % für schwaches WLAN, 100 % nur als theoretischer Bestwert. Realistisch ist fast immer der mittlere Wert.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '50-GB-Spiel: 100 vs. 1.000 Mbit/s',
+        schritte: [
+          { label: 'Dateigröße in Megabit', formel: '50 GB × 1.000 × 8', ergebnis: '400.000 Mbit' },
+          { label: 'Bei 100 Mbit/s (real)', formel: '400.000 ÷ 100 ÷ 0,85', ergebnis: '≈ 1 h 18 min' },
+          { label: 'Bei 1.000 Mbit/s (real)', formel: '400.000 ÷ 1.000 ÷ 0,85', ergebnis: '≈ 7 min 51 s' },
+        ],
+        fazit: 'Ein modernes AAA-Spiel mit 50 GB zeigt, wie stark die Anschlussgeschwindigkeit zählt. Am verbreiteten 100-Mbit/s-Anschluss dauert der Download rund 1 Stunde 18 Minuten, an einem Gigabit-Glasfaseranschluss (1.000 Mbit/s) nur knapp 8 Minuten — fast zehnmal schneller. Solche Dateigrößen erklären, warum Gamer und Vielnutzer von schnellen Leitungen am meisten profitieren. Wichtig: 1 GB sind hier 1.000 MB (dezimale Zählung, wie bei Festplatten- und Tarif-Angaben üblich).',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Downloadzeit eines 4,7-GB-Films',
+        kopf: ['Anschluss', 'Geschwindigkeit', 'Downloadzeit (real)'],
+        zeilen: [
+          ['DSL (alt)', '16 Mbit/s', '46 min 5 s'],
+          ['VDSL', '50 Mbit/s', '14 min 45 s'],
+          ['VDSL / Kabel', '100 Mbit/s', '7 min 22 s'],
+          ['Kabel / Glasfaser', '250 Mbit/s', '2 min 57 s'],
+          ['Glasfaser (Gigabit)', '1.000 Mbit/s', '44,2 s'],
+        ],
+        fussnote: 'Beispiel-Datei: ein Film mit 4,7 GB (4.700 MB, klassische DVD-Größe), Wirkungsgrad 85 %. Die Zeiten zeigen, wie stark moderne Anschlüsse den Download beschleunigen — von über 46 Minuten am alten DSL bis unter eine Minute am Gigabit-Anschluss. Die ideale Zeit ohne Overhead wäre jeweils rund 15 Prozent kürzer. Auffällig ist, dass der Sprung von 16 auf 50 Mbit/s die größte absolute Zeitersparnis bringt, während der Schritt von 250 auf 1.000 Mbit/s bei dieser Dateigröße nur noch wenige Sekunden ausmacht: Je schneller die Leitung, desto kleiner der spürbare Gewinn bei einzelnen mittelgroßen Dateien — erst bei sehr großen Downloads zahlt sich ein Gigabit-Anschluss richtig aus.',
+      },
+      {
+        typ: 'text',
+        titel: 'Typische Dateigrößen im Überblick',
+        html: `<p>Um Downloadzeiten einschätzen zu können, hilft ein Gefühl für gängige Dateigrößen. Ein <strong>Foto</strong> vom Smartphone wiegt je nach Auflösung 5 bis 25 MB, ein <strong>MP3-Song</strong> nur 3 bis 5 MB. Ein <strong>HD-Spielfilm</strong> liegt bei 1 bis 4 GB, ein <strong>4K-Film</strong> schon bei 15 bis 40 GB. Aktuelle <strong>Computerspiele</strong> sind mit 50 bis 150 GB die größten Brocken im Alltag.</p><p>Daran wird schnell klar, warum ein einzelnes Foto selbst an einer langsamen Leitung in Sekunden lädt, ein großes Spiel aber Stunden dauern kann. Auch Betriebssystem-Updates erreichen oft mehrere Gigabyte. Wer regelmäßig große Dateien lädt, merkt den Unterschied zwischen einem 50- und einem 250-Mbit/s-Anschluss sehr deutlich. Wie sich die Einheiten Byte, Kilobyte, Megabyte und Gigabyte ineinander umrechnen — und warum „500 GB" auf der Festplatte als rund 465 GiB erscheinen — zeigt der <a href="/technik/datenmengen-umrechner">Datenmengen-Umrechner</a>.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Was bei 50 Mbit/s in welcher Zeit lädt',
+        kopf: ['Datei', 'Größe', 'Zeit (real, 50 Mbit/s)'],
+        zeilen: [
+          ['Foto (Smartphone)', '15 MB', '2,8 s'],
+          ['MP3-Song', '5 MB', '0,9 s'],
+          ['App-Update', '300 MB', '56,5 s'],
+          ['HD-Film', '4 GB', '12 min 33 s'],
+          ['4K-Film', '25 GB', '1 h 18 min'],
+          ['AAA-Spiel', '80 GB', '4 h 11 min'],
+        ],
+        fussnote: 'Alle Zeiten bei 50 Mbit/s und 85 % Wirkungsgrad, 1 GB = 1.000 MB. Die Werte verdeutlichen die Spannweite: vom Sekundenbruchteil für einen Song bis zu mehreren Stunden für ein großes Spiel. An schnelleren Anschlüssen verkürzen sich alle Zeiten proportional — bei 250 Mbit/s etwa auf ein Fünftel der hier genannten Dauer. Ein Foto oder ein Song lädt damit praktisch unmerklich, während ein 4K-Film oder ein großes Spiel selbst an einer ordentlichen Leitung spürbar Geduld verlangt. Genau hier hilft die Vorab-Schätzung: Sie zeigt, ob sich der Download nebenbei erledigt oder ob man ihn besser über Nacht laufen lässt.',
+      },
+      {
+        typ: 'text',
+        titel: 'Upload vs. Download — warum Hochladen oft länger dauert',
+        html: `<p>Die meisten Internetanschlüsse sind <strong>asymmetrisch</strong>: Die Download-Geschwindigkeit (Daten empfangen) ist deutlich höher als die Upload-Geschwindigkeit (Daten senden). Ein typischer Kabel- oder DSL-Anschluss mit 100 Mbit/s im Download bietet oft nur 10 bis 40 Mbit/s im Upload.</p><p>Der Grund ist historisch und technisch: Privatnutzer laden traditionell viel mehr herunter, als sie hochladen — Streaming, Surfen und Downloads dominieren. Die Anbieter haben die verfügbare Bandbreite deshalb zugunsten des Downloads aufgeteilt. Spürbar wird das, sobald man selbst große Dateien <strong>versendet</strong>: ein Video in die Cloud sichern, Fotos teilen oder in einer Videokonferenz senden. Diese Vorgänge nutzen den schmaleren Upload-Kanal und dauern entsprechend länger. Nur echte <strong>Glasfaseranschlüsse</strong> bieten häufig symmetrische Raten, bei denen Up- und Download gleich schnell sind. Für die Berechnung der Sendezeit gilt dieselbe Formel — nur mit der Upload-Geschwindigkeit statt der Download-Bandbreite.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Download zu langsam? Das sollten Sie prüfen',
+        punkte: [
+          'Per LAN-Kabel statt WLAN verbinden — Kabel ist stabiler und meist schneller.',
+          'Laufende Hintergrund-Downloads, Updates oder Streams auf anderen Geräten pausieren.',
+          'Prüfen, ob die Gegenstelle drosselt — einen anderen Download zum Vergleich starten.',
+          'Den gebuchten Tarif kontrollieren: Liefert der Anschluss überhaupt die beworbene Geschwindigkeit?',
+          'Router neu starten und auf aktuelle Firmware prüfen.',
+          'Mit einem Speedtest die tatsächliche Geschwindigkeit messen, statt auf die Tarif-Angabe zu vertrauen.',
+          'Bei dauerhaft zu langsamer Leitung die Breitbandmessung der Bundesnetzagentur als Nachweis nutzen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Erst die echte Geschwindigkeit messen',
+        text: 'Dieser Rechner geht von der Geschwindigkeit aus, die Sie eingeben — meist dem gebuchten Tarifwert. Tatsächlich kommt davon selten die volle Leistung an. Bevor Sie eine zu lange Downloadzeit dem Rechner anlasten, messen Sie die reale Anschlussgeschwindigkeit mit einem Speedtest und tragen den gemessenen Wert ein. So erhalten Sie eine realistische Schätzung. Den tatsächlichen Wert ermitteln und Mbit/s in MB/s umrechnen können Sie mit dem Internetgeschwindigkeit-Rechner; für offizielle Nachweise gegenüber dem Anbieter dient die Breitbandmessung der Bundesnetzagentur. Messen Sie am besten mehrmals zu unterschiedlichen Tageszeiten und idealerweise per LAN-Kabel — so trennen Sie eine generell langsame Leitung von einer nur abends überlasteten und erhalten einen belastbaren Durchschnittswert für die Schätzung.',
+      },
+      {
+        typ: 'text',
+        titel: 'Glasfaser-Ausbau und die „bis zu"-Tarife',
+        html: `<p>Downloadzeiten werden in den kommenden Jahren weiter sinken, weil der <strong>Glasfaser-Ausbau</strong> in Deutschland voranschreitet. Glasfaser liefert nicht nur höhere Geschwindigkeiten von 250 Mbit/s bis über 1.000 Mbit/s, sondern oft auch symmetrische Up- und Download-Raten und stabilere Verbindungen als Kupfer- oder Kabelnetze.</p><p>Wichtig bleibt der Blick aufs Kleingedruckte: Viele Tarife werben mit <strong>„bis zu"</strong>-Geschwindigkeiten. Das ist der theoretische Bestwert, nicht die garantierte Dauerleistung. Anbieter müssen eine Mindestgeschwindigkeit nennen; wird sie dauerhaft unterschritten, haben Kunden das Recht auf Minderung oder Kündigung. Wer wissen will, was die eigene Leitung wirklich leistet, sollte regelmäßig messen und den realen Wert in diesen Rechner eintragen. Eine genaue Messung samt Umrechnung von Mbit/s in MB/s bietet der <a href="/technik/internetgeschwindigkeit-rechner">Internetgeschwindigkeit-Rechner</a> — er zeigt auch, wie viel von der beworbenen Bandbreite tatsächlich ankommt.</p>`,
+      },
+    ],
+    quellen: [
+      {
+        titel: 'Bundesnetzagentur — Breitbandmessung',
+        url: 'https://www.bundesnetzagentur.de/breitbandmessung',
+        hinweis: 'Offizielles Tool zur Messung der tatsächlichen Anschlussgeschwindigkeit.',
+      },
+      {
+        titel: 'Einheiten Bit/Byte (IEC/SI)',
+        hinweis: '1 Byte = 8 Bit; Bandbreiten werden in Mbit/s, Dateigrößen in MB/GB angegeben — Faktor 8 beachten.',
+      },
+    ],
+  },
+  {
     slug: 'datenmengen-umrechner',
     letzteAktualisierung: '2026-06-19',
     titel: 'Datenmengen-Umrechner',
