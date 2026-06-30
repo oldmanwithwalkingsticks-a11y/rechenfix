@@ -680,6 +680,180 @@ Nutzbare Kapazität = Nennkapazität × Wirkungsgrad; Ladungen = nutzbare Kapazi
     ],
   },
   {
+    slug: 'aufloesung-seitenverhaeltnis-rechner',
+    letzteAktualisierung: '2026-06-30',
+    titel: 'Seitenverhältnis-Rechner',
+    beschreibung: 'Seitenverhältnis aus der Auflösung berechnen (16:9, 21:9, 4:5) oder eine fehlende Seite aus dem Verhältnis bestimmen — mit Rechenweg.',
+    kategorie: 'Technik',
+    kategorieSlug: 'technik',
+    metaTitle: 'Seitenverhältnis-Rechner — Format berechnen',
+    metaDescription: 'Seitenverhältnis-Rechner: aus der Auflösung das Format (16:9, 21:9, 4:5) bestimmen oder eine fehlende Seite berechnen — mit Rechenweg.',
+    keywords: ['seitenverhältnis rechner', 'aspect ratio rechner', '16:9 berechnen', 'auflösung seitenverhältnis', 'bildformat berechnen', 'fehlende seite berechnen', '21:9 64:27', 'pixel verhältnis'],
+    icon: '📐',
+    formel: 'Verhältnis = Breite ÷ ggT : Höhe ÷ ggT | Fehlende Höhe = Breite × Höhen-Anteil ÷ Breiten-Anteil',
+    beispiel: '1920 × 1080: ggT = 120 → 1920 ÷ 120 : 1080 ÷ 120 = 16:9 (Full HD).',
+    erklaerung: `**Seitenverhältnis berechnen — aus der Auflösung das Bildformat bestimmen**
+
+Das Seitenverhältnis beschreibt das Verhältnis von Breite zu Höhe eines Bildes oder Bildschirms — unabhängig von der absoluten Pixelzahl. Es wird als gekürztes Zahlenpaar geschrieben, etwa 16:9 oder 4:3. Dieser Rechner ermittelt aus einer Auflösung das Seitenverhältnis und kann umgekehrt aus einem Verhältnis und einer bekannten Seite die fehlende Dimension berechnen.
+
+**Vom Pixelmaß zum gekürzten Verhältnis**
+
+Um aus einer Auflösung wie 1920 × 1080 das Verhältnis zu erhalten, werden beide Werte durch ihren größten gemeinsamen Teiler (ggT) geteilt. Für 1920 und 1080 ist der ggT 120, woraus sich 16:9 ergibt. Das funktioniert für jede Auflösung über den Euklidischen Algorithmus.
+
+**Warum 2560 × 1080 nicht glatt 21:9 ist**
+
+Manche Ultrawide-Auflösungen kürzen sich nicht auf das beworbene Verhältnis. 2560 × 1080 ergibt mathematisch exakt 64:27, nicht 21:9 — die Hersteller runden auf die griffigere Zahl. Auch 1366 × 768, eine verbreitete Notebook-Auflösung, ist nur näherungsweise 16:9 und kürzt sich auf 683:384.
+
+**Eine fehlende Seite berechnen**
+
+Kennt man das gewünschte Verhältnis und eine Seite, ergibt sich die andere durch einfache Multiplikation: Bei 16:9 und einer Breite von 2560 Pixeln ist die Höhe 2560 × 9 ÷ 16 = 1440 Pixel. Das ist praktisch für Video-Exporte, Canvas-Größen oder Bannerformate.`,
+    faq: [
+      {
+        frage: 'Wie berechne ich das Seitenverhältnis aus einer Auflösung?',
+        antwort: 'Teilen Sie Breite und Höhe durch ihren größten gemeinsamen Teiler (ggT). Beispiel: 1920 und 1080 haben den ggT 120, also 1920 ÷ 120 : 1080 ÷ 120 = 16:9. Der Rechner übernimmt das automatisch und nennt zusätzlich das passende Standardformat.',
+      },
+      {
+        frage: 'Warum ist mein Monitor 64:27 und nicht 21:9?',
+        antwort: 'Viele Ultrawide-Monitore mit 2560 × 1080 kürzen sich mathematisch exakt auf 64:27, nicht auf glatte 21:9. Die Hersteller bewerben die griffigere Zahl 21:9, weil sie näher an der gewohnten Schreibweise liegt. 64:27 ist rechnerisch das tatsächliche Verhältnis — beide meinen denselben Ultrawide-Bildschirm.',
+      },
+      {
+        frage: 'Wie rechne ich eine fehlende Seite aus dem Verhältnis aus?',
+        antwort: 'Multiplizieren Sie die bekannte Seite mit dem Anteil der gesuchten Seite und teilen durch den Anteil der bekannten Seite. Bei 16:9 und einer Breite von 2560 Pixeln: 2560 × 9 ÷ 16 = 1440 Pixel Höhe. Umgekehrt: Höhe 1080 bei 21:9 ergibt 1080 × 21 ÷ 9 = 2520 Pixel Breite.',
+      },
+      {
+        frage: 'Ist 1366 × 768 ein echtes 16:9-Format?',
+        antwort: 'Nicht ganz. 1366 × 768 kürzt sich auf 683:384 und ist damit nur näherungsweise 16:9 (echtes 16:9 wären 1366 × 768,4). Diese Auflösung entstand aus Panel-Fertigungsgründen und ist auf vielen älteren Notebooks verbaut. Optisch fällt der winzige Unterschied nicht auf.',
+      },
+      {
+        frage: 'Welches Seitenverhältnis brauche ich für Social Media?',
+        antwort: 'Für Instagram-Feed 1:1 oder 4:5 (1080 × 1350), für Stories und Reels 9:16 (1080 × 1920), für YouTube-Videos 16:9 (1920 × 1080) und für YouTube-Shorts 9:16. Wer im falschen Verhältnis exportiert, riskiert schwarze Balken oder einen automatischen Zuschnitt durch die Plattform.',
+      },
+      {
+        frage: 'Bedeutet gleiches Seitenverhältnis gleiche Schärfe?',
+        antwort: 'Nein. 1280 × 720 und 3840 × 2160 sind beide 16:9, unterscheiden sich aber um den Faktor 9 in der Pixelzahl. Das Seitenverhältnis beschreibt nur die Form, nicht die Auflösung. Für die Schärfe und Druckgröße zählt die absolute Pixelzahl, die der Megapixel-Rechner ermittelt.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was ein Seitenverhältnis ist',
+        html: `<p>Das <strong>Seitenverhältnis</strong> (englisch aspect ratio) beschreibt das Verhältnis von Breite zu Höhe eines Bildes, Videos oder Bildschirms — und zwar <strong>unabhängig von der absoluten Pixelzahl</strong>. Es wird als gekürztes Zahlenpaar mit Doppelpunkt geschrieben, etwa 16:9, 4:3 oder 1:1. Ein 16:9-Bild ist genau 16 Einheiten breit und 9 Einheiten hoch, gleich ob es 1.280 oder 3.840 Pixel breit ist.</p><p>Genau das ist der Kern: Form und Auflösung sind zwei verschiedene Dinge. Ein winziges Vorschaubild und ein riesiger 4K-Fernseher können dasselbe Seitenverhältnis 16:9 haben, obwohl der eine ein Tausendstel der Pixel des anderen besitzt. Das Verhältnis entscheidet, ob ein Bild quadratisch, breit oder hochkant wirkt — und ob es ohne schwarze Balken oder Zuschnitt auf einen bestimmten Bildschirm oder in ein Social-Media-Format passt. Dieser Rechner bestimmt aus einer Auflösung das gekürzte Verhältnis und nennt das passende Standardformat; im zweiten Modus berechnet er aus einem Verhältnis und einer bekannten Seite die fehlende Dimension.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Gängige Auflösungen und ihr Seitenverhältnis',
+        kopf: ['Auflösung', 'Verhältnis', 'Format'],
+        zeilen: [
+          ['640 × 480', '4:3', 'VGA, klassisch'],
+          ['1280 × 720', '16:9', 'HD (720p)'],
+          ['1920 × 1080', '16:9', 'Full HD (1080p)'],
+          ['2560 × 1440', '16:9', 'QHD (1440p)'],
+          ['3840 × 2160', '16:9', '4K UHD (2160p)'],
+          ['1366 × 768', '683:384', 'Notebook (≈ 16:9)'],
+          ['1920 × 1200', '8:5', '16:10 (WUXGA)'],
+          ['2560 × 1080', '64:27', '21:9 Ultrawide'],
+          ['3440 × 1440', '43:18', '21:9 Ultrawide'],
+        ],
+        fussnote: 'Das Verhältnis entsteht durch Kürzen der Auflösung mit dem größten gemeinsamen Teiler. Auffällig: Die vier Standard-Monitorauflösungen von HD bis 4K sind alle 16:9 — sie unterscheiden sich nur in der Pixelzahl, nicht in der Form. Die Ultrawide-Formate 64:27 und 43:18 werden im Handel meist als 21:9 beworben, obwohl sie sich mathematisch nicht glatt auf 21:9 kürzen lassen. Und 1366 × 768 ist mit 683:384 nur fast 16:9. Wer eine Auflösung in dieser Tabelle nicht findet, gibt sie einfach oben in den Rechner ein — er kürzt jedes beliebige Pixelmaß auf das exakte Verhältnis und nennt, sofern vorhanden, das passende Standardformat oder das nächstliegende.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '1920 × 1080 in ein Verhältnis kürzen',
+        schritte: [
+          { label: 'Größten gemeinsamen Teiler suchen', formel: 'ggT(1920, 1080)', ergebnis: '120' },
+          { label: 'Beide Seiten durch den ggT teilen', formel: '1920 ÷ 120 : 1080 ÷ 120', ergebnis: '16:9' },
+        ],
+        fazit: 'Full HD (1920 × 1080) kürzt sich über den größten gemeinsamen Teiler 120 auf das Seitenverhältnis 16:9. Der Euklidische Algorithmus findet diesen Teiler in wenigen Schritten: Er teilt wiederholt die größere durch die kleinere Zahl und rechnet mit dem Rest weiter, bis dieser null ist. Das Verfahren funktioniert für jede beliebige Auflösung und liefert immer die kleinstmögliche Ganzzahl-Schreibweise. Genau deshalb erscheinen 1280 × 720, 1920 × 1080 und 3840 × 2160 alle als 16:9 — sie haben dieselbe Form, nur unterschiedlich viele Pixel.',
+      },
+      {
+        typ: 'text',
+        titel: 'Eine fehlende Seite aus dem Verhältnis berechnen',
+        html: `<p>Oft kennt man das gewünschte <strong>Verhältnis</strong> und eine Seite, sucht aber die andere — etwa beim Anlegen einer Arbeitsfläche, beim Video-Export oder beim Erstellen einer Bannergrafik. Die Rechnung ist einfach: Die gesuchte Seite ergibt sich aus der bekannten Seite, multipliziert mit dem Anteil der gesuchten Seite, geteilt durch den Anteil der bekannten Seite.</p><p>Ein Beispiel: Soll ein Bild im Format <strong>16:9</strong> genau 2.560 Pixel breit sein, ergibt sich die Höhe zu 2.560 × 9 ÷ 16 = 1.440 Pixel. Umgekehrt: Ist die Höhe mit 1.080 Pixeln vorgegeben und das Format 21:9, beträgt die Breite 1.080 × 21 ÷ 9 = 2.520 Pixel. So lässt sich jedes Format auf eine konkrete Zielgröße bringen, ohne das Bild zu verzerren. Wichtig ist nur, beim Skalieren das Verhältnis beizubehalten — ein nachträgliches Stauchen oder Strecken auf ein falsches Verhältnis macht Gesichter breit oder schmal und wirkt sofort unnatürlich.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Fehlende Höhe: 2560 px breit bei 16:9',
+        schritte: [
+          { label: 'Bekannt: Breite 2.560 px, Zielformat 16:9', formel: 'Höhe = Breite × 9 ÷ 16', ergebnis: 'Formel' },
+          { label: 'Werte einsetzen', formel: '2.560 × 9 ÷ 16', ergebnis: '1.440 px' },
+        ],
+        fazit: 'Wer ein 16:9-Bild mit 2.560 Pixeln Breite anlegen will, braucht eine Höhe von 1.440 Pixeln — das ergibt die bekannte QHD-Auflösung 2560 × 1440. Die Rechnung multipliziert die Breite mit dem Höhen-Anteil (9) und teilt durch den Breiten-Anteil (16). Dasselbe Prinzip liefert für jede Zielbreite die passende Höhe und umgekehrt. So entstehen verzerrungsfreie Formate für Monitore, Videos oder Druckvorlagen, ohne dass man die exakte Standardauflösung auswendig kennen muss.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: '64:27 statt 21:9 — warum Ultrawide krumm wirkt',
+        text: 'Ultrawide-Monitore werden fast immer als 21:9 beworben, kürzen sich mathematisch aber oft auf andere Zahlen. Die Auflösung 2560 × 1080 ergibt exakt 64:27, die größere Variante 3440 × 1440 ergibt 43:18. Beide sind echte Ultrawide-Formate, nur lässt sich keines glatt auf 21:9 kürzen — die Hersteller runden auf die eingängigere Zahl. Ähnlich verhält es sich mit der verbreiteten Notebook-Auflösung 1366 × 768: Sie ist mit 683:384 nur näherungsweise 16:9. Wenn dieser Rechner also 64:27 oder 683:384 ausgibt, ist das kein Fehler, sondern das exakte gekürzte Verhältnis. Die beworbene Marketing-Zahl steht jeweils in Klammern als bekanntes Format dahinter, damit man beide Schreibweisen sofort zuordnen kann. Praktisch heißt das: Wenn ein Bildbearbeitungsprogramm oder ein Datenblatt ein scheinbar krummes Verhältnis wie 64:27 nennt, muss man nicht stutzig werden — es ist schlicht die exakte, ungerundete Form des gewohnten 21:9. Für den Alltag genügt die Marketing-Zahl, für eine pixelgenaue Vorlage ist die exakte Form die verlässlichere Grundlage.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Seitenverhältnisse nach Einsatzzweck',
+        kopf: ['Format', 'Verhältnis', 'Typische Nutzung'],
+        zeilen: [
+          ['Querformat-Standard', '16:9', 'Web, TV, YouTube, Monitore'],
+          ['Reels / Stories', '9:16', 'Hochkant-Videos, TikTok, Shorts'],
+          ['Instagram-Feed', '1:1', 'quadratische Beiträge'],
+          ['Instagram-Hochformat', '4:5', 'Feed-Beiträge mit mehr Höhe'],
+          ['Präsentation (alt)', '4:3', 'ältere Beamer und Folien'],
+          ['Notebook', '16:10', 'mehr vertikale Arbeitsfläche'],
+          ['Gaming / Kino', '21:9', 'Ultrawide-Monitore, Filme'],
+        ],
+        fussnote: 'Welches Verhältnis sinnvoll ist, hängt vom Ziel ab. Bewegtbild fürs Web und Fernsehen ist überwiegend 16:9, während Social-Media-Plattformen zunehmend auf Hochformate (9:16, 4:5) setzen, weil am Smartphone hochkant gescrollt wird. Das ältere 4:3 begegnet einem noch bei Präsentationen und alten Beamern. Notebooks kehren vermehrt zu 16:10 zurück, weil das etwas höhere Format mehr Platz für Text und Code bietet. Für die Praxis bedeutet das vor allem eins: Es gibt nicht das eine richtige Verhältnis, sondern für jeden Kanal ein passendes. Wer denselben Inhalt auf mehreren Plattformen ausspielt, legt ihn am besten gleich in mehreren Formaten an, statt ein einziges Verhältnis überall hinzubiegen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Letterbox und Pillarbox: schwarze Balken verstehen',
+        html: `<p>Passt das Seitenverhältnis des Materials nicht zum Bildschirm, entstehen <strong>schwarze Balken</strong>. Läuft ein breites 16:9- oder 21:9-Video auf einem schmaleren 4:3-Bildschirm, erscheinen Balken oben und unten — das nennt man <strong>Letterbox</strong>. Umgekehrt, wenn ein 4:3-Bild auf einem breiten 16:9-Monitor läuft, sitzen die Balken links und rechts; das heißt <strong>Pillarbox</strong>.</p><p>Die Balken sind kein Fehler, sondern der ehrliche Weg, ein Bild ohne Verzerrung und ohne Beschnitt darzustellen. Die Alternativen sind schlechter: Streckt man das Bild auf das falsche Verhältnis, werden Personen und Objekte verzerrt; schneidet man es zu (Crop), geht Bildinhalt am Rand verloren. Wer das Zielverhältnis von Anfang an kennt, vermeidet beides und produziert passgenau. Genau deshalb lohnt es sich, vor dem Export oder dem Zuschnitt das Verhältnis bewusst festzulegen. Wie groß ein Bildschirm bei einem bestimmten Verhältnis tatsächlich ausfällt und wie dicht die Pixel sitzen, zeigt der <a href="/technik/bildschirmgroesse-ppi-rechner">Bildschirmgröße- und PPI-Rechner</a>.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Social-Media-Formate 2026',
+        kopf: ['Plattform / Typ', 'Empfohlene Auflösung', 'Verhältnis'],
+        zeilen: [
+          ['Instagram-Post', '1080 × 1350', '4:5'],
+          ['Instagram-Story', '1080 × 1920', '9:16'],
+          ['YouTube-Video', '1920 × 1080', '16:9'],
+          ['YouTube-Short', '1080 × 1920', '9:16'],
+          ['X-Post (Bild)', '1600 × 900', '16:9'],
+        ],
+        fussnote: 'Empfohlene Upload-Auflösungen und ihre Seitenverhältnisse für die wichtigsten Plattformen. Wer im passenden Verhältnis exportiert, vermeidet automatische Zuschnitte und schwarze Balken — die Plattformen schneiden abweichende Formate sonst eigenmächtig zu oder zeigen sie verkleinert. Die absoluten Pixelmaße sind Richtwerte; höhere Auflösungen im selben Verhältnis werden ohne Qualitätsverlust verkleinert, niedrigere dagegen unscharf hochskaliert. Plattformen ändern ihre Empfehlungen gelegentlich, das Verhältnis bleibt aber meist stabil — wer im richtigen Verhältnis exportiert, ist auf der sicheren Seite.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Das richtige Format wählen',
+        punkte: [
+          'Das Seitenverhältnis der Zielplattform oder des Zielbildschirms vorab klären.',
+          'Die native Auflösung des Geräts kennen — dort sitzt jeder Pixel exakt.',
+          'Material nicht hochskalieren; das macht es unscharf, nicht schärfer.',
+          'Das Verhältnis vor dem Zuschneiden festlegen, nicht hinterher korrigieren.',
+          'Beim Skalieren das Verhältnis sperren, damit nichts verzerrt wird.',
+          'Vorhandene Export-Presets (z. B. „YouTube 1080p") nutzen, statt Werte von Hand einzutippen.',
+          'Bei mehreren Zielformaten von der höchsten Auflösung ausgehen und herunterrechnen.',
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Pixel oder Verhältnis: gleiches Format, andere Schärfe',
+        html: `<p>Ein häufiges Missverständnis: Gleiches Seitenverhältnis bedeutet nicht gleiche Schärfe. <strong>1280 × 720 und 3840 × 2160 sind beide 16:9</strong>, unterscheiden sich aber um den Faktor 9 in der Gesamtzahl der Pixel. Das Verhältnis beschreibt allein die Form, nicht die Detailmenge.</p><p>Für die wahrgenommene Schärfe, die maximale Druckgröße und den Zoom-Spielraum zählt die <strong>absolute Pixelzahl</strong>. Ein 16:9-Bild mit 720 Pixeln Höhe wirkt auf einem großen Monitor grob, dasselbe Verhältnis mit 2.160 Pixeln dagegen gestochen scharf. Beim Skalieren bleibt das Verhältnis erhalten, die Pixelzahl ändert sich — und mit ihr die Qualität. Wer wissen will, wie viele Megapixel eine Auflösung ergibt und wie groß sie sich drucken lässt, findet die Antwort im <a href="/technik/megapixel-rechner">Megapixel-Rechner</a>. Seitenverhältnis und Auflösung sind also zwei getrennte Kennzahlen, die man immer zusammen betrachten sollte.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Warum sich 16:9 durchsetzte — und der Trend zum Hochformat',
+        html: `<p>Lange dominierte das fast quadratische <strong>4:3</strong> bei Röhrenfernsehern und frühen Monitoren. Mit Flachbildschirmen, HD-Fernsehen und Kinofilmen setzte sich das breitere <strong>16:9</strong> durch — es ist ein guter Kompromiss zwischen klassischem Film (oft noch breiter) und der quadratischen Vergangenheit und wurde zum Standard für TV, Web und nahezu alle Monitore.</p><p>Inzwischen verschiebt sich das Bild erneut. Am Smartphone wird hochkant gescrollt, weshalb <strong>Hochformate wie 9:16 und 4:5</strong> für Reels, Stories und Feed-Beiträge stark zugenommen haben. Gleichzeitig wachsen am Schreibtisch die extrabreiten <strong>Ultrawide-Formate</strong> (21:9, 32:9) für Gaming, Film und produktives Arbeiten mit mehreren Fenstern. Das Ergebnis ist eine größere Vielfalt als je zuvor: Statt eines einzigen vorherrschenden Formats existieren heute mehrere nebeneinander, jeweils passend zum Gerät und zum Nutzungskontext. Genau deshalb lohnt es sich, das Seitenverhältnis bewusst zu wählen — es entscheidet darüber, ob Inhalte auf dem jeweiligen Bildschirm wie vorgesehen wirken.</p>`,
+      },
+    ],
+    quellen: [
+      {
+        titel: 'VESA Display-Standards',
+        hinweis: 'Standardisierte Auflösungen und Seitenverhältnisse für Monitore (16:9, 16:10, 21:9 u. a.).',
+      },
+      {
+        titel: 'Größter gemeinsamer Teiler (Euklidischer Algorithmus)',
+        hinweis: 'Mathematische Grundlage zum Kürzen eines Auflösungs-Verhältnisses auf die kleinste Ganzzahl-Form.',
+      },
+    ],
+  },
+  {
     slug: 'datenmengen-umrechner',
     letzteAktualisierung: '2026-06-19',
     titel: 'Datenmengen-Umrechner',
