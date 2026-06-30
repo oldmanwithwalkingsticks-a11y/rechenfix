@@ -231,6 +231,7 @@ export default function EautoLadezeitRechner() {
             </div>
           </div>
 
+          <CrossLink href="/technik/eauto-ladekosten-rechner" emoji="💶" text="Was kostet eine Ladung?" />
           <CrossLink href="/auto/spritkosten-rechner" emoji="⛽" text="Verbrenner-Kosten vergleichen" />
           <CrossLink href="/technik/stromverbrauch-geraete-rechner" emoji="⚡" text="Stromverbrauch & -kosten von Geräten" />
 
