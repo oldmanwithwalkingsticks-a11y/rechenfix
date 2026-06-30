@@ -1181,6 +1181,169 @@ Die genannten Bitraten sind Richtwerte für gängige Codecs (H.264, H.265). Neue
     ],
   },
   {
+    slug: 'netzteil-watt-rechner',
+    letzteAktualisierung: '2026-06-30',
+    titel: 'Netzteil-Rechner (PC-Watt)',
+    beschreibung: 'Netzteil-Wattzahl für den PC berechnen: aus dem Verbrauch von CPU, GPU und Co. plus Reserve die passende Netzteilgröße bestimmen.',
+    kategorie: 'Technik',
+    kategorieSlug: 'technik',
+    metaTitle: 'Netzteil-Rechner — PC-Wattzahl bestimmen',
+    metaDescription: 'Netzteil-Rechner: passende PC-Wattzahl aus CPU, GPU und Komponenten plus Reserve berechnen — mit Beispiel-Konfigurationen und Rechenweg.',
+    keywords: ['netzteil rechner', 'pc watt berechnen', 'psu calculator deutsch', 'wieviel watt netzteil', 'netzteil wattzahl', 'pc stromverbrauch netzteil', 'gaming pc netzteil', 'netzteil größe'],
+    icon: '🔌',
+    formel: 'Gesamtlast = CPU + GPU + RAM×5 + SSD×5 + HDD×8 + Lüfter×2 | Empfohlen = Gesamtlast × (1 + Reserve)',
+    beispiel: 'Gaming-Mittelklasse: 95 + 170 + 10 + 5 + 8 + 8 = 296 W × 1,30 = 385 W → 400-W-Netzteil.',
+    erklaerung: `**Netzteil-Wattzahl berechnen — wie viel Watt braucht mein PC?**
+
+Die richtige Netzteilgröße ergibt sich nicht aus einer Wunschzahl, sondern aus dem tatsächlichen Verbrauch der verbauten Komponenten plus einer sinnvollen Reserve. Dieser Rechner addiert die Volllast-Verbräuche von CPU, Grafikkarte, Arbeitsspeicher, Laufwerken und Lüftern und schlägt eine passende, gängige Netzteilgröße vor.
+
+**Die Rechnung**
+
+Gesamtlast = CPU + GPU + (RAM-Riegel × 5 W) + (SSD × 5 W) + (HDD × 8 W) + (Lüfter × 2 W). Auf diese Summe kommt eine Reserve von standardmäßig 30 Prozent, anschließend wird auf die nächste handelsübliche Netzteilgröße aufgerundet. Beispiel: Ein Gaming-PC mit 95-W-CPU und 170-W-Grafikkarte landet bei rund 296 W Gesamtlast, mit Reserve bei 385 W — empfohlen wird also ein 400-W-Netzteil.
+
+**Warum nicht die exakte Last?**
+
+Man wählt bewusst etwas mehr als die reine Summe. Grafikkarten erzeugen kurze Lastspitzen, die deutlich über dem Durchschnitt liegen; Netzteile arbeiten bei rund 50 Prozent Auslastung am effizientesten; und Kondensatoren altern über die Jahre. Eine Reserve von etwa 30 Prozent deckt all das ab und lässt zugleich Spielraum für spätere Aufrüstungen.
+
+**Qualität vor reiner Wattzahl**
+
+Ein Netzteil zieht nie mehr, als der PC tatsächlich braucht — eine 600-W-PSU verbraucht im Leerlauf nur 60 bis 90 W, nicht 600. Wichtiger als eine möglichst hohe Wattzahl sind daher eine gute 80-PLUS-Effizienz, saubere Schutzschaltungen und genügend Stromstecker für die Grafikkarte.`,
+    faq: [
+      {
+        frage: 'Wie viel Watt braucht mein PC wirklich?',
+        antwort: 'Addieren Sie die Volllast-Verbräuche der Komponenten: CPU (65–170 W), Grafikkarte (75–450 W), je RAM-Riegel rund 5 W, je SSD 5 W, je HDD 8 W und je Lüfter 2 W. Ein typischer Gaming-PC kommt so auf rund 300 W Gesamtlast. Das Netzteil sollte mit etwa 30 Prozent Reserve darüber liegen, hier also rund 400 W.',
+      },
+      {
+        frage: 'Ist ein größeres Netzteil verschwenderisch?',
+        antwort: 'Nicht direkt, aber unnötig. Ein Netzteil zieht nur so viel Strom, wie der PC braucht — ein 1000-W-Netzteil im Office-PC verbraucht nicht mehr als ein 400-W-Modell. Allerdings arbeitet es im sehr niedrigen Teillastbereich ineffizienter und ist teurer. Sinnvoll ist die goldene Mitte: genug Reserve, aber nicht maßlos überdimensioniert.',
+      },
+      {
+        frage: 'Was bedeutet 80 PLUS?',
+        antwort: 'Die 80-PLUS-Zertifizierung gibt den Wirkungsgrad eines Netzteils an, also wie viel des aus der Steckdose gezogenen Stroms tatsächlich beim PC ankommt und wie viel als Wärme verloren geht. Die Stufen reichen von Bronze über Gold und Platinum bis Titanium. Höhere Stufen sparen Strom und erzeugen weniger Abwärme, am effizientesten meist bei rund 50 Prozent Auslastung.',
+      },
+      {
+        frage: 'Was passiert, wenn das Netzteil zu klein ist?',
+        antwort: 'Reicht die Leistung nicht aus, kann der PC unter Last instabil werden: Es kommt zu plötzlichen Abschaltungen, Neustarts oder Bluescreens, besonders in Spielen oder bei Lastspitzen der Grafikkarte. Im schlimmsten Fall leidet die Hardware. Deshalb sollte man immer eine Reserve einplanen, statt das Netzteil exakt auf die berechnete Last zu wählen.',
+      },
+      {
+        frage: 'Brauche ich ein ATX-3.0-Netzteil?',
+        antwort: 'Für moderne High-End-Grafikkarten mit 12VHPWR-Stecker (PCIe 5.0) ist ein ATX-3.0-Netzteil empfehlenswert, weil es die kurzen Lastspitzen dieser Karten besser abfängt. Für ältere oder sparsamere Systeme genügt ein gutes ATX-2.x-Netzteil mit passenden PCIe-Steckern. Entscheidend ist, dass die Grafikkarte die nötigen Stromanschlüsse erhält.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Wie man die Netzteilgröße bestimmt',
+        html: `<p>Die passende <strong>Netzteilgröße</strong> ergibt sich nicht aus einer runden Wunschzahl, sondern aus dem tatsächlichen Verbrauch der verbauten Teile. Dazu addiert man die <strong>Volllast-Verbräuche</strong> aller Komponenten: Prozessor und Grafikkarte machen den Löwenanteil aus, dazu kommen Arbeitsspeicher, Laufwerke und Lüfter mit kleineren Beträgen.</p><p>Auf diese Gesamtlast schlägt man eine <strong>Reserve</strong> von rund 30 Prozent auf und rundet auf die nächste handelsübliche Netzteilgröße auf. Warum nicht einfach die exakte Last wählen? Weil ein PC nie gleichmäßig verbraucht: Grafikkarten erzeugen kurze, heftige Lastspitzen, Netzteile laufen bei etwa halber Auslastung am effizientesten, und ihre Bauteile altern über die Jahre. Die Reserve fängt all das ab und lässt Platz für spätere Aufrüstungen. Dieser Rechner nimmt die Auswahl der Komponenten entgegen, bildet die Summe, schlägt die Reserve auf und nennt die empfohlene Netzteilgröße — als belastbare Orientierung für den Kauf, nicht als starre Vorgabe.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Beispiel-PCs und empfohlenes Netzteil',
+        kopf: ['Konfiguration', 'Kernkomponenten', 'Gesamtlast', 'Netzteil'],
+        zeilen: [
+          ['Office / Büro', '65-W-CPU, integrierte Grafik', '84 W', '300 W'],
+          ['Gaming-Mittelklasse', '95-W-CPU, 170-W-GPU', '296 W', '400 W'],
+          ['High-End', '125-W-CPU, 290-W-GPU', '457 W', '600 W'],
+          ['Enthusiast', '170-W-CPU, 450-W-GPU', '674 W', '1.000 W'],
+        ],
+        fussnote: 'Vier typische PC-Klassen mit ihrer Gesamtlast und dem empfohlenen Netzteil (jeweils inklusive 30 Prozent Reserve und auf die nächste gängige Größe aufgerundet). Auffällig ist die Spannweite: Ein sparsamer Büro-PC kommt mit 300 W aus, während ein Enthusiasten-System mit dicker Grafikkarte das Dreifache benötigt. Den größten Unterschied macht fast immer die Grafikkarte, nicht der Prozessor. Die Last-Werte beziehen sich auf Volllast, also den ungünstigsten Fall — im Alltag liegt der Verbrauch meist deutlich darunter. Für die Netzteilwahl ist aber genau diese Spitzenlast maßgeblich, damit das System auch im Spiel oder beim Rendern stabil bleibt.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Typische Komponenten-Verbräuche unter Volllast',
+        werte: [
+          { label: 'Prozessor (CPU)', wert: '65–170 W', hinweis: 'je nach Modell und Last' },
+          { label: 'Grafikkarte (GPU)', wert: '75–450 W', hinweis: 'meist der größte Verbraucher' },
+          { label: 'RAM-Riegel', wert: '~5 W', hinweis: 'pro Modul' },
+          { label: 'SSD / NVMe', wert: '~5 W', hinweis: 'pro Laufwerk' },
+          { label: 'Festplatte (HDD)', wert: '~8 W', hinweis: 'mechanisch, mehr als SSD' },
+          { label: 'Lüfter / Pumpe', wert: '~2 W', hinweis: 'pro Stück' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Gaming-Mittelklasse Schritt für Schritt',
+        schritte: [
+          { label: 'Komponenten addieren', formel: '95 (CPU) + 170 (GPU) + 10 (2× RAM) + 5 (SSD) + 8 (HDD) + 8 (4× Lüfter)', ergebnis: '296 W' },
+          { label: 'Reserve aufschlagen', formel: '296 W × 1,30', ergebnis: '385 W' },
+          { label: 'Auf gängige Größe aufrunden', formel: 'nächste Größe ab 385 W', ergebnis: '400 W' },
+        ],
+        fazit: 'Ein Gaming-PC der Mittelklasse mit 95-W-Prozessor und 170-W-Grafikkarte kommt auf rund 296 W Gesamtlast. Mit 30 Prozent Reserve sind das 385 W, aufgerundet auf die nächste handelsübliche Größe also ein 400-W-Netzteil. Das deckt die Lastspitzen der Grafikkarte ab und lässt etwas Luft für eine spätere kleine Aufrüstung. Wer hier zu 300 W greifen würde, riskiert Abschaltungen unter Last; wer ein 750-W-Modell kauft, zahlt unnötig drauf und betreibt es dauerhaft im ineffizienten Niedriglastbereich. Die 400 W treffen hier genau die goldene Mitte zwischen Sicherheit und Effizienz.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum 30 Prozent Reserve?',
+        html: `<p>Die Reserve ist kein Sicherheitsfetisch, sondern hat handfeste Gründe. Der wichtigste sind die <strong>Lastspitzen der Grafikkarte</strong>: Moderne GPUs ziehen für Sekundenbruchteile deutlich mehr als ihre durchschnittliche Leistungsaufnahme — diese „transient spikes" können das Doppelte des Nennwerts erreichen. Ein zu knapp dimensioniertes Netzteil schaltet dann zum Schutz ab.</p><p>Zweitens arbeiten Netzteile nicht überall gleich effizient: Der beste Wirkungsgrad liegt typischerweise bei rund <strong>50 Prozent Auslastung</strong>. Wer sein Netzteil so wählt, dass es im normalen Betrieb etwa in diesem Bereich läuft, spart Strom und Abwärme. Drittens <strong>altern</strong> die Bauteile, vor allem die Kondensatoren — ein Netzteil liefert nach Jahren etwas weniger als am Anfang. Und schließlich gibt die Reserve einen <strong>Aufrüst-Puffer</strong> für eine stärkere Grafikkarte oder zusätzliche Laufwerke. Rund 30 Prozent sind dafür ein bewährter Mittelwert: genug Sicherheit, ohne maßlos zu überdimensionieren. Wer eine baldige Aufrüstung plant, darf auch 40 Prozent ansetzen.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: '80 PLUS: Effizienz schlägt rohe Wattzahl',
+        text: 'Die 80-PLUS-Zertifizierung verrät, wie viel des aus der Steckdose gezogenen Stroms tatsächlich beim PC ankommt und wie viel als Wärme verpufft. Die Stufen Bronze, Gold, Platinum und Titanium stehen für steigenden Wirkungsgrad — ein Gold-Netzteil verschwendet weniger Energie als ein Bronze-Modell und bleibt kühler und leiser. Wichtig zu wissen: Der beste Wirkungsgrad liegt meist bei rund 50 Prozent Auslastung. Genau deshalb ist eine moderate Reserve sinnvoll, eine maßlose Überdimensionierung aber kontraproduktiv: Ein 1.000-W-Netzteil, das im Alltag nur zu 10 Prozent ausgelastet ist, läuft außerhalb seines Effizienz-Sweetspots. Für die meisten Systeme ist ein gutes Gold-Netzteil mit passender Wattzahl die beste Wahl — es spart über die Jahre Strom und schont durch geringere Abwärme die übrige Hardware. Über die gesamte Nutzungsdauer kann der Effizienzunterschied zwischen Bronze und Gold mehrere zehn Euro Stromkosten ausmachen, sodass sich das hochwertigere Netzteil oft von selbst bezahlt macht. Die reine Wattzahl sagt nämlich nichts über die Qualität aus. Ein günstiges 800-W-Netzteil ohne Zertifizierung ist einem hochwertigen 550-W-Gold-Modell in fast jeder Hinsicht unterlegen: weniger effizient, lauter und im Zweifel ohne verlässliche Schutzschaltungen. Beim Netzteil zu sparen rächt sich oft an der übrigen, teureren Hardware, denn ein schlechtes Netzteil kann im Defektfall andere Komponenten mitnehmen.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Die Grafikkarte als Hauptverbraucher',
+        kopf: ['GPU-Klasse', 'Verbrauch', 'PC-Gesamtlast (grob)', 'Netzteil-Empfehlung'],
+        zeilen: [
+          ['Einsteiger', '75 W', '~180 W', '300–400 W'],
+          ['Mittelklasse', '170 W', '~300 W', '400–500 W'],
+          ['High-End', '290 W', '~460 W', '600–650 W'],
+          ['Enthusiast', '450 W', '~680 W', '850–1.000 W'],
+        ],
+        fussnote: 'Die Grafikkarte bestimmt die Netzteilgröße stärker als jede andere Komponente. Während sich Prozessoren zwischen 65 und 170 W bewegen, reicht die Spanne bei Grafikkarten von 75 bis 450 W. Wer die GPU-Klasse kennt, kann die nötige Netzteilgröße schon grob abschätzen — der Rest des Systems addiert meist nur 120 bis 180 W obendrauf. Bei einer geplanten GPU-Aufrüstung lohnt es sich, das Netzteil von Anfang an entsprechend größer zu wählen. Gerade die Grafikkarte ist auch die Komponente, die am häufigsten getauscht wird — ein knapp bemessenes Netzteil zwingt dann zum Doppelkauf. Wer langfristig plant, orientiert sich daher besser an der angepeilten GPU-Oberklasse als am aktuellen Sparmodell.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'High-End-Build und was bei zu knapp passiert',
+        schritte: [
+          { label: 'Komponenten addieren', formel: '125 (CPU) + 290 (GPU) + 20 (4× RAM) + 10 (2× SSD) + 12 (6× Lüfter)', ergebnis: '457 W' },
+          { label: 'Reserve aufschlagen', formel: '457 W × 1,30', ergebnis: '594 W' },
+          { label: 'Aufrunden', formel: 'nächste Größe ab 594 W', ergebnis: '600 W' },
+        ],
+        fazit: 'Ein High-End-PC mit 125-W-CPU und 290-W-Grafikkarte braucht rund 457 W, mit Reserve also ein 600-W-Netzteil. Würde man hier zu einem 450-W-Modell greifen, läge die reine Last bereits nahe der Grenze — schon eine Lastspitze der Grafikkarte könnte das Netzteil in die Schutzabschaltung treiben. Die Folge sind plötzliche Neustarts mitten im Spiel oder Instabilität unter Volllast. Solche Symptome werden oft fälschlich der Grafikkarte oder dem Mainboard zugeschrieben, obwohl schlicht das Netzteil zu klein ist. Die Reserve ist also kein Luxus, sondern der Unterschied zwischen einem stabilen und einem zickigen System. Wer bei einem High-End-System ohnehin viel Geld in CPU und Grafikkarte investiert, sollte am Netzteil zuletzt sparen — die paar Euro Aufpreis zum nächstgrößeren, hochwertigen Modell sind gut angelegt und ersparen mühsame Fehlersuche.',
+      },
+      {
+        typ: 'text',
+        titel: 'Zu groß oder zu klein — die goldene Mitte',
+        html: `<p>Beide Extreme haben Nachteile. Ein <strong>zu kleines</strong> Netzteil führt zu Überlastung, Schutzabschaltungen und im Dauerbetrieb zu vorzeitigem Verschleiß. Ein <strong>zu großes</strong> Netzteil verbraucht zwar nicht mehr Strom als nötig, läuft aber im ineffizienten Niedriglastbereich: Ein 1.000-W-Netzteil in einem Office-PC, der nur 80 W zieht, arbeitet bei 8 Prozent Auslastung weit unter seinem Effizienz-Sweetspot.</p><p>Die <strong>goldene Mitte</strong> ist ein Netzteil, dessen empfohlene Größe etwa 30 Prozent über der Gesamtlast liegt — dann bewegt sich der typische Betrieb im effizienten Bereich, und es bleibt Reserve für Spitzen und Aufrüstung. Wie viel der PC im Alltag tatsächlich aus der Steckdose zieht und was das über das Jahr kostet, lässt sich mit dem <a href="/technik/stromverbrauch-geraete-rechner">Stromverbrauch-Rechner</a> abschätzen — denn die Netzteilgröße ist eine Obergrenze, nicht der reale Verbrauch. Genau deshalb ist es unsinnig, allein nach der höchsten Wattzahl zu kaufen.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Netzteil richtig wählen',
+        punkte: [
+          'Die reale Leistungsaufnahme (TDP) der konkreten CPU und GPU nachschlagen, nicht schätzen.',
+          'Rund 30 Prozent Reserve einplanen, mehr nur bei geplanter Aufrüstung.',
+          'Auf eine gute 80-PLUS-Effizienz achten (Gold ist für die meisten ideal).',
+          'Genug PCIe-Stromstecker für die Grafikkarte sicherstellen.',
+          'Ein Marken-Netzteil mit Schutzschaltungen (Über-/Unterspannung, Kurzschluss) wählen.',
+          'Die ATX-Version zum Mainboard und zur Grafikkarte passend wählen (ATX 3.0 für 12VHPWR).',
+          'Die Wattzahl nicht maßlos überziehen — Qualität geht vor roher Leistung.',
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Realverbrauch ist nicht die Netzteilgröße',
+        html: `<p>Ein verbreitetes Missverständnis: Ein 600-W-Netzteil würde 600 W aus der Steckdose ziehen. Das stimmt nicht. Ein Netzteil liefert nur so viel, wie der PC im jeweiligen Moment <strong>tatsächlich anfordert</strong>. Im Leerlauf, beim Surfen oder bei Büroarbeit zieht ein typischer PC nur rund <strong>60 bis 90 W</strong> — die 600 W sind allein die Obergrenze für Lastspitzen.</p><p>Die volle Wattzahl wird nur unter <strong>Volllast</strong> erreicht, etwa in einem anspruchsvollen Spiel oder beim Videorendern. Für die Stromrechnung zählt deshalb der reale Durchschnittsverbrauch, nicht die Netzteilgröße. Wer wissen will, was der PC-Betrieb übers Jahr kostet, rechnet mit dem geschätzten Durchschnittsverbrauch und dem eigenen Strompreis — der <a href="/wohnen/stromkosten-rechner">Stromkosten-Rechner</a> übernimmt das. Die Netzteilgröße sagt also nichts über die laufenden Kosten aus; sie stellt nur sicher, dass auch in Spitzenmomenten genug Leistung bereitsteht.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'ATX 3.0, 12VHPWR und Zukunftssicherheit',
+        html: `<p>Mit den neuesten Grafikkarten kam der Standard <strong>ATX 3.0</strong> auf, der vor allem die kurzen, heftigen Lastspitzen moderner GPUs besser verkraftet. Dazu gehört der neue <strong>12VHPWR</strong>-Stecker (PCIe 5.0), der bis zu 600 W über ein einziges Kabel liefert und das frühere Gewirr mehrerer Stromstecker ersetzt.</p><p>Für aktuelle High-End-Systeme ist ein ATX-3.0-Netzteil deshalb eine sinnvolle, zukunftssichere Wahl. Für sparsamere oder ältere PCs genügt aber weiterhin ein gutes ATX-2.x-Netzteil mit den passenden Steckern — ein Zwang zum Neukauf besteht nicht. Wichtiger als die Norm-Nummer bleibt am Ende die <strong>Qualität</strong>: ein renommierter Hersteller, eine solide 80-PLUS-Einstufung, zuverlässige Schutzschaltungen und genügend Anschlüsse für die eigene Hardware. Diese Faktoren entscheiden über Stabilität und Lebensdauer weit mehr als eine besonders hohe Wattzahl. Ein durchdacht gewähltes Netzteil hält oft mehrere PC-Generationen und ist damit eine der nachhaltigsten Komponenten im Rechner.</p>`,
+      },
+    ],
+    quellen: [
+      {
+        titel: '80 PLUS Effizienz-Zertifizierung',
+        hinweis: 'Bronze/Gold/Platinum/Titanium geben den Wirkungsgrad an; höchste Effizienz meist bei ~50 % Auslastung — Grund für moderate Reserve.',
+      },
+      {
+        titel: 'ATX-Netzteil-Spezifikation (Intel)',
+        hinweis: 'Definiert Bauform, Stecker und Lastverhalten; ATX 3.0 ergänzt PCIe-5-Stromspitzen (12VHPWR) für moderne Grafikkarten.',
+      },
+    ],
+  },
+  {
     slug: 'datenmengen-umrechner',
     letzteAktualisierung: '2026-06-19',
     titel: 'Datenmengen-Umrechner',
