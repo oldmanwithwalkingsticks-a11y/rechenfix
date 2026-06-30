@@ -224,6 +224,7 @@ const RECHNER_MAP: Record<string, ComponentType> = {
   'powerbank-rechner': dyn(() => import('@/components/rechner/PowerbankRechner')),
   'aufloesung-seitenverhaeltnis-rechner': dyn(() => import('@/components/rechner/AufloesungSeitenverhaeltnisRechner')),
   'dpi-druck-rechner': dyn(() => import('@/components/rechner/DpiDruckRechner')),
+  'video-dateigroesse-rechner': dyn(() => import('@/components/rechner/VideoDateigroesseRechner')),
   'datenmengen-umrechner': dyn(() => import('@/components/rechner/DatenmengenRechner')),
   'megapixel-rechner': dyn(() => import('@/components/rechner/MegapixelRechner')),
   'stromverbrauch-geraete-rechner': dyn(() => import('@/components/rechner/StromverbrauchGeraeteRechner')),

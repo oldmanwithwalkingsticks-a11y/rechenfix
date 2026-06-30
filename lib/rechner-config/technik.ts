@@ -1015,6 +1015,172 @@ Für die Bildschirmanzeige ist DPI bedeutungslos — dort zählt nur die Pixelza
     ],
   },
   {
+    slug: 'video-dateigroesse-rechner',
+    letzteAktualisierung: '2026-06-30',
+    titel: 'Video-Dateigröße-Rechner',
+    beschreibung: 'Video-Dateigröße berechnen: Wie groß wird ein Video bei gegebener Bitrate, Länge und Auflösung? Mit Bitrate-Profilen von 720p bis 8K.',
+    kategorie: 'Technik',
+    kategorieSlug: 'technik',
+    metaTitle: 'Video-Dateigröße-Rechner — Größe berechnen',
+    metaDescription: 'Video-Dateigröße berechnen: Wie groß wird ein Video bei Bitrate, Länge und Auflösung? Mit Bitrate-Richtwerten für 1080p bis 8K.',
+    keywords: ['video dateigröße', 'bitrate rechner', '4k speicherbedarf', 'video größe berechnen', 'video bitrate dateigröße', 'wie groß wird mein video', 'speicherbedarf video', 'mbit/s video'],
+    icon: '🎬',
+    formel: 'Größe (MB) = Bitrate(Mbit/s) × Länge(Sekunden) ÷ 8 | Größe (GB) = MB ÷ 1.000',
+    beispiel: '1080p mit 8 Mbit/s, 10 min: 8 × 600 s ÷ 8 = 600 MB.',
+    erklaerung: `**Video-Dateigröße berechnen — Bitrate, Länge und die ÷8-Regel**
+
+Wie groß eine Videodatei wird, hängt fast nur von zwei Werten ab: der Bitrate und der Länge. Die Auflösung (720p, 1080p, 4K) wirkt dabei nur indirekt — nämlich darüber, welche Bitrate für eine gute Bildqualität nötig ist. Dieser Rechner ermittelt aus Bitrate und Länge die zu erwartende Dateigröße und bietet Bitrate-Richtwerte für die gängigen Auflösungen.
+
+**Die Formel**
+
+Größe in MB = Bitrate (Mbit/s) × Länge (Sekunden) ÷ 8. Die Division durch 8 stammt aus der Umrechnung von Bit in Byte: Ein Byte besteht aus acht Bit. Ein 10-minütiges 1080p-Video mit 8 Mbit/s ergibt also 8 × 600 ÷ 8 = 600 MB. Für Stunden- oder Gigabyte-Werte rechnet man einfach weiter: 1.000 MB entsprechen 1 GB.
+
+**Warum 4K so viel Speicher frisst**
+
+Eine höhere Auflösung verlangt eine deutlich höhere Bitrate, um scharf zu bleiben. Während 1080p mit rund 8 Mbit/s auskommt, braucht 4K etwa 45 Mbit/s — also ungefähr das Fünf- bis Sechsfache. Entsprechend ist ein 4K-Video bei gleicher Länge rund fünfmal so groß wie ein 1080p-Video. Eine Stunde 4K bei 45 Mbit/s belegt rund 20 GB.
+
+**Codec und Inhalt zählen mit**
+
+Die genannten Bitraten sind Richtwerte für gängige Codecs (H.264, H.265). Neuere Codecs wie AV1 liefern bei gleicher Qualität kleinere Dateien, und ruhige Szenen brauchen weniger Daten als schnelle Action. Die Berechnung ist daher eine gute Schätzung, kein exakter Laborwert.`,
+    faq: [
+      {
+        frage: 'Wie groß wird eine Stunde 4K-Video?',
+        antwort: 'Bei der üblichen 4K-Bitrate von 45 Mbit/s ergibt eine Stunde rund 20,3 GB (45 × 3.600 s ÷ 8 = 20.250 MB). Mit höherer Bitrate für 4K60 (68 Mbit/s) sind es schon über 30 GB pro Stunde. 4K-Aufnahmen füllen Speicherkarten daher sehr schnell — eine 64-GB-Karte reicht bei 45 Mbit/s nur für rund drei Stunden.',
+      },
+      {
+        frage: 'Welche Bitrate brauche ich für YouTube oder Instagram?',
+        antwort: 'YouTube empfiehlt für den Upload höhere Bitraten als fürs Streaming: rund 8 Mbit/s für 1080p und 35 bis 45 Mbit/s für 4K, weil die Plattform danach noch einmal komprimiert. Instagram und TikTok komprimieren stark nach, weshalb sehr hohe Bitraten dort wenig bringen — 1080p mit 8 bis 12 Mbit/s ist ein guter Kompromiss.',
+      },
+      {
+        frage: 'Warum ist mein Video so groß?',
+        antwort: 'Meist liegt es an einer hohen Bitrate, hoher Auflösung oder hoher Bildrate (FPS). Eine 4K60-Aufnahme mit 68 Mbit/s ist rund achtmal so groß wie 1080p30 mit 8 Mbit/s. Auch ein veralteter Codec (älteres H.264 statt H.265 oder AV1) vergrößert die Datei. Wer Speicher sparen will, senkt die Bitrate oder nutzt einen moderneren Codec.',
+      },
+      {
+        frage: 'Was bedeutet Bitrate genau?',
+        antwort: 'Die Bitrate gibt an, wie viele Daten pro Sekunde Video gespeichert werden, gemessen in Megabit pro Sekunde (Mbit/s). Eine höhere Bitrate bedeutet mehr Details und weniger Komprimierungsartefakte, aber auch eine größere Datei. Sie ist der wichtigste Hebel für die Dateigröße — wichtiger als die Auflösung allein.',
+      },
+      {
+        frage: 'Ist ein 4K-Video immer größer als ein 1080p-Video?',
+        antwort: 'Nicht zwangsläufig. Entscheidend ist die Bitrate, nicht die Auflösung. Ein 4K-Video mit niedrig eingestellter Bitrate kann kleiner sein als ein 1080p-Video mit sehr hoher Bitrate — es sieht dann aber meist unschärfer aus. In der Praxis werden 4K-Videos mit hoher Bitrate aufgenommen und sind deshalb deutlich größer.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Wie sich die Videogröße ergibt',
+        html: `<p>Die Dateigröße eines Videos hängt überraschend wenig von der Auflösung ab und fast vollständig von zwei Werten: der <strong>Bitrate</strong> und der <strong>Länge</strong>. Die Formel lautet: Größe in MB = Bitrate (Mbit/s) × Länge (Sekunden) ÷ 8. Die Division durch 8 ist nötig, weil Bitraten in <strong>Megabit</strong> und Dateigrößen in <strong>Megabyte</strong> angegeben werden — und ein Byte besteht aus acht Bit.</p><p>Die <strong>Auflösung</strong> wirkt nur indirekt: Ein scharfes 4K-Bild verlangt eine deutlich höhere Bitrate als 1080p, und genau diese höhere Bitrate macht die Datei groß. Die Auflösung selbst steht in keiner Formel — sie bestimmt nur, welche Bitrate für ein gutes Ergebnis sinnvoll ist. Deshalb kann ein sparsam komprimiertes 4K-Video theoretisch sogar kleiner sein als ein hoch-bitratiges 1080p-Video. Dieser Rechner nimmt die Bitrate direkt entgegen und bietet zusätzlich Richtwerte für die gängigen Auflösungen, damit man auch ohne genaue Kenntnis der eigenen Aufnahme eine verlässliche Schätzung bekommt.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '1080p mit 8 Mbit/s, 10 Minuten',
+        schritte: [
+          { label: 'Länge in Sekunden', formel: '10 min × 60', ergebnis: '600 s' },
+          { label: 'Größe in MB', formel: '8 Mbit/s × 600 s ÷ 8', ergebnis: '600 MB' },
+        ],
+        fazit: 'Ein zehnminütiges Full-HD-Video mit der Standard-Bitrate von 8 Mbit/s ergibt genau 600 MB. Die Rechnung multipliziert die Bitrate mit der Länge in Sekunden und teilt durch 8, um von Megabit auf Megabyte zu kommen. Praktisch heißt das: Etwa 60 MB pro Minute bei 1080p. Auf eine 16-GB-Speicherkarte passen damit rund 26 solcher Clips oder gut viereinhalb Stunden Material. Wer die Bitrate oder die Auflösung erhöht, treibt diesen Wert schnell nach oben — bei 4K wird aus demselben Zehnminüter ein Vielfaches.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Bit, Byte und „Bitrate ist nicht Auflösung"',
+        text: 'Zwei Stolperfallen führen beim Schätzen von Videogrößen regelmäßig in die Irre. Erstens die Bit-Byte-Verwechslung: Bitraten werden in Megabit pro Sekunde (Mbit/s) angegeben, Dateigrößen in Megabyte (MB). Weil ein Byte aus acht Bit besteht, muss durch 8 geteilt werden — 8 Mbit/s ergeben also nur 1 MB pro Sekunde, nicht 8. Wer das übersieht, überschätzt die Größe um das Achtfache. Zweitens die Annahme, die Auflösung bestimme die Größe: Das stimmt nur indirekt. Allein die Bitrate legt fest, wie viele Daten pro Sekunde gespeichert werden. Ein 4K-Video mit niedriger Bitrate kann kleiner sein als ein 1080p-Video mit hoher Bitrate — es sieht dann nur weniger detailreich aus. Für die Dateigröße zählt also immer die tatsächliche Bitrate, nicht die Pixelzahl auf dem Papier.',
+      },
+      {
+        typ: 'text',
+        titel: 'Was Bitrate bedeutet — und CBR gegen VBR',
+        html: `<p>Die <strong>Bitrate</strong> beschreibt, wie viele Daten pro Sekunde Video gespeichert werden. Eine höhere Bitrate bedeutet mehr Details, weniger Komprimierungsartefakte — und eine größere Datei. Sie ist der wichtigste Hebel für Qualität und Größe zugleich. Gemessen wird sie meist in Megabit pro Sekunde; wie sich die zugrunde liegenden Datenmengen umrechnen, zeigt der <a href="/technik/datenmengen-umrechner">Datenmengen-Umrechner</a>.</p><p>Zwei Verfahren sind verbreitet: Bei <strong>konstanter Bitrate (CBR)</strong> bleibt der Datenstrom gleichmäßig — gut für Live-Streaming, weil die Größe exakt planbar ist. Bei <strong>variabler Bitrate (VBR)</strong> passt der Encoder die Datenmenge an den Inhalt an: Ruhige Szenen bekommen weniger, actionreiche mehr Daten. Das liefert bei gleicher Dateigröße meist die bessere Qualität, macht die exakte Größe aber schwerer vorhersagbar. Die Rechnung in diesem Werkzeug geht von einer durchschnittlichen Bitrate aus und trifft damit beide Verfahren als realistische Schätzung — die tatsächliche Datei kann je nach Inhalt etwas kleiner oder größer ausfallen.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Empfohlene Bitrate je Auflösung',
+        kopf: ['Auflösung', 'Bitrate (Richtwert)', 'Typischer Einsatz'],
+        zeilen: [
+          ['720p (HD)', '5 Mbit/s', 'einfache Clips, ältere Geräte'],
+          ['1080p (Full HD)', '8 Mbit/s', 'Standard für Web und Streaming'],
+          ['1080p60', '12 Mbit/s', 'flüssige Bewegung, Gaming'],
+          ['1440p (QHD)', '16 Mbit/s', 'hochwertige Monitore'],
+          ['4K', '45 Mbit/s', 'moderne TVs, YouTube 4K'],
+          ['4K60', '68 Mbit/s', 'Sport, schnelle Action'],
+          ['8K', '100 Mbit/s', 'Profi, Zukunftssicherheit'],
+        ],
+        fussnote: 'Richtwerte für gute Streaming-Qualität mit H.264/H.265. Auffällig ist der große Sprung von 1080p (8 Mbit/s) zu 4K (45 Mbit/s) — die vierfache Pixelzahl verlangt rund die fünf- bis sechsfache Bitrate. Wer mit modernen Codecs wie H.265 oder AV1 arbeitet, kommt bei gleicher Qualität mit niedrigeren Werten aus. Die tatsächlich nötige Bitrate hängt zusätzlich vom Bildinhalt ab: Viel Bewegung und feine Strukturen brauchen mehr Daten. Diese Werte beziehen sich auf eine angenehme Streaming-Qualität; für die Archivierung oder professionelle Nachbearbeitung werden oft deutlich höhere Bitraten gewählt, um Reserven zu behalten. Wer einfach nur ein Video für Familie oder Web teilen will, kommt mit den genannten Richtwerten dagegen bestens aus.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Eine Stunde 4K bei 45 Mbit/s',
+        schritte: [
+          { label: 'Länge in Sekunden', formel: '60 min × 60', ergebnis: '3.600 s' },
+          { label: 'Größe in MB', formel: '45 Mbit/s × 3.600 s ÷ 8', ergebnis: '20.250 MB' },
+          { label: 'In Gigabyte', formel: '20.250 ÷ 1.000', ergebnis: '≈ 20,3 GB' },
+        ],
+        fazit: 'Eine Stunde 4K-Video bei 45 Mbit/s belegt rund 20,3 GB — etwa das Fünffache derselben Stunde in 1080p (rund 3,6 GB). Das zeigt eindrücklich, warum 4K-Aufnahmen Speicher fressen: Nicht die Auflösung an sich, sondern die für scharfes 4K nötige hohe Bitrate treibt die Größe. Eine 64-GB-Speicherkarte reicht damit nur für gut drei Stunden 4K, während sie in 1080p rund 17 Stunden fasst. Wer länger in hoher Auflösung filmt, sollte Karten und Cloud-Speicher entsprechend großzügig einplanen.',
+      },
+      {
+        typ: 'tabelle',
+        titel: '10-Minuten-Clip: Größe je Auflösung',
+        kopf: ['Auflösung', 'Bitrate', 'Größe (10 min)'],
+        zeilen: [
+          ['720p', '5 Mbit/s', '375 MB'],
+          ['1080p', '8 Mbit/s', '600 MB'],
+          ['1080p60', '12 Mbit/s', '900 MB'],
+          ['1440p', '16 Mbit/s', '1,2 GB'],
+          ['4K', '45 Mbit/s', '3,4 GB'],
+          ['4K60', '68 Mbit/s', '5,1 GB'],
+          ['8K', '100 Mbit/s', '7,5 GB'],
+        ],
+        fussnote: 'Dateigröße eines zehnminütigen Clips bei der jeweils typischen Bitrate. Der Unterschied ist enorm: Ein 8K-Clip ist mit 7,5 GB rund zwanzigmal so groß wie derselbe Clip in 720p. Die Werte skalieren linear mit der Länge — ein Fünf-Minuten-Clip ist halb so groß, ein 20-Minüter doppelt so groß. So lässt sich aus dieser Tabelle die Größe beliebiger Aufnahmen schnell überschlagen. Praktisch als Merkregel: 1080p belegt rund 60 MB pro Minute, 4K rund 340 MB pro Minute. Wer diese beiden Zahlen im Kopf hat, kann den Speicherbedarf einer Aufnahme schon vor dem Dreh grob abschätzen, ohne jedes Mal zu rechnen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Der Codec entscheidet mit',
+        html: `<p>Die Bitrate allein bestimmt die Dateigröße, doch welche Bitrate für eine bestimmte Qualität nötig ist, hängt stark vom <strong>Codec</strong> ab — dem Verfahren, mit dem das Video komprimiert wird. Der weit verbreitete <strong>H.264</strong> (AVC) ist überall abspielbar, aber nicht der effizienteste. <strong>H.265</strong> (HEVC) liefert bei gleicher Qualität rund 30 bis 50 Prozent kleinere Dateien.</p><p>Noch effizienter ist der lizenzfreie <strong>AV1</strong>, der vor allem von Streaming-Diensten und neueren Geräten genutzt wird. Konkret heißt das: Dasselbe Video sieht mit H.265 bei halber Bitrate genauso gut aus wie mit H.264 — und ist entsprechend kleiner. Die in den Tabellen genannten Richtwerte gelten für H.264/H.265; mit AV1 lassen sie sich oft noch unterbieten. Der Haken: Effizientere Codecs brauchen mehr Rechenleistung beim Kodieren und Abspielen, und ältere Geräte unterstützen sie nicht immer. Wer maximale Kompatibilität braucht, bleibt bei H.264; wer Speicher sparen will, wählt H.265 oder AV1. Deshalb sind alle Größenangaben Richtwerte und keine festen Zahlen.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Speicherkarten-Praxis: 90 Minuten 4K',
+        schritte: [
+          { label: 'Länge in Sekunden', formel: '90 min × 60', ergebnis: '5.400 s' },
+          { label: 'Größe in MB', formel: '45 Mbit/s × 5.400 s ÷ 8', ergebnis: '30.375 MB' },
+          { label: 'In Gigabyte', formel: '30.375 ÷ 1.000', ergebnis: '≈ 30,4 GB' },
+        ],
+        fazit: 'Ein 90-minütiger 4K-Film bei 45 Mbit/s belegt rund 30,4 GB — er passt damit knapp auf eine 32-GB-Speicherkarte, lässt aber kaum Reserve. Umgekehrt gerechnet: Eine 128-GB-Karte fasst bei dieser Bitrate rund sechseinhalb Stunden 4K-Material am Stück. Solche Überschläge helfen bei der Reise- oder Drehplanung — etwa um zu entscheiden, ob eine Karte für einen Drehtag reicht oder ob man zwischendurch sichern muss. Wer auf Nummer sicher geht, plant immer etwas Puffer ein, weil hohe Bewegung im Bild die tatsächliche Bitrate über den Richtwert treiben kann.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Videogröße gezielt reduzieren',
+        punkte: [
+          'Die Bitrate senken — der direkteste Hebel, kostet aber Bilddetails.',
+          'Auflösung oder Bildrate (FPS) anpassen, wenn 4K oder 60 fps nicht nötig sind.',
+          'Einen modernen Codec wählen (H.265 oder AV1) statt älterem H.264.',
+          'Unnötige Passagen herausschneiden — kürzere Videos sind direkt kleiner.',
+          'Zwei-Pass-Encoding nutzen für die beste Qualität bei vorgegebener Größe.',
+          'Für reine Web-Nutzung gezielt komprimieren statt die Rohdatei hochzuladen.',
+          'Vor dem Export die Zielplattform prüfen — viele komprimieren ohnehin noch einmal nach.',
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Plattform-Vorgaben und Upload',
+        html: `<p>Jede Plattform hat eigene Vorstellungen von Bitrate und Format. <strong>YouTube</strong> empfiehlt für den Upload bewusst höhere Bitraten (etwa 8 Mbit/s für 1080p, 35 bis 45 Mbit/s für 4K), weil das Video nach dem Hochladen noch einmal komprimiert wird — eine gute Ausgangsqualität überlebt diesen Schritt besser. <strong>Instagram</strong> und <strong>TikTok</strong> dagegen komprimieren sehr stark nach, sodass extrem hohe Bitraten dort kaum sichtbaren Mehrwert bringen.</p><p>Für die Praxis heißt das: Lieber in solider Qualität exportieren, als die Datei künstlich aufzublähen. Wichtig ist neben der Größe auch die <strong>Upload-Zeit</strong>, denn die hängt vom schmaleren Upload-Kanal des Internetanschlusses ab — ein großes 4K-Video kann beim Hochladen länger brauchen als beim späteren Herunterladen. Wie lange das dauert, lässt sich mit dem <a href="/technik/download-rechner">Download-Rechner</a> abschätzen, der dieselbe Bit-Byte-Logik nutzt. Wer regelmäßig hochlädt, plant die Übertragungszeit am besten gleich mit ein.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Warum dein Download oft kleiner ist als die Rohaufnahme',
+        html: `<p>Es überrascht viele: Ein 4K-Film, den man bei einem Streaming-Dienst herunterlädt, ist oft deutlich kleiner als die Rohaufnahme derselben Länge aus einer Kamera. Der Grund liegt in der <strong>Komprimierung</strong>. Streaming-Anbieter optimieren ihre Dateien mit effizienten Codecs und sorgfältig abgestimmten Bitraten, um bei guter Bildqualität möglichst wenig Daten zu übertragen.</p><p>Eine Kamera dagegen zeichnet mit hoher Bitrate auf, um beim späteren Schnitt maximale Reserven zu haben — diese Rohdateien sind bewusst groß. Zwischen einer professionellen <strong>Rohaufnahme</strong> und der fertig komprimierten <strong>Streaming-Datei</strong> kann der Faktor leicht bei fünf bis zehn liegen. Die hier berechneten Werte beziehen sich auf eine fertig kodierte Datei mit der angegebenen Bitrate und liegen damit zwischen diesen Extremen. Wer die Größe einer konkreten Datei genau wissen will, schaut am verlässlichsten in die Dateieigenschaften — die Rechnung liefert die belastbare Schätzung, wenn die Datei noch gar nicht existiert, etwa bei der Planung von Aufnahmen oder Speicherbedarf.</p>`,
+      },
+    ],
+    quellen: [
+      {
+        titel: 'Video-Bitrate & Codecs (H.264/H.265/AV1)',
+        hinweis: 'Bei gleicher Bildqualität liefern neuere Codecs deutlich kleinere Dateien; angegebene Bitraten sind Richtwerte für H.264/H.265.',
+      },
+      {
+        titel: 'Einheiten Bit/Byte',
+        hinweis: 'Bitraten in Mbit/s, Dateigrößen in MB/GB — Umrechnung über Faktor 8 (1 Byte = 8 Bit).',
+      },
+    ],
+  },
+  {
     slug: 'datenmengen-umrechner',
     letzteAktualisierung: '2026-06-19',
     titel: 'Datenmengen-Umrechner',
