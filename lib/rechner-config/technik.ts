@@ -854,6 +854,167 @@ Kennt man das gewünschte Verhältnis und eine Seite, ergibt sich die andere dur
     ],
   },
   {
+    slug: 'dpi-druck-rechner',
+    letzteAktualisierung: '2026-06-30',
+    titel: 'DPI-Rechner & Druckgröße',
+    beschreibung: 'Druckgröße aus Pixeln und DPI berechnen oder die nötige Auflösung für ein Druckformat bestimmen — A4, Foto, Poster.',
+    kategorie: 'Technik',
+    kategorieSlug: 'technik',
+    metaTitle: 'DPI-Rechner — Druckgröße & Auflösung',
+    metaDescription: 'DPI-Rechner: Druckgröße aus Pixeln und DPI berechnen oder die nötige Auflösung fürs Druckformat — A4, Foto, Poster, mit Rechenweg.',
+    keywords: ['dpi rechner', 'druckgröße pixel', 'ppi druck', 'a4 auflösung dpi', 'pixel in cm', 'druckauflösung berechnen', '300 dpi pixel', 'foto drucken auflösung'],
+    icon: '🖨️',
+    formel: 'Druckgröße (cm) = Pixel ÷ DPI × 2,54 | Nötige Pixel = Druckgröße(cm) ÷ 2,54 × DPI',
+    beispiel: '6.000 × 4.000 px @ 300 dpi: 6.000 ÷ 300 × 2,54 = 50,8 cm breit, 4.000 ÷ 300 × 2,54 = 33,9 cm hoch.',
+    erklaerung: `**DPI und Druckgröße berechnen — wie viele Pixel braucht ein Druck?**
+
+DPI (dots per inch) gibt an, wie viele Bildpunkte pro Zoll gedruckt werden. Die Druckdichte entscheidet, wie groß und wie scharf ein Bild auf Papier erscheint. Dieser Rechner ermittelt aus Pixelmaßen und DPI die physische Druckgröße in Zentimetern — und umgekehrt die nötige Pixelzahl für ein gewünschtes Druckformat.
+
+**Von Pixeln zur Druckgröße**
+
+Die Formel lautet: Druckgröße in cm = Pixel ÷ DPI × 2,54 (ein Zoll entspricht 2,54 cm). Ein 6.000 Pixel breites Bild druckt bei 300 dpi also 6.000 ÷ 300 × 2,54 = 50,8 cm breit — größer als A3. Dasselbe Bild bei nur 72 dpi würde über zwei Meter breit, aber grob und unscharf.
+
+**DPI ist keine Bildeigenschaft**
+
+Wichtig: Die DPI-Angabe in einer Bilddatei ändert die Pixel nicht. Sie ist nur ein Hinweis für den Druck. Entscheidend für die mögliche Druckgröße ist allein die Pixelzahl. Ein 6.000-Pixel-Bild lässt sich klein und scharf oder groß und grob drucken — die DPI legen nur fest, auf welche Fläche die vorhandenen Pixel verteilt werden.
+
+**Web 72, Druck 300**
+
+Für die Bildschirmanzeige ist DPI bedeutungslos — dort zählt nur die Pixelzahl. Für scharfen Fotodruck aus Leseabstand gelten 300 dpi als Richtwert. Bei Postern, die man aus Distanz betrachtet, genügen 150 dpi oder weniger.`,
+    faq: [
+      {
+        frage: 'Wie viele Pixel braucht A4 in Druckqualität?',
+        antwort: 'Für A4 (21 × 29,7 cm) bei 300 dpi sind es exakt 2.480 × 3.508 Pixel, also rund 8,7 Megapixel. Die Rechnung: 21 ÷ 2,54 × 300 = 2.480 und 29,7 ÷ 2,54 × 300 = 3.508. Schon eine einfache 12-Megapixel-Kamera liefert damit genug Auflösung für einen scharfen A4-Druck.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen DPI und PPI?',
+        antwort: 'PPI (pixels per inch) bezeichnet die Pixeldichte einer Bilddatei oder eines Bildschirms, DPI (dots per inch) die Tintenpunkte eines Druckers. Im Alltag werden beide oft synonym verwendet. Für die Druckgröße-Berechnung ist der Unterschied unerheblich — entscheidend ist die Pixelzahl des Bildes im Verhältnis zur gewünschten Größe.',
+      },
+      {
+        frage: 'Reicht mein Handyfoto für ein Poster?',
+        antwort: 'Das hängt von der Postergröße und dem Betrachtungsabstand ab. Ein 12-Megapixel-Foto (4.000 × 3.000 px) reicht bei 150 dpi für rund 67 × 50 cm — also ein ordentliches Poster, das man aus etwas Abstand betrachtet. Für gestochen scharfen Fotodruck bei 300 dpi wäre dasselbe Bild nur bis etwa 34 × 25 cm geeignet.',
+      },
+      {
+        frage: 'Warum wird mein Bild beim Drucken unscharf?',
+        antwort: 'Meist, weil zu wenige Pixel auf zu große Fläche verteilt werden. Wird ein kleines Bild stark vergrößert gedruckt, sinkt die effektive DPI unter die Druckqualität und einzelne Pixel werden sichtbar. Hochskalieren im Bildprogramm hilft nicht, da keine echten Details hinzukommen — es werden nur vorhandene Pixel interpoliert.',
+      },
+      {
+        frage: 'Welche DPI brauche ich für welchen Zweck?',
+        antwort: 'Für die Bildschirmanzeige ist DPI egal, dort zählt nur die Pixelzahl. Für Fotodruck und Hochglanz gelten 300 dpi, für Poster aus normalem Abstand reichen 150 bis 200 dpi, für Großflächenwerbung oder Banner aus großer Distanz genügen 72 bis 150 dpi. Je größer der Betrachtungsabstand, desto weniger DPI sind nötig.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was DPI bedeutet',
+        html: `<p><strong>DPI</strong> steht für „dots per inch", also Bildpunkte pro Zoll. Der Wert gibt an, wie dicht die Pixel beim Druck auf dem Papier sitzen — und bestimmt damit, wie groß und wie scharf ein Bild gedruckt erscheint. Je höher die DPI, desto kleiner und feiner der Druck; je niedriger, desto größer und gröber.</p><p>Die Grundformel ist einfach: <strong>Druckgröße in Zentimetern = Pixel ÷ DPI × 2,54</strong>, weil ein Zoll genau 2,54 cm entspricht. Ein Bild mit 6.000 Pixeln Breite ergibt bei 300 dpi eine Druckbreite von 6.000 ÷ 300 × 2,54 = 50,8 cm. Umgekehrt lässt sich auch die nötige Pixelzahl für ein gewünschtes Format berechnen, indem man die Größe in cm durch 2,54 teilt und mit der DPI multipliziert. Dieser Rechner beherrscht beide Richtungen und ordnet das Ergebnis zusätzlich einer Qualitätsstufe zu — von der Bildschirm-Vorschau bis zum hochwertigen Fotodruck.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Der DPI-Mythos: die Zahl in der Datei ändert nichts',
+        text: 'Ein weit verbreiteter Irrtum: Die „72 dpi"- oder „300 dpi"-Angabe, die in einer Bilddatei gespeichert ist, würde die Bildqualität bestimmen. Das stimmt nicht. Diese Zahl ändert kein einziges Pixel — sie ist nur ein Hinweis für das Druckprogramm, wie groß das Bild standardmäßig ausgegeben werden soll. Entscheidend für die mögliche Druckgröße ist allein die tatsächliche Pixelzahl. Ein Foto mit 6.000 × 4.000 Pixeln kann als winziges scharfes Bildchen oder als großes grobes Poster gedruckt werden — die DPI legen nur fest, auf welche Fläche dieselben Pixel verteilt werden. Wer ein Bild fürs Web auf „72 dpi" stellt, verschlechtert es also nicht; und wer es auf „300 dpi" stellt, verbessert es nicht. Was zählt, sind die Pixel. Deshalb sollte man beim Beurteilen eines Bildes immer die Auflösung in Pixeln betrachten, nicht die DPI-Angabe in den Metadaten.',
+      },
+      {
+        typ: 'text',
+        titel: 'Web 72, Druck 300 — warum der Unterschied?',
+        html: `<p>Für die Anzeige auf einem <strong>Bildschirm</strong> ist DPI bedeutungslos: Ein Monitor zeigt schlicht so viele Pixel, wie das Bild hat. Ein Foto mit 1.920 Pixeln Breite füllt einen Full-HD-Monitor exakt aus — egal, ob in den Metadaten „72" oder „300" steht. Fürs Web genügen daher Pixel in der Größe, in der das Bild angezeigt wird; die historische „72 dpi"-Angabe ist nur ein Relikt.</p><p>Beim <strong>Druck</strong> dagegen wird das Bild auf eine feste physische Fläche gebracht, und hier zählt die Dichte. Aus normalem Leseabstand kann das menschliche Auge bei etwa <strong>300 dpi</strong> keine einzelnen Punkte mehr unterscheiden — das gilt als Schwelle zur Fotoqualität. Weniger DPI bedeuten sichtbare Pixel oder Unschärfe, mehr bringen fürs Auge kaum Gewinn. Deshalb ist 300 dpi der gängige Zielwert für Fotos und Broschüren. Wer vorab das passende Bildformat festlegen will, findet im <a href="/technik/aufloesung-seitenverhaeltnis-rechner">Seitenverhältnis-Rechner</a> die nötige Ergänzung, damit der Druck ohne Verzerrung und ohne Beschnitt gelingt.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '6.000 × 4.000 px bei 300 dpi drucken',
+        schritte: [
+          { label: 'Breite in cm', formel: '6.000 px ÷ 300 dpi × 2,54', ergebnis: '50,8 cm' },
+          { label: 'Höhe in cm', formel: '4.000 px ÷ 300 dpi × 2,54', ergebnis: '33,9 cm' },
+        ],
+        fazit: 'Ein 24-Megapixel-Foto (6.000 × 4.000 px) druckt bei 300 dpi scharf bis rund 50,8 × 33,9 cm — also größer als A3. Die Rechnung teilt die Pixelzahl durch die DPI (das ergibt die Größe in Zoll) und multipliziert mit 2,54 (das ergibt Zentimeter). Dasselbe Bild bei nur 72 dpi würde rechnerisch über zwei Meter breit, wäre dann aber grob und unscharf, weil dieselben Pixel auf eine viel größere Fläche verteilt würden. Die Pixelzahl bleibt gleich, allein die DPI verschieben die mögliche Druckgröße.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'A4 in Druckqualität: wie viele Pixel?',
+        schritte: [
+          { label: 'Breite in Pixel', formel: '21 cm ÷ 2,54 × 300 dpi', ergebnis: '2.480 px' },
+          { label: 'Höhe in Pixel', formel: '29,7 cm ÷ 2,54 × 300 dpi', ergebnis: '3.508 px' },
+          { label: 'Gesamtauflösung', formel: '2.480 × 3.508', ergebnis: '≈ 8,7 MP' },
+        ],
+        fazit: 'Ein A4-Blatt (21 × 29,7 cm) braucht bei 300 dpi exakt 2.480 × 3.508 Pixel, also rund 8,7 Megapixel. Das ist der DIN-Druckstandard, der hinter vielen Vorlagen steckt. Die gute Nachricht: Schon eine einfache 12-Megapixel-Kamera oder ein modernes Smartphone liefert genug Auflösung für einen gestochen scharfen A4-Druck. Für A3 verdoppelt sich die Fläche und damit der Pixelbedarf auf rund 17,4 Megapixel. Wer also nur A4 drucken will, braucht keine teure Hochauflösungskamera — die Reserven moderner Sensoren reichen längst aus.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Welche Pixelzahl für welches Format bei 300 dpi',
+        kopf: ['Format', 'Größe (cm)', 'Pixel bei 300 dpi', 'Megapixel'],
+        zeilen: [
+          ['Foto 10 × 15', '10 × 15', '1.181 × 1.772', '2,1 MP'],
+          ['A5', '14,8 × 21', '1.748 × 2.480', '4,3 MP'],
+          ['A4', '21 × 29,7', '2.480 × 3.508', '8,7 MP'],
+          ['A3', '29,7 × 42', '3.508 × 4.961', '17,4 MP'],
+          ['A2-Poster', '42 × 59,4', '4.961 × 7.016', '34,8 MP'],
+        ],
+        fussnote: 'Nötige Auflösung für gängige Druckformate bei 300 dpi (Fotoqualität). Mit jeder DIN-Stufe nach oben verdoppelt sich die Fläche und damit auch die benötigte Pixelzahl. Reicht die vorhandene Auflösung nicht für 300 dpi, lässt sich das Format trotzdem drucken — dann sinkt aber die effektive Dichte, und das Bild wird aus der Nähe unschärfer. Bei größerem Betrachtungsabstand ist das oft unproblematisch.',
+      },
+      {
+        typ: 'text',
+        titel: 'Qualitätsstufen: der Betrachtungsabstand zählt',
+        html: `<p>Wie viele DPI ein Druck braucht, hängt weniger vom Format ab als vom <strong>Betrachtungsabstand</strong>. Grob gelten vier Stufen: Ab <strong>300 dpi</strong> ist Fotodruck- und Hochglanzqualität erreicht — scharf auch beim genauen Hinsehen. <strong>150 bis 300 dpi</strong> liefern guten Druck und Poster, die man aus etwas Abstand betrachtet.</p><p><strong>72 bis 150 dpi</strong> genügen für Großflächenwerbung und Banner, die ohnehin aus mehreren Metern gesehen werden, und <strong>unter 72 dpi</strong> taugen nur für Bildschirm und Vorschau. Der Grund ist das Auflösungsvermögen des Auges: Aus großer Entfernung kann es feine Punkte nicht mehr trennen, weshalb eine Plakatwand an der Autobahn teils mit nur 10 bis 20 dpi gedruckt wird und trotzdem scharf wirkt. Eine Visitenkarte hingegen, die man in der Hand hält, braucht die vollen 300 dpi. Die Faustregel lautet daher: Je näher das Bild betrachtet wird, desto höher muss die Druckdichte sein — und desto mehr Pixel werden gebraucht.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Reicht mein Bild? Maximale Druckgröße je Auflösung',
+        kopf: ['Vorhandene Pixel', 'Megapixel', 'Max. bei 300 dpi', 'Max. bei 150 dpi'],
+        zeilen: [
+          ['1.920 × 1.080', '2,1 MP', '16,3 × 9,1 cm', '32,5 × 18,3 cm'],
+          ['4.000 × 3.000', '12 MP', '33,9 × 25,4 cm', '67,7 × 50,8 cm'],
+          ['6.000 × 4.000', '24 MP', '50,8 × 33,9 cm', '101,6 × 67,7 cm'],
+          ['8.000 × 6.000', '48 MP', '67,7 × 50,8 cm', '135,5 × 101,6 cm'],
+        ],
+        fussnote: 'Maximale sinnvolle Druckgröße bei voller Schärfe (300 dpi) und bei Poster-Qualität (150 dpi). Ein Full-HD-Bild reicht damit nur für kleine Abzüge, während ein 24-Megapixel-Foto bereits ein gutes A3-Plakat ermöglicht. Bei 150 dpi verdoppelt sich die mögliche Kantenlänge, weil dieselben Pixel auf die doppelte Fläche verteilt werden — vertretbar, solange das Ergebnis aus Abstand betrachtet wird. Als schnelle Orientierung gilt: Megapixel grob durch 8 teilen ergibt die Fläche in Quadratdezimetern bei 300 dpi. Wer also die genaue Grenze wissen will, gibt seine Pixelmaße einfach oben in den Rechner ein und liest die maximale Druckgröße direkt ab.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Poster 60 × 90 cm: reichen 150 dpi?',
+        schritte: [
+          { label: 'Breite in Pixel', formel: '60 cm ÷ 2,54 × 150 dpi', ergebnis: '3.543 px' },
+          { label: 'Höhe in Pixel', formel: '90 cm ÷ 2,54 × 150 dpi', ergebnis: '5.315 px' },
+          { label: 'Gesamtauflösung', formel: '3.543 × 5.315', ergebnis: '≈ 18,8 MP' },
+        ],
+        fazit: 'Für ein großes 60 × 90-cm-Poster genügen bei 150 dpi rund 3.543 × 5.315 Pixel, also etwa 18,8 Megapixel — deutlich weniger, als 300 dpi verlangen würden (dann wären es rund 75 Megapixel). Der Grund: Ein Poster betrachtet man aus ein bis zwei Metern Abstand, und auf diese Distanz reichen 150 dpi für einen scharfen Eindruck völlig aus. Wer also ein Poster drucken lassen will, braucht keine extrem hochauflösende Vorlage — eine gute 20-Megapixel-Kamera genügt. Erst beim Druck, den man aus nächster Nähe betrachtet, lohnen sich die vollen 300 dpi.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Vor dem Druck prüfen',
+        punkte: [
+          'Die Pixelzahl des Bildes prüfen, nicht die DPI-Angabe in den Metadaten.',
+          'Zielformat und Betrachtungsabstand festlegen — daraus ergibt sich die nötige DPI.',
+          'Das Bild nicht hochskalieren oder interpolieren; echte Details kommen dabei nicht hinzu.',
+          'Im richtigen Farbraum arbeiten (für Druck meist CMYK statt RGB).',
+          'Etwas Beschnitt (Rand) einplanen, damit beim Schneiden kein Motiv verloren geht.',
+          'Bei wichtigen Aufträgen einen Probedruck oder Soft-Proof machen.',
+          'Im Zweifel die native Auflösung behalten und erst fürs Ziel herunterrechnen.',
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'DPI, PPI und LPI — die feinen Unterschiede',
+        html: `<p>Im Alltag werden die Begriffe oft vermischt, genau genommen meinen sie aber Verschiedenes. <strong>PPI</strong> (pixels per inch) beschreibt die Pixeldichte einer Bilddatei oder eines Bildschirms — also die Welt der Pixel. <strong>DPI</strong> (dots per inch) bezieht sich auf die einzelnen Tintenpunkte eines Druckers, der für ein einziges Pixel oft mehrere Farbpunkte setzt.</p><p><strong>LPI</strong> (lines per inch) schließlich beschreibt das Raster im professionellen Offsetdruck. Für die Praxis der Druckgröße-Berechnung ist die Unterscheidung jedoch zweitrangig: Entscheidend bleibt das Verhältnis von Pixelzahl zur gewünschten physischen Größe. Wer ein Bild mit ausreichend Pixeln für die Zielgröße hat, bekommt einen scharfen Druck — unabhängig davon, ob man den Wert nun PPI oder DPI nennt. Wie viele Megapixel eine Auflösung ergibt und welche Druckgröße daraus folgt, lässt sich auch direkt mit dem <a href="/technik/megapixel-rechner">Megapixel-Rechner</a> bestimmen, der dieselbe Logik aus Sicht der Gesamtpixelzahl betrachtet.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Hochskalieren bringt keine echten Details',
+        html: `<p>Reicht die Auflösung nicht für die gewünschte Druckgröße, liegt der Gedanke nahe, das Bild im Bearbeitungsprogramm einfach <strong>hochzurechnen</strong>. Das funktioniert jedoch nur begrenzt: Beim Hochskalieren werden vorhandene Pixel <strong>interpoliert</strong>, also Zwischenwerte geschätzt — echte neue Details entstehen dabei nicht. Aus einem unscharfen kleinen Bild wird so ein größeres, aber immer noch unscharfes Bild.</p><p>Moderne <strong>KI-Upscaler</strong> können erstaunlich gute Ergebnisse liefern, indem sie plausible Details ergänzen, doch auch sie erfinden Informationen, die im Original nicht vorhanden waren — bei feinen Strukturen oder Text stößt das an Grenzen. Die zuverlässigste Lösung bleibt deshalb, von Anfang an mit ausreichender <strong>nativer Auflösung</strong> zu arbeiten: lieber etwas höher aufnehmen und später herunterrechnen, als knapp kalkulieren und am Ende vergrößern zu müssen. Wer die nötige Auflösung vorab mit diesem Rechner bestimmt, weiß genau, welche Pixelzahl das Ausgangsbild mitbringen muss — und erspart sich die Enttäuschung eines unscharfen Drucks.</p>`,
+      },
+    ],
+    quellen: [
+      {
+        titel: 'DIN 476 / ISO 216 (A-Papierformate)',
+        hinweis: 'A4 = 21,0 × 29,7 cm; daraus folgen bei 300 dpi exakt 2.480 × 3.508 Pixel.',
+      },
+      {
+        titel: 'Auflösung & Betrachtungsabstand (Druckpraxis)',
+        hinweis: 'Für Fotodruck gelten ~300 dpi als Richtwert; bei großem Betrachtungsabstand (Poster, Plakat) genügen 100–150 dpi.',
+      },
+    ],
+  },
+  {
     slug: 'datenmengen-umrechner',
     letzteAktualisierung: '2026-06-19',
     titel: 'Datenmengen-Umrechner',
