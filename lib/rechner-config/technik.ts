@@ -1344,6 +1344,162 @@ Ein Netzteil zieht nie mehr, als der PC tatsächlich braucht — eine 600-W-PSU 
     ],
   },
   {
+    slug: 'usv-laufzeit-rechner',
+    letzteAktualisierung: '2026-06-30',
+    titel: 'USV-Laufzeit-Rechner',
+    beschreibung: 'USV-Laufzeit berechnen: Wie lange überbrückt eine USV einen Stromausfall bei gegebener Last? Mit VA-zu-Watt-Umrechnung und Akku-Kapazität.',
+    kategorie: 'Technik',
+    kategorieSlug: 'technik',
+    metaTitle: 'USV-Laufzeit-Rechner — Überbrückungszeit',
+    metaDescription: 'USV-Laufzeit berechnen: Wie lange überbrückt eine USV den Stromausfall bei gegebener Last? Mit VA-zu-Watt-Umrechnung und Rechenweg.',
+    keywords: ['usv laufzeit', 'ups laufzeit berechnen', 'va in watt', 'überbrückungszeit usv', 'usv akku laufzeit', 'usv dimensionieren', 'unterbrechungsfreie stromversorgung laufzeit', 'usv watt'],
+    icon: '🔋',
+    formel: 'Laufzeit (min) = Kapazität(Wh) × Wirkungsgrad ÷ Last(W) × 60 | W = VA × Leistungsfaktor | Wh = V × Ah',
+    beispiel: '216-Wh-USV bei 200 W: 216 × 0,9 ÷ 200 × 60 = 58,3 min Überbrückung.',
+    erklaerung: `**USV-Laufzeit berechnen — wie lange überbrückt eine USV den Stromausfall?**
+
+Eine USV (unterbrechungsfreie Stromversorgung, englisch UPS) hält Geräte bei einem Stromausfall am Laufen — lange genug, um Daten zu sichern und sauber herunterzufahren oder eine kurze Lücke ganz zu überbrücken. Wie lange das gelingt, hängt von der Akku-Kapazität und der angeschlossenen Last ab. Dieser Rechner ermittelt die Überbrückungszeit und rechnet dabei auch VA in Watt um.
+
+**Die Rechnung**
+
+Laufzeit in Minuten = Akku-Kapazität (Wh) × Wirkungsgrad ÷ Last (W) × 60. Der Wirkungsgrad (standardmäßig 0,9) berücksichtigt die Verluste des Wechselrichters. Eine 216-Wh-USV bei 200 W Last überbrückt also 216 × 0,9 ÷ 200 × 60 = rund 58 Minuten.
+
+**VA ist nicht Watt**
+
+USV-Geräte tragen meist eine VA-Angabe (Scheinleistung), etwa „1500 VA". Nutzbar ist davon nur die Wirkleistung in Watt: W = VA × Leistungsfaktor. Bei älteren Geräten liegt dieser Faktor oft bei 0,6, sodass aus 1500 VA nur 900 W werden. Wer mit der VA-Zahl statt mit Watt rechnet, schätzt die Laufzeit deutlich zu optimistisch.
+
+**Akku-Kapazität selbst bestimmen**
+
+Steht die Wh-Zahl nicht auf dem Gerät, lässt sie sich aus dem Akku berechnen: Wh = Spannung (V) × Kapazität (Ah). Ein 24-V-Akku mit 9 Ah hat also 216 Wh.`,
+    faq: [
+      {
+        frage: 'Was bedeutet VA bei einer USV?',
+        antwort: 'VA steht für Voltampere, die Scheinleistung. Sie ist die auf dem Gerät beworbene Maximalleistung. Nutzbar ist davon nur die Wirkleistung in Watt: W = VA × Leistungsfaktor. Bei älteren USV liegt dieser Faktor oft bei 0,6, bei modernen bei 0,9 bis 1,0. Eine 1500-VA-USV liefert also je nach Faktor zwischen 900 und 1500 W.',
+      },
+      {
+        frage: 'Wie lange hält eine USV bei Stromausfall?',
+        antwort: 'Das hängt von Akku-Kapazität und Last ab. Eine typische 1500-VA-Tower-USV mit rund 216 Wh überbrückt bei 200 W Last etwa 58 Minuten, bei 600 W nur noch rund 19 Minuten. USV sind meist nicht für stundenlangen Betrieb gedacht, sondern für die Zeit bis zum geordneten Herunterfahren oder zum Überbrücken kurzer Ausfälle.',
+      },
+      {
+        frage: 'Wofür braucht man eine USV?',
+        antwort: 'Eine USV schützt vor Datenverlust und Hardwareschäden bei Stromausfällen und Spannungsschwankungen. Besonders sinnvoll ist sie für NAS-Systeme, Heimserver, Arbeitsplätze mit ungespeicherten Daten und Netzwerktechnik (Router, ONT) im Homeoffice. Sie verschafft die Zeit, kritische Systeme sauber herunterzufahren, statt sie hart abstürzen zu lassen.',
+      },
+      {
+        frage: 'Warum fällt die Laufzeit bei doppelter Last nicht genau auf die Hälfte?',
+        antwort: 'Grob gilt: doppelte Last, halbe Laufzeit. Bei hoher Last sinkt jedoch zusätzlich der nutzbare Akku-Wirkungsgrad (Peukert-Effekt), sodass die Laufzeit etwas stärker fällt als rein rechnerisch. Bei sehr niedriger Last spielen dagegen die Grundverluste der USV-Elektronik eine größere Rolle. Die Berechnung liefert daher eine gute Näherung, keinen Laborwert.',
+      },
+      {
+        frage: 'Wie groß muss meine USV sein?',
+        antwort: 'Summieren Sie die reale Watt-Last aller kritischen Geräte und legen Sie die gewünschte Überbrückungszeit fest. Schließen Sie nur an, was wirklich geschützt werden muss — Laserdrucker etwa gehören nie an eine USV, weil ihre Heizung kurzzeitig sehr hohe Lasten zieht. Planen Sie zudem etwas Reserve für die Akku-Alterung ein.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was eine USV macht und wie die Laufzeit entsteht',
+        html: `<p>Eine <strong>USV</strong> (unterbrechungsfreie Stromversorgung) springt bei einem Stromausfall sofort ein und versorgt die angeschlossenen Geräte aus ihrem Akku weiter. Ziel ist meist nicht stundenlanger Betrieb, sondern eine sichere <strong>Überbrückung</strong>: genug Zeit, um Daten zu speichern und Systeme geordnet herunterzufahren — oder um kurze Ausfälle ganz unbemerkt zu überstehen.</p><p>Wie lange das gelingt, ergibt sich aus zwei Werten: der <strong>Akku-Kapazität</strong> in Wattstunden (Wh) und der angeschlossenen <strong>Last</strong> in Watt (W). Die Formel lautet: Laufzeit in Minuten = Kapazität × Wirkungsgrad ÷ Last × 60. Der Wirkungsgrad von rund 0,9 berücksichtigt die Verluste des Wechselrichters, der den Gleichstrom des Akkus in den Wechselstrom der Geräte umwandelt. Je mehr Last anliegt, desto kürzer die Laufzeit — und zwar in etwa umgekehrt proportional. Dieser Rechner nimmt Kapazität und Last entgegen, rechnet bei Bedarf Akku-Werte und VA-Angaben um und nennt die zu erwartende Überbrückungszeit als realistische Schätzung.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'VA ist nicht Watt — die häufigste USV-Falle',
+        text: 'Auf fast jeder USV prangt eine VA-Zahl, etwa „1500 VA". Das ist die Scheinleistung, nicht die nutzbare Leistung. Tatsächlich abrufbar ist nur die Wirkleistung in Watt, und die ergibt sich aus W = VA × Leistungsfaktor (cos φ). Bei älteren USV liegt dieser Faktor oft bei nur 0,6 — aus 1500 VA werden dann gerade einmal 900 W. Moderne Geräte erreichen 0,9 bis 1,0 und liefern entsprechend mehr. Wer für die Laufzeit-Berechnung einfach die VA-Zahl als Watt einsetzt, überschätzt die mögliche Last und damit die Schutzwirkung deutlich. Maßgeblich ist immer die Watt-Angabe der USV und die reale Watt-Last der Geräte. Die VA-Zahl taugt allenfalls als grober Anhaltspunkt für die Größenklasse, nicht für eine ernsthafte Dimensionierung. Im Zweifel die kleinere, ehrliche Watt-Zahl zugrunde legen.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '216-Wh-USV bei 200 W Last',
+        schritte: [
+          { label: 'Nutzbare Energie', formel: '216 Wh × 0,9', ergebnis: '194,4 Wh' },
+          { label: 'Laufzeit in Stunden', formel: '194,4 Wh ÷ 200 W', ergebnis: '0,97 h' },
+          { label: 'In Minuten', formel: '0,97 h × 60', ergebnis: '≈ 58,3 min' },
+        ],
+        fazit: 'Eine typische 1500-VA-Tower-USV mit einem 216-Wh-Akku (24 V × 9 Ah) überbrückt bei 200 W Last — etwa einem Office-PC samt Monitor — rund 58 Minuten. Das reicht locker, um in Ruhe zu speichern und herunterzufahren, und überbrückt die meisten kurzen Ausfälle komplett. Der Wirkungsgrad von 0,9 zieht dabei die Verluste des Wechselrichters ab; ohne diesen Faktor käme man auf optimistische 64,8 Minuten. Wird mehr angeschlossen, sinkt die Zeit rasch: Schon bei 400 W halbiert sie sich auf rund 29 Minuten.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum die Laufzeit nicht-linear fällt',
+        html: `<p>Die Grundregel ist einfach: <strong>doppelte Last, halbe Laufzeit</strong>. Wer statt 100 W plötzlich 200 W anschließt, halbiert die Überbrückungszeit ungefähr. Diese umgekehrte Proportionalität steckt direkt in der Formel und macht den größten Teil des Effekts aus.</p><p>In der Praxis fällt die Laufzeit bei hoher Last aber sogar <strong>etwas stärker</strong> als rein rechnerisch. Der Grund ist der <strong>Peukert-Effekt</strong>: Je höher der Entladestrom, desto geringer die effektiv nutzbare Akku-Kapazität — ein Bleiakku gibt unter starker Belastung anteilig weniger Energie ab als bei sanfter Entladung. Bei sehr niedriger Last dagegen machen sich die konstanten <strong>Grundverluste</strong> der USV-Elektronik stärker bemerkbar. Beide Effekte sind in einer einfachen Rechnung nicht exakt abbildbar, weshalb die hier ausgegebene Laufzeit eine gute Näherung ist und reale Geräte je nach Akku-Typ und Alter etwas darunter liegen können. Für die Dimensionierung gilt deshalb: lieber etwas großzügiger rechnen und einen Puffer einplanen, als die berechnete Zeit als garantierten Wert zu betrachten.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Laufzeit einer 216-Wh-USV je Last',
+        kopf: ['Last', 'Typisches Gerät', 'Laufzeit'],
+        zeilen: [
+          ['50 W', 'Router + ONT', '3 h 53 min'],
+          ['100 W', 'NAS + Netzwerk', '1 h 57 min'],
+          ['200 W', 'Office-PC + Monitor', '58,3 min'],
+          ['400 W', 'starker PC', '29,2 min'],
+          ['600 W', 'Gaming-PC', '19,4 min'],
+        ],
+        fussnote: 'Überbrückungszeit einer 216-Wh-USV (Wirkungsgrad 0,9) bei steigender Last. Schön sichtbar ist die umgekehrte Proportionalität: Jede Verdopplung der Last halbiert die Laufzeit. Eine sparsame Netzwerk-Last von 50 W lässt sich fast vier Stunden überbrücken, ein stromhungriger Gaming-PC dagegen nur knapp 20 Minuten. Wer lange Laufzeiten braucht, schließt deshalb nur die wirklich kritischen, sparsamen Geräte an. Soll die USV nicht nur den geordneten Shutdown sichern, sondern längere Ausfälle überbrücken, führt am Ende kein Weg an einem größeren Akku oder einem zusätzlichen Akkupack vorbei — die reine VA-Klasse hilft dabei nicht weiter.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Akku-Kapazität selbst bestimmen',
+        schritte: [
+          { label: 'Wh einer großen USV', formel: '24 V × 9 Ah', ergebnis: '216 Wh' },
+          { label: 'Wh einer kleinen USV', formel: '12 V × 7 Ah', ergebnis: '84 Wh' },
+          { label: 'Kleine USV bei 80 W (Router)', formel: '84 Wh × 0,9 ÷ 80 W × 60', ergebnis: '≈ 56,7 min' },
+        ],
+        fazit: 'Steht die Wh-Zahl nicht auf dem Gerät, lässt sie sich aus dem Akku berechnen: Spannung mal Kapazität in Amperestunden. Ein 24-V-Akku mit 9 Ah ergibt 216 Wh, ein kleiner 12-V-Akku mit 7 Ah nur 84 Wh. Letzterer überbrückt einen sparsamen Router mit ONT (rund 80 W) immerhin knapp eine Stunde — genug, um die meisten kurzen Ausfälle im Homeoffice zu überstehen und die Internetverbindung aufrechtzuerhalten. Für längere Ausfälle oder größere Lasten braucht es entsprechend mehr Akku-Kapazität.',
+      },
+      {
+        typ: 'text',
+        titel: 'Was anschließen? Typische Lasten',
+        html: `<p>An eine USV gehört nur das, was im Ausfall wirklich weiterlaufen muss — jedes zusätzliche Gerät verkürzt die Laufzeit. Typische Verbräuche helfen bei der Einschätzung: Ein <strong>Router mit ONT</strong> zieht rund 10 bis 20 W, ein <strong>NAS</strong> je nach Plattenzahl 30 bis 60 W, ein <strong>Monitor</strong> 20 bis 40 W.</p><p>Ein <strong>Office-PC</strong> liegt bei 80 bis 150 W, ein <strong>Gaming-PC</strong> unter Last dagegen schnell bei 300 bis 500 W — und frisst die Akkureserve entsprechend rasch. Wer die genaue Leistungsaufnahme seiner Geräte kennen will, kann sie mit dem <a href="/technik/netzteil-watt-rechner">Netzteil-Rechner</a> für den PC abschätzen oder mit einem Messgerät an der Steckdose ermitteln. Die Faustregel lautet: An die USV nur die kritischen, sparsamen Komponenten — typischerweise Netzwerktechnik, NAS und der Rechner selbst, aber ohne Drucker, Lautsprecher oder Ladegeräte. So bleibt die wertvolle Akkuenergie für das reserviert, was im Ernstfall wirklich zählt.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'USV-Größen und grobe Überbrückung',
+        kopf: ['USV-Klasse', 'Schein- / Wirkleistung', 'Typischer Akku', 'Laufzeit bei mittlerer Last'],
+        zeilen: [
+          ['Klein', '650 VA / 390 W', '~84 Wh (12 V × 7 Ah)', '~25 min bei 180 W'],
+          ['Mittel', '1.000 VA / 600 W', '~150 Wh', '~30 min bei 270 W'],
+          ['Groß', '1.500 VA / 900 W', '~216 Wh (24 V × 9 Ah)', '~29 min bei 400 W'],
+        ],
+        fussnote: 'Grobe Einordnung gängiger USV-Klassen. Wichtig: Die VA- und Watt-Angaben beschreiben die maximal mögliche Last, nicht die Laufzeit — diese hängt allein vom Akku und der tatsächlichen Last ab. Eine größere VA-Klasse verträgt mehr Geräte, hält aber bei voller Auslastung nicht länger durch als eine kleinere bei geringer Last. Wer lange Laufzeiten braucht, achtet auf die Akku-Kapazität in Wh, nicht auf die VA-Zahl. Manche Modelle lassen sich mit externen Akkupacks erweitern und erreichen so deutlich längere Laufzeiten, ohne dass eine größere VA-Klasse nötig wäre.',
+      },
+      {
+        typ: 'text',
+        titel: 'Leistungsfaktor und moderne USV',
+        html: `<p>Der <strong>Leistungsfaktor</strong> (cos φ) entscheidet, wie viel der beworbenen VA-Leistung tatsächlich als nutzbare Watt zur Verfügung steht. Ältere USV-Modelle kommen oft nur auf <strong>0,6</strong>: Aus 1500 VA werden dann 900 W. Moderne Geräte mit aktiver Leistungsfaktor-Korrektur erreichen <strong>0,9 bis 1,0</strong> und stellen damit nahezu die volle Scheinleistung als Wirkleistung bereit.</p><p>Für die Praxis heißt das: Die <strong>Watt-Angabe</strong> einer USV ist aussagekräftiger als die VA-Zahl, denn sie nennt direkt die nutzbare Leistung. Beim Vergleich zweier Geräte mit gleicher VA-Zahl kann das mit dem höheren Leistungsfaktor deutlich mehr leisten. Achten Sie deshalb beim Kauf auf die in Watt angegebene Ausgangsleistung und gleichen Sie sie mit der summierten realen Last Ihrer Geräte ab. Eine USV, deren Watt-Leistung nur knapp über der Last liegt, läuft im Ernstfall an ihrer Grenze — etwas Reserve sorgt hier für Stabilität und schont den Akku.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'USV richtig dimensionieren',
+        punkte: [
+          'Die reale Watt-Last aller kritischen Geräte summieren — nicht die VA-Zahlen.',
+          'Die gewünschte Überbrückungszeit festlegen (oft reichen wenige Minuten bis zum Shutdown).',
+          'Nur wirklich kritische Geräte anschließen, jedes weitere verkürzt die Laufzeit.',
+          'Keine Laserdrucker an die USV — ihre Heizung zieht kurzzeitig extreme Lasten.',
+          'Die Akku-Alterung einplanen: Nach Jahren sinkt die reale Kapazität spürbar.',
+          'Den automatischen Shutdown per USB/Software einrichten, damit Systeme geordnet herunterfahren.',
+          'Auf die Watt-Ausgangsleistung achten, nicht nur auf die VA-Angabe.',
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Akku-Verschleiß: Laufzeit sinkt mit der Zeit',
+        html: `<p>USV-Akkus sind Verschleißteile. Die verbauten Blei- oder Lithium-Akkus altern und verlieren über die Jahre an Kapazität — bei klassischen Blei-Akkus ist nach <strong>drei bis fünf Jahren</strong> oft ein Tausch fällig. Die reale Überbrückungszeit liegt dann deutlich unter dem Neuwert, ohne dass man es sofort merkt.</p><p>Deshalb sollte man regelmäßig den <strong>Selbsttest</strong> der USV nutzen und die tatsächliche Laufzeit gelegentlich überprüfen, etwa durch einen kontrollierten Test unter realer Last. Sinkt sie merklich, ist der Akku reif für den Austausch — viele USV erlauben einen einfachen Wechsel der Akkupacks. Auch die Umgebung spielt eine Rolle: Hitze verkürzt die Akku-Lebensdauer erheblich, weshalb die USV nicht eingeengt neben Wärmequellen stehen sollte. Wer den tatsächlichen Stromverbrauch der angeschlossenen Geräte im Blick behalten will, findet im <a href="/technik/stromverbrauch-geraete-rechner">Stromverbrauch-Rechner</a> ein passendes Werkzeug — damit lässt sich die reale Last und damit die zu erwartende Laufzeit verlässlich abschätzen.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Offline, Line-Interactive oder Online — und wann es sich lohnt',
+        html: `<p>USV gibt es in drei Bauarten mit steigendem Schutzgrad. Die einfache <strong>Offline-USV</strong> (VFD) schaltet bei Ausfall auf den Akku um und genügt für unkritische Heim-Anwendungen. Die <strong>Line-Interactive-USV</strong> (VI) gleicht zusätzlich Spannungsschwankungen aus, ohne gleich auf den Akku zu wechseln — der gängige Kompromiss für Arbeitsplätze, NAS und Heimserver.</p><p>Die <strong>Online-USV</strong> (VFI) versorgt die Geräte permanent über den Wechselrichter und bietet damit den lückenlosesten Schutz, ist aber teurer und weniger effizient — sie lohnt sich vor allem für empfindliche oder geschäftskritische Technik. Für die meisten privaten und kleinen geschäftlichen Anwendungen reicht eine Line-Interactive-USV mit ausreichend Akku-Kapazität für den geordneten Shutdown. Ob sich der Aufwand lohnt, hängt vom Schadenspotenzial ab: Wer ein NAS mit wichtigen Daten, einen Heimserver oder einen Arbeitsplatz mit ungespeicherter Arbeit betreibt, schützt mit einer USV für vergleichsweise wenig Geld vor Datenverlust und Hardwareschäden. Für einen reinen Surf-PC ist sie dagegen meist verzichtbar.</p>`,
+      },
+    ],
+    quellen: [
+      {
+        titel: 'Scheinleistung, Wirkleistung & Leistungsfaktor',
+        hinweis: 'USV-Angaben in VA (Scheinleistung); nutzbare Wirkleistung in Watt = VA × Leistungsfaktor (cos φ).',
+      },
+      {
+        titel: 'USV-Topologien (VFD/VI/VFI nach IEC 62040-3)',
+        hinweis: 'Offline-, Line-Interactive- und Online-USV unterscheiden sich in Schutzgrad und Wirkungsgrad.',
+      },
+    ],
+  },
+  {
     slug: 'datenmengen-umrechner',
     letzteAktualisierung: '2026-06-19',
     titel: 'Datenmengen-Umrechner',
