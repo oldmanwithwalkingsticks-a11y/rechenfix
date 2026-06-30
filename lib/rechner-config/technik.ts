@@ -1659,6 +1659,181 @@ Oberhalb von rund 80 Prozent drosselt das Batteriemanagement die DC-Ladeleistung
     ],
   },
   {
+    slug: 'eauto-ladekosten-rechner',
+    letzteAktualisierung: '2026-06-30',
+    titel: 'E-Auto-Ladekosten-Rechner',
+    beschreibung: 'E-Auto-Ladekosten berechnen: Was kostet das Laden pro 100 km, pro Vollladung und pro Jahr — je Ladeort, plus Verbrenner-Vergleich.',
+    kategorie: 'Technik',
+    kategorieSlug: 'technik',
+    metaTitle: 'E-Auto-Ladekosten-Rechner — Kosten',
+    metaDescription: 'E-Auto-Ladekosten berechnen: Was kostet das Laden pro 100 km, pro Vollladung und pro Jahr je Ladeort? Mit Benziner-Vergleich.',
+    keywords: ['e-auto ladekosten', 'kosten pro 100 km elektroauto', 'wallbox vs schnelllader kosten', 'e-auto vs benziner kosten', 'elektroauto stromkosten', 'ladekosten berechnen', 'kosten vollladung e-auto', 'strompreis laden'],
+    icon: '💶',
+    formel: 'Kosten/100 km = Verbrauch(kWh/100km) × Strompreis(€/kWh) | Vollladung = Akku(kWh) × Strompreis | Jahr = Kosten/100 km × km ÷ 100',
+    beispiel: '18 kWh/100 km an der Wallbox (0,34 €/kWh): 18 × 0,34 = 6,12 €/100 km (Richtwert).',
+    erklaerung: `**E-Auto-Ladekosten berechnen — was kostet das Laden wirklich?**
+
+Die Ladekosten eines E-Autos ergeben sich aus dem Verbrauch und dem Strompreis. Dieser Rechner ermittelt die Kosten pro 100 km, pro Vollladung und pro Jahr — je nach Ladeort — und stellt sie einem Benziner gegenüber. Alle Strompreise sind Richtwerte mit Stand April 2026 (BDEW/Bundesnetzagentur); die tatsächlichen Tarife schwanken stark, die Angaben sind ohne Gewähr.
+
+**Die Rechnung**
+
+Kosten pro 100 km = Verbrauch (kWh/100 km) × Strompreis (€/kWh). Ein Mittelklasse-E-Auto mit 18 kWh Verbrauch kostet an der heimischen Wallbox (rund 0,34 €/kWh) also 18 × 0,34 = 6,12 € pro 100 km. Eine Vollladung des 60-kWh-Akkus schlägt mit rund 20 € zu Buche, die Jahreskosten bei 15.000 km mit rund 918 €.
+
+**Die Stromquelle ist der größte Hebel**
+
+Der Ladeort entscheidet am stärksten über die Kosten: Selbst erzeugter PV-Strom kostet nur rund 0,10 €/kWh, DC-Schnellladen dagegen bis 0,65 €/kWh — ein Faktor von rund sechs. Wer überwiegend zu Hause oder mit Solarstrom lädt, fährt am günstigsten; wer auf öffentliches Schnellladen angewiesen ist, zahlt deutlich mehr.
+
+**Vergleich zum Benziner**
+
+Ein Benziner mit 7,5 l Verbrauch kostet bei 1,75 €/l rund 13,13 € pro 100 km. Das E-Auto liegt an der Wallbox bei gut 6 € — weniger als die Hälfte. Selbst beim teuren DC-Schnellladen bleibt es meist unter den Spritkosten.`,
+    faq: [
+      {
+        frage: 'Was kostet eine Vollladung beim E-Auto?',
+        antwort: 'Das hängt von Akkugröße und Strompreis ab. Ein 60-kWh-Akku kostet an der heimischen Wallbox (rund 0,34 €/kWh) etwa 20 €, an einer öffentlichen AC-Ladestation rund 30 € und am DC-Schnelllader bis zu 39 €. Mit eigenem PV-Strom (rund 0,10 €/kWh) wären es nur etwa 6 €. Die Werte sind Richtwerte mit Stand April 2026.',
+      },
+      {
+        frage: 'Lohnt sich das E-Auto gegenüber dem Benziner?',
+        antwort: 'Bei den reinen Energiekosten meist deutlich: Ein E-Auto kostet an der Wallbox rund 6 € pro 100 km, ein vergleichbarer Benziner mit 7,5 l Verbrauch bei 1,75 €/l rund 13 €. Selbst beim teuren DC-Schnellladen bleibt das E-Auto meist günstiger. Der Vorteil schrumpft jedoch, wer überwiegend teuer öffentlich laden muss. Anschaffung, Wartung und Versicherung sind hier nicht berücksichtigt.',
+      },
+      {
+        frage: 'Wie aktuell sind die Preise?',
+        antwort: 'Die hinterlegten Strompreise sind Richtwerte mit Stand April 2026 auf Basis von BDEW und Bundesnetzagentur. Strom- und besonders öffentliche Ladepreise sind volatil und unterscheiden sich je Anbieter, Tarif und Standort erheblich. Für eine genaue Rechnung sollten Sie Ihren eigenen Strompreis und den realen Tarif Ihrer Ladestation einsetzen. Die Angaben sind ohne Gewähr.',
+      },
+      {
+        frage: 'Warum ist öffentliches Laden so viel teurer?',
+        antwort: 'Öffentliche Ladestationen müssen Aufbau, Betrieb und Standortmiete einpreisen, DC-Schnelllader zusätzlich teure Technik. Ad-hoc-Laden ohne Vertrag ist laut ADAC bis zu 62 % teurer als ein Vertragstarif. Deshalb ist Heimladen der Kernvorteil des E-Autos — wer eine eigene Wallbox oder PV-Anlage hat, lädt am günstigsten.',
+      },
+      {
+        frage: 'Wovon hängen die Ladekosten am stärksten ab?',
+        antwort: 'Vom Ladeort und vom Fahrzeugverbrauch. Der Ladeort ist der größte Hebel: PV-Strom (rund 0,10 €/kWh) gegen DC-Schnellladen (rund 0,65 €/kWh) ist ein Faktor sechs. Der zweite Hebel ist der Verbrauch: Ein Kleinwagen (15 kWh/100 km) kostet rund ein Drittel weniger als ein großer SUV (22 kWh/100 km). Beide Faktoren lassen sich im Rechner durchspielen.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Wie sich die Ladekosten ergeben',
+        html: `<p>Die Ladekosten eines E-Autos folgen einer einfachen Formel: <strong>Verbrauch × Strompreis</strong>. Der Verbrauch wird in Kilowattstunden pro 100 km angegeben (kWh/100 km), der Strompreis in Euro pro Kilowattstunde (€/kWh). Ein Mittelklasse-E-Auto mit 18 kWh Verbrauch kostet an der heimischen Wallbox bei 0,34 €/kWh also 18 × 0,34 = 6,12 € pro 100 km.</p><p>Drei Faktoren bestimmen das Ergebnis. Der wichtigste ist die <strong>Stromquelle</strong>: Heimstrom, öffentliches Laden und Solarstrom unterscheiden sich um ein Vielfaches. Der zweite ist der <strong>Fahrzeugverbrauch</strong>, der je nach Größe und Fahrweise schwankt. Der dritte ist der konkrete <strong>Tarif</strong>, der besonders im öffentlichen Laden stark variiert. Dieser Rechner spielt alle drei durch und stellt die Kosten verschiedenen Ladeorten sowie einem Benziner gegenüber. Wichtig: Die hinterlegten Strompreise sind Richtwerte mit Stand April 2026 (BDEW/Bundesnetzagentur) und ohne Gewähr — für eine genaue Rechnung den eigenen Strompreis eintragen.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Kosten pro 100 km je Ladeort',
+        kopf: ['Ladeort', 'Strompreis (Richtwert)', 'Kosten / 100 km'],
+        zeilen: [
+          ['Wallbox / Haushalt', '0,34 €/kWh', '6,12 €'],
+          ['Öffentlich AC', '0,50 €/kWh', '9,00 €'],
+          ['DC-Schnellladen', '0,65 €/kWh', '11,70 €'],
+          ['PV-Eigenstrom', '0,10 €/kWh', '1,80 €'],
+        ],
+        fussnote: 'Kosten pro 100 km bei einem Verbrauch von 18 kWh/100 km und den jeweiligen Strompreis-Richtwerten (Stand April 2026, BDEW/Bundesnetzagentur). Der Unterschied ist gewaltig: Mit eigenem PV-Strom fährt man für 1,80 €, am DC-Schnelllader für das Sechsfache. Die Werte sind Orientierung, keine Tarifgarantie — gerade öffentliche Ladepreise schwanken je Anbieter und Standort erheblich. Wer seinen eigenen Strompreis kennt, sollte ihn direkt eintragen: Schon zehn Cent Unterschied pro Kilowattstunde verschieben die Kosten pro 100 km bei diesem Verbrauch um 1,80 €. Die Tabelle zeigt damit weniger absolute Wahrheiten als das Verhältnis der Ladeorte zueinander, das auch bei anderen Preisen stabil bleibt.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '18 kWh/100 km an der Wallbox',
+        schritte: [
+          { label: 'Kosten pro 100 km', formel: '18 kWh × 0,34 €', ergebnis: '6,12 €' },
+          { label: 'Kosten einer Vollladung (60 kWh)', formel: '60 kWh × 0,34 €', ergebnis: '20,40 €' },
+          { label: 'Jahreskosten bei 15.000 km', formel: '6,12 € × 150', ergebnis: '918 €' },
+        ],
+        fazit: 'Ein Mittelklasse-E-Auto kostet an der heimischen Wallbox rund 6,12 € pro 100 km, eine volle Ladung des 60-kWh-Akkus etwa 20 € und ein ganzes Jahr mit 15.000 km gut 900 €. Das deckt sich mit den verbreiteten Praxiswerten von 6 bis 9 € pro 100 km. Zum Vergleich: Ein Benziner mit 7,5 l Verbrauch kommt bei 1,75 €/l auf rund 13 € pro 100 km und damit auf fast 2.000 € im Jahr. Der Stromkostenvorteil des E-Autos ist also erheblich — vorausgesetzt, man lädt überwiegend zu Hause. Bei 15.000 km im Jahr trennt die beiden Antriebe rund 1.050 € allein an Energiekosten. Über eine typische Haltedauer von zehn Jahren und 150.000 km summiert sich allein die Energiekosten-Differenz auf einen niedrigen fünfstelligen Betrag, der die höhere Anschaffung teilweise ausgleicht. Mit eigenem PV-Strom fällt der Vorteil noch deutlicher aus, mit überwiegend öffentlichem Schnellladen dagegen geringer.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Strompreise sind volatil und intransparent',
+        text: 'Die hier verwendeten Strompreise sind Richtwerte mit Stand April 2026 (BDEW/Bundesnetzagentur) — keine Tarifgarantie. Gerade beim öffentlichen Laden ist der Markt unübersichtlich: Die Preise unterscheiden sich je Anbieter, Standort und Tarifmodell erheblich, und das spontane Ad-hoc-Laden ohne Vertrag ist laut ADAC bis zu 62 Prozent teurer als ein Vertragstarif. Hinzu kommen mancherorts Blockiergebühren, wenn das Auto nach dem Laden stehen bleibt. Auch der Haushaltsstrompreis schwankt je nach Anbieter und Vertrag deutlich. Für eine belastbare Rechnung sollten Sie deshalb Ihren tatsächlichen Strompreis und den realen Tarif Ihrer üblichen Ladestation eintragen, statt sich allein auf die Richtwerte zu verlassen. Dieser Rechner liefert eine Orientierung für den Kostenvergleich, keine verbindliche Tarifauskunft und keine Kaufberatung. Ein weiterer Punkt: Manche Anbieter rechnen pro Minute statt pro Kilowattstunde ab, was bei langsam ladenden Fahrzeugen besonders teuer wird und sich kaum mit einem €/kWh-Preis vergleichen lässt. Achten Sie deshalb beim Tarif immer auf die Abrechnungseinheit. Auch der Haushaltsstrompreis hat sich in den vergangenen Jahren stark bewegt, weshalb eine Momentaufnahme schnell veraltet. Betrachten Sie die Zahlen daher als Größenordnung und aktualisieren Sie den Strompreis nach Ihrem aktuellen Vertrag — nur so spiegelt das Ergebnis Ihre reale Situation wider.',
+      },
+      {
+        typ: 'text',
+        titel: 'Der größte Hebel: die Stromquelle',
+        html: `<p>Kein anderer Faktor beeinflusst die Ladekosten so stark wie der <strong>Ladeort</strong>. Selbst erzeugter <strong>PV-Strom</strong> vom eigenen Dach kostet nur rund 0,10 €/kWh, Haushaltsstrom an der <strong>Wallbox</strong> etwa 0,34 €/kWh, öffentliches <strong>AC-Laden</strong> rund 0,50 €/kWh und <strong>DC-Schnellladen</strong> bis zu 0,65 €/kWh. Zwischen dem günstigsten und dem teuersten Ladeort liegt damit ein Faktor von rund sechs.</p><p>Das erklärt den Kernvorteil des E-Autos: Wer zu Hause oder mit Solarstrom lädt, fährt für einen Bruchteil der Spritkosten eines Verbrenners. Wer dagegen keine eigene Lademöglichkeit hat und überwiegend auf teures öffentliches Schnellladen angewiesen ist, verliert einen großen Teil dieses Vorteils. Die Stromquelle ist deshalb nicht nur eine Kostenfrage, sondern entscheidet mit darüber, ob sich ein E-Auto im Alltag finanziell lohnt. Heimladen über Nacht zum günstigen Haustarif ist der Normalfall, für den das E-Auto wirtschaftlich konzipiert ist — das öffentliche Laden bleibt die teurere Ausnahme für unterwegs.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Wallbox zu Hause vs. öffentliches Schnellladen',
+        spalteA: 'Wallbox zu Hause',
+        spalteB: 'DC-Schnellladen',
+        zeilen: [
+          { kriterium: 'Strompreis', a: '~0,34 €/kWh', b: '~0,65 €/kWh' },
+          { kriterium: 'Kosten pro 100 km', a: '6,12 €', b: '11,70 €' },
+          { kriterium: 'Jahreskosten (15.000 km)', a: '918 €', b: '1.755 €' },
+          { kriterium: 'Ladedauer', a: 'Stunden, über Nacht', b: '20–40 min' },
+          { kriterium: 'Wofür', a: 'täglicher Alltag', b: 'Langstrecke unterwegs' },
+        ],
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Jahreskosten bei 15.000 km je Ladeort',
+        kopf: ['Ladeort', 'Kosten / 100 km', 'Jahreskosten (15.000 km)'],
+        zeilen: [
+          ['Wallbox / Haushalt', '6,12 €', '918 €'],
+          ['Öffentlich AC', '9,00 €', '1.350 €'],
+          ['DC-Schnellladen', '11,70 €', '1.755 €'],
+          ['PV-Eigenstrom', '1,80 €', '270 €'],
+          ['Benziner (7,5 l)', '13,13 €', '1.969 €'],
+        ],
+        fussnote: 'Hochgerechnet auf 15.000 km Jahresfahrleistung bei 18 kWh/100 km Verbrauch (Richtwerte, Stand April 2026). Der Abstand zwischen Heimladen und Benziner beträgt über 1.000 € pro Jahr — ein Betrag, der die Mehrkosten der Anschaffung über die Jahre relativieren kann. Wer viel fährt, profitiert stärker: Bei 30.000 km im Jahr verdoppelt sich die Ersparnis entsprechend, während sie bei reinen Wenigfahrern kleiner ausfällt. Wer dagegen ausschließlich am Schnelllader lädt, nähert sich den Spritkosten an. Anschaffung, Wartung und Versicherung sind hier nicht enthalten. Über zehn Jahre summiert sich die Differenz so auf rund 10.000 €. Zu bedenken ist außerdem, dass E-Autos in der Regel niedrigere Wartungskosten haben — keine Ölwechsel, weniger Verschleißteile, oft günstigere Inspektionen. Diese Posten gehören in eine vollständige Gesamtkostenrechnung, die über die reinen Energiekosten dieses Rechners hinausgeht.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'E-Auto gegen Benziner pro 100 km',
+        spalteA: 'E-Auto (Wallbox)',
+        spalteB: 'Benziner',
+        zeilen: [
+          { kriterium: 'Verbrauch', a: '18 kWh/100 km', b: '7,5 l/100 km' },
+          { kriterium: 'Energiepreis', a: '0,34 €/kWh', b: '1,75 €/l' },
+          { kriterium: 'Kosten pro 100 km', a: '6,12 €', b: '13,13 €' },
+          { kriterium: 'Auch beim DC-Laden', a: '11,70 €', b: '13,13 €' },
+          { kriterium: 'Jahreskosten (15.000 km)', a: '918 €', b: '1.969 €' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Der zweite Hebel: der Verbrauch',
+        html: `<p>Nach der Stromquelle ist der <strong>Fahrzeugverbrauch</strong> der zweitgrößte Kostenfaktor. Ein effizienter <strong>Kleinwagen</strong> kommt mit rund 15 kWh/100 km aus, ein <strong>Mittelklasse</strong>-Modell liegt bei etwa 18 kWh, ein großer <strong>SUV</strong> bei 22 kWh oder mehr. Bei gleichem Strompreis kostet der SUV damit rund die Hälfte mehr als der Kleinwagen.</p><p>Der reale Verbrauch hängt stark vom <strong>Fahrprofil</strong> ab. <strong>Hohes Tempo</strong> auf der Autobahn treibt ihn überproportional nach oben, weil der Luftwiderstand mit dem Quadrat der Geschwindigkeit steigt. <strong>Kälte</strong> kostet zusätzlich Energie für die Heizung und senkt die Batterieeffizienz — im Winter liegt der Verbrauch oft 20 bis 30 Prozent über dem Sommerwert. Auch <strong>Kurzstrecken</strong> mit kaltem Akku sind anteilig teurer. Wer sparsam und vorausschauend fährt, die Rekuperation nutzt und das Tempo moderat hält, drückt den Verbrauch und damit die Ladekosten spürbar. Im Rechner lässt sich der eigene Verbrauchswert direkt eintragen, um die Kosten realistisch abzubilden. Den realen Durchschnittsverbrauch zeigt der Bordcomputer über längere Zeiträume recht zuverlässig an — er ist die bessere Grundlage als der oft zu optimistische WLTP-Normwert des Herstellers.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Ladekosten senken',
+        punkte: [
+          'So oft wie möglich zu Hause oder am Arbeitsplatz laden statt öffentlich.',
+          'PV-Überschuss vom eigenen Dach nutzen — der mit Abstand günstigste Strom.',
+          'Eine Ladekarte mit Vertragstarif nutzen statt teurem Ad-hoc-Laden.',
+          'Dynamische Tarife oder günstigen Nachtstrom für das Laden über Nacht prüfen.',
+          'DC-Schnellladen nur auf der Langstrecke einsetzen, nicht im Alltag.',
+          'Sparsam und vorausschauend fahren — Tempo und Heizung beeinflussen den Verbrauch stark.',
+          'Vor dem Wallbox- oder Tarifwechsel den eigenen Strompreis genau prüfen.',
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Öffentliche Tarif-Realität 2026',
+        html: `<p>Wer ohne eigene Wallbox auf das öffentliche Netz angewiesen ist, trifft auf einen unübersichtlichen Markt. Die Preise reichen von günstigen <strong>Discounter- und Supermarkt-Ladepunkten</strong> bis zu teuren Autobahn-Schnellladern. Entscheidend ist das Tarifmodell: Ein <strong>Vertragstarif</strong> mit oder ohne monatliche Grundgebühr ist meist deutlich günstiger als das spontane <strong>Ad-hoc-Laden</strong> per Karte oder App, das laut ADAC bis zu 62 Prozent teurer sein kann.</p><p>Hinzu kommen mögliche <strong>Blockiergebühren</strong>, wenn das Auto nach Ladeende an der Säule stehen bleibt, und Unterschiede zwischen AC- und DC-Preisen. Ein Tarifvergleich lohnt sich daher für alle, die regelmäßig öffentlich laden — die passende Ladekarte spart schnell mehrere hundert Euro im Jahr. Wie lange das Laden am jeweiligen Anschluss überhaupt dauert, zeigt der <a href="/technik/eauto-ladezeit-rechner">E-Auto-Ladezeit-Rechner</a> als passende Ergänzung zu diesem Kostenrechner. Beide zusammen geben ein realistisches Bild von Zeit und Kosten eines Ladevorgangs.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Wann sich das E-Auto rechnet',
+        html: `<p>Der Stromkostenvorteil des E-Autos ist eindeutig — aber er hängt fast vollständig am <strong>Ladeort</strong>. Wer überwiegend zu Hause an der Wallbox oder mit eigenem Solarstrom lädt, fährt für einen Bruchteil der Spritkosten und spart gegenüber einem Benziner über 1.000 € pro Jahr. Das ist der Normalfall, für den das E-Auto wirtschaftlich gedacht ist.</p><p>Ohne eigene Lademöglichkeit verschiebt sich die Rechnung deutlich: Wer hauptsächlich am teuren DC-Schnelllader lädt, nähert sich den Spritkosten eines sparsamen Verbrenners an und verliert einen Großteil des Vorteils. Vor der Anschaffung lohnt sich deshalb die ehrliche Frage nach der eigenen Ladesituation. Dieser Rechner betrachtet ausschließlich die Energiekosten — Anschaffung, Wertverlust, Wartung und Versicherung gehören in eine vollständige Gesamtrechnung und sind hier bewusst ausgeklammert. Einen direkten Vergleich der reinen Kraftstoffkosten eines Verbrenners liefert der <a href="/auto/spritkosten-rechner">Spritkosten-Rechner</a>. So lässt sich die hier berechnete Stromrechnung unmittelbar gegenüberstellen — als Orientierung, nicht als Kaufberatung. Unterm Strich gilt: Das E-Auto ist bei den Energiekosten klar im Vorteil, doch wie groß dieser Vorteil ausfällt, entscheidet die eigene Ladesituation mehr als jedes Datenblatt. Wer das vor dem Kauf ehrlich einschätzt, vermeidet die häufigste Fehlrechnung.</p>`,
+      },
+    ],
+    quellen: [
+      {
+        titel: 'BDEW Strompreisanalyse',
+        url: 'https://www.bdew.de/energie/strompreisanalyse/',
+        hinweis: 'Durchschnittliche Haushalts- und Ladestrompreise; Grundlage der Richtwerte (Stand April 2026).',
+      },
+      {
+        titel: 'Bundesnetzagentur — Ladesäulenregister & Strompreise',
+        url: 'https://www.bundesnetzagentur.de/ladesaeulenregister',
+        hinweis: 'Öffentliche AC-/DC-Ladepreise und Marktdaten; Tarife variieren je Anbieter und Standort stark.',
+      },
+      {
+        titel: 'ADAC — E-Auto-Ladekosten & Tarifvergleich',
+        url: 'https://www.adac.de/rund-ums-fahrzeug/elektromobilitaet/laden/elektroauto-ladesaeulen-strompreise/',
+        hinweis: 'Ad-hoc-Laden kann bis zu 62 % teurer sein als ein Vertragstarif ohne Grundgebühr.',
+      },
+    ],
+  },
+  {
     slug: 'datenmengen-umrechner',
     letzteAktualisierung: '2026-06-19',
     titel: 'Datenmengen-Umrechner',
