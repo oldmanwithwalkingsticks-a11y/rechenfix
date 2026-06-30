@@ -4,7 +4,37 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 30.06.2026
+**Stand:** 01.07.2026
+
+---
+
+## 01.07.2026 — W20 Technik-Ausbau: 10 neue Rechner (5 → 15) — ✅ ABGESCHLOSSEN
+
+Die Technik-Kategorie von 5 auf 15 Rechner ausgebaut — alle Neubauten direkt Goldstandard
+(12 contentBloecke, ~1.560–1.580 W, quellen, ≥2 interne Links). Kein späterer Migrationslauf nötig.
+Component-Logik inline (keine separate lib/berechnungen-Datei), Registrierung über RechnerLoader.tsx.
+
+**Block A (8 Rechner, null YMYL):** download-rechner (8a3a21a), akku-ladezeit-rechner (f3824ce),
+powerbank-rechner (0e03291), aufloesung-seitenverhaeltnis-rechner (96b2f20), dpi-druck-rechner (525b06d),
+video-dateigroesse-rechner (9df0d8d), netzteil-watt-rechner (8d6f293), usv-laufzeit-rechner (dee07b5).
+
+**Block B (2 Rechner, moderates YMYL, live primärquellen-recherchiert):** eauto-ladezeit-rechner (93ab9fc),
+eauto-ladekosten-rechner (4c285c0). Werte als Richtwerte ±10–30 % bzw. „Stand April/2026" gekennzeichnet,
+Pflicht-Disclaimer in result-box UND content, Quellen ADAC/Mennekes/BDEW/Bundesnetzagentur. Formeln gegen
+ADAC-Realwerte gegengeprüft (77-kWh-Akku 0→100 AC 11 kW → 7 h 42 min ≈ ADAC „~8 h" für Enyaq 85).
+
+**2 Rückverlinkungs-Commits** (separat atomar): akku→powerbank (245ee7b), eauto-ladezeit→ladekosten (2a2e205).
+**Index-Update** (Technik-Einleitung, alle 15 Rechner verlinkt) als eigener Commit am Wellenende.
+
+**Verifikation:** Alle 10 per check-contentbloecke-struktur.mjs (je 12 Blöcke, Leitformat 2–3×, kein Diagramm)
++ check-contentbloecke-wortzahl.mjs (alle im Band 1.561–1.589) bestätigt. Alle 10 Struktur-Fingerprints
+distinkt (verschiedene Block-Folgen, keine zwei beginnen gleich). client-data.ts in keinem der Commits.
+Beispiel-Anker je Rechner per eigener Node-Probe gegen die Component-Formel nachgerechnet.
+
+**Methodische Bestätigung:** Wortzahl-Zielband auf ~1.560–1.580 angehoben (W19-Erfahrung: 1.505 zu knapp).
+Cross-Kategorie-Links verifiziert (stromkosten=/wohnen/, spritkosten=/auto/) — kategorieSlug ≠ Dateiort.
+Bei YMYL-Neubauten gilt dieselbe Primärquellen-Disziplin wie bei Migrationen: live recherchieren, nicht aus
+Trainingsdaten. AdSense-Resubmit weiterhin bewusst aufgeschoben (Karsten-Entscheidung).
 
 ---
 
