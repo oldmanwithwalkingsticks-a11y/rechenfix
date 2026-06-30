@@ -356,6 +356,167 @@ Ein Foto wiegt 5 bis 25 MB, ein Song 3 bis 5 MB, ein HD-Film 1 bis 4 GB, ein 4K-
     ],
   },
   {
+    slug: 'akku-ladezeit-rechner',
+    letzteAktualisierung: '2026-06-30',
+    titel: 'Akku-Ladezeit-Rechner',
+    beschreibung: 'Akku-Ladezeit berechnen: Wie lange lädt ein Handy, Tablet oder eine Powerbank bei gegebener Kapazität und Ladestrom? Inklusive Watt-Umrechnung.',
+    kategorie: 'Technik',
+    kategorieSlug: 'technik',
+    metaTitle: 'Akku-Ladezeit-Rechner — Ladedauer berechnen',
+    metaDescription: 'Akku-Ladezeit berechnen: Wie lange lädt ein Akku bei gegebener Kapazität und Ladestrom? Mit Watt-Umrechnung, Ladekurve und Rechenweg.',
+    keywords: ['akku ladezeit rechner', 'ladezeit berechnen', 'wie lange lädt akku', 'mah ladezeit', 'powerbank ladezeit', 'handy ladezeit berechnen', 'watt in ma', 'akku laden dauer'],
+    icon: '🔋',
+    formel: 'Ladezeit = Kapazität(mAh) ÷ Ladestrom(mA) × Effizienzfaktor | Ladestrom(mA) = Leistung(W) ÷ Spannung(V) × 1.000',
+    beispiel: '5.000 mAh bei 2.000 mA: 5.000 ÷ 2.000 = 2,5 h (ideal) × 1,2 = 3 h 00 min (real).',
+    erklaerung: `**Akku-Ladezeit berechnen — Kapazität, Ladestrom und Effizienz**
+
+Wie lange ein Akku lädt, hängt von seiner Kapazität (in Milliamperestunden, mAh) und dem Ladestrom (in Milliampere, mA) ab. Die Grundrechnung ist einfach: Kapazität geteilt durch Ladestrom ergibt die theoretische Ladezeit in Stunden. Ein 5.000-mAh-Akku an einem 2.000-mA-Ladegerät bräuchte demnach 2,5 Stunden. In der Praxis dauert es länger.
+
+**Warum die reale Ladezeit länger ist**
+
+Lithium-Ionen-Akkus laden nach dem CC/CV-Verfahren (Konstantstrom, dann Konstantspannung). Bis etwa 80 Prozent fließt der volle Strom, danach drosselt der Akku stark, um die Zellen zu schonen. Die letzten 20 Prozent dauern deshalb überproportional lange. Hinzu kommen Wärmeverluste. Dieser Rechner bildet das über einen Effizienzfaktor ab: standardmäßig 1,2 (rund 20 Prozent Aufschlag), 1,3 bei schwachem Netzteil oder Kälte.
+
+**Watt in Milliampere umrechnen**
+
+Viele Ladegeräte geben statt des Stroms eine Leistung in Watt an. Es gilt: Ladestrom (mA) = Leistung (W) ÷ Spannung (V) × 1.000. Ein 10-Watt-Netzteil bei 5 Volt liefert also 2.000 mA. Achtung: Schnellladen nutzt höhere Spannungen (9, 12 oder 20 Volt), weshalb die mAh-Schätzung dort nur eine grobe Näherung ist.`,
+    faq: [
+      {
+        frage: 'Wie berechne ich die Ladezeit eines Akkus?',
+        antwort: 'Teilen Sie die Kapazität in mAh durch den Ladestrom in mA — das ergibt die theoretische Ladezeit in Stunden. Für die realistische Zeit multiplizieren Sie mit einem Effizienzfaktor (Standard 1,2). Beispiel: 5.000 mAh ÷ 2.000 mA = 2,5 h × 1,2 = 3 Stunden.',
+      },
+      {
+        frage: 'Warum dauert das Laden länger als berechnet?',
+        antwort: 'Lithium-Ionen-Akkus laden nach dem CC/CV-Verfahren: Ab etwa 80 Prozent drosselt der Akku den Strom deutlich, um die Zellen zu schonen. Die letzte Ladephase dauert daher überproportional lange. Zusätzlich entstehen Wärmeverluste. Der Effizienzfaktor von 1,2 bildet diesen Aufschlag von rund 20 Prozent ab.',
+      },
+      {
+        frage: 'Wie rechne ich Watt in Milliampere um?',
+        antwort: 'Ladestrom (mA) = Leistung (W) ÷ Spannung (V) × 1.000. Ein 10-Watt-Netzteil bei 5 Volt liefert 2.000 mA. Wichtig: Schnellladegeräte nutzen höhere Spannungen (9, 12, 15 oder 20 Volt), sodass dieselbe Wattzahl einen anderen Strom ergibt — die mAh-Schätzung ist dann nur eine Näherung.',
+      },
+      {
+        frage: 'Warum ist die mAh-Schätzung beim Schnellladen ungenau?',
+        antwort: 'mAh-Angaben beziehen sich auf die Zellspannung von rund 3,7 Volt. Schnellladegeräte laden aber mit 9, 12 oder 20 Volt und wandeln die Spannung im Gerät um. Dadurch lässt sich aus der Wattzahl nicht exakt auf den Ladestrom am Akku schließen. Die Berechnung liefert daher eine Orientierung, keinen Laborwert.',
+      },
+      {
+        frage: 'Wie lange lädt eine 20.000-mAh-Powerbank?',
+        antwort: 'Bei einem Ladestrom von 2.000 mA (10 W bei 5 V) und Effizienzfaktor 1,2 dauert es rund 12 Stunden. Große Powerbanks laden deshalb am besten über Nacht oder an einem schnelleren Anschluss. Viele Modelle unterstützen Schnellladen mit 18 bis 30 W, was die Zeit deutlich verkürzt.',
+      },
+      {
+        frage: 'Schadet häufiges Schnellladen dem Akku?',
+        antwort: 'Schnellladen erzeugt mehr Wärme, was die Alterung leicht beschleunigt. Moderne Akkus und Ladegeräte regeln das aber gut. Wer die Lebensdauer maximieren will, lädt idealerweise zwischen 20 und 80 Prozent und vermeidet dauerhaftes Laden bei 100 Prozent oder großer Hitze. Gelegentliches Schnellladen ist unkritisch.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Wie die Akku-Ladezeit berechnet wird',
+        html: `<p>Die Ladezeit eines Akkus hängt von zwei Größen ab: seiner <strong>Kapazität</strong> in Milliamperestunden (mAh) und dem <strong>Ladestrom</strong> in Milliampere (mA). Die Grundrechnung ist denkbar einfach: Kapazität geteilt durch Ladestrom ergibt die theoretische Ladezeit in Stunden. Ein 5.000-mAh-Akku an einem 2.000-mA-Ladegerät bräuchte rechnerisch 2,5 Stunden.</p><p>In der Praxis dauert es jedoch länger. Akkus laden nicht gleichmäßig durch, es entstehen Wärmeverluste, und die letzte Ladephase ist bewusst gedrosselt. Dieser Rechner berücksichtigt das über einen <strong>Effizienzfaktor</strong> — standardmäßig 1,2, also rund 20 Prozent Aufschlag auf die ideale Zeit. Wer die Ladeleistung nur in Watt kennt, kann sie umrechnen: Leistung geteilt durch Spannung mal 1.000 ergibt den Ladestrom in Milliampere. Das Ergebnis ist eine realistische Orientierung — der genaue Wert hängt vom Gerät, vom Ladegerät und vom Ladezustand ab.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Typische Akkukapazitäten',
+        werte: [
+          { label: 'Smartphone', wert: '4.000–5.000 mAh', hinweis: 'je nach Modell und Displaygröße' },
+          { label: 'Tablet', wert: '7.000–11.000 mAh', hinweis: 'größeres Display, mehr Kapazität' },
+          { label: 'Powerbank', wert: '10.000–27.000 mAh', hinweis: 'lädt ein Handy oft mehrfach' },
+          { label: 'Smartwatch', wert: '300–600 mAh', hinweis: 'kleiner Akku, kurze Ladezeit' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '5.000 mAh bei 2.000 mA',
+        schritte: [
+          { label: 'Theoretische Zeit (ideal)', formel: '5.000 mAh ÷ 2.000 mA', ergebnis: '2,5 h = 2 h 30 min' },
+          { label: 'Realistische Zeit (Effizienz 1,2)', formel: '2,5 h × 1,2', ergebnis: '3 h = 3 h 00 min' },
+        ],
+        fazit: 'Ein typischer 5.000-mAh-Smartphone-Akku lädt an einem 2.000-mA-Netzteil (rund 10 Watt) rechnerisch in 2,5 Stunden — realistisch in etwa 3 Stunden. Die zusätzliche halbe Stunde entsteht durch Wärmeverluste und die gedrosselte Ladeschlussphase ab rund 80 Prozent. Mit einem stärkeren Schnellladegerät (z. B. 20 bis 30 Watt) sinkt die Zeit deutlich, weil bis zur 80-Prozent-Marke mehr Strom fließt. Genau diese erste Phase geht beim Schnellladen besonders flott, während die letzten 20 Prozent bei jedem Ladegerät vergleichsweise zäh bleiben. Wer es eilig hat, gewinnt also mit einem stärkeren Netzteil vor allem im unteren und mittleren Ladebereich Zeit — bis voll geladen ist der Unterschied kleiner, als die reine Wattzahl vermuten lässt.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'mAh-Schätzung und die Spannungs-Falle',
+        text: 'Ein 20-Watt-Netzteil liefert nicht automatisch 4.000 mA an den Akku. Der Grund: Schnellladen nutzt höhere Spannungen. Während ein einfaches USB-Netzteil mit 5 Volt arbeitet (20 W ÷ 5 V = 4.000 mA), lädt ein Schnellladegerät oft mit 9, 12 oder 20 Volt — bei 20 W und 9 V wären das nur rund 2.200 mA auf der Netzteil-Seite. Zusätzlich beziehen sich mAh-Angaben des Akkus auf dessen Zellspannung von etwa 3,7 Volt, während das Ladegerät mit anderer Spannung arbeitet und im Gerät umgewandelt wird. Deshalb ist jede mAh-Berechnung aus einer Wattzahl nur eine grobe Näherung. Für eine verlässliche Schätzung den tatsächlichen Ladestrom in mA verwenden, falls er bekannt ist. Als Faustregel gilt: Je weiter die Schnellladespannung über den 5 Volt eines einfachen Netzteils liegt, desto stärker weicht die einfache mAh-Rechnung nach unten ab. Wer es genau wissen will, schaut auf das Datenblatt des Ladegeräts, das die unterstützten Spannungs- und Stromstufen auflistet — etwa „9 V / 2 A" für 18-Watt-Schnellladen. Daraus lässt sich der reale Ladestrom an der jeweiligen Stufe deutlich präziser ableiten als aus der reinen Wattzahl.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum die echte Ladezeit länger ist als die ideale',
+        html: `<p>Lithium-Ionen-Akkus laden nach dem <strong>CC/CV-Verfahren</strong> (Constant Current, Constant Voltage). In der ersten Phase fließt ein konstanter, hoher Strom — der Akku füllt sich zügig bis etwa <strong>80 Prozent</strong>. Danach schaltet das Lademanagement auf konstante Spannung um, und der Strom sinkt kontinuierlich, um die Zellen nicht zu überlasten.</p><p>Diese zweite Phase ist der Grund, warum die letzten 20 Prozent oft genauso lange dauern wie die ersten 80. Wer schon einmal beobachtet hat, dass das Handy in 30 Minuten von 20 auf 80 Prozent springt, dann aber für die restlichen 20 Prozent fast ebenso lange braucht, hat genau diesen Effekt gesehen. Hinzu kommen <strong>Wärmeverluste</strong>: Ein Teil der zugeführten Energie wird nicht gespeichert, sondern in Wärme umgesetzt — besonders beim Schnellladen oder in einer warmen Umgebung. Der Effizienzfaktor von 1,2 bündelt beide Effekte zu einem realistischen Aufschlag von rund 20 Prozent. Bei Kälte oder einem schwachen Netzteil kann er auf 1,3 steigen.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Typische Ladeleistungen',
+        werte: [
+          { label: 'Standard-Netzteil', wert: '5–10 W', hinweis: 'ältere und einfache Ladegeräte' },
+          { label: 'Schnellladen', wert: '20–45 W', hinweis: 'USB Power Delivery, höhere Spannung' },
+          { label: 'Laptop (USB-C)', wert: '65–100 W', hinweis: 'für Notebooks und große Geräte' },
+          { label: 'Kabellos (Qi)', wert: '5–15 W', hinweis: 'bequem, aber mehr Wärmeverlust' },
+        ],
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Ladezeit eines 5.000-mAh-Akkus je Ladestrom',
+        kopf: ['Ladestrom', 'grobe Leistung (5 V)', 'Ladezeit (real)'],
+        zeilen: [
+          ['1.000 mA', '5 W', '6 h 00 min'],
+          ['2.000 mA', '10 W', '3 h 00 min'],
+          ['3.000 mA', '15 W', '2 h 00 min'],
+          ['5.000 mA', '25 W', '1 h 12 min'],
+        ],
+        fussnote: 'Berechnet für einen 5.000-mAh-Akku bei Effizienzfaktor 1,2. Die Leistungsangabe (5 V) ist eine grobe Orientierung — Schnellladegeräte nutzen höhere Spannungen, sodass dieselbe Wattzahl einen anderen Strom liefert. Gut zu sehen ist der abnehmende Nutzen: Die Verdopplung von 1.000 auf 2.000 mA halbiert die Zeit, während der Sprung von 3.000 auf 5.000 mA nur noch rund 48 Minuten spart. Sehr hohe Ladeströme bringen außerdem mehr Wärme und damit mehr Verlust. In der Praxis akzeptiert nicht jeder Akku jeden Ladestrom: Das Lademanagement im Gerät begrenzt den Strom auf einen für die Zellen sicheren Wert. Ein sehr starkes Netzteil lädt einen kleinen Akku deshalb nicht beliebig schneller — der Akku zieht nur so viel, wie er verträgt. Die Tabellenwerte sind daher eine Obergrenze des theoretisch Möglichen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Watt in Milliampere umrechnen — warum die Spannung zählt',
+        html: `<p>Viele Ladegeräte sind in <strong>Watt</strong> (Leistung) statt in Milliampere (Strom) beschriftet. Die Umrechnung lautet: <strong>Ladestrom (mA) = Leistung (W) ÷ Spannung (V) × 1.000</strong>. Ein 10-Watt-Netzteil bei 5 Volt liefert also 2.000 mA, ein 20-Watt-Netzteil bei 5 Volt entsprechend 4.000 mA.</p><p>Entscheidend ist die <strong>Spannung</strong>. Moderne Schnellladestandards wie USB Power Delivery handeln zwischen Gerät und Netzteil eine passende Spannung aus — die Stufen sind typischerweise <strong>5, 9, 12, 15 und 20 Volt</strong>. Ein 20-Watt-Ladegerät, das mit 9 Volt lädt, liefert nur rund 2.200 mA statt 4.000 mA bei 5 Volt. Die Leistung bleibt gleich, der Strom unterscheidet sich. Deshalb ist die mAh-Schätzung beim Schnellladen ungenauer als bei einfachen 5-Volt-Netzteilen. Wer den tatsächlichen Stromverbrauch und die Kosten seiner Geräte über die Leistung abschätzen will, findet im <a href="/technik/stromverbrauch-geraete-rechner">Stromverbrauch-Rechner</a> die passende Ergänzung.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Akkutypen und grobe Ladezeit bei Standardladung',
+        kopf: ['Gerät', 'Kapazität', 'Ladestrom (Standard)', 'Ladezeit (real)'],
+        zeilen: [
+          ['Smartwatch', '400 mAh', '400 mA (2 W)', '1 h 12 min'],
+          ['Smartphone', '5.000 mAh', '2.000 mA (10 W)', '3 h 00 min'],
+          ['Tablet', '8.000 mAh', '2.400 mA (12 W)', '4 h 00 min'],
+          ['Powerbank', '20.000 mAh', '2.000 mA (10 W)', '12 h 00 min'],
+        ],
+        fussnote: 'Richtwerte bei Standardladung und Effizienzfaktor 1,2. Mit Schnellladegeräten (20 bis 45 W) verkürzen sich diese Zeiten deutlich, vor allem bis zur 80-Prozent-Marke. Große Powerbanks laden an einfachen Netzteilen am längsten — hier lohnt sich ein Anschluss mit höherer Leistung oder das Laden über Nacht besonders. Die tatsächliche Zeit hängt zusätzlich vom Alter des Akkus und der Temperatur ab. Wichtig bei Powerbanks: Beim Laden gehen durch die Wandlung Verluste verloren, und beim späteren Entladen ans Handy noch einmal — von der aufgedruckten Kapazität kommt am Endgerät real oft nur rund 60 bis 70 Prozent an. Die hier genannten Zeiten beziehen sich auf das Aufladen der Powerbank selbst, nicht auf das spätere Weitergeben der Energie.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Akku lädt langsam? Das sollten Sie prüfen',
+        punkte: [
+          'Das mitgelieferte Original-Netzteil verwenden — schwache Ladegeräte liefern oft nur 5 W.',
+          'Ein hochwertiges Kabel mit ausreichendem Querschnitt nutzen; dünne Billigkabel bremsen den Strom.',
+          'Nicht mehrere Geräte gleichzeitig an einem Mehrfach-USB-Port laden — die Leistung teilt sich auf.',
+          'Stromhungrige Hintergrund-Apps schließen oder das Gerät im Flugmodus laden.',
+          'Die Akkutemperatur beachten — Hitze und Kälte verlangsamen das Laden spürbar.',
+          'Bei alten Geräten den Akkuverschleiß prüfen; ein gealterter Akku lädt langsamer und hält kürzer.',
+          'Die Ladebuchse auf Schmutz oder lose Kontakte kontrollieren.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Bei rund 80 Prozent stoppen schont den Akku',
+        text: 'Lithium-Ionen-Akkus altern am wenigsten, wenn sie überwiegend zwischen 20 und 80 Prozent betrieben werden. Dauerhaftes Laden auf volle 100 Prozent und das Liegenlassen bei hohem Ladestand setzen den Zellen stärker zu. Viele Geräte bieten daher eine Funktion zum Begrenzen der Ladung oder ein optimiertes Laden, das die letzten Prozente erst kurz vor dem üblichen Weckzeitpunkt auffüllt. Praktischer Nebeneffekt: Wer ohnehin meist nur bis 80 Prozent lädt, profitiert von der schnellen CC-Phase und spart sich die zähe Ladeschlussphase. Schnellladen selbst ist unkritisch, solange der Akku dabei nicht dauerhaft heiß wird — moderne Geräte regeln Strom und Temperatur automatisch. Ebenfalls hilfreich: das Gerät beim Laden nicht unter dicke Kissen oder Decken legen, damit die Wärme abziehen kann, und es bei sommerlicher Hitze nicht zusätzlich in der prallen Sonne laden. Wärme ist der größte Feind der Akku-Lebensdauer — noch vor der reinen Zahl der Ladezyklen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Akkuverschleiß: Warum die Ladezeit mit dem Alter steigt',
+        html: `<p>Akkus verlieren über ihre Lebensdauer an Kapazität. Nach mehreren hundert <strong>Ladezyklen</strong> — ein Zyklus entspricht einer vollen Ladung — sinkt die nutzbare Kapazität spürbar, oft auf 80 Prozent oder weniger nach etwa 500 bis 1.000 Zyklen. Ein gealterter Akku nimmt nicht nur weniger Energie auf, er lädt häufig auch langsamer, weil das Lademanagement vorsichtiger wird, um die müden Zellen zu schonen.</p><p>Das erklärt, warum ein zwei Jahre altes Smartphone gefühlt länger an der Steckdose hängt als am ersten Tag — und gleichzeitig schneller leer ist. Wer die Lebensdauer verlängern will, vermeidet Tiefentladung, dauerhafte Hitze und konstantes Laden bei 100 Prozent. Für eine grobe Vorstellung, wie lange einzelne Vorgänge im Alltag dauern, hilft auch der <a href="/technik/download-rechner">Download-Rechner</a> als verwandtes Werkzeug aus der Technik-Kategorie. Bleibt die reale Ladezeit deutlich hinter den hier berechneten Werten zurück, ist meist ein verschlissener Akku oder ein schwaches Netzteil die Ursache.</p>`,
+      },
+    ],
+    quellen: [
+      {
+        titel: 'USB Power Delivery (USB-IF Spezifikation)',
+        hinweis: 'Definiert die Spannungsstufen 5/9/12/15/20 V beim Schnellladen — Grund, warum mAh-Schätzungen nur Näherungen sind.',
+      },
+      {
+        titel: 'Li-Ion-Ladeverfahren CC/CV',
+        hinweis: 'Konstantstrom-/Konstantspannungs-Laden: ab ca. 80 % sinkt der Ladestrom, dadurch dauert die letzte Ladephase überproportional lange.',
+      },
+    ],
+  },
+  {
     slug: 'datenmengen-umrechner',
     letzteAktualisierung: '2026-06-19',
     titel: 'Datenmengen-Umrechner',
