@@ -171,6 +171,7 @@ export default function AkkuLadezeitRechner() {
             </div>
           </div>
 
+          <CrossLink href="/technik/powerbank-rechner" emoji="🔋" text="Wie oft lädt meine Powerbank das Handy?" />
           <CrossLink href="/technik/stromverbrauch-geraete-rechner" emoji="⚡" text="Stromverbrauch & -kosten von Geräten" />
           <CrossLink href="/technik/download-rechner" emoji="⏱️" text="Wie lange dauert ein Download?" />
 
