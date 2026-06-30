@@ -517,6 +517,169 @@ Viele Ladegeräte geben statt des Stroms eine Leistung in Watt an. Es gilt: Lade
     ],
   },
   {
+    slug: 'powerbank-rechner',
+    letzteAktualisierung: '2026-06-30',
+    titel: 'Powerbank-Rechner',
+    beschreibung: 'Powerbank-Ladungen berechnen: Wie oft lädt eine Powerbank Ihr Handy oder Tablet? Mit nutzbarer statt aufgedruckter Kapazität.',
+    kategorie: 'Technik',
+    kategorieSlug: 'technik',
+    metaTitle: 'Powerbank-Rechner — Ladungen berechnen',
+    metaDescription: 'Powerbank-Rechner: Wie oft lädt eine Powerbank Ihr Handy? Mit nutzbarer statt aufgedruckter Kapazität — realistisch dank Wirkungsgrad.',
+    keywords: ['powerbank rechner', 'wie oft lädt powerbank handy', 'powerbank kapazität nutzbar', 'powerbank ladungen berechnen', 'nutzbare kapazität powerbank', '20000 mah powerbank', 'powerbank wirkungsgrad', 'powerbank handy laden'],
+    icon: '🔋',
+    formel: 'Nutzbare Kapazität = Nennkapazität(mAh) × Wirkungsgrad | Ladungen = Nutzbare Kapazität ÷ Geräte-Akku(mAh)',
+    beispiel: '20.000 mAh × 0,65 = 13.000 mAh nutzbar ÷ 5.000 mAh Handy = 2,6 volle Ladungen.',
+    erklaerung: `**Powerbank-Ladungen berechnen — warum die aufgedruckte Kapazität täuscht**
+
+Wie oft eine Powerbank ein Gerät lädt, lässt sich nicht einfach durch Teilen der aufgedruckten Kapazität durch den Geräte-Akku ermitteln. Eine 20.000-mAh-Powerbank lädt ein 5.000-mAh-Handy nämlich nicht vier Mal, sondern nur rund 2,6 Mal. Der Grund liegt in der Spannungswandlung.
+
+**Nutzbare statt aufgedruckte Kapazität**
+
+Die aufgedruckte Kapazität gilt für die verbauten Lithium-Ionen-Zellen mit rund 3,7 Volt. Geladen wird ein Handy aber über den USB-Anschluss mit 5 Volt. Die Powerbank muss die Spannung also hochwandeln — und dabei gehen rund ein Drittel der Energie als Wärme und Wandlungsverlust verloren. Real nutzbar bleiben typisch 60 bis 70 Prozent. Dieser Rechner setzt standardmäßig einen Wirkungsgrad von 0,65 an.
+
+**Die Rechnung**
+
+Nutzbare Kapazität = Nennkapazität × Wirkungsgrad; Ladungen = nutzbare Kapazität ÷ Geräte-Akku. Eine 20.000-mAh-Powerbank hat also rund 13.000 mAh nutzbar und lädt damit ein 5.000-mAh-Handy etwa 2,6 Mal voll. Wer kürzere, dickere Kabel nutzt und nicht schnelllädt, kommt näher an 70 Prozent.`,
+    faq: [
+      {
+        frage: 'Warum lädt eine 20.000-mAh-Powerbank mein 5.000-mAh-Handy nicht 4-mal?',
+        antwort: 'Weil die aufgedruckte Kapazität für die Zellspannung von 3,7 Volt gilt, das Handy aber über 5 Volt geladen wird. Bei der Spannungswandlung gehen rund 35 Prozent als Wärme und Wandlerverlust verloren. Aus 20.000 mAh werden so nur rund 13.000 mAh nutzbar — das reicht für etwa 2,6 statt 4 volle Ladungen.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen aufgedruckter und nutzbarer Kapazität?',
+        antwort: 'Die aufgedruckte (Nenn-)Kapazität beschreibt die Energie der Akkuzellen bei 3,7 Volt. Die nutzbare Kapazität ist das, was nach Spannungswandlung auf 5 Volt und Verlusten tatsächlich beim Endgerät ankommt — typisch 60 bis 70 Prozent. Bei einer 10.000-mAh-Powerbank sind das nur rund 6.500 mAh.',
+      },
+      {
+        frage: 'Wie viele Ladungen schafft eine 10.000-mAh-Powerbank?',
+        antwort: 'Mit rund 6.500 mAh nutzbarer Kapazität lädt sie ein modernes 5.000-mAh-Handy nur etwa 1,3-mal voll — also gut einmal mit kleiner Reserve. Wer mehrere Ladungen braucht, sollte zu 20.000 mAh oder mehr greifen. Ältere Handys mit 3.000 mAh lädt eine 10.000er rund 2-mal.',
+      },
+      {
+        frage: 'Welchen Wirkungsgrad soll ich ansetzen?',
+        antwort: 'Realistisch sind 65 Prozent (Standard im Rechner). Bei kurzen, dicken Kabeln und langsamem Laden sind bis zu 70 Prozent möglich. Schnellladen, lange oder dünne Kabel und Kälte drücken den Wert auf 60 Prozent oder darunter. Der genaue Wert schwankt je nach Powerbank, Kabel und Gerät.',
+      },
+      {
+        frage: 'Welche Powerbank darf ich im Flugzeug mitnehmen?',
+        antwort: 'Powerbanks bis 100 Wattstunden (Wh) sind im Handgepäck ohne Genehmigung erlaubt — das entspricht bei 3,7 Volt rund 27.000 mAh. Zwischen 100 und 160 Wh ist die Zustimmung der Airline nötig, darüber ist die Mitnahme verboten. Powerbanks gehören immer ins Handgepäck, nie in den Koffer.',
+      },
+      {
+        frage: 'Warum schafft meine alte Powerbank weniger Ladungen?',
+        antwort: 'Wie jeder Lithium-Ionen-Akku verliert auch eine Powerbank über die Ladezyklen an Kapazität. Nach einigen hundert Zyklen sinkt die nutzbare Energie spürbar. Zusätzlich entladen sich Powerbanks langsam von selbst (Selbstentladung), wenn sie ungenutzt liegen. Beides senkt die Zahl der realen Ladungen mit dem Alter.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Wie man Powerbank-Ladungen berechnet',
+        html: `<p>Die naheliegende Rechnung führt in die Irre: Eine 20.000-mAh-Powerbank lädt ein 5.000-mAh-Handy <strong>nicht</strong> vier Mal voll. Der Grund ist die <strong>nutzbare Kapazität</strong>, die deutlich unter dem aufgedruckten Wert liegt.</p><p>Die korrekte Rechnung läuft in zwei Schritten: Zuerst wird die <strong>Nennkapazität mit einem Wirkungsgrad multipliziert</strong>, um die tatsächlich abgebbare Energie zu erhalten — standardmäßig 0,65, also rund 65 Prozent. Anschließend wird diese nutzbare Kapazität durch den <strong>Geräte-Akku</strong> geteilt. Für die 20.000-mAh-Powerbank bedeutet das: 20.000 × 0,65 = 13.000 mAh nutzbar, geteilt durch 5.000 mAh ergibt rund 2,6 volle Ladungen. Das Ergebnis ist eine realistische Schätzung — der genaue Wert hängt vom Kabel, der Ladegeschwindigkeit und dem Zustand der Powerbank ab. Wer den aufgedruckten Wert einfach durch den Handy-Akku teilt, überschätzt die Zahl der Ladungen dagegen systematisch um die Hälfte.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Aufgedruckt vs. nutzbar',
+        spalteA: 'Nennkapazität (3,7 V)',
+        spalteB: 'Nutzbar (5 V, ~65 %)',
+        zeilen: [
+          { kriterium: 'Mini-Powerbank', a: '10.000 mAh', b: '≈ 6.500 mAh' },
+          { kriterium: 'Standard', a: '20.000 mAh', b: '≈ 13.000 mAh' },
+          { kriterium: 'XL / Reise', a: '27.000 mAh', b: '≈ 17.550 mAh' },
+          { kriterium: 'Faustregel', a: 'aufgedruckter Wert', b: 'mal 0,6 bis 0,7 rechnen' },
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Die mAh-Falle',
+        text: 'Aufgedruckte 20.000 mAh klingen nach vier vollen Handyladungen — tatsächlich sind es nur etwa 2,6. Der Trick steckt in der Spannung: Die Kapazitätsangabe gilt für die Akkuzellen mit 3,7 Volt, geladen wird das Handy aber über 5 Volt am USB-Anschluss. Beim Hochwandeln der Spannung gehen rund 35 Prozent der Energie verloren. Von 20.000 mAh bleiben so real nur rund 13.000 mAh übrig. Deshalb darf man niemals die aufgedruckte Kapazität direkt durch den Handy-Akku teilen — das überschätzt die Ladungen um etwa die Hälfte. Wer ehrlich plant, rechnet mit dem nutzbaren Wert von 60 bis 70 Prozent der Nennkapazität. Hersteller geben die größere Zahl an, weil sie auf dem Datenblatt eindrucksvoller wirkt. Seriöse Tests bestätigen diesen Bereich quer durch alle Marken: Egal ob günstiges No-Name-Modell oder Markengerät, am Ende kommen nur selten mehr als zwei Drittel der aufgedruckten Energie beim Handy an. Unterschiede gibt es vor allem in der zweiten Nachkommastelle, nicht in der Größenordnung. Manche Anbieter drucken inzwischen zusätzlich die nutzbare Kapazität oder die Wattstunden auf — ein Blick darauf erspart die Umrechnung. Steht nur die Nennkapazität in mAh auf dem Gehäuse, ist die Faustregel „mal 0,65" der sicherste Weg zu einer ehrlichen Erwartung. Wer mehrere Geräte über mehrere Tage versorgen will, sollte diese Reserve von vornherein einplanen, statt sich auf die optimistische Zahl auf der Verpackung zu verlassen.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '20.000-mAh-Powerbank lädt ein 5.000-mAh-Handy',
+        schritte: [
+          { label: 'Nutzbare Kapazität', formel: '20.000 mAh × 0,65', ergebnis: '13.000 mAh' },
+          { label: 'Volle Ladungen', formel: '13.000 mAh ÷ 5.000 mAh', ergebnis: '2,6 ×' },
+        ],
+        fazit: 'Eine handelsübliche 20.000-mAh-Powerbank lädt ein modernes Smartphone mit 5.000 mAh rund 2,6 Mal voll — nicht vier Mal, wie die aufgedruckte Zahl suggeriert. In der Praxis heißt das: gut zwei volle Ladungen plus eine halbe als Reserve. Für ein verlängertes Wochenende ohne Steckdose reicht das meist aus. Wer ein größeres Gerät wie ein Tablet (8.000 mAh) laden will, kommt mit derselben Powerbank nur noch auf rund 1,6 Ladungen. Die nutzbaren 13.000 mAh sind also der ehrliche Wert, mit dem man planen sollte. Rechnet man stattdessen naiv mit den aufgedruckten 20.000 mAh, landet man bei vier Ladungen — und steht am dritten Tag ohne Strom da. Genau diese Differenz zwischen Erwartung und Realität ist der häufigste Grund für Enttäuschung mit Powerbanks. Wer die 0,65 von Anfang an mitrechnet, plant verlässlich und wird unterwegs nicht überrascht.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum der Verlust entsteht',
+        html: `<p>Der Energieverlust einer Powerbank hat mehrere Ursachen, die sich addieren. Der größte Brocken ist die <strong>Spannungswandlung</strong>: Die Akkuzellen liefern rund 3,7 Volt, der USB-Anschluss gibt 5 Volt aus. Diesen Schritt erledigt ein Wandler im Inneren der Powerbank — und jeder Wandler arbeitet nicht verlustfrei, sondern erzeugt <strong>Wärme</strong>.</p><p>Hinzu kommt die <strong>Ladeeffizienz des Endgeräts</strong>: Auch das Handy wandelt die 5 Volt wieder auf seine eigene Zellspannung herunter und verliert dabei Energie. Schließlich spielt der <strong>Kabelwiderstand</strong> eine Rolle — lange oder dünne Kabel kosten zusätzliche Prozente, dicke und kurze Kabel sparen sie. In Summe kommen am Geräteakku typischerweise nur 60 bis 70 Prozent der aufgedruckten Energie an. Beim Schnellladen mit höheren Spannungen oder bei Kälte sinkt der Wert weiter. Wie lange das eigentliche Laden des Geräts dann dauert, zeigt der <a href="/technik/akku-ladezeit-rechner">Akku-Ladezeit-Rechner</a>.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Typische Powerbank-Größen',
+        werte: [
+          { label: 'Mini', wert: '5.000 mAh', hinweis: 'Notfall, Schlüsselbund-Format' },
+          { label: 'Standard', wert: '10.000 mAh', hinweis: 'Alltag, ein Tag unterwegs' },
+          { label: 'Groß', wert: '20.000 mAh', hinweis: 'Wochenende, mehrere Ladungen' },
+          { label: 'XL (Fluglimit)', wert: '26.800 mAh', hinweis: '≈ 99 Wh, knapp unter der 100-Wh-Grenze' },
+        ],
+      },
+      {
+        typ: 'tabelle',
+        titel: '20.000-mAh-Powerbank: Ladungen je Gerät',
+        kopf: ['Geräte-Akku', 'Beispiel', 'Volle Ladungen'],
+        zeilen: [
+          ['3.000 mAh', 'kleines oder älteres Handy', '4,3 ×'],
+          ['4.000 mAh', 'Standard-Handy', '3,3 ×'],
+          ['5.000 mAh', 'großes Handy', '2,6 ×'],
+          ['8.000 mAh', 'kleines Tablet', '1,6 ×'],
+        ],
+        fussnote: 'Berechnet mit der nutzbaren Kapazität von rund 13.000 mAh (20.000 mAh × Wirkungsgrad 0,65). Je größer der Geräteakku, desto weniger volle Ladungen — ein Tablet zieht so viel Energie wie zwei Handys. Die Werte sind Richtwerte: Schnellladen, lange Kabel oder Kälte senken die Zahl der Ladungen, kurze Kabel und langsames Laden erhöhen sie leicht. Zu beachten ist außerdem, dass moderne Geräte selten von 0 auf 100 Prozent geladen werden — wer sein Handy schon bei 30 Prozent ansteckt, holt entsprechend mehr Teilladungen aus der Powerbank. Die Tabelle geht von einer vollständigen Ladung des leeren Geräts aus und bildet damit den ungünstigsten, aber gut planbaren Fall ab.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Welche Powerbank für wen',
+        spalteA: 'Powerbank-Klasse',
+        spalteB: 'Passt für',
+        zeilen: [
+          { kriterium: '5.000 mAh', a: 'Mini, Schlüsselbund-Format', b: 'Notfall: rund eine halbe bis ganze Handyladung' },
+          { kriterium: '10.000 mAh', a: 'Kompakt, Alltag', b: 'gut eine volle Handyladung, ein Tag unterwegs' },
+          { kriterium: '20.000 mAh', a: 'Standard, Wochenende', b: 'rund 2 bis 3 Handyladungen oder Handy plus Tablet' },
+          { kriterium: '26.800 mAh', a: 'XL, gerade noch fluggeeignet', b: 'Reise, Tablet, mehrere Geräte über Tage' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Flugreise: die 100-Wattstunden-Grenze',
+        html: `<p>Wer mit einer Powerbank fliegt, muss die <strong>Wattstunden (Wh)</strong> kennen, nicht nur die mAh. Die Umrechnung lautet: Wattstunden = mAh × Spannung (V) ÷ 1.000. Bei der Zellspannung von 3,7 Volt entsprechen 27.000 mAh also rund <strong>100 Wh</strong> (27.000 × 3,7 ÷ 1.000 ≈ 99,9).</p><p>Diese 100 Wh sind die entscheidende Grenze: Powerbanks bis 100 Wh dürfen ohne Genehmigung im <strong>Handgepäck</strong> mitgeführt werden. Zwischen 100 und 160 Wh ist die ausdrückliche <strong>Zustimmung der Fluggesellschaft</strong> nötig, darüber ist die Mitnahme grundsätzlich verboten. Powerbanks gehören außerdem immer ins Handgepäck, niemals in den aufgegebenen Koffer — wegen der Brandgefahr von Lithium-Akkus im Frachtraum. Viele Reise-Powerbanks sind genau deshalb mit 26.800 mAh angegeben: Das liegt knapp unter der 100-Wh-Schwelle und ist ohne Rückfrage flugtauglich. Auf vielen Modellen ist die Wh-Zahl deshalb direkt aufgedruckt. Wer eine größere Powerbank besitzt, sollte vor dem Flug die Wattstunden prüfen und im Zweifel bei der Airline nachfragen — am Sicherheitscheck zählt allein der Wh-Wert, nicht die mAh-Zahl auf der Verpackung.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Mehr aus der Powerbank holen',
+        punkte: [
+          'Ein kurzes, dickes Kabel verwenden — lange dünne Kabel kosten spürbar Energie.',
+          'Auf Schnellladen verzichten, wenn es auf maximale Ladungszahl ankommt; langsames Laden ist effizienter.',
+          'Das Gerät möglichst nicht gleichzeitig benutzen und laden — das verlängert und verteuert den Vorgang.',
+          'Die Powerbank nicht bei Kälte einsetzen; niedrige Temperaturen senken die nutzbare Kapazität.',
+          'Vor der Reise die Powerbank voll aufladen — sie entlädt sich mit der Zeit auch von selbst.',
+          'Auf die Wattstunden achten, wenn die Powerbank ins Flugzeug soll (Grenze 100 Wh).',
+          'Eine zur Nutzung passende Größe wählen, statt die größte zu kaufen — XL-Powerbanks sind schwer und laden langsam.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Realistisch mit rund 65 Prozent rechnen',
+        text: 'Als Faustregel liefert eine Powerbank etwa 60 bis 70 Prozent ihrer aufgedruckten Kapazität an das Endgerät. Wer plant, sollte deshalb mit rund 65 Prozent rechnen — nicht mit dem vollen Nennwert. Konkret heißt das: Eine 10.000-mAh-Powerbank lädt ein modernes Smartphone (4.000 bis 5.000 mAh) meist nur gut einmal komplett voll, nicht zwei Mal. Für zwei sichere Ladungen sollte man eher zu einer 20.000-mAh-Powerbank greifen. Diese realistische Einschätzung erspart böse Überraschungen unterwegs, wenn der vermeintliche Energievorrat schneller leer ist als gedacht. Im Zweifel lieber eine Nummer größer wählen, als sich auf die optimistische Herstellerangabe zu verlassen. Ein einfacher Gegencheck im Alltag: Hält die Powerbank, was die Rechnung verspricht, oder ist sie schon nach anderthalb statt den erwarteten zwei Ladungen leer? Weicht der reale Wert stark nach unten ab, liegt es meist am Kabel, am Schnellladen oder am Alter der Powerbank — nicht an einer falschen Rechnung. Wer dagegen nur sein Handy für einen langen Tag absichern will, ist mit einer kompakten 10.000er meist besser bedient als mit einem schweren XL-Modell, das ständig halb voll in der Tasche liegt. Das Gewicht und die Ladezeit der Powerbank selbst wachsen mit der Kapazität — die größte Powerbank ist also nicht automatisch die beste Wahl, sondern die, die zur tatsächlichen Nutzung passt.',
+      },
+      {
+        typ: 'text',
+        titel: 'Powerbank-Verschleiß: Warum die Ladungen mit dem Alter sinken',
+        html: `<p>Eine Powerbank ist selbst ein Lithium-Ionen-Akku und unterliegt demselben Verschleiß wie der Handy-Akku. Mit jedem <strong>Ladezyklus</strong> altert sie ein Stück; nach einigen hundert Zyklen sinkt die nutzbare Kapazität merklich, oft auf 80 Prozent oder weniger. Eine zwei Jahre alte Powerbank liefert deshalb spürbar weniger Ladungen als am ersten Tag.</p><p>Hinzu kommt die <strong>Selbstentladung</strong>: Auch ungenutzt verliert eine Powerbank langsam Ladung — wer sie monatelang im Schrank liegen lässt, findet sie oft halb leer vor. Für eine lange Lebensdauer hilft es, die Powerbank weder dauerhaft voll noch ganz leer zu lagern und sie vor Hitze zu schützen. Wer den Stromverbrauch und die Lade­kosten der eigenen Geräte einschätzen will, findet im <a href="/technik/stromverbrauch-geraete-rechner">Stromverbrauch-Rechner</a> ein passendes Werkzeug. Bleibt die reale Ladungszahl deutlich hinter den hier berechneten Werten zurück, ist die Powerbank meist schlicht in die Jahre gekommen und sollte bei häufigem Einsatz ersetzt werden.</p>`,
+      },
+    ],
+    quellen: [
+      {
+        titel: 'IATA-Bestimmungen Lithium-Akkus im Handgepäck',
+        hinweis: 'Powerbanks bis 100 Wh (~27.000 mAh bei 3,7 V) sind ohne Genehmigung erlaubt, 100–160 Wh nur mit Airline-Zustimmung.',
+      },
+      {
+        titel: 'Wirkungsgrad Spannungswandlung (3,7 V → 5 V)',
+        hinweis: 'Die Nennkapazität gilt bei Zellspannung 3,7 V; die Umwandlung auf 5 V USB plus Verluste senkt die nutzbare Kapazität auf typisch 60–70 %.',
+      },
+    ],
+  },
+  {
     slug: 'datenmengen-umrechner',
     letzteAktualisierung: '2026-06-19',
     titel: 'Datenmengen-Umrechner',
