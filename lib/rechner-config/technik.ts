@@ -1500,6 +1500,165 @@ Steht die Wh-Zahl nicht auf dem Gerät, lässt sie sich aus dem Akku berechnen: 
     ],
   },
   {
+    slug: 'eauto-ladezeit-rechner',
+    letzteAktualisierung: '2026-06-30',
+    titel: 'E-Auto-Ladezeit-Rechner',
+    beschreibung: 'E-Auto-Ladezeit berechnen: Wie lange lädt ein Elektroauto an Wallbox oder Schnelllader? Richtwerte für AC und DC inkl. Ladeverlusten.',
+    kategorie: 'Technik',
+    kategorieSlug: 'technik',
+    metaTitle: 'E-Auto-Ladezeit-Rechner — Ladedauer',
+    metaDescription: 'E-Auto-Ladezeit berechnen: Wie lange lädt ein Elektroauto an Wallbox oder Schnelllader? Richtwerte für AC und DC mit Rechenweg.',
+    keywords: ['e-auto ladezeit', 'ladedauer elektroauto', 'wallbox 11 kw ladezeit', 'schnellladen 10 80', 'elektroauto laden dauer', 'ladezeit berechnen e-auto', 'ac dc laden', 'onboard charger'],
+    icon: '⚡',
+    formel: 'Energie = Akku(kWh) × (Ziel − Start) ÷ 100 | AC: ÷ min(Wallbox, Onboard-Charger) × 1,10 | DC: ÷ (Peak × 0,75) × 1,07',
+    beispiel: '60 kWh, 10→80 %, AC 11 kW (Wallbox & Auto): 42 kWh ÷ 11 × 1,10 ≈ 4 h 12 min (Richtwert).',
+    erklaerung: `**E-Auto-Ladezeit berechnen — Wallbox, Schnelllader und der Engpass**
+
+Wie lange ein Elektroauto lädt, hängt von der nachzuladenden Energiemenge und der effektiven Ladeleistung ab. Dieser Rechner ermittelt die Ladezeit für AC-Laden (Wallbox) und DC-Schnellladen — als Richtwert inklusive typischer Ladeverluste. Alle Werte sind Richtwerte mit ±10–30 Prozent Abweichung (Stand 2026), keine Herstellergarantie.
+
+**Die Rechnung**
+
+Zuerst die nachzuladende Energie: Akku-Kapazität × (Ziel-Ladestand − Start-Ladestand) ÷ 100. Ein 60-kWh-Akku von 10 auf 80 Prozent braucht also 42 kWh. Beim AC-Laden teilt man diese Energie durch die effektive Leistung und rechnet rund 10 Prozent Ladeverlust hinzu; beim DC-Schnellladen sind es etwa 7 Prozent.
+
+**Der Engpass bestimmt die Zeit**
+
+Beim AC-Laden gilt immer das Minimum aus Wallbox-Leistung und dem fahrzeugseitigen Onboard-Charger. Eine 22-kW-Wallbox lädt ein Auto mit 11-kW-Onboard-Charger nur mit 11 kW — schneller geht es nicht, weil das Auto nicht mehr annimmt. Beim DC-Laden begrenzt das Fahrzeug-DC-Limit, was eine 300-kW-Säule liefern kann.
+
+**Warum 10 bis 80 Prozent?**
+
+Oberhalb von rund 80 Prozent drosselt das Batteriemanagement die DC-Ladeleistung stark, um die Zellen zu schonen. Das letzte Fünftel dauert deshalb überproportional lange. Für das Schnellladen unterwegs ist 10 bis 80 Prozent darum der praxisrelevante Bereich.`,
+    faq: [
+      {
+        frage: 'Warum lädt mein Auto an der 22-kW-Wallbox nicht schneller?',
+        antwort: 'Weil die Ladeleistung beim AC-Laden durch den Onboard-Charger des Fahrzeugs begrenzt wird. Die meisten E-Autos haben einen 11-kW-Onboard-Charger — dann lädt das Auto auch an einer 22-kW-Wallbox nur mit 11 kW. Eine schnellere Wallbox bringt nur dann etwas, wenn das Fahrzeug AC-seitig ebenfalls 22 kW unterstützt (z. B. Renault Zoe/Megane, smart #1, Polestar 2 LR).',
+      },
+      {
+        frage: 'Warum lädt man nur bis 80 Prozent?',
+        antwort: 'Oberhalb von rund 80 Prozent drosselt das Batteriemanagement (BMS) die Ladeleistung deutlich, um die Zellen zu schonen. Die letzten 20 Prozent dauern beim Schnellladen oft genauso lange wie der Sprung von 10 auf 80. Auf Langstrecke ist es daher zeitsparender, bei 80 Prozent weiterzufahren. Zu Hause an der Wallbox über Nacht ist das Laden auf 100 Prozent dagegen unproblematisch.',
+      },
+      {
+        frage: 'Wie genau ist die Berechnung?',
+        antwort: 'Die Werte sind Richtwerte mit einer realistischen Abweichung von ±10 bis 30 Prozent. Die tatsächliche Ladezeit hängt von Temperatur (besonders Kälte), Batteriezustand, Vorkonditionierung und der genauen Ladekurve des Fahrzeugs ab. Die Berechnung berücksichtigt typische Ladeverluste, ersetzt aber keine Herstellerangabe. Stand der zugrunde gelegten Richtwerte: 2026.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen AC- und DC-Laden?',
+        antwort: 'Beim AC-Laden (Wechselstrom, Wallbox zu Hause) wandelt der Onboard-Charger des Autos den Strom für die Batterie um — das begrenzt die Leistung auf meist 11 kW. Beim DC-Schnellladen (Gleichstrom, Säule an der Autobahn) fließt der Strom direkt in die Batterie, mit 50 bis 350 kW. AC ist fürs Laden über Nacht gedacht, DC fürs schnelle Nachladen unterwegs.',
+      },
+      {
+        frage: 'Wie lange dauert eine volle Ladung an der Schuko-Steckdose?',
+        antwort: 'Sehr lange — die normale Haushaltssteckdose (Schuko) liefert nur rund 2,3 kW. Ein 60-kWh-Akku von 10 auf 80 Prozent braucht damit gut 20 Stunden. Die Schuko-Steckdose ist deshalb nur eine Notlösung; fürs regelmäßige Laden ist eine Wallbox mit 11 kW die richtige Wahl, weil sie schneller und auf Dauer sicherer ist.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Wie sich die Ladezeit ergibt',
+        html: `<p>Die Ladezeit eines E-Autos ergibt sich aus zwei Größen: der <strong>nachzuladenden Energiemenge</strong> und der <strong>effektiven Ladeleistung</strong>. Die Energiemenge berechnet sich aus der Akku-Kapazität und dem Ladestand-Fenster: Akku (kWh) × (Ziel-Ladestand − Start-Ladestand) ÷ 100. Ein 60-kWh-Akku, der von 10 auf 80 Prozent geladen wird, braucht also 42 kWh.</p><p>Diese Energie geteilt durch die effektive Ladeleistung ergibt die reine Ladezeit — plus einen Aufschlag für <strong>Ladeverluste</strong>, denn nicht der gesamte aus dem Netz gezogene Strom landet in der Batterie. Beim AC-Laden gehen rund 10 Prozent verloren, beim DC-Schnellladen etwa 7 Prozent. Das <strong>Ladestand-Fenster</strong> ist wichtig, weil man selten von 0 auf 100 lädt: Im Alltag startet man oft bei 20 bis 40 Prozent, und beim Schnellladen lohnt sich nur der Bereich bis 80 Prozent. Alle Ergebnisse dieses Rechners sind Richtwerte mit ±10–30 Prozent Abweichung (Stand 2026) und keine verbindliche Herstellerangabe.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '60 kWh von 10 auf 80 Prozent an 11-kW-Wallbox',
+        schritte: [
+          { label: 'Nachzuladende Energie', formel: '60 kWh × (80 − 10) ÷ 100', ergebnis: '42 kWh' },
+          { label: 'Effektive Ladeleistung', formel: 'min(11 kW Wallbox, 11 kW Onboard-Charger)', ergebnis: '11 kW' },
+          { label: 'Ladezeit inkl. ~10 % Verlust', formel: '42 ÷ 11 × 1,10', ergebnis: '≈ 4 h 12 min' },
+        ],
+        fazit: 'Ein typisches Kompakt-E-Auto mit 60-kWh-Akku lädt an einer 11-kW-Wallbox von 10 auf 80 Prozent in rund 4 Stunden — ideal fürs Laden über Nacht. Diese Zeit deckt sich mit den Praxiswerten von ADAC und Fachpresse. Der Aufschlag von 10 Prozent berücksichtigt die Ladeverluste, die beim Umwandeln und Laden entstehen. Wer zu Hause über Nacht lädt, merkt von dieser Dauer nichts — das Auto steht ohnehin. Der Wert ist ein Richtwert; bei Kälte oder einem alten Akku kann die reale Ladezeit spürbar länger ausfallen.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Der Engpass entscheidet — nicht die größte Zahl',
+        text: 'Die häufigste Fehlannahme beim Laden: Eine stärkere Ladestation lädt automatisch schneller. Tatsächlich gilt immer das Minimum aus Ladestation und Fahrzeug. Beim AC-Laden begrenzt der Onboard-Charger des Autos: Hat dieser 11 kW, lädt das Auto auch an einer 22-kW-Wallbox nur mit 11 kW — der Rest bleibt ungenutzt. Eine teurere 22-kW-Wallbox bringt dann keinen Vorteil. Beim DC-Schnellladen begrenzt das Fahrzeug-DC-Limit: Ein Auto, das maximal 150 kW annimmt, lädt auch an einer 350-kW-Säule nur mit 150 kW. Die beworbene Säulenleistung ist also eine Obergrenze, kein Versprechen. Wer die Ladezeit realistisch einschätzen will, muss immer beide Werte kennen — den der Station und den des Fahrzeugs — und mit dem kleineren rechnen. Genau das macht dieser Rechner automatisch und weist auf den begrenzenden Engpass hin.',
+      },
+      {
+        typ: 'text',
+        titel: 'AC oder DC — zwei Welten des Ladens',
+        html: `<p>E-Autos laden auf zwei grundverschiedene Arten. Beim <strong>AC-Laden</strong> (Wechselstrom) kommt der Strom aus der normalen Hausinstallation oder einer Wallbox. Der <strong>Onboard-Charger</strong> im Auto wandelt ihn für die Batterie um — und genau dieses Bauteil begrenzt die Leistung, bei den meisten Modellen auf 11 kW. AC-Laden ist die Lösung fürs <strong>Laden zu Hause oder am Arbeitsplatz</strong>, typischerweise über mehrere Stunden oder über Nacht.</p><p>Beim <strong>DC-Schnellladen</strong> (Gleichstrom) sitzt der leistungsstarke Wandler in der Ladesäule selbst, sodass der Strom direkt in die Batterie fließt — mit 50 bis 350 kW. Das ist die Lösung für <strong>unterwegs</strong>, etwa an der Autobahn, wo man in einer Pause von 20 bis 40 Minuten genug für die Weiterfahrt nachlädt. Beide Ladearten ergänzen sich: AC für den günstigen, schonenden Alltag, DC für die schnelle Zwischenladung auf Langstrecke. Welcher Anschluss real wie viel liefert, zeigt der Rechner über den Modus-Umschalter.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'AC-Ladezeit je Akku und Anschluss (10 → 80 %)',
+        kopf: ['Akku', 'Schuko 2,3 kW', 'Wallbox 11 kW', 'Wallbox 22 kW'],
+        zeilen: [
+          ['40 kWh', '13 h 23 min', '2 h 48 min', '1 h 24 min'],
+          ['60 kWh', '20 h 05 min', '4 h 12 min', '2 h 06 min'],
+          ['77 kWh', '25 h 47 min', '5 h 23 min', '2 h 42 min'],
+        ],
+        fussnote: 'Richtwerte für AC-Laden von 10 auf 80 Prozent inkl. rund 10 Prozent Ladeverlust (Stand 2026). Die 22-kW-Spalte gilt nur für die wenigen Fahrzeuge mit 22-kW-Onboard-Charger — die meisten E-Autos laden AC mit maximal 11 kW und erreichen dann die Werte der mittleren Spalte. Die Schuko-Steckdose ist nur eine Notlösung: Über 20 Stunden für eine Ladung sind im Alltag nicht praktikabel.',
+      },
+      {
+        typ: 'text',
+        titel: 'Die Ladekurve und das 10-bis-80-Prozent-Fenster',
+        html: `<p>Anders als beim Tanken läuft das Laden nicht gleichmäßig. Beim DC-Schnellladen folgt die Leistung einer <strong>Ladekurve</strong>: Bei niedrigem Ladestand nimmt die Batterie die volle Leistung auf, doch je voller sie wird, desto stärker drosselt das <strong>Batteriemanagement</strong> (BMS) — oberhalb von rund 80 Prozent oft drastisch, um die Zellen vor Überhitzung und Verschleiß zu schützen.</p><p>Das hat eine wichtige Konsequenz: Das letzte Fünftel von 80 auf 100 Prozent dauert beim Schnellladen häufig genauso lange wie der gesamte Sprung von 10 auf 80. Deshalb ist <strong>10 bis 80 Prozent</strong> der praxisrelevante Bereich fürs Schnellladen unterwegs — danach lohnt sich das Weiterfahren mehr als das Warten. Dieser Rechner bildet die Ladekurve über einen Durchschnittsfaktor ab: Er rechnet beim DC-Laden mit rund 75 Prozent der Spitzenleistung, weil diese nur kurz anliegt. Zu Hause an der Wallbox spielt die Kurve dagegen kaum eine Rolle, weil die AC-Leistung ohnehin niedriger ist und das volle Laden über Nacht problemlos möglich ist.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'DC-Schnellladen: 60 kWh an 150-kW-Säule',
+        schritte: [
+          { label: 'Nachzuladende Energie', formel: '60 kWh × 70 ÷ 100', ergebnis: '42 kWh' },
+          { label: 'Effektive Leistung (Peak × 0,75)', formel: '150 kW × 0,75', ergebnis: '112,5 kW' },
+          { label: 'Ladezeit inkl. ~7 % Verlust', formel: '42 ÷ 112,5 × 1,07', ergebnis: '≈ 24 min' },
+        ],
+        fazit: 'An einer 150-kW-Schnellladesäule lädt der 60-kWh-Akku von 10 auf 80 Prozent in rund 24 Minuten — knapp eine Kaffeepause. Statt mit der vollen Spitzenleistung von 150 kW wird mit einem Durchschnitt von rund 112,5 kW gerechnet (75 Prozent), weil die Leistung über die Ladekurve abnimmt. Voraussetzung ist, dass das Fahrzeug DC-seitig mindestens 150 kW annimmt; sonst begrenzt das niedrigere Fahrzeug-Limit. Auch dieser Wert ist ein Richtwert — Kälte oder eine nicht vorkonditionierte Batterie können die Zeit deutlich verlängern.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'DC-Schnellladen 10 → 80 % je Säulenleistung (60 kWh)',
+        kopf: ['Säulenleistung', 'Effektiv (× 0,75)', 'Ladezeit (Richtwert)'],
+        zeilen: [
+          ['50 kW', '37,5 kW', '1 h 12 min'],
+          ['150 kW', '112,5 kW', '24 min'],
+          ['300 kW', '225 kW', '12 min'],
+        ],
+        fussnote: 'Richtwerte fürs DC-Schnellladen eines 60-kWh-Akkus von 10 auf 80 Prozent (Stand 2026). Entscheidend ist immer das Minimum aus Säulenleistung und Fahrzeug-DC-Limit: Eine 300-kW-Säule nützt nur, wenn das Auto diese Leistung auch annimmt. Viele aktuelle Modelle liegen zwischen 100 und 200 kW DC-Spitzenleistung. Die effektive Leistung liegt wegen der Ladekurve unter dem Spitzenwert, weshalb hier mit 75 Prozent gerechnet wird. Größere Akkus laden absolut betrachtet länger, halten an leistungsstarken Säulen aber oft länger eine hohe Leistung und liefern dafür mehr Reichweite pro Ladestopp — die reine Minutenzahl sagt also noch nichts über die nachgeladenen Kilometer.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum die reale Ladezeit abweicht',
+        html: `<p>Die berechneten Zeiten sind <strong>Richtwerte mit ±10 bis 30 Prozent Abweichung</strong> — die tatsächliche Ladedauer kann spürbar abweichen. Der größte Faktor ist die <strong>Temperatur</strong>: Bei Kälte nimmt eine Batterie deutlich weniger Leistung an, weshalb das Schnellladen im Winter erheblich länger dauern kann. Eine kalte Batterie ohne <strong>Vorkonditionierung</strong> (Vorwärmen vor dem Laden) erreicht oft nicht ihre volle Ladeleistung.</p><p>Auch das <strong>Batteriealter</strong> spielt eine Rolle: Mit den Jahren sinkt die nutzbare Kapazität, und das BMS lädt vorsichtiger. Hinzu kommt die fahrzeugspezifische <strong>Ladekurve</strong>, die je nach Modell unterschiedlich verläuft. Aus all diesen Gründen sind die hier genannten Werte eine fundierte Schätzung und keine Herstellergarantie (Stand 2026). Wer den eigenen Stromverbrauch und damit die Kosten im Blick behalten will, findet im <a href="/technik/stromverbrauch-geraete-rechner">Stromverbrauch-Rechner</a> eine Ergänzung. Im Zweifel gilt: lieber etwas mehr Zeit einplanen, besonders bei Kälte und auf der Langstrecke.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Schneller und schonender laden',
+        punkte: [
+          'Fürs tägliche Laden eine Wallbox (11 kW) statt der Schuko-Steckdose nutzen.',
+          'Beim DC-Schnellladen bei rund 80 Prozent stoppen und weiterfahren.',
+          'Die Batterie vor dem Schnellladen vorkonditionieren (viele Autos tun das über die Navigation automatisch).',
+          'Im Alltag bevorzugt zu Hause oder am Arbeitsplatz mit AC laden — günstiger und schonender.',
+          'Das eigene Onboard-Charger-Limit kennen, bevor man eine teure 22-kW-Wallbox kauft.',
+          'Den Akku nicht ständig auf 100 Prozent laden; 80 Prozent schonen die Zellen im Alltag.',
+          'Auf Langstrecke die Ladestopps entlang der Route vorab planen.',
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Onboard-Charger-Realität 2026',
+        html: `<p>Beim AC-Laden ist der <strong>Onboard-Charger</strong> der entscheidende Engpass — und hier hat sich ein klarer Standard etabliert. Die große Mehrheit der E-Autos lädt AC-seitig mit <strong>11 kW</strong>: Das gilt für die meisten Modelle von Tesla, VW, Hyundai, Kia, BMW und BYD. Eine 11-kW-Wallbox ist deshalb für fast alle Fahrzeuge die passende und ausreichende Wahl.</p><p>Nur wenige Modelle laden AC mit <strong>22 kW</strong> — dazu zählen etwa der Renault Zoe und Megane, der smart #1 und der Polestar 2 in der Long-Range-Version. Für diese lohnt sich eine 22-kW-Wallbox, sofern der Hausanschluss sie hergibt. Für alle anderen wäre sie hinausgeworfenes Geld, weil das Auto die zusätzliche Leistung gar nicht annimmt. Vor dem Wallbox-Kauf lohnt sich daher ein Blick ins Datenblatt des eigenen Fahrzeugs. Wie sich die Ladekosten gegenüber einem Verbrenner schlagen, lässt sich mit dem <a href="/auto/spritkosten-rechner">Spritkosten-Rechner</a> gegenrechnen — der Strompreis pro 100 km liegt meist deutlich unter dem Kraftstoffpreis.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Zu Hause über Nacht oder unterwegs in der Pause',
+        html: `<p>In der Praxis verschmelzen die beiden Ladearten zu einem einfachen Alltagsmuster. Den größten Teil der Energie holt sich ein E-Auto <strong>zu Hause über Nacht</strong> an der Wallbox: Dort spielt die Ladedauer kaum eine Rolle, weil das Auto ohnehin steht — am Morgen ist es voll, ganz ohne Umweg zur Tankstelle. Das ist der bequemste und günstigste Weg, und für viele Pendler reicht er völlig aus.</p><p>Das <strong>DC-Schnellladen</strong> kommt vor allem auf der <strong>Langstrecke</strong> ins Spiel: Hier zählt jede Minute, und der 10-bis-80-Prozent-Sprung in der Kaffeepause hält die Reisezeit kurz. Eine gute <strong>Ladeplanung</strong> macht dabei den Unterschied — wer Ladestopps an leistungsstarken Säulen entlang der Route einplant und bei 80 Prozent weiterfährt, kommt kaum langsamer voran als mit einem Verbrenner. Die hier berechneten Richtwerte helfen, diese Stopps realistisch einzuschätzen. Wichtig bleibt: Es sind Orientierungswerte (Stand 2026), die reale Ladezeit hängt von Fahrzeug, Temperatur und Ladesäule ab.</p>`,
+      },
+    ],
+    quellen: [
+      {
+        titel: 'ADAC — Ladezeiten & Ladeverluste bei E-Autos',
+        url: 'https://www.adac.de/rund-ums-fahrzeug/elektromobilitaet/laden/',
+        hinweis: 'Reale Ladezeiten liegen wegen Ladeverlusten und BMS-Drosselung über den theoretischen Werten; Richtwerte mit ±10–30 % Abweichung.',
+      },
+      {
+        titel: 'Mennekes — Wallbox & AC-Ladeleistung',
+        hinweis: 'AC-Ladeleistung wird durch den Onboard-Charger des Fahrzeugs begrenzt (häufig 11 kW); die Wallbox kann nicht mehr liefern, als das Auto annimmt.',
+      },
+      {
+        titel: 'Ladekurve / 10–80-%-Fenster (Batteriemanagement)',
+        hinweis: 'Oberhalb ~80 % SoC drosselt das BMS die DC-Ladeleistung deutlich, um die Zellen zu schonen — daher ist 10→80 % der praxisrelevante Schnelllade-Bereich.',
+      },
+    ],
+  },
+  {
     slug: 'datenmengen-umrechner',
     letzteAktualisierung: '2026-06-19',
     titel: 'Datenmengen-Umrechner',

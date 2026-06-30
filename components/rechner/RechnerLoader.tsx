@@ -227,6 +227,7 @@ const RECHNER_MAP: Record<string, ComponentType> = {
   'video-dateigroesse-rechner': dyn(() => import('@/components/rechner/VideoDateigroesseRechner')),
   'netzteil-watt-rechner': dyn(() => import('@/components/rechner/NetzteilWattRechner')),
   'usv-laufzeit-rechner': dyn(() => import('@/components/rechner/UsvLaufzeitRechner')),
+  'eauto-ladezeit-rechner': dyn(() => import('@/components/rechner/EautoLadezeitRechner')),
   'datenmengen-umrechner': dyn(() => import('@/components/rechner/DatenmengenRechner')),
   'megapixel-rechner': dyn(() => import('@/components/rechner/MegapixelRechner')),
   'stromverbrauch-geraete-rechner': dyn(() => import('@/components/rechner/StromverbrauchGeraeteRechner')),
