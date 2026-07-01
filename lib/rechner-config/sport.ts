@@ -1176,4 +1176,180 @@ Die Werte sind Richtwerte für gesunde, trainierte Läufer nach dem Daniels-Mode
       },
     ],
   },
+  {
+    slug: 'laufband-steigung-rechner',
+    letzteAktualisierung: '2026-07-01',
+    titel: 'Laufband-Steigung-Rechner',
+    beschreibung: 'Laufband-Tempo in ein Outdoor-Äquivalent umrechnen: Wie schnell läufst du bei gegebener Band-Geschwindigkeit und Steigung auf der Straße?',
+    kategorie: 'Sport & Fitness',
+    kategorieSlug: 'sport',
+    metaTitle: 'Laufband-Steigung-Rechner — Outdoor-Pace',
+    metaDescription: 'Laufband-Steigung umrechnen: Band-Tempo plus Steigung ergibt das Outdoor-Äquivalent auf ebener Straße — mit Pace-Tabelle und Rechenweg.',
+    keywords: ['laufband steigung', 'laufband pace outdoor', 'treadmill äquivalent', '1 prozent steigung laufband', 'grade adjusted pace', 'laufband tempo straße', 'laufband umrechnen', 'incline laufband'],
+    icon: '🏃',
+    formel: 'Outdoor-km/h = Band-km/h × (1 + 0,03 × Steigung%) | Pace = 60 ÷ km/h',
+    beispiel: '10 km/h bei 2 % Steigung: 10 × (1 + 0,03 × 2) = 10,60 km/h ≈ 5:40 min/km auf der Straße.',
+    erklaerung: `**Laufband-Steigung-Rechner — vom Band aufs Outdoor-Tempo**
+
+Laufen auf dem Laufband und auf der Straße ist nicht dasselbe: Auf dem Band fehlt der Luftwiderstand, und das Laufband „zieht" den Fuß ein Stück mit. Dieselbe angezeigte Geschwindigkeit fühlt sich draußen deshalb anstrengender an. Eine eingestellte Steigung gleicht diesen Unterschied aus. Dieser Rechner wandelt Band-Geschwindigkeit und Steigung in ein Outdoor-Äquivalent um — also das Tempo auf ebener Straße bei gleichem Aufwand.
+
+**Die Formel**
+
+Nach Jones & Doust (1996) erhöht jedes Prozent Steigung die Stoffwechselkosten um rund drei Prozent. Daraus folgt: Outdoor-Geschwindigkeit = Band-Geschwindigkeit × (1 + 0,03 × Steigung in Prozent). Ein Band-Tempo von 10 km/h bei 2 % Steigung entspricht also 10 × 1,06 = 10,60 km/h auf der Straße — eine Pace von rund 5:40 statt 6:00 min/km.
+
+**Die 1-Prozent-Regel**
+
+Bei mittlerem Tempo gleicht eine Steigung von etwa 1 % den fehlenden Luftwiderstand aus. Ein Laufband auf 1 % zu stellen macht das Training also mit dem Laufen auf ebener Straße vergleichbar. Ohne Steigung überschätzt man leicht seine reale Straßenform.
+
+**Nur ein Richtwert**
+
+Die Umrechnung gilt für mittlere Laufgeschwindigkeiten. Bei sehr steilen Steigungen, beim Gehen oder bei individueller Laufökonomie weicht der reale Aufwand ab. Nutzen Sie den Wert als Orientierung, nicht als exakte Messung.`,
+    faq: [
+      {
+        frage: 'Warum sollte ich 1 % Steigung einstellen?',
+        antwort: 'Auf dem Laufband fehlt der Luftwiderstand, den man draußen überwinden muss. Bei mittlerem Tempo gleicht eine Steigung von rund 1 % genau diesen Unterschied aus (Jones & Doust 1996). Ein Laufband auf 1 % entspricht damit ungefähr dem Laufen auf ebener Straße. Ohne Steigung ist das Band etwas leichter, und man überschätzt seine reale Straßenform.',
+      },
+      {
+        frage: 'Ist Laufen auf dem Laufband leichter als draußen?',
+        antwort: 'Bei 0 % Steigung tendenziell ja — es fehlt der Luftwiderstand, und das mitlaufende Band unterstützt den Beinrücklauf leicht. Der Unterschied ist bei langsamem Tempo klein und wächst mit der Geschwindigkeit. Mit 1 bis 2 % Steigung gleicht man das aus. Dafür fehlt auf dem Band der Abwärtslauf, der draußen zur Erholung beiträgt.',
+      },
+      {
+        frage: 'Wie genau ist die Umrechnung?',
+        antwort: 'Sie ist ein gut belegter Richtwert für mittlere Laufgeschwindigkeiten (etwa 8 bis 16 km/h). Die Faustregel „1 % Steigung ≈ 3 % Mehraufwand" stammt aus sportwissenschaftlichen Studien. Bei sehr steilen Steigungen, beim Gehen oder bei ungewöhnlicher Laufökonomie weicht der reale Aufwand ab. Betrachten Sie das Ergebnis als Orientierung, nicht als Labormessung.',
+      },
+      {
+        frage: 'Welche Steigung für welches Training?',
+        antwort: 'Für lockere Grundlagenläufe und um die Straße abzubilden reicht 1 %. Für Tempoläufe sind 1 bis 2 % üblich. Bergintervalle zur Kraftausdauer nutzen 4 bis 8 %. Das populäre „12-3-30"-Workout (12 % Steigung, 3 mph, 30 Minuten) ist zügiges Gehen und gelenkschonend. Höhere Steigungen trainieren zusätzlich die Muskulatur, sind aber kein reines Ausdauer-Äquivalent mehr.',
+      },
+      {
+        frage: 'Warum ist mein Laufband-Tempo draußen nicht gleich schnell?',
+        antwort: 'Weil draußen der Luftwiderstand, unebener Untergrund und fehlende Bandunterstützung hinzukommen. Wer auf dem Band ohne Steigung trainiert und draußen dasselbe Tempo erwartet, wird oft enttäuscht. Der Rechner zeigt das realistische Straßen-Äquivalent und hilft, Laufband- und Outdoor-Training fair zu vergleichen.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Warum Laufband und Straße nicht dasselbe sind',
+        html: `<p>Auf dem Laufband dieselbe Geschwindigkeit wie draußen einzustellen bedeutet nicht denselben Aufwand. Zwei Effekte machen das Band etwas leichter: Erstens fehlt der <strong>Luftwiderstand</strong> — draußen muss man die Luft vor sich verdrängen, auf dem Band steht sie still. Zweitens „zieht" das laufende Band den Fuß beim Bodenkontakt ein Stück mit, was den aktiven Abdruck geringfügig <strong>unterstützt</strong>.</p><p>Beide Effekte sind bei langsamem Tempo klein und wachsen mit der Geschwindigkeit. Die gängige Lösung ist eine leichte <strong>Steigung</strong>, die den fehlenden Widerstand ausgleicht. Dieser Rechner setzt das in eine Zahl um: Er wandelt Band-Geschwindigkeit und Steigung in ein <strong>Outdoor-Äquivalent</strong> um — also das Tempo, das auf ebener Straße denselben Aufwand bedeutet. So lassen sich Laufband-Workouts und Straßentraining fair vergleichen, und man überschätzt seine reale Form nicht. Wer ausschließlich ohne Steigung auf dem Band trainiert, erlebt draußen oft eine unangenehme Überraschung, weil dieselbe angezeigte Geschwindigkeit im Freien spürbar härter ist.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Die 1-Prozent-Regel',
+        text: 'Die wohl bekannteste Laufband-Faustregel: Stelle mindestens 1 % Steigung ein. Der Grund ist der fehlende Luftwiderstand. Bei mittlerem Lauftempo gleicht eine Steigung von rund einem Prozent genau den Energieunterschied aus, der draußen durch das Verdrängen der Luft entsteht — das haben Jones und Doust 1996 sportwissenschaftlich belegt. Ein Laufband auf 1 % entspricht damit ungefähr dem Laufen auf ebener Straße. Wer auf 0 % trainiert, läuft effektiv ein kleines Stück leichter und überschätzt beim nächsten Straßenlauf seine Form. Der Effekt ist bei langsamem Tempo gering und wird bei hohem Tempo deutlicher, weil der Luftwiderstand mit der Geschwindigkeit stark zunimmt. Genau deshalb reicht bei einem lockeren Dauerlauf 1 % gut aus, während schnelle Läufer bei hohem Tempo eher 1,5 bis 2 % ansetzen, um den Straßenaufwand voll abzubilden. Für die meisten Läufer ist 1 % deshalb die sinnvolle Grundeinstellung fürs Dauerlauf-Training. Nur beim langsamen Gehen oder sehr gemütlichen Traben kann man die Steigung auch weglassen, weil der Luftwiderstand dann kaum ins Gewicht fällt. Ein weiterer Vorteil der 1-%-Einstellung: Sie sorgt für einen etwas natürlicheren Laufstil, weil der Fuß minimal aktiver abrollen muss, statt vom ebenen Band mitgenommen zu werden. Wer seine Laufband-Zeiten mit Straßenläufen oder Wettkämpfen vergleichen will, sollte deshalb konsequent mit mindestens 1 % trainieren — sonst hinken die Vergleiche.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '10 km/h bei 2 % Steigung',
+        schritte: [
+          { label: 'Steigungs-Zuschlag', formel: '1 + 0,03 × 2', ergebnis: '1,06' },
+          { label: 'Outdoor-Geschwindigkeit', formel: '10 km/h × 1,06', ergebnis: '10,60 km/h' },
+          { label: 'In Pace umrechnen', formel: '60 ÷ 10,60', ergebnis: '5:40 min/km' },
+        ],
+        fazit: 'Wer auf dem Laufband 10 km/h bei 2 % Steigung läuft, leistet so viel wie bei 10,60 km/h auf ebener Straße — eine Pace von rund 5:40 statt der angezeigten 6:00 min/km. Der Zuschlag von 6 % (zweimal 3 % je Steigungsprozent) klingt klein, macht über eine ganze Trainingseinheit aber einen spürbaren Unterschied im Aufwand. Umgekehrt heißt das: Wer draußen 5:40 min/km laufen kann, sollte sich vom Laufband bei 0 % nicht täuschen lassen — dort müsste er für denselben Reiz etwas schneller stellen. Der Zuschlag ist bewusst konservativ angesetzt und deckt vor allem den fehlenden Luftwiderstand und die Bandunterstützung ab; bei sehr hohem Tempo, wo der Luftwiderstand stark zunimmt, darf man die Steigung ruhig etwas großzügiger wählen, um den Straßenaufwand realistisch abzubilden.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Laufband und Straße bei gleichem Tempo',
+        spalteA: 'Laufband',
+        spalteB: 'Straße',
+        zeilen: [
+          { kriterium: 'Luftwiderstand', a: 'entfällt (Luft steht)', b: 'muss überwunden werden' },
+          { kriterium: 'Untergrund', a: 'weich, gleichmäßig', b: 'hart, unregelmäßig' },
+          { kriterium: 'Bandunterstützung', a: 'Band zieht den Fuß mit', b: 'aktiver Abdruck nötig' },
+          { kriterium: 'Kühlung', a: 'oft warm, wenig Fahrtwind', b: 'Fahrtwind kühlt den Körper' },
+          { kriterium: 'Ausgleich', a: '~1 % Steigung empfohlen', b: 'kein Ausgleich nötig' },
+        ],
+      },
+      {
+        typ: 'tabelle',
+        titel: '10 km/h Band → Outdoor-Äquivalent je Steigung',
+        kopf: ['Steigung', 'Outdoor-Äquivalent', 'Pace'],
+        zeilen: [
+          ['0 %', '10,00 km/h', '6:00 min/km'],
+          ['1 %', '10,30 km/h', '5:50 min/km'],
+          ['2 %', '10,60 km/h', '5:40 min/km'],
+          ['4 %', '11,20 km/h', '5:21 min/km'],
+          ['6 %', '11,80 km/h', '5:05 min/km'],
+          ['8 %', '12,40 km/h', '4:50 min/km'],
+          ['10 %', '13,00 km/h', '4:37 min/km'],
+          ['12 %', '13,60 km/h', '4:25 min/km'],
+          ['15 %', '14,50 km/h', '4:08 min/km'],
+        ],
+        fussnote: 'Outdoor-Äquivalent für ein Band-Tempo von 10 km/h bei steigender Neigung. Schon 2 % verwandeln die angezeigten 6:00 min/km in ein Straßen-Tempo von 5:40 — bei 8 % läuft man effektiv fast 4:50 min/km. Die Werte gelten für mittlere Geschwindigkeiten; bei sehr steilen Einstellungen wird ein Teil der Leistung in Höhenarbeit und Muskelkraft umgesetzt, sodass die reine Pace-Umrechnung dann nur noch ein grober Anhaltspunkt ist. Für ein anderes Band-Tempo skaliert die Tabelle proportional: Bei 12 km/h Band wären die Outdoor-Werte je Steigung entsprechend um den Faktor 1,2 höher. Der prozentuale Zuschlag pro Steigungsprozent bleibt dabei immer gleich, unabhängig von der Grundgeschwindigkeit.',
+      },
+      {
+        typ: 'text',
+        titel: 'Was „äquivalent" genau bedeutet',
+        html: `<p>Wichtig zu verstehen: Das Outdoor-Äquivalent bezieht sich auf den <strong>Aufwand</strong> beziehungsweise den Energieverbrauch, nicht auf eine identische Muskelbelastung. Ein Lauf bei 8 % Steigung fühlt sich energetisch an wie ein schnellerer Lauf in der Ebene — aber die <strong>Bergbelastung</strong> beansprucht Waden, Gesäß und Oberschenkel deutlich stärker und trainiert zusätzlich die Kraftausdauer.</p><p>Das ist kein Nachteil, im Gegenteil: Steigungsläufe sind ein wertvoller Trainingsreiz, den man in der Ebene so nicht bekommt. Man sollte den umgerechneten Pace-Wert aber nicht mit einem tatsächlichen ebenen Lauf gleichsetzen, was Technik und Bewegungsmuster angeht. Für den reinen Ausdauerreiz und den Kalorienverbrauch ist das Äquivalent eine gute Näherung — wie viel man dabei verbrennt, lässt sich mit dem <a href="/sport/kalorienverbrauch-rechner">Kalorienverbrauch-Rechner</a> abschätzen. Für die laufspezifische Technik, den Fußaufsatz und das Bergab-Laufen bleibt das Training im Freien unersetzlich. Das Äquivalent ist also ein Werkzeug zum Vergleich der Intensität, kein Beweis, dass Band und Straße identisch wären. Wer regelmäßig am Berg trainiert, wird zudem feststellen, dass sich die Kraftausdauer auch in der Ebene auszahlt: Ein stärkerer Abdruck und eine kräftigere Wadenmuskulatur verbessern die Laufökonomie insgesamt.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Wann Laufband, wann Straße?',
+        spalteA: 'Laufband-Vorteile',
+        spalteB: 'Straße-Vorteile',
+        zeilen: [
+          { kriterium: 'Wetter', a: 'wetterunabhängig, ganzjährig', b: 'frische Luft und Tageslicht' },
+          { kriterium: 'Tempo-Kontrolle', a: 'exakt einstellbar, ideal für Intervalle', b: 'nach Gefühl oder GPS' },
+          { kriterium: 'Gelenke', a: 'gedämpfter Untergrund', b: 'härtere Stöße' },
+          { kriterium: 'Spezifität', a: 'keine Kurven, kein Bergab', b: 'wettkampfnah, Bergab-Training' },
+          { kriterium: 'Ideal für', a: 'schlechtes Wetter, Tempoarbeit', b: 'lange Läufe, Wettkampfvorbereitung' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Umgekehrt: welches Band-Tempo für 5:00 min/km?',
+        schritte: [
+          { label: 'Ziel-Outdoor-Tempo', formel: '5:00 min/km entspricht', ergebnis: '12 km/h' },
+          { label: 'Band-Tempo bei 3 % Steigung', formel: '12 ÷ (1 + 0,03 × 3)', ergebnis: '≈ 11,0 km/h' },
+        ],
+        fazit: 'Manchmal will man das umgekehrte Problem lösen: Welches Band-Tempo entspricht einem gewünschten Straßen-Tempo? Um auf dem Laufband bei 3 % Steigung so hart wie bei 5:00 min/km (12 km/h) auf der Straße zu laufen, stellt man rund 11,0 km/h ein. Man teilt das Ziel-Tempo also durch den Steigungs-Zuschlag. So lässt sich ein Straßen-Trainingsplan sauber aufs Laufband übertragen, ohne die Intensität aus Versehen zu erhöhen oder zu senken. Das ist besonders praktisch, wenn ein Trainingsplan konkrete Straßen-Paces vorgibt und man wegen Wetter oder Dunkelheit aufs Band ausweichen muss — man rechnet das Zieltempo einmal um und trifft die vorgesehene Belastung exakt. Ohne diese Umrechnung würde man auf 0 % zu leicht und bei zu hoher Steigung zu hart trainieren.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Typische Laufband-Workouts und ihre Steigung',
+        kopf: ['Workout', 'Steigung', 'Zweck'],
+        zeilen: [
+          ['Grundlagenausdauer', '1 %', 'ebenes Straßen-Äquivalent, lockeres Tempo'],
+          ['Tempolauf', '1–2 %', 'Renntempo realistisch abbilden'],
+          ['Bergintervalle', '4–8 %', 'Kraftausdauer und VO2max'],
+          ['12-3-30 / zügiges Gehen', '12 %', 'gelenkschonendes Kalorien-Workout'],
+        ],
+        fussnote: 'Übliche Steigungseinstellungen je nach Trainingsziel. Bis etwa 2 % geht es um das ebene Straßen-Äquivalent, darüber kommt gezielt Kraftausdauer ins Spiel. Das populäre „12-3-30"-Workout (12 % Steigung, rund 5 km/h, 30 Minuten) ist bewusst zügiges Gehen statt Laufen — gelenkschonend und für Einsteiger geeignet, aber energetisch nicht mit der reinen Pace-Umrechnung fürs Laufen vergleichbar. Grundsätzlich gilt: Je höher die Steigung, desto mehr verschiebt sich der Reiz vom reinen Ausdauertraining hin zur Kraftausdauer der Bein- und Gesäßmuskulatur. Wer gezielt Bergform aufbauen will, profitiert davon; wer ein ebenes Renntempo simulieren möchte, bleibt besser bei niedrigen Steigungen von ein bis zwei Prozent.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Das Laufband realistisch nutzen',
+        punkte: [
+          'Mindestens 1 % Steigung einstellen, um die Straße abzubilden.',
+          'Den Handlauf loslassen — Festhalten verfälscht Aufwand und Laufstil.',
+          'Die angezeigte Geschwindigkeit gelegentlich gegen ein kalibriertes Band prüfen.',
+          'Das eigene Tempo nicht überschätzen: 0 % Band ist leichter als die Straße.',
+          'Eine natürliche Schrittfrequenz beibehalten, nicht künstlich verkürzen.',
+          'Vor einem Wettkampf auch draußen laufen, um Untergrund und Bergab zu üben.',
+          'Bei Bergintervallen die höhere Muskelbelastung einplanen und aufwärmen.',
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Grenzen der Umrechnung',
+        html: `<p>Die Formel ist ein gut belegter Richtwert für <strong>mittlere Laufgeschwindigkeiten</strong>, etwa im Bereich von 8 bis 16 km/h. In diesem Fenster stimmt die Faustregel „1 % Steigung ≈ 3 % Mehraufwand" gut mit Messwerten überein. Außerhalb davon wird sie ungenauer.</p><p>Bei sehr <strong>steilen Steigungen</strong> und beim <strong>Gehen</strong> gelten andere physiologische Modelle — dort verschiebt sich das Verhältnis von horizontaler zu vertikaler Arbeit, und die lineare Umrechnung überschätzt oder unterschätzt den Aufwand. Auch die individuelle <strong>Laufökonomie</strong> spielt eine Rolle: Zwei Läufer mit gleichem Tempo können unterschiedlich viel Energie verbrauchen. Hinzu kommen Faktoren, die keine Formel erfasst — die Kalibrierung des konkreten Laufbands, die Raumtemperatur und die eigene Tagesform. Wer sein reines Renntempo für ein Ziel umrechnen möchte, kombiniert diesen Rechner sinnvoll mit dem <a href="/sport/pace-rechner">Pace-Rechner</a>. Das Outdoor-Äquivalent bleibt damit eine belastbare Orientierung, aber keine auf die Sekunde genaue Messung. Am verlässlichsten ist der Vergleich, wenn man dasselbe, kalibrierte Laufband konsequent mit gleicher Steigung nutzt — dann sind zumindest die eigenen Werte über die Zeit gut vergleichbar.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Das Laufband als vollwertiges Training',
+        html: `<p>Trotz aller Unterschiede ist das Laufband ein <strong>vollwertiges Trainingsgerät</strong>, kein Notbehelf. Es erlaubt punktgenaue Tempo- und Steigungssteuerung, ist wetterunabhängig und schont durch den gedämpften Untergrund die Gelenke. Für strukturierte <strong>Intervalle</strong> und Tempoläufe ist es sogar oft praktischer als die Straße, weil das Tempo nicht abdriftet.</p><p>Die sinnvollste Lösung für die meisten Läufer ist eine <strong>Kombination</strong>: das Band für kontrollierte Einheiten, schlechtes Wetter und gelenkschonende Umfänge, die Straße für lange Läufe, laufspezifische Technik und die Wettkampfvorbereitung. Wer beide Welten fair vergleichen will, braucht das Outdoor-Äquivalent — genau das liefert dieser Rechner. So bleibt das Training auf dem Band ehrlich zur realen Straßenform, und man baut Fitness auf, die sich auch draußen zeigt. Entscheidend ist am Ende nicht das Gerät, sondern die richtige Intensität — und die lässt sich auf dem Laufband mit ein wenig Umrechnung genauso treffen wie im Freien. Gerade in den dunklen Wintermonaten hält das Band die Form aufrecht, die im Frühjahr auf der Straße abgerufen werden kann.</p>`,
+      },
+    ],
+    quellen: [
+      {
+        titel: 'Jones & Doust (1996), Journal of Sports Sciences',
+        hinweis: '1 % Laufband-Steigung gleicht den Energiekostenunterschied zur ebenen Straße bei mittlerem Tempo aus; je 1 % Steigung ≈ +3 % Stoffwechselkosten.',
+      },
+      {
+        titel: 'ACSM Metabolic Equations (Laufen)',
+        hinweis: 'VO2 = 3,5 + 0,2·v + 0,9·v·Steigung (v in m/min); Grundlage für den Mehraufwand-Vergleich. Werte sind Richtwerte.',
+      },
+    ],
+  },
 ];
