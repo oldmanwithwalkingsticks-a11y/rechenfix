@@ -1836,4 +1836,158 @@ Die Schätzung aus der Körpergröße kann individuell um 8 bis 15 Prozent abwei
       },
     ],
   },
+  {
+    slug: 'ffmi-rechner',
+    letzteAktualisierung: '2026-07-01',
+    titel: 'FFMI-Rechner (Muskelmasse-Index)',
+    beschreibung: 'FFMI berechnen: den Fat-Free-Mass-Index als Kennzahl für die Muskulosität, die anders als der BMI Muskel- von Fettmasse trennt.',
+    kategorie: 'Sport & Fitness',
+    kategorieSlug: 'sport',
+    metaTitle: 'FFMI-Rechner — Muskelmasse-Index',
+    metaDescription: 'FFMI berechnen: den Fat-Free-Mass-Index aus Gewicht, Größe und Körperfettanteil — eine Kennzahl für Muskulosität, die Muskel von Fett trennt.',
+    keywords: ['ffmi rechner', 'fettfreie masse index', 'muskelmasse index berechnen', 'normalisierter ffmi', 'fat free mass index', 'ffmi berechnen', 'muskulosität kennzahl', 'ffmi vs bmi'],
+    icon: '🏋️',
+    formel: 'FFM = Gewicht × (1 − Körperfett%) | FFMI = FFM ÷ Größe(m)² | normFFMI = FFMI + 6,1 × (1,8 − Größe)',
+    beispiel: '80 kg, 15 % Körperfett, 180 cm: FFM 68 kg → FFMI 68 ÷ 1,80² = 21,0 (normalisiert ebenfalls 21,0).',
+    erklaerung: `**FFMI-Rechner — der Fat-Free-Mass-Index als Kennzahl für Muskulosität**
+
+Der FFMI (Fat-Free-Mass-Index, fettfreie-Masse-Index) ist eine Kennzahl, die die fettfreie Masse — also Muskeln, Knochen, Organe und Wasser — ins Verhältnis zur Körpergröße setzt. Anders als der BMI trennt er Muskel- von Fettmasse und eignet sich deshalb, um die Muskulosität einzuordnen und den Verlauf beim Krafttraining zu verfolgen. Der FFMI ist eine reine Einordnungs-Kennzahl und kein Fitness-, Gesundheits- oder Schönheitsziel.
+
+**Wie der FFMI berechnet wird**
+
+Zuerst wird aus Gewicht und Körperfettanteil die fettfreie Masse bestimmt: FFM = Gewicht × (1 − Körperfettanteil in Prozent). Diese teilt man durch die Körpergröße in Metern zum Quadrat. Ein Beispiel: 80 kg bei 15 Prozent Körperfett ergeben 68 kg fettfreie Masse; geteilt durch 1,80² sind das ein FFMI von 21,0.
+
+**Der normalisierte FFMI**
+
+Da größere Menschen bei gleicher Statur einen etwas niedrigeren FFMI haben, gibt es den normalisierten FFMI, der auf eine Referenzgröße von 1,80 m umrechnet: normFFMI = FFMI + 6,1 × (1,8 − Größe in Metern). So werden große und kleine Personen fair vergleichbar. Bei genau 1,80 m sind FFMI und normalisierter FFMI identisch.
+
+**Nur ein Schätzwert**
+
+Das Ergebnis hängt vollständig von der Genauigkeit der Körperfett-Messung ab, die selbst schon ungenau ist. Der FFMI ist deshalb ein grober Orientierungswert und ersetzt keine medizinische oder sportärztliche Beurteilung.`,
+    faq: [
+      {
+        frage: 'Was ist der FFMI?',
+        antwort: 'Der FFMI (Fat-Free-Mass-Index) ist eine Kennzahl, die die fettfreie Masse — Muskeln, Knochen, Organe, Wasser — ins Verhältnis zur Körpergröße setzt. Er dient dazu, die Muskulosität unabhängig vom Körperfett einzuordnen. Im Gegensatz zum BMI, der nur Gewicht und Größe kennt, trennt der FFMI Muskel- von Fettmasse und ist deshalb für Kraftsportler aussagekräftiger.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen FFMI und BMI?',
+        antwort: 'Der BMI berücksichtigt nur Gewicht und Größe und kann muskulöse Menschen fälschlich als „übergewichtig" einstufen, weil Muskeln schwer sind. Der FFMI bezieht den Körperfettanteil ein und misst nur die fettfreie Masse. Dadurch bildet er die Muskulosität ab, während der BMI lediglich das Gewicht relativ zur Größe beschreibt. Beide Kennzahlen beantworten unterschiedliche Fragen.',
+      },
+      {
+        frage: 'Was ist ein normaler FFMI?',
+        antwort: 'Als grobe Orientierung liegen Männer durchschnittlich bei einem normalisierten FFMI von rund 18 bis 20, trainierte bei etwa 20 bis 23; Frauen liegen wegen der anderen Körperzusammensetzung tiefer, etwa bei 15 bis 18. Diese Werte sind populationsbasierte Richtwerte zur Einordnung, keine Zielvorgabe. Jeder Körper ist unterschiedlich, und ein bestimmter Wert ist weder gut noch schlecht.',
+      },
+      {
+        frage: 'Wie genau ist der FFMI-Wert?',
+        antwort: 'Der FFMI ist nur so genau wie die zugrunde liegende Körperfett-Messung — und die schwankt je nach Methode erheblich. Körperfettwaagen, Caliper-Messungen und Formeln liefern oft um mehrere Prozentpunkte abweichende Werte, was den FFMI um mehrere Punkte verschieben kann. Betrachten Sie den FFMI daher als groben Orientierungswert und vor allem als Verlaufsgröße mit derselben Messmethode.',
+      },
+      {
+        frage: 'Wozu dient der FFMI im Training?',
+        antwort: 'Vor allem zur Verlaufskontrolle: Wer über Monate Krafttraining betreibt, kann am steigenden FFMI ablesen, ob die fettfreie Masse zunimmt — unabhängig vom reinen Körpergewicht. Wichtig ist, immer dieselbe Körperfett-Messmethode zu nutzen, damit die Werte vergleichbar bleiben. Der FFMI ist ein Werkzeug zur Einordnung, kein Wettbewerb und keine Vorgabe.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was der FFMI ist',
+        html: `<p>Der <strong>FFMI</strong> (Fat-Free-Mass-Index, auf Deutsch fettfreie-Masse-Index) ist eine Kennzahl, die die <strong>fettfreie Masse</strong> eines Körpers ins Verhältnis zur Körpergröße setzt. Zur fettfreien Masse zählen Muskeln, Knochen, Organe und Wasser — alles außer dem Körperfett. Damit beantwortet der FFMI eine andere Frage als der bekannte BMI: nicht „wie schwer bin ich relativ zur Größe", sondern „wie viel fettfreie Masse trage ich relativ zur Größe".</p><p>Genau das macht ihn für den Kraftsport interessant. Weil er das Körperfett herausrechnet, bildet er die <strong>Muskulosität</strong> ab und eignet sich, den Fortschritt beim Muskelaufbau über die Zeit zu verfolgen. Wichtig ist die Einordnung: Der FFMI ist eine neutrale <strong>Einordnungs-Kennzahl</strong>, kein Fitness-, Gesundheits- oder Schönheitsziel. Ein bestimmter Wert ist weder erstrebenswert noch schlecht — er beschreibt lediglich die Körperzusammensetzung zu einem Zeitpunkt. Dieser Rechner ermittelt den FFMI aus Gewicht, Größe und Körperfettanteil und gibt zusätzlich den normalisierten Wert aus, der große und kleine Personen vergleichbar macht.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '80 kg, 15 % Körperfett, 180 cm',
+        schritte: [
+          { label: 'Fettfreie Masse', formel: '80 kg × (1 − 15 %)', ergebnis: '68,0 kg' },
+          { label: 'FFMI', formel: '68,0 ÷ 1,80²', ergebnis: '21,0' },
+          { label: 'Normalisiert (bei 1,80 m)', formel: '21,0 + 6,1 × (1,8 − 1,8)', ergebnis: '21,0' },
+        ],
+        fazit: 'Bei 80 kg Gewicht, 15 Prozent Körperfett und 180 cm Größe ergibt sich eine fettfreie Masse von 68 kg und ein FFMI von 21,0. Weil die Körpergröße genau der Referenzgröße von 1,80 m entspricht, wird der Korrekturterm für die Normalisierung null — FFMI und normalisierter FFMI sind hier identisch. Der Wert von 21,0 liegt im Bereich, der bei Männern als trainiert gilt. Das ist eine reine Einordnung und kein Werturteil; entscheidend ist, wie sich der Wert bei gleichbleibender Messmethode über die Zeit entwickelt.',
+      },
+      {
+        typ: 'text',
+        titel: 'FFMI gegen BMI — warum der BMI Trainierte täuscht',
+        html: `<p>Der <strong>BMI</strong> (Body-Mass-Index) kennt nur Gewicht und Größe. Muskeln sind schwerer als Fett, weshalb der BMI muskulöse Menschen leicht als „übergewichtig" einstuft, obwohl ihr Körperfettanteil niedrig ist. Ein durchtrainierter Athlet und eine untrainierte Person mit viel Körperfett können denselben BMI haben — die Kennzahl kann beide nicht unterscheiden.</p><p>Genau diese Lücke schließt der FFMI. Indem er den <strong>Körperfettanteil einbezieht</strong> und nur die fettfreie Masse betrachtet, trennt er Muskel- von Fettmasse. Für die Einordnung von Kraftsportlern ist er deshalb deutlich aussagekräftiger als der BMI. Das heißt nicht, dass der BMI wertlos wäre — für die grobe Einschätzung auf Bevölkerungsebene ist er nützlich und einfach zu erheben. Aber sobald überdurchschnittlich viel Muskelmasse im Spiel ist, führt er in die Irre. Wer seinen <a href="/gesundheit/bmi-rechner">BMI kennt</a> und ihn als muskulöse Person überraschend hoch findet, sieht am FFMI, dass die Ursache Muskeln und nicht Fett sind. Beide Kennzahlen ergänzen sich, statt sich zu widersprechen.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Dieselbe Person, zwei Kennzahlen',
+        kopf: ['Kennzahl', 'Wert', 'Formale Einordnung'],
+        zeilen: [
+          ['BMI', '27,8', 'formal „Übergewicht"'],
+          ['FFMI (normalisiert)', '24,4', 'athletisch / sehr muskulös'],
+        ],
+        fussnote: 'Beispiel einer muskulösen Person (90 kg, 180 cm, 12 % Körperfett). Der BMI von 27,8 fällt in den Bereich, den die Tabellen „Übergewicht" nennen — obwohl der niedrige Körperfettanteil zeigt, dass es sich um Muskelmasse handelt. Der FFMI trennt das sauber und ordnet dieselbe Person als muskulös ein. Das Beispiel verdeutlicht, warum der BMI bei Trainierten allein wenig aussagt und der Körperfettanteil die entscheidende Zusatzinformation liefert. Umgekehrt bedeutet ein niedriger BMI nicht automatisch wenig Muskulatur — auch hier hilft der Blick auf die fettfreie Masse. Beide Kennzahlen zusammen ergeben ein deutlich vollständigeres Bild als jede für sich allein.',
+      },
+      {
+        typ: 'text',
+        titel: 'Der normalisierte FFMI',
+        html: `<p>Ein rein berechneter FFMI hat einen kleinen Schönheitsfehler: Bei gleicher Statur und gleichem Trainingszustand fällt er für <strong>größere Menschen etwas niedriger</strong> aus als für kleinere, weil die Körpergröße quadratisch in den Nenner eingeht. Um große und kleine Personen fair vergleichbar zu machen, wurde der <strong>normalisierte FFMI</strong> eingeführt.</p><p>Er rechnet den Wert auf eine <strong>Referenzgröße von 1,80 m</strong> um: normalisierter FFMI = FFMI + 6,1 × (1,8 − Größe in Metern). Ist jemand kleiner als 1,80 m, wird der Wert leicht nach oben korrigiert, bei größeren nach unten. Bei genau 1,80 m ändert sich nichts, weil der Korrekturterm null wird — dann sind FFMI und normalisierter FFMI gleich. Für den Vergleich verschiedener Personen oder für Referenztabellen wird üblicherweise der normalisierte Wert verwendet, weil er die Größenabhängigkeit herausrechnet. Für die reine Verlaufskontrolle einer einzelnen Person spielt die Normalisierung dagegen keine Rolle, weil sich die eigene Größe nicht ändert und beide Werte parallel steigen oder fallen.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Norm-Effekt: gleiche 68 kg bei drei Größen',
+        schritte: [
+          { label: 'Bei 1,70 m', formel: '68 ÷ 1,70² = 23,5 → normalisiert', ergebnis: '24,1' },
+          { label: 'Bei 1,80 m', formel: '68 ÷ 1,80² = 21,0 → normalisiert', ergebnis: '21,0' },
+          { label: 'Bei 1,90 m', formel: '68 ÷ 1,90² = 18,8 → normalisiert', ergebnis: '18,2' },
+        ],
+        fazit: 'Dieselbe fettfreie Masse von 68 kg ergibt je nach Körpergröße einen sehr unterschiedlichen FFMI: 23,5 bei 1,70 m, 21,0 bei 1,80 m und 18,8 bei 1,90 m. Nach der Normalisierung liegen die Werte bei 24,1, 21,0 und 18,2. Die Rechnung zeigt, dass die Körpergröße einen erheblichen Einfluss hat — ein kleinerer Mensch erreicht mit derselben Muskelmasse rechnerisch einen höheren FFMI. Genau deshalb macht die Normalisierung Vergleiche zwischen Personen unterschiedlicher Größe erst sinnvoll.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Einordnung des normalisierten FFMI (Orientierung, kein Ziel)',
+        kopf: ['Einordnung', 'Männer', 'Frauen'],
+        zeilen: [
+          ['durchschnittlich', '18–20', '15–18'],
+          ['athletisch / trainiert', '20–23', '18–20'],
+          ['sehr muskulös', '23–25', '20–22'],
+          ['sehr hoher Wert', 'über 25', 'über 22'],
+        ],
+        fussnote: 'Populationsbasierte Richtwerte zur reinen Einordnung — ausdrücklich keine Zielvorgabe und kein Werturteil. Frauen liegen aufgrund der natürlichen Körperzusammensetzung im Schnitt niedriger als Männer, was völlig normal ist. Werte über etwa 25 (Männer) werden ohne unerlaubte leistungssteigernde Mittel nur selten erreicht — das ist eine sachliche Randnotiz zur Einordnung, keine Empfehlung und keine Bewertung. Die Bereiche gelten für alle Körpertypen gleichermaßen. Wo genau man innerhalb dieser Spannen liegt, hängt stark von Genetik und Trainingshintergrund ab; ein niedrigerer Wert ist genauso in Ordnung wie ein höherer.',
+      },
+      {
+        typ: 'text',
+        titel: 'Die Grenzen: alles hängt an der Körperfett-Messung',
+        html: `<p>Die größte Schwäche des FFMI ist nicht die Formel, sondern der <strong>Eingabewert Körperfettanteil</strong>. Denn dieser lässt sich im Alltag nur schätzen, und die verbreiteten Methoden schwanken erheblich: <strong>Körperfettwaagen</strong> (bioelektrische Impedanz) reagieren empfindlich auf den Flüssigkeitshaushalt, <strong>Caliper-Messungen</strong> hängen von der Erfahrung des Messenden ab, und Formeln liefern nur grobe Schätzungen.</p><p>Weil der Körperfettanteil direkt in die Berechnung der fettfreien Masse eingeht, überträgt sich jede Ungenauigkeit auf den FFMI — schon zwei bis drei Prozentpunkte Abweichung beim Körperfett verschieben den FFMI um rund einen Punkt. Der Körperfettanteil selbst lässt sich mit dem <a href="/gesundheit/koerperfett-rechner">Körperfett-Rechner</a> schätzen, bleibt aber ebenfalls eine Näherung. Die praktische Konsequenz: Ein einzelner FFMI-Wert sollte nicht überinterpretiert werden. Deutlich aussagekräftiger ist die <strong>Entwicklung über die Zeit</strong>, gemessen immer mit derselben Methode unter möglichst gleichen Bedingungen. Dann heben sich systematische Messfehler weitgehend auf, und der Trend bleibt aussagekräftig, auch wenn der absolute Wert unsicher ist. Eine hochwertige Methode wie eine DEXA-Messung liefert genauere Ausgangswerte, ist im Alltag aber selten verfügbar und für die reine Verlaufsbeobachtung auch nicht zwingend nötig.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Was der FFMI nicht ist',
+        html: `<p>Ebenso wichtig wie das, was der FFMI misst, ist das, was er <strong>nicht</strong> ist. Er ist <strong>kein Gesundheits-Score</strong>: Ein bestimmter Wert sagt nichts darüber aus, wie gesund, leistungsfähig oder wohlfühlend jemand ist. Er ist <strong>kein Schönheitsmaß</strong> und keine Vorgabe, wie ein Körper auszusehen hätte — Muskulosität ist eine individuelle Eigenschaft, kein Wert, den man erreichen „muss".</p><p>Der FFMI ist auch <strong>keine Zielvorgabe</strong>. Wer Krafttraining betreibt, tut das aus ganz unterschiedlichen Gründen, und der eigene Ausgangspunkt sowie realistische, gesunde Fortschritte zählen mehr als das Erreichen einer bestimmten Zahl. Die gelegentlich genannte Grenze von rund 25 (bei Männern) markiert lediglich den Bereich, oberhalb dessen Werte ohne unerlaubte Mittel selten vorkommen — das ist eine nüchterne statistische Beobachtung, keine Empfehlung, kein Ziel und erst recht keine Anleitung. Wer sich zu Training, Ernährung oder Körperzusammensetzung Fragen stellt, ist mit einer sportmedizinischen oder ärztlichen Beratung besser bedient als mit einer einzelnen Kennzahl. Der FFMI ordnet ein, mehr nicht.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Den FFMI sinnvoll nutzen',
+        punkte: [
+          'Den Körperfettanteil so genau und konsistent wie möglich bestimmen.',
+          'Immer dieselbe Messmethode und ähnliche Bedingungen verwenden.',
+          'Den FFMI als Verlaufswert über Wochen und Monate betrachten, nicht als Momentaufnahme.',
+          'Sich nicht mit anderen vergleichen — Ausgangslage und Genetik sind verschieden.',
+          'Einen einzelnen Wert nicht überinterpretieren; der Trend zählt.',
+          'Realistisch bleiben: gesunde, nachhaltige Fortschritte statt Zahlenjagd.',
+          'Bei Fragen zu Training oder Ernährung fachlichen Rat einholen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Eine grobe Einordnung — kein medizinischer Befund',
+        text: 'Der FFMI ist ein Schätzwert zur Einordnung der Muskulosität und hängt vollständig von der Genauigkeit der Körperfett-Messung ab, die selbst schon unsicher ist. Er ist kein medizinischer Befund, kein Gesundheits- oder Fitness-Score und keine Aussage über das Aussehen oder den Wert eines Körpers. Die Körperzusammensetzung ist individuell und von vielen Faktoren wie Genetik, Alter, Geschlecht und Trainingshintergrund geprägt; ein bestimmter Wert ist weder erstrebenswert noch bedenklich. Nutzen Sie den FFMI als neutrales Werkzeug zur Verlaufskontrolle, nicht als Ziel oder Vergleichsmaßstab. Bei Fragen zu Training, Ernährung oder Körperzusammensetzung ist eine ärztliche oder sportmedizinische Beratung die richtige Anlaufstelle — gerade wenn Vorerkrankungen bestehen oder die Ernährung stark umgestellt werden soll. Diese Kennzahl ersetzt keine fachliche Einschätzung und trifft keine Aussage über Gewichtsveränderungen oder Diäten.',
+      },
+      {
+        typ: 'text',
+        titel: 'Der FFMI als Werkzeug zur Verlaufskontrolle',
+        html: `<p>Sein volles Potenzial entfaltet der FFMI nicht als einmaliger Wert, sondern als <strong>Verlaufsgröße</strong>. Wer über Monate hinweg Krafttraining betreibt, kann am FFMI ablesen, ob die fettfreie Masse tatsächlich zunimmt — und zwar unabhängig vom reinen Körpergewicht, das auch durch Wasser oder Fett schwanken kann. Steigt der FFMI langsam an, ist das ein Hinweis auf echten Muskelaufbau.</p><p>Entscheidend ist dabei die <strong>Konsistenz</strong> der Messung: dieselbe Waage oder Methode, ähnliche Tageszeit, ähnlicher Flüssigkeitsstand. Nur dann bildet der Trend die reale Entwicklung ab und wird nicht von Messrauschen überlagert. Für die Trainingsplanung selbst ergänzt sich der FFMI gut mit Kraftwerten — wer wissen will, wie sich die Maximalkraft entwickelt, nutzt zusätzlich den <a href="/sport/1rm-rechner">1RM-Rechner</a>. Am Ende bleibt der FFMI aber genau das, was er ist: eine nüchterne Kennzahl zur Einordnung. Gesunde, nachhaltige Fortschritte und das eigene Wohlbefinden sind wichtiger als jede einzelne Zahl — der FFMI hilft nur, den Weg dorthin sachlich zu begleiten.</p>`,
+      },
+    ],
+    quellen: [
+      {
+        titel: 'Fat-Free Mass Index (FFMI) — Kouri et al. 1995 (Ausgangsstudie)',
+        hinweis: 'FFMI = fettfreie Masse ÷ Größe²; normalisiert auf 1,80 m. Einordnungswerte sind populationsbasierte Richtwerte.',
+      },
+      {
+        titel: 'FFMI-Berechnung & Normalisierung',
+        hinweis: 'FFM = Gewicht × (1 − KFA%); normFFMI = FFMI + 6,1 × (1,8 − Größe in m). Ergebnis hängt stark von der Körperfett-Messgenauigkeit ab.',
+      },
+    ],
+  },
 ];

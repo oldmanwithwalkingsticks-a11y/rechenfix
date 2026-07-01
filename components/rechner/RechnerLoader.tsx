@@ -241,6 +241,7 @@ const RECHNER_MAP: Record<string, ComponentType> = {
   'ftp-rechner': dyn(() => import('@/components/rechner/FtpRechner')),
   'schwimm-pace-rechner': dyn(() => import('@/components/rechner/SchwimmPaceRechner')),
   'schritte-kilometer-rechner': dyn(() => import('@/components/rechner/SchritteKilometerRechner')),
+  'ffmi-rechner': dyn(() => import('@/components/rechner/FfmiRechner')),
 };
 
 export default function RechnerLoader({ slug }: { slug: string }) {
