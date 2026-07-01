@@ -2146,4 +2146,166 @@ Die Formel liefert einen statistischen Durchschnittswert mit rund ±10 Prozent A
       },
     ],
   },
+  {
+    slug: 'kalorienbedarf-rechner',
+    letzteAktualisierung: '2026-07-01',
+    titel: 'Kalorienbedarf-Rechner (TDEE)',
+    beschreibung: 'Täglichen Kalorienbedarf (TDEE) berechnen: Grundumsatz mal Aktivitätsfaktor ergibt den Gesamtbedarf zum Gewicht-Halten.',
+    kategorie: 'Sport & Fitness',
+    kategorieSlug: 'sport',
+    metaTitle: 'Kalorienbedarf berechnen — TDEE',
+    metaDescription: 'Kalorienbedarf (TDEE) berechnen: Grundumsatz mal Aktivitätsfaktor ergibt den täglichen Gesamtbedarf zum Gewicht-Halten — aus Gewicht, Größe, Alter.',
+    keywords: ['kalorienbedarf berechnen', 'tdee rechner', 'täglicher kalorienbedarf', 'gesamtumsatz kalorien', 'kalorien tagesbedarf', 'kalorienbedarf frau mann', 'gesamtenergiebedarf', 'aktivitätsfaktor kalorien'],
+    icon: '🍽️',
+    formel: 'TDEE = Grundumsatz (Mifflin-St Jeor) × Aktivitätsfaktor (1,2 sitzend … 1,9 extrem aktiv)',
+    beispiel: '75 kg, 178 cm, 30 Jahre, Mann, moderat aktiv: Grundumsatz 1.718 × 1,55 = 2.662 kcal/Tag.',
+    erklaerung: `**Kalorienbedarf-Rechner — dein Gesamtbedarf pro Tag**
+
+Der tägliche Kalorienbedarf (englisch Total Daily Energy Expenditure, TDEE) ist die Energiemenge, die der Körper an einem durchschnittlichen Tag insgesamt verbraucht — also der Grundumsatz plus alles, was durch Bewegung dazukommt. Dieser Rechner schätzt den TDEE als den Wert, der das Körpergewicht ungefähr hält.
+
+**Die Berechnung**
+
+Basis ist der Grundumsatz nach Mifflin-St Jeor aus Gewicht, Größe, Alter und Geschlecht. Dieser wird mit einem Aktivitätsfaktor (PAL) multipliziert, der die körperliche Aktivität abbildet: 1,2 bei sitzender Lebensweise bis 1,9 bei körperlich sehr anstrengendem Alltag mit zusätzlichem Sport. Ein 30-jähriger Mann mit 75 kg und 178 cm hat einen Grundumsatz von rund 1.718 kcal; bei moderater Aktivität (Faktor 1,55) ergibt das einen Tagesbedarf von etwa 2.662 kcal.
+
+**Ein Halte-Wert, kein Ziel nach unten**
+
+Der TDEE beschreibt den Bedarf zum Gewicht-Halten. Dieser Rechner gibt bewusst keine Defizit- oder Diätzahlen aus. Wer sein Gewicht verändern möchte, sollte das langsam und am besten mit ärztlicher oder ernährungsmedizinischer Begleitung angehen; dauerhaft weniger zu essen als den Grundumsatz ist nicht ratsam.
+
+**Nur eine Schätzung**
+
+Die größte Unsicherheit ist der Aktivitätsfaktor, der sich nur grob wählen lässt. Insgesamt ist der TDEE eine statistische Schätzung mit rund ±10 bis 15 Prozent Abweichung und ersetzt keine fachliche Beratung.`,
+    faq: [
+      {
+        frage: 'Was ist der TDEE?',
+        antwort: 'TDEE steht für Total Daily Energy Expenditure, den täglichen Gesamtenergiebedarf. Er umfasst den Grundumsatz in Ruhe plus die Energie für alle Bewegungen des Tages — Alltag, Arbeit und Sport. Der TDEE ist die Kalorienmenge, mit der man sein Gewicht ungefähr hält. Er wird als Grundumsatz mal einem Aktivitätsfaktor geschätzt.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen Grundumsatz und Gesamtbedarf?',
+        antwort: 'Der Grundumsatz (BMR) ist der Verbrauch in völliger Ruhe, für Atmung, Kreislauf und Organe. Der Gesamtbedarf (TDEE) rechnet die Bewegung hinzu und liegt deshalb höher — je nach Aktivität beim rund 1,3- bis 1,8-Fachen des Grundumsatzes. Dieser Rechner zeigt beides: den Tagesbedarf als Hauptwert und den Grundumsatz als Basiswert.',
+      },
+      {
+        frage: 'Welches Aktivitätslevel soll ich wählen?',
+        antwort: 'Am besten ehrlich und eher zurückhaltend. „Sitzend" passt für überwiegend sitzende Tätigkeit ohne viel Sport, „moderat aktiv" für drei bis fünf Trainingseinheiten pro Woche. Viele Menschen überschätzen ihre Aktivität; ein Bürojob mit gelegentlichem Sport ist meist „leicht" bis „moderat", nicht „sehr aktiv". Im Zweifel lieber die niedrigere Stufe wählen.',
+      },
+      {
+        frage: 'Wie genau ist der berechnete Bedarf?',
+        antwort: 'Es ist eine statistische Schätzung mit rund ±10 bis 15 Prozent Abweichung. Die größte Unsicherheit steckt im Aktivitätsfaktor, der sich nur grob in fünf Stufen wählen lässt. Auch Muskelmasse, Stoffwechsel und Alltagsbewegung schwanken individuell. Nutzen Sie den Wert als Orientierung und Startpunkt, nicht als exakte Vorgabe.',
+      },
+      {
+        frage: 'Kann ich damit meinen Abnehm-Bedarf berechnen?',
+        antwort: 'Dieser Rechner zeigt bewusst nur den Bedarf zum Gewicht-Halten und gibt keine Defizit- oder Diätzahlen aus. Eine Gewichtsveränderung sollte langsam erfolgen und bei Bedarf ärztlich oder ernährungsmedizinisch begleitet werden. Dauerhaft unter dem Grundumsatz zu essen ist nicht ratsam. Bei Fragen zu Ernährung und Zielen ist eine Fachberatung die richtige Anlaufstelle.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was der TDEE ist',
+        html: `<p>Der <strong>TDEE</strong> (Total Daily Energy Expenditure, täglicher Gesamtenergiebedarf) ist die Energiemenge, die der Körper an einem durchschnittlichen Tag <strong>insgesamt</strong> verbraucht. Er setzt sich aus zwei Teilen zusammen: dem Grundumsatz — dem Verbrauch in völliger Ruhe — und der zusätzlichen Energie für <strong>jede Bewegung</strong> des Tages, vom Aufstehen über den Arbeitsweg bis zum Sport.</p><p>Damit ist der TDEE der Wert, mit dem man sein <strong>Körpergewicht ungefähr hält</strong>: Wer im Schnitt so viel Energie zu sich nimmt, wie er verbraucht, bleibt gewichtsstabil. Der Rechner baut auf dem <a href="/sport/grundumsatz-rechner">Grundumsatz</a> auf und multipliziert ihn mit einem Aktivitätsfaktor, der die körperliche Aktivität abbildet. Das Ergebnis ist eine realistische Einordnung, wie viel Energie der eigene Alltag inklusive Bewegung tatsächlich braucht. Wichtig vorweg: Dieser Rechner ist ein Werkzeug zum Verstehen des eigenen Bedarfs und gibt bewusst keine Diät- oder Defizitzahlen aus — er zeigt den Halte-Bedarf, nicht ein Ziel nach unten.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '75 kg, 178 cm, 30 Jahre, moderat aktiv',
+        schritte: [
+          { label: 'Grundumsatz (Mifflin-St Jeor)', formel: '10×75 + 6,25×178 − 5×30 + 5', ergebnis: '≈ 1.718 kcal' },
+          { label: 'Aktivitätsfaktor moderat', formel: '× 1,55', ergebnis: '—' },
+          { label: 'Tagesbedarf (TDEE)', formel: '1.718 × 1,55', ergebnis: '≈ 2.662 kcal' },
+        ],
+        fazit: 'Ein 30-jähriger Mann mit 75 kg und 178 cm hat einen Grundumsatz von rund 1.718 kcal. Bei moderater Aktivität — etwa drei bis fünf Trainingseinheiten pro Woche — wird dieser mit dem Faktor 1,55 multipliziert, was einen Tagesbedarf von etwa 2.662 kcal ergibt. Das ist die Energiemenge, mit der er sein Gewicht ungefähr hält. Verbringt er die Tage überwiegend sitzend, läge der Bedarf niedriger; ist er körperlich sehr aktiv, entsprechend höher. Der Aktivitätsfaktor ist damit die entscheidende Stellschraube. Zur Einordnung: Diese rund 2.662 kcal decken sowohl den Ruheverbrauch als auch die Bewegung eines normalen Tages ab — sie sind keine Obergrenze und kein Sparziel, sondern schlicht der geschätzte Verbrauch. Isst er im Schnitt etwa so viel, bleibt sein Gewicht ungefähr konstant.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Die fünf Aktivitätslevel (für die Beispielperson)',
+        kopf: ['Aktivitätslevel', 'Faktor', 'Kalorienbedarf'],
+        zeilen: [
+          ['Sitzend (kaum Bewegung)', '× 1,2', '2.061 kcal'],
+          ['Leicht aktiv (1–3×/Woche)', '× 1,375', '2.362 kcal'],
+          ['Moderat aktiv (3–5×/Woche)', '× 1,55', '2.662 kcal'],
+          ['Sehr aktiv (6–7×/Woche)', '× 1,725', '2.963 kcal'],
+          ['Extrem aktiv (Job + Sport)', '× 1,9', '3.263 kcal'],
+        ],
+        fussnote: 'Tagesbedarf der Beispielperson (Grundumsatz 1.718 kcal) je nach gewähltem Aktivitätslevel. Der Unterschied zwischen sitzend und extrem aktiv beträgt über 1.200 kcal pro Tag — das zeigt, wie stark die Bewegung den Bedarf bestimmt. Genau deshalb ist die ehrliche Wahl des Aktivitätslevels der wichtigste und zugleich unsicherste Schritt der ganzen Berechnung. Auffällig ist auch, dass die Abstände zwischen den Stufen konstant rund 300 kcal betragen: Jede Stufe höher entspricht ungefähr einer zusätzlichen intensiven Trainingseinheit oder einem deutlich bewegteren Alltag. Wer unsicher ist, kann so gut abschätzen, zwischen welchen beiden Stufen die eigene Realität liegt.',
+      },
+      {
+        typ: 'text',
+        titel: 'Das Aktivitätslevel realistisch wählen',
+        html: `<p>Der häufigste Fehler bei der Bedarfsberechnung ist ein zu hoch gewähltes <strong>Aktivitätslevel</strong>. Viele Menschen überschätzen, wie aktiv sie tatsächlich sind — ein <strong>Bürojob</strong> mit zwei oder drei Trainingseinheiten pro Woche ist meist „leicht" bis „moderat" aktiv, nicht „sehr aktiv". Die Stufe „sehr" oder „extrem" ist wirklich nur für Menschen gedacht, die körperlich anstrengend arbeiten oder nahezu täglich intensiv trainieren.</p><p>Der Grund für Vorsicht: Der Aktivitätsfaktor multipliziert den Grundumsatz und wirkt sich daher stark aus. Wählt man eine Stufe zu hoch, überschätzt man seinen Bedarf um mehrere hundert Kalorien. Als Orientierung hilft die ehrliche Frage, wie viele Stunden am Tag man wirklich in Bewegung ist. Im Zweifel lieber die <strong>niedrigere Stufe</strong> nehmen und den Wert als vorsichtigen Startpunkt verstehen. Wie viel einzelne Sporteinheiten zusätzlich verbrauchen, lässt sich separat abschätzen; entscheidend ist, das gewohnheitsmäßige Aktivitätsniveau realistisch einzuordnen und nicht die eigenen guten Absichten mitzurechnen. Ein pragmatischer Ansatz ist, mit der niedrigeren Stufe zu starten und den Wert erst nach ein paar Wochen anzupassen, falls das Gewicht wider Erwarten sinkt. So vermeidet man, den Bedarf systematisch zu überschätzen.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Zweites Beispiel: Frau, 65 kg, 165 cm, leicht aktiv',
+        schritte: [
+          { label: 'Grundumsatz (Frauenformel)', formel: '10×65 + 6,25×165 − 5×30 − 161', ergebnis: '≈ 1.370 kcal' },
+          { label: 'Aktivitätsfaktor leicht aktiv', formel: '× 1,375', ergebnis: '—' },
+          { label: 'Tagesbedarf (TDEE)', formel: '1.370 × 1,375', ergebnis: '≈ 1.884 kcal' },
+        ],
+        fazit: 'Eine 30-jährige Frau mit 65 kg und 165 cm hat einen Grundumsatz von rund 1.370 kcal. Bei leichter Aktivität (ein bis drei Einheiten pro Woche, Faktor 1,375) ergibt sich ein Tagesbedarf von etwa 1.884 kcal. Das Beispiel zeigt zweierlei: den Einfluss des Geschlechts über die Grundumsatz-Konstante und den des Aktivitätslevels. Wäre dieselbe Frau moderat aktiv, läge ihr Bedarf bei rund 2.124 kcal. Die Werte sind Durchschnittsschätzungen; der reale Bedarf hängt zusätzlich von der Körperzusammensetzung ab. Zwei Menschen mit identischen Eckdaten können durchaus unterschiedlich viel verbrauchen, je nach Muskelanteil und Stoffwechsel. Genau deshalb ist der berechnete Wert ein Ausgangspunkt, den man mit der eigenen Beobachtung über einige Wochen abgleichen sollte.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Woraus sich der Tagesverbrauch zusammensetzt',
+        werte: [
+          { label: 'Grundumsatz', wert: '60–75 %', hinweis: 'Ruheverbrauch, größter Teil' },
+          { label: 'Alltagsbewegung (NEAT)', wert: '15–30 %', hinweis: 'Gehen, Stehen, Haushalt' },
+          { label: 'Sport', wert: '0–15 %', hinweis: 'gezieltes Training' },
+          { label: 'Verdauung (TEF)', wert: '~10 %', hinweis: 'Energie zum Verwerten der Nahrung' },
+        ],
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Bedarf nach Aktivität für Beispielpersonen',
+        kopf: ['Person', 'Grundumsatz', 'Aktivität', 'Tagesbedarf'],
+        zeilen: [
+          ['Mann, 35 J, 80 kg', '1.755 kcal', 'moderat', '2.720 kcal'],
+          ['Frau, 28 J, 62 kg', '1.369 kcal', 'leicht aktiv', '1.882 kcal'],
+          ['Mann, 55 J, 70 kg', '1.524 kcal', 'sitzend', '1.829 kcal'],
+        ],
+        fussnote: 'Drei Beispiele zeigen die Bandbreite: Gewicht, Größe, Alter, Geschlecht und Aktivität bestimmen gemeinsam den Bedarf. Der ältere, überwiegend sitzende Mann hat trotz ähnlichen Gewichts einen deutlich niedrigeren Bedarf als der jüngere, moderat aktive. Solche Werte sind Orientierung, keine individuelle Vorgabe — die tatsächlichen Zahlen schwanken um den Schätzwert. Gut zu erkennen ist, dass nicht das Gewicht allein zählt: Der jüngere Mann und der ältere haben ähnliche Statur, aber durch Alter und Aktivität fast 900 kcal Unterschied im Tagesbedarf. Wer sich mit einer dieser Personen ungefähr identifiziert, bekommt so ein schnelles Gefühl für die eigene Größenordnung, bevor er die exakten Werte einträgt.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Ein Halte-Wert — kein Ziel nach unten',
+        text: 'Der berechnete Tagesbedarf ist der Wert, mit dem das Gewicht ungefähr gehalten wird — und ausdrücklich kein Zielwert, den man unterschreiten sollte. Dieser Rechner gibt bewusst keine Defizit-, Diät- oder Abnehm-Zielzahlen aus. Wer sein Gewicht verändern möchte, sollte das grundsätzlich langsam angehen und sich dabei am besten ärztlich oder ernährungsmedizinisch begleiten lassen. Ganz wichtig: Dauerhaft weniger zu essen als den eigenen Grundumsatz ist nicht ratsam und kann der Gesundheit schaden, weil der Körper wichtige Funktionen herunterfährt. Eine ausreichende, ausgewogene Energiezufuhr ist die Grundlage dafür, leistungsfähig, konzentriert und gesund zu bleiben. Der Tagesbedarf hilft, ein Gefühl für den eigenen Energiehaushalt zu bekommen — er ist ein Werkzeug zum Verstehen, keine Vorgabe und schon gar keine Aufforderung zum Sparen. Bei Anzeichen einer Essstörung oder bei Unsicherheit im Umgang mit Ernährung ist fachliche Beratung besonders wichtig.',
+      },
+      {
+        typ: 'text',
+        titel: 'Der Tagesbedarf ist dynamisch',
+        html: `<p>Der TDEE ist keine ein für alle Mal feste Zahl, sondern <strong>verändert sich</strong> mit den Lebensumständen. Er steigt mit mehr <strong>Muskelmasse</strong> und höherer <strong>Aktivität</strong> und sinkt mit dem <strong>Alter</strong> — vor allem, weil im Alter ohne Gegensteuern Muskulatur abgebaut wird, die auch in Ruhe Energie verbraucht. Auch das Körpergewicht selbst spielt eine Rolle: Ein schwererer Körper verbraucht bei Bewegung mehr Energie als ein leichterer.</p><p>Das bedeutet, dass ein einmal berechneter Wert nur eine <strong>Momentaufnahme</strong> ist. Wer über längere Zeit sein Aktivitätsniveau ändert, deutlich Muskeln aufbaut oder in eine andere Lebensphase kommt, sollte den Bedarf <strong>neu einschätzen</strong>. Genau deshalb ist der TDEE als grober Orientierungsrahmen zu verstehen und nicht als starre Vorgabe. Am aussagekräftigsten ist die Kombination aus dem berechneten Schätzwert und der eigenen Beobachtung: Bleibt das Gewicht über Wochen stabil, passt der Wert ungefähr; verändert es sich unerwartet, lohnt eine Neubewertung von Aktivität und Angaben. So bleibt die Schätzung ein lebendiges, alltagstaugliches Werkzeug. Gerade nach längeren Phasen mit veränderter Bewegung — etwa einem Jobwechsel, einer Verletzungspause oder dem Einstieg in ein neues Training — lohnt sich ein frischer Blick auf den Bedarf.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Den Bedarf realistisch nutzen',
+        punkte: [
+          'Das Aktivitätslevel ehrlich und eher zurückhaltend wählen.',
+          'Den Wert als Startpunkt und Orientierung verstehen, nicht als exakte Vorgabe.',
+          'Die eigene Reaktion über Wochen beobachten und die Schätzung anpassen.',
+          'Nicht mit extremen Crash-Vorgaben oder Hungerkuren arbeiten.',
+          'Bei einer geplanten Gewichtsveränderung fachliche Beratung einholen.',
+          'Niemals dauerhaft unter den Grundumsatz gehen, auch nicht bei einem Abnehmwunsch ohne Begleitung.',
+          'Bedenken, dass sich der Bedarf mit Alter, Muskelmasse und Aktivität ändert.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Ein Schätzwert für gesunde Erwachsene',
+        text: 'Die Berechnung gilt für gesunde Erwachsene und ist ein statistischer Schätzwert, kein medizinischer Befund. Die größte Unsicherheit ist der Aktivitätsfaktor, der sich nur grob in fünf Stufen wählen lässt und den realen Verbrauch um mehrere hundert Kalorien über- oder unterschätzen kann. Auch Muskelmasse, Stoffwechsel, Hormone und der individuelle Alltag beeinflussen den tatsächlichen Bedarf. In besonderen Lebensphasen wie Schwangerschaft und Stillzeit, im Wachstumsalter oder bei chronischen Erkrankungen gelten andere Voraussetzungen. Nutzen Sie den Wert als Orientierung, um den eigenen Energiehaushalt besser zu verstehen, und nicht als verbindliche Ernährungsvorgabe. Bei gesundheitlichen Fragen, geplanten Ernährungsumstellungen oder Anzeichen einer Essstörung ist eine ärztliche oder ernährungsmedizinische Beratung die richtige Anlaufstelle. Dieser Rechner ersetzt keine fachliche Einschätzung.',
+      },
+      {
+        typ: 'text',
+        titel: 'Der Tagesbedarf als Alltags-Orientierung',
+        html: `<p>Am Ende ist der Kalorienbedarf vor allem eine <strong>Orientierungshilfe</strong>, um ein realistisches Gefühl für den eigenen Energiehaushalt zu entwickeln. Er zeigt, in welcher Größenordnung sich der tägliche Verbrauch bewegt, und hilft, den Beitrag von Grundumsatz und Bewegung zu verstehen. Das ist wertvolles Basiswissen — mehr aber auch nicht.</p><p>Denn gesunde Ernährung ist weit mehr als eine einzelne Kalorienzahl. <strong>Qualität und Zusammensetzung</strong> der Nahrung, ausreichend Eiweiß, Vitamine und Ballaststoffe, das Wohlbefinden und ein entspannter Umgang mit dem Essen zählen mindestens ebenso viel wie die reine Energiemenge. Der TDEE-Wert sollte deshalb nie zum Selbstzweck oder zum Druckmittel werden. Wer sich intensiver mit der Nährstoffverteilung beschäftigen möchte, findet mit dem <a href="/sport/kalorienverbrauch-rechner">Kalorienverbrauch-Rechner</a> eine Ergänzung, um den Verbrauch einzelner Aktivitäten einzuordnen. Grundsätzlich gilt: Ein achtsamer, gesunder Umgang mit dem eigenen Körper ist wichtiger als jede exakte Zahl — der Kalorienbedarf ist ein Werkzeug, das dabei unterstützen, aber niemals bevormunden sollte.</p>`,
+      },
+    ],
+    quellen: [
+      {
+        titel: 'Mifflin-St Jeor (1990) + PAL-Aktivitätsfaktoren',
+        hinweis: 'TDEE = Grundumsatz × Aktivitätsfaktor (1,2 sitzend bis 1,9 extrem aktiv); statistische Schätzung des Tagesbedarfs.',
+      },
+      {
+        titel: 'Frankenfield et al. (2005)',
+        hinweis: 'Mifflin-St Jeor als genaueste Standardformel für den Ruheumsatz; der Aktivitätsfaktor bleibt die größte Unsicherheit beim Gesamtbedarf.',
+      },
+    ],
+  },
 ];

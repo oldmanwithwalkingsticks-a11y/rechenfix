@@ -243,6 +243,7 @@ const RECHNER_MAP: Record<string, ComponentType> = {
   'schritte-kilometer-rechner': dyn(() => import('@/components/rechner/SchritteKilometerRechner')),
   'ffmi-rechner': dyn(() => import('@/components/rechner/FfmiRechner')),
   'grundumsatz-rechner': dyn(() => import('@/components/rechner/GrundumsatzRechner')),
+  'kalorienbedarf-rechner': dyn(() => import('@/components/rechner/KalorienbedarfRechner')),
 };
 
 export default function RechnerLoader({ slug }: { slug: string }) {
