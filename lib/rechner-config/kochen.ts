@@ -3195,4 +3195,173 @@ Handfilter arbeiten mit etwa 1:16, French Press durch das Metallsieb etwas kräf
       { titel: 'Methodenspezifische Brew Ratios', hinweis: 'AeroPress ~1:14, Cold-Brew-Konzentrat ~1:5 (verdünnen), Espresso 1:2 (Verhältnis zur ausgegebenen Menge). 1 ml Wasser ≈ 1 g.' },
     ],
   },
+  {
+    slug: 'fleisch-garzeit-rechner',
+    letzteAktualisierung: '2026-07-01',
+    titel: 'Fleisch-Garzeit-Rechner',
+    beschreibung: 'Wie lange muss der Braten in den Ofen? Fleischart und Gewicht eingeben — Garzeit als Richtwert plus sichere Ziel-Kerntemperatur.',
+    kategorie: 'Kochen & Ernährung',
+    kategorieSlug: 'kochen',
+    metaTitle: 'Fleisch-Garzeit-Rechner — Braten & Kerntemperatur',
+    metaDescription: 'Wie lange braucht der Braten im Ofen? Fleischart und Gewicht eingeben — Garzeit-Richtwert plus sichere Kerntemperatur. Kostenlos berechnen.',
+    keywords: ['garzeit fleisch', 'braten garzeit rechner', 'kerntemperatur fleisch', 'hähnchen garzeit', 'braten pro kg', 'fleisch garzeit rechner', 'braten kerntemperatur'],
+    icon: '🍖',
+    formel: 'Garzeit (min) = Gewicht (kg) × Minuten pro kg + 20 min Basiszeit (Ofen ~160–180 °C, Richtwert) | Sichere Kerntemperatur: Geflügel 74 °C, Hackfleisch 72 °C, ganze Stücke 63 °C — die Kerntemperatur ist maßgeblich, nicht die Zeit.',
+    beispiel: 'Rinderbraten 1,5 kg: 1,5 × 45 min + 20 min = 88 min ≈ 1 h 28 min. Ziel-Kerntemperatur medium 63 °C.',
+    erklaerung: `**Wie lange muss der Braten in den Ofen?**
+
+Zwei Dinge entscheiden über einen gelungenen Braten: die **Garzeit** fürs Timing und die **Kerntemperatur** für Sicherheit und Garstufe. Der Fleisch-Garzeit-Rechner schätzt aus Fleischart und Gewicht die ungefähre Ofenzeit und nennt zugleich die passende Ziel-Kerntemperatur.
+
+**Die Zeit ist nur ein Richtwert**
+
+Die berechnete Zeit hilft bei der Planung — verlässlich ist sie nicht. Ofenkalibrierung, Fleischdicke und Starttemperatur verschieben sie erheblich. Deshalb gilt: Der maßgebliche Wert ist die **Kerntemperatur**, gemessen mit einem Fleischthermometer in der dicksten Stelle (nicht am Knochen).
+
+**Sicher garen ist Pflicht**
+
+Geflügel muss sicher **74 °C** und Hackfleisch **72 °C** erreichen, sonst besteht ein Risiko durch Salmonellen und andere Keime. Ganze Stücke von Schwein, Rind und Lamm sind ab **63 °C** plus Ruhezeit sicher und dürfen innen rosa sein — Geflügel und Hackfleisch dagegen nicht. Farbe oder Zeit allein sind kein sicherer Maßstab.`,
+    faq: [
+      {
+        frage: 'Wie lange braucht ein Braten pro Kilogramm?',
+        antwort: 'Als Richtwert bei 160–180 °C: Rinderbraten und Lamm rund 45 Minuten pro kg, Schweinebraten etwa 55, Hähnchen 45, Pute 40 und Roastbeef 35 Minuten pro kg — jeweils plus rund 20 Minuten Basiszeit. Diese Zeiten dienen nur der Planung; ob das Fleisch fertig ist, zeigt allein die Kerntemperatur.',
+      },
+      {
+        frage: 'Welche Kerntemperatur muss Fleisch erreichen?',
+        antwort: 'Nach USDA/FSIS gilt: Geflügel (Hähnchen, Pute) sicher 74 °C, Hackfleisch 72 °C, ganze Stücke von Schwein, Rind und Lamm 63 °C plus Ruhezeit, Fisch 63 °C. Beim Rind steuern Sie die Garstufe über die Kerntemperatur: rare rund 52 °C, medium 63 °C, durch (well done) etwa 71 °C.',
+      },
+      {
+        frage: 'Warum brauche ich ein Fleischthermometer?',
+        antwort: 'Weil Zeit und Farbe unzuverlässig sind. Ein zu kalt gestartetes oder besonders dickes Stück braucht länger, ein heißerer Ofen weniger — die berechnete Zeit kann dadurch um 20 Minuten und mehr danebenliegen. Nur die Kerntemperatur in der dicksten Stelle (nicht am Knochen) zeigt sicher an, ob das Fleisch gar und bei Geflügel und Hack keimfrei ist.',
+      },
+      {
+        frage: 'Warum muss der Braten ruhen?',
+        antwort: 'Beim Ruhen verteilt sich der Fleischsaft gleichmäßig, statt beim Anschnitt auszulaufen — das Fleisch bleibt saftiger. Außerdem steigt die Kerntemperatur durch Nachgaren (Carry-over) noch um 3–10 °C. Deshalb nimmt man den Braten etwas vor der Zieltemperatur aus dem Ofen und lässt ihn je nach Größe 10–20 Minuten ruhen.',
+      },
+      {
+        frage: 'Darf Fleisch innen noch rosa sein?',
+        antwort: 'Bei ganzen Stücken von Rind, Schwein und Lamm ja — sie sind ab 63 °C Kerntemperatur sicher und dürfen innen rosa bleiben. Geflügel und Hackfleisch dagegen niemals: Sie müssen durchgegart 74 bzw. 72 °C erreichen, weil sich Keime nicht nur außen, sondern im ganzen Stück befinden können.',
+      },
+      {
+        frage: 'Gilt die Zeit auch für Niedrigtemperatur-Garen?',
+        antwort: 'Nein. Beim Niedriggaren (etwa 80–120 °C über mehrere Stunden) gelten ganz andere, deutlich längere Zeiten. Was gleich bleibt, sind die sicheren Ziel-Kerntemperaturen: Auch ein niedrig gegarter Braten muss dieselbe Kerntemperatur erreichen wie im heißen Ofen — nur der Weg dorthin dauert länger.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Zeit plant, Kerntemperatur entscheidet',
+        html: `<p>Ein guter Braten hängt an zwei Größen, die man nicht verwechseln darf: der <strong>Garzeit</strong> und der <strong>Kerntemperatur</strong>. Die Garzeit brauchen Sie fürs Timing — damit das Fleisch fertig ist, wenn die Gäste kommen. Die Kerntemperatur brauchen Sie für zwei andere Dinge: für die <strong>Sicherheit</strong> (kein rohes Geflügel, kein rohes Hack) und für die <strong>Garstufe</strong> (rare bis durch beim Rind).</p><p>Der entscheidende Punkt: Die berechnete Zeit ist immer nur ein <strong>Richtwert</strong>. Sie geht davon aus, dass Ihr Ofen die eingestellte Temperatur wirklich hält, dass das Fleisch eine übliche Form hat und mit Zimmertemperatur startet. In der Praxis stimmt selten alles, deshalb kann die tatsächliche Zeit deutlich abweichen. Verlassen Sie sich am Ende nie auf die Uhr, sondern auf das <strong>Fleischthermometer</strong>: Es steckt in der dicksten Stelle des Fleisches, nicht am Knochen, und zeigt genau an, wann das Ziel erreicht ist. Die Zeit sagt Ihnen, <em>wann Sie nachschauen sollten</em> — die Kerntemperatur sagt Ihnen, <em>ob es fertig ist</em>.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Garzeit nach Fleischart (Richtwerte)',
+        kopf: ['Fleischart', 'Minuten pro kg', 'Beispiel bei 1,5 kg'],
+        zeilen: [
+          ['Rinderbraten (medium)', '45 min', '1 h 28 min'],
+          ['Schweinebraten', '55 min', '1 h 43 min'],
+          ['Lammbraten', '45 min', '1 h 28 min'],
+          ['Hähnchen (ganz)', '45 min', '1 h 28 min'],
+          ['Pute (ganz)', '40 min', '1 h 20 min'],
+          ['Roastbeef (medium rare)', '35 min', '1 h 13 min'],
+        ],
+        fussnote: 'Richtwerte für den Ofen bei rund 160–180 °C Ober-/Unterhitze, jeweils inklusive rund 20 Minuten Basiszeit. Die Werte dienen ausschließlich der Zeitplanung. Ob das Fleisch fertig ist, entscheidet allein die Kerntemperatur — nicht die abgelaufene Zeit. Dickere, kompaktere Stücke brauchen bei gleichem Gewicht länger als flache; ein Braten aus dem Kühlschrank länger als einer mit Zimmertemperatur.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: Rinderbraten 1,5 kg',
+        schritte: [
+          { label: 'Gewicht', formel: 'Vorgabe', ergebnis: '1,5 kg' },
+          { label: 'Minuten pro kg (Rind)', formel: 'Richtwert', ergebnis: '45 min' },
+          { label: 'Garzeit', formel: '1,5 kg × 45 min + 20 min', ergebnis: '88 min ≈ 1 h 28 min' },
+          { label: 'Ziel-Kerntemperatur (medium)', formel: 'maßgeblich', ergebnis: '63 °C' },
+        ],
+        fazit: 'Ein Rinderbraten von 1,5 kg braucht rund 1 Stunde 28 Minuten im Ofen — als Planungswert. Nehmen Sie ihn aber nicht nach der Uhr heraus, sondern wenn das Thermometer die gewünschte Garstufe anzeigt: 63 °C für medium. Weil die Kerntemperatur beim Ruhen noch um einige Grad steigt (Carry-over), holen Sie den Braten schon bei etwa 60 °C aus dem Ofen und lassen ihn 10–15 Minuten ruhen. So trifft er die 63 °C punktgenau und bleibt saftig.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Kerntemperatur entscheidet — Sicherheit geht vor',
+        text: 'Die Zeit ist nur ein Richtwert, die Kerntemperatur ist der verlässliche Maßstab. Geflügel wie Hähnchen und Pute muss sicher 74 °C erreichen, Hackfleisch und Faschiertes 72 °C — sonst besteht ein ernsthaftes Risiko durch Salmonellen, Campylobacter und andere Keime. Bei Geflügel und Hack können sich Erreger im ganzen Stück befinden, nicht nur an der Oberfläche; deshalb müssen sie vollständig durchgegart sein und dürfen innen nicht mehr rosa oder glasig sein. Farbe, Zeit oder der Test mit der Gabel sind dafür unzuverlässig. Die einzige sichere Methode ist ein Fleischthermometer, das in die dickste Stelle des Fleisches gesteckt wird — nicht an den Knochen, weil dieser die Messung verfälscht. Dieser Rechner liefert Planungszeiten und ersetzt keine Temperaturmessung.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Sichere Kerntemperaturen & Garstufen',
+        kopf: ['Lebensmittel', 'Kerntemperatur', 'Hinweis'],
+        zeilen: [
+          ['Geflügel (Hähnchen, Pute)', '74 °C', 'durchgaren, nie rosa'],
+          ['Hackfleisch / Faschiertes', '72 °C', 'durchgaren, nie rosa'],
+          ['Schwein / Rind / Lamm (ganz)', '63 °C + Ruhezeit', 'darf innen rosa sein'],
+          ['Fisch', '63 °C', 'glasig-fest'],
+          ['Rind — rare', '52 °C', 'innen rot, kühl'],
+          ['Rind — medium rare', '57 °C', 'innen rot-rosa'],
+          ['Rind — medium', '63 °C', 'innen rosa'],
+          ['Rind — well done', '71 °C', 'durchgegart'],
+        ],
+        fussnote: 'Sichere Mindest-Kerntemperaturen nach USDA/FSIS. Die Garstufen beim Rind (rare bis well done) sind Geschmackssache und gelten nur für ganze Stücke — Geflügel und Hackfleisch haben keine „rosa" Variante, sie müssen immer die sichere Temperatur erreichen. Ganze Muskelstücke von Rind, Schwein und Lamm sind ab 63 °C plus kurzer Ruhezeit sicher, weil Keime hier nur außen sitzen und durch die Bratenhitze abgetötet werden.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Braten in Zahlen',
+        werte: [
+          { label: 'Ofentemperatur (Richtwert)', wert: '160–180 °C', hinweis: 'Ober-/Unterhitze für klassische Braten' },
+          { label: 'Basiszeit', wert: '+20 Min', hinweis: 'Aufschlag zusätzlich zur Zeit pro kg' },
+          { label: 'Kerntemperatur Geflügel', wert: '74 °C', hinweis: 'sichere Mindesttemperatur, nicht verhandelbar' },
+          { label: 'Kerntemperatur Hackfleisch', wert: '72 °C', hinweis: 'sichere Mindesttemperatur, nicht verhandelbar' },
+          { label: 'Carry-over beim Ruhen', wert: '+3–10 °C', hinweis: 'Kerntemperatur steigt nach dem Ofen weiter' },
+          { label: 'Ruhezeit', wert: '10–20 Min', hinweis: 'je nach Größe, damit sich der Saft verteilt' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Garstufen beim Rind richtig treffen',
+        html: `<p>Beim Rind bestimmen Sie über die <strong>Kerntemperatur</strong>, wie durch das Fleisch ist. <strong>Rare</strong> (rund 52 °C) ist innen rot und nur kurz erhitzt, <strong>medium rare</strong> (57 °C) rot-rosa mit warmem Kern, <strong>medium</strong> (63 °C) gleichmäßig rosa und <strong>well done</strong> (71 °C) vollständig durchgegart. Zwischen diesen Stufen liegen nur wenige Grad — genau deshalb ist das Thermometer beim Steak oder Roastbeef so wertvoll: Von rosa zu grau sind es oft nur drei, vier Grad.</p><p>Wichtig ist die Unterscheidung, für welche Fleischarten diese Garstufen überhaupt gelten. Ganze Muskelstücke von <strong>Rind, Schwein und Lamm</strong> dürfen innen rosa sein, weil sich mögliche Keime nur an der Oberfläche befinden, die beim Anbraten und im Ofen sicher heiß wird. <strong>Geflügel und Hackfleisch</strong> dagegen kennen keine rosa Stufe: Beim Faschierten wird die Oberfläche ins Innere gemischt, und Geflügel kann im ganzen Stück belastet sein. Beide müssen darum vollständig auf ihre sichere Temperatur (74 bzw. 72 °C) gegart werden — eine „medium"-Variante gibt es hier aus gutem Grund nicht.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: ganzes Hähnchen 1,2 kg',
+        schritte: [
+          { label: 'Gewicht', formel: 'Vorgabe', ergebnis: '1,2 kg' },
+          { label: 'Minuten pro kg (Hähnchen)', formel: 'Richtwert', ergebnis: '45 min' },
+          { label: 'Garzeit', formel: '1,2 kg × 45 min + 20 min', ergebnis: '74 min ≈ 1 h 14 min' },
+          { label: 'Ziel-Kerntemperatur', formel: 'sicher, Pflicht', ergebnis: '74 °C' },
+        ],
+        fazit: 'Ein ganzes Hähnchen von 1,2 kg braucht rund 1 Stunde 14 Minuten — aber die Zahl, die zählt, sind die 74 °C Kerntemperatur. Messen Sie an der dicksten Stelle der Brust und am inneren Schenkel, ohne den Knochen zu berühren; ist dort sicher 74 °C erreicht, ist das Hähnchen durch und keimfrei. Läuft der austretende Saft klar (nicht rosa), ist das ein gutes zusätzliches Zeichen — es ersetzt aber die Messung nicht. Danach 5–10 Minuten ruhen lassen und erst dann tranchieren.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum die Zeit so stark schwankt',
+        html: `<p>Dieselbe Berechnung, unterschiedliche Ergebnisse — dafür gibt es handfeste Gründe. Der wichtigste ist der <strong>Ofen</strong> selbst: Haushaltsöfen weichen oft um 10 bis 20 °C, gelegentlich sogar bis zu 50 °C von der eingestellten Temperatur ab. Ein Ofenthermometer deckt das auf. Umluft gart zudem schneller und trockener als Ober-/Unterhitze, was die Zeiten weiter verschiebt.</p><p>Fast noch wichtiger als das Gewicht ist die <strong>Form des Fleisches</strong>: Ein flacher, breiter Braten ist schneller durch als ein dicker, kompakter mit gleichem Gewicht, weil die Hitze einen kürzeren Weg bis zum Kern hat. Deshalb liefert die Zeit-pro-Kilo-Formel nur einen groben Rahmen. Und schließlich zählt die <strong>Starttemperatur</strong>: Fleisch direkt aus dem Kühlschrank braucht spürbar länger als eines, das 30–60 Minuten bei Zimmertemperatur angewärmt wurde. All diese Faktoren zusammen erklären, warum die Uhr allein nie ausreicht — und warum das Thermometer das letzte Wort hat.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Ruhezeit & Nachgaren (Carry-over)',
+        html: `<p>Der Braten ist nicht fertig, wenn er aus dem Ofen kommt — er gart nach. Dieses <strong>Carry-over Cooking</strong> lässt die Kerntemperatur nach dem Herausnehmen noch um <strong>3 bis 10 °C</strong> steigen, weil die Hitze aus den äußeren Schichten nach innen wandert. Bei großen Braten ist der Effekt stärker als bei kleinen Stücken. Praktisch heißt das: Nehmen Sie das Fleisch einige Grad <em>vor</em> der Zieltemperatur heraus, sonst übergaren Sie es beim Ruhen.</p><p>Die <strong>Ruhezeit</strong> selbst hat einen zweiten, ebenso wichtigen Zweck: Der Fleischsaft, der sich durch die Hitze zur Mitte gezogen hat, verteilt sich wieder gleichmäßig. Schneiden Sie zu früh an, läuft er auf das Brett statt im Fleisch zu bleiben — das Ergebnis wird trocken. Rechnen Sie je nach Größe mit <strong>10 bis 20 Minuten</strong> Ruhezeit, locker mit Alufolie abgedeckt. Diese Minuten gehören fest zur Planung dazu und sind mindestens so wichtig wie die Garzeit selbst.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Braten sicher gelingen lassen',
+        punkte: [
+          'Ofen vollständig vorheizen, bevor das Fleisch hineinkommt',
+          'Ein Fleischthermometer nutzen — die zuverlässigste Methode überhaupt',
+          'In die dickste Stelle messen, nicht an den Knochen (verfälscht die Messung)',
+          'Geflügel auf 74 °C, Hackfleisch auf 72 °C — diese Werte sind Pflicht, nicht rosa lassen',
+          'Ganze Rind-/Lamm-/Schweinestücke nach gewünschter Garstufe über die Kerntemperatur steuern',
+          'Braten einige Grad vor dem Ziel herausnehmen und 10–20 Minuten ruhen lassen',
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Niedrigtemperatur & Sonderfälle',
+        html: `<p>Die Zeit-pro-Kilo-Formel gilt für den klassischen Ofenbraten bei 160–180 °C. Andere Methoden folgen anderen Zeiten — die <strong>Ziel-Kerntemperaturen für die Sicherheit bleiben aber immer dieselben</strong>. Beim <strong>Niedrigtemperatur-Garen</strong> (etwa 80–120 °C über mehrere Stunden) wird das Fleisch besonders gleichmäßig und zart, braucht dafür aber ein Vielfaches der Zeit; die Kerntemperatur nähert sich langsam der Ofentemperatur an, was punktgenaues Garen erleichtert.</p><p>Auch <strong>Sous-vide</strong>, Schmoren im geschlossenen Topf oder das Garen auf dem Grill haben eigene Zeitlogiken. Für die Sicherheit zählt in allen Fällen nur eines: dass Geflügel und Hackfleisch ihre sichere Kerntemperatur erreichen und ganze Stücke die gewünschte Garstufe. Der Weg dorthin darf länger oder kürzer sein — das Ziel auf dem Thermometer ist das gleiche. Wer die Ofentemperatur oder Backzeiten anpassen muss, findet weitere Richtwerte im <a href="/kochen/backzeit-rechner">Backzeit-Rechner</a> und im <a href="/kochen/kochzeit-rechner">Kochzeit-Rechner</a>.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Zeit zum Planen, Thermometer zum Sichergehen',
+        html: `<p>Der perfekte Braten entsteht aus der Kombination beider Werte: Die <strong>Garzeit</strong> hilft Ihnen, den Ablauf zu planen und den Ofen rechtzeitig zu starten; die <strong>Kerntemperatur</strong> stellt sicher, dass das Fleisch genau die gewünschte Garstufe hat und — bei Geflügel und Hack — sicher durch ist. Verlassen Sie sich fürs Timing auf die Uhr, fürs Ergebnis auf das Thermometer.</p><p>Als Merkregel bleibt: Rund 40–55 Minuten pro Kilo plus Basiszeit im vorgeheizten Ofen, herausnehmen einige Grad vor dem Ziel, ruhen lassen. Und die drei Zahlen, die man im Kopf haben sollte, sind <strong>74 °C für Geflügel</strong>, <strong>72 °C für Hackfleisch</strong> und <strong>63 °C für ganze Stücke</strong>. Mit einem günstigen Fleischthermometer und diesen Richtwerten gelingt der Braten zuverlässig — saftig, auf den Punkt und vor allem sicher.</p>`,
+      },
+    ],
+    quellen: [
+      { titel: 'USDA/FSIS — Safe Minimum Internal Temperatures', hinweis: 'Geflügel 74 °C, Hackfleisch ~72 °C, ganze Stücke von Schwein/Rind/Lamm 63 °C (+ Ruhezeit); mit Fleischthermometer prüfen.' },
+      { titel: 'Garzeit-Richtwerte Ofenbraten', hinweis: 'Ca. 40–55 min pro kg je nach Fleischart bei 160–180 °C; Werte sind Richtwerte, die Kerntemperatur ist maßgeblich. Ofen, Fleischdicke und Starttemperatur beeinflussen die Zeit.' },
+    ],
+  },
 ];
