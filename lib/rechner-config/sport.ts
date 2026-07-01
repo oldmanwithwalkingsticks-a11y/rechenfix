@@ -2308,4 +2308,165 @@ Die größte Unsicherheit ist der Aktivitätsfaktor, der sich nur grob wählen l
       },
     ],
   },
+  {
+    slug: 'makronaehrstoffe-rechner',
+    letzteAktualisierung: '2026-07-01',
+    titel: 'Makronährstoffe-Rechner',
+    beschreibung: 'Makronährstoffe berechnen: ein Kalorienziel auf Protein, Kohlenhydrate und Fett in Gramm verteilen — nach wählbarem, ausgewogenem Split.',
+    kategorie: 'Sport & Fitness',
+    kategorieSlug: 'sport',
+    metaTitle: 'Makronährstoffe-Rechner — Makros',
+    metaDescription: 'Makronährstoffe berechnen: ein Kalorienziel auf Protein, Kohlenhydrate und Fett in Gramm aufteilen — mit ausgewogenen Split-Vorlagen und Rechenweg.',
+    keywords: ['makros berechnen', 'makronährstoffe rechner', 'protein kohlenhydrate fett aufteilen', 'makro split', 'gramm aus kalorien', 'makros protein kh fett', 'nährstoffverteilung', 'makronährstoffe gramm'],
+    icon: '🥗',
+    formel: 'Gramm = (Ziel-kcal × Anteil%) ÷ kcal-pro-Gramm | Protein 4, Kohlenhydrate 4, Fett 9 kcal/g (Atwater)',
+    beispiel: '2.500 kcal, Verteilung 30/40/30: Protein 188 g, Kohlenhydrate 250 g, Fett 83 g.',
+    erklaerung: `**Makronährstoffe-Rechner — vom Kalorienziel zu den Gramm**
+
+Makronährstoffe (kurz Makros) sind die drei energieliefernden Bausteine der Nahrung: Protein, Kohlenhydrate und Fett. Dieser Rechner verteilt ein vorgegebenes Kalorienziel auf diese drei Makros und rechnet die Anteile in konkrete Gramm-Werte um. So wird aus einer abstrakten Zahl wie „2.500 kcal" eine greifbare Vorgabe fürs Essen. Der Rechner verteilt dabei nur — er setzt kein Kalorienziel und keine Abnehm-Vorgabe.
+
+**Die Berechnung**
+
+Grundlage sind die Atwater-Faktoren: Protein und Kohlenhydrate liefern jeweils 4 Kilokalorien pro Gramm, Fett 9. Die Gramm-Menge ergibt sich aus dem Kalorienziel mal dem prozentualen Anteil, geteilt durch die Kalorien pro Gramm. Bei 2.500 kcal und einer ausgewogenen Verteilung von 30 Prozent Protein, 40 Prozent Kohlenhydraten und 30 Prozent Fett sind das 188 g Protein, 250 g Kohlenhydrate und 83 g Fett.
+
+**Verschiedene Verteilungen**
+
+Es gibt nicht die eine richtige Aufteilung. Der Rechner bietet mehrere ausgewogene Vorlagen — von proteinbetont bis kohlenhydratbetont für Ausdauersport — sowie einen frei wählbaren Split. Alle Presets liegen in einem gesundheitlich breiten Rahmen.
+
+**Nur Orientierungswerte**
+
+Wichtig: Die genaue prozentuale Aufteilung ist weniger entscheidend, als oft angenommen. Gesamtkalorien und die Qualität der Lebensmittel wirken stärker. Die Werte sind Orientierung und ersetzen keine ärztliche oder ernährungsmedizinische Beratung.`,
+    faq: [
+      {
+        frage: 'Wie viele Kalorien hat ein Gramm Protein, Kohlenhydrate oder Fett?',
+        antwort: 'Nach den Atwater-Faktoren liefern Protein und Kohlenhydrate jeweils rund 4 Kilokalorien pro Gramm, Fett dagegen 9. Fett ist damit mehr als doppelt so energiedicht. Deshalb erscheinen die Fett-Gramm bei gleichem Kalorienanteil niedriger als die von Protein oder Kohlenhydraten — für dieselbe Energie braucht es weniger Gramm Fett.',
+      },
+      {
+        frage: 'Welche Makro-Verteilung ist die richtige?',
+        antwort: 'Es gibt nicht die eine richtige Verteilung. Für die meisten Menschen ist ein ausgewogener Split gut geeignet; Ausdauersportler betonen oft die Kohlenhydrate, Kraftsportler das Protein. Alle Vorlagen dieses Rechners liegen im gesundheitlich breiten AMDR-Rahmen. Wichtiger als die exakten Prozente ist, dass die Verteilung zum eigenen Alltag passt und langfristig durchzuhalten ist.',
+      },
+      {
+        frage: 'Wie viel Protein brauche ich?',
+        antwort: 'Als grobe Orientierung: Für wenig aktive Menschen gelten rund 0,8 g Protein pro Kilogramm Körpergewicht, für körperlich Aktive und Kraftsportler nennt die ISSN 1,4 bis 2,0 g/kg. Über etwa 2,2 g/kg bringt mehr Protein meist keinen Zusatznutzen. Das sind Richtwerte für gesunde Erwachsene, keine ärztliche Empfehlung; bei Nierenerkrankungen gelten andere Vorgaben.',
+      },
+      {
+        frage: 'Zählen die Makros wirklich so genau?',
+        antwort: 'Weniger als oft gedacht. Studien zeigen bei unterschiedlichen Makro-Verteilungen ähnliche Ergebnisse, solange die Gesamtkalorien und die Proteinzufuhr passen. Entscheidend sind vor allem die Gesamtenergie, genug Protein und Ballaststoffe sowie überwiegend unverarbeitete Lebensmittel. Die Makros sind ein hilfreiches Orientierungswerkzeug, aber keine auf das Gramm genaue Pflicht.',
+      },
+      {
+        frage: 'Muss ich die Werte jeden Tag exakt treffen?',
+        antwort: 'Nein. Sinnvoller ist der Blick auf den Wochenschnitt statt auf tägliche Perfektion. Kleine Schwankungen gleichen sich aus, und ein entspannter Umgang mit dem Essen ist gesünder als starre Kontrolle. Nutzen Sie die Gramm-Werte als groben Rahmen, an dem Sie sich orientieren, nicht als exakte Tagesvorgabe, die es um jeden Preis zu erfüllen gilt.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was Makronährstoffe sind',
+        html: `<p><strong>Makronährstoffe</strong> — kurz Makros — sind die drei Nährstoffgruppen, die dem Körper Energie liefern: <strong>Protein, Kohlenhydrate und Fett</strong>. Anders als die Mikronährstoffe (Vitamine und Mineralstoffe), von denen der Körper nur kleine Mengen braucht, nimmt man Makros in Gramm-Mengen zu sich; sie machen den Großteil der täglichen Nahrung aus und decken den gesamten Energiebedarf.</p><p>Jeder der drei erfüllt eigene Aufgaben, und alle drei sind notwendig. Die <strong>Aufteilung</strong> der Kalorien auf die Makros hilft dabei, die Ernährung bewusster zu gestalten — etwa genug Protein für Muskelerhalt und Sättigung einzuplanen oder die Kohlenhydrate an das Training anzupassen. Dieser Rechner nimmt ein <strong>vorgegebenes Kalorienziel</strong> entgegen — zum Beispiel den Wert aus dem <a href="/sport/kalorienbedarf-rechner">Kalorienbedarf-Rechner</a> — und verteilt es nach einer wählbaren, ausgewogenen Vorlage auf Protein, Kohlenhydrate und Fett in Gramm. Er verteilt also nur eine bereits feststehende Energiemenge und setzt selbst kein Ziel.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '2.500 kcal ausgewogen (30/40/30)',
+        schritte: [
+          { label: 'Protein (30 %)', formel: '2.500 × 30 % ÷ 4 kcal/g', ergebnis: '188 g' },
+          { label: 'Kohlenhydrate (40 %)', formel: '2.500 × 40 % ÷ 4 kcal/g', ergebnis: '250 g' },
+          { label: 'Fett (30 %)', formel: '2.500 × 30 % ÷ 9 kcal/g', ergebnis: '83 g' },
+        ],
+        fazit: 'Bei 2.500 kcal und einer ausgewogenen Verteilung von 30 Prozent Protein, 40 Prozent Kohlenhydraten und 30 Prozent Fett ergeben sich 188 g Protein, 250 g Kohlenhydrate und 83 g Fett. Für jeden Makro nimmt man den Kalorienanteil und teilt ihn durch die Energie pro Gramm — 4 bei Protein und Kohlenhydraten, 9 bei Fett. Die Kontroll-Summe liegt bei rund 2.499 kcal; die kleine Abweichung von 1 kcal entsteht nur durch das Runden auf ganze Gramm und ist bedeutungslos. Bezogen auf ein Körpergewicht von 75 kg entsprechen die 188 g Protein rund 2,5 g pro Kilogramm — ein Wert im oberen Bereich der Empfehlungen für Aktive, der etwa beim gezielten Muskelaufbau sinnvoll sein kann. Wer weniger Protein bevorzugt, wählt einfach eine andere Vorlage.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Kalorien pro Gramm (Atwater-Faktoren)',
+        kopf: ['Makronährstoff', 'kcal pro Gramm', 'Rolle im Körper'],
+        zeilen: [
+          ['Protein', '4 kcal/g', 'Baustein, Muskelerhalt, Sättigung'],
+          ['Kohlenhydrate', '4 kcal/g', 'Hauptenergie, Treibstoff fürs Training'],
+          ['Fett', '9 kcal/g', 'Hormone, Zellwände, fettlösliche Vitamine'],
+        ],
+        fussnote: 'Die Atwater-Faktoren geben an, wie viel Energie ein Gramm jedes Makronährstoffs liefert. Fett ist mit 9 kcal pro Gramm mehr als doppelt so energiedicht wie Protein und Kohlenhydrate. Deshalb wirken die Fett-Gramm bei gleichem Kalorienanteil deutlich niedriger — für dieselbe Energiemenge braucht es weniger Gramm Fett. Alkohol liefert übrigens 7 kcal pro Gramm, zählt aber nicht zu den Makronährstoffen und ist hier nicht berücksichtigt. Diese Faktoren sind Durchschnittswerte: Je nach Lebensmittel und Verdaulichkeit gibt es kleine Abweichungen, für die alltägliche Planung sind sie aber genau genug. Auf Lebensmittelverpackungen findet man dieselben Werte in der Nährwerttabelle wieder, sodass sich die Rechnung leicht mit den eigenen Produkten abgleichen lässt.',
+      },
+      {
+        typ: 'text',
+        titel: 'Die drei Makros im Überblick',
+        html: `<p><strong>Protein</strong> ist der Baustein des Körpers: Es liefert die Aminosäuren für Muskeln, Enzyme und viele weitere Strukturen und sättigt besonders gut. Für aktive Menschen und beim Muskelaufbau spielt eine ausreichende Proteinzufuhr eine wichtige Rolle. <strong>Kohlenhydrate</strong> sind die schnell verfügbare Hauptenergie — besonders wichtig für intensives und langes Training, weil die Muskulatur sie als bevorzugten Treibstoff nutzt.</p><p><strong>Fett</strong> wird oft zu Unrecht gemieden: Es ist unverzichtbar für die Bildung von Hormonen, den Aufbau der Zellwände und die Aufnahme der fettlöslichen Vitamine A, D, E und K. Eine zu geringe Fettzufuhr kann sich negativ auswirken, weshalb die Vorlagen dieses Rechners den Fettanteil nie zu weit absenken. Alle drei Makros sind also notwendig, und keiner ist per se „gut" oder „schlecht". Die Kunst liegt in einer sinnvollen Balance, die zum eigenen Sport, Alltag und Geschmack passt. Genau dafür bietet der Rechner verschiedene ausgewogene Verteilungen an, zwischen denen man je nach Schwerpunkt wählen kann.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Die Verteilungs-Vorlagen bei 2.500 kcal',
+        kopf: ['Verteilung', 'Protein', 'Kohlenhydrate', 'Fett'],
+        zeilen: [
+          ['Ausgewogen (30/40/30)', '188 g', '250 g', '83 g'],
+          ['Proteinbetont (35/35/30)', '219 g', '219 g', '83 g'],
+          ['Ausdauer (20/55/25)', '125 g', '344 g', '69 g'],
+          ['Kohlenhydratreduziert (30/25/45)', '188 g', '156 g', '125 g'],
+        ],
+        fussnote: 'Vier ausgewogene Vorlagen, jeweils in Gramm bei einem Ziel von 2.500 kcal. Alle liegen im gesundheitlich breiten Rahmen und sind als Orientierung gedacht, nicht als Vorgabe. Der ausgewogene Split passt für die meisten; die proteinbetonte Variante hilft beim Muskelerhalt, die Ausdauer-Variante liefert viele Kohlenhydrate für langes Training, und die kohlenhydratreduzierte Version verschiebt Energie zum Fett. Welche am besten passt, hängt vom eigenen Sport und den persönlichen Vorlieben ab. Auffällig ist, dass der Fett-Wert bei den ersten beiden Vorlagen identisch bleibt (83 g), obwohl sich Protein und Kohlenhydrate verschieben — weil beide einen Fettanteil von 30 Prozent haben. Wer ein anderes Kalorienziel hat, gibt es einfach oben ein; die Gramm-Werte in der Tabelle passen sich dann automatisch an die eigene Vorgabe an.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Zweites Beispiel: 2.000 kcal für Ausdauer (20/55/25)',
+        schritte: [
+          { label: 'Protein (20 %)', formel: '2.000 × 20 % ÷ 4 kcal/g', ergebnis: '100 g' },
+          { label: 'Kohlenhydrate (55 %)', formel: '2.000 × 55 % ÷ 4 kcal/g', ergebnis: '275 g' },
+          { label: 'Fett (25 %)', formel: '2.000 × 25 % ÷ 9 kcal/g', ergebnis: '56 g' },
+        ],
+        fazit: 'Ausdauersportler betonen oft die Kohlenhydrate, weil sie der Hauptbrennstoff für langes Training sind. Bei 2.000 kcal und der Verteilung 20/55/25 ergeben sich 100 g Protein, 275 g Kohlenhydrate und 56 g Fett. Im Vergleich zur ausgewogenen Variante steckt hier deutlich mehr Energie in den Kohlenhydraten, während Protein und Fett etwas zurücktreten. Das ist keine Regel, sondern eine sinnvolle Option für Menschen mit hohem Ausdaueranteil — für andere kann ein ausgewogener Split besser passen. Rund um lange, intensive Einheiten sind Kohlenhydrate besonders wertvoll, weil sie die Glykogenspeicher füllen und so die Leistungsfähigkeit stützen — an trainingsfreien Tagen darf der Anteil dagegen ruhig etwas geringer ausfallen.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Protein-Orientierung (Gramm pro Kilogramm)',
+        werte: [
+          { label: 'Wenig aktiv', wert: '~0,8 g/kg', hinweis: 'allgemeiner Grundbedarf' },
+          { label: 'Aktive / Kraftsport', wert: '1,4–2,0 g/kg', hinweis: 'ISSN-Richtwert' },
+          { label: 'Kaum Zusatznutzen ab', wert: '~2,2 g/kg', hinweis: 'mehr bringt selten mehr' },
+          { label: 'Fett-Minimum', wert: '~0,8 g/kg', hinweis: 'für Hormone und Vitamine' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Der AMDR-Rahmen als gesunde Spannbreite',
+        html: `<p>Wie viel Spielraum es bei der Verteilung gibt, zeigt der <strong>AMDR</strong> (Acceptable Macronutrient Distribution Range), den das Institute of Medicine für gesunde Erwachsene definiert hat. Er nennt breite, gesundheitlich unbedenkliche Bereiche: <strong>Protein 10 bis 35 Prozent</strong>, <strong>Kohlenhydrate 45 bis 65 Prozent</strong> und <strong>Fett 20 bis 35 Prozent</strong> der Gesamtkalorien.</p><p>Innerhalb dieser Spannen ist viel möglich, ohne die Gesundheit zu gefährden — genau deshalb liegen alle Vorlagen dieses Rechners in oder nahe an diesem Rahmen (bei sportbetonten Splits mit etwas mehr Protein, wie es in der Sporternährung üblich ist). Das ist eine gute Nachricht: Es gibt nicht die eine „richtige" Zahl, sondern einen weiten Korridor, in dem man die Verteilung an den eigenen Sport, Alltag und Geschmack anpassen kann. Extreme jenseits dieser Bereiche — etwa sehr wenig Kohlenhydrate oder sehr wenig Fett über lange Zeit — sind nicht für jeden geeignet und sollten nicht ohne guten Grund und Begleitung gewählt werden. Für die allermeisten Menschen ist eine ausgewogene Verteilung im AMDR-Rahmen die unkomplizierteste und nachhaltigste Wahl.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Qualität und Gesamtkalorien zählen mehr als die Ratio',
+        text: 'So praktisch die Makro-Aufteilung ist — sie ist nicht der wichtigste Hebel. Studien zeigen bei unterschiedlichen Makro-Verteilungen ähnliche Ergebnisse, solange die Gesamtkalorien und die Proteinzufuhr im passenden Bereich liegen. Deutlich stärker als das exakte Verhältnis wirken die Gesamtenergie, eine ausreichende Proteinmenge, genug Ballaststoffe und vor allem die Wahl überwiegend unverarbeiteter, vollwertiger Lebensmittel. Ein Teller mit Gemüse, Vollkorn, hochwertigem Eiweiß und guten Fetten ist besser als jede perfekt getroffene Prozentzahl aus stark verarbeiteten Quellen. Betrachten Sie die berechneten Gramm-Werte deshalb als groben Orientierungsrahmen, nicht als starre Vorschrift. Auch die Adhärenz, also wie gut sich eine Ernährungsweise langfristig durchhalten lässt, ist entscheidender als die letzte Nachkommastelle. Wer sich mit einer bestimmten Verteilung wohlfühlt und sie beibehalten kann, ist meist besser dran als jemand, der einem theoretisch optimalen Split hinterherjagt.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Makros sinnvoll nutzen',
+        punkte: [
+          'Die Gramm-Werte als Orientierung verstehen, nicht als starre Tagesvorgabe.',
+          'Auf den Wochenschnitt achten statt auf tägliche Perfektion.',
+          'Ausreichend Protein und Ballaststoffe einplanen.',
+          'Überwiegend unverarbeitete, vollwertige Lebensmittel wählen.',
+          'Auf Sättigung, Energie und Wohlbefinden achten, nicht nur auf Zahlen.',
+          'Die Verteilung so wählen, dass sie zum eigenen Alltag passt und durchhaltbar ist.',
+          'Bei gesundheitlichen Fragen fachliche Beratung einholen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Extreme Verteilungen sind nicht für jeden geeignet',
+        text: 'Sehr einseitige Verteilungen — etwa dauerhaft sehr wenige Kohlenhydrate oder sehr wenig Fett — passen nicht für jeden Menschen und jede Lebenssituation. Dieser Rechner bietet bewusst nur ausgewogene, gesundheitlich breite Vorlagen und keine extremen Diät-Splits. Bei bestimmten Vorerkrankungen ist besondere Vorsicht geboten: Wer an Diabetes, einer Nieren- oder Lebererkrankung leidet, benötigt oft eine angepasste Nährstoffverteilung, die ärztlich abgestimmt sein sollte — insbesondere die Proteinmenge ist bei eingeschränkter Nierenfunktion relevant. Auch in Schwangerschaft und Stillzeit, im Wachstumsalter oder bei einer Vorgeschichte von Essstörungen gelten andere Voraussetzungen. In all diesen Fällen sollte die Ernährung nicht allein anhand einer Rechner-Vorlage gestaltet, sondern ärztlich oder ernährungsmedizinisch begleitet werden. Dieser Rechner liefert allgemeine Orientierungswerte für gesunde Erwachsene und ersetzt keine individuelle fachliche Beratung.',
+      },
+      {
+        typ: 'text',
+        titel: 'Makros als flexibles Werkzeug',
+        html: `<p>Die Makro-Aufteilung ist am Ende ein <strong>flexibles Werkzeug</strong>, kein Selbstzweck. Sie hilft, ein Kalorienziel in konkrete, greifbare Mengen zu übersetzen und die Ernährung bewusster zu planen — besonders nützlich für Menschen, die gezielt Muskeln aufbauen, ihre Leistung verbessern oder einfach ein besseres Gefühl für ihre Nahrung entwickeln wollen.</p><p>Wichtig bleibt die richtige Perspektive: Die exakten Prozente sind zweitrangig gegenüber einer insgesamt <strong>ausgewogenen, nachhaltigen Ernährung</strong> mit vollwertigen Lebensmitteln. Niemand muss die Werte auf das Gramm genau treffen, und starre Kontrolle kann dem entspannten Umgang mit dem Essen eher schaden als nutzen. Wer den Rechner als groben Rahmen versteht und ihn mit gesundem Menschenverstand kombiniert, hat ein gutes Hilfsmittel an der Hand. Die Basis dafür — das passende Kalorienziel — liefert der <a href="/sport/grundumsatz-rechner">Grundumsatz-Rechner</a> zusammen mit dem Kalorienbedarf-Rechner. Am Ende zählt jedoch nicht die perfekte Tabelle, sondern eine Ernährung, die den Körper gut versorgt, schmeckt und sich dauerhaft leben lässt. Ein guter Test ist, ob man sich die geplante Ernährung auch in einem Jahr noch vorstellen kann — nur was langfristig durchhaltbar ist, bringt dauerhaft etwas.</p>`,
+      },
+    ],
+    quellen: [
+      {
+        titel: 'Atwater-Faktoren & AMDR (Institute of Medicine, DRIs 2005)',
+        hinweis: 'Protein/Kohlenhydrate 4 kcal/g, Fett 9 kcal/g; empfohlene Verteilungsbereiche Protein 10–35 %, KH 45–65 %, Fett 20–35 % der Kalorien.',
+      },
+      {
+        titel: 'Proteinbedarf (ISSN Position Stand)',
+        hinweis: '1,4–2,0 g Protein pro kg Körpergewicht für körperlich Aktive; darüber meist kein Zusatznutzen. Richtwerte, keine ärztliche Empfehlung.',
+      },
+    ],
+  },
 ];
