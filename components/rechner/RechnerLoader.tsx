@@ -236,6 +236,7 @@ const RECHNER_MAP: Record<string, ComponentType> = {
   'kalorienverbrauch-rechner': dyn(() => import('@/components/rechner/KalorienverbrauchRechner')),
   'vo2max-rechner': dyn(() => import('@/components/rechner/Vo2maxRechner')),
   '1rm-rechner': dyn(() => import('@/components/rechner/EinRmRechner')),
+  'vdot-rechner': dyn(() => import('@/components/rechner/VdotRechner')),
 };
 
 export default function RechnerLoader({ slug }: { slug: string }) {

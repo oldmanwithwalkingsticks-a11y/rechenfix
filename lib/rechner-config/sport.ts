@@ -1017,4 +1017,163 @@ Aus dem 1RM lassen sich Trainingsgewichte als Prozentsatz ableiten: schwer für 
       },
     ],
   },
+  {
+    slug: 'vdot-rechner',
+    letzteAktualisierung: '2026-07-01',
+    titel: 'VDOT-Rechner (Jack Daniels)',
+    beschreibung: 'VDOT aus einem Wettkampfergebnis berechnen und daraus die fünf Trainingspaces (Easy, Marathon, Threshold, Interval, Rep) ableiten.',
+    kategorie: 'Sport & Fitness',
+    kategorieSlug: 'sport',
+    metaTitle: 'VDOT-Rechner — Trainingspaces berechnen',
+    metaDescription: 'VDOT nach Jack Daniels aus einem Rennergebnis berechnen und daraus die fünf Trainingspaces (Easy bis Rep) ableiten — mit Rechenweg.',
+    keywords: ['vdot rechner', 'jack daniels pace', 'trainingspace rechner', 'vdot berechnen', 'lauftempo trainingszonen', 'daniels running formula', 'easy pace threshold', 'trainingstempo laufen'],
+    icon: '🏃',
+    formel: 'VO2 = −4,60 + 0,182258·v + 0,000104·v² | %max-Dauerkurve | VDOT = VO2 ÷ %max | Pace-Zone = f(Prozent · VDOT)',
+    beispiel: '10 km in 50:00 ergibt VDOT 40 — daraus u. a. Threshold-Pace 5:05 min/km und Easy-Pace 6:07 min/km.',
+    erklaerung: `**VDOT-Rechner nach Jack Daniels — vom Rennergebnis zu den Trainingspaces**
+
+VDOT ist eine Fitness-Kennzahl des Laufcoachs Jack Daniels. Sie wird aus einem Wettkampfergebnis (Distanz und Zeit) berechnet und vereint die maximale Sauerstoffaufnahme (VO2max) und die Laufökonomie in einer einzigen Zahl. Aus dem VDOT lassen sich individuelle Trainingstempi ableiten — statt „nach Gefühl" zu laufen, trainiert man mit klaren Pace-Vorgaben.
+
+**Wie der VDOT berechnet wird**
+
+Der Rechner ermittelt zunächst die Laufgeschwindigkeit in Metern pro Minute, daraus über die Daniels-Gilbert-Formel die Sauerstoffaufnahme und den Anteil an der VO2max, den man über die Renndauer halten konnte. Ein 10-km-Lauf in 50:00 ergibt einen VDOT von rund 40.
+
+**Die fünf Trainingspaces**
+
+Aus dem VDOT leiten sich fünf Tempobereiche ab: Easy (E) für lockere Dauerläufe, Marathon (M) für das Renntempo, Threshold (T) für die Tempohärte an der Laktatschwelle, Interval (I) an der VO2max und Rep (R) für die Schnelligkeit. Bei VDOT 40 sind das etwa Easy 6:07, Threshold 5:05 und Interval 4:40 min/km.
+
+**Nur Orientierung, kein Gesetz**
+
+Die Werte sind Richtwerte für gesunde, trainierte Läufer nach dem Daniels-Modell. Tagesform, Wetter, Untergrund und Trainingszustand beeinflussen das reale Tempo. Nutzen Sie die Paces als Bereich, nicht als sekundengenaue Vorgabe.`,
+    faq: [
+      {
+        frage: 'Was ist VDOT?',
+        antwort: 'VDOT ist eine von Jack Daniels eingeführte Fitness-Kennzahl, die aus einem Wettkampfergebnis berechnet wird. Sie beschreibt die effektive Leistungsfähigkeit eines Läufers und vereint VO2max und Laufökonomie in einer Zahl. Der große Nutzen: Aus dem VDOT lassen sich individuelle Trainingstempi für alle Intensitätsbereiche ableiten.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen VDOT und VO2max?',
+        antwort: 'VO2max ist die maximale Sauerstoffaufnahme, eine rein physiologische Größe. VDOT ist ein „effektiver VO2max", der zusätzlich die Laufökonomie berücksichtigt — also wie sparsam jemand bei einem Tempo läuft. Zwei Läufer mit gleicher VO2max können unterschiedliche VDOT-Werte haben. Für Trainingspaces ist der VDOT die praktischere Kennzahl. Die reine VO2max schätzt der VO2max-Rechner.',
+      },
+      {
+        frage: 'Wie oft sollte ich den VDOT neu berechnen?',
+        antwort: 'Nach jedem ehrlich gelaufenen Wettkampf oder alle vier bis acht Wochen mit einem aktuellen Testergebnis. Über einen Trainingszyklus steigt der VDOT typischerweise um ein bis drei Punkte. Wer die Paces zu selten aktualisiert, trainiert mit veralteten Vorgaben; wer sie zu oft ändert, jagt Tagesform-Schwankungen hinterher.',
+      },
+      {
+        frage: 'Welches Rennergebnis soll ich eingeben?',
+        antwort: 'Am besten ein aktuelles, ausgeruht und ehrlich gelaufenes Ergebnis über mindestens 3.000 m — kürzere Distanzen sind zu stark von der Tagesform abhängig. 5 km, 10 km, Halbmarathon oder Marathon eignen sich gut. Ein Rennen, bei dem man am Limit war, liefert einen realistischeren VDOT als ein lockerer Trainingslauf.',
+      },
+      {
+        frage: 'Sind die Trainingspaces exakt einzuhalten?',
+        antwort: 'Nein, betrachten Sie sie als Bereich, nicht als sekundengenaue Vorgabe. Untergrund, Wind, Hitze, Steigungen und Tagesform verschieben das passende Tempo. Wichtiger als die exakte Sekunde ist, die richtige Intensität zu treffen: Easy-Läufe wirklich locker, Threshold komfortabel hart, Intervalle an der VO2max. Die Zahlen geben die Richtung vor.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was VDOT ist',
+        html: `<p><strong>VDOT</strong> ist eine Fitness-Kennzahl des bekannten Laufcoachs Jack Daniels. Sie wird aus einem <strong>Wettkampfergebnis</strong> — also aus Distanz und Zeit — berechnet und fasst zwei Dinge in einer Zahl zusammen: die maximale Sauerstoffaufnahme (VO2max) und die <strong>Laufökonomie</strong>, also wie sparsam jemand bei einem bestimmten Tempo läuft. Zwei Läufer mit identischer VO2max können deshalb unterschiedliche VDOT-Werte haben.</p><p>Der eigentliche Nutzen liegt nicht in der Zahl selbst, sondern in dem, was sich aus ihr ableiten lässt: <strong>individuelle Trainingstempi</strong> für jede Intensität. Statt Dauerläufe, Tempoläufe und Intervalle „nach Gefühl" zu absolvieren, bekommt man konkrete Pace-Vorgaben in Minuten pro Kilometer. Das macht das Training gezielter und verhindert den häufigsten Fehler von Freizeitläufern — nämlich die lockeren Einheiten zu schnell und die harten zu langsam zu laufen. Wer stattdessen die reine <a href="/sport/vo2max-rechner">VO2max schätzen</a> möchte, nutzt den entsprechenden Rechner; der VDOT geht einen Schritt weiter zu den Trainingspaces.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '10 km in 50:00 ergibt VDOT 40',
+        schritte: [
+          { label: 'Geschwindigkeit', formel: '10.000 m ÷ 50 min', ergebnis: '200 m/min' },
+          { label: 'Sauerstoffaufnahme (VO2)', formel: '−4,60 + 0,182258·200 + 0,000104·200²', ergebnis: '≈ 36,0 ml/kg/min' },
+          { label: 'Anteil der VO2max (%max, t = 50)', formel: 'Dauerkurve nach Daniels', ergebnis: '≈ 0,90' },
+          { label: 'VDOT', formel: '36,0 ÷ 0,90', ergebnis: '≈ 40,0' },
+        ],
+        fazit: 'Ein 10-km-Lauf in 50 Minuten ergibt einen VDOT von rund 40 — ein solides Freizeitläufer-Niveau. Die Rechnung ermittelt zuerst die Geschwindigkeit, daraus über die Daniels-Gilbert-Formel die Sauerstoffaufnahme und schließlich den Anteil der VO2max, den man über die Renndauer halten konnte. Je länger man ein Tempo durchhält, desto näher liegt der gehaltene Anteil an der Schwelle. Aus diesem VDOT von 40 leiten sich anschließend alle fünf Trainingspaces ab.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Die fünf Trainingspaces bei VDOT 40',
+        kopf: ['Zone', 'Pace (VDOT 40)', 'Zweck'],
+        zeilen: [
+          ['Easy (E)', '6:07 min/km', 'lockere Dauerläufe, Grundlagenausdauer'],
+          ['Marathon (M)', '5:17 min/km', 'Marathon-Renntempo, lange Läufe'],
+          ['Threshold (T)', '5:05 min/km', 'Tempohärte an der Laktatschwelle'],
+          ['Interval (I)', '4:40 min/km', 'VO2max-Intervalle, 3–5 Minuten'],
+          ['Rep (R)', '4:23 min/km', 'Schnelligkeit, kurze Wiederholungen'],
+        ],
+        fussnote: 'Trainingspaces für einen VDOT von 40 (Richtwerte nach Daniels). Auffällig ist, wie eng Marathon-, Threshold- und Interval-Tempo beieinander liegen, während der Easy-Pace deutlich langsamer ist — genau das ist gewollt: Die Grundlage entsteht im lockeren Bereich, die Härte in wenigen, gezielten Einheiten. Die Werte gelten für gesunde, trainierte Läufer und sind als Bereich zu verstehen, nicht als sekundengenaue Vorgabe. Mit steigendem VDOT verschieben sich alle fünf Paces gleichmäßig nach vorne — bei VDOT 50 läge das Easy-Tempo bereits bei rund 5:07 und Threshold bei 4:15 min/km.',
+      },
+      {
+        typ: 'text',
+        titel: 'Die fünf Intensitätszonen erklärt',
+        html: `<p>Daniels teilt das Lauftraining in fünf Zonen, jede mit einem klaren Zweck. <strong>Easy (E)</strong> ist das Tempo der lockeren Dauerläufe und macht mengenmäßig den größten Teil des Trainings aus — hier entsteht die Grundlagenausdauer, und die Belastung bleibt gering. <strong>Marathon (M)</strong> entspricht dem angestrebten Marathon-Renntempo und wird in längeren Einheiten geübt.</p><p><strong>Threshold (T)</strong>, das Schwellentempo, liegt an der Laktatschwelle — „komfortabel hart", etwa 20 bis 40 Minuten am Stück oder in längeren Intervallen haltbar; es verschiebt die Schwelle nach oben. <strong>Interval (I)</strong> ist das Tempo an der VO2max, gelaufen in Abschnitten von drei bis fünf Minuten mit Pausen, und trainiert die maximale Sauerstoffaufnahme. <strong>Rep (R)</strong> schließlich ist noch schneller: kurze, schnelle Wiederholungen mit vollständiger Erholung, die Schnelligkeit und Laufökonomie schulen. Die Kunst liegt in der Mischung: viel Easy, wenig, aber gezielt gesetzte harte Reize. Genau diese Verteilung unterscheidet strukturiertes Training vom ständigen Laufen im mittleren, wenig wirksamen Tempobereich.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Trainingssteuerung: die Intensität treffen, nicht die Sekunde',
+        text: 'Der häufigste Fehler im Hobbylauf ist, die lockeren Läufe zu schnell und die harten zu langsam zu laufen — alles landet im mittleren Graubereich, der wenig bringt. Die VDOT-Paces helfen, das zu vermeiden. Easy-Läufe sollen wirklich locker sein: Man muss sich dabei unterhalten können, und wenn der Rechner ein langsames Tempo vorgibt, ist das kein Zeichen von Faulheit, sondern Absicht. Threshold fühlt sich „komfortabel hart" an — fordernd, aber kontrolliert. Intervalle laufen an der VO2max, also deutlich anstrengend. Wichtig: Die Prozentwerte nach Daniels sind Richtwerte, keine physikalischen Konstanten. Passen Sie die Paces an Wetter, Untergrund und Tagesform an und behandeln Sie sie als Bereich von einigen Sekunden, nicht als exakte Zielzeit. Wer die richtige Intensität trifft, trainiert wirksamer als jemand, der stur eine Sekundenzahl jagt.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Äquivalente Rennzeiten bei VDOT 40',
+        kopf: ['Distanz', 'Prognostizierte Zeit'],
+        zeilen: [
+          ['5 km', '24:06'],
+          ['10 km', '50:00'],
+          ['Halbmarathon', '1:50:52'],
+          ['Marathon', '3:49:34'],
+        ],
+        fussnote: 'Ein VDOT-Wert prognostiziert nicht nur die eingegebene, sondern alle Renndistanzen — bei gleichem Trainingszustand. Ein VDOT von 40 entspricht rund 24 Minuten auf 5 km und knapp 3:50 h im Marathon. Diese Äquivalenz ist ein nützliches Planungswerkzeug für Zielzeiten, hat aber Grenzen: Sie setzt voraus, dass man für die jeweilige Distanz auch spezifisch trainiert hat. Ohne lange Läufe wird die Marathon-Prognose zu optimistisch ausfallen. Umgekehrt lässt sich die Tabelle nutzen, um ein realistisches Ziel zu setzen: Wer aktuell 10 km in 50 Minuten läuft, weiß, dass ein Marathon unter vier Stunden bei entsprechendem Ausdauertraining in Reichweite liegt — ein motivierender Anhaltspunkt für die Saisonplanung.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Zweites Beispiel: 5 km in 25:00',
+        schritte: [
+          { label: 'Geschwindigkeit', formel: '5.000 m ÷ 25 min', ergebnis: '200 m/min' },
+          { label: 'VDOT (kürzere Dauer, höherer %max)', formel: 'VO2 ÷ %max (t = 25)', ergebnis: '≈ 38,3' },
+          { label: 'Threshold-Pace (88 % des VDOT)', formel: 'aus der Ziel-VO2 zurückgerechnet', ergebnis: '5:16 min/km' },
+        ],
+        fazit: 'Interessant: 5 km in 25:00 wird mit exakt derselben Geschwindigkeit gelaufen wie 10 km in 50:00 (200 m/min) — trotzdem ergibt sich ein niedrigerer VDOT von 38,3 statt 40. Der Grund liegt in der Dauerkurve: Dasselbe Tempo 50 Minuten lang zu halten ist eine größere Leistung als nur 25 Minuten, also steht ein längerer Lauf für einen höheren VDOT. Aus dem VDOT von 38,3 ergibt sich ein Threshold-Tempo von rund 5:16 min/km — etwas langsamer als die 5:05 bei VDOT 40. So macht der Rechner Leistungen über verschiedene Distanzen vergleichbar und zeigt, dass nicht das reine Tempo, sondern das über die Dauer gehaltene Tempo die Fitness bestimmt.',
+      },
+      {
+        typ: 'text',
+        titel: 'Grenzen der Prognose',
+        html: `<p>Die VDOT-Äquivalenz beruht auf der Annahme, dass jemand für <strong>alle Distanzen gleich gut trainiert</strong> ist. In der Praxis stimmt das selten: Ein schneller 5-km-Läufer, der nie lange Läufe absolviert, wird die aus seinem VDOT abgeleitete Marathon-Zeit deutlich verfehlen — schlicht weil ihm die spezifische <strong>Langstreckenausdauer</strong> fehlt.</p><p>Je weiter die Zieldistanz von der getesteten entfernt ist, desto unsicherer wird die Prognose. Ein 10-km-Ergebnis sagt zuverlässig etwas über die 5-km-Leistung aus, aber nur bedingt über den Marathon, der zusätzlich Fettstoffwechsel, Verpflegungsstrategie und muskuläre Ermüdungsresistenz verlangt. Umgekehrt überschätzt der VDOT die Marathonzeit, wenn das Testrennen eine kurze Distanz war. Als Faustregel gilt: Für die Marathonplanung ist ein Halbmarathon-Ergebnis aussagekräftiger als ein 5-km-Rennen. Wer sein Renntempo für ein konkretes Ziel umrechnen will, kombiniert den VDOT sinnvoll mit dem <a href="/sport/pace-rechner">Pace-Rechner</a>, der Zeit, Distanz und Tempo direkt ineinander umrechnet.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Wann den VDOT neu berechnen',
+        html: `<p>Ein VDOT-Wert ist eine Momentaufnahme der Form. Sinnvoll ist eine Neuberechnung nach <strong>jedem ehrlich gelaufenen Wettkampf</strong> oder etwa alle <strong>vier bis acht Wochen</strong> anhand eines aktuellen Testergebnisses. Über einen typischen Trainingszyklus steigt der VDOT bei gezieltem Training um <strong>ein bis drei Punkte</strong> — ein Sprung von 40 auf 43 bedeutet spürbar schnellere Trainingspaces.</p><p>Zwei Fehler gilt es zu vermeiden: Aktualisiert man zu selten, trainiert man mit veralteten, zu langsamen Vorgaben und bremst den Fortschritt. Aktualisiert man dagegen nach jedem einzelnen Lauf, jagt man Tagesform-Schwankungen hinterher und riskiert, sich an einem zufällig guten Tag zu überfordern. Am verlässlichsten ist ein Wettkampfergebnis, bei dem man wirklich am Limit war und ausgeruht an den Start ging. Ein lockerer Trainingslauf oder ein Rennen bei großer Hitze liefern einen zu niedrigen, ein Rückenwind-Bestzeitrennen einen zu hohen Wert. Regelmäßige, ehrliche Standortbestimmung ist der Schlüssel, damit die Paces mit der Form mitwachsen.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'VDOT richtig nutzen',
+        punkte: [
+          'Ein aktuelles Rennergebnis über mindestens 3.000 m verwenden — kürzere Distanzen sind zu tagesformabhängig.',
+          'Das Rennen sollte ehrlich am Limit und ausgeruht gelaufen sein.',
+          'Die Trainingspaces als Bereich behandeln, nicht als sekundengenaue Vorgabe.',
+          'Den hohen Easy-Anteil ernst nehmen — die Grundlage entsteht im lockeren Tempo.',
+          'Nicht jede Einheit hart laufen; wenige gezielte harte Reize genügen.',
+          'Paces an Wetter, Untergrund und Steigung anpassen.',
+          'Nach jedem Wettkampf oder alle vier bis acht Wochen neu berechnen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Ein Schätzmodell — keine Garantie',
+        text: 'Der VDOT beruht auf den Formeln von Daniels und Gilbert, die aus Leistungsdaten von Läufern abgeleitet wurden. Er ist ein bewährtes, aber vereinfachtes Modell: Individuelle Physiologie, Laufstil, Muskelfasertyp und Trainingshintergrund führen zu Abweichungen. Für Freizeitläufer ist der VDOT eine sehr gute Orientierung zur Trainingssteuerung, aber keine exakte Leistungsmessung und keine Garantie für bestimmte Zielzeiten. Die abgeleiteten Paces gelten für gesunde, trainierte Erwachsene. Wer neu mit dem Laufen beginnt, gesundheitliche Einschränkungen hat oder nach längerer Pause wieder einsteigt, sollte die Intensität behutsam steigern und im Zweifel ärztlich abklären lassen, bevor er intensive Einheiten wie Intervalle in den Plan nimmt. Laufen ist für die allermeisten Menschen gesund — die häufigsten Probleme entstehen durch zu schnelles Steigern von Umfang und Tempo, nicht durch das Training an sich.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum individuelle Paces besser sind als pauschale Tipps',
+        html: `<p>Pauschale Tempo-Ratschläge wie „lauf deine langen Läufe in 6:00 min/km" ignorieren, dass Läufer unterschiedlich leistungsfähig sind. Was für den einen ein lockerer Dauerlauf ist, kann für den anderen bereits Schwellentempo sein. Genau hier liegt der Wert des VDOT: Er <strong>personalisiert</strong> die Vorgaben und stellt sicher, dass jede Einheit im richtigen Belastungsbereich stattfindet.</p><p>Das Ergebnis ist ein Training, das <strong>Reiz und Erholung</strong> sinnvoll ausbalanciert. Die lockeren Läufe bleiben locker genug für echte Regeneration, die harten Einheiten treffen die Intensität, die tatsächlich Anpassungen auslöst. Über Wochen und Monate ergibt sich daraus ein stetiger Formaufbau, der sich beim nächsten Wettkampf in einem höheren VDOT niederschlägt — woraufhin sich die Paces wieder anpassen. Dieser Rechner ist damit ein Werkzeug zur Trainingssteuerung, kein Ersatz für einen individuellen Trainingsplan oder die Begleitung durch einen Coach. Als Orientierung, welches Tempo für welchen Zweck passt, macht er das Lauftraining aber deutlich gezielter — und genau das ist der schnellste Weg zu besseren Zeiten.</p>`,
+      },
+    ],
+    quellen: [
+      {
+        titel: 'Daniels & Gilbert — Oxygen Power / Daniels Running Formula',
+        hinweis: 'Zugrunde liegende VDOT-Gleichungen (VO2-Kostenkurve + Dauerkurve); Standardmodell zur Trainingspace-Bestimmung.',
+      },
+      {
+        titel: 'Daniels-Gilbert-Formel',
+        hinweis: 'VO2 = −4,60 + 0,182258·v + 0,000104·v²; %max-Dauerkurve; VDOT = VO2 ÷ %max. Werte sind Richtwerte für gesunde, trainierte Läufer.',
+      },
+    ],
+  },
 ];
