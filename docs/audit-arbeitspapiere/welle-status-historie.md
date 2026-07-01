@@ -8,6 +8,34 @@
 
 ---
 
+## 02.07.2026 — Auto-Ausbau: 4 neue Rechner (11 → 15) — ✅ ABGESCHLOSSEN
+
+Kategorie Auto & Verkehr von 11 auf 15 Rechner erweitert — alle Neubauten direkt Goldstandard
+(12–13 contentBloecke, ~1.560–1.580 W, quellen, 2 interne Links, Component-Logik inline).
+
+- bremsweg-rechner (bff0a5d): Reaktionsweg (v÷10)×3, Bremsweg (v÷10)², Gefahrenbremsung ÷2,
+  Anhalteweg = Summe. VERKEHRSSICHERHEIT: Faustformeln als Merkhilfen markiert, Winter/Nässe-Warnung
+  (Schnee ~3×). Anker 50/100/120 km/h gegen ADAC/TÜV/AutoBild geprüft.
+- reifengroesse-rechner (9575890): Außendurchmesser = Zoll×25,4 + 2×(Breite×Querschnitt÷100),
+  Abrollumfang ×0,97, Tachoabweichung alt→neu. ZULASSUNG: Fahrzeugschein/CoC verbindlich, Tacho darf
+  nie zu wenig anzeigen. Anker 205/55 R16 → 631,9 mm / 1985 mm.
+- leasingfaktor-rechner (2bb523c): (Rate÷BLP)×100; Gesamtkostenfaktor mit Anzahlung. FINANZ: keine
+  Beratung, Nebenkosten/Kilometer nicht enthalten. Klar abgegrenzt vom bestehenden leasing-rechner.
+  Anker 250€/40.000€ → 0,63 (Branchenschnitt).
+- wertverlust-auto-rechner (0901f07): degressiver Restwert = Neupreis × Π(1−Rate_i), 3 Typ-Profile
+  (Verbrenner/Premium-SUV/Elektro). FINANZ: Durchschnitts-Richtwert, keine individuelle Bewertung.
+  Anker Verbrenner 30.000€/3J → 17.852€; DAT-Kompaktklasse 35.000€ (22/11/9) → 22.110€.
+
+Fingerprints distinkt (Starts text-infobox / text-tabelle / text-statistik / text-vergleich). Anker je
+Rechner per Node-Probe gegen Component-Formel und veröffentlichte Referenzwerte geprüft. client-data.ts
+in keinem der 4 Commits. Auto-Einleitung aktualisiert (4 neue verlinkt, nicht existierende Phantom-Nennungen
+THG/Wallbox/Gebrauchtwagen-Bewertung entfernt).
+
+**Status gesamt:** ~203 Rechner. Arbeit, Technik, Sport, Kochen und Auto nun je auf 15 ausgebaut.
+AdSense-Resubmit weiterhin bewusst aufgeschoben (Karsten-Entscheidung).
+
+---
+
 ## 02.07.2026 — Kochen-Ausbau: 3 neue Rechner (12 → 15) — ✅ ABGESCHLOSSEN
 
 Kategorie Kochen von 12 auf 15 Rechner erweitert — alle Neubauten direkt Goldstandard
