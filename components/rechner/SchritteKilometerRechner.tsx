@@ -188,6 +188,7 @@ export default function SchritteKilometerRechner() {
             </p>
           </div>
 
+          <CrossLink href="/gesundheit/schritte-rechner" emoji="🚶" text="Schritte-Rechner mit Tagesziel" />
           <CrossLink href="/sport/kalorienverbrauch-rechner" emoji="🔥" text="Kalorienverbrauch genauer berechnen" />
           <CrossLink href="/sport/pace-rechner" emoji="🏃" text="Pace & Distanz umrechnen" />
 

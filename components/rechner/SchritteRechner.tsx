@@ -136,6 +136,7 @@ export default function SchritteRechner() {
             </div>
           </div>
 
+          <CrossLink href="/sport/schritte-kilometer-rechner" emoji="👟" text="Schritte in km — mit Schrittlänge & Aktivität" />
           <CrossLink href="/gesundheit/kalorienrechner" emoji="🔥" text="Täglichen Kalorienbedarf berechnen" />
           <CrossLink href="/gesundheit/bmi-rechner" emoji="❤️" text="BMI berechnen" />
 
