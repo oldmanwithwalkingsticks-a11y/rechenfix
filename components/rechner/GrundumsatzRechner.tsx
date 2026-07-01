@@ -132,7 +132,7 @@ export default function GrundumsatzRechner() {
             </p>
           </div>
 
-          <CrossLink href="/sport/kalorienverbrauch-rechner" emoji="🔥" text="Kalorienverbrauch bei Bewegung berechnen" />
+          <CrossLink href="/sport/kalorienbedarf-rechner" emoji="🍽️" text="Tagesbedarf mit Aktivität berechnen (TDEE)" />
           <CrossLink href="/gesundheit/bmi-rechner" emoji="⚖️" text="BMI berechnen" />
 
           <ErgebnisAktionen
