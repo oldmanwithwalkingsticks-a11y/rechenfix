@@ -240,6 +240,7 @@ const RECHNER_MAP: Record<string, ComponentType> = {
   'laufband-steigung-rechner': dyn(() => import('@/components/rechner/LaufbandSteigungRechner')),
   'ftp-rechner': dyn(() => import('@/components/rechner/FtpRechner')),
   'schwimm-pace-rechner': dyn(() => import('@/components/rechner/SchwimmPaceRechner')),
+  'schritte-kilometer-rechner': dyn(() => import('@/components/rechner/SchritteKilometerRechner')),
 };
 
 export default function RechnerLoader({ slug }: { slug: string }) {

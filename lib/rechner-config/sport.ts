@@ -1670,4 +1670,170 @@ Die CSS-Formel ist eine gute Näherung der Laktatschwelle, aber kein Laborwert. 
       },
     ],
   },
+  {
+    slug: 'schritte-kilometer-rechner',
+    letzteAktualisierung: '2026-07-01',
+    titel: 'Schritte-in-Kilometer-Rechner',
+    beschreibung: 'Schritte in Kilometer umrechnen (und zurück): mit größenabhängiger Schrittlänge statt Pauschalwert — plus grober Kalorienschätzung.',
+    kategorie: 'Sport & Fitness',
+    kategorieSlug: 'sport',
+    metaTitle: 'Schritte in Kilometer umrechnen',
+    metaDescription: 'Schritte in Kilometer umrechnen und zurück: Wie weit sind 10.000 Schritte? Mit Schrittlänge aus der Körpergröße und grober Kalorienschätzung.',
+    keywords: ['schritte in km', '10000 schritte km', 'schrittlänge berechnen', 'schritte kilometer umrechnen', 'wie weit 10000 schritte', 'schritte pro km', 'schritte distanz', 'schrittlänge körpergröße'],
+    icon: '👟',
+    formel: 'Schrittlänge = Körpergröße × Faktor (Gehen 0,415/0,413) | Distanz(km) = Schritte × Schrittlänge ÷ 100.000',
+    beispiel: '10.000 Schritte bei 175 cm (Gehen): Schrittlänge 72,6 cm → 10.000 × 72,6 ÷ 100.000 = 7,26 km.',
+    erklaerung: `**Schritte-in-Kilometer-Rechner — wie weit sind deine Schritte?**
+
+Wie weit man mit einer bestimmten Zahl an Schritten kommt, hängt von der Schrittlänge ab — und die ist von Mensch zu Mensch verschieden. Dieser Rechner wandelt Schritte in Kilometer um und zurück, schätzt die Schrittlänge aus der Körpergröße und ergänzt eine grobe Kalorienschätzung. So beantwortet er die klassischen Fragen: „Wie weit sind meine 10.000 Schritte?" und „Wie viele Schritte brauche ich für 5 km?"
+
+**Schrittlänge aus der Körpergröße**
+
+Als gute Näherung gilt: Die Gehschrittlänge entspricht rund 41 bis 42 Prozent der Körpergröße — genauer dem Faktor 0,415 bei Männern und 0,413 bei Frauen. Bei 175 cm ergibt das 175 × 0,415 = 72,6 cm pro Schritt.
+
+**Die Umrechnung**
+
+Distanz in Kilometern = Schritte × Schrittlänge in cm ÷ 100.000. Mit 72,6 cm ergeben 10.000 Schritte also 10.000 × 72,6 ÷ 100.000 = 7,26 km. Umgekehrt braucht man für 5 km rund 6.885 Schritte. Beim Joggen und Laufen wird der Schritt länger (Faktor rund 0,50 bzw. 0,60), sodass dieselbe Schrittzahl mehr Distanz abdeckt.
+
+**Nur ein Richtwert**
+
+Die Schätzung aus der Körpergröße kann individuell um 8 bis 15 Prozent abweichen, weil Beinlänge, Gehstil und Tempo mitspielen. Am genauesten wird es, wenn man die eigene Schrittlänge einmal misst und direkt einträgt. Die Kalorienangabe ist eine grobe MET-Schätzung zur Orientierung.`,
+    faq: [
+      {
+        frage: 'Wie weit sind 10.000 Schritte?',
+        antwort: 'Das hängt von der Schrittlänge ab. Bei einer durchschnittlichen Körpergröße von 175 cm und normalem Gehen sind es rund 7,26 km. Kleinere Menschen kommen auf etwa 6,5 km, größere auf über 7,8 km. Die verbreitete Faustregel „10.000 Schritte = etwa 7 bis 8 km" trifft es damit gut — der Rechner liefert den auf die eigene Größe bezogenen Wert.',
+      },
+      {
+        frage: 'Wie viele Schritte sind ein Kilometer?',
+        antwort: 'Bei einer Gehschrittlänge von rund 72,6 cm (entspricht 175 cm Körpergröße) sind es etwa 1.377 Schritte pro Kilometer. Als grobe Faustregel gelten 1.300 bis 1.500 Schritte pro km beim Gehen. Kleinere Menschen brauchen mehr, größere weniger Schritte. Beim Joggen oder Laufen sinkt die Zahl, weil der Schritt länger wird.',
+      },
+      {
+        frage: 'Wie genau ist die Schätzung?',
+        antwort: 'Die Schrittlänge aus der Körpergröße ist eine bewährte Näherung, kann individuell aber um 8 bis 15 Prozent abweichen — je nach Beinlänge, Gehstil und Tempo. Wer es genau will, misst die eigene Schrittlänge über 20 Schritte auf flachem Grund im normalen Tempo und trägt sie direkt ein. Das überschreibt die Größen-Schätzung und macht das Ergebnis deutlich präziser.',
+      },
+      {
+        frage: 'Ändert sich die Schrittlänge beim Joggen?',
+        antwort: 'Ja, deutlich. Beim Gehen liegt die Schrittlänge bei rund 41 bis 42 Prozent der Körpergröße, beim Joggen bei etwa 50 Prozent und beim schnellen Laufen bei rund 60 Prozent. Bei 175 cm sind das also grob 73, 88 und 105 cm. Dieselbe Schrittzahl deckt beim Laufen deshalb eine deutlich größere Distanz ab als beim Gehen.',
+      },
+      {
+        frage: 'Sind 10.000 Schritte am Tag ein Muss?',
+        antwort: 'Nein, die 10.000 sind ein populäres Richtziel, keine feste medizinische Grenze. Studien zeigen, dass der gesundheitliche Nutzen bereits ab etwa 7.000 Schritten pro Tag deutlich ansteigt. Wichtiger als eine exakte Zahl ist regelmäßige Bewegung im Alltag. Der Rechner hilft vor allem, ein Gefühl für die zurückgelegte Distanz zu bekommen.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Warum Schritte keine feste Distanz sind',
+        html: `<p>„10.000 Schritte" klingt nach einer festen Strecke — ist es aber nicht. Wie weit man damit kommt, hängt von der <strong>Schrittlänge</strong> ab, und die ist individuell verschieden. Ein großer Mensch mit langen Beinen legt pro Schritt deutlich mehr Boden zurück als ein kleinerer, und beim schnellen Laufen wird der Schritt viel länger als beim gemütlichen Gehen.</p><p>Die wichtigsten Einflussfaktoren sind <strong>Körpergröße</strong>, <strong>Geschlecht</strong> und <strong>Tempo</strong> beziehungsweise Bewegungsart. Deshalb liefert eine pauschale Umrechnung wie „ein Schritt = 75 cm" oft ungenaue Ergebnisse. Dieser Rechner geht einen Schritt weiter und schätzt die Schrittlänge aus der Körpergröße — mit unterschiedlichen Faktoren für Gehen, Joggen und Laufen. Wer seine tatsächliche Schrittlänge kennt, kann sie direkt eintragen und erhält ein noch genaueres Ergebnis. So wird aus der abstrakten Schrittzahl eine konkrete Distanz in Kilometern, und umgekehrt lässt sich berechnen, wie viele Schritte für eine bestimmte Strecke nötig sind.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Gleiche Schrittzahl, verschiedene Distanz',
+        spalteA: 'Kleiner (160 cm)',
+        spalteB: 'Groß (190 cm)',
+        zeilen: [
+          { kriterium: 'Schrittlänge (Gehen)', a: 'ca. 66 cm', b: 'ca. 79 cm' },
+          { kriterium: '10.000 Schritte', a: 'ca. 6,64 km', b: 'ca. 7,89 km' },
+          { kriterium: 'Für 5 km nötig', a: 'ca. 7.530 Schritte', b: 'ca. 6.340 Schritte' },
+          { kriterium: 'Grund', a: 'kürzere Beine, kürzerer Schritt', b: 'längere Beine, längerer Schritt' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '10.000 Schritte bei 175 cm',
+        schritte: [
+          { label: 'Schrittlänge schätzen', formel: '175 cm × 0,415', ergebnis: '72,6 cm' },
+          { label: 'Distanz berechnen', formel: '10.000 × 72,6 ÷ 100.000', ergebnis: '7,26 km' },
+        ],
+        fazit: 'Bei 175 cm Körpergröße und normalem Gehen ergibt sich eine Schrittlänge von 72,6 cm — 10.000 Schritte entsprechen damit 7,26 km. Der Faktor 0,415 stammt aus biomechanischen Untersuchungen und bildet die Gehschrittlänge im Verhältnis zur Körpergröße gut ab. Die verbreitete Faustregel „10.000 Schritte sind etwa 7 bis 8 km" wird damit bestätigt, aber auf die individuelle Größe präzisiert. Ein kleinerer Mensch käme bei gleicher Schrittzahl auf weniger, ein größerer auf mehr Distanz. Diese Größenabhängigkeit ist der Hauptgrund, warum pauschale Schritt-Distanz-Tabellen im Internet oft danebenliegen: Sie unterstellen eine Durchschnittsgröße, die auf die wenigsten exakt zutrifft. Wer seine eigene Größe einträgt, bekommt ein Ergebnis, das zur eigenen Statur passt.',
+      },
+      {
+        typ: 'text',
+        titel: 'Schrittlänge aus der Körpergröße schätzen',
+        html: `<p>Woher kommt der Faktor? Biomechanische Untersuchungen zeigen, dass die <strong>Gehschrittlänge</strong> in einem recht stabilen Verhältnis zur Körpergröße steht — sie beträgt im Schnitt etwa <strong>41 bis 42 Prozent</strong> der Körpergröße. Konkret nutzt man den Faktor 0,415 für Männer und 0,413 für Frauen; der kleine Unterschied ergibt sich aus statistisch etwas abweichenden Körperproportionen.</p><p>Ein Beispiel: Bei 180 cm ergibt sich eine Gehschrittlänge von 180 × 0,415 = 74,7 cm, bei 165 cm sind es 165 × 0,413 = 68,1 cm. Diese Näherung ist praktisch, weil man nur die Körpergröße kennen muss und nichts abmessen. Sie stößt aber an Grenzen, wenn die individuellen Proportionen abweichen — etwa bei überdurchschnittlich langen Beinen oder einem besonders raumgreifenden oder kleinschrittigen Gehstil. Für die meisten Menschen liefert die Größen-Schätzung ein solides Ergebnis; wer es genauer braucht, misst die eigene Schrittlänge einmal aus und trägt sie im Rechner direkt ein, wodurch die Schätzung übersteuert wird. Eine einmalige Messung lohnt sich, weil die Schrittlänge über die Jahre weitgehend stabil bleibt — anders als das Gewicht oder die Fitness muss man sie nur selten neu bestimmen.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Schritte in Kilometer je Schrittzahl (72,6 cm)',
+        kopf: ['Schritte', 'Distanz'],
+        zeilen: [
+          ['2.000', '1,45 km'],
+          ['5.000', '3,63 km'],
+          ['7.500', '5,45 km'],
+          ['10.000', '7,26 km'],
+          ['15.000', '10,89 km'],
+        ],
+        fussnote: 'Umrechnung für eine Gehschrittlänge von 72,6 cm (entspricht 175 cm Körpergröße). Die Distanz steigt linear mit der Schrittzahl — doppelt so viele Schritte bedeuten doppelte Strecke. Ein üblicher Arbeitstag im Büro bringt oft nur 3.000 bis 4.000 Schritte zusammen, also gut 2 bis 3 km; ein aktiver Tag mit Spaziergängen erreicht schnell 10.000 Schritte und damit über 7 km. Für eine andere Schrittlänge verschieben sich alle Werte proportional: Wer 66 cm Schrittlänge hat, kommt bei 10.000 Schritten auf rund 6,6 statt 7,3 km. Deshalb lohnt es sich, die eigene Größe oder gemessene Schrittlänge einzutragen. Als grobe Orientierung entspricht diese Schrittlänge etwa 1.377 Schritten pro Kilometer — die verbreitete Faustregel von rund 1.300 bis 1.500 Schritten pro km beim Gehen deckt sich damit gut und lässt sich für eine schnelle Überschlagsrechnung leicht im Kopf behalten.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Schrittzahl-Ziele zur Einordnung',
+        werte: [
+          { label: 'Sitzender Alltag', wert: '2.000–4.000', hinweis: 'wenig Bewegung am Tag' },
+          { label: 'Spürbarer Nutzen ab', wert: '~7.000/Tag', hinweis: 'deutlich messbar in Studien' },
+          { label: 'Bekanntes Richtziel', wert: '10.000/Tag', hinweis: 'populär, keine feste Grenze' },
+          { label: 'Aktiver Alltag', wert: '8.000–12.000', hinweis: 'viel zu Fuß unterwegs' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Aktivität ändert die Schrittlänge',
+        html: `<p>Die Schrittlänge ist keine feste Größe, sondern hängt stark vom <strong>Tempo</strong> ab. Beim gemütlichen <strong>Gehen</strong> liegt sie bei rund 41 bis 42 Prozent der Körpergröße. Beim <strong>Joggen</strong> steigt sie auf etwa 50 Prozent, beim schnellen <strong>Laufen</strong> auf rund 60 Prozent — der Körper greift bei höherem Tempo weiter aus.</p><p>Das hat eine praktische Folge: Dieselbe Schrittzahl deckt beim Laufen eine deutlich größere Distanz ab als beim Gehen. Bei 175 cm bedeuten 10.000 Schritte gehend 7,26 km, joggend rund 8,75 km und laufend etwa 10,50 km. Wer also einen Schrittzähler nutzt und dabei läuft statt geht, legt pro Schritt mehr Strecke zurück — die reine Schrittzahl unterschätzt dann die Distanz, wenn man mit dem Gehfaktor rechnet. Deshalb bietet dieser Rechner die Auswahl zwischen Gehen, Joggen und Laufen. Wer den dabei verbrannten Energieumsatz genauer wissen möchte, findet im <a href="/sport/kalorienverbrauch-rechner">Kalorienverbrauch-Rechner</a> eine differenziertere Berechnung als die grobe Schätzung hier. Umgekehrt bedeutet das auch: Wer seine Schrittzahl in Distanz umrechnen will, sollte die passende Aktivität wählen. Ein Tag mit vielen Joggingschritten und wenigen Gehschritten lässt sich nicht sauber mit einem einzigen Faktor abbilden — im Zweifel rechnet man die Abschnitte getrennt und addiert die Distanzen.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: '10.000 Schritte je Aktivität (175 cm, 75 kg)',
+        kopf: ['Aktivität', 'Schrittlänge', 'Distanz', 'grob kcal'],
+        zeilen: [
+          ['Gehen', '72,6 cm', '7,26 km', '~381 kcal'],
+          ['Joggen', '87,5 cm', '8,75 km', '~574 kcal'],
+          ['Laufen', '105 cm', '10,50 km', '~772 kcal'],
+        ],
+        fussnote: 'Distanz und grober Kalorienverbrauch für 10.000 Schritte bei 175 cm und 75 kg. Die Kalorienwerte sind grobe MET-Schätzungen (Gehen 3,5 · Joggen 7,0 · Laufen 9,8) und dienen nur der Orientierung — der reale Verbrauch hängt von Tempo, Untergrund, Fitness und Stoffwechsel ab. Beim Laufen legt man mit derselben Schrittzahl nicht nur mehr Distanz zurück, sondern verbraucht pro Kilometer auch mehr Energie als beim gemütlichen Gehen. Wichtig für die Interpretation: Die Kalorien beziehen sich hier auf die zurückgelegte Distanz der jeweiligen Aktivität, nicht auf die reinen 10.000 Schritte allein — laufend kommt man in derselben Zeit weiter und bewegt sich intensiver, was beide Effekte zusammenführt. Für den Alltag reicht diese grobe Einordnung völlig aus.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Umgekehrt: wie viele Schritte für 5 km?',
+        schritte: [
+          { label: 'Distanz in Zentimeter', formel: '5 km × 100.000', ergebnis: '500.000 cm' },
+          { label: 'Durch die Schrittlänge teilen', formel: '500.000 ÷ 72,6', ergebnis: '≈ 6.885 Schritte' },
+        ],
+        fazit: 'Um 5 Kilometer zu Fuß zurückzulegen, braucht ein 175 cm großer Mensch beim Gehen rund 6.885 Schritte. Die Rechnung dreht die Umrechnung einfach um: Man teilt die Distanz (in Zentimetern) durch die Schrittlänge. So lässt sich ein Streckenziel in eine Schrittzahl übersetzen — praktisch, wenn man mit einem Schrittzähler ein Distanzziel erreichen möchte. Ein größerer Mensch käme mit weniger Schritten aus, ein kleinerer bräuchte etwas mehr, weil seine Schrittlänge kürzer ist. Das ist besonders praktisch für alle, die ein tägliches Distanzziel verfolgen, aber nur die Schrittzahl auf dem Fitness-Tracker sehen: Einmal umgerechnet weiß man, ab welcher Schrittzahl das Streckenziel erreicht ist, und muss nicht raten.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Die Schrittlänge genauer bestimmen',
+        punkte: [
+          'Eine bekannte Strecke abgehen (z. B. 20 Schritte) und die Länge messen, dann durch die Schrittzahl teilen.',
+          'Auf flachem, festem Untergrund messen, nicht auf Sand oder im Gelände.',
+          'Im normalen Alltagstempo gehen, nicht besonders langsam oder schnell.',
+          'Für Joggen und Laufen getrennt messen — die Schrittlänge unterscheidet sich deutlich.',
+          'Den gemessenen Wert im Rechner direkt eintragen; er überschreibt die Größen-Schätzung.',
+          'Einen Fitness-Tracker mit der eigenen Schrittlänge kalibrieren, falls möglich.',
+          'Größe und Aktivität korrekt wählen, wenn man ohne eigene Messung rechnet.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Schätzwerte — keine exakte Messung',
+        text: 'Die aus der Körpergröße abgeleitete Schrittlänge ist eine bewährte Näherung, kann individuell aber um rund 8 bis 15 Prozent abweichen. Beinlänge, Körperproportionen, Gehstil und Tempo beeinflussen die tatsächliche Schrittlänge, die keine Formel exakt erfasst. Für ein genaueres Ergebnis empfiehlt es sich, die eigene Schrittlänge einmal auszumessen und einzutragen. Auch die angezeigten Kalorien sind bewusst als grobe Orientierung gedacht: Sie beruhen auf pauschalen MET-Werten für Gehen, Joggen und Laufen und geben nur eine ungefähre Größenordnung wieder. Der reale Energieverbrauch hängt von Tempo, Steigung, Untergrund, Fitness, Alter und Stoffwechsel ab und kann deutlich abweichen. Zwei Menschen mit identischer Schrittzahl können sehr unterschiedlich viel Energie umsetzen, allein aufgrund von Gewicht und Fitnessstand. Dieser Rechner ist ein Werkzeug, um ein Gefühl für Distanzen und Bewegungsumfänge zu bekommen — er ersetzt keine medizinische oder ernährungswissenschaftliche Beratung und trifft keine Aussage über Gewichtsveränderungen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Schrittziele richtig einordnen',
+        html: `<p>Schrittzähler und Tagesziele sind vor allem eines: ein guter <strong>Motivator</strong>, sich mehr zu bewegen. Die berühmten 10.000 Schritte stammen ursprünglich aus einer japanischen Werbekampagne der 1960er-Jahre und sind kein medizinisch hergeleiteter Grenzwert. Neuere Studien zeigen, dass der gesundheitliche Nutzen bereits ab etwa <strong>7.000 Schritten</strong> pro Tag deutlich ansteigt und danach flacher weiterwächst.</p><p>Wichtiger als das Erreichen einer exakten Zahl ist die <strong>Regelmäßigkeit</strong> der Bewegung. Wer bislang wenig zu Fuß unterwegs war, profitiert schon von einer moderaten Steigerung — jeder zusätzliche Spaziergang zählt. Dieser Rechner hilft dabei, ein realistisches Gefühl für die zurückgelegten Distanzen zu entwickeln und die eigene Schrittzahl in eine greifbare Strecke zu übersetzen. So wird aus einer abstrakten Zahl auf dem Display eine konkrete Vorstellung: Wer weiß, dass die täglichen 8.000 Schritte rund 6 Kilometer sind, kann seine Bewegung besser einschätzen und planen. Für eine gezielte Trainingssteuerung beim Laufen lohnt sich zusätzlich der <a href="/sport/pace-rechner">Pace-Rechner</a>, der Tempo, Zeit und Distanz ineinander umrechnet. Am Ende ist die genaue Schrittzahl weniger entscheidend als die Gewohnheit, sich täglich zu bewegen — ob 7.000 oder 10.000, jede Strecke zu Fuß ist ein Gewinn für die Gesundheit, und der Rechner macht diesen Fortschritt greifbar.</p>`,
+      },
+    ],
+    quellen: [
+      {
+        titel: 'Schrittlänge & Körpergröße (Jensen et al. 1994 / ACSM)',
+        hinweis: 'Gehschrittlänge ≈ 0,415 (♂) bzw. 0,413 (♀) × Körpergröße; Näherung mit ±8–15 % individueller Abweichung.',
+      },
+      {
+        titel: 'Schrittzahl & Gesundheit (Paluch et al. 2022 u. a.)',
+        hinweis: 'Gesundheitlicher Nutzen steigt bereits ab ca. 7.000 Schritten/Tag deutlich; 10.000 ist ein populäres Richtziel, keine feste Grenze.',
+      },
+    ],
+  },
 ];
