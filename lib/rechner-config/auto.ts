@@ -2567,4 +2567,179 @@ Weil der Bremsweg im Quadrat wächst, führt doppelte Geschwindigkeit zum **vier
       { titel: 'Einflussfaktoren auf den realen Bremsweg', hinweis: 'Fahrbahnzustand, Reifen, Bremsen, Beladung und Reaktionszeit bestimmen den tatsächlichen Weg. Bei Schnee ca. dreifache Länge gegenüber trockener Fahrbahn.' },
     ],
   },
+  {
+    slug: 'reifengroesse-rechner',
+    letzteAktualisierung: '2026-07-02',
+    titel: 'Reifengrößen-Rechner',
+    beschreibung: 'Reifenbezeichnung entschlüsseln: Außendurchmesser, Abrollumfang und Tacho-Abweichung beim Wechsel auf eine andere Größe berechnen.',
+    kategorie: 'Auto & Verkehr',
+    kategorieSlug: 'auto',
+    metaTitle: 'Reifengrößen-Rechner — Abrollumfang & Tacho',
+    metaDescription: 'Reifengröße wie 205/55 R16 entschlüsseln: Außendurchmesser, Abrollumfang und Tacho-Abweichung beim Reifenwechsel berechnen. Kostenlos.',
+    keywords: ['reifengröße berechnen', 'abrollumfang', 'tachoabweichung reifen', 'reifen umrechnen', '205 55 r16 bedeutung', 'reifengrößen rechner', 'reifen außendurchmesser'],
+    icon: '🛞',
+    formel: 'Flankenhöhe = Breite × Querschnitt ÷ 100 · Außendurchmesser = Zoll × 25,4 + 2 × Flankenhöhe · Abrollumfang ≈ π × Ø × 0,97 | Abweichung % = (Ø neu ÷ Ø alt − 1) × 100. Technische Näherung, keine Zulassung.',
+    beispiel: '205/55 R16: Flanke 112,75 mm, Außendurchmesser 631,9 mm, Abrollumfang ≈ 1.926 mm.',
+    erklaerung: `**Reifengröße verstehen und vergleichen**
+
+Eine Reifenbezeichnung wie **205/55 R16** wirkt kryptisch, folgt aber einer klaren Logik. Der Reifengrößen-Rechner entschlüsselt sie und berechnet den Außendurchmesser, den Abrollumfang und — beim Vergleich zweier Größen — die Abweichung beim Reifenwechsel.
+
+**Was die Zahlen bedeuten**
+
+Die erste Zahl (205) ist die **Reifenbreite** in Millimetern. Die zweite (55) ist der **Querschnitt** in Prozent der Breite — die Flankenhöhe beträgt hier 55 % von 205 mm. Das „R" steht für **Radialbauweise**, die 16 für den **Felgendurchmesser** in Zoll.
+
+**Warum die Abweichung zählt**
+
+Wechseln Sie auf eine andere Größe, ändert sich meist der Außendurchmesser — und damit die Tacho-Anzeige. Faustregel ist eine Abweichung des Abrollumfangs von höchstens rund ±2 %. Wichtig: Der Tacho darf nie zu wenig anzeigen. Verbindlich ist aber immer der Fahrzeugschein/CoC oder eine Reifenfreigabe — der Rechner liefert nur technische Näherungswerte.`,
+    faq: [
+      {
+        frage: 'Was bedeutet 205/55 R16?',
+        antwort: '205 ist die Reifenbreite in Millimetern, 55 der Querschnitt in Prozent der Breite (die Flanke ist also 55 % von 205 mm = 112,75 mm hoch), R steht für Radialbauweise und 16 für den Felgendurchmesser in Zoll. Oft folgen noch Last- und Geschwindigkeitsindex, etwa 91V — 91 für die Tragfähigkeit, V für bis zu 240 km/h.',
+      },
+      {
+        frage: 'Wie berechnet man den Abrollumfang?',
+        antwort: 'Zuerst den Außendurchmesser: Zoll × 25,4 + 2 × Flankenhöhe, wobei die Flankenhöhe = Breite × Querschnitt ÷ 100 ist. Bei 205/55 R16 sind das 16 × 25,4 + 2 × 112,75 = 631,9 mm. Der geometrische Umfang ist π × Durchmesser ≈ 1.985 mm; der dynamische Abrollumfang liegt durch das Einwalken unter Last rund 3 % darunter, also etwa 1.926 mm.',
+      },
+      {
+        frage: 'Wie viel Abweichung ist beim Reifenwechsel erlaubt?',
+        antwort: 'Als technische Faustregel gilt eine Abweichung des Abrollumfangs von höchstens rund ±2 %. Verbindlich ist aber allein, ob die Größe im Fahrzeugschein/CoC eingetragen ist oder eine Reifenfreigabe bzw. ABE vorliegt. Ist das nicht der Fall, muss die Größe bei TÜV oder DEKRA eingetragen werden — sonst drohen Probleme mit Betriebserlaubnis und Versicherung.',
+      },
+      {
+        frage: 'Warum zeigt der Tacho nach dem Reifenwechsel falsch an?',
+        antwort: 'Ein größerer Außendurchmesser legt pro Radumdrehung mehr Strecke zurück — der Tacho zählt aber Umdrehungen und zeigt dadurch weniger an, als Sie real fahren. Das ist unzulässig, weil der Tacho nie zu wenig anzeigen darf. Ein kleinerer Reifen lässt den Tacho dagegen mehr anzeigen (vorauseilen), was erlaubt ist. Gesetzlich zulässig sind höchstens +10 % + 4 km/h Voreilung.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen breiten und schmalen Reifen?',
+        antwort: 'Breitere Reifen bieten auf trockener Straße mehr Grip und Seitenhalt, verbrauchen aber tendenziell mehr, sind anfälliger für Aquaplaning und oft teurer. Schmalere Reifen rollen leichter, verdrängen Wasser besser und bieten im Winter mehr Traktion im Schnee — deshalb sind Winterreifen häufig eine Nummer schmaler eingetragen.',
+      },
+      {
+        frage: 'Ersetzt der Rechner eine Reifenfreigabe?',
+        antwort: 'Nein. Der Rechner liefert technische Näherungswerte zu Durchmesser, Abrollumfang und Tacho-Abweichung, aber keine Zulassung. Ob eine Größe an Ihrem Fahrzeug erlaubt ist, entscheidet der Fahrzeugschein/CoC oder eine Reifenfreigabe/ABE. Zusätzlich müssen Freigängigkeit, Felgenmaulweite und Einpresstiefe passen. Im Zweifel klärt das ein Fachbetrieb oder die Prüforganisation.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Die Reifenbezeichnung entschlüsselt',
+        html: `<p>Auf jeder Reifenflanke steht eine Kombination wie <strong>205/55 R16 91V</strong> — und jede Angabe hat eine feste Bedeutung. Die <strong>205</strong> ist die Reifenbreite in Millimetern, gemessen von Flanke zu Flanke. Die <strong>55</strong> ist der Querschnitt (das Höhen-Breiten-Verhältnis) in Prozent: Die Flanke ist 55 % der Breite hoch, hier also 112,75 mm. Ein niedrigerer Querschnitt bedeutet eine flachere, sportlichere Flanke.</p><p>Das <strong>R</strong> steht für die <strong>Radialbauweise</strong>, die bei modernen Pkw-Reifen Standard ist. Die <strong>16</strong> ist der Felgendurchmesser in Zoll — der Reifen passt also auf eine 16-Zoll-Felge. Häufig folgen noch zwei Angaben: der <strong>Lastindex</strong> (hier 91, steht für die maximale Tragfähigkeit je Reifen) und der <strong>Geschwindigkeitsindex</strong> als Buchstabe (V für bis zu 240 km/h). Wer diese Systematik einmal verstanden hat, liest jede Reifengröße mühelos — und erkennt sofort, worin sich zwei Größen unterscheiden.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Reifenbezeichnung Teil für Teil (Beispiel 205/55 R16 91V)',
+        kopf: ['Angabe', 'Bedeutung', 'Beispielwert'],
+        zeilen: [
+          ['205', 'Reifenbreite in Millimetern', '205 mm'],
+          ['55', 'Querschnitt (Flankenhöhe in % der Breite)', '55 % → 112,75 mm'],
+          ['R', 'Bauart: Radialreifen', 'Radial'],
+          ['16', 'Felgendurchmesser in Zoll', '16 Zoll = 406,4 mm'],
+          ['91', 'Lastindex (Tragfähigkeit je Reifen)', '91 → 615 kg'],
+          ['V', 'Geschwindigkeitsindex', 'V → bis 240 km/h'],
+        ],
+        fussnote: 'Last- und Geschwindigkeitsindex müssen mindestens den Vorgaben im Fahrzeugschein entsprechen — ein niedrigerer Index ist nicht zulässig, ein höherer erlaubt. Der Lastindex 91 steht laut ETRTO-Tabelle für 615 kg pro Reifen; der Geschwindigkeitsindex V für 240 km/h. Beide Werte finden sich in den Fahrzeugpapieren und auf der Reifenflanke. Weitere gängige Geschwindigkeitsindizes sind T (190 km/h), H (210 km/h) und W (270 km/h) — bei Winterreifen darf der Index niedriger sein als im Schein, wenn ein Aufkleber im Sichtfeld an die reduzierte Höchstgeschwindigkeit erinnert.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: Außendurchmesser von 205/55 R16',
+        schritte: [
+          { label: 'Flankenhöhe', formel: '205 × 55 ÷ 100', ergebnis: '112,75 mm' },
+          { label: 'Felgendurchmesser', formel: '16 × 25,4', ergebnis: '406,4 mm' },
+          { label: 'Außendurchmesser', formel: '406,4 + 2 × 112,75', ergebnis: '631,9 mm' },
+          { label: 'Abrollumfang (dynamisch)', formel: 'π × 631,9 × 0,97', ergebnis: '≈ 1.926 mm' },
+        ],
+        fazit: 'Der Reifen 205/55 R16 hat einen Außendurchmesser von 631,9 mm. Der geometrische Umfang beträgt π × 631,9 ≈ 1.985 mm; weil der Reifen unter Last leicht einwalkt, liegt der reale Abrollumfang mit dem Faktor 0,97 rund 3 % niedriger, also bei etwa 1.926 mm. Genau dieser Abrollumfang ist die Grundlage für die Tacho- und Kilometerzähler-Kalibrierung. Ändert er sich beim Reifenwechsel, weichen Tacho und Kilometerstand entsprechend ab. Ein Rechenbeispiel dazu: Bei einem Abrollumfang von 1.926 mm dreht sich das Rad auf einem Kilometer rund 519 Mal. Wächst der Umfang durch einen größeren Reifen, sinkt die Zahl der Umdrehungen pro Kilometer — und weil das Steuergerät weiter mit dem alten Wert rechnet, zeigt der Kilometerzähler nach einer echten Fahrt von 100 km etwas weniger an, als tatsächlich gefahren wurde.',
+      },
+      {
+        typ: 'text',
+        titel: 'Abrollumfang vs. geometrischer Umfang',
+        html: `<p>Man muss zwei Umfänge unterscheiden. Der <strong>geometrische Umfang</strong> ist die reine Kreisrechnung: π × Außendurchmesser. Der <strong>dynamische Abrollumfang</strong> ist die Strecke, die der Reifen tatsächlich pro Umdrehung auf der Straße zurücklegt — und die ist etwas kürzer. Der Grund ist das <strong>Einwalken</strong>: Unter dem Gewicht des Fahrzeugs wird der Reifen im Aufstandsbereich leicht plattgedrückt, sein wirksamer Radius sinkt. Als Näherung rechnet man mit rund <strong>3 % weniger</strong> (Faktor 0,97).</p><p>Dieser Abrollumfang ist die Bezugsgröße für <strong>Tacho, Kilometerzähler und ABS</strong>. Das Steuergerät zählt die Radumdrehungen und rechnet sie über den hinterlegten Abrollumfang in Geschwindigkeit und Strecke um. Ändert ein anderer Reifen den Abrollumfang, ohne dass das System neu kalibriert wird, weichen Tacho- und Kilometeranzeige ab. Deshalb ist der Abrollumfang — nicht die Breite oder der Zollwert allein — die entscheidende Größe beim Reifenwechsel.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: Wechsel 205/55 R16 → 215/55 R16',
+        schritte: [
+          { label: 'Durchmesser alt (205/55 R16)', formel: '16 × 25,4 + 2 × 112,75', ergebnis: '631,9 mm' },
+          { label: 'Durchmesser neu (215/55 R16)', formel: '16 × 25,4 + 2 × 118,25', ergebnis: '642,9 mm' },
+          { label: 'Abweichung', formel: '(642,9 ÷ 631,9 − 1) × 100', ergebnis: '+1,7 %' },
+          { label: 'Tacho bei real 100 km/h', formel: '100 × 631,9 ÷ 642,9', ergebnis: '≈ 98,3 km/h' },
+        ],
+        fazit: 'Von 205 auf 215 mm Breite bei gleichem Querschnitt (55 %) und Zoll (16) wächst der Durchmesser um 1,7 % auf 642,9 mm. Das liegt zwar innerhalb der ±2-%-Faustregel, hat aber einen kritischen Effekt: Der größere Reifen lässt den Tacho <em>nacheilen</em> — bei real 100 km/h zeigt er nur noch rund 98,3 km/h an. Das ist unzulässig, weil der Tacho nie weniger anzeigen darf als die reale Geschwindigkeit. Solche Größen brauchen zwingend eine Eintragung oder Freigabe, auch wenn die reine Prozentabweichung klein wirkt. Umgekehrt gilt: Ein etwas kleinerer Reifen als das Original lässt den Tacho vorauseilen — er zeigt dann mehr an, als man real fährt. Das ist erlaubt, solange die Voreilung im gesetzlichen Rahmen bleibt, und ist der Grund, warum viele Winterreifen bewusst eine Nummer kleiner gewählt werden dürfen, ohne dass der Tacho zum Problem wird.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Größenvergleich zur Referenz 205/55 R16',
+        kopf: ['Größe', 'Außendurchmesser', 'Abweichung'],
+        zeilen: [
+          ['195/65 R15', '634,5 mm', '+0,4 %'],
+          ['205/55 R16 (Referenz)', '631,9 mm', '0,0 %'],
+          ['225/45 R17', '634,3 mm', '+0,4 %'],
+          ['215/55 R16', '642,9 mm', '+1,7 %'],
+          ['225/50 R17', '656,8 mm', '+3,9 %'],
+          ['235/45 R18', '668,7 mm', '+5,8 %'],
+        ],
+        fussnote: 'Die ersten Größen liegen mit unter ±0,5 % sehr nah an der Referenz — das ist der Sinn hinter dem „Plus-Sizing", bei dem man auf eine größere Felge mit flacherem Querschnitt wechselt und den Außendurchmesser nahezu konstant hält. Die letzten beiden Zeilen zeigen dagegen deutliche Abweichungen von fast 4 bzw. 6 %: Solche Größen ändern den Abrollumfang spürbar und sind ohne Eintragung tabu. Man erkennt außerdem die Grundregel des Plus-Sizings: Steigt der Zollwert um eins, muss der Querschnitt um rund zehn Prozentpunkte sinken (etwa von 55 auf 45), damit der Außendurchmesser gleich bleibt. Wer nur die Felge größer wählt, ohne den Querschnitt anzupassen, landet schnell weit außerhalb der Toleranz.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Reifenmaße in Zahlen',
+        werte: [
+          { label: '1 Zoll', wert: '25,4 mm', hinweis: 'Umrechnung des Felgendurchmessers' },
+          { label: 'Einwalk-Faktor', wert: '0,97', hinweis: 'dynamischer Abrollumfang ≈ 3 % unter dem geometrischen' },
+          { label: 'Technische Toleranz', wert: '≈ ±2 %', hinweis: 'Faustregel für den Abrollumfang beim Reifenwechsel' },
+          { label: 'Zulässige Tacho-Voreilung', wert: '+10 % + 4 km/h', hinweis: 'Tacho darf mehr, aber nie weniger anzeigen' },
+          { label: 'Mindest-Profiltiefe (gesetzlich)', wert: '1,6 mm', hinweis: 'empfohlen: Sommer ab 3 mm, Winter ab 4 mm wechseln' },
+        ],
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Breiter vs. schmaler Reifen',
+        spalteA: 'Breiter Reifen',
+        spalteB: 'Schmaler Reifen',
+        zeilen: [
+          { kriterium: 'Grip (trocken)', a: 'höher, mehr Seitenhalt', b: 'geringer' },
+          { kriterium: 'Aquaplaning', a: 'anfälliger', b: 'weniger anfällig' },
+          { kriterium: 'Traktion im Schnee', a: 'schlechter', b: 'besser (drückt sich durch)' },
+          { kriterium: 'Rollwiderstand / Verbrauch', a: 'höher', b: 'niedriger' },
+          { kriterium: 'Komfort & Geräusch', a: 'sportlicher, oft lauter', b: 'komfortabler, leiser' },
+          { kriterium: 'Preis', a: 'meist teurer', b: 'meist günstiger' },
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Zulassung & Tacho — verbindlich ist der Fahrzeugschein',
+        text: 'Der Rechner liefert technische Näherungswerte, aber keine Zulassung. Verbindlich ist allein, ob die Reifengröße im Fahrzeugschein (Teil I der Zulassungsbescheinigung) bzw. im CoC-Dokument eingetragen ist oder eine gültige Reifenfreigabe bzw. Allgemeine Betriebserlaubnis (ABE) vorliegt. Ist die Größe nicht abgedeckt, muss sie vor der Nutzung bei TÜV oder DEKRA eingetragen werden. Besonders wichtig ist die Tacho-Regel: Der Tacho darf nie weniger anzeigen als die reale Geschwindigkeit — zulässig ist nur eine Voreilung von höchstens 10 Prozent plus 4 km/h. Ein größerer Reifen lässt den Tacho nacheilen und ist damit unzulässig, selbst wenn die Prozentabweichung klein erscheint. Eine falsche oder nicht freigegebene Größe kann die Betriebserlaubnis erlöschen lassen und den Versicherungsschutz gefährden. Freigängigkeit im Radkasten, Felgenmaulweite und Einpresstiefe (ET) sind zusätzlich zu prüfen und vom reinen Größenvergleich nicht abgedeckt. Alle Angaben ohne Gewähr.',
+      },
+      {
+        typ: 'text',
+        titel: 'Toleranz in der Praxis',
+        html: `<p>In der Praxis hat sich als technische Faustregel eine Abweichung des <strong>Abrollumfangs von höchstens rund ±2 %</strong> etabliert. Innerhalb dieses Bereichs bleiben Tacho-Fehler und Auswirkungen auf Fahrwerk und Kraftübertragung klein. Sie ersetzt aber keine rechtliche Freigabe — die kommt immer aus dem Fahrzeugschein oder einer Reifenfreigabe.</p><p>Neben dem Durchmesser sind beim Wechsel weitere Maße entscheidend, die der reine Größenrechner nicht erfasst. Die <strong>Freigängigkeit</strong> im Radkasten muss auch bei vollem Lenkeinschlag und Einfedern gewährleistet sein — ein breiterer Reifen kann sonst schleifen. Die <strong>Felgenmaulweite</strong> muss zur Reifenbreite passen, und die <strong>Einpresstiefe (ET)</strong> bestimmt, wie weit das Rad nach außen steht. Auch Last- und Geschwindigkeitsindex dürfen die Vorgaben des Fahrzeugscheins nicht unterschreiten. Wer eine abweichende Größe fahren will, sollte diese Punkte gemeinsam mit einem Fachbetrieb oder der Prüforganisation abklären.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Vor dem Reifenwechsel prüfen',
+        punkte: [
+          'Fahrzeugschein/CoC prüfen: Ist die gewünschte Größe dort eingetragen und für die Jahreszeit passend?',
+          'Falls nicht: Reifenfreigabe oder ABE des Herstellers suchen, sonst Eintragung bei TÜV/DEKRA einplanen',
+          'Durchmesser-/Abrollumfang-Abweichung mit dem Rechner prüfen — Faustregel höchstens rund ±2 %',
+          'Tacho-Regel beachten: Ein größerer Reifen darf den Tacho nicht nacheilen lassen (nie zu wenig anzeigen)',
+          'Last- und Geschwindigkeitsindex mindestens so hoch wie im Fahrzeugschein wählen, niedriger ist unzulässig',
+          'Freigängigkeit im Radkasten, Felgenmaulweite und Einpresstiefe prüfen — im Zweifel den Fachbetrieb fragen',
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Sommer, Winter und unterschiedliche Größen',
+        html: `<p>Viele Fahrzeuge haben im Fahrzeugschein <strong>mehrere Reifengrößen</strong> eingetragen — oft eine breitere für den Sommer und eine schmalere für den Winter. Das ist kein Zufall: <strong>Winterreifen</strong> werden häufig eine Nummer schmaler gefahren, weil ein schmalerer Reifen sich bei Schnee besser durch die Fahrbahn drückt und dadurch mehr Traktion aufbaut. Ein 195er-Winterreifen kann auf Schnee überlegen sein, wo ein breiter 225er nur aufschwimmt.</p><p>Achten Sie im Winter zusätzlich auf die Kennzeichnung: Das <strong>Alpine-Symbol</strong> (Berg mit Schneeflocke, „3PMSF") ist seit der Winterreifenpflicht maßgeblich; die alte <strong>M+S</strong>-Kennung allein reicht bei neuen Reifen nicht mehr aus. Prüfen Sie vor dem Kauf, welche der eingetragenen Größen zur Jahreszeit passt — und dass Sommer- wie Winterausführung jeweils im Fahrzeugschein stehen oder freigegeben sind. Wie stark unterschiedliche Reifen den Verbrauch beeinflussen, lässt sich grob mit dem <a href="/auto/spritkosten-rechner">Spritkosten-Rechner</a> gegenrechnen.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Der Rechner zeigt die Technik, der Schein entscheidet',
+        html: `<p>Der Reifengrößen-Rechner ist ein <strong>technisches Werkzeug</strong>: Er entschlüsselt die Bezeichnung, berechnet Durchmesser und Abrollumfang und zeigt, wie stark eine andere Größe abweicht und den Tacho verstellt. Damit lässt sich vor dem Kauf schnell einschätzen, ob eine Wunschgröße überhaupt in die Nähe der Originalbereifung kommt oder weit daneben liegt.</p><p>Die <strong>rechtliche Freigabe</strong> ersetzt er aber nicht. Ob eine Größe an Ihrem Auto erlaubt ist, steht im Fahrzeugschein/CoC oder ergibt sich aus einer Reifenfreigabe bzw. ABE — und praktische Punkte wie Freigängigkeit und Einpresstiefe müssen zusätzlich passen. Als Merkregel bleibt: <strong>höchstens rund ±2 % Abrollumfang</strong>, der <strong>Tacho darf nie zu wenig anzeigen</strong>, und im Zweifel klärt der Fachbetrieb oder die Prüforganisation. Die Bremswege bei verschiedenen Tempi zeigt ergänzend der <a href="/auto/bremsweg-rechner">Bremsweg-Rechner</a>.</p>`,
+      },
+    ],
+    quellen: [
+      { titel: 'Reifenmaß-Formel (europ. Norm / ECE R30)', hinweis: 'Außendurchmesser = Zoll × 25,4 + 2 × (Breite × Querschnitt ÷ 100); Abrollumfang = π × Ø, dynamisch ca. 3 % weniger (Faktor 0,97).' },
+      { titel: 'Tachoabweichung & Zulässigkeit (StVZO)', hinweis: 'Tacho darf nie weniger als die reale Geschwindigkeit anzeigen, max. +10 % + 4 km/h. Verbindlich ist die Eintragung im Fahrzeugschein/CoC; technische Toleranz ca. ±2 % Abrollumfang.' },
+    ],
+  },
 ];
