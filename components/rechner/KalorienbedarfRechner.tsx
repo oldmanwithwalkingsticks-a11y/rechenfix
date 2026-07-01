@@ -148,7 +148,7 @@ export default function KalorienbedarfRechner() {
           </div>
 
           <CrossLink href="/sport/grundumsatz-rechner" emoji="🔥" text="Grundumsatz — nur der Ruheverbrauch" />
-          <CrossLink href="/sport/kalorienverbrauch-rechner" emoji="🏃" text="Kalorienverbrauch bei einzelnen Aktivitäten" />
+          <CrossLink href="/sport/makronaehrstoffe-rechner" emoji="🥗" text="Makros aus deinem Kalorienziel verteilen" />
 
           <ErgebnisAktionen
             ergebnisText={`Kalorienbedarf (TDEE): ${fmt0(ergebnis.tdee)} kcal/Tag zum Gewicht-Halten (Grundumsatz ${fmt0(ergebnis.bmr)} kcal × Aktivitätsfaktor ${faktor.toLocaleString('de-DE')}). Schätzwert.`}
