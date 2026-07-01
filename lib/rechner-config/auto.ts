@@ -2406,4 +2406,165 @@ Zahlt der Arbeitnehmer eine **monatliche Eigenbeteiligung** (z. B. 100 €), min
       },
     ],
   },
+  {
+    slug: 'bremsweg-rechner',
+    letzteAktualisierung: '2026-07-02',
+    titel: 'Bremsweg-Rechner',
+    beschreibung: 'Reaktionsweg, Bremsweg und Anhalteweg nach den Fahrschul-Faustformeln berechnen — inklusive Gefahrenbremsung.',
+    kategorie: 'Auto & Verkehr',
+    kategorieSlug: 'auto',
+    metaTitle: 'Bremsweg-Rechner — Anhalteweg & Reaktionsweg',
+    metaDescription: 'Bremsweg, Reaktionsweg und Anhalteweg mit den Fahrschul-Faustformeln berechnen — auch die Gefahrenbremsung. Kostenlos für die Theorieprüfung.',
+    keywords: ['bremsweg berechnen', 'anhalteweg formel', 'reaktionsweg', 'gefahrenbremsung', 'bremsweg faustformel', 'bremsweg rechner', 'anhalteweg berechnen'],
+    icon: '🛑',
+    formel: 'Reaktionsweg = (v÷10)×3 · Bremsweg = (v÷10)² · Gefahrenbremsung = Bremsweg÷2 · Anhalteweg = Reaktionsweg + Bremsweg (v in km/h) | Faustformeln, keine exakten Werte.',
+    beispiel: '50 km/h: Reaktionsweg 15 m + Bremsweg 25 m = 40 m Anhalteweg (Gefahrenbremsung 27,5 m).',
+    erklaerung: `**Bremsweg, Reaktionsweg und Anhalteweg**
+
+In der Fahrschule und in der Theorieprüfung geht es immer wieder um drei Wege: den **Reaktionsweg**, den **Bremsweg** und ihre Summe, den **Anhalteweg**. Der Bremsweg-Rechner ermittelt sie aus der Geschwindigkeit mit den bekannten Faustformeln.
+
+**Die Faustformeln**
+
+Der Reaktionsweg berechnet sich als (Geschwindigkeit ÷ 10) × 3 — er wächst mit dem Tempo linear. Der Bremsweg ist (Geschwindigkeit ÷ 10)², wächst also im Quadrat. Bei einer Gefahrenbremsung (Vollbremsung) halbiert sich der Bremsweg. Der Anhalteweg ist Reaktionsweg plus Bremsweg.
+
+**Warum Tempo so stark zählt**
+
+Weil der Bremsweg im Quadrat wächst, führt doppelte Geschwindigkeit zum **vierfachen** Bremsweg — nicht zum doppelten. Das ist der wichtigste Gedanke hinter den Formeln. Sie sind vereinfachte Merkhilfen für trockene Fahrbahn und gute Reifen; bei Nässe, Schnee oder schlechten Reifen ist der reale Weg deutlich länger.`,
+    faq: [
+      {
+        frage: 'Wie berechnet man den Bremsweg?',
+        antwort: 'Mit der Faustformel Bremsweg = (Geschwindigkeit ÷ 10) × (Geschwindigkeit ÷ 10). Bei 50 km/h sind das (50 ÷ 10)² = 5 × 5 = 25 Meter, bei 100 km/h schon 100 Meter. Der Bremsweg wächst im Quadrat zur Geschwindigkeit — deshalb verlängert er sich bei doppeltem Tempo auf das Vierfache.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen Bremsweg und Anhalteweg?',
+        antwort: 'Der Bremsweg ist nur die Strecke vom Betätigen der Bremse bis zum Stillstand. Der Anhalteweg umfasst zusätzlich den Reaktionsweg — die Strecke, die das Fahrzeug zurücklegt, während der Fahrer die Gefahr erkennt und den Fuß zur Bremse bewegt (etwa 1 Sekunde). Anhalteweg = Reaktionsweg + Bremsweg.',
+      },
+      {
+        frage: 'Wie funktioniert die Gefahrenbremsung?',
+        antwort: 'Bei einer Gefahrenbremsung (Vollbremsung) tritt man das Bremspedal so kräftig wie möglich durch. Der Bremsweg halbiert sich dadurch gegenüber einer normalen Bremsung: Formel Bremsweg ÷ 2. Bei 100 km/h sinkt der Bremsweg so von 100 auf 50 Meter. Moderne Autos mit ABS bleiben dabei lenkbar.',
+      },
+      {
+        frage: 'Wie lang ist der Bremsweg bei Nässe oder Schnee?',
+        antwort: 'Deutlich länger als die Faustformel angibt. Bei Nässe verlängert sich der Bremsweg je nach Reifen und Fahrbahn spürbar, bei Schnee und Eis etwa auf das Dreifache. Die Faustformeln gelten für trockene Straße und gute Reifen — bei schlechten Bedingungen entsprechend mehr Abstand halten und langsamer fahren.',
+      },
+      {
+        frage: 'Was bedeutet die Regel „halber Tacho"?',
+        antwort: 'Der Sicherheitsabstand außerorts sollte in Metern etwa dem halben Tachowert entsprechen: bei 100 km/h also rund 50 Meter. Diese Faustregel orientiert sich am Reaktionsweg von etwa 1,5 Sekunden. Innerorts gilt als grober Richtwert mindestens der Reaktionsweg als Abstand zum Vordermann.',
+      },
+      {
+        frage: 'Sind die Faustformeln exakt?',
+        antwort: 'Nein, sie sind bewusst vereinfachte Merkhilfen für die Theorieprüfung. Der reale Bremsweg hängt von Fahrbahnzustand, Reifen, Bremsen, Beladung, Gefälle und der individuellen Reaktionszeit ab. Die Formeln vermitteln aber sehr gut das Gefühl dafür, wie stark die Geschwindigkeit den Anhalteweg bestimmt.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Reaktionsweg, Bremsweg, Anhalteweg — was bei einer Gefahr passiert',
+        html: `<p>Wenn vor Ihnen plötzlich ein Kind auf die Straße läuft, vergeht bis zum Stillstand mehr, als man denkt. Der Ablauf zerfällt in drei Abschnitte. Zuerst der <strong>Reaktionsweg</strong>: die Strecke, die das Auto zurücklegt, während Sie die Gefahr <em>erkennen</em> und den Fuß vom Gas auf die Bremse bewegen. Das dauert beim aufmerksamen Fahrer rund eine Sekunde — bei 50 km/h sind das schon 15 Meter, in denen das Auto noch ungebremst weiterfährt.</p><p>Dann folgt der <strong>Bremsweg</strong>: die Strecke vom ersten Bremsdruck bis zum völligen Stillstand. Beide zusammen ergeben den <strong>Anhalteweg</strong> — die gesamte Strecke von der Gefahrenerkennung bis zum Stehen. Genau diese Summe entscheidet, ob das Auto rechtzeitig zum Stehen kommt oder ob es zum Unfall kommt. Der Bremsweg-Rechner zeigt alle drei Größen plus die verkürzte <strong>Gefahrenbremsung</strong>, damit Sie ein Gefühl für die echten Distanzen bekommen.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: 50 km/h innerorts',
+        schritte: [
+          { label: 'Reaktionsweg', formel: '(50 ÷ 10) × 3', ergebnis: '15 m' },
+          { label: 'Bremsweg (normal)', formel: '(50 ÷ 10)² = 5 × 5', ergebnis: '25 m' },
+          { label: 'Anhalteweg (normal)', formel: '15 m + 25 m', ergebnis: '40 m' },
+          { label: 'Anhalteweg (Gefahrenbremsung)', formel: '15 m + 12,5 m', ergebnis: '27,5 m' },
+        ],
+        fazit: 'Bei Tempo 50 innerorts braucht ein Auto rund 40 Meter, bis es steht — bei einer Vollbremsung immer noch 27,5 Meter. Das sind gut zwei bis drei Pkw-Längen mehr, als die meisten schätzen. Allein der Reaktionsweg von 15 Metern zeigt, warum schon eine Sekunde Unaufmerksamkeit über einen Unfall entscheiden kann. Wer innerorts 60 statt 50 fährt, verlängert den Anhalteweg bereits deutlich, weil der Bremsweg im Quadrat mitwächst. Umgekehrt zeigt die Rechnung, warum Tempo-30-Zonen vor Schulen und Kindergärten so wirksam sind: Bei 30 km/h steht das Auto schon nach 18 Metern, während es bei 50 km/h an derselben Stelle noch mit voller Wucht unterwegs wäre. Genau in diesem Bereich zwischen Reaktion und Stillstand entscheidet sich, ob eine Situation glimpflich ausgeht.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Wege nach Geschwindigkeit',
+        kopf: ['Tempo', 'Reaktionsweg', 'Bremsweg', 'Anhalteweg'],
+        zeilen: [
+          ['30 km/h', '9 m', '9 m', '18 m'],
+          ['50 km/h', '15 m', '25 m', '40 m'],
+          ['70 km/h', '21 m', '49 m', '70 m'],
+          ['100 km/h', '30 m', '100 m', '130 m'],
+          ['120 km/h', '36 m', '144 m', '180 m'],
+          ['200 km/h', '60 m', '400 m', '460 m'],
+        ],
+        fussnote: 'Berechnet mit den Faustformeln für trockene Fahrbahn und gute Reifen. Man erkennt gut, wie der Bremsweg im Vergleich zum Reaktionsweg davonzieht: Bei 30 km/h sind beide noch gleich (9 m), bei 200 km/h ist der Bremsweg (400 m) fast siebenmal so lang wie der Reaktionsweg (60 m). Ein Blick auf die Sprünge lohnt sich: Von 100 auf 120 km/h wächst der Anhalteweg um 50 Meter, von 120 auf 200 km/h sogar um 280 Meter. Bei Nässe oder Schnee sind alle Bremswege noch einmal deutlich länger — auf verschneiter Fahrbahn kann sich der Bremswert leicht verdreifachen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum der Bremsweg im Quadrat wächst',
+        html: `<p>Der wichtigste Merksatz zum Bremsweg lautet: <strong>Doppelte Geschwindigkeit bedeutet vierfachen Bremsweg</strong> — nicht doppelten. Der Grund liegt in der Physik. Die Bewegungsenergie eines Fahrzeugs steigt mit dem Quadrat der Geschwindigkeit, und genau diese Energie muss die Bremse in Wärme umwandeln. Doppelt so schnell heißt viermal so viel Energie, also viermal so langer Bremsweg.</p><p>In der Faustformel steckt das im „hoch zwei": (v ÷ 10)². Von 50 auf 100 km/h steigt der Bremsweg von 25 auf 100 Meter — eine Vervierfachung. Der <strong>Reaktionsweg</strong> dagegen wächst nur <em>linear</em>, weil er allein von der Zeit abhängt, die der Fahrer zum Reagieren braucht: Bei doppeltem Tempo legt das Auto in derselben Reaktionssekunde die doppelte Strecke zurück, nicht die vierfache. Dieser Unterschied — linear beim Reagieren, quadratisch beim Bremsen — erklärt, warum schon wenig mehr Tempo den Anhalteweg überproportional verlängert.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: Gefahrenbremsung bei 100 km/h',
+        schritte: [
+          { label: 'Reaktionsweg', formel: '(100 ÷ 10) × 3', ergebnis: '30 m' },
+          { label: 'Bremsweg (normal)', formel: '(100 ÷ 10)²', ergebnis: '100 m' },
+          { label: 'Bremsweg (Gefahrenbremsung)', formel: '100 ÷ 2', ergebnis: '50 m' },
+          { label: 'Anhalteweg (Gefahrenbremsung)', formel: '30 m + 50 m', ergebnis: '80 m' },
+        ],
+        fazit: 'Bei 100 km/h auf der Landstraße beträgt der normale Anhalteweg 130 Meter. Eine beherzte Vollbremsung halbiert den Bremsweg von 100 auf 50 Meter und verkürzt den Anhalteweg auf 80 Meter — ein Gewinn von 50 Metern, der über Leben und Tod entscheiden kann. Wichtig: Der Reaktionsweg von 30 Metern bleibt gleich, denn die Gefahrenbremsung wirkt erst, nachdem der Fuß auf der Bremse ist. Bei modernen Autos mit ABS bleibt das Fahrzeug trotz Vollbremsung lenkbar, sodass man einem Hindernis notfalls ausweichen kann, statt die Räder zu blockieren. Im Ernstfall gilt deshalb: das Bremspedal ohne Zögern voll durchtreten und getreten halten — viele Fahrer bremsen aus Angst zu zaghaft und verschenken genau die Meter, auf die es ankommt.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Formel-Übersicht für die Theorieprüfung',
+        kopf: ['Größe', 'Faustformel', 'Beispiel bei 50 km/h'],
+        zeilen: [
+          ['Reaktionsweg', '(v ÷ 10) × 3', '15 m'],
+          ['Bremsweg (normal)', '(v ÷ 10) × (v ÷ 10)', '25 m'],
+          ['Bremsweg (Gefahr)', 'Bremsweg ÷ 2', '12,5 m'],
+          ['Anhalteweg (normal)', 'Reaktionsweg + Bremsweg', '40 m'],
+          ['Anhalteweg (Gefahr)', 'Reaktionsweg + Bremsweg ÷ 2', '27,5 m'],
+        ],
+        fussnote: 'Diese fünf Formeln decken alle Bremsweg-Aufgaben der Theorieprüfung ab. Das „v" steht für die Geschwindigkeit in km/h. Praktischer Merktrick: Zuerst v ÷ 10 rechnen (bei 50 also 5), dann diese Zahl für den Reaktionsweg mit 3 multiplizieren und für den Bremsweg mit sich selbst. Wer diese beiden Schritte beherrscht, hat alle Varianten im Griff. In der Prüfung wird gern nach der Gefahrenbremsung gefragt — dann einfach den normalen Bremsweg ausrechnen und halbieren. Und der beliebteste Merksatz zum Ankreuzen lautet: Bei doppelter Geschwindigkeit vervierfacht sich der Bremsweg, während sich der Reaktionsweg nur verdoppelt.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Geschwindigkeit & Abstand in Zahlen',
+        werte: [
+          { label: 'Reaktionszeit (aufmerksam)', wert: '≈ 1 Sek', hinweis: 'entspricht bei 50 km/h rund 15 m Reaktionsweg' },
+          { label: 'Sicherheitsabstand außerorts', wert: 'halber Tacho', hinweis: 'bei 100 km/h rund 50 m — orientiert am Reaktionsweg' },
+          { label: 'Anhalteweg bei 50 km/h', wert: '40 m', hinweis: 'rund zehn Pkw-Längen' },
+          { label: 'Bremsweg-Faktor bei 2× Tempo', wert: '4×', hinweis: 'der Bremsweg wächst im Quadrat, der Reaktionsweg nur linear' },
+          { label: 'Bremsweg bei Schnee/Eis', wert: 'bis 3×', hinweis: 'gegenüber trockener Fahrbahn, bei Glätte noch mehr' },
+          { label: 'Ungebremste Strecke pro Extra-Sekunde bei 100 km/h', wert: '≈ 28 m', hinweis: 'so viel legt das Auto pro Sekunde Reaktionsverzögerung zurück' },
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Nässe, Schnee und schlechte Reifen',
+        text: 'Die Faustformeln gelten für eine trockene Fahrbahn und gute Reifen — beides ist längst nicht immer gegeben. Bei nasser Straße verlängert sich der Bremsweg spürbar, weil die Reifen weniger Grip haben und Aquaplaning drohen kann. Bei Schnee und Eis wird es dramatisch: Der Bremsweg steigt auf etwa das Dreifache, unter Umständen noch mehr. Auch abgefahrene Reifen mit zu geringer Profiltiefe, eine hohe Beladung, ein Gefälle, verschlissene Bremsen und eine verlängerte Reaktionszeit durch Müdigkeit, Ablenkung oder Alkohol verschlechtern die Werte erheblich — oft mehrere Faktoren gleichzeitig. Deshalb sind die berechneten Wege eine Untergrenze für ideale Bedingungen, nicht der reale Wert bei schlechtem Wetter. Passen Sie Geschwindigkeit und Sicherheitsabstand an die tatsächlichen Verhältnisse an; im Zweifel gilt: langsamer fahren und mehr Abstand halten.',
+      },
+      {
+        typ: 'text',
+        titel: 'Die Reaktionszeit im Detail',
+        html: `<p>Der Reaktionsweg beruht auf der Annahme einer <strong>Reaktionszeit von rund einer Sekunde</strong>. Das ist ein guter Wert für einen ausgeruhten, aufmerksamen Fahrer bei Tag. Tatsächlich setzt sich diese Sekunde aus mehreren Phasen zusammen: die Gefahr wahrnehmen, sie als gefährlich erkennen, die Entscheidung zum Bremsen treffen und schließlich den Fuß vom Gas auf die Bremse bewegen. Studien nennen für aufmerksame Fahrer meist <strong>0,8 bis 1,2 Sekunden</strong>.</p><p>Unter schlechteren Bedingungen wird diese Zeit deutlich länger — und mit ihr der Reaktionsweg. <strong>Müdigkeit</strong>, <strong>Ablenkung</strong> (etwa durch das Handy), <strong>Alkohol</strong> oder bestimmte <strong>Medikamente</strong> können die Reaktionszeit auf zwei Sekunden und mehr verlängern. Bei 100 km/h bedeutet jede zusätzliche Sekunde weitere rund 28 Meter ungebremste Fahrt. Das zeigt, warum Ablenkung am Steuer so gefährlich ist: Sie verlängert nicht den Bremsweg, sondern den Reaktionsweg — und der beginnt, bevor überhaupt gebremst wird. Wer die Bußgeldfolgen von Handy am Steuer oder Tempoverstößen wissen will, findet sie im <a href="/auto/bussgeldrechner">Bußgeldrechner</a>.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Sicher unterwegs',
+        punkte: [
+          'Geschwindigkeit an Straße, Wetter und Sicht anpassen — nicht nur ans erlaubte Tempo, sondern an die tatsächlichen Bedingungen',
+          'Sicherheitsabstand halten: außerorts etwa halber Tacho in Metern, innerorts mindestens den Reaktionsweg',
+          'Vorausschauend fahren und Gefahren früh erkennen — je früher man reagiert, desto kürzer der zurückgelegte Reaktionsweg',
+          'Reifen (Profiltiefe, Luftdruck) und Bremsen regelmäßig prüfen, im Winter auf Winterreifen wechseln',
+          'Bei Nässe, Schnee, Nebel oder Dunkelheit deutlich langsamer fahren und den Abstand vergrößern',
+          'Nicht ablenken lassen — Handy weg, ausgeruht fahren und im Ernstfall entschlossen voll bremsen',
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Grenzen der Faustformel',
+        html: `<p>So praktisch die Faustformeln für die Theorieprüfung sind — sie bleiben <strong>vereinfachte Merkhilfen</strong>, keine exakte Physik. Sie unterstellen eine feste Reaktionszeit von einer Sekunde und eine mittlere Bremsverzögerung, wie sie ein durchschnittliches Auto auf trockener Fahrbahn erreicht. Die Realität weicht in beide Richtungen ab: Ein modernes Auto mit guten Reifen und Bremsen kann kürzer zum Stehen kommen, ein beladener Transporter auf nasser Straße deutlich länger brauchen.</p><p>Faktoren wie <strong>Fahrbahnbelag</strong>, <strong>Reifenmischung und Profiltiefe</strong>, <strong>Gefälle</strong>, <strong>Beladung</strong>, <strong>Bremsentemperatur</strong> und der individuelle Fahrer erfasst die Formel nicht. Deshalb sollte man die berechneten Werte nie als Garantie lesen, sondern als groben Rahmen — und im Zweifel großzügiger kalkulieren. Der eigentliche Wert der Formeln liegt nicht in der Nachkomma-Genauigkeit, sondern im Verständnis für die Größenordnungen.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Im Zweifel Fuß vom Gas',
+        html: `<p>Die Bremsweg-Formeln haben einen Zweck, der über die Prüfung hinausgeht: Sie <strong>schärfen das Gefühl dafür, wie stark das Tempo den Anhalteweg bestimmt</strong>. Wer einmal verinnerlicht hat, dass aus 50 km/h ein Anhalteweg von 40 Metern wird und aus 100 km/h gleich 130 Meter, fährt aufmerksamer — besonders dort, wo mit Fußgängern, Kindern oder Radfahrern zu rechnen ist.</p><p>Als Merkregeln bleiben: <strong>Reaktionsweg mal drei</strong>, <strong>Bremsweg im Quadrat</strong>, <strong>doppeltes Tempo gleich vierfacher Bremsweg</strong>. Und die wichtigste Konsequenz daraus: Bei schlechter Sicht, nasser oder verschneiter Fahrbahn und im Zweifel immer den Fuß vom Gas. Ein paar km/h weniger verkürzen den Anhalteweg überproportional — und genau diese Meter entscheiden im Ernstfall. Wie weit man mit einer Tankfüllung oder Akkuladung überhaupt kommt, zeigt der <a href="/auto/reichweiten-rechner">Reichweiten-Rechner</a>.</p>`,
+      },
+    ],
+    quellen: [
+      { titel: 'ADAC / TÜV NORD — Brems- und Anhalteweg (Faustformeln)', hinweis: 'Reaktionsweg = (v÷10)×3; Bremsweg = (v÷10)²; Gefahrenbremsung halbiert den Bremsweg; Anhalteweg = Reaktions- + Bremsweg. Vereinfachte Merkhilfen, keine exakten Werte.' },
+      { titel: 'Einflussfaktoren auf den realen Bremsweg', hinweis: 'Fahrbahnzustand, Reifen, Bremsen, Beladung und Reaktionszeit bestimmen den tatsächlichen Weg. Bei Schnee ca. dreifache Länge gegenüber trockener Fahrbahn.' },
+    ],
+  },
 ];
