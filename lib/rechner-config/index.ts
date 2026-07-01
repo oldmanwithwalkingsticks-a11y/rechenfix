@@ -76,7 +76,7 @@ Weitere Rechner helfen bei typischen Fragen rund ums Fahrzeug: der [Firmenwagen-
 
 Wer eine Immobilie finanzieren möchte, beginnt beim [Baufinanzierungs-Rechner](/wohnen/baufinanzierung-rechner): Er zeigt monatliche Rate, Zinsbindung, Restschuld und Gesamtkosten auf einen Blick. Für laufende Energiekosten helfen der [Stromkosten-Rechner](/wohnen/stromkosten-rechner) und der Stromvergleich-Rechner, mit dem Sie Ihren aktuellen Tarif gegen verfügbare Anbieter gegenrechnen. Die korrekte Wohnfläche nach Wohnflächenverordnung ermittelt der [Quadratmeter-Rechner](/wohnen/quadratmeter-rechner) — relevant bei Miet- oder Kaufverträgen.
 
-Ergänzend finden Sie Rechner für Mietrendite, Nebenkosten, Heizkosten-Aufteilung, Grunderwerbsteuer, Notarkosten, Wohngeld, Tapetenbedarf, Renovierung und Spezialthemen wie THG-Prämie oder Wallbox-Installation. Alle Werte basieren auf aktuellen Sätzen und den 2026 geltenden gesetzlichen Grundlagen.`,
+Ergänzend finden Sie Rechner für Mietrendite, Nebenkosten, Heizkosten, Grunderwerb- und Grundsteuer, Baufinanzierung, Indexmiete und Mietpreisbremse sowie für Material- und Renovierungsmengen wie Tapeten-, Fliesen-, Laminat- und Malerbedarf. Dazu kommen Energiethemen wie Photovoltaik, Balkon-Solar und Wärmepumpe. Alle Werte basieren auf aktuellen Sätzen und den 2026 geltenden gesetzlichen Grundlagen.`,
   },
   {
     slug: 'mathe',
