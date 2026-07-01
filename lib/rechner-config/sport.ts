@@ -1515,4 +1515,159 @@ Die Faktoren und Zonengrenzen sind bewährte Konventionen nach Allen und Coggan,
       },
     ],
   },
+  {
+    slug: 'schwimm-pace-rechner',
+    letzteAktualisierung: '2026-07-01',
+    titel: 'Schwimm-Pace-Rechner (CSS)',
+    beschreibung: 'Schwimm-Pace pro 100 m umrechnen und die CSS-Schwellenpace aus einem 400- und 200-Meter-Test bestimmen — inklusive Trainingszonen.',
+    kategorie: 'Sport & Fitness',
+    kategorieSlug: 'sport',
+    metaTitle: 'Schwimm-Pace-Rechner — CSS & Zonen',
+    metaDescription: 'Schwimm-Pace pro 100 m berechnen und die CSS-Schwellenpace aus 400- und 200-Meter-Test ableiten — mit Trainingszonen und Rechenweg.',
+    keywords: ['schwimm pace rechner', 'css schwimmen berechnen', 'critical swim speed', 'schwimmen pace pro 100m', 'schwimm trainingszonen', 'schwellenpace schwimmen', 'css test schwimmen', 'schwimmen tempo'],
+    icon: '🏊',
+    formel: 'Pace/100 m = Gesamtzeit ÷ (Distanz ÷ 100) | CSS/100 m = (Zeit 400 m − Zeit 200 m) ÷ 2',
+    beispiel: '400 m in 6:40 und 200 m in 3:10: (400 − 190) ÷ 2 = 105 s = CSS-Pace 1:45 pro 100 m.',
+    erklaerung: `**Schwimm-Pace-Rechner — Tempo pro 100 Meter und CSS-Schwellenpace**
+
+Im Schwimmen ist die Grundeinheit für das Tempo die Pace pro 100 Meter, also die Zeit in Minuten und Sekunden, die man für 100 m benötigt. Dieser Rechner hat zwei Modi: Im ersten rechnet er eine beliebige Zeit und Distanz in die Pace pro 100 m um. Im zweiten bestimmt er die CSS — die Critical Swim Speed, also die Schwimm-Schwellenpace — aus zwei kurzen Tests.
+
+**Was die CSS ist**
+
+Die CSS ist das Schwimm-Pendant zur FTP beim Radfahren: die Pace, die man über eine längere Strecke gerade noch konstant halten kann, nahe der Laktatschwelle. Sie ergibt sich aus einem 400-Meter- und einem 200-Meter-Test all-out: CSS-Pace pro 100 m = (Zeit über 400 m − Zeit über 200 m) ÷ 2. Ein 400er in 6:40 (400 s) und ein 200er in 3:10 (190 s) ergeben (400 − 190) ÷ 2 = 105 Sekunden, also 1:45 pro 100 m.
+
+**Trainingszonen aus der CSS**
+
+Aus der CSS leiten sich Trainingsbereiche als Sekunden-Abstand ab: lockeres Grundlagentempo liegt einige Sekunden über der CSS, harte Intervalle einige Sekunden darunter. So wird jede Trainingseinheit zu einem konkreten Pace-Ziel — strukturiertes Schwimmen statt Bahnen sammeln.
+
+**Nur ein Richtwert**
+
+Die CSS-Formel ist eine gute Näherung der Laktatschwelle, aber kein Laborwert. Bahnlänge, Tagesform und Testdisziplin beeinflussen das Ergebnis. Nutzen Sie die Paces als Bereich, nicht als exakte Vorgabe.`,
+    faq: [
+      {
+        frage: 'Was ist CSS beim Schwimmen?',
+        antwort: 'CSS steht für Critical Swim Speed, die kritische Schwimmgeschwindigkeit. Sie ist die Pace, die man über eine längere Distanz gerade noch konstant halten kann, und liegt nahe der Laktatschwelle. Die CSS ist das Schwimm-Gegenstück zur FTP beim Radfahren und dient als Anker für strukturiertes Training: Alle Trainingszonen werden relativ zur CSS festgelegt.',
+      },
+      {
+        frage: 'Wie mache ich den CSS-Test?',
+        antwort: 'Nach gründlichem Einschwimmen schwimmt man 400 Meter all-out und notiert die Zeit. Nach 5 bis 10 Minuten lockerem Ausschwimmen folgt ein 200-Meter-Test, ebenfalls maximal. Beide Strecken sollten gleichmäßig gepact werden — nicht zu schnell starten. Die CSS-Pace pro 100 m ist dann (Zeit 400 m − Zeit 200 m) geteilt durch 2.',
+      },
+      {
+        frage: 'Warum rechnet man 400 minus 200?',
+        antwort: 'Der Trick steckt in der Differenz. Die 200 Meter zwischen dem 400er und dem 200er werden ohne den energieintensiven Start und mit bereits gefüllten anaeroben Reserven geschwommen — sie bilden das dauerhaft haltbare aerobe Tempo ab. Indem man die 200-m-Zeit von der 400-m-Zeit abzieht und durch 2 teilt, isoliert man genau diese Schwellenpace pro 100 m.',
+      },
+      {
+        frage: 'Wie schnell soll ich im Training schwimmen?',
+        antwort: 'Das hängt vom Ziel ab. Lockere Grundlageneinheiten liegen etwa 10 bis 15 Sekunden pro 100 m über der CSS, ruhige Erholung noch langsamer. Schwellensätze schwimmt man nahe der CSS (plus/minus wenige Sekunden), harte VO2max-Intervalle 5 bis 10 Sekunden schneller. Der Rechner gibt die passenden Pace-Bereiche direkt aus.',
+      },
+      {
+        frage: 'Wie genau ist die CSS-Formel?',
+        antwort: 'Sie ist eine gut belegte Näherung der Laktatschwellen-Geschwindigkeit und meist auf wenige Sekunden pro 100 m genau. Voraussetzung sind zwei ehrlich und gleichmäßig geschwommene Tests. Bahnlänge (25 m gegen 50 m), Tagesform und Wenden beeinflussen das Ergebnis. Betrachten Sie die CSS als Richtwert und testen Sie regelmäßig unter gleichen Bedingungen.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was Schwimm-Pace ist',
+        html: `<p>Im Schwimmen misst man das Tempo nicht in Kilometern pro Stunde, sondern in der <strong>Pace pro 100 Meter</strong> — also der Zeit in Minuten und Sekunden, die man für eine Strecke von 100 m benötigt. Eine Pace von 2:00 pro 100 m bedeutet, dass man für 100 m zwei Minuten braucht; für 1.500 m wären das dann 30 Minuten.</p><p>Diese Einheit ist im Schwimmtraining allgegenwärtig: Trainingspläne geben Sätze wie „10 × 100 m in 1:50" vor, und die Pace-Uhr am Beckenrand ist das wichtigste Steuerungsinstrument. Der große Vorteil gegenüber einer reinen Gesamtzeit ist die <strong>Vergleichbarkeit</strong> über verschiedene Distanzen hinweg: Ob man 200, 400 oder 1.500 m schwimmt, die Pace pro 100 m macht die Anstrengung direkt vergleichbar. Dieser Rechner rechnet im ersten Modus eine beliebige Zeit-Distanz-Kombination in die Pace pro 100 m um und bestimmt im zweiten Modus die individuelle Schwellenpace, aus der sich strukturierte Trainingszonen ableiten lassen.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Was die CSS ist',
+        html: `<p>Die <strong>CSS</strong> (Critical Swim Speed, kritische Schwimmgeschwindigkeit) ist die Pace, die man über eine längere Distanz gerade noch dauerhaft halten kann — physiologisch nahe der <strong>Laktatschwelle</strong>. Sie ist der zentrale Bezugswert für strukturiertes Schwimmtraining und das direkte Gegenstück zur <a href="/sport/ftp-rechner">FTP beim Radfahren</a>: In beiden Fällen geht es um die Schwelle zwischen langfristig haltbarer und schnell ermüdender Belastung.</p><p>Der praktische Nutzen ist derselbe wie bei der Rad-FTP: Aus der CSS lassen sich klare <strong>Trainingszonen</strong> ableiten. Statt einfach Bahnen zu sammeln, schwimmt man Grundlageneinheiten bewusst langsamer und Intervalle bewusst schneller als die CSS — jeweils in einem definierten Pace-Bereich. Das macht das Training gezielter und den Fortschritt messbar: Sinkt die CSS um ein paar Sekunden pro 100 m, verschieben sich alle Zonen entsprechend. Ermittelt wird die CSS aus zwei einfachen Zeittests über 400 und 200 Meter, die sich in jedem Schwimmbad durchführen lassen.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Pace umrechnen: 1500 m in 30:00',
+        schritte: [
+          { label: 'Distanz in Hunderter', formel: '1.500 m ÷ 100', ergebnis: '15' },
+          { label: 'Pace pro 100 m', formel: '1.800 s ÷ 15', ergebnis: '120 s = 2:00' },
+        ],
+        fazit: 'Wer 1.500 Meter in 30 Minuten schwimmt, hält eine Pace von 2:00 pro 100 m. Die Rechnung ist einfach: Man teilt die Gesamtzeit in Sekunden durch die Anzahl der Hunderter-Abschnitte. 30 Minuten sind 1.800 Sekunden, geteilt durch 15 ergibt 120 Sekunden, also glatt zwei Minuten pro 100 m. Diese Umrechnung funktioniert für jede Distanz und macht Schwimmleistungen direkt vergleichbar — ein 750-Meter-Split lässt sich so genauso einordnen wie ein langer 1.500er.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'CSS aus 400-m- und 200-m-Test',
+        schritte: [
+          { label: 'Testzeiten in Sekunden', formel: '400 m = 400 s · 200 m = 190 s', ergebnis: 'Differenz 210 s' },
+          { label: 'CSS-Pace pro 100 m', formel: '(400 − 190) ÷ 2', ergebnis: '105 s = 1:45 /100 m' },
+        ],
+        fazit: 'Ein 400-Meter-Test in 6:40 (400 Sekunden) und ein 200-Meter-Test in 3:10 (190 Sekunden) ergeben eine CSS-Pace von 1:45 pro 100 m. Man zieht die kürzere Testzeit von der längeren ab und teilt durch 2 — das Ergebnis ist die dauerhaft haltbare Schwellenpace. Genau in diesem Tempo kann man längere Schwellensätze schwimmen. Alle anderen Trainingszonen ergeben sich als Sekunden-Abstand zu dieser CSS: einige Sekunden langsamer für die Grundlage, einige schneller für harte Intervalle.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum (400 − 200) ÷ 2 funktioniert',
+        html: `<p>Auf den ersten Blick wirkt die Formel wie ein Taschenspielertrick, doch dahinter steckt eine klare Logik. Beide Tests enthalten einen <strong>anaeroben Startanteil</strong> — die ersten Meter, in denen man aus dem Stand beschleunigt und überproportional Energie verbraucht. Dieser Anteil ist in beiden Tests ungefähr gleich groß.</p><p>Zieht man die 200-Meter-Zeit von der 400-Meter-Zeit ab, <strong>fällt dieser gemeinsame Startanteil heraus</strong>. Übrig bleibt die Zeit für die „zweiten" 200 Meter — also die Strecke, die man im bereits eingeschwommenen, stabilen Zustand zurücklegt. Genau dieses Tempo entspricht der dauerhaft haltbaren aeroben Schwellengeschwindigkeit. Weil es sich um 200 Meter handelt, teilt man das Ergebnis durch 2, um auf die Pace pro 100 m zu kommen. Die Methode isoliert damit sauber den aeroben Anteil und liefert eine erstaunlich genaue Schätzung der Laktatschwelle, ohne dass ein Labor oder eine Blutmessung nötig wäre. Voraussetzung ist nur, dass beide Tests wirklich am Limit und gleichmäßig geschwommen werden.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Trainingszonen bei einer CSS von 1:45',
+        kopf: ['Zone', 'Pace / 100 m', 'Zweck'],
+        zeilen: [
+          ['Erholung (locker)', '2:00–2:05', 'sehr locker, Regeneration'],
+          ['Grundlagenausdauer', '1:55–2:00', 'ruhiges Dauertempo, aerob'],
+          ['Schwelle (CSS)', '1:42–1:48', 'an der Laktatschwelle'],
+          ['VO2max / Speed', '1:35–1:40', 'harte Intervalle, Tempo'],
+        ],
+        fussnote: 'Trainingszonen als Sekunden-Abstand zur CSS von 1:45 pro 100 m (Richtwerte). Grundlageneinheiten schwimmt man bewusst langsamer, um lange Umfänge locker zu bewältigen; Schwellensätze liegen direkt an der CSS und verschieben die Schwelle nach oben; Speed-Intervalle darüber trainieren die Spitzengeschwindigkeit. Die Offsets sind Erfahrungswerte aus der Triathlon- und Schwimmpraxis und können je nach Schwimmer leicht variieren. Ein typisches Schwellenset könnte etwa lauten: 8 × 100 m an der CSS mit kurzer Pause — fordernd, aber über die volle Wiederholungszahl haltbar. Genau diese Kontrollierbarkeit unterscheidet strukturiertes CSS-Training vom ziellosen Bahnenziehen.',
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Den CSS-Test richtig durchführen',
+        text: 'Damit die CSS stimmt, kommt es auf einen sauberen Test an. Schwimmen Sie sich zunächst gründlich ein, mindestens 10 bis 15 Minuten mit ein paar kurzen Tempoanstiegen. Dann folgt der 400-Meter-Test all-out: gleichmäßig und am Limit, nicht zu schnell starten und am Ende einbrechen. Nach dem 400er 5 bis 10 Minuten locker ausschwimmen, damit sich die Muskulatur etwas erholt, aber nicht auskühlt. Anschließend der 200-Meter-Test, ebenfalls maximal und gleichmäßig. Beide Zeiten notieren und in den Rechner eingeben. Wichtig ist, beide Distanzen ehrlich auszubelasten — hält man sich beim 400er zurück, fällt die berechnete CSS zu schnell aus und die Trainingszonen werden unrealistisch. Führen Sie den Test unter möglichst gleichen Bedingungen durch (gleiche Bahnlänge, ausgeruht) und wiederholen Sie ihn alle vier bis sechs Wochen, um die Fortschritte zu erfassen und die Zonen aktuell zu halten.',
+      },
+      {
+        typ: 'text',
+        titel: 'CSS ist nicht die Sprintpace',
+        html: `<p>Ein wichtiger Punkt zum Verständnis: Die CSS liegt bewusst <strong>unter der 100-Meter-Bestzeit</strong>. Sie ist kein Sprinttempo, sondern die Geschwindigkeit, die man über lange Strecken durchhalten kann. Typischerweise entspricht die CSS rund <strong>80 bis 85 Prozent</strong> der maximalen 100-Meter-Geschwindigkeit — deutlich schneller als lockeres Grundlagenschwimmen, aber klar langsamer als ein Vollsprint.</p><p>Dieser Unterschied ist entscheidend für die Trainingssteuerung. Wer versucht, seine Schwellensätze im Sprinttempo zu schwimmen, übersäuert schnell und kann die geplante Wiederholungszahl nicht halten — der Trainingsreiz verpufft. Umgekehrt bringt zu langsames Schwimmen im Schwellenbereich kaum Anpassung. Die CSS trifft genau das Tempo, bei dem man lange, kontrollierte Belastungen fahren kann, die die Ausdauer wirksam verbessern. Genau deshalb ist sie so nützlich: Sie verhindert die zwei häufigsten Fehler im Schwimmtraining — zu schnell bei den langen Sätzen und zu langsam bei den harten. Wer sein Lauftraining ähnlich strukturieren möchte, findet die passende Umrechnung im <a href="/sport/pace-rechner">Pace-Rechner</a> fürs Laufen.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Pace-Referenz je Testdistanz',
+        kopf: ['Distanz', 'Beispiel-Zeit', 'Pace / 100 m'],
+        zeilen: [
+          ['100 m', '1:30', '1:30'],
+          ['200 m', '3:10', '1:35'],
+          ['400 m', '6:40', '1:40'],
+          ['750 m (Sprint-Triathlon)', '13:45', '1:50'],
+          ['1500 m', '30:00', '2:00'],
+        ],
+        fussnote: 'Wie sich Gesamtzeiten in die Pace pro 100 m übersetzen. Gut sichtbar ist, dass die Pace mit der Distanz langsamer wird — über 100 m ist man deutlich schneller als über 1.500 m, weil kurze Strecken mehr anaerobe Reserven zulassen. Genau diese Distanz-Abhängigkeit macht die CSS so wertvoll: Sie liefert einen einzigen, distanzunabhängigen Schwellenwert, an dem sich das gesamte Training ausrichten lässt. Wer nur seine 1.500-m-Zeit kennt, kann daraus umgekehrt grob auf die Pace zurückrechnen und sein Wettkampftempo realistisch einschätzen — hilfreich für die Renneinteilung im Triathlon oder beim Freiwasserschwimmen.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Schneller schwimmen',
+        punkte: [
+          'Technik vor Kraft — im Wasser bringt eine bessere Wasserlage mehr als reine Fitness.',
+          'CSS-Sätze als Kern des Ausdauertrainings einbauen (z. B. Intervalle nahe der CSS).',
+          'Bei Schwellensätzen kurze Pausen wählen, damit der Reiz erhalten bleibt.',
+          'Auf gleichmäßige Splits achten — nicht zu schnell starten.',
+          'Die CSS alle vier bis sechs Wochen neu testen und die Zonen anpassen.',
+          'Eine Pace-Uhr oder die Beckenuhr nutzen, um das Tempo zu kontrollieren.',
+          'Regelmäßig an der Atmung und am Beinschlag arbeiten, nicht nur an der Distanz.',
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Bahnlänge und Bedingungen beachten',
+        html: `<p>Schwimmzeiten hängen stark von den <strong>Bedingungen</strong> ab, und das sollte man beim Vergleichen im Kopf behalten. Auf einer <strong>25-Meter-Bahn</strong> ist man tendenziell etwas schneller als auf einer 50-Meter-Bahn, weil doppelt so viele <strong>Wenden</strong> mit kräftigem Abstoß dazukommen — jede Wende gibt einen kleinen Temposchub. Eine CSS, die im Kurzbecken ermittelt wurde, ist deshalb nicht direkt auf das Langbecken übertragbar.</p><p>Noch deutlicher ist der Unterschied zum <strong>Freiwasser</strong>: Ohne Wenden, mit Wellen, Strömung und Orientierungsaufwand schwimmt man dort spürbar langsamer als im Becken. Für einen fairen Vergleich sollte man CSS-Werte immer im <strong>gleichen Kontext</strong> erheben — dieselbe Bahnlänge, ähnliche Bedingungen, ausgeruht. Wer im Becken trainiert und einen Freiwasser-Wettkampf plant, rechnet am besten einen Aufschlag ein. So bleibt die CSS ein verlässlicher Maßstab für den eigenen Fortschritt, statt durch wechselnde Bedingungen verfälscht zu werden. Konstanz beim Testen ist wichtiger als der absolute Wert, denn nur so lässt sich echter Fortschritt von reinen Bedingungsunterschieden trennen.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'CSS macht Schwimmtraining steuerbar',
+        html: `<p>Der eigentliche Gewinn der CSS ist, dass sie das oft unstrukturierte Schwimmtraining <strong>steuerbar</strong> macht. Viele Freizeitschwimmer ziehen einfach Bahnen im immer gleichen, mittleren Tempo — ein Bereich, der weder die Grundlage optimal aufbaut noch echte Tempoanpassungen auslöst. Mit der CSS als Anker bekommt jede Einheit ein <strong>klares Ziel</strong>: locker in der Grundlagenzone, hart in den Intervallen, kontrolliert an der Schwelle.</p><p>Der <strong>Fortschritt</strong> wird dabei in Sekunden pro 100 m messbar. Verbessert sich die CSS über die Wochen von 1:45 auf 1:42, ist das ein konkreter, motivierender Beleg für den Trainingseffekt — und ein Signal, die Zonen nachzuziehen. So entsteht ein sich selbst tragender Kreislauf aus Testen, gezieltem Training und erneutem Testen, wie ihn ambitionierte Läufer und Radfahrer längst nutzen. Für Triathleten und ambitionierte Schwimmer ist die CSS damit das Werkzeug, um im Wasser genauso planvoll zu trainieren wie an Land. Sie ersetzt keinen Trainer, gibt dem eigenen Training aber eine klare Richtung — und genau das ist der schnellste Weg zu besseren Zeiten.</p>`,
+      },
+    ],
+    quellen: [
+      {
+        titel: 'Critical Swim Speed (Wakayoshi et al. 1992 / Swim Smooth)',
+        hinweis: 'CSS-Pace/100 m = (T400 − T200) ÷ 2; Näherung der Laktatschwellen-Schwimmgeschwindigkeit, meist auf wenige Sekunden genau.',
+      },
+      {
+        titel: 'CSS-Trainingszonen (Swim Smooth / Triathlon-Praxis)',
+        hinweis: 'Zonen als Sekunden-Offset zur CSS je 100 m; Werte sind Richtwerte, abhängig von Bahnlänge und Tagesform.',
+      },
+    ],
+  },
 ];

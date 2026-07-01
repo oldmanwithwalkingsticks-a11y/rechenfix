@@ -239,6 +239,7 @@ const RECHNER_MAP: Record<string, ComponentType> = {
   'vdot-rechner': dyn(() => import('@/components/rechner/VdotRechner')),
   'laufband-steigung-rechner': dyn(() => import('@/components/rechner/LaufbandSteigungRechner')),
   'ftp-rechner': dyn(() => import('@/components/rechner/FtpRechner')),
+  'schwimm-pace-rechner': dyn(() => import('@/components/rechner/SchwimmPaceRechner')),
 };
 
 export default function RechnerLoader({ slug }: { slug: string }) {
