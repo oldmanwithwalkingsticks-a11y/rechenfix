@@ -2742,4 +2742,178 @@ Wechseln Sie auf eine andere Größe, ändert sich meist der Außendurchmesser �
       { titel: 'Tachoabweichung & Zulässigkeit (StVZO)', hinweis: 'Tacho darf nie weniger als die reale Geschwindigkeit anzeigen, max. +10 % + 4 km/h. Verbindlich ist die Eintragung im Fahrzeugschein/CoC; technische Toleranz ca. ±2 % Abrollumfang.' },
     ],
   },
+  {
+    slug: 'leasingfaktor-rechner',
+    letzteAktualisierung: '2026-07-02',
+    titel: 'Leasingfaktor-Rechner',
+    beschreibung: 'Leasingfaktor aus Rate und Bruttolistenpreis berechnen und Angebote unabhängig vom Fahrzeugpreis vergleichen — inklusive Gesamtkostenfaktor.',
+    kategorie: 'Auto & Verkehr',
+    kategorieSlug: 'auto',
+    metaTitle: 'Leasingfaktor-Rechner — Angebote vergleichen',
+    metaDescription: 'Leasingfaktor aus Rate und Bruttolistenpreis berechnen, Angebote als gut oder teuer einordnen — mit Gesamtkostenfaktor bei Anzahlung. Kostenlos.',
+    keywords: ['leasingfaktor berechnen', 'guter leasingfaktor', 'leasing vergleichen', 'gesamtkostenfaktor', 'leasingfaktor formel', 'leasingfaktor rechner', 'leasing angebot bewerten'],
+    icon: '📊',
+    formel: 'Leasingfaktor = (monatliche Rate ÷ Bruttolistenpreis) × 100 · Gesamtkostenfaktor = ((Rate + Sonderzahlung ÷ Laufzeit) ÷ Bruttolistenpreis) × 100 | Branchenschnitt ≈ 0,63. Orientierungs-Kennzahl, keine Finanzberatung.',
+    beispiel: '250 € Rate bei 40.000 € Bruttolistenpreis: (250 ÷ 40.000) × 100 = Leasingfaktor 0,63.',
+    erklaerung: `**Was ist der Leasingfaktor?**
+
+Der **Leasingfaktor** ist die Standard-Kennzahl, um Leasingangebote vergleichbar zu machen. Er setzt die monatliche Rate ins Verhältnis zum Bruttolistenpreis des Fahrzeugs und macht Angebote so unabhängig vom Fahrzeugpreis vergleichbar. Der Rechner ordnet Ihr Angebot in Sekunden als gut oder teuer ein.
+
+**Die Formel**
+
+Leasingfaktor = (monatliche Rate ÷ Bruttolistenpreis) × 100. Ein Beispiel: 250 € Rate bei 40.000 € Listenpreis ergeben (250 ÷ 40.000) × 100 = 0,63 — genau der Branchenschnitt. Je niedriger der Faktor, desto günstiger das Angebot im Verhältnis zum Fahrzeugwert.
+
+**Anzahlung: der Gesamtkostenfaktor**
+
+Eine niedrige Rate kann durch eine hohe Anzahlung „erkauft" sein. Damit Angebote fair vergleichbar bleiben, verteilt der **Gesamtkostenfaktor** die Sonderzahlung auf die Laufzeit: ((Rate + Anzahlung ÷ Laufzeit) ÷ Bruttolistenpreis) × 100. Sobald eine Anzahlung im Spiel ist, ist dieser Wert maßgeblich. Wichtig: Der Faktor enthält keine Nebenkosten, Kilometer oder den Restwert — er ist eine Orientierung, keine Finanzberatung.`,
+    faq: [
+      {
+        frage: 'Was ist ein guter Leasingfaktor?',
+        antwort: 'Als Markt-Faustregel gilt: unter 0,5 ist ein Top-Angebot, 0,5 bis 0,7 sehr gut, 0,7 bis 0,9 gut, 0,9 bis 1,0 noch okay und über 1,0 eher teuer. Der Branchenschnitt liegt bei rund 0,63. Diese Schwellen sind keine festen Grenzen, sondern Orientierungswerte für private Brutto-Angebote.',
+      },
+      {
+        frage: 'Wie berechnet man den Leasingfaktor?',
+        antwort: 'Leasingfaktor = (monatliche Rate ÷ Bruttolistenpreis) × 100. Bei 250 € Rate und 40.000 € Listenpreis sind das (250 ÷ 40.000) × 100 = 0,63. Wichtig ist, immer die Brutto-Rate durch den Bruttolistenpreis zu teilen (oder Netto durch Netto) — beides nicht zu vermischen. Der Angebotspreis mit Rabatt zählt nicht, sondern der Listenpreis.',
+      },
+      {
+        frage: 'Was ist der Gesamtkostenfaktor?',
+        antwort: 'Der Gesamtkostenfaktor berücksichtigt eine Anzahlung (Leasingsonderzahlung), indem er sie auf die Laufzeit verteilt: ((Rate + Anzahlung ÷ Laufzeit) ÷ Bruttolistenpreis) × 100. Nur so lassen sich Angebote mit und ohne Anzahlung fair vergleichen. Ein Angebot mit niedriger Rate, aber hoher Anzahlung kann in Wahrheit teurer sein — das zeigt erst der Gesamtkostenfaktor.',
+      },
+      {
+        frage: 'Brutto oder Netto rechnen?',
+        antwort: 'Für Privatpersonen gilt: Brutto-Rate durch Bruttolistenpreis, beides inklusive Mehrwertsteuer. Gewerbetreibende, die die Vorsteuer ziehen, rechnen mit Netto-Werten. Entscheidend ist, dass Zähler und Nenner konsistent sind — Brutto-Rate durch Netto-Preis (oder umgekehrt) verzerrt den Faktor deutlich und macht den Vergleich wertlos.',
+      },
+      {
+        frage: 'Was sagt der Leasingfaktor nicht aus?',
+        antwort: 'Der Faktor enthält keine Nebenkosten wie Überführung, Zulassung, Wartung, Versicherung und Reifen — und vor allem nicht die enthaltene Kilometerleistung und den Restwert. Zwei Angebote mit gleichem Faktor können sehr unterschiedlich viele Freikilometer bieten. Der Faktor ist ein starker erster Filter, ersetzt aber nicht den Blick auf die Gesamtkosten.',
+      },
+      {
+        frage: 'Warum ändert sich der Leasingfaktor über die Zeit?',
+        antwort: 'Der Faktor hängt von Faktoren ab, die nichts mit dem einzelnen Auto zu tun haben: dem allgemeinen Zinsniveau, der Restwertannahme des Leasinggebers, laufenden Herstelleraktionen und dem Modellzyklus. Steigen die Zinsen, steigen tendenziell auch die Leasingfaktoren. Auslaufmodelle oder Aktionsfahrzeuge haben oft besonders niedrige Faktoren.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was der Leasingfaktor ist — und warum er so praktisch ist',
+        html: `<p>Wer Leasingangebote vergleicht, steht vor einem Problem: Eine Monatsrate von 250 € sagt für sich genommen wenig aus — für einen Kleinwagen kann sie teuer, für eine Oberklasse-Limousine ein Schnäppchen sein. Genau hier setzt der <strong>Leasingfaktor</strong> an. Er setzt die Rate ins Verhältnis zum <strong>Bruttolistenpreis</strong> des Fahrzeugs und macht Angebote dadurch <em>unabhängig vom Fahrzeugpreis</em> vergleichbar.</p><p>Die Kennzahl ist bewusst einfach gehalten: <strong>Leasingfaktor = (monatliche Rate ÷ Bruttolistenpreis) × 100</strong>. Das Ergebnis ist eine kleine Zahl, meist zwischen 0,4 und 1,2. Sie beantwortet die Frage: Wie viel Prozent des Listenpreises zahle ich jeden Monat? Ein Faktor von 0,63 heißt, dass die Monatsrate 0,63 % des Neupreises beträgt. Weil sich der Preis herauskürzt, lassen sich damit ein 15.000-€-Kleinwagen und eine 80.000-€-Limousine direkt gegeneinander stellen — der niedrigere Faktor markiert das relativ günstigere Angebot.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Leasingfaktor in Zahlen',
+        werte: [
+          { label: 'Branchenschnitt', wert: '≈ 0,63', hinweis: 'typischer Wert über alle Klassen hinweg' },
+          { label: 'Top-Angebot', wert: 'unter 0,5', hinweis: 'oft Aktions- oder Auslaufmodelle' },
+          { label: 'Grenze „eher teuer"', wert: 'über 1,0', hinweis: 'Rate übersteigt 1 % des Listenpreises pro Monat' },
+          { label: 'Übliche Laufzeit', wert: '24–48 Mon', hinweis: 'kürzere Laufzeit = meist höherer Faktor' },
+          { label: 'Nicht enthalten', wert: 'Nebenkosten, km, Restwert', hinweis: 'der Faktor ist nur die halbe Wahrheit' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: Leasingfaktor berechnen',
+        schritte: [
+          { label: 'Monatliche Rate', formel: 'Angebot', ergebnis: '250 €' },
+          { label: 'Bruttolistenpreis', formel: 'Listenpreis inkl. Ausstattung', ergebnis: '40.000 €' },
+          { label: 'Leasingfaktor', formel: '(250 ÷ 40.000) × 100', ergebnis: '0,63' },
+          { label: 'Einordnung', formel: 'Bewertungsskala', ergebnis: 'sehr gut / Schnitt' },
+        ],
+        fazit: 'Bei 250 € Rate und 40.000 € Listenpreis ergibt sich ein Leasingfaktor von 0,63 — exakt der Branchenschnitt und damit ein solides Angebot. Zum Vergleich: Eine Rate von 400 € beim selben Preis führt zu einem Faktor von 1,0 (eher teuer), eine Rate von 179 € bei 34.500 € zu 0,52 (sehr gut). Die Faustregel: Alles unter 0,5 ist ein Top-Angebot, über 1,0 wird es teuer. So lässt sich in wenigen Sekunden einschätzen, ob ein Angebot marktüblich, günstig oder überteuert ist. Praktisch ist das vor allem beim Durchforsten vieler Angebote: Statt jede Rate einzeln zum jeweiligen Fahrzeugpreis ins Verhältnis zu setzen, reicht ein Blick auf die eine Zahl. Wer mehrere Fahrzeuge in die engere Wahl genommen hat, sortiert sie mit dem Faktor in Sekunden nach ihrer relativen Attraktivität und spart sich das mühsame Kopfrechnen.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Bewertungsskala (Privat, brutto)',
+        kopf: ['Leasingfaktor', 'Einordnung', 'Bedeutung'],
+        zeilen: [
+          ['unter 0,5', 'Top-Angebot', 'sehr selten, oft Aktion'],
+          ['0,5 – 0,7', 'sehr gut', 'attraktiver Deal'],
+          ['0,7 – 0,9', 'gut', 'marktüblich bis fair'],
+          ['0,9 – 1,0', 'okay', 'akzeptabel, aber kein Schnäppchen'],
+          ['über 1,0', 'eher teuer', 'genauer hinschauen'],
+        ],
+        fussnote: 'Markt-Faustregeln für private Brutto-Angebote; der Branchenschnitt liegt bei rund 0,63. Die Schwellen sind keine festen Grenzen — ein leicht höherer Faktor kann durch besonders viele Freikilometer oder eine kurze Laufzeit gerechtfertigt sein. Für Gewerbekunden mit Vorsteuerabzug gelten Netto-Werte, die nicht direkt mit privaten Brutto-Faktoren vergleichbar sind. Ein Netto-Faktor fällt rechnerisch niedriger aus als der Brutto-Faktor desselben Angebots, weil sowohl die Rate als auch der Preis ohne Mehrwertsteuer angesetzt werden — wer Brutto- und Netto-Angebote nebeneinanderlegt, muss sie also zuerst auf dieselbe Basis bringen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum der Faktor Angebote „nackt" macht',
+        html: `<p>Der eigentliche Wert des Leasingfaktors liegt darin, dass er den Fahrzeugpreis aus der Gleichung nimmt. Ein Beispiel macht das anschaulich: Ein <strong>Kleinwagen</strong> mit 150 € Rate bei 15.000 € Listenpreis hat einen Faktor von 1,0. Eine <strong>Oberklasse-Limousine</strong> mit 600 € Rate bei 80.000 € kommt auf 0,75. Obwohl die Limousine viermal so teuer in der Rate ist, ist sie <em>relativ betrachtet</em> das bessere Leasingangebot — pro Euro Fahrzeugwert zahlt man weniger.</p><p>Das erklärt, warum teure Fahrzeuge oft überraschend niedrige Faktoren haben: Premium-Modelle sind meist <strong>wertstabiler</strong>, der Leasinggeber kalkuliert einen höheren Restwert und kann die Rate im Verhältnis zum Neupreis niedriger ansetzen. Umgekehrt haben manche Kleinwagen relativ hohe Faktoren, weil ihr Wertverlust prozentual stärker ausfällt. Der Faktor entlarvt genau solche Unterschiede — er zeigt, welches Angebot im Verhältnis wirklich günstig ist, statt sich von der absoluten Ratenhöhe blenden zu lassen.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: Gesamtkostenfaktor mit Anzahlung',
+        schritte: [
+          { label: 'Monatliche Rate', formel: 'Angebot', ergebnis: '250 €' },
+          { label: 'Anzahlung auf Laufzeit verteilt', formel: '5.000 € ÷ 36 Monate', ergebnis: '138,9 €/Monat' },
+          { label: 'Effektive Monatsbelastung', formel: '250 € + 138,9 €', ergebnis: '388,9 €' },
+          { label: 'Gesamtkostenfaktor', formel: '(388,9 ÷ 33.850) × 100', ergebnis: '1,15' },
+        ],
+        fazit: 'Ein Angebot mit 250 € Rate, 5.000 € Anzahlung und 36 Monaten Laufzeit bei 33.850 € Listenpreis sieht mit einem reinen Leasingfaktor von 0,74 attraktiv aus. Rechnet man die Anzahlung aber ein, springt der Gesamtkostenfaktor auf 1,15 — das Angebot ist in Wahrheit teuer. Die niedrige Monatsrate ist durch die hohe Sonderzahlung erkauft. Genau deshalb ist bei jeder Anzahlung der Gesamtkostenfaktor die maßgebliche Zahl, nicht der reine Leasingfaktor. Wer nur auf die Monatsrate schaut, tappt hier in die Falle. Umgekehrt kann eine Anzahlung sinnvoll sein, wenn man die Liquidität ohnehin hat und der Gesamtkostenfaktor niedrig bleibt — sie senkt dann die monatliche Belastung, ohne das Angebot insgesamt zu verteuern. Entscheidend ist allein, dass man beide Angebote über den Gesamtkostenfaktor auf denselben Nenner bringt, bevor man vergleicht.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Typische Faktoren nach Fahrzeugklasse (grobe Orientierung)',
+        kopf: ['Klasse', 'Typischer Faktor', 'Hintergrund'],
+        zeilen: [
+          ['Kleinwagen', '0,45 – 0,55', 'oft Aktionsmodelle mit niedrigen Raten'],
+          ['Kompakt-/Mittelklasse', '0,55 – 0,70', 'der breite Marktschnitt'],
+          ['Oberklasse / Premium', '0,60 – 0,80', 'wertstabil, aber höheres Preisniveau'],
+          ['E-Autos', 'stark schwankend', 'Förderungen und Restwertrisiko verzerren'],
+          ['SUV / Vans', '0,65 – 0,85', 'tendenziell höher, je nach Modell'],
+        ],
+        fussnote: 'Nur grobe Orientierungswerte — die tatsächlichen Faktoren hängen stark von Laufzeit, Kilometerleistung, Anzahlung und laufenden Herstelleraktionen ab. Gerade bei Elektroautos schwanken die Faktoren wegen unsicherer Restwerte und wechselnder Förderungen besonders. Ein Faktor außerhalb der Spanne ist kein Fehler, sondern ein Anlass, genauer hinzusehen: Sind Freikilometer, Laufzeit und Anzahlung wirklich vergleichbar? Auch die Marke spielt eine Rolle: Hersteller mit eigener Leasingbank und aggressiver Absatzpolitik zeigen im selben Segment oft niedrigere Faktoren als Marken, die über Restwerte kalkulieren. Die Tabelle ersetzt daher keinen konkreten Angebotsvergleich, sondern hilft nur beim ersten Einordnen.',
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Zwei Angebote, gleiche Rate — der Faktor täuscht',
+        spalteA: 'Angebot A (ohne Anzahlung)',
+        spalteB: 'Angebot B (5.000 € Anzahlung)',
+        zeilen: [
+          { kriterium: 'Monatsrate', a: '250 €', b: '250 €' },
+          { kriterium: 'Anzahlung', a: '0 €', b: '5.000 €' },
+          { kriterium: 'Reiner Leasingfaktor', a: '0,74', b: '0,74' },
+          { kriterium: 'Effektive Belastung/Monat', a: '250 €', b: '≈ 389 €' },
+          { kriterium: 'Gesamtkostenfaktor', a: '0,74', b: '1,15' },
+          { kriterium: 'Ergebnis', a: 'wirklich günstig', b: 'teuer trotz gleicher Rate' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Wenn die niedrige Rate erkauft ist',
+        html: `<p>Eine der häufigsten Fallen beim Leasing ist die <strong>Sonderzahlung</strong>. Händler werben gern mit einer besonders niedrigen Monatsrate — die aber nur zustande kommt, weil zu Vertragsbeginn eine hohe Anzahlung fällig wird. Der reine Leasingfaktor sieht dann verlockend aus, verschweigt aber, dass Sie bereits mehrere tausend Euro vorab gezahlt haben.</p><p>Die Lösung ist der <strong>Gesamtkostenfaktor</strong>: Er verteilt die Anzahlung rechnerisch auf die Laufzeit und addiert sie zur Monatsrate, bevor er durch den Listenpreis teilt. So wird die Sonderzahlung sichtbar. Im Beispiel oben verwandelt sie einen scheinbar guten Faktor von 0,74 in einen teuren von 1,15. Als Regel gilt deshalb: <strong>Sobald eine Anzahlung im Spiel ist, zählt nur der Gesamtkostenfaktor.</strong> Wer zwei Angebote vergleicht, sollte sie außerdem auf dieselbe Laufzeit und dieselbe Kilometerleistung bringen — sonst vergleicht man Äpfel mit Birnen. Die vollständige Rate mit Restwert und Zinsanteil zeigt ergänzend der <a href="/auto/leasing-rechner">Leasing-Rechner</a>.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Was der Leasingfaktor nicht enthält',
+        text: 'Der Leasingfaktor ist ein starker erster Filter, aber er erfasst nur die Rate im Verhältnis zum Listenpreis — vieles andere bleibt außen vor. Nicht enthalten sind die Nebenkosten wie Überführung und Zulassung, die laufenden Kosten für Wartung, Versicherung und Reifen sowie mögliche Kosten für Winterräder. Vor allem aber sagt der Faktor nichts über die enthaltene Kilometerleistung und den Restwert aus. Zwei Angebote mit identischem Leasingfaktor können völlig unterschiedlich sein: Das eine erlaubt 10.000 km im Jahr, das andere 20.000 — bei Mehrkilometern zahlen Sie am Ende kräftig nach. Auch die Laufzeit, die Höhe der Schlussrate beim Restwertleasing und die Konditionen für Rückgabe oder Übernahme gehören zum Gesamtbild. Nutzen Sie den Faktor deshalb, um Angebote grob zu sortieren und teure Ausreißer zu erkennen — die endgültige Entscheidung sollte aber immer auf den vollständigen Vertragskonditionen beruhen, nicht auf einer einzigen Kennzahl. Der Faktor ist eine Orientierung, keine Finanzberatung.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Angebote fair vergleichen',
+        punkte: [
+          'Brutto durch Brutto teilen (privat) oder Netto durch Netto (Gewerbe) — niemals mischen',
+          'Immer den Bruttolistenpreis nehmen, nicht den rabattierten Angebotspreis',
+          'Bei Anzahlung den Gesamtkostenfaktor rechnen, nicht den reinen Leasingfaktor',
+          'Angebote auf gleiche Laufzeit und gleiche Jahreskilometer bringen',
+          'Nebenkosten (Überführung, Zulassung, Wartung, Versicherung, Reifen) separat auflisten und prüfen',
+          'Freikilometer und Mehrkilometer-Preis vergleichen — sie entscheiden oft über die realen Kosten',
+          'Bei Restwertleasing die Schlussrate und das Rückgabe-Risiko in die Bewertung einbeziehen',
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Was den Faktor beeinflusst, ohne dass sich das Auto ändert',
+        html: `<p>Ein und dasselbe Fahrzeug kann zu unterschiedlichen Zeitpunkten sehr verschiedene Leasingfaktoren haben — ganz ohne dass sich am Auto etwas ändert. Der wichtigste Hebel ist das <strong>Zinsniveau</strong>: Leasing ist im Kern eine Finanzierung, und steigende Zinsen treiben die Faktoren nach oben. Ebenso entscheidend ist die <strong>Restwertannahme</strong> des Leasinggebers — je höher der erwartete Restwert, desto niedriger kann die Rate ausfallen.</p><p>Hinzu kommen <strong>Herstelleraktionen</strong> und der <strong>Modellzyklus</strong>. Kurz vor einem Modellwechsel oder bei Auslaufmodellen werden oft aggressive Leasingfaktoren angeboten, um Lagerbestände zu räumen — hier finden sich die Top-Werte unter 0,5. Auch die gewählte <strong>Laufzeit</strong> und <strong>Kilometerleistung</strong> verändern den Faktor: Kürzere Laufzeiten erhöhen ihn tendenziell, weil sich der Wertverlust auf weniger Monate verteilt. Wer den Faktor richtig einordnen will, sollte diese Rahmenbedingungen mitdenken — ein „schlechter" Faktor kann schlicht an einem hohen Zinsumfeld liegen, ein „guter" an einer Sonderaktion.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Ein starker erster Filter — mehr nicht',
+        html: `<p>Der Leasingfaktor ist das beste Werkzeug, um Angebote schnell zu sortieren: Er macht Fahrzeuge unterschiedlicher Preisklassen vergleichbar, entlarvt überteuerte Raten und zeigt mit einer einzigen Zahl, wo ein Angebot im Markt steht. Als <strong>erster Filter</strong> ist er kaum zu schlagen — wer mehrere Angebote vor sich hat, findet damit in Sekunden die aussichtsreichen Kandidaten.</p><p>Er ersetzt aber nicht die <strong>Gesamtkostenrechnung</strong>. Zwei Angebote mit gleichem Faktor können sich in Kilometerleistung, Nebenkosten und Vertragsbedingungen stark unterscheiden. Als Merkregeln bleiben: <strong>Branchenschnitt 0,63</strong>, unter 0,5 ist top, über 1,0 wird teuer, und <strong>bei Anzahlung immer den Gesamtkostenfaktor</strong> nehmen. Nutzen Sie den Faktor, um die Spreu vom Weizen zu trennen — und rechnen Sie beim Favoriten dann die vollständigen Kosten durch, etwa mit dem <a href="/auto/autokosten-rechner">Autokosten-Rechner</a>. So wird aus einer schnellen Kennzahl eine fundierte Entscheidung.</p>`,
+      },
+    ],
+    quellen: [
+      { titel: 'Leasingfaktor-Formel (ADAC/Verivox-Standard)', hinweis: 'Leasingfaktor = (monatliche Rate ÷ Bruttolistenpreis) × 100. Branchenschnitt rund 0,63. Bewertungsschwellen sind Markt-Faustregeln.' },
+      { titel: 'Gesamtkostenfaktor bei Anzahlung', hinweis: '((Rate + Sonderzahlung ÷ Laufzeit) ÷ Bruttolistenpreis) × 100. Nur so sind Angebote mit Anzahlung fair vergleichbar. Nebenkosten und Kilometer bleiben außen vor.' },
+    ],
+  },
 ];
