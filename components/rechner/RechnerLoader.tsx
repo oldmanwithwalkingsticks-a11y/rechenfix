@@ -235,6 +235,7 @@ const RECHNER_MAP: Record<string, ComponentType> = {
   'bremsweg-rechner': dyn(() => import('@/components/rechner/BremswegRechner')),
   'reifengroesse-rechner': dyn(() => import('@/components/rechner/ReifengroesseRechner')),
   'leasingfaktor-rechner': dyn(() => import('@/components/rechner/LeasingfaktorRechner')),
+  'wertverlust-auto-rechner': dyn(() => import('@/components/rechner/WertverlustAutoRechner')),
   'datenmengen-umrechner': dyn(() => import('@/components/rechner/DatenmengenRechner')),
   'megapixel-rechner': dyn(() => import('@/components/rechner/MegapixelRechner')),
   'stromverbrauch-geraete-rechner': dyn(() => import('@/components/rechner/StromverbrauchGeraeteRechner')),

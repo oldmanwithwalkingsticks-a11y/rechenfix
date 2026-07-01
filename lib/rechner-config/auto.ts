@@ -2916,4 +2916,176 @@ Eine niedrige Rate kann durch eine hohe Anzahlung „erkauft" sein. Damit Angebo
       { titel: 'Gesamtkostenfaktor bei Anzahlung', hinweis: '((Rate + Sonderzahlung ÷ Laufzeit) ÷ Bruttolistenpreis) × 100. Nur so sind Angebote mit Anzahlung fair vergleichbar. Nebenkosten und Kilometer bleiben außen vor.' },
     ],
   },
+  {
+    slug: 'wertverlust-auto-rechner',
+    letzteAktualisierung: '2026-07-02',
+    titel: 'Wertverlust-Rechner (Auto)',
+    beschreibung: 'Restwert und Wertverlust eines Autos nach Jahren schätzen — degressiv nach typischen Marktkurven, je nach Fahrzeugtyp.',
+    kategorie: 'Auto & Verkehr',
+    kategorieSlug: 'auto',
+    metaTitle: 'Wertverlust-Rechner Auto — Restwert nach Jahren',
+    metaDescription: 'Wertverlust und Restwert eines Autos nach Jahren schätzen: degressive Marktkurve nach Fahrzeugtyp (Verbrenner, Premium, Elektro). Kostenlos.',
+    keywords: ['wertverlust auto berechnen', 'restwert auto', 'auto abschreibung', 'wertverlust neuwagen', 'restwert nach jahren', 'wertverlust rechner auto', 'auto wertverlust tabelle'],
+    icon: '📉',
+    formel: 'Restwert = Neupreis × Produkt der jährlichen (1 − Wertverlustrate); degressiv, Jahr 1 am höchsten | Wertverlust € = Neupreis − Restwert · Wertverlust % = (1 − Restwert ÷ Neupreis) × 100. Durchschnitts-Richtwert.',
+    beispiel: '30.000 € Verbrenner nach 3 Jahren: 30.000 × 0,76 × 0,87 × 0,90 = 17.852 € Restwert (40,5 % Verlust).',
+    erklaerung: `**Was ist ein Auto nach ein paar Jahren noch wert?**
+
+Kaum etwas verliert so schnell an Wert wie ein Neuwagen. Der Wertverlust-Rechner schätzt aus **Neupreis**, **Fahrzeugalter** und **Fahrzeugtyp** den heutigen Restwert und den bisherigen Wertverlust — nach typischen Marktkurven.
+
+**Warum degressiv, nicht linear**
+
+Der Wertverlust ist im ersten Jahr am größten (rund 20–30 %) und flacht danach ab. Ein Auto verliert also nicht jedes Jahr gleich viel, sondern anfangs stark und später immer weniger. Der Rechner bildet das über gestaffelte Jahresraten ab — wer linear rechnet, überschätzt den Wert junger Autos deutlich.
+
+**Fahrzeugtyp macht den Unterschied**
+
+Volumen-Verbrenner, wertstabile Premium-/SUV-Modelle und Elektroautos verlieren unterschiedlich schnell. E-Autos im Volumensegment verlieren aktuell im ersten Jahr am steilsten, gleichen sich mit der Zeit aber an. Wichtig: Alle Werte sind **Durchschnitts-Richtwerte** — Marke, Zustand, Laufleistung und Nachfrage verändern den realen Wert deutlich. Keine individuelle Bewertung und keine Finanzberatung.`,
+    faq: [
+      {
+        frage: 'Wie viel Wert verliert ein Auto im ersten Jahr?',
+        antwort: 'Bei einem typischen Volumen-Verbrenner rund 24 %, bei wertstabilen Premium-/SUV-Modellen etwa 20 % und bei Volumen-Elektroautos aktuell rund 30 %. Der erste Jahresverlust ist mit Abstand der größte — schon das Zulassen macht aus dem Neuwagen einen Gebrauchten, und der „Neu"-Aufpreis entfällt sofort.',
+      },
+      {
+        frage: 'Wie berechnet man den Restwert?',
+        antwort: 'Der Restwert ergibt sich, indem der Neupreis Jahr für Jahr mit dem verbleibenden Anteil multipliziert wird: Restwert = Neupreis × (1 − Rate Jahr 1) × (1 − Rate Jahr 2) × … Bei 30.000 € Verbrenner sind das 30.000 × 0,76 × 0,87 × 0,90 = 17.852 € nach 3 Jahren. Das ist eine degressive, keine lineare Abschreibung.',
+      },
+      {
+        frage: 'Warum verliert ein Auto degressiv an Wert?',
+        antwort: 'Weil der größte Wertsprung sofort bei der Erstzulassung passiert: Der Aufpreis für „fabrikneu" ist weg, sobald das Auto zugelassen ist. Danach zählen Alter, Laufleistung und Modellzyklus, deren Einfluss von Jahr zu Jahr abnimmt. Ein drei Jahre altes Auto verliert prozentual viel weniger als ein neues — deshalb ist ein junger Gebrauchter oft das wirtschaftlichste Fahrzeug.',
+      },
+      {
+        frage: 'Verlieren Elektroautos anders an Wert?',
+        antwort: 'Aktuell verlieren Volumen-Elektroautos im ersten Jahr tendenziell steiler als vergleichbare Verbrenner — Gründe sind der schnelle technische Fortschritt bei Batterien und Reichweite sowie der Wegfall von Förderungen. Mit zunehmendem Alter gleicht sich die Kurve aber an, und bei gefragten Modellen mit guter Batterie kann der Restwert stabil sein. Der Markt ist hier noch in Bewegung.',
+      },
+      {
+        frage: 'Wie genau ist die Schätzung?',
+        antwort: 'Sie liefert einen Durchschnitts-Richtwert auf Basis typischer Marktkurven, keine individuelle Fahrzeugbewertung. Der reale Restwert hängt von Marke, Modell, Laufleistung, Zustand, Ausstattung, Farbe und regionaler Nachfrage ab und kann deutlich abweichen. Für belastbare Zahlen eignen sich eine DAT-Bewertung, ein Kfz-Gutachten oder ein Live-Marktvergleich auf mobile.de oder AutoScout24.',
+      },
+      {
+        frage: 'Wie kann ich den Wertverlust gering halten?',
+        antwort: 'Durch einen gepflegten Zustand, ein lückenloses Scheckheft, eine moderate Laufleistung sowie gefragte Ausstattung und Farbe. Auch der Verkaufszeitpunkt zählt: vor einem anstehenden TÜV oder einem Modellwechsel verkaufen. Wirtschaftlich am wirksamsten ist aber, gar nicht erst neu zu kaufen — ein zwei bis drei Jahre alter Gebrauchter hat den steilsten Wertverlust bereits hinter sich.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Warum Autos so schnell an Wert verlieren',
+        html: `<p>Ein Neuwagen ist eine der wenigen großen Anschaffungen, die schon in dem Moment an Wert verliert, in dem man sie nutzt. Der Grund liegt im <strong>„Neu"-Aufpreis</strong>: Ein fabrikneues, unzugelassenes Auto ist am Markt mehr wert als ein identisches, das bereits einen Halter hatte. Mit der <strong>Erstzulassung</strong> entfällt dieser Aufpreis schlagartig — aus dem Neuwagen wird ein Gebrauchter, und allein das kostet je nach Modell einen zweistelligen Prozentbetrag.</p><p>Danach bestimmen <strong>Alter</strong>, <strong>Laufleistung</strong> und der <strong>Modellzyklus</strong> den weiteren Verlauf. Jedes Jahr, jeder Kilometer und jedes Facelift des Nachfolgemodells drücken den Wert weiter — allerdings mit abnehmender Wucht. Der Wertverlust-Rechner bildet diese typische Kurve nach und zeigt, was von Ihrem Neupreis nach einer bestimmten Zeit im Schnitt übrig bleibt. So lässt sich abschätzen, wie teuer die ersten Jahre wirklich sind und wann ein Auto seinen steilsten Wertverlust hinter sich hat.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'Verbrenner vs. Elektro (Volumensegment)',
+        spalteA: 'Verbrenner (Volumen)',
+        spalteB: 'Elektro (Volumen)',
+        zeilen: [
+          { kriterium: 'Verlust 1. Jahr', a: '≈ 24 %', b: '≈ 30 %' },
+          { kriterium: 'Verlust nach 3 Jahren', a: '≈ 40,5 %', b: '≈ 46,4 %' },
+          { kriterium: 'Restwert 3 J (30.000 €)', a: '17.852 €', b: '16.073 €' },
+          { kriterium: 'Haupttreiber', a: 'Modellzyklus, Antriebsdebatte', b: 'Batterietechnik, Förderwegfall' },
+          { kriterium: 'Tendenz', a: 'etabliert, stabil', b: 'im ersten Jahr steiler, gleicht sich an' },
+          { kriterium: 'Gebrauchtnachfrage', a: 'breit etabliert', b: 'wachsend, modellabhängig' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: 30.000 € Verbrenner nach 3 Jahren',
+        schritte: [
+          { label: 'Jahr 1 (−24 %)', formel: '30.000 × 0,76', ergebnis: '22.800 €' },
+          { label: 'Jahr 2 (−13 %)', formel: '22.800 × 0,87', ergebnis: '19.836 €' },
+          { label: 'Jahr 3 (−10 %)', formel: '19.836 × 0,90', ergebnis: '17.852 €' },
+          { label: 'Wertverlust gesamt', formel: '30.000 − 17.852', ergebnis: '12.148 € (40,5 %)' },
+        ],
+        fazit: 'Ein Volumen-Verbrenner für 30.000 € ist nach drei Jahren im Schnitt noch rund 17.852 € wert — ein Wertverlust von 12.148 € oder 40,5 %. Gut die Hälfte davon (7.200 €) fällt schon im ersten Jahr an. Genau deshalb sind die ersten Jahre die teuersten: Wer ein Auto neu kauft und nach drei Jahren wieder verkauft, verliert im Schnitt über 4.000 € pro Jahr allein durch den Wertverlust — meist mehr als für Sprit und Versicherung zusammen. Ein junger Gebrauchter überspringt genau diese teuerste Phase. Rechnet man den Wertverlust auf den Kilometer um, kommen bei 15.000 km im Jahr rund 27 Cent pro Kilometer allein für den Wertverlust zusammen — ein Betrag, den viele bei der Kostenrechnung schlicht übersehen, weil er nie als Rechnung auf dem Tisch liegt.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Restwert nach Jahren (Verbrenner, 30.000 €)',
+        kopf: ['Alter', 'Restwert', 'Wertverlust'],
+        zeilen: [
+          ['1 Jahr', '22.800 €', '24,0 %'],
+          ['2 Jahre', '19.836 €', '33,9 %'],
+          ['3 Jahre', '17.852 €', '40,5 %'],
+          ['5 Jahre', '14.946 €', '50,2 %'],
+          ['8 Jahre', '12.022 €', '59,9 %'],
+          ['10 Jahre', '10.398 €', '65,3 %'],
+        ],
+        fussnote: 'Degressive Durchschnittskurve für einen Volumen-Verbrenner. Gut zu erkennen: Der erste Jahresverlust (24 %) ist so groß wie die Verluste der Jahre 2 und 3 zusammen. Nach fünf Jahren ist etwa die Hälfte des Neuwerts weg, nach zehn Jahren rund zwei Drittel. Danach flacht die Kurve weiter ab, weil ein alter Wagen kaum noch prozentual verlieren kann. Reale Werte hängen stark vom Modell ab. In absoluten Euro betrachtet ist der Verlust dagegen im ersten Jahr am größten (hier 7.200 €) und wird Jahr für Jahr kleiner — nach zehn Jahren macht ein weiteres Jahr nur noch wenige hundert Euro aus. Genau diese Verschiebung von großen zu kleinen Jahresverlusten macht ältere Fahrzeuge im Unterhalt so berechenbar.',
+      },
+      {
+        typ: 'text',
+        titel: 'Degressiv statt linear — der entscheidende Unterschied',
+        html: `<p>Viele stellen sich den Wertverlust falsch vor: als gleichmäßige Abnahme, jedes Jahr derselbe Betrag. Tatsächlich verläuft er <strong>degressiv</strong> — im ersten Jahr am stärksten, danach mit abnehmender Rate. Ein Volumen-Verbrenner verliert im ersten Jahr rund 24 %, im zweiten nur noch 13 %, im dritten 10 % und pendelt sich später bei etwa 7 % pro Jahr ein. Die Kurve fällt also anfangs steil und flacht dann ab.</p><p>Dieser Unterschied ist praktisch bedeutsam. Wer <strong>linear</strong> rechnet (etwa „10 % pro Jahr"), überschätzt den Wert junger Autos massiv und unterschätzt den Wert älterer. Ein Auto ist nach einem Jahr eben nicht 10 %, sondern rund ein Viertel weniger wert. Umgekehrt verliert ein zehn Jahre altes Auto kaum noch prozentual — von einem niedrigen Restwert kann nicht mehr viel abbröckeln. Genau deshalb ist der <strong>junge Gebrauchte</strong> so beliebt: Er hat den teuersten Teil der Kurve schon hinter sich, ist technisch aber noch nahezu neuwertig. Der Rechner bildet diese Staffelung ab, statt mit einem falschen Durchschnitt zu rechnen.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: Kompaktklasse (DAT-nah), 35.000 €',
+        schritte: [
+          { label: 'Jahr 1 (−22 %)', formel: '35.000 × 0,78', ergebnis: '27.300 €' },
+          { label: 'Jahr 2 (−11 %)', formel: '27.300 × 0,89', ergebnis: '24.297 €' },
+          { label: 'Jahr 3 (−9 %)', formel: '24.297 × 0,91', ergebnis: '≈ 22.110 €' },
+          { label: 'Restwert nach 3 Jahren', formel: '35.000 × 0,78 × 0,89 × 0,91', ergebnis: '≈ 22.110 €' },
+        ],
+        fazit: 'Eine gefragte Kompaktklasse mit etwas milderer Wertverlustkurve (22 / 11 / 9 %) hält den Wert besser: 35.000 € Neupreis ergeben nach drei Jahren rund 22.110 € Restwert, also etwa 37 % Verlust. Dieses Beispiel deckt sich mit typischen DAT-Restwertangaben für gut nachgefragte Modelle. Der Vergleich zeigt: Schon wenige Prozentpunkte pro Jahr entscheiden über mehrere tausend Euro Restwert. Wertstabile Modelle mit hoher Nachfrage sind deshalb langfristig oft günstiger, auch wenn sie in der Anschaffung mehr kosten. Beim Neuwagenkauf lohnt es sich daher, nicht nur auf den Listenpreis und den Rabatt zu schauen, sondern auch auf die erwartete Wertstabilität — ein günstiger Kaufpreis nützt wenig, wenn das Modell überdurchschnittlich schnell an Wert verliert und beim Wiederverkauf enttäuscht.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Fahrzeugtyp im Vergleich (30.000 €, nach 3 Jahren)',
+        kopf: ['Fahrzeugtyp', 'Restwert', 'Wertverlust'],
+        zeilen: [
+          ['Premium / SUV (wertstabil)', '19.438 €', '35,2 %'],
+          ['Verbrenner (Volumen)', '17.852 €', '40,5 %'],
+          ['Elektro (Volumen)', '16.073 €', '46,4 %'],
+        ],
+        fussnote: 'Bei identischem Neupreis von 30.000 € nach drei Jahren. Wertstabile Premium- und SUV-Modelle halten ihren Wert am besten, Volumen-Elektroautos verlieren aktuell am meisten. Der Abstand von über 11 Prozentpunkten zwischen bestem und schwächstem Typ entspricht rund 3.400 € — ein Grund, den Fahrzeugtyp und das konkrete Modell bei der Kaufentscheidung mitzudenken. Bei teureren Fahrzeugen fällt dieser Prozentunterschied in absoluten Euro noch deutlich stärker ins Gewicht, weshalb sich gerade im Oberklasse-Segment der Blick auf die Wertstabilität besonders lohnt.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Wertverlust in Zahlen',
+        werte: [
+          { label: 'Verlust 1. Jahr (Verbrenner)', wert: '≈ 24 %', hinweis: 'der mit Abstand größte Einzelsprung' },
+          { label: 'Restwert nach 3 Jahren', wert: '≈ 50–65 %', hinweis: 'je nach Fahrzeugklasse und Nachfrage' },
+          { label: 'Restwert nach 5 Jahren', wert: '≈ 50 %', hinweis: 'grob die Hälfte des Neuwerts (Volumen-Verbrenner)' },
+          { label: 'Jährlicher Verlust ab Jahr 6', wert: '≈ 6–8 %', hinweis: 'die Kurve flacht deutlich ab' },
+          { label: 'Wertverlust vs. Spritkosten', wert: 'meist höher', hinweis: 'in den ersten Jahren der größte Kostenblock' },
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Was den realen Wert verschiebt',
+        text: 'Die Rechnerkurve ist ein Durchschnitts-Anhaltswert — der reale Restwert Ihres Autos kann davon deutlich abweichen, in beide Richtungen. Die größten Faktoren: Marke und Modell (zwischen einem wertstabilen und einem schwachen Modell liegen nach drei Jahren leicht 25 Prozentpunkte Unterschied), die Laufleistung (überdurchschnittliche Kilometer drücken den Wert spürbar), der Zustand samt lückenlosem Scheckheft, die Ausstattung (gefragte Extras wie Automatik, Anhängerkupplung oder Assistenzsysteme halten den Wert, exotische Sonderwünsche kaum), die Farbe (neutrale Töne wie Schwarz, Weiß, Grau und Silber verkaufen sich besser als auffällige) und die regionale Nachfrage. Auch der Kraftstoff bzw. Antrieb spielt eine Rolle, weil sich Marktpräferenzen verschieben. Der Rechner kann diese individuellen Merkmale nicht kennen — er liefert die typische Kurve für den gewählten Fahrzeugtyp. Für eine belastbare Einschätzung eines konkreten Fahrzeugs sind eine DAT-Bewertung, ein Kfz-Gutachten oder ein Live-Marktvergleich auf Portalen wie mobile.de und AutoScout24 die bessere Quelle. Alle Angaben ohne Gewähr und keine Finanzberatung.',
+      },
+      {
+        typ: 'text',
+        titel: 'Wertverlust gering halten',
+        html: `<p>Den Wertverlust kann man nicht abschalten, aber bremsen. Der größte Hebel ist die <strong>Kaufentscheidung</strong>: Ein zwei bis drei Jahre alter <strong>Jahres- oder Gebrauchtwagen</strong> hat den steilsten Teil der Kurve schon hinter sich und ist technisch meist noch nahezu neuwertig — das beste Verhältnis aus geringem weiterem Wertverlust und hoher Zuverlässigkeit.</p><p>Wer neu kauft oder den Wert eines vorhandenen Autos erhalten will, achtet auf ein paar Punkte: ein <strong>lückenloses Scheckheft</strong> und regelmäßige Wartung, einen <strong>gepflegten Zustand</strong> ohne Kratzer und Raucherspuren, eine <strong>moderate Laufleistung</strong>, gefragte <strong>Ausstattung</strong> und eine neutrale <strong>Farbe</strong>. Auch der <strong>Verkaufszeitpunkt</strong> zählt: vor einer teuren TÜV-Fälligkeit oder einem anstehenden Modellwechsel verkauft es sich besser. Und schließlich lohnt ein <strong>Marktvergleich</strong> vor dem Verkauf, um den realistischen Preis zu treffen. Wie sich der Wertverlust in die Gesamtkosten einordnet, zeigt der <a href="/auto/autokosten-rechner">Autokosten-Rechner</a>.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Wert erhalten & klug kaufen',
+        punkte: [
+          'Jahres- oder Gebrauchtwagen (2–3 Jahre) statt Neuwagen erwägen — der steilste Verlust ist dann vorbei',
+          'Scheckheft lückenlos führen und Wartungen dokumentieren',
+          'Laufleistung im Blick behalten — überdurchschnittliche Kilometer drücken den Wert',
+          'Gefragte Ausstattung und neutrale Farbe bevorzugen, exotische Sonderwünsche meiden',
+          'Vor teurer TÜV-Fälligkeit oder anstehendem Modellwechsel verkaufen — beides drückt den Wiederverkaufswert',
+          'Vor dem Verkauf einen Marktvergleich (mobile.de, AutoScout24) oder eine DAT-Bewertung nutzen, um den realistischen Preis zu treffen',
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Grenzen der Schätzung',
+        html: `<p>So nützlich die typische Wertverlustkurve ist — sie bleibt eine <strong>Durchschnittsrechnung</strong>. Der Rechner kennt weder Marke und Modell noch Zustand, Laufleistung oder Ausstattung Ihres konkreten Autos. Er unterstellt eine mittlere Kilometerleistung und einen normalen Zustand und zeigt, wie sich ein <em>typisches</em> Fahrzeug des gewählten Typs entwickelt. Zwei Autos mit gleichem Neupreis und Alter können am Markt trotzdem mehrere tausend Euro auseinanderliegen.</p><p>Für die grobe Orientierung — „Was ist mein Auto ungefähr noch wert?" oder „Wie teuer sind die ersten Jahre wirklich?" — ist das genau richtig. Für eine <strong>belastbare Zahl</strong>, etwa beim Verkauf, bei einem Schadensfall oder vor einer Finanzierung, führt aber kein Weg an einer individuellen Bewertung vorbei: eine <strong>DAT- oder Schwacke-Bewertung</strong>, ein <strong>Kfz-Gutachten</strong> oder ein <strong>Live-Marktvergleich</strong> gleichartiger Angebote. Diese berücksichtigen die konkreten Merkmale, die der Durchschnitt zwangsläufig ausblendet.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Die Kurve zeigt die Richtung, der Markt den Preis',
+        html: `<p>Der Wertverlust-Rechner macht sichtbar, was sonst schleichend passiert: Ein Auto verliert die meiste Substanz in den ersten Jahren, und dieser Verlust ist oft der größte Posten der Autokosten — größer als Sprit, Versicherung oder Wartung. Wer das im Blick hat, trifft bessere Entscheidungen: beim Neu- oder Gebrauchtkauf, bei der Haltedauer und beim Verkaufszeitpunkt.</p><p>Als Merkregeln bleiben: <strong>Das erste Jahr ist das teuerste</strong> (rund ein Viertel Verlust), <strong>der Wertverlust ist degressiv</strong> (später immer flacher), und <strong>der junge Gebrauchte</strong> ist meist die wirtschaftlichste Wahl. Der Rechner zeigt die typische Richtung — der tatsächliche Preis entscheidet sich aber immer am Markt, an Angebot und Nachfrage für genau Ihr Modell. Wie stark der Wertverlust neben den laufenden Kosten ins Gewicht fällt, lässt sich mit dem <a href="/auto/leasingfaktor-rechner">Leasingfaktor-Rechner</a> und der Gesamtkostenbetrachtung gegenrechnen.</p>`,
+      },
+    ],
+    quellen: [
+      { titel: 'Wertverlust-Kurven Pkw (DAT-Report / ADAC / Allianz)', hinweis: 'Neuwagen verlieren im 1. Jahr rund 20–25 %, danach degressiv abnehmend; nach 3 Jahren oft rund 50–65 % Restwert je nach Fahrzeugklasse. Durchschnittswerte.' },
+      { titel: 'Restwert-Formel (degressive Abschreibung)', hinweis: 'Restwert = Neupreis × Produkt der jährlichen (1 − Wertverlustrate); Raten degressiv gestaffelt. Reale Werte hängen von Modell, Laufleistung, Zustand und Nachfrage ab.' },
+    ],
+  },
 ];
