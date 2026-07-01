@@ -8,6 +8,43 @@
 
 ---
 
+## 01.07.2026 — W21 Sport-Ausbau: 10 neue Rechner (5 → 15) — ✅ ABGESCHLOSSEN
+
+Die Kategorie Sport & Fitness von 5 auf 15 Rechner ausgebaut — alle Neubauten direkt Goldstandard
+(12 contentBloecke, ~1.560–1.580 W, quellen, ≥2 interne Links). Component-Logik inline.
+
+**Block A (5, Ausdauer/Leistung, null bis niedrig YMYL):** vdot-rechner (f6ad6f4, Daniels-Gilbert),
+laufband-steigung-rechner (de5ae7c, Jones & Doust), ftp-rechner (7e9b51c, Coggan-7-Zonen),
+schwimm-pace-rechner (1bf366b, CSS), schritte-kilometer-rechner (79bd18e, Jensen/ACSM).
+
+**Block B (5, Körper/Ernährung/Gesundheit, verschärftes YMYL):** ffmi-rechner (6ea9803, neutrale Einordnung),
+grundumsatz-rechner (e12216e, Mifflin-St Jeor, nur BMR + Untergrenze-Warnung), kalorienbedarf-rechner
+(777e1a1, TDEE, KEIN Defizit-Feature), makronaehrstoffe-rechner (cea2eb3, Atwater, neutrale Splits, kein Keto),
+trinkmenge-rechner (2bf65a5, IOM/EFSA/ACSM, Hyponatriämie-Warnung + Nieren/Herz-Hinweis).
+
+**YMYL-Disziplin Block B:** Ernährungsrechner geben keine Abnehm-/Defizit-Zielvorgaben und keine
+gefährlich niedrigen Werte aus; Grundumsatz als Untergrenze markiert; Trinkmenge warnt vor Überwässerung.
+Jeder mit Pflicht-Disclaimer + ärztlichem Verweis in result-box UND content. FFMI neutral ohne Körperbild-Druck.
+
+**3 Rückverlinkungs-Commits:** akku→powerbank (aus W20), grundumsatz→kalorienbedarf (a804daa),
+kalorienbedarf→makros (a6fab01). Cross-Kategorie-Links (koerperfett/bmi = /gesundheit/) per grep verifiziert.
+
+**Dubletten-Hinweis:** Bestehender schritte-rechner (gesundheit.ts) überschneidet sich thematisch mit dem
+neuen schritte-kilometer-rechner (sport). Beim Scoping nicht gefangen (Existenzcheck lief nur gegen geplante
+Slugs, nicht gegen thematisch nahe Bestandsrechner). Neuer Rechner klar differenziert (größen-/aktivitäts-
+abhängige Schrittlänge, beide Richtungen); zur Abgrenzung gegenseitig verlinkt. Lesson: künftig auch
+thematische Nachbarn beider Kategorien prüfen, nicht nur Slug-Kollision.
+
+**Verifikation:** Alle 10 per Struktur- + Wortzahl-Script bestätigt (12 Blöcke, 1.563–1.575 W). Alle 15
+Sport-Fingerprints hinreichend distinkt (Uniqueness-Check je „eindeutig"; die vier verwandten Ernährungs-/
+Körper-Rechner divergieren ab Position 3–4 bei klar verschiedenem Inhalt — Non-Gate laut Goldstandard-Spec).
+client-data.ts in keinem der 12 W21-Commits. Beispiel-Anker je Rechner per eigener Node-Probe gegen die
+Component-Formel nachgerechnet und gegen veröffentlichte Referenzwerte gegengeprüft.
+
+**Status gesamt:** ~196 Rechner. AdSense-Resubmit weiterhin bewusst aufgeschoben (Karsten-Entscheidung).
+
+---
+
 ## 01.07.2026 — W20 Technik-Ausbau: 10 neue Rechner (5 → 15) — ✅ ABGESCHLOSSEN
 
 Die Technik-Kategorie von 5 auf 15 Rechner ausgebaut — alle Neubauten direkt Goldstandard
