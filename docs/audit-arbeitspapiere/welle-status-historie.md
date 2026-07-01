@@ -4,7 +4,29 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 01.07.2026
+**Stand:** 02.07.2026
+
+---
+
+## 02.07.2026 — Kochen-Ausbau: 3 neue Rechner (12 → 15) — ✅ ABGESCHLOSSEN
+
+Kategorie Kochen von 12 auf 15 Rechner erweitert — alle Neubauten direkt Goldstandard
+(13 contentBloecke, ~1.560–1.580 W, quellen, 2 interne Links, Component-Logik inline).
+
+- reis-wasser-rechner (f72d2d6): Wasser = Reis(g) × Verhältnis × Methode; 7 Sorten
+  (weiß 1:2, Basmati 1:1,75, Jasmin 1:1,5, Vollkorn 1:2,5, Sushi 1:1,25, Wildreis/Risotto 1:3),
+  Herd vs. Reiskocher (−15 %). Quellen RecipeTin/Omni u. a.
+- kaffee-wasser-rechner (134bbb9): Brew Ratio nach SCA; Handfilter 1:16, French Press 1:15,
+  Drip 1:17, AeroPress 1:14, Cold Brew 1:5, Espresso 1:2 (Sonderfall Ausbeute). Zwei Richtungen.
+- fleisch-garzeit-rechner (f8c787d): Garzeit = kg × min/kg + 20; 6 Fleischarten. LEBENSMITTELSICHERHEIT:
+  Garzeit nur Richtwert, Kerntemperatur maßgeblich (USDA/FSIS: Geflügel 74 °C, Hack 72 °C, ganze Stücke 63 °C),
+  Fleischthermometer-Empfehlung, Warnung prominent in result-box + content.
+
+Fingerprints distinkt (Starts text-infobox / text-beispielrechnung / text-tabelle). Anker je Rechner
+per Node-Probe gegen Component-Formel und veröffentlichte Referenzwerte geprüft. client-data.ts in
+keinem der 3 Commits. Kochen-Einleitung um die 3 Neuzugänge ergänzt.
+
+**Status gesamt:** ~199 Rechner. AdSense-Resubmit weiterhin bewusst aufgeschoben (Karsten-Entscheidung).
 
 ---
 
