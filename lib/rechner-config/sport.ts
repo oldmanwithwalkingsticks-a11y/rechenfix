@@ -1990,4 +1990,160 @@ Das Ergebnis hängt vollständig von der Genauigkeit der Körperfett-Messung ab,
       },
     ],
   },
+  {
+    slug: 'grundumsatz-rechner',
+    letzteAktualisierung: '2026-07-01',
+    titel: 'Grundumsatz-Rechner (BMR)',
+    beschreibung: 'Grundumsatz nach Mifflin-St Jeor berechnen: wie viele Kalorien der Körper in völliger Ruhe pro Tag verbraucht — die Basis-Energie.',
+    kategorie: 'Sport & Fitness',
+    kategorieSlug: 'sport',
+    metaTitle: 'Grundumsatz berechnen — BMR',
+    metaDescription: 'Grundumsatz (BMR) nach Mifflin-St Jeor berechnen: wie viele Kalorien der Körper in völliger Ruhe verbraucht — aus Gewicht, Größe, Alter.',
+    keywords: ['grundumsatz berechnen', 'bmr rechner', 'mifflin st jeor', 'kalorien ruheumsatz', 'grundumsatz formel', 'ruheumsatz berechnen', 'basalumsatz', 'kalorien grundverbrauch'],
+    icon: '🔥',
+    formel: 'Männer: BMR = 10×Gewicht + 6,25×Größe − 5×Alter + 5 | Frauen: … − 161',
+    beispiel: '75 kg, 178 cm, 30 Jahre, Mann: 10×75 + 6,25×178 − 5×30 + 5 = 1.718 kcal/Tag in Ruhe.',
+    erklaerung: `**Grundumsatz-Rechner — die Basis-Energie deines Körpers**
+
+Der Grundumsatz (englisch Basal Metabolic Rate, BMR) ist die Energiemenge, die der Körper in völliger Ruhe pro Tag verbraucht — allein für lebensnotwendige Funktionen wie Atmung, Herzschlag, Organtätigkeit und das Halten der Körpertemperatur. Er ist der größte Einzelposten des täglichen Energieverbrauchs und macht bei den meisten Menschen 60 bis 75 Prozent aus. Dieser Rechner schätzt den Grundumsatz mit der Mifflin-St-Jeor-Formel.
+
+**Die Berechnung**
+
+Die Formel nutzt Gewicht, Größe, Alter und Geschlecht. Für Männer gilt: BMR = 10 × Gewicht (kg) + 6,25 × Größe (cm) − 5 × Alter + 5. Für Frauen wird am Ende statt +5 die Konstante −161 verwendet, was die im Schnitt andere Körperzusammensetzung berücksichtigt. Ein 30-jähriger Mann mit 75 kg und 178 cm kommt so auf rund 1.718 kcal pro Tag.
+
+**Grundumsatz ist die Untergrenze**
+
+Wichtig: Der Grundumsatz beschreibt nur den Verbrauch in Ruhe und ist damit die absolute Untergrenze der Energiezufuhr. Dauerhaft weniger zu essen als den Grundumsatz ist nicht ratsam und sollte höchstens unter ärztlicher Begleitung geschehen. Der tatsächliche Tagesbedarf liegt höher, weil jede Bewegung zusätzliche Energie kostet.
+
+**Nur eine Schätzung**
+
+Die Formel liefert einen statistischen Durchschnittswert mit rund ±10 Prozent Abweichung. Muskelmasse, Hormone und individuelle Faktoren beeinflussen den realen Wert. Der Rechner ersetzt keine ärztliche oder ernährungsmedizinische Beratung.`,
+    faq: [
+      {
+        frage: 'Was ist der Grundumsatz?',
+        antwort: 'Der Grundumsatz (BMR) ist die Energie, die der Körper in völliger Ruhe pro Tag verbraucht — für Atmung, Kreislauf, Organe und Körpertemperatur. Er ist der größte Teil des täglichen Verbrauchs, meist 60 bis 75 Prozent. Alles, was man sich darüber hinaus bewegt, kommt beim Gesamtbedarf noch obendrauf. Der Grundumsatz ist also die Basis-Energie, die der Körper ohne jede Aktivität benötigt.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen Grundumsatz und Gesamtbedarf?',
+        antwort: 'Der Grundumsatz ist der Verbrauch in völliger Ruhe. Der Gesamtbedarf (englisch TDEE) rechnet die Bewegung hinzu — Alltag, Arbeit und Sport. Er liegt deshalb je nach Aktivität deutlich höher als der Grundumsatz, oft das 1,3- bis 1,8-Fache. Dieser Rechner zeigt bewusst nur den Grundumsatz; den Gesamtbedarf mit Aktivität schätzt ein separater Kalorien-Rechner.',
+      },
+      {
+        frage: 'Wie genau ist die Mifflin-St-Jeor-Formel?',
+        antwort: 'Sie gilt als die zuverlässigste Standardformel und sagt den Ruheumsatz für die meisten gesunden Erwachsenen innerhalb von rund ±10 Prozent voraus. Eine große Vergleichsstudie (Frankenfield 2005) bestätigte sie als genauer als ältere Formeln. Trotzdem bleibt es eine statistische Schätzung — individuelle Faktoren wie Muskelmasse oder Schilddrüsenfunktion können den realen Wert verschieben.',
+      },
+      {
+        frage: 'Sollte ich weniger als meinen Grundumsatz essen?',
+        antwort: 'Nein. Der Grundumsatz deckt nur die lebensnotwendigen Funktionen und ist die untere Grenze der Energiezufuhr. Dauerhaft weniger zu essen kann der Gesundheit schaden — der Körper fährt Stoffwechsel und wichtige Prozesse herunter. Wer abnehmen möchte, sollte das nicht über ein Unterschreiten des Grundumsatzes tun, sondern sich bei Bedarf ärztlich oder ernährungsmedizinisch begleiten lassen.',
+      },
+      {
+        frage: 'Warum ist der Grundumsatz bei Frauen niedriger?',
+        antwort: 'Im statistischen Durchschnitt haben Frauen einen etwas anderen Körperbau mit tendenziell weniger Muskelmasse und mehr Fettgewebe, und Muskeln verbrauchen auch in Ruhe mehr Energie. Die Formel bildet das über die Konstante −161 (statt +5 bei Männern) ab. Das ist ein reiner Durchschnittswert; individuell hängt der Grundumsatz vor allem von der Körperzusammensetzung ab, nicht allein vom Geschlecht.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was der Grundumsatz ist',
+        html: `<p>Der <strong>Grundumsatz</strong> (englisch Basal Metabolic Rate, BMR) ist die Energiemenge, die der Körper in <strong>völliger Ruhe</strong> pro Tag verbraucht. Damit sind nicht null Kalorien gemeint, im Gegenteil: Auch wenn man den ganzen Tag entspannt liegen würde, laufen im Hintergrund lebensnotwendige Prozesse — <strong>Atmung, Herzschlag, Nierentätigkeit, Gehirnaktivität</strong> und das Halten der Körpertemperatur. All das kostet Energie.</p><p>Der Grundumsatz ist der mit Abstand <strong>größte Einzelposten</strong> des täglichen Energieverbrauchs und macht bei den meisten Menschen 60 bis 75 Prozent aus. Alles, was man sich darüber hinaus bewegt — vom Aufstehen über den Arbeitsweg bis zum Sport — kommt beim Gesamtbedarf noch obendrauf. Der Grundumsatz beschreibt also die Basis-Energie, die der Körper ohne jede Aktivität benötigt, und ist ein guter Ausgangspunkt, um den eigenen Körper besser zu verstehen. Dieser Rechner schätzt ihn mit der wissenschaftlich anerkannten Mifflin-St-Jeor-Formel aus Gewicht, Größe, Alter und Geschlecht.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '75 kg, 178 cm, 30 Jahre (Mann)',
+        schritte: [
+          { label: 'Gewicht und Größe', formel: '10 × 75 + 6,25 × 178', ergebnis: '1.862,5' },
+          { label: 'Alter und Konstante (Mann)', formel: '− 5 × 30 + 5', ergebnis: '− 145' },
+          { label: 'Grundumsatz', formel: '1.862,5 − 145', ergebnis: '≈ 1.718 kcal' },
+        ],
+        fazit: 'Ein 30-jähriger Mann mit 75 kg und 178 cm hat nach Mifflin-St Jeor einen Grundumsatz von rund 1.718 kcal pro Tag. So viel Energie verbraucht sein Körper allein für die lebenswichtigen Funktionen, ohne jede Bewegung. Das Gewicht geht mit dem Faktor 10 ein, die Größe mit 6,25 und das Alter mit −5 pro Jahr; die Konstante +5 unterscheidet die Männer- von der Frauenformel. Der Wert ist die Basis — der reale Tagesbedarf liegt höher, sobald Alltag und Sport hinzukommen. Anschaulich gerechnet: Diese rund 1.718 kcal verbraucht der Körper auch an einem Tag, an dem man das Bett kaum verlässt, allein für Herz, Lunge, Gehirn und Wärmeregulation. Das zeigt, wie viel Energie schon das bloße Funktionieren kostet — und relativiert die Vorstellung, man könne durch extremes Fasten gefahrlos weit darunter bleiben.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum die Mifflin-St-Jeor-Formel',
+        html: `<p>Für die Schätzung des Ruheumsatzes gibt es mehrere Formeln, doch die <strong>Mifflin-St-Jeor-Gleichung</strong> von 1990 hat sich als Standard durchgesetzt. Der Grund: Sie ist für die heutige Bevölkerung <strong>genauer</strong> als ältere Ansätze wie die Harris-Benedict-Formel aus dem Jahr 1919, die auf Daten eines anderen Zeitalters beruht.</p><p>Eine viel beachtete Vergleichsstudie der Academy of Nutrition and Dietetics (Frankenfield und Kollegen, 2005) untersuchte die gängigen Formeln und kam zu dem Ergebnis, dass Mifflin-St Jeor den Ruheumsatz gesunder Erwachsener am <strong>zuverlässigsten</strong> vorhersagt — für die meisten Menschen innerhalb von rund ±10 Prozent. Sie wurde deshalb als evidenzbasierter Standard empfohlen und ist heute in den meisten seriösen Rechnern hinterlegt. Wichtig bleibt: Auch die beste Formel liefert nur einen statistischen Durchschnittswert. Sie kann die individuelle Körperzusammensetzung nicht vollständig erfassen, trifft aber für den Großteil gesunder Erwachsener eine brauchbare Näherung. Als Ausgangspunkt für das Verständnis des eigenen Energiebedarfs ist sie damit gut geeignet.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Grundumsatz nach Alter (75 kg, 178 cm, Mann)',
+        kopf: ['Alter', 'Grundumsatz'],
+        zeilen: [
+          ['20 Jahre', '1.768 kcal'],
+          ['30 Jahre', '1.718 kcal'],
+          ['40 Jahre', '1.668 kcal'],
+          ['50 Jahre', '1.618 kcal'],
+          ['60 Jahre', '1.568 kcal'],
+        ],
+        fussnote: 'Der Grundumsatz sinkt in der Formel um 5 kcal pro Lebensjahr — über 40 Jahre also um rund 200 kcal. Dahinter steht vor allem der altersbedingte Abbau von Muskelmasse, die auch in Ruhe Energie verbraucht. Die Werte sind rein informativ und zeigen den Alters-Effekt bei ansonsten gleichen Angaben; sie sind kein Zielwert und keine Vorgabe. Regelmäßiges Krafttraining kann dem Muskelabbau entgegenwirken und den Grundumsatz langfristig stützen. Der in der Formel angesetzte lineare Rückgang ist dabei eine Vereinfachung — in der Realität hängt die altersbedingte Veränderung stark vom Aktivitätsniveau ab. Wer bis ins höhere Alter körperlich aktiv bleibt und Muskulatur erhält, muss den rechnerischen Rückgang nicht in vollem Umfang hinnehmen.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Zweites Beispiel: Frau, 65 kg, 165 cm, 30 Jahre',
+        schritte: [
+          { label: 'Gewicht und Größe', formel: '10 × 65 + 6,25 × 165', ergebnis: '1.681,25' },
+          { label: 'Alter und Konstante (Frau)', formel: '− 5 × 30 − 161', ergebnis: '− 311' },
+          { label: 'Grundumsatz', formel: '1.681,25 − 311', ergebnis: '≈ 1.370 kcal' },
+        ],
+        fazit: 'Bei Frauen verwendet die Formel dieselben Faktoren für Gewicht, Größe und Alter, am Ende aber die Konstante −161 statt +5. Eine 30-jährige Frau mit 65 kg und 165 cm kommt so auf einen Grundumsatz von rund 1.370 kcal. Die niedrigere Konstante bildet die im Durchschnitt andere Körperzusammensetzung ab — statistisch etwas weniger Muskel- und mehr Fettgewebe, und Muskeln verbrauchen in Ruhe mehr Energie. Das ist ein reiner Durchschnittswert; der individuelle Grundumsatz hängt vor allem vom Körperbau ab. Eine sehr sportliche Frau mit viel Muskelmasse kann durchaus einen höheren Grundumsatz haben als die Formel vermuten lässt, während er bei geringerem Muskelanteil niedriger ausfällt. Die Geschlechter-Konstante ist also nur eine grobe statistische Näherung, kein fester biologischer Wert.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Was den Grundumsatz beeinflusst',
+        werte: [
+          { label: 'Anteil am Gesamtverbrauch', wert: '60–75 %', hinweis: 'größter Einzelposten' },
+          { label: 'Muskelmasse', wert: 'erhöht ihn', hinweis: 'Muskeln verbrauchen auch in Ruhe' },
+          { label: 'Alter', wert: '−5 kcal/Jahr', hinweis: 'meist über Muskelabbau' },
+          { label: 'Körperbau', wert: 'entscheidend', hinweis: 'Muskel-/Fettverteilung, Geschlecht' },
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Der Grundumsatz ist die Untergrenze',
+        text: 'Ein zentraler Punkt zum Verständnis: Der Grundumsatz deckt ausschließlich die lebensnotwendigen Grundfunktionen ab und ist damit die absolute untere Grenze der Energiezufuhr — kein Zielwert, den man anstreben oder unterschreiten sollte. Dauerhaft weniger zu essen als den eigenen Grundumsatz ist nicht ratsam und kann der Gesundheit schaden: Der Körper reagiert mit heruntergefahrenem Stoffwechsel, Leistungsabfall, Konzentrations- und Schlafproblemen und langfristig ernsteren Folgen. Der reale Tagesbedarf liegt zudem deutlich über dem Grundumsatz, weil jede Bewegung zusätzliche Energie kostet. Wer aus gesundheitlichen Gründen oder aus eigenem Wunsch an seiner Ernährung etwas ändern möchte, sollte das nicht über ein Unterschreiten des Grundumsatzes tun, sondern sich ärztlich oder ernährungsmedizinisch begleiten lassen. Dieser Rechner liefert bewusst nur den Grundumsatz als Wissensbasis und gibt keine Kalorienziele oder Diätvorgaben aus. Bei Anzeichen einer Essstörung ist eine fachliche Beratung besonders wichtig.',
+      },
+      {
+        typ: 'text',
+        titel: 'Grundumsatz und Gesamtbedarf',
+        html: `<p>Der Grundumsatz ist nur ein Teil des täglichen Energieverbrauchs. Der vollständige Bedarf heißt <strong>Gesamtumsatz</strong> oder auf Englisch TDEE (Total Daily Energy Expenditure) und rechnet die <strong>Bewegung</strong> hinzu — vom Gehen und Stehen im Alltag über die Arbeit bis zum Sport. Je nach Aktivitätsniveau liegt der Gesamtbedarf beim rund <strong>1,3- bis 1,8-Fachen</strong> des Grundumsatzes.</p><p>Ein Mensch mit einem Grundumsatz von 1.718 kcal und moderatem Alltag käme so auf einen Tagesbedarf von grob 2.400 bis 2.800 kcal. Dieser Rechner zeigt bewusst <strong>nur den Grundumsatz</strong>, weil das die stabile, gut schätzbare Basis ist — der Aktivitätsanteil ist individuell viel schwerer zu erfassen und wird in einem eigenen Schritt berechnet. Wie viel Energie einzelne Bewegungsformen zusätzlich kosten, lässt sich mit dem <a href="/sport/kalorienverbrauch-rechner">Kalorienverbrauch-Rechner</a> abschätzen. So bleibt die Trennung sauber: Hier der reine Ruheumsatz als Fundament, dort der Verbrauch durch Aktivität. Beides zusammen ergibt erst den realen Tagesbedarf. Diese Trennung ist bewusst gewählt, damit der stabile Grundumsatz nicht mit dem schwankenden Aktivitätsanteil vermischt und fälschlich als Kalorienziel missverstanden wird.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Die Grenzen der Formel',
+        html: `<p>So praktisch die Formel ist — sie liefert einen <strong>statistischen Durchschnitt</strong>, keinen exakten persönlichen Wert. Zwei Menschen mit identischem Gewicht, gleicher Größe und gleichem Alter können unterschiedliche Grundumsätze haben, weil die Formel die <strong>Körperzusammensetzung</strong> nur indirekt erfasst. Ausschlaggebend ist vor allem die Muskelmasse: Sie verbraucht auch in Ruhe Energie, weshalb ein muskulöser Mensch einen höheren Grundumsatz hat als die Formel vermuten lässt.</p><p>Weitere Einflussfaktoren, die keine einfache Formel abbildet, sind <strong>Hormone</strong> (insbesondere die Schilddrüsenfunktion), <strong>Genetik</strong>, der allgemeine Gesundheitszustand und bestimmte Lebensphasen. Deshalb ist der berechnete Wert eine <strong>Näherung mit rund ±10 Prozent Spielraum</strong>. Wirklich exakt lässt sich der Ruheumsatz nur per indirekter Kalorimetrie im Labor bestimmen, bei der die Sauerstoffaufnahme gemessen wird — für den Alltag ist das weder nötig noch praktikabel. Für ein grundlegendes Verständnis des eigenen Energiebedarfs reicht die Schätzung völlig aus, solange man sie nicht als exakte Vorgabe missversteht. Kleine Abweichungen zwischen verschiedenen Rechnern sind übrigens normal und meist auf gerundete Zwischenwerte oder minimal andere Formelvarianten zurückzuführen — die Größenordnung bleibt dieselbe.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Den Grundumsatz sinnvoll nutzen',
+        punkte: [
+          'Den Wert als Wissensbasis verstehen, nicht als Essensgrenze nach unten.',
+          'Gewicht, Größe und Alter ehrlich und aktuell angeben.',
+          'Für den realen Tagesbedarf die Bewegung separat berücksichtigen.',
+          'Beachten, dass der Wert eine Schätzung mit rund ±10 Prozent ist.',
+          'Muskelaufbau kann den Grundumsatz langfristig stützen.',
+          'Niemals dauerhaft unter den Grundumsatz essen, auch nicht mit Abnehmwunsch ohne Begleitung.',
+          'Bei Unsicherheit oder gesundheitlichen Fragen fachlichen Rat einholen.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Ein Schätzwert für gesunde Erwachsene',
+        text: 'Die Berechnung gilt für gesunde Erwachsene und ist ein statistischer Schätzwert, kein medizinischer Befund. Der individuelle Grundumsatz kann durch Muskelmasse, Hormone, Erkrankungen oder Medikamente abweichen. In besonderen Lebensphasen wie Schwangerschaft und Stillzeit, im Wachstumsalter, bei Über- oder Untergewicht sowie bei chronischen Erkrankungen gelten andere Voraussetzungen, die eine Formel nicht abbilden kann. Nutzen Sie den Wert als Orientierung, um den eigenen Körper besser zu verstehen — nicht als verbindliche Vorgabe für die Ernährung. Bei gesundheitlichen Fragen, geplanten größeren Ernährungsumstellungen oder Anzeichen einer Essstörung ist eine ärztliche oder ernährungsmedizinische Beratung die richtige Anlaufstelle. Dieser Rechner trifft bewusst keine Aussagen über Gewichtsabnahme oder Kalorienziele und ersetzt keine fachliche Einschätzung.',
+      },
+      {
+        typ: 'text',
+        titel: 'Basiswissen über den eigenen Körper',
+        html: `<p>Der Grundumsatz ist vor allem ein Stück <strong>Basiswissen</strong>: Er zeigt, wie viel Energie der Körper allein fürs Funktionieren braucht, und hilft, ein realistisches Gefühl für den eigenen Energiehaushalt zu bekommen. Viele Menschen unterschätzen, wie viel der Körper schon in Ruhe verbraucht — die weit überwiegende Mehrheit der täglichen Energie fließt in diese unsichtbaren Grundfunktionen.</p><p>Dieses Verständnis lässt sich gelassen und ohne Druck einordnen. Der Grundumsatz ist keine Bewertung und kein Ziel, sondern eine sachliche Kennzahl. Wer ihn kennt, versteht besser, warum crash-artige Hungerkuren kontraproduktiv sind und warum der Körper eine stabile Energiezufuhr braucht, um leistungsfähig und gesund zu bleiben. Für weiterführende Einordnungen rund um Körper und Gewicht kann ergänzend der <a href="/gesundheit/bmi-rechner">BMI-Rechner</a> herangezogen werden — auch er ist eine grobe Orientierung, kein Urteil. Am wichtigsten bleibt: Ein gesunder, respektvoller Umgang mit dem eigenen Körper und eine ausreichende, ausgewogene Ernährung sind wertvoller als jede einzelne Zahl. Der Grundumsatz ist ein Werkzeug zum Verstehen, nicht zum Optimieren um jeden Preis.</p>`,
+      },
+    ],
+    quellen: [
+      {
+        titel: 'Mifflin MD, St Jeor ST et al. (1990), Am J Clin Nutr',
+        hinweis: 'Ursprungsstudie der Mifflin-St-Jeor-Gleichung zur Schätzung des Ruheenergieumsatzes bei gesunden Erwachsenen.',
+      },
+      {
+        titel: 'Frankenfield et al. (2005) — Vergleich der BMR-Formeln',
+        hinweis: 'Mifflin-St Jeor sagt den Ruheumsatz für die meisten Menschen innerhalb von ±10 % am zuverlässigsten voraus; als evidenzbasierter Standard empfohlen.',
+      },
+    ],
+  },
 ];
