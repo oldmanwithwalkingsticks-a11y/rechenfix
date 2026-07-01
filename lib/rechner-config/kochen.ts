@@ -2851,4 +2851,174 @@ Gefrierbrand entsteht, wenn Luft an die Oberfläche des Lebensmittels gelangt �
       { titel: 'Verpackungsfaktoren (Rechner-Methodik)', hinweis: 'Gefrierbeutel/Dose ×1,0; Alufolie ×0,8; Vakuum ×1,5' },
     ],
   },
+  {
+    slug: 'reis-wasser-rechner',
+    letzteAktualisierung: '2026-07-01',
+    titel: 'Reis-Wasser-Rechner',
+    beschreibung: 'Wie viel Wasser für Reis? Reismenge, Sorte und Kochmethode eingeben — die richtige Wassermenge sofort berechnen.',
+    kategorie: 'Kochen & Ernährung',
+    kategorieSlug: 'kochen',
+    metaTitle: 'Reis-Wasser-Rechner — richtige Wassermenge',
+    metaDescription: 'Wie viel Wasser für Reis? Menge, Sorte (Basmati, Jasmin, Vollkorn …) und Methode eingeben — die passende Wassermenge sofort berechnen. Kostenlos.',
+    keywords: ['reis wasser verhältnis', 'wie viel wasser für reis', 'basmati wasser', 'reis kochen wassermenge', 'reis wasser rechner', 'wasser reis verhältnis', 'reis wasser menge'],
+    icon: '🍚',
+    formel: 'Wasser (ml) = Reismenge (g) × Verhältnis × Methoden-Faktor | Verhältnis: weiß 1:2 · Basmati 1:1,75 · Jasmin 1:1,5 · Vollkorn 1:2,5 · Sushi 1:1,25 · Wildreis/Risotto 1:3 | Reiskocher: ×0,85',
+    beispiel: '150 g weißer Langkornreis auf dem Herd: 150 g × 2,0 = 300 ml Wasser (Verhältnis 1:2).',
+    erklaerung: `**Wie viel Wasser braucht Reis wirklich?**
+
+„Doppelt so viel Wasser wie Reis" ist die bekannteste Faustregel — und stimmt nur für weißen Langkornreis. Der **Reis-Wasser-Rechner** rechnet die passende Wassermenge sortengenau aus: Sie geben Reismenge, Sorte und Methode ein, der Rechner multipliziert die Menge mit dem sortentypischen Verhältnis.
+
+**Warum jede Sorte anders ist**
+
+Entscheidend ist die Stärke im Korn. Basmati und Jasmin haben viel Amylose, bleiben körnig und brauchen weniger Wasser (1:1,75 bzw. 1:1,5). Sushi- und Rundkornreis sind reich an Amylopektin und kleben bewusst — auch sie kommen mit wenig Wasser aus (1:1,25). Vollkornreis dagegen trägt eine Kleieschicht und braucht deutlich mehr (1:2,5) und länger.
+
+**Herd oder Reiskocher?**
+
+Bei der Absorptionsmethode auf dem Herd wird das gesamte Wasser aufgenommen — Faktor 1,0. Im Reiskocher oder Instant Pot verdunstet fast nichts, deshalb rund 15 % weniger Wasser (Faktor 0,85). Die Werte sind verlässliche Ausgangsgrößen; nach Geschmack lässt sich um ein Viertel nachjustieren.`,
+    faq: [
+      {
+        frage: 'Wie viel Wasser pro 100 g Reis?',
+        antwort: 'Das hängt von der Sorte ab. Für weißen Langkornreis gilt 1:2, also 200 ml Wasser pro 100 g. Basmati braucht 175 ml, Jasmin 150 ml, Vollkornreis 250 ml, Sushi-/Rundkornreis 125 ml und Wildreis rund 300 ml. Im Reiskocher jeweils etwa 15 % weniger, weil kaum Wasser verdunstet.',
+      },
+      {
+        frage: 'Was ist der Unterschied zwischen Basmati und Jasmin beim Wasser?',
+        antwort: 'Basmati ist ein langkörniger, sehr aromatischer Reis mit hohem Amylose-Anteil — er bleibt schön körnig und braucht mit 1:1,75 etwas mehr Wasser. Jasmin ist weicher und leicht klebrig; mit 1:1,5 kommt er mit weniger Wasser aus. Beide profitieren davon, vor dem Kochen kurz gewaschen zu werden.',
+      },
+      {
+        frage: 'Warum braucht der Reiskocher weniger Wasser?',
+        antwort: 'Im geschlossenen Reiskocher oder Instant Pot entweicht kaum Dampf, es geht also fast keine Flüssigkeit durch Verdunstung verloren. Deshalb rechnet der Rechner dort mit rund 15 % weniger Wasser (Faktor 0,85). Auf dem offenen oder halb offenen Topf verdunstet mehr, entsprechend höher liegt der Bedarf.',
+      },
+      {
+        frage: 'Muss man Reis vor dem Kochen waschen?',
+        antwort: 'Bei Basmati, Jasmin und weißem Langkornreis ja: Waschen entfernt lose Oberflächenstärke, der Reis wird körniger und klebt weniger. Bei Sushi-Reis und Risotto wäscht man bewusst nicht (oder nur kurz), weil die Oberflächenstärke für die gewünschte Klebrigkeit bzw. Cremigkeit gebraucht wird.',
+      },
+      {
+        frage: 'Warum wird mein Reis matschig oder zu trocken?',
+        antwort: 'Matschig wird Reis meist durch zu viel Wasser, zu hohe Hitze oder Rühren während des Garens. Zu trocken oder körnig-hart bleibt er, wenn das Wasser zu früh verkocht — dann Deckel drauf lassen und bei kleinster Hitze nachziehen. Wichtig ist außerdem, den Deckel während der Garzeit geschlossen zu halten.',
+      },
+      {
+        frage: 'Gilt das Verhältnis auch für Risotto?',
+        antwort: 'Nur als grober Gesamtrichtwert. Risotto wird nicht in einem Zug aufgekocht, sondern die heiße Brühe wird kellenweise zugegeben und unter Rühren einkochen gelassen. Der Gesamtbedarf liegt bei etwa dem Dreifachen der Reismenge, aber Sie tasten sich an die cremige Konsistenz heran, statt eine feste Menge abzumessen.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Warum „1:2" nicht immer stimmt',
+        html: `<p>Fast jeder kennt die Faustregel: <strong>doppelt so viel Wasser wie Reis</strong>. Sie funktioniert für weißen Langkornreis — und geht bei jeder anderen Sorte mehr oder weniger daneben. Der Grund liegt in der <strong>Stärkezusammensetzung</strong> des Korns. Reis besteht aus zwei Stärkearten: <strong>Amylose</strong> und <strong>Amylopektin</strong>. Ihr Verhältnis bestimmt, wie viel Wasser das Korn aufnimmt und wie klebrig oder körnig der fertige Reis wird.</p><p>Sorten mit viel Amylose — allen voran <strong>Basmati</strong> — quellen weniger stark, bleiben locker und körnig und brauchen daher <em>weniger</em> Wasser als die 1:2-Regel vorgibt. Sorten mit viel Amylopektin wie <strong>Sushi-Reis</strong> verkleben gewollt und kommen ebenfalls mit wenig Wasser aus. <strong>Vollkornreis</strong> wiederum trägt eine Kleieschicht, die Wasser nur langsam durchlässt — er braucht deutlich mehr Flüssigkeit und Zeit. Genau diese Unterschiede rechnet der Reis-Wasser-Rechner sortengenau aus, statt pauschal zu verdoppeln.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Ruhen & Fluffen — der letzte Schliff',
+        text: 'Nach dem Kochen den Topf vom Herd nehmen und den Reis mit geschlossenem Deckel noch rund 10 Minuten ausdampfen lassen. In dieser Ruhephase verteilt sich die Restfeuchte gleichmäßig, und die unterste Schicht löst sich leichter vom Boden. Erst danach mit einer Gabel vorsichtig auflockern („fluffen") statt umrühren — so bleiben die Körner ganz und kleben nicht. Wer körnigen Reis mag, wäscht Basmati und weißen Langkornreis vor dem Kochen kurz, bis das Wasser klarer wird: Das spült lose Oberflächenstärke ab. Bei Sushi-Reis und Risotto wird bewusst nicht gewaschen, weil genau diese Stärke für Klebrigkeit und Cremigkeit sorgt.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: 150 g weißer Langkornreis auf dem Herd',
+        schritte: [
+          { label: 'Reismenge', formel: 'Trockengewicht', ergebnis: '150 g' },
+          { label: 'Verhältnis weißer Langkornreis', formel: 'Wasser : Reis', ergebnis: '1:2 (Faktor 2,0)' },
+          { label: 'Methode Herd', formel: 'Absorptionsmethode', ergebnis: 'Faktor 1,0' },
+          { label: 'Wassermenge', formel: '150 g × 2,0 × 1,0', ergebnis: '300 ml' },
+        ],
+        fazit: '150 g weißer Reis brauchen genau 300 ml Wasser. Das ergibt rund zwei gute Portionen mit etwa 450 g gekochtem Reis — Trockenreis legt beim Garen ungefähr auf das Dreifache seines Gewichts zu. Aufkochen, dann bei kleinster Hitze mit geschlossenem Deckel etwa 12–15 Minuten quellen lassen, bis das Wasser vollständig aufgenommen ist. Nicht umrühren und den Deckel geschlossen halten, damit der Dampf im Topf bleibt.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Wasserverhältnis je Reissorte (Herd, bei 150 g)',
+        kopf: ['Reissorte', 'Verhältnis', 'Wasser bei 150 g'],
+        zeilen: [
+          ['Weißer Langkornreis', '1:2', '300 ml'],
+          ['Basmati', '1:1,75', '263 ml'],
+          ['Jasmin', '1:1,5', '225 ml'],
+          ['Vollkorn-/Naturreis', '1:2,5', '375 ml'],
+          ['Sushi-/Rundkornreis', '1:1,25', '188 ml'],
+          ['Wildreis', '1:3', '450 ml'],
+          ['Risotto (Arborio)', '1:3', '450 ml'],
+        ],
+        fussnote: 'Richtwerte für die Absorptionsmethode auf dem Herd. Bei Risotto ist die Angabe ein Gesamtrichtwert für die schrittweise Brühezugabe, keine feste Abmessung. Die Verhältnisse sind bewusst robuste Mittelwerte — je nach Reisalter, Topf und Geschmack lässt sich um etwa ein Viertel Wasser nach oben oder unten abweichen. Älterer, trockener gelagerter Reis nimmt tendenziell etwas mehr Wasser auf als frische Ernte.',
+      },
+      {
+        typ: 'text',
+        titel: 'Langkorn, Rundkorn, Vollkorn — warum die Sorte zählt',
+        html: `<p><strong>Langkornreis</strong> wie Basmati und Jasmin hat schlanke, lange Körner und einen hohen Amylose-Gehalt. Er bleibt nach dem Garen locker, die Körner trennen sich gut — ideal als Beilage zu Currys und Schmorgerichten. Weil er weniger stark quillt, braucht er weniger Wasser als die 1:2-Regel nahelegt.</p><p><strong>Rundkornreis</strong> — dazu zählen Sushi-Reis und Milchreis — ist kurz und rundlich und steckt voller Amylopektin. Beim Kochen wird er weich und klebrig, was bei Sushi ausdrücklich gewollt ist. Trotz der Klebrigkeit ist sein Wasserbedarf niedrig (1:1,25), weil die kompakten Körner schnell durchquellen.</p><p><strong>Vollkornreis</strong> (Naturreis) ist ungeschält und behält seine ballaststoffreiche Kleieschicht. Diese Schicht bremst die Wasseraufnahme — deshalb braucht Vollkornreis mit 1:2,5 mehr Flüssigkeit und mit 35–45 Minuten fast die doppelte Garzeit. Dafür liefert er mehr Ballaststoffe, Mineralstoffe und B-Vitamine als geschälter weißer Reis. Wer von weißem auf Vollkornreis umsteigt, sollte also nicht nur mehr Wasser, sondern auch mehr Zeit einplanen — und den fertigen Reis etwas länger ausdampfen lassen, damit er nicht klitschig bleibt.</p>`,
+
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: 250 g Vollkornreis',
+        schritte: [
+          { label: 'Reismenge', formel: 'Trockengewicht', ergebnis: '250 g' },
+          { label: 'Verhältnis Vollkornreis', formel: 'Wasser : Reis', ergebnis: '1:2,5 (Faktor 2,5)' },
+          { label: 'Wassermenge (Herd)', formel: '250 g × 2,5 × 1,0', ergebnis: '625 ml' },
+          { label: 'Im Reiskocher', formel: '250 g × 2,5 × 0,85', ergebnis: '531 ml' },
+        ],
+        fazit: '250 g Vollkornreis brauchen auf dem Herd 625 ml Wasser — spürbar mehr als weißer Reis. Verantwortlich ist die Kleieschicht: Sie lässt Wasser nur langsam ins Korn und muss länger garen, damit der Reis nicht hart bleibt. Planen Sie 35–45 Minuten Garzeit ein und lassen Sie den Reis danach ausreichend ausdampfen. Wer es weicher mag, weicht Vollkornreis vorab 30–60 Minuten ein — dann verkürzt sich die Garzeit, und man rechnet mit etwas weniger Kochwasser.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Herd vs. Reiskocher (gleiche Menge, 150 g)',
+        kopf: ['Reissorte', 'Herd', 'Reiskocher (−15 %)'],
+        zeilen: [
+          ['Weißer Langkornreis', '300 ml', '255 ml'],
+          ['Basmati', '263 ml', '223 ml'],
+          ['Jasmin', '225 ml', '191 ml'],
+          ['Vollkorn-/Naturreis', '375 ml', '319 ml'],
+          ['Sushi-/Rundkornreis', '188 ml', '159 ml'],
+        ],
+        fussnote: 'Im geschlossenen Reiskocher oder Instant Pot verdunstet kaum Wasser, deshalb rund 15 % weniger als auf dem Herd (Faktor 0,85). Auf einem offenen Topf mit undichtem Deckel oder bei sehr langer Garzeit verdunstet dagegen mehr — dann darf es etwas mehr Wasser sein. Die Werte sind gerundet; kleine Abweichungen im ml-Bereich spielen für das Ergebnis keine Rolle.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Reis in Zahlen',
+        werte: [
+          { label: 'Portion Beilage', wert: '60–75 g', hinweis: 'Trockenreis pro Person; als Hauptgericht rund 100 g' },
+          { label: 'Quellfaktor', wert: '≈ 3×', hinweis: 'Trockenreis legt beim Garen etwa auf das Dreifache seines Gewichts zu' },
+          { label: 'Garzeit weißer Reis', wert: '12–15 Min', hinweis: 'bei kleinster Hitze mit geschlossenem Deckel' },
+          { label: 'Garzeit Vollkornreis', wert: '35–45 Min', hinweis: 'die Kleieschicht verlängert die Garzeit deutlich' },
+          { label: 'Ruhezeit nach dem Kochen', wert: '10 Min', hinweis: 'Deckel geschlossen lassen, danach mit der Gabel auflockern' },
+          { label: 'Spielraum nach Geschmack', wert: '± ¼', hinweis: 'Wasserverhältnis je nach gewünschter Konsistenz anpassen' },
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Die Absorptionsmethode Schritt für Schritt',
+        html: `<p>Die <strong>Absorptionsmethode</strong> ist die klassische Art, Reis auf dem Herd zu garen: Der Reis nimmt die abgemessene Wassermenge vollständig auf, es wird nichts abgegossen. So bleiben Stärke, Aroma und wasserlösliche Nährstoffe im Topf statt im Abfluss.</p><p>Der Ablauf ist immer gleich: Reis (bei Bedarf gewaschen) mit der berechneten Wassermenge und einer Prise Salz in den Topf geben, einmal kurz <strong>aufkochen</strong>, dann die <strong>Hitze auf die kleinste Stufe</strong> reduzieren und den <strong>Deckel schließen</strong>. Jetzt heißt es: nicht mehr umrühren und den Deckel geschlossen lassen, sonst entweicht der Dampf, der zum Garen gebraucht wird. Weißer Reis ist nach etwa 12–15 Minuten fertig, Vollkornreis nach 35–45. Ist das Wasser vollständig aufgenommen, den Topf vom Herd ziehen und den Reis ruhen lassen.</p><p>Die Alternative — Reis in reichlich sprudelndem Wasser wie Nudeln kochen und abgießen — funktioniert ebenfalls, spült aber Stärke und Nährstoffe weg. Für die berechneten Verhältnisse ist die Absorptionsmethode die richtige Grundlage. Eine Prise Salz ins Kochwasser würzt den Reis von innen; wer mag, gibt einen Teelöffel Öl oder Butter dazu, damit die Körner sich später besser trennen.</p>`,
+
+      },
+      {
+        typ: 'text',
+        titel: 'Was das Ergebnis noch verschiebt',
+        html: `<p>Die berechnete Wassermenge ist ein verlässlicher Startwert — ein paar Faktoren können den Bedarf aber leicht verschieben. <strong>Reisalter:</strong> Länger und trockener gelagerter Reis hat Restfeuchte verloren und nimmt etwas mehr Wasser auf als frische Ernte. <strong>Topfgröße und Deckel:</strong> In einem breiten, flachen Topf oder unter einem undichten Deckel verdunstet mehr Wasser — dann eher großzügiger dosieren.</p><p><strong>Höhe über dem Meer:</strong> In den Bergen siedet Wasser unter 100 °C, der Reis gart langsamer und braucht tendenziell mehr Flüssigkeit und Zeit. <strong>Einweichen:</strong> Wer Basmati oder Vollkornreis vorher 20–60 Minuten einweicht, verkürzt die Garzeit und sollte das Kochwasser leicht reduzieren, weil das Korn schon Feuchtigkeit gezogen hat. Und schließlich der <strong>Geschmack:</strong> Wer Reis lieber weicher oder körniger mag, justiert das Verhältnis um etwa ein Viertel nach oben oder unten. Für die Umrechnung von amerikanischen Cup-Angaben aus Rezepten hilft der <a href="/kochen/cups-umrechner">Cups-Umrechner</a>, und die passende Gardauer weiterer Beilagen liefert der <a href="/kochen/kochzeit-rechner">Kochzeit-Rechner</a>.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Perfekter Reis — die wichtigsten Schritte',
+        punkte: [
+          'Richtige Sorte wählen und das passende Wasserverhältnis nutzen (weiß 1:2, Basmati 1:1,75, Vollkorn 1:2,5)',
+          'Reismenge und Wasser genau abmessen statt schätzen — der Rechner liefert die Zahl',
+          'Basmati und weißen Langkornreis vor dem Kochen kurz waschen, Sushi-Reis und Risotto nicht',
+          'Einmal aufkochen, dann auf kleinste Hitze zurückschalten und den Deckel schließen',
+          'Während der Garzeit nicht umrühren und den Deckel geschlossen lassen',
+          'Nach dem Kochen 10 Minuten ausdampfen lassen und mit der Gabel auflockern',
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Sonderfälle: Risotto und Wildreis',
+        html: `<p><strong>Risotto</strong> folgt einer eigenen Logik und lässt sich nicht mit einer festen Wassermenge in einem Zug kochen. Der Arborio- oder Carnaroli-Reis wird zunächst kurz angeschwitzt, dann gibt man <strong>heiße Brühe kellenweise</strong> nach und nach zu und lässt sie unter ständigem Rühren einkochen, bevor die nächste Kelle folgt. Das ständige Rühren löst die Oberflächenstärke und macht das Gericht cremig. Der Gesamtbedarf liegt bei rund dem Dreifachen der Reismenge, aber Sie kochen nach Konsistenz, nicht nach abgemessener Menge — der Reis soll am Ende „al dente" mit cremiger Bindung sein.</p><p><strong>Wildreis</strong> ist streng genommen kein echter Reis, sondern das Korn eines Wassergrases. Er hat eine feste Schale, braucht mit 1:3 viel Wasser und mit 40–50 Minuten die längste Garzeit. Oft wird er mit Langkornreis gemischt — dann beide Komponenten getrennt garen oder eine Mischung mit abgestimmter Garzeit verwenden, damit weder das eine verkocht noch das andere hart bleibt. Sein nussiger Geschmack und der leichte Biss machen ihn zu einer beliebten Beilage für herbstliche Gerichte und Salate.</p>`,
+
+      },
+      {
+        typ: 'text',
+        titel: 'Verhältnisse als verlässliche Ausgangswerte',
+        html: `<p>Die sortentypischen Wasserverhältnisse in diesem Rechner sind erprobte <strong>Ausgangswerte</strong>, mit denen Reis zuverlässig gelingt — kein starres Gesetz. Wer seinen Topf, seinen Herd und seine Lieblingssorte kennt, findet mit ein, zwei Durchgängen die persönliche Feinabstimmung und justiert um etwa ein Viertel nach oben oder unten.</p><p>Als Merkhilfe bleibt: <strong>weiß 1:2</strong>, aromatischer Langkornreis (Basmati, Jasmin) etwas weniger, <strong>Vollkorn mehr</strong>, klebrige Rundkornsorten deutlich weniger, und im Reiskocher generell rund 15 % sparen. Wer regelmäßig dieselbe Sorte in derselben Menge kocht, kann sich die passende Wassermenge einmal notieren und muss danach nur noch abmessen — ganz ohne erneutes Nachschlagen. Mit diesen Richtwerten und der berechneten Menge landet der Reis weder matschig noch hart auf dem Teller — und die häufigste Küchenfrage ist ein für alle Mal beantwortet.</p>`,
+      },
+    ],
+    quellen: [
+      { titel: 'Reis-Wasser-Verhältnisse (Absorptionsmethode)', hinweis: 'Sortenabhängige Richtwerte: weiß 1:2, Basmati 1:1,75, Jasmin 1:1,5, Vollkorn 1:2,5, Sushi 1:1,25, Wildreis/Risotto 1:3. Herd; Reiskocher ~15 % weniger.' },
+      { titel: 'Stärkezusammensetzung & Wasseraufnahme', hinweis: 'Hoher Amylose-Anteil (Basmati) → weniger Wasser, körnig; hoher Amylopektin-Anteil (Sushi/Rundkorn) → klebriger. Werte sind Richtwerte, je nach Reisalter anpassen.' },
+    ],
+  },
 ];
