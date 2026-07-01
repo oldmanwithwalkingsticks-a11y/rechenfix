@@ -219,6 +219,7 @@ const RECHNER_MAP: Record<string, ComponentType> = {
   'zucker-umrechner': dyn(() => import('@/components/rechner/ZuckerUmrechner')),
   'gefrierdauer-rechner': dyn(() => import('@/components/rechner/GefrierdauerRechner')),
   'reis-wasser-rechner': dyn(() => import('@/components/rechner/ReisWasserRechner')),
+  'kaffee-wasser-rechner': dyn(() => import('@/components/rechner/KaffeeWasserRechner')),
   'internetgeschwindigkeit-rechner': dyn(() => import('@/components/rechner/InternetgeschwindigkeitRechner')),
   'download-rechner': dyn(() => import('@/components/rechner/DownloadRechner')),
   'akku-ladezeit-rechner': dyn(() => import('@/components/rechner/AkkuLadezeitRechner')),

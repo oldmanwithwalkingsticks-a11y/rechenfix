@@ -3021,4 +3021,178 @@ Bei der Absorptionsmethode auf dem Herd wird das gesamte Wasser aufgenommen — 
       { titel: 'Stärkezusammensetzung & Wasseraufnahme', hinweis: 'Hoher Amylose-Anteil (Basmati) → weniger Wasser, körnig; hoher Amylopektin-Anteil (Sushi/Rundkorn) → klebriger. Werte sind Richtwerte, je nach Reisalter anpassen.' },
     ],
   },
+  {
+    slug: 'kaffee-wasser-rechner',
+    letzteAktualisierung: '2026-07-01',
+    titel: 'Kaffee-Wasser-Rechner',
+    beschreibung: 'Wie viel Kaffeepulver auf wie viel Wasser? Methode wählen, Menge eingeben — die passende Dosierung nach dem Golden Ratio berechnen.',
+    kategorie: 'Kochen & Ernährung',
+    kategorieSlug: 'kochen',
+    metaTitle: 'Kaffee-Wasser-Rechner — Brew Ratio & Dosierung',
+    metaDescription: 'Wie viel Kaffeepulver pro Tasse? Methode (Handfilter, French Press, Espresso …) und Menge eingeben — die richtige Dosierung sofort berechnen. Kostenlos.',
+    keywords: ['kaffee wasser verhältnis', 'wie viel kaffeepulver', 'brew ratio', 'kaffee dosierung', 'golden ratio kaffee', 'kaffee wasser rechner', 'kaffeemenge pro tasse'],
+    icon: '☕',
+    formel: 'Ratio = Wasser : Kaffee (1 ml ≈ 1 g) | Kaffee (g) = Wasser (ml) ÷ Ratio · Wasser (ml) = Kaffee (g) × Ratio | Handfilter 1:16 · French Press 1:15 · Drip 1:17 · AeroPress 1:14 · Cold Brew 1:5 · Espresso 1:2 (Ausbeute)',
+    beispiel: 'Handfilter mit 500 ml Wasser: 500 ml ÷ 16 = 31,3 g Kaffee (Verhältnis 1:16).',
+    erklaerung: `**Wie viel Kaffee auf wie viel Wasser?**
+
+Der häufigste Grund für dünnen oder bitteren Kaffee ist nicht die Bohne, sondern die Dosierung. Der **Kaffee-Wasser-Rechner** löst das mit dem sogenannten **Brew Ratio** — dem Gewichtsverhältnis von Wasser zu Kaffee. Sie wählen die Methode und geben Wasser- oder Kaffeemenge vor, der Rechner liefert die passende Gegenmenge.
+
+**Das „Golden Ratio"**
+
+Als Faustbereich gilt nach dem SCA Golden Cup Standard ein Verhältnis von **1:15 bis 1:18** (ein Teil Kaffee auf 15–18 Teile Wasser). Der gängige Startpunkt für Filterkaffee ist 1:16 bis 1:17. Weil 1 ml Wasser rund 1 g wiegt, lässt sich beides bequem auf einer Küchenwaage abmessen.
+
+**Jede Methode hat ihr Verhältnis**
+
+Handfilter arbeiten mit etwa 1:16, French Press durch das Metallsieb etwas kräftiger mit 1:15, die Filtermaschine milder mit 1:17 und die AeroPress mit rund 1:14. Cold Brew wird als Konzentrat mit 1:5 angesetzt und danach verdünnt. Espresso ist ein Sonderfall: Das Verhältnis 1:2 bezieht sich auf die ausgegebene Espressomenge, nicht auf das Brühwasser.`,
+    faq: [
+      {
+        frage: 'Wie viel Kaffee pro Tasse?',
+        antwort: 'Für eine Tasse von rund 250 ml brauchen Sie beim Handfilter (1:16) etwa 15–16 g Kaffee. Bei French Press (1:15) sind es rund 17 g, bei der Filtermaschine (1:17) etwa 15 g. Ein gehäufter Esslöffel wiegt je nach Mahlgrad nur 4–7 g — deshalb ist eine Waage zuverlässiger als Löffelzählen.',
+      },
+      {
+        frage: 'Was ist das Golden Ratio beim Kaffee?',
+        antwort: 'Das Golden Ratio nach dem SCA-Standard beschreibt das ideale Verhältnis von Wasser zu Kaffee: rund 1:15 bis 1:18 nach Gewicht. Innerhalb dieser Spanne schmeckt Filterkaffee ausgewogen — weniger Kaffee (höheres Ratio) wird dünn und sauer, mehr Kaffee (niedrigeres Ratio) kräftig bis bitter. 1:16 bis 1:17 ist ein guter Startpunkt.',
+      },
+      {
+        frage: 'French Press oder Filter — welches Verhältnis?',
+        antwort: 'Die French Press ist eine Immersionsmethode: Kaffee und Wasser stehen in vollem Kontakt, und das Metallsieb lässt mehr Öle und feine Partikel durch. Deshalb wird sie meist etwas kräftiger mit 1:15 gebrüht. Der Papier-Handfilter hält Öle zurück und liefert einen klareren Kaffee — hier ist 1:16 der übliche Startwert.',
+      },
+      {
+        frage: 'Warum eine Waage statt Messlöffel?',
+        antwort: 'Ein Esslöffel Kaffee wiegt je nach Mahlgrad, Röstung und Häufung zwischen 4 und 7 g — eine Schwankung von bis zu 75 %. Damit lässt sich kein konstantes Ergebnis erzielen. Eine Küchenwaage mit 0,1-g-Auflösung ist das wirkungsvollste und günstigste Upgrade für gleichbleibend guten Kaffee.',
+      },
+      {
+        frage: 'Wie ändere ich die Stärke?',
+        antwort: 'Über das Ratio: Ein niedrigeres Verhältnis wie 1:14 bedeutet mehr Kaffee pro Wasser und damit einen stärkeren Aufguss, ein höheres wie 1:18 einen milderen. Ändern Sie immer nur eine Variable auf einmal und in kleinen Schritten (±1 g), damit Sie schmecken, was der Unterschied bewirkt. Auch der Mahlgrad beeinflusst die wahrgenommene Stärke.',
+      },
+      {
+        frage: 'Gilt das Ratio auch für Espresso und Cold Brew?',
+        antwort: 'Nur eingeschränkt. Cold Brew wird als Konzentrat mit rund 1:5 angesetzt und anschließend mit Wasser oder Milch verdünnt. Espresso rechnet man mit 1:2, wobei sich die Zahl auf die ausgegebene Espressomenge bezieht (18 g Kaffee → 36 g Espresso), nicht auf das durchgelaufene Brühwasser. Beide folgen also einer eigenen Logik.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Warum das Kaffee-Wasser-Verhältnis den Geschmack bestimmt',
+        html: `<p>Ob ein Kaffee schmeckt, entscheidet sich schon vor dem ersten Schluck — beim <strong>Verhältnis von Wasser zu Kaffee</strong>, dem sogenannten Brew Ratio. Es beschreibt, wie viele Gramm Wasser auf ein Gramm Kaffeepulver kommen. Zu wenig Kaffee, und der Aufguss wird dünn, wässrig und oft unangenehm sauer, weil zu viel Wasser die verfügbaren Aromastoffe „überextrahiert" wirken lässt. Zu viel Kaffee, und die Tasse wird schwer, bitter und überladen.</p><p>Das Schöne daran: Das Verhältnis ist die am leichtesten kontrollierbare Stellschraube in der Kaffeezubereitung. Anders als Mahlgrad, Wassertemperatur oder Aufgusstechnik lässt es sich exakt abmessen — vorausgesetzt, man wiegt Kaffee und Wasser, statt zu schätzen. Weil <strong>1 ml Wasser rund 1 g wiegt</strong>, funktioniert dieselbe Waage für beides. Der Kaffee-Wasser-Rechner nimmt Ihnen das Umrechnen ab und liefert für jede Methode den passenden Startwert, an dem Sie sich orientieren können.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: Handfilter mit 500 ml Wasser',
+        schritte: [
+          { label: 'Wassermenge', formel: 'Vorgabe', ergebnis: '500 ml' },
+          { label: 'Ratio Handfilter', formel: 'Wasser : Kaffee', ergebnis: '1:16' },
+          { label: 'Kaffeemenge', formel: '500 ml ÷ 16', ergebnis: '31,3 g' },
+          { label: 'Tassenbezug', formel: '500 ml ÷ 250 ml', ergebnis: '≈ 2 Tassen' },
+        ],
+        fazit: 'Für 500 ml Wasser im Handfilter wiegen Sie rund 31,3 g Kaffee ab — das ergibt etwa zwei große Tassen. Nach dem gleichen Prinzip lässt sich jede Menge hochrechnen: Für die doppelte Wassermenge (1000 ml, rund vier Tassen) verdoppeln Sie den Kaffee auf 62,5 g. Wer den Kaffee lieber vorgibt, dreht die Rechnung um: 30 g Kaffee × 16 ergeben 480 ml Wasser. So bleibt das Verhältnis immer gleich, egal für wie viele Personen Sie brühen. Praktisch ist, zuerst die gewünschte Tassenzahl festzulegen, daraus die Wassermenge abzuleiten (Tassen × 250 ml) und erst dann den Kaffee zu berechnen — dann passt die Kanne am Ende genau.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Brew Ratios je Zubereitungsmethode',
+        kopf: ['Methode', 'Ratio (Wasser:Kaffee)', 'Charakter'],
+        zeilen: [
+          ['Handfilter / Pour Over', '1:16', 'klar, aromatisch, ausgewogen'],
+          ['French Press', '1:15', 'kräftig, ölig, vollmundig'],
+          ['Filtermaschine (Drip)', '1:17', 'mild, alltagstauglich'],
+          ['AeroPress', '1:14', 'intensiv, vielseitig'],
+          ['Cold Brew (Konzentrat)', '1:5', 'Konzentrat, danach verdünnen'],
+          ['Espresso', '1:2', 'Verhältnis zur Ausbeute, nicht zum Wasser'],
+        ],
+        fussnote: 'Startwerte nach dem SCA Golden Cup Standard und gängiger Barista-Praxis; je nach Bohne, Röstung und Geschmack lässt sich um ±1 abweichen. Die Ratios für Handfilter, French Press, Drip und AeroPress beziehen sich auf das gesamte Brühwasser. Cold Brew ergibt bewusst ein Konzentrat, das man 1:1 bis 1:3 mit Wasser oder Milch streckt. Espresso folgt einer eigenen Logik: Die 1:2 meinen 18 g Kaffee zu 36 g fertigem Espresso in der Tasse. Wer methodenübergreifend vergleicht, sollte die Espresso-Zeile deshalb getrennt lesen und nicht mit den Filter-Ratios in einen Topf werfen. Ein niedrigeres Ratio ergibt generell einen kräftigeren, ein höheres einen milderen Aufguss — deshalb sind die Werte als Startpunkte gedacht, an denen Sie sich Tasse für Tasse Ihrem Lieblingsgeschmack annähern. Für dunklere Röstungen wählt man tendenziell ein etwas höheres Ratio, für helle, fruchtige Röstungen ein niedrigeres, weil sie mehr Substanz zum Extrahieren mitbringen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Das „Golden Ratio" nach dem SCA-Standard',
+        html: `<p>Der Begriff <strong>Golden Ratio</strong> geht auf den Golden Cup Standard der Specialty Coffee Association (SCA) zurück. Er beschreibt den Bereich, in dem Filterkaffee erfahrungsgemäß am ausgewogensten schmeckt: rund <strong>1:15 bis 1:18</strong> nach Gewicht. Innerhalb dieser Spanne stimmt das Gleichgewicht zwischen Säure, Süße und Bitterkeit — außerhalb kippt es in die eine oder andere Richtung.</p><p>In der Praxis hat sich <strong>1:16 bis 1:17</strong> als guter Startpunkt eingebürgert. Wer es kräftiger mag, wandert Richtung 1:15, wer es feiner und teereicher mag, Richtung 1:18. Wichtig ist, das Verhältnis als <em>Ausgangswert</em> zu verstehen, nicht als starre Vorschrift: Die ideale Zahl hängt von der Bohne, der Röstung, dem Mahlgrad und nicht zuletzt vom eigenen Geschmack ab. Der Rechner setzt die etablierten Startwerte für Sie ein, damit Sie nicht bei null anfangen müssen — der Feinschliff passiert danach in der Tasse.</p>`,
+      },
+      {
+        typ: 'vergleich',
+        titel: 'French Press vs. Handfilter',
+        spalteA: 'French Press',
+        spalteB: 'Handfilter',
+        zeilen: [
+          { kriterium: 'Prinzip', a: 'Immersion (Vollkontakt)', b: 'Durchlauf (Perkolation)' },
+          { kriterium: 'Filter', a: 'Metallsieb', b: 'Papierfilter' },
+          { kriterium: 'Öle & Körper', a: 'mehr Öle, vollmundig', b: 'weniger Öle, klarer' },
+          { kriterium: 'Ratio-Startwert', a: '1:15', b: '1:16' },
+          { kriterium: 'Mahlgrad', a: 'grob', b: 'mittel' },
+          { kriterium: 'Ergebnis', a: 'kräftig, mit Sediment', b: 'sauber, aromatisch' },
+        ],
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Mengen nach Tassenzahl (Handfilter, 1:16)',
+        kopf: ['Tassen', 'Wasser', 'Kaffee'],
+        zeilen: [
+          ['1 Tasse', '250 ml', '15,6 g'],
+          ['2 Tassen', '500 ml', '31,3 g'],
+          ['4 Tassen', '1.000 ml', '62,5 g'],
+          ['6 Tassen', '1.500 ml', '93,8 g'],
+        ],
+        fussnote: 'Gerechnet mit 1 Tasse ≈ 250 ml und dem Handfilter-Ratio 1:16. Für eine kleinere Tasse (200 ml) oder das French-Press-Ratio (1:15) verschieben sich die Kaffeemengen entsprechend — der Rechner oben passt die Werte automatisch an Ihre Vorgabe an. Als Merkhilfe: je 250 ml Wasser rund 15–16 g Kaffee. Wer regelmäßig dieselbe Kanne aufbrüht, notiert sich die passende Grammzahl einmal und muss danach nur noch abwiegen.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Kaffee in Zahlen',
+        werte: [
+          { label: 'Golden Ratio (SCA)', wert: '1:15–1:18', hinweis: 'ausgewogener Bereich für Filterkaffee nach Gewicht' },
+          { label: 'Startwert Handfilter', wert: '1:16', hinweis: 'gängiger Ausgangspunkt, je nach Bohne ±1' },
+          { label: 'Tasse (Richtwert)', wert: '≈ 250 ml', hinweis: 'entspricht rund 15–16 g Kaffee' },
+          { label: 'Esslöffel Kaffee', wert: '4–7 g', hinweis: 'je nach Mahlgrad und Häufung — daher Waage nutzen' },
+          { label: 'Brühtemperatur', wert: '92–96 °C', hinweis: 'nicht kochend, sonst wird der Kaffee bitter' },
+          { label: 'Espresso-Extraktion', wert: '25–30 Sek', hinweis: '18 g Dosis → rund 36 g Espresso bei 1:2' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: French Press, 30 g Kaffee vorgegeben',
+        schritte: [
+          { label: 'Kaffeemenge', formel: 'Vorgabe', ergebnis: '30 g' },
+          { label: 'Ratio French Press', formel: 'Wasser : Kaffee', ergebnis: '1:15' },
+          { label: 'Wassermenge', formel: '30 g × 15', ergebnis: '450 ml' },
+          { label: 'Tassenbezug', formel: '450 ml ÷ 250 ml', ergebnis: '≈ 1,8 Tassen' },
+        ],
+        fazit: 'Wenn Sie 30 g Kaffee in der French Press vorgeben, gießen Sie 450 ml Wasser auf — das kräftigere 1:15-Verhältnis passt zur Immersionsmethode und ihrem vollmundigen Charakter. Aufgießen mit rund 93–96 °C heißem Wasser, kurz umrühren, den Deckel auflegen und nach vier Minuten den Stempel langsam herunterdrücken. Das Metallsieb lässt Öle und feine Partikel durch, was den Körper des Kaffees betont, aber am Tassenboden ein leichtes Sediment hinterlässt. Wer es klarer mag, greift zum Handfilter mit Papier; wer den vollen, runden Körper schätzt, bleibt bei der Presse. Die letzten paar Milliliter am Kannenboden lässt man am besten stehen, damit kein Kaffeesatz in die Tasse gerät.',
+      },
+      {
+        typ: 'text',
+        titel: 'Sonderfälle: Cold Brew und Espresso',
+        html: `<p><strong>Cold Brew</strong> folgt einer eigenen Logik. Der Kaffee zieht 12–24 Stunden in kaltem Wasser, wodurch er säurearm und mild wird. Angesetzt wird er meist als <strong>Konzentrat mit rund 1:5</strong> — also deutlich mehr Kaffee als bei Heißverfahren. Dieses Konzentrat wird vor dem Trinken 1:1 bis 1:3 mit Wasser, Milch oder Eis verdünnt. Wer es direkt trinkfertig ansetzen will, arbeitet mit einem schwächeren Verhältnis um 1:10 bis 1:15.</p><p><strong>Espresso</strong> ist der zweite Sonderfall. Hier meint das Verhältnis 1:2 nicht das Brühwasser, sondern das <strong>Verhältnis von Kaffeedosis zur ausgegebenen Espressomenge</strong> (Brew Ratio): 18 g gemahlener Kaffee ergeben rund 36 g fertigen Espresso in der Tasse, üblicherweise in 25–30 Sekunden Extraktion. Ein „ristretto" wird enger gezogen (etwa 1:1,5), ein „lungo" weiter (1:3). Weil unter hohem Druck (rund 9 bar) extrahiert wird, sind diese Zahlen nicht mit den Filter-Ratios vergleichbar. Für einen Cappuccino oder Latte bleibt die Espresso-Basis gleich; verändert wird nur die Menge an aufgeschäumter Milch, nicht das Kaffee-Wasser-Verhältnis.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'tipp',
+        titel: 'Mit der Waage statt mit dem Löffel',
+        text: 'Das wirkungsvollste und zugleich günstigste Upgrade für besseren Kaffee ist eine Küchenwaage mit 0,1-g-Auflösung. Der Grund: Ein Esslöffel Kaffee wiegt je nach Mahlgrad, Röstung und Häufung zwischen 4 und 7 g — das ist eine Schwankung von bis zu 75 %, mit der sich kein gleichbleibendes Ergebnis erzielen lässt. Wer stattdessen Kaffee und Wasser abwiegt, trifft das gewünschte Verhältnis jedes Mal exakt und kann gezielt nachjustieren. Viele stellen die Waage direkt unter den Handfilter oder die Kanne und wiegen das aufgegossene Wasser gleich mit ein. So wird aus dem Zufallsprodukt „irgendwie Kaffee" ein reproduzierbares Rezept, das morgen genauso schmeckt wie heute.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Besserer Kaffee — Schritt für Schritt',
+        punkte: [
+          'Kaffee und Wasser abwiegen statt mit dem Löffel schätzen',
+          'Passendes Ratio zur Methode wählen (Handfilter 1:16, French Press 1:15)',
+          'Bohnen möglichst frisch mahlen, Mahlgrad zur Methode passend (grob für French Press, mittel für Filter)',
+          'Wasser mit rund 92–96 °C aufgießen, nicht kochend',
+          'Gleichmäßig und in Runden aufgießen, den Kaffee gut durchnässen',
+          'Nach Geschmack in kleinen Schritten (±1 g) anpassen und immer nur eine Variable pro Test ändern',
+        ],
+      },
+      {
+        typ: 'text',
+        titel: 'Stärke gezielt anpassen',
+        html: `<p>Die berechnete Menge ist ein Startwert — die persönliche Lieblingsstärke finden Sie über das Ratio. Ein <strong>niedrigeres Verhältnis</strong> wie 1:14 bedeutet mehr Kaffee pro Wasser und einen kräftigeren, intensiveren Aufguss. Ein <strong>höheres Verhältnis</strong> wie 1:18 ergibt einen milderen, teeartigen Kaffee. Wichtig ist, in kleinen Schritten zu arbeiten und pro Durchgang nur eine Variable zu ändern, damit Sie schmecken, was der Unterschied bewirkt.</p><p>Ein praktischer Sonderfall ist <strong>Eiskaffee</strong>: Weil das schmelzende Eis den Kaffee zusätzlich verdünnt, brüht man ihn bewusst stärker — etwa mit 1:12 bis 1:14 — oder gießt direkt über Eis (Japanese Iced Coffee), sodass das geschmolzene Eis von vornherein Teil der Wassermenge ist. Auch die wahrgenommene Stärke hängt nicht allein am Ratio: Ein feinerer Mahlgrad extrahiert mehr und lässt denselben Aufguss kräftiger wirken. Für das Umrechnen von Rezeptmengen und amerikanischen Cup-Angaben helfen der <a href="/kochen/cups-umrechner">Cups-Umrechner</a> und der <a href="/kochen/rezept-umrechner">Rezept-Umrechner</a>.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Das Ratio als verlässlicher Startpunkt',
+        html: `<p>Das Kaffee-Wasser-Verhältnis ist der beste Ausgangspunkt für konstant guten Kaffee — aber nicht das Ende der Geschichte. Es sorgt dafür, dass die <strong>Grundmenge</strong> stimmt; den letzten Feinschliff holen Sie über <strong>Mahlgrad</strong>, <strong>Wassertemperatur</strong> und <strong>Aufgusstechnik</strong> heraus. Ist der Kaffee trotz korrektem Ratio sauer und dünn, war die Extraktion zu kurz oder der Mahlgrad zu grob; ist er bitter und trocken, wurde überextrahiert — dann gröber mahlen oder die Kontaktzeit verkürzen.</p><p>Als Merkregel bleibt: <strong>1:16 als Allrounder</strong>, French Press etwas kräftiger, die Filtermaschine etwas milder, und im Zweifel lieber ein Gramm mehr Kaffee als zu wenig. Mit einer Waage, dem passenden Ratio und ein paar bewussten Testtassen wird aus Alltagskaffee ein verlässlich gutes Getränk — und die häufigste Frage der Kaffeeküche ist beantwortet. Notieren Sie sich das Rezept, das Ihnen am besten schmeckt, mit Grammzahl, Mahlgrad und Ziehzeit; so lässt es sich jederzeit reproduzieren, statt jeden Morgen neu zu raten.</p>`,
+      },
+    ],
+    quellen: [
+      { titel: 'SCA Golden Cup Standard (Kaffee-Wasser-Verhältnis)', hinweis: 'Golden Ratio 1:15 bis 1:18 nach Gewicht; methodenabhängig Handfilter 1:16, French Press 1:15, Drip 1:17. Startwerte, nach Geschmack anpassen.' },
+      { titel: 'Methodenspezifische Brew Ratios', hinweis: 'AeroPress ~1:14, Cold-Brew-Konzentrat ~1:5 (verdünnen), Espresso 1:2 (Verhältnis zur ausgegebenen Menge). 1 ml Wasser ≈ 1 g.' },
+    ],
+  },
 ];
