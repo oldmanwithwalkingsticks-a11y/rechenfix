@@ -1352,4 +1352,167 @@ Die Umrechnung gilt für mittlere Laufgeschwindigkeiten. Bei sehr steilen Steigu
       },
     ],
   },
+  {
+    slug: 'ftp-rechner',
+    letzteAktualisierung: '2026-07-01',
+    titel: 'FTP-Rechner (Rad-Trainingszonen)',
+    beschreibung: 'FTP aus einem Leistungstest schätzen und daraus die sieben Coggan-Trainingszonen sowie das Leistungsgewicht (W/kg) ableiten.',
+    kategorie: 'Sport & Fitness',
+    kategorieSlug: 'sport',
+    metaTitle: 'FTP-Rechner — Rad-Trainingszonen',
+    metaDescription: 'FTP aus einem 20-Minuten- oder Ramp-Test berechnen und daraus die sieben Coggan-Watt-Zonen und das Leistungsgewicht (W/kg) ableiten.',
+    keywords: ['ftp rechner', 'ftp berechnen 20 minuten', 'coggan zonen', 'watt trainingszonen rad', 'funktionelle schwellenleistung', 'ftp test', 'w/kg rechner rad', 'leistungszonen radfahren'],
+    icon: '🚴',
+    formel: 'FTP = Testleistung × Protokoll-Faktor (20-min 0,95 · 8-min 0,90 · Ramp 0,75) | W/kg = FTP ÷ Gewicht',
+    beispiel: '20-Minuten-Test mit 260 W: 260 × 0,95 = FTP 247 W, Schwellenzone Z4 222–259 W, bei 75 kg 3,29 W/kg.',
+    erklaerung: `**FTP-Rechner — vom Leistungstest zu den Watt-Trainingszonen**
+
+FTP steht für Functional Threshold Power, die funktionelle Schwellenleistung. Sie beschreibt die höchste Leistung in Watt, die ein Radfahrer etwa eine Stunde lang konstant halten kann, und ist der zentrale Anker für strukturiertes Wattraining. Aus der FTP leiten sich die sieben Coggan-Trainingszonen ab — jede Trainingseinheit wird so zu einem konkreten Watt-Ziel statt einem vagen Gefühl.
+
+**Die Berechnung**
+
+Da ein echter einstündiger Volllasttest sehr fordernd ist, nutzt man kürzere Tests und rechnet sie um. Ein 20-Minuten-Test wird mit 0,95 multipliziert, weil die 20-Minuten-Leistung rund fünf Prozent über der echten Stundenleistung liegt. Ein 260-Watt-Schnitt im 20-Minuten-Test ergibt also eine FTP von 260 × 0,95 = 247 Watt. Andere Protokolle haben eigene Faktoren: der 8-Minuten-Test 0,90, der Ramp-Test (höchste 1-Minuten-Leistung) 0,75.
+
+**W/kg — der faire Vergleich**
+
+Das Leistungsgewicht (Watt pro Kilogramm) macht Fahrer unterschiedlicher Statur vergleichbar, besonders am Berg. FTP 247 W bei 75 kg ergeben 3,29 W/kg — ein gutes Freizeitniveau. An Steigungen zählt W/kg mehr als die reine Wattzahl.
+
+**Richtwerte, keine Laborsicherheit**
+
+Die Faktoren und Zonengrenzen sind bewährte Konventionen nach Allen und Coggan, aber individuelle Abweichungen sind normal. Nutzen Sie die Werte zur Trainingssteuerung, nicht als exakte physiologische Messung.`,
+    faq: [
+      {
+        frage: 'Was ist FTP?',
+        antwort: 'FTP (Functional Threshold Power) ist die höchste Leistung in Watt, die man rund eine Stunde konstant treten kann. Sie liegt nahe der Laktatschwelle und ist die wichtigste Kennzahl im Radsport-Wattraining. Aus der FTP werden die Trainingszonen abgeleitet, sodass sich jede Einheit gezielt steuern lässt — etwa „20 Minuten in der Schwellenzone" als klares Watt-Ziel.',
+      },
+      {
+        frage: 'Wie teste ich meine FTP?',
+        antwort: 'Am gängigsten ist der 20-Minuten-Test: nach gutem Aufwärmen 20 Minuten maximal gleichmäßig fahren, den Durchschnitt mit 0,95 multiplizieren. Alternativen sind der 8-Minuten-Test (× 0,90) oder der Ramp-Test, bei dem die Leistung stufenweise bis zur Erschöpfung steigt und die höchste 1-Minuten-Leistung mit 0,75 multipliziert wird. Wichtig ist ein kalibrierter Leistungsmesser oder Smarttrainer.',
+      },
+      {
+        frage: 'Warum wird die 20-Minuten-Leistung mit 0,95 multipliziert?',
+        antwort: 'Weil man 20 Minuten lang etwas mehr Leistung halten kann als eine volle Stunde. Die 20-Minuten-Durchschnittsleistung liegt rund fünf Prozent über der echten FTP. Der Faktor 0,95 korrigiert das nach unten und schätzt so die Stundenleistung. Es ist eine Näherung — je nach Fahrertyp liegt der reale Wert zwischen etwa 92 und 97 Prozent.',
+      },
+      {
+        frage: 'Was ist ein guter W/kg-Wert?',
+        antwort: 'Als grobe Richtwerte: Einsteiger liegen bei 1,5–2,5 W/kg, gute Freizeitfahrer bei 2,5–3,5, ambitionierte Fahrer bei 3,5–4,5 und Rennfahrer über 4,5 W/kg. Profi-Bergfahrer erreichen kurzzeitig 6,0–6,5 W/kg. Am Berg zählt das Leistungsgewicht mehr als die absolute Wattzahl, in der Ebene und im Sprint dagegen die reinen Watt.',
+      },
+      {
+        frage: 'Wie oft sollte ich die FTP neu testen?',
+        antwort: 'Etwa alle vier bis acht Wochen oder nach einem Trainingsblock. Bei Einsteigern steigt die FTP anfangs schnell, oft 5 bis 15 Prozent pro Block, sodass die Zonen sonst zu niedrig werden. Bei Fortgeschrittenen sind die Sprünge kleiner. Testen Sie ausgeruht und unter möglichst gleichen Bedingungen, damit die Werte vergleichbar bleiben.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Was FTP ist',
+        html: `<p><strong>FTP</strong> steht für Functional Threshold Power — die funktionelle Schwellenleistung. Sie beschreibt die höchste Leistung in <strong>Watt</strong>, die man etwa eine Stunde lang konstant treten kann, und liegt physiologisch nahe der <strong>Laktatschwelle</strong>: jener Intensität, oberhalb derer der Körper mehr Laktat produziert als er abbauen kann. Genau dort verläuft die Grenze zwischen langfristig haltbarer und schnell ermüdender Belastung.</p><p>Der praktische Wert der FTP liegt darin, dass sie das <strong>Wattraining</strong> steuerbar macht. Statt „nach Gefühl" zu fahren, bekommt man aus der FTP sieben klar abgegrenzte Trainingszonen, jede mit einem konkreten Watt-Bereich und einem Zweck. Eine Vorgabe wie „30 Minuten in Zone 2" wird so zu einer präzisen Wattzahl, die man am Radcomputer direkt ablesen und einhalten kann. Das macht das Training reproduzierbar und den Fortschritt messbar — steigt die FTP, verschieben sich alle Zonen nach oben. Dieser Rechner schätzt die FTP aus einem Testergebnis und gibt die Zonen sowie das Leistungsgewicht in Watt pro Kilogramm aus.</p>`,
+      },
+      {
+        typ: 'statistik',
+        titel: 'Leistungsgewicht (W/kg) — grobe Niveaus',
+        werte: [
+          { label: 'Einsteiger', wert: '1,5–2,5 W/kg', hinweis: 'Trainingsbeginn' },
+          { label: 'Gute Freizeit', wert: '2,5–3,5 W/kg', hinweis: 'regelmäßiges Training' },
+          { label: 'Ambitioniert', wert: '3,5–4,5 W/kg', hinweis: 'wettkampforientiert' },
+          { label: 'Rennfahrer', wert: 'über 4,5 W/kg', hinweis: 'Lizenz- und Elitebereich' },
+          { label: 'Profi-Bergfahrer', wert: '6,0–6,5 W/kg', hinweis: 'kurzzeitig, Weltklasse' },
+        ],
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '20-Minuten-Test mit 260 Watt',
+        schritte: [
+          { label: 'FTP aus dem 20-Minuten-Test', formel: '260 W × 0,95', ergebnis: '247 W' },
+          { label: 'Leistungsgewicht', formel: '247 W ÷ 75 kg', ergebnis: '3,29 W/kg' },
+        ],
+        fazit: 'Ein 20-Minuten-Test mit 260 Watt Durchschnittsleistung ergibt eine FTP von 247 Watt — bei 75 kg Körpergewicht entspricht das 3,29 W/kg, also einem guten Freizeitniveau. Der Faktor 0,95 zieht die rund fünf Prozent ab, die man über 20 Minuten mehr leisten kann als über eine volle Stunde. Aus dieser FTP von 247 Watt ergeben sich anschließend alle sieben Trainingszonen. Die Schwellenzone Z4, in der man die FTP direkt trainiert, reicht dabei von 222 bis 259 Watt. Wer sein Körpergewicht mit einträgt, sieht zusätzlich das Leistungsgewicht — die für Bergfahrten aussagekräftigste Kennzahl, weil dort jedes Kilogramm mit hochgetragen werden muss.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Die sieben Coggan-Zonen bei FTP 247 W',
+        kopf: ['Zone', 'Watt', 'Zweck'],
+        zeilen: [
+          ['Z1 Aktive Erholung', '0–136 W', 'sehr locker, Regeneration'],
+          ['Z2 Grundlagenausdauer', '136–185 W', 'lange Fahrten, Fettstoffwechsel'],
+          ['Z3 Tempo', '185–222 W', 'zügiges Dauertempo'],
+          ['Z4 Schwelle (FTP)', '222–259 W', 'an der Laktatschwelle'],
+          ['Z5 VO2max', '259–296 W', 'harte Intervalle, 3–5 Minuten'],
+          ['Z6 Anaerob', '296–371 W', 'kurze, intensive Anstrengungen'],
+          ['Z7 Neuromuskulär', '371–494 W', 'Sprints, maximale Leistung'],
+        ],
+        fussnote: 'Die sieben Trainingszonen nach Coggan für eine FTP von 247 Watt (Richtwerte). Jede Zone dient einem anderen Trainingsziel: Die unteren Zonen bauen die Grundlagenausdauer auf, die Schwellenzone Z4 verschiebt die FTP nach oben, die oberen Zonen trainieren die maximale Sauerstoffaufnahme, die anaerobe Kapazität und die Sprintkraft. Ein sinnvoller Trainingsplan mischt viel Grundlage mit gezielten harten Einheiten. Ändert sich die FTP nach einem neuen Test, verschieben sich alle sieben Watt-Bereiche automatisch mit — deshalb lohnt es sich, den Wert aktuell zu halten. Gerade die Grenze zwischen Z2 und Z3 ist entscheidend: Wer seine langen Grundlagenfahrten unbemerkt in Z3 fährt, ermüdet stärker, ohne den gewünschten Fettstoffwechsel-Reiz voll zu nutzen.',
+      },
+      {
+        typ: 'text',
+        titel: 'Warum der 0,95-Faktor',
+        html: `<p>Ein echter FTP-Test wäre, eine volle Stunde an der Grenze zu fahren — das ist extrem fordernd und schwer sauber umzusetzen. Deshalb hat sich der <strong>20-Minuten-Test</strong> als praktischer Feldtest durchgesetzt. Über 20 Minuten kann man aber eine <strong>höhere Leistung</strong> halten als über eine ganze Stunde, weil die anaeroben Reserven länger reichen.</p><p>Diese Differenz beträgt erfahrungsgemäß rund <strong>fünf Prozent</strong>. Der Faktor 0,95 korrigiert die 20-Minuten-Leistung deshalb nach unten und schätzt so die Leistung, die man tatsächlich eine Stunde durchhalten könnte. Aus 260 Watt über 20 Minuten werden damit 247 Watt FTP. Wichtig ist, dass der 20-Minuten-Abschnitt wirklich am Limit und gleichmäßig gefahren wird — startet man zu schnell und bricht am Ende ein, fällt der Durchschnitt und damit die geschätzte FTP zu niedrig aus. Viele Testprotokolle schalten vor die 20 Minuten deshalb einen kurzen harten Anritt, um die anaeroben Reserven vorab teilweise zu leeren und die Schätzung realistischer zu machen.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Die Testprotokolle im Überblick',
+        html: `<p>Für die FTP-Bestimmung gibt es mehrere gängige Protokolle, die sich in Dauer und Umrechnungsfaktor unterscheiden. Der <strong>20-Minuten-Test</strong> ist der Klassiker: gut belegt, aber er verlangt diszipliniertes Pacing. Der <strong>8-Minuten-Test</strong> ist kürzer und für Einsteiger angenehmer, wird aber mit dem niedrigeren Faktor 0,90 gerechnet, weil man über acht Minuten noch mehr über der Stundenleistung liegt.</p><p>Der <strong>Ramp-Test</strong> ist am kürzesten und am wenigsten von der Pacing-Erfahrung abhängig: Die Leistung wird in Stufen erhöht, bis man nicht mehr kann; aus der höchsten gehaltenen 1-Minuten-Leistung schätzt man die FTP mit dem Faktor 0,75. Er ist bequem, überschätzt aber bei ausgeprägten Sprintertypen die FTP, weil deren kurze Spitzenleistung sehr hoch ist. Wer seine FTP bereits aus einem Stundentest kennt, gibt sie direkt mit dem Faktor 1,00 ein. Welches Protokoll das richtige ist, hängt von Erfahrung und Fahrertyp ab — für die meisten ist der 20-Minuten-Test der beste Kompromiss aus Genauigkeit und Aufwand.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Testprotokolle und ihre Faktoren im Vergleich',
+        kopf: ['Testprotokoll', 'Faktor', 'Merkmal'],
+        zeilen: [
+          ['20-Minuten-Test', '× 0,95', 'gängigster Feldtest, gutes Pacing nötig'],
+          ['8-Minuten-Test', '× 0,90', 'kürzer, angenehmer für Einsteiger'],
+          ['Ramp-Test', '× 0,75', 'stufenweise bis zur Erschöpfung, kurz'],
+          ['60-Minuten / bekannt', '× 1,00', 'direkter FTP-Wert, sehr fordernd'],
+        ],
+        fussnote: 'Je kürzer und intensiver der Test, desto niedriger der Umrechnungsfaktor — weil man über kurze Zeit deutlich mehr leisten kann als über eine Stunde. Der 20-Minuten-Test bietet für die meisten das beste Verhältnis aus Genauigkeit und Machbarkeit. Der Ramp-Test ist am bequemsten, taugt aber bei Sprintertypen weniger. Entscheidend ist, immer dasselbe Protokoll zu nutzen, damit die FTP-Werte über die Zeit vergleichbar bleiben. Ein Wechsel des Testverfahrens kann allein durch den anderen Faktor eine scheinbare Formveränderung vortäuschen, die es gar nicht gibt. Wer einmal den 20-Minuten-Test gewählt hat, sollte ihn also beibehalten und höchstens ergänzend gelegentlich einen Ramp-Test zur groben Kontrolle fahren.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Zweites Beispiel: Ramp-Test mit 300 Watt Peak',
+        schritte: [
+          { label: 'FTP aus dem Ramp-Test', formel: '300 W (höchste 1-Min-Leistung) × 0,75', ergebnis: '225 W' },
+          { label: 'Schwellenzone Z4', formel: '90–105 % von 225 W', ergebnis: '203–236 W' },
+        ],
+        fazit: 'Beim Ramp-Test zählt die höchste 1-Minuten-Leistung vor der Erschöpfung. Ein Peak von 300 Watt ergibt mit dem Faktor 0,75 eine FTP von 225 Watt und damit eine Schwellenzone Z4 von 203 bis 236 Watt. Der Ramp-Test ist besonders praktisch, weil er kein perfektes Pacing verlangt — man tritt einfach, bis nichts mehr geht. Sein Nachteil: Sprinter mit hoher Kurzzeitleistung erhalten tendenziell einen zu hohen FTP-Wert, weil ihre 1-Minuten-Spitze nicht ihre Stundenleistung widerspiegelt. Für sie ist der 20-Minuten-Test die verlässlichere Wahl. Ausdauertypen mit flacher Leistungskurve erhalten im Ramp-Test dagegen oft realistische Werte, sodass sich das kürzere Verfahren für sie gut eignet.',
+      },
+      {
+        typ: 'text',
+        titel: 'Watt oder Herzfrequenz — was ist besser?',
+        html: `<p>Watt und Herzfrequenz messen zwei verschiedene Dinge: Die <strong>Leistung</strong> in Watt ist das, was man in die Pedale gibt, die <strong>Herzfrequenz</strong> die Reaktion des Körpers darauf. Der entscheidende Vorteil der Watt-Messung ist ihre <strong>Unmittelbarkeit</strong>: Sie zeigt die Anstrengung in Echtzeit an, ohne Verzögerung und unabhängig von Wetter, Tagesform oder Koffein.</p><p>Die Herzfrequenz hinkt dagegen 30 bis 60 Sekunden hinterher und <strong>driftet</strong> bei langen Belastungen nach oben, auch wenn die Leistung gleich bleibt (Hitze, Ermüdung, Flüssigkeitsverlust). Für kurze, harte <strong>Intervalle</strong> ist die Watt-Steuerung deshalb deutlich präziser — der Puls käme erst hoch, wenn das Intervall fast vorbei ist. Trotzdem ergänzen sich beide sinnvoll: Watt sagt, wie hart man tritt, die Herzfrequenz, wie der Körper das verkraftet. Ein ungewöhnlich hoher Puls bei normaler Leistung kann auf Ermüdung oder beginnende Krankheit hinweisen. Wer beides nutzen will, findet die passenden Pulsbereiche im <a href="/sport/herzfrequenz-zonen-rechner">Herzfrequenz-Zonen-Rechner</a> — die Watt-Zonen von hier lassen sich gut damit kombinieren.</p>`,
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Den FTP-Test richtig durchführen',
+        punkte: [
+          'Ausgeruht antreten — zwei bis drei lockere Tage vor dem Test einplanen.',
+          'Gründlich aufwärmen, inklusive einiger kurzer harter Anrisse.',
+          'Gleichmäßig pacen und nicht zu schnell starten — sonst bricht die Leistung ein.',
+          'Einen kalibrierten Leistungsmesser oder Smarttrainer verwenden.',
+          'Immer dasselbe Protokoll nutzen, damit die Werte vergleichbar bleiben.',
+          'Alle vier bis acht Wochen neu testen, damit die Zonen aktuell bleiben.',
+          'Indoor-Werte können 3 bis 10 Prozent niedriger liegen — Bedingungen konstant halten.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Ein Schätzmodell — keine Laborsicherheit',
+        text: 'Die FTP-Berechnung beruht auf bewährten Konventionen nach Allen und Coggan, ist aber ein Schätzmodell. Der 0,95-Faktor für den 20-Minuten-Test ist eine Näherung — je nach Fahrertyp und Ausdauerprofil liegt der reale Wert zwischen rund 92 und 97 Prozent. Der Ramp-Test überschätzt die FTP bei ausgeprägten Sprintern, weil deren kurze Spitzenleistung sehr hoch ist. Auch die Zonengrenzen sind Richtwerte; die individuelle Physiologie kann davon abweichen, und manche Trainingssysteme nutzen leicht andere Prozentwerte. Für die Trainingssteuerung sind die Werte trotzdem sehr nützlich, weil es weniger auf die exakte Zahl als auf die konsequente Anwendung ankommt. Eine echte Bestimmung der Laktatschwelle im Labor ist genauer, aber für die allermeisten Freizeit- und Hobbyfahrer weder nötig noch praktikabel. Wichtig ist, die eigene FTP mit demselben Protokoll regelmäßig zu überprüfen und die Zonen entsprechend anzupassen.',
+      },
+      {
+        typ: 'text',
+        titel: 'FTP ist eine lebendige Zahl',
+        html: `<p>Die FTP ist keine feste Größe, sondern verändert sich mit dem Training. Bei <strong>Einsteigern</strong> steigt sie in den ersten Monaten oft um 5 bis 15 Prozent pro Trainingsblock, weil der Körper schnell auf die neuen Reize reagiert. Bei erfahrenen Fahrern werden die Sprünge kleiner, aber auch sie verbessern sich über eine Saison spürbar. Deshalb sollte man die FTP <strong>regelmäßig neu bestimmen</strong> und die Zonen anpassen — sonst trainiert man mit zu niedrigen Vorgaben und bremst den Fortschritt.</p><p>Das <strong>Leistungsgewicht</strong> in Watt pro Kilogramm bleibt dabei der fairste Vergleich zwischen Fahrern. Ein leichter Fahrer mit 250 Watt FTP kann am Berg schneller sein als ein schwerer mit 300 Watt, weil er weniger Masse bergauf bewegen muss. In der Ebene und im Sprint zählen dagegen die absoluten Watt. Wer seinen Kalorienverbrauch bei den Ausfahrten abschätzen will, findet im <a href="/sport/kalorienverbrauch-rechner">Kalorienverbrauch-Rechner</a> ein passendes Werkzeug. Am Ende ist die FTP vor allem eins: ein ehrlicher, wiederholbarer Maßstab, an dem sich Fortschritt ablesen und Training gezielt planen lässt.</p>`,
+      },
+    ],
+    quellen: [
+      {
+        titel: 'Allen & Coggan — Training and Racing with a Power Meter',
+        hinweis: 'Definiert FTP und das 7-Zonen-Modell; 20-min-Test × 0,95 als gängige Feldtest-Konvention.',
+      },
+      {
+        titel: 'Coggan-Power-Zonen (7-Zonen-Modell)',
+        hinweis: 'Z1 <55 %, Z2 55–75 %, Z3 75–90 %, Z4 90–105 %, Z5 105–120 %, Z6 120–150 %, Z7 >150 % der FTP. Richtwerte, individuelle Abweichung möglich.',
+      },
+    ],
+  },
 ];
