@@ -2469,4 +2469,169 @@ Wichtig: Die genaue prozentuale Aufteilung ist weniger entscheidend, als oft ang
       },
     ],
   },
+  {
+    slug: 'trinkmenge-rechner',
+    letzteAktualisierung: '2026-07-01',
+    titel: 'Trinkmenge-Rechner (Flüssigkeitsbedarf)',
+    beschreibung: 'Täglichen Flüssigkeitsbedarf schätzen: aus Körpergewicht, Sportdauer und Klima — als grobe Orientierung, besonders an Trainingstagen.',
+    kategorie: 'Sport & Fitness',
+    kategorieSlug: 'sport',
+    metaTitle: 'Trinkmenge-Rechner — Flüssigkeitsbedarf',
+    metaDescription: 'Trinkmenge berechnen: den täglichen Flüssigkeitsbedarf aus Gewicht, Sportdauer und Klima schätzen — als grobe Orientierung für gesunde Erwachsene.',
+    keywords: ['trinkmenge berechnen', 'wasserbedarf sport', 'wie viel wasser trinken', 'flüssigkeitsbedarf', 'wasser pro tag', 'trinkmenge sport', 'wasserbedarf berechnen', 'wie viel trinken'],
+    icon: '💧',
+    formel: 'Basis = Gewicht × 33 (♂) bzw. 31 (♀) ml/kg | + Sport (min ÷ 30 × 350 ml) | × Klima-Faktor (1,0–1,2)',
+    beispiel: '75 kg, 45 min Sport, normales Klima: 2.475 ml Basis + 525 ml Sport = 3,00 L pro Tag.',
+    erklaerung: `**Trinkmenge-Rechner — wie viel Flüssigkeit am Tag?**
+
+Wie viel man trinken sollte, hängt von mehreren Faktoren ab: Körpergewicht, körperlicher Aktivität und Klima. Dieser Rechner schätzt den täglichen Flüssigkeitsbedarf aus diesen Angaben und liefert eine grobe Orientierung — besonders nützlich, um an Trainingstagen und bei Hitze nicht zu wenig zu trinken. Es handelt sich um einen Richtwert für gesunde Erwachsene, nicht um eine medizinische Vorgabe.
+
+**Die Berechnung**
+
+Als Basis gelten rund 30 bis 35 ml pro Kilogramm Körpergewicht und Tag; der Rechner nutzt 33 ml/kg für Männer und 31 ml/kg für Frauen. Für Sport kommen je 30 Minuten moderates Training etwa 350 ml hinzu, um den Schweißverlust auszugleichen. Bei Hitze wird die Basis mit einem Klima-Faktor (bis 1,2) erhöht. Ein 75 kg schwerer Mann mit 45 Minuten Sport bei normalem Klima kommt so auf rund 3,0 Liter.
+
+**Auch zu viel ist ungünstig**
+
+Wichtig: Mehr ist nicht automatisch besser. Sehr große Wassermengen in kurzer Zeit können den Natriumhaushalt gefährlich stören (Hyponatriämie). Der beste natürliche Indikator bleibt das Durstgefühl, ergänzt durch die Urinfarbe — hell bedeutet meist ausreichend versorgt.
+
+**Nur eine Schätzung**
+
+Der individuelle Bedarf schwankt stark. Etwa ein Fünftel der Flüssigkeit nimmt man ohnehin über die Nahrung auf. Bei Nieren- oder Herzerkrankungen gilt oft eine ärztlich verordnete Trinkmenge — dann ist der ärztliche Rat maßgeblich, nicht dieser Rechner.`,
+    faq: [
+      {
+        frage: 'Wie viel Wasser sollte ich pro Tag trinken?',
+        antwort: 'Als grobe Orientierung gelten rund 30 bis 35 ml pro Kilogramm Körpergewicht am Tag — bei 70 kg also etwa 2,1 bis 2,5 Liter. Ein Teil davon kommt über die Nahrung. An Sport- und Hitzetagen steigt der Bedarf. Die verbreitete „8-Gläser-Regel" ist kein belastbarer wissenschaftlicher Standard; der tatsächliche Bedarf ist individuell.',
+      },
+      {
+        frage: 'Wie viel mehr sollte ich beim Sport trinken?',
+        antwort: 'Als Faustregel etwa 350 ml zusätzlich je 30 Minuten moderates Training, um den Schweißverlust auszugleichen. Bei intensiver Belastung oder Hitze kann die Schweißrate 1 bis 2 Liter pro Stunde erreichen. Am besten trinkt man vor, während und nach dem Sport in kleinen Mengen und orientiert sich an Durst und Urinfarbe.',
+      },
+      {
+        frage: 'Kann man zu viel trinken?',
+        antwort: 'Ja. Werden in kurzer Zeit sehr große Wassermengen getrunken, kann der Natriumspiegel im Blut gefährlich absinken — das nennt man Hyponatriämie und tritt vor allem bei langen Ausdauereinheiten auf. Deshalb ist „viel hilft viel" falsch. Bei langen Belastungen helfen Elektrolyte, und generell sollte man sich am Durst orientieren statt auf Vorrat zu trinken.',
+      },
+      {
+        frage: 'Zählen Kaffee und Tee zur Flüssigkeitsbilanz?',
+        antwort: 'Ja. Kaffee und Tee tragen zur Flüssigkeitszufuhr bei — die früher angenommene stark entwässernde Wirkung von Koffein ist bei üblichen Mengen gering. Auch wasserreiche Lebensmittel wie Obst, Gemüse und Suppen zählen mit; rund 20 Prozent der Flüssigkeit nimmt man üblicherweise über die Nahrung auf. Wasser und ungesüßte Getränke bleiben aber die beste Basis.',
+      },
+      {
+        frage: 'Gilt der Wert auch bei Erkrankungen?',
+        antwort: 'Nicht unbedingt. Bei Nieren- oder Herzerkrankungen wird die Trinkmenge oft ärztlich begrenzt — dann gilt die ärztliche Vorgabe, nicht der Rechnerwert. Auch in Schwangerschaft und Stillzeit, bei Fieber, Erbrechen oder Durchfall verändert sich der Bedarf. In all diesen Fällen sollte die Flüssigkeitsmenge mit ärztlichem Rat abgestimmt werden.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Warum ausreichendes Trinken zählt',
+        html: `<p>Der menschliche Körper besteht zu über der Hälfte aus Wasser, und eine ausreichende Flüssigkeitszufuhr ist die Grundlage für viele Funktionen: die <strong>Thermoregulation</strong> über das Schwitzen, den Transport von Nährstoffen, die Nierenfunktion und die geistige <strong>Konzentration</strong>. Schon ein leichter Flüssigkeitsmangel kann die körperliche Leistungsfähigkeit und die Aufmerksamkeit spürbar mindern.</p><p>Die oft zitierte Regel von „acht Gläsern am Tag" ist dabei <strong>kein belastbarer wissenschaftlicher Standard</strong>, sondern eine grobe Merkhilfe. Der tatsächliche Bedarf hängt von Körpergewicht, Aktivität, Klima und weiteren Faktoren ab und ist von Mensch zu Mensch verschieden. Dieser Rechner liefert eine an die eigenen Angaben angepasste Orientierung, die realistischer ist als eine pauschale Literzahl. Wer viel Sport treibt, findet mit dem <a href="/sport/kalorienverbrauch-rechner">Kalorienverbrauch-Rechner</a> eine passende Ergänzung, um die Belastung einzuordnen. Wichtig bleibt: Der berechnete Wert ist eine grobe Schätzung für gesunde Erwachsene und keine medizinische Vorgabe.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: '75 kg, 45 min Sport, normales Klima',
+        schritte: [
+          { label: 'Basis-Bedarf', formel: '75 kg × 33 ml/kg', ergebnis: '2.475 ml' },
+          { label: 'Sport-Bonus', formel: '(45 ÷ 30) × 350 ml', ergebnis: '525 ml' },
+          { label: 'Gesamt', formel: '(2.475 × 1,0 + 525) ÷ 1.000', ergebnis: '3,00 L' },
+        ],
+        fazit: 'Ein 75 kg schwerer Mann, der 45 Minuten moderat Sport treibt, hat bei normalem Klima einen geschätzten Bedarf von rund 3,0 Litern pro Tag. Er setzt sich aus dem Basis-Bedarf (2.475 ml) und dem Sport-Bonus (525 ml) zusammen. Der Sport-Bonus gleicht den Schweißverlust aus, der bei 45 Minuten moderater Belastung anfällt. An einem trainingsfreien Tag läge der Bedarf entsprechend niedriger, bei Hitze oder längerem Training höher. Etwa ein Fünftel dieser Menge nimmt man ohnehin über die Nahrung auf, sodass die reine Trinkmenge etwas niedriger liegt. Praktisch heißt das: Statt starr auf drei Liter zu achten, verteilt man die Flüssigkeit über den Tag und trinkt rund um das Training bewusst etwas mehr. Der Wert ist eine Orientierung, keine Pflichtmenge, die exakt erreicht werden muss.',
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Basis-Bedarf nach Gewicht (ohne Sport, normales Klima)',
+        kopf: ['Gewicht', 'Basis-Bedarf'],
+        zeilen: [
+          ['50 kg', '1,65 L'],
+          ['60 kg', '1,98 L'],
+          ['70 kg', '2,31 L'],
+          ['80 kg', '2,64 L'],
+          ['90 kg', '2,97 L'],
+          ['100 kg', '3,30 L'],
+        ],
+        fussnote: 'Basis-Flüssigkeitsbedarf mit 33 ml pro Kilogramm (Männer; für Frauen etwas weniger, rund 31 ml/kg). Diese Werte gelten ohne zusätzlichen Sport und bei gemäßigtem Klima. Rund 20 Prozent der Flüssigkeit nimmt man üblicherweise über die Nahrung auf, etwa über Obst, Gemüse und Suppen — die reine Trinkmenge liegt also etwas niedriger als der Gesamtbedarf. Die Werte sind Orientierung, kein starres Soll.',
+      },
+      {
+        typ: 'text',
+        titel: 'Woher die 30 bis 35 ml pro Kilogramm kommen',
+        html: `<p>Der Basiswert von etwa <strong>30 bis 35 ml pro Kilogramm</strong> Körpergewicht und Tag stammt aus Empfehlungen von Fachgesellschaften wie dem Institute of Medicine (IOM) und der Europäischen Behörde für Lebensmittelsicherheit (EFSA). Er bildet ab, wie viel Flüssigkeit der Körper eines gesunden Erwachsenen in gemäßigtem Klima ungefähr benötigt, um den täglichen Verlust über Urin, Haut, Atmung und Verdauung auszugleichen.</p><p>Der Wert ist bewusst als <strong>Spanne</strong> formuliert, weil der Bedarf individuell schwankt. Größere und muskulösere Menschen haben tendenziell einen höheren Bedarf, ebenso Menschen mit hohem Stoffwechsel oder viel Bewegung im Alltag. Dieser Rechner verwendet 33 ml/kg für Männer und 31 ml/kg für Frauen als mittlere Werte innerhalb der Spanne. Das ist eine sinnvolle Näherung, aber keine exakte persönliche Vorgabe — der eigene Bedarf kann darüber oder darunter liegen. Wichtiger als das genaue Treffen einer Zahl ist, regelmäßig und ausreichend zu trinken und dabei auf die Signale des Körpers zu achten.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Sporttag bei Hitze: 80 kg, 60 min, sehr heiß',
+        schritte: [
+          { label: 'Basis × Klima-Faktor', formel: '80 × 33 × 1,2', ergebnis: '3.168 ml' },
+          { label: 'Sport-Bonus', formel: '(60 ÷ 30) × 350 ml', ergebnis: '700 ml' },
+          { label: 'Gesamt', formel: '(3.168 + 700) ÷ 1.000', ergebnis: '≈ 3,87 L' },
+        ],
+        fazit: 'An einem heißen Tag mit einer Stunde Training steigt der Bedarf deutlich. Für einen 80 kg schweren Mann ergibt sich mit dem Klima-Faktor 1,2 und dem Sport-Bonus ein geschätzter Bedarf von rund 3,87 Litern. Der Klima-Faktor erhöht die Basis um 20 Prozent, weil bei Hitze und hoher Luftfeuchte mehr geschwitzt wird. Solche Werte zeigen, wie stark Bedingungen den Bedarf verschieben — an einem kühlen, ruhigen Tag läge derselbe Mensch deutlich niedriger. Bei sehr großer Hitze oder langen Einheiten sollte man zusätzlich auf Elektrolyte achten. Interessant ist der Vergleich zum ersten Beispiel: Derselbe Sportumfang, aber ein schwererer Körper und heißes Klima erhöhen den Bedarf von 3,0 auf fast 3,9 Liter — knapp ein Liter Unterschied allein durch Gewicht und Bedingungen. Das unterstreicht, wie stark äußere Faktoren wirken und warum eine pauschale Zahl für alle wenig sinnvoll ist.',
+      },
+      {
+        typ: 'statistik',
+        titel: 'Flüssigkeitsverlust und Aufnahme',
+        werte: [
+          { label: 'Schwitzen (moderat)', wert: '0,5–1 l/h', hinweis: 'je nach Intensität' },
+          { label: 'Schwitzen (intensiv/Hitze)', wert: '1–2 l/h', hinweis: 'starke Belastung' },
+          { label: 'Ersatz-Faustregel', wert: '~350 ml/30 min', hinweis: 'ACSM-Richtwert' },
+          { label: 'Aus der Nahrung', wert: '~20 %', hinweis: 'Obst, Gemüse, Suppen' },
+        ],
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Was den Flüssigkeitsbedarf erhöht',
+        kopf: ['Faktor', 'Grober Zusatzbedarf', 'Hinweis'],
+        zeilen: [
+          ['30 min moderates Training', '~350 ml', 'Schweißverlust ausgleichen'],
+          ['Hitze / hohe Luftfeuchte', '+10–20 %', 'stärkeres Schwitzen'],
+          ['Große Höhe', 'leicht erhöht', 'trockene Luft, schnellere Atmung'],
+          ['Fieber, Erbrechen, Durchfall', 'deutlich erhöht', 'ärztlich abklären'],
+          ['Stillzeit', 'erhöht', 'ärztliche Empfehlung beachten'],
+        ],
+        fussnote: 'Verschiedene Umstände erhöhen den Bedarf über den Basiswert hinaus. Sport und Hitze sind die häufigsten Faktoren und im Rechner berücksichtigt. Bei Fieber, Erbrechen oder Durchfall verliert der Körper zusätzlich Flüssigkeit und Elektrolyte — hier ist der Bedarf schwer pauschal zu schätzen und ärztlicher Rat sinnvoll. Auch in der Stillzeit steigt der Bedarf. Die genannten Zusatzmengen sind grobe Anhaltspunkte, keine exakten Vorgaben. Zu beachten ist außerdem, dass sich mehrere Faktoren addieren können: Ein langes Training an einem heißen Tag in der Höhe erhöht den Bedarf gleich dreifach. In solchen Situationen ist es besonders wichtig, vorausschauend und regelmäßig zu trinken, statt erst auf den Durst zu warten.',
+      },
+      {
+        typ: 'text',
+        titel: 'Über den Tag verteilen und auf den Körper hören',
+        html: `<p>Für eine gute Versorgung ist nicht nur die Gesamtmenge wichtig, sondern auch die <strong>Verteilung</strong>: Es ist sinnvoller, über den Tag hinweg regelmäßig kleine Mengen zu trinken, als die gesamte Flüssigkeit auf einmal aufzunehmen. Der Körper kann eine gleichmäßige Zufuhr besser verwerten, und man vermeidet das Gefühl, ständig „nachtrinken" zu müssen.</p><p>Zwei einfache Indikatoren helfen bei der Einschätzung. Das <strong>Durstgefühl</strong> ist ein natürlicher Hinweis — allerdings ein eher später, denn wenn man deutlichen Durst verspürt, ist bereits ein leichtes Defizit entstanden; bei Belastung und Hitze lohnt es sich daher, vorausschauend zu trinken. Der zweite Indikator ist die <strong>Urinfarbe</strong>: hellgelb deutet in der Regel auf eine ausreichende Versorgung hin, ein dunkler Ton kann ein Zeichen für zu wenig Flüssigkeit sein (bestimmte Lebensmittel und Vitaminpräparate färben den Urin allerdings ebenfalls). Diese Signale sind im Alltag oft verlässlicher als jede berechnete Zahl und ein guter Weg, ein gesundes Trinkverhalten zu entwickeln, ohne ständig auf eine Vorgabe zu schauen.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'warnung',
+        titel: 'Zu viel Wasser kann ebenfalls schaden',
+        text: 'Ein weit verbreiteter Irrtum ist, dass mehr Trinken immer besser sei. Das stimmt nicht: Werden in kurzer Zeit sehr große Wassermengen getrunken, kann der Natriumspiegel im Blut gefährlich absinken. Diese sogenannte Hyponatriämie („Wasservergiftung") kann von Kopfschmerzen und Übelkeit bis zu ernsten neurologischen Symptomen reichen und tritt besonders bei sehr langen Ausdauereinheiten auf, wenn viel getrunken, aber wenig Natrium ersetzt wird. Bei langen oder intensiven Belastungen sind deshalb Elektrolyte sinnvoll, nicht nur reines Wasser. Grundsätzlich gilt: Sich am Durst orientieren und nicht literweise auf Vorrat trinken. Besonders wichtig ist außerdem: Bei Nieren- oder Herzerkrankungen ist die Flüssigkeitsmenge häufig ärztlich begrenzt, weil der Körper überschüssiges Wasser nicht gut ausscheiden kann. In diesen Fällen gilt ausschließlich die ärztlich verordnete Trinkmenge — der hier berechnete Orientierungswert trifft dann nicht zu und sollte nicht angewendet werden.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Gut hydriert durch den Tag',
+        punkte: [
+          'Über den Tag verteilt regelmäßig kleine Mengen trinken.',
+          'Vor, während und nach dem Sport an die Flüssigkeit denken.',
+          'Bei langen oder intensiven Einheiten Elektrolyte ergänzen.',
+          'Die Urinfarbe als einfachen Check nutzen (hell ist meist ein gutes Zeichen).',
+          'Bei Hitze, Höhe oder Krankheit den erhöhten Bedarf beachten.',
+          'Auf das eigene Durstgefühl hören und nicht auf Vorrat übertreiben.',
+          'Bei Vorerkrankungen die ärztlich empfohlene Trinkmenge einhalten.',
+        ],
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Ein Schätzwert für gesunde Erwachsene',
+        text: 'Die berechnete Trinkmenge ist ein grober Orientierungswert für gesunde Erwachsene und kein medizinischer Befund. Der individuelle Bedarf schwankt stark je nach Körperzusammensetzung, Stoffwechsel, Ernährung, Umgebung und Aktivität. Etwa 20 Prozent der Flüssigkeit nimmt man ohnehin über feste Nahrung auf, weshalb die reine Trinkmenge unter dem Gesamtbedarf liegt. In besonderen Situationen gelten andere Regeln: In Schwangerschaft und Stillzeit, bei Fieber, Erbrechen, Durchfall oder starkem Schwitzen sowie bei chronischen Erkrankungen sollte die Flüssigkeitsmenge mit ärztlichem Rat abgestimmt werden. Insbesondere bei Nieren- und Herzerkrankungen kann eine ärztlich verordnete Beschränkung gelten, die Vorrang vor jedem Rechnerwert hat. Nutzen Sie diesen Rechner als Anhaltspunkt, um ein Gefühl für Ihren Bedarf zu bekommen, und achten Sie im Alltag vor allem auf die natürlichen Signale Ihres Körpers. Bei Unsicherheit oder gesundheitlichen Fragen ist die ärztliche Beratung die richtige Anlaufstelle.',
+      },
+      {
+        typ: 'text',
+        titel: 'Trinkmenge als Orientierung, nicht als starre Zahl',
+        html: `<p>Am Ende ist der berechnete Wert vor allem eine <strong>Orientierungshilfe</strong>, die ein Gefühl dafür vermittelt, in welcher Größenordnung der eigene Flüssigkeitsbedarf liegt. Er hilft besonders dabei, an Trainings- und Hitzetagen nicht zu wenig zu trinken — ein häufigeres Problem als zu viel zu trinken. Wer sich grob an dem Wert orientiert und dabei auf Durst und Urinfarbe achtet, ist in der Regel gut versorgt.</p><p>Wichtig bleibt die richtige Perspektive: Die Trinkmenge ist keine <strong>starre Vorgabe</strong>, die es exakt zu erfüllen gilt. Der Körper reguliert seinen Wasserhaushalt bei gesunden Menschen sehr zuverlässig selbst, und die Bedingungen ändern sich täglich. Ein aktiver Sommertag verlangt mehr als ein ruhiger Wintertag im beheizten Büro. Statt einer Zahl hinterherzujagen, geht es um ein gutes, gleichmäßiges Trinkverhalten über den Tag. Wer seine Bewegung zusätzlich in Distanzen umrechnen möchte, findet im <a href="/sport/schritte-kilometer-rechner">Schritte-in-Kilometer-Rechner</a> ein passendes Werkzeug. Insgesamt gilt: Ein achtsamer Umgang mit dem eigenen Körper und seinen Signalen ist wertvoller als jede feste Literzahl. Wer gesund ist, muss das Trinken nicht zur Wissenschaft machen — eine griffbereite Wasserflasche und ein Blick auf die Urinfarbe genügen im Alltag völlig.</p>`,
+      },
+    ],
+    quellen: [
+      {
+        titel: 'Flüssigkeitsbedarf (IOM/EFSA; Jéquier & Constant 2010)',
+        hinweis: 'Basisbedarf ca. 30–35 ml pro kg Körpergewicht/Tag für gesunde Erwachsene in gemäßigtem Klima; individuell variabel.',
+      },
+      {
+        titel: 'ACSM — Exercise and Fluid Replacement',
+        hinweis: 'Zusätzlicher Bedarf durch Schweiß ca. 350 ml je 30 min moderates Training; Schweißrate 0,5–2 l/h. Zu hohe Zufuhr kann zu Hyponatriämie führen.',
+      },
+    ],
+  },
 ];

@@ -245,6 +245,7 @@ const RECHNER_MAP: Record<string, ComponentType> = {
   'grundumsatz-rechner': dyn(() => import('@/components/rechner/GrundumsatzRechner')),
   'kalorienbedarf-rechner': dyn(() => import('@/components/rechner/KalorienbedarfRechner')),
   'makronaehrstoffe-rechner': dyn(() => import('@/components/rechner/MakronaehrstoffeRechner')),
+  'trinkmenge-rechner': dyn(() => import('@/components/rechner/TrinkmengeRechner')),
 };
 
 export default function RechnerLoader({ slug }: { slug: string }) {
