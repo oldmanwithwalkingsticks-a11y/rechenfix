@@ -36,24 +36,41 @@ const OUT_DIR = path.join(PROJECT_ROOT, 'public', 'social-videos');
 const ffmpegPath = ffmpegPathImport;
 
 /**
- * Verifizierte ffmpeg-Argumentkette (W18.3b — an echtem Bild getestet,
+ * Verifizierte ffmpeg-Filterkette (W18.3b-2 — an echtem Bild getestet,
  * NICHT ändern): erzeugt TikTok-kompatibles MP4
- * (h264 / 1080×1920 / yuv420p / 30fps / 6s, stumm).
+ * (h264 / 1080×1920 / yuv420p / 30fps / 6s, stumm) MIT Bewegung —
+ * Ken-Burns-Zoom (1.0→1.10 über volle 6s) + pulsierendes Glow-Blinken
+ * der Headline-Zone (~6× langsam per Sinus-Alpha).
  *
- * scale+pad ist ein Sicherheitsnetz für nicht-exakt-1080×1920-Inputs;
- * bei korrektem 9:16-PNG ein No-Op.
+ * Escaping: Kommas im geq-alpha-Ausdruck müssen ffmpeg-intern escaped
+ * werden (`\\,` im JS-String = literales `\,` an ffmpeg). Da execFile
+ * mit Array-Args läuft (kein Shell), ist NUR das ffmpeg-Escaping nötig,
+ * KEIN Shell-Escaping. Der filter_complex-String ist EIN Array-Element.
  */
 function buildArgs(inputPng, outputMp4) {
+  const filter = [
+    // Ken-Burns-Zoom 1.0→1.10 gleichmäßig über 180 Frames (6s):
+    "[0:v]scale=2160:3840,",
+    "zoompan=z='min(zoom+0.00056,1.10)':d=180:",
+    "x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1080x1920:fps=30,",
+    "format=rgba,split[bg][src];",
+    // Glow-Layer: Headline-Zone (y=185, Höhe=300) duplizieren, blurren,
+    // aufhellen, Alpha per Sinus pulsieren (~6 Blinks über 6s):
+    "[src]crop=1080:300:0:185,gblur=sigma=14,eq=brightness=0.34:saturation=1.5,format=rgba,",
+    "geq=r='r(X,Y)':g='g(X,Y)':b='b(X,Y)':a='255*pow(max(0\\,sin(T*5.71))\\,0.9)'[glow];",
+    // Glow über den gezoomten Hintergrund legen:
+    "[bg][glow]overlay=x=0:y=185:eval=frame,format=yuv420p[out]",
+  ].join('');
+
   return [
     '-y',
     '-loop', '1',
     '-i', inputPng,
+    '-filter_complex', filter,
+    '-map', '[out]',
     '-c:v', 'libx264',
     '-t', '6',
     '-pix_fmt', 'yuv420p',
-    '-vf',
-    'scale=1080:1920:force_original_aspect_ratio=decrease,' +
-      'pad=1080:1920:(ow-iw)/2:(oh-ih)/2:color=black,format=yuv420p',
     '-r', '30',
     '-movflags', '+faststart',
     outputMp4,
