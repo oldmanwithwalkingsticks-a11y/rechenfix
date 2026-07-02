@@ -59,6 +59,12 @@ CANVAS = 1080
 CANVAS_V_W = 1080
 CANVAS_V_H = 1920
 
+# TikTok-Vertical-Farbschema (W18.3a-2) — fest, kategorie-unabhängig.
+# Maximaler Feed-Kontrast: dunkler Grund + Neongelb-Akzent + weißer Text.
+TIKTOK_BG     = (13, 13, 15)    # #0D0D0F  fast-schwarz
+TIKTOK_ACCENT = (223, 255, 0)   # #DFFF00  neongelb
+TIKTOK_TEXT   = (255, 255, 255) # weiß
+
 
 # ============================================================
 # Cross-Platform-Font-Resolution
@@ -393,11 +399,13 @@ def render_post_vertical(spec, fonts, bolt_png_path):
     """
     font_bold_path, _font_reg_path, font_emoji_path = fonts
 
-    img = Image.new("RGBA", (CANVAS_V_W, CANVAS_V_H), spec["bg"] + (255,))
+    # W18.3a-2 — festes TikTok-Schema statt Kategorie-Pastell (spec["bg"]/
+    # spec["accent"]). render_post (square, IG/FB) bleibt davon unberührt.
+    img = Image.new("RGBA", (CANVAS_V_W, CANVAS_V_H), TIKTOK_BG + (255,))
     draw = ImageDraw.Draw(img)
 
-    accent = spec["accent"]
-    dark = SLATE_900
+    accent = TIKTOK_ACCENT
+    text_color = TIKTOK_TEXT
 
     def center_x(w):
         return (CANVAS_V_W - w) // 2
@@ -452,10 +460,10 @@ def render_post_vertical(spec, fonts, bolt_png_path):
                 lw, lh = measure(draw, line, f_line)
                 if lw <= CANVAS_V_W - 100:
                     break
-            draw.text((center_x(lw), title_y), line, font=f_line, fill=dark + (255,))
+            draw.text((center_x(lw), title_y), line, font=f_line, fill=text_color + (255,))
             title_y += lh + 18
             continue
-        draw.text((center_x(lw), title_y), line, font=font_line, fill=dark + (255,))
+        draw.text((center_x(lw), title_y), line, font=font_line, fill=text_color + (255,))
         title_y += lh + 18
 
     # ---------- Zone 3 — CTA / FOOTER (unten) ----------
@@ -475,7 +483,7 @@ def render_post_vertical(spec, fonts, bolt_png_path):
     group_w = bw + gap + uw
     group_x = (CANVAS_V_W - group_w) // 2
     img.alpha_composite(bolt, dest=(group_x, footer_y - 8))
-    draw.text((group_x + bw + gap, footer_y), url, font=font_url, fill=dark + (255,))
+    draw.text((group_x + bw + gap, footer_y), url, font=font_url, fill=text_color + (255,))
 
     return img
 
