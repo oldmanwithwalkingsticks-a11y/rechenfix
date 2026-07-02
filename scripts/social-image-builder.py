@@ -55,6 +55,10 @@ SLATE_900 = (15, 23, 42)
 WHITE = (255, 255, 255)
 CANVAS = 1080
 
+# W18.3a — Hochformat (TikTok 9:16). Eigene Konstanten, CANVAS bleibt Quadrat.
+CANVAS_V_W = 1080
+CANVAS_V_H = 1920
+
 
 # ============================================================
 # Cross-Platform-Font-Resolution
@@ -372,6 +376,111 @@ def render_post(spec, fonts, bolt_png_path):
 
 
 # ============================================================
+# W18.3a — Vertical-Renderer (1080×1920, TikTok 9:16)
+# ============================================================
+def render_post_vertical(spec, fonts, bolt_png_path):
+    """Rendert einen Slug als 1080×1920-Hochformat für TikTok.
+
+    Drei vertikale Zonen (Vollbild-Logik: der Hook oben muss in den
+    ersten Sekunden greifen):
+      Zone 1 (oben)   — Eyebrow + großer Highlight-Hook
+      Zone 2 (Mitte)  — Emoji-Motiv + Titel
+      Zone 3 (unten)  — CTA "Jetzt berechnen →" + Marken-Footer
+
+    Nutzt ausschließlich das vorhandene spec-Dict (build_spec bleibt
+    unangetastet) sowie die geteilten Helfer measure/render_emoji/
+    render_bolt_mini.
+    """
+    font_bold_path, _font_reg_path, font_emoji_path = fonts
+
+    img = Image.new("RGBA", (CANVAS_V_W, CANVAS_V_H), spec["bg"] + (255,))
+    draw = ImageDraw.Draw(img)
+
+    accent = spec["accent"]
+    dark = SLATE_900
+
+    def center_x(w):
+        return (CANVAS_V_W - w) // 2
+
+    has_highlight = bool(spec["highlight"])
+
+    # ---------- Zone 1 — HOOK (oben) ----------
+    # Eyebrow gesperrt, accent, Bold 46 (shrinkt falls zu breit)
+    font_eyebrow = ImageFont.truetype(font_bold_path, 46)
+    eyebrow = spec["eyebrow"].upper()
+    spaced = "  ".join(list(eyebrow))
+    ebw, ebh = measure(draw, spaced, font_eyebrow)
+    if ebw > CANVAS_V_W - 100:
+        for size in [40, 36, 32, 28]:
+            font_eyebrow = ImageFont.truetype(font_bold_path, size)
+            ebw, ebh = measure(draw, spaced, font_eyebrow)
+            if ebw <= CANVAS_V_W - 100:
+                break
+    eyebrow_y = 180
+    draw.text((center_x(ebw), eyebrow_y), spaced, font=font_eyebrow, fill=accent + (255,))
+
+    # Highlight = größter Text im Bild (der eigentliche Hook).
+    # Auto-Shrink absteigend, bis Breite ≤ CANVAS_V_W − 120.
+    if has_highlight:
+        hl_y = eyebrow_y + ebh + 80
+        font_hl = ImageFont.truetype(font_bold_path, 130)
+        hw, hh = measure(draw, spec["highlight"], font_hl)
+        for try_size in [130, 120, 110, 100, 92, 84, 76]:
+            font_hl = ImageFont.truetype(font_bold_path, try_size)
+            hw, hh = measure(draw, spec["highlight"], font_hl)
+            if hw <= CANVAS_V_W - 120:
+                break
+        draw.text((center_x(hw), hl_y), spec["highlight"], font=font_hl, fill=accent + (255,))
+
+    # ---------- Zone 2 — MOTIV (Mitte) ----------
+    # Ohne Highlight rückt das Motiv nach oben, damit der Titel selbst
+    # zum Hook wird und keine leere Fläche im oberen Drittel bleibt.
+    emoji_target_h = 280
+    emoji_tile = render_emoji(spec["emoji"], emoji_target_h, font_emoji_path)
+    etw, eth = emoji_tile.size
+    emoji_y = 780 if has_highlight else 520
+    img.alpha_composite(emoji_tile, dest=(center_x(etw), emoji_y))
+
+    title_y = emoji_y + eth + 60
+    font_line = ImageFont.truetype(font_bold_path, 72)
+    for line in spec["lines"]:
+        lw, lh = measure(draw, line, font_line)
+        if lw > CANVAS_V_W - 100:
+            f_line = font_line
+            for size in [64, 58, 52, 46]:
+                f_line = ImageFont.truetype(font_bold_path, size)
+                lw, lh = measure(draw, line, f_line)
+                if lw <= CANVAS_V_W - 100:
+                    break
+            draw.text((center_x(lw), title_y), line, font=f_line, fill=dark + (255,))
+            title_y += lh + 18
+            continue
+        draw.text((center_x(lw), title_y), line, font=font_line, fill=dark + (255,))
+        title_y += lh + 18
+
+    # ---------- Zone 3 — CTA / FOOTER (unten) ----------
+    cta_text = "Jetzt berechnen →"
+    font_cta = ImageFont.truetype(font_bold_path, 52)
+    cw, _ch = measure(draw, cta_text, font_cta)
+    cta_y = 1600
+    draw.text((center_x(cw), cta_y), cta_text, font=font_cta, fill=accent + (255,))
+
+    footer_y = 1720
+    font_url = ImageFont.truetype(font_bold_path, 42)
+    bolt = render_bolt_mini(54, bolt_png_path)
+    bw = bolt.size[0]
+    gap = 14
+    url = "rechenfix.de"
+    uw, _uh = measure(draw, url, font_url)
+    group_w = bw + gap + uw
+    group_x = (CANVAS_V_W - group_w) // 2
+    img.alpha_composite(bolt, dest=(group_x, footer_y - 8))
+    draw.text((group_x + bw + gap, footer_y), url, font=font_url, fill=dark + (255,))
+
+    return img
+
+
+# ============================================================
 # Drift-Check (vor Build)
 # ============================================================
 def verify_repo_state(queue: dict, farben: dict, snapshot: dict) -> bool:
@@ -415,6 +524,12 @@ def main():
         "--limit",
         type=int,
         help="Nur die ersten N Slugs der Queue (für Quick-Tests)",
+    )
+    parser.add_argument(
+        "--vertical",
+        action="store_true",
+        help="1080×1920-Hochformat (TikTok 9:16) → public/social-videos-src/. "
+        "Ohne dieses Flag: 1080×1080-Default → public/social-posts/.",
     )
     args = parser.parse_args()
 
@@ -477,7 +592,14 @@ def main():
         if args.limit:
             targets = targets[: args.limit]
 
-    out_dir = project_root / "public" / "social-posts"
+    # W18.3a — Format-Weiche. Default (kein --vertical) unverändert:
+    # 1080×1080 → public/social-posts/. Vertical: 1080×1920 → social-videos-src/.
+    if args.vertical:
+        out_dir = project_root / "public" / "social-videos-src"
+        renderer = render_post_vertical
+    else:
+        out_dir = project_root / "public" / "social-posts"
+        renderer = render_post
     out_dir.mkdir(parents=True, exist_ok=True)
 
     ok = 0
@@ -494,7 +616,7 @@ def main():
             failed.append(slug)
             continue
         try:
-            img = render_post(spec, fonts, bolt_png)
+            img = renderer(spec, fonts, bolt_png)
             img.save(out_path, "PNG", optimize=True)
             print(f"  ✓ {slug:35} → {out_path.relative_to(project_root)}")
             ok += 1
