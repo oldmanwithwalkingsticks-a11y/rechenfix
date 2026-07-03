@@ -99,9 +99,19 @@ function CalcButton({
   );
 }
 
-export default async function SocialBioHubPage() {
-  const currentSlug = await getCurrentBioSlug();
+export default async function SocialBioHubPage({
+  searchParams,
+}: {
+  searchParams: { ref?: string };
+}) {
+  // TikTok-Bio-Link trägt `?ref=tt` → eigener Bio-Slug + eigene Überschrift.
+  // Ohne ref bleibt alles beim bestehenden IG-Verhalten (abwärtskompatibel).
+  const isTikTok = searchParams?.ref === 'tt';
+  const currentSlug = isTikTok
+    ? await getCurrentBioSlug('tiktok')
+    : await getCurrentBioSlug();
   const current = currentSlug ? resolveRechner(currentSlug) : null;
+  const blockLabel = isTikTok ? 'Aus deinem TikTok-Video' : 'Heute auf Instagram';
 
   const top10 = EXCLUDED_SLUGS.map((slug) => resolveRechner(slug)).filter(
     (r): r is RechnerLite => r !== null,
@@ -127,11 +137,11 @@ export default async function SocialBioHubPage() {
         </p>
       </header>
 
-      {/* Block 1: Heute auf Instagram */}
+      {/* Block 1: aktueller Bio-Rechner (IG „Heute auf Instagram" / TikTok „Aus deinem TikTok-Video") */}
       {current && (
         <section className="mb-8">
           <h2 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3">
-            Heute auf Instagram
+            {blockLabel}
           </h2>
           <CalcButton rechner={current} size="lg" />
         </section>

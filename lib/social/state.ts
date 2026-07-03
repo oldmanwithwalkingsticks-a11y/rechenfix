@@ -238,14 +238,30 @@ async function kvRestSet(key: string, value: string): Promise<void> {
   }
 }
 
-export async function setCurrentBioSlug(slug: string): Promise<void> {
-  await kvRestSet(CURRENT_BIO_KEY, slug);
+/**
+ * Key-Ableitung für den Bio-Slug. Ohne Plattform = bestehender IG-Key
+ * `social:current-bio-slug` (abwärtskompatibel, kein Datenbruch am
+ * laufenden IG-Betrieb). TikTok bekommt einen eigenen Key
+ * `social:current-bio-slug:tiktok`, damit sich IG- und TikTok-Pointer
+ * nicht gegenseitig überschreiben.
+ */
+function bioKey(platform?: 'tiktok'): string {
+  return platform ? `${CURRENT_BIO_KEY}:${platform}` : CURRENT_BIO_KEY;
 }
 
-export async function getCurrentBioSlug(): Promise<string | null> {
+export async function setCurrentBioSlug(
+  slug: string,
+  platform?: 'tiktok',
+): Promise<void> {
+  await kvRestSet(bioKey(platform), slug);
+}
+
+export async function getCurrentBioSlug(
+  platform?: 'tiktok',
+): Promise<string | null> {
   let raw: string | null;
   try {
-    raw = await kvRestGet(CURRENT_BIO_KEY);
+    raw = await kvRestGet(bioKey(platform));
   } catch (err) {
     console.error('[social/getCurrentBioSlug] REST-Read-Fehler:', err);
     return null;
