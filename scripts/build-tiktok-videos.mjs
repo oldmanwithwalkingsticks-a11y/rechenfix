@@ -36,30 +36,32 @@ const OUT_DIR = path.join(PROJECT_ROOT, 'public', 'social-videos');
 const ffmpegPath = ffmpegPathImport;
 
 /**
- * Verifizierte ffmpeg-Filterkette (W18.3b-2 — an echtem Bild getestet,
- * NICHT ändern): erzeugt TikTok-kompatibles MP4
- * (h264 / 1080×1920 / yuv420p / 30fps / 6s, stumm) MIT Bewegung —
- * Ken-Burns-Zoom (1.0→1.10 über volle 6s) + pulsierendes Glow-Blinken
- * der Headline-Zone (~6× langsam per Sinus-Alpha).
+ * Verifizierte ffmpeg-Filterkette (W18.3b-3 — kantenfreier Vollbild-Puls):
+ * erzeugt TikTok-kompatibles MP4 (h264 / 1080×1920 / yuv420p / 30fps / 6s,
+ * stumm) MIT Bewegung — Ken-Burns-Zoom (1.0→1.10 über volle 6s) +
+ * Vollbild-Helligkeits-Puls (~6× über die Länge, Tal ~10% / Peak 100%).
  *
- * Escaping: Kommas im geq-alpha-Ausdruck müssen ffmpeg-intern escaped
- * werden (`\\,` im JS-String = literales `\,` an ffmpeg). Da execFile
- * mit Array-Args läuft (kein Shell), ist NUR das ffmpeg-Escaping nötig,
+ * Bewusst KEIN Crop/Blur/Overlay: das GANZE Bild wird gleichmäßig in der
+ * Helligkeit moduliert → keine Zonen-Kante, kein grauer/schwarzer Kasten.
+ * (Ersetzt die W18.3b-2-Glow-Crop-Blur-Kette, die auf fast-schwarzem
+ * Hintergrund einen grauen Rechteck-Halo erzeugte.)
+ *
+ * Escaping: Kommas im geq-Ausdruck müssen ffmpeg-intern escaped werden
+ * (`\\,` im JS-String = literales `\,` an ffmpeg). Da execFile mit
+ * Array-Args läuft (kein Shell), ist NUR das ffmpeg-Escaping nötig,
  * KEIN Shell-Escaping. Der filter_complex-String ist EIN Array-Element.
  */
 function buildArgs(inputPng, outputMp4) {
+  // Ken-Burns-Zoom (1.0→1.10 gleichmäßig über 180 Frames = 6s)
+  // + Vollbild-Helligkeits-Puls (~6× über die Länge, Tal ~10% / Peak 100%).
+  const pulse = '(0.1+0.9*max(0\\,sin(T*5.71)))';
   const filter = [
-    // Ken-Burns-Zoom 1.0→1.10 gleichmäßig über 180 Frames (6s):
     "[0:v]scale=2160:3840,",
     "zoompan=z='min(zoom+0.00056,1.10)':d=180:",
     "x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1080x1920:fps=30,",
-    "format=rgba,split[bg][src];",
-    // Glow-Layer: Headline-Zone (y=185, Höhe=300) duplizieren, blurren,
-    // aufhellen, Alpha per Sinus pulsieren (~6 Blinks über 6s):
-    "[src]crop=1080:300:0:185,gblur=sigma=14,eq=brightness=0.34:saturation=1.5,format=rgba,",
-    "geq=r='r(X,Y)':g='g(X,Y)':b='b(X,Y)':a='255*pow(max(0\\,sin(T*5.71))\\,0.9)'[glow];",
-    // Glow über den gezoomten Hintergrund legen:
-    "[bg][glow]overlay=x=0:y=185:eval=frame,format=yuv420p[out]",
+    "format=rgb24,",
+    `geq=r='r(X\\,Y)*${pulse}':g='g(X\\,Y)*${pulse}':b='b(X\\,Y)*${pulse}',`,
+    "format=yuv420p[out]",
   ].join('');
 
   return [
