@@ -105,15 +105,53 @@ async function ttPost<T>(
   return (json.data ?? {}) as T;
 }
 
+const CTA_TT = 'Berechne es → Link in Bio 🔗';
+
 /**
- * Baut den TikTok-Titel aus der FB-Caption (echte URL, nicht „Link in
- * Bio") plus FB-Hashtags, sicherheitshalber auf 2200 Zeichen begrenzt.
+ * TikTok-Caption deterministisch aus den vorhandenen Caption-Feldern
+ * ableiten (Variante B, kein API-Call). Aufbau:
+ *   <Hook = 1. Zeile von captionFb>
+ *   <leerzeile>
+ *   <Kernaussage = 1. Inhaltsabsatz nach dem Hook, gekürzt>
+ *   <leerzeile>
+ *   <CTA_TT>
+ *   <leerzeile>
+ *   <Hashtags = hashtagsIg (7 Tags) statt hashtagsFb (3 Tags)>
+ *
+ * URLs werden entfernt (TikTok macht sie nicht klickbar → „Link in Bio").
  */
 function buildTitle(post: SocialPost): string {
-  const caption = (post.captionFb ?? '').trim();
-  const tags = (post.hashtagsFb ?? '').trim();
-  const combined = (tags ? `${caption} ${tags}` : caption).trim();
-  return combined.length > MAX_TITLE_LEN ? combined.slice(0, MAX_TITLE_LEN) : combined;
+  const fb = (post.captionFb ?? '').trim();
+  const blocks = fb.split('\n\n').map((b) => b.trim()).filter(Boolean);
+
+  // Hook = erste Zeile des ersten Blocks:
+  const hook = (blocks[0] ?? '').split('\n')[0].trim();
+
+  // Kernaussage = erster Folgeblock, der KEINE URL enthält; sonst leer.
+  // Auf ~200 Zeichen kürzen (an Satzgrenze), damit die Caption kompakt bleibt.
+  let core = '';
+  for (const b of blocks.slice(1)) {
+    if (b.includes('http')) continue; // URL-Block überspringen
+    core = b;
+    break;
+  }
+  core = core.replace(/\s*https?:\/\/\S+/g, '').trim();
+  if (core.length > 200) {
+    const cut = core.slice(0, 200);
+    const lastDot = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf('? '), cut.lastIndexOf('! '));
+    core = (lastDot > 80 ? cut.slice(0, lastDot + 1) : cut).trim() + (lastDot > 80 ? '' : ' …');
+  }
+
+  // Hashtags: IG-Set (7 Tags) bevorzugen, Fallback FB-Set.
+  const tags = (post.hashtagsIg ?? '').trim() || (post.hashtagsFb ?? '').trim();
+
+  const parts = [hook];
+  if (core) parts.push(core);
+  parts.push(CTA_TT);
+  if (tags) parts.push(tags);
+  const out = parts.join('\n\n').trim();
+
+  return out.length > MAX_TITLE_LEN ? out.slice(0, MAX_TITLE_LEN).trim() : out;
 }
 
 /**
