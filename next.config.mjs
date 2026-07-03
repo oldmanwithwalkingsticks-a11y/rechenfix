@@ -39,6 +39,18 @@ const nextConfig = {
         destination: '/mathe/einheiten-umrechner',
         permanent: true,
       },
+      {
+        // W18.3g (04.07.2026): Kurz-Route für den TikTok-Bio-Link.
+        // TikToks Bio-Feld ist auf 80 Zeichen limitiert und macht Links
+        // nicht klickbar; /social?ref=tt ist dafür zu lang. /tt leitet
+        // auf den Bio-Hub mit TikTok-Kontext weiter (?ref=tt → eigener
+        // Bio-Slug social:current-bio-slug:tiktok, Block „Aus deinem
+        // TikTok-Video"). Nicht permanent: Ziel kann sich ändern, ein
+        // 301 wäre im Browser-Cache schwer zu widerrufen.
+        source: '/tt',
+        destination: '/social?ref=tt',
+        permanent: false,
+      },
     ];
   },
 
