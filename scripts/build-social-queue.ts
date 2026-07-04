@@ -1,22 +1,25 @@
 /**
  * W17A.1 — Seeded-Shuffle-Generator für die Social-Pipeline-Queue.
  *
- * Liest alle 170 Rechner aus lib/rechner-config, filtert die 10
- * EXCLUDED_SLUGS (Phase-0-Top-10) heraus und mischt die verbleibenden
- * 160 deterministisch via Mulberry32-RNG mit fixem Seed (SOCIAL_CONFIG.
- * SHUFFLE_SEED = 17).
+ * W18.4d (Weg B): Die Queue enthält jetzt ALLE 205 Rechner (nicht mehr nur
+ * die 160 IG/FB-Slugs). Die 10 EXCLUDED (Top-10) werden von IG/FB übersprungen,
+ * aber von TikTok gepostet — die Auswahl passiert in publishToOne via
+ * platformsForSlug (state.ts), NICHT mehr durch Herausfiltern aus der Queue.
+ *
+ * **Append-stabil:** Die bestehende Queue-Reihenfolge bleibt UNVERÄNDERT
+ * (die live laufende IG/FB-Rotation darf nicht umsortiert werden). Die 45
+ * fehlenden Slugs (35 neue Rechner + 10 Top-10) werden deterministisch
+ * geshuffelt (Seed-Offset) HINTEN angehängt. Kein Voll-Reshuffle.
  *
  * Ergebnis nach lib/social/queue.json. Die Pipeline läuft die Queue
  * sequentiell durch und markiert jeden Slug nach erfolgreichem Post
  * über KV-Done-Marken (siehe state.ts).
  *
- * Re-Run: `npx tsx scripts/build-social-queue.ts` — bei gleichem
- * SHUFFLE_SEED reproduzierbar identisch. Bei EXCLUDED-Änderungen
- * (z. B. weitere manuelle Posts) erzeugt das eine andere Queue,
- * die Done-Marken bleiben aber gültig (Slug-basiert).
+ * Re-Run: `npx tsx scripts/build-social-queue.ts` — die bestehenden Einträge
+ * bleiben stabil, nur noch fehlende config-Slugs werden hinten ergänzt.
  */
 
-import { writeFileSync, mkdirSync } from 'fs';
+import { readFileSync, existsSync, writeFileSync, mkdirSync } from 'fs';
 import { dirname } from 'path';
 import { rechner } from '../lib/rechner-config';
 import { SOCIAL_CONFIG, EXCLUDED_SLUGS } from '../lib/social/config';
@@ -48,29 +51,61 @@ function shuffleSeeded<T>(arr: readonly T[], seed: number): T[] {
 
 const excluded = new Set<string>(EXCLUDED_SLUGS);
 const allSlugs = rechner.map((r) => r.slug);
-const eligible = allSlugs.filter((s) => !excluded.has(s));
+const allSet = new Set(allSlugs);
 
-console.log(`Total Rechner: ${allSlugs.length}`);
-console.log(`Excluded:      ${excluded.size}`);
-console.log(`Eligible:      ${eligible.length}`);
+// Bestehende Queue lesen (falls vorhanden) — Reihenfolge beibehalten:
+let existingQueue: string[] = [];
+if (existsSync(OUTPUT_PATH)) {
+  try {
+    existingQueue = JSON.parse(readFileSync(OUTPUT_PATH, 'utf8')).queue ?? [];
+  } catch {
+    existingQueue = [];
+  }
+}
+const existingSet = new Set(existingQueue);
 
-// Sanity-Checks
-const missing = Array.from(excluded).filter((s) => !allSlugs.includes(s));
+// Nur noch existierende Slugs behalten (falls ein alter Queue-Slug aus der
+// config entfernt wurde) — Reihenfolge der Bestehenden UNVERÄNDERT:
+const keptExisting = existingQueue.filter((s) => allSet.has(s));
+
+// Neue Slugs = alle config-Slugs, die noch nicht in der Queue sind
+// (die 45: 35 neue Rechner + 10 Top-10). Deterministisch shufflen mit
+// Seed-Offset, damit sie nicht in config-Reihenfolge klumpen.
+const newSlugs = allSlugs.filter((s) => !existingSet.has(s));
+const shuffledNew = shuffleSeeded(newSlugs, SOCIAL_CONFIG.SHUFFLE_SEED + 1);
+
+const queue = [...keptExisting, ...shuffledNew];
+
+console.log(`Total Rechner: ${allSlugs.length}`); // 205
+console.log(`Bestehend:     ${keptExisting.length}`); // 160
+console.log(`Neu angehängt: ${shuffledNew.length}`); // 45
+console.log(`Queue gesamt:  ${queue.length}`); // 205
+
+// Sanity: EXCLUDED verweist auf existente Slugs (harmlos, bleibt).
+const missing = Array.from(excluded).filter((s) => !allSet.has(s));
 if (missing.length > 0) {
   console.error(`FEHLER: EXCLUDED_SLUGS verweist auf nicht-existente Slugs: ${missing.join(', ')}`);
   process.exit(1);
 }
-if (eligible.length === 0) {
-  console.error('FEHLER: keine Slugs übrig nach Filter — Queue wäre leer.');
+
+// Vollständigkeit: jeder config-Slug genau einmal in der Queue?
+const qSet = new Set(queue);
+if (qSet.size !== allSlugs.length) {
+  console.error(`FEHLER: Queue hat ${qSet.size} unique, erwartet ${allSlugs.length}`);
   process.exit(1);
 }
-
-const queue = shuffleSeeded(eligible, SOCIAL_CONFIG.SHUFFLE_SEED);
+const missingFromQueue = allSlugs.filter((s) => !qSet.has(s));
+if (missingFromQueue.length) {
+  console.error(`FEHLER: Slugs fehlen in Queue: ${missingFromQueue.join(', ')}`);
+  process.exit(1);
+}
 
 const payload = {
   version: 1 as const,
   seed: SOCIAL_CONFIG.SHUFFLE_SEED,
   generatedAt: new Date().toISOString().slice(0, 10), // YYYY-MM-DD, kein Zeit-Stempel zur Drift-Vermeidung
+  // queue enthält jetzt ALLE 205; excludedSlugs = die auf IG/FB
+  // übersprungenen (Weg B, via platformsForSlug in state.ts).
   excludedSlugs: [...EXCLUDED_SLUGS],
   queue,
 };

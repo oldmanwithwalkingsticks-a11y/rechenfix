@@ -50,7 +50,7 @@ async function sendErrorMail(result: PublishResult): Promise<void> {
   }
 
   const lines: string[] = [
-    `Social-Pipeline-Fehler am ${result.date} (slug: ${result.slug ?? 'n/a'}).`,
+    `Social-Pipeline-Fehler am ${result.date} (IG/FB-slug: ${result.slug ?? 'n/a'}, TikTok-slug: ${result.tiktokSlug ?? 'n/a'}).`,
     `Queue erschöpft: ${result.queueExhausted ? 'JA' : 'nein'}`,
     `Bild vorhanden: ${result.imageExists ?? false} · Caption vorhanden: ${result.captionExists ?? false}`,
     '',
@@ -63,6 +63,11 @@ async function sendErrorMail(result: PublishResult): Promise<void> {
     `  postId/skipped: ${result.facebook.postId ?? (result.facebook.skipped ? 'skipped' : '-')}`,
     `  error: ${result.facebook.error ?? '-'}`,
     `  code:  ${result.facebook.code ?? '-'}`,
+    '',
+    `TikTok: ${result.tiktok.success ? 'OK' : 'FAIL'}`,
+    `  publishId/skipped: ${result.tiktok.postId ?? (result.tiktok.skipped ? 'skipped' : '-')}`,
+    `  error: ${result.tiktok.error ?? '-'}`,
+    `  code:  ${result.tiktok.code ?? '-'}`,
     '',
     'KV-Error-Log: redis-key social:errors:' + result.date + ':{platform}',
     'Manueller Re-Trigger: GET /api/cron/social-post?force=true',
@@ -152,7 +157,8 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   }
 
   // 8) Mail bei Fehler (mind. eine Plattform failed ODER Daten-Lücke)
-  const anyFail = !result.instagram.success || !result.facebook.success;
+  const anyFail =
+    !result.instagram.success || !result.facebook.success || !result.tiktok.success;
   if (anyFail) {
     await sendErrorMail(result);
     return NextResponse.json(result, { status: 503 });
