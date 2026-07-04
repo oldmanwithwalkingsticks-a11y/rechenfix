@@ -28,8 +28,9 @@
 
 import { redis } from '@/lib/redis';
 import { MetaApiError } from './instagram';
+import { EXCLUDED_SLUGS } from './config';
 
-export type Platform = 'instagram' | 'facebook';
+export type Platform = 'instagram' | 'facebook' | 'tiktok';
 
 export interface ErrorLogEntry {
   error: string;
@@ -105,17 +106,48 @@ export async function isSlugDoneOn(
   return v !== null && v !== undefined;
 }
 
+const EXCLUDED = new Set<string>(EXCLUDED_SLUGS);
+
+/** Alle Plattformen, auf denen die Pipeline grundsätzlich postet. */
+export const ALL_PLATFORMS: readonly Platform[] = [
+  'instagram',
+  'facebook',
+  'tiktok',
+];
+
+/** TikTok-Pipeline-Schalter (analog SOCIAL_PIPELINE_ENABLED).
+ *  Solange nicht 'true', ist TikTok für die „fully done"-Logik inaktiv →
+ *  Zwischenstände 18.4a–c bleiben verhaltensneutral für IG/FB. */
+function tiktokEnabled(): boolean {
+  return process.env.TIKTOK_PIPELINE_ENABLED === 'true';
+}
+
 /**
- * Prüft, ob ein Slug auf BEIDEN Plattformen durch ist („fully done").
- * Wird von pickNextSlug() verwendet — nur fully-done-Slugs werden
- * komplett übersprungen.
+ * Plattformen, die für DIESEN Slug zuständig sind (Weg B):
+ * - TikTok nur wenn TIKTOK_PIPELINE_ENABLED='true'.
+ * - Top-10 (EXCLUDED): NUR TikTok (IG/FB überspringen sie) — wenn TikTok aus,
+ *   sind Top-10 für NIEMANDEN zuständig (bisheriges Verhalten: EXCLUDED = raus).
+ * - Alle anderen: ig+fb immer, tiktok nur wenn aktiv.
+ */
+export function platformsForSlug(slug: string): Platform[] {
+  const tt = tiktokEnabled();
+  if (EXCLUDED.has(slug)) return tt ? ['tiktok'] : [];
+  return tt ? ['instagram', 'facebook', 'tiktok'] : ['instagram', 'facebook'];
+}
+
+/**
+ * Prüft, ob ein Slug auf ALLEN für ihn zuständigen Plattformen durch ist
+ * („fully done"). Wird von pickNextSlug() verwendet — nur fully-done-Slugs
+ * werden komplett übersprungen. Leere Zuständigkeit (Top-10 bei TikTok-aus)
+ * → gilt als fully done (wird übersprungen, wie bisher via Queue-Ausschluss).
  */
 export async function isSlugFullyDone(slug: string): Promise<boolean> {
-  const [ig, fb] = await Promise.all([
-    isSlugDoneOn(slug, 'instagram'),
-    isSlugDoneOn(slug, 'facebook'),
-  ]);
-  return ig && fb;
+  const platforms = platformsForSlug(slug);
+  if (platforms.length === 0) return true; // Top-10 bei TikTok-aus: überspringen
+  const results = await Promise.all(
+    platforms.map((p) => isSlugDoneOn(slug, p)),
+  );
+  return results.every(Boolean);
 }
 
 /**
