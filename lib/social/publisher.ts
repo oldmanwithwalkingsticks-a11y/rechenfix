@@ -246,93 +246,89 @@ async function publishToOne(
   }
 }
 
+/** Asset-Verzeichnis + Extension je Plattform (TikTok: MP4, sonst PNG). */
+function assetExistsFor(platform: Platform, slug: string): boolean {
+  if (platform === 'tiktok') {
+    return existsSync(join(TIKTOK_VIDEOS_DIR, `${slug}.mp4`));
+  }
+  return existsSync(join(IMAGES_DIR, `${slug}.png`));
+}
+
 /**
- * Postet den heutigen Queue-Eintrag auf Instagram UND Facebook.
- * Plattformen unabhängig (kein Short-Circuit bei IG-Fehler).
- * Setzt die Done-Marke, sobald MIN. eine Plattform success war.
+ * Löst den nächsten Slug für EINE Plattform auf (via pickNextSlugFor),
+ * prüft Assets/Caption und postet. Gibt {result, slug} zurück (slug für
+ * Reporting/Bio). slug === null → für diese Plattform nichts offen
+ * (alle done ODER Plattform inaktiv) → skipped.
+ *
+ * W18.4c-2: Jede Plattform holt so ihren EIGENEN nächsten Slug — vorher
+ * liefen IG/FB über das gemeinsame pickNextSlug()/isSlugFullyDone, das mit
+ * aktivem TikTok einen TikTok-Done-Marker verlangte und IG/FB auf einen
+ * längst geposteten Slug (→ skip) festnagelte.
+ */
+async function publishNextFor(
+  date: string,
+  platform: Platform,
+  force: boolean,
+  dryRun: boolean,
+): Promise<{ result: PlatformResult; slug: string | null }> {
+  const slug = await pickNextSlugFor(platform);
+  if (!slug) {
+    return { result: { success: true, skipped: true }, slug: null };
+  }
+  const caption = !!CAPTIONS.captions[slug];
+  const asset = assetExistsFor(platform, slug);
+  if (!caption || !asset) {
+    return {
+      result: {
+        success: false,
+        error: `Asset/Caption fehlt für '${slug}'/${platform} (asset:${asset} caption:${caption})`,
+      },
+      slug,
+    };
+  }
+  const post = buildPostForSlug(slug);
+  if (!post) {
+    return {
+      result: { success: false, error: `Post-Build fehlgeschlagen für '${slug}'` },
+      slug,
+    };
+  }
+  const result = await publishToOne(date, platform, post, force, dryRun);
+  return { result, slug };
+}
+
+/**
+ * Postet den nächsten offenen Queue-Eintrag PRO Plattform (Weg B):
+ * IG, FB und TikTok holen jeweils ihren eigenen nächsten Slug. IG/FB
+ * haben identische Zuständigkeit (gleicher Slug bei gleichem Done-Stand),
+ * TikTok kann abweichen. Plattformen unabhängig (kein Short-Circuit).
+ * Done-Marke wird direkt in publishToOne() gesetzt.
  */
 export async function publishToBothPlatforms(
   force = false,
   dryRun = false,
 ): Promise<PublishResult> {
   const date = getBerlinDate();
-  const { slug, post, imageExists, captionExists } = await resolveTodayPost();
 
-  if (slug === null) {
-    return {
-      date,
-      slug: null,
-      tiktokSlug: null,
-      queueExhausted: true,
-      imageExists: false,
-      captionExists: false,
-      instagram: { success: false, error: 'queue erschöpft — alle Slugs done' },
-      facebook: { success: false, error: 'queue erschöpft — alle Slugs done' },
-      tiktok: { success: false, error: 'queue erschöpft — alle Slugs done' },
-    };
-  }
+  const ig = await publishNextFor(date, 'instagram', force, dryRun);
+  const fb = await publishNextFor(date, 'facebook', force, dryRun);
+  const tt = await publishNextFor(date, 'tiktok', force, dryRun);
 
-  if (!post) {
-    const errMsg =
-      !imageExists && !captionExists
-        ? `Bild + Caption fehlen für '${slug}'`
-        : !imageExists
-          ? `Bild fehlt: public/social-posts/${slug}.png`
-          : `Caption fehlt für '${slug}' in lib/social/captions.json`;
-    return {
-      date,
-      slug,
-      tiktokSlug: null,
-      queueExhausted: false,
-      imageExists,
-      captionExists,
-      instagram: { success: false, error: errMsg },
-      facebook: { success: false, error: errMsg },
-      tiktok: { success: false, error: errMsg },
-    };
-  }
-
-  const instagram = await publishToOne(date, 'instagram', post, force, dryRun);
-  const facebook = await publishToOne(date, 'facebook', post, force, dryRun);
-
-  // Plattform-Done-Marken werden seit W17A.2.x direkt in publishToOne()
-  // gesetzt — kein Blanket-Done nach beiden Plattformen mehr.
-
-  // TikTok (Weg B): EIGENER Slug, unabhängig vom IG/FB-Slug. pickNextSlugFor
-  // liefert nur etwas, wenn TIKTOK_PIPELINE_ENABLED='true' (sonst ist tiktok
-  // nie in platformsForSlug) → tiktok bleibt skipped, IG/FB-Verhalten identisch.
-  let tiktok: PlatformResult = { success: true, skipped: true };
-  let tiktokSlug: string | null = null;
-  const ttSlug = await pickNextSlugFor('tiktok');
-  if (ttSlug) {
-    tiktokSlug = ttSlug;
-    const ttVideo = existsSync(join(TIKTOK_VIDEOS_DIR, `${ttSlug}.mp4`));
-    const ttCaption = !!CAPTIONS.captions[ttSlug];
-    if (ttVideo && ttCaption) {
-      const ttPost = buildPostForSlug(ttSlug);
-      if (ttPost) {
-        tiktok = await publishToOne(date, 'tiktok', ttPost, force, dryRun);
-      } else {
-        tiktok = { success: false, error: `TikTok-Post-Build fehlgeschlagen für '${ttSlug}'` };
-      }
-    } else {
-      tiktok = {
-        success: false,
-        error: `TikTok-Asset fehlt für '${ttSlug}' (video:${ttVideo} caption:${ttCaption})`,
-      };
-    }
-  }
+  // queueExhausted: true nur wenn ALLE drei nichts Offenes mehr haben.
+  const queueExhausted =
+    ig.slug === null && fb.slug === null && tt.slug === null;
 
   return {
     date,
-    slug,
-    tiktokSlug,
-    queueExhausted: false,
-    imageExists: true,
-    captionExists: true,
-    instagram,
-    facebook,
-    tiktok,
+    slug: ig.slug, // Rückwärtskompat: „slug" = IG-Slug
+    tiktokSlug: tt.slug,
+    queueExhausted,
+    // imageExists/captionExists auf den IG-Slug bezogen (Rückwärtskompat).
+    imageExists: ig.slug ? assetExistsFor('instagram', ig.slug) : false,
+    captionExists: ig.slug ? !!CAPTIONS.captions[ig.slug] : false,
+    instagram: ig.result,
+    facebook: fb.result,
+    tiktok: tt.result,
   };
 }
 
