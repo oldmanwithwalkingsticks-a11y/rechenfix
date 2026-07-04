@@ -20,9 +20,11 @@ export const SOCIAL_CONFIG = {
 } as const;
 
 /**
- * Slugs, die NICHT durch die Auto-Pipeline gepostet werden, weil sie
+ * Slugs, die NICHT auf IG/FB gepostet werden (Weg B: TikTok postet sie
+ * sehr wohl — siehe platformsForSlug in lib/social/state.ts), weil sie
  * bereits in Phase 0 manuell auf Instagram veröffentlicht wurden.
- * Konsumiert von scripts/build-social-queue.ts.
+ * Konsumiert von scripts/build-social-queue.ts + lib/social/state.ts.
+ * Für die Bio-Hub-Anzeige siehe BIO_HUB_FEATURED.
  *
  * W17A.1 (06.06.2026): Top-10-Launch-Reihenfolge aus dem Setup-Doku
  * Teil A.3 („Tage 1–10 — Top-10-Launch"). Bei Phase-0-Erweiterung
@@ -42,3 +44,15 @@ export const EXCLUDED_SLUGS = [
   'mietrechner',
   'stromkosten-rechner',
 ] as const;
+
+/**
+ * Die Top-10-Rechner, die im Bio-Hub (/social) als „Beliebte Rechner"
+ * dauerhaft angezeigt werden. Inhaltlich = die Phase-0-Top-10.
+ *
+ * ENTKOPPELT von EXCLUDED_SLUGS (18.4b): EXCLUDED_SLUGS steuert den
+ * POSTING-Ausschluss (IG/FB überspringen diese Slugs), BIO_HUB_FEATURED
+ * steuert die ANZEIGE. Aktuell dieselben 10 Slugs, aber unterschiedliche
+ * Bedeutung — Weg B (TikTok postet die Top-10 sehr wohl) hängt an dieser
+ * Trennung.
+ */
+export const BIO_HUB_FEATURED = EXCLUDED_SLUGS;

@@ -17,7 +17,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { rechner } from '@/lib/rechner-config';
-import { EXCLUDED_SLUGS } from '@/lib/social/config';
+import { BIO_HUB_FEATURED } from '@/lib/social/config';
 import { getCurrentBioSlug } from '@/lib/social/state';
 import farbenFile from '@/lib/social/kategorie-farben.json';
 
@@ -113,7 +113,7 @@ export default async function SocialBioHubPage({
   const current = currentSlug ? resolveRechner(currentSlug) : null;
   const blockLabel = isTikTok ? 'Aus deinem TikTok-Video' : 'Heute auf Instagram';
 
-  const top10 = EXCLUDED_SLUGS.map((slug) => resolveRechner(slug)).filter(
+  const top10 = BIO_HUB_FEATURED.map((slug) => resolveRechner(slug)).filter(
     (r): r is RechnerLite => r !== null,
   );
 
