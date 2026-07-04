@@ -491,21 +491,21 @@ def render_post_vertical(spec, fonts, bolt_png_path):
 # ============================================================
 # Drift-Check (vor Build)
 # ============================================================
-def verify_repo_state(queue: dict, farben: dict, snapshot: dict) -> bool:
-    """Sanity-Check: Queue-Slugs alle in snapshot + Farben-Map komplett."""
+def verify_repo_state(targets: list, farben: dict, snapshot: dict) -> bool:
+    """Sanity-Check: Target-Slugs alle in snapshot + Farben-Map komplett."""
     ok = True
 
-    missing_snapshot = [s for s in queue["queue"] if s not in snapshot]
+    missing_snapshot = [s for s in targets if s not in snapshot]
     if missing_snapshot:
         print(
-            f"✗ {len(missing_snapshot)} Queue-Slugs nicht im snapshot:",
+            f"✗ {len(missing_snapshot)} Slugs nicht im snapshot:",
             ", ".join(missing_snapshot[:5]),
             "…" if len(missing_snapshot) > 5 else "",
             file=sys.stderr,
         )
         ok = False
 
-    used_kats = {snapshot[s]["kategorieSlug"] for s in queue["queue"] if s in snapshot}
+    used_kats = {snapshot[s]["kategorieSlug"] for s in targets if s in snapshot}
     missing_farben = [k for k in used_kats if k not in farben]
     if missing_farben:
         print(
@@ -539,6 +539,12 @@ def main():
         help="1080×1920-Hochformat (TikTok 9:16) → public/social-videos-src/. "
         "Ohne dieses Flag: 1080×1080-Default → public/social-posts/.",
     )
+    parser.add_argument(
+        "--from-config",
+        action="store_true",
+        help="Slug-Liste aus rechner-config (alle 205) statt queue.json — "
+        "für neue Rechner, die noch nicht in der Queue sind.",
+    )
     args = parser.parse_args()
 
     project_root = Path(__file__).resolve().parent.parent
@@ -570,19 +576,6 @@ def main():
     with open(captions_path, encoding="utf-8") as f:
         captions = json.load(f).get("captions") or {}
 
-    # Drift-Check
-    if not verify_repo_state(queue, farben, snapshot):
-        sys.exit("Drift erkannt — Build abgebrochen.")
-
-    # Caption-Coverage-Report (informativ, kein exit)
-    missing_caption = [s for s in queue["queue"] if s not in captions]
-    if missing_caption:
-        print(
-            f"  ℹ {len(missing_caption)} von {len(queue['queue'])} Slugs ohne Caption — "
-            f"diese Bilder bekommen Default-Eyebrow + keinen Highlight-Block. "
-            f"Caption-Build laufen lassen: npx tsx scripts/social-caption-builder.ts"
-        )
-
     # Fonts + Bolt-PNG (Bolt wird einmalig pillow-only erzeugt, falls fehlt)
     try:
         fonts = get_fonts()
@@ -591,14 +584,33 @@ def main():
         sys.exit(f"FEHLER: {err}")
 
     # Ziel-Liste bestimmen
+    # Slug-Pool: --from-config → alle Snapshot-Slugs (config, 205);
+    # sonst queue.json (160).
+    pool = list(snapshot.keys()) if args.from_config else queue["queue"]
     if args.slug:
-        if args.slug not in queue["queue"]:
-            sys.exit(f"Slug '{args.slug}' nicht in queue.json.")
+        if args.slug not in pool:
+            src = "rechner-config" if args.from_config else "queue.json"
+            sys.exit(f"Slug '{args.slug}' nicht in {src}.")
         targets = [args.slug]
     else:
-        targets = queue["queue"]
+        targets = pool
         if args.limit:
             targets = targets[: args.limit]
+
+    # Drift-Check (auf die tatsächliche Target-Liste — im --from-config-Modus
+    # sind alle Targets per Definition aus dem Snapshot; die Farb-Prüfung läuft
+    # über die tatsächlich zu rendernden Kategorien).
+    if not verify_repo_state(targets, farben, snapshot):
+        sys.exit("Drift erkannt — Build abgebrochen.")
+
+    # Caption-Coverage-Report (informativ, kein exit)
+    missing_caption = [s for s in targets if s not in captions]
+    if missing_caption:
+        print(
+            f"  ℹ {len(missing_caption)} von {len(targets)} Slugs ohne Caption — "
+            f"diese Bilder bekommen Default-Eyebrow + keinen Highlight-Block. "
+            f"Caption-Build laufen lassen: npx tsx scripts/social-caption-builder.ts"
+        )
 
     # W18.3a — Format-Weiche. Default (kein --vertical) unverändert:
     # 1080×1080 → public/social-posts/. Vertical: 1080×1920 → social-videos-src/.

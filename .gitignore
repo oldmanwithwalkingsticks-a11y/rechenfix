@@ -74,3 +74,13 @@ next-env.d.ts
 # Generierte Social-Bilder (160 Slugs) — separat in eigener Konvention,
 # Karsten committed sie nach social-image-builder.py-Run gesammelt.
 # Initial NICHT auf gitignore-Liste, damit die Bilder versioniert werden.
+
+# Vercel Deploy Hook (Trigger-Token, nicht committen)
+.vercel-deploy-hook
+
+.vercel
+.env*
+
+# Lokales Render-Werkzeug: NotoColorEmoji für den Image-Builder
+# (SOCIAL_FONT_EMOJI). Nur lokal, wird NICHT committet.
+.fonts/
