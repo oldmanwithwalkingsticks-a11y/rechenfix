@@ -415,6 +415,11 @@ function hasAllFlag(): boolean {
   return process.argv.slice(2).includes('--all');
 }
 
+/** `--from-config`: Slug-Pool aus rechner-config statt queue.json ziehen. */
+function hasFromConfigFlag(): boolean {
+  return process.argv.slice(2).includes('--from-config');
+}
+
 /**
  * Liest `--limit <n>` bzw. `--limit=<n>` (Stichprobenlauf im Voll-Modus).
  * Returnt null, wenn nicht gesetzt oder ungültig (= kein Limit).
@@ -440,7 +445,15 @@ async function main(): Promise<void> {
   if (!captions.captions) captions.captions = {};
   if (captions.version !== 1) captions.version = 1;
 
-  const queue: string[] = queueFile.queue;
+  const fromConfig = hasFromConfigFlag();
+  // Slug-Pool: --from-config → alle rechner-config-Slugs (für neue Rechner,
+  // die noch nicht in der Queue sind); sonst wie bisher queue.json.
+  const queue: string[] = fromConfig
+    ? rechner.map((r) => r.slug)
+    : queueFile.queue;
+  if (fromConfig) {
+    console.log(`Slug-Pool: rechner-config (${queue.length} Slugs, --from-config)`);
+  }
 
   // ---- Einzel-Slug-Modus (TEIL 2 / Format-Test) -------------
   const onlySlug = getSlugArg();
