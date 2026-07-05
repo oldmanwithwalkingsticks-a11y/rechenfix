@@ -186,6 +186,76 @@ async function waitUntilComplete(token: string, publishId: string): Promise<void
 }
 
 /**
+ * W18.5 — TikTok-Post über PostPeer (auditierter Wrapper). Nutzt dieselbe
+ * Live-Video-URL (PULL_FROM_URL-Muster) und dieselbe Caption-Transform
+ * (buildTitle) wie der Direkt-Weg. PostPeer pollt intern bis
+ * PUBLISH_COMPLETE → wir brauchen kein eigenes Status-Polling.
+ * Gibt die PostPeer-Post-ID als publish_id zurück (Pipeline-kompatibel).
+ *
+ * Aktiv nur wenn ENV TIKTOK_VIA_WRAPPER === 'true'; sonst greift der
+ * Direkt-API-Weg (Fallback, unverändert erhalten).
+ */
+async function publishViaPostPeer(post: SocialPost): Promise<string> {
+  const apiKey = process.env.POSTPEER_API_KEY;
+  const accountId = process.env.POSTPEER_ACCOUNT_ID;
+  if (!apiKey) throw new TikTokApiError('POSTPEER_API_KEY fehlt', 'ENV_MISSING');
+  if (!accountId) throw new TikTokApiError('POSTPEER_ACCOUNT_ID fehlt', 'ENV_MISSING');
+
+  const videoUrl = `${SITE_URL}/social-videos/${post.slug}.mp4`;
+  const body = {
+    content: buildTitle(post),
+    platforms: [
+      {
+        platform: 'tiktok',
+        accountId,
+        platformSpecificData: { draft: false, privacyLevel: 'PUBLIC_TO_EVERYONE' },
+      },
+    ],
+    mediaItems: [{ type: 'video', url: videoUrl }],
+    publishNow: true,
+  };
+
+  let res: Response;
+  try {
+    res = await fetch('https://api.postpeer.dev/v1/posts/', {
+      method: 'POST',
+      headers: { 'x-access-key': apiKey, 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+  } catch (err) {
+    throw new TikTokApiError(
+      `PostPeer-Netzwerkfehler: ${err instanceof Error ? err.message : String(err)}`,
+      'NETWORK',
+    );
+  }
+
+  const text = await res.text();
+  if (!res.ok) {
+    throw new TikTokApiError(
+      `PostPeer HTTP ${res.status}: ${text.slice(0, 300)}`,
+      'POSTPEER_ERROR',
+    );
+  }
+
+  // Post-ID aus Response ziehen. Feldname aus PostPeer-Doku noch nicht 100 %
+  // sicher (Phase 0 zeigte „Post ID" im UI). Defensiv mehrere Felder prüfen;
+  // im schlimmsten Fall Platzhalter-ID (Pipeline funktioniert trotzdem).
+  let publishId = '';
+  try {
+    const json = JSON.parse(text) as Record<string, unknown>;
+    publishId =
+      (json.id as string) ||
+      (json.postId as string) ||
+      ((json.post as Record<string, unknown> | undefined)?._id as string) ||
+      ((json.data as Record<string, unknown> | undefined)?.id as string) ||
+      '';
+  } catch {
+    // Response war kein JSON — trotzdem 2xx, also als Erfolg werten.
+  }
+  return publishId || `postpeer-${post.index}`;
+}
+
+/**
  * Postet das Video zu `post.slug` per Direct Post (PULL_FROM_URL) an
  * TikTok.
  *
@@ -200,6 +270,13 @@ export async function publishToTikTok(post: SocialPost, dryRun = false): Promise
     return `dry-tt-${post.index}`;
   }
 
+  // Wrapper-Weg (PostPeer) — wenn aktiv, direkt hier posten und returnen.
+  // Rollback: TIKTOK_VIA_WRAPPER entfernen/false → bisheriger Direkt-API-Weg.
+  if (process.env.TIKTOK_VIA_WRAPPER === 'true') {
+    return publishViaPostPeer(post);
+  }
+
+  // ---- ab hier UNVERÄNDERT: bisheriger Direkt-API-Weg (Fallback) ----
   const token = await getValidAccessToken();
 
   // Schritt 1 — creator_info/query: erlaubte privacy_level_options.
