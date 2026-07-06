@@ -960,17 +960,15 @@ Nicht jedes Einkommen wird vollständig auf das Bürgergeld angerechnet. Es gibt
 
 Einkommen über 1.200 Euro (ohne Kind) bzw. 1.500 Euro (mit Kind) wird vollständig angerechnet. Neben Erwerbseinkommen zählen auch Kindergeld, Unterhalt, Renten und andere Sozialleistungen als Einkommen. Kindergeld wird dabei dem jeweiligen Kind zugeordnet.
 
-**Vermögensgrenzen beim Bürgergeld**
+**Vermögensgrenzen: das Modell bis 30.06.2026**
 
-Beim Bürgergeld gibt es eine Karenzzeit von 12 Monaten ab dem ersten Leistungsbezug. Während dieser Zeit gelten erhöhte Vermögensfreibeträge von 40.000 Euro für die erste Person in der Bedarfsgemeinschaft und 15.000 Euro für jede weitere Person. In der Karenzzeit wird zudem die tatsächliche Miete anerkannt, auch wenn sie über den Angemessenheitsgrenzen liegt.
+Bis zum 30. Juni 2026 galt beim Bürgergeld eine Karenzzeit von 12 Monaten ab dem ersten Leistungsbezug. Während dieser Zeit galten erhöhte Vermögensfreibeträge von 40.000 Euro für die erste Person in der Bedarfsgemeinschaft und 15.000 Euro für jede weitere Person; nach Ablauf der Karenzzeit galten reguläre Freibeträge von 15.000 Euro pro Person. Dieses Karenz-Modell ist mit der Reform zum 1. Juli 2026 entfallen (siehe unten).
 
-Nach Ablauf der Karenzzeit gelten die regulären Vermögensfreibeträge von 15.000 Euro pro Person in der Bedarfsgemeinschaft. Bestimmte Vermögenswerte sind geschützt und werden nicht angerechnet, darunter angemessener Hausrat, ein angemessenes Kraftfahrzeug (bis ca. 15.000 Euro Wert), Altersvorsorge (Riester-Rente, betriebliche Altersvorsorge) und selbstgenutztes Wohneigentum in angemessener Größe.
+Unabhängig vom jeweiligen Freibetrag sind bestimmte Vermögenswerte geschützt und werden nicht angerechnet: angemessener Hausrat, ein angemessenes Kraftfahrzeug (bis ca. 15.000 Euro Wert), Altersvorsorge (Riester-Rente, betriebliche Altersvorsorge) und selbstgenutztes Wohneigentum in angemessener Größe. Wer mit verwertbarem Vermögen über dem Freibetrag liegt, muss es zunächst einsetzen, bevor ein Anspruch besteht.
 
-Wer über den Freibeträgen liegt, muss sein Vermögen zunächst aufbrauchen, bevor ein Anspruch auf Bürgergeld besteht.
+**Vermögensregeln seit 1. Juli 2026 (Grundsicherungsgeld)**
 
-**Neue Vermögensregeln ab 1. Juli 2026 (Grundsicherungsgeld)**
-
-Mit dem 13. Gesetz zur Änderung des SGB II wird die Karenzzeit-Regelung beim Vermögen abgeschafft und durch eine altersgestaffelte Freibetragsregelung ersetzt. Maßgeblich ist § 12 Abs. 2 SGB II in der neuen Fassung. Der Freibetrag pro Person in der Bedarfsgemeinschaft richtet sich ab dem ersten Bezugsmonat nach dem Lebensalter:
+Mit dem 13. Gesetz zur Änderung des SGB II (BGBl. 2026 I Nr. 107) wurde die Karenzzeit-Regelung beim Vermögen zum 1. Juli 2026 abgeschafft und durch eine altersgestaffelte Freibetragsregelung ersetzt. Maßgeblich ist § 12 Abs. 2 SGB II in der neuen Fassung. Seit dem 1. Juli 2026 richtet sich der Freibetrag pro Person in der Bedarfsgemeinschaft nach dem Lebensalter:
 
 - **Bis zur Vollendung des 30. Lebensjahres:** 5.000 Euro
 - **Ab dem 31. Lebensjahr:** 10.000 Euro
@@ -978,6 +976,8 @@ Mit dem 13. Gesetz zur Änderung des SGB II wird die Karenzzeit-Regelung beim Ve
 - **Ab dem 51. Lebensjahr:** 20.000 Euro
 
 Der jeweils höhere Freibetrag gilt ab Beginn des Monats, in dem die Altersgrenze erreicht wird. Die Freibeträge werden pro Person summiert — ein Paar mit 28 und 52 Jahren hat zusammen also 5.000 + 20.000 = 25.000 Euro Schonvermögen. Selbstgenutztes Hausgrundstück oder selbstgenutzte Eigentumswohnung bleiben während der Karenzzeit (erstes Bezugsjahr, § 22 Abs. 1 Satz 2 SGB II) unabhängig von der Größe zusätzlich geschützt (§ 12 Abs. 1 Satz 3 SGB II n. F.).
+
+**Übergangsschutz für Bestandsfälle:** Wer am 30. Juni 2026 bereits im Leistungsbezug war, behält für eine Übergangszeit von sechs Monaten — bis zum 31. Dezember 2026 — das bisherige Schonvermögen von 15.000 Euro pro Person; die neue Altersstaffelung greift für diese Bestandsfälle erst ab dem 1. Januar 2027. Für Neuanträge ab dem 1. Juli 2026 gilt die neue Tabelle dagegen sofort.
 
 **Bürgergeld beantragen — so geht's**
 
