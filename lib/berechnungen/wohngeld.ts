@@ -1,22 +1,24 @@
 /**
- * STATUS 22.04.2026 — ARCHITEKTUR-BUG, REFACTORING GEPLANT
+ * STATUS 06.07.2026 — DAUERHAFTE ERKLÄRSEITE (kein interaktiver Rechner)
  *
- * Diese Lib hat einen architektonischen Bug in der Einkommensermittlung:
- * Sie nimmt ein Single-Brutto-Feld und pauschalisiert mit × 0.7, während
- * §§ 14–16 WoGG eine Pro-Person-Ermittlung mit individueller
- * Werbungskostenpauschale (102,50 €/Monat je AN) und Steuer/KV/RV-Flags
- * vorsehen. 1-Personen-Haushalte liefern korrekte Werte (validiert gegen
- * BMWSB-Rechner, Δ ≤ 1 €); bei 2P+ weicht die effektive Pauschalabzugs-
- * Quote 8,4–29,1 % je nach Konstellation ab (Δ 26 € belegt, potenziell
- * >50 €/Monat).
+ * Das Frontend `/finanzen/wohngeld-rechner` ist dauerhaft eine Erklärseite
+ * (`app/finanzen/wohngeld-rechner/page.tsx`, via STATISCHE_OVERRIDES),
+ * KEIN interaktiver Rechner. Diese Lib liefert nur die Tabellen-/Formel-
+ * konstanten, die die Erklärseite direkt rendert (Höchstbeträge, Zuschläge).
  *
- * Frontend zeigt aktuell eine Erklärseite statt Rechner
- * (Prompt 120d, 22.04.2026). Der bestehende Code (Tabellen-Koeffizienten
- * nach Anlage 2, Höchstbeträge nach § 12, Mindestwerte nach Anlage 3)
- * ist korrekt und wird beim Refactoring weiterverwendet.
+ * Heiz- und Klimakomponente (§ 12 Abs. 6 + 7 WoGG) am 06.07.2026 korrigiert:
+ * die vorherigen Werte waren grob zu niedrig (Faktor ~4–5 bei den Heizkosten).
+ * Höchstbeträge nach Anlage 1 § 12 WoGG sind korrekt (Stand 01.01.2025,
+ * unverändert 2026) und bleiben unverändert.
  *
- * Vollständiges Refactoring geplant als Prompt 120c gemeinsam mit dem
- * Bürgergeld-Refactoring zur Neuen Grundsicherung zum 01.07.2026.
+ * Bekannte Architektur-Grenze (nur relevant bei einer etwaigen Reaktivierung
+ * als interaktiver Rechner): Die Einkommensermittlung nimmt ein Single-Brutto-
+ * Feld und pauschalisiert mit × 0.7, während §§ 14–16 WoGG eine Pro-Person-
+ * Ermittlung mit individueller Werbungskostenpauschale (102,50 €/Monat je AN)
+ * und Steuer/KV/RV-Flags vorsehen. 1-Personen-Haushalte liefern korrekte Werte
+ * (validiert gegen BMWSB-Rechner, Δ ≤ 1 €); bei 2P+ weicht die effektive
+ * Pauschalabzugs-Quote ab. Ein Pro-Person-Refactoring (§§ 14–16) bleibt ein
+ * optionales Zukunftsthema und ist NICHT an ein Datum gekoppelt.
  *
  * Bei Reaktivierung: Interface ändern auf Array<Haushaltsmitglied> mit
  * { brutto, erwerbstaetig, werbungskosten?, steuerpflichtig, gkvPflichtig,
@@ -79,13 +81,16 @@ const HOECHSTBETRAEGE = HOECHSTBETRAEGE_WOGG_2026 as number[][];
 export const ZUSCHLAG_PRO_PERSON_WOGG_2026: ReadonlyArray<number> = [82, 94, 106, 119, 129, 149, 163];
 const ZUSCHLAG_PRO_PERSON = ZUSCHLAG_PRO_PERSON_WOGG_2026 as number[];
 
-// Heizkostenpauschale (monatlich, €)
-const HEIZKOSTENPAUSCHALE = [23.80, 30.60, 37.40, 44.20, 51.00];
-const HEIZKOSTENPAUSCHALE_ZUSCHLAG = 6.80;
+// Heizkostenkomponente § 12 Abs. 6 WoGG (monatl. Gesamtbetrag = CO2-Anteil + dauerhafte
+// Komponente), 1–5 Personen. Quelle: § 12 Abs. 6 WoGG i.d.F. Wohngeld-Plus-Gesetz,
+// unverändert seit 01.01.2023. Stichtag geprüft: 06.07.2026.
+const HEIZKOSTENPAUSCHALE = [110.40, 140.80, 170.20, 199.60, 225.40];
+const HEIZKOSTENPAUSCHALE_ZUSCHLAG = 27.60;
 
-// Klimakomponente (monatlich, €)
-const KLIMAKOMPONENTE = [19.20, 24.70, 30.20, 35.70, 41.20];
-const KLIMAKOMPONENTE_ZUSCHLAG = 5.50;
+// Klimakomponente § 12 Abs. 7 WoGG (monatl.), 1–5 Personen. Quelle: § 12 Abs. 7 WoGG.
+// Stichtag geprüft: 06.07.2026.
+const KLIMAKOMPONENTE = [19.20, 24.80, 29.60, 34.40, 39.20];
+const KLIMAKOMPONENTE_ZUSCHLAG = 4.80;
 
 // Koeffizienten für die Wohngeldformel nach § 19 Abs. 1 WoGG (Anlage 2)
 // Quelle: Anlage 2 WoGG BGBl. 2024 I Nr. 314 S. 3, unverändert 2026.

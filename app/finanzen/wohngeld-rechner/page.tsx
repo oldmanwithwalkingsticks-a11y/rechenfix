@@ -273,13 +273,13 @@ export default function WohngeldErklaerseite() {
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed mt-4">
                 Zusätzlich zum Höchstbetrag erhöhen zwei Komponenten die berücksichtigungsfähige
                 Miete. Die <strong>Heizkostenkomponente</strong> nach § 12 Abs. 6 WoGG entlastet bei
-                den gestiegenen Energiekosten: Sie reicht von <strong>23,80 €</strong> monatlich für
-                einen Ein-Personen-Haushalt bis <strong>51,00 €</strong> bei fünf Personen
-                (je weitere Person zusätzlich 6,80 €). Die <strong>Klimakomponente</strong> nach
+                den gestiegenen Energiekosten: Sie reicht von <strong>110,40 €</strong> monatlich für
+                einen Ein-Personen-Haushalt bis <strong>225,40 €</strong> bei fünf Personen
+                (je weitere Person zusätzlich 27,60 €). Die <strong>Klimakomponente</strong> nach
                 § 12 Abs. 7 WoGG berücksichtigt höhere Mieten in energetisch sanierten Gebäuden und
-                liegt zwischen <strong>19,20 €</strong> (eine Person) und <strong>41,20 €</strong>
-                {' '}(fünf Personen). Beide Beträge werden auf die anzusetzende Höchstmiete
-                aufgeschlagen, bevor die Wohngeldformel greift.
+                liegt zwischen <strong>19,20 €</strong> (eine Person) und <strong>39,20 €</strong>
+                {' '}(fünf Personen; je weitere Person zusätzlich 4,80 €). Beide Beträge werden auf die
+                anzusetzende Höchstmiete aufgeschlagen, bevor die Wohngeldformel greift.
               </p>
 
               <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mt-8 mb-3">
