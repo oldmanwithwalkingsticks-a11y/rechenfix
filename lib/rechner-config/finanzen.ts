@@ -3376,14 +3376,14 @@ Seit dem Beschluss des Bundesverfassungsgerichts 2013 und der „Ehe für alle" 
     keywords: ['wohngeld rechner', 'wohngeld berechnen', 'wohngeld 2026', 'wohngeld anspruch', 'wohngeld höhe', 'wohngeld plus', 'wohngeld mietstufe', 'wohngeldantrag', 'mietzuschuss berechnen', 'wohngeld einkommensgrenze'],
     icon: '🏠',
     formel: 'Wohngeld = 1,15 × (M − (a + b×M + c×Y) × Y) | M = berücksichtigte Miete + Heizkostenpauschale + Klimakomponente | Y = bereinigtes Einkommen | a, b, c = Koeffizienten je Haushaltsgröße (Anlage 1 WoGG)',
-    beispiel: '2-Personen-Haushalt, 2.000 € brutto, 600 € Kaltmiete, Mietstufe III → Bereinigtes Einkommen: ca. 1.400 € | Berücksichtigte Miete: 575 € + 140,80 € Heizkosten + 24,80 € Klima = 740,60 € | Geschätztes Wohngeld: ca. 200–250 €/Monat.',
+    beispiel: '2-Personen-Haushalt, 2.000 € brutto, 600 € Kaltmiete, Mietstufe III → Bereinigtes Einkommen: ca. 1.400 € | Berücksichtigte Miete: 575 € + 142,60 € Heizkosten + 24,80 € Klima = 742,40 € | Geschätztes Wohngeld: ca. 200–250 €/Monat.',
     erklaerung: `**Was ist Wohngeld und wer hat Anspruch?**
 
 Wohngeld ist ein staatlicher Mietzuschuss für Haushalte mit geringem Einkommen, die keine anderen Sozialleistungen wie Grundsicherungsgeld (bis 30.06.2026 Bürgergeld) oder Sozialhilfe beziehen. Es richtet sich an Mieter (als Mietzuschuss) und Eigentümer (als Lastenzuschuss). Seit dem **Wohngeld-Plus-Gesetz 2023** erhalten deutlich mehr Haushalte in Deutschland Wohngeld — die Zahl der Berechtigten hat sich auf rund zwei Millionen Haushalte verdreifacht. Das Wohngeld wird nicht auf das Einkommen angerechnet und muss nicht zurückgezahlt werden.
 
 **Wohngeld-Plus-Gesetz: Was hat sich geändert?**
 
-Das Wohngeld-Plus-Gesetz brachte drei wesentliche Verbesserungen: Erstens wurde eine **Heizkostenkomponente** eingeführt, die die gestiegenen Energiekosten abfedert. Für einen Zwei-Personen-Haushalt beträgt sie 140,80 Euro monatlich. Zweitens gibt es eine **Klimakomponente** von 24,80 Euro (2 Personen), die energetische Sanierungskosten der Vermieter berücksichtigt. Drittens wurden die **Einkommensgrenzen** deutlich angehoben, sodass mehr Haushalte Anspruch haben. Insgesamt ist das Wohngeld im Durchschnitt um rund 190 Euro pro Monat gestiegen. Für viele Haushalte ist Wohngeld finanziell günstiger als [Grundsicherungsgeld](/finanzen/buergergeld-rechner), da es weniger Auflagen hat und das Vermögen nicht angerechnet wird.
+Das Wohngeld-Plus-Gesetz brachte drei wesentliche Verbesserungen: Erstens wurde eine **Heizkostenkomponente** eingeführt, die die gestiegenen Energiekosten abfedert. Für einen Zwei-Personen-Haushalt beträgt sie 142,60 Euro monatlich. Zweitens gibt es eine **Klimakomponente** von 24,80 Euro (2 Personen), die energetische Sanierungskosten der Vermieter berücksichtigt. Drittens wurden die **Einkommensgrenzen** deutlich angehoben, sodass mehr Haushalte Anspruch haben. Insgesamt ist das Wohngeld im Durchschnitt um rund 190 Euro pro Monat gestiegen. Für viele Haushalte ist Wohngeld finanziell günstiger als [Grundsicherungsgeld](/finanzen/buergergeld-rechner), da es weniger Auflagen hat und das Vermögen nicht angerechnet wird.
 
 **Mietstufen erklärt: Welche Mietstufe hat meine Stadt?**
 

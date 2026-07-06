@@ -83,8 +83,8 @@ const ZUSCHLAG_PRO_PERSON = ZUSCHLAG_PRO_PERSON_WOGG_2026 as number[];
 
 // Heizkostenkomponente § 12 Abs. 6 WoGG (monatl. Gesamtbetrag = CO2-Anteil + dauerhafte
 // Komponente), 1–5 Personen. Quelle: § 12 Abs. 6 WoGG i.d.F. Wohngeld-Plus-Gesetz,
-// unverändert seit 01.01.2023. Stichtag geprüft: 06.07.2026.
-const HEIZKOSTENPAUSCHALE = [110.40, 140.80, 170.20, 199.60, 225.40];
+// unverändert seit 01.01.2023. Stichtag 06.07.2026 (amtl. § 12 Abs. 6-Tabelle verifiziert).
+const HEIZKOSTENPAUSCHALE = [110.40, 142.60, 170.20, 197.80, 225.40];
 const HEIZKOSTENPAUSCHALE_ZUSCHLAG = 27.60;
 
 // Klimakomponente § 12 Abs. 7 WoGG (monatl.), 1–5 Personen. Quelle: § 12 Abs. 7 WoGG.
