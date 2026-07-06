@@ -1104,7 +1104,7 @@ Der jeweils höhere Freibetrag gilt ab Beginn des Monats, in dem die Altersgrenz
       },
       {
         frage: 'Wird die Miete vom Bürgergeld bezahlt?',
-        antwort: 'Ja, das Jobcenter übernimmt die tatsächlichen Kosten der Unterkunft (Miete plus Nebenkosten) und Heizung — allerdings nur in angemessener Höhe. Was als angemessen gilt, hängt von Wohnort und Haushaltsgröße ab. In den ersten 12 Monaten (Karenzzeit) wird die tatsächliche Miete ohne Angemessenheitsprüfung übernommen.',
+        antwort: 'Ja, das Jobcenter übernimmt die tatsächlichen Kosten der Unterkunft (Miete plus Nebenkosten) und Heizung — allerdings nur in angemessener Höhe. Was als angemessen gilt, hängt von Wohnort und Haushaltsgröße ab. Bis zum 30. Juni 2026 galt in den ersten 12 Monaten (Karenzzeit) die tatsächliche Kaltmiete ohne Angemessenheitsprüfung. Seit dem 1. Juli 2026 wird die Bruttokaltmiete in der Karenzzeit nur noch bis zum 1,5-Fachen der örtlichen Angemessenheitsgrenze anerkannt (§ 22 Abs. 1 Satz 5 SGB II n. F.) — bei einem Richtwert von 500 € also bis 750 €. Nach Ablauf der Karenzzeit gilt die reguläre (1,0-fache) Angemessenheitsgrenze; Heizkosten werden ohnehin ab Tag 1 auf Angemessenheit geprüft. Für Bestandsbezieher greift die Deckelung erst mit dem ersten Folgebescheid nach dem 1. Juli 2026 (Bestandsschutz bis zum Ende des laufenden Bewilligungszeitraums).',
       },
       {
         frage: 'Wie viel darf man beim Bürgergeld dazuverdienen?',
