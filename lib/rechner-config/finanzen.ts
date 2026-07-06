@@ -3366,7 +3366,7 @@ Seit dem Beschluss des Bundesverfassungsgerichts 2013 und der „Ehe für alle" 
   },
   {
     slug: 'wohngeld-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-07-06',
     titel: 'Wohngeld-Rechner',
     beschreibung: 'Wohngeld berechnen: Prüfen Sie Ihren Anspruch und die voraussichtliche Höhe des Wohngelds nach dem Wohngeld-Plus-Gesetz 2026.',
     kategorie: 'Finanzen',
@@ -3379,11 +3379,11 @@ Seit dem Beschluss des Bundesverfassungsgerichts 2013 und der „Ehe für alle" 
     beispiel: '2-Personen-Haushalt, 2.000 € brutto, 600 € Kaltmiete, Mietstufe III → Bereinigtes Einkommen: ca. 1.400 € | Berücksichtigte Miete: 575 € + 140,80 € Heizkosten + 24,80 € Klima = 740,60 € | Geschätztes Wohngeld: ca. 200–250 €/Monat.',
     erklaerung: `**Was ist Wohngeld und wer hat Anspruch?**
 
-Wohngeld ist ein staatlicher Mietzuschuss für Haushalte mit geringem Einkommen, die keine anderen Sozialleistungen wie Bürgergeld oder Sozialhilfe beziehen. Es richtet sich an Mieter (als Mietzuschuss) und Eigentümer (als Lastenzuschuss). Seit dem **Wohngeld-Plus-Gesetz 2023** erhalten deutlich mehr Haushalte in Deutschland Wohngeld — die Zahl der Berechtigten hat sich auf rund zwei Millionen Haushalte verdreifacht. Das Wohngeld wird nicht auf das Einkommen angerechnet und muss nicht zurückgezahlt werden.
+Wohngeld ist ein staatlicher Mietzuschuss für Haushalte mit geringem Einkommen, die keine anderen Sozialleistungen wie Grundsicherungsgeld (bis 30.06.2026 Bürgergeld) oder Sozialhilfe beziehen. Es richtet sich an Mieter (als Mietzuschuss) und Eigentümer (als Lastenzuschuss). Seit dem **Wohngeld-Plus-Gesetz 2023** erhalten deutlich mehr Haushalte in Deutschland Wohngeld — die Zahl der Berechtigten hat sich auf rund zwei Millionen Haushalte verdreifacht. Das Wohngeld wird nicht auf das Einkommen angerechnet und muss nicht zurückgezahlt werden.
 
 **Wohngeld-Plus-Gesetz: Was hat sich geändert?**
 
-Das Wohngeld-Plus-Gesetz brachte drei wesentliche Verbesserungen: Erstens wurde eine **Heizkostenpauschale** eingeführt, die die gestiegenen Energiekosten abfedert. Für einen Zwei-Personen-Haushalt beträgt sie 140,80 Euro monatlich. Zweitens gibt es eine **Klimakomponente** von 24,80 Euro (2 Personen), die energetische Sanierungskosten der Vermieter berücksichtigt. Drittens wurden die **Einkommensgrenzen** deutlich angehoben, sodass mehr Haushalte Anspruch haben. Insgesamt ist das Wohngeld im Durchschnitt um rund 190 Euro pro Monat gestiegen. Für viele Haushalte ist Wohngeld finanziell günstiger als [Bürgergeld](/finanzen/buergergeld-rechner), da es weniger Auflagen hat und das Vermögen nicht angerechnet wird.
+Das Wohngeld-Plus-Gesetz brachte drei wesentliche Verbesserungen: Erstens wurde eine **Heizkostenkomponente** eingeführt, die die gestiegenen Energiekosten abfedert. Für einen Zwei-Personen-Haushalt beträgt sie 140,80 Euro monatlich. Zweitens gibt es eine **Klimakomponente** von 24,80 Euro (2 Personen), die energetische Sanierungskosten der Vermieter berücksichtigt. Drittens wurden die **Einkommensgrenzen** deutlich angehoben, sodass mehr Haushalte Anspruch haben. Insgesamt ist das Wohngeld im Durchschnitt um rund 190 Euro pro Monat gestiegen. Für viele Haushalte ist Wohngeld finanziell günstiger als [Grundsicherungsgeld](/finanzen/buergergeld-rechner), da es weniger Auflagen hat und das Vermögen nicht angerechnet wird.
 
 **Mietstufen erklärt: Welche Mietstufe hat meine Stadt?**
 
@@ -3393,9 +3393,9 @@ Deutschland ist in sieben Mietstufen eingeteilt, die das lokale Mietniveau wider
 
 Den Wohngeldantrag stellen Sie bei der Wohngeldstelle Ihrer Stadt- oder Gemeindeverwaltung. Benötigt werden: Personalausweis, Mietvertrag, Einkommensnachweise aller Haushaltsmitglieder (Gehaltsabrechnungen der letzten 3 Monate), Nachweis der Miethöhe und ggf. Nachweise über Freibeträge (Schwerbehindertenausweis, etc.). Die Bearbeitungsdauer beträgt in der Regel 3 bis 6 Wochen. Wichtig: **Wohngeld wird ab dem Monat der Antragstellung gezahlt**, nicht rückwirkend. Stellen Sie den Antrag daher so früh wie möglich. Der Bewilligungszeitraum beträgt in der Regel 12 Monate, danach müssen Sie einen Weiterleistungsantrag stellen.
 
-**Wohngeld und Bürgergeld: Was schließt sich aus?**
+**Wohngeld und Grundsicherungsgeld: Was schließt sich aus?**
 
-Wohngeld und Bürgergeld (ehemals Hartz IV) schließen sich grundsätzlich gegenseitig aus. Wer Bürgergeld bezieht, erhält die Wohnkosten bereits als Teil des Bürgergelds (Kosten der Unterkunft). Ebenso schließen Sozialhilfe und BAföG mit Wohnkostenanteil einen Wohngeldanspruch aus. Für Haushalte nahe der Einkommensgrenze kann es sich lohnen, zu prüfen, ob Wohngeld oder Bürgergeld finanziell günstiger ist. Nutzen Sie unseren [Bürgergeld-Rechner](/finanzen/buergergeld-rechner) und vergleichen Sie. Bei einem [Bruttoeinkommen](/finanzen/brutto-netto-rechner) knapp über der Bürgergeld-Grenze ist Wohngeld häufig die bessere Option — es hat weniger Auflagen, keine Vermögensprüfung unter 60.000 Euro und keinen Vorrang der Arbeitsvermittlung.
+Wohngeld und Grundsicherungsgeld schließen sich grundsätzlich gegenseitig aus. Wer Grundsicherungsgeld bezieht, erhält die Wohnkosten bereits als Teil dieser Leistung (Kosten der Unterkunft). Ebenso schließen Sozialhilfe und BAföG mit Wohnkostenanteil einen Wohngeldanspruch aus. Für Haushalte nahe der Einkommensgrenze kann es sich lohnen, zu prüfen, ob Wohngeld oder Grundsicherungsgeld finanziell günstiger ist. Nutzen Sie unseren [Grundsicherungsgeld-Rechner](/finanzen/buergergeld-rechner) und vergleichen Sie. Bei einem [Bruttoeinkommen](/finanzen/brutto-netto-rechner) knapp über der Grundsicherungsgeld-Grenze ist Wohngeld häufig die bessere Option — es hat weniger Auflagen, keine Vermögensprüfung unter 60.000 Euro und keinen Vorrang der Arbeitsvermittlung.
 
 **Wie wird das Wohngeld genau berechnet?**
 
@@ -3403,7 +3403,7 @@ Die Wohngeldformel nach § 19 WoGG lautet: Wohngeld = 1,15 × (M − (a + b×M +
     faq: [
       {
         frage: 'Habe ich Anspruch auf Wohngeld?',
-        antwort: 'Anspruch auf Wohngeld haben Mieter und Eigentümer mit geringem Einkommen, die keine anderen Sozialleistungen (Bürgergeld, Sozialhilfe, BAföG mit Wohnkosten) beziehen. Die Einkommensgrenze hängt von der Haushaltsgröße und Mietstufe ab. Seit dem Wohngeld-Plus-Gesetz haben deutlich mehr Haushalte Anspruch — prüfen Sie es mit unserem Rechner.',
+        antwort: 'Anspruch auf Wohngeld haben Mieter und Eigentümer mit geringem Einkommen, die keine anderen Sozialleistungen (Grundsicherungsgeld, Sozialhilfe, BAföG mit Wohnkosten) beziehen. Die Einkommensgrenze hängt von der Haushaltsgröße und Mietstufe ab. Seit dem Wohngeld-Plus-Gesetz haben deutlich mehr Haushalte Anspruch — prüfen Sie es mit unserem Rechner.',
       },
       {
         frage: 'Wie hoch ist das Wohngeld 2026?',
@@ -3414,8 +3414,8 @@ Die Wohngeldformel nach § 19 WoGG lautet: Wohngeld = 1,15 × (M − (a + b×M +
         antwort: 'Die Mietstufe (I bis VII) spiegelt das Mietniveau Ihrer Gemeinde wider. Stufe I steht für günstige ländliche Gebiete, Stufe VII für teure Innenstadtlagen (z. B. München). Ihre Mietstufe finden Sie auf der Website des Bundesministeriums für Wohnen (bmwsb.bund.de) oder bei Ihrer Gemeindeverwaltung.',
       },
       {
-        frage: 'Kann ich Wohngeld und Bürgergeld gleichzeitig bekommen?',
-        antwort: 'Nein, Wohngeld und Bürgergeld schließen sich gegenseitig aus. Beim Bürgergeld sind die Wohnkosten bereits enthalten (Kosten der Unterkunft). Liegt Ihr Einkommen knapp über der Bürgergeld-Grenze, ist Wohngeld oft die bessere Wahl — weniger Auflagen, keine strenge Vermögensprüfung.',
+        frage: 'Kann ich Wohngeld und Grundsicherungsgeld gleichzeitig bekommen?',
+        antwort: 'Nein, Wohngeld und Grundsicherungsgeld schließen sich gegenseitig aus. Beim Grundsicherungsgeld sind die Wohnkosten bereits enthalten (Kosten der Unterkunft). Liegt Ihr Einkommen knapp über der Grundsicherungsgeld-Grenze, ist Wohngeld oft die bessere Wahl — weniger Auflagen, keine strenge Vermögensprüfung.',
       },
       {
         frage: 'Wo beantrage ich Wohngeld?',

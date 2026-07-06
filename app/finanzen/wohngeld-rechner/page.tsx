@@ -53,7 +53,7 @@ const faq = [
   {
     frage: 'Wer hat Anspruch auf Wohngeld?',
     antwort:
-      'Mieter und Eigentümer (Selbstnutzer) mit Einkommen oberhalb des Bürgergeld-Bedarfs, aber unterhalb der Einkommensgrenzen nach dem Wohngeldgesetz. Ausgeschlossen sind Empfänger von Bürgergeld oder Grundsicherung im Alter, da diese Leistungen den Unterkunftsbedarf bereits enthalten. Der Antrag wird bei der Wohngeldbehörde der jeweiligen Kommune gestellt.',
+      'Mieter und Eigentümer (Selbstnutzer) mit Einkommen oberhalb des Grundsicherungsgeld-Bedarfs, aber unterhalb der Einkommensgrenzen nach dem Wohngeldgesetz. Ausgeschlossen sind Empfänger von Grundsicherungsgeld oder Grundsicherung im Alter, da diese Leistungen den Unterkunftsbedarf bereits enthalten. Der Antrag wird bei der Wohngeldbehörde der jeweiligen Kommune gestellt.',
   },
   {
     frage: 'Welche Einkommensgrenzen gelten 2026?',
@@ -68,7 +68,7 @@ const faq = [
   {
     frage: 'Wird Wohngeld rückwirkend gezahlt?',
     antwort:
-      'Wohngeld wird grundsätzlich ab dem Ersten des Monats gezahlt, in dem der Antrag bei der Wohngeldbehörde eingegangen ist (§ 25 Abs. 2 WoGG). Eine Rückwirkung für frühere Monate gibt es nur in engen Ausnahmefällen — zum Beispiel wenn ein zuvor gestellter Antrag auf Bürgergeld abgelehnt wurde und der Wohngeldantrag noch im Folgemonat nachgereicht wird (§ 25 Abs. 3 WoGG), oder bei einer rückwirkenden Mieterhöhung von mehr als zehn Prozent (§ 27 WoGG). Für zurückliegende Monate ohne solche Ausnahmesituation entsteht kein Anspruch — ein zügiger Antrag ist daher wichtig.',
+      'Wohngeld wird grundsätzlich ab dem Ersten des Monats gezahlt, in dem der Antrag bei der Wohngeldbehörde eingegangen ist (§ 25 Abs. 2 WoGG). Eine Rückwirkung für frühere Monate gibt es nur in engen Ausnahmefällen — zum Beispiel wenn ein zuvor gestellter Antrag auf Grundsicherungsgeld abgelehnt wurde und der Wohngeldantrag noch im Folgemonat nachgereicht wird (§ 25 Abs. 3 WoGG), oder bei einer rückwirkenden Mieterhöhung von mehr als zehn Prozent (§ 27 WoGG). Für zurückliegende Monate ohne solche Ausnahmesituation entsteht kein Anspruch — ein zügiger Antrag ist daher wichtig.',
   },
   {
     frage: 'Warum verweist rechenfix.de für die Berechnung auf den BMWSB-Rechner?',
@@ -166,18 +166,25 @@ export default function WohngeldErklaerseite() {
               <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                 <li>Mieter oder Eigentümer (Selbstnutzer) mit Hauptwohnsitz in Deutschland.</li>
                 <li>
-                  Das Haushaltseinkommen liegt über dem Bürgergeld-Bedarf, aber unter den
-                  Einkommensgrenzen des Wohngeldgesetzes.
+                  Das Haushaltseinkommen liegt über dem Bedarf des Grundsicherungsgelds
+                  (bis 30.06.2026 Bürgergeld), aber unter den Einkommensgrenzen des
+                  Wohngeldgesetzes.
                 </li>
                 <li>
-                  Kein gleichzeitiger Bezug von Bürgergeld, Grundsicherung im Alter oder Hilfe zum
-                  Lebensunterhalt — diese Leistungen enthalten bereits einen Unterkunftsanteil.
+                  Kein gleichzeitiger Bezug von Grundsicherungsgeld, Grundsicherung im Alter oder
+                  Hilfe zum Lebensunterhalt — diese Leistungen enthalten bereits einen
+                  Unterkunftsanteil.
                 </li>
                 <li>
                   Der Antrag wird bei der Wohngeldbehörde der Gemeinde, Stadt oder des Kreises
                   gestellt, in der Regel als Mieter- oder Lastenzuschussantrag.
                 </li>
               </ul>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed mt-3">
+                Das Grundsicherungsgeld löste zum 01.07.2026 das Bürgergeld ab (13. SGB-II-ÄndG).
+                Am gegenseitigen Ausschluss von Wohngeld und dieser Grundsicherungsleistung nach
+                § 7 WoGG ändert sich dadurch inhaltlich nichts.
+              </p>
 
               <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mt-8 mb-3">
                 Mietstufen I bis VII
@@ -373,7 +380,7 @@ export default function WohngeldErklaerseite() {
                 </li>
               </ul>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed mt-3">
-                Einen allgemeinen Erwerbstätigen-Freibetrag wie beim Bürgergeld kennt das
+                Einen allgemeinen Erwerbstätigen-Freibetrag wie beim Grundsicherungsgeld kennt das
                 Wohngeldrecht dagegen <strong>nicht</strong> — die Entlastung Erwerbstätiger erfolgt
                 allein über die genannten Pauschalabzüge von bis zu 30 Prozent.
               </p>
@@ -388,7 +395,7 @@ export default function WohngeldErklaerseite() {
                 zusätzlich <strong>30.000 € für jedes weitere</strong> als erheblich. Selbst genutztes
                 Wohneigentum in angemessener Größe sowie übliches Hausrats- und
                 Altersvorsorgevermögen bleiben dabei unberücksichtigt. Die Vermögensgrenzen sind
-                damit deutlich großzügiger als beim Bürgergeld.
+                damit deutlich großzügiger als beim Grundsicherungsgeld.
               </p>
 
               <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mt-8 mb-3">
@@ -424,7 +431,7 @@ export default function WohngeldErklaerseite() {
                 Ein Single-Haushalt in Mietstufe IV mit 1.400 € Bruttoeinkommen aus
                 nichtselbständiger Arbeit und einer Kaltmiete von 500 € hat 2026 einen
                 Wohngeldanspruch von rund <strong>215 €</strong> monatlich (Wert nach offiziellem
-                BMWSB-Wohngeldrechner, Stand 22.04.2026). Vom Bruttoeinkommen werden dabei die
+                BMWSB-Wohngeldrechner, Stand 06.07.2026). Vom Bruttoeinkommen werden dabei die
                 Werbungskostenpauschale und die Pauschalabzüge abgezogen, sodass das
                 wohngeldrechtliche Einkommen deutlich niedriger liegt als die 1.400 €. Dieser Wert
                 dient nur der <strong>Orientierung</strong>; verbindlich ist allein das Ergebnis des
