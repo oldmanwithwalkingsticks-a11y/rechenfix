@@ -4,8 +4,8 @@
  * Historie:
  * - 01.01.2024–31.12.2024: 12,41 € (MiLoV 2023)
  * - 01.01.2025–31.12.2025: 12,82 € (MiLoV 2023, Stufe 2)
- * - 01.01.2026–31.12.2026: 13,90 € (Vierte MiLoV, Beschluss 27.06.2025)
- * - Ab 01.01.2027:         14,60 € (Vierte MiLoV, Stufe 2)
+ * - 01.01.2026–31.12.2026: 13,90 € (Fünfte MiLoV, BGBl. verkündet 07.11.2025)
+ * - Ab 01.01.2027:         14,60 € (Fünfte MiLoV, Stufe 2)
  *
  * Konsumenten müssen NIE einen hartkodierten Stundenlohn führen, sondern
  * importieren entweder die konstante `MINDESTLOHN` (tagesaktuell beim

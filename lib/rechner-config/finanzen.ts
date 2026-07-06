@@ -975,7 +975,7 @@ Mit dem 13. Gesetz zur Änderung des SGB II (BGBl. 2026 I Nr. 107) wurde die Kar
 - **Ab dem 41. Lebensjahr:** 12.500 Euro
 - **Ab dem 51. Lebensjahr:** 20.000 Euro
 
-Der jeweils höhere Freibetrag gilt ab Beginn des Monats, in dem die Altersgrenze erreicht wird. Die Freibeträge werden pro Person summiert — ein Paar mit 28 und 52 Jahren hat zusammen also 5.000 + 20.000 = 25.000 Euro Schonvermögen. Selbstgenutztes Hausgrundstück oder selbstgenutzte Eigentumswohnung bleiben während der Karenzzeit (erstes Bezugsjahr, § 22 Abs. 1 Satz 2 SGB II) unabhängig von der Größe zusätzlich geschützt (§ 12 Abs. 1 Satz 3 SGB II n. F.).
+Der jeweils höhere Freibetrag gilt ab Beginn des Monats, in dem die Altersgrenze erreicht wird. Die Freibeträge werden pro Person summiert — ein Paar mit 28 und 52 Jahren hat zusammen also 5.000 + 20.000 = 25.000 Euro Schonvermögen. Selbstgenutztes Hausgrundstück oder selbstgenutzte Eigentumswohnung bleiben im ersten Bezugsjahr (Wohnkosten-Schonfrist nach § 22 Abs. 1 Satz 2 SGB II — diese besteht fort, anders als die entfallene Vermögens-Karenzzeit) unabhängig von der Größe zusätzlich geschützt (§ 12 Abs. 1 Satz 3 SGB II n. F.).
 
 **Übergangsschutz für Bestandsfälle:** Wer am 30. Juni 2026 bereits im Leistungsbezug war, behält für eine Übergangszeit von sechs Monaten — bis zum 31. Dezember 2026 — das bisherige Schonvermögen von 15.000 Euro pro Person; die neue Altersstaffelung greift für diese Bestandsfälle erst ab dem 1. Januar 2027. Für Neuanträge ab dem 1. Juli 2026 gilt die neue Tabelle dagegen sofort.
 
