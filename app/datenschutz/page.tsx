@@ -211,9 +211,6 @@ export default function DatenschutzSeite() {
                 <strong>KS Auxilia</strong> (Rechtsschutzversicherung)
               </li>
               <li>
-                <strong>Eventfloss Berlin</strong> (Eventveranstalter)
-              </li>
-              <li>
                 <strong>Verivox</strong> (Vergleichsportal)
               </li>
             </ul>

@@ -33,7 +33,6 @@
 | Verivox | 14797 | verivox.de |
 | hotel.de | 16018 | hotel.de |
 | burda-vergleicht (Zahnzusatz) | 121064 | zahn.burda-vergleicht.de |
-| Eventfloss Berlin | 27722 | eventfloss-berlin.de |
 | Nature's Way | 47173 | naturesway.de |
 | **CosmosDirekt** (neu, Prompt 145, 25.04.2026) | **11893** | cosmosdirekt.de — 15 Produkt-Deeplinks (Tagesgeld, Altersvorsorge, Sparplan, Junior, Risikoleben, BU, Unfall, Sterbegeld, Privat-Haftpflicht, Hausrat, Wohngebäude, Bauherrenhaftpflicht, Tierhalter, Reiserücktritt) |
 

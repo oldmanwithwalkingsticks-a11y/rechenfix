@@ -240,7 +240,7 @@ Doku-Artefakte: `docs/stufe2-rechner-semantik.md`.
 **Prompt 106** — 3 neue Awin-Partner auf 9 Rechnern platziert:
 - hotel.de (MID 16018): /arbeit/urlaubstage-rechner, /alltag/countdown, /auto/spritkosten-rechner
 - burda-Zahnzusatz (MID 121064): /finanzen/pflegegeld-, krankengeld-, rentenrechner + /gesundheit/raucher-, schlaf-rechner
-- eventfloss-berlin (MID 27722): /alltag/geburtstag-rechner (Test, CTR-Review ~20.05.2026)
+- eventfloss-berlin (MID 27722): **entfernt 06.07.2026** (Test auf /alltag/geburtstag-rechner nach CTR-Review beendet; Programm-Definition + Box + Datenschutz-Eintrag ausgebaut)
 
 Gleichzeitig: Affiliate-Regel von „kein Affiliate in Gesundheit/Mathe" umgestellt auf thematischen Match. Details in CLAUDE.md → Abschnitt „Affiliate-Platzierungs-Regel".
 
@@ -537,7 +537,6 @@ Publisher-ID: 2843240
 | CHECK24 | 9364 | **check24.net** (NICHT .de!) | /strom/, /gas/, /kfz-versicherung/, /kredit/ |
 | congstar | 11938 | congstar.de | /handytarife/ |
 | KS Auxilia | 108114 | — (keine Deeplinks) | — |
-| Eventfloss Berlin | 27722 | eventfloss-berlin.de | / (aktiv auf /alltag/geburtstag-rechner) |
 | Verivox | 14797 | verivox.de | /depot/, /depot/etf-vergleich/ |
 | hotel.de | 16018 | hotel.de | / |
 | burda-vergleicht (Zahnzusatz) | 121064 | zahn.burda-vergleicht.de | /campaign_600.html |

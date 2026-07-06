@@ -60,15 +60,6 @@ const AFFILIATE_PROGRAMS = {
     icon: '⚖️',
     color: '#B22222',
   },
-  eventfloss: {
-    name: 'Eventfloss Berlin',
-    tagline: 'Unvergessliche Events auf dem Wasser — jetzt planen',
-    cta: 'Events entdecken',
-    baseUrl: 'https://www.awin1.com/cread.php?awinmid=27722&awinaffid=2843240',
-    deeplink: 'https://www.eventfloss-berlin.de/',
-    icon: '🚢',
-    color: '#1565C0',
-  },
   hotelde: {
     name: 'hotel.de',
     tagline: 'Günstige Hotels weltweit — über 340.000 Hotels einfach und schnell buchen',
@@ -205,9 +196,6 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'rente': 'Vorsorge für die Zähne. Im Alter wird Zahnersatz häufiger nötig. Zahnzusatztarife jetzt bei burda-vergleicht prüfen.',
     'raucher': 'Zahngesundheit absichern. Rauchen erhöht das Risiko für Parodontitis und Zahnverlust. Zahnzusatz vergleichen bei burda-vergleicht.',
     'schlaf': 'Schutz bei Bruxismus. Nächtliches Zähneknirschen kann teuer werden. Zahnzusatztarife vergleichen bei burda-vergleicht.',
-  },
-  eventfloss: {
-    'geburtstag': 'Geburtstag in Berlin? Feiern Sie auf dem Eventfloß auf der Spree — der Geheimtipp für besondere Geburtstage in Berlin.',
   },
   'ks-auxilia': {
     'rechtsschutz': 'KS Auxilia bietet Rechtsschutzversicherung ab 18,90 €/Monat — mit freier Anwaltswahl.',
