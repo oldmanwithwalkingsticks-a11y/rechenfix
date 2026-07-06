@@ -38,7 +38,7 @@ const faq = [
   },
   {
     frage: 'Was ist der Erwerbstätigen-Freibetrag bei 2.500 Euro brutto?',
-    antwort: 'Genauso wie bei 2.000 €: Bei aufstockendem Bürgergeld-Bezug behalten Sie nach § 11b SGB II zusätzlich bis zu 348 € (Single) bzw. 398 € (mit Kind) anrechnungsfrei. Der Maximum-Freibetrag ist bei 1.200 €/1.500 € Brutto bereits ausgeschöpft. Allerdings: Bei 2.500 € Brutto Single in Leipzig ist Bürgergeld-Anspruch in der Regel ausgeschlossen — bei Familien oder sehr hohen Mietkosten (München, Hamburg) kann der Anspruch greifen.',
+    antwort: 'Genauso wie bei 2.000 €: Bei aufstockendem Bürgergeld-Bezug (seit 01.07.2026 Grundsicherungsgeld) behalten Sie nach § 11b SGB II zusätzlich bis zu 348 € (Single) bzw. 398 € (mit Kind) anrechnungsfrei. Der Maximum-Freibetrag ist bei 1.200 €/1.500 € Brutto bereits ausgeschöpft. Allerdings: Bei 2.500 € Brutto Single in Leipzig ist Bürgergeld-Anspruch in der Regel ausgeschlossen — bei Familien oder sehr hohen Mietkosten (München, Hamburg) kann der Anspruch greifen.',
   },
   {
     frage: 'Reicht 2.500 Euro brutto für eine Familie in Leipzig?',

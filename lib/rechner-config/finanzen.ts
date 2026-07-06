@@ -729,8 +729,8 @@ Beide Zuschläge werden unabhängig von der Höhe des regulären Elterngeldes ge
         antwort: 'Elterngeld sollte möglichst bald nach der Geburt beantragt werden. Es wird rückwirkend nur für maximal 3 Lebensmonate vor dem Monat der Antragstellung gezahlt. Den Antrag können Sie bei der Elterngeldstelle Ihres Bundeslandes einreichen — teilweise auch online.',
       },
       {
-        frage: 'Wird Elterngeld auf Bürgergeld angerechnet?',
-        antwort: 'Ja, Elterngeld wird grundsätzlich als Einkommen auf das Bürgergeld (ehemals Hartz IV) angerechnet. Es gibt jedoch einen Freibetrag: Wer vor der Geburt erwerbstätig war, kann bis zu 300 Euro monatlich vom Elterngeld behalten, ohne dass es angerechnet wird.',
+        frage: 'Wird Elterngeld auf Grundsicherungsgeld (Bürgergeld) angerechnet?',
+        antwort: 'Ja, Elterngeld wird grundsätzlich als Einkommen auf das Grundsicherungsgeld (bis 30.06.2026 Bürgergeld) angerechnet. Es gibt jedoch einen Freibetrag: Wer vor der Geburt erwerbstätig war, kann bis zu 300 Euro monatlich vom Elterngeld behalten, ohne dass es angerechnet wird.',
       },
       {
         frage: 'Wie wirkt sich Elterngeld auf die Steuererklärung aus?',
@@ -775,7 +775,7 @@ Wer selbst kündigt oder einen Aufhebungsvertrag ohne wichtigen Grund schließt,
 
 **Nach dem ALG I — was kommt danach?**
 
-Ist der Anspruch auf ALG I aufgebraucht und wurde keine neue Anwartschaftszeit aufgebaut, greift das **Bürgergeld** (§ 19 SGB II). Anders als das ALG I ist das Bürgergeld eine bedarfsorientierte Grundsicherung: Eigenes Vermögen und Einkommen des Partners werden angerechnet, die Höhe richtet sich nicht nach dem früheren Gehalt, sondern nach Regelsatz, Miete und Nebenkosten. Unser [Bürgergeld-Rechner](/finanzen/buergergeld-rechner) hilft bei der Orientierung.
+Ist der Anspruch auf ALG I aufgebraucht und wurde keine neue Anwartschaftszeit aufgebaut, greift das **Grundsicherungsgeld** (bis 30.06.2026 Bürgergeld; § 19 SGB II). Anders als das ALG I ist das Grundsicherungsgeld eine bedarfsorientierte Grundsicherung: Eigenes Vermögen und Einkommen des Partners werden angerechnet, die Höhe richtet sich nicht nach dem früheren Gehalt, sondern nach Regelsatz, Miete und Nebenkosten. Unser [Bürgergeld-Rechner](/finanzen/buergergeld-rechner) hilft bei der Orientierung.
 
 **Hinweis zur Abfindung**
 
@@ -791,8 +791,8 @@ Eine **Abfindung** bei einvernehmlicher Auflösung des Arbeitsverhältnisses wir
     contentBloecke: [
       {
         typ: 'text',
-        titel: 'Was ALG I ist — und der Unterschied zum Bürgergeld',
-        html: `<p>Das <strong>Arbeitslosengeld I (ALG I)</strong> ist eine echte Versicherungsleistung. Wer sozialversicherungspflichtig beschäftigt ist, zahlt über die Arbeitslosenversicherung Beiträge ein und erwirbt damit einen Anspruch — geregelt im Dritten Sozialgesetzbuch (SGB III) und ausgezahlt von der Agentur für Arbeit. Die Höhe richtet sich nach dem früheren Verdienst, nicht nach Bedürftigkeit. Es ist also kein Almosen, sondern eine vorher erworbene Gegenleistung für gezahlte Beiträge.</p><p>Genau das unterscheidet ALG I vom <strong>Bürgergeld</strong> (SGB II): Bürgergeld ist eine bedarfsorientierte Grundsicherung. Sie wird erst nach einer Vermögensprüfung und unter Anrechnung des Partnereinkommens gezahlt und bemisst sich nach Regelsatz, Miete und Nebenkosten — unabhängig vom letzten Gehalt. ALG I dagegen ist <strong>einkommensabhängig</strong>: Wer mehr verdient hat, bekommt mehr. Erst wenn der ALG-I-Anspruch aufgebraucht ist und keine neue Anwartschaft aufgebaut wurde, folgt das Bürgergeld.</p><p>Steuerlich ist ALG I <strong>steuerfrei</strong>, unterliegt aber dem <strong>Progressionsvorbehalt</strong>: Es erhöht den Steuersatz auf das übrige Einkommen im selben Kalenderjahr. Wer im Bezugsjahr noch Gehalt bezogen hat oder mit dem Partner zusammen veranlagt wird, sollte deshalb mit einer möglichen Steuernachzahlung rechnen und das bezogene ALG in der Steuererklärung angeben.</p><p>Finanziert wird die Leistung aus dem Beitrag zur Arbeitslosenversicherung, den Arbeitgeber und Arbeitnehmer je zur Hälfte tragen. Schon deshalb ist ALG I keine Sozialhilfe: Es ist ein Anspruch, den man sich über Jahre der Beschäftigung erarbeitet hat. Während des Bezugs bleibt man kranken-, pflege- und rentenversichert — die Agentur für Arbeit übernimmt die Beiträge, sodass keine Lücke in der Sozialversicherung entsteht.</p>`,
+        titel: 'Was ALG I ist — und der Unterschied zum Grundsicherungsgeld',
+        html: `<p>Das <strong>Arbeitslosengeld I (ALG I)</strong> ist eine echte Versicherungsleistung. Wer sozialversicherungspflichtig beschäftigt ist, zahlt über die Arbeitslosenversicherung Beiträge ein und erwirbt damit einen Anspruch — geregelt im Dritten Sozialgesetzbuch (SGB III) und ausgezahlt von der Agentur für Arbeit. Die Höhe richtet sich nach dem früheren Verdienst, nicht nach Bedürftigkeit. Es ist also kein Almosen, sondern eine vorher erworbene Gegenleistung für gezahlte Beiträge.</p><p>Genau das unterscheidet ALG I vom <strong>Grundsicherungsgeld</strong> (SGB II): Das Grundsicherungsgeld ist eine bedarfsorientierte Grundsicherung. Sie wird erst nach einer Vermögensprüfung und unter Anrechnung des Partnereinkommens gezahlt und bemisst sich nach Regelsatz, Miete und Nebenkosten — unabhängig vom letzten Gehalt. ALG I dagegen ist <strong>einkommensabhängig</strong>: Wer mehr verdient hat, bekommt mehr. Erst wenn der ALG-I-Anspruch aufgebraucht ist und keine neue Anwartschaft aufgebaut wurde, folgt das Grundsicherungsgeld.</p><p>Steuerlich ist ALG I <strong>steuerfrei</strong>, unterliegt aber dem <strong>Progressionsvorbehalt</strong>: Es erhöht den Steuersatz auf das übrige Einkommen im selben Kalenderjahr. Wer im Bezugsjahr noch Gehalt bezogen hat oder mit dem Partner zusammen veranlagt wird, sollte deshalb mit einer möglichen Steuernachzahlung rechnen und das bezogene ALG in der Steuererklärung angeben.</p><p>Finanziert wird die Leistung aus dem Beitrag zur Arbeitslosenversicherung, den Arbeitgeber und Arbeitnehmer je zur Hälfte tragen. Schon deshalb ist ALG I keine Sozialhilfe: Es ist ein Anspruch, den man sich über Jahre der Beschäftigung erarbeitet hat. Während des Bezugs bleibt man kranken-, pflege- und rentenversichert — die Agentur für Arbeit übernimmt die Beiträge, sodass keine Lücke in der Sozialversicherung entsteht.</p>`,
       },
       {
         typ: 'tabelle',
@@ -896,7 +896,7 @@ Eine **Abfindung** bei einvernehmlicher Auflösung des Arbeitsverhältnisses wir
       { frage: 'Wie lange bekomme ich ALG I?', antwort: 'Die Bezugsdauer richtet sich nach Beschäftigungsdauer und Alter: 12 Monate Beschäftigung ergeben 6 Monate ALG, 24 Monate Beschäftigung 12 Monate ALG. Ältere Arbeitnehmer erhalten länger: ab 50 Jahre bis zu 15 Monate, ab 55 bis zu 18 Monate, ab 58 sogar bis zu 24 Monate.' },
       { frage: 'Wird eine Abfindung auf das ALG I angerechnet?', antwort: 'Grundsätzlich nicht — solange die ordentliche Kündigungsfrist eingehalten wird. Wird die Kündigungsfrist verkürzt (z. B. im Aufhebungsvertrag), ruht das ALG bis zum fiktiven regulären Kündigungstermin (§ 158 SGB III). Steuerlich profitieren Abfindungen von der Fünftelregelung.' },
       { frage: 'Was passiert bei Eigenkündigung?', antwort: 'Bei Eigenkündigung oder Aufhebungsvertrag ohne wichtigen Grund verhängt die Arbeitsagentur eine Sperrzeit von 12 Wochen. In dieser Zeit wird kein ALG gezahlt und die Gesamtanspruchsdauer verkürzt sich um bis zu ein Viertel. Ein wichtiger Grund (z. B. Mobbing, gesundheitliche Gründe) muss nachgewiesen werden.' },
-      { frage: 'Was kommt nach ALG I?', antwort: 'Ist der ALG-Anspruch aufgebraucht, greift das Bürgergeld als Grundsicherung (§ 19 SGB II). Anders als das ALG I ist es bedarfsorientiert: Höhe richtet sich nach Regelsatz, Miete und Nebenkosten; Vermögen und Partnereinkommen werden angerechnet. Nutzen Sie unseren Bürgergeld-Rechner für eine Schätzung.' },
+      { frage: 'Was kommt nach ALG I?', antwort: 'Ist der ALG-Anspruch aufgebraucht, greift das Grundsicherungsgeld (§ 19 SGB II). Anders als das ALG I ist es bedarfsorientiert: Höhe richtet sich nach Regelsatz, Miete und Nebenkosten; Vermögen und Partnereinkommen werden angerechnet. Nutzen Sie unseren Bürgergeld-Rechner für eine Schätzung.' },
       { frage: 'Welche Steuerklasse zählt für die ALG-I-Berechnung?', antwort: 'Maßgeblich für die Höhe des ALG I ist die Steuerklasse, die am **1. Januar des Anspruchsjahres** in der ELStAM-Datenbank eingetragen ist. Wer einen Wechsel erwägt — etwa von IV/IV auf III/V bei Verheirateten — sollte ihn rechtzeitig vor Jahresende beantragen. Ein Wechsel im laufenden Jahr ändert das ALG für dieses Jahr nicht mehr; er wirkt sich erst auf einen Anspruch aus, der in einem späteren Jahr beginnt.' },
       { frage: 'Darf ich neben dem ALG I etwas dazuverdienen?', antwort: 'Ja, aber nur eingeschränkt. Nach **§ 155 SGB III** bleibt ein Nebenverdienst von bis zu **165 €/Monat** anrechnungsfrei. Darüber hinausgehendes Einkommen wird vom ALG abgezogen. Die Nebenbeschäftigung darf außerdem **weniger als 15 Wochenstunden** umfassen — sonst gilt sie als nicht mehr „kurzzeitig" und der ALG-Anspruch entfällt vollständig, weil die Verfügbarkeit nicht mehr gegeben ist. Jede Nebentätigkeit muss vorab der Arbeitsagentur gemeldet werden.' },
     ],
@@ -3462,7 +3462,7 @@ Der BAföG-Freibetrag für eigenes Einkommen liegt bei **330 Euro monatlich** (3
 
 **BAföG beantragen: So geht's**
 
-Den BAföG-Antrag stellen Sie beim zuständigen Studenten- oder Schülerwerk (bei Studierenden) oder beim Amt für Ausbildungsförderung (bei Schülern). Benötigt werden: FormBlatt 1 (Antrag), FormBlatt 3 (Einkommen der Eltern), Immatrikulationsbescheinigung, Mietvertrag und Einkommensnachweise. Viele Bundesländer bieten den digitalen Antrag über BAföG Digital an. Die Bearbeitungszeit beträgt durchschnittlich 6 bis 8 Wochen. BAföG wird ab dem Monat der Antragstellung gezahlt — nicht rückwirkend! Stellen Sie den Antrag daher rechtzeitig vor Semesterbeginn. Bei einem zu niedrigen Anspruch prüfen Sie Alternativen wie [Bürgergeld](/finanzen/buergergeld-rechner) oder Wohngeld.`,
+Den BAföG-Antrag stellen Sie beim zuständigen Studenten- oder Schülerwerk (bei Studierenden) oder beim Amt für Ausbildungsförderung (bei Schülern). Benötigt werden: FormBlatt 1 (Antrag), FormBlatt 3 (Einkommen der Eltern), Immatrikulationsbescheinigung, Mietvertrag und Einkommensnachweise. Viele Bundesländer bieten den digitalen Antrag über BAföG Digital an. Die Bearbeitungszeit beträgt durchschnittlich 6 bis 8 Wochen. BAföG wird ab dem Monat der Antragstellung gezahlt — nicht rückwirkend! Stellen Sie den Antrag daher rechtzeitig vor Semesterbeginn. Bei einem zu niedrigen Anspruch prüfen Sie Alternativen wie [Grundsicherungsgeld](/finanzen/buergergeld-rechner) (bis 30.06.2026 Bürgergeld) oder Wohngeld.`,
     faq: [
       {
         frage: 'Wie viel BAföG bekomme ich?',
@@ -3632,7 +3632,7 @@ Hier liegt die eigentliche Stärke des Aufstiegs-BAföG gegenüber gewöhnlichen
 
 **Einkommensanrechnung beim Unterhaltsbeitrag**
 
-Das Elterneinkommen wird beim Aufstiegs-BAföG **nicht** angerechnet — AFBG ist konzeptionell ein Instrument für Berufstätige. Angerechnet werden nur eigenes Einkommen, das Einkommen des Ehegatten oder Lebenspartners sowie das eigene Vermögen. Freibeträge: 603 Euro pro Monat Bruttoeinkommen für den Antragsteller (entspricht der Minijob-Grenze 2026), 850 Euro für den Ehepartner und 770 Euro pro kindergeldberechtigtem Kind. Der Vermögensfreibetrag beträgt 45.000 Euro plus je 2.300 Euro pro Ehegatten und Kind. Über diesen Grenzen fließen übersteigende Beträge zu 50 Prozent in die Anrechnung ein (je Kind minus 5 Prozent-Punkte bis auf null). Vergleichen Sie alternativ auch Ihren Anspruch auf [reguläres BAföG](/finanzen/bafoeg-rechner) oder [Bürgergeld](/finanzen/buergergeld-rechner).
+Das Elterneinkommen wird beim Aufstiegs-BAföG **nicht** angerechnet — AFBG ist konzeptionell ein Instrument für Berufstätige. Angerechnet werden nur eigenes Einkommen, das Einkommen des Ehegatten oder Lebenspartners sowie das eigene Vermögen. Freibeträge: 603 Euro pro Monat Bruttoeinkommen für den Antragsteller (entspricht der Minijob-Grenze 2026), 850 Euro für den Ehepartner und 770 Euro pro kindergeldberechtigtem Kind. Der Vermögensfreibetrag beträgt 45.000 Euro plus je 2.300 Euro pro Ehegatten und Kind. Über diesen Grenzen fließen übersteigende Beträge zu 50 Prozent in die Anrechnung ein (je Kind minus 5 Prozent-Punkte bis auf null). Vergleichen Sie alternativ auch Ihren Anspruch auf [reguläres BAföG](/finanzen/bafoeg-rechner) oder [Grundsicherungsgeld](/finanzen/buergergeld-rechner) (bis 30.06.2026 Bürgergeld).
 
 **Rückzahlung und Freistellung**
 
@@ -3728,7 +3728,7 @@ Der Antrag wird beim zuständigen Landesamt für Ausbildungsförderung gestellt 
       {
         typ: 'text',
         titel: 'Einkommens- und Vermögensanrechnung beim Unterhaltsbeitrag',
-        html: `<p>Der Maßnahmebeitrag ist <strong>einkommens- und vermögensunabhängig</strong> — die Lehrgangskosten werden unabhängig vom Verdienst gefördert. Nur der Unterhaltsbeitrag wird gekürzt, wenn eigenes Einkommen vorhanden ist. Anders als beim regulären BAföG zählt das <strong>Elterneinkommen ausdrücklich nicht</strong>: AFBG ist konzeptionell ein Instrument für bereits Berufstätige, die sich neben oder nach dem Beruf weiterqualifizieren.</p><p>Angerechnet werden nur das eigene Einkommen, das Einkommen des Ehe- oder Lebenspartners sowie das eigene Vermögen. Die monatlichen Freibeträge betragen <strong>603 € für den Antragsteller</strong> (das entspricht der Minijob-Grenze 2026), <strong>850 € für den Partner</strong> und <strong>770 € je kindergeldberechtigtem Kind</strong>. Übersteigende Beträge fließen zu 50 % in die Anrechnung ein, je Kind sinkt diese Quote um 5 Prozentpunkte bis auf null — mit zwei oder mehr Kindern bleibt also ein größerer Teil des Verdienstes anrechnungsfrei. Der <strong>Vermögensfreibetrag</strong> liegt bei 45.000 € plus je 2.300 € für Partner und Kind. Bei mehreren geförderten Auszubildenden in der Familie kann sich der anrechenbare Betrag zusätzlich aufteilen. Prüfen Sie alternativ Ihren Anspruch auf <a href="/finanzen/bafoeg-rechner">reguläres BAföG</a> oder <a href="/finanzen/buergergeld-rechner">Bürgergeld</a>.</p>`,
+        html: `<p>Der Maßnahmebeitrag ist <strong>einkommens- und vermögensunabhängig</strong> — die Lehrgangskosten werden unabhängig vom Verdienst gefördert. Nur der Unterhaltsbeitrag wird gekürzt, wenn eigenes Einkommen vorhanden ist. Anders als beim regulären BAföG zählt das <strong>Elterneinkommen ausdrücklich nicht</strong>: AFBG ist konzeptionell ein Instrument für bereits Berufstätige, die sich neben oder nach dem Beruf weiterqualifizieren.</p><p>Angerechnet werden nur das eigene Einkommen, das Einkommen des Ehe- oder Lebenspartners sowie das eigene Vermögen. Die monatlichen Freibeträge betragen <strong>603 € für den Antragsteller</strong> (das entspricht der Minijob-Grenze 2026), <strong>850 € für den Partner</strong> und <strong>770 € je kindergeldberechtigtem Kind</strong>. Übersteigende Beträge fließen zu 50 % in die Anrechnung ein, je Kind sinkt diese Quote um 5 Prozentpunkte bis auf null — mit zwei oder mehr Kindern bleibt also ein größerer Teil des Verdienstes anrechnungsfrei. Der <strong>Vermögensfreibetrag</strong> liegt bei 45.000 € plus je 2.300 € für Partner und Kind. Bei mehreren geförderten Auszubildenden in der Familie kann sich der anrechenbare Betrag zusätzlich aufteilen. Prüfen Sie alternativ Ihren Anspruch auf <a href="/finanzen/bafoeg-rechner">reguläres BAföG</a> oder <a href="/finanzen/buergergeld-rechner">Grundsicherungsgeld</a>.</p>`,
       },
       {
         typ: 'vergleich',
@@ -4096,7 +4096,7 @@ Zum 1. Januar 2025 wurden alle Leistungsbeträge der Pflegeversicherung um **4,5
 
 **Eigenanteil im Pflegeheim: Wie hoch ist er wirklich?**
 
-Der wohl größte Finanz-Schock für viele Familien: Die Pflegeversicherung deckt die Pflegeheim-Kosten nur zu einem Bruchteil ab. Die gesetzlichen Leistungen für stationäre Pflege liegen zwischen 805 € (Grad 2) und 2.096 € (Grad 5) monatlich — ein deutscher Heimplatz kostet aber durchschnittlich **2.500 bis 3.500 € pro Monat Eigenanteil** (Stand 2026). Dieser sogenannte **einrichtungseinheitliche Eigenanteil (EEE)** umfasst Unterkunft, Verpflegung, Investitionskosten und nicht-pflegerische Ausgaben. Seit 2022 gibt es einen **Leistungszuschlag**, der den Eigenanteil im ersten Jahr um 15 %, im zweiten um 30 %, im dritten um 50 % und ab dem vierten Jahr um 75 % reduziert. Reicht die Rente nicht aus, springt die Sozialhilfe ein — prüfen Sie auch Ihren Anspruch auf [Bürgergeld](/finanzen/buergergeld-rechner) oder [Wohngeld](/finanzen/wohngeld-rechner).
+Der wohl größte Finanz-Schock für viele Familien: Die Pflegeversicherung deckt die Pflegeheim-Kosten nur zu einem Bruchteil ab. Die gesetzlichen Leistungen für stationäre Pflege liegen zwischen 805 € (Grad 2) und 2.096 € (Grad 5) monatlich — ein deutscher Heimplatz kostet aber durchschnittlich **2.500 bis 3.500 € pro Monat Eigenanteil** (Stand 2026). Dieser sogenannte **einrichtungseinheitliche Eigenanteil (EEE)** umfasst Unterkunft, Verpflegung, Investitionskosten und nicht-pflegerische Ausgaben. Seit 2022 gibt es einen **Leistungszuschlag**, der den Eigenanteil im ersten Jahr um 15 %, im zweiten um 30 %, im dritten um 50 % und ab dem vierten Jahr um 75 % reduziert. Reicht die Rente nicht aus, springt die Sozialhilfe ein — prüfen Sie auch Ihren Anspruch auf [Grundsicherungsgeld](/finanzen/buergergeld-rechner) (bis 30.06.2026 Bürgergeld) oder [Wohngeld](/finanzen/wohngeld-rechner).
 
 **Zusatzleistungen: Was Sie oft nicht wissen**
 
@@ -4119,8 +4119,8 @@ Neben dem Pflegegeld haben alle Pflegegrade (auch Grad 1) Anspruch auf den **Ent
         antwort: 'Den Pflegegrad stellt der Medizinische Dienst (MD, früher MDK) im Auftrag der Pflegekasse fest. Bei Privatversicherten übernimmt das Medicproof. Ein Gutachter kommt zur pflegebedürftigen Person nach Hause und bewertet die Selbstständigkeit in 6 Lebensbereichen nach einem Punktesystem (NBA). Das Verfahren dauert nach Antragstellung 25 Arbeitstage. Einen Widerspruch kann man innerhalb eines Monats nach Bescheid einlegen.',
       },
       {
-        frage: 'Wird das Pflegegeld auf Bürgergeld angerechnet?',
-        antwort: 'Nein. Pflegegeld ist eine zweckgebundene Leistung der Pflegeversicherung und wird NICHT auf Bürgergeld, Grundsicherung oder Wohngeld angerechnet. Es bleibt der pflegebedürftigen Person bzw. den Angehörigen in voller Höhe zur Verfügung. Auch bei der Einkommensteuer bleibt Pflegegeld steuerfrei.',
+        frage: 'Wird das Pflegegeld auf Grundsicherungsgeld (Bürgergeld) angerechnet?',
+        antwort: 'Nein. Pflegegeld ist eine zweckgebundene Leistung der Pflegeversicherung und wird NICHT auf Grundsicherungsgeld, Grundsicherung oder Wohngeld angerechnet. Es bleibt der pflegebedürftigen Person bzw. den Angehörigen in voller Höhe zur Verfügung. Auch bei der Einkommensteuer bleibt Pflegegeld steuerfrei.',
       },
       {
         frage: 'Wie beantrage ich einen höheren Pflegegrad?',
@@ -4211,7 +4211,7 @@ Neben dem Pflegegeld haben alle Pflegegrade (auch Grad 1) Anspruch auf den **Ent
       {
         typ: 'text',
         titel: 'Auszahlung, Steuerfreiheit und Pflegegrad 1',
-        html: `<p>Das Pflegegeld wird <strong>steuerfrei</strong> ausgezahlt (§ 3 Nr. 1a EStG) und <strong>nicht auf Bürgergeld, Grundsicherung oder Wohngeld angerechnet</strong> — es bleibt der pflegebedürftigen Person bzw. den pflegenden Angehörigen voll erhalten. Empfänger ist immer die pflegebedürftige Person selbst; sie entscheidet, wie sie es einsetzt.</p><p>Wer Pflegegeld bezieht, muss in festen Abständen einen <strong>Beratungsbesuch</strong> abrufen (§ 37 Abs. 3 SGB XI): bei Pflegegrad 2 und 3 halbjährlich, bei Grad 4 und 5 vierteljährlich. Er sichert die Qualität der häuslichen Pflege; bleibt er aus, kann das Pflegegeld gekürzt werden. Ein Sonderfall ist <strong>Pflegegrad 1</strong>: Hier gibt es kein Pflegegeld und keine Sachleistung, aber den Entlastungsbetrag von 131 €, die Pflegehilfsmittel-Pauschale und Zuschüsse zur Wohnraumanpassung — ein oft unterschätztes Leistungspaket. Pflegegeld und Sachleistung schließen sich gegenseitig nicht aus, sondern werden über die Kombinationsleistung verzahnt; der Entlastungsbetrag und die übrigen Zusatzleistungen kommen in jedem Fall obendrauf, unabhängig von der gewählten Pflegeform. Pflegebedürftige müssen sich also nicht zwischen Geld- und Sachleistung „entscheiden" und damit auf etwas verzichten — die Kombination erlaubt einen fließenden Übergang, der dem tatsächlichen Bedarf folgt.</p>`,
+        html: `<p>Das Pflegegeld wird <strong>steuerfrei</strong> ausgezahlt (§ 3 Nr. 1a EStG) und <strong>nicht auf Grundsicherungsgeld, Grundsicherung oder Wohngeld angerechnet</strong> — es bleibt der pflegebedürftigen Person bzw. den pflegenden Angehörigen voll erhalten. Empfänger ist immer die pflegebedürftige Person selbst; sie entscheidet, wie sie es einsetzt.</p><p>Wer Pflegegeld bezieht, muss in festen Abständen einen <strong>Beratungsbesuch</strong> abrufen (§ 37 Abs. 3 SGB XI): bei Pflegegrad 2 und 3 halbjährlich, bei Grad 4 und 5 vierteljährlich. Er sichert die Qualität der häuslichen Pflege; bleibt er aus, kann das Pflegegeld gekürzt werden. Ein Sonderfall ist <strong>Pflegegrad 1</strong>: Hier gibt es kein Pflegegeld und keine Sachleistung, aber den Entlastungsbetrag von 131 €, die Pflegehilfsmittel-Pauschale und Zuschüsse zur Wohnraumanpassung — ein oft unterschätztes Leistungspaket. Pflegegeld und Sachleistung schließen sich gegenseitig nicht aus, sondern werden über die Kombinationsleistung verzahnt; der Entlastungsbetrag und die übrigen Zusatzleistungen kommen in jedem Fall obendrauf, unabhängig von der gewählten Pflegeform. Pflegebedürftige müssen sich also nicht zwischen Geld- und Sachleistung „entscheiden" und damit auf etwas verzichten — die Kombination erlaubt einen fließenden Übergang, der dem tatsächlichen Bedarf folgt.</p>`,
       },
       {
         typ: 'checkliste',
@@ -4223,7 +4223,7 @@ Neben dem Pflegegeld haben alle Pflegegrade (auch Grad 1) Anspruch auf den **Ent
           'Der Entlastungsbetrag (131 €/Monat) steht zusätzlich allen Pflegegraden zu.',
           'Ab Pflegegrad 2: gemeinsamer Jahresbetrag 3.539 € für Verhinderungs-/Kurzzeitpflege.',
           'Der Beratungsbesuch (§ 37 Abs. 3) muss abgerufen werden, sonst droht eine Kürzung.',
-          'Pflegegeld ist steuerfrei und wird nicht auf Bürgergeld, Grundsicherung oder Wohngeld angerechnet.',
+          'Pflegegeld ist steuerfrei und wird nicht auf Grundsicherungsgeld, Grundsicherung oder Wohngeld angerechnet.',
           'Das Ergebnis ist eine Orientierung — verbindlich entscheidet die Pflegekasse.',
         ],
       },
@@ -4716,7 +4716,7 @@ Weil die Grenzbelastung so hoch ist, lohnen sich steuerfreie Zusatzleistungen of
       },
       {
         frage: 'Lohnt sich eine Gehaltserhöhung immer?',
-        antwort: 'Grundsätzlich ja — auch wenn die Hälfte an den Staat geht, bleibt netto immer ein Plus. Achtung bei bestimmten Schwellen: Wenn Sie durch die Erhöhung Anspruch auf Sozialleistungen (z.B. Wohngeld, Kinderzuschlag, Bürgergeld) verlieren, kann der Netto-Effekt im Extremfall sogar negativ sein. Auch bei Familienversicherten-Einkommensgrenzen oder beim Wechsel in die private Krankenversicherung (JAEG) kann eine Erhöhung unerwartete Nebenwirkungen haben. Mit unserem Rechner sehen Sie den reinen Steuer- und Abgabeneffekt.',
+        antwort: 'Grundsätzlich ja — auch wenn die Hälfte an den Staat geht, bleibt netto immer ein Plus. Achtung bei bestimmten Schwellen: Wenn Sie durch die Erhöhung Anspruch auf Sozialleistungen (z.B. Wohngeld, Kinderzuschlag, Grundsicherungsgeld/Bürgergeld) verlieren, kann der Netto-Effekt im Extremfall sogar negativ sein. Auch bei Familienversicherten-Einkommensgrenzen oder beim Wechsel in die private Krankenversicherung (JAEG) kann eine Erhöhung unerwartete Nebenwirkungen haben. Mit unserem Rechner sehen Sie den reinen Steuer- und Abgabeneffekt.',
       },
       {
         frage: 'Welche steuerfreien Alternativen gibt es zur Gehaltserhöhung?',
@@ -4886,7 +4886,7 @@ In den ersten **sechs Wochen** einer Erkrankung (Tag 1 bis Tag 42) erhalten Sie 
 
 **Wie lange bekommt man Krankengeld?**
 
-Die Bezugsdauer ist auf **78 Wochen (546 Tage)** innerhalb von drei Jahren für dieselbe Krankheit begrenzt. Die sechs Wochen Lohnfortzahlung werden dabei angerechnet. Rein rechnerisch bekommen Sie also maximal **78 Wochen minus 6 Wochen = 72 Wochen reines Krankengeld**. Wird eine neue, andere Erkrankung festgestellt, beginnt der Anspruch erneut. Nach Ablauf der 78 Wochen prüft die Krankenkasse, ob Sie wieder arbeitsfähig sind. Wenn nicht, kommen andere Leistungen in Frage: **Erwerbsminderungsrente**, **Arbeitslosengeld** (Aussteuerung) oder **Bürgergeld**.
+Die Bezugsdauer ist auf **78 Wochen (546 Tage)** innerhalb von drei Jahren für dieselbe Krankheit begrenzt. Die sechs Wochen Lohnfortzahlung werden dabei angerechnet. Rein rechnerisch bekommen Sie also maximal **78 Wochen minus 6 Wochen = 72 Wochen reines Krankengeld**. Wird eine neue, andere Erkrankung festgestellt, beginnt der Anspruch erneut. Nach Ablauf der 78 Wochen prüft die Krankenkasse, ob Sie wieder arbeitsfähig sind. Wenn nicht, kommen andere Leistungen in Frage: **Erwerbsminderungsrente**, **Arbeitslosengeld** (Aussteuerung) oder **Grundsicherungsgeld** (bis 30.06.2026 Bürgergeld).
 
 **Progressionsvorbehalt: Was bedeutet das für die Steuer?**
 
@@ -4920,7 +4920,7 @@ Für die Berechnung Ihres regulären Nettogehalts nutzen Sie den Brutto-Netto-Re
           ['Tag 1–42 (Woche 1–6)', 'Arbeitgeber', 'Lohnfortzahlung — 100 % des Gehalts (§ 3 EFZG)'],
           ['Ab Tag 43', 'Gesetzliche Krankenkasse', 'Krankengeld — 70 % Brutto, max. 90 % Netto (§ 47 SGB V)'],
           ['Bis max. 78 Wochen (546 Tage)', 'Krankenkasse', 'Höchstbezugsdauer je Krankheit in 3 Jahren (§ 48 SGB V)'],
-          ['Nach Aussteuerung', 'Rentenversicherung / Agentur für Arbeit', 'Erwerbsminderungsrente, Arbeitslosengeld oder Bürgergeld'],
+          ['Nach Aussteuerung', 'Rentenversicherung / Agentur für Arbeit', 'Erwerbsminderungsrente, Arbeitslosengeld oder Grundsicherungsgeld'],
         ],
         fussnote: 'Die sechs Wochen Lohnfortzahlung werden auf die 78 Wochen angerechnet, sodass rechnerisch rund 72 Wochen reines Krankengeld verbleiben. Maßgeblich sind dieselbe Krankheit und der Drei-Jahres-Zeitraum; bei einer neuen, anderen Erkrankung beginnt der Anspruch erneut. Verlängert sich die Arbeitsunfähigkeit nahtlos, muss die Krankschreibung lückenlos fortgeführt werden, sonst kann der Anspruch enden. Stand 2026.',
       },
@@ -4992,7 +4992,7 @@ Für die Berechnung Ihres regulären Nettogehalts nutzen Sie den Brutto-Netto-Re
       {
         typ: 'text',
         titel: 'Sonderfälle: Minijob, Aussteuerung und krankes Kind',
-        html: `<p>Nicht jeder hat Anspruch auf Krankengeld. Bei einem <strong>Minijob</strong> ohne eigene Krankenversicherungspflicht entsteht <strong>kein Krankengeldanspruch</strong> — die geringfügige Beschäftigung begründet keine eigene Mitgliedschaft mit Krankengeld. Auch wer <strong>freiwillig versichert</strong> ist, etwa als Selbstständiger, sollte prüfen, ob der gewählte Tarif den gesetzlichen Krankengeldanspruch überhaupt einschließt oder ob nur ein ermäßigter Beitragssatz ohne Krankengeld gewählt wurde. Bei mehreren Teilzeitjobs zählt für die Bemessung das gesamte versicherungspflichtige Entgelt zusammen.</p><p>Endet der Anspruch nach <strong>78 Wochen</strong> (Aussteuerung), prüft die Krankenkasse die weitere Erwerbsfähigkeit; dann kommen Erwerbsminderungsrente, Arbeitslosengeld oder Bürgergeld in Betracht — den Übergang sollte man rechtzeitig vor Ablauf der Frist vorbereiten, am besten mit Unterstützung der Krankenkasse oder eines Sozialverbands. Ein eigener Fall ist das <strong>Kinderkrankengeld</strong> nach § 45 SGB V: Es wird gezahlt, wenn ein gesetzlich versichertes <strong>krankes Kind</strong> unter zwölf Jahren betreut werden muss, hat eine andere Höhe (rund 90 % des ausgefallenen Nettoarbeitsentgelts) und ist pro Kind und Jahr auf eine bestimmte Anzahl Tage begrenzt. Es ist klar vom regulären Krankengeld bei eigener Arbeitsunfähigkeit zu unterscheiden, das dieser Rechner abbildet.</p>`,
+        html: `<p>Nicht jeder hat Anspruch auf Krankengeld. Bei einem <strong>Minijob</strong> ohne eigene Krankenversicherungspflicht entsteht <strong>kein Krankengeldanspruch</strong> — die geringfügige Beschäftigung begründet keine eigene Mitgliedschaft mit Krankengeld. Auch wer <strong>freiwillig versichert</strong> ist, etwa als Selbstständiger, sollte prüfen, ob der gewählte Tarif den gesetzlichen Krankengeldanspruch überhaupt einschließt oder ob nur ein ermäßigter Beitragssatz ohne Krankengeld gewählt wurde. Bei mehreren Teilzeitjobs zählt für die Bemessung das gesamte versicherungspflichtige Entgelt zusammen.</p><p>Endet der Anspruch nach <strong>78 Wochen</strong> (Aussteuerung), prüft die Krankenkasse die weitere Erwerbsfähigkeit; dann kommen Erwerbsminderungsrente, Arbeitslosengeld oder Grundsicherungsgeld in Betracht — den Übergang sollte man rechtzeitig vor Ablauf der Frist vorbereiten, am besten mit Unterstützung der Krankenkasse oder eines Sozialverbands. Ein eigener Fall ist das <strong>Kinderkrankengeld</strong> nach § 45 SGB V: Es wird gezahlt, wenn ein gesetzlich versichertes <strong>krankes Kind</strong> unter zwölf Jahren betreut werden muss, hat eine andere Höhe (rund 90 % des ausgefallenen Nettoarbeitsentgelts) und ist pro Kind und Jahr auf eine bestimmte Anzahl Tage begrenzt. Es ist klar vom regulären Krankengeld bei eigener Arbeitsunfähigkeit zu unterscheiden, das dieser Rechner abbildet.</p>`,
       },
       {
         typ: 'checkliste',
@@ -5044,7 +5044,7 @@ Für die Berechnung Ihres regulären Nettogehalts nutzen Sie den Brutto-Netto-Re
       },
       {
         frage: 'Was kommt nach 78 Wochen Krankengeld?',
-        antwort: 'Nach Ablauf der 78 Wochen endet der Krankengeldanspruch (Aussteuerung). Je nach Situation kommen dann in Frage: Arbeitslosengeld (wenn Sie wieder arbeitsfähig sind), Erwerbsminderungsrente (wenn nicht) oder Bürgergeld (als Grundsicherung). Ein Antrag auf Reha-Maßnahmen ist oft der erste Schritt.',
+        antwort: 'Nach Ablauf der 78 Wochen endet der Krankengeldanspruch (Aussteuerung). Je nach Situation kommen dann in Frage: Arbeitslosengeld (wenn Sie wieder arbeitsfähig sind), Erwerbsminderungsrente (wenn nicht) oder Grundsicherungsgeld (als Grundsicherung). Ein Antrag auf Reha-Maßnahmen ist oft der erste Schritt.',
       },
     ],
     quellen: [
@@ -5705,7 +5705,7 @@ Heiratet die Witwe oder der Witwer erneut, **erlischt der Anspruch** auf die Wit
 
 **Wenn die Witwenrente nicht reicht**
 
-In vielen Fällen reicht die Witwenrente allein nicht aus, um den Lebensunterhalt zu decken — besonders bei geringem eigenen Einkommen oder wenn die Hinterbliebene nie oder nur kurz berufstätig war. In solchen Fällen kommt ergänzend **Grundsicherung im Alter und bei Erwerbsminderung** in Betracht, die nach denselben Regeln wie das [Bürgergeld](/finanzen/buergergeld-rechner) berechnet wird. Auch **Wohngeld** oder **Pflegegeld** können beantragt werden. Seit 2021 gibt es zudem den **Grundrentenzuschlag** für langjährig Versicherte mit geringem Einkommen — dieser wird nicht auf die Witwenrente angerechnet.`,
+In vielen Fällen reicht die Witwenrente allein nicht aus, um den Lebensunterhalt zu decken — besonders bei geringem eigenen Einkommen oder wenn die Hinterbliebene nie oder nur kurz berufstätig war. In solchen Fällen kommt ergänzend **Grundsicherung im Alter und bei Erwerbsminderung** in Betracht, die nach denselben Regeln wie das [Grundsicherungsgeld](/finanzen/buergergeld-rechner) (bis 30.06.2026 Bürgergeld) berechnet wird. Auch **Wohngeld** oder **Pflegegeld** können beantragt werden. Seit 2021 gibt es zudem den **Grundrentenzuschlag** für langjährig Versicherte mit geringem Einkommen — dieser wird nicht auf die Witwenrente angerechnet.`,
     // W19-Goldstandard (YMYL, ZEITKRITISCH): witwenrente-rechner auf volle Tiefe (12 Bausteine,
     // ~1.560 W), Leitformat „vergleich" (3× dominant). SSOT ist die Component
     // WitwenrenteRechner.tsx (keine Lib): groß 55 %/60 %, klein 25 %; Freibetrag 26,4 × RW
@@ -8794,7 +8794,7 @@ Um einen erhöhten Freibetrag geltend zu machen, reicht die Aussage allein nicht
 - Schuldnerberatungsstellen (kostenlos, ca. 6–12 Wochen Wartezeit)
 - Rechtsanwälten (kostenpflichtig, meist 30–80 €)
 - Familienkasse (für Kindergeldempfänger)
-- Jobcenter (für Bürgergeld-Empfänger)
+- Jobcenter (für Grundsicherungsgeld-Empfänger)
 - Arbeitgeber (in Einzelfällen)
 
 Die Bescheinigung ist bei der Bank einzureichen. Die Bank muss den erhöhten Freibetrag dann innerhalb von 7 Tagen umsetzen.`,

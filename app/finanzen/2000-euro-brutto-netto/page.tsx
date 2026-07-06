@@ -38,7 +38,7 @@ const faq = [
   },
   {
     frage: 'Was ist der Erwerbstätigen-Freibetrag bei 2.000 Euro brutto?',
-    antwort: 'Wer mit 2.000 € Brutto aufstockendes Bürgergeld erhält (möglich bei hohen Mietkosten oder Familie), behält dank § 11b SGB II zusätzlich zum Bürgergeld bis zu 348 € (Single) bzw. 398 € (mit Kind/Alleinerziehend) anrechnungsfrei. Aufschlüsselung: 100 € Grundfreibetrag + 84 € (20 % von 100-520 €) + 144 € (30 % von 520-1.000 €) + 20 € (10 % von 1.000-1.200 €) = 348 €. Erwerbsarbeit lohnt sich immer.',
+    antwort: 'Wer mit 2.000 € Brutto aufstockendes Bürgergeld (seit 01.07.2026 Grundsicherungsgeld) erhält (möglich bei hohen Mietkosten oder Familie), behält dank § 11b SGB II zusätzlich zum Bürgergeld bis zu 348 € (Single) bzw. 398 € (mit Kind/Alleinerziehend) anrechnungsfrei. Aufschlüsselung: 100 € Grundfreibetrag + 84 € (20 % von 100-520 €) + 144 € (30 % von 520-1.000 €) + 20 € (10 % von 1.000-1.200 €) = 348 €. Erwerbsarbeit lohnt sich immer.',
   },
   {
     frage: 'Reicht 2.000 Euro brutto für eine Familie?',
