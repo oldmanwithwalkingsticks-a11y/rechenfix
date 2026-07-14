@@ -44,7 +44,7 @@ export default function NutzungsbedingungenSeite() {
           <Section nr="2" titel="Leistungen und Rechner">
             <p>
               rechenfix.de stellt kostenlose Online-Rechner zu verschiedenen Themen (Alltag,
-              Finanzen, Gesundheit, Auto, Wohnen, Mathe, Arbeit, Kochen, Sport) bereit. Die
+              Finanzen, Gesundheit, Auto, Wohnen, Mathe, Arbeit, Kochen, Sport, Technik) bereit. Die
               Nutzung ist kostenfrei und ohne Registrierung möglich.
             </p>
           </Section>
@@ -112,7 +112,7 @@ export default function NutzungsbedingungenSeite() {
             </p>
           </Section>
 
-          <p className="text-sm text-gray-500 dark:text-gray-400">Stand: Juni 2026</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Stand: Juli 2026</p>
         </div>
       </div>
     </div>

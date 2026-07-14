@@ -126,8 +126,8 @@ export default function ImpressumSeite() {
                 className="text-primary-600 dark:text-primary-400 underline"
               >
                 Instagram (@rechenfix)
-              </a>{' '}
-              und{' '}
+              </a>
+              ,{' '}
               <a
                 href="https://www.facebook.com/profile.php?id=1127293363806857"
                 target="_blank"
@@ -135,6 +135,24 @@ export default function ImpressumSeite() {
                 className="text-primary-600 dark:text-primary-400 underline"
               >
                 Facebook
+              </a>
+              ,{' '}
+              <a
+                href="https://www.tiktok.com/@rechenfix"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary-600 dark:text-primary-400 underline"
+              >
+                TikTok (@rechenfix)
+              </a>{' '}
+              und{' '}
+              <a
+                href="https://www.youtube.com/@rechenfix"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary-600 dark:text-primary-400 underline"
+              >
+                YouTube (@rechenfix)
               </a>
               .
             </p>

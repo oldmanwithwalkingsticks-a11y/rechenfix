@@ -26,7 +26,7 @@ export default function DatenschutzSeite() {
         <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
           Datenschutzerklärung
         </h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: Mai 2026</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: Juli 2026</p>
 
         <div className="space-y-10 text-gray-700 dark:text-gray-300 text-[15px] leading-relaxed">
 
@@ -246,8 +246,51 @@ export default function DatenschutzSeite() {
             </p>
           </Section>
 
-          {/* 10. Kontakt per E-Mail */}
-          <Section nr="10" titel="Kontaktaufnahme per E-Mail">
+          {/* 10. Social Media */}
+          <Section nr="10" titel="Präsenzen in sozialen Netzwerken">
+            <p>
+              Wir unterhalten öffentlich zugängliche Profile in sozialen Netzwerken, um über unsere Rechner und Inhalte zu informieren und mit interessierten Nutzern zu kommunizieren. Konkret betreiben wir Auftritte bei Instagram, Facebook, TikTok und YouTube (jeweils unter dem Namen &bdquo;rechenfix&ldquo;).
+            </p>
+            <p className="mt-3">
+              Wenn Sie eines dieser Profile aufrufen oder damit interagieren (z.&nbsp;B. Abonnieren, Kommentieren, Liken, Teilen), verarbeitet der jeweilige Plattformbetreiber personenbezogene Daten von Ihnen — etwa Ihre IP-Adresse, Geräteinformationen und, sofern Sie bei der Plattform eingeloggt sind, Ihre dortigen Profildaten. Diese Verarbeitung erfolgt nach den Datenschutzbestimmungen des jeweiligen Anbieters; auf ihren Umfang und ihre Zwecke haben wir keinen Einfluss. Dabei können Daten auch in Länder außerhalb der EU (insbesondere in die USA) übertragen werden.
+            </p>
+            <p className="mt-3">Anbieter der Plattformen und weiterführende Datenschutzinformationen:</p>
+            <ul className="list-disc pl-5 space-y-2 mt-3">
+              <li>
+                <strong>Instagram &amp; Facebook:</strong> Meta Platforms Ireland Limited, 4 Grand Canal Square, Grand Canal Harbour, Dublin 2, Irland —{' '}
+                <a href="https://www.facebook.com/privacy/policy" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-400 underline">
+                  Datenschutzrichtlinie von Meta
+                </a>
+              </li>
+              <li>
+                <strong>TikTok:</strong> TikTok Technology Limited, 10 Earlsfort Terrace, Dublin, D02 T380, Irland (gemeinsam mit TikTok Information Technologies UK Limited) —{' '}
+                <a href="https://www.tiktok.com/legal/page/eea/privacy-policy/de" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-400 underline">
+                  Datenschutzrichtlinie von TikTok
+                </a>
+              </li>
+              <li>
+                <strong>YouTube:</strong> Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland —{' '}
+                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-400 underline">
+                  Datenschutzerklärung von Google
+                </a>
+              </li>
+            </ul>
+            <p className="mt-3">
+              Soweit wir gemeinsam mit den Plattformbetreibern verantwortlich sind — dies betrifft insbesondere die uns von Meta (&bdquo;Seiten-Insights&ldquo;) und TikTok (&bdquo;TikTok Analytics&ldquo;) bereitgestellten anonymisierten Nutzungsstatistiken unserer Auftritte — geschieht dies auf Grundlage von Vereinbarungen zur gemeinsamen Verantwortlichkeit gemäß Art. 26 DSGVO. Wir erhalten dabei ausschließlich aggregierte, nicht auf einzelne Personen rückführbare Auswertungen. Die Datenverarbeitung beim Besuch unserer YouTube-Präsenz erfolgt in alleiniger Verantwortung von Google.
+            </p>
+            <p className="mt-3">
+              Rechtsgrundlage für den Betrieb unserer Social-Media-Präsenzen ist unser berechtigtes Interesse an Öffentlichkeitsarbeit und Kommunikation gemäß Art. 6 Abs. 1 lit. f DSGVO. Soweit Sie gegenüber dem jeweiligen Anbieter eine Einwilligung erteilt haben, ist zusätzlich Art. 6 Abs. 1 lit. a DSGVO Rechtsgrundlage.
+            </p>
+            <p className="mt-3">
+              Ihre Betroffenenrechte (siehe Abschnitt &bdquo;Ihre Rechte als betroffene Person&ldquo;) können Sie sowohl uns gegenüber als auch unmittelbar gegenüber dem jeweiligen Plattformbetreiber geltend machen. Da wir auf die plattformseitige Verarbeitung nur eingeschränkten Zugriff haben, empfehlen wir, entsprechende Anliegen direkt an den jeweiligen Anbieter zu richten. Unsere Inhalte erreichen Sie weitgehend auch direkt und ohne diese Verarbeitung über{' '}
+              <a href="https://www.rechenfix.de" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-400 underline">
+                www.rechenfix.de
+              </a>.
+            </p>
+          </Section>
+
+          {/* 11. Kontakt per E-Mail */}
+          <Section nr="11" titel="Kontaktaufnahme per E-Mail">
             <p>
               Wenn Sie uns per E-Mail kontaktieren, werden die von Ihnen mitgeteilten Daten (z.&nbsp;B. Name, E-Mail-Adresse, Inhalt der Anfrage) von uns gespeichert und verarbeitet, um Ihre Anfrage zu beantworten.
             </p>
@@ -256,8 +299,8 @@ export default function DatenschutzSeite() {
             </p>
           </Section>
 
-          {/* 11. Rechte der Betroffenen */}
-          <Section nr="11" titel="Ihre Rechte als betroffene Person">
+          {/* 12. Rechte der Betroffenen */}
+          <Section nr="12" titel="Ihre Rechte als betroffene Person">
             <p>Sie haben gemäß DSGVO folgende Rechte hinsichtlich Ihrer personenbezogenen Daten:</p>
             <ul className="list-disc pl-5 space-y-2 mt-3">
               <li>
@@ -287,8 +330,8 @@ export default function DatenschutzSeite() {
             </p>
           </Section>
 
-          {/* 12. Widerrufsrecht */}
-          <Section nr="12" titel="Widerrufsrecht für erteilte Einwilligungen">
+          {/* 13. Widerrufsrecht */}
+          <Section nr="13" titel="Widerrufsrecht für erteilte Einwilligungen">
             <p>
               Gemäß Art. 7 Abs. 3 DSGVO haben Sie das Recht, eine einmal erteilte Einwilligung jederzeit mit Wirkung für die Zukunft zu widerrufen. Die Rechtmäßigkeit der aufgrund der Einwilligung bis zum Widerruf erfolgten Verarbeitung wird dadurch nicht berührt.
             </p>
@@ -302,8 +345,8 @@ export default function DatenschutzSeite() {
             </ul>
           </Section>
 
-          {/* 13. Beschwerderecht */}
-          <Section nr="13" titel="Recht auf Beschwerde bei einer Aufsichtsbehörde">
+          {/* 14. Beschwerderecht */}
+          <Section nr="14" titel="Recht auf Beschwerde bei einer Aufsichtsbehörde">
             <p>
               Gemäß Art. 77 DSGVO haben Sie das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren, wenn Sie der Ansicht sind, dass die Verarbeitung Ihrer personenbezogenen Daten gegen die DSGVO verstößt.
             </p>
@@ -321,8 +364,8 @@ export default function DatenschutzSeite() {
             </div>
           </Section>
 
-          {/* 14. Änderungen */}
-          <Section nr="14" titel="Änderungen dieser Datenschutzerklärung">
+          {/* 15. Änderungen */}
+          <Section nr="15" titel="Änderungen dieser Datenschutzerklärung">
             <p>
               Wir behalten uns vor, diese Datenschutzerklärung anzupassen, um sie an geänderte Rechtslagen oder bei Änderungen des Dienstes bzw. der Datenverarbeitung anzupassen. Die aktuelle Version ist stets auf dieser Seite abrufbar.
             </p>
