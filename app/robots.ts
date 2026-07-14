@@ -5,10 +5,11 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      // Belt-and-suspenders: /ki-rechner hat schon noindex-Meta + ist aus
-      // sitemap.ts ausgenommen. Explizites Disallow ist zusätzliche Crawler-
-      // Sicherung gegen Discovery via Backlinks (W15C-T5 H1).
-      disallow: '/ki-rechner',
+      // Kein Disallow für /ki-rechner (Welle 22): Googlebot muss die Seite
+      // crawlen dürfen, um das noindex-Meta (index:false, follow:true) zu lesen
+      // und zu respektieren. Ein Disallow hätte das Crawlen — und damit das
+      // Lesen des noindex — verhindert. Die Seite bleibt via noindex aus dem
+      // Index, reicht aber Link-Equity an die echten Rechner weiter.
     },
     sitemap: 'https://www.rechenfix.de/sitemap.xml',
   };
