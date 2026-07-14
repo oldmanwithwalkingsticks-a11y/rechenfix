@@ -1058,8 +1058,8 @@ Countdown-Rechner sind besonders beliebt in der Vorweihnachtszeit, vor Schulferi
     beschreibung: 'Wie viele Tage haben Sie bereits gelebt? Überraschende Fakten über Ihre Lebenszeit, Herzschläge und verbleibende Wochenenden.',
     kategorie: 'Alltag',
     kategorieSlug: 'alltag',
-    metaTitle: 'Lebenszeit — Wie viele Tage habe ich gelebt?',
-    metaDescription: 'Lebenszeit-Rechner: Wie viele Tage, Stunden und Herzschläge haben Sie gelebt? Mit Schlafzeit, Smartphone-Zeit und verbleibenden Wochenenden.',
+    metaTitle: 'Lebenszeit-Rechner — 1,5 Mrd. Herzschläge mit 40',
+    metaDescription: 'Lebenszeit-Rechner: Mit 40 sind es rund 14.600 gelebte Tage, 1,5 Mrd. Herzschläge und über 13 Jahre Schlaf. Ihre Zahlen kostenlos berechnen.',
     keywords: ['lebenszeit rechner', 'wie viele tage habe ich gelebt', 'tage gelebt', 'lebenserwartung rechner', 'herzschläge berechnen', 'wie alt bin ich in tagen', 'lebenszeit statistik', 'verbleibende lebenszeit', 'alter in tagen', 'lebensuhr'],
     icon: '🧬',
     formel: 'Gelebte Tage = (Heutiges Datum − Geburtsdatum) in Tagen | Herzschläge = Gelebte Minuten × 70',
@@ -1112,6 +1112,7 @@ Der Lebenszeit-Rechner gehört zu den meistgeteilten Online-Tools. Die überrasc
     quellen: [
       { titel: 'Destatis — Sterbetafel / Lebenserwartung', url: 'https://www.destatis.de', hinweis: 'Durchschnittliche Lebenserwartung in Deutschland (Männer 78,5 / Frauen 83,2 Jahre)' },
       { titel: 'WHO / Statista — Zeitverwendung', hinweis: 'Durchschnittswerte zu Schlaf-, Arbeits- und Mediennutzungszeit' },
+      { titel: 'Medizinische Durchschnittswerte — Ruhepuls und Atemfrequenz', hinweis: 'Erwachsene in Ruhe: rund 60–100 Herzschläge/Min (Modellwert 70) und 12–18 Atemzüge/Min (Modellwert 15)' },
     ],
     contentBloecke: [
       {
@@ -1248,6 +1249,11 @@ Der Lebenszeit-Rechner gehört zu den meistgeteilten Online-Tools. Die überrasc
         variante: 'tipp',
         titel: 'Wochenenden als greifbares Maß',
         text: 'Große Zahlen wie 14.000 Tage sind schwer zu fassen. Wochenenden dagegen kann man sich vorstellen: Etwa 2.000 verbleibende Wochenenden bei einem 40-Jährigen bedeuten rund 2.000 Gelegenheiten für Ausflüge, Zeit mit Familie und Freunden oder Ruhe. Wer die eigene Zeit in dieser Einheit denkt, trifft Entscheidungen oft bewusster — nicht aus Angst vor dem Ende, sondern aus Wertschätzung für die freie Zeit, die noch kommt. Dieselbe Idee funktioniert mit anderen Einheiten: Sommer, Geburtstage mit den eigenen Kindern oder gemeinsame Urlaube sind ebenfalls zählbar und oft noch eindrücklicher als Wochenenden. Welche Einheit man wählt, ist Geschmackssache — der Effekt, Zeit greifbar zu machen, bleibt derselbe.',
+      },
+      {
+        typ: 'text',
+        titel: 'So rechnet dieser Rechner',
+        html: `<p><strong>Die exakten Zahlen</strong> (gelebte Tage, Herzschläge, Atemzüge) ergeben sich direkt aus dem Geburtsdatum — Tag für Tag, Minute für Minute, mit einem Durchschnittspuls von 70 Schlägen und 15 Atemzügen pro Minute. Diese Werte sind auf den Tag genau und hängen von keiner Statistik ab.</p><p><strong>Die Verteilungen</strong> (Schlaf, Arbeit, Essen, Bildschirmzeit) beruhen auf statistischen Durchschnittswerten aus Zeitverwendungserhebungen: ein Drittel des Lebens Schlaf, rund vier Stunden Bildschirmzeit pro Tag, etwa 10,5 Jahre Arbeit über ein Erwerbsleben. Das sind Durchschnitte zur Veranschaulichung, keine Aussage über das individuelle Leben.</p><p><strong>Die verbleibende Zeit</strong> basiert auf der durchschnittlichen Lebenserwartung nach der Sterbetafel des Statistischen Bundesamts (Destatis) — ein statistischer Orientierungswert, kein Schicksal. Sie hängt von Lebensstil, Gesundheit, Veranlagung und vielen weiteren Faktoren ab und ist deshalb bewusst als grobe Perspektive zu lesen.</p>`,
       },
     ],
   },
