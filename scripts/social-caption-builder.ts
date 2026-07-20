@@ -37,7 +37,7 @@
  *   node --env-file=.env.local --import tsx/esm \
  *        scripts/social-caption-builder.ts
  *
- * Modell: claude-sonnet-4-20250514 (Default analog app/api/explain/route.ts).
+ * Modell: claude-sonnet-4-6 (Default analog app/api/explain/route.ts).
  * Override via ENV: ANTHROPIC_MODEL=…
  *
  * Transport (W17A — JSON-Robustheit-Härtung): Das Modell liefert die 6
@@ -56,7 +56,7 @@ import queueFile from '../lib/social/queue.json';
 import type { CaptionsFile, CaptionEntry } from '../lib/social/schema';
 
 const CAPTIONS_PATH = './lib/social/captions.json';
-const DEFAULT_MODEL = 'claude-sonnet-4-20250514';
+const DEFAULT_MODEL = 'claude-sonnet-4-6';
 const SLEEP_MS_BETWEEN_CALLS = 1_500;
 /** W17A-Härtung 2c: 3 Retries = 4 Versuche total pro Slug. */
 const RETRY_MAX = 3;
