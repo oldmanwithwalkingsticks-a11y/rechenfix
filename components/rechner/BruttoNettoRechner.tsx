@@ -14,7 +14,9 @@ import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import { jsPDF } from 'jspdf';
+import autoTable from 'jspdf-autotable';
 import QRCode from 'qrcode';
+import { RECHENFIX_LOGO_PNG } from '@/lib/pdf-logo';
 
 const TABELLEN_WERTE = [1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 6000];
 
@@ -170,102 +172,134 @@ export default function BruttoNettoRechner() {
 
   const handlePdf = async () => {
     const url = 'https://www.rechenfix.de/finanzen/brutto-netto-rechner';
+    const heute = new Date().toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
     const blName = bl?.name || bundesland;
-    const heute = new Date().toLocaleDateString('de-DE', {
-      day: '2-digit', month: '2-digit', year: 'numeric',
-    });
+    const zeitraum = abrechnungszeitraum === 'jahr' ? 'Jahr' : 'Monat';
 
-    // QR-Code als DataURL (zurück zum Rechner)
     let qrDataUrl = '';
-    try {
-      qrDataUrl = await QRCode.toDataURL(url, { margin: 1, width: 240 });
-    } catch {
-      qrDataUrl = '';
-    }
+    try { qrDataUrl = await QRCode.toDataURL(url, { margin: 1, width: 240 }); } catch { qrDataUrl = ''; }
 
     const doc = new jsPDF({ unit: 'mm', format: 'a4' });
     const seiteB = 210;
-    const randX = 20;
-    let y = 24;
+    const randX = 18;
+    // jspdf-autotable ergänzt doc.lastAutoTable erst zur Laufzeit — typisierter Zugriff ohne `any`.
+    const finalY = () => (doc as unknown as { lastAutoTable: { finalY: number } }).lastAutoTable.finalY;
 
-    // --- Kopf: Marke + Titel ---
+    // --- Kopf: Wortmarke-Logo (Ratio 4.381) ---
+    const logoB = 62;                 // mm Breite
+    const logoH = logoB / 4.381;      // proportionale Hoehe
+    try { doc.addImage(RECHENFIX_LOGO_PNG, 'PNG', randX, 14, logoB, logoH); } catch { /* ignore */ }
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(120);
+    doc.text(`Erstellt am ${heute}`, seiteB - randX, 20, { align: 'right' });
+
+    let y = 14 + logoH + 8;
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(20);
-    doc.setTextColor(37, 99, 235); // primary-600
-    doc.text('rechenfix.de', randX, y);
+    doc.setFontSize(15);
     doc.setTextColor(30, 30, 30);
-    doc.setFontSize(14);
-    y += 10;
-    doc.text('Brutto-Netto-Berechnung 2026', randX, y);
-    doc.setDrawColor(220);
-    doc.setLineWidth(0.4);
-    y += 4;
-    doc.line(randX, y, seiteB - randX, y);
+    doc.text('Brutto-Netto-Abrechnung 2026', randX, y);
+    y += 6;
 
-    // --- Parameter ---
+    // --- Parameter-Block ---
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(10);
     doc.setTextColor(90);
-    y += 8;
-    doc.text(`Steuerklasse: ${skLabel(steuerklasse)}   |   Bundesland: ${blName}   |   Stand: ${heute}`, randX, y);
-
-    // --- Ergebnis-Tabelle (Werte NUR aus ergebnis-State) ---
-    const zeilen: [string, string][] = [
-      ['Brutto (Monat)', `${fmt(ergebnis.bruttoMonat)} €`],
-      ['Steuern gesamt', `- ${fmt(ergebnis.steuernGesamt)} €`],
-      ['Sozialabgaben gesamt', `- ${fmt(ergebnis.sozialabgabenGesamt)} €`],
-      ['Netto (Monat)', `${fmt(ergebnis.nettoMonat)} €`],
-      ['Netto (Jahr)', `${fmt(ergebnis.nettoJahr)} €`],
-      ['Netto pro Stunde', `~ ${fmt(ergebnis.nettoProStunde)} €`],
-      ['Abzüge gesamt', `${ergebnis.abzuegeProzent}%`],
+    const params = [
+      `Steuerklasse: ${skLabel(steuerklasse)}`,
+      `Bundesland: ${blName}`,
+      `Kirchensteuer: ${kirchensteuer ? 'ja' : 'nein'}`,
+      `Kinder: ${kinder}`,
+      `Krankenversicherung: ${kvArt === 'privat' ? 'privat' : 'gesetzlich'}`,
+      `Abrechnung: pro ${zeitraum}`,
     ];
-    y += 6;
-    doc.setDrawColor(230);
-    zeilen.forEach(([label, wert], i) => {
-      const rowY = y + i * 9;
-      const istNetto = label.startsWith('Netto (Monat)');
-      doc.setFont('helvetica', istNetto ? 'bold' : 'normal');
-      doc.setFontSize(istNetto ? 12 : 11);
-      doc.setTextColor(istNetto ? 21 : 60, istNetto ? 128 : 60, istNetto ? 61 : 60);
-      doc.text(label, randX, rowY);
-      doc.text(wert, seiteB - randX, rowY, { align: 'right' });
-      doc.setDrawColor(235);
-      doc.line(randX, rowY + 2.5, seiteB - randX, rowY + 2.5);
+    doc.text(params.join('   |   '), randX, y, { maxWidth: seiteB - 2 * randX });
+    y += 8;
+
+    const eur = (n: number) => `${fmt(n)} €`;
+
+    // --- Tabelle 1: Steuern ---
+    autoTable(doc, {
+      startY: y,
+      head: [['Steuern', 'Betrag / Monat']],
+      body: [
+        ['Lohnsteuer', `- ${eur(ergebnis.lohnsteuer)}`],
+        ['Solidaritätszuschlag', `- ${eur(ergebnis.solidaritaet)}`],
+        ['Kirchensteuer', `- ${eur(ergebnis.kirchensteuer)}`],
+      ],
+      foot: [['Steuern gesamt', `- ${eur(ergebnis.steuernGesamt)}`]],
+      theme: 'striped',
+      headStyles: { fillColor: [29, 78, 216], textColor: 255, fontStyle: 'bold' },
+      footStyles: { fillColor: [235, 240, 250], textColor: [30, 30, 30], fontStyle: 'bold' },
+      columnStyles: { 1: { halign: 'right' } },
+      margin: { left: randX, right: randX },
+      styles: { fontSize: 10, cellPadding: 2.5 },
     });
-    y += zeilen.length * 9 + 6;
+
+    // --- Tabelle 2: Sozialabgaben ---
+    autoTable(doc, {
+      startY: finalY() + 5,
+      head: [['Sozialabgaben (Arbeitnehmer-Anteil)', 'Betrag / Monat']],
+      body: [
+        ['Krankenversicherung', `- ${eur(ergebnis.krankenversicherung)}`],
+        ['Rentenversicherung', `- ${eur(ergebnis.rentenversicherung)}`],
+        ['Arbeitslosenversicherung', `- ${eur(ergebnis.arbeitslosenversicherung)}`],
+        ['Pflegeversicherung', `- ${eur(ergebnis.pflegeversicherung)}`],
+      ],
+      foot: [['Sozialabgaben gesamt', `- ${eur(ergebnis.sozialabgabenGesamt)}`]],
+      theme: 'striped',
+      headStyles: { fillColor: [29, 78, 216], textColor: 255, fontStyle: 'bold' },
+      footStyles: { fillColor: [235, 240, 250], textColor: [30, 30, 30], fontStyle: 'bold' },
+      columnStyles: { 1: { halign: 'right' } },
+      margin: { left: randX, right: randX },
+      styles: { fontSize: 10, cellPadding: 2.5 },
+    });
+
+    // --- Tabelle 3: Ergebnis-Übersicht (Netto hervorgehoben) ---
+    autoTable(doc, {
+      startY: finalY() + 5,
+      head: [['Ergebnis', 'Wert']],
+      body: [
+        ['Brutto pro Monat', eur(ergebnis.bruttoMonat)],
+        ['Abzüge gesamt', `- ${eur(ergebnis.gesamtAbzuege)}  (${ergebnis.abzuegeProzent}%)`],
+        [{ content: 'Netto pro Monat', styles: { fontStyle: 'bold' } }, { content: eur(ergebnis.nettoMonat), styles: { fontStyle: 'bold', textColor: [21, 128, 61] } }],
+        ['Netto pro Jahr', eur(ergebnis.nettoJahr)],
+        ['Brutto pro Jahr', eur(ergebnis.bruttoJahr)],
+        ['Netto pro Stunde (ca.)', `~ ${eur(ergebnis.nettoProStunde)}`],
+      ],
+      theme: 'grid',
+      headStyles: { fillColor: [29, 78, 216], textColor: 255, fontStyle: 'bold' },
+      columnStyles: { 1: { halign: 'right' } },
+      margin: { left: randX, right: randX },
+      styles: { fontSize: 10, cellPadding: 2.5 },
+    });
+
+    const yEnd = finalY() + 8;
 
     // --- QR-Code + Rück-Hinweis ---
-    if (qrDataUrl) {
-      doc.addImage(qrDataUrl, 'PNG', randX, y, 28, 28);
-    }
+    if (qrDataUrl) { try { doc.addImage(qrDataUrl, 'PNG', randX, yEnd, 26, 26); } catch { /* ignore */ } }
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(9);
     doc.setTextColor(110);
-    doc.text('Erneut berechnen oder Werte anpassen:', randX + 34, y + 10);
-    doc.setTextColor(37, 99, 235);
-    doc.text(url, randX + 34, y + 16);
+    doc.text('Werte anpassen oder neu berechnen:', randX + 32, yEnd + 9);
+    doc.setTextColor(29, 78, 216);
+    doc.text(url, randX + 32, yEnd + 15);
 
-    // --- Fußzeile / Disclaimer ---
+    // --- Fußzeile / Disclaimer (immer unten) ---
     doc.setTextColor(140);
     doc.setFontSize(8);
     doc.text(
-      'Unverbindliche Berechnung auf Basis der Werte 2026. Keine Steuer- oder Rechtsberatung. Quelle: rechenfix.de',
-      randX, 285,
+      'Unverbindliche Modellrechnung nach den Werten 2026 (BBG, SV-Sätze, Einkommensteuertarif). Keine Steuer- oder Rechtsberatung. Quelle: rechenfix.de',
+      randX, 289, { maxWidth: seiteB - 2 * randX },
     );
 
     doc.save('rechenfix-brutto-netto-2026.pdf');
 
-    // Fire-and-forget: erfolgreichen PDF-Download zählen (blockiert nicht)
+    // Fire-and-forget: erfolgreichen Download zählen (falls Tracking-Prompt schon aktiv; sonst No-Op-Endpoint)
     try {
-      fetch('/api/track', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type: 'pdf', rechner: 'brutto-netto-rechner' }),
-        cache: 'no-store',
-      }).catch(() => { /* ignore */ });
-    } catch {
-      /* ignore */
-    }
+      fetch('/api/track', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type: 'pdf', rechner: 'brutto-netto-rechner' }), cache: 'no-store' }).catch(() => {});
+    } catch { /* ignore */ }
   };
 
   function handleShare() {
