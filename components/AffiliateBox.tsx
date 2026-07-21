@@ -105,6 +105,24 @@ const AFFILIATE_PROGRAMS = {
     icon: '🛡️',
     color: '#0D6EFD',
   },
+  smava: {
+    name: 'smava',
+    tagline: 'Kredite von über 20 Banken vergleichen — SCHUFA-neutral und in wenigen Minuten',
+    cta: 'Kredite vergleichen',
+    baseUrl: 'https://www.awin1.com/cread.php?awinmid=9351&awinaffid=2843240',
+    deeplink: '',
+    icon: '🏦',
+    color: '#E30613',
+  },
+  hansemerkur: {
+    name: 'HanseMerkur',
+    tagline: 'Vielfach ausgezeichneter Versicherungsschutz für Reise, Gesundheit und Vorsorge',
+    cta: 'HanseMerkur ansehen',
+    baseUrl: 'https://www.awin1.com/cread.php?awinmid=11705&awinaffid=2843240',
+    deeplink: '',
+    icon: '⛵',
+    color: '#005CA9',
+  },
 } as const;
 
 export type ProgramId = keyof typeof AFFILIATE_PROGRAMS;
@@ -226,6 +244,18 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'tierhalterhaftpflicht': 'Tierhalter-Haftpflicht — in mehreren Bundesländern für Hunde gesetzlich Pflicht. Jetzt günstig absichern.',
     'reiseruecktritt': 'Reiserücktrittsversicherung — Stornokosten zurück bei Krankheit oder unerwarteten Ereignissen vor der Reise.',
   },
+  smava: {
+    'baufinanzierung': 'Baufinanzierung von über 20 Banken vergleichen — smava findet die passenden Konditionen für Ihr Vorhaben.',
+    'kredit': 'Ratenkredit-Vergleich über smava: über 20 Partnerbanken, SCHUFA-neutrale Anfrage und schnelle Auszahlung.',
+    'zins': 'Günstige Kreditzinsen über smava vergleichen — SCHUFA-neutral und unverbindlich, über 20 Banken auf einen Blick.',
+    'umschuldung': 'Bestehenden Kredit ablösen und Zinsen sparen — smava vergleicht Umschuldungsangebote von über 20 Banken.',
+    'autokredit': 'Autokredit über smava vergleichen — oft günstiger als die Händlerfinanzierung, SCHUFA-neutral anfragen.',
+  },
+  hansemerkur: {
+    'reisekranken': 'Reisekrankenversicherung der HanseMerkur — vielfach ausgezeichneter Schutz im Ausland, schon ab wenigen Euro pro Jahr.',
+    'urlaub': 'Vor dem Urlaub absichern: HanseMerkur Reiseversicherung mit Auslandskrankenschutz und 24-Stunden-Notruf.',
+    'zahnzusatz': 'HanseMerkur Zahnzusatzversicherung — Eigenanteil beim Zahnarzt deutlich senken, bis zu 90 % Erstattung für Zahnersatz.',
+  },
 };
 
 // --- Kontextspezifische Deeplinks ---
@@ -274,6 +304,15 @@ const CONTEXT_DEEPLINKS: Partial<Record<ProgramId, Record<string, string>>> = {
     'tierhalterhaftpflicht': 'https://www.cosmosdirekt.de/tierhalterhaftpflicht/',
     'reiseruecktritt': 'https://www.cosmosdirekt.de/reiseruecktrittsversicherung/',
     'default': 'https://www.cosmosdirekt.de/',
+  },
+  smava: {
+    'kredit': 'https://www.smava.de/kredit/ratenkredit/',
+    'zins': 'https://www.smava.de/kreditvergleich/',
+    'default': 'https://kreditvergleich.smava.de/',
+  },
+  hansemerkur: {
+    'reisekranken': 'https://www.hansemerkur.de/reisekrankenversicherung',
+    'default': 'https://www.hansemerkur.de/',
   },
 };
 
