@@ -13,6 +13,8 @@ import WasserfallSvg from '@/components/rechner/WasserfallSvg';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
+import { jsPDF } from 'jspdf';
+import QRCode from 'qrcode';
 
 const TABELLEN_WERTE = [1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 6000];
 
@@ -166,9 +168,93 @@ export default function BruttoNettoRechner() {
     }
   }
 
-  function handlePrint() {
-    window.print();
-  }
+  const handlePdf = async () => {
+    const url = 'https://www.rechenfix.de/finanzen/brutto-netto-rechner';
+    const blName = bl?.name || bundesland;
+    const heute = new Date().toLocaleDateString('de-DE', {
+      day: '2-digit', month: '2-digit', year: 'numeric',
+    });
+
+    // QR-Code als DataURL (zurück zum Rechner)
+    let qrDataUrl = '';
+    try {
+      qrDataUrl = await QRCode.toDataURL(url, { margin: 1, width: 240 });
+    } catch {
+      qrDataUrl = '';
+    }
+
+    const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+    const seiteB = 210;
+    const randX = 20;
+    let y = 24;
+
+    // --- Kopf: Marke + Titel ---
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(20);
+    doc.setTextColor(37, 99, 235); // primary-600
+    doc.text('rechenfix.de', randX, y);
+    doc.setTextColor(30, 30, 30);
+    doc.setFontSize(14);
+    y += 10;
+    doc.text('Brutto-Netto-Berechnung 2026', randX, y);
+    doc.setDrawColor(220);
+    doc.setLineWidth(0.4);
+    y += 4;
+    doc.line(randX, y, seiteB - randX, y);
+
+    // --- Parameter ---
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(90);
+    y += 8;
+    doc.text(`Steuerklasse: ${skLabel(steuerklasse)}   |   Bundesland: ${blName}   |   Stand: ${heute}`, randX, y);
+
+    // --- Ergebnis-Tabelle (Werte NUR aus ergebnis-State) ---
+    const zeilen: [string, string][] = [
+      ['Brutto (Monat)', `${fmt(ergebnis.bruttoMonat)} €`],
+      ['Steuern gesamt', `- ${fmt(ergebnis.steuernGesamt)} €`],
+      ['Sozialabgaben gesamt', `- ${fmt(ergebnis.sozialabgabenGesamt)} €`],
+      ['Netto (Monat)', `${fmt(ergebnis.nettoMonat)} €`],
+      ['Netto (Jahr)', `${fmt(ergebnis.nettoJahr)} €`],
+      ['Netto pro Stunde', `~ ${fmt(ergebnis.nettoProStunde)} €`],
+      ['Abzüge gesamt', `${ergebnis.abzuegeProzent}%`],
+    ];
+    y += 6;
+    doc.setDrawColor(230);
+    zeilen.forEach(([label, wert], i) => {
+      const rowY = y + i * 9;
+      const istNetto = label.startsWith('Netto (Monat)');
+      doc.setFont('helvetica', istNetto ? 'bold' : 'normal');
+      doc.setFontSize(istNetto ? 12 : 11);
+      doc.setTextColor(istNetto ? 21 : 60, istNetto ? 128 : 60, istNetto ? 61 : 60);
+      doc.text(label, randX, rowY);
+      doc.text(wert, seiteB - randX, rowY, { align: 'right' });
+      doc.setDrawColor(235);
+      doc.line(randX, rowY + 2.5, seiteB - randX, rowY + 2.5);
+    });
+    y += zeilen.length * 9 + 6;
+
+    // --- QR-Code + Rück-Hinweis ---
+    if (qrDataUrl) {
+      doc.addImage(qrDataUrl, 'PNG', randX, y, 28, 28);
+    }
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(110);
+    doc.text('Erneut berechnen oder Werte anpassen:', randX + 34, y + 10);
+    doc.setTextColor(37, 99, 235);
+    doc.text(url, randX + 34, y + 16);
+
+    // --- Fußzeile / Disclaimer ---
+    doc.setTextColor(140);
+    doc.setFontSize(8);
+    doc.text(
+      'Unverbindliche Berechnung auf Basis der Werte 2026. Keine Steuer- oder Rechtsberatung. Quelle: rechenfix.de',
+      randX, 285,
+    );
+
+    doc.save('rechenfix-brutto-netto-2026.pdf');
+  };
 
   function handleShare() {
     const blName = bl?.name || bundesland;
@@ -387,8 +473,8 @@ export default function BruttoNettoRechner() {
               Ergebnis teilen
             </button>
             <span className="text-gray-300 dark:text-gray-600">|</span>
-            <button onClick={handlePrint} className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-600 font-medium transition-colors">
-              Als PDF drucken
+            <button onClick={handlePdf} className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-600 font-medium transition-colors">
+              Als PDF speichern
             </button>
           </div>
 
