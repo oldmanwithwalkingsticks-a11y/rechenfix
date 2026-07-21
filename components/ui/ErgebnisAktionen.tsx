@@ -3,19 +3,33 @@
 import { useState, useRef, useEffect } from 'react';
 import { inkrement } from '@/lib/berechnungs-zaehler';
 import { jsPDF } from 'jspdf';
+import autoTable from 'jspdf-autotable';
 import QRCode from 'qrcode';
 import { RECHENFIX_LOGO_PNG } from '@/lib/pdf-logo';
+
+export interface PdfZeile {
+  label: string;
+  wert: string;
+  // optional: diese Zeile hervorheben (z. B. das Endergebnis)
+  highlight?: boolean;
+}
+export interface PdfAbschnitt {
+  titel: string;           // Tabellen-Überschrift, z. B. "Steuern"
+  wertSpalte?: string;     // Kopf der Wert-Spalte, Default "Wert"
+  zeilen: PdfZeile[];
+}
 
 interface Props {
   ergebnisText: string;
   seitenTitel?: string;
   drucken?: boolean;
+  pdfDaten?: PdfAbschnitt[];   // NEU: optional, für reiches PDF
 }
 
 // `drucken` bleibt in Props (Rückwärtskompatibilität), steuert aber nicht mehr die
 // Sichtbarkeit des PDF-Buttons — der ist jetzt immer da. Bewusst nicht destrukturiert
 // (sonst unused-var-Lint-Fehler), Aufrufer dürfen die Prop weiterhin übergeben.
-export default function ErgebnisAktionen({ ergebnisText, seitenTitel }: Props) {
+export default function ErgebnisAktionen({ ergebnisText, seitenTitel, pdfDaten }: Props) {
   const [kopiert, setKopiert] = useState(false);
   const [kopierFehler, setKopierFehler] = useState(false);
   const [linkKopiert, setLinkKopiert] = useState(false);
@@ -131,13 +145,38 @@ export default function ErgebnisAktionen({ ergebnisText, seitenTitel }: Props) {
     doc.line(randX, y, seiteB - randX, y);
     y += 10;
 
-    // Ergebnis-Text (mehrzeilig umbrochen)
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(12);
-    doc.setTextColor(40, 40, 40);
-    const zeilen = doc.splitTextToSize(ergebnisText, seiteB - 2 * randX);
-    doc.text(zeilen, randX, y);
-    y += zeilen.length * 7 + 12;
+    if (pdfDaten && pdfDaten.length > 0) {
+      // Reiche Darstellung: eine autoTable pro Abschnitt
+      for (const abschnitt of pdfDaten) {
+        autoTable(doc, {
+          startY: y,
+          head: [[abschnitt.titel, abschnitt.wertSpalte || 'Wert']],
+          body: abschnitt.zeilen.map((z) =>
+            z.highlight
+              ? [
+                  { content: z.label, styles: { fontStyle: 'bold' } },
+                  { content: z.wert, styles: { fontStyle: 'bold', textColor: [21, 128, 61] } },
+                ]
+              : [z.label, z.wert]
+          ),
+          theme: 'striped',
+          headStyles: { fillColor: [29, 78, 216], textColor: 255, fontStyle: 'bold' },
+          columnStyles: { 1: { halign: 'right' } },
+          margin: { left: randX, right: randX },
+          styles: { fontSize: 10, cellPadding: 2.5 },
+        });
+        y = (doc as unknown as { lastAutoTable: { finalY: number } }).lastAutoTable.finalY + 5;
+      }
+      y += 7;
+    } else {
+      // Fallback: einfacher Ergebnistext (bisheriges Verhalten)
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(12);
+      doc.setTextColor(40, 40, 40);
+      const zeilen = doc.splitTextToSize(ergebnisText, seiteB - 2 * randX);
+      doc.text(zeilen, randX, y);
+      y += zeilen.length * 7 + 12;
+    }
 
     if (qrDataUrl) { try { doc.addImage(qrDataUrl, 'PNG', randX, y, 26, 26); } catch { /* ignore */ } }
     doc.setFont('helvetica', 'normal');
