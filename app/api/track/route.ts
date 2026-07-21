@@ -7,6 +7,7 @@ export const dynamic = 'force-dynamic';
 // Maximale Anzahl gespeicherter Einträge (älteste fallen raus)
 const MAX_CLICKS = 20000;
 const MAX_FEEDBACKS = 20000;
+const MAX_PDFS = 20000;
 
 interface TrackClickBody {
   type: 'click';
@@ -21,7 +22,12 @@ interface TrackFeedbackBody {
   rechner: string;
 }
 
-type TrackBody = TrackClickBody | TrackFeedbackBody;
+interface TrackPdfBody {
+  type: 'pdf';
+  rechner: string;
+}
+
+type TrackBody = TrackClickBody | TrackFeedbackBody | TrackPdfBody;
 
 function isString(v: unknown): v is string {
   return typeof v === 'string' && v.length > 0 && v.length < 500;
@@ -62,6 +68,19 @@ export async function POST(req: Request) {
       };
       await redis.lpush(KEYS.feedbacks, JSON.stringify(entry));
       await redis.ltrim(KEYS.feedbacks, 0, MAX_FEEDBACKS - 1);
+      return NextResponse.json({ ok: true });
+    }
+
+    if (body.type === 'pdf') {
+      if (!isString(body.rechner)) {
+        return NextResponse.json({ ok: false }, { status: 400 });
+      }
+      const entry = {
+        r: body.rechner.slice(0, 200),
+        t: Date.now(),
+      };
+      await redis.lpush(KEYS.pdfs, JSON.stringify(entry));
+      await redis.ltrim(KEYS.pdfs, 0, MAX_PDFS - 1);
       return NextResponse.json({ ok: true });
     }
 

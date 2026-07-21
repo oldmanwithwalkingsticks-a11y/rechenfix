@@ -254,6 +254,18 @@ export default function BruttoNettoRechner() {
     );
 
     doc.save('rechenfix-brutto-netto-2026.pdf');
+
+    // Fire-and-forget: erfolgreichen PDF-Download zählen (blockiert nicht)
+    try {
+      fetch('/api/track', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'pdf', rechner: 'brutto-netto-rechner' }),
+        cache: 'no-store',
+      }).catch(() => { /* ignore */ });
+    } catch {
+      /* ignore */
+    }
   };
 
   function handleShare() {

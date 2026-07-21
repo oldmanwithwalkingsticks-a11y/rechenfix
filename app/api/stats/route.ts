@@ -17,6 +17,11 @@ interface FeedbackEntry {
   t: number;
 }
 
+interface PdfEntry {
+  r: string;
+  t: number;
+}
+
 // Upstash/Redis LPUSH+LRANGE liefert Einträge je nach Client bereits als
 // deserialisierte Objekte oder als JSON-Strings — wir akzeptieren beides.
 function parseEntry<T>(raw: unknown): T | null {
@@ -41,9 +46,10 @@ export async function GET(req: Request) {
   }
 
   try {
-    const [clicksRaw, feedbacksRaw] = await Promise.all([
+    const [clicksRaw, feedbacksRaw, pdfsRaw] = await Promise.all([
       redis.lrange(KEYS.clicks, 0, -1),
       redis.lrange(KEYS.feedbacks, 0, -1),
+      redis.lrange(KEYS.pdfs, 0, -1),
     ]);
 
     const clicks = (clicksRaw as unknown[])
@@ -54,7 +60,11 @@ export async function GET(req: Request) {
       .map(r => parseEntry<FeedbackEntry>(r))
       .filter((f): f is FeedbackEntry => !!f);
 
-    return NextResponse.json({ clicks, feedbacks });
+    const pdfs = (pdfsRaw as unknown[])
+      .map(r => parseEntry<PdfEntry>(r))
+      .filter((p): p is PdfEntry => !!p);
+
+    return NextResponse.json({ clicks, feedbacks, pdfs });
   } catch {
     return NextResponse.json({ error: 'server_error' }, { status: 500 });
   }
@@ -77,9 +87,10 @@ export async function DELETE(req: Request) {
   }
 
   try {
-    const [clicksRaw, feedbacksRaw] = await Promise.all([
+    const [clicksRaw, feedbacksRaw, pdfsRaw] = await Promise.all([
       redis.lrange(KEYS.clicks, 0, -1),
       redis.lrange(KEYS.feedbacks, 0, -1),
+      redis.lrange(KEYS.pdfs, 0, -1),
     ]);
 
     const imMonat = (t: number) => {
@@ -94,6 +105,9 @@ export async function DELETE(req: Request) {
     const keepFeedbacks = (feedbacksRaw as unknown[])
       .map(r => parseEntry<FeedbackEntry>(r))
       .filter((f): f is FeedbackEntry => !!f && !imMonat(f.t));
+    const keepPdfs = (pdfsRaw as unknown[])
+      .map(r => parseEntry<PdfEntry>(r))
+      .filter((p): p is PdfEntry => !!p && !imMonat(p.t));
 
     // Neu schreiben: alte Liste löschen, dann RPUSH in Originalreihenfolge
     // (LRANGE 0..-1 liefert neueste zuerst; für LPUSH-History wieder umdrehen)
@@ -104,6 +118,10 @@ export async function DELETE(req: Request) {
     await redis.del(KEYS.feedbacks);
     if (keepFeedbacks.length > 0) {
       await redis.rpush(KEYS.feedbacks, ...keepFeedbacks.map(f => JSON.stringify(f)));
+    }
+    await redis.del(KEYS.pdfs);
+    if (keepPdfs.length > 0) {
+      await redis.rpush(KEYS.pdfs, ...keepPdfs.map(p => JSON.stringify(p)));
     }
 
     return NextResponse.json({ ok: true });
