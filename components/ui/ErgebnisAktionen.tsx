@@ -2,6 +2,9 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { inkrement } from '@/lib/berechnungs-zaehler';
+import { jsPDF } from 'jspdf';
+import QRCode from 'qrcode';
+import { RECHENFIX_LOGO_PNG } from '@/lib/pdf-logo';
 
 interface Props {
   ergebnisText: string;
@@ -9,7 +12,10 @@ interface Props {
   drucken?: boolean;
 }
 
-export default function ErgebnisAktionen({ ergebnisText, seitenTitel, drucken }: Props) {
+// `drucken` bleibt in Props (Rückwärtskompatibilität), steuert aber nicht mehr die
+// Sichtbarkeit des PDF-Buttons — der ist jetzt immer da. Bewusst nicht destrukturiert
+// (sonst unused-var-Lint-Fehler), Aufrufer dürfen die Prop weiterhin übergeben.
+export default function ErgebnisAktionen({ ergebnisText, seitenTitel }: Props) {
   const [kopiert, setKopiert] = useState(false);
   const [kopierFehler, setKopierFehler] = useState(false);
   const [linkKopiert, setLinkKopiert] = useState(false);
@@ -93,6 +99,75 @@ export default function ErgebnisAktionen({ ergebnisText, seitenTitel, drucken }:
     setTeilenOffen(false);
   };
 
+  const handlePdf = async () => {
+    const url = typeof window !== 'undefined' ? window.location.href : 'https://www.rechenfix.de';
+    const titel = seitenTitel || 'Berechnung auf Rechenfix.de';
+    const heute = new Date().toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
+
+    let qrDataUrl = '';
+    try { qrDataUrl = await QRCode.toDataURL(url, { margin: 1, width: 240 }); } catch { qrDataUrl = ''; }
+
+    const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+    const seiteB = 210;
+    const randX = 18;
+
+    const logoB = 62;
+    const logoH = logoB / 4.381;
+    try { doc.addImage(RECHENFIX_LOGO_PNG, 'PNG', randX, 14, logoB, logoH); } catch { /* ignore */ }
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(120);
+    doc.text(`Erstellt am ${heute}`, seiteB - randX, 20, { align: 'right' });
+
+    let y = 14 + logoH + 10;
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(15);
+    doc.setTextColor(30, 30, 30);
+    doc.text(titel, randX, y, { maxWidth: seiteB - 2 * randX });
+    y += 8;
+    doc.setDrawColor(220);
+    doc.setLineWidth(0.4);
+    doc.line(randX, y, seiteB - randX, y);
+    y += 10;
+
+    // Ergebnis-Text (mehrzeilig umbrochen)
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(12);
+    doc.setTextColor(40, 40, 40);
+    const zeilen = doc.splitTextToSize(ergebnisText, seiteB - 2 * randX);
+    doc.text(zeilen, randX, y);
+    y += zeilen.length * 7 + 12;
+
+    if (qrDataUrl) { try { doc.addImage(qrDataUrl, 'PNG', randX, y, 26, 26); } catch { /* ignore */ } }
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(110);
+    doc.text('Rechner erneut öffnen oder Werte anpassen:', randX + 32, y + 9);
+    doc.setTextColor(29, 78, 216);
+    doc.text(url, randX + 32, y + 15, { maxWidth: seiteB - randX - 32 - randX });
+
+    doc.setTextColor(140);
+    doc.setFontSize(8);
+    doc.text(
+      'Unverbindliche Berechnung auf Basis der Werte 2026. Keine Steuer-, Rechts- oder Finanzberatung. Quelle: rechenfix.de',
+      randX, 289, { maxWidth: seiteB - 2 * randX },
+    );
+
+    const dateiName = 'rechenfix-' + titel.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) + '.pdf';
+    doc.save(dateiName || 'rechenfix-berechnung.pdf');
+
+    // Fire-and-forget: erfolgreichen Download zählen (rechner = seitenTitel)
+    try {
+      fetch('/api/track', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'pdf', rechner: titel }),
+        cache: 'no-store',
+      }).catch(() => {});
+    } catch { /* ignore */ }
+  };
+
   return (
     <div className="flex flex-wrap gap-2 no-print">
       {/* Screenreader-Ansage bei Ergebnis-Änderung (WCAG 4.1.3) */}
@@ -103,6 +178,14 @@ export default function ErgebnisAktionen({ ergebnisText, seitenTitel, drucken }:
       <span aria-live="polite" className="sr-only">
         {kopiert ? 'Ergebnis wurde in die Zwischenablage kopiert.' : kopierFehler ? 'Kopieren fehlgeschlagen. Bitte manuell markieren und kopieren.' : ''}
       </span>
+      {/* Als PDF speichern — Primär-Aktion (immer sichtbar) */}
+      <button
+        onClick={handlePdf}
+        className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-xl bg-primary-500 text-white hover:bg-primary-600 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500/50"
+      >
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2" /></svg>
+        Als PDF speichern
+      </button>
       {/* Kopieren */}
       <button
         onClick={handleKopieren}
@@ -158,17 +241,6 @@ export default function ErgebnisAktionen({ ergebnisText, seitenTitel, drucken }:
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" /></svg>
         Feedback
       </a>
-
-      {/* Drucken */}
-      {drucken && (
-        <button
-          onClick={() => window.print()}
-          className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-xl bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-        >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
-          Als PDF drucken
-        </button>
-      )}
     </div>
   );
 }
