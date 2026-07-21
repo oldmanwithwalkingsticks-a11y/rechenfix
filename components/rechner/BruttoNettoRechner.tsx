@@ -509,18 +509,39 @@ export default function BruttoNettoRechner() {
             </div>
           </div>
 
-          {/* Action-Buttons */}
-          <div className="flex flex-wrap gap-3 mb-4 no-print">
-            <button onClick={handleCopy} className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-600 font-medium transition-colors">
-              {kopiert ? '✓ Kopiert' : kopierFehler ? 'Fehler — bitte manuell kopieren' : 'Ergebnis kopieren'}
-            </button>
-            <span className="text-gray-300 dark:text-gray-600">|</span>
-            <button onClick={handleShare} className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-600 font-medium transition-colors">
-              Ergebnis teilen
-            </button>
-            <span className="text-gray-300 dark:text-gray-600">|</span>
-            <button onClick={handlePdf} className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-600 font-medium transition-colors">
+          {/* Action-Buttons — Option C: PDF gefüllt (Primär), Rest umrandet (Sekundär) */}
+          <div className="flex flex-wrap items-center gap-2.5 mb-4 no-print">
+            {/* Primär: Als PDF speichern */}
+            <button
+              onClick={handlePdf}
+              className="inline-flex items-center gap-2 rounded-xl bg-primary-500 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500/50"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2" />
+              </svg>
               Als PDF speichern
+            </button>
+
+            {/* Sekundär: Kopieren (Zustandstext erhalten) */}
+            <button
+              onClick={handleCopy}
+              className="inline-flex items-center gap-2 rounded-xl border border-primary-500/40 px-3.5 py-2.5 text-sm font-medium text-primary-600 transition-colors hover:bg-primary-50 dark:border-primary-400/40 dark:text-primary-300 dark:hover:bg-primary-500/10 focus:outline-none focus:ring-2 focus:ring-primary-500/40"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2v-2m-6-12h6a2 2 0 012 2v6m-8-8V3m0 2h4" />
+              </svg>
+              {kopiert ? '✓ Kopiert' : kopierFehler ? 'Fehler' : 'Kopieren'}
+            </button>
+
+            {/* Sekundär: Teilen */}
+            <button
+              onClick={handleShare}
+              className="inline-flex items-center gap-2 rounded-xl border border-primary-500/40 px-3.5 py-2.5 text-sm font-medium text-primary-600 transition-colors hover:bg-primary-50 dark:border-primary-400/40 dark:text-primary-300 dark:hover:bg-primary-500/10 focus:outline-none focus:ring-2 focus:ring-primary-500/40"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+              </svg>
+              Teilen
             </button>
           </div>
 
