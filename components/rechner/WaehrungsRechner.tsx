@@ -6,6 +6,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { AffiliateBox } from '@/components/AffiliateBox';
 
 // Statische Referenzkurse (Basis EUR = 1). Stand: 27.06.2026
 const KURS_DATUM = '27.06.2026';
@@ -153,6 +154,8 @@ export default function WaehrungsRechner() {
           'Stand': KURS_DATUM,
         }}
       />
+
+      <AffiliateBox programId="hansemerkur" context="reisekranken" />
     </div>
   );
 }

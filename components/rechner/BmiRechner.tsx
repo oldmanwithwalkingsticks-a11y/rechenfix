@@ -8,6 +8,7 @@ import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { AffiliateBox } from '@/components/AffiliateBox';
 
 export default function BmiRechner() {
   const [gewicht, setGewicht] = useState('75');
@@ -212,6 +213,8 @@ export default function BmiRechner() {
                 ? { bmi: ergebnis.bmi, hinweis: 'Unter 18 Jahren: Einordnung nur über BMI-Perzentilen (z. B. Kromeyer-Hauschild) möglich — Kategorie-Wertung unterdrückt.' }
                 : { bmi: ergebnis.bmi, kategorie: ergebnis.kategorie.label, optimalesGewichtMin: ergebnis.optimalesGewichtMin, optimalesGewichtMax: ergebnis.optimalesGewichtMax }}
             />
+
+            <AffiliateBox programId="hansemerkur" context="zahnzusatz" />
           </div>
 
           {/* W13.4.1: mt-6-Wrapper für Abstand zwischen Fix-erklärt-Button und Action-Buttons

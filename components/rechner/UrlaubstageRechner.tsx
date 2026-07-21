@@ -11,6 +11,7 @@ import { clampInputValue } from '@/lib/zahlenformat';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { AffiliateBox } from '@/components/AffiliateBox';
 
 type Modus = 'anspruch' | 'resturlaub';
 
@@ -243,6 +244,8 @@ export default function UrlaubstageRechner() {
                 eingaben={{ vertraglicheTage: parseInt(vertraglicheTage, 10) || 0, arbeitstageProWoche, teilzeit, schwerbehindert }}
                 ergebnis={{ gesamt: anspruchErgebnis.gesamt, wochen: anspruchErgebnis.wochen, gesetzlichMinimum: anspruchErgebnis.gesetzlichMinimum, ueberMinimum: anspruchErgebnis.ueberMinimum }}
               />
+
+              <AffiliateBox programId="hansemerkur" context="urlaub" />
 
               {anspruchErgebnis.ueberMinimum < 0 && (
                 <div className="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/30 rounded-xl p-4">

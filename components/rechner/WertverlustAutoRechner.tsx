@@ -6,6 +6,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { AffiliateBox } from '@/components/AffiliateBox';
 
 type Typ = 'verbrenner' | 'premium' | 'elektro';
 
@@ -205,6 +206,8 @@ export default function WertverlustAutoRechner() {
               hinweis: 'Degressiver Durchschnitts-Richtwert — der reale Wert hängt von Modell, Zustand und Nachfrage ab.',
             }}
           />
+
+          <AffiliateBox programId="smava" context="autokredit" />
         </>
       )}
     </div>

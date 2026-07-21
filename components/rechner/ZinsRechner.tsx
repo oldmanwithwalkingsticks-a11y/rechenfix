@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { AffiliateBox } from '@/components/AffiliateBox';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 export default function ZinsRechner() {
@@ -252,6 +253,8 @@ export default function ZinsRechner() {
               eigenkapital: ergebnis.eigenkapital,
             }}
           />
+
+          <AffiliateBox programId="smava" context="zins" />
 
           {/* W13.3.6: Sichtbarer Abstand ZWISCHEN Fix-erklärt-Button und Action-Buttons
               (Ergebnis kopieren / Teilen / Feedback). ErgebnisAktionen rendert mit

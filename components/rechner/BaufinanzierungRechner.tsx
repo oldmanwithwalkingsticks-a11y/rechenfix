@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { AffiliateBox } from '@/components/AffiliateBox';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 const ZINSBINDUNG_OPTIONEN = [
@@ -401,6 +402,8 @@ export default function BaufinanzierungRechner() {
               nebenkosten: ergebnis.nebenkosten.gesamt,
             }}
           />
+
+          <AffiliateBox programId="smava" context="baufinanzierung" />
 
           <CrossLink href="/wohnen/mietrendite-rechner" emoji="📈" text="Als Kapitalanlage? Mietrendite berechnen" />
         </>

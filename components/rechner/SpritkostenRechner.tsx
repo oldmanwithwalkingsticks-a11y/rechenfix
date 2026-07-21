@@ -7,6 +7,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { AffiliateBox } from '@/components/AffiliateBox';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 export default function SpritkostenRechner() {
@@ -153,6 +154,8 @@ export default function SpritkostenRechner() {
             eingaben={{ streckeKm: nStrecke, verbrauchLPro100km: nVerbrauch, spritpreisEuroProL: nSpritpreis, hinUndZurueck }}
             ergebnis={{ gesamtkostenEuro: ergebnis.gesamtkosten, literGesamt: ergebnis.literGesamt, kostenProKm: ergebnis.kostenProKm, effektiveStreckeKm: ergebnis.effektiveStrecke }}
           />
+
+          <AffiliateBox programId="hansemerkur" context="reisekranken" />
         </>
       )}
     </div>
