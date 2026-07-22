@@ -34,9 +34,11 @@ const SLUG_LABELS: Record<string, string> = {
   'alltag/trinkgeld-rechner': 'Trinkgeld-Rechner',
 };
 
+interface AnzeigeZeile { label: string; wert: string; highlight?: boolean; }
 interface Verlauf {
   frage: string;
   antwort: string;
+  ergebnis: AnzeigeZeile[] | null;   // NEU: strukturierte Tool-Ergebniszeilen
   link: { label: string; href: string } | null;
 }
 
@@ -79,7 +81,10 @@ export default function KiRechnerClient() {
       const link = slug && SLUG_LABELS[slug]
         ? { label: SLUG_LABELS[slug], href: '/' + slug }
         : null;
-      setVerlauf(prev => [...prev, { frage: text, antwort: data.antwort, link }]);
+      const ergebnis: AnzeigeZeile[] | null = Array.isArray(data.ergebnis) && data.ergebnis.length > 0
+        ? data.ergebnis
+        : null;
+      setVerlauf(prev => [...prev, { frage: text, antwort: data.antwort, ergebnis, link }]);
       setFrage('');
     } catch {
       setFehler('Verbindungsfehler. Bitte versuchen Sie es erneut.');
@@ -185,6 +190,35 @@ export default function KiRechnerClient() {
               <div className="flex-1 min-w-0">
                 <p className="text-sm text-gray-800 dark:text-gray-200 leading-relaxed whitespace-pre-line">{v.antwort}</p>
 
+                {/* Ergebnis-Tabelle (feste Zeilen aus dem verifizierten Tool) */}
+                {v.ergebnis && v.ergebnis.length > 0 && (
+                  <div className="mt-3 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+                    <table className="w-full text-sm">
+                      <tbody>
+                        {v.ergebnis.map((zeile, zi) => (
+                          <tr
+                            key={zi}
+                            className={
+                              zeile.highlight
+                                ? 'bg-green-50 dark:bg-green-900/20'
+                                : zi % 2 === 1
+                                  ? 'bg-gray-50/60 dark:bg-gray-700/30'
+                                  : ''
+                            }
+                          >
+                            <td className={`px-4 py-2 text-gray-600 dark:text-gray-400 ${zeile.highlight ? 'font-semibold text-gray-800 dark:text-gray-200' : ''}`}>
+                              {zeile.label}
+                            </td>
+                            <td className={`px-4 py-2 text-right tabular-nums ${zeile.highlight ? 'font-bold text-green-700 dark:text-green-400' : 'text-gray-800 dark:text-gray-200'}`}>
+                              {zeile.wert}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+
                 {/* Rechner-Link */}
                 {v.link && (
                   <Link
@@ -229,7 +263,7 @@ export default function KiRechnerClient() {
 
       {/* Hinweis */}
       <p className="text-xs text-center text-gray-600 dark:text-gray-500">
-        Die Antworten werden von einer KI erstellt und sind eine Sch&auml;tzung &mdash; f&uuml;r pr&auml;zise Ergebnisse nutzen Sie den verlinkten Detailrechner. Max 3 Fragen pro Minute.
+        Die Ergebnisse werden mit den gepr&uuml;ften Rechnern von rechenfix berechnet. Die KI formuliert die Erl&auml;uterung &mdash; f&uuml;r alle Details den verlinkten Rechner nutzen. Max 3 Fragen pro Minute.
       </p>
     </div>
   );
