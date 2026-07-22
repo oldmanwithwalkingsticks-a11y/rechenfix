@@ -5,7 +5,15 @@ import { KI_TOOLS, dispatchTool } from '@/lib/ki-rechner/tools';
 // Kein Edge-Runtime: läuft als Node-Function (Tool-Loop kann mehrere Runden brauchen).
 export const dynamic = 'force-dynamic';
 
-const SYSTEM = `Du bist der Rechen-Assistent von rechenfix.de. Für JEDE Rechenaufgabe MUSST du das passende Tool aufrufen und darfst Zahlen NIEMALS selbst schätzen oder ausrechnen. Fehlt ein Pflichtwert, frage kurz und konkret nach, statt zu raten. Gibt ein Tool einen Fehler zurück, erkläre freundlich, welche Angabe fehlt. Für Aufgaben ohne passendes Tool: sage ehrlich, dass es dafür (noch) keinen exakten Rechner gibt. Antworte knapp, auf Deutsch, mit klar genannten Ergebniszahlen.`;
+const SYSTEM = `Du bist der Rechen-Assistent von rechenfix.de. Für JEDE Rechenaufgabe MUSST du das passende Tool aufrufen und darfst Zahlen NIEMALS selbst schätzen oder ausrechnen.
+
+Die genauen Ergebniszahlen werden dem Nutzer bereits in einer separaten Tabelle angezeigt. Wiederhole daher die Zahlen NICHT als eigene Tabelle und liste sie nicht noch einmal einzeln auf. Gib stattdessen eine kurze, freundliche Einordnung in 1–3 Sätzen (was das Ergebnis praktisch bedeutet). Nenne höchstens die eine wichtigste Kennzahl im Fließtext, wenn es den Satz natürlicher macht.
+
+Erfinde KEINE gesetzlichen Detailbegründungen (konkrete Freibeträge, Steuersätze, Prozentgrenzen, Paragraphen o. Ä.), die nicht aus dem Tool-Ergebnis stammen — solche Details stehen im verlinkten Detailrechner. Bleibe bei allgemeiner, korrekter Einordnung.
+
+Fehlt ein Wert, der das Ergebnis wirklich verändert, frage NUR nach diesen 1–2 entscheidenden Angaben — kurz und konkret. Für unwichtige Nebenparameter nimm sinnvolle Standardwerte an und nenne diese Annahme transparent in einem Halbsatz (z. B. „angenommen: ohne Sondertilgung"). Stelle KEINE langen Fragelisten.
+
+Für Aufgaben ohne passendes Tool: sage ehrlich, dass es dafür keinen exakten Rechner gibt. Antworte knapp, auf Deutsch.`;
 
 // Anthropic liefert content als Array von Blöcken (text / tool_use / ...).
 interface AnthropicBlock {
@@ -57,6 +65,7 @@ export async function POST(req: Request) {
     { role: 'user', content: frage },
   ];
   let letzterSlug: string | null = null;
+  let letzteZeilen: unknown[] | null = null;   // NEU: Anzeige-Zeilen des letzten erfolgreichen Tools
 
   try {
     // 6. Tool-Loop (max 4 Runden Schutz gegen Endlosschleife)
@@ -97,6 +106,7 @@ export async function POST(req: Request) {
           const dispatch = dispatchTool(String(block.name), block.input);
           if (dispatch.ok) {
             letzterSlug = dispatch.slug;
+            letzteZeilen = dispatch.zeilen;   // NEU
             toolResults.push({
               type: 'tool_result',
               tool_use_id: block.id,
@@ -133,7 +143,7 @@ export async function POST(req: Request) {
       antwort = 'Dazu konnte ich leider keine Antwort erzeugen. Bitte formulieren Sie Ihre Rechenfrage etwas konkreter.';
     }
 
-    return NextResponse.json({ antwort, rechnerSlug: letzterSlug });
+    return NextResponse.json({ antwort, rechnerSlug: letzterSlug, ergebnis: letzteZeilen });
   } catch (err) {
     console.error('KI-Rechner error:', err);
     return NextResponse.json(
