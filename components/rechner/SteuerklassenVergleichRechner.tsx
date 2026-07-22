@@ -248,6 +248,19 @@ export default function SteuerklassenVergleichRechner() {
       <ErgebnisAktionen
         ergebnisText={`Steuerklassen-Vergleich: Empfehlung ${ergebnis.empfehlung} | III/V: ${fmtEuro0(ergebnis.kombinationen[0].nettoGesamtMonat)} €/Mo | V/III: ${fmtEuro0(ergebnis.kombinationen[1].nettoGesamtMonat)} €/Mo | IV/IV mit Faktor: ${fmtEuro0(ergebnis.kombinationen[2].nettoGesamtMonat)} €/Mo`}
         seitenTitel="Steuerklassen-Vergleich-Rechner"
+        pdfDaten={[
+          {
+            titel: 'Steuerklassen-Vergleich (Netto/Monat)',
+            wertSpalte: 'Gesamt-Netto',
+            zeilen: [
+              ...ergebnis.kombinationen.map((k) => ({
+                label: k.name,
+                wert: `${fmtEuro0(k.nettoGesamtMonat)} €`,
+                highlight: k.name === ergebnis.empfehlung,
+              })),
+            ],
+          },
+        ]}
       />
 
       <AiExplain

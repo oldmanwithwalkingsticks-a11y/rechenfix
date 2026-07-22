@@ -506,6 +506,27 @@ export default function SteuerprogressionsRechner() {
           <ErgebnisAktionen
             ergebnisText={`Steuerprogression bei ${formatEuro(zve)} € zvE (${splitting ? 'Splitting' : 'Einzelveranlagung'}): ESt ${formatEuro(ergebnis.einkommensteuer)} €, Durchschnittssteuersatz ${formatProzent(ergebnis.durchschnittssteuersatz)} %, Grenzsteuersatz ${formatProzent(ergebnis.grenzsteuersatz)} %`}
             seitenTitel="Steuerprogression-Rechner"
+            pdfDaten={[
+              {
+                titel: 'Steuerprogression',
+                zeilen: [
+                  { label: 'Zu versteuerndes Einkommen', wert: `${formatEuro(ergebnis.zvE)} €` },
+                  { label: 'Einkommensteuer', wert: `- ${formatEuro(ergebnis.einkommensteuer)} €` },
+                  { label: 'Solidaritätszuschlag', wert: `- ${formatEuro(ergebnis.solidaritaetszuschlag)} €` },
+                  { label: 'Kirchensteuer', wert: `- ${formatEuro(ergebnis.kirchensteuer)} €` },
+                  { label: 'Steuer gesamt', wert: `${formatEuro(ergebnis.gesamtSteuer)} €`, highlight: true },
+                ],
+              },
+              {
+                titel: 'Steuersätze',
+                wertSpalte: 'Satz',
+                zeilen: [
+                  { label: 'Durchschnittssteuersatz', wert: `${formatProzent(ergebnis.durchschnittssteuersatz)} %` },
+                  { label: 'Grenzsteuersatz', wert: `${formatProzent(ergebnis.grenzsteuersatz)} %` },
+                  { label: 'Effektiver Steuersatz', wert: `${formatProzent(ergebnis.effektiverSteuersatz)} %` },
+                ],
+              },
+            ]}
           />
 
           <AffiliateBox programId="wiso" context="steuerprogression" />

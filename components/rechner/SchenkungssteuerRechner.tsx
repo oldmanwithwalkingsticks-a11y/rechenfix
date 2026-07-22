@@ -253,6 +253,19 @@ export default function SchenkungssteuerRechner() {
       <ErgebnisAktionen
         ergebnisText={`Schenkungssteuer: ${fmtEuro(ergebnis.schenkungssteuer)} € | Schenkungswert: ${fmtEuro(ergebnis.schenkungswert)} € | Freibetrag: ${fmtEuro(ergebnis.freibetrag)} € | Steuerklasse ${ergebnis.steuerklasse}, Satz ${ergebnis.steuersatz} % | Effektiv: ${fmtProzent(ergebnis.effektiverSteuersatz)} % | Netto: ${fmtEuro(ergebnis.nettoSchenkung)} €`}
         seitenTitel="Schenkungssteuer-Rechner"
+        pdfDaten={!ergebnis.steuerfrei ? [
+          {
+            titel: 'Schenkungssteuer',
+            zeilen: [
+              { label: 'Schenkungswert', wert: `${fmtEuro(ergebnis.schenkungswert)} €` },
+              { label: 'Freibetrag', wert: `- ${fmtEuro(ergebnis.freibetrag)} €` },
+              { label: 'Steuerpflichtiger Erwerb', wert: `${fmtEuro(ergebnis.steuerpflichtigerErwerb)} €` },
+              { label: `Steuerklasse ${ergebnis.steuerklasse}, Satz`, wert: `${ergebnis.steuersatz} %` },
+              { label: 'Schenkungssteuer', wert: `${fmtEuro(ergebnis.schenkungssteuer)} €`, highlight: true },
+              { label: 'Netto-Schenkung', wert: `${fmtEuro(ergebnis.nettoSchenkung)} €` },
+            ],
+          },
+        ] : undefined}
       />
 
       <AiExplain

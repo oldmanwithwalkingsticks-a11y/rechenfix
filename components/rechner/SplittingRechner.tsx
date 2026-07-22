@@ -276,6 +276,17 @@ export default function SplittingRechner() {
           <ErgebnisAktionen
             ergebnisText={`Ehegattensplitting: ${ergebnis.vorteilGesamt > 0 ? `${fmtEuro(ergebnis.vorteilGesamt)} € Steuervorteil` : 'Kein Vorteil'} | Einzelveranlagung: ${fmtEuro(ergebnis.gesamtEinzel)} € | Zusammenveranlagung: ${fmtEuro(ergebnis.gesamtSplitting)} € | Empfehlung: ${ergebnis.empfehlung}`}
             seitenTitel="Splitting-Rechner"
+            pdfDaten={[
+              {
+                titel: 'Ehegattensplitting',
+                zeilen: [
+                  { label: 'Einzelveranlagung (Steuer)', wert: `${fmtEuro(ergebnis.gesamtEinzel)} €` },
+                  { label: 'Zusammenveranlagung (Steuer)', wert: `${fmtEuro(ergebnis.gesamtSplitting)} €` },
+                  { label: 'Steuervorteil durch Splitting', wert: ergebnis.vorteilGesamt > 0 ? `${fmtEuro(ergebnis.vorteilGesamt)} €` : 'kein Vorteil', highlight: true },
+                  { label: 'Empfehlung', wert: `${ergebnis.empfehlung}` },
+                ],
+              },
+            ]}
           />
 
           <AiExplain

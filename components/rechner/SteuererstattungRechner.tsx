@@ -288,6 +288,19 @@ export default function SteuererstattungRechner() {
           <ErgebnisAktionen
             ergebnisText={`Geschätzte Steuererstattung: ca. ${fmt(ergebnis.geschaetzteErstattung)} € (Werbungskosten: ${fmt(ergebnis.werbungskostenGesamt)} €, Grenzsteuersatz: ${(ergebnis.grenzsteuersatz * 100).toFixed(0)}%)`}
             seitenTitel="Steuererstattungs-Rechner"
+            pdfDaten={[
+              {
+                titel: 'Steuererstattung (Schätzung)',
+                zeilen: [
+                  { label: 'Geschätzte Erstattung', wert: `${fmt(ergebnis.geschaetzteErstattung)} €`, highlight: true },
+                  { label: 'Werbungskosten gesamt', wert: `${fmt(ergebnis.werbungskostenGesamt)} €` },
+                  { label: 'über Pauschbetrag hinaus', wert: `${fmt(ergebnis.werbungskostenUeberPauschbetrag)} €` },
+                  { label: 'Pendlerpauschale', wert: `${fmt(ergebnis.pendlerpauschale)} €` },
+                  { label: 'Homeoffice-Pauschale', wert: `${fmt(ergebnis.homeofficePauschale)} €` },
+                  { label: 'Grenzsteuersatz', wert: `${(ergebnis.grenzsteuersatz * 100).toFixed(0)} %` },
+                ],
+              },
+            ]}
           />
 
           <AiExplain
