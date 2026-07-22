@@ -297,6 +297,18 @@ export default function GmbhGfRechner() {
       <ErgebnisAktionen
         ergebnisText={`GmbH-GF-Gehalt: ${fmt0(ergebnis.nettoMonat)} netto/Monat bei ${brutto} € brutto (${ergebnis.quote.toFixed(1)} % Abgabenquote)`}
         seitenTitel="GmbH-Geschäftsführer-Rechner"
+        pdfDaten={[
+          {
+            titel: 'GmbH-Geschäftsführer-Gehalt',
+            zeilen: [
+              { label: 'Jahresbrutto', wert: `${fmtEur(ergebnis.jahresBrutto)}` },
+              { label: 'Netto pro Monat', wert: `${fmt0(ergebnis.nettoMonat)}`, highlight: true },
+              { label: 'Netto pro Jahr', wert: `${fmt0(ergebnis.nettoJahr)}` },
+              { label: 'Einkommensteuer', wert: `${fmtEur(ergebnis.est)}` },
+              { label: 'Abgabenquote', wert: `${ergebnis.quote.toFixed(1)} %` },
+            ],
+          },
+        ]}
       />
 
       <AiExplain

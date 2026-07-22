@@ -238,6 +238,26 @@ export default function BetriebskostenRechner() {
           <ErgebnisAktionen
             ergebnisText={`Betriebskosten (${geschaeftsformLabel[geschaeftsform]}): ${fmt(ergebnis.gesamtMonat)} €/Monat (${fmt(ergebnis.gesamtJahr)} €/Jahr) | Fixkosten: ${fmt(ergebnis.fixkostenGesamt)} € | Variable Kosten: ${fmt(ergebnis.variableKostenGesamt)} € | Unternehmerlohn: ${fmt(ergebnis.unternehmerlohn)} € | Nötiger Stundensatz: ${fmt(ergebnis.noetigerStundensatz)} €`}
             seitenTitel="Betriebskosten-Rechner"
+            pdfDaten={[
+              {
+                titel: 'Betriebskosten',
+                zeilen: [
+                  { label: 'Fixkosten', wert: `${fmt(ergebnis.fixkostenGesamt)} €` },
+                  { label: 'Variable Kosten', wert: `${fmt(ergebnis.variableKostenGesamt)} €` },
+                  { label: 'Unternehmerlohn', wert: `${fmt(ergebnis.unternehmerlohn)} €` },
+                  { label: 'Gesamt pro Monat', wert: `${fmt(ergebnis.gesamtMonat)} €`, highlight: true },
+                  { label: 'Gesamt pro Jahr', wert: `${fmt(ergebnis.gesamtJahr)} €` },
+                ],
+              },
+              {
+                titel: 'Notwendige Einnahmen',
+                zeilen: [
+                  { label: 'Nötiger Stundensatz', wert: `${fmt(ergebnis.noetigerStundensatz)} €` },
+                  { label: 'Nötiger Umsatz (netto)', wert: `${fmt(ergebnis.noetigerUmsatzNetto)} €` },
+                  { label: 'Nötiger Umsatz (brutto)', wert: `${fmt(ergebnis.noetigerUmsatzBrutto)} €` },
+                ],
+              },
+            ]}
           />
 
           <AffiliateBox programId="lexware" context="betriebskosten" />

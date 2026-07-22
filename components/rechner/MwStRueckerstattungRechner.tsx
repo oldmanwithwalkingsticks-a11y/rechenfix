@@ -159,6 +159,17 @@ export default function MwstRueckerstattungRechner() {
           <ErgebnisAktionen
             ergebnisText={`MwSt-Rückerstattung: ${fmt(ergebnis.erstattungNetto)} € netto (von ${fmt(ergebnis.mwstAnteil)} € MwSt, abzgl. ${fmt(ergebnis.gebuehrenGesamt)} € Gebühren) bei ${fmt(parseDeutscheZahl(kaufbetrag))} € Einkauf (${mwstSatz} % MwSt) — effektive Ersparnis: ${fmt(ergebnis.effektiveErsparnisProzent)} %`}
             seitenTitel="MwSt-Rückerstattungs-Rechner"
+            pdfDaten={[
+              {
+                titel: 'MwSt-Rückerstattung',
+                zeilen: [
+                  { label: 'MwSt-Anteil im Einkauf', wert: `${fmt(ergebnis.mwstAnteil)} €` },
+                  { label: 'Gebühren gesamt', wert: `- ${fmt(ergebnis.gebuehrenGesamt)} €` },
+                  { label: 'Erstattung (netto)', wert: `${fmt(ergebnis.erstattungNetto)} €`, highlight: true },
+                  { label: 'Effektive Ersparnis', wert: `${fmt(ergebnis.effektiveErsparnisProzent)} %` },
+                ],
+              },
+            ]}
           />
 
           <AiExplain

@@ -220,6 +220,18 @@ export default function WitwenrenteRechner() {
           <ErgebnisAktionen
             ergebnisText={`${art === 'gross' ? 'Große' : 'Kleine'} Witwenrente: ${fmt(ergebnis.auszahlung)} €/Monat (Grundanspruch ${fmt(ergebnis.grundanspruch)} € − Anrechnung ${fmt(ergebnis.abzug)} €). Sterbevierteljahr: ${fmt(ergebnis.sterbevierteljahrMonat)} €/Monat.`}
             seitenTitel="Witwenrente-Rechner"
+            pdfDaten={[
+              {
+                titel: art === 'gross' ? 'Große Witwenrente' : 'Kleine Witwenrente',
+                zeilen: [
+                  { label: 'Rentensatz', wert: `${(ergebnis.prozent * 100).toLocaleString('de-DE')} %` },
+                  { label: 'Grundanspruch', wert: `${fmt(ergebnis.grundanspruch)} €` },
+                  { label: 'Einkommensanrechnung', wert: `- ${fmt(ergebnis.abzug)} €` },
+                  { label: 'Auszahlung pro Monat', wert: `${fmt(ergebnis.auszahlung)} €`, highlight: true },
+                  { label: 'Sterbevierteljahr / Monat', wert: `${fmt(ergebnis.sterbevierteljahrMonat)} €` },
+                ],
+              },
+            ]}
           />
 
           <AiExplain

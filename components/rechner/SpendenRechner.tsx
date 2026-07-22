@@ -232,6 +232,19 @@ export default function SpendenRechner() {
           <ErgebnisAktionen
             ergebnisText={`Spende: ${fmt(ergebnis.spendenbetrag)} € → Steuerersparnis: ${fmt(ergebnis.steuerersparnisGesamt)} € (Grenzsteuersatz: ${ergebnis.grenzsteuersatz.toFixed(0)} %, Effektive Kosten: ${fmt(ergebnis.effektiveKosten)} €, Förderquote: ${ergebnis.foerderquote.toFixed(1)} %)`}
             seitenTitel="Spenden-Rechner"
+            pdfDaten={[
+              {
+                titel: 'Spenden-Steuervorteil',
+                zeilen: [
+                  { label: 'Spendenbetrag', wert: `${fmt(ergebnis.spendenbetrag)} €` },
+                  { label: 'Tatsächlich absetzbar', wert: `${fmt(ergebnis.tatsaechlichAbsetzbar)} €` },
+                  { label: 'Steuerersparnis gesamt', wert: `${fmt(ergebnis.steuerersparnisGesamt)} €`, highlight: true },
+                  { label: 'Effektive Kosten der Spende', wert: `${fmt(ergebnis.effektiveKosten)} €` },
+                  { label: 'Grenzsteuersatz', wert: `${ergebnis.grenzsteuersatz.toFixed(0)} %` },
+                  { label: 'Förderquote', wert: `${ergebnis.foerderquote.toFixed(1)} %` },
+                ],
+              },
+            ]}
           />
 
           <div className="mt-6">

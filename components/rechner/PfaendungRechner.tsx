@@ -288,6 +288,18 @@ export default function PfaendungRechner() {
       <ErgebnisAktionen
         ergebnisText={`Pfändungsrechner: Netto ${fmtEuro(ergebnis.nettoMonat)} €/Monat | ${ergebnis.unterhaltspflichten} Unterhaltspflichten | Freibetrag ${fmtEuro(ergebnis.gesamtFreibetrag)} €/${ZEITRAUM_LABEL[zeitraum]} | Pfändungsfrei: ${fmtEuro(ergebnis.pfaendungsfrei)} € | Pfändbar: ${fmtEuro(ergebnis.pfaendbar)} € (${fmtProzent(ergebnis.pfaendbarProzent)} %)`}
         seitenTitel="Pfändungsrechner"
+        pdfDaten={ergebnis.pfaendbar > 0 ? [
+          {
+            titel: 'Lohnpfändung',
+            zeilen: [
+              { label: 'Netto pro Monat', wert: `${fmtEuro(ergebnis.nettoMonat)} €` },
+              { label: 'Unterhaltspflichten', wert: `${ergebnis.unterhaltspflichten}` },
+              { label: 'Pfändungsfreibetrag', wert: `${fmtEuro(ergebnis.gesamtFreibetrag)} €` },
+              { label: 'Pfändungsfrei', wert: `${fmtEuro(ergebnis.pfaendungsfrei)} €` },
+              { label: 'Pfändbarer Betrag', wert: `${fmtEuro(ergebnis.pfaendbar)} € (${fmtProzent(ergebnis.pfaendbarProzent)} %)`, highlight: true },
+            ],
+          },
+        ] : undefined}
       />
 
       <AiExplain
