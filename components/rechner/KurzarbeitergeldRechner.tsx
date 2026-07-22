@@ -230,6 +230,24 @@ export default function KurzarbeitergeldRechner() {
           <ErgebnisAktionen
             ergebnisText={`Kurzarbeitergeld: ${fmt(ergebnis.kug)} €/Monat (${(ergebnis.satz * 100).toLocaleString('de-DE')} %). Gesamteinkommen: ${fmt(ergebnis.gesamtEinkommen)} € (Verlust ${fmt(ergebnis.verlust)} € / ${fmtP(ergebnis.verlustProzent)} %).`}
             seitenTitel="Kurzarbeitergeld-Rechner"
+            pdfDaten={[
+              {
+                titel: 'Kurzarbeitergeld',
+                zeilen: [
+                  { label: 'Leistungssatz', wert: `${(ergebnis.satz * 100).toLocaleString('de-DE')} %` },
+                  { label: 'Kurzarbeitergeld pro Monat', wert: `${fmt(ergebnis.kug)} €`, highlight: true },
+                  { label: 'Gesamteinkommen (mit KuG)', wert: `${fmt(ergebnis.gesamtEinkommen)} €` },
+                ],
+              },
+              {
+                titel: 'Vergleich Soll/Ist',
+                zeilen: [
+                  { label: 'Soll-Netto (ohne Kurzarbeit)', wert: `${fmt(ergebnis.sollNetto)} €` },
+                  { label: 'Ist-Netto (mit Kurzarbeit)', wert: `${fmt(ergebnis.istNetto)} €` },
+                  { label: 'Verlust', wert: `- ${fmt(ergebnis.verlust)} € (${fmtP(ergebnis.verlustProzent)} %)` },
+                ],
+              },
+            ]}
           />
 
           <AiExplain

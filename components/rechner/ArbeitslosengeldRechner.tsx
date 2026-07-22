@@ -211,6 +211,25 @@ export default function ArbeitslosengeldRechner() {
       <ErgebnisAktionen
         ergebnisText={`Arbeitslosengeld I: ${fmtEuro(ergebnis.algMonat)} €/Monat (${ergebnis.satz * 100} %) für ${ergebnis.dauer} Monate | Gesamt ${fmtEuro(ergebnis.gesamt)} €`}
         seitenTitel="Arbeitslosengeld-Rechner"
+        pdfDaten={[
+          {
+            titel: 'Arbeitslosengeld I',
+            zeilen: [
+              { label: 'Leistungssatz', wert: `${ergebnis.satz * 100} %` },
+              { label: 'ALG I pro Monat', wert: `${fmtEuro(ergebnis.algMonat)} €`, highlight: true },
+              { label: 'ALG I pro Tag', wert: `${fmtEuro(ergebnis.algTag)} €` },
+              { label: 'Bezugsdauer', wert: `${ergebnis.dauer} Monate` },
+              { label: 'Gesamtanspruch', wert: `${fmtEuro(ergebnis.gesamt)} €` },
+            ],
+          },
+          {
+            titel: 'Vergleich zum letzten Netto',
+            zeilen: [
+              { label: 'Letztes Nettoeinkommen', wert: `${fmtEuro(ergebnis.letztesNetto)} €` },
+              { label: 'Monatlicher Verlust', wert: `- ${fmtEuro(ergebnis.verlust)} € (${ergebnis.verlustProzent.toFixed(0)} %)` },
+            ],
+          },
+        ]}
       />
 
       <AiExplain

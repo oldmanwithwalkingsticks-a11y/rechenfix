@@ -282,6 +282,18 @@ export default function ElterngeldRechner() {
           <ErgebnisAktionen
             ergebnisText={`${variante === 'basis' ? 'Basiselterngeld' : 'ElterngeldPlus'}: ${fmt(ergebnis.monatlich)} € / Monat, ${fmt(ergebnis.gesamt)} € gesamt (${ergebnis.bezugsMonate} Monate)`}
             seitenTitel="Elterngeld-Rechner"
+            pdfDaten={[
+              {
+                titel: variante === 'basis' ? 'Basiselterngeld' : 'ElterngeldPlus',
+                zeilen: [
+                  { label: 'Relevantes Nettoeinkommen', wert: `${fmt(ergebnis.relevantesEinkommen)} €` },
+                  { label: 'Ersatzrate', wert: `${ergebnis.ersatzrate.toLocaleString('de-DE')} %` },
+                  { label: 'Elterngeld pro Monat', wert: `${fmt(ergebnis.monatlich)} €`, highlight: true },
+                  { label: 'Bezugsmonate', wert: `${ergebnis.bezugsMonate} Monate` },
+                  { label: 'Gesamt-Elterngeld', wert: `${fmt(ergebnis.gesamt)} €` },
+                ],
+              },
+            ]}
           />
           <AiExplain
             rechnerName="Elterngeld-Rechner"

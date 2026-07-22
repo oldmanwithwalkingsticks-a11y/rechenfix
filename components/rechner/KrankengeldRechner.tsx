@@ -155,6 +155,21 @@ export default function KrankengeldRechner() {
       <ErgebnisAktionen
         ergebnisText={versicherung === 'gesetzlich' ? `Krankengeld: ${fmt(ergebnis.krankengeldNettoMonat)} €/Monat · Einkommensverlust ${fmt(ergebnis.verlust)} € (${fmt2(ergebnis.verlustProzent)} %)` : 'Privat versichert — Krankentagegeld je nach Tarif'}
         seitenTitel="Krankengeld-Rechner"
+        pdfDaten={versicherung === 'gesetzlich' ? [
+          {
+            titel: 'Krankengeld (gesetzlich)',
+            zeilen: [
+              { label: 'Krankengeld pro Tag (netto)', wert: `${fmt2(ergebnis.krankengeldNetto)} €` },
+              { label: 'Krankengeld pro Monat (netto)', wert: `${fmt(ergebnis.krankengeldNettoMonat)} €`, highlight: true },
+            ],
+          },
+          {
+            titel: 'Einkommensverlust',
+            zeilen: [
+              { label: 'Monatlicher Verlust', wert: `- ${fmt(ergebnis.verlust)} € (${fmt2(ergebnis.verlustProzent)} %)` },
+            ],
+          },
+        ] : undefined}
       />
 
       <AiExplain

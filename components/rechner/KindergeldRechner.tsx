@@ -279,6 +279,25 @@ export default function KindergeldRechner() {
           <ErgebnisAktionen
             ergebnisText={`Kindergeld: ${fmtEuro(ergebnis.kindergeldMonat)} €/Monat (${fmtEuro(ergebnis.kindergeldJahr)} €/Jahr) für ${anzahlKinder} ${anzahlKinder === 1 ? 'Kind' : 'Kinder'} | Günstiger: ${ergebnis.gewinner === 'kindergeld' ? 'Kindergeld' : 'Kinderfreibetrag'} | Steuerersparnis Freibetrag: ${fmtEuro(ergebnis.steuerersparnisFreibetrag)} €`}
             seitenTitel="Kindergeld-Rechner"
+            pdfDaten={[
+              {
+                titel: 'Kindergeld',
+                zeilen: [
+                  { label: 'Kindergeld pro Monat', wert: `${fmtEuro(ergebnis.kindergeldMonat)} €`, highlight: true },
+                  { label: 'Kindergeld pro Jahr', wert: `${fmtEuro(ergebnis.kindergeldJahr)} €` },
+                ],
+              },
+              {
+                titel: 'Kindergeld vs. Kinderfreibetrag',
+                wertSpalte: 'Betrag',
+                zeilen: [
+                  { label: 'Günstiger für Sie', wert: ergebnis.gewinner === 'kindergeld' ? 'Kindergeld' : 'Kinderfreibetrag' },
+                  { label: 'Steuerersparnis Freibetrag', wert: `${fmtEuro(ergebnis.steuerersparnisFreibetrag)} €` },
+                  { label: 'Vorteil Kindergeld', wert: `${fmtEuro(ergebnis.vorteilKindergeld)} €` },
+                  { label: 'Vorteil Freibetrag', wert: `${fmtEuro(ergebnis.vorteilFreibetrag)} €` },
+                ],
+              },
+            ]}
           />
 
           <AiExplain
