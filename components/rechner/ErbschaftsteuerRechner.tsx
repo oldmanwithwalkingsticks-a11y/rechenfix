@@ -338,6 +338,19 @@ export default function ErbschaftsteuerRechner() {
       <ErgebnisAktionen
         ergebnisText={`${erwerbsart === 'erbschaft' ? 'Erbschaftsteuer' : 'Schenkungsteuer'}: ${fmtEuro(ergebnis.steuerbetrag)} € | Wert: ${fmtEuro(ergebnis.wert)} € | Freibetrag: ${fmtEuro(ergebnis.gesamtFreibetrag)} € | Steuerklasse ${ergebnis.steuerklasse}, Satz ${ergebnis.steuersatz}% | Netto: ${fmtEuro(ergebnis.nettoErbschaft)} €`}
         seitenTitel="Erbschaftsteuer-Rechner"
+        pdfDaten={!ergebnis.steuerfrei ? [
+          {
+            titel: erwerbsart === 'erbschaft' ? 'Erbschaftsteuer' : 'Schenkungsteuer',
+            zeilen: [
+              { label: 'Wert des Erwerbs', wert: `${fmtEuro(ergebnis.wert)} €` },
+              { label: 'Persönlicher Freibetrag', wert: `- ${fmtEuro(ergebnis.persoenlicherFreibetrag)} €` },
+              { label: 'Steuerpflichtiger Erwerb', wert: `${fmtEuro(ergebnis.steuerpflichtigerErwerb)} €` },
+              { label: `Steuerklasse ${ergebnis.steuerklasse}, Satz`, wert: `${ergebnis.steuersatz} %` },
+              { label: 'Steuerbetrag', wert: `${fmtEuro(ergebnis.steuerbetrag)} €`, highlight: true },
+              { label: 'Netto-Erwerb', wert: `${fmtEuro(ergebnis.nettoErbschaft)} €` },
+            ],
+          },
+        ] : undefined}
       />
 
       <AiExplain

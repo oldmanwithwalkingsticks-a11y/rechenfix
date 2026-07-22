@@ -327,6 +327,27 @@ export default function EinkommensteuerRechner() {
       <ErgebnisAktionen
         ergebnisText={`Einkommensteuer (${ergebnis.jahr}): ${fmtEuro(ergebnis.einkommensteuer)} € | zvE: ${fmtEuro0(ergebnis.zvE)} € | Soli: ${fmtEuro(ergebnis.solidaritaetszuschlag)} € | KiSt: ${fmtEuro(ergebnis.kirchensteuer)} € | Gesamt: ${fmtEuro(ergebnis.gesamtbelastung)} € | Grenzsteuersatz: ${fmtProzent(ergebnis.grenzsteuersatz)} % | Durchschnittssteuersatz: ${fmtProzent(ergebnis.durchschnittssteuersatz)} %`}
         seitenTitel="Einkommensteuer-Rechner"
+        pdfDaten={[
+          {
+            titel: `Einkommensteuer ${ergebnis.jahr}`,
+            zeilen: [
+              { label: 'Zu versteuerndes Einkommen', wert: `${fmtEuro0(ergebnis.zvE)} €` },
+              { label: 'Einkommensteuer', wert: `- ${fmtEuro(ergebnis.einkommensteuer)} €` },
+              { label: 'Solidaritätszuschlag', wert: `- ${fmtEuro(ergebnis.solidaritaetszuschlag)} €` },
+              { label: 'Kirchensteuer', wert: `- ${fmtEuro(ergebnis.kirchensteuer)} €` },
+              { label: 'Gesamtbelastung', wert: `${fmtEuro(ergebnis.gesamtbelastung)} €`, highlight: true },
+            ],
+          },
+          {
+            titel: 'Steuersätze',
+            wertSpalte: 'Satz',
+            zeilen: [
+              { label: 'Grenzsteuersatz', wert: `${fmtProzent(ergebnis.grenzsteuersatz)} %` },
+              { label: 'Durchschnittssteuersatz', wert: `${fmtProzent(ergebnis.durchschnittssteuersatz)} %` },
+              { label: 'Netto-Einkommen', wert: `${fmtEuro(ergebnis.nettoEinkommen)} €` },
+            ],
+          },
+        ]}
       />
 
       <AiExplain

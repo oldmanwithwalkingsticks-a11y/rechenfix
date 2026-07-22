@@ -329,6 +329,24 @@ export default function KapitalertragsteuerRechner() {
       <ErgebnisAktionen
         ergebnisText={`Kapitalertragsteuer: Bei ${fmt0(nErtrag)} € ${art.label} = ${fmt0(ergebnis.steuerGesamt)} € Steuern (effektiv ${ergebnis.effektiverSatz.toFixed(2)} %) → Netto ${fmt0(ergebnis.nettoErtrag)} €`}
         seitenTitel="Kapitalertragsteuer-Rechner"
+        pdfDaten={[
+          {
+            titel: 'Steuer-Aufschlüsselung',
+            zeilen: [
+              { label: 'Abgeltungsteuer', wert: `- ${fmt(ergebnis.abgSt)} €` },
+              { label: 'Solidaritätszuschlag', wert: `- ${fmt(ergebnis.soli)} €` },
+              { label: 'Kirchensteuer', wert: `- ${fmt(ergebnis.kiSt)} €` },
+              { label: 'Steuerlast gesamt', wert: `- ${fmt(ergebnis.steuerGesamt)} €` },
+            ],
+          },
+          {
+            titel: 'Ergebnis',
+            zeilen: [
+              { label: 'Netto-Ertrag', wert: `${fmt(ergebnis.nettoErtrag)} €`, highlight: true },
+              { label: 'Effektiver Steuersatz', wert: `${ergebnis.effektiverSatz.toFixed(2)} %` },
+            ],
+          },
+        ]}
       />
 
       <AiExplain

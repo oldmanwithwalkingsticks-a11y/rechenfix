@@ -263,6 +263,24 @@ export default function AbfindungsRechner() {
           <ErgebnisAktionen
             ergebnisText={`Abfindung: ${fmt(ergebnis.bruttoAbfindung)} € brutto → ${fmt(ergebnis.nettoMitFuenftel)} € netto (Fünftelregelung) | Steuerersparnis: ${fmt(ergebnis.steuerErsparnis)} € gegenüber Normalbesteuerung`}
             seitenTitel="Abfindungsrechner"
+            pdfDaten={[
+              {
+                titel: 'Abfindung mit Fünftelregelung',
+                zeilen: [
+                  { label: 'Brutto-Abfindung', wert: `${fmt(ergebnis.bruttoAbfindung)} €` },
+                  { label: 'Steuer (mit Fünftel)', wert: `- ${fmt(ergebnis.steuerMitFuenftel)} €` },
+                  { label: 'Netto (mit Fünftel)', wert: `${fmt(ergebnis.nettoMitFuenftel)} €`, highlight: true },
+                ],
+              },
+              {
+                titel: 'Vergleich zur Normalbesteuerung',
+                zeilen: [
+                  { label: 'Steuer ohne Fünftelregelung', wert: `- ${fmt(ergebnis.steuerOhneFuenftel)} €` },
+                  { label: 'Netto ohne Fünftelregelung', wert: `${fmt(ergebnis.nettoOhneFuenftel)} €` },
+                  { label: 'Steuerersparnis durch Fünftel', wert: `${fmt(ergebnis.steuerErsparnis)} €` },
+                ],
+              },
+            ]}
           />
 
           <AiExplain

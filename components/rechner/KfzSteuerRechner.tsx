@@ -232,6 +232,18 @@ export default function KfzSteuerRechner() {
                   : `Kfz-Steuer: ${fmt(ergebnis.jahresSteuer)} € pro Jahr (${fmt(ergebnis.monatsSteuer)} € / Monat)`
             }
             seitenTitel="Kfz-Steuer-Rechner"
+            pdfDaten={!ergebnis.befreit ? [
+              {
+                titel: 'Kfz-Steuer',
+                zeilen: [
+                  { label: 'Hubraum-Sockelbetrag', wert: `${fmt(ergebnis.sockelbetrag)} €` },
+                  { label: 'CO₂-Komponente', wert: `${fmt(ergebnis.co2Betrag)} €` },
+                  { label: 'Kfz-Steuer pro Jahr', wert: `${fmt(ergebnis.jahresSteuer)} €`, highlight: true },
+                  { label: 'Kfz-Steuer pro Monat', wert: `${fmt(ergebnis.monatsSteuer)} €` },
+                  { label: 'CO₂-Ausstoß (Eingabe)', wert: `${nCo2} g/km` },
+                ],
+              },
+            ] : undefined}
           />
           <AiExplain
             rechnerName="Kfz-Steuer-Rechner"

@@ -273,6 +273,24 @@ export default function GewerbesteuerRechner() {
       <ErgebnisAktionen
         ergebnisText={`Gewerbesteuer: ${fmtEuro(ergebnis.gewerbesteuer)} € | Gewinn: ${fmtEuro0(ergebnis.gewinn)} € | Hebesatz: ${fmtEuro0(ergebnis.hebesatz)} % | Steuermessbetrag: ${fmtEuro(ergebnis.steuermessbetrag)} €${ergebnis.hatAnrechnung ? ` | ESt-Anrechnung: ${fmtEuro(ergebnis.estAnrechnung)} € | Effektive Belastung: ${fmtEuro(ergebnis.effektiveBelastung)} €` : ''}`}
         seitenTitel="Gewerbesteuer-Rechner"
+        pdfDaten={[
+          {
+            titel: 'Gewerbesteuer',
+            zeilen: [
+              { label: 'Gewinn', wert: `${fmtEuro0(ergebnis.gewinn)} €` },
+              { label: 'Steuermessbetrag', wert: `${fmtEuro(ergebnis.steuermessbetrag)} €` },
+              { label: 'Hebesatz', wert: `${fmtEuro0(ergebnis.hebesatz)} %` },
+              { label: 'Gewerbesteuer', wert: `${fmtEuro(ergebnis.gewerbesteuer)} €`, highlight: true },
+            ],
+          },
+          ...(ergebnis.hatAnrechnung ? [{
+            titel: 'ESt-Anrechnung',
+            zeilen: [
+              { label: 'Anrechenbare Gewerbesteuer', wert: `${fmtEuro(ergebnis.estAnrechnung)} €` },
+              { label: 'Effektive Belastung', wert: `${fmtEuro(ergebnis.effektiveBelastung)} €` },
+            ],
+          }] : []),
+        ]}
       />
 
       <AiExplain
