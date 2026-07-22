@@ -219,6 +219,18 @@ export default function StundenlohnRechner() {
           <ErgebnisAktionen
             ergebnisText={`Stundenlohn: ${fmt(ergebnis.stundenlohn)} €, Monatsgehalt: ${fmt(ergebnis.monatsgehalt)} €, Jahresgehalt: ${fmt(ergebnis.jahresgehalt)} €`}
             seitenTitel="Stundenlohn-Rechner"
+            pdfDaten={[
+              {
+                titel: 'Stundenlohn',
+                zeilen: [
+                  { label: 'Stundenlohn', wert: `${fmt(ergebnis.stundenlohn)} €`, highlight: true },
+                  { label: 'Monatsgehalt', wert: `${fmt(ergebnis.monatsgehalt)} €` },
+                  { label: 'Jahresgehalt', wert: `${fmt(ergebnis.jahresgehalt)} €` },
+                  { label: 'Arbeitsstunden pro Monat', wert: `${fmt(ergebnis.arbeitsstundenProMonat)} h` },
+                  { label: 'Effektiver Stundenlohn', wert: `${fmt(ergebnis.effektiverStundenlohn)} €` },
+                ],
+              },
+            ]}
           />
 
           <AiExplain

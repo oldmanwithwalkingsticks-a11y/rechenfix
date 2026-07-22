@@ -232,6 +232,25 @@ export default function WahrerStundenlohnRechner() {
           <ErgebnisAktionen
             ergebnisText={ergebnisText()}
             seitenTitel="Wahrer Stundenlohn Rechner"
+            pdfDaten={[
+              {
+                titel: 'Wahrer Stundenlohn',
+                zeilen: [
+                  { label: 'Offizieller Netto-Stundenlohn', wert: `${formatEuro(ergebnis.offiziellerStundenlohn)} €/h` },
+                  { label: 'Wahrer Stundenlohn', wert: `${formatEuro(ergebnis.wahrerStundenlohn)} €/h`, highlight: true },
+                  { label: 'Differenz', wert: `- ${formatEuro(ergebnis.differenzStundenlohn)} €/h (${ergebnis.differenzProzent.toFixed(0)} % weniger)` },
+                ],
+              },
+              {
+                titel: 'Grundlage der Berechnung',
+                zeilen: [
+                  { label: 'Tatsächliches Netto pro Monat', wert: `${formatEuro(ergebnis.tatsaechlichesNetto)} €` },
+                  { label: 'Tatsächliche Stunden pro Monat', wert: `${ergebnis.tatsaechlicheStundenMonat.toFixed(0)} h` },
+                  { label: 'davon Pendelzeit', wert: `${ergebnis.pendelzeitStundenMonat.toFixed(0)} h` },
+                  { label: 'davon Überstunden', wert: `${ergebnis.ueberstundenMonat.toFixed(0)} h` },
+                ],
+              },
+            ]}
           />
 
           <AiExplain

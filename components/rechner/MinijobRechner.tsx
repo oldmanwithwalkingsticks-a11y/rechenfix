@@ -277,6 +277,25 @@ export default function MinijobRechner() {
       <ErgebnisAktionen
         ergebnisText={`Minijob ${fmtEuro(ergebnis.verdienst)} € (${art}): Netto ${fmtEuro(ergebnis.nettoAN)} € | RV-Eigenanteil ${fmtEuro(ergebnis.rvEigenanteil)} € | AG-Gesamtkosten ${fmtEuro(ergebnis.agGesamtkosten)} € (+${ergebnis.agAufschlagProzent}%)`}
         seitenTitel="Minijob-Rechner"
+        pdfDaten={[
+          {
+            titel: 'Minijob',
+            zeilen: [
+              { label: 'Verdienst pro Monat', wert: `${fmtEuro(ergebnis.verdienst)} €` },
+              { label: 'Netto (Arbeitnehmer)', wert: `${fmtEuro(ergebnis.nettoAN)} €`, highlight: true },
+              { label: 'RV-Eigenanteil', wert: `- ${fmtEuro(ergebnis.rvEigenanteil)} €` },
+              { label: 'Stundenlohn', wert: ergebnis.stundenlohn !== null ? `${fmtEuro(ergebnis.stundenlohn)} €` : 'n/a' },
+              { label: 'Max. Stunden pro Woche', wert: `${ergebnis.maxStundenProWoche} h` },
+            ],
+          },
+          {
+            titel: 'Arbeitgeber-Kosten',
+            zeilen: [
+              { label: 'AG-Gesamtkosten', wert: `${fmtEuro(ergebnis.agGesamtkosten)} €` },
+              { label: 'Aufschlag', wert: `+ ${ergebnis.agAufschlagProzent} %` },
+            ],
+          },
+        ]}
       />
 
       <AiExplain

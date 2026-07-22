@@ -359,6 +359,18 @@ export default function MidijobRechner() {
       <ErgebnisAktionen
         ergebnisText={`Midijob ${fmtEuro(ergebnis.b)} €: Netto ${fmtEuro(ergebnis.netto)} € | AN-SV ${fmtEuro(ergebnis.anSv)} € | Ersparnis vs. regulär ${fmtEuro(ergebnis.ersparnis)} €`}
         seitenTitel="Midijob-Rechner"
+        pdfDaten={[
+          {
+            titel: 'Midijob (Übergangsbereich)',
+            zeilen: [
+              { label: 'Brutto pro Monat', wert: `${fmtEuro(ergebnis.b)} €` },
+              { label: 'Netto', wert: `${fmtEuro(ergebnis.netto)} €`, highlight: true },
+              { label: 'AN-Sozialversicherung', wert: `- ${fmtEuro(ergebnis.anSv)} €` },
+              { label: 'Lohnsteuer', wert: `- ${fmtEuro(ergebnis.lohnsteuer)} €` },
+              { label: 'Ersparnis vs. regulär', wert: `${fmtEuro(ergebnis.ersparnis)} €` },
+            ],
+          },
+        ]}
       />
 
       <AiExplain

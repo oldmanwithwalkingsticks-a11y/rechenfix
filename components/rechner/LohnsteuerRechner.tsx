@@ -328,6 +328,19 @@ export default function LohnsteuerRechner() {
       <ErgebnisAktionen
         ergebnisText={`Lohnsteuer (Klasse ${steuerklasse}): ${fmtEuro(ergebnis.lohnsteuerMonat)} €/Monat | Brutto: ${fmtEuro(ergebnis.bruttoMonat)} €/Monat | Soli: ${fmtEuro(ergebnis.solidaritaetszuschlagMonat)} € | KiSt: ${fmtEuro(ergebnis.kirchensteuerMonat)} € | Gesamt-Steuer: ${fmtEuro(ergebnis.gesamtabzuegeMonat)} €/Monat (${fmtEuro(ergebnis.gesamtabzuegeJahr)} €/Jahr)`}
         seitenTitel="Lohnsteuer-Rechner"
+        pdfDaten={[
+          {
+            titel: `Lohnsteuer (Klasse ${steuerklasse})`,
+            zeilen: [
+              { label: 'Brutto pro Monat', wert: `${fmtEuro(ergebnis.bruttoMonat)} €` },
+              { label: 'Lohnsteuer pro Monat', wert: `- ${fmtEuro(ergebnis.lohnsteuerMonat)} €`, highlight: true },
+              { label: 'Solidaritätszuschlag', wert: `- ${fmtEuro(ergebnis.solidaritaetszuschlagMonat)} €` },
+              { label: 'Kirchensteuer', wert: `- ${fmtEuro(ergebnis.kirchensteuerMonat)} €` },
+              { label: 'Steuern gesamt / Monat', wert: `- ${fmtEuro(ergebnis.gesamtabzuegeMonat)} €` },
+              { label: 'Steuern gesamt / Jahr', wert: `- ${fmtEuro(ergebnis.gesamtabzuegeJahr)} €` },
+            ],
+          },
+        ]}
       />
 
       <AiExplain
