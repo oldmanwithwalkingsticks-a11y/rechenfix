@@ -1,23 +1,27 @@
-import { berechneZinsen, type ZinsEingabe } from '@/lib/berechnungen/zinsen';
-import { berechneBmi, type BmiEingabe } from '@/lib/berechnungen/bmi';
-import { berechneKfzSteuer, type KfzSteuerEingabe } from '@/lib/berechnungen/kfz-steuer';
-import { berechneKredit } from '@/lib/berechnungen/kredit';
-import { berechneSparplan } from '@/lib/berechnungen/sparplan';
-import { berechneEtfSparplan } from '@/lib/berechnungen/etf-sparplan';
-import { berechneInflation } from '@/lib/berechnungen/inflation';
-import { berechneStundenlohn } from '@/lib/berechnungen/stundenlohn';
-import { berechneGrunderwerbsteuer } from '@/lib/berechnungen/grunderwerbsteuer';
-import { berechneHeizkosten } from '@/lib/berechnungen/heizkosten';
-import { berechnePendlerpauschale } from '@/lib/berechnungen/pendlerpauschale';
-import { berechneWahrenStundenlohn } from '@/lib/berechnungen/wahrer-stundenlohn';
-import { berechneSpritkosten } from '@/lib/berechnungen/spritkosten';
-import { berechneKwPs } from '@/lib/berechnungen/kw-ps';
-import { berechneIdealgewicht } from '@/lib/berechnungen/idealgewicht';
-import { berechneKalorien } from '@/lib/berechnungen/kalorien';
-import { berechneDreisatz } from '@/lib/berechnungen/dreisatz';
-import { berechneProzVeraenderung } from '@/lib/berechnungen/prozentuale-veraenderung';
-import { berechneTage } from '@/lib/berechnungen/tage';
-import { berechneTriinkgeld } from '@/lib/berechnungen/trinkgeld';
+import { formatEuro, formatZahl, formatProzent } from '@/lib/zahlenformat';
+import { berechneZinsen, type ZinsEingabe, type ZinsErgebnis } from '@/lib/berechnungen/zinsen';
+import { berechneBmi, type BmiEingabe, type BmiErgebnis } from '@/lib/berechnungen/bmi';
+import { berechneKfzSteuer, type KfzSteuerEingabe, type KfzSteuerErgebnis } from '@/lib/berechnungen/kfz-steuer';
+import { berechneKredit, type KreditErgebnis } from '@/lib/berechnungen/kredit';
+import { berechneSparplan, type SparplanErgebnis } from '@/lib/berechnungen/sparplan';
+import { berechneEtfSparplan, type EtfSparplanErgebnis } from '@/lib/berechnungen/etf-sparplan';
+import { berechneInflation, type InflationsErgebnis } from '@/lib/berechnungen/inflation';
+import { berechneStundenlohn, type StundenlohnErgebnis } from '@/lib/berechnungen/stundenlohn';
+import { berechneGrunderwerbsteuer, type GrunderwerbsteuerErgebnis } from '@/lib/berechnungen/grunderwerbsteuer';
+import { berechneHeizkosten, type HeizkostenErgebnis } from '@/lib/berechnungen/heizkosten';
+import { berechnePendlerpauschale, type PendlerErgebnis } from '@/lib/berechnungen/pendlerpauschale';
+import { berechneWahrenStundenlohn, type WahrerStundenlohnErgebnis } from '@/lib/berechnungen/wahrer-stundenlohn';
+import { berechneSpritkosten, type SpritkostenErgebnis } from '@/lib/berechnungen/spritkosten';
+import { berechneKwPs, type KwPsErgebnis } from '@/lib/berechnungen/kw-ps';
+import { berechneIdealgewicht, type IdealgewichtErgebnis } from '@/lib/berechnungen/idealgewicht';
+import { berechneKalorien, type KalorienErgebnis } from '@/lib/berechnungen/kalorien';
+import { berechneDreisatz, type DreisatzErgebnis } from '@/lib/berechnungen/dreisatz';
+import { berechneProzVeraenderung, type ProzVeraenderungErgebnis } from '@/lib/berechnungen/prozentuale-veraenderung';
+import { berechneTage, type TageErgebnis } from '@/lib/berechnungen/tage';
+import { berechneTriinkgeld, type TrinkgeldErgebnis } from '@/lib/berechnungen/trinkgeld';
+
+// Eine Anzeige-Zeile der strukturierten Ergebnis-Tabelle (Client rendert daraus React-Tabelle).
+export interface AnzeigeZeile { label: string; wert: string; highlight?: boolean; }
 
 // Ein Tool = Anthropic-Tool-Definition + interner Ausführer + Ziel-Slug für Verlinkung.
 export interface KiTool {
@@ -26,6 +30,7 @@ export interface KiTool {
   input_schema: Record<string, unknown>; // JSON-Schema (type:'object', properties, required)
   rechnerSlug: string;                    // z.B. 'finanzen/zinsrechner'
   run: (input: unknown) => unknown;       // ruft die verifizierte lib-Funktion auf
+  anzeige: (result: unknown) => AnzeigeZeile[]; // strukturiert das Ergebnis für die Client-Tabelle
 }
 
 export const KI_TOOLS: KiTool[] = [
@@ -45,6 +50,11 @@ export const KI_TOOLS: KiTool[] = [
     },
     rechnerSlug: 'finanzen/zinsrechner',
     run: (i) => berechneZinsen(i as ZinsEingabe),
+    anzeige: (r) => { const x = r as ZinsErgebnis; return [
+      { label: 'Endkapital', wert: formatEuro(x.endkapital), highlight: true },
+      { label: 'davon Zinsen', wert: formatEuro(x.gesamtzinsen) },
+      { label: 'Eingezahlt', wert: formatEuro(x.eigenkapital) },
+    ]; },
   },
   {
     name: 'berechne_bmi',
@@ -61,6 +71,11 @@ export const KI_TOOLS: KiTool[] = [
     },
     rechnerSlug: 'gesundheit/bmi-rechner',
     run: (i) => berechneBmi(i as BmiEingabe),
+    anzeige: (r) => { const x = r as BmiErgebnis; return [
+      { label: 'BMI', wert: formatZahl(x.bmi, 1), highlight: true },
+      { label: 'Normalgewicht ab', wert: formatZahl(x.optimalesGewichtMin, 1) + ' kg' },
+      { label: 'Normalgewicht bis', wert: formatZahl(x.optimalesGewichtMax, 1) + ' kg' },
+    ]; },
   },
   {
     name: 'berechne_kfz_steuer',
@@ -77,6 +92,12 @@ export const KI_TOOLS: KiTool[] = [
     },
     rechnerSlug: 'auto/kfz-steuer-rechner',
     run: (i) => berechneKfzSteuer(i as KfzSteuerEingabe),
+    anzeige: (r) => { const x = r as KfzSteuerErgebnis; return [
+      { label: 'Jahressteuer', wert: formatEuro(x.jahresSteuer), highlight: true },
+      { label: 'Monatlich', wert: formatEuro(x.monatsSteuer) },
+      { label: 'Hubraum-Anteil', wert: formatEuro(x.sockelbetrag) },
+      { label: 'CO₂-Anteil', wert: formatEuro(x.co2Betrag) },
+    ]; },
   },
   {
     name: 'berechne_kredit',
@@ -93,6 +114,13 @@ export const KI_TOOLS: KiTool[] = [
     },
     rechnerSlug: 'finanzen/kreditrechner',
     run: (i) => berechneKredit(i as Parameters<typeof berechneKredit>[0]),
+    anzeige: (r) => { const x = r as KreditErgebnis; return [
+      { label: 'Monatsrate', wert: formatEuro(x.monatsrate), highlight: true },
+      { label: 'Gesamtkosten', wert: formatEuro(x.gesamtkosten) },
+      { label: 'davon Zinsen', wert: formatEuro(x.gesamtzins) },
+      { label: 'Effektivzins', wert: formatProzent(x.effektivzins, 2) },
+      { label: 'Laufzeit', wert: formatZahl(x.tatsaechlicheLaufzeit, 0) + ' Monate' },
+    ]; },
   },
   {
     name: 'berechne_sparplan',
@@ -111,6 +139,11 @@ export const KI_TOOLS: KiTool[] = [
     },
     rechnerSlug: 'finanzen/sparrechner',
     run: (i) => berechneSparplan(i as Parameters<typeof berechneSparplan>[0]),
+    anzeige: (r) => { const x = r as SparplanErgebnis; return [
+      { label: 'Endkapital', wert: formatEuro(x.endkapital), highlight: true },
+      { label: 'Eingezahlt', wert: formatEuro(x.eigenkapital) },
+      { label: 'davon Zinsen', wert: formatEuro(x.gesamtzinsen) },
+    ]; },
   },
   {
     name: 'berechne_etf_sparplan',
@@ -131,6 +164,13 @@ export const KI_TOOLS: KiTool[] = [
     },
     rechnerSlug: 'finanzen/sparrechner',
     run: (i) => berechneEtfSparplan(i as Parameters<typeof berechneEtfSparplan>[0]),
+    anzeige: (r) => { const x = r as EtfSparplanErgebnis; return [
+      { label: 'Endkapital (nach Steuer)', wert: formatEuro(x.endkapitalNachSteuern), highlight: true },
+      { label: 'Endkapital (vor Steuer)', wert: formatEuro(x.endkapital) },
+      { label: 'Eingezahlt', wert: formatEuro(x.summeEinzahlungen) },
+      { label: 'Rendite (brutto)', wert: formatEuro(x.renditeAnteil) },
+      { label: 'Abgeltungsteuer', wert: formatEuro(x.steuer) },
+    ]; },
   },
   {
     name: 'berechne_inflation',
@@ -147,6 +187,12 @@ export const KI_TOOLS: KiTool[] = [
     },
     rechnerSlug: 'finanzen/inflationsrechner',
     run: (i) => berechneInflation(i as Parameters<typeof berechneInflation>[0]),
+    anzeige: (r) => { const x = r as InflationsErgebnis; return [
+      { label: 'Ergebnis', wert: formatEuro(x.ergebnis), highlight: true },
+      { label: 'Ausgangswert', wert: formatEuro(x.ausgangswert) },
+      { label: 'Differenz', wert: formatEuro(x.differenz) },
+      { label: 'Veränderung', wert: formatProzent(x.differenzProzent, 1) },
+    ]; },
   },
   {
     name: 'berechne_stundenlohn',
@@ -166,6 +212,12 @@ export const KI_TOOLS: KiTool[] = [
     },
     rechnerSlug: 'finanzen/stundenlohn-rechner',
     run: (i) => berechneStundenlohn(i as Parameters<typeof berechneStundenlohn>[0]),
+    anzeige: (r) => { const x = r as StundenlohnErgebnis; return [
+      { label: 'Stundenlohn', wert: formatEuro(x.stundenlohn), highlight: true },
+      { label: 'Monatsgehalt', wert: formatEuro(x.monatsgehalt) },
+      { label: 'Jahresgehalt', wert: formatEuro(x.jahresgehalt) },
+      { label: 'Arbeitsstunden/Monat', wert: formatZahl(x.arbeitsstundenProMonat, 1) },
+    ]; },
   },
   {
     name: 'berechne_grunderwerbsteuer',
@@ -183,6 +235,14 @@ export const KI_TOOLS: KiTool[] = [
     },
     rechnerSlug: 'wohnen/grunderwerbsteuer-rechner',
     run: (i) => berechneGrunderwerbsteuer(i as Parameters<typeof berechneGrunderwerbsteuer>[0]),
+    anzeige: (r) => { const x = r as GrunderwerbsteuerErgebnis; return [
+      { label: 'Kaufnebenkosten gesamt', wert: formatEuro(x.nebenkostenGesamt), highlight: true },
+      { label: 'Grunderwerbsteuer', wert: formatEuro(x.grunderwerbsteuer) },
+      { label: 'Steuersatz', wert: formatProzent(x.steuersatz, 1) },
+      { label: 'Makler', wert: formatEuro(x.makler) },
+      { label: 'Notar', wert: formatEuro(x.notar) },
+      { label: 'Grundbuch', wert: formatEuro(x.grundbuch) },
+    ]; },
   },
   {
     name: 'berechne_heizkosten',
@@ -199,6 +259,12 @@ export const KI_TOOLS: KiTool[] = [
     },
     rechnerSlug: 'wohnen/heizkosten-rechner',
     run: (i) => berechneHeizkosten(i as Parameters<typeof berechneHeizkosten>[0]),
+    anzeige: (r) => { const x = r as HeizkostenErgebnis; return [
+      { label: 'Kosten pro Jahr', wert: formatEuro(x.kostenJahr), highlight: true },
+      { label: 'Kosten pro Monat', wert: formatEuro(x.kostenMonat) },
+      { label: 'Kosten pro m²', wert: formatEuro(x.kostenProQm) },
+      { label: 'Verbrauch gesamt', wert: formatZahl(x.verbrauchGesamt, 0) + ' kWh' },
+    ]; },
   },
   {
     name: 'berechne_pendlerpauschale',
@@ -216,6 +282,12 @@ export const KI_TOOLS: KiTool[] = [
     },
     rechnerSlug: 'arbeit/pendlerpauschale-rechner',
     run: (i) => berechnePendlerpauschale(i as Parameters<typeof berechnePendlerpauschale>[0]),
+    anzeige: (r) => { const x = r as PendlerErgebnis; return [
+      { label: 'Pauschale gesamt', wert: formatEuro(x.pauschaleGesamt), highlight: true },
+      { label: 'Steuerersparnis', wert: formatEuro(x.steuerersparnis) },
+      { label: 'Ersparnis/Monat', wert: formatEuro(x.monatlicheErsparnis) },
+      { label: 'Homeoffice-Pauschale', wert: formatEuro(x.homeofficePauschale) },
+    ]; },
   },
   {
     name: 'berechne_wahrer_stundenlohn',
@@ -235,6 +307,13 @@ export const KI_TOOLS: KiTool[] = [
     },
     rechnerSlug: 'arbeit/wahrer-stundenlohn',
     run: (i) => berechneWahrenStundenlohn(i as Parameters<typeof berechneWahrenStundenlohn>[0]),
+    anzeige: (r) => { const x = r as WahrerStundenlohnErgebnis; return [
+      { label: 'Wahrer Stundenlohn', wert: formatEuro(x.wahrerStundenlohn), highlight: true },
+      { label: 'Offizieller Stundenlohn', wert: formatEuro(x.offiziellerStundenlohn) },
+      { label: 'Differenz', wert: formatEuro(x.differenzStundenlohn) },
+      { label: 'Tatsächl. Netto/Monat', wert: formatEuro(x.tatsaechlichesNetto) },
+      { label: 'Tatsächl. Stunden/Monat', wert: formatZahl(x.tatsaechlicheStundenMonat, 1) },
+    ]; },
   },
   {
     name: 'berechne_spritkosten',
@@ -251,6 +330,12 @@ export const KI_TOOLS: KiTool[] = [
     },
     rechnerSlug: 'auto/spritkosten-rechner',
     run: (i) => berechneSpritkosten(i as Parameters<typeof berechneSpritkosten>[0]),
+    anzeige: (r) => { const x = r as SpritkostenErgebnis; return [
+      { label: 'Gesamtkosten', wert: formatEuro(x.gesamtkosten), highlight: true },
+      { label: 'Verbrauch gesamt', wert: formatZahl(x.literGesamt, 1) + ' L' },
+      { label: 'Kosten pro km', wert: formatEuro(x.kostenProKm) },
+      { label: 'Strecke', wert: formatZahl(x.effektiveStrecke, 0) + ' km' },
+    ]; },
   },
   {
     name: 'berechne_kw_ps',
@@ -265,6 +350,10 @@ export const KI_TOOLS: KiTool[] = [
     },
     rechnerSlug: 'auto/kw-ps-umrechner',
     run: (i) => berechneKwPs(i as Parameters<typeof berechneKwPs>[0]),
+    anzeige: (r) => { const x = r as KwPsErgebnis; return [
+      { label: 'Ergebnis', wert: formatZahl(x.ergebnisWert, 1) + ' ' + x.ergebnisEinheit, highlight: true },
+      { label: 'Eingabe', wert: formatZahl(x.eingabeWert, 1) + ' ' + x.eingabeEinheit },
+    ]; },
   },
   {
     name: 'berechne_idealgewicht',
@@ -282,6 +371,12 @@ export const KI_TOOLS: KiTool[] = [
     },
     rechnerSlug: 'gesundheit/idealgewicht-rechner',
     run: (i) => berechneIdealgewicht(i as Parameters<typeof berechneIdealgewicht>[0]),
+    anzeige: (r) => { const x = r as IdealgewichtErgebnis; return [
+      { label: 'Idealgewicht (Broca)', wert: formatZahl(x.broca, 1) + ' kg', highlight: true },
+      { label: 'Idealgewicht (Creff)', wert: formatZahl(x.creff, 1) + ' kg' },
+      { label: 'Aktuelles Gewicht', wert: formatZahl(x.aktuellesGewicht, 1) + ' kg' },
+      { label: 'Status', wert: x.statusText },
+    ]; },
   },
   {
     name: 'berechne_kalorien',
@@ -300,6 +395,14 @@ export const KI_TOOLS: KiTool[] = [
     },
     rechnerSlug: 'gesundheit/kalorienrechner',
     run: (i) => berechneKalorien(i as Parameters<typeof berechneKalorien>[0]),
+    anzeige: (r) => { const x = r as KalorienErgebnis; return [
+      { label: 'Zielkalorien', wert: formatZahl(x.zielKalorien, 0) + ' kcal', highlight: true },
+      { label: 'Grundumsatz', wert: formatZahl(x.grundumsatz, 0) + ' kcal' },
+      { label: 'Gesamtumsatz', wert: formatZahl(x.gesamtumsatz, 0) + ' kcal' },
+      { label: 'Protein', wert: formatZahl(x.proteinGramm, 0) + ' g' },
+      { label: 'Kohlenhydrate', wert: formatZahl(x.kohlenhydrateGramm, 0) + ' g' },
+      { label: 'Fett', wert: formatZahl(x.fettGramm, 0) + ' g' },
+    ]; },
   },
   {
     name: 'berechne_dreisatz',
@@ -316,6 +419,9 @@ export const KI_TOOLS: KiTool[] = [
     },
     rechnerSlug: 'alltag/dreisatz-rechner',
     run: (i) => berechneDreisatz(i as Parameters<typeof berechneDreisatz>[0]),
+    anzeige: (r) => { const x = r as DreisatzErgebnis; return [
+      { label: 'Ergebnis', wert: formatZahl(x.b2, 2), highlight: true },
+    ]; },
   },
   {
     name: 'berechne_prozentuale_veraenderung',
@@ -331,6 +437,12 @@ export const KI_TOOLS: KiTool[] = [
     },
     rechnerSlug: 'alltag/prozentuale-veraenderung-rechner',
     run: (i) => berechneProzVeraenderung(i as Parameters<typeof berechneProzVeraenderung>[0]),
+    anzeige: (r) => { const x = r as ProzVeraenderungErgebnis; return [
+      { label: 'Veränderung', wert: formatProzent(x.prozent, 2), highlight: true },
+      { label: 'Absolut', wert: formatZahl(x.absolut, 2) + (x.einheit ? ' ' + x.einheit : '') },
+      { label: 'Alter Wert', wert: formatZahl(x.alterWert, 2) + (x.einheit ? ' ' + x.einheit : '') },
+      { label: 'Neuer Wert', wert: formatZahl(x.neuerWert, 2) + (x.einheit ? ' ' + x.einheit : '') },
+    ]; },
   },
   {
     name: 'berechne_tage',
@@ -349,6 +461,12 @@ export const KI_TOOLS: KiTool[] = [
       const o = i as { startDatum: string; endDatum: string; mitzaehlen: boolean };
       return berechneTage({ startDatum: new Date(o.startDatum), endDatum: new Date(o.endDatum), mitzaehlen: o.mitzaehlen });
     },
+    anzeige: (r) => { const x = r as TageErgebnis; return [
+      { label: 'Tage gesamt', wert: formatZahl(x.tage, 0) + ' Tage', highlight: true },
+      { label: 'Wochen', wert: formatZahl(x.wochen, 0) },
+      { label: 'Arbeitstage', wert: formatZahl(x.arbeitstage, 0) },
+      { label: 'Wochenendtage', wert: formatZahl(x.wochenendtage, 0) },
+    ]; },
   },
   {
     name: 'berechne_trinkgeld',
@@ -367,12 +485,18 @@ export const KI_TOOLS: KiTool[] = [
     },
     rechnerSlug: 'alltag/trinkgeld-rechner',
     run: (i) => berechneTriinkgeld(i as Parameters<typeof berechneTriinkgeld>[0]),
+    anzeige: (r) => { const x = r as TrinkgeldErgebnis; return [
+      { label: 'Gesamtbetrag', wert: formatEuro(x.gesamtbetrag), highlight: true },
+      { label: 'Trinkgeld', wert: formatEuro(x.trinkgeldBetrag) },
+      { label: 'Trinkgeld-%', wert: formatProzent(x.trinkgeldProzent, 1) },
+      { label: 'Pro Person', wert: formatEuro(x.proPerson) },
+    ]; },
   },
 ];
 
 // Findet Tool per Name, führt es aus, fängt null + Exceptions ab.
 export function dispatchTool(name: string, input: unknown):
-  { ok: true; slug: string; result: unknown } | { ok: false; error: string } {
+  { ok: true; slug: string; result: unknown; zeilen: AnzeigeZeile[] } | { ok: false; error: string } {
   const tool = KI_TOOLS.find((t) => t.name === name);
   if (!tool) return { ok: false, error: `Unbekanntes Tool: ${name}` };
   try {
@@ -380,7 +504,7 @@ export function dispatchTool(name: string, input: unknown):
     if (result === null || result === undefined) {
       return { ok: false, error: 'Berechnung nicht möglich — Eingabe unvollständig oder ungültig. Bitte fehlende/plausible Werte erfragen.' };
     }
-    return { ok: true, slug: tool.rechnerSlug, result };
+    return { ok: true, slug: tool.rechnerSlug, result, zeilen: tool.anzeige(result) };
   } catch {
     return { ok: false, error: 'Interner Berechnungsfehler.' };
   }

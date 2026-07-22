@@ -109,3 +109,16 @@ export function clampNumber(n: number, min: number, max: number): number {
   if (isNaN(n)) return min;
   return Math.max(min, Math.min(max, n));
 }
+
+/** Deutsches Euro-Format, immer 2 Nachkommastellen (wie die Rechnerseiten). */
+export function formatEuro(n: number): string {
+  return n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+}
+/** Deutsches Zahlenformat mit fixer Nachkommastellenzahl. */
+export function formatZahl(n: number, dezimal = 0): string {
+  return n.toLocaleString('de-DE', { minimumFractionDigits: dezimal, maximumFractionDigits: dezimal });
+}
+/** Deutsches Prozentformat. */
+export function formatProzent(n: number, dezimal = 1): string {
+  return n.toLocaleString('de-DE', { minimumFractionDigits: dezimal, maximumFractionDigits: dezimal }) + ' %';
+}
