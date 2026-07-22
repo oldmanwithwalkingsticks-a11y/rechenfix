@@ -510,11 +510,11 @@ export default function SteuerprogressionsRechner() {
               {
                 titel: 'Steuerprogression',
                 zeilen: [
-                  { label: 'Zu versteuerndes Einkommen', wert: `${formatEuro(ergebnis.zvE)} €` },
-                  { label: 'Einkommensteuer', wert: `- ${formatEuro(ergebnis.einkommensteuer)} €` },
-                  { label: 'Solidaritätszuschlag', wert: `- ${formatEuro(ergebnis.solidaritaetszuschlag)} €` },
-                  { label: 'Kirchensteuer', wert: `- ${formatEuro(ergebnis.kirchensteuer)} €` },
-                  { label: 'Steuer gesamt', wert: `${formatEuro(ergebnis.gesamtSteuer)} €`, highlight: true },
+                  { label: 'Zu versteuerndes Einkommen', wert: `${formatEuroFull(ergebnis.zvE)} €` },
+                  { label: 'Einkommensteuer', wert: `- ${formatEuroFull(ergebnis.einkommensteuer)} €` },
+                  { label: 'Solidaritätszuschlag', wert: `- ${formatEuroFull(ergebnis.solidaritaetszuschlag)} €` },
+                  { label: 'Kirchensteuer', wert: `- ${formatEuroFull(ergebnis.kirchensteuer)} €` },
+                  { label: 'Steuer gesamt', wert: `${formatEuroFull(ergebnis.gesamtSteuer)} €`, highlight: true },
                 ],
               },
               {

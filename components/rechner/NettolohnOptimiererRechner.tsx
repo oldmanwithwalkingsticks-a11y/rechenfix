@@ -272,6 +272,17 @@ export default function NettolohnOptimiererRechner() {
       <ErgebnisAktionen
         ergebnisText={sieger ? `Nettolohn-Optimierer: Bei ${fmt(betrag)} € AG-Budget ist "${sieger.label}" am besten — +${fmt2(sieger.nettoZugewinn)} €/Monat netto (${fmt2(vorteilVsBrutto)} € mehr als Brutto-Erhöhung)` : 'Nettolohn-Optimierer'}
         seitenTitel="Nettolohn-Optimierer"
+        pdfDaten={sieger ? [
+          {
+            titel: 'Nettolohn-Optimierer',
+            zeilen: [
+              { label: 'AG-Budget', wert: `${fmt(betrag)} €` },
+              { label: 'Beste Option', wert: `${sieger.label}`, highlight: true },
+              { label: 'Netto-Zugewinn / Monat', wert: `+ ${fmt2(sieger.nettoZugewinn)} €` },
+              { label: 'Mehr als Brutto-Erhöhung', wert: `+ ${fmt2(vorteilVsBrutto)} €` },
+            ],
+          },
+        ] : undefined}
       />
 
       <AffiliateBox programId="wiso" context="nettolohn" />

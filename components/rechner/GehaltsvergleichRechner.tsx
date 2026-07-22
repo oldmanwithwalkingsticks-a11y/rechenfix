@@ -246,6 +246,17 @@ export default function GehaltsvergleichRechner() {
           <ErgebnisAktionen
             ergebnisText={`Gehaltsvergleich: ${fmtE(nBrutto)} € brutto — Perzentil ${ergebnis.perzentil}% (${berufLabel}, ${blLabel}, ${alterLabel})`}
             seitenTitel="Gehaltsvergleich"
+            pdfDaten={[
+              {
+                titel: 'Gehaltsvergleich',
+                zeilen: [
+                  { label: 'Ihr Bruttogehalt', wert: `${fmtE(nBrutto)} €` },
+                  { label: 'Perzentil', wert: `${ergebnis.perzentil} %`, highlight: true },
+                  { label: 'Regionaler Median (vergleichbar)', wert: `${fmtE(ergebnis.adjustierterMedian)} €` },
+                  { label: 'Differenz zum Median', wert: `${fmtE(ergebnis.differenz)} € (${ergebnis.differenzProzent.toLocaleString('de-DE')} %)` },
+                ],
+              },
+            ]}
           />
 
           <AiExplain

@@ -143,6 +143,18 @@ export default function HochRechner() {
       <ErgebnisAktionen
         ergebnisText={`${fmtEur(ergebnis.stunde)} / h · ${fmtEur(ergebnis.monat)} / Monat · ${fmtEur(ergebnis.jahr)} / Jahr`}
         seitenTitel="Hochrechner (Gehalt)"
+        pdfDaten={[
+          {
+            titel: 'Gehalt hochgerechnet',
+            zeilen: [
+              { label: 'pro Stunde', wert: `${fmtEur(ergebnis.stunde)}` },
+              { label: 'pro Tag', wert: `${fmtEur(ergebnis.tag)}` },
+              { label: 'pro Woche', wert: `${fmtEur(ergebnis.woche)}` },
+              { label: 'pro Monat', wert: `${fmtEur(ergebnis.monat)}`, highlight: true },
+              { label: 'pro Jahr', wert: `${fmtEur(ergebnis.jahr)}` },
+            ],
+          },
+        ]}
       />
 
       <AiExplain

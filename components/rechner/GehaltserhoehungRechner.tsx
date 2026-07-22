@@ -320,6 +320,24 @@ export default function GehaltserhoehungRechner() {
       <ErgebnisAktionen
         ergebnisText={`Gehaltserhöhung: +${fmtEuro(bruttoDiff)} € brutto → +${fmtEuro(nettoDiff)} € netto/Monat (+${fmtEuro(nettoDiff * 12)} €/Jahr) | Grenzbelastung ${fmtProz(grenzbelastung)} % | Altes Netto ${fmtEuro(alt.nettoMonat)} € → Neues Netto ${fmtEuro(neu.nettoMonat)} €`}
         seitenTitel="Gehaltserhöhung-Rechner"
+        pdfDaten={[
+          {
+            titel: 'Gehaltserhöhung',
+            zeilen: [
+              { label: 'Brutto-Erhöhung / Monat', wert: `+ ${fmtEuro(bruttoDiff)} €` },
+              { label: 'Netto-Erhöhung / Monat', wert: `+ ${fmtEuro(nettoDiff)} €`, highlight: true },
+              { label: 'Netto-Erhöhung / Jahr', wert: `+ ${fmtEuro(nettoDiff * 12)} €` },
+              { label: 'Grenzbelastung', wert: `${fmtProz(grenzbelastung)} %` },
+            ],
+          },
+          {
+            titel: 'Vorher / Nachher (Netto/Monat)',
+            zeilen: [
+              { label: 'Altes Netto', wert: `${fmtEuro(alt.nettoMonat)} €` },
+              { label: 'Neues Netto', wert: `${fmtEuro(neu.nettoMonat)} €` },
+            ],
+          },
+        ]}
       />
 
       <AffiliateBox programId="wiso" context="gehaltserhoehung" />

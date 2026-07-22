@@ -266,6 +266,18 @@ export default function NebenjobRechner() {
           <ErgebnisAktionen
             ergebnisText={`Nebenjob-Rechner (${ergebnis.artLabel}): Brutto ${fmt(ergebnis.nebenjobBrutto)} € → Netto ${fmt(ergebnis.nebenjobNettoMonat)} € | Netto-Zuwachs/Monat: +${fmt(ergebnis.nettoZuwachsMonat)} € | +${fmt(ergebnis.nettoZuwachsJahr)} €/Jahr | Steuerbelastung: ${ergebnis.steuerbelastungNebenjob.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} %`}
             seitenTitel="Nebenjob-Rechner"
+            pdfDaten={[
+              {
+                titel: `Nebenjob (${ergebnis.artLabel})`,
+                zeilen: [
+                  { label: 'Nebenjob-Brutto / Monat', wert: `${fmt(ergebnis.nebenjobBrutto)} €` },
+                  { label: 'Nebenjob-Netto / Monat', wert: `${fmt(ergebnis.nebenjobNettoMonat)} €`, highlight: true },
+                  { label: 'Netto-Zuwachs / Monat', wert: `+ ${fmt(ergebnis.nettoZuwachsMonat)} €` },
+                  { label: 'Netto-Zuwachs / Jahr', wert: `+ ${fmt(ergebnis.nettoZuwachsJahr)} €` },
+                  { label: 'Steuerbelastung Nebenjob', wert: `${ergebnis.steuerbelastungNebenjob.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} %` },
+                ],
+              },
+            ]}
           />
 
           <AiExplain
