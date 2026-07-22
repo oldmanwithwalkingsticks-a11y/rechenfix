@@ -15,7 +15,12 @@ interface FeedbackEntry {
   t: number;
 }
 
-type Tab = 'programm' | 'rechner' | 'alle' | 'feedback';
+interface PdfEntry {
+  r: string;
+  t: number;
+}
+
+type Tab = 'programm' | 'rechner' | 'alle' | 'feedback' | 'pdf';
 
 const AUTH_STORAGE_KEY = 'rf_admin_stats_token';
 
@@ -46,6 +51,7 @@ export default function AffiliateStatsPage() {
 
   const [alleClicks, setAlleClicks] = useState<ClickEntry[]>([]);
   const [alleFeedbacks, setAlleFeedbacks] = useState<FeedbackEntry[]>([]);
+  const [allePdfs, setAllePdfs] = useState<PdfEntry[]>([]);
   const [monat, setMonat] = useState(aktuellerMonat());
   const [tab, setTab] = useState<Tab>('programm');
   const [berichtStatus, setBerichtStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
@@ -79,6 +85,7 @@ export default function AffiliateStatsPage() {
       const data = await res.json();
       setAlleClicks(Array.isArray(data.clicks) ? data.clicks : []);
       setAlleFeedbacks(Array.isArray(data.feedbacks) ? data.feedbacks : []);
+      setAllePdfs(Array.isArray(data.pdfs) ? data.pdfs : []);
       setLadeStatus('ok');
     } catch {
       setLadeStatus('fehler');
@@ -103,6 +110,7 @@ export default function AffiliateStatsPage() {
     setToken(null);
     setAlleClicks([]);
     setAlleFeedbacks([]);
+    setAllePdfs([]);
     try { sessionStorage.removeItem(AUTH_STORAGE_KEY); } catch { /* ignore */ }
   };
 
@@ -118,6 +126,19 @@ export default function AffiliateStatsPage() {
   // Daten nach gewähltem Monat filtern
   const clicks = useMemo(() => alleClicks.filter(c => isImMonat(c.t, monat)), [alleClicks, monat]);
   const feedbacks = useMemo(() => alleFeedbacks.filter(f => isImMonat(f.t, monat)), [alleFeedbacks, monat]);
+  const pdfs = useMemo(() => allePdfs.filter(p => isImMonat(p.t, monat)), [allePdfs, monat]);
+
+  const nachPdfRechner = useMemo(() => {
+    const map = new Map<string, { count: number; letzter: number }>();
+    for (const p of pdfs) {
+      const e = map.get(p.r);
+      if (e) { e.count++; if (p.t > e.letzter) e.letzter = p.t; }
+      else map.set(p.r, { count: 1, letzter: p.t });
+    }
+    return Array.from(map.entries())
+      .map(([rechner, d]) => ({ rechner, ...d }))
+      .sort((a, b) => b.count - a.count);
+  }, [pdfs]);
 
   const nachProgramm = useMemo(() => {
     const map = new Map<string, { count: number; letzter: number }>();
@@ -251,6 +272,7 @@ export default function AffiliateStatsPage() {
     { key: 'rechner', label: 'Nach Rechner' },
     { key: 'alle', label: 'Alle Klicks' },
     { key: 'feedback', label: 'Feedback' },
+    { key: 'pdf', label: 'PDF-Downloads' },
   ];
 
   // Login-Screen
@@ -543,6 +565,36 @@ export default function AffiliateStatsPage() {
                 </table>
               </div>
               </>
+            )
+          )}
+
+          {tab === 'pdf' && (
+            pdfs.length === 0 ? (
+              <div className="text-center py-12 text-gray-600 dark:text-gray-500">Keine PDF-Downloads in diesem Monat.</div>
+            ) : (
+            <>
+              <div className="mb-4 text-sm text-gray-600 dark:text-gray-400">
+                Gesamt: <strong>{pdfs.length}</strong> PDF-Downloads · <strong>{nachPdfRechner.length}</strong> verschiedene Rechner
+              </div>
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-gray-50 dark:bg-gray-700/50 text-left">
+                    <th className="px-4 py-3 font-semibold text-gray-700 dark:text-gray-300">Rechner</th>
+                    <th className="px-4 py-3 font-semibold text-gray-700 dark:text-gray-300 text-right">PDF-Downloads</th>
+                    <th className="px-4 py-3 font-semibold text-gray-700 dark:text-gray-300 text-right">Letzter Download</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
+                  {nachPdfRechner.map((r, i) => (
+                    <tr key={`${r.rechner}-${i}`} className="hover:bg-gray-50 dark:hover:bg-gray-700/30">
+                      <td className="px-4 py-3 text-gray-800 dark:text-gray-200 font-mono text-xs">{r.rechner}</td>
+                      <td className="px-4 py-3 text-right tabular-nums text-gray-600 dark:text-gray-400">{r.count}</td>
+                      <td className="px-4 py-3 text-right text-gray-500 dark:text-gray-400">{fmtDate(r.letzter)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </>
             )
           )}
         </div>

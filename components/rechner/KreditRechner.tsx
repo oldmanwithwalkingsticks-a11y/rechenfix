@@ -279,6 +279,25 @@ export default function KreditRechner() {
           <ErgebnisAktionen
             ergebnisText={`${fmt(nKreditsumme)} € Kredit bei ${fmt(nSollzins)}% Sollzins, ${laufzeitMonate} Monate → Monatsrate: ${fmt(ergebnis.monatsrate)} €, Gesamtzins: ${fmt(ergebnis.gesamtzins)} €`}
             seitenTitel="Kreditrechner"
+            pdfDaten={[
+              {
+                titel: 'Kredit-Konditionen',
+                zeilen: [
+                  { label: 'Monatsrate', wert: `${fmt(ergebnis.monatsrate)} €`, highlight: true },
+                  { label: 'Laufzeit', wert: `${ergebnis.tatsaechlicheLaufzeit} Monate` },
+                  { label: 'Gesamtzinsen', wert: `${fmt(ergebnis.gesamtzins)} €` },
+                  { label: 'Gesamtkosten', wert: `${fmt(ergebnis.gesamtkosten)} €` },
+                  { label: 'Effektiver Jahreszins', wert: `${fmt(ergebnis.effektivzins)} %` },
+                ],
+              },
+              ...(nSondertilgung > 0 && ergebnis.zinsersparnis > 0 ? [{
+                titel: 'Vorteil durch Sondertilgung',
+                zeilen: [
+                  { label: 'Zinsersparnis', wert: `${fmt(ergebnis.zinsersparnis)} €` },
+                  { label: 'Früher schuldenfrei', wert: `${ergebnis.monate_frueher} Monate` },
+                ],
+              }] : []),
+            ]}
           />
           <AiExplain
             rechnerName="Kreditrechner"
