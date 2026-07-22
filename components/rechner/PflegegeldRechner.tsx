@@ -280,6 +280,25 @@ export default function PflegegeldRechner() {
       <ErgebnisAktionen
         ergebnisText={`Pflegegeld Grad ${pflegegrad} (${pflegeformLabel}): ${fmtEuro(ergebnis.hauptLeistungMonat)} €/Monat (${fmtEuro(ergebnis.hauptLeistungJahr)} €/Jahr) + 131 € Entlastungsbetrag`}
         seitenTitel="Pflegegeld-Rechner"
+        pdfDaten={[
+          {
+            titel: `Pflegegeld Grad ${pflegegrad} (${pflegeformLabel})`,
+            zeilen: [
+              { label: 'Hauptleistung pro Monat', wert: `${fmtEuro(ergebnis.hauptLeistungMonat)} €`, highlight: true },
+              { label: 'Hauptleistung pro Jahr', wert: `${fmtEuro(ergebnis.hauptLeistungJahr)} €` },
+              { label: 'Entlastungsbetrag pro Monat', wert: `${fmtEuro(ergebnis.entlastungsbetrag)} €` },
+              { label: 'Pflegehilfsmittel pro Monat', wert: `${fmtEuro(ergebnis.pflegehilfsmittelMonat)} €` },
+            ],
+          },
+          {
+            titel: 'Weitere Leistungsansprüche (jährlich)',
+            wertSpalte: 'Betrag / Jahr',
+            zeilen: [
+              { label: 'Verhinderungspflege', wert: `${fmtEuro(ergebnis.verhinderungspflegeJahr)} €` },
+              { label: 'Kurzzeitpflege', wert: `${fmtEuro(ergebnis.kurzzeitpflegeJahr)} €` },
+            ],
+          },
+        ]}
       />
 
       <AiExplain

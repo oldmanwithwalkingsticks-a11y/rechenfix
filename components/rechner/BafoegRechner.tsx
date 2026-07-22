@@ -582,6 +582,25 @@ export default function BafoegRechner() {
               : `Kein BAföG-Anspruch | Bedarf: ${fmtEuro(ergebnis.gesamtBedarf)} € | Anrechnung: ${fmtEuro(ergebnis.gesamtAnrechnung)} €`
             }
             seitenTitel="BAföG-Rechner"
+            pdfDaten={ergebnis.hatAnspruch ? [
+              {
+                titel: 'BAföG-Anspruch',
+                zeilen: [
+                  { label: 'BAföG pro Monat', wert: `${fmtEuro(ergebnis.bafoegMonat)} €`, highlight: true },
+                  { label: 'Förderart', wert: ausbildung === 'studium' ? '50% Zuschuss + 50% Darlehen' : '100% Zuschuss' },
+                  { label: 'Zuschuss-Anteil', wert: `${fmtEuro(ergebnis.zuschussAnteil)} €` },
+                  { label: 'Darlehens-Anteil', wert: `${fmtEuro(ergebnis.darlehensAnteil)} €` },
+                ],
+              },
+              {
+                titel: 'Bedarf & Anrechnung',
+                zeilen: [
+                  { label: 'Gesamtbedarf', wert: `${fmtEuro(ergebnis.gesamtBedarf)} €` },
+                  { label: 'Anrechnung gesamt', wert: `- ${fmtEuro(ergebnis.gesamtAnrechnung)} €` },
+                  { label: 'davon Elterneinkommen', wert: `${fmtEuro(ergebnis.anrechnungEltern)} €` },
+                ],
+              },
+            ] : undefined}
           />
 
           <AiExplain

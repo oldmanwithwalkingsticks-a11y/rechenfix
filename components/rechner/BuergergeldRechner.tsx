@@ -705,6 +705,24 @@ export default function BuergergeldRechner() {
           <ErgebnisAktionen
             ergebnisText={ergebnis.bedarfGedeckt ? `Kein ${params.bezeichnung}-Anspruch (Bedarf durch Einkommen gedeckt)` : `${params.bezeichnung}-Anspruch: ${fmt(ergebnis.gesamtAnspruch)} € pro Monat`}
             seitenTitel="Bürgergeld-Rechner"
+            pdfDaten={!ergebnis.bedarfGedeckt ? [
+              {
+                titel: `${params.bezeichnung}-Anspruch`,
+                zeilen: [
+                  { label: 'Gesamtanspruch pro Monat', wert: `${fmt(ergebnis.gesamtAnspruch)} €`, highlight: true },
+                  { label: 'Regelbedarf gesamt', wert: `${fmt(ergebnis.regelbedarfGesamt)} €` },
+                  { label: 'Unterkunftskosten', wert: `${fmt(ergebnis.unterkunftskosten)} €` },
+                  { label: 'Personen im Haushalt', wert: `${ergebnis.personenImHaushalt}` },
+                ],
+              },
+              {
+                titel: 'Einkommensanrechnung',
+                zeilen: [
+                  { label: 'Anrechenbares Einkommen', wert: `${fmt(ergebnis.anrechenbareEinkommen)} €` },
+                  { label: 'Einkommens-Freibetrag', wert: `${fmt(ergebnis.freibetragEinkommen)} €` },
+                ],
+              },
+            ] : undefined}
           />
           <AiExplain
             rechnerName="Bürgergeld-Rechner"

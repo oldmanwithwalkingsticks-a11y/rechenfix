@@ -318,6 +318,25 @@ export default function WohngeldRechner() {
               : `Kein Wohngeld-Anspruch | ${personen} Personen, ${fmtEuro(parseDeutscheZahl(einkommen))} € Einkommen, ${fmtEuro(parseDeutscheZahl(miete))} € Miete, Mietstufe ${mietstufe}`
             }
             seitenTitel="Wohngeld-Rechner"
+            pdfDaten={ergebnis.hatAnspruch ? [
+              {
+                titel: 'Wohngeld',
+                zeilen: [
+                  { label: 'Wohngeld pro Monat', wert: `${fmtEuro(ergebnis.wohngeldMonat)} €`, highlight: true },
+                  { label: 'Wohngeld pro Jahr', wert: `${fmtEuro(ergebnis.wohngeldJahr)} €` },
+                  { label: 'Mietstufe', wert: `${mietstufe}` },
+                  { label: 'Personen im Haushalt', wert: `${personen}` },
+                ],
+              },
+              {
+                titel: 'Berechnungsgrundlage',
+                zeilen: [
+                  { label: 'Bereinigtes Monatseinkommen', wert: `${fmtEuro(ergebnis.bereinigtesEinkommen)} €` },
+                  { label: 'Berücksichtigte Miete', wert: `${fmtEuro(ergebnis.beruecksichtigteMiete)} €` },
+                  { label: 'Höchstbetrag Miete', wert: `${fmtEuro(ergebnis.hoechstbetragMiete)} €` },
+                ],
+              },
+            ] : undefined}
           />
 
           <AiExplain
