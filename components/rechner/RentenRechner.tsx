@@ -336,6 +336,26 @@ export default function RentenRechner() {
           <ErgebnisAktionen
             ergebnisText={`Rentenrechner: Brutto-Rente ca. ${fmt(ergebnis.bruttoRente)} €/Monat | Netto ca. ${fmt(ergebnis.nettoRente)} € | ${fmtDez(ergebnis.gesamtRentenpunkte)} Rentenpunkte | Rentenlücke: ${ergebnis.rentenluecke > 0 ? fmt(ergebnis.rentenluecke) + ' €' : 'keine'}`}
             seitenTitel="Rentenrechner"
+            pdfDaten={[
+              {
+                titel: 'Gesetzliche Rente (Prognose)',
+                zeilen: [
+                  { label: 'Rentenpunkte gesamt', wert: `${fmtDez(ergebnis.gesamtRentenpunkte)} Punkte` },
+                  { label: 'Aktueller Rentenwert', wert: `${fmtDez(ergebnis.rentenwert)} €/Punkt` },
+                  { label: 'Brutto-Rente pro Monat', wert: `${fmt(ergebnis.bruttoRente)} €`, highlight: true },
+                  { label: 'Netto-Rente (ca.)', wert: `${fmt(ergebnis.nettoRente)} €` },
+                ],
+              },
+              {
+                titel: 'Vorsorge-Analyse',
+                zeilen: [
+                  { label: 'Gewünschtes Netto', wert: `${fmt(ergebnis.gewuenschtesNetto)} €` },
+                  { label: 'Rentenlücke pro Monat', wert: ergebnis.rentenluecke > 0 ? `${fmt(ergebnis.rentenluecke)} €` : 'keine' },
+                  { label: 'Benötigtes Kapital', wert: `${fmt(ergebnis.benoetigtesKapital)} €` },
+                  { label: 'Nötige Sparrate pro Monat', wert: `${fmt(ergebnis.sparrateMonatlich)} €` },
+                ],
+              },
+            ]}
           />
 
           <AiExplain

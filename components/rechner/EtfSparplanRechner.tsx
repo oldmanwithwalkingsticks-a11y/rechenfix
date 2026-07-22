@@ -321,6 +321,18 @@ export default function EtfSparplanRechner() {
           <ErgebnisAktionen
             ergebnisText={`ETF-Sparplan: ${fmt(nSparrate)} €/Monat, ${nAnlagedauer} Jahre, ${fmtDez(nRendite)}% Rendite → Endkapital: ${fmt(steuern ? ergebnis.endkapitalNachSteuern : ergebnis.endkapital)} € (Einzahlungen: ${fmt(ergebnis.summeEinzahlungen)} €, Rendite: +${fmt(ergebnis.renditeAnteil)} €)`}
             seitenTitel="ETF-Sparplanrechner"
+            pdfDaten={[
+              {
+                titel: 'ETF-Sparplan Ergebnis',
+                zeilen: [
+                  { label: 'Summe Einzahlungen', wert: `${fmt(ergebnis.summeEinzahlungen)} €` },
+                  { label: 'Rendite (Wertzuwachs)', wert: `+ ${fmt(ergebnis.renditeAnteil)} €` },
+                  { label: steuern ? 'Endkapital nach Steuern' : 'Endkapital', wert: `${fmt(steuern ? ergebnis.endkapitalNachSteuern : ergebnis.endkapital)} €`, highlight: true },
+                  { label: 'Rendite-Anteil', wert: `${fmtDez(ergebnis.renditeAnteilProzent)} %` },
+                  ...(steuern ? [{ label: 'Steuer (Abgeltung)', wert: `- ${fmt(ergebnis.steuer)} €` }] : []),
+                ],
+              },
+            ]}
           />
 
           <AiExplain

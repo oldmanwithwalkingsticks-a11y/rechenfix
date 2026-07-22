@@ -196,6 +196,17 @@ export default function InflationsRechner() {
               ? `Kaufkraft nach ${ergebnis.jahre.length} Jahren: ${fmt(ergebnis.ergebnis)} € (Verlust: ${fmt(ergebnis.differenz)} €, ${ergebnis.differenzProzent.toLocaleString('de-DE')} %)`
               : `Preis in ${ergebnis.jahre.length} Jahren: ${fmt(ergebnis.ergebnis)} € (Anstieg: ${fmt(ergebnis.differenz)} €, ${ergebnis.differenzProzent.toLocaleString('de-DE')} %)`}
             seitenTitel="Inflationsrechner"
+            pdfDaten={[
+              {
+                titel: modus === 'kaufkraft' ? 'Kaufkraftverlust' : 'Preisentwicklung',
+                zeilen: [
+                  { label: 'Ausgangswert', wert: `${fmt(ergebnis.ausgangswert)} €` },
+                  { label: modus === 'kaufkraft' ? 'Kaufkraft am Ende' : 'Preis am Ende', wert: `${fmt(ergebnis.ergebnis)} €`, highlight: true },
+                  { label: modus === 'kaufkraft' ? 'Verlust' : 'Anstieg', wert: `${fmt(ergebnis.differenz)} € (${ergebnis.differenzProzent.toLocaleString('de-DE')} %)` },
+                  { label: 'Zeitraum', wert: `${ergebnis.jahre.length} Jahre` },
+                ],
+              },
+            ]}
           />
           <AiExplain
             rechnerName="Inflationsrechner"

@@ -263,6 +263,17 @@ export default function ZinsRechner() {
             <ErgebnisAktionen
               ergebnisText={`${fmt(nAnfang)} € Anfangskapital → ${fmt(ergebnis.endkapital)} € nach ${Math.floor(nLaufzeit)} Jahren (${fmt(ergebnis.gesamtzinsen)} € Zinsen)`}
               seitenTitel="Zinsrechner"
+              pdfDaten={[
+                {
+                  titel: 'Zinsentwicklung',
+                  zeilen: [
+                    { label: 'Eingesetztes Kapital', wert: `${fmt(ergebnis.eigenkapital)} €` },
+                    { label: 'Zinserträge gesamt', wert: `+ ${fmt(ergebnis.gesamtzinsen)} €` },
+                    { label: 'Endkapital', wert: `${fmt(ergebnis.endkapital)} €`, highlight: true },
+                    { label: 'Laufzeit', wert: `${ergebnis.jahre.length} Jahre` },
+                  ],
+                },
+              ]}
             />
           </div>
         </>

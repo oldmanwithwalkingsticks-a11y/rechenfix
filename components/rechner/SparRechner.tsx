@@ -137,6 +137,18 @@ export default function SparRechner() {
           <ErgebnisAktionen
             ergebnisText={`Endkapital nach ${ergebnis.jahre.length} Jahren: ${fmt(ergebnis.endkapital)} € (Eigenkapital: ${fmt(ergebnis.eigenkapital)} €, Zinserträge: ${fmt(ergebnis.gesamtzinsen)} €)`}
             seitenTitel="Sparrechner"
+            pdfDaten={[
+              {
+                titel: 'Sparergebnis',
+                zeilen: [
+                  { label: 'Eingezahltes Eigenkapital', wert: `${fmt(ergebnis.eigenkapital)} €` },
+                  { label: 'Zinserträge gesamt', wert: `+ ${fmt(ergebnis.gesamtzinsen)} €` },
+                  { label: 'Endkapital', wert: `${fmt(ergebnis.endkapital)} €`, highlight: true },
+                  { label: 'Zinsanteil am Endkapital', wert: `${ergebnis.zinsenAnteil.toLocaleString('de-DE')} %` },
+                  { label: 'Spardauer', wert: `${ergebnis.jahre.length} Jahre` },
+                ],
+              },
+            ]}
           />
           <AiExplain
             rechnerName="Sparrechner"
