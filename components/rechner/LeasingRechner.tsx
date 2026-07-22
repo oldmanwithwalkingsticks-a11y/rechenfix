@@ -225,6 +225,25 @@ export default function LeasingRechner() {
       <ErgebnisAktionen
         ergebnisText={`Leasingrate: ${fmt2(ergebnis.leasingrate)} €/Monat · Gesamtkosten ${fmt(ergebnis.gesamt)} € (${laufzeit} Monate)`}
         seitenTitel="Leasing-Rechner"
+        pdfDaten={[
+          {
+            titel: 'Leasing',
+            zeilen: [
+              { label: 'Leasingrate pro Monat', wert: `${fmt2(ergebnis.leasingrate)} €`, highlight: true },
+              { label: 'Summe aller Raten', wert: `${fmt(ergebnis.summeRaten)} €` },
+              { label: 'Gesamtkosten', wert: `${fmt(ergebnis.gesamt)} €` },
+              { label: 'Kosten pro km', wert: `${fmt2(ergebnis.kostenProKm)} €` },
+            ],
+          },
+          {
+            titel: 'Vergleich zur Finanzierung',
+            zeilen: [
+              { label: 'Finanzierungsrate', wert: `${fmt2(ergebnis.finRate)} €` },
+              { label: 'Finanzierungssumme', wert: `${fmt(ergebnis.finSumme)} €` },
+              { label: 'Differenz Leasing/Finanzierung', wert: `${fmt(ergebnis.differenz)} €` },
+            ],
+          },
+        ]}
       />
 
       <AffiliateBox programId="check24" context="leasing" />

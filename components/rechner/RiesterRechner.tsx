@@ -241,6 +241,19 @@ export default function RiesterRechner() {
           <ErgebnisAktionen
             ergebnisText={`Riester: ${fmt(ergebnis.gesamtfoerderung)} €/Jahr Förderung bei ${fmt(ergebnis.eigenbeitrag)} € Eigenbeitrag (${fmtD(ergebnis.foerderquote)} % Förderquote). Zulagen ${fmt(ergebnis.effektiveZulagen)} € + Steuervorteil ${fmt(ergebnis.zusatzlicherSteuervorteil)} €.`}
             seitenTitel="Riester-Rechner"
+            pdfDaten={[
+              {
+                titel: 'Riester-Förderung',
+                zeilen: [
+                  { label: 'Eigenbeitrag pro Jahr', wert: `${fmt(ergebnis.eigenbeitrag)} €` },
+                  { label: 'Grundzulage', wert: `${fmt(ergebnis.grundzulagen)} €` },
+                  { label: 'Kinderzulagen', wert: `${fmt(ergebnis.kinderzulagen)} €` },
+                  { label: 'Steuervorteil (zusätzlich)', wert: `${fmt(ergebnis.zusatzlicherSteuervorteil)} €` },
+                  { label: 'Gesamtförderung pro Jahr', wert: `${fmt(ergebnis.gesamtfoerderung)} €`, highlight: true },
+                  { label: 'Förderquote', wert: `${fmtD(ergebnis.foerderquote)} %` },
+                ],
+              },
+            ]}
           />
 
           <AiExplain

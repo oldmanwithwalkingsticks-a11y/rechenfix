@@ -379,6 +379,27 @@ export default function BaufinanzierungRechner() {
           <ErgebnisAktionen
             ergebnisText={`Baufinanzierung: ${fmt(nKaufpreis)} € Kaufpreis, ${fmt(ergebnis.darlehen)} € Darlehen → Rate: ${fmt(ergebnis.monatsrate)} €/Monat | Restschuld nach ${zinsbindung}J: ${fmt(ergebnis.restschuldNachZinsbindung)} € | Laufzeit: ~${Math.round(ergebnis.gesamtlaufzeitJahre)} Jahre`}
             seitenTitel="Baufinanzierungs-Rechner"
+            pdfDaten={[
+              {
+                titel: 'Finanzierung',
+                zeilen: [
+                  { label: 'Kaufpreis', wert: `${fmt(ergebnis.kaufpreis)} €` },
+                  { label: 'Nebenkosten', wert: `${fmt(ergebnis.nebenkosten.gesamt)} €` },
+                  { label: 'Eigenkapital', wert: `${fmt(ergebnis.eigenkapital)} €` },
+                  { label: 'Darlehen', wert: `${fmt(ergebnis.darlehen)} €` },
+                  { label: 'Monatsrate', wert: `${fmt(ergebnis.monatsrate)} €`, highlight: true },
+                ],
+              },
+              {
+                titel: 'Zinsbindung & Laufzeit',
+                zeilen: [
+                  { label: 'Gezahlte Zinsen (Zinsbindung)', wert: `${fmt(ergebnis.gezahlteZinsenZinsbindung)} €` },
+                  { label: 'Restschuld nach Zinsbindung', wert: `${fmt(ergebnis.restschuldNachZinsbindung)} €` },
+                  { label: 'Gesamtlaufzeit (ca.)', wert: `${Math.round(ergebnis.gesamtlaufzeitJahre)} Jahre` },
+                  { label: 'Gesamtkosten', wert: `${fmt(ergebnis.gesamtkosten)} €` },
+                ],
+              },
+            ]}
           />
 
           <AiExplain

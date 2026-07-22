@@ -190,6 +190,19 @@ export default function LeasingfaktorRechner() {
           <ErgebnisAktionen
             ergebnisText={`Leasingfaktor-Rechner: ${euro(ergebnis.r)} € Rate bei ${euro(ergebnis.b)} € BLP = Leasingfaktor ${f2(ergebnis.leasingfaktor)}${ergebnis.mitAnzahlung ? ` (Gesamtkostenfaktor ${f2(ergebnis.gesamtkostenfaktor)})` : ''} — ${ergebnis.bewertung.label}. Branchenschnitt ~0,63.`}
             seitenTitel="Leasingfaktor-Rechner"
+            pdfDaten={[
+              {
+                titel: 'Leasingfaktor-Bewertung',
+                wertSpalte: 'Wert',
+                zeilen: [
+                  { label: 'Monatsrate', wert: `${euro(ergebnis.r)} €` },
+                  { label: 'Bruttolistenpreis (BLP)', wert: `${euro(ergebnis.b)} €` },
+                  { label: 'Leasingfaktor', wert: `${f2(ergebnis.leasingfaktor)}` },
+                  { label: 'Maßgeblicher Faktor', wert: `${f2(ergebnis.massgeblich)}`, highlight: true },
+                  { label: 'Einordnung', wert: `${ergebnis.bewertung.label}` },
+                ],
+              },
+            ]}
           />
 
           <AiExplain
