@@ -248,7 +248,22 @@ export default function AfaRechner() {
       <CrossLink href="/finanzen/gmbh-geschaeftsfuehrer-rechner" emoji="💼" text="GmbH-Geschäftsführer: Vergütung und Steuer berechnen" />
       <CrossLink href="/arbeit/freelancer-stundensatz-rechner" emoji="🧮" text="Freelancer-Stundensatz: Der faire Stundenlohn für Selbstständige" />
 
-      <ErgebnisAktionen ergebnisText={ergebnis} seitenTitel="AfA-Rechner" />
+      <ErgebnisAktionen
+        ergebnisText={ergebnis}
+        seitenTitel="AfA-Rechner"
+        pdfDaten={[
+          {
+            titel: 'Abschreibung (AfA)',
+            zeilen: [
+              { label: 'Anschaffungskosten', wert: `${fmtEuro(result.k)}` },
+              { label: 'Nutzungsdauer', wert: `${result.nd} Jahre` },
+              { label: 'Jährliche AfA', wert: `${fmtEuro(result.jaehrlich)}`, highlight: true },
+              { label: 'AfA im Erstjahr', wert: `${fmtEuro(result.anteilErstjahr)}` },
+              { label: 'Linearer AfA-Satz', wert: `${result.linSatz} %` },
+            ],
+          },
+        ]}
+      />
       <AiExplain
         rechnerName="AfA-Rechner"
         eingaben={{

@@ -8,6 +8,10 @@ import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import TabGroup from '@/components/ui/TabGroup';
+import { jsPDF } from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import QRCode from 'qrcode';
+import { RECHENFIX_LOGO_PNG } from '@/lib/pdf-logo';
 
 type Tab = 'netto-brutto' | 'brutto-netto' | 'multi';
 
@@ -84,6 +88,76 @@ export default function MwStRechner() {
     setGeteilt(true);
     setTimeout(() => setGeteilt(false), 2000);
   }
+
+  const handlePdf = async () => {
+    if (!ergebnis) return;
+    const url = 'https://www.rechenfix.de/finanzen/mwst-rechner';
+    const heute = new Date().toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
+
+    let qrDataUrl = '';
+    try { qrDataUrl = await QRCode.toDataURL(url, { margin: 1, width: 240 }); } catch { qrDataUrl = ''; }
+
+    const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+    const seiteB = 210;
+    const randX = 18;
+
+    const logoB = 62;
+    const logoH = logoB / 4.381;
+    try { doc.addImage(RECHENFIX_LOGO_PNG, 'PNG', randX, 14, logoB, logoH); } catch { /* ignore */ }
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(120);
+    doc.text(`Erstellt am ${heute}`, seiteB - randX, 20, { align: 'right' });
+
+    let y = 14 + logoH + 10;
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(15);
+    doc.setTextColor(30, 30, 30);
+    doc.text('Mehrwertsteuer-Berechnung', randX, y);
+    y += 8;
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(90);
+    const richtung = tab === 'netto-brutto' ? 'Netto → Brutto' : 'Brutto → Netto';
+    doc.text(`Berechnung: ${richtung}   |   MwSt-Satz: ${aktiverSatz} %`, randX, y);
+    y += 6;
+
+    autoTable(doc, {
+      startY: y,
+      head: [['Position', 'Betrag']],
+      body: [
+        ['Nettobetrag', `${fmt(ergebnis.netto)} €`],
+        [`Mehrwertsteuer (${aktiverSatz} %)`, `+ ${fmt(ergebnis.mwstBetrag)} €`],
+        [{ content: 'Bruttobetrag', styles: { fontStyle: 'bold' } }, { content: `${fmt(ergebnis.brutto)} €`, styles: { fontStyle: 'bold', textColor: [21, 128, 61] } }],
+      ],
+      theme: 'striped',
+      headStyles: { fillColor: [29, 78, 216], textColor: 255, fontStyle: 'bold' },
+      columnStyles: { 1: { halign: 'right' } },
+      margin: { left: randX, right: randX },
+      styles: { fontSize: 11, cellPadding: 3 },
+    });
+    const yEnd = (doc as unknown as { lastAutoTable: { finalY: number } }).lastAutoTable.finalY + 8;
+
+    if (qrDataUrl) { try { doc.addImage(qrDataUrl, 'PNG', randX, yEnd, 26, 26); } catch { /* ignore */ } }
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(110);
+    doc.text('Werte anpassen oder neu berechnen:', randX + 32, yEnd + 9);
+    doc.setTextColor(29, 78, 216);
+    doc.text(url, randX + 32, yEnd + 15);
+
+    doc.setTextColor(140);
+    doc.setFontSize(8);
+    doc.text('Unverbindliche Berechnung. Keine Steuerberatung. Quelle: rechenfix.de', randX, 289, { maxWidth: seiteB - 2 * randX });
+
+    doc.save('rechenfix-mwst-berechnung.pdf');
+
+    try {
+      fetch('/api/track', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type: 'pdf', rechner: 'mwst-rechner' }), cache: 'no-store' }).catch(() => {});
+    } catch { /* ignore */ }
+  };
 
   function addZeile() {
     setZeilen([...zeilen, { id: nextId++, bezeichnung: `Position ${zeilen.length + 1}`, netto: '', mwstSatz: 19 }]);
@@ -202,18 +276,27 @@ export default function MwStRechner() {
                 </div>
               </div>
 
-              <div className="flex gap-3 mt-2">
+              <div className="flex flex-wrap items-center gap-2.5 mt-2">
+                <button
+                  onClick={handlePdf}
+                  className="inline-flex items-center gap-2 rounded-xl bg-primary-500 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500/50"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2" /></svg>
+                  Als PDF speichern
+                </button>
                 <button
                   onClick={handleCopy}
-                  className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-600 font-medium transition-colors"
+                  className="inline-flex items-center gap-2 rounded-xl border border-primary-500/40 px-3.5 py-2.5 text-sm font-medium text-primary-600 transition-colors hover:bg-primary-50 dark:border-primary-400/40 dark:text-primary-300 dark:hover:bg-primary-500/10 focus:outline-none focus:ring-2 focus:ring-primary-500/40"
                 >
-                  {kopiert ? '✓ Kopiert' : kopierFehler ? 'Fehler — bitte manuell kopieren' : 'Ergebnis kopieren'}
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2v-2m-6-12h6a2 2 0 012 2v6m-8-8V3m0 2h4" /></svg>
+                  {kopiert ? '✓ Kopiert' : kopierFehler ? 'Fehler' : 'Kopieren'}
                 </button>
                 <button
                   onClick={handleShare}
-                  className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-600 font-medium transition-colors"
+                  className="inline-flex items-center gap-2 rounded-xl border border-primary-500/40 px-3.5 py-2.5 text-sm font-medium text-primary-600 transition-colors hover:bg-primary-50 dark:border-primary-400/40 dark:text-primary-300 dark:hover:bg-primary-500/10 focus:outline-none focus:ring-2 focus:ring-primary-500/40"
                 >
-                  {geteilt ? '✓ Geteilt' : 'Ergebnis teilen'}
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" /></svg>
+                  {geteilt ? '✓ Geteilt' : 'Teilen'}
                 </button>
               </div>
 
