@@ -11,74 +11,28 @@ const BEISPIELE = [
   'Was ist 15% Rabatt auf 89,99€?',
 ];
 
-/** Maps keywords in the AI response to rechner links */
-const RECHNER_LINKS: { keywords: string[]; label: string; href: string }[] = [
-  { keywords: ['brutto', 'netto', 'nettogehalt', 'steuerklasse', 'lohnsteuer'], label: 'Brutto-Netto-Rechner', href: '/finanzen/brutto-netto-rechner' },
-  { keywords: ['mwst', 'mehrwertsteuer', 'umsatzsteuer', '19%', '7%'], label: 'MwSt-Rechner', href: '/finanzen/mwst-rechner' },
-  { keywords: ['prozent', 'prozentrechnung', 'prozentsatz', 'grundwert', 'prozentwert'], label: 'Prozentrechner', href: '/alltag/prozentrechner' },
-  { keywords: ['rabatt', 'reduziert', 'nachlass', 'ermäßigung', 'preisnachlass'], label: 'Rabattrechner', href: '/alltag/rabattrechner' },
-  { keywords: ['dreisatz', 'verhältnis', 'proportional'], label: 'Dreisatz-Rechner', href: '/alltag/dreisatz-rechner' },
-  { keywords: ['bmi', 'body mass', 'übergewicht', 'untergewicht', 'normalgewicht'], label: 'BMI-Rechner', href: '/gesundheit/bmi-rechner' },
-  { keywords: ['promille', 'alkohol', 'blutalkohol'], label: 'Promillerechner', href: '/arbeit/promillerechner' },
-  { keywords: ['schlaf', 'schlafzykl', 'einschlafen', 'aufwachen', 'schlafenszeit'], label: 'Schlafrechner', href: '/gesundheit/schlaf-rechner' },
-  { keywords: ['rauchen', 'raucher', 'zigarett', 'nikotin', 'tabak'], label: 'Raucher-Rechner', href: '/gesundheit/raucher-rechner' },
-  { keywords: ['sprit', 'benzin', 'diesel', 'tankfüllung', 'fahrtkosten'], label: 'Spritkosten-Rechner', href: '/auto/spritkosten-rechner' },
-  { keywords: ['kfz-steuer', 'kfz steuer', 'autosteuer'], label: 'Kfz-Steuer-Rechner', href: '/auto/kfz-steuer-rechner' },
-  { keywords: ['ps umrechnen', 'kw umrechnen', 'pferdestärke', 'kilowatt', 'kw in ps', 'ps in kw'], label: 'kW-PS-Rechner', href: '/auto/kw-ps-umrechner' },
-  { keywords: ['pendlerpauschale', 'pendler', 'entfernungspauschale'], label: 'Pendlerpauschale-Rechner', href: '/arbeit/pendlerpauschale-rechner' },
-  { keywords: ['strom', 'kwh', 'stromverbrauch', 'stromkosten', 'kühlschrank'], label: 'Stromkosten-Rechner', href: '/wohnen/stromkosten-rechner' },
-  { keywords: ['heizkosten', 'heizung', 'heizen', 'gas', 'fernwärme'], label: 'Heizkosten-Rechner', href: '/wohnen/heizkosten-rechner' },
-  { keywords: ['nebenkosten', 'betriebskosten', 'warmmiete'], label: 'Nebenkosten-Rechner', href: '/wohnen/nebenkosten-rechner' },
-  { keywords: ['miete', 'mietpreis', 'kaltmiete', 'mietbelastung'], label: 'Mietrechner', href: '/wohnen/mietrechner' },
-  { keywords: ['grunderwerbsteuer', 'kaufnebenkosten', 'immobilie', 'hauskauf'], label: 'Grunderwerbsteuer-Rechner', href: '/wohnen/grunderwerbsteuer-rechner' },
-  { keywords: ['tapete', 'tapetenbedarf', 'rolle'], label: 'Tapetenbedarf-Rechner', href: '/wohnen/tapetenbedarf-rechner' },
-  { keywords: ['quadratmeter', 'fläche', 'm²', 'wohnfläche'], label: 'Quadratmeter-Rechner', href: '/wohnen/quadratmeter-rechner' },
-  { keywords: ['zins', 'zinsen', 'zinseszins', 'festgeld', 'tagesgeld'], label: 'Zinsrechner', href: '/finanzen/zinsrechner' },
-  { keywords: ['sparplan', 'sparrate', 'etf', 'sparen', 'vermögensaufbau', 'ansparen'], label: 'Sparrechner', href: '/finanzen/sparrechner' },
-  { keywords: ['inflation', 'kaufkraft', 'preissteigerung', 'geldentwertung'], label: 'Inflationsrechner', href: '/finanzen/inflationsrechner' },
-  { keywords: ['elterngeld', 'elternzeit', 'mutterschutz'], label: 'Elterngeld-Rechner', href: '/finanzen/elterngeld-rechner' },
-  { keywords: ['bürgergeld', 'arbeitslosengeld', 'hartz', 'jobcenter', 'regelbedarf'], label: 'Bürgergeld-Rechner', href: '/finanzen/buergergeld-rechner' },
-  { keywords: ['stundenlohn', 'lohn pro stunde', 'verdienst pro stunde'], label: 'Stundenlohn-Rechner', href: '/finanzen/stundenlohn-rechner' },
-  { keywords: ['arbeitszeit', 'arbeitsstunden', 'wochenstunden'], label: 'Arbeitszeit-Rechner', href: '/arbeit/arbeitszeitrechner' },
-  { keywords: ['urlaub', 'urlaubstage', 'urlaubsanspruch', 'resturlaub'], label: 'Urlaubstage-Rechner', href: '/arbeit/urlaubstage-rechner' },
-  { keywords: ['überstunden', 'mehrarbeit'], label: 'Überstunden-Rechner', href: '/arbeit/ueberstunden-rechner' },
-  { keywords: ['bruch', 'bruchrechnung', 'nenner', 'zähler'], label: 'Bruchrechner', href: '/mathe/bruchrechner' },
-  { keywords: ['durchschnitt', 'mittelwert', 'median', 'notendurchschnitt'], label: 'Durchschnittsrechner', href: '/mathe/durchschnitt-rechner' },
-  { keywords: ['notenschlüssel', 'note', 'punkte', 'bewertung', 'klausur'], label: 'Notenschlüssel-Rechner', href: '/mathe/notenschluessel-rechner' },
-  { keywords: ['einheit', 'umrechnen', 'kilometer', 'meilen', 'celsius', 'fahrenheit', 'liter', 'gallone'], label: 'Einheitenrechner', href: '/mathe/einheiten-umrechner' },
-  { keywords: ['tage zwischen', 'tage berechnen', 'datum', 'zeitraum', 'wie viele tage'], label: 'Tage-Rechner', href: '/alltag/tagerechner' },
-  { keywords: ['countdown', 'weihnachten', 'silvester', 'wie lange noch'], label: 'Countdown-Rechner', href: '/alltag/countdown' },
-  { keywords: ['streaming', 'netflix', 'disney', 'spotify', 'abo'], label: 'Streaming-Kosten-Rechner', href: '/alltag/streaming-kosten-rechner' },
-  { keywords: ['lebenszeit', 'lebensjahr', 'wie alt', 'herzschläge'], label: 'Lebenszeit-Rechner', href: '/alltag/lebenszeit-rechner' },
-  { keywords: ['gehaltsvergleich', 'gehalt vergleich', 'verdiene ich genug'], label: 'Gehaltsvergleich', href: '/finanzen/gehaltsvergleich' },
-  { keywords: ['wahrer stundenlohn', 'tatsächlicher stundenlohn', 'echter stundenlohn', 'pendeln stundenlohn'], label: 'Wahrer-Stundenlohn-Rechner', href: '/finanzen/wahrer-stundenlohn' },
-  { keywords: ['kaffee', 'kaffeekosten', 'espresso', 'cappuccino', 'latte', 'café-to-go'], label: 'Kaffee-Kosten-Rechner', href: '/alltag/kaffee-kosten-rechner' },
-  { keywords: ['lieferservice', 'lieferdienst', 'lieferando', 'bestellen', 'liefergebühr', 'essenslieferung'], label: 'Lieferservice-Rechner', href: '/alltag/lieferservice-rechner' },
-  { keywords: ['abo', 'abonnement', 'abos', 'monatliche kosten', 'fixkosten', 'subscription'], label: 'Abo-Rechner', href: '/alltag/abo-rechner' },
-];
-
-function detectRechnerLink(frage: string, antwort: string): { label: string; href: string } | null {
-  const combined = (frage + ' ' + antwort).toLowerCase();
-
-  let best: { label: string; href: string; score: number } | null = null;
-
-  for (const rechner of RECHNER_LINKS) {
-    let score = 0;
-    for (const kw of rechner.keywords) {
-      // Use word boundary regex so e.g. 'rauch' doesn't match 'verbrauch'
-      const escaped = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const regex = new RegExp(`(?:^|[\\s,.;:!?/"'()—–-])${escaped}`, 'i');
-      if (regex.test(combined)) {
-        score++;
-      }
-    }
-    if (score > 0 && (!best || score > best.score)) {
-      best = { label: rechner.label, href: rechner.href, score };
-    }
-  }
-
-  return best ? { label: best.label, href: best.href } : null;
-}
+/** Slug (kategorie/slug) → Anzeige-Label für den vom Server gelieferten Rechner-Link */
+const SLUG_LABELS: Record<string, string> = {
+  'finanzen/zinsrechner': 'Zinsrechner',
+  'finanzen/kreditrechner': 'Kreditrechner',
+  'finanzen/sparrechner': 'Sparrechner',
+  'finanzen/inflationsrechner': 'Inflationsrechner',
+  'finanzen/stundenlohn-rechner': 'Stundenlohn-Rechner',
+  'wohnen/grunderwerbsteuer-rechner': 'Grunderwerbsteuer-Rechner',
+  'wohnen/heizkosten-rechner': 'Heizkosten-Rechner',
+  'arbeit/pendlerpauschale-rechner': 'Pendlerpauschale-Rechner',
+  'arbeit/wahrer-stundenlohn': 'Wahrer-Stundenlohn-Rechner',
+  'auto/kfz-steuer-rechner': 'Kfz-Steuer-Rechner',
+  'auto/spritkosten-rechner': 'Spritkosten-Rechner',
+  'auto/kw-ps-umrechner': 'kW-PS-Rechner',
+  'gesundheit/bmi-rechner': 'BMI-Rechner',
+  'gesundheit/idealgewicht-rechner': 'Idealgewicht-Rechner',
+  'gesundheit/kalorienrechner': 'Kalorienrechner',
+  'alltag/dreisatz-rechner': 'Dreisatz-Rechner',
+  'alltag/prozentuale-veraenderung-rechner': 'Prozentuale-Veränderung-Rechner',
+  'alltag/tagerechner': 'Tage-Rechner',
+  'alltag/trinkgeld-rechner': 'Trinkgeld-Rechner',
+};
 
 interface Verlauf {
   frage: string;
@@ -108,15 +62,10 @@ export default function KiRechnerClient() {
     setFehler('');
 
     try {
-      const res = await fetch('/api/explain', {
+      const res = await fetch('/api/ki-rechner', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          rechner_name: '__ki_rechner__',
-          eingaben: {},
-          ergebnis: { _: true },
-          frage: text,
-        }),
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ frage: text }),
       });
 
       const data = await res.json();
@@ -126,8 +75,11 @@ export default function KiRechnerClient() {
         return;
       }
 
-      const link = detectRechnerLink(text, data.explanation);
-      setVerlauf(prev => [...prev, { frage: text, antwort: data.explanation, link }]);
+      const slug: string | null = data.rechnerSlug ?? null;
+      const link = slug && SLUG_LABELS[slug]
+        ? { label: SLUG_LABELS[slug], href: '/' + slug }
+        : null;
+      setVerlauf(prev => [...prev, { frage: text, antwort: data.antwort, link }]);
       setFrage('');
     } catch {
       setFehler('Verbindungsfehler. Bitte versuchen Sie es erneut.');
