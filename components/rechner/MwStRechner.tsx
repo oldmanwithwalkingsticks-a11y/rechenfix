@@ -138,7 +138,9 @@ export default function MwStRechner() {
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(10);
     doc.setTextColor(90);
-    const richtung = tab === 'netto-brutto' ? 'Netto → Brutto' : 'Brutto → Netto';
+    // WinAnsi-sicher: der jsPDF-Standardfont (Helvetica) kennt U+2192 nicht
+    // und rendert Ersatzzeichen. Im PDF daher "zu" statt "→".
+    const richtung = tab === 'netto-brutto' ? 'Netto zu Brutto' : 'Brutto zu Netto';
     doc.text(`Berechnung: ${richtung}   |   MwSt-Satz: ${aktiverSatz} %`, randX, y);
     y += 6;
 
