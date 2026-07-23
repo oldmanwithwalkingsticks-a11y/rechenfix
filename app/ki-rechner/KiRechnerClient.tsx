@@ -13,6 +13,7 @@ const BEISPIELE = [
 
 /** Slug (kategorie/slug) → Anzeige-Label für den vom Server gelieferten Rechner-Link */
 const SLUG_LABELS: Record<string, string> = {
+  'finanzen/brutto-netto-rechner': 'Brutto-Netto-Rechner',
   'finanzen/zinsrechner': 'Zinsrechner',
   'finanzen/kreditrechner': 'Kreditrechner',
   'finanzen/sparrechner': 'Sparrechner',

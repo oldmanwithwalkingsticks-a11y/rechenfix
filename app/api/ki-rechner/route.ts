@@ -105,8 +105,10 @@ export async function POST(req: Request) {
           if (block.type !== 'tool_use') continue;
           const dispatch = dispatchTool(String(block.name), block.input);
           if (dispatch.ok) {
-            letzterSlug = dispatch.slug;
-            letzteZeilen = dispatch.zeilen;   // NEU
+            if (dispatch.zeilen.length > 0) {
+              letzterSlug = dispatch.slug;
+              letzteZeilen = dispatch.zeilen;
+            }
             toolResults.push({
               type: 'tool_result',
               tool_use_id: block.id,

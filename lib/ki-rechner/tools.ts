@@ -1,4 +1,6 @@
 import { formatEuro, formatZahl, formatProzent } from '@/lib/zahlenformat';
+import { berechneBruttoNetto, type BruttoNettoErgebnis } from '@/lib/berechnungen/brutto-netto';
+import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from '@/lib/berechnungen/sv-parameter';
 import { berechneZinsen, type ZinsEingabe, type ZinsErgebnis } from '@/lib/berechnungen/zinsen';
 import { berechneBmi, type BmiEingabe, type BmiErgebnis } from '@/lib/berechnungen/bmi';
 import { berechneKfzSteuer, type KfzSteuerEingabe, type KfzSteuerErgebnis } from '@/lib/berechnungen/kfz-steuer';
@@ -490,6 +492,80 @@ export const KI_TOOLS: KiTool[] = [
       { label: 'Trinkgeld', wert: formatEuro(x.trinkgeldBetrag) },
       { label: 'Trinkgeld-%', wert: formatProzent(x.trinkgeldProzent, 1) },
       { label: 'Pro Person', wert: formatEuro(x.proPerson) },
+    ]; },
+  },
+  {
+    name: 'bruttonetto_rueckfrage',
+    description: 'ERSTER SCHRITT bei jeder Brutto-Netto-/Gehalts-/Nettolohn-Frage. Nimmt Bruttogehalt und Steuerklasse entgegen und liefert die noch fehlenden Angaben zurück, die das Nettogehalt spürbar verändern. Rechnet NICHT. Rufe danach mit den Antworten des Nutzers berechne_brutto_netto auf.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        bruttoMonat: { type: 'number', description: 'Bruttogehalt pro Monat in Euro' },
+        steuerklasse: { type: 'number', description: 'Lohnsteuerklasse 1 bis 6' },
+      },
+      required: ['bruttoMonat', 'steuerklasse'],
+    },
+    rechnerSlug: 'finanzen/brutto-netto-rechner',
+    run: (input) => {
+      const i = input as { bruttoMonat: number; steuerklasse: number };
+      return {
+        hinweis: 'Noch nicht gerechnet. Frage den Nutzer kurz und in EINER Nachricht nach den folgenden vier Punkten und nenne dabei die Standardwerte, die er einfach bestätigen kann.',
+        erfasst: { bruttoMonat: i.bruttoMonat, steuerklasse: i.steuerklasse },
+        rueckfragen: [
+          'Kirchensteuer? (Standard: nein)',
+          'Wenn ja, Bundesland — in Baden-Württemberg und Bayern 8 %, sonst 9 %',
+          'Kinderfreibeträge? (Standard: 0)',
+          `KV-Zusatzbeitrag deiner Krankenkasse in Prozent? (Standard: ${KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT} % Durchschnitt 2026)`,
+        ],
+      };
+    },
+    anzeige: () => [],   // rechnet nicht → keine Tabelle
+  },
+  {
+    name: 'berechne_brutto_netto',
+    description: 'Berechnet das Nettogehalt aus dem Bruttogehalt (Lohnsteuer, Soli, Kirchensteuer, Sozialabgaben). NUR aufrufen, nachdem bruttonetto_rueckfrage lief und der Nutzer die Rückfragen beantwortet oder die Standardwerte bestätigt hat.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        bruttoMonat: { type: 'number', description: 'Bruttogehalt pro Monat in Euro' },
+        steuerklasse: { type: 'number', description: 'Lohnsteuerklasse 1 bis 6' },
+        kirchensteuer: { type: 'boolean', description: 'Kirchensteuerpflichtig?' },
+        kirchensteuersatz: { type: 'number', description: '8 für Baden-Württemberg und Bayern, sonst 9. Bei kirchensteuer=false trotzdem 9 angeben.' },
+        kinderfreibetraege: { type: 'number', description: 'Anzahl Kinderfreibeträge (0 wenn keine)' },
+        kvZusatzbeitrag: { type: 'number', description: `KV-Zusatzbeitrag der Krankenkasse in Prozent, voller Satz. Standard ${KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT}` },
+      },
+      required: ['bruttoMonat', 'steuerklasse', 'kirchensteuer', 'kirchensteuersatz', 'kinderfreibetraege', 'kvZusatzbeitrag'],
+    },
+    rechnerSlug: 'finanzen/brutto-netto-rechner',
+    run: (input) => {
+      const i = input as {
+        bruttoMonat: number; steuerklasse: number; kirchensteuer: boolean;
+        kirchensteuersatz: number; kinderfreibetraege: number; kvZusatzbeitrag: number;
+      };
+      return berechneBruttoNetto({
+        bruttoMonat: i.bruttoMonat,
+        steuerklasse: (i.steuerklasse as 1 | 2 | 3 | 4 | 5 | 6),
+        kirchensteuer: i.kirchensteuer,
+        kirchensteuersatz: (i.kirchensteuersatz === 8 ? 8 : 9),
+        kinderfreibetraege: i.kinderfreibetraege,
+        bundesland: '',                    // wird von der Funktion nicht gelesen
+        kvArt: 'gesetzlich',
+        kvZusatzbeitrag: i.kvZusatzbeitrag,
+        kvPrivatBeitrag: 0,
+        rvBefreit: false,
+        abrechnungszeitraum: 'monat',
+        weihnachtsgeld: 0,
+      });
+    },
+    anzeige: (r) => { const x = r as BruttoNettoErgebnis; return [
+      { label: 'Netto pro Monat', wert: formatEuro(x.nettoMonat), highlight: true },
+      { label: 'Brutto pro Monat', wert: formatEuro(x.bruttoMonat) },
+      { label: 'Lohnsteuer', wert: formatEuro(x.lohnsteuer) },
+      { label: 'Solidaritätszuschlag', wert: formatEuro(x.solidaritaet) },
+      { label: 'Kirchensteuer', wert: formatEuro(x.kirchensteuer) },
+      { label: 'Sozialabgaben gesamt', wert: formatEuro(x.sozialabgabenGesamt) },
+      { label: 'Abzüge gesamt', wert: formatEuro(x.gesamtAbzuege) },
+      { label: 'Netto pro Jahr', wert: formatEuro(x.nettoJahr) },
     ]; },
   },
 ];
