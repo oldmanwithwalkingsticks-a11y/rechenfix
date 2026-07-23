@@ -4,7 +4,66 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 02.07.2026
+**Stand:** 23.07.2026
+
+---
+
+## 23.07.2026 — KI-Rechner zum echten Rechenwerkzeug (Function-Calling) — ✅ ABGESCHLOSSEN
+
+Der bestehende KI-Rechner (`/ki-rechner`) ließ die KI frei rechnen (kein Bezug zu
+`lib/berechnungen`) → bei YMYL unzuverlässig, widersprach dem Präzisions-USP. Umgebaut auf
+**Tool-Use**: Nutzer fragt in natürlicher Sprache → Claude ruft das passende Tool → Server führt
+die **verifizierte lib-Funktion** aus → exakte Zahlen. Sechs Commits, jeder unabhängig
+live-verifiziert (`git clone` + Feld-Cross-Check + Live-`curl` gegen die Route).
+
+**Welle 20 (Kern-Umbau):**
+- API-Route `app/api/ki-rechner/route.ts` (188cb08): eigener Node-Endpoint, mehrstufiger
+  tool_use-Loop (max 4 Runden), ein Sonnet-Call mit allen Tools (`claude-sonnet-4-6`, fetch-Muster
+  wie `/api/explain`), zentraler `null`+Exception-Guard in `dispatchTool`, Rate-Limit 20/h pro IP
+  via Upstash (`rechenfix:kirl:<ip>`), 500-Zeichen-Eingabelimit. Neue Registry
+  `lib/ki-rechner/tools.ts`.
+- Tool-Registry auf 20 Rechner (dd6038b): 20 `KiTool`-Objekte mit JSON-Schemas + `rechnerSlug`.
+  Abgedeckt: Zinsen, Kredit, Sparplan, ETF-Sparplan, Inflation, Stundenlohn, Grunderwerbsteuer,
+  Heizkosten, Pendlerpauschale, Wahrer Stundenlohn, Kfz-Steuer, Spritkosten, kW-PS, BMI,
+  Idealgewicht, Kalorien, Dreisatz, Prozentuale Veränderung, Tage, Trinkgeld. Casts via
+  `Parameters<typeof fn>[0]` (keine 20 Typ-Imports). Fallstricke verifiziert: `berechneTriinkgeld`
+  (Doppel-i im Repo), `berechne_tage` ISO-String→`Date`, abweichende Slugs (`zinsrechner`,
+  `sparrechner`, `kw-ps-umrechner`, `wahrer-stundenlohn`, `kalorienrechner`, Grunderwerbsteuer
+  unter `wohnen`). BruttoNetto bewusst NICHT aufgenommen (15+ Feld-Interface, hat eigene
+  KI-Features); Fläche/Promille raus (untractabel: 23 Felder bzw. Objekt-Array).
+- Client + Indexierung (c5d73ab): `KiRechnerClient` von `/api/explain` (`__ki_rechner__`) auf
+  `/api/ki-rechner` umgestellt, altes Keyword-Mapping (`RECHNER_LINKS`/`detectRechnerLink`) durch
+  server-gelieferten `rechnerSlug` → `SLUG_LABELS`-Map ersetzt. Seite auf `robots: index:true`
+  (QS-Vorbedingung erfüllt, da Zahlen jetzt verlässlich).
+
+**Welle 20b (Ausgabe-Qualität):**
+- Strukturierte Anzeige (0482799): Modell „malte" vorher Markdown-Tabellen, Client rendert kein
+  Markdown → rohe `|`-Zeichen. Fix (Option A): `KiTool` um `anzeige(result)` erweitert, 20
+  kuratierte Feld→Zeilen-Mappings (je genau 1 grün hervorgehobene Kernzahl), `dispatchTool` liefert
+  `zeilen`. Drei Ausgabe-Formatter neu in `lib/zahlenformat.ts` (`formatEuro`/`formatZahl`/
+  `formatProzent`, repliziert das 147×-Komponenten-Muster). Alle 20 Mappings per Cross-Check gegen
+  die echten `*Ergebnis`-Interfaces geprüft — 0 Feldfehler.
+- Route-Rückgabe + System-Prompt (d8da44f): Route gibt `ergebnis: zeilen | null` zurück.
+  System-Prompt geschärft: (a) keine Zahlen/Tabellen-Wiederholung im Fließtext (Tabelle kommt vom
+  Client), nur 1–3 Sätze Einordnung; (b) keine erfundenen gesetzlichen Detailbegründungen; (c) max.
+  1–2 Rückfragen + transparente Defaults statt Fragelisten.
+- Client-Tabelle + Disclaimer (0c30cad): feste React-Tabelle aus `ergebnis` (Highlight-Zeile grün,
+  `tabular-nums`, Zebra, purple/blue-Rahmen). Disclaimer ehrlich: nicht mehr „sind eine Schätzung",
+  sondern „mit den geprüften Rechnern von rechenfix berechnet — KI formuliert die Erläuterung".
+
+**Live-verifiziert:** Kfz/Kredit/BMI liefern echte Tool-Zahlen in sauberer Tabelle, kein `|` mehr
+im Fließtext; ETF ohne Sparrate rechnet mit transparenten Defaults durch (0 Rückfragen, vorher 6);
+Nicht-Tool-Fragen (Erdmasse, Everest) → ehrliche Absage, `ergebnis: null`; neuer Disclaimer und
+`index, follow` im ausgelieferten HTML bestätigt.
+
+**Offener Nebenpunkt (nachrangig):** Der Fließtext erwähnt gelegentlich noch allgemeine
+Einordnungen mit gesetzlichem Bezug (z. B. „CO₂-Ausstoß von 160 g/km"). Zahlen stimmen (tool-basiert),
+keine erfundenen Grenzen mehr — die frühere 95-g/km-Falschbehauptung ist weg. Kein Präzisionsfehler;
+härtere Prompt-Regeln erst bei tatsächlichem Bedarf.
+
+**Nicht gebaut (bewusst):** BruttoNetto-Integration in den KI-Rechner (eigene Session mit geführter
+Rückfrage-Logik, wegen 15-Feld-Extraktion); Markdown-Rendering des Fließtexts (durch System-Prompt-
+Anweisung „nur kurze Prosa" derzeit unnötig).
 
 ---
 
