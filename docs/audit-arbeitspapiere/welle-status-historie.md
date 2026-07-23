@@ -8,6 +8,99 @@
 
 ---
 
+## 23.07.2026 — KI-Rechner Feinschliff (20c–20e), Backlog-Bereinigung (21–23) — ✅ ABGESCHLOSSEN
+
+Direkt im Anschluss an den KI-Rechner-Umbau: BruttoNetto ergänzt, drei im Betrieb gefundene
+Fehler behoben, danach der W14-Restbacklog abgearbeitet. Jeder Commit unabhängig verifiziert
+(`git clone` + Live-`curl` gegen die Route + eigene Probe-Rechnungen).
+
+**Welle 20c — BruttoNetto im KI-Rechner (71b04d9).** KI_TOOLS von 20 auf 22 Tools. BruttoNetto
+war bewusst aus V1 raus: `berechneBruttoNetto` gibt als einzige Funktion **kein `| null`**
+zurück, rechnet also auch bei still geratenen Defaults durch und liefert ein plausibel
+aussehendes, aber falsches Netto — bei YMYL + Top-1-Rechner inakzeptabel. Lösung: 2-Tool-Flow
+mit **harter Erzwingung über Schema-`required`** statt weicher System-Prompt-Anweisung
+(das Modell befolgt weiche Regeln nur teilweise): `bruttonetto_rueckfrage` (nur bruttoMonat +
+steuerklasse required, rechnet nicht, `anzeige: () => []`) → `berechne_brutto_netto` (alle 6
+Felder required). Route-Guard `if (dispatch.zeilen.length > 0)` verhindert, dass das
+Rückfrage-Tool eine leere Tabelle + voreiligen Rechner-Link auslöst. Zwei Code-Fakten, die man
+nicht raten darf: `bundesland` steht im Interface, wird im Funktionskörper aber **nicht gelesen**
+(immer `''` übergeben; der Kirchensteuersatz kommt allein aus `kirchensteuersatz`, 8 für BW+BY);
+und der Zusatzbeitrag-Default kommt aus der SSOT-Konstante
+`KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT` (2.9, `sv-parameter.ts`), nie hartkodiert.
+Live geprüft: 3.500 € StKl 1 → 2.327,17 € netto, SV 761,25 € — per eigener Probe-Rechnung auf
+den Cent bestätigt.
+
+**Welle 20d — Mehrfach-Runden repariert (51bb7a3).** Im Betrieb fiel auf: Nach einer Rückfrage
+fragte die KI das bereits genannte Bruttogehalt erneut ab. Ursache: Die Route war **zustandslos**
+— `messages` wurde bei jedem Aufruf neu als `[{role:'user', content: frage}]` gebaut, der Client
+sendete nur `{ frage }`. Fix: Client schickt die letzten 6 Frage/Antwort-Paare mit, Route stellt
+sie `messages` voran. **Sicherheitsentscheidung:** Vom Client kommen NUR reine Textpaare, keine
+Roh-`messages` mit `tool_use`/`tool_result` — sonst ließen sich gefälschte Tool-Ergebnisse
+einschleusen; die echten Zahlen entstehen serverseitig ohnehin neu. Limits: 6 Runden, Frage
+≤500 / Antwort ≤2000 Zeichen. Dazu System-Prompt-Regel „frage nie nach schon Genanntem" und
+UI-Hilfe: Hinweisbox + Autofokus + dynamischer Placeholder, wenn eine Rückfrage offen ist
+(`wartetAufAntwort` = letzte Antwort ohne Ergebnis).
+
+**Welle 20e — Richtungsangabe korrigiert (e9b639d).** Der System-Prompt verwies auf das
+Eingabefeld „direkt unten"; tatsächlich steht es **über** dem Gesprächsverlauf. Richtungsneutral
+formuliert („im Eingabefeld dieser Seite … oberhalb des Gesprächsverlaufs"), damit es bei
+Layout-Änderungen nicht wieder kippt.
+
+**Welle 21 — „Neu hinzugefügt" repariert (1c55a1c).** `getNeueRechner()` nimmt die ersten 3
+Slugs der manuell gepflegten Konstante `neueRechnerSlugs`; es gibt bewusst kein datumsbasiertes
+Feld. Die Liste enthielt nur **129 von 205** Slugs — 76 Rechner (kompletter Sport- und
+Technik-Ausbau, neue Auto-Rechner) konnten nie als „neu" erscheinen, angezeigt wurden Rechner
+vom 19.06. obwohl 27 neuere existierten. Fix = Liste vervollständigen (27 neue vorne, 49 ältere
+hinten, jetzt **205 Einträge, 1:1-SSOT-Deckung, keine Duplikate**); Reihenfolge aus echter
+Git-History (`git log --reverse -S`), nicht geschätzt. Bewusst KEIN `erstelltAm`-Feld für 205
+Configs — für drei sichtbare Kacheln überdimensioniert. **Ursache des Drifts beseitigt:** Der
+`rechner-builder`-Skill erwähnte `neueRechnerSlugs` gar nicht → jetzt Pflichtpunkt in
+`references/checklist.md` (Abschnitt „## Integration") + Schritt in `SKILL.md`.
+
+**Welle 22 — PDF-Bibliotheken dynamisch (0679a05).** jsPDF + jspdf-autotable + qrcode +
+`pdf-logo.ts` (29,7 KB Base64) wurden in `ErgebnisAktionen.tsx`, `MwStRechner.tsx` und
+`BruttoNettoRechner.tsx` statisch importiert; jetzt `await import()` im Handler. Handler-Körper
+wörtlich unverändert (Umbenennung `handlePdf` → `erzeugePdf` + schlanker Wrapper mit
+Ladezustand) → PDF byte-identisch. **Wichtige Analyse-Lehre:** Die Prompt-Prämisse („jeder
+Besucher lädt 300–400 KB PDF-Toolchain") war **falsch** — `RechnerLoader.tsx` lädt alle
+Rechner-Komponenten bereits per `next/dynamic`, `ErgebnisAktionen` lag also im Rechner-Chunk,
+nicht im Initial-Bundle. Per Vorher/Nachher-Messung (Stash + Vergleichs-Build) belegt: realer
+Initial-Load-Gewinn nur ~7,8 KB (First Load JS unverändert 118 kB). Der Nutzen liegt woanders:
+Die 323-KB-jsPDF-Chunk war statische Abhängigkeit des Rechner-Chunks und wurde im selben
+Ladeschub mitgeholt; jetzt echte Async-Chunk erst beim Klick → entlastet TBT/Interaktivität.
+Lehre: `next/dynamic`-Nutzung nicht als „Muster vorhanden" abhaken, sondern prüfen WAS lazy
+geladen wird, bevor Bundle-Annahmen in Prompts wandern.
+
+**Welle 23 — PDF-Darstellung bereinigt (78ed662).** Zwei Altfehler, beide vor W22 entstanden:
+(1) Die Summenzeilen im Brutto-Netto-PDF standen linksbündig, weil `columnStyles` in
+jspdf-autotable **nur für `body`-Zeilen** gilt, nicht für `foot` → `footStyles` um
+`halign: 'right'` ergänzt, Labels als Zellen-Objekt auf `halign: 'left'` gehalten.
+(2) Im MwSt-PDF erschien „Berechnung: Brutto!' Netto", weil der jsPDF-Standardfont
+(Helvetica/WinAnsi) den Unicode-Pfeil U+2192 nicht kennt → im PDF-Pfad durch „zu" ersetzt.
+Die Pfeile in sichtbaren UI-Tab-Labels, im Teilen-Text und in der KI-Erklärung bleiben
+erhalten (dort ist Unicode korrekt). `€` ist unproblematisch (in WinAnsi enthalten).
+
+**W14-Restbacklog — zwei Faktenkorrekturen statt Arbeit:**
+- **Status-204-Bug: gegenstandslos.** Lokal gemessen (`curl.exe -sIL http://rechenfix.de/`):
+  saubere Kette `http://rechenfix.de` →308→ `https://rechenfix.de` →308→ `https://www.rechenfix.de`
+  →200. Kein 204. Zwei Hops statt einem ist Vercel-Standard und SEO-unproblematisch (308 ≡ 301);
+  nicht anfassen. Hinweis: Der Egress-Proxy der Chat-Session erlaubt nur `www.rechenfix.de`
+  (non-www → `host_not_allowed`), Redirect-Ketten sind daher nur lokal messbar.
+- **Mobile Performance: kein Problem.** Der Backlog-Wert „74 → 85+" war veraltet. Echte
+  Lighthouse-Messung (Inkognito, Mobil, `/finanzen/zinsrechner`): **Performance 95**,
+  Accessibility 93, Best Practices 100, SEO 100; FCP 1,3 s, LCP 2,1 s, CLS 0, TBT 230 ms
+  (einziger gelber Wert).
+- Ebenfalls verifiziert erledigt: W15.LongTail (`longtail-diff-check.mjs` grün, Jaccard
+  0,232–0,370), Slug-Konsistenz (`slug-drift-scan.mjs` Exit 0, Kategorie-Deckung 9/9),
+  404-Fix `einheiten-umrechner` (liegt unter `/mathe/`), Sport-Ausbau (5 → 15).
+
+**Stand gesamt:** 205 Rechner. KI-Rechner mit 22 Tool-gestützten Rechnern live und indexierbar.
+Offen bleibt bewusst: PDF für Gesundheit/Auto/Wohnen (~90 Rechner, wartet auf Nutzungsstatistik)
+und der Fließtext-Nebenpunkt des KI-Rechners (gelegentliche allgemeine Gesetzes-Einordnungen im
+Prosa-Teil; Zahlen sind tool-basiert korrekt).
+
+---
+
 ## 23.07.2026 — KI-Rechner zum echten Rechenwerkzeug (Function-Calling) — ✅ ABGESCHLOSSEN
 
 Der bestehende KI-Rechner (`/ki-rechner`) ließ die KI frei rechnen (kein Bezug zu
