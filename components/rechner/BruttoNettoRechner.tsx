@@ -13,10 +13,6 @@ import WasserfallSvg from '@/components/rechner/WasserfallSvg';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
-import { jsPDF } from 'jspdf';
-import autoTable from 'jspdf-autotable';
-import QRCode from 'qrcode';
-import { RECHENFIX_LOGO_PNG } from '@/lib/pdf-logo';
 
 const TABELLEN_WERTE = [1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 6000];
 
@@ -114,6 +110,7 @@ export default function BruttoNettoRechner() {
   const [kvPrivatBeitrag, setKvPrivatBeitrag] = useState('');
   const [rvBefreit, setRvBefreit] = useState(false);
   const [abrechnungszeitraum, setAbrechnungszeitraum] = useState<'monat' | 'jahr'>('monat');
+  const [pdfLaedt, setPdfLaedt] = useState(false);
   const [kopiert, setKopiert] = useState(false);
   const [kopierFehler, setKopierFehler] = useState(false);
   const [weihnachtsgeldAktiv, setWeihnachtsgeldAktiv] = useState(false);
@@ -170,7 +167,28 @@ export default function BruttoNettoRechner() {
     }
   }
 
+  // Klick-Wrapper: lädt die PDF-Toolchain erst bei Bedarf nach und zeigt solange einen Ladezustand.
   const handlePdf = async () => {
+    if (pdfLaedt) return;
+    setPdfLaedt(true);
+    try {
+      await erzeugePdf();
+    } finally {
+      setPdfLaedt(false);
+    }
+  };
+
+  const erzeugePdf = async () => {
+    // Dynamischer Import: jsPDF + autoTable + qrcode + Logo-Base64 bleiben aus dem Initial-Bundle.
+    const [{ jsPDF }, autoTableMod, QRCodeMod, { RECHENFIX_LOGO_PNG }] = await Promise.all([
+      import('jspdf'),
+      import('jspdf-autotable'),
+      import('qrcode'),
+      import('@/lib/pdf-logo'),
+    ]);
+    const autoTable = autoTableMod.default;
+    const QRCode = QRCodeMod.default ?? QRCodeMod;
+
     const url = 'https://www.rechenfix.de/finanzen/brutto-netto-rechner';
     const heute = new Date().toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
     const blName = bl?.name || bundesland;
@@ -514,12 +532,13 @@ export default function BruttoNettoRechner() {
             {/* Primär: Als PDF speichern */}
             <button
               onClick={handlePdf}
-              className="inline-flex items-center gap-2 rounded-xl bg-primary-500 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500/50"
+              disabled={pdfLaedt}
+              className="inline-flex items-center gap-2 rounded-xl bg-primary-500 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500/50 disabled:opacity-70 disabled:cursor-not-allowed"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2" />
               </svg>
-              Als PDF speichern
+              {pdfLaedt ? 'PDF wird erstellt …' : 'Als PDF speichern'}
             </button>
 
             {/* Sekundär: Kopieren (Zustandstext erhalten) */}

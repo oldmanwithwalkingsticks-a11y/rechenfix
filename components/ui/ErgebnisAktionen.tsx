@@ -2,10 +2,6 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { inkrement } from '@/lib/berechnungs-zaehler';
-import { jsPDF } from 'jspdf';
-import autoTable from 'jspdf-autotable';
-import QRCode from 'qrcode';
-import { RECHENFIX_LOGO_PNG } from '@/lib/pdf-logo';
 
 export interface PdfZeile {
   label: string;
@@ -35,6 +31,7 @@ export default function ErgebnisAktionen({ ergebnisText, seitenTitel, pdfDaten }
   const [linkKopiert, setLinkKopiert] = useState(false);
   const [teilenOffen, setTeilenOffen] = useState(false);
   const [liveText, setLiveText] = useState('');
+  const [pdfLaedt, setPdfLaedt] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const letzterText = useRef('');
   const hatGeaendert = useRef(false);
@@ -113,7 +110,28 @@ export default function ErgebnisAktionen({ ergebnisText, seitenTitel, pdfDaten }
     setTeilenOffen(false);
   };
 
+  // Klick-Wrapper: lädt die PDF-Toolchain erst bei Bedarf nach und zeigt solange einen Ladezustand.
   const handlePdf = async () => {
+    if (pdfLaedt) return;
+    setPdfLaedt(true);
+    try {
+      await erzeugePdf();
+    } finally {
+      setPdfLaedt(false);
+    }
+  };
+
+  const erzeugePdf = async () => {
+    // Dynamischer Import: jsPDF + autoTable + qrcode + Logo-Base64 bleiben aus dem Initial-Bundle.
+    const [{ jsPDF }, autoTableMod, QRCodeMod, { RECHENFIX_LOGO_PNG }] = await Promise.all([
+      import('jspdf'),
+      import('jspdf-autotable'),
+      import('qrcode'),
+      import('@/lib/pdf-logo'),
+    ]);
+    const autoTable = autoTableMod.default;
+    const QRCode = QRCodeMod.default ?? QRCodeMod;
+
     const url = typeof window !== 'undefined' ? window.location.href : 'https://www.rechenfix.de';
     const titel = seitenTitel || 'Berechnung auf Rechenfix.de';
     const heute = new Date().toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
@@ -220,10 +238,11 @@ export default function ErgebnisAktionen({ ergebnisText, seitenTitel, pdfDaten }
       {/* Als PDF speichern — Primär-Aktion (immer sichtbar) */}
       <button
         onClick={handlePdf}
-        className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-xl bg-primary-500 text-white hover:bg-primary-600 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500/50"
+        disabled={pdfLaedt}
+        className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-xl bg-primary-500 text-white hover:bg-primary-600 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500/50 disabled:opacity-70 disabled:cursor-not-allowed"
       >
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2" /></svg>
-        Als PDF speichern
+        {pdfLaedt ? 'PDF wird erstellt …' : 'Als PDF speichern'}
       </button>
       {/* Kopieren */}
       <button
