@@ -38,6 +38,7 @@ Kopiere diese Checkliste und arbeite jeden Punkt ab:
 - [ ] BreadcrumbList Schema.org
 
 ## Integration
+- [ ] **Slug ganz vorne in `neueRechnerSlugs`** (`lib/rechner-config/index.ts`) eingetragen — sonst erscheint der Rechner nie unter „✨ Neu hinzugefügt" auf der Startseite (`getNeueRechner()` nimmt die ersten 3)
 - [ ] In Sidebar-Navigation aufgenommen
 - [ ] Kategorie-Zähler aktualisiert
 - [ ] Auf Kategorie-Seite gelistet

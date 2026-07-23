@@ -534,7 +534,13 @@ After the page works:
 1. Add to **sidebar navigation** (update category count)
 2. Add to **category page** (e.g., /finanzen shows all finance calculators)
 3. Add to **sitemap** (must use https://www.rechenfix.de/ with www)
-4. Consider adding to **"Neu hinzugefügt"** section on homepage
+4. **Pflicht:** Slug als ERSTEN Eintrag in `neueRechnerSlugs` eintragen (siehe unten)
+
+Nach dem Anlegen der Config den neuen Slug als ERSTEN Eintrag in `neueRechnerSlugs`
+(`lib/rechner-config/index.ts`) eintragen. Die Startseite zeigt über `getNeueRechner()` die
+ersten drei Einträge dieser Liste unter „Neu hinzugefügt" — wird der Slug nicht eingetragen,
+taucht der Rechner dort nie auf. Es gibt KEIN datumsbasiertes Feld; die Reihenfolge in der
+Liste ist die Quelle der Wahrheit.
 
 ### Step 12a: Jahresabhängige Werte und Stichtag-Switch
 
@@ -1723,7 +1729,9 @@ Auch bei gesetzten `contentBloecke` das `erklaerung`-Feld **befüllt lassen** (S
 
 ### Quellen-Pflicht (ab 06/2026)
 
-Jeder Goldstandard-Rechner setzt `config.quellen` (2–4 Einträge, `{ titel, url?, hinweis? }` aus `types.ts`). Bei YMYL-Themen Primärquellen mit Link (gesetze-im-internet.de, BMF, Destatis, Bundesbank, BEEG/SGB/BGB/PAngV); bei Mathe/Alltag ohne Gesetzesbezug genügt ein didaktischer `hinweis` ohne `url`. Die Sektion „Quellen & Rechtsgrundlagen" rendert automatisch über das Page-Template (`app/[kategorie]/[rechner]/page.tsx`), sobald `config.quellen` gesetzt ist — fehlt das Feld, bleibt die Sektion leer und verschenkt E-E-A-T (gerade bei YMYL). Pflicht-Bestandteil neben `contentBloecke` + Self-Check.
+Jeder Goldstandard-Rechner setzt `config.quellen` (2–4 Einträge, `{ titel, url?, hinweis? }` aus `types.ts`). Bei YMYL-Themen Primärquellen mit Link (gesetze-im-internet.de, BMF, Destatis, Bundesbank, BEEG/SGB/BGB/PAngV); bei Mathe/Alltag ohne Gesetzesbezug genügt ein didaktischer `hinweis` ohne `url`. Die Quellen-Sektion rendert automatisch über das Page-Template (`app/[kategorie]/[rechner]/page.tsx`), sobald `config.quellen` gesetzt ist — fehlt das Feld, bleibt die Sektion leer und verschenkt E-E-A-T (gerade bei YMYL). Pflicht-Bestandteil neben `contentBloecke` + Self-Check.
+
+**Überschrift ist typabhängig (seit 19.06.2026, `components/Quellen.tsx`):** Die Komponente leitet die Überschrift aus den Quellen ab — KEINE manuelle Steuerung nötig. Hat mindestens eine Quelle einen Rechtsbezug (URL auf `gesetze-im-internet.de`/`bundesgesetzblatt`/`eur-lex` ODER `§`/Gesetzeskürzel wie EStG, BGB, ArbZG, SGB, BUrlG, KraftStG, BetrKV, StGB, StVG, StVO, BKatV, WoFlV, BKKG im `titel`), erscheint **„Quellen & Rechtsgrundlagen"**. Sonst — also bei rein didaktischen Hinweisen UND bei reinen Daten-/Behördenquellen ohne Gesetzesbezug (Destatis, ADAC, DGSM, BfS …) — erscheint **„Quellen & Methodik"**. Konsequenz fürs Quellen-Setzen: Bei didaktischen/Daten-Rechnern keinen Gesetzes-Etikettenschwindel erzeugen; ein `hinweis` ohne `§` ist korrekt und führt automatisch zur richtigen „Methodik"-Überschrift.
 
 ### Referenz-Beispiele (Goldstandard-Tranche, 11.06.2026)
 
