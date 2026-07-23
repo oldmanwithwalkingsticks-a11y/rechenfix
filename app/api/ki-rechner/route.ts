@@ -11,7 +11,7 @@ Die genauen Ergebniszahlen werden dem Nutzer bereits in einer separaten Tabelle 
 
 Erfinde KEINE gesetzlichen Detailbegründungen (konkrete Freibeträge, Steuersätze, Prozentgrenzen, Paragraphen o. Ä.), die nicht aus dem Tool-Ergebnis stammen — solche Details stehen im verlinkten Detailrechner. Bleibe bei allgemeiner, korrekter Einordnung.
 
-Fehlt ein Wert, der das Ergebnis wirklich verändert, frage NUR nach diesen 1–2 entscheidenden Angaben — kurz und konkret. Für unwichtige Nebenparameter nimm sinnvolle Standardwerte an und nenne diese Annahme transparent in einem Halbsatz (z. B. „angenommen: ohne Sondertilgung"). Stelle KEINE langen Fragelisten.
+Fehlt ein Wert, der das Ergebnis wirklich verändert, frage NUR nach diesen 1–2 entscheidenden Angaben — kurz und konkret. Für unwichtige Nebenparameter nimm sinnvolle Standardwerte an und nenne diese Annahme transparent in einem Halbsatz (z. B. „angenommen: ohne Sondertilgung"). Stelle KEINE langen Fragelisten. Wenn du nachfragst, schließe IMMER mit einer klaren Handlungsaufforderung ab, die sagt, dass der Nutzer direkt unten im Eingabefeld antworten kann — mit einem konkreten Beispiel, wie eine Antwort aussehen darf, und dem Hinweis, dass ein kurzes „Standard" genügt, um alle Vorschlagswerte zu übernehmen. Frage NIE nach Angaben, die der Nutzer im bisherigen Gespräch schon genannt hat.
 
 Für Aufgaben ohne passendes Tool: sage ehrlich, dass es dafür keinen exakten Rechner gibt. Antworte knapp, auf Deutsch.`;
 
@@ -49,6 +49,22 @@ export async function POST(req: Request) {
     );
   }
 
+  // Konversations-Historie (nur reine Textpaare — KEINE Roh-messages vom Client,
+  // sonst könnten gefälschte tool_result-Blöcke untergeschoben werden).
+  const rohVerlauf = (body as { verlauf?: unknown } | null)?.verlauf;
+  const verlauf: Array<{ frage: string; antwort: string }> = Array.isArray(rohVerlauf)
+    ? (rohVerlauf as unknown[])
+        .filter((v): v is { frage: string; antwort: string } =>
+          !!v && typeof v === 'object' &&
+          typeof (v as { frage?: unknown }).frage === 'string' &&
+          typeof (v as { antwort?: unknown }).antwort === 'string')
+        .slice(-6)                                   // max. 6 zurückliegende Runden
+        .map((v) => ({
+          frage: v.frage.slice(0, 500),
+          antwort: v.antwort.slice(0, 2000),
+        }))
+    : [];
+
   // 3. API-Key
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
@@ -61,9 +77,12 @@ export async function POST(req: Request) {
     input_schema: t.input_schema,
   }));
 
-  const messages: Array<{ role: 'user' | 'assistant'; content: unknown }> = [
-    { role: 'user', content: frage },
-  ];
+  const messages: Array<{ role: 'user' | 'assistant'; content: unknown }> = [];
+  for (const v of verlauf) {
+    messages.push({ role: 'user', content: v.frage });
+    messages.push({ role: 'assistant', content: v.antwort });
+  }
+  messages.push({ role: 'user', content: frage });
   let letzterSlug: string | null = null;
   let letzteZeilen: unknown[] | null = null;   // NEU: Anzeige-Zeilen des letzten erfolgreichen Tools
 

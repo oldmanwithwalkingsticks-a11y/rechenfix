@@ -57,6 +57,14 @@ export default function KiRechnerClient() {
     }
   }, [verlauf]);
 
+  // Rückfrage-Modus: letzte Antwort hatte kein gerechnetes Ergebnis → KI wartet auf Angaben.
+  const letzterEintrag = verlauf.length > 0 ? verlauf[verlauf.length - 1] : null;
+  const wartetAufAntwort = !!letzterEintrag && letzterEintrag.ergebnis === null && !laden;
+
+  useEffect(() => {
+    if (wartetAufAntwort) inputRef.current?.focus();
+  }, [wartetAufAntwort]);
+
   async function handleAbsenden() {
     const text = frage.trim();
     if (!text || laden) return;
@@ -68,7 +76,10 @@ export default function KiRechnerClient() {
       const res = await fetch('/api/ki-rechner', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ frage: text }),
+        body: JSON.stringify({
+          frage: text,
+          verlauf: verlauf.slice(-6).map(v => ({ frage: v.frage, antwort: v.antwort })),
+        }),
       });
 
       const data = await res.json();
@@ -109,6 +120,12 @@ export default function KiRechnerClient() {
   return (
     <div className="space-y-6">
       {/* Eingabefeld */}
+      {wartetAufAntwort && (
+        <div className="mb-2 flex items-center gap-2 rounded-lg bg-purple-50 dark:bg-purple-900/20 px-4 py-2 text-sm text-purple-800 dark:text-purple-300">
+          <span aria-hidden="true">↓</span>
+          <span>Der KI-Rechner wartet auf Ihre Angaben — antworten Sie einfach hier im Feld (z.&nbsp;B. &bdquo;Standard&ldquo;).</span>
+        </div>
+      )}
       <div className="relative">
         <div className="bg-white dark:bg-gray-800 border-2 border-purple-200 dark:border-purple-700/40 rounded-2xl shadow-lg shadow-purple-100/50 dark:shadow-purple-900/20 overflow-hidden focus-within:border-purple-400 dark:focus-within:border-purple-500 transition-colors">
           <textarea
@@ -116,7 +133,9 @@ export default function KiRechnerClient() {
             value={frage}
             onChange={e => setFrage(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder='Stellen Sie eine Rechenfrage... z.B. "Wie viel netto bei 4.000€ brutto in Steuerklasse 3?"'
+            placeholder={wartetAufAntwort
+              ? 'Ihre Antwort … z. B. „Steuerklasse 1, keine Kirchensteuer" oder einfach „Standard"'
+              : 'Stellen Sie eine Rechenfrage... z.B. "Wie viel netto bei 4.000€ brutto in Steuerklasse 3?"'}
             rows={3}
             className="w-full px-5 pt-5 pb-14 text-gray-800 dark:text-gray-200 bg-transparent placeholder-gray-400 dark:placeholder-gray-500 text-base focus:outline-none resize-none"
           />
