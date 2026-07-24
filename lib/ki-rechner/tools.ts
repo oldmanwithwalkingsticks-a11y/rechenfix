@@ -21,6 +21,9 @@ import { berechneDreisatz, type DreisatzErgebnis } from '@/lib/berechnungen/drei
 import { berechneProzVeraenderung, type ProzVeraenderungErgebnis } from '@/lib/berechnungen/prozentuale-veraenderung';
 import { berechneTage, type TageErgebnis } from '@/lib/berechnungen/tage';
 import { berechneTriinkgeld, type TrinkgeldErgebnis } from '@/lib/berechnungen/trinkgeld';
+import { berechneNettoZuBrutto, berechneBruttoZuNetto, type MwStErgebnis } from '@/lib/berechnungen/mwst';
+import { berechneProzentwert, berechneProzentsatz, berechneGrundwert, berechneAufschlag, berechneAbschlag, type ProzentErgebnis } from '@/lib/berechnungen/prozent';
+import { berechneRaucherKosten, type RaucherErgebnis } from '@/lib/berechnungen/raucher';
 
 // Eine Anzeige-Zeile der strukturierten Ergebnis-Tabelle (Client rendert daraus React-Tabelle).
 export interface AnzeigeZeile { label: string; wert: string; highlight?: boolean; }
@@ -34,6 +37,17 @@ export interface KiTool {
   run: (input: unknown) => unknown;       // ruft die verifizierte lib-Funktion auf
   anzeige: (result: unknown) => AnzeigeZeile[]; // strukturiert das Ergebnis für die Client-Tabelle
 }
+
+// Ergebnis-Objekt von berechne_prozent — die prozent.ts-Lib liefert nur { ergebnis, rechenweg },
+// die Teilbeträge (Auf-/Abschlag) baut das Tool selbst aus dem Lib-Ergebnis auf.
+type ProzentToolErgebnis = {
+  ergebnis: number;
+  modus: string;
+  ausgangswert: number;
+  prozentsatz: number;
+  differenz: number | null;   // Auf-/Abschlagsbetrag, sonst null
+  istGeld: boolean;
+};
 
 export const KI_TOOLS: KiTool[] = [
   {
@@ -307,7 +321,7 @@ export const KI_TOOLS: KiTool[] = [
       },
       required: ['bruttoMonatlich', 'arbeitsstundenWoche', 'pendelzeitMinutenTag', 'fahrtkostenMonat', 'essenProTag', 'kleidungMonat', 'ueberstundenWoche'],
     },
-    rechnerSlug: 'arbeit/wahrer-stundenlohn',
+    rechnerSlug: 'finanzen/wahrer-stundenlohn',
     run: (i) => berechneWahrenStundenlohn(i as Parameters<typeof berechneWahrenStundenlohn>[0]),
     anzeige: (r) => { const x = r as WahrerStundenlohnErgebnis; return [
       { label: 'Wahrer Stundenlohn', wert: formatEuro(x.wahrerStundenlohn), highlight: true },
@@ -437,7 +451,7 @@ export const KI_TOOLS: KiTool[] = [
       },
       required: ['alterWert', 'neuerWert', 'einheit'],
     },
-    rechnerSlug: 'alltag/prozentuale-veraenderung-rechner',
+    rechnerSlug: 'mathe/prozentuale-veraenderung-rechner',
     run: (i) => berechneProzVeraenderung(i as Parameters<typeof berechneProzVeraenderung>[0]),
     anzeige: (r) => { const x = r as ProzVeraenderungErgebnis; return [
       { label: 'Veränderung', wert: formatProzent(x.prozent, 2), highlight: true },
@@ -566,6 +580,95 @@ export const KI_TOOLS: KiTool[] = [
       { label: 'Sozialabgaben gesamt', wert: formatEuro(x.sozialabgabenGesamt) },
       { label: 'Abzüge gesamt', wert: formatEuro(x.gesamtAbzuege) },
       { label: 'Netto pro Jahr', wert: formatEuro(x.nettoJahr) },
+    ]; },
+  },
+  {
+    name: 'berechne_mwst',
+    description: 'Berechnet Mehrwertsteuer/Umsatzsteuer: aus Netto den Bruttobetrag oder aus Brutto den Nettobetrag. Bei Fragen zu MwSt, Umsatzsteuer, USt, Netto/Brutto bei Preisen, "19% MwSt von X", "wie viel MwSt steckt in X".',
+    input_schema: {
+      type: 'object',
+      properties: {
+        betrag: { type: 'number', description: 'Der gegebene Geldbetrag' },
+        istBrutto: { type: 'boolean', description: 'true = der Betrag ist bereits brutto (MwSt herausrechnen), false = Betrag ist netto (MwSt aufschlagen)' },
+        mwstSatz: { type: 'number', description: 'MwSt-Satz in Prozent als ganze Zahl: 19 (Regelsatz) oder 7 (ermäßigt). Im Zweifel 19.' },
+      },
+      required: ['betrag', 'istBrutto', 'mwstSatz'],
+    },
+    rechnerSlug: 'finanzen/mwst-rechner',
+    run: (i) => {
+      const p = i as { betrag: number; istBrutto: boolean; mwstSatz: number };
+      return p.istBrutto
+        ? berechneBruttoZuNetto(p.betrag, p.mwstSatz)
+        : berechneNettoZuBrutto(p.betrag, p.mwstSatz);
+    },
+    anzeige: (r) => { const x = r as MwStErgebnis; return [
+      { label: 'Bruttobetrag', wert: formatEuro(x.brutto), highlight: true },
+      { label: 'Nettobetrag', wert: formatEuro(x.netto) },
+      { label: `MwSt (${formatZahl(x.mwstSatz, 0)} %)`, wert: formatEuro(x.mwstBetrag) },
+    ]; },
+  },
+  {
+    name: 'berechne_prozent',
+    description: 'Prozent-Grundaufgaben: X Prozent von Y, Anteil in Prozent, Grundwert aus Prozentwert, Aufschlag (Erhöhung) und Abschlag (Rabatt/Reduzierung). Bei Fragen wie "15% Rabatt auf 89,99€", "wie viel sind 20% von 400", "wie viel Prozent sind 30 von 200".',
+    input_schema: {
+      type: 'object',
+      properties: {
+        modus: {
+          type: 'string',
+          enum: ['prozentwert', 'prozentsatz', 'grundwert', 'aufschlag', 'abschlag'],
+          description: 'prozentwert = X% von Y | prozentsatz = wie viel % ist A von B | grundwert = A ist X%, wie groß ist das Ganze | aufschlag = Y um X% erhöhen | abschlag = Y um X% verringern (Rabatt)',
+        },
+        wertA: { type: 'number', description: 'Bei prozentwert/aufschlag/abschlag: der Grund-/Ausgangswert. Bei prozentsatz: der Teilwert. Bei grundwert: der Prozentwert.' },
+        wertB: { type: 'number', description: 'Bei prozentwert/aufschlag/abschlag/grundwert: der Prozentsatz. Bei prozentsatz: der Grundwert (das Ganze).' },
+        istGeld: { type: 'boolean', description: 'true wenn es sich um Geldbeträge in Euro handelt' },
+      },
+      required: ['modus', 'wertA', 'wertB', 'istGeld'],
+    },
+    rechnerSlug: 'alltag/prozentrechner',
+    run: (i) => {
+      const p = i as { modus: string; wertA: number; wertB: number; istGeld: boolean };
+      let res: ProzentErgebnis;
+      let differenz: number | null = null;
+      switch (p.modus) {
+        case 'prozentsatz': res = berechneProzentsatz(p.wertA, p.wertB); break;
+        case 'grundwert':   res = berechneGrundwert(p.wertA, p.wertB); break;
+        case 'aufschlag':   res = berechneAufschlag(p.wertA, p.wertB); differenz = res.ergebnis - p.wertA; break;
+        case 'abschlag':    res = berechneAbschlag(p.wertA, p.wertB); differenz = p.wertA - res.ergebnis; break;
+        default:            res = berechneProzentwert(p.wertA, p.wertB); break;
+      }
+      return { ergebnis: res.ergebnis, modus: p.modus, ausgangswert: p.wertA, prozentsatz: p.wertB, differenz, istGeld: p.istGeld };
+    },
+    anzeige: (r) => { const x = r as ProzentToolErgebnis;
+      const f = (n: number) => x.istGeld ? formatEuro(n) : formatZahl(n, 2);
+      if (x.modus === 'prozentsatz') return [{ label: 'Anteil', wert: formatProzent(x.ergebnis, 2), highlight: true }];
+      const zeilen: AnzeigeZeile[] = [{ label: 'Ergebnis', wert: f(x.ergebnis), highlight: true }];
+      if (x.differenz !== null) {
+        zeilen.push({ label: x.modus === 'abschlag' ? 'Ersparnis' : 'Aufschlag', wert: f(x.differenz) });
+        zeilen.push({ label: 'Ausgangswert', wert: f(x.ausgangswert) });
+      }
+      return zeilen;
+    },
+  },
+  {
+    name: 'berechne_raucher',
+    description: 'Berechnet die Kosten des Rauchens pro Tag, Monat, Jahr und über die gesamte Raucherzeit. Bei Fragen zu Zigarettenkosten, "was kostet Rauchen", Ersparnis durch Aufhören.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        zigarettenProTag: { type: 'number', description: 'Gerauchte Zigaretten pro Tag' },
+        preisProPackung: { type: 'number', description: 'Preis einer Packung in Euro (Standard 2026: ca. 8.50)' },
+        zigarettenProPackung: { type: 'number', description: 'Zigaretten pro Packung (üblich: 20)' },
+        jahreGeraucht: { type: 'number', description: 'Anzahl Jahre, über die gerechnet wird (bei "pro Jahr" = 1)' },
+      },
+      required: ['zigarettenProTag', 'preisProPackung', 'zigarettenProPackung', 'jahreGeraucht'],
+    },
+    rechnerSlug: 'gesundheit/raucher-rechner',
+    run: (i) => berechneRaucherKosten(i as Parameters<typeof berechneRaucherKosten>[0]),
+    anzeige: (r) => { const x = r as RaucherErgebnis; return [
+      { label: 'Kosten pro Jahr', wert: formatEuro(x.kostenProJahr), highlight: true },
+      { label: 'Kosten pro Monat', wert: formatEuro(x.kostenProMonat) },
+      { label: 'Kosten pro Tag', wert: formatEuro(x.kostenProTag) },
+      { label: 'Kosten gesamt', wert: formatEuro(x.kostenGesamt) },
     ]; },
   },
 ];
