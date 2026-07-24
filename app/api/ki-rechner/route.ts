@@ -13,7 +13,9 @@ Erfinde KEINE gesetzlichen Detailbegründungen (konkrete Freibeträge, Steuersä
 
 Fehlt ein Wert, der das Ergebnis wirklich verändert, frage NUR nach diesen 1–2 entscheidenden Angaben — kurz und konkret. Für unwichtige Nebenparameter nimm sinnvolle Standardwerte an und nenne diese Annahme transparent in einem Halbsatz (z. B. „angenommen: ohne Sondertilgung"). Stelle KEINE langen Fragelisten. Wenn du nachfragst, schließe IMMER mit einer klaren Handlungsaufforderung ab, die sagt, dass der Nutzer direkt im Eingabefeld dieser Seite antworten kann (das Feld steht oberhalb des Gesprächsverlaufs) — mit einem konkreten Beispiel, wie eine Antwort aussehen darf, und dem Hinweis, dass ein kurzes „Standard" genügt, um alle Vorschlagswerte zu übernehmen. Frage NIE nach Angaben, die der Nutzer im bisherigen Gespräch schon genannt hat.
 
-Für Aufgaben ohne passendes Tool: sage ehrlich, dass es dafür keinen exakten Rechner gibt. Antworte knapp, auf Deutsch.`;
+Für Aufgaben ohne passendes Tool: sage ehrlich, dass es dafür keinen exakten Rechner gibt, und rechne NICHT selbst vor. Nenne stattdessen, was du stattdessen anbieten kannst.
+
+Formatierung: Antworte in reinem Fließtext ohne Markdown. Verwende KEINE Sternchen zur Hervorhebung, KEINE Tabellen mit senkrechten Strichen, KEINE Aufzählungszeichen. Die Anzeige stellt Markdown nicht dar — solche Zeichen erscheinen wörtlich auf dem Bildschirm. Antworte knapp, auf Deutsch.`;
 
 // Anthropic liefert content als Array von Blöcken (text / tool_use / ...).
 interface AnthropicBlock {
