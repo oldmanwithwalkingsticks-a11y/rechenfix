@@ -5,7 +5,7 @@
   "scripts": {
     "generate-client-data": "npx tsx scripts/generate-client-data.ts",
     "build-critical-css": "node scripts/build-critical-css.mjs",
-    "prebuild": "node scripts/check-footer.mjs && node scripts/check-jahreswerte.mjs && node scripts/check-backticks.mjs && node scripts/slug-drift-scan.mjs && npx tsx scripts/generate-client-data.ts && npx tsx scripts/generate-tipp-constants.ts && node scripts/build-critical-css.mjs",
+    "prebuild": "node scripts/check-footer.mjs && node scripts/check-jahreswerte.mjs && node scripts/check-backticks.mjs && node scripts/check-ki-beispiele.mjs && node scripts/slug-drift-scan.mjs && npx tsx scripts/generate-client-data.ts && npx tsx scripts/generate-tipp-constants.ts && node scripts/build-critical-css.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -13,6 +13,7 @@
     "lint:jahreswerte": "node scripts/check-jahreswerte.mjs",
     "lint:footer": "node scripts/check-footer.mjs",
     "lint:slugs": "node scripts/slug-drift-scan.mjs",
+    "lint:kibeispiele": "node scripts/check-ki-beispiele.mjs",
     "audit:bundle": "npx tsx scripts/build-audit-bundle.ts",
     "audit:wortzahl": "npx tsx scripts/wortzahl-audit.mjs > docs/audit-arbeitspapiere/w15c-wortzahl-audit.csv",
     "longtail:diff": "node scripts/longtail-diff-check.mjs"

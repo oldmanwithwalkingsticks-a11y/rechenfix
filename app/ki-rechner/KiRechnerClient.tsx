@@ -3,12 +3,19 @@
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 
-const BEISPIELE = [
-  'Wie viel sind 19% MwSt von 500€?',
-  'Was kostet Rauchen pro Jahr bei 10 Zigaretten am Tag?',
-  'Wie viel netto bei 3.500€ brutto?',
-  'Wie viel Strom verbraucht ein Kühlschrank pro Jahr?',
-  'Was ist 15% Rabatt auf 89,99€?',
+/**
+ * Vorschlags-Chips. Jeder Eintrag MUSS auf ein existierendes Tool in
+ * lib/ki-rechner/tools.ts zeigen — scripts/check-ki-beispiele.mjs erzwingt das
+ * im prebuild und bricht den Build bei einer Lücke.
+ * Grund: Ein Vorschlag ohne Tool führt zu frei geschätzten Zahlen und rohem
+ * Markdown im Client (Welle 25).
+ */
+const BEISPIELE: { frage: string; tool: string }[] = [
+  { frage: 'Wie viel sind 19% MwSt von 500€?', tool: 'berechne_mwst' },
+  { frage: 'Was kostet Rauchen pro Jahr bei 10 Zigaretten am Tag?', tool: 'berechne_raucher' },
+  { frage: 'Wie viel netto bei 3.500€ brutto?', tool: 'berechne_brutto_netto' },
+  { frage: 'Was kosten 800 km mit 7 Litern Verbrauch?', tool: 'berechne_spritkosten' },
+  { frage: 'Was ist 15% Rabatt auf 89,99€?', tool: 'berechne_prozent' },
 ];
 
 /** Slug (kategorie/slug) → Anzeige-Label für den vom Server gelieferten Rechner-Link */
@@ -22,7 +29,7 @@ const SLUG_LABELS: Record<string, string> = {
   'wohnen/grunderwerbsteuer-rechner': 'Grunderwerbsteuer-Rechner',
   'wohnen/heizkosten-rechner': 'Heizkosten-Rechner',
   'arbeit/pendlerpauschale-rechner': 'Pendlerpauschale-Rechner',
-  'arbeit/wahrer-stundenlohn': 'Wahrer-Stundenlohn-Rechner',
+  'finanzen/wahrer-stundenlohn': 'Wahrer-Stundenlohn-Rechner',
   'auto/kfz-steuer-rechner': 'Kfz-Steuer-Rechner',
   'auto/spritkosten-rechner': 'Spritkosten-Rechner',
   'auto/kw-ps-umrechner': 'kW-PS-Rechner',
@@ -30,7 +37,10 @@ const SLUG_LABELS: Record<string, string> = {
   'gesundheit/idealgewicht-rechner': 'Idealgewicht-Rechner',
   'gesundheit/kalorienrechner': 'Kalorienrechner',
   'alltag/dreisatz-rechner': 'Dreisatz-Rechner',
-  'alltag/prozentuale-veraenderung-rechner': 'Prozentuale-Veränderung-Rechner',
+  'mathe/prozentuale-veraenderung-rechner': 'Prozentuale-Veränderung-Rechner',
+  'finanzen/mwst-rechner': 'MwSt-Rechner',
+  'alltag/prozentrechner': 'Prozentrechner',
+  'gesundheit/raucher-rechner': 'Raucher-Rechner',
   'alltag/tagerechner': 'Tage-Rechner',
   'alltag/trinkgeld-rechner': 'Trinkgeld-Rechner',
 };
@@ -170,11 +180,11 @@ export default function KiRechnerClient() {
           <div className="flex flex-wrap gap-2">
             {BEISPIELE.map(b => (
               <button
-                key={b}
-                onClick={() => handleBeispiel(b)}
+                key={b.frage}
+                onClick={() => handleBeispiel(b.frage)}
                 className="px-3.5 py-2 rounded-xl text-sm text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 hover:text-purple-600 dark:hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-all"
               >
-                {b}
+                {b.frage}
               </button>
             ))}
           </div>
