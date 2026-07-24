@@ -178,3 +178,40 @@ export function generateWebsiteSchema() {
     },
   };
 }
+
+/**
+ * Article-Schema für Blog-Artikel (Welle 24). Author-/Publisher-Struktur ist
+ * bewusst identisch zu generateWebPageSchema, damit Blog und Rechner dasselbe
+ * Entitäts-Signal senden.
+ */
+export function generateArticleSchema(params: {
+  url: string;
+  headline: string;
+  description: string;
+  datePublished: string;   // ISO YYYY-MM-DD
+  dateModified: string;    // ISO YYYY-MM-DD
+  image?: string;          // absoluter Pfad ab /
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: params.headline,
+    description: params.description,
+    url: params.url,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': params.url },
+    inLanguage: 'de',
+    datePublished: params.datePublished,
+    dateModified: params.dateModified,
+    ...(params.image ? { image: `${SITE_URL}${params.image}` } : {}),
+    author: {
+      '@type': 'Person',
+      name: 'Karsten Kautz',
+      url: `${SITE_URL}/ueber-uns`,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+  };
+}
