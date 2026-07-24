@@ -1,0 +1,458 @@
+import { generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import StructuredData from '@/components/seo/StructuredData';
+import { artikel } from './meta';
+
+export const metadata = {
+  title: `${artikel.titel} | Rechenfix.de`,
+  description: artikel.beschreibung,
+  alternates: { canonical: 'https://www.rechenfix.de/blog/wie-das-meter-erfunden-wurde' },
+};
+
+<StructuredData data={generateArticleSchema({
+  url: 'https://www.rechenfix.de/blog/wie-das-meter-erfunden-wurde',
+  headline: artikel.titel,
+  description: artikel.beschreibung,
+  datePublished: artikel.datum,
+  dateModified: artikel.datum,
+  image: '/blog/meter-titelbild.png',
+})} />
+
+<StructuredData data={generateBreadcrumbSchema([
+  { name: 'Start', url: '/' },
+  { name: 'Blog', url: '/blog' },
+  { name: artikel.titel, url: '/blog/wie-das-meter-erfunden-wurde' },
+])} />
+
+# Wie das Meter erfunden wurde – und warum die berühmteste Version dieser Geschichte falsch ist
+
+<Bild src="/blog/meter-titelbild.png" alt="Zwei Vermesser des späten 18. Jahrhunderts mit einem Messkreis auf einer Anhöhe, im Stil eines historischen Gemäldes" caption="Die Vermessung des Meridianbogens war sieben Jahre Feldarbeit unter freiem Himmel. Historische Darstellung." width={1200} height={675} />
+
+Der Meter ist zu kurz. Um 0,2 Millimeter, verglichen mit dem, was er nach seiner eigenen
+Definition sein müsste. Das ist keine Verschwörungstheorie, das ist unstrittig und lässt sich
+nachrechnen.
+
+Die Geschichte, die üblicherweise dazu erzählt wird, geht so: Ein französischer Astronom
+verrechnete sich in Barcelona, bemerkte es, verschwieg es aus Scham – und dieser eine
+vertuschte Fehler steckt bis heute in jedem Zollstock der Welt. Es ist eine großartige
+Geschichte. Sie hat einen Schuldigen, ein Geheimnis, einen tragischen Tod und eine Moral.
+Sie wurde als Buch ein Bestseller und ist in Dokumentationen, Zeitungsartikeln und
+Schulbüchern gelandet.
+
+Nur ist sie in ihrer Pointe nachweislich falsch.
+
+2019 haben zwei Geodäten den Fehler aufgeschlüsselt und einzeln zugeordnet. Ihr Ergebnis:
+Der Anteil, der auf die Messungen der beiden Astronomen entfällt, liegt bei unter zwei
+Prozent. Rund 95 Prozent der Abweichung haben eine ganz andere Ursache – eine, die im 18.
+Jahrhundert niemand kennen konnte.
+
+Diese Geschichte handelt also von zwei Dingen. Von einer siebenjährigen Expedition quer
+durch ein Land im Bürgerkrieg. Und davon, wie hartnäckig sich eine schöne Erklärung hält,
+auch wenn die Rechnung längst dagegen spricht.
+
+<Infobox titel="Worum es geht">
+Der Meter sollte der zehnmillionste Teil der Strecke vom Nordpol zum Äquator sein. Um diese
+Strecke zu bestimmen, vermaßen zwei Astronomen zwischen 1792 und 1799 den Meridianbogen
+zwischen Dünkirchen und Barcelona. Das Ergebnis war minimal zu kurz – und die Frage, warum,
+wird bis heute unterschiedlich beantwortet.
+</Infobox>
+
+## Das Problem vor dem Problem: Frankreich hatte keine Maße, es hatte Chaos
+
+Um zu verstehen, warum jemand auf die Idee kommt, die Erde zu vermessen, um eine Längeneinheit
+zu definieren, muss man sich klarmachen, wie das Messen vorher funktionierte. Nämlich kaum.
+
+Im Frankreich des ausgehenden 18. Jahrhunderts existierten schätzungsweise mehrere hundert
+verschiedene Maßeinheiten, und schlimmer noch: dieselbe Einheit bedeutete an verschiedenen
+Orten verschiedene Dinge. Eine Elle in einer Stadt war nicht die Elle der Nachbarstadt. Ein
+Pfund Brot in einem Marktflecken war ein anderes Pfund als zwanzig Kilometer weiter. Wer Waren
+über Land handelte, musste umrechnen – und wer die Umrechnung kontrollierte, kontrollierte den
+Handel.
+
+Das war kein Zufall und kein Versehen. Lokale Herrschaften legten die Maße fest, und mancherorts
+wurden sie stillschweigend zugunsten der Grundherren angepasst. Ein größerer Scheffel für die
+Abgabe, ein kleinerer für die Auszahlung. Maße waren Macht.
+
+Die Idee einer einheitlichen Einheit war deshalb von Anfang an nicht nur eine wissenschaftliche,
+sondern eine politische. Sie zielte darauf, den Menschen ein Werkzeug in die Hand zu geben, das
+niemandem gehörte.
+
+## Warum die Erde und nicht ein Stab im Keller
+
+1788 schlug Charles-Maurice de Talleyrand der Académie des sciences vor, ein neues, dezimales
+Maßsystem auf einer „natürlichen und unveränderlichen Grundlage" aufzubauen. 1790 billigte die
+Nationalversammlung das Vorhaben.
+
+Der springende Punkt steckt in dem Wort *natürlich*. Man hätte einfach einen Metallstab anfertigen
+und in Paris einschließen können – fertig. Aber genau das wollte man nicht. Ein Stab wäre eine
+Setzung gewesen, eine Behauptung, und damit wieder eine Frage von Autorität. Wer garantiert,
+dass er nicht heimlich getauscht wird? Wer sagt, warum ausgerechnet diese Länge?
+
+Die Einheit sollte stattdessen aus etwas abgeleitet werden, das allen gehört und das jeder
+prinzipiell nachprüfen kann. Deshalb der berühmte Anspruch: eine Einheit
+„für alle Menschen, für alle Zeiten".
+
+Zwei Kandidaten standen zur Wahl.
+
+Der erste war das **Sekundenpendel** – die Länge eines Pendels, das für einen Schwung exakt eine
+Sekunde braucht. Elegant und mit einfachen Mitteln reproduzierbar. Der Haken: Ein Pendel schwingt
+je nach lokaler Erdbeschleunigung unterschiedlich schnell. Am Äquator anders als in Paris. Die
+Einheit wäre also doch wieder ortsabhängig gewesen – genau das, was man loswerden wollte.
+
+Der zweite Kandidat war die **Erde selbst**. Ein Meter sollte der zehnmillionste Teil der Strecke
+vom Nordpol über Paris bis zum Äquator sein. Der Erdquadrant, geteilt durch zehn Millionen.
+
+Man entschied sich für die Erde. Rückblickend ist das die Entscheidung, aus der alles Weitere
+folgt – die Expedition, die Strapazen, der Fehler und die Debatte, die bis heute läuft.
+
+<Infobox titel="Die Rechnung dahinter">
+Der Erdumfang über die Pole beträgt rund 40.000 Kilometer. Ein Viertel davon – vom Pol zum
+Äquator – sind 10.000 Kilometer. Geteilt durch zehn Millionen ergibt das einen Meter. Die
+runde Zahl 40.000 ist dabei kein Zufall der Natur: Der Meter wurde so gewählt, dass sie
+herauskommt.
+</Infobox>
+
+## Zwei Männer, zwei Richtungen, sieben Monate – dachten sie
+
+Im Juni 1792 verließen zwei Astronomen Paris in entgegengesetzte Richtungen.
+
+**Jean-Baptiste Joseph Delambre** zog nach Norden, Richtung Dünkirchen an der Nordsee.
+**Pierre-François-André Méchain** zog nach Süden, Richtung Barcelona. Méchain hatte den
+Kartografen Jean-Joseph Tranchot an seiner Seite. Zusammen sollten sie den Meridianbogen
+zwischen den beiden Städten vermessen, der fast genau durch Paris verläuft.
+
+Veranschlagt waren ungefähr sieben Monate.
+
+Es wurden sieben Jahre.
+
+### Wie man einen Meridian vermisst, ohne ihn abzuschreiten
+
+Die Methode heißt **Triangulation**, und sie ist im Kern verblüffend einfach. Man misst eine
+einzige Strecke am Boden sehr genau aus – die Basislinie. Dann sucht man einen dritten Punkt,
+etwa einen Kirchturm oder eine Bergkuppe, und misst von beiden Enden der Basislinie aus die
+Winkel zu diesem Punkt. Mit Basislinie und zwei Winkeln liegt das gesamte Dreieck fest, alle
+übrigen Seiten lassen sich berechnen.
+
+Nun nimmt man eine der berechneten Seiten als Basis für das nächste Dreieck. Und so weiter.
+Eine Kette von Dreiecken zieht sich über Hunderte Kilometer, ohne dass man die Strecke je
+abschreiten müsste.
+
+Delambre und Méchain arbeiteten sich so durch Frankreich und Spanien. Ihr wichtigstes Instrument
+war der **Borda-Kreis**, ein Repetitionskreis, benannt nach Jean-Charles de Borda. Sein Trick:
+Derselbe Winkel wird mehrfach hintereinander auf dem Teilkreis abgetragen, wodurch sich zufällige
+Ablesefehler herausmitteln. Für damalige Verhältnisse lieferte er eine außergewöhnliche
+Genauigkeit – und er wird später in dieser Geschichte noch eine unrühmliche Rolle spielen.
+
+Zwei Dinge machen dieses Verfahren anspruchsvoller, als es klingt.
+
+Zum einen hängt alles an der **Basislinie**. Sie ist die einzige Strecke, die wirklich am Boden
+gemessen wird; jede andere Länge im gesamten Netz wird aus ihr berechnet. Ein Fehler in der
+Basislinie pflanzt sich durch die komplette Dreieckskette fort. Entsprechend aufwendig wurde sie
+ausgemessen – mit speziell angefertigten Messstäben, bei kontrollierter Temperatur, weil sich
+Metall bei Wärme ausdehnt.
+
+Zum anderen sind Dreiecke nicht gleich Dreiecke. Ein langgestrecktes, spitzes Dreieck reagiert
+empfindlich auf kleine Winkelfehler; ein gleichmäßiges verzeiht mehr. Die Auswahl der Messpunkte
+war deshalb kein Spaziergang mit Fernrohr, sondern eine Optimierungsaufgabe unter Bedingungen,
+die man sich nicht aussuchen konnte: Man brauchte Punkte, die hoch genug lagen, voneinander
+sichtbar waren, geometrisch günstig standen – und die man betreten durfte.
+
+Genau daran scheiterte es immer wieder. Die besten Punkte waren Kirchtürme und Festungen. Beides
+war in einem Land, das gerade seine Kirchen enteignete und Krieg führte, kein neutraler Ort.
+
+<MeterTriangulation />
+
+<MeterTriangulationAnimiert />
+
+<RechnerLoader slug="einheiten-umrechner" />
+
+### Ein Land, das sich gerade selbst zerlegte
+
+Der Zeitpunkt hätte kaum schlechter sein können.
+
+Während die beiden Astronomen mit Messinstrumenten durch die Landschaft zogen, befand sich
+Frankreich im Krieg mit halb Europa. Preußische Truppen marschierten auf Paris zu. Im September
+1792 wurde die Monarchie abgeschafft, im Januar 1793 wurde der König hingerichtet. Es folgten
+Terror, Bürgerkrieg und der Krieg gegen Spanien – ausgerechnet das Land, in dem Méchains
+Messpunkte lagen.
+
+Für die Expedition bedeutete das konkrete Lebensgefahr. Die beiden hatten offizielle Papiere
+der Nationalversammlung, doch die halfen wenig, wenn ein misstrauischer Dorfrat entschied, dass
+zwei Fremde mit unverständlichen Messgeräten auf dem Kirchturm nur Spione sein konnten.
+Beobachtungsplattformen wurden von argwöhnischen Bauern zerstört. Delambre wurde mehrfach
+aufgehalten und musste seine Arbeit erklären – vor Menschen, denen die Idee einer universellen
+Längeneinheit vermutlich reichlich abwegig erschien.
+
+Méchain traf es härter. Er saß im Süden fest, als der Krieg zwischen Frankreich und Spanien
+ausbrach. Er wurde eine Zeit lang festgehalten und konnte das Land nicht verlassen. Ein
+Kutschunfall verletzte ihn schwer. Er saß in Barcelona, konnte weder vor noch zurück – und
+begann, seine Messungen zu wiederholen.
+
+## Der Moment, um den sich alles dreht
+
+Der Süden des Bogens endete auf dem **Montjuïc**, der Festungsanhöhe über Barcelona. Für die
+Berechnung brauchte Méchain nicht nur die Dreieckskette, sondern auch die exakte geografische
+Breite der Endpunkte – die ließ sich nur astronomisch bestimmen, aus der Position der Sterne.
+
+In Barcelona, festgesetzt und mit reichlich Zeit, führte Méchain diese Messungen aus. Nach
+manchen Darstellungen kam er dabei auf zehntausend Einzelbeobachtungen.
+
+Und dann passierte, was passieren musste: Seine Messungen am Montjuïc und seine Messungen an
+seinem Quartier in der Stadt ergaben Werte für die Breite, die nicht zueinander passten. Die
+Differenz war winzig. Für einen Mann, dessen gesamter Ruf auf Präzision beruhte, war sie
+katastrophal.
+
+Was danach geschah, ist der Kern der Kontroverse – und hier trennen sich die Darstellungen.
+
+## Version 1: Die Geschichte vom vertuschten Fehler
+
+Die bekannteste Darstellung stammt vom amerikanischen Historiker Ken Alder, der um die
+Jahrtausendwende die Korrespondenz und die Logbücher der beiden Astronomen auswertete und
+daraus 2002 das Buch „The Measure of All Things" machte (deutsch: „Das Maß der Welt").
+
+Seine Version, verkürzt: Méchain bemerkte die Diskrepanz, geriet in Panik und verbarg sie.
+Er berichtete nach Paris nicht, was er gemessen hatte. Das Wissen um diesen verschwiegenen
+Widerspruch verfolgte ihn den Rest seines Lebens. Nur zwei Menschen kannten das volle Ausmaß:
+Méchain selbst und, später, Delambre.
+
+Diese Erzählung hat eine bemerkenswerte Wucht, weil sie eine Tragödie ist. Ein
+außergewöhnlich gewissenhafter Mann, gemessen an einem Maßstab der Perfektion, den es
+wissenschaftlich gar nicht geben konnte, zerbricht an einer Ungenauigkeit, die im Grunde
+normal war.
+
+Denn das ist der bittere Kern: Zu Méchains Zeit war die Fehlertheorie noch nicht entwickelt.
+Heute weiß jeder, der misst, dass Messwerte streuen und dass Streuung kein Versagen ist,
+sondern eine Eigenschaft des Messens. Méchain fehlte dieser Begriff. Er hielt die Abweichung
+für seinen persönlichen Fehler.
+
+Eine Darstellung der Mathematikhistoriker von MacTutor geht sogar noch weiter: Als Delambre
+später Méchains Daten für das gemeinsame Werk aufarbeitete, habe er entdeckt, dass Méchain
+seine Ablesungen **verändert** hatte, damit sie präziser wirkten, als sie waren. Das ist ein
+schwererer Vorwurf als bloßes Verschweigen. Delambre habe darauf verzichtet, das öffentlich
+zu machen – aus Sorge, das Vertrauen in das metrische System insgesamt zu beschädigen.
+
+### Das Ende
+
+1803 brach Méchain erneut nach Spanien auf, um den Bogen bis zu den Balearen zu verlängern
+und die Sache in Ordnung zu bringen. Er kehrte nicht zurück. An der Mittelmeerküste infizierte
+er sich mit Malaria und starb 1804 in Castelló de la Plana.
+
+Auch hier gehen die Quellen auseinander: Die meisten nennen den **20. September 1804**, ein
+älteres Lexikon den **12. September**. Wir geben beides an, statt uns für das schönere Datum
+zu entscheiden.
+
+Delambre schrieb ihm einen ehrenvollen Nachruf und lobte darin ausgerechnet die Genauigkeit
+seiner Beobachtungen. Méchains Aufzeichnungen behielt er.
+
+## Version 2: Die Rechnung
+
+2019 erschien im *Journal of Geodesy* ein Aufsatz von Petr Vaníček und Ismael Foroughi mit dem
+Titel „How gravity field shortened our metre". Die beiden Geodäten schreiben offen, dass Alders
+Buch sie überhaupt erst auf die Frage gebracht hat – und dass ihnen daran etwas nicht
+plausibel vorkam.
+
+Ihr Argument ist zunächst ein Größenordnungsargument, und es ist bestechend einfach.
+
+Der Meter ist rund 0,2 Millimeter zu kurz. Da der Meter der zehnmillionste Teil des Quadranten
+sein soll, entspricht das einem Fehler von etwa **zwei Kilometern** auf der Strecke vom Pol
+zum Äquator. Zwei Kilometer. Für zwei Beobachter, die für ihre Sorgfalt berühmt waren, mit
+einem Instrument, das genau dafür gebaut war, zufällige Fehler wegzumitteln.
+
+Das passte den beiden Autoren nicht zusammen. Also rechneten sie den Fehler auf und ordneten
+ihn einzeln zu.
+
+<MeterFehleranteile />
+
+### Was das Schwerefeld damit zu tun hat
+
+Der entscheidende Punkt ist unscheinbar und steckt im Lot.
+
+Um die geografische Breite astronomisch zu bestimmen, braucht man eine Bezugsrichtung: die
+Senkrechte. Die stellt man über ein Lot her, also über die Schwerkraft. Und hier liegt das
+Problem: Die Schwerkraft zeigt nicht überall exakt zum Erdmittelpunkt. Massenverteilungen im
+Untergrund – Gebirge, Gesteinsdichten – ziehen das Lot ein wenig zur Seite. Fachlich heißt das
+**Lotabweichung**.
+
+Wer die Breite über das Lot bestimmt, misst also nicht ganz das, was er zu messen glaubt. Und
+das ist kein Fehler des Beobachters. Es ist ein Fehler des Bezugssystems.
+
+<MeterLotabweichung />
+
+Méchain und Delambre konnten das nicht berücksichtigen. Nicht aus Nachlässigkeit, sondern weil
+das nötige Wissen über das Schwerefeld der Erde schlicht noch nicht existierte. Der Effekt war
+im Prinzip bekannt, seine konkrete Größe an ihren Messpunkten nicht.
+
+Und es gab schon damals einen Verdacht. Als der Mathematiker Adrien-Marie Legendre 1806 die
+Ergebnisse mit denen früherer Messungen verglich, äußerte er die Vermutung, dass
+Unregelmäßigkeiten der örtlichen Anziehung auf das Lot im Spiel sein könnten. Genau diese
+Vermutung bestätigen Vaníček und Foroughi mehr als zwei Jahrhunderte später mit modernen
+Schwerefeldmodellen.
+
+Die beiden Autoren äußern in ihrem Aufsatz übrigens ihr Erstaunen darüber, dass die
+französische Akademie der Wissenschaften kein Interesse gezeigt habe, den Ruf ihrer beiden
+verstorbenen Mitglieder zu klären.
+
+### Der dritte Anteil: die Form der Erde
+
+Bleiben die rund drei Prozent, die auf eine falsche Annahme über die Erdform entfallen. Auch
+das ist keine Nachlässigkeit, sondern der Stand des Wissens.
+
+Die Erde ist keine Kugel. Durch die Fliehkraft der Rotation ist sie an den Polen abgeplattet;
+die Halbachsen unterscheiden sich um gut 21 Kilometer. Das war im 18. Jahrhundert bekannt – die
+Franzosen hatten dafür eigens Expeditionen nach Lappland und nach Peru geschickt, um Bogenstücke
+in unterschiedlichen Breiten zu vergleichen.
+
+Bekannt war also *dass* die Erde abgeplattet ist. Strittig war, *wie stark*. Und genau dieser
+Wert geht in die Hochrechnung ein: Delambre und Méchain vermaßen nur rund zehn Breitengrade
+zwischen Dünkirchen und Barcelona. Von diesem Stück auf den gesamten Quadranten vom Pol zum
+Äquator zu schließen, verlangt ein Modell der Erdform. Ist das Modell leicht daneben, ist die
+Hochrechnung leicht daneben – auch wenn jeder einzelne Winkel perfekt gemessen wurde.
+
+Man kann die drei Fehleranteile deshalb ganz gut sortieren: Der kleinste Teil steckt in dem, was
+die beiden tatsächlich taten. Der größte in dem, was sie nicht wissen konnten.
+
+Diese Unterscheidung ist der eigentliche Punkt. Wissenschaftsgeschichte ist voll von Zahlen, die
+sich später als falsch erwiesen – meist, weil jemand vorhandene Hinweise falsch bewertete. Solche
+Fälle kann man im Rückblick kritisieren, weil das Wissen prinzipiell verfügbar war. Hier liegt es
+anders: Der größte Fehleranteil entstand aus etwas, das im Jahr 1799 niemand hätte berücksichtigen
+können. Das ist keine Nachlässigkeit, sondern eine Grenze der Epoche.
+
+## Wie beides zusammenpasst
+
+An dieser Stelle ist eine Unterscheidung wichtig, weil sonst leicht ein falscher Eindruck
+entsteht.
+
+Die Geodäten von 2019 widerlegen **nicht**, dass Méchain eine Diskrepanz verschwieg. Diese
+Frage ist historisch, sie hängt an Briefen und Logbüchern, und dafür ist Alder der Fachmann.
+
+Was sie widerlegen, ist die **Schlussfolgerung**: dass dieser verschwiegene Fehler die Ursache
+dafür sei, dass unser Meter zu kurz ist. Das ist er nicht, jedenfalls fast nicht. Der Anteil
+liegt unter zwei Prozent.
+
+Man kann es so zusammenfassen: Méchain hat etwas verschwiegen. Er hat sich furchtbar gequält.
+Er ist auf dem Weg gestorben, es richtigstellen zu wollen. Und die Abweichung, die er für seine
+Schuld hielt, war zum überwiegenden Teil gar nicht seine.
+
+Das ist eine andere Tragödie als die erzählte – und aus unserer Sicht die härtere.
+
+## Das Urmeter: 443,296 Linien und ein Stab aus Platin
+
+Zurück zur Praxis. Die Expedition dauerte so lange, dass die Republik nicht warten konnte.
+
+1793 wurde deshalb ein **vorläufiger Meter** festgelegt, gestützt auf ältere Messungen. Am 7.
+April 1795 wurde das dezimale metrische System per Gesetz eingeführt – Jahre bevor die
+Vermessung überhaupt abgeschlossen war. Die Begründung war ökonomisch: Handel, Geldwesen und
+Kataster konnten nicht länger warten.
+
+Als Delambre und Méchain im Herbst 1798 zurück in Paris waren, prüfte eine internationale
+Kommission die Daten. Im März 1799 stand der endgültige Wert fest: **443,296 Pariser Linien**.
+Er wich um 0,114 Linien – etwa 0,32 Millimeter – vom vorläufigen Meter ab.
+
+Am 22. Juni 1799 wurde ein Stab aus Platin, der *mètre des archives*, im Nationalarchiv
+hinterlegt. Im Dezember 1799 folgte das Gesetz, das ihn verbindlich machte.
+
+<Infobox titel="Die Zahlen im Überblick">
+**Urmeter (1799):** 443,296 Pariser Linien, entsprechend 1000,0001606 mm.
+**Abweichung des heutigen Meters:** rund 0,2 mm zu kurz (197 Mikrometer).
+**Erdquadrant tatsächlich (nach WGS84):** etwa 10.001,966 km statt der angestrebten 10.000 km.
+**Vermessener Bogen:** Dünkirchen bis Barcelona, etwa 10 Breitengrade.
+</Infobox>
+
+<MeterSollIst />
+
+Bemerkenswert ist eine Fußnote, die selten erzählt wird: Bezogen auf das eigentliche Ziel – den
+zehnmillionsten Teil der Strecke vom Äquator zum Pol – war das endgültige Urmeter von 1799
+sogar **ungenauer** als der vorläufige Meter von 1793. Sieben Jahre Expedition, unter
+Lebensgefahr, und das Ergebnis war in dieser einen Hinsicht ein Rückschritt.
+
+## Was danach geschah
+
+Die Geschichte hat einen unglamourösen zweiten Teil.
+
+<MeterZeitleiste />
+
+Das metrische System setzte sich nicht durch, weil es überzeugte, sondern weil es verordnet
+wurde – und selbst das dauerte. Die Bevölkerung rechnete weiter in alten Maßen. 1812 ließ
+Napoleon eine Rückkehr zu Einheiten des Ancien Régime zu. Erst Mitte des 19. Jahrhunderts
+setzte sich das Dezimalsystem in Frankreich wirklich durch.
+
+International wurde es 1875 mit der **Meterkonvention** verankert, die 17 Staaten
+unterzeichneten.
+
+Und die Definition selbst? Sie hat den Erdbezug längst verloren:
+
+- **1799:** ein Zehnmillionstel des Erdquadranten, verkörpert durch einen Platinstab
+- **1889:** der Abstand zweier Markierungen auf einem internationalen Prototyp
+- **1960:** ein Vielfaches der Wellenlänge einer bestimmten Krypton-86-Strahlung
+- **1983:** die Strecke, die Licht im Vakuum in 1/299.792.458 Sekunde zurücklegt
+
+Der letzte Schritt ist der elegante. Statt die Lichtgeschwindigkeit immer genauer am Meter zu
+messen, legte man ihren Zahlenwert fest und definierte den Meter über sie. Seither ist die
+Lichtgeschwindigkeit keine Messgröße mehr, sondern eine Festlegung.
+
+Jede dieser Definitionen wurde so gewählt, dass sie zur vorherigen passt. Deshalb steckt die
+Abweichung von 1799 bis heute in jedem Meter – nicht als Fehler, sondern als Erbstück. Der
+Meter ist genau so lang, wie er ist, weil zwei Männer vor über zweihundert Jahren durch ein
+Land im Bürgerkrieg zogen und Winkel maßen.
+
+## Was uns daran interessiert
+
+Wir betreiben ein Rechnerportal. Uns beschäftigt an dieser Geschichte weniger die Romantik als
+eine Frage, die uns täglich betrifft: **Woher kommt eine Zahl, und wie gut ist sie belegt?**
+
+Drei Dinge sind uns hängengeblieben.
+
+**Erstens: Die schöne Erklärung gewinnt.** „Ein Astronom vertuschte seinen Fehler" ist erzählbar,
+merkbar und hat einen Schuldigen. „Die Lotabweichung durch lokale Massenverteilungen wurde nicht
+berücksichtigt" hat nichts davon. Also verbreitet sich die erste Version, obwohl die zweite die
+Zahlen auf ihrer Seite hat.
+
+**Zweitens: Präzision ohne Genauigkeit ist eine Falle.** Der Borda-Kreis lieferte Méchain
+hochpräzise Werte – reproduzierbar, eng beieinander. Nur waren sie systematisch verschoben,
+weil das Bezugssystem verschoben war. Zehntausend Beobachtungen helfen nicht gegen einen
+Fehler, der in jeder einzelnen davon gleichermaßen steckt. Das gilt für Umfragen, für Messungen
+und für jede Rechnung, deren Eingangsgrößen falsch sind.
+
+**Drittens: Ohne Fehlertheorie wird Streuung zu Schuld.** Méchain fehlte der Begriff dafür, dass
+Messwerte streuen dürfen. Er las seine Abweichung als persönliches Versagen. Der Umgang mit
+Unsicherheit ist selbst eine Erfindung – und wer sie nicht hat, kann an normalem Rauschen
+zerbrechen.
+
+<KarstenSagt>
+Dass sich Berechnungen von Gelehrten später als falsch herausstellen, ist in der
+Wissenschaftsgeschichte nichts Neues. Was diesen Fall für mich heraushebt, ist der Grund. Meistens
+lag der Fehler an einer falschen Bewertung dessen, was man eigentlich schon hätte wissen können.
+Hier ist es umgekehrt: Der weitaus größte Teil der Abweichung geht auf etwas zurück, das damals
+schlicht niemand wissen konnte. Das ist eine andere Kategorie, und ich finde, man sollte sie
+auseinanderhalten.
+
+Für mich hat das auch eine praktische Seite. Auch allgemein bekannte Zahlen muss man von Zeit zu
+Zeit überprüfen. Nicht weil jemand geschlampt hätte, sondern weil sich Grundlagen ändern können –
+neue Messverfahren, neue Daten, neue Gesetze. Wenn sich etwas ändert, muss die Zahl mit. Das ist
+für ein Rechnerportal keine akademische Frage, sondern Alltag.
+
+Und zu Méchain: Spezialisten, die mit Leib und Seele für eine Sache brennen, verdienen erst mal
+Respekt. Dass er versucht hat, seinen Fehler zu verschleiern, um weiterhin gut angesehen zu
+bleiben, ist trotzdem der unschöne Teil der Geschichte – das gehört benannt. Man muss ihm aber
+zugutehalten, dass er den Fehler im Nachgang beheben wollte. Er ist auf genau diesem Weg
+gestorben. Das ist mehr, als viele tun.
+</KarstenSagt>
+
+## Zum Nachrechnen
+
+Der Erdquadrant misst tatsächlich etwa 10.001,966 Kilometer statt der angestrebten 10.000.
+Die Differenz sind knapp zwei Kilometer, verteilt auf zehn Millionen Meter – daraus werden die
+0,2 Millimeter pro Meter.
+
+Wer mit den Einheiten aus dieser Geschichte selbst rechnen will – Pariser Linien, Toisen,
+Kilometer, Mikrometer –, kann das direkt hier tun:
+
+<RechnerLoader slug="einheiten-umrechner" />
+
+<Quellen eintraege={[
+  { titel: 'Vaníček, P. & Foroughi, I.: How gravity field shortened our metre. Journal of Geodesy 93, 1821–1827 (2019)', url: 'https://link.springer.com/article/10.1007/s00190-019-01257-7', hinweis: 'Fachliche Aufschlüsselung des Fehleranteils. Widerspricht der populären Deutung, nicht dem historischen Befund.' },
+  { titel: 'Alder, K.: The Measure of All Things (2002), deutsch: Das Maß der Welt', hinweis: 'Grundlage der verbreiteten Erzählung vom vertuschten Fehler. Basiert auf Briefen und Logbüchern der Expedition.' },
+  { titel: 'MacTutor History of Mathematics: Pierre Méchain', url: 'https://mathshistory.st-andrews.ac.uk/Biographies/Mechain/', hinweis: 'Nennt eine schärfere Variante: Méchain habe Ablesungen verändert, nicht nur verschwiegen.' },
+  { titel: 'Physikalisch-Technische Bundesanstalt: Von der Elle zur Naturkonstante', url: 'https://www.ptb.de/cms/fileadmin/internet/forschung_entwicklung/das_si/magazinartikel/Von_der_Elle_zur_Naturkonstante.pdf', hinweis: 'Metrologische Einordnung der Definitionsstufen 1799 bis 1983.' },
+  { titel: 'Cerutti, G. u. a.: Why does the meter beat the second? (arXiv)', url: 'https://arxiv.org/pdf/physics/0412078', hinweis: 'Belegt 443,296 Linien, den Abstand von 0,114 Linien zum vorläufigen Meter und die Gesetzeslage von 1795.' },
+  { titel: 'Wikipedia: Urmeter / Meter / Pierre Méchain', hinweis: 'Für Datierungen herangezogen. Widersprüchlich beim Todesdatum (20. vs. 12. September 1804) und bei der Expeditionsdauer (1792–1798 vs. 1792–1799).' },
+]} />

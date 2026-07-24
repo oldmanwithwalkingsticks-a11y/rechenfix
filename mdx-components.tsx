@@ -5,6 +5,12 @@ import Infobox from '@/components/blog/Infobox';
 import KarstenSagt from '@/components/blog/KarstenSagt';
 import Quellen from '@/components/blog/Quellen';
 import Bild from '@/components/blog/Bild';
+import MeterFehleranteile from '@/components/blog/grafik/MeterFehleranteile';
+import MeterTriangulation from '@/components/blog/grafik/MeterTriangulation';
+import MeterTriangulationAnimiert from '@/components/blog/grafik/MeterTriangulationAnimiert';
+import MeterLotabweichung from '@/components/blog/grafik/MeterLotabweichung';
+import MeterZeitleiste from '@/components/blog/grafik/MeterZeitleiste';
+import MeterSollIst from '@/components/blog/grafik/MeterSollIst';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -50,6 +56,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     KarstenSagt,
     Quellen,
     Bild,
+    MeterFehleranteile,
+    MeterTriangulation,
+    MeterTriangulationAnimiert,
+    MeterLotabweichung,
+    MeterZeitleiste,
+    MeterSollIst,
     ...components,
   };
 }
