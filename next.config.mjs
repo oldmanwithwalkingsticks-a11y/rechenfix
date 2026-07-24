@@ -1,5 +1,10 @@
+import createMDX from '@next/mdx';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // MDX-Blog: .md/.mdx als Seiten-Endungen zulassen (neben den bestehenden)
+  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+
   // Komprimierung aktivieren
   compress: true,
 
@@ -88,4 +93,6 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+const withMDX = createMDX({});
+
+export default withMDX(nextConfig);
