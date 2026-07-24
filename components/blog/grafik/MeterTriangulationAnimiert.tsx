@@ -42,6 +42,10 @@ export default function MeterTriangulationAnimiert() {
         .tri-run .p0{animation-delay:.1s}.tri-run .p1{animation-delay:.9s}.tri-run .p3{animation-delay:2.1s}.tri-run .p4{animation-delay:2.8s}.tri-run .p6{animation-delay:4.2s}.tri-run .p7{animation-delay:4.9s}
         .tri-run .lblBase{animation-delay:.6s}.tri-run .lblApex{animation-delay:1.2s}.tri-run .lblFoot{animation-delay:6.4s}
         @media (prefers-reduced-motion: reduce){.tri-run .tri-seg,.tri-run .base-seg{stroke-dashoffset:0}.tri-run .pt,.tri-run .lbl{opacity:1}}
+        .t-coral { fill: #993C1D; }
+        .t-blued { fill: #0C447C; }
+        .dark .t-coral { fill: #F0997B; }
+        .dark .t-blued { fill: #85B7EB; }
       `}</style>
       <svg key={runde} className={`rounded-xl text-gray-900 dark:text-gray-100${sichtbar ? ' tri-run' : ''}`} width="100%" viewBox="0 0 680 360" role="img" xmlns="http://www.w3.org/2000/svg">
         <title>Aufbau der Triangulationskette</title>
@@ -65,9 +69,9 @@ export default function MeterTriangulationAnimiert() {
         <circle className="pt p4" cx="400" cy="270" r="4" fill="#0C447C" />
         <circle className="pt p6" cx="500" cy="120" r="4" fill="#0C447C" />
         <circle className="pt p7" cx="570" cy="240" r="4" fill="#0C447C" />
-        <text className="lbl lblBase" x="150" y="272" fontSize="14" fontWeight="500" fill="#993C1D" textAnchor="middle">Basislinie</text>
-        <text className="lbl lblBase" x="150" y="288" fontSize="12" fill="#993C1D" textAnchor="middle">einzige gemessene Strecke</text>
-        <text className="lbl lblApex" x="150" y="100" fontSize="12" fill="#0C447C" textAnchor="middle">Kirchturm, Bergkuppe …</text>
+        <text className="lbl lblBase t-coral" x="150" y="272" fontSize="14" fontWeight="500" textAnchor="middle">Basislinie</text>
+        <text className="lbl lblBase t-coral" x="150" y="288" fontSize="12" textAnchor="middle">einzige gemessene Strecke</text>
+        <text className="lbl lblApex t-blued" x="150" y="100" fontSize="12" textAnchor="middle">Kirchturm, Bergkuppe …</text>
         <text className="lbl lblFoot" x="300" y="330" fontSize="12" fill="#9ca3af" textAnchor="middle">Jede berechnete Seite wird zur Basis des nächsten Dreiecks — von Dünkirchen bis Barcelona.</text>
       </svg>
       <div className="mt-3">

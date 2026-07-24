@@ -6,6 +6,14 @@ export default function MeterLotabweichung() {
   return (
     <figure className="my-8">
       <svg width="100%" viewBox="0 0 680 400" role="img" xmlns="http://www.w3.org/2000/svg" className="rounded-xl text-gray-900 dark:text-gray-100">
+        <style>{`
+          .t-coral { fill: #993C1D; }
+          .t-blue  { fill: #185FA5; }
+          .t-blued { fill: #0C447C; }
+          .dark .t-coral { fill: #F0997B; }
+          .dark .t-blue  { fill: #85B7EB; }
+          .dark .t-blued { fill: #85B7EB; }
+        `}</style>
         <title>Lotabweichung durch lokale Massen</title>
         <desc>
           Das Lot einer Waage zeigt eigentlich zum Erdmittelpunkt. Ein nahes Gebirge zieht das Lot
@@ -22,16 +30,16 @@ export default function MeterLotabweichung() {
         <text x="415" y="250" fontSize="12" fill="currentColor" textAnchor="middle">Gebirge</text>
 
         <circle cx="300" cy="140" r="5" fill="#0C447C" />
-        <text x="300" y="128" fontSize="14" fontWeight="500" fill="#0C447C" textAnchor="middle">Messpunkt</text>
+        <text x="300" y="128" fontSize="14" fontWeight="500" className="t-blued" textAnchor="middle">Messpunkt</text>
 
         <line x1="300" y1="145" x2="300" y2="330" stroke="#185FA5" strokeWidth="1" strokeDasharray="4 4" />
-        <text x="286" y="320" fontSize="12" fill="#185FA5" textAnchor="end">Richtung zum</text>
-        <text x="286" y="336" fontSize="12" fill="#185FA5" textAnchor="end">Erdmittelpunkt</text>
+        <text x="286" y="320" fontSize="12" className="t-blue" textAnchor="end">Richtung zum</text>
+        <text x="286" y="336" fontSize="12" className="t-blue" textAnchor="end">Erdmittelpunkt</text>
 
         <line x1="300" y1="145" x2="345" y2="330" stroke="#D85A30" strokeWidth="2" />
         <circle cx="345" cy="330" r="6" fill="#993C1D" />
-        <text x="360" y="326" fontSize="14" fontWeight="500" fill="#993C1D">tatsächliches Lot</text>
-        <text x="360" y="342" fontSize="12" fill="#993C1D">zur Gebirgsmasse gezogen</text>
+        <text x="360" y="326" fontSize="14" fontWeight="500" className="t-coral">tatsächliches Lot</text>
+        <text x="360" y="342" fontSize="12" className="t-coral">zur Gebirgsmasse gezogen</text>
 
         <text x="300" y="382" fontSize="12" fill="#9ca3af" textAnchor="middle">Der Winkel zwischen beiden Linien ist die Lotabweichung — im 18. Jahrhundert nicht messbar.</text>
       </svg>

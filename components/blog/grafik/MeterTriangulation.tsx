@@ -6,6 +6,12 @@ export default function MeterTriangulation() {
   return (
     <figure className="my-8">
       <svg width="100%" viewBox="0 0 680 340" role="img" xmlns="http://www.w3.org/2000/svg" className="rounded-xl text-gray-900 dark:text-gray-100">
+        <style>{`
+          .t-coral { fill: #993C1D; }
+          .t-blued { fill: #0C447C; }
+          .dark .t-coral { fill: #F0997B; }
+          .dark .t-blued { fill: #85B7EB; }
+        `}</style>
         <title>Prinzip der Triangulation entlang des Meridians</title>
         <desc>
           Eine einzige gemessene Basislinie am Boden bildet den Ausgangspunkt. Von ihren Enden werden
@@ -15,8 +21,8 @@ export default function MeterTriangulation() {
         <text x="24" y="34" fontSize="17" fontWeight="500" fill="currentColor">Wie man eine Strecke vermisst, ohne sie abzuschreiten</text>
 
         <line x1="90" y1="250" x2="210" y2="250" stroke="#D85A30" strokeWidth="3" strokeLinecap="round" />
-        <text x="150" y="272" fontSize="14" fontWeight="500" fill="#993C1D" textAnchor="middle">Basislinie</text>
-        <text x="150" y="288" fontSize="12" fill="#993C1D" textAnchor="middle">einzige gemessene Strecke</text>
+        <text x="150" y="272" fontSize="14" fontWeight="500" className="t-coral" textAnchor="middle">Basislinie</text>
+        <text x="150" y="288" fontSize="12" className="t-coral" textAnchor="middle">einzige gemessene Strecke</text>
 
         <polyline points="90,250 150,110 210,250" fill="none" stroke="#185FA5" strokeWidth="1.5" />
         <polyline points="210,250 150,110 330,150" fill="none" stroke="#185FA5" strokeWidth="1.5" />
@@ -32,7 +38,7 @@ export default function MeterTriangulation() {
         <circle cx="500" cy="120" r="4" fill="#0C447C" />
         <circle cx="570" cy="240" r="4" fill="#0C447C" />
 
-        <text x="150" y="100" fontSize="12" fill="#0C447C" textAnchor="middle">Kirchturm, Bergkuppe …</text>
+        <text x="150" y="100" fontSize="12" className="t-blued" textAnchor="middle">Kirchturm, Bergkuppe …</text>
         <text x="300" y="316" fontSize="12" fill="#9ca3af" textAnchor="middle">Jede berechnete Seite wird zur Basis des nächsten Dreiecks — die Kette läuft von Dünkirchen bis Barcelona.</text>
       </svg>
     </figure>
