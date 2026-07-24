@@ -60,6 +60,18 @@ export default function Header() {
           </Link>
 
           <div className="flex items-center gap-2 sm:gap-3">
+            {/* Blog — Desktop-only (hidden sm:flex), damit die Icon-Reihe auf
+                Mobile so eng bleibt wie bisher. Mobiler Weg: Mega-Menu (Welle 24). */}
+            <Link
+              href="/blog"
+              onClick={() => setMenuOpen(false)}
+              aria-label="Blog"
+              className="hidden sm:flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl text-sm font-medium transition-all bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+            >
+              <span aria-hidden="true">📝</span>
+              <span>Blog</span>
+            </Link>
+
             {/* KI-Rechner — sichtbar in der Nav, Seite bleibt noindex (Welle 22) */}
             <Link
               href="/ki-rechner"

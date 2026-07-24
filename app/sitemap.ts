@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next';
 import { execSync } from 'node:child_process';
 import { kategorien, rechner } from '@/lib/rechner-config';
 import { getLatestFeedbackDate } from '@/lib/feedback-log';
+import { getAlleArtikel } from '@/lib/blog';
 
 const SITE_URL = 'https://www.rechenfix.de';
 
@@ -26,7 +27,7 @@ function gitMtime(relativePath: string): Date {
   return result;
 }
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const startseiteMtime = gitMtime('app/page.tsx');
 
   const staticPages: MetadataRoute.Sitemap = [
@@ -137,6 +138,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
+  // Blog-Übersicht + Artikel (Welle 24). Gerüstartikel (beispiel-artikel) ist
+  // noindex und bleibt draußen. lastmod git-basiert wie alle anderen Routen.
+  const blogUebersicht: MetadataRoute.Sitemap = [{
+    url: `${SITE_URL}/blog`,
+    lastModified: gitMtime('app/blog/page.tsx'),
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }];
+
+  const blogArtikel: MetadataRoute.Sitemap = (await getAlleArtikel())
+    .filter(a => a.slug !== 'beispiel-artikel')
+    .map(a => ({
+      url: `${SITE_URL}/blog/${a.slug}`,
+      lastModified: gitMtime(`app/blog/${a.slug}/page.mdx`),
+      changeFrequency: 'yearly' as const,
+      priority: 0.7,
+    }));
+
   // Rechner: mtime der Config-Datei ihrer Kategorie (dasselbe Datum wie die
   // Kategorieseite — Content-Änderung an einem Rechner aktualisiert lastmod
   // für die ganze Kategorie, was ein starkes Re-Crawl-Signal ist).
@@ -147,5 +166,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...longTailPages, ...sonderseiten, ...kategoriePages, ...metaPages, ...rechnerPages];
+  return [...staticPages, ...longTailPages, ...sonderseiten, ...kategoriePages, ...metaPages, ...blogUebersicht, ...blogArtikel, ...rechnerPages];
 }

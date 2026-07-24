@@ -65,6 +65,11 @@ const META_ROUTES = new Set([
   // Wird nicht intern verlinkt, aber als Meta-Route registriert für
   // den Fall, dass künftig irgendwo eine /social-Referenz auftaucht.
   'social',
+  // Blog-Übersicht (Welle 24) — neue statische Route app/blog/page.tsx,
+  // verlinkt aus Header (Desktop), Mega-Menu (mobil) und Blog-Layout.
+  // Artikel-Links /blog/<slug> sind dynamisch (Template-Literal) und werden
+  // vom Scan nicht als hartkodierte Cross-Links erfasst.
+  'blog',
   // Sonder-Targets (Next.js-generated oder Metadata-only Routes)
   'opengraph-image',
   'sitemap.xml',

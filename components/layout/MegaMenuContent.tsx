@@ -67,6 +67,18 @@ export default function MegaMenuContent({ onClose }: { onClose: () => void }) {
             );
           })}
         </div>
+
+        {/* Blog — mobiler Navigationsweg (Header-Link ist Desktop-only). Welle 24. */}
+        <div className="border-t border-gray-200 dark:border-gray-700 mt-6 pt-4">
+          <Link
+            href="/blog"
+            onClick={onClose}
+            className="flex items-center gap-2 font-semibold text-gray-800 dark:text-gray-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+          >
+            <span className="text-lg" aria-hidden="true">📝</span>
+            Blog: Geschichten hinter den Zahlen
+          </Link>
+        </div>
       </div>
     </div>
   );
