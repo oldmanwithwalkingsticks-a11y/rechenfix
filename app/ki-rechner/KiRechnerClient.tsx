@@ -15,7 +15,7 @@ const BEISPIELE: { frage: string; tool: string }[] = [
   { frage: 'Was kostet Rauchen pro Jahr bei 10 Zigaretten am Tag?', tool: 'berechne_raucher' },
   { frage: 'Wie viel netto bei 3.500€ brutto?', tool: 'berechne_brutto_netto' },
   { frage: 'Was kosten 800 km mit 7 Litern Verbrauch?', tool: 'berechne_spritkosten' },
-  { frage: 'Was ist 15% Rabatt auf 89,99€?', tool: 'berechne_prozent' },
+  { frage: 'Was ist 15% Rabatt auf 89,99€?', tool: 'berechne_rabatt' },
 ];
 
 /** Slug (kategorie/slug) → Anzeige-Label für den vom Server gelieferten Rechner-Link */
@@ -40,6 +40,7 @@ const SLUG_LABELS: Record<string, string> = {
   'mathe/prozentuale-veraenderung-rechner': 'Prozentuale-Veränderung-Rechner',
   'finanzen/mwst-rechner': 'MwSt-Rechner',
   'alltag/prozentrechner': 'Prozentrechner',
+  'alltag/rabattrechner': 'Rabattrechner',
   'gesundheit/raucher-rechner': 'Raucher-Rechner',
   'alltag/tagerechner': 'Tage-Rechner',
   'alltag/trinkgeld-rechner': 'Trinkgeld-Rechner',
