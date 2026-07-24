@@ -5,7 +5,7 @@
 export default function MeterLotabweichung() {
   return (
     <figure className="my-8">
-      <svg width="100%" viewBox="0 0 680 400" role="img" xmlns="http://www.w3.org/2000/svg" className="rounded-xl">
+      <svg width="100%" viewBox="0 0 680 400" role="img" xmlns="http://www.w3.org/2000/svg" className="rounded-xl text-gray-900 dark:text-gray-100">
         <title>Lotabweichung durch lokale Massen</title>
         <desc>
           Das Lot einer Waage zeigt eigentlich zum Erdmittelpunkt. Ein nahes Gebirge zieht das Lot
@@ -13,13 +13,13 @@ export default function MeterLotabweichung() {
           Richtung zum Erdmittelpunkt abweicht. Diesen Effekt konnten Delambre und Méchain nicht
           berücksichtigen.
         </desc>
-        <text x="24" y="34" fontSize="17" fontWeight="500" fill="#1f2937">Warum das Lot nicht zum Erdmittelpunkt zeigt</text>
+        <text x="24" y="34" fontSize="17" fontWeight="500" fill="currentColor">Warum das Lot nicht zum Erdmittelpunkt zeigt</text>
 
         <path d="M120 360 Q340 300 560 360" fill="none" stroke="#9ca3af" strokeWidth="1.5" />
-        <text x="150" y="352" fontSize="12" fill="#6b7280">Erdoberfläche</text>
+        <text x="150" y="352" fontSize="12" fill="#9ca3af">Erdoberfläche</text>
 
         <polygon points="360,300 410,190 470,300" fill="#9ca3af" fillOpacity="0.55" />
-        <text x="415" y="250" fontSize="12" fill="#374151" textAnchor="middle">Gebirge</text>
+        <text x="415" y="250" fontSize="12" fill="currentColor" textAnchor="middle">Gebirge</text>
 
         <circle cx="300" cy="140" r="5" fill="#0C447C" />
         <text x="300" y="128" fontSize="14" fontWeight="500" fill="#0C447C" textAnchor="middle">Messpunkt</text>
@@ -33,7 +33,7 @@ export default function MeterLotabweichung() {
         <text x="360" y="326" fontSize="14" fontWeight="500" fill="#993C1D">tatsächliches Lot</text>
         <text x="360" y="342" fontSize="12" fill="#993C1D">zur Gebirgsmasse gezogen</text>
 
-        <text x="300" y="382" fontSize="12" fill="#6b7280" textAnchor="middle">Der Winkel zwischen beiden Linien ist die Lotabweichung — im 18. Jahrhundert nicht messbar.</text>
+        <text x="300" y="382" fontSize="12" fill="#9ca3af" textAnchor="middle">Der Winkel zwischen beiden Linien ist die Lotabweichung — im 18. Jahrhundert nicht messbar.</text>
       </svg>
     </figure>
   );

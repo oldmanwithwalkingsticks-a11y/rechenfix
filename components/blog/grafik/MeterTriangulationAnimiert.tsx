@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 /**
  * Grafik: Animierter Aufbau der Triangulationskette mit Replay-Knopf.
@@ -9,8 +9,27 @@ import { useState } from 'react';
  */
 export default function MeterTriangulationAnimiert() {
   const [runde, setRunde] = useState(0);
+  const [sichtbar, setSichtbar] = useState(false);
+  const ref = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setSichtbar(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
   return (
-    <figure className="my-8">
+    <figure className="my-8" ref={ref}>
       <style>{`
         @keyframes triDraw { to { stroke-dashoffset: 0; } }
         @keyframes triPop { from { opacity: 0; transform: scale(0); } to { opacity: 1; transform: scale(1); } }
@@ -24,10 +43,10 @@ export default function MeterTriangulationAnimiert() {
         .tri-run .lblBase{animation-delay:.6s}.tri-run .lblApex{animation-delay:1.2s}.tri-run .lblFoot{animation-delay:6.4s}
         @media (prefers-reduced-motion: reduce){.tri-run .tri-seg,.tri-run .base-seg{stroke-dashoffset:0}.tri-run .pt,.tri-run .lbl{opacity:1}}
       `}</style>
-      <svg key={runde} className="tri-run rounded-xl" width="100%" viewBox="0 0 680 360" role="img" xmlns="http://www.w3.org/2000/svg">
+      <svg key={runde} className={`rounded-xl text-gray-900 dark:text-gray-100${sichtbar ? ' tri-run' : ''}`} width="100%" viewBox="0 0 680 360" role="img" xmlns="http://www.w3.org/2000/svg">
         <title>Aufbau der Triangulationskette</title>
         <desc>Von einer einzigen gemessenen Basislinie entsteht Dreieck für Dreieck eine Kette echter Dreiecke entlang des Meridians.</desc>
-        <text x="24" y="34" fontSize="17" fontWeight="500" fill="#1f2937">Wie sich die Dreieckskette aufbaut</text>
+        <text x="24" y="34" fontSize="17" fontWeight="500" fill="currentColor">Wie sich die Dreieckskette aufbaut</text>
         <line className="base-seg s1" x1="90" y1="250" x2="210" y2="250" stroke="#D85A30" strokeWidth="3" strokeLinecap="round" />
         <line className="tri-seg s2" x1="90" y1="250" x2="150" y2="110" stroke="#185FA5" strokeWidth="1.5" />
         <line className="tri-seg s2" x1="210" y1="250" x2="150" y2="110" stroke="#185FA5" strokeWidth="1.5" />
@@ -49,12 +68,12 @@ export default function MeterTriangulationAnimiert() {
         <text className="lbl lblBase" x="150" y="272" fontSize="14" fontWeight="500" fill="#993C1D" textAnchor="middle">Basislinie</text>
         <text className="lbl lblBase" x="150" y="288" fontSize="12" fill="#993C1D" textAnchor="middle">einzige gemessene Strecke</text>
         <text className="lbl lblApex" x="150" y="100" fontSize="12" fill="#0C447C" textAnchor="middle">Kirchturm, Bergkuppe …</text>
-        <text className="lbl lblFoot" x="300" y="330" fontSize="12" fill="#6b7280" textAnchor="middle">Jede berechnete Seite wird zur Basis des nächsten Dreiecks — von Dünkirchen bis Barcelona.</text>
+        <text className="lbl lblFoot" x="300" y="330" fontSize="12" fill="#9ca3af" textAnchor="middle">Jede berechnete Seite wird zur Basis des nächsten Dreiecks — von Dünkirchen bis Barcelona.</text>
       </svg>
       <div className="mt-3">
         <button
           type="button"
-          onClick={() => setRunde((r) => r + 1)}
+          onClick={() => { setSichtbar(true); setRunde((r) => r + 1); }}
           className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
         >
           Aufbau erneut abspielen
