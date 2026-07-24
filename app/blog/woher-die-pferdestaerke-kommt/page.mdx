@@ -1,0 +1,331 @@
+import { generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import StructuredData from '@/components/seo/StructuredData';
+import { artikel } from './meta';
+
+export const metadata = {
+  title: `${artikel.titel} | Rechenfix.de`,
+  description: artikel.beschreibung,
+  alternates: { canonical: 'https://www.rechenfix.de/blog/woher-die-pferdestaerke-kommt' },
+};
+
+<StructuredData data={generateArticleSchema({
+  url: 'https://www.rechenfix.de/blog/woher-die-pferdestaerke-kommt',
+  headline: artikel.titel,
+  description: artikel.beschreibung,
+  datePublished: artikel.datum,
+  dateModified: artikel.datum,
+  image: '/blog/pferdestaerke-titelbild.png',
+})} />
+
+<StructuredData data={generateBreadcrumbSchema([
+  { name: 'Start', url: '/' },
+  { name: 'Blog', url: '/blog' },
+  { name: artikel.titel, url: '/blog/woher-die-pferdestaerke-kommt' },
+])} />
+
+# Woher die Pferdestärke kommt – und warum niemand genau weiß, welches Pferd gemeint war
+
+Jedes Auto auf der Welt wird bis heute in Pferdestärken beschrieben. Nicht ausschließlich –
+daneben steht das Kilowatt, seit Jahrzehnten die eigentlich vorgeschriebene Einheit. Aber wenn
+Menschen über die Kraft eines Motors reden, reden sie über PS. Über eine Einheit, die ein Pferd
+zum Maßstab nimmt, in einer Zeit, in der die allermeisten Menschen nie ein Arbeitspferd ziehen
+sehen werden.
+
+Die Zahl dahinter ist erstaunlich konkret: Ein PS im angelsächsischen Sinn sind 33.000
+Fuß-Pfund pro Minute. Man kann sie sich als Bild vorstellen – ein Pferd, das in einer Minute
+ein Gewicht von 33.000 Pfund einen Fuß weit anhebt, oder 33 Pfund tausend Fuß weit, oder eine
+beliebige andere Kombination, die dasselbe ergibt. Eine runde, saubere, merkbare Zahl.
+
+Und genau da fängt das Merkwürdige an. Denn diese runde Zahl ist nicht das Ergebnis einer
+runden Messung. Sie geht auf ein einziges erhaltenes Notizbuch zurück, auf eine Rechnung mit
+dem Wert π = 3, und auf die beiläufige Angabe eines Mühlenbauers, dessen Namen kaum jemand
+kennt. Die Geschichten, die man üblicherweise über die Pferdestärke hört – Watt habe Zugpferde
+vermessen, oder Brauereipferde, oder Grubenponys –, stützen sich fast alle nicht auf das, was
+in Watts eigenen Papieren steht.
+
+Es gibt also zwei Ebenen. Die eine ist gut belegt: ein Rechenbuch, eine konkrete Rechnung, eine
+bewusste Rundung. Die andere ist ein ganzer Kranz einander widersprechender Erzählungen, die
+sich seit über zweihundert Jahren halten. Diese Geschichte handelt von beiden – und davon, wie
+aus einer flüchtigen Schätzung die Einheit wurde, in der wir heute Motoren messen.
+
+<Infobox titel="Worum es geht">
+James Watt brauchte in den 1780er-Jahren eine Zahl, um die Leistung seiner Dampfmaschinen zu
+verkaufen – verglichen mit dem, was Käufer kannten: Pferden. Aus dieser Verkaufsüberlegung
+entstand die Pferdestärke. Der genaue Weg zur Zahl 33.000 lässt sich aus Watts eigenem
+Rechenbuch rekonstruieren. Die populären Versionen der Geschichte weichen davon ab – und
+untereinander auch.
+</Infobox>
+
+## Warum überhaupt ein Pferd? Weil das Pferd der Wettbewerber war
+
+Um zu verstehen, warum jemand eine Maschine ausgerechnet in Pferden misst, muss man wissen,
+wogegen diese Maschine antrat. Nicht gegen andere Motoren – die gab es praktisch nicht. Sondern
+gegen Pferde.
+
+In den 1770er- und 1780er-Jahren kam die Antriebskraft in Mühlen, Brauereien und Bergwerken
+überwiegend von Pferden, die im Kreis gingen und über einen sogenannten Göpel eine Welle
+drehten. Wer eine Dampfmaschine kaufen sollte, stellte deshalb eine sehr praktische Frage: Wie
+viele Pferde ersetzt mir dieses Ding? Genau darauf brauchte Watt eine Antwort, die ein Käufer
+sofort verstand.
+
+Dazu kommt ein Detail, das gern übersehen wird, aber das eigentliche Motiv liefert. Boulton &
+Watt verkauften ihre Maschinen oft nicht einfach gegen einen Festpreis. Ein Teil ihres Geldes
+kam über Lizenzgebühren – und bei den Bergwerken bemaß sich diese Gebühr an der Brennstoff-Ersparnis
+gegenüber der alten Newcomen-Maschine. Watts Maschine verbrauchte nur rund ein Viertel der
+Kohle. Ein Drittel der so eingesparten Kosten floss an die Firma. Das heißt: Je höher die
+angegebene Leistung einer Maschine, desto besser die Verhandlungsposition. Watt hatte also nicht
+nur ein technisches, sondern auch ein handfestes finanzielles Interesse daran, die
+Pferdeleistung großzügig anzusetzen. Diese Beobachtung wird uns später bei der Rundung wieder
+begegnen.
+
+Watt war nicht der Erste, der Pferde als Maß nutzen wollte. Vor ihm hatten das andere versucht –
+und schon an ihren Zahlen sieht man, wie unsicher der Boden war, auf dem sich das alles bewegte.
+
+## Vier Vorgänger, vier verschiedene Pferde
+
+Wer glaubt, die Leistung eines Pferdes sei eine feste Naturkonstante, muss sich nur ansehen, was
+die Ingenieure vor Watt herausbekamen. Die Werte lagen weit auseinander.
+
+Der Ingenieur John Smeaton schätzte die Dauerleistung eines Pferdes zunächst auf rund 22.916
+Fuß-Pfund pro Minute. John Desaguliers kam auf 44.000 – fast das Doppelte. In manchen Quellen
+wird Desaguliers auch mit 27.500 zitiert, was die Verwirrung nur vergrößert. Thomas Tredgold
+wiederum nannte 27.500 Fuß-Pfund pro Minute.
+
+Diese Spanne ist kein Zeichen von Schlamperei. Sie zeigt etwas Grundsätzliches: „Die Leistung
+eines Pferdes" gibt es nicht. Sie hängt davon ab, welches Pferd, wie lange, mit welcher Last,
+über welche Strecke, an welchem Tag. Ein frisches Pferd im Sprint leistet ein Vielfaches dessen,
+was dasselbe Pferd über einen Acht-Stunden-Tag durchhält. Wer eine einzige Zahl will, muss sich
+also entscheiden – und jede Entscheidung ist ein Stück weit willkürlich.
+
+Vor diesem Hintergrund tat Watt etwas, das im Rückblick fast unspektakulär wirkt. Er stützte
+sich nicht auf ein großes Experiment, sondern auf eine Zahl, die ihm ein Fachmann nannte.
+
+## Das Notizbuch: was Watt wirklich aufschrieb
+
+Der beste Beleg dafür, wie die Pferdestärke entstand, ist kein Experiment und keine
+Veröffentlichung, sondern eine Kladde. Unter Watts erhaltenen Papieren befindet sich ein
+Rechenbuch, das den Titel „Blotting and Calculation Book 1782 & 1783" trägt. Die Wissenschaftshistoriker
+H. W. Dickinson und Rhys Jenkins haben es in ihrem bis heute maßgeblichen Werk *James Watt and
+the Steam Engine* (Oxford 1927) ausgewertet. Was darin steht, ist ernüchternd konkret.
+
+In einem Eintrag vom August 1782 rechnet Watt aus, wie groß eine Maschine sein müsste, um eine
+Papiermühle anzutreiben, die damals von zwölf Pferden betrieben wurde. Die Zahlen, mit denen er
+rechnet, stammen nicht von ihm selbst. Er notiert sinngemäß: Herr Wriggley, der Mühlenbauer des
+Besitzers, sage, ein Mühlenpferd laufe in einem Kreis von 24 Fuß Durchmesser und mache 2½
+Umläufe pro Minute – bei etwa 180 Pfund pro Pferd.
+
+Das ist der ganze Ursprung. Kein Versuchsaufbau, keine Messreihe. Ein Mühlenbauer nennt aus
+Erfahrung drei Zahlen – Kreisdurchmesser, Umläufe, Zugkraft –, und Watt rechnet damit weiter.
+Die 180 Pfund sind dabei ausdrücklich eine Schätzung der Kraft, die das Pferd ausübt, nicht ein
+gemessener Wert.
+
+Aus diesen drei Angaben ergibt sich die Leistung durch eine einzige Multiplikation. Der Weg, den
+das Pferd pro Minute zurücklegt, ist der Umfang des Kreises mal die Zahl der Umläufe; die
+Leistung ist dieser Weg mal die Kraft. Watt rechnete den Umfang mit dem Näherungswert π = 3 –
+also Durchmesser mal 3.
+
+<HerleitungPS />
+
+Das Ergebnis: 24 × 3 × 2½ × 180 = 32.400 Fuß-Pfund pro Minute. Das ist die tatsächliche erste
+Zahl, die Watt notierte. Nicht 33.000. Nicht die runde Zahl, die heute in den Büchern steht.
+32.400 – entstanden aus der Angabe eines Mühlenbauers und einem bewusst grob gehaltenen π.
+
+Man kann an dieser Rechnung schön sehen, wie viel Spielraum in ihr steckt. Hätte Watt mit einem
+genaueren π gerechnet, wäre er auf 33.912 gekommen. Nähme man einen Kreis mit 12 Fuß Radius und
+den genauen Wert von π, käme 32.572 heraus – eine dritte Zahl aus praktisch denselben
+Ausgangsdaten. Schon die kleine Frage, wie genau man π ansetzt, verschiebt das Ergebnis um
+Hunderte von Fuß-Pfund.
+
+## Aus 32.400 wird 33.000: die zweite Eintragung
+
+Wäre es bei 32.400 geblieben, wäre die Pferdestärke heute eine krumme Zahl. Doch im selben
+Rechenbuch, unter dem September 1783, taucht der Wert verändert wieder auf – nun als 33.000.
+Dickinson und Jenkins nennen mehrere Gründe, die für diese Änderung sprechen, und keiner davon
+ist eine neue Messung.
+
+Der erste Grund ist schlicht Bequemlichkeit. 33.000 ist eine Zahl, mit der sich leicht rechnen
+lässt. Sie ist ein Vielfaches von 60 – und weil Leistung pro Minute gerechnet wird, ist ein
+Vielfaches der Minutenzahl besonders praktisch. Der zweite Grund ist der, den wir schon kennen:
+Watt setzte die Leistung lieber etwas zu hoch als zu niedrig an. Dampfkraft war neu, die Käufer
+skeptisch, und eine Maschine, die weniger leistete als versprochen, fiel stärker auf als eine,
+die genau lieferte. Nach dem alten Ingenieursgrundsatz, dass zu groß besser ist als zu knapp,
+war eine großzügige Zahl die sichere Wahl. Und drittens, das schwingt bei Boulton & Watt immer
+mit, half eine höhere Zahl auch beim Geld – siehe die Lizenzgebühren.
+
+Damit ist die berühmte 33.000 keine Naturkonstante und kein Messergebnis, sondern eine gerundete,
+bewusst großzügig gewählte Zahl aus einer Kladde. Eine Schätzung auf der Rückseite eines
+Briefumschlags, wie man im Englischen sagt – nur dass sie zufällig die Einheit wurde, in der die
+Welt zweihundert Jahre später ihre Motoren misst.
+
+Ein hübsches Detail am Rande: In Watts eigener Firma sprach niemand von „horsepower". Man sagte
+schlicht „horse". Eine Maschine war eine „10-horse engine", eine Maschine mit der Kraft von zehn
+Pferden. Das Wort Pferdestärke als feststehende Einheit kam erst später.
+
+## Der Zahlen-Wirrwarr: dieselbe Herkunft, lauter verschiedene Werte
+
+Wenn man alle Zahlen zusammenträgt, die im Umlauf sind, entsteht ein verwirrendes Bild. Sie
+stammen im Kern alle aus derselben Grundüberlegung – Kraft mal Weg pro Zeit –, und trotzdem
+weichen sie erheblich voneinander ab. Der Grund ist jedes Mal eine andere Annahme irgendwo in
+der Rechnung.
+
+<ZahlenWirrwarr />
+
+Die 32.400 sind Watts echte Rechnung mit π = 3. Verwirrenderweise taucht genau dieselbe Zahl in
+manchen Quellen mit einer völlig anderen Geschichte auf: Dort heißt es, Watt habe 1782 „durch
+ein Experiment" festgestellt, dass ein „Brauereipferd" 32.400 Fuß-Pfund pro Minute leisten
+könne. Dieselbe Zahl, zwei unvereinbare Herkünfte – die eine aus dem Notizbuch belegt, die
+andere eine oft wiederholte Erzählung.
+
+Die 32.572 entstehen, wenn man mit einem Kreisradius von 12 Fuß und dem genauen Wert von π
+rechnet – so steht es heute in mancher Enzyklopädie. Die 33.912 sind das, was Watts eigene
+Ausgangszahlen mit exaktem π ergeben hätten. Und dann gibt es noch Werte, die schlicht auf
+Rechenfehlern beruhen, etwa wenn jemand den Weg pro Umlauf mit dem Weg pro Minute verwechselt.
+Jede dieser Zahlen lässt sich zu einer bestimmten Annahme zurückverfolgen. Keine ist einfach
+„falsch" – sie sind das Ergebnis davon, dass eine grobe Schätzung nachträglich immer wieder neu
+und mit unterschiedlichen Annahmen nachgerechnet wurde.
+
+## Die Legenden: welches Pferd war es nun wirklich?
+
+Wenn man Menschen fragt, wie die Pferdestärke entstand, bekommt man selten die Notizbuch-Version
+zu hören. Man bekommt eine von mehreren Geschichten, die alle plausibel klingen, alle irgendwo
+geschrieben stehen – und die sich gegenseitig ausschließen. Das Bemerkenswerte ist: Gerade die
+am häufigsten erzählten Versionen sind die, die sich am schlechtesten belegen lassen.
+
+**Die Zugpferd-Version.** Die verbreitetste Erzählung besagt, Watt habe selbst Experimente mit
+kräftigen Zugpferden angestellt und daraus die Zahl gewonnen. Diese Version hat einen klaren
+Ursprung: Die Pferdestärke wurde erstmals im Januar 1809 in gedruckter Form definiert, in einem
+Artikel der Zeitschrift *Edinburgh Review* – und dort wird sie den Experimenten mit Zugpferden
+zugeschrieben. Genau diese Darstellung halten Dickinson und Jenkins für wahrscheinlich falsch.
+Ihr Gegenbeleg ist das Notizbuch: Dort steht kein Experiment, sondern die Angabe eines
+Mühlenbauers. Die gedruckte Erstdefinition erzählt also schon eine Geschichte, die von Watts
+eigenen Aufzeichnungen nicht gedeckt ist.
+
+**Die Brauerei-Version.** Eine zweite Erzählung verlegt die Szene in eine Brauerei: Watt habe die
+Kraft eines Brauereipferds bestimmt, oft verbunden mit der berühmten Brauerei Whitbread. Hier
+gibt es ein Zeitproblem. Die Whitbread-Dampfmaschine, die man in diesem Zusammenhang gern nennt,
+wurde erst 1785 gebaut – nach der Prägung der Zahl im Rechenbuch von 1782/83. Und pikanterweise
+hatte diese Maschine selbst eine Leistung von rund 35 PS, also etwa 26 Kilowatt. Als Beleg für
+die Herkunft der Einheit taugt sie schon aus zeitlichen Gründen nicht.
+
+**Die Grubenpony-Version.** Eine dritte Version, die vor allem im deutschen Sprachraum kursiert,
+handelt von Grubenponys: Watt habe die Leistung eines Ponys bestimmt und sie dann um die Hälfte
+erhöht, weil ein ausgewachsenes Pferd stärker sei als ein Pony. Auch hier lässt sich in Watts
+Papieren kein Beleg finden; die Rechnung im Notizbuch spricht von einem Mühlenpferd, nicht von
+einem Pony mit nachträglichem Aufschlag.
+
+**Die Kohlesack-Version.** Und schließlich gibt es die Erzählung, Watt habe beobachtet, wie ein
+Pferd über eine Schicht hinweg Kohlesäcke hob – so und so viel Pfund, so und so viele Fuß hoch,
+über eine bestimmte Zeit –, und daraus die Zahl gebildet. Auch das ist eine in sich schlüssige,
+aber quellenkritisch nicht gestützte Version.
+
+Man muss diese Geschichten nicht als Lügen abtun. Es sind Erzählungen, die sich über zwei
+Jahrhunderte angelagert haben, weil sie anschaulicher sind als die Wahrheit. Ein Mann, der ein
+kräftiges Pferd bei schwerer Arbeit vermisst, ist ein besseres Bild als ein Ingenieur, der die
+beiläufige Bemerkung eines Mühlenbauers in eine Kladde überträgt und mit π = 3 hochrechnet. Nur
+ist eben Letzteres das, was sich belegen lässt – und Ersteres nicht.
+
+<Infobox titel="Warum diese Vorsicht?">
+Die seriöse Wissenschaftsgeschichte sagt nicht „so und nicht anders war es". Dickinson und
+Jenkins schreiben, die Experiment-Version sei „probably not so" – wahrscheinlich nicht so. Das
+ist ein wichtiger Unterschied. Das Notizbuch ist der beste erhaltene Beleg, aber es ist ein
+einzelnes Dokument. Wir sagen deshalb: am besten belegt, nicht: bewiesen. Genau diese
+Unterscheidung geht in den populären Versionen meist verloren.
+</Infobox>
+
+## Zwei Pferdestärken, die nicht gleich sind: HP und PS
+
+Bis hierher ging es um die angelsächsische Pferdestärke, das *horsepower* mit seinen 33.000
+Fuß-Pfund pro Minute. Auf dem europäischen Kontinent entstand parallel eine zweite Pferdestärke –
+die metrische PS. Und die beiden sind, was viele überrascht, nicht identisch.
+
+Rechnet man Watts 33.000 Fuß-Pfund pro Minute ins metrische System um, landet man bei rund 76,04
+Kilopondmeter pro Sekunde. Auch das ist eine krumme Zahl. Und wie schon Watt entschied man sich
+auf dem Kontinent, sie zu runden – nur diesmal nach unten, auf glatte 75 Kilopondmeter pro
+Sekunde. Genau das ist die Definition der metrischen Pferdestärke: 1 PS = 75 kp·m/s = 735,49875
+Watt, also rund 0,7355 Kilowatt (festgehalten unter anderem in der Norm DIN 66036).
+
+Die angelsächsische Variante liegt dagegen bei etwa 745,7 Watt. Der Unterschied zwischen beiden
+Pferdestärken beträgt rund 1,4 Prozent – eine kleine, aber reale Differenz, die einzig daher
+rührt, dass zwei Kulturen dieselbe krumme Grundzahl an unterschiedlichen Stellen gerundet haben.
+Es gibt also nicht die eine Pferdestärke, sondern zwei, und welche gemeint ist, hängt davon ab,
+auf welcher Seite des Ärmelkanals man rechnet.
+
+<HpVsPs />
+
+Man kann die ganze Geschichte in dieser Grafik zusammenlaufen sehen: eine Schätzung, die zur
+runden Zahl 33.000 aufgerundet wurde, umgerechnet eine zweite krumme Zahl ergibt, die abermals
+gerundet wurde – diesmal auf 75. Zwei Rundungen, zwei Länder, zwei Einheiten, die sich bis heute
+um jene 1,4 Prozent unterscheiden.
+
+## Vom Notizbuch zur Vorschrift: eine kurze Zeitleiste
+
+Die Pferdestärke hat einen bemerkenswert langen Weg hinter sich – von einer privaten Kladde bis
+in die Zulassungspapiere jedes Autos. Und sie ist, rein rechtlich, längst nicht mehr die
+gültige Einheit.
+
+<ZeitleistePS />
+
+Seit dem 1. Januar 1978 ist in Deutschland das Watt beziehungsweise Kilowatt die gesetzliche
+Einheit der Leistung, auf Grundlage europäischer Vorgaben. Die Pferdestärke darf seither nur noch
+als zusätzliche Angabe geführt werden – erlaubt, aber nicht mehr maßgeblich. In der Praxis hat
+sich das Gegenteil durchgesetzt: Kaum jemand beschreibt ein Auto über seine Kilowatt. Die
+gesetzlich nachrangige Einheit ist die, die alle im Kopf haben.
+
+Das ist vielleicht die eigentliche Pointe. James Watt hat die Dampfmaschine so weit verbessert,
+dass sie das Arbeitspferd aus Mühlen, Brauereien und Bergwerken verdrängte. Zum Dank trägt die
+Einheit der Leistung seinen Namen – das Watt. Aber die Einheit, mit der wir tatsächlich über
+Motoren sprechen, ist ausgerechnet die, die noch das verschwundene Pferd im Namen trägt.
+
+## Und wie stark ist ein echtes Pferd?
+
+Nachdem so viel von gerundeten und geschätzten Zahlen die Rede war, drängt sich die Frage auf:
+Wie viel leistet ein echtes Pferd eigentlich? Die etwas ernüchternde Antwort lautet – weniger,
+als eine Pferdestärke.
+
+Moderne Messungen zeigen, dass ein durchschnittliches Pferd über einen Arbeitstag von acht
+Stunden hinweg dauerhaft nur etwa 0,6 PS leistet. Das passt exakt zu dem, was wir über Watts
+Absicht wissen: Er wollte lieber zu großzügig als zu knapp rechnen, damit seine Maschinen im
+Zweifel mehr hielten als versprochen. Die Einheit „ein Pferd" ist also von Anfang an ein
+optimistisches Pferd gewesen, kein durchschnittliches.
+
+Kurzfristig sieht die Sache anders aus. Für wenige Sekunden kann ein kräftiges Pferd ein
+Vielfaches leisten – Spitzenwerte von weit über zehn PS sind belegt. Aber genau das ist der
+Punkt, an dem jede einzelne Pferdestärke-Zahl scheitern muss: Es kommt völlig darauf an, ob man
+den kurzen Kraftakt meint oder die Dauerleistung über einen ganzen Tag. Watt entschied sich für
+etwas dazwischen, aufgerundet – und diese eine Entscheidung steckt bis heute in jeder
+Leistungsangabe.
+
+## Kilowatt und PS umrechnen
+
+Wer heute mit beiden Einheiten zu tun hat – etwa beim Autokauf, wo im Schein das Kilowatt steht,
+im Gespräch aber die PS –, muss ständig zwischen ihnen hin und her rechnen. Der Umrechnungsfaktor
+ist genau jene krumme Zahl, um die es oben ging: 1 PS sind rund 0,7355 kW, und 1 kW sind rund
+1,36 PS.
+
+<RechnerLoader slug="kw-ps-umrechner" />
+
+<KarstenSagt>
+%% DIESER BLOCK WIRD VON KARSTEN SELBST GEFÜLLT — NICHT VON CLAUDE %%
+</KarstenSagt>
+
+<Quellen eintraege={[
+  {
+    titel: 'H. W. Dickinson & Rhys Jenkins: James Watt and the Steam Engine (Oxford, 1927)',
+    hinweis: 'Das wissenschaftshistorische Standardwerk. Wertet Watts erhaltenes „Blotting and Calculation Book 1782 & 1783" aus und ordnet die verbreitete Zugpferd-Experiment-Version als „probably not so" (wahrscheinlich nicht so) ein.',
+  },
+  {
+    titel: 'Sizes.com: British horsepower',
+    url: 'https://www.sizes.com/units/horsepower_british.htm',
+    hinweis: 'Gibt Dickinson & Jenkins ausführlich wieder, inklusive des wörtlichen Notizbuch-Zitats (Mühlenbauer Wriggley, 24 Fuß Durchmesser, 2½ Umläufe, 180 lb) und der Rechnung 24 × 3 × 2½ × 180 = 32.400.',
+  },
+  {
+    titel: 'Wikipedia: Pferdestärke',
+    url: 'https://de.wikipedia.org/wiki/Pferdest%C3%A4rke',
+    hinweis: 'Deutschsprachige Übersicht zu PS und HP, DIN 66036, der Watt-Pflicht seit 1978 und den kursierenden Herkunftslegenden (u. a. Grubenpony, Kohlesäcke). Nennt für die Herleitung teils abweichende Zahlen (12 Fuß Radius, genaues π → 32.572) — ein Beispiel dafür, wie unterschiedlich dieselbe Grundrechnung wiedergegeben wird.',
+  },
+  {
+    titel: 'Wikipedia: Whitbread Engine',
+    url: 'https://en.wikipedia.org/wiki/Whitbread_Engine',
+    hinweis: 'Belegt Baujahr 1785 und die Leistung von rund 35 PS / 26 kW — womit die „Brauereipferd"-Version schon zeitlich nach der Prägung der Zahl (1782/83) liegt.',
+  },
+]} />

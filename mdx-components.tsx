@@ -11,6 +11,10 @@ import MeterTriangulationAnimiert from '@/components/blog/grafik/MeterTriangulat
 import MeterLotabweichung from '@/components/blog/grafik/MeterLotabweichung';
 import MeterZeitleiste from '@/components/blog/grafik/MeterZeitleiste';
 import MeterSollIst from '@/components/blog/grafik/MeterSollIst';
+import HerleitungPS from '@/components/blog/grafik/HerleitungPS';
+import ZahlenWirrwarr from '@/components/blog/grafik/ZahlenWirrwarr';
+import HpVsPs from '@/components/blog/grafik/HpVsPs';
+import ZeitleistePS from '@/components/blog/grafik/ZeitleistePS';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -62,6 +66,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     MeterLotabweichung,
     MeterZeitleiste,
     MeterSollIst,
+    HerleitungPS,
+    ZahlenWirrwarr,
+    HpVsPs,
+    ZeitleistePS,
     ...components,
   };
 }
