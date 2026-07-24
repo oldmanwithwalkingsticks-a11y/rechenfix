@@ -24,6 +24,7 @@ import { berechneTriinkgeld, type TrinkgeldErgebnis } from '@/lib/berechnungen/t
 import { berechneNettoZuBrutto, berechneBruttoZuNetto, type MwStErgebnis } from '@/lib/berechnungen/mwst';
 import { berechneProzentwert, berechneProzentsatz, berechneGrundwert, berechneAufschlag, berechneAbschlag, type ProzentErgebnis } from '@/lib/berechnungen/prozent';
 import { berechneRaucherKosten, type RaucherErgebnis } from '@/lib/berechnungen/raucher';
+import { berechneRabatt, berechneRabattProzent, berechneDoppelrabatt, type RabattErgebnis, type DoppelrabattErgebnis } from '@/lib/berechnungen/rabatt';
 
 // Eine Anzeige-Zeile der strukturierten Ergebnis-Tabelle (Client rendert daraus React-Tabelle).
 export interface AnzeigeZeile { label: string; wert: string; highlight?: boolean; }
@@ -609,7 +610,7 @@ export const KI_TOOLS: KiTool[] = [
   },
   {
     name: 'berechne_prozent',
-    description: 'Prozent-Grundaufgaben: X Prozent von Y, Anteil in Prozent, Grundwert aus Prozentwert, Aufschlag (Erhöhung) und Abschlag (Rabatt/Reduzierung). Bei Fragen wie "15% Rabatt auf 89,99€", "wie viel sind 20% von 400", "wie viel Prozent sind 30 von 200".',
+    description: 'Prozent-Grundaufgaben: X Prozent von Y, Anteil in Prozent, Grundwert aus Prozentwert, Aufschlag (Erhöhung) und Abschlag (Reduzierung eines Werts). Bei Fragen wie "wie viel sind 20% von 400", "wie viel Prozent sind 30 von 200". Für Preisnachlässe/Rabatte auf Geldbeträge (Euro-Preise) stattdessen berechne_rabatt verwenden; modus=abschlag hier nur für nicht-monetäre Abschläge.',
     input_schema: {
       type: 'object',
       properties: {
@@ -670,6 +671,41 @@ export const KI_TOOLS: KiTool[] = [
       { label: 'Kosten pro Tag', wert: formatEuro(x.kostenProTag) },
       { label: 'Kosten gesamt', wert: formatEuro(x.kostenGesamt) },
     ]; },
+  },
+  {
+    name: 'berechne_rabatt',
+    description: 'Berechnet Rabatte auf Preise: Endpreis und Ersparnis bei X% Rabatt, den Rabattprozentsatz aus Original- und Endpreis, oder zwei aufeinanderfolgende Rabatte (Doppelrabatt, z.B. "20% plus zusätzlich 10%"). Bei Fragen zu Rabatt, Prozent-Nachlass, reduziert, Sale, Sonderangebot, "wie viel spare ich".',
+    input_schema: {
+      type: 'object',
+      properties: {
+        modus: {
+          type: 'string',
+          enum: ['rabatt', 'rabattProzent', 'doppelrabatt'],
+          description: 'rabatt = Endpreis bei gegebenem Prozentsatz | rabattProzent = Prozentsatz aus Original- und Endpreis | doppelrabatt = zwei Rabatte nacheinander',
+        },
+        originalpreis: { type: 'number', description: 'Ursprünglicher Preis in Euro' },
+        wertB: { type: 'number', description: 'Bei modus=rabatt: Rabatt in Prozent (ganze Zahl, z.B. 15). Bei modus=rabattProzent: der Endpreis in Euro. Bei modus=doppelrabatt: der erste Rabatt in Prozent.' },
+        rabatt2: { type: 'number', description: 'Nur bei modus=doppelrabatt: zweiter Rabatt in Prozent. Sonst 0.' },
+      },
+      required: ['modus', 'originalpreis', 'wertB', 'rabatt2'],
+    },
+    rechnerSlug: 'alltag/rabattrechner',
+    run: (i) => {
+      const p = i as { modus: string; originalpreis: number; wertB: number; rabatt2: number };
+      if (p.modus === 'rabattProzent') return berechneRabattProzent(p.originalpreis, p.wertB);
+      if (p.modus === 'doppelrabatt') return berechneDoppelrabatt(p.originalpreis, p.wertB, p.rabatt2);
+      return berechneRabatt(p.originalpreis, p.wertB);
+    },
+    anzeige: (r) => {
+      const x = r as RabattErgebnis | DoppelrabattErgebnis;
+      const prozent = 'gesamtRabattProzent' in x ? x.gesamtRabattProzent : x.rabattProzent;
+      const prozentLabel = 'gesamtRabattProzent' in x ? 'Gesamtrabatt' : 'Rabatt';
+      return [
+        { label: 'Endpreis', wert: formatEuro(x.endpreis), highlight: true },
+        { label: 'Ersparnis', wert: formatEuro(x.ersparnis) },
+        { label: prozentLabel, wert: formatProzent(prozent, 2) },
+      ];
+    },
   },
 ];
 
