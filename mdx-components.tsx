@@ -6,6 +6,7 @@ import KarstenSagt from '@/components/blog/KarstenSagt';
 import Quellen from '@/components/blog/Quellen';
 import Bild from '@/components/blog/Bild';
 import Video from '@/components/blog/Video';
+import ArtikelDatum from '@/components/blog/ArtikelDatum';
 import MeterFehleranteile from '@/components/blog/grafik/MeterFehleranteile';
 import MeterTriangulation from '@/components/blog/grafik/MeterTriangulation';
 import MeterTriangulationAnimiert from '@/components/blog/grafik/MeterTriangulationAnimiert';
@@ -62,6 +63,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Quellen,
     Bild,
     Video,
+    ArtikelDatum,
     MeterFehleranteile,
     MeterTriangulation,
     MeterTriangulationAnimiert,

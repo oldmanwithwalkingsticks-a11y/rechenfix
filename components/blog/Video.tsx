@@ -26,7 +26,7 @@ export default function Video({
         loop
         muted
         playsInline
-        preload="metadata"
+        preload="none"
         className="rounded-xl w-full h-auto"
       />
       {caption && (
