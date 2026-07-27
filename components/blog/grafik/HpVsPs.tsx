@@ -4,11 +4,15 @@
  * Server-Komponente. SVG — Dark Mode über <style> mit .dark-Selektor (Regel 2),
  * Balken-Füllungen im Dark abgedunkelt, damit heller Text darauf lesbar bleibt.
  * fill-Attribut an <text>/<rect> bewusst weggelassen, className gewinnt.
+ *
+ * Layout-Hinweis: Die langen Herkunftsangaben stehen bewusst UNTER dem jeweiligen
+ * Balken (linksbündig, x=24), nicht im Balken — SVG-Text bricht nicht um und würde
+ * sonst über die Balkenkante hinauslaufen. Im Balken steht nur der kurze Watt-Wert.
  */
 export default function HpVsPs() {
   return (
     <figure className="my-8">
-      <svg width="100%" viewBox="0 0 680 340" role="img" xmlns="http://www.w3.org/2000/svg" className="rounded-xl text-gray-900 dark:text-gray-100">
+      <svg width="100%" viewBox="0 0 680 360" role="img" xmlns="http://www.w3.org/2000/svg" className="rounded-xl text-gray-900 dark:text-gray-100">
         <style>{`
           .bar-hp { fill: #E1F5EE; }
           .bar-ps { fill: #FAEEDA; }
@@ -29,19 +33,19 @@ export default function HpVsPs() {
         <text x="24" y="34" fontSize="17" fontWeight="500" fill="currentColor">Zwei Pferdestärken, zwei Rundungen</text>
         <text x="24" y="54" fontSize="12" fill="#9ca3af">Dieselbe Grundzahl, an verschiedenen Stellen gerundet — daher rund 1,4 % Unterschied.</text>
 
-        {/* HP-Balken (breiter, 745,7 W) */}
-        <text x="24" y="108" fontSize="14" fontWeight="500" className="t-teal">Angelsächsisch — HP</text>
-        <rect className="bar-hp" x="24" y="120" width="600" height="46" rx="6" stroke="#0F6E56" strokeWidth="1" />
-        <text x="40" y="148" fontSize="15" fontWeight="600" className="t-teal">≈ 745,7 Watt</text>
-        <text x="360" y="148" fontSize="12" className="t-teal">33.000 Fuß-Pfund/Minute (aufgerundet von 32.400)</text>
+        {/* HP-Balken (breiter, 745,7 W) — Herkunft steht UNTER dem Balken */}
+        <text x="24" y="104" fontSize="14" fontWeight="500" className="t-teal">Angelsächsisch — HP</text>
+        <rect className="bar-hp" x="24" y="116" width="600" height="44" rx="6" stroke="#0F6E56" strokeWidth="1" />
+        <text x="40" y="144" fontSize="16" fontWeight="600" className="t-teal">≈ 745,7 Watt</text>
+        <text x="24" y="180" fontSize="12" fill="#9ca3af">33.000 Fuß-Pfund/Minute — aufgerundet von 32.400</text>
 
-        {/* PS-Balken (etwas schmaler, 735,5 W) */}
-        <text x="24" y="212" fontSize="14" fontWeight="500" className="t-brown">Metrisch — PS</text>
-        <rect className="bar-ps" x="24" y="224" width="592" height="46" rx="6" stroke="#854F0B" strokeWidth="1" />
-        <text x="40" y="252" fontSize="15" fontWeight="600" className="t-brown">≈ 735,5 Watt</text>
-        <text x="360" y="252" fontSize="12" className="t-brown">75 kp·m/s (abgerundet von 76,04)</text>
+        {/* PS-Balken (etwas schmaler, 735,5 W) — Herkunft steht UNTER dem Balken */}
+        <text x="24" y="228" fontSize="14" fontWeight="500" className="t-brown">Metrisch — PS</text>
+        <rect className="bar-ps" x="24" y="240" width="592" height="44" rx="6" stroke="#854F0B" strokeWidth="1" />
+        <text x="40" y="268" fontSize="16" fontWeight="600" className="t-brown">≈ 735,5 Watt</text>
+        <text x="24" y="304" fontSize="12" fill="#9ca3af">75 kp·m/s — abgerundet von 76,04</text>
 
-        <text x="24" y="308" fontSize="12" fill="#9ca3af">Watt rundete nach oben, der Kontinent nach unten. Der Rest ist bis heute jene 1,4 %.</text>
+        <text x="24" y="344" fontSize="12" fill="#9ca3af">Watt rundete nach oben, der Kontinent nach unten. Der Rest ist bis heute jene 1,4 %.</text>
       </svg>
     </figure>
   );
