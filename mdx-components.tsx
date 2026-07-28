@@ -17,6 +17,10 @@ import HerleitungPS from '@/components/blog/grafik/HerleitungPS';
 import ZahlenWirrwarr from '@/components/blog/grafik/ZahlenWirrwarr';
 import HpVsPs from '@/components/blog/grafik/HpVsPs';
 import ZeitleistePS from '@/components/blog/grafik/ZeitleistePS';
+import GerstenkornStreuung from '@/components/blog/grafik/GerstenkornStreuung';
+import ViertelVsDrittel from '@/components/blog/grafik/ViertelVsDrittel';
+import NormVsEtikett from '@/components/blog/grafik/NormVsEtikett';
+import ZeitleisteSchuhgroesse from '@/components/blog/grafik/ZeitleisteSchuhgroesse';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -74,6 +78,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ZahlenWirrwarr,
     HpVsPs,
     ZeitleistePS,
+    GerstenkornStreuung,
+    ViertelVsDrittel,
+    NormVsEtikett,
+    ZeitleisteSchuhgroesse,
     ...components,
   };
 }

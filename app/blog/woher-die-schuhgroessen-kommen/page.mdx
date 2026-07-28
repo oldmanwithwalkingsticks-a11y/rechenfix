@@ -1,0 +1,261 @@
+import { generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import StructuredData from '@/components/seo/StructuredData';
+import { artikel } from './meta';
+
+export const metadata = {
+  title: `${artikel.titel} | Rechenfix.de`,
+  description: artikel.beschreibung,
+  alternates: { canonical: 'https://www.rechenfix.de/blog/woher-die-schuhgroessen-kommen' },
+};
+
+<StructuredData data={generateArticleSchema({
+  url: 'https://www.rechenfix.de/blog/woher-die-schuhgroessen-kommen',
+  headline: artikel.titel,
+  description: artikel.beschreibung,
+  datePublished: artikel.datum,
+  dateModified: artikel.datum,
+  image: '/blog/schuhgroessen-titelbild.png',
+})} />
+
+<StructuredData data={generateBreadcrumbSchema([
+  { name: 'Start', url: '/' },
+  { name: 'Blog', url: '/blog' },
+  { name: artikel.titel, url: '/blog/woher-die-schuhgroessen-kommen' },
+])} />
+
+# Woher die Schuhgrößen kommen – und warum Größe 42 keine 42 Zentimeter ist
+
+<ArtikelDatum datum={artikel.datum} />
+
+Ein Fuß in Schuhgröße 42 ist rund 26,7 Zentimeter lang. Die 42 ist also weder eine Länge in
+Zentimetern noch in Zoll noch in irgendeiner Einheit, die man am Fuß nachmessen könnte. Sie ist
+die Anzahl von Schritten auf einer Skala, die vor gut zweihundert Jahren in Frankreich festgelegt
+wurde – und die neben mindestens zwei anderen Skalen existiert, die von ganz anderen Nullpunkten
+und ganz anderen Grundeinheiten ausgehen. Deshalb passt derselbe Fuß je nach Hersteller in drei
+verschiedene Nummern. Das ist kein Versagen der Hersteller. Es ist im System angelegt.
+
+<Bild src="/blog/schuhgroessen-titelbild.png" alt="Eine historische Schuhmacherwerkbank: ein hölzerner Schuhleisten, ein Messstab und eine Handvoll Gerstenkörner, die in einer Reihe aneinandergelegt sind" caption="Leisten, Messstab, Gerstenkörner: die drei Dinge, aus denen die heutigen Schuhgrößensysteme entstanden sind." width={1200} height={675} />
+
+<Infobox titel="Worum es geht">
+Drei Größensysteme stehen nebeneinander: das europäische, das britische und das amerikanische.
+Sie messen unterschiedliche Dinge, sie beginnen an unterschiedlichen Nullpunkten, und ihre
+Herkunftsgeschichten sind zum großen Teil nicht belegt. Die internationale Norm, die zwischen
+ihnen vermitteln soll, räumt in ihrem eigenen Text ein, dass eine exakte Umrechnung nicht
+möglich ist.
+</Infobox>
+
+## Was die Zahl auf dem Schuh tatsächlich misst
+
+Die europäische Größe zählt keine Zentimeter, sondern **Stich**. Ein Pariser Stich ist zwei
+Drittel Zentimeter, also 6,67 Millimeter. Größe 42 heißt: 42 Stich – 28 Zentimeter. Aber auch
+diese 28 Zentimeter sind nicht der Fuß. Gemessen wird der **Leisten**, die Holz- oder
+Kunststoffform, über die der Schuh gebaut wird. Der Leisten ist länger als der Fuß, weil die
+Zehen Platz brauchen.
+
+Wie viel länger, ist die entscheidende Frage – und dafür gibt es keine verbindliche Antwort. Die
+internationale Norm ISO 19407 setzt die Differenz empirisch mit zwei Stich an, also etwa 1,3
+Zentimetern. Dieselbe Norm hält aber ausdrücklich fest, dass daneben ein zweiter Rechenweg in
+Gebrauch ist, der stattdessen mit fünf Prozent Zugabe arbeitet. Beide führen zwischen Größe 38
+und 46 zu fast identischen Ergebnissen und weichen an den Rändern um eine halbe Größe
+voneinander ab. Zwei gültige Auslegungen desselben Systems – und der Kunde sieht auf dem Etikett
+nur die Zahl.
+
+Noch grundsätzlicher: Die Norm stellt fest, dass die europäische Größe **je nach Herkunftsland
+entweder auf die Leistenlänge oder auf die Fußlänge bezogen** wird. Es ist also nicht einmal
+festgelegt, was die Zahl misst.
+
+## Die Nähmaschine, die es noch gar nicht gab
+
+Woher der Pariser Stich kommt, wird auf deutschen Händlerseiten fast überall gleich erzählt: Er
+sei die Stichlänge der Doppelnaht einer Nähmaschine. Das klingt einleuchtend und ist in dieser
+Form nicht haltbar.
+
+Der Pariser Stich wird üblicherweise auf **um 1800** datiert. Die erste praxistauglich gebaute
+Nähmaschine ließ Barthélemy Thimonnier am 17. Juli 1830 patentieren. Die
+Doppelsteppstich-Maschine, auf die sich die Erzählung beruft, entwickelte Elias Howe 1845/46. Ein
+Maß von 1800 kann seinen Ursprung nicht in einer Maschine haben, die es erst dreißig bis fünfzig
+Jahre später gab.
+
+Auffällig ist, dass die Quellen den Widerspruch selbst mitliefern, ohne ihn zu bemerken: Ein Teil
+datiert den Stich auf „um 1800", ein anderer auf „Mitte des 19. Jahrhunderts" – und beide nennen
+die Nähmaschine als Ursprung. Wer den Stich in die Jahrhundertmitte legt, macht die Erzählung
+chronologisch möglich, verliert dafür aber die Datierung, die in den Nachschlagewerken steht.
+
+Plausibel bleibt der Stich als Maß der **Handnaht**: Schuster nähten Sohle und Schaft von Hand,
+und die Stichdichte war ein vertrautes Maß in der Werkstatt. Ein belegtes Gründungsdokument für
+den Pariser Stich gibt es allerdings nicht. Was bleibt, ist die Einheit selbst – 6,67 Millimeter,
+seit über zweihundert Jahren unverändert.
+
+<RechnerLoader slug="schuhgroessen-rechner" />
+
+## Die andere Hälfte der Welt rechnet in Gerstenkörnern
+
+Großbritannien und die USA stufen nicht in 6,67, sondern in 8,47 Millimetern. Das ist ein Drittel
+Zoll – historisch: ein **Gerstenkorn**. Drei Körner, hintereinandergelegt, ergaben einen Zoll.
+
+Als Maßeinheit hat das einen offensichtlichen Haken. Der Forschungsverband der britischen
+Schuhindustrie hält nüchtern fest, dass ein Gerstenkorn je nach Sorte zwischen 4 und 15
+Millimeter lang ist. Die mittelalterlichen Quellen einigten sich auf etwa ein Drittel Zoll – aber
+das war eine Setzung, keine Messung. Wie wenig belastbar das war, zeigt ein Detail aus derselben
+Darstellung: Ein sächsischer Fuß in England maß 39 Gerstenkörner, ein walisischer nur 27. Dieselbe
+Einheit, dieselbe Insel, ein Unterschied von einem Drittel.
+
+<GerstenkornStreuung />
+
+<Video src="/blog/schuhgroessen.mp4" poster="/blog/schuhgroessen-titelbild.png" caption="Drei Gerstenkörner ergeben einen Zoll – so lautete die Regel. Wie zuverlässig sie war, hing davon ab, welche Körner man erwischte." />
+
+## Die Legende von König Edward
+
+Praktisch überall im Netz – und bis vor Kurzem auch auf unserer eigenen Rechnerseite – steht der
+Satz, König Edward II. habe 1324 die Schuhgröße erfunden, indem er drei Gerstenkörner zum Zoll
+erklärte. Beide Hälften dieses Satzes halten der Prüfung nicht stand.
+
+Erstens war die Gerstenkorn-Regel 1324 nicht neu. Das Statut *Composition of Yards and Perches*
+enthielt sie bereits – datiert wird es, wiederum unsicher, auf einen Zeitraum zwischen 1266 und
+1303. Zweitens ging es in Edwards Dekret um Zoll, Fuß, Yard, Rute und Acre. Um Schuhe ging es
+nicht. Das britische Fachmagazin *Country Life* formuliert es unmissverständlich: Edward werde die
+Einführung eines Schuhgrößensystems zwar häufig zugeschrieben, es gebe dafür aber keinen Beleg.
+
+Die Legende ist trotzdem verständlich. Sie liefert, was eine gute Geschichte braucht: ein Datum,
+einen König, einen Grund. Die belegte Version liefert stattdessen ein Statut ohne sicheres Datum
+und eine Einheit, die auf dem Feld wächst.
+
+## Was tatsächlich belegt ist: 1688, und es sind Viertel
+
+Die erste dokumentierte Schuhgrößenskala steht in einem Buch über Wappenkunde. Randle Holme III
+beschreibt 1688 in der *Academy of Armory and Blazon*, wie die Schuhmacher seiner Zeit
+maßnahmen – und sie rechneten nicht in Gerstenkörnern, sondern in **Viertelzoll**.
+
+Nach Holmes Beschreibung sind Kinderschuhe in 13 Stufen geteilt, Männer- und Frauenschuhe in 15.
+Die Skala beginnt bei fünf Zoll, jede weitere Stufe ist ein Viertelzoll. Größe 13 – die „short
+thirteens" – liegt bei 8¼ Zoll, dort beginnt die Erwachsenenskala wieder bei 1 und läuft bis 15,
+was genau zwölf Zoll ergibt.
+
+Ein Größensystem auf Basis eines Drittelzolls, also des Gerstenkorns, ist erst rund
+hundertsiebzig Jahre später dokumentiert: 1856, bei Robert Gardiner in London. In der
+Zwischenzeit existierten beide Schrittweiten nebeneinander – manche Werkstätten stuften in
+Vierteln, andere in Dritteln.
+
+<ViertelVsDrittel />
+
+Die heutige britische und amerikanische Skala rechnet in Dritteln. Aber sie trägt eine Struktur
+aus Holmes Vierteln bis heute mit sich herum.
+
+## Die 13, die niemand erklären kann
+
+In Großbritannien und den USA laufen Kindergrößen von 0 bis 13 – und danach beginnt die
+Erwachsenenskala wieder bei 1. Warum ausgerechnet 13?
+
+Zwei Erklärungen kursieren. Nach der ersten begannen die kleinsten Schuhe bei vier Zoll, der
+Breite einer Hand, und man addierte eine Spanne von neun Zoll: vier plus neun ergibt dreizehn.
+Nach der zweiten hat ein Zwölf-Zoll-Lineal dreizehn Markierungen, wenn man die Null mitzählt.
+
+Der Forschungsverband der Schuhindustrie führt beide Theorien auf und stellt anschließend selbst
+fest, dass sie möglicherweise frei erfunden sind und der wahre Grund verloren ging. Was bleibt,
+ist die Beobachtung, dass der Sprung bereits 1688 bei Holme dokumentiert ist – dreihundert Jahre
+Tradition ohne bekannte Begründung.
+
+## Amerikas Versatz – und was die Norm dazu sagt
+
+Das amerikanische System hat dieselbe Schrittweite wie das britische, 8,47 Millimeter, aber einen
+eigenen Nullpunkt: 99,5 Millimeter statt 101,6. Rechnerisch wäre das ein sauberer, kleiner
+Unterschied.
+
+In der Praxis funktioniert es anders, und die Norm beschreibt es ungewöhnlich direkt: Das
+US-System entspreche unmittelbar dem britischen, ergänzt um einen **willkürlichen** Versatz von
+einer Größe bei Herrenschuhen und meist zwei Größen bei Damenschuhen. Bei Kinderschuhen sind es
+üblicherweise eine halbe Größe. Das Wort „willkürlich" steht so im Normtext.
+
+Dieser Versatz ist der Grund dafür, dass eine Damen-US-8 und eine Herren-US-8 nicht denselben Fuß
+meinen. Er hat keine Herleitung – er ist eine Konvention, die sich eingebürgert hat.
+
+## Der Punkt, an dem die Norm aufgibt
+
+2023 hat die Internationale Organisation für Normung die Umrechnungstabellen neu herausgegeben:
+ISO 19407. Man würde erwarten, dass eine Norm das Problem löst. Sie tut das Gegenteil und schreibt
+in ihrer eigenen Einleitung, dass die Systeme über viele Jahre unterschiedlich entwickelt und
+ausgelegt wurden, ohne je formalisiert worden zu sein, dass eine Lösung des Umrechnungsproblems
+fehlt – und dass die beiden Tabellen deshalb lediglich eine Leitlinie darstellen.
+
+Eine Norm, die feststellt, dass es die gesuchte Antwort nicht gibt, und stattdessen den besten
+verfügbaren Kompromiss anbietet.
+
+Wie weit dieser Kompromiss von der Praxis entfernt ist, führt die Norm selbst vor. Sie rechnet
+UK 4 auf EU 36,5 und UK 8 auf EU 41,5. Im Handel sind dieselben Schuhe regelmäßig mit
+„4 UK / 37 EUR" und „8 UK / 42 EUR" etikettiert. Die Norm hält dazu fest, dass Kunden über diese
+Abweichung überrascht seien – und dass sie ihre eigenen Tabellen für technisch korrekter halte.
+Das Etikett widerspricht der Norm um eine halbe Größe, und die Norm weiß es.
+
+<NormVsEtikett />
+
+## Mondopoint: die Lösung, die keiner wollte
+
+Es gibt ein System, das all das vermeidet. Mondopoint, in den 1970er-Jahren eingeführt und heute
+in ISO 9407 festgeschrieben, gibt schlicht die Fußlänge in Millimetern an, bei Bedarf zusätzlich
+die Breite. Größe 270 heißt: 270 Millimeter Fuß. Keine Nullpunkte, keine Zugabe, keine Umrechnung.
+
+Durchgesetzt hat es sich dort, wo keine alte Skala im Weg stand: in China, Japan und Korea. Japan
+schreibt die Zahl oft in Zentimetern. In Europa blieb Mondopoint eine Randerscheinung – mit einer
+Ausnahme: In der DDR war es in Gebrauch. In der Bundesrepublik setzte sich der Pariser Stich
+durch, obwohl in Deutschland Leistengrößen ursprünglich direkt in Zentimetern angegeben wurden,
+etwa als „29⅓".
+
+Statt zwei Systeme abzulösen, ist ein drittes entstanden.
+
+<ZeitleisteSchuhgroesse />
+
+## Was daraus folgt
+
+Die Zahl im Schuh ist keine Messung, sondern eine Position auf einer von mehreren Skalen, deren
+Nullpunkte historisch gewachsen und deren Zugaben nicht festgelegt sind. Verlässlich ist nur eine
+Angabe: die Fußlänge in Zentimetern. Sie ist von jedem System unabhängig, jeder kann sie selbst
+bestimmen, und seriöse Hersteller geben sie in ihren Größentabellen an.
+
+Alles andere – EU, UK, US – ist eine Übersetzung. Und Übersetzungen sind, wie die Norm selbst
+einräumt, an dieser Stelle nicht exakt möglich.
+
+<KarstenSagt>
+Ich habe drei Nummern im Schrank, und alle drei gehören demselben Fuß. Nike 45 – passt. Puma 45 – der große Zeh stößt vorne an, keine Chance. Adidas sitzt in 44 wie angegossen, und meine Wanderstiefel von The North Face nehmen den Fuß erst in 46 richtig auf. Früher hätte ich gedacht, da misst jemand schlampig. Nach dieser Recherche weiß ich: Es misst überhaupt niemand meinen Fuß. Gemessen wird ein Leisten, und wie viel Luft der vorne lässt, entscheidet jede Marke für sich. Ich kaufe Schuhe deshalb inzwischen nur noch, wenn ich sie vorher anziehen kann – oder wenn der Hersteller die Zentimeter dazuschreibt.
+</KarstenSagt>
+
+<Quellen eintraege={[
+  {
+    titel: 'ISO 19407:2023 — Footwear, Sizing, Conversion of sizing systems',
+    url: 'https://www.iso.org/standard/83106.html',
+    hinweis: 'Die maßgebliche Quelle dieses Artikels. Enthält die Stufungen (EU 6,67 mm, UK und US je 8,47 mm), die Nullpunkte, die beiden EU-Auslegungen (zwei Stich bzw. fünf Prozent Zugabe), den als „willkürlich" bezeichneten US-Versatz sowie die Feststellung, dass es keine exakte Umrechnung zwischen den Systemen gibt.',
+  },
+  {
+    titel: 'ISO 9407:2019 — Footwear sizing, Mondopoint system of sizing and marking',
+    url: 'https://webstore.ansi.org/standards/iso/iso94072019',
+    hinweis: 'Legt Mondopoint fest: Fußlänge in Millimetern, bei Bedarf zusätzlich die Fußbreite.',
+  },
+  {
+    titel: 'Randle Holme III: The Academy of Armory and Blazon (Chester, 1688)',
+    hinweis: 'Älteste bekannte Beschreibung einer Schuhgrößenskala. Kinderschuhe in 13, Erwachsenenschuhe in 15 Stufen, Beginn bei fünf Zoll, Schrittweite ein Viertelzoll, „short thirteens" bei 8¼ Zoll.',
+  },
+  {
+    titel: 'SATRA Bulletin: The diversity of footwear sizing systems (Dezember 2023)',
+    url: 'https://www.satra.com/bulletin/article.php?id=3230',
+    hinweis: 'Forschungsverband der Schuhindustrie. Datiert die Composition of Yards and Perches auf 1266–1303, nennt die reale Kornlänge von 4 bis 15 mm, den sächsischen Fuß mit 39 gegenüber dem walisischen mit 27 Gerstenkörnern, Gardiner 1856, die Einführung halber Größen 1887 sowie beide Theorien zur Kindergröße 13 — und stuft diese selbst als möglicherweise erfunden ein.',
+  },
+  {
+    titel: 'Country Life: How did they come up with the numbers for shoe sizes?',
+    url: 'https://www.countrylife.co.uk/luxury/style/curious-questions-how-did-they-come-up-with-the-numbers-for-shoe-sizes-261259',
+    hinweis: 'Hält ausdrücklich fest, dass es für die Edward-II.-Erzählung keinen Beleg gibt, und gibt Holmes Skala von 1688 im Wortlaut wieder.',
+  },
+  {
+    titel: 'Charles F. Brannock: Foot-Measuring Instrument, US-Patent 1.682.366',
+    url: 'https://patents.google.com/patent/US1682366',
+    hinweis: 'Angemeldet am 4. November 1925, erteilt am 28. August 1928. Das Messgerät hinter der US-Skala. Sekundärquellen datieren es je nach Bezugspunkt auf 1925, 1927 oder 1928.',
+  },
+  {
+    titel: 'Wikipedia: Pariser Stich',
+    url: 'https://de.wikipedia.org/wiki/Pariser_Stich',
+    hinweis: 'Datiert die Einheit auf „um 1800" und rechnet die Schuhgröße aus der Leistenlänge. Andere deutschsprachige Darstellungen datieren sie auf die Mitte des 19. Jahrhunderts — ein Beispiel für die widersprüchliche Beleglage.',
+  },
+  {
+    titel: 'Wikipedia: Nähmaschine',
+    url: 'https://de.wikipedia.org/wiki/N%C3%A4hmaschine',
+    hinweis: 'Thimonniers Patent vom 17. Juli 1830, Howes Doppelsteppstich-Maschine 1845/46 — die Chronologie, an der die verbreitete Herleitung des Pariser Stichs aus der Nähmaschine scheitert.',
+  },
+]} />
