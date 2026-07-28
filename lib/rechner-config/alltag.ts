@@ -3794,7 +3794,7 @@ Ergänzend zum Währungsrechner sind unser Einheiten-Umrechner (für Längen, Ge
   },
   {
     slug: 'schuhgroessen-rechner',
-    letzteAktualisierung: '2026-06-26',
+    letzteAktualisierung: '2026-07-28',
     titel: 'Schuhgrößen-Umrechner',
     beschreibung: 'Schuhgrößen umrechnen: EU, US, UK und cm — für Damen, Herren und Kinder mit vollständiger Tabelle.',
     kategorie: 'Alltag',
@@ -3803,7 +3803,7 @@ Ergänzend zum Währungsrechner sind unser Einheiten-Umrechner (für Längen, Ge
     metaDescription: 'Schuhgrößen umrechnen: EU, US, UK und cm Fußlänge — für Damen, Herren und Kinder. Mit vollständiger Umrechnungstabelle.',
     keywords: ['schuhgrößen umrechner', 'schuhgröße umrechnen', 'eu us uk schuhgröße', 'schuhgröße cm', 'fußlänge schuhgröße', 'damen schuhgröße us', 'herren schuhgröße uk', 'kinderschuhgröße', 'schuhgröße tabelle'],
     icon: '👟',
-    formel: 'cm ≈ (EU + 2) × 0,667 | US Damen ≈ EU − 31 | UK Damen ≈ EU − 33 | Herren und Kinder nach eigener Tabelle',
+    formel: 'Fußlänge cm ≈ (EU − 2) × 0,667 (ISO 19407) | Leistenlänge cm ≈ EU × 0,667 | US Damen ≈ EU − 31 | UK Damen ≈ EU − 33 | Herren und Kinder nach eigener Tabelle',
     beispiel: 'Beispiel: Damen EU 39 entspricht US 8,5, UK 6 und etwa 25 cm Fußlänge. Herren EU 43 = US 9,5 = UK 8,5 = 27,5 cm.',
     erklaerung: `**Warum Schuhgrößen so unterschiedlich sind**
 
@@ -3811,7 +3811,7 @@ Schuhgrößen sind international alles andere als einheitlich. Drei große Syste
 
 **EU-System (Pariser Stich)**
 
-Die europäischen Schuhgrößen basieren auf dem **Pariser Stich**: 1 Stich entspricht 2/3 Zentimeter (≈ 6,67 mm). Gemessen wird nicht die reine Fußlänge, sondern die Länge des Schuhleistens inklusive Zugabe für Zehenfreiheit. Die Umrechnungsformel EU → cm lautet näherungsweise: **cm ≈ (EU + 2) × 0,667**. Eine EU-Größe 39 entspricht also rechnerisch rund 27,3 cm Leistenlänge — die tatsächliche Fußlänge beträgt dann etwa 25 cm.
+Die europäischen Schuhgrößen basieren auf dem **Pariser Stich**: 1 Stich entspricht 2/3 Zentimeter (≈ 6,67 mm). Gemessen wird nicht die reine Fußlänge, sondern die Länge des Schuhleistens inklusive Zugabe für Zehenfreiheit. Die EU-Zahl gibt die Leistenlänge in Stich an: **Leistenlänge cm ≈ EU × 0,667**. Eine EU-Größe 39 entspricht also rund 26 cm Leistenlänge. Für die Fußlänge rechnet die internationale Norm ISO 19407 zwei Stich Zugabe heraus: **Fußlänge cm ≈ (EU − 2) × 0,667**, bei EU 39 also etwa 24,7 cm.
 
 **US-System**
 
@@ -3893,12 +3893,12 @@ Kinderfüße wachsen in den ersten Lebensjahren rasant. Die Deutsche Gesellschaf
       {
         typ: 'text',
         titel: 'Das EU-System: der Pariser Stich',
-        html: `<p>Das europäische System beruht auf dem <strong>Pariser Stich</strong>: Eine Größe entspricht 2/3 Zentimeter, also rund 6,67 mm. Gemessen wird allerdings nicht die nackte Fußlänge, sondern die Länge des <strong>Schuhleistens</strong> samt Zugabe für die Zehen. Deshalb liegt die EU-Zahl rechnerisch über der reinen Fußlänge.</p><p>Als grobe Näherung gilt: <strong>cm ≈ (EU + 2) × 0,667</strong>. Umgekehrt landet eine Fußlänge von 25 cm bei etwa EU 39. Diese Formel ist aber nur eine Faustregel — maßgeblich bleibt die <strong>Umrechnungstabelle</strong>, weil die Systeme nicht exakt linear ineinander übergehen.</p><p>Am verlässlichsten ist ohnehin die <strong>cm-Angabe</strong>: Sie ist unabhängig vom nationalen System. Japanische Hersteller etwa geben ihre Größen grundsätzlich in Zentimetern an — ein Maß, das keine Umrechnung braucht.</p>`,
+        html: `<p>Das europäische System beruht auf dem <strong>Pariser Stich</strong>: Eine Größe entspricht 2/3 Zentimeter, also rund 6,67 mm. Gemessen wird allerdings nicht die nackte Fußlänge, sondern die Länge des <strong>Schuhleistens</strong> samt Zugabe für die Zehen. Deshalb liegt die EU-Zahl rechnerisch über der reinen Fußlänge.</p><p>Die EU-Zahl ist die Leistenlänge in Stich: <strong>Leistenlänge cm ≈ EU × 0,667</strong>. Für die Fußlänge rechnet die internationale Norm ISO 19407 zwei Stich Zugabe heraus: <strong>Fußlänge cm ≈ (EU − 2) × 0,667</strong>. Umgekehrt landet eine Fußlänge von 25 cm bei etwa EU 39. Beides sind Faustregeln — maßgeblich bleibt die <strong>Umrechnungstabelle</strong>, weil die Systeme nicht exakt linear ineinander übergehen.</p><p>Am verlässlichsten ist ohnehin die <strong>cm-Angabe</strong>: Sie ist unabhängig vom nationalen System. Japanische Hersteller etwa geben ihre Größen grundsätzlich in Zentimetern an — ein Maß, das keine Umrechnung braucht.</p>`,
       },
       {
         typ: 'text',
         titel: 'Woher die Schuhgrößen stammen',
-        html: `<p>Die Schuhgröße hat eine überraschend lange Geschichte. Das britische System geht auf das <strong>Gerstenkorn (barleycorn)</strong> zurück: König Edward II. legte 1324 fest, dass drei aneinandergereihte Gerstenkörner einem Zoll entsprechen. Ein Gerstenkorn (etwa 8,5 mm) wurde so zur kleinsten Größeneinheit — daher die ungewöhnliche Schrittweite der UK- und US-Größen.</p><p>Auf dem Kontinent setzte sich später der <strong>Pariser Stich</strong> durch: ein feineres Maß von 2/3 Zentimeter pro Größe, das die europäischen Schuhmacher übernahmen. Weil beide Systeme von unterschiedlichen Grundeinheiten und Nullpunkten ausgehen, lassen sie sich bis heute nicht sauber ineinander überführen.</p><p>Versuche einer Vereinheitlichung gab es: Die ISO-Norm <strong>Mondopoint</strong> misst schlicht die Fußlänge in Millimetern. Im Handel hat sie sich aber nie durchgesetzt — Hersteller und Kundschaft blieben bei ihren gewohnten Zahlen.</p>`,
+        html: `<p>Die Schuhgröße hat eine lange Geschichte — und eine überraschend dünne Beleglage. Weit verbreitet ist die Erzählung, König Edward II. habe 1324 die Schuhgröße erfunden. Belegt ist etwas anderes: Das Statut <em>Composition of Yards and Perches</em> definierte bereits zwischen 1266 und 1303 drei Gerstenkörner als einen Zoll, und Edwards Dekret von 1324 betraf Zoll, Fuß und Yard — nicht Schuhe. Ein Schuhgrößensystem hat er nachweislich nicht eingeführt.</p><p>Die erste dokumentierte Größenskala stammt von Randle Holme III (<em>Academy of Armory and Blazon</em>, 1688) — und sie rechnete in <strong>Viertelzoll</strong>, nicht in Gerstenkörnern. Ein System mit einem Drittel Zoll pro Größe, also einem <strong>Gerstenkorn</strong> (8,47 mm), ist erst 1856 bei Robert Gardiner belegt; es prägt bis heute die Schrittweite der UK- und US-Größen. Schon bei Holme findet sich der Sprung, den beide Skalen noch haben: nach Kindergröße 13 beginnt die Erwachsenenskala wieder bei 1.</p><p>Auf dem Kontinent setzte sich der <strong>Pariser Stich</strong> durch, um 1800 in Frankreich festgelegt: 2/3 Zentimeter pro Größe. Weil die Systeme von unterschiedlichen Grundeinheiten und Nullpunkten ausgehen, lassen sie sich bis heute nicht sauber ineinander überführen — die Norm ISO 19407 sagt das ausdrücklich selbst und bezeichnet ihre Umrechnungstabellen nur als Leitlinie. Der Vereinheitlichungsversuch <strong>Mondopoint</strong> (ISO 9407) misst schlicht die Fußlänge in Millimetern; im europäischen Handel hat er sich nie durchgesetzt.</p>`,
       },
       {
         typ: 'tabelle',
@@ -4033,8 +4033,12 @@ Kinderfüße wachsen in den ersten Lebensjahren rasant. Die Deutsche Gesellschaf
       },
     ],
     quellen: [
+      { titel: 'ISO 19407:2023 — Footwear, Sizing, Conversion of sizing systems', url: 'https://www.iso.org/standard/83106.html', hinweis: 'Stufung EU 6,67 mm, UK und US je 8,47 mm; laut Normtext gibt es keine exakte Umrechnung zwischen den Systemen' },
+      { titel: 'ISO 9407:2019 — Footwear sizing, Mondopoint system of sizing and marking', url: 'https://webstore.ansi.org/standards/iso/iso94072019', hinweis: 'Fußlänge in Millimetern als Größenangabe' },
+      { titel: 'Randle Holme III, The Academy of Armory and Blazon (1688)', hinweis: 'Erste dokumentierte Schuhgrößenskala — in Viertelzoll-Schritten' },
+      { titel: 'SATRA Bulletin — The diversity of footwear sizing systems (2023)', url: 'https://www.satra.com/bulletin/article.php?id=3230', hinweis: 'Forschungsverband der Schuhindustrie zu Systemgeschichte und kursierenden Legenden' },
       { titel: 'Pariser Stich — europäisches Schuhgrößensystem (1 Stich = 2/3 cm)', hinweis: 'Methodik EU-Größen' },
-      { titel: 'Brannock Device / US-Schuhgrößensystem (barleycorn, getrennte Damen-/Herren-Skala)', hinweis: 'Methodik US-Größen' },
+      { titel: 'Brannock Device — US-Patent 1.682.366, angemeldet 1925, erteilt 1928', url: 'https://patents.google.com/patent/US1682366', hinweis: 'Messgerät hinter der US-Skala' },
       { titel: 'WMS-Weitenmesssystem (Deutsches Schuhinstitut) für Kinderschuhe', hinweis: 'Längen- und Weitenmessung bei Kindern' },
     ],
   },
