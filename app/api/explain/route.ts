@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createHash } from 'node:crypto';
 
 // In-Memory Rate Limiting (pro IP, max 10/min)
 const rateLimit = new Map<string, { count: number; reset: number }>();
@@ -121,11 +122,14 @@ export async function POST(request: NextRequest) {
   }
 
   // Rate Limiting
+  // IP nur gehasht als Rate-Limit-Schlüssel verwenden: Das Limit funktioniert
+  // identisch, im Speicher liegt danach aber kein personenbezogenes Datum mehr.
   const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
     || request.headers.get('x-real-ip')
     || 'unknown';
+  const ipHash = createHash('sha256').update(ip).digest('hex').slice(0, 32);
 
-  if (!checkRateLimit(ip)) {
+  if (!checkRateLimit(ipHash)) {
     return NextResponse.json(
       { error: 'Zu viele Anfragen. Bitte warten Sie eine Minute.' },
       { status: 429 },
@@ -145,7 +149,7 @@ export async function POST(request: NextRequest) {
   }
 
   // Stricter rate limit for KI-Rechner
-  if (rechner_name === '__ki_rechner__' && !checkKiRateLimit(ip)) {
+  if (rechner_name === '__ki_rechner__' && !checkKiRateLimit(ipHash)) {
     return NextResponse.json(
       { error: 'Maximal 3 Fragen pro Minute. Bitte warten Sie einen Moment.' },
       { status: 429 },

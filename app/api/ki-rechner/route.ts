@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { createHash } from 'node:crypto';
 import { redis } from '@/lib/redis';
 import { KI_TOOLS, dispatchTool } from '@/lib/ki-rechner/tools';
 
@@ -25,8 +26,11 @@ interface AnthropicBlock {
 
 export async function POST(req: Request) {
   // 1. Rate-Limit: max 20 Anfragen/Stunde pro IP
+  // IP nur gehasht speichern: Das Rate-Limit funktioniert identisch, im Redis
+  // liegt danach aber kein personenbezogenes Datum mehr.
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0] ?? 'unknown';
-  const key = `rechenfix:kirl:${ip}`;
+  const ipHash = createHash('sha256').update(ip).digest('hex').slice(0, 32);
+  const key = `rechenfix:kirl:${ipHash}`;
   const n = await redis.incr(key);
   if (n === 1) await redis.expire(key, 3600);
   if (n > 20) {
