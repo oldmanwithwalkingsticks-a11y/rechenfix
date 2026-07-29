@@ -205,6 +205,12 @@ export default function AiExplain({ rechnerName, eingaben, ergebnis }: Props) {
           {/* Text */}
           <div className="px-5 py-4 text-gray-800 dark:text-gray-200 text-sm leading-relaxed">
             {renderMarkdown(erklaerung)}
+            <p className="mt-3 text-xs text-gray-500 dark:text-gray-400">
+              Dieser Text wurde von einem KI-System erzeugt und kann Fehler enthalten.{' '}
+              <a href="/ki-transparenz" className="underline">
+                KI-Transparenz
+              </a>
+            </p>
           </div>
 
           {/* Actions + Hinweis */}

@@ -131,6 +131,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.2,
     },
     {
+      url: `${SITE_URL}/ki-transparenz`,
+      lastModified: gitMtime('app/ki-transparenz/page.tsx'),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+    {
       url: `${SITE_URL}/nutzungsbedingungen`,
       lastModified: gitMtime('app/nutzungsbedingungen/page.tsx'),
       changeFrequency: 'yearly',

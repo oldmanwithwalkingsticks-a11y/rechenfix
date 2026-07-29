@@ -22,10 +22,7 @@ export default function KiRechnerPage() {
   return (
     <div className="max-w-3xl mx-auto">
       <Breadcrumbs
-        items={[
-          { label: 'Startseite', href: '/' },
-          { label: 'KI-Rechner' },
-        ]}
+        items={[{ label: 'KI-Rechner' }]}
       />
 
       <div className="mb-8 text-center">
@@ -37,6 +34,14 @@ export default function KiRechnerPage() {
         </h1>
         <p className="text-gray-500 dark:text-gray-400 text-lg max-w-xl mx-auto">
           Stellen Sie eine Rechenfrage in natürlicher Sprache. Die KI liefert die Antwort und verlinkt Sie zum passenden Rechner.
+        </p>
+        <p className="mt-4 text-sm text-gray-600 dark:text-gray-400 max-w-xl mx-auto">
+          <strong>Hinweis:</strong> Sie interagieren hier mit einem KI-System. Ihre Eingabe wird an
+          einen Dienstleister in den USA übermittelt und dort verarbeitet. Antworten können
+          fehlerhaft sein. Bitte geben Sie keine personenbezogenen Daten ein.{' '}
+          <a href="/ki-transparenz" className="text-primary-600 dark:text-primary-400 underline">
+            Mehr zur KI-Transparenz
+          </a>
         </p>
       </div>
 

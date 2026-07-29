@@ -107,6 +107,11 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
+                  <Link href="/ki-transparenz" className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm">
+                    KI-Transparenz
+                  </Link>
+                </li>
+                <li>
                   <Link href="/nutzungsbedingungen" className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm">
                     Nutzungsbedingungen
                   </Link>

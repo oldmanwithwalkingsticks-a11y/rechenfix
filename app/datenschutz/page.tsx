@@ -26,7 +26,7 @@ export default function DatenschutzSeite() {
         <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
           Datenschutzerklärung
         </h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: Juli 2026</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: 29. Juli 2026</p>
 
         <div className="space-y-10 text-gray-700 dark:text-gray-300 text-[15px] leading-relaxed">
 
@@ -246,8 +246,60 @@ export default function DatenschutzSeite() {
             </p>
           </Section>
 
-          {/* 10. Social Media */}
-          <Section nr="10" titel="Präsenzen in sozialen Netzwerken">
+          {/* 10. KI-Funktionen */}
+          <Section nr="10" titel="KI-Funktionen (KI-Rechner und KI-Erklärungen)">
+            <p>
+              Rechenfix.de bietet KI-gestützte Funktionen an: den <strong>KI-Rechner</strong>, bei dem Sie
+              eine Rechenfrage in natürlicher Sprache stellen können, sowie <strong>KI-Erklärungen</strong>,
+              die auf Klick eine Erläuterung zu einem Rechenergebnis erzeugen. Beide Funktionen sind
+              freiwillig. Alle Rechner funktionieren vollständig ohne sie.
+            </p>
+            <p className="mt-3">
+              Wenn Sie eine dieser Funktionen nutzen, werden die dafür erforderlichen Daten an unseren
+              Dienstleister übermittelt und dort verarbeitet:
+            </p>
+            <ul className="list-disc pl-5 mt-3 space-y-1">
+              <li><strong>Beim KI-Rechner:</strong> der von Ihnen eingegebene Fragetext (maximal 500 Zeichen)</li>
+              <li><strong>Bei KI-Erklärungen:</strong> die Bezeichnung des Rechners sowie die eingegebenen und berechneten Werte</li>
+              <li>technisch notwendige Verbindungsdaten</li>
+            </ul>
+            <p className="mt-3">
+              Dienstleister ist <strong>Anthropic PBC, 500 Howard Street, San Francisco, CA 94105, USA</strong>.
+              Anthropic verarbeitet die Daten für uns als Auftragsverarbeiter auf Grundlage eines
+              Auftragsverarbeitungsvertrags. Rechtsgrundlage ist unser berechtigtes Interesse an einer
+              verständlichen und komfortablen Bedienung (Art. 6 Abs. 1 lit. f DSGVO); durch das bewusste
+              Auslösen der Funktion entscheiden Sie selbst über deren Nutzung.
+            </p>
+            <p className="mt-3">
+              <strong>Ihre Eingaben werden von uns nicht gespeichert.</strong> Um Missbrauch zu begrenzen,
+              halten wir lediglich einen Zähler der Anfragen je Gerät für die Dauer einer Stunde vor; er
+              wird danach automatisch gelöscht. Der Inhalt Ihrer Frage wird dabei nicht erfasst.
+            </p>
+            <p className="mt-3">
+              <strong>Bitte geben Sie in die KI-Funktionen keine personenbezogenen Daten ein</strong> — weder
+              zu Ihrer eigenen Person noch zu Dritten. Für die Berechnung sind sie nicht erforderlich.
+            </p>
+            <Hinweisbox>
+              <strong>Datenübermittlung in die USA:</strong> Die Übermittlung an Anthropic PBC erfolgt auf
+              Grundlage der von der EU-Kommission erlassenen Standardvertragsklauseln nach Art. 46 Abs. 2
+              lit. c DSGVO, die Bestandteil des Auftragsverarbeitungsvertrags sind. Ein dem europäischen
+              Niveau entsprechender Datenschutz kann für Übermittlungen in die USA trotz dieser Garantien
+              nicht vollständig gewährleistet werden; insbesondere ist ein Zugriff durch US-Behörden nicht
+              in jedem Fall auszuschließen. Sie können die Übermittlung vollständig vermeiden, indem Sie die
+              KI-Funktionen nicht nutzen.
+            </Hinweisbox>
+            <p className="mt-3">
+              Welche KI-Systeme an welcher Stelle eingesetzt werden und wo bewusst auf KI verzichtet wird,
+              legen wir gesondert auf der Seite{' '}
+              <a href="/ki-transparenz" className="text-primary-600 dark:text-primary-400 underline">
+                KI-Transparenz
+              </a>{' '}
+              offen.
+            </p>
+          </Section>
+
+          {/* 11. Social Media */}
+          <Section nr="11" titel="Präsenzen in sozialen Netzwerken">
             <p>
               Wir unterhalten öffentlich zugängliche Profile in sozialen Netzwerken, um über unsere Rechner und Inhalte zu informieren und mit interessierten Nutzern zu kommunizieren. Konkret betreiben wir Auftritte bei Instagram, Facebook, TikTok und YouTube (jeweils unter dem Namen &bdquo;rechenfix&ldquo;).
             </p>
@@ -289,18 +341,29 @@ export default function DatenschutzSeite() {
             </p>
           </Section>
 
-          {/* 11. Kontakt per E-Mail */}
-          <Section nr="11" titel="Kontaktaufnahme per E-Mail">
+          {/* 12. Kontakt per E-Mail */}
+          <Section nr="12" titel="Kontaktaufnahme per E-Mail">
             <p>
               Wenn Sie uns per E-Mail kontaktieren, werden die von Ihnen mitgeteilten Daten (z.&nbsp;B. Name, E-Mail-Adresse, Inhalt der Anfrage) von uns gespeichert und verarbeitet, um Ihre Anfrage zu beantworten.
             </p>
             <p className="mt-3">
               Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen) bzw. Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Beantwortung Ihrer Anfrage). Ihre Daten werden gelöscht, sobald die Anfrage abschließend bearbeitet ist und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.
             </p>
+            <p className="mt-3">
+              Für den Versand von E-Mails, die aus Formularen dieser Website ausgelöst werden — etwa
+              Rückmeldungen über das Feedback-Feld —, nutzen wir den Dienst <strong>Resend</strong> der
+              Resend, Inc. (USA). Übermittelt werden dabei der Inhalt Ihrer Nachricht sowie, sofern von Ihnen
+              angegeben, Ihre E-Mail-Adresse.
+            </p>
+            <Hinweisbox>
+              <strong>Datenübermittlung in die USA:</strong> Die Übermittlung an Resend, Inc. erfolgt auf
+              Grundlage der Standardvertragsklauseln nach Art. 46 Abs. 2 lit. c DSGVO. Es gelten dieselben
+              Einschränkungen wie im Abschnitt zu den KI-Funktionen beschrieben.
+            </Hinweisbox>
           </Section>
 
-          {/* 12. Rechte der Betroffenen */}
-          <Section nr="12" titel="Ihre Rechte als betroffene Person">
+          {/* 13. Rechte der Betroffenen */}
+          <Section nr="13" titel="Ihre Rechte als betroffene Person">
             <p>Sie haben gemäß DSGVO folgende Rechte hinsichtlich Ihrer personenbezogenen Daten:</p>
             <ul className="list-disc pl-5 space-y-2 mt-3">
               <li>
@@ -330,8 +393,8 @@ export default function DatenschutzSeite() {
             </p>
           </Section>
 
-          {/* 13. Widerrufsrecht */}
-          <Section nr="13" titel="Widerrufsrecht für erteilte Einwilligungen">
+          {/* 14. Widerrufsrecht */}
+          <Section nr="14" titel="Widerrufsrecht für erteilte Einwilligungen">
             <p>
               Gemäß Art. 7 Abs. 3 DSGVO haben Sie das Recht, eine einmal erteilte Einwilligung jederzeit mit Wirkung für die Zukunft zu widerrufen. Die Rechtmäßigkeit der aufgrund der Einwilligung bis zum Widerruf erfolgten Verarbeitung wird dadurch nicht berührt.
             </p>
@@ -345,8 +408,8 @@ export default function DatenschutzSeite() {
             </ul>
           </Section>
 
-          {/* 14. Beschwerderecht */}
-          <Section nr="14" titel="Recht auf Beschwerde bei einer Aufsichtsbehörde">
+          {/* 15. Beschwerderecht */}
+          <Section nr="15" titel="Recht auf Beschwerde bei einer Aufsichtsbehörde">
             <p>
               Gemäß Art. 77 DSGVO haben Sie das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren, wenn Sie der Ansicht sind, dass die Verarbeitung Ihrer personenbezogenen Daten gegen die DSGVO verstößt.
             </p>
@@ -364,8 +427,8 @@ export default function DatenschutzSeite() {
             </div>
           </Section>
 
-          {/* 15. Änderungen */}
-          <Section nr="15" titel="Änderungen dieser Datenschutzerklärung">
+          {/* 16. Änderungen */}
+          <Section nr="16" titel="Änderungen dieser Datenschutzerklärung">
             <p>
               Wir behalten uns vor, diese Datenschutzerklärung anzupassen, um sie an geänderte Rechtslagen oder bei Änderungen des Dienstes bzw. der Datenverarbeitung anzupassen. Die aktuelle Version ist stets auf dieser Seite abrufbar.
             </p>

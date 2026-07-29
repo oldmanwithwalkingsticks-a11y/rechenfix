@@ -53,6 +53,10 @@ const META_ROUTES = new Set([
   'feedback',
   'impressum',
   'datenschutz',
+  // KI-Transparenzseite (Welle 34) — Offenlegung nach Art. 50 KI-VO (EU) 2024/1689.
+  // Wird im Footer-Rechtliches-Block, in der Datenschutzerklärung, am KI-Rechner
+  // und an der KI-Erklärung (AiExplain) verlinkt, daher als Meta-Route registriert.
+  'ki-transparenz',
   // Nutzungsbedingungen (ToS) — neue statische Rechtsseite (Welle 18).
   // Pflichtfeld für TikTok Content Posting API + AdSense-Pluspunkt. Wird im
   // Footer-Rechtliches-Block verlinkt, daher hier als Meta-Route registriert.
