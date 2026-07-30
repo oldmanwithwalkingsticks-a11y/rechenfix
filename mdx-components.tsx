@@ -25,6 +25,10 @@ import SchereDezimalBinaer from '@/components/blog/grafik/SchereDezimalBinaer';
 import ZweiNormen from '@/components/blog/grafik/ZweiNormen';
 import DiskettenRaetsel from '@/components/blog/grafik/DiskettenRaetsel';
 import WerZaehltWie from '@/components/blog/grafik/WerZaehltWie';
+import ZweiWarnungen from '@/components/blog/grafik/ZweiWarnungen';
+import SchwelleWandert from '@/components/blog/grafik/SchwelleWandert';
+import WasDieFormelSieht from '@/components/blog/grafik/WasDieFormelSieht';
+import ZeitleisteBmi from '@/components/blog/grafik/ZeitleisteBmi';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -90,6 +94,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ZweiNormen,
     DiskettenRaetsel,
     WerZaehltWie,
+    ZweiWarnungen,
+    SchwelleWandert,
+    WasDieFormelSieht,
+    ZeitleisteBmi,
     ...components,
   };
 }

@@ -1,0 +1,252 @@
+import { generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import StructuredData from '@/components/seo/StructuredData';
+import { artikel } from './meta';
+
+export const metadata = {
+  title: `${artikel.titel} | Rechenfix.de`,
+  description: artikel.beschreibung,
+  alternates: { canonical: 'https://www.rechenfix.de/blog/woher-der-bmi-kommt' },
+};
+
+<StructuredData data={generateArticleSchema({
+  url: 'https://www.rechenfix.de/blog/woher-der-bmi-kommt',
+  headline: artikel.titel,
+  description: artikel.beschreibung,
+  datePublished: artikel.datum,
+  dateModified: artikel.datum,
+  image: '/blog/bmi-titelbild.png',
+})} />
+
+<StructuredData data={generateBreadcrumbSchema([
+  { name: 'Start', url: '/' },
+  { name: 'Blog', url: '/blog' },
+  { name: artikel.titel, url: '/blog/woher-der-bmi-kommt' },
+])} />
+
+# Woher der BMI kommt – und warum sein Erfinder ihn nie für einzelne Menschen gedacht hat
+
+<ArtikelDatum datum={artikel.datum} />
+
+Es gibt wenige Zahlen, die so beiläufig abgefragt werden. Beim Arzt, im Fitnessstudio, im
+Versicherungsformular: Was ist Ihr BMI? Die Frage klingt, als ginge es um eine Messung – wie
+Blutdruck oder Puls, nur einfacher.
+
+Dabei ist der Body-Mass-Index keine Messung. Er ist ein Verhältnis aus zwei Zahlen, das im
+19. Jahrhundert entwickelt wurde, um **Bevölkerungen** zu beschreiben. Der Mathematiker, der die
+Formel aufstellte, hatte keine Diagnose im Sinn. Der Physiologe, der ihr 140 Jahre später ihren
+heutigen Namen gab, warnte im selben Aufsatz ausdrücklich davor, sie auf einzelne Menschen
+anzuwenden.
+
+Beide Warnungen sind belegt. Beide sind folgenlos geblieben.
+
+<Bild src="/blog/bmi-titelbild.png" alt="Der Schreibtisch eines Statistikers des 19. Jahrhunderts mit handgeschriebenen Zahlentabellen, Federhalter und einem messingnen Höhenmaßstab, im Stil eines historischen Gemäldes" caption="Der BMI entstand nicht in einer Arztpraxis, sondern am Schreibtisch eines Statistikers." width={1200} height={675} />
+
+<Infobox titel="Worum es geht">
+Der BMI ist ein Screening-Wert für Bevölkerungsvergleiche, kein Diagnosewerkzeug für
+Einzelpersonen. Diese Einschränkung stammt nicht von Kritikern, sondern von den beiden Männern,
+auf die die Größe zurückgeht. Fragen zur eigenen Gesundheit lassen sich mit keiner Zahl
+beantworten – dafür ist die ärztliche Praxis da.
+</Infobox>
+
+## Ein Werkzeug für Bevölkerungen
+
+Adolphe Quetelet war kein Arzt. Er war belgischer Mathematiker, Astronom und Statistiker, und
+sein Lebensthema war der „mittlere Mensch" – die Frage, wie sich menschliche Merkmale über eine
+Bevölkerung hinweg verteilen. Körpergröße, Gewicht, Brustumfang, sogar Kriminalitätsraten: Quetelet
+suchte in großen Zahlen nach Regelmäßigkeiten.
+
+Um 1832 formulierte er dabei ein Verhältnis, das später seinen Namen tragen sollte. Seine
+Überlegung war schlicht: Das Breitenwachstum des Menschen fällt geringer aus als das
+Höhenwachstum. Wer doppelt so groß ist, wiegt nicht das Achtfache, sondern deutlich weniger.
+Teilt man das Gewicht durch das Quadrat der Größe statt durch die dritte Potenz, bleibt der Wert
+über verschiedene Körpergrößen hinweg einigermaßen vergleichbar.
+
+Genau dafür war die Formel gedacht: um Gruppen miteinander vergleichbar zu machen. Nicht, um
+einem einzelnen Menschen zu sagen, wie es um ihn steht. Der Quetelet-Index war ein Instrument der
+Statistik, kein Instrument der Medizin – und er blieb über ein Jahrhundert weitgehend unbeachtet.
+
+## 1972: der Name – und die Warnung im selben Aufsatz
+
+Aus der Vergessenheit holte ihn Ancel Keys. Der amerikanische Physiologe veröffentlichte 1972 im
+*Journal of Chronic Diseases* die Arbeit „Indices of Relative Weight and Obesity" – eine
+Untersuchung an über 7.400 Männern aus fünf Ländern.
+
+Keys wollte einen jahrzehntelangen Streit entscheiden: Welche der vielen kursierenden
+Größe-Gewicht-Formeln stimmt am besten mit dem tatsächlich gemessenen Körperfettanteil überein?
+Er verglich sie systematisch gegen direkte Messungen. Das Ergebnis war überraschend: Quetelets
+alte Formel schnitt am besten ab. Keys gab ihr daraufhin einen neuen, eingängigeren Namen –
+**Body Mass Index**.
+
+Diese Umbenennung war der Wendepunkt. Aus einer statistischen Randgröße wurde ein Begriff, den
+heute jeder kennt.
+
+Weniger bekannt ist der zweite Teil. Keys empfahl den Index ausdrücklich für den statistischen
+Vergleich von Bevölkerungen – **nicht** für die Beurteilung einzelner Personen. Seine
+Originalarbeit warnt vor genau dieser Verwendung. Er hielt fest, dass die Formel den anderen
+Kandidaten nur *etwas* überlegen und kein zuverlässiges Maß des Körperfetts sei.
+
+Der Erfinder wollte ein Bevölkerungsmaß. Der Namensgeber bestätigte, dass es eines bleiben
+müsse. Was danach geschah, geschah gegen beider ausdrückliche Einschränkung.
+
+<ZweiWarnungen />
+
+<RechnerLoader slug="bmi-rechner" />
+
+## Wie aus einem Vergleichsmaß eine Grenze wurde
+
+Bis in die 1980er-Jahre arbeiteten Ärzte überwiegend mit Gewichtstabellen von
+Lebensversicherungen. 1985 übernahmen die amerikanischen National Institutes of Health den BMI
+als Standardmaß.
+
+Die ersten Schwellen entstanden dabei nicht aus einem gemessenen Gesundheitsrisiko, sondern aus
+einer Verteilung: Man nahm die 85. Perzentile der Bevölkerung – also den Wert, oberhalb dessen
+die schwersten 15 Prozent liegen. Für Männer ergab das 27,8, für Frauen 27,3.
+
+Zwei Dinge sind daran bemerkenswert. Erstens: Die Grenze war **geschlechtsspezifisch**, weil der
+Zusammenhang zwischen BMI und Körperfett bei Männern und Frauen unterschiedlich ausfällt.
+Zweitens: Sie war eine **Positionsangabe innerhalb einer Bevölkerung**, kein Schwellenwert für
+ein Risiko. Wer über der Linie lag, war nicht krank – er war schwerer als 85 Prozent der anderen.
+
+## 1998: als 29 Millionen Menschen über Nacht die Kategorie wechselten
+
+1998 änderten die NIH die Regeln. Sie führten die Werte für Männer und Frauen zusammen, obwohl
+sich das Verhältnis von BMI und Körperfett zwischen den Geschlechtern unterscheidet, und
+ergänzten eine zusätzliche Kategorie. Heraus kamen die Zahlen, die heute jeder kennt: 25 für
+Übergewicht, 30 für Adipositas.
+
+Der Grund für diese Werte ist in den Darstellungen der Geschichte bemerkenswert offen benannt: Es
+waren runde Zahlen, die sich Ärzte und Patienten leicht merken konnten.
+
+An dieser Stelle wurde Genauigkeit gegen Merkbarkeit getauscht. Die geschlechtsspezifische
+Unterscheidung, die 1985 noch bestand, fiel weg – nicht weil neue Daten sie widerlegt hätten,
+sondern weil eine Zahl praktischer ist als zwei.
+
+Die Folge war unmittelbar: Rund 29 Millionen Amerikanerinnen und Amerikaner galten von einem Tag
+auf den anderen als übergewichtig, ohne ein Gramm zugenommen zu haben. Nicht die Menschen hatten
+sich verändert, sondern die Linie.
+
+<SchwelleWandert />
+
+<Video src="/blog/bmi.mp4" poster="/blog/bmi-titelbild.png" caption="Die Formel ist seit 1832 unverändert. Bewegt hat sich nur, wo man die Grenzen hinlegt." />
+
+## Eine Zahl, die nicht für alle passt
+
+2002 berief die Weltgesundheitsorganisation eine Expertenkonsultation nach Singapur. Anlass waren
+Befunde aus Asien: In Regionen, in denen der durchschnittliche BMI unterhalb von 25 lag, traten
+Typ-2-Diabetes und Herz-Kreislauf-Risiken auffällig häufig auf. Die bestehende Grenze schien dort
+nicht zu greifen.
+
+Das 2004 veröffentlichte Ergebnis ist aufschlussreicher, als eine schlichte Korrektur es wäre.
+Die Konsultation bestätigte, dass der Anteil asiatischer Menschen mit hohem Risiko bereits
+unterhalb von 25 erheblich ist. Sie konnte aber **keinen neuen einheitlichen Grenzwert bestimmen**:
+Der Wert für beobachtetes Risiko schwankt je nach Bevölkerung zwischen 22 und 25, der für hohes
+Risiko zwischen 26 und 31.
+
+Die Konsultation beschloss daher zweierlei. Sie behielt die bestehenden Grenzwerte als
+internationale Klassifikation bei – und ergänzte zusätzliche Handlungsschwellen bei 23,0, 27,5,
+32,5 und 37,5.
+
+Seither hält dieselbe Organisation zwei Sätze von Grenzwerten gleichzeitig für gültig. Nicht aus
+Unentschlossenheit, sondern weil die Daten keine einzelne Zahl hergeben, die für alle Menschen
+funktioniert.
+
+## Was die Formel nicht weiß
+
+Die Rechnung kennt genau zwei Eingaben: Gewicht und Körpergröße. Alles andere kommt in ihr nicht
+vor.
+
+Sie unterscheidet nicht zwischen Muskel- und Fettmasse, obwohl Muskelgewebe deutlich schwerer ist
+als Fettgewebe. Sie kennt keinen Knochenbau. Sie weiß nichts darüber, **wo** am Körper sich Fett
+befindet – obwohl gerade das für das Gesundheitsrisiko erheblich ist, weshalb der Taillenumfang
+als ergänzendes Maß gilt. Sie berücksichtigt weder Alter noch Geschlecht: Die WHO-Einteilung für
+Erwachsene ist für alle dieselbe.
+
+Zusätzliche, altersabhängige Orientierungswerte kursieren zwar und finden sich auch in
+Rechnern – auf dieser Seite ebenfalls. Sie stammen aber aus anderen Quellen und sind
+ausdrücklich keine WHO-Empfehlung. Wer beide nebeneinanderlegt, sieht keinen Fehler, sondern zwei
+verschiedene Konventionen.
+
+Für Kinder und Jugendliche gilt die Erwachsenen-Einteilung ohnehin nicht; dort wird mit
+alters- und geschlechtsspezifischen Perzentilen gearbeitet.
+
+<WasDieFormelSieht />
+
+## 2023: die Ärzteschaft rudert zurück
+
+Im Juni 2023 beschloss die American Medical Association – der größte Ärzteverband der USA – eine
+neue Position zum BMI. Der methodische Kern: Der Index hängt in der Allgemeinbevölkerung deutlich
+mit der Fettmasse zusammen, **verliert seine Vorhersagekraft aber, sobald er auf die einzelne
+Person angewandt wird.** Die Grenzwerte beruhen zudem überwiegend auf Daten früherer Generationen
+einer bestimmten Bevölkerungsgruppe.
+
+Die Empfehlung lautet, den BMI nicht mehr allein zu verwenden, sondern gemeinsam mit anderen
+Maßen – Taillenumfang, Körperzusammensetzung, viszerales Fett, Stoffwechselwerte.
+
+Die Entscheidung wurde in den USA öffentlich kontrovers diskutiert, auch weil die AMA in ihrer
+Begründung historische Verwendungen des Maßes aufgriff. Für die Frage, was der BMI misst, ist die
+methodische Feststellung die relevante: Ein Wert, der über Gruppen hinweg aussagekräftig ist,
+wird es dadurch nicht für den Einzelnen.
+
+<ZeitleisteBmi />
+
+## Was daraus folgt
+
+Der BMI ist nicht falsch. Er tut, wofür er gebaut wurde: Er macht Bevölkerungen vergleichbar, mit
+zwei Zahlen, die überall auf der Welt ohne Geräte erhoben werden können. Für Gesundheitsstatistik
+ist das ein enormer Vorteil.
+
+Er ist nur nicht das, wofür er inzwischen gehalten wird. Zwischen „diese Bevölkerung hat sich in
+zwanzig Jahren verändert" und „bei Ihnen stimmt etwas nicht" liegt ein Unterschied, den die
+Formel nicht überbrücken kann – und den beide Männer, auf die sie zurückgeht, ausdrücklich benannt
+haben.
+
+Wer wissen will, wie es um die eigene Gesundheit steht, erfährt das nicht von einer Division. Das
+ist keine Kritik am BMI. Es ist die Beschreibung dessen, was er ist.
+
+<KarstenSagt>
+Ich habe ständig mit dem Gewicht zu kämpfen, und dann wird man gefragt, was für einen BMI man
+hat. Dabei ist der Wert pauschal gar nicht ausschlaggebend, weil er sich nur auf Größe und
+Gewicht bezieht. Alter, Geschlecht, Bauchfett und Muskelmasse werden nicht einbezogen. Deshalb
+ist es nur ein grober Wert, der für mich keinerlei Bedeutung hat.
+</KarstenSagt>
+
+<Quellen eintraege={[
+  {
+    titel: 'Ancel Keys u. a.: Indices of relative weight and obesity. Journal of Chronic Diseases 25 (1972), S. 329–343',
+    hinweis: 'Die Arbeit, die dem Quetelet-Index den Namen Body Mass Index gab. Untersuchung an über 7.400 Männern aus fünf Ländern; empfiehlt den Index für den statistischen Vergleich von Bevölkerungen und warnt vor der Anwendung auf Einzelpersonen.',
+  },
+  {
+    titel: 'Commentary: Origins and evolution of body mass index (BMI): continuing saga. International Journal of Epidemiology 43 (2014)',
+    url: 'https://academic.oup.com/ije/article/43/3/665/2949550',
+    hinweis: 'Ordnet Keys’ Arbeit von 1972 ein und belegt Quetelets Herleitung über die Prämisse, das Breitenwachstum des Menschen falle geringer aus als das Höhenwachstum.',
+  },
+  {
+    titel: 'WHO Expert Consultation: Appropriate body-mass index for Asian populations and its implications for policy and intervention strategies. The Lancet 363 (2004), S. 157–163',
+    url: 'https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(03)15268-3/abstract',
+    hinweis: 'Belegt die Schwankungsbreite der Risikoschwellen zwischen 22 und 25 beziehungsweise 26 und 31, die Beibehaltung der internationalen Klassifikation und die zusätzlichen Handlungsschwellen bei 23,0, 27,5, 32,5 und 37,5.',
+  },
+  {
+    titel: 'WHO: Physical status — the use and interpretation of anthropometry. WHO Technical Report Series 854, Genf 1995',
+    hinweis: 'Grundlage der weltweit verwendeten BMI-Klassifikation für Erwachsene.',
+  },
+  {
+    titel: 'American Medical Association: AMA adopts new policy clarifying role of BMI as a measure in medicine (Juni 2023)',
+    url: 'https://www.ama-assn.org/press-center/ama-press-releases/ama-adopts-new-policy-clarifying-role-bmi-measure-medicine',
+    hinweis: 'Beschluss des größten US-Ärzteverbands, den BMI nicht mehr als alleiniges Maß zu verwenden.',
+  },
+  {
+    titel: 'American Medical Association: Use of BMI alone is an imperfect clinical measure (Juni 2023)',
+    url: 'https://www.ama-assn.org/public-health/chronic-diseases/ama-use-bmi-alone-imperfect-clinical-measure',
+    hinweis: 'Enthält die methodische Kernaussage, der BMI hänge in der Allgemeinbevölkerung deutlich mit der Fettmasse zusammen, verliere seine Vorhersagekraft aber auf Einzelfallebene.',
+  },
+  {
+    titel: 'Jean-Pierre Montani u. a.: Ancel Keys — The legacy of a giant in physiology, nutrition, and public health. Obesity Reviews 22 (2021)',
+    url: 'https://onlinelibrary.wiley.com/doi/full/10.1111/obr.13196',
+    hinweis: 'Wissenschaftshistorische Einordnung der Arbeit von 1972 und ihrer Wirkung.',
+  },
+  {
+    titel: 'Wikipedia: Body-Mass-Index',
+    url: 'https://de.wikipedia.org/wiki/Body-Mass-Index',
+    hinweis: 'Belegt die Entwicklung durch Quetelet 1832 sowie Keys’ Einschränkung auf den statistischen Vergleich von Populationen.',
+  },
+]} />
