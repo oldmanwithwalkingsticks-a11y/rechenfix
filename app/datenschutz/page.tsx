@@ -26,7 +26,7 @@ export default function DatenschutzSeite() {
         <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
           Datenschutzerklärung
         </h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: 29. Juli 2026</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: 30. Juli 2026</p>
 
         <div className="space-y-10 text-gray-700 dark:text-gray-300 text-[15px] leading-relaxed">
 
@@ -348,6 +348,14 @@ export default function DatenschutzSeite() {
             </p>
             <p className="mt-3">
               Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen) bzw. Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Beantwortung Ihrer Anfrage). Ihre Daten werden gelöscht, sobald die Anfrage abschließend bearbeitet ist und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.
+            </p>
+            <p className="mt-3">
+              Im Feedback-Feld unter jedem Rechner können Sie uns freiwillig eine E-Mail-Adresse
+              hinterlassen, damit wir bei Rückfragen auf Ihre Rückmeldung antworten können. Die
+              Angabe ist optional — das Feedback lässt sich auch vollständig ohne sie absenden.
+              Rechtsgrundlage ist Ihre Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO, die Sie
+              jederzeit widerrufen können. Wir verwenden die Adresse ausschließlich zur Beantwortung
+              Ihrer Rückmeldung und löschen sie, sobald die Anfrage erledigt ist.
             </p>
             <p className="mt-3">
               Für den Versand von E-Mails, die aus Formularen dieser Website ausgelöst werden — etwa

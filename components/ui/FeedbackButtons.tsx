@@ -1,12 +1,35 @@
 'use client';
 
+/**
+ * Daumen-Bewertung unter jedem Rechner. Bei „Nein" öffnet sich an Ort und
+ * Stelle ein kleines Formular — bewusst kein Seitenwechsel, weil dabei die
+ * Eingaben im Rechner verloren gingen und die meisten Nutzer abbrechen.
+ *
+ * Überarbeitet in Welle 44:
+ * - Fehlgeschlagene Sendungen werden als Fehler angezeigt, nicht mehr als
+ *   Erfolg. Vorher setzte der catch-Zweig `gesendet` auf true: Der Nutzer sah
+ *   eine Dankesmeldung, der Text war weg, und bei uns kam nie eine Mail an.
+ *   Ausgerechnet Rückmeldungen zu kaputten Rechnern gingen so lautlos verloren.
+ * - Es wird jetzt zusätzlich `res.ok` geprüft. Ein 400er oder 500er löst kein
+ *   throw aus und galt vorher ebenfalls als Erfolg.
+ * - Die Nachricht bleibt im Fehlerfall erhalten, ein erneuter Versuch ist
+ *   möglich.
+ * - „Überspringen" verabschiedet neutral, statt sich für nicht gegebenes
+ *   Feedback zu bedanken.
+ * - Optionales E-Mail-Feld für Rückfragen. Freiwillig, leer voreingestellt,
+ *   in der Datenschutzerklärung ausgewiesen.
+ */
+
 import { useState } from 'react';
+
+const MAX_ZEICHEN = 1000;
 
 export default function FeedbackButtons() {
   const [feedback, setFeedback] = useState<'ja' | 'nein' | null>(null);
   const [nachricht, setNachricht] = useState('');
-  const [sending, setSending] = useState(false);
-  const [gesendet, setGesendet] = useState(false);
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'sendet' | 'ok' | 'fehler'>('idle');
+  const [uebersprungen, setUebersprungen] = useState(false);
 
   if (feedback === 'ja') {
     return (
@@ -16,7 +39,7 @@ export default function FeedbackButtons() {
     );
   }
 
-  if (gesendet) {
+  if (status === 'ok') {
     return (
       <div className="text-center py-4 text-sm text-green-600 dark:text-green-400 font-medium">
         Vielen Dank! Ihr Feedback hilft uns, diesen Rechner zu verbessern.
@@ -24,29 +47,41 @@ export default function FeedbackButtons() {
     );
   }
 
+  if (uebersprungen) {
+    return (
+      <div className="text-center py-4 text-sm text-gray-500 dark:text-gray-400">
+        Alles klar. Falls Ihnen später doch noch etwas auffällt, freuen wir uns über eine
+        Nachricht.
+      </div>
+    );
+  }
+
   if (feedback === 'nein') {
     const absenden = async () => {
       if (!nachricht.trim()) return;
-      setSending(true);
+      setStatus('sendet');
       try {
-        await fetch('/api/feedback', {
+        const res = await fetch('/api/feedback', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             typ: 'Rechner verbessern',
             felder: {
               rechner: window.location.pathname,
-              wasFehlt: nachricht.trim(),
+              wasFehlt: nachricht.trim().slice(0, MAX_ZEICHEN),
             },
-            email: '',
+            email: email.trim(),
           }),
         });
-        setGesendet(true);
+        // Ein 400er oder 500er löst kein throw aus — deshalb res.ok prüfen.
+        setStatus(res.ok ? 'ok' : 'fehler');
       } catch {
-        setGesendet(true);
+        setStatus('fehler');
       }
-      setSending(false);
     };
+
+    const sendet = status === 'sendet';
+    const absendbar = nachricht.trim().length > 0 && !sendet;
 
     return (
       <div className="py-4 no-print">
@@ -57,26 +92,57 @@ export default function FeedbackButtons() {
           <p className="text-xs text-amber-700 dark:text-amber-400 mb-3">
             Was können wir verbessern? Ihr Feedback hilft uns direkt weiter.
           </p>
+
           <textarea
             value={nachricht}
-            onChange={e => setNachricht(e.target.value)}
+            onChange={(e) => setNachricht(e.target.value.slice(0, MAX_ZEICHEN))}
+            maxLength={MAX_ZEICHEN}
             placeholder="z.B. Ergebnis war falsch, Eingabefeld fehlt, Berechnung unklar..."
             className="w-full px-3 py-2 text-sm border border-amber-200 dark:border-amber-500/30 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-400 dark:focus:ring-amber-500/50 resize-none min-h-[80px]"
           />
+
+          <label className="block mt-2">
+            <span className="text-xs text-amber-700 dark:text-amber-400">
+              E-Mail für Rückfragen — freiwillig
+            </span>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="optional"
+              autoComplete="email"
+              className="w-full mt-1 px-3 py-2 text-sm border border-amber-200 dark:border-amber-500/30 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-400 dark:focus:ring-amber-500/50"
+            />
+          </label>
+
+          {status === 'fehler' && (
+            <p
+              role="alert"
+              className="mt-3 text-xs text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/30 rounded-lg px-3 py-2"
+            >
+              Das Absenden hat nicht geklappt — Ihre Nachricht ist noch da. Bitte versuchen Sie es
+              noch einmal, oder schreiben Sie an info@rechenfix.de.
+            </p>
+          )}
+
           <div className="flex gap-2 mt-2">
             <button
               onClick={absenden}
-              disabled={!nachricht.trim() || sending}
+              disabled={!absendbar}
               className={`flex-1 py-2 text-sm font-medium rounded-lg transition-colors ${
-                nachricht.trim() && !sending
+                absendbar
                   ? 'bg-primary-600 text-white hover:bg-primary-700'
                   : 'bg-gray-200 dark:bg-gray-700 text-gray-600 cursor-not-allowed'
               }`}
             >
-              {sending ? 'Wird gesendet...' : 'Feedback absenden'}
+              {sendet
+                ? 'Wird gesendet...'
+                : status === 'fehler'
+                  ? 'Erneut versuchen'
+                  : 'Feedback absenden'}
             </button>
             <button
-              onClick={() => setGesendet(true)}
+              onClick={() => setUebersprungen(true)}
               className="px-4 py-2 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
             >
               Überspringen
@@ -100,8 +166,12 @@ export default function FeedbackButtons() {
           rechner: window.location.pathname,
         }),
         keepalive: true,
-      }).catch(() => { /* ignore */ });
-    } catch { /* ignore */ }
+      }).catch(() => {
+        /* ignore */
+      });
+    } catch {
+      /* ignore */
+    }
   };
 
   return (
