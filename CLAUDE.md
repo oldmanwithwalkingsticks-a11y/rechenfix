@@ -942,3 +942,26 @@ Pro Sub-Welle:
 - Hotfix-Prompt: `welle<N>-w<N>-<sub>-<sub2>-hotfix-prompt.md`
 
 Lokale Ablage: `docs/welle<N>/`
+
+## Social-Post-Bilder (`public/social-posts/`)
+
+Die 160 PNG-Dateien in `public/social-posts/` sind **erzeugte Artefakte**. Sie entstehen lokal
+aus `scripts/social-image-builder.py` und beziehen die große Zahlenzeile aus dem Feld
+`socialHeadline` in `lib/social/captions.json`. Der Cron `/api/cron/social-post` erzeugt keine
+Bilder — er postet ausschließlich die im Repo liegenden Dateien, die Vercel ausliefert.
+
+Daraus folgen drei Regeln:
+
+1. **Wird `socialHeadline` oder ein anderes bildwirksames Feld in `lib/social/captions.json`
+   geändert, müssen die betroffenen Bilder in derselben Welle neu erzeugt und mitcommittet
+   werden.** Sonst liefert die Website Kacheln aus, die nicht mehr zu ihrer eigenen Datenquelle
+   passen. Genau das ist bei `autokosten-rechner` und `kalorienrechner` passiert.
+2. **Bilder in `public/social-posts/` werden nur in einer eigenen, dafür vorgesehenen Welle neu
+   erzeugt und committet** — nie beiläufig als Nebenprodukt einer anderen Arbeit.
+3. **Nach jedem lokalen Lauf des Bildgenerators gehört ein `git status --short` dazu.** Was dort
+   erscheint, wird bewusst committet oder verworfen. Liegenlassen ist die schlechteste Variante,
+   weil die Dateien beim nächsten weiten `git add` unbemerkt mitrutschen.
+
+Für Wellen allgemein gilt daraus abgeleitet: Am Ende einer Welle darf `git status --short` nichts
+außer `lib/rechner-config/client-data.ts` zeigen. Taucht etwas anderes auf, ist das ein Befund
+und wird gemeldet — nicht stillschweigend mitgenommen.
