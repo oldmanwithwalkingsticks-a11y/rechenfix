@@ -20,7 +20,22 @@ interface PdfEntry {
   t: number;
 }
 
-type Tab = 'programm' | 'rechner' | 'alle' | 'feedback' | 'pdf';
+type Tab = 'programm' | 'rechner' | 'alle' | 'feedback' | 'pdf' | 'social';
+
+interface SocialPlattformStatus {
+  platform: string;
+  zustaendig: number;
+  erledigt: number;
+  runde: number;
+  letzterRundenwechsel: string | null;
+  naechsterSlug: string | null;
+}
+
+interface SocialStatus {
+  queueLaenge: number;
+  abgerufenAm: string;
+  plattformen: SocialPlattformStatus[];
+}
 
 const AUTH_STORAGE_KEY = 'rf_admin_stats_token';
 
@@ -54,6 +69,8 @@ export default function AffiliateStatsPage() {
   const [allePdfs, setAllePdfs] = useState<PdfEntry[]>([]);
   const [monat, setMonat] = useState(aktuellerMonat());
   const [tab, setTab] = useState<Tab>('programm');
+  const [socialData, setSocialData] = useState<SocialStatus | null>(null);
+  const [socialStatus, setSocialStatus] = useState<'idle' | 'lade' | 'fehler' | 'ok'>('idle');
   const [berichtStatus, setBerichtStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
   // Token aus SessionStorage laden (überlebt Reload, nicht Tab-Close)
@@ -95,6 +112,30 @@ export default function AffiliateStatsPage() {
   useEffect(() => {
     if (token) ladeStats(token);
   }, [token, ladeStats]);
+
+  const ladeSocial = useCallback(async (t: string) => {
+    setSocialStatus('lade');
+    try {
+      const res = await fetch('/api/social-status', {
+        headers: { Authorization: `Bearer ${t}` },
+        cache: 'no-store',
+      });
+      if (!res.ok) {
+        setSocialStatus('fehler');
+        return;
+      }
+      setSocialData(await res.json());
+      setSocialStatus('ok');
+    } catch {
+      setSocialStatus('fehler');
+    }
+  }, []);
+
+  // Social-Status erst beim Aktivieren des Tabs laden, mit dem im State
+  // gehaltenen Bearer-Token.
+  useEffect(() => {
+    if (tab === 'social' && token) ladeSocial(token);
+  }, [tab, token, ladeSocial]);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -273,6 +314,7 @@ export default function AffiliateStatsPage() {
     { key: 'alle', label: 'Alle Klicks' },
     { key: 'feedback', label: 'Feedback' },
     { key: 'pdf', label: 'PDF-Downloads' },
+    { key: 'social', label: 'Social' },
   ];
 
   // Login-Screen
@@ -420,8 +462,60 @@ export default function AffiliateStatsPage() {
         ))}
       </div>
 
+      {/* Social-Status — eigener Block, unabhängig von Klick-/Feedback-Daten */}
+      {tab === 'social' && (
+        <div className="space-y-4">
+          {socialStatus === 'lade' && (
+            <div className="text-center py-12 text-gray-600 dark:text-gray-500">Lade Social-Status…</div>
+          )}
+          {socialStatus === 'fehler' && (
+            <div className="text-center py-12 text-red-600 dark:text-red-400">Social-Status konnte nicht geladen werden.</div>
+          )}
+          {socialStatus === 'ok' && socialData && (
+            <>
+              <div className="text-sm text-gray-500 dark:text-gray-400">
+                Queue-Länge: <strong>{socialData.queueLaenge}</strong> · abgerufen {fmtDate(new Date(socialData.abgerufenAm).getTime())}
+              </div>
+              {socialData.plattformen.map((p) => (
+                <div key={p.platform} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5">
+                  <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100 capitalize mb-3">{p.platform}</h3>
+                  {p.zustaendig === 0 ? (
+                    <p className="text-gray-500 dark:text-gray-400">inaktiv</p>
+                  ) : (
+                    <>
+                      <div className="text-2xl font-extrabold text-gray-900 dark:text-gray-50 mb-2">Runde {p.runde}</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                        <strong>{p.erledigt}</strong> von <strong>{p.zustaendig}</strong> erledigt
+                      </div>
+                      <div className="h-2 w-full bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden mb-3">
+                        <div
+                          className="h-full bg-blue-600 dark:bg-blue-500 rounded-full"
+                          style={{ width: `${Math.round((p.erledigt / p.zustaendig) * 100)}%` }}
+                        />
+                      </div>
+                      <div className="text-sm text-gray-700 dark:text-gray-300">
+                        Nächster Rechner:{' '}
+                        {p.naechsterSlug ? (
+                          <span className="font-mono text-xs">{p.naechsterSlug}</span>
+                        ) : (
+                          <span className="text-gray-500 dark:text-gray-400">Runde abgeschlossen — der nächste Lauf startet die neue Runde</span>
+                        )}
+                      </div>
+                      <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                        Letzter Rundenwechsel:{' '}
+                        {p.letzterRundenwechsel ? fmtDate(new Date(p.letzterRundenwechsel).getTime()) : 'noch keiner'}
+                      </div>
+                    </>
+                  )}
+                </div>
+              ))}
+            </>
+          )}
+        </div>
+      )}
+
       {/* Tab Content */}
-      {clicks.length === 0 && feedbacks.length === 0 ? (
+      {tab !== 'social' && (clicks.length === 0 && feedbacks.length === 0 ? (
         <div className="text-center py-12 text-gray-600 dark:text-gray-500">
           Keine Daten für {getMonatLabel(monat)} vorhanden.
         </div>
@@ -598,7 +692,7 @@ export default function AffiliateStatsPage() {
             )
           )}
         </div>
-      )}
+      ))}
     </div>
   );
 }
