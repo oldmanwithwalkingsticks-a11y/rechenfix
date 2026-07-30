@@ -37,6 +37,17 @@ Dependencies:  pip install Pillow
 """
 
 import argparse
+import sys as _sys
+
+# Windows-Konsolen laufen per Default unter cp1252 und brechen beim Ausgeben
+# der Statuszeichen mit UnicodeEncodeError ab. Der Abbruch wird als "Failed"
+# protokolliert, obwohl das Bild erfolgreich erzeugt wurde — die Erfolgsmeldung
+# des Skripts wäre damit unbrauchbar. Deshalb die Ausgabe fest auf UTF-8 stellen.
+try:
+    _sys.stdout.reconfigure(encoding="utf-8")
+    _sys.stderr.reconfigure(encoding="utf-8")
+except AttributeError:
+    pass
 import json
 import os
 import sys
