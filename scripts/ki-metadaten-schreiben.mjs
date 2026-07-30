@@ -42,6 +42,8 @@ const DIGITAL_SOURCE_TYPE =
  * erzeugt wurde — oder das Skript meldet es als unbekannt.
  */
 const GENERATOREN = {
+  'datenmengen-titelbild.png': 'Gemini 3 Pro Image (Google)',
+  'datenmengen.mp4': 'Kling AI 3.0 (Kuaishou)',
   'meter-titelbild.png': 'Gemini 3 Pro Image (Google)',
   'meter-video-standbild.png': 'Gemini 3 Pro Image (Google)',
   'meter.mp4': 'Kling AI 3.0 (Kuaishou)',

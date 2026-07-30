@@ -1,0 +1,250 @@
+import { generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import StructuredData from '@/components/seo/StructuredData';
+import { artikel } from './meta';
+
+export const metadata = {
+  title: `${artikel.titel} | Rechenfix.de`,
+  description: artikel.beschreibung,
+  alternates: { canonical: 'https://www.rechenfix.de/blog/warum-1-terabyte-nur-931-gigabyte-sind' },
+};
+
+<StructuredData data={generateArticleSchema({
+  url: 'https://www.rechenfix.de/blog/warum-1-terabyte-nur-931-gigabyte-sind',
+  headline: artikel.titel,
+  description: artikel.beschreibung,
+  datePublished: artikel.datum,
+  dateModified: artikel.datum,
+  image: '/blog/datenmengen-titelbild.png',
+})} />
+
+<StructuredData data={generateBreadcrumbSchema([
+  { name: 'Start', url: '/' },
+  { name: 'Blog', url: '/blog' },
+  { name: artikel.titel, url: '/blog/warum-1-terabyte-nur-931-gigabyte-sind' },
+])} />
+
+# Warum 1 Terabyte nur 931 Gigabyte sind – und wer hier eigentlich falsch rechnet
+
+<ArtikelDatum datum={artikel.datum} />
+
+Auf der Packung steht 2 Terabyte. Windows zeigt 1862 Gigabyte. Es fehlen 138 Gigabyte, und
+niemand hat sie genommen. Kein Formatierungsverlust, keine versteckte Partition, kein
+Herstellertrick im engeren Sinne – die Zahl auf der Packung und die Zahl auf dem Bildschirm
+beschreiben dieselbe Menge Speicher. Sie tun es nur in zwei verschiedenen Einheiten, die
+denselben Namen tragen.
+
+<Bild src="/blog/datenmengen-titelbild.png" alt="Eine 3,5-Zoll-Diskette liegt neben einer modernen M.2-SSD auf einem Schreibtisch, seitliches Tageslicht" caption="Zwei Datenträger, zwei Größenangaben – und keine von beiden bezeichnet, was man vermuten würde." width={1200} height={675} />
+
+<Infobox titel="Worum es geht">
+Das Wort „Gigabyte" hat zwei gültige Bedeutungen: eine Milliarde Byte und 1.073.741.824 Byte.
+Beide sind normiert – von zwei verschiedenen Normungsorganisationen, die sich gegenseitig
+widersprechen. Ein Kompromissvorschlag existiert seit 1999. Er wird bis heute kaum benutzt.
+</Infobox>
+
+## Die Rechnung, die zu 931 führt
+
+Ein Terabyte im dezimalen Sinn ist eine Billion Byte, also 1.000.000.000.000. Genau so viele
+Byte hat die Platte, und genau das steht auf der Packung.
+
+Windows rechnet anders. Es teilt nicht durch 1000, sondern durch 1024 – die nächstgelegene
+Zweierpotenz. Und zwar viermal, einmal je Stufe: von Byte zu Kilobyte, zu Megabyte, zu Gigabyte,
+zu Terabyte. Am Ende dieser vier Teilungen stehen rund 931 Gigabyte.
+
+Beide Zahlen sind richtig. Sie zählen dieselben Byte, benutzen aber unterschiedliche Bündelgrößen
+und nennen das Ergebnis gleich.
+
+## Die Schere geht auf
+
+Bei Kilobyte ist der Unterschied klein: 1024 gegenüber 1000, also weniger als 2,4 Prozent. Das
+war jahrzehntelang gleichgültig. Mit jeder Stufe multipliziert sich die Abweichung aber mit sich
+selbst. Bei Terabyte sind es rund zehn Prozent, bei Pebibyte gegenüber Petabyte schon 12,6
+Prozent.
+
+Deshalb ist das Problem nicht älter geworden, sondern größer. Eine 2-Terabyte-Platte erscheint
+als 1,81 Terabyte, eine 18-Terabyte-Platte als 16,4 Terabyte. Wer heute Speicher kauft, sieht
+eine Lücke, die 1985 noch niemandem aufgefallen wäre.
+
+<SchereDezimalBinaer />
+
+## Warum es überhaupt zwei Bedeutungen gibt
+
+Die naheliegende Erklärung lautet: Die Hersteller haben sich die günstigere Zahl ausgesucht. Sie
+greift zu kurz, und zwar aus einem Grund, der überrascht.
+
+Bis 1996 gab es **keine** Einheitenvorsätze für Zweierpotenzen. Computer arbeiten technisch in
+Zweierpotenzen, es existierte aber kein Wort dafür. Also wurden die vorhandenen SI-Vorsätze
+zweckentfremdet und auf den nächstgelegenen Wert gebogen: Kilo bekam neben 1000 die
+Zweitbedeutung 1024.
+
+Diese Zweitbedeutung war keine Schlamperei am Rand, sie war normiert. Die IEEE führte sie 1986 im
+Standard 1084-1986 ausdrücklich auf: kilo bezeichne 1000 – und bei Angaben zur Größe von
+Computerspeicher 2¹⁰, also 1024. Mega entsprechend 2²⁰. Die Lesart, die heute als die falsche
+gilt, war die zuerst festgeschriebene.
+
+## Das fehlende große K
+
+Eine Zeit lang gab es eine Lösung, und sie scheiterte an der Typografie. Unterschieden wurde
+zwischen **kB** für 1000 Byte, gesprochen Kilobyte, und **KB** für 1024 Byte, gesprochen
+„Kabyte" oder kurz „Ka". Klein k dezimal, großes K binär – eine funktionierende Konvention.
+
+Bei Mega stand diese Möglichkeit nicht mehr zur Verfügung. Das Symbol für Mega ist ohnehin ein
+großes M, ein zweites Großbuchstaben-M gibt es nicht. Damit war die Unterscheidung nicht
+fortsetzbar, wurde in der Praxis aufgegeben, und Kilobyte bekam generell die Bedeutung 1024
+Byte.
+
+Die Zweideutigkeit, die heute Millionen Käufer irritiert, entstand also nicht aus einer
+Entscheidung, sondern aus dem Fehlen eines Buchstabens.
+
+<RechnerLoader slug="datenmengen-umrechner" />
+
+## 1999 kommt die Lösung – und wird nicht genommen
+
+Die Internationale Elektrotechnische Kommission legte im Juni 1996 einen Normentwurf vor, der die
+Sache saubermachte: eigene Vorsätze ausschließlich für Zweierpotenzen. Der Entwurf wurde im
+Dezember 1998 beschlossen und im Januar 1999 als Ergänzung zu IEC 60027-2 veröffentlicht. Er
+brachte **Kibi, Mebi, Gibi, Tebi, Pebi und Exbi** – gebildet aus den ersten zwei Buchstaben des
+SI-Vorsatzes plus „bi" für binär.
+
+Damit war jede Zahl eindeutig benennbar: 1 Kibibyte sind 1024 Byte, 1 Kilobyte sind 1000 Byte,
+fertig. Heute steht das in IEC 80000-13, in Deutschland als DIN EN 80000-13. Das Internationale
+Büro für Maß und Gewicht, zuständig für die SI-Vorsätze, rät von deren binärer Verwendung
+ausdrücklich ab. Angeschlossen haben sich das BIPM 1998, die IEEE 2002 und die
+Physikalisch-Technische Bundesanstalt 2007.
+
+Eine vollständige, seit einem Vierteljahrhundert verfügbare Lösung – getragen von den
+maßgeblichen Institutionen. Und in der IT-Branche bis heute mit geringer Akzeptanz. Wer sagt
+schon „Gibibyte".
+
+## Zwei Normen, ein Wort, gegensätzliche Werte
+
+Jetzt wird es interessant. Die Halbleiterindustrie hat ihre eigene Normungsorganisation, JEDEC.
+In deren Begriffsverzeichnis steht, dass kilo als Vorsatz für Halbleiter-Speicherkapazität ein
+Multiplikator gleich 1024 sei – ausdrücklich im Kontrast zum SI-Vorsatz kilo, der 10³ bedeutet.
+Ebenso mega gleich 1.048.576 und giga gleich 1.073.741.824.
+
+Das ist keine historische Fußnote, sondern die geltende Grundlage, nach der Arbeitsspeicher
+gebaut und verkauft wird. Deshalb hat ein 16-GB-RAM-Riegel tatsächlich 16 × 1024³ Byte, während
+eine 16-GB-SSD 16 × 1000³ Byte hat. Beide Angaben sind normkonform. Sie stützen sich auf
+verschiedene Normen.
+
+Und der Standard JESD 100B.01 vom Dezember 2002 widerspricht sich dabei selbst. Er hält fest,
+dass die auf Zweierpotenzen beruhenden Definitionen nur aufgenommen seien, um den üblichen
+Gebrauch abzubilden, und zitiert IEEE/ASTM SI 10-1997 mit der Feststellung, diese Praxis führe
+häufig zu Verwirrung und sei zu vermeiden. Verworfen wird sie trotzdem nicht – und die
+IEC-Vorsätze werden nicht in die Begriffsliste aufgenommen.
+
+Eine Norm, die eine Definition festschreibt und im selben Dokument dokumentiert, dass davon
+abzuraten ist.
+
+<ZweiNormen />
+
+## Die Prozesse, die kein Urteil brachten
+
+Mitte der 2000er landete die Sache vor Gericht. Kläger warfen Festplattenherstellern vor, mit der
+dezimalen Lesart rund sieben Prozent mehr nutzbaren Speicher zu versprechen, als das
+Betriebssystem anzeigt.
+
+Western Digital verglich sich 2006: Backup-Software mit einem Listenwert von 30 Dollar für rund
+eine Million Käufer, die für die Platten durchschnittlich 150 Dollar gezahlt hatten. Seagate
+folgte im Verfahren Cho v. Seagate Technology (US) Holdings am San Francisco Superior Court –
+Bargeld oder Software für Käufer aus einem Zeitraum, in dem etwa 6,2 Millionen Platten im
+US-Einzelhandel verkauft wurden.
+
+Der entscheidende Satz steht in der Vergleichsmitteilung selbst: Seagate hat die Vorwürfe
+bestritten und bestreitet sie weiter, und **das Gericht hat keine Entscheidung in der Sache
+getroffen.** Wer heute liest, die Hersteller seien verurteilt worden, liest eine Verkürzung. Es
+wurde verglichen, nicht entschieden – und seither steht auf den Verpackungen ein Hinweis, wie
+gezählt wird.
+
+<Video src="/blog/datenmengen.mp4" poster="/blog/datenmengen-titelbild.png" caption="1,44 MB auf der Diskette, 2 TB auf der SSD – zwei Zahlen, die beide nicht das bezeichnen, was sie zu bezeichnen scheinen." />
+
+## Die Diskette, deren Angabe in keiner Norm steht
+
+Wer glaubt, dezimal und binär seien die beiden Möglichkeiten, hat die 3,5-Zoll-Diskette nicht
+nachgerechnet.
+
+Ihre Kapazität beträgt 1440 × 1024 Byte, also 1.474.560 Byte. Um daraus „1,44 MB" zu machen,
+wurde durch 1000 geteilt: 1440 Kibibyte, geschrieben als 1,44 Megabyte. Das Ergebnis ist eine
+**Mischform** – binär in der ersten Stufe, dezimal in der zweiten.
+
+Dezimal gerechnet wären es 1,47 Megabyte. Binär gerechnet 1,41 Mebibyte. Die Zahl 1,44
+bezeichnet keine dieser beiden Größen. Sie ist in keinem System definiert, stand jahrzehntelang
+auf Milliarden von Disketten und war für eine ganze Generation die selbstverständliche
+Maßeinheit für „ein Dokument, wenn man Glück hat".
+
+<DiskettenRaetsel />
+
+Sie ist kein Einzelfall. Eine 700-MB-CD fasst 700 × 1024 × 1024 Byte, eine 4,7-GB-DVD dagegen
+4,7 × 1000 × 1000 × 1000 Byte. USB-Übertragungsraten zählen dezimal. Jedes Medium hat sich seine
+Lesart selbst gewählt.
+
+## Wer zählt wie
+
+Bemerkenswert ist, dass die Fronten nicht stabil sind. Mit macOS X 10.6 Snow Leopard, erschienen
+am 28. August 2009, stellte Apple die Anzeige auf das Dezimalsystem um. Seither zeigt ein Mac für
+eine 1-TB-Platte 1 TB an, Windows für dieselbe Platte 931 GB. Beides ist korrekt – es sind zwei
+Dialekte derselben Sprache.
+
+<WerZaehltWie />
+
+## Was daraus folgt
+
+Es fehlen keine 138 Gigabyte. Es fehlt eine Angabe darüber, welches Gigabyte gemeint ist.
+
+Praktisch heißt das: Bei Speicherkäufen ist die Byte-Zahl die einzige eindeutige Größe – und
+Hersteller nennen sie auf der Verpackung. Wer vergleichen will, vergleicht Byte, nicht Vorsätze.
+Und wenn eine Zahl doppelt so groß aussieht, wie sie sein sollte, lohnt vor dem Ärger die Frage,
+ob gerade jemand durch 1024 statt durch 1000 geteilt hat.
+
+Die eleganteste Lösung liegt seit 1999 fertig auf dem Tisch. Sie scheitert daran, dass niemand
+„Gibibyte" sagen möchte.
+
+<KarstenSagt>
+Natürlich ärgert mich das immer wieder aufs Neue. Vor nicht allzu langer Zeit habe ich mir eine
+M.2-SSD zugelegt – der Hersteller gibt 2 TB an, in Wahrheit sind es 1862 GB. Netto rund 130 GB
+weniger. Ich finde es nicht korrekt, dass zu Marketingzwecken der höhere Wert angegeben wird.
+Was zusätzlich verwirrt, ist dieses Durcheinander aus Megabyte, Mebibyte, Terabyte und Gibibyte –
+da soll sich jemand zurechtfinden.
+
+Und ja, die 3,5-Zoll-Diskette mit 1,44 MB war eine verrückte Zeit. Ausgiebige Texte passten schon
+kaum auf eine Disk, und Windows ließ sich nur mit einem ganzen Stapel installieren.
+</KarstenSagt>
+
+<Quellen eintraege={[
+  {
+    titel: 'JEDEC Dictionary: kilo (K) (as a prefix to units of semiconductor storage capacity)',
+    url: 'https://www.jedec.org/standards-documents/dictionary/terms/kilo-k-prefix-units-semiconductor-storage-capacity',
+    hinweis: 'Primärquelle für die abweichende Normung der Halbleiterindustrie. Definiert kilo als Multiplikator 1024, ausdrücklich im Kontrast zum SI-Vorsatz kilo gleich 10³.',
+  },
+  {
+    titel: 'JEDEC JESD 100B.01 — Terms, Definitions, and Letter Symbols for Microcomputers, Microprocessors, and Memory Integrated Circuits (Dezember 2002)',
+    url: 'https://www.jedec.org/standards-documents/docs/jesd-100b01',
+    hinweis: 'Enthält die Definitionen für mega und giga auf Basis von 1024 sowie den Verweis auf IEEE/ASTM SI 10-1997, wonach diese Praxis zu Verwirrung führe und zu vermeiden sei — ohne sie zu verwerfen.',
+  },
+  {
+    titel: 'IEC 60027-2, Ergänzung von Januar 1999; heute IEC 80000-13 bzw. DIN EN 80000-13',
+    hinweis: 'Einführung der Binärvorsätze Kibi, Mebi, Gibi, Tebi, Pebi und Exbi. Entwurf Juni 1996, beschlossen Dezember 1998, veröffentlicht Januar 1999.',
+  },
+  {
+    titel: 'IEEE Standard 1084-1986 — Standard Glossary of Mathematics of Computing Terminology',
+    hinweis: 'Führt die binäre Zweitbedeutung von kilo und mega ausdrücklich als gültig auf — die heute als falsch geltende Lesart war die zuerst festgeschriebene. DOI 10.1109/IEEESTD.1986.79649.',
+  },
+  {
+    titel: 'Wikipedia: Binärpräfix',
+    url: 'https://de.wikipedia.org/wiki/Bin%C3%A4rpr%C3%A4fix',
+    hinweis: 'Belegt die historische Unterscheidung kB gegen KB („Kabyte"), deren Aufgabe mit Einführung von Mega, die Mischform der 3,5-Zoll-Diskette sowie die wachsende Abweichung von 2,4 Prozent bei Kibi bis 12,6 Prozent bei Pebi.',
+  },
+  {
+    titel: 'Computerworld: Seagate to repay customers over inaccurate gigabyte definition (2007)',
+    url: 'https://www.computerworld.com/article/1571835/seagate-to-repay-customers-over-inaccurate-gigabyte-definition.html',
+    hinweis: 'Zum Verfahren Cho v. Seagate Technology (US) Holdings, San Francisco Superior Court: Vorwurf von rund sieben Prozent Abweichung, Vergleich mit Bargeld oder Software, etwa 6,2 Millionen betroffene Platten.',
+  },
+  {
+    titel: 'Vergleichsmitteilung Cho v. Seagate Technology (US) Holdings, San Francisco Superior Court, Az. 453195',
+    hinweis: 'Hält ausdrücklich fest, dass Seagate die Vorwürfe bestreitet und das Gericht keine Entscheidung in der Sache getroffen hat.',
+  },
+  {
+    titel: 'Apple Support-Dokument TS2419 zur Anzeige der Laufwerkskapazität ab Mac OS X 10.6',
+    hinweis: 'Dokumentiert die Umstellung auf dezimale Anzeige mit Snow Leopard, erschienen am 28. August 2009.',
+  },
+]} />
