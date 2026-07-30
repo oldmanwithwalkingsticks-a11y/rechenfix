@@ -39,6 +39,8 @@ import {
   markSlugDoneOn,
   setCurrentBioSlug,
   platformsForSlug,
+  resetRoundFor,
+  ALL_PLATFORMS,
   type Platform,
 } from './state';
 
@@ -110,9 +112,39 @@ function buildPostForSlug(slug: string): SocialPost | null {
  * NICHT auf beiden Plattformen done ist (Plattform-Done-Marken seit
  * W17A.2.x). Damit kann ein Slug, der z. B. nur FB erfolgreich war,
  * im nächsten Lauf noch einen IG-Retry bekommen.
- * Returnt null, wenn alle Queue-Slugs vollständig durch sind.
+ *
+ * W42 — Rundlauf: Sind alle Queue-Slugs vollständig durch, wird EINMALIG
+ * ein plattformweiser Reset ausgelöst — und zwar nur für die Plattformen,
+ * die tatsächlich zuständig, aber erschöpft sind (nicht pauschal alle:
+ * eine Plattform ohne Zuständigkeit, z. B. TikTok bei TIKTOK_PIPELINE_ENABLED
+ * ≠ 'true', bleibt unberührt). Danach wird genau einmal erneut gesucht.
+ * Returnt null, wenn auch nach dem Reset — oder mangels resetbarer
+ * Plattform — nichts Offenes existiert.
  */
 export async function pickNextSlug(): Promise<string | null> {
+  for (const slug of QUEUE.queue) {
+    const fully = await isSlugFullyDone(slug);
+    if (!fully) return slug;
+  }
+  // Queue erschöpft → Reset je Plattform, die zuständig UND vollständig durch ist.
+  let didReset = false;
+  for (const platform of ALL_PLATFORMS) {
+    let hatZustaendigkeit = false;
+    let hatOffenen = false;
+    for (const slug of QUEUE.queue) {
+      if (!platformsForSlug(slug).includes(platform)) continue;
+      hatZustaendigkeit = true;
+      if (!(await isSlugDoneOn(slug, platform))) {
+        hatOffenen = true;
+        break;
+      }
+    }
+    if (hatZustaendigkeit && !hatOffenen) {
+      await resetRoundFor(platform);
+      didReset = true;
+    }
+  }
+  if (!didReset) return null; // keine resetbare Plattform → keine erneute Suche
   for (const slug of QUEUE.queue) {
     const fully = await isSlugFullyDone(slug);
     if (!fully) return slug;
@@ -126,10 +158,27 @@ export async function pickNextSlug(): Promise<string | null> {
  * - für diese Plattform zuständig ist (platformsForSlug enthält sie), UND
  * - auf dieser Plattform noch KEINE Done-Marke hat.
  * IG/FB überspringen so die Top-10 (nicht zuständig), TikTok nimmt sie mit.
- * Ist TikTok inaktiv (TIKTOK_PIPELINE_ENABLED≠'true'), liefert
- * platformsForSlug nie 'tiktok' → pickNextSlugFor('tiktok') gibt immer null.
+ *
+ * W42 — Rundlauf: Sind alle für diese Plattform zuständigen Slugs done, wird
+ * EINMALIG resetRoundFor(platform) ausgelöst und danach erneut gesucht — die
+ * Rotation beginnt so beim ersten zuständigen Slug wieder von vorn. Der Reset
+ * greift pro Aufruf höchstens einmal.
+ * Ist die Plattform für KEINEN Slug zuständig (z. B. TikTok bei
+ * TIKTOK_PIPELINE_ENABLED≠'true'), wird OHNE Reset null zurückgegeben — sonst
+ * entstünde eine Endlosschleife bzw. ein sinnloser Rundenzähler-Hochlauf.
  */
 export async function pickNextSlugFor(platform: Platform): Promise<string | null> {
+  let hatZustaendigkeit = false;
+  for (const slug of QUEUE.queue) {
+    if (!platformsForSlug(slug).includes(platform)) continue;
+    hatZustaendigkeit = true;
+    const done = await isSlugDoneOn(slug, platform);
+    if (!done) return slug;
+  }
+  // Keine Zuständigkeit → kein Rundlauf (verhindert Endlosschleife/Leerlauf-Reset).
+  if (!hatZustaendigkeit) return null;
+  // Alle zuständigen Slugs done → einmaliger Rundlauf-Reset, dann erneut suchen.
+  await resetRoundFor(platform);
   for (const slug of QUEUE.queue) {
     if (!platformsForSlug(slug).includes(platform)) continue;
     const done = await isSlugDoneOn(slug, platform);

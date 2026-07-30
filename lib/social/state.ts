@@ -29,6 +29,8 @@
 import { redis } from '@/lib/redis';
 import { MetaApiError } from './instagram';
 import { EXCLUDED_SLUGS } from './config';
+import queueFile from './queue.json';
+import type { QueueFile } from './schema';
 
 export type Platform = 'instagram' | 'facebook' | 'tiktok';
 
@@ -162,6 +164,45 @@ export async function markSlugDoneOn(
   dateBerlin: string,
 ): Promise<void> {
   await redis.set(doneKey(slug, platform), dateBerlin);
+}
+
+/**
+ * W42 — Rundlauf-Reset für EINE Plattform.
+ *
+ * Löscht ausschließlich die Slug-Done-Marken `social:done:{slug}:{platform}`,
+ * und davon nur die Slugs, für die diese Plattform nach platformsForSlug()
+ * überhaupt zuständig ist. Die Tages-Marken (posted-Keys), der Bio-Slug
+ * (current-bio-slug) und die Fehler-Schlüssel bleiben unangetastet.
+ *
+ * Jeder Rundenwechsel wird protokolliert:
+ *   - social:round:{platform}       — Rundenzähler, bei jedem Reset +1 (Start 1 → nach 1. Reset 2)
+ *   - social:round-reset:{platform} — ISO-Zeitstempel des letzten Resets
+ *
+ * Rückgabe: neue Rundennummer + Anzahl tatsächlich gelöschter Done-Marken.
+ */
+function roundKey(platform: Platform): string {
+  return `social:round:${platform}`;
+}
+
+function roundResetKey(platform: Platform): string {
+  return `social:round-reset:${platform}`;
+}
+
+export async function resetRoundFor(
+  platform: Platform,
+): Promise<{ runde: number; zurueckgesetzt: number }> {
+  const queue = (queueFile as unknown as QueueFile).queue;
+  let zurueckgesetzt = 0;
+  for (const slug of queue) {
+    if (!platformsForSlug(slug).includes(platform)) continue;
+    const removed = await redis.del(doneKey(slug, platform));
+    zurueckgesetzt += typeof removed === 'number' ? removed : 0;
+  }
+  const cur = Number(await redis.get(roundKey(platform))) || 1;
+  const runde = cur + 1;
+  await redis.set(roundKey(platform), String(runde));
+  await redis.set(roundResetKey(platform), new Date().toISOString());
+  return { runde, zurueckgesetzt };
 }
 
 /**
