@@ -29,6 +29,10 @@ import ZweiWarnungen from '@/components/blog/grafik/ZweiWarnungen';
 import SchwelleWandert from '@/components/blog/grafik/SchwelleWandert';
 import WasDieFormelSieht from '@/components/blog/grafik/WasDieFormelSieht';
 import ZeitleisteBmi from '@/components/blog/grafik/ZeitleisteBmi';
+import VierCups from '@/components/blog/grafik/VierCups';
+import EtikettGegenRezept from '@/components/blog/grafik/EtikettGegenRezept';
+import LoeffelFalle from '@/components/blog/grafik/LoeffelFalle';
+import MehlStreuung from '@/components/blog/grafik/MehlStreuung';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -98,6 +102,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     SchwelleWandert,
     WasDieFormelSieht,
     ZeitleisteBmi,
+    VierCups,
+    EtikettGegenRezept,
+    LoeffelFalle,
+    MehlStreuung,
     ...components,
   };
 }

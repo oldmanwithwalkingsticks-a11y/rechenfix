@@ -1,0 +1,232 @@
+import { generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import StructuredData from '@/components/seo/StructuredData';
+import { artikel } from './meta';
+
+export const metadata = {
+  title: `${artikel.titel} | Rechenfix.de`,
+  description: artikel.beschreibung,
+  alternates: { canonical: 'https://www.rechenfix.de/blog/wie-viel-ist-eine-cup' },
+};
+
+<StructuredData data={generateArticleSchema({
+  url: 'https://www.rechenfix.de/blog/wie-viel-ist-eine-cup',
+  headline: artikel.titel,
+  description: artikel.beschreibung,
+  datePublished: artikel.datum,
+  dateModified: artikel.datum,
+  image: '/blog/cups-titelbild.png',
+})} />
+
+<StructuredData data={generateBreadcrumbSchema([
+  { name: 'Start', url: '/' },
+  { name: 'Blog', url: '/blog' },
+  { name: artikel.titel, url: '/blog/wie-viel-ist-eine-cup' },
+])} />
+
+# Wie viel ist eine Cup – und warum die Frage keine eindeutige Antwort hat
+
+<ArtikelDatum datum={artikel.datum} />
+
+Ein amerikanisches Rezept verlangt zwei Cups Mehl. Die naheliegende Frage ist, wie viel das in
+Gramm ist. Die ehrliche Antwort lautet: Das hängt davon ab, aus welchem Land das Rezept stammt,
+ob die Zahl von einer Packung oder aus einem Kochbuch kommt — und davon, wie Sie den Becher
+füllen.
+
+Die letzte dieser drei Abhängigkeiten ist die unangenehmste. Bei allen anderen Einheiten dieser
+Reihe war die Zahl zwischen verschiedenen Systemen uneindeutig. Bei der Cup ist sie es innerhalb
+einer einzigen Küche, bei derselben Person, an zwei aufeinanderfolgenden Morgen.
+
+<Bild src="/blog/cups-titelbild.png" alt="Mehrere Messbecher unterschiedlicher Größe stehen nebeneinander auf einem hölzernen Küchentisch, daneben eine digitale Küchenwaage" caption="Vier Messbecher, vier Volumina – und alle heißen Cup." width={1200} height={675} />
+
+<Infobox titel="Worum es geht">
+Die Cup ist keine international festgelegte Einheit. Vier verschiedene Volumina sind gleichzeitig
+in Gebrauch, und selbst innerhalb der USA unterscheidet sich die Cup auf der Verpackung von der
+Cup im Rezept. Verlässlich ist am Ende nur eine Angabe: das Gewicht in Gramm.
+</Infobox>
+
+## Vier Cups, alle gleichzeitig im Umlauf
+
+Die **US-amerikanische Alltags-Cup** ist als acht US-Flüssigunzen definiert und misst damit
+236,588 Milliliter. Das ist die Cup der amerikanischen Kochbücher, Rezeptseiten und
+Fernsehsendungen.
+
+Die **metrische Cup** misst exakt 250 Milliliter. Sie ist in Australien und Neuseeland als Norm
+festgeschrieben und steckt in praktisch jedem modernen australischen Rezept.
+
+Die **imperiale Cup** ging auf zehn imperiale Flüssigunzen zurück und kommt damit auf 284,131
+Milliliter — rund zwanzig Prozent mehr als die amerikanische. Moderne britische Rezepte rechnen
+überwiegend in Gramm und Millilitern, in älteren Kochbüchern taucht sie aber auf.
+
+Und dann gibt es noch eine vierte, die gleich ein eigenes Kapitel bekommt.
+
+<VierCups />
+
+Zwischen der kleinsten und der größten liegen fast fünfzig Milliliter. Wer ein britisches Rezept
+mit amerikanischen Bechern nachkocht, hat bei drei Cups Flüssigkeit rund 140 Milliliter zu
+wenig — ein gutes halbes Wasserglas.
+
+## Die Cup auf der Packung ist nicht die Cup im Rezept
+
+Die vierte Cup ist die verwirrendste, weil sie im selben Land existiert wie die erste.
+
+Für die Nährwertkennzeichnung hat die amerikanische Lebensmittelbehörde FDA eine eigene Cup
+festgelegt. In ihrer Leitlinie für die Industrie steht es unmissverständlich: Für Zwecke der
+Nährwertkennzeichnung bedeutet 1 Cup 240 Milliliter, 1 Tablespoon 15 Milliliter, 1 Teaspoon
+5 Milliliter, 1 Flüssigunze 30 Milliliter und 1 Unze 28 Gramm. Rechtsgrundlage ist
+21 CFR 101.9(b)(5)(viii).
+
+Diese Werte wurden bewusst auf glatte Zahlen gerundet, damit sich Nährwerte einfacher berechnen
+lassen. Die gesetzliche Cup ist damit rund 1,4 Prozent größer als die Alltags-Cup.
+
+Die Angabe „serving size: 1 cup (240 ml)" auf der Milchpackung bezeichnet also **nicht** die Cup,
+die im Rezept daneben steht. Für einen Schluck Milch ist der Unterschied bedeutungslos. Für die
+Frage, welche Zahl man in einen Umrechner tippt, ist er der Grund, warum verschiedene Tabellen
+verschiedene Ergebnisse liefern — die einen rechnen mit 236,6, die anderen mit 240.
+
+<EtikettGegenRezept />
+
+<RechnerLoader slug="cups-umrechner" />
+
+## Der Löffel, der ein Drittel zu viel fasst
+
+Eine Falle, die selbst erfahrene Bäcker übersehen: Der australische Tablespoon hat nicht
+15 Milliliter, sondern **20**.
+
+Bei Öl oder Milch fällt das kaum auf. Bei Backpulver, Natron oder Hefe ist es entscheidend. Wer
+einen australischen Rezeptlöffel Triebmittel blind als 15 Milliliter umrechnet, dosiert um ein
+Drittel daneben — und ein Kuchen, der zu stark treibt, fällt beim Abkühlen zusammen.
+
+<LoeffelFalle />
+
+## 1896: was Fannie Farmer wirklich tat
+
+Die Ordnung, die es im amerikanischen Messwesen immerhin gibt, geht auf eine Person zurück:
+Fannie Merritt Farmer.
+
+Ihr *Boston Cooking-School Cook Book* erschien am 7. Januar 1896 und war eines der ersten
+Kochbücher, das auf standardisierten Maßen bestand. „Correct measurements are absolutely
+necessary to insure the best results", schrieb sie — richtige Maße seien unbedingt nötig, um die
+besten Ergebnisse zu sichern. Der Verlag hielt das Buch für unverkäuflich und druckte nur 3.000
+Exemplare, die Farmer selbst bezahlen musste. Zu ihren Lebzeiten wurden über vier Millionen
+Stück verkauft. Sie ging als „Mutter der gestrichenen Maße" in die Geschichte ein.
+
+Die verbreitete Kurzfassung lautet, Farmer habe die genaue Küchenmessung erfunden. Das trifft
+nicht ganz.
+
+**Messbecher und Messlöffel gab es schon vorher.** Die Rezepte verwiesen nur nicht darauf,
+sondern sprachen von einer Handvoll oder einer ordentlichen Menge; wer es genauer meinte, nannte
+eine Tasse, einen Becher oder eine Untertasse und maß Butter „in der Größe eines Eis" oder „einer
+Walnuss". Farmers Neuerung war nicht der Becher, sondern die Regel, **glattgestrichen** statt
+gehäuft zu messen. Ein gehäufter Becher Mehl kann leicht das Anderthalbfache eines gestrichenen
+enthalten — genau die Unschärfe, die sie beseitigen wollte.
+
+Und sie stand auf Schultern. Farmer war Schülerin von Mary Johnson Lincoln an derselben Boston
+Cooking School, und ihr wurde anfangs vorgeworfen, deren Rezepte lediglich zu wiederholen. Die
+Bewegung hin zur wissenschaftlichen Haushaltsführung war älter als ihr Buch; Farmer gab ihr das
+Werk, das sich in Millionen Küchen durchsetzte.
+
+## Warum Amerika überhaupt in Volumen misst
+
+Hier liegt die eigentliche Pointe, und sie ist eine technische.
+
+Gegen Ende des 19. Jahrhunderts waren Küchenwaagen unzuverlässig und teuer. Ein Maß nach Gewicht
+war für die meisten Haushalte schlicht nicht praktikabel. Folglich maß man nach Volumen — nicht
+weil es genauer gewesen wäre, sondern weil es das Einzige war, das jeder umsetzen konnte. Der
+Messbecher war ein **Behelf**.
+
+Genau in dieser Zeit entstand auch der Messbecher mit aufgedruckter Skala in Cups und
+Bruchteilen davon.
+
+Der Grund für den Behelf ist längst verschwunden. Eine digitale Küchenwaage kostet heute weniger
+als ein Kochbuch und wiegt auf ein Gramm genau. Der Behelf hat das Problem, das ihn nötig machte,
+um mehr als hundert Jahre überlebt — und ist in einem ganzen Land zur Selbstverständlichkeit
+geworden.
+
+<Video src="/blog/cups.mp4" poster="/blog/cups-titelbild.png" caption="Derselbe Becher, dieselbe Zutat – der Unterschied entsteht beim Füllen." />
+
+## Dieselbe Cup, dieselbe Person, 40 Gramm Unterschied
+
+Bis hierher ließe sich alles mit einer guten Tabelle lösen. Der letzte Punkt lässt sich nicht
+lösen.
+
+Mehl ist ein zusammendrückbares Pulver. Wie viel davon in einen Becher passt, hängt davon ab,
+wie es hineinkommt. Der Mühlenbetrieb King Arthur hat den Unterschied gemessen: Eine Cup
+Weizenmehl, vorsichtig eingelöffelt und glattgestrichen, wiegt 120 Gramm. Dieselbe Cup, direkt
+aus der Tüte geschöpft, erreicht 160 Gramm. **Ein Drittel mehr Mehl aus demselben Becher.**
+
+Bei drei Cups für einen Brotlaib sind das 120 Gramm Überschuss — fast eine ganze zusätzliche
+Cup. Das ist häufig der ganze Grund, warum ein Brot trocken und dicht wird.
+
+Und die Fachwelt ist sich nicht einmal über den Ausgangswert einig. King Arthurs eigene Rezepte
+setzen 1 Cup = 120 Gramm an. USDA- und FAO-Analysen liegen näher bei 125 Gramm. Viele
+Berufsbäcker rechnen mit 140 Gramm. Gesiebtes Mehl kommt auf etwa 110 Gramm.
+
+<MehlStreuung />
+
+Beim Zucker ist die Lage übrigens deutlich ruhiger: Rund 200 Gramm je Cup sind breit anerkannt,
+weil Zuckerkristalle sich kaum zusammendrücken lassen. Genau das macht die Sache tückisch — eine
+Zahl, die bei einer Zutat verlässlich ist, ist bei der nächsten eine Schätzung.
+
+## Was daraus folgt
+
+Die Cup ist keine Menge. Sie ist ein Behälter.
+
+Sie sagt, wie voll etwas ist, nicht wie viel darin ist. Bei Flüssigkeiten fällt der Unterschied
+nicht auf, weil Wasser sich nicht zusammendrücken lässt. Bei Mehl, Kakao, Puderzucker oder
+Semmelbröseln entscheidet die Handbewegung mit.
+
+Praktisch heißt das: Wenn ein amerikanisches Rezept Gewichte in Gramm mitliefert, nehmen Sie die
+Gramm. Wenn nicht, ist eine Umrechnungstabelle die zweitbeste Lösung — und die einzige, die es
+gibt. Nur sollte man wissen, dass sie eine Annahme darüber trifft, wie jemand anders vor Jahren
+seinen Becher gefüllt hat.
+
+<KarstenSagt>
+Mein erstes amerikanisches Rezept ging mächtig daneben. Ich hatte gelesen, eine Cup sind ungefähr
+240 — und habe dann für alles 240 Gramm abgewogen. Mehl, Zucker, Butter, immer 240 Gramm. Die 240
+stimmen aber für Milliliter, nicht für Gramm. Beim Mehl hatte ich damit die doppelte Menge im
+Teig, weil eine Cup Mehl nur rund 120 Gramm wiegt. Beim Zucker war es ein Fünftel zu viel. Das
+Ergebnis war ein Chaos.
+
+Heute weiß ich: Die Cup sagt, wie voll der Becher ist, nicht wie viel drin ist.
+</KarstenSagt>
+
+<Quellen eintraege={[
+  {
+    titel: 'FDA: Guidance for Industry — Guidelines for Determining Metric Equivalents of Household Measures',
+    url: 'https://www.fda.gov/regulatory-information/search-fda-guidance-documents/guidance-industry-guidelines-determining-metric-equivalents-household-measures',
+    hinweis: 'Primärquelle für die gesetzliche US-Cup: 1 Cup = 240 ml, 1 Tablespoon = 15 ml, 1 Teaspoon = 5 ml, 1 Flüssigunze = 30 ml, 1 Unze = 28 g, nach 21 CFR 101.9(b)(5)(viii).',
+  },
+  {
+    titel: 'Code of Federal Regulations, Title 21, § 101.9(b)(5)(viii)',
+    hinweis: 'Rechtsgrundlage der gesetzlichen Cup für die Nährwertkennzeichnung in den USA.',
+  },
+  {
+    titel: 'King Arthur Baking: How to Measure Flour',
+    url: 'https://www.kingarthurbaking.com/videos/baking-skills/how-to-measure-flour',
+    hinweis: 'Belegt, dass sämtliche Rezepte des Herstellers 1 Cup = 120 g Weizenmehl ansetzen, und empfiehlt die digitale Waage als genaueste Methode.',
+  },
+  {
+    titel: 'King Arthur Baking: Recipe Success Guide',
+    url: 'https://www.kingarthurbaking.com/recipes/resources/recipe-success-guide',
+    hinweis: 'Nennt 120 g je Cup Weizenmehl und beschreibt das Einlöffeln mit anschließendem Abstreichen als Messmethode.',
+  },
+  {
+    titel: 'US-Patentschrift 9.828.140, Hintergrundabschnitt zur Entstehung des Messbechers',
+    url: 'https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/9828140',
+    hinweis: 'Hält fest, dass Maße nach Gewicht im späten 19. Jahrhundert wegen unzuverlässiger und teurer Waagen unpraktisch waren und deshalb nach Volumen gemessen wurde — und dass der Messbecher mit Cup-Skala in derselben Zeit entstand.',
+  },
+  {
+    titel: 'Boston Magazine: Fannie Farmer’s The Boston Cooking-School Cook Book (2016)',
+    url: 'https://www.bostonmagazine.com/news/2016/01/07/fannie-farmer-cookbook/',
+    hinweis: 'Erscheinungsdatum 7. Januar 1896, das Zitat zu den korrekten Maßen und der Beiname „mother of level measurements".',
+  },
+  {
+    titel: 'Freedom’s Way National Heritage Area: Fannie Farmer',
+    url: 'https://freedomsway.org/story/fannie-farmer/',
+    hinweis: 'Belegt die Erstauflage von 3.000 Exemplaren auf eigene Kosten, über vier Millionen verkaufte Exemplare zu Lebzeiten und die Ausbildung an der Boston Cooking School.',
+  },
+  {
+    titel: 'Australian Standard AS 1325 — metrische Cup',
+    hinweis: 'Legt die metrische Cup auf exakt 250 ml fest; entsprechende Normen gelten in Neuseeland. Der australische Tablespoon misst abweichend 20 ml.',
+  },
+]} />

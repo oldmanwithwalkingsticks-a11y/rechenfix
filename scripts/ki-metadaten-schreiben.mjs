@@ -44,6 +44,8 @@ const DIGITAL_SOURCE_TYPE =
 const GENERATOREN = {
   'bmi-titelbild.png': 'Gemini 3 Pro Image (Google)',
   'bmi.mp4': 'Kling AI 3.0 (Kuaishou)',
+  'cups-titelbild.png': 'Gemini 3 Pro Image (Google)',
+  'cups.mp4': 'Kling AI 3.0 (Kuaishou)',
   'datenmengen-titelbild.png': 'Gemini 3 Pro Image (Google)',
   'datenmengen.mp4': 'Kling AI 3.0 (Kuaishou)',
   'meter-titelbild.png': 'Gemini 3 Pro Image (Google)',
