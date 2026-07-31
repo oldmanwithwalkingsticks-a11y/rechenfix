@@ -1,0 +1,189 @@
+import { generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import StructuredData from '@/components/seo/StructuredData';
+import { artikel } from './meta';
+
+export const metadata = {
+  title: `${artikel.titel} | Rechenfix.de`,
+  description: artikel.beschreibung,
+  alternates: { canonical: 'https://www.rechenfix.de/blog/warum-sich-der-euro-teurer-anfuehlte' },
+};
+
+<StructuredData data={generateArticleSchema({
+  url: 'https://www.rechenfix.de/blog/warum-sich-der-euro-teurer-anfuehlte',
+  headline: artikel.titel,
+  description: artikel.beschreibung,
+  datePublished: artikel.datum,
+  dateModified: artikel.datum,
+  image: '/blog/euro-dmark-titelbild.png',
+})} />
+
+<StructuredData data={generateBreadcrumbSchema([
+  { name: 'Start', url: '/' },
+  { name: 'Blog', url: '/blog' },
+  { name: artikel.titel, url: '/blog/warum-sich-der-euro-teurer-anfuehlte' },
+])} />
+
+# Warum sich der Euro teurer anfühlte, als er war
+
+<ArtikelDatum datum={artikel.datum} />
+
+<Bild src="/blog/euro-dmark-titelbild.png" alt="Zwei Stapel Münzen nebeneinander auf einer hölzernen Ladentheke, links stumpfe ältere Münzen, rechts hellere Zweifarbenmünzen" caption="Zwei Währungen auf derselben Theke — und ein Umrechnungskurs, der nie wieder verhandelt wurde." width={1200} height={675} />
+
+Am 1. Januar 2002 wachte Deutschland mit einer neuen Zahl auf: 1,95583. Wer an diesem Tag ein Bier bestellte, das am Tag zuvor fünf Mark gekostet hatte, zahlte 2,56 Euro. Nicht 2,50.
+
+Die zwei Cent Unterschied klingen nach nichts. Sie sind der Anfang einer Geschichte darüber, wie eine völlig korrekte Zahl und ein völlig ehrliches Gefühl jahrelang gegeneinander stehen konnten — und wie sich am Ende herausstellte, dass beide Seiten recht hatten.
+
+## Die Zahl wurde nicht ausgehandelt. Sie fiel an.
+
+Ein hartnäckiger Verdacht lautet, der Kurs sei politisch gemacht worden. War er nicht.
+
+Der EG-Vertrag schrieb vor, dass die Festlegung der Umrechnungskurse den Außenwert der ECU nicht verändern durfte — jener europäischen Korbwährung, aus der der Euro hervorging. Eine ECU sollte schlicht ein Euro werden. Um das zu garantieren, nahm man als Umrechnungskurse genau die Kurse, die die Europäische Kommission am 31. Dezember 1998 nach dem üblichen Verfahren für die täglichen amtlichen ECU-Kurse berechnet hatte. Der Rat schrieb sie noch am selben Tag in der Verordnung (EG) Nr. 2866/98 fest. Unwiderruflich, ab dem 1. Januar 1999.
+
+Die 1,95583 sind also kein Verhandlungsergebnis, sondern das Ergebnis einer Tagesberechnung. Für die Mark, für den Franc, für die Lira, für alle elf Währungen gleichzeitig.
+
+## Sechs Stellen — aber nicht die, die man denkt
+
+Hier wird es genau, und die Genauigkeit ist der Punkt.
+
+Man liest oft, der Kurs sei „auf sechs Nachkommastellen" festgelegt worden. Das stimmt nicht. 1,95583 hat fünf Nachkommastellen. Die maßgebliche Regel steht in Artikel 4 Absatz 1 der Verordnung (EG) Nr. 1103/97 und lautet anders: Die Kurse werden **mit sechs signifikanten Stellen** festgelegt. Erwägungsgrund 12 derselben Verordnung definiert das ausdrücklich — ein Kurs mit sechs signifikanten Stellen ist einer, der ab der ersten von links gezählten Stelle, die nicht eine Null ist, sechs Ziffern hat.
+
+<SechsStellen />
+
+Der Beweis steht in derselben Verordnung, ein paar Zeilen weiter. Ein Euro entsprach 1936,27 italienischen Lire — keine einzige Nachkommastelle, aber sechs Ziffern. Und 340,750 griechischen Drachmen: Die Null am Ende ist kein Schreibfehler, sie ist die sechste signifikante Stelle. Dasselbe bei 0,429300 maltesischen Lira, wo gleich zwei Nullen mitgezählt werden müssen.
+
+<RechnerLoader slug="dm-euro-rechner" />
+
+## Eine Verordnung, die vorschreibt, wie zu runden ist
+
+Wer 1,95583 für pedantisch hält, hat den Rest der Verordnung noch nicht gelesen. Artikel 4 und 5 regeln das Rechnen selbst:
+
+Der Kurs darf bei Umrechnungen **weder gerundet noch um Stellen gekürzt** werden. Man darf außerdem **keinen Kehrwert bilden** — wer Euro in Mark umrechnet, multipliziert mit 1,95583; wer Mark in Euro umrechnet, teilt durch dieselbe Zahl. Mit 0,511292 zu multiplizieren ist verboten, und die Begründung steht gleich dabei: Inverse Kurse würden Rundungen erfordern und könnten „zu erheblichen Ungenauigkeiten führen, insbesondere wenn es sich um hohe Beträge handelt".
+
+Wollte man Peseten in Lire umrechnen, musste man den Umweg über den Euro nehmen — direkte bilaterale Kurse zwischen zwei Altwährungen gab es nicht und durften nicht gebildet werden. Und für den Fall, dass ein Ergebnis exakt zwischen zwei Cent landet, hat der Rat auch das geregelt: Dann wird aufgerundet.
+
+Das ist eine Verordnung, die einer ganzen Volkswirtschaft bis auf den halben Cent hinunter vorschreibt, wie sie zu runden hat.
+
+## Dann kam das Gefühl
+
+Und trotz dieser Präzision wurde 2002 aus dem Euro der Teuro. Das Wort wurde zum Wort des Jahres gewählt, die Verbraucherschutzministerin lud zu einem „Anti-Teuro-Gipfel", und die Antwort der amtlichen Statistik lautete: Da ist nichts.
+
+Die Zahlen gaben ihr recht. Die Verbraucherpreise stiegen 2002 gegenüber 2001 um 1,3 Prozent — nach 2,5 Prozent im Jahr davor. Im Mai 2002 lag die Jahresrate bei 1,1 Prozent, dem niedrigsten Wert seit November 1999. Computer waren im selben Monat 23 Prozent billiger als ein Jahr zuvor. Das Statistische Bundesamt schrieb, die Euro-Bargeldeinführung habe auf die Preisentwicklung 2002 keinen nennenswerten Einfluss gehabt. Die Deutsche Bundesbank rechnete nach und kam zu dem Ergebnis, der Bargeldeinführung selbst könne **höchstens ein Beitrag von 0,3 Prozentpunkten** zur Januar-Teuerungsrate zugerechnet werden — der Rest ging auf zum 1. Januar 2002 erhöhte Steuern auf Energie, Tabak und Versicherungen sowie auf verdorbene Ernten in Südeuropa.
+
+Das ifo-Institut nannte die Euro-Einführung im Hinblick auf die Inflation ein „Nicht-Ereignis" und verwies die Debatte in den „imaginären Raum der Psyche und der subjektiven Befindlichkeiten". Die Frankfurter Allgemeine resümierte 2005, der Teuro sei für viele einfach „Einbildung" gewesen; der Konsument habe ein „verzerrtes Preisgefühl" gehabt.
+
+Nur: Das Gefühl ging nicht weg. Im Oktober und November 2003 meinten über 90 Prozent der befragten Deutschen rückblickend, die Preise seien bei der Umstellung eher zu ihrem Nachteil geändert worden. Ein Jahr zuvor waren es 88 Prozent gewesen. Die Überzeugung verfestigte sich, statt sich zu legen.
+
+## Der Durchschnitt, den kein Kunde bezahlte
+
+<Video src="/blog/euro-dmark.mp4" poster="/blog/euro-dmark-titelbild.png" caption="Dieselbe Theke, dasselbe Geld — nur die Zahl darauf war neu." />
+
+Die Auflösung steckt in einer Sonderauswertung, die die Bundesbank gemeinsam mit dem Statistischen Bundesamt an den Einzeldaten der Preisstatistik vornahm — nicht an Durchschnitten, sondern an den einzelnen Preisen dahinter.
+
+Friseurleistungen verteuerten sich im Januar 2002 im Bundesdurchschnitt um 1,9 Prozent. Ein unauffälliger Wert. Nur: **Rund die Hälfte der beobachteten Salons hob die Preise überhaupt nicht an. Die andere Hälfte erhöhte im Mittel um rund sechs Prozent.** Es gab sogar Friseure, die senkten.
+
+<HalbeErhoehung />
+
+Damit lösen sich beide Wahrnehmungen gleichzeitig auf. Die Statistik hatte recht: 1,9 Prozent im Mittel. Der Kunde hatte auch recht: Er zahlte sechs Prozent mehr — oder gar nichts. Der Durchschnitt, den die Statistik auswies, existierte für keinen einzigen Menschen.
+
+Über alle untersuchten Produkte hinweg wurden knapp 45 Prozent der Preise angehoben, 10 Prozent gesenkt, und fast die Hälfte blieb unverändert. Wer Pech hatte, traf reihenweise die ersten 45 Prozent.
+
+## Der Rechenfehler, den die Bundesbank selbst benannt hat
+
+Dazu kam ein zweiter Effekt, und der ist reine Arithmetik.
+
+Fast alle rechneten im Kopf mit „mal zwei". Fünf Euro? Waren früher zehn Mark. Nur stimmt das nicht: Fünf Euro sind 9,78 Mark. Wer verdoppelt, erhält systematisch einen zu hohen Mark-Betrag.
+
+<MalZweiFalle />
+
+Die Bundesbank hat das ausgerechnet und in ihrem Monatsbericht vom Januar 2004 festgehalten: Die vielfach nach der Faustregel 1:2 vorgenommene Umrechnung ergibt angesichts des tatsächlichen Konversionsfaktors von 1,95583 einen **um 2,3 Prozent überhöhten Wert** — und wirkt sich damit zu Ungunsten des Euro aus.
+
+Jeder Preisvergleich im Kopf machte den Euro also ein bisschen teurer, als er war. Bei jedem Einkauf. Über Jahre. Und Ende 2002 gaben mehr als drei Viertel der Befragten an, die alte Währung noch immer als Rechenhilfe zu benutzen.
+
+Die Bundesbank verweist außerdem auf Experimente von Wirtschafts- und Sozialpsychologen: Selbst bei völlig korrekter Umrechnung durch den Anbieter nahmen Verbraucher häufig eine Preissteigerung wahr. Der Effekt war stärker bei Menschen, die von der Umstellung ohnehin einen Preisschub erwarteten — Rechenfehler fallen seltener auf, wenn ihr Ergebnis zu den eigenen Erwartungen passt. Die Fachliteratur nennt das „selektive Fehlerkorrektur".
+
+## Warum der Index es nicht zeigen konnte
+
+Der interessanteste Befund kam 2005, und er kam ausgerechnet aus dem Statistischen Bundesamt selbst. Es druckte einen Aufsatz von Hans Wolfgang Brachinger, der gemeinsam mit dem Amt einen Index der wahrgenommenen Inflation berechnet hatte — auf Basis der Prospect Theory von Kahneman und Tversky, aber gerechnet mit den echten amtlichen Preisdaten, nicht mit Umfragen.
+
+Das Ergebnis: Im Juni und Juli 2001 lag die wahrgenommene Inflation bei 8,8 Prozent, während der Verbraucherpreisindex um die zwei Prozent pendelte. Im Januar 2002, dem Monat der Umstellung, sprang sie auf 10,6 Prozent. Über den gesamten Zeitraum Januar 2001 bis Juni 2002 lag die wahrgenommene Teuerung bei 6,6 Prozent gegenüber 1,8 Prozent im amtlichen Index — mehr als das Dreieinhalbfache. Ab Juli 2002 fiel sie wieder auf das Niveau des Index zurück.
+
+Der Grund dafür ist strukturell und hat mit Einbildung nichts zu tun. 2001 stiegen ausgerechnet die Preise jener Güter überdurchschnittlich, die man überdurchschnittlich häufig kauft. Brachinger nennt es eine in der jüngeren Vergangenheit nie dagewesene positive Korrelation zwischen Preisveränderung und Kaufhäufigkeit.
+
+<AusgabenGegenHaeufigkeit />
+
+Der Verbraucherpreisindex kann so etwas gar nicht abbilden, weil er nach **Ausgaben** gewichtet, nicht nach **Kaufhäufigkeit**. Die vier am häufigsten gekauften Dinge im deutschen Warenkorb waren die Tageszeitung im Einzelverkauf, Zigaretten, Bier im Ausschank und Brötchen; drei davon haben ein winziges Ausgabengewicht. Die vier ausgabenstärksten Posten waren zwei Wohnungsgrößen, Normalbenzin und Reisen — alle vier kauft man selten.
+
+Brachingers Schluss ist bemerkenswert fair: Wenn Wahrnehmung und amtliche Zahl auseinanderfallen, muss sich keine der beiden Seiten irren. Der Index misst die Geldwertstabilität einer Volkswirtschaft. Er war nie dafür gebaut, abzubilden, wie sich Einkaufen anfühlt. „Das kann man dem VPI nicht vorhalten."
+
+Ganz einig ist sich die Forschung bis heute nicht. Das Institut für Wirtschaftsforschung Halle fand Hinweise, dass die Bargeldeinführung zu einem Sprung des Preisniveaus beigetragen hat. Das Wiener WIFO fand insgesamt keinen stärkeren preistreibenden Effekt, wohl aber Erhöhungen mit Schwerpunkt im Dienstleistungssektor. Und eine Prognose aus dem Herbst 2001 hatte für Anfang 2002 sogar **sinkende** Preise erwartet, weil der Handel auf attraktive Euro-Schwellenpreise abrunden werde.
+
+## Der Abschied, den fast alle falsch erinnern
+
+Fast jeder erinnert den 28. Februar 2002 als das Ende der D-Mark. Das war es nicht.
+
+Das Gesetz über die Beendigung der Zahlungsmitteleigenschaft legte fest: Mit Ablauf des 31. Dezember 2001 verloren die D-Mark-Banknoten und -Münzen ihre Eigenschaft als gesetzliches Zahlungsmittel. Punkt. Die EU-Verordnung hätte einen Parallelumlauf von bis zu sechs Monaten erlaubt — Deutschland nutzte diesen Spielraum bewusst nicht, um Handel und Banken die Doppelbelastung zu ersparen.
+
+Der 28. Februar war kein Gesetz, sondern eine freiwillige Selbstverpflichtung: Kreditwirtschaft, Handel und Automatenwirtschaft hatten in einer gemeinsamen Erklärung zugesagt, D-Mark im Januar und Februar weiter anzunehmen. Bezahlen konnte man in Mark, Wechselgeld gab es nur in Euro. Verpflichtet war niemand. In den meisten Geschäften wurde ohnehin schon Ende Januar fast nur noch in Euro gezahlt.
+
+## Zwölf Milliarden, die nie zurückkamen
+
+Zum 31. Dezember 2025 waren noch **12,13 Milliarden D-Mark** nicht umgetauscht: 5,61 Milliarden in Scheinen, 6,52 Milliarden in Münzen. Im Jahr 2025 kamen 53,1 Millionen Mark zurück, gut 27 Millionen Euro wert.
+
+Sie können auch heute noch getauscht werden — zeitlich unbefristet, betraglich unbegrenzt und gebührenfrei bei der Deutschen Bundesbank, in einer ihrer Filialen oder per Post. Normale Banken dürfen es nicht. Und das ist europaweit die Ausnahme: Frankreich schloss den Umtausch im Februar 2012, Italien im Dezember 2011, Griechenland im März 2012, Spanien 2021, Portugal 2022. Wer eine alte Drachme findet, hat ein Sammlerstück. Wer eine alte Mark findet, hat Geld.
+
+## Die Zahl lebt noch
+
+Und dann ist da noch dieses Detail, an dem man merkt, dass Geschichte selten sauber endet.
+
+Am 1. Januar 2026 hat Bulgarien den Euro eingeführt. Der Umrechnungskurs des Lew wurde festgelegt auf: 1,95583.
+
+Dieselbe Zahl. Kein Zufall — Bulgarien hatte seine Währung in den neunziger Jahren an die D-Mark gekoppelt, und diese Bindung wanderte über den Wechselkursmechanismus unverändert in den Eurobeitritt hinein. Die Zahl, die 2002 in Deutschland zum Symbol für ein Gefühl wurde, ist seit 2026 wieder geltendes Recht — sechs signifikante Stellen, in einem anderen Land.
+
+Wer bis heute in Mark umrechnet, ist damit übrigens nicht allein, und die Statistik kennt dieses Verhalten genau. Brachinger hat es als eigenes Modell gerechnet: Wer den letzten DM-Preis als festen Bezugspunkt behält, nimmt seit 2005 im Schnitt 14,7 Prozent Inflation wahr. Ein erheblicher Teil davon sind allerdings schlicht die Preissteigerungen von inzwischen fast einem Vierteljahrhundert, die mit der Währungsumstellung nichts zu tun haben.
+
+<KarstenSagt>
+Das war schon was mit der Umstellung, die hat uns richtig weh getan und wir wurden mehr oder weniger über den Tisch gezogen. Die Preise wurden nahezu 1:1 übernommen, also was mal 1,49 D-Mark gekostet hat, wurde mit 1,49 Euro ausgezeichnet — aber auf dem Gehaltszettel stand plötzlich nur noch die Hälfte.
+
+Heute vergleiche ich noch gerne Preise mit der guten alten Mark und muss erschreckend feststellen, wie teuer manche Dinge geworden sind, wenn man den Betrag in D-Mark betrachtet.
+
+Bis heute ist der Euro umstritten, zurecht wie ich finde, denn es kann niemals gerecht sein, eine Währung für ganz Europa einzuführen, wenn jeder Staat ein anderes Niveau, einen anderen Zinssatz und so weiter hat.
+</KarstenSagt>
+
+<Quellen eintraege={[
+  {
+    titel: 'Verordnung (EG) Nr. 1103/97 des Rates vom 17.06.1997, ABl. L 162 vom 19.06.1997, S. 1–3',
+    hinweis: 'Artikel 4 und 5 sowie Erwägungsgründe 10 und 12: sechs signifikante Stellen, Rundungs- und Kürzungsverbot, Verbot inverser Kurse, Dreiecksweg über den Euro, Aufrundung bei Ergebnis genau in der Mitte.',
+  },
+  {
+    titel: 'Verordnung (EG) Nr. 2866/98 des Rates vom 31.12.1998, ABl. L 359 vom 31.12.1998, S. 1–2',
+    hinweis: 'Unwiderruflich festgelegte Umrechnungskurse, berechnet aus den ECU-Tageskursen vom 31.12.1998.',
+  },
+  {
+    titel: 'Gesetz über die Beendigung der Zahlungsmitteleigenschaft (DMBeEndG), Art. 1 des Gesetzes vom 16.12.1999, BGBl. I S. 2402, § 1',
+    hinweis: 'Ende der Zahlungsmitteleigenschaft mit Ablauf des 31.12.2001.',
+  },
+  {
+    titel: 'Statistisches Bundesamt, WiSta 1/2003, „Preisentwicklung 2002"',
+    hinweis: 'Verbraucherpreise 2002 plus 1,3 Prozent nach plus 2,5 Prozent 2001.',
+  },
+  {
+    titel: 'Deutsche Bundesbank, Monatsbericht Januar 2004, „Der Euro und die Preise: zwei Jahre später", S. 15 ff.',
+    hinweis: 'Höchstens 0,3 Prozentpunkte, Friseur-Sonderauswertung, die 2,3 Prozent der Faustregel 1:2, selektive Fehlerkorrektur, Flash-Eurobarometer.',
+  },
+  {
+    titel: 'Statistisches Bundesamt, WiSta 9/2005, Brachinger, „Der Euro als Teuro? Die wahrgenommene Inflation in Deutschland"',
+    hinweis: 'Index der wahrgenommenen Inflation, Korrelation 0,0971, DM-Anker-Modelle.',
+  },
+  {
+    titel: 'Axel Lindner, IWH, „Preisniveaueffekte der Euro-Bargeldeinführung", Wirtschaft im Wandel 8(4)/2002, S. 99–101',
+  },
+  {
+    titel: 'Wolfgang Pollan, WIFO-Monatsberichte 75(10)/2002, S. 633–640',
+  },
+  {
+    titel: 'Deutsche Bundesbank, FAQ zu DM-Banknoten und Umtauschzahlen zum 31.12.2025',
+  },
+  {
+    titel: 'EZB, Übersicht der Umtauschfristen nationaler Währungen; Pressemitteilung vom 08.07.2025 zum Umrechnungskurs des bulgarischen Lew',
+  },
+]} />

@@ -48,6 +48,8 @@ const GENERATOREN = {
   'cups.mp4': 'Kling AI 3.0 (Kuaishou)',
   'datenmengen-titelbild.png': 'Gemini 3 Pro Image (Google)',
   'datenmengen.mp4': 'Kling AI 3.0 (Kuaishou)',
+  'euro-dmark-titelbild.png': 'Gemini 3 Pro Image (Google)',
+  'euro-dmark.mp4': 'Kling AI 3.0 (Kuaishou)',
   'meter-titelbild.png': 'Gemini 3 Pro Image (Google)',
   'meter-video-standbild.png': 'Gemini 3 Pro Image (Google)',
   'meter.mp4': 'Kling AI 3.0 (Kuaishou)',

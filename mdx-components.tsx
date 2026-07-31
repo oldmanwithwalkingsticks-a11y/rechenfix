@@ -33,6 +33,10 @@ import VierCups from '@/components/blog/grafik/VierCups';
 import EtikettGegenRezept from '@/components/blog/grafik/EtikettGegenRezept';
 import LoeffelFalle from '@/components/blog/grafik/LoeffelFalle';
 import MehlStreuung from '@/components/blog/grafik/MehlStreuung';
+import SechsStellen from '@/components/blog/grafik/SechsStellen';
+import HalbeErhoehung from '@/components/blog/grafik/HalbeErhoehung';
+import MalZweiFalle from '@/components/blog/grafik/MalZweiFalle';
+import AusgabenGegenHaeufigkeit from '@/components/blog/grafik/AusgabenGegenHaeufigkeit';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -106,6 +110,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     EtikettGegenRezept,
     LoeffelFalle,
     MehlStreuung,
+    SechsStellen,
+    HalbeErhoehung,
+    MalZweiFalle,
+    AusgabenGegenHaeufigkeit,
     ...components,
   };
 }
