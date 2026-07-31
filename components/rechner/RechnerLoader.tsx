@@ -148,6 +148,7 @@ const RECHNER_MAP: Record<string, ComponentType> = {
   'zyklusrechner': dyn(() => import('@/components/rechner/ZyklusRechner')),
   'hochrechner': dyn(() => import('@/components/rechner/HochRechner')),
   'malerkosten-rechner': dyn(() => import('@/components/rechner/MalerkostenRechner')),
+  'dm-euro-rechner': dyn(() => import('@/components/rechner/DmEuroRechner')),
   'waehrungsrechner': dyn(() => import('@/components/rechner/WaehrungsRechner')),
   'alkohol-abbau-rechner': dyn(() => import('@/components/rechner/AlkoholAbbauRechner')),
   'unterhaltsrechner': dyn(() => import('@/components/rechner/UnterhaltsRechner')),

@@ -176,6 +176,8 @@ export const beliebteRechnerSlugs = [
 
 /** Neu hinzugefügte Rechner (neueste zuerst) */
 export const neueRechnerSlugs = [
+  // DM-Euro-Rechner 31.07.2026
+  'dm-euro-rechner',
   // Auto-Ausbau 02.07.2026
   'wertverlust-auto-rechner',
   'reifengroesse-rechner',
@@ -405,7 +407,8 @@ const verwandteMap: Record<string, string[]> = {
   'zyklusrechner': ['geburtstermin-rechner', 'ssw-rechner', 'tagerechner', 'schlaf-rechner'],
   'hochrechner': ['brutto-netto-rechner', 'stundenlohn-rechner', 'gehaltsvergleich', 'gehaltserhoehung-rechner'],
   'malerkosten-rechner': ['quadratmeter-rechner', 'tapetenbedarf-rechner', 'umzugskosten-rechner', 'nebenkosten-rechner'],
-  'waehrungsrechner': ['einheiten-umrechner', 'prozentrechner', 'inflationsrechner', 'mwst-rechner'],
+  'dm-euro-rechner': ['waehrungsrechner', 'inflationsrechner', 'prozentrechner', 'dreisatz-rechner'],
+  'waehrungsrechner': ['dm-euro-rechner', 'prozentrechner', 'inflationsrechner', 'mwst-rechner'],
   'alkohol-abbau-rechner': ['promillerechner', 'bussgeldrechner', 'bmi-rechner', 'schlaf-rechner'],
   'brutto-netto-rechner': ['stundenlohn-rechner', 'elterngeld-rechner', 'pendlerpauschale-rechner', 'sparrechner'],
   'prozentrechner': ['mwst-rechner', 'dreisatz-rechner', 'bruchrechner', 'einheiten-umrechner'],

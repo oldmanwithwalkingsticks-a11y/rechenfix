@@ -3560,6 +3560,186 @@ Ein älterer Hund hat andere Bedürfnisse als ein junger: **weichere Gelenke**, 
     ],
   },
   {
+    slug: 'dm-euro-rechner',
+    letzteAktualisierung: '2026-07-31',
+    titel: 'DM-Euro-Rechner',
+    beschreibung: 'D-Mark und andere Altwährungen der Eurozone zum unwiderruflich festgelegten Kurs umrechnen — 21 Währungen, amtliche Rundungsregeln.',
+    kategorie: 'Alltag',
+    kategorieSlug: 'alltag',
+    metaTitle: 'DM in Euro umrechnen — amtlicher Kurs 1,95583',
+    metaDescription: 'DM-Euro-Rechner: D-Mark in Euro umrechnen ✓ Amtlicher Kurs 1 € = 1,95583 DM ✓ 21 Altwährungen ✓ Rundung nach EU-Verordnung ✓ Mit KI-Erklärung.',
+    keywords: ['dm in euro umrechnen', 'dm euro rechner', 'd-mark in euro', 'umrechnungskurs dm euro', 'schilling in euro', 'altwährung umrechnen', '1,95583'],
+    icon: '💶',
+    formel: 'Euro = DM-Betrag ÷ 1,95583. Der Umrechnungskurs wird dabei weder gerundet noch gekürzt; nur das Ergebnis wird auf den nächstliegenden Cent gerundet.',
+    beispiel: 'Beispiel: 100 DM ÷ 1,95583 = 51,1292… € → 51,13 €. Umgekehrt: 50 € × 1,95583 = 97,79 DM.',
+    erklaerung: `**Der Kurs, der sich nie ändert**
+
+Die meisten Umrechnungskurse schwanken jeden Tag. Der Kurs zwischen D-Mark und Euro tut das nicht. Er wurde mit der Verordnung (EG) Nr. 2866/98 des Rates vom 31. Dezember 1998 unwiderruflich festgelegt und gilt seit dem 1. Januar 1999: 1 Euro = 1,95583 D-Mark. Dieselbe Verordnung legte die Kurse aller damaligen Gründungswährungen der Eurozone fest, spätere Beitritte kamen per Änderungsverordnung hinzu.
+
+**Warum genau 1,95583?**
+
+Die Zahl ist kein politisch ausgehandelter Wert, sondern das Ergebnis einer Tagesberechnung. Nach dem damaligen EG-Vertrag durfte die Festlegung den Außenwert der ECU (der europäischen Rechnungseinheit) nicht verändern. Deshalb übernahm man als Umrechnungskurse genau die ECU-Kurse, die die Kommission am 31. Dezember 1998 nach dem üblichen Verfahren berechnet hatte. Eine ECU wurde zu genau einem Euro.
+
+**Amtliche Rundung**
+
+Für die Umrechnung gelten feste Regeln aus der Verordnung (EG) Nr. 1103/97: Der Kurs wird nie gerundet oder gekürzt, es wird durch ihn geteilt statt mit einem Kehrwert multipliziert, und das Endergebnis wird auf den nächstliegenden Cent gerundet. Dieser Rechner setzt genau diese Regeln um — deshalb ist sein Ergebnis nicht nur ungefähr, sondern amtlich korrekt.
+
+**Wofür man ihn braucht**
+
+Der Rechner hilft beim Umtausch alter D-Mark-Bestände, beim Einordnen historischer Preise und beim Verstehen alter Rechnungen, Sparbücher oder Kaufbelege. Auch die Schilling-, Franc-, Lira- oder Peseta-Beträge aus alten Reisekassen lassen sich so exakt in Euro umrechnen.`,
+    faq: [
+      {
+        frage: 'Wie rechne ich D-Mark in Euro um?',
+        antwort: 'Man teilt den D-Mark-Betrag durch 1,95583. 100 DM ergeben also 100 ÷ 1,95583 = 51,13 €. Der Kurs ist unwiderruflich festgelegt und ändert sich nicht — das Ergebnis ist damit exakt, nicht nur ungefähr.',
+      },
+      {
+        frage: 'Stimmt die Faustregel „D-Mark durch zwei"?',
+        antwort: 'Nur ungefähr, und sie führt systematisch in die Irre. Der echte Kurs ist 1,95583, nicht 2,0. Wer durch zwei teilt, liegt rund 2,3 Prozent zu niedrig; wer umgekehrt einen Euro-Preis verdoppelt, um ihn „in Mark" zu prüfen, kommt rund 2,26 Prozent zu hoch heraus. Die Deutsche Bundesbank hat genau diesen Fehler benannt und beziffert.',
+      },
+      {
+        frage: 'Kann ich D-Mark heute noch umtauschen?',
+        antwort: 'Ja. Die Deutsche Bundesbank tauscht D-Mark zeitlich unbefristet, betraglich unbegrenzt und gebührenfrei in Euro um — in ihren Filialen oder per Post über die Filiale Mainz. Normale Banken sind dazu nicht verpflichtet. Zum 31. Dezember 2025 waren noch rund 12,13 Milliarden D-Mark nicht zurückgegeben.',
+      },
+      {
+        frage: 'Warum hat der Kurs sechs Stellen und trotzdem nur fünf Nachkommastellen?',
+        antwort: 'Die Verordnung verlangt sechs signifikante Stellen, nicht sechs Nachkommastellen. Bei 1,95583 sind die Ziffern 1-9-5-5-8-3 die sechs signifikanten Stellen. Bei der italienischen Lira (1 € = 1936,27) gibt es deshalb sogar nur zwei Nachkommastellen, weil die sechs Ziffern schon vor dem Komma liegen.',
+      },
+      {
+        frage: 'Rechnet der Rechner auch Schilling, Franc oder Lira um?',
+        antwort: 'Ja. Neben der D-Mark kennt er 20 weitere unwiderruflich festgelegte Altwährungen der Eurozone — vom österreichischen Schilling über den französischen Franc und die italienische Lira bis zur kroatischen Kuna. Für Umrechnungen zwischen zwei Altwährungen läuft der Weg vorschriftsgemäß über den Euro.',
+      },
+      {
+        frage: 'Warum hat Bulgarien denselben Kurs wie die D-Mark?',
+        antwort: 'Bulgarien ist zum 1. Januar 2026 der Eurozone beigetreten. Der bulgarische Lew war seit den 1990er-Jahren fest an die D-Mark gekoppelt, weshalb sein Euro-Kurs mit 1,95583 exakt dem der alten D-Mark entspricht. Die Zahl 1,95583 ist damit seit 2026 wieder ein gültiger Umrechnungskurs.',
+      },
+    ],
+    contentBloecke: [
+      {
+        typ: 'text',
+        titel: 'Ein Kurs, den eine Verordnung festschreibt',
+        html: `<p>Der <strong>DM-Euro-Rechner</strong> rechnet Beträge zwischen der <strong>D-Mark</strong> und dem Euro um — und zwar nicht zu einem tagesaktuellen Wechselkurs, sondern zu dem Kurs, den die Europäische Union ein für alle Mal festgeschrieben hat: <strong>1 Euro = 1,95583 D-Mark</strong>. Rechtsgrundlage ist die Verordnung (EG) Nr. 2866/98 des Rates vom 31. Dezember 1998, in Kraft seit dem 1. Januar 1999. Der Kurs ist dort ausdrücklich <strong>unwiderruflich</strong> — er schwankt nicht, er wird nicht angepasst, er gilt heute noch.</p><p>Woher die krumme Zahl kommt, ist selbst Teil der Geschichte: Sie war kein politisch ausgehandelter Wert. Nach dem damaligen EG-Vertrag durfte die Festlegung den Außenwert der europäischen Rechnungseinheit ECU nicht verändern. Deshalb wurden schlicht die ECU-Kurse übernommen, die die Kommission am 31. Dezember 1998 nach dem üblichen Verfahren für die täglichen amtlichen ECU-Kurse berechnet hatte. Aus einer ECU wurde exakt ein Euro — und aus dem damaligen ECU-Kurs der D-Mark die Zahl 1,95583.</p><p>Dieselbe Verordnung legte die Kurse aller damaligen Gründungswährungen fest. Wer alte Reisekassen mit Schilling, Franc, Lira oder Peseta findet, kann sie deshalb genauso exakt umrechnen wie D-Mark.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Die 21 unwiderruflich festgelegten Kurse',
+        kopf: ['Währung', 'Code', '1 € =', 'Euro seit'],
+        zeilen: [
+          ['Deutsche Mark', 'DEM', '1,95583', '1999'],
+          ['Österreichischer Schilling', 'ATS', '13,7603', '1999'],
+          ['Belgischer Franc', 'BEF', '40,3399', '1999'],
+          ['Spanische Peseta', 'ESP', '166,386', '1999'],
+          ['Finnmark', 'FIM', '5,94573', '1999'],
+          ['Französischer Franc', 'FRF', '6,55957', '1999'],
+          ['Irisches Pfund', 'IEP', '0,787564', '1999'],
+          ['Italienische Lira', 'ITL', '1936,27', '1999'],
+          ['Luxemburgischer Franc', 'LUF', '40,3399', '1999'],
+          ['Niederländischer Gulden', 'NLG', '2,20371', '1999'],
+          ['Portugiesischer Escudo', 'PTE', '200,482', '1999'],
+          ['Griechische Drachme', 'GRD', '340,750', '2001'],
+          ['Slowenischer Tolar', 'SIT', '239,640', '2007'],
+          ['Zypern-Pfund', 'CYP', '0,585274', '2008'],
+          ['Maltesische Lira', 'MTL', '0,429300', '2008'],
+          ['Slowakische Krone', 'SKK', '30,1260', '2009'],
+          ['Estnische Krone', 'EEK', '15,6466', '2011'],
+          ['Lettischer Lats', 'LVL', '0,702804', '2014'],
+          ['Litauischer Litas', 'LTL', '3,45280', '2015'],
+          ['Kroatische Kuna', 'HRK', '7,53450', '2023'],
+          ['Bulgarischer Lew', 'BGN', '1,95583', '2026'],
+        ],
+        fussnote: 'Alle Kurse per EU-Verordnung unwiderruflich festgelegt (Gründungskurse: VO (EG) Nr. 2866/98; spätere Beitritte per Änderungsverordnung). Der bulgarische Lew war an die D-Mark gekoppelt und hat deshalb denselben Kurs.',
+      },
+      {
+        typ: 'text',
+        titel: 'Sechs signifikante Stellen — nicht sechs Nachkommastellen',
+        html: `<p>Die Verordnung (EG) Nr. 1103/97 schreibt vor, dass jeder Umrechnungskurs mit <strong>sechs signifikanten Stellen</strong> festzulegen ist. Ein Erwägungsgrund definiert das genau: gezählt wird ab der ersten von links, die keine Null ist — von dort an sechs Ziffern.</p><p>Bei 1,95583 sind das die Ziffern 1-9-5-5-8-3: sechs signifikante Stellen, aber nur fünf Nachkommastellen. Die verbreitete Formulierung „auf sechs Nachkommastellen gerundet" ist also falsch. Dass die Regel wirklich signifikante Stellen meint, zeigen die anderen Kurse: Die italienische Lira steht bei 1 € = 1936,27 — sechs Ziffern, aber nur zwei Nachkommastellen, weil vier schon vor dem Komma liegen. Die Finnmark dagegen lautet 5,94573, das irische Pfund sogar 0,787564 mit sechs Nachkommastellen.</p><p>Für die Praxis heißt das: Der Kurs wird in voller Länge verwendet — nie auf „ungefähr 1,96" oder „rund 2" verkürzt.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Das Rundungsverbot der EU-Verordnung',
+        html: `<p>Kaum bekannt, aber der eigentliche Kern der Regelung: Die Verordnung (EG) Nr. 1103/97 schreibt einer ganzen Volkswirtschaft vor, <strong>wie</strong> zu runden ist. Vier Regeln aus Artikel 4 und 5:</p><p><strong>Der Kurs wird nicht gerundet oder gekürzt</strong> (Art. 4 Abs. 2). Er geht immer in voller Länge in die Rechnung ein.</p><p><strong>Kein inverser Kurs</strong> (Art. 4 Abs. 3): Man darf nicht mit einem abgeleiteten Kehrwert wie 0,511292 multiplizieren, sondern muss durch 1,95583 <strong>teilen</strong>. Der Grund: Ein gerundeter Kehrwert würde gerade bei hohen Beträgen zu spürbaren Ungenauigkeiten führen.</p><p><strong>Der Dreiecksweg</strong> (Art. 4 Abs. 4): Ein Betrag zwischen zwei nationalen Währungen wird zuerst in Euro umgerechnet und erst dann weiter — das Zwischenergebnis in Euro darf nicht vorzeitig gerundet werden. Eine Peseta-Summe in Lira musste also über den Euro laufen.</p><p><strong>Kaufmännische Cent-Rundung</strong> (Art. 5): Der zu zahlende Betrag wird am Ende auf den nächstliegenden Cent gerundet; liegt er genau in der Mitte, wird aufgerundet. Dieser Rechner bildet genau diese Kette ab.</p>`,
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: 100 D-Mark in Euro',
+        schritte: [
+          { label: 'Ausgangsbetrag', formel: '100 DM', ergebnis: '100 DM' },
+          { label: 'Amtlicher Kurs', formel: '1 € = 1,95583 DM', ergebnis: 'unwiderruflich' },
+          { label: 'Division durch den Kurs', formel: '100 ÷ 1,95583', ergebnis: '51,1292… €' },
+          { label: 'Rundung auf den Cent', formel: 'Art. 5 VO 1103/97', ergebnis: '51,13 €' },
+        ],
+        fazit: 'Aus 100 D-Mark werden exakt 51,13 Euro. Zum Vergleich: Die beliebte Faustregel „durch zwei" ergäbe 50,00 € — also 1,13 € zu wenig.',
+      },
+      {
+        typ: 'beispielrechnung',
+        titel: 'Beispiel: 1.000 Schilling in D-Mark (Dreiecksweg)',
+        schritte: [
+          { label: 'Ausgangsbetrag', formel: '1.000 ATS', ergebnis: '1.000 ATS' },
+          { label: 'Schritt 1: Schilling → Euro', formel: '1.000 ÷ 13,7603', ergebnis: '72,672… €' },
+          { label: 'Zwischenergebnis nicht runden', formel: 'Art. 4 Abs. 4', ergebnis: 'voller Wert' },
+          { label: 'Schritt 2: Euro → D-Mark', formel: '72,672… × 1,95583', ergebnis: '142,15 DM' },
+        ],
+        fazit: 'Zwischen zwei Altwährungen führt der vorgeschriebene Weg immer über den Euro. Das Euro-Zwischenergebnis bleibt dabei ungerundet — nur der Endbetrag wird auf den Cent gerundet.',
+      },
+      {
+        typ: 'text',
+        titel: 'Der Verdopplungs-Fehler im Kopf',
+        html: `<p>Weil 1,95583 so nah an 2 liegt, hat sich über Jahre die Faustregel „mal zwei" beziehungsweise „durch zwei" eingebürgert. Bequem — aber sie liegt systematisch daneben, und zwar immer in dieselbe Richtung.</p><p>Die Deutsche Bundesbank hat den Effekt im Monatsbericht Januar 2004 selbst benannt und beziffert: Die vielfach nach der Faustregel 1:2 vorgenommene Umrechnung der Euro-Preise in D-Mark ergibt angesichts des tatsächlichen Kurses von 1,95583 einen <strong>um 2,3 Prozent überhöhten Wert</strong> — und wirkt sich damit zu Ungunsten des Euro aus.</p><p>Umgekehrt gerechnet: Wer einen Euro-Preis im Kopf <strong>verdoppelt</strong>, um ihn „in Mark" zu prüfen, kommt rund 2,26 Prozent zu hoch heraus (2 ÷ 1,95583 = 1,0226). Fünf Euro sind eben 9,78 D-Mark, nicht 10. Jede solche Kopfrechnung ließ den Euro-Preis ein Stück teurer erscheinen, als er war — bei jedem einzelnen Einkauf, über Jahre hinweg. Genau deshalb rechnet dieser Rechner mit dem vollen Kurs und nicht mit der Faustregel.</p>`,
+      },
+      {
+        typ: 'tabelle',
+        titel: 'Kopfrechnung „durch zwei" gegen den echten Kurs',
+        kopf: ['D-Mark', 'Korrekt (÷ 1,95583)', 'Faustregel (÷ 2)'],
+        zeilen: [
+          ['5 DM', '2,56 €', '2,50 €'],
+          ['10 DM', '5,11 €', '5,00 €'],
+          ['19,99 DM', '10,22 €', '9,99 €'],
+          ['100 DM', '51,13 €', '50,00 €'],
+          ['1.000 DM', '511,29 €', '500,00 €'],
+        ],
+        fussnote: 'Die Faustregel unterschätzt den Euro-Wert durchgängig um rund 2,3 Prozent. Je höher der Betrag, desto größer der absolute Unterschied.',
+      },
+      {
+        typ: 'text',
+        titel: 'Das Ende als Zahlungsmittel — Gesetz gegen Kulanz',
+        html: `<p>Fast alle erinnern den Abschied der D-Mark falsch. Populär ist der 28. Februar 2002 als „letzter Tag der D-Mark". Ein Gesetz war das nicht.</p><p>Maßgeblich ist das Gesetz über die Beendigung der Zahlungsmitteleigenschaft (Artikel 1 des Gesetzes vom 16. Dezember 1999, BGBl. I S. 2402). Danach verloren die D-Mark-Banknoten und -Münzen ihre Eigenschaft als gesetzliches Zahlungsmittel bereits <strong>mit Ablauf des 31. Dezember 2001</strong>. Dasselbe Gesetz verpflichtet die Bundesbank, ab dem 1. Januar 2002 zum festen Kurs umzutauschen.</p><p>Der 28. Februar 2002 war dagegen nur eine <strong>freiwillige Selbstverpflichtung</strong> von Handel, Banken und Automatenwirtschaft — die sogenannte modifizierte Stichtagsregelung. In Januar und Februar 2002 nahmen viele Geschäfte D-Mark noch an; bezahlt werden konnte in Mark, das Wechselgeld gab es aber nur in Euro. Verpflichtet war dazu niemand.</p><p>Die EU-Verordnung Nr. 974/98 hätte sogar einen Parallelumlauf von bis zu sechs Monaten erlaubt. Deutschland nutzte diesen Spielraum bewusst nicht, um Handel und Banken die Doppelbelastung zu ersparen — in den meisten Geschäften wurde schon Ende Januar 2002 fast nur noch in Euro gezahlt.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'D-Mark umtauschen — unbefristet, bis heute',
+        html: `<p>Anders als in fast allen anderen Ländern der Eurozone kann man D-Mark <strong>bis heute</strong> umtauschen. Die Deutsche Bundesbank nimmt sie <strong>zeitlich unbefristet, betraglich unbegrenzt und gebührenfrei</strong> an — in ihren Filialen oder per Post über die Filiale Mainz. Normale Geschäftsbanken sind dazu nicht verpflichtet.</p><p>Wie viel noch draußen ist, überrascht: Zum 31. Dezember 2025 waren rund <strong>12,13 Milliarden D-Mark</strong> nicht zurückgegeben — etwa 5,61 Milliarden in Scheinen und 6,52 Milliarden in Münzen, zusammen ein Gegenwert von rund 6,2 Milliarden Euro. Ein Teil davon ist verloren, ein Teil vergessen, ein Teil wird bewusst als Erinnerungsstück behalten. Der jährliche Rücklauf ist klein und stetig: Allein 2025 wurden noch rund 53 Millionen D-Mark umgetauscht, ein Gegenwert von gut 27 Millionen Euro.</p><p>Damit ist Deutschland die Ausnahme, nicht die Regel. Frankreich tauschte Scheine nur bis Februar 2012 um, Italien bis Dezember 2011, Spanien bis Juni 2021, Portugal bis Februar 2022. Unbefristet umtauschbar sind nur die Währungen weniger Länder, darunter Deutschland, Österreich und Irland. Eine schöne Fußnote der Geldgeschichte: Seit dem Beitritt Bulgariens zum 1. Januar 2026 ist die Zahl 1,95583 wieder ein gültiger Umrechnungskurs — für den Lew, der einst fest an die D-Mark gekoppelt war.</p>`,
+      },
+      {
+        typ: 'text',
+        titel: 'Alte Preise einordnen — Kurs ist nicht Kaufkraft',
+        html: `<p>Ein häufiger Denkfehler: Der feste Kurs sagt, wie viele Euro ein D-Mark-Betrag <strong>nominal</strong> wert ist — nicht, was er heute noch <strong>kaufen</strong> kann. 100 D-Mark aus dem Jahr 1990 sind rechnerisch 51,13 Euro. Was diese 51,13 Euro heute im Supermarkt bewirken, ist eine ganz andere Frage.</p><p>Für den reinen Umtausch alter Scheine, für alte Rechnungen, Sparbücher oder Kaufbelege ist der feste Kurs genau das Richtige — er ist unwiderruflich und exakt. Wer dagegen wissen will, wie teuer ein alter Mark-Preis im Vergleich zu heute war, braucht zusätzlich die Preisentwicklung über die Jahre. Dafür ist der <a href="/finanzen/inflationsrechner">Inflationsrechner</a> das passende Werkzeug: Er rechnet die Kaufkraft zwischen zwei Jahren um, während dieser Rechner den amtlichen Währungskurs abbildet.</p><p>Kurz gesagt beantwortet dieser Rechner die Frage, wie viele Euro ein D-Mark-Betrag ist. Der Inflationsrechner beantwortet, wie viel das nach Kaufkraft wert ist. Beide Fragen sind berechtigt — und werden oft verwechselt.</p>`,
+      },
+      {
+        typ: 'infobox',
+        variante: 'hinweis',
+        titel: 'Nicht alles alte Geld ist umtauschbar',
+        text: 'Bargeld der DDR und der früheren sowjetischen Besatzungszone tauscht die Bundesbank nicht um — es hat keinen Umtauschwert. Der unwiderrufliche Kurs und die unbefristete Umtauschmöglichkeit gelten ausschließlich für die D-Mark der Bundesrepublik und die übrigen früheren Euro-Landeswährungen.',
+      },
+      {
+        typ: 'checkliste',
+        titel: 'Beim Umtausch beachten',
+        punkte: [
+          'D-Mark-Betrag durch 1,95583 teilen — nicht durch 2. Die Faustregel liegt rund 2,3 Prozent daneben.',
+          'Umtausch nur bei der Deutschen Bundesbank (Filiale oder Post über Mainz), gebührenfrei und ohne Frist.',
+          'Scheine und Münzen werden beide angenommen; auch alte, längst eingezogene Serien.',
+          'DDR-Mark und Bargeld der sowjetischen Besatzungszone sind vom Umtausch ausgeschlossen.',
+          'Für Schilling, Franc, Lira, Peseta und die übrigen Altwährungen gelten eigene, ebenfalls feste Kurse (siehe Tabelle oben).',
+        ],
+      },
+    ],
+    quellen: [
+      { titel: 'Verordnung (EG) Nr. 1103/97 des Rates v. 17.06.1997', url: 'https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:31997R1103', hinweis: 'Umrechnungs- und Rundungsregeln (Art. 4 und 5): sechs signifikante Stellen, kein inverser Kurs, Dreiecksweg über den Euro, kaufmännische Cent-Rundung.' },
+      { titel: 'Verordnung (EG) Nr. 2866/98 des Rates v. 31.12.1998', url: 'https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:31998R2866', hinweis: 'Legt die unwiderruflichen Umrechnungskurse der Gründungswährungen fest, darunter 1 € = 1,95583 DM.' },
+      { titel: 'Deutsche Bundesbank — Monatsbericht Januar 2004, „Der Euro und die Preise"', hinweis: 'Benennt und beziffert den Kopfrechen-Fehler der Faustregel 1:2 mit rund 2,3 Prozent zu Ungunsten des Euro.' },
+      { titel: 'Deutsche Bundesbank — FAQ zu DM-Banknoten; Umtauschzahlen zum 31.12.2025', hinweis: 'Unbefristeter, gebührenfreier Umtausch; rund 12,13 Mrd. DM noch nicht zurückgegeben. DDR-Bargeld nicht umtauschbar.' },
+      { titel: 'Gesetz über die Beendigung der Zahlungsmitteleigenschaft (DMBeEndG), Art. 1 des Gesetzes v. 16.12.1999, BGBl. I S. 2402', hinweis: 'D-Mark verlor die Eigenschaft als gesetzliches Zahlungsmittel mit Ablauf des 31.12.2001; der 28.02.2002 war nur eine freiwillige Selbstverpflichtung des Handels.' },
+    ],
+  },
+  {
     slug: 'waehrungsrechner',
     letzteAktualisierung: '2026-06-27',
     titel: 'Währungsrechner',
