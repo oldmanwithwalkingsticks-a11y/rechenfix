@@ -1,7 +1,7 @@
 {
   "version": 1,
   "seed": 17,
-  "generatedAt": "2026-07-04",
+  "generatedAt": "2026-07-31",
   "excludedSlugs": [
     "brutto-netto-rechner",
     "mwst-rechner",
@@ -219,6 +219,7 @@
     "bremsweg-rechner",
     "ftp-rechner",
     "grundumsatz-rechner",
-    "kalorienverbrauch-rechner"
+    "kalorienverbrauch-rechner",
+    "dm-euro-rechner"
   ]
 }
