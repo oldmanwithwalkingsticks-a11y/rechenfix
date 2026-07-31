@@ -5,16 +5,21 @@
  * Layout-Entscheidung: Jede Zeile ist auf ihren eigenen Höchstwert normiert
  * (der „mal zwei“-Balken füllt immer die volle Breite). Dadurch ist die Lücke
  * in allen drei Zeilen gleich groß — genau das ist die Aussage: der relative
- * Fehler ist immer derselbe, nur der absolute Betrag wächst. Eine gemeinsame
+ * Fehler bleibt derselbe, nur der absolute Betrag wächst. Eine gemeinsame
  * Skala über alle drei Zeilen würde die ersten beiden auf wenige Pixel
  * zusammenschrumpfen und die Lücke unsichtbar machen.
- * Die Differenzbeträge stehen rechts außen, nicht in der Lücke — bei 10 px
- * Lückenbreite wäre dort kein Text lesbar.
+ *
+ * Korrektur nach Sichtprüfung Welle 47: Bei Zeilenabstand 88 lag der
+ * Differenztext der dritten Zeile bei y=338 und damit genau auf der Legende.
+ * Zeilenabstand jetzt 84, Differenztext bei y+64, Legende bei y=352, Trennlinie
+ * bei y=378, viewBox 410 hoch. Regel für spätere Änderungen:
+ * 92 + 2 * ABSTAND + 64 muss deutlich kleiner bleiben als die Legenden-y.
  * Server-Komponente, statisch. Dark Mode über <style> mit .dark-Selektor.
  * Muster: components/blog/grafik/MehlStreuung.tsx.
  */
 const BALKEN_X = 132;
 const BALKEN_MAX = 384;
+const ABSTAND = 84;
 const ANTEIL_KORREKT = 1 / 1.022583762392437;
 
 const zeilen = [
@@ -26,7 +31,7 @@ const zeilen = [
 export default function MalZweiFalle() {
   return (
     <figure className="my-8">
-      <svg width="100%" viewBox="0 0 680 380" role="img" xmlns="http://www.w3.org/2000/svg" className="rounded-xl text-gray-900 dark:text-gray-100">
+      <svg width="100%" viewBox="0 0 680 410" role="img" xmlns="http://www.w3.org/2000/svg" className="rounded-xl text-gray-900 dark:text-gray-100">
         <style>{`
           .b-korrekt { fill: #0F6E56; }
           .b-falsch { fill: #993C1D; }
@@ -46,7 +51,7 @@ export default function MalZweiFalle() {
         <text x="24" y="54" fontSize="12" fill="#9ca3af">Der echte Kurs lautet 1,95583 — nicht 2.</text>
 
         {zeilen.map((z, i) => {
-          const y = 96 + i * 88;
+          const y = 92 + i * ABSTAND;
           return (
             <g key={z.euro}>
               <text x="24" y={y + 26} fontSize="16" fontWeight="600" fill="currentColor">{z.euro}</text>
@@ -57,20 +62,20 @@ export default function MalZweiFalle() {
               <rect className="b-falsch" x={BALKEN_X} y={y + 28} width={BALKEN_MAX} height="20" rx="3" />
               <text x={BALKEN_X + BALKEN_MAX + 12} y={y + 43} fontSize="12" className="t-falsch" fontWeight="600">{z.falsch}</text>
 
-              <text x={BALKEN_X} y={y + 66} fontSize="11" fill="#9ca3af">{z.diff}</text>
+              <text x={BALKEN_X} y={y + 64} fontSize="11" fill="#9ca3af">{z.diff}</text>
             </g>
           );
         })}
 
         <g>
-          <rect x="24" y="330" width="14" height="10" rx="2" className="b-korrekt" />
-          <text x="46" y="339" fontSize="12" fill="#9ca3af">korrekt geteilt durch 1,95583</text>
-          <rect x="270" y="330" width="14" height="10" rx="2" className="b-falsch" />
-          <text x="292" y="339" fontSize="12" fill="#9ca3af">Kopfrechnung mal zwei</text>
+          <rect x="24" y="352" width="14" height="10" rx="2" className="b-korrekt" />
+          <text x="46" y="361" fontSize="12" fill="#9ca3af">korrekt geteilt durch 1,95583</text>
+          <rect x="270" y="352" width="14" height="10" rx="2" className="b-falsch" />
+          <text x="292" y="361" fontSize="12" fill="#9ca3af">Kopfrechnung mal zwei</text>
         </g>
 
-        <line x1="24" y1="354" x2="656" y2="354" stroke="#d1d5db" strokeWidth="1" />
-        <text x="24" y="372" fontSize="12" fill="#9ca3af">Immer 2,3 Prozent zu hoch — bei jedem Preisvergleich, über Jahre hinweg.</text>
+        <line x1="24" y1="378" x2="656" y2="378" stroke="#d1d5db" strokeWidth="1" />
+        <text x="24" y="396" fontSize="12" fill="#9ca3af">Immer 2,3 Prozent zu hoch — bei jedem Preisvergleich, über Jahre hinweg.</text>
       </svg>
     </figure>
   );
