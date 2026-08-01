@@ -18,7 +18,7 @@ export default function EtikettGegenRezept() {
           .dark .t-brown { fill: #FAC775; }
           .dark .t-teal { fill: #5DCAA5; }
         `}</style>
-        <title>Die Cup auf der Packung gegen die Cup im Rezept</title>
+        <title>Der Cup auf der Packung gegen den Cup im Rezept</title>
         <desc>
           In den USA existieren zwei Cups nebeneinander. Für die Nährwertkennzeichnung sind nach
           21 CFR 101.9 exakt 240 Milliliter festgelegt, bewusst auf eine glatte Zahl gerundet. In

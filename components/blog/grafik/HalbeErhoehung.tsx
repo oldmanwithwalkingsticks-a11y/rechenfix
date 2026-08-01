@@ -10,7 +10,13 @@
  * behaupten, die es in den Daten nicht gibt. Die Beschriftungen stehen als
  * Legende rechts neben dem Raster, nicht an den Quadraten.
  *
- * Korrektur nach Sichtprüfung Welle 47: Bei Schrittweite 28 endete die zehnte
+ * Korrektur 2 nach Sichtprüfung Welle 47b: „+1,9 % im Bundesdurchschnitt“ stand
+ * einzeilig bei Schriftgrad 20 und lief rechts aus dem Kasten (Kasten endet bei
+ * x=648, der Text brauchte rund 664). Jetzt dreizeilig: Zeile klein, Zahl groß,
+ * Bezug klein. Regel: In diesem Kasten stehen maximal 22 Zeichen bei Schriftgrad
+ * 12 bzw. 8 Zeichen bei Schriftgrad 26.
+ *
+ * Korrektur 1 nach Sichtprüfung Welle 47: Bei Schrittweite 28 endete die zehnte
  * Rasterzeile bei y=366 und lief durch Trennlinie und Schlusstext. Jetzt
  * Schrittweite 24 bei 19 px Kantenlänge, Raster endet bei y=327, Trennlinie
  * bei y=348. Regel für spätere Änderungen: RASTER_Y + 9 * SCHRITT + KANTE muss
@@ -70,9 +76,10 @@ export default function HalbeErhoehung() {
           </g>
         ))}
 
-        <rect className="schnitt" x="360" y="238" width="288" height="66" rx="8" strokeWidth="1" />
-        <text x="378" y="264" fontSize="12" fill="#9ca3af">Amtlich ausgewiesen wurde</text>
-        <text x="378" y="290" fontSize="20" fontWeight="600" fill="currentColor">+1,9 % im Bundesdurchschnitt</text>
+        <rect className="schnitt" x="360" y="234" width="288" height="90" rx="8" strokeWidth="1" />
+        <text x="378" y="258" fontSize="12" fill="#9ca3af">Amtlich ausgewiesen wurde</text>
+        <text x="378" y="290" fontSize="26" fontWeight="600" fill="currentColor">+1,9 %</text>
+        <text x="378" y="312" fontSize="12" fill="#9ca3af">im Bundesdurchschnitt</text>
 
         <line x1="24" y1="348" x2="656" y2="348" stroke="#d1d5db" strokeWidth="1" />
         <text x="24" y="366" fontSize="12" fill="#9ca3af">Wer zu einem Salon der einen Hälfte ging, zahlte sechs Prozent mehr. Wer zur anderen ging, gar nichts.</text>

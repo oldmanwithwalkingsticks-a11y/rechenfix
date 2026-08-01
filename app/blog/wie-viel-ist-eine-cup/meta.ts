@@ -5,9 +5,9 @@ import type { BlogArtikel } from '@/lib/blog';
  * (driftfrei). Gelesen von lib/blog.ts (Registry) und von page.mdx selbst.
  */
 export const artikel: Omit<BlogArtikel, 'slug'> = {
-  titel: 'Wie viel ist eine Cup – und warum die Frage keine eindeutige Antwort hat',
+  titel: 'Wie viel ist ein Cup – und warum die Frage keine eindeutige Antwort hat',
   beschreibung:
-    'Vier verschiedene Cups sind gleichzeitig in Gebrauch, und die Cup auf der Packung ist nicht die im Rezept. Dieselbe Cup Mehl wiegt je nach Handbewegung 120 oder 160 Gramm.',
+    'Vier verschiedene Cups sind gleichzeitig in Gebrauch, und der Cup auf der Packung ist nicht der im Rezept. Derselbe Cup Mehl wiegt je nach Handbewegung 120 oder 160 Gramm.',
   datum: '2026-07-30',
   rechnerSlug: 'cups-umrechner',
   rechnerPfad: '/kochen/cups-umrechner',

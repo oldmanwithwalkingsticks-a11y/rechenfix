@@ -28,9 +28,9 @@ export default function VierCups() {
         `}</style>
         <title>Vier gleichzeitig gebräuchliche Cup-Volumina im Größenvergleich</title>
         <desc>
-          Die US-amerikanische Alltags-Cup misst 236,6 Milliliter, die US-Cup für
-          Nährwertkennzeichnung 240 Milliliter, die metrische Cup 250 Milliliter und die imperiale
-          Cup 284,1 Milliliter. Zwischen der kleinsten und der größten liegen rund 47 Milliliter.
+          Der US-amerikanische Alltags-Cup misst 236,6 Milliliter, der US-Cup für
+          Nährwertkennzeichnung 240 Milliliter, der metrische Cup 250 Milliliter und der imperiale
+          Cup 284,1 Milliliter. Zwischen dem kleinsten und dem größten liegen rund 47 Milliliter.
         </desc>
 
         <text x="24" y="34" fontSize="17" fontWeight="500" fill="currentColor">Vier Cups, alle gleichzeitig gültig</text>

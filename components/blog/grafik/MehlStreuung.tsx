@@ -1,5 +1,5 @@
 /**
- * Grafik: Wie viel eine Cup Mehl wiegt — gemessene Spanne von 110 bis 165 g,
+ * Grafik: Wie viel ein Cup Mehl wiegt — gemessene Spanne von 110 bis 165 g,
  * dazu die konkurrierenden Standardwerte.
  * Achsenabbildung: x = 70 + (Gramm − 100) × 8,143 für 100 bis 170 g.
  *
@@ -7,6 +7,13 @@
  * liegen nur 41 px auseinander. Über der Achse stehen deshalb ausschließlich
  * kurze Zahlen, die Beschreibungen stehen als Legende darunter — so kann
  * nichts überlappen, egal wie eng die Werte liegen.
+ * Korrektur nach Sichtprüfung: Die senkrechten Marken-Linien liefen von y=96 bis
+ * y=176 und damit quer durch die Beschriftung im Streuband. Sie beginnen jetzt
+ * erst an der Bandunterkante bei y=148. Die Zuordnung Zahl–Marke bleibt über die
+ * x-Position erhalten. Regel: Innerhalb des Bandes (y=96 bis 148) darf keine
+ * Hilfslinie liegen.
+ * Genus: „der Cup“ — so schreiben es die deutschen Koch- und Backquellen
+ * durchgängig; im Bestand war es zuvor uneinheitlich.
  * Server-Komponente, statisch. Dark Mode über <style> mit .dark-Selektor.
  * Muster: components/blog/grafik/HpVsPs.tsx.
  */
@@ -39,25 +46,25 @@ export default function MehlStreuung() {
           .dark .m-teal { fill: #5DCAA5; }
           .dark .m-coral { fill: #F0A88C; }
         `}</style>
-        <title>Gewicht einer Cup Weizenmehl je nach Messweise</title>
+        <title>Gewicht eines Cups Weizenmehl je nach Messweise</title>
         <desc>
-          Dieselbe Cup Weizenmehl wiegt gesiebt etwa 110 Gramm, vorsichtig eingelöffelt und
+          Derselbe Cup Weizenmehl wiegt gesiebt etwa 110 Gramm, vorsichtig eingelöffelt und
           abgestrichen 120 Gramm, nach USDA- und FAO-Analysen rund 125 Gramm, nach verbreitetem
           Wert unter Berufsbäckern 140 Gramm und direkt aus der Tüte geschöpft bis zu 160 Gramm.
           Die Spanne beträgt damit rund 45 Prozent.
         </desc>
 
-        <text x="24" y="34" fontSize="17" fontWeight="500" fill="currentColor">Eine Cup Mehl wiegt zwischen 110 und 160 Gramm</text>
+        <text x="24" y="34" fontSize="17" fontWeight="500" fill="currentColor">Ein Cup Mehl wiegt zwischen 110 und 160 Gramm</text>
         <text x="24" y="54" fontSize="12" fill="#9ca3af">Derselbe Becher, dieselbe Zutat — der Unterschied entsteht beim Füllen.</text>
 
         {/* Streuband */}
         <rect className="band" x="151" y="96" width="408" height="52" rx="6" stroke="#854F0B" strokeWidth="1" />
-        <text x="355" y="127" fontSize="12" textAnchor="middle" fill="#9ca3af">gemessene Spanne für ein und dieselbe Cup</text>
+        <text x="355" y="127" fontSize="12" textAnchor="middle" fill="#9ca3af">gemessene Spanne für ein und denselben Cup</text>
 
         {/* Marken */}
         {marken.map((m) => (
           <g key={m.wert}>
-            <line x1={m.x} y1="96" x2={m.x} y2="176" stroke="#d1d5db" strokeWidth="1" />
+            <line x1={m.x} y1="148" x2={m.x} y2="176" stroke="#d1d5db" strokeWidth="1" />
             <circle cx={m.x} cy="176" r="5" className={`m-${m.klasse}`} />
             <text x={m.x} y="90" fontSize="12" fontWeight="600" textAnchor="middle" className={`m-${m.klasse}`}>{m.wert}</text>
           </g>
@@ -87,7 +94,7 @@ export default function MehlStreuung() {
         ))}
 
         <line x1="24" y1="336" x2="656" y2="336" stroke="#d1d5db" strokeWidth="1" />
-        <text x="24" y="356" fontSize="12" fill="#9ca3af">Bei drei Cups für einen Brotlaib ergibt das bis zu 120 Gramm Unterschied — fast eine ganze Cup.</text>
+        <text x="24" y="356" fontSize="12" fill="#9ca3af">Bei drei Cups für einen Brotlaib ergibt das bis zu 120 Gramm Unterschied — fast ein ganzer Cup.</text>
       </svg>
     </figure>
   );
