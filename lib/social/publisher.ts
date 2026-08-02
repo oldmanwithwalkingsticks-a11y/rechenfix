@@ -356,16 +356,37 @@ async function publishNextFor(
 export async function publishToBothPlatforms(
   force = false,
   dryRun = false,
+  platforms: readonly Platform[] = ALL_PLATFORMS,
 ): Promise<PublishResult> {
   const date = getBerlinDate();
 
-  const ig = await publishNextFor(date, 'instagram', force, dryRun);
-  const fb = await publishNextFor(date, 'facebook', force, dryRun);
-  const tt = await publishNextFor(date, 'tiktok', force, dryRun);
+  // W53 — Plattformfilter: Nicht angefragte Plattformen werden NICHT gepostet
+  // und als skipped (slug null) geführt — dieselbe Ergebnisform, die
+  // publishNextFor ohnehin für nicht zuständige Plattformen liefert.
+  // Standard bleibt ALL_PLATFORMS, damit bestehende Aufrufe unverändert bleiben.
+  const skip = (): { result: PlatformResult; slug: string | null } => ({
+    result: { success: true, skipped: true },
+    slug: null,
+  });
 
-  // queueExhausted: true nur wenn ALLE drei nichts Offenes mehr haben.
+  const ig = platforms.includes('instagram')
+    ? await publishNextFor(date, 'instagram', force, dryRun)
+    : skip();
+  const fb = platforms.includes('facebook')
+    ? await publishNextFor(date, 'facebook', force, dryRun)
+    : skip();
+  const tt = platforms.includes('tiktok')
+    ? await publishNextFor(date, 'tiktok', force, dryRun)
+    : skip();
+
+  // queueExhausted: true nur wenn ALLE ANGEFRAGTEN Plattformen nichts Offenes
+  // mehr haben. Eine nicht angefragte Plattform zählt NICHT als erschöpft.
+  const angefragt: Array<{ result: PlatformResult; slug: string | null }> = [];
+  if (platforms.includes('instagram')) angefragt.push(ig);
+  if (platforms.includes('facebook')) angefragt.push(fb);
+  if (platforms.includes('tiktok')) angefragt.push(tt);
   const queueExhausted =
-    ig.slug === null && fb.slug === null && tt.slug === null;
+    angefragt.length > 0 && angefragt.every((r) => r.slug === null);
 
   return {
     date,

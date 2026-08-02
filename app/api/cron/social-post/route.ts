@@ -3,6 +3,13 @@
  *
  * Schedule: 0 17 * * *  (täglich 17 UTC = 19 Berlin Sommer / 18 Berlin Winter)
  *
+ * W53 — Zuständigkeit dieser Route: standardmäßig NUR Instagram + Facebook.
+ * TikTok läuft über die eigene Route /api/cron/social-post-tiktok (05 UTC),
+ * weil der 24-Stunden-Creator-Cap von PostPeers API-Client um 17 UTC (US-
+ * Stoßzeit) blockiert. Der manuelle Re-Trigger kann die Zuständigkeit per
+ * ?platforms= überschreiben (z. B. ?platforms=tiktok oder
+ * ?platforms=instagram,facebook). Fehlt der Parameter, gilt IG+FB.
+ *
  * Auth: Authorization: Bearer ${CRON_SECRET} (Vercel setzt das automatisch
  *       beim Cron-Trigger; bei manuellem curl ebenfalls erforderlich).
  *
@@ -17,6 +24,8 @@
  *   ?force=true   — überspringt wasPostedToday()-Check (manueller Re-Trigger)
  *   ?test=true    — dryRun (kein API-Call, kein KV-Write)
  *                   in production zusätzlich ?admin=${ADMIN_PASSWORD} nötig
+ *   ?platforms=   — kommagetrennt (instagram,facebook,tiktok). Nur manuell.
+ *                   Default IG+FB. Unbekannte Werte → HTTP 400.
  *
  * Response:
  *   200: { date, postIndex, instagram, facebook }         — normaler Lauf
@@ -32,6 +41,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { publishToBothPlatforms, type PublishResult } from '@/lib/social/publisher';
+import { ALL_PLATFORMS, type Platform } from '@/lib/social/state';
 
 // Route ist dynamisch — niemals pre-rendern, KV-Reads sind Request-spezifisch.
 export const dynamic = 'force-dynamic';
@@ -105,6 +115,27 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   const force = url.searchParams.get('force') === 'true';
   const test = url.searchParams.get('test') === 'true';
 
+  // W53 — Plattform-Filter (nur manuell). Default: IG+FB (TikTok hat eigene Route).
+  let platforms: Platform[] = ['instagram', 'facebook'];
+  const platformsParam = url.searchParams.get('platforms');
+  if (platformsParam !== null) {
+    const parts = platformsParam
+      .split(',')
+      .map((s) => s.trim())
+      .filter((s) => s.length > 0);
+    const invalid = parts.filter((p) => !ALL_PLATFORMS.includes(p as Platform));
+    if (parts.length === 0 || invalid.length > 0) {
+      return NextResponse.json(
+        {
+          error: 'bad_request',
+          detail: `Ungültiger platforms-Parameter (${invalid.join(', ') || 'leer'}). Erlaubt: ${ALL_PLATFORMS.join(', ')}.`,
+        },
+        { status: 400 },
+      );
+    }
+    platforms = parts as Platform[];
+  }
+
   // 3) test=true in production braucht zusätzlich ?admin=${ADMIN_PASSWORD}
   let dryRun = false;
   if (test) {
@@ -138,8 +169,8 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     );
   }
 
-  // 5) Publish
-  const result = await publishToBothPlatforms(force, dryRun);
+  // 5) Publish (W53 — Standard IG+FB; ?platforms= überschreibt manuell)
+  const result = await publishToBothPlatforms(force, dryRun, platforms);
 
   // 6) Dry-Run: keine Mail, kein 503 — auch wenn Queue erschöpft oder
   // Bild/Caption fehlt. Wir wollen die Diagnose-Info im JSON sehen.
