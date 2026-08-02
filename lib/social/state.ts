@@ -31,6 +31,7 @@ import { MetaApiError } from './instagram';
 import { EXCLUDED_SLUGS } from './config';
 import queueFile from './queue.json';
 import type { QueueFile } from './schema';
+import { getBerlinDate, istTikTokTag } from './utils';
 
 export type Platform = 'instagram' | 'facebook' | 'tiktok';
 
@@ -119,9 +120,19 @@ export const ALL_PLATFORMS: readonly Platform[] = [
 
 /** TikTok-Pipeline-Schalter (analog SOCIAL_PIPELINE_ENABLED).
  *  Solange nicht 'true', ist TikTok für die „fully done"-Logik inaktiv →
- *  Zwischenstände 18.4a–c bleiben verhaltensneutral für IG/FB. */
+ *  Zwischenstände 18.4a–c bleiben verhaltensneutral für IG/FB.
+ *
+ *  W52: Zusätzlich nur jeden zweiten Tag aktiv (istTikTokTag, ab 06.08.2026).
+ *  Bewusst HIER und nicht im Publisher: Die vorhandene Architektur behandelt
+ *  „TikTok heute nicht zuständig" bereits korrekt — pickNextSlugFor gibt ohne
+ *  Zuständigkeit null OHNE Rundlauf-Reset zurück, und die Reset-Schleife in
+ *  pickNextSlug überspringt Plattformen ohne Zuständigkeit. Es entsteht also
+ *  weder ein Rundenzähler-Hochlauf noch ein verlorener Slug: TikTok-Done-Marken
+ *  sind plattformweise, die TikTok-Rotation nimmt am nächsten Takttag genau
+ *  dort wieder auf, wo sie stand. */
 function tiktokEnabled(): boolean {
-  return process.env.TIKTOK_PIPELINE_ENABLED === 'true';
+  if (process.env.TIKTOK_PIPELINE_ENABLED !== 'true') return false;
+  return istTikTokTag(getBerlinDate());
 }
 
 /**

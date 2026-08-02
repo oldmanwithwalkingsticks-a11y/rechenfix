@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { redis } from '@/lib/redis';
 import { platformsForSlug, ALL_PLATFORMS, type Platform } from '@/lib/social/state';
+import { getBerlinDate, istTikTokTag } from '@/lib/social/utils';
 import queueFile from '@/lib/social/queue.json';
 import type { QueueFile } from '@/lib/social/schema';
 
@@ -80,10 +81,26 @@ export async function GET(req: Request) {
       }),
     );
 
+    // W52 — TikTok postet nur jeden zweiten Tag. Damit der Admin-Tab an einem
+    // Nicht-Takttag (TikTok ohne Zuständigkeit) nicht wie ein Defekt aussieht.
+    const heuteBerlin = getBerlinDate();
+    const tiktokTakttagHeute = istTikTokTag(heuteBerlin);
+    let tiktokNaechsterTakttag = heuteBerlin;
+    const basisMs = Date.parse(`${heuteBerlin}T00:00:00Z`);
+    for (let i = 0; i < 800; i++) {
+      const tag = new Date(basisMs + i * 86_400_000).toISOString().slice(0, 10);
+      if (istTikTokTag(tag)) {
+        tiktokNaechsterTakttag = tag;
+        break;
+      }
+    }
+
     return NextResponse.json({
       queueLaenge: QUEUE.length,
       abgerufenAm: new Date().toISOString(),
       plattformen,
+      tiktokTakttagHeute,
+      tiktokNaechsterTakttag,
     });
   } catch {
     return NextResponse.json({ error: 'server_error' }, { status: 500 });
