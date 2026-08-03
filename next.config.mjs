@@ -5,6 +5,22 @@ const nextConfig = {
   // MDX-Blog: .md/.mdx als Seiten-Endungen zulassen (neben den bestehenden)
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 
+  experimental: {
+    // W53a (02.08.2026) — Serverless-Function-Größe unter dem 250-MB-Limit halten.
+    // public/blog (8 Blog-Videos, ~154 MB) und public/social-videos-src (~16 MB)
+    // werden NIE zur Laufzeit aus einer Function gelesen — Blog-Medien werden nur
+    // statisch ausgeliefert (<Bild>/<Video src="/blog/…">, CDN), social-videos-src
+    // ist reine Build-Quelle des lokalen Bild-Builders. Ohne diesen Ausschluss zieht
+    // der node-file-trace sie über die process.cwd()+'public'-Referenzen (AuthorBio,
+    // /ueber-uns, publisher) konservativ in JEDE Function; der [kategorie]/[rechner]-
+    // Bundle lief dadurch mit dem kalorien-Video auf 263,82 MB (Deploy-Fehler,
+    // Commit f706af7). public/social-posts und public/social-videos bleiben im Trace,
+    // weil der Cron-Publisher sie zur Laufzeit per existsSync prüft.
+    outputFileTracingExcludes: {
+      '*': ['public/blog/**', 'public/social-videos-src/**'],
+    },
+  },
+
   // Komprimierung aktivieren
   compress: true,
 
