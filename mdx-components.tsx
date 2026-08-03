@@ -37,6 +37,12 @@ import SechsStellen from '@/components/blog/grafik/SechsStellen';
 import HalbeErhoehung from '@/components/blog/grafik/HalbeErhoehung';
 import MalZweiFalle from '@/components/blog/grafik/MalZweiFalle';
 import AusgabenGegenHaeufigkeit from '@/components/blog/grafik/AusgabenGegenHaeufigkeit';
+import ZweiRundeZahlen from '@/components/blog/grafik/ZweiRundeZahlen';
+import DieDreiFaktoren from '@/components/blog/grafik/DieDreiFaktoren';
+import EnergieKaskade from '@/components/blog/grafik/EnergieKaskade';
+import SpannenDerFaktoren from '@/components/blog/grafik/SpannenDerFaktoren';
+import MandelDifferenz from '@/components/blog/grafik/MandelDifferenz';
+import FuenfWege from '@/components/blog/grafik/FuenfWege';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -114,6 +120,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     HalbeErhoehung,
     MalZweiFalle,
     AusgabenGegenHaeufigkeit,
+    ZweiRundeZahlen,
+    DieDreiFaktoren,
+    EnergieKaskade,
+    SpannenDerFaktoren,
+    MandelDifferenz,
+    FuenfWege,
     ...components,
   };
 }

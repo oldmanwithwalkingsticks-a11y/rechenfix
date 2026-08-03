@@ -1,0 +1,233 @@
+import { generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import StructuredData from '@/components/seo/StructuredData';
+import { artikel } from './meta';
+
+export const metadata = {
+  title: `${artikel.titel} | Rechenfix.de`,
+  description: artikel.beschreibung,
+  alternates: { canonical: 'https://www.rechenfix.de/blog/woher-die-kalorien-auf-der-packung-kommen' },
+};
+
+<StructuredData data={generateArticleSchema({
+  url: 'https://www.rechenfix.de/blog/woher-die-kalorien-auf-der-packung-kommen',
+  headline: artikel.titel,
+  description: artikel.beschreibung,
+  datePublished: artikel.datum,
+  dateModified: artikel.datum,
+  image: '/blog/kalorien-titelbild.png',
+})} />
+
+<StructuredData data={generateBreadcrumbSchema([
+  { name: 'Start', url: '/' },
+  { name: 'Blog', url: '/blog' },
+  { name: artikel.titel, url: '/blog/woher-die-kalorien-auf-der-packung-kommen' },
+])} />
+
+# Woher die Kalorien auf der Packung kommen
+
+<ArtikelDatum datum={artikel.datum} />
+
+<Bild src="/blog/kalorien-titelbild.png" alt="Ein Küchentisch mit einer Lebensmittelverpackung, deren Nährwerttabelle sichtbar ist, daneben eine digitale Küchenwaage" caption="Die Nährwerttabelle sieht aus wie ein Messergebnis — sie ist das Ergebnis einer Rechnung." width={1200} height={675} />
+
+Auf jeder Packung steht eine Zahl, die aussieht wie eine Messung. 512 Kilokalorien je 100 Gramm, auf die Stelle genau, ohne Komma. Man könnte meinen, jemand habe das Produkt in ein Gerät gelegt und abgelesen.
+
+Hat niemand. Die Zahl ist eine Rechnung — und bei einem der Nährstoffe ist sie nicht einmal das, sondern nur der Rest, der übrig bleibt.
+
+Das ist kein Skandal. Es ist eine Konvention, sie ist über hundert Jahre alt, und sie funktioniert für ihren Zweck erstaunlich gut. Aber wer weiß, wie die Zahl entsteht, liest sie anders.
+
+## Zwei Fehler stecken schon im Wort
+
+Eine Kalorie ist die Wärmemenge, die ein Gramm Wasser um ein Grad erwärmt. Genauer: von 14,5 auf 15,5 Grad Celsius. Die Definition stammt aus dem 19. Jahrhundert, aus der Zeit, in der die Thermodynamik entstand.
+
+**Erstens** ist die Kalorie heute keine gültige Einheit der Physik mehr. Zuständig ist das Joule, seit die Internationale Einheitenordnung 1960 aufgestellt wurde. Ein Kilojoule sind 0,239 Kilokalorien, eine Kilokalorie sind 4,184 Kilojoule.
+
+**Zweitens**, und das ist der interessantere Fehler: Was im Alltag „Kalorie" heißt, ist eine **Kilo**kalorie. Der Apfel mit „52 Kalorien" hat physikalisch 52.000. Auf der Packung steht korrekt kcal — im Sprachgebrauch fällt das Kilo weg.
+
+Die Ernährungsorganisation der Vereinten Nationen schreibt das in ihrem maßgeblichen Bericht selbst, in einer Fußnote auf der ersten Seite: Die korrekte Einheit sei die Kilokalorie, und zunehmend gelte die Übereinkunft, Kilojoule zu verwenden.
+
+Deshalb verlangt die EU beides. Nach der Lebensmittelinformationsverordnung ist der Brennwert **systematisch sowohl in Kilojoule als auch in Kilokalorien** anzugeben, Joule zuerst. Nur kcal ist unzulässig, auch bei der freiwilligen Wiederholung auf der Packungsvorderseite.
+
+## Die Zahl, die sich selbst nicht ausrechnet
+
+Auf vielen Packungen steht ein Referenzwert: **8 400 kJ/2 000 kcal** für einen durchschnittlichen Erwachsenen. So steht er in Anhang XIII der Verordnung.
+
+Nur rechnen sich die beiden Zahlen nicht ineinander um. 2.000 Kilokalorien sind 8.368 Kilojoule, nicht 8.400. Und 8.400 Kilojoule sind 2.007,6 Kilokalorien, nicht 2.000.
+
+<ZweiRundeZahlen />
+
+Beide Werte sind eigenständig gerundete Richtwerte, keiner ist aus dem anderen berechnet. Das ist harmlos — aber es ist ein gutes erstes Bild dafür, wie viel Rundung in dieser Zahlenwelt steckt.
+
+## Ein Chemiker in Connecticut, um 1900
+
+Die Faktoren, mit denen bis heute jede Kalorienangabe der Welt gerechnet wird, gehen auf einen Mann zurück: **Wilbur Olin Atwater** (1844–1907), Chemiker an der landwirtschaftlichen Versuchsstation in Storrs, Connecticut.
+
+Sein Werkzeug war das **Bombenkalorimeter**: ein Druckbehälter, umgeben von Wasser, in dem eine Probe vollständig verbrannt wird. Aus der Erwärmung des Wassers ergibt sich die freigesetzte Energie. Dazu kamen Bilanzversuche an Menschen — was hineingeht, und was in Urin und Kot wieder herauskommt.
+
+Daraus entstanden die Zahlen, die jeder kennt:
+
+<DieDreiFaktoren />
+
+Und hier beginnt die erste Rundung. Die präzisen Werte lauten **16,7** Kilojoule je Gramm Protein, **37,4** für Fett, **16,7** für Kohlenhydrate und **28,9** für Alkohol. Daraus wurden 17, 37, 17 und 29.
+
+Wichtig ist, was diese Zahlen **nicht** sind: die Verbrennungswärme. Das Kalorimeter verbrennt alles restlos, der Körper nicht. Atwaters eigentliche Leistung bestand darin, Abzüge für das Unverdauliche einzuführen. Die 4-9-4 sind bereits korrigierte Werte — und Atwater wusste, dass der Körper nicht alles gleich gut verwertet. Bei Ballaststoffen hatte er das selbst gezeigt.
+
+## Wo die Zahl auf der Packung wirklich sitzt
+
+Die FAO stellt den Weg der Energie durch den Körper als Kaskade dar. Fünf Stufen, und auf jeder geht etwas verloren:
+
+<EnergieKaskade />
+
+Die Zahl auf der Packung steht auf **Stufe drei von fünf**. Was danach kommt — die Wärme der Darmgärung und der Energieaufwand für Verdauung und Verstoffwechselung selbst — ist in ihr nicht berücksichtigt. Und der letzte dieser Abzüge hängt davon ab, *was* man isst.
+
+<RechnerLoader slug="naehrwert-rechner" />
+
+## Protein wird nicht gemessen. Kohlenhydrate auch nicht.
+
+Jetzt wird es unerwartet.
+
+**Protein** bestimmt man bis heute nicht direkt, sondern über den **Stickstoffgehalt**. Der wird gemessen und dann mit einem Faktor multipliziert. Atwater nahm an, Proteine bestünden im Schnitt zu 16 Prozent aus Stickstoff — daraus ergibt sich der Faktor 6,25.
+
+Tatsächlich schwankt der Stickstoffanteil von Proteinen zwischen **13 und 19 Prozent**. Das entspräche Faktoren von 5,26 bis 7,69. Seit 1941 gibt es deshalb lebensmittelspezifische Umrechnungsfaktoren, die sogenannten Jones-Faktoren: 5,18 für Nüsse und Samen, 6,38 für Milch, 5,83 für Weizen, 5,95 für Reis.
+
+Die FAO beziffert den Fehler offen: Wer den allgemeinen Faktor statt des spezifischen verwendet, liegt beim Proteingehalt zwischen minus zwei und plus neun Prozent daneben.
+
+**Kohlenhydrate** aber werden meist überhaupt nicht analysiert. Sie werden **als Differenz berechnet**:
+
+> 100 minus (Protein + Fett + Wasser + Asche + Alkohol)
+
+Was übrig bleibt, gilt als Kohlenhydrat. Und die FAO schreibt in einer Fußnote selbst, was das bedeutet: Die Differenzmethode sei zu vermeiden, weil solche Werte **die kumulierten Fehler aller anderen Messungen** enthalten.
+
+Jede Ungenauigkeit bei Protein, Fett, Wasser und Asche landet am Ende in der Kohlenhydratzahl.
+
+## 1955 wurde nachgebessert. Fast niemand ist mitgegangen.
+
+Dass ein einziger Faktor je Nährstoff zu grob ist, war früh klar. 1955 legten Merrill und Watt Tabellen mit **lebensmittelspezifischen** Faktoren vor. Die Spannen sind erheblich:
+
+<SpannenDerFaktoren />
+
+Protein liefert je nach Herkunft zwischen **2,44 und 4,36 Kilokalorien je Gramm** — das eine sind manche Gemüse, das andere sind Eier. Bei Kohlenhydraten reicht die Spanne von 2,70 in Zitronensaft bis 4,16 in poliertem Reis. Nur beim Fett ist es ruhig: 8,37 bis 9,02.
+
+Das Extrembeispiel steht ebenfalls im FAO-Bericht: Für den Kohlenhydratanteil von **Schokolade** reichen die zulässigen Faktoren von **1,33 bis 4,0** Kilokalorien je Gramm. Mehr als das Dreifache.
+
+Wie weit die beiden Systeme auseinanderliegen können, haben Merrill und Watt selbst durchgerechnet. Bei rohen Zitronen liefern die allgemeinen Faktoren **138 Prozent** des Werts nach spezifischen Faktoren. Bei grünen Bohnen und Weißkohl 120 Prozent. Bei weißem Reis umgekehrt 97 Prozent.
+
+Bei gemischter Kost aber lag der Unterschied im Schnitt bei rund fünf Prozent, ohne die Ausreißer bei zwei. Und genau das ist der Grund, warum die Welt bei 4-9-4 geblieben ist: Der Aufwand einer Umstellung wäre gewaltig, der Gewinn für den Normalfall klein.
+
+## Das USDA rechnet gegen sich selbst
+
+2012 veröffentlichte eine Arbeitsgruppe am **Beltsville Human Nutrition Research Center** eine Studie. Das ist eine Einrichtung des US-Landwirtschaftsministeriums — also genau der Behörde, deren Nährwerttabellen auf den Atwater-Faktoren beruhen.
+
+Achtzehn gesunde Erwachsene, kontrollierte Ernährung, drei Phasen zu je achtzehn Tagen mit null, 42 oder 84 Gramm Mandeln täglich. In den letzten neun Tagen jeder Phase wurde sämtlicher Urin und Stuhl gesammelt und zusammen mit Proben der Nahrung auf Energiegehalt analysiert.
+
+<MandelDifferenz />
+
+Nach den Atwater-Faktoren enthält eine Portion von 28 Gramm Mandeln 168 bis 170 Kilokalorien. Tatsächlich verwertet wurden **129**. Die Studie beziffert die Überschätzung auf **32 Prozent**.
+
+Die Erklärung liegt in der Zellstruktur: Die Zellwände der Mandel schließen einen Teil des Fetts ein. Was nicht aufgeschlossen wird, wird nicht aufgenommen. Deshalb hängt der Wert davon ab, ob die Mandel ganz, gehackt, gemahlen oder als Mus gegessen wird.
+
+Dieselbe Arbeitsgruppe fand entsprechende Abweichungen bei Pistazien, Walnüssen und Cashews.
+
+Wichtig für die Einordnung: Das betrifft Nüsse mit intakter Zellstruktur. Es ist **kein** Beleg dafür, dass Kalorienangaben allgemein zu hoch wären. Bei den meisten Lebensmitteln sind die Abweichungen klein, und sie gehen in beide Richtungen.
+
+## Was rechtlich verlangt ist — und was nicht
+
+Der EU-Leitfaden für die Lebensmittelkontrolle sagt unumwunden, was die Zahl auf der Packung ist: ein **Durchschnittswert**. Er darf beruhen auf
+
+- einer Analyse des Herstellers,
+- einer **Berechnung** aus den Durchschnittswerten der Zutaten, oder
+- einer **Berechnung** aus allgemein anerkannten Daten.
+
+Zwei von drei zulässigen Wegen sind Rechnungen aus Tabellenwerten. Eine Laboranalyse ist nicht vorgeschrieben.
+
+Dazu kommen Toleranzen. Bei Kohlenhydraten und Fett im mittleren Bereich sind es **± 20 Prozent**. Deklariert ein Hersteller 30 Gramm Kohlenhydrate je 100 Gramm, deckt das rechnerisch eine Spanne von 23,6 bis 36,5 Gramm ab.
+
+Das klingt schlimmer, als es ist, und zwei Einschränkungen gehören zwingend dazu. Erstens sind Toleranzen **Kontrollmaßstäbe**, keine erlaubte Schlamperei beim Deklarieren — der angegebene Wert muss den tatsächlichen Durchschnitt so genau wie möglich wiedergeben. Zweitens verlangt der Leitfaden ausdrücklich, dass Hersteller sich „nach bestem Wissen und Gewissen" bemühen und die Werte **nicht am Rand des Toleranzbereichs** ansetzen. Bei Fett, Zucker und Salz dürfen die Angaben nicht am unteren Rand liegen, wenn der wahre Wert darüber läge. Und der Wert muss über die gesamte Haltbarkeitsdauer stimmen.
+
+Nebenbei erklärt derselbe Leitfaden, warum auf keiner Packung „52,3 kcal" steht: Energie ist auf volle Kilojoule und Kilokalorien zu runden, ohne Dezimalstellen.
+
+<Video src="/blog/kalorien.mp4" poster="/blog/kalorien-titelbild.png" caption="Die Packung auf der Waage — die Nährwertzahl entsteht trotzdem durch Rechnung, nicht durch Wiegen." />
+
+## Dieselbe Portion, zwei Kontinente, zwei legale Zahlen
+
+Und dann ist da diese Frage, die jemand der EU-Kommission gestellt hat: Darf ein Hersteller, der in Europa und in den USA verkauft, beide Nährwerttabellen auf die Packung drucken?
+
+Die Antwort steht in der amtlichen Bekanntmachung von 2018 und lautet **nein**. Begründung: Das könnte Verbraucher in die Irre führen, **weil in den USA andere Umrechnungsfaktoren verwendet werden**.
+
+Wie anders, zeigt ein Blick in die Regelwerke. Der Codex Alimentarius und die EU schreiben die allgemeinen Faktoren vor — 17, 37, 17 Kilojoule je Gramm. Die USA erlauben **fünf verschiedene Rechenwege**, und der Hersteller darf wählen:
+
+<FuenfWege />
+
+Fünf Wege, ein Lebensmittel, fünf mögliche Zahlen. Alle legal.
+
+Wie viele Möglichkeiten es insgesamt gibt, hat die FAO ausgerechnet. Der Satz steht in Kapitel 3.5.6 ihres Berichts und ist der ehrlichste der ganzen Recherche: Theoretisch gebe es **975 Kombinationen** für die energieliefernden Bestandteile eines Lebensmittels — dreizehn Definitionen für Protein, mal drei für Fett, mal fünf für Kohlenhydrate, mal fünf für Ballaststoffe. Jede führt zu einem anderen Nährwert. Und die anerkannten Umrechnungsfaktoren, fügt die FAO hinzu, erhöhen diese Zahl noch.
+
+Ihr eigenes Fazit im selben Absatz: Ein einheitlicheres System sei eindeutig nötig.
+
+## Es gäbe eine Alternative. Sie wurde geprüft und verworfen.
+
+Es gibt einen ausgearbeiteten Gegenvorschlag, der zusätzlich die Verdauungswärme abzieht. Protein läge darin bei 3,2 statt 4,0 Kilokalorien je Gramm, Ballaststoffe bei 1,4 statt 2,0, Alkohol bei 6,3 statt 7,0. Fett und Kohlenhydrate blieben unverändert.
+
+Für gemischte Kost ergäbe das vier bis sechs Prozent weniger. Die FAO hat es 2002 geprüft und sich dagegen entschieden — mit einer Begründung, die man zweimal lesen muss: Die Empfehlungen für den täglichen Energiebedarf beruhen auf Messungen des Energieverbrauchs und passen konzeptionell zum bisherigen System. Änderte man nur die eine Seite, passten Bedarf und Zufuhr nicht mehr zusammen.
+
+Man behält also die Konvention, damit beide Seiten der Rechnung zueinander passen. Das ist keine Bequemlichkeit, sondern Konsequenz.
+
+Wie groß der Unterschied sein kann, zeigt ein Beispiel aus demselben Bericht: 100 Milliliter Muttermilch enthalten 253 Kilojoule nach spezifischen Atwater-Faktoren, 259 nach allgemeinen und 248 nach dem neuen System. Dieselbe Flüssigkeit, drei Zahlen.
+
+## Was die Zahl ist
+
+Sie ist nicht falsch. Sie ist eine gerundete Schätzung nach einer Konvention, die 1896 aufgestellt wurde, seither einmal ernsthaft überarbeitet und dann bewusst beibehalten wurde. Sie beruht auf Faktoren, die Durchschnitte sind, angewandt auf Nährstoffmengen, von denen eine über einen Umweg bestimmt und eine andere gar nicht gemessen, sondern als Rest errechnet wird.
+
+Für den Zweck, für den sie gebaut wurde — Lebensmittel miteinander vergleichbar zu machen — funktioniert sie gut. Sie war nie eine Messung an dem Stück, das man in der Hand hält.
+
+<KarstenSagt>
+Ich schaue zuerst immer auf die Kalorien, dann auf den Eiweißgehalt und erst danach auf die anderen Angaben.
+
+Da ich ständig mit meinem Gewicht zu kämpfen habe, zähle ich öfters Kalorien, wenn ich abnehmen will, und steuere dementsprechend, wovon ich was und wie viel davon esse.
+</KarstenSagt>
+
+<Quellen eintraege={[
+  {
+    titel: 'FAO: Food energy — methods of analysis and conversion factors, FAO Food and Nutrition Paper 77, Rom 2003',
+    url: 'https://www.fao.org/4/y5022e/y5022e00.htm',
+    hinweis: 'Die zentrale Quelle des Artikels: präzise Umrechnungsfaktoren, Jones-Faktoren, spezifische Atwater-Faktoren, Energiekaskade, die 975 Kombinationen und der Vergleich der Regelwerke in den USA, im Codex Alimentarius und in der EU.',
+  },
+  {
+    titel: 'Novotny, Gebauer, Baer: Discrepancy between the Atwater factor predicted and empirically measured energy values of almonds in human diets, American Journal of Clinical Nutrition 96(2)/2012, S. 296–301',
+    url: 'https://doi.org/10.3945/ajcn.112.035782',
+    hinweis: 'Misst am Menschen 129 statt 168–170 kcal je 28-g-Portion — durchgeführt am Beltsville Human Nutrition Research Center des US-Landwirtschaftsministeriums.',
+  },
+  {
+    titel: 'Baer, Novotny: Metabolizable Energy from Cashew Nuts is Less than that Predicted by Atwater Factors, Nutrients 11(1)/2018',
+    url: 'https://doi.org/10.3390/nu11010033',
+    hinweis: 'Belegt, dass der Befund kein Einzelfall ist; entsprechende Arbeiten gibt es auch zu Pistazien und Walnüssen.',
+  },
+  {
+    titel: 'Verordnung (EU) Nr. 1169/2011 (Lebensmittelinformationsverordnung), Artikel 30 bis 33 und Anhänge XIII, XIV, XV',
+    url: 'https://eur-lex.europa.eu/legal-content/DE/ALL/?uri=CELEX%3A32011R1169',
+    hinweis: 'Schreibt die Angabe in Kilojoule und Kilokalorien vor, nennt die Umrechnungsfaktoren und den Referenzwert von 8 400 kJ beziehungsweise 2 000 kcal.',
+  },
+  {
+    titel: 'Europäische Kommission: Leitfaden für zuständige Behörden — Toleranzen für auf dem Etikett angegebene Nährwerte, Dezember 2012',
+    url: 'https://food.ec.europa.eu/system/files/2021-11/labelling_nutrition-vitamins_minerals-guidance_tolerances_1212_de.pdf',
+    hinweis: 'Enthält die Toleranztabelle, die Rundungsleitlinien und die ausdrückliche Vorgabe, dass Angaben nicht am Rand des Toleranzbereichs angesetzt werden dürfen.',
+  },
+  {
+    titel: 'Mitteilung der Kommission — Fragen und Antworten zur Verordnung (EU) Nr. 1169/2011, ABl. C 196 vom 08.06.2018',
+    url: 'https://eur-lex.europa.eu/legal-content/DE/TXT/PDF/?uri=CELEX:52018XC0608(01)',
+    hinweis: 'Abschnitt 3.3.10 verbietet, die US-Nährwerttabelle zusätzlich abzudrucken, weil in den USA andere Umrechnungsfaktoren verwendet werden.',
+  },
+  {
+    titel: 'Merrill, Watt: Energy value of foods — basis and derivation, USDA Agriculture Handbook 74, 1955, revidiert 1973',
+    hinweis: 'Quelle der lebensmittelspezifischen Atwater-Faktoren. Kein frei zugängliches Digitalisat auffindbar; die im Artikel genannten Werte sind über das FAO-Papier 77, Tabellen 3.1 und 3.2, belegt.',
+  },
+  {
+    titel: 'Carmody, Weintraub, Wrangham: Energetic consequences of thermal and nonthermal food processing, PNAS 108/2011, S. 19199–19203',
+    url: 'https://doi.org/10.1073/pnas.1112128108',
+    hinweis: 'Zeigt, dass Verarbeitung und Erhitzen die verwertbare Energie messbar verändern.',
+  },
+  {
+    titel: 'Wilbur Olin Atwater Papers, National Agricultural Library',
+    url: 'https://archivesspace.nal.usda.gov/repositories/4/archival_objects/41114',
+    hinweis: 'Atwaters Originalarbeiten (Atwater und Woods 1896, Atwater und Bryant 1900, Atwater und Benedict 1902) sind nicht als freies Volltext-Digitalisat verfügbar; verlinkt ist deshalb sein Nachlass.',
+  },
+]} />
