@@ -43,6 +43,12 @@ import EnergieKaskade from '@/components/blog/grafik/EnergieKaskade';
 import SpannenDerFaktoren from '@/components/blog/grafik/SpannenDerFaktoren';
 import MandelDifferenz from '@/components/blog/grafik/MandelDifferenz';
 import FuenfWege from '@/components/blog/grafik/FuenfWege';
+import SonneGegenUhr from '@/components/blog/grafik/SonneGegenUhr';
+import FuenfZeitenAmBodensee from '@/components/blog/grafik/FuenfZeitenAmBodensee';
+import ZweiUhrenImBahnhof from '@/components/blog/grafik/ZweiUhrenImBahnhof';
+import WasWashingtonBeschloss from '@/components/blog/grafik/WasWashingtonBeschloss';
+import ZeitleisteEinheitszeit from '@/components/blog/grafik/ZeitleisteEinheitszeit';
+import GrenzwertSprung from '@/components/blog/grafik/GrenzwertSprung';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -126,6 +132,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     SpannenDerFaktoren,
     MandelDifferenz,
     FuenfWege,
+    SonneGegenUhr,
+    FuenfZeitenAmBodensee,
+    ZweiUhrenImBahnhof,
+    WasWashingtonBeschloss,
+    ZeitleisteEinheitszeit,
+    GrenzwertSprung,
     ...components,
   };
 }

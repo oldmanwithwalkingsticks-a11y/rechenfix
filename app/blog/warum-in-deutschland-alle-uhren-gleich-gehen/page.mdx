@@ -1,0 +1,313 @@
+import { generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import StructuredData from '@/components/seo/StructuredData';
+import { artikel } from './meta';
+
+export const metadata = {
+  title: `${artikel.titel} | Rechenfix.de`,
+  description: artikel.beschreibung,
+  alternates: { canonical: 'https://www.rechenfix.de/blog/warum-in-deutschland-alle-uhren-gleich-gehen' },
+};
+
+<StructuredData data={generateArticleSchema({
+  url: 'https://www.rechenfix.de/blog/warum-in-deutschland-alle-uhren-gleich-gehen',
+  headline: artikel.titel,
+  description: artikel.beschreibung,
+  datePublished: artikel.datum,
+  dateModified: artikel.datum,
+  image: '/blog/zeit-titelbild.png',
+})} />
+
+<StructuredData data={generateBreadcrumbSchema([
+  { name: 'Start', url: '/' },
+  { name: 'Blog', url: '/blog' },
+  { name: artikel.titel, url: '/blog/warum-in-deutschland-alle-uhren-gleich-gehen' },
+])} />
+
+# Warum in Deutschland alle Uhren gleich gehen
+
+<ArtikelDatum datum={artikel.datum} />
+
+<Bild src="/blog/zeit-titelbild.png" alt="Bahnhofshalle des späten 19. Jahrhunderts mit zwei nebeneinander an einem Gusseisenpfeiler montierten Uhren, die unterschiedliche Zeiten anzeigen" caption="Zwei Uhren, ein Bahnhof: bis 1893 zeigten Bahnsteig und Dienstraum verschiedene Zeiten — beide richtig." width={1200} height={675} />
+
+In Görlitz steht ein Stein aus Lausitzer Granit. Er markiert den fünfzehnten Längengrad östlich von Greenwich — jene gedachte Linie, nach der sich unsere Uhrzeit richtet. Aufgestellt wurde er 1961, zu Ehren Juri Gagarins.
+
+Der Stein steht falsch. Nach heutigen Messverfahren verläuft der fünfzehnte Meridian rund 137 Meter weiter östlich, unten in den Neißewiesen. Die Stadt weiß das. Sie hat den falschen Verlauf 2011 trotzdem auf der Straße markiert, weil er besser erreichbar ist.
+
+Das ist eine passende Einleitung für dieses Thema. Die Geschichte unserer Uhrzeit ist über weite Strecken die Geschichte von Näherungen, die irgendwann verbindlich wurden. Von Kompromissen, die man aus praktischen Gründen einging und später für Naturgesetze hielt. Und sie ist nicht abgeschlossen: Im Oktober dieses Jahres wird in Versailles über ihre vielleicht größte Änderung seit hundert Jahren abgestimmt.
+
+Görlitz ist dabei tatsächlich besonders. Es ist die einzige deutsche Stadt, durch die der fünfzehnte Längengrad läuft. Nur dort stimmt die gesetzliche Zeit mit der mittleren Sonnenzeit überein — steht die Sonne mittags um zwölf tatsächlich am höchsten. In Aachen passiert das gut eine halbe Stunde später, bei identischer Uhrzeit auf identischen Uhren.
+
+<SonneGegenUhr />
+
+Wer wissen will, warum das so ist, muss zurück in eine Zeit, in der genau dieser Zustand als unerträglich galt.
+
+## Vier Minuten je Längengrad
+
+Die Rechnung dahinter ist einfach, und sie steht schon 1913 in der *Enzyklopädie des Eisenbahnwesens*, geschrieben von Fachleuten, die die alten Zustände noch selbst erlebt hatten. Die Erde dreht sich in 24 Stunden um 360 Grad, also 15 Grad je Stunde. Zwei Orte, die 15 Längengrade auseinanderliegen, haben demnach 60 Minuten Unterschied in der Mittagszeit. Ein einzelner Längengrad macht vier Minuten.
+
+Das Deutsche Reich erstreckte sich über annähernd 17 Längengrade. Wer die Zeit nach dem Sonnenstand bestimmte, wie es bis 1893 üblich war, kam damit auf **67 Minuten Unterschied** zwischen dem östlichsten und dem westlichsten Ort. Ein Schnellzug legte die Strecke von einem Längengrad zum nächsten in etwa einer Stunde zurück. Nach jeder Stunde Fahrt mussten also vier Minuten addiert oder abgezogen werden, wenn man die Ankunftszeit in der Ortszeit des Zielorts angeben wollte.
+
+So ließen sich keine Fahrpläne bauen. Die Enzyklopädie formuliert es nüchtern: Ankunft und Abfahrt könne man durchaus in Ortszeiten bekanntgeben — die Berechnung der Fahrzeiten und vor allem der Zugkreuzungen und Anschlüsse aber könne nur auf Grundlage einer einheitlichen Zeit erfolgen.
+
+Die Eisenbahnen lösten das, indem sie zwei Zeiten nebeneinander führten. Im inneren Dienst galt die Ortszeit der Landeshauptstadt oder der Hauptstation des Bezirks; nach ihr wurden die Dienstfahrpläne gerechnet. Nach außen, in Aushangfahrplänen und Kursbüchern, standen weiterhin die Zeiten der örtlichen Sonnenzeit jedes einzelnen Bahnhofs.
+
+Daraus ergibt sich ein Bild, das die verbreitete Erzählung „bis 1893 hatte jede Stadt ihre eigene Zeit" nur halb trifft. **In den Bahnhöfen gingen zwei Uhren gleichzeitig.** Die Uhren im Publikumsbereich zeigten die Ortszeit. Die Uhren in den Diensträumen zeigten daneben auch die Einheitszeit, nach der der Fahrplan gerechnet war. Der Beamte sah auf seiner Taschenuhr eine andere Zeit als der Reisende auf dem Bahnsteig, und beide hatten recht.
+
+<ZweiUhrenImBahnhof />
+
+Es war also nicht so, dass die Zeit vor der Vereinheitlichung einfach uneinheitlich war. Sie war doppelt. Der erste Schritt zur Ordnung hatte die Verwirrung zunächst vergrößert.
+
+## Eine Landkarte aus Uhrzeiten
+
+Wie unübersichtlich das in ganz Europa war, listet die Enzyklopädie Land für Land auf. Frankreich richtete sich nach Paris, Belgien nach Brüssel, die Niederlande nach Amsterdam, Dänemark nach Kopenhagen, Norwegen nach Christiania, das heutige Oslo. Die Schweiz nach Bern, Spanien nach Madrid, Portugal nach Lissabon. Schweden benutzte eine Zeit, die von der Stockholmer um zwölf Minuten abwich. Russland führte gleich zwei, die Petersburger und die Moskauer.
+
+England war früh dran: Dort galt seit 1847 die durch den Meridian von Greenwich bestimmte Zeit. Die geringe Ost-West-Ausdehnung der Insel machte das leicht.
+
+Österreich-Ungarn dagegen hatte zwei Einheitszeiten, die Prager und die Budapester — **19 Minuten Unterschied** innerhalb eines Staates. Italien hatte drei: Rom fürs Festland, Palermo für Sizilien, Cagliari für Sardinien. Und die römische Zeit war ihrerseits erst 1866 aus mehreren älteren Zeitrechnungen zusammengelegt worden, unter anderem denen von Turin, Florenz, Verona und Neapel.
+
+Am dichtesten wurde es dort, wo viele Staaten auf engem Raum aneinandergrenzten. Um 1880 galt am Bodensee in Baden die Karlsruher Zeit, in Württemberg die Stuttgarter, in Bayern die Münchner, im österreichischen Teil die Wiener und in der Schweiz die Berner. Fünf Anrainer, fünf Uhrzeiten, ein See.
+
+<FuenfZeitenAmBodensee />
+
+Das schönste Beispiel liefert aber Genf. Der dortige Uhrenturm zeigte bis 1886 **drei verschiedene Zeiten** gleichzeitig an: die französische und die schweizerische Eisenbahnzeit — also Pariser und Berner Ortszeit — sowie die Genfer Ortszeit für die Einwohner.
+
+Und Deutschland war damit noch übersichtlich. In den Vereinigten Staaten bestanden vor 1883 etwa **75 verschiedene Eisenbahnzeiten**.
+
+## Fünf Zeiten — aber welche fünf?
+
+Fast jeder deutsche Text zu diesem Thema nennt dieselbe Aufzählung: Die Züge fuhren nach Berliner, Karlsruher, Ludwigshafener, Stuttgarter und Münchener Zeit. Fünf Eisenbahnzeiten. Man findet den Satz in Zeitungen, auf Blogs, in Jubiläumsartikeln zur Eisenbahngeschichte.
+
+Die *Enzyklopädie des Eisenbahnwesens* zählt anders. Sie nennt: Berliner Zeit für die norddeutschen Bahnen und Elsaß-Lothringen, Münchener Zeit für Bayern, Stuttgarter für Württemberg, Ludwigshafener für die Pfalz — und **Frankfurter Zeit für Hessen**. Karlsruhe kommt in ihrer Aufzählung der deutschen Eisenbahnzeiten überhaupt nicht vor.
+
+Beide Listen haben fünf Einträge. Es sind nicht dieselben fünf. Bei Röll fehlen die badischen Bahnen, in der populären Liste fehlen die hessischen. Welche Fassung stimmt, lässt sich hier nicht auflösen — und genau deshalb steht der Widerspruch hier, statt weggeglättet zu werden.
+
+Festhalten lässt sich: Die Zahl fünf ist gut belegt, sie stammt aus Moltkes Rede von 1891 und wird in der Fachliteratur bestätigt. Die Namensliste dahinter ist es nicht. Wer sie irgendwo als Selbstverständlichkeit liest, sollte skeptisch werden.
+
+## Der Neunzigjährige
+
+Anregungen zur Vereinheitlichung gab es seit Jahrzehnten. Bereits 1850 befasste sich die Akademie der Wissenschaften in Wien mit der Frage einer Einheitszeit im österreichischen Eisenbahnwesen. 1852 beantragte der badische Professor Erb im Verein Deutscher Eisenbahnverwaltungen, die Bahnuhren im gesamten Vereinsgebiet nach einheitlicher Zeit zu stellen.
+
+Passiert war: nichts. Vierzig Jahre lang.
+
+Am 16. März 1891 sprach im Reichstag Generalfeldmarschall Helmuth von Moltke, damals neunzig Jahre alt. Es war seine letzte Rede vor diesem Haus; er starb sechs Wochen später, am 24. April 1891. Ein Zeitgenosse beschrieb ihn kurz darauf als einen der fleißigsten Besucher der Reichstagssitzungen, der seine Stimme aber fast nur erhob, wenn es um militärische Fragen ging.
+
+Genau das tat er auch hier. Sein Argument war weder das der Reisenden noch das der Bahnverwaltungen. Es war ein militärisches: Im Fall einer Mobilmachung müssten alle Fahrtlisten für die Truppen sowohl in Ortszeiten als auch in den süddeutschen Einheitszeiten gerechnet werden. Bei diesen Umrechnungen könne sich leicht ein Fehler einschleichen — und ein solcher Fehler könne verhängnisvoll werden.
+
+Die fünf Zeiten im Reich waren für Moltke also keine Unbequemlichkeit, sondern eine Gefahr für die Landesverteidigung. Die Rede steht in den Stenographischen Berichten des Reichstags, 90. Sitzung, Seite 2092. Sie wurde berühmt, und sie gilt bis heute als der Moment, in dem sich die Sache drehte.
+
+Wie groß der Unterschied zwischen zwei Ortszeiten war, lässt sich mit dem Uhrzeitrechner nachvollziehen — im Tab „Zeitzonen" für heutige Zonen, oder von Hand mit der Regel: ein Längengrad, vier Minuten.
+
+<RechnerLoader slug="uhrzeitrechner" />
+
+## Was die Rede nicht bewirkt hat
+
+An dieser Stelle wird die populäre Fassung ungenau. Sie lautet ungefähr: Moltke sprach, und daraufhin führte Deutschland die Einheitszeit ein. Der General gab den Ausschlag, wo Jahrzehnte ziviler Vernunft gescheitert waren.
+
+Das stimmt so nicht, aus einem einfachen Grund — **die Eisenbahnen waren zu diesem Zeitpunkt bereits auf dem Weg.** Der Verein Deutscher Eisenbahnverwaltungen hatte schon am 30. Juli 1890, also knapp acht Monate vor Moltkes Rede, auf Antrag der ungarischen Staatsbahnverwaltung beschlossen, die Zonenzeit für den inneren Dienst einzuführen. In Österreich-Ungarn geschah das am 1. November 1890, gleich mit Übernahme in die öffentlichen Fahrpläne. In Bayern, Württemberg, Baden und Elsaß-Lothringen am 1. April 1892 — ein volles Jahr, bevor das Reichsgesetz überhaupt in Kraft trat.
+
+Was 1893 folgte, war also nicht die Erfindung der Einheitszeit. Es war ihre Ausweitung von der Bahn auf alles andere: auf das bürgerliche Leben, den Post- und Telegraphendienst, Behörden, Gerichte, Arbeitszeiten. Der eigentliche Streit ging nicht darum, ob Züge nach einer gemeinsamen Uhr fahren sollten. Er ging darum, ob die Uhr der Züge auch die Uhr aller anderen werden sollte.
+
+Und dagegen gab es erheblichen Widerstand. Der Abgeordnete Freiherr von Stumm hielt im März 1891 dagegen, es könne doch nicht sein, dass sich die sesshafte Mehrheit den Wünschen einer Minderheit beuge — nämlich der Reisenden und der Interessen der Eisenbahnverwaltungen. Andere argumentierten mit der „natürlichen Zeit", besonders mit Blick auf die Landbevölkerung. Noch Ende Januar 1893, wenige Wochen vor der Verabschiedung, diskutierte der Reichstag einen Kommissionsvorschlag, die Oberbehörden sollten ermächtigt werden, bezirksweise Anpassungen vorzunehmen — was auf lokale Einheitszeiten neben der nationalen hinausgelaufen wäre. Der Vorschlag fiel durch.
+
+Die Bedenken waren nicht abwegig. Die Eisenbahn-Enzyklopädie führt sie 1913 selbst auf: In Zonenrandlagen weicht die Zonenzeit so stark von der Sonnenzeit ab, dass an kurzen Tagen bis zu einer Dreiviertelstunde länger bei künstlichem Licht gearbeitet werden muss, als wenn man sich nach der Sonne richtete.
+
+Die Niederlande zogen daraus die Konsequenz. Sie hatten die Zonenzeit gemeinsam mit den Nachbarn eingeführt — und kehrten zum 1. Mai 1909 wieder zur Amsterdamer Sonnenzeit zurück, 20 Minuten vor der westeuropäischen und 40 Minuten hinter der Mitteleuropäischen Zeit. Ein Land, das seine Zeitzone wieder abschaffte, weil ihm das Tageslicht wichtiger war.
+
+## Greenwich, 1884 — und was dort nicht beschlossen wurde
+
+Der fünfzehnte Längengrad, nach dem sich unsere Uhr richtet, wird von Greenwich aus gezählt. Warum ausgerechnet von dort?
+
+Im Oktober 1884 tagten in Washington 41 Delegierte aus 25 Nationen. Am 13. Oktober wurde über den Nullmeridian abgestimmt. Das Ergebnis: **22 Stimmen dafür, eine dagegen, zwei Enthaltungen.** Dagegen stimmte San Domingo, die heutige Dominikanische Republik. Frankreich und Brasilien enthielten sich. Frankreich übernahm den Greenwich-Meridian auf seinen Karten erst 1911, also 27 Jahre später.
+
+Die Begründung war unromantisch und hatte nichts mit Weltpolitik zu tun: Über zwei Drittel aller Schiffe rechneten ohnehin schon von dort aus. Vor 1884 waren neben Greenwich unter anderem Meridiane durch die Kanarischen Inseln, Rom, Kopenhagen, Jerusalem, Sankt Petersburg, Pisa, Paris, Oslo und Philadelphia in Gebrauch gewesen.
+
+Und nun der Punkt, an dem beinahe jede Darstellung falsch liegt — vom Reiseblog über die Tageszeitung bis zur Pressemitteilung einer deutschen Universität. Überall steht, die Konferenz habe die Erde in 24 Zeitzonen zu je 15 Längengraden eingeteilt.
+
+**Das hat sie nicht.** Im Protokoll, das vollständig öffentlich zugänglich ist, lässt sich nachlesen, dass zwei Delegierte — darunter Sandford Fleming, dem die Erfindung der Zeitzonen üblicherweise zugeschrieben wird — die Einführung einer Standardzeit für alle Nationen vorschlugen. Andere Delegierte widersprachen: Das liege außerhalb des Auftrags der Konferenz. Über keinen der beiden Vorschläge wurde abgestimmt. Beschlossen wurden ein Nullmeridian und ein „universeller Tag" — und die vierte Resolution nimmt die örtlichen Zeiten davon sogar ausdrücklich aus.
+
+<WasWashingtonBeschloss />
+
+Die Zeitzonen entstanden nicht durch Beschluss, sondern durch Nachahmung. Was 1884 tatsächlich auf dem Tisch lag, war das amerikanische Vorbild: Am 18. November 1883 hatte die Railway Time Convention auf Betreiben ihres Sekretärs W. F. Allen beschlossen, das nordamerikanische Bahnnetz in Stundenzonen aufzuteilen — der 60., 75., 90., 105. und 120. Längengrad westlich von Greenwich als Mittellinien. Allen saß ein Jahr später in Washington mit am Tisch, als Mitglied der amerikanischen Delegation.
+
+Die Zonen bekamen die Namen, die sie bis heute tragen: Intercolonial, Eastern, Central, Mountain, Pacific Time. Aus 75 Eisenbahnzeiten wurden fünf.
+
+## Ein Satz, und zwei Jahre später eine Hintertür
+
+Das deutsche Gesetz besteht im Kern aus einem einzigen Satz. Kaiser Wilhelm II. unterzeichnete ihn am 12. März 1893 im Berliner Schloss, gegengezeichnet vom Reichskanzler Graf von Caprivi: Die gesetzliche Zeit in Deutschland ist die mittlere Sonnenzeit des fünfzehnten Längengrades östlich von Greenwich. In Kraft ab dem 1. April 1893.
+
+<Video src="/blog/zeit.mp4" caption="Bahnhofshalle des späten 19. Jahrhunderts: Wo Fahrpläne zusammenlaufen mussten, wurde die uneinheitliche Zeit zuerst zum Problem." beschreibung="Kamerafahrt durch eine Bahnhofshalle der 1890er Jahre mit Dampf, Gaslicht und einer Bahnhofsuhr im Mittelgrund" />
+
+Für Norddeutschland war der Sprung klein. Der Unterschied zwischen der bisher im Bahndienst benutzten Berliner Zeit und dem neuen Bezugsmeridian betrug **sechseinhalb Minuten.** Die Zoneneinteilung, schreibt die Enzyklopädie, schloss sich den bestehenden Zeitrechnungen verhältnismäßig gut an — was erklärt, warum sie sich am Ende so geräuschlos durchsetzte.
+
+Weniger bekannt ist, dass das Gesetz zwei Jahre später aufgeweicht wurde. Am 31. Juli 1895 kam ein Zusatz hinzu: Beträgt der Unterschied zwischen gesetzlicher Zeit und Ortszeit mehr als eine Viertelstunde, kann die höhere Verwaltungsbehörde für einzelne Betriebe oder Betriebsteile Abweichungen von den Arbeitszeitvorschriften der Gewerbeordnung zulassen.
+
+Die Einheitszeit galt also von Anfang an nicht ganz so einheitlich, wie es der eine Satz vermuten lässt. Genau die Sorge, die von Stumm 1891 formuliert hatte, bekam vier Jahre später ihre gesetzliche Ausnahme.
+
+Das Gesetz von 1893 hielt 85 Jahre. Abgelöst wurde es durch das Zeitgesetz vom 25. Juli 1978, in Kraft seit dem 1. August 1978 — nicht 1977, wie an mehreren Stellen im Netz zu lesen ist. Seit dem 12. Juli 2008 stehen die Regeln im Einheiten- und Zeitgesetz, das die Zeitbestimmung mit den Maßeinheiten in einem Gesetz zusammenfasst. In dessen Paragraf 4 steht der heutige Nachfolger des kaiserlichen Satzes, nüchterner formuliert: Die gesetzliche Zeit ist die mitteleuropäische Zeit, bestimmt durch die koordinierte Weltzeit unter Hinzufügung einer Stunde.
+
+Eine Randnotiz, die zu diesem Artikel passt: Die Physikalisch-Technische Bundesanstalt, die in Deutschland für die gesetzliche Zeit zuständig ist, gibt auf ihrer eigenen Seite das Änderungsgesetz mit dem 11. Juli 2008 an. Ausgefertigt wurde es am 3. Juli, in Kraft trat es am 12. Juli. Wer die Zeit für das ganze Land darstellt, hat beim Datum des eigenen Gesetzes danebengegriffen.
+
+## Der Tag, der 24 Stunden bekam
+
+Nebenbei änderte sich in diesen Jahrzehnten noch etwas, das heute selbstverständlich wirkt: die Zählung der Stunden.
+
+Bis dahin war es üblich, die Stunden zweimal von 1 bis 12 zu zählen, mit Zusätzen für vormittags und nachmittags. In Fahrplänen behalf man sich damit, die Minutenziffern der Nachtstunden zu unterstreichen. Die durchlaufende Zählung von 0 bis 24 setzte sich langsam durch: 1865 in Britisch-Indien, 1866 in Kanada, 1893 in Italien, 1897 in Belgien, 1900 in Spanien, 1912 in Frankreich.
+
+Die Enzyklopädie notiert 1913 dazu eine bemerkenswert moderne Beobachtung: In den Ländern, die die 24-Stunden-Zählung im Verkehrswesen eingeführt hatten, sei sie ins übrige Leben kaum eingedrungen. Es bestünden dort also wieder zwei Zeitrechnungen nebeneinander — genau das, was man eigentlich hatte vermeiden wollen.
+
+Ein zweites Detail, das die Sache verkompliziert und selten erwähnt wird: Die gesetzliche Zeit richtet sich nach der **mittleren** Sonnenzeit, nicht nach der tatsächlichen. Die echte Sonne läuft der mittleren im Jahresverlauf um bis zu 16 Minuten voraus oder hinterher. Die Folge ist kurios: Am 11. Februar ist der Nachmittag eine halbe Stunde länger als der Vormittag, am 2. November eine halbe Stunde kürzer. Selbst in Görlitz, wo die Uhr mit der mittleren Sonne übereinstimmt, weicht sie von der echten Sonne die meiste Zeit des Jahres ab.
+
+## Dann drehte man wieder an der Uhr
+
+Kaum war die Zeit vereinheitlicht, begann man, sie zu verschieben. Die Enzyklopädie erwähnt 1913 einen Vorschlag aus England als Neuheit: die Uhren des Landes zweimal jährlich um ein gewisses Maß vor- und zurückzustellen. Für die Eisenbahnen sei das nur annehmbar, wenn alle am Durchgangsverkehr beteiligten Länder gleichzeitig mitmachten — ein Argument, das die Zeitumstellungsdebatte bis heute prägt.
+
+Drei Jahre später war es so weit. Ab 1916 führte das Kaiserreich mitten im Krieg eine Sommerzeit ein, um Tageslicht für Landwirtschaft und Rüstungsindustrie besser auszunutzen. Sie galt von 1916 bis 1918. Schon im Herbst 1916 wies der Leiter eines kommunalen Energieunternehmens darauf hin, dass der gesunkene Gasverbrauch keineswegs nur an der Sommerzeit liege, sondern ebenso an eingeschränkter Straßenbeleuchtung, kühler Witterung, früherem Geschäftsschluss und der allgemeinen wirtschaftlichen Lage. Die Frage, ob Zeitumstellung wirklich Energie spart, ist also exakt so alt wie die Zeitumstellung selbst.
+
+1919 wurde die Maßnahme wieder abgeschafft. Bis 1939 blieb die Uhr in Ruhe. 1940 kam die Sommerzeit zurück, diesmal so gründlich, dass sie von April 1940 bis November 1942 durchgehend galt — ohne Rückstellung im Winter. Ab 1943 wurde wieder zweimal jährlich umgestellt. Nach Kriegsende bestimmten die Besatzungsmächte jeweils eigenständig, was zeitweise zu einem Durcheinander führte, das dem des 19. Jahrhunderts nicht unähnlich war: 1945 galt in der sowjetischen Besatzungszone samt Berlin von Ende Mai bis Ende September sogar eine doppelte Sommerzeit, zwei Stunden vor der Normalzeit, passend zur Moskauer Ortszeit. 1947 gab es eine solche Hochsommerzeit noch einmal.
+
+Ab 1950 war dreißig Jahre lang Ruhe. Die Wiedereinführung beschloss die Bundesrepublik 1978 — als Nachwirkung der Ölkrise von 1973 und weil die westlichen Nachbarn bereits 1977 umgestellt hatten. In Kraft trat sie erst 1980, und der Grund für die Verzögerung ist bemerkenswert: Man musste sich zuvor mit der DDR einigen, damit Deutschland und besonders Berlin nicht auch noch zeitlich geteilt waren.
+
+Seit 2001 regelt die EU-Richtlinie 2000/84/EG die Umstellung unbefristet: letzter Sonntag im März vor, letzter Sonntag im Oktober zurück.
+
+Abgeschafft werden sollte sie längst. Vom 4. Juli bis zum 16. August 2018 führte die EU-Kommission eine öffentliche Konsultation durch, an der 4,6 Millionen Menschen teilnahmen — rund ein Prozent der EU-Bevölkerung. Auch hier lohnt der genaue Blick: Manche Quellen berichten, über 80 Prozent hätten für ein Ende der Umstellung gestimmt, andere, 84 Prozent seien für ein Ende **und** eine dauerhafte Sommerzeit gewesen. Das sind zwei verschiedene Aussagen. 2019 stimmte das Europäische Parlament für die Abschaffung ab 2021.
+
+Passiert ist seither nichts. Der Rat der EU müsste zustimmen, und die Mitgliedstaaten sind sich uneins: Nordeuropa neigt zur dauerhaften Normalzeit, Südeuropa zur dauerhaften Sommerzeit, einzelne Länder wollen bei der Umstellung bleiben. Nötig wären mindestens 15 der 27 Staaten, die zusammen 65 Prozent der Bevölkerung vertreten. Das Vorhaben gehört inzwischen zu den ältesten offenen Vorschlägen in Brüssel.
+
+Es ist derselbe Konflikt wie 1891, nur größer: Wer sich nach der Sonne richten will, und wer sich nach dem Fahrplan richten muss.
+
+## Von der Sonne zum Atom
+
+Bis hierhin war unsere Uhr an die Erddrehung gekoppelt. Seit 1972 ist sie das nur noch mit einem Trick.
+
+Die Sekunde wird seit 1967 über Cäsium-Atome definiert — als das 9.192.631.770-fache der Periodendauer einer bestimmten Strahlung. Mit der Erddrehung hat das nichts mehr zu tun. Und die Erde dreht sich unregelmäßig: mal etwas langsamer, mal etwas schneller, beeinflusst von Mond, Sonne und Vorgängen im Erdinneren.
+
+Damit die Atomzeit nicht langsam von der Sonne wegläuft, wurde zum 1. Januar 1972 die Koordinierte Weltzeit UTC eingeführt. Sie läuft im Takt der Atomuhren, bekommt aber gelegentlich eine Sekunde eingeschoben, sobald die Abweichung zur Erddrehung auf 0,9 Sekunden zuzugehen droht. Zuständig für die Entscheidung ist der Internationale Dienst für Erdrotation, in Deutschland umgesetzt von der Physikalisch-Technischen Bundesanstalt, die die gesetzliche Zeit unter anderem über den Langwellensender DCF77 verbreitet.
+
+Diese Schaltsekunden gab es seit 1972 genau **27 Mal**. Zusammen mit den zehn Sekunden, um die Atomzeit und UTC schon zum Start auseinanderlagen, ergibt das den heutigen Abstand von 37 Sekunden. Die letzte Schaltsekunde wurde am 31. Dezember 2016 eingefügt, in Deutschland also am Neujahrsmorgen um 00:59:60 MEZ. Seither keine mehr — die Erde dreht sich in den letzten Jahren wieder schneller.
+
+<ZeitleisteEinheitszeit />
+
+## Was im Oktober zur Abstimmung steht
+
+Genau das ist inzwischen das Problem. Bisher war jede Schaltsekunde eine zusätzliche Sekunde. Dreht sich die Erde dauerhaft schneller, müsste erstmals eine Sekunde **gestrichen** werden — eine negative Schaltsekunde. Das hat es noch nie gegeben, und praktisch kein System der Welt ist darauf vorbereitet.
+
+Ein Fachtreffen von Zeitmetrologen und Erdrotationsexperten schätzte im März 2025 die Wahrscheinlichkeit, dass dieser Fall bis 2035 eintritt, auf **30 Prozent**. Der zugehörige Beschlussentwurf formuliert die Folgen ungewöhnlich direkt: Die Vorbereitung darauf würde für die Industrien, die auf Zeitsynchronisation angewiesen sind, einen finanziellen Aufwand bedeuten, der dem für das Jahr-2000-Problem entspricht.
+
+Deshalb liegt der Generalkonferenz für Maß und Gewicht ein Entwurf vor, über den vom 13. bis 15. Oktober 2026 in Versailles abgestimmt wird. Er sieht vor: **Ab dem 20. Mai 2027 läuft UTC durch.** Der zulässige Abstand zur Erddrehung wird von 0,9 Sekunden auf **3600 Sekunden** heraufgesetzt — auf eine volle Stunde.
+
+<GrenzwertSprung />
+
+Formal werden Schaltsekunden damit nicht abgeschafft. Der Mechanismus bleibt bestehen. Er greift nur für mehrere Jahrhunderte nicht mehr. Wer den Unterschied zwischen Uhrzeit und Sonnenstand künftig ausgleichen will, müsste irgendwann eine ganze Stunde einfügen — einen Nachfahren der Schaltsekunde, den heute niemand mehr erleben wird.
+
+Der Entwurf begründet das übrigens mit einem Argument, das zu diesem Artikel gut passt: In vielen Ländern weiche die wahre Sonnenzeit ohnehin um mehr als eine Stunde von der bürgerlichen Zeit ab, je nach Zeitzone — und beim Sommerzeitwechsel verschiebe man die Uhr regelmäßig um eine volle Stunde. Wenn man mit diesen Abweichungen leben könne, dann auch mit einer langsam davonlaufenden Sekunde.
+
+Auf derselben Tagesordnung steht noch ein zweiter Entwurf, der andeutet, wohin die Reise geht: die Definition einer internationalen Mondzeitskala und ihrer Rückführbarkeit auf UTC. Die Raumfahrtagenturen bauen Navigationssysteme für den Mond, und dort vergeht die Zeit wegen der Relativitätstheorie messbar anders. Hundertdreißig Jahre nachdem Deutschland sich auf eine Uhr geeinigt hat, wird darüber verhandelt, welche Uhr auf dem Mond gilt.
+
+## Was bleibt
+
+1893 band ein einziger Satz im Reichsgesetzblatt die deutsche Uhr an die mittlere Sonnenzeit eines Längengrades. Es war eine Näherung — für die meisten Orte im Land war sie von Anfang an falsch, um bis zu einer halben Stunde. Man nahm das in Kauf, weil Fahrpläne wichtiger geworden waren als Sonnenstände.
+
+Ab 2027 wird auch diese Näherung aufgegeben. Unsere Zeit ist dann Atomzeit, die sich um die Sonne nur noch ungefähr kümmert, und zwar auf Jahrhunderte hinaus immer ungefährer.
+
+Der Stein in Görlitz steht 137 Meter falsch. Das wird bald der kleinste Unterschied zwischen unserer Uhr und dem Himmel sein.
+
+Versetzt wurde er nie. Stattdessen markierte man 2011 auch noch die Straße nach dem falschen Verlauf. Der Görlitzer Anzeiger nannte diesen Verlauf damals selbst „tourismusfreundlich" und bezifferte die Kosten einer dauerhaften Markierung aus Spendenmitteln auf 20.000 Euro.
+
+<KarstenSagt>
+Dass der Stein in Görlitz nie versetzt wurde, sagt für mich mehr über uns als über den Meridian. Sobald Genauigkeit im Weg steht, wird sie unwichtig — und zwar immer dann, wenn etwas anderes gerade mehr einbringt.
+
+Ich gehe davon aus, dass es um Tourismus geht. Eine Sehenswürdigkeit muss gut erreichbar sein, sonst kommt niemand hin, und wer nicht hinkommt, gibt auch kein Geld aus. Der richtige Meridian liegt unten auf der Wiese. Der falsche steht dort, wo die Leute ohnehin vorbeilaufen.
+
+Belegen kann ich das nicht, es ist meine Einschätzung. Aber ich baue ein Portal, bei dem Zahlen stimmen müssen, und mich stört so etwas. Wenn schon das Denkmal für die Genauigkeit an der falschen Stelle steht, braucht man sich über den Rest nicht zu wundern.
+</KarstenSagt>
+
+<Quellen eintraege={[
+  {
+    titel: 'Gesetz, betreffend die Einführung einer einheitlichen Zeitbestimmung vom 12. März 1893 (RGBl. S. 93)',
+    url: 'https://de.wikisource.org/wiki/Gesetz,_betreffend_die_Einführung_einer_einheitlichen_Zeitbestimmung',
+    hinweis: 'Volltext. Das Gesetz besteht im Kern aus einem einzigen Satz.',
+  },
+  {
+    titel: 'Gesetz, betreffend die Abänderung des Gesetzes, betreffend die Einführung einer einheitlichen Zeitbestimmung, vom 31. Juli 1895',
+    url: 'https://de.wikisource.org/wiki/Gesetz,_betreffend_die_Abänderung_des_Gesetzes,_betreffend_die_Einführung_einer_einheitlichen_Zeitbestimmung',
+    hinweis: 'Die zwei Jahre später eingefügte Ausnahmeregelung ab einer Viertelstunde Abweichung.',
+  },
+  {
+    titel: 'Röll (Hrsg.): Enzyklopädie des Eisenbahnwesens, Band 4, Berlin/Wien 1913, S. 149–152, Stichwort „Eisenbahnzeit"',
+    url: 'http://www.zeno.org/Roell-1912/A/Eisenbahnzeit',
+    hinweis: 'Zeitnahe Fachquelle für die Vier-Minuten-Regel, die 67 Minuten Spannweite, die doppelte Zeitrechnung im Bahnhof und die europäische Zeitlandschaft. Nennt als fünfte deutsche Eisenbahnzeit die Frankfurter, nicht die Karlsruher — im Widerspruch zur heute verbreiteten Aufzählung.',
+  },
+  {
+    titel: 'Stenographische Berichte über die Verhandlungen des Reichstags, VIII. Legislaturperiode, 1. Session 1890/91, Band 3, S. 2092 (90. Sitzung vom 16. März 1891)',
+    hinweis: 'Fundstelle von Moltkes Rede zur Einheitszeit. Die Digitalisate liegen auf reichstagsprotokolle.de; ein stabiler Link auf die einzelne Seite ließ sich nicht verifizieren, deshalb steht hier bewusst nur die Fundstelle.',
+  },
+  {
+    titel: 'Die Gartenlaube, Jahrgang 1892, Heft 5: „Ortszeit und Einheitszeit"',
+    url: 'https://de.wikisource.org/wiki/Ortszeit_und_Einheitszeit',
+    hinweis: 'Zeitgenössischer Bericht über Moltkes letzte Reichstagsrede und sein Argument der fehleranfälligen Umrechnung.',
+  },
+  {
+    titel: 'Rothauge, Caroline: Zur Einführung der „Mitteleuropäischen Zeit" im Deutschen Kaiserreich 1893, Themenportal Europäische Geschichte',
+    url: 'https://www.europa.clio-online.de/essay/id/fdae-29052',
+    hinweis: 'Wissenschaftliche Aufarbeitung der Reichstagsdebatten mit den Gegenstimmen, unter anderem der von Stumms.',
+  },
+  {
+    titel: 'Quellenedition zum Gesetz von 1893, Themenportal Europäische Geschichte',
+    url: 'https://www.europa.clio-online.de/quelle/id/q63-59160',
+    hinweis: 'Gesetzestext mit Kommentar und den Fundstellen der einzelnen Debattenbeiträge.',
+  },
+  {
+    titel: 'International Conference Held at Washington for the Purpose of Fixing a Prime Meridian and a Universal Day, Protokoll 1884',
+    url: 'https://www.gutenberg.org/files/17759/17759-h/17759-h.htm',
+    hinweis: 'Vollständiges Sitzungsprotokoll. Belegt das Abstimmungsergebnis 22 zu 1 bei zwei Enthaltungen — und dass über die Einteilung in 24 Zeitzonen nie abgestimmt wurde.',
+  },
+  {
+    titel: 'BIPM: Draft Resolutions for the 28th meeting of the CGPM, Version 3 vom 30. März 2026',
+    url: 'https://www.bipm.org/en/cgpm-2026/documents',
+    hinweis: 'Entwurf C enthält das Datum 20. Mai 2027, den Wert 3600 Sekunden und die 30-Prozent-Schätzung; Entwurf D die Mondzeitskala.',
+  },
+  {
+    titel: 'BIPM: Resolution 4 of the 27th CGPM (2022)',
+    url: 'https://www.bipm.org/en/cgpm-2022/resolution-4',
+    hinweis: 'Grundsatzbeschluss, den zulässigen Abstand zwischen UT1 und UTC bis spätestens 2035 zu erhöhen.',
+  },
+  {
+    titel: 'Physikalisch-Technische Bundesanstalt: Darstellung der gesetzlichen Zeit',
+    url: 'https://www.ptb.de/cms/ptb/fachabteilungen/abt4/fb-44/ag-441/darstellung-der-gesetzlichen-zeit.html',
+    hinweis: 'Gibt das Änderungsgesetz mit dem 11. Juli 2008 an. Ausgefertigt wurde es am 3. Juli, in Kraft trat es am 12. Juli — ein Datumsfehler auf der Seite der zuständigen Bundesanstalt.',
+  },
+  {
+    titel: 'Physikalisch-Technische Bundesanstalt: Schaltsekunden',
+    url: 'https://www.ptb.de/cms/ptb/fachabteilungen/abt4/fb-44/ag-441/darstellung-der-gesetzlichen-zeit/schaltsekunden.html',
+    hinweis: 'Tabelle aller seit 1972 eingefügten Schaltsekunden.',
+  },
+  {
+    titel: '§ 4 Einheiten- und Zeitgesetz (EinhZeitG)',
+    url: 'https://www.gesetze-im-internet.de/me_einhg/__4.html',
+    hinweis: 'Die heute geltende Fassung der gesetzlichen Zeit in Deutschland.',
+  },
+  {
+    titel: 'Zeitgesetz vom 25. Juli 1978, BGBl. 1978 Teil I, S. 1110–1111',
+    hinweis: 'Löste das Gesetz von 1893 ab, in Kraft ab 1. August 1978, aufgehoben am 12. Juli 2008. Ein amtlicher Volltext des historischen Gesetzes ist online nicht frei zugänglich.',
+  },
+  {
+    titel: 'Richtlinie 2000/84/EG des Europäischen Parlaments und des Rates vom 19. Januar 2001 zur Regelung der Sommerzeit',
+    url: 'https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32000L0084',
+    hinweis: 'Regelt die halbjährliche Umstellung seit 2001 unbefristet.',
+  },
+  {
+    titel: 'Europäische Kommission: Vorschlag zur Abschaffung der jahreszeitlich bedingten Zeitumstellung, COM(2018) 639',
+    url: 'https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:52018PC0639',
+    hinweis: 'Nennt den Zeitraum der öffentlichen Konsultation vom 4. Juli bis 16. August 2018. Die Ergebnisangaben schwanken zwischen „über 80 Prozent für ein Ende der Umstellung" und „84 Prozent für ein Ende und eine dauerhafte Sommerzeit" — zwei verschiedene Aussagen.',
+  },
+  {
+    titel: 'Deutsches Uhrenmuseum Furtwangen: 125 Jahre Mitteleuropäische Zeit in Deutschland',
+    url: 'https://blog.deutsches-uhrenmuseum.de/2018/03/08/mez-deutschland/',
+    hinweis: 'Quelle für die fünf Zeiten am Bodensee und die drei Uhrzeiten am Genfer Uhrturm.',
+  },
+  {
+    titel: 'Stadt Görlitz: Der 15. Meridian',
+    url: 'https://www.goerlitz.de/15.-Meridian.html',
+    hinweis: 'Darstellung der Stadt selbst zum Bezugsmeridian der Mitteleuropäischen Zeit.',
+  },
+]} />
