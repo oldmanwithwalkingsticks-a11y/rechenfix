@@ -5,7 +5,9 @@ description: Technik-Vorlage und Verifikations-Checkliste zum Ausrollen von Blog
 
 # Blog Builder für rechenfix.de
 
-**Stand: v3 (30.07.2026, verifiziert an HEAD `412aa86`).** Rollt Blogartikel für das deutsche Rechner-Portal rechenfix.de technisch sauber aus. Deckt die **wiederkehrende Mechanik** ab: MDX-Andockpunkte, Grafik-Komponenten-Konvention, Dark-Mode, Quellen, eingebettete Rechner, Verifikations-Checkliste, Build-Prompt-Struktur für Code-Claude.
+**Stand: v4 (05.08.2026, verifiziert an HEAD `7ebc2c5`).** Rollt Blogartikel für das deutsche Rechner-Portal rechenfix.de technisch sauber aus. Deckt die **wiederkehrende Mechanik** ab: MDX-Andockpunkte, Grafik-Komponenten-Konvention, Dark-Mode, Quellen, eingebettete Rechner, Verifikations-Checkliste, Build-Prompt-Struktur für Code-Claude.
+
+**v4-Nachtrag (05.08.2026 — nach Artikel 9 „Zeitvereinheitlichung", Welle 55):** Der Build-Prompt ließ **KI-Metadaten Ebene 3** (XMP in der Datei) weg und behauptete, die KI-Kennzeichnung entstehe vollständig automatisch. Code-Claude stoppte vor dem Commit — sonst wäre `zeit.mp4` auf Dateiebene ungekennzeichnet live gegangen. Kodifiziert in: „Die drei Ebenen sind nicht gleich automatisch" (unten im KI-Metadaten-Abschnitt), einem Pflichtschritt + STOP-Bedingung + Generator-Spalte in „Build-Prompt-Struktur", und der Regel, dass der **Generatorname eine Tatsachenangabe ist** (Chat-Claude liefert ihn mit den Assets; Code-Claude rät ihn nie und übernimmt ihn nicht aus der Tabelle anderer Artikel).
 
 **Was dieser Skill NICHT abnimmt:** Faktenrecherche, Widersprüche in Quellen aufspüren, Erzählung bauen, Grafiken inhaltlich entwerfen, den „Karsten sagt"-Block. Das ist pro Artikel neu und ist der eigentliche Wert. Der Skill verschlankt das Drumherum, nicht den Kern.
 
@@ -257,6 +259,16 @@ export default function Video({ src, poster, caption }: { src: string; poster?: 
 
 Rechtsgrundlage: Art. 50 Abs. 4 KI-VO (Verordnung (EU) 2024/1689), anwendbar seit 2. August 2026. Betreiber müssen offenlegen, dass Bild- und Videoinhalte künstlich erzeugt sind. Umgesetzt in drei Ebenen (Welle 35, Commit `412aa86`).
 
+### Die drei Ebenen sind nicht gleich automatisch (Lehre Welle 55)
+
+**Ebene 1 und 2 — Badge und On-Page-JSON-LD: automatisch.** `Bild.tsx` und `Video.tsx` haben beide `kiGeneriert = true` als Default. Hier ist nichts zu tun; ein echtes Foto müsste aktiv `kiGeneriert={false}` setzen.
+
+**Ebene 3 — XMP in der Datei: NICHT automatisch.** Sie erfordert zwei getrennte Handgriffe, und beide müssen im Build-Prompt stehen (Einzelheiten unten in „Ebene 3"): eine `GENERATOREN`-Zeile pro neuer Mediendatei plus ein Skriptlauf mit `--pruefen`-Gegenprobe. Fehlt die Zeile, überspringt das Skript die Datei mit einer Warnung — der Build bleibt grün, die Datei bleibt ungekennzeichnet. Ein stiller Fehlschlag. **Ein Build-Prompt, der behauptet, die KI-Kennzeichnung entstehe vollständig automatisch, ist falsch** (genau dieser Satz stand im Artikel-9-Prompt und wurde von Code-Claude gestoppt — sonst wäre `zeit.mp4` auf Dateiebene ungekennzeichnet live gegangen).
+
+**Der Generatorname ist eine Tatsachenangabe, keine Formsache.** Er muss das tatsächlich verwendete Modell nennen, nicht das gewohnte. Wer aus Gewohnheit `Kling AI 3.0 (Kuaishou)` einträgt, obwohl mit 2.5 erzeugt wurde, schreibt eine falsche Herkunftsangabe in die Datei — genau das, was Art. 50 KI-VO verhindern soll. Weicht das Modell von den bisherigen ab, gibt es zwei zulässige Wege: den abweichenden Namen eintragen, oder das Medium mit dem gewohnten Modell neu erzeugen. Nicht zulässig ist, den gewohnten Namen über ein anderes Modell zu schreiben.
+
+**Chat-Claude liefert den Generatornamen mit den Assets.** Wer die Medien erzeugt, weiß als Einziger sicher, mit welchem Modell — Code-Claude kann es der Datei nicht ansehen und darf es nicht raten. Der Name gehört deshalb in dieselbe Übergabe wie die Asset-Links, nicht in eine Rückfrage. (Stand der bisherigen acht Artikel: Titelbilder/Standbilder `Gemini 3 Pro Image (Google)`, Videos `Kling AI 3.0 (Kuaishou)` — neue Werte nur bei tatsächlich anderem Modell.)
+
 ### Ebene 1 — sichtbares Badge, passiert automatisch
 
 `Bild` und `Video` haben `kiGeneriert = true` als **Default**. Wer die Prop vergisst, bekommt eine überflüssige Kennzeichnung statt einer fehlenden — das ist die sichere Richtung und bewusst so gebaut. Ein **echtes Foto** muss aktiv `kiGeneriert={false}` setzen.
@@ -355,8 +367,10 @@ Pro Welle prüfen (`web_fetch` NICHT nutzen — liefert stale Cache; Live-Verify
 Jeder Prompt als eigene `.md` in `/mnt/user-data/outputs/`, Konvention `welle<N>-blog-<thema>-<zweck>-prompt.md`. Pflicht-Bestandteile:
 
 - **Harter Kontext-Header:** Repo, lokaler Pfad, HEAD-Erwartung, betroffene Dateien.
-- **STOP-Bedingungen (ZERO Commits):** Zieldatei fehlt; wörtlicher Suchtext nicht gefunden → NICHT raten, STOP + melden; Build schlägt fehl → nicht committen, Fehlermeldung.
+- **STOP-Bedingungen (ZERO Commits):** Zieldatei fehlt; wörtlicher Suchtext nicht gefunden → NICHT raten, STOP + melden; Build schlägt fehl → nicht committen, Fehlermeldung; **der Prompt nennt keine Generatornamen für die neuen Medien → melden und stoppen** (nicht aus der Tabelle für andere Artikel übernehmen und nicht schätzen — Lehre Welle 55).
 - **Schritte** mit wörtlichen Such-/Ersetz-Blöcken. **Wortlaute vorab per git clone verifizieren**, damit Code-Claudes STOP-Bedingung nicht fälschlich greift.
+- **Pflichtschritt KI-Metadaten Ebene 3 (Art. 50 KI-VO)** direkt nach dem Schritt, der Titelbild und Video ablegt — sonst geht das Video auf Dateiebene ungekennzeichnet live (Ebene 1/2 reichen NICHT, sie gelten nur auf der eigenen Seite). Der Schritt lautet: je eine Zeile `'<titelbild>.png': '<Generatorname>'` und `'<video>.mp4': '<Generatorname>'` in `GENERATOREN` in `scripts/ki-metadaten-schreiben.mjs` ergänzen (Werte aus der Datei-Tabelle des Prompts, siehe nächster Punkt), dann `node scripts/ki-metadaten-schreiben.mjs` und `node scripts/ki-metadaten-schreiben.mjs --pruefen`. Erwartung: beide neuen Dateien melden `OK` (`UNBEKANNT` = GENERATOREN-Zeile fehlt; `FEHLT` = Skript nicht/nicht erfolgreich gelaufen). `scripts/ki-metadaten-schreiben.mjs` gehört mit in den Commit.
+- **Datei-Tabelle des Prompts trägt eine Generator-Spalte.** Die „Mitgelieferte Dateien"-Tabelle bekommt neben `Ziel` die Spalte `Generator (für GENERATOREN)`, damit der Wert an derselben Stelle wie der Dateiname steht und beim Prompt-Schreiben nicht übersehen wird. Chat-Claude füllt sie beim Erzeugen der Assets — nicht aus Gewohnheit, sondern mit dem real verwendeten Modell.
 - **Gezieltes Staging:** `git add <konkrete Pfade>` — NIE `git add .` (sonst wandern `client-data.ts`-Drift und ungetrackte Handoff-Dateien mit). `client-data.ts` ist auto-generierter Datums-Drift, nie mitcommitten.
 - **Übergabe-Format:** knappe Punktliste (geänderte Dateien, Build-Ergebnis, Routen-Check, Commit-Hash, offene Punkte für Karsten).
 - **„Was du NICHT tust":** Artikeltext inhaltlich ändern (außer explizit benannt), „Karsten sagt"-Block anfassen, Infrastruktur/Renderer verändern, Suchtexte nach Sinn raten.
