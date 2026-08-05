@@ -5,7 +5,7 @@ description: Technik-Vorlage und Verifikations-Checkliste zum Ausrollen von Blog
 
 # Blog Builder für rechenfix.de
 
-**Stand: v4 (05.08.2026, verifiziert an HEAD `7ebc2c5`).** Rollt Blogartikel für das deutsche Rechner-Portal rechenfix.de technisch sauber aus. Deckt die **wiederkehrende Mechanik** ab: MDX-Andockpunkte, Grafik-Komponenten-Konvention, Dark-Mode, Quellen, eingebettete Rechner, Verifikations-Checkliste, Build-Prompt-Struktur für Code-Claude.
+**Stand: v5 (05.08.2026, verifiziert an HEAD `56acc07`).** Rollt Blogartikel für das deutsche Rechner-Portal rechenfix.de technisch sauber aus. Deckt die **wiederkehrende Mechanik** ab: MDX-Andockpunkte, Grafik-Komponenten-Konvention, Dark-Mode, Quellen, eingebettete Rechner, Verifikations-Checkliste, Build-Prompt-Struktur für Code-Claude.
 
 **v4-Nachtrag (05.08.2026 — nach Artikel 9 „Zeitvereinheitlichung", Welle 55):** Der Build-Prompt ließ **KI-Metadaten Ebene 3** (XMP in der Datei) weg und behauptete, die KI-Kennzeichnung entstehe vollständig automatisch. Code-Claude stoppte vor dem Commit — sonst wäre `zeit.mp4` auf Dateiebene ungekennzeichnet live gegangen. Kodifiziert in: „Die drei Ebenen sind nicht gleich automatisch" (unten im KI-Metadaten-Abschnitt), einem Pflichtschritt + STOP-Bedingung + Generator-Spalte in „Build-Prompt-Struktur", und der Regel, dass der **Generatorname eine Tatsachenangabe ist** (Chat-Claude liefert ihn mit den Assets; Code-Claude rät ihn nie und übernimmt ihn nicht aus der Tabelle anderer Artikel).
 
@@ -40,6 +40,10 @@ Artikel 3 lief mit **einer** Ausrollwelle durch (Welle 32) — die v2-Checkliste
 6. **Ablageort der Quelldateien im Prompt benennen.** Welle 32 stoppte, weil der Prompt „Karsten stellt bereit" sagte, aber nicht wo.
 7. **Verifikations-Greps müssen alle real vorkommenden Zeichen abdecken.** `nr="[0-9]+"` übersah den Abschnitt `9a` der Datenschutzseite — dieselbe Fehlerklasse wie damals `ergebnis\.[a-zA-Z]+` bei Feldnamen mit Ziffern.
 8. **Neue statische Routen brauchen einen Eintrag in `META_ROUTES`** in `scripts/slug-drift-scan.mjs`, sonst bricht der Prebuild-Hook, sobald die Route intern verlinkt ist.
+
+## v5-Nachtrag (05.08.2026 — nach Artikel 10 „Pfund")
+
+**Titelbild-Varianten:** `image_count: 2` in EINEM Generator-Aufruf liefert keine zwei Bildideen, sondern zwei Ausschnitte derselben Interpretation. Beobachtet bei den Titelbildern zu Artikel 9 (zwei Bahnhofsuhren) und 10 (Balkenwaage) — die zweite Fassung war jeweils nur etwas näher herangezoomt. Ab jetzt: **zwei getrennte Aufrufe mit verschieden komponierten Motiven.** Gleiche Credits, echte Auswahl. Kodifiziert unten im Titelbild-Abschnitt.
 
 ## Tech Stack (verifiziert an HEAD c9b966d–26636e6)
 
@@ -217,6 +221,24 @@ HTML-Tabellen (kein SVG) nutzen Tailwind-`dark:`-Klassen direkt (`text-gray-900 
 - **Asset-Weg:** Karsten legt Bilder lokal nach `G:\Projekte\Rechenfix\Blogs\Bilder`, Videos nach `G:\Projekte\Rechenfix\Blogs\Videos`. Chat-Claude hat KEINEN Schreibzugriff auf `G:\` und der Egress-Proxy blockiert Kling-Domains. Ablauf bei generierten Assets: Claude generiert via Kling → gibt wasserzeichenfreie URLs aus (gültig NUR 24 h!) → Karsten lädt herunter und legt ab. Im Build-Prompt den Zielpfad als Quelle nennen; Code-Claude legt `public/blog/` an, Karsten kopiert die Datei selbst hinein.
 - **Assets MÜSSEN committet werden.** Sie liegen lokal, sind aber erst nach `git add public/blog/<datei>` im Repo — sonst fehlen sie auf Vercel (baut aus GitHub) und das Bild/Video ist live kaputt, obwohl es lokal da ist. Im Build-Prompt die Assets ausdrücklich mit stagen und vor dem Commit prüfen (`ls -la` + > 0 Bytes). Beleg: `meter-titelbild.png` liegt committet im Repo, so gehört es.
 - Fehlt die PNG beim Build, bricht `next/image` NICHT ab (Laufzeit-Laden) — aber live erscheint dann nichts. Deshalb Commit-Prüfung.
+
+### Zwei Varianten heißt zwei Aufrufe, nicht `image_count: 2`
+
+Ein Generator-Aufruf mit `image_count: 2` (bzw. `imageCount` bei Kling) erzeugt **keine zwei Bildideen**. Das Modell interpretiert den Prompt einmal und variiert danach nur noch Ausschnitt und Kleinigkeiten. Belegt an zwei Artikeln in Folge:
+
+- Artikel 9, Bahnhofsuhren: beide Fassungen dieselbe Szene, die zweite näher dran.
+- Artikel 10, Balkenwaage: dasselbe Bild, leicht anderer Zoom.
+
+**Regel:** Wenn Karsten eine Auswahl bekommen soll, zwei **getrennte** Aufrufe mit bewusst **unterschiedlich komponierten** Motiven absetzen — nicht bloß andere Worte für dieselbe Szene, sondern eine andere Bildidee (andere Perspektive, anderes Objekt, anderer Ausschnittstyp). Beispiel Artikel 10:
+
+1. Balkenwaage in Seitenansicht, deutlich schief — trägt die Aussage „zwei Pfunde wiegen nicht gleich viel".
+2. Aufsicht auf eine Reihe ungleicher Handelsgewichte — trägt die Aussage „es gab viele verschiedene Pfunde".
+
+Kosten sind identisch (`gemini-3-pro-image` rechnet ~20 Credits je Bild, egal ob ein Aufruf mit zwei Bildern oder zwei Aufrufe mit je einem).
+
+Gilt sinngemäß auch für Video. Dort wird bisher immer nur eine Fassung erzeugt, weshalb es nicht aufgefallen ist — bei einer gewünschten Auswahl dieselbe Regel anwenden.
+
+**Nicht verwechseln mit dem Nachbessern eines misslungenen Bildes.** Wenn ein Motiv inhaltlich falsch herauskam (identische Zifferblätter, waagerechte Waage), ist die Antwort ein geschärfter Prompt mit explizit ausgeschriebenen Sollzuständen — nicht eine zweite Bildidee. Siehe Artikel 9: „die Uhren zeigen unterschiedliche Zeiten" scheiterte, „linke Uhr beide Zeiger senkrecht nach oben, rechte Uhr Minutenzeiger nach unten rechts" funktionierte.
 
 ### Generatoren scheitern auch an filigraner Mechanik (nicht nur an Diagramm-Geometrie)
 
