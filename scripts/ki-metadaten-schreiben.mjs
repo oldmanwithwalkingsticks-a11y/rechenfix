@@ -61,6 +61,8 @@ const GENERATOREN = {
   'schuhgroessen.mp4': 'Kling AI 3.0 (Kuaishou)',
   'zeit-titelbild.png': 'Gemini 3 Pro Image (Google)',
   'zeit.mp4': 'Kling AI 3.0 (Kuaishou)',
+  'pfund-titelbild.png': 'Gemini 3 Pro Image (Google)',
+  'pfund.mp4': 'Kling AI 3.0 (Kuaishou)',
 };
 
 const nurPruefen = process.argv.includes('--pruefen');

@@ -49,6 +49,12 @@ import ZweiUhrenImBahnhof from '@/components/blog/grafik/ZweiUhrenImBahnhof';
 import WasWashingtonBeschloss from '@/components/blog/grafik/WasWashingtonBeschloss';
 import ZeitleisteEinheitszeit from '@/components/blog/grafik/ZeitleisteEinheitszeit';
 import GrenzwertSprung from '@/components/blog/grafik/GrenzwertSprung';
+import PfundImVergleich from '@/components/blog/grafik/PfundImVergleich';
+import DreiAbschaffungsjahre from '@/components/blog/grafik/DreiAbschaffungsjahre';
+import ZweiPfunde from '@/components/blog/grafik/ZweiPfunde';
+import PfundZuGeld from '@/components/blog/grafik/PfundZuGeld';
+import PreisschildRegel from '@/components/blog/grafik/PreisschildRegel';
+import PfundZeitleiste from '@/components/blog/grafik/PfundZeitleiste';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -138,6 +144,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     WasWashingtonBeschloss,
     ZeitleisteEinheitszeit,
     GrenzwertSprung,
+    PfundImVergleich,
+    DreiAbschaffungsjahre,
+    ZweiPfunde,
+    PfundZuGeld,
+    PreisschildRegel,
+    PfundZeitleiste,
     ...components,
   };
 }

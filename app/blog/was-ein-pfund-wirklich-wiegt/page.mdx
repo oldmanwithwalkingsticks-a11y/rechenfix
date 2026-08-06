@@ -1,0 +1,551 @@
+import { generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import StructuredData from '@/components/seo/StructuredData';
+import { artikel } from './meta';
+
+export const metadata = {
+  title: `${artikel.titel} | Rechenfix.de`,
+  description: artikel.beschreibung,
+  alternates: { canonical: 'https://www.rechenfix.de/blog/was-ein-pfund-wirklich-wiegt' },
+};
+
+<StructuredData data={generateArticleSchema({
+  url: 'https://www.rechenfix.de/blog/was-ein-pfund-wirklich-wiegt',
+  headline: artikel.titel,
+  description: artikel.beschreibung,
+  datePublished: artikel.datum,
+  dateModified: artikel.datum,
+  image: '/blog/pfund-titelbild.png',
+})} />
+
+<StructuredData data={generateBreadcrumbSchema([
+  { name: 'Start', url: '/' },
+  { name: 'Blog', url: '/blog' },
+  { name: artikel.titel, url: '/blog/was-ein-pfund-wirklich-wiegt' },
+])} />
+
+# Was ein Pfund wirklich wiegt
+
+<ArtikelDatum datum={artikel.datum} />
+
+<Bild src="/blog/pfund-titelbild.png" alt="Alte Handelsgewichte aus Eisen und Messing in einer Reihe auf einem dunklen Ladentisch, sichtbar unterschiedlich groß und geformt" caption="Gewichte aus verschiedenen Städten: Dasselbe Wort bezeichnete jahrhundertelang verschiedene Mengen." width={1200} height={675} />
+
+## Ein Wort, das es amtlich nicht gibt
+
+An der Fleischtheke wird ein Pfund Hackfleisch verlangt. Im Rezept steht ein
+Pfund Mehl. Auf der Waage sind fünf Pfund runter.
+
+Das Pfund ist in Deutschland keine gesetzliche Einheit. Es steht in keiner
+Tabelle des Einheiten- und Zeitgesetzes, es hat kein Einheitenzeichen, und im
+geschäftlichen Verkehr darf eine Ware nicht allein in Pfund ausgezeichnet
+werden. Trotzdem benutzt es fast jeder, und niemand missversteht es.
+
+Wie es dazu kam, ist eine Geschichte über ein Wort, das mehrfach abgeschafft
+wurde und jedes Mal wiederkam. Sie enthält ein Gesetz, das das Pfund angeblich
+beseitigte und es in Wahrheit definierte, drei verschiedene Jahreszahlen für
+seine Abschaffung, und eine Zahl, die in Deutschland und in den Vereinigten
+Staaten um fast neun Prozent auseinanderliegt — bei identischem Wort.
+
+## Das Gesetz, das das Pfund abgeschafft haben soll
+
+Die Maß- und Gewichtsordnung für den Norddeutschen Bund vom 17. August 1868
+gilt als der Moment, in dem Deutschland metrisch wurde. Unterzeichnet in
+Homburg vor der Höhe, gegengezeichnet von Bismarck. Sie führte Meter, Liter und
+Gramm ein und räumte mit den jahrhundertealten Lokalmaßen auf.
+
+Im Volltext, der auf Wikisource frei zugänglich ist, steht in Artikel 6 dieser
+Satz:
+
+> Ein halbes Kilogramm heißt das Pfund.
+
+Und direkt danach: Fünfzig Kilogramm oder hundert Pfund heißen der Zentner.
+Tausend Kilogramm oder zweitausend Pfund heißen die Tonne.
+
+Das Gesetz, das dem Pfund den Garaus gemacht haben soll, hat es amtlich
+festgeschrieben. Nicht geduldet, nicht übergangsweise zugelassen — definiert,
+im Gesetzestext, gleichrangig neben dem Zentner und der Tonne.
+
+Der Grund dafür ist praktisch. Man wollte den Menschen die Umstellung
+erleichtern, indem man den vertrauten Wörtern neue, runde Werte gab. Das Pfund
+wurde nicht abgeschafft, es wurde umdefiniert. Aus einem Gewicht, das von Stadt
+zu Stadt schwankte, wurde ein exakt halbes Kilogramm.
+
+Dieselbe Ordnung erfand auch Wörter wie das Neuloth für zehn Gramm. Das war
+gut gemeint — und es sollte sich als Fehler erweisen.
+
+## Vorher: in Nürnberg schwerer als in Berlin
+
+Um zu verstehen, was 1868 gewonnen war, hilft ein Blick auf den Zustand davor.
+
+Das Wort geht auf das lateinische *libra pondo* zurück, ein römisches Pfund an
+Gewicht. Aus *pondo* wurde das deutsche Pfund, aus *libra* die bis heute
+gebräuchliche englische Abkürzung lb. Zwei Wörter für dieselbe Sache, in zwei
+Sprachen weiterentwickelt — das erklärt, warum die Abkürzung nicht zum Wort
+passt.
+
+Im Mittelalter war das Pfund in ganz Europa verbreitet, aber sein Gewicht wich
+von Stadt zu Stadt ab. In Nürnberg wog es gut 510 Gramm, in Berlin nur etwa
+467, in Paris rund 489,5. Wer zwischen beiden Städten handelte, handelte mit zwei verschiedenen
+Pfunden.
+
+<PfundImVergleich />
+
+Damit nicht genug: Am selben Ort galten für verschiedene Waren verschiedene
+Pfunde. Das Krämergewicht teilte sich in 32 Lot zu 128 Quentchen. Das
+Apotheker- oder Medizinalpfund dagegen zerfiel in 12 Unzen, 96 Drachmen, 288
+Skrupel und 5760 Gran — eine völlig andere Einteilung mit einem völlig anderen
+Gesamtgewicht. Apotheker und Juweliere behielten ihre eigenen Gewichte bis weit
+ins 19. Jahrhundert.
+
+Im Amt Lingen entsprach ein Zentner Schlachtergewicht 106 Pfund kölnischen
+Gewichts. Dasselbe Fleisch, zwei Zahlen, je nachdem, wer wog.
+
+## Das Zollpfund — und ein Datum, das niemand festhalten kann
+
+Der erste ernsthafte Aufräumversuch kam nicht aus der Wissenschaft, sondern aus
+dem Zoll. Wer Waren über Landesgrenzen verzollen will, braucht ein Gewicht, auf
+das sich beide Seiten einigen. Der Deutsche Zollverein führte deshalb nach
+französischem Vorbild ein dezimales Zollpfund zu 500 Gramm ein.
+
+Wann genau, lässt sich erstaunlich schwer sagen.
+
+Die deutschsprachige Wikipedia und praktisch alle Seiten, die von ihr
+abschreiben, nennen **1854**. Spezialisierte Darstellungen zum preußischen
+Maßwesen nennen dagegen das preußische Gesetz vom **17. Mai 1856**, das das alte
+Pfund aufhob — wirksam allerdings erst zum **1. Juli 1858**. Ein
+Münzlexikon datiert die Einführung als Münzgrundgewicht auf **1857**, mit dem
+Wiener Münzvertrag.
+
+Alle vier Jahreszahlen sind vermutlich richtig, und sie meinen Verschiedenes:
+den Beschluss im Zollverein, das preußische Umsetzungsgesetz, die Übernahme als
+Münzgewicht, das Wirksamwerden als allgemeines Landesgewicht. Wer eine einzelne
+Jahreszahl als *die* Einführung des 500-Gramm-Pfunds liest, liest eine
+Vereinfachung.
+
+Bemerkenswert ist, wie groß der Sprung war. Das neue Zollpfund war rund sieben
+Prozent schwerer als das abgelöste preußische. Wer bis gestern ein Pfund Mehl
+gekauft hatte, bekam ab jetzt spürbar mehr für dasselbe Wort. Und ein Zentner,
+der vorher gut 46,8 Kilogramm gewogen hatte, wog plötzlich glatte 50.
+
+Ganz nebenbei zeigt sich hier, dass die Vereinheitlichung kein reines
+Aufräumen war: Sie verschob reale Mengen in realen Geschäften.
+
+## Wie man ein Gewicht durchsetzt
+
+Ein Gesetz zu beschließen ist das eine. Dafür zu sorgen, dass in
+zehntausenden Läden richtige Gewichte auf richtigen Waagen liegen, ist das
+andere — und dieser Teil der Geschichte wird selten erzählt.
+
+Die Maß- und Gewichtsordnung von 1868 richtete dafür eine eigene Behörde ein,
+die Normal-Eichungskommission. Sie sollte, wie es im Gesetz heißt, alsbald nach
+der Verkündung tätig werden, um die Eichungsbehörden rechtzeitig in den Stand zu
+setzen, die ihnen vorgelegten Maße und Gewichte zu prüfen und zu stempeln. Die
+Eichordnung folgte 1869. Ab dem 1. Januar 1870 durfte nach den neuen Vorschriften
+geeicht werden, ab dem 1. Januar 1872 galten sie im öffentlichen Verkehr. Zwei
+Jahre Vorlauf, bevor das Gesetz überhaupt griff.
+
+Dazu kamen Regeln, die zeigen, wie ernst die Sache genommen wurde. Der Bundesrat
+legte in einer eigenen Bekanntmachung fest, welche Abweichungen von der
+absoluten Richtigkeit bei Maßen, Gewichten und Waagen im öffentlichen Verkehr
+noch zu dulden waren — nach oben wie nach unten. Wer diese Grenzen überschritt,
+dessen Gewicht galt als unrichtig und war zum Gebrauch im Verkehr unzulässig.
+Neben der ersten Eichung gab es eine periodische Nacheichung, und die Länder
+bestimmten selbst, welche Gewerbetreibenden sie wie oft vorlegen mussten.
+
+<Video src="/blog/pfund.mp4" caption="Die Vereinheitlichung entschied sich nicht im Gesetzblatt, sondern an zehntausenden Ladentischen." beschreibung="Nahaufnahme einer alten Balkenwaage auf einem Ladentisch, auf die ein eisernes Gewichtsstück gelegt wird" />
+
+Wer trotzdem mit falschen Gewichten arbeitete, hatte es nicht mit dem Eichamt
+allein zu tun. Falsches Maß war eine Übertretung nach § 369 des
+Strafgesetzbuchs.
+
+Diese Infrastruktur war keine Erfindung des Kaiserreichs. In Lingen etwa gab es
+bereits seit 1836 ein städtisches Eichamt, das bis 1912 Bestand hatte — ein
+halbes Jahrhundert vor der Reichseinheit und ein halbes Jahrhundert danach.
+
+Man kann daran ablesen, warum solche Umstellungen Jahrzehnte dauern. Nicht das
+Rechnen ist das Problem, sondern die Menge an Metall, die in Umlauf ist. Jedes
+Gewichtsstück in jedem Laden musste geprüft, gestempelt und irgendwann ersetzt
+werden. Wer heute darüber klagt, dass eine Norm sich langsam durchsetzt, kann
+sich an den Fristen von 1884 orientieren: Die letzten alten Stücke durften bis
+1896 nachgeeicht werden — achtundzwanzig Jahre nach dem Gesetz.
+
+<RechnerLoader slug="einheiten-umrechner" />
+
+## 1884: die Streichung auf der Insel Mainau
+
+Sechzehn Jahre nachdem die Maß- und Gewichtsordnung das Pfund amtlich definiert
+hatte, wurde sie geändert. Kaiser Wilhelm I. unterzeichnete das Gesetz,
+betreffend die Abänderung der Maaß- und Gewichtsordnung, am 11. Juli 1884 auf
+der Insel Mainau im Bodensee. Es steht im Reichsgesetzblatt auf Seite 115.
+
+Der neue Wortlaut beginnt nüchtern: Die Grundlage des Maßes und Gewichtes ist
+das Meter. Das Meter ist die Einheit des Längenmaßes.
+
+Was in dieser Neufassung fehlt, ist entscheidend. Die Nebenbezeichnungen sind
+weg. Kein Satz mehr, der das halbe Kilogramm zum Pfund erklärt. Kein Neuloth,
+kein Neu-Zoll, kein Stab.
+
+Die gut gemeinte Brücke von 1868 hatte nicht funktioniert. Statt den Übergang
+zu erleichtern, hielten die alten Wörter die alten Vorstellungen am Leben und
+sorgten für neue Verwirrung — weil dasselbe Wort je nach Sprecher das alte oder
+das neue Gewicht meinen konnte. 1884 zog der Gesetzgeber die Konsequenz und
+strich sie.
+
+Wie zäh das Alte war, zeigen die Übergangsfristen. Ältere Gewichtsstücke
+durften noch bis zum 31. Dezember 1886 geeicht und gestempelt werden, zur
+Nacheichung bis zum 31. Dezember 1896. Bestimmte Stücke aus dem alten
+Pfundsystem wurden im öffentlichen Verkehr allgemein bis zum 31. Dezember 1888
+geduldet. Und einzelne Gegenstände — solche mit den Aufschriften Kette, Stab,
+Kanne, Schoppen, Faß, Scheffel oder Neuloth — wurden ausdrücklich von jeder
+weiteren Verlängerung ausgenommen.
+
+Man kann diesen Listen ansehen, dass hier nicht abstrakt reguliert, sondern um
+jedes Gewichtsstück in jedem Laden gerungen wurde.
+
+## Warum drei verschiedene Jahre kursieren
+
+Damit lässt sich der Widerspruch auflösen, an dem die meisten Darstellungen
+scheitern. Wer nach dem Ende des Pfunds sucht, findet drei Jahreszahlen:
+
+**1868** — die Maß- und Gewichtsordnung führt das metrische System ein und
+ersetzt das Pfund als eigenständige Gewichtseinheit durch das Kilogramm.
+Richtig, aber unvollständig: Dasselbe Gesetz definiert das Pfund als
+Nebenbezeichnung weiter.
+
+**1884** — die Nebenbezeichnungen werden gestrichen. Das ist der Zeitpunkt, an
+dem das Pfund aus dem Gesetzestext verschwindet. Wer schreibt, das Pfund sei
+1884 verboten worden, meint diesen Vorgang, formuliert ihn aber schärfer, als
+das Gesetz es tut.
+
+**1935** — taucht in einem Münzlexikon auf, das Pfund sei „noch bis 1935 als
+Einheit der Masse zugelassen" gewesen. Für dieses Datum ließ sich kein Beleg
+finden. Es könnte sich auf eine Regelung des Eichwesens beziehen, die hier
+nicht auffindbar war. Wir führen die Angabe auf, ohne sie zu bestätigen —
+lieber eine offene Lücke als eine geglättete Erzählung.
+
+<DreiAbschaffungsjahre />
+
+Keine der drei Zahlen ist einfach falsch. Sie beschreiben verschiedene Schritte
+eines Vorgangs, der sich über Jahrzehnte hinzog und in den Übergangsfristen bis
+1896 hineinreichte.
+
+## Das andere Pfund
+
+Während das deutsche Pfund aus den Gesetzen verschwand, hielt sich ein zweites
+Pfund hartnäckig — und wiegt bis heute etwas anderes.
+
+Das angloamerikanische Pfund geht auf denselben römischen Ursprung zurück, hat
+aber einen völlig anderen Weg genommen. Es teilt sich nicht dezimal, sondern in
+16 Unzen zu insgesamt 7000 Gran. Daneben existiert bis heute das Troy-Pfund für
+Edelmetalle mit nur 5760 Gran — dieselbe Doppelung von Krämer- und
+Juweliergewicht, die es auch im deutschen Sprachraum gab, nur dass sie dort nie
+abgeschafft wurde.
+
+Lange war auch das englische Pfund kein exakter Wert, sondern hing an einem
+Metallstück. 1834 brannte der Palace of Westminster, und mit ihm verbrannten
+die Prototypen, die Yard und Pfund definierten. Neue Normale wurden
+angefertigt, zwei Kopien des neuen Yardstabs gingen in die Vereinigten Staaten.
+Von da an gab es zwei Länder, die dasselbe Maß aus zwei verschiedenen
+Metallstücken ableiteten.
+
+Das musste auseinanderdriften, und es tat es. Der amerikanische Yard war
+schließlich etwa 2,8 Millionstel länger als der britische. Für den Alltag
+belanglos, für Luftfahrt und Maschinenbau nicht.
+
+Am 1. Juli 1959 einigten sich deshalb Australien, Kanada, Neuseeland,
+Südafrika, das Vereinigte Königreich und die Vereinigten Staaten auf gemeinsame
+Werte: das Yard auf exakt 0,9144 Meter, das Avoirdupois-Pfund auf exakt
+**0,45359237 Kilogramm**.
+
+Die Verschiebung war winzig und trotzdem messbar. Das neue internationale Pfund
+war rund sechs Zehnmillionstel Kilogramm leichter als das bisherige
+Imperial-Pfund. Vorher hatten die Vereinigten Staaten seit der Mendenhall Order
+von 1893 mit dem Verhältnis 2,20462 Pfund je Kilogramm gerechnet.
+
+Ein Detail, das oft falsch wiedergegeben wird: Dies war kein völkerrechtlicher
+Vertrag. Es war eine abgestimmte Erklärung der nationalen Normungsinstitute,
+die anschließend in den beteiligten Ländern zu unterschiedlichen Zeitpunkten in
+nationales Recht überführt wurde. Formulierungen wie „sechs Nationen
+unterzeichneten ein Abkommen" legen mehr staatsrechtliches Gewicht hinein, als
+der Vorgang hatte.
+
+Bemerkenswert ist die Richtung: Das englische Pfund wird seit 1959 über das
+Kilogramm definiert. Die Einheit, die als Gegenmodell zum metrischen System
+gilt, hängt an dessen Normal.
+
+## Das Pfund, das Geld wurde
+
+Es gibt eine zweite Sorte Pfund, die noch älter ist als das Gewicht in seiner
+heutigen Form — und sie liegt jedem Briten im Portemonnaie.
+
+Der angelsächsische König Offa von Mercien führte im späten 8. Jahrhundert den
+Silberpenny ein und orientierte sich dabei an den karolingischen Denaren des
+Festlands. Aus einem Pfund Silber wurden genau 240 dieser Münzen geprägt. Die
+Zahl 240 stammt aus der karolingischen Münzreform, die das Pfund in 20 Solidi zu
+je 12 Denaren teilte — daher die bis 1971 gebräuchlichen Abkürzungen s für
+Shilling und d für Penny, beide aus dem Lateinischen.
+
+Das Pfund Sterling war damit ursprünglich weder eine Münze noch eine
+Gewichtseinheit, sondern eine Zähleinheit: 240 Silberpfennige, deren Gesamtmasse
+etwa einem Pfund entsprach. Wer im Mittelalter eine große Summe zu zahlen hatte,
+zählte nicht — er wog. Bis 1489 wurden Zahlungen in Pfund Sterling für
+Handelsgeschäfte tatsächlich abgewogen.
+
+Der Zusammenhang zwischen Gewicht und Geld steckt bis heute im Währungszeichen.
+Das £ ist ein geschwungenes L und steht für *libra*, dasselbe lateinische Wort,
+aus dem die englische Gewichtsabkürzung lb kommt. Dieselbe Wurzel trägt die
+italienische Lira und die französische Livre. Drei Währungen, ein Gewicht.
+
+<PfundZuGeld />
+
+Auch hier haben die Quellen ein Zahlenproblem. Für das karolingische Pfund, aus
+dem die 240 Pennies geschlagen wurden, kursieren rund 406,5 Gramm und etwa 450
+Gramm; das englische Towerpfund und das bis heute für Edelmetalle verwendete
+Troypfund zu 373,24 Gramm sind noch einmal andere Werte. Der Grund ist
+derselbe wie bei allen alten Gewichten: Es gab kein einheitliches Pfund, aus dem
+man hätte prägen können — man prägte aus dem, was vor Ort galt.
+
+Und die Münzen selbst blieben nicht, was sie waren. Beim Nachwiegen fanden sich
+selten exakt 240 Stück im Pfund. Weiches Silber nutzte sich ab, schwerere Stücke
+wurden aussortiert, und die Obrigkeit selbst verschlechterte den Silbergehalt,
+wenn Geld gebraucht wurde. Die Zähleinheit löste sich langsam von dem Gewicht,
+nach dem sie benannt war — bis nur noch der Name übrig blieb.
+
+Das Pfund Sterling ist damit ein Musterfall dafür, was mit Maßeinheiten
+passiert, wenn niemand nachmisst: Es heißt bis heute nach einem Gewicht, mit dem
+es seit Jahrhunderten nichts mehr zu tun hat.
+
+## Neun Prozent Unterschied bei gleichem Wort
+
+Damit steht die Zahl, um die es beim Kochen und beim Einkaufen tatsächlich
+geht:
+
+Ein deutsches Pfund sind 500 Gramm. Ein amerikanisches oder britisches Pfund
+sind 453,59237 Gramm. Der Unterschied beträgt 46,4 Gramm oder gut neun Prozent.
+
+<ZweiPfunde />
+
+Bei einem amerikanischen Rezept, das ein Pfund Butter verlangt, liegt man mit
+zwei deutschen Päckchen zu 250 Gramm also um fast ein Zehntel darüber. Bei einem
+Braten von fünf Pfund macht es schon 232 Gramm aus.
+
+Der umgekehrte Fall ist der beim Körpergewicht. Wer im Ausland liest, jemand
+wiege 180 Pfund, denkt in Deutschland leicht an 90 Kilogramm. Tatsächlich sind
+es rund 81,6.
+
+## Was heute erlaubt ist — und was nicht
+
+Der Rechtsstand ist präziser, als die verbreitete Kurzfassung „das Pfund ist
+verboten" nahelegt.
+
+Maßgeblich ist heute das Einheiten- und Zeitgesetz, ursprünglich als Gesetz über
+Einheiten im Messwesen vom 2. Juli 1969 erlassen und seither mehrfach
+neugefasst. Es bestimmt: Im geschäftlichen und amtlichen Verkehr sind Größen in
+gesetzlichen Einheiten anzugeben. Welche das sind, legt nicht das Gesetz selbst
+fest, sondern die Einheitenverordnung vom 13. Dezember 1985 — es sind die
+SI-Einheiten und einige zugelassene Zusätze. Das Pfund ist nicht darunter.
+
+Der entscheidende Satz steht dann in Paragraf 3 dieser Verordnung, und er ist
+präziser, als die verbreitete Kurzfassung vermuten lässt: Soweit Größen in
+gesetzlichen Einheiten anzugeben sind, ist die zusätzliche Verwendung anderer
+als der gesetzlichen Einheiten nur gestattet, wenn die Angabe in der
+gesetzlichen Einheit hervorgehoben ist.
+
+<PreisschildRegel />
+
+Das heißt konkret: Ein Preisschild mit „1 Pfund" allein ist nicht zulässig. Ein
+Preisschild mit „500 g" und daneben, weniger hervorgehoben, „(1 Pfund)" ist es.
+Der gesprochene Satz an der Fleischtheke fällt ohnehin nicht unter die
+Auszeichnungspflicht — verboten ist das Wort also nirgends, es darf nur nicht
+allein die Menge bezeichnen.
+
+Auch hier lohnt es, die Daten auseinanderzuhalten. Das Gesetz wurde am 2. Juli
+1969 ausgefertigt und 1985 neugefasst. Die heute geltende Einheitenverordnung
+stammt vom 13. Dezember 1985 und gilt seit dem 1. Januar 1986; die ursprüngliche
+Fassung von 1970 war ungleich ausführlicher und enthielt noch Umrechnungen und
+Übergangsfristen für die veralteten Einheiten. Wer eine einzelne Jahreszahl
+nennt — 1969, 1970, 1978, 1985 —, meint jeweils etwas anderes. Es ist derselbe
+Effekt wie beim Zollpfund hundert Jahre zuvor.
+
+## Warum das Wort überlebt hat
+
+Ein Wort verschwindet nicht, weil es aus einem Gesetzestext gestrichen wird.
+
+Das Pfund hatte, als es 1884 aus der Maß- und Gewichtsordnung flog, bereits
+über tausend Jahre Sprachgeschichte hinter sich. Es steckt in Redewendungen —
+wer mit seinem Pfund wuchert, tut das in Anlehnung an das biblische Gleichnis
+von den anvertrauten Talenten. Dasselbe Wort bezeichnet dort eine Silbermenge
+und eine Begabung, genau wie das Wort Talent.
+
+Es steckt außerdem in einer Größenordnung, die zum menschlichen Alltag passt.
+Ein Pfund ist eine Portion. Ein halbes Kilogramm klingt nach Messung, ein Pfund
+nach Einkauf. Dass der Zentner in Deutschland 50 Kilogramm hat und in
+Österreich und der Schweiz 100, ist der Nachhall derselben Geschichte: Der
+deutsche Zentner blieb an das Pfund gekoppelt, das anderswo nie in dieser Form
+existierte.
+
+Und schließlich hat das Wort im deutschen Sprachraum den seltenen Vorzug, exakt
+zu sein. Es sind glatte 500 Gramm — kein krummer Wert, kein regionaler
+Unterschied mehr, keine Verwechslungsgefahr, solange man im Land bleibt. Die
+Vereinheitlichung von 1858 war so gründlich, dass das Wort auch ohne
+gesetzliche Grundlage eindeutig blieb.
+
+Genau das ist der Grund, warum es überlebt hat und das Neuloth nicht. Beide
+wurden 1868 eingeführt und 1884 gestrichen. Das eine hatte tausend Jahre
+Vorlauf und eine handliche Größe, das andere war eine Erfindung vom Reißbrett.
+
+## Woran ein Pfund heute hängt
+
+Bleibt die Frage, woran das Ganze eigentlich befestigt ist.
+
+Von 1889 an war das Kilogramm ein Gegenstand: ein Zylinder aus Platin-Iridium,
+39 Millimeter hoch und 39 Millimeter im Durchmesser, verwahrt in einem Tresor
+bei Paris. Per Definition wog er exakt ein Kilogramm. Alle anderen Massen der
+Welt wurden durch Vergleichswägungen daran angeschlossen — auch das deutsche
+Pfund, auch das amerikanische.
+
+Das Verfahren hatte einen Haken, der sich erst über Jahrzehnte zeigte. Bei den
+regelmäßigen Vergleichen mit den offiziellen Kopien wurden fast alle Kopien im
+Verhältnis zum Urkilogramm scheinbar schwerer. Warum, lässt sich bis heute nicht
+mit Sicherheit sagen. Es könnte am Urkilogramm liegen, es könnte an den Kopien
+liegen — feststellen lässt es sich nicht, denn der Maßstab war ja das
+Urkilogramm selbst. Ein Prototyp kann nicht falsch sein; er kann nur
+unbrauchbar werden.
+
+Am 16. November 2018 beschloss die Generalkonferenz für Maß und Gewicht in
+Versailles deshalb, das Kilogramm über eine Naturkonstante zu definieren: die
+Planck-Konstante h. In Kraft trat die neue Definition am **20. Mai 2019**, dem
+Weltmetrologietag. Seither ist das Kilogramm kein Gegenstand mehr, sondern ein
+Rechenweg — und jedes hinreichend ausgestattete Labor kann es selbst
+darstellen, ohne den Tresor bei Paris zu fragen.
+
+<PfundZeitleiste />
+
+Für die Waage in der Küche änderte sich nichts. Für die Frage, was ein Pfund
+ist, änderte sich alles: Das amerikanische Pfund ist seit 1959 über das
+Kilogramm definiert, das Kilogramm seit 2019 über eine Quantenkonstante. Damit
+hängt auch das Maß, das als Gegenmodell zum metrischen System gilt, an der
+Planck-Konstante.
+
+Das deutsche Pfund hängt an derselben Konstante — nur ohne gesetzliche
+Grundlage. Es ist ein halbes von etwas, das exakt definiert ist, und es steht
+in keinem Gesetz.
+
+## Was bleibt
+
+Das Pfund ist in Deutschland seit 1884 keine gesetzliche Bezeichnung mehr, seit
+1969 gilt eine Rechtslage, die es aus der Warenauszeichnung heraushält, und
+seit 1858 ist es das, was fast jeder darunter versteht: ein halbes Kilogramm.
+Drei Daten, drei verschiedene Aussagen, kein Widerspruch.
+
+In den Vereinigten Staaten heißt dasselbe Wort 453,59237 Gramm, festgelegt 1959
+und seither über das Kilogramm definiert, gegen das es einmal antrat.
+
+Was von dem Wort geblieben ist, ist eine Menge, die man in der Hand halten kann.
+Für ein Gesetz zu wenig, für den Alltag genug.
+
+<KarstenSagt>
+Ich kenne das Pfund noch aus der Kindheit. Meine Oma hat die Bezeichnung ständig verwendet — „bitte ein Pfund Hack, ein halbes Pfund Schweineschmalz und zwei Pfund Gulasch", so klang das an der Fleischtheke. Heute hört man solche Sätze noch ab und zu, fast nur noch von älteren Herrschaften.
+
+Ich selbst sage nur Gramm oder Kilo. Pfund kommt bei mir nicht vor.
+
+Dass die Sache rechtlich nicht sauber ist, zeigt mal wieder, wie schwierig manche Dinge zu handhaben sind. Aber dass man Pfund aufs Preisschild schreiben darf, solange Gramm danebensteht, finde ich schon ziemlich lächerlich. Die Einheit ist offiziell nicht zugelassen — und dann wird sie durch die Hintertür doch wieder erlaubt. Entweder oder.
+</KarstenSagt>
+
+
+<Quellen eintraege={[
+  {
+    titel: 'Maaß- und Gewichtsordnung für den Norddeutschen Bund vom 17. August 1868, Bundesgesetzbl. S. 473',
+    url: 'https://de.wikisource.org/wiki/Maa%C3%9F-_und_Gewichtsordnung_f%C3%BCr_den_Norddeutschen_Bund',
+    hinweis: 'Volltext. Artikel 6 enthält den Satz über das halbe Kilogramm — das Gesetz, das das Pfund abgeschafft haben soll, definiert es ausdrücklich.',
+  },
+  {
+    titel: 'Gesetz, betreffend die Abänderung der Maaß- und Gewichtsordnung, vom 11. Juli 1884, RGBl. S. 115',
+    url: 'https://de.wikisource.org/wiki/Gesetz,_betreffend_die_Ab%C3%A4nderung_der_Maa%C3%9F-_und_Gewichtsordnung._Vom_11._Juli_1884',
+    hinweis: 'Unterzeichnet auf der Insel Mainau. Streicht die Nebenbezeichnungen; hier verschwindet das Pfund aus dem Gesetzestext.',
+  },
+  {
+    titel: 'Bekanntmachung betreffend die Ausführung der Bestimmungen im § 2 des Gesetzes über die Abänderung der Maaß- und Gewichtsordnung vom 30. Oktober 1884, RGBl. S. 215',
+    url: 'https://de.wikisource.org/wiki/Bekanntmachung,_betreffend_die_Ausf%C3%BChrung_der_Bestimmungen_im_%C2%A7._2_des_Gesetzes_%C3%BCber_die_Ab%C3%A4nderung_der_Maa%C3%9F-_und_Gewichtsordnung',
+    hinweis: 'Übergangsfristen: Eichung bis 31. Dezember 1886, Nacheichung bis 31. Dezember 1896, Duldung im Verkehr bis 31. Dezember 1888.',
+  },
+  {
+    titel: 'Bekanntmachung betreffend die Zulassung älterer Maaße, Meßwerkzeuge und Gewichte zur Wiederholung der Aichung und Stempelung',
+    url: 'https://de.wikisource.org/wiki/Bekanntmachung,_betreffend_die_Zulassung_%C3%A4lterer_Maa%C3%9Fe,_Me%C3%9Fwerkzeuge_und_Gewichte_zur_Wiederholung_der_Aichung_und_Stempelung',
+    hinweis: 'Nennt die ausdrücklich ausgenommenen Bezeichnungen Kette, Stab, Kanne, Schoppen, Faß, Scheffel und Neuloth.',
+  },
+  {
+    titel: 'Bekanntmachung betreffend die äußersten Grenzen der im öffentlichen Verkehr noch zu duldenden Abweichungen der Maaße, Gewichte und Waagen von der absoluten Richtigkeit',
+    url: 'https://de.wikisource.org/wiki/Bekanntmachung,_betreffend_die_%C3%A4u%C3%9Fersten_Grenzen_der_im_%C3%B6ffentlichen_Verkehr_noch_zu_duldenden_Abweichungen_der_Maa%C3%9Fe,_Gewichte_und_Waagen_von_der_absoluten_Richtigkeit',
+    hinweis: 'Fehlergrenzen des Eichwesens auf Grundlage von Artikel 10 der Maß- und Gewichtsordnung.',
+  },
+  {
+    titel: 'Eichordnung für den Norddeutschen Bund',
+    url: 'https://de.wikisource.org/wiki/Eichordnung_f%C3%BCr_den_Norddeutschen_Bund',
+    hinweis: 'Eichung ab 1. Januar 1870 zulässig, Geltung im öffentlichen Verkehr ab 1. Januar 1872.',
+  },
+  {
+    titel: 'Gesetz, betreffend die Einführung der Maaß- und Gewichtsordnung für den Norddeutschen Bund vom 17. August 1868 in Bayern, vom 26. November 1871',
+    url: 'https://de.wikisource.org/wiki/Gesetz,_betreffend_die_Einf%C3%BChrung_der_Maa%C3%9F-_und_Gewichtsordnung_f%C3%BCr_den_Norddeutschen_Bund_vom_17._August_1868_in_Bayern',
+    hinweis: 'Beispiel für die gestaffelte Einführung; bayerische Feldmaße durften bis 1878 weitergelten.',
+  },
+  {
+    titel: 'Einheiten- und Zeitgesetz (EinhZeitG), Ausfertigung 2. Juli 1969',
+    url: 'https://www.gesetze-im-internet.de/me_einhg/BJNR007090969.html',
+    hinweis: 'Verpflichtet zur Angabe in gesetzlichen Einheiten im geschäftlichen und amtlichen Verkehr.',
+  },
+  {
+    titel: 'Einheitenverordnung (EinhV) vom 13. Dezember 1985, BGBl. I S. 2272',
+    url: 'https://www.gesetze-im-internet.de/einhv/BJNR022720985.html',
+    hinweis: 'Paragraf 3 enthält die entscheidende Regel: zusätzliche nicht gesetzliche Einheiten nur dann, wenn die gesetzliche Einheit hervorgehoben ist. Die Urfassung von 1970 war weit ausführlicher.',
+  },
+  {
+    titel: 'International yard and pound',
+    url: 'https://en.wikipedia.org/wiki/International_yard_and_pound',
+    hinweis: 'Vereinbarung vom 1. Juli 1959 über 0,9144 Meter und 0,45359237 Kilogramm; Verlust der Prototypen beim Brand von Westminster 1834.',
+  },
+  {
+    titel: 'US Metric Association: Refinement of Values for the Yard and the Pound',
+    url: 'https://usma.org/laws-and-bills/refinement-of-values-for-the-yard-and-the-pound',
+    hinweis: 'Bekanntgabe des National Bureau of Standards; die Mendenhall Order von 1893 als Vorgängerregelung.',
+  },
+  {
+    titel: 'preussische-masse.de: Der Weg zum metrischen Maßsystem',
+    url: 'http://preussische-masse.de/alte_masse/alte_masse_metrisch.html',
+    hinweis: 'Volltextauszug der Artikel 6 bis 9 der Maß- und Gewichtsordnung sowie zur Streichung der Nebenbezeichnungen 1884.',
+  },
+  {
+    titel: 'preussische-masse.de: Das preußische Maß von 1816 bis 1869',
+    url: 'http://preussische-masse.de/alte_masse/alte_masse_preussisch.html',
+    hinweis: 'Preußisches Gesetz vom 17. Mai 1856, Wirksamkeit des Zollpfunds zum 1. Juli 1858, Münzgewicht ab 5. Mai 1857.',
+  },
+  {
+    titel: 'MGM Münzlexikon: Pfund',
+    url: 'https://www.mgmindex.de/index.php?title=Pfund',
+    hinweis: 'Krämergewicht gegen Medizinalgewicht. Quelle der Angabe, das Pfund sei bis 1935 zugelassen gewesen — für dieses Datum ließ sich kein Beleg finden.',
+  },
+  {
+    titel: 'Osnabrücker Geschichtsblog: Lingener Maße und Gewichte',
+    url: 'https://hvos.hypotheses.org/7201',
+    hinweis: 'Städtisches Eichamt ab 1836, Schlachtergewicht gegen kölnisches Gewicht.',
+  },
+  {
+    titel: 'Deutsches Historisches Museum, LeMO: Vereinheitlichungen im Kaiserreich',
+    url: 'https://dhm.de/lemo/kapitel/kaiserreich/industrie/massegewichte',
+    hinweis: 'Einordnung der Maß- und Gewichtsordnung neben der Währungsunion.',
+  },
+  {
+    titel: 'Pfund Sterling',
+    url: 'https://de.wikipedia.org/wiki/Pfund_Sterling',
+    hinweis: '240 Silberpennies aus einem karolingischen Pfund, Herkunft des Währungszeichens aus libra, Dezimalisierung 1971.',
+  },
+  {
+    titel: 'Physikalisch-Technische Bundesanstalt: Das Kilogramm',
+    url: 'https://www.ptb.de/cms/forschung-entwicklung/forschung-zum-neuen-si/countdown-zum-neuen-si/das-kilogramm.html',
+    hinweis: 'Neudefinition über die Planck-Konstante zum 20. Mai 2019; Abmessungen des Urkilogramms.',
+  },
+  {
+    titel: 'Lueger, Lexikon der gesamten Technik (1904): Maß- und Gewichtswesen',
+    url: 'http://www.zeno.org/Lueger-1904/A/Ma%C3%9F-+und+Gewichtswesen',
+    hinweis: 'Zeitgenössische Übersicht der Maßsysteme, unter anderem das russische Pfund zu 409,512 Gramm.',
+  },
+]} />
