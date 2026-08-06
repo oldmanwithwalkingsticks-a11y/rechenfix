@@ -29,6 +29,8 @@ const SITE_URL = 'https://www.rechenfix.de';
 const TIMEOUT_MS = 15_000;
 const POLL_INTERVAL_MS = 3_000;
 const POLL_MAX_ATTEMPTS = 10; // 10 × 3 s = ~30 s
+const POSTPEER_POLL_INTERVAL_MS = 5_000;
+const POSTPEER_POLL_MAX_ATTEMPTS = 6; // 6 × 5 s = ~30 s
 const MAX_TITLE_LEN = 2200;
 
 /**
@@ -185,12 +187,139 @@ async function waitUntilComplete(token: string, publishId: string): Promise<void
   );
 }
 
+interface PostPeerPlatformResult {
+  platform?: string;
+  success?: boolean;
+  error?: string;
+  platformPostUrl?: string;
+}
+
+interface PostPeerResponse {
+  success?: boolean;
+  status?: string;
+  postId?: string;
+  platforms?: PostPeerPlatformResult[];
+}
+
+/** TikTok-Eintrag aus `platforms` ziehen (sonst erster Eintrag). */
+function pickTikTok(platforms?: PostPeerPlatformResult[]): PostPeerPlatformResult | undefined {
+  if (!platforms || platforms.length === 0) return undefined;
+  return platforms.find((p) => p.platform === 'tiktok') ?? platforms[0];
+}
+
+/** Post-ID defensiv aus der Antwort ziehen (Doku-Feld `postId`, plus Fallbacks). */
+function extractPostPeerId(json: PostPeerResponse): string {
+  const rec = json as Record<string, unknown>;
+  return (
+    (json.postId as string) ||
+    (rec.id as string) ||
+    ((rec.post as Record<string, unknown> | undefined)?._id as string) ||
+    ((rec.data as Record<string, unknown> | undefined)?.id as string) ||
+    ''
+  );
+}
+
+/**
+ * Antworttext zu einem PostPeer-Objekt mit brauchbarem `status` parsen.
+ * Nicht parsebar oder ohne `status` → TikTokApiError (kein stiller Erfolg).
+ */
+function parsePostPeer(text: string, httpStatus: number): PostPeerResponse {
+  let json: PostPeerResponse | undefined;
+  try {
+    json = JSON.parse(text) as PostPeerResponse;
+  } catch {
+    json = undefined;
+  }
+  if (!json || typeof json.status !== 'string') {
+    throw new TikTokApiError(
+      `PostPeer-Antwort unbrauchbar (HTTP ${httpStatus}): ${text.slice(0, 300)}`,
+      'POSTPEER_UNPARSEABLE',
+    );
+  }
+  return json;
+}
+
+/**
+ * Endzustand einer PostPeer-Antwort für unseren Zweck (nur TikTok) auswerten.
+ * Wirft bei Fehlschlag; gibt 'success' (fertig) oder 'pending' (weiter pollen).
+ * Der API-Schlüssel taucht hier nicht auf; der `error`-Text wird auf 300 Zeichen
+ * gekürzt weitergereicht.
+ */
+function evaluatePostPeer(json: PostPeerResponse, postId: string): 'success' | 'pending' {
+  const tiktok = pickTikTok(json.platforms);
+
+  // TikTok explizit fehlgeschlagen (z. B. reached_active_user_cap).
+  if (tiktok?.success === false) {
+    throw new TikTokApiError(
+      `PostPeer TikTok-Fehler: ${(tiktok.error ?? 'ohne Angabe').slice(0, 300)}`,
+      'POSTPEER_PLATFORM_FAILED',
+    );
+  }
+  if (json.status === 'failed') {
+    throw new TikTokApiError(`PostPeer status=failed (postId ${postId})`, 'POSTPEER_FAILED');
+  }
+  // published/partial: nur TikTok im Spiel und nicht als false markiert → Erfolg.
+  if (json.status === 'published' || json.status === 'partial') return 'success';
+  if (json.status === 'pending' || json.status === 'publishing' || json.status === 'scheduled') {
+    return 'pending';
+  }
+  // status vorhanden, aber unbekannt → nicht als Erfolg werten.
+  throw new TikTokApiError(`PostPeer unerwarteter status="${json.status}"`, 'POSTPEER_FAILED');
+}
+
+/**
+ * Für noch laufende Posts `GET /v1/posts/{postId}` pollen: höchstens
+ * POSTPEER_POLL_MAX_ATTEMPTS Versuche im Abstand POSTPEER_POLL_INTERVAL_MS
+ * (~30 s, passt in die Cron-Laufzeit). Endzustand published/partial(ok) →
+ * Erfolg; failed oder TikTok-success:false → wirft wie in evaluatePostPeer;
+ * Zeitfenster abgelaufen → Timeout-Fehler (Slug wird lieber später erneut
+ * versucht als fälschlich als erledigt markiert).
+ */
+async function pollPostPeerStatus(postId: string, apiKey: string): Promise<string> {
+  for (let attempt = 1; attempt <= POSTPEER_POLL_MAX_ATTEMPTS; attempt++) {
+    await new Promise((resolve) => setTimeout(resolve, POSTPEER_POLL_INTERVAL_MS));
+
+    let res: Response;
+    try {
+      res = await fetch(`https://api.postpeer.dev/v1/posts/${encodeURIComponent(postId)}`, {
+        method: 'GET',
+        headers: { 'x-access-key': apiKey },
+      });
+    } catch {
+      continue; // vorübergehender Netzfehler → nächster Versuch
+    }
+
+    const text = await res.text();
+    if (!res.ok) continue; // z. B. 404 während der Verarbeitung → weiter
+
+    let json: PostPeerResponse;
+    try {
+      const parsed = JSON.parse(text) as PostPeerResponse;
+      if (typeof parsed.status !== 'string') continue; // noch nicht brauchbar
+      json = parsed;
+    } catch {
+      continue;
+    }
+
+    if (evaluatePostPeer(json, postId) === 'success') return postId;
+    // 'pending' → nächster Versuch
+  }
+  throw new TikTokApiError(
+    `PostPeer nicht abgeschlossen nach ${POSTPEER_POLL_MAX_ATTEMPTS}×${POSTPEER_POLL_INTERVAL_MS} ms (postId ${postId})`,
+    'POSTPEER_TIMEOUT',
+  );
+}
+
 /**
  * W18.5 — TikTok-Post über PostPeer (auditierter Wrapper). Nutzt dieselbe
  * Live-Video-URL (PULL_FROM_URL-Muster) und dieselbe Caption-Transform
- * (buildTitle) wie der Direkt-Weg. PostPeer pollt intern bis
- * PUBLISH_COMPLETE → wir brauchen kein eigenes Status-Polling.
- * Gibt die PostPeer-Post-ID als publish_id zurück (Pipeline-kompatibel).
+ * (buildTitle) wie der Direkt-Weg.
+ *
+ * HTTP 202 heißt bei PostPeer nur „Post accepted" — der tatsächliche Ausgang
+ * steht in `status` und `platforms[].success` (Werte: pending, publishing,
+ * published, scheduled, partial, failed). Bei pending/publishing/scheduled wird
+ * `GET /v1/posts/{postId}` gepollt (pollPostPeerStatus). Gibt die PostPeer-
+ * Post-ID als publish_id zurück (Pipeline-kompatibel).
  *
  * Aktiv nur wenn ENV TIKTOK_VIA_WRAPPER === 'true'; sonst greift der
  * Direkt-API-Weg (Fallback, unverändert erhalten).
@@ -237,22 +366,14 @@ async function publishViaPostPeer(post: SocialPost): Promise<string> {
     );
   }
 
-  // Post-ID aus Response ziehen. Feldname aus PostPeer-Doku noch nicht 100 %
-  // sicher (Phase 0 zeigte „Post ID" im UI). Defensiv mehrere Felder prüfen;
-  // im schlimmsten Fall Platzhalter-ID (Pipeline funktioniert trotzdem).
-  let publishId = '';
-  try {
-    const json = JSON.parse(text) as Record<string, unknown>;
-    publishId =
-      (json.id as string) ||
-      (json.postId as string) ||
-      ((json.post as Record<string, unknown> | undefined)?._id as string) ||
-      ((json.data as Record<string, unknown> | undefined)?.id as string) ||
-      '';
-  } catch {
-    // Response war kein JSON — trotzdem 2xx, also als Erfolg werten.
-  }
-  return publishId || `postpeer-${post.index}`;
+  // HTTP 2xx heißt bei PostPeer nur „angenommen". Maßgeblich ist der Ausgang in
+  // `status` + `platforms[].success` (siehe Kopfkommentar / evaluatePostPeer).
+  const json = parsePostPeer(text, res.status);
+  const postId = extractPostPeerId(json) || `postpeer-${post.index}`;
+
+  // Endzustand sofort entscheiden; nur bei pending/publishing/scheduled pollen.
+  if (evaluatePostPeer(json, postId) === 'success') return postId;
+  return pollPostPeerStatus(postId, apiKey);
 }
 
 /**
