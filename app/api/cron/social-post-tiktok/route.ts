@@ -29,6 +29,9 @@ import type { Platform } from '@/lib/social/state';
 // Route ist dynamisch — niemals pre-rendern, KV-Reads sind Request-spezifisch.
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
+// bundle.social-Posting pollt bis zu 5 min (W59). Vercel-Standard-maxDuration
+// läge unter der ~94 s Postdauer und schnitte das Polling ab.
+export const maxDuration = 300;
 
 const TIKTOK_ONLY: Platform[] = ['tiktok'];
 

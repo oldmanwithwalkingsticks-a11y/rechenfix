@@ -31,6 +31,8 @@ const POLL_INTERVAL_MS = 3_000;
 const POLL_MAX_ATTEMPTS = 10; // 10 × 3 s = ~30 s
 const POSTPEER_POLL_INTERVAL_MS = 5_000;
 const POSTPEER_POLL_MAX_ATTEMPTS = 6; // 6 × 5 s = ~30 s
+const BUNDLE_POLL_INTERVAL_MS = 10_000;
+const BUNDLE_POLL_MAX_ATTEMPTS = 30; // 30 × 10 s = 5 min (Testdauer ~94 s)
 const MAX_TITLE_LEN = 2200;
 
 /**
@@ -376,6 +378,176 @@ async function publishViaPostPeer(post: SocialPost): Promise<string> {
   return pollPostPeerStatus(postId, apiKey);
 }
 
+interface BundleUploadResponse {
+  id?: string;
+}
+
+interface BundlePostResponse {
+  id?: string;
+  status?: string;
+  postedDate?: string | null;
+  errors?: unknown;
+  errorsVerbose?: unknown;
+}
+
+/** Einzige Schreibstelle für den Upload-Fehlercode (grep-stabil). */
+function bundleUploadFailed(detail: string): never {
+  throw new TikTokApiError(`bundle.social Upload: ${detail.slice(0, 300)}`, 'BUNDLE_UPLOAD_FAILED');
+}
+
+/** Einzige Schreibstelle für den Post-anlegen-Fehlercode. */
+function bundlePostFailed(detail: string): never {
+  throw new TikTokApiError(`bundle.social Post: ${detail.slice(0, 300)}`, 'BUNDLE_POST_FAILED');
+}
+
+/** Fehlertext aus errorsVerbose bzw. errors ziehen, auf 300 Zeichen gekürzt. */
+function bundleErrorText(json: BundlePostResponse): string {
+  const raw = json.errorsVerbose ?? json.errors ?? '';
+  const s = typeof raw === 'string' ? raw : JSON.stringify(raw);
+  return s.slice(0, 300);
+}
+
+/**
+ * Für einen laufenden bundle.social-Post `GET /api/v1/post/{id}` pollen:
+ * höchstens BUNDLE_POLL_MAX_ATTEMPTS Versuche im Abstand
+ * BUNDLE_POLL_INTERVAL_MS (5 min, dreifache Reserve über die ~94 s Testdauer).
+ * POSTED → Erfolg; FAILED/ERROR/CANCELLED → wirft; Fenster abgelaufen → wirft
+ * (Slug wird lieber später erneut versucht als fälschlich als erledigt markiert).
+ * Der API-Schlüssel taucht in keiner Meldung auf.
+ */
+async function pollBundleSocialStatus(postId: string, apiKey: string): Promise<string> {
+  for (let attempt = 1; attempt <= BUNDLE_POLL_MAX_ATTEMPTS; attempt++) {
+    await new Promise((resolve) => setTimeout(resolve, BUNDLE_POLL_INTERVAL_MS));
+
+    let res: Response;
+    try {
+      res = await fetch(`https://api.bundle.social/api/v1/post/${encodeURIComponent(postId)}`, {
+        method: 'GET',
+        headers: { 'x-api-key': apiKey },
+      });
+    } catch {
+      continue; // vorübergehender Netzfehler → nächster Versuch
+    }
+
+    const text = await res.text();
+    if (!res.ok) continue;
+
+    let json: BundlePostResponse;
+    try {
+      json = JSON.parse(text) as BundlePostResponse;
+    } catch {
+      continue;
+    }
+
+    const status = json.status;
+    if (status === 'POSTED') return postId;
+    if (status === 'FAILED' || status === 'ERROR' || status === 'CANCELLED') {
+      throw new TikTokApiError(
+        `bundle.social status=${status}: ${bundleErrorText(json)}`,
+        'BUNDLE_FAILED',
+      );
+    }
+    // SCHEDULED / PROCESSING / RETRYING / … → weiter warten
+  }
+  throw new TikTokApiError(
+    `bundle.social nicht abgeschlossen nach ${BUNDLE_POLL_MAX_ATTEMPTS}×${BUNDLE_POLL_INTERVAL_MS} ms (postId ${postId})`,
+    'BUNDLE_TIMEOUT',
+  );
+}
+
+/**
+ * W59 — TikTok-Post über bundle.social (BUNDLE SP. Z O.O., EU/Warschau; AVV auf
+ * Anfrage). Ersetzt PostPeer als Standard-Wrapper, weil PostPeers TikTok-Client
+ * am geteilten 24-h-Creator-Cap hängt. Drei Schritte: Video von der Live-URL
+ * holen → /api/v1/upload (multipart, MIME video/mp4 Pflicht) → /api/v1/post →
+ * /api/v1/post/{id} pollen bis POSTED. Caption via buildTitle wie bisher.
+ *
+ * Aktiv nur wenn ENV TIKTOK_PROVIDER === 'bundle'.
+ */
+async function publishViaBundleSocial(post: SocialPost): Promise<string> {
+  const apiKey = process.env.BUNDLE_SOCIAL_API_KEY;
+  const teamId = process.env.BUNDLE_SOCIAL_TEAM_ID;
+  if (!apiKey) throw new TikTokApiError('BUNDLE_SOCIAL_API_KEY fehlt', 'ENV_MISSING');
+  if (!teamId) throw new TikTokApiError('BUNDLE_SOCIAL_TEAM_ID fehlt', 'ENV_MISSING');
+
+  // 1) Video von der Live-URL holen (kein fs — Medien sind aus dem Function-
+  //    Bundle ausgeschlossen, W51b; die Videos sind klein, ~288 KB im Test).
+  const videoUrl = `${SITE_URL}/social-videos/${post.slug}.mp4`;
+  let videoBuf: ArrayBuffer;
+  try {
+    const vRes = await fetch(videoUrl);
+    if (!vRes.ok) bundleUploadFailed(`Video-URL HTTP ${vRes.status}`);
+    videoBuf = await vRes.arrayBuffer();
+  } catch (err) {
+    if (err instanceof TikTokApiError) throw err;
+    throw new TikTokApiError(
+      `bundle.social Video-Download: ${err instanceof Error ? err.message : String(err)}`,
+      'NETWORK',
+    );
+  }
+
+  // 2) Upload — multipart. Der Datei-Teil MUSS als video/mp4 markiert sein,
+  //    sonst antwortet der Dienst mit HTTP 400 (Unsupported file type).
+  const form = new FormData();
+  form.append('file', new Blob([videoBuf], { type: 'video/mp4' }), `${post.slug}.mp4`);
+  form.append('teamId', teamId);
+
+  let uploadId = '';
+  try {
+    const upRes = await fetch('https://api.bundle.social/api/v1/upload', {
+      method: 'POST',
+      headers: { 'x-api-key': apiKey },
+      body: form,
+    });
+    const upText = await upRes.text();
+    if (!upRes.ok) bundleUploadFailed(`HTTP ${upRes.status}: ${upText}`);
+    uploadId = (JSON.parse(upText) as BundleUploadResponse).id ?? '';
+  } catch (err) {
+    if (err instanceof TikTokApiError) throw err;
+    bundleUploadFailed(err instanceof Error ? err.message : String(err));
+  }
+  if (!uploadId) bundleUploadFailed('Antwort ohne id');
+
+  // 3) Post anlegen — Caption via buildTitle (unverändert). title ist intern.
+  const body = {
+    teamId,
+    title: post.slug,
+    postDate: new Date().toISOString(),
+    status: 'SCHEDULED',
+    socialAccountTypes: ['TIKTOK'],
+    data: {
+      TIKTOK: {
+        type: 'VIDEO',
+        text: buildTitle(post),
+        uploadIds: [uploadId],
+        privacy: 'PUBLIC_TO_EVERYONE',
+        disableComments: false,
+        disableDuet: false,
+        disableStitch: false,
+      },
+    },
+  };
+
+  let postId = '';
+  try {
+    const pRes = await fetch('https://api.bundle.social/api/v1/post', {
+      method: 'POST',
+      headers: { 'x-api-key': apiKey, 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    const pText = await pRes.text();
+    if (!pRes.ok) bundlePostFailed(`HTTP ${pRes.status}: ${pText}`);
+    postId = (JSON.parse(pText) as BundlePostResponse).id ?? '';
+  } catch (err) {
+    if (err instanceof TikTokApiError) throw err;
+    bundlePostFailed(err instanceof Error ? err.message : String(err));
+  }
+  if (!postId) bundlePostFailed('Antwort ohne id');
+
+  // 4) Status pollen bis POSTED.
+  return pollBundleSocialStatus(postId, apiKey);
+}
+
 /**
  * Postet das Video zu `post.slug` per Direct Post (PULL_FROM_URL) an
  * TikTok.
@@ -391,9 +563,20 @@ export async function publishToTikTok(post: SocialPost, dryRun = false): Promise
     return `dry-tt-${post.index}`;
   }
 
-  // Wrapper-Weg (PostPeer) — wenn aktiv, direkt hier posten und returnen.
-  // Rollback: TIKTOK_VIA_WRAPPER entfernen/false → bisheriger Direkt-API-Weg.
-  if (process.env.TIKTOK_VIA_WRAPPER === 'true') {
+  // Provider-Weiche (W59). Abwärtskompatibel gestaffelt:
+  //   TIKTOK_PROVIDER='bundle'   → bundle.social (Standard nach W59)
+  //   TIKTOK_PROVIDER='postpeer' ODER (Variable fehlt UND TIKTOK_VIA_WRAPPER=
+  //     'true') → PostPeer (stillgelegt, aber erreichbar)
+  //   sonst → Direkt-API-Weg wie bisher
+  // Bleibt TIKTOK_PROVIDER versehentlich ungesetzt, verhält sich das System wie
+  // vor der Welle statt gar nicht.
+  if (process.env.TIKTOK_PROVIDER === 'bundle') {
+    return publishViaBundleSocial(post);
+  }
+  if (
+    process.env.TIKTOK_PROVIDER === 'postpeer' ||
+    (!process.env.TIKTOK_PROVIDER && process.env.TIKTOK_VIA_WRAPPER === 'true')
+  ) {
     return publishViaPostPeer(post);
   }
 
