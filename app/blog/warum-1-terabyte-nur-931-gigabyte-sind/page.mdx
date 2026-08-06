@@ -81,6 +81,34 @@ Standard 1084-1986 ausdrücklich auf: kilo bezeichne 1000 – und bei Angaben zu
 Computerspeicher 2¹⁰, also 1024. Mega entsprechend 2²⁰. Die Lesart, die heute als die falsche
 gilt, war die zuerst festgeschriebene.
 
+## Warum der Arbeitsspeicher wirklich binär ist
+
+Es gibt eine Stelle im Rechner, an der 1024 keine Konvention ist, sondern Physik.
+
+Arbeitsspeicher wird adressiert. Jede Speicherzelle hat eine Nummer, und diese Nummer läuft über Adressleitungen. Mit jeder zusätzlichen Leitung verdoppelt sich die Zahl der ansprechbaren Adressen: eine Leitung ergibt zwei, zehn Leitungen ergeben 1024, zwanzig ergeben 1.048.576, dreißig ergeben 1.073.741.824.
+
+Adressleitungen kosten Geld und Platz. Wer dreißig davon verbaut, wird nicht 1.000.000.000 Zellen anschließen und den Rest verfallen lassen — er nutzt alle 1.073.741.824. Deshalb hat Arbeitsspeicher praktisch immer eine Größe, die eine Zweierpotenz ist. Andernfalls blieben Bereiche schlicht ungenutzt.
+
+Ein Riegel mit der Aufschrift **8 GB enthält also tatsächlich 8 × 2³⁰ Bytes**, das sind 8.589.934.592. Hier ist der Verkäufer großzügiger als die Zahl vermuten lässt, nicht knauseriger. Genau umgekehrt als bei der Festplatte.
+
+Das ist der Kern des ganzen Durcheinanders: Zwei Bauteile im selben Gehäuse zählen aus zwei verschiedenen, jeweils vollkommen vernünftigen Gründen unterschiedlich. Beim Speicherchip ist die Zweierpotenz technisch zwingend. Bei der rotierenden Scheibe ist sie es nicht — dort bestimmen Spuren, Sektoren und Plattenzahl die Kapazität, und die ergeben keine glatte Zweierpotenz.
+
+Man sieht das auch daran, wer die Regeln aufstellt. Für Halbleiterspeicher tut das die **JEDEC**, der Verband der Chiphersteller, und deren Definition von Kilo lautet 1024. Für Festplatten tut es die **IDEMA**, die International Disk Drive Equipment and Materials Association — der Verband der Laufwerkshersteller. Deren Definition lautet 1000.
+
+Beide Verbände haben recht für ihr Bauteil. Der Ärger entsteht erst, wenn beide Bauteile im selben Gerät stecken und dasselbe Betriebssystem beide Zahlen mit demselben Buchstaben beschriftet.
+
+## Wer hier eigentlich falsch rechnet
+
+Bevor es weitergeht, lohnt eine Einordnung, die in den meisten Empörungsbeiträgen fehlt.
+
+Der Festplattenhersteller, der 1 TB auf die Verpackung druckt und 1.000.000.000.000 Bytes liefert, hält sich exakt an das Internationale Einheitensystem. Tera bedeutet dort seit jeher zehn hoch zwölf, bei Metern, Gramm und Sekunden ebenso wie bei Bytes. Wer diese Angabe als Betrug bezeichnet, verlangt vom Hersteller, ein weltweit gültiges Präfix anders zu verwenden als überall sonst.
+
+Die Anzeige des Betriebssystems, die daraus 931 macht, ist ebenfalls nicht falsch — sie rechnet in Zweierpotenzen, was für einen Computer naheliegt.
+
+Falsch ist nur das Etikett. Wer in Zweierpotenzen rechnet und das Ergebnis trotzdem GB nennt, benutzt ein Präfix, das etwas anderes bedeutet. Genau dafür gibt es seit 1999 eine Lösung, und genau die wird bis heute weitgehend ignoriert.
+
+Die Verwirrung entsteht also nicht dort, wo die Zahlen gebildet werden, sondern dort, wo sie beschriftet werden. Das ist ein Unterschied, den man kennen sollte, bevor man sich über die Festplattenindustrie ärgert.
+
 ## Das fehlende große K
 
 Eine Zeit lang gab es eine Lösung, und sie scheiterte an der Typografie. Unterschieden wurde
@@ -114,6 +142,29 @@ Physikalisch-Technische Bundesanstalt 2007.
 Eine vollständige, seit einem Vierteljahrhundert verfügbare Lösung – getragen von den
 maßgeblichen Institutionen. Und in der IT-Branche bis heute mit geringer Akzeptanz. Wer sagt
 schon „Gibibyte".
+
+## Ein Byte war nicht immer acht Bit
+
+Bevor man über 1000 gegen 1024 streiten kann, müsste eigentlich feststehen, was ein Byte ist. Auch das war lange offen.
+
+Den Begriff prägte **Werner Buchholz** 1956 bei IBM, während der Arbeit am Großrechner 7030 mit dem Projektnamen Stretch. Er leitete ihn vom englischen *bite*, dem Bissen, ab und schrieb ihn mit Ypsilon, damit er nicht versehentlich zu *bit* verrutschte. Das *bit* selbst ist ein Kofferwort aus *binary digit* — und heißt nebenbei auf Englisch „das Bisschen". Bissen und Bisschen.
+
+In Buchholz' ursprünglicher Definition war ein Byte eine Gruppe von Bits zur Kodierung eines Zeichens, und zwar **eine bis sechs**. Wie viele es tatsächlich waren, hing von der Maschine ab:
+
+- IBM 1401, gebaut bis 1971: sechs Bit je Zeichen
+- UNIVAC 1100: neun Bit im ASCII-Code, sechs im FIELDATA-Code
+- Nixdorf 820: zwölf Bit
+- PDP-10, gebaut bis 1983: **frei wählbar zwischen 1 und 36 Bit**
+
+Erst das IBM System/360 legte 1964 acht Bit fest — und laut Buchholz' eigener Darstellung nicht aus theoretischer Einsicht, sondern aus Sparsamkeit: Die Bytegröße wurde auf das Maximum von acht fixiert, und die Adressierung wechselte von der Bit- auf die Byte-Ebene.
+
+Amtlich wurde das erst **1993**, in ISO/IEC 2382-1. Bis dahin war fast dreißig Jahre lang üblich, was nirgends festgeschrieben stand.
+
+Und weil die Sache selbst danach uneindeutig blieb, gibt es dafür ein zweites Wort: das **Oktett**, in Frankreich *octet*, das immer und ausnahmslos acht Bit bezeichnet. Netzwerkstandards benutzen es genau deshalb.
+
+Damit steht dieselbe Geschichte zweimal in diesem Artikel. Ein gebräuchliches Wort, dessen Bedeutung sich je nach Maschine unterschied. Eine Norm, die Klarheit schuf, indem sie ein neues Wort einführte. Und ein Alltag, der beim alten Wort blieb.
+
+Nur dass es beim Byte funktioniert hat und beim Kilobyte nicht.
 
 ## Zwei Normen, ein Wort, gegensätzliche Werte
 
@@ -158,6 +209,42 @@ gezählt wird.
 
 <Video src="/blog/datenmengen.mp4" poster="/blog/datenmengen-titelbild.png" caption="1,44 MB auf der Diskette, 2 TB auf der SSD – zwei Zahlen, die beide nicht das bezeichnen, was sie zu bezeichnen scheinen." />
 
+## Und dann ist da noch der Faktor acht
+
+Die zweite Falle im selben Themenfeld hat mit Präfixen gar nichts zu tun, sondern mit dem Bezugswert.
+
+Speicher wird in **Byte** gemessen, Leitungen in **Bit**. Ein Internetanschluss mit 250 Mbit/s liefert nicht 250 Megabyte je Sekunde, sondern rund 31 — man teilt durch acht. Wer eine Datei von 4 Gigabyte über eine 50-Mbit-Leitung lädt, wartet nicht 80 Sekunden, sondern gut zehn Minuten.
+
+Die Schreibweise unterscheidet beides sauber: kleines b für Bit, großes B für Byte. Mbit/s gegen MB/s. Im Marketing verschwimmt genau diese Unterscheidung gern, weil die größere Zahl besser aussieht — und der Faktor acht ist erheblich größer als die 7,4 Prozent, um die sich Terabyte und Tebibyte unterscheiden.
+
+Hier hat der Gesetzgeber inzwischen eingegriffen, anders als bei den Präfixen. Die Bundesnetzagentur betreibt seit dem 25. September 2015 eine Breitbandmessung, und seit der Novelle des Telekommunikationsgesetzes gibt es ein echtes **Minderungsrecht**: Wer nicht die vertraglich vereinbarte Leistung erhält, kann das monatliche Entgelt mindern oder außerordentlich kündigen. Voraussetzung ist eine erhebliche, kontinuierliche oder regelmäßig wiederkehrende Abweichung.
+
+Der Nachweis ist formalisiert. Mit der Desktop-App der Bundesnetzagentur führt man eine Messkampagne durch — dreißig Messungen innerhalb von vierzehn Tagen, verteilt auf höchstens fünf Messtage — und erhält am Ende ein Protokoll, das man dem Anbieter vorlegen kann.
+
+Wie nötig das ist, zeigt der Jahresbericht zur Breitbandmessung für den Zeitraum Oktober 2021 bis September 2022: Im Festnetz erhielten **84,4 Prozent** der Nutzer im Download wenigstens die Hälfte der vertraglich vereinbarten Höchstgeschwindigkeit. Voll erreicht oder überschritten wurde sie bei **42,3 Prozent**.
+
+Anders gesagt: Nicht einmal jeder zweite Anschluss liefert, was auf dem Vertrag steht. Das ist ein größerer Unterschied als alles, worum in diesem Artikel sonst gestritten wird — und der einzige, gegen den man rechtlich etwas unternehmen kann.
+
+## 2022 wurden neue Präfixe gebraucht — wegen der Daten
+
+Am 18. November 2022 traten in Versailles Vertreter aus 64 Ländern zur Generalkonferenz für Maß und Gewicht zusammen und beschlossen einstimmig etwas, das es seit 1991 nicht mehr gegeben hatte: vier neue Präfixe für das Internationale Einheitensystem.
+
+Oben kamen **Ronna** für zehn hoch 27 und **Quetta** für zehn hoch 30 hinzu, unten die Gegenstücke **ronto** und **quecto**. Zuvor war bei Yotta und Yokto das Ende der Skala erreicht.
+
+Der Anlass war ausdrücklich die digitale Speicherung. Das für den Vorschlag verantwortliche britische National Physical Laboratory nennt als treibende Kraft die wachsenden Anforderungen von Datenwissenschaft und digitaler Speicherung, die die obersten Präfixe der bestehenden Skala bereits ausschöpfen. Die Zahlen dahinter: Allein 2020 wurden weltweit rund 64 Zettabyte an Daten erzeugt, für 2023 wurden über 100 Zettabyte erwartet.
+
+Ein Ronnabyte sind tausend Yottabyte, ein Quettabyte tausend Ronnabyte — eine Eins mit dreißig Nullen. Zur Einordnung: Die Erde wiegt knapp sechs Ronnagramm, ein Elektron etwa ein Quectogramm.
+
+Und nun das Detail, das in diesen Artikel gehört wie kaum ein anderes.
+
+In der Fachwelt kursierten längst inoffizielle Vorschläge für zehn hoch 27, vor allem **Bronto** und **Hella**. Beide fielen durch — aus einem rein buchstäblichen Grund: Ihre Abkürzungen waren im metrischen System schon vergeben. **B steht für Byte**, h für das Präfix hekto. Übrig blieben als einzige unbenutzte Buchstabenpaare Q und R.
+
+Das Byte hat also ein Präfix blockiert, das für Bytes gedacht war.
+
+Ein Nachtrag, der die Sache rundmacht: Für Ronna und Quetta gibt es **keine binären Gegenstücke**. Die IEC-Reihe endet bei Yobi. Wer die weltweite Datenmenge in Zweierpotenzen ausdrücken will, hat dafür seit 2022 kein normiertes Wort mehr.
+
+Dieselbe Konferenz beschloss übrigens noch etwas: dass die Schaltsekunde bis spätestens 2035 abgeschafft werden soll. Zwei Entscheidungen an einem Tag, beide an derselben Stelle — die eine, weil unsere Daten die Maßeinheiten sprengen, die andere, weil unsere Uhren der Erddrehung davonlaufen.
+
 ## Die Diskette, deren Angabe in keiner Norm steht
 
 Wer glaubt, dezimal und binär seien die beiden Möglichkeiten, hat die 3,5-Zoll-Diskette nicht
@@ -178,6 +265,22 @@ Sie ist kein Einzelfall. Eine 700-MB-CD fasst 700 × 1024 × 1024 Byte, eine 4,7
 4,7 × 1000 × 1000 × 1000 Byte. USB-Übertragungsraten zählen dezimal. Jedes Medium hat sich seine
 Lesart selbst gewählt.
 
+## Zwei Scheiben im selben Regal, zwei Zählweisen
+
+Wer sehen will, wie tief die Uneinigkeit sitzt, muss nicht in den Rechner schauen. Es genügt ein Blick auf zwei Rohlinge nebeneinander.
+
+Auf der CD steht **700 MB**. Auf der DVD steht **4,7 GB**. Beide Angaben stammen aus derselben Branche, beide bezeichnen dieselbe Art von Datenträger — und sie sind nach zwei verschiedenen Systemen gerechnet.
+
+Die 700 der CD sind binär gemeint. Eine 80-Minuten-CD im Datenmodus fasst 360.000 Sektoren zu je 2048 Bytes, das sind 737.280.000 Bytes. Dezimal wären das 737 MB. Als 700 lesbar wird die Zahl nur, wenn man durch 1024 mal 1024 teilt.
+
+Die 4,7 der DVD sind dezimal gemeint. Deshalb zeigt Windows für eine frisch eingelegte Single-Layer-DVD nicht 4,7 an, sondern rund **4,38** — die bekannte Enttäuschung beim Brennen eines Films, der angeblich 4,5 GB groß ist und trotzdem nicht draufpasst.
+
+Dasselbe Muster zieht sich weiter. Die 25 GB einer Blu-ray sind dezimal, im Explorer werden daraus etwa 23,3. Auf mancher Verpackung stehen deshalb gleich beide Zahlen.
+
+Der Grund für den Bruch ist historisch. Die CD-Spezifikationen entstanden Anfang der 1980er Jahre, als in der Rechnerwelt selbstverständlich in Zweierpotenzen gezählt wurde und niemand ein Problem darin sah. Die DVD kam Mitte der 1990er, aus einem Konsortium, in dem Unterhaltungselektronik und Filmindustrie den Ton angaben — und dort war Giga eine Milliarde, wie überall sonst auch.
+
+Zwischen den beiden Scheiben liegen etwa fünfzehn Jahre und ein stiller Systemwechsel, den nie jemand angekündigt hat. Man sieht ihn nur, wenn man beide Verpackungen nebeneinanderlegt und nachrechnet.
+
 ## Wer zählt wie
 
 Bemerkenswert ist, dass die Fronten nicht stabil sind. Mit macOS X 10.6 Snow Leopard, erschienen
@@ -186,6 +289,10 @@ eine 1-TB-Platte 1 TB an, Windows für dieselbe Platte 931 GB. Beides ist korrek
 Dialekte derselben Sprache.
 
 <WerZaehltWie />
+
+Und selbst die 931 sind noch nicht die Zahl, die am Ende zur Verfügung steht. Bevor eine Platte Daten aufnehmen kann, braucht sie ein Dateisystem, und das belegt selbst Platz: Verwaltungsstrukturen, Journale, Reserven für defekte Bereiche. Bei SSDs kommt hinzu, dass ein Teil der Flash-Zellen vom Controller zurückgehalten wird, um Verschleiß auszugleichen — dieser Bereich ist von außen gar nicht sichtbar.
+
+Wie viel das ausmacht, hängt vom Dateisystem, von der Größe des Datenträgers und vom Hersteller ab; eine allgemeine Zahl dafür gibt es nicht. Sicher ist nur die Richtung: Die Differenz zwischen Aufdruck und Anzeige ist die eine Sache, die Differenz zwischen Anzeige und tatsächlich beschreibbarem Platz noch eine zweite.
 
 ## Was daraus folgt
 
@@ -249,5 +356,45 @@ kaum auf eine Disk, und Windows ließ sich nur mit einem ganzen Stapel installie
   {
     titel: 'Apple Support-Dokument TS2419 zur Anzeige der Laufwerkskapazität ab Mac OS X 10.6',
     hinweis: 'Dokumentiert die Umstellung auf dezimale Anzeige mit Snow Leopard, erschienen am 28. August 2009. Apple hat dieses Support-Dokument zurückgezogen; eine dauerhaft gültige Adresse existiert nicht mehr. Der Inhalt ist nur noch über zeitgenössische Berichterstattung belegt.',
+  },
+  {
+    titel: 'Arbeitsspeicher — binaere Adressierung und Groessenangabe',
+    url: 'https://de.wikipedia.org/wiki/Arbeitsspeicher',
+    hinweis: 'Durch die binaere Adressierung hat Arbeitsspeicher praktisch immer eine Groesse als Zweierpotenz, da sonst Adressbereiche ungenutzt blieben.',
+  },
+  {
+    titel: 'Byte — Begriffspraegung, historische Wortbreiten und Oktett',
+    url: 'https://de.wikipedia.org/wiki/Byte',
+    hinweis: 'Werner Buchholz praegte den Begriff 1956 am IBM 7030; System/360 fixierte 1964 acht Bit aus Sparsamkeitsgruenden. Historische Groessen von 6 bis 36 Bit.',
+  },
+  {
+    titel: 'Bundesnetzagentur: Internetgeschwindigkeit und Nachweisverfahren',
+    url: 'https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/Internetgeschwindigkeit/artikel.html',
+    hinweis: 'Vorgaben der Messkampagne: 30 Messungen in 14 Tagen an hoechstens fuenf Messtagen; Messprotokoll als Nachweis einer Minderleistung.',
+  },
+  {
+    titel: 'Bundesnetzagentur: Jahresbericht 2021/2022 zur Breitbandmessung',
+    url: 'https://www.bundesnetzagentur.de/SharedDocs/Pressemitteilungen/DE/2023/20230315_JB_Breitbandmessung.html',
+    hinweis: '84,4 Prozent der Nutzer erhielten im Festnetz mindestens die Haelfte der vereinbarten Datenuebertragungsrate, 42,3 Prozent erreichten sie voll.',
+  },
+  {
+    titel: 'National Physical Laboratory: Expansion to the SI prefix range',
+    url: 'https://www.npl.co.uk/resources/the-si-units/si-prefix',
+    hinweis: 'Erste Erweiterung der SI-Praefixe seit 1991; ausdruecklich getrieben von den Anforderungen der Datenwissenschaft und der digitalen Speicherung.',
+  },
+  {
+    titel: 'Laborpraxis: Praefix-Neuerung im metrischen System',
+    url: 'https://www.laborpraxis.vogel.de/die-erde-wiegt-6-ronnagramm-praefix-neuerung-im-metrischen-system-a-4148c32de590388e8be76d0c78683a62/',
+    hinweis: 'Bronto und Hella scheiterten, weil B bereits fuer Byte und h fuer hekto vergeben sind; uebrig blieben Q und R.',
+  },
+  {
+    titel: 'Leitfaden zu DVD-Kapazitaet und -Groesse',
+    url: 'https://aestiquo.com/de-ge/blogs/product-selection-reviews/dvd-capacity-guide',
+    hinweis: 'Die Herstellerangabe 4,7 GB ist dezimal gerechnet; Rechner zeigen daher rund 4,38 GiB an.',
+  },
+  {
+    titel: 'ComputerWeekly: Optisches Storage',
+    url: 'https://www.computerweekly.com/de/definition/Optisches-Storage-Optical-Storage',
+    hinweis: 'Kapazitaetsangaben der optischen Medien: CD 700 MB, Single-Layer-DVD 4,7 GB, Single-Layer-Blu-ray 25 GB.',
   },
 ]} />
