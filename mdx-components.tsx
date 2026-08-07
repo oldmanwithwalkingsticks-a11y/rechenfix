@@ -25,6 +25,7 @@ import ZehenUndBallen from '@/components/blog/grafik/ZehenUndBallen';
 import PassformStreuung from '@/components/blog/grafik/PassformStreuung';
 import HerleitungCup from '@/components/blog/grafik/HerleitungCup';
 import ZweiLaenderZweiCups from '@/components/blog/grafik/ZweiLaenderZweiCups';
+import EckpreiseKrumm from '@/components/blog/grafik/EckpreiseKrumm';
 import SchereDezimalBinaer from '@/components/blog/grafik/SchereDezimalBinaer';
 import ZweiNormen from '@/components/blog/grafik/ZweiNormen';
 import DiskettenRaetsel from '@/components/blog/grafik/DiskettenRaetsel';
@@ -124,6 +125,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     PassformStreuung,
     HerleitungCup,
     ZweiLaenderZweiCups,
+    EckpreiseKrumm,
     SchereDezimalBinaer,
     ZweiNormen,
     DiskettenRaetsel,
