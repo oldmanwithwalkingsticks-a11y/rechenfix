@@ -21,6 +21,8 @@ import GerstenkornStreuung from '@/components/blog/grafik/GerstenkornStreuung';
 import ViertelVsDrittel from '@/components/blog/grafik/ViertelVsDrittel';
 import NormVsEtikett from '@/components/blog/grafik/NormVsEtikett';
 import ZeitleisteSchuhgroesse from '@/components/blog/grafik/ZeitleisteSchuhgroesse';
+import ZehenUndBallen from '@/components/blog/grafik/ZehenUndBallen';
+import PassformStreuung from '@/components/blog/grafik/PassformStreuung';
 import SchereDezimalBinaer from '@/components/blog/grafik/SchereDezimalBinaer';
 import ZweiNormen from '@/components/blog/grafik/ZweiNormen';
 import DiskettenRaetsel from '@/components/blog/grafik/DiskettenRaetsel';
@@ -116,6 +118,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ViertelVsDrittel,
     NormVsEtikett,
     ZeitleisteSchuhgroesse,
+    ZehenUndBallen,
+    PassformStreuung,
     SchereDezimalBinaer,
     ZweiNormen,
     DiskettenRaetsel,
