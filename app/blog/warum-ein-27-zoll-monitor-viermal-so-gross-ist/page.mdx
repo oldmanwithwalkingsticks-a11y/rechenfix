@@ -1,0 +1,382 @@
+import { generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import StructuredData from '@/components/seo/StructuredData';
+import { artikel } from './meta';
+
+export const metadata = {
+  title: `${artikel.titel} | Rechenfix.de`,
+  description: artikel.beschreibung,
+  alternates: { canonical: 'https://www.rechenfix.de/blog/warum-ein-27-zoll-monitor-viermal-so-gross-ist' },
+};
+
+<StructuredData data={generateArticleSchema({
+  url: 'https://www.rechenfix.de/blog/warum-ein-27-zoll-monitor-viermal-so-gross-ist',
+  headline: artikel.titel,
+  description: artikel.beschreibung,
+  datePublished: artikel.datum,
+  dateModified: artikel.datum,
+  image: '/blog/bildschirm-titelbild.png',
+})} />
+
+<StructuredData data={generateBreadcrumbSchema([
+  { name: 'Start', url: '/' },
+  { name: 'Blog', url: '/blog' },
+  { name: artikel.titel, url: '/blog/warum-ein-27-zoll-monitor-viermal-so-gross-ist' },
+])} />
+
+# Warum ein 27-Zoll-Monitor viermal so groß ist
+
+<ArtikelDatum datum={artikel.datum} />
+
+<Bild src="/blog/bildschirm-titelbild.png" alt="Links ein alter beiger Röhrenmonitor mit fast quadratischem Bildschirm, rechts ein flacher moderner Breitbildmonitor, über die Diagonale des alten Geräts ist ein Maßband gespannt" caption="Der fast quadratische Vorgänger und sein breites Erbe – gemessen wird bei beiden dieselbe Strecke." width={1200} height={675} />
+
+<Infobox titel="Worum es geht">
+Bildschirmgrößen werden als Diagonale in Zoll angegeben. Diese eine Zahl sagt nichts über die
+Fläche, nichts über Breite und Höhe und nichts darüber, wie groß das Bild wirkt. Doppelte Zoll
+bedeuten die vierfache Fläche, und zwei Geräte mit derselben Zollzahl können sich um ein Viertel
+ihrer Bildfläche unterscheiden. Historisch war die Zahl nicht einmal die Diagonale des Bildes.
+</Infobox>
+
+## Eine Zahl, aus der man nichts ausrechnen kann
+
+Auf dem Karton steht 27 Zoll. Auf dem Preisschild daneben 32. Die naheliegende Annahme lautet:
+Das eine ist etwa ein Fünftel größer als das andere.
+
+Diese Annahme ist falsch, und zwar in beide Richtungen zugleich. Das größere Gerät hat rund vierzig
+Prozent mehr Bildfläche, nicht zwanzig. Und ob es überhaupt breiter oder höher ist, steht in der
+Zahl gar nicht drin — dafür bräuchte man das Seitenverhältnis, und das steht meist woanders.
+
+Die Zollzahl ist die Länge der Bildschirmdiagonale. Sie ist damit die einzige Kennzahl eines
+Rechtecks, aus der sich für sich genommen weder Breite noch Höhe noch Fläche ableiten lässt. Bei
+einer Länge, einer Breite oder einer Fläche wüsste man, woran man ist. Bei einer Diagonale weiß
+man erst etwas, wenn eine zweite Angabe dazukommt.
+
+Das ist bemerkenswert für eine Zahl, die in praktisch jeder Produktbeschreibung an erster Stelle
+steht — und es hat eine Vorgeschichte, in der diese Zahl noch nicht einmal das gemessen hat, was
+sie heute misst.
+
+## Warum ausgerechnet die Diagonale
+
+Der Grund liegt in der Bauform der ersten Fernseher. Die frühen Bildröhren waren rund. Ein runder
+Glaskolben hat keine Breite und keine Höhe, die man sinnvoll angeben könnte — er hat einen
+Durchmesser. Also wurde die Größe eines Fernsehers als Durchmesser der Röhre angegeben.
+
+Das Bild in dieser runden Röhre war aber rechteckig. In einen Kreis passt ein Rechteck nur so
+hinein, dass seine vier Ecken auf dem Kreis liegen; die Diagonale des Rechtecks entspricht dann dem
+Durchmesser des Kreises. Als die Röhren später rechteckig wurden, blieb die Diagonale als
+Größenangabe erhalten, weil sie die unmittelbare Fortsetzung des Durchmessers war.
+
+Es gibt einen zweiten Grund, und der ist weniger technisch. Die Diagonale ist bei jedem Rechteck
+die längste Strecke, die man messen kann. Wer eine Größe mit einer einzigen Zahl beschreiben will
+und die Wahl hat, nimmt die größte verfügbare. Beide Gründe wirken bis heute fort: Auch Notebooks,
+Tablets und Telefone werden diagonal gemessen, obwohl in keinem davon je eine runde Röhre steckte.
+
+## Und dann war es nicht einmal die Diagonale des Bildes
+
+Hier wird es unangenehm. Die Größenangabe der frühen Fernseher war der **Außendurchmesser des
+Glaskolbens**. Die sichtbare Bilddiagonale war kleiner — abgezogen wurden die Dicke des Glases
+ringsum und der Teil der Leuchtschicht, den Gehäuse und Blende verdeckten.
+
+Diese Praxis überlebte den Grund, der sie hervorgebracht hatte. Auch als die Röhren als abgerundete
+Rechtecke gefertigt wurden, wurde weiter die Röhre angegeben und nicht das Bild. Über Jahrzehnte
+stand damit auf dem Karton eine Zahl, die größer war als das, was der Käufer zu sehen bekam.
+
+Beendet wurde das nicht durch Einsicht, sondern durch Behörden und Gerichte. In Kalifornien brachte
+die staatliche Eichbehörde den Fall an die Bezirksstaatsanwaltschaften, und die gingen gegen die
+Hersteller vor. Die Beanstandung war präzise: Ein als 40 Zoll beschriebenes Gerät konnte eine
+sichtbare Diagonale haben, die kleiner oder größer war als 40 Zoll, und diese gerundete Angabe
+verstieß nach Auffassung der Staatsanwaltschaften gegen geltendes Recht. Im Vergleich stellten LG,
+Panasonic, Samsung, Sharp und Sony Geräte im Wert von 1,1 Millionen Dollar für kalifornische
+Schulen bereit und zahlten 1,25 Millionen Dollar an Kosten und weiteren Leistungen. Seither wird
+die sichtbare Diagonale auf ein Zehntel Zoll genau angegeben.
+
+Ähnliches hatte sich zuvor schon bei Computermonitoren abgespielt. Auch dort wich die beworbene
+Diagonale von der sichtbaren ab, weil ein Teil der Röhre hinter der Blende verschwand — bei einem
+als 14 Zoll verkauften Gerät blieben typischerweise knapp 13,6 Zoll übrig. Die Branche reagierte
+mit einer sprachlichen Lösung, die man bis heute auf Verpackungen findet: Geräte werden als
+Klasse ausgewiesen, etwa als 14-Zoll-Klasse, womit die Zahl zur Kategorie wird statt zur Messung.
+Wer heute im Kleingedruckten eines Fernsehers „Zoll-Klasse“ liest, sieht die direkte Nachfahrin
+dieser Auseinandersetzung.
+
+Der Fall lohnt sich zu merken, weil er den Charakter der ganzen Angabe zeigt: Die Diagonale ist
+kein gewachsenes Naturmaß, sondern eine Verkaufsangabe, die erst durch Eichrecht an das gebunden
+wurde, was man tatsächlich sieht. Und selbst dann blieb sie eine Zahl, die nur beschreibt, wie
+lang eine Linie quer über eine Fläche ist — nicht, wie groß diese Fläche ist.
+
+## Die Quadratregel: doppelte Zoll sind vierfache Fläche
+
+Jetzt zur eigentlichen Rechnung, und sie ist einfacher, als ihre Wirkung vermuten lässt.
+
+Vergrößert man ein Rechteck unter Beibehaltung seines Seitenverhältnisses, wachsen Breite und Höhe
+im selben Verhältnis wie die Diagonale. Die Fläche ist Breite mal Höhe — also wächst sie mit dem
+**Quadrat** der Diagonale. Eine Diagonale, die doppelt so lang ist, ergibt die vierfache Fläche.
+
+Das ist der Grund für den Satz in der Überschrift. Ein 27-Zoll-Monitor hat gegenüber einem
+13,5-Zoll-Notebookdisplay nicht die doppelte, sondern exakt die vierfache Bildfläche. Umgekehrt
+gilt: Wer die Fläche verdoppeln will, braucht die 1,414-fache Diagonale — die Wurzel aus zwei. Von
+24 Zoll führt der Weg zur doppelten Fläche nicht auf 48, sondern auf 34 Zoll. Von 27 auf 38.
+
+<QuadratRegel />
+
+Praktisch heißt das zweierlei. Erstens sind kleine Zollsprünge größer, als sie klingen: Von 27 auf
+32 Zoll sind es fünf Zoll, aber rund vierzig Prozent mehr Fläche. Zweitens sind große Sprünge
+kleiner, als sie klingen: Der Weg von 55 auf 65 Zoll bringt vierzig Prozent, nicht das Doppelte,
+obwohl die Zahl um zehn wächst statt um fünf. Prozentual entscheidet nur das Verhältnis der
+Diagonalen, im Quadrat.
+
+Der Rechenweg dafür ist kurz genug für den Laden: Man teilt die größere Diagonale durch die
+kleinere und nimmt das Ergebnis mal sich selbst. Der Wechsel von einem 24-Zoll-Monitor auf einen
+27-Zoll-Monitor sieht nach einem kleinen Schritt aus — drei Zoll, gut ein Achtel mehr. Tatsächlich
+sind es 27 Prozent mehr Bildfläche, weil 27 geteilt durch 24 gleich 1,125 ist und 1,125 mal sich
+selbst 1,27 ergibt. Bei 55 gegen 65 Zoll führt dieselbe Rechnung auf vierzig Prozent, bei 65 gegen
+75 Zoll nur noch auf dreiunddreißig, obwohl der Sprung in Zoll derselbe ist. Je größer die
+Ausgangsgröße, desto weniger bringt ein Zuwachs von zehn Zoll prozentual. Das ist der Grund, warum
+die üblichen Größenstufen nach oben hin immer weiter auseinanderrücken: Damit ein Schritt spürbar
+bleibt, muss er im Verhältnis wachsen, nicht in absoluten Zoll.
+
+Wer beim Kauf vergleichen will, rechnet deshalb besser mit der Fläche als mit der Diagonale — oder
+lässt es den [Bildschirmgrößen- und PPI-Rechner](/technik/bildschirmgroesse-ppi-rechner) tun, der
+aus Diagonale und Seitenverhältnis Breite, Höhe und Pixeldichte ermittelt.
+
+<RechnerLoader slug="bildschirmgroesse-ppi-rechner" />
+
+## Dieselbe Zahl, fünf verschiedene Flächen
+
+Die zweite Unschärfe steckt im Seitenverhältnis. Bei gleicher Diagonale hat ein Rechteck umso
+weniger Fläche, je weiter es von der Quadratform entfernt ist. Ein Quadrat holt aus einer gegebenen
+Diagonale das Maximum heraus; je länglicher das Format, desto mehr Fläche geht verloren.
+
+Für 27 Zoll Diagonale ergibt das folgendes Bild:
+
+<FormateGleicheDiagonale />
+
+Zwischen dem alten 4:3-Format und einem heutigen 32:9-Monitor liegen bei identischer Zollzahl fast
+tausend Quadratzentimeter — der 32:9 hat nur gut die Hälfte der Bildfläche. Selbst der Schritt vom
+klassischen 16:9 zum breiten 21:9 kostet rund sechzehn Prozent Fläche, obwohl beide Geräte im Laden
+als 27-Zöller nebeneinanderstehen und dieselbe Zahl tragen.
+
+Das ist kein Betrug, sondern eine unvermeidliche Folge davon, dass eine Diagonale eben nur eine
+Diagonale ist. Es bedeutet aber, dass die Angabe zwischen verschiedenen Formaten schlicht nicht
+vergleichbar ist. Zwei Geräte mit derselben Zollzahl sind nur dann gleich groß, wenn sie auch
+dasselbe Seitenverhältnis haben.
+
+## Der stille Schrumpf beim Formatwechsel
+
+Diese Rechnung hatte einmal eine sehr konkrete Folge, an die sich kaum noch jemand erinnert.
+
+Als der Markt in den 2000er-Jahren von 4:3 auf 16:9 wechselte, blieben die gewohnten Zollzahlen im
+Regal stehen. Ein 17-Zoll-Monitor hieß weiter 17-Zoll-Monitor. Nur war er nicht mehr derselbe:
+Bei gleicher Diagonale hat ein 16:9-Bild elf Prozent weniger Fläche als ein 4:3-Bild — und vor
+allem deutlich weniger Höhe.
+
+Wer die Höhe seines alten Bildschirms behalten wollte, musste in der Zollzahl deutlich zulegen. Ein
+20-Zoll-Gerät im Format 4:3 ist rund 30,5 Zentimeter hoch. Dieselbe Höhe erreicht ein 16:9-Gerät
+erst bei 24,5 Zoll Diagonale. Wer damals von 20 auf 22 Zoll wechselte und den Eindruck hatte, es
+sei irgendwie weniger geworden, hatte recht: In der Höhe war es weniger.
+
+Für Textarbeit ist genau die Höhe die entscheidende Größe, weil Text nach unten läuft und nicht zur
+Seite. Das erklärt, warum das Format 16:10 sich im Bürobereich bis heute hält, obwohl 16:9 den
+Markt beherrscht — bei 27 Zoll bringt 16:10 gegenüber 16:9 rund hundert Quadratzentimeter mehr,
+und die liegen dort, wo der Text steht.
+
+<Video src="/blog/bildschirm.mp4" poster="/blog/bildschirm-video-standbild.png" caption="Dasselbe Maßband, zwei Geräte – die Diagonale bleibt gleich, die Bildfläche nicht." />
+
+## Woher die Formate kommen, mit denen wir rechnen
+
+Wenn das Seitenverhältnis so entscheidend ist, lohnt der Blick darauf, wie die gängigen Formate
+eigentlich zustande kamen. Die Antwort ist bei beiden dieselbe wie bei der Diagonale: durch
+Umstände, nicht durch Absicht.
+
+Das 4:3-Format geht auf das frühe Kino zurück und wurde von dort ins Fernsehen übernommen. Es war
+kein Ergebnis von Wahrnehmungsforschung, sondern eine Festlegung, die sich aus dem verfügbaren
+Filmmaterial und den Perforationsabständen ergab und dann fünfzig Jahre lang niemand mehr in Frage
+stellte.
+
+Das 16:9-Format dagegen hat einen Urheber und ein Datum. Kerns H. Powers, Mitglied einer
+SMPTE-Arbeitsgruppe zur hochauflösenden Produktion, schlug es 1984 vor — zu einer Zeit, als
+niemand in diesem Format produzierte. Sein Vorgehen war denkbar anschaulich: Er schnitt Rechtecke
+gleicher Fläche in allen damals üblichen Formaten aus, legte sie mittig übereinander und suchte
+das kleinste Rechteck, das alle umschloss, sowie das größte, das in allen enthalten war. Beide
+hatten dasselbe Seitenverhältnis, ungefähr 1,77 zu 1 — also 16:9. Der praktische Sinn dahinter:
+Auf einem solchen Bildschirm ist die vergeudete Fläche ungefähr gleich groß, egal ob ein breiter
+Kinofilm oben und unten schwarze Balken bekommt oder ein altes Fernsehbild links und rechts.
+
+Fast überall liest man dazu, 16:9 sei das geometrische Mittel der Extremformate 4:3 und 2,35:1.
+Nachgerechnet stimmt das nicht ganz. Die Wurzel aus dem Produkt von 1,3333 und 2,35 ergibt 1,7701,
+16:9 aber ist 1,7778 — eine Abweichung von 0,43 Prozent nach oben. Nimmt man statt 2,35 den heute
+üblicheren Wert 2,39, ergibt sich 1,7851, und 16:9 liegt 0,41 Prozent darunter. Je nachdem, welchen
+Extremwert man einsetzt, ist 16:9 also entweder etwas zu breit oder etwas zu schmal für den
+Mittelwert, den es angeblich darstellt. Eine der ausführlicheren Darstellungen formuliert es
+korrekt: Der berechnete Wert liege zufällig nahe bei 16:9. Zu einem glatten Verhältnis aus zwei
+kleinen ganzen Zahlen kam man erst durch Runden — dieselbe Bewegung, die schon Watt bei den 33.000
+und der Kontinent bei den 75 Kilopondmetern gemacht hat.
+
+## Warum breitere Formate die größeren Zahlen bekommen
+
+Aus der Geometrie der Diagonale folgt ein wirtschaftlicher Anreiz, den man kennen sollte, bevor
+man Angebote vergleicht.
+
+Dreht man die Rechnung von vorhin um und fragt nicht nach der Fläche bei gleicher Diagonale,
+sondern nach der Diagonale bei gleicher Fläche, ergibt sich Folgendes: Ein 27-Zoll-Bildschirm im
+Format 16:9 hat rund 2.010 Quadratzentimeter Bildfläche. Dieselbe Fläche erreicht ein 4:3-Gerät
+schon bei 25,5 Zoll, ein 16:10-Gerät bei 26,3 Zoll — ein 21:9-Gerät braucht dagegen 29,4 Zoll und
+ein 32:9-Gerät sogar 34,6 Zoll.
+
+Anders gesagt: Je breiter das Format, desto größer die Zollzahl bei gleichbleibender Bildfläche.
+Da Bildschirme über die Diagonale beworben werden, klingt ein breiteres Gerät bei identischer
+Fläche größer. Genau dieser Zusammenhang wird in der Fachliteratur zum Formatwechsel offen
+benannt — zusammen mit dem zweiten Grund, der die Sache endgültig entschied: 16:9-Panels ließen
+sich günstiger fertigen als die im Bürobereich verbreiteten 16:10-Panels.
+
+Damit fügt sich das Bild. Der Markt wechselte nicht auf 16:9, weil es die bessere Arbeitsfläche
+wäre — für Text ist es nachweislich die schlechtere. Er wechselte, weil die Fertigung billiger war
+und weil dasselbe Panel unter der üblichen Maßangabe nach mehr aussieht. Die Diagonale ist damit
+nicht nur eine unglückliche Kennzahl, sie hat die Entwicklung der Geräte mitgeprägt.
+
+## Zoll in einem Land, das metrisch misst
+
+Es gibt eine Merkwürdigkeit an dieser Angabe, die im Alltag völlig untergeht: Der Zoll ist in
+Deutschland keine gesetzliche Einheit. Das Einheiten- und Zeitgesetz kennt für Längen das Meter und
+seine dezimalen Teile. Trotzdem trägt jeder Fernseher, jedes Notebook und jedes Telefon seine
+Größe in Zoll, und zwar auch dann, wenn daneben pflichtgemäß die Zentimeterangabe steht.
+
+Der Grund ist derselbe wie beim Reifen, beim Rohrgewinde und bei der Fahrradfelge: Die Branche kam
+aus dem angelsächsischen Raum, die Maße wurden mit den Produkten übernommen, und ein späterer
+Wechsel hätte jede bestehende Größenbezeichnung entwertet. Der Zoll ist dabei bis auf die
+Nachkommastelle definiert — seit 1959 gilt international exakt 2,54 Zentimeter —, sodass die
+Umrechnung selbst kein Problem ist. Sie ist nur eben nötig.
+
+Ein Nebeneffekt betrifft das Runden. In Zoll fallen die üblichen Größen auf glatte Zahlen: 24, 27,
+32, 55, 65. In Zentimetern lauten dieselben Geräte 60,96, 68,58, 81,28, 139,7 und 165,1. Die
+runden Zahlen entstehen also nur in der fremden Einheit — was einer der Gründe ist, warum sich die
+Zentimeterangabe im Handel nie durchgesetzt hat, obwohl sie rechtlich die maßgebliche ist.
+
+## PPI: die zweite Zahl, die auch nicht allein reicht
+
+Neben der Diagonale steht heute meist eine zweite Kennzahl, die Pixeldichte. Sie gibt an, wie viele
+Bildpunkte auf einen Zoll entfallen, und wird berechnet, indem man die Diagonale in Pixeln — nach
+Pythagoras aus Breite und Höhe — durch die Diagonale in Zoll teilt. Ein 27-Zoll-Bildschirm mit
+3.840 × 2.160 Bildpunkten kommt so auf rund 163 PPI.
+
+Auch diese Zahl sagt für sich genommen wenig. Ob man einzelne Bildpunkte erkennt, hängt nicht von
+der Pixeldichte ab, sondern vom Verhältnis aus Pixeldichte und Betrachtungsabstand. Ein Telefon
+liegt bei rund vierhundert PPI und wird aus dreißig Zentimetern betrachtet, ein Fernseher liegt bei
+achtzig und wird aus drei Metern betrachtet — beide wirken scharf. Ein Fernseher mit
+Telefon-Pixeldichte wäre nicht schärfer, sondern nur teurer.
+
+Damit hat man am Ende zwei Zahlen, von denen keine allein trägt: eine Diagonale, die ohne
+Seitenverhältnis unvollständig ist, und eine Pixeldichte, die ohne Betrachtungsabstand
+unvollständig ist. Beide zusammen mit den fehlenden Angaben ergeben ein brauchbares Bild — einzeln
+laden sie zu Fehlschlüssen ein.
+
+## Und heute? Dasselbe Muster noch einmal
+
+Man könnte meinen, die Geschichte mit dem Röhrendurchmesser sei erledigt. Sie ist es nicht — sie
+läuft in der Hosentasche weiter.
+
+Moderne Telefondisplays haben abgerundete Ecken, dazu Aussparungen für Kamera und Sensoren. Die
+angegebene Diagonale bezieht sich trotzdem auf ein gedachtes vollständiges Rechteck, so als wären
+die Ecken spitz und die Aussparung nicht vorhanden. Die Hersteller schreiben das selbst dazu, man
+muss nur ins Kleingedruckte sehen. Apple formuliert es so: Das Display habe abgerundete Ecken, die
+innerhalb eines Standardrechtecks lägen; gemessen als solches Rechteck betrage die Diagonale so und
+so viele Zoll, die tatsächlich sichtbare Fläche sei kleiner.
+
+Samsung beziffert die Differenz in einem eigenen Support-Dokument sogar. Für das Galaxy S8 heißt
+es dort: 5,8 Zoll im Vollrechteck, 5,6 Zoll unter Berücksichtigung der abgerundeten Ecken — und
+der Pixelverlust durch die Rundung betrage 0,24 Prozent. Zwei Zehntelzoll Unterschied in der
+Angabe bei einem Bruchteil eines Prozents verlorener Fläche: Das zeigt noch einmal, wie
+empfindlich eine Diagonale auf Formänderungen reagiert und wie wenig sie über die Fläche sagt.
+
+Auch der juristische Teil wiederholt sich. Gegen Apple lief eine Sammelklage, die genau diese
+Messweise als Täuschung angriff — die abgerundeten Ecken und die Aussparung würden bei der
+Diagonale nicht abgezogen. Der zuständige Richter zeigte sich skeptisch und verwies darauf, dass
+die Offenlegung im Datenblatt den Betrugsvorwurf entkräfte. Damit endet die Sache anders als in
+Kalifornien bei den Fernsehern: Dort führte der Druck zu einer genaueren Zahl, hier führte er zu
+einem Fußnotentext.
+
+Bei gekrümmten Monitoren kommt eine weitere Feinheit hinzu. Die Diagonale wird entlang der
+gewölbten Oberfläche gemessen, nicht als gerade Linie durch den Raum. Wer das Maßband anlegt, muss
+es also der Krümmung folgen lassen. Zwischen beiden Messweisen liegen bei starker Krümmung
+durchaus sichtbare Millimeter — ein weiterer Grund, warum die Zahl allein selten reicht.
+
+## Wie groß ist richtig? Auch da streuen die Zahlen
+
+Bleibt die Frage, die vor dem Kauf tatsächlich zählt: Welche Größe passt in welchen Abstand? Dafür
+gibt es Empfehlungen von Normungsgremien, und sie sind ein weiteres Beispiel dafür, wie schwer eine
+einzelne Zahl es hat.
+
+Die Society of Motion Picture and Television Engineers nennt in ihrer Empfehlung EG-18-1994 einen
+horizontalen Sehwinkel von mindestens dreißig Grad. THX, die Zertifizierungsstelle aus dem Umfeld
+von Lucasfilm, zielt höher: rund vierzig Grad für ein kinoähnliches Erlebnis, sechsunddreißig Grad
+für die hinteren Reihen, sechsundzwanzig Grad als noch akzeptabler Wert für den letzten Platz.
+
+Aus diesen Winkeln lassen sich Abstände ableiten, und genau dort beginnt die Streuung. Für dieselben
+vierzig Grad kursiert der Faktor 1,0 mal Diagonale ebenso wie 1,2 mal Diagonale. Für die dreißig
+Grad der SMPTE findet man 1,6 und 1,63. Die verbreitete Formulierung, THX empfehle zwischen
+sechsundzwanzig und sechsunddreißig Grad, gibt die Werte sogar falsch wieder — diese Spanne
+beschreibt die hinteren Sitzreihen, nicht den empfohlenen Platz.
+
+Die Ursache ist immer dieselbe wie bei der Zollzahl selbst: Aus einem Winkel lässt sich ein Abstand
+nur ableiten, wenn man das Seitenverhältnis kennt, denn der Sehwinkel bezieht sich auf die
+**Breite** des Bildes, die Faustformel aber auf die **Diagonale**. Bei 16:9 ist die Breite rund 87
+Prozent der Diagonale, bei 21:9 rund 92, bei 4:3 nur 80. Wer eine Faustformel von einem Format auf
+ein anderes überträgt, rechnet mit einem stillschweigend mitgeschleppten Umrechnungsfaktor.
+
+Als grober Rahmen taugen die Zahlen trotzdem: Bei einem 16:9-Fernseher liegt der Bereich zwischen
+etwa dem Ein- und dem Zweifachen der Diagonale, näher dran für Filme, weiter weg für Nachrichten
+und Sport. Wer es genauer will, misst den Abstand und rechnet über die Breite.
+
+## Was daraus folgt
+
+Die Zollzahl ist keine Größe, sondern ein Kürzel. Sie ist aus der runden Bildröhre entstanden, war
+jahrzehntelang die Röhre statt des Bildes, wurde erst durch Behördendruck an die sichtbare Fläche
+gebunden — und sie beschreibt bis heute die eine Strecke eines Rechtecks, aus der man am wenigsten
+ablesen kann.
+
+Für den Kauf folgen daraus drei Handgriffe, die zusammen weniger als eine Minute kosten. Erstens:
+Bei Vergleichen die Fläche heranziehen, nicht die Diagonale — Faktor gleich Verhältnis der
+Diagonalen im Quadrat. Zweitens: Das Seitenverhältnis mit angeben, sonst sind die Zahlen nicht
+vergleichbar; besonders beim Sprung auf 21:9 oder 32:9, wo die Bildfläche trotz gleicher Zollzahl
+deutlich kleiner ausfällt. Drittens: Bei Arbeitsgeräten auf die Höhe schauen statt auf die
+Diagonale, weil Text nach unten läuft.
+
+Und die Zahl selbst? Sie bleibt. Nicht weil sie gut wäre, sondern weil zu viel an ihr hängt —
+dieselbe Begründung, die schon die Cup, die Schuhgröße und die Pferdestärke am Leben gehalten hat.
+Ein Maß muss nicht sinnvoll sein, um sich zu halten. Es muss nur alle anderen zwingen, es
+mitzubenutzen.
+
+<KarstenSagt>
+Mein letzter Monitorkauf war ein 27-Zöller, ganz bewusst in dieser Größe, weil meine beiden
+anderen Monitore „nur“ 24 Zoll haben. Diesmal wollte ich etwas Größeres, um schlichtweg mehr
+Fläche zu haben — was im Alter hilfreich ist.
+
+Heutzutage sind die Monitore rechteckig, da kann die Bildschirmdiagonale schon mal verwirrend
+sein, weil das Bild eben breiter ist als hoch. Im Gegensatz zu den damaligen Monitoren, die eher
+viereckig waren und bei denen Höhe und Breite ziemlich gleich ausfielen.
+</KarstenSagt>
+
+<Quellen eintraege={[
+  {
+    titel: 'Wikipedia: Display size',
+    url: 'https://en.wikipedia.org/wiki/Display_size',
+    hinweis: 'Belegt die Herkunft der Diagonalmessung: Die ersten Fernseher hatten runde Bildröhren, deren Außendurchmesser als Größenangabe diente. Weil das dargestellte Rechteck innerhalb der Röhre lag, war die sichtbare Bilddiagonale kleiner als der angegebene Durchmesser — Glasdicke und Blende gingen ab. Die Praxis blieb auch nach dem Übergang zu abgerundet rechteckigen Röhren bestehen.',
+  },
+  {
+    titel: 'The Downey Patriot: TV makers settle case over dimensions',
+    url: 'https://www.thedowneypatriot.com/articles/tv-makers-settle-case-over-dimensions',
+    hinweis: 'Zum kalifornischen Vergleich: Ausgelöst von der Division of Measurement Standards und örtlichen Eichbehörden, geführt von den Bezirksstaatsanwaltschaften gegen LG, Panasonic, Samsung, Sharp und Sony. Gegenstand war die gerundete Angabe der Bildschirmgröße; seither wird die sichtbare Diagonale auf ein Zehntel Zoll genau ausgewiesen.',
+  },
+  {
+    titel: 'SMPTE Engineering Guideline EG-18-1994',
+    hinweis: 'Nennt einen horizontalen Sehwinkel von mindestens dreißig Grad als Empfehlung für Kinos; der Wert wird seit Langem auch auf Heimkinos übertragen. Die Empfehlung selbst ist kostenpflichtig und wird hier nach übereinstimmenden Sekundärdarstellungen wiedergegeben — die daraus abgeleiteten Abstandsfaktoren weichen zwischen den Quellen ab.',
+  },
+  {
+    titel: 'Kaleidescape: Screen Size, Viewing Distance & Resolution',
+    url: 'https://www.kaleidescape.com/home-theater-guide/screen-size/',
+    hinweis: 'Stellt die dreißig Grad der SMPTE den rund vierzig Grad von THX gegenüber und nennt als Faustformel den Faktor 0,835 vom Abstand zur Diagonale. Andere Darstellungen leiten aus demselben Winkel den Faktor 1,0 oder 1,2 ab — die Streuung steht bewusst im Text.',
+  },
+  {
+    titel: 'AVForums: Diskussion zur Auslegung der THX-Empfehlungen',
+    url: 'https://www.avforums.com/threads/confusion-with-smpte-guidelines.1341044/',
+    hinweis: 'Fachdiskussion mit dem Hinweis, dass die vielfach zitierte Spanne von sechsundzwanzig bis sechsunddreißig Grad die hinteren Sitzreihen beschreibt und nicht die THX-Empfehlung für den besten Platz. Ein Forenbeitrag ist keine Primärquelle; der Punkt steht hier, weil er eine verbreitete Fehlwiedergabe benennt, nicht als Beleg für die Normwerte selbst.',
+  },
+]} />
