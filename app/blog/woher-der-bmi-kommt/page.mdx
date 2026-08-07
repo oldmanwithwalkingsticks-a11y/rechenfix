@@ -65,6 +65,28 @@ Genau dafür war die Formel gedacht: um Gruppen miteinander vergleichbar zu mach
 einem einzelnen Menschen zu sagen, wie es um ihn steht. Der Quetelet-Index war ein Instrument der
 Statistik, kein Instrument der Medizin – und er blieb über ein Jahrhundert weitgehend unbeachtet.
 
+## Die Tabellen kamen von einer Lebensversicherung
+
+Zwischen Quetelet und Keys liegt ein Jahrhundert, in dem die Frage nach dem richtigen Gewicht gar nicht von Ärzten beantwortet wurde, sondern von Versicherungsmathematikern.
+
+Ab 1897 sammelte die amerikanische Vereinigung der Versicherungsmediziner Daten über Größe, Gewicht und Sterblichkeit ihrer Versicherten. Der Anlass war kaufmännisch: Es kamen immer mehr Leistungsfälle von übergewichtigen Versicherungsnehmern herein, und wer Beiträge kalkulieren will, braucht ein Merkmal, an dem sich Risiko festmachen lässt.
+
+**Louis I. Dublin**, Vizepräsident der Metropolitan Life Insurance Company und selbst Statistiker, war der Erste, der daraus Tabellen normaler Gewichte entwickelte — gebildet aus den Durchschnittsgewichten für eine gegebene Körpergröße.
+
+Daraus wurden 1942 und 1943 die berühmten Tabellen: *Ideal Weights for Men*, *Ideal Weight for Women*. Neufassungen folgten 1959 und 1983. Bis in die 1980er Jahre waren sie der klinische Standard — nicht der BMI, sondern die Tabelle eines Versicherungskonzerns.
+
+Wie sie gebaut waren, ist aufschlussreich. Die empfohlenen Gewichte stützten sich auf Versicherte im Alter zwischen zwanzig und neunundzwanzig Jahren und galten dann unverändert für das ganze Erwachsenenleben — die Begründung lautete, nach abgeschlossenem Wachstum sei eine weitere Gewichtszunahme nicht nötig. Die Tabellen unterschieden zusätzlich nach Körperbau in klein, mittel und groß.
+
+Nur: **Wie man den eigenen Körperbau bestimmt, stand nirgends.** Es gab keine Anleitung dazu. Wer sich für großgebaut hielt, durfte mehr wiegen.
+
+Auch das Wort „ideal", das der ganzen Vorstellung ihren Namen gab, war so nie gemeint. In den späteren Veröffentlichungen hießen die Werte *desirable*, wünschenswert, und in manchen Darstellungen taucht der Begriff „ideal" in den amtlichen Tabellen überhaupt nicht auf — er setzte sich im allgemeinen Sprachgebrauch durch und wurde rückwirkend zum Etikett.
+
+Die methodischen Schwächen sind gut dokumentiert: Größen und Gewichte wurden in einem erheblichen Teil der Fälle selbst angegeben, das Gewicht nur ein einziges Mal erfasst, und über Ernährung oder Bewegung wurde nie gefragt. Wer eine Police abschloss, wurde einmal gewogen und Jahrzehnte später wieder betrachtet.
+
+Aus diesem Material entstand die Vorstellung vom Normalgewicht, die bis heute in Köpfen steckt. Sie kam nicht aus der Medizin. Sie kam aus der Beitragskalkulation.
+
+Der BMI löste diese Tabellen ab — und erbte dabei ihre Aufgabe. Beide beantworten dieselbe Frage: Wie weit darf jemand vom Durchschnitt abweichen, bevor er als Risiko gilt.
+
 ## 1972: der Name – und die Warnung im selben Aufsatz
 
 Aus der Vergessenheit holte ihn Ancel Keys. Der amerikanische Physiologe veröffentlichte 1972 im
@@ -90,8 +112,6 @@ müsse. Was danach geschah, geschah gegen beider ausdrückliche Einschränkung.
 
 <ZweiWarnungen />
 
-<RechnerLoader slug="bmi-rechner" />
-
 ## Wie aus einem Vergleichsmaß eine Grenze wurde
 
 Bis in die 1980er-Jahre arbeiteten Ärzte überwiegend mit Gewichtstabellen von
@@ -106,6 +126,48 @@ Zwei Dinge sind daran bemerkenswert. Erstens: Die Grenze war **geschlechtsspezif
 Zusammenhang zwischen BMI und Körperfett bei Männern und Frauen unterschiedlich ausfällt.
 Zweitens: Sie war eine **Positionsangabe innerhalb einer Bevölkerung**, kein Schwellenwert für
 ein Risiko. Wer über der Linie lag, war nicht krank – er war schwerer als 85 Prozent der anderen.
+
+<RechnerLoader slug="bmi-rechner" />
+
+## Warum eigentlich hoch zwei?
+
+Es gibt eine Kritik am BMI, die nichts mit Muskeln, Fettverteilung oder Ethnien zu tun hat, sondern rein rechnerisch ist: **Der Exponent stimmt nicht.**
+
+Im Januar 2013 schrieb **Nick Trefethen**, Professor für numerische Analysis in Oxford und Mitglied der Royal Society, einen Leserbrief an den *Economist*. Er nannte den BMI ein sonderbares Maß: Wir leben in einer dreidimensionalen Welt, doch der Index teilt das Gewicht durch die Größe zum Quadrat. Erfunden worden sei er in den 1840er Jahren, vor der Zeit der Taschenrechner, als eine Formel sehr einfach sein musste, um überhaupt brauchbar zu sein.
+
+Die Folge dieser Definition beschreibt er drastisch: Millionen kleiner Menschen halten sich für dünner, als sie sind, und Millionen großer Menschen für dicker.
+
+Der Grund ist einfach nachzurechnen. Wächst ein Körper proportional in alle drei Richtungen, wächst sein Volumen mit der dritten Potenz der Größe, nicht mit der zweiten. Der Exponent 2 teilt also bei kleinen Menschen durch eine zu große Zahl und bei großen durch eine zu kleine. Trefethen schlug vor:
+
+**Neuer BMI = 1,3 × Gewicht in kg ÷ (Größe in m)^2,5**
+
+Der Faktor 1,3 ist so gewählt, dass sich für einen Menschen durchschnittlicher Größe — Trefethen rechnet mit 1,69 Metern — gegenüber der alten Formel nichts ändert. Wer deutlich kleiner ist, bekommt bis zu einen Punkt mehr, wer deutlich größer ist, bis zu einen Punkt weniger. An der Grenze zwischen zwei Kategorien entscheidet das über die Einstufung.
+
+Und jetzt der Teil, der in den meisten Artikeln über diese „neue Formel" fehlt.
+
+**Trefethen selbst hält sie ausdrücklich für ungesichert.** Auf seiner eigenen Seite an der Universität Oxford schreibt er, die vorgeschlagenen Formeln beruhten nicht auf epidemiologischen Studien und seien aus vielerlei Gründen möglicherweise gar keine Verbesserung. Er verweist im selben Atemzug auf eine Arbeit von Heymsfield und Kollegen im *American Journal of Clinical Nutrition* von 2007, die den Exponenten 2,0 epidemiologisch stützt.
+
+Und er korrigiert sich in einer eingeschobenen Klammer sogar selbst: Im Absatz nach der zitierten Stelle schlage Quetelet für ausgewachsene Erwachsene tatsächlich den Exponenten 2 vor. Der Vorwurf, die Formel sei aus Rechenbequemlichkeit entstanden, trifft ihren Urheber also nicht.
+
+Eine Prüfung an knapp zweihundert jungen Erwachsenen auf den Philippinen verglich beide Formeln daraufhin, wie gut sie den gemessenen Körperfettanteil vorhersagen und Übergewicht erkennen. Ergebnis: Die **herkömmliche** Formel schnitt besser ab, wenn auch nicht statistisch bedeutsam.
+
+Damit steht die Sache so: Der mathematische Einwand ist berechtigt und leicht nachvollziehbar. Ob die korrigierte Formel bessere Vorhersagen liefert, ist offen — und derjenige, von dem sie stammt, sagt das als Erster.
+
+Trefethens eigentlicher Punkt ist ohnehin ein anderer, und er passt zu allem, was in diesem Artikel steht: Jede Rechnung, die einem Menschen eine einzige Zahl zuweist, kann nicht richtig sein. Menschen sind zu vielfältig, um von einer einzigen Ziffer beschrieben zu werden.
+
+## Für Kinder gilt die Formel gar nicht
+
+Eine Einschränkung, die in fast jeder Alltagsdarstellung fehlt: **Die bekannten Grenzwerte gelten erst ab achtzehn.**
+
+Bei Kindern und Jugendlichen wäre eine feste Zahl sinnlos. Ein Zehnjähriger hat einen anderen Körperbau als ein Sechzehnjähriger, und beide verändern sich schneller, als eine Tabelle abbilden kann. Deshalb wird der Wert nicht gegen feste Grenzen gehalten, sondern gegen die Verteilung in der eigenen Alters- und Geschlechtsgruppe — in Deutschland gegen die Referenzwerte aus der KiGGS-Studie des Robert Koch-Instituts.
+
+Das Ergebnis ist keine Kategorie, sondern eine **Perzentile**: Der Wert sagt, wie viel Prozent der Gleichaltrigen darunter liegen. Ein Kind auf der neunzigsten Perzentile hat einen höheren Wert als neunzig Prozent seiner Altersgruppe. Übergewicht beginnt üblicherweise dort, Adipositas ab der siebenundneunzigsten.
+
+Das ist ein grundsätzlich anderer Maßstab. Bei Erwachsenen wird gegen einen Grenzwert gemessen, bei Kindern gegen den Rest der Altersgruppe — mit der Folge, dass sich die Einordnung mitverschiebt, wenn sich die ganze Gruppe verändert. Werden Kinder insgesamt schwerer, wandern die Perzentilen mit, sofern die Referenzwerte nicht eingefroren bleiben.
+
+Auch in der Schwangerschaft trägt der Index nicht. Dort geht es nicht um einen Zielbereich, sondern um eine angemessene Gewichtszunahme im Verlauf — eine BMI-Einordnung wäre in dieser Zeit ohne Aussagekraft.
+
+Wer die Zahl für ein Kind ausrechnet und mit den Erwachsenengrenzen vergleicht, bekommt also ein Ergebnis, das nichts bedeutet.
 
 ## 1998: als 29 Millionen Menschen über Nacht die Kategorie wechselten
 
@@ -170,6 +232,52 @@ Für Kinder und Jugendliche gilt die Erwachsenen-Einteilung ohnehin nicht; dort 
 alters- und geschlechtsspezifischen Perzentilen gearbeitet.
 
 <WasDieFormelSieht />
+
+## Was man stattdessen messen könnte
+
+Wer den BMI kritisiert, sollte sagen, was besser wäre. Es gibt eine Antwort, sie ist ähnlich einfach zu rechnen — und sie braucht nur ein Maßband statt einer Waage.
+
+Das **Taille-zu-Größe-Verhältnis**, englisch Waist-to-Height Ratio oder kurz WHtR, teilt den Taillenumfang durch die Körpergröße. Beides in Zentimetern, das Ergebnis eine Zahl unter eins. Die Faustregel dazu ist so knapp, dass man sie sich merken kann, ohne zu rechnen:
+
+**Der Taillenumfang sollte weniger als die halbe Körpergröße betragen.**
+
+Bei 1,80 Meter Größe wären das 90 Zentimeter. Wer darunter bleibt, liegt unter 0,5. Mit dem Alter verschiebt sich die Grenze nach oben: zwischen vierzig und fünfzig gilt ein Bereich zwischen 0,5 und 0,6 als vertretbar, ab fünfzig ein Wert bis 0,6.
+
+Der Unterschied zum BMI ist grundsätzlicher Natur. Der BMI bewertet das **Gesamtgewicht**. Das Taille-zu-Größe-Verhältnis bewertet, **wo** das Fett sitzt. Und das ist medizinisch nicht dasselbe: Fett im Bauchraum, das sogenannte viszerale Fett, umgibt die inneren Organe, ist stoffwechselaktiv und mit Herz-Kreislauf-Erkrankungen sowie Typ-2-Diabetes deutlich stärker verknüpft als Unterhautfett an Hüfte oder Oberschenkeln.
+
+Zwei Menschen mit identischem BMI können damit ein völlig verschiedenes Risiko tragen — je nachdem, wie das Gewicht verteilt ist. Der BMI kann diesen Unterschied nicht sehen. Er kennt nur zwei Zahlen, und keine davon sagt etwas über Form.
+
+Die Datenlage ist inzwischen umfangreich. Eine Studie der Ludwig-Maximilians-Universität München verfolgte knapp elftausend Erwachsene über achteinhalb Jahre und verglich BMI, Taille-Hüft-Verhältnis und Taille-zu-Größe-Verhältnis daraufhin, wie gut sie Herz-Kreislauf-Erkrankungen und Sterblichkeit vorhersagen. Das Taille-zu-Größe-Verhältnis schnitt am besten ab.
+
+Bei Kindern zeigt sich dasselbe. Eine britisch-finnische Untersuchung begleitete über siebentausend Kinder ab dem neunten Lebensjahr bis ins Erwachsenenalter und verglich beide Maße mit dem, was eine Röntgenmessung der Körperzusammensetzung tatsächlich ergab. Das Taille-zu-Größe-Verhältnis stimmte besser überein — beim BMI kommt es bei Kindern zu Überdiagnosen, weil er Fettmasse und Muskelmasse nicht auseinanderhalten kann.
+
+Und die Umstellung hat den Bereich der Fachliteratur längst verlassen. Am 17. Juli 2025 kündigte der Gemeinsame Bundesausschuss an, die Kostenübernahme für Fettabsaugungen bei Lipödem im BMI-Bereich zwischen 32 und 35 an ein Taille-zu-Größe-Verhältnis im Normalbereich zu koppeln. Eine deutsche Behörde macht damit eine Kassenleistung nicht allein vom BMI abhängig, sondern verlangt zusätzlich das Maßband.
+
+Es wäre allerdings falsch, den einen Wert gegen den anderen auszuspielen. Die beiden messen verschiedene Dinge und ergänzen sich: Der BMI ordnet das Gewicht ein, das Taille-zu-Größe-Verhältnis die Verteilung. Wer beides kennt, weiß mehr als jemand, der nur eine der beiden Zahlen hat.
+
+Und beim Messen gilt dieselbe Sorgfalt wie überall in diesem Artikel. Der Taillenumfang wird morgens gemessen, nüchtern, im Stehen, nach normalem Ausatmen, zwischen unterem Rippenbogen und Beckenkamm. Die Körpergröße ebenfalls morgens — der Körper ist abends ein bis zwei Zentimeter kleiner als nach dem Aufstehen. Wer beides zu unterschiedlichen Tageszeiten misst, produziert eine Abweichung, die größer sein kann als der Unterschied zwischen zwei Kategorien.
+
+## Der Streit, ob Übergewicht überhaupt schadet
+
+2013 veröffentlichte eine Arbeitsgruppe um **Katherine Flegal** von den amerikanischen Centers for Disease Control eine Meta-Analyse im *Journal of the American Medical Association*, die dem gesamten Gebäude widersprach: Menschen mit leichtem Übergewicht hatten darin die **geringste** Sterblichkeit — geringer als Normalgewichtige.
+
+Der Befund bekam einen Namen, das **Adipositas-Paradoxon**, und er wurde weltweit aufgegriffen. Wer je gehört hat, ein paar Kilo zu viel seien im Alter gesünder, hört ein Echo dieser Arbeit.
+
+Drei Jahre später kam der Gegenschlag. Die **Global BMI Mortality Collaboration** veröffentlichte 2016 im *Lancet* eine Auswertung, die das Paradoxon nicht bestätigen konnte — sobald man Raucher und bereits Erkrankte herausrechnete. Ihre Zahlen sind unmissverständlich: Ein Wert zwischen 25 und 27,5 ging bereits mit einem um sieben Prozent erhöhten Sterberisiko einher, zwischen 27,5 und 30 mit zwanzig Prozent, zwischen 30 und 35 mit fünfundvierzig, zwischen 35 und 40 mit vierundneunzig. Ab 40 war das Risiko eines vorzeitigen Todes verdreifacht.
+
+Konkret heißt das: Von den Männern mit Adipositas ersten Grades starben 29,5 Prozent vor dem siebzigsten Geburtstag — bei Normalgewichtigen waren es 19 Prozent.
+
+Wie lässt sich der Widerspruch auflösen?
+
+**Erstens über die Auswahl der Untersuchten.** Wer bereits krank ist, hat oft schon Gewicht verloren — die Krankheit senkt das Gewicht, nicht das niedrige Gewicht verursacht den Tod. Rechnet man diese Gruppe heraus, verschwindet ein großer Teil des Effekts. Genau das ist der methodische Kern des Streits.
+
+**Zweitens gilt das Paradoxon offenbar nur für bereits Erkrankte.** Bei Patienten mit Herzerkrankungen finden Studien tatsächlich einen Vorteil für höheres Gewicht. Nur folgt daraus nichts für Gesunde: Es ist günstiger, die Krankheit durch Normalgewicht zu vermeiden, als sie zu bekommen und dann mit Übergewicht etwas länger zu überleben.
+
+**Drittens ist ein Alterseffekt real, aber kleiner als gedacht.** Eine Meta-Analyse über zehn Millionen Menschen fand in allen Altersgruppen denselben parabelförmigen Zusammenhang, nur verschoben: Der günstigste Wert lag bei den 35- bis 49-Jährigen bei 22, bei den 70- bis 89-Jährigen bei 24. Und die Kurve verläuft im Alter flacher — pro fünf Punkte stieg das Risiko bei den Jüngeren um 52 Prozent, bei den Ältesten nur um 21.
+
+Die Deutsche Gesellschaft für Ernährung zieht daraus eine praktische Folgerung und nennt für Menschen ab fünfundsechzig einen Bereich von 22 bis 27 als günstig — mit dem ausdrücklichen Hinweis, dass Untergewicht im Alter das ernstere Risiko ist, weil Muskelmasse und Reserven fehlen.
+
+Damit steht am Ende dieselbe Erkenntnis wie überall in diesem Artikel: Die Zahl bedeutet nicht in jedem Lebensabschnitt dasselbe. Ein Wert von 26 ist mit fünfundsiebzig etwas anderes als mit fünfundzwanzig — und die Grenze bei 25 kennt diesen Unterschied nicht.
 
 ## 2023: die Ärzteschaft rudert zurück
 
@@ -250,5 +358,55 @@ ist es nur ein grober Wert, der für mich keinerlei Bedeutung hat.
     titel: 'Wikipedia: Body-Mass-Index',
     url: 'https://de.wikipedia.org/wiki/Body-Mass-Index',
     hinweis: 'Belegt die Entwicklung durch Quetelet 1832 sowie Keys’ Einschränkung auf den statistischen Vergleich von Populationen.',
+  },
+  {
+    titel: 'Nick Trefethen: New BMI (New Body Mass Index), University of Oxford',
+    url: 'https://people.maths.ox.ac.uk/trefethen/bmi.html',
+    hinweis: 'Der Leserbrief an den Economist vom 5. Januar 2013 im Wortlaut, die Formel mit Exponent 2,5 \u2014 und Trefethens eigener Hinweis, dass sie nicht auf epidemiologischen Studien beruht und moeglicherweise keine Verbesserung ist.',
+  },
+  {
+    titel: 'Assessment of a proposed BMI formula in predicting body fat percentage among Filipino young adults',
+    url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7738554/',
+    hinweis: 'Vergleich beider Formeln an 190 jungen Erwachsenen: Die herkoemmliche Formel sagte den Koerperfettanteil besser voraus als die vorgeschlagene, der Unterschied war nicht signifikant.',
+  },
+  {
+    titel: 'Diana Thomas u. a.: Origins of the Metropolitan Life height and weight tables',
+    url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC3953878/',
+    hinweis: 'Aufbau der Tabellen von 1942, 1943 und 1959: Grundlage waren Versicherte im Alter 20 bis 29, drei Koerperbau-Kategorien ohne Anleitung zu deren Bestimmung.',
+  },
+  {
+    titel: 'Halls: Metropolitan Life ideal weight tables',
+    url: 'https://halls.md/met-life-ideal-weight/',
+    hinweis: 'Zur Herkunft des Worts ideal: In den Veroeffentlichungen hiessen die Werte desirable; ideal setzte sich erst im Sprachgebrauch durch.',
+  },
+  {
+    titel: 'Waist-to-Height Ratio \u2014 Uebersicht, Grenzwerte und Studienlage',
+    url: 'https://de.wikipedia.org/wiki/Waist-to-Height_Ratio',
+    hinweis: 'Altersgestaffelte Grenzwerte; LMU-Studie mit knapp 11.000 Probanden ueber achteinhalb Jahre; Ankuendigung des Gemeinsamen Bundesausschusses vom 17. Juli 2025 zur Kopplung der Liposuktion bei Lipoedem an den WHtR.',
+  },
+  {
+    titel: 'Gelbe Liste: Taillenumfang-Groesse-Verhaeltnis besser als Body-Mass-Index',
+    url: 'https://www.gelbe-liste.de/paediatrie/taillenumfang-groesse-verhaeltnis-vs-bmi',
+    hinweis: 'Britisch-finnische Untersuchung an ueber 7.000 Kindern ab dem neunten Lebensjahr: bessere Uebereinstimmung mit der DEXA-Messung als der BMI; beim BMI kommt es bei Kindern zu Ueberdiagnosen.',
+  },
+  {
+    titel: 'Global BMI Mortality Collaboration, The Lancet 2016 \u2014 Berichterstattung des Deutschen Aerzteblatts',
+    url: 'https://www.aerzteblatt.de/news/studie-widerlegt-adipositas-paradoxon-sterberisiko-steigt-bereits-bei-leichtem-uebergewicht-7bb97a80-eb09-4422-ae68-09d3d5de775d',
+    hinweis: 'Kein Adipositas-Paradoxon nach Ausschluss von Rauchern und Vorerkrankten; die Risikowerte je BMI-Stufe und der Vergleich mit der Meta-Analyse von Flegal (JAMA 2013).',
+  },
+  {
+    titel: 'Adipositas-Paradoxon \u2014 Einordnung der Hypothese',
+    url: 'https://de.wikipedia.org/wiki/Adipositas-Paradoxon',
+    hinweis: 'Der Effekt zeigt sich nur bei bereits Erkrankten; fuer Gesunde folgt daraus nichts. Enthaelt auch das Beispiel eines BMI von 30 bei sehr hoher Muskelmasse.',
+  },
+  {
+    titel: 'DVGS: BMI und Sterblichkeit \u2014 Meta-Analyse ueber 10 Millionen Menschen',
+    url: 'https://bildung.dvgs.de/zusammenhang-von-bmi-und-sterblichkeit-personalisierte-meta-analyse-ueber-10-millionen-menschen/',
+    hinweis: 'Guenstigster Wert verschiebt sich von 22 bei den 35- bis 49-Jaehrigen auf 24 bei den 70- bis 89-Jaehrigen; Risikoanstieg je fuenf Punkte 52 gegenueber 21 Prozent.',
+  },
+  {
+    titel: 'BMI-Klassifikation nach Alter, KiGGS-Perzentilen und DGE-Empfehlung',
+    url: 'https://www.klinikkosten.de/tabellen/bmi-tabelle/',
+    hinweis: 'Fuer 0 bis 17 Jahre gelten alters- und geschlechtsspezifische Perzentilen nach den KiGGS-Referenzwerten des Robert Koch-Instituts; die DGE nennt fuer Menschen ab 65 einen Bereich von 22 bis 27.',
   },
 ]} />
