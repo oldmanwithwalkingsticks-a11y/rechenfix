@@ -5,8 +5,9 @@
  *
  * W53 — Zuständigkeit dieser Route: standardmäßig NUR Instagram + Facebook.
  * TikTok läuft über die eigene Route /api/cron/social-post-tiktok (05 UTC),
- * weil der 24-Stunden-Creator-Cap von PostPeers API-Client um 17 UTC (US-
- * Stoßzeit) blockiert. Der manuelle Re-Trigger kann die Zuständigkeit per
+ * weil TikToks 24-Stunden-Creator-Cap bei PostPeer um 17 UTC (US-Stoßzeit)
+ * blockierte; seit dem Anbieterwechsel (W59) bleibt die Trennung bestehen.
+ * Der manuelle Re-Trigger kann die Zuständigkeit per
  * ?platforms= überschreiben (z. B. ?platforms=tiktok oder
  * ?platforms=instagram,facebook). Fehlt der Parameter, gilt IG+FB.
  *

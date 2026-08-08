@@ -26,9 +26,19 @@ export const TIKTOK_TAKT_START = '2026-08-06';
 /**
  * W52 — TikTok postet nur jeden zweiten Tag, gerechnet ab TIKTOK_TAKT_START.
  *
- * Grund: PostPeer-Gratistarif liefert 20 Credits/Monat bei 1 Credit je Post;
- * täglich wären ~30 nötig. Zwei-Tage-Takt ergibt ~15 Posts und lässt Luft für
- * manuelle Re-Trigger nach Fehlschlägen.
+ * Grund ist das Post-Kontingent des Gratistarifs: 20 Posts je Abrechnungszyklus
+ * bei 1 Post je Veröffentlichung; täglich wären ~30 nötig. Der Zwei-Tage-Takt
+ * ergibt ~15 und lässt Luft für manuelle Re-Trigger nach Fehlschlägen.
+ *
+ * W66 — Die Grenze ist anbieterunabhängig: Sie galt bei PostPeer und gilt bei
+ * bundle.social unverändert. Der Anbieterwechsel (W59) berührt den Takt deshalb
+ * NICHT. Wer den Takt aufheben will, braucht einen bezahlten Tarif, keinen
+ * anderen Anbieter.
+ *
+ * Der Abrechnungszyklus läuft ab Registrierungsdatum, nicht kalendarisch —
+ * belegt durch einen 402 „Not enough credits" am 02.08.2026, also an Tag zwei
+ * eines Kalendermonats. Zyklusgrenze bei bundle.social daher um den 06./07.
+ * jedes Monats.
  *
  * Gerechnet wird in ganzen Tagen seit dem Starttag, NICHT über die Parität des
  * Monatstags: Bei Monatstag-Parität entstünde an jedem 31. ein Doppel- bzw.

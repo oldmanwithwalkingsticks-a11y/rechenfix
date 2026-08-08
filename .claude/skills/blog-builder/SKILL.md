@@ -5,7 +5,7 @@ description: Technik-Vorlage und Verifikations-Checkliste zum Ausrollen von Blog
 
 # Blog Builder für rechenfix.de
 
-**Stand: v5 (05.08.2026, verifiziert an HEAD `56acc07`).** Rollt Blogartikel für das deutsche Rechner-Portal rechenfix.de technisch sauber aus. Deckt die **wiederkehrende Mechanik** ab: MDX-Andockpunkte, Grafik-Komponenten-Konvention, Dark-Mode, Quellen, eingebettete Rechner, Verifikations-Checkliste, Build-Prompt-Struktur für Code-Claude.
+**Stand: v7 (08.08.2026, verifiziert an HEAD `97820c1`).** Rollt Blogartikel für das deutsche Rechner-Portal rechenfix.de technisch sauber aus. Deckt die **wiederkehrende Mechanik** ab: MDX-Andockpunkte, Grafik-Komponenten-Konvention, Dark-Mode, Quellen, eingebettete Rechner, Verifikations-Checkliste, Build-Prompt-Struktur für Code-Claude.
 
 **v4-Nachtrag (05.08.2026 — nach Artikel 9 „Zeitvereinheitlichung", Welle 55):** Der Build-Prompt ließ **KI-Metadaten Ebene 3** (XMP in der Datei) weg und behauptete, die KI-Kennzeichnung entstehe vollständig automatisch. Code-Claude stoppte vor dem Commit — sonst wäre `zeit.mp4` auf Dateiebene ungekennzeichnet live gegangen. Kodifiziert in: „Die drei Ebenen sind nicht gleich automatisch" (unten im KI-Metadaten-Abschnitt), einem Pflichtschritt + STOP-Bedingung + Generator-Spalte in „Build-Prompt-Struktur", und der Regel, dass der **Generatorname eine Tatsachenangabe ist** (Chat-Claude liefert ihn mit den Assets; Code-Claude rät ihn nie und übernimmt ihn nicht aus der Tabelle anderer Artikel).
 
@@ -44,6 +44,14 @@ Artikel 3 lief mit **einer** Ausrollwelle durch (Welle 32) — die v2-Checkliste
 ## v5-Nachtrag (05.08.2026 — nach Artikel 10 „Pfund")
 
 **Titelbild-Varianten:** `image_count: 2` in EINEM Generator-Aufruf liefert keine zwei Bildideen, sondern zwei Ausschnitte derselben Interpretation. Beobachtet bei den Titelbildern zu Artikel 9 (zwei Bahnhofsuhren) und 10 (Balkenwaage) — die zweite Fassung war jeweils nur etwas näher herangezoomt. Ab jetzt: **zwei getrennte Aufrufe mit verschieden komponierten Motiven.** Gleiche Credits, echte Auswahl. Kodifiziert unten im Titelbild-Abschnitt.
+
+## v6-Nachtrag (06.08.2026 — nach Artikel 10 „Pfund" und dem Ausbau der Artikel 4 und 8)
+
+Drei Lehren, alle aus Prompt- oder Vorlagenfehlern von Chat-Claude, die Code-Claude gefangen hat:
+
+1. **Gerade Anführungszeichen in SVG-Grafiken brechen den Build.** `react/no-unescaped-entities` schlägt bei `"` als sichtbarem JSX-Text zu. Läuft lokal durch `tsc`, bricht aber bei `next build` → Vercel rot. Kodifiziert unten in der Grafik-Konvention, samt der Prüfung, die dafür taugt.
+2. **STOP-Bedingungen nicht an einen Commit-Hash hängen.** `git log -1 -- <pfad>` liefert den letzten Commit auf die *Datei*, nicht den Repo-HEAD. Statt eines Hashes prüft ein Diff direkt die Eigenschaft, um die es geht.
+3. **Prüfbefehle gehören in die Umgebung, in der sie laufen sollen.** Bash für Code-Claude, PowerShell für Karsten. Ein Bash-Snippet, das Karsten kopiert, scheitert an PowerShell-Syntax.
 
 ## Tech Stack (verifiziert an HEAD c9b966d–26636e6)
 
@@ -156,6 +164,34 @@ export default function Grafik() {
 - `tri-run` (oder analoge Klasse) nur gesetzt, wenn `sichtbar` → Startzustand bleibt sichtbar, bis reingescrollt wird.
 - Replay-Knopf setzt `sichtbar=true` (falls Knopf vor Scroll gedrückt) + erhöht `key` (Remount → Neustart).
 - `@media (prefers-reduced-motion: reduce)` im CSS zeigt sofort den Endzustand.
+
+### Gerade Anführungszeichen brechen den Build (Lehre Welle 56)
+
+In SVG-Grafikkomponenten darf im **sichtbaren Text** kein gerades `"` stehen. Die Regel `react/no-unescaped-entities` bricht `next build` — und zwar nur dort: `tsc` und die lokale Typprüfung laufen durch, der Fehler taucht erst beim Build auf und macht den Vercel-Deploy rot.
+
+Betroffen ist ausschließlich Text zwischen `>` und `<`, also der Inhalt von `<text>`, `<title>`, `<desc>` und JSX-Kindern. In **Attributwerten** (`fill="#9ca3af"`) sind gerade Anführungszeichen selbstverständlich korrekt.
+
+**Richtig:** typografische Anführungszeichen `„…"` im deutschen Text.
+**Falsch:** `„…"` mit geradem Schlusszeichen.
+
+In Welle 56 waren genau vier Stellen betroffen, und in **allen vier** war das öffnende `„` korrekt und nur das schließende gerade — beim Schreiben wird die Anführung bewusst gesetzt und der Abschluss aus Gewohnheit getippt. Beim Prüfen also besonders auf Schlusszeichen achten.
+
+#### Die Prüfung muss mehrzeilig sein
+
+Ein zeilenweiser Grep findet den Fehler nur, wenn der Text in einer Zeile steht. Steckt er in einem umbrochenen Absatz, wird er übersehen — in Welle 56 fand der einzeilige Grep drei von vier Fällen, der Linter alle vier. Deshalb über JSX-Textknoten prüfen, nicht über Zeilen:
+
+```python
+import re, io
+for name in [...]:  # alle Grafikdateien der Welle
+    t = io.open(name, encoding='utf-8').read()
+    k = t[t.index('export default'):]        # Kopfkommentar ausklammern
+    n = sum(1 for m in re.finditer(r'>([^<>]*)<', k, re.S) if '"' in m.group(1))
+    print(name, n)                            # erwartet: 0
+```
+
+Der Schnitt bei `export default` klammert den Kopfkommentar aus, in dem gerade Anführungszeichen unproblematisch sind.
+
+Gilt sinngemäß auch für `'` als Apostroph im sichtbaren Text — dieselbe Lint-Regel, bisher aber nicht aufgetreten.
 
 ## Dark-Mode-Checkliste für SVG-Grafiken (die zentrale Fehlerquelle)
 
@@ -340,15 +376,100 @@ Unverändert gültig: **rohes `<video>` in MDX funktioniert nicht**, poster imme
 
 ## Kling: Bewegung muss aus der Handlung kommen
 
-**Lehre aus zwei verworfenen Videos.** Prompts wie „alles bleibt vollkommen still, nichts bewegt sich, nur langsame Kamerafahrt" erzeugen einen Ken-Burns-Zoom auf das Startbild — kein Video. Das war eine Überreaktion auf das Göpel-Problem (verformte Mechanik).
+> **v7-Warnung: Diese Lehre stand bereits in v6 und wurde in Welle 65 trotzdem gebrochen.**
+> Der Videoprompt lautete sinngemäß „nichts bewegt sich außer der Kamera" — heraus kam wieder
+> ein Kameraschwenk ohne Handlung, den Karsten zurückgab. Zusätzlich wurden `turbo` und
+> 5 Sekunden verwendet, obwohl unten ausdrücklich anderes steht. **Vor jedem Videoaufruf
+> diesen Abschnitt lesen, nicht aus dem Gedächtnis prompten.**
+
+**Der Denkfehler dahinter, damit er nicht wiederkehrt:** Die Regel „Sollzustände ausschreiben
+statt umschreiben" (entstanden am Uhren-Video, wo „die Uhren zeigen unterschiedliche Zeiten"
+scheiterte und „linke Uhr beide Zeiger senkrecht nach oben" funktionierte) gilt für den
+**Bildinhalt** — für das, was im Bild stehen soll. Sie gilt **nicht** für die Handlung. Wer sie
+auf die Handlung überträgt, verbietet dem Modell die Bewegung und bekommt ein Standbild mit
+Kamerafahrt. Beides sauber trennen: Zustände festnageln, Handlung ausschreiben.
+
+Prompts wie „alles bleibt vollkommen still, nichts bewegt sich, nur langsame Kamerafahrt"
+erzeugen einen Ken-Burns-Zoom auf das Startbild — kein Video.
 
 Richtiges Vorgehen:
 
-- **Handlung beschreiben, Kamera ruhig halten.** Nicht „Kamera fährt heran", sondern „Hände legen die Körner in eine Reihe und heben dann den Leisten ins Licht".
-- **`kling-video-v3_0`** statt `kling-video-v3_0_turbo`, wenn echte Bewegung mit Händen oder Mechanik gefragt ist — bessere Elementkonsistenz. `prefer_multi_shots: false` setzen, sonst schneidet das Modell von der Startszene weg.
+- **Handlung beschreiben, Kamera ruhig halten.** Nicht „Kamera fährt heran", sondern „Hände
+  legen die Körner in eine Reihe und heben dann den Leisten ins Licht".
+- **`kling-video-v3_0`** statt `kling-video-v3_0_turbo`, wenn echte Bewegung mit Händen oder
+  Mechanik gefragt ist — bessere Elementkonsistenz. `prefer_multi_shots: false` setzen, sonst
+  schneidet das Modell von der Startszene weg.
 - **10 Sekunden** statt 5, sonst reicht die Zeit für die Handlung nicht.
-- **image-to-video aus dem Standbild**, damit der erste Frame identisch zum poster ist. Vorher immer `who_am_i` — die Modellnamen ändern sich zwischen Sitzungen.
-- Dateigröße im Blick behalten: 10 s bei 1080p landen bei 12–20 MB. Mit Autoplay lädt das fast jeder Leser.
+- **image-to-video aus dem Standbild**, damit der erste Frame identisch zum poster ist. Vorher
+  immer `who_am_i` — die Modellnamen ändern sich zwischen Sitzungen.
+- Dateigröße im Blick behalten: 10 s bei 1080p landen bei 12–20 MB. Mit Autoplay lädt das fast
+  jeder Leser.
+
+## Titelbild und Video sind getrennte Motive (Lehre Welle 65)
+
+Karstens Vorgabe, wörtlich: „Bild und Video sollen nicht gleich sein, gerne immer getrennt
+halten."
+
+Daraus folgen drei Medien-Assets je Artikel, nicht zwei:
+
+| Datei | Inhalt |
+|---|---|
+| `<thema>-titelbild.png` | eigenes Motiv, steht unter der H1 |
+| `<thema>-video-standbild.png` | **anderes** Motiv, dient als `poster` und als erster Frame |
+| `<thema>.mp4` | aus dem Video-Standbild animiert |
+
+**Der `poster` des `Video`-Blocks zeigt nie auf das Titelbild.** Vorbild ist der Meter-Artikel
+(`meter-video-standbild.png`); die älteren Zwei-Asset-Artikel (bmi, cups, euro) sind die
+Ausnahme, nicht die Regel.
+
+Konsequenzen für die Mechanik:
+
+- **Die GENERATOREN-Tabelle bekommt drei Zeilen**, nicht zwei — das Video-Standbild ist ein
+  eigenes generiertes Medium und braucht seine eigene XMP-Kennzeichnung.
+- **In den Build-Prompt gehört eine STOP-Bedingung darauf**, dass der `poster` nicht auf das
+  Titelbild umgebogen wird. In Welle 65 hat genau diese Bedingung einen Fehler gefangen.
+- Beim Wechsel des Titelbild-Motivs nach der Auswahl durch Karsten **müssen `alt` und
+  `caption` mitgeändert werden** — sie beschreiben das Motiv, nicht den Artikel.
+
+## Geänderte Quelldateien bekommen einen NEUEN Namen (Lehre Welle 65)
+
+Die Regel galt bisher nur für Prompt-Dateien. Sie gilt für **jede** Quelldatei, die an Karsten
+und weiter an Code-Claude geht — `page.mdx`, Ausbaudateien, Grafiken, `meta.ts`.
+
+**Was in Welle 65 passierte:** Die `page.mdx` wurde geliefert, Karsten lud sie herunter. Danach
+wählte er ein anderes Titelbild-Motiv, woraufhin `alt`, `caption` und `poster` geändert wurden —
+unter demselben Dateinamen. Karsten reichte die bereits heruntergeladene, alte Fassung an
+Code-Claude weiter. Der STOP kam korrekt, kostete aber eine volle Runde.
+
+Das ist dieselbe Fehlerklasse wie in Welle 47a, nur mit einer Artikeldatei statt einem Prompt:
+**Eine überschriebene Datei sieht im Chat aktuell aus und ist es auf Karstens Platte nicht.**
+
+Regel:
+
+- Jede Änderung nach dem ersten `present_files` erzeugt einen **neuen Dateinamen** mit
+  sprechendem Zusatz: `page-motivb-final.mdx`, nicht `page.mdx`.
+- Der Build-Prompt nennt **den neuen Namen** in der Quelldateien-Tabelle und weist Code-Claude
+  ausdrücklich an, eine danebenliegende ältere Fassung zu ignorieren.
+- Im Zielpfad heißt die Datei trotzdem wie vorgesehen (`page.mdx`).
+
+## Wortzahl: eine Methode, verbindlich (Lehre Welle 61)
+
+Karstens Vorgabe lautet 3.000+ Wörter Fließtext. Bis Welle 60 wurde unterschiedlich gezählt,
+weshalb Artikel als erledigt galten, die es nach strenger Zählung nicht waren — Terabyte und
+Kalorien lagen bei 2.846 und 2.843 statt der berichteten 3.021 und 3.020.
+
+**Verbindliche Methode:** Gezählt wird ausschließlich Markdown-Prosa zwischen der **ersten
+`##`-Überschrift** und der Zeile `<Quellen`. Ausgeschlossen sind alle Zeilen, die mit `<`
+beginnen oder auf `/>` enden (JSX, Grafiken, Bild, Video, RechnerLoader), sowie die
+Überschriften selbst. Markup wird vor dem Zählen entfernt: `**`, `*`, Backticks, Linkziele.
+
+Der `KarstenSagt`-Block zählt mit, weil sein Text als Markdown-Prosa zwischen den Grenzen
+steht. Das ist beabsichtigt — es ist Fließtext des Artikels.
+
+**Die Zahl wird an der fertigen Datei gemessen, nie geschätzt und nie aus dem Prompt
+übernommen.** Dieselbe Methode gilt für die Rechnerposition (Wörter vor `RechnerLoader` geteilt
+durch Gesamtwörter); Zielkorridor ist rund ein Drittel, gemessene Werte der letzten Wellen
+liegen zwischen 29 und 40 Prozent.
 
 ## Sichtbares Datum (`ArtikelDatum`) — feste Zutat jeder Artikelseite
 
@@ -400,6 +521,35 @@ Jeder Prompt als eigene `.md` in `/mnt/user-data/outputs/`, Konvention `welle<N>
 ### Prompt bei Output-Limit über mehrere Antworten füllen
 
 Große Prompts (voller Grafik-Code + Artikeltext) überschreiten Chat-Claudes Output-Grenze pro Antwort. Datei per `create_file` beginnen, dann per `str_replace` über mehrere Antworten weiterfüllen. Code-Claudes Kontextfenster ist nie der Engpass. Alternativ: den fertigen Artikeltext als separate Referenzdatei mitliefern (`blog-artikel-<N>-<thema>.mdx`) und im Prompt „1:1 kopieren, dann diese Einschübe" anweisen.
+
+### STOP-Bedingungen prüfen Eigenschaften, keine Hashes (Lehre Welle 57)
+
+Beim **Ausbau bestehender Artikel** ersetzt die Ausbaufassung die Datei vollständig. Die STOP-Bedingung muss sicherstellen, dass dabei kein Bestandstext verlorengeht.
+
+**Nicht so:** „Die Zieldatei muss auf Commit `<hash>` stehen." `git log -1 -- <pfad>` liefert den letzten Commit, der **diese Datei** berührt hat — nicht den Repo-HEAD. In Welle 57 stand im Prompt der Repo-HEAD (`5326924`), die Dateien waren aber zuletzt in `f706af7` und `abb42ea` angefasst worden. Die Prüfung konnte nie grün werden.
+
+**Sondern so** — der Diff prüft direkt, worum es geht:
+
+```bash
+diff app/blog/<slug>/page.mdx <ausbaudatei> | grep -c '^<'    # erwartet: 0
+```
+
+Null gelöschte Zeilen heißt: Bestand vollständig erhalten, nur Einfügungen. Das ist robust gegen zwischenzeitliche Commits und veraltet nicht.
+
+Allgemeiner: Eine STOP-Bedingung sollte die **Eigenschaft** prüfen, die gewährleistet sein muss, nicht einen Stellvertreterwert, der zufällig damit korreliert.
+
+### Prüfbefehle gehören in die Umgebung, in der sie laufen
+
+Befehle im Build-Prompt laufen bei **Code-Claude unter Linux/Bash**. Befehle, die **Karsten** ausführen soll, laufen in **PowerShell unter Windows** — dort gibt es kein `grep`, und `<` ist ein reservierter Operator, der einen Parser-Fehler auslöst.
+
+Wenn Chat-Claude Karsten einen Prüfbefehl gibt, muss er in PowerShell-Syntax dastehen, mit echten Pfaden statt Platzhaltern:
+
+```powershell
+(Compare-Object (Get-Content $repo) (Get-Content $ausbau) |
+  Where-Object SideIndicator -eq '<=').Count      # erwartet: 0
+```
+
+Bash-Snippets aus einem Build-Prompt niemals unverändert an Karsten weiterreichen.
 
 ## Quelldateien an Code-Claude übergeben
 

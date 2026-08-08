@@ -3,10 +3,19 @@
  *
  * Schedule: 0 5 * * *  (täglich 05 UTC = 07 Berlin Sommer / 06 Berlin Winter)
  *
- * Warum eigene Route + eigene Zeit: Der 24-Stunden-Creator-Cap von PostPeers
- * API-Client (`reached_active_user_cap`) wird über alle Kunden dieses Anbieters
- * geteilt und ist um 17 UTC (US-Vormittag) vermutlich voll. 05 UTC ist US-Nacht.
- * Messaufbau — bleiben die Fehler auch hier, ist der Cap rund um die Uhr voll.
+ * Warum eigene Route + eigene Zeit (W53): TikToks 24-Stunden-Creator-Cap wird
+ * pro API-Client des Anbieters vergeben und über alle seine Kunden geteilt. Bei
+ * PostPeer war er um 17 UTC (US-Vormittag) regelmäßig voll; die Verlegung auf
+ * 05 UTC (US-Nacht) half nicht.
+ *
+ * W66 — Seit dem Wechsel auf bundle.social (W59) läuft die Route unauffällig:
+ * erster Post am 08.08.2026 sichtbar, kein Eintrag in social:errors. Die 05 UTC
+ * bleiben, weil es keinen Anlass gibt, sie zu ändern — nicht, weil sie als
+ * Lösung erwiesen wären. Der Messaufbau von W53 ist damit erledigt.
+ *
+ * Auswertung ab 20.08. nach docs/audit-arbeitspapiere/
+ * arbeitspapier-tiktok-messvorschrift-2026-08-08.md — dort sind Cap (strukturell),
+ * HTTP 402 (Kontingent) und stiller Ausfall als drei getrennte Fälle beschrieben.
  * IG/FB laufen unverändert um 17 UTC über /api/cron/social-post.
  *
  * Diese Route ist bewusst dünn: dieselbe Auth-, Pause- und Fehlermail-Logik wie
