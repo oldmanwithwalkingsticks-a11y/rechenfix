@@ -45,12 +45,14 @@ export default function Header() {
       <header className="bg-white dark:bg-slate-900 border-b border-gray-100 dark:border-gray-700">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 shrink-0" onClick={() => setMenuOpen(false)}>
+          {/* W70 — min-w-0 statt shrink-0: Wird es eng, weicht der Schriftzug,
+              nicht die Bedienelemente rechts. */}
+          <Link href="/" className="flex items-center gap-2 sm:gap-2.5 min-w-0" onClick={() => setMenuOpen(false)}>
             <Image src="/logo.svg" alt="Rechenfix Logo" width={40} height={40} className="shrink-0 w-10 h-10" priority />
             <div className="flex flex-col">
               <div className="flex items-center gap-0.5">
-                <span className="text-3xl font-extrabold text-primary-600">Rechen</span>
-                <span className="text-3xl font-extrabold text-accent-700 dark:text-accent-400">fix</span>
+                <span className="text-2xl sm:text-3xl font-extrabold text-primary-600">Rechen</span>
+                <span className="text-2xl sm:text-3xl font-extrabold text-accent-700 dark:text-accent-400">fix</span>
                 <span className="text-sm text-gray-600 hidden sm:inline">.de</span>
               </div>
               <span className="text-[11px] tracking-widest uppercase text-gray-600 dark:text-gray-500 font-medium -mt-1">
@@ -59,7 +61,7 @@ export default function Header() {
             </div>
           </Link>
 
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
             {/* Blog — W68: auch auf Mobile sichtbar. Nach dem Muster des KI-Rechner-Buttons
                 daneben zeigt Mobile nur das Symbol, die Beschriftung erscheint ab sm.
                 Vorher war der Link mit hidden sm:flex ganz abgeschaltet und der Blog
@@ -68,7 +70,7 @@ export default function Header() {
               href="/blog"
               onClick={() => setMenuOpen(false)}
               aria-label="Blog"
-              className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl text-sm font-medium transition-all bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+              className="flex items-center gap-2 px-2.5 sm:px-4 py-2 rounded-xl text-sm font-medium transition-all bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
             >
               <span aria-hidden="true">📝</span>
               <span className="hidden sm:inline">Blog</span>
@@ -79,7 +81,7 @@ export default function Header() {
               href="/ki-rechner"
               onClick={() => setMenuOpen(false)}
               aria-label="KI-Rechner"
-              className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl text-sm font-medium transition-all bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+              className="flex items-center gap-2 px-2.5 sm:px-4 py-2 rounded-xl text-sm font-medium transition-all bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
             >
               <span aria-hidden="true">🤖</span>
               <span className="hidden sm:inline">KI-Rechner</span>
@@ -91,7 +93,7 @@ export default function Header() {
                 weil der Daumen dort am leichtesten hinkommt. */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+              className={`flex items-center gap-2 px-2.5 sm:px-4 py-2 rounded-xl text-sm font-medium transition-all ${
                 menuOpen
                   ? 'bg-primary-500 text-white shadow-md'
                   : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
