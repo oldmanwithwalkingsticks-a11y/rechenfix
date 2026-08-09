@@ -1,0 +1,469 @@
+import { generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import StructuredData from '@/components/seo/StructuredData';
+import { artikel } from './meta';
+
+export const metadata = {
+  title: `${artikel.titel} | Rechenfix.de`,
+  description: artikel.beschreibung,
+  alternates: { canonical: 'https://www.rechenfix.de/blog/warum-der-blutdruck-in-millimetern-gemessen-wird' },
+};
+
+<StructuredData data={generateArticleSchema({
+  url: 'https://www.rechenfix.de/blog/warum-der-blutdruck-in-millimetern-gemessen-wird',
+  headline: artikel.titel,
+  description: artikel.beschreibung,
+  datePublished: artikel.datum,
+  dateModified: artikel.datum,
+  image: '/blog/blutdruck-titelbild.png',
+})} />
+
+<StructuredData data={generateBreadcrumbSchema([
+  { name: 'Start', url: '/' },
+  { name: 'Blog', url: '/blog' },
+  { name: artikel.titel, url: '/blog/warum-der-blutdruck-in-millimetern-gemessen-wird' },
+])} />
+
+# Warum der Blutdruck in Millimetern gemessen wird
+
+<ArtikelDatum datum={artikel.datum} />
+
+<Bild src="/blog/blutdruck-titelbild.png" alt="Ein altes Quecksilber-Blutdruckmessgerät mit senkrechter Glasröhre und Stoffmanschette auf einer Holzablage" caption="Das Gerät, auf das sich die Einheit bezieht – und das heute in kaum einer Praxis mehr steht." width={1200} height={675} />
+
+<Infobox titel="Worum es geht">
+Der Blutdruck wird in Millimetern angegeben, obwohl Druck keine Länge ist. Die Angabe stammt
+von einer Quecksilbersäule, deren Höhe man früher tatsächlich ablas. Heute ist die Einheit über
+das Pascal definiert, das Messgerät ist in der EU für den allgemeinen Verkauf verboten – und die
+Zahl blieb trotzdem.
+</Infobox>
+
+## Eine Druckangabe, die eine Länge ist
+
+120 zu 80. Kaum eine Zahl wird häufiger genannt, und kaum jemand denkt darüber nach, was für
+eine Einheit dahintersteht. Ausgeschrieben lautet sie: einhundertzwanzig Millimeter
+Quecksilbersäule.
+
+Das ist auf den ersten Blick unsinnig. Ein Millimeter ist eine Länge, kein Druck. Man kann
+schlecht sagen, der Reifendruck betrage vier Zentimeter oder der Luftdruck einen halben Meter.
+Bei genau einer Größe tun wir aber genau das – und zwar weltweit, in jeder Praxis, in jeder
+Leitlinie, auf jedem Blutdruckmessgerät.
+
+Die Erklärung ist so einfach wie ihre Folgen weitreichend: Die Zahl beschreibt, wie hoch eine
+Säule aus Quecksilber steigt, wenn dieser Druck auf sie wirkt. Sie ist eine Ablesehilfe aus
+einer Zeit, in der man den Druck nicht direkt messen konnte, sondern nur seine Wirkung auf eine
+Flüssigkeit. Und sie hat das Gerät, dem sie ihren Namen verdankt, überlebt.
+
+## Neunzig Jahre vorher: warum Quecksilber überhaupt
+
+Bevor jemand Blutdruck maß, war die Idee schon da, einen Druck als Höhe einer Quecksilbersäule
+auszudrücken. Sie stammt aus einem ganz anderen Zusammenhang – aus dem Ärger mit Saugpumpen.
+
+Bergleute und Brunnenbauer kannten das Problem seit Langem: Eine Saugpumpe holt Wasser nur bis
+zu einer bestimmten Tiefe herauf, danach reißt die Säule ab. Die Grenze liegt bei rund zehn
+Metern. Die zeitgenössische Erklärung lautete, die Natur scheue das Leere, aber offenbar nur bis
+zu einem gewissen Grad – eine Aussage, die niemanden befriedigte.
+
+Evangelista Torricelli fand 1643 die richtige Erklärung, und zwar mit einem Kunstgriff, der uns
+inzwischen vertraut vorkommt: Er ersetzte das Wasser durch etwas Schwereres. Er füllte ein
+etwa meterlanges, an einem Ende verschlossenes Glasrohr mit Quecksilber, verschloss die Öffnung
+mit dem Finger, stellte es umgekehrt in eine Schale mit Quecksilber und ließ los. Die Säule sank
+ab – aber nicht ganz. Sie blieb bei rund **760 Millimetern** stehen, darüber blieb ein leerer
+Raum.
+
+Seine Deutung war so einfach wie neu: Nicht die Natur hält die Säule oben, sondern das Gewicht
+der Luft, die auf die Schale drückt. In einem Brief formulierte er es in einem Satz, der später
+oft zitiert wurde – wir lebten untergetaucht am Grund eines Meeres aus Luft, von dem
+zweifelsfrei bekannt sei, dass es Gewicht habe.
+
+Zwei Dinge daran zählen für unsere Geschichte. Erstens: Torricelli maß einen Druck, indem er
+eine Länge ablas – exakt das Verfahren, das der Blutdruck bis heute in seinem Namen trägt.
+Zweitens: Er nahm Quecksilber aus demselben Grund, aus dem es später in die Arztpraxis kam. Mit
+Wasser hätte er ein Rohr von über zehn Metern gebraucht; mit Quecksilber genügten
+sechsundsiebzig Zentimeter. Das Verhältnis ist dasselbe wie bei Blut und Quecksilber, nur eine
+Spur größer.
+
+Aus dieser Säule stammt übrigens auch die zweite Einheit, die uns gleich noch begegnet: Ein Torr
+ist definiert als ein Siebenhundertsechzigstel des Luftdrucks – also genau ein Millimeter von
+Torricellis Säule.
+
+## Der Pfarrer, die Stute und zweieinhalb Meter Blut
+
+Die Geschichte beginnt nicht mit Quecksilber, sondern mit Blut, und sie ist unangenehm zu
+lesen.
+
+Stephen Hales war anglikanischer Landpfarrer in Teddington bei London und zugleich Mitglied der
+Royal Society. Er wollte wissen, mit welcher Kraft das Blut in den Adern steht. Da es kein
+Messgerät dafür gab, baute er eines aus dem, was da war. In seinem Werk *Haemastaticks*
+beschreibt er den Versuch selbst: Er ließ eine Stute lebend auf den Rücken binden, öffnete ihr
+die Oberschenkelarterie etwa drei Zoll vor dem Bauch, setzte ein Messingröhrchen von einem
+Sechstel Zoll Durchmesser ein und steckte darauf ein Glasrohr von neun Fuß Länge.
+
+Dann löste er die Abbindung. Das Blut stieg im Rohr auf **acht Fuß und drei Zoll** senkrecht
+über der Höhe der linken Herzkammer – und, wie er festhielt, es erreichte diese Höhe nicht auf
+einmal, sondern stieg und fiel mit jedem Pulsschlag um zwei, drei oder vier Zoll.
+
+Acht Fuß drei Zoll sind 2,51 Meter. Damit war zum ersten Mal gezeigt, dass der Blutdruck keine
+unbestimmte Lebenskraft ist, sondern eine messbare Größe – mit einem oberen und einem unteren
+Wert, weil die Säule im Takt des Herzens schwankte. Systole und Diastole standen in diesem
+Glasrohr, siebzig Jahre bevor jemand sie am Menschen ablesen konnte.
+
+Wann genau der Versuch stattfand, geht in den Darstellungen auseinander. *Haemastaticks*
+erschien 1733, aber die Versuche liegen davor: Eine Quelle datiert den Beginn auf vermutlich
+Dezember 1710, eine andere auf Dezember 1727, eine dritte schreibt, das Buch sei zweiundzwanzig
+Jahre nach dem ersten Experiment erschienen – also 1711. Auch das Alter der Stute schwankt
+zwischen zehn und vierzehn Jahren. Die Zahl 1733 in den meisten Darstellungen ist damit das
+Erscheinungsjahr, nicht das Versuchsjahr.
+
+## Warum nicht in Metern Blut gerechnet wird
+
+An dieser Stelle könnte man fragen, warum wir den Blutdruck heute nicht in Zentimetern Blut
+angeben. Die Antwort steckt in einer einfachen Rechnung.
+
+Der Druck einer Flüssigkeitssäule hängt von zwei Dingen ab: ihrer Höhe und ihrer Dichte. Blut
+hat eine Dichte von etwa 1,055 Gramm je Kubikzentimeter, Quecksilber von 13,6 – es ist knapp
+dreizehnmal schwerer. Für denselben Druck braucht man deshalb eine knapp dreizehnmal höhere
+Blutsäule.
+
+Konkret: Ein systolischer Wert von 120 mmHg entspricht **1,55 Metern Blut**. Der diastolische
+Wert von 80 entspricht immer noch 1,03 Metern. Ein Messgerät, das mit Blut arbeitet, müsste
+also anderthalb Meter hoch sein – für einen normalen Wert. Bei Bluthochdruck käme man in
+Bereiche, für die man eine Leiter bräuchte.
+
+<SaeulenVergleich />
+
+Mit Quecksilber passt dieselbe Angabe in zwölf Zentimeter. Ein Gerät von Unterarmlänge genügt,
+es steht auf jedem Tisch, und man kann die Skala direkt aufdrucken. Die Wahl des Quecksilbers
+ist damit keine medizinische Entscheidung, sondern eine bautechnische.
+
+Umgekehrt lässt sich Hales' Messung in die heutige Einheit übersetzen. Ich habe es
+nachgerechnet: 2,51 Meter Blut ergeben bei einer Dichte von 1,055 rund **195 mmHg**. In der
+Fachliteratur findet sich für dieselben 99 Zoll der Wert 186 mmHg – das ist die Rechnung mit
+der Dichte von Wasser statt Blut. Beide Zahlen sind nicht falsch, sie beruhen auf verschiedenen
+Annahmen. Genau diese Abhängigkeit von der Dichte ist die Schwachstelle, die der Einheit bis
+heute anhaftet.
+
+<RechnerLoader slug="blutdruck-rechner" />
+
+## 1828: das U-Rohr, das die Einheit stiftete
+
+Von Hales' Glasrohr zur heutigen Einheit fehlt ein Schritt, und den machte der französische
+Arzt und Physiker Jean Léonard Marie Poiseuille.
+
+Er stellte 1828 in seiner Pariser Doktorarbeit ein Quecksilber-Manometer in U-Form vor, das er
+an die Arterie eines Versuchstiers anschloss. Damit war das Messgerät handlich genug für den
+regelmäßigen Gebrauch – und die abgelesene Größe war von nun an nicht mehr die Höhe einer
+Blutsäule, sondern die einer Quecksilbersäule. Aus diesem Instrument stammt die Einheit, in der
+bis heute gemessen wird.
+
+Poiseuille ist derselbe, nach dem später das Gesetz für die Strömung zäher Flüssigkeiten durch
+Röhren benannt wurde. Sein Manometer war ein Nebenprodukt derselben Frage: Wie bewegt sich Blut
+durch ein Rohrsystem? Die Einheit mmHg ist damit ein Erbstück aus der Strömungslehre, nicht aus
+der Heilkunde.
+
+Was weiterhin fehlte, war die Anwendbarkeit am lebenden Menschen. Poiseuilles Verfahren setzte
+voraus, dass eine Arterie geöffnet wird. Für die Praxis war das keine Option.
+
+## 1896: die Manschette, die aus dem Puls eine Zahl machte
+
+Den Schritt zum Menschen ging der italienische Internist Scipione Riva-Rocci. 1896 beschrieb er
+in einer Turiner Fachzeitschrift ein Gerät, das im Kern noch heute jedem vertraut ist: eine
+aufblasbare Manschette um den Oberarm, ein Gummiball zum Aufpumpen und eine senkrechte
+Quecksilbersäule, die den Druck anzeigt.
+
+Das Verfahren war denkbar schlicht. Die Manschette wurde aufgepumpt, bis der Puls am Handgelenk
+nicht mehr zu tasten war. Dann ließ man den Druck langsam ab und las an der Quecksilbersäule
+den Wert ab, bei dem der Puls wieder erschien. Das war der systolische Druck.
+
+Die eigentliche Leistung liegt nicht in der Mechanik, sondern in der Übersetzung: Aus „harter
+Puls“ und „weicher Puls“ – bis dahin die übliche Beschreibung – wurde eine Zahl in Millimetern.
+Erst damit ließen sich Werte vergleichen, Verläufe verfolgen und Grenzen ziehen.
+
+Der Nachteil war ebenso deutlich: Das Tasten am Handgelenk verrät nur, wann der Puls
+verschwindet und wiederkehrt. Über den **unteren** Wert sagt es nichts. Riva-Roccis Gerät konnte
+den diastolischen Druck nicht messen. Und seine erste Manschette war mit fünf Zentimetern zu
+schmal, was die Werte systematisch zu hoch ausfallen ließ – 1901 verbreiterte der deutsche Arzt
+Heinrich von Recklinghausen sie.
+
+## 1905: 281 Wörter, die den zweiten Wert brachten
+
+Am 8. November 1905 trug ein einunddreißigjähriger russischer Militärchirurg an der
+Kaiserlichen Militärmedizinischen Akademie in Sankt Petersburg eine Beobachtung vor. Nikolai
+Sergejewitsch Korotkow hatte Riva-Roccis Manschette benutzt, aber statt den Puls zu tasten, mit
+einem Stethoskop in der Ellenbeuge gehorcht.
+
+Er stellte fest, dass die abgedrückte Arterie zunächst still ist. Lässt man den Druck ab,
+tauchen Geräusche auf – und verschwinden bei weiterem Ablassen wieder. Der Punkt des Auftauchens
+markiert den systolischen, der des Verschwindens den diastolischen Druck. Sein Bericht darüber
+umfasste 281 Wörter.
+
+Damit war das Verfahren vollständig, das bis heute als Bezugsmaßstab gilt: Manschette nach
+Riva-Rocci, Töne nach Korotkow, abgelesen an einer Quecksilbersäule. In der Fachsprache heißt es
+schlicht RRK-Messung.
+
+Auch hier gibt es die üblichen Unschärfen. Eine amerikanische Patentschrift datiert Korotkows
+Beschreibung auf 1904 und schreibt die Methode dann noch dazu einem falsch geschriebenen
+„Rivi-Roci“ zu. Die Jahreszahl 1905 und der Vortrag im November sind dagegen durch die
+Fachliteratur gut belegt.
+
+<Video src="/blog/blutdruck.mp4" poster="/blog/blutdruck-video-standbild.png" caption="Pumpen, ablesen, ablassen – der Vorgang, aus dem die Einheit stammt." />
+
+## Warum der Arm auf Herzhöhe liegen muss
+
+Hales' Glasrohr erklärt nebenbei eine Vorschrift, die bei jeder Messung genannt und oft
+übergangen wird: Der Arm gehört auf Herzhöhe.
+
+Der Grund ist derselbe hydrostatische Effekt, der das Blut in seinem Rohr steigen ließ. Zwischen
+Herz und Messstelle steht eine Blutsäule, und die drückt mit. Liegt die Manschette tiefer als
+das Herz, addiert sich dieser Druck zum gemessenen Wert; liegt sie höher, wird er abgezogen.
+
+Wie viel das ausmacht, lässt sich mit derselben Rechnung wie oben bestimmen. Zehn Zentimeter
+Höhenunterschied entsprechen **7,8 mmHg**. Ein Arm, der zwanzig Zentimeter zu tief liegt, treibt
+den Wert um gut 15 Punkte nach oben; ein locker herabhängender Arm, rund 25 Zentimeter unter
+Herzhöhe, um etwa 19.
+
+Zum Vergleich: Der Unterschied zwischen einem optimalen und einem hochnormalen Blutdruck beträgt
+in der Klassifikation zehn bis zwanzig Punkte. Die Armhaltung allein kann also die Einordnung
+verschieben – nicht wegen einer Eigenheit des Körpers, sondern wegen der Physik einer
+Flüssigkeitssäule, die Stephen Hales 1733 an einer Stute vermessen hat.
+
+Dasselbe gilt für die Manschette selbst. Riva-Roccis erste war fünf Zentimeter breit und maß
+deshalb systematisch zu hoch; von Recklinghausen verbreiterte sie 1901. Heutige Prüfnormen
+schreiben vor, dass die aufblasbare Blase 75 bis 100 Prozent des Armumfangs umschließt und 37
+bis 50 Prozent davon breit ist. Eine zu kleine Manschette an einem kräftigen Arm erzeugt
+denselben Fehler wie vor hundertzwanzig Jahren.
+
+Die Rechnung erklärt auch, warum Geräte fürs Handgelenk als weniger zuverlässig gelten als
+solche für den Oberarm. Es liegt nicht in erster Linie an der Elektronik, sondern an der Lage:
+Der Oberarm liegt beim Sitzen ohnehin ungefähr auf Herzhöhe, das Handgelenk fast nie. Wer es
+nicht bewusst anhebt, misst mit einer zusätzlichen Blutsäule von zwanzig, dreißig Zentimetern —
+und die schlägt mit fünfzehn bis dreiundzwanzig Punkten zu Buche. Am Oberarm kann man diesen
+Fehler kaum machen, am Handgelenk muss man ihn aktiv vermeiden.
+
+## Was das Gerät auf dem Nachttisch tatsächlich misst
+
+Und damit zur letzten Wendung dieser Geschichte, die bei den meisten Menschen zu Hause steht.
+
+Elektronische Blutdruckmessgeräte hören keine Korotkow-Töne. Sie arbeiten oszillometrisch: Die
+Manschette registriert, wie stark der Arterienpuls sie in Schwingung versetzt, während der Druck
+langsam abgelassen wird. Aus diesen Schwingungen entsteht eine Hüllkurve. Der Punkt, an dem sie
+ihr Maximum erreicht, entspricht ungefähr dem mittleren arteriellen Druck.
+
+Nur: Der mittlere Druck ist nicht die Zahl, die auf dem Display steht. Systolischer und
+diastolischer Wert werden aus der Hüllkurve **geschätzt** – üblicherweise über feste
+Verhältniswerte. Der systolische Punkt liegt bei etwa fünfzig Prozent der maximalen Amplitude auf
+der ansteigenden Flanke, der diastolische bei etwa siebzig Prozent auf der abfallenden.
+
+Diese Verhältniswerte sind keine Naturkonstanten. Sie wurden aus Bevölkerungsdaten gewonnen,
+schwanken erheblich zwischen den Geräten und hängen von der Gefäßsteifigkeit und der
+Pulsdruckamplitude des einzelnen Menschen ab. Die verwendeten Algorithmen sind Betriebsgeheimnis
+– in der Fachliteratur heißen sie ausdrücklich nicht offengelegt, teils streng gehütet. Eine
+Übersichtsarbeit formuliert die Konsequenz so knapp wie treffend: Außerhalb der Software des
+jeweiligen Geräts gibt es die oszillometrische Messung gar nicht als einheitliche Größe.
+
+Die Abweichungen sind messbar. Gegenüber der direkten Messung in der Arterie unterschätzen
+automatische Geräte den systolischen Wert im Mittel um acht Punkte, die Abhorchmethode nur um
+drei bis vier. Und eine modellgestützte Analyse kommt zu dem Ergebnis, dass der
+Maximum-Amplituden-Algorithmus streng genommen nicht einmal den mittleren Druck liefert, sondern
+einen gewichteten Mittelwert aus systolischem und diastolischem Wert.
+
+Damit schließt sich der Kreis auf eine fast schon komische Weise. Auf dem Display steht eine Zahl
+in Millimetern einer Quecksilbersäule, die es im Gerät nicht gibt. Sie beschreibt einen Druck,
+den das Gerät nicht direkt gemessen hat. Und sie entsteht aus einer Rechenvorschrift, die der
+Hersteller nicht veröffentlicht. Zuverlässig ist das trotzdem – aber nur, weil jedes Gerät gegen
+die Abhorchmethode geprüft wird, die wiederum auf die Quecksilbersäule zurückgeht.
+
+## Nicht nur Blut
+
+Der Gesetzestext spricht nicht vom Blutdruck allein, sondern vom Druck von Körperflüssigkeiten
+insgesamt. Das ist kein Formulierungszufall: Auch der Augeninnendruck und der Druck des
+Nervenwassers werden in Millimetern Quecksilbersäule angegeben, ebenso der zentrale Venendruck.
+
+Überall dort gilt dieselbe Begründung wie beim Blutdruck. Die Werte stammen aus einer Zeit, in
+der mit Quecksilbersäulen gemessen wurde, sämtliche Grenzwerte sind auf diese Einheit geeicht,
+und ein Wechsel würde jede eingeübte Zahl entwerten. Die Ausnahme im europäischen Einheitenrecht
+ist deshalb bewusst als Fachgebietsausnahme formuliert und nicht als Ausnahme für ein einzelnes
+Messverfahren.
+
+## Die Einheit braucht längst kein Quecksilber mehr
+
+Die ursprüngliche Definition – der Druck, den eine ein Millimeter hohe Quecksilbersäule
+ausübt – klingt handfest, ist es aber nicht. Sie hängt an zwei Größen, die nicht überall gleich
+sind: der Dichte des Quecksilbers, die sich mit der Temperatur ändert, und der örtlichen
+Fallbeschleunigung, die auf einem Berg geringer ist als am Meer. Dieselbe Säule zeigt in
+Helgoland und in Garmisch nicht denselben Druck an.
+
+Die Lösung war dieselbe wie beim amerikanischen Cup und beim Zoll: Man definierte die alte
+Einheit über die neue. Ein Millimeter Quecksilbersäule ist heute festgelegt als exakt
+**133,322387415 Pascal**. Das ist kein Messwert mehr, sondern eine Vereinbarung.
+
+Ein Detail für Genauigkeitsfreunde: Die Einheit ist nicht ganz identisch mit dem Torr, obwohl
+beide oft gleichgesetzt werden. Ein Torr ist definiert als ein Siebenhundertsechzigstel der
+Normatmosphäre, also 101.325 geteilt durch 760 – das ergibt 133,322368421 Pascal. Der
+Unterschied liegt bei rund neunzehn Milliardstel Pascal je Millimeter. Für den Blutdruck ist er
+bedeutungslos, für die Vakuumtechnik nicht.
+
+In Kilopascal ausgedrückt sind 120 zu 80 übrigens 16,0 zu 10,7. Man sieht sofort, warum sich
+das nie durchgesetzt hat: Die Zahlen liegen dichter beieinander, und ein Unterschied, der in
+mmHg zehn Einheiten beträgt, schrumpft auf 1,3.
+
+## Eine Ausnahme, die im Gesetz steht
+
+Für gesetzliche Einheiten gilt in der Europäischen Union die Richtlinie 80/181/EWG. Sie schreibt
+die Einheiten des Internationalen Einheitensystems vor – für Druck also das Pascal. Sie enthält
+aber einen Anhang mit Einheiten, die nur in bestimmten Fachgebieten weiterverwendet werden
+dürfen, und dort steht der Millimeter Quecksilbersäule.
+
+Die Beschränkung ist eng gefasst: erlaubt für die Messung des **Blutdrucks und des Drucks
+anderer Körperflüssigkeiten**. Für alles andere gilt sie nicht. Wer einen Reifendruck oder einen
+Kesseldruck in mmHg angibt, verwendet in der EU keine gesetzliche Einheit.
+
+Das ist eine bemerkenswerte Konstruktion, und sie ist das genaue Gegenstück zum Zoll auf dem
+Fernsehkarton: Dort hält sich eine fremde Einheit ohne rechtliche Grundlage einfach durch
+Gewohnheit. Hier steht die Ausnahme ausdrücklich im Gesetzestext – der Gesetzgeber hat sich
+bewusst dagegen entschieden, die Medizin zum Wechsel zu zwingen.
+
+## Das Gerät ist verboten, die Zahl blieb
+
+Und dann kommt der Teil, der die ganze Sache endgültig kurios macht.
+
+Quecksilber ist giftig. Die Richtlinie 2007/51/EG untersagte deshalb den Verkauf
+quecksilberhaltiger Messgeräte an die Allgemeinheit – ausdrücklich genannt sind
+Fieberthermometer, Manometer, Barometer und Blutdruckmessgeräte. Ausgenommen sind nur Geräte,
+die älter als fünfzig Jahre sind, sowie Barometer zu Dekorationszwecken.
+
+In den Praxen und Kliniken sind die Quecksilbergeräte seither weitgehend verschwunden. Gemessen
+wird heute mit Dosenmanometern oder, weit häufiger, mit elektronischen Geräten, die aus den
+Schwingungen der Manschette auf den Druck schließen.
+
+**Die Einheit hat das Instrument überlebt.** Wir geben den Blutdruck in Millimetern einer Säule
+an, die im Behandlungszimmer nicht mehr steht – und die meisten Geräte, die diese Zahl anzeigen,
+enthalten kein Quecksilber und keine Säule, sondern einen Drucksensor und einen Rechenchip.
+
+Warum niemand wechselt, ist gut nachvollziehbar. Sämtliche Grenzwerte, Studien und
+Behandlungsleitlinien der letzten hundert Jahre sind auf diese Zahlen geeicht. Selbst die
+Prüfnormen für neue Geräte arbeiten damit: Für nicht-quecksilberhaltige Manometer verlangt die
+Norm einen maximal zulässigen Fehler von einem einzigen mmHg. Ein Wechsel auf Kilopascal würde
+jede eingeübte Zahl entwerten – und in der Übergangszeit Verwechslungen erzeugen, deren Preis
+niemand zahlen möchte.
+
+<ZeitleisteBlutdruck />
+
+## Was daraus folgt
+
+Der Blutdruck wird in einer Einheit angegeben, die eine Länge ist, weil man vor knapp zweihundert
+Jahren einen Druck nur als Höhe einer Flüssigkeitssäule ablesen konnte. Die Flüssigkeit war
+Quecksilber, weil Blut für ein handliches Gerät zu leicht ist. Die Einheit wurde später über das
+Pascal neu definiert, weil die ursprüngliche Definition von Temperatur und Ortshöhe abhing. Und
+sie blieb, als das Messgerät verboten wurde, weil zu viele Zahlen an ihr hängen.
+
+Das ist dieselbe Geschichte, die auch die Cup, die Pferdestärke und die Schuhgröße erzählen: Ein
+Maß hält sich nicht, weil es sinnvoll ist, sondern weil zu viel darauf aufbaut. Der Unterschied
+ist, dass es hier gut ausgeht. Die Einheit ist heute exakt definiert, sie ist international
+einheitlich, und sie bedeutet in Krefeld dasselbe wie in Kyoto. Von den Maßen in dieser Reihe ist
+sie die krummste – und zugleich die verlässlichste.
+
+Drei Dinge lassen sich aus der Geschichte für die eigene Messung mitnehmen, und alle drei sind
+Physik, keine Medizin. Erstens: Der Arm gehört auf Herzhöhe, weil zehn Zentimeter Abweichung
+knapp acht Punkte ausmachen – der Fehler ist größer als mancher Unterschied, über den man sich
+danach Gedanken macht. Zweitens: Die Manschette muss zum Armumfang passen, sonst wiederholt man
+den Fehler, den Riva-Rocci 1896 mit seinen fünf Zentimetern machte. Drittens: Zwei Geräte können
+bei derselben Person verschiedene Werte anzeigen, ohne dass eines davon defekt ist – sie rechnen
+mit verschiedenen, nicht veröffentlichten Verhältniswerten. Wer Verläufe vergleichen will, sollte
+deshalb bei einem Gerät bleiben.
+
+Und noch eine Beobachtung am Rande: Von allen Einheiten in dieser Reihe ist der Millimeter
+Quecksilbersäule die einzige, deren Ursprungsgerät aus Gründen des Gesundheitsschutzes verboten
+wurde. Die Schuhgröße hat ihren Leisten überlebt, die Pferdestärke ihr Pferd, die Cup ihre
+Nähmaschine. Der Blutdruck hat sein Quecksilber überlebt – und musste es, weil es giftig war.
+
+Wer die eigenen Werte einordnen möchte, findet im
+[Blutdruck-Rechner](/gesundheit/blutdruck-rechner) die Klassifikation nach den Leitlinien der
+Europäischen Gesellschaft für Hypertonie und der Deutschen Hochdruckliga. Was diese Zahlen im
+Einzelfall bedeuten, gehört allerdings in die Hand einer Ärztin oder eines Arztes – dieser
+Artikel handelt von der Einheit, nicht von der Diagnose.
+
+<KarstenSagt>
+Ich messe meinen Blutdruck gelegentlich selbst. Zunächst mit einem Handgelenkgerät, doch da
+musste ich Ungenauigkeiten feststellen, sodass ich auf ein Oberarmgerät umgestiegen bin.
+
+Ich kenne aber auch noch die alten Geräte aus der Arztpraxis: aufklappbarer Metallkasten,
+Glasröhre, Quecksilber. Wie umständlich das damals war — erst pumpen und dann mit dem
+Stethoskop abhören.
+</KarstenSagt>
+
+<Quellen eintraege={[
+  {
+    titel: 'Stephen Hales: Statical Essays, containing Haemastaticks (1733; 3. Auflage 1738)',
+    url: 'https://www.britannica.com/topic/Haemastaticks',
+    hinweis: 'Die erste direkte Blutdruckmessung. Hales beschreibt den Versuch selbst: Messingröhrchen von einem Sechstel Zoll Durchmesser, Glasrohr von neun Fuß Länge, Blutsäule von 8 Fuß 3 Zoll über der linken Herzkammer, schwankend um zwei bis vier Zoll je Pulsschlag. Britannica ordnet das Werk als wichtigsten Beitrag zur Physiologie des Kreislaufs seit William Harvey ein.',
+  },
+  {
+    titel: 'JMS Pearce: Stephen Hales — the priest who pioneered clinical physiology (Hektoen International)',
+    url: 'https://hekint.org/2017/01/29/stephen-hales-the-priest-who-pioneered-clinical-physiology/',
+    hinweis: 'Zur Person und zur Datierung: Hales begann seine Versuche im Pfarrhaus von Teddington vermutlich im Dezember 1710. Andere Darstellungen nennen 1727 oder leiten aus dem Erscheinungsjahr 1733 abzüglich zweiundzwanzig Jahren das Jahr 1711 ab — die Streuung steht bewusst im Text.',
+  },
+  {
+    titel: 'Springer: The Direct Measurement of Blood Pressure',
+    url: 'https://link.springer.com/chapter/10.1007/978-1-4684-7170-0_1',
+    hinweis: 'Nennt für Hales\u2019 99 Zoll Blutsäule einen mittleren Druck von 186 mmHg — das entspricht einer Umrechnung mit der Dichte von Wasser. Mit der Dichte von Blut (1,055) ergeben sich rund 195 mmHg; beide Werte stehen im Text nebeneinander. Belegt außerdem, dass die Einheit mmHg erst mit Poiseuilles Quecksilber-U-Rohr-Manometer von 1828 entstand.',
+  },
+  {
+    titel: 'Wood Library-Museum of Anesthesiology: Riva-Rocci Sphygmomanometer',
+    url: 'https://www.woodlibrarymuseum.org/museum/riva-rocci-sphygmomanometer/',
+    hinweis: 'Zum Gerät von 1896: fünf Zentimeter breiter Gummibeutel in einer Textilhülle, Ablesung an der senkrechten Quecksilbersäule, systolischer Wert beim Wiederauftreten des tastbaren Radialispulses. Hält fest, dass Heinrich von Recklinghausen 1901 die zu schmale Manschette verbreiterte.',
+  },
+  {
+    titel: 'Circulation: 90th Anniversary of the Development by Nikolai S. Korotkoff of the Auscultatory Method',
+    url: 'https://www.ahajournals.org/doi/10.1161/01.CIR.94.2.116',
+    hinweis: 'Primärnahe Darstellung zur Methode von 1905. Belegt, dass Riva-Roccis Tastverfahren den diastolischen Wert nicht liefern konnte und dass Korotkow dessen Apparat verwendete. Nennt die Maße der von Korotkow benutzten Manschette.',
+  },
+  {
+    titel: 'Healio: This month, 100 years ago — Korotkoff, 8. November 1905',
+    url: 'https://www.healio.com/news/cardiology/20150821/this-month-100-years-ago',
+    hinweis: 'Datiert den Vortrag auf den 8. November 1905 an der Kaiserlichen Militärmedizinischen Akademie in Sankt Petersburg. Eine US-Patentschrift datiert dieselbe Beschreibung abweichend auf 1904 und schreibt den Namen Riva-Roccis falsch — ein Beispiel für die Streuung in Sekundärquellen.',
+  },
+  {
+    titel: 'StatPearls (NCBI Bookshelf): Physiology, Korotkoff Sound',
+    url: 'https://www.ncbi.nlm.nih.gov/books/NBK539778/',
+    hinweis: 'Belegt den Umfang von Korotkows Bericht: 281 Wörter für die Beschreibung der auskultatorischen Methode zur Bestimmung von systolischem und diastolischem Druck.',
+  },
+  {
+    titel: 'Wikipedia: Millimetre of mercury',
+    url: 'https://en.wikipedia.org/wiki/Millimetre_of_mercury',
+    hinweis: 'Zur heutigen Definition: exakt 133,322387415 Pascal, näherungsweise, aber nicht exakt gleich einem Torr (101.325 geteilt durch 760 = 133,322368421 Pascal). Die ursprüngliche Definition über eine reale Quecksilbersäule hing von Temperatur und örtlicher Fallbeschleunigung ab.',
+  },
+  {
+    titel: 'Sizes.com: conventional millimeters of mercury',
+    url: 'https://www.sizes.com/units/mmHg.htm',
+    hinweis: 'Zur Rechtslage: Die Richtlinie 80/181/EWG vom 20. Dezember 1979 erlaubte die Weiterverwendung des Millimeters Quecksilbersäule; spätere Fassungen beschränken sie auf die Messung des Blutdrucks und des Drucks anderer Körperflüssigkeiten. Für andere Anwendungen ist die Einheit nicht zulässig.',
+  },
+  {
+    titel: 'Richtlinie 2007/51/EG zur Beschränkung des Inverkehrbringens quecksilberhaltiger Messgeräte',
+    url: 'https://oeil.europarl.europa.eu/oeil/en/procedure-document-summary/pdf?id=1013999',
+    hinweis: 'Verbietet den Verkauf quecksilberhaltiger Fieberthermometer sowie weiterer an die Allgemeinheit gerichteter Messgeräte, ausdrücklich einschließlich Blutdruckmessgeräten, Manometern und Barometern. Ausgenommen sind Geräte, die älter als fünfzig Jahre sind, sowie Barometer zu Dekorationszwecken.',
+  },
+  {
+    titel: 'AAMI/ESH/ISO Collaboration Statement zur Prüfung von Blutdruckmessgeräten',
+    url: 'https://www.ahajournals.org/doi/10.1161/HYPERTENSIONAHA.117.10237',
+    hinweis: 'Belegt, warum die Einheit bleibt: Referenzmessungen dürfen mit nicht-quecksilberhaltigen Manometern erfolgen, sofern sie die Anforderungen der ISO 81060-1 erfüllen — zulässig ist ein maximaler Fehler von einem einzigen mmHg. Sämtliche Prüf- und Grenzwerte sind auf diese Einheit geeicht.',
+  },
+  {
+    titel: 'Britannica: Mercury barometer',
+    url: 'https://www.britannica.com/technology/mercury-barometer',
+    hinweis: 'Zum Ursprung der Idee, Druck als Höhe einer Quecksilbersäule anzugeben: Torricellis Barometer von 1643/44. Nennt als Anlass die Beobachtung, dass Pumpen und Saugheber Wasser nur rund zehn Meter hoch heben können, und die vorangehenden Versuche Gasparo Bertis mit einer Wassersäule.',
+  },
+  {
+    titel: 'American Physiological Society: Torricelli and the Ocean of Air',
+    url: 'https://journals.physiology.org/doi/full/10.1152/physiol.00053.2012',
+    hinweis: 'Ordnet die Entdeckung des Luftdrucks physiologiegeschichtlich ein und zitiert Torricellis Brief mit dem Bild vom Meer aus Luft, an dessen Grund wir untergetaucht leben. Datiert den Brief auf 1644, während die meisten Darstellungen den Versuch auf 1643 legen.',
+  },
+  {
+    titel: 'Journal of Human Hypertension: Automated oscillometric blood pressure measuring devices — how they work and what they measure',
+    url: 'https://www.nature.com/articles/s41371-022-00693-x',
+    hinweis: 'Zur Funktionsweise heutiger Geräte: Der Punkt maximaler Amplitude der Hüllkurve dient der Schätzung des mittleren arteriellen Drucks; systolischer und diastolischer Wert werden über feste Verhältniswerte von rund 50 beziehungsweise 70 Prozent der Maximalamplitude abgeleitet. Die Algorithmen sind herstellereigen, die optimalen Koeffizienten schwanken erheblich zwischen den Geräten. Gegenüber der direkten Messung in der Arterie unterschätzen automatische Geräte den systolischen Wert im Mittel um acht Punkte, die Abhorchmethode nur um drei bis vier.',
+  },
+  {
+    titel: 'Frontiers in Physiology: Formulas to Explain Popular Oscillometric Blood Pressure Estimation Algorithms',
+    url: 'https://www.frontiersin.org/journals/physiology/articles/10.3389/fphys.2019.01415/full',
+    hinweis: 'Modellgestützte Analyse mit einem überraschenden Befund: Der Maximum-Amplituden-Algorithmus liefert streng genommen nicht den mittleren Druck, sondern einen gewichteten Mittelwert aus systolischem und diastolischem Wert. Hält außerdem fest, dass die festen Verhältniswerte mit Gefäßsteifigkeit und Pulsdruck erheblich schwanken.',
+  },
+]} />

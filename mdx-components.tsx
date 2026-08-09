@@ -28,6 +28,8 @@ import ZweiLaenderZweiCups from '@/components/blog/grafik/ZweiLaenderZweiCups';
 import EckpreiseKrumm from '@/components/blog/grafik/EckpreiseKrumm';
 import QuadratRegel from '@/components/blog/grafik/QuadratRegel';
 import FormateGleicheDiagonale from '@/components/blog/grafik/FormateGleicheDiagonale';
+import SaeulenVergleich from '@/components/blog/grafik/SaeulenVergleich';
+import ZeitleisteBlutdruck from '@/components/blog/grafik/ZeitleisteBlutdruck';
 import SchereDezimalBinaer from '@/components/blog/grafik/SchereDezimalBinaer';
 import ZweiNormen from '@/components/blog/grafik/ZweiNormen';
 import DiskettenRaetsel from '@/components/blog/grafik/DiskettenRaetsel';
@@ -130,6 +132,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     EckpreiseKrumm,
     QuadratRegel,
     FormateGleicheDiagonale,
+    SaeulenVergleich,
+    ZeitleisteBlutdruck,
     SchereDezimalBinaer,
     ZweiNormen,
     DiskettenRaetsel,
