@@ -1,4 +1,5 @@
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
+import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -48,6 +49,7 @@ export default function DatenschutzSeite() {
               <li>Serverseitige, anonyme Nutzungsstatistik (Klicks, Feedback, Berechnungszähler)</li>
               <li>Kontaktaufnahme per E-Mail</li>
               <li>Cookie-Verwaltung über eigenen Consent-Banner</li>
+              <li>Optionale Offline-Nutzung über lokal gespeicherte Websitebestandteile</li>
             </ul>
           </Section>
 
@@ -157,12 +159,66 @@ export default function DatenschutzSeite() {
                     <td className="p-3">Google AdSense</td>
                     <td className="p-3">Art. 6 Abs. 1 lit. a DSGVO</td>
                   </tr>
+                  <tr>
+                    <td className="p-3">Offline-Nutzung</td>
+                    <td className="p-3">Merken Ihrer Entscheidung zur Offline-Funktion (siehe Abschnitt 7a)</td>
+                    <td className="p-3">§ 25 Abs. 1 TDDDG</td>
+                  </tr>
                 </tbody>
               </table>
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
                 Vercel Analytics ist nicht in dieser Tabelle aufgeführt, da der Dienst cookielos arbeitet (siehe Abschnitt 6).
               </p>
             </div>
+          </Section>
+
+          {/* 7a. Offline-Nutzung (Service Worker) */}
+          <Section nr="7a" titel="Offline-Nutzung (Service Worker)">
+            <p>
+              Rechenfix.de bietet die Möglichkeit, Seiten für die Nutzung ohne Internetverbindung auf Ihrem Endgerät zu speichern. Technisch geschieht dies über einen sogenannten <strong>Service Worker</strong> — ein kleines Programm, das Ihr Browser lokal ausführt — sowie über einen zugehörigen Zwischenspeicher.
+            </p>
+
+            <h3 className="font-bold text-gray-800 dark:text-gray-100 mt-6 mb-2">7a.1 Was gespeichert wird</h3>
+            <p>
+              Gespeichert werden ausschließlich Bestandteile dieser Website: Seiteninhalte, Programmcode, Gestaltungsangaben, Bilder und Schriften. <strong>Ihre Eingaben in die Rechner werden nicht gespeichert und nicht übertragen</strong>; sie werden ausschließlich in Ihrem Browser verarbeitet und verlassen Ihr Gerät nicht.
+            </p>
+            <p className="mt-3">
+              Es findet keine Analyse Ihres Nutzungsverhaltens statt, es werden keine Kennungen vergeben, und es werden keine Daten an uns oder an Dritte übermittelt. Die gespeicherten Inhalte verbleiben auf Ihrem Gerät.
+            </p>
+
+            <h3 className="font-bold text-gray-800 dark:text-gray-100 mt-6 mb-2">7a.2 Wann dies geschieht</h3>
+            <p>
+              Beim gewöhnlichen Besuch dieser Website wird <strong>nichts</strong> gespeichert. Die Funktion wird erst aktiv, wenn Sie sie auf der Seite{' '}
+              <Link href="/offline-nutzung" className="text-primary-600 dark:text-primary-400 hover:underline">
+                Offline-Nutzung
+              </Link>{' '}
+              ausdrücklich einschalten, oder wenn Sie Rechenfix zuvor auf Ihrem Startbildschirm abgelegt haben und die Website über dieses Symbol starten.
+            </p>
+
+            <h3 className="font-bold text-gray-800 dark:text-gray-100 mt-6 mb-2">7a.3 Rechtsgrundlage</h3>
+            <p>
+              Für die Aktivierung über den Schalter: Ihre Einwilligung nach <strong>§ 25 Abs. 1 TDDDG</strong>. Beim Start aus dem installierten Zustand: <strong>§ 25 Abs. 2 Nr. 2 TDDDG</strong>, da die Speicherung dann unbedingt erforderlich ist, um den von Ihnen ausdrücklich gewünschten Dienst — die Nutzung ohne Internetverbindung — bereitzustellen.
+            </p>
+            <p className="mt-3">
+              Eine Verarbeitung personenbezogener Daten im Sinne der Datenschutz-Grundverordnung ist mit der Offline-Funktion nicht verbunden. § 25 TDDDG schützt das Endgerät als solches und gilt unabhängig davon, ob ein Personenbezug vorliegt.
+            </p>
+
+            <h3 className="font-bold text-gray-800 dark:text-gray-100 mt-6 mb-2">7a.4 Speicherdauer und Widerruf</h3>
+            <p>
+              Die gespeicherten Inhalte bleiben erhalten, bis sie durch eine neuere Fassung der Website ersetzt werden, bis Sie die Websitedaten in Ihrem Browser löschen oder bis Sie die Funktion abschalten.
+            </p>
+            <p className="mt-3">
+              Sie können die Offline-Nutzung jederzeit auf der Seite{' '}
+              <Link href="/offline-nutzung" className="text-primary-600 dark:text-primary-400 hover:underline">
+                Offline-Nutzung
+              </Link>{' '}
+              wieder abschalten. Dabei werden der Service Worker abgemeldet und sämtliche zugehörigen Zwischenspeicher gelöscht. Der Widerruf ist damit ebenso einfach möglich wie die Erteilung.
+            </p>
+
+            <h3 className="font-bold text-gray-800 dark:text-gray-100 mt-6 mb-2">7a.5 Hinweis zur Aktualität</h3>
+            <p>
+              Solange eine Internetverbindung besteht, wird jede Seite frisch geladen; Sie sehen dann stets den aktuellen Stand. Gespeicherte Fassungen werden ausschließlich dann angezeigt, wenn keine Verbindung erreichbar ist. Da zahlreiche Berechnungen auf gesetzlich festgelegten Werten beruhen, die sich ändern können, sollten Sie Ergebnisse, auf die es ankommt, mit bestehender Verbindung erneut prüfen.
+            </p>
           </Section>
 
           {/* 8. Google AdSense */}

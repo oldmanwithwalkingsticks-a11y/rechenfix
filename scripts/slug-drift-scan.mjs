@@ -74,6 +74,15 @@ const META_ROUTES = new Set([
   // Artikel-Links /blog/<slug> sind dynamisch (Template-Literal) und werden
   // vom Scan nicht als hartkodierte Cross-Links erfasst.
   'blog',
+  // Offline-Nutzung (Welle 69) — neue statische Route app/offline-nutzung/page.tsx,
+  // Einwilligungs-Schalter für den PWA-Service-Worker nach § 25 TDDDG. Aus der
+  // Datenschutzerklärung (Abschnitt 7a) zweimal intern verlinkt, daher als
+  // Meta-Route registriert.
+  'offline-nutzung',
+  // Offline-Rückfallseite (Welle 69) — app/offline/page.tsx, wird vom Service
+  // Worker ausgeliefert, wenn eine Seite weder im Netz noch im Cache vorhanden
+  // ist. Aktuell nicht intern verlinkt; wie 'social' vorsorglich registriert.
+  'offline',
   // Sonder-Targets (Next.js-generated oder Metadata-only Routes)
   'opengraph-image',
   'sitemap.xml',

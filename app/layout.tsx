@@ -21,6 +21,7 @@ import ScrollToTop from '@/components/layout/ScrollToTop';
 import ConsentScripts from '@/components/cookie/ConsentScripts';
 import StructuredData from '@/components/seo/StructuredData';
 import CssLoader from '@/components/CssLoader';
+import PwaStart from '@/components/pwa/PwaStart';
 import { generateWebsiteSchema } from '@/lib/seo';
 import { Analytics } from '@vercel/analytics/next';
 import Script from 'next/script';
@@ -40,7 +41,9 @@ export const metadata: Metadata = {
     icon: [
       { url: '/favicon.svg', type: 'image/svg+xml' },
     ],
-    apple: '/logo.svg',
+    // W69 — iOS braucht für den Startbildschirm ein PNG; SVG wird dort nicht
+    // zuverlässig unterstützt.
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
   title: {
     default: 'Rechenfix.de — Kostenlose Online-Rechner',
@@ -144,6 +147,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </CookieConsentProvider>
         </ThemeProvider>
         <Analytics />
+        <PwaStart />
       </body>
     </html>
   );

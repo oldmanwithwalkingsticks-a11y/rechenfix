@@ -1,4 +1,5 @@
 import createMDX from '@next/mdx';
+import withSerwistInit from '@serwist/next';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -111,4 +112,20 @@ const nextConfig = {
 
 const withMDX = createMDX({});
 
-export default withMDX(nextConfig);
+// W69 — Serwist erzeugt aus app/sw.ts die Datei public/sw.js beim Build.
+//
+// register: false ist ENTSCHEIDEND. Ein Service Worker speichert Dateien auf dem
+// Endgerät; das fällt unter § 25 TDDDG, der kein berechtigtes Interesse kennt. Die
+// Registrierung erfolgt deshalb ausschließlich nach ausdrücklicher Zustimmung
+// (/offline-nutzung) oder im bereits installierten Zustand (components/pwa/PwaStart).
+//
+// In der Entwicklungsumgebung ganz abgeschaltet, sonst überlagert ein alter Worker
+// bei jedem Neustart die frischen Dateien.
+const withSerwist = withSerwistInit({
+  swSrc: 'app/sw.ts',
+  swDest: 'public/sw.js',
+  register: false,
+  disable: process.env.NODE_ENV === 'development',
+});
+
+export default withSerwist(withMDX(nextConfig));

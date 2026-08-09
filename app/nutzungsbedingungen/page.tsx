@@ -61,6 +61,15 @@ export default function NutzungsbedingungenSeite() {
               verbindliche Auskünfte erteilen ausschließlich die jeweils zuständigen Stellen
               (z.&nbsp;B. Finanzamt, Ärzte, Fachberater).
             </p>
+            <p className="mt-4">
+              <strong>Nutzung ohne Internetverbindung.</strong> Wird die optionale Offline-Funktion
+              verwendet, können Seiten aus einem lokalen Zwischenspeicher angezeigt werden. Diese
+              geben den Stand des letzten Besuchs mit bestehender Verbindung wieder. Da zahlreiche
+              Berechnungen auf gesetzlich festgelegten Werten beruhen, die sich insbesondere zum
+              Jahreswechsel ändern, können offline angezeigte Grundlagen und Ergebnisse veraltet
+              sein. Ergebnisse, auf die es ankommt, sind daher mit bestehender Internetverbindung
+              erneut zu prüfen. Bei bestehender Verbindung wird stets die aktuelle Fassung geladen.
+            </p>
           </Section>
 
           {/* 4. Urheberrecht und Nutzung der Inhalte */}

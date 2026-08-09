@@ -84,3 +84,7 @@ next-env.d.ts
 # Lokales Render-Werkzeug: NotoColorEmoji für den Image-Builder
 # (SOCIAL_FONT_EMOJI). Nur lokal, wird NICHT committet.
 .fonts/
+
+# W69 — von Serwist beim Build erzeugt, gehört nicht ins Repo
+public/sw.js
+public/swe-worker-*.js
