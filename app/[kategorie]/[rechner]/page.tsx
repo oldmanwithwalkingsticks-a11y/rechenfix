@@ -13,6 +13,8 @@ import StandHinweis from '@/components/StandHinweis';
 import AuthorBio from '@/components/AuthorBio';
 import RechnerLoader from '@/components/rechner/RechnerLoader';
 import ContentBlockRenderer from '@/components/rechner/ContentBlockRenderer';
+import BlogHinweis from '@/components/blog/BlogHinweis';
+import { getArtikelZuRechner } from '@/lib/blog';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -48,9 +50,14 @@ export function generateMetadata({ params }: Props): Metadata {
   return generateRechnerMetadata(config);
 }
 
-export default function RechnerSeite({ params }: Props) {
+export default async function RechnerSeite({ params }: Props) {
   const config = getRechnerBySlug(params.kategorie, params.rechner);
   if (!config) notFound();
+
+  // W68: Gibt es zu diesem Rechner einen Blogartikel? Die Zuordnung stammt aus der
+  // meta.ts des Artikels; zu den allermeisten Rechnern gibt es keinen, dann bleibt
+  // blogArtikel undefined und BlogHinweis rendert nichts.
+  const blogArtikel = await getArtikelZuRechner(config.slug);
 
 
   const verwandteRechner = getVerwandteRechner(config, 4);
@@ -149,6 +156,9 @@ export default function RechnerSeite({ params }: Props) {
               </div>
             </section>
           )}
+
+          {/* Blogartikel zu diesem Rechner (W68) — rendert nichts, wenn es keinen gibt. */}
+          <BlogHinweis artikel={blogArtikel} />
 
           {/* Ad Middle */}
           <AdSlot typ="rectangle" className="mb-8" />

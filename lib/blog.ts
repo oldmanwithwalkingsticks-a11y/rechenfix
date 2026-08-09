@@ -45,3 +45,30 @@ export async function getAlleArtikel(): Promise<BlogArtikel[]> {
   );
   return artikel.sort((a, b) => b.datum.localeCompare(a.datum)); // neueste zuerst
 }
+
+/**
+ * Umkehrung der Zuordnung aus meta.ts: Zu welchem Artikel gehört ein Rechner?
+ *
+ * Hintergrund (W68): Jeder Artikel benennt in seiner meta.ts den Rechner, den er
+ * einbettet (`rechnerSlug` / `rechnerPfad`). Genutzt wurde das bisher nur in einer
+ * Richtung — vom Artikel zum Rechner. Der Rückweg fehlte, weshalb Besucher einer
+ * Rechnerseite nie erfuhren, dass es zu genau diesem Thema einen Artikel gibt.
+ *
+ * Erwartet den reinen Rechner-Slug ohne Kategorie, also 'bmi-rechner', nicht
+ * 'gesundheit/bmi-rechner'. Gibt undefined zurück, wenn es keinen Artikel gibt —
+ * das ist der Normalfall, denn zu den allermeisten Rechnern existiert keiner.
+ *
+ * Gibt es mehrere Artikel zu einem Rechner (aktuell: einheiten-umrechner wird von
+ * Artikel 1 und Artikel 10 verwendet), gewinnt der neuere. Bewusst so: Der zuletzt
+ * erschienene Text ist der aktuellere Aufhänger.
+ */
+export async function getArtikelZuRechner(rechnerSlug: string): Promise<BlogArtikel | undefined> {
+  const alle = await getAlleArtikel();
+  return alle.find((a) => a.rechnerSlug === rechnerSlug);
+}
+
+/** Die n neuesten Artikel — für den Teaser auf der Startseite. */
+export async function getNeuesteArtikel(anzahl = 3): Promise<BlogArtikel[]> {
+  const alle = await getAlleArtikel();
+  return alle.slice(0, anzahl);
+}

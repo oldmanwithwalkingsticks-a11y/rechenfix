@@ -3,6 +3,8 @@ import { kategorien, rechner as alleRechner, getBeliebtRechner, getNeueRechner, 
 import SearchBar from '@/components/layout/SearchBar';
 import TippDesTages from '@/components/ui/TippDesTages';
 import BerechnungsZaehler from '@/components/ui/BerechnungsZaehler';
+import BlogTeaser from '@/components/blog/BlogTeaser';
+import { getNeuesteArtikel } from '@/lib/blog';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -26,7 +28,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Startseite() {
+export default async function Startseite() {
+  // W68: Die Startseite verlinkte den Blog vorher an keiner Stelle.
+  const neuesteArtikel = await getNeuesteArtikel(3);
   const beliebteRechner = getBeliebtRechner();
   const neueRechner = getNeueRechner();
 
@@ -124,6 +128,9 @@ export default function Startseite() {
           ))}
         </div>
       </section>
+
+      {/* Blog-Teaser (W68) */}
+      <BlogTeaser artikel={neuesteArtikel} />
 
       {/* Neu hinzugefügt */}
       <section className="mb-16">

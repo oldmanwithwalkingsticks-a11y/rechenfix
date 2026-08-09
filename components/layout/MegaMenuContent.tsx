@@ -31,6 +31,20 @@ export default function MegaMenuContent({ onClose }: { onClose: () => void }) {
   return (
     <div className="border-t border-gray-100 dark:border-gray-700 bg-gray-50/80 dark:bg-gray-800/50 backdrop-blur-sm">
       <div className="max-w-6xl mx-auto px-4 py-6 max-h-[75vh] overflow-y-auto">
+        {/* Blog — W68: steht jetzt ÜBER den Kategorien. Vorher stand er unterhalb von
+            neun Kategorien mit über 200 Einträgen und war damit faktisch unsichtbar. */}
+        <div className="mb-5 rounded-xl border border-accent-200 bg-accent-50/60 p-4 dark:border-accent-600/40 dark:bg-accent-700/10">
+          <Link
+            href="/blog"
+            onClick={onClose}
+            className="flex items-center gap-2 font-semibold text-gray-800 transition-colors hover:text-accent-700 dark:text-gray-100 dark:hover:text-accent-300"
+          >
+            <span className="text-lg" aria-hidden="true">📝</span>
+            Blog: Geschichten hinter den Zahlen
+            <span className="ml-auto shrink-0 text-accent-600 dark:text-accent-400" aria-hidden="true">→</span>
+          </Link>
+        </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {kategorien.map(k => {
             const katRechner = getRechnerByKategorie(k.slug);
@@ -68,17 +82,6 @@ export default function MegaMenuContent({ onClose }: { onClose: () => void }) {
           })}
         </div>
 
-        {/* Blog — mobiler Navigationsweg (Header-Link ist Desktop-only). Welle 24. */}
-        <div className="border-t border-gray-200 dark:border-gray-700 mt-6 pt-4">
-          <Link
-            href="/blog"
-            onClick={onClose}
-            className="flex items-center gap-2 font-semibold text-gray-800 dark:text-gray-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-          >
-            <span className="text-lg" aria-hidden="true">📝</span>
-            Blog: Geschichten hinter den Zahlen
-          </Link>
-        </div>
       </div>
     </div>
   );

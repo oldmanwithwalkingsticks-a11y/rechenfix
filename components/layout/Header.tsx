@@ -60,16 +60,18 @@ export default function Header() {
           </Link>
 
           <div className="flex items-center gap-2 sm:gap-3">
-            {/* Blog — Desktop-only (hidden sm:flex), damit die Icon-Reihe auf
-                Mobile so eng bleibt wie bisher. Mobiler Weg: Mega-Menu (Welle 24). */}
+            {/* Blog — W68: auch auf Mobile sichtbar. Nach dem Muster des KI-Rechner-Buttons
+                daneben zeigt Mobile nur das Symbol, die Beschriftung erscheint ab sm.
+                Vorher war der Link mit hidden sm:flex ganz abgeschaltet und der Blog
+                mobil nur über das Ende des Mega-Menüs erreichbar. */}
             <Link
               href="/blog"
               onClick={() => setMenuOpen(false)}
               aria-label="Blog"
-              className="hidden sm:flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl text-sm font-medium transition-all bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+              className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl text-sm font-medium transition-all bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
             >
               <span aria-hidden="true">📝</span>
-              <span>Blog</span>
+              <span className="hidden sm:inline">Blog</span>
             </Link>
 
             {/* KI-Rechner — sichtbar in der Nav, Seite bleibt noindex (Welle 22) */}
@@ -83,7 +85,10 @@ export default function Header() {
               <span className="hidden sm:inline">KI-Rechner</span>
             </Link>
 
-            {/* Alle Rechner Button */}
+            <ThemeToggle />
+
+            {/* Alle Rechner Button — W68: steht als letztes Element ganz rechts,
+                weil der Daumen dort am leichtesten hinkommt. */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl text-sm font-medium transition-all ${
@@ -108,8 +113,6 @@ export default function Header() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
               </svg>
             </button>
-
-            <ThemeToggle />
           </div>
         </div>
 
