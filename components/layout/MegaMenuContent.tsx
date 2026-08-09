@@ -45,6 +45,17 @@ export default function MegaMenuContent({ onClose }: { onClose: () => void }) {
           </Link>
         </div>
 
+        {/* Offline-Nutzung (W71) — bewusst schlichter als der Blog-Kasten: nützlich für
+            Vielnutzer, für Gelegenheitsbesucher aber ohne Belang. */}
+        <Link
+          href="/offline-nutzung"
+          onClick={onClose}
+          className="mb-5 flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400"
+        >
+          <span aria-hidden="true">📡</span>
+          Rechenfix ohne Internetverbindung nutzen
+        </Link>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {kategorien.map(k => {
             const katRechner = getRechnerByKategorie(k.slug);

@@ -49,7 +49,16 @@ export default function OfflineSeite() {
         </Link>
       </div>
 
-      <p className="mt-10 text-xs text-gray-400 dark:text-gray-500">
+      <p className="mt-10 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+        Damit künftig mehr Seiten auch ohne Verbindung bereitstehen, lässt sich die
+        Offline-Nutzung dauerhaft einschalten — nachzulesen und zu ändern unter{' '}
+        <Link href="/offline-nutzung" className="text-primary-600 underline dark:text-primary-400">
+          Offline-Nutzung
+        </Link>
+        .
+      </p>
+
+      <p className="mt-6 text-xs text-gray-400 dark:text-gray-500">
         Sobald die Verbindung zurück ist, lädt jede Seite wieder in der aktuellen Fassung.
         Rechenfix zeigt gespeicherte Inhalte nur, wenn kein Netz erreichbar ist.
       </p>

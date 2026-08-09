@@ -154,6 +154,12 @@ export default function Footer() {
                     Feedback geben
                   </Link>
                 </li>
+                {/* W71 — vorher war die Seite nur aus der Datenschutzerklärung erreichbar. */}
+                <li>
+                  <Link href="/offline-nutzung" className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm">
+                    Offline nutzen
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
