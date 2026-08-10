@@ -5,7 +5,7 @@ description: Technik-Vorlage und Verifikations-Checkliste zum Ausrollen von Blog
 
 # Blog Builder für rechenfix.de
 
-**Stand: v7 (08.08.2026, verifiziert an HEAD `97820c1`).** Rollt Blogartikel für das deutsche Rechner-Portal rechenfix.de technisch sauber aus. Deckt die **wiederkehrende Mechanik** ab: MDX-Andockpunkte, Grafik-Komponenten-Konvention, Dark-Mode, Quellen, eingebettete Rechner, Verifikations-Checkliste, Build-Prompt-Struktur für Code-Claude.
+**Stand: v8 (10.08.2026, verifiziert an HEAD `1633a01`).** Rollt Blogartikel für das deutsche Rechner-Portal rechenfix.de technisch sauber aus. Deckt die **wiederkehrende Mechanik** ab: MDX-Andockpunkte, Grafik-Komponenten-Konvention, Dark-Mode, Quellen, eingebettete Rechner, Verifikations-Checkliste, Build-Prompt-Struktur für Code-Claude.
 
 **v4-Nachtrag (05.08.2026 — nach Artikel 9 „Zeitvereinheitlichung", Welle 55):** Der Build-Prompt ließ **KI-Metadaten Ebene 3** (XMP in der Datei) weg und behauptete, die KI-Kennzeichnung entstehe vollständig automatisch. Code-Claude stoppte vor dem Commit — sonst wäre `zeit.mp4` auf Dateiebene ungekennzeichnet live gegangen. Kodifiziert in: „Die drei Ebenen sind nicht gleich automatisch" (unten im KI-Metadaten-Abschnitt), einem Pflichtschritt + STOP-Bedingung + Generator-Spalte in „Build-Prompt-Struktur", und der Regel, dass der **Generatorname eine Tatsachenangabe ist** (Chat-Claude liefert ihn mit den Assets; Code-Claude rät ihn nie und übernimmt ihn nicht aus der Tabelle anderer Artikel).
 
@@ -52,6 +52,38 @@ Drei Lehren, alle aus Prompt- oder Vorlagenfehlern von Chat-Claude, die Code-Cla
 1. **Gerade Anführungszeichen in SVG-Grafiken brechen den Build.** `react/no-unescaped-entities` schlägt bei `"` als sichtbarem JSX-Text zu. Läuft lokal durch `tsc`, bricht aber bei `next build` → Vercel rot. Kodifiziert unten in der Grafik-Konvention, samt der Prüfung, die dafür taugt.
 2. **STOP-Bedingungen nicht an einen Commit-Hash hängen.** `git log -1 -- <pfad>` liefert den letzten Commit auf die *Datei*, nicht den Repo-HEAD. Statt eines Hashes prüft ein Diff direkt die Eigenschaft, um die es geht.
 3. **Prüfbefehle gehören in die Umgebung, in der sie laufen sollen.** Bash für Code-Claude, PowerShell für Karsten. Ein Bash-Snippet, das Karsten kopiert, scheitert an PowerShell-Syntax.
+
+## v8-Nachtrag (10.08.2026 — nach den Wellen 67 bis 75)
+
+Sieben Lehren. **Die ersten vier gelten für jede Welle, nicht nur für Blogwellen** — sie stehen
+hier, weil die Prompt-Mechanik in diesem Skill liegt.
+
+1. **Ein Prüfbefehl darf die gesuchte Zeichenfolge nicht im eigenen Kommentar tragen.**
+   **Viermal passiert** (Wellen 68, 69, 70 und zuletzt 73). Eigener Abschnitt unten unter
+   „Build-Prompt-Struktur" — dort steht auch die Bauform, die das dauerhaft löst.
+2. **Eine grüne Repo-Prüfung sagt nichts über das Laufzeitverhalten im Browser.** Der Kern der
+   Wellen 73/73a. Eigener Abschnitt unten.
+3. **Der Commit-Abschnitt nennt Einzelpfade, nie ein Verzeichnis.** In Welle 74 lautete die
+   Anleitung `git add docs/audit-arbeitspapiere/` — das hätte dutzende ungetrackte Quelldateien
+   früherer Wellen eingesammelt und damit die eigene STOP-Bedingung („nur die genannten Dateien
+   im Diff") gebrochen. Code-Claude hat den Widerspruch bemerkt und eng gestaged. Die bestehende
+   Regel „nie `git add .`" reicht nicht; sie gilt für **jeden** Pfad, der mehr als eine Datei
+   erfasst.
+4. **Am Ende jeder Welle gegenprüfen, dass jede neue Quelldatei auch im Commit ist.**
+   In Welle 69 fehlte `app/sw.ts`. Der lokale Build war grün, weil die Datei auf der Platte lag
+   — erst Vercels frischer Checkout fiel auf die Nase. Ergänzend: Schließt eine Welle bewusst
+   eine Datei aus (`public/sw.js`), muss der Prompt die ähnlich heißende **Pflichtdatei**
+   danebenstellen, sonst wird versehentlich die falsche weggelassen.
+5. **Neue Routen brauchen den `META_ROUTES`-Eintrag in derselben Welle.** Stand seit v3 im
+   Skill (dort Punkt 8) und wurde in Welle 69 trotzdem gebrochen: Die interne Verlinkung war
+   drin, der Eintrag fehlte, der Prebuild-Hook brach ab. Regel M4 greift, **sobald** intern
+   verlinkt wird — nicht erst, wenn die Route beworben wird.
+6. **Die Anführungszeichen-Prüfung über JEDE gelieferte Datei laufen lassen**, nicht nur über
+   Artikel und Grafiken. In Welle 69 steckte ein gemischtes Anführungszeichen in einer neuen
+   Seitenkomponente, die niemand für eine Textdatei gehalten hätte.
+7. **Bei neuen Artikeln `<Bild`, `<Video` und `poster=` in derselben Messung prüfen wie
+   Wortzahl und Quellen** (Lehre aus Welle 67). Der Video-Block fehlte dort komplett, weil nur
+   die Zahlen gemessen wurden und die Sichtbarkeit der Medien niemand mitgezählt hat.
 
 ## Tech Stack (verifiziert an HEAD c9b966d–26636e6)
 
@@ -502,6 +534,15 @@ Pro Welle prüfen (`web_fetch` NICHT nutzen — liefert stale Cache; Live-Verify
 - Dark Mode: `.dark`-Selektoren (nicht `@media`) in den farbigen Grafiken? Null farbige `fill`-Attribute mehr an `<text>` (nur `className`)? — Grep: `grep -rn '<text[^>]*fill="#' components/blog/grafik/` soll 0 für die Farbwerte liefern.
 - Quellen: alle verlinkbaren Einträge mit `url`?
 - Build laut Bericht grün, Route statisch (`○`/`●`, nicht `ƒ`)?
+- **Jede neue Quelldatei im Commit?** — `git show --stat HEAD` gegen die Dateiliste des Prompts
+  halten. Ein lokal grüner Build beweist nichts; Vercel checkt frisch aus (Lehre Welle 69,
+  `app/sw.ts`).
+- **Anführungszeichen-Prüfung über ALLE gelieferten Dateien**, nicht nur Artikel und Grafiken —
+  auch neue Seiten- und Layoutkomponenten (Lehre Welle 69).
+- **Bei neuen Artikeln zusätzlich `<Bild`, `<Video` und `poster=` zählen**, in derselben
+  Messung wie Wortzahl und Quellen (Lehre Welle 67).
+- **Verhaltensändernde Wellen:** Netzwerk-Beleg von Karsten eingefordert? (siehe „Eine grüne
+  Repo-Prüfung sagt nichts über das Laufzeitverhalten")
 
 **Prüf-Grep-Fallstrick:** `grep -A1` auf die H1 erwischt nur die (leere) Folgezeile — zwischen H1 und `<ArtikelDatum>` steht eine MDX-Pflicht-Leerzeile. Für „Datum nach H1" besser `grep -A2` oder direkt `grep -n "ArtikelDatum datum"`. (Eigener Fehlalarm bei Welle-30-Verifikation.)
 
@@ -514,9 +555,70 @@ Jeder Prompt als eigene `.md` in `/mnt/user-data/outputs/`, Konvention `welle<N>
 - **Schritte** mit wörtlichen Such-/Ersetz-Blöcken. **Wortlaute vorab per git clone verifizieren**, damit Code-Claudes STOP-Bedingung nicht fälschlich greift.
 - **Pflichtschritt KI-Metadaten Ebene 3 (Art. 50 KI-VO)** direkt nach dem Schritt, der Titelbild und Video ablegt — sonst geht das Video auf Dateiebene ungekennzeichnet live (Ebene 1/2 reichen NICHT, sie gelten nur auf der eigenen Seite). Der Schritt lautet: je eine Zeile `'<titelbild>.png': '<Generatorname>'` und `'<video>.mp4': '<Generatorname>'` in `GENERATOREN` in `scripts/ki-metadaten-schreiben.mjs` ergänzen (Werte aus der Datei-Tabelle des Prompts, siehe nächster Punkt), dann `node scripts/ki-metadaten-schreiben.mjs` und `node scripts/ki-metadaten-schreiben.mjs --pruefen`. Erwartung: beide neuen Dateien melden `OK` (`UNBEKANNT` = GENERATOREN-Zeile fehlt; `FEHLT` = Skript nicht/nicht erfolgreich gelaufen). `scripts/ki-metadaten-schreiben.mjs` gehört mit in den Commit.
 - **Datei-Tabelle des Prompts trägt eine Generator-Spalte.** Die „Mitgelieferte Dateien"-Tabelle bekommt neben `Ziel` die Spalte `Generator (für GENERATOREN)`, damit der Wert an derselben Stelle wie der Dateiname steht und beim Prompt-Schreiben nicht übersehen wird. Chat-Claude füllt sie beim Erzeugen der Assets — nicht aus Gewohnheit, sondern mit dem real verwendeten Modell.
-- **Gezieltes Staging:** `git add <konkrete Pfade>` — NIE `git add .` (sonst wandern `client-data.ts`-Drift und ungetrackte Handoff-Dateien mit). `client-data.ts` ist auto-generierter Datums-Drift, nie mitcommitten.
+- **Gezieltes Staging:** `git add <konkrete Pfade>` — NIE `git add .` und **nie ein Verzeichnis** (Lehre Welle 74) (sonst wandern `client-data.ts`-Drift und ungetrackte Handoff-Dateien mit). `client-data.ts` ist auto-generierter Datums-Drift, nie mitcommitten.
 - **Übergabe-Format:** knappe Punktliste (geänderte Dateien, Build-Ergebnis, Routen-Check, Commit-Hash, offene Punkte für Karsten).
 - **„Was du NICHT tust":** Artikeltext inhaltlich ändern (außer explizit benannt), „Karsten sagt"-Block anfassen, Infrastruktur/Renderer verändern, Suchtexte nach Sinn raten.
+
+### Der Prüfbefehl darf sein eigenes Ziel nicht im Kommentar tragen (Lehre Wellen 68, 69, 70, 73)
+
+**Viermal dieselbe Fehlerklasse.** Chat-Claude liefert eine Quelldatei mit einem erklärenden
+Kommentar; der Kommentar nennt genau die Zeichenfolge, auf die der Prüfbefehl im Prompt zielt.
+Der Erwartungswert lautet dann 1, gezählt werden aber 2 — Codezeile plus Kommentar. Code-Claude
+stoppt korrekt, die Welle steht, obwohl inhaltlich alles stimmt.
+
+Zuletzt in Welle 73: Der Kommentar über der neuen Kopfzeile erklärte die Direktive
+`frame-ancestors` und nannte sie dabei beim Namen. `grep -c "frame-ancestors" next.config.mjs`
+lieferte 2 statt 1.
+
+Zwei Gegenmittel, **beide anwenden**:
+
+- **Am Wert verankern, nicht an der Zeichenfolge.** Nicht auf das blosse Wort zählen, sondern
+  auf die vollständige Codezeile mitsamt Zuweisung. Ein Kommentar enthält keine Zuweisung, also
+  zählt er nie mit. Das ist die robustere Hälfte, weil sie auch gegen **künftige** Kommentare
+  hält, die jemand später hinzufügt.
+- **Den Kommentar umschreiben.** Erklären, worum es geht, ohne den gesuchten Bezeichner zu
+  nennen — „die Rahmen-Direktive unten" statt des Namens.
+
+Vor dem Abschicken jedes Prompts: Für jeden Erwartungswert einmal gedanklich den Befehl gegen
+die **mitgelieferte Quelldatei** laufen lassen, nicht gegen die Vorstellung davon, was in der
+Datei steht. Am sichersten ist, ihn tatsächlich laufen zu lassen.
+
+### Eine grüne Repo-Prüfung sagt nichts über das Laufzeitverhalten (Lehre Wellen 73/73a)
+
+Alle Prüfmittel dieses Skills lesen **Quelltext**: Greps, Diffs, Tag-Bilanzen, Build-Ergebnis.
+Keines davon sieht, **was der Browser tatsächlich anfordert, lädt und speichert**.
+
+In Welle 73 stellte sich heraus, dass ein Anzeigen-Skript seit Monaten bei jedem Seitenaufruf
+lud, obwohl die Einwilligungslogik an der Stelle, an der sie gebaut worden war, nachweislich
+korrekt arbeitete — es gab schlicht einen **zweiten**, älteren Ladepfad an anderer Stelle.
+Kein Grep hatte je gefragt: „Was geht beim ersten Aufruf raus?"
+
+Daraus drei Regeln:
+
+1. **Ändert eine Welle das Verhalten gegenüber Dritten** — externe Skripte, Einwilligung,
+   Kopfzeilen, Speicherzugriffe —, gehört ein **Netzwerk-Beleg** in die Sichtprüfung für
+   Karsten: Inkognito, Entwicklerwerkzeuge, Filter auf Drittanbieter, Verhalten vor **und**
+   nach der Entscheidung. Der Repo-Beleg allein reicht nicht.
+2. **Eine dauerhaft geltende Eigenschaft gehört in ein Prüfskript in der `prebuild`-Kette**,
+   nicht in eine einmalige Prüfung. Einmal geprüft heisst nur: heute stimmte es.
+3. **Jedes neue Wächterskript wird gegen den ALTEN Stand gegengeprüft** — per `git stash`, mit
+   erwartetem Fehlschlag. Ein Wächter, der im Fehlerfall nicht anschlägt, ist wertlos und
+   erzeugt falsche Sicherheit. Diese Gegenprobe gehört als eigener Prüfschritt in den Prompt.
+
+Umgekehrt gilt genauso: Ein externer Prüfbericht misst **einen Zeitpunkt**. Vor jeder Reaktion
+darauf prüfen, ob er den aktuellen Stand beschreibt — mehrere Berichte in Folge beschrieben
+Zustände, die längst repariert waren.
+
+### Der Commit-Abschnitt nennt Einzelpfade (Lehre Welle 74)
+
+`git add .` war schon verboten. Die Regel gilt für **jeden** Pfad, der mehr als eine Datei
+erfasst — auch für ein scheinbar harmloses Verzeichnis. In `docs/audit-arbeitspapiere/` liegen
+ungetrackte Quelldateien früherer Wellen (`.tsx.txt`, `page.mdx`, Icon- und Skill-Quellen);
+`git add docs/audit-arbeitspapiere/` hätte sie alle mitgenommen und damit die STOP-Bedingung
+derselben Welle gebrochen.
+
+Im Commit-Abschnitt jede Datei einzeln aufführen. Bei mehr als etwa fünf Dateien ist das ein
+Hinweis darauf, dass die Welle zu gross geschnitten ist.
 
 ### Prompt bei Output-Limit über mehrere Antworten füllen
 
