@@ -1,9 +1,14 @@
 # Arbeitspapier — Einwilligungsverwaltung vor der AdSense-Reaktivierung
 
-**Stand:** 10.08.2026
+**Stand:** 10.08.2026, zweite Fassung (Abschnitte 3, 4A, 5 und 6 überarbeitet)
 **Anlass:** Ein externer Prüfbericht bemängelte das Fehlen von `__tcfapi`. Die Prüfung der
 Behauptung förderte eine andere Ausgangslage zutage als angenommen.
 **Status:** Entscheidungsvorlage. **Es wird hier nichts entschieden und nichts gebaut.**
+
+**Änderung gegenüber der ersten Fassung:** Der Rechtspunkt in Abschnitt 3 war dort als offen
+beschrieben. Die Prüfung von Googles Entwicklerdokumentation hat ein technisches Gegenargument
+ergeben, das ihn weitgehend schliesst — zulasten von Weg A. Die Empfehlung in Abschnitt 5 ist
+im Ergebnis unverändert, die Rangfolge dahinter nicht.
 
 ---
 
@@ -74,28 +79,65 @@ Wer eine zertifizierte Lösung einsetzt, bekommt die Signale ohnehin mit.
 
 ---
 
-## 3. Der offene Rechtspunkt — vor jeder Wegentscheidung zu klären
+## 3. Der Rechtspunkt — weitgehend geklärt, zulasten von Weg A
 
 Googles Mitteilung wird **von `adsbygoogle.js` selbst** ausgeliefert. Soll sie der einzige
 Dialog sein, muss dieses Skript vor jeder Einwilligung laden — also genau das, was Welle 73
 entfernt hat.
 
-Vertretbar ist die Auffassung, dass ein Skript, dessen einziger Zweck an dieser Stelle das
-Einholen der Einwilligung ist, unter die Ausnahme des § 25 Abs. 2 Nr. 2 TDDDG fällt
-(unbedingt erforderlich für einen ausdrücklich gewünschten Dienst). Sicher ist das nicht, denn
-dasselbe Skript ist zugleich der Anzeigen-Loader; die Ausnahme ist eng auszulegen.
+### 3.1 Die naheliegende Rechtfertigung
 
-**Diese Frage geht an den Anwalt, zusammen mit den drei offenen Punkten aus
-`rechtstexte-pwa-bausteine.md`, Abschnitt 6.** Sie entscheidet über Weg A.
+Vertretbar erschien zunächst: Ein Dienst, dessen einziger Zweck an dieser Stelle das Einholen
+der Einwilligung ist, fällt unter § 25 Abs. 2 Nr. 2 TDDDG — unbedingt erforderlich für einen
+ausdrücklich gewünschten Dienst. Diese Auslegung ist nicht exotisch, sondern die Grundlage
+dafür, dass Einwilligungsplattformen überhaupt funktionieren können: Auch Usercentrics,
+Cookiebot oder Complianz laden vor der Entscheidung und sehen dabei die IP-Adresse. Wer das
+pauschal für unzulässig hält, verbietet jede Fremdlösung mit — das ist nicht die herrschende
+Auffassung.
 
-Der Rechtspunkt ist unabhängig davon, wie gut oder schlecht Weg A sonst abschneidet — er kann
-ihn allein ausschließen.
+Die Frage lautet also nicht „darf ein Skript vor der Einwilligung laden", sondern: **Ist dieses
+Skript ein reiner Einwilligungsdienst?**
 
----
+### 3.2 Das Gegenargument, das die Frage schliesst
+
+Nein, und zwar nicht wegen unserer Einbindung, sondern von Google so gebaut. Googles
+Entwicklerdokumentation zur Privacy-&-Messaging-API hält fest, dass die Messaging-Funktion über
+die **bereits vorhandenen Publisher- beziehungsweise AdSense-Tags** ausgeliefert wird; eine
+eigene Einbindung existiert nur für Werbeblocker-Meldungen.
+
+Quelle: https://developers.google.com/funding-choices/fc-api-docs (abgerufen 10.08.2026)
+
+Es gibt für AdSense-Publisher also **keinen reinen Einwilligungs-Tag**. Wer Googles Dialog
+will, lädt zwingend den Anzeigen-Loader — ein Skript mit doppelter Funktion. § 25 Abs. 2 ist
+eng auszulegen; „unbedingt erforderlich" dürfte bei einem Skript, das zugleich das
+Anzeigengeschäft mitbringt, nicht tragen.
+
+Das ist kein Auslegungsspielraum, den man mit einer guten Begründung schliessen kann, sondern
+eine Eigenschaft des Produkts. Weg A verliert damit seine Grundlage.
+
+### 3.3 Was daraus für die anwaltliche Frage wird
+
+Aus der offenen Frage wird eine Bestätigungsfrage: **Trägt die Ausnahme des § 25 Abs. 2 Nr. 2
+bei einem Skript mit Doppelfunktion — Einwilligungsdialog und Anzeigenauslieferung in einer
+Datei?** Erwartete Antwort: nein. Fällt sie wider Erwarten anders aus, ist Weg A wieder offen.
+
+Geht mit den drei offenen Punkten aus `rechtstexte-pwa-bausteine.md`, Abschnitt 6, in dasselbe
+Paket. Kein eigener Termin.
+
+### 3.4 Ein häufiger Denkfehler, der hier auftaucht
+
+Der Rat, „Basic Consent Mode" zu verwenden, weil dort alle Google-Skripte bis zur Zustimmung
+blockiert bleiben, ist für sich richtig — er setzt aber ein Einwilligungswerkzeug voraus, das
+**neben** Google steht und es blockieren kann. Also Weg B. Mit Googles eigener Plattform ist
+das strukturell unmöglich; sie kann sich nicht selbst blockieren. Der Rat ist damit kein
+Argument für Weg A, sondern gegen ihn.
 
 ## 4. Die drei Wege
 
 ### Weg A — Funding Choices übernimmt, eigener Banner wird zurückgebaut
+
+**Nach Abschnitt 3 sehr wahrscheinlich nicht gangbar.** Hier dokumentiert, damit die Prüfung
+nachvollziehbar bleibt und der Weg nicht in einem halben Jahr erneut aufgeworfen wird.
 
 Googles Mitteilung wird der einzige Einwilligungsdialog. `CookieBanner`,
 `CookieConsentProvider`, `ConsentScripts` und die Einwilligungsprüfung in `AdSlot` entfallen;
@@ -103,11 +145,13 @@ Googles Mitteilung wird der einzige Einwilligungsdialog. `CookieBanner`,
 
 - **Dafür:** eine Fehlerquelle statt zwei, kein doppelter Dialog, personalisierte Anzeigen
   möglich, keine laufenden Kosten, Pflege liegt bei Google, 32 Sprachen bereits konfiguriert
-- **Dagegen:** hängt am Rechtspunkt aus Abschnitt 3. Aussehen und Wortlaut nur begrenzt
-  gestaltbar. Abhängigkeit von einem Anbieter, der zugleich Vertragspartner der Vermarktung ist
+- **Dagegen:** scheitert voraussichtlich an der Doppelfunktion des Skripts (Abschnitt 3.2).
+  Aussehen und Wortlaut nur begrenzt gestaltbar. Abhängigkeit von einem Anbieter, der zugleich
+  Vertragspartner der Vermarktung ist
 - **Aufwand:** ein bis zwei Wellen Rückbau, dazu Datenschutzerklärung und
   Verarbeitungsverzeichnis
-- **Voraussetzung:** anwaltliche Klärung, sonst nicht gangbar
+- **Voraussetzung:** anwaltliche Bestätigung entgegen der erwarteten Antwort. Ohne diese nicht
+  weiterverfolgen
 
 ### Weg B — zertifizierte Fremdlösung
 
@@ -136,29 +180,39 @@ Der eigene Banner bleibt, wie er ist. Auf personalisierte Anzeigen wird bewusst 
 
 ## 5. Empfehlung
 
-**Für den Zeitpunkt der Reaktivierung: Weg C als Ausgangszustand, Weg A als Ziel, sobald der
-Rechtspunkt geklärt ist.**
+**Für den Zeitpunkt der Reaktivierung: Weg C als Ausgangszustand. Weg B, sobald die Reichweite
+den Unterschied in Euro spürbar macht. Weg A nur, falls die anwaltliche Antwort wider Erwarten
+ausfällt.**
 
-Begründung: Bei DR 0 und dem heutigen Aufkommen ist der Unterschied zwischen personalisierten
-und nicht-personalisierten Anzeigen in absoluten Zahlen gering — die Reichweite ist der
-Engpass, nicht die Anzeigenart. Weg C kostet nichts und blockiert nichts; von dort ist der
-Wechsel nach A jederzeit möglich, umgekehrt wäre der Rückbau bereits geschehen.
+Begründung für C als Start: Bei DR 0 und dem heutigen Aufkommen ist der Unterschied zwischen
+personalisierten und nicht-personalisierten Anzeigen in absoluten Zahlen gering — die
+Reichweite ist der Engpass, nicht die Anzeigenart. Weg C kostet nichts, verbaut nichts und
+lässt den heutigen, am Gerät belegten Zustand unangetastet. Von dort ist der Wechsel nach B
+jederzeit möglich.
 
-Weg B lohnt erst, wenn die Reichweite den Unterschied spürbar macht **und** Weg A rechtlich
-ausscheidet.
+Begründung für B als Ziel statt A: B löst den Rechtspunkt sauber, weil die Plattform **vor**
+den Werbeskripten steht und sie blockieren kann. Das ist genau die Bauform, die Google für den
+Basic Consent Mode selbst vorsieht. Der Preis sind laufende Kosten und ein weiterer
+Auftragsverarbeiter — beides beherrschbar und dokumentierbar.
 
-**Was diese Empfehlung umstoßen würde:** eine klare anwaltliche Auskunft, dass das Laden von
-`adsbygoogle.js` allein zum Einholen der Einwilligung zulässig ist. Dann ist Weg A sofort
-vorzuziehen, weil er zusätzlich den gesamten eigenen Banner einspart.
+**Was diese Empfehlung umstoßen würde:** eine anwaltliche Auskunft, dass die Ausnahme des
+§ 25 Abs. 2 Nr. 2 auch bei einem Skript mit Doppelfunktion trägt. Dann wäre A wieder erste
+Wahl, weil er zusätzlich den gesamten eigenen Banner einspart.
 
----
+**Wichtig für die Umsetzung von B:** In diesem Fall muss Googles eigene Mitteilung im
+AdSense-Konto **abgeschaltet** werden, sonst erscheinen zwei Dialoge nacheinander. Sie ist
+derzeit veröffentlicht (Abschnitt 2.2). Das Abschalten geschieht unter „Datenschutz und
+Mitteilungen" und ist kein Code.
 
 ## 6. Nächste Schritte, in dieser Reihenfolge
 
-1. Den Rechtspunkt aus Abschnitt 3 in das anwaltliche Paket aufnehmen (kein eigener Termin)
+1. Die Bestätigungsfrage aus Abschnitt 3.3 in das anwaltliche Paket aufnehmen (kein eigener
+   Termin)
 2. Nichts bauen, solange keine Website im AdSense-Konto verknüpft ist
 3. Bei tatsächlicher Reaktivierung: dieses Papier wieder aufschlagen, Abschnitt 5 prüfen,
    entscheiden, Entscheidung hier vermerken
+4. Fällt die Wahl auf Weg B: **zuerst** Googles Mitteilung im Konto abschalten, **dann** die
+   Fremdlösung einbauen — nicht umgekehrt, sonst laufen zwei Dialoge parallel
 
 ---
 
@@ -170,3 +224,7 @@ vorzuziehen, weil er zusätzlich den gesamten eigenen Banner einspart.
 - **Consent Mode v2 nicht von Hand einbauen.** Sowohl Weg A als auch Weg B bringen die Signale
   mit; Handarbeit wäre Wegwerfarbeit.
 - **`__tcfapi` nicht selbst nachbauen.** Ohne Zertifizierung wertlos, siehe 2.3.
+- **Der Einwand „IP-Übertragung beim Skriptabruf macht jedes Vorabladen unzulässig" trägt in
+  dieser Pauschalität nicht.** Er verböte auch jede zertifizierte Fremdlösung und damit Weg B.
+  Das tragfähige Argument ist die Doppelfunktion, nicht der Abruf als solcher — siehe 3.1
+  und 3.2.

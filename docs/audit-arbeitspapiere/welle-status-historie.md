@@ -6159,3 +6159,4 @@ Blautöne bei 2-Segment-Donuts (zins) schlecht trennbar. Reiner Renderer-Fix.
 | 73 | Ungegateten Anzeigen-Loader aus `app/layout.tsx` entfernt, Einbettungsschutz gesetzt (`frame-ancestors`, `X-Frame-Options`, `Cross-Origin-Opener-Policy`), `scripts/check-drittanbieter.mjs` als Prebuild-Wächter | `e20bd80` |
 | 73a | Widerruf der Marketing-Einwilligung lädt die Seite neu | `47c8678` |
 | 74 | Dieses Arbeitspapier (`arbeitspapier-einwilligung-adsense-2026-08-10.md`) | — |
+| 75 | Arbeitspapier Einwilligungsverwaltung, zweite Fassung: Rechtspunkt zur Doppelfunktion von `adsbygoogle.js` geklärt, Rangfolge der Wege angepasst (B vor A) | — |
