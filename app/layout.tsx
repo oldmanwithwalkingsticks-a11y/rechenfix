@@ -24,7 +24,6 @@ import CssLoader from '@/components/CssLoader';
 import PwaStart from '@/components/pwa/PwaStart';
 import { generateWebsiteSchema } from '@/lib/seo';
 import { Analytics } from '@vercel/analytics/next';
-import Script from 'next/script';
 import { ADSENSE_PUBLISHER_ID } from '@/lib/adsense-config';
 
 export const viewport: Viewport = {
@@ -114,19 +113,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </noscript>
       </head>
       <body className="min-h-screen flex flex-col bg-white dark:bg-slate-900 text-gray-800 dark:text-gray-100 antialiased font-sans">
-        {/* AdSense Basis-Loader — via next/script mit strategy="afterInteractive"
-            (W15C-T4-F1). Lädt nach React-Hydration und blockiert dadurch nicht
-            mehr LCP der Erklär-Cards. AdSense-Crawler erkennt den Loader
-            weiterhin sauber (Pattern offiziell von Google empfohlen). Die
-            <ins>-Ad-Slot-Tags in AdSlot.tsx bleiben unverändert. CMP-
-            Integration folgt in Prompt 68 nach AdSense-Freigabe. */}
-        <Script
-          id="adsense-loader"
-          async
-          strategy="afterInteractive"
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_PUBLISHER_ID}`}
-          crossOrigin="anonymous"
-        />
         {/* Non-blocking Voll-CSS-Loader (prerender-sicher, ersetzt head-script). */}
         <CssLoader href={FULL_CSS_HREF} />
         <a

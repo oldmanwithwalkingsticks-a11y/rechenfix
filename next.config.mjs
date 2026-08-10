@@ -94,6 +94,27 @@ const nextConfig = {
             key: 'Referrer-Policy',
             value: 'origin-when-cross-origin',
           },
+          // W73 — Einbettungsschutz. Ohne die beiden folgenden Angaben darf jede
+          // fremde Seite rechenfix.de in einen unsichtbaren Rahmen legen und
+          // Klicks abfangen. Die Rahmen-Direktive unten ist der moderne Weg, die
+          // X-Frame-Zeile daneben bedient aeltere Browser, die sie nicht kennen.
+          // ACHTUNG: Die Richtlinie enthaelt bewusst NUR die Rahmen-Angabe.
+          // Eine vollstaendige Fassung mit Skript-Quellen gehoert in eine eigene
+          // Welle und muss vorher im Nur-Melden-Modus gefahren werden.
+          // (Wortlaut bewusst ohne die Direktiven-Namen — sonst zaehlt jede
+          // Pruefung per grep den Kommentar mit; Lehre aus den Wellen 68-70.)
+          {
+            key: 'Content-Security-Policy',
+            value: "frame-ancestors 'self'",
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN',
+          },
+          {
+            key: 'Cross-Origin-Opener-Policy',
+            value: 'same-origin-allow-popups',
+          },
         ],
       },
       {
