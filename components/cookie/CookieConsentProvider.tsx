@@ -81,17 +81,30 @@ export default function CookieConsentProvider({ children }: { children: React.Re
       marketing: partial.marketing,
       timestamp: new Date().toISOString(),
     };
+    // W73a — Widerruf greift sonst erst beim naechsten vollstaendigen Seitenaufbau.
+    // Ein einmal geladenes Fremdskript verschwindet nicht, wenn React das
+    // zugehoerige Element aus dem Baum nimmt; es laeuft im Fenster weiter. Beim
+    // Zuruecknehmen der Marketing-Auswahl wird deshalb neu geladen.
+    const widerruf = consent?.marketing === true && partial.marketing === false;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(full));
     setConsent(full);
     setBannerVisible(false);
     setSettingsVisible(false);
-  }, []);
+    if (widerruf) {
+      window.location.reload();
+    }
+  }, [consent]);
 
   const resetConsent = useCallback(() => {
+    // Gleiche Ueberlegung wie oben: war Marketing aktiv, muss das Fenster neu.
+    const widerruf = consent?.marketing === true;
     localStorage.removeItem(STORAGE_KEY);
     setConsent(null);
     setBannerVisible(true);
-  }, []);
+    if (widerruf) {
+      window.location.reload();
+    }
+  }, [consent]);
 
   const openBanner = useCallback(() => {
     setBannerVisible(true);
