@@ -2410,15 +2410,15 @@ Zahlt der Arbeitnehmer eine **monatliche Eigenbeteiligung** (z. B. 100 €), min
     slug: 'bremsweg-rechner',
     letzteAktualisierung: '2026-07-02',
     titel: 'Bremsweg-Rechner',
-    beschreibung: 'Reaktionsweg, Bremsweg und Anhalteweg nach den Fahrschul-Faustformeln berechnen — inklusive Gefahrenbremsung.',
+    beschreibung: 'Reaktionsweg, Bremsweg und Anhalteweg berechnen — wahlweise nach den Fahrschul-Faustformeln oder physikalisch mit Fahrbahnzustand und Reaktionszeit.',
     kategorie: 'Auto & Verkehr',
     kategorieSlug: 'auto',
     metaTitle: 'Bremsweg-Rechner — Anhalteweg & Reaktionsweg',
-    metaDescription: 'Bremsweg, Reaktionsweg und Anhalteweg mit den Fahrschul-Faustformeln berechnen — auch die Gefahrenbremsung. Kostenlos für die Theorieprüfung.',
+    metaDescription: 'Bremsweg, Reaktionsweg und Anhalteweg berechnen — mit den Fahrschul-Faustformeln für die Theorieprüfung oder physikalisch für Nässe, Schnee und Eis.',
     keywords: ['bremsweg berechnen', 'anhalteweg formel', 'reaktionsweg', 'gefahrenbremsung', 'bremsweg faustformel', 'bremsweg rechner', 'anhalteweg berechnen'],
     icon: '🛑',
-    formel: 'Reaktionsweg = (v÷10)×3 · Bremsweg = (v÷10)² · Gefahrenbremsung = Bremsweg÷2 · Anhalteweg = Reaktionsweg + Bremsweg (v in km/h) | Faustformeln, keine exakten Werte.',
-    beispiel: '50 km/h: Reaktionsweg 15 m + Bremsweg 25 m = 40 m Anhalteweg (Gefahrenbremsung 27,5 m).',
+    formel: 'Faustformel: Reaktionsweg = (v÷10)×3 · Bremsweg = (v÷10)² · Gefahrenbremsung = Bremsweg÷2 (v in km/h) | Physikalisch: Bremsweg = (v÷3,6)² ÷ (2×a) · Reaktionsweg = (v÷3,6)×t | Anhalteweg = Reaktionsweg + Bremsweg.',
+    beispiel: '50 km/h nach Faustformel: 15 m Reaktion + 25 m Bremsweg = 40 m Anhalteweg. Physikalisch auf nasser Fahrbahn (6 m/s², 1 s Reaktion): 13,9 m + 16,1 m = 30 m.',
     erklaerung: `**Bremsweg, Reaktionsweg und Anhalteweg**
 
 In der Fahrschule und in der Theorieprüfung geht es immer wieder um drei Wege: den **Reaktionsweg**, den **Bremsweg** und ihre Summe, den **Anhalteweg**. Der Bremsweg-Rechner ermittelt sie aus der Geschwindigkeit mit den bekannten Faustformeln.
