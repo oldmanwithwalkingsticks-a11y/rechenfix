@@ -39,7 +39,10 @@ export default function KiHinweis({
           KI-generiert
         </span>
         <span className="hidden sm:inline">
-          erzeugt mit {KI_GENERATOREN[generator]} · kein reales Foto
+          {/* Wortlaut folgt dem Medientyp: „Foto" trifft bei einem Video nicht zu
+              und hat auf den Blogseiten mit Video eine falsche Aussage erzeugt. */}
+          erzeugt mit {KI_GENERATOREN[generator]} ·{' '}
+          {typ === 'video' ? 'keine reale Aufnahme' : 'kein reales Foto'}
         </span>
       </div>
       <script

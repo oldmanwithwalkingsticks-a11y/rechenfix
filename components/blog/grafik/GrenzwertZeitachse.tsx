@@ -16,8 +16,14 @@
  *
  * Server-Komponente, statisch. Dark Mode über <style> mit .dark-Selektor.
  */
-const PX_PRO_PROMILLE = 150;
-const BASIS = 250;
+/**
+ * Maßstab bewusst auf 120 px je Promille gesetzt: Bei 150 stieß der Balken von
+ * 1966 (1,3 ‰) in die Unterzeile der Überschrift, und die Summenbeschriftung
+ * darüber überlagerte den Titel. Höchster Balken endet jetzt bei y = 110,
+ * die Summe darüber bei y = 96 — mit Abstand unter der Unterzeile bei y = 52.
+ */
+const PX_PRO_PROMILLE = 120;
+const BASIS = 266;
 
 export default function GrenzwertZeitachse() {
   const jahre = [
@@ -27,7 +33,7 @@ export default function GrenzwertZeitachse() {
 
   return (
     <figure className="my-8">
-      <svg width="100%" viewBox="0 0 680 360" role="img" xmlns="http://www.w3.org/2000/svg" className="rounded-xl text-gray-900 dark:text-gray-100">
+      <svg width="100%" viewBox="0 0 680 400" role="img" xmlns="http://www.w3.org/2000/svg" className="rounded-xl text-gray-900 dark:text-gray-100">
         <style>{`
           .grund { fill: #0F6E56; fill-opacity: 0.85; }
           .zuschlag { fill: #B4791A; fill-opacity: 0.85; }
