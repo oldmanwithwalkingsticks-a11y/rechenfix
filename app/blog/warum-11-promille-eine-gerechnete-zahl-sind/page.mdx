@@ -1,0 +1,446 @@
+import { generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import StructuredData from '@/components/seo/StructuredData';
+import { artikel } from './meta';
+
+export const metadata = {
+  title: `${artikel.titel} | Rechenfix.de`,
+  description: artikel.beschreibung,
+  alternates: { canonical: 'https://www.rechenfix.de/blog/warum-11-promille-eine-gerechnete-zahl-sind' },
+};
+
+<StructuredData data={generateArticleSchema({
+  url: 'https://www.rechenfix.de/blog/warum-11-promille-eine-gerechnete-zahl-sind',
+  headline: artikel.titel,
+  description: artikel.beschreibung,
+  datePublished: artikel.datum,
+  dateModified: artikel.datum,
+  image: '/blog/promille-titelbild.png',
+})} />
+
+<StructuredData data={generateBreadcrumbSchema([
+  { name: 'Start', url: '/' },
+  { name: 'Blog', url: '/blog' },
+  { name: artikel.titel, url: '/blog/warum-11-promille-eine-gerechnete-zahl-sind' },
+])} />
+
+# Warum 1,1 Promille eine gerechnete Zahl sind
+
+<ArtikelDatum datum={artikel.datum} />
+
+<Bild src="/blog/promille-titelbild.png" alt="Mehrere verschlossene Blutprobenröhrchen mit grauen und roten Kappen stehen in einem Gestell auf einer Edelstahl-Laborbank" caption="Am Ende steht eine Zahl mit zwei Nachkommastellen. Wie belastbar sie ist, entscheidet sich lange vorher." width={1200} height={675} />
+
+<Infobox titel="Worum es geht">
+Die Formel, mit der in Deutschland Blutalkoholwerte berechnet werden, stammt aus dem Jahr 1932
+und hat einen Schwachpunkt, den man nie beheben konnte. Der Grenzwert von 1,1 Promille ist keine
+Messgröße, sondern eine Summe aus Erfahrungswert und Sicherheitszuschlag. Und für dieselbe
+Blutprobe rechnet die Justiz mit zwei verschiedenen Abbauwerten — je nachdem, welche Frage sie
+beantworten will.
+</Infobox>
+
+## Die Frage, die keine Rechnung beantwortet
+
+Zwei Bier, ein Glas Wein, das war es. Kann ich noch fahren?
+
+Diese Frage ist der Grund, warum Promillerechner existieren, und sie ist zugleich der Grund,
+warum keiner von ihnen sie beantworten kann. Nicht weil die Rechner schlecht wären, sondern
+weil die Größe, um die es geht, sich nicht aus dem berechnen lässt, was man über sich selbst
+weiß.
+
+Man kann ausrechnen, wie viel reiner Alkohol in zwei Bier und einem Glas Wein steckt — das ist
+Arithmetik und stimmt auf das Gramm. Man kann daraus abschätzen, welche Konzentration sich
+daraus ergäbe, wenn dieser Alkohol sich gleichmäßig im Körperwasser verteilte. Was man nicht
+kann, ist beziffern, wie viel davon überhaupt ins Blut gelangt ist, wie viel zum fraglichen
+Zeitpunkt schon abgebaut war und wie stark die eigene Physiologie vom Durchschnitt abweicht.
+Jede dieser drei Größen schwankt so erheblich, dass sich die Unsicherheiten nicht ausmitteln,
+sondern addieren.
+
+Das Ergebnis ist eine Spanne, keine Zahl. Und in dieser Spanne liegt oft die Grenze, um die es
+geht.
+
+Man kann das an einer einzigen Zeile sehen. Nimmt man die drei Unsicherheiten je für sich —
+Verteilungsraum, Resorption, Abbau —, ergibt jede allein schon eine Abweichung von zehn bis
+zwanzig Prozent nach oben oder unten. Zusammengenommen liegt zwischen dem günstigsten und dem
+ungünstigsten Fall leicht ein Faktor von anderthalb. Bei einem berechneten Wert von 0,8 Promille
+heißt das: irgendwo zwischen 0,6 und 1,2. Über diese Spanne verteilt liegen die
+Ordnungswidrigkeit, die Straftat und der unauffällige Abend.
+
+Interessant wird die Sache, wenn man sich ansieht, wie der Staat mit demselben Problem umgeht.
+Er hat es nicht gelöst — er hat sich entschieden, mit der Unsicherheit systematisch umzugehen.
+Wie er das tut, ist der eigentliche Gegenstand dieses Textes. Und es führt zu dem
+bemerkenswerten Ergebnis, dass ein und dieselbe Person am selben Abend zwei verschiedene
+Promillewerte gehabt haben kann, beide amtlich, beide richtig.
+
+## Was Widmark 1932 wirklich aufgeschrieben hat
+
+Der schwedische Chemiker Erik Matteo Prochet Widmark, geboren 1889 in Helsingborg, veröffentlichte
+1932 eine Formel, die seither unverändert in Gebrauch ist. Sie lautet: Konzentration gleich
+aufgenommene Alkoholmenge, geteilt durch das Produkt aus Körpergewicht und einem
+Reduktionsfaktor.
+
+In Zeichen: c₀ = A / (r × p). A ist die Alkoholmenge in Gramm, p das Körpergewicht in Kilogramm,
+r der Reduktionsfaktor — 0,7 bei Männern, 0,6 bei Frauen.
+
+Wichtig ist, was dabei herauskommt. Nicht der Promillewert, den jemand hatte, sondern die
+fiktive maximale Konzentration: der Wert, der sich einstellen würde, wenn die gesamte Menge auf
+einmal aufgenommen, vollständig verteilt und noch nichts abgebaut worden wäre. Ein
+Obergrenzenwert für einen Zustand, den es so nie gibt.
+
+Der Reduktionsfaktor ist der interessante Teil, und er wird fast immer falsch erklärt. Er ist
+kein Korrekturfaktor und kein Erfahrungswert, sondern die Antwort auf eine physikalische
+Tatsache: Alkohol ist wasserlöslich und verteilt sich deshalb nur im Körperwasser. In Knochen
+und Fettgewebe geht er nicht. Ein Körper von 80 Kilogramm stellt dem Alkohol also nicht 80
+Kilogramm Verteilungsraum zur Verfügung, sondern deutlich weniger — und dieser Anteil ist es,
+den r beziffert.
+
+Dass der Wert bei Frauen niedriger liegt, hat denselben Grund und nichts mit Verträglichkeit zu
+tun: Der durchschnittliche Körperfettanteil ist höher, der Wasseranteil entsprechend niedriger.
+Zwei Menschen mit gleichem Gewicht, aber unterschiedlicher Zusammensetzung haben unterschiedlich
+viel Verteilungsraum. Deshalb wirkt dieselbe Menge unterschiedlich stark.
+
+Widmarks Leistung war, diesen Zusammenhang überhaupt quantifiziert zu haben, zu einer Zeit, als
+die Bestimmung von Alkohol im Blut selbst noch ein Forschungsgegenstand war. Dass seine Formel
+mehr als neunzig Jahre überdauert hat, spricht für sie. Dass sie in dieser Zeit nicht besser
+geworden ist, spricht für die Schwierigkeit des Gegenstands.
+
+## Warum Promille und nicht Prozent
+
+Ein Zwischenschritt, der die Größenordnungen erklärt. Blutalkohol wird als Massenanteil
+angegeben: Gramm Alkohol je Kilogramm Blut. Ein Promille bedeutet also ein Gramm Ethanol in
+einem Kilogramm Blut.
+
+Prozent wäre dieselbe Größe mit anderem Nenner — 1,1 Promille sind 0,11 Prozent. Man hat sich
+gegen diese Schreibweise entschieden, weil der interessante Bereich zwischen 0,03 und 0,25
+Prozent läge und damit ausgerechnet dort, wo Kommastellen anfangen, unübersichtlich zu werden.
+Bei einer Größe, an der Führerscheine und Strafverfahren hängen, ist die zweite Nachkommastelle
+kein guter Ort für den Unterschied zwischen Ordnungswidrigkeit und Straftat.
+
+Der Massenanteil hat noch einen praktischen Vorteil gegenüber einer Konzentration in Gramm je
+Liter: Er ist unabhängig von der Temperatur, weil sich mit der Wärme zwar das Volumen ändert,
+nicht aber die Masse. Für Laborwerte, die über Jahre vergleichbar bleiben sollen, ist das kein
+kleiner Punkt.
+
+Wer das umrechnen will: Ein Standardglas Bier von 0,3 Litern mit 5 Prozent Alkohol enthält rund
+12 Gramm reinen Alkohol. Alkohol hat eine Dichte von etwa 0,8 Gramm je Milliliter — deshalb wiegt
+ein Milliliter Ethanol weniger als ein Milliliter Wasser, und deshalb steht in jeder
+Umrechnungsformel irgendwo der Faktor 0,8.
+
+## Der Faktor, der nie zur Variablen wurde
+
+Die Schwäche der Formel steckt genau in dem Teil, der ihre Stärke ist. Der Reduktionsfaktor
+beschreibt eine individuelle Größe — den Wasseranteil des Körpers — mit einer festen Zahl für
+alle.
+
+Ein durchtrainierter Mann von 85 Kilogramm und ein stark übergewichtiger Mann von 85 Kilogramm
+bekommen denselben Faktor 0,7. Ihr tatsächlicher Körperwasseranteil kann sich aber um zehn
+Prozentpunkte und mehr unterscheiden. Bei gleicher Trinkmenge liegen ihre Blutalkoholwerte
+entsprechend auseinander, während die Rechnung für beide dasselbe ausgibt.
+
+Man hat das früh gewusst und lange versucht, es zu beheben. Es gelang nicht, und der Grund ist
+nüchtern: Das Gesamtkörperwasser entzog sich einer genauen Bestimmung, anders als der
+Wassergehalt des Blutes. Ohne ein praktikables Messverfahren blieb dem starren Faktor keine
+Alternative — verschiedene Ansätze zur Modifikation konnten diesen Mangel nicht oder nur
+unzureichend ausgleichen.
+
+Erst gegen Ende der neunziger Jahre änderte sich das. An der Universität Ulm nutzten der
+forensische Chemiker Andreas Alt und der Mediziner Stephan Seidl ein Körperfettanalysegerät,
+das nach dem Prinzip der bioelektrischen Impedanzmessung arbeitet, um das Gesamtkörperwasser
+zuverlässig zu bestimmen. Damit ließ sich der Verteilungsfaktor individualisieren. In
+Trinkversuchen mit je dreißig Probandinnen und Probanden stellten sie den gemessenen Blutwerten
+zwei Rechnungen gegenüber: eine mit den starren Faktoren, eine mit den individuellen.
+
+Parallel dazu entstanden Ansätze wie die Watson-Formel, die neben dem Gewicht auch Körpergröße,
+Alter und Geschlecht einbeziehen. Alle diese Verfahren zielen auf dasselbe: den
+Verteilungsraum genauer zu schätzen, statt ihn zu pauschalieren.
+
+<GetraenkeAlkohol />
+
+## Was gar nicht erst ankommt
+
+Die zweite Unschärfe hat mit dem Körper zu tun, aber nicht mit seiner Zusammensetzung. Nicht
+aller getrunkene Alkohol erreicht das Blut. Ein Teil wird schon in Magen und Darmwand
+abgebaut, bevor er den Kreislauf erreicht.
+
+Dieser Anteil heißt Resorptionsdefizit, und er ist nicht klein: Er liegt zwischen zehn und
+dreißig Prozent der konsumierten Menge und hängt davon ab, was und wie getrunken wurde —
+Schnaps verhält sich anders als Bier, auf nüchternen Magen anders als zum Essen.
+
+Zehn bis dreißig Prozent ist eine Spanne mit dem Faktor drei. Wer 60 Gramm reinen Alkohol
+getrunken hat, bei dem kommen zwischen 42 und 54 Gramm an. Das allein verschiebt das Ergebnis um
+mehr als 0,2 Promille bei einem durchschnittlichen Körpergewicht — eine Größenordnung, die im
+Straßenverkehrsrecht über die Einordnung eines Sachverhalts entscheidet.
+
+Für eine amtliche Rechnung muss man sich für einen Wert entscheiden. In der Rückrechnung aus
+Trinkmengen wird das Resorptionsdefizit mit zehn Prozent angesetzt — dem niedrigsten Wert, also
+dem, der die meiste Alkoholmenge im Blut ankommen lässt. Warum ausgerechnet dieser Wert gewählt
+wird, ergibt sich erst weiter unten.
+
+## Die Kurve über den Abend
+
+Der dritte Punkt ist der Zeitverlauf. Blutalkohol ist keine Zahl, sondern eine Kurve mit zwei
+Phasen. In der Resorptionsphase steigt der Wert, weil mehr Alkohol aufgenommen als abgebaut
+wird. Nach dem Trinkende erreicht er ein Maximum und fällt danach in der Eliminationsphase
+annähernd linear ab.
+
+Dieses lineare Abfallen ist die praktisch wichtigste Eigenschaft. Anders als bei den meisten
+Stoffen im Körper hängt die Abbaugeschwindigkeit von Alkohol kaum von der vorhandenen Menge ab
+— die Leber arbeitet an der Auslastungsgrenze und schafft eine annähernd konstante Menge je
+Stunde, egal wie viel bereitsteht. Deshalb sinkt die Kurve als Gerade und nicht als abklingende
+Krümmung.
+
+Nur: Wie steil diese Gerade ist, unterscheidet sich von Mensch zu Mensch erheblich. Der
+stündliche Abbauwert liegt nach heutigem Stand zwischen 0,10 und 0,20 Promille und hängt unter
+anderem von Gewicht, Geschlecht und Alkoholgewöhnung ab. Auch hier: Faktor zwei zwischen den
+Rändern.
+
+Über eine Nacht summiert sich das. Wer um Mitternacht bei 1,2 Promille steht, liegt um sechs Uhr
+morgens je nach eigener Physiologie bei 0,6 oder bei null. Beides ist medizinisch normal.
+
+<PromilleKurve />
+
+Wer nachvollziehen will, wie sich Trinkmenge, Gewicht und Zeit auf die Größenordnung auswirken,
+kann es hier durchspielen — mit dem Vorbehalt, um den es in diesem Text geht:
+
+<RechnerLoader slug="promillerechner" />
+
+<Video src="/blog/promille.mp4" poster="/blog/promille-video-standbild.jpg" caption="Pipettieren, verschließen, einstellen – der Weg von der Probe zur Zahl." />
+
+## 1,1 ist eine Summe, keine Messung
+
+Damit zum Recht. Die Zahl 1,1 Promille kennt jeder als Grenze zur absoluten Fahruntüchtigkeit.
+Kaum jemand weiß, dass sie sich aus zwei Teilen zusammensetzt und dass sie früher anders lautete.
+
+1966 legte der Bundesgerichtshof den Grenzwert auf 1,3 Promille fest. Er bestand aus einem
+Grundwert von 1,0 Promille — ab dort war nach Alkoholforschung und Fahrversuchen von absoluter
+Fahruntüchtigkeit auszugehen — und einem Sicherheitszuschlag von 0,2 Promille. Der Zuschlag galt
+nicht dem Menschen, sondern dem Labor: Die Alkoholbestimmung war damals ungenau, und die
+Standardabweichung von 0,05 Promille wurde vorsichtshalber auf das Dreifache aufgerundet.
+
+Am 28. Juni 1990 senkte der Bundesgerichtshof den Wert auf 1,1 Promille und sprach zugleich
+ausdrücklich aus, dass er für alle Führer von Kraftfahrzeugen gilt.
+
+Der entscheidende Punkt: Der Grundwert blieb, wo er war. Verändert hat sich der Zuschlag — weil
+die Labore genauer geworden waren und weil sich die Institute inzwischen durch Ringversuche
+gegenseitig kontrollierten. Einwendungen gegen den Grundwert von 1,0 Promille waren aus
+medizinisch-naturwissenschaftlichen Fachkreisen nicht erhoben worden.
+
+Der Mensch von 1990 vertrug also nicht weniger als der von 1966. Die Messgeräte waren besser
+geworden. Die Zahl 1,1 beschreibt damit zwei Dinge zugleich: eine Aussage über den Menschen und
+eine Aussage über den Stand der Analytik. Wer sie für eine Naturkonstante hält, verwechselt eine
+Rechnung mit einer Beobachtung.
+
+<GrenzwertZeitachse />
+
+## Zwei Rückrechnungen, zwei Wahrheiten
+
+Jetzt der Teil, an dem die meisten hängenbleiben, und der zugleich der logischste ist.
+
+Blut wird selten zur Tatzeit entnommen. Zwischen dem Vorfall und der Blutprobe liegen Stunden,
+in denen der Wert gesunken ist. Um zu beurteilen, was zur Tatzeit vorlag, muss zurückgerechnet
+werden. Und hier gilt: Es gibt nicht eine Rückrechnung, sondern zwei — mit unterschiedlichen
+Werten, im selben Verfahren, für dieselbe Person.
+
+Geht es um die **Fahruntüchtigkeit**, also um die Frage, ob eine Straftat vorliegt, wird mit dem
+niedrigsten medizinisch anerkannten Abbauwert von 0,1 Promille je Stunde gerechnet. Zusätzlich
+bleiben in der Regel die ersten zwei Stunden nach Trinkende unberücksichtigt, weil in dieser
+Zeit noch Resorption stattfinden kann.
+
+Geht es um die **Schuldfähigkeit**, also um die Frage, ob jemand im Zustand erheblich
+verminderter Steuerungsfähigkeit handelte, wird mit 0,2 Promille je Stunde gerechnet, zuzüglich
+eines einmaligen Sicherheitszuschlags von 0,2 Promille ab der ersten Stunde.
+
+Ein Beispiel macht die Größenordnung deutlich. Tatzeit ein Uhr nachts, Blutentnahme um sieben
+Uhr, gemessen 1,3 Promille. Für die Fahruntüchtigkeit werden vier Stunden zu je 0,1 Promille
+angesetzt: rund 1,7 Promille zur Tatzeit. Für die Schuldfähigkeit sechs Stunden zu je 0,2
+Promille plus 0,2 Promille Zuschlag: rund 2,7 Promille. Ein Unterschied von einem ganzen
+Promille bei identischer Blutprobe.
+
+<ZweiRueckrechnungen />
+
+Das ist kein Widerspruch, sondern ein Prinzip. Zurückgerechnet wird immer zugunsten des
+Beschuldigten — und was ihm nützt, ist bei beiden Fragen genau entgegengesetzt. Bei der
+Fahruntüchtigkeit nützt ihm ein möglichst niedriger Wert, weil er dann unter der Grenze bleibt.
+Bei der Schuldfähigkeit nützt ihm ein möglichst hoher, weil erhebliche Alkoholisierung die
+Schuld mindern kann.
+
+Aus demselben Grund wird das Resorptionsdefizit in der Hochrechnung aus Trinkmengen mit nur zehn
+Prozent angesetzt und der Reduktionsfaktor mit 0,7: Beides führt zum ungünstigsten Ergebnis für
+die jeweils zu prüfende Behauptung. Die Rechnung sucht nicht den wahrscheinlichsten Wert. Sie
+sucht den Wert, der sich nicht mehr zugunsten des Beschuldigten bestreiten lässt.
+
+Erreicht die Blutprobe selbst schon 1,1 Promille, erübrigt sich die Rückrechnung für die
+Fahruntüchtigkeit ohnehin — dann stand fest, dass zur Tatzeit mindestens diese Menge im Körper
+war.
+
+## Was der Körper mit dem Rest macht
+
+Ein Punkt fehlt noch, und er erklärt, warum sich am Abbau nichts beschleunigen lässt. Rund 90
+bis 95 Prozent des aufgenommenen Alkohols werden in der Leber abgebaut; der kleine Rest
+verlässt den Körper unverändert über Atem, Schweiß und Urin. Genau dieser Rest ist der Grund,
+warum ein Atemalkoholtest überhaupt funktioniert: Was man ausatmet, steht in einem festen
+Verhältnis zu dem, was im Blut ist.
+
+Der Abbau in der Leber läuft über zwei Enzymschritte. Zuerst wird Ethanol zu Acetaldehyd,
+danach Acetaldehyd zu Acetat, das der Körper weiterverwenden kann. Der erste Schritt ist der
+langsamere und begrenzt das Tempo. Weil das zuständige Enzym schon bei niedrigen
+Konzentrationen ausgelastet ist, arbeitet es unabhängig davon, wie viel Nachschub bereitsteht —
+das ist der Grund für den linearen Abfall der Kurve.
+
+Daraus folgt, was man aus Erfahrung kennt und trotzdem gern vergisst: Es gibt kein Mittel, das
+den Abbau beschleunigt. Kaffee, kaltes Duschen, Bewegung, fettes Essen — nichts davon greift in
+den Enzymschritt ein. Was diese Mittel bewirken, ist eine kurzzeitige Veränderung des
+Wachheitsgefühls. Der Wert im Blut bleibt, wo er ist. Ein wacher Mensch mit 1,2 Promille ist
+nicht nüchterner als ein müder mit 1,2 Promille, er hält sich nur für nüchterner.
+
+Umgekehrt lässt sich der Anstieg sehr wohl beeinflussen. Auf nüchternen Magen getrunkener
+Alkohol erreicht das Blut schneller und in höherer Spitze als derselbe Alkohol zu einer
+Mahlzeit, weil der Magen langsamer entleert. Das verändert nicht die Gesamtmenge, aber den
+Verlauf — und damit den Wert zu einem bestimmten Zeitpunkt.
+
+## Die anderen Zahlen, die man kennen sollte
+
+Die 1,1 ist die bekannteste Grenze, aber weder die niedrigste noch die einzige. Vier weitere
+gehören dazu, und sie stehen in verschiedenen Gesetzen mit verschiedenen Folgen.
+
+**0,5 Promille** ist die einzige Zahl, die der Gesetzgeber selbst in einen Gesetzestext
+geschrieben hat. § 24a des Straßenverkehrsgesetzes macht es zur Ordnungswidrigkeit, ein
+Kraftfahrzeug zu führen, wenn man 0,5 Promille oder mehr im Blut hat — beziehungsweise 0,25
+Milligramm je Liter in der Atemluft. Ausfallerscheinungen braucht es dafür nicht; der Wert
+allein genügt.
+
+**0,3 Promille** steht in keinem Gesetz, sondern kommt aus der Rechtsprechung. Ab dort kann
+relative Fahruntüchtigkeit vorliegen — allerdings nur, wenn zum Alkohol alkoholbedingte
+Ausfallerscheinungen hinzutreten, etwa Schlangenlinien oder ein Unfall. Dann ist es keine
+Ordnungswidrigkeit mehr, sondern eine Straftat. Fehlen die Ausfallerscheinungen, bleibt es bei
+der 0,5-Grenze.
+
+**Null** gilt für Fahranfängerinnen und Fahranfänger. § 24c des Straßenverkehrsgesetzes verbietet
+Alkohol am Steuer in der Probezeit und vor Vollendung des 21. Lebensjahres vollständig. Beide
+Voraussetzungen wirken unabhängig voneinander: Wer mit 19 die Probezeit hinter sich hat, fällt
+weiterhin unter die Altersregel.
+
+**1,6 Promille** ist keine Grenze für die Bestrafung, sondern für die Eignung. Ab diesem Wert
+ordnet die Fahrerlaubnisbehörde in der Regel eine medizinisch-psychologische Untersuchung an,
+und zwar auch bei Radfahrern. Der Gedanke dahinter: Wer eine solche Konzentration erreicht und
+noch handlungsfähig ist, hat eine Gewöhnung entwickelt, die auf mehr als einen einzelnen Abend
+hindeutet.
+
+Bemerkenswert ist, was die Aufzählung über die Systematik verrät. Die einzige gesetzlich
+fixierte Zahl ist die für die Ordnungswidrigkeit. Alle strafrechtlich bedeutsamen Werte — 0,3
+mit Ausfallerscheinungen, 1,1 ohne — stammen aus Gerichtsentscheidungen und stehen in keinem
+Paragrafen. Das Strafgesetzbuch selbst nennt in § 316 keine einzige Promillezahl; es spricht nur
+davon, dass jemand nicht in der Lage ist, das Fahrzeug sicher zu führen. Die Zahlen sind die
+Antwort der Gerichte auf die Frage, ab wann das feststeht.
+
+<GrenzwertUebersicht />
+
+## Warum der Rechner hier anders rechnet
+
+Der Promillerechner auf dieser Seite folgt nicht Widmarks starrem Faktor. Er rechnet über den
+Körperwasseranteil — 68 Prozent beim Mann, 55 Prozent bei der Frau — und setzt den Abbau mit
+0,15 Promille je Stunde an.
+
+Beides ist eine bewusste Entscheidung. Der Körperwasseranteil ist die Größe, um die es
+physiologisch geht; Widmarks r war immer nur eine Näherung dafür, entstanden aus der Not, dass
+man Körperwasser nicht messen konnte. Und 0,15 Promille liegt genau in der Mitte des Korridors
+von 0,1 bis 0,2.
+
+Damit rechnet dieser Rechner absichtlich anders als ein Gericht. Ein Gericht sucht die Grenze
+des Bestreitbaren und nimmt dafür die Ränder. Ein Rechner, der jemandem eine Vorstellung von
+Größenordnungen geben soll, nimmt die Mitte. Beides ist richtig für seinen Zweck — und beides
+liefert unterschiedliche Zahlen.
+
+Genau deshalb taugt kein Ergebnis von hier als Beleg für irgendetwas. Es ist die
+wahrscheinlichste Schätzung, nicht die belastbare Untergrenze.
+
+Eine zweite Vereinfachung steckt in der Zeitrechnung. Der Rechner zieht den Abbau ab dem
+Trinkbeginn ab, als liefe die Elimination von der ersten Minute an mit voller Rate. Tatsächlich
+überlagern sich am Anfang Aufnahme und Abbau, und das Maximum wird erst nach dem Trinkende
+erreicht. Für eine Abschätzung über einen ganzen Abend fällt das kaum ins Gewicht; für die
+erste Stunde nach dem ersten Glas unterschätzt es den Wert.
+
+Wer beide Vereinfachungen zusammennimmt — mittlerer Abbauwert statt Randwert, linearer Abbau ab
+Trinkbeginn statt ab Maximum —, sieht, wohin sie zeigen: zu einem Wert, der eher zu niedrig als
+zu hoch liegt. Bei einer Zahl, die manche als Erlaubnis lesen könnten, ist das die
+unangenehmere Richtung. Deshalb dieser Absatz.
+
+## Was man damit anfängt — und was nicht
+
+Der Nutzen einer solchen Rechnung liegt nicht im Ergebnis, sondern im Gefühl für
+Größenordnungen. Dass ein halber Liter Bier und ein Glas Wein zusammen mehr sind, als man denkt.
+Dass Abbau in Stunden gemessen wird und nicht in Kaffee. Dass eine Nacht Schlaf bei hohen Werten
+nicht reicht.
+
+Was sie nicht leistet, ist eine Auskunft über die eigene Fahrtüchtigkeit. Drei Unsicherheiten
+mit jeweils zweistelligen Prozentspannen — Verteilungsraum, Resorption, Abbau — ergeben eine
+Ergebnisspanne, in der jede Grenze mühelos Platz findet. Ein Rechner, der 0,4 Promille anzeigt,
+schließt 0,6 nicht aus.
+
+Und selbst wenn die Zahl stimmte, beantwortete sie die falsche Frage. Die Grenze von 0,5
+Promille ist keine Schwelle, unterhalb derer nichts passiert; Beeinträchtigungen beginnen früher.
+Die 1,1 markieren nicht den Beginn der Gefährlichkeit, sondern den Punkt, ab dem keine
+Gegenbehauptung mehr zugelassen wird.
+
+Es lohnt, sich den Umgang der Justiz mit derselben Unsicherheit noch einmal anzusehen. Sie
+rechnet nicht mit Mittelwerten, obwohl sie könnte. Sie rechnet mit den Rändern, und sie wechselt
+den Rand, sobald sich die Frage ändert. Das ist kein Misstrauen gegen die Physiologie, sondern
+ein Eingeständnis: Man weiß es nicht genau genug, um jemanden auf einen Mittelwert hin zu
+verurteilen.
+
+Wer sich fragt, ob er noch fahren kann, hat die Frage damit schon beantwortet. Das ist kein
+moralischer Satz, sondern ein rechnerischer: In dem Bereich, in dem die Frage überhaupt
+aufkommt, ist die Unsicherheit der Schätzung größer als der Abstand zur Grenze.
+
+<KarstenSagt>
+Bei mir ist die Frage einfach zu beantworten, weil sie sich nicht stellt: Ich trinke seit Jahren
+keinen Alkohol mehr. Kein Wein, kein Bier, härtere Sachen erst recht nicht. Und selbst als das
+noch anders war, galt: keine Fahrt unter Alkohol. Nicht ein Glas, nicht ausnahmsweise.
+
+Was mich beim Recherchieren dieses Textes überrascht hat, ist etwas anderes. Dass eine genaue
+Messung im Grunde nicht möglich ist — dass Verteilungsraum, Aufnahme und Abbau jeder für sich
+schon eine Spanne aufmachen und sich das dann noch addiert. Man denkt bei einem Promillewert an
+etwas Feststehendes, weil er auf zwei Stellen genau ausgewiesen wird.
+
+Gleichzeitig verstehe ich, dass es nicht anders geht. Irgendwo muss ein Wert festgelegt werden,
+sonst lässt sich kein Bußgeld verhängen und keine Maßnahme begründen. Man kann nicht jeden Fall
+einzeln ausdiskutieren. Insofern finde ich die Lösung mit den Sicherheitszuschlägen und den zwei
+Rechenwegen sogar ziemlich ehrlich: Sie tut nicht so, als wüsste man es genau, sondern rechnet
+die Unsicherheit ein.
+</KarstenSagt>
+
+<Quellen eintraege={[
+  {
+    titel: 'Widmark-Formel — Springer, Lexikon der Rechtsmedizin',
+    url: 'https://link.springer.com/rwe/10.1007/978-3-662-49054-9_3317-1',
+    hinweis: 'Erik Widmark (1889–1945), Formel von 1932: C = A / (r × KG). Reduktionsfaktor 0,7 für Männer, 0,6 für Frauen. Begründung über die Wasserlöslichkeit von Ethanol, das sich nicht in Knochen und Fettgewebe verteilt. Verweis auf neuere Ansätze wie die Watson-Formel, die zusätzlich Körpergröße und Alter einbeziehen.',
+  },
+  {
+    titel: 'BAK-Berechnungen nach Trinkmengenangaben — Spektrum der Wissenschaft zur Ulmer Arbeit von Seidl und Alt',
+    url: 'https://www.spektrum.de/news/bak-berechnungen-nach-trinkmengenangaben/342316',
+    hinweis: 'Zur fiktiven maximalen Konzentration als Ergebnis der Formel und zum ungelösten Problem des starren r: Das Gesamtkörperwasser entzog sich einer genaueren Bestimmbarkeit. Beschreibt die Individualisierung des Verteilungsfaktors über bioelektrische Impedanzmessung und die Trinkversuche mit je dreißig Probandinnen und Probanden.',
+  },
+  {
+    titel: 'BGH, Urteil vom 28. Juni 1990 — 4 StR 297/90',
+    url: 'https://dejure.org/dienste/vernetzung/rechtsprechung?Gericht=BGH&Datum=28.06.1990&Aktenzeichen=4+StR+297/90',
+    hinweis: 'Festlegung des Grenzwerts der absoluten Fahruntüchtigkeit auf 1,1 Promille mit ausdrücklicher Geltung für alle Führer von Kraftfahrzeugen. Zuvor galt seit 1966 ein Wert von 1,3 Promille aus Grundwert 1,0 plus Sicherheitszuschlag 0,2.',
+  },
+  {
+    titel: 'Zur Herleitung des Sicherheitszuschlags — Wiedergabe der Entscheidungsgründe',
+    url: 'https://autorechtler.de/news/blutalkoholgehalt-fuer-absolute-fahruntuechtigkeit-eines-kraftfahrers',
+    hinweis: 'Der Sicherheitszuschlag von 1966 beruhte auf einer Standardabweichung der Alkoholbestimmung von 0,05 Promille, die auf das Dreifache aufgerundet wurde. Gegen den Grundwert von 1,0 Promille wurden aus medizinisch-naturwissenschaftlichen Fachkreisen keine Einwendungen erhoben.',
+  },
+  {
+    titel: 'Rückrechnung bei Alkoholdelikten — Verfahren und Rechenwerte',
+    url: 'https://brald.com/de/content_01_06-html/',
+    hinweis: 'Stündlicher Abbauwert zwischen 0,10 und 0,20 Promille. Getrennte Rechenwege: Tatbestandsmäßigkeit mit 0,1 Promille je Stunde ab Resorptionsende, Schuldfähigkeit mit 0,2 Promille je Stunde zuzüglich einmaligem Sicherheitszuschlag von 0,2 Promille.',
+  },
+  {
+    titel: 'Rückrechnung nach BGH vom 22. November 1990 — Übersicht der Rechenvorgaben',
+    url: 'https://www.verkehrslexikon.de/ModuleAlk/Rueckrechnung.php',
+    hinweis: 'Bei der Hochrechnung aus Trinkmengen ist mit dem jeweils niedrigsten Abbauwert von 0,1 Promille je Stunde, einem Resorptionsdefizit von zehn Prozent und einem Reduktionsfaktor von 0,7 zu rechnen.',
+  },
+  {
+    titel: 'Resorptionsdefizit — Spanne und Einflussgrößen',
+    url: 'https://www.mpu-hilfe.tips/berechnung-der-blutalkoholkonzentration-bak-nach-der-widmark-formel/',
+    hinweis: 'Der beim Trinken nicht in den Blutkreislauf übergehende Anteil beträgt zwischen zehn und dreißig Prozent der konsumierten Menge und hängt von der Art des Getränks ab. Darstellung des dreistufigen Rechenwegs aus Maximalwert, Resorptionsdefizit und Abbau.',
+  },
+]} />

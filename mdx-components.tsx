@@ -68,6 +68,11 @@ import DachschraegeZonen from '@/components/blog/grafik/DachschraegeZonen';
 import ZweiZulaessigeErgebnisse from '@/components/blog/grafik/ZweiZulaessigeErgebnisse';
 import WasZaehltMit from '@/components/blog/grafik/WasZaehltMit';
 import ZehnProzentZeitachse from '@/components/blog/grafik/ZehnProzentZeitachse';
+import GetraenkeAlkohol from '@/components/blog/grafik/GetraenkeAlkohol';
+import PromilleKurve from '@/components/blog/grafik/PromilleKurve';
+import GrenzwertZeitachse from '@/components/blog/grafik/GrenzwertZeitachse';
+import ZweiRueckrechnungen from '@/components/blog/grafik/ZweiRueckrechnungen';
+import GrenzwertUebersicht from '@/components/blog/grafik/GrenzwertUebersicht';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -176,6 +181,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ZweiZulaessigeErgebnisse,
     WasZaehltMit,
     ZehnProzentZeitachse,
+    GetraenkeAlkohol,
+    PromilleKurve,
+    GrenzwertZeitachse,
+    ZweiRueckrechnungen,
+    GrenzwertUebersicht,
     ...components,
   };
 }
