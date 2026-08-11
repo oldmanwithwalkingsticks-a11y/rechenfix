@@ -64,6 +64,10 @@ import ZweiPfunde from '@/components/blog/grafik/ZweiPfunde';
 import PfundZuGeld from '@/components/blog/grafik/PfundZuGeld';
 import PreisschildRegel from '@/components/blog/grafik/PreisschildRegel';
 import PfundZeitleiste from '@/components/blog/grafik/PfundZeitleiste';
+import DachschraegeZonen from '@/components/blog/grafik/DachschraegeZonen';
+import ZweiZulaessigeErgebnisse from '@/components/blog/grafik/ZweiZulaessigeErgebnisse';
+import WasZaehltMit from '@/components/blog/grafik/WasZaehltMit';
+import ZehnProzentZeitachse from '@/components/blog/grafik/ZehnProzentZeitachse';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -168,6 +172,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     PfundZuGeld,
     PreisschildRegel,
     PfundZeitleiste,
+    DachschraegeZonen,
+    ZweiZulaessigeErgebnisse,
+    WasZaehltMit,
+    ZehnProzentZeitachse,
     ...components,
   };
 }

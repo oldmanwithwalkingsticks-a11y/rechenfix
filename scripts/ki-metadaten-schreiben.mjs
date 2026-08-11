@@ -69,6 +69,9 @@ const GENERATOREN = {
   'zeit.mp4': 'Kling AI 3.0 (Kuaishou)',
   'pfund-titelbild.png': 'Gemini 3 Pro Image (Google)',
   'pfund.mp4': 'Kling AI 3.0 (Kuaishou)',
+  'wohnflaeche-titelbild.png': 'gemini-3-pro-image',
+  'wohnflaeche-video-standbild.jpg': 'kling-video-v3_0',
+  'wohnflaeche.mp4': 'kling-video-v3_0',
 };
 
 const nurPruefen = process.argv.includes('--pruefen');

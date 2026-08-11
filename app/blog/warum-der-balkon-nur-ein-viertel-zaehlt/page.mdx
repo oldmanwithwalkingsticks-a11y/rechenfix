@@ -1,0 +1,427 @@
+import { generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import StructuredData from '@/components/seo/StructuredData';
+import { artikel } from './meta';
+
+export const metadata = {
+  title: `${artikel.titel} | Rechenfix.de`,
+  description: artikel.beschreibung,
+  alternates: { canonical: 'https://www.rechenfix.de/blog/warum-der-balkon-nur-ein-viertel-zaehlt' },
+};
+
+<StructuredData data={generateArticleSchema({
+  url: 'https://www.rechenfix.de/blog/warum-der-balkon-nur-ein-viertel-zaehlt',
+  headline: artikel.titel,
+  description: artikel.beschreibung,
+  datePublished: artikel.datum,
+  dateModified: artikel.datum,
+  image: '/blog/wohnflaeche-titelbild.png',
+})} />
+
+<StructuredData data={generateBreadcrumbSchema([
+  { name: 'Start', url: '/' },
+  { name: 'Blog', url: '/blog' },
+  { name: artikel.titel, url: '/blog/warum-der-balkon-nur-ein-viertel-zaehlt' },
+])} />
+
+# Warum der Balkon nur zu einem Viertel zählt
+
+<ArtikelDatum datum={artikel.datum} />
+
+<Bild src="/blog/wohnflaeche-titelbild.png" alt="Blick aus einem Wohnzimmer durch die offene Balkontür auf einen sonnigen Balkon mit Tisch, zwei Stühlen und Metallgeländer" caption="Die Schwelle im Bild ist zugleich eine Rechengrenze: drinnen zählt die Fläche voll, draußen nur zu einem Viertel." width={1200} height={675} />
+
+<Infobox titel="Worum es geht">
+Die Quadratmeterzahl im Mietvertrag ist keine gemessene Größe, sondern eine gerechnete. Ein
+Balkon zählt anteilig, eine Dachschräge unter einem Meter gar nicht, die Treppe in der
+Maisonette fällt heraus — der Heizkörper dagegen zählt mit. Und die Verordnung, nach der das
+alles bemessen wird, ist für frei finanzierte Wohnungen formal überhaupt nicht gemacht worden.
+</Infobox>
+
+## Zwölf Quadratmeter Balkon, drei Quadratmeter Wohnfläche
+
+Wer eine Wohnung nachmisst, erlebt selten eine Überraschung beim Zollstock. Die Wände stehen
+da, wo sie stehen, und ein Zimmer von 4,20 mal 3,60 Metern hat 15,12 Quadratmeter Bodenfläche.
+Daran gibt es nichts zu deuteln.
+
+Die Überraschung kommt später, beim Zusammenzählen. Denn die Zahl, die im Mietvertrag steht,
+ist nicht die Summe der Bodenflächen. Sie ist das Ergebnis einer Rechnung, in der manche
+Flächen ganz zählen, manche zur Hälfte, manche zu einem Viertel und manche überhaupt nicht. Und
+welcher Fläche welcher Faktor zusteht, entscheidet keine Messung, sondern eine Verordnung.
+
+Der Balkon ist der auffälligste Fall. Zwölf Quadratmeter Balkon werden in aller Regel zu drei
+Quadratmetern Wohnfläche. Nicht, weil er kleiner wäre, als er aussieht, sondern weil man ihn nur
+einen Teil des Jahres nutzen kann und er deshalb nur anteilig in die Rechnung eingeht. Das ist
+nachvollziehbar. Merkwürdig wird es erst, wenn man liest, wie die Regel genau formuliert ist —
+dazu weiter unten.
+
+Diese Rechnung ist keine Formalie. An der Quadratmeterzahl hängt die Miete, an ihr hängen die
+Nebenkosten, an ihr hängen die Heizkosten, an ihr hängt beim Kauf der Quadratmeterpreis, mit dem
+man Angebote vergleicht. Sie ist die Bezugsgröße für praktisch alles, was Wohnen kostet. Und sie
+ist erstaunlich beweglich.
+
+## Die Verordnung, die für Ihre Wohnung gar nicht gemacht wurde
+
+Maßgeblich ist heute die Wohnflächenverordnung, ausgefertigt am 25. November 2003 und in Kraft
+seit dem 1. Januar 2004. Sie ist kurz — fünf Paragrafen, keine drei Seiten — und sie regelt in
+dieser Kürze, was zur Wohnfläche gehört, wie die Grundfläche zu ermitteln ist und mit welchem
+Anteil sie angerechnet wird.
+
+Nur: Ihr eigener erster Satz sagt etwas anderes, als die meisten annehmen. § 1 Absatz 1 lautet
+sinngemäß, die Verordnung sei anzuwenden, wenn die Wohnfläche nach dem Wohnraumförderungsgesetz
+berechnet wird. Das betrifft geförderten Wohnraum — also den kleineren Teil des Marktes. Für
+eine frei finanzierte Mietwohnung steht dort schlicht nichts.
+
+Dass sie trotzdem gilt, verdankt sich einem Urteil. Der Bundesgerichtshof entschied am
+24. März 2004, dass der Begriff der Wohnfläche auch bei frei finanziertem Wohnraum
+grundsätzlich anhand dieser Vorschriften zu bestimmen ist — sofern die Parteien nichts anderes
+vereinbart haben, ein anderer Berechnungsmodus ortsüblich ist oder nach der Art der Wohnung
+näherliegt.
+
+Man sollte diesen Satz zweimal lesen. Er enthält eine Regel und drei Türen, durch die man sie
+verlassen kann. Vereinbaren die Parteien im Mietvertrag ausdrücklich eine andere
+Berechnungsgrundlage, gilt diese. Ist am Ort eine andere Berechnung üblich, kann sie gelten.
+Und bei bestimmten Wohnungsarten kann eine andere Methode näherliegen.
+
+Der Grund für diese Weichheit ist selbst bemerkenswert: Ein allgemeiner, eindeutiger
+Sprachgebrauch für den Begriff „Wohnfläche“ hat sich nie herausgebildet. Es gibt kein Gesetz,
+das ein für alle Mal sagt, was das Wort bedeutet. Es gibt eine Verordnung für einen Teilbereich,
+eine technische Norm für einen anderen Zweck, jahrzehntealte Vorgängerregeln — und die
+Rechtsprechung, die daraus einen Standard gemacht hat, ohne ihn zwingend zu machen.
+
+Die zweite Rechengrundlage, die in der Praxis vorkommt, ist die DIN 277. Sie stammt aus dem
+Bauwesen und verfolgt einen anderen Zweck: Sie beschreibt Grundflächen und Rauminhalte von
+Bauwerken, nicht die Nutzbarkeit einer Wohnung für den, der darin wohnt. Wer nach ihr rechnet,
+kommt für dieselbe Wohnung auf eine höhere Zahl, weil dort Flächen mitzählen, die die
+Wohnflächenverordnung anteilig oder gar nicht ansetzt. Für Mietverträge braucht es dafür eine
+wirksame Vereinbarung — von selbst gilt sie nicht.
+
+## Was überhaupt dazugehört — und was nicht
+
+Bevor gerechnet wird, muss feststehen, welche Räume überhaupt in die Rechnung kommen. § 2 der
+Verordnung sortiert das in drei Absätzen.
+
+Dazu gehören zunächst die Grundflächen der Räume, die ausschließlich zu dieser Wohnung gehören.
+Das sind die Zimmer, die Küche, das Bad, der Flur innerhalb der Wohnung — alles, was hinter der
+Wohnungstür liegt und niemand anderem zusteht.
+
+Ausdrücklich dazu gehören außerdem Wintergärten, Schwimmbäder und ähnliche nach allen Seiten
+geschlossene Räume sowie Balkone, Loggien, Dachgärten und Terrassen — allerdings nur, wenn sie
+ausschließlich zu dieser Wohnung gehören. Der gemeinschaftlich genutzte Dachgarten des Hauses
+zählt also für niemanden mit.
+
+Nicht dazu gehören die Zubehörräume, und die Verordnung zählt sie einzeln auf: Kellerräume,
+Abstellräume und Kellerersatzräume außerhalb der Wohnung, Waschküchen, Bodenräume, Trockenräume,
+Heizungsräume und Garagen. Ebenfalls draußen bleiben Räume, die den bauordnungsrechtlichen
+Anforderungen an ihre Nutzung nicht genügen, sowie Geschäftsräume.
+
+Beim Wintergarten steckt die Feinheit eine Ebene tiefer. Er gehört nach § 2 zur Wohnfläche —
+angerechnet wird er nach § 4 aber nur zur Hälfte, wenn er unbeheizbar ist. Ein beheizbarer
+Wintergarten zählt damit voll, ein unbeheizbarer halb. Nicht die Nutzung entscheidet und auch
+nicht die Größe, sondern die Frage, ob sich der Raum überhaupt beheizen lässt. Dieselbe
+Glasfläche kann also je nach Heizungsanschluss zwei verschiedene Beiträge zur Wohnfläche
+leisten. Dasselbe gilt für Schwimmbäder und für ähnliche nach allen Seiten geschlossene Räume.
+
+Der zweite Punkt ist der interessante. Ein ausgebauter Kellerraum mit Teppich, Heizung und
+Fenster ist kein Wohnraum, solange er die Anforderungen der Landesbauordnung an einen
+Aufenthaltsraum nicht erfüllt — etwa an Raumhöhe, Belichtung oder Rettungswege. Er darf dann
+nicht in die Wohnfläche. Was tatsächlich bewohnt wird und was als Wohnfläche zählen darf, sind
+zwei verschiedene Fragen.
+
+Umgekehrt gilt: Ein Abstellraum **innerhalb** der Wohnung zählt mit, derselbe Raum eine Etage
+tiefer im Keller nicht. Nicht die Nutzung entscheidet, sondern die Lage.
+
+## Gemessen wird lichte Weite — der Heizkörper zählt mit
+
+§ 3 regelt, wie die Grundfläche zu ermitteln ist, und hier wird es handfest. Gemessen wird nach
+den lichten Maßen zwischen den Bauteilen, ausgehend von der Vorderkante ihrer Bekleidung. Anders
+gesagt: von Putzoberfläche zu Putzoberfläche, nicht von Rohbaukante zu Rohbaukante.
+
+Dann folgt eine Liste dessen, was ausdrücklich **mitgerechnet** wird, und sie überrascht die
+meisten. Einbezogen werden die Grundflächen von Tür- und Fensterbekleidungen samt Umrahmungen,
+von Fuß-, Sockel- und Schrammleisten, von fest eingebauten Gegenständen wie Öfen, Heiz- und
+Klimageräten, Herden, Bade- oder Duschwannen, von freiliegenden Installationen, von Einbaumöbeln
+und von versetzbaren Raumteilern, die nicht ortsgebunden sind.
+
+Man bezahlt also die Fläche, auf der der Heizkörper steht, die Fläche unter der Badewanne und
+die Fläche unter dem Einbauschrank. Das klingt nach einem schlechten Scherz, ist aber
+konsequent: Diese Dinge sind Ausstattung, sie können verschwinden, und die Fläche bleibt. Würde
+man sie abziehen, schrumpfte die Wohnung beim Einbau einer neuen Badewanne.
+
+Und es gibt eine Liste dessen, was **draußen** bleibt. Schornsteine, Vormauerungen,
+Bekleidungen, freistehende Pfeiler und Säulen zählen nicht mit — aber nur, wenn sie höher als
+1,50 Meter sind und ihre Grundfläche mehr als 0,1 Quadratmeter beträgt. Beide Bedingungen
+zugleich. Ein dünner Pfeiler bleibt in der Rechnung, ein dicker fliegt heraus.
+
+Nicht mitgerechnet werden außerdem Treppen mit mehr als drei Steigungen samt ihren Absätzen.
+In einer Maisonette-Wohnung sind das schnell mehrere Quadratmeter, die zwar begangen werden,
+aber nicht zählen. Ebenfalls draußen: Türnischen sowie Fenster- und offene Wandnischen, die
+nicht bis zum Fußboden herunterreichen — und selbst wenn sie es tun, bleiben sie draußen, sofern
+sie nur 13 Zentimeter oder weniger tief sind.
+
+<WasZaehltMit />
+
+Diese 13 Zentimeter sind ein schönes Beispiel für die Genauigkeit, die die Verordnung an den
+Tag legt, wo es kaum eine Rolle spielt — und für die Unschärfe, die sie an anderer Stelle
+zulässt, wo es um viel geht.
+
+## Die Dachschräge: null, halb, ganz
+
+Die eigentliche Rechnung steht in § 4, und sie besteht aus vier Zeilen. Räume und Raumteile mit
+einer lichten Höhe von mindestens zwei Metern zählen vollständig. Solche mit mindestens einem
+und weniger als zwei Metern zählen zur Hälfte. Unbeheizbare Wintergärten, Schwimmbäder und
+ähnliche geschlossene Räume zählen zur Hälfte. Balkone, Loggien, Dachgärten und Terrassen zählen
+in der Regel zu einem Viertel, höchstens jedoch zur Hälfte.
+
+Die ersten beiden Zeilen erklären, warum die romantische Dachwohnung auf dem Papier so klein
+ist. Unter einer Dachschräge gibt es drei Zonen: den Bereich, in dem weniger als ein Meter
+Höhe bleibt und der überhaupt nicht zählt; den Bereich zwischen einem und zwei Metern, der zur
+Hälfte zählt; und den Bereich ab zwei Metern, der voll zählt.
+
+Bei einem flach geneigten Dach ist das ein schmaler Streifen an der Wand. Bei einem steilen
+Satteldach mit Kniestock kann die halbe Zimmerbreite betroffen sein. Zwei Dachwohnungen mit
+identischer Bodenfläche können deshalb um zehn Quadratmeter auseinanderliegen, ohne dass an
+einer von beiden etwas falsch berechnet wäre.
+
+<DachschraegeZonen />
+
+Das ist auch der Grund, warum sich bei Dachwohnungen der Streit häuft. Wer eine Fläche nur nach
+dem Augenschein einschätzt, kann den anrechenbaren Teil unmöglich abschätzen — das hat der
+Bundesgerichtshof einer Mieterin ausdrücklich zugutegehalten, als es darum ging, ob sie den
+Fehler bei Vertragsschluss hätte erkennen müssen.
+
+Wer für die eigene Wohnung nachrechnen will, braucht dafür kein Gutachten. Zimmer für Zimmer die
+Bodenfläche, bei Dachschrägen die drei Zonen getrennt, Balkon separat mit seinem Anteil:
+
+<RechnerLoader slug="quadratmeter-rechner" />
+
+## „In der Regel zu einem Viertel“
+
+Zurück zum Balkon, denn seine Zeile in § 4 ist die merkwürdigste der ganzen Verordnung. Sie
+lautet: in der Regel zu einem Viertel, höchstens jedoch zur Hälfte.
+
+Eine Verordnung, die eine Zahl nennt, sie mit „in der Regel“ relativiert und im selben Atemzug
+eine Obergrenze für die Ausnahme setzt. Das ist keine Schludrigkeit, sondern Absicht: Ein
+schmaler Nordbalkon im dritten Hinterhof und eine große Südterrasse mit Blick sind nicht
+gleichwertig, und die Verordnung wollte Spielraum für diesen Unterschied lassen.
+
+Für die Zahl im Vertrag hat dieser Spielraum aber Folgen. Zwölf Quadratmeter Balkon können drei
+Quadratmeter Wohnfläche ergeben oder sechs. Bei einer Wohnung von 70 Quadratmetern sind das
+gut vier Prozent Unterschied — allein aus der Frage, wie gut der Balkon ist. Wer die Zahl im
+Vertrag nachrechnet und auf ein anderes Ergebnis kommt als der Vermieter, hat also
+möglicherweise nicht falsch gerechnet, sondern nur anders gewichtet.
+
+<ZweiZulaessigeErgebnisse />
+
+Für die höhere Anrechnung braucht es allerdings einen Grund, der in der Sache liegt: Lage,
+Ausrichtung, Nutzbarkeit, Ausstattung. Der Wunsch nach einer größeren Zahl ist keiner.
+
+Wer nachrechnet, sollte deshalb nicht nur die Summe vergleichen, sondern die Bestandteile. Zwei
+Berechnungen, die sich um vier Quadratmeter unterscheiden, können auf einem Rechenfehler
+beruhen — oder darauf, dass die eine Seite den Balkon zur Hälfte angesetzt hat und die andere
+zum Viertel. Im ersten Fall liegt jemand falsch, im zweiten liegen beide innerhalb der
+Verordnung. Das ist ein wesentlicher Unterschied, wenn es darum geht, wie man das Gespräch mit
+dem Vermieter beginnt.
+
+## Zwei Wohnungen, zwei Regelwerke, ein Treppenhaus
+
+§ 5 der Verordnung enthält eine Überleitungsvorschrift, die in der Praxis mehr bewirkt, als ihr
+unauffälliger Platz am Ende vermuten lässt: Wurde die Wohnfläche bis zum 31. Dezember 2003 nach
+der Zweiten Berechnungsverordnung berechnet, bleibt es bei dieser Berechnung. Erst wenn nach
+diesem Stichtag bauliche Änderungen vorgenommen werden, die eine Neuberechnung erforderlich
+machen, gilt die neue Verordnung.
+
+Das heißt: In einem Haus von 1975, in dem seither niemand umgebaut hat, sind die Flächen
+weiterhin nach dem alten Regelwerk bemessen. In derselben Immobilie kann die Wohnung im dritten
+Stock, deren Bad 2010 versetzt wurde, nach der neuen Verordnung berechnet sein. Zwei Wohnungen,
+zwei Regelwerke, ein Treppenhaus — und nirgends steht, welche nach was gerechnet wurde.
+
+Die praktisch wichtigste Abweichung betrifft wieder den Balkon: Nach dem alten Regelwerk konnte
+er bis zur Hälfte angesetzt werden. Wer eine alte und eine neue Berechnung derselben Wohnung
+nebeneinanderlegt, sieht die Differenz vor allem dort.
+
+Für den Alltag folgt daraus eine unbequeme Erkenntnis. Eine Quadratmeterzahl ohne die Angabe,
+nach welcher Methode und zu welchem Zeitpunkt sie ermittelt wurde, ist nur eine halbe
+Information. Sie lässt sich nicht überprüfen, weil unklar bleibt, woran man sie messen soll.
+
+<Video src="/blog/wohnflaeche.mp4" poster="/blog/wohnflaeche-video-standbild.jpg" caption="Ausklappen, anlegen, ablesen – die Höhe unter der Schräge entscheidet über den Anrechnungsfaktor." />
+
+## Wer misst eigentlich — und woher die Zahl im Vertrag stammt
+
+Eine Frage bleibt bis hierher offen: Wer ermittelt die Fläche überhaupt? Die Verordnung lässt in
+§ 3 Absatz 4 zwei Wege zu. Entweder wird im fertiggestellten Wohnraum ausgemessen, oder die
+Grundfläche wird aus einer Bauzeichnung entnommen.
+
+An die Bauzeichnung stellt sie dabei Bedingungen: Sie muss für ein bauordnungsrechtliches
+Verfahren gefertigt oder zumindest dafür geeignet sein, und sie muss die lichten Maße zwischen
+den Bauteilen erkennen lassen. Eine Verkaufsskizze aus dem Exposé genügt nicht.
+
+Und dann folgt der Satz, der in der Praxis am häufigsten übersehen wird: Wurde die Fläche nach
+einer Bauzeichnung ermittelt, aber abweichend von dieser Zeichnung gebaut, ist neu zu ermitteln
+— entweder durch Ausmessen im fertigen Zustand oder anhand einer berichtigten Zeichnung.
+
+Genau hier entstehen die meisten Abweichungen. Wände werden im Bau um wenige Zentimeter
+versetzt, ein Installationsschacht wird dicker als geplant, eine Tür wandert. Jede dieser
+Änderungen ist für sich harmlos; zusammengenommen ergeben sie eine Zahl, die zur Zeichnung
+passt, aber nicht zum Gebäude. Wird die Fläche danach nie nachgerechnet, wandert die Abweichung
+über Jahrzehnte von Mietvertrag zu Mietvertrag weiter — kopiert aus dem Vorgängerdokument, ohne
+dass jemand sie je überprüft hätte.
+
+Der Bundesgerichtshof hat daraus 2015 eine klare Zuordnung abgeleitet: Die zutreffende
+Ermittlung der Wohnfläche fällt regelmäßig in die Risikosphäre des Vermieters. Wer eine Zahl in
+den Vertrag schreibt, steht für sie ein — auch dann, wenn er sie in gutem Glauben aus alten
+Unterlagen übernommen hat.
+
+## 2004, 2015, 2018 — wie die Gerichte die Zahl verschoben haben
+
+Bis hierher ging es darum, wie gerechnet wird. Jetzt geht es darum, was passiert, wenn die
+gerechnete Zahl von der wirklichen abweicht. Und hier liegt der eigentliche Widerspruch dieses
+Themas: Dieselbe Abweichung wird unterschiedlich behandelt, je nachdem, wofür man die Zahl
+gerade braucht.
+
+**2004 — die Zehn-Prozent-Grenze entsteht.** Am 24. März 2004 entschied der Bundesgerichtshof
+in gleich mehreren Verfahren, dass eine Wohnung, deren Fläche mehr als zehn Prozent unter der im
+Mietvertrag angegebenen liegt, damit einen Mangel aufweist, der zur Mietminderung berechtigt.
+Bemerkenswert daran ist der zweite Teil des Leitsatzes: Der Mieter muss nicht zusätzlich
+darlegen, dass die Wohnung durch die fehlende Fläche schlechter nutzbar geworden ist. Die
+Abweichung genügt.
+
+In einem der Verfahren ging es zusätzlich um die Frage, ob ein „ca.“ vor der Quadratmeterzahl
+den Vermieter schützt. Die Antwort war nein — eine zusätzliche Toleranzspanne wegen des Zusatzes
+gibt es nicht. Die zehn Prozent sind bereits die Toleranz.
+
+**2015 — die Grenze fällt bei der Mieterhöhung.** Elf Jahre später kam ein Fall aus Berlin vor
+den Senat, der die bisherige Logik an ihre Grenze führte. Im Mietvertrag standen 156,95
+Quadratmeter, tatsächlich waren es 210,43 — die Wohnung war also um rund ein Drittel größer als
+vereinbart. Der Vermieter wollte die Miete um 15 Prozent erhöhen und zusätzlich die bisher nicht
+berücksichtigte Fläche erstmals ansetzen.
+
+Der Bundesgerichtshof entschied am 18. November 2015 unter teilweiser Aufgabe seiner bisherigen
+Rechtsprechung: Für eine Mieterhöhung ist allein die tatsächliche Fläche maßgeblich —
+unabhängig davon, was im Vertrag steht und wie groß die Abweichung ist. Die Begründung ist
+schlicht: Eine Mieterhöhung soll dem Vermieter eine am örtlichen Markt orientierte Miete
+ermöglichen, und ein Markt orientiert sich an tatsächlichen Gegebenheiten, nicht an dem, was
+zwei Parteien einmal aufgeschrieben haben.
+
+Die Vermieterin bekam trotzdem nicht, was sie wollte, denn die Kappungsgrenze gilt weiterhin:
+Sie ist eine zweite, eigenständige Obergrenze, die auch dann eingehalten werden muss, wenn die
+Wohnung größer ist als gedacht. Und einen Ausweg über den Wegfall der Geschäftsgrundlage gab es
+ebenfalls nicht — die zutreffende Ermittlung der Wohnfläche, so der Senat, fällt regelmäßig in
+die Risikosphäre des Vermieters.
+
+**2018 — die Grenze fällt bei den Nebenkosten.** Zweieinhalb Jahre später zog der Senat nach.
+Es ging um Heizkosten: 74,59 Quadratmeter laut Vertrag, 78,22 tatsächlich — eine Abweichung von
+knapp fünf Prozent, nach der alten Rechtsprechung also unbeachtlich. Am 30. Mai 2018 entschied
+der Bundesgerichtshof, dass für die Umlage von Betriebskosten nach Wohnflächenanteilen der
+Anteil der tatsächlichen Fläche an der tatsächlich vorhandenen Gesamtfläche maßgebend ist. Die
+Zehn-Prozent-Toleranz für die Abrechnung war damit ausdrücklich aufgegeben.
+
+<ZehnProzentZeitachse />
+
+**Und was jetzt gilt.** Für die Mieterhöhung und für die Abrechnung von Betriebs- und
+Heizkosten zählt die tatsächliche Fläche, ohne Toleranz. Für die Frage, ob der Mieter die Miete
+mindern darf, gilt die Zehn-Prozent-Grenze weiter: Erst wenn die Wohnung mehr als zehn Prozent
+kleiner ist als vereinbart, liegt der Mangel vor.
+
+Das ist kein Versehen, sondern folgt aus der Sache. Bei der Minderung geht es um eine
+vertragliche Zusage, die enttäuscht wurde — dort muss die Enttäuschung ein gewisses Gewicht
+haben. Bei Erhöhung und Abrechnung geht es um objektive Größen, an denen Geld verteilt wird —
+dort wäre jede Toleranz eine systematische Verzerrung zulasten einer Seite. Wer das
+zusammendenkt, muss es aushalten, dass ein und dieselbe Zahl im selben Mietverhältnis
+unterschiedlich streng behandelt wird.
+
+## Wo sich der Fehler vervielfacht
+
+Eine zu groß angegebene Wohnfläche kostet nicht einmal Geld, sondern dreimal.
+
+Zuerst über die Miete selbst, sofern sie nach Quadratmetern kalkuliert ist. Fünf Quadratmeter zu
+viel bei zwölf Euro Kaltmiete sind sechzig Euro im Monat, siebenhundertzwanzig im Jahr.
+
+Dann über die kalten Betriebskosten, soweit sie nach Fläche umgelegt werden — Grundsteuer,
+Versicherung, Hausreinigung, Gartenpflege und anderes. Hier wirkt der Fehler doppelt: Die eigene
+Fläche ist zu groß angesetzt, und weil sie in die Gesamtfläche des Hauses eingeht, verschiebt
+sich zugleich der Verteilungsschlüssel.
+
+Und schließlich über die Heizkosten, die zu einem gesetzlich vorgegebenen Anteil nach Fläche
+abgerechnet werden. Genau darum ging es 2018.
+
+Beim Kauf verhält es sich anders, aber nicht harmloser: Dort ist die Quadratmeterzahl die
+Größe, mit der man Angebote überhaupt erst vergleichbar macht. Wer zwei Wohnungen nach
+Quadratmeterpreis nebeneinanderlegt, von denen eine ihren großen Balkon zur Hälfte und die
+andere ihren kleinen zu einem Viertel angesetzt hat, vergleicht zwei Zahlen, die nicht dasselbe
+bedeuten.
+
+## Was man damit anfängt
+
+Nachmessen ist einfacher, als es klingt: Zimmer für Zimmer Länge mal Breite, bei Dachschrägen
+die drei Zonen getrennt, Balkon und Terrasse separat, Keller und Garage weglassen. Ein
+Zollstock, ein Blatt Papier und eine Stunde reichen für eine belastbare Schätzung.
+
+Wichtiger als das Ergebnis ist die Frage, die man dabei mitstellen sollte: nach welcher Methode
+die Zahl im Vertrag ermittelt wurde und wann. Ohne diese Angabe lässt sich eine Abweichung nicht
+beurteilen, weil unklar bleibt, woran gemessen wird. Bei Altbauten mit Verträgen von vor 2004
+kann das alte Regelwerk gelten; bei Balkonen kann der Anteil zwischen einem Viertel und der
+Hälfte liegen; und wenn im Vertrag eine ganz andere Berechnungsgrundlage vereinbart ist, gilt
+die.
+
+Wer eine deutliche Abweichung findet, sollte sie nicht selbst zu Geld rechnen. Ob und in welcher
+Höhe daraus Ansprüche folgen, hängt an Details, die dieser Text nicht kennt — am Wortlaut des
+Vertrags, am Zeitpunkt der Kenntnis, an der Frage, wofür die Zahl gebraucht wird. Der Weg führt
+zum Mieterverein oder zu einer Anwältin, nicht zum Taschenrechner.
+
+Was bleibt, ist ein Gedanke, der über die Wohnung hinausgeht. Wir behandeln Quadratmeter wie
+eine Naturgröße — etwas, das man nachmisst und dann weiß. Tatsächlich ist die Zahl im
+Mietvertrag ein Ergebnis: aus Messung, Gewichtung, Stichtag und Rechtsprechung. Sie ist so
+belastbar wie die Regel, nach der sie zustande kam. Und diese Regel steht in einer Verordnung,
+die für den eigenen Fall streng genommen gar nicht geschrieben wurde.
+
+<KarstenSagt>
+Ich hatte mal eine Dachwohnung mit Balkon, und die kam mir deutlich größer vor, als im
+Mietvertrag stand. Das war kein Gefühl, das sich nach ein paar Wochen verliert — es blieb.
+Aufgelöst hat es sich erst, als ich verstanden habe, wie der Balkon und die Dachschrägen
+umgerechnet werden. Da lag die Differenz.
+
+Wer das selbst nachrechnen will, merkt schnell, wie kompliziert und verwirrend das ist. Man
+steht mit dem Zollstock im Zimmer, misst die Höhe an drei Stellen und weiß trotzdem nicht
+genau, wo die Zone anfängt, die nur halb zählt. Und beim Balkon fragt man sich, warum es
+überhaupt eine Spanne gibt, wenn er doch immer gleich groß bleibt.
+
+Wenn ich heute eine Wohnung suche, schaue ich als Erstes auf die Quadratmeterzahl — von der hat
+man ja eine Vorstellung. Im selben Atemzug aber auf den Grundriss, weil dort die Maße der
+einzelnen Zimmer stehen. Erst daraus wird ein Bild von der Aufteilung, und die entscheidet mehr
+über das Wohnen als die Gesamtzahl.
+
+Beim Preis achte ich auf die Gesamtsumme, nicht auf den Quadratmeterpreis. Bezahlen muss ich am
+Ende die Miete, nicht den Meter.
+</KarstenSagt>
+
+<Quellen eintraege={[
+  {
+    titel: 'Wohnflächenverordnung (WoFlV) vom 25. November 2003, BGBl. I S. 2346',
+    url: 'https://www.gesetze-im-internet.de/woflv/',
+    hinweis: 'Volltext aller fünf Paragrafen. § 1 Anwendungsbereich (Bezug auf das Wohnraumförderungsgesetz), § 2 zugehörige Grundflächen samt Aufzählung der Zubehörräume, § 3 Ermittlung nach lichten Maßen mit den Listen des Einzubeziehenden und des Ausgenommenen (1,50 Meter / 0,1 Quadratmeter bei Pfeilern, Treppen über drei Steigungen, 0,13 Meter bei Nischen), § 4 Anrechnung (zwei Meter, ein Meter, Viertel bis Hälfte), § 5 Überleitung für Berechnungen bis 31.12.2003.',
+  },
+  {
+    titel: 'BGH, Urteil vom 24. März 2004 — VIII ZR 295/03',
+    url: 'https://www.bundesgerichtshof.de/SharedDocs/Entscheidungen/DE/Zivilsenate/VIII_ZS/2003/VIII_ZR_295-03.pdf?__blob=publicationFile',
+    hinweis: 'Leitsatz: Liegt die Wohnfläche mehr als zehn Prozent unter der im Mietvertrag angegebenen, stellt das grundsätzlich einen Mangel nach § 536 Abs. 1 Satz 1 BGB dar. Eine zusätzliche Darlegung, dass die Tauglichkeit zum vertragsgemäßen Gebrauch gemindert ist, ist nicht erforderlich.',
+  },
+  {
+    titel: 'BGH, Urteil vom 24. März 2004 — VIII ZR 44/03',
+    url: 'https://www.bundesgerichtshof.de/SharedDocs/Entscheidungen/DE/Zivilsenate/VIII_ZS/2003/VIII_ZR__44-03.pdf?__blob=publicationFile',
+    hinweis: 'Die Entscheidung, die den Wohnflächenbegriff auch für frei finanzierten Wohnraum an die Berechnungsvorschriften bindet — vorbehaltlich abweichender Vereinbarung, örtlicher Üblichkeit oder einer nach Art der Wohnung näherliegenden Methode. Enthält außerdem die Erwägung, dass der anrechenbare Anteil unter Dachschrägen nach dem optischen Eindruck nicht abschätzbar ist.',
+  },
+  {
+    titel: 'BGH, Urteil vom 24. März 2004 — VIII ZR 133/03',
+    url: 'https://www.bundesgerichtshof.de/SharedDocs/Entscheidungen/DE/Zivilsenate/VIII_ZS/2003/VIII_ZR_133-03.pdf?__blob=publicationFile',
+    hinweis: 'Zur „ca.\u201c-Angabe: Auch wenn die vereinbarte Wohnfläche mit einem Zirka-Zusatz versehen ist, liegt der Mangel bei mehr als zehn Prozent Unterschreitung vor. Eine zusätzliche Toleranzspanne wegen des Zusatzes ist nicht anzusetzen.',
+  },
+  {
+    titel: 'BGH, Pressemitteilung Nr. 189/2015 zum Urteil vom 18. November 2015 — VIII ZR 266/14',
+    url: 'https://www.bundesgerichtshof.de/SharedDocs/Pressemitteilungen/DE/2015/2015189.html',
+    hinweis: 'Mieterhöhung nach § 558 BGB auf Basis der tatsächlichen Wohnfläche, unabhängig von Vertragsangabe und Höhe der Abweichung. Sachverhalt: 156,95 Quadratmeter vereinbart, 210,43 tatsächlich. Enthält die Feststellung zur Risikosphäre des Vermieters und die Klarstellung, dass die Kappungsgrenze eigenständig einzuhalten ist.',
+  },
+  {
+    titel: 'BGH, Urteil vom 30. Mai 2018 — VIII ZR 220/17',
+    url: 'https://dejure.org/dienste/vernetzung/rechtsprechung?Gericht=BGH&Datum=30.05.2018&Aktenzeichen=VIII+ZR+220/17',
+    hinweis: 'Werden Betriebskosten ganz oder teilweise nach Wohnflächenanteilen umgelegt, ist der Anteil der tatsächlichen Wohnfläche an der tatsächlich vorhandenen Gesamtwohnfläche maßgebend. Insoweit ausdrückliche Aufgabe der Entscheidung vom 31. Oktober 2007 (VIII ZR 261/06). Sachverhalt: 74,59 Quadratmeter vereinbart, 78,22 tatsächlich.',
+  },
+]} />
