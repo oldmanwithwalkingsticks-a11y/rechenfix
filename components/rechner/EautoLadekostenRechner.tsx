@@ -6,6 +6,8 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { LADEPREISE, ladepreisDe } from '@/lib/berechnungen/ladepreise-parameter';
+import { SPRITPREISE_REFERENZ } from '@/lib/berechnungen/spritpreise-parameter';
 
 /**
  * E-Auto-Ladekosten-Rechner (Technik-Kategorie). BLOCK B — YMYL (Preise).
@@ -24,30 +26,30 @@ const VERBRAUCH_OPTIONEN = [
   { key: 'custom', label: 'Eigener Wert' },
 ];
 const LADEORT_OPTIONEN = [
-  { key: '0.34', label: 'Wallbox / Haushalt (0,34 €/kWh)' },
-  { key: '0.50', label: 'Öffentlich AC (0,50 €/kWh)' },
-  { key: '0.65', label: 'DC-Schnellladen (0,65 €/kWh)' },
-  { key: '0.10', label: 'PV-Eigenstrom (0,10 €/kWh)' },
+  { key: ladepreisDe(LADEPREISE.wallbox), label: `Wallbox / Haushalt (${ladepreisDe(LADEPREISE.wallbox)} €/kWh)` },
+  { key: ladepreisDe(LADEPREISE.oeffentlichAC), label: `Öffentlich AC (${ladepreisDe(LADEPREISE.oeffentlichAC)} €/kWh)` },
+  { key: ladepreisDe(LADEPREISE.dcSchnell), label: `DC-Schnellladen (${ladepreisDe(LADEPREISE.dcSchnell)} €/kWh)` },
+  { key: ladepreisDe(LADEPREISE.pvEigen), label: `PV-Eigenstrom (${ladepreisDe(LADEPREISE.pvEigen)} €/kWh)` },
   { key: 'custom', label: 'Eigener Preis' },
 ];
 
-// Vergleichs-Ladeorte (Richtwerte Stand April 2026).
+// Vergleichs-Ladeorte aus der Ladepreis-SSOT (lib/berechnungen/ladepreise-parameter.ts).
 const VERGLEICH_ORTE: Array<{ name: string; preis: number }> = [
-  { name: 'Wallbox / Haushalt', preis: 0.34 },
-  { name: 'Öffentlich AC', preis: 0.50 },
-  { name: 'DC-Schnellladen', preis: 0.65 },
-  { name: 'PV-Eigenstrom', preis: 0.10 },
+  { name: 'Wallbox / Haushalt', preis: LADEPREISE.wallbox },
+  { name: 'Öffentlich AC', preis: LADEPREISE.oeffentlichAC },
+  { name: 'DC-Schnellladen', preis: LADEPREISE.dcSchnell },
+  { name: 'PV-Eigenstrom', preis: LADEPREISE.pvEigen },
 ];
 
 // Benziner-Referenz für den Vergleich.
 const BENZIN_L = 7.5;
-const BENZIN_PREIS = 1.75;
+const BENZIN_PREIS = SPRITPREISE_REFERENZ.superE10;
 
 export default function EautoLadekostenRechner() {
   const [verbrauchProfil, setVerbrauchProfil] = useState('18');
   const [verbrauch, setVerbrauch] = useState('18');
-  const [ladeort, setLadeort] = useState('0.34');
-  const [strompreis, setStrompreis] = useState('0.34');
+  const [ladeort, setLadeort] = useState(ladepreisDe(LADEPREISE.wallbox));
+  const [strompreis, setStrompreis] = useState(ladepreisDe(LADEPREISE.wallbox));
   const [akku, setAkku] = useState('60');
   const [jahresKm, setJahresKm] = useState('15000');
 
@@ -100,7 +102,7 @@ export default function EautoLadekostenRechner() {
         </div>
         <div>
           <label htmlFor="ek-strompreis" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Strompreis</label>
-          <NummerEingabe value={strompreis} onChange={(v) => { setStrompreis(v); setLadeort('custom'); }} placeholder="0,34" einheit="€/kWh" />
+          <NummerEingabe value={strompreis} onChange={(v) => { setStrompreis(v); setLadeort('custom'); }} placeholder={ladepreisDe(LADEPREISE.wallbox)} einheit="€/kWh" />
         </div>
         <div>
           <label htmlFor="ek-akku" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Akku-Kapazität</label>

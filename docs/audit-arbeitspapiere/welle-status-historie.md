@@ -8,6 +8,41 @@
 
 ---
 
+## 12.08.2026 — Welle 87: Ladepreis-SSOT angelegt, EautoLadekostenRechner gebunden — ✅ ABGESCHLOSSEN
+
+`auto.ts` war mit Welle 86 durch; der `eauto-ladekosten-rechner` war der letzte Rechner mit
+sichtbaren hartkodierten Energiepreisen — und der komplizierteste, weil die Preise in einer
+Auswahlliste, deren Beschriftungen, einer Vergleichstabelle und einer Benziner-Referenz stecken.
+
+- **Neue Datei `lib/berechnungen/ladepreise-parameter.ts`** mit vier Ladepreisen. Der
+  Wallbox-Wert wird aus `STROMPREIS_2026` **abgeleitet statt dupliziert** — es ist derselbe Strom,
+  nur an der eigenen Wallbox. Öffentliches AC-Laden, DC-Schnellladen und PV-Eigenstrom sind eigene
+  Preiskategorien mit eigenen Märkten; sie hatten bisher gar keine Heimat und bekommen hier einen
+  Ort, ein Datum und eine Quelle.
+- **Die drei Werte ändern sich inhaltlich nicht** (0,50 / 0,65 / 0,10). Sie wurden gegen den
+  ACE-Ladepreisvergleich vom August 2026 geprüft und liegen mittig in den dort genannten Spannen
+  (AC 0,40–0,60, DC 0,50–0,70 €/kWh).
+- **Auswahlschlüssel von Punkt- auf Kommaschreibweise umgestellt.** Der Schlüssel wird direkt in
+  den `strompreis`-State geschrieben und von `parseDeutscheZahl` gelesen; ein `parseFloat` gibt es
+  im File nicht. Der Rundlauf ist für **alle vier** Schlüssel belegt, nicht nur für den Startwert:
+  `0,37` → 0.37, `0,50` → 0.5, `0,65` → 0.65, `0,10` → 0.1, jeweils identisch mit dem SSOT-Wert.
+  Nebeneffekt: Das Preisfeld zeigt beim Laden jetzt deutsch formatiert `0,37` statt vorher `0.34`.
+- **`BENZIN_PREIS`** an `SPRITPREISE_REFERENZ.superE10` gebunden; `BENZIN_L = 7.5` bleibt, das ist
+  eine Verbrauchsannahme und kein Preis. Der Benziner-Vergleich rechnet damit 15,94 € statt 13,13 €
+  pro 100 km.
+- Belegt in der Seite: Auswahl mit `value="0,37"` und Label „Wallbox / Haushalt (0,37 €/kWh)",
+  Preisfeld 0,37, Vergleichstabelle 0,37 / 0,50 / 0,65 / 0,10.
+
+**Offen, bewusst:** `technik.ts` nennt für denselben Rechner in Fließtext, FAQ und einer zweiten
+Vergleichstabelle weiterhin 0,34 €/kWh und 1,75 €/l. Folgt in der nächsten Welle.
+
+**Zu prüfen, unabhängig von dieser Welle:** `STROMPREIS_2026` steht auf Stand 04/2026 mit 37 ct als
+BDEW-Mittelwert. Mehrere Marktquellen vom Juni 2026 nennen für Haushaltsstrom niedrigere Werte. Der
+Wert wird inzwischen an vielen Stellen ausgespielt — und seit dieser Welle zusätzlich als
+Wallbox-Ladepreis — und gehört gegen die aktuelle BDEW-Veröffentlichung gegengeprüft.
+
+---
+
 ## 12.08.2026 — Welle 86: autokosten-rechner, Rechenweg und Fahrleistungs-Vergleich — ✅ ABGESCHLOSSEN
 
 Welle 85 hatte den Statistik-Block auf 6.993 € gebracht; drei Zeilen darunter stand in einem
