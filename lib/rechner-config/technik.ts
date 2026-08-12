@@ -1,4 +1,17 @@
 import type { RechnerConfig } from './types';
+import { LADEPREISE, ladepreisDe } from '@/lib/berechnungen/ladepreise-parameter';
+import { SPRITPREISE_REFERENZ } from '@/lib/berechnungen/spritpreise-parameter';
+
+// Lokaler Helfer für deutsche Zahlformatierung, wie in auto.ts.
+const eur = (n: number, dezimal = 2) => n.toFixed(dezimal).replace('.', ',');
+
+// Annahmen des eauto-ladekosten-rechner, an einer Stelle gebündelt.
+const EK_VERBRAUCH = 18;     // kWh/100 km, Mittelklasse-E-Auto
+const EK_AKKU = 60;          // kWh
+const EK_BENZIN_L = 7.5;     // l/100 km, Vergleichsfahrzeug
+const EK_KM_JAHR = 15000;
+const ekJahrStrom = (EK_KM_JAHR / 100) * EK_VERBRAUCH * LADEPREISE.wallbox;
+const ekJahrBenzin = (EK_KM_JAHR / 100) * EK_BENZIN_L * SPRITPREISE_REFERENZ.superE10;
 
 export const technikRechner: RechnerConfig[] = [
   {
@@ -1689,11 +1702,11 @@ Ein Benziner mit 7,5 l Verbrauch kostet bei 1,75 €/l rund 13,13 € pro 100 km
     faq: [
       {
         frage: 'Was kostet eine Vollladung beim E-Auto?',
-        antwort: 'Das hängt von Akkugröße und Strompreis ab. Ein 60-kWh-Akku kostet an der heimischen Wallbox (rund 0,34 €/kWh) etwa 20 €, an einer öffentlichen AC-Ladestation rund 30 € und am DC-Schnelllader bis zu 39 €. Mit eigenem PV-Strom (rund 0,10 €/kWh) wären es nur etwa 6 €. Die Werte sind Richtwerte mit Stand April 2026.',
+        antwort: `Das hängt von Akkugröße und Strompreis ab. Ein ${EK_AKKU}-kWh-Akku kostet an der heimischen Wallbox (rund ${ladepreisDe(LADEPREISE.wallbox)} €/kWh) etwa ${eur(EK_AKKU * LADEPREISE.wallbox, 0)} €, an einer öffentlichen AC-Ladestation rund ${eur(EK_AKKU * LADEPREISE.oeffentlichAC, 0)} € und am DC-Schnelllader bis zu ${eur(EK_AKKU * LADEPREISE.dcSchnell, 0)} €. Mit eigenem PV-Strom (rund ${ladepreisDe(LADEPREISE.pvEigen)} €/kWh) wären es nur etwa ${eur(EK_AKKU * LADEPREISE.pvEigen, 0)} €. Die Werte sind Richtwerte mit Stand August 2026.`,
       },
       {
         frage: 'Lohnt sich das E-Auto gegenüber dem Benziner?',
-        antwort: 'Bei den reinen Energiekosten meist deutlich: Ein E-Auto kostet an der Wallbox rund 6 € pro 100 km, ein vergleichbarer Benziner mit 7,5 l Verbrauch bei 1,75 €/l rund 13 €. Selbst beim teuren DC-Schnellladen bleibt das E-Auto meist günstiger. Der Vorteil schrumpft jedoch, wer überwiegend teuer öffentlich laden muss. Anschaffung, Wartung und Versicherung sind hier nicht berücksichtigt.',
+        antwort: `Bei den reinen Energiekosten meist deutlich: Ein E-Auto kostet an der Wallbox rund ${eur(EK_VERBRAUCH * LADEPREISE.wallbox, 0)} € pro 100 km, ein vergleichbarer Benziner mit ${eur(EK_BENZIN_L, 1)} l Verbrauch bei ${eur(SPRITPREISE_REFERENZ.superE10, 3)} €/l rund ${eur(EK_BENZIN_L * SPRITPREISE_REFERENZ.superE10, 0)} €. Selbst beim teuren DC-Schnellladen bleibt das E-Auto meist günstiger. Der Vorteil schrumpft jedoch, wer überwiegend teuer öffentlich laden muss. Anschaffung, Wartung und Versicherung sind hier nicht berücksichtigt.`,
       },
       {
         frage: 'Wie aktuell sind die Preise?',
@@ -1705,24 +1718,24 @@ Ein Benziner mit 7,5 l Verbrauch kostet bei 1,75 €/l rund 13,13 € pro 100 km
       },
       {
         frage: 'Wovon hängen die Ladekosten am stärksten ab?',
-        antwort: 'Vom Ladeort und vom Fahrzeugverbrauch. Der Ladeort ist der größte Hebel: PV-Strom (rund 0,10 €/kWh) gegen DC-Schnellladen (rund 0,65 €/kWh) ist ein Faktor sechs. Der zweite Hebel ist der Verbrauch: Ein Kleinwagen (15 kWh/100 km) kostet rund ein Drittel weniger als ein großer SUV (22 kWh/100 km). Beide Faktoren lassen sich im Rechner durchspielen.',
+        antwort: `Vom Ladeort und vom Fahrzeugverbrauch. Der Ladeort ist der größte Hebel: PV-Strom (rund ${ladepreisDe(LADEPREISE.pvEigen)} €/kWh) gegen DC-Schnellladen (rund ${ladepreisDe(LADEPREISE.dcSchnell)} €/kWh) ist ein Faktor sechs. Der zweite Hebel ist der Verbrauch: Ein Kleinwagen (15 kWh/100 km) kostet rund ein Drittel weniger als ein großer SUV (22 kWh/100 km). Beide Faktoren lassen sich im Rechner durchspielen.`,
       },
     ],
     contentBloecke: [
       {
         typ: 'text',
         titel: 'Wie sich die Ladekosten ergeben',
-        html: `<p>Die Ladekosten eines E-Autos folgen einer einfachen Formel: <strong>Verbrauch × Strompreis</strong>. Der Verbrauch wird in Kilowattstunden pro 100 km angegeben (kWh/100 km), der Strompreis in Euro pro Kilowattstunde (€/kWh). Ein Mittelklasse-E-Auto mit 18 kWh Verbrauch kostet an der heimischen Wallbox bei 0,34 €/kWh also 18 × 0,34 = 6,12 € pro 100 km.</p><p>Drei Faktoren bestimmen das Ergebnis. Der wichtigste ist die <strong>Stromquelle</strong>: Heimstrom, öffentliches Laden und Solarstrom unterscheiden sich um ein Vielfaches. Der zweite ist der <strong>Fahrzeugverbrauch</strong>, der je nach Größe und Fahrweise schwankt. Der dritte ist der konkrete <strong>Tarif</strong>, der besonders im öffentlichen Laden stark variiert. Dieser Rechner spielt alle drei durch und stellt die Kosten verschiedenen Ladeorten sowie einem Benziner gegenüber. Wichtig: Die hinterlegten Strompreise sind Richtwerte mit Stand April 2026 (BDEW/Bundesnetzagentur) und ohne Gewähr — für eine genaue Rechnung den eigenen Strompreis eintragen.</p>`,
+        html: `<p>Die Ladekosten eines E-Autos folgen einer einfachen Formel: <strong>Verbrauch × Strompreis</strong>. Der Verbrauch wird in Kilowattstunden pro 100 km angegeben (kWh/100 km), der Strompreis in Euro pro Kilowattstunde (€/kWh). Ein Mittelklasse-E-Auto mit 18 kWh Verbrauch kostet an der heimischen Wallbox bei ${ladepreisDe(LADEPREISE.wallbox)} €/kWh also ${EK_VERBRAUCH} × ${ladepreisDe(LADEPREISE.wallbox)} = ${eur(EK_VERBRAUCH * LADEPREISE.wallbox)} € pro 100 km.</p><p>Drei Faktoren bestimmen das Ergebnis. Der wichtigste ist die <strong>Stromquelle</strong>: Heimstrom, öffentliches Laden und Solarstrom unterscheiden sich um ein Vielfaches. Der zweite ist der <strong>Fahrzeugverbrauch</strong>, der je nach Größe und Fahrweise schwankt. Der dritte ist der konkrete <strong>Tarif</strong>, der besonders im öffentlichen Laden stark variiert. Dieser Rechner spielt alle drei durch und stellt die Kosten verschiedenen Ladeorten sowie einem Benziner gegenüber. Wichtig: Die hinterlegten Strompreise sind Richtwerte mit Stand April 2026 (BDEW/Bundesnetzagentur) und ohne Gewähr — für eine genaue Rechnung den eigenen Strompreis eintragen.</p>`,
       },
       {
         typ: 'tabelle',
         titel: 'Kosten pro 100 km je Ladeort',
         kopf: ['Ladeort', 'Strompreis (Richtwert)', 'Kosten / 100 km'],
         zeilen: [
-          ['Wallbox / Haushalt', '0,34 €/kWh', '6,12 €'],
-          ['Öffentlich AC', '0,50 €/kWh', '9,00 €'],
-          ['DC-Schnellladen', '0,65 €/kWh', '11,70 €'],
-          ['PV-Eigenstrom', '0,10 €/kWh', '1,80 €'],
+          ['Wallbox / Haushalt', `${ladepreisDe(LADEPREISE.wallbox)} €/kWh`, `${eur(EK_VERBRAUCH * LADEPREISE.wallbox)} €`],
+          ['Öffentlich AC', `${ladepreisDe(LADEPREISE.oeffentlichAC)} €/kWh`, `${eur(EK_VERBRAUCH * LADEPREISE.oeffentlichAC)} €`],
+          ['DC-Schnellladen', `${ladepreisDe(LADEPREISE.dcSchnell)} €/kWh`, `${eur(EK_VERBRAUCH * LADEPREISE.dcSchnell)} €`],
+          ['PV-Eigenstrom', `${ladepreisDe(LADEPREISE.pvEigen)} €/kWh`, `${eur(EK_VERBRAUCH * LADEPREISE.pvEigen)} €`],
         ],
         fussnote: 'Kosten pro 100 km bei einem Verbrauch von 18 kWh/100 km und den jeweiligen Strompreis-Richtwerten (Stand April 2026, BDEW/Bundesnetzagentur). Der Unterschied ist gewaltig: Mit eigenem PV-Strom fährt man für 1,80 €, am DC-Schnelllader für das Sechsfache. Die Werte sind Orientierung, keine Tarifgarantie — gerade öffentliche Ladepreise schwanken je Anbieter und Standort erheblich. Wer seinen eigenen Strompreis kennt, sollte ihn direkt eintragen: Schon zehn Cent Unterschied pro Kilowattstunde verschieben die Kosten pro 100 km bei diesem Verbrauch um 1,80 €. Die Tabelle zeigt damit weniger absolute Wahrheiten als das Verhältnis der Ladeorte zueinander, das auch bei anderen Preisen stabil bleibt.',
       },
@@ -1734,7 +1747,7 @@ Ein Benziner mit 7,5 l Verbrauch kostet bei 1,75 €/l rund 13,13 € pro 100 km
           { label: 'Kosten einer Vollladung (60 kWh)', formel: '60 kWh × 0,34 €', ergebnis: '20,40 €' },
           { label: 'Jahreskosten bei 15.000 km', formel: '6,12 € × 150', ergebnis: '918 €' },
         ],
-        fazit: 'Ein Mittelklasse-E-Auto kostet an der heimischen Wallbox rund 6,12 € pro 100 km, eine volle Ladung des 60-kWh-Akkus etwa 20 € und ein ganzes Jahr mit 15.000 km gut 900 €. Das deckt sich mit den verbreiteten Praxiswerten von 6 bis 9 € pro 100 km. Zum Vergleich: Ein Benziner mit 7,5 l Verbrauch kommt bei 1,75 €/l auf rund 13 € pro 100 km und damit auf fast 2.000 € im Jahr. Der Stromkostenvorteil des E-Autos ist also erheblich — vorausgesetzt, man lädt überwiegend zu Hause. Bei 15.000 km im Jahr trennt die beiden Antriebe rund 1.050 € allein an Energiekosten. Über eine typische Haltedauer von zehn Jahren und 150.000 km summiert sich allein die Energiekosten-Differenz auf einen niedrigen fünfstelligen Betrag, der die höhere Anschaffung teilweise ausgleicht. Mit eigenem PV-Strom fällt der Vorteil noch deutlicher aus, mit überwiegend öffentlichem Schnellladen dagegen geringer.',
+        fazit: `Ein Mittelklasse-E-Auto kostet an der heimischen Wallbox rund ${eur(EK_VERBRAUCH * LADEPREISE.wallbox)} € pro 100 km, eine volle Ladung des ${EK_AKKU}-kWh-Akkus etwa ${eur(EK_AKKU * LADEPREISE.wallbox, 0)} € und ein ganzes Jahr mit 15.000 km rund ${eur(ekJahrStrom, 0)} €. Das deckt sich mit den verbreiteten Praxiswerten von 6 bis 9 € pro 100 km. Zum Vergleich: Ein Benziner mit 7,5 l Verbrauch kommt bei ${eur(SPRITPREISE_REFERENZ.superE10, 3)} €/l auf rund ${eur(EK_BENZIN_L * SPRITPREISE_REFERENZ.superE10, 0)} € pro 100 km und damit auf rund ${eur(ekJahrBenzin, 0)} € im Jahr. Der Stromkostenvorteil des E-Autos ist also erheblich — vorausgesetzt, man lädt überwiegend zu Hause. Bei 15.000 km im Jahr trennt die beiden Antriebe rund ${eur(ekJahrBenzin - ekJahrStrom, 0)} € allein an Energiekosten. Über eine typische Haltedauer von zehn Jahren und 150.000 km summiert sich allein die Energiekosten-Differenz auf einen niedrigen fünfstelligen Betrag, der die höhere Anschaffung teilweise ausgleicht. Mit eigenem PV-Strom fällt der Vorteil noch deutlicher aus, mit überwiegend öffentlichem Schnellladen dagegen geringer.`,
       },
       {
         typ: 'infobox',
@@ -1745,7 +1758,7 @@ Ein Benziner mit 7,5 l Verbrauch kostet bei 1,75 €/l rund 13,13 € pro 100 km
       {
         typ: 'text',
         titel: 'Der größte Hebel: die Stromquelle',
-        html: `<p>Kein anderer Faktor beeinflusst die Ladekosten so stark wie der <strong>Ladeort</strong>. Selbst erzeugter <strong>PV-Strom</strong> vom eigenen Dach kostet nur rund 0,10 €/kWh, Haushaltsstrom an der <strong>Wallbox</strong> etwa 0,34 €/kWh, öffentliches <strong>AC-Laden</strong> rund 0,50 €/kWh und <strong>DC-Schnellladen</strong> bis zu 0,65 €/kWh. Zwischen dem günstigsten und dem teuersten Ladeort liegt damit ein Faktor von rund sechs.</p><p>Das erklärt den Kernvorteil des E-Autos: Wer zu Hause oder mit Solarstrom lädt, fährt für einen Bruchteil der Spritkosten eines Verbrenners. Wer dagegen keine eigene Lademöglichkeit hat und überwiegend auf teures öffentliches Schnellladen angewiesen ist, verliert einen großen Teil dieses Vorteils. Die Stromquelle ist deshalb nicht nur eine Kostenfrage, sondern entscheidet mit darüber, ob sich ein E-Auto im Alltag finanziell lohnt. Heimladen über Nacht zum günstigen Haustarif ist der Normalfall, für den das E-Auto wirtschaftlich konzipiert ist — das öffentliche Laden bleibt die teurere Ausnahme für unterwegs.</p>`,
+        html: `<p>Kein anderer Faktor beeinflusst die Ladekosten so stark wie der <strong>Ladeort</strong>. Selbst erzeugter <strong>PV-Strom</strong> vom eigenen Dach kostet nur rund ${ladepreisDe(LADEPREISE.pvEigen)} €/kWh, Haushaltsstrom an der <strong>Wallbox</strong> etwa ${ladepreisDe(LADEPREISE.wallbox)} €/kWh, öffentliches <strong>AC-Laden</strong> rund ${ladepreisDe(LADEPREISE.oeffentlichAC)} €/kWh und <strong>DC-Schnellladen</strong> bis zu ${ladepreisDe(LADEPREISE.dcSchnell)} €/kWh. Zwischen dem günstigsten und dem teuersten Ladeort liegt damit ein Faktor von rund sechs.</p><p>Das erklärt den Kernvorteil des E-Autos: Wer zu Hause oder mit Solarstrom lädt, fährt für einen Bruchteil der Spritkosten eines Verbrenners. Wer dagegen keine eigene Lademöglichkeit hat und überwiegend auf teures öffentliches Schnellladen angewiesen ist, verliert einen großen Teil dieses Vorteils. Die Stromquelle ist deshalb nicht nur eine Kostenfrage, sondern entscheidet mit darüber, ob sich ein E-Auto im Alltag finanziell lohnt. Heimladen über Nacht zum günstigen Haustarif ist der Normalfall, für den das E-Auto wirtschaftlich konzipiert ist — das öffentliche Laden bleibt die teurere Ausnahme für unterwegs.</p>`,
       },
       {
         typ: 'vergleich',
@@ -1753,7 +1766,7 @@ Ein Benziner mit 7,5 l Verbrauch kostet bei 1,75 €/l rund 13,13 € pro 100 km
         spalteA: 'Wallbox zu Hause',
         spalteB: 'DC-Schnellladen',
         zeilen: [
-          { kriterium: 'Strompreis', a: '~0,34 €/kWh', b: '~0,65 €/kWh' },
+          { kriterium: 'Strompreis', a: `~${ladepreisDe(LADEPREISE.wallbox)} €/kWh`, b: `~${ladepreisDe(LADEPREISE.dcSchnell)} €/kWh` },
           { kriterium: 'Kosten pro 100 km', a: '6,12 €', b: '11,70 €' },
           { kriterium: 'Jahreskosten (15.000 km)', a: '918 €', b: '1.755 €' },
           { kriterium: 'Ladedauer', a: 'Stunden, über Nacht', b: '20–40 min' },
@@ -1780,7 +1793,7 @@ Ein Benziner mit 7,5 l Verbrauch kostet bei 1,75 €/l rund 13,13 € pro 100 km
         spalteB: 'Benziner',
         zeilen: [
           { kriterium: 'Verbrauch', a: '18 kWh/100 km', b: '7,5 l/100 km' },
-          { kriterium: 'Energiepreis', a: '0,34 €/kWh', b: '1,75 €/l' },
+          { kriterium: 'Energiepreis', a: `${ladepreisDe(LADEPREISE.wallbox)} €/kWh`, b: `${eur(SPRITPREISE_REFERENZ.superE10, 3)} €/l` },
           { kriterium: 'Kosten pro 100 km', a: '6,12 €', b: '13,13 €' },
           { kriterium: 'Auch beim DC-Laden', a: '11,70 €', b: '13,13 €' },
           { kriterium: 'Jahreskosten (15.000 km)', a: '918 €', b: '1.969 €' },

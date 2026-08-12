@@ -8,6 +8,54 @@
 
 ---
 
+## 13.08.2026 — Welle 88: eauto-ladekosten-rechner in technik.ts an die SSOTs gebunden — ✅ ABGESCHLOSSEN
+
+Seit Welle 87 zeigte `/technik/eauto-ladekosten-rechner` **zwei Ladeort-Tabellen mit
+unterschiedlichen Preisen** — eine aus der Komponente mit 0,37, eine aus der Config mit 0,34.
+Das ist aufgelöst.
+
+- **Elf Stellen** an `LADEPREISE` und `SPRITPREISE_REFERENZ` gebunden. `technik.ts` hat damit
+  erstmals Importe und einen `eur`-Helfer, nach dem Muster von `auto.ts`.
+- **Annahmen gebündelt:** 18 kWh/100 km, 60 kWh Akku, 7,5 l Vergleichsfahrzeug, 15.000 km stehen
+  jetzt als `EK_*`-Konstanten an einer Stelle statt über elf Textstellen verstreut.
+- **Beide Ladeort-Tabellen zeigen jetzt 0,37 / 0,50 / 0,65 / 0,10.** Nur zwei Preise haben sich
+  bewegt: Wallbox 0,34 → 0,37 und Benzin 1,75 → 2,125; AC, DC und PV blieben inhaltlich gleich und
+  haben nur einen Ort bekommen.
+- **Drei Aussagen bewusst unverändert gelassen und rechnerisch belegt:** „Faktor sechs" (real 6,5),
+  „Praxiswerte 6 bis 9 € pro 100 km" (neuer Wert 6,66 liegt darin), „niedriger fünfstelliger
+  Betrag" über zehn Jahre (13.916 statt 10.500 €).
+
+**Abweichung vom Auftrag, notwendig.** Der Prompt nannte für zwei FAQ-Antworten (Benziner-Vergleich
+und Hebel-Frage) nur Teilstrings. Beide Felder waren aber **einfach gequotet**. Nur den Teilstring
+zu ersetzen hätte `${…}` wörtlich auf die Seite geschrieben. Beide Zeilen wurden deshalb — wie die
+dritte FAQ-Antwort und das Fazit — vollständig auf Template-Literale umgestellt.
+
+**Offen — beim Verifizieren gefunden.** Die Preise selbst sind vollständig gebunden (`0,34 €/kWh`
+und `1,75 €/l` kommen in der gerenderten Seite **null Mal** mehr vor). Geblieben sind fünf
+**daraus abgeleitete Beträge** in vier gerenderten Blöcken, die der Auftrag nicht abdeckt:
+
+| Zeile | Block | steht | soll |
+|---|---|---|---|
+| 1746 | Rechenweg | `18 kWh × 0,34 €` → `6,12 €` | `6,66 €` |
+| 1747 | Rechenweg | `60 kWh × 0,34 €` → `20,40 €` | `22,20 €` |
+| 1748 | Rechenweg | `6,12 € × 150` → `918 €` | `999 €` |
+| 1770/1771 | Vergleich Wallbox↔DC | `6,12 €` / `918 €` | `6,66 €` / `999 €` |
+| 1781 | Jahreskosten je Ladeort | `6,12 €` / `918 €` | `6,66 €` / `999 €` |
+| 1797/1799 | Vergleich E-Auto↔Benziner | `6,12`/`13,13` · `918`/`1.969` | `6,66`/`15,94` · `999`/`2.391` |
+
+Die DC-Spalten (11,70 € und 1.755 €) bleiben korrekt, weil sich der DC-Preis nicht geändert hat.
+Dadurch steht im Fazit jetzt „rund 999 €" und drei Blöcke tiefer weiterhin „918 €" — dieselbe
+Konstellation wie zwischen Welle 85 und 86.
+
+**Bestätigt tot** (nicht gerendert, da der Rechner `contentBloecke` hat): `beispiel` Z. 1686 und
+`erklaerung` Z. 1693/1701 mit 0,34 / 1,75 / 13,13.
+
+**Weiter offen:** `stromverbrauch-geraete-rechner` in derselben Datei und `reisekosten-rechner` in
+`alltag.ts` haben noch je einige Stellen. Und `ladepreise-parameter.ts` führt ein `stand`-Feld, das
+von keinem Wächter geprüft wird — anders als `SPRITPREISE_REFERENZ`.
+
+---
+
 ## 12.08.2026 — Welle 87: Ladepreis-SSOT angelegt, EautoLadekostenRechner gebunden — ✅ ABGESCHLOSSEN
 
 `auto.ts` war mit Welle 86 durch; der `eauto-ladekosten-rechner` war der letzte Rechner mit
