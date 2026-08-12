@@ -10,6 +10,7 @@ import {
   type FinanzierungsModus,
 } from '@/lib/berechnungen/autokosten';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import { SPRITPREISE_REFERENZ } from '@/lib/berechnungen/spritpreise-parameter';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
@@ -18,6 +19,10 @@ import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 const FAHRLEISTUNG_SCHNELLWAHL = [10000, 15000, 20000, 30000];
+
+// Startwert aus der zentralen Spritpreis-SSOT. Bewusst mit Komma erzeugt:
+// parseDeutscheZahl liest '2.125' als 2125 (Tausenderpunkt-Regel R3).
+const SPRIT_DEFAULT = SPRITPREISE_REFERENZ.superE10.toFixed(3).replace('.', ',');
 
 export default function AutokostenRechner() {
   // Fahrzeug
@@ -35,7 +40,7 @@ export default function AutokostenRechner() {
   const [fahrleistung, setFahrleistung] = useState('15000');
   const [verbrauch, setVerbrauch] = useState('7');
   const [antrieb, setAntrieb] = useState<Antriebsart>('benzin');
-  const [kraftstoffpreis, setKraftstoffpreis] = useState('1,75');
+  const [kraftstoffpreis, setKraftstoffpreis] = useState(SPRIT_DEFAULT);
 
   // Laufende Kosten
   const [wartung, setWartung] = useState('600');
@@ -193,7 +198,7 @@ export default function AutokostenRechner() {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kraftstoffpreis</label>
-              <NummerEingabe value={kraftstoffpreis} onChange={setKraftstoffpreis} placeholder="1,75" einheit={ANTRIEB_EINHEITEN[antrieb]} />
+              <NummerEingabe value={kraftstoffpreis} onChange={setKraftstoffpreis} placeholder={SPRIT_DEFAULT} einheit={ANTRIEB_EINHEITEN[antrieb]} />
             </div>
           </div>
         </div>

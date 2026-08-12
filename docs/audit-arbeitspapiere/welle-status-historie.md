@@ -8,6 +8,49 @@
 
 ---
 
+## 12.08.2026 — Welle 84: Energiepreis-Defaults der Komponenten an die SSOTs gebunden — ✅ ABGESCHLOSSEN
+
+Die Wellen 82 und 83 haben die **Configs** verdrahtet; die **Komponenten** hingen weiter an
+eigenen Literalen. Die sind sichtbarer als alles in den Configs: Sie stehen im Eingabefeld, bevor
+der Nutzer etwas eintippt, und beim `spritkosten-rechner` rechnet eine ganze Vergleichstabelle
+live damit.
+
+- **Vier Komponenten gebunden:** `SpritkostenRechner` (1,65 → 2,125), `AutokostenRechner`
+  (1,75 → 2,125), `ReisekostenRechner` (1,75 → 2,125) an `SPRITPREISE_REFERENZ.superE10`;
+  `StromverbrauchGeraeteRechner` (0,35 → 0,37) an `STROMPREIS_2026.durchschnitt_bdew`.
+  Defaults **und** Platzhalter kommen jetzt aus derselben Quelle wie die Configs.
+- Belegt in den ausgelieferten Seiten: `value="2,125"` auf `/auto/spritkosten-rechner`,
+  `/auto/autokosten-rechner`, `/alltag/reisekosten-rechner`; `value="0,37"` auf
+  `/technik/stromverbrauch-geraete-rechner`. Kein alter Default mehr als `value`.
+- Die sichtbare Vergleichstabelle im `spritkosten-rechner` zeigt jetzt **10,63 / 12,75 / 14,88 /
+  17,00 / 19,13 / 21,25 / 25,50 €** statt 8,25 bis 19,80 €. Die **14,88** erscheint damit an drei
+  Stellen — FAQ, `contentBloecke` und Tabelle —, alle aus derselben Konstante abgeleitet.
+
+**Parserfalle, dokumentiert und abgesichert.** `parseDeutscheZahl` (Regel R3 in
+`lib/zahlenformat.ts`) liest einen Punkt mit **genau drei** Ziffern danach als Tausenderpunkt.
+Der neue Spritpreis hat genau drei Nachkommastellen, also gilt: `'2,125'` → 2.125 richtig,
+`'2.125'` → **2125**, Faktor 1000 daneben. Empirisch gegen den echten Parser belegt. Alle Defaults
+werden deshalb über `.replace('.', ',')` erzeugt; der Rundlauf `SSOT → String → parseDeutscheZahl`
+liefert wieder exakt den SSOT-Wert (`=== true` für beide).
+
+**Handwerkliche Notiz.** Der Helfer gehört hinter den **gesamten** Importblock, nicht direkt hinter
+die `parseDeutscheZahl`-Zeile — sonst steht eine `const` zwischen zwei Imports. Beim
+`SpritkostenRechner` folgen dort noch sechs weitere Importe.
+
+**Offen.**
+1. **Dieselbe Falle trifft den Nutzer.** Wer im Spritpreisfeld `2.125` eintippt, rechnet unbemerkt
+   mit 2125 €/L. Betrifft alle Felder mit üblichen dreistelligen Nachkommawerten. Eine Änderung an
+   R3 würde die Tausenderpunkt-Erkennung anderswo brechen — eigene Entscheidung.
+2. **Neu sichtbar geworden durch diese Welle:** Auf `/auto/autokosten-rechner` steht weiterhin die
+   Fußnote „Energiepreise als Standardwerte des Rechners (Benzin 1,75 €/l, Diesel 1,65 €/l, Strom
+   0,35 €/kWh)" samt zugehöriger statischer Tabelle in `auto.ts` Z. 1093. Das Eingabefeld daneben
+   zeigt jetzt 2,125. Die Seite widerspricht sich damit innerhalb eines Bildschirms — vorher war
+   die Fußnote nur veraltet, jetzt ist sie nachweislich falsch über den eigenen Rechner.
+3. `EautoLadekostenRechner.tsx` führt seine Preise als Optionsliste mit Beschriftungen und
+   Vergleichstabelle, dazu im Punktformat (`'0.34'`). Kommt mit der technik.ts-Welle.
+
+---
+
 ## 12.08.2026 — Welle 83: spritkosten-rechner an die Preis-SSOTs angebunden — ✅ ABGESCHLOSSEN
 
 Welle 82 hat `SPRITPREISE_REFERENZ` aktualisiert; im `spritkosten-rechner` standen daneben noch

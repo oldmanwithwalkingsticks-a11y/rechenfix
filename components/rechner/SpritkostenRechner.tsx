@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import { berechneSpritkosten } from '@/lib/berechnungen/spritkosten';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import { SPRITPREISE_REFERENZ } from '@/lib/berechnungen/spritpreise-parameter';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
@@ -10,10 +11,14 @@ import CrossLink from '@/components/ui/CrossLink';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
+// Startwert aus der zentralen Spritpreis-SSOT. Bewusst mit Komma erzeugt:
+// parseDeutscheZahl liest '2.125' als 2125 (Tausenderpunkt-Regel R3).
+const SPRIT_DEFAULT = SPRITPREISE_REFERENZ.superE10.toFixed(3).replace('.', ',');
+
 export default function SpritkostenRechner() {
   const [strecke, setStrecke] = useState('100');
   const [verbrauch, setVerbrauch] = useState('7,5');
-  const [spritpreis, setSpritpreis] = useState('1,65');
+  const [spritpreis, setSpritpreis] = useState(SPRIT_DEFAULT);
   const [hinUndZurueck, setHinUndZurueck] = useState(false);
 
   const nStrecke = parseDeutscheZahl(strecke);

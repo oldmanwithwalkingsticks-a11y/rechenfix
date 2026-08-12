@@ -3,11 +3,16 @@
 import { useState, useMemo } from 'react';
 import { berechneReisekosten } from '@/lib/berechnungen/reisekosten';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import { SPRITPREISE_REFERENZ } from '@/lib/berechnungen/spritpreise-parameter';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
+
+// Startwert aus der zentralen Spritpreis-SSOT. Bewusst mit Komma erzeugt:
+// parseDeutscheZahl liest '2.125' als 2125 (Tausenderpunkt-Regel R3).
+const SPRIT_DEFAULT = SPRITPREISE_REFERENZ.superE10.toFixed(3).replace('.', ',');
 
 const FARBEN = ['bg-blue-500', 'bg-amber-500', 'bg-green-500', 'bg-purple-500', 'bg-red-400'];
 const FARBEN_TEXT = ['text-blue-600 dark:text-blue-400', 'text-amber-600 dark:text-amber-400', 'text-green-600 dark:text-green-400', 'text-purple-600 dark:text-purple-400', 'text-red-600 dark:text-red-400'];
@@ -29,7 +34,7 @@ export default function ReisekostenRechner() {
   // Auto
   const [entfernung, setEntfernung] = useState('500');
   const [spritverbrauch, setSpritverbrauch] = useState('7');
-  const [spritpreis, setSpritpreis] = useState('1,75');
+  const [spritpreis, setSpritpreis] = useState(SPRIT_DEFAULT);
   const [maut, setMaut] = useState('30');
 
   // Zug/Flug/Bus
@@ -118,7 +123,7 @@ export default function ReisekostenRechner() {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Spritpreis (€/l)</label>
-              <NummerEingabe value={spritpreis} onChange={setSpritpreis} placeholder="1,75" />
+              <NummerEingabe value={spritpreis} onChange={setSpritpreis} placeholder={SPRIT_DEFAULT} />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Maut/Vignette (€)</label>

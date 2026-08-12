@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import { STROMPREIS_2026 } from '@/lib/berechnungen/strompreis';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
@@ -15,6 +16,10 @@ import CrossLink from '@/components/ui/CrossLink';
  * - Kosten = kWh × Strompreis (€/kWh, als Eingabe; Default 0,35)
  * Geräte-Vorlagen setzen nur die typische Leistung; Nutzungsdauer bleibt Eingabe.
  */
+// Startwert aus der zentralen Strompreis-SSOT (dort in ct gefuehrt).
+// Bewusst mit Komma erzeugt, siehe Regel R3 in lib/zahlenformat.ts.
+const STROM_DEFAULT = (STROMPREIS_2026.durchschnitt_bdew / 100).toFixed(2).replace('.', ',');
+
 const GERAETE: { key: string; label: string; watt: number }[] = [
   { key: 'custom', label: 'Eigene Eingabe', watt: 0 },
   { key: 'kuehl', label: 'Kühl-Gefrier-Kombi (Takt)', watt: 100 },
@@ -32,7 +37,7 @@ const GERAETE: { key: string; label: string; watt: number }[] = [
 export default function StromverbrauchGeraeteRechner() {
   const [watt, setWatt] = useState('200');
   const [stunden, setStunden] = useState('5');
-  const [preis, setPreis] = useState('0,35');
+  const [preis, setPreis] = useState(STROM_DEFAULT);
   const [geraet, setGeraet] = useState('custom');
 
   const nWatt = parseDeutscheZahl(watt);
@@ -86,7 +91,7 @@ export default function StromverbrauchGeraeteRechner() {
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Strompreis</label>
-          <NummerEingabe value={preis} onChange={setPreis} placeholder="0,35" einheit="€/kWh" />
+          <NummerEingabe value={preis} onChange={setPreis} placeholder={STROM_DEFAULT} einheit="€/kWh" />
         </div>
       </div>
 
