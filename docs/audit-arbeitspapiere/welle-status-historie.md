@@ -8,6 +8,44 @@
 
 ---
 
+## 12.08.2026 — Welle 82: Spritpreise aktualisiert, vier veraltete Diesel-Aussagen korrigiert — ✅ ABGESCHLOSSEN
+
+`SPRITPREISE_REFERENZ` stand auf dem ADAC-Bundesschnitt vom 08.06.2026; der Jahreswerte-Wächter
+warnte seit Wochen (65 Tage, Schwelle 45).
+
+- **Werte gesetzt:** Super E10 von 1,907 auf **2,125 €/L**, Diesel von 1,893 auf **2,200 €/L**,
+  `stand` von 2026-06-08 auf **2026-08-12**. Quelle: ADAC-Bundesschnitt.
+- **Das Verhältnis ist gekippt.** Im Repo war Diesel 1,4 Cent *billiger* als E10, tatsächlich ist
+  er 7,5 Cent *teurer*. Nicht der Betrag war das Problem, sondern die Umkehr.
+- **Vier Prosa-Aussagen in drei Rechnern korrigiert**, die Diesel als je Liter günstiger
+  behaupteten: `spritkosten-rechner` (Fließtext und FAQ), `kfz-steuer-rechner` (FAQ),
+  `autokosten-rechner` (Erklärtext).
+- **`tankrabattHinweis`** von laufender auf ausgelaufene Energiesteuersenkung umgestellt — der
+  Tankrabatt galt bis 30.06.2026.
+- **Pflegehinweis** in `spritpreise-parameter.ts` um die vier Prosa-Stellen erweitert, damit beim
+  nächsten Update jemand das Verhältnis mitprüft.
+- Abgeleitete Beträge wandern automatisch mit und wurden im gerenderten HTML gegengeprüft:
+  Pendeln 1.762 → **1.964 €**, Jahr Benzin 2.002 → **2.231 €**, Jahr Diesel 1.704 → **1.980 €**,
+  100 km 13,35/11,36 → **14,88/13,20 €**. Alte Werte kommen im Build nicht mehr vor.
+
+**Lehre.** Eine sauber verdrahtete Konstante schützt die Zahlen, nicht die Sätze daneben. Wenn ein
+Referenzwert nicht nur wandert, sondern sein Verhältnis zu einem anderen umkehrt, veralten
+Prosa-Aussagen still mit. Der Jahreswerte-Wächter erkennt das Alter, nicht die Aussage.
+
+**Offen geblieben (beim Verifizieren gefunden, nicht im Wellen-Auftrag).** Zwei Stellen hängen
+gar nicht an `SPRITPREISE_REFERENZ`:
+1. `auto.ts` Z. 1093, `fussnote` im `contentBloecke`-Block des `autokosten-rechner`, nennt
+   hartkodiert „Benzin 1,75 €/l, Diesel 1,65 €/l" — dieselbe umgekehrte Reihenfolge, dazu weit
+   unter dem ADAC-Stand. Diese Fußnote **ist sichtbar**.
+2. `AutokostenRechner.tsx` Z. 38 setzt `kraftstoffpreis` als Default auf `'1,75'`.
+
+Nebenbefund derselben Prüfung: Beim `autokosten-rechner` wird das Feld `erklaerung` **nicht
+gerendert**, seit der Rechner auf `contentBloecke` migriert ist. Die dort korrigierte Aussage
+(Punkt 4 oben) war also nie live — der Fix bleibt als Konfig-Hygiene richtig, wirkt aber nicht
+auf der Seite.
+
+---
+
 ## 12.08.2026 — Welle 81, Schritt 2: Wächter für metaDescription-Länge — ✅ ABGESCHLOSSEN
 
 Die Regel „metaDescription höchstens 155 Zeichen" stand seit jeher in `CLAUDE.md`, wurde aber von
