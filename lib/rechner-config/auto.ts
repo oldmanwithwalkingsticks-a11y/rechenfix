@@ -22,7 +22,12 @@ const eurT = (n: number) => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/
 // damit sie bei jeder Preisaenderung stimmig bleiben.
 const AK_KRAFTSTOFF = 150 * 7 * SPRITPREISE_REFERENZ.superE10;
 const AK_FEST = { wertverlust: 2427, versicherung: 960, wartung: 650, parken: 540, steuerTuev: 185 };
-const AK_GESAMT = AK_KRAFTSTOFF + Object.values(AK_FEST).reduce((a, b) => a + b, 0);
+const AK_FIX = Object.values(AK_FEST).reduce((a, b) => a + b, 0);
+// Jahressumme fuer eine beliebige Fahrleistung. Regel aus den Bestandswerten
+// rueckgerechnet und belegt: beim alten Preis von 1,75 €/l ergibt sie
+// 5.374,50 / 6.599,50 / 7.212,00 € fuer 5.000 / 15.000 / 20.000 km.
+const akJahr = (km: number) => AK_FIX + (km / 100) * 7 * SPRITPREISE_REFERENZ.superE10;
+const AK_GESAMT = akJahr(15000);
 const akAnteil = (n: number) => Math.round((n / AK_GESAMT) * 100);
 
 export const autoRechner: RechnerConfig[] = [
@@ -1090,10 +1095,10 @@ Ein eigenes Auto lohnt sich finanziell erst ab einer gewissen Fahrleistung und w
         typ: 'beispielrechnung',
         titel: 'Kosten pro Kilometer berechnen',
         schritte: [
-          { label: 'Alle Kostenblöcke zur Jahressumme addieren', formel: 'Wertverlust + laufende Kosten', ergebnis: '6.599 €/Jahr' },
-          { label: 'Auf die Fahrleistung umlegen', formel: '6.599 € ÷ 15.000 km', ergebnis: '0,44 €/km' },
-          { label: 'Auf den Tag umlegen', formel: '6.599 € ÷ 365', ergebnis: '18,08 €/Tag' },
-          { label: 'Auf den Monat umlegen', formel: '6.599 € ÷ 12', ergebnis: '549,94 €/Monat' },
+          { label: 'Alle Kostenblöcke zur Jahressumme addieren', formel: 'Wertverlust + laufende Kosten', ergebnis: `${eurT(AK_GESAMT)} €/Jahr` },
+          { label: 'Auf die Fahrleistung umlegen', formel: `${eurT(AK_GESAMT)} € ÷ 15.000 km`, ergebnis: `${eur(AK_GESAMT / 15000)} €/km` },
+          { label: 'Auf den Tag umlegen', formel: `${eurT(AK_GESAMT)} € ÷ 365`, ergebnis: `${eur(AK_GESAMT / 365)} €/Tag` },
+          { label: 'Auf den Monat umlegen', formel: `${eurT(AK_GESAMT)} € ÷ 12`, ergebnis: `${eur(AK_GESAMT / 12)} €/Monat` },
         ],
         fazit: 'Das Beispielfahrzeug kostet rund 0,44 € pro gefahrenem Kilometer, etwa 18 € pro Tag oder 550 € im Monat. Der Kilometersatz ist das fairste Vergleichsmaß, weil er Anschaffung und laufende Kosten zusammenfasst. Bei den meisten Autos liegt der Vollkosten-Kilometersatz zwischen 0,30 und 0,60 €/km — wer deutlich darüber liegt, fährt entweder wenig oder ein teures Fahrzeug. Zum Vergleich: Die steuerliche Pendlerpauschale von 0,30 €/km (ab dem 21. Kilometer 0,38 €) deckt die realen Vollkosten oft nicht ab, sondern nur einen Teil davon — ein gutes Argument, die eigenen Kosten einmal ehrlich durchzurechnen.',
       },
@@ -1126,11 +1131,11 @@ Ein eigenes Auto lohnt sich finanziell erst ab einer gewissen Fahrleistung und w
         typ: 'beispielrechnung',
         titel: 'Vielfahrer gegen Wenigfahrer: derselbe Wagen, anderer Kilometersatz',
         schritte: [
-          { label: 'Wenigfahrer (5.000 km/Jahr)', formel: '5.374 € ÷ 5.000 km', ergebnis: '1,07 €/km' },
-          { label: 'Durchschnitt (15.000 km/Jahr)', formel: '6.599 € ÷ 15.000 km', ergebnis: '0,44 €/km' },
-          { label: 'Vielfahrer (20.000 km/Jahr)', formel: '7.212 € ÷ 20.000 km', ergebnis: '0,36 €/km' },
+          { label: 'Wenigfahrer (5.000 km/Jahr)', formel: `${eurT(akJahr(5000))} € ÷ 5.000 km`, ergebnis: `${eur(akJahr(5000) / 5000)} €/km` },
+          { label: 'Durchschnitt (15.000 km/Jahr)', formel: `${eurT(AK_GESAMT)} € ÷ 15.000 km`, ergebnis: `${eur(AK_GESAMT / 15000)} €/km` },
+          { label: 'Vielfahrer (20.000 km/Jahr)', formel: `${eurT(akJahr(20000))} € ÷ 20.000 km`, ergebnis: `${eur(akJahr(20000) / 20000)} €/km` },
         ],
-        fazit: 'Es ist dasselbe Auto — nur die Fahrleistung ändert sich. Beim Wenigfahrer kostet der Kilometer mit 1,07 € fast das Dreifache des Vielfahrers (0,36 €), weil sich die hohen Fixkosten auf viel weniger Kilometer verteilen. Die Jahressumme steigt mit den Kilometern nur moderat (von 5.374 auf 7.212 €), weil allein der variable Kraftstoffanteil mitwächst. Wer ein Auto kaum nutzt, sollte den Kilometersatz ehrlich kalkulieren. Genau dieser Effekt erklärt auch, warum sich ein teurer Diesel oder ein Elektroauto mit höherer Anschaffung erst ab vielen Kilometern lohnt: Der niedrigere Energiepreis pro Kilometer muss erst die höheren Fixkosten wieder einspielen.',
+        fazit: `Es ist dasselbe Auto — nur die Fahrleistung ändert sich. Beim Wenigfahrer kostet der Kilometer mit ${eur(akJahr(5000) / 5000)} € fast das Dreifache des Vielfahrers (${eur(akJahr(20000) / 20000)} €), weil sich die hohen Fixkosten auf viel weniger Kilometer verteilen. Die Jahressumme steigt mit den Kilometern nur moderat (von ${eurT(akJahr(5000))} auf ${eurT(akJahr(20000))} €), weil allein der variable Kraftstoffanteil mitwächst. Wer ein Auto kaum nutzt, sollte den Kilometersatz ehrlich kalkulieren. Genau dieser Effekt erklärt auch, warum sich ein teurer Diesel oder ein Elektroauto mit höherer Anschaffung erst ab vielen Kilometern lohnt: Der niedrigere Energiepreis pro Kilometer muss erst die höheren Fixkosten wieder einspielen.`,
       },
       {
         typ: 'tabelle',

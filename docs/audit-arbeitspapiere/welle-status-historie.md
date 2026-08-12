@@ -8,6 +8,39 @@
 
 ---
 
+## 12.08.2026 — Welle 86: autokosten-rechner, Rechenweg und Fahrleistungs-Vergleich — ✅ ABGESCHLOSSEN
+
+Welle 85 hatte den Statistik-Block auf 6.993 € gebracht; drei Zeilen darunter stand in einem
+zweiten gerenderten Block weiterhin „Jahressumme = 6.599 €/Jahr". Diese Welle räumt den Rest ab.
+
+- **Helfer `akJahr(km)`** ergänzt, `AK_GESAMT` daraus abgeleitet. Rechenweg **und** alle drei
+  Fahrleistungswerte kommen jetzt aus einer Funktion statt aus sieben Literalen.
+- **Ableitungsregel belegt, nicht angenommen:** `feste Posten + (km/100) × 7 × Preis` reproduziert
+  mit dem **alten** Preis von 1,75 €/l exakt die drei Bestandswerte — 5.374,50 / 6.599,50 /
+  7.212,00 € für 5.000 / 15.000 / 20.000 km. Drei von drei. Erst danach wurde ersetzt.
+- **Rundung vereinheitlicht:** Der Bestand schnitt bei `,50` ab, `eurT` rundet kaufmännisch — aus
+  5.505,75 wird 5.506 statt 5.505. Bewusste Angleichung an Welle 85.
+- **Fazit-Satz mitgezogen.** Das Verhältnis der Kilometersätze verschiebt sich von 2,97 auf 2,85,
+  „fast das Dreifache" bleibt damit zutreffend; „steigt nur moderat" trägt ebenfalls weiter, weil
+  die Spanne mit 2.231 € deutlich unter den festen Posten (4.762 €) bleibt.
+- Belegt in der ausgelieferten Seite: neu **6.993 · 0,47 · 19,16 · 582,77 · 5.506 · 1,10 · 7.737 ·
+  0,39**; die acht alten Werte (6.599, 0,44 €/km, 18,08, 549,94, 5.374, 1,07, 7.212, 0,36 €/km)
+  kommen **null Mal** mehr vor.
+
+**Lehre.** Ein Teilstring kann in zwei Blöcken derselben Config identisch vorkommen:
+`formel: '6.599 € ÷ 15.000 km', ergebnis: '0,44 €/km' },` stand zweimal da — im Rechenweg und im
+Fahrleistungs-Vergleich. Suchstrings brauchen in solchen Configs immer das `label` als Anker,
+sonst trifft eine Ersetzung die falsche Stelle oder scheitert an der Mehrdeutigkeit.
+
+**Damit ist der Bogen aus den Wellen 82–86 geschlossen.** Ein Sweep über alle 15 gebauten
+`/auto/`-Seiten findet nur noch SSOT-abgeleitete Energiepreise: `autokosten-rechner` zeigt 0,37 €/kWh,
+2,125 €/l und 2,200 €/l, `spritkosten-rechner` zusätzlich 0,25 und 0,75 €/kWh — das sind die von
+Welle 83 bewusst belassenen Szenariospannen für Dynamiktarif und Schnellladen, keine Referenzpreise.
+Verbleibend nur tote `beispiel`- und `erklaerung`-Felder, die bei migrierten Rechnern nicht
+gerendert werden und zur Sammelentscheidung über alle 203 migrierten Rechner gehören.
+
+---
+
 ## 12.08.2026 — Welle 85: autokosten-rechner Beispielrechnung an die SSOTs gebunden — ✅ ABGESCHLOSSEN
 
 Welle 84 hat den Default des Rechners auf 2,125 €/l gesetzt; die Seite drumherum rechnete weiter
