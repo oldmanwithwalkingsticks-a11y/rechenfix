@@ -12,6 +12,19 @@ const STAND_DE = datumDe(SPRITPREISE_REFERENZ.stand);
 // Haushaltsstrompreis in €/kWh aus der zentralen SSOT (dort in ct gefuehrt).
 const STROM = STROMPREIS_2026.durchschnitt_bdew / 100;
 
+// Ganze Euro mit deutschem Tausenderpunkt. Bewusst ohne toLocaleString:
+// bei knapper ICU-Ausstattung faellt das auf englische Trennzeichen zurueck.
+const eurT = (n: number) => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+// Beispielfahrzeug des autokosten-rechner: 25.000 €, 15.000 km/Jahr,
+// 7 l/100 km Benzin. Nur der Kraftstoff haengt am Spritpreis, die uebrigen
+// Posten sind feste Annahmen. Anteile und Summe werden daraus gerechnet,
+// damit sie bei jeder Preisaenderung stimmig bleiben.
+const AK_KRAFTSTOFF = 150 * 7 * SPRITPREISE_REFERENZ.superE10;
+const AK_FEST = { wertverlust: 2427, versicherung: 960, wartung: 650, parken: 540, steuerTuev: 185 };
+const AK_GESAMT = AK_KRAFTSTOFF + Object.values(AK_FEST).reduce((a, b) => a + b, 0);
+const akAnteil = (n: number) => Math.round((n / AK_GESAMT) * 100);
+
 export const autoRechner: RechnerConfig[] = [
   {
     slug: 'spritkosten-rechner',
@@ -1043,19 +1056,19 @@ Ein eigenes Auto lohnt sich finanziell erst ab einer gewissen Fahrleistung und w
       {
         typ: 'text',
         titel: 'TCO: die wahren Kosten eines Autos',
-        html: `<p>Die meisten Autofahrer kennen ihre Tankrechnung und die Versicherungsprämie — aber nicht die <strong>Gesamtbetriebskosten</strong> (englisch Total Cost of Ownership, TCO). Genau die entscheiden, was ein Auto wirklich kostet. Laut ADAC liegt ein durchschnittlicher Kompaktwagen bei rund <strong>400 bis 600 Euro im Monat</strong>, und der größte Posten ist meist unsichtbar: der Wertverlust.</p><p>Der Rechner addiert alle Kostenblöcke zur Jahres- und Monatssumme und teilt sie auf die Fahrleistung um — das ergibt die aussagekräftigste Kennzahl, die <strong>Kosten pro Kilometer</strong>. Sechs Gruppen fließen ein: Wertverlust (oder Finanzierungsrate), Kraftstoff, Versicherung, Kfz-Steuer, Wartung mit Reifen und TÜV sowie sonstige Kosten wie Parken und Pflege. Erst diese Vollkostenrechnung macht verschiedene Fahrzeuge und auch die Alternative zum eigenen Auto fair vergleichbar. Die folgenden Beispiele rechnen mit einem Neuwagen für 25.000 Euro, 15.000 km im Jahr und 7 l/100 km Benzin zu 1,75 €/l. Alle Werte lassen sich im Rechner durch die eigenen ersetzen — das Beispiel dient nur als Orientierung für die Größenordnung der einzelnen Posten.</p>`,
+        html: `<p>Die meisten Autofahrer kennen ihre Tankrechnung und die Versicherungsprämie — aber nicht die <strong>Gesamtbetriebskosten</strong> (englisch Total Cost of Ownership, TCO). Genau die entscheiden, was ein Auto wirklich kostet. Laut ADAC liegt ein durchschnittlicher Kompaktwagen bei rund <strong>400 bis 600 Euro im Monat</strong>, und der größte Posten ist meist unsichtbar: der Wertverlust.</p><p>Der Rechner addiert alle Kostenblöcke zur Jahres- und Monatssumme und teilt sie auf die Fahrleistung um — das ergibt die aussagekräftigste Kennzahl, die <strong>Kosten pro Kilometer</strong>. Sechs Gruppen fließen ein: Wertverlust (oder Finanzierungsrate), Kraftstoff, Versicherung, Kfz-Steuer, Wartung mit Reifen und TÜV sowie sonstige Kosten wie Parken und Pflege. Erst diese Vollkostenrechnung macht verschiedene Fahrzeuge und auch die Alternative zum eigenen Auto fair vergleichbar. Die folgenden Beispiele rechnen mit einem Neuwagen für 25.000 Euro, 15.000 km im Jahr und 7 l/100 km Benzin zu ${eur(SPRITPREISE_REFERENZ.superE10, 3)} €/l. Alle Werte lassen sich im Rechner durch die eigenen ersetzen — das Beispiel dient nur als Orientierung für die Größenordnung der einzelnen Posten.</p>`,
       },
       {
         typ: 'statistik',
         titel: 'Kostenblöcke eines Beispielfahrzeugs (25.000 €, 15.000 km/Jahr)',
         werte: [
-          { label: 'Wertverlust', wert: '2.427 €/Jahr', hinweis: '37 % — der mit Abstand größte Posten' },
-          { label: 'Kraftstoff', wert: '1.838 €/Jahr', hinweis: '28 % — 7 l/100 km zu 1,75 €/l' },
-          { label: 'Versicherung', wert: '960 €/Jahr', hinweis: '15 % — Haftpflicht plus Kasko, je nach SF-Klasse' },
-          { label: 'Wartung & Reifen', wert: '650 €/Jahr', hinweis: '10 % — Inspektion, Verschleiß, Reifenwechsel' },
-          { label: 'Parken & Pflege', wert: '540 €/Jahr', hinweis: '8 % — Stellplatzmiete, Waschanlage, Pflege' },
-          { label: 'Kfz-Steuer & TÜV', wert: '185 €/Jahr', hinweis: '3 % — gesetzlich, kaum beeinflussbar' },
-          { label: 'Gesamt', wert: '6.599 €/Jahr', hinweis: '≈ 550 €/Monat = 0,44 €/km bei 15.000 km Jahresfahrleistung' },
+          { label: 'Wertverlust', wert: `${eurT(AK_FEST.wertverlust)} €/Jahr`, hinweis: `${akAnteil(AK_FEST.wertverlust)} % — der mit Abstand größte Posten` },
+          { label: 'Kraftstoff', wert: `${eurT(AK_KRAFTSTOFF)} €/Jahr`, hinweis: `${akAnteil(AK_KRAFTSTOFF)} % — 7 l/100 km zu ${eur(SPRITPREISE_REFERENZ.superE10, 3)} €/l` },
+          { label: 'Versicherung', wert: '960 €/Jahr', hinweis: `${akAnteil(AK_FEST.versicherung)} % — Haftpflicht plus Kasko, je nach SF-Klasse` },
+          { label: 'Wartung & Reifen', wert: '650 €/Jahr', hinweis: `${akAnteil(AK_FEST.wartung)} % — Inspektion, Verschleiß, Reifenwechsel` },
+          { label: 'Parken & Pflege', wert: '540 €/Jahr', hinweis: `${akAnteil(AK_FEST.parken)} % — Stellplatzmiete, Waschanlage, Pflege` },
+          { label: 'Kfz-Steuer & TÜV', wert: '185 €/Jahr', hinweis: `${akAnteil(AK_FEST.steuerTuev)} % — gesetzlich, kaum beeinflussbar` },
+          { label: 'Gesamt', wert: `${eurT(AK_GESAMT)} €/Jahr`, hinweis: `≈ ${eurT(AK_GESAMT / 12)} €/Monat = ${eur(AK_GESAMT / 15000)} €/km bei 15.000 km Jahresfahrleistung` },
         ],
       },
       {
@@ -1089,12 +1102,12 @@ Ein eigenes Auto lohnt sich finanziell erst ab einer gewissen Fahrleistung und w
         titel: 'Energiekosten nach Antriebsart (typische Werte)',
         kopf: ['Antrieb', 'Typischer Verbrauch', 'Energiepreis', 'Energiekosten/100 km'],
         zeilen: [
-          ['Benzin', '7 l/100 km', '1,75 €/l', '12,25 €'],
-          ['Diesel', '5,5 l/100 km', '1,65 €/l', '9,08 €'],
-          ['Elektro', '18 kWh/100 km', '0,35 €/kWh', '6,30 €'],
-          ['Hybrid', '5 l/100 km', '1,75 €/l', '8,75 €'],
+          ['Benzin', '7 l/100 km', `${eur(SPRITPREISE_REFERENZ.superE10, 3)} €/l`, `${eur(7 * SPRITPREISE_REFERENZ.superE10)} €`],
+          ['Diesel', '5,5 l/100 km', `${eur(SPRITPREISE_REFERENZ.diesel, 3)} €/l`, `${eur(5.5 * SPRITPREISE_REFERENZ.diesel)} €`],
+          ['Elektro', '18 kWh/100 km', `${eur(STROM)} €/kWh`, `${eur(18 * STROM)} €`],
+          ['Hybrid', '5 l/100 km', `${eur(SPRITPREISE_REFERENZ.superE10, 3)} €/l`, `${eur(5 * SPRITPREISE_REFERENZ.superE10)} €`],
         ],
-        fussnote: 'Energiepreise als Standardwerte des Rechners (Benzin 1,75 €/l, Diesel 1,65 €/l, Strom 0,35 €/kWh); der Verbrauch ist ein typischer Beispielwert und im Rechner frei einstellbar. Die Tabelle zeigt nur die Energiekosten, nicht die Gesamtkosten — Diesel und Elektro haben oft höhere Anschaffung bzw. Steuer/Versicherung, die sich erst über die Fahrleistung rechnen. Beim Elektroauto hängt der Preis pro 100 km zudem stark davon ab, ob zu Hause günstig oder unterwegs am teuren Schnelllader geladen wird — die Spanne ist hier größer als bei Benzin oder Diesel.',
+        fussnote: `Energiepreise als Standardwerte des Rechners (Benzin ${eur(SPRITPREISE_REFERENZ.superE10, 3)} €/l, Diesel ${eur(SPRITPREISE_REFERENZ.diesel, 3)} €/l, Strom ${eur(STROM)} €/kWh); der Verbrauch ist ein typischer Beispielwert und im Rechner frei einstellbar. Die Tabelle zeigt nur die Energiekosten, nicht die Gesamtkosten — Diesel und Elektro haben oft höhere Anschaffung bzw. Steuer/Versicherung, die sich erst über die Fahrleistung rechnen. Beim Elektroauto hängt der Preis pro 100 km zudem stark davon ab, ob zu Hause günstig oder unterwegs am teuren Schnelllader geladen wird — die Spanne ist hier größer als bei Benzin oder Diesel.`,
       },
       {
         typ: 'statistik',

@@ -8,6 +8,46 @@
 
 ---
 
+## 12.08.2026 — Welle 85: autokosten-rechner Beispielrechnung an die SSOTs gebunden — ✅ ABGESCHLOSSEN
+
+Welle 84 hat den Default des Rechners auf 2,125 €/l gesetzt; die Seite drumherum rechnete weiter
+mit 1,75 / 1,65 / 0,35.
+
+- **Einleitungstext, Statistik-Block, Vergleichstabelle und Fußnote** an `SPRITPREISE_REFERENZ`
+  und `STROMPREIS_2026` gebunden. Vierzehn Stellen, jede vorab als genau einmal vorkommend geprüft.
+- **Der Statistik-Block wird jetzt gerechnet, nicht geschrieben.** Anteile und Gesamtsumme leiten
+  sich aus `AK_KRAFTSTOFF` und den festen Posten ab; eine Preisänderung verschiebt künftig auch die
+  Prozentanteile automatisch. Kraftstoff 1.838 → **2.231 €** (28 → 32 %), Gesamt 6.599 → **6.993 €**,
+  Monat 550 → **583 €**, Kilometer 0,44 → **0,47 €**.
+- **Vergleichstabelle:** 12,25 / 9,08 / 6,30 / 8,75 → **14,88 / 12,10 / 6,66 / 10,63 €**. Die
+  Diesel-Zeile ist die aussagekräftigste: Sie steigt auf 12,10 € und liegt damit nur noch knapp
+  unter dem Benziner, obwohl der Diesel 1,5 Liter weniger verbraucht — genau der Effekt, den Welle
+  82 im Fließtext beschrieben hat.
+- Helfer `eurT` für Tausenderpunkte ergänzt, bewusst ohne `toLocaleString` (fällt bei knapper
+  ICU-Ausstattung auf englische Trennzeichen zurück).
+- **Der Welle-84-Widerspruch ist aufgelöst:** Die Fußnote beschreibt wieder den Default, den das
+  Feld daneben zeigt.
+
+Die Prozentanteile addieren sich weiterhin zu 101 %, weil jeder Anteil einzeln gerundet wird. Das
+war vorher so (37+28+15+10+8+3) und ist beabsichtigt.
+
+**Offen — beim Verifizieren gefunden, nicht im Auftrag.** Zwei **gerenderte** Blöcke in `auto.ts`
+tragen weiterhin die alte Jahressumme 6.599 € und stehen damit im Widerspruch zum Statistik-Block
+drei Zeilen darüber, der jetzt 6.993 € nennt:
+
+1. **Rechenweg, Z. 1093–1096.** Soll: Jahressumme **6.993**, je km **0,47**, je Tag **19,16**
+   (alt 18,08), je Monat **582,77** (alt 549,94).
+2. **Fahrleistungs-Vergleich, Z. 1129–1131.** Beide Randwerte sind mechanisch ableitbar als
+   `feste Posten + (km/100) × 7 × Preis`. Soll: Wenigfahrer **5.506 € → 1,10 €/km** (alt 5.374 →
+   1,07), Durchschnitt **6.993 € → 0,47**, Vielfahrer **7.737 € → 0,39 €/km** (alt 7.212 → 0,36).
+   Das Fazit „fast das Dreifache" in Z. 1133 hält auch danach — das Verhältnis geht von 2,97 auf
+   2,85.
+
+**Weiterhin offen:** `beispiel` (Z. 997) enthält 1,75 €/l und 0,44 €/km. Totes Feld, gehört zur
+Sammelentscheidung über alle 203 migrierten Rechner.
+
+---
+
 ## 12.08.2026 — Welle 84: Energiepreis-Defaults der Komponenten an die SSOTs gebunden — ✅ ABGESCHLOSSEN
 
 Die Wellen 82 und 83 haben die **Configs** verdrahtet; die **Komponenten** hingen weiter an
