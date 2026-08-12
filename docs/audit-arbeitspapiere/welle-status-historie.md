@@ -8,6 +8,42 @@
 
 ---
 
+## 12.08.2026 — Welle 81, Schritt 2: Wächter für metaDescription-Länge — ✅ ABGESCHLOSSEN
+
+Die Regel „metaDescription höchstens 155 Zeichen" stand seit jeher in `CLAUDE.md`, wurde aber von
+nichts geprüft — weder Lint noch Build noch Prebuild. In Welle 79 kam ein Wert mit 167 Zeichen an;
+er wäre unbemerkt live gegangen, wenn nicht zufällig nachgezählt worden wäre. Eine Regel ohne
+Wächter ist eine Absichtserklärung. Diese Welle baut den Wächter.
+
+**Kein einziger metaDescription-Wert wurde inhaltlich geändert.** Der Bestand war vorab gemessen
+(Schritt 1): **216 Felder, 0 Überschreitungen**, längster Wert 155 Zeichen
+(`steuerklassen-vergleich-rechner`, `finanzen.ts`).
+
+- **Neu: `scripts/check-metadescription.mjs`**, Schwelle **156 Zeichen** — 155 ist zulässig, erst
+  156 bricht ab.
+- **Variante A, keine Ausnahmeliste.** Weil der Bestand vollständig sauber ist, braucht es keine
+  Altfall-Liste; jede nicht benötigte Ausnahme schwächt den Wächter nur. Der längste Bestandswert
+  liegt damit bewusst eingefroren genau auf der Grenze.
+- **Zeichenweise Zählung über Unicode-Codepoints, nicht byteweise.** Der Unterschied ist real: der
+  Bremsweg-Wert hat 148 Zeichen, aber 154 Bytes. Ein byteweise zählender Wächter würde in genau
+  dem Band Fehlalarme werfen, in dem die sieben engsten Bestandswerte liegen (150–155).
+- **String-Leser mit Escape-Behandlung statt Regex-Muster.** Ein Muster wie `'([^']*)'` bricht an
+  einem maskierten Apostroph ab und misst zu kurz. Im Bestand kommt das derzeit null Mal vor —
+  die Vorsorge gilt künftigen Werten.
+- **`index.ts` wird mitgeprüft** (10 Kategorieseiten, unterliegen derselben Google-Kürzung).
+  Ausgenommen sind `client-data.ts` (generierte Kopie, würde doppelt zählen) und `types.ts` (nur
+  Typdeklarationen). Macht 11 geprüfte Dateien, 216 Felder = 206 Rechner + 10 Kategorien.
+- **Gegenprobe belegt, nicht behauptet:** ein künstlich auf 156 Zeichen verlängerter Wert erzeugt
+  Exit 1 mit Datei, Slug, Länge und Überschreitungsbetrag; nach Rücksetzung wieder Exit 0.
+- **Einbindung:** in der `prebuild`-Kette direkt hinter `check-drittanbieter.mjs` (Glied 3 von 10),
+  dazu `lint:metadescription` neben den bestehenden `lint:*`-Einträgen.
+
+**Lehre.** Eine dokumentierte MUSS-Regel ohne maschinellen Wächter wird irgendwann verletzt, und
+zwar unbemerkt — der Fehler fällt nur auf, wenn jemand zufällig nachzählt. Bei jeder Regel in
+`CLAUDE.md`, die sich mechanisch prüfen lässt, gehört der Prebuild-Guard mit zur Regel.
+
+---
+
 ## 23.07.2026 — KI-Rechner Feinschliff (20c–20e), Backlog-Bereinigung (21–23) — ✅ ABGESCHLOSSEN
 
 Direkt im Anschluss an den KI-Rechner-Umbau: BruttoNetto ergänzt, drei im Betrieb gefundene
