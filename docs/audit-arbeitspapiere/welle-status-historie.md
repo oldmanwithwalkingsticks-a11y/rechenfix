@@ -8,6 +8,49 @@
 
 ---
 
+## 12.08.2026 — Welle 83: spritkosten-rechner an die Preis-SSOTs angebunden — ✅ ABGESCHLOSSEN
+
+Welle 82 hat `SPRITPREISE_REFERENZ` aktualisiert; im `spritkosten-rechner` standen daneben noch
+14 hartkodierte Energiepreise. Statt Zahlen auszutauschen wurden die sichtbaren Stellen **an die
+Konstanten angebunden** — sie wandern künftig von selbst mit.
+
+- **Vier sichtbare Stellen** an `SPRITPREISE_REFERENZ` und neu an `STROMPREIS_2026` angebunden.
+  Dies ist die **erste Config überhaupt**, die die Strompreis-SSOT nutzt; bisher taten das nur
+  acht Komponenten.
+- **Drei `faq.antwort`-Felder** von einfachen Anführungen auf Template-Literale umgestellt.
+  `check-backticks.mjs` erlaubt das in `faq` ausdrücklich und bleibt grün.
+- **Folgerungen mitgezogen**, weil sie von beiden Preisen abhängen: „nochmals 30 %" → „rund 40 %",
+  Break-Even „5–10 Jahre" → „4–8 Jahre". Die Szenariospannen (Dynamiktarif 0,20–0,25, Schnellladen
+  0,55–0,75 €/kWh) bleiben stehen — das sind keine Referenzpreise.
+- Gegenprobe im gerenderten HTML: neu 29,75 · 0,15 · 14,88 · 6,66 · 8,21 · 1232 · 0,37 vorhanden,
+  alt 23,10 · 12,25 · 5,76 · 0,32 €/kWh verschwunden. Die 14,88 stimmt mit dem Wert überein, den
+  der `contentBloecke`-Block schon vorher aus derselben Konstante ableitete — das war die
+  eigentliche Probe.
+
+**Bewusst offen gelassen.** `beispiel` (Z. 26) und `erklaerung` (Z. 69–80) enthalten weiterhin
+1,65 / 1,75 / 1,80 €/L. Beide Felder werden bei migrierten Rechnern **nicht gerendert** (Ternär in
+`app/[kategorie]/[rechner]/page.tsx` Z. 171). Belegt: keiner dieser Werte taucht in der
+ausgelieferten Seite auf. Ob toter Text gelöscht oder gepflegt wird, ist für alle 203 migrierten
+Rechner gemeinsam zu entscheiden.
+
+**Lehre.** Vor jeder Inhaltskorrektur klären, ob das Feld überhaupt ausgeliefert wird. Von 14
+hartkodierten Preisen waren nur 7 sichtbar — die Hälfte der scheinbaren Arbeit wäre Arbeit an
+totem Text gewesen.
+
+**Offen für spätere Wellen.**
+1. `eur(x, 0)` liefert `1232` statt `1.232` — dem Helfer fehlen Tausenderpunkte durchgängig.
+2. **Beim Verifizieren gefunden:** `SpritkostenRechner.tsx` Z. 16 setzt `spritpreis` als Default
+   auf `'1,65'`. Die Vergleichstabelle darunter rechnet live damit, sichtbar sind 8,25 bis
+   19,80 € für 5 bis 12 L/100km — sämtlich auf Basis eines Preises, der 46 Cent unter der SSOT
+   liegt. Zusammen mit dem Welle-82-Befund (`AutokostenRechner.tsx` Z. 38 Default `'1,75'`,
+   `auto.ts` Z. 1093 Fußnote „Benzin 1,75 / Diesel 1,65") ergibt das ein Muster: Die Configs sind
+   jetzt verdrahtet, die **Komponenten-Defaults** nicht. Der Dateikopf von
+   `spritpreise-parameter.ts` grenzt das bewusst ab („NICHT für die Rechenlogik — der
+   spritkosten-rechner nutzt User-Input"); der Default ist aber eine sichtbare Zahl, nicht nur
+   eine Eingabehilfe.
+
+---
+
 ## 12.08.2026 — Welle 82: Spritpreise aktualisiert, vier veraltete Diesel-Aussagen korrigiert — ✅ ABGESCHLOSSEN
 
 `SPRITPREISE_REFERENZ` stand auf dem ADAC-Bundesschnitt vom 08.06.2026; der Jahreswerte-Wächter

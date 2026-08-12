@@ -1,5 +1,6 @@
 import type { RechnerConfig } from './types';
 import { SPRITPREISE_REFERENZ } from '@/lib/berechnungen/spritpreise-parameter';
+import { STROMPREIS_2026 } from '@/lib/berechnungen/strompreis';
 
 // Lokale Helfer für deutsche Zahlformatierung in den W19-Content-Bausteinen
 // (Komma als Dezimaltrenner). Nur in diesem Modul verwendet.
@@ -8,6 +9,8 @@ const datumDe = (iso: string) => iso.split('-').reverse().join('.');
 
 // Spritpreise: ADAC-Bundesschnitt, Stand laut SPRITPREISE_REFERENZ.stand
 const STAND_DE = datumDe(SPRITPREISE_REFERENZ.stand);
+// Haushaltsstrompreis in €/kWh aus der zentralen SSOT (dort in ct gefuehrt).
+const STROM = STROMPREIS_2026.durchschnitt_bdew / 100;
 
 export const autoRechner: RechnerConfig[] = [
   {
@@ -88,7 +91,8 @@ Spritkosten sind einer der größten variablen Kostenposten beim Autofahren — 
 - **Kaltstart-Effekt bei Kurzstrecken unterschätzt.** Auf den ersten 4–5 km nach einem Kaltstart verbraucht ein Verbrenner 30–80 % mehr als im warmen Betriebszustand. Wer nur Kurzstrecken fährt (Schule, Einkauf, kurze Fahrten zur Arbeit), liegt im Jahresverbrauch oft 1–2 L/100km über dem Bordcomputer-Wert, der den Anteil des Kaltlaufs nicht prominent ausweist.`,
     // W19-Pilot → Goldstandard (~1.500 W): Modulare Content-Bausteine. Benzin/Diesel-Werte
     // aus SPRITPREISE_REFERENZ (ADAC-Bundesschnitt, Stand 12.08.2026) zur Build-Zeit eingesetzt.
-    // Strom-Vergleich ist eine ANNAHME (Haushaltsstrom ~0,35 €/kWh, ~18 kWh/100km, Stand 06/2026)
+    // Strom-Vergleich: Haushaltsstrompreis aus STROMPREIS_2026.durchschnitt_bdew
+    // (BDEW 04/2026), Verbrauchsannahme ~18 kWh/100km. Nicht hartkodieren.
     // — im Text als Annahme gekennzeichnet, reine Energiekosten ohne Anschaffung/Steuer/Wartung.
     // erklaerung bleibt als Fallback.
     contentBloecke: [
@@ -164,7 +168,7 @@ Spritkosten sind einer der größten variablen Kostenposten beim Autofahren — 
       {
         typ: 'text',
         titel: 'Benzin, Diesel oder Elektro — die Kosten pro 100 km',
-        html: `<p>Wie viel kostet die Energie für 100 Kilometer — unabhängig von Anschaffung, Steuer und Wartung? Ein grober Vergleich auf Basis der aktuellen Preise zeigt die Größenordnung.</p><p>Ein <strong>Benziner</strong> mit 7 Litern Super E10 auf 100 km kommt bei ${eur(SPRITPREISE_REFERENZ.superE10, 3)} €/L auf rund ${eur(7 * SPRITPREISE_REFERENZ.superE10)} € pro 100 km. Ein <strong>Diesel</strong> mit 6 Litern auf 100 km liegt bei ${eur(SPRITPREISE_REFERENZ.diesel, 3)} €/L bei etwa ${eur(6 * SPRITPREISE_REFERENZ.diesel)} €. Ein <strong>Elektroauto</strong> mit einem angenommenen Verbrauch von 18 kWh/100 km kostet bei einem Haushaltsstrompreis von rund 0,35 €/kWh etwa 6,30 € pro 100 km — wer zu Hause mit einem günstigeren Tarif oder eigenem Solarstrom lädt, fährt noch günstiger, beim teuren Schnellladen unterwegs dagegen deutlich teurer.</p><p>Wichtig zur Einordnung: Das ist ein <strong>reiner Energiekosten-Vergleich</strong>. Anschaffungspreis, Wertverlust, Kfz-Steuer, Versicherung und Wartung sind hier nicht enthalten und können das Gesamtbild stark verschieben. Der Vergleich ersetzt also keine Kaufentscheidung, zeigt aber den laufenden Energiekosten-Unterschied bei heutigen Preisen.</p>`,
+        html: `<p>Wie viel kostet die Energie für 100 Kilometer — unabhängig von Anschaffung, Steuer und Wartung? Ein grober Vergleich auf Basis der aktuellen Preise zeigt die Größenordnung.</p><p>Ein <strong>Benziner</strong> mit 7 Litern Super E10 auf 100 km kommt bei ${eur(SPRITPREISE_REFERENZ.superE10, 3)} €/L auf rund ${eur(7 * SPRITPREISE_REFERENZ.superE10)} € pro 100 km. Ein <strong>Diesel</strong> mit 6 Litern auf 100 km liegt bei ${eur(SPRITPREISE_REFERENZ.diesel, 3)} €/L bei etwa ${eur(6 * SPRITPREISE_REFERENZ.diesel)} €. Ein <strong>Elektroauto</strong> mit einem angenommenen Verbrauch von 18 kWh/100 km kostet bei einem Haushaltsstrompreis von rund ${eur(STROM)} €/kWh etwa ${eur(18 * STROM)} € pro 100 km — wer zu Hause mit einem günstigeren Tarif oder eigenem Solarstrom lädt, fährt noch günstiger, beim teuren Schnellladen unterwegs dagegen deutlich teurer.</p><p>Wichtig zur Einordnung: Das ist ein <strong>reiner Energiekosten-Vergleich</strong>. Anschaffungspreis, Wertverlust, Kfz-Steuer, Versicherung und Wartung sind hier nicht enthalten und können das Gesamtbild stark verschieben. Der Vergleich ersetzt also keine Kaufentscheidung, zeigt aber den laufenden Energiekosten-Unterschied bei heutigen Preisen.</p>`,
       },
       {
         typ: 'text',
@@ -216,11 +220,11 @@ Spritkosten sind einer der größten variablen Kostenposten beim Autofahren — 
     faq: [
       {
         frage: 'Wie berechne ich die Spritkosten für eine Strecke?',
-        antwort: 'Teilen Sie die Strecke in Kilometern durch 100, multiplizieren Sie mit dem Verbrauch (L/100km) und dann mit dem Spritpreis pro Liter. Formel: (Strecke ÷ 100) × Verbrauch × Preis. Beispiel: 200 km, 7 L/100km, 1,65 €/L = 23,10 €.',
+        antwort: `Teilen Sie die Strecke in Kilometern durch 100, multiplizieren Sie mit dem Verbrauch (L/100km) und dann mit dem Spritpreis pro Liter. Formel: (Strecke ÷ 100) × Verbrauch × Preis. Beispiel: 200 km, 7 L/100km, ${eur(SPRITPREISE_REFERENZ.superE10, 3)} €/L = ${eur(2 * 7 * SPRITPREISE_REFERENZ.superE10)} €.`,
       },
       {
         frage: 'Wie hoch sind die Spritkosten pro Kilometer?',
-        antwort: 'Die Spritkosten pro Kilometer hängen vom Verbrauch und Spritpreis ab. Bei 7 L/100km und 1,65 €/L liegen die reinen Spritkosten bei ca. 0,12 € pro Kilometer. Rechnet man Verschleiß, Versicherung und Wertverlust dazu, liegen die Gesamtkosten pro Kilometer bei 0,30–0,50 €.',
+        antwort: `Die Spritkosten pro Kilometer hängen vom Verbrauch und Spritpreis ab. Bei 7 L/100km und ${eur(SPRITPREISE_REFERENZ.superE10, 3)} €/L liegen die reinen Spritkosten bei ca. ${eur(7 * SPRITPREISE_REFERENZ.superE10 / 100)} € pro Kilometer. Rechnet man Verschleiß, Versicherung und Wertverlust dazu, liegen die Gesamtkosten pro Kilometer bei 0,30–0,50 €.`,
       },
       {
         frage: 'Was ist ein normaler Benzinverbrauch?',
@@ -244,7 +248,7 @@ Spritkosten sind einer der größten variablen Kostenposten beim Autofahren — 
       },
       {
         frage: 'Lohnt der Wechsel zum E-Auto bei meinem Verbrauchsprofil?',
-        antwort: 'Auf 100 km gerechnet: ein Mittelklasse-Benziner mit 7 L/100km bei 1,75 €/L kostet 12,25 € Sprit; ein vergleichbares E-Auto mit 18 kWh/100km bei 0,32 €/kWh Haushaltsstrom kostet 5,76 € — Differenz etwa 6,50 € pro 100 km. Bei 15.000 km/Jahr sind das knapp 1.000 € Energiekosten-Ersparnis pro Jahr. Wer eine eigene Wallbox plus Dynamic-Tarif (zeitvariable Stromtarife, oft 0,20–0,25 €/kWh) hat, fährt nochmals 30 % günstiger. Aber: Anschaffungspreis ist beim E-Auto typisch 5.000–10.000 € höher als beim Verbrenner, Wertverlust unsicher, Reichweite/Lade-Infrastruktur prüfen. Break-Even bei reiner Energiekosten-Differenz liegt grob bei 5–10 Jahren — wer überwiegend Kurzstrecken fährt und zu Hause laden kann, profitiert schneller; Vielfahrer auf Langstrecken-Routen rechnen mit Schnellladekosten (0,55–0,75 €/kWh) anders.',
+        antwort: `Auf 100 km gerechnet: ein Mittelklasse-Benziner mit 7 L/100km bei ${eur(SPRITPREISE_REFERENZ.superE10, 3)} €/L kostet ${eur(7 * SPRITPREISE_REFERENZ.superE10)} € Sprit; ein vergleichbares E-Auto mit 18 kWh/100km bei ${eur(STROM)} €/kWh Haushaltsstrom kostet ${eur(18 * STROM)} € — Differenz etwa ${eur(7 * SPRITPREISE_REFERENZ.superE10 - 18 * STROM)} € pro 100 km. Bei 15.000 km/Jahr sind das rund ${eur(150 * (7 * SPRITPREISE_REFERENZ.superE10 - 18 * STROM), 0)} € Energiekosten-Ersparnis pro Jahr. Wer eine eigene Wallbox plus Dynamic-Tarif (zeitvariable Stromtarife, oft 0,20–0,25 €/kWh) hat, fährt nochmals rund 40 % günstiger. Aber: Anschaffungspreis ist beim E-Auto typisch 5.000–10.000 € höher als beim Verbrenner, Wertverlust unsicher, Reichweite/Lade-Infrastruktur prüfen. Break-Even bei reiner Energiekosten-Differenz liegt grob bei 4–8 Jahren — wer überwiegend Kurzstrecken fährt und zu Hause laden kann, profitiert schneller; Vielfahrer auf Langstrecken-Routen rechnen mit Schnellladekosten (0,55–0,75 €/kWh) anders.`,
       },
     ],
     quellen: [
