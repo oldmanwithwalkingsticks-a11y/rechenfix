@@ -1,5 +1,6 @@
 import type { RechnerConfig } from './types';
 import { LADEPREISE, ladepreisDe } from '@/lib/berechnungen/ladepreise-parameter';
+import { STROMPREIS_META } from '@/lib/berechnungen/strompreis';
 import { SPRITPREISE_REFERENZ } from '@/lib/berechnungen/spritpreise-parameter';
 
 // Lokaler Helfer für deutsche Zahlformatierung, wie in auto.ts.
@@ -12,6 +13,11 @@ const EK_BENZIN_L = 7.5;     // l/100 km, Vergleichsfahrzeug
 const EK_KM_JAHR = 15000;
 // Jahreskosten fuer einen beliebigen Ladepreis, bei den Annahmen des Rechners.
 const ekJahr = (preisProKwh: number) => (EK_KM_JAHR / 100) * EK_VERBRAUCH * preisProKwh;
+
+// 'YYYY-MM-TT' oder 'YYYY-MM' zu 'MM/YYYY'.
+const monatJahr = (iso: string) => { const [j, m] = iso.split('-'); return `${m}/${j}`; };
+const STAND_STROM = monatJahr(STROMPREIS_META.stand);
+const STAND_LADEN = monatJahr(LADEPREISE.stand);
 const ekJahrStrom = ekJahr(LADEPREISE.wallbox);
 // Ganze Euro mit deutschem Tausenderpunkt, wie in auto.ts.
 const eurT = (n: number) => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
@@ -1690,7 +1696,7 @@ Oberhalb von rund 80 Prozent drosselt das Batteriemanagement die DC-Ladeleistung
     beispiel: '18 kWh/100 km an der Wallbox (0,34 €/kWh): 18 × 0,34 = 6,12 €/100 km (Richtwert).',
     erklaerung: `**E-Auto-Ladekosten berechnen — was kostet das Laden wirklich?**
 
-Die Ladekosten eines E-Autos ergeben sich aus dem Verbrauch und dem Strompreis. Dieser Rechner ermittelt die Kosten pro 100 km, pro Vollladung und pro Jahr — je nach Ladeort — und stellt sie einem Benziner gegenüber. Alle Strompreise sind Richtwerte mit Stand April 2026 (BDEW/Bundesnetzagentur); die tatsächlichen Tarife schwanken stark, die Angaben sind ohne Gewähr.
+Die Ladekosten eines E-Autos ergeben sich aus dem Verbrauch und dem Strompreis. Dieser Rechner ermittelt die Kosten pro 100 km, pro Vollladung und pro Jahr — je nach Ladeort — und stellt sie einem Benziner gegenüber. Alle Preise sind Richtwerte: Haushaltsstrom nach ${STROMPREIS_META.quelle} (Stand ${STAND_STROM}), öffentliche Ladepreise nach Marktübersicht (Stand ${STAND_LADEN}); die tatsächlichen Tarife schwanken stark, die Angaben sind ohne Gewähr.
 
 **Die Rechnung**
 
@@ -1714,7 +1720,7 @@ Ein Benziner mit 7,5 l Verbrauch kostet bei 1,75 €/l rund 13,13 € pro 100 km
       },
       {
         frage: 'Wie aktuell sind die Preise?',
-        antwort: 'Die hinterlegten Strompreise sind Richtwerte mit Stand April 2026 auf Basis von BDEW und Bundesnetzagentur. Strom- und besonders öffentliche Ladepreise sind volatil und unterscheiden sich je Anbieter, Tarif und Standort erheblich. Für eine genaue Rechnung sollten Sie Ihren eigenen Strompreis und den realen Tarif Ihrer Ladestation einsetzen. Die Angaben sind ohne Gewähr.',
+        antwort: `Die hinterlegten Preise sind Richtwerte: der Haushaltsstrompreis nach ${STROMPREIS_META.quelle} mit Stand ${STAND_STROM}, die öffentlichen Ladepreise nach Marktübersicht mit Stand ${STAND_LADEN}. Strom- und besonders öffentliche Ladepreise sind volatil und unterscheiden sich je Anbieter, Tarif und Standort erheblich. Für eine genaue Rechnung sollten Sie Ihren eigenen Strompreis und den realen Tarif Ihrer Ladestation einsetzen. Die Angaben sind ohne Gewähr.`,
       },
       {
         frage: 'Warum ist öffentliches Laden so viel teurer?',
@@ -1729,7 +1735,7 @@ Ein Benziner mit 7,5 l Verbrauch kostet bei 1,75 €/l rund 13,13 € pro 100 km
       {
         typ: 'text',
         titel: 'Wie sich die Ladekosten ergeben',
-        html: `<p>Die Ladekosten eines E-Autos folgen einer einfachen Formel: <strong>Verbrauch × Strompreis</strong>. Der Verbrauch wird in Kilowattstunden pro 100 km angegeben (kWh/100 km), der Strompreis in Euro pro Kilowattstunde (€/kWh). Ein Mittelklasse-E-Auto mit 18 kWh Verbrauch kostet an der heimischen Wallbox bei ${ladepreisDe(LADEPREISE.wallbox)} €/kWh also ${EK_VERBRAUCH} × ${ladepreisDe(LADEPREISE.wallbox)} = ${eur(EK_VERBRAUCH * LADEPREISE.wallbox)} € pro 100 km.</p><p>Drei Faktoren bestimmen das Ergebnis. Der wichtigste ist die <strong>Stromquelle</strong>: Heimstrom, öffentliches Laden und Solarstrom unterscheiden sich um ein Vielfaches. Der zweite ist der <strong>Fahrzeugverbrauch</strong>, der je nach Größe und Fahrweise schwankt. Der dritte ist der konkrete <strong>Tarif</strong>, der besonders im öffentlichen Laden stark variiert. Dieser Rechner spielt alle drei durch und stellt die Kosten verschiedenen Ladeorten sowie einem Benziner gegenüber. Wichtig: Die hinterlegten Strompreise sind Richtwerte mit Stand April 2026 (BDEW/Bundesnetzagentur) und ohne Gewähr — für eine genaue Rechnung den eigenen Strompreis eintragen.</p>`,
+        html: `<p>Die Ladekosten eines E-Autos folgen einer einfachen Formel: <strong>Verbrauch × Strompreis</strong>. Der Verbrauch wird in Kilowattstunden pro 100 km angegeben (kWh/100 km), der Strompreis in Euro pro Kilowattstunde (€/kWh). Ein Mittelklasse-E-Auto mit 18 kWh Verbrauch kostet an der heimischen Wallbox bei ${ladepreisDe(LADEPREISE.wallbox)} €/kWh also ${EK_VERBRAUCH} × ${ladepreisDe(LADEPREISE.wallbox)} = ${eur(EK_VERBRAUCH * LADEPREISE.wallbox)} € pro 100 km.</p><p>Drei Faktoren bestimmen das Ergebnis. Der wichtigste ist die <strong>Stromquelle</strong>: Heimstrom, öffentliches Laden und Solarstrom unterscheiden sich um ein Vielfaches. Der zweite ist der <strong>Fahrzeugverbrauch</strong>, der je nach Größe und Fahrweise schwankt. Der dritte ist der konkrete <strong>Tarif</strong>, der besonders im öffentlichen Laden stark variiert. Dieser Rechner spielt alle drei durch und stellt die Kosten verschiedenen Ladeorten sowie einem Benziner gegenüber. Wichtig: Die hinterlegten Preise sind Richtwerte — Haushaltsstrom Stand ${STAND_STROM}, öffentliche Ladepreise Stand ${STAND_LADEN} — und ohne Gewähr — für eine genaue Rechnung den eigenen Strompreis eintragen.</p>`,
       },
       {
         typ: 'tabelle',
@@ -1741,7 +1747,7 @@ Ein Benziner mit 7,5 l Verbrauch kostet bei 1,75 €/l rund 13,13 € pro 100 km
           ['DC-Schnellladen', `${ladepreisDe(LADEPREISE.dcSchnell)} €/kWh`, `${eur(EK_VERBRAUCH * LADEPREISE.dcSchnell)} €`],
           ['PV-Eigenstrom', `${ladepreisDe(LADEPREISE.pvEigen)} €/kWh`, `${eur(EK_VERBRAUCH * LADEPREISE.pvEigen)} €`],
         ],
-        fussnote: 'Kosten pro 100 km bei einem Verbrauch von 18 kWh/100 km und den jeweiligen Strompreis-Richtwerten (Stand April 2026, BDEW/Bundesnetzagentur). Der Unterschied ist gewaltig: Mit eigenem PV-Strom fährt man für 1,80 €, am DC-Schnelllader für das Sechsfache. Die Werte sind Orientierung, keine Tarifgarantie — gerade öffentliche Ladepreise schwanken je Anbieter und Standort erheblich. Wer seinen eigenen Strompreis kennt, sollte ihn direkt eintragen: Schon zehn Cent Unterschied pro Kilowattstunde verschieben die Kosten pro 100 km bei diesem Verbrauch um 1,80 €. Die Tabelle zeigt damit weniger absolute Wahrheiten als das Verhältnis der Ladeorte zueinander, das auch bei anderen Preisen stabil bleibt.',
+        fussnote: `Kosten pro 100 km bei einem Verbrauch von 18 kWh/100 km und den jeweiligen Preis-Richtwerten (Haushaltsstrom Stand ${STAND_STROM}, öffentliche Ladepreise Stand ${STAND_LADEN}). Der Unterschied ist gewaltig: Mit eigenem PV-Strom fährt man für ${eur(EK_VERBRAUCH * LADEPREISE.pvEigen)} €, am DC-Schnelllader für das Sechsfache. Die Werte sind Orientierung, keine Tarifgarantie — gerade öffentliche Ladepreise schwanken je Anbieter und Standort erheblich. Wer seinen eigenen Strompreis kennt, sollte ihn direkt eintragen: Schon zehn Cent Unterschied pro Kilowattstunde verschieben die Kosten pro 100 km bei diesem Verbrauch um 1,80 €. Die Tabelle zeigt damit weniger absolute Wahrheiten als das Verhältnis der Ladeorte zueinander, das auch bei anderen Preisen stabil bleibt.`,
       },
       {
         typ: 'beispielrechnung',
@@ -1757,7 +1763,7 @@ Ein Benziner mit 7,5 l Verbrauch kostet bei 1,75 €/l rund 13,13 € pro 100 km
         typ: 'infobox',
         variante: 'warnung',
         titel: 'Strompreise sind volatil und intransparent',
-        text: 'Die hier verwendeten Strompreise sind Richtwerte mit Stand April 2026 (BDEW/Bundesnetzagentur) — keine Tarifgarantie. Gerade beim öffentlichen Laden ist der Markt unübersichtlich: Die Preise unterscheiden sich je Anbieter, Standort und Tarifmodell erheblich, und das spontane Ad-hoc-Laden ohne Vertrag ist laut ADAC bis zu 62 Prozent teurer als ein Vertragstarif. Hinzu kommen mancherorts Blockiergebühren, wenn das Auto nach dem Laden stehen bleibt. Auch der Haushaltsstrompreis schwankt je nach Anbieter und Vertrag deutlich. Für eine belastbare Rechnung sollten Sie deshalb Ihren tatsächlichen Strompreis und den realen Tarif Ihrer üblichen Ladestation eintragen, statt sich allein auf die Richtwerte zu verlassen. Dieser Rechner liefert eine Orientierung für den Kostenvergleich, keine verbindliche Tarifauskunft und keine Kaufberatung. Ein weiterer Punkt: Manche Anbieter rechnen pro Minute statt pro Kilowattstunde ab, was bei langsam ladenden Fahrzeugen besonders teuer wird und sich kaum mit einem €/kWh-Preis vergleichen lässt. Achten Sie deshalb beim Tarif immer auf die Abrechnungseinheit. Auch der Haushaltsstrompreis hat sich in den vergangenen Jahren stark bewegt, weshalb eine Momentaufnahme schnell veraltet. Betrachten Sie die Zahlen daher als Größenordnung und aktualisieren Sie den Strompreis nach Ihrem aktuellen Vertrag — nur so spiegelt das Ergebnis Ihre reale Situation wider.',
+        text: `Die hier verwendeten Preise sind Richtwerte — Haushaltsstrom Stand ${STAND_STROM}, öffentliche Ladepreise Stand ${STAND_LADEN} — keine Tarifgarantie. Gerade beim öffentlichen Laden ist der Markt unübersichtlich: Die Preise unterscheiden sich je Anbieter, Standort und Tarifmodell erheblich, und das spontane Ad-hoc-Laden ohne Vertrag ist laut ADAC bis zu 62 Prozent teurer als ein Vertragstarif. Hinzu kommen mancherorts Blockiergebühren, wenn das Auto nach dem Laden stehen bleibt. Auch der Haushaltsstrompreis schwankt je nach Anbieter und Vertrag deutlich. Für eine belastbare Rechnung sollten Sie deshalb Ihren tatsächlichen Strompreis und den realen Tarif Ihrer üblichen Ladestation eintragen, statt sich allein auf die Richtwerte zu verlassen. Dieser Rechner liefert eine Orientierung für den Kostenvergleich, keine verbindliche Tarifauskunft und keine Kaufberatung. Ein weiterer Punkt: Manche Anbieter rechnen pro Minute statt pro Kilowattstunde ab, was bei langsam ladenden Fahrzeugen besonders teuer wird und sich kaum mit einem €/kWh-Preis vergleichen lässt. Achten Sie deshalb beim Tarif immer auf die Abrechnungseinheit. Auch der Haushaltsstrompreis hat sich in den vergangenen Jahren stark bewegt, weshalb eine Momentaufnahme schnell veraltet. Betrachten Sie die Zahlen daher als Größenordnung und aktualisieren Sie den Strompreis nach Ihrem aktuellen Vertrag — nur so spiegelt das Ergebnis Ihre reale Situation wider.`,
       },
       {
         typ: 'text',
@@ -1836,7 +1842,7 @@ Ein Benziner mit 7,5 l Verbrauch kostet bei 1,75 €/l rund 13,13 € pro 100 km
       {
         titel: 'BDEW Strompreisanalyse',
         url: 'https://www.bdew.de/energie/strompreisanalyse/',
-        hinweis: 'Durchschnittliche Haushalts- und Ladestrompreise; Grundlage der Richtwerte (Stand April 2026).',
+        hinweis: `Durchschnittliche Haushalts- und Ladestrompreise; Grundlage der Richtwerte (Haushaltsstrom Stand ${STAND_STROM}, öffentliche Ladepreise Stand ${STAND_LADEN}).`,
       },
       {
         titel: 'Bundesnetzagentur — Ladesäulenregister & Strompreise',

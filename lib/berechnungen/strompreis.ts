@@ -20,6 +20,16 @@ export const STROMPREIS_2026 = {
   waermepumpen_tarif: 28,
 } as const;
 
+/**
+ * Herkunft und Alter der Werte oben. Bewusst NICHT in STROMPREIS_2026 selbst,
+ * weil StromTarifProfil dessen Schluessel als Tarifprofile verwendet — ein
+ * Textfeld dort wuerde den Rueckgabetyp von getStrompreis aufweichen.
+ */
+export const STROMPREIS_META = {
+  stand: '2026-04',
+  quelle: 'BDEW-Strompreisanalyse',
+} as const;
+
 export type StromTarifProfil = keyof typeof STROMPREIS_2026;
 
 export function getStrompreis(profil: StromTarifProfil = 'durchschnitt_bdew'): number {

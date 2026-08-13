@@ -8,6 +8,52 @@
 
 ---
 
+## 13.08.2026 — Welle 90: Stand- und Quellenangaben des eauto-ladekosten-rechner — ✅ ABGESCHLOSSEN
+
+Nach den Wellen 88/89 sagten FAQ und Fußnote „August 2026", sechs andere Stellen weiterhin
+„April 2026". Beim Nachsehen war die Lage feiner als ein bloßer Rest: **Beide Daten waren halb
+richtig.** Der Wallbox-Preis stammt über `STROMPREIS_2026` aus der BDEW-Erhebung 04/2026, die Werte
+für AC, DC und PV aus `LADEPREISE` mit Stand 08/2026 — ein einzelnes Datum konnte die Seite gar
+nicht korrekt angeben.
+
+- **`STROMPREIS_META` in `strompreis.ts` ergänzt**, bewusst **neben** `STROMPREIS_2026`: Weil
+  `StromTarifProfil = keyof typeof STROMPREIS_2026` dessen Schlüssel als Tarifprofile nutzt, hätte
+  ein Textfeld im Objekt den Rückgabetyp von `getStrompreis` auf `number | string` aufgeweicht.
+  Belegt: `tsc --noEmit` läuft sauber, `getStrompreis()` liefert weiterhin `number`, und `stand`
+  taucht nicht in der Profilliste auf.
+- **Sechs Quellenangaben trennen jetzt die zwei Herkünfte** — Haushaltsstrom nach
+  BDEW-Strompreisanalyse (04/2026), öffentliche Ladepreise nach Marktübersicht (08/2026). Beide
+  Daten werden über `monatJahr()` aus den Konstanten abgeleitet und können nicht mehr
+  auseinanderlaufen.
+- **Vier der sechs Felder waren einfach gequotet** (`antwort`, `fussnote`, `text`, `hinweis`) und
+  wurden auf Template-Literale umgestellt; `erklaerung` und `html` waren es bereits. Die Prüfung
+  vorab hat sich damit erneut gelohnt.
+- **PV-Betrag in der Fußnote gebunden.** Das zweite `1,80 €` weiter hinten bleibt literal — es ist
+  keine Ableitung aus einem Ladepreis, sondern die eigenständige Rechnung 18 kWh × 0,10 €
+  Preisunterschied.
+- **Bewusst unverändert:** „über 1.000 € pro Jahr" deckt Wallbox (1.392 €) und Solarstrom
+  (2.121 €) zugleich ab; ein einzelner abgeleiteter Wert wäre für den jeweils anderen Fall falsch.
+
+**Lehre.** Ein Datum, das nur im Dateikommentar steht, wird an jeder Verwendungsstelle neu getippt
+und läuft auseinander. Jede SSOT braucht ihr `stand` als **Feld** — aber nicht dort, wo ein
+`keyof typeof` darüberliegt.
+
+**Zwei Funde außerhalb der zwei Dateien dieser Welle**, beide in
+`components/rechner/EautoLadekostenRechner.tsx`:
+
+1. **Z. 178 widerspricht sich selbst.** Die Vergleichszeile zeigt als Beschriftung hartkodiert
+   `7,5 l × 1,75 €`, daneben den gebundenen Betrag `{eur(ergebnis.benzin100)} €` = **15,94 €**.
+   7,5 × 1,75 ergibt aber 13,13. Welle 87 hat den Betrag gebunden und die Beschriftung stehen
+   lassen. Soll: `7,5 l × 2,125 €`, besser aus `SPRITPREISE_REFERENZ` abgeleitet.
+2. **Z. 136 nennt weiterhin „Stand April 2026"** im Hinweistext unter dem Ergebnis, dazu Z. 19 im
+   Dateikopf-Kommentar. Deshalb steht `April 2026` trotz dieser Welle noch einmal in der Seite —
+   die Erwartung „null Mal" ist mit den zwei Dateien dieser Welle nicht erreichbar.
+
+**Weiter offen:** `stromverbrauch-geraete-rechner` (technik.ts), `reisekosten-rechner` (alltag.ts),
+Altersprüfung für `ladepreise-parameter.ts` und `STROMPREIS_META`.
+
+---
+
 ## 13.08.2026 — Welle 89: abgeleitete Beträge des eauto-ladekosten-rechner gebunden — ✅ ABGESCHLOSSEN
 
 Welle 88 hatte die **Preise** gebunden; die **daraus gerechneten Beträge** standen noch — 6,12 ·
