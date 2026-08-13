@@ -8,6 +8,37 @@
 
 ---
 
+## 13.08.2026 — Welle 96a: Arbeitspapiere strukturell getrennt — ✅ ABGESCHLOSSEN
+
+Welle 96 hat 117 von 716 untrackten Pfaden abgeräumt; die Hauptlast lag weiter an einer Stelle.
+Diese Welle löst sie strukturell auf.
+
+- **590 lokale Arbeitskopien nach `docs/audit-arbeitspapiere/_lokal/` verschoben** und dort
+  ignoriert. Bewegt wurde ausschließlich, was Git selbst als untrackt meldet; die Liste wurde
+  **vor** dem ersten `mv` gegen `git ls-files` geprüft: 0 Kollisionen, keine getrackte Datei
+  unterhalb des einen mitgelisteten Verzeichnisses, keine doppelten Basisnamen. Nach dem
+  Verschieben: 0 gelöschte getrackte Dateien, alle 71 versionierten Papiere unverändert an Ort
+  und Stelle.
+- **Bewusst kein Namensmuster.** Die 71 getrackten Arbeitspapiere tragen dieselbe Konvention wie
+  die lokalen (`welle<n>-…-prompt.md`, `-scoping.md`, `-bericht.md`). Ein Muster könnte die einen
+  nicht von den anderen trennen — nur ein eigenes Verzeichnis kann das.
+- **Bewusst nicht das ganze Verzeichnis ignoriert.** Das wäre die ruhigere, aber gefährlichere
+  Lösung: Ein künftig neu angelegtes Arbeitspapier erschiene in keinem `git status` mehr und
+  müsste per `git add -f` erzwungen werden. Wer das vergisst, merkt nichts. Genau diese Klasse
+  stiller Auslassung hat in dieser Serie zweimal zugeschlagen — der ans Dateiende geratene Eintrag
+  aus Welle 74 und die 72 undokumentierten Wellen. **Sichtbarkeit schlägt Ruhe.**
+- **Sechs Reste aus Welle 96 nachgezogen**, darunter `build-error.log`, das neben dem
+  katalogisierten `build-log.txt` übersehen worden war. `.claude/settings.json` vorher auf
+  Tracking geprüft — nicht versioniert, die Zeile durfte bleiben.
+- **Sicherheitsnetz `git ls-files -i -c --exclude-standard` ohne Treffer.**
+- **Wirkung:** untrackte Pfade **600 → 4**, `git status` gesamt 601 → 6 Zeilen.
+
+Übrig bleiben genau die vier Pfade, die man sehen *will*: `docs/Social Automation/` und die drei
+Bremsweg-Assets unter `public/blog/`, die zu Blogartikel 15 (Welle 80) gehören und noch offen sind.
+Der `git status` vor einem Commit ist damit in einem Blick erfassbar — der Zweck der Übung.
+
+---
+
 ## 13.08.2026 — Welle 96: lokale Arbeitsartefakte in `.gitignore` — ✅ ABGESCHLOSSEN
 
 Im Arbeitsverzeichnis lagen **716 untrackte Dateien**. Sie verrauschen jedes `git status` und damit

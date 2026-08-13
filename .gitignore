@@ -101,3 +101,18 @@ public/swe-worker-*.js
 # Grafiken, Skripte). Nach dem jeweiligen Commit sind sie Doppelungen des
 # versionierten Inhalts. In diesem Verzeichnis ist keine .txt-Datei getrackt.
 docs/audit-arbeitspapiere/*.txt
+
+# Welle 96a — lokale Arbeitskopien der Arbeitspapiere. Prompts, Berichte und
+# Zwischenstände sammeln sich hier an; sie gehören auf die Platte, nicht ins
+# Repo. Bewusst als eigenes Verzeichnis statt als Namensmuster: die getrackten
+# Arbeitspapiere tragen dieselbe Konvention (welle<n>-…-prompt.md) und liessen
+# sich durch kein Muster von den lokalen unterscheiden.
+docs/audit-arbeitspapiere/_lokal/
+
+# Reste aus dem Bestand, die in Welle 96 durchgerutscht sind
+/config-committed.txt
+/build-error.log
+.claude/settings.json
+scripts/__pycache__/
+scripts/_scratch_at.mjs
+scripts/_tmp-etf-check.mjs
