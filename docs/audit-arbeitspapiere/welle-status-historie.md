@@ -8,6 +8,39 @@
 
 ---
 
+## 13.08.2026 — Welle 96: lokale Arbeitsartefakte in `.gitignore` — ✅ ABGESCHLOSSEN
+
+Im Arbeitsverzeichnis lagen **716 untrackte Dateien**. Sie verrauschen jedes `git status` und damit
+die Sicherheitsprüfung vor jedem Commit — genau die Stelle, an der in dieser Serie ein
+versehentlich mitgenommener Pfad auffallen müsste.
+
+- **Ignoriert statt gelöscht.** `Blogs/` enthält die Original-Medien der Artikel und bleibt auf der
+  Platte. Die Welle entfernt nichts und nimmt nichts aus der Versionierung; sie fügt nur Muster
+  hinzu, die auf untrackte Pfade zielen.
+- **`docs/audit-arbeitspapiere/*.txt` aufgenommen.** Vorher geprüft: In diesem Verzeichnis ist
+  **keine** `.txt` getrackt (0 von 71 versionierten Dateien), die gelieferten Quelldateien sind
+  nach dem jeweiligen Commit Doppelungen des versionierten Inhalts.
+- **Sicherheitsnetz `git ls-files -i -c --exclude-standard` ohne Treffer** — kein Muster verdeckt
+  versionierten Inhalt. Das ist der gefährliche Fall bei `.gitignore`-Änderungen und deshalb
+  Abbruchbedingung, nicht Nachkontrolle.
+- **Wirkung:** untrackte Pfade 716 → **599**, `git status` gesamt 717 → 601 Zeilen.
+
+**Was bewusst offen bleibt.** Die Muster greifen 117 Dateien ab; die Hauptlast liegt woanders.
+In `docs/audit-arbeitspapiere/` bleiben **562 `.md`** plus 16 `.mdx`, 4 `.zip`, 4 `.png` untrackt.
+Ein pauschales `*.md` verbietet sich dort, weil in genau diesem Verzeichnis 71 Dateien **getrackt**
+sind — darunter diese Historie. Eine Trennung müsste über ein Unterverzeichnis für Zuarbeiten
+laufen, nicht über eine Endung. Ebenfalls stehen geblieben, weil nicht im Musterkatalog:
+`config-committed.txt`, `build-error.log`, `.claude/settings.json` und drei Streuner in `scripts/`
+(`__pycache__/`, `_scratch_at.mjs`, `_tmp-etf-check.mjs`).
+
+**Entscheidung zu `client-data.ts`:** bleibt getrackt. Geprüft, nicht vermutet — `package.json` hat
+kein `predev`, `npm run dev` erzeugt die Datei also nicht, und sie wird von `Footer.tsx`,
+`SearchBar.tsx` und `MegaMenuContent.tsx` importiert, die auf jeder Seite laufen. Aus der
+Versionierung genommen liefe ein frischer Klon sofort auf allen Seiten in einen Importfehler. Die
+kosmetische `M`-Zeile im `git status` ist der geringere Preis.
+
+---
+
 ## 13.08.2026 — Welle 95: Historie 24–79 nachgetragen und abgesichert — ✅ ABGESCHLOSSEN
 
 Zwischen Welle 23 (23.07.) und Welle 81 (12.08.) fehlten Wellen in dieser Datei. Wie viele, war

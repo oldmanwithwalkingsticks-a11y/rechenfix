@@ -88,3 +88,16 @@ next-env.d.ts
 # W69 — von Serwist beim Build erzeugt, gehört nicht ins Repo
 public/sw.js
 public/swe-worker-*.js
+
+# Welle 96 — lokale Arbeitsartefakte. Entstehen beim Recherchieren, Bauen und
+# Debuggen auf der Arbeitsmaschine und gehören nie ins Repo. Bewusst ignoriert,
+# nicht gelöscht: Blogs/ enthält die Original-Medien der Artikel.
+/Blogs/
+/body.json
+/build-log.txt
+/diag-*.txt
+.claude/worktrees/
+# Quelldateien, die vor einem Commit als .txt geliefert werden (Konfigs,
+# Grafiken, Skripte). Nach dem jeweiligen Commit sind sie Doppelungen des
+# versionierten Inhalts. In diesem Verzeichnis ist keine .txt-Datei getrackt.
+docs/audit-arbeitspapiere/*.txt
