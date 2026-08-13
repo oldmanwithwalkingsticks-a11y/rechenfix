@@ -8,6 +8,52 @@
 
 ---
 
+## 13.08.2026 — Welle 89: abgeleitete Beträge des eauto-ladekosten-rechner gebunden — ✅ ABGESCHLOSSEN
+
+Welle 88 hatte die **Preise** gebunden; die **daraus gerechneten Beträge** standen noch — 6,12 ·
+20,40 · 918 · 13,13 · 1.969, verteilt auf vier gerenderte Blöcke. Das Fazit nannte „rund 999 €",
+drei Blöcke tiefer stand „918 €".
+
+- **Sechzehn Stellen** in vier Blöcken gebunden: Rechenweg, Vergleich Wallbox↔DC, Tabelle
+  „Jahreskosten je Ladeort", Vergleich E-Auto↔Benziner, dazu die Fußnote.
+- **Helfer `ekJahr(preis)` und `eurT`** ergänzt, `ekJahrStrom` daraus abgeleitet.
+- **AC- und DC-Beträge bleiben zahlenmäßig gleich** (9,00 / 1.350 / 11,70 / 1.755), sind aber jetzt
+  gebunden und wandern beim nächsten Mal mit. Dass sie sich nicht verändert haben, war zugleich die
+  Kontrolle, dass kein falscher Preis eingesetzt wurde.
+- **Fußnote:** Abstand 1.000 → **1.392 €**, Zehnjahressumme 10.000 → **13.916 €**, Stand April →
+  August 2026.
+- Belegt in der Seite: 6,12 · 20,40 · 918 · 13,13 · 1.969 · 10.000 € kommen **null Mal** mehr vor;
+  neu vorhanden 6,66 · 22,20 · 999 · 15,94 · 2.391 · 1.392 · 13.916.
+- Die Aussage „Auch beim DC-Laden" trägt weiter und wurde belegt: 11,70 € gegen 15,94 € beim
+  Benziner — der Abstand wächst sogar, statt vorher gegen 13,13 €.
+
+**Quotierung wie angewiesen mitgeprüft:** Die `fussnote` war einfach gequotet und wurde als ganze
+Zeile auf ein Template-Literal umgestellt. Die übrigen fünfzehn Stellen sind Objekt- bzw.
+Array-Werte, bei denen jeder Wert sein eigenes Literal bekommt — dort bestand die Gefahr nicht.
+
+**Lehre.** Preise zu binden ist nur die halbe Arbeit. Die aus ihnen gerechneten Beträge stehen an
+ganz anderen Stellen und werden von einer Suche nach Preismustern (`€/kWh`, `€/l`) **nicht**
+gefunden. Nach jeder Preisbindung muss zusätzlich nach den **Ergebnissen** gesucht werden — hier
+waren es fünf Beträge in vier Blöcken, die drei Wellen lang unentdeckt blieben.
+
+**Damit ist der eauto-ladekosten-rechner rechnerisch abgeschlossen.** Zwei Punkte bleiben, beide
+keine Rechenfehler:
+
+1. **Datumsangabe uneinheitlich.** Vier Stellen nennen weiterhin „Stand April 2026" für die
+   Strompreis-Richtwerte (Z. 1717 FAQ, 1744 Fußnote, 1760 Hinweistext, 1839 Quellen-Hinweis),
+   während FAQ und Fußnote seit Welle 88/89 „August 2026" sagen. Sachlich ist beides halb richtig:
+   Der Wallbox-Preis stammt über `STROMPREIS_2026` aus der BDEW-Erhebung 04/2026, die Werte für
+   AC/DC/PV aus `LADEPREISE` mit `stand: '2026-08-12'`. Eine saubere Formulierung müsste beide
+   Quellen trennen — das ist eine inhaltliche Entscheidung, keine Ersetzung.
+2. **„über 1.000 € pro Jahr"** (Z. 1832) bleibt stehen und ist weiterhin **wahr**, nur konservativ:
+   Der tatsächliche Abstand beträgt 1.392 €. Bewusst nicht angefasst, weil die Aussage nicht falsch
+   ist.
+
+**Weiter offen:** `stromverbrauch-geraete-rechner` (technik.ts) und `reisekosten-rechner`
+(alltag.ts), dazu die fehlende Altersprüfung für `ladepreise-parameter.ts`.
+
+---
+
 ## 13.08.2026 — Welle 88: eauto-ladekosten-rechner in technik.ts an die SSOTs gebunden — ✅ ABGESCHLOSSEN
 
 Seit Welle 87 zeigte `/technik/eauto-ladekosten-rechner` **zwei Ladeort-Tabellen mit

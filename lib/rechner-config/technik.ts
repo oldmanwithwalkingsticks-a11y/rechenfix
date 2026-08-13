@@ -10,7 +10,11 @@ const EK_VERBRAUCH = 18;     // kWh/100 km, Mittelklasse-E-Auto
 const EK_AKKU = 60;          // kWh
 const EK_BENZIN_L = 7.5;     // l/100 km, Vergleichsfahrzeug
 const EK_KM_JAHR = 15000;
-const ekJahrStrom = (EK_KM_JAHR / 100) * EK_VERBRAUCH * LADEPREISE.wallbox;
+// Jahreskosten fuer einen beliebigen Ladepreis, bei den Annahmen des Rechners.
+const ekJahr = (preisProKwh: number) => (EK_KM_JAHR / 100) * EK_VERBRAUCH * preisProKwh;
+const ekJahrStrom = ekJahr(LADEPREISE.wallbox);
+// Ganze Euro mit deutschem Tausenderpunkt, wie in auto.ts.
+const eurT = (n: number) => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 const ekJahrBenzin = (EK_KM_JAHR / 100) * EK_BENZIN_L * SPRITPREISE_REFERENZ.superE10;
 
 export const technikRechner: RechnerConfig[] = [
@@ -1743,9 +1747,9 @@ Ein Benziner mit 7,5 l Verbrauch kostet bei 1,75 €/l rund 13,13 € pro 100 km
         typ: 'beispielrechnung',
         titel: '18 kWh/100 km an der Wallbox',
         schritte: [
-          { label: 'Kosten pro 100 km', formel: '18 kWh × 0,34 €', ergebnis: '6,12 €' },
-          { label: 'Kosten einer Vollladung (60 kWh)', formel: '60 kWh × 0,34 €', ergebnis: '20,40 €' },
-          { label: 'Jahreskosten bei 15.000 km', formel: '6,12 € × 150', ergebnis: '918 €' },
+          { label: 'Kosten pro 100 km', formel: `${EK_VERBRAUCH} kWh × ${ladepreisDe(LADEPREISE.wallbox)} €`, ergebnis: `${eur(EK_VERBRAUCH * LADEPREISE.wallbox)} €` },
+          { label: 'Kosten einer Vollladung (60 kWh)', formel: `${EK_AKKU} kWh × ${ladepreisDe(LADEPREISE.wallbox)} €`, ergebnis: `${eur(EK_AKKU * LADEPREISE.wallbox)} €` },
+          { label: 'Jahreskosten bei 15.000 km', formel: `${eur(EK_VERBRAUCH * LADEPREISE.wallbox)} € × 150`, ergebnis: `${eurT(ekJahrStrom)} €` },
         ],
         fazit: `Ein Mittelklasse-E-Auto kostet an der heimischen Wallbox rund ${eur(EK_VERBRAUCH * LADEPREISE.wallbox)} € pro 100 km, eine volle Ladung des ${EK_AKKU}-kWh-Akkus etwa ${eur(EK_AKKU * LADEPREISE.wallbox, 0)} € und ein ganzes Jahr mit 15.000 km rund ${eur(ekJahrStrom, 0)} €. Das deckt sich mit den verbreiteten Praxiswerten von 6 bis 9 € pro 100 km. Zum Vergleich: Ein Benziner mit 7,5 l Verbrauch kommt bei ${eur(SPRITPREISE_REFERENZ.superE10, 3)} €/l auf rund ${eur(EK_BENZIN_L * SPRITPREISE_REFERENZ.superE10, 0)} € pro 100 km und damit auf rund ${eur(ekJahrBenzin, 0)} € im Jahr. Der Stromkostenvorteil des E-Autos ist also erheblich — vorausgesetzt, man lädt überwiegend zu Hause. Bei 15.000 km im Jahr trennt die beiden Antriebe rund ${eur(ekJahrBenzin - ekJahrStrom, 0)} € allein an Energiekosten. Über eine typische Haltedauer von zehn Jahren und 150.000 km summiert sich allein die Energiekosten-Differenz auf einen niedrigen fünfstelligen Betrag, der die höhere Anschaffung teilweise ausgleicht. Mit eigenem PV-Strom fällt der Vorteil noch deutlicher aus, mit überwiegend öffentlichem Schnellladen dagegen geringer.`,
       },
@@ -1767,8 +1771,8 @@ Ein Benziner mit 7,5 l Verbrauch kostet bei 1,75 €/l rund 13,13 € pro 100 km
         spalteB: 'DC-Schnellladen',
         zeilen: [
           { kriterium: 'Strompreis', a: `~${ladepreisDe(LADEPREISE.wallbox)} €/kWh`, b: `~${ladepreisDe(LADEPREISE.dcSchnell)} €/kWh` },
-          { kriterium: 'Kosten pro 100 km', a: '6,12 €', b: '11,70 €' },
-          { kriterium: 'Jahreskosten (15.000 km)', a: '918 €', b: '1.755 €' },
+          { kriterium: 'Kosten pro 100 km', a: `${eur(EK_VERBRAUCH * LADEPREISE.wallbox)} €`, b: `${eur(EK_VERBRAUCH * LADEPREISE.dcSchnell)} €` },
+          { kriterium: 'Jahreskosten (15.000 km)', a: `${eurT(ekJahrStrom)} €`, b: `${eurT(ekJahr(LADEPREISE.dcSchnell))} €` },
           { kriterium: 'Ladedauer', a: 'Stunden, über Nacht', b: '20–40 min' },
           { kriterium: 'Wofür', a: 'täglicher Alltag', b: 'Langstrecke unterwegs' },
         ],
@@ -1778,13 +1782,13 @@ Ein Benziner mit 7,5 l Verbrauch kostet bei 1,75 €/l rund 13,13 € pro 100 km
         titel: 'Jahreskosten bei 15.000 km je Ladeort',
         kopf: ['Ladeort', 'Kosten / 100 km', 'Jahreskosten (15.000 km)'],
         zeilen: [
-          ['Wallbox / Haushalt', '6,12 €', '918 €'],
-          ['Öffentlich AC', '9,00 €', '1.350 €'],
-          ['DC-Schnellladen', '11,70 €', '1.755 €'],
-          ['PV-Eigenstrom', '1,80 €', '270 €'],
-          ['Benziner (7,5 l)', '13,13 €', '1.969 €'],
+          ['Wallbox / Haushalt', `${eur(EK_VERBRAUCH * LADEPREISE.wallbox)} €`, `${eurT(ekJahrStrom)} €`],
+          ['Öffentlich AC', `${eur(EK_VERBRAUCH * LADEPREISE.oeffentlichAC)} €`, `${eurT(ekJahr(LADEPREISE.oeffentlichAC))} €`],
+          ['DC-Schnellladen', `${eur(EK_VERBRAUCH * LADEPREISE.dcSchnell)} €`, `${eurT(ekJahr(LADEPREISE.dcSchnell))} €`],
+          ['PV-Eigenstrom', `${eur(EK_VERBRAUCH * LADEPREISE.pvEigen)} €`, `${eurT(ekJahr(LADEPREISE.pvEigen))} €`],
+          ['Benziner (7,5 l)', `${eur(EK_BENZIN_L * SPRITPREISE_REFERENZ.superE10)} €`, `${eurT(ekJahrBenzin)} €`],
         ],
-        fussnote: 'Hochgerechnet auf 15.000 km Jahresfahrleistung bei 18 kWh/100 km Verbrauch (Richtwerte, Stand April 2026). Der Abstand zwischen Heimladen und Benziner beträgt über 1.000 € pro Jahr — ein Betrag, der die Mehrkosten der Anschaffung über die Jahre relativieren kann. Wer viel fährt, profitiert stärker: Bei 30.000 km im Jahr verdoppelt sich die Ersparnis entsprechend, während sie bei reinen Wenigfahrern kleiner ausfällt. Wer dagegen ausschließlich am Schnelllader lädt, nähert sich den Spritkosten an. Anschaffung, Wartung und Versicherung sind hier nicht enthalten. Über zehn Jahre summiert sich die Differenz so auf rund 10.000 €. Zu bedenken ist außerdem, dass E-Autos in der Regel niedrigere Wartungskosten haben — keine Ölwechsel, weniger Verschleißteile, oft günstigere Inspektionen. Diese Posten gehören in eine vollständige Gesamtkostenrechnung, die über die reinen Energiekosten dieses Rechners hinausgeht.',
+        fussnote: `Hochgerechnet auf 15.000 km Jahresfahrleistung bei 18 kWh/100 km Verbrauch (Richtwerte, Stand August 2026). Der Abstand zwischen Heimladen und Benziner beträgt rund ${eurT(ekJahrBenzin - ekJahrStrom)} € pro Jahr — ein Betrag, der die Mehrkosten der Anschaffung über die Jahre relativieren kann. Wer viel fährt, profitiert stärker: Bei 30.000 km im Jahr verdoppelt sich die Ersparnis entsprechend, während sie bei reinen Wenigfahrern kleiner ausfällt. Wer dagegen ausschließlich am Schnelllader lädt, nähert sich den Spritkosten an. Anschaffung, Wartung und Versicherung sind hier nicht enthalten. Über zehn Jahre summiert sich die Differenz so auf rund ${eurT((ekJahrBenzin - ekJahrStrom) * 10)} €. Zu bedenken ist außerdem, dass E-Autos in der Regel niedrigere Wartungskosten haben — keine Ölwechsel, weniger Verschleißteile, oft günstigere Inspektionen. Diese Posten gehören in eine vollständige Gesamtkostenrechnung, die über die reinen Energiekosten dieses Rechners hinausgeht.`,
       },
       {
         typ: 'vergleich',
@@ -1794,9 +1798,9 @@ Ein Benziner mit 7,5 l Verbrauch kostet bei 1,75 €/l rund 13,13 € pro 100 km
         zeilen: [
           { kriterium: 'Verbrauch', a: '18 kWh/100 km', b: '7,5 l/100 km' },
           { kriterium: 'Energiepreis', a: `${ladepreisDe(LADEPREISE.wallbox)} €/kWh`, b: `${eur(SPRITPREISE_REFERENZ.superE10, 3)} €/l` },
-          { kriterium: 'Kosten pro 100 km', a: '6,12 €', b: '13,13 €' },
-          { kriterium: 'Auch beim DC-Laden', a: '11,70 €', b: '13,13 €' },
-          { kriterium: 'Jahreskosten (15.000 km)', a: '918 €', b: '1.969 €' },
+          { kriterium: 'Kosten pro 100 km', a: `${eur(EK_VERBRAUCH * LADEPREISE.wallbox)} €`, b: `${eur(EK_BENZIN_L * SPRITPREISE_REFERENZ.superE10)} €` },
+          { kriterium: 'Auch beim DC-Laden', a: `${eur(EK_VERBRAUCH * LADEPREISE.dcSchnell)} €`, b: `${eur(EK_BENZIN_L * SPRITPREISE_REFERENZ.superE10)} €` },
+          { kriterium: 'Jahreskosten (15.000 km)', a: `${eurT(ekJahrStrom)} €`, b: `${eurT(ekJahrBenzin)} €` },
         ],
       },
       {
