@@ -1,4 +1,21 @@
 import type { RechnerConfig } from './types';
+import { SPRITPREISE_REFERENZ } from '@/lib/berechnungen/spritpreise-parameter';
+
+// Deutsche Zahlformatierung, wie in auto.ts und technik.ts.
+const eur = (n: number, dezimal = 2) => n.toFixed(dezimal).replace('.', ',');
+// Mit Tausenderpunkt und zwei Nachkommastellen: 1858.75 -> '1.858,75'
+const eurP = (n: number) => n.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?=,))/g, '.');
+
+// Beispielreise des reisekosten-rechner: 500 km einfach, 7 l/100 km, 2 Personen,
+// 7 Naechte. Nur der Sprit haengt am Preis, die uebrigen Posten sind Annahmen.
+const RK_LITER = 70;
+const RK_MAUT = 30;
+const RK_SPRIT = RK_LITER * SPRITPREISE_REFERENZ.superE10;
+const RK_ANREISE = RK_SPRIT + RK_MAUT;
+const RK_UNTERKUNFT = 560;
+const RK_VERPFLEGUNG = 800;
+const RK_AKTIVITAETEN = 320;
+const RK_GESAMT = RK_ANREISE + RK_UNTERKUNFT + RK_VERPFLEGUNG + RK_AKTIVITAETEN;
 
 export const alltagRechner: RechnerConfig[] = [
   {
@@ -4548,12 +4565,12 @@ Der Rechner deckt die Hauptkostenblöcke ab. Zusätzlich können anfallen: Trans
         titel: 'Kostenposten des Beispiels aufgeschlüsselt',
         kopf: ['Posten', 'Berechnung', 'Betrag'],
         zeilen: [
-          ['Anreise (Auto)', 'Sprit hin+rück 122,50 € + Maut 30 €', '152,50 €'],
+          ['Anreise (Auto)', `Sprit hin+rück ${eur(RK_SPRIT)} € + Maut ${eur(RK_MAUT)} €`, `${eur(RK_ANREISE)} €`],
           ['Unterkunft', '80 €/Nacht × 7 Nächte', '560,00 €'],
           ['Verpflegung', '50 € × 2 Personen × 8 Tage', '800,00 €'],
           ['Aktivitäten', '20 € × 2 Personen × 8 Tage', '320,00 €'],
-          ['Gesamt', 'Summe aller Posten', '1.832,50 €'],
-          ['Pro Person', '1.832,50 € ÷ 2', '916,25 €'],
+          ['Gesamt', 'Summe aller Posten', `${eurP(RK_GESAMT)} €`],
+          ['Pro Person', `${eurP(RK_GESAMT)} € ÷ 2`, `${eurP(RK_GESAMT / 2)} €`],
         ],
         fussnote: 'Das Beispiel rechnet eine Woche zu zweit mit dem Auto. Auffällig ist, dass Verpflegung und Aktivitäten über die Tage und Personen laufen — und Tage hier Nächte plus eins bedeuten, weil An- und Abreisetag mitzählen. Bei sieben Nächten sind das acht Tage. Deshalb ist die Verpflegung mit 800 € der größte Einzelposten, noch vor der Unterkunft. Genau diese Aufschlüsselung hilft, den richtigen Hebel zu finden: Wer hier sparen will, setzt eher bei der täglichen Verpflegung an als bei der einmaligen Anreise. Würde man stattdessen vier statt zwei Personen eintragen, verdoppelten sich Verpflegung und Aktivitäten, während Anreise und Unterkunft gleich blieben — der Kostenvorteil pro Kopf wächst also mit der Gruppengröße.',
       },
@@ -4563,11 +4580,11 @@ Der Rechner deckt die Hauptkostenblöcke ab. Zusätzlich können anfallen: Trans
         schritte: [
           { label: 'Strecke hin und zurück', formel: '500 km × 2', ergebnis: '1.000 km' },
           { label: 'Spritverbrauch gesamt', formel: '1.000 km × 7 l/100 km', ergebnis: '70 Liter' },
-          { label: 'Spritkosten', formel: '70 l × 1,75 €/l', ergebnis: '122,50 €' },
+          { label: 'Spritkosten', formel: `${RK_LITER} l × ${eur(SPRITPREISE_REFERENZ.superE10, 3)} €/l`, ergebnis: `${eur(RK_SPRIT)} €` },
           { label: 'Maut / Vignette', formel: '', ergebnis: '30,00 €' },
-          { label: 'Anreise gesamt', formel: '122,50 + 30', ergebnis: '152,50 €' },
+          { label: 'Anreise gesamt', formel: `${eur(RK_SPRIT)} + ${eur(RK_MAUT, 0)}`, ergebnis: `${eur(RK_ANREISE)} €` },
         ],
-        fazit: 'Die Autoanreise rechnet der Rechner als Hin- und Rückfahrt: 500 km einfache Strecke werden zu 1.000 km, bei 7 Litern Verbrauch je 100 km sind das 70 Liter, die bei 1,75 €/l rund 122,50 € kosten. Mit 30 € Maut ergeben sich 152,50 €. Wichtig zu wissen: Hier zählen nur die reinen Spritkosten plus Maut. Verschleiß, Wertverlust und Versicherung sind nicht enthalten — laut ADAC liegen die echten Kilometerkosten bei 30 bis 60 Cent, also deutlich höher. Für einen fairen Vergleich mit Bahn oder Flug sollte man das im Hinterkopf behalten. Zu zweit oder zu viert bleibt das Auto trotzdem oft günstig, weil sich die Anreisekosten auf alle Mitfahrenden verteilen.',
+        fazit: `Die Autoanreise rechnet der Rechner als Hin- und Rückfahrt: 500 km einfache Strecke werden zu 1.000 km, bei 7 Litern Verbrauch je 100 km sind das 70 Liter, die bei ${eur(SPRITPREISE_REFERENZ.superE10, 3)} €/l rund ${eur(RK_SPRIT)} € kosten. Mit ${eur(RK_MAUT, 0)} € Maut ergeben sich ${eur(RK_ANREISE)} €. Wichtig zu wissen: Hier zählen nur die reinen Spritkosten plus Maut. Verschleiß, Wertverlust und Versicherung sind nicht enthalten — laut ADAC liegen die echten Kilometerkosten bei 30 bis 60 Cent, also deutlich höher. Für einen fairen Vergleich mit Bahn oder Flug sollte man das im Hinterkopf behalten. Zu zweit oder zu viert bleibt das Auto trotzdem oft günstig, weil sich die Anreisekosten auf alle Mitfahrenden verteilen.`,
       },
       {
         typ: 'tabelle',

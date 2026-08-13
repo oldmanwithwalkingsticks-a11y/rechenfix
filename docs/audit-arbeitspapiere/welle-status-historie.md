@@ -8,6 +8,29 @@
 
 ---
 
+## 13.08.2026 — Welle 92: reisekosten-rechner, die Beispielrechnung — ✅ ABGESCHLOSSEN
+
+Die Beispielrechnung an `SPRITPREISE_REFERENZ` gebunden. `alltag.ts` bekommt damit **erstmals
+Importe und Helfer** — die Datei hatte bis hierher weder das eine noch das andere.
+
+- **Die Kette wird gerechnet statt geschrieben.** Der Spritpreis steht an einer Stelle, wandert
+  aber durch fünf weitere Beträge: Sprit → Anreise → Gesamt → Pro Person.
+  122,50 → **148,75** · 152,50 → **178,75** · 1.832,50 → **1.858,75** · 916,25 → **929,38**.
+  Unterkunft, Verpflegung und Aktivitäten hängen nicht am Preis und bleiben unverändert.
+- **Neuer Helfer `eurP`** für Beträge mit Tausenderpunkt **und** zwei Nachkommastellen. Der `eurT`
+  aus den früheren Wellen rundet auf ganze Euro und passte hier nicht. Der reguläre Ausdruck setzt
+  den Punkt nur, wenn einer nötig ist — geprüft an beiden Fällen: `1.858,75` und `148,75`.
+- **Widerspruch aufgelöst, der seit Welle 84 bestand:** Der Startwert der Komponente stand auf
+  2,125, die Beispielrechnung daneben auf 1,75.
+- Sechs Textstellen, jede als **ganze Zeile** ersetzt: Die einfachen Anführungszeichen mussten zu
+  Backticks werden, sonst landet ein `${...}` wörtlich auf der Seite, ohne dass Build oder
+  `check-backticks` etwas melden.
+
+**Offen:** `stromverbrauch-geraete-rechner` in `technik.ts` — dort steht derselbe Widerspruch seit
+Welle 84 (Komponente 0,37, Config 0,35) und die Kette ist mit acht sichtbaren Stellen länger.
+
+---
+
 ## 13.08.2026 — Welle 91: EautoLadekostenRechner, die letzten drei Reste — ✅ ABGESCHLOSSEN
 
 Welle 90 hatte sechs Quellenangaben in `technik.ts` getrennt; die siebte Fundstelle lag in der
