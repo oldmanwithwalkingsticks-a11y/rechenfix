@@ -11,6 +11,13 @@
  * Die Kernaussage steckt im Vergleich bei 12,5 m: Dort steht das langsamere
  * Fahrzeug bereits, während das schnellere noch 86,6 km/h fährt.
  *
+ * Die Beschriftung "Start 100 km/h" steht bewusst UNTER ihrer Kurve, mit
+ * Offset +36 statt der naheliegenden kleineren Werte. Ueber ihr liegen nur
+ * zwoelf Pixel bis zum Untertitel (Grundlinie y = 52). Unter ihr faellt die
+ * Kurve ueber die 82 px Textbreite von y = 64 auf y = 81,4 — kleinere Offsets
+ * werden von der eigenen Kurve gekreuzt. +36 laesst 6 px Luft.
+ * "Start 50 km/h" steht dagegen darueber, dort ist Platz.
+ *
  * Maßstab: 0 bis 50 m über 480 px, 0 bis 100 km/h über 190 px.
  *
  * Server-Komponente, statisch. Dark Mode über <style> mit .dark-Selektor.
@@ -110,7 +117,7 @@ export default function RestgeschwindigkeitVergleich() {
         <text x={px(12.5) + 14} y={py(86.6) - 8} fontSize="14" fontWeight="600" className="t-hundert">86,6 km/h</text>
         <text x={px(12.5) + 14} y={py(0) - 12} fontSize="14" fontWeight="600" className="t-fuenfzig">steht</text>
 
-        <text x={px(2)} y={py(100) - 12} fontSize="12" fontWeight="600" className="t-hundert">Start 100 km/h</text>
+        <text x={px(2)} y={py(100) + 36} fontSize="12" fontWeight="600" className="t-hundert">Start 100 km/h</text>
         <text x={px(2)} y={py(50) - 12} fontSize="12" fontWeight="600" className="t-fuenfzig">Start 50 km/h</text>
 
         <line x1="24" y1="300" x2="656" y2="300" stroke="#d1d5db" strokeWidth="1" />

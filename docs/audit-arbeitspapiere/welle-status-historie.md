@@ -8,6 +8,41 @@
 
 ---
 
+## 14.08.2026 — Welle 97: Beschriftungskollision in `RestgeschwindigkeitVergleich` — ✅ ABGESCHLOSSEN
+
+Auf `/blog/warum-100-kmh-dort-noch-87-sind` überlagerte „Start 100 km/h" die Untertitelzeile der
+dritten Grafik — im Dark Mode besonders deutlich.
+
+- **Grundlinie von y = 48 auf y = 96** (`py(100) + 36`). Die Beschriftung steht damit vollständig
+  unter ihrer eigenen Kurve: Textoberkante 87,4, tiefster Kurvenpunkt über der Textbreite 81,4 —
+  **6 px Luft**. Nach unten sind es 59 px bis zur 50er-Gitterlinie.
+- **„Start 50 km/h" bleibt unverändert** über seiner Kurve (y = 143, Kurve bei 155). Dort ist
+  Platz; ein Verschieben hätte die Grafik nur ohne Not verändert. Die Asymmetrie ist im Dateikopf
+  begründet, damit die nächste Bearbeitung sie nicht „aufräumt".
+- Die anderen vier Grafiken des Artikels wurden nachgerechnet und sind frei von Überlagerungen.
+
+**Der Prompt-Wert war falsch gerechnet.** Der vorgegebene Offset +22 hätte die Kollision mit dem
+Untertitel gegen eine neue mit der eigenen Kurve getauscht (−8 px). Ursache: Die Kurvenlage wurde
+über km/h-Stützwerte abgeschätzt statt über die x-Spanne der Beschriftung; die geprüften 26 px
+deckten nur ein Drittel der 82 px Textbreite ab. Gegengerechnet über die volle Breite
+(x = 119,2 bis 201,2) fällt die Kurve von y = 64,0 auf y = 81,4.
+
+| Offset | Grundlinie | Textoberkante | Luft zur Kurve |
+|---|---|---|---|
+| −12 (Bestand) | 48 | 39,4 | Kollision mit **Untertitel** |
+| +22 (Prompt) | 82 | 73,4 | **−8,0 px** — Kollision mit der Kurve |
+| +32 | 92 | 83,4 | 2,0 px — grenzwertig bei breiteren Glyphen |
+| **+36 (gesetzt)** | **96** | **87,4** | **6,0 px** |
+
+**Lehre.** Bei einer Kollisionsprüfung ist die zu prüfende Strecke die **Ausdehnung des Textes**,
+nicht ein Punkt an seinem Anfang. Das ergänzt die Lehre aus Welle 78 (Geometrieprüfung vor der
+Auslieferung), die hier nur die Balkenlängen erfasst hatte, nicht den Kopfbereich. Kritisch ist
+überall dort, wo eine Beschriftung an einem **berechneten** Punkt hängt und ein benachbartes
+Element an einer **festen** Koordinate: Beide für sich sind richtig, erst ihr Abstand entscheidet
+— und den sieht man der einzelnen Zeile nicht an.
+
+---
+
 ## 14.08.2026 — Welle 80: Blogartikel 15 „Warum 100 km/h dort noch 87 sind" — ✅ ABGESCHLOSSEN
 
 Slug `warum-100-kmh-dort-noch-87-sind`, 3.128 Wörter Fließtext, fünf Grafiken, Titelbild und
