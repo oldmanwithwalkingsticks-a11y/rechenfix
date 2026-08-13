@@ -1,6 +1,6 @@
 import type { RechnerConfig } from './types';
 import { LADEPREISE, ladepreisDe } from '@/lib/berechnungen/ladepreise-parameter';
-import { STROMPREIS_META } from '@/lib/berechnungen/strompreis';
+import { STROMPREIS_META, STROMPREIS_2026 } from '@/lib/berechnungen/strompreis';
 import { SPRITPREISE_REFERENZ } from '@/lib/berechnungen/spritpreise-parameter';
 
 // Lokaler Helfer für deutsche Zahlformatierung, wie in auto.ts.
@@ -18,6 +18,13 @@ const ekJahr = (preisProKwh: number) => (EK_KM_JAHR / 100) * EK_VERBRAUCH * prei
 const monatJahr = (iso: string) => { const [j, m] = iso.split('-'); return `${m}/${j}`; };
 const STAND_STROM = monatJahr(STROMPREIS_META.stand);
 const STAND_LADEN = monatJahr(LADEPREISE.stand);
+
+// Haushaltsstrompreis in €/kWh fuer den stromverbrauch-geraete-rechner.
+// Bewusst NICHT LADEPREISE.wallbox: das ist derselbe Zahlenwert, meint aber
+// das Laden eines Autos. Hier geht es um Haushaltsgeraete.
+const SG_PREIS = STROMPREIS_2026.durchschnitt_bdew / 100;
+const SG_PREIS_DE = SG_PREIS.toFixed(2).replace('.', ',');
+const sgEuro = (kwh: number) => `${Math.round(kwh * SG_PREIS)}`;
 const ekJahrStrom = ekJahr(LADEPREISE.wallbox);
 // Ganze Euro mit deutschem Tausenderpunkt, wie in auto.ts.
 const eurT = (n: number) => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
@@ -2295,13 +2302,13 @@ Der tatsächliche Strompreis steht auf Ihrer Abrechnung. Tragen Sie ihn ein, um 
       },
       {
         typ: 'beispielrechnung',
-        titel: 'PC mit 200 W, 5 h/Tag, 0,35 €/kWh',
+        titel: `PC mit 200 W, 5 h/Tag, ${SG_PREIS_DE} €/kWh`,
         schritte: [
           { label: 'Verbrauch pro Tag', formel: '200 W × 5 h ÷ 1.000', ergebnis: '1 kWh' },
           { label: 'Verbrauch pro Jahr', formel: '1 kWh × 365', ergebnis: '365 kWh' },
-          { label: 'Kosten pro Jahr', formel: '365 kWh × 0,35 €', ergebnis: '127,75 €' },
+          { label: 'Kosten pro Jahr', formel: `365 kWh × ${SG_PREIS_DE} €`, ergebnis: `${eur(365 * SG_PREIS)} €` },
         ],
-        fazit: 'Ein PC mit 200 Watt, der täglich 5 Stunden läuft, verbraucht 365 kWh im Jahr und kostet bei 0,35 €/kWh rund 128 Euro — etwa 10,65 Euro im Monat. Wer den Rechner nur halb so lange nutzt, halbiert auch die Kosten. Die Rechnung ist immer dieselbe: Watt mal Stunden geteilt durch 1.000 ergibt die kWh, mal dem Strompreis die Kosten. So lässt sich für jedes Gerät der Jahresbeitrag zur Stromrechnung abschätzen. Eine Plausibilitätskontrolle: 1 kWh am Tag entspricht 365 kWh im Jahr — bei 0,35 €/kWh also rund 128 Euro. Wer diese Bezugsgröße im Kopf hat, ordnet jeden Verbraucher schnell ein: Ein Gerät, das täglich 1 kWh zieht, kostet ungefähr so viel wie ein Wochenend-Tankstopp im Monat.',
+        fazit: `Ein PC mit 200 Watt, der täglich 5 Stunden läuft, verbraucht 365 kWh im Jahr und kostet bei ${SG_PREIS_DE} €/kWh rund ${sgEuro(365)} Euro — etwa ${eur(365 * SG_PREIS / 12)} Euro im Monat. Wer den Rechner nur halb so lange nutzt, halbiert auch die Kosten. Die Rechnung ist immer dieselbe: Watt mal Stunden geteilt durch 1.000 ergibt die kWh, mal dem Strompreis die Kosten. So lässt sich für jedes Gerät der Jahresbeitrag zur Stromrechnung abschätzen. Eine Plausibilitätskontrolle: 1 kWh am Tag entspricht 365 kWh im Jahr — bei ${SG_PREIS_DE} €/kWh also rund ${sgEuro(365)} Euro. Wer diese Bezugsgröße im Kopf hat, ordnet jeden Verbraucher schnell ein: Ein Gerät, das täglich 1 kWh zieht, kostet ungefähr so viel wie ein Wochenend-Tankstopp im Monat.`,
       },
       {
         typ: 'text',
@@ -2312,9 +2319,9 @@ Der tatsächliche Strompreis steht auf Ihrer Abrechnung. Tragen Sie ihn ein, um 
         typ: 'statistik',
         titel: 'Standby-Verbrauch typischer Geräte',
         werte: [
-          { label: 'TV + Receiver (Standby)', wert: '~3–10 W', hinweis: 'rund 9–30 € im Jahr, nur im Ruhemodus' },
+          { label: 'TV + Receiver (Standby)', wert: '~3–10 W', hinweis: `rund ${sgEuro(3 * 8.76)}–${sgEuro(10 * 8.76)} € im Jahr, nur im Ruhemodus` },
           { label: 'PC mit Peripherie (Standby)', wert: '~5–15 W', hinweis: 'das Netzteil zieht auch im ausgeschalteten Zustand Strom' },
-          { label: 'WLAN-Router (Dauerbetrieb)', wert: '~10 W', hinweis: '24/7 an: rund 88 kWh und etwa 31 € im Jahr' },
+          { label: 'WLAN-Router (Dauerbetrieb)', wert: '~10 W', hinweis: `24/7 an: rund 88 kWh und etwa ${sgEuro(88)} € im Jahr` },
           { label: 'Ladegeräte ohne Gerät', wert: '~0,1–1 W', hinweis: 'einzeln wenig, in Summe über viele Stecker spürbar' },
           { label: 'Haushalt gesamt (Standby)', wert: '~300–400 kWh/Jahr', hinweis: 'oft über 100 € im Jahr nur für „aus"-Geräte' },
         ],
@@ -2325,24 +2332,24 @@ Der tatsächliche Strompreis steht auf Ihrer Abrechnung. Tragen Sie ihn ein, um 
         schritte: [
           { label: 'Dauer-Standby-Leistung addieren', formel: 'TV 8 + PC 10 + Router 10 + Sonstiges 12', ergebnis: '40 W' },
           { label: 'Verbrauch pro Jahr (× 8.760 h)', formel: '40 W × 8.760 ÷ 1.000', ergebnis: '≈ 350 kWh' },
-          { label: 'Kosten pro Jahr', formel: '350 kWh × 0,35 €', ergebnis: '≈ 123 €' },
+          { label: 'Kosten pro Jahr', formel: `350 kWh × ${SG_PREIS_DE} €`, ergebnis: `≈ ${sgEuro(350)} €` },
         ],
-        fazit: 'Rechnet man die ständige Standby-Last eines Haushalts zusammen — Fernseher, PC, Router und diverse Kleingeräte — kommen leicht 40 Watt Dauerlast zustande. Weil diese rund um die Uhr anliegen, ergeben sich über das Jahr etwa 350 kWh und damit rund 123 Euro, nur für Geräte, die scheinbar aus sind. Eine schaltbare Steckdosenleiste eliminiert den größten Teil davon. Der Router muss meist anbleiben, aber Fernseher, Konsole, PC und Audio lassen sich nachts und tagsüber komplett trennen. Praktisch sind Steckdosenleisten mit Fußschalter oder Funksteckdosen, die mehrere Geräte auf einen Griff vom Netz nehmen. Schon das spart in vielen Haushalten den größten Teil der hier gerechneten 123 Euro — Geld, das ohne jeden Komfortverlust eingespart wird.',
+        fazit: `Rechnet man die ständige Standby-Last eines Haushalts zusammen — Fernseher, PC, Router und diverse Kleingeräte — kommen leicht 40 Watt Dauerlast zustande. Weil diese rund um die Uhr anliegen, ergeben sich über das Jahr etwa 350 kWh und damit rund ${sgEuro(350)} Euro, nur für Geräte, die scheinbar aus sind. Eine schaltbare Steckdosenleiste eliminiert den größten Teil davon. Der Router muss meist anbleiben, aber Fernseher, Konsole, PC und Audio lassen sich nachts und tagsüber komplett trennen. Praktisch sind Steckdosenleisten mit Fußschalter oder Funksteckdosen, die mehrere Geräte auf einen Griff vom Netz nehmen. Schon das spart in vielen Haushalten den größten Teil der hier gerechneten ${sgEuro(350)} Euro — Geld, das ohne jeden Komfortverlust eingespart wird.`,
       },
       {
         typ: 'tabelle',
         titel: 'Gerätevergleich: Verbrauch und Jahreskosten',
-        kopf: ['Gerät', 'Watt', 'h/Tag', 'kWh/Jahr', '€/Jahr (0,35 €)'],
+        kopf: ['Gerät', 'Watt', 'h/Tag', 'kWh/Jahr', `€/Jahr (${SG_PREIS_DE} €)`],
         zeilen: [
-          ['Kühl-Gefrier-Kombi', '100', '6*', '219', '77 €'],
-          ['Fernseher (LED)', '90', '4', '131', '46 €'],
-          ['Desktop-PC', '150', '5', '274', '96 €'],
-          ['WLAN-Router', '10', '24', '88', '31 €'],
-          ['Waschmaschine', '2.000', '0,3*', '219', '77 €'],
-          ['Wäschetrockner', '2.500', '0,4*', '365', '128 €'],
-          ['LED-Lampe', '10', '5', '18', '6 €'],
+          ['Kühl-Gefrier-Kombi', '100', '6*', '219', `${sgEuro(219)} €`],
+          ['Fernseher (LED)', '90', '4', '131', `${sgEuro(131)} €`],
+          ['Desktop-PC', '150', '5', '274', `${sgEuro(274)} €`],
+          ['WLAN-Router', '10', '24', '88', `${sgEuro(88)} €`],
+          ['Waschmaschine', '2.000', '0,3*', '219', `${sgEuro(219)} €`],
+          ['Wäschetrockner', '2.500', '0,4*', '365', `${sgEuro(365)} €`],
+          ['LED-Lampe', '10', '5', '18', `${sgEuro(18)} €`],
         ],
-        fussnote: 'Beispielwerte bei 0,35 €/kWh; die tatsächlichen Stunden variieren stark. *Bei Kühlschrank und Waschmaschine/Trockner ist die Stundenangabe die effektive Laufzeit (Verdichter-Takt bzw. Heizphase), nicht die Anschlusszeit. Die genaue Leistung steht auf dem Typenschild des Geräts. Auffällig ist, dass die Geräte mit der höchsten Watt-Zahl (Trockner, Waschmaschine) nicht zwingend die höchsten Jahreskosten haben — entscheidend ist immer das Produkt aus Leistung und Laufzeit. Der dauerlaufende Router mit nur 10 Watt kommt auf ähnliche Jahreswerte wie kurz, aber kräftig heizende Geräte.',
+        fussnote: `Beispielwerte bei ${SG_PREIS_DE} €/kWh; die tatsächlichen Stunden variieren stark. *Bei Kühlschrank und Waschmaschine/Trockner ist die Stundenangabe die effektive Laufzeit (Verdichter-Takt bzw. Heizphase), nicht die Anschlusszeit. Die genaue Leistung steht auf dem Typenschild des Geräts. Auffällig ist, dass die Geräte mit der höchsten Watt-Zahl (Trockner, Waschmaschine) nicht zwingend die höchsten Jahreskosten haben — entscheidend ist immer das Produkt aus Leistung und Laufzeit. Der dauerlaufende Router mit nur 10 Watt kommt auf ähnliche Jahreswerte wie kurz, aber kräftig heizende Geräte.`,
       },
       {
         typ: 'text',
@@ -2353,11 +2360,11 @@ Der tatsächliche Strompreis steht auf Ihrer Abrechnung. Tragen Sie ihn ein, um 
         typ: 'beispielrechnung',
         titel: 'Alter vs. neuer Kühlschrank — die Ersparnis',
         schritte: [
-          { label: 'Alter Kühlschrank', formel: '~330 kWh/Jahr × 0,35 €', ergebnis: '≈ 116 €/Jahr' },
-          { label: 'Neues, effizientes Gerät', formel: '~100 kWh/Jahr × 0,35 €', ergebnis: '≈ 35 €/Jahr' },
-          { label: 'Ersparnis pro Jahr', formel: '116 € − 35 €', ergebnis: '≈ 81 €' },
+          { label: 'Alter Kühlschrank', formel: `~330 kWh/Jahr × ${SG_PREIS_DE} €`, ergebnis: `≈ ${sgEuro(330)} €/Jahr` },
+          { label: 'Neues, effizientes Gerät', formel: `~100 kWh/Jahr × ${SG_PREIS_DE} €`, ergebnis: `≈ ${sgEuro(100)} €/Jahr` },
+          { label: 'Ersparnis pro Jahr', formel: `${sgEuro(330)} € − ${sgEuro(100)} €`, ergebnis: `≈ ${sgEuro(230)} €` },
         ],
-        fazit: 'Ein alter Kühlschrank mit rund 330 kWh im Jahr gegen ein modernes, effizientes Gerät mit etwa 100 kWh getauscht, spart rund 230 kWh oder 81 Euro pro Jahr. Über die typische Lebensdauer von 15 Jahren sind das rund 1.200 Euro — oft mehr, als ein neues Gerät kostet. Weil Kühl- und Gefriergeräte rund um die Uhr laufen, lohnt sich Effizienz hier am stärksten. Bei einem alten, ständig brummenden Gerät kann sich der Neukauf allein über die Stromrechnung rechnen. Zur Einordnung lohnt eine einfache Amortisationsrechnung: Kostet ein neues Gerät 500 Euro und spart 80 Euro im Jahr, ist es nach gut sechs Jahren bezahlt — und alle weiteren Jahre bis zum Lebensende sind reiner Gewinn. Genau diese Rechnung kippt bei alten Kühl- und Gefriergeräten oft zugunsten des Austauschs.',
+        fazit: `Ein alter Kühlschrank mit rund 330 kWh im Jahr gegen ein modernes, effizientes Gerät mit etwa 100 kWh getauscht, spart rund 230 kWh oder ${sgEuro(230)} Euro pro Jahr. Über die typische Lebensdauer von 15 Jahren sind das rund ${eurT(230 * 15 * SG_PREIS)} Euro — oft mehr, als ein neues Gerät kostet. Weil Kühl- und Gefriergeräte rund um die Uhr laufen, lohnt sich Effizienz hier am stärksten. Bei einem alten, ständig brummenden Gerät kann sich der Neukauf allein über die Stromrechnung rechnen. Zur Einordnung lohnt eine einfache Amortisationsrechnung: Kostet ein neues Gerät 500 Euro und spart ${sgEuro(230)} Euro im Jahr, ist es nach knapp sechs Jahren bezahlt — und alle weiteren Jahre bis zum Lebensende sind reiner Gewinn. Genau diese Rechnung kippt bei alten Kühl- und Gefriergeräten oft zugunsten des Austauschs.`,
       },
       {
         typ: 'statistik',

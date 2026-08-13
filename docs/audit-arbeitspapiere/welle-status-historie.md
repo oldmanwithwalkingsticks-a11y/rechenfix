@@ -8,6 +8,49 @@
 
 ---
 
+## 13.08.2026 — Welle 93: stromverbrauch-geraete-rechner, die Preisschicht schließt — ✅ ABGESCHLOSSEN
+
+Der letzte Rechner mit hartkodierten Energiepreisen. Dreiundzwanzig Stellen an `STROMPREIS_2026`
+gebunden; Helfer `SG_PREIS`, `SG_PREIS_DE` und `sgEuro(kwh)` ergänzt.
+
+- **Bewusst nicht `LADEPREISE.wallbox`.** Gleicher Zahlenwert, andere Bedeutung: dort geht es ums
+  Autoladen, hier um Haushaltsgeräte. Die Gleichheit ist ein Zufall der aktuellen Datenlage und
+  darf nicht zur Kopplung werden.
+- **Widerspruch seit Welle 84 aufgelöst** (Komponente 0,37, Config 0,35). Vier Rechenwege, eine
+  siebenzeilige Gerätetabelle, zwei Standby-Hinweise und drei Fazit-Texte hängen jetzt am selben
+  Wert.
+- **„gut sechs Jahre" Amortisation wird „knapp sechs"** (6,2 → 5,9), weil die jährliche Ersparnis
+  von 81 auf 85 Euro steigt.
+- **„über 100 € Standby im Haushalt" bleibt stehen**, weil 300–400 kWh jetzt 111–148 € ergeben —
+  vor dem Ändern nachgerechnet, nicht geschätzt.
+- **Eine Fundstelle mehr als spezifiziert.** Das Standby-Fazit nennt den Jahresbetrag **zweimal**:
+  einmal als Ergebnis, einmal als Rückverweis („den größten Teil der hier gerechneten 123 Euro").
+  Nur die erste stand im Auftrag. Wäre die zweite geblieben, stünde „rund 130 Euro" und drei Sätze
+  später „der hier gerechneten 123 Euro" — ein sichtbarer Selbstwiderspruch statt einer bloß
+  veralteten Zahl. Beide an `sgEuro(350)` gebunden.
+- **`eurT` statt `sgEuro` für den 15-Jahres-Betrag.** `sgEuro` setzt keinen Tausenderpunkt; der
+  Text hätte sonst „1277 Euro" statt bisher „1.200 Euro" gezeigt — eine stille typografische
+  Verschlechterung. Jetzt „1.277 Euro".
+
+**Damit ist die Preisschicht abgeschlossen.** Kein Rechner enthält mehr sichtbare hartkodierte
+Energiepreise.
+
+**Lehre (Fortschreibung aus Welle 91).** Es genügt nicht, die Beschriftung *neben* einem Betrag
+mitzubinden — auch **Rückverweise weiter hinten im selben Text** zählen. Ein Fließtext nennt
+denselben Betrag gern mehrfach: einmal rechnend, danach zusammenfassend. Die Zählung der
+Fundstellen muss deshalb über den **ganzen Textblock** laufen, nicht über den Satz mit der
+Rechnung. Konkret: `grep -o` auf den Zahlenwert im gesamten Feld, bevor die Liste der zu
+ersetzenden Stellen als vollständig gilt.
+
+**Offen:** Altersprüfung für `LADEPREISE.stand` und `STROMPREIS_META.stand`; Wächter gegen neue
+Literale; Überprüfung des BDEW-Werts von 37 ct (Stand 04/2026).
+
+**Beobachtung für später:** Das Fazit des PC-Beispiels vergleicht die Monatskosten mit „einem
+Wochenend-Tankstopp". Das trug schon bei 10,65 € nicht und trägt bei 11,25 € genauso wenig — ein
+Tankstopp kostet ein Vielfaches. Reine Textfrage, nicht Teil dieser Welle.
+
+---
+
 ## 13.08.2026 — Welle 92: reisekosten-rechner, die Beispielrechnung — ✅ ABGESCHLOSSEN
 
 Die Beispielrechnung an `SPRITPREISE_REFERENZ` gebunden. `alltag.ts` bekommt damit **erstmals
