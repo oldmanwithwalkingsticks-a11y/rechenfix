@@ -75,6 +75,9 @@ const GENERATOREN = {
   'promille-titelbild.png': 'Gemini 3 Pro Image (Google)',
   'promille-video-standbild.jpg': 'Kling AI 3.0 (Kuaishou)',
   'promille.mp4': 'Kling AI 3.0 (Kuaishou)',
+  'bremsweg-titelbild.png': 'Gemini 3 Pro Image (Google)',
+  'bremsweg-video-standbild.jpg': 'Kling AI 3.0 (Kuaishou)',
+  'bremsweg.mp4': 'Kling AI 3.0 (Kuaishou)',
 };
 
 const nurPruefen = process.argv.includes('--pruefen');

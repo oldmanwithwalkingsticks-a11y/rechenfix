@@ -73,6 +73,11 @@ import PromilleKurve from '@/components/blog/grafik/PromilleKurve';
 import GrenzwertZeitachse from '@/components/blog/grafik/GrenzwertZeitachse';
 import ZweiRueckrechnungen from '@/components/blog/grafik/ZweiRueckrechnungen';
 import GrenzwertUebersicht from '@/components/blog/grafik/GrenzwertUebersicht';
+import FaustformelHerleitung from '@/components/blog/grafik/FaustformelHerleitung';
+import FahrbahnVergleich from '@/components/blog/grafik/FahrbahnVergleich';
+import AnhaltewegZerlegung from '@/components/blog/grafik/AnhaltewegZerlegung';
+import RestgeschwindigkeitVergleich from '@/components/blog/grafik/RestgeschwindigkeitVergleich';
+import VerzoegerungsTabelle from '@/components/blog/grafik/VerzoegerungsTabelle';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -186,6 +191,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     GrenzwertZeitachse,
     ZweiRueckrechnungen,
     GrenzwertUebersicht,
+    FaustformelHerleitung,
+    FahrbahnVergleich,
+    AnhaltewegZerlegung,
+    RestgeschwindigkeitVergleich,
+    VerzoegerungsTabelle,
     ...components,
   };
 }

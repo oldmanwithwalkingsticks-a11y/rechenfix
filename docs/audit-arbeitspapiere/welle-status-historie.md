@@ -8,6 +8,51 @@
 
 ---
 
+## 14.08.2026 — Welle 80: Blogartikel 15 „Warum 100 km/h dort noch 87 sind" — ✅ ABGESCHLOSSEN
+
+Slug `warum-100-kmh-dort-noch-87-sind`, 3.128 Wörter Fließtext, fünf Grafiken, Titelbild und
+Video, Rechner bei 54 % der Textlänge. Blogordner 14 → 15, Sitemap 264 → 265 Seiten.
+
+- **Datum `2026-08-13`**, nicht der Entstehungstag `2026-08-11`: Artikel 14 (Promille) trägt
+  bereits den 11.08., zwei gleiche Daten machten die Reihenfolge der Übersichtsseite uneindeutig.
+- **KI-Metadaten Ebene 3** für drei Medien ergänzt, Katalog 33 → 36, alle `OK`. Zusätzlich
+  unabhängig per `grep -ac trainedAlgorithmicMedia` in den Binärdateien gegengeprüft — dem
+  Schreibprotokoll allein wird nicht getraut. Der Lauf hat die 33 bestehenden Assets nicht
+  verändert.
+- **Der `poster` zeigt auf `bremsweg-video-standbild.jpg`**, nicht auf das Titelbild — die
+  Trennung von Bild- und Videomotiv aus Welle 65 ist eingehalten.
+
+**Der Grund für den STOP vor dem Commit.** Die `beschreibung` in `meta.ts` enthielt drei
+ASCII-Umschriften (`Bremsverzoegerung`, `fuer`, `Groesse`) in live sichtbarem Text — Google-Snippet
+und Blog-Übersicht. Der Artikeltext selbst nutzt auf 174 Zeilen korrekte Umlaute, alle 14
+bestehenden Artikel ebenfalls. Nach der Skill-Regel „Vorlagen nie von Code-Claude korrigieren
+lassen" wurde die Quelldatei von Chat-Claude repariert und neu geliefert (`-meta-v2_ts.txt`),
+statt den Fehler still im Repo auszubessern. Der Diff der neuen Fassung berührt genau zwei Zeilen.
+**Damit driften Repo und Vorlage nicht auseinander** — der eigentliche Zweck der Regel.
+
+**Zwei Erwartungswerte des Prompts waren arithmetisch nicht erreichbar**, beide dieselbe
+Fehlerklasse: Der Erwartungswert wurde gebildet, ohne den Prüfbefehl gegen die echte Datei laufen
+zu lassen.
+
+- `mdx-components.tsx` 66 → **76** setzt voraus, dass auch die fünf Registrierungszeilen den Pfad
+  `components/blog/grafik` tragen. Sie tragen nur den Namen. Richtig ist 66 → **71**.
+- „registriert **2**" je Grafik setzt einen Treffer pro Zeile voraus. Die Importzeile nennt den
+  Namen zweimal (Binding und Pfad), plus Registrierung = **3**. An drei bestehenden Grafiken
+  gegengeprüft, die ebenfalls 3 liefern.
+
+**Lehre.** Ein Erwartungswert ist eine Messung, kein Überschlag — auch dann, wenn er nur eine
+Zeilenzahl betrifft. Beide Werte hätten sich durch einen einzigen Lauf gegen die Bestandsdatei
+klären lassen. Die Gegenprobe gegen **bestehende** Einträge ist dabei das schärfste Mittel: Liefert
+der Altbestand denselben „falschen" Wert, liegt der Fehler in der Erwartung, nicht im Einbau.
+
+**Nachzügler.** Der Artikel war seit dem 11.08. fertig und lag sechzehn Wellen lang unausgerollt,
+weil die Aufräumarbeiten Vorrang hatten. Ein Prompt, der liegen bleibt, altert mit dem Repo:
+Erwartungswerte, Pfade und Prüfketten mussten vor dem Ausrollen neu gemessen werden. Die
+Quelldateien lagen zudem in zwei Kopien vor und wurden nach der Welle-65-Lehre byteweise
+verglichen, bevor eine davon benutzt wurde.
+
+---
+
 ## 13.08.2026 — Welle 96a: Arbeitspapiere strukturell getrennt — ✅ ABGESCHLOSSEN
 
 Welle 96 hat 117 von 716 untrackten Pfaden abgeräumt; die Hauptlast lag weiter an einer Stelle.

@@ -1,0 +1,442 @@
+import { generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import StructuredData from '@/components/seo/StructuredData';
+import { artikel } from './meta';
+
+export const metadata = {
+  title: `${artikel.titel} | Rechenfix.de`,
+  description: artikel.beschreibung,
+  alternates: { canonical: 'https://www.rechenfix.de/blog/warum-100-kmh-dort-noch-87-sind' },
+};
+
+<StructuredData data={generateArticleSchema({
+  url: 'https://www.rechenfix.de/blog/warum-100-kmh-dort-noch-87-sind',
+  headline: artikel.titel,
+  description: artikel.beschreibung,
+  datePublished: artikel.datum,
+  dateModified: artikel.datum,
+  image: '/blog/bremsweg-titelbild.png',
+})} />
+
+<StructuredData data={generateBreadcrumbSchema([
+  { name: 'Start', url: '/' },
+  { name: 'Blog', url: '/blog' },
+  { name: artikel.titel, url: '/blog/warum-100-kmh-dort-noch-87-sind' },
+])} />
+
+# Warum 100 km/h dort noch 87 sind, wo 50 km/h schon stehen
+
+<ArtikelDatum datum={artikel.datum} />
+
+<Bild src="/blog/bremsweg-titelbild.png" alt="Senkrechte Aufnahme von trockenem Asphalt mit zwei parallelen schwarzen Bremsspuren, die zum unteren Bildrand hin dunkler und breiter werden" caption="Die Spur wird zum Ende hin dunkler. Genau so verläuft eine Bremsung: erst wenig Wirkung, dann viel." width={1200} height={675} />
+
+<Infobox titel="Worum es geht">
+Die Faustformel aus der Fahrschule enthält eine Zahl, die niemand nennt: eine bestimmte
+Bremsverzögerung in Metern je Sekundenquadrat. Rechnet man sie heraus, zeigt sich etwas
+Unerwartetes — ausgerechnet die Formel für die Gefahrenbremsung ist ziemlich genau richtig,
+während die für die normale Bremsung eine Bequemlichkeit beschreibt. Und die wichtigste Zahl
+kommt in keiner Faustformel vor.
+</Infobox>
+
+## Ein Rechenbeispiel, das man nicht mehr vergisst
+
+Zwei Autos, dieselbe Stelle auf derselben trockenen Straße. Beide Fahrerinnen treten im selben
+Moment auf die Bremse. Das eine Auto fuhr 50, das andere 100 km/h.
+
+Das erste kommt nach 12,5 Metern Bremsweg zum Stehen. Die Frage, um die es hier geht, lautet:
+Wie schnell ist das zweite Auto an genau dieser Stelle noch?
+
+Die intuitive Antwort ist irgendetwas um 50 — es hatte doppelt so viel Tempo, es hat dieselbe
+Strecke gebremst, also müsste es ungefähr die Hälfte abgebaut haben. Die richtige Antwort
+lautet: **86,6 km/h.**
+
+Das Auto hat auf diesen 12,5 Metern nicht die Hälfte seiner Geschwindigkeit verloren, sondern
+knapp ein Siebtel. Wo das langsamere Fahrzeug bereits steht, ist das schnellere noch fast
+unvermindert unterwegs. Wäre dort ein Hindernis, träfe es mit 86,6 km/h darauf.
+
+Das ist kein Taschenspielertrick, sondern folgt aus einer einzigen Eigenschaft des Bremsens: Der
+Bremsweg wächst nicht mit der Geschwindigkeit, sondern mit ihrem Quadrat. Und der erste Teil
+einer Bremsung baut deshalb erstaunlich wenig Tempo ab, während der letzte sehr viel bringt.
+
+Man kann es auch andersherum betrachten, und dann wird die Sache noch unangenehmer. Ein Auto,
+das aus 100 km/h bremst, braucht bis zum Stillstand rund 50 Meter. Die ersten 12,5 davon — ein
+Viertel der Strecke — kosten es gerade einmal 13 km/h. Die letzten 12,5 Meter dagegen bringen es
+von 50 auf null. Dieselbe Strecke, viermal so viel Wirkung.
+
+Wer beim Bremsen das Gefühl hat, es passiere zunächst wenig und dann plötzlich alles, täuscht
+sich also nicht. Genau so verläuft es.
+
+Genau diesen Zusammenhang soll die Faustformel aus der Fahrschule vermitteln. Sie tut es
+zuverlässig. Was sie nebenbei tut, ohne es zu sagen, ist eine Annahme über die Bremsanlage zu
+treffen — und diese Annahme ist der Grund, warum dieser Text existiert.
+
+## Was in der Faustformel steckt
+
+Jeder kennt sie: Bremsweg gleich Geschwindigkeit durch zehn, mal sich selbst. Bei 50 km/h also
+fünf mal fünf, macht 25 Meter. Dazu der Reaktionsweg, Geschwindigkeit durch zehn, mal drei — bei
+50 also 15 Meter. Zusammen 40 Meter Anhalteweg. Für die Gefahrenbremsung wird der Bremsweg
+halbiert.
+
+Diese Formeln haben eine Eigenschaft, die man selten benennt: Sie sind keine Gleichungen im
+physikalischen Sinn. Man setzt Kilometer je Stunde ein und bekommt Meter heraus, ohne dass
+irgendwo eine Umrechnung sichtbar wäre. So etwas heißt Größengleichung, und es funktioniert nur,
+weil die Umrechnungen im Vorfeld in die Zahlen eingebaut wurden.
+
+Die physikalische Formel für den Bremsweg lautet: Bremsweg gleich Geschwindigkeit zum Quadrat,
+geteilt durch das Doppelte der Bremsverzögerung. In Zeichen s = v² / (2a). Die Geschwindigkeit
+steht dabei in Metern je Sekunde, die Verzögerung a in Metern je Sekundenquadrat.
+
+Setzt man beide Formeln gleich und löst nach a auf, kommt genau ein Wert heraus. Kilometer je
+Stunde werden durch 3,6 zu Metern je Sekunde, das Quadrat davon ist 12,96, und damit am Ende
+durch 100 geteilt wird, muss das Doppelte der Verzögerung 100 durch 12,96 ergeben.
+
+Das Ergebnis: **3,86 Meter je Sekundenquadrat.**
+
+Diese Zahl steht in keiner Fahrschulunterlage. Sie ist trotzdem in jeder Bremswegrechnung
+enthalten, die je nach dieser Formel gemacht wurde. Und für die Gefahrenbremsung, bei der der
+Bremsweg halbiert wird, verdoppelt sich der unterstellte Wert entsprechend auf **7,72 Meter je
+Sekundenquadrat**.
+
+<FaustformelHerleitung />
+
+## Wofür eine Formel gemacht ist, die niemand braucht
+
+An dieser Stelle drängt sich eine Frage auf: Warum lernt man überhaupt eine Näherung, wenn jedes
+Telefon die exakte Rechnung in einer Sekunde erledigt?
+
+Die Antwort hat wenig mit Rechnen zu tun. Die Faustformel ist nicht dazu da, im Auto benutzt zu
+werden — niemand tippt beim Fahren Zahlen. Sie ist dazu da, einen Zusammenhang so zu speichern,
+dass er ohne Hilfsmittel abrufbar bleibt. Und dieser Zusammenhang lautet: Der Bremsweg wächst
+mit dem Quadrat der Geschwindigkeit.
+
+Genau diese Aussage überlebt jede Ungenauigkeit. Ob die tatsächliche Verzögerung nun 3,86 oder
+7,72 oder 5,4 Meter je Sekundenquadrat beträgt: Doppeltes Tempo bedeutet immer vierfachen
+Bremsweg. Der Faktor a steht in der Formel im Nenner und beeinflusst nur, wie lang der Weg
+absolut ausfällt — nicht, wie er sich mit dem Tempo verändert.
+
+Deshalb ist die Faustformel dort präzise, wo es darauf ankommt, und ungenau dort, wo Ungenauigkeit
+wenig kostet. Wer sie kritisiert, weil sie bei Nässe falsche Meter liefert, kritisiert ein
+Merkschema dafür, dass es kein Messgerät ist.
+
+Ihre eigentliche Schwäche liegt woanders — nämlich darin, dass sie ihre Annahme nicht mitliefert.
+Eine Formel, die 3,86 Meter je Sekundenquadrat unterstellt, ohne es zu sagen, lädt dazu ein, ihre
+Ergebnisse für allgemeingültig zu halten. Und das sind sie nicht.
+
+## Die überraschende Umkehrung
+
+Jetzt wird es interessant, denn die naheliegende Vermutung ist falsch.
+
+Man würde erwarten, dass eine Formel aus der Zeit vor ABS und Scheibenbremsen an allen Ecken zu
+schlecht rechnet. Tatsächlich schafft ein heutiges Auto auf trockenem Asphalt eine Verzögerung
+von etwa sieben bis neun Metern je Sekundenquadrat. Die Faustformel für die **Gefahrenbremsung**
+unterstellt 7,72 — sie liegt also mitten in diesem Bereich.
+
+Anders gesagt: Ausgerechnet die Formel, die nach Notfall klingt und wie eine grobe Schätzung
+wirkt, beschreibt ziemlich genau, was ein moderner Wagen auf trockener Straße wirklich leistet.
+
+Die Formel für die **normale** Bremsung dagegen unterstellt 3,86 — weniger als die Hälfte
+dessen, was das Fahrzeug könnte. Das ist kein Fehler, sondern eine andere Aussage: Sie
+beschreibt nicht, was die Bremse kann, sondern wie man im Alltag bremst. Ein Bremsvorgang mit
+knapp vier Metern je Sekundenquadrat ist ein deutliches, aber bequemes Verzögern — nichts, wobei
+Taschen vom Sitz fallen.
+
+Damit stehen die beiden Formeln für zwei verschiedene Dinge, ohne dass das je gesagt würde. Die
+eine beschreibt Fahrverhalten, die andere Fahrzeugtechnik. Wer sie für zwei Genauigkeitsstufen
+derselben Sache hält, missversteht beide.
+
+Für den Alltag folgt daraus eine unbequeme Konsequenz. Die 25 Meter, die man für 50 km/h im Kopf
+hat, sind nicht der Weg, den man im Ernstfall braucht — es sind die 12,5 Meter der
+Gefahrenbremsung. Und wer meint, mit der normalen Formel auf der sicheren Seite zu liegen, hat
+recht: Sie rechnet großzügig. Nur eben nicht aus dem Grund, den die meisten vermuten.
+
+## Die Sekunde, die keine ist
+
+Beim Reaktionsweg ist die versteckte Zahl leichter zu finden. Geschwindigkeit durch zehn, mal
+drei — daraus lässt sich die unterstellte Reaktionszeit direkt ausrechnen, und sie beträgt 1,08
+Sekunden. Bei jedem Tempo dieselbe, denn der Reaktionsweg wächst linear mit der Geschwindigkeit,
+nicht quadratisch.
+
+Diese gut eine Sekunde ist als Annahme vernünftig gewählt. Sie liegt im Bereich dessen, was
+aufmerksame Fahrerinnen und Fahrer brauchen, um eine Gefahr zu erkennen, zu bewerten und den Fuß
+zu bewegen.
+
+Nur endet die Sache dort nicht. Zwischen dem Moment, in dem der Fuß auf dem Pedal ankommt, und
+dem Moment, in dem das Fahrzeug tatsächlich mit voller Kraft verzögert, vergeht weitere Zeit:
+Die Bremse muss auf die Pedalbewegung ansprechen, und der Bremsdruck muss sich aufbauen. Beides
+zusammen dauert seinerseits einen guten Sekundenbruchteil.
+
+In dieser Zeit fährt das Auto weiter — nicht mit voller Geschwindigkeit wie im Reaktionsweg,
+aber auch noch nicht mit voller Verzögerung. Die Faustformel kennt diese Zwischenphase nicht.
+Sie schaltet von ungebremst auf voll gebremst um, als gäbe es dazwischen nichts.
+
+Bei 100 km/h legt ein Fahrzeug in einer Zehntelsekunde knapp drei Meter zurück. Man muss nicht
+lange rechnen, um zu sehen, dass sich hier einige Meter ansammeln, die in keiner Fahrschulformel
+auftauchen.
+
+Und dann ist da noch die Voraussetzung hinter der Voraussetzung: Die 1,08 Sekunden gelten für
+jemanden, der aufmerksam nach vorn schaut. Wer im selben Moment auf ein Display sieht, beginnt
+die Reaktion nicht später, sondern gar nicht — die Sekunde beginnt erst zu laufen, wenn der
+Blick zurückkommt.
+
+## Was ABS wirklich tut — und was nicht
+
+Ein verbreitetes Missverständnis gehört an dieser Stelle geklärt, weil es direkt mit der
+Verzögerung zu tun hat: Ein Antiblockiersystem verkürzt den Bremsweg nicht zuverlässig. Auf
+manchen Untergründen verlängert es ihn sogar.
+
+Der Grund liegt in der Physik der Reibung. Ein blockierendes Rad rutscht, und ein rutschendes Rad
+überträgt weniger Kraft als eines, das sich noch dreht — die Gleitreibung ist kleiner als die
+Haftreibung. Ein ABS verhindert das Blockieren und hält die Räder in dem schmalen Bereich, in
+dem sie zwar leicht durchdrehen, aber noch greifen. Auf trockener und nasser Straße bringt das
+in der Regel etwas kürzere Wege.
+
+Auf tiefem Schnee, Schotter oder Sand ist es umgekehrt. Dort schiebt ein blockierendes Rad einen
+Keil aus Material vor sich her, der zusätzlich bremst. Ein ABS verhindert genau diesen Effekt und
+kann den Bremsweg dadurch verlängern.
+
+Wozu dann ABS? Die Antwort steht nicht im Bremsweg, sondern in der Lenkbarkeit. Ein blockiertes
+Rad überträgt keine Seitenkräfte mehr — das Fahrzeug rutscht geradeaus, egal wohin das Lenkrad
+zeigt. Mit ABS bleibt es lenkbar, und man kann während der Vollbremsung noch ausweichen. Das
+rettet mehr Situationen als ein paar Meter kürzerer Weg.
+
+Für unsere Rechnung heißt das: Die Verzögerung von sieben bis neun Metern je Sekundenquadrat auf
+trockener Straße ist ein Wert, der mit modernen Assistenzsystemen erreicht wird — aber sie ist
+keine Folge davon, dass die Bremse stärker geworden wäre. Sie ist die Folge davon, dass Reifen
+und Fahrbahn nicht mehr hergeben.
+
+## Die Zahl, die alles verändert und in keiner Formel steht
+
+Bis hierher ging es um das Fahrzeug und den Menschen. Die größte Einflussgröße ist beides nicht.
+Es ist die Fahrbahn.
+
+Die Verzögerung, die überhaupt möglich ist, hängt davon ab, wie viel Reibung zwischen Reifen und
+Untergrund zustande kommt. Und dieser Wert schwankt nicht um Prozente, sondern um ein
+Vielfaches:
+
+Auf trockenem Asphalt sind rund acht Meter je Sekundenquadrat erreichbar. Bei Nässe etwa sechs.
+Auf Schnee etwa drei. Auf Eis unter zwei.
+
+Aus 100 km/h ergibt das Bremswege von 48 Metern auf trockener Straße, 64 Metern bei Nässe, 129
+Metern auf Schnee und rund 257 Metern auf Eis. Zwischen dem besten und dem schlechtesten Fall
+liegt mehr als der Faktor fünf — mehr als eine ganze Autobahnbrücke Unterschied bei identischem
+Tempo, identischem Auto und identischer Fahrerin.
+
+<FahrbahnVergleich />
+
+Die Faustformel kennt genau eine Fahrbahn. Sie hat kein Feld für Regen, keines für Schnee, keines
+für die glatte Stelle unter der Brücke. Wer im Winter mit den Werten aus der Theorieprüfung
+plant, plant mit Zahlen, die für einen Sommertag gelten.
+
+Das ist übrigens der Grund, warum die Empfehlung zum Sicherheitsabstand nicht in Metern
+formuliert ist, sondern in Sekunden — der halbe Tachowert in Metern entspricht ziemlich genau
+1,8 Sekunden Abstand. Eine Zeitangabe skaliert automatisch mit der Geschwindigkeit. Sie skaliert
+allerdings nicht mit der Fahrbahn, weshalb bei Nässe die Empfehlung lautet, den Abstand zu
+verdoppeln.
+
+Wer beides nebeneinander sehen will — die Faustformel und die physikalische Rechnung mit
+wählbarer Fahrbahn —, kann es hier durchspielen:
+
+<RechnerLoader slug="bremsweg-rechner" />
+
+<Video src="/blog/bremsweg.mp4" poster="/blog/bremsweg-video-standbild.jpg" caption="Nasse Fahrbahn: Der Reibwert sinkt, und mit ihm alles, was in der Faustformel steckt." />
+
+## Nicht jedes Fahrzeug bremst gleich
+
+Die Werte, um die es bisher ging, gelten für einen Personenwagen. Andere Fahrzeuge liegen zum
+Teil deutlich daneben, und die Gründe dafür sind lehrreich, weil sie zeigen, woran der Bremsweg
+tatsächlich hängt.
+
+**Lastwagen** brauchen erheblich länger. Das liegt weniger an der Masse als an zwei anderen
+Dingen. Erstens arbeiten schwere Nutzfahrzeuge überwiegend mit Druckluftbremsen, und Luft muss
+erst durch lange Leitungen strömen, bevor an der Hinterachse Druck ankommt — die Schwellzeit ist
+ein Mehrfaches der eines Personenwagens. Zweitens ist die Beladung entscheidend: Ein leerer
+Auflieger hat wenig Gewicht auf den Achsen und damit wenig Reibung, ein überladener zu viel Masse
+für die vorhandene Bremsleistung.
+
+Dass die Masse allein den Bremsweg nicht verlängert, ist eine der schöneren Erkenntnisse der
+Mechanik. Ein schwereres Fahrzeug drückt stärker auf die Fahrbahn und erzeugt dadurch mehr
+Reibung — aber es hat auch mehr Bewegungsenergie abzubauen. Beides wächst gleichermaßen mit der
+Masse und kürzt sich in der Rechnung heraus. Der Bremsweg hängt deshalb theoretisch gar nicht
+vom Gewicht ab, sondern nur vom Reibwert und von der Geschwindigkeit.
+
+In der Praxis stimmt das nur ungefähr, weil Bremsen bei hoher Belastung heiß werden und dann
+schlechter greifen. Wer eine lange Passabfahrt bremsend nimmt, erlebt das als nachlassende
+Wirkung bei gleichem Pedaldruck.
+
+**Motorräder** haben ein anderes Problem: Sie stehen auf zwei Reifen mit sehr kleinen
+Aufstandsflächen, und die Gewichtsverteilung verschiebt sich beim Bremsen so stark nach vorn, dass
+das Hinterrad kaum noch Kraft übertragen kann. Ein Motorrad kann in guten Händen ähnlich stark
+verzögern wie ein Auto — es verzeiht dabei aber deutlich weniger.
+
+**Fahrräder** liegen erwartungsgemäß am unteren Ende. Bei ihnen kommt hinzu, dass die
+Verzögerung schnell an einer anderen Grenze endet als der Reibung: Wer zu stark vorn bremst,
+hebt das Hinterrad.
+
+## Warum der Anhalteweg zwei verschiedene Dinge addiert
+
+Der Anhalteweg ist die Summe aus Reaktionsweg und Bremsweg, und diese Summe hat eine Eigenschaft,
+die man beim bloßen Addieren übersieht: Ihre beiden Teile wachsen unterschiedlich schnell.
+
+Der Reaktionsweg wächst linear. Doppeltes Tempo, doppelter Weg. Der Bremsweg wächst quadratisch.
+Doppeltes Tempo, vierfacher Weg.
+
+Bei 30 km/h ist der Reaktionsweg noch der größere Anteil — neun Meter gegenüber neun Metern
+Bremsweg, also genau die Hälfte. Bei 50 km/h sind es 15 gegenüber 25. Bei 100 km/h stehen 30
+Metern Reaktionsweg bereits 100 Meter Bremsweg gegenüber. Und bei 200 km/h verschwindet der
+Reaktionsweg mit 60 Metern fast neben 400 Metern Bremsweg.
+
+<AnhaltewegZerlegung />
+
+Daraus folgt etwas Praktisches. Im Stadtverkehr ist Aufmerksamkeit die entscheidende Größe: Dort
+macht die Reaktionszeit den halben Anhalteweg aus, und eine Sekunde Ablenkung wiegt schwerer als
+jede Bremsanlage. Auf der Autobahn kehrt sich das um — dort dominiert die Physik, und keine
+Aufmerksamkeit der Welt ersetzt Abstand.
+
+Wer das einmal verstanden hat, liest auch die Diskussion um Tempolimits anders. Der Unterschied
+zwischen 30 und 50 km/h in der Stadt ist nicht ein Unterschied von zwanzig Stundenkilometern,
+sondern einer zwischen 18 und 40 Metern Anhalteweg. Ein Kind, das 25 Meter voraus auf die
+Fahrbahn tritt, bleibt im einen Fall unberührt und wird im anderen Fall mit erheblicher
+Geschwindigkeit getroffen.
+
+## Zurück zu den 86,6 km/h
+
+Damit lässt sich die Zahl vom Anfang auflösen. Sie folgt aus derselben Formel, nur nach einer
+anderen Größe umgestellt.
+
+Wenn ein Fahrzeug aus 100 km/h über 12,5 Meter mit 7,72 Metern je Sekundenquadrat verzögert,
+bleibt eine Restgeschwindigkeit von 86,6 km/h. Der Grund liegt in dem, was beim Bremsen
+tatsächlich abgebaut wird: nicht Geschwindigkeit, sondern Bewegungsenergie. Und die wächst
+ebenfalls mit dem Quadrat der Geschwindigkeit.
+
+Ein Fahrzeug mit 100 km/h trägt die vierfache Bewegungsenergie eines Fahrzeugs mit 50 km/h. Die
+ersten 12,5 Meter Bremsweg nehmen ihm genau so viel Energie, wie das langsamere Fahrzeug
+insgesamt hatte — nämlich ein Viertel. Drei Viertel sind dann noch da. Und drei Viertel der
+Energie bedeuten die Wurzel aus drei Vierteln an Geschwindigkeit, also rund 87 Prozent.
+
+<RestgeschwindigkeitVergleich />
+
+Das ist die Rechnung hinter einer Erfahrung, die Unfallforscher immer wieder beschreiben: Bei
+Kollisionen ist die Aufprallgeschwindigkeit fast immer höher, als die Beteiligten schätzen. Nicht
+weil sie schneller gefahren wären als gedacht, sondern weil die Bremsung bis zum Aufprall viel
+weniger gebracht hat, als man dem Bremsvorgang zutraut.
+
+Wer die Faustformel nur benutzt, um einen Anhalteweg auszurechnen, verpasst genau diesen Teil.
+Die Formel sagt, wo man steht. Sie sagt nichts darüber, wie schnell man an jedem Punkt davor noch
+war — und diese zweite Frage ist die, an der es hängt.
+
+## Was der Rechner hier macht
+
+Der Bremsweg-Rechner auf dieser Seite hat zwei Ansichten, und das ist eine bewusste Entscheidung.
+
+Die Faustformel bleibt die Standardansicht. Sie ist der Stoff der Theorieprüfung, sie wird dort
+genau so abgefragt, und wer für den Führerschein lernt, braucht sie in dieser Form. Ein Rechner,
+der stattdessen die Physik ausgibt, wäre für den häufigsten Anwendungsfall nutzlos.
+
+Daneben steht die physikalische Rechnung mit einer Auswahl der Fahrbahn. Dort lässt sich
+nachvollziehen, was die Faustformel unterstellt und wie weit die Wirklichkeit davon abweicht,
+sobald die Straße nicht trocken ist.
+
+<VerzoegerungsTabelle />
+
+Beide Ansichten sind richtig für ihren Zweck, und keine ersetzt die andere. Die Faustformel
+lehrt einen Zusammenhang, den man im Kopf behält. Die physikalische Rechnung liefert Zahlen für
+Bedingungen, die die Faustformel nicht kennt.
+
+## Der Abstand, der aus alldem folgt
+
+Wenn der Bremsweg von Faktoren abhängt, die man im Fahren nicht kennt — Reibwert der Stelle
+voraus, Zustand der eigenen Reifen, Aufmerksamkeit im entscheidenden Moment —, bleibt eine
+einzige Größe, die vollständig in der eigenen Hand liegt: der Abstand.
+
+Die bekannte Regel lautet: halber Tachowert in Metern. Bei 100 km/h also 50 Meter. Rechnet man
+nach, entspricht das 1,8 Sekunden — und diese Sekundenangabe ist die eigentliche Regel, weil sie
+mit jedem Tempo automatisch mitwächst.
+
+Der Grund für ausgerechnet diesen Wert ist einleuchtend, sobald man die Teile kennt. Reagiert man
+gut eine Sekunde und braucht die Bremse noch einen Moment, bis sie voll greift, ist die
+Sekundenspanne fast aufgebraucht, bevor überhaupt Verzögerung entsteht. Der Abstand deckt also im
+Wesentlichen die Zeit ab, in der nichts passiert.
+
+Was er nicht abdeckt, ist ein Unterschied in der Bremsleistung. Der Sicherheitsabstand geht
+stillschweigend davon aus, dass der Vordermann ähnlich stark verzögert wie man selbst. Bremst er
+härter — weil er bessere Reifen hat, leichter ist oder einfach entschlossener tritt —, reicht die
+Regel nicht. Deshalb lautet die Empfehlung bei Nässe, den Abstand zu verdoppeln: nicht weil die
+Reaktionszeit im Regen länger wäre, sondern weil die Streuung zwischen Fahrzeugen größer wird.
+
+Ein zweiter Punkt wird selten erwähnt. Der Abstand hilft nur gegen das Auffahren auf ein
+bremsendes Fahrzeug. Gegen ein stehendes Hindernis — ein Stauende hinter der Kuppe, ein Baum, ein
+Wildtier — hilft er nicht, denn dort gibt es keinen Vordermann, der schon einen Teil des Weges
+abgebaut hätte. In diesem Fall gilt der volle Anhalteweg, und der ist bei 100 km/h auch nach der
+großzügigen Faustformel 130 Meter lang.
+
+## Was man damit anfängt
+
+Das Wichtigste an diesem Thema ist nicht eine Zahl, sondern eine Größenordnung, und die lautet:
+Bremsen bringt spät sehr viel und früh sehr wenig.
+
+Daraus folgen drei Dinge, die man ohne Taschenrechner mitnehmen kann.
+
+Erstens: Der Abstand zum Vordermann ist keine Höflichkeit, sondern die einzige Größe in dieser
+Rechnung, über die man vollständig selbst bestimmt. Reaktionszeit lässt sich nur begrenzt
+verbessern, die Bremsanlage gar nicht, die Fahrbahn schon gar nicht.
+
+Zweitens: Tempo wirkt stärker, als es sich anfühlt. Zehn Stundenkilometer weniger klingen nach
+wenig und verkürzen den Bremsweg bei 100 km/h um fast zehn Meter — und die Restgeschwindigkeit
+an jedem Punkt davor gleich mit.
+
+Drittens: Bei Nässe und Schnee gelten die gelernten Zahlen nicht. Nicht ein bisschen nicht,
+sondern um ein Vielfaches nicht. Der Bremsweg auf Schnee ist aus 100 km/h fast dreimal so lang
+wie auf trockener Straße.
+
+Und für alle, die sich über die Faustformel geärgert haben, weil sie ungenau ist: Sie ist es
+nicht. Sie ist genau in dem, wofür sie gemacht wurde — dem quadratischen Zusammenhang, der bei
+jeder Bremsverzögerung gleichermaßen gilt. Was sie nicht kann, ist, ihre eigene Annahme
+mitzuteilen. Diese Annahme ist 3,86 Meter je Sekundenquadrat, und wer sie kennt, kann die Formel
+sinnvoll benutzen.
+
+<KarstenSagt>
+Ich hatte beim Stichwort Faustformel eine ganz andere im Kopf — die für den Abstand: halber
+Tachowert. Bei 50 also 25 Meter, bei 100 dann 50. Die Formeln für den Anhalteweg, Bremsweg plus
+Reaktionsweg, sind mir dagegen überhaupt nicht mehr geläufig. Die habe ich für die Prüfung
+gelernt und danach nie wieder gebraucht.
+
+In die Situation einer echten Vollbremsung bin ich glücklicherweise noch nie gekommen. Das
+wundert mich selbst, wenn ich sehe, was auf den Straßen inzwischen alles unterwegs ist.
+
+Was ich heute nutze, ist der Abstandstempomat. Er hält zuverlässig die eine Größe, auf die es
+ankommt, falls doch einmal eine Vollbremsung nötig wird — und Abstand in Metern schätzt man im
+Fahren erstaunlich schlecht. Wie dieser Text zeigt, ist er ohnehin die einzige Größe in der
+ganzen Rechnung, über die man wirklich selbst bestimmt.
+</KarstenSagt>
+
+<Quellen eintraege={[
+  {
+    titel: 'Herleitung der Fahrschul-Faustformeln aus der Bremswegformel',
+    url: 'https://www.cbcity.de/faustformel-fuer-reaktions-und-bremsweg',
+    hinweis: 'Rechnet die Faustformel auf die zugrunde liegende Physik zurück. Der Vereinfachung von s = v²/(2a) zu (v/10)·(v/10) liegt eine mittlere Verzögerung von 3,86 m/s² zugrunde, weil 3,6² · 2 · 3,86 ungefähr 100 ergibt. Für den Reaktionsweg wird eine Reaktionszeit von 1,1 Sekunden angesetzt. Ausdrücklicher Hinweis, dass 3,86 m/s² keine Vollverzögerung ist.',
+  },
+  {
+    titel: 'Bremsweg beim Auto richtig berechnen — ingenieur.de',
+    url: 'https://www.ingenieur.de/technik/fachbereiche/verkehr/bremsweg-beim-auto-richtig-berechnen-mit-formel/',
+    hinweis: 'Herleitung der Bremsverzögerung über das zweite newtonsche Gesetz: Alles hängt an der Haftreibungszahl zwischen Reifen und Fahrbahn, multipliziert mit der Erdbeschleunigung von 9,81 m/s². Enthält Tabellen typischer Haftreibungszahlen und Bremsverzögerungen nach Fahrzeugtyp und Fahrbahnbeschaffenheit.',
+  },
+  {
+    titel: 'Bremsverzögerung nach Fahrbahnzustand',
+    url: 'https://www.rechner.club/weg-zeit-geschwindigkeit/bremsweg-berechnen',
+    hinweis: 'Anhaltswerte der erreichbaren Verzögerung: etwa 1 bis 3 m/s² bei Eis und Schnee, 5 bis 7 m/s² bei Regen und 7 bis 9 m/s² auf trockener Straße. Grundlage der Fahrbahnauswahl in der physikalischen Ansicht des Rechners.',
+  },
+  {
+    titel: 'Ansprechzeit und Schwellzeit der Bremsanlage',
+    url: 'https://www.bussgeldkatalog.de/bremsweg-berechnen/',
+    hinweis: 'Zwischen Pedalbetätigung und voller Bremswirkung liegen die Ansprechzeit der Bremse und die Schwellzeit bis zum Aufbau des Bremsdrucks. Diese Zwischenphase kommt in den Faustformeln nicht vor, die unmittelbar von ungebremst auf voll gebremst umschalten.',
+  },
+  {
+    titel: 'Die Faustformeln in der Fahrausbildung',
+    url: 'https://www.fahrschule-moss.de/ratgeber/faustformeln/',
+    hinweis: 'Darstellung der drei Wege, wie sie in der Fahrschule gelehrt werden, samt Halbierung des Bremswegs bei der Gefahrenbremsung. Beispielrechnung für 50 km/h: 15 Meter Reaktionsweg plus 25 Meter Bremsweg ergeben 40 Meter Anhalteweg, bei Gefahrenbremsung 12,5 Meter Bremsweg.',
+  },
+  {
+    titel: 'Amtlicher Fragenkatalog für die Theorieprüfung, Frage 1.2.03-105',
+    url: 'https://www.fahrschule.de/Fragenkatalog/1.2.03-105',
+    hinweis: 'Beleg dafür, dass die Faustformel für den Bremsweg bei normaler Bremsung Bestandteil des amtlichen Fragenkatalogs ist — der Grund, warum sie im Rechner die Standardansicht bleibt.',
+  },
+]} />
