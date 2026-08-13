@@ -8,6 +8,7 @@ import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 import { LADEPREISE, ladepreisDe } from '@/lib/berechnungen/ladepreise-parameter';
 import { SPRITPREISE_REFERENZ } from '@/lib/berechnungen/spritpreise-parameter';
+import { STROMPREIS_META } from '@/lib/berechnungen/strompreis';
 
 /**
  * E-Auto-Ladekosten-Rechner (Technik-Kategorie). BLOCK B — YMYL (Preise).
@@ -16,7 +17,8 @@ import { SPRITPREISE_REFERENZ } from '@/lib/berechnungen/spritpreise-parameter';
  * - Kosten pro 100 km = Verbrauch(kWh/100km) × Strompreis(€/kWh)
  * - Kosten Vollladung = Akku(kWh) × Strompreis(€/kWh)
  * - Jahreskosten = Kosten/100 km × (Jahres-km ÷ 100)
- * Strompreis-Richtwerte Stand April 2026 (BDEW/Bundesnetzagentur), volatil — keine Tarifgarantie.
+ * Haushaltsstrom aus STROMPREIS_2026 (BDEW), oeffentliche Ladepreise aus LADEPREISE.
+ * Beide Staende kommen aus den Konstanten, nicht aus diesem Kommentar.
  */
 
 const VERBRAUCH_OPTIONEN = [
@@ -41,9 +43,16 @@ const VERGLEICH_ORTE: Array<{ name: string; preis: number }> = [
   { name: 'PV-Eigenstrom', preis: LADEPREISE.pvEigen },
 ];
 
+// 'YYYY-MM-TT' oder 'YYYY-MM' zu 'MM/YYYY'.
+const monatJahr = (iso: string) => { const [j, m] = iso.split('-'); return `${m}/${j}`; };
+const STAND_STROM = monatJahr(STROMPREIS_META.stand);
+const STAND_LADEN = monatJahr(LADEPREISE.stand);
+
 // Benziner-Referenz für den Vergleich.
 const BENZIN_L = 7.5;
 const BENZIN_PREIS = SPRITPREISE_REFERENZ.superE10;
+const BENZIN_L_DE = BENZIN_L.toFixed(1).replace('.', ',');
+const BENZIN_PREIS_DE = BENZIN_PREIS.toFixed(3).replace('.', ',');
 
 export default function EautoLadekostenRechner() {
   const [verbrauchProfil, setVerbrauchProfil] = useState('18');
@@ -133,7 +142,7 @@ export default function EautoLadekostenRechner() {
             </div>
           </div>
           <p className="text-xs text-gray-500 dark:text-gray-400 mb-6">
-            Strompreis-Richtwerte Stand April 2026 (BDEW/Bundesnetzagentur) — tatsächliche Tarife variieren stark. Ohne Gewähr.
+            Richtwerte: Haushaltsstrom Stand {STAND_STROM} ({STROMPREIS_META.quelle}), öffentliche Ladepreise Stand {STAND_LADEN} — tatsächliche Tarife variieren stark. Ohne Gewähr.
           </p>
 
           {/* Rechenweg */}
@@ -175,7 +184,7 @@ export default function EautoLadekostenRechner() {
                   })}
                   <tr className="border-t-2 border-gray-300 dark:border-gray-500">
                     <td className="py-2.5 pr-4 text-gray-800 dark:text-gray-200">Benziner (Vergleich)</td>
-                    <td className="py-2.5 pr-4 text-gray-600 dark:text-gray-400">7,5 l × 1,75 €</td>
+                    <td className="py-2.5 pr-4 text-gray-600 dark:text-gray-400">{BENZIN_L_DE} l × {BENZIN_PREIS_DE} €</td>
                     <td className="py-2.5 text-gray-800 dark:text-gray-200">{eur(ergebnis.benzin100)} €</td>
                   </tr>
                 </tbody>

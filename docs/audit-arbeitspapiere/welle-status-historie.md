@@ -8,6 +8,35 @@
 
 ---
 
+## 13.08.2026 — Welle 91: EautoLadekostenRechner, die letzten drei Reste — ✅ ABGESCHLOSSEN
+
+Welle 90 hatte sechs Quellenangaben in `technik.ts` getrennt; die siebte Fundstelle lag in der
+Komponente und war mit den zwei Dateien jener Welle nicht erreichbar.
+
+- **Sichtbarer Hinweistext und Dateikopf** auf die getrennten, abgeleiteten Stände umgestellt.
+  `April 2026` kommt auf der Seite jetzt **null Mal** vor — die Erwartung aus Welle 90 ist damit
+  eingelöst.
+- **Selbstwiderspruch behoben.** Die Vergleichszeile zeigte die hartkodierte Beschriftung
+  `7,5 l × 1,75 €` neben dem seit Welle 87 abgeleiteten Betrag `15,94 €`. 7,5 × 1,75 ergibt aber
+  13,13. Beschriftung und Betrag kommen jetzt aus derselben Konstante; belegt in der Seite:
+  `7,5 l × 2,125 € · 15,94 €`.
+- **`BENZIN_L_DE` und `BENZIN_PREIS_DE`** ergänzt, weil der komponenteninterne `eur`-Helfer über
+  `toLocaleString` fest auf zwei Nachkommastellen steht — „7,5 l" braucht eine, „2,125 €" drei.
+- JSX-Interpolation mit **einfachen** geschweiften Klammern, nicht mit der
+  Template-Literal-Schreibweise der Config-Wellen.
+
+**Lehre.** Wenn ein Betrag an eine Konstante gebunden wird, muss die **Beschriftung daneben**
+mitgebunden werden. Sonst entsteht statt einer bloß veralteten Zahl ein **sichtbarer Rechenfehler**
+— und das ist die schlechtere von beiden Lagen, weil es die Rechnung selbst in Zweifel zieht. Nach
+jeder Bindung prüfen, ob im selben Element eine beschreibende Formel steht.
+
+**Damit ist der eauto-ladekosten-rechner vollständig abgeschlossen** — Komponente und Config.
+
+**Offen:** `stromverbrauch-geraete-rechner` (technik.ts), `reisekosten-rechner` (alltag.ts),
+Altersprüfung für `LADEPREISE.stand` und `STROMPREIS_META.stand`.
+
+---
+
 ## 13.08.2026 — Welle 90: Stand- und Quellenangaben des eauto-ladekosten-rechner — ✅ ABGESCHLOSSEN
 
 Nach den Wellen 88/89 sagten FAQ und Fußnote „August 2026", sechs andere Stellen weiterhin
