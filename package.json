@@ -5,7 +5,7 @@
   "scripts": {
     "generate-client-data": "npx tsx scripts/generate-client-data.ts",
     "build-critical-css": "node scripts/build-critical-css.mjs",
-    "prebuild": "node scripts/check-footer.mjs && node scripts/check-drittanbieter.mjs && node scripts/check-metadescription.mjs && node scripts/check-jahreswerte.mjs && node scripts/check-backticks.mjs && node scripts/check-ki-beispiele.mjs && node scripts/slug-drift-scan.mjs && npx tsx scripts/generate-client-data.ts && npx tsx scripts/generate-tipp-constants.ts && node scripts/build-critical-css.mjs",
+    "prebuild": "node scripts/check-footer.mjs && node scripts/check-drittanbieter.mjs && node scripts/check-metadescription.mjs && node scripts/check-energiepreise.mjs && node scripts/check-jahreswerte.mjs && node scripts/check-backticks.mjs && node scripts/check-ki-beispiele.mjs && node scripts/slug-drift-scan.mjs && npx tsx scripts/generate-client-data.ts && npx tsx scripts/generate-tipp-constants.ts && node scripts/build-critical-css.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -16,6 +16,7 @@
     "lint:slugs": "node scripts/slug-drift-scan.mjs",
     "lint:kibeispiele": "node scripts/check-ki-beispiele.mjs",
     "lint:metadescription": "node scripts/check-metadescription.mjs",
+    "lint:energiepreise": "node scripts/check-energiepreise.mjs",
     "audit:bundle": "npx tsx scripts/build-audit-bundle.ts",
     "audit:wortzahl": "npx tsx scripts/wortzahl-audit.mjs > docs/audit-arbeitspapiere/w15c-wortzahl-audit.csv",
     "longtail:diff": "node scripts/longtail-diff-check.mjs"

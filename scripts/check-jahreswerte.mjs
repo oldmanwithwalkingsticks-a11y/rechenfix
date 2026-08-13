@@ -23,27 +23,51 @@ const CYAN = '\x1b[36m';
 const DIM = '\x1b[2m';
 const RESET = '\x1b[0m';
 
-// --- Soft-Freshness-Check (W19): redaktionelle Spritpreis-Referenz ---
-// Reines Pattern-Lint (kein Import): liest den `stand`-Wert aus
-// spritpreise-parameter.ts per Regex und warnt, wenn er älter als 45 Tage ist.
-// Bewusst NUR console.warn — kein Exit-Code-Einfluss (redaktioneller Wert, kein
-// gesetzlicher Stichtag). Pflege monatlich, Quelle ADAC.
-(function checkSpritpreisFreshness() {
-  try {
-    const spritFile = join(ROOT, 'lib/berechnungen/spritpreise-parameter.ts');
-    const src = readFileSync(spritFile, 'utf8');
-    const m = src.match(/stand:\s*'(\d{4}-\d{2}-\d{2})'/);
-    if (!m) return;
-    const stand = new Date(`${m[1]}T00:00:00`);
-    const ageDays = Math.floor((Date.now() - stand.getTime()) / 86400000);
-    if (ageDays > 45) {
-      console.warn(
-        `${YELLOW}⚠ Spritpreis-Referenz (SPRITPREISE_REFERENZ.stand = ${m[1]}) ist ${ageDays} Tage alt ` +
-        `(> 45). Bitte gegen ADAC-Bundesschnitt aktualisieren: lib/berechnungen/spritpreise-parameter.ts${RESET}`,
-      );
+// --- Soft-Freshness-Check: redaktionelle Preis-Referenzen ---
+// Reines Pattern-Lint (kein Import): liest die `stand`-Werte per Regex und
+// warnt, wenn sie aelter als die jeweilige Schwelle sind.
+// Bewusst NUR console.warn — kein Exit-Code-Einfluss (redaktionelle Werte,
+// keine gesetzlichen Stichtage).
+(function checkPreisFreshness() {
+  const quellen = [
+    {
+      datei: 'lib/berechnungen/spritpreise-parameter.ts',
+      name: 'SPRITPREISE_REFERENZ.stand',
+      schwelle: 45,
+      hinweis: 'gegen ADAC-Bundesschnitt aktualisieren',
+    },
+    {
+      datei: 'lib/berechnungen/ladepreise-parameter.ts',
+      name: 'LADEPREISE.stand',
+      schwelle: 180,
+      hinweis: 'gegen ACE/ADAC-Ladepreisvergleich pruefen',
+    },
+    {
+      datei: 'lib/berechnungen/strompreis.ts',
+      name: 'STROMPREIS_META.stand',
+      schwelle: 120,
+      hinweis: 'gegen die aktuelle BDEW-Strompreisanalyse pruefen',
+    },
+  ];
+
+  for (const q of quellen) {
+    try {
+      const src = readFileSync(join(ROOT, q.datei), 'utf8');
+      const m = src.match(/stand:\s*'(\d{4}-\d{2}(?:-\d{2})?)'/);
+      if (!m) continue;
+      // 'YYYY-MM' wird als Monatsanfang gelesen.
+      const iso = m[1].length === 7 ? `${m[1]}-01` : m[1];
+      const stand = new Date(`${iso}T00:00:00`);
+      const ageDays = Math.floor((Date.now() - stand.getTime()) / 86400000);
+      if (ageDays > q.schwelle) {
+        console.warn(
+          `${YELLOW}⚠ ${q.name} = ${m[1]} ist ${ageDays} Tage alt (> ${q.schwelle}). ` +
+          `Bitte ${q.hinweis}: ${q.datei}${RESET}`,
+        );
+      }
+    } catch {
+      // Datei fehlt o. Ae. — still ueberspringen, niemals den Build brechen.
     }
-  } catch {
-    // Datei fehlt o. Ä. — Freshness-Check still überspringen, niemals den Build brechen.
   }
 })();
 

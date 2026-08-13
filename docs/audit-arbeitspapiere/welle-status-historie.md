@@ -8,6 +8,48 @@
 
 ---
 
+## 13.08.2026 — Welle 94: zwei Wächter für die Energiepreise — ✅ ABGESCHLOSSEN
+
+Die Wellen 82 bis 93 haben 56 hartkodierte Energiepreise gebunden. Ohne Wächter wäre das ein
+Zustand, kein Ergebnis — wie die 155-Zeichen-Regel, die bis Welle 81 nur eine Absichtserklärung war.
+
+- **`scripts/check-energiepreise.mjs` angelegt.** Verbietet einzelne hartkodierte Preise in
+  gerenderten Config-Feldern, erlaubt Szenariospannen und Quellcode-Kommentare, zählt Treffer in
+  nicht gerenderten Feldern.
+- **Keine Ausnahmeliste nötig.** Die einzigen legitimen Live-Fälle sind Spannen, und die erkennt
+  der Wächter an ihrer **Form**. Eine Liste hätte gepflegt werden müssen, eine Regel nicht.
+- **Gegenprobe belegt beide Richtungen.** Ein eingesetzter Einzelpreis `1,89 €/l` bricht mit
+  Exit 1 und benennt Datei, Slug, Feld und Wert; eine eingesetzte Spanne `0,30–0,45 €/kWh` geht
+  mit Exit 0 durch und hebt die Spannenzahl von 2 auf 3. Damit ist belegt, dass die Ausnahme
+  wirklich greift und nicht bloß zufällig niemanden trifft.
+- **Bestandslauf:** 2 Szenariospannen, 1 Kommentar, 14 Treffer in toten Feldern — nach dem
+  Zurücksetzen der Gegenprobe unverändert.
+- **`check-jahreswerte.mjs`: Altersprüfung von einer auf drei Quellen erweitert.** Schwellen nach
+  Pflegeangabe: Sprit 45, Laden 180, BDEW-Strom 120 Tage. Das Format `YYYY-MM` wird als
+  Monatsanfang gelesen — nachgeprüft, dass alle drei `stand`-Werte vom Regex erfasst werden und
+  keiner still übersprungen wird.
+- **Die BDEW-Warnung erscheint ab sofort bei jedem Build.** Beabsichtigt: Sie macht den offenen
+  Punkt aus Welle 87 dauerhaft sichtbar, statt ihn im Protokoll altern zu lassen.
+
+**Damit ist die Energiepreis-Serie abgeschlossen** (Wellen 82 bis 94).
+
+**Lehre.** Ein gebundener Wert ohne Wächter ist eine Momentaufnahme. Der Unterschied zwischen
+Regel und Liste entscheidet dabei über die Pflegelast: Hier ließ sich der einzige legitime
+Ausnahmefall an seiner Form erkennen (Spanne statt Einzelwert), deshalb braucht der Wächter keine
+Allowlist. Wo das nicht gelingt, wächst die Ausnahmeliste mit — und wird selbst zur Altlast.
+Zweite Hälfte derselben Lehre: Ein Wächter, der eine Datei still überspringt, wenn sein Regex
+nicht greift, meldet Grün ohne geprüft zu haben. Die drei `stand`-Werte wurden deshalb einzeln
+gegengeprüft, nicht nur am Ausbleiben von Warnungen gemessen.
+
+**Offen:** Der Wächter deckt Configs ab, nicht Komponenten. Dort liegen Preise als numerische
+Literale (`const BENZIN_PREIS = 1.75`), die sich nicht zuverlässig von anderen Zahlen unterscheiden
+lassen. Aktuell sind alle fünf gebunden; eine Absicherung müsste anders ansetzen.
+
+**Offen:** die 14 Treffer in toten Feldern — Teil der Sammelentscheidung über
+`beispiel`/`formel`/`erklaerung` bei allen 203 migrierten Rechnern.
+
+---
+
 ## 13.08.2026 — Welle 93: stromverbrauch-geraete-rechner, die Preisschicht schließt — ✅ ABGESCHLOSSEN
 
 Der letzte Rechner mit hartkodierten Energiepreisen. Dreiundzwanzig Stellen an `STROMPREIS_2026`
