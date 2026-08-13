@@ -31,10 +31,6 @@ vorher nicht bekannt — der neue Wächter hat es gemessen: **72**.
   deshalb nur in Überschriften ausgedehnt, die auch von Wellen sprechen.
 - **Nicht vergebene Wellennummern:** 27, 49, 49a, 80 — zu ihnen gibt es keinen Commit; 80 ist für
   Blogartikel 15 vorgesehen und noch offen.
-- **Zahl im Nachtragstext:** Der Nachtrag spricht einleitend von „79 Wellen". Gemessen sind **72**
-  nicht dokumentierte Wellen; die 79 ist die höchste vergebene Nummer, nicht die Anzahl. Der
-  Nachtragstext wurde wörtlich übernommen und deshalb nicht angefasst — die belastbare Zahl ist
-  die des Wächters.
 
 **Lehre.** Ein Wächter, der eine echte Lücke verdeckt, ist schlechter als keiner. Beim Bau eines
 Prüfskripts gehört deshalb jeder Treffer, der *nicht* gemeldet wird, genauso geprüft wie jeder,
@@ -42,15 +38,24 @@ der gemeldet wird — sonst misst man das Ausbleiben von Warnungen und hält es 
 Damit ist dieselbe Lehre zum dritten Mal bestätigt (155-Zeichen-Regel in Welle 81, Energiepreise
 in 82–94, Historie hier): Eine Regel in `CLAUDE.md` ohne Wächter ist eine Absichtserklärung.
 
+- **Korrektur 95a:** Der Nachtragsblock nannte zunächst 79 committete Wellen und
+  behauptete, 72–75 seien erfasst gewesen. Richtig sind 76 eindeutige
+  Wellenkennungen, davon 72 fehlend; dokumentiert waren nur 72, 73, 73a und 74.
+  Die 79 stammte aus gezählten Commit-Zeilen statt eindeutiger Kennungen —
+  Betreffs wie `25c` kommen doppelt vor. Dieselbe Fehlerklasse, gegen die die
+  Prompt-Regel „Erwartungswerte messen, nie schätzen" gerichtet ist, diesmal in
+  einem Prüfprotokoll.
+
 ---
 
 ## 13.08.2026 — Nachtrag: Wellen 24–79 (Rekonstruktion aus den Commit-Meldungen) — ✅ ABGESCHLOSSEN
 
-**Was das hier ist.** Zwischen dem 24.07. und dem 12.08.2026 sind 79 Wellen
-committet, aber nicht in diese Datei eingetragen worden. Der jüngste Block davor
-stammt vom 23.07. (Wellen 20c–23), der nächste vom 12.08. (Welle 81). Einzig die
-Wellen 72–75 wurden erfasst — allerdings **ans Dateiende** statt nach oben, wo
-sie niemand gesucht hat.
+**Was das hier ist.** Zwischen dem 24.07. und dem 12.08.2026 sind 76 Wellen
+committet worden; **72 davon fehlten in dieser Datei**. Der jüngste Block davor
+stammt vom 23.07. (Wellen 20c–23), der nächste vom 12.08. (Welle 81). Erfasst
+waren allein 72, 73, 73a und 74 — und zwar **am Dateiende** statt oben, wo
+niemand sie gesucht hat. Welle 75 stand nur in der Tabelle jenes Blocks, nicht
+in seiner Überschrift, und galt deshalb zu Recht als undokumentiert.
 
 Dieser Block schließt die Lücke. Er ist aus den Commit-Betreffs rekonstruiert,
 nicht aus den Sitzungsprotokollen — die Begründungen, verworfenen Alternativen
