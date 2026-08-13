@@ -8,6 +8,185 @@
 
 ---
 
+## 13.08.2026 — Welle 95: Historie 24–79 nachgetragen und abgesichert — ✅ ABGESCHLOSSEN
+
+Zwischen Welle 23 (23.07.) und Welle 81 (12.08.) fehlten Wellen in dieser Datei. Wie viele, war
+vorher nicht bekannt — der neue Wächter hat es gemessen: **72**.
+
+- **72 fehlende Wellen nachgetragen**, in einem konsolidierten Block, thematisch gruppiert und
+  ausdrücklich als **Rekonstruktion aus Commit-Betreffs** gekennzeichnet. Die Begründungen und
+  verworfenen Alternativen jener drei Wochen sind nicht mehr verfügbar; der Nachtrag sagt das
+  selbst, statt Vollständigkeit vorzutäuschen.
+- **Der ans Dateiende geratene Block zu 72–75 wurde eingesammelt** und steht jetzt am Ende des
+  Nachtrags. Seine Überschrift ist dabei von `##` auf `####` gerückt — der Text unverändert, nur
+  die Ebene, weil eine zweite `##`-Überschrift den Nachtragsblock sonst vorzeitig beendet hätte.
+  Die Tabelle selbst ist unberührt.
+- **`scripts/check-wellenhistorie.mjs` angelegt.** Liest Wellenkennungen aus den Commit-Betreffs,
+  vergleicht sie mit den Überschriften dieser Datei, warnt bei jedem lokalen Build und
+  überspringt flache Klone auf Vercel still. Er warnt nur — ein Dokumentationsmangel darf keinen
+  Deploy blockieren.
+- **Beim Bauen gefunden:** Ohne Wortgrenze greift das Muster `Welle \d+` mitten in
+  „Sch·welle" — eine Überschrift über Firmenwagen-Schwellenwerte („0,25 %-Schwelle 70.000 →
+  100.000 €") ließ Welle 70 als dokumentiert erscheinen, obwohl sie fehlte. Zahlenspannen werden
+  deshalb nur in Überschriften ausgedehnt, die auch von Wellen sprechen.
+- **Nicht vergebene Wellennummern:** 27, 49, 49a, 80 — zu ihnen gibt es keinen Commit; 80 ist für
+  Blogartikel 15 vorgesehen und noch offen.
+- **Zahl im Nachtragstext:** Der Nachtrag spricht einleitend von „79 Wellen". Gemessen sind **72**
+  nicht dokumentierte Wellen; die 79 ist die höchste vergebene Nummer, nicht die Anzahl. Der
+  Nachtragstext wurde wörtlich übernommen und deshalb nicht angefasst — die belastbare Zahl ist
+  die des Wächters.
+
+**Lehre.** Ein Wächter, der eine echte Lücke verdeckt, ist schlechter als keiner. Beim Bau eines
+Prüfskripts gehört deshalb jeder Treffer, der *nicht* gemeldet wird, genauso geprüft wie jeder,
+der gemeldet wird — sonst misst man das Ausbleiben von Warnungen und hält es für Korrektheit.
+Damit ist dieselbe Lehre zum dritten Mal bestätigt (155-Zeichen-Regel in Welle 81, Energiepreise
+in 82–94, Historie hier): Eine Regel in `CLAUDE.md` ohne Wächter ist eine Absichtserklärung.
+
+---
+
+## 13.08.2026 — Nachtrag: Wellen 24–79 (Rekonstruktion aus den Commit-Meldungen) — ✅ ABGESCHLOSSEN
+
+**Was das hier ist.** Zwischen dem 24.07. und dem 12.08.2026 sind 79 Wellen
+committet, aber nicht in diese Datei eingetragen worden. Der jüngste Block davor
+stammt vom 23.07. (Wellen 20c–23), der nächste vom 12.08. (Welle 81). Einzig die
+Wellen 72–75 wurden erfasst — allerdings **ans Dateiende** statt nach oben, wo
+sie niemand gesucht hat.
+
+Dieser Block schließt die Lücke. Er ist aus den Commit-Betreffs rekonstruiert,
+nicht aus den Sitzungsprotokollen — die Begründungen, verworfenen Alternativen
+und Zwischenstände jener drei Wochen sind nicht mehr verfügbar. Was hier steht,
+ist belegt; was dort besprochen wurde, ist verloren. Genau deshalb existiert ab
+Welle 95 ein Wächter dafür.
+
+**Nicht vergebene Nummern:** 27, 49, 49a und 80. Zu ihnen gibt es keinen Commit.
+80 war für Blogartikel 15 (Bremsweg) vorgesehen und ist zum Zeitpunkt dieses
+Nachtrags noch offen.
+
+---
+
+### Blog-Infrastruktur (24a–24d, 24.07.)
+
+Der komplette Unterbau für den Blog an einem Tag: MDX-Pakete und
+`next.config`-Anbindung, die Bausteine (Infobox, KarstenSagt, Quellen, Bild) mit
+Article-Schema, die Routen samt Übersicht und einer Registry, die sich aus dem
+Dateisystem speist, dazu Sitemap-Anbindung und Navigation.
+
+### Blogartikel 1–14 (25 bis 78a)
+
+Vierzehn Artikel in drei Wochen, jeder mit MDX, vier bis sechs selbstgebauten
+Grafiken, Titelbild, Video und KI-Metadaten:
+
+| Nr. | Thema | Welle |
+|---|---|---|
+| 1 | Erfindung des Meters | 25, 25b–25d |
+| 2 | Pferdestärke | 26, 28, 30 |
+| 3 | Schuhgrößen | 32 |
+| 4 | Datenmengen | 37 |
+| 5 | BMI | 38 |
+| 6 | Cups | 45 |
+| 7 | Euro und D-Mark | 47, 47a, 47b |
+| 8 | Kalorien | 51 |
+| 9 | Zeitvereinheitlichung | 55 |
+| 10 | Pfund | 56 |
+| 11 | Bildschirmdiagonale | 65 |
+| 12 | Blutdruck in mmHg | 67 |
+| 13 | Wohnfläche | 77, 77a |
+| 14 | Promille | 78, 78a |
+
+### Wortzahl-Ausbau auf 3.000+ (57, 60–64)
+
+Sieben Bestandsartikel wurden nachträglich auf die Zielmarke gebracht: Artikel 4
+und 8 (Welle 57), BMI auf 3.280 Wörter mit Quellen von 8 auf 18 (60),
+Schuhgrößen auf 3.011 (61), Cups auf 3.005 (62), Euro auf 3.009 (63),
+Pferdestärke auf 3.060 (64).
+
+### Blog-Medien und KI-Kennzeichnung (29, 30, 33, 34, 35)
+
+Eigene Video-Komponente als MDX-Fix, Startbild ohne Vorabladen, sichtbares
+Artikeldatum, Videos starten beim Scrollen in den Sichtbereich. Dazu die
+KI-Transparenzseite, die Kennzeichnung der Blog-Medien (Badge, JSON-LD nach
+IPTC, XMP in den Assets) und IP-Hashing im Rate-Limiter.
+
+### KI-Rechner (25c, 25d, 26a–26c)
+
+Vorschlags-Chips an die Tools gekoppelt, Build-Wächter `check-ki-beispiele`,
+System-Prompt geschärft (kein Markdown, kein freies Rechnen), Tool
+`berechne_rabatt` ergänzt und gegen `berechne_prozent` abgegrenzt.
+
+### Social-Pipeline (40–43, 52, 53, 58, 59, 66)
+
+45 fehlende Social-Kacheln erzeugt, damit die Queue mit 205 Einträgen vollständig
+war; Rundlauf plattformweise; Status im Admin-Panel. TikTok auf jeden zweiten Tag
+und eine eigene Cron-Zeit (05 UTC) als Messaufbau gegen den Creator-Cap.
+PostPeer-Antworten werden ausgewertet statt nur der HTTP-Status — ein 202 heißt
+nicht Erfolg. Umstellung auf bundle.social, PostPeer stillgelegt statt entfernt.
+
+### Rechner und Fachkorrekturen (31, 46, 46a, 79)
+
+Schuhgrößen-Rechner faktisch korrigiert (Edward-II-Legende, EU-cm-Formel nach
+ISO 19407). DM-Euro-Rechner mit 21 unwiderruflichen Altwährungskursen und
+Rundung nach VO 1103/97. Bremsweg-Rechner um die physikalische Ansicht mit
+Fahrbahnzustand und Reaktionszeit erweitert.
+
+### Grafik- und Layoutkorrekturen (39, 47b, 49b, 54, 70, 78a)
+
+Überlappende Beschriftungen, abgeschnittene Quellenzeilen, Kollisionen mit der
+Fußzeile, Textüberlauf in mehrzeiligen Einträgen, entzerrte Kopfzeile auf
+Mobilgeräten. Welle 49b vereinheitlichte zusätzlich das Genus von „Cup"
+durchgängig — redaktionelle Arbeit, kein mechanisches Ersetzen.
+
+### PWA, Einwilligung, Sichtbarkeit (68, 69, 69a, 71, 72, 73, 73a)
+
+PWA mit Offline-Schalter und Einwilligung nach § 25 TDDDG, Datenschutz und
+Nutzungsbedingungen angepasst; `app/sw.ts` als Build-Blocker nachgereicht.
+Offline-Nutzung auffindbar gemacht. Blog sichtbar gemacht (Header mobil,
+Mega-Menü, Startseiten-Teaser, Rückweg vom Rechner). Footer-Block „Mehr" als
+eigene Rasterspalte. Ungegateter Anzeigen-Loader aus `app/layout.tsx` entfernt,
+Einbettungsschutz gesetzt, `check-drittanbieter.mjs` als Wächter; Widerruf der
+Marketing-Einwilligung lädt die Seite neu.
+
+### Skills und Arbeitspapiere (36, 55b–55d, 66, 74, 75, 76)
+
+`blog-builder` von v3 auf v8, mit den Lehren aus den Wellen 67–75. Zwei
+Skill-Lehren verdienen die Wiederholung: KI-Metadaten Ebene 3 als Pflichtschritt,
+und Titelbild-Varianten brauchen zwei getrennte Aufrufe — `image_count: 2`
+erzeugt Zoomvarianten derselben Interpretation, keine Alternativen.
+Arbeitspapiere zu Einwilligungsverwaltung (zwei Fassungen) und zur Messvorschrift
+für den TikTok-Cap.
+
+### Kleinere Korrekturen (40, 41a, 44, 51b)
+
+Veraltete Social-Bilder an `captions.json` angeglichen. Social-Image-Builder gibt
+auf Windows-Konsolen UTF-8 aus — Erfolge wurden zuvor fälschlich als
+fehlgeschlagen gemeldet. Feedback-Formular meldet Fehler ehrlich statt als
+Erfolg. Blog-Medien aus dem Function-Trace ausgeschlossen, nachdem das
+250-MB-Limit einen Deploy blockiert hatte.
+
+---
+
+**Lehre.** Eine Regel in `CLAUDE.md` ohne Wächter ist eine Absichtserklärung.
+Das galt für die 155-Zeichen-Grenze bei `metaDescription` (Welle 81), für die
+hartkodierten Energiepreise (Wellen 82–94) und hier zum dritten Mal. Die
+Historie wurde nicht aus Nachlässigkeit übersprungen, sondern weil bei
+Tagesabschlüssen unter Zeitdruck der Schritt entfällt, den niemand prüft. Welle
+74 zeigt die Variante davon, die noch schwerer zu bemerken ist: Der Eintrag
+wurde geschrieben, landete aber an der falschen Stelle und war damit praktisch
+unsichtbar.
+
+### Nachgereicht: der ursprünglich ans Dateiende geratene Block zu 72–75
+
+#### Wellen 72–74 — Footer-Spalte, Einwilligungs-Härtung, Arbeitspapier (10.08.2026)
+
+| Welle | Inhalt | Commit |
+|---|---|---|
+| 72 | Footer: Block „Mehr" als eigene Rasterspalte neben „Rechtliches" | `0c24bfd` |
+| 73 | Ungegateten Anzeigen-Loader aus `app/layout.tsx` entfernt, Einbettungsschutz gesetzt (`frame-ancestors`, `X-Frame-Options`, `Cross-Origin-Opener-Policy`), `scripts/check-drittanbieter.mjs` als Prebuild-Wächter | `e20bd80` |
+| 73a | Widerruf der Marketing-Einwilligung lädt die Seite neu | `47c8678` |
+| 74 | Dieses Arbeitspapier (`arbeitspapier-einwilligung-adsense-2026-08-10.md`) | — |
+| 75 | Arbeitspapier Einwilligungsverwaltung, zweite Fassung: Rechtspunkt zur Doppelfunktion von `adsbygoogle.js` geklärt, Rangfolge der Wege angepasst (B vor A) | — |
+
+---
+
 ## 13.08.2026 — Welle 94: zwei Wächter für die Energiepreise — ✅ ABGESCHLOSSEN
 
 Die Wellen 82 bis 93 haben 56 hartkodierte Energiepreise gebunden. Ohne Wächter wäre das ein
@@ -6695,13 +6874,3 @@ Blautöne bei 2-Segment-Donuts (zins) schlecht trennbar. Reiner Renderer-Fix.
   Amber klar getrennt; bmi — drei klar getrennte Farben (Blau/Amber/Grün); Mobil — Donut
   oben, Legende darunter, zentriert.
   Klammer-Struktur von headers() vor Commit prüfen (Get-Content -Tail 6).
-
-## Wellen 72–74 — Footer-Spalte, Einwilligungs-Härtung, Arbeitspapier (10.08.2026)
-
-| Welle | Inhalt | Commit |
-|---|---|---|
-| 72 | Footer: Block „Mehr" als eigene Rasterspalte neben „Rechtliches" | `0c24bfd` |
-| 73 | Ungegateten Anzeigen-Loader aus `app/layout.tsx` entfernt, Einbettungsschutz gesetzt (`frame-ancestors`, `X-Frame-Options`, `Cross-Origin-Opener-Policy`), `scripts/check-drittanbieter.mjs` als Prebuild-Wächter | `e20bd80` |
-| 73a | Widerruf der Marketing-Einwilligung lädt die Seite neu | `47c8678` |
-| 74 | Dieses Arbeitspapier (`arbeitspapier-einwilligung-adsense-2026-08-10.md`) | — |
-| 75 | Arbeitspapier Einwilligungsverwaltung, zweite Fassung: Rechtspunkt zur Doppelfunktion von `adsbygoogle.js` geklärt, Rangfolge der Wege angepasst (B vor A) | — |
