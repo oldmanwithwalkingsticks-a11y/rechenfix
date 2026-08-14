@@ -8,6 +8,45 @@
 
 ---
 
+## 14.08.2026 — Welle 98: Prüfvermerk statt Datenalter für die trägen Preis-SSOTs — ✅ ABGESCHLOSSEN
+
+Seit Welle 94 warnte jeder Build zu `STROMPREIS_META.stand`. **Der Wert ist korrekt:** Die
+BDEW-Strompreisanalyse vom 15.04.2026 nennt für Haushalte 37,0 ct/kWh — genau den Wert in
+`STROMPREIS_2026.durchschnitt_bdew`. Die Januar-Ausgabe lag bei 37,2; der Repo-Wert ist also der
+neuere. Die Warnung war kein Fehlerhinweis, sondern ein Konstruktionsfehler des Wächters.
+
+- **Neues Feld `geprueft`** in beiden trägen Quellen. `check-jahreswerte` liest das zu prüfende
+  Feld jetzt aus der Quellenliste (`feld:`) statt fest `stand`.
+- **Spritpreise behalten die Prüfung auf `stand`** (Schwelle 45). Dort ändert sich der Wert
+  wöchentlich, ein altes Datum bedeutet dort tatsächlich einen falschen Wert.
+- **Bei `LADEPREISE` war `stand` ohnehin kein Datenstand**, sondern der Prüftag — die Vermischung
+  ist damit aufgelöst. Der Pflegehinweis sagt jetzt, welches Feld wann zu bumpen ist.
+- **Ein fehlendes Datumsfeld meldet sich**, statt still übersprungen zu werden. Vorher hätte ein
+  vertippter Feldname den Wächter grün melden lassen, ohne geprüft zu haben — dieselbe
+  Konstellation, die bei der Wellenhistorie schon einmal eine echte Lücke verdeckt hat.
+
+| Quelle | geprüftes Feld | Wert | Alter | Schwelle |
+|---|---|---|---|---|
+| `SPRITPREISE_REFERENZ` | `stand` | 2026-08-12 | 2 | 45 |
+| `LADEPREISE` | `geprueft` | 2026-08-14 | 0 | 180 |
+| `STROMPREIS_META` | `geprueft` | 2026-08-14 | 0 | 90 |
+
+**Beide Gegenproben belegt**, weil ein Wächter, der nach dem Umbau nur schweigt, nichts beweist:
+`geprueft` auf 2026-01-01 gesetzt → genau eine Warnung, und zwar mit 225 Tagen, also aus
+`geprueft` gelesen und nicht aus dem danebenliegenden `stand`. Feldname zu `geprueftX` verfälscht
+→ die neue Meldung „Feld geprueft … nicht gefunden" erscheint. Danach zurückgesetzt, der Diff
+zeigt nur die beabsichtigten Einfügungen. Zusätzlich wurde für alle drei Quellen einzeln
+nachgewiesen, welches Feld tatsächlich gelesen wird — Schweigen allein ist kein Beleg dafür, dass
+das richtige Feld geprüft wurde.
+
+**Lehre.** Ein Wächter muss die Frage stellen, die zur **Änderungsrate der Quelle** passt. Prüft er
+das Datenalter einer Quelle, die nur selten veröffentlicht, warnt er dauerhaft bei korrekten
+Werten — und erzieht dazu, Warnungen zu überlesen. Das ist schlechter als keine Warnung, weil es
+die nächste echte mit entwertet. Für träge Quellen lautet die richtige Frage nicht „wie alt sind
+die Daten", sondern „wann hat zuletzt jemand nachgesehen, ob es Neueres gibt".
+
+---
+
 ## 14.08.2026 — Welle 97: Beschriftungskollision in `RestgeschwindigkeitVergleich` — ✅ ABGESCHLOSSEN
 
 Auf `/blog/warum-100-kmh-dort-noch-87-sind` überlagerte „Start 100 km/h" die Untertitelzeile der

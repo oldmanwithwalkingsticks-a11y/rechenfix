@@ -26,7 +26,17 @@ export const STROMPREIS_2026 = {
  * Textfeld dort wuerde den Rueckgabetyp von getStrompreis aufweichen.
  */
 export const STROMPREIS_META = {
+  /** Datenstand der Quelle. BDEW veroeffentlicht wenige Male im Jahr. */
   stand: '2026-04',
+  /**
+   * Tag, an dem zuletzt gegen die BDEW-Seite abgeglichen wurde, ob eine neuere
+   * Ausgabe vorliegt. Diesen Wert prueft check-jahreswerte, nicht `stand`:
+   * Ein alter Datenstand bedeutet hier keinen falschen Wert, sondern nur, dass
+   * die Quelle selbst noch nichts Neueres veroeffentlicht hat.
+   * Zuletzt bestaetigt: Analyse vom 15.04.2026, Haushalte 37,0 ct/kWh
+   * (Januar-Ausgabe 37,2 ct/kWh).
+   */
+  geprueft: '2026-08-14',
   quelle: 'BDEW-Strompreisanalyse',
 } as const;
 

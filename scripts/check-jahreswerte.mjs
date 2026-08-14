@@ -24,37 +24,54 @@ const DIM = '\x1b[2m';
 const RESET = '\x1b[0m';
 
 // --- Soft-Freshness-Check: redaktionelle Preis-Referenzen ---
-// Reines Pattern-Lint (kein Import): liest die `stand`-Werte per Regex und
-// warnt, wenn sie aelter als die jeweilige Schwelle sind.
+// Reines Pattern-Lint (kein Import): liest per Regex ein Datumsfeld je Quelle
+// und warnt, wenn es aelter als die jeweilige Schwelle ist.
+//
+// Welches Feld geprueft wird, haengt vom Aenderungstakt der Quelle ab:
+//   `stand`    bei Werten, die sich laufend aendern — ein altes Datum bedeutet
+//              dort einen falschen Wert (Spritpreise, woechentlich).
+//   `geprueft` bei traegen Quellen, die nur wenige Male im Jahr veroeffentlichen
+//              — dort bedeutet ein altes Datum nur, dass es nichts Neues gibt.
+//              Gefragt ist, wann zuletzt jemand nachgesehen hat.
 // Bewusst NUR console.warn — kein Exit-Code-Einfluss (redaktionelle Werte,
 // keine gesetzlichen Stichtage).
 (function checkPreisFreshness() {
   const quellen = [
     {
       datei: 'lib/berechnungen/spritpreise-parameter.ts',
+      feld: 'stand',
       name: 'SPRITPREISE_REFERENZ.stand',
       schwelle: 45,
       hinweis: 'gegen ADAC-Bundesschnitt aktualisieren',
     },
     {
       datei: 'lib/berechnungen/ladepreise-parameter.ts',
-      name: 'LADEPREISE.stand',
+      feld: 'geprueft',
+      name: 'LADEPREISE.geprueft',
       schwelle: 180,
-      hinweis: 'gegen ACE/ADAC-Ladepreisvergleich pruefen',
+      hinweis: 'gegen ACE/ADAC-Ladepreisvergleich abgleichen und geprueft bumpen',
     },
     {
       datei: 'lib/berechnungen/strompreis.ts',
-      name: 'STROMPREIS_META.stand',
-      schwelle: 120,
-      hinweis: 'gegen die aktuelle BDEW-Strompreisanalyse pruefen',
+      feld: 'geprueft',
+      name: 'STROMPREIS_META.geprueft',
+      schwelle: 90,
+      hinweis: 'gegen die BDEW-Strompreisanalyse abgleichen und geprueft bumpen',
     },
   ];
 
   for (const q of quellen) {
     try {
       const src = readFileSync(join(ROOT, q.datei), 'utf8');
-      const m = src.match(/stand:\s*'(\d{4}-\d{2}(?:-\d{2})?)'/);
-      if (!m) continue;
+      const muster = new RegExp(`${q.feld}:\\s*'(\\d{4}-\\d{2}(?:-\\d{2})?)'`);
+      const m = src.match(muster);
+      if (!m) {
+        console.warn(
+          `${YELLOW}⚠ Feld ${q.feld} in ${q.datei} nicht gefunden — ` +
+          `die Alterspruefung fuer ${q.name} laeuft ins Leere.${RESET}`,
+        );
+        continue;
+      }
       // 'YYYY-MM' wird als Monatsanfang gelesen.
       const iso = m[1].length === 7 ? `${m[1]}-01` : m[1];
       const stand = new Date(`${iso}T00:00:00`);
