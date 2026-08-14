@@ -7,7 +7,7 @@ description: Template and checklist for building standardized online calculators
 
 Build standardized, SEO-optimized calculator pages for the German calculator portal rechenfix.de. Every calculator must follow this template to ensure consistency, completeness, and maximum SEO impact.
 
-## WARUM diese Standards existieren (Skill v2, 10.05.2026 · Content-Bausteine-Update Welle 19, 10.06.2026 · Goldstandard-Update 11.06.2026)
+## WARUM diese Standards existieren (Skill v2, 10.05.2026 · Content-Bausteine-Update Welle 19, 10.06.2026 · Goldstandard-Update 11.06.2026 · Referenzwerte-Update Wellen 82–102, 14.08.2026)
 
 > **Welle 19 (10.06.2026):** Neue Rechner und Migrationen nutzen den Content-Baustein-Standard (`contentBloecke`) statt des Thin-`erklaerung`-String-Pfads, der die 4. AdSense-Ablehnung verursacht hat. Details im Abschnitt „Content-Bausteine (contentBloecke) — Standard ab Welle 19" weiter unten.
 
@@ -1749,6 +1749,75 @@ Für Komposition + Daten-Disziplin diese als Muster nehmen — nicht den ursprü
 Gestaltung ist final: `ContentBlockRenderer.tsx` (Server-Component, Kachel = `card p-5 md:p-6` mit Hover-Lift, Titel `primary-600`). Der Renderer beherrscht 5 Diagramm-Varianten (balken/kreis/linie/gestapelt/wasserfall, CLS-sicher, kontrastreiche Hex-Palette, Donut zentriert) — diese werden über das `variante`-Feld im Config gesteuert, NICHT durch Renderer-Änderungen. Baustein-Arbeit = **ausschließlich Content** im Config-Eintrag der jeweiligen Kategorie-Datei (`lib/rechner-config/<kategorie>.ts`) — nur die Auto-Kategorie selbst liegt in `auto.ts`.
 
 ---
+
+## Redaktionelle Referenzwerte in Configs (Wellen 82–102, 14.08.2026)
+
+**Die Lücke, die diese Wellen aufgedeckt haben:** G11 verbietet eigene Konstanten für *gesetzliche* Werte in *Berechnungs-Libs*. Für **redaktionelle Referenzwerte in Config-Prosa** — Spritpreise, Strompreise, Ladepreise — gab es keine Regel. Ergebnis: 56 hartkodierte Energiepreise über drei Config-Dateien, teils widersprüchlich zueinander, teils zwei Jahre alt. `lib/berechnungen/strompreis.ts` verbot in seinem eigenen Kopfkommentar ausdrücklich hartkodierte Werte — und keine einzige Config hielt sich daran.
+
+### G13 — Referenzwerte kommen aus einer SSOT und werden interpoliert
+
+Jeder wiederkehrende Zahlenwert in Config-Text (Preise, Marktspannen, Durchschnittswerte) gehört in eine Parameter-Datei unter `lib/berechnungen/` und wird von dort interpoliert, nicht abgeschrieben. Bestehende: `spritpreise-parameter.ts`, `strompreis.ts`, `ladepreise-parameter.ts`.
+
+`check-energiepreise.mjs` erzwingt das für Energiepreise. **Szenariospannen** (`0,20–0,25 €/kWh`) sind erlaubt und werden an ihrer Form erkannt — sie beschreiben eine Bandbreite, keinen Referenzwert, und gehören in keine SSOT.
+
+Semantik vor Bequemlichkeit: `LADEPREISE.wallbox` und `STROMPREIS_2026.durchschnitt_bdew` liefern denselben Zahlenwert, meinen aber Verschiedenes. Ein Haushaltsgeräte-Rechner nimmt die Strompreis-SSOT, kein Ladepreis-Feld.
+
+### Preise binden ist die halbe Arbeit — die Ergebnisse stehen woanders
+
+Eine Suche nach `€/kWh` oder `€/l` findet die **Preise**. Sie findet nicht die Beträge, die aus ihnen gerechnet wurden — die stehen als nackte Zahlen in Rechenwegen, Tabellen, Fazit-Texten und Fußnoten, oft mehrere Blöcke entfernt.
+
+Dieser Fehler ist in dieser Serie **dreimal** aufgetreten (Wellen 85→86, 88→89, 89 Nachlauf). Nach jeder Preisbindung folgt ein zweiter Durchgang: nach den alten **Ergebniswerten** suchen, nicht nach den Preisen.
+
+Und ein dritter Durchgang nach **Rückverweisen**: „den größten Teil der hier gerechneten 123 Euro" nennt den Betrag ein zweites Mal, drei Sätze später.
+
+### Beschriftungen neben gebundenen Beträgen mitbinden
+
+Wird ein Betrag an eine Konstante gebunden und die Beschriftung daneben bleibt hartkodiert, entsteht aus einer veralteten Zahl ein **sichtbarer Rechenfehler**:
+
+```
+Benziner (Vergleich) | 7,5 l × 1,75 € | 15,94 €
+```
+
+7,5 × 1,75 ergibt 13,13. Das ist die schlechtere Lage als eine bloß alte Zahl, weil es die ganze Rechnung in Zweifel zieht — und es entsteht **durch** das Binden. Nach jeder Bindung prüfen, ob im selben Element eine beschreibende Formel steht.
+
+### Quotierung prüfen, bevor `${…}` eingesetzt wird
+
+Ein Interpolationsausdruck in einem **einfach gequoteten** Feld landet wörtlich auf der Seite. Weder der Build noch `check-backticks.mjs` melden das — beides ist syntaktisch einwandfrei.
+
+Vor jeder Ersetzung prüfen, wie das Zielfeld gequotet ist. Bei einfachen Anführungszeichen die **ganze Zeile** ersetzen und öffnendes **und** schließendes Zeichen auf Backtick umstellen. In JSX gilt das Gegenteil: dort `{…}` ohne Dollarzeichen.
+
+### Erst klären, ob das Feld gerendert wird — und wer es sonst liest
+
+`app/[kategorie]/[rechner]/page.tsx` entscheidet per Ternär zwischen `contentBloecke` und dem alten Pfad. Vor Welle 101 war der alte Pfad für **keinen** Rechner erreichbar, obwohl er wie eine Absicherung für zwei Ausnahmen aussah. Von 14 gefundenen Fundstellen in einem Rechner waren 7 unsichtbar; eine Korrektur landete in totem Text.
+
+Die zweite Frage ist wichtiger als die erste: **Wer liest das Feld sonst noch?** `beispiel` speist `scripts/social-caption-builder.ts` — ein Feld zu entfernen, das nur die Seite nicht rendert, hätte die Social-Pipeline getroffen. Vor jeder großflächigen Änderung `grep -rn "\.feldname"` über `app`, `components`, `lib`, `scripts`.
+
+### Wächter: die Frage muss zur Änderungsrate der Quelle passen
+
+Ein Wächter, der das **Datenalter** einer Quelle prüft, die nur zweimal im Jahr veröffentlicht, warnt dauerhaft bei korrekten Werten — und erzieht dazu, Warnungen zu überlesen. Das entwertet die nächste echte Warnung.
+
+- Wert ändert sich laufend (Spritpreise, wöchentlich) → `stand` prüfen
+- Wert ändert sich träge (BDEW, ACE) → `geprueft` prüfen: wann hat zuletzt jemand nachgesehen, ob es Neueres gibt
+
+Beim Bau eines Wächters gehört jeder Treffer, der **nicht** gemeldet wird, genauso geprüft wie jeder gemeldete. Ein stilles `continue` bei fehlendem Feld, ein `catch`, das eine fehlende Datei überspringt, ein Muster ohne Wortgrenze — alle drei lassen einen Wächter grün melden, ohne geprüft zu haben. Ein Wächter, der eine echte Lücke verdeckt, ist schlechter als keiner.
+
+### Ein toter Auffangpfad ist gefährlicher als gar keiner
+
+Der entfernte Fallback in `page.tsx` hat jahrelang die Illusion einer Absicherung erzeugt und dabei verdeckt, dass die eigentliche Prüfung fehlt. Wird ein Fallback entfernt, muss vorher geklärt sein, wer seine Aufgabe übernimmt — hier `check-contentbloecke-pflicht.mjs`.
+
+### Beim Entfernen: Gegenzählung dessen, was nicht getroffen werden darf
+
+Bei 412 Schnitten über zehn Dateien prüft niemand den Diff mit dem Auge. Die aussagekräftige Zahl ist nicht, wie viele Felder entfernt wurden, sondern wie viele gleichnamige Vorkommen **unberührt** geblieben sind — 1.875 `formel:`-Schlüssel in den `contentBloecke`-Bausteinen. Wäre das Muster zu weit gegriffen, hätte genau diese Zahl den Schaden sofort angezeigt.
+
+Dazu die Strukturprobe auf verwaiste Kommas (`,\s*,` und `\{\s*,`) — der wahrscheinlichste Schaden beim Entfernen von Objekteigenschaften.
+
+Und: Feldwerte niemals per Regex schneiden. Sie enthalten Apostrophe, Zeilenumbrüche und Template-Literale mit eigenen Anführungszeichen. String-Leser mit Escape-Behandlung, rückwärts arbeitend, mit Abbruch bei unlesbarem Literal.
+
+### Belegkriterien müssen erreichbar sein
+
+Ein Prüfkriterium, das nie grün werden kann, ist kein Beleg, sondern Aufwand. Datei-Hashes gebauter Seiten taugen in diesem Projekt **nicht**: Next.js schreibt je Build eine neue `buildId` und neue Chunk-Namen, zwei Builds aus identischen Quellen liefern verschiedene Hashes.
+
+Tauglich ist der Vergleich des **sichtbaren Textes**: Vorzustand über `git stash` bauen, Skripte und Tags entfernen, ab dem Breadcrumb vergleichen, Zeichenzahl gegenüberstellen.
 
 ## Operative Disziplin
 

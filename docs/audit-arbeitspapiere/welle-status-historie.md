@@ -8,6 +8,36 @@
 
 ---
 
+## 14.08.2026 — Welle 103: rechner-builder Referenzwerte-Update — ✅ ABGESCHLOSSEN
+
+Einundzwanzig Wellen Config-Arbeit (82–102) als Regeln kodifiziert. 1775 → 1844 Zeilen,
+24 → 25 Hauptabschnitte, 85 → 94 Unterabschnitte.
+
+**Die Lücke, die den Anlass gab.** G11 verbietet eigene Zahlen-Konstanten für **gesetzliche** Werte
+in **Berechnungs-Libs**. Für **redaktionelle Referenzwerte in Config-Prosa** — Sprit-, Strom-,
+Ladepreise — gab es keine Regel. Ergebnis: 56 hartkodierte Energiepreise über drei Config-Dateien,
+teils widersprüchlich, teils zwei Jahre alt. `lib/berechnungen/strompreis.ts` untersagte
+hartkodierte Werte im eigenen Kopfkommentar, und keine Config hielt sich daran. Der neue Abschnitt
+trägt die Nummer **G13** und ordnet sich damit in die bestehende Guard-Reihe ein.
+
+Acht Unterabschnitte: Referenzwerte aus SSOT interpolieren; Preise binden ist die halbe Arbeit, die
+Ergebnisse stehen woanders; Beschriftungen neben gebundenen Beträgen mitbinden; Quotierung vor
+Interpolation prüfen; erst klären, ob ein Feld gerendert wird **und wer es sonst liest**; die
+Wächterfrage muss zur Änderungsrate der Quelle passen; ein toter Auffangpfad ist gefährlicher als
+keiner; Gegenzählung beim Entfernen; Belegkriterien müssen erreichbar sein.
+
+**Vollständige Ersetzung statt Einzelersetzungen** — Lehre aus Welle 99, wo zwei Instanzen aus
+demselben Prompt in vier Absätzen abweichende Fassungen erzeugten. Vor dem Überschreiben wurde
+gegengeprüft, dass die neue Fassung nichts verliert: **eine** entfernte Zeile, und zwar die
+`WARUM`-Überschrift, die durch die um das Referenzwerte-Update erweiterte Variante ersetzt wird;
+70 hinzugefügte Zeilen; keine Überschrift des Bestands fehlt. Bei einer Datei, die künftige Arbeit
+steuert, ist stiller Verlust der teuerste Fehler.
+
+**Manueller Schritt:** Das ZIP für die Claude.ai-Oberfläche wird **aus dem Repo** gebaut, nicht aus
+einer Arbeitskopie — dieselbe Reihenfolge wie bei blog-builder v9.
+
+---
+
 ## 14.08.2026 — Welle 102: 412 tote Felder aus den Configs entfernt — ✅ ABGESCHLOSSEN
 
 `erklaerung` und `formel`, je 206 Stück. Beide wurden seit Welle 101 nirgends mehr gelesen — der
