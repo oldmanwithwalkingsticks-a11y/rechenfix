@@ -5,7 +5,7 @@ description: Technik-Vorlage und Verifikations-Checkliste zum Ausrollen von Blog
 
 # Blog Builder für rechenfix.de
 
-**Stand: v8 (10.08.2026, verifiziert an HEAD `1633a01`).** Rollt Blogartikel für das deutsche Rechner-Portal rechenfix.de technisch sauber aus. Deckt die **wiederkehrende Mechanik** ab: MDX-Andockpunkte, Grafik-Komponenten-Konvention, Dark-Mode, Quellen, eingebettete Rechner, Verifikations-Checkliste, Build-Prompt-Struktur für Code-Claude.
+**Stand: v9 (14.08.2026, verifiziert an HEAD `d344375`).** Rollt Blogartikel für das deutsche Rechner-Portal rechenfix.de technisch sauber aus. Deckt die **wiederkehrende Mechanik** ab: MDX-Andockpunkte, Grafik-Komponenten-Konvention, Dark-Mode, Quellen, eingebettete Rechner, Verifikations-Checkliste, Build-Prompt-Struktur für Code-Claude.
 
 **v4-Nachtrag (05.08.2026 — nach Artikel 9 „Zeitvereinheitlichung", Welle 55):** Der Build-Prompt ließ **KI-Metadaten Ebene 3** (XMP in der Datei) weg und behauptete, die KI-Kennzeichnung entstehe vollständig automatisch. Code-Claude stoppte vor dem Commit — sonst wäre `zeit.mp4` auf Dateiebene ungekennzeichnet live gegangen. Kodifiziert in: „Die drei Ebenen sind nicht gleich automatisch" (unten im KI-Metadaten-Abschnitt), einem Pflichtschritt + STOP-Bedingung + Generator-Spalte in „Build-Prompt-Struktur", und der Regel, dass der **Generatorname eine Tatsachenangabe ist** (Chat-Claude liefert ihn mit den Assets; Code-Claude rät ihn nie und übernimmt ihn nicht aus der Tabelle anderer Artikel).
 
@@ -52,6 +52,33 @@ Drei Lehren, alle aus Prompt- oder Vorlagenfehlern von Chat-Claude, die Code-Cla
 1. **Gerade Anführungszeichen in SVG-Grafiken brechen den Build.** `react/no-unescaped-entities` schlägt bei `"` als sichtbarem JSX-Text zu. Läuft lokal durch `tsc`, bricht aber bei `next build` → Vercel rot. Kodifiziert unten in der Grafik-Konvention, samt der Prüfung, die dafür taugt.
 2. **STOP-Bedingungen nicht an einen Commit-Hash hängen.** `git log -1 -- <pfad>` liefert den letzten Commit auf die *Datei*, nicht den Repo-HEAD. Statt eines Hashes prüft ein Diff direkt die Eigenschaft, um die es geht.
 3. **Prüfbefehle gehören in die Umgebung, in der sie laufen sollen.** Bash für Code-Claude, PowerShell für Karsten. Ein Bash-Snippet, das Karsten kopiert, scheitert an PowerShell-Syntax.
+
+## v9-Nachtrag (14.08.2026 — nach Artikel 15 „Bremsweg", Wellen 80 und 97)
+
+Vier Lehren, drei neue und eine alte, die nicht gehalten hat:
+
+1. **Grafik-Geometrie ist die zweite zentrale Fehlerquelle** neben dem Dark
+   Mode. Eine Beschriftung lag auf dem Untertitel; der erste Korrekturvorschlag
+   hätte sie in die eigene Kurve geschoben. Kodifiziert unten in
+   „Geometrie-Prüfung für SVG-Grafiken".
+2. **Umlaute gehören in Prosa, ASCII in Bezeichner.** In `meta.ts` standen
+   `Bremsverzoegerung`, `fuer`, `Groesse` — live sichtbar im Google-Snippet.
+   Ein pauschales Ersetzen hätte dagegen `fuenfzig` und
+   `VerzoegerungsTabelle` zerlegt. Kodifiziert unten.
+3. **Erwartungswert und Messverfahren müssen aus derselben Quelle stammen.**
+   Zwei Werte im Ausroll-Prompt waren arithmetisch unerreichbar, weil sie aus
+   einem bash-Entwurf in eine PowerShell-Prüfung mit anderer Zählweise
+   übernommen wurden. Kodifiziert in der Verifikations-Checkliste.
+4. **Die Wortzahl-Regel aus v6 wurde gebrochen** — nicht aus Nachlässigkeit,
+   sondern weil in einem anderen Werkzeug gezählt wurde (`sed` statt der
+   verbindlichen Methode). Ergebnis: 3.609 statt 3.128 Wörter, 51 statt 54
+   Prozent Rechnerposition. Beide Male lag der Skill richtig und die
+   Schnellmessung falsch. Der Abschnitt „Wortzahl" ist um diesen Punkt ergänzt.
+
+Dazu ein Befund zur Haltbarkeit von Prompts: Der Ausroll-Prompt für Artikel 15
+lag sechzehn Wellen lang unbenutzt. In dieser Zeit ist er veraltet — falscher
+Ausgangs-HEAD, kleingeschriebener Projektpfad, überholte Erwartungswerte.
+Kodifiziert unten bei „Geänderte Quelldateien bekommen einen NEUEN Namen".
 
 ## v8-Nachtrag (10.08.2026 — nach den Wellen 67 bis 75)
 
@@ -224,6 +251,71 @@ for name in [...]:  # alle Grafikdateien der Welle
 Der Schnitt bei `export default` klammert den Kopfkommentar aus, in dem gerade Anführungszeichen unproblematisch sind.
 
 Gilt sinngemäß auch für `'` als Apostroph im sichtbaren Text — dieselbe Lint-Regel, bisher aber nicht aufgetreten.
+
+## Geometrie-Prüfung für SVG-Grafiken (Lehre Wellen 78 und 97)
+
+Nach dem Dark Mode ist die Geometrie die zweithäufigste Fehlerquelle. Sie fällt
+im Code nicht auf, weil jede Zeile für sich richtig ist — erst der **Abstand
+zwischen zwei Zeilen** entscheidet.
+
+**Die gefährliche Konstellation:** ein Element an einer **berechneten**
+Koordinate (`y={py(100) - 12}`) neben einem Element an einer **festen**
+(`y="52"`). Beide sehen plausibel aus. In Welle 97 lag die Beschriftung
+„Start 100 km/h" damit auf Grundlinie 48, der Untertitel auf 52 — Überlagerung
+über die volle Textbreite.
+
+**Die zu prüfende Strecke ist die Ausdehnung des Textes, nicht ein Punkt an
+seinem Anfang.** Der erste Korrekturversuch prüfte die Kurvenlage nur über die
+ersten 26 von 82 Pixeln Textbreite und verschob die Beschriftung damit in die
+eigene Kurve — Kollision getauscht, nicht behoben. Über die volle Breite
+gerechnet fiel die Kurve von y = 64 auf y = 81,4; erst ein Offset von +36 ließ
+6 px Luft.
+
+Vor jeder Auslieferung durchrechnen:
+
+- **Kopfbereich:** Beschriftungen nahe dem oberen Rand des Datenbereichs gegen
+  Titel (meist y ≈ 32) und Untertitel (meist y ≈ 52). Faustregel: Bei
+  Schriftgröße 12 reicht ein Text etwa 9 px über seine Grundlinie.
+- **Textbreite abschätzen:** rund 6,8 px je Zeichen bei Größe 12 mit
+  `fontWeight 600`. Die Kollisionsprüfung läuft über `x_start` **bis**
+  `x_start + Breite`.
+- **Balkenenden:** Label rechts vom Balken darf `viewBox`-Breite minus ~20 px
+  nicht überschreiten. Sonst Label in den Balken setzen (heller Text auf
+  Fläche), so wie es `FahrbahnVergleich` für den längsten Balken tut.
+- **Fußbereich:** letzte Datenzeile, Trennlinie, Fußtexte und `viewBox`-Höhe in
+  dieser Reihenfolge; die letzte Grundlinie braucht ~4 px bis zum Rand für
+  Unterlängen.
+- **Kurven:** an mehreren Stützstellen auswerten, nicht nur am Anfang.
+
+**Asymmetrie begründen.** Steht eine Beschriftung unter ihrer Kurve, eine
+zweite darüber, gehört der Grund in den Dateikopf — sonst „glättet" die nächste
+Bearbeitung es zurück in die Kollision.
+
+## Umlaute in Prosa, ASCII in Bezeichnern (Lehre Welle 80)
+
+In `meta.ts` standen `Bremsverzoegerung`, `fuer` und `Groesse` — sichtbarer
+Text in Google-Snippet und Blog-Übersicht, während alle vierzehn Bestandsartikel
+dort korrekte Umlaute führen.
+
+Ein pauschales Suchen-und-Ersetzen ist aber **falsch**. Im selben Artikel sind
+`fuenfzig` (Variable), `VerzoegerungsTabelle` (Komponentenname) und
+`…/faustformel-fuer-reaktions-und-bremsweg` (Quell-URL) korrekt in ASCII und
+müssen es bleiben. Wer sie mitersetzt, zerlegt den Build — und der Diff sieht
+aus wie eine Rechtschreibkorrektur.
+
+**Prüfung vor der Auslieferung**, über alle Textdateien eines Artikels:
+
+```
+grep -noiE "\b(fuer|ueber|groess|verzoeger|waehrend|koenn|muess|laeng|naechst|zurueck|hoeher|moegl|fuenf|haett|waer)" <dateien>
+```
+
+Jeder Treffer wird **einzeln eingeordnet**: sichtbare Prosa → korrigieren;
+Bezeichner, Dateiname, URL, Komponentenname → stehen lassen.
+
+**Korrigiert wird an der Quelle, nicht im Repo.** Chat-Claude liefert eine neue
+Quelldatei mit neuem Namen; Code-Claude repariert Vorlagen nie selbst. Sonst
+tragen Repo und Vorlage verschiedene Stände, und die nächste Welle holt den
+Fehler zurück.
 
 ## Dark-Mode-Checkliste für SVG-Grafiken (die zentrale Fehlerquelle)
 
@@ -463,6 +555,25 @@ Konsequenzen für die Mechanik:
 - Beim Wechsel des Titelbild-Motivs nach der Auswahl durch Karsten **müssen `alt` und
   `caption` mitgeändert werden** — sie beschreiben das Motiv, nicht den Artikel.
 
+## Ein liegengebliebener Prompt altert mit dem Repo (Lehre Welle 80)
+
+Der Ausroll-Prompt für Artikel 15 entstand am 11.08. und wurde am 13.08.
+ausgeführt — dazwischen lagen sechzehn Wellen. In dieser Zeit war er still
+veraltet:
+
+- der genannte Ausgangs-HEAD existierte längst nicht mehr als Spitze
+- er enthielt `cd /g/projekte/rechenfix` **kleingeschrieben** — genau der
+  Fehler, der zwei React-Instanzen und Prerender-Fehler auf allen Blogseiten
+  erzeugt
+- die prebuild-Kette war von 9 auf 12 Glieder gewachsen, mit neuen Wächtern und
+  einer dauerhaften Warnung, die im Prompt nicht eingeordnet war
+- zwei Erwartungswerte waren nicht mehr erreichbar
+
+**Vor dem Ausführen eines Prompts, der älter als ein paar Wellen ist, wird er
+neu gemessen** — Ausgangs-HEAD, Pfadschreibweise, alle Zahlen, die
+Wächterausgabe. Und er bekommt einen neuen Dateinamen; die alte Fassung bleibt
+unangetastet.
+
 ## Geänderte Quelldateien bekommen einen NEUEN Namen (Lehre Welle 65)
 
 Die Regel galt bisher nur für Prompt-Dateien. Sie gilt für **jede** Quelldatei, die an Karsten
@@ -502,6 +613,16 @@ steht. Das ist beabsichtigt — es ist Fließtext des Artikels.
 übernommen.** Dieselbe Methode gilt für die Rechnerposition (Wörter vor `RechnerLoader` geteilt
 durch Gesamtwörter); Zielkorridor ist rund ein Drittel, gemessene Werte der letzten Wellen
 liegen zwischen 29 und 40 Prozent.
+
+**Nachtrag v9:** Diese Regel wurde bei Artikel 15 gebrochen — mit einem
+`sed`-Einzeiler gezählt statt mit der verbindlichen Methode. Ergebnis: 3.609
+statt 3.128 Wörter und 51 statt 54 Prozent Rechnerposition, weil der Filter
+JSX-Attributtexte mitzählte. Der Skill lag beide Male richtig.
+
+Eine Zählung mit einem anderen Werkzeug ist keine Zählung nach dieser Methode,
+auch wenn sie ähnlich aussieht. Die Zahl im Prompt und die Zahl im
+Verifikationsbericht müssen aus **demselben** Verfahren stammen, sonst prüft man
+zwei verschiedene Dinge gegeneinander.
 
 ## Sichtbares Datum (`ArtikelDatum`) — feste Zutat jeder Artikelseite
 
@@ -543,6 +664,21 @@ Pro Welle prüfen (`web_fetch` NICHT nutzen — liefert stale Cache; Live-Verify
   Messung wie Wortzahl und Quellen (Lehre Welle 67).
 - **Verhaltensändernde Wellen:** Netzwerk-Beleg von Karsten eingefordert? (siehe „Eine grüne
   Repo-Prüfung sagt nichts über das Laufzeitverhalten")
+
+**Erwartungswert und Messverfahren aus derselben Quelle (Lehre Welle 80).** Zwei
+Werte im Ausroll-Prompt für Artikel 15 waren arithmetisch unerreichbar:
+
+- `mdx-components.tsx` sollte von 66 auf 76 Zeilen mit dem Grafik-Pfad steigen.
+  Tatsächlich sind **alle** Treffer Import-Zeilen; die Registrierung führt nur
+  den nackten Namen. Richtig: 66 → 71 bei fünf neuen Grafiken.
+- „registriert 2" pro Grafik stammte aus zeilenweiser Zählung (`grep -c`), stand
+  aber in einer PowerShell-Prüfung mit `-AllMatches`, die Vorkommen zählt. Die
+  Import-Zeile enthält den Namen zweimal, also 3 statt 2.
+
+Beide Werte waren für sich richtig — nur nicht zusammen mit dem Verfahren, das
+sie prüfen sollte. **Vor dem Schreiben eines Erwartungswerts denselben Befehl
+gegen die Bestandsdatei laufen lassen**, mit dem später geprüft wird. Ein aus
+einem anderen Werkzeug übernommener Wert ist so ungemessen wie ein geschätzter.
 
 **Prüf-Grep-Fallstrick:** `grep -A1` auf die H1 erwischt nur die (leere) Folgezeile — zwischen H1 und `<ArtikelDatum>` steht eine MDX-Pflicht-Leerzeile. Für „Datum nach H1" besser `grep -A2` oder direkt `grep -n "ArtikelDatum datum"`. (Eigener Fehlalarm bei Welle-30-Verifikation.)
 

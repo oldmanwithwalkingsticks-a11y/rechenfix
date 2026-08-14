@@ -8,6 +8,35 @@
 
 ---
 
+## 14.08.2026 — Welle 99: blog-builder Skill v9 — ✅ ABGESCHLOSSEN
+
+Vier Lehren aus Artikel 15 kodifiziert, `##`-Überschriften 28 → 32.
+
+- **Grafik-Geometrie als zweite zentrale Fehlerquelle** neben dem Dark Mode. Eigener Abschnitt mit
+  Prüfliste für Kopf- und Fußbereich, Balkenenden, Textbreite und Kurven — und der Kernregel, dass
+  die zu prüfende Strecke die **Ausdehnung des Textes** ist, nicht ein Punkt an seinem Anfang.
+- **Umlaute in Prosa, ASCII in Bezeichnern.** Mit der Warnung vor dem naheliegenden Fehler: Ein
+  pauschales Ersetzen hätte `fuenfzig`, `VerzoegerungsTabelle` und eine Quell-URL zerlegt, und der
+  Diff hätte wie eine Rechtschreibkorrektur ausgesehen.
+- **Erwartungswert und Messverfahren aus derselben Quelle.** Beide Werte in Welle 80 waren für
+  sich richtig, nur nicht zusammen mit dem Verfahren, das sie prüfen sollte.
+- **Haltbarkeit liegengebliebener Prompts** — der Ausroll-Prompt lag sechzehn Wellen und war in
+  vier Punkten still veraltet.
+
+**Die Wortzahl-Regel aus v6 wurde gebrochen**, nicht aus Nachlässigkeit, sondern weil in einem
+anderen Werkzeug gezählt wurde. Der Abschnitt ist um den Punkt ergänzt, dass eine Zählung mit
+anderem Werkzeug keine Zählung nach dieser Methode ist — auch wenn sie ähnlich aussieht. Das ist
+der eigentliche Grund, warum diese Lehre in den Skill gehört: Eine Regel, die man in einem anderen
+Werkzeug umgeht, ist keine.
+
+**Offen:** Die Lehren aus den Wellen 82 bis 98 betreffen Configs, SSOTs und Wächter, nicht den
+Blog. Sie gehören in `rechner-builder` und brauchen eine eigene Runde.
+
+**Manueller Schritt:** Der Skill muss nach dem Commit in die Claude.ai-Skills-Oberfläche
+übertragen werden, sonst arbeitet Chat-Claude weiter mit v8.
+
+---
+
 ## 14.08.2026 — Welle 98: Prüfvermerk statt Datenalter für die trägen Preis-SSOTs — ✅ ABGESCHLOSSEN
 
 Seit Welle 94 warnte jeder Build zu `STROMPREIS_META.stand`. **Der Wert ist korrekt:** Die
