@@ -13,67 +13,7 @@ export const gesundheitRechner: RechnerConfig[] = [
     metaDescription: 'BMI berechnen \u2713 Sofort-Ergebnis mit WHO-Einordnung \u2713 F\u00FCr M\u00E4nner & Frauen \u2713 Kostenlos. Jetzt Ihren BMI ermitteln! ✓ Mit KI-Erklärung.',
     keywords: ['bmi rechner', 'bmi berechnen', 'body mass index', 'bmi tabelle', 'bmi formel', 'idealgewicht'],
     icon: '\u2764\uFE0F',
-    formel: 'BMI = Gewicht (kg) \u00F7 Gr\u00F6\u00DFe (m)\u00B2',
     beispiel: 'Beispiel: 75 kg bei 1,75 m = 75 \u00F7 (1,75 \u00D7 1,75) = 75 \u00F7 3,0625 = 24,49 (Normalgewicht)',
-    erklaerung: `**Was ist der BMI?**
-
-Der Body Mass Index (BMI) ist eine Maßzahl, die das Verhältnis von Körpergewicht zu Körpergröße beschreibt. Er wurde im 19. Jahrhundert vom belgischen Mathematiker Adolphe Quetelet entwickelt und ist heute weltweit die gängigste Methode zur groben Einschätzung des Körpergewichts.
-
-Der BMI wird von der Weltgesundheitsorganisation (WHO) als Screening-Werkzeug empfohlen, um festzustellen, ob eine Person unter-, normal- oder übergewichtig ist. Ärzte, Ernährungsberater und Krankenkassen nutzen den BMI als erste Orientierung bei der Bewertung des Gesundheitszustands.
-
-Dabei ist es wichtig zu verstehen, dass der BMI ein vereinfachtes Maß ist. Er unterscheidet nicht zwischen Muskelmasse und Fettmasse und berücksichtigt weder die Körperfettverteilung noch individuelle Faktoren wie Knochenbau oder ethnische Herkunft.
-
-**BMI-Formel**
-
-Die Berechnung des BMI ist denkbar einfach:
-
-**BMI = Körpergewicht in Kilogramm geteilt durch die Körpergröße in Metern zum Quadrat.**
-
-In der mathematischen Schreibweise: BMI = kg / m². Dabei wird die Körpergröße in Metern angegeben und mit sich selbst multipliziert (quadriert). Das Körpergewicht in Kilogramm wird dann durch dieses Ergebnis geteilt.
-
-Ein konkretes Rechenbeispiel: Eine Person wiegt 80 kg und ist 1,80 m groß. Die Berechnung lautet: 1,80 × 1,80 = 3,24. Dann: 80 ÷ 3,24 = 24,69. Der BMI beträgt also 24,69 — das liegt im Bereich Normalgewicht.
-
-**BMI-Tabelle nach WHO**
-
-Die Weltgesundheitsorganisation (WHO) hat folgende Einteilung für Erwachsene festgelegt:
-
-- **Untergewicht:** BMI unter 18,5 — Kann auf Mangelernährung oder eine Essstörung hinweisen. Erhöhtes Risiko für Osteoporose und Immunschwäche.
-- **Normalgewicht:** BMI 18,5 bis 24,9 — Der ideale Bereich. Das geringste Risiko für gewichtsbedingte Erkrankungen.
-- **Übergewicht (Präadipositas):** BMI 25,0 bis 29,9 — Leicht erhöhtes Risiko für Herz-Kreislauf-Erkrankungen und Diabetes Typ 2.
-- **Adipositas Grad I:** BMI 30,0 bis 34,9 — Deutlich erhöhtes Gesundheitsrisiko. Ärztliche Beratung wird empfohlen.
-- **Adipositas Grad II:** BMI 35,0 bis 39,9 — Hohes Gesundheitsrisiko. Behandlung dringend empfohlen.
-- **Adipositas Grad III:** BMI 40,0 und höher — Sehr hohes Gesundheitsrisiko (morbide Adipositas). Sofortige medizinische Betreuung ratsam.
-
-Für Kinder und Jugendliche gelten andere Referenzwerte, da sich der BMI mit dem Wachstum verändert — dort sind BMI-Perzentilen nach Alter und Geschlecht (z. B. nach Kromeyer-Hauschild) maßgeblich. Für Erwachsene bleibt die WHO bei der einheitlichen Normalgewichts-Spanne von **18,5 bis 24,9** unabhängig vom Alter. Die in diesem Rechner zusätzlich angezeigte altersabhängige Staffelung (z. B. 19–24 für 19- bis 24-Jährige, etwa 24–29 für 65+) folgt einer Konvention aus der ernährungswissenschaftlichen Literatur (**NRC 1989** — National Research Council, *Diet and Health*) und ist als zusätzliche Orientierung zu verstehen, nicht als WHO-Empfehlung.
-
-**Anwendungsfälle: Wann brauchen Sie den BMI-Rechner?**
-
-Der BMI-Rechner ist als Orientierungswert in vielen Lebenssituationen hilfreich — hier fünf typische Anwendungsfälle:
-
-- **Vorbereitung auf den Hausarzt-Termin.** Vor Vorsorgeuntersuchungen oder Routinechecks ist es nützlich, den eigenen BMI zu kennen. Viele Hausärzte nutzen den BMI als Erstindikator. Wer den Wert vorab berechnet, kann beim Termin gezielt Fragen stellen — etwa zur Bedeutung der Kategorie oder zu weiteren Untersuchungen wie Blutdruck oder Blutzucker.
-- **Sportler und muskulöse Personen.** Wer regelmäßig Krafttraining macht, hat oft einen BMI im Übergewichtsbereich, ohne tatsächlich übergewichtig zu sein. Muskelgewebe ist schwerer als Fettgewebe. Hier ist der BMI alleine wenig aussagekräftig — der Körperfettanteil oder der Taillenumfang sind bessere Indikatoren. Der Rechner zeigt zumindest den Wert; die Einordnung sollte aber im Kontext erfolgen.
-- **Senioren ab 65 Jahren.** Im Alter verändert sich die Körperzusammensetzung — Muskelmasse nimmt ab, Fettanteil zu. Studien zeigen, dass ein leicht höherer BMI (etwa 24–29) bei älteren Menschen mit besserer Gesundheit und höherer Lebenserwartung verbunden sein kann. Dieser Rechner berücksichtigt das Alter und zeigt einen alters-adjustierten Optimal-Bereich.
-- **Während Schwangerschaft und Stillzeit.** Während der Schwangerschaft ist der BMI nicht aussagekräftig — die natürliche Gewichtszunahme verfälscht den Wert. Sinnvoll ist er aber **vor** der Schwangerschaft (Ausgangs-BMI als Basis für die empfohlene Gewichtszunahme) und einige Monate **nach** der Geburt. Der Rechner kann hier Orientierung bieten, ärztliche Beratung ersetzt er nicht.
-- **Eltern, die den BMI ihres Kindes prüfen.** Bei Kindern und Jugendlichen unter 18 Jahren gelten **nicht** die WHO-Erwachsenenkategorien, sondern altersspezifische BMI-Perzentilen (z. B. nach Kromeyer-Hauschild). Dieser Rechner erkennt Kinder automatisch und zeigt einen entsprechenden Hinweis statt einer falschen Kategorisierung. Eine fundierte Einschätzung ist nur über die Kinderärzt:in möglich.
-
-**Häufige Fehler bei der BMI-Berechnung**
-
-- **Größe in Zentimetern statt Metern.** Der häufigste Eingabefehler: 175 statt 1,75 wird in der Formel kg ÷ m² eingesetzt. Das ergibt absurde Werte. Manche Rechner (auch dieser hier) erwarten cm — bei eigener Berechnung mit der Formel aber unbedingt in Metern rechnen, sonst entsteht ein BMI im Promille-Bereich.
-- **Muskelmasse nicht berücksichtigt.** Ein durchtrainierter Sportler mit BMI 28 ist nicht zwingend übergewichtig — Muskelgewebe wiegt mehr als Fettgewebe. Wer regelmäßig Kraftsport macht, sollte den BMI durch Messung des Körperfettanteils ergänzen, etwa mit einer Bioimpedanz-Waage oder beim Hausarzt.
-- **Bauchumfang nicht gemessen.** Der BMI sagt nichts über die Fettverteilung. Viszerales Bauchfett ist gesundheitlich relevanter als Fett an Hüfte und Oberschenkel. Faustregel: Taillenumfang bei Männern unter 94 cm, bei Frauen unter 80 cm. Wer einen Normal-BMI hat, aber starken Bauchumfang, sollte das ärztlich abklären lassen.
-- **Alter ignoriert.** Der WHO-Optimal-Bereich (18,5–24,9) gilt für alle Erwachsenen — manche Studien empfehlen aber bei Senioren leicht höhere Werte (24–29 bei 65+). Wer den BMI ohne Alterskontext bewertet, übersieht diese Nuance. Dieser Rechner berücksichtigt das Alter, sofern eingegeben.
-- **Erwachsenen-Tabelle bei Kindern angewendet.** Ein zehnjähriges Kind mit BMI 19 ist **nicht** automatisch übergewichtig — bei Kindern gelten Perzentilen nach Alter und Geschlecht. Wer die WHO-Erwachsenenkategorien auf Kinder anwendet, kommt zu falschen Schlüssen. Bei Sorgen immer mit der Kinderärzt:in sprechen.
-
-**Kritik am BMI — wie aussagekräftig ist er?**
-
-Obwohl der BMI weltweit verwendet wird, hat er einige bekannte Schwächen:
-
-- **Keine Unterscheidung zwischen Fett und Muskeln:** Ein durchtrainierter Sportler mit viel Muskelmasse kann einen hohen BMI haben, obwohl er sehr gesund ist. Muskeln sind schwerer als Fettgewebe.
-- **Keine Berücksichtigung der Fettverteilung:** Bauchfett (viszerales Fett) ist deutlich gefährlicher als Fett an Hüften und Oberschenkeln. Der BMI sagt darüber nichts aus. Der Taillenumfang oder das Taille-Hüft-Verhältnis sind hier aussagekräftiger.
-- **Alter und Geschlecht:** Frauen haben von Natur aus einen höheren Körperfettanteil als Männer. Im Alter verändert sich die Körperzusammensetzung — weniger Muskeln, mehr Fett — bei gleichbleibendem Gewicht.
-- **Ethnische Unterschiede:** Studien zeigen, dass verschiedene ethnische Gruppen unterschiedliche Gesundheitsrisiken bei gleichen BMI-Werten haben.
-
-Trotz dieser Einschränkungen bleibt der BMI ein nützliches Screening-Werkzeug für die breite Bevölkerung. Für eine individuelle Gesundheitsbewertung sollte er aber immer durch weitere Untersuchungen ergänzt werden, etwa durch die Messung des Körperfettanteils, des Taillenumfangs oder Blutuntersuchungen.`,
     // W19-Goldstandard: bmi-rechner auf volle Tiefe (~1.500 W, 10 Bausteine), Leitformat
     // „Risiko- & Kontext-Seite" — Diagramm (BMI-Verteilung DE) + Risiko-Kontext. SENSITIV:
     // WHO-Klassen rein deskriptiv, KEINE Diät-/Kalorien-/Gewichtsziel-Zahlen, keine Wertung,
@@ -234,31 +174,7 @@ Trotz dieser Einschränkungen bleibt der BMI ein nützliches Screening-Werkzeug 
     metaDescription: 'Raucher-Rechner: Berechnen Sie, wie viel Geld Sie fürs Rauchen ausgeben — und was Sie sich stattdessen leisten könnten. Kostenlos.',
     keywords: ['raucher rechner', 'kosten rauchen', 'zigaretten kosten', 'rauchen kosten pro monat', 'rauchen kosten pro jahr', 'rauchen aufhören sparen', 'zigarettenpreis rechner', 'was kostet rauchen', 'raucher kosten', 'rauchfrei rechner'],
     icon: '🚬',
-    formel: 'Kosten pro Tag = (Zigaretten pro Tag ÷ Zigaretten pro Packung) × Preis pro Packung',
     beispiel: 'Beispiel: 15 Zigaretten/Tag bei 9,00 €/Packung (20 Stück) = 6,75 € pro Tag = 2.464 € pro Jahr.',
-    erklaerung: `**Was zeigt der Raucher-Rechner?**
-
-Der Raucher-Rechner macht die wahren Kosten des Rauchens sichtbar. Während eine einzelne Schachtel Zigaretten mit 8 bis 10 Euro überschaubar wirkt, summieren sich die Ausgaben über Monate und Jahre zu erstaunlichen Beträgen. Der Rechner zeigt nicht nur die reinen Kosten, sondern auch, was Sie sich von dem Geld stattdessen leisten könnten.
-
-**Was kostet Rauchen in Deutschland?**
-
-Der durchschnittliche Zigarettenpreis in Deutschland liegt 2026 bei rund 8,90 bis 10,00 Euro pro Packung (20 Stück), im Schnitt etwa 9,20 Euro. Grund für den Anstieg ist unter anderem die letzte Stufe des Tabaksteuermodernisierungsgesetzes (TaStMoG), die zum 01.01.2026 in Kraft getreten ist. Wer eine Schachtel am Tag raucht, gibt damit rund 3.350 Euro pro Jahr aus. Bei einer halben Packung (10 Zigaretten) sind es immer noch rund 1.680 Euro jährlich. Über ein Raucherleben von 20 bis 30 Jahren kommen so 33.000 bis 100.000 Euro zusammen.
-
-**Der Zinseszins-Effekt**
-
-Besonders eindrucksvoll ist der Investment-Vergleich: Hätten Sie das Geld statt in Zigaretten an der Börse mit einer durchschnittlichen Rendite von 5 Prozent pro Jahr angelegt, wäre dank des Zinseszins-Effekts deutlich mehr daraus geworden. Aus 3.000 Euro jährlicher Sparrate werden nach 20 Jahren über 100.000 Euro — ein eindrucksvoller Beweis, wie teuer das Rauchen wirklich ist.
-
-**Steigende Preise: Der Trend geht weiter**
-
-Die Tabaksteuer in Deutschland wurde zuletzt 2022 erhöht und steigt bis 2026 in mehreren Stufen weiter an. Experten erwarten, dass eine Schachtel Markenzigaretten bis 2027 die 10-Euro-Marke überschreiten wird. Das bedeutet: Die tatsächlichen Kosten über die nächsten Jahre werden noch höher ausfallen als die aktuelle Hochrechnung.
-
-**Gesundheitliche Kosten nicht eingerechnet**
-
-Der Rechner zeigt nur die direkten Ausgaben für Zigaretten. Nicht berücksichtigt sind die indirekten Kosten: höhere Krankenversicherungsbeiträge, Zahnbehandlungen, Medikamente, Arbeitsausfälle und eine statistisch kürzere Lebenserwartung. Laut Deutschem Krebsforschungszentrum (DKFZ) verursacht Rauchen in Deutschland jährlich volkswirtschaftliche Kosten von über 97 Milliarden Euro.
-
-**Aufhören lohnt sich — finanziell und gesundheitlich**
-
-Schon wenige Wochen nach dem Rauchstopp verbessern sich Kreislauf und Lungenfunktion. Finanziell spüren Sie den Unterschied sofort: Das eingesparte Geld können Sie in einen Sparplan, Urlaub oder andere Wünsche investieren. Die Bundeszentrale für gesundheitliche Aufklärung (BZgA) bietet unter der kostenlosen Nummer 0800 8 31 31 31 Beratung und Unterstützung beim Aufhören.`,
     faq: [
       {
         frage: 'Wie viel kostet eine Schachtel Zigaretten in Deutschland?',
@@ -408,64 +324,7 @@ Schon wenige Wochen nach dem Rauchstopp verbessern sich Kreislauf und Lungenfunk
     metaDescription: 'Schlafrechner: Wann ins Bett gehen, um ausgeruht aufzuwachen? Optimale Schlafenszeit nach 90-Minuten-Schlafzyklen berechnen. Kostenlos.',
     keywords: ['schlafrechner', 'optimale schlafenszeit', 'schlafzyklen berechnen', 'wann ins bett gehen', 'schlaf rechner', 'schlafphasen', 'rem schlaf', 'wie viel schlaf brauche ich', 'schlafzyklen', 'aufwachzeit berechnen'],
     icon: '😴',
-    formel: 'Schlafenszeit = Aufwachzeit − (Anzahl Zyklen × 90 Min.) − Einschlafzeit',
     beispiel: 'Aufwachzeit 6:00 Uhr, 5 Zyklen (7,5 Std.), 15 Min. Einschlafzeit → Schlafenszeit: 22:15 Uhr. Oder 4 Zyklen (6 Std.) → 23:45 Uhr.',
-    erklaerung: `**Schlafrechner — Wann sollten Sie ins Bett gehen?**
-
-Der Schlafrechner berechnet Ihre optimale Schlafenszeit basierend auf Schlafzyklen. Jeder Schlafzyklus dauert etwa 90 Minuten und besteht aus verschiedenen Schlafphasen — Leichtschlaf, Tiefschlaf und REM-Schlaf. Wer zwischen zwei Zyklen aufwacht, fühlt sich deutlich erholter als jemand, der mitten im Tiefschlaf geweckt wird.
-
-**So funktioniert die Berechnung**
-
-Der Rechner nimmt Ihre gewünschte Aufwachzeit und zählt rückwärts in 90-Minuten-Schritten. Zusätzlich wird eine Einschlafzeit von durchschnittlich 15 Minuten berücksichtigt. So erhalten Sie mehrere optimale Schlafenszeiten — je nachdem, wie viele Schlafzyklen Sie durchlaufen möchten.
-
-Beispiel: Sie möchten um 6:00 Uhr aufwachen. Die idealen Schlafenszeiten wären:
-- 21:00 Uhr (6 Zyklen = 9 Stunden Schlaf)
-- 22:30 Uhr (5 Zyklen = 7,5 Stunden Schlaf)
-- 00:00 Uhr (4 Zyklen = 6 Stunden Schlaf)
-- 01:30 Uhr (3 Zyklen = 4,5 Stunden Schlaf)
-
-Jeweils plus 15 Minuten Einschlafzeit, also 20:45, 22:15, 23:45 und 01:15 Uhr.
-
-**Die 5 Schlafphasen erklärt**
-
-Jeder 90-Minuten-Zyklus durchläuft fünf Phasen:
-
-1. **Einschlafphase (N1):** Leichter Übergang vom Wachzustand. Dauert 5–10 Minuten. Sie können leicht geweckt werden und haben manchmal das Gefühl zu fallen.
-
-2. **Leichtschlaf (N2):** Herzfrequenz und Körpertemperatur sinken. Das Gehirn produziert sogenannte Schlafspindeln — kurze Aktivitätsausbrüche, die bei der Gedächtnisbildung helfen. Etwa 50% der Nacht verbringen Sie in dieser Phase.
-
-3. **Tiefschlaf (N3):** Die wichtigste Phase für körperliche Erholung. Wachstumshormone werden ausgeschüttet, das Immunsystem wird gestärkt, Zellen repariert. Wer in dieser Phase geweckt wird, fühlt sich besonders desorientiert und müde.
-
-4. **Übergangsphase:** Kurzer Übergang zurück zum leichteren Schlaf vor der REM-Phase.
-
-5. **REM-Schlaf:** Die Traumphase. Die Augen bewegen sich schnell (Rapid Eye Movement), das Gehirn ist fast so aktiv wie im Wachzustand. Hier werden Erinnerungen konsolidiert und Emotionen verarbeitet. Die REM-Phasen werden im Laufe der Nacht länger — der letzte Zyklus vor dem Aufwachen hat die längste REM-Phase.
-
-**Wie viel Schlaf brauchen Sie?**
-
-Die optimale Schlafdauer hängt vom Alter ab. Die Empfehlungen der National Sleep Foundation und der WHO sind:
-
-| Altersgruppe | Empfohlene Schlafdauer |
-|---|---|
-| Schulkinder (6–13) | 9–11 Stunden |
-| Teenager (14–17) | 8–10 Stunden |
-| Erwachsene (18–64) | 7–9 Stunden |
-| Senioren (65+) | 7–8 Stunden |
-
-Für die meisten Erwachsenen bedeutet das 5 Schlafzyklen (7,5 Stunden) — das ist der optimale Wert, der sowohl genug Tiefschlaf als auch ausreichend REM-Schlaf garantiert.
-
-**90-Minuten-Zyklus: Mittelwert, keine Konstante**
-
-Dieser Rechner nutzt die verbreitete 90-Minuten-Annahme für einen kompletten Schlafzyklus. In der Schlafforschung ist das ein **Mittelwert** — die tatsächliche Zykluslänge variiert individuell zwischen **70 und 120 Minuten** und kann sich im Laufe der Nacht sogar pro Zyklus unterscheiden (frühe Zyklen sind meist tiefschlaf-lastig, spätere REM-lastig). Die 90-Minuten-Einteilung liefert eine praktikable Annäherung, keine exakte Zielzeit.
-
-**Tipps für besseren Schlaf**
-
-Die sogenannte Schlafhygiene hat großen Einfluss auf Ihre Schlafqualität:
-
-- **Regelmäßigkeit:** Gehen Sie jeden Tag zur gleichen Zeit ins Bett — auch am Wochenende. Ihr Körper gewöhnt sich an den Rhythmus.
-- **Bildschirme meiden:** Das blaue Licht von Smartphone und Laptop unterdrückt die Melatonin-Produktion. Mindestens 30 Minuten vor dem Schlafengehen Bildschirme weglegen.
-- **Temperatur:** Die ideale Schlafzimmertemperatur liegt bei 16–18°C. Ein kühler Raum fördert das Einschlafen.
-- **Koffein:** Vermeiden Sie Kaffee und koffeinhaltige Getränke nach 14 Uhr. Die Halbwertszeit von Koffein beträgt 5–6 Stunden.
-- **Alkohol:** Obwohl Alkohol müde macht, stört er die Schlafarchitektur und unterdrückt den REM-Schlaf.`,
     // W19-Goldstandard: schlaf-rechner auf volle Tiefe (15 Bausteine, ~1.560 W), Leitformat
     // „tabelle" (4× dominant). Wellbeing-Handling (Gesundheit, moderat): neutral-informativ,
     // KEINE Schlafmittel-Empfehlung, kein Leistungsdruck, ärztliche Abklärung bei anhaltenden
@@ -674,33 +533,7 @@ Die sogenannte Schlafhygiene hat großen Einfluss auf Ihre Schlafqualität:
     metaDescription: 'Kalorienbedarf berechnen: Grundumsatz und Gesamtumsatz mit der Mifflin-St Jeor-Formel ✓ Aktivitätslevel ✓ Makronährstoffe ✓ KI-Erklärung.',
     keywords: ['kalorienrechner', 'kalorienbedarf berechnen', 'grundumsatz berechnen', 'gesamtumsatz', 'mifflin st jeor', 'kalorienverbrauch', 'kcal rechner', 'täglicher kalorienbedarf'],
     icon: '🍎',
-    formel: 'Grundumsatz (Männer) = (10 × Gewicht) + (6,25 × Größe) − (5 × Alter) + 5 | Grundumsatz (Frauen) = (10 × Gewicht) + (6,25 × Größe) − (5 × Alter) − 161 | Gesamtumsatz = Grundumsatz × Aktivitätsfaktor',
     beispiel: 'Beispiel: Frau, 30 Jahre, 165 cm, 65 kg, leicht aktiv → Grundumsatz = 1.354 kcal → Gesamtumsatz = 1.862 kcal',
-    erklaerung: `Der Kalorienrechner berechnet Ihren individuellen täglichen Kalorienbedarf mithilfe der **Mifflin-St Jeor-Formel** — der von Ernährungswissenschaftlern weltweit empfohlenen Standardformel.
-
-**Was ist der Grundumsatz und warum ist er wichtig?**
-
-Der Grundumsatz (auch Basalmetabolismus oder BMR) ist die Energiemenge, die Ihr Körper in völliger Ruhe benötigt, um lebenswichtige Funktionen aufrechtzuerhalten: Atmung, Herzschlag, Zellerneuerung, Gehirnfunktion und Temperaturregulation. Er macht bei den meisten Menschen **60 bis 75 Prozent** des gesamten täglichen Energieverbrauchs aus. Der Grundumsatz wird maßgeblich von Alter, Geschlecht, Körpergröße und Gewicht bestimmt. Muskelmasse erhöht den Grundumsatz, da Muskelzellen selbst in Ruhe mehr Energie verbrauchen als Fettzellen.
-
-**Mifflin-St Jeor vs. Harris-Benedict: Welche Formel ist genauer?**
-
-Die Harris-Benedict-Formel stammt aus dem Jahr 1919 und wurde lange als Standard verwendet. Studien haben jedoch gezeigt, dass die **Mifflin-St Jeor-Formel** (entwickelt 1990) den tatsächlichen Grundumsatz deutlich genauer vorhersagt — insbesondere bei übergewichtigen Personen. Eine Metaanalyse der American Dietetic Association bestätigte 2005, dass die Mifflin-St Jeor-Formel die zuverlässigsten Ergebnisse liefert und empfahl sie als bevorzugte Methode. Auch die WHO orientiert sich an dieser Berechnungsmethode.
-
-Die Formel berücksichtigt vier Schlüsselfaktoren: Körpergewicht in Kilogramm, Körpergröße in Zentimetern, Alter in Jahren und Geschlecht. Die unterschiedliche Berechnung für Männer und Frauen spiegelt die durchschnittlich höhere Muskelmasse und den damit verbundenen höheren Energieverbrauch bei Männern wider.
-
-**Wie beeinflusst das Aktivitätslevel den Kalorienbedarf?**
-
-Der Gesamtumsatz ergibt sich aus dem Grundumsatz multipliziert mit einem Aktivitätsfaktor (PAL-Wert: Physical Activity Level). Unser Rechner nutzt die in Fitness- und Ernährungsliteratur verbreiteten **Harris-Benedict-Faktoren** von 1,2 (überwiegend sitzend) bis 1,9 (extreme körperliche Belastung). Die DGE (Deutsche Gesellschaft für Ernährung) setzt in ihren Referenzwerten etwas höhere PAL-Stufen von etwa 1,4 bis 2,2–2,4 an — beide Konventionen sind wissenschaftlich etabliert, die DGE-Werte fallen rund 10–15 % höher aus. Bereits ein Wechsel von \"kaum aktiv\" zu \"leicht aktiv\" kann den täglichen Kalorienbedarf um **200 bis 300 kcal** erhöhen. Regelmäßige Bewegung steigert nicht nur den akuten Energieverbrauch, sondern erhöht langfristig auch den Grundumsatz durch den Aufbau von Muskelmasse.
-
-**Energiebedarf und Gewicht — gesund und nachhaltig**
-
-Wer abnehmen möchte, nimmt weniger Energie auf, als der Körper verbraucht. Wie groß eine sinnvolle Veränderung ist, hängt von der individuellen Situation ab und sollte mit ärztlicher oder ernährungsfachlicher Begleitung bestimmt werden — nicht über pauschale Richtwerte. Wichtig ist vor allem: Die tägliche Kalorienaufnahme sollte **niemals dauerhaft unter den Grundumsatz fallen**. Bei zu starker Einschränkung schaltet der Körper in einen Sparmodus, der das Abnehmen erschwert und einen Jo-Jo-Effekt begünstigt; zudem können Müdigkeit, Haarausfall und Hormonstörungen auftreten. Eine gesunde Gewichtsveränderung verläuft langsam und nachhaltig — ein ausgewogenes, langfristig durchhaltbares Essverhalten ist dafür hilfreicher als starre Kalorienvorgaben.
-
-**Makronährstoffverteilung: Protein, Kohlenhydrate, Fett**
-
-Neben der Gesamtkalorienmenge spielt die Verteilung auf die drei Makronährstoffe eine wichtige Rolle. Unser Rechner verwendet eine **proteinbetonte Verteilung** von **30 % Protein**, **45 % Kohlenhydrate** und **25 % Fett** — wie sie bei Abnehm- und Muskelaufbau-Zielen typischerweise empfohlen wird. Die allgemeine **DGE-Referenz** für Erwachsene liegt bei 10–20 % Protein, 50–55 % Kohlenhydrate und etwa 30 % Fett; für reine Erhaltungsernährung ohne sportliches Ziel ist die niedrigere Protein-Quote der DGE ausreichend. Proteine sind besonders wichtig beim Abnehmen, da sie die Muskelmasse erhalten und den Sättigungseffekt erhöhen. Kohlenhydrate liefern die Hauptenergie für Gehirn und Muskeln. Gesunde Fette sind essenziell für die Hormonproduktion und die Aufnahme fettlöslicher Vitamine.
-
-Für eine individuelle Anpassung der Makronährstoffverteilung — etwa bei einer ketogenen Diät oder bei Leistungssport — empfehlen wir die Rücksprache mit einem Ernährungsberater. Auch der [BMI-Rechner](/gesundheit/bmi-rechner) kann Ihnen helfen, Ihren aktuellen Körperstatus besser einzuordnen. Für eine ganzheitliche Betrachtung Ihrer Gesundheit werfen Sie auch einen Blick auf unseren [Schlafrechner](/gesundheit/schlaf-rechner), denn ausreichender Schlaf spielt eine entscheidende Rolle beim Stoffwechsel und der Gewichtsregulation.`,
     // contentBloecke (W19): „Bedarf-verstehen-Leitformat" — bewusst nüchtern bei
     // sensiblem Thema (Disordered-Eating-Prävention): KEINE Defizit-/Diät-Anleitung,
     // Fokus auf Energiebedarf verstehen. Prägend: vergleich (Grund- vs. Gesamtumsatz)
@@ -833,57 +666,7 @@ Für eine individuelle Anpassung der Makronährstoffverteilung — etwa bei eine
     metaDescription: 'Geburtstermin berechnen: Naegele-Regel mit letzter Periode, Empfängnisdatum oder Ultraschall ✓ SSW-Anzeige ✓ Meilenstein-Timeline ✓ Mit KI-Erklärung.',
     keywords: ['geburtstermin berechnen', 'geburtsterminrechner', 'entbindungstermin berechnen', 'ssw berechnen', 'schwangerschaftswoche berechnen', 'naegele regel', 'geburtstermin rechner', 'et berechnen'],
     icon: '🤰',
-    formel: 'Geburtstermin = Erster Tag der letzten Periode + 280 Tage (± Zykluskorrektur)',
     beispiel: 'Beispiel: Letzte Periode am 01.01.2026 bei 28-Tage-Zyklus → Geburtstermin: 08.10.2026 (SSW 40+0)',
-    erklaerung: `**Wie wird der Geburtstermin berechnet?**
-
-Der Geburtstermin wird in der Regel nach der **Naegele-Regel** berechnet, die nach dem deutschen Gynäkologen Franz Naegele (1778–1851) benannt ist. Diese bewährte Formel ist seit über 200 Jahren der Standard in der Geburtshilfe und wird von Frauenärzten weltweit verwendet.
-
-Die Berechnung geht vom **ersten Tag der letzten Regelblutung** aus und addiert **280 Tage** (40 Wochen). Das Ergebnis ist der voraussichtliche Entbindungstermin (ET). Bei einem abweichenden Zykluslänge wird eine Korrektur vorgenommen: Ist der Zyklus länger als 28 Tage, verschiebt sich der Termin nach hinten — ist er kürzer, nach vorne.
-
-**Was bedeutet SSW (Schwangerschaftswoche)?**
-
-Die Schwangerschaftswoche (SSW) wird ab dem ersten Tag der letzten Periode gezählt — also bereits vor der eigentlichen Empfängnis. Die Angabe erfolgt im Format „SSW X+Y", wobei X die vollendete Woche und Y die zusätzlichen Tage sind. Eine Schwangerschaft dauert rechnerisch **40 Wochen** oder **280 Tage**. Die tatsächliche Empfängnis findet in der Regel um den Eisprung herum statt, also etwa in **SSW 2+0**.
-
-Die Einteilung in Schwangerschaftswochen dient Ärzten und Hebammen zur Orientierung bei Vorsorgeuntersuchungen, Ultraschalltermine und der Beurteilung der kindlichen Entwicklung.
-
-**Drei Methoden zur Berechnung des Geburtstermins**
-
-Unser Rechner bietet drei verschiedene Berechnungsmethoden an:
-
-1. **Letzte Periode (Naegele-Regel):** Die gängigste Methode. Sie geben den ersten Tag Ihrer letzten Regelblutung und Ihre durchschnittliche Zykluslänge ein. Der Rechner addiert 280 Tage und korrigiert bei abweichender Zykluslänge.
-
-2. **Empfängnisdatum:** Wenn Sie das Datum der Empfängnis kennen (z. B. bei künstlicher Befruchtung oder Zyklusmonitoring), rechnet der Rechner vom Empfängnisdatum 266 Tage vorwärts. Das entspricht den 280 Tagen minus den 14 Tagen vor dem Eisprung.
-
-3. **Ultraschall-Messung:** Bei einer Ultraschalluntersuchung bestimmt der Arzt die aktuelle Schwangerschaftswoche anhand der Größe des Embryos. Der Rechner errechnet daraus den Beginn der Schwangerschaft und den voraussichtlichen Geburtstermin. Diese Methode gilt als die **genaueste**, insbesondere im ersten Trimester (SSW 8–12).
-
-**Wie genau ist der errechnete Geburtstermin?**
-
-Der errechnete Geburtstermin ist ein Richtwert. Statistisch kommen nur etwa **4 bis 5 Prozent** aller Babys tatsächlich am errechneten Termin zur Welt. Die meisten Geburten finden in einem Zeitfenster von **zwei Wochen vor bis zwei Wochen nach** dem ET statt. Erstgebärende tendieren dazu, etwas später zu entbinden, während Mehrgebärende häufiger vor dem Termin entbinden.
-
-Faktoren, die den tatsächlichen Geburtstermin beeinflussen, sind unter anderem: genetische Veranlagung, Alter der Mutter, Anzahl vorheriger Schwangerschaften, körperliche Aktivität und allgemeiner Gesundheitszustand.
-
-**Die drei Trimester der Schwangerschaft**
-
-Die Schwangerschaft wird in drei Trimester (Drittel) eingeteilt:
-
-- **1. Trimester (SSW 1–12):** Die Organe des Babys werden angelegt. In dieser Phase finden wichtige Vorsorgeuntersuchungen statt, darunter das Ersttrimester-Screening (SSW 11–14) mit Nackenfaltenmessung.
-
-- **2. Trimester (SSW 13–27):** Das Baby wächst deutlich und die ersten Bewegungen werden spürbar. Das Organscreening (Feindiagnostik) findet in SSW 19–22 statt. Viele Eltern erfahren in diesem Zeitraum das Geschlecht ihres Kindes.
-
-- **3. Trimester (SSW 28–40):** Das Baby reift aus und nimmt an Gewicht zu. Ab SSW 34 beginnt der **Mutterschutz** (6 Wochen vor dem ET). Die Vorbereitung auf die Geburt steht im Vordergrund.
-
-**Mutterschutz und Elterngeld**
-
-Der gesetzliche Mutterschutz in Deutschland beginnt **6 Wochen vor** dem errechneten Entbindungstermin und endet **8 Wochen danach** (bei Früh- und Mehrlingsgeburten 12 Wochen). Während des Mutterschutzes erhalten Arbeitnehmerinnen Mutterschaftsgeld von der Krankenkasse und einen Arbeitgeberzuschuss.
-
-Im Anschluss an den Mutterschutz können Eltern [Elterngeld](/finanzen/elterngeld-rechner) beantragen. Mit unserem Elterngeld-Rechner können Sie bereits vor der Geburt berechnen, wie hoch Ihr Elterngeld voraussichtlich ausfallen wird.
-
-**Vorsorgeuntersuchungen in der Schwangerschaft**
-
-Unser Meilenstein-Timeline zeigt Ihnen die wichtigsten Termine während der Schwangerschaft: vom Ersttrimester-Screening über das Organscreening und den Rhesusfaktor-Test bis hin zum Mutterschutz-Beginn und dem errechneten Geburtstermin. So behalten Sie alle wichtigen Termine im Blick.
-
-Für Ihre allgemeine Gesundheit während der Schwangerschaft kann auch unser [BMI-Rechner](/gesundheit/bmi-rechner) hilfreich sein, um Ihre Gewichtsentwicklung zu beobachten. Achten Sie zudem auf ausreichend Schlaf — unser [Schlafrechner](/gesundheit/schlaf-rechner) hilft Ihnen, die optimale Schlafenszeit zu finden.`,
     faq: [
       {
         frage: 'Wie genau ist der errechnete Geburtstermin?',
@@ -1051,45 +834,7 @@ Für Ihre allgemeine Gesundheit während der Schwangerschaft kann auch unser [BM
     metaDescription: 'Idealgewicht berechnen: Broca-Formel, Creff-Formel und BMI-basierte Spanne ✓ Altersangepasst ✓ Körperbau ✓ KI-Erklärung.',
     keywords: ['idealgewicht berechnen', 'idealgewicht rechner', 'broca formel', 'creff formel', 'normalgewicht berechnen', 'idealgewicht frau', 'idealgewicht mann', 'idealgewicht nach alter'],
     icon: '⚖️',
-    formel: 'Broca: (Größe − 100) × 0,90 (♂) / 0,85 (♀) | Creff: ((Größe − 100) + (Alter / 10)) × 0,9 × Körperbau-Koeffizient | BMI-basiert: BMI × (Größe in m)²',
     beispiel: 'Frau, 30 Jahre, 170 cm, normal → Broca: 59,5 kg | Creff: 66,0 kg | BMI-Spanne: 57,8–72,3 kg',
-    erklaerung: `**Was ist das Idealgewicht und wer definiert es?**
-
-Der Begriff „Idealgewicht" beschreibt das Körpergewicht, bei dem statistisch gesehen die höchste Lebenserwartung und das geringste Risiko für gewichtsbedingte Erkrankungen bestehen. Verschiedene Organisationen und Forscher haben im Laufe der Jahrzehnte unterschiedliche Formeln entwickelt, um das Idealgewicht zu berechnen. Keine dieser Formeln ist perfekt — jede hat ihre Stärken und Schwächen. Unser Rechner vergleicht drei etablierte Methoden, damit Sie ein umfassendes Bild erhalten.
-
-Wichtig zu verstehen: Das Idealgewicht ist kein festes Ziel, das jeder Mensch erreichen muss. Es ist ein **Orientierungswert**, der zusammen mit anderen Faktoren wie Körperfettanteil, Fitness und allgemeinem Wohlbefinden betrachtet werden sollte.
-
-**Die Broca-Formel: Einfach, aber veraltet**
-
-Die Broca-Formel ist die älteste und einfachste Methode zur Berechnung des Normalgewichts. Sie wurde 1871 vom französischen Chirurgen Paul Broca entwickelt: **Normalgewicht = Körpergröße in cm − 100**. Für das Idealgewicht wird ein geschlechtsspezifischer Abzug vorgenommen: Männer multiplizieren mit 0,90 (also 10 % Abzug), Frauen mit 0,85 (15 % Abzug).
-
-Der Vorteil der Broca-Formel liegt in ihrer Einfachheit. Der Nachteil: Sie berücksichtigt weder das Alter noch den Körperbau und wird bei sehr großen oder kleinen Menschen ungenau. Für Personen im Bereich von 155 bis 185 cm liefert sie dennoch brauchbare Richtwerte.
-
-**Die Creff-Formel: Alter und Körperbau einberechnet**
-
-Die Creff-Formel ist eine Weiterentwicklung der Broca-Formel und berücksichtigt zusätzlich das **Alter** und den **Körperbau** des Menschen. Die Formel lautet: **Idealgewicht = ((Größe − 100) + (Alter / 10)) × 0,9 × Körperbau-Koeffizient**. Der Körperbau-Koeffizient beträgt 0,9 für einen schmalen Körperbau, 1,0 für normal und 1,1 für kräftig.
-
-Diese Formel berücksichtigt die Tatsache, dass der Stoffwechsel sich mit dem Alter verändert und dass ein kräftiger Körperbau von Natur aus ein höheres Gewicht mit sich bringt. Die Creff-Formel ist damit differenzierter als die Broca-Formel, basiert jedoch nicht auf epidemiologischen Studien.
-
-**BMI-basierte Spanne: sinnvolle Orientierung für die Allgemeinbevölkerung**
-
-Die **BMI-basierte Idealgewicht-Spanne** basiert auf dem Body-Mass-Index, den die WHO als Standardmaß für die Gewichtsklassifikation etabliert hat. Ein BMI zwischen 18,5 und 24,9 gilt für Erwachsene als normalgewichtig. Für die breite Allgemeinbevölkerung ist diese Spanne eine sinnvolle erste Orientierung — sie ignoriert allerdings die Körperzusammensetzung (Muskel- vs. Fettmasse), Körperbau-Typen und ethnische Unterschiede. Für Leistungssportler:innen, sehr muskulöse Menschen oder spezielle Bevölkerungsgruppen ergänzen andere Kennzahlen (Körperfettanteil, Taillenumfang, WHR) das Bild.
-
-Unser Rechner geht noch einen Schritt weiter und verwendet zusätzlich eine **altersangepasste BMI-Staffelung**: Während für 19- bis 24-Jährige ein BMI von 18,5–24,9 als Zielbereich gilt, liegt er für über 65-Jährige bei 24,0–29,9. Diese Alters-Staffelung stammt aus der ernährungswissenschaftlichen Konvention **NRC 1989** (National Research Council) und wird von der WHO nicht offiziell übernommen — die WHO hält für alle Erwachsenen 18,5–24,9 aufrecht. Die Staffelung ist als zusätzliche Orientierung gedacht, die der empirischen Beobachtung folgt, dass im Alter ein etwas höheres Gewicht leicht schützend wirken kann. Für eine detaillierte BMI-Analyse nutzen Sie auch unseren [BMI-Rechner](/gesundheit/bmi-rechner).
-
-**Warum ändert sich das Idealgewicht mit dem Alter?**
-
-Mit zunehmendem Alter verändert sich die Körperzusammensetzung: Die Muskelmasse nimmt ab, während der Fettanteil tendenziell steigt. Gleichzeitig zeigen Studien, dass ein leicht erhöhter BMI im Alter (BMI 25–27) sogar mit einer höheren Lebenserwartung verbunden sein kann — ein Phänomen, das als „Adipositas-Paradoxon" bekannt ist. Mögliche Erklärungen sind Energiereserven bei Krankheit und ein Schutz vor Knochenbrüchen. Deshalb empfehlen Geriater oft, im Alter nicht zu streng auf das Gewicht zu achten.
-
-**Idealgewicht vs. Wohlfühlgewicht: Was zählt wirklich?**
-
-Das rechnerische Idealgewicht und das persönliche Wohlfühlgewicht sind nicht immer identisch. Viele Menschen fühlen sich bei einem Gewicht am wohlsten, das leicht über oder unter dem statistischen Idealwert liegt. Entscheidend für die Gesundheit sind letztlich: regelmäßige Bewegung, ausgewogene Ernährung, ausreichend Schlaf und ein gesunder Umgang mit Stress. Das Gewicht auf der Waage ist nur ein Faktor von vielen.
-
-**Muskelmasse und Körperfett: Die Grenzen des Idealgewichts**
-
-Alle drei Formeln haben eine gemeinsame Schwäche: Sie können **Muskelmasse und Körperfett nicht unterscheiden**. Ein durchtrainierter Sportler mit viel Muskelmasse kann laut BMI als „übergewichtig" gelten, obwohl sein Körperfettanteil niedrig ist. Umgekehrt kann eine Person mit normalem BMI einen hohen Körperfettanteil und wenig Muskelmasse haben — das sogenannte „skinny fat". Für eine genauere Einschätzung ist die Messung des Körperfettanteils oder des Taillenumfangs sinnvoll.
-
-Diese Formeln sind eine grobe Orientierung, kein anzustrebendes Ziel. Für eine genauere Einschätzung der Körperzusammensetzung sind der Körperfettanteil oder der Taillenumfang aussagekräftiger als jede reine Gewichtsformel — dafür gibt es den [Körperfett-Rechner](/gesundheit/koerperfett-rechner) und den [WHR-Rechner](/gesundheit/whr-rechner). Eine Zahl auf der Waage sagt für sich genommen wenig; entscheidend ist das Gesamtbild, das am besten ärztlich eingeordnet wird.`,
     faq: [
       {
         frage: 'Wie berechne ich mein Idealgewicht?',
@@ -1230,37 +975,7 @@ Diese Formeln sind eine grobe Orientierung, kein anzustrebendes Ziel. Für eine 
     metaDescription: 'Wasserbedarf berechnen: Empfohlene tägliche Trinkmenge nach Gewicht, Aktivität und Sport ✓ In Gläsern ✓ KI-Erklärung.',
     keywords: ['wasserbedarf rechner', 'trinkmenge berechnen', 'wie viel wasser trinken', 'täglicher wasserbedarf', 'wasserbedarf sport', 'trinkmenge pro tag', 'wasser pro kg körpergewicht', 'dehydration vermeiden', 'flüssigkeitsbedarf rechner', 'wasserbedarf schwangerschaft'],
     icon: '💧',
-    formel: 'Basisbedarf = Körpergewicht × 35 ml/kg (bei leichter Aktivität)',
     beispiel: '75 kg, leicht aktiv, 60 Min. Sport → 2.625 ml Basis + 700 ml Sport = 3.325 ml ≈ 3,3 Liter (ca. 14 Gläser).',
-    erklaerung: `**Wie viel Wasser sollte man am Tag trinken?**
-
-Die Deutsche Gesellschaft für Ernährung (DGE) empfiehlt Erwachsenen eine tägliche Trinkmenge von mindestens **1,5 Litern** — zusätzlich zur Flüssigkeit aus der Nahrung. Der tatsächliche Bedarf variiert jedoch stark je nach Körpergewicht, Aktivitätslevel, Temperatur und individuellen Faktoren. Eine gängige Faustregel lautet: **30-35 ml pro Kilogramm Körpergewicht** bei normaler Aktivität. Bei einem 75 kg schweren Menschen ergibt das 2,25 bis 2,63 Liter pro Tag.
-
-Unser Rechner berücksichtigt neben dem Gewicht auch Ihr Aktivitätslevel, sportliche Betätigung, Hitze und besondere Umstände wie Schwangerschaft oder Stillzeit. So erhalten Sie eine individuell angepasste Empfehlung, die über die pauschale „2 Liter am Tag"-Regel hinausgeht.
-
-**Faktoren, die den Wasserbedarf beeinflussen**
-
-Verschiedene Faktoren können Ihren Wasserbedarf erheblich verändern. Körperliche Aktivität ist der wichtigste: Beim Sport verlieren Sie durch Schweiß je nach Intensität 500-1.500 ml pro Stunde. Hohe Temperaturen erhöhen den Bedarf um weitere 500-1.000 ml am Tag. Auch trockene Heizungsluft im Winter, Fieber, Durchfall oder Erbrechen steigern den Flüssigkeitsbedarf deutlich. Schwangere sollten ca. 300 ml, Stillende ca. 700 ml mehr trinken als üblich.
-
-Auch die Ernährung spielt eine Rolle: Wasserreiche Lebensmittel wie Gurken, Wassermelonen, Tomaten und Suppen decken etwa 20-30% des täglichen Flüssigkeitsbedarfs. Salzhaltige Speisen erhöhen dagegen den Bedarf. Alkohol wirkt harntreibend und entzieht dem Körper Wasser — pro Glas Alkohol sollte man ein zusätzliches Glas Wasser trinken.
-
-**Anzeichen von Dehydration erkennen**
-
-Viele Menschen trinken zu wenig, ohne es zu merken. Typische Anzeichen für einen Flüssigkeitsmangel sind: dunkler Urin (gesund ist hellgelb), Kopfschmerzen, Müdigkeit und Konzentrationsschwäche, trockene Lippen und Haut, Schwindel und Mundtrockenheit. Bereits ein Flüssigkeitsverlust von 2% des Körpergewichts kann die geistige Leistungsfähigkeit spürbar beeinträchtigen.
-
-Ein einfacher Test: Drücken Sie die Haut am Handrücken zusammen. Bleibt eine Falte kurz stehen, trinken Sie wahrscheinlich zu wenig. Der zuverlässigste Indikator ist die **Urinfarbe**: Hellgelb bis klar bedeutet ausreichend Flüssigkeit, dunkelgelb bis bernsteinfarben deutet auf Flüssigkeitsmangel hin.
-
-**Wasser trinken beim Sport: Vor, während und nach dem Training**
-
-Beim Sport steigt der Wasserbedarf erheblich. Pro 30 Minuten intensiver Bewegung verliert der Körper durchschnittlich 350 ml Flüssigkeit über den Schweiß. Empfohlen wird: **Vor dem Sport** ca. 300-500 ml in den zwei Stunden vorher trinken. **Während des Sports** alle 15-20 Minuten 150-250 ml. **Nach dem Sport** die verlorene Flüssigkeit mit dem 1,5-fachen des Gewichtsverlusts ausgleichen.
-
-Bei intensivem Training über 60 Minuten kann ein isotonisches Getränk sinnvoll sein, da mit dem Schweiß auch Mineralstoffe (vor allem Natrium) verloren gehen. Für normales Training reicht Wasser mit einer Prise Salz oder eine Saftschorle.
-
-**Zählen Kaffee und Tee zum Wasserbedarf?**
-
-Entgegen der weit verbreiteten Meinung zählen Kaffee und Tee zur täglichen Flüssigkeitszufuhr. Zwar wirkt Koffein leicht harntreibend, der Effekt ist jedoch minimal: Studien zeigen, dass der Körper den Großteil der Flüssigkeit aus Kaffee und Tee aufnimmt. Die DGE bestätigt: Kaffee in moderaten Mengen (3-4 Tassen) darf als Flüssigkeitszufuhr gewertet werden. Allerdings sollte der Hauptteil der Trinkmenge aus Wasser, ungesüßtem Tee oder Mineralwasser bestehen.
-
-Nicht empfehlenswert als Durstlöscher sind zuckerhaltige Getränke, Limonaden und Säfte pur — sie liefern viele Kalorien und können den Durst sogar verstärken. Besser: Wasser mit Zitrone, Minze oder Gurke für natürlichen Geschmack. Weitere Informationen zu Ernährung und Kalorien finden Sie in unserem [Kalorienrechner](/gesundheit/kalorienrechner), und mit dem [BMI-Rechner](/gesundheit/bmi-rechner) können Sie Ihr Gewicht einordnen.`,
     faq: [
       {
         frage: 'Wie viel Wasser sollte ich am Tag trinken?',
@@ -1430,23 +1145,7 @@ Nicht empfehlenswert als Durstlöscher sind zuckerhaltige Getränke, Limonaden u
     metaDescription: 'Körperfettanteil berechnen: Navy-Methode mit Bauchumfang und Halsumfang ✓ Einordnung ✓ Vergleichswerte ✓ KI-Erklärung.',
     keywords: ['körperfettrechner', 'körperfettanteil berechnen', 'kfa rechner', 'navy methode körperfett', 'körperfett messen', 'body fat calculator', 'körperfettanteil mann', 'körperfettanteil frau', 'körperfett prozent', 'fettmasse berechnen'],
     icon: '📏',
-    formel: 'Männer: KFA = 495 / (1,0324 − 0,19077 × log₁₀(Bauch − Hals) + 0,15456 × log₁₀(Größe)) − 450 | Frauen: KFA = 495 / (1,29579 − 0,35004 × log₁₀(Bauch + Hüfte − Hals) + 0,22100 × log₁₀(Größe)) − 450',
     beispiel: 'Mann, 178 cm, Bauchumfang 85 cm, Halsumfang 38 cm → KFA ≈ 18,3% (Durchschnittlich)',
-    erklaerung: `**Was der Körperfettanteil beschreibt**
-
-Der Körperfettanteil (KFA) gibt an, welcher Anteil des Körpergewichts aus Fettgewebe besteht — der Rest ist Magermasse aus Muskeln, Knochen, Organen und Wasser. Fett ist dabei kein bloßer Speicher: Ein Teil davon ist **essentielles Fett**, das der Körper für Hormonhaushalt, Organschutz und Nervenfunktion braucht. Anders als das reine Gewicht oder der BMI trennt der KFA Fett- und Magermasse und bietet damit eine zusätzliche Blickrichtung auf den Körper. Für sich genommen ist ein einzelner Wert allerdings nur ein Marker unter vielen und sagt nichts allein über Gesundheit oder Fitness aus.
-
-**Die US-Navy-Methode**
-
-Dieser Rechner nutzt die US-Navy-Umfangmethode (Hodgdon & Beckett, 1984). Aus Körpergröße sowie Hals- und Bauchumfang — bei Frauen zusätzlich dem Hüftumfang — schätzt eine logarithmische Formel den Körperfettanteil. Sie kommt ohne Geräte aus und braucht nur ein Maßband. Wichtig ist das Wort Schätzung: Die typische Abweichung gegenüber einem DEXA-Scan liegt bei ±3 bis 4 Prozentpunkten, bei sehr muskulösen oder sehr schlanken Personen kann sie größer ausfallen. Für vergleichbare Ergebnisse misst man immer zur gleichen Tageszeit und an denselben Stellen.
-
-**Orientierungsspannen, kein Zielwert**
-
-Die im Rechner gezeigten Spannen (nach dem American Council on Exercise) sind statistische Orientierungsbereiche — keine Vorgaben und kein anzustrebender Wert. Frauen liegen physiologisch höher als Männer, weil der weibliche Körper von Natur aus mehr essentielles Fett trägt; mit dem Alter steigen die Durchschnittswerte. Diese Zahlen helfen lediglich beim Einordnen einer Messung. Sie bewerten keine Person, und sie unterscheiden nicht zwischen Menschen mit unterschiedlichem Körperbau, Trainingszustand oder Lebenssituation.
-
-**Wofür der Wert nicht gedacht ist**
-
-Der Rechner liefert Information, keine Anleitung zur Selbstoptimierung. Ein einzelner Schätzwert eignet sich nicht, um daraus in Eigenregie Ernährungs- oder Trainingsziele abzuleiten. Wer sich Sorgen um Gewicht, Körper oder Essverhalten macht, findet bei Ärztinnen und Ärzten oder bei Beratungsstellen verlässlichere und sicherere Begleitung als bei einer wiederholten Selbstmessung. Den BMI als ergänzende Kennzahl zeigt der [BMI-Rechner](/gesundheit/bmi-rechner) — auch er ist nur ein grober Anhaltspunkt und ersetzt keine ärztliche Einschätzung.`,
     faq: [
       {
         frage: 'Wie messe ich für die US-Navy-Methode richtig?',
@@ -1629,31 +1328,7 @@ Der Rechner liefert Information, keine Anleitung zur Selbstoptimierung. Ein einz
     metaDescription: 'SSW berechnen: Aktuelle Schwangerschaftswoche, Trimester und Baby-Entwicklung ✓ Größenvergleich ✓ Wichtige Termine ✓ KI-Erklärung.',
     keywords: ['ssw rechner', 'schwangerschaftswoche berechnen', 'ssw berechnen', 'trimester rechner', 'baby entwicklung', 'wie viele wochen schwanger', 'ssw tabelle', 'mutterpass ssw', 'geburtstermin', 'schwangerschaftskalender'],
     icon: '🤰',
-    formel: 'SSW = floor((Heute − Erster Tag letzte Periode) / 7) + Resttage | Notation: "SSW X+Y" (X vollendete Wochen, Y Tage) | ET (Naegele): letzte Periode + 280 Tage (+ Zykluskorrektur) | 1. Trimester: SSW 1–12, 2. Trimester: SSW 13–27, 3. Trimester: SSW 28–40.',
     beispiel: 'Letzte Periode vor 14 Wochen 3 Tagen → SSW 14+3, 2. Trimester, Baby ca. 9 cm groß (Zitrone), noch ca. 25 Wochen 4 Tage bis zum Geburtstermin.',
-    erklaerung: `**Was bedeutet SSW? Die Zählung erklärt**
-
-SSW steht für „Schwangerschaftswoche" und ist die international gebräuchliche Angabe, um den Stand einer Schwangerschaft zu beschreiben. Gezählt wird ab dem **ersten Tag der letzten Periode** — nicht ab dem tatsächlichen Zeugungstermin. Dadurch entstehen im Rechner zwei zusätzliche Wochen, in denen die Frau streng genommen noch gar nicht schwanger ist. Der Grund: Der genaue Eisprung lässt sich oft nicht eindeutig bestimmen, die letzte Periode jedoch schon. Die Angabe erfolgt als „SSW X+Y", wobei X für die vollendeten Wochen und Y für die zusätzlichen Tage steht. Bei „SSW 14+3" ist die Frau also 14 volle Wochen und 3 Tage schwanger — sie befindet sich in der 15. Woche. Eine Schwangerschaft dauert durchschnittlich 40 Wochen bzw. 280 Tage, gerechnet ab der letzten Periode. Der [Geburtstermin-Rechner](/gesundheit/geburtstermin-rechner) ermittelt den errechneten Termin nach verschiedenen Methoden.
-
-**Die drei Trimester im Überblick**
-
-Die 40 Wochen einer Schwangerschaft werden in **drei Trimester** eingeteilt — jeweils mit eigenen Schwerpunkten und Herausforderungen. Das **1. Trimester** umfasst die Wochen 1 bis 12 und ist die sensibelste Phase: Alle Organe werden angelegt, das Fehlgeburtsrisiko ist am höchsten, viele Frauen leiden unter Übelkeit und starker Müdigkeit. Am Ende des 1. Trimesters sinkt das Risiko einer Fehlgeburt deutlich — viele Paare informieren dann Familie und Freunde. Das **2. Trimester** (SSW 13–27) gilt als die „goldene Zeit": Beschwerden lassen nach, der Babybauch wird sichtbar, erste Kindsbewegungen werden spürbar, das Geschlecht ist erkennbar. Im **3. Trimester** (SSW 28–40) bereitet sich der Körper auf die Geburt vor, das Baby gewinnt schnell an Gewicht, der Bauch wird schwer, Kontraktionen (Übungswehen) werden häufiger.
-
-**Baby-Entwicklung Woche für Woche**
-
-Kaum ein Prozess im menschlichen Körper ist so faszinierend wie die Embryonal- und Fötalentwicklung. In **SSW 5–8** schlägt erstmals das Herz, alle wichtigen Organe werden angelegt. Bis **SSW 12** sind Finger und Zehen ausgebildet, das Baby ist etwa 6 cm groß. In **SSW 16** lässt sich das Geschlecht per Ultraschall erkennen. Um **SSW 20** herum nehmen viele Frauen die ersten Kindsbewegungen wahr — bei Erstgebärenden meist etwas später. Ab **SSW 24** kann das Baby hören und reagiert auf Stimmen und Musik. In **SSW 28** öffnen sich die Augen, die Überlebensfähigkeit außerhalb der Gebärmutter erreicht über 90 Prozent. Ab **SSW 32** dreht sich das Baby meist in die Kopflage. In **SSW 37** gilt die Schwangerschaft als ausgetragen — alles ab hier ist kein Frühchen mehr.
-
-**Wichtige Vorsorgeuntersuchungen nach SSW**
-
-Die deutschen Mutterschaftsrichtlinien sehen regelmäßige Vorsorgeuntersuchungen vor — bezahlt von der Krankenkasse. Die **Erstuntersuchung** findet zwischen SSW 5 und 8 statt und umfasst Anamnese, Ausstellung des Mutterpasses und ersten Ultraschall. Der **1. Screening-Ultraschall** erfolgt zwischen SSW 9–12 zur Feststellung der Herzaktivität und des genauen Alters. Zwischen SSW 11 und 14 bieten Ärzte das optionale **Ersttrimester-Screening** (Nackenfaltenmessung) an. Der **2. Ultraschall** zwischen SSW 19–22 ist die sogenannte „Feindiagnostik" — hier werden alle Organe untersucht. Zwischen SSW 24–28 wird der **Zuckerbelastungstest (oGTT)** zum Ausschluss einer Schwangerschaftsdiabetes durchgeführt. Der **3. Ultraschall** findet zwischen SSW 29–32 statt. Ab SSW 32 kommen Sie alle zwei Wochen zur Vorsorge, ab SSW 36 wöchentlich.
-
-**Mutterschutz, Elterngeld und wichtige Fristen**
-
-Sechs Wochen vor dem errechneten Geburtstermin beginnt der **Mutterschutz** — ab diesem Zeitpunkt darf die werdende Mutter nicht mehr arbeiten (außer sie wünscht es ausdrücklich). Nach der Geburt folgen 8 Wochen Schutzfrist, bei Früh- oder Mehrlingsgeburten 12 Wochen. Der [Mutterschutz-Rechner](/arbeit/mutterschutz-rechner) zeigt alle wichtigen Fristen und die Höhe des Mutterschaftsgelds. Für die Zeit nach der Geburt kommt das [Elterngeld](/finanzen/elterngeld-rechner) ins Spiel — 65 % des letzten Nettos, bis 1.800 € monatlich. Beantragen Sie den Mutterpass, Kinderbetreuung und Elterngeld frühzeitig — die Fristen und Wartezeiten sind in Deutschland länger als viele denken.
-
-**Frauenärztliche Beratung ersetzen kann dieser Rechner nicht**
-
-So hilfreich SSW-Rechner und Schwangerschafts-Apps auch sind — sie ersetzen keine ärztliche Betreuung. Jede Schwangerschaft verläuft individuell, Komplikationen sind möglich, und der vom Frauenarzt im Mutterpass eingetragene Geburtstermin gilt als verbindlich. Ultraschallmessungen in den ersten 12 Wochen sind die genaueste Methode zur Bestimmung des Gestationsalters. Ziehen Sie bei Unsicherheiten immer Ihre Frauenärztin oder Ihren Frauenarzt hinzu.`,
     faq: [
       {
         frage: 'In welcher SSW bin ich?',
@@ -1787,63 +1462,7 @@ So hilfreich SSW-Rechner und Schwangerschafts-Apps auch sind — sie ersetzen ke
     metaDescription: 'Gewichtszunahme Schwangerschaft berechnen: Empfohlene Zunahme nach BMI, Verlaufskurve und Verteilung ✓ IOM-Richtlinien ✓ KI-Erklärung.',
     keywords: ['gewichtszunahme schwangerschaft', 'gewicht schwangerschaft rechner', 'iom richtlinien', 'schwangerschaft bmi', 'zunahme pro woche schwangerschaft', 'zwillinge gewichtszunahme'],
     icon: '🤰',
-    formel: 'Empfohlene Zunahme nach BMI vor SS (IOM): Untergewicht 12,5–18 kg | Normal 11,5–16 kg | Übergewicht 7–11,5 kg | Adipositas 5–9 kg',
     beispiel: 'Beispiel: Gewicht vor SS 65 kg, Größe 168 cm → BMI 23,0 (Normalgewicht). Empfohlene Gesamtzunahme: 11,5–16 kg. In SSW 20 liegt der erwartete Bereich bei ca. 3,3–6 kg.',
-    erklaerung: `**Gewichtszunahme in der Schwangerschaft — was ist normal?**
-
-Wie viel Gewicht eine Frau in der Schwangerschaft zunehmen sollte, hängt vor allem vom **BMI vor der Schwangerschaft** ab. Die international anerkannten Empfehlungen stammen vom US-amerikanischen Institute of Medicine (**IOM**) und werden auch in Deutschland von Hebammen, Gynäkologen und der Deutschen Gesellschaft für Ernährung empfohlen. Unser Rechner berechnet Ihren BMI, zeigt die für Sie empfohlene Spanne und vergleicht sie mit Ihrer aktuellen Zunahme.
-
-**IOM-Richtlinien: Die empfohlene Gesamtzunahme**
-
-Die IOM unterscheidet vier BMI-Kategorien. Pro Kategorie gelten folgende Empfehlungen für Einlingsschwangerschaften:
-
-- **Untergewicht (BMI < 18,5):** 12,5–18,0 kg Gesamtzunahme.
-- **Normalgewicht (BMI 18,5–24,9):** 11,5–16,0 kg — die häufigste Gruppe.
-- **Übergewicht (BMI 25–29,9):** 7,0–11,5 kg — bewusstes Maß halten.
-- **Adipositas (BMI ≥ 30):** 5,0–9,0 kg — eher zurückhaltend zunehmen.
-
-Bei **Zwillingsschwangerschaften** liegen die Werte deutlich höher, da zwei Babys plus zusätzliche Plazenta/Fruchtwasser versorgt werden müssen. Für Normalgewichtige gilt: 17–25 kg, bei Übergewicht 14–23 kg, bei Adipositas 11–19 kg.
-
-**Wie viel nimmt man pro Woche zu?**
-
-Im **1. Trimester** (SSW 1–12) ist die Zunahme gering — durchschnittlich 0,5–2,0 kg insgesamt. Bei Übelkeit kann das Gewicht anfangs sogar leicht sinken. Ab dem **2. Trimester** wird die Zunahme gleichmäßiger:
-
-- **Untergewicht:** 0,44–0,58 kg/Woche
-- **Normalgewicht:** 0,35–0,50 kg/Woche
-- **Übergewicht:** 0,23–0,33 kg/Woche
-- **Adipositas:** 0,17–0,27 kg/Woche
-
-Unser Rechner berechnet aus Ihrem BMI und der aktuellen SSW automatisch, in welchem Bereich Sie sich bewegen sollten — und vergleicht Ihre tatsächliche Zunahme mit dem erwarteten Korridor.
-
-**Woraus besteht die Gewichtszunahme?**
-
-Eine verbreitete Sorge lautet: „Ich nehme doch nicht 12 kg Fett zu, oder?" Nein — die Zunahme verteilt sich auf viele Komponenten:
-
-- **Baby:** ca. 3,3 kg
-- **Plazenta:** ca. 0,7 kg
-- **Fruchtwasser:** ca. 0,9 kg
-- **Gebärmutter:** ca. 1,0 kg
-- **Brustgewebe:** ca. 0,5 kg
-- **Blutvolumen:** ca. 1,5 kg (zusätzlich zum Ausgangsvolumen)
-- **Wassereinlagerungen:** ca. 1,5 kg
-- **Fettreserven:** ca. 3,0 kg (als Energiereserve für Stillzeit)
-
-In Summe entspricht das den typischen 12–13 kg einer normalgewichtigen Einlings-Schwangerschaft. Der Großteil dieser Zunahme geht bei der Geburt bzw. in den Wochen danach wieder zurück.
-
-**Zu viel oder zu wenig zugenommen — was tun?**
-
-Abweichungen vom empfohlenen Bereich sind zunächst kein Grund zur Sorge. Die IOM-Werte sind Richtwerte, keine starren Grenzen. Wichtiger als eine exakte Zahl sind Wohlbefinden, regelmäßige Vorsorgeuntersuchungen und ein gesundes Ernährungsverhalten.
-
-- **Zu viel zugenommen:** Bewegung (Schwimmen, Spaziergänge, Schwangerschaftsyoga), bewusste Ernährung mit viel Gemüse, Vollkorn und Proteinen. Keine radikalen Diäten — in der Schwangerschaft darf nicht gefastet werden.
-- **Zu wenig zugenommen:** Nährstoffreiche Snacks (Nüsse, Avocado, Vollmilch, Trockenfrüchte). Bei anhaltender Übelkeit (Hyperemesis) ärztlich abklären lassen.
-
-Sprechen Sie größere Abweichungen in jedem Fall mit Ihrer Hebamme oder Ihrem Frauenarzt/Ihrer Frauenärztin ab. Insbesondere eine sehr starke Zunahme in kurzer Zeit (mehr als 2 kg pro Woche) kann auf **Wassereinlagerungen** bei Präeklampsie hindeuten und sollte immer untersucht werden.
-
-**Ernährung und Gewicht — Qualität vor Quantität**
-
-Der Mehrbedarf an Kalorien ist geringer als oft gedacht: Im 2. Trimester nur etwa **250 kcal/Tag**, im 3. Trimester ca. **500 kcal/Tag** zusätzlich. Wichtiger als „mehr essen" ist „besser essen": Folsäure, Jod, Eisen, Omega-3-Fettsäuren und hochwertiges Eiweiß unterstützen die Entwicklung des Kindes optimal.
-
-**Hinweis:** Die Empfehlungen basieren auf den IOM-Richtlinien. Jede Schwangerschaft ist individuell — unser Rechner ersetzt keine ärztliche Beratung. Nutzen Sie zusätzlich unseren SSW-Rechner, den Geburtstermin-Rechner, den BMI-Rechner und den Kalorienrechner, um Ihren Überblick zu vervollständigen.`,
     faq: [
       {
         frage: 'Wie viel sollte ich in der Schwangerschaft zunehmen?',
@@ -1976,37 +1595,7 @@ Der Mehrbedarf an Kalorien ist geringer als oft gedacht: Im 2. Trimester nur etw
     metaDescription: 'Zyklusrechner: Eisprung, fruchtbares Fenster und nächste Periode berechnen ✓ Kalender-Ansicht ✓ 1–6 Zyklen voraus ✓ Mit KI-Erklärung.',
     keywords: ['zyklusrechner', 'eisprungrechner', 'fruchtbare tage berechnen', 'eisprung berechnen', 'fruchtbares fenster', 'menstruationszyklus rechner', 'periode berechnen'],
     icon: '🔄',
-    formel: 'Eisprung = erster Tag der letzten Periode + (Zykluslänge − 14). Fruchtbares Fenster = Eisprung − 5 Tage bis Eisprung + 1 Tag.',
     beispiel: 'Beispiel: Letzte Periode am 01.04.2026, Zykluslänge 28 Tage → Eisprung am 15.04.2026, fruchtbares Fenster 10.–16.04.2026, nächste Periode am 29.04.2026.',
-    erklaerung: `**Wie funktioniert der Zyklusrechner?**
-
-Der Zyklusrechner berechnet auf Basis des ersten Tages der letzten Periode und der durchschnittlichen Zykluslänge, wann der nächste Eisprung stattfindet, wann das fruchtbare Fenster beginnt und wann voraussichtlich die nächste Menstruation einsetzt. Dazu nutzt er die in der Reproduktionsmedizin etablierte Faustregel: Der Eisprung findet etwa 14 Tage vor der nächsten Periode statt. Das fruchtbare Fenster umfasst die fünf Tage vor dem Eisprung plus den Eisprungtag selbst, da Spermien bis zu fünf Tage im weiblichen Körper überleben können und die Eizelle nach dem Eisprung etwa 12 bis 24 Stunden befruchtungsfähig ist.
-
-**Der Menstruationszyklus im Überblick**
-
-Ein typischer Zyklus dauert 28 Tage, kann aber individuell zwischen 21 und 35 Tagen schwanken. Der Zyklus wird in vier Phasen unterteilt: Menstruation (Tag 1–5), Follikelphase (Tag 1–13), Ovulation/Eisprung (ca. Tag 14) und Lutealphase (Tag 15–28). Während die Lutealphase relativ konstant etwa 14 Tage dauert, ist die Follikelphase variabel — deshalb verschiebt sich bei längeren oder kürzeren Zyklen vor allem der Zeitpunkt des Eisprungs, nicht aber der Abstand zwischen Eisprung und Periode.
-
-Die **Perioden-Länge** variiert individuell zwischen 3 und 7 Tagen (Default im Rechner: 5). Der eingegebene Wert beeinflusst nur die Darstellung der Menstruations-Phase im Kalender — die Lage des fruchtbaren Fensters und der Eisprungtag hängen vom Ovulationszeitpunkt ab, nicht von der Dauer der Blutung.
-
-**Fruchtbare und unfruchtbare Tage**
-
-Für eine mögliche Schwangerschaft zählen vor allem die Tage rund um den Eisprung. Die höchste Wahrscheinlichkeit einer Befruchtung besteht an den zwei Tagen vor dem Eisprung und am Tag des Eisprungs selbst. Unser Rechner markiert dieses fruchtbare Fenster grün im Kalender, den Eisprungtag selbst mit einem Stern. Tage außerhalb dieses Fensters gelten als weniger fruchtbar, sind aber niemals vollständig „sicher" — besonders bei unregelmäßigen Zyklen.
-
-**Kalender-Ansicht und Mehrzyklus-Vorschau**
-
-Sie können zwischen einer Vorschau für 1, 3 oder 6 Zyklen wählen. Der Rechner zeigt automatisch alle betroffenen Monate im Kalender an, farblich markiert: Rot für die Menstruationstage, Hellgrün für fruchtbare Tage, Dunkelgrün für den Eisprung. So können Sie Termine langfristig planen — zum Beispiel Urlaubsreisen, Hochzeiten oder Kinderwunsch-Timing.
-
-**Kinderwunsch oder Familienplanung**
-
-Paare mit Kinderwunsch nutzen den Zyklusrechner, um die Wahrscheinlichkeit einer Schwangerschaft zu erhöhen, indem sie den Geschlechtsverkehr in das fruchtbare Fenster legen. Umgekehrt wird der Rechner gelegentlich zur natürlichen Familienplanung (NFP) eingesetzt — allerdings nur eingeschränkt zuverlässig. Die sogenannte Kalendermethode nach Knaus-Ogino hat einen Pearl-Index von etwa 9 bis 15, das heißt 9 bis 15 von 100 Frauen werden damit innerhalb eines Jahres dennoch schwanger. Deutlich sicherer sind symptothermale Methoden in Kombination mit Zyklus-Apps oder moderne Verhütungsmittel.
-
-**Wichtige Einschränkungen**
-
-Der Rechner basiert auf Durchschnittswerten. Der tatsächliche Eisprung kann durch Stress, Krankheit, Hormonschwankungen, Ernährung und andere Faktoren abweichen — mitunter um mehrere Tage. Bei unregelmäßigen Zyklen (Schwankungen über 7 Tage) ist die Berechnung besonders ungenau. Genauer sind Ovulationstests (LH-Messung im Urin), Temperaturmessung (Basaltemperatur), Zervixschleim-Beobachtung oder kombinierte symptothermale Verfahren.
-
-**Dieser Rechner ist kein Verhütungsmittel**
-
-Wir weisen ausdrücklich darauf hin: Der Zyklusrechner darf nicht als alleinige Verhütungsmethode verwendet werden. Er ist ebenfalls keine Garantie dafür, dass eine Schwangerschaft bei einem Kinderwunsch schnell eintritt. Bei unerfülltem Kinderwunsch nach mehr als 12 Monaten (bei Frauen über 35: nach 6 Monaten) sollten Sie einen Gynäkologen oder eine Kinderwunschklinik aufsuchen. Nutzen Sie unseren Zyklusrechner als erste Orientierung, ergänzend zu unserem Geburtstermin-Rechner, SSW-Rechner und Tagerechner.`,
     faq: [
       {
         frage: 'Wann ist der Eisprung bei einem 28-Tage-Zyklus?',
@@ -2133,50 +1722,7 @@ Wir weisen ausdrücklich darauf hin: Der Zyklusrechner darf nicht als alleinige 
     metaDescription: 'Alkohol-Abbau berechnen: Maximaler Promillewert, Abbauzeit, 0,5 ‰-Grenze ✓ Widmark-Formel ✓ Dynamische Getränke ✓ Mit KI-Erklärung.',
     keywords: ['alkohol abbau rechner', 'promille abbau', 'wann bin ich wieder nüchtern', 'widmark formel', 'alkohol fahrtauglich', 'promille berechnen', 'blutalkohol rechner'],
     icon: '🍺',
-    formel: 'Promille = Alkohol in Gramm ÷ (Körpergewicht × r), mit r = 0,68 (Mann) / 0,55 (Frau). Abbau ca. 0,15 ‰/Stunde.',
     beispiel: 'Beispiel: Mann, 80 kg, 3 Bier (0,5 l, 5 %) = 60 g Alkohol → 60 / (80 × 0,68) = 60 / 54,4 ≈ 1,10 ‰. Abbau auf 0,0 ‰ nach ca. 7,3 Stunden.',
-    erklaerung: `**Wie funktioniert der Alkohol-Abbau-Rechner?**
-
-Unser Rechner schätzt anhand der weltweit bekannten **Widmark-Formel**, welchen maximalen Blutalkoholwert (BAK) Sie nach dem Konsum einer bestimmten Menge Alkohol erreichen und wann Sie voraussichtlich wieder nüchtern sein werden. Die Widmark-Formel stammt vom schwedischen Chemiker Erik M. P. Widmark (1889–1945) und ist bis heute Grundlage forensischer Alkoholberechnungen bei Gericht und Polizei.
-
-**Die Widmark-Formel im Detail**
-
-Die Formel lautet: Promille = (Alkoholmenge in Gramm) / (Körpergewicht in kg × Verteilungsfaktor r). Der Faktor r berücksichtigt, dass Alkohol sich nur im Körperwasser verteilt und nicht im Fettgewebe. Bei Männern beträgt r etwa 0,68, bei Frauen 0,55 — weil Frauen im Schnitt einen höheren Körperfettanteil und weniger Körperwasser haben. Die reine Widmark-Formel liefert dabei den maximalen Blutalkoholwert (Peak) unmittelbar nach dem Trinken; die tatsächlichen Werte können im Einzelfall etwas darunter liegen, weil ein Teil des Alkohols schon während der Aufnahme verstoffwechselt wird.
-
-**Alkoholmenge verschiedener Getränke**
-
-Ein Standardgetränk enthält etwa 10 bis 12 Gramm reinen Alkohol. Typische Mengen:
-
-- **Bier 0,5 l (5 %):** ca. 20 g Alkohol
-- **Wein 0,2 l (12 %):** ca. 19 g Alkohol
-- **Sekt 0,1 l (11 %):** ca. 9 g Alkohol
-- **Schnaps 2 cl (40 %):** ca. 6 g Alkohol
-- **Cocktail 0,3 l (15 %):** ca. 36 g Alkohol
-
-Berechnet wird die Alkoholmenge nach der Formel: ml × (Vol.-% / 100) × 0,8 (spezifische Dichte von Ethanol). Unser Rechner bietet eine dynamische Getränkeliste — fügen Sie beliebig viele Getränke hinzu oder definieren Sie eigene Drinks.
-
-**Abbau im Körper: 0,1 bis 0,2 ‰ pro Stunde**
-
-Der menschliche Körper baut Alkohol linear ab, unabhängig von der getrunkenen Menge. Die durchschnittliche Abbaurate liegt zwischen 0,1 und 0,2 ‰ pro Stunde, im Mittel bei **0,15 ‰/h**. Der Abbau erfolgt fast ausschließlich in der Leber über die Enzyme Alkoholdehydrogenase (ADH) und Aldehyddehydrogenase (ALDH). Weder Kaffee, kalte Duschen, frische Luft noch Bewegung beschleunigen diesen Prozess — Alkoholabbau braucht schlicht Zeit.
-
-**Die 0,5 ‰-Grenze und absolute Fahruntüchtigkeit**
-
-In Deutschland gelten klare gesetzliche Grenzen im Straßenverkehr:
-
-- **0,0 ‰:** Für Fahranfänger in der Probezeit, für alle unter 21 Jahren und für Berufskraftfahrer während der Arbeit.
-- **0,3 ‰:** Ab hier kann bei auffälligem Fahrverhalten oder Unfall eine Straftat wegen relativer Fahruntüchtigkeit vorliegen.
-- **0,5 ‰:** Ordnungswidrigkeit — 500 € Bußgeld, 2 Punkte, 1 Monat Fahrverbot beim Ersttäter.
-- **1,1 ‰:** Ab diesem Wert liegt **absolute Fahruntüchtigkeit** vor (§ 316 StGB) — das ist in jedem Fall eine Straftat, auch ohne Fahrfehler.
-
-Unser Rechner zeigt neben dem Peak-Wert auch die Uhrzeiten, zu denen Sie die Grenzen 0,5 ‰ und 0,3 ‰ unterschreiten und wann Sie vermutlich wieder vollständig nüchtern (0,0 ‰) sind.
-
-**Wichtige Einschränkungen**
-
-Der Rechner liefert eine grobe Schätzung. Individuelle Faktoren können den tatsächlichen Blutalkoholwert erheblich beeinflussen: Nahrung im Magen, Medikamente, Tagesform, genetische Unterschiede im Alkoholabbau, Lebererkrankungen, Schwangerschaft, Trainingszustand. Frauen, ältere Menschen und schlanke Personen reagieren empfindlicher. Bei gleicher Trinkmenge sind die tatsächlichen Werte nicht selten um 0,2 bis 0,3 ‰ höher oder niedriger als berechnet.
-
-**Die einzig sichere Regel: Nicht fahren**
-
-Wenn Sie Alkohol getrunken haben, gilt eine einfache Regel: **Nicht ans Steuer.** Die einzig wirklich sichere Promillegrenze für den Straßenverkehr ist 0,0 ‰. Im Zweifel nehmen Sie ein Taxi, den Nachtbus, einen Designated Driver oder übernachten Sie vor Ort. Die Kosten eines Taxis sind immer niedriger als die Konsequenzen einer Alkoholfahrt: Bußgeld, Punkte, Fahrverbot, MPU, Entzug, Versicherungsprobleme — oder im schlimmsten Fall Personenschäden. Nutzen Sie zur Orientierung auch unseren Promillerechner und den Bußgeldrechner.`,
     // W19-Goldstandard (SENSIBEL): alkohol-abbau-rechner auf volle Tiefe (16 Bausteine,
     // ~1.560 W), Leitformat „tabelle" 4× dominant. STRENGE Schutzauflage: KEINE Fahrfreigabe-
     // Formulierung, KEINE „schneller nüchtern"-Methode (Mythen nur entkräftet), Restalkohol
@@ -2385,39 +1931,7 @@ Wenn Sie Alkohol getrunken haben, gilt eine einfache Regel: **Nicht ans Steuer.*
     metaDescription: 'Proteinbedarf kostenlos berechnen: wie viel Eiweiß pro Tag nach Gewicht, Sport und Ziel. Mit Lebensmittel-Tabelle und KI-Erklärung.',
     keywords: ['protein rechner', 'eiweißbedarf', 'protein pro tag', 'eiweiß berechnen', 'muskelaufbau protein'],
     icon: '💪',
-    formel: 'Proteinbedarf (g/Tag) = Körpergewicht (kg) × Faktor (g/kg)\n\nFaktor nach Aktivität + Ziel:\n• Kaum aktiv: 0,8 g/kg\n• Hobbysport: 1,2 g/kg\n• Krafttraining: 1,6 g/kg\n• Bodybuilding: 2,0 g/kg\n• Ausdauer intensiv: 1,4 g/kg\n\nZuschläge:\n• Muskelaufbau: +0,2 g/kg\n• Abnehmen: +0,3 g/kg (Muskelerhalt im Defizit)',
     beispiel: 'Beispiel: 75 kg Körpergewicht, regelmäßiges Krafttraining, Ziel Muskelaufbau.\nFaktor = 1,6 + 0,2 = 1,8 g/kg\nBedarf = 75 × 1,8 = 135 g Protein pro Tag\nVerteilt auf 4 Mahlzeiten = ca. 34 g pro Mahlzeit\nEntspricht z. B. 587 g Hähnchenbrust oder 1.125 g Magerquark pro Tag.',
-    erklaerung: `## Wie viel Protein braucht der Körper wirklich?
-
-Protein (Eiweiß) ist einer der drei Makronährstoffe und für den Körper lebenswichtig. Eiweiß ist der Baustoff schlechthin: Muskeln, Haut, Haare, Enzyme, Hormone und Antikörper bestehen aus Proteinen. Wer zu wenig Eiweiß zu sich nimmt, verliert Muskelmasse, schwächt das Immunsystem und erholt sich schlechter vom Training.
-
-Die **Deutsche Gesellschaft für Ernährung (DGE)** empfiehlt Erwachsenen seit Jahrzehnten 0,8 g Protein pro Kilogramm Körpergewicht pro Tag. Das ist jedoch der **Mindestwert**, um einem gesunden, sesshaften Erwachsenen Mangelerscheinungen zu ersparen — nicht der optimale Wert für Menschen, die sportlich aktiv sind, Muskeln aufbauen möchten oder über 65 Jahre alt sind.
-
-## Warum Sportler deutlich mehr brauchen
-
-Moderne Sportwissenschaft zeigt klar: Kraftsportler und Bodybuilder profitieren von **1,6 bis 2,0 g Protein pro kg Körpergewicht**. Eine Meta-Analyse von Morton et al. (2018, British Journal of Sports Medicine) wertete 49 Studien aus und kam zu dem Ergebnis, dass Muskelaufbau ab etwa 1,6 g/kg maximal stimuliert wird — mehr bringt statistisch keinen zusätzlichen Effekt, schadet aber auch nicht bei gesunden Nieren.
-
-Ausdauersportler liegen mit 1,2 bis 1,4 g/kg etwas darunter, benötigen aber immer noch deutlich mehr als die DGE-Mindestempfehlung. Der Grund: Ausdauertraining verursacht kleinere muskuläre Mikroverletzungen, die repariert werden müssen, und bei sehr langen Einheiten wird zunehmend Protein zur Energiegewinnung herangezogen.
-
-## Der Zuschlag beim Ziel „Abnehmen"
-
-In einer Phase mit geringerer Energiezufuhr kann der Körper neben Fett auch Muskulatur abbauen. Eine ausreichende Proteinzufuhr wirkt dem entgegen — das ist der sachliche Grund, warum der Rechner für das Ziel „Abnehmen" einen kleinen Zuschlag von 0,3 g/kg auf den Aktivitätsfaktor ansetzt. Das ist ein reiner Rechenparameter und keine Empfehlung zum Abnehmen; für konkrete Ernährungsziele ist eine ärztliche oder ernährungsmedizinische Beratung die richtige Adresse.
-
-## Ältere Menschen und der Proteinbedarf
-
-Senioren ab 65 Jahren sollten nach heutigem Wissensstand **mindestens 1,0 bis 1,2 g/kg** Protein täglich anstreben. Grund ist die sogenannte **anabole Resistenz**: Die Muskulatur älterer Menschen reagiert schwächer auf einen Proteinreiz als die jüngerer Menschen. Ohne ausreichend Protein droht Sarkopenie — der altersbedingte Muskelabbau, der zu Stürzen, Frakturen und Pflegebedürftigkeit führen kann.
-
-## Pflanzlich oder tierisch — macht es einen Unterschied?
-
-Tierische Proteine (Fleisch, Fisch, Eier, Milchprodukte) haben eine höhere **biologische Wertigkeit** als die meisten pflanzlichen Quellen, da sie das komplette Aminosäureprofil liefern. Wer sich vegetarisch oder vegan ernährt, sollte bewusst **kombinieren**: Hülsenfrüchte mit Getreide (Linsen + Reis), Soja mit Mais oder Nüsse mit Haferflocken ergänzen sich gegenseitig. Viele Veganer rechnen mit einem Aufschlag von etwa 10 % auf den Proteinbedarf, um die teils niedrigere Verwertbarkeit auszugleichen.
-
-## Verteilung über den Tag
-
-Studien zeigen, dass der Muskelproteinaufbau pro Mahlzeit durch etwa 20 bis 40 g qualitativ hochwertiges Protein maximal stimuliert wird. Es ist daher sinnvoll, die Tagesmenge auf 3 bis 5 Mahlzeiten zu verteilen, statt alles zum Abendessen zu konsumieren. Unser Rechner zeigt Ihnen direkt, wie viel Protein pro Mahlzeit sinnvoll wäre.
-
-## Ist zu viel Protein gefährlich?
-
-Für Menschen mit **gesunden Nieren** ist eine hohe Proteinzufuhr unbedenklich. Studien, die Nierenschäden durch Protein belegen, beziehen sich durchweg auf Patienten mit vorgeschädigter Niere. Wer eine Nierenerkrankung hat, sollte die Proteinzufuhr allerdings mit dem Arzt absprechen. Alle anderen können selbst 2,5 g/kg ohne Sorge konsumieren — oberhalb davon wird es jedoch schwer, nützliche andere Nährstoffe unterzubringen.`,
     faq: [
       {
         frage: 'Wie viel Protein brauche ich pro Tag?',
@@ -2566,43 +2080,7 @@ Für Menschen mit **gesunden Nieren** ist eine hohe Proteinzufuhr unbedenklich. 
     metaDescription: 'WHR-Rechner: Taille-Hüfte-Verhältnis und WHtR kostenlos berechnen — mit Risiko-Ampel, WHO-Grenzwerten und Vergleich zum BMI.',
     keywords: ['whr rechner', 'taille hüfte verhältnis', 'waist hip ratio', 'whr berechnen', 'bauchumfang verhältnis', 'viszerales fett', 'whtr rechner', 'taille hüfte index'],
     icon: '📏',
-    formel: 'WHR = Taillenumfang ÷ Hüftumfang | WHtR = Taillenumfang ÷ Körpergröße',
     beispiel: 'Beispiel: Frau, 78 cm Taille, 100 cm Hüfte → WHR 0,78 (niedriges Risiko). Bei 168 cm Größe → WHtR 0,46 (optimal)',
-    erklaerung: `**Taille-Hüfte-Verhältnis (WHR) — was es aussagt**
-
-Das Taille-Hüfte-Verhältnis (Waist-to-Hip Ratio, kurz WHR) ist ein einfacher Indikator für die Fettverteilung am Körper. Im Gegensatz zum BMI, der nur Gewicht und Größe berücksichtigt, zeigt der WHR, wo das Fett sitzt — und genau das ist für die Gesundheit entscheidend. Bauchfett (viszerales Fett) umgibt die inneren Organe und produziert Entzündungsbotenstoffe, die das Risiko für Herz-Kreislauf-Erkrankungen, Typ-2-Diabetes und bestimmte Krebsarten deutlich erhöhen.
-
-**So messen Sie richtig**
-
-Messen Sie morgens nüchtern, im Stehen und in Unterwäsche. Ziehen Sie den Bauch nicht ein:
-- **Taillenumfang:** Messen Sie auf Nabelhöhe, also in der Mitte zwischen der untersten Rippe und dem oberen Rand des Hüftknochens. Das Maßband sollte eng anliegen, aber nicht einschneiden.
-- **Hüftumfang:** Messen Sie an der breitesten Stelle des Gesäßes. Stehen Sie aufrecht, die Füße zusammen.
-
-Beide Maße sollten Sie mehrmals nehmen und den Durchschnitt verwenden, um Messfehler zu minimieren.
-
-**WHR-Grenzwerte: WHO-Schwelle + NIH/AHA-3-Stufen-Einordnung**
-
-Die **Weltgesundheitsorganisation (WHO)** kennt für das WHR nur zwei Stufen: unterhalb und oberhalb der Risiko-Schwelle (Frauen ≥ 0,85, Männer ≥ 1,00). Die in diesem Rechner verwendete **3-Stufen-Einordnung** (niedrig / moderat / erhöht) folgt der Konvention von **NIH und AHA** (National Institutes of Health / American Heart Association), die eine Zwischenstufe „moderates Risiko" für früh auffällige Werte definieren:
-- **Frauen:** WHR unter 0,80 gilt als niedriges Risiko, 0,80 bis 0,84 als moderat und ab 0,85 als erhöht.
-- **Männer:** WHR unter 0,90 gilt als niedriges Risiko, 0,90 bis 0,99 als moderat und ab 1,00 als erhöht.
-
-Diese Grenzwerte beziehen sich auf europäische Bevölkerungen. Für asiatische Bevölkerungsgruppen werden oft niedrigere Schwellenwerte empfohlen.
-
-**WHtR — Taille-Größe-Verhältnis als zweite Kennzahl**
-
-Das Waist-to-Height Ratio (WHtR) setzt den Taillenumfang ins Verhältnis zur Körpergröße. Es ist besonders einfach zu interpretieren: Ist der Taillenumfang kleiner als die halbe Körpergröße (WHtR unter 0,50), gilt das als optimal. Ab 0,50 steigt das Risiko für Stoffwechselerkrankungen messbar an. Das WHtR hat den Vorteil, dass es auch bei großen und kleinen Menschen aussagekräftig bleibt — ein Problem, das beim BMI bekannt ist.
-
-**WHR vs. BMI — warum der WHR oft besser ist**
-
-Der BMI unterscheidet nicht zwischen Muskelmasse und Fettmasse und sagt nichts über die Fettverteilung aus. Ein durchtrainierter Sportler kann einen hohen BMI haben und trotzdem metabolisch gesund sein. Umgekehrt kann eine normalgewichtige Person mit viel Bauchfett (sogenanntes „TOFI" — Thin Outside, Fat Inside) ein erhöhtes Risiko tragen, das der BMI nicht erfasst. Mehrere große Studien (u. a. INTERHEART, Prospective Studies Collaboration) zeigen, dass der WHR Herz-Kreislauf-Risiken besser vorhersagt als der BMI.
-
-**Was Sie tun können**
-
-Bei einem erhöhten WHR ist die gute Nachricht: Bauchfett spricht besonders gut auf Lebensstiländerungen an. Ausdauersport (3–5× pro Woche, 30–60 Minuten) reduziert viszerales Fett nachweislich — oft schneller als subkutanes Fett an Oberschenkeln und Hüften. Krafttraining erhöht den Grundumsatz und verbessert die Insulinsensitivität. Bei der Ernährung helfen mediterrane Kost, reduzierter Zuckerkonsum und ausreichend Ballaststoffe. Alkohol — insbesondere Bier — fördert die Fetteinlagerung am Bauch besonders stark.
-
-**Einschränkungen**
-
-Der WHR ist ein Screening-Werkzeug, keine Diagnose. Er funktioniert am besten bei Erwachsenen zwischen 18 und 70 Jahren. Bei Schwangeren, Kindern und Menschen mit bestimmten Erkrankungen (z. B. Aszites) ist er nicht aussagekräftig. Auch nach einer großen Mahlzeit oder bei Blähungen können die Messwerte verfälscht sein. Für eine umfassende Risikobeurteilung konsultieren Sie Ihren Arzt.`,
     faq: [
       {
         frage: 'Was ist ein gutes Taille-Hüfte-Verhältnis?',
@@ -2758,44 +2236,7 @@ Der WHR ist ein Screening-Werkzeug, keine Diagnose. Er funktioniert am besten be
     metaDescription: 'Blutdruck einordnen nach ESH-/DHL-Klassifikation — mit Durchschnitt aus mehreren Messungen, Pulsdruck und KI-Erklärung. Kostenlos.',
     keywords: ['blutdruck rechner', 'blutdruck einordnen', 'blutdruckwerte tabelle', 'hypertonie', 'blutdruck normal', 'blutdruck messen', 'systolisch diastolisch'],
     icon: '🩺',
-    formel: 'Pulsdruck = Systolisch − Diastolisch | Mittlerer Druck = Diastolisch + Pulsdruck ÷ 3',
     beispiel: '130/85 mmHg = Hochnormal. Pulsdruck: 45 mmHg. Mittlerer arterieller Druck: 100 mmHg.',
-    erklaerung: `**Was misst der Blutdruck?**
-
-Der Blutdruck beschreibt den Druck, den das Blut auf die Wände der Arterien ausübt. Er wird in Millimeter Quecksilbersäule (mmHg) angegeben und besteht aus zwei Werten: dem systolischen (oberen) und dem diastolischen (unteren) Wert. Der systolische Wert entsteht, wenn das Herz sich zusammenzieht und Blut in die Arterien pumpt. Der diastolische Wert wird gemessen, wenn das Herz sich entspannt und sich wieder mit Blut füllt.
-
-**Blutdruckklassifikation nach ESH / Deutscher Hochdruckliga**
-
-Die **European Society of Hypertension (ESH, Leitlinie 2023)** und die **Deutsche Hochdruckliga (DHL)** teilen Blutdruckwerte in sechs Kategorien ein (die WHO/ISH verwendet ein kompakteres 4-Stufen-Schema — in Deutschland ist jedoch die ESH-/DHL-Klassifikation maßgeblich):
-
-- **Optimal** (unter 120/80): Idealer Blutdruck mit dem geringsten kardiovaskulären Risiko.
-- **Normal** (120–129/80–84): Normaler Blutdruck, kein Handlungsbedarf.
-- **Hochnormal** (130–139/85–89): Leicht erhöht. Lebensstiländerungen können sinnvoll sein.
-- **Hypertonie Grad 1** (140–159/90–99): Leichter Bluthochdruck. Ärztliche Beratung und Lebensstiländerungen empfohlen.
-- **Hypertonie Grad 2** (160–179/100–109): Mittelschwerer Bluthochdruck. Medikamentöse Behandlung meist notwendig.
-- **Hypertonie Grad 3** (ab 180/110): Schwerer Bluthochdruck mit hohem Risiko für Organschäden. Sofortige Behandlung notwendig.
-
-Die Klassifikation richtet sich immer nach dem höheren Grad — wenn also der systolische Wert in Grad 2 fällt und der diastolische in Grad 1, gilt Grad 2.
-
-**Isolierte systolische Hypertonie**
-
-Eine Sonderform ist die isolierte systolische Hypertonie: Der systolische Wert liegt bei 140 mmHg oder darüber, während der diastolische Wert unter 90 mmHg bleibt. Sie tritt besonders häufig bei älteren Menschen auf, weil die Arterien mit dem Alter steifer werden. Trotz des normalen diastolischen Werts erhöht sie das Risiko für Herz-Kreislauf-Erkrankungen und sollte behandelt werden.
-
-**Pulsdruck und mittlerer arterieller Druck**
-
-Der Pulsdruck (Blutdruckamplitude) ist die Differenz zwischen systolischem und diastolischem Wert. Ein normaler Pulsdruck liegt bei 30–50 mmHg. Werte über 60 mmHg deuten auf eine erhöhte Gefäßsteifigkeit hin. Der mittlere arterielle Druck (MAD) beschreibt den durchschnittlichen Druck während eines Herzschlags und wird näherungsweise berechnet als: MAD = Diastolisch + (Systolisch − Diastolisch) ÷ 3.
-
-**Richtig messen**
-
-Für aussagekräftige Ergebnisse sollten Sie mehrere Messungen zu verschiedenen Zeitpunkten durchführen. Empfohlen wird: morgens und abends je zwei Messungen im Abstand von einer Minute, im Sitzen nach fünf Minuten Ruhe, Manschette auf Herzhöhe. Der Rechner kann bis zu fünf Messungen mitteln — das liefert ein genaueres Bild als eine Einzelmessung.
-
-**Lebensstil und Blutdruck**
-
-Viele Faktoren beeinflussen den Blutdruck: Salzkonsum, Bewegung, Stress, Alkohol, Übergewicht und Rauchen. Eine Gewichtsreduktion von 10 kg kann den systolischen Wert um 5–20 mmHg senken. Regelmäßige Ausdauerbewegung (30 Minuten, 5× pro Woche) senkt den Blutdruck um 4–9 mmHg. Eine salzarme Ernährung (unter 6 g pro Tag) bringt 2–8 mmHg.
-
-**Hinweis zur Klassifikation: ESH 2023 vs. ESC 2024**
-
-Die **European Society of Cardiology (ESC)** hat 2024 eine neuere Leitlinie mit einem 3-Stufen-Schema (Non-elevated / Elevated / Hypertension) veröffentlicht. Die **Deutsche Hochdruckliga (DHL)** bleibt in ihrer aktuellen Empfehlung beim bewährten **6-Kategorien-Schema der ESH 2023** — und dieses Schema verwendet auch der Rechner. Wer die neueren ESC-2024-Kategorien braucht, sollte direkt die Leitlinie der European Society of Cardiology konsultieren.`,
     faq: [
       {
         frage: 'Was ist ein normaler Blutdruck?',
@@ -2949,41 +2390,7 @@ Die **European Society of Cardiology (ESC)** hat 2024 eine neuere Leitlinie mit 
     metaDescription: 'Schritte in Kilometer und Kalorien umrechnen — mit Schrittlänge, Gehzeit und Fortschrittsbalken zum 10.000-Schritte-Ziel. Kostenlos.',
     keywords: ['schritte rechner', 'schritte in km', 'schritte kalorien', '10000 schritte', 'schrittlänge berechnen', 'gehgeschwindigkeit', 'kalorienverbrauch gehen'],
     icon: '🚶',
-    formel: 'Schrittlänge ≈ Körpergröße × 0,415 | Distanz = Schritte × Schrittlänge ÷ 100.000 | Kalorien ≈ Distanz × Gewicht × 0,9',
     beispiel: '8.000 Schritte bei 175 cm Größe: Schrittlänge 72,6 cm → 5,81 km. Bei 75 kg: ca. 392 kcal verbrannt.',
-    erklaerung: `**Was berechnet der Schritte-Rechner?**
-
-Der Rechner wandelt Schritte in Kilometer, Kalorien und Gehzeit um. Er berücksichtigt Ihre Körpergröße (für die individuelle Schrittlänge), Ihr Gewicht (für den Kalorienverbrauch) und die Gehgeschwindigkeit (für die Dauer). Ein Fortschrittsbalken zeigt, wie nah Sie dem empfohlenen Tagesziel von 10.000 Schritten sind.
-
-**Schrittlänge — individuell berechnet**
-
-Die Schrittlänge variiert je nach Körpergröße, Schrittfrequenz und Gelände. Als Faustregel gilt: Schrittlänge ≈ Körpergröße × 0,415. Bei einer Körpergröße von 175 cm ergibt das etwa 72,6 cm pro Schritt. Größere Menschen haben längere Schritte — wer 185 cm groß ist, legt pro Schritt rund 76,8 cm zurück und braucht für einen Kilometer weniger Schritte.
-
-Exaktere Werte erhält man durch eigene Messung: 100 Schritte auf einer ebenen Strecke gehen und die zurückgelegte Distanz teilen. Die Formel im Rechner liefert aber einen guten Näherungswert für den Alltagsgebrauch.
-
-**10.000 Schritte — woher kommt das Ziel?**
-
-Die 10.000er-Marke ist eine **populäre Faustregel, kein medizinischer Schwellenwert**. Sie stammt aus einer japanischen Marketingkampagne der 1960er-Jahre für den Schrittzähler „Manpo-kei" (万歩計 = 10.000-Schritte-Messgerät). Aktuelle Studien (**Paluch et al., The Lancet Public Health 2022**, und JAMA-Meta-Analyse 2023) zeigen, dass signifikante Gesundheitsvorteile bereits ab **4.000–7.000 Schritten/Tag** messbar sind: Mit jedem zusätzlichen 1.000 Schritte sinkt das Sterblichkeitsrisiko weiter, der Effekt flacht ab etwa 7.500–10.000 Schritten ab.
-
-Die 10.000er-Marke bleibt als praktikable Zielsetzung sinnvoll — nicht weil sie ein Schwellenwert wäre, sondern weil sie leicht zu merken ist und den größten Teil des kardiovaskulären Nutzens abdeckt. Der größte Sprung kommt beim Übergang von „wenig" zu „mäßig aktiv", nicht zwischen 9.000 und 11.000 Schritten.
-
-**Kalorienverbrauch beim Gehen**
-
-Der Kalorienverbrauch beim Gehen hängt von Gewicht, Geschwindigkeit und Steigung ab. Die Näherungsformel lautet: Kalorien ≈ Distanz (km) × Gewicht (kg) × 0,9. Das ist weniger als beim Joggen (Faktor ~1,0–1,1), aber Gehen ist gelenkschonender und lässt sich leichter in den Alltag integrieren.
-
-Beispiel: 10.000 Schritte bei 175 cm und 75 kg ≈ 7,26 km ≈ 490 kcal. Das entspricht einer kleinen Mahlzeit oder einem Stück Kuchen. Wer abnehmen möchte, kann durch tägliches Gehen ein Kaloriendefizit schaffen, ohne die Gelenke zu belasten.
-
-**Geschwindigkeit und Gehzeit**
-
-Die Gehgeschwindigkeit beeinflusst die Dauer, aber kaum den Kalorienverbrauch pro Kilometer. Langsames Gehen (4 km/h) entspricht einem gemütlichen Spaziergang, normales Tempo (5 km/h) einem zügigen Gang, schnelles Gehen (6,5 km/h) fast einem Walking-Tempo. Für 10.000 Schritte benötigt man bei normalem Tempo etwa 80–100 Minuten — verteilt über den Tag (Arbeitsweg, Mittagspause, Abendspaziergang) gut machbar.
-
-**Tipps für mehr Schritte im Alltag**
-
-- Eine Haltestelle früher aussteigen und den Rest gehen.
-- Treppe statt Aufzug nehmen.
-- Telefonate im Stehen oder Gehen führen.
-- In der Mittagspause einen 15-Minuten-Spaziergang machen.
-- Einkäufe zu Fuß erledigen statt mit dem Auto.`,
     faq: [
       {
         frage: 'Wie viele Schritte sind ein Kilometer?',
@@ -3149,46 +2556,7 @@ Die Gehgeschwindigkeit beeinflusst die Dauer, aber kaum den Kalorienverbrauch pr
     metaDescription: 'Sonnenschutzzeit kostenlos berechnen — Eigenschutzzeit nach Hauttyp, UV-Index und LSF. Mit Nachcreme-Erinnerung und KI-Erklärung.',
     keywords: ['sonnenschutz rechner', 'lsf rechner', 'eigenschutzzeit', 'uv index', 'sonnencreme', 'lichtschutzfaktor', 'hauttyp'],
     icon: '☀️',
-    formel: 'Eigenschutzzeit = Basis × (3 ÷ UV-Index) | Geschützte Zeit = Eigenschutzzeit × LSF × 0,6',
     beispiel: 'Hauttyp II, UV 6–7, LSF 30: Eigenschutz ca. 7 Min., geschützte Zeit ca. 126 Min. Nachcremen nach ca. 63 Min.',
-    erklaerung: `**Was berechnet der Sonnenschutz-Rechner?**
-
-Der Rechner bestimmt, wie lange Sie sich mit und ohne Sonnencreme in der Sonne aufhalten können, ohne einen Sonnenbrand zu riskieren. Er berücksichtigt Ihren Hauttyp (Eigenschutzzeit), den aktuellen UV-Index (Sonnenstärke) und den Lichtschutzfaktor (LSF) Ihrer Sonnencreme.
-
-**Hauttypen nach Fitzpatrick**
-
-Die Dermatologie unterscheidet sechs Hauttypen nach der Fitzpatrick-Skala. Sie bestimmen die Eigenschutzzeit — die Zeit, die die Haut ohne Schutz der Sonne ausgesetzt werden kann, bevor eine Rötung entsteht:
-
-- **Typ I** (sehr hell, Sommersprossen, rotes Haar): 5–10 Minuten. Bräunt nie, bekommt immer Sonnenbrand.
-- **Typ II** (hell, blondes Haar): 10–20 Minuten. Bräunt kaum, häufig Sonnenbrand.
-- **Typ III** (mittelhell, dunkelblond/braun): 20–30 Minuten. Bräunt langsam, gelegentlich Sonnenbrand.
-- **Typ IV** (bräunlich, dunkles Haar): 30–45 Minuten. Bräunt gut, selten Sonnenbrand.
-- **Typ V** (dunkel): ca. 60 Minuten. Bräunt schnell, sehr selten Sonnenbrand.
-- **Typ VI** (sehr dunkel): ca. 90 Minuten. Sonnenbrand extrem selten.
-
-Diese Basiswerte gelten bei einem UV-Index von etwa 3 (mäßig). Bei höherem UV-Index verkürzt sich die Eigenschutzzeit proportional.
-
-**UV-Index — was bedeutet er?**
-
-Der UV-Index (UVI) ist ein international standardisiertes Maß für die sonnenbrandwirksame UV-Strahlung. Er reicht von 0 (nachts) bis über 11 (Hochgebirge, Tropen). In Deutschland erreicht der UV-Index im Sommer typischerweise 6–8. Jede Wetter-App zeigt den aktuellen UV-Index an.
-
-- **1–2 (niedrig):** Kein Schutz nötig für die meisten Hauttypen.
-- **3–5 (mäßig):** Sonnenschutz empfohlen. Mittagssonne meiden.
-- **6–7 (hoch):** Sonnenschutz notwendig. Schatten bevorzugen.
-- **8–10 (sehr hoch):** Starker Schutz nötig. Mittagssonne unbedingt meiden.
-- **11+ (extrem):** Maximaler Schutz. Aufenthalt im Freien minimieren.
-
-**Lichtschutzfaktor (LSF) — was bedeutet die Zahl?**
-
-Der LSF gibt an, um welchen Faktor sich die Eigenschutzzeit verlängert. LSF 30 bedeutet theoretisch: 30× längerer Schutz. In der Praxis wird jedoch zu dünn aufgetragen, die Creme wird durch Schweiß und Wasser abgetragen und der Schutz lässt mit der Zeit nach. Deshalb rechnet der Rechner mit einem Sicherheitsabzug von 40 % (Faktor 0,6).
-
-**Nachcremen — verlängert es die Schutzzeit?**
-
-Nein! Nachcremen verlängert die maximale Schutzzeit nicht, sondern erhält den bestehenden Schutz. Wer nach 2 Stunden nachcremt, hat nicht 4 Stunden Schutz, sondern stellt sicher, dass die verbleibende Schutzzeit nicht durch Abrieb oder Schweiß verloren geht. Der Rechner empfiehlt, nach der Hälfte der geschützten Zeit nachzucremen.
-
-**Richtig eincremen**
-
-Für den vollen LSF-Schutz müssen 2 mg Sonnencreme pro Quadratzentimeter Haut aufgetragen werden. Für einen Erwachsenen entspricht das etwa 30–40 ml (6 Teelöffel) für den gesamten Körper. Die meisten Menschen tragen nur die Hälfte auf — und erhalten damit nur die Hälfte des angegebenen LSF.`,
     // W19-Goldstandard: sonnenschutz-rechner auf volle Tiefe (16 Bausteine, ~1.560 W),
     // Leitformat „statistik" 4× dominant (Eigenschutz/Hauttyp, UV-Index-Stufen, LSF-Wirkung,
     // verstärkende Faktoren). Werte aus lib/berechnungen/sonnenschutz.ts gespiegelt:

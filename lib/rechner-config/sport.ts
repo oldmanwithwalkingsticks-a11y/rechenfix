@@ -12,52 +12,7 @@ export const sportRechner: RechnerConfig[] = [
     metaDescription: 'Pace berechnen beim Laufen: min/km, km/h, Zielzeit und Split-Tabellen für 5k, 10k, Halbmarathon und Marathon. Kostenlos mit KI-Erklärung.',
     keywords: ['pace rechner', 'pace berechnen laufen', 'min/km rechner', 'laufgeschwindigkeit', 'marathon pace', 'halbmarathon pace', 'pace in km/h', 'split zeiten laufen', 'laufzeit rechner'],
     icon: '🏃',
-    formel: 'Pace (min/km) = Gesamtzeit (Sek) ÷ Distanz (km) ÷ 60 | Zeit = Pace × Distanz | km/h = 60 ÷ Pace | 1 mi = 1,60934 km',
     beispiel: '10 km in 55:00 → Pace 5:30 min/km = 10,91 km/h. Marathon (42,195 km) in 4:00:00 → Pace 5:41 min/km. 5 km in 25:00 → Pace 5:00 min/km = 12,0 km/h.',
-    erklaerung: `**Pace berechnen — das wichtigste Maß beim Laufen**
-
-Pace ist die Zeit, die Sie für einen Kilometer benötigen — ausgedrückt als Minuten:Sekunden pro Kilometer (z. B. 5:30 min/km). Im Gegensatz zur Geschwindigkeit in km/h ist Pace beim Laufen das weltweit verwendete Maß, weil es sich schneller im Kopf rechnen lässt: Bei 5:30 min/km läuft man 10 km in 55 Minuten — einfache Mathematik.
-
-Unser Pace-Rechner bietet drei Modi: Pace berechnen (aus Zeit + Distanz), Zielzeit berechnen (aus Pace + Distanz) und benötigte Distanz berechnen (aus Zeit + Pace). Zusätzlich gibt es eine Split-Tabelle mit den Zwischenzeiten bei jedem Kilometer — praktisch für Trainingsläufe und Wettkampfplanung.
-
-**Pace vs. Geschwindigkeit (km/h)**
-
-Beide Werte beschreiben dasselbe, nur anders:
-
-- **Pace (min/km):** Je niedriger, desto schneller. 4:00 min/km ist schneller als 5:00 min/km.
-- **Geschwindigkeit (km/h):** Je höher, desto schneller. 15 km/h ist schneller als 12 km/h.
-
-Umrechnung: km/h = 60 ÷ Pace(min/km). Beispiel: 5:00 min/km = 12 km/h, 4:00 min/km = 15 km/h.
-
-**Typische Pace-Werte und Leistungseinordnung**
-
-- **Anfänger:** 6:30–7:30 min/km (8–9 km/h). Noch locker unterhaltungsfähig.
-- **Fortgeschritten:** 5:00–6:00 min/km (10–12 km/h). Wettkampftempo für Hobbyläufer.
-- **Ambitioniert:** 4:00–5:00 min/km (12–15 km/h). Ehrgeizige Freizeitsportler.
-- **Elite:** unter 3:30 min/km (über 17 km/h). Profis und Spitzensportler.
-
-Ein Marathon-Weltrekord liegt bei unter 3:00 min/km über 42 Kilometer — Tempo, das die meisten Hobbyläufer nicht mal 1 Kilometer durchhalten.
-
-**Pace-Werte für gängige Zielzeiten**
-
-- **5 km in 25 Minuten:** Pace 5:00 min/km — solider Freizeitläufer.
-- **10 km in 50 Minuten:** Pace 5:00 min/km — fortgeschritten.
-- **Halbmarathon in 2:00 h:** Pace 5:41 min/km — ambitionierter Freizeitläufer.
-- **Marathon in 4:00 h:** Pace 5:41 min/km — typisches Ziel erster Marathonläufer.
-- **Marathon in 3:30 h:** Pace 4:58 min/km — ambitioniert.
-- **Marathon in 3:00 h:** Pace 4:16 min/km — sehr schnell.
-
-**Die 80/20-Trainingsregel**
-
-Studien zeigen: Wer im Training 80 % der Zeit langsam läuft (Grundlagenausdauer) und nur 20 % schnell (Tempo-/Intervalltraining), verbessert seine Bestzeiten schneller als wer immer mit gleichem Tempo läuft. Das langsame Tempo liegt typischerweise 60–90 Sekunden über der Wettkampfpace.
-
-**Split-Strategien: Even vs. Negative Splits**
-
-Profis laufen meist mit Negative Splits — die zweite Hälfte schneller als die erste. Das schont die Kräfte für den Schluss. Viele Anfänger starten zu schnell und brechen am Ende ein (Positive Splits). Faustregel: Die ersten 10 % eines Laufs mindestens 10 Sekunden langsamer als die Zielpace.
-
-**Kilometer vs. Meilen (mi/min → min/km)**
-
-Amerikanische und britische Läufer verwenden oft min/mi (Minuten pro Meile). Umrechnung: 1 Meile = 1,60934 km. Eine Pace von 8:00 min/mi entspricht etwa 4:58 min/km — das ist Tempo für ambitionierte Marathonläufer.`,
     faq: [
       {
         frage: 'Was ist Pace beim Laufen?',
@@ -242,53 +197,7 @@ Amerikanische und britische Läufer verwenden oft min/mi (Minuten pro Meile). Um
     metaDescription: 'Herzfrequenz-Trainingszonen berechnen: HFmax nach Tanaka und Karvonen-Formel, 5 Zonen, Fettverbrennung und 80/20-Regel. Kostenlos mit KI-Erklärung.',
     keywords: ['herzfrequenz zonen', 'trainingszonen rechner', 'karvonen formel', 'hfmax berechnen', 'maximale herzfrequenz', 'fettverbrennungszone', 'puls trainingszonen', '80/20 training', 'herzfrequenz laufen'],
     icon: '❤️',
-    formel: 'HFmax (Standard) = 220 − Alter | HFmax (Tanaka) = 208 − 0,7 × Alter | Karvonen: Zielpuls = Ruhepuls + (HFmax − Ruhepuls) × Intensität',
     beispiel: '30 Jahre, Ruhepuls 65: HFmax (Tanaka) = 187. Zone 2 Grundlagenausdauer nach Karvonen: 65 + (187 − 65) × 0,6 = 138 bpm bis 150 bpm. Ideal für den Grundlagenausdauer-Aufbau.',
-    erklaerung: `**Herzfrequenz-Zonen — so trainierst du gezielt**
-
-Die Herzfrequenz (Puls) ist der beste Indikator für die Trainingsintensität. Statt nur auf Tempo oder Gefühl zu achten, orientieren sich Profi- und ambitionierte Freizeitsportler an 5 Herzfrequenz-Zonen. Jede Zone hat einen anderen Trainingseffekt: Regeneration, Fettverbrennung, Ausdauer, Leistung oder Maximum.
-
-Unser Rechner ermittelt Ihre individuelle maximale Herzfrequenz (HFmax) nach verschiedenen Formeln und teilt die Zonen auf Basis der Karvonen-Methode auf — der genaueren Variante, die auch Ihren Ruhepuls berücksichtigt.
-
-**Die maximale Herzfrequenz (HFmax) berechnen**
-
-Es gibt verschiedene Formeln zur Schätzung der HFmax. Keine ist 100 % genau — der wahre Wert kann nur per Belastungstest ermittelt werden. Die wichtigsten Formeln:
-
-- **Standardformel (Fox):** HFmax = 220 − Alter. Einfach, aber ungenau (Abweichung ±10 bpm).
-- **Tanaka-Formel (2001):** HFmax = 208 − 0,7 × Alter. Wissenschaftlich validiert, genauer als die Standardformel.
-- **Karvonen-Methode:** Nutzt HFmax und Ruhepuls — dadurch werden die Zonen individueller.
-
-Für die meisten Menschen ist Tanaka zu empfehlen. Bei 30 Jahren liefert die Standardformel 190, Tanaka 187 — bei 60 Jahren liegen beide weit auseinander (160 vs. 166).
-
-**Die 5 Trainingszonen im Detail**
-
-- **Zone 1 (50–60 % HFmax) — Regeneration:** Sehr lockeres Tempo, z. B. nach hartem Training oder Wettkampf. Puls typ. 100–120 bpm.
-- **Zone 2 (60–70 %) — Grundlagenausdauer:** „Lauf-Grundlage", hier verbringen Marathonis 80 % ihrer Zeit. Fettverbrennung optimal. Puls typ. 120–140 bpm.
-- **Zone 3 (70–80 %) — Aerobe Zone:** Zielzeit-Tempo für lange Wettkämpfe. Schwitzen deutlich, Atmung kontrollierbar. Puls typ. 140–160 bpm.
-- **Zone 4 (80–90 %) — Anaerobe Schwelle:** Tempo, das gerade noch lange haltbar ist. Hartes Training, Intervalle, Tempodauerläufe. Puls typ. 160–180 bpm.
-- **Zone 5 (90–100 %) — Maximum:** Sprint, Maximalintensität, nur für kurze Zeit haltbar. Kurze Intervalle, Wettkampf-Endspurt. Puls typ. 180+ bpm.
-
-**Die Fettverbrennungszone — ein Mythos?**
-
-Jahrzehntelang galt Zone 2 als „Fettverbrennungszone". Stimmt teilweise: Bei niedriger Intensität holt der Körper einen höheren Anteil der Energie aus Fett. Absolut gesehen verbrennen Sie aber in höheren Zonen MEHR Fett pro Stunde, weil der Gesamtverbrauch steigt. Fürs Abnehmen zählt am Ende die Kalorienbilanz — egal in welcher Zone.
-
-Für Ausdauersport ist Zone 2 trotzdem essenziell: Sie baut die „aerobe Basis" auf, ohne die höhere Zonen nicht lange haltbar sind.
-
-**Die Karvonen-Formel: Individuelle Zonen**
-
-Die Karvonen-Methode berücksichtigt den Ruhepuls und liefert realistischere Zonen:
-
-Zielpuls = Ruhepuls + (HFmax − Ruhepuls) × Intensität
-
-Beispiel: 30 Jahre, HFmax 187 bpm, Ruhepuls 65 bpm, Zone 2 (60 %): Zielpuls = 65 + (187 − 65) × 0,6 = 65 + 73 = 138 bpm. Die einfache Formel (ohne Ruhepuls) ergäbe 187 × 0,6 = 112 bpm — deutlich niedriger. Karvonen ist für Trainierte genauer.
-
-**Die 80/20-Regel im Training**
-
-Der Trainingswissenschaftler Stephen Seiler hat nachgewiesen: Elite-Ausdauersportler verbringen 80 % ihrer Trainingszeit in Zone 1–2 (locker) und nur 20 % in Zone 4–5 (hart). Die Mittelzone 3 wird gemieden („Polarized Training"). Diese Verteilung führt zu schnellerem Fortschritt als permanentes Mittelzonentraining.
-
-**Ruhepuls messen — morgens im Bett**
-
-Der Ruhepuls ist der Puls im absoluten Ruhezustand. Am besten morgens direkt nach dem Aufwachen im Bett messen, bevor Sie aufstehen. Bei trainierten Menschen liegt er bei 50–60 bpm, bei Untrainierten bei 70–80 bpm. Ausdauersportler haben oft 40–50 bpm. Ein sinkender Ruhepuls ist ein Zeichen für steigende Fitness.`,
     faq: [
       {
         frage: 'Wie berechne ich meine maximale Herzfrequenz?',
@@ -453,23 +362,7 @@ Der Ruhepuls ist der Puls im absoluten Ruhezustand. Am besten morgens direkt nac
     metaDescription: 'Kalorienverbrauch bei Sport schätzen: MET-Methode nach Aktivität, Gewicht und Dauer ✓ Joggen, Radfahren, Schwimmen ✓ Richtwerte mit KI-Erklärung.',
     keywords: ['kalorienverbrauch rechner', 'kalorien sport', 'met methode', 'kalorienverbrauch joggen', 'kalorienverbrauch berechnen', 'energieverbrauch sport', 'kalorien radfahren', 'met werte'],
     icon: '🏃',
-    formel: 'kcal = MET × Körpergewicht (kg) × Dauer (h)',
     beispiel: 'Joggen (MET 7), 70 kg, 30 min: 7 × 70 × 0,5 = 245 kcal (grobe Schätzung).',
-    erklaerung: `**Kalorienverbrauch bei Bewegung schätzen — die MET-Methode**
-
-Jede Bewegung kostet Energie, gemessen in Kilokalorien (kcal). Wie viel ein Mensch bei einer Aktivität verbraucht, schätzt man üblicherweise mit der MET-Methode. MET steht für metabolisches Äquivalent und beschreibt, um welchen Faktor eine Tätigkeit den Energieumsatz gegenüber der Ruhe erhöht.
-
-**Die Formel**
-
-kcal = MET × Körpergewicht (kg) × Dauer (h). Ein MET-Wert von 1 entspricht dem Verbrauch in völliger Ruhe. Joggen hat rund 7 MET. Eine 70 kg schwere Person, die 30 Minuten joggt, verbraucht so etwa 7 × 70 × 0,5 = 245 kcal Aktivitäts-Energie.
-
-**Warum es nur eine Schätzung ist**
-
-Die MET-Werte stammen aus dem Compendium of Physical Activities und sind Durchschnittswerte. Der tatsächliche Verbrauch hängt von Fitness, Muskelanteil, Technik, Tempo, Gelände, Wetter und Tagesform ab und kann deutlich abweichen. Die Ergebnisse sind eine grobe Orientierung, kein exakter Messwert.
-
-**Bewegung und Gesundheit**
-
-Die WHO empfiehlt Erwachsenen mindestens 150 Minuten moderate oder 75 Minuten intensive Bewegung pro Woche. Für die Gesundheit zählt vor allem die Regelmäßigkeit. Bei Vorerkrankungen oder vor intensiverem Training ist eine ärztliche Rücksprache sinnvoll. Die Werte hier dienen der Einordnung von Aktivitäten, nicht der Verfolgung eines Gewichtsziels.`,
     faq: [
       {
         frage: 'Wie wird der Kalorienverbrauch beim Sport berechnet?',
@@ -652,23 +545,7 @@ Die WHO empfiehlt Erwachsenen mindestens 150 Minuten moderate oder 75 Minuten in
     metaDescription: 'VO2max schätzen: maximale Sauerstoffaufnahme per Cooper-Test oder Ruhe-/Maxpuls ✓ Normwerte ✓ Fitnesslevel einordnen ✓ Richtwerte mit KI-Erklärung.',
     keywords: ['vo2max rechner', 'vo2max berechnen', 'cooper test', 'maximale sauerstoffaufnahme', 'ausdauer messen', 'vo2max normwerte', 'fitnesslevel', 'vo2max schätzen'],
     icon: '🫁',
-    formel: 'Cooper: VO2max = (Distanz in m − 504,9) ÷ 44,73 | Puls: VO2max ≈ 15 × (HFmax ÷ HFruhe)',
     beispiel: 'Cooper-Test 2.400 m in 12 min: (2.400 − 504,9) ÷ 44,73 ≈ 42 ml/kg/min.',
-    erklaerung: `**VO2max — die maximale Sauerstoffaufnahme**
-
-Der VO2max ist die maximale Sauerstoffmenge, die der Körper pro Minute aufnehmen und verwerten kann, angegeben in Milliliter pro Kilogramm Körpergewicht und Minute (ml/kg/min). Er gilt als wichtigster Einzelwert für die Ausdauerleistungsfähigkeit. Unser Rechner schätzt ihn über zwei einfache Methoden.
-
-**Cooper-Test**
-
-Beim Cooper-Test läuft man 12 Minuten so weit wie möglich. Aus der Distanz schätzt die Formel VO2max = (Distanz in m − 504,9) ÷ 44,73 den Wert. 2.400 m ergeben rund 42 ml/kg/min. Der Test braucht nur eine vermessene Strecke und eine Uhr.
-
-**Puls-Methode**
-
-Die Puls-Methode setzt den Maximalpuls ins Verhältnis zum Ruhepuls: VO2max ≈ 15 × (HFmax ÷ HFruhe). Ein niedriger Ruhepuls — typisch für ein trainiertes Herz — ergibt einen höheren Wert. Sie ist bequem, aber ungenauer, weil ein exakter Maximalpuls schwer zu bestimmen ist.
-
-**Schätzwerte, kein Leistungsdruck**
-
-Die Ergebnisse sind Näherungen; der Labortest (Spiroergometrie) ist genauer. Der VO2max ist ein neutraler Anhaltspunkt für die eigene Ausdauer, kein Werturteil. Maximalbelastungstests fordern das Herz-Kreislauf-System stark — bei Vorerkrankungen oder Unsicherheit vorher ärztlich abklären.`,
     faq: [
       {
         frage: 'Was ist der VO2max?',
@@ -843,23 +720,7 @@ Die Ergebnisse sind Näherungen; der Labortest (Spiroergometrie) ist genauer. De
     metaDescription: 'Maximalkraft (1RM) aus einem Satz schätzen: Epley- und Brzycki-Formel ✓ Prozenttabelle ✓ Trainingsgewichte je Ziel ✓ sicher ohne Maximalversuch.',
     keywords: ['1rm rechner', 'maximalkraft berechnen', 'one rep max', 'epley formel', 'brzycki formel', 'trainingsgewicht prozent', '1rm schätzen', 'krafttraining gewicht'],
     icon: '🏋️',
-    formel: 'Epley: 1RM = Gewicht × (1 + Wiederholungen ÷ 30) | Brzycki: 1RM = Gewicht × 36 ÷ (37 − Wiederholungen)',
     beispiel: '80 kg × 5 Wdh → Epley ≈ 93 kg, Brzycki 90 kg. Trainingsgewicht bei 80 % ≈ 74 kg.',
-    erklaerung: `**1RM schätzen — Maximalkraft ohne riskanten Maximalversuch**
-
-Das 1RM (One-Rep Maximum) ist das Gewicht, das man bei einer Übung genau einmal mit sauberer Technik bewegen kann. Es ist die gängige Bezugsgröße, um Trainingsgewichte zu planen. Unser Rechner schätzt es aus einem leichteren Satz — ganz ohne echten Maximalversuch.
-
-**Warum schätzen statt testen?**
-
-Ein echter 1RM-Test birgt ein erhöhtes Verletzungsrisiko, besonders ohne Erfahrung oder Sicherung. Deshalb rechnet man aus „Gewicht × Wiederholungen" auf das Maximum hoch. Das ist sicherer und für die Planung völlig ausreichend.
-
-**Epley und Brzycki**
-
-Epley: 1RM = Gewicht × (1 + Wdh ÷ 30). Brzycki: 1RM = Gewicht × 36 ÷ (37 − Wdh). Bei 80 kg und 5 Wiederholungen ergeben sich rund 93 kg (Epley) bzw. 90 kg (Brzycki). Beide sind am genauesten bei wenigen Wiederholungen.
-
-**Trainingsgewichte aus dem 1RM**
-
-Aus dem 1RM lassen sich Trainingsgewichte als Prozentsatz ableiten: schwer für Maximalkraft (rund 85–100 %), moderat für Muskelaufbau (rund 65–85 %), leichter für Kraftausdauer (rund 50–65 %). Saubere Technik geht dabei immer vor dem nächsten Kilo; Anfänger sollten sich anleiten lassen.`,
     faq: [
       {
         frage: 'Was ist das 1RM?',
@@ -1028,23 +889,7 @@ Aus dem 1RM lassen sich Trainingsgewichte als Prozentsatz ableiten: schwer für 
     metaDescription: 'VDOT nach Jack Daniels aus einem Rennergebnis berechnen und daraus die fünf Trainingspaces (Easy bis Rep) ableiten — mit Rechenweg.',
     keywords: ['vdot rechner', 'jack daniels pace', 'trainingspace rechner', 'vdot berechnen', 'lauftempo trainingszonen', 'daniels running formula', 'easy pace threshold', 'trainingstempo laufen'],
     icon: '🏃',
-    formel: 'VO2 = −4,60 + 0,182258·v + 0,000104·v² | %max-Dauerkurve | VDOT = VO2 ÷ %max | Pace-Zone = f(Prozent · VDOT)',
     beispiel: '10 km in 50:00 ergibt VDOT 40 — daraus u. a. Threshold-Pace 5:05 min/km und Easy-Pace 6:07 min/km.',
-    erklaerung: `**VDOT-Rechner nach Jack Daniels — vom Rennergebnis zu den Trainingspaces**
-
-VDOT ist eine Fitness-Kennzahl des Laufcoachs Jack Daniels. Sie wird aus einem Wettkampfergebnis (Distanz und Zeit) berechnet und vereint die maximale Sauerstoffaufnahme (VO2max) und die Laufökonomie in einer einzigen Zahl. Aus dem VDOT lassen sich individuelle Trainingstempi ableiten — statt „nach Gefühl" zu laufen, trainiert man mit klaren Pace-Vorgaben.
-
-**Wie der VDOT berechnet wird**
-
-Der Rechner ermittelt zunächst die Laufgeschwindigkeit in Metern pro Minute, daraus über die Daniels-Gilbert-Formel die Sauerstoffaufnahme und den Anteil an der VO2max, den man über die Renndauer halten konnte. Ein 10-km-Lauf in 50:00 ergibt einen VDOT von rund 40.
-
-**Die fünf Trainingspaces**
-
-Aus dem VDOT leiten sich fünf Tempobereiche ab: Easy (E) für lockere Dauerläufe, Marathon (M) für das Renntempo, Threshold (T) für die Tempohärte an der Laktatschwelle, Interval (I) an der VO2max und Rep (R) für die Schnelligkeit. Bei VDOT 40 sind das etwa Easy 6:07, Threshold 5:05 und Interval 4:40 min/km.
-
-**Nur Orientierung, kein Gesetz**
-
-Die Werte sind Richtwerte für gesunde, trainierte Läufer nach dem Daniels-Modell. Tagesform, Wetter, Untergrund und Trainingszustand beeinflussen das reale Tempo. Nutzen Sie die Paces als Bereich, nicht als sekundengenaue Vorgabe.`,
     faq: [
       {
         frage: 'Was ist VDOT?',
@@ -1187,23 +1032,7 @@ Die Werte sind Richtwerte für gesunde, trainierte Läufer nach dem Daniels-Mode
     metaDescription: 'Laufband-Steigung umrechnen: Band-Tempo plus Steigung ergibt das Outdoor-Äquivalent auf ebener Straße — mit Pace-Tabelle und Rechenweg.',
     keywords: ['laufband steigung', 'laufband pace outdoor', 'treadmill äquivalent', '1 prozent steigung laufband', 'grade adjusted pace', 'laufband tempo straße', 'laufband umrechnen', 'incline laufband'],
     icon: '🏃',
-    formel: 'Outdoor-km/h = Band-km/h × (1 + 0,03 × Steigung%) | Pace = 60 ÷ km/h',
     beispiel: '10 km/h bei 2 % Steigung: 10 × (1 + 0,03 × 2) = 10,60 km/h ≈ 5:40 min/km auf der Straße.',
-    erklaerung: `**Laufband-Steigung-Rechner — vom Band aufs Outdoor-Tempo**
-
-Laufen auf dem Laufband und auf der Straße ist nicht dasselbe: Auf dem Band fehlt der Luftwiderstand, und das Laufband „zieht" den Fuß ein Stück mit. Dieselbe angezeigte Geschwindigkeit fühlt sich draußen deshalb anstrengender an. Eine eingestellte Steigung gleicht diesen Unterschied aus. Dieser Rechner wandelt Band-Geschwindigkeit und Steigung in ein Outdoor-Äquivalent um — also das Tempo auf ebener Straße bei gleichem Aufwand.
-
-**Die Formel**
-
-Nach Jones & Doust (1996) erhöht jedes Prozent Steigung die Stoffwechselkosten um rund drei Prozent. Daraus folgt: Outdoor-Geschwindigkeit = Band-Geschwindigkeit × (1 + 0,03 × Steigung in Prozent). Ein Band-Tempo von 10 km/h bei 2 % Steigung entspricht also 10 × 1,06 = 10,60 km/h auf der Straße — eine Pace von rund 5:40 statt 6:00 min/km.
-
-**Die 1-Prozent-Regel**
-
-Bei mittlerem Tempo gleicht eine Steigung von etwa 1 % den fehlenden Luftwiderstand aus. Ein Laufband auf 1 % zu stellen macht das Training also mit dem Laufen auf ebener Straße vergleichbar. Ohne Steigung überschätzt man leicht seine reale Straßenform.
-
-**Nur ein Richtwert**
-
-Die Umrechnung gilt für mittlere Laufgeschwindigkeiten. Bei sehr steilen Steigungen, beim Gehen oder bei individueller Laufökonomie weicht der reale Aufwand ab. Nutzen Sie den Wert als Orientierung, nicht als exakte Messung.`,
     faq: [
       {
         frage: 'Warum sollte ich 1 % Steigung einstellen?',
@@ -1363,23 +1192,7 @@ Die Umrechnung gilt für mittlere Laufgeschwindigkeiten. Bei sehr steilen Steigu
     metaDescription: 'FTP aus einem 20-Minuten- oder Ramp-Test berechnen und daraus die sieben Coggan-Watt-Zonen und das Leistungsgewicht (W/kg) ableiten.',
     keywords: ['ftp rechner', 'ftp berechnen 20 minuten', 'coggan zonen', 'watt trainingszonen rad', 'funktionelle schwellenleistung', 'ftp test', 'w/kg rechner rad', 'leistungszonen radfahren'],
     icon: '🚴',
-    formel: 'FTP = Testleistung × Protokoll-Faktor (20-min 0,95 · 8-min 0,90 · Ramp 0,75) | W/kg = FTP ÷ Gewicht',
     beispiel: '20-Minuten-Test mit 260 W: 260 × 0,95 = FTP 247 W, Schwellenzone Z4 222–259 W, bei 75 kg 3,29 W/kg.',
-    erklaerung: `**FTP-Rechner — vom Leistungstest zu den Watt-Trainingszonen**
-
-FTP steht für Functional Threshold Power, die funktionelle Schwellenleistung. Sie beschreibt die höchste Leistung in Watt, die ein Radfahrer etwa eine Stunde lang konstant halten kann, und ist der zentrale Anker für strukturiertes Wattraining. Aus der FTP leiten sich die sieben Coggan-Trainingszonen ab — jede Trainingseinheit wird so zu einem konkreten Watt-Ziel statt einem vagen Gefühl.
-
-**Die Berechnung**
-
-Da ein echter einstündiger Volllasttest sehr fordernd ist, nutzt man kürzere Tests und rechnet sie um. Ein 20-Minuten-Test wird mit 0,95 multipliziert, weil die 20-Minuten-Leistung rund fünf Prozent über der echten Stundenleistung liegt. Ein 260-Watt-Schnitt im 20-Minuten-Test ergibt also eine FTP von 260 × 0,95 = 247 Watt. Andere Protokolle haben eigene Faktoren: der 8-Minuten-Test 0,90, der Ramp-Test (höchste 1-Minuten-Leistung) 0,75.
-
-**W/kg — der faire Vergleich**
-
-Das Leistungsgewicht (Watt pro Kilogramm) macht Fahrer unterschiedlicher Statur vergleichbar, besonders am Berg. FTP 247 W bei 75 kg ergeben 3,29 W/kg — ein gutes Freizeitniveau. An Steigungen zählt W/kg mehr als die reine Wattzahl.
-
-**Richtwerte, keine Laborsicherheit**
-
-Die Faktoren und Zonengrenzen sind bewährte Konventionen nach Allen und Coggan, aber individuelle Abweichungen sind normal. Nutzen Sie die Werte zur Trainingssteuerung, nicht als exakte physiologische Messung.`,
     faq: [
       {
         frage: 'Was ist FTP?',
@@ -1526,23 +1339,7 @@ Die Faktoren und Zonengrenzen sind bewährte Konventionen nach Allen und Coggan,
     metaDescription: 'Schwimm-Pace pro 100 m berechnen und die CSS-Schwellenpace aus 400- und 200-Meter-Test ableiten — mit Trainingszonen und Rechenweg.',
     keywords: ['schwimm pace rechner', 'css schwimmen berechnen', 'critical swim speed', 'schwimmen pace pro 100m', 'schwimm trainingszonen', 'schwellenpace schwimmen', 'css test schwimmen', 'schwimmen tempo'],
     icon: '🏊',
-    formel: 'Pace/100 m = Gesamtzeit ÷ (Distanz ÷ 100) | CSS/100 m = (Zeit 400 m − Zeit 200 m) ÷ 2',
     beispiel: '400 m in 6:40 und 200 m in 3:10: (400 − 190) ÷ 2 = 105 s = CSS-Pace 1:45 pro 100 m.',
-    erklaerung: `**Schwimm-Pace-Rechner — Tempo pro 100 Meter und CSS-Schwellenpace**
-
-Im Schwimmen ist die Grundeinheit für das Tempo die Pace pro 100 Meter, also die Zeit in Minuten und Sekunden, die man für 100 m benötigt. Dieser Rechner hat zwei Modi: Im ersten rechnet er eine beliebige Zeit und Distanz in die Pace pro 100 m um. Im zweiten bestimmt er die CSS — die Critical Swim Speed, also die Schwimm-Schwellenpace — aus zwei kurzen Tests.
-
-**Was die CSS ist**
-
-Die CSS ist das Schwimm-Pendant zur FTP beim Radfahren: die Pace, die man über eine längere Strecke gerade noch konstant halten kann, nahe der Laktatschwelle. Sie ergibt sich aus einem 400-Meter- und einem 200-Meter-Test all-out: CSS-Pace pro 100 m = (Zeit über 400 m − Zeit über 200 m) ÷ 2. Ein 400er in 6:40 (400 s) und ein 200er in 3:10 (190 s) ergeben (400 − 190) ÷ 2 = 105 Sekunden, also 1:45 pro 100 m.
-
-**Trainingszonen aus der CSS**
-
-Aus der CSS leiten sich Trainingsbereiche als Sekunden-Abstand ab: lockeres Grundlagentempo liegt einige Sekunden über der CSS, harte Intervalle einige Sekunden darunter. So wird jede Trainingseinheit zu einem konkreten Pace-Ziel — strukturiertes Schwimmen statt Bahnen sammeln.
-
-**Nur ein Richtwert**
-
-Die CSS-Formel ist eine gute Näherung der Laktatschwelle, aber kein Laborwert. Bahnlänge, Tagesform und Testdisziplin beeinflussen das Ergebnis. Nutzen Sie die Paces als Bereich, nicht als exakte Vorgabe.`,
     faq: [
       {
         frage: 'Was ist CSS beim Schwimmen?',
@@ -1681,23 +1478,7 @@ Die CSS-Formel ist eine gute Näherung der Laktatschwelle, aber kein Laborwert. 
     metaDescription: 'Schritte in Kilometer umrechnen und zurück: Wie weit sind 10.000 Schritte? Mit Schrittlänge aus der Körpergröße und grober Kalorienschätzung.',
     keywords: ['schritte in km', '10000 schritte km', 'schrittlänge berechnen', 'schritte kilometer umrechnen', 'wie weit 10000 schritte', 'schritte pro km', 'schritte distanz', 'schrittlänge körpergröße'],
     icon: '👟',
-    formel: 'Schrittlänge = Körpergröße × Faktor (Gehen 0,415/0,413) | Distanz(km) = Schritte × Schrittlänge ÷ 100.000',
     beispiel: '10.000 Schritte bei 175 cm (Gehen): Schrittlänge 72,6 cm → 10.000 × 72,6 ÷ 100.000 = 7,26 km.',
-    erklaerung: `**Schritte-in-Kilometer-Rechner — wie weit sind deine Schritte?**
-
-Wie weit man mit einer bestimmten Zahl an Schritten kommt, hängt von der Schrittlänge ab — und die ist von Mensch zu Mensch verschieden. Dieser Rechner wandelt Schritte in Kilometer um und zurück, schätzt die Schrittlänge aus der Körpergröße und ergänzt eine grobe Kalorienschätzung. So beantwortet er die klassischen Fragen: „Wie weit sind meine 10.000 Schritte?" und „Wie viele Schritte brauche ich für 5 km?"
-
-**Schrittlänge aus der Körpergröße**
-
-Als gute Näherung gilt: Die Gehschrittlänge entspricht rund 41 bis 42 Prozent der Körpergröße — genauer dem Faktor 0,415 bei Männern und 0,413 bei Frauen. Bei 175 cm ergibt das 175 × 0,415 = 72,6 cm pro Schritt.
-
-**Die Umrechnung**
-
-Distanz in Kilometern = Schritte × Schrittlänge in cm ÷ 100.000. Mit 72,6 cm ergeben 10.000 Schritte also 10.000 × 72,6 ÷ 100.000 = 7,26 km. Umgekehrt braucht man für 5 km rund 6.885 Schritte. Beim Joggen und Laufen wird der Schritt länger (Faktor rund 0,50 bzw. 0,60), sodass dieselbe Schrittzahl mehr Distanz abdeckt.
-
-**Nur ein Richtwert**
-
-Die Schätzung aus der Körpergröße kann individuell um 8 bis 15 Prozent abweichen, weil Beinlänge, Gehstil und Tempo mitspielen. Am genauesten wird es, wenn man die eigene Schrittlänge einmal misst und direkt einträgt. Die Kalorienangabe ist eine grobe MET-Schätzung zur Orientierung.`,
     faq: [
       {
         frage: 'Wie weit sind 10.000 Schritte?',
@@ -1847,23 +1628,7 @@ Die Schätzung aus der Körpergröße kann individuell um 8 bis 15 Prozent abwei
     metaDescription: 'FFMI berechnen: den Fat-Free-Mass-Index aus Gewicht, Größe und Körperfettanteil — eine Kennzahl für Muskulosität, die Muskel von Fett trennt.',
     keywords: ['ffmi rechner', 'fettfreie masse index', 'muskelmasse index berechnen', 'normalisierter ffmi', 'fat free mass index', 'ffmi berechnen', 'muskulosität kennzahl', 'ffmi vs bmi'],
     icon: '🏋️',
-    formel: 'FFM = Gewicht × (1 − Körperfett%) | FFMI = FFM ÷ Größe(m)² | normFFMI = FFMI + 6,1 × (1,8 − Größe)',
     beispiel: '80 kg, 15 % Körperfett, 180 cm: FFM 68 kg → FFMI 68 ÷ 1,80² = 21,0 (normalisiert ebenfalls 21,0).',
-    erklaerung: `**FFMI-Rechner — der Fat-Free-Mass-Index als Kennzahl für Muskulosität**
-
-Der FFMI (Fat-Free-Mass-Index, fettfreie-Masse-Index) ist eine Kennzahl, die die fettfreie Masse — also Muskeln, Knochen, Organe und Wasser — ins Verhältnis zur Körpergröße setzt. Anders als der BMI trennt er Muskel- von Fettmasse und eignet sich deshalb, um die Muskulosität einzuordnen und den Verlauf beim Krafttraining zu verfolgen. Der FFMI ist eine reine Einordnungs-Kennzahl und kein Fitness-, Gesundheits- oder Schönheitsziel.
-
-**Wie der FFMI berechnet wird**
-
-Zuerst wird aus Gewicht und Körperfettanteil die fettfreie Masse bestimmt: FFM = Gewicht × (1 − Körperfettanteil in Prozent). Diese teilt man durch die Körpergröße in Metern zum Quadrat. Ein Beispiel: 80 kg bei 15 Prozent Körperfett ergeben 68 kg fettfreie Masse; geteilt durch 1,80² sind das ein FFMI von 21,0.
-
-**Der normalisierte FFMI**
-
-Da größere Menschen bei gleicher Statur einen etwas niedrigeren FFMI haben, gibt es den normalisierten FFMI, der auf eine Referenzgröße von 1,80 m umrechnet: normFFMI = FFMI + 6,1 × (1,8 − Größe in Metern). So werden große und kleine Personen fair vergleichbar. Bei genau 1,80 m sind FFMI und normalisierter FFMI identisch.
-
-**Nur ein Schätzwert**
-
-Das Ergebnis hängt vollständig von der Genauigkeit der Körperfett-Messung ab, die selbst schon ungenau ist. Der FFMI ist deshalb ein grober Orientierungswert und ersetzt keine medizinische oder sportärztliche Beurteilung.`,
     faq: [
       {
         frage: 'Was ist der FFMI?',
@@ -2001,23 +1766,7 @@ Das Ergebnis hängt vollständig von der Genauigkeit der Körperfett-Messung ab,
     metaDescription: 'Grundumsatz (BMR) nach Mifflin-St Jeor berechnen: wie viele Kalorien der Körper in völliger Ruhe verbraucht — aus Gewicht, Größe, Alter.',
     keywords: ['grundumsatz berechnen', 'bmr rechner', 'mifflin st jeor', 'kalorien ruheumsatz', 'grundumsatz formel', 'ruheumsatz berechnen', 'basalumsatz', 'kalorien grundverbrauch'],
     icon: '🔥',
-    formel: 'Männer: BMR = 10×Gewicht + 6,25×Größe − 5×Alter + 5 | Frauen: … − 161',
     beispiel: '75 kg, 178 cm, 30 Jahre, Mann: 10×75 + 6,25×178 − 5×30 + 5 = 1.718 kcal/Tag in Ruhe.',
-    erklaerung: `**Grundumsatz-Rechner — die Basis-Energie deines Körpers**
-
-Der Grundumsatz (englisch Basal Metabolic Rate, BMR) ist die Energiemenge, die der Körper in völliger Ruhe pro Tag verbraucht — allein für lebensnotwendige Funktionen wie Atmung, Herzschlag, Organtätigkeit und das Halten der Körpertemperatur. Er ist der größte Einzelposten des täglichen Energieverbrauchs und macht bei den meisten Menschen 60 bis 75 Prozent aus. Dieser Rechner schätzt den Grundumsatz mit der Mifflin-St-Jeor-Formel.
-
-**Die Berechnung**
-
-Die Formel nutzt Gewicht, Größe, Alter und Geschlecht. Für Männer gilt: BMR = 10 × Gewicht (kg) + 6,25 × Größe (cm) − 5 × Alter + 5. Für Frauen wird am Ende statt +5 die Konstante −161 verwendet, was die im Schnitt andere Körperzusammensetzung berücksichtigt. Ein 30-jähriger Mann mit 75 kg und 178 cm kommt so auf rund 1.718 kcal pro Tag.
-
-**Grundumsatz ist die Untergrenze**
-
-Wichtig: Der Grundumsatz beschreibt nur den Verbrauch in Ruhe und ist damit die absolute Untergrenze der Energiezufuhr. Dauerhaft weniger zu essen als den Grundumsatz ist nicht ratsam und sollte höchstens unter ärztlicher Begleitung geschehen. Der tatsächliche Tagesbedarf liegt höher, weil jede Bewegung zusätzliche Energie kostet.
-
-**Nur eine Schätzung**
-
-Die Formel liefert einen statistischen Durchschnittswert mit rund ±10 Prozent Abweichung. Muskelmasse, Hormone und individuelle Faktoren beeinflussen den realen Wert. Der Rechner ersetzt keine ärztliche oder ernährungsmedizinische Beratung.`,
     faq: [
       {
         frage: 'Was ist der Grundumsatz?',
@@ -2157,23 +1906,7 @@ Die Formel liefert einen statistischen Durchschnittswert mit rund ±10 Prozent A
     metaDescription: 'Kalorienbedarf (TDEE) berechnen: Grundumsatz mal Aktivitätsfaktor ergibt den täglichen Gesamtbedarf zum Gewicht-Halten — aus Gewicht, Größe, Alter.',
     keywords: ['kalorienbedarf berechnen', 'tdee rechner', 'täglicher kalorienbedarf', 'gesamtumsatz kalorien', 'kalorien tagesbedarf', 'kalorienbedarf frau mann', 'gesamtenergiebedarf', 'aktivitätsfaktor kalorien'],
     icon: '🍽️',
-    formel: 'TDEE = Grundumsatz (Mifflin-St Jeor) × Aktivitätsfaktor (1,2 sitzend … 1,9 extrem aktiv)',
     beispiel: '75 kg, 178 cm, 30 Jahre, Mann, moderat aktiv: Grundumsatz 1.718 × 1,55 = 2.662 kcal/Tag.',
-    erklaerung: `**Kalorienbedarf-Rechner — dein Gesamtbedarf pro Tag**
-
-Der tägliche Kalorienbedarf (englisch Total Daily Energy Expenditure, TDEE) ist die Energiemenge, die der Körper an einem durchschnittlichen Tag insgesamt verbraucht — also der Grundumsatz plus alles, was durch Bewegung dazukommt. Dieser Rechner schätzt den TDEE als den Wert, der das Körpergewicht ungefähr hält.
-
-**Die Berechnung**
-
-Basis ist der Grundumsatz nach Mifflin-St Jeor aus Gewicht, Größe, Alter und Geschlecht. Dieser wird mit einem Aktivitätsfaktor (PAL) multipliziert, der die körperliche Aktivität abbildet: 1,2 bei sitzender Lebensweise bis 1,9 bei körperlich sehr anstrengendem Alltag mit zusätzlichem Sport. Ein 30-jähriger Mann mit 75 kg und 178 cm hat einen Grundumsatz von rund 1.718 kcal; bei moderater Aktivität (Faktor 1,55) ergibt das einen Tagesbedarf von etwa 2.662 kcal.
-
-**Ein Halte-Wert, kein Ziel nach unten**
-
-Der TDEE beschreibt den Bedarf zum Gewicht-Halten. Dieser Rechner gibt bewusst keine Defizit- oder Diätzahlen aus. Wer sein Gewicht verändern möchte, sollte das langsam und am besten mit ärztlicher oder ernährungsmedizinischer Begleitung angehen; dauerhaft weniger zu essen als den Grundumsatz ist nicht ratsam.
-
-**Nur eine Schätzung**
-
-Die größte Unsicherheit ist der Aktivitätsfaktor, der sich nur grob wählen lässt. Insgesamt ist der TDEE eine statistische Schätzung mit rund ±10 bis 15 Prozent Abweichung und ersetzt keine fachliche Beratung.`,
     faq: [
       {
         frage: 'Was ist der TDEE?',
@@ -2319,23 +2052,7 @@ Die größte Unsicherheit ist der Aktivitätsfaktor, der sich nur grob wählen l
     metaDescription: 'Makronährstoffe berechnen: ein Kalorienziel auf Protein, Kohlenhydrate und Fett in Gramm aufteilen — mit ausgewogenen Split-Vorlagen und Rechenweg.',
     keywords: ['makros berechnen', 'makronährstoffe rechner', 'protein kohlenhydrate fett aufteilen', 'makro split', 'gramm aus kalorien', 'makros protein kh fett', 'nährstoffverteilung', 'makronährstoffe gramm'],
     icon: '🥗',
-    formel: 'Gramm = (Ziel-kcal × Anteil%) ÷ kcal-pro-Gramm | Protein 4, Kohlenhydrate 4, Fett 9 kcal/g (Atwater)',
     beispiel: '2.500 kcal, Verteilung 30/40/30: Protein 188 g, Kohlenhydrate 250 g, Fett 83 g.',
-    erklaerung: `**Makronährstoffe-Rechner — vom Kalorienziel zu den Gramm**
-
-Makronährstoffe (kurz Makros) sind die drei energieliefernden Bausteine der Nahrung: Protein, Kohlenhydrate und Fett. Dieser Rechner verteilt ein vorgegebenes Kalorienziel auf diese drei Makros und rechnet die Anteile in konkrete Gramm-Werte um. So wird aus einer abstrakten Zahl wie „2.500 kcal" eine greifbare Vorgabe fürs Essen. Der Rechner verteilt dabei nur — er setzt kein Kalorienziel und keine Abnehm-Vorgabe.
-
-**Die Berechnung**
-
-Grundlage sind die Atwater-Faktoren: Protein und Kohlenhydrate liefern jeweils 4 Kilokalorien pro Gramm, Fett 9. Die Gramm-Menge ergibt sich aus dem Kalorienziel mal dem prozentualen Anteil, geteilt durch die Kalorien pro Gramm. Bei 2.500 kcal und einer ausgewogenen Verteilung von 30 Prozent Protein, 40 Prozent Kohlenhydraten und 30 Prozent Fett sind das 188 g Protein, 250 g Kohlenhydrate und 83 g Fett.
-
-**Verschiedene Verteilungen**
-
-Es gibt nicht die eine richtige Aufteilung. Der Rechner bietet mehrere ausgewogene Vorlagen — von proteinbetont bis kohlenhydratbetont für Ausdauersport — sowie einen frei wählbaren Split. Alle Presets liegen in einem gesundheitlich breiten Rahmen.
-
-**Nur Orientierungswerte**
-
-Wichtig: Die genaue prozentuale Aufteilung ist weniger entscheidend, als oft angenommen. Gesamtkalorien und die Qualität der Lebensmittel wirken stärker. Die Werte sind Orientierung und ersetzen keine ärztliche oder ernährungsmedizinische Beratung.`,
     faq: [
       {
         frage: 'Wie viele Kalorien hat ein Gramm Protein, Kohlenhydrate oder Fett?',
@@ -2480,23 +2197,7 @@ Wichtig: Die genaue prozentuale Aufteilung ist weniger entscheidend, als oft ang
     metaDescription: 'Trinkmenge berechnen: den täglichen Flüssigkeitsbedarf aus Gewicht, Sportdauer und Klima schätzen — als grobe Orientierung für gesunde Erwachsene.',
     keywords: ['trinkmenge berechnen', 'wasserbedarf sport', 'wie viel wasser trinken', 'flüssigkeitsbedarf', 'wasser pro tag', 'trinkmenge sport', 'wasserbedarf berechnen', 'wie viel trinken'],
     icon: '💧',
-    formel: 'Basis = Gewicht × 33 (♂) bzw. 31 (♀) ml/kg | + Sport (min ÷ 30 × 350 ml) | × Klima-Faktor (1,0–1,2)',
     beispiel: '75 kg, 45 min Sport, normales Klima: 2.475 ml Basis + 525 ml Sport = 3,00 L pro Tag.',
-    erklaerung: `**Trinkmenge-Rechner — wie viel Flüssigkeit am Tag?**
-
-Wie viel man trinken sollte, hängt von mehreren Faktoren ab: Körpergewicht, körperlicher Aktivität und Klima. Dieser Rechner schätzt den täglichen Flüssigkeitsbedarf aus diesen Angaben und liefert eine grobe Orientierung — besonders nützlich, um an Trainingstagen und bei Hitze nicht zu wenig zu trinken. Es handelt sich um einen Richtwert für gesunde Erwachsene, nicht um eine medizinische Vorgabe.
-
-**Die Berechnung**
-
-Als Basis gelten rund 30 bis 35 ml pro Kilogramm Körpergewicht und Tag; der Rechner nutzt 33 ml/kg für Männer und 31 ml/kg für Frauen. Für Sport kommen je 30 Minuten moderates Training etwa 350 ml hinzu, um den Schweißverlust auszugleichen. Bei Hitze wird die Basis mit einem Klima-Faktor (bis 1,2) erhöht. Ein 75 kg schwerer Mann mit 45 Minuten Sport bei normalem Klima kommt so auf rund 3,0 Liter.
-
-**Auch zu viel ist ungünstig**
-
-Wichtig: Mehr ist nicht automatisch besser. Sehr große Wassermengen in kurzer Zeit können den Natriumhaushalt gefährlich stören (Hyponatriämie). Der beste natürliche Indikator bleibt das Durstgefühl, ergänzt durch die Urinfarbe — hell bedeutet meist ausreichend versorgt.
-
-**Nur eine Schätzung**
-
-Der individuelle Bedarf schwankt stark. Etwa ein Fünftel der Flüssigkeit nimmt man ohnehin über die Nahrung auf. Bei Nieren- oder Herzerkrankungen gilt oft eine ärztlich verordnete Trinkmenge — dann ist der ärztliche Rat maßgeblich, nicht dieser Rechner.`,
     faq: [
       {
         frage: 'Wie viel Wasser sollte ich pro Tag trinken?',

@@ -42,27 +42,7 @@ export const technikRechner: RechnerConfig[] = [
     metaDescription: 'Download-Zeit berechnen und Mbit/s in MB/s umrechnen ✓ Bandbreiten-Bedarf ✓ DSL, Kabel, Glasfaser ✓ kostenlos mit KI-Erklärung.',
     keywords: ['internetgeschwindigkeit rechner', 'mbit in mb umrechnen', 'mbit/s in mb/s', 'download zeit berechnen', 'bandbreite rechner', 'dsl geschwindigkeit', 'mbit mbyte', 'internet geschwindigkeit'],
     icon: '🌐',
-    formel: 'MB/s = Mbit/s ÷ 8 (1 Byte = 8 Bit) | Download-Zeit = Dateigröße ÷ Bandbreite',
     beispiel: '100 Mbit/s ÷ 8 = 12,5 MB/s. Eine 5-GB-Datei bei 50 Mbit/s (6,25 MB/s): 5.000 MB ÷ 6,25 = 800 s ≈ 13 min.',
-    erklaerung: `**Internetgeschwindigkeit berechnen — Mbit/s, MB/s und Download-Zeit**
-
-Wer einen Internettarif bucht, sieht eine Zahl wie „100 Mbit/s". Wer dann eine Datei herunterlädt, sieht im Browser eine ganz andere Zahl wie „12,5 MB/s". Beide stimmen — sie verwenden nur unterschiedliche Einheiten. Unser Rechner übersetzt zwischen beiden und schätzt, wie lange ein Download bei Ihrer Bandbreite dauert.
-
-**Mbit/s vs. MB/s — der Faktor 8**
-
-Provider geben die Geschwindigkeit in Megabit pro Sekunde (Mbit/s) an, Dateigrößen und Download-Anzeigen rechnen in Megabyte pro Sekunde (MB/s). Ein Byte besteht aus 8 Bit, daher gilt: MB/s = Mbit/s ÷ 8. Ein 100-Mbit-Anschluss liefert also höchstens 12,5 MB/s, ein 16-Mbit-DSL rund 2 MB/s.
-
-**Download-Zeit abschätzen**
-
-Die Dauer eines Downloads ergibt sich aus Dateigröße ÷ Bandbreite. Eine 5-GB-Datei (5.000 MB) bei 50 Mbit/s (6,25 MB/s) braucht rechnerisch 800 Sekunden, also rund 13 Minuten. Verdoppelt sich die Bandbreite, halbiert sich die Zeit.
-
-**Warum die reale Geschwindigkeit unter dem Tarif liegt**
-
-Die beworbene Bandbreite ist ein Bis-zu-Wert. Protokoll-Overhead, WLAN statt LAN-Kabel, ausgelastete Knoten zur Hauptzeit und die Leitungsdämpfung bei DSL kosten Tempo. Realistisch erreicht man per Kabel oft 80 bis 90 Prozent des Tarifs, über WLAN teils weniger. Die Bundesnetzagentur stellt mit der Breitbandmessung ein offizielles Messverfahren bereit.
-
-**Welche Bandbreite brauche ich?**
-
-Surfen und E-Mail kommen mit wenigen Mbit/s aus, HD-Streaming braucht etwa 5–8 Mbit/s, 4K-Streaming rund 25 Mbit/s. In Haushalten mit mehreren Personen addieren sich die Bedarfe. Alle Werte dienen der Orientierung.`,
     faq: [
       {
         frage: 'Wie rechne ich Mbit/s in MB/s um?',
@@ -231,23 +211,7 @@ Surfen und E-Mail kommen mit wenigen Mbit/s aus, HD-Streaming braucht etwa 5–8
     metaDescription: 'Downloadzeit berechnen: Wie lange dauert ein Download bei Ihrer Internetgeschwindigkeit? Mit MB-Mbit-Umrechnung, Overhead und Rechenweg.',
     keywords: ['download rechner', 'downloadzeit berechnen', 'download dauer', 'mbit in mb', 'mbit/s in mb/s', 'wie lange dauert download', 'downloadzeit internetgeschwindigkeit', 'datei download zeit'],
     icon: '⬇️',
-    formel: 'Downloadzeit = Dateigröße(MB) × 8 ÷ Bandbreite(Mbit/s) ÷ Wirkungsgrad | 1 GB = 1.000 MB',
     beispiel: '1.500 MB bei 50 Mbit/s: 1.500 × 8 = 12.000 Mbit ÷ 50 = 240 s (ideal) ÷ 0,85 ≈ 282 s = 4 min 42 s (real).',
-    erklaerung: `**Downloadzeit berechnen — Dateigröße, Bandbreite und Overhead**
-
-Wie lange ein Download dauert, hängt von der Dateigröße und der Internetgeschwindigkeit ab. Die Tücke steckt in den Einheiten: Dateigrößen werden in Megabyte (MB) angegeben, Internetgeschwindigkeiten dagegen in Megabit pro Sekunde (Mbit/s). Da ein Byte aus acht Bit besteht, muss die Dateigröße zuerst mit 8 multipliziert werden. Dieser Rechner nimmt Ihnen die Umrechnung ab und zeigt die ideale wie die realistische Downloadzeit.
-
-**Die Megabit-vs.-Megabyte-Falle**
-
-Der häufigste Fehler: Ein 50-Mbit/s-Anschluss überträgt nicht 50 Megabyte pro Sekunde, sondern nur 50 ÷ 8 = 6,25 MB/s. Wer das übersieht, schätzt Downloadzeiten achtmal zu kurz. Die Faustregel lautet daher: Mbit/s geteilt durch 8 ergibt MB/s.
-
-**Warum die reale Zeit länger ist**
-
-Die ideale Zeit unterstellt, dass jede Sekunde die volle Bandbreite ankommt. In der Praxis kosten Protokoll-Overhead (TCP/IP), WLAN-Verluste, Server-Drosselung und Auslastung zur Hauptverkehrszeit Tempo. Der Rechner bildet das über einen Wirkungsgrad ab: 85 Prozent als realistischer Standard, 70 Prozent bei schwachem WLAN, 100 Prozent nur als theoretischer Bestwert.
-
-**Typische Dateigrößen**
-
-Ein Foto wiegt 5 bis 25 MB, ein Song 3 bis 5 MB, ein HD-Film 1 bis 4 GB, ein 4K-Film 15 bis 40 GB und ein aktuelles Spiel 50 bis 150 GB. Daran zeigt sich, warum sich ein schneller Anschluss vor allem bei großen Dateien auszahlt.`,
     faq: [
       {
         frage: 'Wie berechne ich die Downloadzeit?',
@@ -396,19 +360,7 @@ Ein Foto wiegt 5 bis 25 MB, ein Song 3 bis 5 MB, ein HD-Film 1 bis 4 GB, ein 4K-
     metaDescription: 'Akku-Ladezeit berechnen: Wie lange lädt ein Akku bei gegebener Kapazität und Ladestrom? Mit Watt-Umrechnung, Ladekurve und Rechenweg.',
     keywords: ['akku ladezeit rechner', 'ladezeit berechnen', 'wie lange lädt akku', 'mah ladezeit', 'powerbank ladezeit', 'handy ladezeit berechnen', 'watt in ma', 'akku laden dauer'],
     icon: '🔋',
-    formel: 'Ladezeit = Kapazität(mAh) ÷ Ladestrom(mA) × Effizienzfaktor | Ladestrom(mA) = Leistung(W) ÷ Spannung(V) × 1.000',
     beispiel: '5.000 mAh bei 2.000 mA: 5.000 ÷ 2.000 = 2,5 h (ideal) × 1,2 = 3 h 00 min (real).',
-    erklaerung: `**Akku-Ladezeit berechnen — Kapazität, Ladestrom und Effizienz**
-
-Wie lange ein Akku lädt, hängt von seiner Kapazität (in Milliamperestunden, mAh) und dem Ladestrom (in Milliampere, mA) ab. Die Grundrechnung ist einfach: Kapazität geteilt durch Ladestrom ergibt die theoretische Ladezeit in Stunden. Ein 5.000-mAh-Akku an einem 2.000-mA-Ladegerät bräuchte demnach 2,5 Stunden. In der Praxis dauert es länger.
-
-**Warum die reale Ladezeit länger ist**
-
-Lithium-Ionen-Akkus laden nach dem CC/CV-Verfahren (Konstantstrom, dann Konstantspannung). Bis etwa 80 Prozent fließt der volle Strom, danach drosselt der Akku stark, um die Zellen zu schonen. Die letzten 20 Prozent dauern deshalb überproportional lange. Hinzu kommen Wärmeverluste. Dieser Rechner bildet das über einen Effizienzfaktor ab: standardmäßig 1,2 (rund 20 Prozent Aufschlag), 1,3 bei schwachem Netzteil oder Kälte.
-
-**Watt in Milliampere umrechnen**
-
-Viele Ladegeräte geben statt des Stroms eine Leistung in Watt an. Es gilt: Ladestrom (mA) = Leistung (W) ÷ Spannung (V) × 1.000. Ein 10-Watt-Netzteil bei 5 Volt liefert also 2.000 mA. Achtung: Schnellladen nutzt höhere Spannungen (9, 12 oder 20 Volt), weshalb die mAh-Schätzung dort nur eine grobe Näherung ist.`,
     faq: [
       {
         frage: 'Wie berechne ich die Ladezeit eines Akkus?',
@@ -557,19 +509,7 @@ Viele Ladegeräte geben statt des Stroms eine Leistung in Watt an. Es gilt: Lade
     metaDescription: 'Powerbank-Rechner: Wie oft lädt eine Powerbank Ihr Handy? Mit nutzbarer statt aufgedruckter Kapazität — realistisch dank Wirkungsgrad.',
     keywords: ['powerbank rechner', 'wie oft lädt powerbank handy', 'powerbank kapazität nutzbar', 'powerbank ladungen berechnen', 'nutzbare kapazität powerbank', '20000 mah powerbank', 'powerbank wirkungsgrad', 'powerbank handy laden'],
     icon: '🔋',
-    formel: 'Nutzbare Kapazität = Nennkapazität(mAh) × Wirkungsgrad | Ladungen = Nutzbare Kapazität ÷ Geräte-Akku(mAh)',
     beispiel: '20.000 mAh × 0,65 = 13.000 mAh nutzbar ÷ 5.000 mAh Handy = 2,6 volle Ladungen.',
-    erklaerung: `**Powerbank-Ladungen berechnen — warum die aufgedruckte Kapazität täuscht**
-
-Wie oft eine Powerbank ein Gerät lädt, lässt sich nicht einfach durch Teilen der aufgedruckten Kapazität durch den Geräte-Akku ermitteln. Eine 20.000-mAh-Powerbank lädt ein 5.000-mAh-Handy nämlich nicht vier Mal, sondern nur rund 2,6 Mal. Der Grund liegt in der Spannungswandlung.
-
-**Nutzbare statt aufgedruckte Kapazität**
-
-Die aufgedruckte Kapazität gilt für die verbauten Lithium-Ionen-Zellen mit rund 3,7 Volt. Geladen wird ein Handy aber über den USB-Anschluss mit 5 Volt. Die Powerbank muss die Spannung also hochwandeln — und dabei gehen rund ein Drittel der Energie als Wärme und Wandlungsverlust verloren. Real nutzbar bleiben typisch 60 bis 70 Prozent. Dieser Rechner setzt standardmäßig einen Wirkungsgrad von 0,65 an.
-
-**Die Rechnung**
-
-Nutzbare Kapazität = Nennkapazität × Wirkungsgrad; Ladungen = nutzbare Kapazität ÷ Geräte-Akku. Eine 20.000-mAh-Powerbank hat also rund 13.000 mAh nutzbar und lädt damit ein 5.000-mAh-Handy etwa 2,6 Mal voll. Wer kürzere, dickere Kabel nutzt und nicht schnelllädt, kommt näher an 70 Prozent.`,
     faq: [
       {
         frage: 'Warum lädt eine 20.000-mAh-Powerbank mein 5.000-mAh-Handy nicht 4-mal?',
@@ -720,23 +660,7 @@ Nutzbare Kapazität = Nennkapazität × Wirkungsgrad; Ladungen = nutzbare Kapazi
     metaDescription: 'Seitenverhältnis-Rechner: aus der Auflösung das Format (16:9, 21:9, 4:5) bestimmen oder eine fehlende Seite berechnen — mit Rechenweg.',
     keywords: ['seitenverhältnis rechner', 'aspect ratio rechner', '16:9 berechnen', 'auflösung seitenverhältnis', 'bildformat berechnen', 'fehlende seite berechnen', '21:9 64:27', 'pixel verhältnis'],
     icon: '📐',
-    formel: 'Verhältnis = Breite ÷ ggT : Höhe ÷ ggT | Fehlende Höhe = Breite × Höhen-Anteil ÷ Breiten-Anteil',
     beispiel: '1920 × 1080: ggT = 120 → 1920 ÷ 120 : 1080 ÷ 120 = 16:9 (Full HD).',
-    erklaerung: `**Seitenverhältnis berechnen — aus der Auflösung das Bildformat bestimmen**
-
-Das Seitenverhältnis beschreibt das Verhältnis von Breite zu Höhe eines Bildes oder Bildschirms — unabhängig von der absoluten Pixelzahl. Es wird als gekürztes Zahlenpaar geschrieben, etwa 16:9 oder 4:3. Dieser Rechner ermittelt aus einer Auflösung das Seitenverhältnis und kann umgekehrt aus einem Verhältnis und einer bekannten Seite die fehlende Dimension berechnen.
-
-**Vom Pixelmaß zum gekürzten Verhältnis**
-
-Um aus einer Auflösung wie 1920 × 1080 das Verhältnis zu erhalten, werden beide Werte durch ihren größten gemeinsamen Teiler (ggT) geteilt. Für 1920 und 1080 ist der ggT 120, woraus sich 16:9 ergibt. Das funktioniert für jede Auflösung über den Euklidischen Algorithmus.
-
-**Warum 2560 × 1080 nicht glatt 21:9 ist**
-
-Manche Ultrawide-Auflösungen kürzen sich nicht auf das beworbene Verhältnis. 2560 × 1080 ergibt mathematisch exakt 64:27, nicht 21:9 — die Hersteller runden auf die griffigere Zahl. Auch 1366 × 768, eine verbreitete Notebook-Auflösung, ist nur näherungsweise 16:9 und kürzt sich auf 683:384.
-
-**Eine fehlende Seite berechnen**
-
-Kennt man das gewünschte Verhältnis und eine Seite, ergibt sich die andere durch einfache Multiplikation: Bei 16:9 und einer Breite von 2560 Pixeln ist die Höhe 2560 × 9 ÷ 16 = 1440 Pixel. Das ist praktisch für Video-Exporte, Canvas-Größen oder Bannerformate.`,
     faq: [
       {
         frage: 'Wie berechne ich das Seitenverhältnis aus einer Auflösung?',
@@ -894,23 +818,7 @@ Kennt man das gewünschte Verhältnis und eine Seite, ergibt sich die andere dur
     metaDescription: 'DPI-Rechner: Druckgröße aus Pixeln und DPI berechnen oder die nötige Auflösung fürs Druckformat — A4, Foto, Poster, mit Rechenweg.',
     keywords: ['dpi rechner', 'druckgröße pixel', 'ppi druck', 'a4 auflösung dpi', 'pixel in cm', 'druckauflösung berechnen', '300 dpi pixel', 'foto drucken auflösung'],
     icon: '🖨️',
-    formel: 'Druckgröße (cm) = Pixel ÷ DPI × 2,54 | Nötige Pixel = Druckgröße(cm) ÷ 2,54 × DPI',
     beispiel: '6.000 × 4.000 px @ 300 dpi: 6.000 ÷ 300 × 2,54 = 50,8 cm breit, 4.000 ÷ 300 × 2,54 = 33,9 cm hoch.',
-    erklaerung: `**DPI und Druckgröße berechnen — wie viele Pixel braucht ein Druck?**
-
-DPI (dots per inch) gibt an, wie viele Bildpunkte pro Zoll gedruckt werden. Die Druckdichte entscheidet, wie groß und wie scharf ein Bild auf Papier erscheint. Dieser Rechner ermittelt aus Pixelmaßen und DPI die physische Druckgröße in Zentimetern — und umgekehrt die nötige Pixelzahl für ein gewünschtes Druckformat.
-
-**Von Pixeln zur Druckgröße**
-
-Die Formel lautet: Druckgröße in cm = Pixel ÷ DPI × 2,54 (ein Zoll entspricht 2,54 cm). Ein 6.000 Pixel breites Bild druckt bei 300 dpi also 6.000 ÷ 300 × 2,54 = 50,8 cm breit — größer als A3. Dasselbe Bild bei nur 72 dpi würde über zwei Meter breit, aber grob und unscharf.
-
-**DPI ist keine Bildeigenschaft**
-
-Wichtig: Die DPI-Angabe in einer Bilddatei ändert die Pixel nicht. Sie ist nur ein Hinweis für den Druck. Entscheidend für die mögliche Druckgröße ist allein die Pixelzahl. Ein 6.000-Pixel-Bild lässt sich klein und scharf oder groß und grob drucken — die DPI legen nur fest, auf welche Fläche die vorhandenen Pixel verteilt werden.
-
-**Web 72, Druck 300**
-
-Für die Bildschirmanzeige ist DPI bedeutungslos — dort zählt nur die Pixelzahl. Für scharfen Fotodruck aus Leseabstand gelten 300 dpi als Richtwert. Bei Postern, die man aus Distanz betrachtet, genügen 150 dpi oder weniger.`,
     faq: [
       {
         frage: 'Wie viele Pixel braucht A4 in Druckqualität?',
@@ -1055,23 +963,7 @@ Für die Bildschirmanzeige ist DPI bedeutungslos — dort zählt nur die Pixelza
     metaDescription: 'Video-Dateigröße berechnen: Wie groß wird ein Video bei Bitrate, Länge und Auflösung? Mit Bitrate-Richtwerten für 1080p bis 8K.',
     keywords: ['video dateigröße', 'bitrate rechner', '4k speicherbedarf', 'video größe berechnen', 'video bitrate dateigröße', 'wie groß wird mein video', 'speicherbedarf video', 'mbit/s video'],
     icon: '🎬',
-    formel: 'Größe (MB) = Bitrate(Mbit/s) × Länge(Sekunden) ÷ 8 | Größe (GB) = MB ÷ 1.000',
     beispiel: '1080p mit 8 Mbit/s, 10 min: 8 × 600 s ÷ 8 = 600 MB.',
-    erklaerung: `**Video-Dateigröße berechnen — Bitrate, Länge und die ÷8-Regel**
-
-Wie groß eine Videodatei wird, hängt fast nur von zwei Werten ab: der Bitrate und der Länge. Die Auflösung (720p, 1080p, 4K) wirkt dabei nur indirekt — nämlich darüber, welche Bitrate für eine gute Bildqualität nötig ist. Dieser Rechner ermittelt aus Bitrate und Länge die zu erwartende Dateigröße und bietet Bitrate-Richtwerte für die gängigen Auflösungen.
-
-**Die Formel**
-
-Größe in MB = Bitrate (Mbit/s) × Länge (Sekunden) ÷ 8. Die Division durch 8 stammt aus der Umrechnung von Bit in Byte: Ein Byte besteht aus acht Bit. Ein 10-minütiges 1080p-Video mit 8 Mbit/s ergibt also 8 × 600 ÷ 8 = 600 MB. Für Stunden- oder Gigabyte-Werte rechnet man einfach weiter: 1.000 MB entsprechen 1 GB.
-
-**Warum 4K so viel Speicher frisst**
-
-Eine höhere Auflösung verlangt eine deutlich höhere Bitrate, um scharf zu bleiben. Während 1080p mit rund 8 Mbit/s auskommt, braucht 4K etwa 45 Mbit/s — also ungefähr das Fünf- bis Sechsfache. Entsprechend ist ein 4K-Video bei gleicher Länge rund fünfmal so groß wie ein 1080p-Video. Eine Stunde 4K bei 45 Mbit/s belegt rund 20 GB.
-
-**Codec und Inhalt zählen mit**
-
-Die genannten Bitraten sind Richtwerte für gängige Codecs (H.264, H.265). Neuere Codecs wie AV1 liefern bei gleicher Qualität kleinere Dateien, und ruhige Szenen brauchen weniger Daten als schnelle Action. Die Berechnung ist daher eine gute Schätzung, kein exakter Laborwert.`,
     faq: [
       {
         frage: 'Wie groß wird eine Stunde 4K-Video?',
@@ -1221,23 +1113,7 @@ Die genannten Bitraten sind Richtwerte für gängige Codecs (H.264, H.265). Neue
     metaDescription: 'Netzteil-Rechner: passende PC-Wattzahl aus CPU, GPU und Komponenten plus Reserve berechnen — mit Beispiel-Konfigurationen und Rechenweg.',
     keywords: ['netzteil rechner', 'pc watt berechnen', 'psu calculator deutsch', 'wieviel watt netzteil', 'netzteil wattzahl', 'pc stromverbrauch netzteil', 'gaming pc netzteil', 'netzteil größe'],
     icon: '🔌',
-    formel: 'Gesamtlast = CPU + GPU + RAM×5 + SSD×5 + HDD×8 + Lüfter×2 | Empfohlen = Gesamtlast × (1 + Reserve)',
     beispiel: 'Gaming-Mittelklasse: 95 + 170 + 10 + 5 + 8 + 8 = 296 W × 1,30 = 385 W → 400-W-Netzteil.',
-    erklaerung: `**Netzteil-Wattzahl berechnen — wie viel Watt braucht mein PC?**
-
-Die richtige Netzteilgröße ergibt sich nicht aus einer Wunschzahl, sondern aus dem tatsächlichen Verbrauch der verbauten Komponenten plus einer sinnvollen Reserve. Dieser Rechner addiert die Volllast-Verbräuche von CPU, Grafikkarte, Arbeitsspeicher, Laufwerken und Lüftern und schlägt eine passende, gängige Netzteilgröße vor.
-
-**Die Rechnung**
-
-Gesamtlast = CPU + GPU + (RAM-Riegel × 5 W) + (SSD × 5 W) + (HDD × 8 W) + (Lüfter × 2 W). Auf diese Summe kommt eine Reserve von standardmäßig 30 Prozent, anschließend wird auf die nächste handelsübliche Netzteilgröße aufgerundet. Beispiel: Ein Gaming-PC mit 95-W-CPU und 170-W-Grafikkarte landet bei rund 296 W Gesamtlast, mit Reserve bei 385 W — empfohlen wird also ein 400-W-Netzteil.
-
-**Warum nicht die exakte Last?**
-
-Man wählt bewusst etwas mehr als die reine Summe. Grafikkarten erzeugen kurze Lastspitzen, die deutlich über dem Durchschnitt liegen; Netzteile arbeiten bei rund 50 Prozent Auslastung am effizientesten; und Kondensatoren altern über die Jahre. Eine Reserve von etwa 30 Prozent deckt all das ab und lässt zugleich Spielraum für spätere Aufrüstungen.
-
-**Qualität vor reiner Wattzahl**
-
-Ein Netzteil zieht nie mehr, als der PC tatsächlich braucht — eine 600-W-PSU verbraucht im Leerlauf nur 60 bis 90 W, nicht 600. Wichtiger als eine möglichst hohe Wattzahl sind daher eine gute 80-PLUS-Effizienz, saubere Schutzschaltungen und genügend Stromstecker für die Grafikkarte.`,
     faq: [
       {
         frage: 'Wie viel Watt braucht mein PC wirklich?',
@@ -1384,23 +1260,7 @@ Ein Netzteil zieht nie mehr, als der PC tatsächlich braucht — eine 600-W-PSU 
     metaDescription: 'USV-Laufzeit berechnen: Wie lange überbrückt eine USV den Stromausfall bei gegebener Last? Mit VA-zu-Watt-Umrechnung und Rechenweg.',
     keywords: ['usv laufzeit', 'ups laufzeit berechnen', 'va in watt', 'überbrückungszeit usv', 'usv akku laufzeit', 'usv dimensionieren', 'unterbrechungsfreie stromversorgung laufzeit', 'usv watt'],
     icon: '🔋',
-    formel: 'Laufzeit (min) = Kapazität(Wh) × Wirkungsgrad ÷ Last(W) × 60 | W = VA × Leistungsfaktor | Wh = V × Ah',
     beispiel: '216-Wh-USV bei 200 W: 216 × 0,9 ÷ 200 × 60 = 58,3 min Überbrückung.',
-    erklaerung: `**USV-Laufzeit berechnen — wie lange überbrückt eine USV den Stromausfall?**
-
-Eine USV (unterbrechungsfreie Stromversorgung, englisch UPS) hält Geräte bei einem Stromausfall am Laufen — lange genug, um Daten zu sichern und sauber herunterzufahren oder eine kurze Lücke ganz zu überbrücken. Wie lange das gelingt, hängt von der Akku-Kapazität und der angeschlossenen Last ab. Dieser Rechner ermittelt die Überbrückungszeit und rechnet dabei auch VA in Watt um.
-
-**Die Rechnung**
-
-Laufzeit in Minuten = Akku-Kapazität (Wh) × Wirkungsgrad ÷ Last (W) × 60. Der Wirkungsgrad (standardmäßig 0,9) berücksichtigt die Verluste des Wechselrichters. Eine 216-Wh-USV bei 200 W Last überbrückt also 216 × 0,9 ÷ 200 × 60 = rund 58 Minuten.
-
-**VA ist nicht Watt**
-
-USV-Geräte tragen meist eine VA-Angabe (Scheinleistung), etwa „1500 VA". Nutzbar ist davon nur die Wirkleistung in Watt: W = VA × Leistungsfaktor. Bei älteren Geräten liegt dieser Faktor oft bei 0,6, sodass aus 1500 VA nur 900 W werden. Wer mit der VA-Zahl statt mit Watt rechnet, schätzt die Laufzeit deutlich zu optimistisch.
-
-**Akku-Kapazität selbst bestimmen**
-
-Steht die Wh-Zahl nicht auf dem Gerät, lässt sie sich aus dem Akku berechnen: Wh = Spannung (V) × Kapazität (Ah). Ein 24-V-Akku mit 9 Ah hat also 216 Wh.`,
     faq: [
       {
         frage: 'Was bedeutet VA bei einer USV?',
@@ -1540,23 +1400,7 @@ Steht die Wh-Zahl nicht auf dem Gerät, lässt sie sich aus dem Akku berechnen: 
     metaDescription: 'E-Auto-Ladezeit berechnen: Wie lange lädt ein Elektroauto an Wallbox oder Schnelllader? Richtwerte für AC und DC mit Rechenweg.',
     keywords: ['e-auto ladezeit', 'ladedauer elektroauto', 'wallbox 11 kw ladezeit', 'schnellladen 10 80', 'elektroauto laden dauer', 'ladezeit berechnen e-auto', 'ac dc laden', 'onboard charger'],
     icon: '⚡',
-    formel: 'Energie = Akku(kWh) × (Ziel − Start) ÷ 100 | AC: ÷ min(Wallbox, Onboard-Charger) × 1,10 | DC: ÷ (Peak × 0,75) × 1,07',
     beispiel: '60 kWh, 10→80 %, AC 11 kW (Wallbox & Auto): 42 kWh ÷ 11 × 1,10 ≈ 4 h 12 min (Richtwert).',
-    erklaerung: `**E-Auto-Ladezeit berechnen — Wallbox, Schnelllader und der Engpass**
-
-Wie lange ein Elektroauto lädt, hängt von der nachzuladenden Energiemenge und der effektiven Ladeleistung ab. Dieser Rechner ermittelt die Ladezeit für AC-Laden (Wallbox) und DC-Schnellladen — als Richtwert inklusive typischer Ladeverluste. Alle Werte sind Richtwerte mit ±10–30 Prozent Abweichung (Stand 2026), keine Herstellergarantie.
-
-**Die Rechnung**
-
-Zuerst die nachzuladende Energie: Akku-Kapazität × (Ziel-Ladestand − Start-Ladestand) ÷ 100. Ein 60-kWh-Akku von 10 auf 80 Prozent braucht also 42 kWh. Beim AC-Laden teilt man diese Energie durch die effektive Leistung und rechnet rund 10 Prozent Ladeverlust hinzu; beim DC-Schnellladen sind es etwa 7 Prozent.
-
-**Der Engpass bestimmt die Zeit**
-
-Beim AC-Laden gilt immer das Minimum aus Wallbox-Leistung und dem fahrzeugseitigen Onboard-Charger. Eine 22-kW-Wallbox lädt ein Auto mit 11-kW-Onboard-Charger nur mit 11 kW — schneller geht es nicht, weil das Auto nicht mehr annimmt. Beim DC-Laden begrenzt das Fahrzeug-DC-Limit, was eine 300-kW-Säule liefern kann.
-
-**Warum 10 bis 80 Prozent?**
-
-Oberhalb von rund 80 Prozent drosselt das Batteriemanagement die DC-Ladeleistung stark, um die Zellen zu schonen. Das letzte Fünftel dauert deshalb überproportional lange. Für das Schnellladen unterwegs ist 10 bis 80 Prozent darum der praxisrelevante Bereich.`,
     faq: [
       {
         frage: 'Warum lädt mein Auto an der 22-kW-Wallbox nicht schneller?',
@@ -1699,23 +1543,7 @@ Oberhalb von rund 80 Prozent drosselt das Batteriemanagement die DC-Ladeleistung
     metaDescription: 'E-Auto-Ladekosten berechnen: Was kostet das Laden pro 100 km, pro Vollladung und pro Jahr je Ladeort? Mit Benziner-Vergleich.',
     keywords: ['e-auto ladekosten', 'kosten pro 100 km elektroauto', 'wallbox vs schnelllader kosten', 'e-auto vs benziner kosten', 'elektroauto stromkosten', 'ladekosten berechnen', 'kosten vollladung e-auto', 'strompreis laden'],
     icon: '💶',
-    formel: 'Kosten/100 km = Verbrauch(kWh/100km) × Strompreis(€/kWh) | Vollladung = Akku(kWh) × Strompreis | Jahr = Kosten/100 km × km ÷ 100',
     beispiel: '18 kWh/100 km an der Wallbox (0,34 €/kWh): 18 × 0,34 = 6,12 €/100 km (Richtwert).',
-    erklaerung: `**E-Auto-Ladekosten berechnen — was kostet das Laden wirklich?**
-
-Die Ladekosten eines E-Autos ergeben sich aus dem Verbrauch und dem Strompreis. Dieser Rechner ermittelt die Kosten pro 100 km, pro Vollladung und pro Jahr — je nach Ladeort — und stellt sie einem Benziner gegenüber. Alle Preise sind Richtwerte: Haushaltsstrom nach ${STROMPREIS_META.quelle} (Stand ${STAND_STROM}), öffentliche Ladepreise nach Marktübersicht (Stand ${STAND_LADEN}); die tatsächlichen Tarife schwanken stark, die Angaben sind ohne Gewähr.
-
-**Die Rechnung**
-
-Kosten pro 100 km = Verbrauch (kWh/100 km) × Strompreis (€/kWh). Ein Mittelklasse-E-Auto mit 18 kWh Verbrauch kostet an der heimischen Wallbox (rund 0,34 €/kWh) also 18 × 0,34 = 6,12 € pro 100 km. Eine Vollladung des 60-kWh-Akkus schlägt mit rund 20 € zu Buche, die Jahreskosten bei 15.000 km mit rund 918 €.
-
-**Die Stromquelle ist der größte Hebel**
-
-Der Ladeort entscheidet am stärksten über die Kosten: Selbst erzeugter PV-Strom kostet nur rund 0,10 €/kWh, DC-Schnellladen dagegen bis 0,65 €/kWh — ein Faktor von rund sechs. Wer überwiegend zu Hause oder mit Solarstrom lädt, fährt am günstigsten; wer auf öffentliches Schnellladen angewiesen ist, zahlt deutlich mehr.
-
-**Vergleich zum Benziner**
-
-Ein Benziner mit 7,5 l Verbrauch kostet bei 1,75 €/l rund 13,13 € pro 100 km. Das E-Auto liegt an der Wallbox bei gut 6 € — weniger als die Hälfte. Selbst beim teuren DC-Schnellladen bleibt es meist unter den Spritkosten.`,
     faq: [
       {
         frage: 'Was kostet eine Vollladung beim E-Auto?',
@@ -1874,25 +1702,7 @@ Ein Benziner mit 7,5 l Verbrauch kostet bei 1,75 €/l rund 13,13 € pro 100 km
     metaDescription: 'Datenmengen umrechnen: Byte, KB, MB, GB, TB und binäre KiB/MiB/GiB ✓ dezimal vs. binär ✓ warum 500 GB als 465 GiB erscheinen ✓ KI-Erklärung.',
     keywords: ['datenmengen umrechner', 'gb in gib', 'mb in mib', 'byte umrechnen', 'gibibyte', 'dezimal binär datenmenge', '500 gb festplatte', 'speichergröße umrechnen'],
     icon: '💾',
-    formel: 'Umrechnung über Byte: dezimal × 1.000 (KB/MB/GB/TB), binär × 1.024 (KiB/MiB/GiB/TiB); 1 Byte = 8 Bit',
     beispiel: '500 GB (dezimal) = 500.000.000.000 Byte ÷ 1.073.741.824 ≈ 465,66 GiB. 8 Mbit = 1 MB (1 Byte = 8 Bit).',
-    erklaerung: `**Datenmengen umrechnen — dezimal und binär**
-
-Datenmengen werden in zwei unterschiedlichen Systemen gezählt, und genau das sorgt für Verwirrung. Unser Rechner wandelt zwischen allen gängigen Einheiten um — von Bit und Byte über Kilo-, Mega-, Giga- und Terabyte bis zu den binären Einheiten Kibibyte (KiB), Mebibyte (MiB) und Gibibyte (GiB).
-
-**Bit und Byte**
-
-Die kleinste Einheit ist das Bit (eine 0 oder 1). Acht Bit ergeben ein Byte. Daraus folgt: 8 Megabit (Mbit) sind 1 Megabyte (MB). Internetanbieter werben in Megabit pro Sekunde, Dateigrößen rechnen in Megabyte — der Faktor 8 trennt beide.
-
-**Dezimal vs. binär**
-
-Dezimale Einheiten (SI) rechnen in Tausenderschritten: 1 KB = 1.000 Byte, 1 MB = 1.000.000 Byte, 1 GB = 1.000.000.000 Byte. So zählen Festplatten- und SSD-Hersteller sowie Internetanbieter.
-
-Binäre Einheiten (IEC 80000-13) rechnen in 1.024er-Schritten: 1 KiB = 1.024 Byte, 1 MiB = 1.048.576 Byte, 1 GiB = 1.073.741.824 Byte. So zählen Betriebssysteme den Arbeitsspeicher und oft auch Dateigrößen.
-
-**Warum „500 GB" als 465 GiB erscheinen**
-
-Eine Festplatte mit 500 GB hat 500.000.000.000 Byte (dezimal). Das Betriebssystem teilt diese Zahl durch 1.073.741.824 und zeigt rund 465 an — beschriftet es aber meist trotzdem als „GB", obwohl GiB gemeint ist. Es fehlt kein Byte; nur die Einheit ist eine andere. Je größer die Kapazität, desto größer die scheinbare Lücke.`,
     faq: [
       {
         frage: 'Warum zeigt meine 500-GB-Festplatte weniger an?',
@@ -2058,27 +1868,7 @@ Eine Festplatte mit 500 GB hat 500.000.000.000 Byte (dezimal). Das Betriebssyste
     metaDescription: 'Megapixel aus Pixeln berechnen ✓ maximale Druckgröße bei 300 DPI ✓ Seitenverhältnis ✓ warum mehr MP nicht mehr Qualität sind ✓ mit KI-Erklärung.',
     keywords: ['megapixel rechner', 'pixel in megapixel', 'druckgröße dpi', 'auflösung berechnen', 'megapixel druckgröße', 'dpi rechner', 'seitenverhältnis', 'bildauflösung'],
     icon: '📷',
-    formel: 'Megapixel = (Breite × Höhe) ÷ 1.000.000 | Druckgröße = Pixel ÷ DPI (Zoll), × 2,54 = cm',
     beispiel: '6.000 × 4.000 px = 24 MP (Seitenverhältnis 3:2). Bei 300 DPI: 6.000 ÷ 300 × 2,54 ≈ 50,8 cm breit.',
-    erklaerung: `**Megapixel berechnen — Auflösung, DPI und Druckgröße**
-
-Ein Megapixel (MP) ist eine Million Bildpunkte. Die Megapixel-Zahl eines Fotos ergibt sich aus Breite × Höhe in Pixeln, geteilt durch eine Million. Unser Rechner ermittelt aus den Pixelmaßen die Megapixel, das Seitenverhältnis und die maximale Druckgröße bei einer gewünschten Auflösung.
-
-**Megapixel aus der Auflösung**
-
-Ein Bild mit 6.000 × 4.000 Pixeln hat 24.000.000 Bildpunkte, also 24 MP. Die Megapixel sagen aus, wie viele Bildpunkte ein Foto enthält — und damit, wie groß man es drucken oder zuschneiden kann, ohne dass einzelne Pixel sichtbar werden.
-
-**Megapixel sind kein Qualitätsmaß**
-
-Eine höhere MP-Zahl bedeutet nicht automatisch ein besseres Bild. Schärfe, Farbtreue und Rauschverhalten hängen viel stärker von Sensorgröße, Objektiv und Licht ab. Ein 24-MP-Bild aus einer Kamera mit großem Sensor kann besser aussehen als ein 108-MP-Handyfoto.
-
-**Druckgröße und DPI**
-
-DPI (dots per inch) legt fest, wie eng die Pixel beim Druck sitzen. Druckgröße = Pixel ÷ DPI ergibt Zoll, mal 2,54 ergibt Zentimeter. Bei 300 DPI druckt ein 6.000-Pixel-Bild rund 50,8 cm breit. Für das Web ist DPI bedeutungslos — dort zählt nur die Pixelzahl.
-
-**Seitenverhältnis**
-
-Kameras nutzen meist 3:2 oder 4:3, Videos 16:9. Beim Zuschnitt auf ein anderes Format geht Bildfläche und damit Auflösung verloren.`,
     faq: [
       {
         frage: 'Wie berechne ich Megapixel aus der Auflösung?',
@@ -2240,27 +2030,7 @@ Kameras nutzen meist 3:2 oder 4:3, Videos 16:9. Beim Zuschnitt auf ein anderes F
     metaDescription: 'Stromverbrauch einzelner Geräte berechnen: Watt × Stunden = kWh, Kosten pro Jahr ✓ Standby ✓ Gerätevergleich ✓ Strompreis frei wählbar.',
     keywords: ['stromverbrauch rechner', 'geräte stromverbrauch', 'watt in kwh', 'stromkosten gerät', 'standby verbrauch', 'kwh berechnen', 'stromfresser', 'stromverbrauch berechnen'],
     icon: '⚡',
-    formel: 'kWh = Watt × Stunden ÷ 1.000 | Kosten = kWh × Strompreis (€/kWh)',
     beispiel: 'PC 200 W, 5 h/Tag: 200 × 5 ÷ 1.000 = 1 kWh/Tag → 365 kWh/Jahr × 0,35 € ≈ 128 €/Jahr.',
-    erklaerung: `**Stromverbrauch eines Geräts berechnen**
-
-Der Stromverbrauch eines Geräts ergibt sich aus seiner Leistung in Watt und der Nutzungsdauer. Multipliziert man beides und teilt durch 1.000, erhält man den Verbrauch in Kilowattstunden (kWh) — der Einheit, nach der Strom abgerechnet wird.
-
-**Die Formel**
-
-kWh = Watt × Stunden ÷ 1.000. Ein Gerät mit 200 Watt, das 5 Stunden täglich läuft, verbraucht 200 × 5 ÷ 1.000 = 1 kWh pro Tag, also rund 365 kWh im Jahr. Die Kosten ergeben sich aus kWh × Strompreis: bei 0,35 €/kWh sind das etwa 128 Euro pro Jahr.
-
-**Wo steht die Leistung?**
-
-Die Leistungsaufnahme in Watt steht auf dem Typenschild des Geräts oder im Datenblatt. Manche Geräte verbrauchen je nach Betriebszustand unterschiedlich viel — ein Kühlschrank zieht nur Strom, während der Verdichter läuft.
-
-**Standby nicht vergessen**
-
-Viele Geräte verbrauchen auch im Standby Strom. Über das ganze Jahr summieren sich ein paar Watt Dauerlast zu mehreren Hundert Kilowattstunden. Eine schaltbare Steckdosenleiste trennt die Geräte vollständig vom Netz.
-
-**Strompreis als Eingabe**
-
-Der tatsächliche Strompreis steht auf Ihrer Abrechnung. Tragen Sie ihn ein, um realistische Kosten zu erhalten. Alle Werte sind Orientierung; für genaue Messungen hilft eine Messsteckdose.`,
     faq: [
       {
         frage: 'Wie berechne ich den Stromverbrauch eines Geräts?',
@@ -2427,23 +2197,7 @@ Der tatsächliche Strompreis steht auf Ihrer Abrechnung. Tragen Sie ihn ein, um 
     metaDescription: 'Bildschirmdiagonale in cm, Pixeldichte (PPI) und Breite × Höhe aus Zoll und Auflösung berechnen ✓ Phone, Laptop, Monitor, TV ✓ mit KI-Erklärung.',
     keywords: ['ppi rechner', 'bildschirmdiagonale cm', 'zoll in cm bildschirm', 'pixeldichte berechnen', 'monitor größe', 'bildschirmgröße rechner', 'dpi monitor', 'display ppi'],
     icon: '🖥️',
-    formel: 'Diagonale cm = Zoll × 2,54 | PPI = √(Breite² + Höhe² in px) ÷ Diagonale in Zoll',
     beispiel: '27 Zoll = 68,58 cm. 27" 4K (3.840 × 2.160): √(3.840² + 2.160²) ÷ 27 ≈ 163 PPI. Fläche ≈ 59,8 × 33,6 cm.',
-    erklaerung: `**Bildschirmgröße und Pixeldichte berechnen**
-
-Bildschirme werden in Zoll gemessen — und zwar immer die Diagonale. Ein Zoll sind exakt 2,54 cm, ein 27-Zoll-Monitor hat also 27 × 2,54 = 68,58 cm Diagonale. Unser Rechner ermittelt aus Diagonale und Auflösung die Pixeldichte (PPI), die physischen Maße und das Seitenverhältnis.
-
-**Zoll in Zentimeter**
-
-Diagonale in cm = Zoll × 2,54. Aus der Diagonale und dem Seitenverhältnis ergeben sich über den Satz des Pythagoras auch Breite und Höhe in Zentimetern — praktisch, um zu prüfen, ob ein Gerät auf den Schreibtisch oder an die Wand passt.
-
-**Was ist PPI?**
-
-PPI (pixels per inch) ist die Pixeldichte: wie viele Bildpunkte auf einem Zoll liegen. Berechnet wird sie als PPI = √(Breite² + Höhe² in Pixeln) ÷ Diagonale in Zoll. Der Wurzelterm ist die Bildschirmdiagonale in Pixeln (Pythagoras). Ein 27-Zoll-4K-Monitor kommt so auf rund 163 PPI.
-
-**Pixeldichte und Betrachtungsabstand**
-
-Ob man einzelne Pixel sieht, hängt von PPI und Abstand ab. Smartphones (nah, ~400+ PPI), Monitore (~110 PPI) und Fernseher (~80 PPI) wirken aus ihrem typischen Abstand alle scharf. Die PPI ist ein Schärfe-Baustein, kein Gesamtqualitätsmaß.`,
     faq: [
       {
         frage: 'Wie viel cm sind 27 Zoll Bildschirm?',

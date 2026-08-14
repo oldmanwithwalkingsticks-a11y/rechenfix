@@ -43,70 +43,7 @@ export const autoRechner: RechnerConfig[] = [
     metaDescription: 'Spritkosten berechnen: Benzinkosten und Fahrtkosten sofort ermitteln — mit Hin- und Rückfahrt, Kosten pro km und KI-Erklärung. Kostenlos.',
     keywords: ['spritkostenrechner', 'spritkosten berechnen', 'fahrtkosten rechner', 'benzinkosten', 'kosten pro km', 'tankkosten berechnen'],
     icon: '⛽',
-    formel: 'Spritkosten = (Strecke ÷ 100) × Verbrauch × Spritpreis',
     beispiel: 'Beispiel: 250 km bei 7,5 L/100km und 1,65 €/L = (250 ÷ 100) × 7,5 × 1,65 = 30,94 €',
-    erklaerung: `**Was ist der Spritkostenrechner?**
-
-Der Spritkostenrechner hilft Ihnen, die Benzinkosten bzw. Dieselkosten für eine beliebige Strecke schnell und genau zu berechnen. Egal ob Sie eine Urlaubsreise planen, die täglichen Pendelkosten ermitteln oder Fahrtkosten für eine Geschäftsreise abrechnen möchten — mit unserem Rechner wissen Sie in Sekundenschnelle, wie viel Sprit Ihre Fahrt kostet.
-
-Geben Sie einfach die Entfernung in Kilometern, den Durchschnittsverbrauch Ihres Fahrzeugs und den aktuellen Spritpreis pro Liter ein. Optional können Sie die Berechnung auf Hin- und Rückfahrt erweitern. Der Rechner zeigt Ihnen sofort die Gesamtkosten, den Benzinverbrauch in Litern und die Kosten pro Kilometer an.
-
-Besonders praktisch: Der integrierte Kostenvergleich zeigt Ihnen, wie sich unterschiedliche Verbräuche auf die Fahrtkosten auswirken. So können Sie die Kosten verschiedener Fahrzeuge direkt vergleichen oder sehen, wie viel eine spritsparende Fahrweise einsparen würde.
-
-**So berechnen Sie Ihre Spritkosten**
-
-Die Berechnung der Spritkosten basiert auf einer einfachen Formel: Sie teilen die Strecke durch 100, multiplizieren das Ergebnis mit dem Verbrauch in Litern pro 100 Kilometer und anschließend mit dem Spritpreis pro Liter.
-
-Die vollständige Formel lautet: **Spritkosten = (Strecke in km ÷ 100) × Verbrauch (L/100km) × Preis (€/L)**.
-
-Ein konkretes Rechenbeispiel: Sie möchten von Köln nach München fahren, das sind rund 575 km. Ihr Auto verbraucht 7,0 Liter Diesel auf 100 km und der aktuelle Dieselpreis liegt bei 1,55 € pro Liter. Die Rechnung: (575 ÷ 100) × 7,0 × 1,55 = 5,75 × 7,0 × 1,55 = 62,39 €. Für die einfache Fahrt zahlen Sie also rund 62 € an Spritkosten. Hin und zurück wären es etwa 125 €.
-
-Um die Kosten pro Kilometer zu ermitteln, teilen Sie die Gesamtkosten durch die gefahrene Strecke: 62,39 ÷ 575 = 0,11 € pro Kilometer. Dieser Wert ist besonders nützlich für Fahrtkostenabrechnungen oder um verschiedene Verkehrsmittel zu vergleichen.
-
-**Durchschnittsverbrauch — Richtwerte für verschiedene Fahrzeugtypen**
-
-Der Durchschnittsverbrauch variiert stark je nach Fahrzeugtyp, Motorisierung und Fahrweise. Hier sind typische Richtwerte:
-
-- **Kleinwagen (z. B. VW Polo, Opel Corsa):** 5,0–6,5 L/100km (Benzin) bzw. 4,0–5,0 L/100km (Diesel)
-- **Kompaktklasse (z. B. VW Golf, Ford Focus):** 6,0–7,5 L/100km (Benzin) bzw. 4,5–5,5 L/100km (Diesel)
-- **Mittelklasse (z. B. BMW 3er, Mercedes C-Klasse):** 7,0–9,0 L/100km (Benzin) bzw. 5,0–6,5 L/100km (Diesel)
-- **SUV (z. B. VW Tiguan, BMW X3):** 8,0–11,0 L/100km (Benzin) bzw. 6,0–8,0 L/100km (Diesel)
-- **Transporter (z. B. VW T6, Mercedes Vito):** 9,0–12,0 L/100km (Diesel)
-
-Wichtig: Die Herstellerangaben zum Verbrauch liegen in der Praxis oft 20–30% unter dem realen Verbrauch. Nutzen Sie für eine realistische Berechnung am besten Ihren tatsächlichen Durchschnittsverbrauch, den Sie im Bordcomputer Ihres Fahrzeugs finden oder über mehrere Tankfüllungen selbst ermitteln können.
-
-**Tipps zum Spritsparen**
-
-Mit einer bewussten Fahrweise lässt sich der Spritverbrauch deutlich senken — oft um 15 bis 25 Prozent. Das spart nicht nur Geld, sondern schont auch die Umwelt:
-
-- **Vorausschauend fahren:** Vermeiden Sie häufiges Bremsen und Beschleunigen. Lassen Sie das Auto wenn möglich rollen und nutzen Sie die Motorbremse.
-- **Frühzeitig hochschalten:** Schalten Sie bei Drehzahlen von 1.500–2.000 U/min (Diesel) bzw. 2.000–2.500 U/min (Benziner) in den nächsthöheren Gang. Niedertouriges Fahren spart erheblich Sprit.
-- **Reifendruck prüfen:** Zu niedriger Reifendruck erhöht den Rollwiderstand und damit den Verbrauch um bis zu 5%. Prüfen Sie den Druck alle vier Wochen.
-- **Unnötiges Gewicht vermeiden:** Jedes Kilogramm kostet Sprit. Entfernen Sie Dachboxen und Fahrradträger, wenn Sie sie nicht brauchen.
-- **Klimaanlage bewusst nutzen:** Die Klimaanlage erhöht den Verbrauch um 0,5–1,5 L/100km. Bei moderaten Temperaturen reicht oft die Lüftung.
-- **Motor bei längeren Stopps abstellen:** Bei Wartezeiten über 30 Sekunden lohnt sich das Abschalten des Motors. Moderne Autos mit Start-Stopp-Automatik machen das bereits automatisch.
-- **Kurzstrecken vermeiden:** Ein kalter Motor verbraucht deutlich mehr Sprit. Für kurze Wege sind Fahrrad oder öffentliche Verkehrsmittel oft die bessere und günstigere Wahl.
-
-Diese Maßnahmen summieren sich: Bei einer jährlichen Fahrleistung von 15.000 km und einem Verbrauch von 7,5 L/100km sparen Sie durch 20% weniger Verbrauch rund 225 Liter Sprit pro Jahr — das sind bei einem Benzinpreis von 1,65 €/L etwa 370 € Ersparnis.
-
-**Anwendungsfälle: Wann brauchen Sie den Spritkostenrechner?**
-
-Spritkosten sind einer der größten variablen Kostenposten beim Autofahren — und einer der einfachsten, den man durch bewusste Entscheidungen beeinflussen kann. Hier sechs typische Anwendungsfälle:
-
-- **Pendlerkosten monatlich und jährlich kalkulieren.** Wer 30 km einfache Strecke pendelt, fährt im Jahr rund 13.200 km nur fürs Berufspendeln (220 Arbeitstage × 60 km). Bei 7,0 L/100km und 1,75 €/L Benzin sind das rund 1.617 € Spritkosten pro Jahr — Pendlerpauschale rechnet davon nur einen Teil gegen. Der Rechner zeigt die Größenordnung in Sekunden, was für Steuererklärung, Gehaltsverhandlung („Standortvorteil") und Standortentscheidungen relevant ist.
-- **Urlaubsreise-Budgetierung.** Vor einer Urlaubsfahrt ist das Sprit-Budget oft der unterschätzte Posten. Köln–Toskana und zurück sind rund 2.000 km — bei einem SUV mit 9 L/100km und 1,80 €/L Diesel landet man bei 324 € Sprit allein für die Anreise. Wer das vor der Buchung kalkuliert, sieht Tankkosten als realen Block neben Unterkunft und Mautgebühren stehen.
-- **Auto-Vergleich beim Kauf (TCO als Entscheidungsfaktor).** Zwischen zwei Modellen entscheidet selten der Listenpreis allein, sondern die Total Cost of Ownership über 5–8 Jahre Haltedauer. Ein Auto mit 6 L/100km vs. eines mit 9 L/100km macht bei 15.000 km/Jahr und 1,75 €/L knapp 790 €/Jahr Differenz — über 6 Jahre rund 4.700 €. Der Rechner liefert den Sprit-Anteil dieser TCO-Rechnung.
-- **Geschäftsreise und Reisekostenabrechnung.** Wer mit dem Privat-Pkw dienstlich fährt, kann pauschal 0,30 €/km nach § 9 EStG abrechnen — das deckt nur grob die Spritkosten plus einen kleinen Anteil Verschleiß. Wer den realen Verbrauch ermittelt, erkennt sofort, ob die Pauschale die echten Kosten deckt oder ob Bahn/Mietwagen für die Strecke wirtschaftlicher wäre.
-- **Break-Even Diesel vs. Benziner.** Diesel-Aufpreis bei Anschaffung gegen Spritersparnis pro Jahr — der Rechner zeigt für beide Verbräuche, wann der Mehrpreis amortisiert ist. Bei 2.500 € Diesel-Aufpreis und 350 €/Jahr Spritersparnis liegt der Break-Even bei rund 7 Jahren — kürzer bei Vielfahrern, deutlich länger bei Wenigfahrern. Ein einfacher Vergleich verhindert Fehlkäufe.
-- **Spritkosten vs. E-Auto-Stromkosten.** Vergleich auf 100 km Basis: 7 L Benzin × 1,75 € = 12,25 €/100km. E-Auto mit 18 kWh/100km × 0,32 €/kWh Haushaltsstrom = 5,76 €/100km — bei Wallbox-Sondertarif noch günstiger. Wer den Spritkosten-Wert als Referenz hat, kann das E-Auto-Angebot präziser bewerten und Werbeversprechen einordnen.
-
-**Häufige Fehler bei der Spritkosten-Berechnung**
-
-- **Herstellerverbrauch (WLTP) statt Realverbrauch eingesetzt.** Die offiziellen WLTP-Angaben liegen typisch 15–25 % unter dem realen Verbrauch — bei Plug-in-Hybriden noch deutlicher (oft Faktor 2). Wer mit Datenblatt-Werten rechnet, unterschätzt die Spritkosten systematisch. Besser: zwei bis drei eigene Tankfüllungen über mehrere Wochen mitteln, oder den Bordcomputer-Langzeitwert nutzen.
-- **Schwankende Spritpreise nicht berücksichtigt.** Spritpreise variieren wochentags und untertags um 15–25 ct/L (typisch günstiger 18–20 Uhr, teurer am Morgen). Wer mit dem aktuellen Höchstpreis rechnet, überschätzt die Jahreskosten; wer mit dem Tiefpreis rechnet, unterschätzt sie. Realistisch: 4-Wochen-Durchschnitt von ADAC-Tankstellenpreisen oder eigene Tank-App-Statistik nutzen.
-- **Dachbox-, Fahrradträger- und Anhänger-Mehrverbrauch ignoriert.** Eine Dachbox erhöht den Verbrauch je nach Geschwindigkeit um 1–2 L/100km (10–20 % Mehrverbrauch), ein Heckträger mit Fahrrädern um 0,5–1,5 L/100km, ein Wohnwagen-Anhänger oft um 30–50 %. Wer für die Urlaubsfahrt mit Dachbox den normalen Verbrauch ansetzt, kalkuliert das Sprit-Budget rund 100–200 € zu niedrig.
-- **Stadt-, Land- und Autobahn-Verbrauch pauschalisiert.** Stadtfahrten verbrauchen meist 30–50 % mehr als Autobahn-Fahrten bei 110–120 km/h, ab 130 km/h kehrt sich das wieder um (Luftwiderstand). Wer einen pauschalen Mischwert nutzt, kommt bei einer reinen Autobahnreise aufs falsche Ergebnis. Faustregel: für reine Autobahnstrecken Bordcomputer-Wert „Autobahn" verwenden, für reine Stadtstrecken den höheren Stadtverbrauch.
-- **Kaltstart-Effekt bei Kurzstrecken unterschätzt.** Auf den ersten 4–5 km nach einem Kaltstart verbraucht ein Verbrenner 30–80 % mehr als im warmen Betriebszustand. Wer nur Kurzstrecken fährt (Schule, Einkauf, kurze Fahrten zur Arbeit), liegt im Jahresverbrauch oft 1–2 L/100km über dem Bordcomputer-Wert, der den Anteil des Kaltlaufs nicht prominent ausweist.`,
     // W19-Pilot → Goldstandard (~1.500 W): Modulare Content-Bausteine. Benzin/Diesel-Werte
     // aus SPRITPREISE_REFERENZ (ADAC-Bundesschnitt, Stand 12.08.2026) zur Build-Zeit eingesetzt.
     // Strom-Vergleich: Haushaltsstrompreis aus STROMPREIS_2026.durchschnitt_bdew
@@ -290,46 +227,7 @@ Spritkosten sind einer der größten variablen Kostenposten beim Autofahren — 
     metaDescription: 'KW in PS umrechnen und umgekehrt ✓ Sofort-Ergebnis ✓ Mit Umrechnungstabelle ✓ Kostenlos. Jetzt berechnen! ✓ Mit KI-Erklärung.',
     keywords: ['kw in ps', 'ps in kw', 'kw ps umrechner', 'kilowatt ps', 'ps umrechnen', 'kw umrechnen'],
     icon: '🏎️',
-    formel: '1 kW = 1,35962 PS | 1 PS = 0,73550 kW',
     beispiel: 'Beispiel: 100 kW × 1,35962 = 135,96 PS | 150 PS × 0,73550 = 110,33 kW',
-    erklaerung: `**KW in PS umrechnen**
-
-Die Umrechnung von Kilowatt (kW) in Pferdestärken (PS) und umgekehrt gehört zu den häufigsten Berechnungen rund ums Auto. In Fahrzeugscheinen und offiziellen Dokumenten wird die Motorleistung in Kilowatt angegeben, während im alltäglichen Sprachgebrauch und in der Werbung fast immer PS verwendet wird. Unser Rechner macht die Umrechnung kinderleicht: Geben Sie einfach den Wert ein und erhalten Sie sofort das Ergebnis in der anderen Einheit.
-
-Der exakte Umrechnungsfaktor lautet: **1 kW = 1,35962 PS**. Umgekehrt gilt: **1 PS = 0,73550 kW**. Diese Faktoren sind international genormt und gelten weltweit einheitlich. Um also einen kW-Wert in PS umzurechnen, multiplizieren Sie ihn mit 1,35962. Für die Umrechnung von PS in kW multiplizieren Sie mit 0,73550.
-
-Ein praktisches Beispiel: Ihr Fahrzeugschein weist eine Leistung von 110 kW aus. Wie viel PS sind das? 110 × 1,35962 = 149,56 PS, also rund 150 PS. Umgekehrt: Ein Auto wird mit 200 PS beworben. In kW sind das 200 × 0,73550 = 147,10 kW.
-
-Als Faustregel können Sie sich merken: **kW-Wert mal 1,36 ergibt ungefähr die PS-Zahl**. Oder andersherum: **PS-Wert mal 0,74 ergibt ungefähr die kW-Zahl**. Diese vereinfachten Faktoren reichen für eine schnelle Kopfrechnung völlig aus.
-
-**Was ist der Unterschied zwischen KW und PS?**
-
-Kilowatt und Pferdestärke sind beides Einheiten für Leistung, haben aber unterschiedliche Ursprünge und Verwendungszwecke.
-
-Die **Pferdestärke (PS)** wurde Ende des 18. Jahrhunderts von James Watt eingeführt, um die Leistung seiner Dampfmaschinen mit der Zugkraft von Pferden vergleichbar zu machen. Eine Pferdestärke entspricht der Leistung, die benötigt wird, um 75 Kilogramm in einer Sekunde einen Meter hoch zu heben. Obwohl diese Definition heute etwas altmodisch wirkt, hat sich die Einheit PS im Automobilbereich hartnäckig gehalten — vor allem im deutschsprachigen Raum, in Italien und in Japan.
-
-Das **Kilowatt (kW)** ist die offizielle SI-Einheit für Leistung und gehört zum internationalen Einheitensystem. Ein Kilowatt entspricht 1.000 Watt. Seit 2010 ist die Angabe der Motorleistung in kW in der Europäischen Union gesetzlich vorgeschrieben. In Fahrzeugscheinen (Zulassungsbescheinigung Teil I) finden Sie die Leistung daher immer in kW angegeben, im Feld P.2.
-
-In der Praxis werden beide Einheiten parallel verwendet. Autohersteller geben in ihren Prospekten und auf Websites meist beide Werte an, zum Beispiel „150 kW (204 PS)". Im Gespräch unter Autofahrern dominiert weiterhin PS, während kW in technischen und rechtlichen Zusammenhängen der Standard ist.
-
-Übrigens: Der Unterschied zwischen PS und der englischen „horsepower" (hp) ist minimal, aber vorhanden. Eine mechanische horsepower entspricht etwa 1,0139 PS. In der Praxis wird dieser Unterschied oft ignoriert, kann aber bei hochpräzisen Angaben relevant sein.
-
-**Umrechnungstabelle KW ↔ PS**
-
-Die folgende Tabelle zeigt die gängigsten Leistungswerte und ihre Umrechnung. Sie deckt den typischen Bereich von Kleinwagen bis Sportwagen ab:
-
-- **50 kW = 68 PS** — typisch für sparsame Kleinwagen wie den VW Up oder Fiat 500
-- **75 kW = 102 PS** — Kompaktwagen der Einstiegsklasse wie Opel Corsa oder Renault Clio
-- **100 kW = 136 PS** — beliebteste Motorisierung bei Kompaktwagen wie VW Golf oder Ford Focus
-- **110 kW = 150 PS** — häufige Leistungsstufe bei Kombis und Mittelklassewagen
-- **150 kW = 204 PS** — gehobene Mittelklasse und sportliche Modelle
-- **200 kW = 272 PS** — Oberklasse-Limousinen und leistungsstarke SUVs
-- **250 kW = 340 PS** — Sportwagen und Performance-Modelle
-- **300 kW = 408 PS** — Hochleistungsfahrzeuge wie Porsche 911 oder AMG-Modelle
-
-Für Elektroautos sind diese Werte besonders relevant, da die Leistung dort direkt in kW angegeben wird. Ein Tesla Model 3 mit 208 kW hat beispielsweise 283 PS. Elektrofahrzeuge erreichen ihre maximale Leistung oft schon bei niedrigen Drehzahlen, was sich in einer besonders schnellen Beschleunigung bemerkbar macht.
-
-Bei der Kfz-Steuer spielt die kW-Zahl übrigens keine direkte Rolle — hier sind Hubraum und CO₂-Ausstoß die entscheidenden Faktoren. Allerdings korreliert eine höhere Leistung tendenziell mit höherem Verbrauch und damit höheren Emissionen, was indirekt zu einer höheren Steuer führen kann.`,
     faq: [
       {
         frage: 'Wie rechne ich kW in PS um?',
@@ -503,68 +401,7 @@ Bei der Kfz-Steuer spielt die kW-Zahl übrigens keine direkte Rolle — hier sin
     metaDescription: 'Kfz-Steuer 2026 berechnen ✓ Benzin, Diesel & Elektro ✓ Nach WLTP ✓ Kostenlos & aktuell. Jetzt Ihre Kfz-Steuer ermitteln! ✓ Mit KI-Erklärung.',
     keywords: ['kfz steuer rechner', 'kfz steuer berechnen', 'kfz steuer 2026', 'autosteuer', 'kraftfahrzeugsteuer', 'co2 steuer auto'],
     icon: '🚙',
-    formel: 'Kfz-Steuer = Sockelbetrag (Hubraum) + CO₂-Komponente (ab 95 g/km)',
     beispiel: 'Beispiel: 1.498 ccm Benziner, 128 g/km CO₂ → Sockel: 15 × 2,00 € = 30 € + CO₂: (20 × 2,00 €) + (13 × 2,20 €) = 40 € + 28,60 € = 68,60 € → Jahressteuer 98,60 €',
-    erklaerung: `**Kfz-Steuer 2026 — was ändert sich?**
-
-Die Kraftfahrzeugsteuer ist eine jährliche Steuer, die jeder Fahrzeughalter in Deutschland zahlen muss. Sie wird vom Hauptzollamt erhoben und ist bei der Zulassung eines Fahrzeugs fällig. Die Höhe der Kfz-Steuer hängt seit der Reform von 2009 von zwei Faktoren ab: dem Hubraum des Motors und dem CO₂-Ausstoß des Fahrzeugs.
-
-Für das Jahr 2026 gelten im Wesentlichen die gleichen Regeln wie seit der letzten Anpassung. Fahrzeuge mit Erstzulassung ab dem 01.07.2009 werden nach dem kombinierten Hubraum-CO₂-Modell besteuert. Der CO₂-Freibetrag liegt bei 95 g/km — alles darüber wird progressiv besteuert. Je höher der Schadstoffausstoß, desto teurer wird die Steuer.
-
-Besonders relevant für 2026: Die Steuerbefreiung für reine Elektrofahrzeuge gilt weiterhin. Wer ein reines Elektroauto mit Erstzulassung im Zeitraum 18.05.2011 bis 31.12.2030 zulässt, zahlt 10 Jahre lang keine Kfz-Steuer, längstens bis zum 31.12.2035 (§ 3d KraftStG in der Fassung des 8. KraftStÄndG vom 04.12.2025). Nach Ablauf gilt eine gewichtsbasierte Besteuerung nach § 9 Abs. 1 Nr. 2e KraftStG. Für Plug-in-Hybride gilt diese Befreiung nicht — sie werden wie Verbrenner nach Hubraum und CO₂ besteuert.
-
-Ältere Fahrzeuge mit Erstzulassung vor dem 01.07.2009 werden weiterhin rein nach Hubraum und Schadstoffklasse besteuert. Hier fallen je nach Emissionsstandard deutlich höhere Steuersätze an, insbesondere für Fahrzeuge ohne Feinstaubplakette.
-
-**Wie wird die Kfz-Steuer berechnet?**
-
-Die Berechnung der Kfz-Steuer für Fahrzeuge ab Erstzulassung 01.07.2009 erfolgt in zwei Schritten:
-
-**Schritt 1 — Sockelbetrag (Hubraum):** Der Hubraum wird auf volle 100 ccm aufgerundet. Für jeden angefangenen 100 ccm fallen bei Benzinern 2,00 € und bei Dieselfahrzeugen 9,50 € an. Der höhere Satz für Diesel gleicht den niedrigeren Energiesteuersatz auf Dieselkraftstoff aus.
-
-Rechenbeispiel: Ein Benziner mit 1.498 ccm → aufgerundet 1.500 ccm → 15 × 2,00 € = 30,00 € Sockelbetrag. Ein Diesel mit 1.968 ccm → aufgerundet 2.000 ccm → 20 × 9,50 € = 190,00 € Sockelbetrag.
-
-**Schritt 2 — CO₂-Komponente:** Für jedes Gramm CO₂ über dem Freibetrag von 95 g/km wird ein progressiver Steuersatz nach § 9 Abs. 1 Nr. 2c KraftStG fällig (seit 01.01.2021):
-
-- **96–115 g/km:** 2,00 € pro g/km über dem Freibetrag
-- **116–135 g/km:** 2,20 € pro g/km
-- **136–155 g/km:** 2,50 € pro g/km
-- **156–175 g/km:** 2,90 € pro g/km
-- **176–195 g/km:** 3,40 € pro g/km
-- **ab 196 g/km:** 4,00 € pro g/km
-
-Die CO₂-Werte basieren seit September 2018 auf dem WLTP-Messverfahren (Worldwide Harmonized Light Vehicles Test Procedure), das realistischere Werte liefert als das alte NEFZ-Verfahren. Den WLTP-CO₂-Wert Ihres Fahrzeugs finden Sie in der Zulassungsbescheinigung Teil I (Feld V.7) oder im COC-Dokument (Certificate of Conformity).
-
-Rechenbeispiel komplett: Benziner, 1.498 ccm, 128 g/km CO₂:
-- Sockelbetrag: 15 × 2,00 € = 30,00 €
-- CO₂: 128 − 95 = 33 g/km über Freibetrag. Davon 20 g × 2,00 € = 40,00 € (96–115 g) und 13 g × 2,20 € = 28,60 € (116–128 g). Gesamt CO₂: 68,60 €
-- Jahressteuer: 30,00 € + 68,60 € = 98,60 €
-
-Für Fahrzeuge mit Erstzulassung vor dem 01.07.2009 wird die Steuer ausschließlich nach Hubraum und Schadstoffklasse berechnet. Die Sätze sind hier deutlich höher: Für einen Euro-4-Benziner fallen z. B. 6,75 € pro angefangene 100 ccm an, für einen Euro-4-Diesel 15,44 € pro angefangene 100 ccm. Unser Rechner setzt für den Vor-2009-Pfad die Schadstoffklasse Euro 4 (oder besser) voraus — für schlechtere Klassen (Euro 0 bis Euro 3) nennt § 9 Abs. 1 Nr. 2a KraftStG deutlich höhere Sätze, insbesondere bei Dieselfahrzeugen ohne Partikelfilter.
-
-**Kfz-Steuer für Elektroautos**
-
-Elektrofahrzeuge genießen in Deutschland eine großzügige steuerliche Förderung. Reine Elektroautos (BEV — Battery Electric Vehicle) sind bei Erstzulassung im Zeitraum 18.05.2011 bis 31.12.2030 für 10 Jahre von der Kfz-Steuer befreit, längstens jedoch bis zum 31.12.2035 (§ 3d KraftStG in der Fassung des 8. KraftStÄndG vom 04.12.2025).
-
-Das bedeutet konkret: Wer im Jahr 2024 ein Elektroauto erstmals zugelassen hat, ist bis 2034 steuerbefreit. Wer 2028 zulässt, profitiert bis 2035 (Deckel greift, 10-Jahres-Frist würde bis 2038 reichen). Wer 2020 zugelassen hat, ist bis 2030 befreit. Nach Ablauf der Befreiung wird eine gewichtsbasierte Kfz-Steuer nach § 9 Abs. 1 Nr. 2e KraftStG fällig, die sich am zulässigen Gesamtgewicht des Fahrzeugs orientiert.
-
-Wichtig zu wissen: Diese Befreiung gilt nur für rein batterieelektrische Fahrzeuge. Plug-in-Hybride (PHEV) sind davon ausgenommen und werden regulär nach Hubraum und CO₂ besteuert — allerdings profitieren sie oft von niedrigeren CO₂-Werten durch den Elektromotor. Auch Brennstoffzellenfahrzeuge (FCEV) fallen unter die Elektro-Befreiung.
-
-Für Firmenwagen mit Elektroantrieb gilt zusätzlich ein reduzierter geldwerter Vorteil bei der Versteuerung (0,25% statt 1% des Bruttolistenpreises für reine E-Autos bis 100.000 € Listenpreis, seit 01.07.2025 angehoben von 70.000 €). Dies macht Elektroautos als Dienstwagen besonders attraktiv.
-
-**Kfz-Steuer Tabelle nach Hubraum**
-
-Die folgende Übersicht zeigt typische jährliche Kfz-Steuern für gängige Fahrzeugkonfigurationen (Erstzulassung ab 01.07.2009):
-
-- **Kleinwagen (1.000 ccm, 110 g/km, Benzin):** ca. 50 € / Jahr — Sockel 20 € + CO₂ 30 €
-- **Kompaktwagen (1.500 ccm, 128 g/km, Benzin):** ca. 99 € / Jahr — Sockel 30 € + CO₂ 68,60 €
-- **Mittelklasse (2.000 ccm, 145 g/km, Benzin):** ca. 149 € / Jahr — Sockel 40 € + CO₂ 109 €
-- **SUV (2.000 ccm, 175 g/km, Diesel):** ca. 382 € / Jahr — Sockel 190 € + CO₂ 192 €
-- **Oberklasse (3.000 ccm, 190 g/km, Benzin):** ca. 303 € / Jahr — Sockel 60 € + CO₂ 243 €
-- **Elektroauto (beliebig, Erstzulassung bis 31.12.2030):** 0 € / Jahr (steuerbefreit längstens bis 31.12.2035)
-
-Je niedriger der CO₂-Ausstoß, desto günstiger die Steuer. Deshalb lohnt es sich, beim Neuwagenkauf auf sparsame Motorisierungen zu achten. Bereits wenige Gramm CO₂ weniger können durch die progressiven Steuerstufen einen spürbaren Unterschied bei der jährlichen Steuerbelastung ausmachen.
-
-Die Kfz-Steuer wird vom Hauptzollamt per SEPA-Lastschrift eingezogen. Halbjährliche Zahlung ist auf Antrag möglich, kostet jedoch einen Zuschlag von 3%. Vierteljährliche Zahlung ist bei Steuerbeträgen über 500 € möglich (Zuschlag 6%).`,
     // W19-Goldstandard (YMYL): kfz-steuer-rechner auf volle Tiefe (15 Bausteine, ~1.560 W),
     // Leitformat „beispielrechnung" (5× dominant). SSOT aus kfz-steuer-parameter.ts +
     // kfz-steuer.ts gespiegelt: Sockel 2,00 €/100 ccm Benzin / 9,50 € Diesel (§ 9 Abs. 1
@@ -776,39 +613,7 @@ Die Kfz-Steuer wird vom Hauptzollamt per SEPA-Lastschrift eingezogen. Halbjährl
     metaDescription: 'Bußgeld berechnen: Geschwindigkeit, Rotlicht, Abstand, Handy, Alkohol ✓ Aktueller Bußgeldkatalog ✓ Punkte & Fahrverbot ✓ KI-Erklärung.',
     keywords: ['bußgeldrechner', 'bußgeld berechnen', 'bußgeldkatalog 2026', 'geschwindigkeitsüberschreitung', 'punkte flensburg', 'fahrverbot', 'blitzer strafe', 'rotlichtverstoß', 'bußgeld geschwindigkeit', 'verkehrsverstoß strafe'],
     icon: '🚨',
-    formel: 'Bußgeld wird anhand des Bußgeldkatalogs bestimmt: Verstoßart + Schwere → Bußgeld + Punkte + ggf. Fahrverbot',
     beispiel: 'Beispiel: 26 km/h zu schnell innerorts (PKW) → 180 € Bußgeld, 1 Punkt in Flensburg, 1 Monat Fahrverbot (bei Wiederholungstäter).',
-    erklaerung: `Der Bußgeldkatalog regelt die Strafen für Verkehrsverstöße in Deutschland. Er wird regelmäßig aktualisiert — zuletzt 2024 mit deutlich höheren Strafen für Geschwindigkeitsüberschreitungen. Unser Bußgeldrechner zeigt Ihnen sofort, welches Bußgeld, wie viele Punkte in Flensburg und ob ein Fahrverbot droht.
-
-**Der aktuelle Bußgeldkatalog 2026 im Überblick**
-
-Seit der Reform 2024 sind die Bußgelder für Geschwindigkeitsüberschreitungen deutlich gestiegen. Innerorts kostet bereits eine Überschreitung von 16–20 km/h 70 Euro, ab 21 km/h kommt ein Punkt in Flensburg hinzu. Bei 26–30 km/h zu schnell innerorts drohen 180 Euro, ein Punkt und — bei Wiederholungstätern — ein Monat Fahrverbot. Ab 31 km/h zu schnell ist das Fahrverbot obligatorisch. Außerorts sind die Strafen etwas milder, aber ab 41 km/h zu schnell drohen auch hier 320 Euro, 2 Punkte und ein Monat Fahrverbot.
-
-**Einspruch gegen Bußgeldbescheid: Wann lohnt es sich?**
-
-Ein Einspruch gegen den Bußgeldbescheid lohnt sich in vielen Fällen. Laut Statistik sind rund 30 Prozent aller Bußgeldbescheide fehlerhaft — sei es durch falsche Messergebnisse, defekte Blitzer, fehlende Beschilderung oder Formfehler im Bescheid. Sie haben 14 Tage nach Zustellung Zeit, Einspruch einzulegen. Bei hohen Bußgeldern (ab 200 Euro), Punkten oder Fahrverboten sollten Sie den Bescheid unbedingt von einem Anwalt für Verkehrsrecht prüfen lassen. Die Kosten für den Anwalt werden von einer Verkehrsrechtsschutzversicherung übernommen. Typische Angriffspunkte: Wurde das Messgerät korrekt geeicht? Stimmt die Zuordnung zum Fahrzeug? Wurde die Toleranz korrekt abgezogen? Ist der Bescheid fristgerecht zugestellt worden?
-
-**Punkte in Flensburg: Wie funktioniert das Punktesystem?**
-
-Das Fahreignungsregister (FAER) in Flensburg erfasst Verkehrsverstöße mit einem Punktesystem von 1 bis 3 Punkten pro Verstoß. Bei 1–3 Punkten gibt es eine Vormerkung, bei 4–5 Punkten eine Ermahnung, bei 6–7 Punkten eine Verwarnung, und bei 8 Punkten wird die Fahrerlaubnis entzogen. Punkte verjähren nach 2,5 Jahren (1-Punkt-Verstöße), 5 Jahren (2-Punkte-Verstöße) oder 10 Jahren (Straftaten mit 3 Punkten). Wichtig: Durch die Teilnahme an einem Fahreignungsseminar können Sie einmal innerhalb von 5 Jahren 1 Punkt abbauen — allerdings nur bei maximal 5 Punkten.
-
-**Fahrverbot vs. Entzug der Fahrerlaubnis: Der Unterschied**
-
-Ein Fahrverbot ist zeitlich begrenzt (1 bis 3 Monate) und wird bei schweren Ordnungswidrigkeiten verhängt. Nach Ablauf erhalten Sie Ihren Führerschein automatisch zurück. Der Entzug der Fahrerlaubnis dagegen ist eine deutlich härtere Maßnahme: Die Fahrerlaubnis wird komplett eingezogen, und Sie müssen sie nach einer Sperrfrist (mindestens 6 Monate) neu beantragen. Bei Alkoholdelikten ab 1,6 Promille oder bei 8 Punkten in Flensburg ist in der Regel eine MPU (Medizinisch-Psychologische Untersuchung, umgangssprachlich „Idiotentest") erforderlich. Die MPU kostet zwischen 350 und 750 Euro — bei Nichtbestehen muss sie wiederholt werden.
-
-**Probezeit: Welche besonderen Regeln gelten?**
-
-Für Fahranfänger in der zweijährigen Probezeit gelten strengere Regeln. Es gilt eine absolute 0,0-Promille-Grenze (auch unter 21 Jahren). Verstöße werden in A-Verstöße (schwerwiegend, z.B. Geschwindigkeitsüberschreitung ab 21 km/h, Rotlichtverstoß) und B-Verstöße (weniger schwerwiegend, z.B. Handy am Steuer, abgefahrene Reifen) unterteilt. Bereits ein A-Verstoß oder zwei B-Verstöße führen zu einem verpflichtenden Aufbauseminar und einer Verlängerung der Probezeit um zwei weitere Jahre. Ein weiterer Verstoß danach führt zur Empfehlung einer verkehrspsychologischen Beratung. Fahranfänger sollten besonders vorsichtig sein — die Konsequenzen sind deutlich spürbarer als bei erfahrenen Fahrern.
-
-**Toleranzabzug bei Geschwindigkeitsmessungen**
-
-Bei jeder Geschwindigkeitsmessung wird ein Toleranzabzug vorgenommen, um Messungenauigkeiten auszugleichen. Bei Geschwindigkeiten bis 100 km/h werden 3 km/h abgezogen, darüber 3 Prozent des Messwerts. Beispiel: Gemessene Geschwindigkeit 83 km/h in einer 50er-Zone → nach Toleranzabzug (3 km/h) gilt eine Überschreitung von 30 km/h. Bei Messungen durch Nachfahren (Polizeifahrzeug) ist der Toleranzabzug höher: 5 km/h bzw. 5 Prozent. Unser Rechner geht davon aus, dass der Toleranzabzug bereits berücksichtigt ist — geben Sie also die tatsächliche Überschreitung ein, nicht die gemessene Geschwindigkeit.
-
-**Vereinfachungen dieses Rechners**
-
-Für **Lkw und Busse** zeigt der Rechner eine pauschale Näherung von rund +30 Prozent gegenüber Pkw-Sätzen. Die BKatV differenziert in Lfd.Nr. 11.3.* feiner nach Fahrzeuggewicht und -art (z. B. Gefahrgut-Transport); diese Vereinfachung reicht für eine grobe Einordnung, ersetzt aber nicht den Blick in die BKatV-Anlage.
-
-Für **Parkverstöße** nennt der Rechner nur die häufigsten Grundsätze (z. B. 25 € für unerlaubtes Parken, 55 € für Park­en in zweiter Reihe / auf Geh­weg / in Feuer­wehr­zu­fahrt / auf Behinderten­park­plätzen, siehe BKatV Lfd.Nr. 52.1.*). Bei Behinderung anderer Verkehrsteilnehmer erhöht sich das Bußgeld um 15–25 €, bei Parkdauern über 1 Stunde kommen weitere 25 € hinzu. Diese Zusatzfälle sind im Rechner nicht einzeln konfigurierbar.`,
     faq: [
       {
         frage: 'Wie viel kostet eine Geschwindigkeitsüberschreitung?',
@@ -998,31 +803,7 @@ Für **Parkverstöße** nennt der Rechner nur die häufigsten Grundsätze (z. B.
     metaDescription: 'Autokosten berechnen: Wertverlust, Sprit, Versicherung, Steuer, Wartung und mehr ✓ Kosten pro km ✓ Kostenaufschlüssung ✓ KI-Erklärung.',
     keywords: ['autokosten rechner', 'autokosten berechnen', 'was kostet ein auto im monat', 'autokosten pro km', 'kosten auto pro monat', 'wertverlust auto', 'unterhaltskosten auto', 'kfz kosten rechner', 'auto gesamtkosten', 'kosten pro kilometer'],
     icon: '🚗',
-    formel: 'Gesamtkosten/Monat = (Wertverlust + Kraftstoff + Versicherung + Steuer + Wartung + Sonstige) / 12 | Kosten/km = Jahreskosten / Fahrleistung',
     beispiel: 'Neuwagen 25.000 €, 5 Jahre Haltedauer, 15.000 km/Jahr, 7 l/100 km Benzin (1,75 €/l) → Wertverlust 202 €/Mon. | Sprit 153 €/Mon. | Versicherung 80 €/Mon. | Gesamt ca. 550 €/Monat = 0,44 €/km.',
-    erklaerung: `**Was kostet ein Auto wirklich? Die versteckten Kosten**
-
-Ein Auto ist für viele Deutsche ein täglicher Begleiter — aber die wenigsten kennen die tatsächlichen Gesamtkosten. Laut ADAC kostet ein durchschnittlicher Neuwagen der Kompaktklasse zwischen **400 und 600 Euro pro Monat** — und das ist oft mehr, als man denkt. Der Grund: Neben den offensichtlichen Kosten wie Sprit und Versicherung gibt es zahlreiche versteckte Posten. Der mit Abstand größte ist der **Wertverlust**: Ein Neuwagen für 30.000 Euro verliert im ersten Jahr allein rund 7.200 Euro an Wert — das sind 600 Euro pro Monat, mehr als die meisten für Sprit ausgeben. Unser Rechner erfasst alle Kostenblöcke und zeigt Ihnen die wahren Kosten pro Monat und pro Kilometer.
-
-**Wertverlust: Der größte Kostenblock, den viele übersehen**
-
-Der Wertverlust ist bei den meisten Autos der größte einzelne Kostenfaktor — oft 30 bis 50 Prozent der Gesamtkosten. Ein Neuwagen verliert im ersten Jahr durchschnittlich **24 Prozent** seines Wertes, im zweiten Jahr weitere 13 Prozent, danach nimmt der Verlust langsam ab auf 6 bis 8 Prozent pro Jahr. Nach 5 Jahren ist ein Neuwagen typischerweise nur noch 45 bis 50 Prozent des Neupreises wert. Ein Auto für 25.000 Euro hätte dann einen Restwert von ca. 11.000 bis 12.500 Euro — der Wertverlust beträgt also 12.500 bis 14.000 Euro oder rund **208 bis 233 Euro pro Monat**. Gebrauchtwagen verlieren prozentual weniger, da der stärkste Wertverlust in den ersten Jahren stattfindet. Wer einen 3 Jahre alten Gebrauchtwagen kauft, kann den größten Wertverlust vermeiden.
-
-**Neuwagen vs. Gebrauchtwagen: Kostenvergleich über 5 Jahre**
-
-Ein Neuwagen der Kompaktklasse für 30.000 Euro kostet über 5 Jahre Gesamtkosten von ca. 34.000 Euro (inkl. Wertverlust, Sprit, Versicherung, Wartung). Ein vergleichbarer 3 Jahre alter Gebrauchtwagen für 18.000 Euro kostet im gleichen Zeitraum ca. 24.000 Euro — eine Ersparnis von **10.000 Euro** oder 167 Euro pro Monat. Der Hauptgrund ist der geringere Wertverlust. Allerdings können bei älteren Fahrzeugen die Reparaturkosten steigen. Als Faustregel gilt: Ein 2 bis 4 Jahre alter Gebrauchtwagen bietet das beste Verhältnis aus Wertverlust und Zuverlässigkeit. Nutzen Sie unseren [Kfz-Steuer-Rechner](/auto/kfz-steuer-rechner) für die genaue Steuerberechnung Ihres Fahrzeugs.
-
-**Benziner vs. Diesel vs. Elektro: Welcher Antrieb ist am günstigsten?**
-
-Die Antwort hängt von der jährlichen Fahrleistung ab. **Benziner** haben niedrigere Anschaffungskosten und günstigere Versicherung, dafür höheren Verbrauch. **Diesel** lohnen sich ab ca. 15.000 bis 20.000 km/Jahr — der niedrigere Verbrauch kompensiert dann einen Teil der höheren Kfz-Steuer und Versicherung — der Literpreis derzeit nicht, denn Diesel liegt über Super E10. **Elektroautos** haben die niedrigsten Energiekosten (ca. 5 bis 7 Euro/100 km vs. 12 bis 15 Euro beim Benziner), keine Kfz-Steuer (bis 2030), niedrigere Wartungskosten (keine Ölwechsel, weniger Bremsenverschleiß) — aber höhere Anschaffungskosten und den Unsicherheitsfaktor Batterielebensdauer. Bei 15.000 km/Jahr und Laden zu Hause ist ein Elektroauto über die Gesamtbetriebskosten oft günstiger als ein vergleichbarer Verbrenner. Berechnen Sie die genauen Spritkosten mit unserem [Spritkostenrechner](/auto/spritkosten-rechner).
-
-**Tipps zum Senken der Autokosten**
-
-Der einfachste Hebel ist die **Kfz-Versicherung**: Ein jährlicher Vergleich spart durchschnittlich 300 bis 500 Euro. Achten Sie auf: höhere Selbstbeteiligung (150/300 statt 0/150 Euro), Werkstattbindung, Telematik-Tarife für Wenigfahrer. Beim **Sprit** helfen: vorausschauendes Fahren (bis 20% Ersparnis), Reifendruck regelmäßig prüfen, unnötiges Gewicht entladen, Preisvergleich-Apps nutzen. Bei der **Wartung**: Freie Werkstätten sind oft 20 bis 40 Prozent günstiger als Vertragswerkstätten. **Versicherung wechseln** lohnt sich besonders im November (Sonderkündigungsrecht). Auch der [KW-PS-Umrechner](/auto/kw-ps-umrechner) und [Bußgeldrechner](/auto/bussgeldrechner) helfen Ihnen, Kosten rund ums Auto im Blick zu behalten.
-
-**Auto vs. ÖPNV vs. Carsharing: Ab wann lohnt sich ein eigenes Auto?**
-
-Ein eigenes Auto lohnt sich finanziell erst ab einer gewissen Fahrleistung und wenn ÖPNV keine echte Alternative ist. Mit einem Deutschlandticket (63 €/Monat seit 2026) und gelegentlichem Carsharing (ca. 0,30 bis 0,50 €/km) kommen Stadtbewohner oft günstiger weg als mit einem eigenen Auto für 400 bis 600 Euro/Monat. Die Grenze liegt typischerweise bei **10.000 bis 12.000 km/Jahr** in der Stadt: Darunter ist Carsharing + ÖPNV günstiger, darüber lohnt sich das eigene Auto. Auf dem Land ohne ÖPNV-Anbindung ist das Auto natürlich alternativlos. Bedenken Sie auch den Zeitfaktor: Ein eigenes Auto spart oft erhebliche Zeit — und Zeit hat einen Wert.`,
     faq: [
       {
         frage: 'Wie viel kostet ein Auto im Monat?',
@@ -1191,33 +972,7 @@ Ein eigenes Auto lohnt sich finanziell erst ab einer gewissen Fahrleistung und w
     metaDescription: 'Leasing berechnen: Leasingrate, Gesamtkosten und Vergleich mit Finanzierung ✓ Leasingfaktor ✓ Kilometerrisiko ✓ KI-Erklärung.',
     keywords: ['leasing rechner', 'leasingrate berechnen', 'leasingfaktor', 'leasing vs finanzierung', 'auto leasing', 'leasing gesamtkosten', 'mehrkilometer leasing', 'leasing kosten'],
     icon: '🚘',
-    formel: 'Leasingrate (Netto) = (Listenpreis − Anzahlung) × Leasingfaktor ÷ 100 | Gesamtkosten = Anzahlung + (Rate × Laufzeit)',
     beispiel: 'Beispiel: 35.000 € Listenpreis, Faktor 0,85 %, 36 Monate → Netto-Rate ≈ 297,50 €, Brutto ≈ 354,03 €. Gesamtkosten ≈ 12.745 €.',
-    erklaerung: `Leasing ist eine beliebte Alternative zum Autokauf — gerade für Neuwagen, Firmenfahrzeuge und Vielfahrer. Statt den Wagen zu kaufen, zahlen Sie eine monatliche Nutzungsgebühr an die Leasinggesellschaft. Unser Leasing-Rechner zeigt Ihnen sofort Leasingrate, Gesamtkosten und — optional — den Vergleich mit einer klassischen Finanzierung. So sehen Sie auf einen Blick, ob Leasing für Sie die bessere Wahl ist.
-
-**Wie wird die Leasingrate berechnet?**
-
-Die gängigste Methode ist die Berechnung über den **Leasingfaktor**. Dieser Prozentwert (typischerweise zwischen 0,6 und 1,2) wird mit dem Listenpreis multipliziert und ergibt die Netto-Monatsrate: Leasingrate (netto) = (Listenpreis − Anzahlung) × Leasingfaktor ÷ 100. Die Brutto-Rate enthält zusätzlich 19 % Mehrwertsteuer. Je niedriger der Leasingfaktor, desto günstiger das Angebot. Alternativ können Sie die Rate auch direkt eingeben, falls Sie sie bereits aus einem konkreten Angebot kennen.
-
-**Leasingfaktor erklärt: Was ist ein guter Faktor?**
-
-Als Faustregel gilt: Ein Leasingfaktor unter **0,8** gilt als sehr attraktiv, zwischen 0,8 und 1,0 ist marktüblich, über 1,2 sollten Sie aufmerksam werden. Der Faktor hängt von vielen Variablen ab: Marke, Modell, Laufzeit, Kilometerleistung, Anzahlung und aktuelle Hersteller-Aktionen. Besonders bei Leasing-Sonderaktionen von Herstellern (z. B. Auslaufmodellen) können Sie Faktoren unter 0,5 finden — diese Angebote lohnen sich oft wirklich.
-
-**Leasing vs. Finanzierung vs. Barkauf**
-
-Leasing hat einen entscheidenden Unterschied zum Kauf: Das Auto gehört Ihnen am Ende **nicht**. Bei einer Finanzierung zahlen Sie zwar höhere Monatsraten, aber das Fahrzeug ist nach der Rückzahlung Ihr Eigentum — es behält also einen Restwert. Unser Vergleich berücksichtigt genau das: Von den Finanzierungs-Gesamtkosten ziehen wir den erwarteten Restwert ab. So bekommen Sie einen fairen Vergleich der effektiven Kosten beider Varianten. Nicht vergessen: Beim Barkauf fallen keine Zinsen an, aber Sie haben einen großen Einmalbetrag gebunden, der anderweitig hätte Rendite erwirtschaften können.
-
-**Kilometerleasing: Das Risiko Mehr-/Minderkilometer**
-
-Bei fast allen Leasingverträgen ist eine jährliche Kilometerleistung vereinbart. Fahren Sie mehr, zahlen Sie für jeden Mehrkilometer einen Aufpreis — typisch sind **5 bis 15 Cent pro km**. Bei 5.000 km Mehrkilometern pro Jahr über 3 Jahre bei 10 ct/km sind das bereits 1.500 € Nachzahlung. Umgekehrt gibt es für Minderkilometer oft eine Rückerstattung, aber meist zu einem niedrigeren Satz. Schätzen Sie Ihre Jahreskilometer lieber **etwas großzügiger**, als unter der Grenze bleiben zu müssen.
-
-**Leasing für Gewerbetreibende: Steuervorteile**
-
-Selbstständige und Unternehmer können Leasingraten voll als Betriebsausgaben absetzen — ein wesentlicher Vorteil gegenüber dem Kauf, bei dem nur die Abschreibung wirkt. Auch die in der Rate enthaltene Mehrwertsteuer ist vorsteuerabzugsberechtigt. Bei privater Mitnutzung greift allerdings die 1-%-Regelung oder ein Fahrtenbuch. Lassen Sie sich im Zweifel von Ihrem Steuerberater beraten, ob Leasing oder Kauf in Ihrer konkreten Situation günstiger ist.
-
-**Verwandte Rechner**
-
-Möchten Sie die Gesamtkosten Ihres Autos inkl. Versicherung, Steuer und Sprit berechnen? Nutzen Sie unseren Autokosten-Rechner. Für eine klassische Finanzierung hilft der Kreditrechner, und die jährliche Kfz-Steuer bestimmt der Kfz-Steuer-Rechner.`,
     faq: [
       {
         frage: 'Wie berechne ich meine Leasingrate?',
@@ -1382,29 +1137,7 @@ Möchten Sie die Gesamtkosten Ihres Autos inkl. Versicherung, Steuer und Sprit b
     metaDescription: 'Führerscheinkosten Klasse B berechnen: Fahrstunden, Prüfungen und Nebenkosten nach Region — kostenlose Gesamtkosten-Schätzung mit KI-Erklärung.',
     keywords: ['führerscheinkosten', 'führerschein kosten', 'was kostet ein führerschein', 'führerschein klasse b', 'fahrschule kosten', 'fahrstunden preis', 'führerschein rechner', 'führerscheinprüfung kosten'],
     icon: '🚗',
-    formel: 'Gesamt = Grundgebühr + 12 × Sonderfahrten-Preis + Übungsstunden × Preis + Nebenkosten + Theorie- + Praxisprüfung',
     beispiel: 'Beispiel (Vorort, 25 Übungsstunden, Erstversuche bestanden): 425 € + 12 × 82,50 € + 25 × 55 € + 157 € + 23 € + 117 € = ca. 3.087 €',
-    erklaerung: `**Was kostet der Führerschein 2026 wirklich?**
-
-Der Führerschein Klasse B gehört in Deutschland zu den teuersten Ausbildungen überhaupt — und die Kosten sind in den letzten Jahren spürbar gestiegen. Wer heute neu anfängt, sollte mit **2.500 bis 4.500 Euro** rechnen, in Großstädten auch deutlich mehr. Der Grund: höhere Personal- und Betriebskosten der Fahrschulen, teurere Prüffahrzeuge, gestiegene TÜV-/DEKRA-Gebühren und längere Ausbildungszeiten durch neue Lehrinhalte (z. B. E-Auto-Module). Mit unserem Führerscheinkosten-Rechner bekommen Sie eine realistische Schätzung auf Basis Ihrer Region, Ihrer voraussichtlichen Fahrstundenanzahl und davon, ob Sie die Prüfungen beim ersten Anlauf bestehen. So wissen Sie vorher, was auf Sie zukommt — und können das Budget sauber planen.
-
-**Die einzelnen Kostenblöcke im Überblick**
-
-Die Gesamtkosten setzen sich aus mehreren festen und variablen Posten zusammen. Die **Grundgebühr der Fahrschule** deckt Theorieunterricht, Verwaltung und Anmeldung ab — je nach Region liegt sie bei 350 € (ländlich) bis 500 € (Großstadt). Hinzu kommen die **12 Pflicht-Sonderfahrten** (5 Überlandfahrten, 4 Autobahnfahrten, 3 Nachtfahrten), die gesetzlich vorgeschrieben sind und meist mit einem Zuschlag von rund 50 % auf den normalen Fahrstundenpreis abgerechnet werden. Die **Übungsfahrstunden** sind der größte variable Block: Der Bundesdurchschnitt liegt bei etwa 25 Übungsstunden, die Spanne reicht von 15 bei Vielfahrern bis über 40 bei Fahranfängern, die sich schwertun. Rechnen Sie pro Stunde mit 45 € (ländlich) bis 65 € (Stadt).
-
-Zu den **Nebenkosten** zählen: Lehrmaterial rund 50 €, Sehtest 7 €, Erste-Hilfe-Kurs 40 €, biometrische Passbilder 15 € und die Antragsgebühr der Führerscheinstelle 45 €. Summiert sind das rund 157 € fixe Nebenkosten, die bei jedem Führerschein-Neuantrag anfallen. Schließlich die **Prüfungsgebühren**: Die Theorieprüfung kostet beim TÜV/DEKRA 23 €, die Praxisprüfung 117 €. Wichtig: Jede Wiederholung kostet nochmals den vollen Betrag. Wer zweimal durch die Praxisprüfung fällt, zahlt allein für die Prüfungen 351 € — plus meist 4 bis 10 zusätzliche Übungsstunden zur Vorbereitung.
-
-**Regionale Unterschiede: Stadt vs. Land**
-
-Die Preise für Fahrstunden variieren in Deutschland drastisch. In **München, Hamburg oder Berlin** zahlen Sie oft 65 € oder mehr pro 45-Minuten-Einheit, in **Dörfern und Kleinstädten** teilweise nur 40 bis 45 €. Auch die Grundgebühr der Fahrschule folgt diesem Muster. Wer flexibel ist, kann durch einen Intensivkurs in einer ländlichen Region hunderte Euro sparen — Ferienkurse im Harz, in der Eifel oder im Schwarzwald sind bei Großstadt-Fahrschülern beliebt. Wichtig zu wissen: Die Prüfungen müssen in der Regel bei der TÜV-/DEKRA-Stelle abgelegt werden, die der ausbildenden Fahrschule zugeordnet ist. Ein Wechsel ist möglich, aber mit Aufwand verbunden.
-
-**Spartipps für Fahrschüler**
-
-Der einfachste Hebel: **Theorie konsequent vorbereiten**, um die Prüfung beim ersten Versuch zu bestehen. Kostenlose Apps und Online-Tests ersetzen keine Fahrschule, sind aber perfekt zur Wiederholung. Zweiter Hebel: **Fahrstunden effizient nutzen**. Kommen Sie ausgeschlafen, regelmäßig und in kurzen Abständen — wer nur alle 2 Wochen fährt, braucht erfahrungsgemäß deutlich mehr Stunden. Dritter Hebel: **Fahrschulen vergleichen**. Die Preise unterscheiden sich auch innerhalb einer Stadt stark. Fragen Sie konkret nach Paketpreisen und achten Sie auf den Preis pro Sonderfahrt — hier verstecken sich oft Aufschläge. Und: Bezahlen Sie nie die komplette Fahrschule im Voraus, falls eine Insolvenz droht. Eine Monatsabrechnung ist sicherer.
-
-**Finanzierung: Kann man den Führerschein von der Steuer absetzen?**
-
-Grundsätzlich nein — der Führerschein Klasse B gilt als Kosten der privaten Lebensführung. Es gibt jedoch Ausnahmen: Wenn der Führerschein **Voraussetzung für den Beruf** ist (z. B. bei Polizei, Außendienst, Pflegediensten), kann er als Werbungskosten geltend gemacht werden. Bei Azubis zahlt manchmal der Arbeitgeber oder es gibt einen Zuschuss über die Agentur für Arbeit. Für den LKW-Führerschein (Klasse C/CE) oder Bus-Führerschein (D/DE) gibt es spezielle Förderprogramme. Auch der [Autokosten-Rechner](/auto/autokosten-rechner) hilft Ihnen, die laufenden Kosten nach dem Führerschein realistisch einzuschätzen — und unser [Kfz-Steuer-Rechner](/auto/kfz-steuer-rechner) zeigt, was Sie für Ihr erstes eigenes Auto jährlich ans Finanzamt zahlen.`,
     faq: [
       {
         frage: 'Was kostet der Führerschein Klasse B 2026 im Durchschnitt?',
@@ -1577,64 +1310,7 @@ Grundsätzlich nein — der Führerschein Klasse B gilt als Kosten der privaten 
     metaDescription: 'E-Auto-Reichweite realistisch berechnen: Winter, Autobahn und Heizung mindern die WLTP-Reichweite. Mit Verbrauch & Ladekosten.',
     keywords: ['e-auto reichweite rechner', 'wltp reichweite real', 'elektroauto verbrauch', 'e-auto winter reichweite', 'kwh pro 100 km', 'ladekosten rechner', 'e-auto autobahn reichweite', 'reichweite tesla', 'e-auto stromverbrauch'],
     icon: '🔋',
-    formel: 'Realverbrauch = WLTP-Verbrauch ÷ (Fahrprofil × Temperatur × Klima) | Realreichweite = Akku ÷ Realverbrauch × 100',
     beispiel: 'Beispiel: 60 kWh Akku, 400 km WLTP → 15 kWh/100 km WLTP. Autobahn × 0,70, Winter 0–10 °C × 0,85, Heizung an × 0,90 → Realverbrauch 28 kWh/100 km, Realreichweite ~215 km.',
-    erklaerung: `**Warum die WLTP-Reichweite nicht der Realität entspricht**
-
-Die von Herstellern angegebene **WLTP-Reichweite** (Worldwide Harmonised Light Vehicles Test Procedure) wird unter Laborbedingungen ermittelt: moderate Temperaturen, definierte Geschwindigkeitsprofile, keine Klimaanlage. Für den Alltag ist sie daher eine Bestwert-Angabe, die Sie im realen Fahrbetrieb fast nie erreichen. Vor allem auf der Autobahn, bei Kälte oder mit eingeschalteter Heizung sinkt die Reichweite teils drastisch — um 20 bis 40 Prozent. Unser Reichweiten-Rechner zeigt Ihnen, welche **realistische Reichweite** Sie von Ihrem E-Auto tatsächlich erwarten können.
-
-**Einflussfaktoren auf die Reichweite**
-
-Vier große Hebel bestimmen, wie weit Sie mit einer Akkuladung kommen:
-
-- **Geschwindigkeit (Fahrprofil):** Der Luftwiderstand wächst im Quadrat zur Geschwindigkeit. Tempo 100 verbraucht etwa doppelt so viel wie Tempo 70, Tempo 130 rund das Dreifache. Stadtfahrten profitieren von Rekuperation — hier landet ein Teil der Bremsenergie zurück im Akku.
-- **Außentemperatur:** Lithium-Ionen-Akkus arbeiten ab etwa 20 °C ideal. Bei 0 °C liefert der Akku nur noch rund 85 %, bei −10 °C kann es unter 70 % fallen. Gleichzeitig braucht die Heizung viel Strom, weil E-Autos keine Motorabwärme zum Heizen nutzen können.
-- **Heizung und Klimaanlage:** Klassische Widerstandsheizungen können im Winter 3–5 kW ziehen — das entspricht bei 100 km/h einem Mehrverbrauch von 3–5 kWh/100 km. Moderne Wärmepumpen reduzieren das auf etwa 1 kWh/100 km.
-- **Beladung, Dachboxen und Anhänger:** Jedes zusätzliche Gewicht und jeder aerodynamische Störfaktor kostet Reichweite — beim Anhänger kann sich die Reichweite halbieren.
-
-**Winter-Reichweite: Was Sie einplanen sollten**
-
-Der kritischste Moment für E-Auto-Reichweite ist der **Winter**. Kalte Batterien liefern weniger Energie, die Heizung zieht zusätzlich. Faustregel: Rechnen Sie mit **70 bis 80 % der sommerlichen Reichweite** bei Temperaturen unter 0 °C. Wer das unterschätzt, bleibt schnell liegen. Gute Strategien:
-
-- **Vorheizen am Stecker:** Wenn Sie mit Akku am Ladekabel vorheizen, verbraucht das Heizen keinen Strom aus dem Akku.
-- **Sitz- und Lenkradheizung statt Raumheizung:** Sitzheizungen verbrauchen nur 50–100 Watt und heizen effizienter direkt am Körper.
-- **Gemächliches Fahren:** Auf der Autobahn kostet Tempo 130 im Winter besonders viel — 10–20 km/h weniger zahlen sich direkt in Reichweite aus.
-- **Eco-Modus nutzen:** Reduziert Beschleunigung und Heizleistung — oft 10–15 % Reichweitengewinn.
-
-**Ladekosten richtig einschätzen**
-
-Die Kosten pro 100 km hängen vom Strompreis und Ladepunkt ab:
-
-- **Zuhause an der Wallbox** (Haushaltstrom ≈ 33 ct/kWh): 4–6 € pro 100 km bei 15–18 kWh/100 km.
-- **Wallbox-Sondertarif** (ca. 28 ct): 3,50–5 €.
-- **Öffentliche AC-Säule** (ca. 45 ct): 7–9 €.
-- **DC-Schnelllader** (ca. 60–80 ct): 9–15 €.
-
-Zum Vergleich: Ein Verbrenner mit 6 l/100 km und 1,75 €/l kostet rund 10,50 € pro 100 km. E-Autos sind also beim Heimladen klar günstiger — beim Dauer-Nutzen öffentlicher Schnelllader kann der Preisvorteil allerdings schrumpfen.
-
-**Wann lohnt sich das E-Auto?**
-
-Die Antwort hängt von Ihrem Fahrprofil ab. E-Autos spielen ihre Vorteile aus, wenn Sie
-
-- überwiegend zu Hause oder am Arbeitsplatz laden können,
-- hauptsächlich im Pendel- und Alltagsverkehr unterwegs sind,
-- die THG-Quote (aktuell 100–200 €/Jahr) mitnehmen,
-- eine PV-Anlage haben und selbst erzeugten Strom laden.
-
-Weniger attraktiv wird die Rechnung bei häufigen Langstrecken mit Schnelllader-Zwang oder in Miet- und Tiefgaragen ohne eigene Wallbox.
-
-**Unser Reichweiten-Rechner zeigt:**
-
-- Die **realistische Reichweite** in km — abhängig von Ihrem Fahrprofil
-- Den **Realverbrauch** in kWh/100 km
-- Die **Ladekosten** pro 100 km und pro voller Ladung
-- Den **Abschlag gegenüber WLTP** in Prozent
-
-**Welche Faktoren der Rechner berücksichtigt**
-
-Der Reichweiten-Rechner kombiniert vier Praxis-Faktoren mit dem WLTP-Wert deines Fahrzeugs: **Fahrprofil** (Stadt, gemischt, Autobahn), **Außentemperatur**, **Klimaanlage oder Heizung** und **Fahrstil**. Die Größenordnungen der Korrekturen orientieren sich an den E-Auto-Reichweiten-Tests des ADAC und an Praxis-Daten weiterer Anbieter.
-
-Manchmal werden zusätzliche Eingaben wie Mitfahrer-Anzahl oder Straßenbelag gewünscht. Beides hat in der Praxis nur sehr geringen Effekt: Eine zusätzliche Person erhöht den Verbrauch auf der Autobahn um etwa ein bis zwei Prozent, der Straßenbelag variiert im Alltag (durchgängig Asphalt) kaum messbar. Auch der ADAC-Reichweiten-Rechner und vergleichbare Tools verzichten deshalb bewusst auf diese Inputs — sie würden die Bedienung verkomplizieren, ohne die Vorhersage spürbar genauer zu machen.`,
     // W19-Goldstandard: reichweiten-rechner auf volle Tiefe (15 Bausteine, ~1.560 W), Leitformat
     // „vergleich" 3× dominant. Fokus REICHWEITE/Energie — disjunkt zu autokosten/spritkosten/
     // kfz-steuer. Rechner ist E-Auto-spezialisiert (WLTP-Korrektur nach Fahrprofil/Temperatur/
@@ -1857,40 +1533,7 @@ Manchmal werden zusätzliche Eingaben wie Mitfahrer-Anzahl oder Straßenbelag ge
     metaDescription: 'Fahrrad-Rahmengröße kostenlos berechnen — nach Körpergröße und Schrittlänge für City, Rennrad, MTB und E-Bike. Mit Größentabelle.',
     keywords: ['fahrrad rahmengröße', 'rahmenhöhe berechnen', 'fahrradgröße rechner', 'schrittlänge fahrrad', 'rennrad rahmengröße', 'mtb rahmengröße', 'e-bike rahmenhöhe'],
     icon: '🚲',
-    formel: 'City/E-Bike: Schrittlänge × 0,66 | Rennrad: × 0,665 | MTB: × 0,574 | Schrittlänge ≈ Körpergröße × 0,47',
     beispiel: '178 cm, Schrittlänge 84 cm, City: 84 × 0,66 = 55,4 cm (Größe L). MTB: 84 × 0,574 = 48,2 cm (Größe L).',
-    erklaerung: `**Was berechnet der Fahrrad-Rahmengröße-Rechner?**
-
-Der Rechner bestimmt die optimale Rahmenhöhe für Ihr Fahrrad. Er berücksichtigt Körpergröße, Schrittlänge (optional, aber empfohlen) und den Fahrradtyp. Das Ergebnis wird in Zentimetern, Zoll und als Buchstabengröße (XS bis XXL) angegeben — mit einem Toleranzbereich von ±2 cm.
-
-**Warum ist die richtige Rahmengröße wichtig?**
-
-Ein zu großer Rahmen führt zu Überstreckung, Nacken- und Rückenschmerzen. Ein zu kleiner Rahmen erzwingt eine gebeugte Haltung und kann Knieprobleme verursachen. Die richtige Rahmengröße ist Grundvoraussetzung für komfortables, effizientes und verletzungsfreies Radfahren. Sattel und Lenker lassen sich feinjustieren, aber die Rahmenhöhe ist unveränderlich.
-
-**Schrittlänge — der wichtigste Wert**
-
-Die Schrittlänge (Innenbeinlänge) ist genauer als die Körpergröße, weil sie das Verhältnis von Beinen zu Oberkörper berücksichtigt. Zwei Menschen mit gleicher Körpergröße können unterschiedlich lange Beine haben — und brauchen verschiedene Rahmen.
-
-So messen Sie die Schrittlänge: Barfuß mit dem Rücken an die Wand stellen. Ein Buch waagerecht zwischen die Beine klemmen (fest nach oben drücken, wie ein Sattel). Den Abstand vom Boden bis zur Oberkante des Buches messen. Am besten zwei Messungen durchführen und den Mittelwert nehmen.
-
-Wenn keine Schrittlänge angegeben wird, schätzt der Rechner sie als Körpergröße × 0,47. Das ist ein guter Durchschnittswert, aber die eigene Messung ist immer besser.
-
-**Fahrradtypen und Faktoren**
-
-Jeder Fahrradtyp hat eine andere Geometrie und damit einen anderen Umrechnungsfaktor:
-
-- **City/Trekking (× 0,66):** Aufrechte Sitzposition, Komfort im Alltag. Die häufigste Kategorie.
-- **Rennrad (× 0,665):** Gestreckte, aerodynamische Position. Etwas größerer Rahmen wegen der sportlichen Haltung.
-- **Mountainbike (× 0,574):** Kompakter Rahmen für mehr Bewegungsfreiheit im Gelände. Wird oft in Zoll angegeben.
-- **E-Bike (× 0,66):** Gleicher Faktor wie City/Trekking. Der Motor ändert nichts an der idealen Rahmengröße.
-
-**Größenbezeichnungen — XS bis XXL**
-
-Hersteller verwenden Buchstabengrößen, die ungefähr Rahmenhöhen-Bereichen entsprechen. Die Zuordnung variiert leicht zwischen Herstellern — die Angaben im Rechner sind Richtwerte. Prüfen Sie immer die Größentabelle des jeweiligen Herstellers.
-
-**Probefahrt empfohlen**
-
-Der Rechner liefert eine fundierte Empfehlung, aber jedes Fahrrad sitzt etwas anders. Arm- und Oberkörperlänge, Flexibilität und persönliche Vorlieben spielen ebenfalls eine Rolle. Wenn möglich, machen Sie eine Probefahrt mit dem berechneten Rahmen und probieren Sie auch die nächstkleinere und nächstgrößere Größe.`,
     faq: [
       {
         frage: 'Wie messe ich meine Schrittlänge?',
@@ -2052,50 +1695,7 @@ Der Rechner liefert eine fundierte Empfehlung, aber jedes Fahrrad sitzt etwas an
     metaDescription: 'Taxikosten kostenlos berechnen — Fahrpreis nach Strecke, Stadt und Tageszeit. Für Berlin, München, Hamburg und 5 weitere Städte.',
     keywords: ['taxi rechner', 'taxikosten berechnen', 'taxi preis', 'taxi tarif', 'taxifahrt kosten', 'taxi berlin', 'taxi münchen'],
     icon: '🚕',
-    formel: 'Fahrpreis = Grundgebühr + Strecke × km-Preis + Wartezeit × Minutenpreis',
     beispiel: 'Berlin, 10 km: 4,30 € + 3 × 2,80 € + 4 × 2,60 € + 3 × 2,10 € = 4,30 + 8,40 + 10,40 + 6,30 = 29,40 €. Mit 10 % Trinkgeld: 32,34 €.',
-    erklaerung: `**Was berechnet der Taxi-Kosten-Rechner?**
-
-Der Rechner schätzt den Fahrpreis einer Taxifahrt in deutschen Großstädten. Er berücksichtigt die stadtspezifischen Tarife (Grundgebühr, Kilometerpreis gestaffelt, Wartezeit) und unterscheidet zwischen Tag- und Nachttarif. Zusätzlich wird eine Trinkgeld-Empfehlung (10 %) berechnet.
-
-**Wie setzen sich Taxikosten zusammen?**
-
-Jede Taxifahrt besteht aus drei Kostenblöcken:
-
-- **Grundgebühr:** Fällt beim Einsteigen an, unabhängig von der Strecke. Je nach Stadt 4,00–5,90 €.
-- **Streckentarif:** Preis pro gefahrenem Kilometer. Einige Städte (Berlin, Hamburg, Köln, Stuttgart) arbeiten mit Staffelung — die ersten 3–9 km kosten mehr als die folgenden. München, Frankfurt und Düsseldorf berechnen einen einheitlichen km-Preis.
-- **Wartezeit:** Wird berechnet, wenn das Taxi im Stau steht oder wartet. Üblich: 0,50–0,72 €/Minute (30–43 €/h).
-
-Die Tarife werden von der jeweiligen Kommune festgelegt und sind für alle Taxis in der Stadt verbindlich. Private Vereinbarungen über den Preis sind nicht erlaubt — es gilt der Taxameter.
-
-**Tarifsysteme der Städte**
-
-Die Tarife unterscheiden sich deutlich zwischen den Städten:
-
-- **Berlin:** Grundgebühr 4,30 €, 3-stufige Staffelung: 2,80 €/km (bis 3 km), 2,60 €/km (3–7 km), 2,10 €/km (ab 7 km). Kurzstreckentarif 6,00 € bis 2 km möglich (nur bei Heranwinken).
-- **München:** Höchste Grundgebühr (5,90 €, inkl. 1. Schalteinheit), einheitlicher km-Preis 2,70 €. Keine Tarif-Staffelung.
-- **Hamburg:** Grundgebühr 4,50 €, Staffelung ab km 9 (2,70 €/km bzw. 2,00 €/km ab km 9). Einheitstarif rund um die Uhr seit 01.02.2025.
-- **Stuttgart:** Niedrige Grundgebühr, aber höchste km-Preise (2,50 €). Staffelung ab km 4.
-
-**Tag vs. Nacht**
-
-Einige Städte haben erhöhte Nachttarife (22–6 Uhr), andere verwenden einen Einheitstarif rund um die Uhr. Berlin und München haben keinen separaten Nachttarif; Köln und Düsseldorf berechnen nachts 10–20 Cent mehr pro Kilometer.
-
-**Zuschläge und Sondertarife**
-
-Der Rechner kalkuliert den Standardtarif. Zusätzliche Kosten können entstehen durch:
-- **Großraumtaxi:** Zuschlag von 5–10 € für Fahrzeuge mit mehr als 4 Sitzplätzen.
-- **Gepäck:** In manchen Städten Zuschlag für sperriges Gepäck.
-- **Flughafen:** Einige Flughäfen haben Festpreise für bestimmte Strecken.
-- **Feiertage:** In manchen Regionen gelten an Feiertagen erhöhte Tarife.
-
-**Trinkgeld im Taxi**
-
-In Deutschland ist Trinkgeld im Taxi üblich, aber nicht verpflichtend. 5–10 % sind Standard. Bei kurzen Fahrten rundet man auf den nächsten vollen Euro auf. Bei gutem Service (Gepäckhilfe, freundliches Gespräch) darf es auch etwas mehr sein.
-
-**Taxi vs. eigenes Auto**
-
-Für gelegentliche Fahrten ist das Taxi oft günstiger als ein eigenes Auto. Die Vollkosten eines Mittelklassewagens liegen bei 30–60 Cent pro Kilometer (Versicherung, Steuern, Wertverlust, Wartung). Eine 10-km-Taxifahrt kostet 25–30 € — das entspricht den Vollkosten von 50–100 km Autofahrt. Wer selten fährt, spart mit Taxi und ÖPNV.`,
     faq: [
       {
         frage: 'Wie genau ist die Kostenberechnung?',
@@ -2270,27 +1870,7 @@ Für gelegentliche Fahrten ist das Taxi oft günstiger als ein eigenes Auto. Die
     metaDescription: 'Firmenwagen berechnen: 1 %-Regel, 0,25 % E-Auto-Vorteil und Arbeitsweg ✓ Verbrenner/Hybrid/Elektro ✓ KI-Erklärung.',
     keywords: ['firmenwagen-rechner', 'firmenwagenrechner', '1 prozent regel', 'geldwerter vorteil', 'dienstwagen rechner', 'e-auto firmenwagen', '0 25 prozent regel', 'firmenwagen steuer'],
     icon: '🚗',
-    formel: 'GWV Privat = Bruttolistenpreis × (1 % Verbrenner | 0,5 % Hybrid | 0,25 % E-Auto ≤70k€ | 0,5 % E-Auto >70k€) | GWV Arbeitsweg (pauschal) = BLP × 0,03 % × km × Antriebsfaktor | GWV gesamt = Privat + Arbeitsweg − Zuzahlung',
     beispiel: 'Bruttolistenpreis 45.000 €, Verbrenner, 20 km Arbeitsweg, keine Zuzahlung: Privatnutzung 450 € + Arbeitsweg 270 € = 720 € GWV/Monat → Steuer bei 35 % Grenzsteuersatz ca. 252 €/Monat.',
-    erklaerung: `**Firmenwagen und die 1 %-Regel**
-
-Wird ein Firmenwagen auch privat genutzt, ist der **geldwerte Vorteil (GWV)** steuerpflichtig. Die einfachste und häufigste Methode ist die **1 %-Regel**: Jeden Monat wird **1 % des Bruttolistenpreises** (inkl. Sonderausstattung und MwSt.) als Privatnutzung versteuert — unabhängig davon, wie oft das Auto tatsächlich privat gefahren wird. Ein Bruttolistenpreis von 45.000 € ergibt 450 € GWV pro Monat.
-
-**E-Auto-Vorteil: Nur 0,25 % bzw. 0,5 %**
-
-Um die Elektromobilität zu fördern, wurde die Steuer für **Elektroautos** drastisch reduziert: Bei Bruttolistenpreis bis **100.000 €** gilt nur **0,25 %** pro Monat — das ist ein Viertel der regulären Last (Schwelle seit 01.07.2025 von 70.000 € auf 100.000 € angehoben, Wachstumsbooster-Gesetz). Über 100.000 € sowie bei **Plug-in-Hybriden** (mit Mindestreichweite und Emissionsgrenzwert) gilt **0,5 %**. Das entspricht einer Steuerersparnis von bis zu 200 €/Monat gegenüber einem vergleichbaren Verbrenner. Mit dem [Autokosten-Rechner](/auto/autokosten-rechner) lässt sich zusätzlich ein Gesamtkostenvergleich anstellen.
-
-**Arbeitsweg — pauschal oder einzeln?**
-
-Neben der Privatnutzung wird auch der **Arbeitsweg** besteuert, sofern der Wagen dafür genutzt wird. Zwei Methoden stehen zur Wahl: Die **pauschale Bewertung (0,03 %)** wird standardmäßig angewandt: Bruttolistenpreis × 0,03 % × Entfernungs-km (einfache Strecke) ergibt den monatlichen GWV für den Arbeitsweg — unabhängig von der tatsächlichen Nutzung. Die **Einzelbewertung (0,002 %)** lohnt sich, wenn Sie **weniger als 15 Tage pro Monat** ins Büro fahren: Bruttolistenpreis × 0,002 % × km × Fahrten/Monat. Bei Homeoffice-Tagen oder Außendiensttätigkeit ist die Einzelbewertung oft deutlich günstiger — Sie müssen aber die Fahrten nachweisen.
-
-**Fahrtenbuch als Alternative**
-
-Statt der 1 %-Regel kann ein **Fahrtenbuch** geführt werden: Jede Fahrt wird mit Datum, Kilometerstand, Ziel und Zweck dokumentiert. Am Jahresende wird der Anteil der Privatfahrten berechnet und mit den tatsächlichen Autokosten (Abschreibung, Kraftstoff, Versicherung, Reparatur) multipliziert. Das Fahrtenbuch lohnt sich bei **geringer Privatnutzung** und **teuren Fahrzeugen** — ist aber aufwändig und muss lückenlos geführt werden. Software wie [WISO Steuer](https://www.buhl.de/produkte/wiso-steuer/) vergleicht automatisch, welche Methode günstiger ist.
-
-**Eigene Zuzahlung und Gehaltsumwandlung**
-
-Zahlt der Arbeitnehmer eine **monatliche Eigenbeteiligung** (z. B. 100 €), mindert diese direkt den geldwerten Vorteil. Auch einmalige Zuzahlungen zu den Anschaffungskosten werden über mehrere Jahre verteilt angerechnet. Alternativ kann der Firmenwagen auch im Rahmen einer **Gehaltsumwandlung** finanziert werden — statt einer [Gehaltserhöhung](/finanzen/gehaltserhoehung-rechner) wird ein Teil des Gehalts für den Wagen eingesetzt. Das spart Sozialabgaben und Steuern gleichermaßen, reduziert aber die Rentenbeiträge.`,
     faq: [
       { frage: 'Wie wird der Firmenwagen versteuert?', antwort: 'Für die private Nutzung wird monatlich 1 % des Bruttolistenpreises als geldwerter Vorteil versteuert (Verbrenner). Bei Plug-in-Hybriden und E-Autos über 100.000 € gilt 0,5 %, bei reinen E-Autos bis 100.000 € nur 0,25 % (Schwelle seit 01.07.2025 von 70.000 € angehoben). Dazu kommen 0,03 % je Kilometer Arbeitsweg (pauschal) oder 0,002 % je Kilometer und tatsächliche Fahrt (Einzelbewertung).' },
       { frage: 'Was ist die 1 %-Regel?', antwort: 'Die 1 %-Regel ist die pauschale Methode zur Besteuerung der privaten Nutzung eines Firmenwagens. Jeden Monat wird 1 % des Bruttolistenpreises (inkl. Sonderausstattung) als geldwerter Vorteil versteuert — unabhängig von der tatsächlichen Privatnutzung. Das ist einfach, aber nicht immer günstig.' },
@@ -2439,19 +2019,7 @@ Zahlt der Arbeitnehmer eine **monatliche Eigenbeteiligung** (z. B. 100 €), min
     metaDescription: 'Bremsweg, Reaktionsweg und Anhalteweg berechnen — mit den Fahrschul-Faustformeln für die Theorieprüfung oder physikalisch für Nässe, Schnee und Eis.',
     keywords: ['bremsweg berechnen', 'anhalteweg formel', 'reaktionsweg', 'gefahrenbremsung', 'bremsweg faustformel', 'bremsweg rechner', 'anhalteweg berechnen'],
     icon: '🛑',
-    formel: 'Faustformel: Reaktionsweg = (v÷10)×3 · Bremsweg = (v÷10)² · Gefahrenbremsung = Bremsweg÷2 (v in km/h) | Physikalisch: Bremsweg = (v÷3,6)² ÷ (2×a) · Reaktionsweg = (v÷3,6)×t | Anhalteweg = Reaktionsweg + Bremsweg.',
     beispiel: '50 km/h nach Faustformel: 15 m Reaktion + 25 m Bremsweg = 40 m Anhalteweg. Physikalisch auf nasser Fahrbahn (6 m/s², 1 s Reaktion): 13,9 m + 16,1 m = 30 m.',
-    erklaerung: `**Bremsweg, Reaktionsweg und Anhalteweg**
-
-In der Fahrschule und in der Theorieprüfung geht es immer wieder um drei Wege: den **Reaktionsweg**, den **Bremsweg** und ihre Summe, den **Anhalteweg**. Der Bremsweg-Rechner ermittelt sie aus der Geschwindigkeit mit den bekannten Faustformeln.
-
-**Die Faustformeln**
-
-Der Reaktionsweg berechnet sich als (Geschwindigkeit ÷ 10) × 3 — er wächst mit dem Tempo linear. Der Bremsweg ist (Geschwindigkeit ÷ 10)², wächst also im Quadrat. Bei einer Gefahrenbremsung (Vollbremsung) halbiert sich der Bremsweg. Der Anhalteweg ist Reaktionsweg plus Bremsweg.
-
-**Warum Tempo so stark zählt**
-
-Weil der Bremsweg im Quadrat wächst, führt doppelte Geschwindigkeit zum **vierfachen** Bremsweg — nicht zum doppelten. Das ist der wichtigste Gedanke hinter den Formeln. Sie sind vereinfachte Merkhilfen für trockene Fahrbahn und gute Reifen; bei Nässe, Schnee oder schlechten Reifen ist der reale Weg deutlich länger.`,
     faq: [
       {
         frage: 'Wie berechnet man den Bremsweg?',
@@ -2600,19 +2168,7 @@ Weil der Bremsweg im Quadrat wächst, führt doppelte Geschwindigkeit zum **vier
     metaDescription: 'Reifengröße wie 205/55 R16 entschlüsseln: Außendurchmesser, Abrollumfang und Tacho-Abweichung beim Reifenwechsel berechnen. Kostenlos.',
     keywords: ['reifengröße berechnen', 'abrollumfang', 'tachoabweichung reifen', 'reifen umrechnen', '205 55 r16 bedeutung', 'reifengrößen rechner', 'reifen außendurchmesser'],
     icon: '🛞',
-    formel: 'Flankenhöhe = Breite × Querschnitt ÷ 100 · Außendurchmesser = Zoll × 25,4 + 2 × Flankenhöhe · Abrollumfang ≈ π × Ø × 0,97 | Abweichung % = (Ø neu ÷ Ø alt − 1) × 100. Technische Näherung, keine Zulassung.',
     beispiel: '205/55 R16: Flanke 112,75 mm, Außendurchmesser 631,9 mm, Abrollumfang ≈ 1.926 mm.',
-    erklaerung: `**Reifengröße verstehen und vergleichen**
-
-Eine Reifenbezeichnung wie **205/55 R16** wirkt kryptisch, folgt aber einer klaren Logik. Der Reifengrößen-Rechner entschlüsselt sie und berechnet den Außendurchmesser, den Abrollumfang und — beim Vergleich zweier Größen — die Abweichung beim Reifenwechsel.
-
-**Was die Zahlen bedeuten**
-
-Die erste Zahl (205) ist die **Reifenbreite** in Millimetern. Die zweite (55) ist der **Querschnitt** in Prozent der Breite — die Flankenhöhe beträgt hier 55 % von 205 mm. Das „R" steht für **Radialbauweise**, die 16 für den **Felgendurchmesser** in Zoll.
-
-**Warum die Abweichung zählt**
-
-Wechseln Sie auf eine andere Größe, ändert sich meist der Außendurchmesser — und damit die Tacho-Anzeige. Faustregel ist eine Abweichung des Abrollumfangs von höchstens rund ±2 %. Wichtig: Der Tacho darf nie zu wenig anzeigen. Verbindlich ist aber immer der Fahrzeugschein/CoC oder eine Reifenfreigabe — der Rechner liefert nur technische Näherungswerte.`,
     faq: [
       {
         frage: 'Was bedeutet 205/55 R16?',
@@ -2775,19 +2331,7 @@ Wechseln Sie auf eine andere Größe, ändert sich meist der Außendurchmesser �
     metaDescription: 'Leasingfaktor aus Rate und Bruttolistenpreis berechnen, Angebote als gut oder teuer einordnen — mit Gesamtkostenfaktor bei Anzahlung. Kostenlos.',
     keywords: ['leasingfaktor berechnen', 'guter leasingfaktor', 'leasing vergleichen', 'gesamtkostenfaktor', 'leasingfaktor formel', 'leasingfaktor rechner', 'leasing angebot bewerten'],
     icon: '📊',
-    formel: 'Leasingfaktor = (monatliche Rate ÷ Bruttolistenpreis) × 100 · Gesamtkostenfaktor = ((Rate + Sonderzahlung ÷ Laufzeit) ÷ Bruttolistenpreis) × 100 | Branchenschnitt ≈ 0,63. Orientierungs-Kennzahl, keine Finanzberatung.',
     beispiel: '250 € Rate bei 40.000 € Bruttolistenpreis: (250 ÷ 40.000) × 100 = Leasingfaktor 0,63.',
-    erklaerung: `**Was ist der Leasingfaktor?**
-
-Der **Leasingfaktor** ist die Standard-Kennzahl, um Leasingangebote vergleichbar zu machen. Er setzt die monatliche Rate ins Verhältnis zum Bruttolistenpreis des Fahrzeugs und macht Angebote so unabhängig vom Fahrzeugpreis vergleichbar. Der Rechner ordnet Ihr Angebot in Sekunden als gut oder teuer ein.
-
-**Die Formel**
-
-Leasingfaktor = (monatliche Rate ÷ Bruttolistenpreis) × 100. Ein Beispiel: 250 € Rate bei 40.000 € Listenpreis ergeben (250 ÷ 40.000) × 100 = 0,63 — genau der Branchenschnitt. Je niedriger der Faktor, desto günstiger das Angebot im Verhältnis zum Fahrzeugwert.
-
-**Anzahlung: der Gesamtkostenfaktor**
-
-Eine niedrige Rate kann durch eine hohe Anzahlung „erkauft" sein. Damit Angebote fair vergleichbar bleiben, verteilt der **Gesamtkostenfaktor** die Sonderzahlung auf die Laufzeit: ((Rate + Anzahlung ÷ Laufzeit) ÷ Bruttolistenpreis) × 100. Sobald eine Anzahlung im Spiel ist, ist dieser Wert maßgeblich. Wichtig: Der Faktor enthält keine Nebenkosten, Kilometer oder den Restwert — er ist eine Orientierung, keine Finanzberatung.`,
     faq: [
       {
         frage: 'Was ist ein guter Leasingfaktor?',
@@ -2949,19 +2493,7 @@ Eine niedrige Rate kann durch eine hohe Anzahlung „erkauft" sein. Damit Angebo
     metaDescription: 'Wertverlust und Restwert eines Autos nach Jahren schätzen: degressive Marktkurve nach Fahrzeugtyp (Verbrenner, Premium, Elektro). Kostenlos.',
     keywords: ['wertverlust auto berechnen', 'restwert auto', 'auto abschreibung', 'wertverlust neuwagen', 'restwert nach jahren', 'wertverlust rechner auto', 'auto wertverlust tabelle'],
     icon: '📉',
-    formel: 'Restwert = Neupreis × Produkt der jährlichen (1 − Wertverlustrate); degressiv, Jahr 1 am höchsten | Wertverlust € = Neupreis − Restwert · Wertverlust % = (1 − Restwert ÷ Neupreis) × 100. Durchschnitts-Richtwert.',
     beispiel: '30.000 € Verbrenner nach 3 Jahren: 30.000 × 0,76 × 0,87 × 0,90 = 17.852 € Restwert (40,5 % Verlust).',
-    erklaerung: `**Was ist ein Auto nach ein paar Jahren noch wert?**
-
-Kaum etwas verliert so schnell an Wert wie ein Neuwagen. Der Wertverlust-Rechner schätzt aus **Neupreis**, **Fahrzeugalter** und **Fahrzeugtyp** den heutigen Restwert und den bisherigen Wertverlust — nach typischen Marktkurven.
-
-**Warum degressiv, nicht linear**
-
-Der Wertverlust ist im ersten Jahr am größten (rund 20–30 %) und flacht danach ab. Ein Auto verliert also nicht jedes Jahr gleich viel, sondern anfangs stark und später immer weniger. Der Rechner bildet das über gestaffelte Jahresraten ab — wer linear rechnet, überschätzt den Wert junger Autos deutlich.
-
-**Fahrzeugtyp macht den Unterschied**
-
-Volumen-Verbrenner, wertstabile Premium-/SUV-Modelle und Elektroautos verlieren unterschiedlich schnell. E-Autos im Volumensegment verlieren aktuell im ersten Jahr am steilsten, gleichen sich mit der Zeit aber an. Wichtig: Alle Werte sind **Durchschnitts-Richtwerte** — Marke, Zustand, Laufleistung und Nachfrage verändern den realen Wert deutlich. Keine individuelle Bewertung und keine Finanzberatung.`,
     faq: [
       {
         frage: 'Wie viel Wert verliert ein Auto im ersten Jahr?',

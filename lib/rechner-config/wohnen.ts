@@ -18,56 +18,8 @@ export const wohnenRechner: RechnerConfig[] = [
     metaDescription: 'Stromkosten berechnen ✓ Nach Verbrauch & Tarif ✓ Pro Tag, Monat, Jahr ✓ Mit Verbrauchstabelle ✓ Kostenlos. Jetzt berechnen! ✓ Mit KI-Erklärung.',
     keywords: ['stromkosten rechner', 'stromkosten berechnen', 'stromverbrauch kosten', 'strompreis rechner', 'kwh kosten'],
     icon: '⚡',
-    formel: 'Stromkosten = Verbrauch (kWh) × Arbeitspreis (ct/kWh) + Grundpreis × 12',
     beispiel: 'Beispiel: 2.500 kWh × 37 ct/kWh + 12 €/Monat Grundpreis = 1.069 € pro Jahr',
     affiliate: { programId: 'check24', context: 'strom' },
-    erklaerung: `**Stromkosten berechnen — so geht's**
-
-Der Stromkostenrechner berechnet Ihre jährlichen Stromkosten anhand Ihres Verbrauchs und Ihres Tarifs. Die Kosten setzen sich aus zwei Bestandteilen zusammen: dem Arbeitspreis (Cent pro verbrauchte Kilowattstunde) und dem Grundpreis (monatliche Pauschale für den Netzanschluss). Geben Sie einfach Ihren Jahresverbrauch in kWh ein sowie die Preise aus Ihrem Stromvertrag.
-
-Die Schnellwahl ermöglicht es, typische Verbrauchswerte für verschiedene Haushaltsgrößen einzusetzen. Ein Single-Haushalt verbraucht durchschnittlich 1.500 kWh pro Jahr, ein Zwei-Personen-Haushalt 2.500 kWh, drei Personen 3.500 kWh und vier Personen 4.500 kWh. Diese Werte sind Richtwerte — der tatsächliche Verbrauch hängt von der Wohnfläche, den Geräten und dem Nutzungsverhalten ab.
-
-**Strompreis in Deutschland 2026**
-
-Der durchschnittliche Strompreis für Haushaltskunden liegt 2026 bei rund 37 Cent pro Kilowattstunde (BDEW-Strompreisanalyse). Darin enthalten sind Stromerzeugung, Netzentgelte, Stromsteuer, EEG-Umlage-Reste, Konzessionsabgabe und Mehrwertsteuer. Regional gibt es erhebliche Unterschiede: In Norddeutschland und ländlichen Gebieten sind die Netzentgelte tendenziell höher als in Ballungsräumen.
-
-Der Grundpreis deckt die fixen Kosten des Netzbetreibers und liegt typischerweise zwischen 8 und 15 Euro pro Monat. Er fällt unabhängig vom Verbrauch an. Zusammen ergibt sich der effektive Strompreis, den unser Rechner zusätzlich berechnet.
-
-**Stromverbrauch senken — Tipps**
-
-- **LED-Beleuchtung:** LED-Lampen verbrauchen bis zu 90% weniger Strom als Glühbirnen und halten deutlich länger.
-- **Standby vermeiden:** Geräte im Standby-Modus verbrauchen dauerhaft Strom. Steckdosenleisten mit Schalter helfen, den Verbrauch zu eliminieren.
-- **Effiziente Geräte:** Beim Neukauf auf die Energieeffizienzklasse achten. Ein A-Kühlschrank verbraucht deutlich weniger als ein älteres Modell.
-- **Waschmaschine:** Waschen bei 30°C statt 60°C spart rund 50% Strom. Moderne Waschmaschinen reinigen auch bei niedrigen Temperaturen gründlich.
-- **Stromvergleich:** Jährlich den Stromanbieter vergleichen. Der Wechsel zu einem günstigeren Tarif kann mehrere Hundert Euro pro Jahr sparen.
-
-**Durchschnittlicher Stromverbrauch nach Haushaltsgröße**
-
-Der Stromverbrauch hängt stark von der Anzahl der Personen im Haushalt und der Warmwasserbereitung ab. In Wohnungen ohne elektrische Warmwasserbereitung verbraucht ein Single etwa 1.300 kWh, mit Durchlauferhitzer steigt der Wert auf 1.800 kWh. Bei vier Personen sind es 3.500 bis 5.000 kWh. In Einfamilienhäusern liegt der Verbrauch meist 20-30% höher als in Wohnungen, da zusätzliche Verbraucher wie Gartenpumpen, Außenbeleuchtung und größere Wohnflächen hinzukommen. Unsere Tabelle zeigt die typischen Durchschnittswerte, die Ihnen als Orientierung dienen.
-
-**Anwendungsfälle in der Praxis**
-
-Der Stromverbrauch unterscheidet sich nach Lebenssituation und Gebäudetyp deutlich stärker, als die einfache „kWh pro Person"-Faustregel vermuten lässt. Diese sieben Profile decken die häufigsten Konstellationen ab:
-
-- **Single in der Wohnung:** Typisch 1.300–1.800 kWh pro Jahr — Beleuchtung, Kühlschrank, Waschmaschine, Unterhaltungselektronik plus Warmwasser bei Durchlauferhitzer. Bei 37 ct/kWh und 11 €/Monat Grundpreis liegen die Jahreskosten zwischen 612 € und 798 €. Wer viel im Home-Office arbeitet (Laptop, Bildschirm, Heizlüfter) kommt schnell auf 2.000–2.300 kWh.
-- **Familie mit Kindern im EFH:** 4–5-Personen-Haushalte im Einfamilienhaus liegen typisch bei 4.500–6.500 kWh. Der „EFH-Aufschlag" gegenüber Wohnungen beträgt 20–30 % wegen Außenbeleuchtung, Gartenpumpe, Garagentor, mehr Kühl- und Gefriergeräten und größerer beheizter Wohnfläche bei elektrischer Warmwasserbereitung. Bei 37 ct/kWh sind das 1.665–2.405 € Jahresstromkosten — vor E-Auto und Wärmepumpe.
-- **WG-Haushalt:** 3er-WGs verbrauchen oft nur 2.500–3.000 kWh statt der erwarteten 3 × Single-Verbrauch (3.900–5.400 kWh). Grund: gemeinsam genutzte Geräte (ein Kühlschrank, eine Waschmaschine, ein Backofen) und die Tatsache, dass selten alle gleichzeitig zu Hause sind. Der Pro-Kopf-Stromverbrauch ist in WGs deutlich niedriger als in Single-Haushalten.
-- **E-Auto-Haushalt:** Eine Wallbox mit 11 kW Anschluss und 15.000 km Jahresfahrleistung schlägt mit 2.000–3.000 kWh Mehrverbrauch zu Buche (E-Auto-Verbrauch typisch 18 kWh/100 km × 150 = 2.700 kWh). Bei Standardtarif 37 ct/kWh entstehen 740–1.110 € Mehrkosten — mit Wallbox-Spezialtarif (28–32 ct/kWh) deutlich weniger. Lohnt einen separaten Zähler bzw. Sub-Zähler hinter der Wallbox.
-- **Wärmepumpen-Haushalt:** Eine Wärmepumpe für Heizung + Warmwasser braucht je nach Gebäudezustand 3.000–6.000 kWh zusätzlich pro Jahr. Spezielle Wärmepumpen-Stromtarife liegen bei 24–28 ct/kWh (statt 37 ct Haushalts-Standard). Voraussetzung ist ein zweiter, separater Zähler oder ein Smart-Meter mit Wärmepumpen-Modul. Die Tarif-Differenz spart bei 4.000 kWh Wärmepumpen-Verbrauch rund 360–520 €/Jahr.
-- **Home-Office-Effekt:** Tägliches Arbeiten von zu Hause erhöht den Stromverbrauch um 200–500 kWh pro Jahr — Laptop + zwei Monitore (etwa 100–150 W über 8 h × 220 Tage = 175–265 kWh), zusätzliche Heizung im Arbeitszimmer wenn elektrisch, mehr Beleuchtung, Kaffeemaschine, eventuell Heizlüfter. Bei 37 ct/kWh sind das 75–185 € Mehrkosten — eine Position, die viele bei der Tarifvergleich-Schätzung vergessen.
-- **Nachtspeicher-Heizung mit Doppeltarif:** Ältere Häuser mit Nachtspeicher-Öfen haben oft einen zweiten Zähler für Heizstrom mit deutlich günstigerem Nachttarif (typisch 18–22 ct/kWh) gegenüber Tagstrom (37 ct). Der Heizstrom-Verbrauch liegt bei einem 100-m²-Haus schnell bei 8.000–15.000 kWh — die Tarif-Differenz macht 1.200–2.000 €/Jahr aus. Beide Zähler müssen getrennt erfasst und getrennt im Vertrag berücksichtigt werden.
-
-**Häufige Fehler bei der Strom-Berechnung**
-
-Beim Vergleich von Stromtarifen und der Schätzung von Jahreskosten gibt es einige typische Fallstricke — diese sieben treten am häufigsten auf:
-
-- **Brutto- und Netto-Preis verwechseln.** Endkundentarife enthalten 19 % Mehrwertsteuer — der ausgewiesene Preis ist meistens brutto. Manche Anbieter werben aber mit netto-Preisen (besonders bei Geschäftskunden-Marketing für Selbstständige). Wer 31 ct/kWh netto in den Rechner einträgt statt der echten Endabrechnung 36,89 ct brutto, schätzt die Jahreskosten 19 % zu niedrig.
-- **Grundpreis vergessen oder doppelt zählen.** Der Grundpreis (8–15 €/Monat) ist vom Verbrauch unabhängig und wird zusätzlich zum Arbeitspreis berechnet. Manche Tarif-Vergleichsseiten zeigen einen „Mischpreis" pro kWh, der den Grundpreis bei Standardverbrauch bereits einbezieht — wer dann Grundpreis nochmal addiert, doppelt sich. Faustregel: separat eingeben (Arbeitspreis ct/kWh + Grundpreis €/Monat) und den Rechner die Summe bilden lassen.
-- **kWh-Verbrauch grob schätzen statt vom Zähler ablesen.** Schätzwerte aus Haushaltsgrößen-Tabellen können um 30–50 % danebenliegen, je nach Geräte-Effizienz, Heizsystem und Nutzungsverhalten. Vor der Tarifrechnung Zählerstand notieren, gleiches Datum nächstes Jahr wieder ablesen — die Differenz ist der echte Jahresverbrauch. Auf den Stromrechnungen findet sich der Vorjahresverbrauch ebenfalls als Vergleichswert.
-- **Heizstrom mit Haushaltsstrom verrechnen.** Wer Nachtspeicher, Wärmepumpe oder Durchlauferhitzer hat, hat oft einen zweiten Zähler mit anderem Tarif. Beide Verbrauchsmengen in einem Topf zu rechnen führt zu einem unrealistischen Mischpreis und falschen Vergleichen. Heizstrom und Haushaltsstrom getrennt erfassen.
-- **Tarifänderungen unterm Jahr nicht eingerechnet.** Stromanbieter-Wechsel oder Anpassungen mitten im Abrechnungsjahr bedeuten zwei verschiedene Tarife für unterschiedliche Verbrauchsperioden. Der Jahresverbrauch lässt sich nur sauber zuordnen, wenn der Zählerstand zum Wechseltag dokumentiert wird — sonst wird die Berechnung Schätzwerk.
-- **Alte Verbrauchszahlen nach E-Auto- oder Wärmepumpen-Anschaffung weiterverwenden.** Nach einer Wallbox- oder Wärmepumpen-Installation steigt der Jahresverbrauch um 2.000–6.000 kWh — die Tarifrechnung mit dem Vor-Anschaffungs-Wert ist dann grob falsch. Die ersten 12 Monate nach Anschaffung als Übergangsjahr behandeln, dann den realen neuen Verbrauch nutzen.
-- **Dynamische Tarife mit pauschalen Mittelwerten kalkulieren.** Bei dynamischen Tarifen (Tibber, awattar etc.) variiert der Arbeitspreis stündlich nach Börsenstrompreis — der Jahresdurchschnitt liegt typisch 10–25 % unter dem Standardtarif, kann aber je nach Verbrauchsverhalten deutlich abweichen. Wer den Mittelwert in den Rechner eingibt, ohne den Lastprofil-Effekt einzuplanen (Verbrauch tagsüber bei höheren Preisen vs. nachts bei niedrigen), kommt auf eine schöne, aber unrealistische Schätzung.`,
     // contentBloecke (W19): „Zusammensetzungs-Leitformat" — Preis-Anteile (kreis) +
     // Verbrauchs-Skalierung (balken) + Haushalts-Tabelle. Werte gespiegelt aus
     // lib/berechnungen/strompreis.ts (STROMPREIS_2026.durchschnitt_bdew = 37 ct).
@@ -213,29 +165,7 @@ Beim Vergleich von Stromtarifen und der Schätzung von Jahreskosten gibt es eini
     metaDescription: 'Nebenkosten berechnen ✓ Alle Posten ✓ Warmmiete ermitteln ✓ Kosten pro m² ✓ Kostenlos. Jetzt Nebenkosten prüfen! ✓ Mit KI-Erklärung.',
     keywords: ['nebenkosten rechner', 'nebenkosten berechnen', 'mietnebenkosten', 'betriebskosten rechner', 'warmmiete berechnen'],
     icon: '🏢',
-    formel: 'Warmmiete = Kaltmiete + Heizkosten + Wasser + Müll + Grundsteuer + Versicherung + Hauswart',
     beispiel: 'Beispiel: 650 € Kaltmiete + 200 € Nebenkosten = 850 € Warmmiete (13,08 €/m² bei 65 m²)',
-    erklaerung: `**Nebenkosten berechnen — was gehört dazu?**
-
-Mietnebenkosten (auch Betriebskosten genannt) sind alle Kosten, die neben der Kaltmiete anfallen. Sie werden vom Vermieter auf die Mieter umgelegt und sind in §2 der Betriebskostenverordnung (BetrKV) geregelt. Der Nebenkostenrechner hilft Ihnen, alle Posten zusammenzustellen und die Warmmiete zu ermitteln.
-
-Die häufigsten Nebenkostenposten sind: Heizkosten (größter Posten, ca. 40% der Nebenkosten), Warmwasser, Kaltwasser und Abwasser, Müllentsorgung, Grundsteuer, Gebäudeversicherung, Hausmeister/Hauswart sowie Treppenhausreinigung, Gartenpflege und Aufzugskosten.
-
-**Nebenkosten pro Quadratmeter — was ist normal?**
-
-Laut Betriebskostenspiegel 2023 des Deutschen Mieterbunds (aktuellster verfügbarer Stand) liegen die durchschnittlichen Nebenkosten in Deutschland bei 2,51 Euro pro Quadratmeter und Monat (umgelegte Posten im Schnitt) — ein Anstieg von rund 10 % gegenüber dem Vorjahr. Bei voller Ausnutzung aller umlagefähigen Kostenarten können bis zu 3,15 Euro pro Quadratmeter und Monat anfallen. Je nach Lage, Gebäudealter und Ausstattung schwanken die Werte regional erheblich — in NRW etwa liegt der Durchschnitt bei 2,45 Euro pro Quadratmeter, in günstigeren Lagen bei 2,00 Euro und in teuren Gebieten über 4,00 Euro pro Quadratmeter.
-
-Die Heizkosten machen den größten Teil der Nebenkosten aus und hängen stark vom Energieträger, dem Gebäudezustand und dem individuellen Heizverhalten ab. In schlecht gedämmten Altbauten können die Heizkosten doppelt so hoch sein wie in einem modernen Neubau.
-
-**Nebenkostenabrechnung prüfen**
-
-Vermieter sind verpflichtet, jährlich eine Nebenkostenabrechnung zu erstellen. Etwa jede zweite Abrechnung enthält laut Mieterbund Fehler. Achten Sie auf den korrekten Verteilerschlüssel (nach Wohnfläche, Personenzahl oder Verbrauch), den Abrechnungszeitraum (maximal 12 Monate) und die Frist (Abrechnung muss innerhalb von 12 Monaten nach Ende des Abrechnungszeitraums zugestellt werden). Nicht umlagefähige Kosten wie Verwaltungskosten, Reparaturen oder Instandhaltungen dürfen nicht in der Abrechnung erscheinen.
-
-**Tipps zur Nebenkostensenkung**
-
-- **Heizverhalten optimieren:** 1°C weniger Raumtemperatur spart ca. 6% Heizkosten. 20°C im Wohnzimmer und 18°C im Schlafzimmer sind empfehlenswert.
-- **Wasser sparen:** Sparduschköpfe und Durchflussbegrenzer können den Wasserverbrauch halbieren. Eine Dusche statt Vollbad spart ca. 100 Liter Wasser.
-- **Müllvermeidung:** Konsequente Mülltrennung kann die Müllgebühren senken, da Restmüll teurer ist als Wertstoffe.`,
     faq: [
       {
         frage: 'Was zählt alles zu den Nebenkosten?',
@@ -427,56 +357,7 @@ Vermieter sind verpflichtet, jährlich eine Nebenkostenabrechnung zu erstellen. 
     metaDescription: 'Mietbelastung berechnen ✓ Warmmiete & Kaltmiete ✓ Preis pro m² ✓ 30%-Regel prüfen ✓ Kostenlos. Jetzt Miete checken! ✓ Mit KI-Erklärung.',
     keywords: ['mietrechner', 'mietbelastung', 'warmmiete berechnen', 'miete berechnen', 'mietpreis rechner', 'miete einkommen'],
     icon: '🔑',
-    formel: 'Mietbelastung = Warmmiete / Nettoeinkommen × 100',
     beispiel: 'Beispiel: 850 € Warmmiete / 2.500 € Netto = 34% Mietbelastung (über der empfohlenen 30%-Grenze)',
-    erklaerung: `**Mietbelastung berechnen — die 30%-Regel**
-
-Der Mietrechner berechnet Ihre gesamte Warmmiete und prüft, ob Ihre Mietbelastung im empfohlenen Rahmen liegt. Die weit verbreitete Faustregel besagt, dass die Warmmiete maximal 30 Prozent des monatlichen Nettoeinkommens betragen sollte. Unser Rechner zeigt Ihnen auf einen Blick, ob Ihre Miete im grünen Bereich liegt.
-
-Geben Sie Ihre Kaltmiete und Nebenkosten ein sowie die Wohnfläche und Ihr monatliches Nettoeinkommen. Der Rechner ermittelt die Warmmiete, den Quadratmeterpreis und die prozentuale Mietbelastung. Bei einer Überschreitung der 30%-Grenze wird eine Warnung angezeigt.
-
-**Mietpreise in Deutschland — ein Überblick**
-
-Die Mietpreise in Deutschland variieren enorm je nach Region. In München liegt die durchschnittliche Kaltmiete bei 18–22 Euro pro Quadratmeter, in Berlin bei 12–16 Euro, in Hamburg und Frankfurt bei 13–17 Euro. In Mittelstädten sind es oft 7–10 Euro, in ländlichen Gebieten 5–7 Euro pro Quadratmeter.
-
-Die Nebenkosten liegen im Durchschnitt bei 2,50–3,50 Euro pro Quadratmeter und Monat. Für eine 65-m²-Wohnung ergeben sich damit typische Warmmieten zwischen 500 Euro (ländlich) und 1.500 Euro (Münchner Innenstadt).
-
-**Wie viel Miete kann ich mir leisten?**
-
-Neben der 30%-Regel gibt es weitere Ansätze zur Beurteilung der Mietbelastung. Die 40×-Regel besagt, dass die Jahresmiete maximal das 40-Fache des monatlichen Nettogehalts betragen sollte. Manche Finanzexperten empfehlen, die Mietbelastung nach dem verfügbaren Restbetrag zu beurteilen: Nach Abzug der Miete sollten für eine Einzelperson mindestens 800–1.000 Euro monatlich übrig bleiben.
-
-Bedenken Sie auch, dass neben der Miete weitere wohnungsbezogene Kosten anfallen: Strom (35–80 € Single, 80–160 € Familie), Internet/Telefon (25–50 €), Rundfunkbeitrag (18,36 €/Monat seit 2025), Hausratversicherung (10–25 €) und gegebenenfalls Stellplatzmiete (50–250 € je nach Stadt). Diese Kosten sind in der Warmmiete nicht enthalten und summieren sich auf typisch 150–300 € pro Monat zusätzlich. Wer zur Miet-Frage eine ehrliche Antwort sucht, sollte mit der „echten Wohnkostenquote" rechnen — Warmmiete plus alle wohnungsbezogenen Fixkosten gegen das Nettoeinkommen.
-
-**Anwendungsfälle: Lebenssituationen im Vergleich**
-
-Die 30%-Regel wirkt eindeutig — in der Praxis schwankt die realistische Mietbelastung aber stark nach Lebenssituation. Diese fünf typischen Profile zeigen die Bandbreite:
-
-- **Single in der Großstadt:** Bei 2.400 € Netto und 850 € Warmmiete für 45 m² in Hamburg sind das 35 % Mietbelastung — formal über der 30%-Schwelle, aber für Solo-Haushalte in Metropolen heute der Normalfall. Realistische Untergrenze in München, Frankfurt oder Hamburg liegt eher bei 35–45 %; wer unter 30 % bleiben will, muss in Randlage oder WG ausweichen oder akzeptieren, dass die Wohnung deutlich kleiner ausfällt.
-- **Familie mit Kindern:** Bei 4.000 € Netto (Ein-Verdiener-Haushalt) und 1.300 € Warmmiete für 90 m² ergeben sich 32,5 % — knapp über der Empfehlung, aber durch Kindergeld (259 € pro Kind) und ggf. Wohngeld-Anspruch entlastet. Wichtig: Familien brauchen mehr Quadratmeter pro Kopf (ca. 25–30 m² als Richtwert), die Wohnungsbeurteilung sollte Schnittraum statt nur Gesamtfläche prüfen (Kinderzimmer, Arbeitsbereich, Stauraum).
-- **WG-Bewohner:** Bei 1.800 € Netto (Berufsanfänger) und 450 € Anteil an einer 3er-WG-Warmmiete (Gesamt 1.350 €) sind das nur 25 % — entspannte Belastung. WGs profitieren stark von geteilten Nebenkosten: Internet, Strom-Grundgebühr, Rundfunkbeitrag und Hausratversicherung verteilen sich auf alle Mieter. Effektive Kostenersparnis vs. Single-Wohnung schnell 200–350 €/Monat.
-- **Studierende:** Bei BAföG-Höchstsatz (992 €/Monat inkl. 380 € Wohnpauschale, Stand 2026) und 380 € WG-Zimmer-Miete passt die Wohnpauschale nur in Mittelstädten. In München, Hamburg oder Frankfurt liegen WG-Zimmer eher bei 500–700 € — die Lücke wird über Nebenjob, Eltern-Zuschuss oder Wohnheim-Plätze (typisch 280–400 €) geschlossen. Wohnheim-Plätze sind oft 30–50 % günstiger als der freie WG-Markt, aber stark nachgefragt.
-- **Rentner mit niedriger Rente:** Bei 1.400 € Netto-Rente und 650 € Warmmiete entsteht 46 % Mietbelastung — kritisch. Hier greift typisch der Wohngeld-Anspruch (Mietzuschuss) oder bei sehr knappen Renten die Grundsicherung im Alter (§ 41 ff. SGB XII), die die Wohnkosten in angemessener Höhe übernimmt. Vor Umzugs- oder Verzweiflungsentscheidungen lohnt der Anruf bei der Wohngeldstelle der Kommune.
-
-**Häufige Fehler bei der Mietbeurteilung**
-
-Bei der Frage „Kann ich mir diese Wohnung leisten?" treten regelmäßig dieselben Fehlannahmen auf — diese acht sind die häufigsten:
-
-- **Nur Kaltmiete statt Warmmiete betrachten.** Die Anzeigen-Kaltmiete ist nicht die monatliche Belastung. Bei einer 800 € Kaltmiete + 200 € Nebenkosten zahlt man 1.000 €, nicht 800 €. Vor jeder Wohnungsbesichtigung die Warmmiete-Frage explizit stellen, weil Vermieter die Nebenkosten oft nur auf Nachfrage konkretisieren.
-- **Nebenkosten als statisch annehmen.** Heizkosten haben eine starke Saisonalität — der ausgewiesene Monatswert ist meist ein 12-Monats-Durchschnitt, in den Wintermonaten kann die tatsächliche Belastung 50–80 % höher liegen. Bei Energiepreis-Sprüngen droht zudem die Nachzahlung im Folgejahr. Realistisch: 10–15 % Puffer auf die Nebenkosten einplanen.
-- **Stellplatz oder Garage vergessen.** In Großstädten kostet ein Tiefgaragen-Stellplatz 80–250 €/Monat zusätzlich. Wer das Auto nicht aufgeben kann oder will, muss diese Position einplanen — das schiebt die effektive Mietbelastung schnell um 5–8 Prozentpunkte nach oben.
-- **Einmalige Einzugskosten unterschätzen.** Kaution (3 Kaltmieten), Maklerprovision (sofern noch zulässig), Renovierungs-/Streichkosten, Umzugswagen, neue Möbel — der Einzug in eine 800-€-Wohnung kostet schnell 4.000–6.000 € Vorab-Kapital. Wer das nicht hat, scheitert oft an der Bonitätsprüfung beim Vermieter.
-- **Brutto- statt Netto-Einkommen als Basis.** Die 30%-Regel bezieht sich immer auf das Netto. Wer sein Brutto-Gehalt einsetzt, kommt auf eine zu niedrige Belastungsquote und überdehnt sein Budget. Auch Sondervergütungen (Weihnachtsgeld, Bonus) gehören nicht in die monatliche Berechnung — sie sind nicht garantiert.
-- **Mietpreisbremse-Schutz nicht prüfen.** In vielen Großstädten gilt die Mietpreisbremse (verlängert bis 31.12.2029) — die Miete bei Neuvermietung darf höchstens 10 % über der ortsüblichen Vergleichsmiete liegen. Wer eine deutlich überteuerte Wohnung mietet, kann nachträglich Rückforderung geltend machen. Vor Vertragsunterzeichnung Mietspiegel der Stadt prüfen.
-- **Indexmiete-Anpassungen nicht einkalkulieren.** Bei einer Indexmiete steigt die Miete jährlich mit dem Verbraucherpreisindex — bei 4 % Inflation und 850 € Warmmiete sind das +34 €/Monat oder +408 €/Jahr. Über fünf Jahre summiert sich das schnell zu einer Belastungs-Verschiebung von +5–10 Prozentpunkten. Bei Vertragsabschluss prüfen, ob Index-, Staffel- oder Standard-Miete vereinbart ist.
-- **Stromkosten als Mieten-Bestandteil verwechseln.** Strom ist in der Warmmiete fast nie enthalten (Heizstrom-Wohnungen sind die Ausnahme). Wer den Stromvertrag direkt mit dem Versorger abschließen muss, kommt auf zusätzliche 35–160 €/Monat — die mentale „Komplettkosten-Wohnung"-Vorstellung führt bei der ersten Stromabrechnung zur bösen Überraschung.
-
-**Rechtliche Aspekte: Mietspiegel, Mietpreisbremse, Indexmiete**
-
-Bei der Mietbeurteilung helfen drei rechtliche Werkzeuge, die jeder Mieter kennen sollte:
-
-- **Mietspiegel — qualifiziert vs. einfach:** Der Mietspiegel ist eine Übersicht der ortsüblichen Vergleichsmieten in einer Gemeinde. Ein qualifizierter Mietspiegel (§ 558d BGB) wird wissenschaftlich erstellt, mindestens alle zwei Jahre angepasst und ist gerichtlich anerkannt — er gilt als verlässliche Beweisgrundlage. Ein einfacher Mietspiegel ist nur eine Orientierung der Gemeinde. In rund 350 deutschen Städten existiert ein qualifizierter Mietspiegel; in kleineren Kommunen muss die ortsübliche Vergleichsmiete über Vergleichswohnungen oder Sachverständigen-Gutachten ermittelt werden.
-- **Mietpreisbremse — wo und wie sie gilt:** Die Mietpreisbremse (§§ 556d ff. BGB) deckelt bei Neuvermietung in Gebieten mit angespanntem Wohnungsmarkt die Miete auf maximal 10 % über der ortsüblichen Vergleichsmiete. Sie wurde 2025 bis zum 31.12.2029 verlängert. Ausnahmen: Erstvermietung von Neubauten (ab 01.10.2014), umfassend modernisierte Wohnungen, möblierte Kurzzeit-Vermietung. Die Bundesländer legen einzeln fest, welche Gemeinden als angespannt gelten. Verstöße muss der Mieter rügen, dann gibt es Rückforderung der Überzahlung.
-- **Indexmiete vs. Staffelmiete vs. Standardmiete:** Bei der Indexmiete steigt die Miete mit dem Verbraucherpreisindex (§ 557b BGB). Bei der Staffelmiete sind feste Erhöhungen zu festen Daten im Vertrag vereinbart (z. B. +20 €/Jahr). Beide Varianten schließen reguläre Mieterhöhungen nach § 558 BGB für die Vertragsdauer aus. Standardmiete kennt keine automatische Anpassung — Erhöhungen brauchen Begründung über Vergleichsmieten und sind innerhalb von drei Jahren auf 20 % (in vielen Großstädten 15 %) gedeckelt. Für Detail-Berechnungen siehe unsere Mietpreisbremse-Erklärseite und den Indexmiete-Rechner in derselben Kategorie.`,
     faq: [
       {
         frage: 'Wie berechne ich die Mietbelastung?',
@@ -659,47 +540,7 @@ Bei der Mietbeurteilung helfen drei rechtliche Werkzeuge, die jeder Mieter kenne
     metaDescription: 'Heizkosten berechnen ✓ Gas, Öl, Fernwärme, Wärmepumpe ✓ Energieträger vergleichen ✓ Kostenlos. Jetzt berechnen! ✓ Mit KI-Erklärung.',
     keywords: ['heizkosten rechner', 'heizkosten berechnen', 'gaskosten rechner', 'heizung kosten', 'energiekosten rechner'],
     icon: '🔥',
-    formel: 'Heizkosten = Wohnfläche × Verbrauch (kWh/m²) × Energiepreis (ct/kWh)',
     beispiel: 'Beispiel: 80 m² × 140 kWh/m² × 12 ct/kWh (Gas) = 1.344 € pro Jahr (112 €/Monat)',
-    erklaerung: `**Heizkosten berechnen — nach Energieträger**
-
-Der Heizkostenrechner ermittelt Ihre jährlichen Heizkosten anhand der Wohnfläche, des spezifischen Energieverbrauchs und des Energiepreises. Wählen Sie Ihren Energieträger (Gas, Öl, Fernwärme, Wärmepumpe oder Pellets) und der Rechner setzt automatisch typische Verbrauchswerte und Preise ein, die Sie individuell anpassen können.
-
-Der Verbrauch wird in Kilowattstunden pro Quadratmeter und Jahr (kWh/m²/a) angegeben. Ein gut gedämmtes Haus liegt bei 50–80 kWh/m², ein Altbau kann 150–250 kWh/m² verbrauchen. Die integrierte Vergleichstabelle zeigt auf einen Blick, welcher Energieträger für Ihre Wohnfläche am günstigsten ist.
-
-**Energieträger im Vergleich**
-
-Erdgas ist mit einem Anteil von rund 50 % der häufigste Energieträger in Deutschland. Der Preis liegt bei etwa 12 Cent pro kWh. Heizöl kostet ähnlich, hat aber schwankende Preise. Fernwärme liegt bei ca. 14 ct/kWh, bietet aber wartungsfreien Komfort. Wärmepumpen verbrauchen zwar Strom (Wärmepumpen-Spezialtarif ca. 28 ct/kWh, sonst ca. 33–37 ct/kWh), benötigen aber dank der Nutzung von Umweltwärme nur ein Drittel der Energie konventioneller Heizungen. Pellets liegen mit etwa 8 ct/kWh am günstigsten, erfordern aber Lagerplatz.
-
-**Heizkosten senken — Tipps**
-
-- **Raumtemperatur senken:** Jedes Grad weniger spart ca. 6% Heizkosten. 20°C im Wohnzimmer und 18°C im Schlafzimmer sind empfehlenswert.
-- **Richtig lüften:** Stoßlüften statt Kipplüften spart bis zu 200 Euro pro Jahr.
-- **Heizung entlüften:** Gluckernde Heizkörper arbeiten ineffizient. Regelmäßiges Entlüften verbessert die Leistung.
-- **Thermostatventile nutzen:** Programmierbare Thermostate senken die Temperatur automatisch nachts und bei Abwesenheit.
-- **Dichtungen prüfen:** Undichte Fenster und Türen verursachen erhebliche Wärmeverluste.
-
-**Anwendungsfälle: Energieträger im Kostenvergleich für ein 100-m²-Haus**
-
-Bei einem typischen 100-m²-Haus mit 140 kWh/m²/Jahr Heizwärmebedarf (modernisierter Altbau) ergibt sich folgender Jahreskostenvergleich für die wichtigsten Energieträger:
-
-- **Erdgas (~12 ct/kWh):** 100 × 140 × 0,12 = **1.680 €/Jahr**. Standard in Deutschland, gute Effizienz, planbare Kosten. Risiko: starke Preisschwankungen seit 2022.
-- **Heizöl (~13 ct/kWh äquivalent):** 100 × 140 × 0,13 = **1.820 €/Jahr**. Erfordert Tank und Lagerplatz, Preise stark vom Weltmarkt abhängig (Tagesschwankung 5–15 %). Sinnvoll bei verfügbarer Lagerinfrastruktur.
-- **Fernwärme (~14 ct/kWh):** 100 × 140 × 0,14 = **1.960 €/Jahr**. Kein Heizungstausch nötig, aber Versorger-Bindung und Preisanpassungen mit kurzer Frist möglich. Komfortabel, oft etwas teurer.
-- **Wärmepumpe (JAZ 3,5, Wärmepumpen-Spezialtarif 28 ct/kWh):** 100 × 140 / 3,5 × 0,28 = **1.120 €/Jahr**. Stromverbrauch nur etwa ein Drittel des Heizwärmebedarfs. Hohe Anschaffungskosten (15–35 k€), aber laufende Kosten am niedrigsten. BEG-Förderung möglich.
-- **Pellets (~8 ct/kWh):** 100 × 140 × 0,08 = **1.120 €/Jahr**. Günstig im Verbrauch, aber Lagerplatz und jährliche Wartung nötig. Preise saisonal schwankend, im Sommer oft 15–20 % günstiger.
-
-**Häufige Fehler bei der Heizkosten-Berechnung**
-
-- **kWh-Verbrauch grob schätzen statt vom Zähler ablesen.** Faustregel-Werte (140 kWh/m²) können um 30–40 % danebenliegen. Realistisch: Heizkostenabrechnung der letzten zwei Jahre mitteln oder den Energieausweis konsultieren — beides liefert den tatsächlichen Verbrauch je m².
-- **Heizöl-Preisschwankungen ignorieren.** Ölpreise schwanken im Jahresverlauf um 20–35 %. Wer im teuren Winter tankt statt im günstigen Frühling, zahlt schnell mehrere Hundert Euro Aufschlag pro Tank. Vor der Jahres-Hochrechnung lohnt der Blick auf den 12-Monats-Durchschnitt von Heizöl-Vergleichsplattformen.
-- **Wirkungsgrad der Heizung außer Acht.** Eine alte Gasheizung liefert bei 100 kWh Brennstoffeinsatz nur 75–85 kWh Wärme; ein moderner Brennwertkessel kommt auf 95–98 %. Wer mit dem Brennstoffverbrauch rechnet, übersieht den Wirkungsgrad — vor allem bei alten Anlagen wird die Realbelastung deutlich höher als die kWh-Rechnung suggeriert.
-- **Warmwasser nicht separat ausweisen.** In vielen Haushalten macht die Warmwasserbereitung 15–25 % des Gesamtverbrauchs aus. Wer das mit der Raumheizung verrechnet, vergleicht Energieträger schief — Wärmepumpen mit Warmwasser-Modul stehen anders da als reine Heiz-Lösungen mit elektrischem Durchlauferhitzer.
-- **Bestandsaufnahme vor Heizungstausch ohne Hydraulischen Abgleich.** Vor jedem Tausch sollte ein hydraulischer Abgleich erfolgen — er senkt den Verbrauch um typisch 5–15 %, ohne dass die Heizung selbst getauscht werden muss. Wer ohne Abgleich auf Wärmepumpe wechselt, kalkuliert mit überhöhtem alten Verbrauch und unterschätzt das Sparpotenzial der bestehenden Anlage.
-
-**Förderung und CO₂-Komponente 2026**
-
-Die BEG-Förderung (KfW 458) bezuschusst den Heizungstausch auf erneuerbare Wärme mit 30 % Grundförderung, plus Klimageschwindigkeitsbonus (20 %, bei Tausch alter fossiler Anlagen vor 2029), Einkommensbonus (30 % bei zvE unter 40.000 €) und Effizienzbonus (5 %), gedeckelt bei 70 % der förderfähigen Investitionskosten und maximal 30.000 € pro Wohneinheit. Eine 25.000-€-Wärmepumpe kann nach Abzug der Förderung netto nur 7.500 € kosten — das verschiebt die Wirtschaftlichkeitsrechnung deutlich. Zusätzlich wirkt seit 2024 der CO₂-Preis im nationalen Emissionshandel: Heizöl und Erdgas wurden 2026 mit 55 €/Tonne CO₂ belastet, was Erdgas um etwa 1,2 ct/kWh und Heizöl um 1,5 ct/kWh verteuert. Bis 2027 steigt der CO₂-Preis nach BEHG-Plan weiter. Wer heute Heizöl oder Gas einkauft, sollte die langfristige Kostenentwicklung mit einplanen — die Wirtschaftlichkeit erneuerbarer Heizsysteme verbessert sich jedes Jahr.`,
     faq: [
       {
         frage: 'Wie viel kosten Heizkosten pro m²?',
@@ -875,40 +716,7 @@ Die BEG-Förderung (KfW 458) bezuschusst den Heizungstausch auf erneuerbare Wär
     metaDescription: 'Grunderwerbsteuer berechnen ✓ Alle 16 Bundesländer ✓ Mit Makler & Notarkosten ✓ Kaufnebenkosten gesamt. Jetzt berechnen! ✓ Mit KI-Erklärung.',
     keywords: ['grunderwerbsteuer rechner', 'grunderwerbsteuer', 'kaufnebenkosten rechner', 'immobilien nebenkosten', 'grunderwerbsteuer bundesland'],
     icon: '🏡',
-    formel: 'Nebenkosten = Kaufpreis × (Grunderwerbsteuer + Makler + Notar + Grundbuch)',
     beispiel: 'Beispiel: 300.000 € in NRW → 19.500 € Steuer (6,5%) + 10.710 € Makler + 4.500 € Notar + 1.500 € Grundbuch = 36.210 € Nebenkosten',
-    erklaerung: `**Grunderwerbsteuer und Kaufnebenkosten berechnen**
-
-Beim Kauf einer Immobilie fallen neben dem Kaufpreis erhebliche Nebenkosten an. Der Grunderwerbsteuerrechner berechnet alle Kaufnebenkosten auf einen Blick: Grunderwerbsteuer, Maklergebühren, Notarkosten und Grundbuchgebühren. Die Nebenkosten betragen je nach Bundesland insgesamt 8 bis 15 Prozent des Kaufpreises.
-
-Die Grunderwerbsteuer ist der größte Einzelposten und variiert je nach Bundesland zwischen 3,5 % (Bayern) und 6,5 % (Brandenburg, NRW, Saarland, Schleswig-Holstein). Sie wird beim Kauf von Grundstücken, Häusern und Eigentumswohnungen fällig und muss innerhalb eines Monats nach Erhalt des Steuerbescheids bezahlt werden.
-
-**Kaufnebenkosten im Detail**
-
-Die Maklergebühren betragen in der Regel 3,57 % inkl. MwSt pro Partei (seit 2020 werden sie bei Wohnimmobilien hälftig zwischen Käufer und Verkäufer geteilt). Bei einem Kaufpreis von 300.000 Euro sind das 10.710 Euro. In manchen Fällen — etwa beim Kauf direkt vom Bauträger — entfällt die Maklerprovision.
-
-Die Notarkosten liegen bei ca. 1,5 % des Kaufpreises und umfassen die Beurkundung des Kaufvertrags, die Grundschuldbestellung und verschiedene Vollzugstätigkeiten. Die Grundbuchgebühren (ca. 0,5 %) fallen für die Eintragung des neuen Eigentümers und ggf. einer Grundschuld an.
-
-**Grunderwerbsteuersätze nach Bundesland (2026)**
-
-Die Steuersätze haben sich in den letzten Jahren mehrfach geändert. Bayern ist mit 3,5 % seit 2006 unverändert das günstigste Bundesland. Die teuersten Bundesländer mit 6,5 % sind Brandenburg, Nordrhein-Westfalen, Saarland und Schleswig-Holstein.
-
-**Aktuelle Änderungen:**
-
-- **Thüringen** hat den Satz zum 01.01.2024 von 6,5 % auf **5,0 %** gesenkt — die bislang einzige Senkung in der Geschichte der Grunderwerbsteuer.
-- **Bremen** hat zum 01.07.2025 von 5,0 % auf **5,5 %** erhöht.
-- **Sachsen** hat zum 01.01.2023 von 3,5 % auf **5,5 %** erhöht.
-- **Hamburg** hat zum 01.01.2023 von 4,5 % auf 5,5 % erhöht.
-
-Unser Rechner zeigt alle aktuellen Sätze in einer übersichtlichen Tabelle und nutzt dieselbe SSOT, aus der auch der Baufinanzierungsrechner seine Werte zieht.
-
-**Tipp zur Grunderwerbsteuer**
-
-Bei einem Kaufpreis knapp über der Freigrenze für bewegliches Inventar (z. B. Einbauküche, Markisen, Gartenhaus) kann es sich lohnen, das Inventar separat auszuweisen. Auf bewegliches Inventar fällt keine Grunderwerbsteuer an. Der Wert muss im Kaufvertrag gesondert aufgeführt und realistisch beziffert werden.
-
-**Hessengeld: Förderung beim Erwerb von Wohneigentum in Hessen**
-
-In Hessen gibt es seit September 2024 das **Hessengeld**: bis zu 10.000 € je erwachsenem Käufer plus 5.000 € pro Kind, beim erstmaligen Erwerb selbstgenutzten Wohneigentums. Wer eine Immobilie in Hessen kauft, sollte vor dem Notartermin prüfen, ob die Antragsvoraussetzungen erfüllt sind — die Förderung kompensiert einen Teil der Grunderwerbsteuer.`,
     faq: [
       {
         frage: 'Wie hoch ist die Grunderwerbsteuer?',
@@ -1071,39 +879,7 @@ In Hessen gibt es seit September 2024 das **Hessengeld**: bis zu 10.000 € je e
     metaDescription: 'Baufinanzierung berechnen: Monatsrate, Kaufnebenkosten, Restschuld und Tilgungsplan ✓ Alle Bundesländer ✓ Sondertilgung ✓ KI-Erklärung.',
     keywords: ['baufinanzierung rechner', 'baufinanzierung berechnen', 'immobilienkredit rechner', 'hypothekenrechner', 'monatsrate immobilie', 'tilgungsplan', 'restschuld berechnen', 'immobilienfinanzierung', 'hauskauf rechner', 'baukredit rechner'],
     icon: '🏗️',
-    formel: 'Monatsrate = Darlehensbetrag × (Sollzins + Tilgung) / 100 / 12',
     beispiel: 'Kaufpreis 350.000 €, 70.000 € EK, NRW, 3,5% Zins, 2% Tilgung: → Nebenkosten: 42.245 €, Darlehen: 322.245 €, Rate: 1.476 €/Monat, Restschuld nach 15 J.: ca. 195.000 €.',
-    erklaerung: `**Wie funktioniert eine Baufinanzierung?**
-
-Eine Baufinanzierung ist ein zweckgebundener Kredit zum Kauf oder Bau einer Immobilie. In der Regel handelt es sich um ein Annuitätendarlehen: Die monatliche Rate bleibt über die gesamte Zinsbindung gleich, wobei sich der Anteil von Zinsen und Tilgung verschiebt. Anfangs zahlen Sie vor allem Zinsen, mit der Zeit wächst der Tilgungsanteil. Unser Rechner berechnet Ihre monatliche Rate, die Restschuld nach Ende der Zinsbindung und erstellt einen vollständigen Tilgungsplan.
-
-**Kaufnebenkosten: Grunderwerbsteuer nach Bundesland**
-
-Beim Immobilienkauf fallen neben dem Kaufpreis erhebliche Nebenkosten an. Die Grunderwerbsteuer variiert je nach Bundesland zwischen 3,5 % (Bayern) und 6,5 % (Brandenburg, NRW, Saarland, Schleswig-Holstein). Sachsen liegt seit 01.01.2023 bei 5,5 %, Thüringen seit 01.01.2024 bei 5,0 %, Bremen seit 01.07.2025 ebenfalls bei 5,5 %. Hinzu kommen Notar- und Grundbuchkosten (ca. 2 %) sowie die Maklerprovision (ca. 3,57 % Käuferanteil). Insgesamt betragen die Nebenkosten 9 bis 12 % des Kaufpreises. Diese Kosten müssen Sie in der Regel aus Eigenkapital finanzieren, da Banken sie nur ungern mitfinanzieren.
-
-**Wie viel Eigenkapital brauche ich?**
-
-Experten empfehlen mindestens 20 bis 30 Prozent Eigenkapital — idealerweise genug, um die Kaufnebenkosten plus 10 bis 20 Prozent des Kaufpreises abzudecken. Je mehr Eigenkapital Sie einbringen, desto niedriger der Beleihungsauslauf und desto bessere Zinskonditionen erhalten Sie. Eine Vollfinanzierung (100% oder mehr) ist möglich, aber mit deutlich höheren Zinsen verbunden.
-
-**Sollzins vs. Effektivzins**
-
-Der Sollzins ist der reine Zinssatz, den die Bank für das Darlehen berechnet. Der Effektivzins enthält zusätzlich alle Nebenkosten des Kredits (z. B. Bearbeitungsgebühren) und ist daher für den Vergleich verschiedener Angebote besser geeignet. Unser Rechner arbeitet mit dem Sollzins für die Monatsratenberechnung.
-
-**Zinsbindung: 10, 15 oder 20 Jahre?**
-
-Die Zinsbindung legt fest, wie lange der vereinbarte Zinssatz gilt. Nach Ablauf müssen Sie eine Anschlussfinanzierung zu den dann geltenden Konditionen abschließen. Eine längere Zinsbindung bietet mehr Planungssicherheit, ist aber meist teurer. In Niedrigzinsphasen empfiehlt sich eine lange Zinsbindung (15-20 Jahre), in Hochzinsphasen kann eine kürzere Bindung (5-10 Jahre) sinnvoll sein.
-
-**Tilgungsrate: Warum 2% das Minimum sein sollte**
-
-Die anfängliche Tilgung bestimmt, wie schnell Sie das Darlehen zurückzahlen. Bei nur 1% Tilgung dauert die Rückzahlung über 40 Jahre. Bei 2% sind es etwa 28 Jahre, bei 3% nur noch 22 Jahre. Die KfW und Verbraucherzentralen empfehlen mindestens 2% anfängliche Tilgung. Durch die Annuitätenberechnung steigt die tatsächliche Tilgung im Laufe der Zeit automatisch an, da der Zinsanteil sinkt.
-
-**Sondertilgung: Lohnt sich das?**
-
-Sondertilgungen sind zusätzliche Zahlungen über die reguläre Rate hinaus. Die meisten Banken erlauben 5 bis 10% der Darlehenssumme pro Jahr als Sondertilgung ohne Vorfälligkeitsentschädigung. Sondertilgungen lohnen sich fast immer: Sie reduzieren die Restschuld schneller, sparen Zinsen und verkürzen die Laufzeit erheblich. Bei einem Darlehen von 300.000 € und nur 200 € monatlicher Sondertilgung können Sie über 15 Jahre mehrere tausend Euro Zinsen sparen.
-
-**Anschlussfinanzierung nach Zinsbindung**
-
-Nach Ablauf der Zinsbindung bleibt in der Regel eine Restschuld, die Sie weiterfinanzieren müssen. Die Restschuld hängt von der Tilgungsrate, Sondertilgungen und der Zinsbindungsdauer ab. Unser Rechner zeigt Ihnen die voraussichtliche Restschuld nach Ende der Zinsbindung. Planen Sie rechtzeitig (12-36 Monate vor Ablauf) ein Forward-Darlehen oder eine Umschuldung, um sich günstige Zinsen zu sichern.`,
     faq: [
       {
         frage: 'Wie hoch sollte die monatliche Rate maximal sein?',
@@ -1272,51 +1048,7 @@ Nach Ablauf der Zinsbindung bleibt in der Regel eine Restschuld, die Sie weiterf
     metaDescription: 'Quadratmeter berechnen ✓ Rechteck, Kreis, Dreieck, L-Form ✓ Mehrere Flächen addieren ✓ Kostenlos. Jetzt Fläche berechnen! ✓ Mit KI-Erklärung.',
     keywords: ['quadratmeter rechner', 'fläche berechnen', 'qm rechner', 'm2 rechner', 'flächenrechner', 'wohnfläche berechnen', 'quadratmeter berechnen formel'],
     icon: '📐',
-    formel: 'Rechteck: A = L × B | Kreis: A = π × r² | Dreieck: A = (g × h) / 2 | Trapez: A = ((a + c) / 2) × h',
     beispiel: 'Rechteck 5 m × 4 m: A = 5 × 4 = 20 m². Kreis mit r = 3 m: A = π × 3² ≈ 28,27 m². Dreieck 6 m × 4 m: A = (6 × 4) / 2 = 12 m².',
-    erklaerung: `**Quadratmeter berechnen — Formel für jede Form**
-
-Der Quadratmeter (m²) ist die Standardeinheit für Flächenangaben in Deutschland. Ob Wohnfläche, Grundstück oder Wandfläche — die Berechnung hängt von der Form der Fläche ab. Unser Rechner unterstützt die fünf häufigsten Formen und addiert auf Wunsch mehrere Teilflächen zu einer Gesamtfläche.
-
-Geben Sie einfach die Maße ein und wählen Sie die passende Form. Das Ergebnis wird sofort in Quadratmetern angezeigt, inklusive Umrechnung in andere Flächeneinheiten wie cm², Ar und Hektar.
-
-**Quadratmeter-Formeln im Überblick**
-
-Jede geometrische Form hat ihre eigene Flächenformel. Hier die wichtigsten auf einen Blick:
-
-- **Rechteck / Quadrat:** A = Länge × Breite. Die einfachste und häufigste Berechnung. Bei einem Quadrat sind Länge und Breite gleich.
-- **Kreis:** A = π × r². Der Radius (r) ist der halbe Durchmesser. Pi (π) beträgt gerundet 3,14159. Beispiel: Bei einem Radius von 3 m ergibt sich eine Fläche von ca. 28,27 m².
-- **Dreieck:** A = (Grundseite × Höhe) / 2. Die Höhe steht senkrecht auf der Grundseite. Bei einem rechtwinkligen Dreieck ist die Höhe eine der Katheten.
-- **L-Form:** Die L-Form wird in zwei Rechtecke zerlegt. Die Einzelflächen werden addiert. Beispiel: Rechteck 1 (5 × 3 m = 15 m²) + Rechteck 2 (3 × 2 m = 6 m²) = 21 m².
-- **Trapez:** A = ((a + c) / 2) × h. Dabei sind a und c die beiden parallelen Seiten und h die Höhe (der senkrechte Abstand zwischen den parallelen Seiten).
-
-Für unregelmäßige Räume können Sie die Funktion „Weitere Fläche hinzufügen" nutzen: Teilen Sie den Raum in einfache Formen auf, berechnen Sie jede einzeln und der Rechner addiert automatisch alle Teilflächen.
-
-**Wohnfläche berechnen — Besonderheiten bei Dachschrägen**
-
-Bei der Berechnung der Wohnfläche gelten in Deutschland besondere Regeln nach der Wohnflächenverordnung (WoFlV):
-
-- **Volle Anrechnung:** Flächen mit einer lichten Höhe von mindestens 2 m werden vollständig gezählt.
-- **Halbe Anrechnung:** Flächen mit einer lichten Höhe zwischen 1 m und 2 m zählen nur zur Hälfte.
-- **Keine Anrechnung:** Flächen unter 1 m Höhe werden nicht zur Wohnfläche gerechnet.
-
-Das betrifft vor allem Dachgeschosswohnungen. Ein Raum mit 20 m² Grundfläche kann so auf eine deutlich kleinere Wohnfläche kommen, wenn große Teile unter der Dachschräge liegen.
-
-Balkone, Loggien und Dachgärten werden in der Regel zu 25 % angerechnet, in Ausnahmefällen bis zu 50 %. Kellerräume, Waschküchen, Heizungsräume und Garagen zählen nicht zur Wohnfläche.
-
-Tipp: Messen Sie bei Dachschrägen die Breite des Raumes an der Stelle, wo die Deckenhöhe 1 m und 2 m beträgt. So können Sie die drei Zonen (voll, halb, keine Anrechnung) getrennt berechnen und mit der Funktion „Weitere Fläche hinzufügen" zusammenrechnen.
-
-**Umrechnungstabelle: m², cm², Ar, Hektar**
-
-Flächeneinheiten lassen sich durch einfache Faktoren umrechnen:
-
-- **1 m² = 10.000 cm²** — Für kleine Flächen wie Fliesen oder Papierformate.
-- **1 m² = 1.000.000 mm²** — Für sehr kleine Flächen in der Technik.
-- **1 Ar (a) = 100 m²** — Früher gängig für Grundstücke, heute weniger gebräuchlich.
-- **1 Hektar (ha) = 10.000 m²** — Standard für landwirtschaftliche Flächen und große Grundstücke.
-- **1 km² = 1.000.000 m²** — Für Stadtteile, Gemeinden oder Regionen.
-
-In der Praxis begegnen Ihnen vor allem m² (Wohnung, Zimmer), Ar (kleine Grundstücke) und Hektar (Landwirtschaft, Parks). Unser Rechner zeigt alle relevanten Umrechnungen automatisch an.`,
     // W19-Goldstandard: quadratmeter-rechner auf volle Tiefe (16 Bausteine, ~1.560 W),
     // Leitformat „beispielrechnung" (6× dominant). WOHN-Kontext (WoFlV, Miete/m², BGH),
     // disjunkt zu mathe/flaechenrechner (reine Geometrie) — eigener vergleich-Baustein
@@ -1525,49 +1257,7 @@ In der Praxis begegnen Ihnen vor allem m² (Wohnung, Zimmer), Ar (kleine Grundst
     metaDescription: 'Tapetenbedarf berechnen ✓ Rollen-Anzahl ermitteln ✓ Mit Rapport & Verschnitt ✓ Fenster/Türen abziehen. Jetzt berechnen! ✓ Mit KI-Erklärung.',
     keywords: ['tapetenbedarf rechner', 'tapetenrollen berechnen', 'wie viele rollen tapete', 'tapetenbedarf berechnen', 'rapport tapete', 'verschnitt tapete', 'tapetenbedarf online rechner'],
     icon: '🖼️',
-    formel: 'Bahnen = Gesamtbreite aller Wände ÷ Rollenbreite | Bahnen pro Rolle = Rollenlänge ÷ (Wandhöhe + Rapport) | Rollen = Bahnen ÷ Bahnen pro Rolle × (1 + Verschnitt%)',
     beispiel: 'Raum 5 m × 4 m, Höhe 2,50 m: Gesamtbreite = 18 m → 34 Bahnen (bei 0,53 m). Rollenlänge 10,05 m ÷ 2,50 m = 4 Bahnen/Rolle → 34 ÷ 4 = 9 Rollen. Mit 10 % Verschnitt ≈ 10 Rollen.',
-    erklaerung: `**Tapetenbedarf berechnen — Schritt für Schritt**
-
-Bevor Sie mit dem Tapezieren beginnen, sollten Sie den Tapetenbedarf möglichst genau ermitteln. So vermeiden Sie überflüssige Kosten und das Risiko, mitten in der Arbeit ohne Material dazustehen. Unser Rechner führt Sie in wenigen Schritten zum Ergebnis.
-
-Messen Sie zunächst die Breite und Höhe jeder Wand, die tapeziert werden soll. Ziehen Sie anschließend Fenster und Türen ab — sie verringern die tatsächlich zu tapezierende Fläche. Geben Sie Rollenbreite, Rollenlänge, Rapport und den gewünschten Verschnitt-Zuschlag ein. Der Rechner ermittelt dann automatisch, wie viele Bahnen und Rollen Sie benötigen.
-
-**Wie viele Tapetenrollen brauche ich?**
-
-Die Anzahl der benötigten Rollen hängt von vier Faktoren ab: der Gesamtbreite aller Wände, der Wandhöhe, den Rollenmaßen und dem Rapport.
-
-- **Bahnen berechnen:** Teilen Sie die Gesamtbreite aller Wände durch die Rollenbreite (z. B. 0,53 m) und runden Sie auf.
-- **Bahnen pro Rolle:** Teilen Sie die Rollenlänge durch die Schnittlänge pro Bahn (Wandhöhe + Rapport) und runden Sie ab.
-- **Rollen:** Teilen Sie die benötigten Bahnen durch die Bahnen pro Rolle und runden Sie auf. Addieren Sie den Verschnitt-Zuschlag.
-
-Beispiel: Ein Raum mit 18 m Gesamtbreite und 2,50 m Höhe ergibt bei 0,53 m Rollenbreite 34 Bahnen. Bei 10,05 m Rollenlänge passen 4 Bahnen auf eine Rolle (10,05 ÷ 2,50 = 4,02 → abgerundet 4). Das ergibt 34 ÷ 4 = 8,5 → aufgerundet 9 Rollen. Mit 10 % Verschnitt benötigen Sie 10 Rollen.
-
-**Was ist Rapport und wie rechne ich ihn ein?**
-
-Der Rapport ist die Musterhöhe einer Tapete — also der vertikale Abstand, nach dem sich das Muster wiederholt. Bei gemusterten Tapeten müssen Sie beim Zuschnitt darauf achten, dass das Muster an den Nahtstellen passt. Das erhöht den Materialverbrauch.
-
-Einfarbige oder strukturierte Tapeten ohne erkennbares Muster haben einen Rapport von 0 cm. Bei Mustertapeten liegt der Rapport meist zwischen 15 und 64 cm. Er ist auf dem Etikett der Rolle angegeben.
-
-Beim Berechnen wird der Rapport zur Wandhöhe addiert. Eine Wand mit 2,50 m Höhe und 32 cm Rapport ergibt eine Schnittlänge von 2,82 m pro Bahn. Dadurch passen weniger Bahnen auf eine Rolle und Sie benötigen insgesamt mehr Rollen.
-
-**Standardmaße von Tapetenrollen**
-
-In Deutschland sind zwei Rollenbreiten üblich:
-
-- **Normalrolle:** 0,53 m breit × 10,05 m lang — die häufigste Größe, besonders für gemusterte Tapeten.
-- **Breitrolle (Doppelrolle):** 1,06 m breit × 25 m lang — schneller zu verarbeiten, weniger Nähte, ideal für große Flächen und Vliestapeten.
-
-Breitrollen decken pro Bahn die doppelte Wandbreite ab. Dadurch benötigen Sie weniger Bahnen, und die höhere Rollenlänge ergibt ebenfalls mehr Bahnen pro Rolle. In der Regel sind Breitrollen wirtschaftlicher, aber schwerer zu handhaben — besonders bei Ecken und Hindernissen.
-
-**Tipps zum Tapezieren — Verschnitt minimieren**
-
-- **Messen Sie genau:** Kleine Messfehler summieren sich schnell zu einer fehlenden Rolle.
-- **Schneiden Sie etwas länger zu:** Pro Bahn 5–10 cm Überstand oben und unten einplanen, nach dem Kleben abschneiden.
-- **Denken Sie an den Rapport:** Legen Sie die ersten Bahnen probeweise nebeneinander, um den Musterversatz zu prüfen.
-- **Planen Sie 10–15 % Verschnitt ein:** Das deckt Zuschnitt-Abfälle, Rapportversatz und kleine Fehler ab. Bei komplexen Raumgrundrissen oder vielen Ecken eher 15 %.
-- **Kaufen Sie aus einer Charge:** Farbunterschiede zwischen Produktions-Chargen (sogenannte Bäder) sind häufig. Bestellen Sie alle Rollen auf einmal und prüfen Sie die Chargen-Nummer.
-- **Türen und Fenster:** Kleine Fenster (unter 1 m²) werden oft nicht abgezogen, da der Verschnitt drumherum ähnlich hoch ist wie die eingesparte Fläche. Bei größeren Öffnungen lohnt sich der Abzug.`,
     faq: [
       {
         frage: 'Wie berechne ich den Tapetenbedarf für einen Raum?',
@@ -1725,33 +1415,7 @@ Breitrollen decken pro Bahn die doppelte Wandbreite ab. Dadurch benötigen Sie w
     metaDescription: 'Stromvergleich-Rechner: Aktuelle Stromkosten berechnen und mit günstigen Tarifen vergleichen ✓ Sparpotenzial ermitteln ✓ Ökostrom ✓ KI-Erklärung.',
     keywords: ['stromvergleich rechner', 'stromanbieter vergleichen', 'stromkosten vergleich', 'strom sparen', 'günstiger strom', 'stromtarif vergleichen', 'ökostrom vergleich', 'strompreis vergleich', 'stromanbieter wechseln', 'stromvergleich 2026'],
     icon: '🔌',
-    formel: 'Jahreskosten = (Verbrauch in kWh × Arbeitspreis in ct/kWh ÷ 100) + (Grundpreis × 12)',
     beispiel: 'Beispiel: 2.500 kWh × 37 ct/kWh = 925 € + 120 € Grundpreis (10 €/Monat) = 1.045 €/Jahr (BDEW-Mittel). Günstigster Festpreis-Neukunden-Tarif: 945 €/Jahr → Sparpotenzial: 100 €.',
-    erklaerung: `Die Stromkosten sind für viele Haushalte einer der größten Posten bei den Nebenkosten. Trotzdem bleiben viele Verbraucher jahrelang beim selben Anbieter — und zahlen deutlich mehr als nötig. Unser Stromvergleich-Rechner zeigt Ihnen auf einen Blick, wie Ihr aktueller Tarif im Vergleich zum Markt abschneidet und wie viel Sie durch einen Wechsel sparen könnten.
-
-**Stromkosten in Deutschland 2026**
-
-Der BDEW-Durchschnittspreis für Haushaltskunden liegt 2026 bei rund 37 Cent pro Kilowattstunde über alle Tarifgruppen. Für einen Zwei-Personen-Haushalt mit einem Verbrauch von 2.500 kWh bedeutet das Jahreskosten von etwa 1.045 Euro. Ein Vier-Personen-Haushalt mit 4.500 kWh zahlt rund 1.785 Euro pro Jahr. Festpreis-Neuverträge starten bei ca. 33 ct/kWh, die Grundversorgung liegt bei ca. 40 ct. Die Preise variieren regional stark: In Norddeutschland sind die Netzentgelte oft höher als im Süden, was sich direkt auf den Endpreis auswirkt. Ökostromtarife liegen im Schnitt 1–3 Cent über konventionellem Strom, sind aber in vielen Fällen günstiger als der Grundversorgungstarif.
-
-**Wie setzt sich der Strompreis zusammen?**
-
-Der Strompreis besteht aus drei Hauptkomponenten: Etwa ein Drittel entfällt auf die Stromerzeugung und den Vertrieb — das ist der Teil, den Ihr Anbieter beeinflusst und der sich durch einen Wechsel ändern kann. Ein weiteres Drittel sind Netzentgelte für den Transport des Stroms vom Kraftwerk bis zur Steckdose. Das letzte Drittel sind staatliche Abgaben und Umlagen, darunter die Stromsteuer (2,05 ct/kWh), die Konzessionsabgabe und weitere Umlagen. Da Netzentgelte und Steuern für alle Anbieter gleich sind, können Sie durch einen Wechsel primär beim Einkaufs- und Vertriebsanteil sparen.
-
-**Wann lohnt sich ein Anbieterwechsel?**
-
-Ein Anbieterwechsel lohnt sich fast immer — besonders wenn Sie noch in der Grundversorgung Ihres lokalen Stadtwerks sind. Der Grundversorgungstarif ist in der Regel der teuerste Tarif am Markt. Durch einen Wechsel zu einem alternativen Anbieter sparen Haushalte im Schnitt 100 bis 300 Euro pro Jahr. Ein Wechsel ist besonders sinnvoll, wenn Ihr Arbeitspreis über 33 Cent pro kWh liegt, Sie noch nie den Anbieter gewechselt haben, Ihr Vertrag eine automatische Verlängerung hatte oder Sie von der Preisgarantie Ihres alten Vertrags abgelaufen sind.
-
-**Ökostrom — teuer oder günstig?**
-
-Entgegen der landläufigen Meinung ist Ökostrom nicht unbedingt teurer als konventioneller Strom. Viele Ökostromanbieter bieten sehr konkurrenzfähige Preise an — teilweise sogar günstiger als der Grundversorger. Der Grund: Erneuerbare Energien (Wind, Solar) sind inzwischen die günstigsten Stromerzeugungsarten. Achten Sie beim Ökostromtarif auf anerkannte Gütesiegel wie das OK-Power-Label oder das Grüner-Strom-Label. Diese garantieren, dass der Strom tatsächlich aus erneuerbaren Quellen stammt und der Anbieter in den Ausbau der Erneuerbaren investiert.
-
-**Tipps zum Stromsparen**
-
-Neben dem Anbieterwechsel können Sie durch einfache Maßnahmen Ihren Verbrauch und damit die Kosten senken: LED-Lampen statt Glühbirnen sparen bis zu 80 Prozent Stromkosten bei der Beleuchtung. Geräte nicht im Standby lassen — eine Steckdosenleiste mit Schalter eliminiert versteckten Verbrauch von 100–200 kWh pro Jahr. Beim Kauf neuer Geräte auf die Energieeffizienzklasse achten: Ein A-Kühlschrank verbraucht nur halb so viel wie ein D-Gerät. Wäsche bei 30 statt 60 Grad waschen spart pro Waschgang etwa 60 Prozent Strom. Und: Wasserkocher statt Herd zum Wassererhitzen — das geht schneller und spart Energie.
-
-**Strompreisbremse und staatliche Entlastungen**
-
-Die Strompreisbremse des Bundes wurde 2023 eingeführt und inzwischen wieder ausgelaufen. Dennoch gibt es weiterhin Mechanismen, die extreme Preisspitzen abfedern. Für Haushalte mit niedrigem Einkommen gibt es in vielen Kommunen einen Stromspar-Check, der kostenlose Beratung und Soforthilfen bietet. Zudem können Stromkosten als Teil der Nebenkosten bei der Steuererklärung geltend gemacht werden — indirekt über haushaltsnahe Dienstleistungen (Handwerkerleistungen an der Elektrik) oder bei beruflicher Nutzung über das Arbeitszimmer.`,
     faq: [
       {
         frage: 'Wie hoch sind die durchschnittlichen Stromkosten pro Jahr?',
@@ -1920,29 +1584,7 @@ Die Strompreisbremse des Bundes wurde 2023 eingeführt und inzwischen wieder aus
     metaDescription: 'Mietrendite berechnen: Brutto- und Nettorendite, Eigenkapitalrendite und Cashflow für Immobilien ✓ Mit Kredit ✓ KI-Erklärung.',
     keywords: ['mietrendite rechner', 'mietrendite berechnen', 'bruttomietrendite', 'nettomietrendite', 'eigenkapitalrendite immobilie', 'immobilie als kapitalanlage', 'mietmultiplikator', 'cashflow immobilie', 'rendite immobilie berechnen', 'immobilienrendite'],
     icon: '📊',
-    formel: 'Bruttomietrendite = (Jahresmiete / Kaufpreis) × 100 | Nettomietrendite = (Jahresreinertrag / Gesamtinvestition) × 100 | EK-Rendite = (Reinertrag − Zinsen) / Eigenkapital × 100',
     beispiel: 'Kaufpreis 250.000 €, 800 € Kaltmiete/Monat (9.600 €/Jahr) → Bruttomietrendite 3,8 %, Nettomietrendite 2,1 %, Mietmultiplikator 26. Mit 225.000 € Kredit (3,5 % Zins, 2 % Tilgung) beträgt die Kreditrate 1.031 €/Monat — bei nur 485 €/Monat Reinertrag ergibt das einen negativen Cashflow von −546 €/Monat und eine Eigenkapitalrendite von −4,1 %. Bei aktuellen Zinsen reicht eine Bruttorendite von 3,8 % für einen positiven Cashflow nicht aus.',
-    erklaerung: `**Bruttomietrendite vs. Nettomietrendite: Der Unterschied**
-
-Die Bruttomietrendite ist die einfachste Kennzahl für die Bewertung einer Immobilie als Kapitalanlage. Sie berechnet sich aus der Jahreskaltmiete geteilt durch den Kaufpreis, multipliziert mit 100. Bei einer Wohnung für 250.000 Euro mit 800 Euro Kaltmiete pro Monat ergibt das: 9.600 / 250.000 × 100 = **3,84%**. Diese Zahl ist schnell berechnet und eignet sich gut für einen ersten Vergleich verschiedener Objekte. Allerdings berücksichtigt sie weder die Kaufnebenkosten noch die laufenden Kosten, die der Vermieter nicht auf den Mieter umlegen kann.
-
-Die **Nettomietrendite** ist deutlich aussagekräftiger. Sie bezieht die Kaufnebenkosten (Grunderwerbsteuer, Notar, Makler — typischerweise 8 bis 15 Prozent des Kaufpreises) in die Gesamtinvestition ein und zieht die nicht umlagefähigen Kosten (Verwaltung, Instandhaltungsrücklage, Mietausfallrisiko) von den Mieteinnahmen ab. Die Nettomietrendite liegt daher immer deutlich unter der Bruttomietrendite. Im obigen Beispiel sinkt sie von 3,84% auf etwa 2,0% — ein erheblicher Unterschied. Nutzen Sie unseren [Grunderwerbsteuer-Rechner](/wohnen/grunderwerbsteuer-rechner) für die genauen Kaufnebenkosten in Ihrem Bundesland.
-
-**Was ist eine gute Mietrendite?**
-
-Die Frage nach der „guten" Mietrendite hängt von der Lage und der Strategie ab. Als Faustregel gilt: Eine **Bruttomietrendite ab 5 Prozent** ist gut, 3 bis 5 Prozent durchschnittlich und unter 3 Prozent eher gering. In Großstädten wie München, Hamburg oder Berlin liegen die Bruttomietrenditen oft nur bei 2 bis 3 Prozent — hier setzen Investoren auf Wertsteigerung statt auf Cashflow. In B- und C-Lagen (kleinere Städte, ländliche Gebiete) sind 5 bis 8 Prozent Bruttorendite durchaus erreichbar, allerdings bei höherem Leerstandsrisiko. Der **Mietmultiplikator** (Kaufpreis geteilt durch Jahresmiete) ist eine weitere Schnellkennzahl: Ein Wert unter 20 gilt als günstig, 20 bis 25 als durchschnittlich, über 25 als teuer.
-
-**Der Leverage-Effekt: Warum Kredit die Eigenkapitalrendite steigern kann**
-
-Wenn Sie eine Immobilie teilweise mit einem Kredit finanzieren, tritt der sogenannte **Leverage-Effekt** (Hebeleffekt) ein: Solange die Nettomietrendite auf das Gesamtinvestment höher ist als der Kreditzins, steigt die Rendite auf Ihr eingesetztes Eigenkapital. Ein Beispiel: Sie kaufen eine Wohnung für 275.000 Euro (inkl. Nebenkosten) mit 50.000 Euro Eigenkapital und 225.000 Euro Kredit zu 3,5 Prozent Zins. Der Jahresreinertrag beträgt 5.520 Euro. Ohne Kredit wäre die Nettorendite 5.520 / 275.000 = 2,0%. Die Zinsen betragen 7.875 Euro — das übersteigt den Reinertrag, der Cashflow ist negativ. Aber für die EK-Rendite zählt die Tilgung als Vermögensaufbau: (5.520 − 7.875) wäre negativ, aber mit Tilgungsberücksichtigung ergibt sich ein anderes Bild. Der Hebel funktioniert auch umgekehrt: Bei steigenden Zinsen oder sinkenden Mieten kann der Leverage-Effekt die Rendite ins Negative drehen. Nutzen Sie unseren [Baufinanzierungs-Rechner](/wohnen/baufinanzierung-rechner) für eine detaillierte Kreditplanung.
-
-**Versteckte Kosten bei Immobilien-Investments**
-
-Viele Immobilien-Einsteiger unterschätzen die laufenden Kosten. Neben der offensichtlichen Kreditrate fallen an: **Nicht umlagefähige Betriebskosten** wie Hausverwaltung (20 bis 30 Euro pro Einheit/Monat), Kontogebühren und anteilige Reparaturen. Die **Instandhaltungsrücklage** sollte bei Neubauten mindestens 7 bis 10 Euro pro Quadratmeter und Jahr betragen, bei Altbauten 12 bis 15 Euro. **Mietausfallrisiko** — auch bei guter Lage steht eine Wohnung bei Mieterwechsel 1 bis 3 Monate leer, was über die Jahre 2 bis 5 Prozent Mietausfall bedeutet. Dazu kommen eventuelle **Sonderumlagen** der Eigentümergemeinschaft für größere Sanierungen (Dach, Heizung, Fassade) und **Mietausfälle** durch zahlungsunfähige Mieter. Planen Sie immer konservativ — mit dem [Mietrechner](/wohnen/mietrechner) können Sie prüfen, ob Ihre Mieterwartung realistisch ist.
-
-**Steuerliche Aspekte — nicht in der Rechnung, aber wichtig**
-
-Unser Rechner berücksichtigt bewusst keine steuerlichen Effekte, da diese sehr individuell sind. Wichtig zu wissen: Als Vermieter können Sie die Gebäude-AfA (Absetzung für Abnutzung) geltend machen — bei Gebäuden ab 2023 sind das 3 Prozent der Gebäudekosten pro Jahr (bei Altbauten 2 bis 2,5 Prozent). Zinsen, Verwaltungskosten und Instandhaltung sind als Werbungskosten absetzbar. In den ersten Jahren übersteigen die Abschreibungen oft den steuerpflichtigen Gewinn — es entsteht ein steuerlicher Verlust, der mit anderen Einkünften verrechnet werden kann. Dieser Steuervorteil verbessert den tatsächlichen Cashflow erheblich.`,
     faq: [
       {
         frage: 'Was ist eine gute Mietrendite?',
@@ -2119,27 +1761,7 @@ Unser Rechner berücksichtigt bewusst keine steuerlichen Effekte, da diese sehr 
     metaDescription: 'Indexmiete berechnen: Mieterhöhung basierend auf dem Verbraucherpreisindex (VPI) ✓ Aktuelle VPI-Werte ✓ 12-Monats-Frist ✓ KI-Erklärung.',
     keywords: ['indexmiete rechner', 'indexmiete berechnen', 'indexmietvertrag', 'vpi mieterhöhung', 'verbraucherpreisindex miete', 'mieterhöhung indexmiete', 'indexmiete erhöhung', 'staffelmiete vs indexmiete', 'destatis vpi', 'mietanpassung'],
     icon: '📈',
-    formel: 'Neue Kaltmiete = Aktuelle Kaltmiete × (Aktueller VPI / Alter VPI) | VPI-Veränderung in % = (Aktueller VPI − Alter VPI) / Alter VPI × 100 | Basisjahr des VPI: 2020 = 100 Punkte.',
     beispiel: 'Kaltmiete 800 € · VPI bei Vertragsabschluss 117,4 · aktueller VPI 125,8 (Beispielwert, Stand März 2026) → Veränderung +7,16 % → neue Kaltmiete 857,24 € (+57,24 €/Monat, +686,88 €/Jahr).',
-    erklaerung: `**Was ist ein Indexmietvertrag?**
-
-Ein **Indexmietvertrag** ist eine besondere Form des Mietvertrags, bei der die Miete an die Entwicklung des **Verbraucherpreisindex (VPI)** gekoppelt ist. Geregelt ist die Indexmiete in § 557b BGB. Steigt der VPI, darf der Vermieter die Kaltmiete im gleichen Verhältnis anheben — fällt der Index, kann die Miete theoretisch auch sinken (in der Praxis selten). Der große Vorteil aus Vermietersicht: Die Miete passt sich automatisch der Inflation an, ohne dass ortsübliche Vergleichsmieten oder Modernisierungen als Begründung herhalten müssen. Für Mieter bringt die Indexmiete auf der einen Seite Planungssicherheit (keine überraschenden Mieterhöhungen auf Vergleichsmietenniveau), auf der anderen Seite aber in inflationären Zeiten spürbare Mehrkosten. Während einer normalen Mietzeit gilt: Solange der Indexmietvertrag wirksam vereinbart ist, sind Erhöhungen nach § 558 BGB (Vergleichsmiete) und nach § 559 BGB (Modernisierungsumlage, außer bei gesetzlich vorgeschriebenen Maßnahmen) ausgeschlossen.
-
-**Wie funktioniert die Indexmiete?**
-
-Die Berechnung ist denkbar einfach: Die prozentuale Veränderung des Verbraucherpreisindex zwischen Vertragsabschluss (bzw. der letzten Anpassung) und dem aktuellen Zeitpunkt wird 1:1 auf die Kaltmiete übertragen. Beispiel: Die Kaltmiete beträgt 800 Euro, der VPI lag bei Vertragsabschluss bei 117,4 Punkten (Basisjahr 2020 = 100) und ist aktuell auf 125,8 Punkte gestiegen (Stand März 2026, Destatis). Das ist eine Steigerung von rund 7,16 Prozent. Die neue Kaltmiete berechnet sich dann zu 800 € × 125,8 / 117,4 = **857,21 Euro**. Das macht eine Mieterhöhung von rund 57,21 Euro pro Monat oder 686,52 Euro im Jahr. **Wichtig:** Die Erhöhung gilt nur für die Kaltmiete — Nebenkosten sind davon nicht betroffen, sie werden separat nach tatsächlichem Verbrauch abgerechnet. Ergänzend empfehlen wir unseren [Mietrechner](/wohnen/mietrechner) und den [Nebenkosten-Rechner](/wohnen/nebenkosten-rechner), um Ihre Gesamtbelastung zu überblicken.
-
-**Verbraucherpreisindex (VPI) erklärt**
-
-Der **Verbraucherpreisindex** wird monatlich vom Statistischen Bundesamt (destatis.de) veröffentlicht und misst die durchschnittliche Preisentwicklung aller Waren und Dienstleistungen, die Privathaushalte für Konsumzwecke kaufen. Seit 2023 gilt das **Basisjahr 2020 = 100 Punkte**. Ein VPI-Wert von 125,8 (Stand März 2026) bedeutet demnach, dass das allgemeine Preisniveau seit 2020 um 25,8 Prozent gestiegen ist. Der Index setzt sich aus rund 650 Güterarten zusammen — von Lebensmitteln über Wohnen und Energie bis zu Dienstleistungen und Freizeit. Für die Berechnung der Indexmiete ist ausschließlich der **Gesamtindex** relevant, nicht einzelne Unterindizes. Die aktuellen Werte finden Sie monatsgenau auf destatis.de unter "Preise → Verbraucherpreisindex". Wer die langfristige Entwicklung der Kaufkraft betrachten möchte, findet im [Inflationsrechner](/finanzen/inflationsrechner) ein passendes Werkzeug.
-
-**Vor- und Nachteile eines Indexmietvertrags**
-
-**Vorteile für Mieter:** Keine Mieterhöhungen aufgrund ortsüblicher Vergleichsmieten oder Modernisierungen, transparente Berechnung, bei sinkendem VPI theoretisch auch sinkende Miete, langfristige Planbarkeit bei stabiler Preisentwicklung. **Nachteile für Mieter:** In Zeiten hoher Inflation steigt die Miete schnell und deutlich — 2022/2023 lag die jährliche Inflation teils über 7 Prozent, was bei 800 € Kaltmiete eine Erhöhung von über 55 € pro Monat allein in einem Jahr bedeuten konnte. Die gesetzliche Kappungsgrenze (20 bzw. 15 Prozent in drei Jahren) gilt für Indexmieten **nicht**. **Vorteile für Vermieter:** Automatischer Inflationsausgleich, einfache Berechnung, keine aufwendige Begründung nötig. **Nachteile für Vermieter:** Bei sinkendem VPI auch sinkende Miete möglich, Modernisierungsumlagen sind (außer bei gesetzlich vorgeschriebenen Maßnahmen) ausgeschlossen.
-
-**Indexmiete vs. Staffelmiete vs. Vergleichsmiete**
-
-Neben der Indexmiete gibt es zwei weitere wichtige Mietformen: Die **Staffelmiete** (§ 557a BGB) legt bereits im Vertrag feste Mietsteigerungen zu bestimmten Zeitpunkten fest — etwa 20 Euro mehr pro Jahr oder 3 Prozent alle zwei Jahre. Das sorgt für absolute Planbarkeit, ist aber unabhängig von der tatsächlichen Preisentwicklung. Die **Vergleichsmiete** (§ 558 BGB) ist die klassische Mietform: Der Vermieter kann die Miete nach Ablauf der Wartefrist auf das ortsübliche Niveau anheben, begrenzt durch die Kappungsgrenze von 20 Prozent in drei Jahren (in angespannten Wohnungsmärkten 15 Prozent). Bei allen drei Modellen gilt: Sie schließen sich gegenseitig aus — eine Kombination (etwa Index- und Staffelmiete gleichzeitig) ist unzulässig. Die Wahl des Modells richtet sich nach der erwarteten Preisentwicklung, der Wohnungsmarktlage und den individuellen Präferenzen. Wer eine Wohnung flächenmäßig bewerten will, findet im [Quadratmeter-Rechner](/mathe/quadratmeter-rechner) eine praktische Hilfe für die Berechnung des Quadratmeterpreises.`,
     faq: [
       {
         frage: 'Was ist eine Indexmiete?',
@@ -2312,36 +1934,7 @@ Neben der Indexmiete gibt es zwei weitere wichtige Mietformen: Die **Staffelmiet
     metaDescription: 'Wärmepumpe berechnen: Betriebskosten, Amortisation und Vergleich mit Gasheizung ✓ BEG-Förderung 2026 ✓ CO₂-Ersparnis ✓ KI-Erklärung.',
     keywords: ['wärmepumpe rechner', 'wärmepumpe kosten', 'wärmepumpe amortisation', 'beg förderung 2026', 'jahresarbeitszahl jaz', 'wärmepumpe altbau', 'wärmepumpe vs gas', 'wärmepumpen stromtarif', 'heizung tauschen', 'luft wasser wärmepumpe'],
     icon: '🔥',
-    formel: 'Heizwärmebedarf = Wohnfläche × Heizlast (W/m²) × 1.800 Volllaststunden / 1.000 | Stromverbrauch Wärmepumpe = Heizwärmebedarf / JAZ | Betriebskosten WP = Stromverbrauch × Strompreis + 200 € Wartung | Amortisation = (Anschaffung − Förderung) / jährliche Ersparnis.',
     beispiel: '120 m² Altbau teilsaniert (JAZ 3,0), bisher 2.000 €/Jahr Gas (12 ct/kWh) → Heizwärmebedarf ~16.667 kWh → WP-Stromverbrauch ~5.556 kWh × 28 ct = 1.556 € + 200 € Wartung = 1.756 €/Jahr gegenüber 2.300 € Gas (inkl. Wartung) = nur ~544 € Ersparnis/Jahr. Bei 30.000 € Anschaffung und 30 % Grundförderung bleiben 21.000 € Eigenanteil → ~39 Jahre Amortisation; erst die Maximalförderung von 70 % senkt den Eigenanteil auf 9.000 € → ~17 Jahre. CO₂-Ersparnis ~1.240 kg/Jahr. Fazit: Bei aktuellen Preisen ist die Förderung der Haupthebel, nicht die laufende Ersparnis.',
-    erklaerung: `**Lohnt sich eine Wärmepumpe? Die Wirtschaftlichkeits-Analyse**
-
-Ob sich der Umstieg auf eine Wärmepumpe rechnet, hängt von **vier Hauptfaktoren** ab: dem Zustand Ihres Gebäudes, den aktuellen Energiepreisen, den Anschaffungskosten und der verfügbaren Förderung. Als Faustregel gilt: In einem **gut gedämmten Haus** (Neubau oder sanierter Altbau) amortisiert sich eine Wärmepumpe in 8–15 Jahren. In einem **unsanierten Altbau** mit hohem Wärmebedarf und ungeeigneten Heizkörpern kann es 20 Jahre oder länger dauern. Der entscheidende Faktor ist die **Jahresarbeitszahl (JAZ)** — sie gibt an, wie viel Wärmeenergie aus einer Kilowattstunde Strom erzeugt wird. Je höher die JAZ, desto effizienter und günstiger arbeitet die Wärmepumpe. Bei aktuellen Strompreisen von 30–35 ct/kWh und Gaspreisen um 10–12 ct/kWh lohnt sich eine Wärmepumpe ab einer JAZ von etwa 3,0. Wer zusätzlich eine Photovoltaikanlage besitzt oder einen speziellen [Wärmepumpen-Stromtarif](/wohnen/stromvergleich-rechner) nutzt, verbessert die Wirtschaftlichkeit deutlich.
-
-**BEG-Förderung 2026: Bis zu 70 Prozent Zuschuss**
-
-Die **Bundesförderung für effiziente Gebäude (BEG)** ist das wichtigste Förderinstrument für Wärmepumpen in Deutschland. 2026 setzt sich die maximale Förderung aus mehreren kombinierbaren Bausteinen zusammen:
-
-- **Grundförderung 30 Prozent** — alle Antragsteller.
-- **Klimageschwindigkeitsbonus +20 Prozent** — beim Austausch einer alten Öl-, Gas- oder Kohleheizung. Absenkung ab 2029 vorgesehen.
-- **Einkommensbonus +30 Prozent** — Haushalte mit zu versteuerndem Jahreseinkommen unter 40.000 Euro.
-- **Effizienzbonus +5 Prozent** — natürliches Kältemittel (z. B. Propan R290) oder Wasser/Erdreich/Abwasser als Wärmequelle.
-
-Rechnerisch summieren sich diese Boni auf bis zu 85 Prozent — die Richtlinie deckelt die Gesamtförderung jedoch bei **70 Prozent**. Die maximalen förderfähigen Investitionskosten liegen bei 30.000 Euro pro Wohneinheit. Das bedeutet: Wer alle anrechenbaren Boni ausschöpft, bekommt bis zu **21.000 Euro Zuschuss**. Der Antrag muss **vor Vertragsunterschrift** beim KfW-Portal eingereicht werden. Ein Energieberater (Experten-Liste der BAFA) ist Pflicht und kostet selbst zusätzlich ca. 1.000–2.000 Euro — die Beratung ist aber wiederum zu 50 % förderfähig.
-
-**Hinweis ab 2026:** Seit 01.01.2026 werden Luft-Wasser-Wärmepumpen nur noch gefördert, wenn die Geräuschemissionen des Außengeräts mindestens **10 dB unter** den gesetzlichen Grenzwerten liegen (vorher 5 dB). Die Anforderung gilt nur für Bestandsgebäude, nicht für Neubauten. Bei Auswahl der Anlage auf das Datenblatt achten.
-
-**Jahresarbeitszahl (JAZ) erklärt**
-
-Die **JAZ** (Jahresarbeitszahl) ist die Schlüsselgröße für die Effizienz einer Wärmepumpe. Sie gibt an, wie viel Wärmeenergie im Jahresdurchschnitt pro eingesetzter Kilowattstunde Strom erzeugt wird. Eine **JAZ von 3,0** bedeutet: Aus 1 kWh Strom werden 3 kWh Wärme — also 2 kWh "gratis" aus der Umweltwärme gewonnen. Die JAZ hängt vom Wärmepumpentyp ab (Luft-Wasser-Wärmepumpen erreichen 2,5–3,5, Sole-Wasser-Wärmepumpen 3,5–4,5, Wasser-Wasser sogar bis 5,0) und vor allem von der **Vorlauftemperatur** Ihres Heizsystems: Je niedriger, desto besser. Fußbodenheizungen sind ideal (35 °C Vorlauf), klassische Heizkörper im Altbau (60–70 °C) reduzieren die JAZ deutlich. Der BAFA fördert Wärmepumpen erst ab einer JAZ von 3,0 (Luft-Wasser) bzw. 3,8 (Sole/Wasser). Prüfen Sie vor dem Kauf das Datenblatt — dort steht die JAZ für Ihre individuelle Situation.
-
-**Wärmepumpe im Altbau: Geht das?**
-
-Der hartnäckigste Mythos: "Im Altbau funktioniert eine Wärmepumpe nicht." **Das stimmt so nicht.** Moderne Hochtemperatur-Wärmepumpen erreichen Vorlauftemperaturen bis 70 °C und können auch unsanierte Altbauten heizen — allerdings mit niedrigerer JAZ (2,0–2,5) und damit höheren Stromkosten. Für einen wirtschaftlichen Betrieb im Altbau sind drei Maßnahmen empfehlenswert: Erstens die **Dämmung von oberster Geschossdecke und Kellerdecke**, was Heizkostenreduzierung bringt. Zweitens der **Austausch kleiner Heizkörper** durch großflächige Niedertemperatur-Modelle, damit die Vorlauftemperatur sinken kann. Drittens ein **hydraulischer Abgleich** der Anlage. Mit diesen Maßnahmen erreichen auch Altbauten JAZ-Werte von 3,0–3,5. Unser [Heizkosten-Rechner](/wohnen/heizkosten-rechner) hilft, die aktuellen Kosten Ihrer bestehenden Heizung zu ermitteln.
-
-**Wärmepumpen-Stromtarife: So sparen Sie zusätzlich**
-
-Ein entscheidender Hebel für die Wirtschaftlichkeit ist der **Wärmepumpen-Stromtarif**. Diese Spezialtarife sind rund 20–30 Prozent günstiger als normale Haushaltsstromtarife — statt 33–37 ct/kWh zahlen Sie oft nur 25–28 ct/kWh. Voraussetzung ist ein **separater Zähler** für die Wärmepumpe oder ein intelligenter Zähler mit getrennter Messung. Die Stromversorger dürfen im Gegenzug die Wärmepumpe an wenigen Stunden pro Tag netzdienlich abschalten — in der Praxis merkt man das durch den Pufferspeicher kaum. Bei 5.000 kWh Wärmepumpenstrom pro Jahr sparen Sie durch einen Spezialtarif rund **250–350 Euro jährlich**. Vergleichen Sie Tarife regelmäßig über unseren [Stromvergleich-Rechner](/wohnen/stromvergleich-rechner) oder direkt über CHECK24. Wer zusätzlich eine PV-Anlage betreibt und einen Teil des Wärmepumpenstroms selbst erzeugt, senkt die Betriebskosten nochmals deutlich — eine Wärmepumpen-PV-Kombination amortisiert sich oft schon nach 8–12 Jahren.`,
     faq: [
       {
         frage: 'Was kostet eine Wärmepumpe mit Einbau?',
@@ -2530,61 +2123,7 @@ Ein entscheidender Hebel für die Wirtschaftlichkeit ist der **Wärmepumpen-Stro
     metaDescription: 'Photovoltaik berechnen: Ertrag, Eigenverbrauch, Einspeisevergütung und Amortisation ✓ Mit/ohne Speicher ✓ CO₂-Ersparnis ✓ KI-Erklärung.',
     keywords: ['photovoltaik rechner', 'pv rechner', 'solaranlage berechnen', 'einspeisevergütung 2026', 'photovoltaik amortisation', 'solarrechner', 'pv ertrag berechnen', 'batteriespeicher rechner'],
     icon: '☀️',
-    formel: 'Jahresertrag = kWp × 1.000 kWh × Ausrichtungsfaktor × 0,85 (Verluste) | Amortisation = Investition / (Ersparnis + Einspeisung − Wartung)',
     beispiel: 'Eine 8 kWp-Anlage auf einem Süddach (30°) erzeugt ca. 6.800 kWh pro Jahr. Bei 30 % Eigenverbrauch und 33 ct/kWh Strompreis (Festpreis-Neuvertrag 2026) entstehen ca. 673 € Ersparnis plus rund 370 € Einspeisung (7,78 ct/kWh) = ca. 1.043 € Jahresertrag.',
-    erklaerung: `**Lohnt sich Photovoltaik 2026?**
-
-Eine Photovoltaikanlage ist 2026 für die meisten Hausbesitzer eine lohnende Investition. Dank gesunkener Modulpreise, staatlicher Förderung und steigender Strompreise amortisieren sich moderne PV-Anlagen in 10–14 Jahren — bei einer Lebensdauer von 25–30 Jahren bleibt damit eine lange Gewinnphase. Unser Photovoltaik-Rechner hilft Ihnen, Ertrag, Eigenverbrauch, Einspeisevergütung und Amortisation für Ihre individuelle Situation zu berechnen.
-
-**Wie viel Strom produziert eine PV-Anlage?**
-
-In Deutschland erzeugt eine PV-Anlage typischerweise 400–1.000 kWh pro installiertem kWp und Jahr — stark abhängig von Ausrichtung, Neigung und Verschattung. Unser Rechner kalkuliert auf Basis eines theoretischen Süd-Optimums (25–35° Neigung) von **850 kWh/kWp/Jahr** (inklusive Performance Ratio 0,85, deckt Modul-, Wechselrichter-, Leitungs-, Verschmutzungs- und Degradationsverluste ab nach VDI 6002 / IEC 61724). Davon ausgehend ergibt sich der individuelle Ertrag über Ausrichtungs- und Neigungsfaktoren:
-
-**Ausrichtungs-Faktoren:** Süd 100 % · Süd-Ost / Süd-West 95 % · Ost / West 85 % · Nord-Ost / Nord-West 72 % · Nord 65 %
-
-**Neigungs-Faktoren** (relativ zu 25–35°): Flach (0–15°) 87 % · Leicht (15–25°) 94 % · Optimal (25–35°) 100 % · Steil (35–45°) 97 % · Sehr steil (45°+) 91 %
-
-Beispiel: Eine 8 kWp-Anlage auf einem Süd-Dach mit 30° Neigung erzeugt 8 × 850 × 1,00 × 1,00 = **6.800 kWh/Jahr**. Dieselbe Anlage auf einem Nord-Dach mit 20° Neigung kommt auf 8 × 850 × 0,65 × 0,94 = **4.158 kWh/Jahr** — also rund 39 % weniger. Datengrundlage: Konrad Mertens, „Photovoltaik" (Hanser Verlag), aufbereitet anhand der 30-Jahres-Globalstrahlungs-Statistik des Deutschen Wetterdienstes.
-
-**Was kostet eine Photovoltaik-Anlage 2026?**
-
-Die Kosten einer schlüsselfertigen PV-Anlage liegen 2026 bei ca. **1.100–1.500 € pro kWp** inklusive Montage. Eine typische 8 kWp-Anlage kostet damit rund 8.800–12.000 €. Mit Batteriespeicher kommen pro kWh Speicherkapazität 700–1.000 € hinzu. Wichtig: Seit 2023 entfällt die Mehrwertsteuer auf Kauf und Installation von PV-Anlagen bis 30 kWp — ein Rabatt von 19 %.
-
-**Einspeisevergütung 2026: Aktuelle Sätze**
-
-Für Anlagen, die zwischen 01.02.2026 und 31.07.2026 in Betrieb gehen, beträgt die Einspeisevergütung (Überschusseinspeisung) **7,78 ct/kWh** bis 10 kWp und **6,73 ct/kWh** für Anlagenteile von 10 bis 40 kWp. Bei Volleinspeisung (kein Eigenverbrauch) sind es 12,34 bzw. 10,35 ct/kWh. Die Vergütung wird für 20 Jahre plus das Inbetriebnahme-Jahr garantiert. Nach § 49 EEG 2023 sinken die Sätze halbjährlich (jeweils zum 01.02. und 01.08.) um 1 % — wer mit der Inbetriebnahme zögert, erhält über die gesamten 20 Jahre weniger. Maßgeblich ist der Satz zum Zeitpunkt der Inbetriebnahme. Aktuelle Werte: Bundesnetzagentur (Veröffentlichung „EEG-Förderung & -Fördersätze").
-
-**Eigenverbrauch optimieren: So sparen Sie doppelt**
-
-Je mehr Strom Sie selbst verbrauchen, desto rentabler ist die PV-Anlage. Denn jede kWh Eigenverbrauch spart den aktuellen Haushaltsstrompreis (typisch 33 ct/kWh als Festpreis-Neuvertrag, BDEW-Mittel 37 ct/kWh) — vier- bis fünfmal so viel wie die Einspeisevergütung. Typische Eigenverbrauchsquoten:
-
-- **Ohne Speicher:** 25–35 % — bei gutem Verhältnis von Ertrag zu Verbrauch.
-- **Mit Speicher (5–10 kWh):** 55–75 % — je größer der Speicher, desto höher die Quote.
-- **Mit Wärmepumpe + Speicher:** bis 85 % — die Kombination ist besonders wirtschaftlich.
-
-Tipps zur Eigenverbrauchs-Optimierung: Waschmaschine, Geschirrspüler und Trockner tagsüber laufen lassen, ein Elektroauto mit Überschussladung betreiben oder die Wärmepumpe per Heizstab mit PV-Strom unterstützen.
-
-**Batteriespeicher: Wann lohnt er sich?**
-
-Ein Batteriespeicher speichert überschüssigen Solarstrom für den Abend und erhöht den Eigenverbrauch erheblich. Rechnerisch lohnt sich ein Speicher meist, wenn der Strompreis über 30 ct/kWh liegt und Sie regelmäßig abends oder nachts viel Strom verbrauchen. Typische Speichergrößen: 5–15 kWh, Faustregel: 1 kWh Speicher pro 1.000 kWh Jahresverbrauch. Die Amortisationszeit des Speichers selbst liegt bei 10–15 Jahren — etwas länger als die der reinen PV-Anlage.
-
-**PV und Wärmepumpe: Die perfekte Kombination**
-
-Wer Photovoltaik und Wärmepumpe kombiniert, nutzt Solarstrom auch zum Heizen. Moderne Systeme koordinieren Wärmepumpe und PV-Wechselrichter so, dass die Wärmepumpe bevorzugt dann läuft, wenn die Sonne scheint. Der Warmwasserspeicher dient als thermischer „Puffer". Das steigert den Eigenverbrauch auf 60–75 % und senkt die Heizkosten drastisch.
-
-**Solarpaket I: Was hat sich seit 16.05.2024 geändert?**
-
-Mit dem **Solarpaket I**, das am 16.05.2024 in Kraft getreten ist, hat der Gesetzgeber den Ausbau von Photovoltaik deutlich vereinfacht. Wichtige Punkte: vereinfachte MaStR-Anmeldung (Marktstammdatenregister), erleichterte Direktvermarktungsregeln, höhere Vergütung für Volleinspeisung, neue Grundlage für Balkonkraftwerke (800-W-Grenze, vereinfachte Anmeldung). Die zugrundeliegenden Vergütungssätze nach § 48 EEG 2023 unterliegen seither der halbjährlichen Degression nach § 49 EEG.
-
-**CO₂-Ersparnis: Beitrag zum Klimaschutz**
-
-Jede Kilowattstunde Solarstrom spart ca. 380 g CO₂ gegenüber dem deutschen Strommix. Eine 8-kWp-Anlage vermeidet damit rund 2,6 Tonnen CO₂ pro Jahr — über 20 Jahre sind das 52 Tonnen. Zum Vergleich: Ein Auto mit 15.000 km Jahresfahrleistung verursacht etwa 3 Tonnen CO₂ jährlich.
-
-**Wichtiger Hinweis**
-
-Unser Rechner liefert eine erste Orientierung. Der tatsächliche Ertrag hängt von vielen Faktoren ab: Standort (Süddeutschland > Norddeutschland), Verschattung, Modulqualität, Montagesystem, Wechselrichter-Effizienz und Wetter. Holen Sie sich für die konkrete Planung immer ein individuelles Angebot von mindestens zwei Fachbetrieben ein. Die **Bundesnetzagentur** und die Verbraucherzentralen bieten zusätzliche Informationen zu Förderung und Auswahl.
-
-**Verwandte Rechner:** Für Heizkosten nutzen Sie den Heizkosten-Rechner, für den aktuellen Stromverbrauch den Stromkosten-Rechner. Wenn Sie parallel zur PV-Anlage über eine Wärmepumpe nachdenken, hilft der Wärmepumpen-Rechner. Einen günstigen Reststrom-Tarif finden Sie mit dem Stromvergleich-Rechner.`,
     faq: [
       {
         frage: 'Wie viel Strom produziert eine PV-Anlage?',
@@ -2741,50 +2280,7 @@ Unser Rechner liefert eine erste Orientierung. Der tatsächliche Ertrag hängt v
     metaDescription: 'Dachfläche berechnen für Sattel-, Pult-, Walm- und Flachdach ✓ Mit Dachneigung ✓ Ziegelbedarf ✓ PV-Potenzial ✓ Mit KI-Erklärung.',
     keywords: ['dachfläche berechnen', 'dachflächen rechner', 'dachneigung', 'satteldach fläche', 'pultdach berechnen', 'walmdach fläche', 'dachziegel berechnen', 'sparrenlänge'],
     icon: '🏠',
-    formel: 'Satteldach: 2 × Länge × (Breite/2) ÷ cos(Neigung) | Pultdach: Länge × Breite ÷ cos(Neigung) | Flachdach: Länge × Breite',
     beispiel: 'Haus 10 × 8 m mit Satteldach bei 35° Neigung: Sparrenlänge = 4 m ÷ cos(35°) ≈ 4,88 m → Fläche = 2 × 10 × 4,88 = 97,7 m².',
-    erklaerung: `**Dachfläche berechnen — so funktioniert's**
-
-Die Dachfläche ist die Grundlage für fast jede Dacharbeit: Eindeckung, Dämmung, PV-Anlage, Regenrinnen, Schneefang, Tauwasserbilanz. Im Gegensatz zur Grundfläche des Hauses ist die Dachfläche durch die **Neigung** größer — und der Unterschied kann je nach Dachform erheblich sein. Unser Dachflächen-Rechner unterstützt die vier gebräuchlichsten Dachformen in Deutschland: Satteldach, Pultdach, Walmdach und Flachdach.
-
-**Satteldach — die häufigste Form**
-
-Rund 60 % aller Häuser in Deutschland haben ein Satteldach. Es besteht aus zwei gleich großen geneigten Rechtecken, die an einem First zusammenstoßen. Die Dachfläche ergibt sich aus: **2 × Länge × Sparrenlänge**, wobei die Sparrenlänge (Strecke vom Traufpunkt bis zum First) mit der Neigung zusammenhängt: **Sparrenlänge = (Breite/2) / cos(Neigung)**. Bei einer Grundbreite von 8 m und 35° Neigung rechnet man: 4 m / cos(35°) ≈ 4,88 m. Die Gesamtfläche beträgt dann z. B. bei 10 m Haustiefe 2 × 10 × 4,88 ≈ 97,7 m². Vergleicht man dies mit der reinen Grundfläche (80 m²), sind das **22 % mehr Material** — ein Effekt, der bei Kostenschätzungen oft unterschätzt wird.
-
-**Pultdach — modern und effizient**
-
-Das Pultdach ist eine einzelne, geneigte Dachfläche. Es wird beliebter, weil es bei PV-Anlagen eine große, einheitlich ausgerichtete Fläche bietet. Die Berechnung ist einfacher: **Länge × Breite / cos(Neigung)**. Dachneigungen liegen typischerweise zwischen 5° und 25°.
-
-**Walmdach — repräsentativ, aber komplexer**
-
-Beim Walmdach sind alle vier Seiten geneigt. Bei gleicher Neigung an allen vier Seiten gilt die einfache Formel: **Grundfläche / cos(Neigung)** — diese ist mathematisch exakt, da jeder Quadratmeter Grundfläche um den gleichen Faktor 1/cos(Neigung) auf die Dachfläche projiziert wird, unabhängig von der Neigungsrichtung. Für Walmdächer mit unterschiedlichen Neigungen oder Krüppelwalme mit teilweisem Walm empfehlen wir eine fachliche Aufmessung.
-
-**Flachdach — geometrisch einfach**
-
-Ein Flachdach hat eine Neigung von weniger als 10° (oft 2–5° für Entwässerung). Rechnerisch entspricht die Dachfläche der Grundfläche, ggf. zuzüglich Dachüberstand. Für Abdichtungen, Dachbegrünung oder Aufstell-PV ist genau diese Rechnung relevant.
-
-**Der Dachüberstand**
-
-Ein Dachüberstand (0,3–0,8 m) schützt die Fassade vor Regen und Sonne. Er vergrößert die Dachfläche entsprechend. Unser Rechner berücksichtigt den Überstand automatisch: Länge und Breite werden um 2 × Überstand erhöht, bevor die Dachfläche berechnet wird. Typische Werte: 30 cm in Neubauten, bis zu 80 cm in alpinen Regionen zum Schutz vor Schnee.
-
-**Dachziegel-Bedarf**
-
-Als Richtwert gilt: Je nach Ziegelart (Doppel-S, Biberschwanz, Frankfurter Pfanne, Flachdachpfanne) werden **10–15 Ziegel pro m²** benötigt. Unser Rechner kalkuliert mit 12 Stück/m² und schlägt 5 % Verschnitt auf. Beispiel: Bei 98 m² Fläche → 98 × 12 × 1,05 ≈ 1.235 Ziegel. Der tatsächliche Bedarf hängt vom gewählten Modell ab — fragen Sie den Dachdecker oder den Baustoffhandel nach dem exakten Verlegewert.
-
-**Dachlatten und Unterspannbahn**
-
-- **Dachlatten:** Richtwert ca. 3,3 lfm pro m² Dachfläche (Querlatten in 30 cm Abstand + Konterlatten)
-- **Unterspannbahn:** Fläche + 15 % Verschnitt (für Überlappungen an den Rändern)
-
-**PV-Potenzial — wie viel Strom kann das Dach liefern?**
-
-Pro Kilowatt-Peak (kWp) einer modernen PV-Anlage benötigen Sie rund **5–5,5 m² Modulfläche** (bei modernen Modulen mit ~200 Wp/m²). Nicht die gesamte Dachfläche ist nutzbar — bei Schrägdächern sind es rund 70 %, bei Flachdächern (aufgeständert) nur 50 %, da die Module sich gegenseitig nicht verschatten dürfen. Der spezifische Ertrag liegt bei einem optimal Süd-ausgerichteten Dach mit 25–35° Neigung bei rund **850 kWh/kWp und Jahr** (inkl. Performance Ratio 0,85 nach VDI 6002). Ein Satteldach mit 98 m² Südausrichtung könnte also ca. 12 kWp liefern = rund **10.200 kWh/Jahr** Bruttoertrag. Das ist deutlich mehr als der typische Einfamilienhaus-Stromverbrauch von 4.000–5.000 kWh — der Überschuss wird ins Netz eingespeist (Vergütung 7,78 ct/kWh, Stand Feb 2026), oder mit Speicher selbst genutzt. Ohne Speicher liegt der Eigenverbrauchsanteil typischerweise bei 25–35 %. Die genauen Werte für Ihre Ausrichtung und Neigung kalkuliert unser [Photovoltaik-Rechner](/wohnen/photovoltaik-rechner) mit dem vollständigen Faktor-Modell nach Konrad Mertens.
-
-**Dachneigung und Niederschlagsabfluss**
-
-Die Dachneigung beeinflusst, wie schnell Regen- und Schmelzwasser abfließen. Je steiler, desto schneller — aber auch desto größer die Dachfläche und damit das Materialvolumen. Für Satteldächer sind 30–45° üblich, Pultdächer haben meist 15–25°. Die Mindestneigung hängt von der Eindeckung ab (z. B. Ziegel ab 22°, Blech ab 3°).
-
-**Weitere Rechner:** Für die PV-Planung nutzen Sie den Photovoltaik-Rechner. Für Wandflächen und Tapetenbedarf den Tapetenbedarf-Rechner. Für einfache Flächenberechnungen den Quadratmeter-Rechner.`,
     faq: [
       {
         frage: 'Wie berechne ich die Fläche eines Satteldachs?',
@@ -2957,35 +2453,7 @@ Die Dachneigung beeinflusst, wie schnell Regen- und Schmelzwasser abfließen. Je
     metaDescription: 'Malerkosten-Rechner: Streichfläche, Farbbedarf, Materialkosten und Maler-Honorar berechnen ✓ Selbst vs. Maler ✓ Einkaufsliste ✓ Mit KI-Erklärung.',
     keywords: ['malerkosten rechner', 'streichen kosten', 'farbbedarf rechner', 'maler kosten', 'wand streichen kosten', 'decke streichen', 'wandfarbe menge', 'streichfläche berechnen'],
     icon: '🎨',
-    formel: 'Streichfläche = 2 × (Länge + Breite) × Höhe + Decke − Fenster − Türen. Farbbedarf = Fläche × 0,15 l/m² × Anzahl Anstriche.',
     beispiel: 'Beispiel: Raum 5×4×2,5 m, 1 Fenster, 1 Tür, 2 Anstriche, Decke mitstreichen → ca. 62 m² Streichfläche, 19 l Farbe (95 €), Material ~135 €. Mit Maler ca. 682 € (12,3 h × 42 € + 30 € Anfahrt).',
-    erklaerung: `**Wie funktioniert der Malerkosten-Rechner?**
-
-Der Malerkosten-Rechner ermittelt, wie viel Farbe Sie für einen Raum benötigen, was das Material kostet und wie viel ein professioneller Maler zusätzlich verlangen würde. Sie wählen zwischen zwei Eingabemodi: Entweder Sie geben Länge, Breite und Höhe des Raums an (der Rechner ermittelt die Wandfläche automatisch), oder Sie tragen die Streichfläche direkt in Quadratmetern ein.
-
-**Berechnung der Streichfläche**
-
-Die Wandfläche eines rechteckigen Raums ergibt sich aus dem Umfang mal der Raumhöhe: Fläche = 2 × (Länge + Breite) × Höhe. Ein Raum mit 5 m × 4 m Grundfläche und 2,5 m Höhe hat also 2 × 9 × 2,5 = 45 m² Wandfläche. Kommt die Decke hinzu (Länge × Breite), addieren sich weitere 20 m² — Gesamtfläche 65 m². Für Fenster und Türen zieht der Rechner Pauschalen ab: 1,5 m² pro Fenster und 2,0 m² pro Tür. Bei einem Fenster und einer Tür bleiben 61,5 m² zu streichen.
-
-**Farbbedarf berechnen**
-
-Als Faustregel gilt: Ein Liter Wandfarbe reicht für etwa 6–8 m² bei einem Anstrich. Wir rechnen konservativ mit 0,15 Litern pro Quadratmeter, also ca. 6,7 m²/l. Bei zwei Anstrichen verdoppelt sich der Bedarf. Für dunkle Untergründe oder einen Farbwechsel von dunkel auf hell sind oft drei Anstriche nötig. Das Ergebnis rundet der Rechner immer auf volle Liter auf, damit Sie ausreichend Farbe kaufen und keine Nachläufe durch fehlende Reste riskieren.
-
-**Farbqualität und Preise**
-
-Die Preisspanne bei Wandfarbe ist groß. Standard-Dispersionsfarben kosten ca. 5 €/l, gute Premiumqualität (hohes Deckvermögen, Klasse 1 oder 2) etwa 10 €/l, Spezialfarben für Küche und Bad (schimmelresistent, feuchtraumgeeignet) 15 €/l und mehr. Deckvermögen, Nassabriebklasse und Strapazierfähigkeit sind die wichtigsten Qualitätsmerkmale. Günstige Baumarktfarbe kann zwar verlockend wirken, benötigt aber oft einen zusätzlichen Anstrich — Ersparnis = 0.
-
-**Selbst streichen oder Maler beauftragen?**
-
-Der Rechner zeigt beide Varianten parallel. Bei der Selbst-Option werden nur Material (Farbe, Abdeckmaterial, Werkzeug) berechnet — ein typischer Raum kostet so 80 bis 150 €. Beim Maler kommen Arbeitszeit (ca. 42 €/h, Leistung ca. 10 m²/h) und Anfahrt (pauschal 30 €) hinzu — das Ergebnis liegt meist bei 350 bis 800 €. Die Differenz ist also Ihr „Lohn" fürs Selbststreichen. Hobby-Streicher schaffen rund 5 m² pro Stunde, sollten also für einen Standardraum 5 bis 10 Stunden einplanen.
-
-**Wann lohnt sich der Profi?**
-
-Ein Malermeister lohnt sich vor allem bei großen Flächen, hohen Decken (über 3 m), schwierigen Untergründen (Risse, Schimmel, Tapetenwechsel), Stuckwerk, besonderen Techniken (Lasur, Wischtechnik) oder Zeitdruck. Außerdem haften Profis für Mängel, geben bei richtiger Rechnungsstellung Gewährleistung und übernehmen Entsorgung und Abdeckung. Bei einem reinen Auffrischungs-Anstrich in einem einfachen Wohnraum ist das DIY-Projekt meist die bessere Wahl.
-
-**Einkaufsliste für den Baumarkt**
-
-Zusätzlich zum reinen Farbbedarf zeigt Ihnen der Rechner eine vollständige Einkaufsliste: Abdeckfolie, Kreppband, Farbrolle mit Teleskopstiel, Abstreifgitter und Pinsel für Ecken. Rechnen Sie Materialpauschalen von ca. 40 € für Abdeckung und Werkzeug ein, falls nicht bereits vorhanden. Planen Sie zusätzlich unseren Tapetenbedarf-Rechner, den Quadratmeter-Rechner und den Umzugskosten-Rechner ein, wenn Sie einen kompletten Umzug planen.`,
     faq: [
       {
         frage: 'Wie viel Farbe brauche ich pro Quadratmeter?',
@@ -3137,27 +2605,7 @@ Zusätzlich zum reinen Farbbedarf zeigt Ihnen der Rechner eine vollständige Ein
     metaDescription: 'Grundsteuer berechnen: Bundesmodell, Bayern und Baden-Württemberg ✓ Bodenrichtwert ✓ Hebesatz ✓ KI-Erklärung.',
     keywords: ['grundsteuer rechner', 'grundsteuer 2026', 'grundsteuerreform', 'bodenrichtwert', 'hebesatz', 'grundsteuerwert', 'bundesmodell grundsteuer', 'grundsteuer bayern', 'grundsteuer baden-württemberg'],
     icon: '🏠',
-    formel: 'Bundesmodell: Grundsteuer = Grundsteuerwert × Steuermesszahl (0,031 % Wohnen) × Hebesatz | Bayern (Flächenmodell): Äquivalenzbetrag × 0,70 × Hebesatz | BW (Bodenwertmodell): Fläche × Bodenrichtwert × 0,091 ‰ × Hebesatz',
     beispiel: 'Eigentumswohnung, 120 m² Wohnfläche, 400 m² Grundstück, Bodenrichtwert 200 €/m², Baujahr 1990, Hebesatz 500 %: Grundsteuerwert ca. 242.000 € → Messbetrag ca. 75 € → Grundsteuer ca. 375 €/Jahr.',
-    erklaerung: `**Die neue Grundsteuer ab 2025 — Überblick**
-
-Seit dem 1. Januar 2025 gilt in Deutschland die **neue Grundsteuer**, nachdem das Bundesverfassungsgericht die bisherigen Einheitswerte 2018 für verfassungswidrig erklärt hatte. Die Berechnung erfolgt seither nach dem **Bundesmodell** oder — in fünf Ländern — nach **eigenen Landesmodellen**. Die meisten Bundesländer (darunter NRW, Niedersachsen, Schleswig-Holstein, Brandenburg, Mecklenburg-Vorpommern, Thüringen, Sachsen-Anhalt, Berlin, Bremen, Hessen mit Flächen-Faktor-Modell) nutzen das Bundesmodell. Bayern setzt auf ein reines Flächenmodell, Baden-Württemberg auf ein Bodenwertmodell, Hamburg auf ein Wohnlagemodell und Niedersachsen zusätzlich auf ein Flächen-Lage-Modell.
-
-**Das Bundesmodell im Detail**
-
-Beim Bundesmodell ergibt sich der **Grundsteuerwert** vereinfacht aus dem **Bodenwert** (Grundstücksfläche × Bodenrichtwert) plus dem **Gebäudewert** aus dem Ertragswertverfahren. Der Gebäudewert wird über einen fiktiven Jahresrohertrag (Wohnfläche × Nettokaltmiete je m² nach Baujahr und Lage) multipliziert mit einem **Liegenschaftszins/Kapitalisierungsfaktor** ermittelt. Auf den Grundsteuerwert wird die **Steuermesszahl** angewandt (Wohngrundstücke: 0,031 %, unbebaut: 0,034 %). Der so errechnete Messbetrag multipliziert mit dem **kommunalen Hebesatz** (durchschnittlich ca. 500 %) ergibt die jährliche Grundsteuer. Für [Baufinanzierung](/finanzen/baufinanzierung-rechner) und [Grunderwerbsteuer](/wohnen/grunderwerbsteuer-rechner) gibt es eigene Rechner.
-
-**Bayern und Baden-Württemberg — eigene Wege**
-
-**Bayern** nutzt ein reines **Flächenmodell**: Der Äquivalenzbetrag ergibt sich aus Grundstücksfläche × 0,04 €/m² plus Wohnfläche × 0,50 €/m². Für Wohnnutzung wird ein Abschlag von 30 % gewährt. Unabhängig vom Wert des Grundstücks zahlt also jeder gleich — reine Lagevorteile spielen keine Rolle. **Baden-Württemberg** hat das **Bodenwertmodell** gewählt: Grundstücksfläche × Bodenrichtwert = Grundsteuerwert, darauf 1,3 ‰ Steuermesszahl (mit Abschlag 30 % für Wohnen auf 0,91 ‰). Das bedeutet: Das Gebäude selbst zählt nicht — nur der Grund und Boden. In guten Lagen steigt die Grundsteuer deutlich stärker als in einfachen Wohnlagen.
-
-**Hebesatz — der kommunale Stellhebel**
-
-Der **Hebesatz** wird von jeder Gemeinde individuell festgelegt und liegt bundesweit im Schnitt bei ca. 500 %. In Großstädten und teuren Lagen sind 600–900 % nicht selten, während günstige ländliche Gemeinden teils mit 350–400 % auskommen. Der Hebesatz wird in Prozent auf den Messbetrag angewandt. Die Gemeinden haben bei der Grundsteuerreform ihren Hebesatz oft angepasst, um **aufkommensneutral** zu bleiben — faktisch kam es aber zu Verschiebungen zwischen Eigentümern. Wer bisher niedrig besteuert war, zahlt jetzt tendenziell mehr; umgekehrt profitieren Eigentümer alter Einheitswerte in Toplagen oft.
-
-**Grundsteuer in den Nebenkosten**
-
-Die Grundsteuer ist nach der **Betriebskostenverordnung** umlagefähig auf Mieter und fließt somit in die [Nebenkostenabrechnung](/wohnen/nebenkosten-rechner). Sie wird quartalsweise an die Gemeinde gezahlt (15.02., 15.05., 15.08., 15.11.). Für die Steuererklärung kann die Grundsteuer bei **vermieteten Objekten** als Werbungskosten bei Einkünften aus Vermietung und Verpachtung angesetzt werden. Selbstnutzer können die Grundsteuer nicht steuerlich absetzen.`,
     faq: [
       { frage: 'Wie wird die neue Grundsteuer berechnet?', antwort: 'Beim Bundesmodell: Grundsteuerwert × Steuermesszahl (0,031 % Wohnen) × kommunaler Hebesatz. Der Grundsteuerwert setzt sich aus Bodenwert (Fläche × Bodenrichtwert) und Gebäudewert (Ertragswertverfahren) zusammen. Bayern nutzt ein reines Flächenmodell, Baden-Württemberg ein Bodenwertmodell ohne Berücksichtigung des Gebäudes.' },
       { frage: 'Was ist der Bodenrichtwert?', antwort: 'Der Bodenrichtwert gibt den durchschnittlichen Wert pro Quadratmeter Boden in einer bestimmten Lage an. Er wird vom Gutachterausschuss der Gemeinde festgelegt und kann kostenlos auf boris.de (oder den Länder-Portalen) abgerufen werden. Er ist ein zentraler Bestandteil der neuen Grundsteuer-Berechnung.' },
@@ -3309,31 +2757,7 @@ Die Grundsteuer ist nach der **Betriebskostenverordnung** umlagefähig auf Miete
     metaDescription: 'Mietpreisbremse prüfen: Ist Ihre Miete zulässig oder zu hoch? Vergleichsmiete, max. 110 %-Grenze und Rückforderung kostenlos berechnen.',
     keywords: ['mietpreisbremse', 'mietpreisbremse rechner', 'miete zu hoch', 'vergleichsmiete', 'ortsübliche miete', 'mietspiegel', 'mietminderung', 'rüge vermieter', 'miete zurückfordern'],
     icon: '🏠',
-    formel: 'Max. zulässige Miete = Vergleichsmiete × 1,10 | Überhöhung/Monat = max(0; Ist-Miete − Max-Miete) × Wohnfläche',
     beispiel: 'Beispiel: Vergleichsmiete 10 €/m², aktuelle Miete 12 €/m², 65 m² → Max erlaubt: 11 €/m² = 715 €, Ist: 780 € → 65 €/Monat zu viel = 780 € pro Jahr.',
-    erklaerung: `**Was ist die Mietpreisbremse?**
-
-Die Mietpreisbremse (§ 556d BGB) begrenzt in angespannten Wohnungsmärkten die Miete bei Neuvermietung. Sie darf in diesen Gebieten **höchstens 10 Prozent** über der ortsüblichen Vergleichsmiete liegen. Eingeführt wurde die Regelung mit dem Mietrechtsnovellierungsgesetz 2015. Mit dem **Gesetz zur Änderung der Regelungen über die zulässige Miethöhe bei Mietbeginn** (BT-Drs. 21/322 i.d.F. 21/631, Bundestag-Beschluss am 26.06.2025, Bundesrat-Billigung am 11.07.2025) wurde sie **bis zum 31.12.2029 verlängert**. Konkret wurde die bisherige Fünfjahresfrist für Landesverordnungen gestrichen und das Außerkrafttreten vom 31.12.2025 auf den 31.12.2029 verschoben. Die 10-Prozent-Grenze und die Ausnahmen nach §§ 556e, 556f BGB bleiben unverändert. Welche konkreten Gebiete als angespannter Wohnungsmarkt gelten, regeln weiterhin die Landesverordnungen. Der Koalitionsvertrag 2025 sieht zudem strengere Regeln für Indexmieten und möblierten Wohnraum vor — eine Expertengruppe soll bis Ende 2026 Vorschläge vorlegen. Unser Mietpreisbremse-Rechner zeigt Ihnen sofort, ob Ihre aktuelle Miete noch zulässig ist — und wenn nicht, wie viel Sie pro Monat und pro Jahr zu viel zahlen.
-
-**Wie wird die Mietpreisbremse berechnet?**
-
-Die Berechnung ist einfach: Sie multiplizieren die **ortsübliche Vergleichsmiete** aus dem Mietspiegel Ihrer Stadt mit 1,10 (also +10 Prozent). Das Ergebnis ist die **Höchstmiete pro Quadratmeter** kalt. Liegt Ihre tatsächliche Kaltmiete darüber, verstößt der Vermieter gegen § 556d BGB — es sei denn, es greift eine Ausnahme. Ein Beispiel: Die Vergleichsmiete liegt in Ihrer Straße bei 10,00 €/m² (laut Mietspiegel), Sie haben 65 m² und zahlen 12,00 €/m² kalt. Die maximale Miete wäre 11,00 €/m² × 65 = 715 € kalt. Sie zahlen aber 780 € kalt — also **65 € zu viel pro Monat**, was über ein Jahr **780 €** ausmacht.
-
-**Welche Ausnahmen gibt es?**
-
-Nicht jede Miete fällt unter die Mietpreisbremse. Es gibt vier wichtige Ausnahmen: Erstens **Neubauten**: Wohnungen, die nach dem 01.10.2014 erstmalig vermietet wurden, sind ausgenommen — der Vermieter darf die Miete frei festsetzen. Zweitens **umfassende Modernisierungen**: Hat der Vermieter mindestens ein Drittel eines vergleichbaren Neubaus in die Wohnung investiert, darf er die Miete neu festlegen. Drittens **die Vormiete**: War die Miete des Vormieters bereits höher als 110 Prozent der Vergleichsmiete, darf der Vermieter diese höhere Miete weiter verlangen (Bestandsschutz). Viertens **möblierte Zimmer oder Wohnungen auf Zeit** — hier gilt die Bremse meist nicht. In all diesen Fällen zeigt der Rechner eine entsprechende Info an.
-
-**Wie fordere ich zu viel gezahlte Miete zurück?**
-
-Wichtig zu wissen: Die Mietpreisbremse wirkt **nicht automatisch**. Sie müssen den Vermieter **schriftlich rügen** — am besten per Einschreiben mit Rückschein. Eine qualifizierte Rüge nennt die konkrete Wohnung, den Verstoß gegen § 556d BGB und fordert die Reduzierung auf die zulässige Miete. **Achtung:** Die Rückforderung gilt **nur ab dem Zeitpunkt der Rüge** — rückwirkend vor der Rüge bekommen Sie nichts zurück. Je früher Sie also rügen, desto besser. Nach der Rüge können Sie die Differenz Monat für Monat einfordern und notfalls gerichtlich durchsetzen. Eine Rechtsschutzversicherung mit Mietrecht deckt die Anwalts- und Gerichtskosten ab und ist bei der Mietpreisbremse oft sinnvoll.
-
-**Wie finde ich die Vergleichsmiete heraus?**
-
-Die ortsübliche Vergleichsmiete wird im **Mietspiegel** der Gemeinde festgelegt. Es gibt zwei Varianten: den **qualifizierten Mietspiegel** (wissenschaftlich erstellt, rechtlich bindend) und den **einfachen Mietspiegel** (weniger detailliert). Die meisten Großstädte führen einen qualifizierten Mietspiegel — häufig kostenlos als PDF auf der Website der Stadt abrufbar. Alternativen sind Mietspiegel-Apps, Mietspiegel-Gutachten oder Auskunft beim Mieterverein. Wichtig: Der Mietspiegel berücksichtigt Lage, Baujahr, Ausstattung, Größe und Art der Wohnung — Sie müssen die richtige Rubrik finden, die auf Ihre Wohnung passt.
-
-**Wann lohnt sich ein Mieterverein?**
-
-Wer unsicher ist, ob die Mietpreisbremse greift und wie die Rüge formuliert werden muss, sollte den örtlichen **Mieterverein** einschalten. Für einen Jahresbeitrag von rund 50 bis 90 € erhalten Sie kompetente Rechtsberatung, fertige Musterbriefe und Unterstützung bei der Durchsetzung. Bei höheren Streitwerten ist eine **Mietrechtsschutzversicherung** sinnvoll, die Anwalts- und Gerichtskosten übernimmt. Unser [Mietrechner](/wohnen/mietrechner) hilft Ihnen gleichzeitig, die monatliche Gesamtbelastung aus Kalt- und Warmmiete im Blick zu behalten — und der [Nebenkosten-Rechner](/wohnen/nebenkosten-rechner) zeigt, welche Posten der Vermieter tatsächlich umlegen darf.`,
     faq: [
       {
         frage: 'Wie hoch darf die Miete laut Mietpreisbremse sein?',
@@ -3489,57 +2913,7 @@ Wer unsicher ist, ob die Mietpreisbremse greift und wie die Rüge formuliert wer
     metaDescription: 'Poolkosten berechnen: Jährliche Kosten für Wasser, Strom, Chemie und Wartung Ihres Pools — mit Heizung und Abdeckung.',
     keywords: ['poolkosten rechner', 'pool betriebskosten', 'pool strom kosten', 'pool chemie kosten', 'pool wärmepumpe kosten', 'pool wasser kosten', 'pool unterhalt', 'swimmingpool kosten jahr'],
     icon: '🏊',
-    formel: 'Wasser = Volumen × 1,2 × Wasserpreis | Filter = 8 h × Pumpe kW × Saison-Tage × Strompreis | Heizung (Wärmepumpe) ≈ 3–6 kWh/Tag × Saison-Tage',
     beispiel: 'Beispiel: 40 m³ Pool, ohne Heizung, mit Abdeckung, Mai–September → Wasser ≈ 192 €, Filterstrom ≈ 272 €, Chemie ≈ 240 €, Wartung ≈ 410 €. Gesamt ≈ 1.114 €/Jahr.',
-    erklaerung: `**Was kostet ein Pool wirklich im Jahr?**
-
-Ein eigener Pool im Garten klingt nach Urlaub vor der Haustür — doch die laufenden Kosten werden oft unterschätzt. Neben der Anschaffung (1.500 € für einen Aufstellpool bis weit über 50.000 € für einen betonierten Einbaupool) fallen jedes Jahr **Betriebskosten** für Wasser, Strom, Chemie und Wartung an. Unser Poolkosten-Rechner zeigt Ihnen, mit welchen Ausgaben Sie pro Saison rechnen müssen — abhängig von Größe, Heizung, Abdeckung und Saisonlänge.
-
-**Wasserkosten**
-
-Zu Saisonbeginn wird der Pool meist einmal komplett neu befüllt. Über die Saison verdunsten zusätzlich 20–30 % des Volumens, die nachgefüllt werden müssen. Bei einem **40-m³-Pool** und einem Wasserpreis von 4 €/m³ ergibt das rund 190 € pro Saison. Wer eine Abdeckung nutzt, reduziert die Verdunstung um bis zu 90 % — der größte Einzelspar-Effekt.
-
-**Stromkosten Filterpumpe**
-
-Die Filterpumpe muss täglich etwa **6 bis 10 Stunden** laufen (typischerweise 8 h), damit das Wasser sauber bleibt. Eine typische Pumpe für einen 40-m³-Pool hat 0,6 kW Leistung. Über 5 Monate Saison (153 Tage) bei 8 h täglich summiert sich das auf ca. 734 kWh — bei 37 ct/kWh sind das **rund 270 €**. Energiesparende Umwälzpumpen mit Frequenzregelung kosten mehr, sparen aber bis zu 60 % Strom.
-
-**Heizungskosten**
-
-Ohne Heizung ist das Poolwasser in Deutschland meist erst ab Juni angenehm warm — die Saison verkürzt sich. Drei Optionen sind üblich:
-
-- **Keine Heizung:** 0 € Kosten, dafür kürzere Badesaison.
-- **Wärmepumpe:** Die beliebteste Lösung. Stromverbrauch je nach Größe und Temperaturzielwert 3–6 kWh pro Tag. Bei 40 m³ und 153 Tagen ergibt das rund **700 kWh ≈ 220 €** pro Saison. Mit Abdeckung sinken die Heizkosten um etwa 30 %.
-- **Solarabsorber:** Schläuche auf dem Dach oder eine Solarmatte nutzen kostenlose Sonnenwärme. Investition 500–2.000 €, Betriebskosten nahezu null. Allerdings witterungsabhängig.
-
-**Chemie: Chlor, pH, Algen**
-
-Sauberes, sicheres Poolwasser braucht regelmäßige Wasserpflege. Die Grundprodukte sind Chlor (Desinfektion), pH-Minus oder pH-Plus (pH-Regulierung) und gelegentlich Algizid. Faustregel: **6 bis 10 € pro m³ Pool und Saison** für Standardpools. Bei regelmäßiger Abdeckung sinken die Chemiekosten um etwa 20 %, weil weniger Staub, Laub und UV-Einstrahlung das Wasser belasten. Wer auf Salzwasserelektrolyse umsteigt, spart langfristig Chemiekosten, muss aber in die Anlage investieren (800–2.000 €).
-
-**Wartung und Zubehör**
-
-Dazu zählen Filterkartuschen oder Sand, Poolsauger, Kescher, Skimmer, Dichtungen und gelegentliche Reparaturen. Realistisch sind **250–500 € pro Jahr** — größere Pools brauchen tendenziell mehr Zubehör. Wer seinen Pool professionell einwintern und im Frühjahr wieder einfahren lässt, zahlt zusätzlich 150–300 € für den Service.
-
-**Abdeckung: Der größte Sparhebel**
-
-Eine gute Poolabdeckung (Solarfolie, Rollabdeckung oder Rollladen) lohnt sich fast immer. Sie spart gleichzeitig **Wasser, Strom, Heizung und Chemie**:
-
-- Bis zu 90 % weniger Verdunstung → weniger Wasser nachfüllen
-- Etwa 30 % weniger Heizkosten
-- Ca. 20 % weniger Chemieverbrauch
-- Weniger Laub, Pollen und Schmutz → längere Filterstandzeit
-
-Die Investition von 100 € (einfache Solarfolie) bis mehreren Tausend (elektrische Rollabdeckung) amortisiert sich innerhalb weniger Jahre.
-
-**Pool mit Photovoltaik betreiben**
-
-Wer eine **PV-Anlage** besitzt, kann Filterpumpe und Wärmepumpe überwiegend mit selbst erzeugtem Strom betreiben — und drückt die laufenden Kosten drastisch. Ein smarter Pool-Controller lässt die Filterpumpe nur laufen, wenn genug Solarstrom vorhanden ist. So bleibt vom ursprünglichen Strombedarf oft nur ein kleiner Rest, der aus dem Netz kommt. In Kombination mit Wärmepumpe und Abdeckung wird ein sonnenreicher Haushaltspool fast zum Nullkostenpool.
-
-**Unser Poolkosten-Rechner zeigt:**
-
-- Die Gesamtkosten pro Jahr in Euro
-- Die Aufschlüsselung nach Wasser, Filterstrom, Heizung, Chemie und Wartung
-- Kosten pro Monat und pro Badetag
-- Die Ersparnis durch Abdeckung und Saisonwahl`,
     faq: [
       {
         frage: 'Was kostet ein Pool pro Jahr an Betriebskosten?',
@@ -3699,47 +3073,7 @@ Wer eine **PV-Anlage** besitzt, kann Filterpumpe und Wärmepumpe überwiegend mi
     metaDescription: 'Vorfälligkeitsentschädigung berechnen: VFE bei vorzeitiger Kreditablösung kostenlos schätzen — mit 10-Jahres-Sonderkündigungsrecht.',
     keywords: ['vorfälligkeitsentschädigung berechnen', 'vfe rechner', 'kredit ablösen', 'baufinanzierung vorzeitig kündigen', 'aktiv passiv methode', '10 jahre sonderkündigungsrecht', '§ 489 bgb', 'umschuldung', 'restschuld ablösen'],
     icon: '🏦',
-    formel: 'Zinsmarge = Vertragszins − Marktzins. VFE ≈ Restschuld × Zinsmarge% × Restlaufzeit × 0,85 + Bearbeitungsgebühr (ca. 300 €). Bei Zinsmarge ≤ 0: keine VFE.',
     beispiel: 'Restschuld 150.000 €, Vertragszins 2,5 %, Marktzins 3,5 %, Restlaufzeit 5 Jahre → Zinsmarge −1 % (Marktzins über Vertragszins → kein Zinsschaden, keine VFE). Umgekehrt bei Vertragszins 4,0 % und Marktzins 2,5 % → Zinsmarge 1,5 % × 150.000 × 5 × 0,85 ≈ 9.562 € + 300 € Gebühr.',
-    erklaerung: `**Vorfälligkeitsentschädigung-Rechner — was Banken bei vorzeitiger Kreditablösung verlangen dürfen**
-
-Wer seinen Immobilienkredit **vor Ablauf der Zinsbindung** zurückzahlen möchte — sei es beim Hausverkauf, bei einer Erbschaft oder weil eine günstigere Finanzierung lockt —, muss der Bank in der Regel eine **Vorfälligkeitsentschädigung** (kurz: VFE) zahlen. Die Idee dahinter: Die Bank hat mit Ihnen einen festen Zinssatz über einen bestimmten Zeitraum vereinbart und darauf kalkuliert, über die Laufzeit Zinsen zu verdienen. Wird der Kredit vorzeitig abgelöst, muss sie das frei werdende Geld zu den aktuellen Konditionen neu anlegen. Liegen diese **unter** Ihrem Vertragszins, entgehen der Bank Zinseinnahmen — und genau diesen Schaden dürfen sie Ihnen in Rechnung stellen. Unser VFE-Rechner schätzt die Höhe nach der offiziellen **Aktiv-Passiv-Methode**.
-
-**Rechtsgrundlage und Rechtsprechung**
-
-Die Vorfälligkeitsentschädigung ist in **§ 490 Abs. 2 BGB** (Kündigung durch den Darlehensnehmer bei Immobiliar-Verbraucherdarlehen) und in der ständigen Rechtsprechung des Bundesgerichtshofs geregelt. Der BGH hat in mehreren Urteilen (zuletzt **XI ZR 388/14**) klargestellt: Die Bank darf ihren **tatsächlichen Zinsschaden** verlangen, muss sich aber **ersparte Verwaltungskosten** und das **ersparte Risiko** anrechnen lassen. In der Praxis wird pauschal mit einem **Abschlagsfaktor von ca. 15 %** gearbeitet — entsprechend wird die Zinsschaden-Summe mit **0,85** multipliziert. Zusätzlich fällt eine **Bearbeitungsgebühr** von typischerweise 200 bis 400 € an.
-
-**Die Aktiv-Passiv-Methode einfach erklärt**
-
-Die Aktiv-Passiv-Methode vergleicht zwei Alternativen für die Bank:
-- **Aktiv-Seite:** Hätten Sie normal weitergezahlt, hätte die Bank über die Restlaufzeit **Zinsen von Ihnen** bekommen (Ihr Vertragszins).
-- **Passiv-Seite:** Nach Ihrer vorzeitigen Rückzahlung legt die Bank das Geld zum **aktuellen Kapitalmarktzins** wieder an — typischerweise in Pfandbriefe mit gleicher Restlaufzeit.
-
-Die Differenz zwischen beiden Werten ist der **Zinsschaden**. Der Rechner vereinfacht den Barwertvergleich zu einer jährlichen Betrachtung: **Zinsmarge × Restschuld × Restlaufzeit × 0,85**. Für eine exakte Berechnung brauchen Sie die **individuelle Tilgungsplanung** (die Restschuld sinkt ja durch die laufenden Raten). Unsere Schätzung ist absichtlich konservativ — die tatsächliche Forderung der Bank liegt oft **nahe**, aber selten **höher**.
-
-**Der wichtigste Fall: gar keine VFE**
-
-Wenn der **aktuelle Marktzins über Ihrem Vertragszins** liegt (wie es im Umfeld steigender Zinsen seit 2022 oft der Fall ist), hat die Bank **keinen Zinsschaden** — sie kann das Geld sogar profitabler anlegen. In diesem Fall darf sie **keine Vorfälligkeitsentschädigung verlangen**. Manche Banken versuchen dennoch, eine pauschale "Bearbeitungsgebühr" durchzusetzen — auch das ist rechtlich oft angreifbar. Lassen Sie sich jede VFE-Forderung schriftlich begründen und prüfen Sie den Brief notfalls durch einen Anwalt oder die Verbraucherzentrale.
-
-**Das 10-Jahres-Sonderkündigungsrecht nach § 489 BGB — der wichtigste Spartipp**
-
-Viele Immobilienkredite haben eine Zinsbindung von 15, 20 oder mehr Jahren. Nach § 489 Abs. 1 Nr. 2 BGB können Sie den Kredit aber **immer nach 10 Jahren** kündigen — gerechnet ab der **vollständigen Auszahlung** des Darlehens. Die Kündigungsfrist beträgt **6 Monate**. Wichtig: **Es fällt keinerlei Vorfälligkeitsentschädigung an.** Sie zahlen lediglich die Restschuld und beenden den Vertrag. Dieses Sonderkündigungsrecht ist unabdingbar — kein Kreditvertrag kann es wirksam ausschließen.
-
-Prüfen Sie also **vor** jeder Überlegung zur Umschuldung: Wann genau wurde das Darlehen ausgezahlt? Sind die 10 Jahre schon um oder fast erreicht? Wenn ja, warten Sie ggf. die paar Monate ab und sparen sich die komplette VFE. Bei der Umschuldung danach kann der [Kreditrechner](/finanzen/kreditrechner) oder unser [Baufinanzierungsrechner](/wohnen/baufinanzierung-rechner) helfen, die neuen Raten zu kalkulieren.
-
-**Wann lohnt sich die vorzeitige Ablösung trotz VFE?**
-
-Eine Umschuldung lohnt sich nur, wenn die **Zinsersparnis über die Restlaufzeit größer ist als die VFE plus alle Nebenkosten** (Notar, Grundbuch, neue Bankgebühren). Faustregel: Bei einer Zinsdifferenz von mindestens **1 Prozentpunkt** und einer Restlaufzeit von mindestens **3 Jahren** sollte sich die Rechnung prüfen lassen. Bei einem Hausverkauf gilt: Die VFE ist in der Regel auch nicht verhandelbar — sie wird dann direkt vom Verkaufserlös abgezogen. In den ersten 10 Jahren gibt es aber ein wichtiges Sonderrecht: Wer die Immobilie aus einem **berechtigten Grund** veräußern muss (z. B. berufsbedingter Umzug, Trennung), kann die VFE in einigen Fällen mindern lassen.
-
-**Was unser Rechner liefert**
-
-- Schätzung der VFE nach der Aktiv-Passiv-Methode
-- Automatische Erkennung: Bei **Zinsmarge ≤ 0** keine VFE
-- Vollständiger Rechenweg mit Zwischenschritten
-- Hinweis auf das **10-Jahres-Sonderkündigungsrecht**
-- Bearbeitungsgebühr-Pauschale mit eingerechnet
-
-**Wichtiger Hinweis:** Unsere Berechnung ist eine **Schätzung**. Die exakte VFE-Berechnung hängt von der individuellen Tilgungsstruktur, der Art der Wiederanlage (Hypothekenpfandbriefe vs. Staatsanleihen) und dem konkreten Vertrag ab. Lassen Sie sich die Forderung der Bank **immer schriftlich** detailliert aufschlüsseln und ziehen Sie im Zweifel die Verbraucherzentrale oder einen Fachanwalt für Bankrecht hinzu.`,
     faq: [
       {
         frage: 'Was ist eine Vorfälligkeitsentschädigung?',
@@ -3913,69 +3247,7 @@ Eine Umschuldung lohnt sich nur, wenn die **Zinsersparnis über die Restlaufzeit
     metaDescription: 'Energiekosten pro Gerät berechnen: Stromverbrauch und Kosten pro Tag, Monat und Jahr kostenlos ermitteln — für bis zu 10 Geräte.',
     keywords: ['energiekosten rechner', 'stromkosten gerät berechnen', 'watt in kwh', 'verbrauch berechnen', 'standby kosten', 'kühlschrank stromkosten', 'waschmaschine stromkosten', 'stromverbrauch haushalt', 'kwh kosten'],
     icon: '⚡',
-    formel: 'kWh/Jahr = Leistung(W) × Stunden/Tag × Nutzungstage/Woche × 52 / 1000. Kosten/Jahr = kWh/Jahr × Strompreis(ct/kWh) / 100.',
     beispiel: 'PC im Homeoffice: 200 W × 6 h × 5 Tage × 52 / 1000 = 312 kWh/Jahr. Bei 37 ct/kWh (BDEW-Mittel 2026) = 115,44 €/Jahr — also ca. 9,60 €/Monat nur für den Arbeitsrechner.',
-    erklaerung: `**Energiekosten-Rechner — was Ihre Haushaltsgeräte wirklich kosten**
-
-Die Strompreise in Deutschland gehören zu den höchsten in Europa. Bei rund **37 ct/kWh** (BDEW-Mittel 2026, Grundversorgung teils über 40 ct) wird jedes Gerät im Haushalt zu einem echten Kostenfaktor — und nicht selten sind es die unscheinbaren Dauerläufer wie Router, Aquariumpumpe oder alte Gefriertruhe, die am Ende des Jahres die größten Löcher in die Stromrechnung reißen. Unser **Energiekosten-Rechner** zeigt Ihnen auf einen Blick, was einzelne Geräte kosten, welche die größten Stromfresser sind und wo Sparen lohnt.
-
-**Wichtig: Anschlussleistung vs. tatsächlicher Verbrauch**
-
-Die auf einem Gerät angegebene Watt-Zahl ist die maximale Anschlussleistung, nicht der Dauerverbrauch. Geräte mit Compressor-Cycling (Kühlschrank, Gefriertruhe, Wärmepumpe) laufen typischerweise nur 30–50 % der Zeit unter Volllast. Für eine realistische Schätzung Verbrauchsmessgerät nutzen oder Herstellerangabe (kWh/Jahr) verwenden.
-
-**Die Formel ist einfacher als gedacht**
-
-Die Berechnung folgt einer simplen Logik: **Leistung (in Watt) × Nutzungsdauer (in Stunden) = Energie (in Wattstunden)**. Geteilt durch 1.000 kommt man zu Kilowattstunden (kWh) — der Einheit, die auf Ihrer Stromrechnung steht. Multipliziert mit dem Strompreis ergibt sich die Geldsumme. Wer sein Gerät nicht jeden Tag nutzt (Waschmaschine, Spülmaschine, Trockner), rechnet mit **Nutzungstagen pro Woche** — das bildet den tatsächlichen Haushalt realistisch ab.
-
-Eine Faustregel für die Überschlagsrechnung: **1 Watt Dauerlast = ca. 3,24 € Stromkosten pro Jahr** (bei 37 ct/kWh, 24/7). Ihr WLAN-Router mit 10 W kostet also rund **32 €/Jahr**, Ihr altes 20-W-Netzteil am Ladestecker sogar fast **65 €** — und zwar ohne dass Sie etwas davon haben.
-
-**Die größten Stromfresser im Haushalt**
-
-Nach Daten des Bundesumweltamtes (UBA) entfallen im Durchschnittshaushalt die meisten Stromkosten auf:
-
-- **Kühl- und Gefriergeräte** (ca. 20–30 % der Stromrechnung) — laufen 24/7, moderne A-Klasse-Geräte verbrauchen nur noch 80–150 kWh/Jahr, alte Geräte über 400 kWh.
-- **Waschen, Trocknen, Spülen** (ca. 15–25 %) — der Trockner ist mit Abstand der größte Einzelposten. Wer stattdessen Wäscheständer nutzt, spart schnell 200 €/Jahr.
-- **Kochen und Backen** (ca. 10–15 %) — Induktion ist deutlich effizienter als Ceran, der Backofen im Umluftbetrieb sparsamer als Ober-/Unterhitze.
-- **Unterhaltungselektronik und IT** (ca. 15–20 %) — großer Fernseher (50"+), Gaming-PC und mehrere Streaming-Geräte summieren sich.
-- **Beleuchtung** (ca. 5–10 %) — LED ist Pflicht; gegenüber Glühbirnen sparen Sie 85 % Strom.
-- **Stand-by-Verbrauch** (ca. 5–10 %) — unsichtbar, aber teuer. Eine einzige Mehrfachsteckdose mit Schalter kann 50–100 €/Jahr sparen.
-
-**Was die Energieeffizienzklasse bringt**
-
-Seit 2021 gilt die neue EU-Energielabel-Skala **A bis G** (ohne die alten A+, A++, A+++). Die Einsparpotenziale sind beeindruckend:
-
-- **Kühlschrank** Klasse G → A: ca. **60 % weniger Stromverbrauch**, spart über 10 Jahre rund 800 €.
-- **Waschmaschine** Klasse F → A: ca. **30–40 % weniger**, plus weniger Wasserverbrauch.
-- **Trockner** mit Wärmepumpe statt Kondensationstrockner: **bis zu 50 % Ersparnis**.
-- **Geschirrspüler** im Eco-Modus: 20–30 % weniger Strom und Wasser.
-
-Die höheren Anschaffungskosten (oft 100–300 € Aufpreis für A-Klasse) amortisieren sich bei täglich genutzten Geräten meist in 3–5 Jahren. Unser Rechner hilft Ihnen, diesen Vergleich konkret für Ihre Nutzung durchzurechnen — einfach zweimal rechnen: einmal mit den alten Wattwerten, einmal mit den neuen.
-
-**Typische Leistungswerte zum Abgleich**
-
-Nicht jeder weiß aus dem Kopf, wie viel Watt ein Gerät zieht. Die wichtigsten Richtwerte:
-
-- Kühlschrank (A-Klasse): 80–150 W im Durchschnitt (Kompressor läuft nicht dauerhaft)
-- Waschmaschine: 1.800–2.500 W (nur während des Waschgangs, ca. 1–2 Stunden)
-- Trockner (Wärmepumpe): 1.000–1.500 W, Kondensation 2.500–3.000 W
-- Geschirrspüler: 1.500–2.000 W pro Spülgang (ca. 1–1,5 h)
-- Elektroherd + Backofen: 2.000–3.500 W (bei voller Auslastung)
-- LED-Lampe: 5–15 W (ersetzt 40–100-W-Glühbirne)
-- Smart-TV (55 Zoll): 80–150 W
-- Gaming-PC: 300–600 W unter Last, 50–100 W Idle
-- WLAN-Router: 6–12 W (24/7)
-- Kaffeevollautomat: 1.300–1.500 W (nur beim Brühen, ca. 2–3 Min. pro Tasse)
-
-**Spartipps, die sich sofort auszahlen**
-
-1. **Stand-by killen:** Mehrfachsteckdosen mit Schalter oder smarte Stecker (Wemo, Fritz-DECT) schalten Entertainment-Ecke und Kaffeeautomat nachts komplett aus. Einsparung: 50–150 €/Jahr.
-2. **Waschen bei 30 °C:** Moderne Waschmittel reinigen auch kalt zuverlässig. Einsparung: ca. 30 % Strom pro Waschgang.
-3. **Trockner weglassen:** Ein Wäscheständer kostet 30 € einmalig — der Trockner im Dauerbetrieb 200–300 €/Jahr.
-4. **Alte Kühlgeräte rauswerfen:** Eine 20 Jahre alte Gefriertruhe verbraucht oft das Dreifache eines neuen A-Geräts. Amortisation in 4–5 Jahren.
-5. **LED statt Glühbirne:** Einmalige Umrüstung, danach jährlich 50–100 € weniger Beleuchtungskosten.
-6. **Stromtarif wechseln:** Wer in der teuren Grundversorgung steckt, zahlt oft 15–20 % zu viel. Ein Wechsel über den [Stromvergleich-Rechner](/wohnen/stromvergleich-rechner) bringt schnell 200–500 €/Jahr.
-
-Für den gesamten Haushaltsverbrauch nutzen Sie unseren [Stromkosten-Rechner](/wohnen/stromkosten-rechner), der mit Personenzahl und Haushaltsgröße arbeitet. Wer den Verbrauch selbst produzieren will, findet im [Photovoltaik-Rechner](/wohnen/photovoltaik-rechner) die passende Dimensionierung für die eigene Dachanlage.`,
     faq: [
       {
         frage: 'Wie rechne ich Watt in kWh und Stromkosten um?',
@@ -4129,47 +3401,7 @@ Für den gesamten Haushaltsverbrauch nutzen Sie unseren [Stromkosten-Rechner](/w
     metaDescription: 'Fliesenbedarf berechnen: Anzahl Fliesen, Kleber und Fugenmasse für Ihre Fläche — mit Verschnitt, Verlegemuster und Einkaufsliste. Kostenlos.',
     keywords: ['fliesenbedarf rechner', 'fliesen berechnen', 'fliesenbedarf berechnen', 'fliesenkleber berechnen', 'fugenmasse berechnen', 'fliesen pro qm', 'verschnitt fliesen', 'fliesenrechner'],
     icon: '🧱',
-    formel: 'Fliesen pro m² = 10.000 ÷ (Länge cm × Breite cm) | Anzahl = Fläche × Fliesen/m² × (1 + Verschnitt%) | Kleber ≈ 4 kg/m² | Fuge ≈ 0,75 kg/m²',
     beispiel: 'Beispiel: 7,5 m² mit 30×60 cm Fliesen, gerade verlegt (5 % Verschnitt) → 44 Fliesen, 2 Säcke Kleber (25 kg), 2 Gebinde Fugenmasse (5 kg)',
-    erklaerung: `**Fliesenbedarf berechnen — Schritt für Schritt**
-
-Bevor Sie Fliesen kaufen, sollten Sie genau wissen, wie viele Fliesen, wie viel Kleber und wie viel Fugenmasse Sie brauchen. Unser Fliesenbedarf-Rechner nimmt Ihnen die Arbeit ab: Geben Sie Ihre Fläche und das Fliesenformat ein, wählen Sie das Verlegemuster — und erhalten Sie eine komplette Einkaufsliste mit Materialkosten.
-
-**So berechnen Sie die Fliesenanzahl**
-
-Die Formel ist einfach: Teilen Sie 10.000 durch das Produkt aus Fliesenlänge und -breite (in cm), um die Fliesen pro Quadratmeter zu erhalten. Bei 30 × 60 cm ergibt das 10.000 ÷ 1.800 ≈ 5,56 Fliesen/m². Multiplizieren Sie mit der Fläche und dem Verschnittaufschlag, und Sie haben die benötigte Stückzahl.
-
-**Verschnitt richtig einplanen**
-
-Verschnitt entsteht beim Zuschneiden an Wänden, Ecken und Aussparungen. Je nach Verlegemuster fällt unterschiedlich viel Verschnitt an:
-- **Gerade verlegt:** ca. 5 % Verschnitt — das sparsamste Muster, ideal für Anfänger.
-- **Drittelverband:** ca. 10 % — die Fliesen werden um ein Drittel versetzt, was dynamischer wirkt und den Verschnitt leicht erhöht.
-- **Diagonal verlegt:** ca. 15 % — optisch sehr ansprechend, aber mit dem höchsten Materialverbrauch. Alle Randfliesen müssen diagonal geschnitten werden.
-
-Bei verwinkelte Räumen, vielen Aussparungen (Rohre, Heizkörpernischen) oder großformatigen Fliesen in kleinen Räumen sollten Sie zusätzlich 2–5 % aufschlagen.
-
-**Fliesenkleber — wie viel brauche ich?**
-
-Die Klebermenge hängt vom Untergrund, der Fliesengröße und der Zahnspachtelgröße ab. Als Richtwert gelten 3–5 kg pro Quadratmeter, unser Rechner arbeitet mit 4 kg/m². Bei großformatigen Fliesen (ab 60 × 60 cm) wird empfohlen, sowohl den Untergrund als auch die Fliesenrückseite zu spachteln (Buttering-Floating-Verfahren) — dann steigt der Bedarf auf 5–6 kg/m². Fliesenkleber wird in 25-kg-Säcken verkauft.
-
-**Fugenmasse — der richtige Bedarf**
-
-Der Bedarf an Fugenmasse liegt bei ca. 0,5–1 kg pro Quadratmeter, abhängig von Fugenbreite und Fliesengröße. Kleine Fliesen haben mehr Fugenlänge pro m², große weniger. Unser Rechner kalkuliert mit 0,75 kg/m² als Mittelwert. Fugenmasse gibt es in 5-kg-Gebinden. Wählen Sie die Fugenfarbe passend zur Fliese — graue Fugen auf hellen Fliesen wirken oft schmutziger als helle Fugen.
-
-**Gängige Fliesenformate**
-
-- **30 × 30 cm:** Klassiker für Bodenfliesen in Bädern und Küchen. Universell einsetzbar, einfach zu verlegen.
-- **30 × 60 cm:** Modernes Standardformat. Wirkt durch die Rechteckform großzügiger und eignet sich für Boden und Wand.
-- **60 × 60 cm:** Großformat für moderne Böden. Erfordert einen sehr ebenen Untergrund und das Buttering-Floating-Verfahren.
-- **20 × 25 cm:** Typisches Wandfliesenformat in Küchen und Bädern. Preisgünstig und einfach zu verarbeiten.
-
-**Materialkosten kalkulieren**
-
-Fliesen kosten je nach Material und Qualität zwischen 10 und 80 €/m². Einfache Keramikfliesen gibt es ab 10–15 €/m², Feinsteinzeug in Holzoptik für 20–35 €/m², Naturstein ab 40 €/m². Hinzu kommen Kleber (ca. 18 € pro 25-kg-Sack) und Fugenmasse (ca. 12 € pro 5-kg-Gebinde). Vergessen Sie nicht Silikon für Dehnungsfugen, Kreuzabstandhalter und ggf. Grundierung — diese Posten sind im Rechner nicht enthalten.
-
-**Tipps für den Einkauf**
-
-Kaufen Sie immer 1–2 Fliesen extra als Reserve. Fliesen aus unterschiedlichen Chargen können leichte Farbabweichungen haben. Wenn später eine Fliese beschädigt wird und Ihre Charge ausverkauft ist, haben Sie ein Problem. Die Kartonanzahl Ihres gewählten Formats finden Sie auf der Verpackung — teilen Sie die Gesamtmenge durch die Stückzahl pro Karton.`,
     faq: [
       {
         frage: 'Wie berechne ich die Anzahl Fliesen pro Quadratmeter?',
@@ -4332,40 +3564,7 @@ Kaufen Sie immer 1–2 Fliesen extra als Reserve. Fliesen aus unterschiedlichen 
     metaDescription: 'Laminat-Rechner: Pakete, Verschnitt, Trittschalldämmung und Sockelleisten kostenlos berechnen — mit Verlegemuster-Auswahl und Einkaufsliste.',
     keywords: ['laminat rechner', 'laminat berechnen', 'parkett rechner', 'laminat pakete berechnen', 'verschnitt laminat', 'laminat m2 rechner', 'laminatbedarf', 'parkett bedarf'],
     icon: '🪵',
-    formel: 'Benötigte Fläche = Raumfläche × (1 + Verschnitt%) | Pakete = ⌈Fläche ÷ Paketgröße⌉ | Trittschalldämmung = Fläche × 1,05 | Sockelleisten = Umfang × 1,10',
     beispiel: 'Beispiel: 20 m² Raum, 2,49 m²/Paket, gerade verlegt (10 % Verschnitt) → 9 Pakete (22,41 m²), 270 € Materialkosten, 21 m² Trittschalldämmung',
-    erklaerung: `**Laminat- und Parkettbedarf berechnen — Schritt für Schritt**
-
-Ob Laminat, Parkett oder Vinyl-Klickboden: Vor dem Kauf müssen Sie wissen, wie viele Pakete Sie brauchen. Unser Laminat-Rechner kalkuliert die benötigte Menge inklusive Verschnitt, Trittschalldämmung und Sockelleisten — damit Sie weder zu viel noch zu wenig kaufen.
-
-**So funktioniert die Berechnung**
-
-Die Paketanzahl ergibt sich aus Ihrer Raumfläche plus Verschnitt, geteilt durch die Paketgröße (steht auf der Verpackung, typisch 2,0–3,0 m²). Da Sie keine halben Pakete kaufen können, wird immer aufgerundet. Der Rechner zeigt Ihnen auch den Überschuss, den Sie als Reserve behalten sollten.
-
-**Verschnitt nach Verlegemuster**
-
-Das Verlegemuster bestimmt, wie viel Material beim Zuschneiden verloren geht:
-- **Gerade / Schiffsboden (10 %):** Das sparsamste Muster. Die Dielen werden parallel zur längsten Wand verlegt. Reststücke von einer Reihe können oft die nächste beginnen. Ideal für Anfänger und große Räume.
-- **Diagonal (15 %):** Die Dielen verlaufen im 45°-Winkel zu den Wänden. Optisch reizvoll, besonders in schmalen Fluren, da der Raum breiter wirkt. Allerdings müssen an jedem Wandanschluss schräge Schnitte gesetzt werden — das erhöht den Verschnitt.
-- **Fischgrät (20 %):** Die klassischste Parkett-Variante. Kurze Stäbe werden V-förmig verlegt. Erfordert spezielle Fischgrät-Dielen und den höchsten Verschnitt, da viele Passschnitte nötig sind.
-
-In verwinkelten Räumen mit Erkern, Nischen oder Säulen sollten Sie zusätzlich 3–5 % aufschlagen.
-
-**Trittschalldämmung — wann und wie viel?**
-
-Bei Laminat und Klick-Parkett wird eine Trittschalldämmung unter den Boden gelegt — sie reduziert Gehgeräusche und gleicht kleine Unebenheiten aus. Die Bahnen werden mit ca. 5 % Überlappung verlegt, daher rechnet unser Tool Raumfläche × 1,05. Ist die Trittschalldämmung bereits in die Diele integriert (bei vielen Premium-Laminaten der Fall), können Sie diesen Posten ignorieren. Gängige Materialien sind PE-Schaum (günstig), Kork (natürlich, guter Schallschutz) und XPS (feuchtigkeitsresistent).
-
-**Sockelleisten — den Raumumfang kennen**
-
-Sockelleisten verdecken die Dehnungsfuge am Rand (ca. 8–10 mm). Der Rechner berechnet den Raumumfang und addiert 10 % Reserve für Gehrungsschnitte und Verschnitt. Sockelleisten werden in Stücken von typisch 2,40 m verkauft. Ziehen Sie Türöffnungen nicht ab — das Material wird für die Abschlüsse an den Türzargen gebraucht.
-
-**Materialkosten im Überblick**
-
-Laminat gibt es in großer Preisspanne: Einfache Klasse-31-Böden kosten 5–10 € pro m², robuste Klasse-33-Laminatböden 10–20 € pro m². Echtholz-Parkett (Zweischicht) liegt bei 20–50 € pro m², Dreischicht-Parkett bei 30–80 €. Pro Paket zahlen Sie je nach Hersteller und Format 15–60 €. Hinzu kommen Trittschalldämmung (2–5 €/m²) und Sockelleisten (1–4 €/lfdm).
-
-**Tipps für den Einkauf**
-
-Kaufen Sie ein Paket extra als Reserve — für spätere Reparaturen. Laminat aus verschiedenen Produktionschargen kann Farbabweichungen haben. Lagern Sie die Pakete vor dem Verlegen mindestens 48 Stunden im Raum, damit sich das Material an Temperatur und Luftfeuchtigkeit anpasst (Akklimatisierung). Auf mineralischen Untergründen (Estrich) ist eine Dampfbremse unter der Trittschalldämmung Pflicht.`,
     // W19-Goldstandard: laminat-rechner auf volle Tiefe (15 Bausteine, ~1.560 W), Leitformat
     // „beispielrechnung" 5× dominant. MATERIAL-Bedarf inkl. Verschnitt — disjunkt zu
     // quadratmeter (Wohnfläche/WoFlV). Logik aus lib/berechnungen/laminat.ts gespiegelt:
@@ -4560,41 +3759,7 @@ Kaufen Sie ein Paket extra als Reserve — für spätere Reparaturen. Laminat au
     metaDescription: 'Betonmenge kostenlos berechnen — Volumen, Gewicht und Säcke für Fundament, Bodenplatte oder Pfosten. Mit Zuschlag und Kostenvergleich.',
     keywords: ['beton rechner', 'betonmenge berechnen', 'beton säcke', 'fundament beton', 'beton kubikmeter', 'fertigbeton', 'lieferbeton'],
     icon: '🧱',
-    formel: 'Volumen = L × B × H (Quader) | π × (D/2)² × H (Zylinder) | Gewicht = Volumen × 2.400 kg/m³',
     beispiel: 'Bodenplatte 3 × 2 × 0,15 m = 0,9 m³ + 10 % = 0,99 m³. Gewicht: 2.376 kg. Säcke (25 kg): 83 Stück.',
-    erklaerung: `**Was berechnet der Beton-Rechner?**
-
-Der Rechner ermittelt die benötigte Betonmenge für Ihr Bauprojekt. Er berechnet das Volumen in Kubikmetern, das Gewicht, die Anzahl der Fertigbeton-Säcke und die ungefähren Materialkosten. Ab 0,5 m³ empfiehlt der Rechner Lieferbeton als günstigere und bequemere Alternative.
-
-**Drei Formen für verschiedene Projekte**
-
-- **Rechteckig:** Für Bodenplatten, Streifenfundamente, Terrassen und Stufen. Maße in Länge × Breite × Höhe/Dicke.
-- **Rund (Zylinder):** Für Punktfundamente, Zaunpfosten und Säulen. Maße in Durchmesser × Höhe.
-- **L-Form:** Für L-förmige Fundamente oder Stützwände. Zwei Schenkel mit eigenen Maßen plus gemeinsame Dicke.
-
-**Betongewicht und Dichte**
-
-Normalbeton hat eine Dichte von etwa 2.400 kg/m³. Ein Kubikmeter Beton wiegt also 2,4 Tonnen. Das ist wichtig für Transport und Statik. Leichtbeton (1.200–2.000 kg/m³) und Schwerbeton (über 2.600 kg/m³) haben andere Dichten — der Rechner kalkuliert mit Normalbeton.
-
-**Sackware vs. Lieferbeton**
-
-Fertigbeton in Säcken (Trockenmischung, nur Wasser hinzufügen) ist praktisch für kleine Projekte. Ein 25-kg-Sack ergibt etwa 0,012 m³ Beton, ein 40-kg-Sack etwa 0,019 m³. Ab 0,5 m³ wird Lieferbeton (Transportbeton per LKW) empfohlen:
-
-- **Preis:** Lieferbeton kostet 80–120 €/m³, Sackware 5–8 €/25 kg. Für 1 m³ brauchen Sie 84 Säcke à 25 kg = 420–670 € — Lieferbeton ist ab 0,5 m³ deutlich günstiger.
-- **Qualität:** Lieferbeton wird im Werk gemischt und hat eine gleichmäßige Qualität. Sackware hängt von der Mischung vor Ort ab.
-- **Aufwand:** 84 Säcke à 25 kg = 2.100 kg händisch anmischen. Lieferbeton wird per Pumpe oder Rutsche eingebracht.
-
-**Zuschlag einplanen**
-
-Der Rechner bietet 0 %, 5 % und 10 % Zuschlag. 10 % ist empfohlen, weil: Schalungen nie perfekt sind, Unebenheiten im Untergrund zusätzliches Volumen erfordern und Schwund beim Mischen und Einbringen entsteht. Lieber zu viel als zu wenig — Restbeton lässt sich für kleine Projekte verwenden.
-
-**Tipps für Heimwerker**
-
-- Bei Fundamenten: Schotterschicht (10–15 cm) als frostfreie Gründung unter dem Beton einplanen.
-- Beton nicht bei Frost verarbeiten — Mindesttemperatur 5 °C.
-- Frischbeton innerhalb von 90 Minuten verarbeiten.
-- Bei größeren Flächen: Bewehrung (Baustahlmatte) einlegen, um Risse zu vermeiden.
-- Beton nach dem Einbringen verdichten (Rüttelflasche oder Stochern) und 7 Tage feucht halten.`,
     faq: [
       {
         frage: 'Wie viel Beton brauche ich für ein Fundament?',
@@ -4769,50 +3934,7 @@ Der Rechner bietet 0 %, 5 % und 10 % Zuschlag. 10 % ist empfohlen, weil: Schalun
     metaDescription: 'Estrich- und Putzmenge kostenlos berechnen — Zementestrich, Fließestrich, Kalkzement- und Gipsputz. Gewicht, Säcke und Kosten.',
     keywords: ['estrich rechner', 'estrich menge berechnen', 'estrich bedarf', 'putz rechner', 'verputz menge', 'zementestrich', 'fließestrich'],
     icon: '🏗️',
-    formel: 'Volumen = Fläche × Dicke (m) | Gewicht = Volumen × Dichte | Säcke = Gewicht × 1,05 ÷ Sackgewicht',
     beispiel: '20 m² Zementestrich, 50 mm: Volumen 1,0 m³, Gewicht 2.000 kg, 53 Säcke à 40 kg (~424 €).',
-    erklaerung: `**Was berechnet der Estrich-Rechner?**
-
-Der Rechner ermittelt den Materialbedarf für Estrich (Bodenbeschichtung) und Putz/Mörtel (Wandbeschichtung). Er berechnet Volumen, Gewicht, Anzahl der Säcke und ungefähre Materialkosten — jeweils mit 5 % Reserve für Verschnitt und Schwund.
-
-**Estrich — der Boden unter dem Boden**
-
-Estrich ist die Ausgleichsschicht zwischen Rohboden (Betondecke) und Bodenbelag (Fliesen, Laminat, Parkett). Er gleicht Unebenheiten aus, nimmt die Fußbodenheizung auf und verteilt Lasten gleichmäßig.
-
-- **Zementestrich (CT):** Der Klassiker. Dichte ca. 2.000 kg/m³. Schichtdicke meist 45–65 mm. Belastbar nach 28 Tagen, begehbar nach 3 Tagen. Robust und feuchtigkeitsbeständig — auch für Nassräume geeignet.
-- **Fließestrich (CAF/CA):** Selbstnivellierende Calciumsulfat-Mischung. Dichte ca. 1.800 kg/m³. Ideal für Fußbodenheizung (bessere Wärmeleitfähigkeit). Nicht für Nassräume ohne zusätzliche Abdichtung.
-
-**Putz und Mörtel — die Wandbeschichtung**
-
-Putz wird auf Mauerwerk oder Beton aufgetragen und dient als Grundlage für Tapete, Farbe oder Fliesen.
-
-- **Kalkzement-Putz:** Dichte ca. 1.600 kg/m³. Universell einsetzbar, auch in Feuchträumen. Schichtdicke innen 10–15 mm, außen 15–20 mm.
-- **Gipsputz:** Dichte ca. 1.200 kg/m³. Leichter zu verarbeiten, glattere Oberfläche. Nur für trockene Innenräume. Schichtdicke 10–15 mm.
-
-**Schichtdicken — Richtwerte**
-
-- Estrich auf Fußbodenheizung: 45–50 mm (über den Rohren)
-- Estrich ohne Heizung: 35–45 mm
-- Innenputz: 10–15 mm
-- Außenputz: 15–20 mm (zwei Lagen: Unter- und Oberputz)
-
-**Materialkosten — Richtwerte**
-
-Preise schwanken je nach Region und Anbieter:
-- Zementestrich (40 kg): ca. 7–10 €/Sack
-- Fließestrich (25 kg): ca. 10–15 €/Sack
-- Kalkzement-Putz (30 kg): ca. 8–12 €/Sack
-- Gipsputz (30 kg): ca. 5–9 €/Sack
-
-Der Rechner kalkuliert mit Durchschnittspreisen. Großmengen im Baustoffhandel sind oft 20–30 % günstiger als Baumarktpreise.
-
-**Tipps für die Verarbeitung**
-
-- Untergrund muss sauber, tragfähig und frei von losen Teilen sein.
-- Grundierung (Tiefengrund) verbessert die Haftung und reguliert das Saugverhalten.
-- Bei Estrich: Randdämmstreifen an allen Wänden und Durchbrüchen.
-- Trocknungszeit beachten: Zementestrich braucht ca. 1 cm Dicke = 1 Woche Trocknungszeit.
-- Restfeuchte vor dem Verlegen des Bodenbelags messen (CM-Messung).`,
     faq: [
       {
         frage: 'Wie dick muss Estrich sein?',
@@ -4976,44 +4098,7 @@ Der Rechner kalkuliert mit Durchschnittspreisen. Großmengen im Baustoffhandel s
     metaDescription: 'Balkonkraftwerk kostenlos berechnen — Ertrag, Eigenverbrauch, Amortisation und CO₂-Ersparnis für 600W/800W Anlagen. Mit Spartipps.',
     keywords: ['balkonkraftwerk rechner', 'balkon solar rechner', 'balkonkraftwerk ertrag', 'balkonkraftwerk amortisation', '800 watt balkonkraftwerk', 'mini pv anlage', 'stecker solaranlage'],
     icon: '☀️',
-    formel: 'Jahresertrag = kWp × 950 × Ausrichtung × Aufstellung | Eigenverbrauch = Ertrag × 30 % | Ersparnis = Eigenverbrauch × Strompreis',
     beispiel: '800 W, Süd, Aufständerung: 0,8 × 950 × 1,0 × 0,9 = 684 kWh/Jahr. Eigenverbrauch 205 kWh × 33 ct (Festpreis-Neuvertrag 2026) = 67,65 € Ersparnis.',
-    erklaerung: `**Was berechnet der Balkon-Solar-Rechner?**
-
-Der Rechner ermittelt den erwarteten Jahresertrag, den nutzbaren Eigenverbrauch und die finanzielle Amortisation eines Balkonkraftwerks. Er berücksichtigt Anlagenleistung, Ausrichtung, Aufstellungsart und Ihren individuellen Stromverbrauch und Strompreis.
-
-**Balkonkraftwerk — was ist das?**
-
-Ein Balkonkraftwerk (auch Mini-PV-Anlage oder Steckersolargerät) ist eine kleine Photovoltaikanlage, die direkt über eine Steckdose ins Hausnetz einspeist. Mit dem **Solarpaket I** (Inkrafttreten 16.05.2024) wurde die Bagatellgrenze von 600 W auf **800 Watt Wechselrichterleistung** angehoben und die Anmeldung deutlich vereinfacht: Eine kurze Online-Eintragung im Marktstammdatenregister (MaStR) der Bundesnetzagentur reicht aus, ein Elektriker ist nicht mehr nötig.
-
-**Ertrag — wie viel Strom produziert die Anlage?**
-
-In Deutschland erzeugt eine optimal ausgerichtete PV-Anlage etwa 950 kWh pro kWp (Kilowatt-Peak) und Jahr. Für ein 800-W-Balkonkraftwerk ergibt das theoretisch 760 kWh/Jahr. Der tatsächliche Ertrag hängt von Ausrichtung und Aufstellung ab:
-
-- **Ausrichtung:** Süd = 100 %, Süd-West/Ost = 85 %, West/Ost = 70 %, Nord = 60 %. Süd ist ideal, West/Ost erzeugt morgens/abends mehr (passt oft besser zum Verbrauchsprofil). Nord-BKW lohnen sich bei guter Aufständerung weiterhin — der Branchenkonsens (ADAC, SolarScouts/PVGIS, Anker SOLIX) liegt hier bei rund 60 % vom Süd-Optimum.
-- **Aufstellung:** Senkrecht an der Brüstung = 70 % (schlechterer Winkel), Aufständerung 30° = 90 % (fast ideal), Flachdach/Garten = 100 % (optimaler Winkel möglich).
-
-**Eigenverbrauch — das Schlüsselthema**
-
-Balkonkraftwerke speisen überschüssigen Strom ins Netz ein, erhalten dafür aber keine Vergütung (keine EEG-Einspeisevergütung). Nur der selbst verbrauchte Strom spart Geld. Ohne Speicher liegt die Eigenverbrauchsquote bei etwa 30 % — das heißt, 70 % des erzeugten Stroms gehen ungenutzt ins Netz.
-
-Durch gezieltes Lastmanagement (Waschmaschine, Geschirrspüler und Trockner tagsüber bei Sonne laufen lassen) lässt sich die Quote auf 40–50 % steigern. Mit einem Batteriespeicher sind 60–80 % möglich, aber die Speicher kosten 300–600 € zusätzlich und verlängern die Amortisation.
-
-**Amortisation — wann rechnet sich die Anlage?**
-
-Die Amortisationszeit hängt vom Strompreis und der Eigenverbrauchsquote ab. Bei 800 W, Südausrichtung mit Aufständerung und 33 ct/kWh Strompreis (Festpreis-Neuvertrag 2026): ca. 8–10 Jahre. Bei 37 ct/kWh (BDEW-Mittel) entsprechend kürzer. Danach produziert die Anlage reinen Gewinn. Die Lebensdauer moderner Solarmodule liegt bei 25–30 Jahren — über die gesamte Laufzeit spart ein 800-W-Balkonkraftwerk typischerweise 1.000–1.700 €.
-
-**CO₂-Ersparnis**
-
-Jede erzeugte Kilowattstunde Solarstrom spart ca. 0,38 kg CO₂ gegenüber dem deutschen Strommix ein. Ein 800-W-Balkonkraftwerk vermeidet damit etwa 250–290 kg CO₂ pro Jahr — über 20 Jahre sind das rund 5–6 Tonnen.
-
-**Rechtliche Rahmenbedingungen (Stand 2026)**
-
-- Anlagen bis 800 W Wechselrichterleistung dürfen ohne Elektriker installiert werden.
-- Vereinfachte Anmeldung über das Marktstammdatenregister (MaStR) beim Netzbetreiber.
-- Der alte Ferraris-Zähler darf rückwärtslaufen, bis der Netzbetreiber einen Zweirichtungszähler einbaut (kostenlos).
-- **Wohnungseigentümer (WEG):** § 20 Abs. 2 Nr. 5 WEG — Anspruch auf Zustimmung der Eigentümergemeinschaft als privilegierte bauliche Veränderung.
-- **Mieter:** § 554 BGB — Anspruch auf Zustimmung des Vermieters. Beide Regelungen wurden mit dem Solarpaket I am 16.05.2024 eingeführt. Der Vermieter bzw. die Eigentümergemeinschaft kann nur die Art der Installation regeln (Befestigung, Statik, Brandschutz), die Anbringung selbst aber nicht grundlos verweigern.`,
     faq: [
       {
         frage: 'Wie viel spart ein Balkonkraftwerk pro Jahr?',

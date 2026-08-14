@@ -8,6 +8,48 @@
 
 ---
 
+## 14.08.2026 — Welle 102: 412 tote Felder aus den Configs entfernt — ✅ ABGESCHLOSSEN
+
+`erklaerung` und `formel`, je 206 Stück. Beide wurden seit Welle 101 nirgends mehr gelesen — der
+einzige Leseort war der dort entfernte Fallback-Zweig.
+
+- **Configs von 4.650.555 auf 3.815.055 Bytes — 835.500 Bytes weniger, 18,0 %.**
+- **`beispiel` bleibt vollständig erhalten** (alle 206): `social-caption-builder.ts` baut daraus
+  den Caption-Text für die Social-Pipeline, `dump-rechner-data.ts` übernimmt es.
+- **Auch die beiden Sonderrechner verlieren ihre Felder.** `brutto-netto-rechner` rendert seinen
+  Text als eigenes JSX, `wohngeld-rechner` über eine eigene Route.
+- `formel` im Typ optional, `erklaerung`-Kommentar aus Welle 100 nachgezogen.
+- Nebenbei sichtbar: Der Energiepreis-Wächter meldet nur noch **3 statt 14** Treffer in nicht
+  gerenderten Feldern — elf lagen in den entfernten Feldern, die restlichen drei in `beispiel`.
+
+**Vorabprobe statt Vertrauen ins Muster.** Vor dem Lauf wurde gezählt, was das Muster
+`\n {4}<feld>:` trifft: exakt 412 auf Rechner-Ebene, verteilt genau wie erwartet (24+24 Alltag,
+45+45 Finanzen …). Entscheidend war die Gegenzahl: **1.875 weitere `formel:`-Vorkommen liegen in
+den `contentBloecke`-Bausteinen** und dürfen nicht angefasst werden. Sie stehen tiefer eingerückt
+und wurden vom Muster nicht erfasst.
+
+**Eine Abweichung von zwei, die aufgeklärt wurde.** Nach dem Lauf blieben 1.873 statt 1.875
+`formel:`-Vorkommen. Ursache sind zwei Teilstrings in entferntem Text, keine echten Schlüssel:
+`Faustformel:` im gelöschten `formel`-Wert des Bremsweg-Rechners und `Grundformel:` in einer
+gelöschten `erklaerung`-Prosa. 2.081 − 206 − 2 = 1.873.
+
+**Beleg:** sichtbarer Text auf drei Stichprobenseiten vor und nach dem Schnitt zeichengleich
+(18.467 / 18.682 / 14.777 Zeichen). Kein Hash-Vergleich — Next.js schreibt je Build eine neue
+`buildId`, Byte-Gleichheit gebauter Artefakte ist in diesem Projekt kein taugliches Kriterium
+(Lehre Welle 101). Strukturprobe: `slug 206 · beispiel 206 · erklaerung 0 · formel 0 ·
+Doppelkomma 0 · KommaNachKlammer 0`.
+
+**Lehre.** Beim Entfernen von Objekteigenschaften ist das verwaiste Komma der wahrscheinlichste
+Schaden, und bei 412 Stellen ist er im Diff nicht mit dem Auge zu finden. Die Strukturprobe zählt
+deshalb `,\s*,` und `\{\s*,` mit, nicht nur die Zielfelder. Zweite Hälfte: Wenn eine Kennzahl nach
+einem Massenschnitt um zwei danebenliegt, ist das zu erklären und nicht zu runden — hier waren es
+harmlose Teilstrings, es hätten ebenso gut zwei zerschossene Schlüssel sein können.
+
+**Damit ist die W19-Migration abgeschlossen.** Seit Juni lagen die alten Felder neben den
+Bausteinen; gerendert wurden seit damals nur die Bausteine.
+
+---
+
 ## 14.08.2026 — Welle 101: toter Fallback-Zweig entfernt, Wächter an seine Stelle — ✅ ABGESCHLOSSEN
 
 Noch kein Config-Feld entfernt. Zuerst stirbt der Leser, dann die Daten.

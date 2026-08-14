@@ -76,13 +76,23 @@ export interface RechnerConfig {
   metaDescription: string;
   keywords: string[];
   icon: string;
-  formel: string;
+  /**
+   * Optional seit Welle 102 und in keiner Config mehr gefuehrt. Wird von
+   * nichts gelesen; der einzige Leseort war der in Welle 101 entfernte
+   * Fallback-Zweig. Bleibt im Typ, damit aeltere Zweige nicht brechen.
+   */
+  formel?: string;
+  /**
+   * Bleibt Pflichtfeld: scripts/social-caption-builder.ts baut daraus den
+   * Caption-Text fuer die Social-Pipeline, scripts/dump-rechner-data.ts
+   * uebernimmt es. NICHT entfernen, ohne beide Skripte umzustellen.
+   */
   beispiel: string;
   /**
    * Optional seit Welle 100. Nur noch Rechner OHNE `contentBloecke` brauchen
    * das Feld — aktuell `brutto-netto-rechner` und `wohngeld-rechner`. Bei allen
-   * anderen wird es nicht gerendert (siehe Ternaer in page.tsx) und ab Welle 101
-   * nicht mehr gefuehrt.
+   * anderen wird es nicht gerendert (siehe Ternaer in page.tsx) und seit
+   * Welle 102 in keiner Config mehr gefuehrt.
    */
   erklaerung?: string;
   faq: { frage: string; antwort: string }[];
