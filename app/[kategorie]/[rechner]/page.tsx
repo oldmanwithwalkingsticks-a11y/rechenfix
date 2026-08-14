@@ -191,7 +191,7 @@ export default async function RechnerSeite({ params }: Props) {
               </div>
 
               <div className="max-w-none text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                {config.erklaerung.split('\n\n').map((absatz, i) => {
+                {(config.erklaerung ?? '').split('\n\n').map((absatz, i) => {
                   const istUeberschrift = absatz.startsWith('**') && absatz.indexOf('**', 2) === absatz.length - 2;
                   const hatFetttext = absatz.includes('**');
 

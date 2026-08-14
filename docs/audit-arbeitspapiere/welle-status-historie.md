@@ -8,6 +8,48 @@
 
 ---
 
+## 14.08.2026 — Welle 100: Vorbereitung für die Entfernung der toten `erklaerung`-Felder — ✅ ABGESCHLOSSEN
+
+Kein `erklaerung`-Feld entfernt. Diese Welle macht die Entfernung nur möglich, ohne schon etwas zu
+löschen — der Rückweg bleibt an jeder Stelle offen.
+
+- **`erklaerung` im Typ optional**, Fallback-Zweig in `page.tsx` null-sicher über `?? ''`. Genau
+  eine Zeile geändert; das Gating (`INLINE_ERKLAERUNG_SLUGS`, `STATISCHE_OVERRIDES`,
+  `contentBloecke`) ist unangetastet.
+- **`wortzahl-audit.mjs` samt npm-Eintrag entfernt.** Es zählt Wörter in `erklaerung` und hätte
+  nach Welle 101 für 204 Rechner null gemeldet — genau die stille Fehlaussage, die diese Reihe
+  abbaut. Nachfolger ist `check-contentbloecke-wortzahl.mjs`. Vor dem Löschen geprüft: keine
+  Code-Referenz außer `package.json`, nur historische Erwähnungen in alten Berichten.
+- **Messung, die den Zuschnitt bestimmt hat:** `erklaerung` macht 93,4 % der toten Zeichen aus
+  (781.570 von 836.577). `beispiel` und `formel` bleiben — zusammen 6,6 %, und `beispiel` wird von
+  `scripts/social-caption-builder.ts` noch gelesen.
+
+**Befund: Der Fallback-Zweig ist bereits unerreichbar.** Die Annahme des Prompts, er laufe „für die
+zwei Ausnahmen", trifft nicht zu. Beide erreichen ihn nicht:
+
+| Rechner | ohne `contentBloecke` | erreicht Fallback? | rendert stattdessen über |
+|---|---|---|---|
+| `brutto-netto-rechner` | ja | **nein** — in `INLINE_ERKLAERUNG_SLUGS`, Gate in page.tsx Z. 169 | eigenes JSX in der Komponente (15 `h2`) |
+| `wohngeld-rechner` | ja | **nein** — in `STATISCHE_OVERRIDES`, eigene statische Route | `app/finanzen/wohngeld-rechner/page.tsx` (18 `h2`) |
+
+Belegt über **alle 265** gebauten Seiten: Die Fallback-Überschrift „So funktioniert der …"
+erscheint **null Mal**. Das ist kein Schaden dieser Welle — der Diff an `page.tsx` umfasst eine
+einzige Zeile innerhalb des Zweigs, das Gating darüber blieb unberührt. Die Probe aus Schritt 6
+konnte deshalb nie greifen; ihr eigentliches Ziel — zeigen die zwei Ausnahmen weiterhin ihren
+Erklärtext — ist erfüllt, nur über einen anderen Pfad.
+
+**Folgen für Welle 101:** `erklaerung` ist damit für **alle 206** Rechner totes Feld, nicht für
+204. Auch die zwei „Ausnahmen" brauchen es nicht. Ob sie mitgenommen werden, ist eine Entscheidung
+für die Folgewelle; der Fallback-Zweig in `page.tsx` ist ein eigener Aufräumkandidat.
+
+**Lehre.** Vor einer großflächigen Entfernung wird nicht nur gefragt, ob ein Feld gerendert wird,
+sondern **wer es sonst noch liest** — drei Skripte greifen auf die drei Felder zu, eines speist die
+Social-Pipeline. Und die Gegenprobe muss am gerenderten Ergebnis hängen, nicht an der Annahme über
+den Codepfad: Hier wäre sonst ein Zweig als „lebendig" in die Folgewelle übernommen worden, den seit
+Längerem kein Rechner mehr erreicht.
+
+---
+
 ## 14.08.2026 — Welle 99: blog-builder Skill v9 — ✅ ABGESCHLOSSEN
 
 Vier Lehren aus Artikel 15 kodifiziert, `##`-Überschriften 28 → 32.

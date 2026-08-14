@@ -19,7 +19,6 @@
     "lint:energiepreise": "node scripts/check-energiepreise.mjs",
     "lint:wellenhistorie": "node scripts/check-wellenhistorie.mjs",
     "audit:bundle": "npx tsx scripts/build-audit-bundle.ts",
-    "audit:wortzahl": "npx tsx scripts/wortzahl-audit.mjs > docs/audit-arbeitspapiere/w15c-wortzahl-audit.csv",
     "longtail:diff": "node scripts/longtail-diff-check.mjs"
   },
   "dependencies": {

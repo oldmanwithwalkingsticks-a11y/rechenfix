@@ -78,12 +78,19 @@ export interface RechnerConfig {
   icon: string;
   formel: string;
   beispiel: string;
-  erklaerung: string;
+  /**
+   * Optional seit Welle 100. Nur noch Rechner OHNE `contentBloecke` brauchen
+   * das Feld — aktuell `brutto-netto-rechner` und `wohngeld-rechner`. Bei allen
+   * anderen wird es nicht gerendert (siehe Ternaer in page.tsx) und ab Welle 101
+   * nicht mehr gefuehrt.
+   */
+  erklaerung?: string;
   faq: { frage: string; antwort: string }[];
   /**
    * Optional (W19): Modulare Content-Bausteine. Wenn gesetzt (Länge > 0), rendert
-   * der Page-Renderer DIESE statt des erklaerung-String-Splits. `erklaerung` bleibt
-   * Pflichtfeld und dient als Fallback für alle Rechner ohne `contentBloecke`.
+   * der Page-Renderer DIESE statt des erklaerung-String-Splits. `erklaerung` ist
+   * seit Welle 100 optional und wird nur noch von Rechnern ohne `contentBloecke`
+   * gebraucht.
    */
   contentBloecke?: ContentBlock[];
   /**
