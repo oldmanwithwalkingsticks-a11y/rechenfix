@@ -116,3 +116,7 @@ docs/audit-arbeitspapiere/_lokal/
 scripts/__pycache__/
 scripts/_scratch_at.mjs
 scripts/_tmp-etf-check.mjs
+
+# Skill-Archive zum Hochladen in die Claude.ai-Oberflaeche. Der Inhalt ist
+# ohnehin als SKILL.md versioniert; das ZIP ist nur ein Transportbehaelter.
+.claude/skills/*.zip

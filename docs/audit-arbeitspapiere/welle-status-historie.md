@@ -8,6 +8,51 @@
 
 ---
 
+## 14.08.2026 — Welle 101: toter Fallback-Zweig entfernt, Wächter an seine Stelle — ✅ ABGESCHLOSSEN
+
+Noch kein Config-Feld entfernt. Zuerst stirbt der Leser, dann die Daten.
+
+- **53 Zeilen Fallback-Zweig aus `page.tsx` entfernt.** `config.erklaerung`, `config.formel` und
+  `config.beispiel` werden im ganzen Projekt jetzt **null Mal** gelesen.
+- **`check-contentbloecke-pflicht.mjs` angelegt** und als 6. Glied in die prebuild-Kette gehängt
+  (12 → 13). Gegenprobe: `contentBloecke` beim `kalorienverbrauch-rechner` verfälscht → Exit 1 mit
+  Datei und Slug; zurückgesetzt → wieder Exit 0.
+- **JSX-Detail beachtet:** Der Kommentar steht jetzt in Kinderposition und braucht `{/* … */}`.
+  Als nacktes `/* … */` wäre er sichtbarer Text geworden, ohne dass der Build etwas meldet.
+- `.claude/skills/*.zip` ignoriert; `git ls-files -i -c` bleibt leer.
+
+**Der Hash-Beleg aus Schritt 7 ist untauglich — und das ist selbst ein Befund.** Die drei
+SHA256-Werte wichen ab, auch bei `wohngeld-rechner`, das über eine eigene statische Route läuft und
+von der Änderung gar nicht berührt sein kann. Gegenprobe: **zwei Builds mit identischen Quellen
+liefern bereits verschiedene Hashes**, weil Next.js je Build eine neue `buildId` und neue
+Chunk-Namen ins HTML schreibt. Ein Byte-Vergleich gebauter Seiten kann in diesem Projekt nie grün
+werden.
+
+Ersatzbeleg, der die Frage tatsächlich beantwortet — Vorzustand über `git stash` gebaut, Skripte
+und Tags entfernt, ab dem Breadcrumb verglichen:
+
+| Seite | sichtbarer Text |
+|---|---|
+| `auto/spritkosten-rechner` | 18.467 Zeichen, **identisch** |
+| `finanzen/brutto-netto-rechner` | 18.682 Zeichen, **identisch** |
+| `finanzen/wohngeld-rechner` | 14.777 Zeichen, **identisch** |
+
+**Ein realer Nebeneffekt, den erst der Vergleich zeigte:** Im eingebetteten Critical CSS fehlt jetzt
+die Regel `.bg-accent-50`. Ursache ist kein Fehler, sondern die Bauweise — `tailwind.critical.
+config.ts` erfasst nur Seiten und Nicht-Rechner-Komponenten, und der tote Zweig war die letzte
+Fundstelle in diesem Scope. Die 37 übrigen Verwendungen liegen in `components/rechner/*`, die dort
+nie erfasst waren. Im Voll-CSS-Asset ist die Regel weiterhin enthalten, es geht also keine
+Formatierung verloren; die betroffenen Boxen beziehen ihren Stil nun aus dem nachgeladenen
+Stylesheet statt zufällig aus dem Critical CSS.
+
+**Lehre.** Bevor ein Fallback entfernt wird, muss geklärt sein, wer ihn auffängt — hier war er
+selbst schon unerreichbar, hat aber die Illusion einer Absicherung erzeugt. Ein toter Auffangpfad
+ist gefährlicher als gar keiner, weil er die fehlende Prüfung verdeckt. Und: **Ein Beleg muss zur
+Bauweise des Projekts passen.** Byte-Gleichheit gebauter Artefakte ist kein Kriterium, wo der
+Build absichtlich nicht deterministisch ist; die belastbare Aussage steckt im gerenderten Text.
+
+---
+
 ## 14.08.2026 — Welle 100: Vorbereitung für die Entfernung der toten `erklaerung`-Felder — ✅ ABGESCHLOSSEN
 
 Kein `erklaerung`-Feld entfernt. Diese Welle macht die Entfernung nur möglich, ohne schon etwas zu

@@ -168,66 +168,15 @@ export default async function RechnerSeite({ params }: Props) {
               den Erklär-Text + FAQ bereits selbst inline rendert. */}
           {!INLINE_ERKLAERUNG_SLUGS.has(config.slug) && (
           <>
-            {config.contentBloecke?.length ? (
-              /* BAUSTEIN-PFAD (W19.0e): keine Außenbox, keine Formel-/Rechenbeispiel-Box.
-                 Die einzelnen Block-Karten (W19.0b) werden zu freistehenden Kacheln mit
-                 space-y-Abstand direkt im Seitenfluss. */
-              <div className="mb-8 no-print">
-                <ContentBlockRenderer bloecke={config.contentBloecke} />
-              </div>
-            ) : (
-            /* FALLBACK-PFAD: unverändert — Außenbox + Formel-Box + Rechenbeispiel-Box + erklaerung-Split. */
-            <section className="card p-6 md:p-8 mb-8 no-print">
-              <h2 className="text-xl md:text-2xl font-bold text-primary-600 dark:text-primary-300 mb-4">So funktioniert der {config.titel}</h2>
-
-              <div className="bg-accent-50 dark:bg-accent-700/20 border border-accent-200 dark:border-accent-600/40 rounded-xl p-4 mb-6">
-                <p className="font-semibold text-accent-700 dark:text-accent-400 text-sm mb-1">Formel</p>
-                <p className="text-gray-800 dark:text-gray-200 font-mono text-sm">{config.formel}</p>
-              </div>
-
-              <div className="bg-primary-50 dark:bg-primary-500/10 border border-primary-200 dark:border-primary-500/30 rounded-xl p-4 mb-6">
-                <p className="font-semibold text-primary-700 dark:text-primary-400 text-sm mb-1">Rechenbeispiel</p>
-                <p className="text-gray-800 dark:text-gray-200 text-sm">{config.beispiel}</p>
-              </div>
-
-              <div className="max-w-none text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                {(config.erklaerung ?? '').split('\n\n').map((absatz, i) => {
-                  const istUeberschrift = absatz.startsWith('**') && absatz.indexOf('**', 2) === absatz.length - 2;
-                  const hatFetttext = absatz.includes('**');
-
-                  if (istUeberschrift) {
-                    return (
-                      <h3 key={i} className="text-base font-bold text-gray-800 dark:text-gray-100 mt-8 mb-3"
-                        dangerouslySetInnerHTML={{
-                          __html: absatz.replace(/\*\*(.*?)\*\*/g, '$1')
-                        }}
-                      />
-                    );
-                  }
-                  if (absatz.startsWith('- ')) {
-                    const items = absatz.split('\n').filter(l => l.startsWith('- '));
-                    return (
-                      <ul key={i} className="list-disc pl-5 space-y-1.5 mb-4">
-                        {items.map((item, j) => (
-                          <li key={j} dangerouslySetInnerHTML={{
-                            __html: item.slice(2).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                          }} />
-                        ))}
-                      </ul>
-                    );
-                  }
-                  if (hatFetttext) {
-                    return (
-                      <p key={i} className="mb-4" dangerouslySetInnerHTML={{
-                        __html: absatz.replace(/\*\*(.*?)\*\*/g, '<strong class="text-gray-800 dark:text-gray-100">$1</strong>').replace(/\n/g, '<br />')
-                      }} />
-                    );
-                  }
-                  return <p key={i} className="mb-4">{absatz}</p>;
-                })}
-              </div>
-            </section>
-            )}
+            {/* BAUSTEIN-PFAD (W19.0e): keine Außenbox, keine Formel-/Rechenbeispiel-Box.
+                Die einzelnen Block-Karten (W19.0b) werden zu freistehenden Kacheln mit
+                space-y-Abstand direkt im Seitenfluss. Seit Welle 101 der einzige Pfad;
+                der Fallback auf formel/beispiel/erklaerung war seit der W19-Migration
+                unerreichbar und wurde entfernt. check-contentbloecke-pflicht.mjs stellt
+                sicher, dass jeder gerenderte Rechner Bausteine hat. */}
+            <div className="mb-8 no-print">
+              <ContentBlockRenderer bloecke={config.contentBloecke ?? []} />
+            </div>
 
             {/* FAQ */}
             <section className="card p-6 md:p-8 mb-8 no-print">
