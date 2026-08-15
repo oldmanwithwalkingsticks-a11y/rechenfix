@@ -24,9 +24,10 @@ export default function BarrierefreiheitSeite() {
       <Breadcrumbs items={[{ label: 'Barrierefreiheit' }]} />
 
       <div className="card p-6 md:p-8">
-        <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-8">
+        <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
           Erklärung zur Barrierefreiheit
         </h1>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: Mai 2026</p>
 
         <div className="space-y-8 text-gray-700 dark:text-gray-300">
           <p className="text-base leading-relaxed">
