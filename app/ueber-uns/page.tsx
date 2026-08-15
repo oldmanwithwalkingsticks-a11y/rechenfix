@@ -132,7 +132,7 @@ export default function UeberUnsSeite() {
             Beratungs-Expertise, sondern aus disziplinierter Pflege gegen die offiziellen
             Primärquellen — siehe{' '}
             <Link href="/qualitaet" className="text-primary-600 dark:text-primary-400 hover:underline">Qualität &amp; Methodik</Link>.
-            Vollständige Anbieter-Angaben gemäß § 5 TMG inklusive Anschrift,
+            Vollständige Anbieter-Angaben gemäß § 5 DDG inklusive Anschrift,
             Telefonnummer und Umsatzsteuer-ID finden Sie im{' '}
             <Link href="/impressum" className="text-primary-600 dark:text-primary-400 hover:underline">Impressum</Link>.
           </p>
@@ -330,7 +330,7 @@ export default function UeberUnsSeite() {
           . Antwort in der Regel innerhalb von 14 Tagen.
         </p>
         <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-          Anbieter-Angaben nach § 5 TMG:{' '}
+          Anbieter-Angaben nach § 5 DDG:{' '}
           <Link href="/impressum" className="text-primary-600 dark:text-primary-400 hover:underline">Impressum</Link>.
         </p>
       </section>
