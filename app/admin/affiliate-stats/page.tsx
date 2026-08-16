@@ -59,9 +59,14 @@ function isImMonat(t: number, monatKey: string) {
 }
 
 export default function AffiliateStatsPage() {
-  const [token, setToken] = useState<string | null>(null);
+  // S1 — Die Anmeldung liegt in einem HttpOnly-Cookie, das JavaScript nicht
+  // lesen kann. Der Anmeldestand wird deshalb nicht im Client gehalten, sondern
+  // vom Server erfragt: Antwortet /api/stats mit 401, ist niemand angemeldet.
+  // `null` heisst "wird gerade geprueft".
+  const [angemeldet, setAngemeldet] = useState<boolean | null>(null);
   const [passwortEingabe, setPasswortEingabe] = useState('');
   const [authFehler, setAuthFehler] = useState(false);
+  const [anmeldeLaeuft, setAnmeldeLaeuft] = useState(false);
   const [ladeStatus, setLadeStatus] = useState<'idle' | 'lade' | 'fehler' | 'ok'>('idle');
 
   const [alleClicks, setAlleClicks] = useState<ClickEntry[]>([]);
@@ -73,26 +78,19 @@ export default function AffiliateStatsPage() {
   const [socialStatus, setSocialStatus] = useState<'idle' | 'lade' | 'fehler' | 'ok'>('idle');
   const [berichtStatus, setBerichtStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
-  // Token aus SessionStorage laden (überlebt Reload, nicht Tab-Close)
+  // Altbestand aufräumen: Vor S1 lag hier das Kennwort im Klartext. Wer die
+  // Seite noch im selben Tab offen hatte, trägt den Wert sonst weiter mit sich.
   useEffect(() => {
-    try {
-      const t = sessionStorage.getItem(AUTH_STORAGE_KEY);
-      if (t) setToken(t);
-    } catch { /* ignore */ }
+    try { sessionStorage.removeItem(AUTH_STORAGE_KEY); } catch { /* ignore */ }
   }, []);
 
-  const ladeStats = useCallback(async (t: string) => {
+  const ladeStats = useCallback(async () => {
     setLadeStatus('lade');
     try {
-      const res = await fetch('/api/stats', {
-        headers: { Authorization: `Bearer ${t}` },
-        cache: 'no-store',
-      });
+      const res = await fetch('/api/stats', { cache: 'no-store' });
       if (res.status === 401) {
-        setAuthFehler(true);
-        setToken(null);
-        try { sessionStorage.removeItem(AUTH_STORAGE_KEY); } catch { /* ignore */ }
-        setLadeStatus('fehler');
+        setAngemeldet(false);
+        setLadeStatus('idle');
         return;
       }
       if (!res.ok) {
@@ -103,23 +101,23 @@ export default function AffiliateStatsPage() {
       setAlleClicks(Array.isArray(data.clicks) ? data.clicks : []);
       setAlleFeedbacks(Array.isArray(data.feedbacks) ? data.feedbacks : []);
       setAllePdfs(Array.isArray(data.pdfs) ? data.pdfs : []);
+      setAngemeldet(true);
       setLadeStatus('ok');
     } catch {
       setLadeStatus('fehler');
     }
   }, []);
 
+  // Beim ersten Laden einmal anfragen — das beantwortet zugleich, ob eine
+  // gültige Sitzung besteht.
   useEffect(() => {
-    if (token) ladeStats(token);
-  }, [token, ladeStats]);
+    ladeStats();
+  }, [ladeStats]);
 
-  const ladeSocial = useCallback(async (t: string) => {
+  const ladeSocial = useCallback(async () => {
     setSocialStatus('lade');
     try {
-      const res = await fetch('/api/social-status', {
-        headers: { Authorization: `Bearer ${t}` },
-        cache: 'no-store',
-      });
+      const res = await fetch('/api/social-status', { cache: 'no-store' });
       if (!res.ok) {
         setSocialStatus('fehler');
         return;
@@ -131,28 +129,47 @@ export default function AffiliateStatsPage() {
     }
   }, []);
 
-  // Social-Status erst beim Aktivieren des Tabs laden, mit dem im State
-  // gehaltenen Bearer-Token.
+  // Social-Status erst beim Aktivieren des Tabs laden. Das Sitzungscookie geht
+  // automatisch mit; es muss nichts mitgegeben werden.
   useEffect(() => {
-    if (tab === 'social' && token) ladeSocial(token);
-  }, [tab, token, ladeSocial]);
+    if (tab === 'social' && angemeldet) ladeSocial();
+  }, [tab, angemeldet, ladeSocial]);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     const pw = passwortEingabe.trim();
-    if (!pw) return;
+    if (!pw || anmeldeLaeuft) return;
     setAuthFehler(false);
-    setToken(pw);
-    try { sessionStorage.setItem(AUTH_STORAGE_KEY, pw); } catch { /* ignore */ }
-    setPasswortEingabe('');
+    setAnmeldeLaeuft(true);
+    try {
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ passwort: pw }),
+      });
+      if (!res.ok) {
+        setAuthFehler(true);
+        return;
+      }
+      setPasswortEingabe('');
+      await ladeStats();
+    } catch {
+      setAuthFehler(true);
+    } finally {
+      setAnmeldeLaeuft(false);
+    }
   };
 
-  const handleLogout = () => {
-    setToken(null);
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/admin/logout', { method: 'POST' });
+    } catch { /* ignore */ }
+    setAngemeldet(false);
     setAlleClicks([]);
     setAlleFeedbacks([]);
     setAllePdfs([]);
-    try { sessionStorage.removeItem(AUTH_STORAGE_KEY); } catch { /* ignore */ }
+    setSocialData(null);
+    setLadeStatus('idle');
   };
 
   // Verfügbare Monate ermitteln
@@ -295,15 +312,12 @@ export default function AffiliateStatsPage() {
   };
 
   const handleLoeschen = async () => {
-    if (!token) return;
+    if (!angemeldet) return;
     if (!confirm(`Alle Daten für ${getMonatLabel(monat)} unwiderruflich löschen?`)) return;
     try {
-      const res = await fetch(`/api/stats?monat=${monat}`, {
-        method: 'DELETE',
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await fetch(`/api/stats?monat=${monat}`, { method: 'DELETE' });
       if (res.ok) {
-        await ladeStats(token);
+        await ladeStats();
       }
     } catch { /* ignore */ }
   };
@@ -317,8 +331,18 @@ export default function AffiliateStatsPage() {
     { key: 'social', label: 'Social' },
   ];
 
+  // Solange der Server noch nicht geantwortet hat, ist unklar, ob eine Sitzung
+  // besteht. In dieser Zeit weder Anmeldemaske noch Daten zeigen.
+  if (angemeldet === null) {
+    return (
+      <div className="max-w-md mx-auto px-4 py-16">
+        <p className="text-sm text-gray-500 dark:text-gray-400">Anmeldung wird geprüft …</p>
+      </div>
+    );
+  }
+
   // Login-Screen
-  if (!token) {
+  if (!angemeldet) {
     return (
       <div className="max-w-md mx-auto px-4 py-16">
         <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2">Admin-Login</h1>
@@ -341,10 +365,10 @@ export default function AffiliateStatsPage() {
           )}
           <button
             type="submit"
-            disabled={!passwortEingabe}
+            disabled={!passwortEingabe || anmeldeLaeuft}
             className="w-full px-4 py-3 text-sm font-medium rounded-xl bg-primary-500 text-white hover:bg-primary-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors min-h-[48px]"
           >
-            Anmelden
+            {anmeldeLaeuft ? 'Wird geprüft …' : 'Anmelden'}
           </button>
         </form>
       </div>
@@ -375,7 +399,7 @@ export default function AffiliateStatsPage() {
       {ladeStatus === 'fehler' && (
         <div className="text-sm text-red-600 dark:text-red-400 mb-6">
           Fehler beim Laden der Daten.
-          <button onClick={() => token && ladeStats(token)} className="ml-2 underline">
+          <button onClick={() => ladeStats()} className="ml-2 underline">
             Erneut versuchen
           </button>
         </div>

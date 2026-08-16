@@ -4,6 +4,7 @@ import { platformsForSlug, ALL_PLATFORMS, type Platform } from '@/lib/social/sta
 import { getBerlinDate, istTikTokTag } from '@/lib/social/utils';
 import queueFile from '@/lib/social/queue.json';
 import type { QueueFile } from '@/lib/social/schema';
+import { istAdminAngemeldet } from '@/lib/admin-session';
 
 export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
@@ -26,12 +27,8 @@ interface PlattformStatus {
   naechsterSlug: string | null;
 }
 
-export async function GET(req: Request) {
-  const authHeader = req.headers.get('authorization') || '';
-  const token = (authHeader.startsWith('Bearer ') ? authHeader.slice(7) : '').trim();
-  const expected = (process.env.ADMIN_STATS_PASSWORD || '').trim();
-
-  if (!expected || token !== expected) {
+export async function GET() {
+  if (!(await istAdminAngemeldet())) {
     return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   }
 
