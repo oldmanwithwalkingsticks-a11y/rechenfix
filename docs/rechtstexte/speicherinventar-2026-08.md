@@ -76,5 +76,44 @@ Zeile 5 entfällt mit dem Consent-Banner, weil nach der Umstellung keine einwill
 Verarbeitung mehr übrig bleibt. Der Schlüssel wird bei den Besuchern aktiv aufgeräumt.
 
 Nach Abschluss von R3 verbleiben damit ausschließlich Speicherungen, die der Nutzer selbst
-einschaltet. Die Fortschreibung dieser Tabelle steht am Ende dieses Dokuments unter „Stand nach
-R3".
+einschaltet.
+
+---
+
+## Stand nach R3 (16.08.2026, ausgerollt)
+
+| # | Fundstelle | Schlüssel | Auslösung | Rechtsgrundlage | In der Datenschutzerklärung? |
+|---|---|---|---|---|---|
+| 1 | `components/ThemeProvider.tsx:38` | `rechenfix-theme` | Nutzer — Umschalter im Seitenkopf | § 25 Abs. 2 Nr. 2 TDDDG | ja, Abschnitt 7 |
+| 2 | `components/pwa/OfflineSchalter.tsx:53` | `rechenfix-offline-einwilligung` | Nutzer — Schalter auf `/offline-nutzung` | § 25 Abs. 1 TDDDG (siehe offene Frage unten) | ja, Abschnitt 7 und 7a |
+| 3 | Service Worker `public/sw.js` | Cache Storage | Nutzer — Schalter; im installierten Zustand der Start über das Symbol | § 25 Abs. 1 bzw. Abs. 2 Nr. 2 TDDDG | ja, Abschnitt 7 und 7a |
+| 4 | `components/rechner/Prozentrechner.tsx` über `hooks/useOptInStorage.ts` | `rechenfix-verlauf-einwilligung` und `rechenfix_prozent_history` | **Nutzer** — Schalter unterhalb der Verlaufsanzeige | § 25 Abs. 2 Nr. 2 TDDDG | ja, Abschnitt 7 und 7b |
+| 5 | `app/admin/affiliate-stats/page.tsx:146` | `rf_admin_stats_token` (sessionStorage) | Nutzer — Anmeldung des Betreibers | interne Seite, nicht für Besucher erreichbar | nein, bewusst |
+
+**Entfallen gegenüber der Erhebung:** der Schlüssel `cookie-consent` des Consent-Banners. Der
+Banner ist mit R3.3 vollständig zurückgebaut; der Altbestand wird bei den Besuchern durch
+`components/cookie/EinwilligungsspeicherAufraeumen.tsx` beim ersten Laden gelöscht.
+
+**Kein automatischer Schreiber mehr.** Beim gewöhnlichen Besuch der Website wird nichts auf dem
+Endgerät abgelegt. Jede verbleibende Speicherung wird durch eine Handlung des Nutzers ausgelöst
+und ist durch einen Schalter widerrufbar, der zugleich die Daten löscht.
+
+### Offene Frage zur Einordnung
+
+Der Offline-Schalter (Zeile 2/3) und der Verlaufsschalter (Zeile 4) sind bauartgleich — beide
+werden ausschließlich durch eine bewusste Handlung des Nutzers ausgelöst — werden aber
+unterschiedlich begründet: Abschnitt 7a führt den Offline-Schalter seit Welle 69 als **Einwilligung
+nach § 25 Abs. 1**, Abschnitt 7b den Verlauf als **Ausnahme nach § 25 Abs. 2 Nr. 2**. Beide
+Einordnungen sind vertretbar, aber sie sollten angeglichen werden. Solange sie auseinanderfallen,
+kann in Abschnitt 7 nicht behauptet werden, die Website setze überhaupt keine
+einwilligungspflichtigen Speicherungen ein — der Satz ist dort entsprechend vorsichtiger gefasst.
+
+Das ist eine Bewertungsfrage, keine Umsetzungsfrage, und daher bewusst offen gelassen.
+
+### Regel für neue Rechner
+
+Wer einen Rechner mit Verlauf oder gemerkten Eingaben ausstattet, benutzt `hooks/useOptInStorage.ts`
+und schreibt **nicht** direkt in den Browserspeicher. Der Hook erzwingt den Standardzustand „aus",
+das Löschen beim Abschalten und das Aufräumen von Altbeständen ohne Einwilligungskennzeichen.
+Andernfalls kehrt der automatische Schreiber zurück, den Welle R2 gefunden hat — und diese Tabelle
+wird still unrichtig.

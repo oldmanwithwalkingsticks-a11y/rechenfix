@@ -1,0 +1,113 @@
+# Änderungshistorie Rechtstexte — rechenfix.de
+
+Jede Änderung an einem Rechtstext wird hier eingetragen — auch die von Susanne Recht selbstständig ausgerollten. Abgleich beim Quartalslauf:
+
+```bash
+git log --oneline --grep='^recht:'
+```
+
+Lücken zwischen Commits und diesem Protokoll bedeuten, dass am Verfahren vorbei geändert wurde.
+
+Ablageort ist bewusst das Repo und nicht der Skill-Ordner: Skills liegen schreibgeschützt und werden beim Update ersetzt.
+
+| Datum | Seite | Änderung | Stufe | Belegquelle | Commit |
+|---|---|---|---|---|---|
+| 16.08.2026 | `/ueber-uns` | Zwei Verweise „§ 5 TMG" durch „§ 5 DDG" ersetzt. Das TMG wurde am 14.05.2024 durch das Digitale-Dienste-Gesetz abgelöst; die Impressumspflicht steht seither in § 5 DDG. Die Impressumsseite selbst war bereits korrekt. | A | Digitale-Dienste-Gesetz § 5, `https://www.gesetze-im-internet.de/ddg/` | `320f332` |
+| 16.08.2026 | `/impressum` | Sichtbares Stand-Datum „16. August 2026" ergänzt, Darstellung von `/datenschutz` übernommen (gleiche Klassen, gleiche Position). Vorher trug die Seite kein Datum. | A | Susanne Recht, Erstbefund Scan 16.08.2026 | `f4c5e5a` |
+| 16.08.2026 | `/barrierefreiheit` | Stand-Datum „Mai 2026" ergänzt, ohne Tagesangabe. Das Datum bezeichnet den Zeitpunkt der letzten Barrierefreiheitsprüfung, nicht der letzten Dateiänderung; der genaue Tag ist nicht mehr feststellbar. Ein erfundener Tag wäre präziser formuliert und weniger wahr. Formatvorbild: `/nutzungsbedingungen` („Stand: Juli 2026"). | A | Auskunft des Betreibers, Prüfung im Mai 2026 | `fe6e142` |
+
+## Welle R2 — geplant, Freigabe erteilt 16.08.2026
+
+Entscheidung des Betreibers: AdSense ruht bis ca. 01/2027, alles nicht Benötigte kommt raus. Absicherung gegen das Vergessen ist **nicht** eine Wiedervorlage, sondern die tägliche Dienste-Wache — sie schlägt Alarm, sobald AdSense-Ladecode wieder auf der Seite liegt, an welchem Tag auch immer.
+
+| Nr. | Gegenstand | Stufe |
+|---|---|---|
+| R2.1 | AdSense-Ladecode entfernen (Meta-Tag `google-adsense-account`, `adsbygoogle` in zwei Bündeln, Publisher-ID). Komponente und ID vorher nach `docs/rechtstexte/adsense-rueckbau-2026-08.md` sichern. | A |
+| R2.2 | Consent-Banner entfernt — ohne AdSense bleibt keine einwilligungspflichtige Verarbeitung. Vercel Analytics cookielos (belegt), Dark-Mode-Einstellung nach § 25 Abs. 2 Nr. 2 TDDDG ausgenommen. | A |
+| R2.3 | Datenschutzerklärung: Abschnitt 8 und AdSense-Eintrag in Abschnitt 2 entfernen, Abschnitt 7 durch zutreffende Cookie-Aussage ersetzen, Stand-Datum setzen. | A |
+| R2.4 | Diese Änderungshistorie unter `docs/rechtstexte/` ins Repo. | A |
+
+**Abnahme:** `python3 scripts/dienste-wache.py` meldet für `google_adsense` nichts mehr, Rückgabewert `0`.
+
+**Rückkehr im Januar:** Erst Registry auf `aktiv` und Texte zurück, dann deployen. Umgekehrte Reihenfolge erzeugt am Folgetag einen berechtigten Alarm.
+
+## Offene Punkte
+
+| Aufgenommen | Seite | Punkt | Stufe |
+|---|---|---|---|
+| 16.08.2026 | `/nutzungsbedingungen` | Stand-Datum ohne Tagesangabe („Juli 2026"). Kein Mangel, sondern Formatentscheidung — nur zu ändern, wenn projektweit auf Tagesgenauigkeit vereinheitlicht wird. | B |
+| 16.08.2026 | `/datenschutz` | ~~Scan findet keine externen Einbindungen~~ — **zurückgezogen am 16.08.2026.** Der Scan sieht nur `src`-Attribute im ausgelieferten HTML. Vercel Analytics, Google AdSense, Upstash Redis und Affiliate-Links werden clientseitig nachgeladen und sind statisch unsichtbar. Ein Satz „lädt nichts von Dritten" wäre falsch gewesen. Kein Handlungsbedarf am Text. | — |
+| 16.08.2026 | alle | ~~Browserprüfung § 25 TDDDG~~ — **erledigt am 16.08.2026.** Ergebnis unten unter „Browserprüfung". | — |
+| 16.08.2026 | ~~`/datenschutz` Abschnitt 8~~ | **überholt durch Welle R2** — statt Ruhend-Kennzeichnung wird entfernt. Ursprünglich: Google AdSense ruht (Wiederaufnahme geplant ~01/2027, nach Reichweitenaufbau). Der Abschnitt beschreibt damit eine Verarbeitung, die derzeit nicht stattfindet. Empfehlung: Abschnitt **behalten** und als ruhend kennzeichnen, statt ihn zu streichen — das Risiko ist asymmetrisch. Ein vorhandener Abschnitt für eine ruhende Verarbeitung ist ein Transparenzmangel; ein fehlender Abschnitt bei laufender Verarbeitung ist ein Verstoß gegen Art. 13 DSGVO. Einleitungssatz entworfen, Freigabe offen. | B |
+| 16.08.2026 | ~~Consent-Banner~~ | **erledigt/überholt.** Prüfung ergab: Kategorie „Werbung (Google AdSense)" vorhanden, Ablehnung gleichrangig auf erster Ebene, Werbeschalter standardmäßig aus. Rückbau in R2.2. Offen als reine Gestaltungsfrage: „Alle akzeptieren" blau vs. „Nur notwendige" grau — entfällt mit dem Banner. | — |
+| 16.08.2026 | ~~`/datenschutz` Abschnitt 2~~ | **überholt durch R2.3** — AdSense-Eintrag wird entfernt statt gekennzeichnet. | — |
+| 16.08.2026 | `/datenschutz` | **Vorbereitend:** Sobald YouTube-Videos auf der Seite **eingebettet** werden (nicht nur verlinkt), entsteht eine echte Drittanbieter-Einbindung mit Einwilligungspflicht nach § 25 TDDDG. Abschnitt 11 deckt heute nur die Kanal-Verlinkung ab. Vor dem ersten Embed vorbereiten, nicht nachschieben. | B |
+| 16.08.2026 | alle | Browserprüfung auf JavaScript-gesetzte Cookies und Verbindungen nach Interaktion steht aus. Statische Analyse sieht das nicht. | — |
+| 16.08.2026 | `/barrierefreiheit` | BFSG-Kleinstunternehmenausnahme (§ 3 Abs. 3 BFSG: unter 10 Beschäftigte **und** höchstens 2 Mio. € Umsatz) greift voraussichtlich. Dann besteht keine Pflicht zur Barrierefreiheit und keine zur Erklärung. Die vorhandene Erklärung liest sich derzeit wie eine Pflichterklärung; ein Zusatz „geben wir freiwillig ab" nimmt Angriffsfläche, ohne etwas zu kosten. | B |
+
+## Sichtprüfung
+
+| Datum | Seite | Geprüft durch | Ergebnis |
+|---|---|---|---|
+| 16.08.2026 | `/impressum`, `/barrierefreiheit` | Karsten, Inkognito-Browser | **offen** — Datum sichtbar? Dark Mode lesbar? Position wie `/datenschutz`? |
+| 16.08.2026 | Startseite, vor Einwilligung | Karsten, Netzwerk-Tab + Application-Tab | **bestanden.** 66 Requests, ausschließlich gegen `www.rechenfix.de`. Keine Verbindung zu Google, doubleclick, googlesyndication oder awin. Schriftart lokal ausgeliefert, keine Google Fonts. Local Storage enthält allein `rechenfix-theme` (Dark-Mode-Schalter). Vercel Analytics läuft first-party über `script.js` + `view`; im Code ist das Cookie an `enableCookie` gebunden und nicht gesetzt. Damit kein Speichern/Auslesen im Endgerät → § 25 Abs. 1 TDDDG nicht eröffnet; serverseitige Verarbeitung über Art. 6 Abs. 1 lit. f DSGVO, wie in Abschnitt 6 beschrieben. **Offene Rechtsfrage, bewusst nicht entschieden:** Ob das Auslesen von Browsereigenschaften (`userAgent`, `navigator.webdriver`) bereits Gerätezugriff darstellt, wird uneinheitlich beurteilt. Ein Fingerprint entsteht hier nicht. |
+
+## Welle R2 — ausgerollt 16.08.2026
+
+Die Planungstabelle oben ist der Stand **vor** der Umsetzung und wurde bewusst nicht nachträglich
+geändert. Was tatsächlich ausgerollt wurde, steht hier.
+
+| Datum | Seite | Änderung | Stufe | Belegquelle | Commit |
+|---|---|---|---|---|---|
+| 16.08.2026 | seitenweit | AdSense-Ladecode vollständig entfernt: Meta-Tag `google-adsense-account`, die Komponenten `AdSlot` und `ConsentScripts`, die Konfiguration `lib/adsense-config.ts`, 13 Anzeigenplätze in 5 Dateien und zwei tote Print-Selektoren. Publisher-ID kam in keiner Umgebungsvariablen und keiner Konfigurationsdatei vor; die Sicherheitsrichtlinie enthält nur `frame-ancestors` und blieb unberührt. Sicherung in `adsense-rueckbau-2026-08.md`. | A | Entscheidung des Betreibers, AdSense ruht bis ca. 01/2027 | `2cbc174` |
+| 16.08.2026 | Consent-Banner | **Nur** die Werbe-Kategorie entfernt, Banner zunächst behalten. Grund: die STOP-Bedingung von R2.2 hat gegriffen — siehe Abweichung unten. | A | Susanne Recht R2, STOP-Bedingung Korrektur 2 | `234ee40` |
+| 16.08.2026 | `/datenschutz` | Abschnitt 8 (Google AdSense) gestrichen, Nummerierung nachgezogen (kein Anker und keine `id` verwies auf die Nummern), interner Verweis auf den Affiliate-Abschnitt angepasst. AdSense-Eintrag in Abschnitt 2, Nennung in den Rechtsgrundlagen und Werbe-Zeile der Cookie-Tabelle entfernt. Stand-Datum gesetzt. | A | Wegfall der beschriebenen Verarbeitung | `0f6fff1` |
+| 16.08.2026 | `docs/rechtstexte/` | Verzeichnis angelegt, Rückbauvorlage `adsense-rueckbau-2026-08.md` mit Publisher-ID, Komponentencode und allen Einbindungsorten. | A | Susanne Recht R2, Korrektur 4 | `a88ca52` |
+| 16.08.2026 | `/impressum`, `/nutzungsbedingungen`, `/qualitaet`, Startseite | **Über den Wellen-Auftrag hinaus.** Vier Seiten behaupteten weiterhin Werbeausspielung über Google AdSense bzw. im Banner einzeln steuerbare Marketing-Cookies. Beides traf nach dem Rückbau nicht mehr zu. Nur die betroffenen Sätze geändert. | A | Folge des Rückbaus, Befund beim Ausrollen | `c34f0a9` |
+
+**Abweichung von der Planung — STOP-Bedingung R2.2 hat gegriffen.** Der vollständige Bannerrückbau
+wurde nicht ausgeführt. `components/rechner/Prozentrechner.tsx` legte einen Rechenverlauf
+automatisch bei jeder Berechnung dauerhaft im Browser ab, ohne Zutun des Nutzers und ohne
+Erwähnung in der Datenschutzerklärung. Damit war die Prämisse „ohne AdSense bleibt keine
+einwilligungspflichtige Verarbeitung" nicht mehr tragfähig. Der vorgesehene Ersatztext für
+Abschnitt 7 wurde deshalb ebenfalls nicht eingesetzt — er hätte behauptet, es werde allein die
+Darstellungseinstellung gespeichert. Auflösung in Welle R3.
+
+**Abnahme R2 eingeschränkt.** `scripts/dienste-wache.py` und `assets/websites.json` liegen nicht im
+Repo; die Registry-Umstellung und der Wächterlauf konnten nicht vom Repo aus erfolgen. Ersatzweise
+lief `scripts/check-drittanbieter.mjs` (Rückgabewert `0`, 390 Dateien, keine ungegateten
+Fremdskripte). Die Prüfzeile `grep -rc "adsbygoogle\|ca-pub-" .next/` liefert nicht `0`, sondern
+Treffer im Webpack-Zwischenspeicher, der nicht ausgeliefert wird; im ausgelieferten Build
+(`.next/server`, `.next/static`) sind es `0`.
+
+## Welle R3 — ausgerollt 16.08.2026
+
+Entscheidung des Betreibers: Der Rechenverlauf wird auf Opt-in umgestellt, damit die Speicherung
+nach § 25 Abs. 2 Nr. 2 TDDDG ausgenommen ist. Erst dann entfällt der Banner.
+
+| Datum | Seite | Änderung | Stufe | Belegquelle | Commit |
+|---|---|---|---|---|---|
+| 16.08.2026 | `docs/rechtstexte/` | Vollständiges Speicherinventar aller Endgerät-Speicherungen erhoben (`speicherinventar-2026-08.md`). Sechs Fundstellen, davon genau ein automatischer Schreiber. Keine Middleware, keine serverseitigen Cookies, kein IndexedDB. | A | Volltextsuche über `app/`, `components/`, `lib/`, `hooks/` | `c6068da` |
+| 16.08.2026 | Prozentrechner | Rechenverlauf auf Opt-in umgestellt. Neuer gemeinsamer Hook `hooks/useOptInStorage.ts` statt Einzellösung, damit der nächste Rechner nicht wieder direkt auf den Speicher schreibt. Standard aus; Abschalten löscht Kennzeichen, Daten und Anzeige; Altbestände ohne Einwilligungskennzeichen werden beim ersten Laden gelöscht. Ohne Schalter besteht der Verlauf nur im Arbeitsspeicher der Sitzung. | A | § 25 Abs. 2 Nr. 2 TDDDG | `220378c` |
+| 16.08.2026 | `/datenschutz` | Abschnitt 7 ersetzt: Tabelle jetzt nach Auslösung statt nach Cookie-Kategorie, jede Zeile durch das Speicherinventar gedeckt. Neuer Abschnitt 7b zum Rechenverlauf im Aufbau von 7a. Abschnitt 13 nennt statt des Banners die einzelnen Schalter. Banner-Erwähnungen in Abschnitt 2 und 3 entfernt. | A | Speicherinventar `speicherinventar-2026-08.md` | `570e7f8` |
+| 16.08.2026 | seitenweit | Consent-Banner entfernt: Banner, Einstellungsdialog, Provider und Footer-Link. Einziger externer Konsument war der Footer-Link; nichts hat den Einwilligungszustand ausgelesen, um eine Funktion zu schalten. Neue Komponente `EinwilligungsspeicherAufraeumen` löscht den gegenstandslosen Schlüssel `cookie-consent` beim ersten Laden aus dem Browser der Besucher. | A | Wegfall jeder einwilligungspflichtigen Verarbeitung | `85eacbf` |
+
+**Abweichung — Abschnitt 7, Wortlaut.** Der vorgesehene Halbsatz „Diese Website setzt keine
+einwilligungspflichtigen Cookies ein" wurde **nicht** übernommen. Abschnitt 7a führt den
+Offline-Schalter seit Welle 69 als Einwilligung nach **§ 25 Abs. 1** TDDDG, nicht als Ausnahme nach
+Absatz 2. Der Satz wäre also durch keine Zeile der Tabelle gedeckt gewesen. Nach der Vorrangregel
+der Welle („Deckt er sie nicht, wird der Satz geändert, nicht die Tabelle") wurde der Satz
+geändert und 7a unangetastet gelassen. Der Bannerrückbau bleibt davon unberührt: Die Einwilligung
+für die Offline-Nutzung wird im Feature selbst eingeholt, nicht über einen Banner.
+
+**Offene Rechtsfrage daraus:** Offline-Schalter und Verlaufsschalter sind bauartgleich, werden aber
+unterschiedlich begründet (§ 25 Abs. 1 gegen § 25 Abs. 2 Nr. 2). Eine der beiden Einordnungen
+sollte angeglichen werden — das ist eine Bewertung, keine Umsetzungsfrage.
+
+## Nächste Termine
+
+- **täglich** — Dienste-Wache (`scripts/dienste-wache.py`). Ersetzt die Wiedervorlage für die AdSense-Rückkehr: Sie erinnert nicht an ein Datum, sie merkt, dass etwas passiert ist.
+- **~01/2027** — AdSense-Wiederaufnahme: Registry auf `aktiv`, Abschnitte 2, 7, 8 und **die gesamte Einwilligungsmechanik** zurück, Stand-Datum setzen — **vor** der Freischaltung. Der Banner existiert seit R3.3 nicht mehr und muss neu gebaut werden, nicht nur wieder eingebunden; AdSense ist einwilligungspflichtig. Die Dienste-Wache meldet zwar den Ladecode, prüft aber **nicht**, ob ein Banner vorhanden ist. Vorlage: `docs/rechtstexte/adsense-rueckbau-2026-08.md`.
+- **02.12.2026** — Ende der Übergangsfrist Art. 50 Abs. 2 KI-VO (maschinenlesbare Kennzeichnung, Bestandssysteme)
+- **01.11.2026** — nächste Vollprüfung (Quartalslauf)
+- **01.01.2027** — Beschäftigtenzahl zum 31.12.2026 prüfen (§ 36 VSBG, BFSG-Kleinstunternehmen)

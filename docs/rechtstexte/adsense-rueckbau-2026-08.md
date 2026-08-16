@@ -230,8 +230,8 @@ Im `@media print`-Block waren zwei Selektoren gelistet, die mit dem Rückbau ent
 - **Zwei Code-Kommentare in `components/rechner/RechnerLoader.tsx`** erwähnen den früheren
   Middle-AdSlot als Ursache eines CLS-Befunds. Das ist Dokumentation eines vergangenen Vorfalls,
   kein Ladecode.
-- **Der Consent-Banner** wurde nicht vollständig entfernt, sondern nur um die Werbe-Kategorie
-  gekürzt — siehe offener Punkt in `aenderungshistorie.md`.
+- **Der Consent-Banner** wurde in dieser Welle nur um die Werbe-Kategorie gekürzt. In Welle R3.3
+  ist er dann **vollständig entfallen** — siehe den folgenden Abschnitt.
 
 ---
 
@@ -241,17 +241,39 @@ Reihenfolge nicht vertauschen: **erst** Registry auf `aktiv` und Rechtstexte zur
 deployen. Wer zuerst AdSense freischaltet, bekommt am nächsten Morgen einen Alarm der
 Dienste-Wache — und der wäre dann berechtigt.
 
-Zurückzunehmen sind:
+### ⚠ Der wichtigste Punkt zuerst: Es gibt keinen Consent-Banner mehr
 
-1. Die drei Dateien oben wiederherstellen.
-2. Meta-Tag, Importe und `<ConsentScripts />` in `app/layout.tsx` einsetzen.
-3. Die 13 Anzeigenplätze nach obiger Tabelle wieder einbauen.
-4. Die zwei Print-Selektoren in `app/globals.css` ergänzen.
-5. Werbe-Kategorie im Consent-Banner und in `CookieConsentProvider` wieder aufnehmen
-   (inklusive des W73a-Neuladens beim Widerruf — ein einmal geladenes Fremdskript verschwindet
-   nicht, wenn React das Element aus dem Baum nimmt).
+In Welle R3.3 sind **Banner, Einstellungsdialog und der gesamte Einwilligungsspeicher entfallen**
+(`components/cookie/CookieBanner.tsx` und `CookieConsentProvider.tsx` gelöscht, Footer-Link
+entfernt). Grund: Nach dem Rückbau von AdSense und der Umstellung des Rechenverlaufs auf Opt-in
+blieb keine einwilligungspflichtige Verarbeitung übrig.
+
+**AdSense ist einwilligungspflichtig.** Wer die Anzeigen wieder freischaltet, ohne vorher die
+Einwilligungsmechanik neu zu bauen, spielt Werbung ohne Rechtsgrundlage aus. Die Dienste-Wache
+schützt davor **nicht**: Sie meldet den Ladecode, prüft aber nicht, ob ein Banner existiert.
+
+Der Banner muss also **neu gebaut**, nicht nur wieder eingebunden werden. Der letzte funktionsfähige
+Stand mit Werbe-Kategorie steht im Commit `234ee40^` (Zustand vor dem Kürzen der Kategorie).
+
+### Reihenfolge
+
+Erst Registry auf `aktiv` und Texte zurück, **dann** deployen. Wer zuerst AdSense freischaltet,
+bekommt am nächsten Morgen einen Alarm der Dienste-Wache — und der wäre dann berechtigt.
+
+1. **Einwilligungsmechanik neu aufbauen** — Provider mit Marketing-Kategorie, Banner mit
+   gleichrangiger Ablehnung auf erster Ebene, Einstellungsdialog, Footer-Link. Einschließlich des
+   W73a-Neuladens beim Widerruf: Ein einmal geladenes Fremdskript verschwindet nicht, wenn React
+   das zugehörige Element aus dem Baum nimmt.
+2. Die drei gelöschten Dateien oben wiederherstellen.
+3. Meta-Tag, Importe und `<ConsentScripts />` in `app/layout.tsx` einsetzen.
+4. Die 13 Anzeigenplätze nach obiger Tabelle wieder einbauen.
+5. Die zwei Print-Selektoren in `app/globals.css` ergänzen.
 6. Datenschutzerklärung: Abschnitt „Google AdSense" wieder einfügen, Nummerierung erneut
-   nachziehen, Eintrag in Abschnitt 2, Nennung in den Rechtsgrundlagen und die Werbe-Zeile
-   in der Cookie-Tabelle ergänzen.
+   nachziehen, Eintrag in Abschnitt 2, Nennung in den Rechtsgrundlagen und eine Werbe-Zeile in
+   der Speicher-Tabelle in Abschnitt 7 ergänzen. Abschnitt 13 verweist derzeit auf die einzelnen
+   Schalter statt auf einen Banner und ist mit anzupassen.
 7. Die Aussagen auf `/impressum`, `/nutzungsbedingungen`, `/qualitaet` und der Startseite
    zurücknehmen.
+8. `components/cookie/EinwilligungsspeicherAufraeumen.tsx` entfernen — die Komponente löscht den
+   Schlüssel `cookie-consent` beim Laden und würde sonst die frisch erteilte Einwilligung
+   sofort wieder wegräumen.
