@@ -67,6 +67,7 @@ export default function AffiliateStatsPage() {
   const [passwortEingabe, setPasswortEingabe] = useState('');
   const [authFehler, setAuthFehler] = useState(false);
   const [anmeldeLaeuft, setAnmeldeLaeuft] = useState(false);
+  const [gesperrt, setGesperrt] = useState(false);
   const [ladeStatus, setLadeStatus] = useState<'idle' | 'lade' | 'fehler' | 'ok'>('idle');
 
   const [alleClicks, setAlleClicks] = useState<ClickEntry[]>([]);
@@ -147,11 +148,17 @@ export default function AffiliateStatsPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ passwort: pw }),
       });
+      if (res.status === 429) {
+        setAuthFehler(true);
+        setGesperrt(true);
+        return;
+      }
       if (!res.ok) {
         setAuthFehler(true);
         return;
       }
       setPasswortEingabe('');
+      setGesperrt(false);
       await ladeStats();
     } catch {
       setAuthFehler(true);
@@ -360,7 +367,9 @@ export default function AffiliateStatsPage() {
           />
           {authFehler && (
             <p className="text-sm text-red-600 dark:text-red-400">
-              Passwort falsch. Bitte erneut versuchen.
+              {gesperrt
+                ? 'Zu viele Fehlversuche. Bitte in 15 Minuten erneut versuchen.'
+                : 'Passwort falsch. Bitte erneut versuchen.'}
             </p>
           )}
           <button
