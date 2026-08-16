@@ -104,6 +104,36 @@ für die Offline-Nutzung wird im Feature selbst eingeholt, nicht über einen Ban
 unterschiedlich begründet (§ 25 Abs. 1 gegen § 25 Abs. 2 Nr. 2). Eine der beiden Einordnungen
 sollte angeglichen werden — das ist eine Bewertung, keine Umsetzungsfrage.
 
+## Sicherheit
+
+Getrennt von den Rechtstext-Einträgen geführt. Commit-Präfix `sec:`, damit
+`git log --grep='^recht:'` sauber gegen die Rechtstext-Historie abgleichbar bleibt.
+Diese Änderungen berühren Art. 32 DSGVO (Sicherheit der Verarbeitung), nicht Art. 13 —
+sie gehören deshalb in den Code, nicht in die Datenschutzerklärung.
+
+| Datum | Gegenstand | Änderung | Commit |
+|---|---|---|---|
+| 16.08.2026 | Admin-Anmeldung | Kennwort lag im Klartext im Sitzungsspeicher und ging bei jedem Abruf als `Authorization: Bearer` mit — über jede XSS-Lücke auslesbar. Jetzt einmalige serverseitige Prüfung in konstanter Zeit gegen `ADMIN_STATS_PASSWORD`, danach ein signiertes, nach 8 Stunden ablaufendes Sitzungskennzeichen im `HttpOnly`-Cookie. Der Cookie-Wert ist nie das Kennwort. Der alte Klartextwert wird beim Laden aus bestehenden Sitzungen entfernt. | `ff5d675` |
+| 16.08.2026 | `/api/monthly-report` | War **ohne jede Prüfung** erreichbar: Ein beliebiger Aufruf von außen konnte eine E-Mail mit frei wählbarem CSV-Anhang über die verifizierte Absenderadresse `feedback@rechenfix.de` verschicken. Anmeldeprüfung ergänzt. Nebenbefund aus S1.2, nicht Teil des ursprünglichen Auftrags. | `97e7e48` |
+| 16.08.2026 | Admin-Anmeldung | Ratenbegrenzung: fünf Fehlversuche je Adresse, danach 15 Minuten Sperre (HTTP 429). Gezählt wird ausschließlich die Anzahl, nie die Eingabe. Fällt der Zähler aus, bleibt die Anmeldung möglich — eine ausgefallene Ratenbegrenzung darf den Betreiber nicht aussperren. | `d978a62` |
+
+**Untersuchungsergebnis S1.0 — die STOP-Bedingung hat nicht gegriffen.** Das Kennwort wurde bereits
+vor S1 **serverseitig** geprüft (`/api/stats`, `/api/social-status` gegen `process.env`), nie im
+Browser verglichen. `ADMIN_STATS_PASSWORD` trägt **kein** `NEXT_PUBLIC_`-Präfix und lag damit nie
+im ausgelieferten JavaScript. Es ist folglich **nicht** öffentlich bekannt geworden und muss nicht
+gewechselt werden. Das Risiko lag allein in der Klartext-Ablage im Browser des Betreibers.
+
+### Offener Punkt aus S1.0, nicht behoben
+
+Ein **zweites** Kennwort, `ADMIN_PASSWORD`, wird auf drei Routen als **URL-Parameter**
+`?admin=<Wert>` übergeben: `/api/cron/social-post`, `/api/cron/social-post-tiktok` und
+`/api/tiktok/auth`. Query-Parameter landen in Server- und Zugriffs-Logs, bei Vercel wie bei jedem
+zwischengeschalteten Dienst. Das ist derselbe Fehlertyp wie der behobene, betrifft aber eine andere
+Zugangskennung und die laufende Social-Pipeline. Bewusst **nicht** in S1 mitgeändert, weil ein
+Eingriff dort den täglichen Post-Cron treffen kann. Gehört in eine eigene Welle: Übergabe im
+`Authorization`-Kopf statt in der Adresse, danach Kennwortwechsel — dieses hier ist durch die Logs
+als kompromittiert zu behandeln.
+
 ## Nächste Termine
 
 - **täglich** — Dienste-Wache (`scripts/dienste-wache.py`). Ersetzt die Wiedervorlage für die AdSense-Rückkehr: Sie erinnert nicht an ein Datum, sie merkt, dass etwas passiert ist.
