@@ -3,11 +3,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { kategorien, getRechnerByKategorie, beliebteRechnerSlugs, rechner } from '@/lib/rechner-config/client-data';
-import { useCookieConsent } from '@/components/cookie/CookieConsentProvider';
 
 export default function Footer() {
-  const { openSettings } = useCookieConsent();
-
   const beliebteRechner = beliebteRechnerSlugs
     .map(slug => rechner.find(r => r.slug === slug))
     .filter(Boolean)
@@ -124,14 +121,6 @@ export default function Footer() {
                 <Link href="/barrierefreiheit" className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm">
                   Barrierefreiheit
                 </Link>
-              </li>
-              <li>
-                <button
-                  onClick={openSettings}
-                  className="text-primary-200 dark:text-gray-400 hover:text-white transition-colors text-sm"
-                >
-                  Cookie-Einstellungen
-                </button>
               </li>
             </ul>
           </div>

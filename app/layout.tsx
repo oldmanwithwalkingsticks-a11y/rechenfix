@@ -15,8 +15,7 @@ const inter = Inter({
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import ThemeProvider from '@/components/ThemeProvider';
-import CookieConsentProvider from '@/components/cookie/CookieConsentProvider';
-import CookieBanner from '@/components/cookie/CookieBanner';
+import EinwilligungsspeicherAufraeumen from '@/components/cookie/EinwilligungsspeicherAufraeumen';
 import ScrollToTop from '@/components/layout/ScrollToTop';
 import StructuredData from '@/components/seo/StructuredData';
 import CssLoader from '@/components/CssLoader';
@@ -118,14 +117,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <StructuredData data={generateWebsiteSchema()} />
         <ThemeProvider>
-          <CookieConsentProvider>
-            <Header />
-            <main id="main-content" tabIndex={-1} className="flex-1 outline-none">{children}</main>
-            <Footer />
-            <CookieBanner />
-            <ScrollToTop />
-          </CookieConsentProvider>
+          <Header />
+          <main id="main-content" tabIndex={-1} className="flex-1 outline-none">{children}</main>
+          <Footer />
+          <ScrollToTop />
         </ThemeProvider>
+        <EinwilligungsspeicherAufraeumen />
         <Analytics />
         <PwaStart />
       </body>
