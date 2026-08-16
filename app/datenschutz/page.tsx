@@ -27,7 +27,7 @@ export default function DatenschutzSeite() {
         <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
           Datenschutzerklärung
         </h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: 30. Juli 2026</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: 16. August 2026</p>
 
         <div className="space-y-10 text-gray-700 dark:text-gray-300 text-[15px] leading-relaxed">
 
@@ -44,7 +44,6 @@ export default function DatenschutzSeite() {
               <li>Bereitstellung der Website und Gewährleistung ihrer Funktionalität</li>
               <li>Hosting und technische Infrastruktur</li>
               <li>Anonyme Reichweitenmessung über Vercel Analytics (cookielos, ohne Personenbezug)</li>
-              <li>Anzeige personalisierter Werbung (nur nach Einwilligung)</li>
               <li>Einbindung von Affiliate-Links</li>
               <li>Serverseitige, anonyme Nutzungsstatistik (Klicks, Feedback, Berechnungszähler)</li>
               <li>Kontaktaufnahme per E-Mail</li>
@@ -58,7 +57,7 @@ export default function DatenschutzSeite() {
             <p>Wir verarbeiten personenbezogene Daten auf Grundlage folgender Rechtsgrundlagen gemäß Art. 6 Abs. 1 DSGVO:</p>
             <ul className="list-disc pl-5 space-y-2 mt-3">
               <li>
-                <strong>Einwilligung (Art. 6 Abs. 1 lit. a DSGVO):</strong> Für den Einsatz von Google AdSense und nicht-essenzielle Cookies. Die Einwilligung kann jederzeit über unseren Cookie-Banner oder per E-Mail an uns widerrufen werden.
+                <strong>Einwilligung (Art. 6 Abs. 1 lit. a DSGVO):</strong> Für den Einsatz nicht-essenzieller Cookies. Die Einwilligung kann jederzeit über unseren Cookie-Banner oder per E-Mail an uns widerrufen werden.
               </li>
               <li>
                 <strong>Vertragserfüllung (Art. 6 Abs. 1 lit. b DSGVO):</strong> Soweit die Verarbeitung zur Bereitstellung unserer kostenlosen Online-Rechner erforderlich ist.
@@ -155,11 +154,6 @@ export default function DatenschutzSeite() {
                     <td className="p-3">Art. 6 Abs. 1 lit. f DSGVO</td>
                   </tr>
                   <tr>
-                    <td className="p-3">Werbung</td>
-                    <td className="p-3">Google AdSense</td>
-                    <td className="p-3">Art. 6 Abs. 1 lit. a DSGVO</td>
-                  </tr>
-                  <tr>
                     <td className="p-3">Offline-Nutzung</td>
                     <td className="p-3">Merken Ihrer Entscheidung zur Offline-Funktion (siehe Abschnitt 7a)</td>
                     <td className="p-3">§ 25 Abs. 1 TDDDG</td>
@@ -221,25 +215,8 @@ export default function DatenschutzSeite() {
             </p>
           </Section>
 
-          {/* 8. Google AdSense */}
-          <Section nr="8" titel="Google AdSense">
-            <p>
-              Wir nutzen Google AdSense, einen Anzeigendienst der Google Ireland Limited, zur Einblendung von Werbeanzeigen. Google AdSense wird <strong>ausschließlich nach Ihrer ausdrücklichen Einwilligung</strong> über unseren Cookie-Banner geladen.
-            </p>
-            <p className="mt-3">
-              Google AdSense verwendet Cookies und sogenannte Web Beacons, um die Website-Nutzung zu analysieren und relevante Werbung auszuspielen. Dabei können Daten (einschließlich Ihrer IP-Adresse) an Server von Google in den USA übertragen werden. Google ist unter dem EU-US Data Privacy Framework zertifiziert.
-            </p>
-            <p className="mt-3">
-              Rechtsgrundlage ist Ihre Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO. Sie können Ihre Einwilligung jederzeit über den Cookie-Banner widerrufen. Darüber hinaus können Sie personalisierte Werbung in den{' '}
-              <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-400 underline">
-                Google Ads-Einstellungen
-              </a>{' '}
-              deaktivieren.
-            </p>
-          </Section>
-
-          {/* 9. Affiliate-Links und Werbung */}
-          <Section nr="9" titel="Affiliate-Links und Werbung">
+          {/* 8. Affiliate-Links und Werbung */}
+          <Section nr="8" titel="Affiliate-Links und Werbung">
             <p>
               Einige Seiten auf rechenfix.de enthalten Empfehlungen und Links zu Produkten und Dienstleistungen Dritter (sog. Affiliate-Links). Diese Links sind als &bdquo;Anzeige&ldquo; gekennzeichnet. Wenn Sie auf einen solchen Link klicken und ein Produkt kaufen oder einen Vertrag abschließen, erhalten wir möglicherweise eine Provision vom Anbieter. Für Sie entstehen dabei keine zusätzlichen Kosten.
             </p>
@@ -281,14 +258,14 @@ export default function DatenschutzSeite() {
             </p>
           </Section>
 
-          {/* 9a. Serverseitige Nutzungsstatistik */}
-          <Section nr="9a" titel="Serverseitige Nutzungsstatistik (Upstash Redis)">
+          {/* 8a. Serverseitige Nutzungsstatistik */}
+          <Section nr="8a" titel="Serverseitige Nutzungsstatistik (Upstash Redis)">
             <p>
               Um unser Angebot zu verbessern und die Nutzung nachvollziehen zu können, speichern wir ausgewählte anonyme Nutzungsereignisse auf unserem Server. Konkret verarbeiten wir:
             </p>
             <ul className="list-disc pl-5 space-y-1 mt-3">
               <li><strong>Berechnungszähler:</strong> Ein einfacher, aggregierter Zählerstand, der bei jeder durchgeführten Berechnung um 1 erhöht wird. Es wird ausschließlich eine einzelne Zahl gespeichert — keine Zuordnung zu einer Person, Sitzung oder einem Gerät.</li>
-              <li><strong>Affiliate-Klicks:</strong> Programm-ID, Rechner-Seitenpfad und Zeitstempel (siehe Abschnitt 9).</li>
+              <li><strong>Affiliate-Klicks:</strong> Programm-ID, Rechner-Seitenpfad und Zeitstempel (siehe Abschnitt 8).</li>
               <li><strong>Rechner-Feedback:</strong> Wenn Sie auf den &bdquo;Daumen hoch&ldquo;/&bdquo;Daumen runter&ldquo;-Button unter einem Rechner klicken, speichern wir die Bewertung (ja/nein), den Pfad des Rechners und den Zeitstempel. Bei negativem Feedback können Sie zusätzlich freiwillig einen Freitext-Hinweis absenden; dieser wird ebenfalls gespeichert. Geben Sie dort bitte keine personenbezogenen Daten ein.</li>
             </ul>
             <p className="mt-3">
@@ -302,8 +279,8 @@ export default function DatenschutzSeite() {
             </p>
           </Section>
 
-          {/* 10. KI-Funktionen */}
-          <Section nr="10" titel="KI-Funktionen (KI-Rechner und KI-Erklärungen)">
+          {/* 9. KI-Funktionen */}
+          <Section nr="9" titel="KI-Funktionen (KI-Rechner und KI-Erklärungen)">
             <p>
               Rechenfix.de bietet KI-gestützte Funktionen an: den <strong>KI-Rechner</strong>, bei dem Sie
               eine Rechenfrage in natürlicher Sprache stellen können, sowie <strong>KI-Erklärungen</strong>,
@@ -354,8 +331,8 @@ export default function DatenschutzSeite() {
             </p>
           </Section>
 
-          {/* 11. Social Media */}
-          <Section nr="11" titel="Präsenzen in sozialen Netzwerken">
+          {/* 10. Social Media */}
+          <Section nr="10" titel="Präsenzen in sozialen Netzwerken">
             <p>
               Wir unterhalten öffentlich zugängliche Profile in sozialen Netzwerken, um über unsere Rechner und Inhalte zu informieren und mit interessierten Nutzern zu kommunizieren. Konkret betreiben wir Auftritte bei Instagram, Facebook, TikTok und YouTube (jeweils unter dem Namen &bdquo;rechenfix&ldquo;).
             </p>
@@ -397,8 +374,8 @@ export default function DatenschutzSeite() {
             </p>
           </Section>
 
-          {/* 12. Kontakt per E-Mail */}
-          <Section nr="12" titel="Kontaktaufnahme per E-Mail">
+          {/* 11. Kontakt per E-Mail */}
+          <Section nr="11" titel="Kontaktaufnahme per E-Mail">
             <p>
               Wenn Sie uns per E-Mail kontaktieren, werden die von Ihnen mitgeteilten Daten (z.&nbsp;B. Name, E-Mail-Adresse, Inhalt der Anfrage) von uns gespeichert und verarbeitet, um Ihre Anfrage zu beantworten.
             </p>
@@ -426,8 +403,8 @@ export default function DatenschutzSeite() {
             </Hinweisbox>
           </Section>
 
-          {/* 13. Rechte der Betroffenen */}
-          <Section nr="13" titel="Ihre Rechte als betroffene Person">
+          {/* 12. Rechte der Betroffenen */}
+          <Section nr="12" titel="Ihre Rechte als betroffene Person">
             <p>Sie haben gemäß DSGVO folgende Rechte hinsichtlich Ihrer personenbezogenen Daten:</p>
             <ul className="list-disc pl-5 space-y-2 mt-3">
               <li>
@@ -457,8 +434,8 @@ export default function DatenschutzSeite() {
             </p>
           </Section>
 
-          {/* 14. Widerrufsrecht */}
-          <Section nr="14" titel="Widerrufsrecht für erteilte Einwilligungen">
+          {/* 13. Widerrufsrecht */}
+          <Section nr="13" titel="Widerrufsrecht für erteilte Einwilligungen">
             <p>
               Gemäß Art. 7 Abs. 3 DSGVO haben Sie das Recht, eine einmal erteilte Einwilligung jederzeit mit Wirkung für die Zukunft zu widerrufen. Die Rechtmäßigkeit der aufgrund der Einwilligung bis zum Widerruf erfolgten Verarbeitung wird dadurch nicht berührt.
             </p>
@@ -472,8 +449,8 @@ export default function DatenschutzSeite() {
             </ul>
           </Section>
 
-          {/* 15. Beschwerderecht */}
-          <Section nr="15" titel="Recht auf Beschwerde bei einer Aufsichtsbehörde">
+          {/* 14. Beschwerderecht */}
+          <Section nr="14" titel="Recht auf Beschwerde bei einer Aufsichtsbehörde">
             <p>
               Gemäß Art. 77 DSGVO haben Sie das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren, wenn Sie der Ansicht sind, dass die Verarbeitung Ihrer personenbezogenen Daten gegen die DSGVO verstößt.
             </p>
@@ -491,8 +468,8 @@ export default function DatenschutzSeite() {
             </div>
           </Section>
 
-          {/* 16. Änderungen */}
-          <Section nr="16" titel="Änderungen dieser Datenschutzerklärung">
+          {/* 15. Änderungen */}
+          <Section nr="15" titel="Änderungen dieser Datenschutzerklärung">
             <p>
               Wir behalten uns vor, diese Datenschutzerklärung anzupassen, um sie an geänderte Rechtslagen oder bei Änderungen des Dienstes bzw. der Datenverarbeitung anzupassen. Die aktuelle Version ist stets auf dieser Seite abrufbar.
             </p>
