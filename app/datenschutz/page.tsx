@@ -47,8 +47,8 @@ export default function DatenschutzSeite() {
               <li>Einbindung von Affiliate-Links</li>
               <li>Serverseitige, anonyme Nutzungsstatistik (Klicks, Feedback, Berechnungszähler)</li>
               <li>Kontaktaufnahme per E-Mail</li>
-              <li>Cookie-Verwaltung über eigenen Consent-Banner</li>
               <li>Optionale Offline-Nutzung über lokal gespeicherte Websitebestandteile</li>
+              <li>Optionaler Rechenverlauf, der ausschließlich im Browser des Nutzers verbleibt</li>
             </ul>
           </Section>
 
@@ -57,15 +57,15 @@ export default function DatenschutzSeite() {
             <p>Wir verarbeiten personenbezogene Daten auf Grundlage folgender Rechtsgrundlagen gemäß Art. 6 Abs. 1 DSGVO:</p>
             <ul className="list-disc pl-5 space-y-2 mt-3">
               <li>
-                <strong>Einwilligung (Art. 6 Abs. 1 lit. a DSGVO):</strong> Für den Einsatz nicht-essenzieller Cookies. Die Einwilligung kann jederzeit über unseren Cookie-Banner oder per E-Mail an uns widerrufen werden.
-              </li>
-              <li>
                 <strong>Vertragserfüllung (Art. 6 Abs. 1 lit. b DSGVO):</strong> Soweit die Verarbeitung zur Bereitstellung unserer kostenlosen Online-Rechner erforderlich ist.
               </li>
               <li>
-                <strong>Berechtigte Interessen (Art. 6 Abs. 1 lit. f DSGVO):</strong> Für technisch notwendige Cookies, das Hosting der Website, die SSL/TLS-Verschlüsselung, die anonyme Reichweitenmessung über Vercel Analytics sowie die Einbindung von Affiliate-Links zur Finanzierung des Angebots.
+                <strong>Berechtigte Interessen (Art. 6 Abs. 1 lit. f DSGVO):</strong> Für das Hosting der Website, die SSL/TLS-Verschlüsselung, die anonyme Reichweitenmessung über Vercel Analytics sowie die Einbindung von Affiliate-Links zur Finanzierung des Angebots.
               </li>
             </ul>
+            <p className="mt-3">
+              Für Speicherungen auf Ihrem Endgerät gilt zusätzlich <strong>§ 25 TDDDG</strong>. Diese Vorschrift schützt das Endgerät als solches, unabhängig davon, ob personenbezogene Daten betroffen sind. Welche Speicherungen es gibt und worauf sie beruhen, steht in Abschnitt 7.
+            </p>
           </Section>
 
           {/* 4. SSL/TLS */}
@@ -123,40 +123,39 @@ export default function DatenschutzSeite() {
           </Section>
 
           {/* 7. Cookies */}
-          <Section nr="7" titel="Cookies und Einwilligung">
-            <h3 className="font-bold text-gray-800 dark:text-gray-100 mt-4 mb-2">7.1 Was sind Cookies?</h3>
+          <Section nr="7" titel="Cookies und Speicherung auf Ihrem Endgerät">
             <p>
-              Cookies sind kleine Textdateien, die auf Ihrem Endgerät gespeichert werden. Sie richten keinen Schaden an und enthalten keine Viren. Cookies ermöglichen es, unser Angebot nutzerfreundlicher und effektiver zu gestalten.
-            </p>
-
-            <h3 className="font-bold text-gray-800 dark:text-gray-100 mt-6 mb-2">7.2 Cookie-Consent-Banner</h3>
-            <p>
-              Wir verwenden einen <strong>selbst programmierten Cookie-Consent-Banner</strong> (kein Drittanbieter-Tool). Beim ersten Besuch unserer Website werden Sie gefragt, ob Sie der Verwendung nicht-essenzieller Cookies zustimmen. Ihre Entscheidung wird in einem lokalen Cookie gespeichert, sodass Sie nicht bei jedem Besuch erneut gefragt werden.
+              Diese Website setzt <strong>keine Cookies zu Werbe- oder Analysezwecken</strong> ein und bindet keine Dienste Dritter ein, die auf Ihr Endgerät zugreifen. Im Browser gespeichert wird ausschließlich, was Sie selbst einschalten: Ihre Darstellungseinstellung, die Offline-Nutzung und &mdash; falls von Ihnen aktiviert &mdash; Ihr Rechenverlauf. Diese Angaben verlassen Ihr Gerät nicht.
             </p>
             <p className="mt-3">
-              Sie können Ihre Einwilligung jederzeit widerrufen, indem Sie den entsprechenden Cookie in Ihrem Browser löschen oder uns per E-Mail kontaktieren.
+              Beim gewöhnlichen Besuch dieser Website wird nichts auf Ihrem Gerät abgelegt. Deshalb gibt es auch keinen Einwilligungsbanner: Über jede Speicherung entscheiden Sie dort, wo die zugehörige Funktion steht. Schalten Sie eine Funktion wieder ab, werden die dazu gespeicherten Angaben gelöscht.
             </p>
 
-            <h3 className="font-bold text-gray-800 dark:text-gray-100 mt-6 mb-2">7.3 Arten von Cookies</h3>
+            <h3 className="font-bold text-gray-800 dark:text-gray-100 mt-6 mb-2">7.1 Was im Einzelnen gespeichert wird</h3>
             <div className="overflow-x-auto mt-3">
               <table className="w-full text-sm border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
                 <thead>
                   <tr className="bg-gray-50 dark:bg-gray-700/50">
-                    <th className="text-left p-3 font-semibold text-gray-800 dark:text-gray-200">Kategorie</th>
-                    <th className="text-left p-3 font-semibold text-gray-800 dark:text-gray-200">Zweck</th>
+                    <th className="text-left p-3 font-semibold text-gray-800 dark:text-gray-200">Was</th>
+                    <th className="text-left p-3 font-semibold text-gray-800 dark:text-gray-200">Wodurch ausgelöst</th>
                     <th className="text-left p-3 font-semibold text-gray-800 dark:text-gray-200">Rechtsgrundlage</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                   <tr>
-                    <td className="p-3">Essenziell</td>
-                    <td className="p-3">Cookie-Einwilligung, Dark-Mode-Einstellung</td>
-                    <td className="p-3">Art. 6 Abs. 1 lit. f DSGVO</td>
+                    <td className="p-3">Darstellungseinstellung (heller oder dunkler Modus)</td>
+                    <td className="p-3">Ihr Klick auf den Umschalter im Seitenkopf</td>
+                    <td className="p-3">§ 25 Abs. 2 Nr. 2 TDDDG</td>
                   </tr>
                   <tr>
-                    <td className="p-3">Offline-Nutzung</td>
-                    <td className="p-3">Merken Ihrer Entscheidung zur Offline-Funktion (siehe Abschnitt 7a)</td>
-                    <td className="p-3">§ 25 Abs. 1 TDDDG</td>
+                    <td className="p-3">Ihre Entscheidung zur Offline-Nutzung und die dafür gespeicherten Websitebestandteile (siehe Abschnitt 7a)</td>
+                    <td className="p-3">Ihr Schalter auf der Seite Offline-Nutzung; im installierten Zustand der Start über das Symbol</td>
+                    <td className="p-3">§ 25 Abs. 1 TDDDG bzw. § 25 Abs. 2 Nr. 2 TDDDG</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3">Rechenverlauf im Prozentrechner (siehe Abschnitt 7b)</td>
+                    <td className="p-3">Ihr Schalter unterhalb der Verlaufsanzeige</td>
+                    <td className="p-3">§ 25 Abs. 2 Nr. 2 TDDDG</td>
                   </tr>
                 </tbody>
               </table>
@@ -212,6 +211,40 @@ export default function DatenschutzSeite() {
             <h3 className="font-bold text-gray-800 dark:text-gray-100 mt-6 mb-2">7a.5 Hinweis zur Aktualität</h3>
             <p>
               Solange eine Internetverbindung besteht, wird jede Seite frisch geladen; Sie sehen dann stets den aktuellen Stand. Gespeicherte Fassungen werden ausschließlich dann angezeigt, wenn keine Verbindung erreichbar ist. Da zahlreiche Berechnungen auf gesetzlich festgelegten Werten beruhen, die sich ändern können, sollten Sie Ergebnisse, auf die es ankommt, mit bestehender Verbindung erneut prüfen.
+            </p>
+          </Section>
+
+          {/* 7b. Rechenverlauf */}
+          <Section nr="7b" titel="Rechenverlauf (optional)">
+            <p>
+              Einzelne Rechner &mdash; derzeit der{' '}
+              <Link href="/alltag/prozentrechner" className="text-primary-600 dark:text-primary-400 hover:underline">
+                Prozentrechner
+              </Link>{' '}
+              &mdash; können Ihre letzten Ergebnisse als Verlauf anzeigen. Ob dieser Verlauf über die laufende Sitzung hinaus auf Ihrem Gerät erhalten bleibt, entscheiden Sie selbst.
+            </p>
+
+            <h3 className="font-bold text-gray-800 dark:text-gray-100 mt-6 mb-2">7b.1 Was gespeichert wird</h3>
+            <p>
+              Gespeichert werden höchstens die <strong>fünf zuletzt angezeigten Ergebnisse</strong> des jeweiligen Rechners: die Beschriftung der Rechnung, das Ergebnis, die gewählte Rechenart und die Uhrzeit. Die Angaben verbleiben in Ihrem Browser; sie werden <strong>nicht an uns und nicht an Dritte übermittelt</strong> und nicht ausgewertet.
+            </p>
+
+            <h3 className="font-bold text-gray-800 dark:text-gray-100 mt-6 mb-2">7b.2 Wann dies geschieht</h3>
+            <p>
+              Beim gewöhnlichen Benutzen des Rechners wird <strong>nichts</strong> auf Ihrem Gerät abgelegt. Der Verlauf besteht dann allein im Arbeitsspeicher und endet, sobald Sie die Seite verlassen. Erst wenn Sie den Schalter <em>&bdquo;Rechenverlauf auf diesem Gerät speichern&ldquo;</em> unterhalb der Verlaufsanzeige einschalten, wird er dauerhaft abgelegt.
+            </p>
+
+            <h3 className="font-bold text-gray-800 dark:text-gray-100 mt-6 mb-2">7b.3 Rechtsgrundlage</h3>
+            <p>
+              <strong>§ 25 Abs. 2 Nr. 2 TDDDG.</strong> Die Speicherung wird ausschließlich durch Ihre eigene Entscheidung ausgelöst und ist erforderlich, um den von Ihnen gewünschten Dienst &mdash; einen über die Sitzung hinaus erhaltenen Verlauf &mdash; überhaupt bereitzustellen. Eine Verarbeitung personenbezogener Daten im Sinne der Datenschutz-Grundverordnung ist damit nicht verbunden; § 25 TDDDG schützt das Endgerät als solches und gilt unabhängig davon, ob ein Personenbezug vorliegt.
+            </p>
+
+            <h3 className="font-bold text-gray-800 dark:text-gray-100 mt-6 mb-2">7b.4 Speicherdauer und Widerruf</h3>
+            <p>
+              Der Verlauf bleibt erhalten, bis Sie ihn abschalten oder die Websitedaten in Ihrem Browser löschen. Beim <strong>Abschalten werden sowohl der gespeicherte Verlauf als auch das Kennzeichen Ihrer Entscheidung gelöscht</strong> und die Anzeige geleert. Der Widerruf ist damit ebenso einfach möglich wie die Erteilung.
+            </p>
+            <p className="mt-3">
+              Verläufe, die vor der Einführung dieses Schalters ohne Ihre Entscheidung angelegt wurden, werden beim ersten Aufruf des Rechners automatisch gelöscht.
             </p>
           </Section>
 
@@ -440,12 +473,22 @@ export default function DatenschutzSeite() {
               Gemäß Art. 7 Abs. 3 DSGVO haben Sie das Recht, eine einmal erteilte Einwilligung jederzeit mit Wirkung für die Zukunft zu widerrufen. Die Rechtmäßigkeit der aufgrund der Einwilligung bis zum Widerruf erfolgten Verarbeitung wird dadurch nicht berührt.
             </p>
             <p className="mt-3">
-              Sie können Ihre Einwilligung widerrufen, indem Sie:
+              Über jede Speicherung auf Ihrem Endgerät entscheiden Sie unmittelbar dort, wo die zugehörige Funktion steht. Einen Einwilligungsbanner gibt es nicht, weil beim gewöhnlichen Besuch nichts gespeichert wird. Die einzelnen Schalter finden Sie hier:
             </p>
             <ul className="list-disc pl-5 space-y-1 mt-3">
-              <li>Den Cookie-Banner erneut aufrufen und Ihre Einstellungen ändern</li>
-              <li>Die entsprechenden Cookies in Ihrem Browser löschen</li>
-              <li>Uns per E-Mail an <a href="mailto:info@rechenfix.de" className="text-primary-600 dark:text-primary-400 underline">info@rechenfix.de</a> kontaktieren</li>
+              <li>
+                <strong>Darstellung (heller oder dunkler Modus):</strong> Umschalter im Seitenkopf
+              </li>
+              <li>
+                <strong>Offline-Nutzung:</strong> auf der Seite{' '}
+                <Link href="/offline-nutzung" className="text-primary-600 dark:text-primary-400 hover:underline">Offline-Nutzung</Link>{' '}
+                &mdash; Abschalten löscht zugleich alle gespeicherten Inhalte
+              </li>
+              <li>
+                <strong>Rechenverlauf:</strong> Schalter unterhalb der Verlaufsanzeige im jeweiligen Rechner &mdash; Abschalten löscht den gespeicherten Verlauf
+              </li>
+              <li>Darüber hinaus können Sie die Websitedaten jederzeit in Ihrem Browser löschen</li>
+              <li>Oder uns per E-Mail an <a href="mailto:info@rechenfix.de" className="text-primary-600 dark:text-primary-400 underline">info@rechenfix.de</a> kontaktieren</li>
             </ul>
           </Section>
 
