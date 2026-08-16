@@ -15,6 +15,7 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 import TabGroup from '@/components/ui/TabGroup';
+import { useOptInStorage } from '@/hooks/useOptInStorage';
 
 type Modus = 'prozentwert' | 'prozentsatz' | 'grundwert' | 'aufschlag' | 'abschlag';
 
@@ -28,7 +29,14 @@ interface HistoryEintrag {
 }
 
 const HISTORY_KEY = 'rechenfix_prozent_history';
+const HISTORY_CONSENT_KEY = 'rechenfix-verlauf-einwilligung';
 const MAX_HISTORY = 5;
+
+/**
+ * Der Ausgangswert liegt im Modul-Scope, damit er bei jedem Rendern dieselbe
+ * Referenz hat — sonst laufen die Effekte im Speicher-Hook unnoetig erneut.
+ */
+const LEERER_VERLAUF: HistoryEintrag[] = [];
 
 interface ModusInfo {
   key: Modus;
@@ -59,15 +67,21 @@ export default function Prozentrechner() {
   const initial = MODI.find(m => m.key === 'prozentwert')!;
   const [wert1, setWert1] = useState(initial.default1);
   const [wert2, setWert2] = useState(initial.default2);
-  const [history, setHistory] = useState<HistoryEintrag[]>([]);
-
-  // History aus localStorage laden
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(HISTORY_KEY);
-      if (stored) setHistory(JSON.parse(stored));
-    } catch { /* ignore */ }
-  }, []);
+  // Der Verlauf wird nur auf dem Geraet abgelegt, wenn der Nutzer es einschaltet
+  // (§ 25 Abs. 2 Nr. 2 TDDDG). Ohne Schalter besteht er allein im Arbeitsspeicher
+  // der laufenden Sitzung. Begruendung im Kopf von hooks/useOptInStorage.ts.
+  const {
+    aktiv: verlaufGespeichert,
+    bereit: verlaufBereit,
+    daten: history,
+    setzeDaten: setHistory,
+    einschalten: verlaufEinschalten,
+    ausschalten: verlaufAusschalten,
+  } = useOptInStorage<HistoryEintrag[]>({
+    einwilligungsSchluessel: HISTORY_CONSENT_KEY,
+    datenSchluessel: HISTORY_KEY,
+    initialwert: LEERER_VERLAUF,
+  });
 
   const n1 = parseDeutscheZahl(wert1);
   const n2 = parseDeutscheZahl(wert2);
@@ -114,12 +128,8 @@ export default function Prozentrechner() {
       modus: aktuellerModus.kurz,
       zeit: new Date().toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' }),
     };
-    setHistory(prev => {
-      const neu = [eintrag, ...prev.filter(h => h.label !== label)].slice(0, MAX_HISTORY);
-      try { localStorage.setItem(HISTORY_KEY, JSON.stringify(neu)); } catch { /* ignore */ }
-      return neu;
-    });
-  }, [ergebnisEinheit, aktuellerModus.kurz]);
+    setHistory(prev => [eintrag, ...prev.filter(h => h.label !== label)].slice(0, MAX_HISTORY));
+  }, [ergebnisEinheit, aktuellerModus.kurz, setHistory]);
 
   useEffect(() => {
     if (berechnung && ergebnisLabel) {
@@ -252,10 +262,12 @@ export default function Prozentrechner() {
       </TabGroup>
 
       {/* Letzte Berechnungen */}
-      {history.length > 1 && (
+      {history.length > 0 && (
         <div className="mt-6">
+          {history.length > 1 && (
+            <>
           <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-2">Letzte Berechnungen</h3>
-          <div className="space-y-1.5">
+          <div className="space-y-1.5 mb-3">
             {history.slice(1).map((h, i) => (
               <div key={i} className="flex items-center justify-between bg-gray-50 dark:bg-gray-700/30 rounded-lg px-3 py-2 text-sm">
                 <span className="text-gray-600 dark:text-gray-400 truncate">
@@ -266,6 +278,43 @@ export default function Prozentrechner() {
               </div>
             ))}
           </div>
+            </>
+          )}
+
+          {/* Opt-in-Schalter. Ohne ihn bleibt der Verlauf im Arbeitsspeicher und
+              endet mit der Sitzung — auf dem Geraet wird dann nichts abgelegt. */}
+          {verlaufBereit && (
+            <div className="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+              <div className="flex items-start justify-between gap-4">
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-gray-800 dark:text-gray-100">
+                    Rechenverlauf auf diesem Gerät speichern
+                  </p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mt-1 leading-relaxed">
+                    {verlaufGespeichert
+                      ? 'Der Verlauf bleibt nach dem Schließen des Browsers erhalten. Beim Abschalten werden die gespeicherten Einträge gelöscht.'
+                      : 'Derzeit wird nichts gespeichert — der Verlauf endet mit dieser Sitzung. Eingeschaltet bleibt er auf diesem Gerät erhalten und verlässt es nicht.'}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  role="switch"
+                  aria-checked={verlaufGespeichert}
+                  aria-label="Rechenverlauf auf diesem Gerät speichern"
+                  onClick={verlaufGespeichert ? verlaufAusschalten : verlaufEinschalten}
+                  className={`relative shrink-0 mt-0.5 w-11 h-6 rounded-full transition-colors duration-200 cursor-pointer ${
+                    verlaufGespeichert ? 'bg-green-600' : 'bg-gray-400 hover:bg-gray-500'
+                  }`}
+                >
+                  <span
+                    className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform duration-200 ${
+                      verlaufGespeichert ? 'translate-x-5' : 'translate-x-0'
+                    }`}
+                  />
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>
