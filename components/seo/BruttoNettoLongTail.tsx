@@ -5,7 +5,6 @@ import type { BruttoNettoErgebnis } from '@/lib/berechnungen/brutto-netto';
 import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from '@/lib/berechnungen/sv-parameter';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import ZurueckButton from '@/components/layout/ZurueckButton';
-import AdSlot from '@/components/ads/AdSlot';
 import StructuredData from '@/components/seo/StructuredData';
 import StandardBruttoNettoBlock from '@/components/seo/StandardBruttoNettoBlock';
 import StandHinweis from '@/components/StandHinweis';
@@ -117,7 +116,6 @@ export default function BruttoNettoLongTail({
 
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="flex-1 min-w-0">
-          <AdSlot typ="leaderboard" className="mb-6" />
 
           <ZurueckButton fallbackHref="/finanzen" label="Zurück" />
 
@@ -265,7 +263,6 @@ export default function BruttoNettoLongTail({
           {/* AuthorBio (W15B) — Authorship → Commercial-Hierarchie analog W15A.2 */}
           {zeigtAuthorBio && <AuthorBio />}
 
-          <AdSlot typ="leaderboard" />
         </div>
       </div>
     </div>

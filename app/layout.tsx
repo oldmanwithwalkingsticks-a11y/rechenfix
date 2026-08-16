@@ -18,13 +18,11 @@ import ThemeProvider from '@/components/ThemeProvider';
 import CookieConsentProvider from '@/components/cookie/CookieConsentProvider';
 import CookieBanner from '@/components/cookie/CookieBanner';
 import ScrollToTop from '@/components/layout/ScrollToTop';
-import ConsentScripts from '@/components/cookie/ConsentScripts';
 import StructuredData from '@/components/seo/StructuredData';
 import CssLoader from '@/components/CssLoader';
 import PwaStart from '@/components/pwa/PwaStart';
 import { generateWebsiteSchema } from '@/lib/seo';
 import { Analytics } from '@vercel/analytics/next';
-import { ADSENSE_PUBLISHER_ID } from '@/lib/adsense-config';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -92,9 +90,6 @@ export const metadata: Metadata = {
   verification: {
     google: '_ZYnL2qqwrcx4Nz7KxkPG2cTlBOapbWbi7IdX3dzHFI',
   },
-  other: {
-    'google-adsense-account': ADSENSE_PUBLISHER_ID,
-  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -124,7 +119,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <StructuredData data={generateWebsiteSchema()} />
         <ThemeProvider>
           <CookieConsentProvider>
-            <ConsentScripts />
             <Header />
             <main id="main-content" tabIndex={-1} className="flex-1 outline-none">{children}</main>
             <Footer />

@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import ZurueckButton from '@/components/layout/ZurueckButton';
-import AdSlot from '@/components/ads/AdSlot';
 import StructuredData from '@/components/seo/StructuredData';
 import { generateFAQSchema, generateBreadcrumbSchema } from '@/lib/seo';
 import { kategorien, getRechnerByKategorie } from '@/lib/rechner-config';
@@ -105,7 +104,6 @@ export default function WohngeldErklaerseite() {
 
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="flex-1 min-w-0">
-          <AdSlot typ="leaderboard" className="mb-6" />
 
           <ZurueckButton fallbackHref="/finanzen" label="Zurück" />
 
@@ -567,7 +565,6 @@ export default function WohngeldErklaerseite() {
             </section>
           </div>
 
-          <AdSlot typ="rectangle" className="mb-8" />
         </div>
 
         {/* Sidebar — hidden on mobile, visible on desktop (identisch zu Rechner-Seiten) */}
@@ -612,8 +609,6 @@ export default function WohngeldErklaerseite() {
                 );
               })}
 
-            {/* Ad Sidebar */}
-            <AdSlot typ="rectangle" className="mt-3" />
           </div>
         </aside>
       </div>

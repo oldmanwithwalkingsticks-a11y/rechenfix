@@ -4,7 +4,6 @@ import { rechner as alleRechner, kategorien, getRechnerBySlug, getRechnerByKateg
 import { generateRechnerMetadata, generateFAQSchema, generateWebApplicationSchema, generateBreadcrumbSchema } from '@/lib/seo';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import ZurueckButton from '@/components/layout/ZurueckButton';
-import AdSlot from '@/components/ads/AdSlot';
 import StructuredData from '@/components/seo/StructuredData';
 import FeedbackButtons from '@/components/ui/FeedbackButtons';
 import { AffiliateBox } from '@/components/AffiliateBox';
@@ -58,7 +57,6 @@ export default async function RechnerSeite({ params }: Props) {
   // meta.ts des Artikels; zu den allermeisten Rechnern gibt es keinen, dann bleibt
   // blogArtikel undefined und BlogHinweis rendert nichts.
   const blogArtikel = await getArtikelZuRechner(config.slug);
-
 
   const verwandteRechner = getVerwandteRechner(config, 4);
 
@@ -159,9 +157,6 @@ export default async function RechnerSeite({ params }: Props) {
 
           {/* Blogartikel zu diesem Rechner (W68) — rendert nichts, wenn es keinen gibt. */}
           <BlogHinweis artikel={blogArtikel} />
-
-          {/* Ad Middle */}
-          <AdSlot typ="rectangle" className="mb-8" />
 
           {/* Erklaerung & FAQ — eager rendered für SSR-Sichtbarkeit (AdSense)
               Inline-Erklär-Slugs (W13.1.1+) skippen diesen Block, weil ihre Component
@@ -265,8 +260,6 @@ export default async function RechnerSeite({ params }: Props) {
             </section>
           )}
 
-          {/* Ad Bottom */}
-          <AdSlot typ="leaderboard" />
         </div>
 
         {/* Sidebar — hidden on mobile, visible on desktop */}
@@ -311,8 +304,6 @@ export default async function RechnerSeite({ params }: Props) {
                 );
               })}
 
-            {/* Ad Sidebar */}
-            <AdSlot typ="rectangle" className="mt-3" />
           </div>
         </aside>
       </div>

@@ -3,7 +3,6 @@ import { berechneBruttoNetto } from '@/lib/berechnungen/brutto-netto';
 import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from '@/lib/berechnungen/sv-parameter';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import ZurueckButton from '@/components/layout/ZurueckButton';
-import AdSlot from '@/components/ads/AdSlot';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import StructuredData from '@/components/seo/StructuredData';
 import { generateBreadcrumbSchema, generateFAQSchema } from '@/lib/seo';
@@ -88,7 +87,6 @@ export default function BruttoNettoTabelle() {
 
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="flex-1 min-w-0">
-          <AdSlot typ="leaderboard" className="mb-6" />
 
           <ZurueckButton fallbackHref="/finanzen" label="Zurück" />
 
@@ -150,8 +148,6 @@ export default function BruttoNettoTabelle() {
               </Link>
             </div>
           </div>
-
-          <AdSlot typ="rectangle" className="mb-8" />
 
           {/* SEO-Text */}
           <section className="card p-6 md:p-8 mb-8">
@@ -229,7 +225,6 @@ export default function BruttoNettoTabelle() {
             </div>
           </section>
 
-          <AdSlot typ="leaderboard" />
         </div>
       </div>
     </div>

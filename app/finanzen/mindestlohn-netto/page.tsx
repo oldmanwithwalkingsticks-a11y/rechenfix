@@ -5,7 +5,6 @@ import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from '@/lib/berechnun
 import { MINDESTLOHN } from '@/lib/berechnungen/mindestlohn';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import ZurueckButton from '@/components/layout/ZurueckButton';
-import AdSlot from '@/components/ads/AdSlot';
 import StructuredData from '@/components/seo/StructuredData';
 import { generateBreadcrumbSchema, generateFAQSchema } from '@/lib/seo';
 import type { Metadata } from 'next';
@@ -107,7 +106,6 @@ export default function Page() {
 
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="flex-1 min-w-0">
-          <AdSlot typ="leaderboard" className="mb-6" />
 
           <ZurueckButton fallbackHref="/finanzen" label="Zurück" />
 
@@ -256,7 +254,6 @@ export default function Page() {
             </div>
           </section>
 
-          <AdSlot typ="leaderboard" />
         </div>
       </div>
     </div>
