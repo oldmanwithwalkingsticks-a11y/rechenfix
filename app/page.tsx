@@ -223,7 +223,7 @@ export default async function Startseite() {
           </div>
           <div>
             <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">Datenschutz</h3>
-            <p>Alle Berechnungen finden direkt in deinem Browser statt. Analyse- und Werbe-Cookies werden nur nach deiner Einwilligung geladen.</p>
+            <p>Alle Berechnungen finden direkt in deinem Browser statt. Analyse- und Werbe-Cookies setzen wir nicht ein.</p>
           </div>
         </div>
       </section>

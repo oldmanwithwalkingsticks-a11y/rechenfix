@@ -220,9 +220,9 @@ export default function QualitaetSeite() {
             einen Server übertragen, nicht protokolliert und nicht gespeichert.
           </p>
           <p className="mb-4">
-            Cookies werden nur mit ausdrücklicher Einwilligung gesetzt. Notwendige
-            technische Cookies (Sitzung) sind funktional unverzichtbar; Analyse- und
-            Marketing-Cookies sind optional und im Cookie-Banner einzeln steuerbar.
+            Analyse- und Marketing-Cookies setzen wir nicht ein. Gespeichert wird
+            allein, was für den Betrieb erforderlich ist — etwa Ihre Darstellungs-
+            einstellung (heller oder dunkler Modus).
           </p>
           <p>
             Vollständige Angaben zur Datenverarbeitung in der{' '}

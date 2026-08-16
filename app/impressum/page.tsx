@@ -96,7 +96,7 @@ export default function ImpressumSeite() {
               Hinweis zu Affiliate-Links
             </h2>
             <p>
-              Rechenfix.de finanziert sich über Werbeanzeigen und Affiliate-Partnerschaften. Für die Werbung wird Google AdSense genutzt — Anzeigen sind als &bdquo;Anzeige&ldquo; gekennzeichnet.
+              Rechenfix.de finanziert sich über Affiliate-Partnerschaften. Anzeigen sind als &bdquo;Anzeige&ldquo; gekennzeichnet. Werbeanzeigen Dritter werden derzeit nicht ausgespielt.
             </p>
             <p className="mt-3">
               Bei einigen Rechnern verlinken wir zu thematisch passenden Anbietern (u.&nbsp;a. CHECK24, WISO Steuer, smartsteuer, Cosmos Direkt) über das Affiliate-Netzwerk Awin. Klickt jemand auf einen solchen Link und schließt einen Vertrag ab, erhalten wir eine Vergütung. Für Nutzer entstehen dadurch keine Mehrkosten.

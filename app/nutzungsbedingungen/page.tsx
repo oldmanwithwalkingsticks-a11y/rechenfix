@@ -84,9 +84,9 @@ export default function NutzungsbedingungenSeite() {
           {/* 5. Werbung und Affiliate-Links */}
           <Section nr="5" titel="Werbung und Affiliate-Links">
             <p>
-              Die Website finanziert sich über Werbeanzeigen (Google AdSense) und
-              Affiliate-Partnerschaften (Awin). Anzeigen sind als &bdquo;Anzeige&ldquo;
-              gekennzeichnet. Bei einigen Rechnern wird zu thematisch passenden Anbietern verlinkt;
+              Die Website finanziert sich über Affiliate-Partnerschaften (Awin);
+              Werbeanzeigen Dritter werden derzeit nicht ausgespielt. Anzeigen sind
+              als &bdquo;Anzeige&ldquo; gekennzeichnet. Bei einigen Rechnern wird zu thematisch passenden Anbietern verlinkt;
               bei Vertragsabschluss über einen solchen Link kann der Anbieter eine Vergütung
               erhalten. Für Nutzer entstehen dadurch keine Mehrkosten. Details siehe{' '}
               <a href="/datenschutz" className="text-primary-600 dark:text-primary-400 underline">
