@@ -4,17 +4,15 @@ import { createContext, useContext, useEffect, useState, useCallback } from 'rea
 
 interface CookieConsent {
   necessary: boolean;
-  marketing: boolean;
   timestamp: string;
 }
 
 interface CookieConsentContextType {
   consent: CookieConsent | null;
   consentGiven: boolean;
-  marketingAllowed: boolean;
   bannerVisible: boolean;
   settingsVisible: boolean;
-  saveConsent: (consent: Omit<CookieConsent, 'necessary' | 'timestamp'>) => void;
+  saveConsent: () => void;
   resetConsent: () => void;
   openBanner: () => void;
   openSettings: () => void;
@@ -27,7 +25,6 @@ const CONSENT_MAX_AGE_DAYS = 365;
 const CookieConsentContext = createContext<CookieConsentContextType>({
   consent: null,
   consentGiven: false,
-  marketingAllowed: false,
   bannerVisible: false,
   settingsVisible: false,
   saveConsent: () => {},
@@ -75,36 +72,26 @@ export default function CookieConsentProvider({ children }: { children: React.Re
     setMounted(true);
   }, []);
 
-  const saveConsent = useCallback((partial: Omit<CookieConsent, 'necessary' | 'timestamp'>) => {
+  // R2 — Seit dem Rueckbau von AdSense wird keine Einwilligung mehr eingeholt,
+  // die ein Fremdskript freischaltet. Die Bestaetigung haelt nur noch fest, dass
+  // der Hinweis zur Kenntnis genommen wurde; das W73a-Neuladen beim Widerruf ist
+  // damit gegenstandslos und entfaellt.
+  const saveConsent = useCallback(() => {
     const full: CookieConsent = {
       necessary: true,
-      marketing: partial.marketing,
       timestamp: new Date().toISOString(),
     };
-    // W73a — Widerruf greift sonst erst beim naechsten vollstaendigen Seitenaufbau.
-    // Ein einmal geladenes Fremdskript verschwindet nicht, wenn React das
-    // zugehoerige Element aus dem Baum nimmt; es laeuft im Fenster weiter. Beim
-    // Zuruecknehmen der Marketing-Auswahl wird deshalb neu geladen.
-    const widerruf = consent?.marketing === true && partial.marketing === false;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(full));
     setConsent(full);
     setBannerVisible(false);
     setSettingsVisible(false);
-    if (widerruf) {
-      window.location.reload();
-    }
-  }, [consent]);
+  }, []);
 
   const resetConsent = useCallback(() => {
-    // Gleiche Ueberlegung wie oben: war Marketing aktiv, muss das Fenster neu.
-    const widerruf = consent?.marketing === true;
     localStorage.removeItem(STORAGE_KEY);
     setConsent(null);
     setBannerVisible(true);
-    if (widerruf) {
-      window.location.reload();
-    }
-  }, [consent]);
+  }, []);
 
   const openBanner = useCallback(() => {
     setBannerVisible(true);
@@ -127,7 +114,6 @@ export default function CookieConsentProvider({ children }: { children: React.Re
       value={{
         consent,
         consentGiven: consent !== null,
-        marketingAllowed: consent?.marketing ?? false,
         bannerVisible,
         settingsVisible,
         saveConsent,

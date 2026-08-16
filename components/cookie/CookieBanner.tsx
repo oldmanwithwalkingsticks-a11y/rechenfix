@@ -1,23 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useCookieConsent } from './CookieConsentProvider';
 
 export default function CookieBanner() {
-  const { bannerVisible, settingsVisible, consent, saveConsent, closeSettings } = useCookieConsent();
-  const [marketing, setMarketing] = useState(false);
-
-  // Toggles mit gespeichertem Consent synchronisieren wenn Settings geöffnet werden
-  useEffect(() => {
-    if (settingsVisible) {
-      setMarketing(consent?.marketing ?? false);
-    }
-  }, [settingsVisible, consent]);
-
-  const acceptAll = () => saveConsent({ marketing: true });
-  const acceptNecessary = () => saveConsent({ marketing: false });
-  const saveSelection = () => saveConsent({ marketing });
+  const { bannerVisible, settingsVisible, saveConsent, closeSettings } = useCookieConsent();
 
   return (
     <>
@@ -34,17 +21,14 @@ export default function CookieBanner() {
                   </Link>
                 </p>
                 <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 shrink-0">
+                  {/* R2 — Es gibt nur noch eine Kategorie, deshalb nur noch eine
+                      Schaltflaeche. Zwei Knoepfe mit identischer Wirkung waeren
+                      eine Scheinauswahl. */}
                   <button
-                    onClick={acceptAll}
+                    onClick={saveConsent}
                     className="bg-primary-500 hover:bg-primary-600 text-white font-semibold px-5 py-2.5 rounded-xl transition-colors text-sm"
                   >
-                    Alle akzeptieren
-                  </button>
-                  <button
-                    onClick={acceptNecessary}
-                    className="bg-gray-700 dark:bg-gray-600 hover:bg-gray-600 dark:hover:bg-gray-500 text-white font-medium px-5 py-2.5 rounded-xl transition-colors text-sm"
-                  >
-                    Nur notwendige
+                    Einverstanden
                   </button>
                   <BannerSettingsButton />
                 </div>
@@ -82,7 +66,7 @@ export default function CookieBanner() {
               </div>
 
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
-                Hier können Sie auswählen, welche Cookies Sie zulassen möchten. Notwendige Cookies sind für den Betrieb der Website erforderlich und können nicht deaktiviert werden.
+                Diese Website setzt keine Cookies zu Werbe- oder Analysezwecken. Gespeichert wird allein, was für den Betrieb erforderlich ist; diese Angaben können deshalb nicht abgewählt werden.
               </p>
 
               <div className="space-y-4">
@@ -94,29 +78,14 @@ export default function CookieBanner() {
                   disabled={true}
                   onChange={() => {}}
                 />
-
-                {/* Marketing */}
-                <CookieToggle
-                  label="Werbung (Google AdSense)"
-                  description="Ermöglichen die Anzeige personalisierter Werbung über Google AdSense."
-                  checked={marketing}
-                  disabled={false}
-                  onChange={setMarketing}
-                />
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3 mt-8">
                 <button
-                  onClick={saveSelection}
+                  onClick={saveConsent}
                   className="flex-1 bg-primary-500 hover:bg-primary-600 text-white font-semibold px-5 py-3 rounded-xl transition-colors text-sm"
                 >
-                  Auswahl speichern
-                </button>
-                <button
-                  onClick={acceptAll}
-                  className="flex-1 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 font-medium px-5 py-3 rounded-xl transition-colors text-sm"
-                >
-                  Alle akzeptieren
+                  Einverstanden
                 </button>
               </div>
             </div>
