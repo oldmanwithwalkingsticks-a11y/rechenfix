@@ -50,6 +50,9 @@ Entscheidung des Betreibers: AdSense ruht bis ca. 01/2027, alles nicht Benötigt
 | Datum | Seite | Geprüft durch | Ergebnis |
 |---|---|---|---|
 | 16.08.2026 | `/impressum`, `/barrierefreiheit` | Karsten, Inkognito-Browser | **offen** — Datum sichtbar? Dark Mode lesbar? Position wie `/datenschutz`? |
+| 16.08.2026 | Opt-in-Speicherung nach R3 | Karsten, Inkognito + Application-Tab | **bestanden.** Startseite ohne Banner und ohne Dialog. Prozentrechner ohne Schalter benutzt → kein `rechenfix_prozent_history`, Verlauf nur im Arbeitsspeicher. Schalter an → Verlauf und Einwilligungskennzeichen vorhanden. Schalter aus → **beide** entfernt, kehren nach Neuladen nicht zurück. Einzige Abweichung: `rechenfix-theme` wird bereits beim Seitenaufruf ohne Nutzerwahl geschrieben — behoben mit R4. |
+| 16.08.2026 | Theme-Speicherung nach R4 | Karsten, Inkognito + Application-Tab | **offen** — (1) Startseite laden, nichts anklicken → Local Storage leer? (2) System auf dunkel, laden → dunkle Darstellung, weiterhin kein Eintrag? (3) Umschalter betätigen → Eintrag erscheint? (4) Neu laden → gewählte Darstellung bleibt, kein Umspringen? |
+| 16.08.2026 | Admin-Anmeldung nach S1 | Karsten, Application-Tab | **offen** — Session storage leer, unter Cookies ein `rf_admin_session` mit gesetztem `HttpOnly`-Häkchen? |
 | 16.08.2026 | Startseite, vor Einwilligung | Karsten, Netzwerk-Tab + Application-Tab | **bestanden.** 66 Requests, ausschließlich gegen `www.rechenfix.de`. Keine Verbindung zu Google, doubleclick, googlesyndication oder awin. Schriftart lokal ausgeliefert, keine Google Fonts. Local Storage enthält allein `rechenfix-theme` (Dark-Mode-Schalter). Vercel Analytics läuft first-party über `script.js` + `view`; im Code ist das Cookie an `enableCookie` gebunden und nicht gesetzt. Damit kein Speichern/Auslesen im Endgerät → § 25 Abs. 1 TDDDG nicht eröffnet; serverseitige Verarbeitung über Art. 6 Abs. 1 lit. f DSGVO, wie in Abschnitt 6 beschrieben. **Offene Rechtsfrage, bewusst nicht entschieden:** Ob das Auslesen von Browsereigenschaften (`userAgent`, `navigator.webdriver`) bereits Gerätezugriff darstellt, wird uneinheitlich beurteilt. Ein Fingerprint entsteht hier nicht. |
 
 ## Welle R2 — ausgerollt 16.08.2026
@@ -103,6 +106,32 @@ für die Offline-Nutzung wird im Feature selbst eingeholt, nicht über einen Ban
 **Offene Rechtsfrage daraus:** Offline-Schalter und Verlaufsschalter sind bauartgleich, werden aber
 unterschiedlich begründet (§ 25 Abs. 1 gegen § 25 Abs. 2 Nr. 2). Eine der beiden Einordnungen
 sollte angeglichen werden — das ist eine Bewertung, keine Umsetzungsfrage.
+
+## Welle R4 — ausgerollt 16.08.2026
+
+| Datum | Seite | Änderung | Stufe | Belegquelle | Commit |
+|---|---|---|---|---|---|
+| 16.08.2026 | Theme-Provider | `rechenfix-theme` wurde beim Seitenaufruf automatisch geschrieben, auch ohne Nutzerwahl. Umgestellt auf Speichern erst bei aktiver Betätigung des Umschalters; ohne Wahl gilt `prefers-color-scheme`. Vorhandene Einträge bleiben bewusst stehen — dort ist keine unrechtmäßige Speicherung zu bereinigen, und Löschen würde die Einstellung der Nutzer zurücksetzen. Damit trifft die Aussage in Abschnitt 7 („ausschließlich, was Sie selbst einschalten") wieder zu. | A | Browserprüfung Karsten, 16.08.2026 | `04be477` |
+| 16.08.2026 | `docs/rechtstexte/` | Speicherinventar korrigiert und fortgeschrieben: Zeile 1 war in der Erst-Erhebung fälschlich als „vom Nutzer ausgelöst" eingestuft; tatsächlich waren es zwei automatische Schreiber, nicht einer. Zusätzlich der durch Welle S1 abgelöste Schlüssel `rf_admin_stats_token` nachgezogen. | A | eigene Nachprüfung nach dem R4-Befund | `<dieser Commit>` |
+
+**Fehler in der eigenen Erhebung, offen protokolliert.** Die R3.0-Erhebung hat `rechenfix-theme`
+als vom Nutzer ausgelöst eingestuft. Das war falsch: Das `setItem` stand in einem Effekt ohne
+Bedingung und lief damit bei jedem Einhängen der Komponente. Die statische Suche nach `setItem`
+findet die Zeile, beantwortet aber nicht, **wodurch** sie ausgelöst wird — und genau das ist für
+§ 25 TDDDG die entscheidende Frage. Aufgefallen ist es erst in der Browserprüfung.
+
+Auf den Ablauf von R3 wirkt sich der Fehler nicht aus: `rechenfix-theme` war in der
+STOP-Bedingung namentlich ausgenommen, sie hätte also auch bei richtiger Einstufung nicht
+ausgelöst. Die Aussage „genau ein automatischer Schreiber" war trotzdem unrichtig und ist im
+Speicherinventar als Korrektur mit Datum vermerkt.
+
+**Zur Erwartung im R4-Auftrag, die sich nicht bestätigt hat:** Der Prompt nahm an, es werde „beim
+Laden immer `light` geschrieben", weshalb Besucher mit dunkel eingestelltem Betriebssystem die
+helle Darstellung erhielten. Das trifft so nicht zu — der Provider las `prefers-color-scheme`
+bereits und schrieb den passenden Wert. Der tatsächliche Schaden war ein anderer: Der ungefragt
+geschriebene Wert **friert die Einstellung ein**. Wer die Seite einmal mit hellem System besucht
+und danach das System auf dunkel stellt, bekam weiterhin hell, weil der gespeicherte Wert die
+Systemeinstellung überstimmt. Genau das ist mit R4.1 behoben.
 
 ## Sicherheit
 
