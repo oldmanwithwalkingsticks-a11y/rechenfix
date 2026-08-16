@@ -1,7 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { istAdminAngemeldet } from '@/lib/admin-session';
 
 export async function POST(request: NextRequest) {
+  // S1.2 — Dieser Endpunkt war bis dahin voellig ungeschuetzt: Jeder Aufruf von
+  // aussen konnte eine E-Mail mit beliebigem Anhang ueber die verifizierte
+  // Absenderadresse feedback@rechenfix.de verschicken. Die Anmeldepruefung
+  // steht deshalb vor jeder weiteren Verarbeitung.
+  if (!(await istAdminAngemeldet())) {
+    return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
+  }
+
   let body: { monat: string; csv: string };
   try {
     body = await request.json();
