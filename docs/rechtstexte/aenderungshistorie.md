@@ -272,6 +272,20 @@ ist gleich formuliert, aber ohne den Zusatz „Für diese Nutzungsstatistik gilt
 Satzanfang gebunden und deshalb nicht unrichtig — eine Angleichung an die Formulierung in 8a wäre
 dennoch eine Verbesserung. Entscheidung liegt bei dir.
 
+> **Entschieden am 17.08.2026.** Ergänzt wurde allein der Verweis auf Abschnitt 11, den 8a bereits
+> trägt. Die Bindung durch den Satzanfang bleibt unverändert, die Zusage selbst wurde nicht
+> umformuliert und keine neue Begrenzung eingezogen. Siehe Block R7.6.
+
+## Welle R7.6 — ausgerollt 17.08.2026
+
+| Datum | Seite | Änderung | Stufe | Belegquelle | Commit |
+|---|---|---|---|---|---|
+| 17.08.2026 | `/datenschutz` 8 | Die Zusage „Es werden keine IP-Adressen, keine User-Agents und keine sonstigen personenbezogenen Daten gespeichert" um denselben Verweis auf Abschnitt 11 ergänzt, den 8a seit R7.2 trägt. Reine Einfügung eines Satzes an derselben relativen Position wie in 8a — die Zusage selbst und ihre Bindung durch den Satzanfang blieben unverändert. | A | Angleichung an 8a | `<dieser Commit>` |
+
+**Grund.** Abschnitt 8 und Abschnitt 8a beschreiben **dieselben Klickdaten**. Zwei unterschiedlich
+gebaute Zusagen über denselben Vorgang driften auseinander, sobald eine davon geändert wird — nach
+R7.2 trug 8a den Verweis, 8 nicht. Beide tragen ihn jetzt.
+
 ## Sicherheit
 
 Getrennt von den Rechtstext-Einträgen geführt. Commit-Präfix `sec:`, damit
