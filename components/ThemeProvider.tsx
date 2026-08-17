@@ -12,8 +12,15 @@ import { createContext, useCallback, useContext, useEffect, useState } from 'rea
  * `rechenfix-theme` eine automatische Speicherung — und das bricht die Linie,
  * auf der die gesamte Argumentation der Datenschutzerklärung ruht:
  *
- *   vom Nutzer selbst gesetzt → einwilligungsfrei (§ 25 Abs. 2 Nr. 2 TDDDG)
- *   automatisch angelegt      → einwilligungspflichtig
+ *   vom Nutzer selbst gesetzt → zulässig
+ *   automatisch angelegt      → unzulässig
+ *
+ * Für den Darstellungsmodus trägt dabei die Ausnahme nach § 25 Abs. 2 Nr. 2
+ * TDDDG: Eine reine Anzeigepräferenz, die der Nutzer selbst setzt, ist der
+ * Lehrbuchfall des Absatzes 2 und braucht keine Einwilligungsmechanik. Das ist
+ * bewusst anders als beim Rechenverlauf (`hooks/useOptInStorage.ts`), der seit
+ * W R5.2 auf einer Einwilligung nach § 25 Abs. 1 TDDDG beruht — dort geht es um
+ * gespeicherte Rechenergebnisse, nicht um die Farbgebung der Seite.
  *
  * Abschnitt 7 der Datenschutzerklärung sagt: „Im Browser gespeichert wird
  * ausschließlich, was Sie selbst einschalten." Dieser Satz soll ohne

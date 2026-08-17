@@ -27,7 +27,7 @@ export default function DatenschutzSeite() {
         <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
           Datenschutzerklärung
         </h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: 16. August 2026</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: 17. August 2026</p>
 
         <div className="space-y-10 text-gray-700 dark:text-gray-300 text-[15px] leading-relaxed">
 
@@ -64,7 +64,7 @@ export default function DatenschutzSeite() {
               </li>
             </ul>
             <p className="mt-3">
-              Für Speicherungen auf Ihrem Endgerät gilt zusätzlich <strong>§ 25 TDDDG</strong>. Diese Vorschrift schützt das Endgerät als solches, unabhängig davon, ob personenbezogene Daten betroffen sind. Welche Speicherungen es gibt und worauf sie beruhen, steht in Abschnitt 7.
+              Für Speicherungen auf Ihrem Endgerät gilt zusätzlich <strong>§ 25 TDDDG</strong>. Diese Vorschrift schützt das Endgerät als solches, unabhängig davon, ob personenbezogene Daten betroffen sind. Die Offline-Nutzung und der Rechenverlauf beruhen dort auf <strong>Ihrer Einwilligung nach § 25 Abs. 1 TDDDG</strong>, die Sie über den jeweiligen Schalter erteilen und ebenso wieder zurücknehmen. Welche Speicherungen es im Einzelnen gibt und worauf sie beruhen, steht in Abschnitt 7.
             </p>
           </Section>
 
@@ -155,7 +155,7 @@ export default function DatenschutzSeite() {
                   <tr>
                     <td className="p-3">Rechenverlauf im Prozentrechner (siehe Abschnitt 7b)</td>
                     <td className="p-3">Ihr Schalter unterhalb der Verlaufsanzeige</td>
-                    <td className="p-3">§ 25 Abs. 2 Nr. 2 TDDDG</td>
+                    <td className="p-3">§ 25 Abs. 1 TDDDG</td>
                   </tr>
                 </tbody>
               </table>
@@ -226,7 +226,10 @@ export default function DatenschutzSeite() {
 
             <h3 className="font-bold text-gray-800 dark:text-gray-100 mt-6 mb-2">7b.1 Was gespeichert wird</h3>
             <p>
-              Gespeichert werden höchstens die <strong>fünf zuletzt angezeigten Ergebnisse</strong> des jeweiligen Rechners: die Beschriftung der Rechnung, das Ergebnis, die gewählte Rechenart und die Uhrzeit. Die Angaben verbleiben in Ihrem Browser; sie werden <strong>nicht an uns und nicht an Dritte übermittelt</strong> und nicht ausgewertet.
+              Gespeichert werden höchstens die <strong>fünf zuletzt angezeigten Ergebnisse</strong> des jeweiligen Rechners: die Beschriftung der Rechnung, das Ergebnis, die gewählte Rechenart und die Uhrzeit. <strong>Ihre Eingaben werden darüber hinaus nicht gespeichert und nicht übertragen</strong>; sie werden ausschließlich in Ihrem Browser verarbeitet und verlassen Ihr Gerät nicht.
+            </p>
+            <p className="mt-3">
+              Es findet keine Analyse Ihres Nutzungsverhaltens statt, es werden keine Kennungen vergeben, und es werden keine Daten an uns oder an Dritte übermittelt. Die gespeicherten Angaben verbleiben auf Ihrem Gerät.
             </p>
 
             <h3 className="font-bold text-gray-800 dark:text-gray-100 mt-6 mb-2">7b.2 Wann dies geschieht</h3>
@@ -236,7 +239,10 @@ export default function DatenschutzSeite() {
 
             <h3 className="font-bold text-gray-800 dark:text-gray-100 mt-6 mb-2">7b.3 Rechtsgrundlage</h3>
             <p>
-              <strong>§ 25 Abs. 2 Nr. 2 TDDDG.</strong> Die Speicherung wird ausschließlich durch Ihre eigene Entscheidung ausgelöst und ist erforderlich, um den von Ihnen gewünschten Dienst &mdash; einen über die Sitzung hinaus erhaltenen Verlauf &mdash; überhaupt bereitzustellen. Eine Verarbeitung personenbezogener Daten im Sinne der Datenschutz-Grundverordnung ist damit nicht verbunden; § 25 TDDDG schützt das Endgerät als solches und gilt unabhängig davon, ob ein Personenbezug vorliegt.
+              Für die Aktivierung über den Schalter: Ihre Einwilligung nach <strong>§ 25 Abs. 1 TDDDG</strong>. Sie erteilen sie, indem Sie den Schalter einschalten; ohne diese Handlung wird nichts auf Ihrem Gerät abgelegt.
+            </p>
+            <p className="mt-3">
+              Eine Verarbeitung personenbezogener Daten im Sinne der Datenschutz-Grundverordnung ist mit dem Rechenverlauf nicht verbunden. § 25 TDDDG schützt das Endgerät als solches und gilt unabhängig davon, ob ein Personenbezug vorliegt.
             </p>
 
             <h3 className="font-bold text-gray-800 dark:text-gray-100 mt-6 mb-2">7b.4 Speicherdauer und Widerruf</h3>

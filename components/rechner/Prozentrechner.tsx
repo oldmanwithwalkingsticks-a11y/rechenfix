@@ -68,7 +68,7 @@ export default function Prozentrechner() {
   const [wert1, setWert1] = useState(initial.default1);
   const [wert2, setWert2] = useState(initial.default2);
   // Der Verlauf wird nur auf dem Geraet abgelegt, wenn der Nutzer es einschaltet
-  // (§ 25 Abs. 2 Nr. 2 TDDDG). Ohne Schalter besteht er allein im Arbeitsspeicher
+  // (Einwilligung nach § 25 Abs. 1 TDDDG). Ohne Schalter besteht er allein im Arbeitsspeicher
   // der laufenden Sitzung. Begruendung im Kopf von hooks/useOptInStorage.ts.
   const {
     aktiv: verlaufGespeichert,

@@ -14,13 +14,22 @@ import { useCallback, useEffect, useRef, useState } from 'react';
  * die Ausnahme nach Absatz 2, oder es braucht eine Einwilligung.
  *
  * Die Trennlinie, nach der hier gearbeitet wird:
- *   vom Nutzer selbst eingeschaltet  → einwilligungsfrei (§ 25 Abs. 2 Nr. 2)
- *   automatisch angelegt             → einwilligungspflichtig
+ *   vom Nutzer selbst eingeschaltet  → zulässig
+ *   automatisch angelegt             → unzulässig
  *
  * Ein Komfortverlauf ist für die angeforderte Berechnung nicht „unbedingt
  * erforderlich" — die Rechner funktionieren ohne ihn vollständig. Deshalb schreibt
- * dieser Hook im Ausgangszustand NICHTS. Erst der ausdrückliche Schalter macht die
- * Speicherung zu dem Dienst, den der Nutzer gewünscht hat; dann trägt die Ausnahme.
+ * dieser Hook im Ausgangszustand NICHTS.
+ *
+ * Rechtsgrundlage ist seit W R5.2 die **Einwilligung nach § 25 Abs. 1 TDDDG**, die
+ * der Nutzer mit dem Schalter erteilt — nicht die Ausnahme nach Absatz 2 Nr. 2.
+ * Beides wäre vertretbar, weil die Speicherung ausschließlich durch eine bewusste
+ * Handlung ausgelöst wird. Die Risiken sind aber ungleich: Trägt die Ausnahme vor
+ * Gericht nicht, fehlt die Rechtsgrundlage vollständig. Wird eine Einwilligung
+ * eingeholt, die nicht nötig gewesen wäre, ist nichts falsch — es wurde mehr getan
+ * als verlangt. Der Aufwand ist ohnehin erbracht: Schalter, Widerruf mit Löschung
+ * und Dokumentation stehen. Damit trägt dieser Fall dasselbe System wie die
+ * Offline-Nutzung (Datenschutzerklärung, Abschnitte 7a und 7b).
  *
  * Vorbild und Schwesterfall ist `components/pwa/OfflineSchalter.tsx`. Beide Fälle
  * sind bewusst gleich gebaut, damit sie im Rechtstext gleich behandelt werden können
