@@ -101,9 +101,9 @@ einschaltet.
 | # | Fundstelle | Schlüssel | Auslösung | Rechtsgrundlage | In der Datenschutzerklärung? |
 |---|---|---|---|---|---|
 | 1 | `components/ThemeProvider.tsx` (`toggleTheme`) | `rechenfix-theme` | **Nutzer** — Betätigen des Umschalters im Seitenkopf; ohne gespeicherten Wert entscheidet `prefers-color-scheme`, ohne zu schreiben (seit `04be477`, R4.1) | § 25 Abs. 2 Nr. 2 TDDDG | ja, Abschnitt 7 |
-| 2 | `components/pwa/OfflineSchalter.tsx:53` | `rechenfix-offline-einwilligung` | Nutzer — Schalter auf `/offline-nutzung` | § 25 Abs. 1 TDDDG (siehe offene Frage unten) | ja, Abschnitt 7 und 7a |
+| 2 | `components/pwa/OfflineSchalter.tsx:53` | `rechenfix-offline-einwilligung` | Nutzer — Schalter auf `/offline-nutzung` | § 25 Abs. 1 TDDDG | ja, Abschnitt 7 und 7a |
 | 3 | Service Worker `public/sw.js` | Cache Storage | Nutzer — Schalter; im installierten Zustand der Start über das Symbol | § 25 Abs. 1 bzw. Abs. 2 Nr. 2 TDDDG | ja, Abschnitt 7 und 7a |
-| 4 | `components/rechner/Prozentrechner.tsx` über `hooks/useOptInStorage.ts` | `rechenfix-verlauf-einwilligung` und `rechenfix_prozent_history` | **Nutzer** — Schalter unterhalb der Verlaufsanzeige | § 25 Abs. 2 Nr. 2 TDDDG | ja, Abschnitt 7 und 7b |
+| 4 | `components/rechner/Prozentrechner.tsx` über `hooks/useOptInStorage.ts` | `rechenfix-verlauf-einwilligung` und `rechenfix_prozent_history` | **Nutzer** — Schalter unterhalb der Verlaufsanzeige | § 25 Abs. 1 TDDDG (seit R5.2, Angleichung an Zeile 2) | ja, Abschnitt 7 und 7b |
 | 5 | `lib/admin-session.ts`, gesetzt von `/api/admin/login` | `rf_admin_session` (Cookie, `HttpOnly`) | Nutzer — Anmeldung des Betreibers | interne Seite, nicht für Besucher erreichbar | nein, bewusst |
 
 **Entfallen gegenüber der Erhebung:**
@@ -122,17 +122,25 @@ Erst-Erhebung übersehen worden war: Der Darstellungsmodus wurde beim Seitenaufr
 geschrieben. Erst mit `04be477` trifft die Aussage in Abschnitt 7 der Datenschutzerklärung
 („Im Browser gespeichert wird ausschließlich, was Sie selbst einschalten") ohne Vorbehalt zu.
 
-### Offene Frage zur Einordnung
+### Einordnung der Schalter — entschieden mit R5.2 (17.08.2026)
 
-Der Offline-Schalter (Zeile 2/3) und der Verlaufsschalter (Zeile 4) sind bauartgleich — beide
-werden ausschließlich durch eine bewusste Handlung des Nutzers ausgelöst — werden aber
-unterschiedlich begründet: Abschnitt 7a führt den Offline-Schalter seit Welle 69 als **Einwilligung
-nach § 25 Abs. 1**, Abschnitt 7b den Verlauf als **Ausnahme nach § 25 Abs. 2 Nr. 2**. Beide
-Einordnungen sind vertretbar, aber sie sollten angeglichen werden. Solange sie auseinanderfallen,
-kann in Abschnitt 7 nicht behauptet werden, die Website setze überhaupt keine
-einwilligungspflichtigen Speicherungen ein — der Satz ist dort entsprechend vorsichtiger gefasst.
+Der Offline-Schalter (Zeile 2/3) und der Verlaufsschalter (Zeile 4) sind bauartgleich: Beide werden
+ausschließlich durch eine bewusste Handlung des Nutzers ausgelöst, ohne die Speicherung gibt es die
+Funktion nicht, und Abschalten löscht. Sie wurden bis R5 dennoch unterschiedlich begründet — 7a als
+Einwilligung nach § 25 Abs. 1, 7b als Ausnahme nach § 25 Abs. 2 Nr. 2.
 
-Das ist eine Bewertungsfrage, keine Umsetzungsfrage, und daher bewusst offen gelassen.
+**Vereinheitlicht auf § 25 Abs. 1 (Einwilligung).** Beide Einordnungen sind vertretbar, die Risiken
+aber ungleich: Trägt die Ausnahme vor Gericht nicht, fehlt die Rechtsgrundlage vollständig; wird
+eine Einwilligung eingeholt, die nicht nötig war, ist nichts falsch. Der Aufwand war ohnehin
+erbracht — Schalter, Widerruf mit Löschung und Dokumentation standen bereits.
+
+**Nicht angeglichen wurde der Darstellungsmodus** (Zeile 1). Eine reine Anzeigepräferenz, die der
+Nutzer selbst setzt, ist der Lehrbuchfall des § 25 Abs. 2 Nr. 2 und braucht keine
+Einwilligungsmechanik. Sie wird seit R4 ohnehin nur noch bei aktiver Wahl geschrieben.
+
+Damit ist auch der Grund entfallen, aus dem der Einleitungssatz in Abschnitt 7 vorsichtiger gefasst
+werden musste. Er bleibt trotzdem in der jetzigen Form: Er sagt zu, dass nur gespeichert wird, was
+der Nutzer selbst einschaltet — und das ist die Aussage, auf die es ankommt.
 
 ### Regel für neue Rechner
 

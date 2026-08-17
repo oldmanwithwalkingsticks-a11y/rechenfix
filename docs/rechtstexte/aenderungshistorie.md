@@ -53,6 +53,7 @@ Entscheidung des Betreibers: AdSense ruht bis ca. 01/2027, alles nicht Benötigt
 | 16.08.2026 | Opt-in-Speicherung nach R3 | Karsten, Inkognito + Application-Tab | **bestanden.** Startseite ohne Banner und ohne Dialog. Prozentrechner ohne Schalter benutzt → kein `rechenfix_prozent_history`, Verlauf nur im Arbeitsspeicher. Schalter an → Verlauf und Einwilligungskennzeichen vorhanden. Schalter aus → **beide** entfernt, kehren nach Neuladen nicht zurück. Einzige Abweichung: `rechenfix-theme` wird bereits beim Seitenaufruf ohne Nutzerwahl geschrieben — behoben mit R4. |
 | 16.08.2026 | Theme-Speicherung nach R4 | Karsten, Inkognito + Application-Tab | **offen** — (1) Startseite laden, nichts anklicken → Local Storage leer? (2) System auf dunkel, laden → dunkle Darstellung, weiterhin kein Eintrag? (3) Umschalter betätigen → Eintrag erscheint? (4) Neu laden → gewählte Darstellung bleibt, kein Umspringen? |
 | 16.08.2026 | Admin-Anmeldung nach S1 | Karsten, Application-Tab | **offen** — Session storage leer, unter Cookies ein `rf_admin_session` mit gesetztem `HttpOnly`-Häkchen? |
+| 17.08.2026 | Freiwilligkeit und § 25 nach R5 | Karsten, Browser | **offen** — Barrierefreiheitsseite: Einleitung sichtbar, Stand weiterhin Mai 2026? Datenschutzerklärung: 7a und 7b mit derselben Rechtsgrundlage und demselben Aufbau? |
 | 16.08.2026 | Startseite, vor Einwilligung | Karsten, Netzwerk-Tab + Application-Tab | **bestanden.** 66 Requests, ausschließlich gegen `www.rechenfix.de`. Keine Verbindung zu Google, doubleclick, googlesyndication oder awin. Schriftart lokal ausgeliefert, keine Google Fonts. Local Storage enthält allein `rechenfix-theme` (Dark-Mode-Schalter). Vercel Analytics läuft first-party über `script.js` + `view`; im Code ist das Cookie an `enableCookie` gebunden und nicht gesetzt. Damit kein Speichern/Auslesen im Endgerät → § 25 Abs. 1 TDDDG nicht eröffnet; serverseitige Verarbeitung über Art. 6 Abs. 1 lit. f DSGVO, wie in Abschnitt 6 beschrieben. **Offene Rechtsfrage, bewusst nicht entschieden:** Ob das Auslesen von Browsereigenschaften (`userAgent`, `navigator.webdriver`) bereits Gerätezugriff darstellt, wird uneinheitlich beurteilt. Ein Fingerprint entsteht hier nicht. |
 
 ## Welle R2 — ausgerollt 16.08.2026
@@ -132,6 +133,39 @@ bereits und schrieb den passenden Wert. Der tatsächliche Schaden war ein andere
 geschriebene Wert **friert die Einstellung ein**. Wer die Seite einmal mit hellem System besucht
 und danach das System auf dunkel stellt, bekam weiterhin hell, weil der gespeicherte Wert die
 Systemeinstellung überstimmt. Genau das ist mit R4.1 behoben.
+
+## Welle R5 — ausgerollt 17.08.2026
+
+Beide Korrekturen sind **Stufe B**: Sie beruhen auf Bewertung, nicht auf Gesetzeswortlaut.
+Freigabe durch Karsten am 17.08.2026; die Formulierungen waren abgestimmt und wurden übernommen.
+
+| Datum | Seite | Änderung | Stufe | Belegquelle | Commit |
+|---|---|---|---|---|---|
+| 17.08.2026 | `/barrierefreiheit` | Einleitung ergänzt: Erklärung wird freiwillig abgegeben. Kein Vertragsschluss über Waren oder Dienstleistungen auf der Seite; zusätzlich Kleinstunternehmen nach § 3 Abs. 3 BFSG. Konformität wird ausdrücklich nicht behauptet, sondern Orientierung an EN 301 549 / WCAG 2.1 AA. Stand-Datum unverändert Mai 2026, da keine neue Prüfung stattfand. | B | § 3 Abs. 3 BFSG; Anwendungsbereich BFSG (Dienstleistungen im elektronischen Geschäftsverkehr) | `2e02dc6` |
+| 17.08.2026 | `/datenschutz` 7b | Rechenverlauf von § 25 Abs. 2 Nr. 2 auf § 25 Abs. 1 TDDDG umgestellt, Angleichung an 7a. Beide Funktionen sind baugleich (nutzergesetzter Schalter, Löschung bei Widerruf); die Einwilligungslösung ist die risikoärmere von zwei vertretbaren Einordnungen. Dark-Mode bleibt bei Abs. 2 Nr. 2. Mitgezogen: Tabelle in Abschnitt 7, Rechtsgrundlagen-Hinweis in Abschnitt 3, Kopfkommentare in `useOptInStorage`, `Prozentrechner` und `ThemeProvider`. Stand-Datum 17. August 2026. | B | Bewertung, freigegeben durch Karsten am 17.08.2026 | `43fc88d` |
+| 17.08.2026 | `docs/rechtstexte/` | Speicherinventar nachgezogen: Rechtsgrundlage des Rechenverlaufs auf § 25 Abs. 1, offene Einordnungsfrage als entschieden geschlossen. | B | — | `<dieser Commit>` |
+
+### Gemeldet, nicht geändert — Bestandstext der Barrierefreiheitserklärung
+
+Drei Stellen stehen im Spannungsverhältnis zur neuen Freiwilligkeit. Der Auftrag verlangte
+ausdrücklich, sie zu melden statt eigenmächtig zu streichen:
+
+1. **Geltungsklausel, erster Absatz nach der Einleitung:** „Sie wird im Sinne der
+   Barrierefreie-Informationstechnik-Verordnung (BITV 2.0) und des
+   Barrierefreiheitsstärkungsgesetzes (BFSG) bereitgestellt." Das liest sich als Rechtsgrundlage
+   der Erklärung und steht damit neben dem Satz, eine gesetzliche Verpflichtung bestehe nicht.
+   Hinzu kommt: Die **BITV 2.0 gilt für öffentliche Stellen**, nicht für ein privates Angebot —
+   der Verweis war schon vor R5 unpassend.
+2. **Abschnitt „Stand der Vereinbarkeit":** „…dass sie die Anforderungen der WCAG 2.1 auf
+   Konformitätsstufe AA **weitgehend erfüllt**."
+3. **Ebenda:** „Die Website **erfüllt** die automatisiert prüfbaren Anforderungen der WCAG 2.1 AA
+   **vollständig**" (Lighthouse-Ø 100/100, axe 0 Findings, Stichprobe April 2026).
+
+Nummer 2 und 3 sind Konformitätsaussagen. Das Abnahmekriterium der Welle — „keine Stelle im Text
+behauptet Konformität mit EN 301 549 oder WCAG" — ist damit **nicht erfüllt**, und zwar allein
+durch das Voranstellen der Einleitung auch nicht erfüllbar. Nummer 3 ist eng gefasst und mit
+Messwerten belegt, könnte also bleiben; Nummer 2 ist die weichere Formulierung, wirkt aber durch
+„erfüllt" stärker als die Einleitung mit „orientieren uns an". Entscheidung offen.
 
 ## Sicherheit
 
