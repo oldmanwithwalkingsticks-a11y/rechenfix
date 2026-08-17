@@ -55,6 +55,7 @@ Entscheidung des Betreibers: AdSense ruht bis ca. 01/2027, alles nicht Benötigt
 | 16.08.2026 | Admin-Anmeldung nach S1 | Karsten, Application-Tab | **offen** — Session storage leer, unter Cookies ein `rf_admin_session` mit gesetztem `HttpOnly`-Häkchen? |
 | 17.08.2026 | Freiwilligkeit und § 25 nach R5 | Karsten, Browser | **offen** — Barrierefreiheitsseite: Einleitung sichtbar, Stand weiterhin Mai 2026? Datenschutzerklärung: 7a und 7b mit derselben Rechtsgrundlage und demselben Aufbau? |
 | 17.08.2026 | Bestandstext nach R5.4 | Karsten, Browser | **offen** — Barrierefreiheitsseite: Geltungsklausel ohne Rechtsverweis, Abschnitt „Stand der Vereinbarkeit" mit Messdatum und Reichweiten-Hinweis, kein „weitgehend" mehr, Stand weiterhin Mai 2026? |
+| 17.08.2026 | Ereigniserfassung nach R7 | Karsten, Browser | **offen** — Datenschutzerklärung Abschnitt 8a: vier Ereignisarten aufgeführt (Zähler, Klicks, Feedback, PDF), Freitext-Satz verweist auf Abschnitt 11, Zusage beginnt mit „Für diese Nutzungsstatistik gilt"? Abschnitt 11 nennt den User-Agent? |
 | 16.08.2026 | Startseite, vor Einwilligung | Karsten, Netzwerk-Tab + Application-Tab | **bestanden.** 66 Requests, ausschließlich gegen `www.rechenfix.de`. Keine Verbindung zu Google, doubleclick, googlesyndication oder awin. Schriftart lokal ausgeliefert, keine Google Fonts. Local Storage enthält allein `rechenfix-theme` (Dark-Mode-Schalter). Vercel Analytics läuft first-party über `script.js` + `view`; im Code ist das Cookie an `enableCookie` gebunden und nicht gesetzt. Damit kein Speichern/Auslesen im Endgerät → § 25 Abs. 1 TDDDG nicht eröffnet; serverseitige Verarbeitung über Art. 6 Abs. 1 lit. f DSGVO, wie in Abschnitt 6 beschrieben. **Offene Rechtsfrage, bewusst nicht entschieden:** Ob das Auslesen von Browsereigenschaften (`userAgent`, `navigator.webdriver`) bereits Gerätezugriff darstellt, wird uneinheitlich beurteilt. Ein Fingerprint entsteht hier nicht. |
 
 ## Welle R2 — ausgerollt 16.08.2026
@@ -215,6 +216,61 @@ dazu unter „Nächste Termine".
 steht weiterhin `18. April 2026`, weil die Seite durchgehend die ausgeschriebene Form verwendet
 („16. April 2026", „Mai 2026"). Der Datumswert ist unverändert; bindend war laut Auftrag der Sinn,
 nicht die Zeichenkette.
+
+## Welle R7 — ausgerollt 17.08.2026
+
+Gegenprobe der Datenschutzerklärung gegen `/api/track` und `/api/feedback`. Stufe A durchgehend:
+jede Korrektur folgt aus einem Codebefund, keine aus Auslegung. Alle fünf Punkte in einem Commit,
+weil sie denselben Abschnitt betreffen und einzeln einen widersprüchlichen Zwischenstand ergäben.
+
+| Datum | Seite | Änderung | Stufe | Belegquelle | Commit |
+|---|---|---|---|---|---|
+| 17.08.2026 | `/datenschutz` 8a | Unrichtige Aussage korrigiert: Der Freitext bei negativem Feedback wird nicht in der Nutzungsstatistik gespeichert, sondern per E-Mail versandt. | A | `FeedbackButtons.tsx:64`, `api/feedback/route.ts` | `3dca24e` |
+| 17.08.2026 | `/datenschutz` 8a | Zusage „keine IP-Adressen, keine User-Agents" ausdrücklich auf die Nutzungsstatistik begrenzt, Verweis auf Abschnitt 11 ergänzt. Die Zusage war für ihren Gegenstand zutreffend, wurde ohne Begrenzung aber als Aussage über die gesamte Website lesbar. | A | Gegenprobe Text gegen `/api/feedback` | `3dca24e` |
+| 17.08.2026 | `/datenschutz` 11 | User-Agent als übermittelte Angabe ergänzt, mit Zweck und Rechtsgrundlage Art. 6 Abs. 1 lit. f DSGVO. | A | `api/feedback/route.ts:19,34` | `3dca24e` |
+| 17.08.2026 | `/datenschutz` 8a und 8 | Kontextfeld `c` (max. 100 Zeichen) in beide Feldaufzählungen aufgenommen. | A | `api/track/route.ts:50` | `3dca24e` |
+| 17.08.2026 | `/datenschutz` 8a | PDF-Download als vierte Ereignisart aufgenommen. War in der gesamten Erklärung nicht beschrieben. | A | `ErgebnisAktionen.tsx:222`, `KEYS.pdfs` | `3dca24e` |
+
+**Zu R7.3 — die Alternative wurde nicht gewählt.** Der User-Agent hätte auch aus dem Mailversand
+entfernt werden können, statt ihn zu beschreiben. Umgesetzt ist die Beschreibung, entsprechend der
+Empfehlung im Auftrag: Ein Fehlerbericht ohne Browserangabe ist für die Fehlersuche meist wertlos.
+Die Entfernung bleibt jederzeit möglich und wäre datensparsamer.
+
+**Zu R7.4 — Prüfergebnis.** In `c` landen ausschließlich entwicklerseitig gesetzte Slugs aus einer
+festen Menge: entweder als Literal im JSX (`context="strom"`) oder aus `config.affiliate.context`
+in `lib/rechner-config/`. Es gibt keinen Pfad, über den Nutzereingaben dorthin gelangen. Die
+Beschreibung „Kontext der angeklickten Fläche" trifft damit zu; der Fall „melden statt beschreiben"
+ist nicht eingetreten.
+
+### Zwei Abweichungen von der Vorlage, beide aus dem Code belegt
+
+1. **PDF-Ereignis: Bezeichnung statt Pfad.** Der Auftrag nannte „Seitenpfad und Zeitstempel". Beim
+   Feedback trifft das zu (`FeedbackButtons.tsx:166` sendet `window.location.pathname`), beim PDF
+   nicht: `ErgebnisAktionen.tsx:222` sendet `rechner: titel`, also den Seitentitel; zwei Rechner
+   senden stattdessen einen festen Slug. Im Text steht deshalb „die Bezeichnung des Rechners".
+2. **Abschnitt 8 mitgezogen.** Der Auftrag verlangte das Kontextfeld nur für 8a. Abschnitt 8 führt
+   dieselben Klickfelder in Kurzform; ohne Mitziehen stünden zwei Aufzählungen desselben Vorgangs
+   mit unterschiedlichem Feldbestand nebeneinander.
+
+### R7.2 STOP-Bedingung — weitere Zusagen dieser Bauart, gemeldet und nicht geändert
+
+Gesucht wurde nach Zusagen der Form „wir erfassen keine …" / „es werden keine … übermittelt" ohne
+erkennbare Begrenzung auf ihren Gegenstand. Gefunden wurden fünf weitere Stellen. **Alle fünf
+tragen ihren Gegenstand im unmittelbar vorangehenden Satz und sind dort zutreffend** — keine ist
+ein Fall wie der in 8a, wo ein Gegenbeispiel an anderer Stelle existierte. Nichts geändert:
+
+| Abschnitt | Zusage | Warum begrenzt |
+|---|---|---|
+| 6 Vercel Analytics | „IP-Adressen werden nicht gespeichert … kein Tracking über Geräte oder Sitzungen hinweg" | Satzsubjekt ist ausdrücklich „Die Messung" |
+| 7a Offline-Nutzung | „keine Analyse … keine Kennungen … keine Daten an uns oder an Dritte übermittelt" | steht in 7a.1 unter der Überschrift „Was gespeichert wird", bezogen auf den Zwischenspeicher |
+| 7b Rechenverlauf | wortgleich zu 7a | ebenso, bezogen auf den Verlauf |
+| 8 Affiliate | „keine IP-Adressen, keine User-Agents und keine sonstigen personenbezogenen Daten gespeichert" | bezieht sich auf den vorangehenden Halbsatz „Klickdaten … auf unserem Server" |
+| 9 KI-Funktionen | „Ihre Eingaben werden von uns nicht gespeichert" | „von uns" grenzt gegen den Auftragsverarbeiter ab; der Folgesatz nennt den Anfragezähler als Ausnahme |
+
+Die Zeile in Abschnitt 8 ist die grenzwertigste: Sie steht demselben Vorgang wie 8a gegenüber und
+ist gleich formuliert, aber ohne den Zusatz „Für diese Nutzungsstatistik gilt". Sie ist durch den
+Satzanfang gebunden und deshalb nicht unrichtig — eine Angleichung an die Formulierung in 8a wäre
+dennoch eine Verbesserung. Entscheidung liegt bei dir.
 
 ## Sicherheit
 
