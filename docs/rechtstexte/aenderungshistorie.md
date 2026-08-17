@@ -54,6 +54,7 @@ Entscheidung des Betreibers: AdSense ruht bis ca. 01/2027, alles nicht Benötigt
 | 16.08.2026 | Theme-Speicherung nach R4 | Karsten, Inkognito + Application-Tab | **offen** — (1) Startseite laden, nichts anklicken → Local Storage leer? (2) System auf dunkel, laden → dunkle Darstellung, weiterhin kein Eintrag? (3) Umschalter betätigen → Eintrag erscheint? (4) Neu laden → gewählte Darstellung bleibt, kein Umspringen? |
 | 16.08.2026 | Admin-Anmeldung nach S1 | Karsten, Application-Tab | **offen** — Session storage leer, unter Cookies ein `rf_admin_session` mit gesetztem `HttpOnly`-Häkchen? |
 | 17.08.2026 | Freiwilligkeit und § 25 nach R5 | Karsten, Browser | **offen** — Barrierefreiheitsseite: Einleitung sichtbar, Stand weiterhin Mai 2026? Datenschutzerklärung: 7a und 7b mit derselben Rechtsgrundlage und demselben Aufbau? |
+| 17.08.2026 | Bestandstext nach R5.4 | Karsten, Browser | **offen** — Barrierefreiheitsseite: Geltungsklausel ohne Rechtsverweis, Abschnitt „Stand der Vereinbarkeit" mit Messdatum und Reichweiten-Hinweis, kein „weitgehend" mehr, Stand weiterhin Mai 2026? |
 | 16.08.2026 | Startseite, vor Einwilligung | Karsten, Netzwerk-Tab + Application-Tab | **bestanden.** 66 Requests, ausschließlich gegen `www.rechenfix.de`. Keine Verbindung zu Google, doubleclick, googlesyndication oder awin. Schriftart lokal ausgeliefert, keine Google Fonts. Local Storage enthält allein `rechenfix-theme` (Dark-Mode-Schalter). Vercel Analytics läuft first-party über `script.js` + `view`; im Code ist das Cookie an `enableCookie` gebunden und nicht gesetzt. Damit kein Speichern/Auslesen im Endgerät → § 25 Abs. 1 TDDDG nicht eröffnet; serverseitige Verarbeitung über Art. 6 Abs. 1 lit. f DSGVO, wie in Abschnitt 6 beschrieben. **Offene Rechtsfrage, bewusst nicht entschieden:** Ob das Auslesen von Browsereigenschaften (`userAgent`, `navigator.webdriver`) bereits Gerätezugriff darstellt, wird uneinheitlich beurteilt. Ein Fingerprint entsteht hier nicht. |
 
 ## Welle R2 — ausgerollt 16.08.2026
@@ -162,10 +163,35 @@ ausdrücklich, sie zu melden statt eigenmächtig zu streichen:
    **vollständig**" (Lighthouse-Ø 100/100, axe 0 Findings, Stichprobe April 2026).
 
 Nummer 2 und 3 sind Konformitätsaussagen. Das Abnahmekriterium der Welle — „keine Stelle im Text
-behauptet Konformität mit EN 301 549 oder WCAG" — ist damit **nicht erfüllt**, und zwar allein
-durch das Voranstellen der Einleitung auch nicht erfüllbar. Nummer 3 ist eng gefasst und mit
-Messwerten belegt, könnte also bleiben; Nummer 2 ist die weichere Formulierung, wirkt aber durch
-„erfüllt" stärker als die Einleitung mit „orientieren uns an". Entscheidung offen.
+behauptet Konformität mit EN 301 549 oder WCAG" — war damit **nicht erfüllt**, und zwar allein
+durch das Voranstellen der Einleitung auch nicht erfüllbar.
+
+> **Erledigt mit R5.4 am 17.08.2026.** Die Abnahmezeile war zu grob gefasst und wurde korrigiert auf
+> „keine **unbelegte** Konformitätsaussage": Eine gemessene, datierte und in ihrer Reichweite
+> begrenzte Aussage ist für den Leser mehr wert als Schweigen. Stelle 1 und 2 entfernt, Stelle 3
+> behalten und eingeordnet. Siehe Block R5.4 unten.
+
+## Welle R5.4 — ausgerollt 17.08.2026
+
+| Datum | Seite | Änderung | Stufe | Belegquelle | Commit |
+|---|---|---|---|---|---|
+| 17.08.2026 | `/barrierefreiheit` | Drei Bestandstext-Stellen bereinigt: Verweis auf BITV 2.0 entfernt (gilt für öffentliche Stellen, nicht für private Angebote), BFSG nicht länger als Grundlage der Bereitstellung genannt, unbestimmte Aussage „erfüllt weitgehend" gestrichen. Die gemessene Aussage zu automatisiert prüfbaren Kriterien bleibt, ergänzt um Messdatum, Werkzeuge und den Hinweis auf die begrenzte Reichweite automatisierter Prüfung. Stand unverändert Mai 2026. | B | § 1 BITV 2.0 (Anwendungsbereich öffentliche Stellen); Messung April 2026 | `<dieser Commit>` |
+
+**Messwerte gegengeprüft.** Die im neuen Text genannten Werte stimmen mit dem Detailabschnitt
+„Erstellung dieser Erklärung" derselben Seite überein: Sweep am 18. April 2026, durchschnittlicher
+Lighthouse-Accessibility-Score 100/100 (Mobile und Desktop), axe DevTools 0 Findings. Keine
+Abweichung, nichts angepasst.
+
+**Drei Daten auf einer Seite — bewusst und nicht widersprüchlich.** Die Erklärung wurde am
+16.04.2026 erstellt, zuletzt am 18.04.2026 gemessen, und trägt den Stand Mai 2026. Das Stand-Datum
+bezeichnet die letzte inhaltliche Überprüfung der Erklärung, nicht den Messzeitpunkt und nicht den
+Tag der letzten Textänderung.
+
+**Beobachtung, nicht geändert:** Der Detailabschnitt nennt die Stichprobe „19 Rechner aus allen
+9 Kategorien". Zum Messzeitpunkt traf das zu; seit Juni 2026 gibt es eine zehnte Kategorie
+(Technik). Die Messung deckt damit 9 der heute 10 Kategorien ab. Die Angabe ist durch die
+ausgeschriebene Zahl und das Datum selbstbegrenzend und bleibt richtig — für die nächste Prüfung
+ist der Zuschnitt aber nachzuziehen.
 
 ## Sicherheit
 

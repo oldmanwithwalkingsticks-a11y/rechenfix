@@ -40,27 +40,26 @@ export default function BarrierefreiheitSeite() {
           </p>
 
           <p className="text-base leading-relaxed">
-            Diese Erklärung zur Barrierefreiheit gilt für die unter{' '}
-            <Link href="/" className="text-primary-600 dark:text-primary-400 underline">www.rechenfix.de</Link>{' '}
-            veröffentlichte Website. Sie wird im Sinne der Barrierefreie-Informationstechnik-Verordnung (BITV 2.0) und
-            des Barrierefreiheitsstärkungsgesetzes (BFSG) bereitgestellt.
+            Diese Erklärung bezieht sich auf die Website{' '}
+            <Link href="/" className="text-primary-600 dark:text-primary-400 underline">www.rechenfix.de</Link>.
           </p>
 
           {/* Stand der Vereinbarkeit */}
           <section>
             <h2 className="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">
-              Stand der Vereinbarkeit mit den Anforderungen
+              Stand der Vereinbarkeit
             </h2>
             <p className="leading-relaxed">
-              Die Website rechenfix.de wurde so gestaltet, dass sie die Anforderungen der{' '}
-              <strong>Web Content Accessibility Guidelines (WCAG) 2.1 auf Konformitätsstufe AA</strong>{' '}
-              weitgehend erfüllt. Wir arbeiten kontinuierlich an der Verbesserung der Barrierefreiheit.
+              Wir prüfen die Website gegen die Anforderungen der{' '}
+              <strong>WCAG 2.1 Stufe AA</strong>. Bei der letzten Prüfung im April 2026 erfüllte sie
+              alle automatisiert prüfbaren Kriterien vollständig (Lighthouse Accessibility{' '}
+              <strong>100/100</strong>, axe ohne Befunde).
             </p>
             <p className="mt-3 leading-relaxed">
-              Die Website erfüllt die automatisiert prüfbaren Anforderungen der WCAG 2.1 AA{' '}
-              vollständig (Lighthouse-Ø <strong>100/100</strong>, axe <strong>0 Findings</strong>{' '}
-              in der Stichprobe vom April 2026). Einzelne Inhalte sind trotzdem noch eingeschränkt{' '}
-              barrierefrei zugänglich, siehe Abschnitt &bdquo;Nicht barrierefreie Inhalte&ldquo;.
+              Automatisierte Prüfungen decken allerdings nur einen Teil der Erfolgskriterien ab.
+              Anforderungen wie verständliche Sprache, sinnvolle Alternativtexte oder eine schlüssige
+              Fokusreihenfolge lassen sich nur manuell beurteilen. Eine vollständige Vereinbarkeit
+              behaupten wir deshalb nicht.
             </p>
           </section>
 
