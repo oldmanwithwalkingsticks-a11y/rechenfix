@@ -311,6 +311,48 @@ Browser verglichen. `ADMIN_STATS_PASSWORD` trägt **kein** `NEXT_PUBLIC_`-Präfi
 im ausgelieferten JavaScript. Es ist folglich **nicht** öffentlich bekannt geworden und muss nicht
 gewechselt werden. Das Risiko lag allein in der Klartext-Ablage im Browser des Betreibers.
 
+### Welle S2 — `ADMIN_PASSWORD` aus den URL-Parametern (begonnen 18.08.2026)
+
+**Sachverhalt.** `ADMIN_PASSWORD` wurde auf drei Routen als Query-Parameter `?admin=` übergeben und
+landete damit in Zugriffs- und Server-Logs, in Referrer-Headern und im Browserverlauf. Der Wert ist
+**als kompromittiert zu behandeln** und nach Abschluss von S2.3 zu wechseln.
+
+| Datum | Gegenstand | Änderung | Commit |
+|---|---|---|---|
+| 18.08.2026 | S2.1 — drei Routen | Beide Wege gelten gleichzeitig, nichts entfernt. Cron-Routen akzeptieren zusätzlich den Kopf `X-Admin-Password`, `/api/tiktok/auth` zusätzlich das `rf_admin_session`-Cookie aus S1. Jeder Treffer über den alten Weg wird protokolliert — nur Route und Zeitpunkt, nie der Wert. Vergleich in konstanter Zeit über gehashte Puffer. | `acc0cef` |
+
+**Untersuchungsergebnis S2.0 — die Ausgangslage war günstiger als angenommen.** Der Auftrag ging
+davon aus, dass der tägliche Cron über `?admin=` läuft. Das trifft nicht zu:
+
+- **`vercel.json` enthält keinen einzigen `?admin=`-Parameter.** Die drei Cron-Pfade sind nackt.
+- **Beide Cron-Routen verlangen bereits als ersten Schritt `Authorization: Bearer ${CRON_SECRET}`**,
+  und zwar für jeden Aufruf. Vercel setzt diesen Kopf beim Cron-Trigger automatisch.
+- Der Query-Parameter ist ausschließlich ein **zweiter Faktor für `?test=true` in Production**, also
+  für manuelle Dry-Runs durch den Betreiber. Der planmäßige Cron hat ihn nie benutzt.
+
+Damit war das Kennwort nie Teil des automatisierten Ablaufs. In Logs gelangt ist es nur, soweit
+manuelle Testaufrufe stattgefunden haben — die Einstufung als kompromittiert bleibt davon
+unberührt, der Umfang ist aber deutlich kleiner.
+
+**STOP-Bedingung nicht eingetreten.** `/api/tiktok/auth` ist der OAuth-**Start**, nicht der
+Rücksprung: Die Route baut die Authorize-URL, legt den `state` in ein kurzlebiges Cookie und
+leitet mit 302 zu TikTok weiter. Der Rücksprung läuft über `/api/tiktok/callback`, das
+`ADMIN_PASSWORD` nicht verwendet. Ein `state`-Einmalkennzeichen existiert dort bereits.
+
+**Zwei Abweichungen vom Auftrag, beide erzwungen**
+
+1. **Der Kopf heißt `X-Admin-Password`, nicht `Authorization`.** Auf den Cron-Routen ist
+   `Authorization` bereits durch `CRON_SECRET` belegt; ein zweites Geheimnis passt dort nicht hinein.
+2. **`/api/tiktok/auth` bekommt keinen Kopf, sondern das Sitzungscookie.** Der Aufruf ist eine
+   Adresszeilen-Navigation im Browser — dabei lässt sich kein eigener Kopf setzen. Das war im
+   Auftrag als naheliegende Lösung bereits vorgezeichnet.
+
+**Beobachtung, nicht geändert:** Der Vergleich des `CRON_SECRET` erfolgt auf beiden Cron-Routen mit
+einem gewöhnlichen Zeichenkettenvergleich (`authHeader !== \`Bearer ${cronSecret}\``), nicht in
+konstanter Zeit. Das ist dieselbe Schwäche, die S1 beim Admin-Kennwort behoben hat. Bewusst nicht
+mitgeändert, weil jeder Eingriff an dieser Stelle den täglichen Cron trifft und die Welle
+ausdrücklich stufenweise angelegt ist. Gehört in eine eigene, ebenso gestufte Runde.
+
 ### Offener Punkt aus S1.0, nicht behoben
 
 Ein **zweites** Kennwort, `ADMIN_PASSWORD`, wird auf drei Routen als **URL-Parameter**
@@ -322,7 +364,16 @@ Eingriff dort den täglichen Post-Cron treffen kann. Gehört in eine eigene Well
 `Authorization`-Kopf statt in der Adresse, danach Kennwortwechsel — dieses hier ist durch die Logs
 als kompromittiert zu behandeln.
 
+> **Aufgegriffen mit Welle S2 am 18.08.2026.** Stufe S2.1 steht, siehe Block oben. Der Punkt bleibt
+> offen, bis S2.3 den alten Weg entfernt und S2.4 das Kennwort gewechselt hat.
+
 ## Nächste Termine
+
+- **frühestens 19.08.2026, nach mindestens 24 Stunden ohne Protokollzeile** — Welle S2 fortsetzen:
+  In den Vercel-Logs nach `[S2] alter Weg benutzt` suchen. Erscheint nichts mehr, S2.3 ausführen
+  (Query-Parameter-Prüfung ersatzlos streichen), danach S2.4 (Kennwort wechseln). **Reihenfolge
+  zwingend** — wer zuerst wechselt, sperrt sich selbst aus. Erscheint noch etwas, gibt es einen
+  Aufrufer, den niemand auf dem Zettel hat; dann erst klären, nicht abschneiden.
 
 - **täglich** — Dienste-Wache (`scripts/dienste-wache.py`). Ersetzt die Wiedervorlage für die AdSense-Rückkehr: Sie erinnert nicht an ein Datum, sie merkt, dass etwas passiert ist.
 - **~01/2027** — AdSense-Wiederaufnahme: Registry auf `aktiv`, Abschnitte 2, 7, 8 und **die gesamte Einwilligungsmechanik** zurück, Stand-Datum setzen — **vor** der Freischaltung. Der Banner existiert seit R3.3 nicht mehr und muss neu gebaut werden, nicht nur wieder eingebunden; AdSense ist einwilligungspflichtig. Die Dienste-Wache meldet zwar den Ladecode, prüft aber **nicht**, ob ein Banner vorhanden ist. Vorlage: `docs/rechtstexte/adsense-rueckbau-2026-08.md`.
