@@ -125,9 +125,9 @@ export default function BarrierefreiheitSeite() {
               und Tastaturnavigation.
             </p>
             <p className="mt-2 leading-relaxed">
-              Zuletzt geprüft durch Lighthouse- und axe-DevTools-Sweep:{' '}
-              <strong>18. April 2026</strong> (Stichprobe 19 Rechner aus allen 9 Kategorien,{' '}
-              Re-Runs nach Prompts 78z-B und 78z-A).
+              Zuletzt geprüft durch Lighthouse- und axe-DevTools-Sweep am{' '}
+              <strong>18. April 2026</strong>: eine Stichprobe von 19 Rechnern aus den damals
+              bestehenden 9 Kategorien (Re-Runs nach Prompts 78z-B und 78z-A).
             </p>
             <p className="mt-2 leading-relaxed">
               Ergebnis der Stichprobe:

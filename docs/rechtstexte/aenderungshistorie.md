@@ -193,6 +193,29 @@ Tag der letzten Textänderung.
 ausgeschriebene Zahl und das Datum selbstbegrenzend und bleibt richtig — für die nächste Prüfung
 ist der Zuschnitt aber nachzuziehen.
 
+> **Aufgegriffen mit R6 am 17.08.2026.** Siehe Block unten.
+
+## Welle R6 — ausgerollt 17.08.2026
+
+| Datum | Seite | Änderung | Stufe | Belegquelle | Commit |
+|---|---|---|---|---|---|
+| 17.08.2026 | `/barrierefreiheit` | Stichprobenangabe von „alle 9 Kategorien" auf „die damals bestehenden 9 Kategorien" umgestellt. Seit Juni 2026 existiert eine zehnte Kategorie (Technik); die Angabe wurde dadurch zwar nicht unrichtig, aber zunehmend missverständlich. Die neue Fassung ist an den Messzeitpunkt gebunden und kann nur veralten, nicht falsch werden. Zahlen und Messdatum unverändert. | A | Kategorienbestand der Website, Vergleich April/August 2026 | `<dieser Commit>` |
+
+**Warum die Konstruktion so gewählt ist — nicht „vereinfachen".** Der Satz bindet die
+Kategorienzahl an den Messzeitpunkt. Damit kann er nie unrichtig werden, sondern nur veralten — und
+ein veraltetes Datum sieht man sofort, eine veraltete Zahl nicht. Der Text macht seine eigene
+Alterung sichtbar, statt sie zu verstecken. Wer die Angabe später wieder zu „allen Kategorien"
+glättet, stellt genau den stillen Drift wieder her, der hier beseitigt wurde.
+
+**Bewusst nicht nachgemessen.** Die zehnte Kategorie wird beim nächsten Prüflauf mitgemessen, nicht
+heute nachgetragen — sonst behauptete der Text eine Messung, die nicht stattgefunden hat. Eintrag
+dazu unter „Nächste Termine".
+
+**Formatabweichung, bewusst:** Der Ersatzwortlaut schreibt das Datum als `18.04.2026`. Im Text
+steht weiterhin `18. April 2026`, weil die Seite durchgehend die ausgeschriebene Form verwendet
+(„16. April 2026", „Mai 2026"). Der Datumswert ist unverändert; bindend war laut Auftrag der Sinn,
+nicht die Zeichenkette.
+
 ## Sicherheit
 
 Getrennt von den Rechtstext-Einträgen geführt. Commit-Präfix `sec:`, damit
@@ -228,5 +251,8 @@ als kompromittiert zu behandeln.
 - **täglich** — Dienste-Wache (`scripts/dienste-wache.py`). Ersetzt die Wiedervorlage für die AdSense-Rückkehr: Sie erinnert nicht an ein Datum, sie merkt, dass etwas passiert ist.
 - **~01/2027** — AdSense-Wiederaufnahme: Registry auf `aktiv`, Abschnitte 2, 7, 8 und **die gesamte Einwilligungsmechanik** zurück, Stand-Datum setzen — **vor** der Freischaltung. Der Banner existiert seit R3.3 nicht mehr und muss neu gebaut werden, nicht nur wieder eingebunden; AdSense ist einwilligungspflichtig. Die Dienste-Wache meldet zwar den Ladecode, prüft aber **nicht**, ob ein Banner vorhanden ist. Vorlage: `docs/rechtstexte/adsense-rueckbau-2026-08.md`.
 - **02.12.2026** — Ende der Übergangsfrist Art. 50 Abs. 2 KI-VO (maschinenlesbare Kennzeichnung, Bestandssysteme)
-- **01.11.2026** — nächste Vollprüfung (Quartalslauf)
+- **01.11.2026** — nächste Vollprüfung (Quartalslauf). Dabei zwingend: Kategorie **Technik** in die
+  Barrierefreiheits-Stichprobe aufnehmen und anschließend im Text von `/barrierefreiheit` Zahl der
+  Rechner, Zahl der Kategorien und Messdatum aktualisieren. Bis dahin steht dort bewusst die alte,
+  an den April 2026 gebundene Messung.
 - **01.01.2027** — Beschäftigtenzahl zum 31.12.2026 prüfen (§ 36 VSBG, BFSG-Kleinstunternehmen)
