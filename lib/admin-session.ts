@@ -86,21 +86,44 @@ async function signiere(nutzlast: string, schluessel: string): Promise<string> {
 }
 
 /**
- * Vergleicht das eingegebene Kennwort mit dem hinterlegten.
+ * Vergleicht zwei Geheimnisse.
  *
  * Beide Seiten werden vorher gehasht. Das bringt sie auf dieselbe feste Länge
  * und verhindert zugleich, dass der Vergleich über die Länge der Eingabe
  * etwas verrät.
  */
-export async function pruefeKennwort(eingabe: string): Promise<boolean> {
-  const erwartet = signaturSchluessel();
-  if (!erwartet) return false;
-
+async function vergleicheGeheimnis(eingabe: string, erwartet: string): Promise<boolean> {
   const [a, b] = await Promise.all([
     crypto.subtle.digest('SHA-256', encoder.encode(eingabe)),
     crypto.subtle.digest('SHA-256', encoder.encode(erwartet)),
   ]);
   return gleichInKonstanterZeit(new Uint8Array(a), new Uint8Array(b));
+}
+
+/** Prüft das Kennwort der Admin-Oberfläche gegen `ADMIN_STATS_PASSWORD`. */
+export async function pruefeKennwort(eingabe: string): Promise<boolean> {
+  const erwartet = signaturSchluessel();
+  if (!erwartet) return false;
+  return vergleicheGeheimnis(eingabe, erwartet);
+}
+
+/**
+ * Prüft das Betreiber-Kennwort gegen `ADMIN_PASSWORD` (Welle S2).
+ *
+ * ACHTUNG — das ist eine ANDERE Zugangskennung als `ADMIN_STATS_PASSWORD`
+ * oben. `ADMIN_PASSWORD` sichert manuelle Eingriffe an der Social-Pipeline
+ * (Dry-Run der Cron-Routen, Start des TikTok-OAuth-Flows), nicht die
+ * Statistik-Oberfläche. Die beiden dürfen nicht zusammengelegt werden, ohne
+ * dass jemand das ausdrücklich entscheidet.
+ *
+ * Bis S2 wurde dieses Kennwort als Query-Parameter `?admin=` übergeben und
+ * landete damit in Zugriffs- und Server-Logs. Es ist deshalb als
+ * kompromittiert zu behandeln und nach Abschluss von S2.3 zu wechseln.
+ */
+export async function pruefeAdminPasswort(eingabe: string | null | undefined): Promise<boolean> {
+  const erwartet = (process.env.ADMIN_PASSWORD || '').trim();
+  if (!erwartet || !eingabe) return false;
+  return vergleicheGeheimnis(eingabe, erwartet);
 }
 
 /** Erzeugt ein signiertes, ablaufendes Sitzungskennzeichen. */

@@ -24,7 +24,10 @@
  * Query-Parameter:
  *   ?force=true   — überspringt wasPostedToday()-Check (manueller Re-Trigger)
  *   ?test=true    — dryRun (kein API-Call, kein KV-Write)
- *                   in production zusätzlich ?admin=${ADMIN_PASSWORD} nötig
+ *                   in production zusätzlich der Kopf
+ *                   X-Admin-Password: ${ADMIN_PASSWORD} nötig. Der alte Weg
+ *                   ?admin= wird in der Übergangsphase S2.1 noch akzeptiert,
+ *                   aber protokolliert und mit S2.3 entfernt.
  *   ?platforms=   — kommagetrennt (instagram,facebook,tiktok). Nur manuell.
  *                   Default IG+FB. Unbekannte Werte → HTTP 400.
  *
@@ -43,6 +46,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { publishToBothPlatforms, type PublishResult } from '@/lib/social/publisher';
 import { ALL_PLATFORMS, type Platform } from '@/lib/social/state';
+import { pruefeAdminPasswort } from '@/lib/admin-session';
 
 // Route ist dynamisch — niemals pre-rendern, KV-Reads sind Request-spezifisch.
 export const dynamic = 'force-dynamic';
@@ -137,19 +141,29 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     platforms = parts as Platform[];
   }
 
-  // 3) test=true in production braucht zusätzlich ?admin=${ADMIN_PASSWORD}
+  // 3) test=true in production braucht zusätzlich das Betreiber-Kennwort.
+  //
+  // S2.1 — Übergangsphase: Der Kopf `X-Admin-Password` wird zuerst geprüft,
+  // der bisherige Query-Parameter `?admin=` bleibt daneben gültig. Jeder
+  // Treffer über den alten Weg wird protokolliert (nur Route und Zeitpunkt,
+  // niemals der Wert); diese Zeilen sind die Abnahme für S2.3.
+  //
+  // Der Kopf heisst bewusst NICHT `Authorization` — der ist auf dieser Route
+  // bereits durch CRON_SECRET belegt (Schritt 1).
   let dryRun = false;
   if (test) {
     const isDev = process.env.NODE_ENV === 'development';
     if (isDev) {
       dryRun = true;
-    } else {
-      const adminPw = process.env.ADMIN_PASSWORD;
-      const provided = url.searchParams.get('admin');
-      if (!adminPw || provided !== adminPw) {
-        return unauthorized('test=true in production requires ?admin=<ADMIN_PASSWORD>');
-      }
+    } else if (await pruefeAdminPasswort(request.headers.get('x-admin-password'))) {
       dryRun = true;
+    } else if (await pruefeAdminPasswort(url.searchParams.get('admin'))) {
+      console.warn(
+        `[S2] alter Weg benutzt: ?admin= auf /api/cron/social-post um ${new Date().toISOString()}`,
+      );
+      dryRun = true;
+    } else {
+      return unauthorized('test=true in production requires header X-Admin-Password');
     }
   }
 
