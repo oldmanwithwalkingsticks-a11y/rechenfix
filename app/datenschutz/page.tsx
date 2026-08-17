@@ -290,7 +290,7 @@ export default function DatenschutzSeite() {
               Bei Klick auf einen Affiliate-Link werden Sie auf die Website des Anbieters weitergeleitet. Dort gelten die Datenschutzbestimmungen des jeweiligen Anbieters. Die Affiliate-Links werden über das Netzwerk der <strong>Awin AG</strong> (Eichhornstraße 3, 10785 Berlin) vermittelt. Awin kann dabei einen Tracking-Cookie setzen, um die Zuordnung des Kaufs zu ermöglichen.
             </p>
             <p className="mt-3">
-              Zusätzlich speichern wir bei Klick auf einen Affiliate-Link anonymisierte Klickdaten (Programm-ID, Rechner-Seitenpfad, Zeitstempel) auf unserem Server, um die Nutzung der Empfehlungen intern statistisch auszuwerten. Es werden <strong>keine IP-Adressen, keine User-Agents und keine sonstigen personenbezogenen Daten</strong> gespeichert. Eine Zuordnung zu einer konkreten Person ist uns nicht möglich. Die technische Speicherung erfolgt bei unserem Auftragsverarbeiter <strong>Upstash, Inc.</strong> in einer Redis-Datenbank mit Standort in der Europäischen Union (Frankfurt/Irland). Mit Upstash besteht ein Auftragsverarbeitungsvertrag gemäß Art. 28 DSGVO. Die Liste ist auf maximal 20.000 Einträge begrenzt; ältere Einträge werden automatisch überschrieben.
+              Zusätzlich speichern wir bei Klick auf einen Affiliate-Link anonymisierte Klickdaten (Programm-ID, Rechner-Seitenpfad, Zeitstempel und Kontext der angeklickten Fläche) auf unserem Server, um die Nutzung der Empfehlungen intern statistisch auszuwerten. Es werden <strong>keine IP-Adressen, keine User-Agents und keine sonstigen personenbezogenen Daten</strong> gespeichert. Eine Zuordnung zu einer konkreten Person ist uns nicht möglich. Die technische Speicherung erfolgt bei unserem Auftragsverarbeiter <strong>Upstash, Inc.</strong> in einer Redis-Datenbank mit Standort in der Europäischen Union (Frankfurt/Irland). Mit Upstash besteht ein Auftragsverarbeitungsvertrag gemäß Art. 28 DSGVO. Die Liste ist auf maximal 20.000 Einträge begrenzt; ältere Einträge werden automatisch überschrieben.
             </p>
             <p className="mt-3">
               Die Einbindung von Affiliate-Links erfolgt auf Grundlage unseres berechtigten Interesses an der Finanzierung unseres kostenlosen Angebots (Art. 6 Abs. 1 lit. f DSGVO). Affiliate-Links sind auf unserer Website stets als &bdquo;Anzeige&ldquo; gekennzeichnet.
@@ -304,11 +304,12 @@ export default function DatenschutzSeite() {
             </p>
             <ul className="list-disc pl-5 space-y-1 mt-3">
               <li><strong>Berechnungszähler:</strong> Ein einfacher, aggregierter Zählerstand, der bei jeder durchgeführten Berechnung um 1 erhöht wird. Es wird ausschließlich eine einzelne Zahl gespeichert — keine Zuordnung zu einer Person, Sitzung oder einem Gerät.</li>
-              <li><strong>Affiliate-Klicks:</strong> Programm-ID, Rechner-Seitenpfad und Zeitstempel (siehe Abschnitt 8).</li>
-              <li><strong>Rechner-Feedback:</strong> Wenn Sie auf den &bdquo;Daumen hoch&ldquo;/&bdquo;Daumen runter&ldquo;-Button unter einem Rechner klicken, speichern wir die Bewertung (ja/nein), den Pfad des Rechners und den Zeitstempel. Bei negativem Feedback können Sie zusätzlich freiwillig einen Freitext-Hinweis absenden; dieser wird ebenfalls gespeichert. Geben Sie dort bitte keine personenbezogenen Daten ein.</li>
+              <li><strong>Affiliate-Klicks:</strong> Programm-ID, Rechner-Seitenpfad, Zeitstempel sowie der Kontext der angeklickten Fläche (etwa die gewählte Tarifart), höchstens 100 Zeichen (siehe Abschnitt 8).</li>
+              <li><strong>Rechner-Feedback:</strong> Wenn Sie auf den &bdquo;Daumen hoch&ldquo;/&bdquo;Daumen runter&ldquo;-Button unter einem Rechner klicken, speichern wir die Bewertung (ja/nein), den Pfad des Rechners und den Zeitstempel. Bei negativem Feedback können Sie zusätzlich freiwillig einen Freitext-Hinweis absenden. Dieser wird <strong>nicht</strong> in der Nutzungsstatistik gespeichert, sondern ausschließlich per E-Mail an uns übermittelt; Näheres dazu in Abschnitt 11. Geben Sie dort bitte keine personenbezogenen Daten ein.</li>
+              <li><strong>PDF-Downloads:</strong> Wenn Sie ein Ergebnis als PDF herunterladen, speichern wir die Bezeichnung des Rechners und den Zeitstempel. Der Inhalt des PDFs und die zugrunde liegenden Eingaben werden dabei nicht übertragen; das PDF entsteht ausschließlich in Ihrem Browser.</li>
             </ul>
             <p className="mt-3">
-              Wir erfassen dabei <strong>keine IP-Adressen, keine User-Agents, keine Cookies und keine sonstigen Merkmale</strong>, die einen Rückschluss auf Ihre Person erlauben würden. Eine Identifizierung einzelner Nutzer ist für uns technisch nicht möglich.
+              Für diese Nutzungsstatistik gilt: Wir erfassen dabei <strong>keine IP-Adressen, keine User-Agents, keine Cookies und keine sonstigen Merkmale</strong>, die einen Rückschluss auf Ihre Person erlauben würden. Eine Identifizierung einzelner Nutzer ist für uns anhand dieser Daten technisch nicht möglich. Zu den Angaben, die beim Absenden des Feedback-Formulars übermittelt werden, siehe Abschnitt 11.
             </p>
             <p className="mt-3">
               Die technische Speicherung erfolgt in einer Redis-Datenbank bei <strong>Upstash, Inc.</strong> (Auftragsverarbeiter gemäß Art. 28 DSGVO). Der Datenbank-Standort liegt innerhalb der Europäischen Union (Frankfurt/Irland). Die Listen sind auf jeweils 20.000 Einträge begrenzt, ältere Einträge werden automatisch überschrieben.
@@ -432,8 +433,11 @@ export default function DatenschutzSeite() {
             <p className="mt-3">
               Für den Versand von E-Mails, die aus Formularen dieser Website ausgelöst werden — etwa
               Rückmeldungen über das Feedback-Feld —, nutzen wir den Dienst <strong>Resend</strong> der
-              Resend, Inc. (USA). Übermittelt werden dabei der Inhalt Ihrer Nachricht sowie, sofern von Ihnen
-              angegeben, Ihre E-Mail-Adresse.
+              Resend, Inc. (USA). Übermittelt werden dabei der Inhalt Ihrer Nachricht, technische Angaben
+              zu Ihrem Browser (User-Agent) sowie, sofern von Ihnen angegeben, Ihre E-Mail-Adresse. Der
+              User-Agent hilft uns, gemeldete Darstellungs- und Bedienfehler nachzuvollziehen;
+              Rechtsgrundlage ist unser berechtigtes Interesse an der Fehlerbehebung nach
+              Art. 6 Abs. 1 lit. f DSGVO.
             </p>
             <Hinweisbox>
               <strong>Datenübermittlung in die USA:</strong> Die Übermittlung an Resend, Inc. erfolgt auf
