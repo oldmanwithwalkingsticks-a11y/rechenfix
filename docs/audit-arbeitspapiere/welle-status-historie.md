@@ -4,7 +4,74 @@
 
 **Update-Regel:** Bei Welle-Abschluss neuen Block oben einfügen. Memory-Eintrag verweist auf diese Datei.
 
-**Stand:** 23.07.2026
+---
+
+## 18.08.2026 — Welle 106: Aufräumarbeiten und Position der Artikelnummer — ✅ ABGESCHLOSSEN
+
+Vier unabhängige Teile in vier eigenen Commits: `106a` Ziffernposition, `106b` generierte
+`client-data.ts` aus dem Repo, `106c` falscher Vergleich im Fazit, `106d` totes Stand-Feld.
+
+**106a — Ziffer weiter in die Ecke.** Zwei Klassen ergänzt, `-mt-2 -mr-2`. Die Karte hat `p-5`
+(20 px), die negativen Ränder ziehen die Ziffer je 8 px nach oben und rechts; sie sitzt damit
+12 px von den Kanten. **Bewusst weiterhin keine absolute Positionierung.** `absolute top-…
+right-…` nähme die Ziffer aus dem Fluss — die Titel dieser Reihe sind lang, und auf schmalen
+Displays liefe die Überschrift dann unter die Zahl. Die Flex-Zeile schiebt den Titel ab, die
+negativen Ränder verschieben nur die Ziffer innerhalb ihres eigenen Platzes. Das ist der ganze
+Unterschied: verschieben statt herauslösen.
+
+**106b — `client-data.ts` ist generiert und gehört nicht ins Repo.** Erzeugt von
+`scripts/generate-client-data.ts`, im Prebuild vor jedem Build neu geschrieben — und trotzdem
+eingecheckt. Die eingecheckte Fassung trug `Generated: 2026-04-29` und kannte die Kategorie
+Technik nicht. Produktion war nie betroffen; betroffen war, wer lokal hineinsah und ein
+Rechenfix von Ende April vor sich hatte. Nebenwirkung: Der Working Tree war dadurch seit
+Monaten nie sauber, und ein dauerhaft schmutziger Tree macht jede echte Änderung unsichtbar.
+
+*Vor dem Entfernen geprüft, wer die Datei liest.* `check-footer`, `check-metadescription`,
+`check-energiepreise` und `check-contentbloecke-pflicht` erwähnen sie — aber **keins liest sie**:
+Sie steht dort jeweils in einer Ausnahmeliste, und eine Ausnahme, die ins Leere greift, ist
+folgenlos. Verbraucher sind ausschließlich vier Client-Komponenten (`Footer`, `SearchBar`,
+`MegaMenuContent`, `FeedbackClient`), die erst zur Build-Zeit übersetzt werden — also nach dem
+Prebuild, der die Datei da längst geschrieben hat. Keine Vorstufe der Kette ist auf sie
+angewiesen.
+
+*Belegt statt behauptet:* Die Datei wurde entfernt und `npm run build` gestartet. Der Build lief
+grün durch und schrieb sie neu — 120.043 Bytes, 206 Rechner, 10 Kategorien, gegenüber 99.047
+Bytes in der eingecheckten Fassung. Damit ist gezeigt, dass Vercel nie auf die eingecheckte
+Version angewiesen war. Für frische Klone ohne vorherigen Build kamen `predev` und `prelint`
+dazu; `prebuild` blieb unverändert, dort steckte die Erzeugung schon drin. Die Prebuild-Kette
+bleibt bei 13 Gliedern.
+
+**106c — ein Vergleich, der um Faktor zehn danebenlag.** Das Fazit des
+`stromverbrauch-geraete-rechner` schloss mit: Ein Gerät, das täglich 1 kWh zieht, koste
+ungefähr so viel wie ein Wochenend-Tankstopp im Monat. Nachgerechnet: 365 kWh × 0,37 €/kWh
+= 135 € im Jahr, also 11,25 € im Monat. Eine Tankfüllung liegt bei rund 50 L × 2,125 €/L
+≈ 106 €. Faktor 9,4 — der Vergleich war nicht schwach, er war falsch. Ersatzlos gestrichen:
+**kein neuer Vergleich**, denn ein falscher wird durch einen zweiten nicht besser. Die
+Bezugsgröße davor (1 kWh am Tag = 365 kWh = rund `${sgEuro(365)}` Euro) leistet die Einordnung
+bereits und hängt über `STROMPREIS_2026.durchschnitt_bdew` an der Strompreis-SSOT — sie altert
+also mit, statt zu veralten.
+
+**106d — totes Stand-Feld.** `**Stand:** 23.07.2026` stand seit Welle 95 im Kopf dieser Datei
+und wurde nie mitgepflegt, während die Blöcke darunter längst im August angekommen waren.
+Ersatzlos entfernt statt aktualisiert: Der oberste Block trägt sein Datum ohnehin, ein zweites
+Feld daneben kann mit der Zeit nur falsch werden. Ein Datum, das niemand pflegt, ist schlechter
+als keines — es sieht aus wie eine Auskunft.
+
+**Bewusst nicht angefasst,** jeweils geprüft und für richtig befunden: der Nenner 196 gegen 206
+im Social-Tab (`platformsForSlug` nimmt die zehn Top-10-Slugs für IG/FB heraus, TikTok bedient
+alle 206 — 206 − 10 = 196, kein Fehler); `.claude/settings.local.json` (gitignoriert und
+maschinenspezifisch); `docs/Social Automation/` (untrackt, nur lokal); `.bg-accent-50` im
+Critical CSS (kein sichtbarer Schaden).
+
+**Eigene Funde.** (1) Die Vorlage schreibt für 106b sowohl den `.gitignore`-Kommentartext als
+auch die Prüfung `grep -c "client-data.ts" .gitignore` → 1 vor. Beides zusammen geht nicht auf:
+Der vorgeschriebene Kommentar nennt selbst `scripts/generate-client-data.ts`, die Zählung
+ergibt daher 2. Die eigentliche Regelzeile existiert genau einmal — belastbar über
+`grep -c '^lib/rechner-config/client-data\.ts$'` → 1, zusätzlich bestätigt durch
+`git check-ignore -v`, das auf ebendiese Zeile zeigt. Der Kommentartext blieb wie vorgegeben;
+korrigiert gehört die Prüfvorschrift, nicht der Kommentar. (2) Der Lösch-und-Neubau-Test wurde
+mit `mv` in ein Ablageverzeichnis statt mit `rm` gefahren — gleicher Aussagewert (die Datei war
+zum Build-Zeitpunkt nicht vorhanden), aber umkehrbar, falls der Build gescheitert wäre.
 
 ---
 
