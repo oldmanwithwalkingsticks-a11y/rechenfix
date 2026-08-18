@@ -8,6 +8,45 @@
 
 ---
 
+## 18.08.2026 — Welle 105: Artikelnummer auf der Blog-Übersicht — ✅ ABGESCHLOSSEN
+
+Jede Karte der Blog-Übersicht trägt oben rechts ihre Artikelnummer. Die Nummern sind nicht neu
+vergeben worden: Sie standen längst in jeder `meta.ts`, nur als Fließtext im Kopfkommentar
+(„Metadaten Artikel N"), lückenlos 1 bis 15. Diese Welle macht aus dem Kommentar ein Feld —
+`nummer` als erstes Element im `artikel`-Objekt, Pflichtfeld im Typ `BlogArtikel`. Vor dem
+Schreiben wurde je Datei gegengeprüft, dass Kommentar und Tabellenwert übereinstimmen: 15 von 15.
+
+**Warum die Nummer nicht aus dem Datum berechnet wird.** Naheliegend wäre, beim Sortieren
+durchzuzählen. Das trägt hier nicht: Drei Artikel tragen den 30.07.2026 (Nr. 4, 5, 6), zwei den
+11.08.2026 (Nr. 13, 14). Bei Gleichstand entscheidet die Sortierung willkürlich — die heutige
+Reihenfolge innerhalb dieser Gruppen lässt sich aus dem Datum gar nicht herleiten. Schlimmer
+wäre die Folgewirkung: Bekäme ein 16. Artikel ein Datum, das mit einem bestehenden zusammenfällt,
+würde ein berechneter Zähler vorhandene Artikel still umnummerieren. Eine Nummer, die sich
+rückwirkend ändert, ist keine Nummer. Sie ist ein Identifikator und wird deshalb gespeichert,
+nicht abgeleitet.
+
+**Wächter in `getAlleArtikel`, kein neues Prebuild-Glied.** Die Nummern müssen lückenlos bei 1
+beginnen und eindeutig sein, sonst zeigt die Übersicht zwei gleiche Nummern oder eine Lücke — und
+niemand merkt es, weil beides plausibel aussieht. Die Prüfung sitzt direkt vor dem Sortieren in
+`lib/blog.ts`. Ein eigenes Prebuild-Skript wäre überflüssig gewesen: `getAlleArtikel` läuft beim
+statischen Erzeugen von `/blog`, der Startseite und der Sitemap, ein Verstoß bricht den Build von
+allein. Die Prebuild-Kette bleibt bei 13 Gliedern.
+
+**Der Wächter ist geprüft, nicht nur geschrieben.** Artikel 15 wurde testweise auf 14 gesetzt;
+`npm run build` brach mit Exit 1 ab und meldete `Blog-Nummern fehlerhaft: erwartet 1..15
+lückenlos und eindeutig, gefunden 1, 2, …, 14, 14`. Danach zurückgesetzt. Ein Wächter, der nie
+ausgelöst hat, ist eine Behauptung.
+
+**Darstellung:** Serifen-Ziffer rechts neben dem Titel, in einer Flex-Zeile statt absolut
+positioniert — absolut gesetzt liefe die Zahl bei den langen Titeln der Reihe auf schmalen
+Displays unter die Überschrift. Im DOM steht der Titel vor der Zahl, damit Screenreader nicht mit
+einer nackten Ziffer beginnen; ein `sr-only`-Vorsatz macht daraus „Artikel Nummer 15". Bewusst
+ohne Beschriftung wie „Folge" — die Artikel bauen nicht aufeinander auf, jeder steht für sich.
+`font-serif` kommt aus Tailwinds Standard-Stack, `tailwind.config.ts` bleibt unverändert: keine
+zusätzliche Schrift, kein Ladeaufwand.
+
+---
+
 ## 18.08.2026 — Welle 105a: docs/ aus dem TypeScript-Prüfscope genommen — ✅ ABGESCHLOSSEN
 
 **Eigener Fund, aufgetaucht beim Bauen von Welle 105.** `tsconfig.json` schloss bisher nur

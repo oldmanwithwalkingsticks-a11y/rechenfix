@@ -5,6 +5,7 @@ import type { BlogArtikel } from '@/lib/blog';
  * Gelesen von lib/blog.ts (Registry) und von page.mdx selbst.
  */
 export const artikel: Omit<BlogArtikel, 'slug'> = {
+  nummer: 8,
   titel: 'Woher die Kalorien auf der Packung kommen',
   beschreibung:
     'Die Zahl auf der Packung ist keine Messung, sondern eine Rechnung nach einer Konvention von 1896 — und die FAO zählt 975 zulässige Kombinationen, sie zu ermitteln.',

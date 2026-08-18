@@ -5,6 +5,7 @@ import type { BlogArtikel } from '@/lib/blog';
  * (driftfrei). Gelesen von lib/blog.ts (Registry) und von page.mdx selbst.
  */
 export const artikel: Omit<BlogArtikel, 'slug'> = {
+  nummer: 5,
   titel: 'Woher der BMI kommt – und warum sein Erfinder ihn nie für einzelne Menschen gedacht hat',
   beschreibung:
     'Der Body-Mass-Index wurde für Bevölkerungsstatistik entwickelt. Sowohl Adolphe Quetelet als auch Ancel Keys warnten vor der Anwendung auf Einzelpersonen — die heute Standard ist.',

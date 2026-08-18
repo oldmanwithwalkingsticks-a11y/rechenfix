@@ -5,6 +5,7 @@ import type { BlogArtikel } from '@/lib/blog';
  * Gelesen von lib/blog.ts (Registry) und von page.mdx selbst.
  */
 export const artikel: Omit<BlogArtikel, 'slug'> = {
+  nummer: 13,
   titel: 'Warum der Balkon nur zu einem Viertel zählt',
   beschreibung:
     'Die Quadratmeterzahl im Mietvertrag ist keine gemessene, sondern eine gerechnete Größe — nach einer Verordnung, die für frei finanzierte Wohnungen formal gar nicht gemacht wurde. Von der Dachschräge über die Badewanne bis zu drei Urteilen, die dieselbe Zahl unterschiedlich streng behandeln.',

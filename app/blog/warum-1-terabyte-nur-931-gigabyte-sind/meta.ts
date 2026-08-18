@@ -5,6 +5,7 @@ import type { BlogArtikel } from '@/lib/blog';
  * (driftfrei). Gelesen von lib/blog.ts (Registry) und von page.mdx selbst.
  */
 export const artikel: Omit<BlogArtikel, 'slug'> = {
+  nummer: 4,
   titel: 'Warum 1 Terabyte nur 931 Gigabyte sind – und wer hier eigentlich falsch rechnet',
   beschreibung:
     'Das Wort Gigabyte hat zwei gültige Bedeutungen, festgeschrieben von zwei Normungsorganisationen, die sich widersprechen. Eine Lösung existiert seit 1999 — sie wird nur nicht benutzt.',

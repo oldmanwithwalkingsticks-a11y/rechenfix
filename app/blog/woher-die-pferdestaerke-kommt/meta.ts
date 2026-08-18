@@ -5,6 +5,7 @@ import type { BlogArtikel } from '@/lib/blog';
  * (driftfrei). Gelesen von lib/blog.ts (Registry) und von page.mdx selbst.
  */
 export const artikel: Omit<BlogArtikel, 'slug'> = {
+  nummer: 2,
   titel: 'Woher die Pferdestärke kommt – und warum niemand genau weiß, welches Pferd gemeint war',
   beschreibung:
     'Jedes Auto wird bis heute in Pferdestärken gemessen. Die Zahl 33.000 geht auf ein einziges Notizbuch von James Watt zurück – und auf die beiläufige Schätzung eines Mühlenbauers.',

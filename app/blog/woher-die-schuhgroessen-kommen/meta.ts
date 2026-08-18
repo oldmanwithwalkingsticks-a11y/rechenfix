@@ -5,6 +5,7 @@ import type { BlogArtikel } from '@/lib/blog';
  * (driftfrei). Gelesen von lib/blog.ts (Registry) und von page.mdx selbst.
  */
 export const artikel: Omit<BlogArtikel, 'slug'> = {
+  nummer: 3,
   titel: 'Woher die Schuhgrößen kommen – und warum Größe 42 keine 42 Zentimeter ist',
   beschreibung:
     'Drei Größensysteme, drei Nullpunkte, keine gemeinsame Einheit: Die ISO-Norm räumt in ihrem eigenen Text ein, dass es keine exakte Umrechnung zwischen EU-, UK- und US-Schuhgrößen gibt.',

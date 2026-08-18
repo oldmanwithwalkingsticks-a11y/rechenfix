@@ -3,6 +3,7 @@ import path from 'node:path';
 
 export type BlogArtikel = {
   slug: string;
+  nummer: number;         // Artikelnummer der Reihe, 1-basiert, aus meta.ts
   titel: string;
   beschreibung: string;
   datum: string;          // ISO YYYY-MM-DD
@@ -43,6 +44,19 @@ export async function getAlleArtikel(): Promise<BlogArtikel[]> {
       return { slug, ...meta };
     })
   );
+
+  // Wächter: Die Nummern sind ein Identifikator, kein Zähler. Sie müssen
+  // lückenlos bei 1 beginnen und eindeutig sein — sonst zeigt die Übersicht
+  // zwei Artikel mit derselben Nummer oder eine Lücke, und niemand merkt es.
+  const nummern = artikel.map((a) => a.nummer).sort((x, y) => x - y);
+  const erwartet = nummern.map((_, i) => i + 1);
+  if (nummern.join(',') !== erwartet.join(',')) {
+    throw new Error(
+      `Blog-Nummern fehlerhaft: erwartet 1..${artikel.length} lückenlos und eindeutig, ` +
+        `gefunden ${nummern.join(', ')}`,
+    );
+  }
+
   return artikel.sort((a, b) => b.datum.localeCompare(a.datum)); // neueste zuerst
 }
 

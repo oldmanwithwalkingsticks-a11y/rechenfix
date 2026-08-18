@@ -5,6 +5,7 @@ import type { BlogArtikel } from '@/lib/blog';
  * (driftfrei). Gelesen von lib/blog.ts (Registry) und von page.mdx selbst.
  */
 export const artikel: Omit<BlogArtikel, 'slug'> = {
+  nummer: 6,
   titel: 'Wie viel ist ein Cup – und warum die Frage keine eindeutige Antwort hat',
   beschreibung:
     'Vier verschiedene Cups sind gleichzeitig in Gebrauch, und der Cup auf der Packung ist nicht der im Rezept. Derselbe Cup Mehl wiegt je nach Handbewegung 120 oder 160 Gramm.',

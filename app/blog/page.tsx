@@ -43,9 +43,15 @@ export default async function BlogUebersicht() {
                 href={`/blog/${a.slug}`}
                 className="card block p-5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800"
               >
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-1">
-                  {a.titel}
-                </h2>
+                <div className="flex items-start justify-between gap-4 mb-1">
+                  <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+                    {a.titel}
+                  </h2>
+                  <span className="shrink-0 font-serif text-3xl font-bold leading-none tabular-nums text-primary-700 dark:text-primary-300">
+                    <span className="sr-only">Artikel Nummer </span>
+                    {a.nummer}
+                  </span>
+                </div>
                 <p className="text-gray-600 dark:text-gray-400 mb-3">{a.beschreibung}</p>
                 <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500 dark:text-gray-400">
                   <time dateTime={a.datum}>
