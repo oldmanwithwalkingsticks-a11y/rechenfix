@@ -2078,7 +2078,7 @@ export const technikRechner: RechnerConfig[] = [
           { label: 'Verbrauch pro Jahr', formel: '1 kWh × 365', ergebnis: '365 kWh' },
           { label: 'Kosten pro Jahr', formel: `365 kWh × ${SG_PREIS_DE} €`, ergebnis: `${eur(365 * SG_PREIS)} €` },
         ],
-        fazit: `Ein PC mit 200 Watt, der täglich 5 Stunden läuft, verbraucht 365 kWh im Jahr und kostet bei ${SG_PREIS_DE} €/kWh rund ${sgEuro(365)} Euro — etwa ${eur(365 * SG_PREIS / 12)} Euro im Monat. Wer den Rechner nur halb so lange nutzt, halbiert auch die Kosten. Die Rechnung ist immer dieselbe: Watt mal Stunden geteilt durch 1.000 ergibt die kWh, mal dem Strompreis die Kosten. So lässt sich für jedes Gerät der Jahresbeitrag zur Stromrechnung abschätzen. Eine Plausibilitätskontrolle: 1 kWh am Tag entspricht 365 kWh im Jahr — bei ${SG_PREIS_DE} €/kWh also rund ${sgEuro(365)} Euro. Wer diese Bezugsgröße im Kopf hat, ordnet jeden Verbraucher schnell ein: Ein Gerät, das täglich 1 kWh zieht, kostet ungefähr so viel wie ein Wochenend-Tankstopp im Monat.`,
+        fazit: `Ein PC mit 200 Watt, der täglich 5 Stunden läuft, verbraucht 365 kWh im Jahr und kostet bei ${SG_PREIS_DE} €/kWh rund ${sgEuro(365)} Euro — etwa ${eur(365 * SG_PREIS / 12)} Euro im Monat. Wer den Rechner nur halb so lange nutzt, halbiert auch die Kosten. Die Rechnung ist immer dieselbe: Watt mal Stunden geteilt durch 1.000 ergibt die kWh, mal dem Strompreis die Kosten. So lässt sich für jedes Gerät der Jahresbeitrag zur Stromrechnung abschätzen. Eine Plausibilitätskontrolle: 1 kWh am Tag entspricht 365 kWh im Jahr — bei ${SG_PREIS_DE} €/kWh also rund ${sgEuro(365)} Euro. Wer diese Bezugsgröße im Kopf hat, ordnet jeden Verbraucher schnell ein.`,
       },
       {
         typ: 'text',
