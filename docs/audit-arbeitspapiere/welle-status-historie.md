@@ -6,6 +6,63 @@
 
 ---
 
+## 19.08.2026 — Welle 107a: Artikel 16, Beleglücke geschlossen — ✅ ABGESCHLOSSEN
+
+Auslöser war ein Fund aus Welle 107: Zwei Aussagen standen unbelegt im Text, obwohl die Prüfliste
+der Textquelle für beide „je eine Fundstelle beibringen oder aus dem Text nehmen" verlangt hatte.
+Diese Welle tut beides — einmal so, einmal so.
+
+**Windeln sind ersatzlos gestrichen.** Für die Behauptung fand sich keine Primärquelle. Sie wäre
+allein über das Fehlen auf der Anlage 2 zu begründen, und ein Fehlen lässt sich ohne vollständige
+Lektüre der Liste nicht belegen. Ein Beispiel, das man nur durch Abwesenheit stützen kann, trägt
+den Absatz nicht — die vier übrigen Warenpaare tun es auch allein.
+
+**Mineralwasser bekommt seinen Beleg und wird zum eigenen Abschnitt.** Nummer 34 der Anlage 2
+begünstigt die Lieferung von Wasser und nimmt abgefülltes Trinkwasser in Fertigpackungen für den
+Verbraucher ausdrücklich wieder aus. Damit entscheidet nicht der Inhalt, sondern die Verpackung —
+und der BFH hatte zu klären, ob eine 22,5-Liter-Gallone für einen Wasserspender noch eine solche
+Fertigpackung ist. Ein Nachtrag stellt das zurecht: Die Milch steht unter Nummer 4, und die kennt
+gar keine Verpackungsklausel. Entschieden hat also nicht die Verpackung, sondern unter welcher
+Nummer eine Ware landet — zwei getrennt entstandene Formulierungen, kein Grundsatz. Das ist
+dieselbe Einsicht wie beim Topinambur, nur an einer Ware, die jeder im Einkaufswagen hat.
+
+**Wortzahl: 3.028 Wörter, Rechnerposition 28,4 Prozent** (verbindliches Skill-Verfahren, gemessen
+an der fertigen Datei). Vor dieser Welle 2.684 Wörter — Zuwachs 344. Damit liegt der Artikel
+erstmals über dem Richtwert von 3.000. **Das gelang nicht im ersten Anlauf:** Der ursprüngliche
+Nachtrag brachte 2.921 Wörter und blieb 79 unter dem Ziel. Da Nachjustieren am Text ausdrücklich
+untersagt ist, wurde vor dem Commit gestoppt und gemeldet; die zwei Absätze zu Nummer 4 kamen als
+eigene Lieferung nach. Die Rechnerposition liegt am unteren Rand des Korridors, weil der gesamte
+Nachtrag hinter der Einbettung steht — so beabsichtigt.
+
+**Eigene Funde.**
+
+1. **Ein Quelleneintrag hätte die eigene Prüfung gerissen.** Die Vorlage beschreibt den neuen
+   Eintrag zu Nummer 34 als „Wasser, ausgenommen abgefülltes Trinkwasser, aus Unterposition
+   2201 90 00 des Zolltarifs" — und verlangt zugleich, dass diese Ziffernfolge genau **einmal** in
+   der Datei steht. Beides zusammen geht nicht auf, weil der Artikeltext sie bereits führt. Der
+   Eintrag ist deshalb ohne die Ziffern formuliert; er benennt die Ausnahme vollständig und
+   verweist auf eine eigene Unterposition, ohne sie zu wiederholen. Dieselbe Fehlerklasse wie in
+   Welle 106b: Ein Prüfbefehl darf sein eigenes Ziel nicht ein zweites Mal in die Datei schreiben.
+
+2. **Das genannte Vorbild lag woanders.** Die Vorlage verweist für linklose Quelleneinträge auf
+   „die zwei linklosen Einträge in Artikel 3". Artikel 3 hat keinen einzigen. Die Praxis gibt es in
+   fünf anderen Artikeln, und genau zwei davon stehen in Artikel 9. Am Vorgehen ändert das nichts,
+   an der Belastbarkeit des Verweises schon.
+
+3. **BFH V R 17/04 ist über die Entscheidungsdatenbank des Bundesfinanzhofs nicht erreichbar** —
+   sie reicht nicht bis 2006 zurück. Der Eintrag steht deshalb ohne Link, mit dem Aktenzeichen als
+   Fundstellenhinweis; das ist der von der Vorlage vorgesehene Weg. Eine URL zu konstruieren wäre
+   die Alternative gewesen und ist ausgeschlossen. Entscheidung und Inhalt wurden über zwei
+   unabhängige Fundstellen bestätigt, bevor sie in den Quellenblock kamen.
+
+4. **Prüfwert 3 ist durch den Nachtrag überholt.** Er verlangt „Fertigpackungen" genau einmal;
+   nach dem Nachtrag steht das Wort zweimal — Zeile 90 im Wortlaut der Nummer 34, Zeile 94 im neuen
+   Absatz zur Milch („Dort gibt es keine Ausnahme für Fertigpackungen"). Beide Vorkommen sind
+   richtig. Der Prüfwert wurde vor dem Nachtrag festgelegt und misst seither etwas anderes, als er
+   messen sollte. Nicht angepasst wurde der Text, sondern die Feststellung hier notiert.
+
+---
+
 ## 19.08.2026 — Welle 107: Blogartikel 16 „Süßkartoffel und Mehrwertsteuer" — ✅ ABGESCHLOSSEN
 
 Artikel 16 der Blogreihe, verlinkter Rechner `mwst-rechner`. Neu: zwei Grafik-Komponenten
