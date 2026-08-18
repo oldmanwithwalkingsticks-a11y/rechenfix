@@ -8,6 +8,50 @@
 
 ---
 
+## 18.08.2026 — Welle 104: PostPeer-Pfad entfernt, Provider-Weiche gehärtet — ✅ ABGESCHLOSSEN
+
+Der Messaufbau aus W53/W66 ist entschieden: bundle.social hat vom 08. bis 18.08. sechs von sechs
+Slots gepostet, keine Lücke. Damit endet der Test vorzeitig, und der zweite Anbieter wird nicht
+stillgelegt, sondern entfernt. PostPeer war ohnehin kein tauglicher Rollback — der
+`reached_active_user_cap` sitzt auf PostPeers geteiltem TikTok-Client und lässt sich durch Bezahlen
+nicht lösen. Ein Rückfallweg, der im Ernstfall nicht trägt, ist schlechter als keiner: er verleitet
+dazu, auf ihn zu zählen.
+
+**Der zweite Anlass wog schwerer als der erste.** In `publishToTikTok` war der Direkt-API-Weg der
+Default, sobald `TIKTOK_PROVIDER` fehlte. Der Direktweg wählt bei ungeprüftem Konto `SELF_ONLY` —
+eine vergessene Umgebungsvariable hätte das System also still ins Private posten lassen, statt
+sichtbar zu scheitern. Ein Ausfall, der wie Erfolg aussieht, wird nicht bemerkt. Die neue Weiche
+kennt zwei Werte: `bundle` (Default, auch bei fehlender Variable) und `direct`. Jeder andere Wert
+bricht mit `PROVIDER_UNKNOWN` ab, statt sich etwas auszusuchen.
+
+**Entfernt:** die beiden `POSTPEER_POLL_*`-Konstanten, die Typen `PostPeerPlatformResult` und
+`PostPeerResponse` sowie `pickTikTok`, `extractPostPeerId`, `parsePostPeer`, `evaluatePostPeer`,
+`pollPostPeerStatus` und `publishViaPostPeer`. `lib/social/tiktok.ts` schrumpft von 633 auf 442
+Zeilen. `TIKTOK_VIA_WRAPPER` kommt im Code nicht mehr vor.
+
+**Bewusst stehen geblieben** — und das ist der Teil, den eine spätere Aufräumwelle nicht
+„nachziehen" darf: Die PostPeer-Erwähnungen in `lib/social/utils.ts`, in den beiden Cron-Routen und
+in `CLAUDE.md` Zeile 844 sind **Begründungen**, keine Rückstände. Sie erklären, warum der
+TikTok-Takt jeden zweiten Tag läuft und warum TikTok um 05 UTC postet. Wer sie streicht, löscht die
+Begründung und behält die Regel. `lib/social/tiktok-auth.ts` bleibt vollständig erhalten:
+`TikTokApiError` stammt von dort und wird vom bundle-Pfad weiter gebraucht.
+
+**Offener Punkt:** Der Direktweg samt OAuth-Strecke (`tiktok-auth.ts`, `/api/tiktok/auth`,
+`/api/tiktok/callback`) bleibt bestehen, solange nicht geklärt ist, ob die TikTok-Developer-App eine
+erreichbare Redirect-URI verlangt. Erst wenn das entschieden ist, lässt sich sagen, ob `direct` ein
+echter zweiter Weg bleibt oder ebenfalls fallen kann.
+
+**Eigener Fund (Vorlage).** Schritt 3 nennt den Ersetzungsbereich als Zeilen 566–582, der Fließtext
+daneben als „bis einschließlich der schließenden `}` des zweiten `if`-Blocks" — das ist Zeile 581,
+582 ist die Leerzeile dahinter. Ersetzt wurden 566–581, die Leerzeile blieb stehen; das Ergebnis
+ist in beiden Lesarten identisch. Gemeldet, nicht selbst in der Vorlage repariert.
+
+**Eigener Fund (diese Datei).** Das Feld `**Stand:**` in Zeile 7 steht auf 23.07.2026, während die
+beiden jüngsten Blöcke auf den 14.08.2026 datieren. Nicht angefasst, weil außerhalb des Auftrags —
+gehört bei nächster Gelegenheit nachgezogen.
+
+---
+
 ## 14.08.2026 — Welle 103: rechner-builder Referenzwerte-Update — ✅ ABGESCHLOSSEN
 
 Einundzwanzig Wellen Config-Arbeit (82–102) als Regeln kodifiziert. 1775 → 1844 Zeilen,

@@ -29,8 +29,6 @@ const SITE_URL = 'https://www.rechenfix.de';
 const TIMEOUT_MS = 15_000;
 const POLL_INTERVAL_MS = 3_000;
 const POLL_MAX_ATTEMPTS = 10; // 10 × 3 s = ~30 s
-const POSTPEER_POLL_INTERVAL_MS = 5_000;
-const POSTPEER_POLL_MAX_ATTEMPTS = 6; // 6 × 5 s = ~30 s
 const BUNDLE_POLL_INTERVAL_MS = 10_000;
 const BUNDLE_POLL_MAX_ATTEMPTS = 30; // 30 × 10 s = 5 min (Testdauer ~94 s)
 const MAX_TITLE_LEN = 2200;
@@ -187,195 +185,6 @@ async function waitUntilComplete(token: string, publishId: string): Promise<void
       `(publish_id ${publishId} — Post ist evtl. später trotzdem fertig)`,
     'POLL_TIMEOUT',
   );
-}
-
-interface PostPeerPlatformResult {
-  platform?: string;
-  success?: boolean;
-  error?: string;
-  platformPostUrl?: string;
-}
-
-interface PostPeerResponse {
-  success?: boolean;
-  status?: string;
-  postId?: string;
-  platforms?: PostPeerPlatformResult[];
-}
-
-/** TikTok-Eintrag aus `platforms` ziehen (sonst erster Eintrag). */
-function pickTikTok(platforms?: PostPeerPlatformResult[]): PostPeerPlatformResult | undefined {
-  if (!platforms || platforms.length === 0) return undefined;
-  return platforms.find((p) => p.platform === 'tiktok') ?? platforms[0];
-}
-
-/** Post-ID defensiv aus der Antwort ziehen (Doku-Feld `postId`, plus Fallbacks). */
-function extractPostPeerId(json: PostPeerResponse): string {
-  const rec = json as Record<string, unknown>;
-  return (
-    (json.postId as string) ||
-    (rec.id as string) ||
-    ((rec.post as Record<string, unknown> | undefined)?._id as string) ||
-    ((rec.data as Record<string, unknown> | undefined)?.id as string) ||
-    ''
-  );
-}
-
-/**
- * Antworttext zu einem PostPeer-Objekt mit brauchbarem `status` parsen.
- * Nicht parsebar oder ohne `status` → TikTokApiError (kein stiller Erfolg).
- */
-function parsePostPeer(text: string, httpStatus: number): PostPeerResponse {
-  let json: PostPeerResponse | undefined;
-  try {
-    json = JSON.parse(text) as PostPeerResponse;
-  } catch {
-    json = undefined;
-  }
-  if (!json || typeof json.status !== 'string') {
-    throw new TikTokApiError(
-      `PostPeer-Antwort unbrauchbar (HTTP ${httpStatus}): ${text.slice(0, 300)}`,
-      'POSTPEER_UNPARSEABLE',
-    );
-  }
-  return json;
-}
-
-/**
- * Endzustand einer PostPeer-Antwort für unseren Zweck (nur TikTok) auswerten.
- * Wirft bei Fehlschlag; gibt 'success' (fertig) oder 'pending' (weiter pollen).
- * Der API-Schlüssel taucht hier nicht auf; der `error`-Text wird auf 300 Zeichen
- * gekürzt weitergereicht.
- */
-function evaluatePostPeer(json: PostPeerResponse, postId: string): 'success' | 'pending' {
-  const tiktok = pickTikTok(json.platforms);
-
-  // TikTok explizit fehlgeschlagen (z. B. reached_active_user_cap).
-  if (tiktok?.success === false) {
-    throw new TikTokApiError(
-      `PostPeer TikTok-Fehler: ${(tiktok.error ?? 'ohne Angabe').slice(0, 300)}`,
-      'POSTPEER_PLATFORM_FAILED',
-    );
-  }
-  if (json.status === 'failed') {
-    throw new TikTokApiError(`PostPeer status=failed (postId ${postId})`, 'POSTPEER_FAILED');
-  }
-  // published/partial: nur TikTok im Spiel und nicht als false markiert → Erfolg.
-  if (json.status === 'published' || json.status === 'partial') return 'success';
-  if (json.status === 'pending' || json.status === 'publishing' || json.status === 'scheduled') {
-    return 'pending';
-  }
-  // status vorhanden, aber unbekannt → nicht als Erfolg werten.
-  throw new TikTokApiError(`PostPeer unerwarteter status="${json.status}"`, 'POSTPEER_FAILED');
-}
-
-/**
- * Für noch laufende Posts `GET /v1/posts/{postId}` pollen: höchstens
- * POSTPEER_POLL_MAX_ATTEMPTS Versuche im Abstand POSTPEER_POLL_INTERVAL_MS
- * (~30 s, passt in die Cron-Laufzeit). Endzustand published/partial(ok) →
- * Erfolg; failed oder TikTok-success:false → wirft wie in evaluatePostPeer;
- * Zeitfenster abgelaufen → Timeout-Fehler (Slug wird lieber später erneut
- * versucht als fälschlich als erledigt markiert).
- */
-async function pollPostPeerStatus(postId: string, apiKey: string): Promise<string> {
-  for (let attempt = 1; attempt <= POSTPEER_POLL_MAX_ATTEMPTS; attempt++) {
-    await new Promise((resolve) => setTimeout(resolve, POSTPEER_POLL_INTERVAL_MS));
-
-    let res: Response;
-    try {
-      res = await fetch(`https://api.postpeer.dev/v1/posts/${encodeURIComponent(postId)}`, {
-        method: 'GET',
-        headers: { 'x-access-key': apiKey },
-      });
-    } catch {
-      continue; // vorübergehender Netzfehler → nächster Versuch
-    }
-
-    const text = await res.text();
-    if (!res.ok) continue; // z. B. 404 während der Verarbeitung → weiter
-
-    let json: PostPeerResponse;
-    try {
-      const parsed = JSON.parse(text) as PostPeerResponse;
-      if (typeof parsed.status !== 'string') continue; // noch nicht brauchbar
-      json = parsed;
-    } catch {
-      continue;
-    }
-
-    if (evaluatePostPeer(json, postId) === 'success') return postId;
-    // 'pending' → nächster Versuch
-  }
-  throw new TikTokApiError(
-    `PostPeer nicht abgeschlossen nach ${POSTPEER_POLL_MAX_ATTEMPTS}×${POSTPEER_POLL_INTERVAL_MS} ms (postId ${postId})`,
-    'POSTPEER_TIMEOUT',
-  );
-}
-
-/**
- * W18.5 — TikTok-Post über PostPeer (auditierter Wrapper). Nutzt dieselbe
- * Live-Video-URL (PULL_FROM_URL-Muster) und dieselbe Caption-Transform
- * (buildTitle) wie der Direkt-Weg.
- *
- * HTTP 202 heißt bei PostPeer nur „Post accepted" — der tatsächliche Ausgang
- * steht in `status` und `platforms[].success` (Werte: pending, publishing,
- * published, scheduled, partial, failed). Bei pending/publishing/scheduled wird
- * `GET /v1/posts/{postId}` gepollt (pollPostPeerStatus). Gibt die PostPeer-
- * Post-ID als publish_id zurück (Pipeline-kompatibel).
- *
- * Aktiv nur wenn ENV TIKTOK_VIA_WRAPPER === 'true'; sonst greift der
- * Direkt-API-Weg (Fallback, unverändert erhalten).
- */
-async function publishViaPostPeer(post: SocialPost): Promise<string> {
-  const apiKey = process.env.POSTPEER_API_KEY;
-  const accountId = process.env.POSTPEER_ACCOUNT_ID;
-  if (!apiKey) throw new TikTokApiError('POSTPEER_API_KEY fehlt', 'ENV_MISSING');
-  if (!accountId) throw new TikTokApiError('POSTPEER_ACCOUNT_ID fehlt', 'ENV_MISSING');
-
-  const videoUrl = `${SITE_URL}/social-videos/${post.slug}.mp4`;
-  const body = {
-    content: buildTitle(post),
-    platforms: [
-      {
-        platform: 'tiktok',
-        accountId,
-        platformSpecificData: { draft: false, privacyLevel: 'PUBLIC_TO_EVERYONE' },
-      },
-    ],
-    mediaItems: [{ type: 'video', url: videoUrl }],
-    publishNow: true,
-  };
-
-  let res: Response;
-  try {
-    res = await fetch('https://api.postpeer.dev/v1/posts/', {
-      method: 'POST',
-      headers: { 'x-access-key': apiKey, 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    });
-  } catch (err) {
-    throw new TikTokApiError(
-      `PostPeer-Netzwerkfehler: ${err instanceof Error ? err.message : String(err)}`,
-      'NETWORK',
-    );
-  }
-
-  const text = await res.text();
-  if (!res.ok) {
-    throw new TikTokApiError(
-      `PostPeer HTTP ${res.status}: ${text.slice(0, 300)}`,
-      'POSTPEER_ERROR',
-    );
-  }
-
-  // HTTP 2xx heißt bei PostPeer nur „angenommen". Maßgeblich ist der Ausgang in
-  // `status` + `platforms[].success` (siehe Kopfkommentar / evaluatePostPeer).
-  const json = parsePostPeer(text, res.status);
-  const postId = extractPostPeerId(json) || `postpeer-${post.index}`;
-
-  // Endzustand sofort entscheiden; nur bei pending/publishing/scheduled pollen.
-  if (evaluatePostPeer(json, postId) === 'success') return postId;
-  return pollPostPeerStatus(postId, apiKey);
 }
 
 interface BundleUploadResponse {
@@ -563,24 +372,24 @@ export async function publishToTikTok(post: SocialPost, dryRun = false): Promise
     return `dry-tt-${post.index}`;
   }
 
-  // Provider-Weiche (W59). Abwärtskompatibel gestaffelt:
-  //   TIKTOK_PROVIDER='bundle'   → bundle.social (Standard nach W59)
-  //   TIKTOK_PROVIDER='postpeer' ODER (Variable fehlt UND TIKTOK_VIA_WRAPPER=
-  //     'true') → PostPeer (stillgelegt, aber erreichbar)
-  //   sonst → Direkt-API-Weg wie bisher
-  // Bleibt TIKTOK_PROVIDER versehentlich ungesetzt, verhält sich das System wie
-  // vor der Welle statt gar nicht.
-  if (process.env.TIKTOK_PROVIDER === 'bundle') {
+  // Provider-Weiche (W59, gehärtet in W104). Zwei Wege, kein stiller Default:
+  //   'bundle' (Default, auch wenn die Variable fehlt) → bundle.social
+  //   'direct'                                          → Direkt-API-Weg unten
+  // Jeder andere Wert ist ein Konfigurationsfehler und bricht laut ab. Vor W104
+  // fiel eine fehlende Variable auf den Direktweg zurück — der postet bei
+  // ungeprüftem Konto SELF_ONLY, also still ins Private statt zu scheitern.
+  const provider = process.env.TIKTOK_PROVIDER ?? 'bundle';
+  if (provider === 'bundle') {
     return publishViaBundleSocial(post);
   }
-  if (
-    process.env.TIKTOK_PROVIDER === 'postpeer' ||
-    (!process.env.TIKTOK_PROVIDER && process.env.TIKTOK_VIA_WRAPPER === 'true')
-  ) {
-    return publishViaPostPeer(post);
+  if (provider !== 'direct') {
+    throw new TikTokApiError(
+      `Unbekannter TIKTOK_PROVIDER="${provider}" (erlaubt: bundle, direct)`,
+      'PROVIDER_UNKNOWN',
+    );
   }
 
-  // ---- ab hier UNVERÄNDERT: bisheriger Direkt-API-Weg (Fallback) ----
+  // ---- Direkt-API-Weg, nur bei TIKTOK_PROVIDER='direct' ----
   const token = await getValidAccessToken();
 
   // Schritt 1 — creator_info/query: erlaubte privacy_level_options.
