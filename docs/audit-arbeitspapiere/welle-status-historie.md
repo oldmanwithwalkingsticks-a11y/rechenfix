@@ -6,6 +6,86 @@
 
 ---
 
+## 19.08.2026 — Welle 107: Blogartikel 16 „Süßkartoffel und Mehrwertsteuer" — ✅ ABGESCHLOSSEN
+
+Artikel 16 der Blogreihe, verlinkter Rechner `mwst-rechner`. Neu: zwei Grafik-Komponenten
+(`ZollpositionGrenze`, `PositionEinhundertEins`), drei Medien-Assets, `page.mdx` und `meta.ts`.
+Erster Artikel, der unter dem Nummern-Wächter aus Welle 105 angelegt wurde — `nummer: 16` ist
+Pflichtfeld, und der Wächter verlangt 1 bis 16 lückenlos.
+
+**Der Fließtext wurde nicht abgetippt, sondern skriptgesteuert übernommen.** Die Zeilen der
+Textquelle wandern per Skript in die MDX, die Einschübe werden an geprüften Zeilennummern
+gesetzt, und jeder Anker ist vorher per Assertion gegengelesen. Bei 137 Zeilen Fließtext ist
+Abtippen die wahrscheinlichste Fehlerquelle; ein Skript, das bei falschem Anker abbricht, ist
+die billigere Absicherung.
+
+**Zwei Grafiken, beide Server-Komponenten.** `ZollpositionGrenze` zeigt den Bruch innerhalb der
+Zollposition 0714 — Topinambur begünstigt, Süßkartoffel nicht, bei identischer zolltariflicher
+Einordnung. `PositionEinhundertEins` zeigt dasselbe Muster ein zweites Mal an Position 0101
+(Maultier auf der Liste, Pferd und Esel nicht). Beide mit `.dark`-Selektoren statt
+`@media (prefers-color-scheme)`, weil das Repo `darkMode: 'class'` fährt. Geometrie vor der
+Übernahme nachgerechnet: Kastenränder, Innenabstände und die letzte Grundlinie gegen die
+`viewBox`-Höhe.
+
+**KI-Kennzeichnung Ebene 3** für alle drei Assets eingetragen und gelaufen; unabhängig per
+`grep -ac trainedAlgorithmicMedia` gegengelesen, nicht nur über das Schreibprotokoll. Das
+Video-Standbild ist als **Kling** geführt, nicht als Bildmodell — es ist der erste Frame des
+Videos, den Kling als Cover mitliefert. Das entspricht der Handhabung bei `wohnflaeche-`,
+`promille-` und `bremsweg-video-standbild.jpg`. Der Skriptlauf hat die 36 Bestands-Assets
+nachweislich nicht verändert (`git status` meldet 0 geänderte, 3 neue Dateien).
+
+**Offener Punkt aus der Textquelle, bewusst nicht aufgelöst:** Die Aufhebung von Anlage 2
+Nummer 1 Buchstabe a ist **nicht datiert**. Die verbreitete Angabe (Streichung 2012 nach einem
+EU-Vertragsverletzungsverfahren) ist nicht primärbelegt. Text und Grafik sagen deshalb nur, dass
+der Buchstabe den Vermerk weggefallen trägt, und nicht, was dort stand. Lieber eine Lücke
+benennen als sie mit einer Sekundärquelle füllen.
+
+**Eigene Funde.**
+
+1. **Ablageort der Assets.** Die Vorlage führt alle sechs Quelldateien unter
+   `docs/audit-arbeitspapiere/_lokal/`. Die drei Mediendateien lagen dort nicht, sondern in
+   `Blogs/Bilder/` und `Blogs/Videos/` — dem Ort, den der blog-builder-Skill dafür vorsieht und
+   den `.gitignore` als „Original-Medien der Artikel" führt. Es fehlte also nichts; die
+   Vorlagentabelle nennt für Medien den falschen Pfad. Nur Textquelle und die beiden
+   `.tsx.txt`-Vorlagen lagen wie angegeben.
+
+2. **Zitat-Artefakt in der Textquelle.** Zeile 97 der Textdatei umschließt das wörtliche
+   § 26-Zitat mit `<cite index="39-1">…</cite>` — ein Rückstand aus dem Belegsystem, kein
+   Artikelinhalt. In keinem der fünfzehn Bestandsartikel kommt ein `cite`-Element oder ein
+   `index`-Attribut vor. Beim Bau entfernt, der Wortlaut des Zitats blieb unverändert; die
+   Anführungszeichen tragen die Kennzeichnung ohnehin. Von Karsten bestätigt: Das Artefakt
+   gehörte nie in den Artikel. **Zu korrigieren ist die Quelldatei**, sonst holt die nächste
+   Lieferung es zurück.
+
+3. **Andockpunkt drei traf nicht wörtlich zu** — die STOP-Bedingung, die diese Welle vor dem
+   Commit angehalten hat. Die Vorlage setzt `<PositionEinhundertEins />` „nach dem Absatz, der
+   mit *eine Zollposition, eine Grenze mittendurch* endet". Diese Formulierung steht nicht im
+   Artikeltext, sondern im `<desc>` der Grafik. Der Text sagt an der gemeinten Stelle (Zeile 57,
+   Abschnitt „Das Maultier, die Hafermilch …"): *Wieder dieselbe Zollposition, wieder eine Linie
+   mittendurch.* Gemeint ist zweifelsfrei derselbe Absatz — der Abschnitt ist benannt, und die
+   Grafik behandelt genau dessen Gegenstand. Gesetzt wurde dort, gemeldet wurde es trotzdem;
+   Karsten hat die Stelle bestätigt und den Ankertext als Abschreibfehler aus dem `<desc>`
+   der Grafik eingeordnet.
+
+4. **Wortzahl je nach Verfahren verschieden.** Das Verfahren der Vorlage (JSX-Tags entfernen)
+   ergibt 2.754 Wörter bei 32,0 Prozent Rechnerposition — im vorgegebenen Korridor. Das
+   verbindliche Verfahren des Skills (Markdown-Prosa ab der ersten `##`) ergibt 2.684 Wörter bei
+   32,1 Prozent. Die Rechnerposition stimmt in beiden. Die Wortzahl liegt nach dem verbindlichen
+   Verfahren jedoch unter dem Richtwert von 3.000, und der Korridor der Vorlage war von vornherein
+   darunter angesetzt. Das ist eine Entscheidung, keine Messabweichung — festgehalten, damit sie
+   nicht unbemerkt zum neuen Maßstab wird.
+
+5. **`python3` gibt es auf dieser Maschine nicht**, nur `python` (3.12.12). Die Messvorschrift der
+   Vorlage läuft mit `python3` ins Leere. Für künftige Vorlagen: `python`.
+
+6. **Zwei Aussagen im Text stehen weiter ohne Beleg.** Die Prüfliste der Textquelle verlangt für
+   Windeln (19 %) und Mineralwasser (19 %) „je eine Fundstelle beibringen oder aus dem Text
+   nehmen". Beide stehen weiterhin im Absatz mit den Warenpaaren, und keiner der dreizehn
+   Quelleneinträge deckt sie. Nicht angefasst, weil der Fließtext vorgegeben ist — aber die
+   Prüfliste hat den Punkt selbst als offen markiert.
+
+---
+
 ## 18.08.2026 — Welle 106: Aufräumarbeiten und Position der Artikelnummer — ✅ ABGESCHLOSSEN
 
 Vier unabhängige Teile in vier eigenen Commits: `106a` Ziffernposition, `106b` generierte

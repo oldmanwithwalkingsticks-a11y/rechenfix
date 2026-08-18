@@ -78,6 +78,8 @@ import FahrbahnVergleich from '@/components/blog/grafik/FahrbahnVergleich';
 import AnhaltewegZerlegung from '@/components/blog/grafik/AnhaltewegZerlegung';
 import RestgeschwindigkeitVergleich from '@/components/blog/grafik/RestgeschwindigkeitVergleich';
 import VerzoegerungsTabelle from '@/components/blog/grafik/VerzoegerungsTabelle';
+import ZollpositionGrenze from '@/components/blog/grafik/ZollpositionGrenze';
+import PositionEinhundertEins from '@/components/blog/grafik/PositionEinhundertEins';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -196,6 +198,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     AnhaltewegZerlegung,
     RestgeschwindigkeitVergleich,
     VerzoegerungsTabelle,
+    ZollpositionGrenze,
+    PositionEinhundertEins,
     ...components,
   };
 }

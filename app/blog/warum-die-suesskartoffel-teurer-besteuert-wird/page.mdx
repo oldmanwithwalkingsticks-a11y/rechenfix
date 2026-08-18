@@ -1,0 +1,231 @@
+import { generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import StructuredData from '@/components/seo/StructuredData';
+import { artikel } from './meta';
+
+export const metadata = {
+  title: `${artikel.titel} | Rechenfix.de`,
+  description: artikel.beschreibung,
+  alternates: { canonical: 'https://www.rechenfix.de/blog/warum-die-suesskartoffel-teurer-besteuert-wird' },
+};
+
+<StructuredData data={generateArticleSchema({
+  url: 'https://www.rechenfix.de/blog/warum-die-suesskartoffel-teurer-besteuert-wird',
+  headline: artikel.titel,
+  description: artikel.beschreibung,
+  datePublished: artikel.datum,
+  dateModified: artikel.datum,
+  image: '/blog/suesskartoffel-titelbild.png',
+})} />
+
+<StructuredData data={generateBreadcrumbSchema([
+  { name: 'Start', url: '/' },
+  { name: 'Blog', url: '/blog' },
+  { name: artikel.titel, url: '/blog/warum-die-suesskartoffel-teurer-besteuert-wird' },
+])} />
+
+# Warum die Süßkartoffel teurer besteuert wird als die Kartoffel
+
+<ArtikelDatum datum={artikel.datum} />
+
+<Bild src="/blog/suesskartoffel-titelbild.png" alt="Zwei ungeschälte Knollen liegen hintereinander auf einem dunkelgrauen Kassenband: vorn eine braune Kartoffel, dahinter eine orangefarbene Süßkartoffel" caption="Zwei Knollen, ein Band, zwei Steuersätze. Welcher gilt, steht nicht im Steuerrecht." width={1200} height={675} />
+
+## Zwei Knollen, zwei Steuersätze
+
+Legen Sie eine Kartoffel und eine Süßkartoffel aufs Kassenband, und der Staat behandelt sie wie zwei verschiedene Dinge. Auf die Kartoffel fallen 7 Prozent Umsatzsteuer, auf die Süßkartoffel 19.
+
+Das ist kein Versehen und kein Rundungsfehler, sondern geltendes Recht. Nachzulesen ist es nicht im Umsatzsteuergesetz selbst, sondern in einem Anhang dazu: der Anlage 2, überschrieben als „Liste der dem ermäßigten Steuersatz unterliegenden Gegenstände". Ihre Nummer 10 begünstigt Kartoffeln aller Art. Süßkartoffeln stehen ausdrücklich nicht darauf.
+
+Die naheliegende Erklärung wäre: Die Kartoffel ist ein Grundnahrungsmittel, die Süßkartoffel ein Luxus. So wird es oft erzählt. Nur trägt diese Erklärung nicht, sobald man weiterliest. Denn auf derselben Liste, in derselben Nummer, steht der Topinambur — eine Knolle, die in deutschen Küchen um einiges seltener vorkommt als die Süßkartoffel. Der Topinambur ist ermäßigt. Die Süßkartoffel nicht.
+
+Wer wissen will, warum, muss das Steuerrecht verlassen.
+
+## Die Liste ist keine Liste der Grundbedürfnisse
+
+Der erste Irrtum betrifft schon die Bauart der Regel. Es gibt keine Tabelle, in der für jede Ware ein Steuersatz steht. Es gibt eine Ausnahmeliste.
+
+Das Umsatzsteuergesetz setzt in § 12 Absatz 1 einen einzigen Satz fest: 19 Prozent, auf alles. § 12 Absatz 2 nimmt davon aus, was in der Anlage 2 aufgezählt ist, und besteuert es mit 7 Prozent. Die Liste ist abschließend. Was nicht darauf steht, ist damit automatisch voll besteuert — nicht, weil jemand entschieden hätte, dass es voll besteuert gehört, sondern weil niemand entschieden hat, dass es ermäßigt gehört.
+
+Der Unterschied klingt spitzfindig, ist aber der Kern der Sache. Eine Zuordnungstabelle müsste für jede Ware eine Begründung mitbringen. Eine Ausnahmeliste braucht nur für die Ausnahmen eine — und für den Rest gar keine. Die Süßkartoffel wurde nie zum Luxusgut erklärt. Sie wurde übersehen, oder ausgelassen, oder aussortiert; die Liste sagt es nicht.
+
+Die Zollverwaltung, die diese Einordnung im Zweifel vornimmt, formuliert es unmissverständlich: Dem ermäßigten Satz unterliegen nur Produkte, die in der Anlage 2 ausdrücklich und abschließend genannt sind. Alles, was dort nicht steht, unterliegt dem Regelsatz. Der Umfang der begünstigten Gegenstände bestimmt sich dabei nach dem Inhalt der einzelnen Warenbezeichnungen — und die sind unter Bezugnahme auf die jeweilige Stelle im Zolltarif festgelegt.
+
+In diesen beiden Sätzen steckt bereits die ganze Konstruktion. Was begünstigt ist, ergibt sich nicht aus einer Eigenschaft der Ware, sondern daraus, ob sie namentlich aufgeführt wurde. Und wo die Grenzen dieser Aufzählung verlaufen, bestimmt ein anderes Regelwerk.
+
+<ZollpositionGrenze />
+
+Und die Liste enthält Positionen, die sich mit „Grundbedarf" nur schwer vereinbaren lassen. Trüffel sind ermäßigt. Kaviar, Hummer und Langusten sind es nicht. Bücher sind ermäßigt, Hörbücher inzwischen auch, E-Book-Abonnements erst nach längerem Streit. Wer die Liste als Sozialpolitik liest, findet ein Durcheinander. Wer sie als das liest, was sie ist, findet ein System — nur ein anderes.
+
+## Die dritte Spalte
+
+Die Anlage 2 hat drei Spalten. Die erste trägt eine laufende Nummer, die zweite die Warenbezeichnung. Die dritte ist die entscheidende, und sie ist überschrieben mit: Zolltarif, Kapitel, Position, Unterposition.
+
+Denn die Waren der Anlage 2 sind nicht in Worten definiert, sondern über Nummern aus dem Zolltarif — genauer: aus der Kombinierten Nomenklatur, dem Warenverzeichnis, mit dem die Europäische Union Einfuhrabgaben und Handelsstatistik ordnet. Frisches Gemüse steht dort in den Positionen 0701 bis 0714. Kartoffeln sind Position 0701. Und die Süßkartoffel? Position 0714, zusammen mit Maniok, Yamswurzeln, Taro und Topinambur — Wurzeln und Knollen mit hohem Stärkegehalt.
+
+Die Anlage 2 Nummer 10 begünstigt die Positionen 0701 bis 0713. Und dann, ausdrücklich, den Topinambur aus Position 0714.
+
+Damit steht das Ergebnis fest: Die Grenze läuft nicht zwischen Kartoffel und Süßkartoffel, sondern zwischen 0713 und 0714 — und mitten durch 0714 hindurch, um eine einzige Knolle noch mit hineinzuholen.
+
+Diese Grenze wurde nicht von Ernährungswissenschaftlern gezogen und nicht von Sozialpolitikern. Sie stammt aus einem Verzeichnis, das eine ganz andere Frage beantwortet: Wie viel Zoll ist auf eine Einfuhr fällig, und in welche Statistikspalte gehört sie? Für diese Frage ist es sinnvoll, stärkehaltige Wurzeln von Kartoffeln zu trennen. Für die Frage, was Menschen zum Leben brauchen, ist es ohne jeden Belang.
+
+Wie sehr sich diese Zuordnung der Alltagslogik entzieht, zeigt eine Einrichtung, die es genau deswegen gibt: die unverbindliche Zolltarifauskunft für Umsatzsteuerzwecke. Wer als Händler nicht sicher ist, welcher Satz für seine Ware gilt, kann bei der Zollverwaltung anfragen und sich die Einreihung mitteilen lassen; auch Finanzämter können das tun. Es existiert also ein amtliches Verfahren für die Frage, wie viel Mehrwertsteuer auf ein Produkt entfällt — weil sie sich nicht durch Nachdenken beantworten lässt, sondern nur durch Nachschlagen in einem Verzeichnis, das niemand im Kopf hat.
+
+Das ist bemerkenswert für eine Steuer, die an jeder Ladenkasse des Landes anfällt, millionenfach am Tag. Bei der Einkommensteuer lässt sich der Tarif berechnen. Bei der Grundsteuer gibt es eine Formel. Beim ermäßigten Umsatzsteuersatz gibt es eine Liste — und für Zweifelsfälle eine Behördenanfrage.
+
+Beim Topinambur wird es vollends undurchsichtig. Er teilt seine Zollposition mit der Süßkartoffel — die Nomenklatur behandelt beide gleich. Trotzdem steht er auf der Liste und sie nicht. Der Zolltarif erklärt diese Grenze also nicht; er liefert nur das Vokabular, in dem sie gezogen wurde. Warum ausgerechnet der Topinambur herausgegriffen wurde, geht aus den Materialien nicht hervor. Was übrig bleibt, ist eine Einzelentscheidung, die niemand mehr begründen kann und die jeder Kassenzettel bis heute mitträgt.
+
+<RechnerLoader slug="mwst-rechner" />
+
+## Das Maultier, die Hafermilch und ein Beispiel, das nicht mehr stimmt
+
+Die Süßkartoffel ist kein Einzelfall. Sie ist ein Muster.
+
+Nummer 1 der Anlage 2 handelt von lebenden Tieren. Aufgeführt sind dort unter anderem Maultiere und Maulesel — beide aus Position 0101 des Zolltarifs. In derselben Position stehen auch Pferde und Esel; auf der Liste stehen sie nicht. Und Buchstabe a) dieser Nummer, ganz am Anfang, trägt heute nur noch einen Vermerk in Klammern: „(weggefallen)". Dort stand einmal etwas, das inzwischen gestrichen wurde. Übrig bleibt: Das Kreuzungstier ist ermäßigt, seine beiden Elterntiere sind es nicht. Wieder dieselbe Zollposition, wieder eine Linie mittendurch.
+
+<PositionEinhundertEins />
+
+Beim Trinken zeigt sich dasselbe. Milch steht auf der Liste, Milcherzeugnisse ebenfalls. Hafer-, Soja- und Mandeldrinks stehen nicht darauf und werden mit 19 Prozent besteuert. Für den Kunden am Tresen ist der Unterschied ein Wort bei der Bestellung; für die Kasse sind es zwölf Prozentpunkte. Und es ist genau die Konstellation, über die beim Brennholz gestritten wurde: zwei Waren, die demselben Bedürfnis dienen und miteinander im Wettbewerb stehen, unterschiedlich besteuert.
+
+Weitere Paare aus derselben Liste: Frische Schnittblumen sind ermäßigt, Windeln nicht. Leitungswasser ist ermäßigt, Mineralwasser aus der Flasche nicht. Trüffel sind ermäßigt, Hummer und Langusten nicht. Kaffeebohnen sind ermäßigt, der fertige Kaffee ist es nicht.
+
+Und dann gibt es ein Beispiel, das in fast jeder Aufzählung dieser Art auftaucht und **nicht mehr stimmt**. Jahrelang galt: Menstruationsprodukte werden mit 19 Prozent besteuert, Schnittblumen mit 7 — der Staat halte Tampons für Luxus. Das war zutreffend, bis zum 31. Dezember 2019.
+
+Dann kam die Nummer 55. Mit dem Jahressteuergesetz 2019 wurde der Anlage 2 eine neue Position angefügt: Erzeugnisse für Zwecke der Monatshygiene. Sie trat zum 1. Januar 2020 in Kraft und gilt für alle Umsätze nach dem 31. Dezember 2019 — Binden, Tampons, Menstruationstassen, Periodenunterwäsche. Seither sind sie ermäßigt besteuert.
+
+Bemerkenswert ist, wie diese Nummer entstand: Sie stand weder im Referentenentwurf noch im Regierungsentwurf des Gesetzes. Sie kam erst im parlamentarischen Verfahren hinzu, nach jahrelangem öffentlichem Druck. Die Liste wächst also nicht nach einem Kriterium, sondern dort, wo jemand laut genug ist — was zugleich erklärt, warum kein Kriterium erkennbar ist.
+
+Der Vergleich mit den Schnittblumen wird trotzdem bis heute weitergereicht, in Zeitungsartikeln, Ratgebern und Petitionstexten. Er ist seit über sechs Jahren falsch.
+
+Das ist die stille Zusatzkosten dieser Konstruktion: Weil sich die Regel nicht herleiten lässt, sondern nur nachschlagen, merkt kaum jemand, wenn sie sich ändert. Eine Liste, die keine innere Logik hat, kann man nicht mitdenken — man kann sie nur nachlesen oder falsch zitieren.
+
+## 1968, und alles danach
+
+Die Liste ist so alt wie die Mehrwertsteuer selbst. Deutschland stellte zum 1. Januar 1968 auf das heutige System um, und die Umstellung war einschneidend.
+
+Bis dahin galt eine Allphasen-Bruttoumsatzsteuer: Bei jedem Verkauf wurde erneut der volle Preis besteuert, ohne Anrechnung dessen, was auf den Vorstufen schon gezahlt worden war. Je mehr Zwischenhändler eine Ware durchlief, desto höher ihre Steuerlast — bei identischem Endprodukt. Das begünstigte große, vertikal integrierte Konzerne, die alle Fertigungsschritte im eigenen Haus behielten, und benachteiligte arbeitsteilige Ketten aus kleinen Betrieben. Wie hoch ein Produkt besteuert war, hing damit nicht davon ab, was es war, sondern davon, über wie viele Schreibtische es gegangen war.
+
+Das neue System beendete das durch den Vorsteuerabzug: Jeder Unternehmer zieht die Steuer ab, die ihm seine Lieferanten berechnet haben, und führt nur die Differenz ab. Am Ende trägt der Endverbraucher die Steuer, und zwar unabhängig von der Länge der Kette. Es war ein Fortschritt an Neutralität — genau jener Grundsatz, der ein halbes Jahrhundert später beim Brennholz wieder auftauchen sollte.
+
+Und dieses neue System brachte von Anfang an einen ermäßigten Satz mit, samt einer Liste der Gegenstände, für die er gilt. Der Regelsatz lag 1968 bei 10 Prozent. Auf die heutigen 19 Prozent kam er erst zum 1. Januar 2007, durch das Haushaltsbegleitgesetz 2006; seither ist er unverändert. Der Abstand zwischen beiden Sätzen ist über die Jahrzehnte also gewachsen — und mit ihm das Gewicht der Frage, auf welcher Seite der Liste eine Ware landet. 1968 ging es um einige Prozentpunkte Unterschied. Heute geht es um zwölf.
+
+Diese Liste hieß zunächst Anlage 1, ab 1980 schlicht „Anlage" und trägt erst seit 2004 den Namen Anlage 2. Ihr Inhalt wurde über die Jahrzehnte vielfach geändert, und die meisten dieser Änderungen waren keine politischen Entscheidungen, sondern Nachführungen: Der Zolltarif wurde umsortiert, also musste die Steuerliste hinterher.
+
+Ein Vorgang sticht heraus. Zum 1. Januar 1988 wurde die Anlage an den Gemeinsamen Zolltarif angepasst — und bei dieser Gelegenheit von 47 auf 54 Nummern erweitert. Eine Steuervergünstigung, die um sieben Positionen wächst, weil ein Warenverzeichnis überarbeitet wurde.
+
+Der ermäßigte Satz hatte dabei von Beginn an einen sozialpolitischen Zweck: Die Umsatzsteuer trifft alle gleich, unabhängig vom Einkommen, und belastet damit kleine Einkommen anteilig stärker, weil sie einen größeren Teil davon für den täglichen Bedarf ausgeben. Wer den Grundbedarf niedriger besteuert, mildert das ab. Das Ziel ist unstrittig und in jeder Gesetzesbegründung nachzulesen.
+
+Nur wurde für die Umsetzung nie ein eigener Maßstab entwickelt. Statt zu bestimmen, was zum Grundbedarf gehört, wurde auf ein bestehendes Verzeichnis verwiesen — und dieses Verzeichnis wächst und schrumpft nach seiner eigenen Logik weiter. Der Zweck ist sozialpolitisch, das Werkzeug ist zollrechtlich. Zwischen beiden klafft die Lücke, in der die Süßkartoffel sitzt.
+
+Das ist die eigentliche Merkwürdigkeit an dieser Konstruktion: Sie koppelt eine Frage der Steuergerechtigkeit an ein Dokument, das aus ganz anderen Gründen fortgeschrieben wird.
+
+## Der Gesetzgeber dürfte anders — er tut es nur nicht
+
+An dieser Stelle wäre zu erwarten, dass niemandem eine Alternative eingefallen ist. Das Gegenteil ist der Fall. Die Möglichkeit steht seit jeher im Gesetz.
+
+§ 26 Absatz 1 des Umsatzsteuergesetzes erlaubt der Bundesregierung, den Umfang der Steuerermäßigungen durch Rechtsverordnung näher zu bestimmen — zur Wahrung der Gleichmäßigkeit bei der Besteuerung, zur Beseitigung von Unbilligkeiten in Härtefällen, zur Vereinfachung. Und Satz 2 wird ausdrücklich: „Bei der näheren Bestimmung des Umfangs der Steuerermäßigung nach § 12 Abs. 2 Nr. 1 kann von der zolltariflichen Abgrenzung abgewichen werden."
+
+Der Gesetzgeber hat also vorgesehen, dass die Zollsystematik im Einzelfall zu unbilligen Ergebnissen führt, und hat der Regierung das Werkzeug gegeben, sich davon zu lösen. Von dieser Ermächtigung wird kein Gebrauch gemacht. Für den Inhalt der Anlage 2 bleibt damit allein die Bezugnahme auf den Zolltarif maßgeblich.
+
+Wer die Süßkartoffel auf die Liste setzen wollte, müsste also kein Gesetz ändern. Es genügte eine Verordnung, für die die Grundlage seit Jahrzehnten bereitsteht.
+
+## Zwei Prinzipien, die einander widersprechen
+
+Wie sehr die Zollsystematik trägt, wurde vor Gericht ausgetragen — und die Antwort hat sich im Verfahren gedreht.
+
+Es ging um Holz. Die Anlage 2 begünstigt Brennholz, allerdings in einer Warenbeschreibung, die an bestimmte Formen anknüpft: Rundlinge, Scheite, Zweige, Reisigbündel. Holzhackschnitzel fielen nach der zolltariflichen Einreihung nicht darunter und wurden deshalb mit 19 Prozent besteuert, während der Scheit im selben Ofen mit 7 Prozent brannte.
+
+Der Bundesfinanzhof hatte solche Fälle lange über den Zolltarif entschieden: Waren in verschiedenen Unterpositionen galten als nicht gleichartig — auch dann, wenn sie denselben Anwendungsbereich, denselben Verwendungszweck und die gleichen Eigenschaften hatten. Die Einreihung schlug alles andere.
+
+Der Europäische Gerichtshof sah es anders. In der Sache Finanzamt A entschied er am 3. Februar 2022 (C-515/20), dass Brennholz jegliches Holz meint, das nach seinen objektiven Eigenschaften ausschließlich zum Verbrennen bestimmt ist. Ein Mitgliedstaat darf den ermäßigten Satz zwar anhand der Kombinierten Nomenklatur eingrenzen — aber nur, solange er dabei den Grundsatz der steuerlichen Neutralität beachtet. Und dieser Grundsatz verbietet es, gleichartige Waren, die miteinander im Wettbewerb stehen, umsatzsteuerlich verschieden zu behandeln. Maßstab ist die Sicht des Durchschnittsverbrauchers.
+
+Der Bundesfinanzhof zog nach und gab am 21. April 2022 den Hackschnitzeln recht — ausdrücklich als Änderung der Rechtsprechung. Das Fehlen der zolltariflichen Voraussetzung steht der Ermäßigung nicht entgegen, wenn Hackschnitzel und Scheitholz austauschbar sind.
+
+Damit stehen zwei Prinzipien nebeneinander, und keines hat sich vollständig durchgesetzt. Die Verweisung auf den Zolltarif gilt weiter als zulässiges und grundsätzlich geeignetes Abgrenzungskriterium. Zugleich darf sie nicht dazu führen, dass Austauschbares ungleich besteuert wird. Welches der beiden im Zweifel gewinnt, entscheidet sich Ware für Ware, vor Gericht.
+
+Ob Kartoffel und Süßkartoffel aus Sicht eines Durchschnittsverbrauchers austauschbar sind, ist bislang nicht entschieden. Wer es wissen will, müsste klagen.
+
+<KarstenSagt>
+Als ich den Mehrwertsteuer-Rechner gebaut habe, bin ich davon ausgegangen, dass ich irgendwo eine Regel finde. Irgendeine Linie, an der entlang sich entscheidet, was ermäßigt ist und was nicht. Ich habe keine gefunden.
+
+Was ich stattdessen gefunden habe, war eine Liste. Und weil ein Rechner eine Regel braucht und keine Meinung, steht am Ende genau das im Code: eine Tabelle. Abgeschrieben, nicht hergeleitet.
+
+Das hat mich mehr überrascht, als es sollte. In Deutschland hat sonst alles ein System, oft eines zu viel. Hier nicht. Wer wissen will, warum etwas auf der Liste steht, findet die Antwort nicht im Gesetz — er muss nachschlagen, wo die Ware im Zolltarif einsortiert ist. Und selbst das erklärt es nicht immer.
+</KarstenSagt>
+
+## Die berühmteste Grenze ist verschwunden — und sofort wieder da
+
+Es gab jahrelang ein Beispiel, das jeder kannte: dasselbe Brötchen, im Laden gegessen 19 Prozent, mitgenommen 7. Wer sich über die Absurdität der Mehrwertsteuer lustig machen wollte, brauchte nichts weiter.
+
+<Video src="/blog/suesskartoffel.mp4" poster="/blog/suesskartoffel-video-standbild.jpg" caption="Der Bon entscheidet nicht, er hält nur fest, was die Liste vorher entschieden hat." />
+
+Diese Grenze ist seit dem 1. Januar 2026 weg. Das Steueränderungsgesetz 2025 hat mit § 12 Absatz 2 Nummer 15 in das Umsatzsteuergesetz geschrieben, dass Restaurant- und Verpflegungsdienstleistungen dem ermäßigten Satz unterliegen — dauerhaft, nicht befristet wie die Absenkungen der Pandemiejahre. Für Speisen gilt seither 7 Prozent, gleichgültig ob im Restaurant, am Imbiss, geliefert oder mitgenommen. Wo die Mahlzeit gegessen wird, spielt für den Steuersatz keine Rolle mehr.
+
+Verschwunden ist die Grenze damit aber nicht. Sie ist umgezogen. Denn ausgenommen bleiben die Getränke: Sie werden weiter mit 19 Prozent besteuert. An die Stelle der alten Frage — hier oder mitnehmen — ist eine neue getreten: Speise oder Getränk?
+
+Und diese Frage hat sofort ihre eigenen Feinheiten hervorgebracht. Milch und Milchmischgetränke mit einem Milchanteil von mindestens 75 Prozent gelten als begünstigt, ebenso Leitungswasser, wenn außer Haus abgegeben. Der Latte Macchiato kommt damit über die Schwelle, der Espresso nicht. Die Kaffeebohne im Regal ist ein Lebensmittel und ermäßigt; derselbe Kaffee in der Tasse ist ein Getränk und voll besteuert. Wer ein Menü aus Speise und Getränk zu einem Pauschalpreis verkauft, muss den Preis aufteilen und auf der Rechnung getrennt ausweisen.
+
+Ein Gesetz hat eine viel verspottete Trennlinie beseitigt und im selben Satz eine neue gezogen, komplett mit einer Quote von 75 Prozent Milchanteil als Scheidelinie.
+
+## Was am Ende bleibt
+
+Die Mehrwertsteuer ist kein Beispiel für deutschen Ordnungssinn, sondern für seine Grenze. Es gibt ein System, aber es beantwortet die falsche Frage. Es gibt eine Ausnahme davon, aber sie wird nicht genutzt. Es gibt zwei Rechtsprinzipien, aber sie widersprechen einander. Und es gibt eine Reform, die eine Grenze abgeschafft und dabei eine neue gebaut hat.
+
+Für den Einkauf heißt das: Der Steuersatz auf dem Kassenbon lässt sich nicht herleiten, nur nachschlagen. Wer wissen will, wie viel Umsatzsteuer in einem Preis steckt oder wie sich ein Nettopreis zusammensetzt, findet das im Rechner — mit beiden Sätzen und der Übersicht, welcher wann gilt.
+
+Und beim nächsten Blick auf die Gemüseauslage lohnt der Gedanke, dass zwischen zwei Knollen, die nebeneinanderliegen und beide in der Pfanne landen, eine Linie verläuft, die 1968 gezogen und 1988 nachgeführt wurde — von Leuten, die über Einfuhrabgaben nachdachten und nicht über Abendessen.
+
+<Quellen eintraege={[
+  {
+    titel: 'Umsatzsteuergesetz, § 12 (Steuersätze)',
+    url: 'https://www.gesetze-im-internet.de/ustg_1980/__12.html',
+  },
+  {
+    titel: 'Umsatzsteuergesetz, § 26 Abs. 1',
+    url: 'https://www.gesetze-im-internet.de/ustg_1980/__26.html',
+    hinweis: 'Ermächtigung, von der zolltariflichen Abgrenzung abzuweichen.',
+  },
+  {
+    titel: 'Anlage 2 zum UStG — Liste der dem ermäßigten Steuersatz unterliegenden Gegenstände, Nr. 10',
+    url: 'https://www.gesetze-im-internet.de/ustg_1980/anlage_2.html',
+  },
+  {
+    titel: 'BMF-Schreiben vom 05.08.2004, IV B 7 – S 7220 – 46/04, Tz. 48–50',
+    hinweis: 'Kartoffeln aller Art begünstigt, nicht Süßkartoffeln der Position 0714; Topinambur aus 0714 begünstigt.',
+  },
+  {
+    titel: 'EuGH, Urteil vom 03.02.2022, C-515/20 „Finanzamt A"',
+    hinweis: 'Brennholzbegriff, Neutralitätsgrundsatz.',
+  },
+  {
+    titel: 'BFH, Urteil vom 21.04.2022, V R 2/22 (V R 6/18)',
+    hinweis: 'Änderung der Rechtsprechung zu Holzhackschnitzeln.',
+  },
+  {
+    titel: 'Steueränderungsgesetz 2025 — § 12 Abs. 2 Nr. 15 UStG',
+    hinweis: 'Gastronomie ab 01.01.2026.',
+  },
+  {
+    titel: 'Verordnung (EWG) Nr. 2658/87 über die zolltarifliche und statistische Nomenklatur',
+    hinweis: 'Kombinierte Nomenklatur.',
+  },
+  {
+    titel: 'Jahressteuergesetz 2019 vom 12.12.2019, Art. 12 Nr. 21',
+    hinweis: 'Anfügung der Nr. 55 (Monatshygiene) an die Anlage 2; Inkrafttreten 01.01.2020 nach Art. 39 Abs. 2.',
+  },
+  {
+    titel: 'Haushaltsbegleitgesetz 2006 vom 29.06.2006, BGBl. I 2006, 1402',
+    hinweis: 'Regelsatz 19 % ab 01.01.2007.',
+  },
+  {
+    titel: 'Anlage 2 Nr. 1, Nr. 3 und Nr. 8',
+    hinweis: 'Nr. 1 lebende Tiere (Buchst. a „weggefallen", Buchst. b Maultiere und Maulesel aus Position 0101); Nr. 3 Fische und Krebstiere, ausgenommen Zierfische, Langusten, Hummer, Austern und Schnecken; Nr. 8 Blumen und Blüten, geschnitten, frisch, aus Position 0603.',
+  },
+  {
+    titel: 'Zoll (Generalzolldirektion): Zolltarifauskunft für Umsatzsteuerzwecke',
+    url: 'https://www.zoll.de',
+    hinweis: 'Fachthemen, Steuern, Einfuhrumsatzsteuer. Bestätigt: Die Anlage 2 ist ausdrücklich und abschließend; Nichtaufgeführtes fällt auf 19 %.',
+  },
+  {
+    titel: 'Steueränderungsgesetz 2025: BGBl. 2025 I Nr. 363',
+    hinweis: 'Verkündet am 23.12.2025; Bundestag 04.12.2025, Bundesrat 19.12.2025; UStG-Artikel in Kraft ab 01.01.2026.',
+  },
+]} />
