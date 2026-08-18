@@ -71,6 +71,13 @@ next-env.d.ts
 # W17A.1.F — Auto-generierter Rechner-Snapshot für Python-Image-Builder
 # (scripts/dump-rechner-data.ts). Wird pro Image-Build neu erzeugt.
 /lib/social/_rechner-snapshot.json
+
+# Welle 106 — generierte Client-Daten. Erzeugt von scripts/generate-client-data.ts,
+# im Prebuild vor jedem Build neu geschrieben. Eingecheckt driftete die Datei
+# monatelang (Stand 29.04.2026 ohne Kategorie Technik) und hielt den Working
+# Tree dauerhaft schmutzig. predev/prelint erzeugen sie lokal.
+lib/rechner-config/client-data.ts
+
 # Generierte Social-Bilder (160 Slugs) — separat in eigener Konvention,
 # Karsten committed sie nach social-image-builder.py-Run gesammelt.
 # Initial NICHT auf gitignore-Liste, damit die Bilder versioniert werden.
