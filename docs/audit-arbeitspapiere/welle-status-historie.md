@@ -8,6 +8,32 @@
 
 ---
 
+## 18.08.2026 — Welle 105a: docs/ aus dem TypeScript-Prüfscope genommen — ✅ ABGESCHLOSSEN
+
+**Eigener Fund, aufgetaucht beim Bauen von Welle 105.** `tsconfig.json` schloss bisher nur
+`node_modules` und `public/sw.js` aus, prüfte über `include: ["**/*.ts"]` aber alles andere —
+auch `docs/`. In `docs/audit-arbeitspapiere/_lokal/` lag eine lokale Arbeitskopie der `meta.ts`
+von Artikel 12. Sobald `nummer` in Welle 105 zum Pflichtfeld von `BlogArtikel` wurde, brach
+`npm run build` dort mit einem Typfehler ab — in einer Datei, die gar nicht zum Repo gehört.
+
+**Warum das mehr ist als ein Einzelfall.** `docs/audit-arbeitspapiere/_lokal/` ist der
+vorgesehene Ablageort für gelieferte Dateien und ist genau dafür gitignoriert
+(`.gitignore` Zeile 110). Jede dort abgelegte `.ts` hätte den lokalen Build erneut gebrochen —
+und zwar mit einer Fehlermeldung, die auf einen Pfad zeigt, den niemand als Quellcode liest.
+Vercel war nie betroffen, weil der Ordner nicht eingecheckt wird; der Fehler trifft
+ausschließlich die lokale Arbeitskopie. Genau solche Fehler kosten am meisten Zeit, weil sie
+dort auftreten, wo man sie nicht sucht.
+
+**Der Ausschluss kostet keine Prüfabdeckung:** Unter `docs/` liegen 0 eingecheckte `.ts`/`.tsx`,
+und keine Datei aus `app/`, `lib/`, `components/` oder `scripts/` importiert von dort. Belegt
+über `git ls-files 'docs/**/*.ts' 'docs/**/*.tsx'` (0 Treffer) und eine Import-Suche über die
+vier Quellverzeichnisse (0 Treffer).
+
+Die vorgefundene Datei `docs/audit-arbeitspapiere/_lokal/meta.ts` bleibt bewusst unverändert
+liegen — weder gelöscht noch um `nummer` ergänzt. Sie ist eine Arbeitskopie, keine Quelle.
+
+---
+
 ## 18.08.2026 — Welle 104: PostPeer-Pfad entfernt, Provider-Weiche gehärtet — ✅ ABGESCHLOSSEN
 
 Der Messaufbau aus W53/W66 ist entschieden: bundle.social hat vom 08. bis 18.08. sechs von sechs
