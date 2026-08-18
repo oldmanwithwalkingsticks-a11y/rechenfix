@@ -47,7 +47,7 @@ export default async function BlogUebersicht() {
                   <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
                     {a.titel}
                   </h2>
-                  <span className="shrink-0 font-serif text-3xl font-bold leading-none tabular-nums text-primary-700 dark:text-primary-300">
+                  <span className="-mt-2 -mr-2 shrink-0 font-serif text-3xl font-bold leading-none tabular-nums text-primary-700 dark:text-primary-300">
                     <span className="sr-only">Artikel Nummer </span>
                     {a.nummer}
                   </span>
