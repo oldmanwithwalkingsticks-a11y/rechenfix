@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.rechenfix.de/ki-transparenz' },
 };
 
-const STAND = '29. Juli 2026';
+const STAND = '19. August 2026';
 
 function Abschnitt({ titel, children }: { titel: string; children: React.ReactNode }) {
   return (
@@ -76,8 +76,8 @@ export default function KiTransparenzPage() {
                 <td className="py-3 pr-4 font-medium">Videos im Blog</td>
                 <td className="py-3 pr-4">Kling AI 3.0 (Kuaishou Technology, China)</td>
                 <td className="py-3">
-                  Die Videos sind vollständig künstlich erzeugt und aus den Titelbildern
-                  animiert. Keine realen Aufnahmen, keine realen Personen.
+                  Die Videos sind vollständig künstlich erzeugt. Keine realen Aufnahmen,
+                  keine realen Personen.
                 </td>
               </tr>
               <tr className="border-b border-gray-200 dark:border-gray-800">
@@ -106,15 +106,17 @@ export default function KiTransparenzPage() {
         <p>
           <strong>Die Rechner selbst rechnen ohne KI.</strong> Jedes Ergebnis auf Rechenfix.de
           entsteht aus fest hinterlegten Formeln und Tabellen — deterministisch, nachvollziehbar
-          und bei gleicher Eingabe immer gleich. Ein Sprachmodell ist an keiner Berechnung
-          beteiligt. Das ist eine bewusste Entscheidung: Sprachmodelle rechnen nicht zuverlässig,
+          und bei gleicher Eingabe immer gleich. An den Berechnungen der einzelnen Rechner
+          ist kein Sprachmodell beteiligt. Für den KI-Rechner gilt das nicht — siehe unten.
+          Das ist eine bewusste Entscheidung: Sprachmodelle rechnen nicht zuverlässig,
           und ein Rechner, dessen Ergebnis sich zwischen zwei Aufrufen unterscheidet, wäre
           wertlos.
         </p>
         <p>
-          Der KI-Rechner bildet die Ausnahme nur scheinbar: Dort versteht die KI Ihre Frage und
-          wählt den passenden Rechner aus — gerechnet wird anschließend ebenfalls mit den fest
-          hinterlegten Formeln.
+          Der KI-Rechner ist die Ausnahme: Dort versteht die KI Ihre Frage, führt die Berechnung
+          selbst durch und verweist anschließend auf den passenden Rechner für eine exakte
+          Nachrechnung. Sein Ergebnis entsteht also nicht aus einer hinterlegten Formel und kann
+          im Einzelfall abweichen. Verbindlich ist das Ergebnis des jeweiligen Rechners.
         </p>
       </Abschnitt>
 
