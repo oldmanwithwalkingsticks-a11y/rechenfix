@@ -31,6 +31,13 @@ export default function SchlafTipp({ eingaben, ergebnis }: Props) {
 
       const data = await res.json();
 
+      fetch('/api/track', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'ki', feature: 'schlaf-tipp', status: res.ok ? 'ok' : 'fehler' }),
+        cache: 'no-store',
+      }).catch(() => {});
+
       if (!res.ok) {
         setFehler(data.error || 'Schlaftipp konnte nicht geladen werden.');
         return;

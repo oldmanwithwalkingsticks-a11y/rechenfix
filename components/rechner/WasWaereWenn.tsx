@@ -51,6 +51,13 @@ export default function WasWaereWenn({ eingaben, ergebnis }: Props) {
 
       const data = await res.json();
 
+      fetch('/api/track', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'ki', feature: 'was-waere-wenn', status: res.ok ? 'ok' : 'fehler' }),
+        cache: 'no-store',
+      }).catch(() => {});
+
       if (!res.ok) {
         setFehler(data.error || 'Antwort konnte nicht geladen werden.');
         return;

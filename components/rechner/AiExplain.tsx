@@ -95,6 +95,13 @@ export default function AiExplain({ rechnerName, eingaben, ergebnis }: Props) {
 
       const data = await res.json();
 
+      fetch('/api/track', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'ki', feature: 'erklaerung', rechner: rechnerName, status: res.ok ? 'ok' : 'fehler' }),
+        cache: 'no-store',
+      }).catch(() => {});
+
       if (!res.ok) {
         setFehler(data.error || 'Erklärung konnte nicht geladen werden.');
         return;
