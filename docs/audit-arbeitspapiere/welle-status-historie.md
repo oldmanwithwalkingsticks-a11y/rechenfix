@@ -6,7 +6,7 @@
 
 ---
 
-## 19.08.2026 — Welle 108: Termin-SSOT mit automatischer Erinnerung — ✅ ABGESCHLOSSEN (ein Teilschritt offen)
+## 19.08.2026 — Welle 108: Termin-SSOT mit automatischer Erinnerung — ✅ ABGESCHLOSSEN
 
 Bis hierher gab es **keine** maschinelle Terminüberwachung. Fristen lagen in
 `docs/jahreswerte-kalender.md` (nur gesetzliche Parameter) und im Handoff-Dokument außerhalb des
@@ -52,16 +52,27 @@ Betreffzeile bekommt ihren Zusatz nur, wenn tatsächlich etwas ansteht.
 Die Prebuild-Kette wächst von 13 auf **14 Glieder**; das neue Glied sitzt direkt vor
 `slug-drift-scan.mjs`.
 
-**Offener Teilschritt.**
+**Nachtrag 108d/108e — der offene Teilschritt ist geschlossen.**
 
-Schritt 4c der Vorlage — `docs/backlog-wartende-positionen.md` aus einer separat bereitgestellten
-Quelldatei anlegen — konnte **nicht** ausgeführt werden: Die Datei
-`backlog-wartende-positionen-2026-08-19.md` existiert weder im vorgesehenen Ablageordner noch
-sonst im Repo. Erfinden ließ sich ihr Inhalt nicht. Folge: Der Termin `entscheidung-brueckentage`
-verweist in seinem `quelle`-Feld auf `docs/backlog-wartende-positionen.md, Punkt A1` — eine Datei,
-die es noch nicht gibt. Das bricht nichts (das Feld ist reiner Text und wird nur in die Mail
-gedruckt), zeigt aber ins Leere, bis das Dokument nachgereicht ist. Die Commit-Nachricht für 108c
-wurde entsprechend angepasst; sie hätte sonst ein Dokument angekündigt, das nicht im Commit liegt.
+Schritt 4c der Vorlage — `docs/backlog-wartende-positionen.md` anlegen — war in 108c nicht
+ausführbar: Die dort genannte Quelldatei `backlog-wartende-positionen-2026-08-19.md` lag weder im
+vorgesehenen Ablageordner noch sonst im Repo. Ihren Inhalt zu erfinden kam nicht in Frage, also
+wurde der Schritt ausgelassen, gemeldet und die Commit-Nachricht für 108c entsprechend angepasst —
+sie hätte sonst ein Dokument angekündigt, das nicht im Commit liegt. **Das war ein Fehler der
+Vorlage, nicht der Ausführung; die Meldung war das korrekte Verhalten.** Der Inhalt kam als eigene
+Lieferung nach.
+
+`108d` legt die Datei an: vier Ränge (A spruchreif, B mit Vorbehalt, C erst bei Reichweite,
+D verworfen) plus Schlussabschnitt, jede verworfene Position mit Begründung — damit sie nicht in
+sechs Monaten als neue Idee wiederkehrt. Damit zeigt auch der `quelle`-Verweis des Termins
+`entscheidung-brueckentage` nicht mehr ins Leere: `Punkt A1` existiert und trägt das Zeitfenster,
+auf das der Termin erinnert.
+
+`108e` schließt das in Welle 108 gemeldete Wartungsrisiko auf der offenen Seite: Das Skript
+verwies bereits auf die Lib, die Lib aber nicht zurück auf das Skript. Wer `naechstesVorkommen`
+ändert, sieht den zweiten Ort der Monatskappung jetzt im Kopfkommentar. Sechs hinzugefügte
+Kommentarzeilen, keine entfernte Codezeile — belegt über den Diff gegen `cdbcf8b`; die
+Rollover-Gegenprobe liefert unverändert `2027-12-10`.
 
 **Eigener Fund.** Die Vorlage nennt 17 Termine und verlangt, dass ein sachlich falsch wirkendes
 Datum gemeldet und nicht geändert wird. Aufgefallen ist keines — Domain und Postfach teilen sich
