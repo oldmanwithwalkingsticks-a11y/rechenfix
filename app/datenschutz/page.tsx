@@ -45,7 +45,7 @@ export default function DatenschutzSeite() {
               <li>Hosting und technische Infrastruktur</li>
               <li>Anonyme Reichweitenmessung über Vercel Analytics (cookielos, ohne Personenbezug)</li>
               <li>Einbindung von Affiliate-Links</li>
-              <li>Serverseitige, anonyme Nutzungsstatistik (Klicks, Feedback, Berechnungszähler)</li>
+              <li>Serverseitige, anonyme Nutzungsstatistik (Klicks, Feedback, Berechnungszähler, PDF-Downloads, KI-Nutzung)</li>
               <li>Kontaktaufnahme per E-Mail</li>
               <li>Optionale Offline-Nutzung über lokal gespeicherte Websitebestandteile</li>
               <li>Optionaler Rechenverlauf, der ausschließlich im Browser des Nutzers verbleibt</li>
@@ -307,6 +307,7 @@ export default function DatenschutzSeite() {
               <li><strong>Affiliate-Klicks:</strong> Programm-ID, Rechner-Seitenpfad, Zeitstempel sowie der Kontext der angeklickten Fläche (etwa die gewählte Tarifart), höchstens 100 Zeichen (siehe Abschnitt 8).</li>
               <li><strong>Rechner-Feedback:</strong> Wenn Sie auf den &bdquo;Daumen hoch&ldquo;/&bdquo;Daumen runter&ldquo;-Button unter einem Rechner klicken, speichern wir die Bewertung (ja/nein), den Pfad des Rechners und den Zeitstempel. Bei negativem Feedback können Sie zusätzlich freiwillig einen Freitext-Hinweis absenden. Dieser wird <strong>nicht</strong> in der Nutzungsstatistik gespeichert, sondern ausschließlich per E-Mail an uns übermittelt; Näheres dazu in Abschnitt 11. Geben Sie dort bitte keine personenbezogenen Daten ein.</li>
               <li><strong>PDF-Downloads:</strong> Wenn Sie ein Ergebnis als PDF herunterladen, speichern wir die Bezeichnung des Rechners und den Zeitstempel. Der Inhalt des PDFs und die zugrunde liegenden Eingaben werden dabei nicht übertragen; das PDF entsteht ausschließlich in Ihrem Browser.</li>
+              <li><strong>Nutzung der KI-Funktionen:</strong> Wenn Sie eine KI-Funktion auslösen (etwa &bdquo;Fix erklärt&ldquo; oder den KI-Rechner), speichern wir die Bezeichnung der Funktion, die Bezeichnung des Rechners, ob die Anfrage erfolgreich war, und den Zeitstempel. <strong>Ihre Eingaben, Ihre Frage und die erzeugte Antwort werden dabei nicht gespeichert.</strong> Zur Übermittlung an unseren KI-Dienstleister siehe Abschnitt 9.</li>
             </ul>
             <p className="mt-3">
               Für diese Nutzungsstatistik gilt: Wir erfassen dabei <strong>keine IP-Adressen, keine User-Agents, keine Cookies und keine sonstigen Merkmale</strong>, die einen Rückschluss auf Ihre Person erlauben würden. Eine Identifizierung einzelner Nutzer ist für uns anhand dieser Daten technisch nicht möglich. Zu den Angaben, die beim Absenden des Feedback-Formulars übermittelt werden, siehe Abschnitt 11.
