@@ -66,7 +66,7 @@ export default function KiTransparenzPage() {
               </tr>
               <tr className="border-b border-gray-200 dark:border-gray-800">
                 <td className="py-3 pr-4 font-medium">Titelbilder im Blog</td>
-                <td className="py-3 pr-4">Bildgenerator von Google</td>
+                <td className="py-3 pr-4">Gemini 3 Pro Image (Google-Modell), bezogen über Kling AI (Kuaishou Technology, China)</td>
                 <td className="py-3">
                   Die Bilder sind vollständig künstlich erzeugt. Sie zeigen keine realen
                   Aufnahmen und keine realen Personen.
@@ -74,7 +74,7 @@ export default function KiTransparenzPage() {
               </tr>
               <tr className="border-b border-gray-200 dark:border-gray-800">
                 <td className="py-3 pr-4 font-medium">Videos im Blog</td>
-                <td className="py-3 pr-4">Kling AI (Kuaishou, China)</td>
+                <td className="py-3 pr-4">Kling AI 3.0 (Kuaishou Technology, China)</td>
                 <td className="py-3">
                   Die Videos sind vollständig künstlich erzeugt und aus den Titelbildern
                   animiert. Keine realen Aufnahmen, keine realen Personen.
