@@ -5,7 +5,7 @@
   "scripts": {
     "generate-client-data": "npx tsx scripts/generate-client-data.ts",
     "build-critical-css": "node scripts/build-critical-css.mjs",
-    "prebuild": "node scripts/check-footer.mjs && node scripts/check-drittanbieter.mjs && node scripts/check-metadescription.mjs && node scripts/check-energiepreise.mjs && node scripts/check-wellenhistorie.mjs && node scripts/check-contentbloecke-pflicht.mjs && node scripts/check-jahreswerte.mjs && node scripts/check-backticks.mjs && node scripts/check-ki-beispiele.mjs && node scripts/slug-drift-scan.mjs && npx tsx scripts/generate-client-data.ts && npx tsx scripts/generate-tipp-constants.ts && node scripts/build-critical-css.mjs",
+    "prebuild": "node scripts/check-footer.mjs && node scripts/check-drittanbieter.mjs && node scripts/check-metadescription.mjs && node scripts/check-energiepreise.mjs && node scripts/check-wellenhistorie.mjs && node scripts/check-contentbloecke-pflicht.mjs && node scripts/check-jahreswerte.mjs && node scripts/check-backticks.mjs && node scripts/check-ki-beispiele.mjs && node scripts/check-termine.mjs && node scripts/slug-drift-scan.mjs && npx tsx scripts/generate-client-data.ts && npx tsx scripts/generate-tipp-constants.ts && node scripts/build-critical-css.mjs",
     "predev": "npx tsx scripts/generate-client-data.ts",
     "dev": "next dev",
     "build": "next build",
@@ -16,6 +16,7 @@
     "lint:footer": "node scripts/check-footer.mjs",
     "lint:drittanbieter": "node scripts/check-drittanbieter.mjs",
     "lint:slugs": "node scripts/slug-drift-scan.mjs",
+    "lint:termine": "node scripts/check-termine.mjs",
     "lint:kibeispiele": "node scripts/check-ki-beispiele.mjs",
     "lint:metadescription": "node scripts/check-metadescription.mjs",
     "lint:energiepreise": "node scripts/check-energiepreise.mjs",
