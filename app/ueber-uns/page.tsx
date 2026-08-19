@@ -39,17 +39,17 @@ export default function UeberUnsSeite() {
         Über Rechenfix.de
       </h1>
       <p className="text-gray-500 dark:text-gray-400 mb-8">
-        170 deutsche Online-Rechner — die nicht nur Zahlen ausspucken, sondern erklären, was dahintersteckt.
+        Über 200 deutsche Online-Rechner — die nicht nur Zahlen ausspucken, sondern erklären, was dahintersteckt.
       </p>
 
       {/* 1. Hero + Author-Block (BESTEHEND Hero, NEU Author-Block) */}
       <section className="card p-6 md:p-8 mb-8">
         <div className="prose prose-sm max-w-none text-gray-700 dark:text-gray-300 leading-relaxed">
           <p className="mb-4">
-            Rechenfix.de ist ein unabhängiges Rechnerportal mit aktuell <strong>170 kostenlosen
-            Online-Rechnern</strong> in neun Kategorien: Alltag, Finanzen, Gesundheit,
-            Auto &amp; Verkehr, Wohnen &amp; Energie, Mathematik, Arbeit &amp; Recht, Kochen
-            und Sport.
+            Rechenfix.de ist ein unabhängiges Rechnerportal mit aktuell <strong>über 200 kostenlosen
+            Online-Rechnern</strong> in zehn Kategorien: Alltag, Finanzen, Gesundheit,
+            Auto &amp; Verkehr, Wohnen &amp; Energie, Mathe &amp; Schule, Arbeit &amp; Recht,
+            Kochen &amp; Ernährung, Sport &amp; Fitness und Technik.
           </p>
           <p className="mb-4">
             Alle Berechnungen laufen <strong>direkt in Ihrem Browser</strong> — wir
@@ -166,7 +166,7 @@ export default function UeberUnsSeite() {
             <li>so gestaltet ist, dass die Bedienung schnell und auf jedem Gerät funktioniert — Werbung finanziert den Betrieb, soll aber nicht das Ergebnis verdecken.</li>
           </ol>
           <p>
-            Heute, im Mai 2026, sind es 170 Rechner in neun Kategorien — von Brutto-Netto und Mehrwertsteuer über BMI und Spritkosten
+            Heute sind es über 200 Rechner in zehn Kategorien — von Brutto-Netto und Mehrwertsteuer über BMI und Spritkosten
             bis zu Backzeit und Pace. Neue Rechner kommen regelmäßig dazu, bestehende werden gepflegt und bei gesetzlichen Änderungen aktualisiert.
           </p>
         </div>

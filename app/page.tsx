@@ -9,11 +9,11 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Rechenfix.de — Kostenlose Online-Rechner',
-  description: '170 Online-Rechner für Deutschland — mit Erklärungen statt blanker Zahlen. Kostenlos, ohne Anmeldung, Ergebnisse direkt im Browser.',
+  description: 'Über 200 Online-Rechner für Deutschland — mit Erklärungen statt blanker Zahlen. Kostenlos, ohne Anmeldung, Ergebnisse direkt im Browser.',
   alternates: { canonical: 'https://www.rechenfix.de' },
   openGraph: {
     title: 'Rechenfix.de — Kostenlose Online-Rechner',
-    description: '170 Online-Rechner für Deutschland — mit Erklärungen statt blanker Zahlen. Kostenlos, ohne Anmeldung, Ergebnisse direkt im Browser.',
+    description: 'Über 200 Online-Rechner für Deutschland — mit Erklärungen statt blanker Zahlen. Kostenlos, ohne Anmeldung, Ergebnisse direkt im Browser.',
     url: 'https://www.rechenfix.de',
     siteName: 'Rechenfix.de',
     type: 'website',
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Rechenfix.de — Kostenlose Online-Rechner',
-    description: '170 Online-Rechner für Deutschland — mit Erklärungen statt blanker Zahlen. Kostenlos, ohne Anmeldung, Ergebnisse direkt im Browser.',
+    description: 'Über 200 Online-Rechner für Deutschland — mit Erklärungen statt blanker Zahlen. Kostenlos, ohne Anmeldung, Ergebnisse direkt im Browser.',
     images: ['https://www.rechenfix.de/opengraph-image'],
   },
 };

@@ -33,7 +33,7 @@ export default function QualitaetSeite() {
       <section className="card p-6 md:p-8 mb-8">
         <div className="prose prose-sm max-w-none text-gray-700 dark:text-gray-300 leading-relaxed">
           <p className="mb-4">
-            Rechenfix.de pflegt 170 Online-Rechner in neun Kategorien — viele davon
+            Rechenfix.de pflegt über 200 Online-Rechner in zehn Kategorien — viele davon
             mit rechtlich relevanten Berechnungen (Steuern, Sozialabgaben, Unterhalt,
             Förderung, Mietrecht). Diese Seite beschreibt den Workflow, mit dem
             die fachliche Genauigkeit und Aktualität sichergestellt wird.
@@ -185,7 +185,7 @@ export default function QualitaetSeite() {
         <div className="prose prose-sm max-w-none text-gray-700 dark:text-gray-300 leading-relaxed">
           <p className="mb-4">
             Rechenfix.de hat im April 2026 einen vollständigen A11y-Sprint
-            durchlaufen. Geprüfte Stichprobe: 19 Rechner aus allen 9 Kategorien.
+            durchlaufen. Geprüfte Stichprobe: 19 Rechner aus den damals bestehenden 9 Kategorien.
             Ergebnisse:
           </p>
           <ul className="list-disc pl-5 space-y-1.5 mb-4">

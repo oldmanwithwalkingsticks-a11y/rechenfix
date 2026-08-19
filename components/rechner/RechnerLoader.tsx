@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * Client-Wrapper für die 170 Rechner-Components.
+ * Client-Wrapper für die Rechner-Components.
  *
  * Bei Verwendung in einer Server-Component (`app/[kategorie]/[rechner]/page.tsx`)
  * sorgt das `'use client'`-Pragma dafür, dass die `dynamic()`-Imports als echte
@@ -41,7 +41,7 @@ function RechnerSkeleton() {
 }
 
 /**
- * Helper: `dynamic()` mit Skeleton-Loading-Prop für alle 170 Rechner-Imports.
+ * Helper: `dynamic()` mit Skeleton-Loading-Prop für alle Rechner-Imports.
  * Default-Behavior von `next/dynamic` bleibt (ssr: true, kein Suspense-Mode).
  */
 const dyn = (loader: () => Promise<{ default: ComponentType }>): ComponentType =>
