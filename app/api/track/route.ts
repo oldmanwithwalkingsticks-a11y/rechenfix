@@ -8,6 +8,7 @@ export const dynamic = 'force-dynamic';
 const MAX_CLICKS = 20000;
 const MAX_FEEDBACKS = 20000;
 const MAX_PDFS = 20000;
+const MAX_KI = 20000;
 
 interface TrackClickBody {
   type: 'click';
@@ -27,7 +28,21 @@ interface TrackPdfBody {
   rechner: string;
 }
 
-type TrackBody = TrackClickBody | TrackFeedbackBody | TrackPdfBody;
+type KiFeature = 'erklaerung' | 'ki-rechner' | 'was-waere-wenn' | 'strom-spartipp' | 'schlaf-tipp';
+
+const KI_FEATURES: readonly KiFeature[] = [
+  'erklaerung', 'ki-rechner', 'was-waere-wenn', 'strom-spartipp', 'schlaf-tipp',
+] as const;
+
+interface TrackKiBody {
+  type: 'ki';
+  feature: KiFeature;
+  /** Anzeigename des Rechners; beim eigenständigen KI-Rechner leer. */
+  rechner?: string;
+  status: 'ok' | 'fehler';
+}
+
+type TrackBody = TrackClickBody | TrackFeedbackBody | TrackPdfBody | TrackKiBody;
 
 function isString(v: unknown): v is string {
   return typeof v === 'string' && v.length > 0 && v.length < 500;
@@ -81,6 +96,24 @@ export async function POST(req: Request) {
       };
       await redis.lpush(KEYS.pdfs, JSON.stringify(entry));
       await redis.ltrim(KEYS.pdfs, 0, MAX_PDFS - 1);
+      return NextResponse.json({ ok: true });
+    }
+
+    if (body.type === 'ki') {
+      if (!KI_FEATURES.includes(body.feature)) {
+        return NextResponse.json({ ok: false }, { status: 400 });
+      }
+      if (body.status !== 'ok' && body.status !== 'fehler') {
+        return NextResponse.json({ ok: false }, { status: 400 });
+      }
+      const entry = {
+        f: body.feature,
+        r: typeof body.rechner === 'string' ? body.rechner.slice(0, 200) : '',
+        s: body.status,
+        t: Date.now(),
+      };
+      await redis.lpush(KEYS.ki, JSON.stringify(entry));
+      await redis.ltrim(KEYS.ki, 0, MAX_KI - 1);
       return NextResponse.json({ ok: true });
     }
 

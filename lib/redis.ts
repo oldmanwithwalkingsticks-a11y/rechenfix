@@ -13,6 +13,7 @@ export const KEYS = {
   clicks: 'rechenfix:clicks',
   feedbacks: 'rechenfix:feedbacks',
   pdfs: 'rechenfix:pdfs',
+  ki: 'rechenfix:ki',
 } as const;
 
 // Startwert des Berechnungszählers, falls er noch nicht in Redis existiert.
