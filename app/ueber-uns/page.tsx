@@ -7,7 +7,7 @@ import path from 'path';
 import { KARSTEN_PHOTO_PATH } from '@/lib/site-config';
 
 // LAST_UPDATED manuell pflegen bei substantiellen Änderungen.
-const LAST_UPDATED = '20. Mai 2026';
+const LAST_UPDATED = '19. August 2026';
 
 // Server-side Foto-Check: rendert <Image>, sobald das in lib/site-config
 // referenzierte Foto existiert. Solange nicht: Placeholder-Div mit
@@ -52,11 +52,15 @@ export default function UeberUnsSeite() {
             Kochen &amp; Ernährung, Sport &amp; Fitness und Technik.
           </p>
           <p className="mb-4">
-            Alle Berechnungen laufen <strong>direkt in Ihrem Browser</strong> — wir
-            übertragen keine Eingaben auf einen Server, keine Anmeldung ist nötig,
-            keine Daten werden gespeichert. Das Ziel ist einfach: komplexe Berechnungen
-            so zugänglich machen, dass Sie in Sekunden eine belastbare Orientierung
-            bekommen.
+            Die Berechnungen laufen <strong>direkt in Ihrem Browser</strong> — für das
+            Rechnen selbst übertragen wir keine Eingaben auf einen Server, keine Anmeldung
+            ist nötig, keine Daten werden gespeichert. Eine Ausnahme sind die
+            KI-Funktionen: Wer sie bewusst auslöst, übermittelt dabei die Bezeichnung des
+            Rechners sowie die eingegebenen und berechneten Werte an unseren
+            KI-Dienstleister. Einzelheiten dazu stehen in der{' '}
+            <Link href="/datenschutz" className="text-primary-600 dark:text-primary-400 hover:underline">Datenschutzerklärung</Link>.
+            Das Ziel ist einfach: komplexe Berechnungen so zugänglich machen, dass Sie in
+            Sekunden eine belastbare Orientierung bekommen.
           </p>
           <p className="mb-4">
             Eine Besonderheit von Rechenfix ist die KI-gestützte Erklärung
@@ -163,7 +167,7 @@ export default function UeberUnsSeite() {
           <ol className="list-decimal pl-6 space-y-2 my-4">
             <li>erklärt, was die Zahl bedeutet — nicht nur ausspuckt,</li>
             <li>aktuell ist, sobald sich gesetzliche Werte ändern, und</li>
-            <li>so gestaltet ist, dass die Bedienung schnell und auf jedem Gerät funktioniert — Werbung finanziert den Betrieb, soll aber nicht das Ergebnis verdecken.</li>
+            <li>so gestaltet ist, dass die Bedienung schnell und auf jedem Gerät funktioniert — die Finanzierung soll das Ergebnis nie verdecken.</li>
           </ol>
           <p>
             Heute sind es über 200 Rechner in zehn Kategorien — von Brutto-Netto und Mehrwertsteuer über BMI und Spritkosten
@@ -194,9 +198,10 @@ export default function UeberUnsSeite() {
             automatisch um, ohne dass die Site neu deployed werden muss.
           </li>
           <li>
-            <strong className="text-gray-800 dark:text-gray-100">3. Werbefinanziert, aber nicht werbeüberladen.</strong>{' '}
-            Eine dezente Werbeanzeige unter dem Ergebnis hält den Betrieb am Laufen.
-            Keine Pop-ups, keine Newsletter-Aufdringlichkeit, keine
+            <strong className="text-gray-800 dark:text-gray-100">3. Finanziert, aber nicht zugestellt.</strong>{' '}
+            Derzeit trägt sich der Betrieb über Affiliate-Partnerschaften; Werbeanzeigen
+            sind zurzeit vollständig abgeschaltet. Sollten sie zurückkehren, dann dezent
+            unter dem Ergebnis. Keine Pop-ups, keine Newsletter-Aufdringlichkeit, keine
             „Premium-Versionen&ldquo;, keine Tracking-Banner über die ganze Seite.
           </li>
         </ul>
@@ -299,12 +304,15 @@ export default function UeberUnsSeite() {
           <p className="mb-4">
             <strong>Berechnungen erfolgen lokal in Ihrem Browser.</strong> Eingaben
             werden nicht an Rechenfix übermittelt, nicht protokolliert und nicht
-            gespeichert. Sie können jeden Rechner nutzen, ohne sich anzumelden, ohne
+            gespeichert. Das gilt für das Rechnen selbst; nutzen Sie zusätzlich eine
+            KI-Funktion, werden die betreffenden Werte an unseren KI-Dienstleister
+            übermittelt. Sie können jeden Rechner nutzen, ohne sich anzumelden, ohne
             ein Konto anzulegen und ohne Cookies zu akzeptieren.
           </p>
           <p className="mb-4">
             <strong>Werbung und Affiliate-Links:</strong> Rechenfix.de finanziert
-            sich durch Werbeeinblendungen und Affiliate-Partnerschaften. Affiliate-Links
+            sich durch Affiliate-Partnerschaften; Werbeanzeigen sind zurzeit
+            abgeschaltet und können später zurückkehren. Affiliate-Links
             sind als solche gekennzeichnet. Die fachlichen Inhalte und Berechnungsergebnisse
             werden davon nicht beeinflusst — Empfehlungen erfolgen ausschließlich nach
             thematischer Passung, nicht nach Provisionshöhe.
