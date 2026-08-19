@@ -301,7 +301,7 @@ export default function KiRechnerClient() {
 
       {/* Hinweis */}
       <p className="text-xs text-center text-gray-600 dark:text-gray-500">
-        Die Ergebnisse werden mit den gepr&uuml;ften Rechnern von rechenfix berechnet. Die KI formuliert die Erl&auml;uterung &mdash; f&uuml;r alle Details den verlinkten Rechner nutzen. Max 3 Fragen pro Minute.
+        Die Antwort wird von der KI berechnet und formuliert. F&uuml;r ein gepr&uuml;ftes, nachvollziehbares Ergebnis den verlinkten Rechner nutzen. Max 3 Fragen pro Minute.
       </p>
     </div>
   );
