@@ -13,6 +13,7 @@
  */
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { getTerminlage } from '@/lib/termine';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -115,12 +116,41 @@ async function sendStatusMail(results: ProbeResult[], allOk: boolean): Promise<v
     'Manueller Re-Trigger: GET /api/cron/health-check (mit Bearer CRON_SECRET)',
   ];
 
+  const lage = getTerminlage(date);
+  if (lage.ueberfaellig.length > 0 || lage.faellig.length > 0) {
+    lines.push('', '─────────── TERMINE ───────────');
+    for (const e of lage.ueberfaellig) {
+      lines.push(
+        '',
+        `🔴 ÜBERFÄLLIG seit ${Math.abs(e.tage)} Tagen (${e.datum}) — [${e.termin.bereich}] ${e.termin.titel}`,
+        `   ${e.termin.was}`,
+        ...(e.termin.quelle ? [`   Quelle: ${e.termin.quelle}`] : []),
+      );
+    }
+    for (const e of lage.faellig) {
+      lines.push(
+        '',
+        `🟡 in ${e.tage} Tagen (${e.datum}) — [${e.termin.bereich}] ${e.termin.titel}`,
+        `   ${e.termin.was}`,
+        ...(e.termin.quelle ? [`   Quelle: ${e.termin.quelle}`] : []),
+      );
+    }
+    lines.push('', 'Gepflegt in lib/termine.ts. Erledigte Einmaltermine dort entfernen.');
+  }
+
+  const terminMarke =
+    lage.ueberfaellig.length > 0
+      ? ` · ${lage.ueberfaellig.length} ÜBERFÄLLIG`
+      : lage.faellig.length > 0
+        ? ` · ${lage.faellig.length} Termin(e)`
+        : '';
+
   try {
     const resend = new Resend(apiKey);
     await resend.emails.send({
       from: 'Rechenfix Stats <feedback@rechenfix.de>',
       to,
-      subject: `[Rechenfix KI-Check] ${statusWord} — ${date}`,
+      subject: `[Rechenfix KI-Check] ${statusWord}${terminMarke} — ${date}`,
       text: lines.join('\n'),
     });
   } catch (err) {
