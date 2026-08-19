@@ -13,6 +13,7 @@
 | **01.07.2026** | Rentenwert 40,79 € → 42,52 € | **Switch aktiv** — automatischer Wechsel in `rente.ts` | ✅ vorbereitet |
 | **01.07.2026** | Pfändungsfreigrenze 1.555 € → 1.587,40 € | **Switch aktiv** — automatischer Wechsel in `pfaendung.ts` | ✅ vorbereitet |
 | **~Oktober 2026** | SV-Rechengrößenverordnung 2027 | Neue BBG-Werte in `brutto-netto.ts` einpflegen (Switch auf 01.01.2027) | ⏳ warten auf Bekanntgabe |
+| **~Herbst 2026** | Wohngeld-Dynamisierung 2027 (2-jährlich) | Höchstbeträge Anlage 1 WoGG, Koeffizienten, Freibeträge § 17, Heiz- und Klimakomponente in `wohngeld.ts` (Wechsel 01.01.2027) | ⏳ warten auf Fortschreibungsverordnung |
 | **~November 2026** | Inflationsausgleichsgesetz 2027 | Grundfreibetrag + ESt-Zonengrenzen in `einkommensteuer.ts` einpflegen | ⏳ warten auf Bekanntgabe |
 | **01.01.2027** | Mindestlohn 13,90 € → 14,60 € | **Switch aktiv** — automatischer Wechsel in `mindestlohn.ts` | ✅ vorbereitet |
 | **01.01.2027** | Minijob-Grenze 603 € → 633 € | **Switch aktiv** — abgeleitet aus Mindestlohn | ✅ vorbereitet |
@@ -149,6 +150,17 @@
 ---
 
 ## 🔔 Audit-Routine
+
+> **Erinnert wird seit Welle 108 automatisch.** Die Termine dieser Datei stehen zusätzlich als
+> Datensatz in [`lib/termine.ts`](../lib/termine.ts) und werden täglich mit der Health-Check-Mail
+> um 06 UTC gemeldet — fällige und überfällige Einträge stehen dann auch in der Betreffzeile.
+> Ein zweiter, stiller Kanal warnt im Build-Log (`scripts/check-termine.mjs`, ohne Exit-Code).
+>
+> Bewusst in `lib/` statt in `docs/`: `vercel.json` überspringt Deploys, bei denen nur `docs/**`
+> oder `*.md` geändert wurde. Eine Terminänderung in dieser Datei allein würde nie deployt.
+>
+> **Die Checklisten unten bleiben das Verfahren.** `lib/termine.ts` ist nur der Wecker und
+> enthält keine Fachinhalte — wer einen Termin verschiebt, ändert dort das Datum, nicht hier.
 
 ### Dezember-Audit (für 01.01.-Wechsel)
 

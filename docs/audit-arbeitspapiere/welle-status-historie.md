@@ -6,6 +6,71 @@
 
 ---
 
+## 19.08.2026 — Welle 108: Termin-SSOT mit automatischer Erinnerung — ✅ ABGESCHLOSSEN (ein Teilschritt offen)
+
+Bis hierher gab es **keine** maschinelle Terminüberwachung. Fristen lagen in
+`docs/jahreswerte-kalender.md` (nur gesetzliche Parameter) und im Handoff-Dokument außerhalb des
+Repos — und keines von beiden erinnert von selbst. Diese Welle legt eine Termin-SSOT an und hängt
+die Erinnerung an den einzigen Kanal, der ohnehin täglich ankommt: die Health-Check-Mail um
+06 UTC. Kein neuer Cron, keine neue Infrastruktur, keine zusätzlichen Kosten.
+
+**Warum `lib/termine.ts` und nicht `docs/`.** `vercel.json` überspringt Deploys, bei denen nur
+`docs/**` oder `*.md` geändert wurde. Läge die Terminliste dort, würde eine Terminänderung nie
+deployt, und der Cron liefe unbemerkt mit dem alten Stand weiter — ein Wecker, der die neue Uhrzeit
+nicht mitbekommt. Der Ablageort ist hier also kein Ordnungsgeschmack, sondern Voraussetzung dafür,
+dass die Sache überhaupt funktioniert.
+
+**Einmaltermine rollen bewusst nicht.** Wiederkehrende Einträge (`wiederholungMonate`) rechnen sich
+selbst auf das nächste Vorkommen weiter. Einmaltermine bleiben nach Ablauf dauerhaft als
+ÜBERFÄLLIG stehen, bis jemand sie entfernt oder das Datum von Hand fortschreibt. Das gilt
+ausdrücklich für Domain- und Postfachablauf: Ein automatisch weiterrollender Eintrag würde sich
+selbst beruhigen, ohne dass verlängert wurde. Rechtliche Fristen und Vertragsabläufe sollen nerven.
+
+**Eigene Monatsarithmetik statt `setUTCMonth`.** Bei Ankertagen über dem 28. rechnet JavaScript
+still in den Folgemonat über — aus dem 30.01. plus einem Monat wird der 02.03., und der Termin
+driftet danach dauerhaft weiter. Stattdessen werden Jahr und Monat getrennt fortgezählt und der Tag
+auf das Monatsende gekappt. Belegt: ein am 30. verankerter Monatstermin liefert `2026-02-28` und im
+Folgemonat wieder `2026-03-30`.
+
+**Zwei Kanäle, ein Datenstand.** Die Mail nennt Titel, Handlung und Quelle; das Prebuild-Skript
+`scripts/check-termine.mjs` warnt zusätzlich im Build-Log, **ohne** Exit-Code — ein Termin darf
+keinen Deploy blockieren. Weil das Skript reines Node ist und `lib/termine.ts` TypeScript, liest es
+die Einträge per Regex statt per Import. Damit existiert die Monatskappung zweimal, und das ist eine
+Driftquelle: Ändert jemand die eine Seite, schweigt die andere dazu. Gegengeprüft an drei Stichtagen
+(19.08., 06.09., 28.10.2026) — beide Kanäle nennen dieselben Einträge, dieselben Daten, dieselben
+Tagesabstände.
+
+**Der Wächter ist geprüft, nicht nur geschrieben.** Am heutigen Stand schweigt er korrekt, weil
+nichts fällig ist. Gegen vorgestellte Stichtage schlägt er an: am 06.09. mit zwei überfälligen und
+einem fälligen Eintrag, am 28.10. mit drei überfälligen und einem fälligen. Ein Wächter, der im
+Ernstfall nicht anschlägt, erzeugt nur falsche Sicherheit.
+
+**Erste Mail mit Terminblock: 25.08.2026** — sechs Tage nach dieser Welle, ausgelöst vom
+Vorlauf für die Brückentage-Entscheidung. Bis dahin bleibt die Mail unverändert wie bisher; die
+Betreffzeile bekommt ihren Zusatz nur, wenn tatsächlich etwas ansteht.
+
+Die Prebuild-Kette wächst von 13 auf **14 Glieder**; das neue Glied sitzt direkt vor
+`slug-drift-scan.mjs`.
+
+**Offener Teilschritt.**
+
+Schritt 4c der Vorlage — `docs/backlog-wartende-positionen.md` aus einer separat bereitgestellten
+Quelldatei anlegen — konnte **nicht** ausgeführt werden: Die Datei
+`backlog-wartende-positionen-2026-08-19.md` existiert weder im vorgesehenen Ablageordner noch
+sonst im Repo. Erfinden ließ sich ihr Inhalt nicht. Folge: Der Termin `entscheidung-brueckentage`
+verweist in seinem `quelle`-Feld auf `docs/backlog-wartende-positionen.md, Punkt A1` — eine Datei,
+die es noch nicht gibt. Das bricht nichts (das Feld ist reiner Text und wird nur in die Mail
+gedruckt), zeigt aber ins Leere, bis das Dokument nachgereicht ist. Die Commit-Nachricht für 108c
+wurde entsprechend angepasst; sie hätte sonst ein Dokument angekündigt, das nicht im Commit liegt.
+
+**Eigener Fund.** Die Vorlage nennt 17 Termine und verlangt, dass ein sachlich falsch wirkendes
+Datum gemeldet und nicht geändert wird. Aufgefallen ist keines — Domain und Postfach teilen sich
+den 03.04.2027, was zu zwei getrennten Verträgen bei zwei Anbietern zunächst wie ein Übertragungs-
+fehler aussieht. Beide Einträge tragen dieselbe Begründung und dieselbe Pflegeanweisung, das Datum
+ist also bewusst doppelt gesetzt. Unverändert übernommen.
+
+---
+
 ## 19.08.2026 — Welle 107a: Artikel 16, Beleglücke geschlossen — ✅ ABGESCHLOSSEN
 
 Auslöser war ein Fund aus Welle 107: Zwei Aussagen standen unbelegt im Text, obwohl die Prüfliste
