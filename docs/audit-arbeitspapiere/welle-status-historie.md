@@ -6,6 +6,82 @@
 
 ---
 
+## 19.08.2026 — Welle 110: KI-Nutzung wird gezählt — ✅ ABGESCHLOSSEN
+
+Die Nutzungsstatistik zählte Affiliate-Klicks, Feedback und PDF-Downloads. Ausgerechnet die
+KI-Funktionen — die einzigen, die je Aufruf Geld kosten — wurden gar nicht erfasst. Wer nicht
+weiß, wie oft etwas benutzt wird, kann weder Kosten einordnen noch entscheiden, ob es sich lohnt.
+
+**Ein Ereignis mit Funktionskennung, nicht fünf Zähler.** Alle fünf Auslöser schreiben in
+denselben Redis-Key `rechenfix:ki` und unterscheiden sich nur im Feld `f`. Ein Schlüssel, ein
+Reiter, eine Löschlogik — statt fünf Wege, die man alle einzeln pflegen und alle einzeln vergessen
+kann.
+
+**Gezählt wird nach der Antwort, mit Status.** Nicht beim Klick. Jedes Ereignis trägt `ok` oder
+`fehler`, damit Ratenbremse und Schlüsselprobleme im Reiter sichtbar werden, statt sich als
+stille Lücke zu zeigen. Bricht jemand vorher ab, wird nichts gezählt — bewusst hingenommen. Der
+Aufruf ist Feuer-und-vergiss mit `.catch(() => {})`: Ein Fehler beim Zählen darf die Funktion
+selbst nie stören.
+
+**Eine Weißliste, keine offene Ablage.** Der `ki`-Zweig prüft `feature` gegen `KI_FEATURES` und
+`status` gegen die beiden erlaubten Werte, **bevor** etwas geschrieben wird. Ein unbekannter Wert
+wird mit 400 abgewiesen. Ohne diese Prüfung könnte der Reiter über den offenen Endpunkt mit
+Fremdeinträgen zulaufen.
+
+**Keine einzige Rechner-Datei angefasst.** `AiExplain` steckt in 206 Rechnern und wurde trotzdem
+nur einmal geändert; alle fünf Auslöser sitzen zentral in je einer Komponente. Belegt über
+`git diff --name-only` auf `components/rechner/`: außer den vier Komponenten null Treffer.
+
+**Rechnername nur dort, wo es einen gibt.** Von den fünf Auslösern konnte genau **einer** einen
+Rechnernamen mitsenden: `AiExplain` hat die Prop `rechnerName`. `WasWaereWenn`, `StromSpartipp`
+und `SchlafTipp` bekommen ausschließlich `eingaben` und `ergebnis` — dort bleibt das Feld leer,
+statt einen Namen zu erfinden oder eine neue Prop durch 206 Dateien zu ziehen. Der KI-Rechner
+sendet ebenfalls keinen, weil er zu keinem einzelnen Rechner gehört. Die zweite Tabelle im Reiter
+sagt das ausdrücklich, wenn sie leer bliebe.
+
+**Der Rechnerbezeichner bleibt bewusst uneinheitlich.** PDF-Ereignisse tragen den Slug
+(`mwst-rechner`), KI-Ereignisse den Anzeigenamen (`Mehrwertsteuer-Rechner`). Eine Vereinheitlichung
+würde 206 Dateien berühren und war nicht Teil dieser Welle.
+
+**Monatsauswahl erweitert (Schritt 5g).** Die Liste der verfügbaren Monate speiste sich nur aus
+Klicks und Feedback. Ein Monat mit KI-Nutzung, aber ohne Klicks wäre unsichtbar geblieben —
+`alleKi` ist deshalb aufgenommen. **PDF-Einträge bleiben weiterhin draußen**; das ist ein
+bestehender Zustand und wurde bewusst nicht mitverändert.
+
+**Datenschutzerklärung nachgezogen.** Die Aufzählung unter „Konkret verarbeiten wir:" ist
+abschließend formuliert, ein neues Ereignis muss darin stehen. Der neue Punkt nennt, was
+gespeichert wird — und ebenso deutlich, was **nicht**: Eingaben, Frage und erzeugte Antwort. In
+der Kurzaufzählung weiter oben fehlten PDF-Downloads schon vorher; beides ist jetzt geschlossen.
+
+**Eigene Funde.**
+
+1. **Die Abschnittsnummer im Verweis stimmte nicht.** Die Vorlage nennt Abschnitt 12 ausdrücklich
+   als Annahme und verlangt die Prüfung an der Datei. Tatsächlich trägt der KI-Abschnitt
+   `nr="9"` („KI-Funktionen (KI-Rechner und KI-Erklärungen)"); Abschnitt 12 ist „Ihre Rechte als
+   betroffene Person". Der Verweis steht deshalb auf 9. Der Wert ist gemessen, nicht geraten —
+   ein Querverweis in einer Datenschutzerklärung, der auf den falschen Abschnitt zeigt, wäre
+   schlechter als jede Alternative.
+
+2. **Prüfvorschrift 3 ist mit dem vorgeschriebenen Code nicht erreichbar.** Erwartet wird
+   `grep -c "KI_FEATURES"` = 3 („Deklaration, Typliste, Prüfung"), gemessen wird 2. Die Zeile mit
+   der Werteliste steht als Folgezeile und trägt den Bezeichner nicht. Der Code ist wörtlich wie
+   vorgegeben eingebaut; die Zählung ist der Fehler, nicht die Datei. Dieselbe Fehlerklasse wie in
+   Welle 106b und 107a.
+
+3. **Prüfvorschrift 13 zählt eine Datei zu wenig.** Erwartet werden neun, geändert sind zehn —
+   und zwar genau die zehn, die die Vorlage in ihren Schritten 1 bis 6 selbst benennt
+   (`redis.ts`, zwei Routen, fünf Komponenten, Adminseite, Datenschutzerklärung). Keine weitere
+   Datei berührt.
+
+4. **Eine Lint-Warnung stammt aus dem vorgegebenen Code.** `KI_LABELS` wird im Rumpf der
+   Komponente deklariert und in `nachKiFunktion` verwendet, steht aber nicht in der
+   Abhängigkeitsliste — `react-hooks/exhaustive-deps` meldet das als Warnung. Der Build bleibt
+   grün (das Repo trägt bereits eine gleichartige Warnung). Nicht repariert, weil der Block
+   wörtlich vorgegeben war; die saubere Lösung wäre, `KI_LABELS` auf Modulebene zu ziehen, wo es
+   keine wechselnde Identität mehr hat.
+
+---
+
 ## 19.08.2026 — Welle 109: Veraltete Zahlen und falsche Aussagen auf den Meta-Seiten — ✅ ABGESCHLOSSEN
 
 Karsten sah auf der Über-uns-Seite „170 Rechner". Die Prüfung förderte drei Fehlerklassen zutage:
