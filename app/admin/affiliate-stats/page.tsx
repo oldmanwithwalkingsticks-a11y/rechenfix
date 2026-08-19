@@ -20,7 +20,14 @@ interface PdfEntry {
   t: number;
 }
 
-type Tab = 'programm' | 'rechner' | 'alle' | 'feedback' | 'pdf' | 'social';
+interface KiEntry {
+  f: string;
+  r: string;
+  s: 'ok' | 'fehler';
+  t: number;
+}
+
+type Tab = 'programm' | 'rechner' | 'alle' | 'feedback' | 'pdf' | 'ki' | 'social';
 
 interface SocialPlattformStatus {
   platform: string;
@@ -73,6 +80,7 @@ export default function AffiliateStatsPage() {
   const [alleClicks, setAlleClicks] = useState<ClickEntry[]>([]);
   const [alleFeedbacks, setAlleFeedbacks] = useState<FeedbackEntry[]>([]);
   const [allePdfs, setAllePdfs] = useState<PdfEntry[]>([]);
+  const [alleKi, setAlleKi] = useState<KiEntry[]>([]);
   const [monat, setMonat] = useState(aktuellerMonat());
   const [tab, setTab] = useState<Tab>('programm');
   const [socialData, setSocialData] = useState<SocialStatus | null>(null);
@@ -102,6 +110,7 @@ export default function AffiliateStatsPage() {
       setAlleClicks(Array.isArray(data.clicks) ? data.clicks : []);
       setAlleFeedbacks(Array.isArray(data.feedbacks) ? data.feedbacks : []);
       setAllePdfs(Array.isArray(data.pdfs) ? data.pdfs : []);
+      setAlleKi(Array.isArray(data.ki) ? data.ki : []);
       setAngemeldet(true);
       setLadeStatus('ok');
     } catch {
@@ -175,6 +184,7 @@ export default function AffiliateStatsPage() {
     setAlleClicks([]);
     setAlleFeedbacks([]);
     setAllePdfs([]);
+    setAlleKi([]);
     setSocialData(null);
     setLadeStatus('idle');
   };
@@ -184,14 +194,51 @@ export default function AffiliateStatsPage() {
     const set = new Set<string>();
     for (const c of alleClicks) set.add(getMonatKey(c.t));
     for (const f of alleFeedbacks) set.add(getMonatKey(f.t));
+    for (const k of alleKi) set.add(getMonatKey(k.t));
     if (set.size === 0) set.add(aktuellerMonat());
     return Array.from(set).sort().reverse();
-  }, [alleClicks, alleFeedbacks]);
+  }, [alleClicks, alleFeedbacks, alleKi]);
 
   // Daten nach gewähltem Monat filtern
   const clicks = useMemo(() => alleClicks.filter(c => isImMonat(c.t, monat)), [alleClicks, monat]);
   const feedbacks = useMemo(() => alleFeedbacks.filter(f => isImMonat(f.t, monat)), [alleFeedbacks, monat]);
   const pdfs = useMemo(() => allePdfs.filter(p => isImMonat(p.t, monat)), [allePdfs, monat]);
+
+  const kiEreignisse = useMemo(() => alleKi.filter(k => isImMonat(k.t, monat)), [alleKi, monat]);
+
+  const KI_LABELS: Record<string, string> = {
+    'erklaerung': 'Fix erklärt',
+    'ki-rechner': 'KI-Rechner',
+    'was-waere-wenn': 'Was wäre wenn…?',
+    'strom-spartipp': 'KI-Spartipp Strom',
+    'schlaf-tipp': 'Schlaf-Tipp',
+  };
+
+  const nachKiFunktion = useMemo(() => {
+    const map = new Map<string, { ok: number; fehler: number; letzter: number }>();
+    for (const k of kiEreignisse) {
+      const e = map.get(k.f) ?? { ok: 0, fehler: 0, letzter: 0 };
+      if (k.s === 'ok') e.ok++; else e.fehler++;
+      if (k.t > e.letzter) e.letzter = k.t;
+      map.set(k.f, e);
+    }
+    return Array.from(map.entries())
+      .map(([feature, d]) => ({ feature, label: KI_LABELS[feature] ?? feature, gesamt: d.ok + d.fehler, ...d }))
+      .sort((a, b) => b.gesamt - a.gesamt);
+  }, [kiEreignisse]);
+
+  const nachKiRechner = useMemo(() => {
+    const map = new Map<string, { count: number; letzter: number }>();
+    for (const k of kiEreignisse) {
+      if (!k.r) continue;
+      const e = map.get(k.r);
+      if (e) { e.count++; if (k.t > e.letzter) e.letzter = k.t; }
+      else map.set(k.r, { count: 1, letzter: k.t });
+    }
+    return Array.from(map.entries())
+      .map(([rechner, d]) => ({ rechner, ...d }))
+      .sort((a, b) => b.count - a.count);
+  }, [kiEreignisse]);
 
   const nachPdfRechner = useMemo(() => {
     const map = new Map<string, { count: number; letzter: number }>();
@@ -291,8 +338,12 @@ export default function AffiliateStatsPage() {
     lines.push('Rechner;Daumen hoch;Daumen runter;Gesamt;Zufriedenheit');
     for (const r of feedbackStats) lines.push(`${r.rechner};${r.ja};${r.nein};${r.gesamt};${r.rate.toFixed(0)}%`);
 
+    lines.push('');
+    lines.push('--- KI-NUTZUNG NACH FUNKTION ---');
+    lines.push('Funktion;Aufrufe;davon Fehler');
+    for (const k of nachKiFunktion) lines.push(`${k.label};${k.gesamt};${k.fehler}`);
     return lines.join('\n');
-  }, [clicks, feedbacks, monat, feedbackGesamt, nachProgramm, feedbackStats]);
+  }, [clicks, feedbacks, monat, feedbackGesamt, nachProgramm, feedbackStats, nachKiFunktion]);
 
   const handleExport = () => {
     const blob = new Blob([buildCsv()], { type: 'text/csv;charset=utf-8;' });
@@ -335,6 +386,7 @@ export default function AffiliateStatsPage() {
     { key: 'alle', label: 'Alle Klicks' },
     { key: 'feedback', label: 'Feedback' },
     { key: 'pdf', label: 'PDF-Downloads' },
+    { key: 'ki', label: 'KI-Nutzung' },
     { key: 'social', label: 'Social' },
   ];
 
@@ -721,6 +773,62 @@ export default function AffiliateStatsPage() {
                   ))}
                 </tbody>
               </table>
+            </>
+            )
+          )}
+
+          {tab === 'ki' && (
+            kiEreignisse.length === 0 ? (
+              <div className="text-center py-12 text-gray-600 dark:text-gray-500">Keine KI-Nutzung in diesem Monat.</div>
+            ) : (
+            <>
+              <div className="mb-4 text-sm text-gray-600 dark:text-gray-400">
+                Gesamt: <strong>{kiEreignisse.length}</strong> Aufrufe · <strong>{nachKiFunktion.length}</strong> Funktionen · Fehlerquote: <strong>{((kiEreignisse.filter(k => k.s === 'fehler').length / kiEreignisse.length) * 100).toFixed(1)}&nbsp;%</strong>
+              </div>
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-gray-50 dark:bg-gray-700/50 text-left">
+                    <th className="px-4 py-3 font-semibold text-gray-700 dark:text-gray-300">Funktion</th>
+                    <th className="px-4 py-3 font-semibold text-gray-700 dark:text-gray-300 text-right">Aufrufe</th>
+                    <th className="px-4 py-3 font-semibold text-gray-700 dark:text-gray-300 text-right">davon Fehler</th>
+                    <th className="px-4 py-3 font-semibold text-gray-700 dark:text-gray-300 text-right">Letzter Aufruf</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
+                  {nachKiFunktion.map((k, i) => (
+                    <tr key={`${k.feature}-${i}`} className="hover:bg-gray-50 dark:hover:bg-gray-700/30">
+                      <td className="px-4 py-3 text-gray-800 dark:text-gray-200">{k.label}</td>
+                      <td className="px-4 py-3 text-right tabular-nums text-gray-600 dark:text-gray-400">{k.gesamt}</td>
+                      <td className="px-4 py-3 text-right tabular-nums text-gray-600 dark:text-gray-400">{k.fehler}</td>
+                      <td className="px-4 py-3 text-right text-gray-500 dark:text-gray-400">{fmtDate(k.letzter)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+              <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3 mt-8">Nach Rechner</h3>
+              {nachKiRechner.length === 0 ? (
+                <div className="text-sm text-gray-600 dark:text-gray-500">Keine Aufrufe mit Rechnerbezug — der KI-Rechner gehört zu keinem einzelnen Rechner.</div>
+              ) : (
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-gray-50 dark:bg-gray-700/50 text-left">
+                    <th className="px-4 py-3 font-semibold text-gray-700 dark:text-gray-300">Rechner</th>
+                    <th className="px-4 py-3 font-semibold text-gray-700 dark:text-gray-300 text-right">Aufrufe</th>
+                    <th className="px-4 py-3 font-semibold text-gray-700 dark:text-gray-300 text-right">Letzter Aufruf</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
+                  {nachKiRechner.map((r, i) => (
+                    <tr key={`${r.rechner}-${i}`} className="hover:bg-gray-50 dark:hover:bg-gray-700/30">
+                      <td className="px-4 py-3 text-gray-800 dark:text-gray-200 font-mono text-xs">{r.rechner}</td>
+                      <td className="px-4 py-3 text-right tabular-nums text-gray-600 dark:text-gray-400">{r.count}</td>
+                      <td className="px-4 py-3 text-right text-gray-500 dark:text-gray-400">{fmtDate(r.letzter)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              )}
             </>
             )
           )}
