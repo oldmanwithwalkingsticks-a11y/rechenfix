@@ -6,6 +6,54 @@
 
 ---
 
+## 19.08.2026 — Welle 109: Veraltete Zahlen und falsche Aussagen auf den Meta-Seiten — ✅ ABGESCHLOSSEN
+
+Karsten sah auf der Über-uns-Seite „170 Rechner". Die Prüfung förderte drei Fehlerklassen zutage:
+veraltete Zahlen, eine veraltete Kategorienzahl mit **fehlender Kategorie** — und drei Aussagen,
+die sachlich nicht mehr stimmten. Die dritte Klasse war die eigentliche.
+
+**Zahlen künftig als Spanne, nicht als Wert.** Statt auf 206 zu setzen, steht überall „über 200".
+Eine exakte Zahl veraltet mit jedem neuen Rechner und erzwingt jedes Mal eine Korrekturwelle; die
+Spanne bleibt dauerhaft wahr. `app/manifest.ts` und `components/blog/BlogHinweis.tsx` führten es
+ohnehin schon so — die Site widersprach sich also selbst. Kategorien werden dagegen **exakt**
+genannt, weil sie sich selten ändern und die Aufzählung sonst unvollständig wirkt.
+
+**Technik fehlte in der Aufzählung.** Die Über-uns-Seite nannte neun Kategorien und ließ die zehnte
+komplett aus. Die Namen stehen jetzt so da wie in `lib/rechner-config/index.ts` — Mathe &amp;
+Schule statt Mathematik, Kochen &amp; Ernährung statt Kochen, Sport &amp; Fitness statt Sport.
+
+**Die Seite behauptete etwas, das die Datenschutzerklärung längst differenzierter darstellt.** An
+zwei Stellen stand ausnahmslos, es würden keine Eingaben übertragen — und zwei Absätze weiter
+bewarb dieselbe Seite die KI-Erklärung und den KI-Rechner, bei denen genau das geschieht. Beide
+Stellen benennen jetzt die Ausnahme und verweisen auf die Datenschutzerklärung. Eine
+Datenschutzaussage, die sich auf derselben Seite selbst widerlegt, ist schlimmer als gar keine:
+Sie beschädigt das Vertrauen in alle übrigen Aussagen mit.
+
+**Und sie beschrieb Werbung, die es nicht gibt.** Der AdSense-Ladecode wurde am 16.08.2026
+zurückgebaut (Susanne Recht R2) — ausdrücklich, damit keine Einwilligung für eine Verarbeitung
+eingeholt wird, die nicht stattfindet. Dieselbe Logik gilt in die andere Richtung: Wer keine
+Anzeigen ausliefert, darf sie auch nicht als Finanzierungsmodell beschreiben. Drei Stellen
+angepasst, dabei bewusst offen formuliert („zurzeit abgeschaltet, können später zurückkehren")
+statt Werbung dauerhaft auszuschließen. Affiliate-Partnerschaften laufen weiter und bleiben genannt.
+
+**Das eingebaute Datum ist raus.** „Heute, im Mai 2026, sind es …" veraltet zwangsläufig; das
+Aktualisierungsdatum steht ohnehin am Seitenende und wurde auf den 19.08.2026 gesetzt.
+
+Historische Aussagen blieben unangetastet: der Messbefund in `RechnerLoader.tsx` Zeile 9
+(„170 Components … ~2,1 MB Chunk"), der Kommentar in `lib/rechner-config/types.ts` und der in
+`MegaMenuContent.tsx`. Auf `/qualitaet` wurde die Stichprobenangabe an die Formulierung
+angeglichen, die `/barrierefreiheit` bereits sauber führt: „aus den **damals bestehenden**
+9 Kategorien" — die Prüfung stammt aus April 2026 und ist als Zeitangabe richtig, las sich aber
+wie eine Gegenwartsaussage.
+
+**Keine Vorlagenfehler.** Alle vierzehn Ankertexte fanden sich wörtlich, alle acht Werte der
+Vorher-Tabelle stimmten, alle vierzehn Prüfvorschriften gingen auf, `git diff --stat` nennt genau
+die vier vorgesehenen Dateien. Vor dem Einsetzen des Datenschutz-Verweises wurde gegengeprüft, dass
+`Link` in `ueber-uns/page.tsx` bereits importiert ist und dieselbe Klassenkombination dort schon
+für einen `/datenschutz`-Link verwendet wird — sonst hätte der Absatz den Build gebrochen.
+
+---
+
 ## 19.08.2026 — Welle 108: Termin-SSOT mit automatischer Erinnerung — ✅ ABGESCHLOSSEN
 
 Bis hierher gab es **keine** maschinelle Terminüberwachung. Fristen lagen in
