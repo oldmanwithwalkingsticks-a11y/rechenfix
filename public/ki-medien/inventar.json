@@ -1,0 +1,241 @@
+{
+  "_hinweis": "Bestand der KI-erzeugten Medien auf rechenfix.de. Grundlage fuer den Soll-Ist-Abgleich der Kennzeichen-Wache (Skill peter-ai).",
+  "_stand": "19.08.2026",
+  "_quelle": "GENERATOREN-Tabelle in scripts/ki-metadaten-schreiben.mjs",
+  "ki_medien": [
+    {
+      "datei": "/blog/bildschirm-titelbild.png",
+      "art": "bild",
+      "seite": "/blog/warum-ein-27-zoll-monitor-viermal-so-gross-ist",
+      "generator": "Gemini 3 Pro Image (Google)"
+    },
+    {
+      "datei": "/blog/bildschirm-video-standbild.png",
+      "art": "bild",
+      "seite": "/blog/warum-ein-27-zoll-monitor-viermal-so-gross-ist",
+      "generator": "Gemini 3 Pro Image (Google)"
+    },
+    {
+      "datei": "/blog/bildschirm.mp4",
+      "art": "video",
+      "seite": "/blog/warum-ein-27-zoll-monitor-viermal-so-gross-ist",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    },
+    {
+      "datei": "/blog/blutdruck-titelbild.png",
+      "art": "bild",
+      "seite": "/blog/warum-der-blutdruck-in-millimetern-gemessen-wird",
+      "generator": "Gemini 3 Pro Image (Google)"
+    },
+    {
+      "datei": "/blog/blutdruck-video-standbild.png",
+      "art": "bild",
+      "seite": "/blog/warum-der-blutdruck-in-millimetern-gemessen-wird",
+      "generator": "Gemini 3 Pro Image (Google)"
+    },
+    {
+      "datei": "/blog/blutdruck.mp4",
+      "art": "video",
+      "seite": "/blog/warum-der-blutdruck-in-millimetern-gemessen-wird",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    },
+    {
+      "datei": "/blog/bmi-titelbild.png",
+      "art": "bild",
+      "seite": "/blog/woher-der-bmi-kommt",
+      "generator": "Gemini 3 Pro Image (Google)"
+    },
+    {
+      "datei": "/blog/bmi.mp4",
+      "art": "video",
+      "seite": "/blog/woher-der-bmi-kommt",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    },
+    {
+      "datei": "/blog/bremsweg-titelbild.png",
+      "art": "bild",
+      "seite": "/blog/warum-100-kmh-dort-noch-87-sind",
+      "generator": "Gemini 3 Pro Image (Google)"
+    },
+    {
+      "datei": "/blog/bremsweg-video-standbild.jpg",
+      "art": "bild",
+      "seite": "/blog/warum-100-kmh-dort-noch-87-sind",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    },
+    {
+      "datei": "/blog/bremsweg.mp4",
+      "art": "video",
+      "seite": "/blog/warum-100-kmh-dort-noch-87-sind",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    },
+    {
+      "datei": "/blog/cups-titelbild.png",
+      "art": "bild",
+      "seite": "/blog/wie-viel-ist-eine-cup",
+      "generator": "Gemini 3 Pro Image (Google)"
+    },
+    {
+      "datei": "/blog/cups.mp4",
+      "art": "video",
+      "seite": "/blog/wie-viel-ist-eine-cup",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    },
+    {
+      "datei": "/blog/datenmengen-titelbild.png",
+      "art": "bild",
+      "seite": "/blog/warum-1-terabyte-nur-931-gigabyte-sind",
+      "generator": "Gemini 3 Pro Image (Google)"
+    },
+    {
+      "datei": "/blog/datenmengen.mp4",
+      "art": "video",
+      "seite": "/blog/warum-1-terabyte-nur-931-gigabyte-sind",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    },
+    {
+      "datei": "/blog/euro-dmark-titelbild.png",
+      "art": "bild",
+      "seite": "/blog/warum-sich-der-euro-teurer-anfuehlte",
+      "generator": "Gemini 3 Pro Image (Google)"
+    },
+    {
+      "datei": "/blog/euro-dmark.mp4",
+      "art": "video",
+      "seite": "/blog/warum-sich-der-euro-teurer-anfuehlte",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    },
+    {
+      "datei": "/blog/kalorien-titelbild.png",
+      "art": "bild",
+      "seite": "/blog/woher-die-kalorien-auf-der-packung-kommen",
+      "generator": "Gemini 3 Pro Image (Google)"
+    },
+    {
+      "datei": "/blog/kalorien.mp4",
+      "art": "video",
+      "seite": "/blog/woher-die-kalorien-auf-der-packung-kommen",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    },
+    {
+      "datei": "/blog/meter-titelbild.png",
+      "art": "bild",
+      "seite": "/blog/wie-das-meter-erfunden-wurde",
+      "generator": "Gemini 3 Pro Image (Google)"
+    },
+    {
+      "datei": "/blog/meter-video-standbild.png",
+      "art": "bild",
+      "seite": "/blog/wie-das-meter-erfunden-wurde",
+      "generator": "Gemini 3 Pro Image (Google)"
+    },
+    {
+      "datei": "/blog/meter.mp4",
+      "art": "video",
+      "seite": "/blog/wie-das-meter-erfunden-wurde",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    },
+    {
+      "datei": "/blog/pferdestaerke-muehlenpferd.mp4",
+      "art": "video",
+      "seite": "/blog/woher-die-pferdestaerke-kommt",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    },
+    {
+      "datei": "/blog/pferdestaerke-titelbild.png",
+      "art": "bild",
+      "seite": "/blog/woher-die-pferdestaerke-kommt",
+      "generator": "Gemini 3 Pro Image (Google)"
+    },
+    {
+      "datei": "/blog/pfund-titelbild.png",
+      "art": "bild",
+      "seite": "/blog/was-ein-pfund-wirklich-wiegt",
+      "generator": "Gemini 3 Pro Image (Google)"
+    },
+    {
+      "datei": "/blog/pfund.mp4",
+      "art": "video",
+      "seite": "/blog/was-ein-pfund-wirklich-wiegt",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    },
+    {
+      "datei": "/blog/promille-titelbild.png",
+      "art": "bild",
+      "seite": "/blog/warum-11-promille-eine-gerechnete-zahl-sind",
+      "generator": "Gemini 3 Pro Image (Google)"
+    },
+    {
+      "datei": "/blog/promille-video-standbild.jpg",
+      "art": "bild",
+      "seite": "/blog/warum-11-promille-eine-gerechnete-zahl-sind",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    },
+    {
+      "datei": "/blog/promille.mp4",
+      "art": "video",
+      "seite": "/blog/warum-11-promille-eine-gerechnete-zahl-sind",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    },
+    {
+      "datei": "/blog/schuhgroessen-titelbild.png",
+      "art": "bild",
+      "seite": "/blog/woher-die-schuhgroessen-kommen",
+      "generator": "Gemini 3 Pro Image (Google)"
+    },
+    {
+      "datei": "/blog/schuhgroessen.mp4",
+      "art": "video",
+      "seite": "/blog/woher-die-schuhgroessen-kommen",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    },
+    {
+      "datei": "/blog/suesskartoffel-titelbild.png",
+      "art": "bild",
+      "seite": "/blog/warum-die-suesskartoffel-teurer-besteuert-wird",
+      "generator": "Gemini 3 Pro Image (Google)"
+    },
+    {
+      "datei": "/blog/suesskartoffel-video-standbild.jpg",
+      "art": "bild",
+      "seite": "/blog/warum-die-suesskartoffel-teurer-besteuert-wird",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    },
+    {
+      "datei": "/blog/suesskartoffel.mp4",
+      "art": "video",
+      "seite": "/blog/warum-die-suesskartoffel-teurer-besteuert-wird",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    },
+    {
+      "datei": "/blog/wohnflaeche-titelbild.png",
+      "art": "bild",
+      "seite": "/blog/warum-der-balkon-nur-ein-viertel-zaehlt",
+      "generator": "Gemini 3 Pro Image (Google)"
+    },
+    {
+      "datei": "/blog/wohnflaeche-video-standbild.jpg",
+      "art": "bild",
+      "seite": "/blog/warum-der-balkon-nur-ein-viertel-zaehlt",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    },
+    {
+      "datei": "/blog/wohnflaeche.mp4",
+      "art": "video",
+      "seite": "/blog/warum-der-balkon-nur-ein-viertel-zaehlt",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    },
+    {
+      "datei": "/blog/zeit-titelbild.png",
+      "art": "bild",
+      "seite": "/blog/warum-in-deutschland-alle-uhren-gleich-gehen",
+      "generator": "Gemini 3 Pro Image (Google)"
+    },
+    {
+      "datei": "/blog/zeit.mp4",
+      "art": "video",
+      "seite": "/blog/warum-in-deutschland-alle-uhren-gleich-gehen",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    }
+  ]
+}
