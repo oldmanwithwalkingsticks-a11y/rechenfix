@@ -127,3 +127,9 @@ scripts/_tmp-etf-check.mjs
 # Skill-Archive zum Hochladen in die Claude.ai-Oberflaeche. Der Inhalt ist
 # ohnehin als SKILL.md versioniert; das ZIP ist nur ein Transportbehaelter.
 .claude/skills/*.zip
+
+# Via "npx skills add" installierte Fremd-Skills. Quelle ist .agents/skills/,
+# .claude/skills/<name> ist nur ein lokaler Symlink darauf. Da dieses Repo mit
+# core.symlinks=false laeuft, wuerde git den Symlink als zweite Kopie der
+# SKILL.md einchecken -> Drift bei "npx skills update". Deshalb ignoriert.
+.claude/skills/find-skills/
