@@ -9,6 +9,12 @@
  *   - app/api/cron/health-check/route.ts  (tägliche Mail 06 UTC)
  *   - scripts/check-termine.mjs           (Warnung im Prebuild, kein Gate)
  *
+ * ACHTUNG bei Änderungen an `naechstesVorkommen`: Die Monatskappung existiert
+ * bewusst zweimal — hier und in scripts/check-termine.mjs, weil das Skript
+ * reines Node ist und diese Datei nicht importieren kann. Wer eine Seite
+ * ändert, muss an die andere denken, sonst nennen Mail und Build-Log
+ * verschiedene Daten.
+ *
  * Pflegeregel:
  *   - `wiederholungMonate` gesetzt  → wiederkehrender Termin. Liegt das Datum in
  *     der Vergangenheit, rollt die Berechnung automatisch auf das nächste
