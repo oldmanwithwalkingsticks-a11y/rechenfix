@@ -28,7 +28,9 @@ Diese Standards wurden nach den W13/W14-Audit-Wellen etabliert, in denen veralte
 
 Wenn diese Standards befolgt werden, dauert der Januar-Audit 1–2 Tage statt 2–3 Wochen.
 
-**Aktueller Stand (01.05.2026):** 170 Rechner in 9 Kategorien (Alltag 23, Finanzen **45**, Gesundheit 17, Auto & Verkehr 11, Wohnen & Energie 25, Mathe & Schule 18, Arbeit & Recht **17**, Kochen & Ernährung 12, Sport & Fitness 2). **Welle-Status:** Welle 1 ✅ komplett; **Welle 2 KOMPLETT abgeschlossen 26.04.2026** — Stufe 1 Auto (130–132.6), Stufe 2 Gesundheit (140–144b), Stufe 3 Wohnen (147–148c), Stufe 3 Arbeit (Block A 149a-d + 150a-d, Block B 152a + 153a/b/b-fix + 153c Lib-Audit). **Welle 3 9/10 abgeschlossen (30.04.2026):** ✅ 152b feiertage.ts SSOT, ✅ 154 LazySection-Removal (AdSense-Trigger), ✅ 155 /ueber-uns ausgebaut, ✅ 156 /qualitaet neu, ✅ 151 Block-A-P3-Sammelbatch (17 Items in 5 atomaren Konfig-Commits), ✅ 150e Süd-OLG-UI-Toggle ehegattenunterhalt, ✅ 157 P3-Sammelrest (25 Items in 6 atomaren Konfig-Commits 157a–f), ✅ P3-B1 ueberstunden-Netto-Refactor (Commit 7c2426b), ✅ **Validation-Sweep KOMPLETT 30.04.2026** — 7/7 Module abgeschlossen (M1 Backtick-Hook, M2 Norm-Zitate, M3 SSOT-Konsumption inkl. Lehren L-30 + L-31, M4 Meta-Routen, M5 Affiliate-Konsistenz, M6 FAQ-Drift, M7 A11y-Stichprobe). **Welle-3-Backlog:** nur noch 152c Pendlerpauschalen-SSOT (geparkt — Trigger: Reform-Verabschiedung). **Welle 4 angefangen 01.05.2026 — Verify-Coverage-Backfill:** Scoping ✅ 01.05.26, 6 Module M0–M5, ~22 neue Verify-Scripts, ~16–22 h auf 4–6 Sessions. Lib-Extractions auf Welle 5 ausgelagert. Volldetails: [docs/audit-arbeitspapiere/welle4-scoping.md](../../docs/audit-arbeitspapiere/welle4-scoping.md). **Affiliate:** 12 Programme inkl. CosmosDirekt (Awin 11893); 116 AffiliateBox-Aufrufe in 72 Dateien (M5-Stand 30.04.2026 nach Box-Removal MwStRueckerstattungRechner). **AdSense** live seit 20.04.2026 (Publisher-ID `pub-1389746597486587`); erste Prüfung 27.04.2026 negativ („Minderwertige Inhalte"), Drei-Maßnahmen-Sprint 154+155+156 als Reaktion. Vollständige Welle-Historie + Welle-3-Backlog mit Detailspecs: [docs/audit-arbeitspapiere/welle-status-historie.md](../../docs/audit-arbeitspapiere/welle-status-historie.md).
+**Aktueller Stand (20.08.2026, gemessen an HEAD `76f5552`):** 206 Rechner in **zehn** Kategorien — Alltag 24, Finanzen 45, Gesundheit 17, Auto & Verkehr 15, Wohnen & Energie 25, Mathe & Schule 18, Arbeit & Recht 17, Kochen & Ernährung 15, Sport & Fitness 15, **Technik 15**. Dazu 16 Blogartikel und 73 Grafik-Komponenten. Die Prebuild-Kette hat **14** Glieder. **Affiliate:** **13** Programme in `components/AffiliateBox.tsx` (wiso, smartsteuer, lexware, check24, congstar, ks-auxilia, hotelde, burdaZahn, verivox, naturesway, cosmosdirekt, smava, hansemerkur); 55 `<AffiliateBox>`-Aufrufe in 52 Dateien. **AdSense:** seit Februar 2026 bewusst pausiert, der Ladecode wurde am **16.08.2026** vollständig entfernt (Susanne Recht R2) — es findet derzeit **keine** Werbeauslieferung statt. Neue Rechner dürfen deshalb keine AdSense-Annahmen enthalten. **Wellenverlauf:** vollständig in [docs/audit-arbeitspapiere/welle-status-historie.md](../../docs/audit-arbeitspapiere/welle-status-historie.md) — bewusst nicht hier gespiegelt, damit der Skill nicht mit jeder Welle veraltet.
+
+> **Pflege dieses Blocks:** Die Zahlen oben veralten mit jeder Welle. Sie sind eine Momentaufnahme, keine SSOT — im Zweifel gegen `lib/rechner-config/` und `components/AffiliateBox.tsx` messen, nie aus diesem Skill zitieren. Zuletzt berichtigt in Welle 111 (20.08.2026), davor unverändert seit 01.05.2026.
 
 ## Tech Stack
 
@@ -803,7 +805,7 @@ Rechner- und Kategorie-Zahlen im Footer werden **dynamisch** aus [lib/rechner-co
 {rechner.length} Rechner in {kategorien.length} Kategorien
 
 // FALSCH (veraltet, sobald ein Rechner dazukommt):
-169 Rechner in 9 Kategorien
+206 Rechner in 10 Kategorien
 ```
 
 Das Lint-Script `npm run lint:footer` prüft beides automatisch:
@@ -1224,7 +1226,7 @@ For detailed templates per calculator type, see `references/templates.md`.
 
 ## Affiliate-Platzierung (Verweis)
 
-Affiliate-Platzierungs-Regel: thematischer Match zum Rechner erforderlich. Details, verbotene Kombinationen und aktuelle Partner-Liste (12 Programme inkl. CosmosDirekt seit Prompt 145): siehe CLAUDE.md → Abschnitt »Affiliate-Programme (Awin)«.
+Affiliate-Platzierungs-Regel: thematischer Match zum Rechner erforderlich. Details, verbotene Kombinationen und aktuelle Partner-Liste (13 Programme, Stand 20.08.2026): siehe CLAUDE.md → Abschnitt »Affiliate-Programme (Awin)«.
 
 **Affiliate-Boxen werden NIE hartkodiert im Component eingebaut.** Stattdessen via `config.affiliate`-Property in der jeweiligen `lib/rechner-config/<kat>.ts` deklariert. Der Renderer in [`app/[kategorie]/[rechner]/page.tsx`](../../../app/[kategorie]/[rechner]/page.tsx) Z. ~565 macht den `Array.isArray`-Check automatisch und rendert post-FAQ-Position (etabliert in W14.A.1, 09.05.2026).
 
