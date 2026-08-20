@@ -14,34 +14,12 @@ Monaten erneut als neue Idee auftaucht.
 
 ## A — Wartend, spruchreif (in dieser Reihenfolge)
 
-### A1 · Feiertage / Brückentage / Schulferien
-
-**Warum zuerst:** Der einzige Punkt der ganzen Sammlung, der das *tatsächliche*
-Problem angeht — Backlinks. „Brückentage 2027" wird jedes Jahr von
-Regionalpresse, Personalabteilungen und Arbeitgeberportalen verlinkt, ohne dass
-man darum bitten muss.
-
-- Datenlage deterministisch: Feiertagsrecht ist Ländersache, KMK-Ferientermine
-  liegen Jahre im Voraus fest — kein Preis-Drift wie bei Energiepreisen
-- statisch generierbar, passt in das Prebuild-Modell
-- Ankerrechner stehen bereits: `arbeitstage-rechner`, `urlaubstage-rechner`,
-  `countdown`, `tagerechner`; `lib/berechnungen/feiertage.ts` existiert ebenfalls
-- Darstellung „mit 28 Urlaubstagen 60 freie Tage" ist ein *Ergebnis*, kein
-  Artikel — das eigene Format
-- Pflegelast: einmal jährlich pro Bundesland, als Skript, nicht als Redaktion
-
-**Zeitfenster:** Saisonaler Peak beginnt Oktober. Entscheidung bis 01.09.2026,
-sonst fällt der Jahrgang 2027 aus. Der Termin steht in `lib/termine.ts` unter
-`entscheidung-brueckentage`.
-
-**Vorbedingung:** Go/No-Go-Recherche (Datenlage, Rechtsstand je Bundesland,
-Wettbewerb, Aufwand) **vor** jeder Zeile Code.
-
-### A2 · Vergleichsrechner
+### A1 · Vergleichsrechner
 
 Ein Vergleichsrechner ist architektonisch ein Rechner mit zwei Ergebnisspalten —
 der `vergleich`-ContentBlock existiert bereits in `lib/rechner-config/types.ts`.
 Neue Suchintentionen in bestehender Infrastruktur, nicht neue Infrastruktur.
+Nach der Herabstufung der Brückentage (siehe A4) die stärkste offene Position.
 
 Fehlend und lohnend:
 
@@ -56,7 +34,7 @@ Hohe Keyword-Werte, AWIN-Programme passen dort natürlich statt aufgesetzt.
 
 **Takt:** laufende Ergänzung im normalen Rechner-Rhythmus, kein eigener Sprint.
 
-### A3 · Themenwelten als Hub-Seiten
+### A2 · Themenwelten als Hub-Seiten
 
 Drei bis fünf, nicht fünfzehn. Je eine Seite, die vorhandene Rechner in einer
 sinnvollen Reihenfolge bündelt und den Gesamtzusammenhang erklärt:
@@ -73,7 +51,7 @@ nicht „kfz-steuer-rechner".
 Besucher kommen aus Google direkt auf die Rechnerseite; die Startseite ist für
 sie ein Randereignis.
 
-### A4 · Ergebnisvertiefung bei den Top-10
+### A3 · Ergebnisvertiefung bei den Top-10
 
 Nicht „3.200 € brutto → 2.187 € netto → Ende", sondern: Abgabenquote,
 Steuerklassenvergleich, was vom nächsten Gehaltsplus bleibt.
@@ -82,6 +60,57 @@ Steuerklassenvergleich, was vom nächsten Gehaltsplus bleibt.
 derselbe Hebel (Tiefe statt Breite), nur im Rechner statt im Artikel. Von den
 zehn stärksten Rechnern haben erst zwei einen Artikel (bmi, mwst). Nicht beides
 gleichzeitig starten.
+
+### A4 · Brückentage — herabgestuft nach Recherche vom 20.08.2026
+
+Stand ursprünglich auf Platz eins mit der Begründung, es sei der einzige Punkt,
+der Backlinks erzeugt. **Die Go/No-Go-Recherche hat diese Begründung nicht
+bestätigt.** Die Position bleibt im Backlog, aber ohne Vorrang und ohne
+Reichweitenerwartung.
+
+**Was geprüft wurde — und was dabei herauskam:**
+
+*Datenlage: einwandfrei.* `lib/berechnungen/feiertage.ts` rechnet nach der
+Osterformel von Meeus (Spencer-Variante, gültig 1583–4099), deckt alle 16
+Bundesländer ab und legt drei Modellierungsvereinfachungen im Kopfkommentar
+offen (Mariä Himmelfahrt in BY pauschal statt gemeindebasiert, Fronleichnam ohne
+die kath. Gemeinden in SN/TH, Augsburger Friedensfest nicht modelliert). Die
+Ausgabe für 2027 wurde gegen drei unabhängige Quellen gehalten und stimmt
+überein. Die Rechenlogik ist fertig.
+
+*Rechtsstand: stabil.* Keine beschlossene Feiertagsänderung für 2027. Die
+politische Debatte über Ersatztermine bei Feiertagen am Wochenende läuft, hat
+aber zu nichts geführt.
+
+*Wettbewerb: der Befund, der die These kippt.* Das Feld ist nicht nur besetzt,
+sondern von Seiten besetzt, die exakt der geplanten Bauform entsprechen —
+darunter mindestens ein deutsches Rechnerportal mit Brückentage-Rechner, eigener
+Seite je Bundesland, Info-Seite und Blog. Dazu mehrere reine Ein-Thema-Seiten,
+mehrere davon erkennbar frisch gebaut, sowie Reiseaffiliates und Großmarken mit
+Domain Authority.
+
+*Backlinks: nicht belegbar.* Wer verlinkt, verlinkt Gewerkschaften, große Marken
+oder Studien — nicht den zwölften Brückentage-Rechner auf einer Domain ohne
+Autorität. Die ursprüngliche These war aus der Struktur des Themas abgeleitet,
+nicht gemessen; die Messung sagt etwas anderes.
+
+**Was daraus wird:**
+
+Kein Sprint, kein Hub, keine sechzehn Bundesland-Seiten. Stattdessen **ein
+einzelner Brückentage-Rechner im normalen Takt** — der Grenzaufwand ist klein,
+weil die Rechenlogik existiert, und er rundet den Arbeitszeit-Verbund ab.
+
+Dazu ein möglicher Blogartikel mit umgekehrtem Vorzeichen: 2027 ist rechnerisch
+ein schwaches Jahr, nur fünf bundesweite Feiertage fallen auf Montag bis Freitag
+(1. Mai Samstag, Tag der Deutschen Einheit Sonntag, beide Weihnachtstage am
+Wochenende). Die Reiseportale werben gleichzeitig mit 54 bis 64 freien Tagen.
+Eine populäre Zahl, die niemand nachrechnet — das ist die erzählerische DNA, und
+diese Anfrage bedient kein Reiseanbieter.
+
+**Lehre für den Backlog selbst:** Eine Position, die mit einem
+Reichweitenversprechen ganz oben steht, braucht die Prüfung dieses Versprechens
+**vor** der Einordnung, nicht danach. Hier stand die Rangfolge zuerst und die
+Recherche kam hinterher.
 
 ---
 
@@ -139,8 +168,10 @@ Die gesamte Vorschlagssammlung optimiert **Verweildauer und Seiten pro
 Sitzung**. Das ist nicht der Engpass. Der Engpass ist, dass zu wenige Menschen
 überhaupt ankommen.
 
-Von über dreißig Vorschlägen adressieren genau zwei den Engpass: **A1**, weil es
-verlinkt wird, und **A2**, weil es neue Suchanfragen erschließt.
+Von über dreißig Vorschlägen sollten zwei den Engpass adressieren. Nach der
+Recherche vom 20.08.2026 bleibt **einer**: A1 (Vergleichsrechner), weil er neue
+Suchanfragen erschließt. Die Brückentage-Position hat ihre Begründung nicht
+gehalten (A4).
 
 Und keiner davon kommt an das heran, was seit dem 17.07.2026 blockiert ist: die
 vierzehn Viseme-Sprites für Fixi. Sieht nach nichts aus, ist aber der Schritt,
