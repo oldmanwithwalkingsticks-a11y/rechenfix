@@ -51,6 +51,45 @@ gefunden und berichtet, nicht selbst repariert.
 wird zur Laufzeit von niemandem gelesen. `npm run build` lief trotzdem durch, als Beleg dafür, dass
 nichts anderes angefasst wurde.
 
+### Nachtrag Welle 111a — Technik-Abschnitt ergänzt, G13 präzisiert
+
+**Die Lücke stammt aus der eigenen Messung.** Prüfvorschrift 10 der Welle 111 verlangte, die zehn
+Kategorien einzeln zu belegen statt sie bloß zu zählen. Ergebnis: Gesundheit stand elfmal im Skill,
+Arbeit dreimal, **Technik genau einmal** — und zwar in der Zeile, die Welle 111 gerade erst
+eingefügt hatte. Der Skill trug fachliche Anleitung für neun Kategorien und keine einzige für die
+zehnte. Das erklärt, wie Technik in der Statuszeile überhaupt fehlen konnte: Die Kategorie war dort
+nie angekommen. Eine reine Zählung hätte „10" ergeben und die Lücke zugedeckt.
+
+**Der neue Abschnitt** steht neben dem einzigen anderen kategoriebezogenen Abschnitt
+(Wellbeing/Gesundheit) und hält fest, was Technik unterscheidet: Bei dreizehn der fünfzehn Rechner
+sind die Werte Physik, nicht Recht — keine Verordnung, kein Stichtag, kein Jahres-Audit. Dort
+ersetzt die Gegenrechnung von Hand den Quellenabgleich. Genau zwei Rechner beziehen Preise und
+veralten wie Finanz- oder Wohnen-Rechner.
+
+**Fassung 1 der Vorlage führte `eauto-ladezeit-rechner` als dritten Preis-Rechner** — allein wegen
+des Namens. Gemessen enthält die Komponente keine einzige Preis-Zeichenkette, und der
+Config-Eintrag keinen Preisbezug, auch nicht über die abgeleiteten Modul-Konstanten. Der Rechner
+rechnet kWh ÷ kW, sonst nichts. Gefangen wurde der Fehler, weil die Prüfvorschriften bewusst gegen
+das Repo prüfen und nicht gegen die Vorlage. Fassung 2 korrigierte auf zwei Preis-Rechner und
+dreizehn preisfreie; der Abschnitt trägt den Fall jetzt als Merksatz: **Preisbezug wird gemessen,
+nicht am Namen abgelesen.**
+
+**G13 wurde in derselben Welle präzisiert.** Dort stand seit **Welle 103 (14.08.2026)**,
+`LADEPREISE.wallbox` und `STROMPREIS_2026.durchschnitt_bdew` lieferten „denselben Zahlenwert".
+Tatsächlich ist `wallbox` in `ladepreise-parameter.ts` als `durchschnitt_bdew / 100` definiert —
+abgeleitet statt zufällig gleich — und anders skaliert: 0,37 €/kWh gegen 37 ct/kWh. Ein unbedachter
+Tausch bringt keinen kleinen Fehler, sondern den Faktor 100. Sichtbar wurde das erst, weil ein
+Zählwert über den Umlaut nicht aufging; die Zahl war das Symptom, der Befund war der Widerspruch
+zwischen G13 und dem neuen Abschnitt. G13 nennt die Ableitung jetzt beim Namen und verweist für die
+Begründung auf den Technik-Abschnitt.
+
+**Zwei Abbrüche, beide vor dem ersten Commit.** Fassung 1 scheiterte an der Preis-Tabelle,
+Fassung 2 am Umlaut-Zählwert. Beide Male wurde gemeldet statt stillschweigend repariert, beide Male
+wurde die Vorlage nachgezogen. Das kostet eine Rückfrage — deutlich weniger als eine falsche Regel
+in einer Datei, die jeder neue Rechner liest.
+
+**Umfang:** eine Datei, 52 Zeilen hinzu, eine ersetzt. Kein Code, keine Konfiguration.
+
 ---
 
 ## 19.08.2026 — Welle 110: KI-Nutzung wird gezählt — ✅ ABGESCHLOSSEN
