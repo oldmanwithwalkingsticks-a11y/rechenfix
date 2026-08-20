@@ -6,6 +6,53 @@
 
 ---
 
+## 20.08.2026 — Welle 112: Brückentage-Position herabgestuft, Backlog neu geordnet — ✅ ABGESCHLOSSEN
+
+Die Go/No-Go-Recherche zu A1 lief am 20.08.2026 und hat **die Begründung der Position widerlegt,
+nicht die Position selbst**. Das ist der Grund, warum der Punkt herabgestuft und nicht gestrichen
+wurde — und warum das Rechercheergebnis vollständig im Backlog steht statt in einer Fußnote. Ohne
+diese Notiz stünde der Punkt in sechs Monaten wieder oben, mit derselben Begründung.
+
+**Die These, die nicht hielt.** A1 stand auf Platz eins mit der Begründung, es sei der einzige
+Punkt der ganzen Sammlung, der Backlinks erzeugt: „Brückentage 2027" werde jedes Jahr von
+Regionalpresse, Personalabteilungen und Arbeitgeberportalen verlinkt, ohne dass man darum bitten
+müsse. Die Messung trägt das nicht. Das Feld ist besetzt, teils von Seiten exakt der geplanten
+Bauform — ein Rechnerportal mit eigener Seite je Bundesland, dazu mehrere erkennbar frisch gebaute
+Ein-Thema-Seiten, Reiseaffiliates und Großmarken mit Domain Authority. Wer verlinkt, verlinkt
+Gewerkschaften, große Marken oder Studien, nicht den zwölften Brückentage-Rechner auf einer Domain
+ohne Autorität. Die ursprüngliche These war aus der Struktur des Themas abgeleitet, nicht gemessen.
+
+**Was die Recherche bestätigt hat.** Die Datenlage ist einwandfrei: `feiertage.ts` rechnet nach der
+Osterformel von Meeus in der Spencer-Variante, deckt alle 16 Bundesländer ab und legt drei
+Modellierungsvereinfachungen im Kopfkommentar offen; die Ausgabe für 2027 stimmt mit drei
+unabhängigen Quellen überein. Der Rechtsstand ist stabil, keine beschlossene Feiertagsänderung.
+Weggefallen ist allein die Reichweitenerwartung — und die war der einzige Grund für Platz eins.
+
+**Was daraus wurde.** Kein Sprint, kein Hub, keine sechzehn Bundesland-Seiten, sondern ein
+einzelner Brückentage-Rechner im normalen Takt: Der Grenzaufwand ist klein, weil die Rechenlogik
+existiert, und er rundet den Arbeitszeit-Verbund ab. Dazu ein möglicher Blogartikel mit umgekehrtem
+Vorzeichen — 2027 ist rechnerisch ein schwaches Jahr mit nur fünf bundesweiten Feiertagen von
+Montag bis Freitag, während Reiseportale gleichzeitig mit 54 bis 64 freien Tagen werben. Eine
+populäre Zahl, die niemand nachrechnet.
+
+**Umnummerierung im Abschnitt A:** Vergleichsrechner rücken auf A1, Themenwelten auf A2,
+Ergebnisvertiefung auf A3, Brückentage stehen als A4. Der Schlussabschnitt nennt jetzt **einen**
+statt zwei Punkte, die den Engpass adressieren.
+
+**Lehre, die im Backlog selbst steht:** Eine Position, die mit einem Reichweitenversprechen ganz
+oben steht, braucht die Prüfung dieses Versprechens **vor** der Einordnung, nicht danach. Hier
+stand die Rangfolge zuerst und die Recherche kam hinterher.
+
+### Welle 112a — Termin entscheidung-brueckentage entfernt
+
+Der Einmaltermin zum 01.09.2026 ist mit der Entscheidung elf Tage vor Frist erledigt und wurde aus
+`lib/termine.ts` entfernt. Ohne das hätte er ab September dauerhaft als ÜBERFÄLLIG in der
+Erinnerungsmail gestanden — ein Einmaltermin hat keine Wiederholung, aus der er herauswachsen
+könnte. `TERMINE` enthält danach 16 Einträge; `naechstesVorkommen` für `domain-checkdomain` liefert
+unverändert 2027-04-03, die Nachbarn sind unberührt.
+
+---
+
 ## 20.08.2026 — Welle 111: rechner-builder-Statusblock auf gemessenen Stand gebracht — ✅ ABGESCHLOSSEN
 
 Der Statusblock des Skills stammte vom 01.05.2026 und war in fast jeder Zahl falsch: 170 Rechner
