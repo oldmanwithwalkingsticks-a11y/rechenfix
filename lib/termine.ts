@@ -118,15 +118,6 @@ export const TERMINE: Termin[] = [
     was: 'Harter Ablauf. Ist die Rotation nicht erfolgt, fallen KI-Erklärung und KI-Rechner aus.',
   },
   {
-    id: 'entscheidung-brueckentage',
-    titel: 'Entscheidung Brückentage/Feiertage',
-    datum: '2026-09-01',
-    vorlaufTage: 7,
-    bereich: 'Inhalt',
-    was: 'Go/No-Go-Recherche starten oder das Vorhaben für 2027 absagen. Saisonaler Peak beginnt Oktober.',
-    quelle: 'docs/backlog-wartende-positionen.md, Punkt A1',
-  },
-  {
     id: 'sv-rechengroessen',
     titel: 'SV-Rechengrößenverordnung Folgejahr',
     datum: '2026-10-01',
