@@ -6,6 +6,53 @@
 
 ---
 
+## 20.08.2026 — Welle 111: rechner-builder-Statusblock auf gemessenen Stand gebracht — ✅ ABGESCHLOSSEN
+
+Der Statusblock des Skills stammte vom 01.05.2026 und war in fast jeder Zahl falsch: 170 Rechner
+statt 206, neun Kategorien statt zehn, zwölf Affiliate-Programme statt dreizehn, AdSense als „live"
+beschrieben, obwohl der Ladecode am 16.08.2026 entfernt wurde. Das wiegt schwerer als ein falscher
+Wert auf einer Webseite. Eine Seite liest, wer sie aufruft — diesen Block liest jeder neue Rechner.
+
+**Technik fehlte nicht als Zahl, sondern als Kategorie.** In der alten Aufzählung kam sie überhaupt
+nicht vor. Wer dort „Sport & Fitness 2" liest, beginnt den nächsten Sport-Rechner auf falscher
+Grundlage — tatsächlich sind es 15. Deshalb wurden die zehn Namen einzeln gegen
+`lib/rechner-config/` gehalten und nicht bloß gezählt.
+
+**Gemessen, nicht geschätzt.** Jeder Wert stammt aus dem Repo an HEAD `76f5552`: 206 Rechner
+(Alltag 24, Finanzen 45, Gesundheit 17, Auto 15, Wohnen 25, Mathe 18, Arbeit 17, Kochen 15,
+Sport 15, Technik 15), 16 Blogartikel, 73 Grafik-Komponenten, 14 Prebuild-Glieder, 13
+Affiliate-Programme, 55 `<AffiliateBox>`-Aufrufe in 52 Dateien. Zählfalle bei den Grafiken:
+`components/blog` enthält 83 `.tsx` — zehn davon Infrastruktur direkt im Ordner, 73 in `grafik/`.
+Nur die 73 sind gemeint.
+
+**Der Wellenverlauf ist ersatzlos entfallen.** April bis Mai 2026 stand vollständig im Skill und
+steht ebenso vollständig in dieser Datei hier. Im Skill blähte er den Kontext beim Bauen auf, ohne
+beim Bauen zu helfen — und veraltete mit jeder Welle erneut.
+
+**Neu ist ein Pflegehinweis.** Der Block war dreieinhalb Monate falsch, ohne dass es auffiel. Die
+neue Zeile kennzeichnet ihn als Momentaufnahme statt als SSOT und nennt bewusst das alte Datum:
+ohne es stünde dort nur eine Ermahnung, mit ihm steht dort, wie lange niemand hingesehen hat.
+
+**Datierte Historienzeilen blieben unangetastet** — „CosmosDirekt als 12. Programm", „170 = Alltag
+23". Sie sind Aussagen über den damaligen Stand und als solche richtig, genau wie „die damals
+bestehenden 9 Kategorien" auf der Qualitätsseite.
+
+**Zwei Abbrüche vor dem ersten Commit.** Erstens wich HEAD vom erwarteten Anker ab: fünf Commits
+lagen dazwischen, darunter ein `find-skills`-Commit aus derselben Sitzung. Statt weiterzuarbeiten
+wurde belegt, dass keine messrelevante Datei dazwischenliegt — der Anker wurde daraufhin auf
+`76f5552` gezogen, auch im Statusblock selbst, damit dort der Commit steht, an dem tatsächlich
+gemessen wurde. Zweitens widersprachen sich Schritt 5 und Prüfvorschrift 2 der Vorlage: Der
+einzufügende Pflegehinweis endet auf „seit 01.05.2026", die Prüfung verlangte null Vorkommen genau
+dieses Datums. Nicht erfüllbar, also gemeldet statt stillschweigend aufgelöst; die Prüfung lautet
+jetzt „1, und zwar ausschließlich in der Pflegezeile". Beide Male galt: Vorlagenfehler werden
+gefunden und berichtet, nicht selbst repariert.
+
+**Umfang:** eine Datei, fünf Zeilen hinzu, drei ersetzt. Kein Code, keine Konfiguration — die Datei
+wird zur Laufzeit von niemandem gelesen. `npm run build` lief trotzdem durch, als Beleg dafür, dass
+nichts anderes angefasst wurde.
+
+---
+
 ## 19.08.2026 — Welle 110: KI-Nutzung wird gezählt — ✅ ABGESCHLOSSEN
 
 Die Nutzungsstatistik zählte Affiliate-Klicks, Feedback und PDF-Downloads. Ausgerechnet die
