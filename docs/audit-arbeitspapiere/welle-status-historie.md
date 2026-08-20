@@ -6,6 +6,35 @@
 
 ---
 
+## 20.08.2026 — Welle 113: Monatliche Prüfung der AWIN-Programme — ✅ ABGESCHLOSSEN
+
+**Ein Anstoß tritt an die Stelle einer Frist.** Die dreizehn AWIN-Partnerprogramme in
+`components/AffiliateBox.tsx` haben keine im Repo hinterlegte Laufzeit. Läuft eines aus oder wird
+es vom Merchant beendet, fällt das niemandem auf, bis ein Werbemittel ins Leere zeigt. Ein
+Ablaufdatum lässt sich nicht erfassen, weil es keines gibt — jeder Versuch, eine Frist zu setzen,
+hätte ein erfundenes Datum gebraucht.
+
+Deshalb ein **monatlicher Termin** statt eines Fristtermins: zwei Tage Vorlauf, Bereich Betrieb,
+Prüfgegenstand ist der Blick ins AWIN-Konto, welche Programme noch aktiv sind. Der Termin erzeugt
+keine Sicherheit über Laufzeiten, er erzeugt einen regelmäßigen Blick auf etwas, das sonst still
+veraltet. Das ist der ehrlichere Zuschnitt.
+
+**Verhalten belegt, nicht angenommen.** Der Eintrag rollt nach dem Stichtag weiter statt überfällig
+zu werden (01.09. → 01.10.) und tut das auch über den Jahreswechsel (15.03.2027 → 01.04.2027). Das
+Erinnerungsfenster öffnet am 30.08., gerechnet aus `datum` minus `vorlaufTage` — am 29.08. ist der
+Termin nicht fällig, am 30.08. und am 01.09. ist er es. `TERMINE` enthält danach 17 Einträge; die
+Nachbarn `vercel-kostenkontrolle`, `domain-checkdomain` und `postpeer-loeschbestaetigung` liefern
+unveränderte Vorkommen.
+
+**Vorlagenfehler, gemeldet statt repariert:** Die Prüfvorschrift zählte `grep -ci "awin-programme"`
+und erwartete 1. Tatsächlich sind es 2, weil der Titel „AWIN-Programme auf Aktivität prüfen"
+denselben Wortlaut trägt wie die Kennung und sich nur in der Schreibweise unterscheidet. Die
+Vorschrift wurde auf groß-/kleinschreibungsgenau umgestellt — dann prüft sie die Kennung statt das
+Wort. Vor der Änderung enthielt die Datei kein einziges „awin", der zweite Treffer stammte also
+vollständig aus dem neuen Eintrag.
+
+---
+
 ## 20.08.2026 — Welle 112: Brückentage-Position herabgestuft, Backlog neu geordnet — ✅ ABGESCHLOSSEN
 
 Die Go/No-Go-Recherche zu A1 lief am 20.08.2026 und hat **die Begründung der Position widerlegt,
