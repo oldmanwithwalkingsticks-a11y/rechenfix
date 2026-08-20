@@ -90,6 +90,16 @@ export const TERMINE: Termin[] = [
     was: 'Abrechnung läuft automatisch am 30. jedes Monats. Vierteljährlich statt monatlich erinnert, weil die Abbuchung selbst keine Handlung erfordert — geprüft werden Verbrauch, Rechnungshöhe und ob der Tarif noch passt.',
   },
   {
+    id: 'awin-programme',
+    titel: 'AWIN-Programme auf Aktivität prüfen',
+    datum: '2026-09-01',
+    vorlaufTage: 2,
+    wiederholungMonate: 1,
+    bereich: 'Betrieb',
+    was: 'Im AWIN-Konto (Publisher-ID 2843240) nachsehen, welche der 13 Programme noch aktiv sind. Beendete oder ausgelaufene Programme aus components/AffiliateBox.tsx entfernen, sonst zeigen Werbemittel ins Leere. Bewusst monatlich statt fristgebunden: Die Programme haben keine im Repo hinterlegte Laufzeit, ein Ablaufdatum gibt es nicht.',
+    quelle: 'components/AffiliateBox.tsx, Konstante AFFILIATE_PROGRAMS',
+  },
+  {
     id: 'bundle-social-kontingent',
     titel: 'bundle.social Kontingent prüfen',
     datum: '2026-09-06',
