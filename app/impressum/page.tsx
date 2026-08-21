@@ -26,7 +26,7 @@ export default function ImpressumSeite() {
         <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
           Impressum
         </h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: 16. August 2026</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: 22. August 2026</p>
 
         <div className="space-y-8 text-gray-700 dark:text-gray-300">
           {/* Anbieter */}
@@ -66,6 +66,16 @@ export default function ImpressumSeite() {
               Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:{' '}
               <span className="font-semibold whitespace-nowrap">DE293513316</span>
             </p>
+          </section>
+
+          {/* Verantwortlich nach § 18 Abs. 2 MStV */}
+          <section>
+            <h2 className="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">
+              Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
+            </h2>
+            <p>Karsten Kautz</p>
+            <p>Dülkener Straße 35</p>
+            <p>47804 Krefeld</p>
           </section>
 
           {/* Streitbeilegung */}
