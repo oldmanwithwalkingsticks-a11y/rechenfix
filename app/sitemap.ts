@@ -43,7 +43,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly',
       priority: 0.6,
     },
-    // /ki-rechner bewusst nicht in Sitemap (W15A.4: noindex + nav-hide)
+    // /ki-rechner bewusst nicht in Sitemap (W15A.4: nav-hide). ACHTUNG: Die
+    // Begruendung "noindex" stimmt seit 22.08.2026 nicht mehr — die Seite
+    // liefert robots "index, follow" und ein Canonical auf sich selbst.
+    // Ausschluss bleibt als bewusste Entscheidung stehen; welche der beiden
+    // Stellen angeglichen wird, ist offen. Siehe Kommentar bei metaPages.
   ];
 
   // Long-Tail SEO-Seiten (Brutto-Netto für spezifische Beträge)
@@ -90,7 +94,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // damit Google von uns ein aktives Indexierungs-Signal mit lastmod
   // erhält — vorher rein über Footer-Crawl erreichbar.
   // Bewusst NICHT in Sitemap:
-  //   - /ki-rechner (noindex seit W15A.4)
+  //   - /ki-rechner (nav-hide seit W15A.4; das fruehere "noindex" gilt nicht
+  //     mehr: app/ki-rechner/page.tsx setzt robots index/follow + Canonical.
+  //     Geprueft 22.08.2026 gegen die Live-Auslieferung. Entweder dort auf
+  //     index:false stellen oder die Route hier aufnehmen — offene Frage,
+  //     deshalb hier unveraendert ausgeschlossen.)
   //   - /admin/affiliate-stats (intern)
   //   - /aktualisierungen (steht bereits in staticPages)
   const metaPages: MetadataRoute.Sitemap = [
@@ -141,6 +149,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: gitMtime('app/nutzungsbedingungen/page.tsx'),
       changeFrequency: 'yearly',
       priority: 0.2,
+    },
+    {
+      url: `${SITE_URL}/offline-nutzung`,
+      lastModified: gitMtime('app/offline-nutzung/page.tsx'),
+      changeFrequency: 'yearly',
+      priority: 0.3,
     },
   ];
 
