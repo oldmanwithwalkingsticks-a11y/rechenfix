@@ -49,6 +49,7 @@ export default function DatenschutzSeite() {
               <li>Kontaktaufnahme per E-Mail</li>
               <li>Optionale Offline-Nutzung über lokal gespeicherte Websitebestandteile</li>
               <li>Optionaler Rechenverlauf, der ausschließlich im Browser des Nutzers verbleibt</li>
+              <li>Begrenzung missbräuchlicher Nutzung der KI-Funktionen durch Zählung der Anfragen je Internetanschluss</li>
             </ul>
           </Section>
 
