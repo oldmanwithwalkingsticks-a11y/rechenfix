@@ -27,7 +27,7 @@ export default function DatenschutzSeite() {
         <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
           Datenschutzerklärung
         </h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: 17. August 2026</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: 22. August 2026</p>
 
         <div className="space-y-10 text-gray-700 dark:text-gray-300 text-[15px] leading-relaxed">
 
