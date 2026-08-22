@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createHash } from 'node:crypto';
+import { createHmac } from 'node:crypto';
 
 // In-Memory Rate Limiting (pro IP, max 10/min)
 const rateLimit = new Map<string, { count: number; reset: number }>();
@@ -122,12 +122,23 @@ export async function POST(request: NextRequest) {
   }
 
   // Rate Limiting
-  // IP nur gehasht als Rate-Limit-Schlüssel verwenden: Das Limit funktioniert
-  // identisch, im Speicher liegt danach aber kein personenbezogenes Datum mehr.
+  // Schluessel: HMAC-SHA256 ueber die IP mit Geheimnis aus RATELIMIT_SALT.
+  // Das ist Pseudonymisierung, keine Anonymisierung: Der Personenbezug bleibt
+  // nach Art. 4 Nr. 5 DSGVO bestehen, weil wir das Geheimnis halten.
+  // Rechtsgrundlage Art. 6 Abs. 1 lit. f DSGVO; der Eintrag lebt hier nur im
+  // Prozessspeicher bis zum Ende des Minutenfensters.
+  // Ohne Salt waere der Hash wirkungslos — der IPv4-Raum ist durchrechenbar.
+  const salt = process.env.RATELIMIT_SALT;
+  if (!salt) {
+    return NextResponse.json(
+      { error: 'Ratenbegrenzung nicht konfiguriert' },
+      { status: 503 },
+    );
+  }
   const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
     || request.headers.get('x-real-ip')
     || 'unknown';
-  const ipHash = createHash('sha256').update(ip).digest('hex').slice(0, 32);
+  const ipHash = createHmac('sha256', salt).update(ip).digest('hex').slice(0, 32);
 
   if (!checkRateLimit(ipHash)) {
     return NextResponse.json(

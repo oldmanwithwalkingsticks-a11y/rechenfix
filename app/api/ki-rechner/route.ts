@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createHash } from 'node:crypto';
+import { createHmac } from 'node:crypto';
 import { redis } from '@/lib/redis';
 import { KI_TOOLS, dispatchTool } from '@/lib/ki-rechner/tools';
 
@@ -26,10 +26,20 @@ interface AnthropicBlock {
 
 export async function POST(req: Request) {
   // 1. Rate-Limit: max 20 Anfragen/Stunde pro IP
-  // IP nur gehasht speichern: Das Rate-Limit funktioniert identisch, im Redis
-  // liegt danach aber kein personenbezogenes Datum mehr.
+  // Schluessel: HMAC-SHA256 ueber die IP mit Geheimnis aus RATELIMIT_SALT.
+  // Das ist Pseudonymisierung, keine Anonymisierung: Der Personenbezug bleibt
+  // nach Art. 4 Nr. 5 DSGVO bestehen, weil wir das Geheimnis halten.
+  // Rechtsgrundlage Art. 6 Abs. 1 lit. f DSGVO, TTL eine Stunde.
+  // Ohne Salt waere der Hash wirkungslos — der IPv4-Raum ist durchrechenbar.
+  const salt = process.env.RATELIMIT_SALT;
+  if (!salt) {
+    return NextResponse.json(
+      { error: 'Ratenbegrenzung nicht konfiguriert.' },
+      { status: 500 },
+    );
+  }
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0] ?? 'unknown';
-  const ipHash = createHash('sha256').update(ip).digest('hex').slice(0, 32);
+  const ipHash = createHmac('sha256', salt).update(ip).digest('hex').slice(0, 32);
   const key = `rechenfix:kirl:${ipHash}`;
   const n = await redis.incr(key);
   if (n === 1) await redis.expire(key, 3600);
