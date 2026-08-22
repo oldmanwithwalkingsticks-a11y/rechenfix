@@ -45,12 +45,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     // /ki-rechner: index+follow, sitewide verlinkt — gehoert in die Sitemap
     // (22.08.2026). Der fruehere Ausschluss berief sich auf noindex + nav-hide;
-    // beides trifft nicht mehr zu. Niveau wie /ki-transparenz.
+    // beides trifft nicht mehr zu. Niveau der uebrigen Rechner, nicht der
+    // Rechtstexte: interaktive Seite mit 36 internen Links.
     {
       url: `${SITE_URL}/ki-rechner`,
       lastModified: gitMtime('app/ki-rechner/page.tsx'),
-      changeFrequency: 'yearly',
-      priority: 0.3,
+      changeFrequency: 'monthly',
+      priority: 0.8,
     },
   ];
 
