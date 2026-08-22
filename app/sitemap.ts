@@ -43,11 +43,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly',
       priority: 0.6,
     },
-    // /ki-rechner bewusst nicht in Sitemap (W15A.4: nav-hide). ACHTUNG: Die
-    // Begruendung "noindex" stimmt seit 22.08.2026 nicht mehr — die Seite
-    // liefert robots "index, follow" und ein Canonical auf sich selbst.
-    // Ausschluss bleibt als bewusste Entscheidung stehen; welche der beiden
-    // Stellen angeglichen wird, ist offen. Siehe Kommentar bei metaPages.
+    // /ki-rechner: index+follow, sitewide verlinkt — gehoert in die Sitemap
+    // (22.08.2026). Der fruehere Ausschluss berief sich auf noindex + nav-hide;
+    // beides trifft nicht mehr zu. Niveau wie /ki-transparenz.
+    {
+      url: `${SITE_URL}/ki-rechner`,
+      lastModified: gitMtime('app/ki-rechner/page.tsx'),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
   ];
 
   // Long-Tail SEO-Seiten (Brutto-Netto für spezifische Beträge)
@@ -94,11 +98,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // damit Google von uns ein aktives Indexierungs-Signal mit lastmod
   // erhält — vorher rein über Footer-Crawl erreichbar.
   // Bewusst NICHT in Sitemap:
-  //   - /ki-rechner (nav-hide seit W15A.4; das fruehere "noindex" gilt nicht
-  //     mehr: app/ki-rechner/page.tsx setzt robots index/follow + Canonical.
-  //     Geprueft 22.08.2026 gegen die Live-Auslieferung. Entweder dort auf
-  //     index:false stellen oder die Route hier aufnehmen — offene Frage,
-  //     deshalb hier unveraendert ausgeschlossen.)
   //   - /admin/affiliate-stats (intern)
   //   - /aktualisierungen (steht bereits in staticPages)
   const metaPages: MetadataRoute.Sitemap = [
