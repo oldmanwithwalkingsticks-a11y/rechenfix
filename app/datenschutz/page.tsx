@@ -345,9 +345,18 @@ export default function DatenschutzSeite() {
               Auslösen der Funktion entscheiden Sie selbst über deren Nutzung.
             </p>
             <p className="mt-3">
-              <strong>Ihre Eingaben werden von uns nicht gespeichert.</strong> Um Missbrauch zu begrenzen,
-              halten wir lediglich einen Zähler der Anfragen je Gerät für die Dauer einer Stunde vor; er
-              wird danach automatisch gelöscht. Der Inhalt Ihrer Frage wird dabei nicht erfasst.
+              <strong>Ihre Eingaben werden von uns nicht gespeichert.</strong> Um Missbrauch zu begrenzen, zählen wir die
+              Anfragen je Internetanschluss. Dazu bilden wir aus der IP-Adresse Ihrer Anfrage mit einem
+              geheimen Schlüssel einen Prüfwert, der sich ohne diesen Schlüssel nicht auf die IP-Adresse
+              zurückführen lässt; die IP-Adresse selbst speichern wir nicht. Beim KI-Rechner wird dieser
+              Zählerstand höchstens eine Stunde vorgehalten und danach automatisch gelöscht; bei den
+              KI-Erklärungen besteht er nur für die Dauer einer Minute im Arbeitsspeicher unseres Servers.
+              Der Inhalt Ihrer Frage wird dabei nicht erfasst. Auf Ihrem Endgerät wird für diese Zählung
+              nichts gespeichert und nichts ausgelesen. Da mehrere Geräte hinter demselben Anschluss
+              dieselbe IP-Adresse verwenden können, teilen sie sich dieses Kontingent; wechselt Ihre
+              IP-Adresse, etwa im Mobilfunk, beginnt die Zählung von vorn. Rechtsgrundlage ist unser
+              berechtigtes Interesse an der Abwehr missbräuchlicher Nutzung und am zuverlässigen Betrieb
+              unseres kostenlosen Angebots (Art. 6 Abs. 1 lit. f DSGVO).
             </p>
             <p className="mt-3">
               <strong>Bitte geben Sie in die KI-Funktionen keine personenbezogenen Daten ein</strong> — weder
