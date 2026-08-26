@@ -1,5 +1,5 @@
 import BruttoNettoLongTail from '@/components/seo/BruttoNettoLongTail';
-import { berechneBruttoNetto } from '@/lib/berechnungen/brutto-netto';
+import { berechneBruttoNetto, fmtAbzugsquote } from '@/lib/berechnungen/brutto-netto';
 import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from '@/lib/berechnungen/sv-parameter';
 import type { Metadata } from 'next';
 
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 const faq = [
   {
     frage: '5.000 Euro brutto — wie viel netto in Steuerklasse 1?',
-    antwort: `Bei 5.000 € brutto bleiben in Steuerklasse 1 ca. ${fmt(n(1).nettoMonat)} € netto. Abzugsquote rund ${n(1).abzuegeProzent} %. Der Grenzsteuersatz nähert sich hier 42 %. Bei der Krankenversicherung wird die Beitragsbemessungsgrenze 2026 (5.812,50 €/Monat) noch nicht erreicht — höhere Gehälter zahlen proportional weniger KV-Beitrag.`,
+    antwort: `Bei 5.000 € brutto bleiben in Steuerklasse 1 ca. ${fmt(n(1).nettoMonat)} € netto. Abzugsquote rund ${fmtAbzugsquote(n(1).abzuegeProzent)} %. Der Grenzsteuersatz nähert sich hier 42 %. Bei der Krankenversicherung wird die Beitragsbemessungsgrenze 2026 (5.812,50 €/Monat) noch nicht erreicht — höhere Gehälter zahlen proportional weniger KV-Beitrag.`,
   },
   {
     frage: 'Welche Berufe verdienen typischerweise 5.000 Euro brutto?',

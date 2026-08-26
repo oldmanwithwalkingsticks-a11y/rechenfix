@@ -264,3 +264,19 @@ export function berechneBruttoNetto(eingabe: BruttoNettoEingabe): BruttoNettoErg
     weihnachtsgeld: weihnachtsgeldErgebnis,
   };
 }
+
+/**
+ * Abzugsquote deutsch ausgeben. Der Wert kommt bereits auf eine Nachkommastelle
+ * gerundet aus berechneBruttoNetto(); hier wird ausschliesslich das
+ * Dezimaltrennzeichen gesetzt.
+ *
+ * Bewusst NICHT "fmtProzent" genannt: dieser Name existiert repo-weit siebenmal
+ * als dateiprivate const, teils mit zwei Nachkommastellen. Ein exportierter
+ * gleichnamiger Helfer wuerde beim Import still das dortige Verhalten aendern.
+ *
+ * NICHT fuer CSS-Angaben verwenden — dort wird die rohe Zahl mit Punkt gebraucht
+ * (siehe BruttoNettoRechner.tsx:570).
+ */
+export function fmtAbzugsquote(v: number): string {
+  return v.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+}

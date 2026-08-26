@@ -1,5 +1,5 @@
 import BruttoNettoLongTail from '@/components/seo/BruttoNettoLongTail';
-import { berechneBruttoNetto } from '@/lib/berechnungen/brutto-netto';
+import { berechneBruttoNetto, fmtAbzugsquote } from '@/lib/berechnungen/brutto-netto';
 import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from '@/lib/berechnungen/sv-parameter';
 import type { Metadata } from 'next';
 
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 const faq = [
   {
     frage: '3.500 Euro brutto — wie viel netto in Steuerklasse 1?',
-    antwort: `Bei 3.500 € brutto bleiben in Steuerklasse 1 ca. ${fmt(n(1).nettoMonat)} € netto. Abzugsquote rund ${n(1).abzuegeProzent} %. Der progressive Tarif greift sichtbar — gegenüber 3.000 € sind es bei +500 € Brutto netto nur ca. +280 € (Grenzsteuersatz ~44 % inkl. Sozialabgaben).`,
+    antwort: `Bei 3.500 € brutto bleiben in Steuerklasse 1 ca. ${fmt(n(1).nettoMonat)} € netto. Abzugsquote rund ${fmtAbzugsquote(n(1).abzuegeProzent)} %. Der progressive Tarif greift sichtbar — gegenüber 3.000 € sind es bei +500 € Brutto netto nur ca. +280 € (Grenzsteuersatz ~44 % inkl. Sozialabgaben).`,
   },
   {
     frage: 'Welche Berufe verdienen typischerweise 3.500 Euro brutto?',

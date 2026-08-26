@@ -1,5 +1,5 @@
 import BruttoNettoLongTail from '@/components/seo/BruttoNettoLongTail';
-import { berechneBruttoNetto } from '@/lib/berechnungen/brutto-netto';
+import { berechneBruttoNetto, fmtAbzugsquote } from '@/lib/berechnungen/brutto-netto';
 import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from '@/lib/berechnungen/sv-parameter';
 import type { Metadata } from 'next';
 
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 const faq = [
   {
     frage: '3.000 Euro brutto — wie viel netto in Steuerklasse 1?',
-    antwort: `Bei 3.000 € brutto bleiben in Steuerklasse 1 (ledig, kinderlos, GKV, NRW, ohne Kirchensteuer) ca. ${fmt(n(1).nettoMonat)} € netto übrig. Das entspricht einer Abzugsquote von rund ${n(1).abzuegeProzent} %. Mit Kirchensteuer reduziert sich das Netto je nach Bundesland um weitere 8 % (BW/BY) bzw. 9 % der Lohnsteuer.`,
+    antwort: `Bei 3.000 € brutto bleiben in Steuerklasse 1 (ledig, kinderlos, GKV, NRW, ohne Kirchensteuer) ca. ${fmt(n(1).nettoMonat)} € netto übrig. Das entspricht einer Abzugsquote von rund ${fmtAbzugsquote(n(1).abzuegeProzent)} %. Mit Kirchensteuer reduziert sich das Netto je nach Bundesland um weitere 8 % (BW/BY) bzw. 9 % der Lohnsteuer.`,
   },
   {
     frage: 'Welche Berufe verdienen typischerweise 3.000 Euro brutto?',

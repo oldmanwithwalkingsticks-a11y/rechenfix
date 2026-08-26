@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { berechneBruttoNetto, BUNDESLAENDER } from '@/lib/berechnungen/brutto-netto';
+import { berechneBruttoNetto, BUNDESLAENDER, fmtAbzugsquote } from '@/lib/berechnungen/brutto-netto';
 import type { BruttoNettoErgebnis } from '@/lib/berechnungen/brutto-netto';
 import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from '@/lib/berechnungen/sv-parameter';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
@@ -280,7 +280,7 @@ export default function BruttoNettoRechner() {
       head: [['Ergebnis', 'Wert']],
       body: [
         ['Brutto pro Monat', eur(ergebnis.bruttoMonat)],
-        ['Abzüge gesamt', `- ${eur(ergebnis.gesamtAbzuege)}  (${ergebnis.abzuegeProzent}%)`],
+        ['Abzüge gesamt', `- ${eur(ergebnis.gesamtAbzuege)}  (${fmtAbzugsquote(ergebnis.abzuegeProzent)}%)`],
         [{ content: 'Netto pro Monat', styles: { fontStyle: 'bold' } }, { content: eur(ergebnis.nettoMonat), styles: { fontStyle: 'bold', textColor: [21, 128, 61] } }],
         ['Netto pro Jahr', eur(ergebnis.nettoJahr)],
         ['Brutto pro Jahr', eur(ergebnis.bruttoJahr)],
@@ -523,7 +523,7 @@ export default function BruttoNettoRechner() {
               <span>|</span>
               <span>~{fmt(ergebnis.nettoProStunde)} € / Stunde</span>
               <span>|</span>
-              <span>{ergebnis.abzuegeProzent}% Abzüge</span>
+              <span>{fmtAbzugsquote(ergebnis.abzuegeProzent)}% Abzüge</span>
             </div>
           </div>
 
@@ -568,7 +568,7 @@ export default function BruttoNettoRechner() {
           <div className="mb-6">
             <div className="flex rounded-xl overflow-hidden h-8 text-xs font-medium">
               <div className="bg-green-800 flex items-center justify-center text-white transition-all" style={{ width: `${100 - ergebnis.abzuegeProzent}%` }}>
-                {(100 - ergebnis.abzuegeProzent).toFixed(1)}% Netto
+                {fmtAbzugsquote(100 - ergebnis.abzuegeProzent)}% Netto
               </div>
               <div className="bg-red-700 flex items-center justify-center text-white transition-all" style={{ width: `${ergebnis.bruttoMonat > 0 ? (ergebnis.steuernGesamt / ergebnis.bruttoMonat * 100) : 0}%` }}>
                 Steuern

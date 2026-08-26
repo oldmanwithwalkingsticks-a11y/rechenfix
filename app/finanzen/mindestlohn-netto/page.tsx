@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { berechneBruttoNetto } from '@/lib/berechnungen/brutto-netto';
+import { berechneBruttoNetto, fmtAbzugsquote } from '@/lib/berechnungen/brutto-netto';
 import type { BruttoNettoErgebnis } from '@/lib/berechnungen/brutto-netto';
 import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from '@/lib/berechnungen/sv-parameter';
 import { MINDESTLOHN } from '@/lib/berechnungen/mindestlohn';
@@ -69,7 +69,7 @@ const faq = [
   },
   {
     frage: 'Wie viel Mindestlohn netto in Steuerklasse 1?',
-    antwort: `In Steuerklasse 1 bleiben vom Mindestlohn (${BRUTTO.toLocaleString('de-DE')} € brutto) ca. ${fmt(ergebnisse[0].ergebnis.nettoMonat)} € netto. Die Abzugsquote beträgt rund ${ergebnisse[0].ergebnis.abzuegeProzent}%.`,
+    antwort: `In Steuerklasse 1 bleiben vom Mindestlohn (${BRUTTO.toLocaleString('de-DE')} € brutto) ca. ${fmt(ergebnisse[0].ergebnis.nettoMonat)} € netto. Die Abzugsquote beträgt rund ${fmtAbzugsquote(ergebnisse[0].ergebnis.abzuegeProzent)}%.`,
   },
   {
     frage: 'Wie viel Mindestlohn netto in Steuerklasse 3?',
@@ -151,7 +151,7 @@ export default function Page() {
                       </td>
                       <td className="p-3 text-right font-bold text-primary-600 dark:text-primary-400">{fmt(e.ergebnis.nettoMonat)} €</td>
                       <td className="p-3 text-right text-red-600 dark:text-red-400">{fmt(e.ergebnis.gesamtAbzuege)} €</td>
-                      <td className="p-3 text-right text-gray-600 dark:text-gray-400">{e.ergebnis.abzuegeProzent}%</td>
+                      <td className="p-3 text-right text-gray-600 dark:text-gray-400">{fmtAbzugsquote(e.ergebnis.abzuegeProzent)}%</td>
                     </tr>
                   ))}
                 </tbody>

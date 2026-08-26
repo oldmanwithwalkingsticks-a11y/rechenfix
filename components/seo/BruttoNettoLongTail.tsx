@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
-import { berechneBruttoNetto } from '@/lib/berechnungen/brutto-netto';
+import { berechneBruttoNetto, fmtAbzugsquote } from '@/lib/berechnungen/brutto-netto';
 import type { BruttoNettoErgebnis } from '@/lib/berechnungen/brutto-netto';
 import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from '@/lib/berechnungen/sv-parameter';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
@@ -148,7 +148,7 @@ export default function BruttoNettoLongTail({
                       </td>
                       <td className="p-3 text-right font-bold text-primary-600 dark:text-primary-400">{fmt(e.ergebnis.nettoMonat)} €</td>
                       <td className="p-3 text-right text-red-600 dark:text-red-400">{fmt(e.ergebnis.gesamtAbzuege)} €</td>
-                      <td className="p-3 text-right text-gray-600 dark:text-gray-400">{e.ergebnis.abzuegeProzent}%</td>
+                      <td className="p-3 text-right text-gray-600 dark:text-gray-400">{fmtAbzugsquote(e.ergebnis.abzuegeProzent)}%</td>
                     </tr>
                   ))}
                 </tbody>
