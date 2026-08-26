@@ -8,18 +8,22 @@ const LETZTE_AKTUALISIERUNG = '2026-05-22';
 const n = (sk: 1|2|3|4|5|6) => berechneBruttoNetto({ bruttoMonat: BRUTTO, steuerklasse: sk, kirchensteuer: false, kirchensteuersatz: 9, kinderfreibetraege: 0, bundesland: 'NW', kvArt: 'gesetzlich', kvZusatzbeitrag: KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT, kvPrivatBeitrag: 0, rvBefreit: false, abrechnungszeitraum: 'monat' });
 const fmt = (v: number) => v.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
+const BRUTTO_FMT = BRUTTO.toLocaleString('de-DE');
+const TITEL = `${BRUTTO_FMT} € brutto = ${fmt(n(1).nettoMonat)} € netto (2026)`;
+const DESC = `${BRUTTO_FMT} € brutto sind ${fmt(n(1).nettoMonat)} € netto (Steuerklasse 1, ledig, GKV, NRW, ohne Kirchensteuer). Steuerklasse 3: ${fmt(n(3).nettoMonat)} €. Alle sechs Steuerklassen im Rechner.`;
+
 export const metadata: Metadata = {
-  title: '3.000 Euro brutto wie viel netto 2026?',
-  description: '3.000 € brutto in netto: alle Steuerklassen + Beispielstadt Hannover + typische Berufe + DACH-Vergleich. Stand 2026.',
+  title: TITEL,
+  description: DESC,
   keywords: '3000 euro brutto wieviel netto, 3000 brutto netto, 3000 euro brutto, gehalt 3000 brutto, hannover gehalt',
   openGraph: {
-    title: '3.000 Euro brutto wie viel netto 2026?',
-    description: '3.000 € brutto in netto: alle Steuerklassen + Beispielstadt Hannover + typische Berufe + DACH-Vergleich.',
+    title: TITEL,
+    description: DESC,
     url: 'https://www.rechenfix.de/finanzen/3000-euro-brutto-netto',
     siteName: 'Rechenfix.de', type: 'website', locale: 'de_DE',
     images: [{ url: 'https://www.rechenfix.de/opengraph-image', width: 1200, height: 630, alt: '3.000 Euro brutto netto 2026 — Rechenfix.de' }],
   },
-  twitter: { card: 'summary_large_image', title: '3.000 Euro brutto wie viel netto 2026?', description: '3.000 € brutto in netto: alle Steuerklassen + Beispielstadt Hannover + typische Berufe + DACH-Vergleich.' },
+  twitter: { card: 'summary_large_image', title: TITEL, description: DESC },
   alternates: { canonical: 'https://www.rechenfix.de/finanzen/3000-euro-brutto-netto' },
 };
 
