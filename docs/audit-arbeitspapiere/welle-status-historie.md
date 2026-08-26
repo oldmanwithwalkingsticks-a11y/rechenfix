@@ -6,6 +6,54 @@
 
 ---
 
+## 26.08.2026 — Welle 114: Nettobetrag in Title und Description der Varianten-Seiten — ✅ ABGESCHLOSSEN
+
+**865 Impressionen, null Klicks.** Die sechs Brutto-Netto-Varianten standen in der Search Console
+über drei Monate überwiegend auf Seite 1 und 2 — `/finanzen/3500-euro-brutto-netto` auf Position
+6,8, `/finanzen/2500-euro-brutto-netto` auf 8,3 — und sammelten dabei keinen einzigen Klick. Bei
+Position 7 bis 8 wären 2 bis 3 Prozent normal. Die Ursache lag nicht an der Position, sondern am
+Snippet: Wer „2500 euro brutto wieviel netto" sucht, will eine Zahl sehen, und die Description
+nannte stattdessen „Berufseinsteiger-Gehalt. Beispielstadt Leipzig (Boom-Markt Ost)". Weder Title
+noch Description enthielten den Nettobetrag.
+
+**Keine Zahl ist hartkodiert.** Drei neue Konstanten je Datei — `BRUTTO_FMT`, `TITEL`, `DESC` —
+stehen zwischen der bestehenden `fmt`-Zeile und `export const metadata` und leiten alle Beträge zur
+Build-Zeit aus `n()` ab, derselben Hilfsfunktion, aus der auch der FAQ-Block der Seite rechnet.
+Snippet und Seiteninhalt können damit nicht auseinanderlaufen, und die Werte wandern bei der
+SV-Parameter-Änderung zum 01.01.2027 von selbst mit. Gegengeprüft im gebauten HTML: Auf allen sechs
+Seiten trägt das Snippet dieselbe SK1-Zahl wie der FAQ-Block — auf der 3000er-Seite, deren FAQ
+anders formuliert ist, kommt `2.049,50` 24-mal vor und kein abweichender SK1-Wert.
+
+**Gemessene Längen, in allen sechs Dateien identisch:** `TITEL` roh 40 Zeichen, mit dem globalen
+Template `| Rechenfix.de` aus `app/layout.tsx:46` genau 55, `DESC` 156. Der Nettobetrag steht in
+beiden Feldern innerhalb der ersten 40 Zeichen und überlebt damit eine Kürzung durch Google.
+
+**Umfang: sechs Dateien, je drei Konstanten und sechs ersetzte Metadata-Felder.** Commit
+`bf54663`, 54 hinzugefügte und 30 entfernte Zeilen. Unverändert und im Diff nicht vorhanden:
+`keywords`, `alternates.canonical`, `openGraph.url`, `siteName`, `type`, `locale`, `images` samt
+`alt`-Text, `twitter.card`, `const faq`, `spezifischerContent`. Die Beispielstadt verschwindet
+ausschließlich aus den Metadaten, nicht aus dem Inhalt: in der 2500er-Datei fällt „Leipzig" von 15
+auf 12 Vorkommen, in der 3500er „Dresden" von 12 auf 9 — die je drei entfernten Nennungen stehen
+sämtlich auf `title:`- oder `description:`-Zeilen.
+
+**Ein Prüfwert der Vorlage geht nicht auf — Vorlagenfehler, gemeldet statt angepasst.**
+Verifikation 3 erwartet für `TITEL` und `DESC` je 18 Treffer beim Muster
+`(^|[^a-zA-Z0-9_])<name>(,|$)`. Gemessen: `TITEL` 18, `DESC` **12**, mit `-o` gegengezählt
+identisch. Grund ist der rechte Anker `(,|$)` in Verbindung mit dem einzeiligen `twitter`-Objekt:
+in `twitter: { card: …, title: TITEL, description: DESC },` folgt auf `TITEL` ein Komma, auf `DESC`
+dagegen ein Leerzeichen vor der schließenden Klammer. Mit rechter Wortgrenze statt Komma-Anker
+liefern beide 18. **Lehre, als Fortsetzung der Wortgrenzen-Lehre aus der Abzugsquoten-Welle: Ein
+Bezeichner-Grep braucht die Grenze auf beiden Seiten.** Ein Komma als rechter Anker ist eine
+Annahme über die Formatierung, keine Wortgrenze.
+
+**Erfolgsmessung frühestens am 20.09.2026.** Google liefert Snippets typischerweise erst nach ein
+bis drei Wochen neu aus. Kennzahl ist die Klickzahl, nicht die Durchschnittsposition — ein
+Snippet-Wechsel verschiebt die Position nicht. Bleibt die Klickrate bei null, liegt es nicht am
+Text, sondern an einer KI-Übersicht oder einem Featured Snippet über den Treffern; nächster Schritt
+wäre dann eine SERP-Sichtprüfung im Inkognito-Fenster, keine weitere Textänderung.
+
+---
+
 ## 26.08.2026 — Welle 114: Abzugsquote deutsch formatiert — ✅ ABGESCHLOSSEN
 
 **Ein deutschsprachiger Finanzrechner schrieb Prozentwerte mit Punkt.** Live standen auf den sechs
