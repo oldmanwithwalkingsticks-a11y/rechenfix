@@ -6,6 +6,42 @@
 
 ---
 
+## 26.08.2026 — Welle 114: SearchAction aus dem WebSite-Schema entfernt — ✅ ABGESCHLOSSEN
+
+**Ein Platzhalter, den Googlebot wörtlich genommen hat.** Die Search Console führte zwei URLs unter
+„Gecrawlt – zurzeit nicht indexiert": `https://www.rechenfix.de/?q=%7Bsearch_term_string%7D`
+(zuletzt gecrawlt 06.04.2026) und dieselbe Adresse ohne `www` (11.04.2026). Beide entstanden aus
+dem `potentialAction`-Block in `generateWebsiteSchema()` (`lib/seo.ts`), der eine
+Sitelinks-Suchbox deklarierte.
+
+**Zwei Gründe, jeder für sich ausreichend.** Google hat die Sitelinks-Suchbox am 21.11.2024 global
+abgeschaltet (angekündigt 21.10.2024); das Markup löst seitdem nichts mehr aus. Und die darin
+deklarierte Ziel-URL existiert auf rechenfix.de gar nicht — es gibt keine Suchseite, und
+`app/page.tsx` verarbeitet keine `searchParams`. Das Schema versprach eine Funktion, die die Seite
+nicht hat.
+
+**Umfang: acht Zeilen, eine Datei.** Commit `42f91d1`, `git diff --numstat` meldet 0 hinzugefügte
+und 8 entfernte Zeilen in `lib/seo.ts`. `generateWebsiteSchema()` gibt danach genau sechs Schlüssel
+zurück — `@context`, `@type`, `name`, `url`, `description`, `inLanguage`; das Site-Name-Signal
+bleibt unberührt. Kein Kommentar-Platzhalter im Code: die Begründung steht hier und in der
+Commit-Nachricht. `app/layout.tsx:118` ruft die Funktion unverändert auf, die Datei wurde nicht
+angefasst.
+
+**Zwei Messabweichungen gegenüber der Vorlage, gemeldet statt stillschweigend übergangen.** Erstens
+nannte die Vorlage HEAD `2e8bc4d`, tatsächlich stand `b97b1e0` — `lib/seo.ts` war zwischen beiden
+Ständen unverändert, die Ausgangsmessung galt also weiter. Zweitens liefern die repo-weiten Greps
+auf `potentialAction` und `SearchAction` vier statt einem Treffer, weil drei verwaiste
+Arbeitskopien unter `.claude/worktrees/` alte Fassungen von `lib/seo.ts` enthalten. Der Ordner
+steht in `.gitignore` (Zeile 106), ist nicht getrackt und in `git worktree list` nicht mehr
+registriert; die Prüfwerte wurden ohne ihn gemessen. **Wer diese Prüfvorschrift wiederverwendet,
+muss `.claude/worktrees` ebenso ausschließen wie `node_modules`** — sonst schlägt eine
+STOP-Bedingung an, die inhaltlich erfüllt ist.
+
+**Laufzeit-Gegenprobe steht aus.** Nach dem Vercel-Deploy auf `https://www.rechenfix.de/`:
+`search_term_string` darf nicht mehr vorkommen, `"@type":"WebSite"` genau einmal.
+
+---
+
 ## 20.08.2026 — Welle 113: Monatliche Prüfung der AWIN-Programme — ✅ ABGESCHLOSSEN
 
 **Ein Anstoß tritt an die Stelle einer Frist.** Die dreizehn AWIN-Partnerprogramme in
