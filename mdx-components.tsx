@@ -80,6 +80,9 @@ import RestgeschwindigkeitVergleich from '@/components/blog/grafik/Restgeschwind
 import VerzoegerungsTabelle from '@/components/blog/grafik/VerzoegerungsTabelle';
 import ZollpositionGrenze from '@/components/blog/grafik/ZollpositionGrenze';
 import PositionEinhundertEins from '@/components/blog/grafik/PositionEinhundertEins';
+import DreiTarifeSechsKlassen from '@/components/blog/grafik/DreiTarifeSechsKlassen';
+import EinBruttoSechsNettos from '@/components/blog/grafik/EinBruttoSechsNettos';
+import DreiFensterDreiRegeln from '@/components/blog/grafik/DreiFensterDreiRegeln';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -200,6 +203,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     VerzoegerungsTabelle,
     ZollpositionGrenze,
     PositionEinhundertEins,
+    DreiTarifeSechsKlassen,
+    EinBruttoSechsNettos,
+    DreiFensterDreiRegeln,
     ...components,
   };
 }

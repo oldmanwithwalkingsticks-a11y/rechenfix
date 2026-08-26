@@ -1,0 +1,521 @@
+import { generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import StructuredData from '@/components/seo/StructuredData';
+import { artikel } from './meta';
+
+export const metadata = {
+  title: `${artikel.titel} | Rechenfix.de`,
+  description: artikel.beschreibung,
+  alternates: { canonical: 'https://www.rechenfix.de/blog/warum-steuerklasse-3-keine-steuern-spart' },
+};
+
+<StructuredData data={generateArticleSchema({
+  url: 'https://www.rechenfix.de/blog/warum-steuerklasse-3-keine-steuern-spart',
+  headline: artikel.titel,
+  description: artikel.beschreibung,
+  datePublished: artikel.datum,
+  dateModified: artikel.datum,
+  image: '/blog/steuerklassen-titelbild.png',
+})} />
+
+<StructuredData data={generateBreadcrumbSchema([
+  { name: 'Start', url: '/' },
+  { name: 'Blog', url: '/blog' },
+  { name: artikel.titel, url: '/blog/warum-steuerklasse-3-keine-steuern-spart' },
+])} />
+
+# Steuerklasse 3 spart keine Steuern – und warum das trotzdem nicht die ganze Wahrheit ist
+
+<ArtikelDatum datum={artikel.datum} />
+
+<Bild src="/blog/steuerklassen-titelbild.png" alt="Ein aufgeschlagener Kalender auf einem Schreibtisch, daneben zwölf unterschiedlich hohe Münzstapel in einer Reihe und am Ende ein einzelner größerer Stapel" caption="Zwölf Monate, zwölf verschiedene Beträge – und am Jahresende trotzdem dieselbe Summe." width={1200} height={675} />
+
+## Der Trick, der wie eine Ersparnis aussieht
+
+In § 39b Absatz 2 des Einkommensteuergesetzes steht ein Satz, der die ganze Sache
+erklärt, und fast niemand kennt ihn. Er regelt, wie der Arbeitgeber die Lohnsteuer
+berechnet, und er unterscheidet nach Steuerklasse. In den Klassen I, II und IV wird
+die Jahreslohnsteuer nach § 32a Absatz 1 berechnet — nach dem normalen Grundtarif,
+so wie bei jedem Ledigen. In der Steuerklasse III dagegen nach § 32a Absatz 5.
+
+Absatz 5 ist das Splittingverfahren. Es ist die Vorschrift, nach der ein Ehepaar am
+Jahresende besteuert wird: gemeinsames Einkommen halbieren, darauf die Steuer
+berechnen, das Ergebnis verdoppeln.
+
+Steuerklasse III wendet dieses Verfahren also auf ein einzelnes Gehalt an. Monat für
+Monat. Der komplette Splittingvorteil eines Ehepaars wird auf einen Lohnzettel
+vorgezogen, so als gäbe es das zweite Einkommen nicht.
+
+Deshalb sieht Steuerklasse III so gut aus. Nicht weil sie Steuern spart, sondern
+weil sie einen Vorteil, der dem Paar ohnehin zusteht, unterjährig komplett auf eine
+Person bucht. Der Partner in Klasse V bezahlt diese Vorwegnahme — und am Jahresende
+wird die Rechnung neu aufgemacht.
+
+Wer das einmal verstanden hat, versteht auch, warum sich die Legende so hartnäckig
+hält. Sie beschreibt eine echte Beobachtung. Auf dem Konto liegt tatsächlich mehr.
+Nur die Ursache ist falsch.
+
+<DreiTarifeSechsKlassen />
+
+## Was eine Steuerklasse überhaupt ist
+
+§ 38b Absatz 1 Satz 1 EStG beginnt mit einem Satz, der schon alles sagt:
+
+> Für die Durchführung des Lohnsteuerabzugs werden Arbeitnehmer in Steuerklassen
+> eingereiht.
+
+Für die Durchführung des Lohnsteuerabzugs. Nicht für die Besteuerung. Nicht für die
+Ermittlung der Steuerschuld. Für den Abzug.
+
+Die Lohnsteuer ist keine eigene Steuer. Sie ist eine Erhebungsform der
+Einkommensteuer — eine Vorauszahlung, die der Arbeitgeber im Auftrag des Finanzamts
+einbehält, damit der Staat nicht ein Jahr auf sein Geld warten muss. Die Steuerklasse
+ist die Schätzformel für diese Vorauszahlung. Sie ist ein Verwaltungsinstrument, kein
+Steuertarif.
+
+Der Steuertarif steht in § 32a EStG, und er kennt keine Steuerklassen. Er kennt nur
+das zu versteuernde Einkommen.
+
+## Was am Jahresende passiert
+
+Ehegatten, die zusammen veranlagt werden — die Voraussetzungen dafür stehen in
+§§ 26 und 26b EStG —, werden nach § 32a Absatz 5 EStG besteuert:
+
+> Bei Ehegatten, die nach den §§ 26, 26b zusammen zur Einkommensteuer veranlagt
+> werden, beträgt die tarifliche Einkommensteuer [...] das Zweifache des
+> Steuerbetrags, der sich für die Hälfte ihres gemeinsam zu versteuernden
+> Einkommens nach Absatz 1 ergibt.
+
+Das gemeinsam zu versteuernde Einkommen. Die Kommentarliteratur formuliert die
+Konsequenz noch deutlicher: Für die Anwendung des Tarifs nach § 32a Abs. 5 EStG ist
+ohne Bedeutung, welcher der beiden Ehegatten das Einkommen bezogen hat. Auch wenn
+nur einer verdient hat, wird gesplittet.
+
+Damit ist die Frage beantwortet. Ein Ehepaar mit 90.000 Euro gemeinsamem zu
+versteuernden Einkommen zahlt dieselbe Jahressteuer, ob es sich unterjährig für
+III/V, für IV/IV oder für IV/IV mit Faktor entschieden hat. Die Steuerklasse taucht
+in der Formel überhaupt nicht auf.
+
+Was sich unterscheidet, ist ausschließlich, wie viel davon schon abgeführt wurde,
+als das Jahr zu Ende ging.
+
+<Video src="/blog/steuerklassen.mp4" poster="/blog/steuerklassen-video-standbild.jpg" caption="Münzen wandern von einem Stapel zum anderen. Was sich ändert, ist die Verteilung – nicht die Menge." />
+
+## Was in Steuerklasse V passiert
+
+Für die Klassen V und VI gibt § 39b Absatz 2 Satz 7 EStG eine eigene Rechenanweisung.
+Die Jahreslohnsteuer ergibt sich aus dem Zweifachen des Unterschiedsbetrags zwischen
+dem Steuerbetrag für das Eineinviertelfache und dem Steuerbetrag für das
+Dreiviertelfache des zu versteuernden Jahresbetrags nach § 32a Absatz 1. Und sie
+beträgt mindestens 14 Prozent des zu versteuernden Jahresbetrags.
+
+Man muss diese Formel nicht nachrechnen können, um zu sehen, was sie tut. Sie nimmt
+den Jahresbetrag einmal deutlich zu hoch und einmal deutlich zu niedrig an und
+bildet daraus eine Differenz — konstruiert also einen Steuersatz, der oberhalb dessen
+liegt, was derselbe Betrag in Klasse I kosten würde. Genau das ist beabsichtigt: Was
+Klasse III zu wenig einbehält, muss Klasse V zu viel einbehalten, sonst geht die
+Rechnung des Paares am Jahresende nicht auf.
+
+Die 14-Prozent-Untergrenze erklärt ein Phänomen, das viele Paare irritiert: In
+Klasse V wird auch dann spürbar Lohnsteuer einbehalten, wenn das Gehalt so klein
+ist, dass ein Lediger mit demselben Betrag gar keine Steuer zahlen würde. Der
+Grundfreibetrag ist in Klasse V nicht eingebaut — er sitzt komplett bei Klasse III.
+
+Das ist keine Ungerechtigkeit im System, sondern die logische Kehrseite der
+Vorwegnahme. Wenn der Freibetrag vollständig auf einer Seite verbucht wird, kann er
+auf der anderen nicht noch einmal auftauchen. Trotzdem erklärt es, warum sich
+Klasse V so anfühlt, als würde man bestraft. Der Zweitverdiener sieht auf seiner
+eigenen Abrechnung einen Abzug, den er ohne Trauschein nicht hätte — und der Vorteil
+daraus landet auf einem anderen Konto.
+
+Bei Paaren, die getrennte Kassen führen, ist das kein rechnerisches, sondern ein
+handfest praktisches Problem.
+
+<EinBruttoSechsNettos />
+
+## Die Quittung kommt automatisch
+
+Der Gesetzgeber weiß, dass III/V eine Lücke zwischen Vorauszahlung und tatsächlicher
+Steuer erzeugt. Deshalb hat er den Ausgleich nicht dem Zufall überlassen.
+
+§ 46 Absatz 2 Nummer 3 Buchstabe a EStG ordnet an, dass eine Veranlagung
+durchzuführen ist, wenn beide Ehegatten Arbeitslohn bezogen haben und bei einem von
+ihnen der Steuerabzug nach der Steuerklasse V oder VI vorgenommen wurde. Dasselbe
+gilt beim Faktorverfahren nach § 39f EStG.
+
+Das ist keine Möglichkeit, sondern eine Pflicht. Wer III/V wählt, **muss** eine
+Steuererklärung abgeben. Die Frist ist die reguläre — der 31. Juli des Folgejahres,
+wenn man sie selbst erstellt.
+
+Gegen diese Konstruktion ist geklagt worden. Das Finanzgericht Düsseldorf hat mit
+Urteil vom 17. März 2010 (Aktenzeichen 15 K 2978/08 E) entschieden, dass die
+Pflichtveranlagung bei der Steuerklassenkombination III/V verfassungskonform ist.
+Der Umstand, dass sich manche der Erklärungspflicht schlicht entziehen und dadurch
+faktisch Nachzahlungen vermeiden, führe nicht zu einem verfassungswidrigen
+Vollzugsdefizit.
+
+Übersetzt: Dass es Leute gibt, die nicht abgeben, ändert nichts daran, dass sie es
+müssten.
+
+Damit ist die Legende in ihrer starken Form erledigt. III/V spart keine Steuern.
+III/V verschiebt Geld ins Jahr hinein und holt es am Ende wieder ab. Wer den
+monatlichen Mehrbetrag ausgibt, statt ihn zurückzulegen, hat sich selbst einen
+Kredit gegeben, den er im nächsten Sommer zurückzahlt.
+
+## Die dritte Möglichkeit, die kaum jemand nutzt
+
+Zwischen III/V und IV/IV gibt es eine dritte Wahl, und sie steht in § 39f EStG:
+Steuerklasse IV für beide, kombiniert mit einem Faktor.
+
+Der Faktor ist kein Schätzwert und keine Pauschale. Das Gesetz schreibt vor, wie
+er entsteht: Er ist der Quotient Y geteilt durch X, vom Finanzamt mit drei
+Nachkommastellen ohne Rundung zu berechnen. Y ist dabei die voraussichtliche
+Einkommensteuer für beide Ehegatten nach dem Splittingverfahren des § 32a
+Absatz 5. X ist die Summe der voraussichtlichen Lohnsteuer, die bei Steuerklasse
+IV für jeden Ehegatten anfiele.
+
+Anders gesagt: Y ist das, was das Paar am Jahresende tatsächlich schuldet. X ist
+das, was ohne Faktor unterjährig einbehalten würde. Der Faktor ist das Verhältnis
+zwischen beiden — und weil das Splitting die Steuer senkt, ist er kleiner als
+eins. Das Gesetz sagt das ausdrücklich: Das Finanzamt bildet den Faktor nur dann,
+wenn er kleiner als 1 ist.
+
+Damit macht das Verfahren genau das, was III/V nicht macht. Es zieht den
+Splittingvorteil nicht auf ein Gehalt vor, sondern verteilt ihn anteilig auf
+beide — im Verhältnis der jeweiligen Lohnsteuer. Beide Partner sehen einen
+Abschlag auf ihrer eigenen Abrechnung, keiner trägt die Gegenrechnung des
+anderen.
+
+Der Preis dafür ist Bürokratie. Der Faktor muss beantragt werden, er gilt für
+das laufende und das folgende Kalenderjahr, danach neu. Und die Pflicht zur
+Steuererklärung bleibt: § 46 Absatz 2 Nummer 3 Buchstabe a EStG erfasst das
+Faktorverfahren genauso wie III/V.
+
+<RechnerLoader slug="steuerklassen-vergleich-rechner" />
+
+## Und trotzdem ist die Klassenwahl nicht egal
+
+Hier wird es interessant. Denn wenn die Steuerklasse für die Steuer folgenlos ist,
+warum regt sich dann jedes Jahr jemand darüber auf?
+
+Weil sie außerhalb des Steuerrechts sehr wohl Folgen hat.
+
+Eine ganze Reihe staatlicher Leistungen bemisst sich nicht am Brutto, sondern am
+Netto — und das Netto hängt an der Steuerklasse. Elterngeld, Arbeitslosengeld,
+Krankengeld, Kurzarbeitergeld, Mutterschaftsgeld. Wer im richtigen Moment in der
+richtigen Klasse steht, bekommt über Monate spürbar mehr.
+
+Das ist der Kern der Sache: Die Steuerklasse spart keine Steuern, aber sie kann
+Leistungen erhöhen. Zwei völlig verschiedene Mechanismen, die in der öffentlichen
+Wahrnehmung zu einem verschmelzen.
+
+Und jetzt kommt der Teil, den fast alle Ratgeber falsch machen.
+
+## Drei Leistungen, drei völlig verschiedene Stichtage
+
+Es gibt eine Faustregel, die durchs Netz geistert: „Sieben Monate vor dem Ereignis
+die Steuerklasse wechseln.“ Diese Regel ist für genau eine Leistung richtig. Für die
+anderen beiden ist sie falsch — einmal zu vorsichtig, einmal komplett am Thema
+vorbei.
+
+### Elterngeld: die überwiegende Zahl der Monate
+
+§ 2c Absatz 3 BEEG regelt es zweistufig. Grundsätzlich zählt die Steuerklasse aus der
+Gehaltsbescheinigung für den letzten Monat des Bemessungszeitraums. Hat sich die
+Klasse innerhalb des Zeitraums geändert, gilt die abweichende Angabe — wenn sie in
+der überwiegenden Zahl der Kalendermonate des Bemessungszeitraums gegolten hat.
+
+Der Bemessungszeitraum umfasst in der Regel zwölf Monate. Daraus stammt die
+Sieben-Monats-Regel.
+
+Dass ein Wechsel überhaupt zulässig ist, hat das Bundessozialgericht früh geklärt.
+Ein Wechsel der Steuerklassen mit dem Ziel, ein höheres Elterngeld zu erzielen, ist
+zulässig (Urteil vom 25. Juni 2009, B 10 EG 3/08 R). Es ist ausdrücklich kein
+Rechtsmissbrauch, das System zu nutzen. Der Gesetzgeber hat 2013 lediglich eine
+Mindestdauer eingezogen, damit der Wechsel nicht drei Wochen vor der Geburt passiert.
+
+Und dann hat das BSG die Sieben-Monats-Regel selbst relativiert. Im Urteil vom
+28. März 2019 (B 10 EG 8/17 R) ging es um jemanden, der die Klasse mehrfach
+gewechselt hatte. Das Gericht stellte klar: Maßgeblich ist das Merkmal, das durch
+seine Geltung in der überwiegenden Zahl der Monate den Bemessungszeitraum — im
+Vergleich zu anderen Merkmalen — am stärksten geprägt hat. Es zählt also die relativ
+längste Geltung, nicht eine absolute Sieben.
+
+Und weiter: Monate ohne Einnahmen aus nichtselbständiger Tätigkeit sind von
+vornherein keine Zählmonate. Wer im Bemessungszeitraum Monate ohne Lohn hatte, für
+den kann eine Klasse schon nach sechs Monaten überwiegen.
+
+Beides zusammen heißt: Die Faustregel ist eine brauchbare Sicherheitsmarge, aber sie
+ist nicht das Gesetz. Wer sich auf sie verlässt, liegt meistens richtig. Wer sie für
+die Vorschrift hält, kann sich in beide Richtungen irren.
+
+### Arbeitslosengeld: der 1. Januar
+
+Beim ALG I gilt etwas völlig anderes. § 153 Absatz 2 SGB III:
+
+> Die Feststellung der Lohnsteuer richtet sich nach der Lohnsteuerklasse, die zu
+> Beginn des Jahres, in dem der Anspruch entstanden ist, als
+> Lohnsteuerabzugsmerkmal gebildet war.
+
+Kein Zwölf-Monats-Zeitraum. Keine überwiegende Zahl von Monaten. Ein einziger
+Stichtag: der 1. Januar des Jahres, in dem der Anspruch entsteht.
+
+Wer im März arbeitslos wird, für den zählt die Klasse, die am 1. Januar eingetragen
+war — selbst wenn er sie im Februar gewechselt hat. Und wer im Dezember gewechselt
+hat, profitiert ab dem 1. Januar sofort, ohne jede Wartezeit.
+
+Absatz 3 lässt spätere Wechsel unter Bedingungen zu und verlangt dabei
+ausdrücklich, den Faktor nach § 39f EStG zu berücksichtigen. Aber der Grundfall ist
+der Jahresbeginn.
+
+Die Sieben-Monats-Regel hat hier schlicht keine Grundlage. Sie stammt aus einem
+anderen Gesetz.
+
+### Krankengeld: die letzten vier Wochen
+
+Der dritte Fall ist noch einmal anders. § 47 Absatz 1 Satz 1 SGB V: Das Krankengeld
+beträgt 70 Prozent des Regelentgelts und darf 90 Prozent des Nettoarbeitsentgelts
+nicht übersteigen.
+
+Bemessungsgrundlage ist nach Absatz 2 das im letzten vor Beginn der
+Arbeitsunfähigkeit abgerechneten Entgeltabrechnungszeitraum, mindestens während der
+letzten abgerechneten vier Wochen erzielte Arbeitsentgelt.
+
+Vier Wochen. Kein Jahr, kein Stichtag, ein Ausschnitt.
+
+Und jetzt die Rechnung, die die meisten Darstellungen unterschlagen: Die
+90-Prozent-Netto-Grenze ist nicht die Ausnahme, sondern der Normalfall. Bei einem
+typischen Netto-Anteil von 65 bis 70 Prozent des Bruttos liegt 90 Prozent vom Netto
+unter 70 Prozent vom Brutto — und dann gilt der niedrigere Wert.
+
+Ein Beispiel: 3.000 Euro brutto, 2.100 Euro netto. 70 Prozent vom Brutto sind
+2.100 Euro. 90 Prozent vom Netto sind 1.890 Euro. Ausgezahlt werden 1.890.
+
+Damit bestimmt die Steuerklasse das Krankengeld unmittelbar, denn sie bestimmt das
+Netto, an dem der Deckel hängt. Ohne jede Mindestdauer, ohne Vorlauf.
+
+<DreiFensterDreiRegeln />
+
+## Die zweite Legende: „2030 ist Schluss“
+
+Es gibt eine zweite Behauptung über Steuerklassen, die heute in vielen Ratgebern
+steht, und sie ist jünger als die erste. Sie lautet, die Steuerklassen III und V
+würden nach aktueller Gesetzeslage zum 1. Januar 2030 abgeschafft und ins
+Faktorverfahren überführt.
+
+Das ist nicht der Fall. Und der Weg, wie diese Aussage entstanden ist, lässt sich
+Schritt für Schritt nachvollziehen.
+
+Der Koalitionsvertrag der Ampel-Regierung von 2021 enthielt die Absicht, die
+Kombination III/V in das Faktorverfahren der Steuerklasse IV zu überführen. Im Juli
+2024 wurde daraus ein Gesetzentwurf: das Steuerfortentwicklungsgesetz, damals noch
+als zweites Jahressteuergesetz 2024 eingebracht. Der Entwurf enthielt die
+Überführung, vorgesehen für 2030.
+
+Dann brach die Koalition auseinander. Im Dezember 2024 wurde das Gesetz im
+Finanzausschuss verschlankt, am 19. Dezember vom Bundestag und am 20. Dezember vom
+Bundesrat beschlossen. Verkündet wurde es am 30. Dezember 2024 im Bundesgesetzblatt,
+2024 I Nr. 449.
+
+Was drinsteht, lässt sich nachlesen: Anhebung des Grundfreibetrags, Anhebung des
+Kinderfreibetrags, Anhebung des Kindergelds, Verschiebung der Tarifeckwerte gegen
+die kalte Progression, Anhebung des Sofortzuschlags und der Freigrenzen beim
+Solidaritätszuschlag. Das ist der vollständige Inhalt.
+
+Die Überführung der Steuerklassen III und V in das Faktorverfahren gehört zu den
+Maßnahmen, die im parlamentarischen Verfahren gestrichen wurden. Sie ist nie Gesetz
+geworden.
+
+Bleibt die Frage, ob die aktuelle Regierung das Vorhaben wieder aufgenommen hat. Der
+Koalitionsvertrag zwischen CDU, CSU und SPD vom 9. April 2025 listet in seinem
+Steuerkapitel eine lange Reihe von Einzelmaßnahmen für Arbeitnehmer: Absenkung der
+Einkommensteuer für kleine und mittlere Einkommen, Beibehaltung des
+Solidaritätszuschlags, Steuerfreiheit von Überstundenzuschlägen, Aktivrente,
+Pendlerpauschale ab dem ersten Kilometer auf 38 Cent, Prüfung einer
+Arbeitstagepauschale, Frühstart-Rente, Überführung der Riester-Rente, Angleichung von
+Kinderfreibetrag und Kindergeld, Anhebung des Alleinerziehenden-Entlastungsbetrags,
+Übungsleiter- und Ehrenamtspauschale.
+
+Zu Steuerklassen: nichts. Auch nicht in der Liste der ausdrücklich nicht
+übernommenen Vorhaben. Das Thema kommt schlicht nicht vor.
+
+Der Stand ist damit: Die Steuerklassen III und V gelten unverändert. Es gibt keinen
+Gesetzentwurf, kein Datum und keine Zusage im Regierungsprogramm. Wer heute liest,
+die Abschaffung sei beschlossen, liest die Beschreibung eines Entwurfs, der vor über
+anderthalb Jahren gestrichen wurde.
+
+Das Bemerkenswerte daran ist nicht der Irrtum. Das Bemerkenswerte ist, wie schnell er
+sich verfestigt hat. Eine Legende, die üblicherweise Jahrzehnte braucht, ist hier in
+achtzehn Monaten entstanden — weil ein Gesetzentwurf breit berichtet wurde und seine
+Streichung nicht.
+
+## Der Sonderfall, den kaum ein Ratgeber behandelt
+
+Was passiert, wenn nur einer der beiden Ehepartner Arbeitnehmer ist?
+
+Selbstständige haben streng genommen keine Steuerklasse, weil sie keinen Lohn
+beziehen und es keinen Arbeitgeber gibt, der einen Lohnsteuerabzug vornimmt. Formal
+eintragen lässt sich eine Klasse trotzdem — und damit auch die Kombination III/V,
+bei der die III beim Selbstständigen liegt und die V beim angestellten Partner.
+
+Die gängige Empfehlung lautet genau umgekehrt: Der angestellte Partner solle die III
+nehmen. Die Begründung ist einleuchtend. Eine III beim Selbstständigen läuft ins
+Leere, weil sie auf kein Gehalt angewendet wird. Die V beim Angestellten dagegen
+wirkt in voller Höhe — auf das einzige Gehalt im Haushalt.
+
+Es gibt allerdings einen Effekt, der die umgekehrte Aufteilung erklärt. Selbstständige
+zahlen Einkommensteuer-Vorauszahlungen nach § 37 EStG, und das Finanzamt bemisst sie
+so, dass die bereits einbehaltene Lohnsteuer des Ehepartners angerechnet wird. Steht
+der angestellte Partner in Klasse V, wird von seinem Gehalt viel einbehalten — und
+die Vorauszahlungen des Selbstständigen fallen entsprechend niedriger aus.
+
+Aus Sicht des Selbstständigen sieht das aus wie eine Entlastung. Auf Haushaltsebene
+ist es keine. Es ist dieselbe Verschiebung wie bei jedem anderen Paar in III/V, nur
+zwischen zwei verschiedenen Zahlwegen statt zwischen zwei Gehältern: Was der eine
+weniger vorauszahlt, führt der andere über die Lohnsteuer mehr ab. Am Jahresende
+steht dieselbe Summe.
+
+Der Unterschied liegt woanders — und er ist real. Die Klasse V senkt nicht nur das
+monatliche Netto des angestellten Partners, sie senkt auch die Bemessungsgrundlage
+für dessen Lohnersatzleistungen. Und die sind, anders als die Steuer, keine
+Verschiebung. Was dort weniger ausgezahlt wird, kommt nicht zurück.
+
+## Was daraus folgt
+
+Für die Praxis bleiben drei Sätze.
+
+**Erstens:** Für die Höhe der Jahressteuer ist die Steuerklassenwahl folgenlos. Wer
+III/V wählt, um Steuern zu sparen, hat sich die Regel falsch gemerkt. Der einzige
+Effekt ist die Verteilung über das Jahr — und die Pflicht, am Ende abzurechnen.
+
+**Zweitens:** Für Lohnersatzleistungen ist die Wahl sehr wohl relevant, und zwar mit
+drei verschiedenen Fristenlogiken. Wer plant, muss wissen, welche Leistung ansteht:
+Elterngeld verlangt Vorlauf über den größeren Teil eines Jahres, ALG I hängt am
+1. Januar, Krankengeld an den letzten Wochen.
+
+Und daraus folgt etwas, das in den Fristen selbst versteckt liegt. Elterngeld lässt
+sich planen — man weiß Monate vorher Bescheid, und das Gesetz verlangt genau diesen
+Vorlauf. Arbeitslosengeld lässt sich oft teilweise planen, und der Stichtag ist ein
+Datum im Kalender. Krankengeld lässt sich überhaupt nicht planen — und ausgerechnet
+dort ist das Fenster am kürzesten.
+
+Beim Krankengeld entscheidet deshalb nicht die Klasse, die man für diesen Fall
+gewählt hat, sondern die, in der man ohnehin gerade steht. Es gibt keinen Moment, in
+dem man vorher reagieren könnte, weil man den Anlass nicht kommen sieht. Wer über
+Jahre in Klasse V steht, hat diese Entscheidung längst getroffen, ohne sie je als
+Entscheidung wahrgenommen zu haben.
+
+**Drittens:** Wer III/V behält und den monatlichen Mehrbetrag nicht zurücklegt,
+finanziert die Nachzahlung aus dem laufenden Haushalt. Die Alternative heißt IV/IV
+mit Faktor. Sie führt ebenfalls zur Pflichtveranlagung, verteilt die Last aber schon
+unterjährig annähernd richtig.
+
+Was keine dieser drei Aussagen ist: eine Empfehlung für den Einzelfall. Ob sich ein
+Wechsel lohnt, hängt am Einkommensverhältnis, an anstehenden Lebensereignissen und
+daran, ob das Paar gemeinsam oder getrennt wirtschaftet. Der Rechner oben zeigt die
+Zahlen. Die Entscheidung bleibt eine Abwägung.
+
+<KarstenSagt>
+Ich schreibe das nicht als Unbeteiligter. Meine Frau und ich haben 3/5, seit fast
+27 Jahren, seit der Hochzeit. Ich habe die 3, sie die 5 — und das ist eine
+Konstellation, die in kaum einem Ratgeber vorkommt, denn ich bin gewerblich
+selbstständig. Für mich ist die Steuerklasse also weitgehend Papier. Es gibt keinen
+Arbeitgeber, der sie anwendet. Angewendet wird nur ihre.
+
+In fast drei Jahrzehnten gab es Jahre mit Nachzahlung und Jahre mit Erstattung.
+Einmal hat es mich böse erwischt: Die Umsätze waren gestiegen, die Vorauszahlungen
+liefen unverändert weiter, niemand hat sie angepasst — und nach der Steuererklärung
+kam die dicke Rechnung. Das hatte nichts mit der Steuerklasse zu tun, sondern damit,
+dass Vorauszahlungen der Vergangenheit hinterherlaufen. Aber es ist dieselbe
+Mechanik: Was unterjährig nicht bezahlt wird, wird am Ende fällig.
+
+Der Nachteil der Kombination liegt bei meiner Frau. In Klasse 5 bleibt ihr deutlich
+weniger netto im Monat. Wir lösen das intern — ich übernehme den größeren Teil der
+laufenden Kosten, sie steuert nur wenig bei. Das funktioniert, weil wir gemeinsam
+wirtschaften. Bei Paaren mit getrennten Kassen wäre dieselbe Kombination ein
+ständiger Streitpunkt.
+
+Meine Frau hat einmal Krankengeld bezogen. An einen Nachteil haben wir dabei nie
+gedacht. Dass ihre Steuerklasse die Höhe dieser Leistung mitbestimmt hat, ist mir
+erst beim Schreiben dieses Artikels aufgegangen — nach 27 Jahren in derselben
+Kombination. Es ist auch nichts, worauf man von selbst kommt. Eine Krankheit kündigt
+sich nicht an, und in dem Moment, in dem sie da ist, ist die Entscheidung längst
+gefallen.
+
+Und die Sache mit der Abschaffung: Die habe ich mitbekommen, als sie diskutiert
+wurde. Danach kam nichts mehr. Für mich war das Thema damit vom Tisch. Das war
+zufällig richtig — aber aus dem falschen Grund. Ich hatte nicht gelesen, dass die
+Regelung gestrichen wurde. Ich hatte nur aufgehört, davon zu hören.
+</KarstenSagt>
+
+<Quellen eintraege={[
+  {
+    titel: '§ 32a EStG — Einkommensteuertarif, Absatz 5 Splittingverfahren',
+    url: 'https://www.gesetze-im-internet.de/estg/__32a.html',
+    hinweis: 'Der Tarif kennt keine Steuerklassen, nur das zu versteuernde Einkommen. Absatz 5 ist die Vorschrift, auf die § 39b Abs. 2 Satz 6 für die Klasse III verweist.',
+  },
+  {
+    titel: '§ 38b EStG — Lohnsteuerklassen',
+    url: 'https://www.gesetze-im-internet.de/estg/__38b.html',
+    hinweis: 'Absatz 1 Satz 1 belegt den Kernsatz des Artikels: Die Einreihung erfolgt für die Durchführung des Lohnsteuerabzugs — nicht für die Besteuerung.',
+  },
+  {
+    titel: '§ 39b EStG — Einbehaltung der Lohnsteuer',
+    url: 'https://www.gesetze-im-internet.de/estg/__39b.html',
+    hinweis: 'Absatz 2 Satz 6 ordnet für Klasse III das Splittingverfahren an, Satz 7 die Sonderformel für die Klassen V und VI samt der Untergrenze von 14 Prozent. Die Euro-Schwellen aus Satz 7 stehen bewusst nicht im Artikel: Sie wandern mit den Tarifeckwerten.',
+  },
+  {
+    titel: '§ 39f EStG — Faktorverfahren anstelle der Kombination III/V',
+    url: 'https://www.gesetze-im-internet.de/estg/__39f.html',
+    hinweis: 'Die dritte Möglichkeit, der ein eigener Abschnitt gewidmet ist: Beide Ehegatten stehen in Klasse IV, ein Faktor verteilt den Splittingvorteil schon unterjährig nach dem Verhältnis der Gehälter. Auch dieser Weg führt zur Pflichtveranlagung.',
+  },
+  {
+    titel: '§ 46 EStG — Veranlagung bei Bezug von Einkünften aus nichtselbständiger Arbeit',
+    url: 'https://www.gesetze-im-internet.de/estg/__46.html',
+    hinweis: 'Absatz 2 Nummer 3 Buchstabe a macht die Steuererklärung bei III/V zur Pflicht, nicht zur Möglichkeit. Das ist der Mechanismus, über den die unterjährige Vorwegnahme wieder eingesammelt wird.',
+  },
+  {
+    titel: '§ 26b EStG — Zusammenveranlagung von Ehegatten',
+    url: 'https://www.gesetze-im-internet.de/estg/__26b.html',
+    hinweis: 'Einkünfte beider Ehegatten werden zusammengerechnet, die Ehegatten gemeinsam als ein Steuerpflichtiger behandelt — die Voraussetzung dafür, dass die Steuerklasse in der Jahresformel überhaupt nicht mehr auftaucht.',
+  },
+  {
+    titel: '§ 2c BEEG — Einkommen aus nichtselbständiger Erwerbstätigkeit',
+    url: 'https://www.gesetze-im-internet.de/beeg/__2c.html',
+    hinweis: 'Absatz 3 enthält die zweistufige Regel, aus der die verbreitete Faustformel vom Wechsel sieben Monate vorher abgeleitet wird: maßgeblich ist die Angabe des letzten Monats, es sei denn, eine abweichende galt in der überwiegenden Zahl der Monate.',
+  },
+  {
+    titel: '§ 153 SGB III — Leistungsentgelt beim Arbeitslosengeld',
+    url: 'https://www.gesetze-im-internet.de/sgb_3/__153.html',
+    hinweis: 'Absatz 2 nennt einen einzigen Stichtag: den Beginn des Jahres, in dem der Anspruch entsteht. Absatz 3 lässt spätere Wechsel unter Bedingungen zu und verweist dabei auf den Faktor nach § 39f EStG. Belegt, dass die Sieben-Monats-Regel hier keine Grundlage hat.',
+  },
+  {
+    titel: '§ 47 SGB V — Höhe und Berechnung des Krankengeldes',
+    url: 'https://www.gesetze-im-internet.de/sgb_5/__47.html',
+    hinweis: 'Absatz 1 mit den 70 Prozent des Regelentgelts und der Deckelung auf 90 Prozent des Nettoarbeitsentgelts, Absatz 2 mit dem Bemessungszeitraum von mindestens vier abgerechneten Wochen. Beides zusammen ergibt, dass die Steuerklasse das Krankengeld ohne jede Vorlauffrist bestimmt.',
+  },
+  {
+    titel: 'Steuerfortentwicklungsgesetz vom 23.12.2024, BGBl. 2024 I Nr. 449, verkündet am 30.12.2024',
+    url: 'https://www.recht.bund.de/bgbl/1/2024/449/VO.html',
+    hinweis: 'Der Verkündungstext im Volltext. Er enthält Grundfreibetrag, Kinderfreibetrag, Kindergeld, Tarifeckwerte und Solidaritätszuschlag — und eben nicht die Überführung der Klassen III und V ins Faktorverfahren. Das ist der Beleg dafür, dass diese Maßnahme im parlamentarischen Verfahren gestrichen wurde und nie Gesetz geworden ist.',
+  },
+  {
+    titel: 'Koalitionsvertrag zwischen CDU, CSU und SPD vom 9. April 2025',
+    url: 'https://www.bundesregierung.de/breg-de/aktuelles/koalitionsvertrag-2025-2340970',
+    hinweis: 'Das Steuerkapitel listet zahlreiche Einzelmaßnahmen für Arbeitnehmer auf. Steuerklassen kommen darin nicht vor — weder als Vorhaben noch unter den ausdrücklich nicht übernommenen Punkten. Damit fehlt der Abschaffungsbehauptung auch die politische Grundlage.',
+  },
+  {
+    titel: 'BSG, Urteil vom 25.06.2009 — B 10 EG 3/08 R',
+    url: 'https://dejure.org/dienste/vernetzung/rechtsprechung?Gericht=BSG&Datum=25.06.2009&Aktenzeichen=B+10+EG+3/08+R',
+    hinweis: 'Der Wechsel der Steuerklasse mit dem Ziel eines höheren Elterngeldes ist zulässig und kein Rechtsmissbrauch. Nachweisseite mit den Fundstellen (BSGE 103, 284; NJW 2010, 1485) und Volltext-Verlinkungen; das Entscheidungsarchiv des Bundessozialgerichts reicht nicht bis 2009 zurück.',
+  },
+  {
+    titel: 'BSG, Urteil vom 28.03.2019 — B 10 EG 8/17 R',
+    url: 'https://www.bsg.bund.de/SharedDocs/Entscheidungen/DE/2019/2019_03_28_B_10_EG_08_17_R.html',
+    hinweis: 'Relativiert die Sieben-Monats-Regel in zwei Richtungen: Maßgeblich ist die relativ längste Geltung, nicht eine absolute Sieben — und Monate ohne Arbeitslohn zählen von vornherein nicht mit. Volltext beim Gericht.',
+  },
+  {
+    titel: 'FG Düsseldorf, Urteil vom 17.03.2010 — 15 K 2978/08 E',
+    url: 'https://www.deloitte-tax-news.de/arbeitnehmerentsendung-personal/steuerrecht/pflichtveranlagung-von-arbeitnehmern-bei-steuerklassenkombination-iii-v.html',
+    hinweis: 'Die Pflichtveranlagung bei der Kombination III/V ist verfassungskonform; dass sich manche der Erklärungspflicht entziehen, begründet kein Vollzugsdefizit. Referiert nach einer Fachbesprechung — ein Volltext-Nachweis der Entscheidung ist weder in der NRWE-Datenbank noch bei dejure auffindbar.',
+  },
+]} />
